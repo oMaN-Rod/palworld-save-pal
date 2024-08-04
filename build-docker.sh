@@ -55,6 +55,6 @@ cd ..
 
 # Run docker-compose up --build -d
 echo "Starting Docker Compose..."
-docker-compose up --build -d
+docker compose up --build -d
 
 echo "Build and deployment completed successfully."
