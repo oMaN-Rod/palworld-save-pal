@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+	@apply bg-surface-950;
+}
+
+.floating {
+	width: max-content;
+	position: absolute;
+	top: 0;
+	left: 0;
+}

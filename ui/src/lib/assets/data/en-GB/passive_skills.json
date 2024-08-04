@@ -1,0 +1,332 @@
+{
+	"ElementResist_Normal_1_PAL": {
+		"Name": "Abnormal",
+		"Description": "10% decreased to incoming Neutral damage.",
+		"Effect": "Neutral Defense"
+	},
+	"ElementResist_Dark_1_PAL": {
+		"Name": "Cheery",
+		"Description": "10% decrease to incoming Dark damage.",
+		"Effect": "Dark Defense"
+	},
+	"ElementResist_Dragon_1_PAL": {
+		"Name": "Dragonkiller",
+		"Description": "10% decrease to incoming Dragon damage.",
+		"Effect": "Dragon Defense"
+	},
+	"ElementResist_Ice_1_PAL": {
+		"Name": "Heated Body",
+		"Description": "10% decrease to incoming Ice damage.",
+		"Effect": "Ice Defense"
+	},
+	"ElementResist_Fire_1_PAL": {
+		"Name": "Suntan Lover",
+		"Description": "10% decrease to incoming Fire damage.",
+		"Effect": "Fire Defense"
+	},
+	"ElementResist_Leaf_1_PAL": {
+		"Name": "Botanical Barrier",
+		"Description": "10% decrease to incoming Grass damage.",
+		"Effect": "Grass Defense"
+	},
+	"ElementResist_Earth_1_PAL": {
+		"Name": "Earthquake Resistant",
+		"Description": "10% decrease to incoming Ground damage.",
+		"Effect": "Ground Defense"
+	},
+	"ElementResist_Thunder_1_PAL": {
+		"Name": "Insulated Body",
+		"Description": "10% decrease to incoming Lightning damage.",
+		"Effect": "Electric Defense"
+	},
+	"ElementResist_Aqua_1_PAL": {
+		"Name": "Waterproof",
+		"Description": "10% decrease to incoming Water damage.",
+		"Effect": "Water Defense"
+	},
+	"ElementBoost_Normal_1_PAL": {
+		"Name": "Zen Mind",
+		"Description": "10% increase to Neutral attack damage.",
+		"Effect": "Neutral Damage"
+	},
+	"ElementBoost_Dark_1_PAL": {
+		"Name": "Veil of Darkness",
+		"Description": "10% increase to Dark attack damage.",
+		"Effect": "Dark Damage"
+	},
+	"ElementBoost_Dragon_1_PAL": {
+		"Name": "Blood of the Dragon",
+		"Description": "10% increase to Dragon attack damage.",
+		"Effect": "Dragon Damage"
+	},
+	"ElementBoost_Ice_1_PAL": {
+		"Name": "Coldblooded",
+		"Description": "10% increase to Ice attack damage.",
+		"Effect": "Ice Damage"
+	},
+	"ElementBoost_Fire_1_PAL": {
+		"Name": "Pyromaniac",
+		"Description": "10% increase to Fire attack damage.",
+		"Effect": "Fire Damage"
+	},
+	"ElementBoost_Leaf_1_PAL": {
+		"Name": "Fragrant Foliage",
+		"Description": "10% increase to Grass attack damage.",
+		"Effect": "Grass Damage"
+	},
+	"ElementBoost_Earth_1_PAL": {
+		"Name": "Power of Gaia",
+		"Description": "10% increase to Earth attack damage.",
+		"Effect": "Ground Damage"
+	},
+	"ElementBoost_Thunder_1_PAL": {
+		"Name": "Capacitor",
+		"Description": "10% increase to Lightning attack damage.",
+		"Effect": "Electric Damage"
+	},
+	"ElementBoost_Aqua_1_PAL": {
+		"Name": "Hydromaniac",
+		"Description": "10% increase to Water attack damage.",
+		"Effect": "Water Damage"
+	},
+	"ElementBoost_Normal_2_PAL": {
+		"Name": "Celestial Emperor",
+		"Description": "20% increase to Normal attack damage.",
+		"Effect": "Neutral Damage"
+	},
+	"ElementBoost_Dark_2_PAL": {
+		"Name": "Lord of the Underworld",
+		"Description": "20% increase to Dark attack damage.",
+		"Effect": "Dark Damage"
+	},
+	"ElementBoost_Dragon_2_PAL": {
+		"Name": "Divine Dragon",
+		"Description": "20% increase to Dragon attack damage.",
+		"Effect": "Dragon Damage"
+	},
+	"ElementBoost_Ice_2_PAL": {
+		"Name": "Ice Emperor",
+		"Description": "20% increase to Ice attack damage.",
+		"Effect": "Ice Damage"
+	},
+	"ElementBoost_Fire_2_PAL": {
+		"Name": "Flame Emperor",
+		"Description": "20% increase to Fire attack damage.",
+		"Effect": "Fire Damage"
+	},
+	"ElementBoost_Leaf_2_PAL": {
+		"Name": "Spirit Emperor",
+		"Description": "20% increase to Grass attack damage.",
+		"Effect": "Grass Damage"
+	},
+	"ElementBoost_Earth_2_PAL": {
+		"Name": "Earth Emperor",
+		"Description": "20% increase to Earth attack damage.",
+		"Effect": "Earth Damage"
+	},
+	"ElementBoost_Thunder_2_PAL": {
+		"Name": "Lord of Lightning",
+		"Description": "20% increase to Lightning attack damage.",
+		"Effect": "Electric Damage"
+	},
+	"ElementBoost_Aqua_2_PAL": {
+		"Name": "Lord of the Sea",
+		"Description": "20% increase to Water attack damage.",
+		"Effect": "Water Damage"
+	},
+	"PAL_ALLAttack_up1": {
+		"Name": "Brave",
+		"Description": "Attack +10%",
+		"Effect": "Attack Stat"
+	},
+	"PAL_ALLAttack_up2": {
+		"Name": "Ferocious",
+		"Description": "Attack +20%",
+		"Effect": "Attack Stat"
+	},
+	"PAL_ALLAttack_down1": {
+		"Name": "Coward",
+		"Description": "Attack -10%",
+		"Effect": "Attack Stat"
+	},
+	"PAL_ALLAttack_down2": {
+		"Name": "Pacifist",
+		"Description": "Attack -20%",
+		"Effect": "Attack Stat"
+	},
+	"Deffence_up1": {
+		"Name": "Hard Skin",
+		"Description": "Defense +10%",
+		"Effect": "Defense Stat"
+	},
+	"Deffence_up2": {
+		"Name": "Burly Body",
+		"Description": "Defense +20%",
+		"Effect": "Defense Stat"
+	},
+	"Deffence_down1": {
+		"Name": "Downtrodden",
+		"Description": "Defense -10%",
+		"Effect": "Defense Stat"
+	},
+	"Deffence_down2": {
+		"Name": "Brittle",
+		"Description": "Defense -20%",
+		"Effect": "Defense Stat"
+	},
+	"TrainerMining_up1": {
+		"Name": "Mine Foreman",
+		"Description": "25% increase to Player Mining Efficiency.",
+		"Effect": "Player Buff"
+	},
+	"TrainerLogging_up1": {
+		"Name": "Logging Foreman",
+		"Description": "25% increase to Player Logging Efficiency.",
+		"Effect": "Player Buff"
+	},
+	"TrainerATK_UP_1": {
+		"Name": "Vanguard",
+		"Description": "10% increase to Player Attack.",
+		"Effect": "Player Buff"
+	},
+	"TrainerWorkSpeed_UP_1": {
+		"Name": "Motivational Leader",
+		"Description": "25% increase to Player Work Speed.",
+		"Effect": "Player Buff"
+	},
+	"TrainerDEF_UP_1": {
+		"Name": "Stronghold Strategist",
+		"Description": "10% increase to Player Defense.",
+		"Effect": "Player Buff"
+	},
+	"PAL_Sanity_Down_1": {
+		"Name": "Positive Thinker",
+		"Description": "SAN drops +10% slower.",
+		"Effect": "SAN Depletion"
+	},
+	"PAL_Sanity_Down_2": {
+		"Name": "Workaholic",
+		"Description": "SAN drops +15% slower.",
+		"Effect": "SAN Depletion"
+	},
+	"PAL_Sanity_Up_1": {
+		"Name": "Unstable",
+		"Description": "SAN drops +10% faster.",
+		"Effect": "SAN Depletion"
+	},
+	"PAL_Sanity_Up_2": {
+		"Name": "Destructive",
+		"Description": "SAN drops +15% faster.",
+		"Effect": "SAN Depletion"
+	},
+	"PAL_FullStomach_Down_1": {
+		"Name": "Dainty Eater",
+		"Description": "Satiety drops +10% slower.",
+		"Effect": "Satiety"
+	},
+	"PAL_FullStomach_Down_2": {
+		"Name": "Diet Lover",
+		"Description": "Decrease in Hunger is less likely by +15%",
+		"Effect": "Satiety"
+	},
+	"PAL_FullStomach_Up_1": {
+		"Name": "Glutton",
+		"Description": "Satiety drops +10% faster.",
+		"Effect": "Satiety"
+	},
+	"PAL_FullStomach_Up_2": {
+		"Name": "Bottomless Stomach",
+		"Description": "Satiety drops +15% faster.",
+		"Effect": "Satiety"
+	},
+	"CraftSpeed_up1": {
+		"Name": "Serious",
+		"Description": "Work Speed +20%",
+		"Effect": "Work Speed"
+	},
+	"CraftSpeed_up2": {
+		"Name": "Artisan",
+		"Description": "Work Speed +50%",
+		"Effect": "Work Speed"
+	},
+	"CraftSpeed_down1": {
+		"Name": "Clumsy",
+		"Description": "Work Speed -10%",
+		"Effect": "Work Speed"
+	},
+	"CraftSpeed_down2": {
+		"Name": "Slacker",
+		"Description": "Work Speed -30%",
+		"Effect": "Work Speed"
+	},
+	"MoveSpeed_up_1": {
+		"Name": "Nimble",
+		"Description": "10% increase to Movement Speed.",
+		"Effect": "Movement Speed"
+	},
+	"MoveSpeed_up_2": {
+		"Name": "Runner",
+		"Description": "20% increase to Movement Speed.",
+		"Effect": "Movement Speed"
+	},
+	"MoveSpeed_up_3": {
+		"Name": "Swift",
+		"Description": "30% increase to movement speed.",
+		"Effect": "Movement Speed"
+	},
+	"PAL_CorporateSlave": {
+		"Name": "Work Slave",
+		"Description": "Work Speed +30%, Attack -30%",
+		"Effect": "Work Speed Up + Attack Down"
+	},
+	"PAL_rude": {
+		"Name": "Hooligan",
+		"Description": "Attack +15%, Work Speed -10%",
+		"Effect": "Attack Up + Work Down"
+	},
+	"Noukin": {
+		"Name": "Musclehead",
+		"Description": "Attack +30%, Work Speed -50%",
+		"Effect": "Attack Up + Work Down"
+	},
+	"PAL_oraora": {
+		"Name": "Aggressive",
+		"Description": "Attack +10%, Defense -10%",
+		"Effect": "Attack Up + Defense Down"
+	},
+	"PAL_conceited": {
+		"Name": "Conceited",
+		"Description": "Work Speed +10%, Defense -10%",
+		"Effect": "Work Speed Up + Defense Down"
+	},
+	"PAL_masochist": {
+		"Name": "Masochist",
+		"Description": "Defense +15%, Attack -15%",
+		"Effect": "Defense Up + Attack Down"
+	},
+	"PAL_sadist": {
+		"Name": "Sadist",
+		"Description": "Attack +15%, Defense -15%",
+		"Effect": "Attack Up + Defense Down"
+	},
+	"Rare": {
+		"Name": "Lucky",
+		"Description": "Work Speed +15%, Attack +15%",
+		"Effect": "Work and Attack"
+	},
+	"Legend": {
+		"Name": "Legend",
+		"Description": "Attack +20%, Defense +20%, Movement Speed increases 15%",
+		"Effect": "Attack, Defense and Speed"
+	},
+	"Witch": {
+		"Name": "Siren of the Void",
+		"Description": "20% increase to Dark attack damage.20% increase to Ice attack damage.",
+		"Effect": "Dark and Ice Damage"
+	},
+	"NonKilling": {
+		"Name": "Mercy Hit",
+		"Description": "Pacifist.Will not reduce the target's Health below 1.",
+		"Effect": "Attack Effect"
+	}
+}

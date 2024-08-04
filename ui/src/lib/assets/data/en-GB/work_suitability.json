@@ -1,0 +1,15 @@
+{
+	"EmitFlame": "kindling",
+	"Watering": "watering",
+	"Seeding": "planting",
+	"GenerateElectricity": "generating",
+	"Handcraft": "handiwork",
+	"Collection": "gathering",
+	"Deforest": "deforesting",
+	"Mining": "mining",
+	"OilExtraction": "extracting",
+	"ProductMedicine": "production",
+	"Cool": "cooling",
+	"Transport": "transporting",
+	"MonsterFarm": "farming"
+}

@@ -1,0 +1,542 @@
+{
+	"EPalWazaID::AcidRain": {
+		"Name": "Acid Rain",
+		"Description": "Creates acidic clouds that pour down acid rain on enemies."
+	},
+	"EPalWazaID::AirCanon": {
+		"Name": "Air Cannon",
+		"Description": "Quickly fires a burst of highly pressurized air."
+	},
+	"EPalWazaID::Unique_Deer_PushupHorn": {
+		"Name": "Antler Uppercut",
+		"Description": "Charges at foes and uses antlers to launch them into the air. If used while riding, the direction of the charge can be controlled."
+	},
+	"EPalWazaID::WaterBall": {
+		"Name": "Aqua Burst",
+		"Description": "Creates a giant ball of water and hurls it at an enemy."
+	},
+	"EPalWazaID::WaterGun": {
+		"Name": "Aqua Gun",
+		"Description": "Hurls a ball of water straight at an enemy."
+	},
+	"EPalWazaID::Unique_JetDragon_JumpBeam": {
+		"Name": "Beam Comet",
+		"Description": "Flies at enemies on illuminated wings while firing innumerable beams. The beams explode on impact."
+	},
+	"EPalWazaID::SelfDestruct_Bee": {
+		"Name": "Bee Quiet",
+		"Description": "Risks its life to cause a violent explosion, but receives the honor of falling in battle."
+	},
+	"EPalWazaID::Unique_GrassPanda_Electric_ElectricPunch": {
+		"Name": "Blast Punch",
+		"Description": "Winds up its fist before pummeling an enemy with a flurry of electrically charged punches."
+	},
+	"EPalWazaID::Unique_FlameBuffalo_FlameHorn": {
+		"Name": "Blazing Horn",
+		"Description": "Takes aim and rushes at an enemy with a mad dash."
+	},
+	"EPalWazaID::IcicleThrow": {
+		"Name": "Blizzard Spike",
+		"Description": "Creates a giant lump of ice and hurls it at any enemy. It deals damage to those in the surrounding area upon impact."
+	},
+	"EPalWazaID::Unique_FlowerDinosaur_Whip": {
+		"Name": "Botanical Smash",
+		"Description": "Uses large tail to smash the ground in front of it, damaging enemies over a wide area."
+	},
+	"EPalWazaID::BubbleShot": {
+		"Name": "Bubble Blast",
+		"Description": "Fires numerous bubbles that slowly pursue an enemy."
+	},
+	"EPalWazaID::Unique_NaughtyCat_CatPress": {
+		"Name": "Cat Press",
+		"Description": "Grins menacingly before leaping into the air and smashing foes with its body."
+	},
+	"EPalWazaID::Unique_ChickenPal_ChickenPeck": {
+		"Name": "Chicken Rush",
+		"Description": "Flies at enemies in its sight, attacking them with its sharp beak."
+	},
+	"EPalWazaID::Unique_FengyunDeeper_CloudTempest": {
+		"Name": "Cloud Tempest",
+		"Description": "Charges forward while manipulating the atmosphere to create a pressurized wind tunnel around itself."
+	},
+	"EPalWazaID::CrossThunder": {
+		"Name": "Cross Lightning",
+		"Description": "Generates lightning that strikes an enemy three times from above."
+	},
+	"EPalWazaID::Unique_GrassPanda_MusclePunch": {
+		"Name": "Crushing Punch",
+		"Description": "Winds up its fist before striking an enemy with a devastating punch."
+	},
+	"EPalWazaID::FrostBreath": {
+		"Name": "Cryst Breath",
+		"Description": "Enshrouds an enemy in a frigid blast of air, dealing continuous damage."
+	},
+	"EPalWazaID::Unique_IceHorse_IceBladeAttack": {
+		"Name": "Crystal Wing",
+		"Description": "Dashes forward while creating frigid air around its wings, using them to slash enemies."
+	},
+	"EPalWazaID::Unique_AmaterasuWolf_FireCharge": {
+		"Name": "Daring Flames",
+		"Description": "Charges forward with great speed while clad in intense blue flames."
+	},
+	"EPalWazaID::DarkBall": {
+		"Name": "Dark Ball",
+		"Description": "Unleashes a sphere of darkness that slowly tracks down the enemy."
+	},
+	"EPalWazaID::Unique_FireKirin_Dark_DarkTossin": {
+		"Name": "Dark Charge",
+		"Description": "Charges forward while clad in a veil of dark flames. Flames continue to burn in its trajectory."
+	},
+	"EPalWazaID::DarkLaser": {
+		"Name": "Dark Laser",
+		"Description": "Charges dark energy before blasting enemies with a powerful beam."
+	},
+	"EPalWazaID::DarkLegion": {
+		"Name": "Dark Whisp",
+		"Description": "Generates several dark vortexes in the surrounding area."
+	},
+	"EPalWazaID::Unique_BlackGriffon_TackleLaser": {
+		"Name": "Divine Disaster",
+		"Description": "Charges forward while generating orbs of light that automatically capture enemies. The orbs automatically capture enemies, before releasing a barrage of lasers."
+	},
+	"EPalWazaID::DragonBreath": {
+		"Name": "Draconic Breath",
+		"Description": "Exhales breath imbued with draconic energy, dealing continuous damage to those in front of it."
+	},
+	"EPalWazaID::DragonWave": {
+		"Name": "Dragon Burst",
+		"Description": "Quickly discharges draconic energy, damaging those around it."
+	},
+	"EPalWazaID::DragonCanon": {
+		"Name": "Dragon Cannon",
+		"Description": "Hurls an energy ball imbued with draconic energy at an enemy."
+	},
+	"EPalWazaID::DragonMeteor": {
+		"Name": "Dragon Meteor",
+		"Description": "Calls down numerous small meteorites and launches them at an enemy."
+	},
+	"EPalWazaID::Unique_Grassmammoth_Earthquake": {
+		"Name": "Earth Impact",
+		"Description": "Uses massive body to shake the earth, dealing damage over a wide area."
+	},
+	"EPalWazaID::ThunderBall": {
+		"Name": "Electric Ball",
+		"Description": "Fires an electric ball that slowly pursues an enemy."
+	},
+	"EPalWazaID::Unique_CaptainPenguin_BodySlide": {
+		"Name": "Emperor Slide",
+		"Description": "Lies on its belly while generating frozen air all around it before sliding at enemies at high speed."
+	},
+	"EPalWazaID::Unique_Garm_Bite": {
+		"Name": "Fierce Fang",
+		"Description": "Swiftly leaps at an enemy and bites into them."
+	},
+	"EPalWazaID::FireBall": {
+		"Name": "Fire Ball",
+		"Description": "Creates a giant ball of flame and hurls it at an enemy. The ball explodes over a wide area upon impact."
+	},
+	"EPalWazaID::FlareArrow": {
+		"Name": "Flare Arrow",
+		"Description": "Fires three flaming arrows in succession that home in on an enemy."
+	},
+	"EPalWazaID::FlareTornado": {
+		"Name": "Flare Storm",
+		"Description": "Generates two flaming tornadoes on either side before launching them at an enemy."
+	},
+	"EPalWazaID::Unique_Alpaca_Tackle": {
+		"Name": "Fluffy Tackle",
+		"Description": "Charges forward while clad in an aura of sublime adorableness."
+	},
+	"EPalWazaID::Unique_RobinHood_BowSnipe": {
+		"Name": "Focus Shot",
+		"Description": "Takes aim while drawing its bow before loosing a poweful shot at an enemy."
+	},
+	"EPalWazaID::Unique_Anubis_Tackle": {
+		"Name": "Forceful Charge",
+		"Description": "Moves at high speeds to pursue its foe while releasing energy and a flurry of powerful punches."
+	},
+	"EPalWazaID::Unique_IceDeer_IceHorn": {
+		"Name": "Freezing Charge",
+		"Description": "Charges at an enemy with antlers adorned in ice."
+	},
+	"EPalWazaID::Unique_VolcanicMonster_Ice_IceAttack": {
+		"Name": "Frost Burst",
+		"Description": "Raises its front legs and slams them into the ground causing frozen blasts under its enemies. It simultaneously pounds them with snow balls from above."
+	},
+	"EPalWazaID::Unique_Eagle_GlidingNail": {
+		"Name": "Gale Claw",
+		"Description": "Soars through the air with its talons outstretched forward."
+	},
+	"EPalWazaID::Unique_HerculesBeetle_BeetleTackle": {
+		"Name": "Giga Horn",
+		"Description": "Skewers enemies with its four sturdy horns."
+	},
+	"EPalWazaID::GrassTornado": {
+		"Name": "Grass Tornado",
+		"Description": "Generates two tornadoes on either side before launching them at an enemy."
+	},
+	"EPalWazaID::Unique_Gorilla_GroundPunch": {
+		"Name": "Ground Pound",
+		"Description": "Pounds the ground twice before leaping into the air and unleashing a powerful punch."
+	},
+	"EPalWazaID::Unique_Anubis_GroundPunch": {
+		"Name": "Ground Smash",
+		"Description": "Leaps high into the air before diving to the ground with a punch. The force of the impact deals damage over a wide area."
+	},
+	"EPalWazaID::Unique_Baphomet_SwallowKite": {
+		"Name": "Hellfire Claw",
+		"Description": "Draws near enemies using its left claw to slash them into the air before cutting them down with its right claw."
+	},
+	"EPalWazaID::AquaJet": {
+		"Name": "Hydro Jet",
+		"Description": "Hurls a high speed ball of water at an enemy."
+	},
+	"EPalWazaID::HydroPump": {
+		"Name": "Hydro Laser",
+		"Description": "Shoots pressurized water at extreme velocities, sweeping over a wide area in front of it."
+	},
+	"EPalWazaID::Unique_Ronin_Iai": {
+		"Name": "Iaigiri",
+		"Description": "After Holding the sword, he appears in front of the enemy in an instant and unleashes a Ultra-fast sword draw attack."
+	},
+	"EPalWazaID::IceMissile": {
+		"Name": "Ice Missile",
+		"Description": "Creates ice lances in the air that fly towards enemies."
+	},
+	"EPalWazaID::BlizzardLance": {
+		"Name": "Iceberg",
+		"Description": "Summons a sharp ice lance under the enemy."
+	},
+	"EPalWazaID::IceBlade": {
+		"Name": "Icicle Cutter",
+		"Description": "Creates a crescent blade of ice and hurls it forward."
+	},
+	"EPalWazaID::FireBlast": {
+		"Name": "Ignis Blast",
+		"Description": "Hurls a ball of fire straight at an enemy."
+	},
+	"EPalWazaID::Flamethrower": {
+		"Name": "Ignis Breath",
+		"Description": "Shoots flames at an enemy, dealing continuous damage."
+	},
+	"EPalWazaID::Inferno": {
+		"Name": "Ignis Rage",
+		"Description": "Energizes the surrounding ground, causing it to explode after a set amount of time."
+	},
+	"EPalWazaID::Unique_FireKirin_Tackle": {
+		"Name": "Ignis Slam",
+		"Description": "Charges forward while clad in a veil of flames. Flames continue to burn in its wake."
+	},
+	"EPalWazaID::SelfDestruct": {
+		"Name": "Implode",
+		"Description": "Risks its life to cause a violent explosion. Becomes incapacitated afterwards."
+	},
+	"EPalWazaID::Intimidate": {
+		"Name": "Intimidate",
+		"Description": "Generates a fog of poison in front, causing the opponent to become poisoned."
+	},
+	"EPalWazaID::Unique_Werewolf_Scratch": {
+		"Name": "Jumping Claw",
+		"Description": "Leaps forward and attacks twice with vicious claws imbued with dark energy."
+	},
+	"EPalWazaID::Unique_ThunderDragonMan_ThunderSwordAttack": {
+		"Name": "Kerauno",
+		"Description": "Summons a blade of lightning while leaping into the air before throwing it at an enemy."
+	},
+	"EPalWazaID::Unique_KingAlpaca_BodyPress": {
+		"Name": "Kingly Slam",
+		"Description": "Leaps high into the air before smashing into an enemy with its massive body."
+	},
+	"EPalWazaID::Thunderbolt": {
+		"Name": "Lightning Bolt",
+		"Description": "Charges electric energy before blasting enemies with a powerful shock."
+	},
+	"EPalWazaID::Unique_ElecPanda_ElecScratch": {
+		"Name": "Lightning Claw",
+		"Description": "After leaping at an enemy and tearing at it twice with its electrically charged claws, it attacks the ground, sending an electric shock throughout the area."
+	},
+	"EPalWazaID::ThunderRain": {
+		"Name": "Lightning Rain",
+		"Description": "Calls lightning that strikes an enemy after a set amount of time has passed."
+	},
+	"EPalWazaID::LineThunder": {
+		"Name": "Lightning Streak",
+		"Description": "Generates a lightning bolt that moves forward in a line."
+	},
+	"EPalWazaID::LightningStrike": {
+		"Name": "Lightning Strike",
+		"Description": "Acts as a lightning rod, calling down thunderbolts that electrocute the surrounding area."
+	},
+	"EPalWazaID::Unique_Kirin_LightningTackle": {
+		"Name": "Lightning Tackle",
+		"Description": "Generates lightning that strikes an enemy three times from above."
+	},
+	"EPalWazaID::LockonLaser": {
+		"Name": "Lock-on Laser",
+		"Description": "Takes aim at an enemy before firing a super high speed laser."
+	},
+	"EPalWazaID::SelfExplosion": {
+		"Name": "Megaton Implode",
+		"Description": "Risks life to cause a massive explosion. Those who perish for their duty become glistening stars in the night sky."
+	},
+	"EPalWazaID::SpecialCutter": {
+		"Name": "Multicutter",
+		"Description": "The user fires three high-speed blades of wind in quick succession that fly straight at enemies."
+	},
+	"EPalWazaID::Unique_SakuraSaurus_SideTackle": {
+		"Name": "Muscle Slam",
+		"Description": "Turns sideways before tackling enemies in front of it, sending them flying into the air."
+	},
+	"EPalWazaID::Unique_FairyDragon_FairyTornado": {
+		"Name": "Mystic Whirlwind",
+		"Description": "Generates twin whirlwinds imbued with a mysterious power that pursues enemies."
+	},
+	"EPalWazaID::ShadowBall": {
+		"Name": "Nightmare Ball",
+		"Description": "Creates a giant ball of darkness and hurls it at an enemy."
+	},
+	"EPalWazaID::HyperBeam": {
+		"Name": "Pal Blast",
+		"Description": "Charges destructive energy before firing a high-powered beam forward across a wide area."
+	},
+	"EPalWazaID::Unique_DarkCrow_TelePoke": {
+		"Name": "Phantom Peck",
+		"Description": "Teleports next to an enemy before attacking with its beak."
+	},
+	"EPalWazaID::Unique_Horus_FlareBird": {
+		"Name": "Phoenix Flare",
+		"Description": "Covers its body in a tornado of flames before charging forward."
+	},
+	"EPalWazaID::ThunderFunnel": {
+		"Name": "Plasma Tornado",
+		"Description": "Creates two balls of electric energy that fire numerous bolts of lightning at enemies."
+	},
+	"EPalWazaID::PoisonShot": {
+		"Name": "Poison Blast",
+		"Description": "Hurls poison sludge at an enemy."
+	},
+	"EPalWazaID::PoisonFog": {
+		"Name": "Poison Fog",
+		"Description": "Generates a fog of poison in front, causing the opponent to become poisoned."
+	},
+	"EPalWazaID::PowerBall": {
+		"Name": "Power Bomb",
+		"Description": "Charges a massive amount of energy before firing a large destructive ball."
+	},
+	"EPalWazaID::PowerShot": {
+		"Name": "Power Shot",
+		"Description": "Charges energy into a focused blast."
+	},
+	"EPalWazaID::Psychokinesis": {
+		"Name": "Psycho Gravity",
+		"Description": "Generates a fog of poison in front, causing the opponent to become poisoned."
+	},
+	"EPalWazaID::Human_Punch": {
+		"Name": "Punch",
+		"Description": "A basic punch attack."
+	},
+	"EPalWazaID::Unique_PinkCat_CatPunch": {
+		"Name": "Punch Flurry",
+		"Description": "Pursues enemies, repeatedly punching them with both fists."
+	},
+	"EPalWazaID::Unique_Boar_Tackle": {
+		"Name": "Reckless Charge",
+		"Description": "Takes aim at a foe and rushes at them with a made charge."
+	},
+	"EPalWazaID::RockLance": {
+		"Name": "Rock Lance",
+		"Description": "Generates a sharp rock spear under an enemy."
+	},
+	"EPalWazaID::Unique_SheepBall_Roll": {
+		"Name": "Roly Poly",
+		"Description": "Curls into a ball, rolling after any enemies in its way. Becomes dizzy and unable to move after the attack ends."
+	},
+	"EPalWazaID::MudShot": {
+		"Name": "Sand Blast",
+		"Description": "Hurls sticky mud at an enemy."
+	},
+	"EPalWazaID::SandTornado": {
+		"Name": "Sand Tornado",
+		"Description": "Creates two tornados of sand and sends them at an enemy."
+	},
+	"EPalWazaID::SeedMachinegun": {
+		"Name": "Seed Machine Gun",
+		"Description": "Fires a volley of hard seeds at enemies in front of it."
+	},
+	"EPalWazaID::SeedMine": {
+		"Name": "Seed Mine",
+		"Description": "Launches a deadly mine field of seeds that detonate when touched or after a few seconds. Enemies near a mine take damage."
+	},
+	"EPalWazaID::DarkWave": {
+		"Name": "Shadow Burst",
+		"Description": "Quickly discharges dark energy, damaging those around it."
+	},
+	"EPalWazaID::Unique_DrillGame_ShellAttack": {
+		"Name": "Shell Spin",
+		"Description": "Moves while spinning its whole body at high speeds. Drills through enemies, dealing continuous damage."
+	},
+	"EPalWazaID::ElecWave": {
+		"Name": "Shockwave",
+		"Description": "Quickly discharges electricity, shocking those around it."
+	},
+	"EPalWazaID::SolarBeam": {
+		"Name": "Solar Blast",
+		"Description": "Charges solar energy before blasting enemies with a powerful beam."
+	},
+	"EPalWazaID::SpreadPulse": {
+		"Name": "Spark Blast",
+		"Description": "The user releases a lightning ball that expands outward in a forward, circular pattern."
+	},
+	"EPalWazaID::Unique_SaintCentaur_OneSpearRushes": {
+		"Name": "Spear Thrust",
+		"Description": "Clads itself in holy power before charging forward with its spear. The shield in its other hand protects from attacks during the charge."
+	},
+	"EPalWazaID::RootAttack": {
+		"Name": "Spine Vine",
+		"Description": "Generates spiny thorns that chase an enemy along the ground, piercing them from below."
+	},
+	"EPalWazaID::Unique_QueenBee_SpinLance": {
+		"Name": "Spinning Lance",
+		"Description": "Channels power into its staff, and unleashes it in a whirl."
+	},
+	"EPalWazaID::Unique_Anubis_LowRoundKick": {
+		"Name": "Spinning Roundhouse",
+		"Description": "Performs a spin kick with its strong legs, cutting down enemies over a wide area."
+	},
+	"EPalWazaID::FireSeed": {
+		"Name": "Spirit Fire",
+		"Description": "Shoots fireballs towards an enemy. The fireballs explode after a short distance, generating smaller fireballs that spread forward."
+	},
+	"EPalWazaID::GhostFlame": {
+		"Name": "Spirit Flame",
+		"Description": "Fires three balls of malice that relentlessly pursue an enemy."
+	},
+	"EPalWazaID::StoneShotgun": {
+		"Name": "Stone Blast",
+		"Description": "Fires a barrage of stones forward."
+	},
+	"EPalWazaID::ThrowRock": {
+		"Name": "Stone Cannon",
+		"Description": "Digs up a boulder and hurls it at an enemy."
+	},
+	"EPalWazaID::Unique_BluePlatypus_Toboggan": {
+		"Name": "Surfing Slam",
+		"Description": "Slides on water to attack enemies."
+	},
+	"EPalWazaID::Unique_HawkBird_Storm": {
+		"Name": "Tornado Attack",
+		"Description": "Generates a tornado before soaring towards its target."
+	},
+	"EPalWazaID::ThreeThunder": {
+		"Name": "Tri-Lightning",
+		"Description": "Generates lightning that strikes an enemy three times from above."
+	},
+	"EPalWazaID::Unique_BlackCentaur_TwoSpearRushes": {
+		"Name": "Twin Spears",
+		"Description": "Clads its twin spears with vicious whirlwinds and charges forward, thrusting them one after the other."
+	},
+	"EPalWazaID::Unique_VolcanicMonster_MagmaAttack": {
+		"Name": "Volcanic Burst",
+		"Description": "Raises its front legs before slamming them onto the ground, causing volcanic eruptions under its enemies. It simultaneously bombards them with volcanic bombs from above."
+	},
+	"EPalWazaID::WindCutter": {
+		"Name": "Wind Cutter",
+		"Description": "Fires a high speed blade of wind that flies straight at an enemy."
+	},
+	"EPalWazaID::WaterWave": {
+		"Name": "Curtain Splash",
+		"Description": "Continously creates walls made from water columns at the enemy's location."
+	},
+	"EPalWazaID::Unique_NightLady_FlameNightmare": {
+		"Name": "Flame Waltz",
+		"Description": "Dances gracefully while creating an extending ring of flames. Then, it fires mysterious flames that home in on enemies."
+	},
+	"EPalWazaID::Unique_NightLady_WarpBeam": {
+		"Name": "Nightmare Bloom",
+		"Description": "Disappears suddenly, then reappears while firing a barrage of beams. The beams spread like a beautiful flower in bloom."
+	},
+	"EPalWazaID::Unique_NightLady_WarpBeam_Straight": {
+		"Name": "Nightmare Ray",
+		"Description": "Disappears suddenly, then reappears while firing a barrage of beams."
+	},
+	"EPalWazaID::DarkCanon": {
+		"Name": "Dark Cannon",
+		"Description": "Hurls an energy ball imbued with dark energy at an enemy."
+	},
+	"EPalWazaID::DarkPulse": {
+		"Name": "Umbral Surge",
+		"Description": "Fires a high speed ball of dark energy that spreads forward in a radial shape."
+	},
+	"EPalWazaID::DarkArrow": {
+		"Name": "Dark Arrow",
+		"Description": "Fires off dark energy that homes in on an enemy."
+	},
+	"EPalWazaID::Apocalypse": {
+		"Name": "Apocalypse",
+		"Description": "Generates several dark vortexes in the surrounding area."
+	},
+	"EPalWazaID::Unique_KingBahamut_ArmSmash": {
+		"Name": "Brawn Impact",
+		"Description": "A powerful smashing attack using the full force of its muscular arms."
+	},
+	"EPalWazaID::BeamSlicer": {
+		"Name": "Beam Slicer",
+		"Description": "Mows down the frontal area with a beam imbued with dragon power. The area touched by the beam will also explode after a few moments."
+	},
+	"EPalWazaID::BlastCannon": {
+		"Name": "Blast Cannon",
+		"Description": "Fires an energy bullet imbued with dragon power at the enemy's location. Upon impact, the bullet shatters and creates a frontal long-range explosion."
+	},
+	"EPalWazaID::DiamondRain": {
+		"Name": "Diamond Rain",
+		"Description": "Creates numerous lumps of ice that are consecutively dropped on a foe's head."
+	},
+	"EPalWazaID::IcicleLine": {
+		"Name": "Icicle Line",
+		"Description": "Generates a pillar of ice that moves in a straight line."
+	},
+	"EPalWazaID::Thunderstorm": {
+		"Name": "Thunderstorm",
+		"Description": "Generates a huge tornado of lightning that moves slowly towards the enemy."
+	},
+	"EPalWazaID::TriSpark": {
+		"Name": "TriSpark",
+		"Description": "A high-speed lightning ball that flies in a straight line. Simultaneously fires slow lightning balls that track the enemy."
+	},
+	"EPalWazaID::FlameWall": {
+		"Name": "Flame Wall",
+		"Description": "Creates a wall of flames at the enemy's location. The wall of flame will remain for a while, and deal damage to the enemies it touches."
+	},
+	"EPalWazaID::VolcanicRain": {
+		"Name": "Volcanic Rain",
+		"Description": "Fires countless volcanic bombs into the sky. After a while, the bombs rain down around their originator."
+	},
+	"EPalWazaID::AirBlade": {
+		"Name": "Air Blade",
+		"Description": "Sends out sharp blades of air in a fan shape."
+	},
+	"EPalWazaID::Tremor": {
+		"Name": "Rockburst",
+		"Description": "Causes the ground to shake before hurling a massive stone mass at its surroundings."
+	},
+	"EPalWazaID::SandTwister": {
+		"Name": "Sand Twister",
+		"Description": "Creates multiple sand tornadoes. The tornadoes continuously spin in circles."
+	},
+	"EPalWazaID::Unique_WingGolem_RoundCutter": {
+		"Name": "Ground Cutter",
+		"Description": "Knocklem's exclusive skill. Take a big swing and throws the ring on its back. The ring flies in a circular trajectory"
+	},
+	"EPalWazaID::Unique_DarkScorpion_Pierce": {
+		"Name": "Jumping Stinger",
+		"Description": "Menasting's exclusive skill. Jumps hign and stabs its prey with its tail. The poison from its tail is deadly."
+	},
+	"EPalWazaID::Unique_SifuDog_Counter": {
+		"Name": "Wholehearted Stance",
+		"Description": "Dogen's exclusive skill. Adopts an aiki stance. While in stance, any attack is nullified, then instantly countered with a full force palm strike "
+	},
+	"EPalWazaID::Unique_WeaselDragon_FlyingTackle": {
+		"Name": "Rocket Slam",
+		"Description": "Chillet's exclusive skill. Gathers a bit of strength and it leaps forward. When landing it's always scared so it closes its eyes."
+	}
+}
