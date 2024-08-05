@@ -3,6 +3,23 @@
 # Navigate to the script's directory
 Set-Location -Path $PSScriptRoot
 
+pyinstaller desktop.spec
+
+if ($LASTEXITCODE -ne 0) {
+    Write-Error "pyinstaller failed. Exiting."
+    exit 1
+}
+
+# Remove build directory
+if (Test-Path -Path ".\build\") {
+    Remove-Item -Path ".\build\" -Recurse -Force
+}
+
+if (Test-Path -Path ".\dist\build\") {
+    Remove-Item -Path ".\dist\build\" -Recurse -Force
+}
+
+
 # Create or update the .env file with PUBLIC_WS_URL
 "PUBLIC_WS_URL=127.0.0.1:5174/ws" | Set-Content -Path ".\ui\.env"
 
@@ -67,13 +84,6 @@ if ($LASTEXITCODE -ne 0) {
 
 # Navigate back to the root directory
 Set-Location -Path ".."
-
-pyinstaller desktop.spec
-
-if ($LASTEXITCODE -ne 0) {
-    Write-Error "pyinstaller failed. Exiting."
-    exit 1
-}
 
 # Copy build to dist
 Copy-Item -Path ".\build\" -Destination ".\dist\" -Recurse -Force
