@@ -16,6 +16,8 @@ PALWorld Save Pal is a tool for managing and analyzing save files for the game P
   - [👨‍💻 Developer Guide](#-developer-guide)
     - [Web](#web)
     - [Build Desktop App](#build-desktop-app)
+      - [Using build script](#using-build-script)
+      - [Manual build](#manual-build)
   - [🗺️ Roadmap](#️-roadmap)
     - [General](#general)
     - [Pals](#pals)
@@ -113,7 +115,7 @@ For developers who want to contribute to PALWorld Save Pal:
 2. Run the application in development mode:
 
    ```bash
-   python main.py --dev
+   python psp.py --dev
    ```
 
 3. Set the environment variable for the svelte SPA `ui/.env`.
@@ -134,6 +136,14 @@ For developers who want to contribute to PALWorld Save Pal:
 
 ### Build Desktop App
 
+#### Using build script
+
+```powershell
+.\build-desktop.ps1
+```
+
+#### Manual build
+
 1. Set the environment variable for the svelte SPA `ui/.env`. Replace `{{ ip_address }}` with the IP address of the server:
 
    ```jinja
@@ -151,7 +161,7 @@ For developers who want to contribute to PALWorld Save Pal:
 3. Create EXE:
 
    ```bash
-   pyinstaller --onefile --windowed desktop.py
+   pyinstaller desktop.spec
    ```
 
 4. Copy build to the dist folder:
