@@ -1,0 +1,4376 @@
+{
+    "melee": {
+        "common_container": [
+            {
+                "slot_index": 0,
+                "count": 1,
+                "static_id": "Axe_Tier_00"
+            },
+            {
+                "slot_index": 1,
+                "count": 1,
+                "static_id": "Axe_Tier_01"
+            },
+            {
+                "slot_index": 2,
+                "count": 1,
+                "static_id": "Axe_Tier_02"
+            },
+            {
+                "slot_index": 3,
+                "count": 1,
+                "static_id": "Pickaxe_Tier_00"
+            },
+            {
+                "slot_index": 4,
+                "count": 1,
+                "static_id": "Pickaxe_Tier_01"
+            },
+            {
+                "slot_index": 5,
+                "count": 1,
+                "static_id": "Pickaxe_Tier_02"
+            },
+            {
+                "slot_index": 6,
+                "count": 1,
+                "static_id": "Torch"
+            },
+            {
+                "slot_index": 7,
+                "count": 1,
+                "static_id": "Bat"
+            },
+            {
+                "slot_index": 8,
+                "count": 1,
+                "static_id": "Bat2"
+            },
+            {
+                "slot_index": 9,
+                "count": 1,
+                "static_id": "MeatCutterKnife"
+            },
+            {
+                "slot_index": 10,
+                "count": 1,
+                "static_id": "ElecBaton"
+            },
+            {
+                "slot_index": 11,
+                "count": 1,
+                "static_id": "Sword"
+            },
+            {
+                "slot_index": 12,
+                "count": 1,
+                "static_id": "Spear"
+            },
+            {
+                "slot_index": 13,
+                "count": 1,
+                "static_id": "Spear_2"
+            },
+            {
+                "slot_index": 14,
+                "count": 1,
+                "static_id": "Spear_3"
+            },
+            {
+                "slot_index": 15,
+                "count": 1,
+                "static_id": "Spear_QueenBee"
+            },
+            {
+                "slot_index": 16,
+                "count": 1,
+                "static_id": "Spear_ForestBoss"
+            }
+        ]
+    },
+    "ranged_1": {
+        "common_container": [
+            {
+                "slot_index": 0,
+                "count": 1,
+                "static_id": "WeakerBow"
+            },
+            {
+                "slot_index": 1,
+                "count": 1,
+                "static_id": "WeakerBow_2"
+            },
+            {
+                "slot_index": 2,
+                "count": 1,
+                "static_id": "WeakerBow_3"
+            },
+            {
+                "slot_index": 3,
+                "count": 1,
+                "static_id": "WeakerBow_4"
+            },
+            {
+                "slot_index": 4,
+                "count": 1,
+                "static_id": "WeakerBow_5"
+            },
+            {
+                "slot_index": 5,
+                "count": 9999,
+                "static_id": "Arrow"
+            },
+            {
+                "slot_index": 6,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 7,
+                "count": 1,
+                "static_id": "Blueprint_WeakerBow_2"
+            },
+            {
+                "slot_index": 8,
+                "count": 1,
+                "static_id": "Blueprint_WeakerBow_3"
+            },
+            {
+                "slot_index": 9,
+                "count": 1,
+                "static_id": "Blueprint_WeakerBow_4"
+            },
+            {
+                "slot_index": 10,
+                "count": 1,
+                "static_id": "Blueprint_WeakerBow_5"
+            },
+            {
+                "slot_index": 11,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 12,
+                "count": 1,
+                "static_id": "BowGun"
+            },
+            {
+                "slot_index": 13,
+                "count": 1,
+                "static_id": "BowGun_2"
+            },
+            {
+                "slot_index": 14,
+                "count": 1,
+                "static_id": "BowGun_3"
+            },
+            {
+                "slot_index": 15,
+                "count": 1,
+                "static_id": "BowGun_4"
+            },
+            {
+                "slot_index": 16,
+                "count": 1,
+                "static_id": "BowGun_5"
+            },
+            {
+                "slot_index": 17,
+                "count": 9999,
+                "static_id": "Arrow"
+            },
+            {
+                "slot_index": 18,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 19,
+                "count": 1,
+                "static_id": "Blueprint_BowGun_2"
+            },
+            {
+                "slot_index": 20,
+                "count": 1,
+                "static_id": "Blueprint_BowGun_3"
+            },
+            {
+                "slot_index": 21,
+                "count": 1,
+                "static_id": "Blueprint_BowGun_4"
+            },
+            {
+                "slot_index": 22,
+                "count": 1,
+                "static_id": "Blueprint_BowGun_5"
+            },
+            {
+                "slot_index": 23,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 24,
+                "count": 1,
+                "static_id": "Bow_Fire"
+            },
+            {
+                "slot_index": 25,
+                "count": 1,
+                "static_id": "BowGun_Fire"
+            },
+            {
+                "slot_index": 26,
+                "count": 9999,
+                "static_id": "Arrow_Fire"
+            },
+            {
+                "slot_index": 27,
+                "count": 1,
+                "static_id": "Bow_Poison"
+            },
+            {
+                "slot_index": 28,
+                "count": 1,
+                "static_id": "BowGun_Poison"
+            },
+            {
+                "slot_index": 29,
+                "count": 9999,
+                "static_id": "Arrow_Poison"
+            },
+            {
+                "slot_index": 30,
+                "count": 1,
+                "static_id": "Bow_Triple"
+            }
+        ]
+    },
+    "ranged_2": {
+        "common_container": [
+            {
+                "slot_index": 0,
+                "count": 1,
+                "static_id": "Musket"
+            },
+            {
+                "slot_index": 1,
+                "count": 1,
+                "static_id": "Musket_2"
+            },
+            {
+                "slot_index": 2,
+                "count": 1,
+                "static_id": "Musket_3"
+            },
+            {
+                "slot_index": 3,
+                "count": 1,
+                "static_id": "Musket_4"
+            },
+            {
+                "slot_index": 4,
+                "count": 1,
+                "static_id": "Musket_5"
+            },
+            {
+                "slot_index": 5,
+                "count": 9999,
+                "static_id": "RoughBullet"
+            },
+            {
+                "slot_index": 6,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 7,
+                "count": 1,
+                "static_id": "Blueprint_Musket_2"
+            },
+            {
+                "slot_index": 8,
+                "count": 1,
+                "static_id": "Blueprint_Musket_3"
+            },
+            {
+                "slot_index": 9,
+                "count": 1,
+                "static_id": "Blueprint_Musket_4"
+            },
+            {
+                "slot_index": 10,
+                "count": 1,
+                "static_id": "Blueprint_Musket_5"
+            },
+            {
+                "slot_index": 11,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 12,
+                "count": 1,
+                "static_id": "HandGun_Default"
+            },
+            {
+                "slot_index": 13,
+                "count": 1,
+                "static_id": "HandGun_Default_2"
+            },
+            {
+                "slot_index": 14,
+                "count": 1,
+                "static_id": "HandGun_Default_3"
+            },
+            {
+                "slot_index": 15,
+                "count": 1,
+                "static_id": "HandGun_Default_4"
+            },
+            {
+                "slot_index": 16,
+                "count": 1,
+                "static_id": "HandGun_Default_5"
+            },
+            {
+                "slot_index": 17,
+                "count": 9999,
+                "static_id": "HandgunBullet"
+            },
+            {
+                "slot_index": 18,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 19,
+                "count": 1,
+                "static_id": "Blueprint_HandGun_Default_2"
+            },
+            {
+                "slot_index": 20,
+                "count": 1,
+                "static_id": "Blueprint_HandGun_Default_3"
+            },
+            {
+                "slot_index": 21,
+                "count": 1,
+                "static_id": "Blueprint_HandGun_Default_4"
+            },
+            {
+                "slot_index": 22,
+                "count": 1,
+                "static_id": "Blueprint_HandGun_Default_5"
+            },
+            {
+                "slot_index": 23,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 24,
+                "count": 1,
+                "static_id": "SingleShotRifle"
+            },
+            {
+                "slot_index": 25,
+                "count": 1,
+                "static_id": "SingleShotRifle_2"
+            },
+            {
+                "slot_index": 26,
+                "count": 1,
+                "static_id": "SingleShotRifle_3"
+            },
+            {
+                "slot_index": 27,
+                "count": 1,
+                "static_id": "SingleShotRifle_4"
+            },
+            {
+                "slot_index": 28,
+                "count": 1,
+                "static_id": "SingleShotRifle_5"
+            },
+            {
+                "slot_index": 29,
+                "count": 9999,
+                "static_id": "RifleBullet"
+            },
+            {
+                "slot_index": 30,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 31,
+                "count": 1,
+                "static_id": "Blueprint_SingleShotRifle_2"
+            },
+            {
+                "slot_index": 32,
+                "count": 1,
+                "static_id": "Blueprint_SingleShotRifle_3"
+            },
+            {
+                "slot_index": 33,
+                "count": 1,
+                "static_id": "Blueprint_SingleShotRifle_4"
+            },
+            {
+                "slot_index": 34,
+                "count": 1,
+                "static_id": "Blueprint_SingleShotRifle_5"
+            }
+        ]
+    },
+    "ranged_3": {
+        "common_container": [
+            {
+                "slot_index": 0,
+                "count": 1,
+                "static_id": "DoubleBarrelShotgun"
+            },
+            {
+                "slot_index": 1,
+                "count": 1,
+                "static_id": "DoubleBarrelShotgun_2"
+            },
+            {
+                "slot_index": 2,
+                "count": 1,
+                "static_id": "DoubleBarrelShotgun_3"
+            },
+            {
+                "slot_index": 3,
+                "count": 1,
+                "static_id": "DoubleBarrelShotgun_4"
+            },
+            {
+                "slot_index": 4,
+                "count": 1,
+                "static_id": "DoubleBarrelShotgun_5"
+            },
+            {
+                "slot_index": 5,
+                "count": 9999,
+                "static_id": "ShotgunBullet"
+            },
+            {
+                "slot_index": 6,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 7,
+                "count": 1,
+                "static_id": "Blueprint_DoubleBarrelShotgun_2"
+            },
+            {
+                "slot_index": 8,
+                "count": 1,
+                "static_id": "Blueprint_DoubleBarrelShotgun_3"
+            },
+            {
+                "slot_index": 9,
+                "count": 1,
+                "static_id": "Blueprint_DoubleBarrelShotgun_4"
+            },
+            {
+                "slot_index": 10,
+                "count": 1,
+                "static_id": "Blueprint_DoubleBarrelShotgun_5"
+            },
+            {
+                "slot_index": 11,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 12,
+                "count": 1,
+                "static_id": "PumpActionShotgun"
+            },
+            {
+                "slot_index": 13,
+                "count": 1,
+                "static_id": "PumpActionShotgun_2"
+            },
+            {
+                "slot_index": 14,
+                "count": 1,
+                "static_id": "PumpActionShotgun_3"
+            },
+            {
+                "slot_index": 15,
+                "count": 1,
+                "static_id": "PumpActionShotgun_4"
+            },
+            {
+                "slot_index": 16,
+                "count": 1,
+                "static_id": "PumpActionShotgun_5"
+            },
+            {
+                "slot_index": 17,
+                "count": 9999,
+                "static_id": "ShotgunBullet"
+            },
+            {
+                "slot_index": 18,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 19,
+                "count": 1,
+                "static_id": "Blueprint_PumpActionShotgun_2"
+            },
+            {
+                "slot_index": 20,
+                "count": 1,
+                "static_id": "Blueprint_PumpActionShotgun_3"
+            },
+            {
+                "slot_index": 21,
+                "count": 1,
+                "static_id": "Blueprint_PumpActionShotgun_4"
+            },
+            {
+                "slot_index": 22,
+                "count": 1,
+                "static_id": "Blueprint_PumpActionShotgun_5"
+            },
+            {
+                "slot_index": 23,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 24,
+                "count": 1,
+                "static_id": "AssaultRifle_Default1"
+            },
+            {
+                "slot_index": 25,
+                "count": 1,
+                "static_id": "AssaultRifle_Default2"
+            },
+            {
+                "slot_index": 26,
+                "count": 1,
+                "static_id": "AssaultRifle_Default3"
+            },
+            {
+                "slot_index": 27,
+                "count": 1,
+                "static_id": "AssaultRifle_Default4"
+            },
+            {
+                "slot_index": 28,
+                "count": 1,
+                "static_id": "AssaultRifle_Default5"
+            },
+            {
+                "slot_index": 29,
+                "count": 9999,
+                "static_id": "AssaultRifleBullet"
+            },
+            {
+                "slot_index": 30,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 31,
+                "count": 1,
+                "static_id": "Blueprint_AssaultRifle_Default2"
+            },
+            {
+                "slot_index": 32,
+                "count": 1,
+                "static_id": "Blueprint_AssaultRifle_Default3"
+            },
+            {
+                "slot_index": 33,
+                "count": 1,
+                "static_id": "Blueprint_AssaultRifle_Default4"
+            },
+            {
+                "slot_index": 34,
+                "count": 1,
+                "static_id": "Blueprint_AssaultRifle_Default5"
+            }
+        ]
+    },
+    "ranged_4": {
+        "common_container": [
+            {
+                "slot_index": 0,
+                "count": 1,
+                "static_id": "Launcher_Default"
+            },
+            {
+                "slot_index": 1,
+                "count": 1,
+                "static_id": "Launcher_Default_2"
+            },
+            {
+                "slot_index": 2,
+                "count": 1,
+                "static_id": "Launcher_Default_3"
+            },
+            {
+                "slot_index": 3,
+                "count": 1,
+                "static_id": "Launcher_Default_4"
+            },
+            {
+                "slot_index": 4,
+                "count": 1,
+                "static_id": "Launcher_Default_5"
+            },
+            {
+                "slot_index": 5,
+                "count": 9999,
+                "static_id": "ExplosiveBullet"
+            },
+            {
+                "slot_index": 6,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 7,
+                "count": 1,
+                "static_id": "Blueprint_Launcher_Default_2"
+            },
+            {
+                "slot_index": 8,
+                "count": 1,
+                "static_id": "Blueprint_Launcher_Default_3"
+            },
+            {
+                "slot_index": 9,
+                "count": 1,
+                "static_id": "Blueprint_Launcher_Default_4"
+            },
+            {
+                "slot_index": 10,
+                "count": 1,
+                "static_id": "Blueprint_Launcher_Default_5"
+            },
+            {
+                "slot_index": 11,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 12,
+                "count": 1,
+                "static_id": "LaserRifle"
+            },
+            {
+                "slot_index": 13,
+                "count": 1,
+                "static_id": "LaserRifle_2"
+            },
+            {
+                "slot_index": 14,
+                "count": 1,
+                "static_id": "LaserRifle_3"
+            },
+            {
+                "slot_index": 15,
+                "count": 1,
+                "static_id": "LaserRifle_4"
+            },
+            {
+                "slot_index": 16,
+                "count": 1,
+                "static_id": "LaserRifle_5"
+            },
+            {
+                "slot_index": 17,
+                "count": 9999,
+                "static_id": "LaserBullet"
+            },
+            {
+                "slot_index": 18,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 19,
+                "count": 1,
+                "static_id": "Blueprint_LaserRifle_2"
+            },
+            {
+                "slot_index": 20,
+                "count": 1,
+                "static_id": "Blueprint_LaserRifle_3"
+            },
+            {
+                "slot_index": 21,
+                "count": 1,
+                "static_id": "Blueprint_LaserRifle_4"
+            },
+            {
+                "slot_index": 22,
+                "count": 1,
+                "static_id": "Blueprint_LaserRifle_5"
+            },
+            {
+                "slot_index": 23,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 24,
+                "count": 1,
+                "static_id": "GrenadeLauncher"
+            },
+            {
+                "slot_index": 25,
+                "count": 1,
+                "static_id": "GrenadeLauncher_2"
+            },
+            {
+                "slot_index": 26,
+                "count": 1,
+                "static_id": "GrenadeLauncher_3"
+            },
+            {
+                "slot_index": 27,
+                "count": 1,
+                "static_id": "GrenadeLauncher_4"
+            },
+            {
+                "slot_index": 28,
+                "count": 1,
+                "static_id": "GrenadeLauncher_5"
+            },
+            {
+                "slot_index": 29,
+                "count": 9999,
+                "static_id": "GrenadeBullet"
+            },
+            {
+                "slot_index": 30,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 31,
+                "count": 1,
+                "static_id": "Blueprint_GrenadeLauncher_2"
+            },
+            {
+                "slot_index": 32,
+                "count": 1,
+                "static_id": "Blueprint_GrenadeLauncher_3"
+            },
+            {
+                "slot_index": 33,
+                "count": 1,
+                "static_id": "Blueprint_GrenadeLauncher_4"
+            },
+            {
+                "slot_index": 34,
+                "count": 1,
+                "static_id": "Blueprint_GrenadeLauncher_5"
+            }
+        ]
+    },
+    "ranged_5": {
+        "common_container": [
+            {
+                "slot_index": 0,
+                "count": 1,
+                "static_id": "GatlingGun"
+            },
+            {
+                "slot_index": 1,
+                "count": 1,
+                "static_id": "GatlingGun_2"
+            },
+            {
+                "slot_index": 2,
+                "count": 1,
+                "static_id": "GatlingGun_3"
+            },
+            {
+                "slot_index": 3,
+                "count": 1,
+                "static_id": "GatlingGun_4"
+            },
+            {
+                "slot_index": 4,
+                "count": 1,
+                "static_id": "GatlingGun_5"
+            },
+            {
+                "slot_index": 5,
+                "count": 9999,
+                "static_id": "GatlingBullet"
+            },
+            {
+                "slot_index": 6,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 7,
+                "count": 1,
+                "static_id": "Blueprint_GatlingGun_2"
+            },
+            {
+                "slot_index": 8,
+                "count": 1,
+                "static_id": "Blueprint_GatlingGun_3"
+            },
+            {
+                "slot_index": 9,
+                "count": 1,
+                "static_id": "Blueprint_GatlingGun_4"
+            },
+            {
+                "slot_index": 10,
+                "count": 1,
+                "static_id": "Blueprint_GatlingGun_5"
+            },
+            {
+                "slot_index": 11,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 12,
+                "count": 1,
+                "static_id": "GuidedMissileLauncher"
+            },
+            {
+                "slot_index": 13,
+                "count": 1,
+                "static_id": "GuidedMissileLauncher_2"
+            },
+            {
+                "slot_index": 14,
+                "count": 1,
+                "static_id": "GuidedMissileLauncher_3"
+            },
+            {
+                "slot_index": 15,
+                "count": 1,
+                "static_id": "GuidedMissileLauncher_4"
+            },
+            {
+                "slot_index": 16,
+                "count": 1,
+                "static_id": "GuidedMissileLauncher_5"
+            },
+            {
+                "slot_index": 17,
+                "count": 9999,
+                "static_id": "MissileBullet"
+            },
+            {
+                "slot_index": 18,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 19,
+                "count": 1,
+                "static_id": "Blueprint_GuidedMissileLauncher_2"
+            },
+            {
+                "slot_index": 20,
+                "count": 1,
+                "static_id": "Blueprint_GuidedMissileLauncher_3"
+            },
+            {
+                "slot_index": 21,
+                "count": 1,
+                "static_id": "Blueprint_GuidedMissileLauncher_4"
+            },
+            {
+                "slot_index": 22,
+                "count": 1,
+                "static_id": "Blueprint_GuidedMissileLauncher_5"
+            }
+        ]
+    },
+    "cloth_armor": {
+        "common_container": [
+            {
+                "slot_index": 0,
+                "count": 1,
+                "static_id": "ClothArmor"
+            },
+            {
+                "slot_index": 1,
+                "count": 1,
+                "static_id": "ClothArmor_2"
+            },
+            {
+                "slot_index": 2,
+                "count": 1,
+                "static_id": "ClothArmor_3"
+            },
+            {
+                "slot_index": 3,
+                "count": 1,
+                "static_id": "ClothArmor_4"
+            },
+            {
+                "slot_index": 4,
+                "count": 1,
+                "static_id": "ClothArmor_5"
+            },
+            {
+                "slot_index": 5,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 6,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 7,
+                "count": 1,
+                "static_id": "Blueprint_ClothArmor_2"
+            },
+            {
+                "slot_index": 8,
+                "count": 1,
+                "static_id": "Blueprint_ClothArmor_3"
+            },
+            {
+                "slot_index": 9,
+                "count": 1,
+                "static_id": "Blueprint_ClothArmor_4"
+            },
+            {
+                "slot_index": 10,
+                "count": 1,
+                "static_id": "Blueprint_ClothArmor_5"
+            },
+            {
+                "slot_index": 11,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 12,
+                "count": 1,
+                "static_id": "ClothArmorHeat"
+            },
+            {
+                "slot_index": 13,
+                "count": 1,
+                "static_id": "ClothArmorHeat_2"
+            },
+            {
+                "slot_index": 14,
+                "count": 1,
+                "static_id": "ClothArmorHeat_3"
+            },
+            {
+                "slot_index": 15,
+                "count": 1,
+                "static_id": "ClothArmorHeat_4"
+            },
+            {
+                "slot_index": 16,
+                "count": 1,
+                "static_id": "ClothArmorHeat_5"
+            },
+            {
+                "slot_index": 17,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 18,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 19,
+                "count": 1,
+                "static_id": "Blueprint_ClothArmorHeat_2"
+            },
+            {
+                "slot_index": 20,
+                "count": 1,
+                "static_id": "Blueprint_ClothArmorHeat_3"
+            },
+            {
+                "slot_index": 21,
+                "count": 1,
+                "static_id": "Blueprint_ClothArmorHeat_4"
+            },
+            {
+                "slot_index": 22,
+                "count": 1,
+                "static_id": "Blueprint_ClothArmorHeat_5"
+            },
+            {
+                "slot_index": 23,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 24,
+                "count": 1,
+                "static_id": "ClothArmorCold"
+            },
+            {
+                "slot_index": 25,
+                "count": 1,
+                "static_id": "ClothArmorCold_2"
+            },
+            {
+                "slot_index": 26,
+                "count": 1,
+                "static_id": "ClothArmorCold_3"
+            },
+            {
+                "slot_index": 27,
+                "count": 1,
+                "static_id": "ClothArmorCold_4"
+            },
+            {
+                "slot_index": 28,
+                "count": 1,
+                "static_id": "ClothArmorCold_5"
+            },
+            {
+                "slot_index": 29,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 30,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 31,
+                "count": 1,
+                "static_id": "Blueprint_ClothArmorCold_2"
+            },
+            {
+                "slot_index": 32,
+                "count": 1,
+                "static_id": "Blueprint_ClothArmorCold_3"
+            },
+            {
+                "slot_index": 33,
+                "count": 1,
+                "static_id": "Blueprint_ClothArmorCold_4"
+            },
+            {
+                "slot_index": 34,
+                "count": 1,
+                "static_id": "Blueprint_ClothArmorCold_5"
+            }
+        ]
+    },
+    "pelt_armor": {
+        "common_container": [
+            {
+                "slot_index": 0,
+                "count": 1,
+                "static_id": "FurArmor"
+            },
+            {
+                "slot_index": 1,
+                "count": 1,
+                "static_id": "FurArmor_2"
+            },
+            {
+                "slot_index": 2,
+                "count": 1,
+                "static_id": "FurArmor_3"
+            },
+            {
+                "slot_index": 3,
+                "count": 1,
+                "static_id": "FurArmor_4"
+            },
+            {
+                "slot_index": 4,
+                "count": 1,
+                "static_id": "FurArmor_5"
+            },
+            {
+                "slot_index": 5,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 6,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 7,
+                "count": 1,
+                "static_id": "Blueprint_FurArmor_2"
+            },
+            {
+                "slot_index": 8,
+                "count": 1,
+                "static_id": "Blueprint_FurArmor_3"
+            },
+            {
+                "slot_index": 9,
+                "count": 1,
+                "static_id": "Blueprint_FurArmor_4"
+            },
+            {
+                "slot_index": 10,
+                "count": 1,
+                "static_id": "Blueprint_FurArmor_5"
+            },
+            {
+                "slot_index": 11,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 12,
+                "count": 1,
+                "static_id": "FurArmorHeat"
+            },
+            {
+                "slot_index": 13,
+                "count": 1,
+                "static_id": "FurArmorHeat_2"
+            },
+            {
+                "slot_index": 14,
+                "count": 1,
+                "static_id": "FurArmorHeat_3"
+            },
+            {
+                "slot_index": 15,
+                "count": 1,
+                "static_id": "FurArmorHeat_4"
+            },
+            {
+                "slot_index": 16,
+                "count": 1,
+                "static_id": "FurArmorHeat_5"
+            },
+            {
+                "slot_index": 17,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 18,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 19,
+                "count": 1,
+                "static_id": "Blueprint_FurArmorHeat_2"
+            },
+            {
+                "slot_index": 20,
+                "count": 1,
+                "static_id": "Blueprint_FurArmorHeat_3"
+            },
+            {
+                "slot_index": 21,
+                "count": 1,
+                "static_id": "Blueprint_FurArmorHeat_4"
+            },
+            {
+                "slot_index": 22,
+                "count": 1,
+                "static_id": "Blueprint_FurArmorHeat_5"
+            },
+            {
+                "slot_index": 23,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 24,
+                "count": 1,
+                "static_id": "FurArmorCold"
+            },
+            {
+                "slot_index": 25,
+                "count": 1,
+                "static_id": "FurArmorCold_2"
+            },
+            {
+                "slot_index": 26,
+                "count": 1,
+                "static_id": "FurArmorCold_3"
+            },
+            {
+                "slot_index": 27,
+                "count": 1,
+                "static_id": "FurArmorCold_4"
+            },
+            {
+                "slot_index": 28,
+                "count": 1,
+                "static_id": "FurArmorCold_5"
+            },
+            {
+                "slot_index": 29,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 30,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 31,
+                "count": 1,
+                "static_id": "Blueprint_FurArmorCold_2"
+            },
+            {
+                "slot_index": 32,
+                "count": 1,
+                "static_id": "Blueprint_FurArmorCold_3"
+            },
+            {
+                "slot_index": 33,
+                "count": 1,
+                "static_id": "Blueprint_FurArmorCold_4"
+            },
+            {
+                "slot_index": 34,
+                "count": 1,
+                "static_id": "Blueprint_FurArmorCold_5"
+            }
+        ]
+    },
+    "metal_armor": {
+        "common_container": [
+            {
+                "slot_index": 0,
+                "count": 1,
+                "static_id": "CopperArmor"
+            },
+            {
+                "slot_index": 1,
+                "count": 1,
+                "static_id": "CopperArmor_2"
+            },
+            {
+                "slot_index": 2,
+                "count": 1,
+                "static_id": "CopperArmor_3"
+            },
+            {
+                "slot_index": 3,
+                "count": 1,
+                "static_id": "CopperArmor_4"
+            },
+            {
+                "slot_index": 4,
+                "count": 1,
+                "static_id": "CopperArmor_5"
+            },
+            {
+                "slot_index": 5,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 6,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 7,
+                "count": 1,
+                "static_id": "Blueprint_CopperArmor_2"
+            },
+            {
+                "slot_index": 8,
+                "count": 1,
+                "static_id": "Blueprint_CopperArmor_3"
+            },
+            {
+                "slot_index": 9,
+                "count": 1,
+                "static_id": "Blueprint_CopperArmor_4"
+            },
+            {
+                "slot_index": 10,
+                "count": 1,
+                "static_id": "Blueprint_CopperArmor_5"
+            },
+            {
+                "slot_index": 11,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 12,
+                "count": 1,
+                "static_id": "CopperArmorHeat"
+            },
+            {
+                "slot_index": 13,
+                "count": 1,
+                "static_id": "CopperArmorHeat_2"
+            },
+            {
+                "slot_index": 14,
+                "count": 1,
+                "static_id": "CopperArmorHeat_3"
+            },
+            {
+                "slot_index": 15,
+                "count": 1,
+                "static_id": "CopperArmorHeat_4"
+            },
+            {
+                "slot_index": 16,
+                "count": 1,
+                "static_id": "CopperArmorHeat_5"
+            },
+            {
+                "slot_index": 17,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 18,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 19,
+                "count": 1,
+                "static_id": "Blueprint_CopperArmorHeat_2"
+            },
+            {
+                "slot_index": 20,
+                "count": 1,
+                "static_id": "Blueprint_CopperArmorHeat_3"
+            },
+            {
+                "slot_index": 21,
+                "count": 1,
+                "static_id": "Blueprint_CopperArmorHeat_4"
+            },
+            {
+                "slot_index": 22,
+                "count": 1,
+                "static_id": "Blueprint_CopperArmorHeat_5"
+            },
+            {
+                "slot_index": 23,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 24,
+                "count": 1,
+                "static_id": "CopperArmorCold"
+            },
+            {
+                "slot_index": 25,
+                "count": 1,
+                "static_id": "CopperArmorCold_2"
+            },
+            {
+                "slot_index": 26,
+                "count": 1,
+                "static_id": "CopperArmorCold_3"
+            },
+            {
+                "slot_index": 27,
+                "count": 1,
+                "static_id": "CopperArmorCold_4"
+            },
+            {
+                "slot_index": 28,
+                "count": 1,
+                "static_id": "CopperArmorCold_5"
+            },
+            {
+                "slot_index": 29,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 30,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 31,
+                "count": 1,
+                "static_id": "Blueprint_CopperArmorCold_2"
+            },
+            {
+                "slot_index": 32,
+                "count": 1,
+                "static_id": "Blueprint_CopperArmorCold_3"
+            },
+            {
+                "slot_index": 33,
+                "count": 1,
+                "static_id": "Blueprint_CopperArmorCold_4"
+            },
+            {
+                "slot_index": 34,
+                "count": 1,
+                "static_id": "Blueprint_CopperArmorCold_5"
+            }
+        ]
+    },
+    "refined_metal_armor": {
+        "common_container": [
+            {
+                "slot_index": 0,
+                "count": 1,
+                "static_id": "IronArmor"
+            },
+            {
+                "slot_index": 1,
+                "count": 1,
+                "static_id": "IronArmor_2"
+            },
+            {
+                "slot_index": 2,
+                "count": 1,
+                "static_id": "IronArmor_3"
+            },
+            {
+                "slot_index": 3,
+                "count": 1,
+                "static_id": "IronArmor_4"
+            },
+            {
+                "slot_index": 4,
+                "count": 1,
+                "static_id": "IronArmor_5"
+            },
+            {
+                "slot_index": 5,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 6,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 7,
+                "count": 1,
+                "static_id": "Blueprint_IronArmor_2"
+            },
+            {
+                "slot_index": 8,
+                "count": 1,
+                "static_id": "Blueprint_IronArmor_3"
+            },
+            {
+                "slot_index": 9,
+                "count": 1,
+                "static_id": "Blueprint_IronArmor_4"
+            },
+            {
+                "slot_index": 10,
+                "count": 1,
+                "static_id": "Blueprint_IronArmor_5"
+            },
+            {
+                "slot_index": 11,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 12,
+                "count": 1,
+                "static_id": "IronArmorHeat"
+            },
+            {
+                "slot_index": 13,
+                "count": 1,
+                "static_id": "IronArmorHeat_2"
+            },
+            {
+                "slot_index": 14,
+                "count": 1,
+                "static_id": "IronArmorHeat_3"
+            },
+            {
+                "slot_index": 15,
+                "count": 1,
+                "static_id": "IronArmorHeat_4"
+            },
+            {
+                "slot_index": 16,
+                "count": 1,
+                "static_id": "IronArmorHeat_5"
+            },
+            {
+                "slot_index": 17,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 18,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 19,
+                "count": 1,
+                "static_id": "Blueprint_IronArmorHeat_2"
+            },
+            {
+                "slot_index": 20,
+                "count": 1,
+                "static_id": "Blueprint_IronArmorHeat_3"
+            },
+            {
+                "slot_index": 21,
+                "count": 1,
+                "static_id": "Blueprint_IronArmorHeat_4"
+            },
+            {
+                "slot_index": 22,
+                "count": 1,
+                "static_id": "Blueprint_IronArmorHeat_5"
+            },
+            {
+                "slot_index": 23,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 24,
+                "count": 1,
+                "static_id": "IronArmorCold"
+            },
+            {
+                "slot_index": 25,
+                "count": 1,
+                "static_id": "IronArmorCold_2"
+            },
+            {
+                "slot_index": 26,
+                "count": 1,
+                "static_id": "IronArmorCold_3"
+            },
+            {
+                "slot_index": 27,
+                "count": 1,
+                "static_id": "IronArmorCold_4"
+            },
+            {
+                "slot_index": 28,
+                "count": 1,
+                "static_id": "IronArmorCold_5"
+            },
+            {
+                "slot_index": 29,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 30,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 31,
+                "count": 1,
+                "static_id": "Blueprint_IronArmorCold_2"
+            },
+            {
+                "slot_index": 32,
+                "count": 1,
+                "static_id": "Blueprint_IronArmorCold_3"
+            },
+            {
+                "slot_index": 33,
+                "count": 1,
+                "static_id": "Blueprint_IronArmorCold_4"
+            },
+            {
+                "slot_index": 34,
+                "count": 1,
+                "static_id": "Blueprint_IronArmorCold_5"
+            }
+        ]
+    },
+    "pal_metal_armor": {
+        "common_container": [
+            {
+                "slot_index": 0,
+                "count": 1,
+                "static_id": "StealArmor"
+            },
+            {
+                "slot_index": 1,
+                "count": 1,
+                "static_id": "StealArmor_2"
+            },
+            {
+                "slot_index": 2,
+                "count": 1,
+                "static_id": "StealArmor_3"
+            },
+            {
+                "slot_index": 3,
+                "count": 1,
+                "static_id": "StealArmor_4"
+            },
+            {
+                "slot_index": 4,
+                "count": 1,
+                "static_id": "StealArmor_5"
+            },
+            {
+                "slot_index": 5,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 6,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 7,
+                "count": 1,
+                "static_id": "Blueprint_StealArmor_2"
+            },
+            {
+                "slot_index": 8,
+                "count": 1,
+                "static_id": "Blueprint_StealArmor_3"
+            },
+            {
+                "slot_index": 9,
+                "count": 1,
+                "static_id": "Blueprint_StealArmor_4"
+            },
+            {
+                "slot_index": 10,
+                "count": 1,
+                "static_id": "Blueprint_StealArmor_5"
+            },
+            {
+                "slot_index": 11,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 12,
+                "count": 1,
+                "static_id": "StealArmorHeat"
+            },
+            {
+                "slot_index": 13,
+                "count": 1,
+                "static_id": "StealArmorHeat_2"
+            },
+            {
+                "slot_index": 14,
+                "count": 1,
+                "static_id": "StealArmorHeat_3"
+            },
+            {
+                "slot_index": 15,
+                "count": 1,
+                "static_id": "StealArmorHeat_4"
+            },
+            {
+                "slot_index": 16,
+                "count": 1,
+                "static_id": "StealArmorHeat_5"
+            },
+            {
+                "slot_index": 17,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 18,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 19,
+                "count": 1,
+                "static_id": "Blueprint_StealArmorHeat_2"
+            },
+            {
+                "slot_index": 20,
+                "count": 1,
+                "static_id": "Blueprint_StealArmorHeat_3"
+            },
+            {
+                "slot_index": 21,
+                "count": 1,
+                "static_id": "Blueprint_StealArmorHeat_4"
+            },
+            {
+                "slot_index": 22,
+                "count": 1,
+                "static_id": "Blueprint_StealArmorHeat_5"
+            },
+            {
+                "slot_index": 23,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 24,
+                "count": 1,
+                "static_id": "StealArmorCold"
+            },
+            {
+                "slot_index": 25,
+                "count": 1,
+                "static_id": "StealArmorCold_2"
+            },
+            {
+                "slot_index": 26,
+                "count": 1,
+                "static_id": "StealArmorCold_3"
+            },
+            {
+                "slot_index": 27,
+                "count": 1,
+                "static_id": "StealArmorCold_4"
+            },
+            {
+                "slot_index": 28,
+                "count": 1,
+                "static_id": "StealArmorCold_5"
+            },
+            {
+                "slot_index": 29,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 30,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 31,
+                "count": 1,
+                "static_id": "Blueprint_StealArmorCold_2"
+            },
+            {
+                "slot_index": 32,
+                "count": 1,
+                "static_id": "Blueprint_StealArmorCold_3"
+            },
+            {
+                "slot_index": 33,
+                "count": 1,
+                "static_id": "Blueprint_StealArmorCold_4"
+            },
+            {
+                "slot_index": 34,
+                "count": 1,
+                "static_id": "Blueprint_StealArmorCold_5"
+            }
+        ]
+    },
+    "plasteel_armor": {
+        "common_container": [
+            {
+                "slot_index": 0,
+                "count": 1,
+                "static_id": "PlasticArmor"
+            },
+            {
+                "slot_index": 1,
+                "count": 1,
+                "static_id": "PlasticArmor_2"
+            },
+            {
+                "slot_index": 2,
+                "count": 1,
+                "static_id": "PlasticArmor_3"
+            },
+            {
+                "slot_index": 3,
+                "count": 1,
+                "static_id": "PlasticArmor_4"
+            },
+            {
+                "slot_index": 4,
+                "count": 1,
+                "static_id": "PlasticArmor_5"
+            },
+            {
+                "slot_index": 5,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 6,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 7,
+                "count": 1,
+                "static_id": "Blueprint_PlasticArmor_2"
+            },
+            {
+                "slot_index": 8,
+                "count": 1,
+                "static_id": "Blueprint_PlasticArmor_3"
+            },
+            {
+                "slot_index": 9,
+                "count": 1,
+                "static_id": "Blueprint_PlasticArmor_4"
+            },
+            {
+                "slot_index": 10,
+                "count": 1,
+                "static_id": "Blueprint_PlasticArmor_5"
+            },
+            {
+                "slot_index": 11,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 12,
+                "count": 1,
+                "static_id": "PlasticArmorHeat"
+            },
+            {
+                "slot_index": 13,
+                "count": 1,
+                "static_id": "PlasticArmorHeat_2"
+            },
+            {
+                "slot_index": 14,
+                "count": 1,
+                "static_id": "PlasticArmorHeat_3"
+            },
+            {
+                "slot_index": 15,
+                "count": 1,
+                "static_id": "PlasticArmorHeat_4"
+            },
+            {
+                "slot_index": 16,
+                "count": 1,
+                "static_id": "PlasticArmorHeat_5"
+            },
+            {
+                "slot_index": 17,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 18,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 19,
+                "count": 1,
+                "static_id": "Blueprint_PlasticArmorHeat_2"
+            },
+            {
+                "slot_index": 20,
+                "count": 1,
+                "static_id": "Blueprint_PlasticArmorHeat_3"
+            },
+            {
+                "slot_index": 21,
+                "count": 1,
+                "static_id": "Blueprint_PlasticArmorHeat_4"
+            },
+            {
+                "slot_index": 22,
+                "count": 1,
+                "static_id": "Blueprint_PlasticArmorHeat_5"
+            },
+            {
+                "slot_index": 23,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 24,
+                "count": 1,
+                "static_id": "PlasticArmorCold"
+            },
+            {
+                "slot_index": 25,
+                "count": 1,
+                "static_id": "PlasticArmorCold_2"
+            },
+            {
+                "slot_index": 26,
+                "count": 1,
+                "static_id": "PlasticArmorCold_3"
+            },
+            {
+                "slot_index": 27,
+                "count": 1,
+                "static_id": "PlasticArmorCold_4"
+            },
+            {
+                "slot_index": 28,
+                "count": 1,
+                "static_id": "PlasticArmorCold_5"
+            },
+            {
+                "slot_index": 29,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 30,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 31,
+                "count": 1,
+                "static_id": "Blueprint_PlasticArmorCold_2"
+            },
+            {
+                "slot_index": 32,
+                "count": 1,
+                "static_id": "Blueprint_PlasticArmorCold_3"
+            },
+            {
+                "slot_index": 33,
+                "count": 1,
+                "static_id": "Blueprint_PlasticArmorCold_4"
+            },
+            {
+                "slot_index": 34,
+                "count": 1,
+                "static_id": "Blueprint_PlasticArmorCold_5"
+            }
+        ]
+    },
+    "lightweight_plasteel_armor": {
+        "common_container": [
+            {
+                "slot_index": 0,
+                "count": 1,
+                "static_id": "PlasticArmorWeight"
+            },
+            {
+                "slot_index": 1,
+                "count": 1,
+                "static_id": "PlasticArmorWeight_2"
+            },
+            {
+                "slot_index": 2,
+                "count": 1,
+                "static_id": "PlasticArmorWeight_3"
+            },
+            {
+                "slot_index": 3,
+                "count": 1,
+                "static_id": "PlasticArmorWeight_4"
+            },
+            {
+                "slot_index": 4,
+                "count": 1,
+                "static_id": "PlasticArmorWeight_5"
+            },
+            {
+                "slot_index": 5,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 6,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 7,
+                "count": 1,
+                "static_id": "Blueprint_PlasticArmorWeight_2"
+            },
+            {
+                "slot_index": 8,
+                "count": 1,
+                "static_id": "Blueprint_PlasticArmorWeight_3"
+            },
+            {
+                "slot_index": 9,
+                "count": 1,
+                "static_id": "Blueprint_PlasticArmorWeight_4"
+            },
+            {
+                "slot_index": 10,
+                "count": 1,
+                "static_id": "Blueprint_PlasticArmorWeight_5"
+            }
+        ]
+    },
+    "head_armor_1": {
+        "common_container": [
+            {
+                "slot_index": 0,
+                "count": 1,
+                "static_id": "FurHelmet"
+            },
+            {
+                "slot_index": 1,
+                "count": 1,
+                "static_id": "FurHelmet_2"
+            },
+            {
+                "slot_index": 2,
+                "count": 1,
+                "static_id": "FurHelmet_3"
+            },
+            {
+                "slot_index": 3,
+                "count": 1,
+                "static_id": "FurHelmet_4"
+            },
+            {
+                "slot_index": 4,
+                "count": 1,
+                "static_id": "FurHelmet_5"
+            },
+            {
+                "slot_index": 5,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 6,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 7,
+                "count": 1,
+                "static_id": "Blueprint_FurHelmet_2"
+            },
+            {
+                "slot_index": 8,
+                "count": 1,
+                "static_id": "Blueprint_FurHelmet_3"
+            },
+            {
+                "slot_index": 9,
+                "count": 1,
+                "static_id": "Blueprint_FurHelmet_4"
+            },
+            {
+                "slot_index": 10,
+                "count": 1,
+                "static_id": "Blueprint_FurHelmet_5"
+            },
+            {
+                "slot_index": 11,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 12,
+                "count": 1,
+                "static_id": "CopperHelmet"
+            },
+            {
+                "slot_index": 13,
+                "count": 1,
+                "static_id": "CopperHelmet_2"
+            },
+            {
+                "slot_index": 14,
+                "count": 1,
+                "static_id": "CopperHelmet_3"
+            },
+            {
+                "slot_index": 15,
+                "count": 1,
+                "static_id": "CopperHelmet_4"
+            },
+            {
+                "slot_index": 16,
+                "count": 1,
+                "static_id": "CopperHelmet_5"
+            },
+            {
+                "slot_index": 17,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 18,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 19,
+                "count": 1,
+                "static_id": "Blueprint_CopperHelmet_2"
+            },
+            {
+                "slot_index": 20,
+                "count": 1,
+                "static_id": "Blueprint_CopperHelmet_3"
+            },
+            {
+                "slot_index": 21,
+                "count": 1,
+                "static_id": "Blueprint_CopperHelmet_4"
+            },
+            {
+                "slot_index": 22,
+                "count": 1,
+                "static_id": "Blueprint_CopperHelmet_5"
+            },
+            {
+                "slot_index": 23,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 24,
+                "count": 1,
+                "static_id": "IronHelmet"
+            },
+            {
+                "slot_index": 25,
+                "count": 1,
+                "static_id": "IronHelmet_2"
+            },
+            {
+                "slot_index": 26,
+                "count": 1,
+                "static_id": "IronHelmet_3"
+            },
+            {
+                "slot_index": 27,
+                "count": 1,
+                "static_id": "IronHelmet_4"
+            },
+            {
+                "slot_index": 28,
+                "count": 1,
+                "static_id": "IronHelmet_5"
+            },
+            {
+                "slot_index": 29,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 30,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 31,
+                "count": 1,
+                "static_id": "Blueprint_IronHelmet_2"
+            },
+            {
+                "slot_index": 32,
+                "count": 1,
+                "static_id": "Blueprint_IronHelmet_3"
+            },
+            {
+                "slot_index": 33,
+                "count": 1,
+                "static_id": "Blueprint_IronHelmet_4"
+            },
+            {
+                "slot_index": 34,
+                "count": 1,
+                "static_id": "Blueprint_IronHelmet_5"
+            }
+        ]
+    },
+    "head_armor_2": {
+        "common_container": [
+            {
+                "slot_index": 0,
+                "count": 1,
+                "static_id": "StealHelmet"
+            },
+            {
+                "slot_index": 1,
+                "count": 1,
+                "static_id": "StealHelmet_2"
+            },
+            {
+                "slot_index": 2,
+                "count": 1,
+                "static_id": "StealHelmet_3"
+            },
+            {
+                "slot_index": 3,
+                "count": 1,
+                "static_id": "StealHelmet_4"
+            },
+            {
+                "slot_index": 4,
+                "count": 1,
+                "static_id": "StealHelmet_5"
+            },
+            {
+                "slot_index": 5,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 6,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 7,
+                "count": 1,
+                "static_id": "Blueprint_StealHelmet_2"
+            },
+            {
+                "slot_index": 8,
+                "count": 1,
+                "static_id": "Blueprint_StealHelmet_3"
+            },
+            {
+                "slot_index": 9,
+                "count": 1,
+                "static_id": "Blueprint_StealHelmet_4"
+            },
+            {
+                "slot_index": 10,
+                "count": 1,
+                "static_id": "Blueprint_StealHelmet_5"
+            },
+            {
+                "slot_index": 11,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 12,
+                "count": 1,
+                "static_id": "PlasticHelmet"
+            },
+            {
+                "slot_index": 13,
+                "count": 1,
+                "static_id": "PlasticHelmet_2"
+            },
+            {
+                "slot_index": 14,
+                "count": 1,
+                "static_id": "PlasticHelmet_3"
+            },
+            {
+                "slot_index": 15,
+                "count": 1,
+                "static_id": "PlasticHelmet_4"
+            },
+            {
+                "slot_index": 16,
+                "count": 1,
+                "static_id": "PlasticHelmet_5"
+            },
+            {
+                "slot_index": 17,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 18,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 19,
+                "count": 1,
+                "static_id": "Blueprint_PlasticHelmet_2"
+            },
+            {
+                "slot_index": 20,
+                "count": 1,
+                "static_id": "Blueprint_PlasticHelmet_3"
+            },
+            {
+                "slot_index": 21,
+                "count": 1,
+                "static_id": "Blueprint_PlasticHelmet_4"
+            },
+            {
+                "slot_index": 22,
+                "count": 1,
+                "static_id": "Blueprint_PlasticHelmet_5"
+            },
+            {
+                "slot_index": 23,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 24,
+                "count": 1,
+                "static_id": "Head001"
+            },
+            {
+                "slot_index": 25,
+                "count": 1,
+                "static_id": "Head001_2"
+            },
+            {
+                "slot_index": 26,
+                "count": 1,
+                "static_id": "Head001_3"
+            },
+            {
+                "slot_index": 27,
+                "count": 1,
+                "static_id": "Head001_4"
+            },
+            {
+                "slot_index": 28,
+                "count": 1,
+                "static_id": "Head001_5"
+            },
+            {
+                "slot_index": 29,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 30,
+                "count": 1,
+                "static_id": "Blueprint_Head001_1"
+            },
+            {
+                "slot_index": 31,
+                "count": 1,
+                "static_id": "Blueprint_Head001_2"
+            },
+            {
+                "slot_index": 32,
+                "count": 1,
+                "static_id": "Blueprint_Head001_3"
+            },
+            {
+                "slot_index": 33,
+                "count": 1,
+                "static_id": "Blueprint_Head001_4"
+            },
+            {
+                "slot_index": 34,
+                "count": 1,
+                "static_id": "Blueprint_Head001_5"
+            }
+        ]
+    },
+    "head_armor_3": {
+        "common_container": [
+            {
+                "slot_index": 0,
+                "count": 1,
+                "static_id": "Head002"
+            },
+            {
+                "slot_index": 1,
+                "count": 1,
+                "static_id": "Head002_2"
+            },
+            {
+                "slot_index": 2,
+                "count": 1,
+                "static_id": "Head002_3"
+            },
+            {
+                "slot_index": 3,
+                "count": 1,
+                "static_id": "Head002_4"
+            },
+            {
+                "slot_index": 4,
+                "count": 1,
+                "static_id": "Head002_5"
+            },
+            {
+                "slot_index": 5,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 6,
+                "count": 1,
+                "static_id": "Blueprint_Head002_1"
+            },
+            {
+                "slot_index": 7,
+                "count": 1,
+                "static_id": "Blueprint_Head002_2"
+            },
+            {
+                "slot_index": 8,
+                "count": 1,
+                "static_id": "Blueprint_Head002_3"
+            },
+            {
+                "slot_index": 9,
+                "count": 1,
+                "static_id": "Blueprint_Head002_4"
+            },
+            {
+                "slot_index": 10,
+                "count": 1,
+                "static_id": "Blueprint_Head002_5"
+            },
+            {
+                "slot_index": 11,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 12,
+                "count": 1,
+                "static_id": "Head003"
+            },
+            {
+                "slot_index": 13,
+                "count": 1,
+                "static_id": "Head003_2"
+            },
+            {
+                "slot_index": 14,
+                "count": 1,
+                "static_id": "Head003_3"
+            },
+            {
+                "slot_index": 15,
+                "count": 1,
+                "static_id": "Head003_4"
+            },
+            {
+                "slot_index": 16,
+                "count": 1,
+                "static_id": "Head003_5"
+            },
+            {
+                "slot_index": 17,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 18,
+                "count": 1,
+                "static_id": "Blueprint_Head003_1"
+            },
+            {
+                "slot_index": 19,
+                "count": 1,
+                "static_id": "Blueprint_Head003_2"
+            },
+            {
+                "slot_index": 20,
+                "count": 1,
+                "static_id": "Blueprint_Head003_3"
+            },
+            {
+                "slot_index": 21,
+                "count": 1,
+                "static_id": "Blueprint_Head003_4"
+            },
+            {
+                "slot_index": 22,
+                "count": 1,
+                "static_id": "Blueprint_Head003_5"
+            },
+            {
+                "slot_index": 23,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 24,
+                "count": 1,
+                "static_id": "Head004"
+            },
+            {
+                "slot_index": 25,
+                "count": 1,
+                "static_id": "Head004_2"
+            },
+            {
+                "slot_index": 26,
+                "count": 1,
+                "static_id": "Head004_3"
+            },
+            {
+                "slot_index": 27,
+                "count": 1,
+                "static_id": "Head004_4"
+            },
+            {
+                "slot_index": 28,
+                "count": 1,
+                "static_id": "Head004_5"
+            },
+            {
+                "slot_index": 29,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 30,
+                "count": 1,
+                "static_id": "Blueprint_Head004_1"
+            },
+            {
+                "slot_index": 31,
+                "count": 1,
+                "static_id": "Blueprint_Head004_2"
+            },
+            {
+                "slot_index": 32,
+                "count": 1,
+                "static_id": "Blueprint_Head004_3"
+            },
+            {
+                "slot_index": 33,
+                "count": 1,
+                "static_id": "Blueprint_Head004_4"
+            },
+            {
+                "slot_index": 34,
+                "count": 1,
+                "static_id": "Blueprint_Head004_5"
+            }
+        ]
+    },
+    "head_armor_4": {
+        "common_container": [
+            {
+                "slot_index": 0,
+                "count": 1,
+                "static_id": "Head005"
+            },
+            {
+                "slot_index": 1,
+                "count": 1,
+                "static_id": "Head005_2"
+            },
+            {
+                "slot_index": 2,
+                "count": 1,
+                "static_id": "Head005_3"
+            },
+            {
+                "slot_index": 3,
+                "count": 1,
+                "static_id": "Head005_4"
+            },
+            {
+                "slot_index": 4,
+                "count": 1,
+                "static_id": "Head005_5"
+            },
+            {
+                "slot_index": 5,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 6,
+                "count": 1,
+                "static_id": "Blueprint_Head005_1"
+            },
+            {
+                "slot_index": 7,
+                "count": 1,
+                "static_id": "Blueprint_Head005_2"
+            },
+            {
+                "slot_index": 8,
+                "count": 1,
+                "static_id": "Blueprint_Head005_3"
+            },
+            {
+                "slot_index": 9,
+                "count": 1,
+                "static_id": "Blueprint_Head005_4"
+            },
+            {
+                "slot_index": 10,
+                "count": 1,
+                "static_id": "Blueprint_Head005_5"
+            },
+            {
+                "slot_index": 11,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 12,
+                "count": 1,
+                "static_id": "Head006"
+            },
+            {
+                "slot_index": 13,
+                "count": 1,
+                "static_id": "Head006_2"
+            },
+            {
+                "slot_index": 14,
+                "count": 1,
+                "static_id": "Head006_3"
+            },
+            {
+                "slot_index": 15,
+                "count": 1,
+                "static_id": "Head006_4"
+            },
+            {
+                "slot_index": 16,
+                "count": 1,
+                "static_id": "Head006_5"
+            },
+            {
+                "slot_index": 17,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 18,
+                "count": 1,
+                "static_id": "Blueprint_Head006_1"
+            },
+            {
+                "slot_index": 19,
+                "count": 1,
+                "static_id": "Blueprint_Head006_2"
+            },
+            {
+                "slot_index": 20,
+                "count": 1,
+                "static_id": "Blueprint_Head006_3"
+            },
+            {
+                "slot_index": 21,
+                "count": 1,
+                "static_id": "Blueprint_Head006_4"
+            },
+            {
+                "slot_index": 22,
+                "count": 1,
+                "static_id": "Blueprint_Head006_5"
+            },
+            {
+                "slot_index": 23,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 24,
+                "count": 1,
+                "static_id": "Head007"
+            },
+            {
+                "slot_index": 25,
+                "count": 1,
+                "static_id": "Head007_2"
+            },
+            {
+                "slot_index": 26,
+                "count": 1,
+                "static_id": "Head007_3"
+            },
+            {
+                "slot_index": 27,
+                "count": 1,
+                "static_id": "Head007_4"
+            },
+            {
+                "slot_index": 28,
+                "count": 1,
+                "static_id": "Head007_5"
+            },
+            {
+                "slot_index": 29,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 30,
+                "count": 1,
+                "static_id": "Blueprint_Head007_1"
+            },
+            {
+                "slot_index": 31,
+                "count": 1,
+                "static_id": "Blueprint_Head007_2"
+            },
+            {
+                "slot_index": 32,
+                "count": 1,
+                "static_id": "Blueprint_Head007_3"
+            },
+            {
+                "slot_index": 33,
+                "count": 1,
+                "static_id": "Blueprint_Head007_4"
+            },
+            {
+                "slot_index": 34,
+                "count": 1,
+                "static_id": "Blueprint_Head007_5"
+            }
+        ]
+    },
+    "head_armor_5": {
+        "common_container": [
+            {
+                "slot_index": 0,
+                "count": 1,
+                "static_id": "Head008"
+            },
+            {
+                "slot_index": 1,
+                "count": 1,
+                "static_id": "Head008_2"
+            },
+            {
+                "slot_index": 2,
+                "count": 1,
+                "static_id": "Head008_3"
+            },
+            {
+                "slot_index": 3,
+                "count": 1,
+                "static_id": "Head008_4"
+            },
+            {
+                "slot_index": 4,
+                "count": 1,
+                "static_id": "Head008_5"
+            },
+            {
+                "slot_index": 5,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 6,
+                "count": 1,
+                "static_id": "Blueprint_Head008_1"
+            },
+            {
+                "slot_index": 7,
+                "count": 1,
+                "static_id": "Blueprint_Head008_2"
+            },
+            {
+                "slot_index": 8,
+                "count": 1,
+                "static_id": "Blueprint_Head008_3"
+            },
+            {
+                "slot_index": 9,
+                "count": 1,
+                "static_id": "Blueprint_Head008_4"
+            },
+            {
+                "slot_index": 10,
+                "count": 1,
+                "static_id": "Blueprint_Head008_5"
+            },
+            {
+                "slot_index": 11,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 12,
+                "count": 1,
+                "static_id": "Head009"
+            },
+            {
+                "slot_index": 13,
+                "count": 1,
+                "static_id": "Head009_2"
+            },
+            {
+                "slot_index": 14,
+                "count": 1,
+                "static_id": "Head009_3"
+            },
+            {
+                "slot_index": 15,
+                "count": 1,
+                "static_id": "Head009_4"
+            },
+            {
+                "slot_index": 16,
+                "count": 1,
+                "static_id": "Head009_5"
+            },
+            {
+                "slot_index": 17,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 18,
+                "count": 1,
+                "static_id": "Blueprint_Head009_1"
+            },
+            {
+                "slot_index": 19,
+                "count": 1,
+                "static_id": "Blueprint_Head009_2"
+            },
+            {
+                "slot_index": 20,
+                "count": 1,
+                "static_id": "Blueprint_Head009_3"
+            },
+            {
+                "slot_index": 21,
+                "count": 1,
+                "static_id": "Blueprint_Head009_4"
+            },
+            {
+                "slot_index": 22,
+                "count": 1,
+                "static_id": "Blueprint_Head009_5"
+            },
+            {
+                "slot_index": 23,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 24,
+                "count": 1,
+                "static_id": "Head010"
+            },
+            {
+                "slot_index": 25,
+                "count": 1,
+                "static_id": "Head010_2"
+            },
+            {
+                "slot_index": 26,
+                "count": 1,
+                "static_id": "Head010_3"
+            },
+            {
+                "slot_index": 27,
+                "count": 1,
+                "static_id": "Head010_4"
+            },
+            {
+                "slot_index": 28,
+                "count": 1,
+                "static_id": "Head010_5"
+            },
+            {
+                "slot_index": 29,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 30,
+                "count": 1,
+                "static_id": "Blueprint_Head010_1"
+            },
+            {
+                "slot_index": 31,
+                "count": 1,
+                "static_id": "Blueprint_Head010_2"
+            },
+            {
+                "slot_index": 32,
+                "count": 1,
+                "static_id": "Blueprint_Head010_3"
+            },
+            {
+                "slot_index": 33,
+                "count": 1,
+                "static_id": "Blueprint_Head010_4"
+            },
+            {
+                "slot_index": 34,
+                "count": 1,
+                "static_id": "Blueprint_Head010_5"
+            }
+        ]
+    },
+    "head_armor_6": {
+        "common_container": [
+            {
+                "slot_index": 0,
+                "count": 1,
+                "static_id": "Head011"
+            },
+            {
+                "slot_index": 1,
+                "count": 1,
+                "static_id": "Head011_2"
+            },
+            {
+                "slot_index": 2,
+                "count": 1,
+                "static_id": "Head011_3"
+            },
+            {
+                "slot_index": 3,
+                "count": 1,
+                "static_id": "Head011_4"
+            },
+            {
+                "slot_index": 4,
+                "count": 1,
+                "static_id": "Head011_5"
+            },
+            {
+                "slot_index": 5,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 6,
+                "count": 1,
+                "static_id": "Blueprint_Head011_1"
+            },
+            {
+                "slot_index": 7,
+                "count": 1,
+                "static_id": "Blueprint_Head011_2"
+            },
+            {
+                "slot_index": 8,
+                "count": 1,
+                "static_id": "Blueprint_Head011_3"
+            },
+            {
+                "slot_index": 9,
+                "count": 1,
+                "static_id": "Blueprint_Head011_4"
+            },
+            {
+                "slot_index": 10,
+                "count": 1,
+                "static_id": "Blueprint_Head011_5"
+            },
+            {
+                "slot_index": 11,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 12,
+                "count": 1,
+                "static_id": "Head012"
+            },
+            {
+                "slot_index": 13,
+                "count": 1,
+                "static_id": "Head012_2"
+            },
+            {
+                "slot_index": 14,
+                "count": 1,
+                "static_id": "Head012_3"
+            },
+            {
+                "slot_index": 15,
+                "count": 1,
+                "static_id": "Head012_4"
+            },
+            {
+                "slot_index": 16,
+                "count": 1,
+                "static_id": "Head012_5"
+            },
+            {
+                "slot_index": 17,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 18,
+                "count": 1,
+                "static_id": "Blueprint_Head012_1"
+            },
+            {
+                "slot_index": 19,
+                "count": 1,
+                "static_id": "Blueprint_Head012_2"
+            },
+            {
+                "slot_index": 20,
+                "count": 1,
+                "static_id": "Blueprint_Head012_3"
+            },
+            {
+                "slot_index": 21,
+                "count": 1,
+                "static_id": "Blueprint_Head012_4"
+            },
+            {
+                "slot_index": 22,
+                "count": 1,
+                "static_id": "Blueprint_Head012_5"
+            },
+            {
+                "slot_index": 23,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 24,
+                "count": 1,
+                "static_id": "Head013"
+            },
+            {
+                "slot_index": 25,
+                "count": 1,
+                "static_id": "Head013_2"
+            },
+            {
+                "slot_index": 26,
+                "count": 1,
+                "static_id": "Head013_3"
+            },
+            {
+                "slot_index": 27,
+                "count": 1,
+                "static_id": "Head013_4"
+            },
+            {
+                "slot_index": 28,
+                "count": 1,
+                "static_id": "Head013_5"
+            },
+            {
+                "slot_index": 29,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 30,
+                "count": 1,
+                "static_id": "Blueprint_Head013_1"
+            },
+            {
+                "slot_index": 31,
+                "count": 1,
+                "static_id": "Blueprint_Head013_2"
+            },
+            {
+                "slot_index": 32,
+                "count": 1,
+                "static_id": "Blueprint_Head013_3"
+            },
+            {
+                "slot_index": 33,
+                "count": 1,
+                "static_id": "Blueprint_Head013_4"
+            },
+            {
+                "slot_index": 34,
+                "count": 1,
+                "static_id": "Blueprint_Head013_5"
+            }
+        ]
+    },
+    "head_armor_7": {
+        "common_container": [
+            {
+                "slot_index": 0,
+                "count": 1,
+                "static_id": "Head014"
+            },
+            {
+                "slot_index": 1,
+                "count": 1,
+                "static_id": "Head014_2"
+            },
+            {
+                "slot_index": 2,
+                "count": 1,
+                "static_id": "Head014_3"
+            },
+            {
+                "slot_index": 3,
+                "count": 1,
+                "static_id": "Head014_4"
+            },
+            {
+                "slot_index": 4,
+                "count": 1,
+                "static_id": "Head014_5"
+            },
+            {
+                "slot_index": 5,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 6,
+                "count": 1,
+                "static_id": "Blueprint_Head014_1"
+            },
+            {
+                "slot_index": 7,
+                "count": 1,
+                "static_id": "Blueprint_Head014_2"
+            },
+            {
+                "slot_index": 8,
+                "count": 1,
+                "static_id": "Blueprint_Head014_3"
+            },
+            {
+                "slot_index": 9,
+                "count": 1,
+                "static_id": "Blueprint_Head014_4"
+            },
+            {
+                "slot_index": 10,
+                "count": 1,
+                "static_id": "Blueprint_Head014_5"
+            },
+            {
+                "slot_index": 11,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 12,
+                "count": 1,
+                "static_id": "Head015"
+            },
+            {
+                "slot_index": 13,
+                "count": 1,
+                "static_id": "Head015_2"
+            },
+            {
+                "slot_index": 14,
+                "count": 1,
+                "static_id": "Head015_3"
+            },
+            {
+                "slot_index": 15,
+                "count": 1,
+                "static_id": "Head015_4"
+            },
+            {
+                "slot_index": 16,
+                "count": 1,
+                "static_id": "Head015_5"
+            },
+            {
+                "slot_index": 17,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 18,
+                "count": 1,
+                "static_id": "Blueprint_Head015_1"
+            },
+            {
+                "slot_index": 19,
+                "count": 1,
+                "static_id": "Blueprint_Head015_2"
+            },
+            {
+                "slot_index": 20,
+                "count": 1,
+                "static_id": "Blueprint_Head015_3"
+            },
+            {
+                "slot_index": 21,
+                "count": 1,
+                "static_id": "Blueprint_Head015_4"
+            },
+            {
+                "slot_index": 22,
+                "count": 1,
+                "static_id": "Blueprint_Head015_5"
+            },
+            {
+                "slot_index": 23,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 24,
+                "count": 1,
+                "static_id": "Head016"
+            },
+            {
+                "slot_index": 25,
+                "count": 1,
+                "static_id": "Head016_2"
+            },
+            {
+                "slot_index": 26,
+                "count": 1,
+                "static_id": "Head016_3"
+            },
+            {
+                "slot_index": 27,
+                "count": 1,
+                "static_id": "Head016_4"
+            },
+            {
+                "slot_index": 28,
+                "count": 1,
+                "static_id": "Head016_5"
+            },
+            {
+                "slot_index": 29,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 30,
+                "count": 1,
+                "static_id": "Blueprint_Head016_1"
+            },
+            {
+                "slot_index": 31,
+                "count": 1,
+                "static_id": "Blueprint_Head016_2"
+            },
+            {
+                "slot_index": 32,
+                "count": 1,
+                "static_id": "Blueprint_Head016_3"
+            },
+            {
+                "slot_index": 33,
+                "count": 1,
+                "static_id": "Blueprint_Head016_4"
+            },
+            {
+                "slot_index": 34,
+                "count": 1,
+                "static_id": "Blueprint_Head016_5"
+            }
+        ]
+    },
+    "head_armor_8": {
+        "common_container": [
+            {
+                "slot_index": 0,
+                "count": 1,
+                "static_id": "Head017"
+            },
+            {
+                "slot_index": 1,
+                "count": 1,
+                "static_id": "Head017_2"
+            },
+            {
+                "slot_index": 2,
+                "count": 1,
+                "static_id": "Head017_3"
+            },
+            {
+                "slot_index": 3,
+                "count": 1,
+                "static_id": "Head017_4"
+            },
+            {
+                "slot_index": 4,
+                "count": 1,
+                "static_id": "Head017_5"
+            },
+            {
+                "slot_index": 5,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 6,
+                "count": 1,
+                "static_id": "Blueprint_Head017_1"
+            },
+            {
+                "slot_index": 7,
+                "count": 1,
+                "static_id": "Blueprint_Head017_2"
+            },
+            {
+                "slot_index": 8,
+                "count": 1,
+                "static_id": "Blueprint_Head017_3"
+            },
+            {
+                "slot_index": 9,
+                "count": 1,
+                "static_id": "Blueprint_Head017_4"
+            },
+            {
+                "slot_index": 10,
+                "count": 1,
+                "static_id": "Blueprint_Head017_5"
+            },
+            {
+                "slot_index": 11,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 12,
+                "count": 1,
+                "static_id": "HeadEquip023"
+            },
+            {
+                "slot_index": 13,
+                "count": 1,
+                "static_id": "HeadEquip024"
+            },
+            {
+                "slot_index": 14,
+                "count": 1,
+                "static_id": "HeadEquip025"
+            },
+            {
+                "slot_index": 15,
+                "count": 1,
+                "static_id": "HeadEquip026"
+            },
+            {
+                "slot_index": 16,
+                "count": 1,
+                "static_id": "HeadEquip027"
+            },
+            {
+                "slot_index": 17,
+                "count": 1,
+                "static_id": "HeadEquip028"
+            },
+            {
+                "slot_index": 18,
+                "count": 1,
+                "static_id": "HeadEquip029"
+            },
+            {
+                "slot_index": 19,
+                "count": 1,
+                "static_id": "HeadEquip030"
+            },
+            {
+                "slot_index": 20,
+                "count": 1,
+                "static_id": "HeadEquip031"
+            },
+            {
+                "slot_index": 21,
+                "count": 1,
+                "static_id": "HeadEquip032"
+            },
+            {
+                "slot_index": 22,
+                "count": 1,
+                "static_id": "HeadEquip033"
+            },
+            {
+                "slot_index": 23,
+                "count": 1,
+                "static_id": "HeadEquip001_purple"
+            },
+            {
+                "slot_index": 24,
+                "count": 1,
+                "static_id": "HeadEquip041"
+            },
+            {
+                "slot_index": 25,
+                "count": 1,
+                "static_id": "GYM_Head_Grass"
+            },
+            {
+                "slot_index": 26,
+                "count": 1,
+                "static_id": "GYM_Head_Sakurajima"
+            },
+            {
+                "slot_index": 27,
+                "count": 1,
+                "static_id": "GYM_Head_Desert"
+            },
+            {
+                "slot_index": 28,
+                "count": 1,
+                "static_id": "GYM_Head_Snow"
+            },
+            {
+                "slot_index": 29,
+                "count": 1,
+                "static_id": "GYM_Head_Forest"
+            },
+            {
+                "slot_index": 30,
+                "count": 1,
+                "static_id": "GYM_Head_Electric"
+            }
+        ]
+    },
+    "key_items": {
+        "essential_container": [
+            {
+                "slot_index": 0,
+                "count": 1,
+                "static_id": "AutoMealPouch_Tier1"
+            },
+            {
+                "slot_index": 1,
+                "count": 1,
+                "static_id": "AutoMealPouch_Tier2"
+            },
+            {
+                "slot_index": 2,
+                "count": 1,
+                "static_id": "AutoMealPouch_Tier3"
+            },
+            {
+                "slot_index": 3,
+                "count": 1,
+                "static_id": "AutoMealPouch_Tier4"
+            },
+            {
+                "slot_index": 4,
+                "count": 1,
+                "static_id": "AutoMealPouch_Tier5"
+            },
+            {
+                "slot_index": 5,
+                "count": 1,
+                "static_id": "Unlock_Picking_Tier1"
+            },
+            {
+                "slot_index": 6,
+                "count": 1,
+                "static_id": "Unlock_Picking_Tier2"
+            },
+            {
+                "slot_index": 7,
+                "count": 1,
+                "static_id": "Unlock_Picking_Tier3"
+            },
+            {
+                "slot_index": 8,
+                "count": 1,
+                "static_id": "UnlockEquipmentSlot_Accessory_01"
+            },
+            {
+                "slot_index": 9,
+                "count": 1,
+                "static_id": "UnlockEquipmentSlot_Accessory_02"
+            },
+            {
+                "slot_index": 10,
+                "count": 1,
+                "static_id": "Lantern"
+            },
+            {
+                "slot_index": 11,
+                "count": 1,
+                "static_id": "SkillUnlock_Alpaca"
+            },
+            {
+                "slot_index": 12,
+                "count": 1,
+                "static_id": "SkillUnlock_AmaterasuWolf"
+            },
+            {
+                "slot_index": 13,
+                "count": 1,
+                "static_id": "SkillUnlock_BirdDragon"
+            },
+            {
+                "slot_index": 14,
+                "count": 1,
+                "static_id": "SkillUnlock_BirdDragon_Ice"
+            },
+            {
+                "slot_index": 15,
+                "count": 1,
+                "static_id": "SkillUnlock_BlackCentaur"
+            },
+            {
+                "slot_index": 16,
+                "count": 1,
+                "static_id": "SkillUnlock_BlackGriffon"
+            },
+            {
+                "slot_index": 17,
+                "count": 1,
+                "static_id": "SkillUnlock_BlackMetalDragon"
+            },
+            {
+                "slot_index": 18,
+                "count": 1,
+                "static_id": "SkillUnlock_BlueDragon"
+            },
+            {
+                "slot_index": 19,
+                "count": 1,
+                "static_id": "SkillUnlock_Boar"
+            },
+            {
+                "slot_index": 20,
+                "count": 1,
+                "static_id": "SkillUnlock_Carbunclo"
+            },
+            {
+                "slot_index": 21,
+                "count": 1,
+                "static_id": "SkillUnlock_ColorfulBird"
+            },
+            {
+                "slot_index": 22,
+                "count": 1,
+                "static_id": "SkillUnlock_Deer"
+            },
+            {
+                "slot_index": 23,
+                "count": 1,
+                "static_id": "SkillUnlock_Deer_Ground"
+            },
+            {
+                "slot_index": 24,
+                "count": 1,
+                "static_id": "SkillUnlock_DreamDemon"
+            },
+            {
+                "slot_index": 25,
+                "count": 1,
+                "static_id": "SkillUnlock_DrillGame"
+            },
+            {
+                "slot_index": 26,
+                "count": 1,
+                "static_id": "SkillUnlock_Eagle"
+            },
+            {
+                "slot_index": 27,
+                "count": 1,
+                "static_id": "SkillUnlock_ElecPanda"
+            },
+            {
+                "slot_index": 28,
+                "count": 1,
+                "static_id": "SkillUnlock_FairyDragon"
+            },
+            {
+                "slot_index": 29,
+                "count": 1,
+                "static_id": "SkillUnlock_FairyDragon_Water"
+            },
+            {
+                "slot_index": 30,
+                "count": 1,
+                "static_id": "SkillUnlock_FeatherOstrich"
+            },
+            {
+                "slot_index": 31,
+                "count": 1,
+                "static_id": "SkillUnlock_FengyunDeeper"
+            },
+            {
+                "slot_index": 32,
+                "count": 1,
+                "static_id": "SkillUnlock_FireKirin"
+            },
+            {
+                "slot_index": 33,
+                "count": 1,
+                "static_id": "SkillUnlock_FireKirin_Dark"
+            },
+            {
+                "slot_index": 34,
+                "count": 1,
+                "static_id": "SkillUnlock_FlameBuffalo"
+            },
+            {
+                "slot_index": 35,
+                "count": 1,
+                "static_id": "SkillUnlock_FlowerDinosaur"
+            },
+            {
+                "slot_index": 36,
+                "count": 1,
+                "static_id": "SkillUnlock_FlowerDinosaur_Electric"
+            },
+            {
+                "slot_index": 37,
+                "count": 1,
+                "static_id": "SkillUnlock_FlowerRabbit"
+            },
+            {
+                "slot_index": 38,
+                "count": 1,
+                "static_id": "SkillUnlock_FlyingManta"
+            },
+            {
+                "slot_index": 39,
+                "count": 1,
+                "static_id": "SkillUnlock_Garm"
+            },
+            {
+                "slot_index": 40,
+                "count": 1,
+                "static_id": "SkillUnlock_GhostBeast"
+            },
+            {
+                "slot_index": 41,
+                "count": 1,
+                "static_id": "SkillUnlock_GrassMammoth"
+            },
+            {
+                "slot_index": 42,
+                "count": 1,
+                "static_id": "SkillUnlock_GrassMammoth_Ice"
+            },
+            {
+                "slot_index": 43,
+                "count": 1,
+                "static_id": "SkillUnlock_GrassPanda"
+            },
+            {
+                "slot_index": 44,
+                "count": 1,
+                "static_id": "SkillUnlock_GrassPanda_Electric"
+            },
+            {
+                "slot_index": 45,
+                "count": 1,
+                "static_id": "SkillUnlock_GuardianDog"
+            },
+            {
+                "slot_index": 46,
+                "count": 1,
+                "static_id": "SkillUnlock_HadesBird"
+            },
+            {
+                "slot_index": 47,
+                "count": 1,
+                "static_id": "SkillUnlock_HawkBird"
+            },
+            {
+                "slot_index": 48,
+                "count": 1,
+                "static_id": "SkillUnlock_Hedgehog"
+            },
+            {
+                "slot_index": 49,
+                "count": 1,
+                "static_id": "SkillUnlock_Hedgehog_Ice"
+            },
+            {
+                "slot_index": 50,
+                "count": 1,
+                "static_id": "SkillUnlock_Horus"
+            },
+            {
+                "slot_index": 51,
+                "count": 1,
+                "static_id": "SkillUnlock_IceDeer"
+            },
+            {
+                "slot_index": 52,
+                "count": 1,
+                "static_id": "SkillUnlock_IceHorse"
+            },
+            {
+                "slot_index": 53,
+                "count": 1,
+                "static_id": "SkillUnlock_IceHorse_Dark"
+            },
+            {
+                "slot_index": 54,
+                "count": 1,
+                "static_id": "SkillUnlock_JetDragon"
+            },
+            {
+                "slot_index": 55,
+                "count": 1,
+                "static_id": "SkillUnlock_KingAlpaca"
+            },
+            {
+                "slot_index": 56,
+                "count": 1,
+                "static_id": "SkillUnlock_KingAlpaca_Ice"
+            },
+            {
+                "slot_index": 57,
+                "count": 1,
+                "static_id": "SkillUnlock_KingBahamut"
+            },
+            {
+                "slot_index": 58,
+                "count": 1,
+                "static_id": "SkillUnlock_Kirin"
+            },
+            {
+                "slot_index": 59,
+                "count": 1,
+                "static_id": "SkillUnlock_Kitsunebi"
+            },
+            {
+                "slot_index": 60,
+                "count": 1,
+                "static_id": "SkillUnlock_LazyDragon"
+            },
+            {
+                "slot_index": 61,
+                "count": 1,
+                "static_id": "SkillUnlock_LazyDragon_Electric"
+            },
+            {
+                "slot_index": 62,
+                "count": 1,
+                "static_id": "SkillUnlock_Manticore"
+            },
+            {
+                "slot_index": 63,
+                "count": 1,
+                "static_id": "SkillUnlock_Manticore_Dark"
+            },
+            {
+                "slot_index": 64,
+                "count": 1,
+                "static_id": "SkillUnlock_Monkey"
+            },
+            {
+                "slot_index": 65,
+                "count": 1,
+                "static_id": "SkillUnlock_MopKing"
+            },
+            {
+                "slot_index": 66,
+                "count": 1,
+                "static_id": "SkillUnlock_NaughtyCat"
+            },
+            {
+                "slot_index": 67,
+                "count": 1,
+                "static_id": "SkillUnlock_NegativeOctopus"
+            },
+            {
+                "slot_index": 68,
+                "count": 1,
+                "static_id": "SkillUnlock_Penguin"
+            },
+            {
+                "slot_index": 69,
+                "count": 1,
+                "static_id": "SkillUnlock_RaijinDaughter"
+            },
+            {
+                "slot_index": 70,
+                "count": 1,
+                "static_id": "SkillUnlock_RedArmorBird"
+            },
+            {
+                "slot_index": 71,
+                "count": 1,
+                "static_id": "SkillUnlock_SaintCentaur"
+            },
+            {
+                "slot_index": 72,
+                "count": 1,
+                "static_id": "SkillUnlock_SakuraSaurus"
+            },
+            {
+                "slot_index": 73,
+                "count": 1,
+                "static_id": "SkillUnlock_SakuraSaurus_Water"
+            },
+            {
+                "slot_index": 74,
+                "count": 1,
+                "static_id": "SkillUnlock_Serpent"
+            },
+            {
+                "slot_index": 75,
+                "count": 1,
+                "static_id": "SkillUnlock_Serpent_Ground"
+            },
+            {
+                "slot_index": 76,
+                "count": 1,
+                "static_id": "SkillUnlock_SkyDragon"
+            },
+            {
+                "slot_index": 77,
+                "count": 1,
+                "static_id": "SkillUnlock_Suzaku"
+            },
+            {
+                "slot_index": 78,
+                "count": 1,
+                "static_id": "SkillUnlock_Suzaku_Water"
+            },
+            {
+                "slot_index": 79,
+                "count": 1,
+                "static_id": "SkillUnlock_ThunderBird"
+            },
+            {
+                "slot_index": 80,
+                "count": 1,
+                "static_id": "SkillUnlock_ThunderDog"
+            },
+            {
+                "slot_index": 81,
+                "count": 1,
+                "static_id": "SkillUnlock_Umihebi"
+            },
+            {
+                "slot_index": 82,
+                "count": 1,
+                "static_id": "SkillUnlock_Umihebi_Fire"
+            },
+            {
+                "slot_index": 83,
+                "count": 1,
+                "static_id": "SkillUnlock_VolcanicMonster"
+            },
+            {
+                "slot_index": 84,
+                "count": 1,
+                "static_id": "SkillUnlock_VolcanicMonster_Ice"
+            },
+            {
+                "slot_index": 85,
+                "count": 1,
+                "static_id": "SkillUnlock_WeaselDragon"
+            },
+            {
+                "slot_index": 86,
+                "count": 1,
+                "static_id": "SkillUnlock_WindChimes"
+            },
+            {
+                "slot_index": 87,
+                "count": 1,
+                "static_id": "SkillUnlock_WindChimes_Ice"
+            },
+            {
+                "slot_index": 88,
+                "count": 1,
+                "static_id": "SkillUnlock_Yeti"
+            },
+            {
+                "slot_index": 89,
+                "count": 1,
+                "static_id": "SkillUnlock_Yeti_Grass"
+            }
+        ]
+    },
+    "shields_utilities": {
+        "common_container": [
+            {
+                "slot_index": 0,
+                "count": 1,
+                "static_id": "Shield_01"
+            },
+            {
+                "slot_index": 1,
+                "count": 1,
+                "static_id": "Shield_02"
+            },
+            {
+                "slot_index": 2,
+                "count": 1,
+                "static_id": "Shield_03"
+            },
+            {
+                "slot_index": 3,
+                "count": 1,
+                "static_id": "Shield_04"
+            },
+            {
+                "slot_index": 4,
+                "count": 1,
+                "static_id": "Shield_Ultra"
+            },
+            {
+                "slot_index": 5,
+                "count": 0,
+                "static_id": "None"
+            },
+            {
+                "slot_index": 6,
+                "count": 1,
+                "static_id": "GrapplingGun"
+            },
+            {
+                "slot_index": 7,
+                "count": 1,
+                "static_id": "GrapplingGun2"
+            },
+            {
+                "slot_index": 8,
+                "count": 1,
+                "static_id": "GrapplingGun3"
+            },
+            {
+                "slot_index": 9,
+                "count": 1,
+                "static_id": "GrapplingGun4"
+            },
+            {
+                "slot_index": 12,
+                "count": 1,
+                "static_id": "Glider_Old"
+            },
+            {
+                "slot_index": 13,
+                "count": 1,
+                "static_id": "Glider_Good"
+            },
+            {
+                "slot_index": 14,
+                "count": 1,
+                "static_id": "Glider_Super"
+            },
+            {
+                "slot_index": 15,
+                "count": 1,
+                "static_id": "Glider_Tera"
+            }
+        ]
+    },
+    "accessories_1": {
+        "common_container": [
+            {
+                "slot_index": 0,
+                "count": 1,
+                "static_id": "Accessory_AT_1"
+            },
+            {
+                "slot_index": 1,
+                "count": 1,
+                "static_id": "Accessory_AT_2"
+            },
+            {
+                "slot_index": 2,
+                "count": 1,
+                "static_id": "Accessory_AT_3"
+            },
+            {
+                "slot_index": 3,
+                "count": 1,
+                "static_id": "Accessory_HP_1"
+            },
+            {
+                "slot_index": 4,
+                "count": 1,
+                "static_id": "Accessory_HP_2"
+            },
+            {
+                "slot_index": 5,
+                "count": 1,
+                "static_id": "Accessory_HP_3"
+            },
+            {
+                "slot_index": 6,
+                "count": 1,
+                "static_id": "Accessory_WorkSpeed_1"
+            },
+            {
+                "slot_index": 7,
+                "count": 1,
+                "static_id": "Accessory_WorkSpeed_2"
+            },
+            {
+                "slot_index": 8,
+                "count": 1,
+                "static_id": "Accessory_WorkSpeed_3"
+            },
+            {
+                "slot_index": 9,
+                "count": 1,
+                "static_id": "Accessory_defense_1"
+            },
+            {
+                "slot_index": 10,
+                "count": 1,
+                "static_id": "Accessory_defense_2"
+            },
+            {
+                "slot_index": 11,
+                "count": 1,
+                "static_id": "Accessory_defense_3"
+            },
+            {
+                "slot_index": 12,
+                "count": 1,
+                "static_id": "Accessory_AquaResist_1"
+            },
+            {
+                "slot_index": 13,
+                "count": 1,
+                "static_id": "Accessory_AquaResist_2"
+            },
+            {
+                "slot_index": 14,
+                "count": 1,
+                "static_id": "Accessory_AquaResist_3"
+            },
+            {
+                "slot_index": 15,
+                "count": 1,
+                "static_id": "Accessory_DarkResist_1"
+            },
+            {
+                "slot_index": 16,
+                "count": 1,
+                "static_id": "Accessory_DarkResist_2"
+            },
+            {
+                "slot_index": 17,
+                "count": 1,
+                "static_id": "Accessory_DarkResist_3"
+            },
+            {
+                "slot_index": 18,
+                "count": 1,
+                "static_id": "Accessory_DragonResist_1"
+            },
+            {
+                "slot_index": 19,
+                "count": 1,
+                "static_id": "Accessory_DragonResist_2"
+            },
+            {
+                "slot_index": 20,
+                "count": 1,
+                "static_id": "Accessory_DragonResist_3"
+            },
+            {
+                "slot_index": 21,
+                "count": 1,
+                "static_id": "Accessory_EarthResist_1"
+            },
+            {
+                "slot_index": 22,
+                "count": 1,
+                "static_id": "Accessory_EarthResist_2"
+            },
+            {
+                "slot_index": 23,
+                "count": 1,
+                "static_id": "Accessory_EarthResist_3"
+            },
+            {
+                "slot_index": 24,
+                "count": 1,
+                "static_id": "Accessory_FireResist_1"
+            },
+            {
+                "slot_index": 25,
+                "count": 1,
+                "static_id": "Accessory_FireResist_2"
+            },
+            {
+                "slot_index": 26,
+                "count": 1,
+                "static_id": "Accessory_FireResist_3"
+            },
+            {
+                "slot_index": 27,
+                "count": 1,
+                "static_id": "Accessory_IceResist_1"
+            },
+            {
+                "slot_index": 28,
+                "count": 1,
+                "static_id": "Accessory_IceResist_2"
+            },
+            {
+                "slot_index": 29,
+                "count": 1,
+                "static_id": "Accessory_IceResist_3"
+            },
+            {
+                "slot_index": 30,
+                "count": 1,
+                "static_id": "Accessory_LeafResist_1"
+            },
+            {
+                "slot_index": 31,
+                "count": 1,
+                "static_id": "Accessory_LeafResist_2"
+            },
+            {
+                "slot_index": 32,
+                "count": 1,
+                "static_id": "Accessory_LeafResist_3"
+            },
+            {
+                "slot_index": 33,
+                "count": 1,
+                "static_id": "Accessory_NormalResist_1"
+            },
+            {
+                "slot_index": 34,
+                "count": 1,
+                "static_id": "Accessory_NormalResist_2"
+            },
+            {
+                "slot_index": 35,
+                "count": 1,
+                "static_id": "Accessory_NormalResist_3"
+            },
+            {
+                "slot_index": 36,
+                "count": 1,
+                "static_id": "Accessory_ThunderResist_1"
+            },
+            {
+                "slot_index": 37,
+                "count": 1,
+                "static_id": "Accessory_ThunderResist_2"
+            },
+            {
+                "slot_index": 38,
+                "count": 1,
+                "static_id": "Accessory_ThunderResist_3"
+            },
+            {
+                "slot_index": 39,
+                "count": 1,
+                "static_id": "Accessory_MaxWeightUp_01"
+            },
+            {
+                "slot_index": 40,
+                "count": 1,
+                "static_id": "Accessory_MaxWeightUp_02"
+            },
+            {
+                "slot_index": 41,
+                "count": 1,
+                "static_id": "Accessory_MaxWeightUp_03"
+            }
+        ]
+    },
+    "accessories_2": {
+        "common_container": [
+            {
+                "slot_index": 0,
+                "count": 1,
+                "static_id": "Accessory_CoolResist_1"
+            },
+            {
+                "slot_index": 1,
+                "count": 1,
+                "static_id": "Accessory_CoolResist_2"
+            },
+            {
+                "slot_index": 2,
+                "count": 1,
+                "static_id": "Accessory_CoolResist_3"
+            },
+            {
+                "slot_index": 3,
+                "count": 1,
+                "static_id": "Accessory_HeatResist_1"
+            },
+            {
+                "slot_index": 4,
+                "count": 1,
+                "static_id": "Accessory_HeatResist_2"
+            },
+            {
+                "slot_index": 5,
+                "count": 1,
+                "static_id": "Accessory_HeatResist_3"
+            },
+            {
+                "slot_index": 6,
+                "count": 1,
+                "static_id": "Accessory_HeatColdResist_1"
+            },
+            {
+                "slot_index": 7,
+                "count": 1,
+                "static_id": "Accessory_HeatColdResist_2"
+            },
+            {
+                "slot_index": 8,
+                "count": 1,
+                "static_id": "Accessory_HeatColdResist_3"
+            },
+            {
+                "slot_index": 10,
+                "count": 1,
+                "static_id": "Accessory_Nonkilling"
+            },
+            {
+                "slot_index": 11,
+                "count": 1,
+                "static_id": "Accessory_TalentChecker"
+            }
+        ]
+    },
+    "misc": {
+        "common_container": [
+            {
+                "slot_index": 0,
+                "count": 999999,
+                "static_id": "Money"
+            },
+            {
+                "slot_index": 1,
+                "count": 9999,
+                "static_id": "DogCoin"
+            },
+            {
+                "slot_index": 2,
+                "count": 9999,
+                "static_id": "PalCrystal_Ex"
+            },
+            {
+                "slot_index": 3,
+                "count": 9999,
+                "static_id": "AncientParts2"
+            },
+            {
+                "slot_index": 4,
+                "count": 9999,
+                "static_id": "ExpBoost_01"
+            },
+            {
+                "slot_index": 5,
+                "count": 9999,
+                "static_id": "ExpBoost_02"
+            },
+            {
+                "slot_index": 6,
+                "count": 9999,
+                "static_id": "ExpBoost_03"
+            },
+            {
+                "slot_index": 7,
+                "count": 9999,
+                "static_id": "ExpBoost_04"
+            },
+            {
+                "slot_index": 8,
+                "count": 9999,
+                "static_id": "Fruit__defense_01"
+            },
+            {
+                "slot_index": 9,
+                "count": 9999,
+                "static_id": "Fruit_attack_01"
+            },
+            {
+                "slot_index": 10,
+                "count": 9999,
+                "static_id": "Fruit_HP_01"
+            },
+            {
+                "slot_index": 11,
+                "count": 9999,
+                "static_id": "Potion_Low"
+            },
+            {
+                "slot_index": 12,
+                "count": 9999,
+                "static_id": "Potion"
+            },
+            {
+                "slot_index": 13,
+                "count": 9999,
+                "static_id": "Potion_High"
+            },
+            {
+                "slot_index": 14,
+                "count": 9999,
+                "static_id": "TreasureBoxKey01"
+            },
+            {
+                "slot_index": 15,
+                "count": 9999,
+                "static_id": "TreasureBoxKey02"
+            },
+            {
+                "slot_index": 16,
+                "count": 9999,
+                "static_id": "TreasureBoxKey03"
+            },
+            {
+                "slot_index": 18,
+                "count": 9999,
+                "static_id": "PalSphere"
+            },
+            {
+                "slot_index": 19,
+                "count": 9999,
+                "static_id": "PalSphere_Mega"
+            },
+            {
+                "slot_index": 20,
+                "count": 9999,
+                "static_id": "PalSphere_Giga"
+            },
+            {
+                "slot_index": 21,
+                "count": 9999,
+                "static_id": "PalSphere_Tera"
+            },
+            {
+                "slot_index": 22,
+                "count": 9999,
+                "static_id": "PalSphere_Master"
+            },
+            {
+                "slot_index": 23,
+                "count": 9999,
+                "static_id": "PalSphere_Legend"
+            },
+            {
+                "slot_index": 24,
+                "count": 9999,
+                "static_id": "PalSphere_Ultimate"
+            }
+        ]
+    }
+}

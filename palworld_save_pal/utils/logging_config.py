@@ -1,7 +1,3 @@
-"""
-This module provides a logging configuration for the SBB application.
-"""
-
 import logging
 import logging.config
 from datetime import datetime
@@ -11,6 +7,7 @@ from colorlog import ColoredFormatter
 
 
 def setup_logging(dev_mode: bool = False):
+    print("Setting up logging configuration with dev_mode: ", dev_mode)
     date = datetime.now().strftime("%m-%d-%y")
     log_dir = Path("logs")
     log_dir.mkdir(exist_ok=True)

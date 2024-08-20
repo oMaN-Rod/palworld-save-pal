@@ -40,28 +40,28 @@
 			if (!skillData) {
 				continue;
 			}
-			attackBonus += skillData.details.Bonuses.Attack / 100;
-			defenseBonus += skillData.details.Bonuses.Defense / 100;
-			workSpeedBonus += skillData.details.Bonuses.WorkSpeed / 100;
+			attackBonus += skillData.details.bonuses.attack / 100;
+			defenseBonus += skillData.details.bonuses.defense / 100;
+			workSpeedBonus += skillData.details.bonuses.work_speed / 100;
 		}
 		const condenserBonus = (pal.rank - 1) * 0.05;
 
 		const hp_iv = (pal.talent_hp * 0.3) / 100;
 		const hp_rank = pal.rank_hp * 0.03;
-		const hp_scale = palData.scaling.HP;
+		const hp_scale = palData.scaling.hp;
 		let hp = Math.floor(500 + 5 * level + hp_scale * 0.5 * level * (1 + hp_iv));
 		hp = Math.floor(hp * (1 + condenserBonus) * (1 + hp_rank));
 
 		const attack_iv = (pal.talent_melee * 0.3) / 100;
 		const attack_rank = pal.rank_attack * 0.03;
-		const attack_scale = palData.scaling.Attack;
+		const attack_scale = palData.scaling.attack;
 
 		let attack = Math.floor(attack_scale * 0.075 * level * (1 + attack_iv));
 		attack = Math.floor(attack * (1 + condenserBonus) * (1 + attack_rank) * (1 + attackBonus));
 
 		const defense_iv = (pal.talent_defense * 0.3) / 100;
 		const defense_rank = pal.rank_defense * 0.03;
-		const defense_scale = palData.scaling.Defense;
+		const defense_scale = palData.scaling.defense;
 
 		let defense = Math.floor(50 + defense_scale * 0.075 * level * (1 + defense_iv));
 		defense = Math.floor(defense * (1 + condenserBonus) * (1 + defense_rank) * (1 + defenseBonus));

@@ -19,7 +19,7 @@ app_state.process_save_file(file.read())
 def test_save_file_loading():
     assert app_state.save_file.name == "Level.sav"
     assert app_state.save_file.size > 0
-    assert app_state.save_file.gvas_file is not None
+    assert app_state.save_file._gvas_file is not None
 
 
 def test_load_pals():

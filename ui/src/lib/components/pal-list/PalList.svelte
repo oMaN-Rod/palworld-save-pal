@@ -42,6 +42,7 @@
 	const itemClass = $derived(cn('list-item p-2 flex items-center cursor-pointer'));
 
 	async function filterPals() {
+		if (!appState.selectedPlayer || !appState.selectedPlayer.pals) return;
 		const pals = Object.entries(appState.selectedPlayer.pals as Record<string, PalSummary>);
 		const palsWithInfo = await Promise.all(
 			pals.map(async ([id, pal]) => {
@@ -92,7 +93,7 @@
 		for (const elementType of elementTypes) {
 			const elementObj = await elementsData.searchElement(elementType);
 			if (elementObj) {
-				const iconPath = `${ASSET_DATA_PATH}/img/elements/${elementObj.IconBadge}.webp`;
+				const iconPath = `${ASSET_DATA_PATH}/img/elements/${elementObj.badge_icon}.webp`;
 				try {
 					elementIcons[elementType] = await assetLoader.loadImage(iconPath, true);
 				} catch (error) {
@@ -105,7 +106,7 @@
 	async function getPalElementBadge(elementType: string): Promise<string | undefined> {
 		const elementObj = await elementsData.searchElement(elementType);
 		if (!elementObj) return undefined;
-		const icon_path = `${ASSET_DATA_PATH}/img/elements/${elementObj.IconBadge}.webp`;
+		const icon_path = `${ASSET_DATA_PATH}/img/elements/${elementObj.badge_icon}.webp`;
 		const icon = await assetLoader.loadImage(icon_path, true);
 		return icon;
 	}
@@ -113,18 +114,16 @@
 	async function getPalElementIcon(elementType: string): Promise<string | undefined> {
 		const elementObj = await elementsData.searchElement(elementType);
 		if (!elementObj) return undefined;
-		const icon_path = `${ASSET_DATA_PATH}/img/elements/${elementObj.Icon}.webp`;
+		const icon_path = `${ASSET_DATA_PATH}/img/elements/${elementObj.icon}.webp`;
 		const icon = await assetLoader.loadImage(icon_path, true);
 		return icon;
 	}
 
 	async function getPalIcon(palId: string): Promise<string | undefined> {
+		if (!appState.selectedPlayer || !appState.selectedPlayer.pals) return undefined;
 		const pal = appState.selectedPlayer.pals[palId];
-		if (!pal) {
-			console.error('Pal not found:', palId);
-			return undefined;
-		}
-		const palImgName = pal.name.toLowerCase().replace(' ', '_');
+		if (!pal) return undefined;
+		const palImgName = pal.name.toLowerCase().replaceAll(' ', '_');
 		const icon_path = `${ASSET_DATA_PATH}/img/pals/menu/${palImgName}_menu.png`;
 		const icon = await assetLoader.loadImage(icon_path, true);
 		return icon;
@@ -142,7 +141,7 @@
 
 	$effect(() => {
 		if (appState.selectedPlayer && appState.selectedPlayer.pals) {
-			filterPals();
+			debouncedFilterPals();
 		}
 	});
 

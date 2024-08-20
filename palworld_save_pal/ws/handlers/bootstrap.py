@@ -12,6 +12,7 @@ from palworld_save_pal.ws.messages import (
     SyncAppStateMessage,
     UpdateSaveFileMessage,
     DownloadSaveFileMessage,
+    LoadZipFileMessage,
 )
 
 if TYPE_CHECKING:
@@ -32,6 +33,14 @@ def bootstrap(dispatcher: "MessageDispatcher"):
         {
             "message_class": LoadSaveFileMessage,
             "handler_func": save_file_handler.load_save_file_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.LOAD_ZIP_FILE.value,
+        {
+            "message_class": LoadZipFileMessage,
+            "handler_func": save_file_handler.load_zip_file_handler,
         },
     )
 

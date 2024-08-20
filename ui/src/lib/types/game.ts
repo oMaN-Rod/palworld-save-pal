@@ -1,133 +1,4 @@
-export type MovesetKey = `EPalWazaID::${string}`;
-
-export type Moveset = {
-	[K in MovesetKey]?: number;
-};
-
-export type Scaling = {
-	HP: number;
-	Attack: number;
-	Defense: number;
-};
-
-export type Suitabilities = {
-	[key: string]: number;
-};
-
-export interface PalData {
-	CodeName: string;
-	Type: ElementType[];
-	Moveset: Moveset;
-	RaidMoveset?: Moveset;
-	Scaling: Scaling;
-	Suitabilities: Suitabilities;
-	Tower?: boolean;
-	Human?: boolean;
-	Bonuses?: Bonuses;
-}
-
-export interface Bonuses {
-	Attack: number;
-	Defense: number;
-	WorkSpeed: number;
-}
-
-enum PalGender {
-	UNKNOWN = 'Unknown',
-	MALE = 'male',
-	FEMALE = 'female'
-}
-
-type SkillType = 'Active' | 'Passive' | 'Empty';
-
-interface ActiveSkillDetails {
-	Type: string;
-	Power: number;
-	CT: number;
-	Name: string;
-	Description: string;
-	Exclusive?: string[];
-}
-
-interface Skill {
-	id: string;
-	name: string;
-}
-
-interface ActiveSkill extends Skill {
-	details: ActiveSkillDetails;
-}
-
-interface PassiveSkillDetails {
-	Description: string;
-	Effect: string;
-	Rating: string;
-	Tier: string;
-	Bonuses: Bonuses;
-}
-
-interface PassiveSkill extends Skill {
-	details: PassiveSkillDetails;
-}
-
-type ElementType =
-	| 'Fire'
-	| 'Water'
-	| 'Ground'
-	| 'Ice'
-	| 'Neutral'
-	| 'Dark'
-	| 'Grass'
-	| 'Dragon'
-	| 'Electric';
-
-type WorkSuitability =
-	| 'EmitFlame'
-	| 'Watering'
-	| 'Seeding'
-	| 'GenerateElectricity'
-	| 'Handcraft'
-	| 'Collection'
-	| 'Deforest'
-	| 'Mining'
-	| 'OilExtraction'
-	| 'ProductMedicine'
-	| 'Cool'
-	| 'Transport'
-	| 'MonsterFarm';
-
-type PalSummary = {
-	instance_id: string;
-	character_id: string;
-	owner_uid: string;
-	name: string;
-	nickname: string;
-	level: number;
-	elements: ElementType[];
-};
-
-type Element = {
-	Name: string;
-	Color: string;
-	Icon: string;
-	IconBadge: string;
-	IconEgg: string;
-	IconFruit: string;
-	IconWhite: string;
-};
-
-type Player = {
-	uid: string;
-	nickname: string;
-	level: number;
-	pals: Record<string, PalSummary>;
-};
-
-type SaveFile = {
-	name: string;
-	size: number;
-};
-
+// Backend types
 type Pal = {
 	name: string;
 	instance_id: string;
@@ -160,32 +31,214 @@ type Pal = {
 	elements: ElementType[];
 };
 
-// const defaultPal: Pal = {
-// 	name: '',
-// 	character_id: '',
-// 	instance_id: '',
-// 	owner_uid: '',
-// 	is_lucky: false,
-// 	is_boss: false,
-// 	gender: PalGender.UNKNOWN,
-// 	work_speed: 0.0,
-// 	talent_hp: 0,
-// 	talent_melee: 0,
-// 	talent_shot: 0,
-// 	talent_defense: 0,
-// 	rank: 1,
-// 	level: 1,
-// 	nickname: '',
-// 	is_tower: false,
-// 	storage_slot: 0,
-// 	learned_skills: [],
-// 	active_skills: [],
-// 	passive_skills: [],
-// 	work_suitabilities: {} as Record<WorkSuitability, number>,
-// 	hp: 0,
-// 	max_hp: 0,
-// 	elements: []
-// };
+type PalSummary = {
+	instance_id: string;
+	character_id: string;
+	owner_uid: string;
+	name: string;
+	nickname: string;
+	level: number;
+	elements: ElementType[];
+};
+
+type Player = {
+	uid: string;
+	nickname: string;
+	level: number;
+	pals?: Record<string, PalSummary>;
+	common_container: ItemContainer;
+	essential_container: ItemContainer;
+	weapon_load_out_container: ItemContainer;
+	player_equipment_armor_container: ItemContainer;
+	food_equip_container: ItemContainer;
+
+};
+
+type SaveFile = {
+	name: string;
+	size: number;
+};
+export interface DynamicItem {
+	local_id: string;
+	durability: number;
+	remaining_bullets?: number;
+	type: DynamicItemType;
+}
+
+export interface ContainerSlot {
+	slot_index: number;
+	static_id: string;
+	count: number;
+	dynamic_item?: DynamicItem;
+}
+
+export interface ItemContainer {
+	id: string;
+	type: string;
+	slots: ContainerSlot[];
+}
+
+// Frontend types
+
+export type Tier = 'None' | 'Uncommon' | 'Rare' | 'Epic' | 'Legendary';
+export type ItemType =
+	| 'Accessory'
+	| 'Ammo'
+	| 'Armor'
+	| 'Consumable'
+	| 'Currency'
+	| 'Egg'
+	| 'Ingredient'
+	| 'Key_Item'
+	| 'Material'
+	| 'None'
+	| 'Pal_Sphere'
+	| 'Schematic'
+	| 'Structure'
+	| 'Unknown'
+	| 'Utility'
+	| 'Weapon'
+export type DynamicItemType = 'armor' | 'weapon';
+export type ItemGroup = 'Accessory' | 'Body' | 'Common' | 'Food' | 'Glider' | 'Head' | 'Shield' | 'Weapon' | 'KeyItem'
+
+export interface DynamicItemDetails {
+	damage: number;
+	durability: number;
+	magazine_size: number;
+	workload: number;
+	type: DynamicItemType;
+}
+export interface ItemDetails {
+	image: string;
+	type: ItemType;
+	group: ItemGroup;
+	tier: Tier;
+	stack: number;
+	weight: number;
+	buy_price: number;
+	sell_price: number;
+	dynamic?: DynamicItemDetails;
+}
+
+export interface ItemInfo {
+	localized_name: string;
+	description: string;
+}
+
+export interface Item {
+	id: string;
+	details: ItemDetails;
+	info: ItemInfo;
+}
+
+export type MovesetKey = `EPalWazaID::${string}`;
+
+export type Moveset = {
+	[K in MovesetKey]?: number;
+};
+
+export type Scaling = {
+	hp: number;
+	attack: number;
+	defense: number;
+};
+
+export type Suitabilities = {
+	[key: string]: number;
+};
+
+
+export interface PalData {
+	code_name: string;
+	type: ElementType[];
+	skill_set: Moveset;
+	raid_skill_set?: Moveset;
+	scaling: Scaling;
+	suitabilities: Suitabilities;
+	tower?: boolean;
+	human?: boolean;
+	bonuses?: Bonuses;
+}
+
+export interface Bonuses {
+	attack: number;
+	defense: number;
+	work_speed: number;
+}
+
+enum PalGender {
+	UNKNOWN = 'Unknown',
+	MALE = 'male',
+	FEMALE = 'female'
+}
+
+type SkillType = 'Active' | 'Passive' | 'Empty';
+
+interface ActiveSkillDetails {
+	type: string;
+	power: number;
+	ct: number;
+	name: string;
+	description: string;
+	exclusive?: string[];
+}
+
+interface Skill {
+	id: string;
+	name: string;
+}
+
+interface ActiveSkill extends Skill {
+	details: ActiveSkillDetails;
+}
+
+interface PassiveSkillDetails {
+	description: string;
+	effect: string;
+	rating: string;
+	tier: string;
+	bonuses: Bonuses;
+}
+
+interface PassiveSkill extends Skill {
+	details: PassiveSkillDetails;
+}
+
+type ElementType =
+	| 'Fire'
+	| 'Water'
+	| 'Ground'
+	| 'Ice'
+	| 'Neutral'
+	| 'Dark'
+	| 'Grass'
+	| 'Dragon'
+	| 'Electric';
+
+type WorkSuitability =
+	| 'EmitFlame'
+	| 'Watering'
+	| 'Seeding'
+	| 'GenerateElectricity'
+	| 'Handcraft'
+	| 'Collection'
+	| 'Deforest'
+	| 'Mining'
+	| 'OilExtraction'
+	| 'ProductMedicine'
+	| 'Cool'
+	| 'Transport'
+	| 'MonsterFarm';
+
+type Element = {
+	name: string;
+	color: string;
+	icon: string;
+	badge_icon: string;
+	egg_icon: string;
+	fruit_icon: string;
+	white_icon: string;
+};
 
 export { PalGender };
 export type {
@@ -203,4 +256,5 @@ export type {
 	SkillType,
 	Skill
 };
+
 

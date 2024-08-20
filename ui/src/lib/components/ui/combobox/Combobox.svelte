@@ -1,10 +1,10 @@
 <script lang="ts" generics="T">
-	import { onMount } from 'svelte';
 	import type { SelectOption } from '$types';
 	import { nanoid } from 'nanoid';
 	import { cn } from '$theme';
 	import type { Snippet } from 'svelte';
-	import { ChevronDown, Search } from 'lucide-svelte';
+	import { ChevronDown } from 'lucide-svelte';
+	import { debounce } from '$utils';
 
 	let {
 		options = [],
@@ -13,7 +13,7 @@
 		labelTextClass: _labelTextClass = '',
 		label = '',
 		name = nanoid(),
-		value: _value = $bindable(''),
+		value = $bindable(''),
 		disabled = false,
 		error = false,
 		selectOption,
@@ -34,23 +34,41 @@
 		[key: string]: any;
 	}>();
 
-	let selected = $state(typeof _value === 'string' ? _value : _value.toString());
+	let selected = $state(typeof value === 'string' ? value : value.toString());
 	let isOpen = $state(false);
 	let containerRef: HTMLDivElement;
 	let listboxId = nanoid();
 	let searchTerm = $state('');
 	let filteredOptions = $state(options);
 
+	async function searchOptions() {
+		filteredOptions = options.filter((option: SelectOption) =>
+			option.label.toLowerCase().includes(searchTerm.toLowerCase())
+		);
+	}
+
+	const debounceSearch = debounce(searchOptions, 300);
+
 	$effect(() => {
-		_value = selected;
+		if (value === 'None') {
+			selected = '';
+			searchTerm = '';
+		} else {
+			searchTerm = options.find((opt: SelectOption) => opt.value === value)?.label || '';
+		}
+		filteredOptions = options;
+	});
+
+	$effect(() => {
+		value = selected;
 		isOpen = false;
 		onChange(selected);
 	});
 
 	$effect(() => {
-		filteredOptions = options.filter((option: SelectOption) =>
-			option.label.toLowerCase().includes(searchTerm.toLowerCase())
-		);
+		if (searchTerm) {
+			debounceSearch();
+		}
 	});
 
 	const selectClass = $derived(
@@ -83,7 +101,6 @@
 
 		switch (event.key) {
 			case 'Enter':
-			case ' ':
 				event.preventDefault();
 				if (isOpen) {
 					const selectedOption = filteredOptions.find(
@@ -128,7 +145,7 @@
 		}
 	}
 
-	onMount(() => {
+	$effect(() => {
 		const handleClickOutside = (event: MouseEvent) => {
 			if (containerRef && !containerRef.contains(event.target as Node)) {
 				isOpen = false;

@@ -21,7 +21,7 @@
 		labelTextClass: _labelTextClass = '',
 		placeholder = '',
 		label = '',
-		value: _value = $bindable(''),
+		value = $bindable(''),
 		disabled = false,
 		name = nanoid(),
 		autocomplete = undefined,
@@ -50,13 +50,6 @@
 		[key: string]: any;
 	}>();
 
-	let formattedValue = $state(formatValue(_value.toString()));
-
-	$effect(() => {
-		formattedValue = formatValue(formattedValue);
-		_value = formattedValue.replace(/,/g, '');
-	});
-
 	const inputClass = $derived(
 		cn(
 			'input p-2 my-2 focus:outline-none ring-surface-200-800 focus-within:ring-secondary-500 ring rounded-sm bg-surface-800',
@@ -69,25 +62,6 @@
 	const labelClass = $derived(cn('label', _labelClass));
 
 	const labelTextClass = $derived(cn('label-text', _labelTextClass));
-
-	function formatValue(value: string) {
-		if (format === 'text') return value;
-		if (format === 'currency') {
-			const numericValue = value.replace(/,/g, '');
-			const formattedNumber = parseFloat(numericValue)
-				.toLocaleString('en-US', {
-					style: 'currency',
-					currency: 'USD',
-					minimumFractionDigits: 2
-				})
-				.replace('$', '');
-			return formattedNumber;
-		} else {
-			const numericValue = value.replace(/,/g, '');
-			const formattedNumber = numericValue.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-			return formattedNumber;
-		}
-	}
 </script>
 
 <label class={labelClass}>
@@ -103,7 +77,7 @@
 		{min}
 		{max}
 		{placeholder}
-		bind:value={formattedValue}
+		bind:value
 		{disabled}
 		{autocomplete}
 		class={inputClass}

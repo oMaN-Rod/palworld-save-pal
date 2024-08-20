@@ -22,9 +22,7 @@ async def sync_app_state_handler(_: SyncAppStateMessage, ws: WebSocket):
             "name": save_file.name,
             "size": save_file.size,
         }
-        response = build_response(
-            MessageType.LOAD_SAVE_FILE, data, f"{save_file.name} loaded"
-        )
+        response = build_response(MessageType.LOAD_SAVE_FILE, data)
         await ws.send_json(response)
         # data = {f"{k}": v.model_dump() for k, v in app_state.players.items()}
         data = jsonable_encoder(app_state.players)
@@ -35,6 +33,6 @@ async def sync_app_state_handler(_: SyncAppStateMessage, ws: WebSocket):
         logger.error("Error processing sync_app_state: %s", str(e))
         traceback.print_exc()
         response = build_response(
-            MessageType.ERROR, None, f"Error syncing app state: {str(e)}"
+            MessageType.ERROR, f"Error syncing app state: {str(e)}"
         )
         await ws.send_json(response)

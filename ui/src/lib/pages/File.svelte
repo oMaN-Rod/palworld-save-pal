@@ -3,6 +3,7 @@
 	import { getSocketState } from '$states/websocketState.svelte';
 	import { MessageType } from '$types';
 	import { getAppState, getNavigationState, getToastState } from '$states';
+	import { Download } from 'lucide-svelte';
 
 	let appState = getAppState();
 	const ws = getSocketState();
@@ -14,13 +15,13 @@
 	function handleOnUpload() {
 		if (!files) return;
 		nav.activePage = 'Loading';
-		ws.message = { type: MessageType.PROGRESS_MESSAGE, data: 'Uploading save file 🚀...' };
+		ws.message = { type: MessageType.PROGRESS_MESSAGE, data: 'Uploading zip file 🚀...' };
 		const reader = new FileReader();
 		reader.onload = function () {
 			const arrayBuffer = reader.result as ArrayBuffer;
 			const uint8Array = new Uint8Array(arrayBuffer);
 			const data = {
-				type: MessageType.LOAD_SAVE_FILE,
+				type: MessageType.LOAD_ZIP_FILE,
 				data: Array.from(uint8Array)
 			};
 
@@ -49,9 +50,22 @@
 						{(appState.saveFile.size / 1024 / 1024).toFixed(2)} MB
 					</p>
 				</div>
-				<button class="btn preset-filled-primary-500 font-bold" onclick={handleDownloadSaveFile}>
-					Download
-				</button>
+				<div class="flex flex-col space-y-2">
+					<Tooltip>
+						<button
+							class="btn preset-filled-primary-500 font-bold"
+							onclick={handleDownloadSaveFile}
+						>
+							<Download /> SAVE
+						</button>
+						{#snippet popup()}
+							<span>Download current Level.sav file</span>
+						{/snippet}
+					</Tooltip>
+					<!-- <button class="btn preset-filled-primary-500 font-bold" onclick={handleDownloadSaveFile}>
+						<Download /> JSON
+					</button> -->
+				</div>
 			</div>
 		</Card>
 	{/if}

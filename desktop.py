@@ -93,7 +93,6 @@ def cleanup_processes():
     current_process = psutil.Process()
     children = current_process.children(recursive=True)
     for child in children:
-        logger.debug("Terminating child process: %s", child.pid)
         child.terminate()
     _, alive = psutil.wait_procs(children, timeout=5)
     for p in alive:

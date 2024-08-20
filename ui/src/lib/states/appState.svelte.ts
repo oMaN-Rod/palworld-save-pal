@@ -12,6 +12,7 @@ export function createAppState() {
 	let selectedPal: Pal | null = $state(null);
 	let saveFile: SaveFile | null = $state(null);
 	let modifiedPals: Record<string, Pal> = $state({});
+	let modifiedPlayers: Record<string, Player> = $state({});
 
 	function setPlayers(newPlayers: Record<string, Player>) {
 		Object.entries(newPlayers).forEach(([key, player]) => {
@@ -41,6 +42,13 @@ export function createAppState() {
 		}
 	}
 
+	function setSelectedPlayer(player: Player | null) {
+		selectedPlayer = player;
+		if (player) {
+			modifiedPlayers[player.uid] = player;
+		}
+	}
+
 	function handlePalSelect(palId: string) {
 		selectedPalId = palId;
 		if (modifiedPals[palId]) {
@@ -62,7 +70,7 @@ export function createAppState() {
 		set selectedPlayerUid(uid: string) { selectedPlayerUid = uid; },
 
 		get selectedPlayer() { return selectedPlayer as Player; },
-		set selectedPlayer(player: Player) { selectedPlayer = player; },
+		set selectedPlayer(player: Player | null) { setSelectedPlayer(player); },
 
 		get selectedPalId() { return selectedPalId; },
 		set selectedPalId(palId: string) { handlePalSelect(palId); },
@@ -73,7 +81,9 @@ export function createAppState() {
 		get saveFile() { return saveFile; },
 		set saveFile(file: SaveFile | null) { saveFile = file; },
 
-		get modifiedPals() { return modifiedPals; }
+		get modifiedPals() { return modifiedPals; },
+
+		get modifiedPlayers() { return modifiedPlayers; }
 	}
 }
 

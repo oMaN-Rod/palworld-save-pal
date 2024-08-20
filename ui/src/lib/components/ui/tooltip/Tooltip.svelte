@@ -18,9 +18,10 @@
 	let {
 		background = 'bg-surface-500',
 		rounded = 'rounded',
-		popupClass = 'p-4 z-50',
+		popupClass = 'p-4',
 		popup,
 		position = 'bottom',
+		useArrow = true,
 		children
 	} = $props<{
 		background?: string;
@@ -28,6 +29,7 @@
 		popupClass?: string;
 		popup?: any;
 		position?: 'top' | 'bottom' | 'left' | 'right';
+		useArrow?: boolean;
 		children: any;
 	}>();
 
@@ -62,11 +64,13 @@
 			bind:this={floating.elements.floating}
 			style={floating.floatingStyles}
 			{...interactions.getFloatingProps()}
-			class={cn('floating', background, popupClass, rounded)}
+			class={cn('floating z-50', background, popupClass, rounded)}
 			transition:fade={{ duration: 200 }}
 		>
 			{@render popup()}
-			<FloatingArrow bind:ref={elemArrow} context={floating.context} fill={floatingArrowColor} />
+			{#if useArrow}
+				<FloatingArrow bind:ref={elemArrow} context={floating.context} fill={floatingArrowColor} />
+			{/if}
 		</div>
 	{/if}
 </div>

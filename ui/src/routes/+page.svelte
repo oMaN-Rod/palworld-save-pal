@@ -7,6 +7,7 @@
 	import { Spinner } from '$components';
 	import { MessageType, type Message } from '$types';
 	import { palsData } from '$lib/data';
+	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 
 	const appState = getAppState();
 	const ws = getSocketState();
@@ -14,6 +15,7 @@
 	const toast = getToastState();
 
 	let progressMessage = $state('');
+	let errorMessage = $state('');
 
 	$effect(() => {
 		if (ws.message && ws.message.type) {
@@ -21,14 +23,13 @@
 			switch (type) {
 				case MessageType.GET_PLAYERS:
 					appState.players = data;
-					ws.clear(MessageType.GET_PLAYERS);
 					const numOfPlayers = Object.keys(data).length;
 					toast.add(`${numOfPlayers} players loaded successfully`, 'Success!');
 					break;
+				case MessageType.LOAD_ZIP_FILE:
 				case MessageType.LOAD_SAVE_FILE:
 					const file = data as { name: string; size: number };
 					appState.saveFile = file;
-					ws.clear(MessageType.LOAD_SAVE_FILE);
 					nav.activePage = 'Edit';
 					toast.add(`Save file uploaded successfully as ${file.name}`, 'Success!');
 					break;
@@ -52,7 +53,6 @@
 					a.download = name;
 					a.click();
 					URL.revokeObjectURL(url);
-					ws.clear(MessageType.DOWNLOAD_SAVE_FILE);
 					nav.activePage = 'File';
 					break;
 				case MessageType.SYNC_APP_STATE:
@@ -64,26 +64,24 @@
 						newPal.name = palInfo?.localized_name || 'Unknown';
 						newPal.elements = palInfo?.elements || [];
 						appState.selectedPal = newPal;
-						ws.clear(MessageType.GET_PAL_DETAILS);
 					};
 					checkMessage(ws.message);
 					break;
 				case MessageType.ERROR:
-					const errorMessage = data as string;
-					toast.add(errorMessage, 'Error', 'error');
-					ws.clear(MessageType.ERROR);
+					errorMessage = data as string;
+					nav.activePage = 'Error';
 					break;
 				case MessageType.PROGRESS_MESSAGE:
 					progressMessage = data as string;
-					ws.clear(MessageType.PROGRESS_MESSAGE);
 					break;
 				case MessageType.UPDATE_SAVE_FILE:
 					const updateMessage = data as string;
-					ws.clear(MessageType.UPDATE_SAVE_FILE);
 					toast.add(updateMessage, 'Success!');
+					appState.selectedPlayer = null;
 					nav.activePage = 'Edit';
 					break;
 			}
+			ws.clear(type);
 		}
 	});
 </script>
@@ -104,6 +102,24 @@
 			{#if progressMessage}
 				<span class="mt-2">{progressMessage}</span>
 			{/if}
+		</div>
+	{:else}
+		<div class="flex h-full w-full flex-col items-center justify-center">
+			<div class="max-w-2/3 flex flex-col">
+				<h1 class="text-4xl font-bold">😵‍💫 Oops... Something went wrong</h1>
+				{#if errorMessage}
+					<Accordion classes="mt-4 bg-surface-800">
+						<Accordion.Item id="error">
+							{#snippet control()}
+								<h1 class="ml-4 text-3xl font-bold text-red-500">ERROR</h1>
+							{/snippet}
+							{#snippet panel()}
+								<p class="text-lg">{errorMessage}</p>
+							{/snippet}
+						</Accordion.Item>
+					</Accordion>
+				{/if}
+			</div>
 		</div>
 	{/if}
 </div>

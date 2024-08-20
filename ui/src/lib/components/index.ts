@@ -9,6 +9,7 @@ import PlayerList from './player-list/PlayerList.svelte';
 import Toast from './toast/Toast.svelte';
 import Modal from './modal/Modal.svelte';
 import Spinner from './spinner/Spinner.svelte';
+import ItemBadge from './badges/item-badge/ItemBadge.svelte';
 
 export * from './modals'
 export {
@@ -22,5 +23,6 @@ export {
 	Toast,
 	WorkSuitabilities,
 	Modal,
-	Spinner
+	Spinner,
+	ItemBadge
 };

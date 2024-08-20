@@ -15,18 +15,18 @@ export class ActiveSkills {
 		const skillsData = await assetLoader.loadJson<Record<string, ActiveSkillDetails>>(
 			`${ASSET_DATA_PATH}/data/active_skills.json`
 		);
-		const i18nData = await assetLoader.loadJson<Record<string, { Name: string; Description: string }>>(
+		const i18nData = await assetLoader.loadJson<Record<string, { name: string; description: string }>>(
 			`${ASSET_DATA_PATH}/data/en-GB/active_skills.json`
 		);
 
 		for (const [skillId, details] of Object.entries(skillsData)) {
-			const i18nInfo = i18nData[skillId] || { Name: skillId, Description: '' };
+			const i18nInfo = i18nData[skillId] || { name: skillId, description: '' };
 			const attack: ActiveSkill = {
 				id: skillId,
-				name: i18nInfo.Name,
+				name: i18nInfo.name,
 				details: {
 					...details,
-					Description: i18nInfo.Description
+					description: i18nInfo.description
 				}
 			};
 			this.active_skills[skillId.toLowerCase()] = attack;
@@ -72,14 +72,14 @@ export class ActiveSkills {
 	async searchActiveSkillsByType(type: string): Promise<ActiveSkill[]> {
 		await this.ensureInitialized();
 		return Object.values(this.active_skills).filter(
-			(skill) => skill.details.Type.toLowerCase() === type.toLowerCase()
+			(skill) => skill.details.type.toLowerCase() === type.toLowerCase()
 		);
 	}
 
 	async searchActiveSkillsByExclusive(exclusive: string): Promise<ActiveSkill[]> {
 		await this.ensureInitialized();
 		return Object.values(this.active_skills).filter(
-			(skill) => skill.details.Exclusive && skill.details.Exclusive.includes(exclusive)
+			(skill) => skill.details.exclusive && skill.details.exclusive.includes(exclusive)
 		);
 	}
 

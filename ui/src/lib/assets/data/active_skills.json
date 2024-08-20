@@ -1,860 +1,860 @@
 {
 	"EPalWazaID::AcidRain": {
-		"Type": "Water",
-		"Power": 80,
-		"CT": 18
+		"type": "Water",
+		"power": 80,
+		"ct": 18
 	},
 	"EPalWazaID::AirCanon": {
-		"Type": "Neutral",
-		"Power": 25,
-		"CT": 2
+		"type": "Neutral",
+		"power": 25,
+		"ct": 2
 	},
 	"EPalWazaID::Unique_Deer_PushupHorn": {
-		"Type": "Neutral",
-		"Power": 50,
-		"CT": 5,
-		"Exclusive": [
+		"type": "Neutral",
+		"power": 50,
+		"ct": 5,
+		"exclusive": [
 			"Deer",
 			"Deer_Ground"
 		]
 	},
 	"EPalWazaID::WaterBall": {
-		"Type": "Water",
-		"Power": 100,
-		"CT": 30
+		"type": "Water",
+		"power": 100,
+		"ct": 30
 	},
 	"EPalWazaID::WaterGun": {
-		"Type": "Water",
-		"Power": 40,
-		"CT": 4
+		"type": "Water",
+		"power": 40,
+		"ct": 4
 	},
 	"EPalWazaID::Unique_JetDragon_JumpBeam": {
-		"Type": "Dragon",
-		"Power": 140,
-		"CT": 50,
-		"Exclusive": [
+		"type": "Dragon",
+		"power": 140,
+		"ct": 50,
+		"exclusive": [
 			"JetDragon"
 		]
 	},
 	"EPalWazaID::SelfDestruct_Bee": {
-		"Type": "Grass",
-		"Power": 250,
-		"CT": 55,
-		"Exclusive": [
+		"type": "Grass",
+		"power": 250,
+		"ct": 55,
+		"exclusive": [
 			"SoldierBee"
 		]
 	},
 	"EPalWazaID::Unique_GrassPanda_Electric_ElectricPunch": {
-		"Type": "Electric",
-		"Power": 85,
-		"CT": 14,
-		"Exclusive": [
+		"type": "Electric",
+		"power": 85,
+		"ct": 14,
+		"exclusive": [
 			"GrassPanda_Electric"
 		]
 	},
 	"EPalWazaID::Unique_FlameBuffalo_FlameHorn": {
-		"Type": "Fire",
-		"Power": 50,
-		"CT": 9,
-		"Exclusive": [
+		"type": "Fire",
+		"power": 50,
+		"ct": 9,
+		"exclusive": [
 			"FlameBuffalo"
 		]
 	},
 	"EPalWazaID::IcicleThrow": {
-		"Type": "Ice",
-		"Power": 130,
-		"CT": 45
+		"type": "Ice",
+		"power": 130,
+		"ct": 45
 	},
 	"EPalWazaID::Unique_FlowerDinosaur_Whip": {
-		"Type": "Grass",
-		"Power": 60,
-		"CT": 8,
-		"Exclusive": [
+		"type": "Grass",
+		"power": 60,
+		"ct": 8,
+		"exclusive": [
 			"FlowerDinosaur"
 		]
 	},
 	"EPalWazaID::BubbleShot": {
-		"Type": "Water",
-		"Power": 65,
-		"CT": 13
+		"type": "Water",
+		"power": 65,
+		"ct": 13
 	},
 	"EPalWazaID::Unique_NaughtyCat_CatPress": {
-		"Type": "Neutral",
-		"Power": 60,
-		"CT": 9,
-		"Exclusive": [
+		"type": "Neutral",
+		"power": 60,
+		"ct": 9,
+		"exclusive": [
 			"NaughtyCat"
 		]
 	},
 	"EPalWazaID::Unique_ChickenPal_ChickenPeck": {
-		"Type": "Neutral",
-		"Power": 30,
-		"CT": 1,
-		"Exclusive": [
+		"type": "Neutral",
+		"power": 30,
+		"ct": 1,
+		"exclusive": [
 			"ChickenPal"
 		]
 	},
 	"EPalWazaID::Unique_FengyunDeeper_CloudTempest": {
-		"Type": "Neutral",
-		"Power": 90,
-		"CT": 15,
-		"Exclusive": [
+		"type": "Neutral",
+		"power": 90,
+		"ct": 15,
+		"exclusive": [
 			"FengyunDeeper"
 		]
 	},
 	"EPalWazaID::CrossThunder": {
-		"Type": "Electric",
-		"Power": 0,
-		"CT": 55
+		"type": "Electric",
+		"power": 0,
+		"ct": 55
 	},
 	"EPalWazaID::Unique_GrassPanda_MusclePunch": {
-		"Type": "Grass",
-		"Power": 85,
-		"CT": 18,
-		"Exclusive": [
+		"type": "Grass",
+		"power": 85,
+		"ct": 18,
+		"exclusive": [
 			"GrassPanda"
 		]
 	},
 	"EPalWazaID::FrostBreath": {
-		"Type": "Ice",
-		"Power": 90,
-		"CT": 22
+		"type": "Ice",
+		"power": 90,
+		"ct": 22
 	},
 	"EPalWazaID::Unique_IceHorse_IceBladeAttack": {
-		"Type": "Ice",
-		"Power": 110,
-		"CT": 24,
-		"Exclusive": [
+		"type": "Ice",
+		"power": 110,
+		"ct": 24,
+		"exclusive": [
 			"IceHorse",
 			"IceHorse_Dark"
 		]
 	},
 	"EPalWazaID::Unique_AmaterasuWolf_FireCharge": {
-		"Type": "Fire",
-		"Power": 75,
-		"CT": 10,
-		"Exclusive": [
+		"type": "Fire",
+		"power": 75,
+		"ct": 10,
+		"exclusive": [
 			"AmaterasuWolf"
 		]
 	},
 	"EPalWazaID::DarkBall": {
-		"Type": "Dark",
-		"Power": 40,
-		"CT": 4
+		"type": "Dark",
+		"power": 40,
+		"ct": 4
 	},
 	"EPalWazaID::Unique_FireKirin_Dark_DarkTossin": {
-		"Type": "Dark",
-		"Power": 85,
-		"CT": 14,
-		"Exclusive": [
+		"type": "Dark",
+		"power": 85,
+		"ct": 14,
+		"exclusive": [
 			"FireKirin_Dark"
 		]
 	},
 	"EPalWazaID::DarkLaser": {
-		"Type": "Dark",
-		"Power": 150,
-		"CT": 55
+		"type": "Dark",
+		"power": 150,
+		"ct": 55
 	},
 	"EPalWazaID::DarkLegion": {
-		"Type": "Dark",
-		"Power": 110,
-		"CT": 55
+		"type": "Dark",
+		"power": 110,
+		"ct": 55
 	},
 	"EPalWazaID::Unique_BlackGriffon_TackleLaser": {
-		"Type": "Dark",
-		"Power": 160,
-		"CT": 45,
-		"Exclusive": [
+		"type": "Dark",
+		"power": 160,
+		"ct": 45,
+		"exclusive": [
 			"BlackGriffon",
 			"GYM_BlackGriffon"
 		]
 	},
 	"EPalWazaID::DragonBreath": {
-		"Type": "Dragon",
-		"Power": 70,
-		"CT": 15
+		"type": "Dragon",
+		"power": 70,
+		"ct": 15
 	},
 	"EPalWazaID::DragonWave": {
-		"Type": "Dragon",
-		"Power": 55,
-		"CT": 10
+		"type": "Dragon",
+		"power": 55,
+		"ct": 10
 	},
 	"EPalWazaID::DragonCanon": {
-		"Type": "Dragon",
-		"Power": 30,
-		"CT": 2
+		"type": "Dragon",
+		"power": 30,
+		"ct": 2
 	},
 	"EPalWazaID::DragonMeteor": {
-		"Type": "Dragon",
-		"Power": 150,
-		"CT": 55
+		"type": "Dragon",
+		"power": 150,
+		"ct": 55
 	},
 	"EPalWazaID::Unique_Grassmammoth_Earthquake": {
-		"Type": "Ground",
-		"Power": 100,
-		"CT": 30,
-		"Exclusive": [
+		"type": "Ground",
+		"power": 100,
+		"ct": 30,
+		"exclusive": [
 			"Grassmammoth",
 			"Grassmammoth_Ice"
 		]
 	},
 	"EPalWazaID::ThunderBall": {
-		"Type": "Electric",
-		"Power": 50,
-		"CT": 9
+		"type": "Electric",
+		"power": 50,
+		"ct": 9
 	},
 	"EPalWazaID::Unique_CaptainPenguin_BodySlide": {
-		"Type": "Ice",
-		"Power": 70,
-		"CT": 10,
-		"Exclusive": [
+		"type": "Ice",
+		"power": 70,
+		"ct": 10,
+		"exclusive": [
 			"CaptainPenguin"
 		]
 	},
 	"EPalWazaID::Unique_Garm_Bite": {
-		"Type": "Neutral",
-		"Power": 45,
-		"CT": 2,
-		"Exclusive": [
+		"type": "Neutral",
+		"power": 45,
+		"ct": 2,
+		"exclusive": [
 			"Garm"
 		]
 	},
 	"EPalWazaID::FireBall": {
-		"Type": "Fire",
-		"Power": 150,
-		"CT": 55
+		"type": "Fire",
+		"power": 150,
+		"ct": 55
 	},
 	"EPalWazaID::FlareArrow": {
-		"Type": "Fire",
-		"Power": 55,
-		"CT": 10
+		"type": "Fire",
+		"power": 55,
+		"ct": 10
 	},
 	"EPalWazaID::FlareTornado": {
-		"Type": "Fire",
-		"Power": 80,
-		"CT": 18
+		"type": "Fire",
+		"power": 80,
+		"ct": 18
 	},
 	"EPalWazaID::Unique_Alpaca_Tackle": {
-		"Type": "Neutral",
-		"Power": 40,
-		"CT": 4,
-		"Exclusive": [
+		"type": "Neutral",
+		"power": 40,
+		"ct": 4,
+		"exclusive": [
 			"Alpaca"
 		]
 	},
 	"EPalWazaID::Unique_RobinHood_BowSnipe": {
-		"Type": "Grass",
-		"Power": 65,
-		"CT": 9,
-		"Exclusive": [
+		"type": "Grass",
+		"power": 65,
+		"ct": 9,
+		"exclusive": [
 			"RobinHood",
 			"RobinHood_Ground"
 		]
 	},
 	"EPalWazaID::Unique_Anubis_Tackle": {
-		"Type": "Ground",
-		"Power": 120,
-		"CT": 28,
-		"Exclusive": [
+		"type": "Ground",
+		"power": 120,
+		"ct": 28,
+		"exclusive": [
 			"Anubis"
 		]
 	},
 	"EPalWazaID::Unique_IceDeer_IceHorn": {
-		"Type": "Ice",
-		"Power": 65,
-		"CT": 9,
-		"Exclusive": [
+		"type": "Ice",
+		"power": 65,
+		"ct": 9,
+		"exclusive": [
 			"IceDeer"
 		]
 	},
 	"EPalWazaID::Unique_VolcanicMonster_Ice_IceAttack": {
-		"Type": "Ice",
-		"Power": 100,
-		"CT": 45,
-		"Exclusive": [
+		"type": "Ice",
+		"power": 100,
+		"ct": 45,
+		"exclusive": [
 			"VolcanicMonster_Ice"
 		]
 	},
 	"EPalWazaID::Unique_Eagle_GlidingNail": {
-		"Type": "Neutral",
-		"Power": 60,
-		"CT": 8,
-		"Exclusive": [
+		"type": "Neutral",
+		"power": 60,
+		"ct": 8,
+		"exclusive": [
 			"Eagle"
 		]
 	},
 	"EPalWazaID::Unique_HerculesBeetle_BeetleTackle": {
-		"Type": "Ground",
-		"Power": 75,
-		"CT": 11,
-		"Exclusive": [
+		"type": "Ground",
+		"power": 75,
+		"ct": 11,
+		"exclusive": [
 			"HerculesBeetle"
 		]
 	},
 	"EPalWazaID::GrassTornado": {
-		"Type": "Grass",
-		"Power": 80,
-		"CT": 18
+		"type": "Grass",
+		"power": 80,
+		"ct": 18
 	},
 	"EPalWazaID::Unique_Gorilla_GroundPunch": {
-		"Type": "Neutral",
-		"Power": 85,
-		"CT": 14,
-		"Exclusive": [
+		"type": "Neutral",
+		"power": 85,
+		"ct": 14,
+		"exclusive": [
 			"Gorilla"
 		]
 	},
 	"EPalWazaID::Unique_Anubis_GroundPunch": {
-		"Type": "Ground",
-		"Power": 140,
-		"CT": 35,
-		"Exclusive": [
+		"type": "Ground",
+		"power": 140,
+		"ct": 35,
+		"exclusive": [
 			"Anubis"
 		]
 	},
 	"EPalWazaID::Unique_Baphomet_SwallowKite": {
-		"Type": "Fire",
-		"Power": 70,
-		"CT": 10,
-		"Exclusive": [
+		"type": "Fire",
+		"power": 70,
+		"ct": 10,
+		"exclusive": [
 			"Baphomet",
 			"Baphomet_Dark"
 		]
 	},
 	"EPalWazaID::AquaJet": {
-		"Type": "Water",
-		"Power": 30,
-		"CT": 2
+		"type": "Water",
+		"power": 30,
+		"ct": 2
 	},
 	"EPalWazaID::HydroPump": {
-		"Type": "Water",
-		"Power": 150,
-		"CT": 55
+		"type": "Water",
+		"power": 150,
+		"ct": 55
 	},
 	"EPalWazaID::Unique_Ronin_Iai": {
-		"Type": "Fire",
-		"Power": 65,
-		"CT": 9,
-		"Exclusive": [
+		"type": "Fire",
+		"power": 65,
+		"ct": 9,
+		"exclusive": [
 			"Ronin"
 		]
 	},
 	"EPalWazaID::IceMissile": {
-		"Type": "Ice",
-		"Power": 30,
-		"CT": 3
+		"type": "Ice",
+		"power": 30,
+		"ct": 3
 	},
 	"EPalWazaID::BlizzardLance": {
-		"Type": "Ice",
-		"Power": 70,
-		"CT": 15
+		"type": "Ice",
+		"power": 70,
+		"ct": 15
 	},
 	"EPalWazaID::IceBlade": {
-		"Type": "Ice",
-		"Power": 55,
-		"CT": 10
+		"type": "Ice",
+		"power": 55,
+		"ct": 10
 	},
 	"EPalWazaID::FireBlast": {
-		"Type": "Fire",
-		"Power": 30,
-		"CT": 2
+		"type": "Fire",
+		"power": 30,
+		"ct": 2
 	},
 	"EPalWazaID::Flamethrower": {
-		"Type": "Fire",
-		"Power": 70,
-		"CT": 15
+		"type": "Fire",
+		"power": 70,
+		"ct": 15
 	},
 	"EPalWazaID::Inferno": {
-		"Type": "Fire",
-		"Power": 120,
-		"CT": 40
+		"type": "Fire",
+		"power": 120,
+		"ct": 40
 	},
 	"EPalWazaID::Unique_FireKirin_Tackle": {
-		"Type": "Fire",
-		"Power": 85,
-		"CT": 14,
-		"Exclusive": [
+		"type": "Fire",
+		"power": 85,
+		"ct": 14,
+		"exclusive": [
 			"FireKirin"
 		]
 	},
 	"EPalWazaID::SelfDestruct": {
-		"Type": "Neutral",
-		"Power": 230,
-		"CT": 55
+		"type": "Neutral",
+		"power": 230,
+		"ct": 55
 	},
 	"EPalWazaID::Intimidate": {
-		"Type": "Neutral",
-		"Power": 0,
-		"CT": 30
+		"type": "Neutral",
+		"power": 0,
+		"ct": 30
 	},
 	"EPalWazaID::Unique_Werewolf_Scratch": {
-		"Type": "Dark",
-		"Power": 55,
-		"CT": 7,
-		"Exclusive": [
+		"type": "Dark",
+		"power": 55,
+		"ct": 7,
+		"exclusive": [
 			"Werewolf"
 		]
 	},
 	"EPalWazaID::Unique_ThunderDragonMan_ThunderSwordAttack": {
-		"Type": "Electric",
-		"Power": 100,
-		"CT": 30,
-		"Exclusive": [
+		"type": "Electric",
+		"power": 100,
+		"ct": 30,
+		"exclusive": [
 			"ThunderDragonMan",
 			"GYM_ThunderDragonMan"
 		]
 	},
 	"EPalWazaID::Unique_KingAlpaca_BodyPress": {
-		"Type": "Neutral",
-		"Power": 100,
-		"CT": 21,
-		"Exclusive": [
+		"type": "Neutral",
+		"power": 100,
+		"ct": 21,
+		"exclusive": [
 			"KingAlpaca",
 			"KingAlpaca_Ice"
 		]
 	},
 	"EPalWazaID::Thunderbolt": {
-		"Type": "Electric",
-		"Power": 150,
-		"CT": 55
+		"type": "Electric",
+		"power": 150,
+		"ct": 55
 	},
 	"EPalWazaID::Unique_ElecPanda_ElecScratch": {
-		"Type": "Electric",
-		"Power": 90,
-		"CT": 22,
-		"Exclusive": [
+		"type": "Electric",
+		"power": 90,
+		"ct": 22,
+		"exclusive": [
 			"ElecPanda",
 			"GYM_ElecPanda"
 		]
 	},
 	"EPalWazaID::ThunderRain": {
-		"Type": "Electric",
-		"Power": 135,
-		"CT": 45
+		"type": "Electric",
+		"power": 135,
+		"ct": 45
 	},
 	"EPalWazaID::LineThunder": {
-		"Type": "Electric",
-		"Power": 75,
-		"CT": 16
+		"type": "Electric",
+		"power": 75,
+		"ct": 16
 	},
 	"EPalWazaID::LightningStrike": {
-		"Type": "Electric",
-		"Power": 120,
-		"CT": 40
+		"type": "Electric",
+		"power": 120,
+		"ct": 40
 	},
 	"EPalWazaID::Unique_Kirin_LightningTackle": {
-		"Type": "Electric",
-		"Power": 0,
-		"CT": 0,
-		"Exclusive": [
+		"type": "Electric",
+		"power": 0,
+		"ct": 0,
+		"exclusive": [
 			"Kirin"
 		]
 	},
 	"EPalWazaID::LockonLaser": {
-		"Type": "Electric",
-		"Power": 70,
-		"CT": 15
+		"type": "Electric",
+		"power": 70,
+		"ct": 15
 	},
 	"EPalWazaID::SelfExplosion": {
-		"Type": "Neutral",
-		"Power": 180,
-		"CT": 55
+		"type": "Neutral",
+		"power": 180,
+		"ct": 55
 	},
 	"EPalWazaID::SpecialCutter": {
-		"Type": "Grass",
-		"Power": 60,
-		"CT": 12
+		"type": "Grass",
+		"power": 60,
+		"ct": 12
 	},
 	"EPalWazaID::Unique_SakuraSaurus_SideTackle": {
-		"Type": "Neutral",
-		"Power": 80,
-		"CT": 12,
-		"Exclusive": [
+		"type": "Neutral",
+		"power": 80,
+		"ct": 12,
+		"exclusive": [
 			"SakuraSaurus",
 			"SakuraSaurus_Water"
 		]
 	},
 	"EPalWazaID::Unique_FairyDragon_FairyTornado": {
-		"Type": "Dragon",
-		"Power": 70,
-		"CT": 10,
-		"Exclusive": [
+		"type": "Dragon",
+		"power": 70,
+		"ct": 10,
+		"exclusive": [
 			"FairyDragon",
 			"FairyDragon_Water"
 		]
 	},
 	"EPalWazaID::ShadowBall": {
-		"Type": "Dark",
-		"Power": 100,
-		"CT": 30
+		"type": "Dark",
+		"power": 100,
+		"ct": 30
 	},
 	"EPalWazaID::HyperBeam": {
-		"Type": "Neutral",
-		"Power": 150,
-		"CT": 55
+		"type": "Neutral",
+		"power": 150,
+		"ct": 55
 	},
 	"EPalWazaID::Unique_DarkCrow_TelePoke": {
-		"Type": "Dark",
-		"Power": 55,
-		"CT": 7,
-		"Exclusive": [
+		"type": "Dark",
+		"power": 55,
+		"ct": 7,
+		"exclusive": [
 			"DarkCrow"
 		]
 	},
 	"EPalWazaID::Unique_Horus_FlareBird": {
-		"Type": "Fire",
-		"Power": 135,
-		"CT": 28,
-		"Exclusive": [
+		"type": "Fire",
+		"power": 135,
+		"ct": 28,
+		"exclusive": [
 			"Horus",
 			"GYM_Horus"
 		]
 	},
 	"EPalWazaID::Unique_NightLady_FlameNightmare": {
-		"Type": "Dark",
-		"Power": 130,
-		"CT": 45,
-		"Exclusive": [
+		"type": "Dark",
+		"power": 130,
+		"ct": 45,
+		"exclusive": [
 			"NightLady_Dark"
 		]
 	},
 	"EPalWazaID::Unique_NightLady_WarpBeam": {
-		"Type": "Dark",
-		"Power": 160,
-		"CT": 50,
-		"Exclusive": [
+		"type": "Dark",
+		"power": 160,
+		"ct": 50,
+		"exclusive": [
 			"NightLady_Dark"
 		]
 	},
 	"EPalWazaID::Unique_NightLady_WarpBeam_Straight": {
-		"Type": "Dark",
-		"Power": 140,
-		"CT": 50,
-		"Exclusive": [
+		"type": "Dark",
+		"power": 140,
+		"ct": 50,
+		"exclusive": [
 			"NightLady"
 		]
 	},
 	"EPalWazaID::DarkCanon": {
-		"Type": "Dark",
-		"Power": 50,
-		"CT": 2
+		"type": "Dark",
+		"power": 50,
+		"ct": 2
 	},
 	"EPalWazaID::DarkPulse": {
-		"Type": "Dark",
-		"Power": 40,
-		"CT": 2
+		"type": "Dark",
+		"power": 40,
+		"ct": 2
 	},
 	"EPalWazaID::DarkArrow": {
-		"Type": "Dark",
-		"Power": 65,
-		"CT": 10
+		"type": "Dark",
+		"power": 65,
+		"ct": 10
 	},
 	"EPalWazaID::Apocalypse": {
-		"Type": "Dark",
-		"Power": 110,
-		"CT": 55
+		"type": "Dark",
+		"power": 110,
+		"ct": 55
 	},
 	"EPalWazaID::ThunderFunnel": {
-		"Type": "Electric",
-		"Power": 65,
-		"CT": 13
+		"type": "Electric",
+		"power": 65,
+		"ct": 13
 	},
 	"EPalWazaID::PoisonShot": {
-		"Type": "Dark",
-		"Power": 30,
-		"CT": 2
+		"type": "Dark",
+		"power": 30,
+		"ct": 2
 	},
 	"EPalWazaID::PoisonFog": {
-		"Type": "Dark",
-		"Power": 0,
-		"CT": 30
+		"type": "Dark",
+		"power": 0,
+		"ct": 30
 	},
 	"EPalWazaID::PowerBall": {
-		"Type": "Neutral",
-		"Power": 70,
-		"CT": 15
+		"type": "Neutral",
+		"power": 70,
+		"ct": 15
 	},
 	"EPalWazaID::PowerShot": {
-		"Type": "Neutral",
-		"Power": 35,
-		"CT": 4
+		"type": "Neutral",
+		"power": 35,
+		"ct": 4
 	},
 	"EPalWazaID::Psychokinesis": {
-		"Type": "Dark",
-		"Power": 0,
-		"CT": 0
+		"type": "Dark",
+		"power": 0,
+		"ct": 0
 	},
 	"EPalWazaID::Human_Punch": {
-		"Type": "Neutral",
-		"Power": 0,
-		"CT": 0
+		"type": "Neutral",
+		"power": 0,
+		"ct": 0
 	},
 	"EPalWazaID::Unique_PinkCat_CatPunch": {
-		"Type": "Neutral",
-		"Power": 40,
-		"CT": 1,
-		"Exclusive": [
+		"type": "Neutral",
+		"power": 40,
+		"ct": 1,
+		"exclusive": [
 			"PinkCat"
 		]
 	},
 	"EPalWazaID::Unique_Boar_Tackle": {
-		"Type": "Neutral",
-		"Power": 55,
-		"CT": 2,
-		"Exclusive": [
+		"type": "Neutral",
+		"power": 55,
+		"ct": 2,
+		"exclusive": [
 			"Boar"
 		]
 	},
 	"EPalWazaID::RockLance": {
-		"Type": "Ground",
-		"Power": 150,
-		"CT": 55
+		"type": "Ground",
+		"power": 150,
+		"ct": 55
 	},
 	"EPalWazaID::Unique_SheepBall_Roll": {
-		"Type": "Neutral",
-		"Power": 35,
-		"CT": 1,
-		"Exclusive": [
+		"type": "Neutral",
+		"power": 35,
+		"ct": 1,
+		"exclusive": [
 			"Sheepball"
 		]
 	},
 	"EPalWazaID::MudShot": {
-		"Type": "Ground",
-		"Power": 40,
-		"CT": 4
+		"type": "Ground",
+		"power": 40,
+		"ct": 4
 	},
 	"EPalWazaID::SandTornado": {
-		"Type": "Ground",
-		"Power": 80,
-		"CT": 18
+		"type": "Ground",
+		"power": 80,
+		"ct": 18
 	},
 	"EPalWazaID::SeedMachinegun": {
-		"Type": "Grass",
-		"Power": 50,
-		"CT": 9
+		"type": "Grass",
+		"power": 50,
+		"ct": 9
 	},
 	"EPalWazaID::SeedMine": {
-		"Type": "Grass",
-		"Power": 65,
-		"CT": 13
+		"type": "Grass",
+		"power": 65,
+		"ct": 13
 	},
 	"EPalWazaID::DarkWave": {
-		"Type": "Dark",
-		"Power": 55,
-		"CT": 10
+		"type": "Dark",
+		"power": 55,
+		"ct": 10
 	},
 	"EPalWazaID::Unique_DrillGame_ShellAttack": {
-		"Type": "Ground",
-		"Power": 65,
-		"CT": 9,
-		"Exclusive": [
+		"type": "Ground",
+		"power": 65,
+		"ct": 9,
+		"exclusive": [
 			"DrillGame"
 		]
 	},
 	"EPalWazaID::ElecWave": {
-		"Type": "Electric",
-		"Power": 40,
-		"CT": 4
+		"type": "Electric",
+		"power": 40,
+		"ct": 4
 	},
 	"EPalWazaID::SolarBeam": {
-		"Type": "Electric",
-		"Power": 150,
-		"CT": 55
+		"type": "Electric",
+		"power": 150,
+		"ct": 55
 	},
 	"EPalWazaID::SpreadPulse": {
-		"Type": "Electric",
-		"Power": 30,
-		"CT": 2
+		"type": "Electric",
+		"power": 30,
+		"ct": 2
 	},
 	"EPalWazaID::Unique_SaintCentaur_OneSpearRushes": {
-		"Type": "Neutral",
-		"Power": 120,
-		"CT": 40,
-		"Exclusive": [
+		"type": "Neutral",
+		"power": 120,
+		"ct": 40,
+		"exclusive": [
 			"SaintCentaur"
 		]
 	},
 	"EPalWazaID::RootAttack": {
-		"Type": "Grass",
-		"Power": 95,
-		"CT": 25
+		"type": "Grass",
+		"power": 95,
+		"ct": 25
 	},
 	"EPalWazaID::Unique_QueenBee_SpinLance": {
-		"Type": "Grass",
-		"Power": 70,
-		"CT": 9,
-		"Exclusive": [
+		"type": "Grass",
+		"power": 70,
+		"ct": 9,
+		"exclusive": [
 			"Queenbee"
 		]
 	},
 	"EPalWazaID::Unique_Anubis_LowRoundKick": {
-		"Type": "Ground",
-		"Power": 100,
-		"CT": 21,
-		"Exclusive": [
+		"type": "Ground",
+		"power": 100,
+		"ct": 21,
+		"exclusive": [
 			"Anubis"
 		]
 	},
 	"EPalWazaID::FireSeed": {
-		"Type": "Fire",
-		"Power": 45,
-		"CT": 7
+		"type": "Fire",
+		"power": 45,
+		"ct": 7
 	},
 	"EPalWazaID::GhostFlame": {
-		"Type": "Dark",
-		"Power": 75,
-		"CT": 16
+		"type": "Dark",
+		"power": 75,
+		"ct": 16
 	},
 	"EPalWazaID::StoneShotgun": {
-		"Type": "Ground",
-		"Power": 55,
-		"CT": 10
+		"type": "Ground",
+		"power": 55,
+		"ct": 10
 	},
 	"EPalWazaID::ThrowRock": {
-		"Type": "Ground",
-		"Power": 70,
-		"CT": 15
+		"type": "Ground",
+		"power": 70,
+		"ct": 15
 	},
 	"EPalWazaID::Unique_BluePlatypus_Toboggan": {
-		"Type": "Water",
-		"Power": 0,
-		"CT": 0,
-		"Exclusive": [
+		"type": "Water",
+		"power": 0,
+		"ct": 0,
+		"exclusive": [
 			"BluePlatypus"
 		]
 	},
 	"EPalWazaID::Unique_HawkBird_Storm": {
-		"Type": "Neutral",
-		"Power": 65,
-		"CT": 13,
-		"Exclusive": [
+		"type": "Neutral",
+		"power": 65,
+		"ct": 13,
+		"exclusive": [
 			"HawkBird"
 		]
 	},
 	"EPalWazaID::ThreeThunder": {
-		"Type": "Electric",
-		"Power": 90,
-		"CT": 22
+		"type": "Electric",
+		"power": 90,
+		"ct": 22
 	},
 	"EPalWazaID::Unique_BlackCentaur_TwoSpearRushes": {
-		"Type": "Dark",
-		"Power": 120,
-		"CT": 40,
-		"Exclusive": [
+		"type": "Dark",
+		"power": 120,
+		"ct": 40,
+		"exclusive": [
 			"BlackCentaur"
 		]
 	},
 	"EPalWazaID::Unique_VolcanicMonster_MagmaAttack": {
-		"Type": "Fire",
-		"Power": 100,
-		"CT": 45,
-		"Exclusive": [
+		"type": "Fire",
+		"power": 100,
+		"ct": 45,
+		"exclusive": [
 			"VolcanicMonster"
 		]
 	},
 	"EPalWazaID::WindCutter": {
-		"Type": "Grass",
-		"Power": 30,
-		"CT": 2
+		"type": "Grass",
+		"power": 30,
+		"ct": 2
 	},
 	"EPalWazaID::WaterWave": {
-		"Type": "Water",
-		"Power": 120,
-		"CT": 40
+		"type": "Water",
+		"power": 120,
+		"ct": 40
 	},
 	"EPalWazaID::Unique_KingBahamut_ArmSmash": {
-		"Type": "Fire",
-		"Power": 150,
-		"CT": 55,
-		"Exclusive": [
+		"type": "Fire",
+		"power": 150,
+		"ct": 55,
+		"exclusive": [
 			"KingBahamut"
 		]
 	},
 	"EPalWazaID::BeamSlicer": {
-		"Type": "Dragon",
-		"Power": 130,
-		"CT": 45
+		"type": "Dragon",
+		"power": 130,
+		"ct": 45
 	},
 	"EPalWazaID::BlastCannon": {
-		"Type": "Dragon",
-		"Power": 100,
-		"CT": 30
+		"type": "Dragon",
+		"power": 100,
+		"ct": 30
 	},
 	"EPalWazaID::DiamondRain": {
-		"Type": "Ice",
-		"Power": 160,
-		"CT": 60
+		"type": "Ice",
+		"power": 160,
+		"ct": 60
 	},
 	"EPalWazaID::IcicleLine": {
-		"Type": "Ice",
-		"Power": 120,
-		"CT": 40
+		"type": "Ice",
+		"power": 120,
+		"ct": 40
 	},
 	"EPalWazaID::Thunderstorm": {
-		"Type": "Electric",
-		"Power": 160,
-		"CT": 60
+		"type": "Electric",
+		"power": 160,
+		"ct": 60
 	},
 	"EPalWazaID::TriSpark": {
-		"Type": "Electric",
-		"Power": 110,
-		"CT": 35
+		"type": "Electric",
+		"power": 110,
+		"ct": 35
 	},
 	"EPalWazaID::FlameWall": {
-		"Type": "Fire",
-		"Power": 120,
-		"CT": 30
+		"type": "Fire",
+		"power": 120,
+		"ct": 30
 	},
 	"EPalWazaID::VolcanicRain": {
-		"Type": "Fire",
-		"Power": 130,
-		"CT": 45
+		"type": "Fire",
+		"power": 130,
+		"ct": 45
 	},
 	"EPalWazaID::AirBlade": {
-		"Type": "Neutral",
-		"Power": 85,
-		"CT": 20
+		"type": "Neutral",
+		"power": 85,
+		"ct": 20
 	},
 	"EPalWazaID::Tremor": {
-		"Type": "Ground",
-		"Power": 130,
-		"CT": 35
+		"type": "Ground",
+		"power": 130,
+		"ct": 35
 	},
 	"EPalWazaID::SandTwister": {
-		"Type": "Ground",
-		"Power": 160,
-		"CT": 60
+		"type": "Ground",
+		"power": 160,
+		"ct": 60
 	},
 	"EPalWazaID::Unique_WingGolem_RoundCutter": {
-		"Type": "Ground",
-		"Power": 145,
-		"CT": 35,
-		"Exclusive": [
+		"type": "Ground",
+		"power": 145,
+		"ct": 35,
+		"exclusive": [
 			"WingGolem"
 		]
 	},
 	"EPalWazaID::Unique_DarkScorpion_Pierce": {
-		"Type": "Ground",
-		"Power": 110,
-		"CT": 24,
-		"Exclusive": [
+		"type": "Ground",
+		"power": 110,
+		"ct": 24,
+		"exclusive": [
 			"DarkScorpion",
 			"DarkScorpion_Ground"
 		]
 	},
 	"EPalWazaID::Unique_SifuDog_Counter": {
-		"Type": "Neutral",
-		"Power": 170,
-		"CT": 30,
-		"Exclusive": [
+		"type": "Neutral",
+		"power": 170,
+		"ct": 30,
+		"exclusive": [
 			"SifuDog"
 		]
 	},
 	"EPalWazaID::Unique_WeaselDragon_FlyingTackle": {
-		"Type": "Dragon",
-		"Power": 50,
-		"CT": 6,
-		"Exclusive": [
+		"type": "Dragon",
+		"power": 50,
+		"ct": 6,
+		"exclusive": [
 			"WeaselDragon",
 			"WeaselDragon_Fire"
 		]

@@ -19,14 +19,14 @@ export class PalInfo {
 	constructor(code_name: string, localized_name: string, data: PalData) {
 		this.code_name = code_name;
 		this.localized_name = localized_name;
-		this.elements = data.Type;
-		this.move_set = data.Moveset;
-		this.raid_move_set = data.RaidMoveset;
-		this.scaling = data.Scaling;
-		this.suitabilities = data.Suitabilities;
-		this.is_tower = data.Tower || false;
-		this.is_human = data.Human || false;
-		this.bonuses = data.Bonuses;
+		this.elements = data.type;
+		this.move_set = data.skill_set;
+		this.raid_move_set = data.raid_skill_set;
+		this.scaling = data.scaling;
+		this.suitabilities = data.suitabilities;
+		this.is_tower = data.tower || false;
+		this.is_human = data.human || false;
+		this.bonuses = data.bonuses;
 	}
 }
 
@@ -50,7 +50,7 @@ export class Pals {
 		);
 
 		palsData.values.forEach((pal: PalData) => {
-			const codeName = pal.CodeName;
+			const codeName = pal.code_name;
 			const localizedName = palNamesData[codeName] || codeName;
 			this.pals[codeName] = new PalInfo(codeName, localizedName, pal);
 		});

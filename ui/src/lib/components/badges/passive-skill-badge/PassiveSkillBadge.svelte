@@ -3,7 +3,7 @@
 	import { passiveSkillsData } from '$lib/data';
 	import type { PassiveSkill } from '$types';
 	import { ASSET_DATA_PATH } from '$lib/constants';
-	import { SelectModal } from '$components';
+	import { SkillSelectModal } from '$components';
 	import { getModalState } from '$states';
 	import { Tooltip } from '$components/ui';
 
@@ -25,7 +25,7 @@
 		if (skill) {
 			passiveSkill = await passiveSkillsData.searchPassiveSkills(skill);
 			if (passiveSkill) {
-				const iconPath = `${ASSET_DATA_PATH}/img/passives/Passive_${passiveSkill.details.Tier.toUpperCase()}_icon.webp`;
+				const iconPath = `${ASSET_DATA_PATH}/img/passives/Passive_${passiveSkill.details.tier.toUpperCase()}_icon.webp`;
 				tierIcon = await assetLoader.loadImage(iconPath, true);
 			}
 		}
@@ -33,7 +33,7 @@
 
 	async function handleSelectSkill() {
 		// @ts-ignore
-		const result = await modal.showModal(SelectModal, {
+		const result = await modal.showModal(SkillSelectModal, {
 			type: 'Passive',
 			value: skill,
 			title: 'Select Passive Skill'
@@ -76,7 +76,7 @@
 	</button>
 	{#snippet popup()}
 		<div class="p-4">
-			{passiveSkill?.details.Description}
+			{passiveSkill?.details.description}
 		</div>
 	{/snippet}
 </Tooltip>

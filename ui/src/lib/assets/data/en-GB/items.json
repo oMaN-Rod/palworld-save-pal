@@ -1,0 +1,4790 @@
+{
+    "Accessory_AT_1": {
+        "localized_name": "Attack Pendant",
+        "description": ""
+    },
+    "Accessory_AT_2": {
+        "localized_name": "Attack Pendant +1",
+        "description": ""
+    },
+    "Accessory_AT_3": {
+        "localized_name": "Attack Pendant +2",
+        "description": ""
+    },
+    "Accessory_AquaResist_1": {
+        "localized_name": "Ring of Water Resistance",
+        "description": ""
+    },
+    "Accessory_AquaResist_2": {
+        "localized_name": "Ring of Water Resistance +1",
+        "description": ""
+    },
+    "Accessory_AquaResist_3": {
+        "localized_name": "Ring of Water Resistance +2",
+        "description": ""
+    },
+    "Accessory_CoolResist_1": {
+        "localized_name": "Thermal Undershirt",
+        "description": ""
+    },
+    "Accessory_CoolResist_2": {
+        "localized_name": "Thermal Undershirt +1",
+        "description": ""
+    },
+    "Accessory_CoolResist_3": {
+        "localized_name": "Thermal Undershirt +2",
+        "description": ""
+    },
+    "Accessory_DarkResist_1": {
+        "localized_name": "Ring of Dark Resistance",
+        "description": ""
+    },
+    "Accessory_DarkResist_2": {
+        "localized_name": "Ring of Dark Resistance +1",
+        "description": ""
+    },
+    "Accessory_DarkResist_3": {
+        "localized_name": "Ring of Dark Resistance +2",
+        "description": ""
+    },
+    "Accessory_DragonResist_1": {
+        "localized_name": "Ring of Dragon Resistance",
+        "description": ""
+    },
+    "Accessory_DragonResist_2": {
+        "localized_name": "Ring of Dragon Resistance +1",
+        "description": ""
+    },
+    "Accessory_DragonResist_3": {
+        "localized_name": "Ring of Dragon Resistance +2",
+        "description": ""
+    },
+    "Accessory_EarthResist_1": {
+        "localized_name": "Ring of Earth Resistance",
+        "description": ""
+    },
+    "Accessory_EarthResist_2": {
+        "localized_name": "Ring of Earth Resistance +1",
+        "description": ""
+    },
+    "Accessory_EarthResist_3": {
+        "localized_name": "Ring of Earth Resistance +2",
+        "description": ""
+    },
+    "Accessory_FireResist_1": {
+        "localized_name": "Ring of Flame Resistance",
+        "description": ""
+    },
+    "Accessory_FireResist_2": {
+        "localized_name": "Ring of Flame Resistance +1",
+        "description": ""
+    },
+    "Accessory_FireResist_3": {
+        "localized_name": "Ring of Flame Resistance +2",
+        "description": ""
+    },
+    "Accessory_HP_1": {
+        "localized_name": "Life Pendant",
+        "description": ""
+    },
+    "Accessory_HP_2": {
+        "localized_name": "Life Pendant +1",
+        "description": ""
+    },
+    "Accessory_HP_3": {
+        "localized_name": "Life Pendant +2",
+        "description": ""
+    },
+    "Accessory_HeatColdResist_1": {
+        "localized_name": "Multiclimate Undershirt",
+        "description": ""
+    },
+    "Accessory_HeatColdResist_2": {
+        "localized_name": "Multiclimate Undershirt +1",
+        "description": ""
+    },
+    "Accessory_HeatColdResist_3": {
+        "localized_name": "Multiclimate Undershirt +2",
+        "description": ""
+    },
+    "Accessory_HeatResist_1": {
+        "localized_name": "Heat Resistant Undershirt",
+        "description": ""
+    },
+    "Accessory_HeatResist_2": {
+        "localized_name": "Heat Resistant Undershirt +1",
+        "description": ""
+    },
+    "Accessory_HeatResist_3": {
+        "localized_name": "Heat Resistant Undershirt +2",
+        "description": ""
+    },
+    "Accessory_IceResist_1": {
+        "localized_name": "Ring of Ice Resistance",
+        "description": ""
+    },
+    "Accessory_IceResist_2": {
+        "localized_name": "Ring of Ice Resistance +1",
+        "description": ""
+    },
+    "Accessory_IceResist_3": {
+        "localized_name": "Ring of Ice Resistance +2",
+        "description": ""
+    },
+    "Accessory_LeafResist_1": {
+        "localized_name": "Ring of Grass Resistance",
+        "description": ""
+    },
+    "Accessory_LeafResist_2": {
+        "localized_name": "Ring of Grass Resistance +1",
+        "description": ""
+    },
+    "Accessory_LeafResist_3": {
+        "localized_name": "Ring of Grass Resistance +2",
+        "description": ""
+    },
+    "Accessory_MaxWeightUp_01": {
+        "localized_name": "Ring of Frieght",
+        "description": ""
+    },
+    "Accessory_MaxWeightUp_02": {
+        "localized_name": "Ring of Frieght +1",
+        "description": ""
+    },
+    "Accessory_MaxWeightUp_03": {
+        "localized_name": "Ring of Frieght +2",
+        "description": ""
+    },
+    "Accessory_Nonkilling": {
+        "localized_name": "Ring of Mercy",
+        "description": ""
+    },
+    "Accessory_NormalResist_1": {
+        "localized_name": "Ring of Resistance",
+        "description": ""
+    },
+    "Accessory_NormalResist_2": {
+        "localized_name": "Ring of Resistance +1",
+        "description": ""
+    },
+    "Accessory_NormalResist_3": {
+        "localized_name": "Ring of Resistance +2",
+        "description": ""
+    },
+    "Accessory_TalentChecker": {
+        "localized_name": "Ability Glasses",
+        "description": ""
+    },
+    "Accessory_ThunderResist_1": {
+        "localized_name": "Ring of Lightning Resistance",
+        "description": ""
+    },
+    "Accessory_ThunderResist_2": {
+        "localized_name": "Ring of Lightning Resistance +1",
+        "description": ""
+    },
+    "Accessory_ThunderResist_3": {
+        "localized_name": "Ring of Lightning Resistance +2",
+        "description": ""
+    },
+    "Accessory_WorkSpeed_1": {
+        "localized_name": "Pendant of Diligence",
+        "description": ""
+    },
+    "Accessory_WorkSpeed_2": {
+        "localized_name": "Pendant of Diligence +1",
+        "description": ""
+    },
+    "Accessory_WorkSpeed_3": {
+        "localized_name": "Pendant of Diligence +2",
+        "description": ""
+    },
+    "Accessory_WorkSpeed_4": {
+        "localized_name": "Pendant of Diligence +3",
+        "description": ""
+    },
+    "Accessory_defense_1": {
+        "localized_name": "Defense Pendant",
+        "description": ""
+    },
+    "Accessory_defense_2": {
+        "localized_name": "Defense Pendant +1",
+        "description": ""
+    },
+    "Accessory_defense_3": {
+        "localized_name": "Defense Pendant +2",
+        "description": ""
+    },
+    "AirGrapplingGun": {
+        "localized_name": "AirGrapplingGun",
+        "description": ""
+    },
+    "AncientParts2": {
+        "localized_name": "Ancient Civilization Core",
+        "description": ""
+    },
+    "AncientTechnologyBook_G1": {
+        "localized_name": "Ancient Technical Manual",
+        "description": ""
+    },
+    "AnimalSkin": {
+        "localized_name": "Animal Skin",
+        "description": ""
+    },
+    "AnimalSkin2": {
+        "localized_name": "AnimalSkin2",
+        "description": ""
+    },
+    "Antibiotic_Good": {
+        "localized_name": "Antibiotic_Good",
+        "description": ""
+    },
+    "Antibiotic_Normal": {
+        "localized_name": "Antibiotic_Normal",
+        "description": ""
+    },
+    "Antibiotic_Super": {
+        "localized_name": "Antibiotic_Super",
+        "description": ""
+    },
+    "Arrow": {
+        "localized_name": "Arrow",
+        "description": ""
+    },
+    "Arrow_Fire": {
+        "localized_name": "Fire Arrow",
+        "description": ""
+    },
+    "Arrow_Poison": {
+        "localized_name": "Poison Arrow",
+        "description": ""
+    },
+    "AssaultRifleBullet": {
+        "localized_name": "Assault Rifle Ammo",
+        "description": ""
+    },
+    "AssaultRifle_Default1": {
+        "localized_name": "Assault Rifle",
+        "description": "An Assault Rifle suited to long range combat. It excels at rapid-fire and is well suited to taking down powerful foes."
+    },
+    "AssaultRifle_Default2": {
+        "localized_name": "Assault Rifle +1",
+        "description": "An Assault Rifle suited to long range combat. It excels at rapid-fire and is well suited to taking down powerful foes."
+    },
+    "AssaultRifle_Default3": {
+        "localized_name": "Assault Rifle +2",
+        "description": "An Assault Rifle suited to long range combat. It excels at rapid-fire and is well suited to taking down powerful foes."
+    },
+    "AssaultRifle_Default4": {
+        "localized_name": "Assault Rifle +3",
+        "description": "An Assault Rifle suited to long range combat. It excels at rapid-fire and is well suited to taking down powerful foes."
+    },
+    "AssaultRifle_Default5": {
+        "localized_name": "Assault Rifle +4",
+        "description": "An Assault Rifle suited to long range combat. It excels at rapid-fire and is well suited to taking down powerful foes."
+    },
+    "AutoMealPouch_Tier1": {
+        "localized_name": "Small Feed Bag",
+        "description": ""
+    },
+    "AutoMealPouch_Tier2": {
+        "localized_name": "Average Feed Bag",
+        "description": ""
+    },
+    "AutoMealPouch_Tier3": {
+        "localized_name": "Large Feed Bag",
+        "description": ""
+    },
+    "AutoMealPouch_Tier4": {
+        "localized_name": "Huge Feed Bag",
+        "description": ""
+    },
+    "AutoMealPouch_Tier5": {
+        "localized_name": "Giant Feed Bag",
+        "description": ""
+    },
+    "Axe_Tier_00": {
+        "localized_name": "Stone Axe",
+        "description": ""
+    },
+    "Axe_Tier_01": {
+        "localized_name": "Metal Axe",
+        "description": ""
+    },
+    "Axe_Tier_02": {
+        "localized_name": "Refined Metal Axe",
+        "description": ""
+    },
+    "BLT": {
+        "localized_name": "Burrito",
+        "description": ""
+    },
+    "BaconEggs": {
+        "localized_name": "Rushoar Bacon 'n' Eggs",
+        "description": ""
+    },
+    "BakedMeat_BerryGoat": {
+        "localized_name": "Herb Roasted Caprity",
+        "description": ""
+    },
+    "BakedMeat_Boar": {
+        "localized_name": "Roast Rushoar",
+        "description": ""
+    },
+    "BakedMeat_ChickenPal": {
+        "localized_name": "Grilled Chikipi",
+        "description": ""
+    },
+    "BakedMeat_CowPal": {
+        "localized_name": "Mozzarina Steak",
+        "description": ""
+    },
+    "BakedMeat_Deer": {
+        "localized_name": "Roast Eikthyrdeer",
+        "description": ""
+    },
+    "BakedMeat_Eagle": {
+        "localized_name": "Grilled Galeclaw",
+        "description": ""
+    },
+    "BakedMeat_GrassMammoth": {
+        "localized_name": "Mammorest Steak",
+        "description": ""
+    },
+    "BakedMeat_IceDeer": {
+        "localized_name": "Roast Reindrix",
+        "description": ""
+    },
+    "BakedMeat_Kelpie": {
+        "localized_name": "Grilled Kelpsea",
+        "description": ""
+    },
+    "BakedMeat_LazyCatfish": {
+        "localized_name": "Broiled Dumud",
+        "description": ""
+    },
+    "BakedMeat_SakuraSaurus": {
+        "localized_name": "Broncherry Rib Roast",
+        "description": ""
+    },
+    "BakedMeat_SheepBall": {
+        "localized_name": "Lamball Kebab",
+        "description": ""
+    },
+    "BakedMushroom": {
+        "localized_name": "Baked Mushroom",
+        "description": ""
+    },
+    "Baked_Berries": {
+        "localized_name": "Baked Berries",
+        "description": ""
+    },
+    "Baked_Potato": {
+        "localized_name": "Baked_Potato",
+        "description": ""
+    },
+    "BaseCampBattleDirector": {
+        "localized_name": "BaseCampBattleDirector",
+        "description": ""
+    },
+    "BaseCampWorkHard": {
+        "localized_name": "BaseCampWorkHard",
+        "description": ""
+    },
+    "Bat": {
+        "localized_name": "Wooden Club",
+        "description": ""
+    },
+    "Bat2": {
+        "localized_name": "Bat",
+        "description": ""
+    },
+    "Beer": {
+        "localized_name": "Beer",
+        "description": ""
+    },
+    "Berries": {
+        "localized_name": "Red Berries",
+        "description": ""
+    },
+    "Berries2": {
+        "localized_name": "Berries2",
+        "description": ""
+    },
+    "BerrySeeds": {
+        "localized_name": "Berry Seeds",
+        "description": ""
+    },
+    "Blueprint_AssaultRifle_Default2": {
+        "localized_name": "Assault Rifle Schematic 1",
+        "description": ""
+    },
+    "Blueprint_AssaultRifle_Default3": {
+        "localized_name": "Assault Rifle Schematic 2",
+        "description": ""
+    },
+    "Blueprint_AssaultRifle_Default4": {
+        "localized_name": "Assault Rifle Schematic 3",
+        "description": ""
+    },
+    "Blueprint_AssaultRifle_Default5": {
+        "localized_name": "Assault Rifle Schematic 4",
+        "description": ""
+    },
+    "Blueprint_BowGun_2": {
+        "localized_name": "Crossbow Schematic 1",
+        "description": ""
+    },
+    "Blueprint_BowGun_3": {
+        "localized_name": "Crossbow Schematic 2",
+        "description": ""
+    },
+    "Blueprint_BowGun_4": {
+        "localized_name": "Crossbow Schematic 3",
+        "description": ""
+    },
+    "Blueprint_BowGun_5": {
+        "localized_name": "Crossbow Schematic 4",
+        "description": ""
+    },
+    "Blueprint_ClothArmorCold_2": {
+        "localized_name": "Tundra Outfit Schematic 1",
+        "description": ""
+    },
+    "Blueprint_ClothArmorCold_3": {
+        "localized_name": "Tundra Outfit Schematic 2",
+        "description": ""
+    },
+    "Blueprint_ClothArmorCold_4": {
+        "localized_name": "Tundra Outfit Schematic 3",
+        "description": ""
+    },
+    "Blueprint_ClothArmorCold_5": {
+        "localized_name": "Tundra Outfit Schematic 4",
+        "description": ""
+    },
+    "Blueprint_ClothArmorHeat_2": {
+        "localized_name": "Tropical Outfit Schematic 1",
+        "description": ""
+    },
+    "Blueprint_ClothArmorHeat_3": {
+        "localized_name": "Tropical Outfit Schematic 2",
+        "description": ""
+    },
+    "Blueprint_ClothArmorHeat_4": {
+        "localized_name": "Tropical Outfit Schematic 3",
+        "description": ""
+    },
+    "Blueprint_ClothArmorHeat_5": {
+        "localized_name": "Tropical Outfit Schematic 4",
+        "description": ""
+    },
+    "Blueprint_ClothArmor_2": {
+        "localized_name": "Cloth Outfit Schematic 1",
+        "description": ""
+    },
+    "Blueprint_ClothArmor_3": {
+        "localized_name": "Cloth Outfit Schematic 2",
+        "description": ""
+    },
+    "Blueprint_ClothArmor_4": {
+        "localized_name": "Cloth Outfit Schematic 3",
+        "description": ""
+    },
+    "Blueprint_ClothArmor_5": {
+        "localized_name": "Cloth Outfit Schematic 4",
+        "description": ""
+    },
+    "Blueprint_CopperArmorCold_2": {
+        "localized_name": "Cold Resistant Metal Armor Schematic 1",
+        "description": ""
+    },
+    "Blueprint_CopperArmorCold_3": {
+        "localized_name": "Cold Resistant Metal Armor Schematic 2",
+        "description": ""
+    },
+    "Blueprint_CopperArmorCold_4": {
+        "localized_name": "Cold Resistant Metal Armor Schematic 3",
+        "description": ""
+    },
+    "Blueprint_CopperArmorCold_5": {
+        "localized_name": "Cold Resistant Metal Armor Schematic 4",
+        "description": ""
+    },
+    "Blueprint_CopperArmorHeat_2": {
+        "localized_name": "Heat Resistant Metal Armor Schematic 1",
+        "description": ""
+    },
+    "Blueprint_CopperArmorHeat_3": {
+        "localized_name": "Heat Resistant Metal Armor Schematic 2",
+        "description": ""
+    },
+    "Blueprint_CopperArmorHeat_4": {
+        "localized_name": "Heat Resistant Metal Armor Schematic 3",
+        "description": ""
+    },
+    "Blueprint_CopperArmorHeat_5": {
+        "localized_name": "Heat Resistant Metal Armor Schematic 4",
+        "description": ""
+    },
+    "Blueprint_CopperArmor_2": {
+        "localized_name": "Metal Armor Schematic 1",
+        "description": ""
+    },
+    "Blueprint_CopperArmor_3": {
+        "localized_name": "Metal Armor Schematic 2",
+        "description": ""
+    },
+    "Blueprint_CopperArmor_4": {
+        "localized_name": "Metal Armor Schematic 3",
+        "description": ""
+    },
+    "Blueprint_CopperArmor_5": {
+        "localized_name": "Metal Armor Schematic 4",
+        "description": ""
+    },
+    "Blueprint_CopperHelmet_2": {
+        "localized_name": "Metal Helm Schematic 1",
+        "description": ""
+    },
+    "Blueprint_CopperHelmet_3": {
+        "localized_name": "Metal Helm Schematic 2",
+        "description": ""
+    },
+    "Blueprint_CopperHelmet_4": {
+        "localized_name": "Metal Helm Schematic 3",
+        "description": ""
+    },
+    "Blueprint_CopperHelmet_5": {
+        "localized_name": "Metal Helm Schematic 4",
+        "description": ""
+    },
+    "Blueprint_DoubleBarrelShotgun_2": {
+        "localized_name": "Double-barreled Shotgun Schematic 1",
+        "description": ""
+    },
+    "Blueprint_DoubleBarrelShotgun_3": {
+        "localized_name": "Double-barreled Shotgun Schematic 2",
+        "description": ""
+    },
+    "Blueprint_DoubleBarrelShotgun_4": {
+        "localized_name": "Double-barreled Shotgun Schematic 3",
+        "description": ""
+    },
+    "Blueprint_DoubleBarrelShotgun_5": {
+        "localized_name": "Double-barreled Shotgun Schematic 4",
+        "description": ""
+    },
+    "Blueprint_FlameThrower_2": {
+        "localized_name": "Blueprint_FlameThrower_2 +1",
+        "description": ""
+    },
+    "Blueprint_FurArmorCold_2": {
+        "localized_name": "Cold Resistant Pelt Armor Schematic 1",
+        "description": ""
+    },
+    "Blueprint_FurArmorCold_3": {
+        "localized_name": "Cold Resistant Pelt Armor Schematic 2",
+        "description": ""
+    },
+    "Blueprint_FurArmorCold_4": {
+        "localized_name": "Cold Resistant Pelt Armor Schematic 3",
+        "description": ""
+    },
+    "Blueprint_FurArmorCold_5": {
+        "localized_name": "Cold Resistant Pelt Armor Schematic 4",
+        "description": ""
+    },
+    "Blueprint_FurArmorHeat_2": {
+        "localized_name": "Heat Resistant Pelt Armor Schematic 1",
+        "description": ""
+    },
+    "Blueprint_FurArmorHeat_3": {
+        "localized_name": "Heat Resistant Pelt Armor Schematic 2",
+        "description": ""
+    },
+    "Blueprint_FurArmorHeat_4": {
+        "localized_name": "Heat Resistant Pelt Armor Schematic 3",
+        "description": ""
+    },
+    "Blueprint_FurArmorHeat_5": {
+        "localized_name": "Heat Resistant Pelt Armor Schematic 4",
+        "description": ""
+    },
+    "Blueprint_FurArmor_2": {
+        "localized_name": "Pelt Armor Schematic 1",
+        "description": ""
+    },
+    "Blueprint_FurArmor_3": {
+        "localized_name": "Pelt Armor Schematic 2",
+        "description": ""
+    },
+    "Blueprint_FurArmor_4": {
+        "localized_name": "Pelt Armor Schematic 3",
+        "description": ""
+    },
+    "Blueprint_FurArmor_5": {
+        "localized_name": "Pelt Armor Schematic 4",
+        "description": ""
+    },
+    "Blueprint_FurHelmet_2": {
+        "localized_name": "Feathered Hairband Schematic 1",
+        "description": ""
+    },
+    "Blueprint_FurHelmet_3": {
+        "localized_name": "Feathered Hairband Schematic 2",
+        "description": ""
+    },
+    "Blueprint_FurHelmet_4": {
+        "localized_name": "Feathered Hairband Schematic 3",
+        "description": ""
+    },
+    "Blueprint_FurHelmet_5": {
+        "localized_name": "Feathered Hairband Schematic 4",
+        "description": ""
+    },
+    "Blueprint_GatlingGun_2": {
+        "localized_name": "Gatling Gun Schematic +1",
+        "description": ""
+    },
+    "Blueprint_GatlingGun_3": {
+        "localized_name": "Gatling Gun Schematic +2",
+        "description": ""
+    },
+    "Blueprint_GatlingGun_4": {
+        "localized_name": "Gatling Gun Schematic +3",
+        "description": ""
+    },
+    "Blueprint_GatlingGun_5": {
+        "localized_name": "Gatling Gun Schematic +4",
+        "description": ""
+    },
+    "Blueprint_GrenadeLauncher_2": {
+        "localized_name": "Grenade Launcher Schematic +1",
+        "description": ""
+    },
+    "Blueprint_GrenadeLauncher_3": {
+        "localized_name": "Grenade Launcher Schematic +2",
+        "description": ""
+    },
+    "Blueprint_GrenadeLauncher_4": {
+        "localized_name": "Grenade Launcher Schematic +3",
+        "description": ""
+    },
+    "Blueprint_GrenadeLauncher_5": {
+        "localized_name": "Grenade Launcher Schematic +4",
+        "description": ""
+    },
+    "Blueprint_GuidedMissileLauncher_2": {
+        "localized_name": "Guided Missile Launcher Schematic +1",
+        "description": ""
+    },
+    "Blueprint_GuidedMissileLauncher_3": {
+        "localized_name": "Guided Missile Launcher Schematic +2",
+        "description": ""
+    },
+    "Blueprint_GuidedMissileLauncher_4": {
+        "localized_name": "Guided Missile Launcher Schematic +3",
+        "description": ""
+    },
+    "Blueprint_GuidedMissileLauncher_5": {
+        "localized_name": "Guided Missile Launcher Schematic +4",
+        "description": ""
+    },
+    "Blueprint_HandGun_Default_2": {
+        "localized_name": "Handgun Schematic 1",
+        "description": ""
+    },
+    "Blueprint_HandGun_Default_3": {
+        "localized_name": "Handgun Schematic 2",
+        "description": ""
+    },
+    "Blueprint_HandGun_Default_4": {
+        "localized_name": "Handgun Schematic 3",
+        "description": ""
+    },
+    "Blueprint_HandGun_Default_5": {
+        "localized_name": "Handgun Schematic 4",
+        "description": ""
+    },
+    "Blueprint_Head001_1": {
+        "localized_name": "Monarch's Crown Schematic 1",
+        "description": ""
+    },
+    "Blueprint_Head001_2": {
+        "localized_name": "Monarch's Crown Schematic 2",
+        "description": ""
+    },
+    "Blueprint_Head001_3": {
+        "localized_name": "Monarch's Crown Schematic 3",
+        "description": ""
+    },
+    "Blueprint_Head001_4": {
+        "localized_name": "Monarch's Crown Schematic 4",
+        "description": ""
+    },
+    "Blueprint_Head001_5": {
+        "localized_name": "Blueprint of the King's Crown 5",
+        "description": ""
+    },
+    "Blueprint_Head002_1": {
+        "localized_name": "Golden Crown Schematic 1",
+        "description": ""
+    },
+    "Blueprint_Head002_2": {
+        "localized_name": "Golden Crown Schematic 2",
+        "description": ""
+    },
+    "Blueprint_Head002_3": {
+        "localized_name": "Golden Crown Schematic 3",
+        "description": ""
+    },
+    "Blueprint_Head002_4": {
+        "localized_name": "Golden Crown Schematic 4",
+        "description": ""
+    },
+    "Blueprint_Head002_5": {
+        "localized_name": "Blueprint for Golden Crown 5",
+        "description": ""
+    },
+    "Blueprint_Head003_1": {
+        "localized_name": "Long-eared Headband Schematic 1",
+        "description": ""
+    },
+    "Blueprint_Head003_2": {
+        "localized_name": "Long-eared Headband Schematic 2",
+        "description": ""
+    },
+    "Blueprint_Head003_3": {
+        "localized_name": "Long-eared Headband Schematic 3",
+        "description": ""
+    },
+    "Blueprint_Head003_4": {
+        "localized_name": "Long-eared Headband Schematic 4",
+        "description": ""
+    },
+    "Blueprint_Head003_5": {
+        "localized_name": "5 Blueprints of Long-eared Headband",
+        "description": ""
+    },
+    "Blueprint_Head004_1": {
+        "localized_name": "Witch Hat Schematic 1",
+        "description": ""
+    },
+    "Blueprint_Head004_2": {
+        "localized_name": "Witch Hat Schematic 2",
+        "description": ""
+    },
+    "Blueprint_Head004_3": {
+        "localized_name": "Witch Hat Schematic 3",
+        "description": ""
+    },
+    "Blueprint_Head004_4": {
+        "localized_name": "Witch Hat Schematic 4",
+        "description": ""
+    },
+    "Blueprint_Head004_5": {
+        "localized_name": "Design of Witch Hat No. 5",
+        "description": ""
+    },
+    "Blueprint_Head005_1": {
+        "localized_name": "Soft Hat Schematic 1",
+        "description": ""
+    },
+    "Blueprint_Head005_2": {
+        "localized_name": "Soft Hat Schematic 2",
+        "description": ""
+    },
+    "Blueprint_Head005_3": {
+        "localized_name": "Soft Hat Schematic 3",
+        "description": ""
+    },
+    "Blueprint_Head005_4": {
+        "localized_name": "Soft Hat Schematic 4",
+        "description": ""
+    },
+    "Blueprint_Head005_5": {
+        "localized_name": "Blueprint of Soft Hat 5",
+        "description": ""
+    },
+    "Blueprint_Head006_1": {
+        "localized_name": "Helmet Schematic 1",
+        "description": ""
+    },
+    "Blueprint_Head006_2": {
+        "localized_name": "Helmet Schematic 2",
+        "description": ""
+    },
+    "Blueprint_Head006_3": {
+        "localized_name": "Helmet Schematic 3",
+        "description": ""
+    },
+    "Blueprint_Head006_4": {
+        "localized_name": "Helmet Schematic 4",
+        "description": ""
+    },
+    "Blueprint_Head006_5": {
+        "localized_name": "Blueprint of Helmet 5",
+        "description": ""
+    },
+    "Blueprint_Head007_1": {
+        "localized_name": "Silk Hat Schematic 1",
+        "description": ""
+    },
+    "Blueprint_Head007_2": {
+        "localized_name": "Silk Hat Schematic 2",
+        "description": ""
+    },
+    "Blueprint_Head007_3": {
+        "localized_name": "Silk Hat Schematic 3",
+        "description": ""
+    },
+    "Blueprint_Head007_4": {
+        "localized_name": "Silk Hat Schematic 4",
+        "description": ""
+    },
+    "Blueprint_Head007_5": {
+        "localized_name": "5 Schematic Diagrams of the Silk Hat",
+        "description": ""
+    },
+    "Blueprint_Head008_1": {
+        "localized_name": "Tricorne Schematic 1",
+        "description": ""
+    },
+    "Blueprint_Head008_2": {
+        "localized_name": "Tricorne Schematic 2",
+        "description": ""
+    },
+    "Blueprint_Head008_3": {
+        "localized_name": "Tricorne Schematic 3",
+        "description": ""
+    },
+    "Blueprint_Head008_4": {
+        "localized_name": "Tricorne Schematic 4",
+        "description": ""
+    },
+    "Blueprint_Head008_5": {
+        "localized_name": "Blueprint of the Tricorn Hat 5",
+        "description": ""
+    },
+    "Blueprint_Head009_1": {
+        "localized_name": "Exploration Cap Schematic 1",
+        "description": ""
+    },
+    "Blueprint_Head009_2": {
+        "localized_name": "Exploration Cap Schematic 2",
+        "description": ""
+    },
+    "Blueprint_Head009_3": {
+        "localized_name": "Exploration Cap Schematic 3",
+        "description": ""
+    },
+    "Blueprint_Head009_4": {
+        "localized_name": "Exploration Cap Schematic 4",
+        "description": ""
+    },
+    "Blueprint_Head009_5": {
+        "localized_name": "Blueprint of Exploration Hat 5",
+        "description": ""
+    },
+    "Blueprint_Head010_1": {
+        "localized_name": "Graduate Cap Schematic 1",
+        "description": ""
+    },
+    "Blueprint_Head010_2": {
+        "localized_name": "Graduate Cap Schematic 2",
+        "description": ""
+    },
+    "Blueprint_Head010_3": {
+        "localized_name": "Graduate Cap Schematic 3",
+        "description": ""
+    },
+    "Blueprint_Head010_4": {
+        "localized_name": "Graduate Cap Schematic 4",
+        "description": ""
+    },
+    "Blueprint_Head010_5": {
+        "localized_name": "Blueprint 5 of University Hat",
+        "description": ""
+    },
+    "Blueprint_Head011_1": {
+        "localized_name": "Farming Hat Schematic 1",
+        "description": ""
+    },
+    "Blueprint_Head011_2": {
+        "localized_name": "Farming Hat Schematic 2",
+        "description": ""
+    },
+    "Blueprint_Head011_3": {
+        "localized_name": "Farming Hat Schematic 3",
+        "description": ""
+    },
+    "Blueprint_Head011_4": {
+        "localized_name": "Farming Hat Schematic 4",
+        "description": ""
+    },
+    "Blueprint_Head011_5": {
+        "localized_name": "5 Diagrams of Agricultural Hat",
+        "description": ""
+    },
+    "Blueprint_Head012_1": {
+        "localized_name": "Bowler Hat Schematic 1",
+        "description": ""
+    },
+    "Blueprint_Head012_2": {
+        "localized_name": "Bowler Hat Schematic 2",
+        "description": ""
+    },
+    "Blueprint_Head012_3": {
+        "localized_name": "Bowler Hat Schematic 3",
+        "description": ""
+    },
+    "Blueprint_Head012_4": {
+        "localized_name": "Bowler Hat Schematic 4",
+        "description": ""
+    },
+    "Blueprint_Head012_5": {
+        "localized_name": "Blueprint of Bowler Hat 5",
+        "description": ""
+    },
+    "Blueprint_Head013_1": {
+        "localized_name": "Tocotoco Cap Schematic 1",
+        "description": ""
+    },
+    "Blueprint_Head013_2": {
+        "localized_name": "Tocotoco Cap Schematic 2",
+        "description": ""
+    },
+    "Blueprint_Head013_3": {
+        "localized_name": "Tocotoco Cap Schematic 3",
+        "description": ""
+    },
+    "Blueprint_Head013_4": {
+        "localized_name": "Tocotoco Cap Schematic 4",
+        "description": ""
+    },
+    "Blueprint_Head013_5": {
+        "localized_name": "Design Plan 5 for the Crutchli Hat",
+        "description": ""
+    },
+    "Blueprint_Head014_1": {
+        "localized_name": "Grinning Tocotoco Cap Schematic 1",
+        "description": ""
+    },
+    "Blueprint_Head014_2": {
+        "localized_name": "Grinning Tocotoco Cap Schematic 2",
+        "description": ""
+    },
+    "Blueprint_Head014_3": {
+        "localized_name": "Grinning Tocotoco Cap Schematic 3",
+        "description": ""
+    },
+    "Blueprint_Head014_4": {
+        "localized_name": "Grinning Tocotoco Cap Schematic 4",
+        "description": ""
+    },
+    "Blueprint_Head014_5": {
+        "localized_name": "Grinning Curly Hat Blueprint 5",
+        "description": ""
+    },
+    "Blueprint_Head015_1": {
+        "localized_name": "Gumoss Cap Schematic 1",
+        "description": ""
+    },
+    "Blueprint_Head015_2": {
+        "localized_name": "Gumoss Cap Schematic 2",
+        "description": ""
+    },
+    "Blueprint_Head015_3": {
+        "localized_name": "Gumoss Cap Schematic 3",
+        "description": ""
+    },
+    "Blueprint_Head015_4": {
+        "localized_name": "Gumoss Cap Schematic 4",
+        "description": ""
+    },
+    "Blueprint_Head015_5": {
+        "localized_name": "5 Blueprints of Naemochi Hat",
+        "description": ""
+    },
+    "Blueprint_Head016_1": {
+        "localized_name": "Penking Cap Schematic 1",
+        "description": ""
+    },
+    "Blueprint_Head016_2": {
+        "localized_name": "Penking Cap Schematic 2",
+        "description": ""
+    },
+    "Blueprint_Head016_3": {
+        "localized_name": "Penking Cap Schematic 3",
+        "description": ""
+    },
+    "Blueprint_Head016_4": {
+        "localized_name": "Penking Cap Schematic 4",
+        "description": ""
+    },
+    "Blueprint_Head016_5": {
+        "localized_name": "Blueprint of Capppen Hat 5",
+        "description": ""
+    },
+    "Blueprint_Head017_1": {
+        "localized_name": "Katress Cap Schematic 1",
+        "description": ""
+    },
+    "Blueprint_Head017_2": {
+        "localized_name": "Katress Cap Schematic 2",
+        "description": ""
+    },
+    "Blueprint_Head017_3": {
+        "localized_name": "Katress Cap Schematic 3",
+        "description": ""
+    },
+    "Blueprint_Head017_4": {
+        "localized_name": "Katress Cap Schematic 4",
+        "description": ""
+    },
+    "Blueprint_Head017_5": {
+        "localized_name": "Design Blueprint of Clemence Hat 5",
+        "description": ""
+    },
+    "Blueprint_IronArmorCold_2": {
+        "localized_name": "Cold Resistant Refined Metal Armor Schematic 1",
+        "description": ""
+    },
+    "Blueprint_IronArmorCold_3": {
+        "localized_name": "Cold Resistant Refined Metal Armor Schematic 2",
+        "description": ""
+    },
+    "Blueprint_IronArmorCold_4": {
+        "localized_name": "Cold Resistant Refined Metal Armor Schematic 3",
+        "description": ""
+    },
+    "Blueprint_IronArmorCold_5": {
+        "localized_name": "Cold Resistant Refined Metal Armor Schematic 4",
+        "description": ""
+    },
+    "Blueprint_IronArmorHeat_2": {
+        "localized_name": "Heat Resistant Refined Metal Armor Schematic 1",
+        "description": ""
+    },
+    "Blueprint_IronArmorHeat_3": {
+        "localized_name": "Heat Resistant Refined Metal Armor Schematic 2",
+        "description": ""
+    },
+    "Blueprint_IronArmorHeat_4": {
+        "localized_name": "Heat Resistant Refined Metal Armor Schematic 3",
+        "description": ""
+    },
+    "Blueprint_IronArmorHeat_5": {
+        "localized_name": "Heat Resistant Refined Metal Armor Schematic 4",
+        "description": ""
+    },
+    "Blueprint_IronArmor_2": {
+        "localized_name": "Refined Metal Armor Schematic 1",
+        "description": ""
+    },
+    "Blueprint_IronArmor_3": {
+        "localized_name": "Refined Metal Armor Schematic 2",
+        "description": ""
+    },
+    "Blueprint_IronArmor_4": {
+        "localized_name": "Refined Metal Armor Schematic 3",
+        "description": ""
+    },
+    "Blueprint_IronArmor_5": {
+        "localized_name": "Refined Metal Armor Schematic 4",
+        "description": ""
+    },
+    "Blueprint_IronHelmet_2": {
+        "localized_name": "Refined Metal Helm 1",
+        "description": ""
+    },
+    "Blueprint_IronHelmet_3": {
+        "localized_name": "Refined Metal Helm 2",
+        "description": ""
+    },
+    "Blueprint_IronHelmet_4": {
+        "localized_name": "Refined Metal Helm 3",
+        "description": ""
+    },
+    "Blueprint_IronHelmet_5": {
+        "localized_name": "Refined Metal Helm 4",
+        "description": ""
+    },
+    "Blueprint_LaserRifle_2": {
+        "localized_name": "Laser Rifle Schematic +1",
+        "description": ""
+    },
+    "Blueprint_LaserRifle_3": {
+        "localized_name": "Laser Rifle Schematic +2",
+        "description": ""
+    },
+    "Blueprint_LaserRifle_4": {
+        "localized_name": "Laser Rifle Schematic +3",
+        "description": ""
+    },
+    "Blueprint_LaserRifle_5": {
+        "localized_name": "Laser Rifle Schematic +4",
+        "description": ""
+    },
+    "Blueprint_Launcher_Default_2": {
+        "localized_name": "Rocket Launcher Schematic +1",
+        "description": ""
+    },
+    "Blueprint_Launcher_Default_3": {
+        "localized_name": "Rocket Launcher Schematic +2",
+        "description": ""
+    },
+    "Blueprint_Launcher_Default_4": {
+        "localized_name": "Rocket Launcher Schematic +3",
+        "description": ""
+    },
+    "Blueprint_Launcher_Default_5": {
+        "localized_name": "Rocket Launcher Schematic +4",
+        "description": ""
+    },
+    "Blueprint_MakeshiftHandgun_2": {
+        "localized_name": "Makeshift Handgun Schematic +1",
+        "description": ""
+    },
+    "Blueprint_MakeshiftHandgun_3": {
+        "localized_name": "Makeshift Handgun Schematic +2",
+        "description": ""
+    },
+    "Blueprint_Musket_2": {
+        "localized_name": "Musket Schematic +1",
+        "description": ""
+    },
+    "Blueprint_Musket_3": {
+        "localized_name": "Musket Schematic +2",
+        "description": ""
+    },
+    "Blueprint_Musket_4": {
+        "localized_name": "Musket Schematic +3",
+        "description": ""
+    },
+    "Blueprint_Musket_5": {
+        "localized_name": "Musket Schematic +4",
+        "description": ""
+    },
+    "Blueprint_PlasticArmorCold_2": {
+        "localized_name": "Cold Resistant Plasteel Armor Schematic +1",
+        "description": ""
+    },
+    "Blueprint_PlasticArmorCold_3": {
+        "localized_name": "Cold Resistant Plasteel Armor Schematic +2",
+        "description": ""
+    },
+    "Blueprint_PlasticArmorCold_4": {
+        "localized_name": "Cold Resistant Plasteel Armor Schematic +3",
+        "description": ""
+    },
+    "Blueprint_PlasticArmorCold_5": {
+        "localized_name": "Cold Resistant Plasteel Armor Schematic +4",
+        "description": ""
+    },
+    "Blueprint_PlasticArmorHeat_2": {
+        "localized_name": "Heat Resistant Plasteel Armor Schematic +1",
+        "description": ""
+    },
+    "Blueprint_PlasticArmorHeat_3": {
+        "localized_name": "Heat Resistant Plasteel Armor Schematic +2",
+        "description": ""
+    },
+    "Blueprint_PlasticArmorHeat_4": {
+        "localized_name": "Heat Resistant Plasteel Armor Schematic +3",
+        "description": ""
+    },
+    "Blueprint_PlasticArmorHeat_5": {
+        "localized_name": "Heat Resistant Plasteel Armor Schematic +4",
+        "description": ""
+    },
+    "Blueprint_PlasticArmorWeight_2": {
+        "localized_name": "Lightweight Plasteel Armor Schematic +1",
+        "description": ""
+    },
+    "Blueprint_PlasticArmorWeight_3": {
+        "localized_name": "Lightweight Plasteel Armor Schematic +2",
+        "description": ""
+    },
+    "Blueprint_PlasticArmorWeight_4": {
+        "localized_name": "Lightweight Plasteel Armor Schematic +3",
+        "description": ""
+    },
+    "Blueprint_PlasticArmorWeight_5": {
+        "localized_name": "Lightweight Plasteel Armor Schematic +4",
+        "description": ""
+    },
+    "Blueprint_PlasticArmor_2": {
+        "localized_name": "Plasteel Armor Schematic +1",
+        "description": ""
+    },
+    "Blueprint_PlasticArmor_3": {
+        "localized_name": "Plasteel Armor Schematic +2",
+        "description": ""
+    },
+    "Blueprint_PlasticArmor_4": {
+        "localized_name": "Plasteel Armor Schematic +3",
+        "description": ""
+    },
+    "Blueprint_PlasticArmor_5": {
+        "localized_name": "Plasteel Armor Schematic +4",
+        "description": ""
+    },
+    "Blueprint_PlasticHelmet_2": {
+        "localized_name": "Plasteel Helmet Schematic +1",
+        "description": ""
+    },
+    "Blueprint_PlasticHelmet_3": {
+        "localized_name": "Plasteel Helmet Schematic +2",
+        "description": ""
+    },
+    "Blueprint_PlasticHelmet_4": {
+        "localized_name": "Plasteel Helmet Schematic +3",
+        "description": ""
+    },
+    "Blueprint_PlasticHelmet_5": {
+        "localized_name": "Plasteel Helmet Schematic +4",
+        "description": ""
+    },
+    "Blueprint_PumpActionShotgun_2": {
+        "localized_name": "Pump-Action Shotgun Schematic 1",
+        "description": ""
+    },
+    "Blueprint_PumpActionShotgun_3": {
+        "localized_name": "Pump-Action Shotgun Schematic 2",
+        "description": ""
+    },
+    "Blueprint_PumpActionShotgun_4": {
+        "localized_name": "Pump-Action Shotgun Schematic 3",
+        "description": ""
+    },
+    "Blueprint_PumpActionShotgun_5": {
+        "localized_name": "Pump-Action Shotgun Schematic 4",
+        "description": ""
+    },
+    "Blueprint_SingleShotRifle_2": {
+        "localized_name": "Single-shot Rifle Schematic 1",
+        "description": ""
+    },
+    "Blueprint_SingleShotRifle_3": {
+        "localized_name": "Single-shot Rifle Schematic 2",
+        "description": ""
+    },
+    "Blueprint_SingleShotRifle_4": {
+        "localized_name": "Single-shot Rifle Schematic 3",
+        "description": ""
+    },
+    "Blueprint_SingleShotRifle_5": {
+        "localized_name": "Single-shot Rifle Schematic 4",
+        "description": ""
+    },
+    "Blueprint_StealArmorCold_2": {
+        "localized_name": "Cold Resistant Pal Metal Armor Schematic 1",
+        "description": ""
+    },
+    "Blueprint_StealArmorCold_3": {
+        "localized_name": "Cold Resistant Pal Metal Armor Schematic 2",
+        "description": ""
+    },
+    "Blueprint_StealArmorCold_4": {
+        "localized_name": "Cold Resistant Pal Metal Armor Schematic 3",
+        "description": ""
+    },
+    "Blueprint_StealArmorCold_5": {
+        "localized_name": "Cold Resistant Pal Metal Armor Schematic 4",
+        "description": ""
+    },
+    "Blueprint_StealArmorHeat_1": {
+        "localized_name": "Blueprint_StealArmorHeat_1",
+        "description": ""
+    },
+    "Blueprint_StealArmorHeat_2": {
+        "localized_name": "Heat Resistant Pal Metal Armor Schematic 1",
+        "description": ""
+    },
+    "Blueprint_StealArmorHeat_3": {
+        "localized_name": "Heat Resistant Pal Metal Armor Schematic 2",
+        "description": ""
+    },
+    "Blueprint_StealArmorHeat_4": {
+        "localized_name": "Heat Resistant Pal Metal Armor Schematic 3",
+        "description": ""
+    },
+    "Blueprint_StealArmorHeat_5": {
+        "localized_name": "Heat Resistant Pal Metal Armor Schematic 4",
+        "description": ""
+    },
+    "Blueprint_StealArmor_2": {
+        "localized_name": "Pal Metal Armor Schematic 1",
+        "description": ""
+    },
+    "Blueprint_StealArmor_3": {
+        "localized_name": "Pal Metal Armor Schematic 2",
+        "description": ""
+    },
+    "Blueprint_StealArmor_4": {
+        "localized_name": "Pal Metal Armor Schematic 3",
+        "description": ""
+    },
+    "Blueprint_StealArmor_5": {
+        "localized_name": "Pal Metal Armor Schematic 4",
+        "description": ""
+    },
+    "Blueprint_StealHelmet_2": {
+        "localized_name": "Pal Metal Helm Schematic 1",
+        "description": ""
+    },
+    "Blueprint_StealHelmet_3": {
+        "localized_name": "Pal Metal Helm Schematic 2",
+        "description": ""
+    },
+    "Blueprint_StealHelmet_4": {
+        "localized_name": "Pal Metal Helm Schematic 3",
+        "description": ""
+    },
+    "Blueprint_StealHelmet_5": {
+        "localized_name": "Pal Metal Helm Schematic 4",
+        "description": ""
+    },
+    "Blueprint_WeakerBow_2": {
+        "localized_name": "Old Bow Schematic 1",
+        "description": ""
+    },
+    "Blueprint_WeakerBow_3": {
+        "localized_name": "Old Bow Schematic 2",
+        "description": ""
+    },
+    "Blueprint_WeakerBow_4": {
+        "localized_name": "Old Bow Schematic 3",
+        "description": ""
+    },
+    "Blueprint_WeakerBow_5": {
+        "localized_name": "Old Bow Schematic 4",
+        "description": ""
+    },
+    "Bone": {
+        "localized_name": "Bone",
+        "description": ""
+    },
+    "BowGun": {
+        "localized_name": "Crossbow",
+        "description": "This can be used to fire Arrows effortlessly. Its power more than makes up for its slow reload time"
+    },
+    "BowGun_2": {
+        "localized_name": "Crossbow +1",
+        "description": "This can be used to fire Arrows effortlessly. Its power more than makes up for its slow reload time"
+    },
+    "BowGun_3": {
+        "localized_name": "Crossbow +2",
+        "description": "This can be used to fire Arrows effortlessly. Its power more than makes up for its slow reload time"
+    },
+    "BowGun_4": {
+        "localized_name": "Crossbow +3",
+        "description": "This can be used to fire Arrows effortlessly. Its power more than makes up for its slow reload time"
+    },
+    "BowGun_5": {
+        "localized_name": "Crossbow +4",
+        "description": "This can be used to fire Arrows effortlessly. Its power more than makes up for its slow reload time"
+    },
+    "BowGun_Fire": {
+        "localized_name": "Fire Arrow Crossbow",
+        "description": ""
+    },
+    "BowGun_Poison": {
+        "localized_name": "Poison Arrow Crossbow",
+        "description": ""
+    },
+    "Bow_Fifth": {
+        "localized_name": "Five Shot Bow",
+        "description": ""
+    },
+    "Bow_Fire": {
+        "localized_name": "Fire Bow",
+        "description": ""
+    },
+    "Bow_Poison": {
+        "localized_name": "Poison Bow",
+        "description": ""
+    },
+    "Bow_Triple": {
+        "localized_name": "Three Shot Bow",
+        "description": ""
+    },
+    "BreedFarm": {
+        "localized_name": "BreedFarm",
+        "description": ""
+    },
+    "BuildableGoddessStatue": {
+        "localized_name": "BuildableGoddessStatue",
+        "description": ""
+    },
+    "Cake": {
+        "localized_name": "Cake",
+        "description": ""
+    },
+    "CaptureRope": {
+        "localized_name": "CaptureRope",
+        "description": ""
+    },
+    "CarbonFiber": {
+        "localized_name": "Carbon Fiber",
+        "description": ""
+    },
+    "Carbonara": {
+        "localized_name": "Carbonara",
+        "description": ""
+    },
+    "CashFang": {
+        "localized_name": "CashFang",
+        "description": ""
+    },
+    "CashScales": {
+        "localized_name": "CashScales",
+        "description": ""
+    },
+    "Cauldron": {
+        "localized_name": "Cauldron",
+        "description": ""
+    },
+    "CaveMushroom": {
+        "localized_name": "Cavern Mushroom",
+        "description": ""
+    },
+    "CeilingLamp": {
+        "localized_name": "CeilingLamp",
+        "description": ""
+    },
+    "Cement": {
+        "localized_name": "Cement",
+        "description": ""
+    },
+    "Charcoal": {
+        "localized_name": "Charcoal",
+        "description": ""
+    },
+    "CheeseBurger": {
+        "localized_name": "Cheeseburger",
+        "description": ""
+    },
+    "Cheeseburger_2": {
+        "localized_name": "Mozzarina Cheeseburger",
+        "description": ""
+    },
+    "ChickenSaute": {
+        "localized_name": "Chikipi Saut\u00e9",
+        "description": ""
+    },
+    "Chowder": {
+        "localized_name": "Dumud Chowder",
+        "description": ""
+    },
+    "Claws": {
+        "localized_name": "Claw",
+        "description": ""
+    },
+    "Claws2": {
+        "localized_name": "Claws2",
+        "description": ""
+    },
+    "ClawsPendant": {
+        "localized_name": "ClawsPendant",
+        "description": ""
+    },
+    "Cloth": {
+        "localized_name": "Cloth",
+        "description": ""
+    },
+    "Cloth2": {
+        "localized_name": "High Quality Cloth",
+        "description": ""
+    },
+    "ClothArmor": {
+        "localized_name": "Cloth Outfit",
+        "description": ""
+    },
+    "ClothArmorCold": {
+        "localized_name": "Tundra Outfit",
+        "description": ""
+    },
+    "ClothArmorCold_2": {
+        "localized_name": "Tundra Outfit +1",
+        "description": ""
+    },
+    "ClothArmorCold_3": {
+        "localized_name": "Tundra Outfit +2",
+        "description": ""
+    },
+    "ClothArmorCold_4": {
+        "localized_name": "Tundra Outfit +3",
+        "description": ""
+    },
+    "ClothArmorCold_5": {
+        "localized_name": "Tundra Outfit +4",
+        "description": ""
+    },
+    "ClothArmorHeat": {
+        "localized_name": "Tropical Outfit",
+        "description": ""
+    },
+    "ClothArmorHeat_2": {
+        "localized_name": "Tropical Outfit +1",
+        "description": ""
+    },
+    "ClothArmorHeat_3": {
+        "localized_name": "Tropical Outfit +2",
+        "description": ""
+    },
+    "ClothArmorHeat_4": {
+        "localized_name": "Tropical Outfit +3",
+        "description": ""
+    },
+    "ClothArmorHeat_5": {
+        "localized_name": "Tropical Outfit +4",
+        "description": ""
+    },
+    "ClothArmor_2": {
+        "localized_name": "Cloth Outfit +1",
+        "description": ""
+    },
+    "ClothArmor_3": {
+        "localized_name": "Cloth Outfit +2",
+        "description": ""
+    },
+    "ClothArmor_4": {
+        "localized_name": "Cloth Outfit +3",
+        "description": ""
+    },
+    "ClothArmor_5": {
+        "localized_name": "Cloth Outfit +4",
+        "description": ""
+    },
+    "ClothHat": {
+        "localized_name": "ClothHat",
+        "description": ""
+    },
+    "Coal": {
+        "localized_name": "Coal",
+        "description": ""
+    },
+    "Computer": {
+        "localized_name": "Computer",
+        "description": ""
+    },
+    "Cooler": {
+        "localized_name": "Cooler",
+        "description": ""
+    },
+    "CoolerBox": {
+        "localized_name": "CoolerBox",
+        "description": ""
+    },
+    "CopperArmor": {
+        "localized_name": "Metal Armor",
+        "description": ""
+    },
+    "CopperArmorCold": {
+        "localized_name": "Cold Resistant Metal Armor",
+        "description": ""
+    },
+    "CopperArmorCold_2": {
+        "localized_name": "Cold Resistant Metal Armor +1",
+        "description": ""
+    },
+    "CopperArmorCold_3": {
+        "localized_name": "Cold Resistant Metal Armor +2",
+        "description": ""
+    },
+    "CopperArmorCold_4": {
+        "localized_name": "Cold Resistant Metal Armor +3",
+        "description": ""
+    },
+    "CopperArmorCold_5": {
+        "localized_name": "Cold Resistant Metal Armor +4",
+        "description": ""
+    },
+    "CopperArmorHeat": {
+        "localized_name": "Heat Resistant Metal Armor",
+        "description": ""
+    },
+    "CopperArmorHeat_2": {
+        "localized_name": "Heat Resistant Metal Armor +1",
+        "description": ""
+    },
+    "CopperArmorHeat_3": {
+        "localized_name": "Heat Resistant Metal Armor +2",
+        "description": ""
+    },
+    "CopperArmorHeat_4": {
+        "localized_name": "Heat Resistant Metal Armor +3",
+        "description": ""
+    },
+    "CopperArmorHeat_5": {
+        "localized_name": "Heat Resistant Metal Armor +4",
+        "description": ""
+    },
+    "CopperArmor_2": {
+        "localized_name": "Metal Armor +1",
+        "description": ""
+    },
+    "CopperArmor_3": {
+        "localized_name": "Metal Armor +2",
+        "description": ""
+    },
+    "CopperArmor_4": {
+        "localized_name": "Metal Armor +3",
+        "description": ""
+    },
+    "CopperArmor_5": {
+        "localized_name": "Metal Armor +4",
+        "description": ""
+    },
+    "CopperHelmet": {
+        "localized_name": "Metal Helm",
+        "description": ""
+    },
+    "CopperHelmet_2": {
+        "localized_name": "Metal Helm +1",
+        "description": ""
+    },
+    "CopperHelmet_3": {
+        "localized_name": "Metal Helm +2",
+        "description": ""
+    },
+    "CopperHelmet_4": {
+        "localized_name": "Metal Helm +3",
+        "description": ""
+    },
+    "CopperHelmet_5": {
+        "localized_name": "Metal Helm +4",
+        "description": ""
+    },
+    "CopperIngot": {
+        "localized_name": "Ingot",
+        "description": ""
+    },
+    "CopperOre": {
+        "localized_name": "Ore",
+        "description": ""
+    },
+    "Corn": {
+        "localized_name": "Corn",
+        "description": ""
+    },
+    "CornSoup": {
+        "localized_name": "Corn Soup",
+        "description": ""
+    },
+    "CrudeOil": {
+        "localized_name": "Crude Oil",
+        "description": ""
+    },
+    "Crusher": {
+        "localized_name": "Crusher",
+        "description": ""
+    },
+    "Curry": {
+        "localized_name": "Curry",
+        "description": ""
+    },
+    "DamagedScarecrow": {
+        "localized_name": "DamagedScarecrow",
+        "description": ""
+    },
+    "DecalGunSet": {
+        "localized_name": "DecalGunSet",
+        "description": ""
+    },
+    "DecalGun_1": {
+        "localized_name": "Decal Gun 1",
+        "description": ""
+    },
+    "DecalGun_2": {
+        "localized_name": "Decal Gun 2",
+        "description": ""
+    },
+    "DecalGun_3": {
+        "localized_name": "Decal Gun 3",
+        "description": ""
+    },
+    "DecalGun_4": {
+        "localized_name": "Decal Gun 4",
+        "description": ""
+    },
+    "DecalGun_5": {
+        "localized_name": "Decal Gun 5",
+        "description": ""
+    },
+    "DeerLocoMoco": {
+        "localized_name": "Eikthyrdeer Loco Moco",
+        "description": ""
+    },
+    "DeerStew": {
+        "localized_name": "Eikthyrdeer Stew",
+        "description": ""
+    },
+    "DefenseWait": {
+        "localized_name": "DefenseWait",
+        "description": ""
+    },
+    "DefenseWall": {
+        "localized_name": "DefenseWall",
+        "description": ""
+    },
+    "DefenseWall_Metal": {
+        "localized_name": "DefenseWall_Metal",
+        "description": ""
+    },
+    "DefenseWall_Wood": {
+        "localized_name": "DefenseWall_Wood",
+        "description": ""
+    },
+    "Diamond": {
+        "localized_name": "Diamond",
+        "description": ""
+    },
+    "DogCoin": {
+        "localized_name": "Dog Coin",
+        "description": ""
+    },
+    "DoubleBarrelShotgun": {
+        "localized_name": "Double Barrel Shotgun",
+        "description": ""
+    },
+    "DoubleBarrelShotgun_2": {
+        "localized_name": "Double-barreled Shotgun +1",
+        "description": ""
+    },
+    "DoubleBarrelShotgun_3": {
+        "localized_name": "Double-barreled Shotgun +2",
+        "description": ""
+    },
+    "DoubleBarrelShotgun_4": {
+        "localized_name": "Double-barreled Shotgun +3",
+        "description": ""
+    },
+    "DoubleBarrelShotgun_5": {
+        "localized_name": "Double-barreled Shotgun +4",
+        "description": ""
+    },
+    "Eaglestew": {
+        "localized_name": "Stewed Galeclaw",
+        "description": ""
+    },
+    "Eemerald": {
+        "localized_name": "Emerald",
+        "description": ""
+    },
+    "Egg": {
+        "localized_name": "Egg",
+        "description": ""
+    },
+    "ElecBaton": {
+        "localized_name": "Stun Baton",
+        "description": "A baton with electricity running through it. It can shock a Pal, stopping it in its tracks. Electrocuted Pals are easier to capture."
+    },
+    "ElectricCooler": {
+        "localized_name": "ElectricCooler",
+        "description": ""
+    },
+    "ElectricHeater": {
+        "localized_name": "ElectricHeater",
+        "description": ""
+    },
+    "ElectricOrgan": {
+        "localized_name": "Electric Organ",
+        "description": ""
+    },
+    "ElectronicCircuit": {
+        "localized_name": "ElectronicCircuit",
+        "description": ""
+    },
+    "Elixir_attack_02": {
+        "localized_name": "Might Elixir",
+        "description": "Extremely valuable elixir that permanently raises attack when consumed.\nIneffective when used by pals."
+    },
+    "Elixir_hp_02": {
+        "localized_name": "Vital Elixir",
+        "description": "Extremely valuable elixir that permanently raises health when consumed.\nIneffective when used by pals."
+    },
+    "Elixir_stamina_02": {
+        "localized_name": "Stamina Elixir",
+        "description": "Extremely valuable elixir that permanently raises stamina when consumed.\nIneffective when used by pals."
+    },
+    "Elixir_weight_02": {
+        "localized_name": "Burden Elixir",
+        "description": "Extremely valuable elixir that permanently raises carrying capacity when consumed.\nIneffective when used by pals."
+    },
+    "Elixir_workspeed_02": {
+        "localized_name": "Speed Elixir",
+        "description": "Extremely valuable elixir that permanently raises work speed when consumed.\nIneffective when used by pals."
+    },
+    "EnergyDrink": {
+        "localized_name": "EnergyDrink",
+        "description": ""
+    },
+    "ExpBoost_01": {
+        "localized_name": "Training Manual (S)",
+        "description": ""
+    },
+    "ExpBoost_02": {
+        "localized_name": "Training Manual (M)",
+        "description": ""
+    },
+    "ExpBoost_03": {
+        "localized_name": "Training Manual (L)",
+        "description": ""
+    },
+    "ExpBoost_04": {
+        "localized_name": "Training Manual (XL)",
+        "description": ""
+    },
+    "ExplosiveBullet": {
+        "localized_name": "Rocket Ammo",
+        "description": ""
+    },
+    "Fang": {
+        "localized_name": "Fang",
+        "description": ""
+    },
+    "Fang2": {
+        "localized_name": "Fang2",
+        "description": ""
+    },
+    "FangNecklace": {
+        "localized_name": "FangNecklace",
+        "description": ""
+    },
+    "FarmCrop_Tmp": {
+        "localized_name": "FarmCrop_Tmp",
+        "description": ""
+    },
+    "Fiber": {
+        "localized_name": "Fiber",
+        "description": ""
+    },
+    "FireOrgan": {
+        "localized_name": "Flame Organ",
+        "description": ""
+    },
+    "FishMeat": {
+        "localized_name": "FishMeat",
+        "description": ""
+    },
+    "FishMeat2": {
+        "localized_name": "FishMeat2",
+        "description": ""
+    },
+    "FishingRod_Good": {
+        "localized_name": "Fishing Rod_Good",
+        "description": ""
+    },
+    "FishingRod_Legendary": {
+        "localized_name": "Fishing Rod_Legendary",
+        "description": ""
+    },
+    "FishingRod_Old": {
+        "localized_name": "Fishing Rod_Old",
+        "description": ""
+    },
+    "FishingRod_Super": {
+        "localized_name": "Fishing Rod_Super",
+        "description": ""
+    },
+    "FlameThrower": {
+        "localized_name": "Flamethrower",
+        "description": ""
+    },
+    "FlameThrower_2": {
+        "localized_name": "Flamethrower +1",
+        "description": ""
+    },
+    "FlameThrower_3": {
+        "localized_name": "Flamethrower +2",
+        "description": ""
+    },
+    "FlameThrower_4": {
+        "localized_name": "Flamethrower +3",
+        "description": ""
+    },
+    "FlameThrower_5": {
+        "localized_name": "Flamethrower +4",
+        "description": ""
+    },
+    "FlamethrowerBullet": {
+        "localized_name": "Flamethrower Fuel",
+        "description": ""
+    },
+    "Flint": {
+        "localized_name": "Flint",
+        "description": ""
+    },
+    "Flour": {
+        "localized_name": "Flour",
+        "description": ""
+    },
+    "FlourMill": {
+        "localized_name": "FlourMill",
+        "description": ""
+    },
+    "FlowerBed": {
+        "localized_name": "FlowerBed",
+        "description": ""
+    },
+    "Fountain": {
+        "localized_name": "Fountain",
+        "description": ""
+    },
+    "FragGrenade": {
+        "localized_name": "Frag Grenade",
+        "description": ""
+    },
+    "FragGrenade_Elec": {
+        "localized_name": "Shock Grenade",
+        "description": ""
+    },
+    "FragGrenade_Fire": {
+        "localized_name": "Incendiary Grenade",
+        "description": ""
+    },
+    "FragGrenade_Ice": {
+        "localized_name": "Ice Grenade",
+        "description": ""
+    },
+    "FriedChicken": {
+        "localized_name": "Fried Chikipi",
+        "description": ""
+    },
+    "FriedEggs": {
+        "localized_name": "Fried Egg",
+        "description": ""
+    },
+    "FriedKelpie": {
+        "localized_name": "Fried Kelpsea",
+        "description": ""
+    },
+    "FriedVegetables": {
+        "localized_name": "Stir-fried Veggies",
+        "description": ""
+    },
+    "Fruit__defense_01": {
+        "localized_name": "Stout Fruit",
+        "description": "Precious fruit that is extremely difficult to obtain.\nSlightly increases a Pal's defense."
+    },
+    "Fruit_attack_01": {
+        "localized_name": "Power Fruit",
+        "description": "Precious fruit that is extremely difficult to obtain.\nSlightly increases a Pal's attack."
+    },
+    "Fruit_hp_01": {
+        "localized_name": "Life Fruit",
+        "description": "Precious fruit that is extremely difficult to obtain.\nSlightly increases a Pal's health."
+    },
+    "FurArmor": {
+        "localized_name": "Pelt Armor",
+        "description": ""
+    },
+    "FurArmorCold": {
+        "localized_name": "Cold Resistant Pelt Armor",
+        "description": ""
+    },
+    "FurArmorCold_2": {
+        "localized_name": "Cold Resistant Pelt Armor +1",
+        "description": ""
+    },
+    "FurArmorCold_3": {
+        "localized_name": "Cold Resistant Pelt Armor +2",
+        "description": ""
+    },
+    "FurArmorCold_4": {
+        "localized_name": "Cold Resistant Pelt Armor +3",
+        "description": ""
+    },
+    "FurArmorCold_5": {
+        "localized_name": "Cold Resistant Pelt Armor +4",
+        "description": ""
+    },
+    "FurArmorHeat": {
+        "localized_name": "Heat Resistant Pelt Armor",
+        "description": ""
+    },
+    "FurArmorHeat_2": {
+        "localized_name": "Heat Resistant Pelt Armor +1",
+        "description": ""
+    },
+    "FurArmorHeat_3": {
+        "localized_name": "Heat Resistant Pelt Armor +2",
+        "description": ""
+    },
+    "FurArmorHeat_4": {
+        "localized_name": "Heat Resistant Pelt Armor +3",
+        "description": ""
+    },
+    "FurArmorHeat_5": {
+        "localized_name": "Heat Resistant Pelt Armor +4",
+        "description": ""
+    },
+    "FurArmor_2": {
+        "localized_name": "Pelt Armor +1",
+        "description": ""
+    },
+    "FurArmor_3": {
+        "localized_name": "Pelt Armor +2",
+        "description": ""
+    },
+    "FurArmor_4": {
+        "localized_name": "Pelt Armor +3",
+        "description": ""
+    },
+    "FurArmor_5": {
+        "localized_name": "Pelt Armor +4",
+        "description": ""
+    },
+    "FurHelmet": {
+        "localized_name": "Feathered Hair Band",
+        "description": ""
+    },
+    "FurHelmet_2": {
+        "localized_name": "Feathered Hair Band +1",
+        "description": ""
+    },
+    "FurHelmet_3": {
+        "localized_name": "Feathered Hair Band +2",
+        "description": ""
+    },
+    "FurHelmet_4": {
+        "localized_name": "Feathered Hair Band +3",
+        "description": ""
+    },
+    "FurHelmet_5": {
+        "localized_name": "Feathered Hair Band +4",
+        "description": ""
+    },
+    "FurnitureSet_1": {
+        "localized_name": "FurnitureSet_1",
+        "description": ""
+    },
+    "FurnitureSet_10": {
+        "localized_name": "FurnitureSet_10",
+        "description": ""
+    },
+    "FurnitureSet_11": {
+        "localized_name": "FurnitureSet_11",
+        "description": ""
+    },
+    "FurnitureSet_12": {
+        "localized_name": "FurnitureSet_12",
+        "description": ""
+    },
+    "FurnitureSet_13": {
+        "localized_name": "FurnitureSet_13",
+        "description": ""
+    },
+    "FurnitureSet_14": {
+        "localized_name": "FurnitureSet_14",
+        "description": ""
+    },
+    "FurnitureSet_15": {
+        "localized_name": "FurnitureSet_15",
+        "description": ""
+    },
+    "FurnitureSet_16": {
+        "localized_name": "FurnitureSet_16",
+        "description": ""
+    },
+    "FurnitureSet_17": {
+        "localized_name": "FurnitureSet_17",
+        "description": ""
+    },
+    "FurnitureSet_18": {
+        "localized_name": "FurnitureSet_18",
+        "description": ""
+    },
+    "FurnitureSet_19": {
+        "localized_name": "FurnitureSet_19",
+        "description": ""
+    },
+    "FurnitureSet_2": {
+        "localized_name": "FurnitureSet_2 +1",
+        "description": ""
+    },
+    "FurnitureSet_20": {
+        "localized_name": "FurnitureSet_20",
+        "description": ""
+    },
+    "FurnitureSet_21": {
+        "localized_name": "FurnitureSet_21",
+        "description": ""
+    },
+    "FurnitureSet_22": {
+        "localized_name": "FurnitureSet_22",
+        "description": ""
+    },
+    "FurnitureSet_23": {
+        "localized_name": "FurnitureSet_23",
+        "description": ""
+    },
+    "FurnitureSet_24": {
+        "localized_name": "FurnitureSet_24",
+        "description": ""
+    },
+    "FurnitureSet_25": {
+        "localized_name": "FurnitureSet_25",
+        "description": ""
+    },
+    "FurnitureSet_26": {
+        "localized_name": "FurnitureSet_26",
+        "description": ""
+    },
+    "FurnitureSet_27": {
+        "localized_name": "FurnitureSet_27",
+        "description": ""
+    },
+    "FurnitureSet_28": {
+        "localized_name": "FurnitureSet_28",
+        "description": ""
+    },
+    "FurnitureSet_29": {
+        "localized_name": "FurnitureSet_29",
+        "description": ""
+    },
+    "FurnitureSet_3": {
+        "localized_name": "FurnitureSet_3 +2",
+        "description": ""
+    },
+    "FurnitureSet_30": {
+        "localized_name": "FurnitureSet_30",
+        "description": ""
+    },
+    "FurnitureSet_31": {
+        "localized_name": "FurnitureSet_31",
+        "description": ""
+    },
+    "FurnitureSet_32": {
+        "localized_name": "FurnitureSet_32",
+        "description": ""
+    },
+    "FurnitureSet_4": {
+        "localized_name": "FurnitureSet_4 +3",
+        "description": ""
+    },
+    "FurnitureSet_5": {
+        "localized_name": "FurnitureSet_5",
+        "description": ""
+    },
+    "FurnitureSet_6": {
+        "localized_name": "FurnitureSet_6",
+        "description": ""
+    },
+    "FurnitureSet_7": {
+        "localized_name": "FurnitureSet_7",
+        "description": ""
+    },
+    "FurnitureSet_8": {
+        "localized_name": "FurnitureSet_8",
+        "description": ""
+    },
+    "FurnitureSet_9": {
+        "localized_name": "FurnitureSet_9",
+        "description": ""
+    },
+    "GasMask": {
+        "localized_name": "Gas Mask",
+        "description": ""
+    },
+    "GatlingBullet": {
+        "localized_name": "Gatling Ammo",
+        "description": ""
+    },
+    "GatlingGun": {
+        "localized_name": "Gatling Gun",
+        "description": ""
+    },
+    "GatlingGun_2": {
+        "localized_name": "Gatling Gun +1",
+        "description": ""
+    },
+    "GatlingGun_3": {
+        "localized_name": "Gatling Gun +2",
+        "description": ""
+    },
+    "GatlingGun_4": {
+        "localized_name": "Gatling Gun +3",
+        "description": ""
+    },
+    "GatlingGun_5": {
+        "localized_name": "Gatling Gun +4",
+        "description": ""
+    },
+    "GenghisKhan": {
+        "localized_name": "Grilled Lamball",
+        "description": ""
+    },
+    "Glider_Good": {
+        "localized_name": "Mega Glider",
+        "description": ""
+    },
+    "Glider_Legendary": {
+        "localized_name": "Hyper Glider",
+        "description": ""
+    },
+    "Glider_Old": {
+        "localized_name": "Normal Parachute",
+        "description": ""
+    },
+    "Glider_Super": {
+        "localized_name": "Giga Glider",
+        "description": ""
+    },
+    "Glider_Tera": {
+        "localized_name": "Hyper Glider",
+        "description": ""
+    },
+    "Grape": {
+        "localized_name": "Grape",
+        "description": ""
+    },
+    "GrapplingGun": {
+        "localized_name": "Grappling Gun",
+        "description": "Range 5 foundations"
+    },
+    "GrapplingGun2": {
+        "localized_name": "Mega Grappling Gun",
+        "description": "Range 6 foundations"
+    },
+    "GrapplingGun3": {
+        "localized_name": "Giga Grappling Gun",
+        "description": "Range 6.8 foundations"
+    },
+    "GrapplingGun4": {
+        "localized_name": "Hyper Grappling Gun",
+        "description": "Range 7.5 foundations"
+    },
+    "GrenadeBullet": {
+        "localized_name": "Grenade Ammo",
+        "description": ""
+    },
+    "GrenadeLauncher": {
+        "localized_name": "Grenade Launcher",
+        "description": ""
+    },
+    "GrenadeLauncher_2": {
+        "localized_name": "Grenade Launcher +1",
+        "description": ""
+    },
+    "GrenadeLauncher_3": {
+        "localized_name": "Grenade Launcher +2",
+        "description": ""
+    },
+    "GrenadeLauncher_4": {
+        "localized_name": "Grenade Launcher +3",
+        "description": ""
+    },
+    "GrenadeLauncher_5": {
+        "localized_name": "Grenade Launcher +4",
+        "description": ""
+    },
+    "GrilledFish": {
+        "localized_name": "Grilled Fish",
+        "description": ""
+    },
+    "GrilledMeat": {
+        "localized_name": "Grilled Meat",
+        "description": ""
+    },
+    "GrilledSheepHerbs": {
+        "localized_name": "Herb Roasted Lamball",
+        "description": ""
+    },
+    "GuidedMissileLauncher": {
+        "localized_name": "Guided Missile Launcher",
+        "description": ""
+    },
+    "GuidedMissileLauncher_2": {
+        "localized_name": "Guided Missile Launcher +1",
+        "description": ""
+    },
+    "GuidedMissileLauncher_3": {
+        "localized_name": "Guided Missile Launcher +2",
+        "description": ""
+    },
+    "GuidedMissileLauncher_4": {
+        "localized_name": "Guided Missile Launcher +3",
+        "description": ""
+    },
+    "GuidedMissileLauncher_5": {
+        "localized_name": "Guided Missile Launcher +4",
+        "description": ""
+    },
+    "GunPowder2": {
+        "localized_name": "Gunpowder",
+        "description": ""
+    },
+    "Gunpowder": {
+        "localized_name": "Gunpowder",
+        "description": ""
+    },
+    "Gunpowder2": {
+        "localized_name": "Gunpowder",
+        "description": ""
+    },
+    "GYM_Head_Grass": {
+        "localized_name": "Zoe hat",
+        "description": ""
+    },
+    "GYM_Head_Sakurajima": {
+        "localized_name": "Saya Hat",
+        "description": ""
+    },
+    "GYM_Head_Desert": {
+        "localized_name": "Marcus Hat",
+        "description": ""
+    },
+    "GYM_Head_Snow": {
+        "localized_name": "Victor Hat",
+        "description": ""
+    },
+    "Hamburger": {
+        "localized_name": "Hamburger",
+        "description": ""
+    },
+    "GYM_Head_Forest": {
+        "localized_name": "Lily Hat",
+        "description": ""
+    },
+    "GYM_Head_Electric": {
+        "localized_name": "Axel Hat",
+        "description": ""
+    },
+    "Hamburger_2": {
+        "localized_name": "Mozzarina Hamburger",
+        "description": ""
+    },
+    "HandGun_Default": {
+        "localized_name": "Handgun",
+        "description": "Pistol with improved capacity and rapid-fire capabilities. Has more immediate fire power than a Makeshift Handgun."
+    },
+    "HandGun_Default_2": {
+        "localized_name": "Handgun +1",
+        "description": "Pistol with improved capacity and rapid-fire capabilities. Has more immediate fire power than a Makeshift Handgun."
+    },
+    "HandGun_Default_3": {
+        "localized_name": "Handgun +2",
+        "description": "Pistol with improved capacity and rapid-fire capabilities. Has more immediate fire power than a Makeshift Handgun."
+    },
+    "HandGun_Default_4": {
+        "localized_name": "Handgun +3",
+        "description": "Pistol with improved capacity and rapid-fire capabilities. Has more immediate fire power than a Makeshift Handgun."
+    },
+    "HandGun_Default_5": {
+        "localized_name": "Handgun +4",
+        "description": "Pistol with improved capacity and rapid-fire capabilities. Has more immediate fire power than a Makeshift Handgun."
+    },
+    "HandTorch": {
+        "localized_name": "HandTorch",
+        "description": ""
+    },
+    "HandgunBullet": {
+        "localized_name": "Handgun Ammo",
+        "description": ""
+    },
+    "Head001": {
+        "localized_name": "Monarch's Crown",
+        "description": ""
+    },
+    "Head001_2": {
+        "localized_name": "Monarch's Crown +1",
+        "description": ""
+    },
+    "Head001_3": {
+        "localized_name": "Monarch's Crown +2",
+        "description": ""
+    },
+    "Head001_4": {
+        "localized_name": "Monarch's Crown +3",
+        "description": ""
+    },
+    "Head001_5": {
+        "localized_name": "Monarch's Crown +4",
+        "description": ""
+    },
+    "Head002": {
+        "localized_name": "Golden Crown",
+        "description": ""
+    },
+    "Head002_2": {
+        "localized_name": "Golden Crown +1",
+        "description": ""
+    },
+    "Head002_3": {
+        "localized_name": "Golden Crown +2",
+        "description": ""
+    },
+    "Head002_4": {
+        "localized_name": "Golden Crown +3",
+        "description": ""
+    },
+    "Head002_5": {
+        "localized_name": "Golden Crown +4",
+        "description": ""
+    },
+    "Head003": {
+        "localized_name": "Long-eared Headband",
+        "description": ""
+    },
+    "Head003_2": {
+        "localized_name": "Long-eared Headband +1",
+        "description": ""
+    },
+    "Head003_3": {
+        "localized_name": "Long-eared Headband +2",
+        "description": ""
+    },
+    "Head003_4": {
+        "localized_name": "Long-eared Headband +3",
+        "description": ""
+    },
+    "Head003_5": {
+        "localized_name": "Long-eared Headband +4",
+        "description": ""
+    },
+    "Head004": {
+        "localized_name": "Witch Hat",
+        "description": ""
+    },
+    "Head004_2": {
+        "localized_name": "Witch Hat +1",
+        "description": ""
+    },
+    "Head004_3": {
+        "localized_name": "Witch Hat +2",
+        "description": ""
+    },
+    "Head004_4": {
+        "localized_name": "Witch Hat +3",
+        "description": ""
+    },
+    "Head004_5": {
+        "localized_name": "Witch Hat +4",
+        "description": ""
+    },
+    "Head005": {
+        "localized_name": "Soft Hat",
+        "description": ""
+    },
+    "Head005_2": {
+        "localized_name": "Soft Hat +1",
+        "description": ""
+    },
+    "Head005_3": {
+        "localized_name": "Soft Hat +2",
+        "description": ""
+    },
+    "Head005_4": {
+        "localized_name": "Soft Hat +3",
+        "description": ""
+    },
+    "Head005_5": {
+        "localized_name": "Soft Hat +4",
+        "description": ""
+    },
+    "Head006": {
+        "localized_name": "Helmet",
+        "description": ""
+    },
+    "Head006_2": {
+        "localized_name": "Helmet +1",
+        "description": ""
+    },
+    "Head006_3": {
+        "localized_name": "Helmet +2",
+        "description": ""
+    },
+    "Head006_4": {
+        "localized_name": "Helmet +3",
+        "description": ""
+    },
+    "Head006_5": {
+        "localized_name": "Helmet +4",
+        "description": ""
+    },
+    "Head007": {
+        "localized_name": "Silk Hat",
+        "description": ""
+    },
+    "Head007_2": {
+        "localized_name": "Silk Hat +1",
+        "description": ""
+    },
+    "Head007_3": {
+        "localized_name": "Silk Hat +2",
+        "description": ""
+    },
+    "Head007_4": {
+        "localized_name": "Silk Hat +3",
+        "description": ""
+    },
+    "Head007_5": {
+        "localized_name": "Silk Hat +4",
+        "description": ""
+    },
+    "Head008": {
+        "localized_name": "Tricorne",
+        "description": ""
+    },
+    "Head008_2": {
+        "localized_name": "Tricorne +1",
+        "description": ""
+    },
+    "Head008_3": {
+        "localized_name": "Tricorne +2",
+        "description": ""
+    },
+    "Head008_4": {
+        "localized_name": "Tricorne +3",
+        "description": ""
+    },
+    "Head008_5": {
+        "localized_name": "Tricorne +4",
+        "description": ""
+    },
+    "Head009": {
+        "localized_name": "Explorer Cap",
+        "description": ""
+    },
+    "Head009_2": {
+        "localized_name": "Explorer Cap +1",
+        "description": ""
+    },
+    "Head009_3": {
+        "localized_name": "Explorer Cap +2",
+        "description": ""
+    },
+    "Head009_4": {
+        "localized_name": "Explorer Cap +3",
+        "description": ""
+    },
+    "Head009_5": {
+        "localized_name": "Explorer Cap +4",
+        "description": ""
+    },
+    "Head010": {
+        "localized_name": "Graduation cap",
+        "description": ""
+    },
+    "Head010_2": {
+        "localized_name": "Graduation cap +1",
+        "description": ""
+    },
+    "Head010_3": {
+        "localized_name": "Graduation cap +2",
+        "description": ""
+    },
+    "Head010_4": {
+        "localized_name": "Graduation cap +3",
+        "description": ""
+    },
+    "Head010_5": {
+        "localized_name": "Graduation cap +4",
+        "description": ""
+    },
+    "Head011": {
+        "localized_name": "Farming Hat",
+        "description": ""
+    },
+    "Head011_2": {
+        "localized_name": "Farming Hat +1",
+        "description": ""
+    },
+    "Head011_3": {
+        "localized_name": "Farming Hat +2",
+        "description": ""
+    },
+    "Head011_4": {
+        "localized_name": "Farming Hat +3",
+        "description": ""
+    },
+    "Head011_5": {
+        "localized_name": "Farming Hat +4",
+        "description": ""
+    },
+    "Head012": {
+        "localized_name": "Bowler Hat",
+        "description": ""
+    },
+    "Head012_2": {
+        "localized_name": "Bowler Hat +1",
+        "description": ""
+    },
+    "Head012_3": {
+        "localized_name": "Bowler Hat +2",
+        "description": ""
+    },
+    "Head012_4": {
+        "localized_name": "Bowler Hat +3",
+        "description": ""
+    },
+    "Head012_5": {
+        "localized_name": "Bowler Hat +4",
+        "description": ""
+    },
+    "Head013": {
+        "localized_name": "Tocotoco Cap",
+        "description": ""
+    },
+    "Head013_2": {
+        "localized_name": "Tocotoco Cap +1",
+        "description": ""
+    },
+    "Head013_3": {
+        "localized_name": "Tocotoco Cap +2",
+        "description": ""
+    },
+    "Head013_4": {
+        "localized_name": "Tocotoco Cap +3",
+        "description": ""
+    },
+    "Head013_5": {
+        "localized_name": "Tocotoco Cap +4",
+        "description": ""
+    },
+    "Head014": {
+        "localized_name": "Grinning Tocotoco Cap",
+        "description": ""
+    },
+    "Head014_2": {
+        "localized_name": "Grinning Tocotoco Cap +1",
+        "description": ""
+    },
+    "Head014_3": {
+        "localized_name": "Grinning Tocotoco Cap +2",
+        "description": ""
+    },
+    "Head014_4": {
+        "localized_name": "Grinning Tocotoco Cap +3",
+        "description": ""
+    },
+    "Head014_5": {
+        "localized_name": "Grinning Tocotoco Cap +4",
+        "description": ""
+    },
+    "Head015": {
+        "localized_name": "Gumoss Cap",
+        "description": ""
+    },
+    "Head015_2": {
+        "localized_name": "Gumoss Cap +1",
+        "description": ""
+    },
+    "Head015_3": {
+        "localized_name": "Gumoss Cap +2",
+        "description": ""
+    },
+    "Head015_4": {
+        "localized_name": "Gumoss Cap +3",
+        "description": ""
+    },
+    "Head015_5": {
+        "localized_name": "Gumoss Cap +4",
+        "description": ""
+    },
+    "Head016": {
+        "localized_name": "Penking Cap",
+        "description": ""
+    },
+    "Head016_2": {
+        "localized_name": "Penking Cap +1",
+        "description": ""
+    },
+    "Head016_3": {
+        "localized_name": "Penking Cap +2",
+        "description": ""
+    },
+    "Head016_4": {
+        "localized_name": "Penking Cap +3",
+        "description": ""
+    },
+    "Head016_5": {
+        "localized_name": "Penking Cap +4",
+        "description": ""
+    },
+    "Head017": {
+        "localized_name": "Katress Cap",
+        "description": ""
+    },
+    "Head017_2": {
+        "localized_name": "Katress Cap +1",
+        "description": ""
+    },
+    "Head017_3": {
+        "localized_name": "Katress Cap +2",
+        "description": ""
+    },
+    "Head017_4": {
+        "localized_name": "Katress Cap +3",
+        "description": ""
+    },
+    "Head017_5": {
+        "localized_name": "Katress Cap +4",
+        "description": ""
+    },
+    "HeadEquip001_purple": {
+        "localized_name": "Witch's Crown (Ultra)",
+        "description": ""
+    },
+    "HeadEquip023": {
+        "localized_name": "Lyleen Floral Cap",
+        "description": ""
+    },
+    "HeadEquip024": {
+        "localized_name": "Sibelyx Hat",
+        "description": ""
+    },
+    "HeadEquip025": {
+        "localized_name": "Leezpunk Hood",
+        "description": ""
+    },
+    "HeadEquip026": {
+        "localized_name": "Killamari Cap",
+        "description": ""
+    },
+    "HeadEquip027": {
+        "localized_name": "Cawgnito Hat",
+        "description": ""
+    },
+    "HeadEquip028": {
+        "localized_name": "Ribbunny Headband",
+        "description": ""
+    },
+    "HeadEquip029": {
+        "localized_name": "Lamball Helm",
+        "description": ""
+    },
+    "HeadEquip030": {
+        "localized_name": "Dumud Helm",
+        "description": ""
+    },
+    "HeadEquip031": {
+        "localized_name": "Swee Cap",
+        "description": ""
+    },
+    "HeadEquip032": {
+        "localized_name": "Dazzi Hat",
+        "description": ""
+    },
+    "HeadEquip033": {
+        "localized_name": "Cattiva Hat",
+        "description": ""
+    },
+    "HeadEquip041": {
+        "localized_name": "Horns of Supremacy",
+        "description": ""
+    },
+    "Heater": {
+        "localized_name": "Heater",
+        "description": ""
+    },
+    "Herbs": {
+        "localized_name": "Low Grade Medical Supplies",
+        "description": "Low grade medical supplies good for colds and sprains. The don't heal health when eaten, however."
+    },
+    "Homeward": {
+        "localized_name": "Homeward Thundercloud",
+        "description": ""
+    },
+    "HomingSphereLauncher": {
+        "localized_name": "Homing Sphere Launcher",
+        "description": ""
+    },
+    "Honey": {
+        "localized_name": "Honey",
+        "description": ""
+    },
+    "Hop": {
+        "localized_name": "Hop",
+        "description": ""
+    },
+    "Horn": {
+        "localized_name": "Horn",
+        "description": ""
+    },
+    "HotDog": {
+        "localized_name": "Hot Dog",
+        "description": ""
+    },
+    "HotDog_2": {
+        "localized_name": "Rushoar Hot Dog",
+        "description": ""
+    },
+    "HotMilk": {
+        "localized_name": "Hot Milk",
+        "description": ""
+    },
+    "IceOrgan": {
+        "localized_name": "Ice Organ",
+        "description": ""
+    },
+    "Infra_ElectricGenerator_Grade_01": {
+        "localized_name": "Infra_ElectricGenerator_Grade_01",
+        "description": ""
+    },
+    "Infra_ElectronicCircuit": {
+        "localized_name": "Infra_ElectronicCircuit",
+        "description": ""
+    },
+    "Infra_ItemChest_Grade_01": {
+        "localized_name": "Infra_ItemChest_Grade_01",
+        "description": ""
+    },
+    "Infra_ItemChest_Grade_02": {
+        "localized_name": "Infra_ItemChest_Grade_02",
+        "description": ""
+    },
+    "Infra_ItemChest_Grade_03": {
+        "localized_name": "Infra_ItemChest_Grade_03",
+        "description": ""
+    },
+    "Infra_MachineParts": {
+        "localized_name": "Infra_MachineParts",
+        "description": ""
+    },
+    "Infra_PalBed_Grade_01": {
+        "localized_name": "Infra_PalBed_Grade_01",
+        "description": ""
+    },
+    "Infra_PalBed_Grade_02": {
+        "localized_name": "Infra_PalBed_Grade_02",
+        "description": ""
+    },
+    "Infra_PlayerBed_Grade_01": {
+        "localized_name": "Infra_PlayerBed_Grade_01",
+        "description": ""
+    },
+    "Infra_PlayerBed_Grade_02": {
+        "localized_name": "Infra_PlayerBed_Grade_02",
+        "description": ""
+    },
+    "InkBullet": {
+        "localized_name": "Decal Ink",
+        "description": ""
+    },
+    "IronArmor": {
+        "localized_name": "Refined Metal Armor",
+        "description": ""
+    },
+    "IronArmorCold": {
+        "localized_name": "Cold Resistant Pal Metal Armor",
+        "description": ""
+    },
+    "IronArmorCold_2": {
+        "localized_name": "Cold Resistant Refined Metal Armor +1",
+        "description": ""
+    },
+    "IronArmorCold_3": {
+        "localized_name": "Cold Resistant Refined Metal Armor +2",
+        "description": ""
+    },
+    "IronArmorCold_4": {
+        "localized_name": "Cold Resistant Refined Metal Armor +3",
+        "description": ""
+    },
+    "IronArmorCold_5": {
+        "localized_name": "Cold Resistant Refined Metal Armor +4",
+        "description": ""
+    },
+    "IronArmorHeat": {
+        "localized_name": "Heat Resistant Pal Metal Armor",
+        "description": ""
+    },
+    "IronArmorHeat_2": {
+        "localized_name": "Heat Resistant Refined Metal Armor +1",
+        "description": ""
+    },
+    "IronArmorHeat_3": {
+        "localized_name": "Heat Resistant Refined Metal Armor +2",
+        "description": ""
+    },
+    "IronArmorHeat_4": {
+        "localized_name": "Heat Resistant Refined Metal Armor +3",
+        "description": ""
+    },
+    "IronArmorHeat_5": {
+        "localized_name": "Heat Resistant Refined Metal Armor +4",
+        "description": ""
+    },
+    "IronArmor_2": {
+        "localized_name": "Refined Metal Armor +1",
+        "description": ""
+    },
+    "IronArmor_3": {
+        "localized_name": "Refined Metal Armor +2",
+        "description": ""
+    },
+    "IronArmor_4": {
+        "localized_name": "Refined Metal Armor +3",
+        "description": ""
+    },
+    "IronArmor_5": {
+        "localized_name": "Refined Metal Armor +4",
+        "description": ""
+    },
+    "IronHelmet": {
+        "localized_name": "Refined Metal Helm",
+        "description": ""
+    },
+    "IronHelmet_2": {
+        "localized_name": "Refined Metal Helm +1",
+        "description": ""
+    },
+    "IronHelmet_3": {
+        "localized_name": "Refined Metal Helm +2",
+        "description": ""
+    },
+    "IronHelmet_4": {
+        "localized_name": "Refined Metal Helm +3",
+        "description": ""
+    },
+    "IronHelmet_5": {
+        "localized_name": "Refined Metal Helm +4",
+        "description": ""
+    },
+    "IronIngot": {
+        "localized_name": "Refined Ingot",
+        "description": ""
+    },
+    "IronOre": {
+        "localized_name": "IronOre",
+        "description": ""
+    },
+    "JamBun": {
+        "localized_name": "Jam-filled Bun",
+        "description": ""
+    },
+    "Kitsunebi_Fire": {
+        "localized_name": "Kitsunebi_Fire",
+        "description": ""
+    },
+    "Lamp": {
+        "localized_name": "Lamp",
+        "description": ""
+    },
+    "Lantern": {
+        "localized_name": "Hip Lantern",
+        "description": ""
+    },
+    "LargeBullet": {
+        "localized_name": "LargeBullet",
+        "description": ""
+    },
+    "LargeCeilingLamp": {
+        "localized_name": "LargeCeilingLamp",
+        "description": ""
+    },
+    "LargeLamp": {
+        "localized_name": "LargeLamp",
+        "description": ""
+    },
+    "LaserBullet": {
+        "localized_name": "Energy Cartridge",
+        "description": ""
+    },
+    "LaserRifle": {
+        "localized_name": "Laser Rifle",
+        "description": ""
+    },
+    "LaserRifle_2": {
+        "localized_name": "Laser Rifle +1",
+        "description": ""
+    },
+    "LaserRifle_3": {
+        "localized_name": "Laser Rifle +2",
+        "description": ""
+    },
+    "LaserRifle_4": {
+        "localized_name": "Laser Rifle +3",
+        "description": ""
+    },
+    "LaserRifle_5": {
+        "localized_name": "Laser Rifle +4",
+        "description": ""
+    },
+    "Launcher_Default": {
+        "localized_name": "Rocket Launcher",
+        "description": "A weapon that fires rockets. It has a wide blast radius and can deal massive damage to enemies."
+    },
+    "Launcher_Default_2": {
+        "localized_name": "Rocket Launcher +1",
+        "description": "A weapon that fires rockets. It has a wide blast radius and can deal massive damage to enemies."
+    },
+    "Launcher_Default_3": {
+        "localized_name": "Rocket Launcher +2",
+        "description": "A weapon that fires rockets. It has a wide blast radius and can deal massive damage to enemies."
+    },
+    "Launcher_Default_4": {
+        "localized_name": "Rocket Launcher +3",
+        "description": "A weapon that fires rockets. It has a wide blast radius and can deal massive damage to enemies."
+    },
+    "Launcher_Default_5": {
+        "localized_name": "Rocket Launcher +4",
+        "description": "A weapon that fires rockets. It has a wide blast radius and can deal massive damage to enemies."
+    },
+    "Launcher_Meat": {
+        "localized_name": "Launcher_Meat",
+        "description": ""
+    },
+    "Leather": {
+        "localized_name": "Leather",
+        "description": ""
+    },
+    "Leather2": {
+        "localized_name": "Leather2",
+        "description": ""
+    },
+    "Lettuce": {
+        "localized_name": "Lettuce",
+        "description": ""
+    },
+    "LettuceSeeds": {
+        "localized_name": "Lettuce Seeds",
+        "description": ""
+    },
+    "LightzHelmet": {
+        "localized_name": "Lightz Helmet",
+        "description": ""
+    },
+    "Lotus_attack_01": {
+        "localized_name": "Power Lotus (S)",
+        "description": ""
+    },
+    "Lotus_attack_02": {
+        "localized_name": "Power Lotus (L)",
+        "description": ""
+    },
+    "Lotus_hp_01": {
+        "localized_name": "Life Lotus (S)",
+        "description": ""
+    },
+    "Lotus_hp_02": {
+        "localized_name": "Life Lotus (L)",
+        "description": ""
+    },
+    "Lotus_stamina_01": {
+        "localized_name": "Stamina Lotus (S)",
+        "description": ""
+    },
+    "Lotus_stamina_02": {
+        "localized_name": "Stamina Lotus (L)",
+        "description": ""
+    },
+    "Lotus_weight_01": {
+        "localized_name": "Carrying Lotus (S)",
+        "description": ""
+    },
+    "Lotus_weight_02": {
+        "localized_name": "Carrying Lotus (L)",
+        "description": ""
+    },
+    "Lotus_workspeed_01": {
+        "localized_name": "Speed Lotus (S)",
+        "description": ""
+    },
+    "Lotus_workspeed_02": {
+        "localized_name": "Speed Lotus (L)",
+        "description": ""
+    },
+    "LuxuryMedicines": {
+        "localized_name": "High Grade Medical Supplies",
+        "description": ""
+    },
+    "LuxuryOmelette": {
+        "localized_name": "LuxuryOmelette",
+        "description": ""
+    },
+    "LvUP_01": {
+        "localized_name": "Training Crystal",
+        "description": ""
+    },
+    "MachineParts": {
+        "localized_name": "Nail",
+        "description": ""
+    },
+    "MachineParts2": {
+        "localized_name": "Circuit Board",
+        "description": ""
+    },
+    "MachingunBullet": {
+        "localized_name": "Machine Gun Ammo",
+        "description": ""
+    },
+    "MagnumBullet": {
+        "localized_name": "Magnum Ammo",
+        "description": ""
+    },
+    "MakeshiftHandgun": {
+        "localized_name": "Makeshift Handgun",
+        "description": ""
+    },
+    "MarinatedMushrooms": {
+        "localized_name": "Marinated Mushrooms",
+        "description": ""
+    },
+    "MateItem01": {
+        "localized_name": "MateItem01",
+        "description": ""
+    },
+    "Meat": {
+        "localized_name": "Meat",
+        "description": ""
+    },
+    "Meat2": {
+        "localized_name": "Meat2",
+        "description": ""
+    },
+    "MeatCutterKnife": {
+        "localized_name": "Meat Cleaver",
+        "description": ""
+    },
+    "MeatSauce": {
+        "localized_name": "Bolognese Sauce",
+        "description": ""
+    },
+    "Meat_BerryGoat": {
+        "localized_name": "Caprity Meat",
+        "description": ""
+    },
+    "Meat_Boar": {
+        "localized_name": "Rushoar Pork",
+        "description": ""
+    },
+    "Meat_ChickenPal": {
+        "localized_name": "Chikipi Poultry",
+        "description": ""
+    },
+    "Meat_CowPal": {
+        "localized_name": "Mozzarina Meat",
+        "description": ""
+    },
+    "Meat_Deer": {
+        "localized_name": "Eikthyrdeer Venison",
+        "description": ""
+    },
+    "Meat_Eagle": {
+        "localized_name": "Galeclaw Poultry",
+        "description": ""
+    },
+    "Meat_GrassMammoth": {
+        "localized_name": "Mammorest Meat",
+        "description": ""
+    },
+    "Meat_IceDeer": {
+        "localized_name": "Reindrix Venison",
+        "description": ""
+    },
+    "Meat_Kelpie": {
+        "localized_name": "Raw Kelpsea",
+        "description": ""
+    },
+    "Meat_LazyCatfish": {
+        "localized_name": "Raw Dumud",
+        "description": ""
+    },
+    "Meat_SakuraSaurus": {
+        "localized_name": "Broncherry Meat",
+        "description": ""
+    },
+    "Meat_SheepBall": {
+        "localized_name": "Lamball Mutton",
+        "description": ""
+    },
+    "MedicalPalBed_04": {
+        "localized_name": "MedicalPalBed_04",
+        "description": ""
+    },
+    "Medicines": {
+        "localized_name": "Medical Supplies",
+        "description": ""
+    },
+    "Metal_Gate": {
+        "localized_name": "Metal_Gate",
+        "description": ""
+    },
+    "Metal_houseset": {
+        "localized_name": "Metal_houseset",
+        "description": ""
+    },
+    "MeteorDrop": {
+        "localized_name": "Meteorite Fragment",
+        "description": ""
+    },
+    "Milk": {
+        "localized_name": "Milk",
+        "description": ""
+    },
+    "MindControlDrug": {
+        "localized_name": "Mind Control Meds",
+        "description": ""
+    },
+    "MiningTool": {
+        "localized_name": "MiningTool",
+        "description": ""
+    },
+    "MissileBullet": {
+        "localized_name": "Missile Ammo",
+        "description": ""
+    },
+    "Money": {
+        "localized_name": "Gold Coin",
+        "description": ""
+    },
+    "MonsterEquipWeapon_Dummy": {
+        "localized_name": "MonsterEquipWeapon_Dummy",
+        "description": ""
+    },
+    "MonsterFarm": {
+        "localized_name": "MonsterFarm",
+        "description": ""
+    },
+    "Mushroom": {
+        "localized_name": "Mushroom",
+        "description": ""
+    },
+    "MushroomSoup": {
+        "localized_name": "Mushroom Soup",
+        "description": ""
+    },
+    "MushroomStew": {
+        "localized_name": "Mushroom Stew",
+        "description": ""
+    },
+    "Musket": {
+        "localized_name": "Musket",
+        "description": ""
+    },
+    "Musket_2": {
+        "localized_name": "Musket +1",
+        "description": ""
+    },
+    "Musket_3": {
+        "localized_name": "Musket +2",
+        "description": ""
+    },
+    "Musket_4": {
+        "localized_name": "Musket +3",
+        "description": ""
+    },
+    "Musket_5": {
+        "localized_name": "Musket +4",
+        "description": ""
+    },
+    "Narcotic": {
+        "localized_name": "Strange Juice",
+        "description": ""
+    },
+    "NightVisionGoggles": {
+        "localized_name": "Night Vision Goggles",
+        "description": ""
+    },
+    "OlympicCauldron": {
+        "localized_name": "OlympicCauldron",
+        "description": ""
+    },
+    "Omelet": {
+        "localized_name": "Omelet",
+        "description": ""
+    },
+    "Opium": {
+        "localized_name": "Suspicious Juice",
+        "description": ""
+    },
+    "PAL_Growth_Stone_L": {
+        "localized_name": "PAL_Growth_Stone_L",
+        "description": ""
+    },
+    "PAL_Growth_Stone_M": {
+        "localized_name": "PAL_Growth_Stone_M",
+        "description": ""
+    },
+    "PAL_Growth_Stone_S": {
+        "localized_name": "PAL_Growth_Stone_S",
+        "description": ""
+    },
+    "PAL_Growth_Stone_XL": {
+        "localized_name": "PAL_Growth_Stone_XL",
+        "description": ""
+    },
+    "PV_AssaultRifle_Default1": {
+        "localized_name": "PV_ITEMS",
+        "description": ""
+    },
+    "PV_Glider_Manta": {
+        "localized_name": "PV_Glider_Manta",
+        "description": ""
+    },
+    "PalBox": {
+        "localized_name": "PalBox",
+        "description": ""
+    },
+    "PalCrystal_Ex": {
+        "localized_name": "Ancient Civilization Parts",
+        "description": ""
+    },
+    "PalFluid": {
+        "localized_name": "Pal Fluids",
+        "description": ""
+    },
+    "PalFoodBox": {
+        "localized_name": "PalFoodBox",
+        "description": ""
+    },
+    "PalItem_CaptainPenguin": {
+        "localized_name": "Penking Plume",
+        "description": ""
+    },
+    "PalItem_CatMage": {
+        "localized_name": "Katress Hair",
+        "description": ""
+    },
+    "PalItem_ColorfulBird": {
+        "localized_name": "Tocotoco Feather",
+        "description": ""
+    },
+    "PalItem_LizardMan": {
+        "localized_name": "PalItem_LizardMan",
+        "description": ""
+    },
+    "PalItem_MopBaby": {
+        "localized_name": "PalItem_MopBaby",
+        "description": ""
+    },
+    "PalItem_NegativeOctopus": {
+        "localized_name": "PalItem_NegativeOctopus",
+        "description": ""
+    },
+    "PalItem_PinkRabbit": {
+        "localized_name": "PalItem_PinkRabbit",
+        "description": ""
+    },
+    "PalItem_PlantSlime": {
+        "localized_name": "Gumoss Leaf",
+        "description": ""
+    },
+    "PalItem_RaijinDaughter": {
+        "localized_name": "Dazzi Cloud",
+        "description": ""
+    },
+    "PalItem_ToSell_01": {
+        "localized_name": "Precious Dragon Stone",
+        "description": ""
+    },
+    "PalItem_ToSell_02": {
+        "localized_name": "Precious Plume",
+        "description": ""
+    },
+    "PalItem_ToSell_03": {
+        "localized_name": "Precious Entrails",
+        "description": ""
+    },
+    "PalItem_ToSell_04": {
+        "localized_name": "Precious Claw",
+        "description": ""
+    },
+    "PalItem_ToSell_05": {
+        "localized_name": "Precious Pelt",
+        "description": ""
+    },
+    "PalOil": {
+        "localized_name": "High Quality Pal Oil",
+        "description": ""
+    },
+    "PalSphere": {
+        "localized_name": "Pal Sphere",
+        "description": ""
+    },
+    "PalSphere_Giga": {
+        "localized_name": "Giga Sphere",
+        "description": ""
+    },
+    "PalSphere_Legend": {
+        "localized_name": "Legendary Sphere",
+        "description": ""
+    },
+    "PalSphere_Master": {
+        "localized_name": "Ultra Sphere",
+        "description": ""
+    },
+    "PalSphere_Mega": {
+        "localized_name": "Mega Sphere",
+        "description": ""
+    },
+    "PalSphere_Robbery": {
+        "localized_name": "Radar Sphere",
+        "description": ""
+    },
+    "PalSphere_Tera": {
+        "localized_name": "Hyper Sphere",
+        "description": ""
+    },
+    "PalSphere_Ultimate": {
+        "localized_name": "Ultimate Sphere",
+        "description": ""
+    },
+    "PalSummon": {
+        "localized_name": "Summoning Altar",
+        "description": ""
+    },
+    "PalSummon_KingBahamut_Dragon_Parts": {
+        "localized_name": "PalSummon_KingBahamut_Dragon_Parts",
+        "description": ""
+    },
+    "PalSummon_NightLady": {
+        "localized_name": "Bellanoir's Slab",
+        "description": ""
+    },
+    "PalSummon_NightLady_Dark": {
+        "localized_name": "Bellanoir Libero's Slab",
+        "description": ""
+    },
+    "PalSummon_NightLady_Dark_2": {
+        "localized_name": "Bellanoir Libero (Ultra) Slab",
+        "description": ""
+    },
+    "PalSummon_NightLady_Dark_Parts": {
+        "localized_name": "Bellanoir Libero's Slab Fragment",
+        "description": ""
+    },
+    "PalSummon_NightLady_Dark_Parts_2": {
+        "localized_name": "Bellanoir Libero (Ultra) Slab Fragment",
+        "description": ""
+    },
+    "PalSummon_NightLady_Parts": {
+        "localized_name": "Bellanoir's Slab Fragment",
+        "description": ""
+    },
+    "PalUpgradeStone": {
+        "localized_name": "Small Pal Soul",
+        "description": ""
+    },
+    "PalUpgradeStone2": {
+        "localized_name": "Medium Pal Soul",
+        "description": ""
+    },
+    "PalUpgradeStone3": {
+        "localized_name": "Large Pal Soul",
+        "description": ""
+    },
+    "Pal_crystal_L": {
+        "localized_name": "Paldium Clump",
+        "description": ""
+    },
+    "Pal_crystal_S": {
+        "localized_name": "Paldium Fragment",
+        "description": ""
+    },
+    "Pan": {
+        "localized_name": "Bread",
+        "description": ""
+    },
+    "Pancake": {
+        "localized_name": "Pancake",
+        "description": ""
+    },
+    "PenguinLauncher": {
+        "localized_name": "PenguinLauncher",
+        "description": ""
+    },
+    "Pickaxe_Tier_00": {
+        "localized_name": "Stone Pickaxe",
+        "description": ""
+    },
+    "Pickaxe_Tier_01": {
+        "localized_name": "Metal Pickaxe",
+        "description": ""
+    },
+    "Pickaxe_Tier_02": {
+        "localized_name": "Refined Metal Pickaxe",
+        "description": ""
+    },
+    "Pickaxe_Tier_03": {
+        "localized_name": "Pickaxe_Tier_03",
+        "description": ""
+    },
+    "Pizza": {
+        "localized_name": "Pizza",
+        "description": ""
+    },
+    "Plastic": {
+        "localized_name": "Plastic",
+        "description": "Armor made of plasteel.\nIn addition to enhanced defense capabilities, its weight was also reduced.\nEquipment that pushes the limit of technology."
+    },
+    "PlasticArmor": {
+        "localized_name": "Plasteel Armor",
+        "description": "Armor made of plasteel.\nIn addition to enhanced defense capabilities, its weight was also reduced.\nEquipment that pushes the limit of technology."
+    },
+    "PlasticArmorCold": {
+        "localized_name": "Cold Resistant Plasteel Armor",
+        "description": ""
+    },
+    "PlasticArmorCold_2": {
+        "localized_name": "Cold Resistant Plasteel Armor +1",
+        "description": ""
+    },
+    "PlasticArmorCold_3": {
+        "localized_name": "Cold Resistant Plasteel Armor +2",
+        "description": ""
+    },
+    "PlasticArmorCold_4": {
+        "localized_name": "Cold Resistant Plasteel Armor +3",
+        "description": ""
+    },
+    "PlasticArmorCold_5": {
+        "localized_name": "Cold Resistant Plasteel Armor +4",
+        "description": ""
+    },
+    "PlasticArmorHeat": {
+        "localized_name": "Heat Resistant Plasteel Armor",
+        "description": ""
+    },
+    "PlasticArmorHeat_2": {
+        "localized_name": "Heat Resistant Plasteel Armor +1",
+        "description": ""
+    },
+    "PlasticArmorHeat_3": {
+        "localized_name": "Heat Resistant Plasteel Armor +2",
+        "description": ""
+    },
+    "PlasticArmorHeat_4": {
+        "localized_name": "Heat Resistant Plasteel Armor +3",
+        "description": ""
+    },
+    "PlasticArmorHeat_5": {
+        "localized_name": "Heat Resistant Plasteel Armor +4",
+        "description": ""
+    },
+    "PlasticArmorWeight": {
+        "localized_name": "Lightweight Plasteel Armor",
+        "description": ""
+    },
+    "PlasticArmorWeight_2": {
+        "localized_name": "Lightweight Plasteel Armor +1",
+        "description": ""
+    },
+    "PlasticArmorWeight_3": {
+        "localized_name": "Lightweight Plasteel Armor +2",
+        "description": ""
+    },
+    "PlasticArmorWeight_4": {
+        "localized_name": "Lightweight Plasteel Armor +3",
+        "description": ""
+    },
+    "PlasticArmorWeight_5": {
+        "localized_name": "Lightweight Plasteel Armor +4",
+        "description": ""
+    },
+    "PlasticArmor_2": {
+        "localized_name": "Plasteel Armor +1",
+        "description": "Armor made of plasteel.\nIn addition to enhanced defense capabilities, its weight was also reduced.\nEquipment that pushes the limit of technology."
+    },
+    "PlasticArmor_3": {
+        "localized_name": "Plasteel Armor +2",
+        "description": "Armor made of plasteel.\nIn addition to enhanced defense capabilities, its weight was also reduced.\nEquipment that pushes the limit of technology."
+    },
+    "PlasticArmor_4": {
+        "localized_name": "Plasteel Armor +3",
+        "description": "Armor made of plasteel.\nIn addition to enhanced defense capabilities, its weight was also reduced.\nEquipment that pushes the limit of technology."
+    },
+    "PlasticArmor_5": {
+        "localized_name": "Plasteel Armor +4",
+        "description": "Armor made of plasteel.\nIn addition to enhanced defense capabilities, its weight was also reduced.\nEquipment that pushes the limit of technology."
+    },
+    "PlasticHelmet": {
+        "localized_name": "Plasteel Helmet",
+        "description": ""
+    },
+    "PlasticHelmet_2": {
+        "localized_name": "Plasteel Helmet +1",
+        "description": ""
+    },
+    "PlasticHelmet_3": {
+        "localized_name": "Plasteel Helmet +2",
+        "description": ""
+    },
+    "PlasticHelmet_4": {
+        "localized_name": "Plasteel Helmet +3",
+        "description": ""
+    },
+    "PlasticHelmet_5": {
+        "localized_name": "Plasteel Helmet +4",
+        "description": ""
+    },
+    "Polymer": {
+        "localized_name": "Polymer",
+        "description": ""
+    },
+    "Poppy": {
+        "localized_name": "Beautiful Flower",
+        "description": ""
+    },
+    "Potage": {
+        "localized_name": "Potage",
+        "description": ""
+    },
+    "Potato": {
+        "localized_name": "Potato",
+        "description": ""
+    },
+    "PotatoSeedPotatoes": {
+        "localized_name": "PotatoSeedPotatoes",
+        "description": ""
+    },
+    "Potion": {
+        "localized_name": "Recovery Meds",
+        "description": "Medicine that heals wounds over time. Restores a decent amount of health."
+    },
+    "Potion_High": {
+        "localized_name": "High Quality Recovery Meds",
+        "description": ""
+    },
+    "Potion_Low": {
+        "localized_name": "Low Quality Recovery Meds",
+        "description": ""
+    },
+    "PumpActionShotgun": {
+        "localized_name": "Pump Action Shotgun",
+        "description": "A high capacity, powerful shotgun. It has outstanding close range DPS."
+    },
+    "PumpActionShotgun_2": {
+        "localized_name": "Pump Action Shotgun",
+        "description": "A high capacity, powerful shotgun. It has outstanding close range DPS."
+    },
+    "PumpActionShotgun_3": {
+        "localized_name": "Pump Action Shotgun",
+        "description": "A high capacity, powerful shotgun. It has outstanding close range DPS."
+    },
+    "PumpActionShotgun_4": {
+        "localized_name": "Pump Action Shotgun",
+        "description": "A high capacity, powerful shotgun. It has outstanding close range DPS."
+    },
+    "PumpActionShotgun_5": {
+        "localized_name": "Pump Action Shotgun",
+        "description": "A high capacity, powerful shotgun. It has outstanding close range DPS."
+    },
+    "Pumpkin": {
+        "localized_name": "Pumpkin",
+        "description": ""
+    },
+    "Quartz": {
+        "localized_name": "Pure Quartz",
+        "description": ""
+    },
+    "Rankup_Arbitrary": {
+        "localized_name": "Concentrated All-Purpose Pal Extract",
+        "description": "A mysterious extract that can be injected into pals to unlock their potential.\nRaises pal's rank by 1."
+    },
+    "RecurveBow": {
+        "localized_name": "RecurveBow",
+        "description": ""
+    },
+    "Refrigerator": {
+        "localized_name": "Refrigerator",
+        "description": ""
+    },
+    "Relic": {
+        "localized_name": "Lifmunk Effigy",
+        "description": ""
+    },
+    "RepairBench": {
+        "localized_name": "RepairBench",
+        "description": ""
+    },
+    "RepairKit": {
+        "localized_name": "Repair Kit",
+        "description": ""
+    },
+    "RifleBullet": {
+        "localized_name": "Rifle Ammo",
+        "description": ""
+    },
+    "RoughBullet": {
+        "localized_name": "Coarse Ammo",
+        "description": ""
+    },
+    "Ruby": {
+        "localized_name": "Ruby",
+        "description": ""
+    },
+    "Salad": {
+        "localized_name": "Salad",
+        "description": ""
+    },
+    "Sand": {
+        "localized_name": "Sand",
+        "description": ""
+    },
+    "Sandwich": {
+        "localized_name": "Sandwich",
+        "description": ""
+    },
+    "Sapphire": {
+        "localized_name": "Sapphire",
+        "description": ""
+    },
+    "Scales": {
+        "localized_name": "Scales",
+        "description": ""
+    },
+    "Scales2": {
+        "localized_name": "Scales2",
+        "description": ""
+    },
+    "SeafoodSoup": {
+        "localized_name": "Seafood Soup",
+        "description": ""
+    },
+    "Seed_Tmp": {
+        "localized_name": "Seed_Tmp",
+        "description": ""
+    },
+    "Sharkkid_Scale": {
+        "localized_name": "Sharkkid_Scale",
+        "description": ""
+    },
+    "Shield_01": {
+        "localized_name": "Common Shield",
+        "description": "A curious shield that was made using Paldium technology.\nt repairs itself automatically when not taking damage after some time."
+    },
+    "Shield_02": {
+        "localized_name": "Mega Shield",
+        "description": "A curious shield that was made using Paldium technology.\nIt repairs itself automatically when not taking damage after some time.\nAs a mass produced model, defenses have been enhanced."
+    },
+    "Shield_03": {
+        "localized_name": "Giga Shield",
+        "description": "A curious shield that was made using Paldium technology.\nIt repairs itself automatically when not taking damage after some time.\nModifications have increased its effectiveness even further."
+    },
+    "Shield_04": {
+        "localized_name": "Hyper Shield",
+        "description": "A curious shield that was made using Paldium technology.\nIt repairs itself automatically when not taking damage after some time.\nRepeated testing has created a near perfect product."
+    },
+    "Shield_Ultra": {
+        "localized_name": "Ultra Shield",
+        "description": "A curious shield that was made using Paldium technology.\nIt repairs itself automatically when not taking damage after some time.\nAs a result of further experiments, ultimate quality has been achieved."
+    },
+    "ShotgunBullet": {
+        "localized_name": "Shotgun Shells",
+        "description": ""
+    },
+    "Signboard": {
+        "localized_name": "Signboard",
+        "description": ""
+    },
+    "Silicon": {
+        "localized_name": "Silicon",
+        "description": ""
+    },
+    "Silo": {
+        "localized_name": "Silo",
+        "description": ""
+    },
+    "SingleShotRifle": {
+        "localized_name": "Single-shot Rifle",
+        "description": ""
+    },
+    "SingleShotRifle_2": {
+        "localized_name": "Single-shot Rifle +1",
+        "description": ""
+    },
+    "SingleShotRifle_3": {
+        "localized_name": "Single-shot Rifle +2",
+        "description": ""
+    },
+    "SingleShotRifle_4": {
+        "localized_name": "Single-shot Rifle +3",
+        "description": ""
+    },
+    "SingleShotRifle_5": {
+        "localized_name": "Single-shot Rifle +4",
+        "description": ""
+    },
+    "SkillCard_AcidRain": {
+        "localized_name": "Water Skill Fruit: Acid Rain",
+        "description": ""
+    },
+    "SkillCard_AirCanon": {
+        "localized_name": "Skill Fruit: Air Cannon",
+        "description": ""
+    },
+    "SkillCard_Apocalypse": {
+        "localized_name": "SkillCard_Apocalypse",
+        "description": ""
+    },
+    "SkillCard_AquaJet": {
+        "localized_name": "Water Skill Fruit: Hydro Jet",
+        "description": ""
+    },
+    "SkillCard_BlizzardLance": {
+        "localized_name": "Ice Skill Fruit: Iceberg",
+        "description": ""
+    },
+    "SkillCard_BubbleShot": {
+        "localized_name": "Water Skill Fruit: Bubble Blast",
+        "description": ""
+    },
+    "SkillCard_DarkCanon": {
+        "localized_name": "SkillCard_DarkCanon",
+        "description": ""
+    },
+    "SkillCard_DarkLaser": {
+        "localized_name": "Dark Skill Fruit: Dark Laser",
+        "description": ""
+    },
+    "SkillCard_DarkWave": {
+        "localized_name": "Dark Skill Fruit: Shadow Burst",
+        "description": ""
+    },
+    "SkillCard_DragonBreath": {
+        "localized_name": "Dragon Skill Fruit: Draconic Breath",
+        "description": ""
+    },
+    "SkillCard_DragonCanon": {
+        "localized_name": "Dragon Skill Fruit: Dragon Cannon",
+        "description": ""
+    },
+    "SkillCard_DragonMeteor": {
+        "localized_name": "Dragon Skill Fruit: Dragon Meteor",
+        "description": ""
+    },
+    "SkillCard_DragonWave": {
+        "localized_name": "Dragon Skill Fruit: Dragon Burst",
+        "description": ""
+    },
+    "SkillCard_ElecWave": {
+        "localized_name": "Electric Skill Fruit: Shockwave",
+        "description": ""
+    },
+    "SkillCard_Eruption": {
+        "localized_name": "SkillCard_Eruption",
+        "description": ""
+    },
+    "SkillCard_FireBall": {
+        "localized_name": "Fire Skill Fruit: Fire Ball",
+        "description": ""
+    },
+    "SkillCard_FireBlast": {
+        "localized_name": "Fire Skill Fruit: Ignis Blast",
+        "description": ""
+    },
+    "SkillCard_FireSeed": {
+        "localized_name": "Fire Skill Fruit: Spirit Fire",
+        "description": ""
+    },
+    "SkillCard_Flamethrower": {
+        "localized_name": "Fire Skill Fruit: Ignis Breath",
+        "description": ""
+    },
+    "SkillCard_FlareArrow": {
+        "localized_name": "Fire Skill Fruit: Flare Arrow",
+        "description": ""
+    },
+    "SkillCard_FlareTornado": {
+        "localized_name": "Fire Skill Fruit: Flare Storm",
+        "description": ""
+    },
+    "SkillCard_FrostBreath": {
+        "localized_name": "Ice Skill Fruit: Cryst Breath",
+        "description": ""
+    },
+    "SkillCard_GhostFlame": {
+        "localized_name": "Dark Skill Fruit: Spirit Flame",
+        "description": ""
+    },
+    "SkillCard_GrassTornado": {
+        "localized_name": "Grass Skill Fruit: Grass Tornado",
+        "description": ""
+    },
+    "SkillCard_HydroPump": {
+        "localized_name": "Water Skill Fruit: Hydro Laser",
+        "description": ""
+    },
+    "SkillCard_HyperBeam": {
+        "localized_name": "Skill Fruit: Pal Blast",
+        "description": ""
+    },
+    "SkillCard_IceBlade": {
+        "localized_name": "Ice Skill Fruit: Icicle Cutter",
+        "description": ""
+    },
+    "SkillCard_IceMissile": {
+        "localized_name": "Ice Skill Fruit: Ice Missile",
+        "description": ""
+    },
+    "SkillCard_IcicleThrow": {
+        "localized_name": "Ice Skill Fruit: Blizzard Spike",
+        "description": ""
+    },
+    "SkillCard_Inferno": {
+        "localized_name": "Fire Skill Fruit: Ignis Rage",
+        "description": ""
+    },
+    "SkillCard_LightningStrike": {
+        "localized_name": "Electric Skill Fruit: Lightning Strike",
+        "description": ""
+    },
+    "SkillCard_LineGeyser": {
+        "localized_name": "SkillCard_LineGeyser",
+        "description": ""
+    },
+    "SkillCard_LineThunder": {
+        "localized_name": "Electric Skill Fruit: Lightning Streak",
+        "description": ""
+    },
+    "SkillCard_LockonLaser": {
+        "localized_name": "Electric Skill Fruit: Lock-on Laser",
+        "description": ""
+    },
+    "SkillCard_MudShot": {
+        "localized_name": "Earth Skill Fruit: Sand Blast",
+        "description": ""
+    },
+    "SkillCard_PoisonShot": {
+        "localized_name": "Dark Skill Fruit: Poison Blast",
+        "description": ""
+    },
+    "SkillCard_PowerBall": {
+        "localized_name": "Skill Fruit: Power Bomb",
+        "description": ""
+    },
+    "SkillCard_PowerShot": {
+        "localized_name": "Skill Fruit: Power Shot",
+        "description": ""
+    },
+    "SkillCard_Psychokinesis": {
+        "localized_name": "Dark Skill Fruit: Psycho Gravity",
+        "description": ""
+    },
+    "SkillCard_RockLance": {
+        "localized_name": "Earth Skill Fruit: Rock Lance",
+        "description": ""
+    },
+    "SkillCard_RootAttack": {
+        "localized_name": "Grass Skill Fruit: Spine Vine",
+        "description": ""
+    },
+    "SkillCard_RootLance": {
+        "localized_name": "SkillCard_RootLance",
+        "description": ""
+    },
+    "SkillCard_SandTornado": {
+        "localized_name": "Earth Skill Fruit: Sand Tornado",
+        "description": ""
+    },
+    "SkillCard_SandTwister": {
+        "localized_name": "SkillCard_SandTwister",
+        "description": ""
+    },
+    "SkillCard_SeedMachinegun": {
+        "localized_name": "Grass Skill Fruit: Seed Machine Gun",
+        "description": ""
+    },
+    "SkillCard_SeedMine": {
+        "localized_name": "Grass Skill Fruit: Seed Mine",
+        "description": ""
+    },
+    "SkillCard_SelfDestruct": {
+        "localized_name": "Skill Fruit: Implode",
+        "description": ""
+    },
+    "SkillCard_ShadowBall": {
+        "localized_name": "Dark Skill Fruit: Nightmare Ball",
+        "description": ""
+    },
+    "SkillCard_SolarBeam": {
+        "localized_name": "Grass Skill Fruit: Solar Blast",
+        "description": ""
+    },
+    "SkillCard_SpreadPulse": {
+        "localized_name": "Electric Skill Fruit: Spark Blast",
+        "description": ""
+    },
+    "SkillCard_StoneShotgun": {
+        "localized_name": "Earth Skill Fruit: Stone Blast",
+        "description": ""
+    },
+    "SkillCard_ThreeThunder": {
+        "localized_name": "Electric Skill Fruit: Tri-Lightning",
+        "description": ""
+    },
+    "SkillCard_ThrowRock": {
+        "localized_name": "Earth Skill Fruit: Stone Cannon",
+        "description": ""
+    },
+    "SkillCard_ThunderBall": {
+        "localized_name": "Electric Skill Fruit: Electric Ball",
+        "description": ""
+    },
+    "SkillCard_ThunderFunnel": {
+        "localized_name": "Electric Skill Fruit: Plasma Tornado",
+        "description": ""
+    },
+    "SkillCard_ThunderRain": {
+        "localized_name": "SkillCard_ThunderRain",
+        "description": ""
+    },
+    "SkillCard_Thunderbolt": {
+        "localized_name": "Electric Skill Fruit: Lightning Bolt",
+        "description": ""
+    },
+    "SkillCard_Tremor": {
+        "localized_name": "SkillCard_Tremor",
+        "description": ""
+    },
+    "SkillCard_TriSpark": {
+        "localized_name": "SkillCard_TriSpark",
+        "description": ""
+    },
+    "SkillCard_WallSplash": {
+        "localized_name": "SkillCard_WallSplash",
+        "description": ""
+    },
+    "SkillCard_WaterBall": {
+        "localized_name": "Water Skill Fruit: Aqua Burst",
+        "description": ""
+    },
+    "SkillCard_WaterGun": {
+        "localized_name": "Water Skill Fruit: Aqua Gun",
+        "description": ""
+    },
+    "SkillCard_WindCutter": {
+        "localized_name": "Grass Skill Fruit: Wind Cutter",
+        "description": ""
+    },
+    "SkillUnlock_Alpaca": {
+        "localized_name": "Melpaca Saddle",
+        "description": ""
+    },
+    "SkillUnlock_AmaterasuWolf": {
+        "localized_name": "Kitsun Saddle",
+        "description": ""
+    },
+    "SkillUnlock_BadCatgirl": {
+        "localized_name": "en_text's Shotgun",
+        "description": ""
+    },
+    "SkillUnlock_BirdDragon": {
+        "localized_name": "Vanwyrm Saddle",
+        "description": ""
+    },
+    "SkillUnlock_BirdDragon_Ice": {
+        "localized_name": "Vanwyrm Cryst Saddle",
+        "description": ""
+    },
+    "SkillUnlock_BlackCentaur": {
+        "localized_name": "Necromus Saddle",
+        "description": ""
+    },
+    "SkillUnlock_BlackFurDragon": {
+        "localized_name": "Dragostrophe's Shotgun",
+        "description": ""
+    },
+    "SkillUnlock_BlackGriffon": {
+        "localized_name": "Shadowbeak Saddle",
+        "description": ""
+    },
+    "SkillUnlock_BlackMetalDragon": {
+        "localized_name": "Astegon Saddle",
+        "description": ""
+    },
+    "SkillUnlock_BlueDragon": {
+        "localized_name": "Azurobe Saddle",
+        "description": ""
+    },
+    "SkillUnlock_Boar": {
+        "localized_name": "Rushoar Saddle",
+        "description": ""
+    },
+    "SkillUnlock_Carbunclo": {
+        "localized_name": "Lifmunk's Submachine Gun",
+        "description": ""
+    },
+    "SkillUnlock_ColorfulBird": {
+        "localized_name": "Tocotoco's Gloves",
+        "description": ""
+    },
+    "SkillUnlock_DarkMutant": {
+        "localized_name": "Dark Mutant Saddle",
+        "description": ""
+    },
+    "SkillUnlock_Deer": {
+        "localized_name": "Eikthyrdeer Saddle",
+        "description": ""
+    },
+    "SkillUnlock_Deer_Ground": {
+        "localized_name": "Eikthyrdeer Terra Saddle",
+        "description": ""
+    },
+    "SkillUnlock_DreamDemon": {
+        "localized_name": "Daedream's Necklace",
+        "description": ""
+    },
+    "SkillUnlock_DrillGame": {
+        "localized_name": "Digtoise's Headband",
+        "description": ""
+    },
+    "SkillUnlock_Eagle": {
+        "localized_name": "Galeclaw's Gloves",
+        "description": ""
+    },
+    "SkillUnlock_ElecLion": {
+        "localized_name": "Boltmane Saddle",
+        "description": ""
+    },
+    "SkillUnlock_ElecPanda": {
+        "localized_name": "Grizzbolt's Minigun",
+        "description": ""
+    },
+    "SkillUnlock_FairyDragon": {
+        "localized_name": "Elphidran Saddle",
+        "description": ""
+    },
+    "SkillUnlock_FairyDragon_Water": {
+        "localized_name": "Elphidran Aqua Saddle",
+        "description": ""
+    },
+    "SkillUnlock_FeatherOstrich": {
+        "localized_name": "Dazemu Saddle",
+        "description": ""
+    },
+    "SkillUnlock_FengyunDeeper": {
+        "localized_name": "Fenglope Saddle",
+        "description": ""
+    },
+    "SkillUnlock_FireKirin": {
+        "localized_name": "Pyrin Saddle",
+        "description": ""
+    },
+    "SkillUnlock_FireKirin_Dark": {
+        "localized_name": "Pyrin Noct Saddle",
+        "description": ""
+    },
+    "SkillUnlock_FlameBuffalo": {
+        "localized_name": "Arsox Saddle",
+        "description": ""
+    },
+    "SkillUnlock_FlowerDinosaur": {
+        "localized_name": "Dinossom Saddle",
+        "description": ""
+    },
+    "SkillUnlock_FlowerDinosaur_Electric": {
+        "localized_name": "Dinossom Lux Saddle",
+        "description": ""
+    },
+    "SkillUnlock_FlowerRabbit": {
+        "localized_name": "Flopie's Necklace",
+        "description": ""
+    },
+    "SkillUnlock_FlyingManta": {
+        "localized_name": "Celaray's Gloves",
+        "description": ""
+    },
+    "SkillUnlock_Garm": {
+        "localized_name": "Direhowl's Saddled Harness",
+        "description": ""
+    },
+    "SkillUnlock_GhostBeast": {
+        "localized_name": "Maraith Saddle",
+        "description": ""
+    },
+    "SkillUnlock_GoldenHorse": {
+        "localized_name": "en_text Saddle",
+        "description": ""
+    },
+    "SkillUnlock_GrassMammoth": {
+        "localized_name": "Mammorest Saddle",
+        "description": ""
+    },
+    "SkillUnlock_GrassMammoth_Ice": {
+        "localized_name": "Mammorest Cryst Saddle",
+        "description": ""
+    },
+    "SkillUnlock_GrassPanda": {
+        "localized_name": "Mossanda's Grenade Launcher",
+        "description": ""
+    },
+    "SkillUnlock_GrassPanda_Electric": {
+        "localized_name": "Mossanda Lux's Grenade Launcher",
+        "description": ""
+    },
+    "SkillUnlock_GuardianDog": {
+        "localized_name": "Yakumo Saddle",
+        "description": ""
+    },
+    "SkillUnlock_HadesBird": {
+        "localized_name": "Helzephyr Saddle",
+        "description": ""
+    },
+    "SkillUnlock_HawkBird": {
+        "localized_name": "Nitewing Saddle",
+        "description": ""
+    },
+    "SkillUnlock_Hedgehog": {
+        "localized_name": "Jolthog's Gloves",
+        "description": ""
+    },
+    "SkillUnlock_Hedgehog_Ice": {
+        "localized_name": "Jolthog Cryst's Gloves",
+        "description": ""
+    },
+    "SkillUnlock_Horus": {
+        "localized_name": "Faleris Saddle",
+        "description": ""
+    },
+    "SkillUnlock_IceDeer": {
+        "localized_name": "Reindrix Saddle",
+        "description": ""
+    },
+    "SkillUnlock_IceHorse": {
+        "localized_name": "Frostallion Saddle",
+        "description": ""
+    },
+    "SkillUnlock_IceHorse_Dark": {
+        "localized_name": "Frostallion Noct Saddle",
+        "description": ""
+    },
+    "SkillUnlock_JetDragon": {
+        "localized_name": "JetDragon's Missile Launcher",
+        "description": ""
+    },
+    "SkillUnlock_KingAlpaca": {
+        "localized_name": "Kingpaca Saddle",
+        "description": ""
+    },
+    "SkillUnlock_KingAlpaca_Ice": {
+        "localized_name": "Kingpaca Cryst Saddle",
+        "description": ""
+    },
+    "SkillUnlock_KingBahamut": {
+        "localized_name": "Blazamut Saddle",
+        "description": ""
+    },
+    "SkillUnlock_Kirin": {
+        "localized_name": "Univolt Saddle",
+        "description": ""
+    },
+    "SkillUnlock_Kitsunebi": {
+        "localized_name": "Foxparks's Harness",
+        "description": ""
+    },
+    "SkillUnlock_LazyDragon": {
+        "localized_name": "Relaxaurus's Missile Launcher",
+        "description": ""
+    },
+    "SkillUnlock_LazyDragon_Electric": {
+        "localized_name": "Relaxaurus's Lux Missile Launcher",
+        "description": ""
+    },
+    "SkillUnlock_Manticore": {
+        "localized_name": "Blazehowl Saddle",
+        "description": ""
+    },
+    "SkillUnlock_Manticore_Dark": {
+        "localized_name": "Blazehowl Noct Saddle",
+        "description": ""
+    },
+    "SkillUnlock_Monkey": {
+        "localized_name": "Tanzee's Assault Rifle",
+        "description": ""
+    },
+    "SkillUnlock_MopKing": {
+        "localized_name": "Sweepa Saddle",
+        "description": ""
+    },
+    "SkillUnlock_NaughtyCat": {
+        "localized_name": "Grintale Saddle",
+        "description": ""
+    },
+    "SkillUnlock_NegativeOctopus": {
+        "localized_name": "Killamari's Gloves",
+        "description": ""
+    },
+    "SkillUnlock_Penguin": {
+        "localized_name": "Pengullet's Rocket Launcher",
+        "description": ""
+    },
+    "SkillUnlock_RaijinDaughter": {
+        "localized_name": "Dazzi's Necklace",
+        "description": ""
+    },
+    "SkillUnlock_RedArmorBird": {
+        "localized_name": "Ragnahawk Saddle",
+        "description": ""
+    },
+    "SkillUnlock_SaintCentaur": {
+        "localized_name": "Paladius Saddle",
+        "description": ""
+    },
+    "SkillUnlock_SakuraSaurus": {
+        "localized_name": "Broncherry Saddle",
+        "description": ""
+    },
+    "SkillUnlock_SakuraSaurus_Water": {
+        "localized_name": "Broncherry Aqua Saddle",
+        "description": ""
+    },
+    "SkillUnlock_Serpent": {
+        "localized_name": "Surfent Saddle",
+        "description": ""
+    },
+    "SkillUnlock_Serpent_Ground": {
+        "localized_name": "Surfent Terra Saddle",
+        "description": ""
+    },
+    "SkillUnlock_SkyDragon": {
+        "localized_name": "Quivern Saddle",
+        "description": ""
+    },
+    "SkillUnlock_Suzaku": {
+        "localized_name": "Suzaku Saddle",
+        "description": ""
+    },
+    "SkillUnlock_Suzaku_Water": {
+        "localized_name": "Suzaku Aqua Saddle",
+        "description": ""
+    },
+    "SkillUnlock_ThunderBird": {
+        "localized_name": "Beakon Saddle",
+        "description": ""
+    },
+    "SkillUnlock_ThunderDog": {
+        "localized_name": "Rayhound Saddle",
+        "description": ""
+    },
+    "SkillUnlock_Umihebi": {
+        "localized_name": "Jormuntide Saddle",
+        "description": ""
+    },
+    "SkillUnlock_Umihebi_Fire": {
+        "localized_name": "Jormuntide Ignis Saddle",
+        "description": ""
+    },
+    "SkillUnlock_VolcanicMonster": {
+        "localized_name": "Reptyro Saddle",
+        "description": ""
+    },
+    "SkillUnlock_VolcanicMonster_Ice": {
+        "localized_name": "Reptyro Cryst Saddle",
+        "description": ""
+    },
+    "SkillUnlock_WeaselDragon": {
+        "localized_name": "Chillet Saddle",
+        "description": ""
+    },
+    "SkillUnlock_WindChimes": {
+        "localized_name": "Hangyu's Gloves",
+        "description": ""
+    },
+    "SkillUnlock_WindChimes_Ice": {
+        "localized_name": "Hangyu Cryst's Glove",
+        "description": ""
+    },
+    "SkillUnlock_WingGolem": {
+        "localized_name": "Knocklem Saddle",
+        "description": ""
+    },
+    "SkillUnlock_Yeti": {
+        "localized_name": "Wumpo Saddle",
+        "description": ""
+    },
+    "SkillUnlock_Yeti_Grass": {
+        "localized_name": "Wumpo Botan Saddle",
+        "description": ""
+    },
+    "SmallBullet": {
+        "localized_name": "SmallBullet",
+        "description": ""
+    },
+    "SniperRifle_Default": {
+        "localized_name": "SniperRifle_Default",
+        "description": ""
+    },
+    "Snowman": {
+        "localized_name": "Snowman",
+        "description": ""
+    },
+    "Spa": {
+        "localized_name": "Spa",
+        "description": ""
+    },
+    "Spa2": {
+        "localized_name": "Spa2",
+        "description": ""
+    },
+    "Spear": {
+        "localized_name": "Stone Spear",
+        "description": ""
+    },
+    "Spear_2": {
+        "localized_name": "Metal Spear",
+        "description": ""
+    },
+    "Spear_3": {
+        "localized_name": "Refined Metal Spear",
+        "description": ""
+    },
+    "Spear_ForestBoss": {
+        "localized_name": "Lily's Spear",
+        "description": ""
+    },
+    "Spear_QueenBee": {
+        "localized_name": "Elizabee's Staff",
+        "description": ""
+    },
+    "Spear_SoldierBee": {
+        "localized_name": "Beegarde's Spear",
+        "description": ""
+    },
+    "Special_HatchingPalEgg": {
+        "localized_name": "Special_HatchingPalEgg",
+        "description": ""
+    },
+    "Special_PalRankUp": {
+        "localized_name": "Special_PalRankUp",
+        "description": ""
+    },
+    "Special_PalSphere_Grade_01": {
+        "localized_name": "Special_PalSphere_Grade_01",
+        "description": ""
+    },
+    "Special_PalSphere_Grade_02": {
+        "localized_name": "Special_PalSphere_Grade_02",
+        "description": ""
+    },
+    "Special_PalSphere_Grade_03": {
+        "localized_name": "Special_PalSphere_Grade_03",
+        "description": ""
+    },
+    "Special_PalSphere_Grade_04": {
+        "localized_name": "Special_PalSphere_Grade_04",
+        "description": ""
+    },
+    "Special_PalSphere_Grade_05": {
+        "localized_name": "Special_PalSphere_Grade_05",
+        "description": ""
+    },
+    "Special_PalSphere_Grade_06": {
+        "localized_name": "Special_PalSphere_Grade_06",
+        "description": ""
+    },
+    "Special_SphereFactory_Black_Grade_01": {
+        "localized_name": "Special_SphereFactory_Black_Grade_01",
+        "description": ""
+    },
+    "Special_SphereFactory_Black_Grade_02": {
+        "localized_name": "Special_SphereFactory_Black_Grade_02",
+        "description": ""
+    },
+    "Special_SphereFactory_Black_Grade_03": {
+        "localized_name": "Special_SphereFactory_Black_Grade_03",
+        "description": ""
+    },
+    "SphereLauncher": {
+        "localized_name": "Scatter Sphere Launcher",
+        "description": ""
+    },
+    "SphereLauncher_Once": {
+        "localized_name": "Single-shot Sphere Launcher",
+        "description": ""
+    },
+    "StatusPointResetSan": {
+        "localized_name": "Memory Wiping Medicine",
+        "description": ""
+    },
+    "StealArmor": {
+        "localized_name": "Pal Metal Armor",
+        "description": ""
+    },
+    "StealArmorCold": {
+        "localized_name": "Cold Resistant Pal Metal Armor",
+        "description": ""
+    },
+    "StealArmorCold_2": {
+        "localized_name": "Cold Resistant Pal Metal Armor +1",
+        "description": ""
+    },
+    "StealArmorCold_3": {
+        "localized_name": "Cold Resistant Pal Metal Armor +2",
+        "description": ""
+    },
+    "StealArmorCold_4": {
+        "localized_name": "Cold Resistant Pal Metal Armor +3",
+        "description": ""
+    },
+    "StealArmorCold_5": {
+        "localized_name": "Cold Resistant Pal Metal Armor +4",
+        "description": ""
+    },
+    "StealArmorHeat": {
+        "localized_name": "Heat Resistant Pal Metal Armor",
+        "description": ""
+    },
+    "StealArmorHeat_2": {
+        "localized_name": "Heat Resistant Pal Metal Armor +1",
+        "description": ""
+    },
+    "StealArmorHeat_3": {
+        "localized_name": "Heat Resistant Pal Metal Armor +2",
+        "description": ""
+    },
+    "StealArmorHeat_4": {
+        "localized_name": "Heat Resistant Pal Metal Armor +3",
+        "description": ""
+    },
+    "StealArmorHeat_5": {
+        "localized_name": "Heat Resistant Pal Metal Armor +4",
+        "description": ""
+    },
+    "StealArmor_2": {
+        "localized_name": "Pal Metal Armor +1",
+        "description": ""
+    },
+    "StealArmor_3": {
+        "localized_name": "Pal Metal Armor +2",
+        "description": ""
+    },
+    "StealArmor_4": {
+        "localized_name": "Pal Metal Armor +3",
+        "description": ""
+    },
+    "StealArmor_5": {
+        "localized_name": "Pal Metal Armor +4",
+        "description": ""
+    },
+    "StealHelmet": {
+        "localized_name": "Pal Metal Helm",
+        "description": ""
+    },
+    "StealHelmet_2": {
+        "localized_name": "Pal Metal Helm +1",
+        "description": ""
+    },
+    "StealHelmet_3": {
+        "localized_name": "Pal Metal Helm +2",
+        "description": ""
+    },
+    "StealHelmet_4": {
+        "localized_name": "Pal Metal Helm +3",
+        "description": ""
+    },
+    "StealHelmet_5": {
+        "localized_name": "Pal Metal Helm +4",
+        "description": ""
+    },
+    "StealIngot": {
+        "localized_name": "Pal Metal Ingot",
+        "description": ""
+    },
+    "Stew": {
+        "localized_name": "Stew",
+        "description": ""
+    },
+    "StewedIceDeer": {
+        "localized_name": "Reindrix Stew",
+        "description": ""
+    },
+    "Stone": {
+        "localized_name": "Stone",
+        "description": ""
+    },
+    "Stone_Gate": {
+        "localized_name": "Stone_Gate",
+        "description": ""
+    },
+    "Stone_houseset": {
+        "localized_name": "Stone_houseset",
+        "description": ""
+    },
+    "Stump": {
+        "localized_name": "Stump",
+        "description": ""
+    },
+    "Sulfur": {
+        "localized_name": "Sulfur",
+        "description": ""
+    },
+    "Sweet": {
+        "localized_name": "Cotton Candy",
+        "description": ""
+    },
+    "Sword": {
+        "localized_name": "Sword",
+        "description": ""
+    },
+    "TechnologyBook_G1": {
+        "localized_name": "High Grade Technical Manual",
+        "description": ""
+    },
+    "TechnologyBook_G2": {
+        "localized_name": "Innovative Technical Manual",
+        "description": ""
+    },
+    "TechnologyBook_G3": {
+        "localized_name": "Future Technical Manual",
+        "description": ""
+    },
+    "ThrowStone": {
+        "localized_name": "ThrowStone",
+        "description": ""
+    },
+    "Tomato": {
+        "localized_name": "Tomato",
+        "description": ""
+    },
+    "TomatoSeeds": {
+        "localized_name": "Tomato Seeds",
+        "description": ""
+    },
+    "ToolBoxV1": {
+        "localized_name": "ToolBoxV1",
+        "description": ""
+    },
+    "Torch": {
+        "localized_name": "Hand-held Torch",
+        "description": ""
+    },
+    "TransmissionTower": {
+        "localized_name": "TransmissionTower",
+        "description": ""
+    },
+    "Trap_LegHold": {
+        "localized_name": "Trap_LegHold",
+        "description": ""
+    },
+    "Trap_LegHold_Big": {
+        "localized_name": "Trap_LegHold_Big",
+        "description": ""
+    },
+    "Trap_MineAttack": {
+        "localized_name": "Trap_MineAttack",
+        "description": ""
+    },
+    "Trap_MineElecShock": {
+        "localized_name": "Trap_MineElecShock",
+        "description": ""
+    },
+    "Trap_MineFreeze": {
+        "localized_name": "Trap_MineFreeze",
+        "description": ""
+    },
+    "Trap_Noose": {
+        "localized_name": "Trap_Noose",
+        "description": ""
+    },
+    "TreasureBoxKey01": {
+        "localized_name": "Copper Key",
+        "description": ""
+    },
+    "TreasureBoxKey02": {
+        "localized_name": "Silver Key",
+        "description": ""
+    },
+    "TreasureBoxKey03": {
+        "localized_name": "Gold Key",
+        "description": ""
+    },
+    "Unko_L": {
+        "localized_name": "Huge Dung Pile",
+        "description": ""
+    },
+    "Unko_S": {
+        "localized_name": "Dung",
+        "description": ""
+    },
+    "UnlockEquipmentSlot_Accessory_01": {
+        "localized_name": "Mysterious Accessory Box",
+        "description": ""
+    },
+    "UnlockEquipmentSlot_Accessory_02": {
+        "localized_name": "Box of Mystery Accessories",
+        "description": ""
+    },
+    "Unlock_Picking_Tier1": {
+        "localized_name": "Lockpicking Tool v1",
+        "description": ""
+    },
+    "Unlock_Picking_Tier2": {
+        "localized_name": "Lockpicking Tool v2",
+        "description": ""
+    },
+    "Unlock_Picking_Tier3": {
+        "localized_name": "Lockpicking Tool v3",
+        "description": ""
+    },
+    "VenisonBoiledInTomato": {
+        "localized_name": "VenisonBoiledInTomato",
+        "description": ""
+    },
+    "Venom": {
+        "localized_name": "Venom Gland",
+        "description": ""
+    },
+    "WallTorch": {
+        "localized_name": "WallTorch",
+        "description": ""
+    },
+    "WaterBucket": {
+        "localized_name": "WaterBucket",
+        "description": ""
+    },
+    "WeakerBow": {
+        "localized_name": "Old Bow",
+        "description": ""
+    },
+    "WeakerBow_2": {
+        "localized_name": "Old Bow +1",
+        "description": ""
+    },
+    "WeakerBow_3": {
+        "localized_name": "Old Bow +2",
+        "description": ""
+    },
+    "WeakerBow_4": {
+        "localized_name": "Old Bow +3",
+        "description": ""
+    },
+    "WeakerBow_5": {
+        "localized_name": "Old Bow +4",
+        "description": ""
+    },
+    "Wheat": {
+        "localized_name": "Wheat",
+        "description": ""
+    },
+    "WheatSeeds": {
+        "localized_name": "Wheat Seeds",
+        "description": ""
+    },
+    "Wine": {
+        "localized_name": "Wine",
+        "description": ""
+    },
+    "Wood": {
+        "localized_name": "Wood",
+        "description": ""
+    },
+    "Wood_Gate": {
+        "localized_name": "Wood_Gate",
+        "description": ""
+    },
+    "Wooden_houseset": {
+        "localized_name": "Wooden_houseset",
+        "description": ""
+    },
+    "Wool": {
+        "localized_name": "Wool",
+        "description": ""
+    },
+    "Workbench": {
+        "localized_name": "Workbench",
+        "description": ""
+    },
+    "bone": {
+        "localized_name": "Bone",
+        "description": ""
+    }
+}

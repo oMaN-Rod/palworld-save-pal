@@ -11,23 +11,23 @@ export class PassiveSkills {
 
 	private async initializePassiveSkills() {
 		const i18nData = await assetLoader.loadJson<
-			Record<string, { Name: string; Description: string; Effect: string }>
+			Record<string, { name: string; description: string; effect: string }>
 		>(`${ASSET_DATA_PATH}/data/en-GB/passive_skills.json`);
 		const statsData = await assetLoader.loadJson<
-			Record<string, { Rating?: string; Tier?: string; Bonuses?: Bonuses }>
+			Record<string, { rating?: string; tier?: string; bonuses?: Bonuses }>
 		>(`${ASSET_DATA_PATH}/data/passive_skills.json`);
 
 		for (const [skillId, details] of Object.entries(i18nData)) {
 			const stats = statsData[skillId] || {};
 			const skill: PassiveSkill = {
 				id: skillId,
-				name: details.Name,
+				name: details.name,
 				details: {
-					Description: details.Description,
-					Effect: details.Effect,
-					Rating: stats.Rating || '',
-					Tier: stats.Tier || '',
-					Bonuses: stats.Bonuses || { Attack: 0, Defense: 0, WorkSpeed: 0 }
+					description: details.description,
+					effect: details.effect,
+					rating: stats.rating || '',
+					tier: stats.tier || '',
+					bonuses: stats.bonuses || { attack: 0, defense: 0, work_speed: 0 }
 				}
 			};
 			this.passive_skills[skillId.toLowerCase()] = skill;
@@ -64,7 +64,7 @@ export class PassiveSkills {
 			if (field in passiveSkill) {
 				return passiveSkill[field as keyof PassiveSkill] as string;
 			} else if (field in passiveSkill.details) {
-				return passiveSkill.details[field as keyof PassiveSkillDetails];
+				return passiveSkill.details[field as keyof PassiveSkillDetails] as string;
 			}
 		}
 		return null;
@@ -73,21 +73,21 @@ export class PassiveSkills {
 	async searchPassiveSkillsByEffect(effect: string): Promise<PassiveSkill[]> {
 		await this.ensureInitialized();
 		return Object.values(this.passive_skills).filter(
-			(skill) => skill.details.Effect.toLowerCase() === effect.toLowerCase()
+			(skill) => skill.details.effect.toLowerCase() === effect.toLowerCase()
 		);
 	}
 
 	async searchPassiveSkillsByTier(tier: string): Promise<PassiveSkill[]> {
 		await this.ensureInitialized();
 		return Object.values(this.passive_skills).filter(
-			(skill) => skill.details.Tier.toLowerCase() === tier.toLowerCase()
+			(skill) => skill.details.tier.toLowerCase() === tier.toLowerCase()
 		);
 	}
 
 	async searchPassiveSkillsByRating(rating: string): Promise<PassiveSkill[]> {
 		await this.ensureInitialized();
 		return Object.values(this.passive_skills).filter(
-			(skill) => skill.details.Rating.toLowerCase() === rating.toLowerCase()
+			(skill) => skill.details.rating.toLowerCase() === rating.toLowerCase()
 		);
 	}
 

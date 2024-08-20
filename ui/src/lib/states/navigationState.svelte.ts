@@ -1,4 +1,4 @@
-export type Page = 'Edit' | 'Info' | 'File' | 'Settings' | 'Loading';
+export type Page = 'Edit' | 'Info' | 'File' | 'Settings' | 'Loading' | 'Error';
 
 export interface NavigationState {
 	activePage: Page;

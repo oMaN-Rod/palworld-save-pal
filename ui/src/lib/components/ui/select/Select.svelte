@@ -1,5 +1,4 @@
 <script lang="ts" generics="T">
-	import { onMount } from 'svelte';
 	import type { SelectOption } from '$types';
 	import { nanoid } from 'nanoid';
 	import { cn } from '$theme';
@@ -118,7 +117,7 @@
 		}
 	}
 
-	onMount(() => {
+	$effect(() => {
 		const handleClickOutside = (event: MouseEvent) => {
 			if (containerRef && !containerRef.contains(event.target as Node)) {
 				isOpen = false;

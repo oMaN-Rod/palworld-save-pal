@@ -32,31 +32,7 @@ Grab the latest release from the [Releases](https://github.com/oMaN-Rod/psp/rele
 
 ## 🎮 Usage
 
-To use PALWorld Save Pal, follow these steps:
-
-1. Go the file page and add a file
-   ![File Page](./img/file-page.png)
-2. Click the upload button
-   ![Upload Button](./img/file-upload.png)
-3. Select a player to see their pals, select any pal in the list
-   ![Select Player](./img/player-select.png)
-   *Alternatively you can use the filter to find a pal by name, nickname, or Element type*
-   ![Pal Filter](./img/pal-filter.png)
-4. Currently the available edit options are (more coming soon!):
-   - Nickname
-   - Gender
-   - Active Skills
-   - Passive Skills
-   ![Edit Options](./img/edit-options.png)
-   *You can hover over skill badges to see additional information*
-   ![Skill Info](./img/skill-info.png)
-5. Click on a skill badge to select/search for a new skill
-   ![Active Skill Select](./img/active-skill-select.png)
-   ![Passive Skill Search](./img/passive-skill-search.png)
-6. Click the save button to save your changes
-   ![Save Changes](./img/save-changes.png)
-7. Head back to the file page and click the download button to download your updated save file
-   ![Download Button](./img/file-download.png)
+Details for using PALWorld Save Pal can be found in the [User Guide](https://github.com/oMaN-Rod/palworld-save-pal/wiki/usage).
 
 ## 🐳 Docker
 

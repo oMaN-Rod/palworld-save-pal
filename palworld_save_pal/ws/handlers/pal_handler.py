@@ -32,13 +32,13 @@ async def get_pal_details_handler(message: GetPalDetailsMessage, ws: WebSocket):
             raise ValueError(f"No Pal found with ID {pal_id}")
 
         data = pal.model_dump_json()
-        response = build_response(MessageType.GET_PAL_DETAILS, data, f"{pal_id} loaded")
+        response = build_response(MessageType.GET_PAL_DETAILS, data)
         await ws.send_json(response)
 
     except Exception as e:
         logger.error("Error processing get_pal_details: %s", str(e))
         response = build_response(
-            MessageType.ERROR, None, f"Error getting Pal details: {str(e)}"
+            MessageType.ERROR, f"Error getting Pal details: {str(e)}"
         )
         await ws.send_json(response)
         traceback.print_exc()
