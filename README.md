@@ -32,7 +32,7 @@ Grab the latest release from the [Releases](https://github.com/oMaN-Rod/psp/rele
 
 ## 🎮 Usage
 
-Details for using PALWorld Save Pal can be found in the [User Guide](https://github.com/oMaN-Rod/palworld-save-pal/wiki/usage).
+Details for using PALWorld Save Pal can be found in the [User Guide](https://github.com/oMaN-Rod/palworld-save-pal/wiki/%F0%9F%8E%AE-Usage)
 
 ## 🐳 Docker
 
