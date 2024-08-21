@@ -28,7 +28,7 @@ Palworld Save Pal is a tool for managing and analyzing save files.
 
 ## 🚀 Installation
 
-Grab the latest release from the [Releases](https://github.com/oMaN-Rod/psp/releases) page and extract it to a folder of your choice.
+Grab the latest release from the [releases](https://github.com/oMaN-Rod/palworld-save-pal/releases) page and extract it to a folder of your choice.
 
 ## 🎮 Usage
 
