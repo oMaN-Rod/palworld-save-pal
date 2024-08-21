@@ -4,7 +4,7 @@
 
 ⚠️ **Backup your save files before using this tool!!** ⚠️
 
-PALWorld Save Pal is a tool for managing and analyzing save files for the game PALWorld.
+Palworld Save Pal is a tool for managing and analyzing save files.
 
 ## 📋 Table of Contents
 
@@ -32,11 +32,11 @@ Grab the latest release from the [Releases](https://github.com/oMaN-Rod/psp/rele
 
 ## 🎮 Usage
 
-Details for using PALWorld Save Pal can be found in the [User Guide](https://github.com/oMaN-Rod/palworld-save-pal/wiki/%F0%9F%8E%AE-Usage)
+Details for using Palworld Save Pal can be found in the [User Guide](https://github.com/oMaN-Rod/palworld-save-pal/wiki/%F0%9F%8E%AE-Usage)
 
 ## 🐳 Docker
 
-To run PALWorld Save Pal using Docker:
+To run Palworld Save Pal using Docker:
 
 1. Clone this repository:
 
@@ -78,7 +78,7 @@ To run PALWorld Save Pal using Docker:
 
 ## 👨‍💻 Developer Guide
 
-For developers who want to contribute to PALWorld Save Pal:
+For developers who want to contribute to Palworld Save Pal:
 
 ### Web
 
@@ -156,14 +156,14 @@ For developers who want to contribute to PALWorld Save Pal:
 
 ## 🗺️ Roadmap
 
-Here's what's planned for future releases of PALWorld Save Pal:
+Here's what's planned for future releases of Palworld Save Pal:
 
 ### General
 
 - [X] Filter Pals by name, nickname, or Element type
 - [ ] Remote access to save files (sftp to remote server)
 - [ ] Bulk edit pals (e.g., set all stomachs to 100%)
-- [ ] Profile system to save/load presets for pals and players
+- [ ] Profile system to save/load presets for pals and players (Partially implemeted for player inventory)
 - [ ] Proper localization support
 
 ### Pals
@@ -189,10 +189,10 @@ Here's what's planned for future releases of PALWorld Save Pal:
 
 - [ ] Edit Player Name
 - [ ] Edit Player Level
-- [ ] Edit Player Money
-- [ ] Edit Player Inventory
+- [X] Edit Player Money
+- [X] Edit Player Inventory
 - [ ] Add/Remove Players
-- [ ] Player profiles creating presets for level, money, and inventory
+- [ ] Player profiles creating presets for level, money, and inventory (Partially implemeted for player inventory)
 
 ### Map
 
