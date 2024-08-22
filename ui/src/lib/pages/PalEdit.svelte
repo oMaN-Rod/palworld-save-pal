@@ -72,7 +72,7 @@
 	async function getPalElementBadge(elementType: string): Promise<string | undefined> {
 		const elementObj = await elementsData.searchElement(elementType);
 		if (!elementObj) return undefined;
-		const icon_path = `${ASSET_DATA_PATH}/img/elements/${elementObj.badge_icon}.webp`;
+		const icon_path = `${ASSET_DATA_PATH}/img/elements/${elementObj.badge_icon}.png`;
 		const icon = await assetLoader.loadImage(icon_path, true);
 		return icon;
 	}

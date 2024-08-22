@@ -34,7 +34,7 @@
 			console.log(JSON.stringify(activeSkill, null, 2));
 			element = await elementsData.searchElement(activeSkill.details.type);
 			if (element) {
-				const iconPath = `${ASSET_DATA_PATH}/img/elements/${element.white_icon}.webp`;
+				const iconPath = `${ASSET_DATA_PATH}/img/elements/${element.white_icon}.png`;
 				elementIcon = await assetLoader.loadImage(iconPath, true);
 			}
 		} else {

@@ -25,7 +25,7 @@
 		if (skill) {
 			passiveSkill = await passiveSkillsData.searchPassiveSkills(skill);
 			if (passiveSkill) {
-				const iconPath = `${ASSET_DATA_PATH}/img/passives/Passive_${passiveSkill.details.tier.toUpperCase()}_icon.webp`;
+				const iconPath = `${ASSET_DATA_PATH}/img/passives/Passive_${passiveSkill.details.tier.toUpperCase()}_icon.png`;
 				tierIcon = await assetLoader.loadImage(iconPath, true);
 			}
 		}

@@ -5,6 +5,6 @@ import { defineConfig } from 'vitest/config';
 export default defineConfig({
 	plugins: [enhancedImages(), sveltekit()],
 	test: {
-		include: ['src/**/*.{test,spec}.{js,ts}', 'static/**/*.{png,webp,json}']
+		include: ['src/**/*.{test,spec}.{js,ts}', 'static/**/*.{png,json}']
 	}
 });

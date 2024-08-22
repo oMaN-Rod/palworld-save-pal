@@ -93,7 +93,7 @@
 		for (const elementType of elementTypes) {
 			const elementObj = await elementsData.searchElement(elementType);
 			if (elementObj) {
-				const iconPath = `${ASSET_DATA_PATH}/img/elements/${elementObj.badge_icon}.webp`;
+				const iconPath = `${ASSET_DATA_PATH}/img/elements/${elementObj.badge_icon}.png`;
 				try {
 					elementIcons[elementType] = await assetLoader.loadImage(iconPath, true);
 				} catch (error) {
@@ -106,7 +106,7 @@
 	async function getPalElementBadge(elementType: string): Promise<string | undefined> {
 		const elementObj = await elementsData.searchElement(elementType);
 		if (!elementObj) return undefined;
-		const icon_path = `${ASSET_DATA_PATH}/img/elements/${elementObj.badge_icon}.webp`;
+		const icon_path = `${ASSET_DATA_PATH}/img/elements/${elementObj.badge_icon}.png`;
 		const icon = await assetLoader.loadImage(icon_path, true);
 		return icon;
 	}
@@ -114,7 +114,7 @@
 	async function getPalElementIcon(elementType: string): Promise<string | undefined> {
 		const elementObj = await elementsData.searchElement(elementType);
 		if (!elementObj) return undefined;
-		const icon_path = `${ASSET_DATA_PATH}/img/elements/${elementObj.icon}.webp`;
+		const icon_path = `${ASSET_DATA_PATH}/img/elements/${elementObj.icon}.png`;
 		const icon = await assetLoader.loadImage(icon_path, true);
 		return icon;
 	}

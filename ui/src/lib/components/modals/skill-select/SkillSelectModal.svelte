@@ -34,7 +34,7 @@
 		for (const elementType of elementTypes) {
 			const elementObj = await elementsData.searchElement(elementType);
 			if (elementObj) {
-				const iconPath = `${ASSET_DATA_PATH}/img/elements/${elementObj.badge_icon}.webp`;
+				const iconPath = `${ASSET_DATA_PATH}/img/elements/${elementObj.badge_icon}.png`;
 				try {
 					elementIcons[elementType] = await assetLoader.loadImage(iconPath, true);
 				} catch (error) {
@@ -84,7 +84,7 @@
 		const activeSkill = skill as ActiveSkill;
 		const elementObj = await elementsData.searchElement(activeSkill.details.type);
 		if (!elementObj) return undefined;
-		const iconPath = `${ASSET_DATA_PATH}/img/elements/${elementObj.icon}.webp`;
+		const iconPath = `${ASSET_DATA_PATH}/img/elements/${elementObj.icon}.png`;
 		const icon = await assetLoader.loadImage(iconPath, true);
 		return icon;
 	}
@@ -93,7 +93,7 @@
 		const skill = passiveSkills.find((s) => s.id === skillId);
 		if (!skill || skill.name === 'None') return undefined;
 		const passiveSkill = skill as PassiveSkill;
-		const iconPath = `${ASSET_DATA_PATH}/img/passives/Passive_${passiveSkill.details.tier.toUpperCase()}_icon.webp`;
+		const iconPath = `${ASSET_DATA_PATH}/img/passives/Passive_${passiveSkill.details.tier.toUpperCase()}_icon.png`;
 		const icon = await assetLoader.loadImage(iconPath, true);
 		return icon;
 	}

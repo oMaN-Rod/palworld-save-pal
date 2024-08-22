@@ -9,7 +9,7 @@ interface AssetLoaderOptions {
 class AssetLoader {
 	private cache: Record<string, any> = {};
 	private jsonGlob = import.meta.glob('$lib/assets/data/**/*.json', { eager: true });
-	private imageGlob = import.meta.glob('$lib/assets/img/**/*.{png,jpg,jpeg,gif,webp,avif}', {
+	private imageGlob = import.meta.glob('$lib/assets/img/**/*.png', {
 		eager: true
 	});
 	private svgGlob = import.meta.glob('$lib/assets/img/**/*.svg', {
@@ -17,7 +17,7 @@ class AssetLoader {
 		as: 'raw'
 	});
 	private enhancedImageGlob = import.meta.glob(
-		'$lib/assets/img/**/*.{png,jpg,jpeg,gif,webp,avif}',
+		'$lib/assets/img/**/*.png',
 		{
 			eager: true,
 			query: { enhanced: true }
