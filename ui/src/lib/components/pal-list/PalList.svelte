@@ -146,9 +146,9 @@
 	});
 
 	$effect(() => {
-		searchQuery = searchQuery.trim();
-		selectedElement = selectedElement.trim();
-		debouncedFilterPals();
+		if (searchQuery || selectedElement) {
+			debouncedFilterPals();
+		}
 	});
 
 	$effect(() => {

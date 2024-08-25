@@ -68,6 +68,8 @@
 	$effect(() => {
 		if (searchTerm) {
 			debounceSearch();
+		} else {
+			filteredOptions = options;
 		}
 	});
 
