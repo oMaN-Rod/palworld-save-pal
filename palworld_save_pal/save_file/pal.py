@@ -9,6 +9,7 @@ from palworld_save_pal.utils.logging_config import create_logger
 from palworld_save_pal.save_file.utils import safe_get
 from palworld_save_pal.save_file.enums import PalGender, Element
 from palworld_save_pal.save_file.encoders import custom_uuid_encoder
+from palworld_save_pal.save_file.pal_objects import *
 
 from palworld_save_pal.save_file.empty_objects import get_empty_property, PropertyType
 
@@ -17,6 +18,9 @@ logger = create_logger(__name__)
 
 def process_character_id(character_id: str, is_lucky: bool) -> Tuple[str, bool]:
     is_boss = False
+    if not character_id:
+        logger.error("Character ID is empty")
+        return character_id, is_boss
     if character_id.lower().startswith("boss_"):
         character_id = character_id[5:]
         is_boss = not is_lucky
@@ -42,7 +46,7 @@ class Pal(BaseModel):
     is_lucky: bool = False
     is_boss: bool = False
     character_id: Optional[str] = Field(None)
-    gender: PalGender = PalGender.UNKNOWN
+    gender: PalGender = PalGender.FEMALE
     work_speed: float = Field(0.0)
     rank_hp: int = 0
     rank_attack: int = 0
@@ -66,174 +70,95 @@ class Pal(BaseModel):
     max_hp: int = 0
     elements: List[Element] = Field(default_factory=list)
 
-    _data: Dict[str, Any] = PrivateAttr(default_factory=dict)
     _pal_obj: Dict[str, Any] = PrivateAttr(default_factory=dict)
 
     def __init__(self, **data):
         super().__init__(**data)
-        self._data = data.get("data", {})
-        if self._data:
+        data = data.get("data", {})
+        if data:
             instance_id = (
                 self.instance_id
                 if self.instance_id
-                else safe_get(self._data, "key", "InstanceId", "value", default=None)
+                else PalObjects.get_value(data["key"]["InstanceId"])
             )
-            self.instance_id = instance_id.UUID()
-            self._pal_obj = safe_get(
-                self._data,
-                "value",
-                "RawData",
-                "value",
-                "object",
-                "SaveParameter",
-                "value",
-                default={},
-            )
+            self.instance_id = instance_id.UUID() if isinstance(instance_id, ArchiveUUID) else instance_id
+            self._pal_obj = PalObjects.get_nested(data, "value", "RawData", "value", "object", "SaveParameter", "value")
+            if not self._pal_obj:
+                logger.error("Failed to parse pal object: %s", data)
+                return
             self._parse_pal_data()
 
     def _parse_pal_data(self):
-        self.character_id = self._parse_str(self._extract_value("CharacterID"))
+        self.character_id = PalObjects.get_value(self._pal_obj["CharacterID"])
         if not self.character_id or self.character_id == "":
             logger.error("Failed to parse character ID: %s", self._pal_obj)
             return
-
-        self.owner_uid = self._parse_uuid(self._extract_value("OwnerPlayerUId"))
-        self.is_lucky = self._parse_bool(self._extract_value("IsRarePal"))
-        self.work_speed = self._parse_float(self._extract_value("CraftSpeed"), 0.0)
-        self.nickname = self._parse_str(self._extract_value("NickName"))
+        self.owner_uid = PalObjects.get_guid(self._pal_obj["OwnerPlayerUId"])
+        self.is_lucky = PalObjects.get_value(self._pal_obj["IsRarePal"]) if "IsRarePal" in self._pal_obj else False
+        self.work_speed = PalObjects.get_value(self._pal_obj["CraftSpeed"])
+        self.nickname = PalObjects.get_value(self._pal_obj["NickName"]) if "NickName" in self._pal_obj else None
 
         self._process_character_id()
-        self._set_gender()
-        self._set_talents()
-        self._set_rank()
-        self._set_level()
-        self._set_storage_info()
-        self._set_skills()
-        self._set_work_suitabilities()
-        self._set_hp()
-        self._pal_obj = {}
-        self._data = {}
+        self._get_gender()
+        self._get_talents()
+        self._get_ranks()
+        self._get_level()
+        self._get_storage_info()
+        self._get_skills()
+        self._get_work_suitabilities()
+        self._get_hp()
         logger.info("Parsed PalEntity data: %s", self)
-
-    def _extract_value(self, key: str, d: Dict[str, Any] | None = None) -> Any:
-        target = d or self._pal_obj
-        value = safe_get(target, key, "value", default=None)
-        if isinstance(value, dict):
-            if "value" in value:
-                return value["value"]
-            elif "values" in value:
-                return value["values"]
-        return value
 
     def _process_character_id(self):
         self.character_id, self.is_boss = process_character_id(
             self.character_id, self.is_lucky
         )
 
-    def _set_gender(self):
-        gender_value = self._extract_value("Gender")
-        if isinstance(gender_value, dict) and "value" in gender_value:
-            gender_value = gender_value["value"]
-        if gender_value == "EPalGenderType::Male":
-            self.gender = PalGender.MALE
-        elif gender_value == "EPalGenderType::Female":
-            self.gender = PalGender.FEMALE
+    def _get_gender(self):
+        gender = PalObjects.get_enum_property(self._pal_obj["Gender"])
+        self.gender = PalGender.from_value(gender)
 
-    def _set_talents(self):
-        self.rank_hp = self._parse_int(self._extract_value("Rank_HP"), 0)
-        self.rank_attack = self._parse_int(self._extract_value("Rank_Attack"), 0)
-        self.rank_defense = self._parse_int(self._extract_value("Rank_Defence"), 0)
-        self.rank_craftspeed = self._parse_int(
-            self._extract_value("Rank_CraftSpeed"), 0
-        )
-        self.talent_hp = self._parse_int(self._extract_value("Talent_HP"), 0)
-        self.talent_melee = self._parse_int(self._extract_value("Talent_Melee"), 0)
-        self.talent_shot = self._parse_int(self._extract_value("Talent_Shot"), 0)
-        self.talent_defense = self._parse_int(self._extract_value("Talent_Defense"), 0)
+    def _get_talents(self):
+        self.talent_hp = PalObjects.get_value(self._pal_obj["Talent_HP"], 0) if "Talent_HP" in self._pal_obj else 0
+        self.talent_melee = PalObjects.get_value(self._pal_obj["Talent_Melee"], 0) if "Talent_Melee" in self._pal_obj else 0
+        self.talent_shot = PalObjects.get_value(self._pal_obj["Talent_Shot"], 0) if "Talent_Shot" in self._pal_obj else 0
+        self.talent_defense = PalObjects.get_value(self._pal_obj["Talent_Defense"], 0) if "Talent_Defense" in self._pal_obj else 0
 
-    def _set_rank(self):
-        self.rank = self._parse_int(self._extract_value("Rank"), 1)
+    def _get_ranks(self):
+        self.rank = PalObjects.get_value(self._pal_obj["Rank"], 1) if "Rank" in self._pal_obj else 1
+        self.rank_hp = PalObjects.get_value(self._pal_obj["Rank_HP"], 0) if "Rank_HP" in self._pal_obj else 0
+        self.rank_attack = PalObjects.get_value(self._pal_obj["Rank_Attack"], 0) if "Rank_Attack" in self._pal_obj else 0
+        self.rank_defense = PalObjects.get_value(self._pal_obj["Rank_Defence"], 0) if "Rank_Defence" in self._pal_obj else 0
+        self.rank_craftspeed = PalObjects.get_value(self._pal_obj["Rank_CraftSpeed"], 0) if "Rank_CraftSpeed" in self._pal_obj else 0
         if self.rank < 1 or self.rank > 5:
             self.rank = 1
 
-    def _set_level(self):
-        self.level = self._parse_int(self._extract_value("Level"), 1)
+    def _get_level(self):
+        self.level = PalObjects.get_value(self._pal_obj["Level"], 1)
 
-    def _set_storage_info(self):
-        slot_id = self._extract_value("SlotID")
+    def _get_storage_info(self):
+        slot_id = PalObjects.get_value(self._pal_obj["SlotID"])
         if isinstance(slot_id, dict):
-            self.storage_id = self._parse_uuid(
-                safe_get(slot_id, "ContainerId", "value", "ID", "value")
-            )
-            self.storage_slot = self._parse_int(
-                safe_get(slot_id, "SlotIndex", "value"), 0
-            )
+            self.storage_id = PalObjects.get_guid(PalObjects.get_nested(slot_id, "ContainerId", "value", "ID"))
+            self.storage_slot = PalObjects.get_value(slot_id["SlotIndex"], 0)
 
-    def _set_skills(self):
-        self.learned_skills = self._parse_list(self._extract_value("MasteredWaza"))
-        self.passive_skills = self._parse_list(self._extract_value("PassiveSkillList"))
-        equip_waza = self._parse_list(self._extract_value("EquipWaza"))
-        self.active_skills = [skill.split("::")[-1] for skill in equip_waza]
+    def _get_skills(self):
+        self.learned_skills = PalObjects.get_array_property(self._pal_obj["MasteredWaza"]) if "MasteredWaza" in self._pal_obj else []
+        self.passive_skills = PalObjects.get_array_property(self._pal_obj["PassiveSkillList"]) if "PassiveSkillList" in self._pal_obj else []
+        equip_waza = PalObjects.get_array_property(self._pal_obj["EquipWaza"]) if "EquipWaza" in self._pal_obj else None
+        self.active_skills = [skill.split("::")[-1] for skill in equip_waza] if equip_waza else []
 
-    def _set_work_suitabilities(self):
-        work_suitabilities = self._parse_list(self._extract_value("CraftSpeeds"))
+    def _get_work_suitabilities(self):
+        work_suitabilities = PalObjects.get_array_property(self._pal_obj["CraftSpeeds"])
         self.work_suitabilities = {}
         for ws in work_suitabilities:
-            ws_type = safe_get(ws, "WorkSuitability", "value", "value", default="")
-            if "::" in ws_type:
-                ws_type = ws_type.split("::")[-1]
-            value = safe_get(ws, "Rank", "value", default=0)
+            ws_type = WorkSuitability.from_value(PalObjects.get_enum_property(ws["WorkSuitability"]))
+            ws_rank = PalObjects.get_value(ws["Rank"], 0)
             if ws_type:
-                self.work_suitabilities[ws_type] = value
+                self.work_suitabilities[ws_type.value()] = ws_rank
 
-    def _set_hp(self):
-        hp_value = self._extract_value("HP")
-        if isinstance(hp_value, dict) and "Value" in hp_value:
-            self.hp = self._parse_int(hp_value["Value"].get("value"), 0)
-        else:
-            self.hp = self._parse_int(hp_value, 0)
-
-    @staticmethod
-    def _parse_int(value: Any, default: int = 0) -> int:
-        try:
-            return int(value)
-        except (TypeError, ValueError):
-            return default
-
-    @staticmethod
-    def _parse_float(value: Any, default: float = 0.0) -> float:
-        try:
-            return float(value)
-        except (TypeError, ValueError):
-            return default
-
-    @staticmethod
-    def _parse_str(value: Any, default: str = "") -> str:
-        return str(value) if value is not None else default
-
-    @staticmethod
-    def _parse_bool(value: Any, default: bool = False) -> bool:
-        return bool(value) if value is not None else default
-
-    @staticmethod
-    def _parse_list(value: Any, default: List = None) -> List:
-        if isinstance(value, list):
-            return value
-        return [] if default is None else default
-
-    @staticmethod
-    def _parse_uuid(value: Any) -> Optional[UUID]:
-        if isinstance(value, UUID):
-            return value
-        if isinstance(value, ArchiveUUID):
-            return value.UUID()
-        if isinstance(value, str):
-            return UUID(value)
-        if isinstance(value, dict):
-            return Pal._parse_uuid(
-                value.get("value", "00000000-0000-0000-0000-000000000000")
-            )
-        return None
+    def _get_hp(self):
+        self.hp = PalObjects.get_fixed_point64(self._pal_obj["Hp"])
 
     @field_validator("rank")
     @classmethod
@@ -270,16 +195,7 @@ class Pal(BaseModel):
         ]
         debug_info = {}
         for field in problematic_fields:
-            value = safe_get(
-                data,
-                "value",
-                "RawData",
-                "value",
-                "object",
-                "SaveParameter",
-                "value",
-                field,
-            )
+            value = PalObjects.get_nested(data, "value", "RawData", "value", "object", "SaveParameter", "value", field)
             debug_info[field] = (
                 str(value)[:100] if value is not None else "None"
             )  # Truncate long values
@@ -287,39 +203,26 @@ class Pal(BaseModel):
 
     @classmethod
     def create_summary(cls, data: Dict[str, Any]):
-        def extract_value(key: str, d: Dict[str, Any] | None = None) -> Any:
-            value = safe_get(d, key, "value", default=None)
-            if isinstance(value, dict):
-                if "value" in value:
-                    return value["value"]
-                elif "values" in value:
-                    return value["values"]
-            return value
-
-        instance_id = cls._parse_uuid(safe_get(data, "key", "InstanceId", "value"))
-        pal_obj = safe_get(
-            data,
-            "value",
-            "RawData",
-            "value",
-            "object",
-            "SaveParameter",
-            "value",
-            default={},
-        )
-        is_lucky = cls._parse_bool(extract_value("IsRarePal"))
-        pal_character_id = cls._parse_str(extract_value("CharacterID", pal_obj))
-        pal_character_id, is_boss = process_character_id(pal_character_id, is_lucky)
-        owner_uid = cls._parse_uuid(extract_value("OwnerPlayerUId", pal_obj))
-        nickname = cls._parse_str(extract_value("NickName", pal_obj))
-        level = cls._parse_int(extract_value("Level", pal_obj), 1)
-
+        instance_id = PalObjects.get_guid(PalObjects.get_nested(data, "key", "InstanceId"))
         if not instance_id:
             logger.error("Failed to parse instance ID: %s", data)
             return None
+        
+        pal_obj = PalObjects.get_nested(data, "value", "RawData", "value", "object", "SaveParameter", "value")
+        if not pal_obj:
+            logger.error("Failed to parse pal object: %s", data)
+            return None
+        
+        pal_character_id = PalObjects.get_value(pal_obj["CharacterID"])
+        is_lucky = PalObjects.get_value(pal_obj["IsRarePal"]) if "IsRarePal" in pal_obj else False
+        pal_character_id, is_boss = process_character_id(pal_character_id, is_lucky)
         if not pal_character_id or pal_character_id == "":
             logger.error("Failed to parse character ID: %s", pal_obj)
             return None
+        
+        owner_uid = PalObjects.get_guid(pal_obj["OwnerPlayerUId"]) if "OwnerPlayerUId" in pal_obj else None
+        nickname = PalObjects.get_value(pal_obj["NickName"]) if "NickName" in pal_obj else None
+        level = PalObjects.get_value(pal_obj["Level"], 1) if "Level" in pal_obj else 1
 
         summary = cls(
             data={},

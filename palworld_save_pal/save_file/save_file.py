@@ -649,9 +649,6 @@ class SaveFile(BaseModel):
             "value",
             value=str(dynamic_item.local_id),
         )
-        local_id = safe_get(
-            dynamic_item_data, "ID", "value", "LocalIdInCreatedWorld", "value"
-        )
         safe_set(
             dynamic_item_data,
             "RawData",
