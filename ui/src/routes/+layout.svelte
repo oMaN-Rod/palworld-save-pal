@@ -7,7 +7,7 @@
 
 <Toast />
 <Modal>
-	<div class="flex h-[100vh] w-full flex-row">
+	<div class="flex h-[100vh] w-full flex-row overflow-hidden">
 		<NavBar />
 		{@render children()}
 	</div>

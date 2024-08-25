@@ -9,7 +9,7 @@
 		Spinner
 	} from '$components';
 	import { Card, CornerDotButton, SectionHeader, Tooltip } from '$components/ui';
-	import { MessageType, type Pal, PalGender } from '$types';
+	import { type Pal, PalGender } from '$types';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { palsData, elementsData } from '$lib/data';
 	import { cn } from '$theme';
@@ -376,10 +376,12 @@
 					>
 				</div>
 			</div>
-			<div class="pal flex flex-col items-center justify-center">
+			<div class="flex flex-col items-center justify-center">
 				{#await loadPalImage() then palImage}
 					{#if palImage}
-						<enhanced:img src={palImage} alt={`${appState.selectedPal.name} icon`}></enhanced:img>
+						<div class="pal">
+							<enhanced:img src={palImage} alt={`${appState.selectedPal.name} icon`}></enhanced:img>
+						</div>
 					{:else}
 						<div class="flex h-96 w-96 items-center justify-center">
 							<Spinner size="size-48" />
@@ -403,7 +405,6 @@
 
 <style lang="postcss">
 	.pal img {
-		width: auto;
 		max-height: 600px;
 	}
 </style>

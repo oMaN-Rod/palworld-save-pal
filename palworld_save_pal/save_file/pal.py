@@ -134,7 +134,7 @@ class Pal(BaseModel):
             self.rank = 1
 
     def _get_level(self):
-        self.level = PalObjects.get_value(self._pal_obj["Level"], 1)
+        self.level = PalObjects.get_value(self._pal_obj["Level"], 1) if "Level" in self._pal_obj else 1
 
     def _get_storage_info(self):
         slot_id = PalObjects.get_value(self._pal_obj["SlotID"])
