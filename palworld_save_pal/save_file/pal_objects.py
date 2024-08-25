@@ -91,6 +91,7 @@ class WorkSuitability(str, PrefixedEnum):
     @staticmethod
     def from_value(value: str):
         try:
+            value = value.replace("EPalWorkSuitability::", "")
             return WorkSuitability(value)
         except:
             logger.warning("%s is not a valid work suitability", value)

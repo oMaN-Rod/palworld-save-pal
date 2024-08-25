@@ -155,7 +155,7 @@ class Pal(BaseModel):
             ws_type = WorkSuitability.from_value(PalObjects.get_enum_property(ws["WorkSuitability"]))
             ws_rank = PalObjects.get_value(ws["Rank"], 0)
             if ws_type:
-                self.work_suitabilities[ws_type.value()] = ws_rank
+                self.work_suitabilities[ws_type.value] = ws_rank
 
     def _get_hp(self):
         self.hp = PalObjects.get_fixed_point64(self._pal_obj["Hp"])
