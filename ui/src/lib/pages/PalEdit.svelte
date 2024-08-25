@@ -376,7 +376,7 @@
 					>
 				</div>
 			</div>
-			<div class="flex flex-col items-center justify-center">
+			<div class="pal flex flex-col items-center justify-center">
 				{#await loadPalImage() then palImage}
 					{#if palImage}
 						<enhanced:img src={palImage} alt={`${appState.selectedPal.name} icon`}></enhanced:img>
@@ -400,3 +400,10 @@
 		<h2 class="h2">Upload a save file and select a Pal to edit 🚀</h2>
 	</div>
 {/if}
+
+<style lang="postcss">
+	.pal img {
+		width: auto;
+		max-height: 600px;
+	}
+</style>
