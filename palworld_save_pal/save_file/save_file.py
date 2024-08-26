@@ -299,12 +299,6 @@ class SaveFile(BaseModel):
         }
         return pals
 
-    def _get_world_save_data(self):
-        world_save_data = PalObjects.get_value(
-            self._gvas_file.properties["worldSaveData"]
-        )
-        return world_save_data
-
     def _get_player_save_data(self, player_gvas: Dict[str, Any]):
         player_save_data = PalObjects.get_value(player_gvas.properties["SaveData"])
         return player_save_data
@@ -334,7 +328,9 @@ class SaveFile(BaseModel):
                 logger.warning("Failed to create PalEntity summary")
 
     def _set_data(self) -> None:
-        world_save_data = self._get_world_save_data()
+        world_save_data = PalObjects.get_value(
+            self._gvas_file.properties["worldSaveData"]
+        )
         self._character_save_parameter_map = PalObjects.get_value(
             world_save_data["CharacterSaveParameterMap"]
         )
@@ -500,17 +496,15 @@ class SaveFile(BaseModel):
         player_save_data = self._get_player_save_data(player_gvas_file)
         self._load_player_storage(uid, player_save_data)
 
-    def _update_pal(self, pal_id: UUID, pal: Pal) -> None:
-        world_save_data = self._get_world_save_data()
-        character_save_parameter_map = PalObjects.get_value(
-            world_save_data["CharacterSaveParameterMap"]
-        )
-        for entry in character_save_parameter_map:
+    def _update_pal(self, pal_id: UUID, updated_pal: Pal) -> None:
+        for entry in self._character_save_parameter_map:
             current_instance_id = PalObjects.get_guid(
                 PalObjects.get_nested(entry, "key", "InstanceId")
             )
             if are_equal_uuids(current_instance_id, pal_id):
-                self._update_pal_entry(entry, pal)
+                existing_pal = self._pals[pal_id]
+                existing_pal.update_from(updated_pal)
+                self._update_pal_entry(entry, existing_pal)
                 return
         logger.warning("Pal with ID %s not found in the save file.", pal_id)
 
@@ -526,34 +520,11 @@ class SaveFile(BaseModel):
         pal.update(pal_obj)
 
     def _update_player(self, player: Player) -> None:
-        world_save_data = self._get_world_save_data()
-        item_container_save_data = PalObjects.get_value(
-            world_save_data["ItemContainerSaveData"]
-        )
-        dynamic_item_save_data = PalObjects.get_array_property(
-            world_save_data["DynamicItemSaveData"]
-        )
-        self._set_container_items(
-            player.common_container, item_container_save_data, dynamic_item_save_data
-        )
-        self._set_container_items(
-            player.essential_container, item_container_save_data, dynamic_item_save_data
-        )
-        self._set_container_items(
-            player.weapon_load_out_container,
-            item_container_save_data,
-            dynamic_item_save_data,
-        )
-        self._set_container_items(
-            player.player_equipment_armor_container,
-            item_container_save_data,
-            dynamic_item_save_data,
-        )
-        self._set_container_items(
-            player.food_equip_container,
-            item_container_save_data,
-            dynamic_item_save_data,
-        )
+        self._set_container_items(player.common_container)
+        self._set_container_items(player.essential_container)
+        self._set_container_items(player.weapon_load_out_container)
+        self._set_container_items(player.player_equipment_armor_container)
+        self._set_container_items(player.food_equip_container)
 
     def _set_dynamic_data(
         self,
@@ -607,12 +578,7 @@ class SaveFile(BaseModel):
             if not passive_skill_list:
                 raw_data["passive_skill_list"] = []
 
-    def _set_dynamic_item(
-        self,
-        slot: Dict[str, Any],
-        container_slot: ContainerSlot,
-        dynamic_item_save_data: List[Dict[str, Any]],
-    ):
+    def _set_dynamic_item(self, slot: Dict[str, Any], container_slot: ContainerSlot):
         slot_local_id = PalObjects.get_guid(
             PalObjects.get_nested(
                 slot, "ItemId", "value", "DynamicId", "LocalIdInCreatedWorld"
@@ -625,12 +591,12 @@ class SaveFile(BaseModel):
             and not is_empty_uuid(slot_local_id)
             and is_valid_uuid(str(slot_local_id))
         ):
-            for entry in dynamic_item_save_data:
+            for entry in self._dynamic_item_save_data:
                 local_id = PalObjects.get_guid(
                     PalObjects.get_nested(entry, "ID", "value", "LocalIdInCreatedWorld")
                 )
                 if are_equal_uuids(local_id, slot_local_id):
-                    dynamic_item_save_data.remove(entry)
+                    self._dynamic_item_save_data.remove(entry)
                     break
             return PalObjects.EMPTY_UUID
 
@@ -647,7 +613,7 @@ class SaveFile(BaseModel):
                 container_slot.dynamic_item,
                 new_dynamic_item,
             )
-            dynamic_item_save_data.append(new_dynamic_item)
+            self._dynamic_item_save_data.append(new_dynamic_item)
             return container_slot.dynamic_item.local_id
 
         if is_empty_uuid(container_slot.dynamic_item.local_id) and not is_empty_uuid(
@@ -656,7 +622,7 @@ class SaveFile(BaseModel):
             container_slot.dynamic_item.local_id = slot_local_id
 
         # If the dynamic item is not empty, we need to update it
-        for entry in dynamic_item_save_data:
+        for entry in self._dynamic_item_save_data:
             local_id = PalObjects.get_guid(
                 PalObjects.get_nested(entry, "ID", "value", "LocalIdInCreatedWorld")
             )
@@ -666,13 +632,8 @@ class SaveFile(BaseModel):
                 )
                 return container_slot.dynamic_item.local_id
 
-    def _set_container_items(
-        self,
-        container: ItemContainer,
-        item_container_save_data: List[Dict[str, Any]],
-        dynamic_item_save_data: List[Dict[str, Any]],
-    ):
-        for entry in item_container_save_data:
+    def _set_container_items(self, container: ItemContainer):
+        for entry in self._item_container_save_data:
             current_container_id = PalObjects.get_guid(
                 PalObjects.get_nested(entry, "key", "ID")
             )
@@ -684,11 +645,7 @@ class SaveFile(BaseModel):
             for slot in slots:
                 slot_index = PalObjects.get_value(slot["SlotIndex"])
                 container_slot = container.get_slot(slot_index)
-                local_id = self._set_dynamic_item(
-                    slot,
-                    container_slot,
-                    dynamic_item_save_data,
-                )
+                local_id = self._set_dynamic_item(slot, container_slot)
                 PalObjects.set_nested(
                     slot,
                     "ItemId",

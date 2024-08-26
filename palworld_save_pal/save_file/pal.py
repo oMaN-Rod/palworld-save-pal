@@ -298,3 +298,8 @@ class Pal(BaseModel):
             pal_obj["PassiveSkillList"] = PalObjects.ArrayProperty(
                 ArrayType.NAME_PROPERTY, self.passive_skills
             )
+
+    def update_from(self, other_pal: "Pal"):
+        data = other_pal.model_dump()
+        for key, value in data.items():
+            setattr(self, key, value)
