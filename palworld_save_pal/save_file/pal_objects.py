@@ -221,7 +221,7 @@ class PalObjects:
 
     @staticmethod
     def set_enum_property(d: Dict[str, Any], value: str):
-        PalObjects.set_nested(d, "value", "value", value)
+        PalObjects.set_nested(d, "value", "value", value=value)
 
     @staticmethod
     def ArrayProperty(

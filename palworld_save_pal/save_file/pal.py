@@ -63,19 +63,22 @@ class Pal(BaseModel):
 
     _pal_obj: Dict[str, Any] = PrivateAttr(default_factory=dict)
 
-    def __init__(self, data):
-        super().__init__()
-        self.instance_id = PalObjects.get_guid(data["key"]["InstanceId"])
-        if not self.instance_id:
-            logger.error("Failed to parse instance ID: %s", data)
+    def __init__(self, data=None, **kwargs):
+        if data is not None:
+            super().__init__()
+            self.instance_id = PalObjects.get_guid(data["key"]["InstanceId"])
+            if not self.instance_id:
+                logger.error("Failed to parse instance ID: %s", data)
 
-        self._pal_obj = PalObjects.get_nested(
-            data, "value", "RawData", "value", "object", "SaveParameter", "value"
-        )
-        if not self._pal_obj:
-            logger.error("Failed to parse pal object: %s", data)
-            return
-        self._parse_pal_data()
+            self._pal_obj = PalObjects.get_nested(
+                data, "value", "RawData", "value", "object", "SaveParameter", "value"
+            )
+            if not self._pal_obj:
+                logger.error("Failed to parse pal object: %s", data)
+                return
+            self._parse_pal_data()
+        else:
+            super().__init__(**kwargs)
 
     def _parse_pal_data(self):
         self.character_id = PalObjects.get_value(self._pal_obj["CharacterID"])
@@ -231,3 +234,67 @@ class Pal(BaseModel):
     @classmethod
     def validate_rank(cls, v):
         return max(1, min(v, 5))
+
+    def update(self, pal_obj: Dict[str, Any]):
+        self._update_pal_nickname(pal_obj)
+        self._update_pal_gender(pal_obj)
+        self._update_pal_equip_waza(pal_obj)
+        self._update_mastered_waza(pal_obj)
+        self._update_passive_skills(pal_obj)
+
+    def _update_pal_nickname(self, pal_obj: Dict[str, Any]):
+        if not self.nickname or len(self.nickname) == 0:
+            return
+        if "NickName" in pal_obj:
+            PalObjects.set_value(pal_obj["NickName"], value=self.nickname)
+        else:
+            pal_obj["NickName"] = PalObjects.StrProperty(self.nickname)
+
+    def _update_pal_gender(self, pal_obj: Dict[str, Any]):
+        self.gender = self.gender if self.gender else PalGender.FEMALE
+        if "Gender" in pal_obj:
+            PalObjects.set_enum_property(
+                pal_obj["Gender"], value=self.gender.prefixed()
+            )
+        else:
+            pal_obj["Gender"] = PalObjects.EnumProperty(
+                "EPalGenderType", self.gender.prefixed()
+            )
+
+    def _update_pal_equip_waza(self, pal_obj: Dict[str, Any]):
+        if not self.active_skills or len(self.active_skills) == 0:
+            active_skills = []
+        else:
+            active_skills = [f"EPalWazaID::{skill}" for skill in self.active_skills]
+
+        if "EquipWaza" in pal_obj:
+            PalObjects.set_array_property(pal_obj["EquipWaza"], values=active_skills)
+        else:
+            pal_obj["EquipWaza"] = PalObjects.ArrayProperty(
+                ArrayType.ENUM_PROPERTY, active_skills
+            )
+
+    def _update_mastered_waza(self, pal_obj: Dict[str, Any]):
+        if not self.learned_skills or len(self.learned_skills) == 0:
+            learned_skills = []
+        else:
+            learned_skills = self.learned_skills
+
+        if "MasteredWaza" in pal_obj:
+            PalObjects.set_array_property(
+                pal_obj["MasteredWaza"], values=learned_skills
+            )
+        else:
+            pal_obj["MasteredWaza"] = PalObjects.ArrayProperty(
+                ArrayType.ENUM_PROPERTY, learned_skills
+            )
+
+    def _update_passive_skills(self, pal_obj: Dict[str, Any]) -> None:
+        if "PassiveSkillList" in pal_obj:
+            PalObjects.set_array_property(
+                pal_obj["PassiveSkillList"], values=self.passive_skills
+            )
+        else:
+            pal_obj["PassiveSkillList"] = PalObjects.ArrayProperty(
+                ArrayType.NAME_PROPERTY, self.passive_skills
+            )

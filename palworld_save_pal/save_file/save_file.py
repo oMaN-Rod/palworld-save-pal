@@ -253,9 +253,7 @@ class SaveFile(BaseModel):
         with open(output_path, "wb") as f:
             f.write(sav_file)
 
-    async def update_pals(
-        self, modified_pals: Dict[UUID, Pal], ws_callback=None
-    ) -> None:
+    async def update_pals(self, modified_pals: Dict[UUID, Pal], ws_callback) -> None:
         if not self._gvas_file:
             raise ValueError("No GvasFile has been loaded.")
 
@@ -269,7 +267,7 @@ class SaveFile(BaseModel):
         self._set_active_data()
 
     async def update_players(
-        self, modified_players: Dict[UUID, Player], ws_callback=None
+        self, modified_players: Dict[UUID, Player], ws_callback
     ) -> None:
         if not self._gvas_file:
             raise ValueError("No GvasFile has been loaded.")
@@ -531,72 +529,7 @@ class SaveFile(BaseModel):
         if not pal_obj:
             logger.error("Invalid pal entry structure for pal %s", pal.instance_id)
             return
-
-        self._update_pal_nickname(pal_obj, pal.nickname)
-        self._update_pal_gender(pal_obj, pal.gender)
-        self._update_pal_equip_waza(pal_obj, pal.active_skills)
-        self._update_mastered_waza(pal_obj, pal.learned_skills)
-        self._update_passive_skills(pal_obj, pal.passive_skills)
-
-    def _update_pal_equip_waza(
-        self, pal_obj: Dict[str, Any], active_skills: List[str]
-    ) -> None:
-        if not active_skills or len(active_skills) == 0:
-            return
-        active_skills = [f"EPalWazaID::{skill}" for skill in active_skills]
-        if "EquipWaza" in pal_obj:
-            PalObjects.set_array_property(pal_obj["EquipWaza"], value=active_skills)
-        else:
-            pal_obj["EquipWaza"] = PalObjects.ArrayProperty(
-                ArrayType.ENUM_PROPERTY, active_skills
-            )
-
-    def _update_pal_gender(self, pal_obj: Dict[str, Any], gender: str) -> None:
-        gender = PalGender.from_value(gender.capitalize())
-        if "Gender" in pal_obj:
-            PalObjects.set_enum_property(pal_obj["Gender"], value=gender.prefixed())
-        else:
-            pal_obj["Gender"] = PalObjects.EnumProperty(
-                "EPalGenderType", gender.prefixed()
-            )
-
-    def _update_pal_nickname(self, pal_obj: Dict[str, Any], nickname: str) -> None:
-        if not nickname or len(nickname) == 0:
-            return
-        if "NickName" in pal_obj:
-            PalObjects.set_value(pal_obj["NickName"], value=nickname)
-        else:
-            pal_obj["NickName"] = PalObjects.StrProperty(nickname)
-
-    def _update_mastered_waza(
-        self, pal_obj: Dict[str, Any], learned_skills: List[str]
-    ) -> None:
-        if not learned_skills or len(learned_skills) == 0:
-            return
-        if "MasteredWaza" in pal_obj:
-            PalObjects.set_array_property(pal_obj["MasteredWaza"], value=learned_skills)
-        else:
-            pal_obj["MasteredWaza"] = PalObjects.ArrayProperty(
-                ArrayType.ENUM_PROPERTY, learned_skills
-            )
-
-    def _update_pal_field(
-        self, pal_obj: Dict[str, Any], field: str, value: Any
-    ) -> None:
-        if field in pal_obj:
-            PalObjects.set_value(pal_obj[field], value)
-        else:
-            logger.warning("Field %s not found in pal object.", field)
-
-    def _update_passive_skills(
-        self, pal_obj: Dict[str, Any], values: List[str]
-    ) -> None:
-        if "PassiveSkillList" in pal_obj:
-            PalObjects.set_array_property(pal_obj["PassiveSkillList"], value=values)
-        else:
-            pal_obj["PassiveSkillList"] = PalObjects.ArrayProperty(
-                ArrayType.NAME_PROPERTY, values
-            )
+        pal.update(pal_obj)
 
     def _update_player(self, player: Player) -> None:
         world_save_data = self._get_world_save_data(False)

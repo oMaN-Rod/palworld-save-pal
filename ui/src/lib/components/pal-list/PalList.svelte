@@ -29,7 +29,7 @@
 	let selectedElement = $state('All');
 	let elementTypes: string[] = $state([]);
 	let elementIcons: Record<string, string> = $state({});
-	let filteredPals: Array<Pal & { id: string }> = $state([]);
+	let filteredPals: Array<Pal> = $state([]);
 	let sortBy: SortBy | undefined = $state(undefined);
 	let sortOrder: SortOrder | undefined = $state(undefined);
 
@@ -75,7 +75,9 @@
 	const debouncedFilterPals = debounce(filterPals, 300);
 
 	function handlePalSelect(pal: Pal) {
-		appState.selectedPal = pal;
+		if (appState.selectedPlayer && appState.selectedPlayer.pals) {
+			appState.selectedPal = appState.selectedPlayer.pals[pal.instance_id];
+		}
 	}
 
 	function handleKeyDown(event: KeyboardEvent, pal: Pal) {
@@ -266,12 +268,12 @@
 	</div>
 	<div class={listContainerClass}>
 		<ul class={listClass}>
-			{#each filteredPals as pal (pal.id)}
+			{#each filteredPals as pal}
 				<li
 					class={cn(
 						'hover:bg-secondary-500/25',
 						itemClass,
-						appState.selectedPal?.instance_id === pal.id ? 'bg-secondary-500/25' : ''
+						appState.selectedPal?.instance_id === pal.instance_id ? 'bg-secondary-500/25' : ''
 					)}
 				>
 					<button
@@ -284,10 +286,9 @@
 								<span class="font-bold">Lvl {pal.level}</span>
 							</div>
 							<div class="justify-start">
-								{#await getPalIcon(pal.id) then icon}
+								{#await getPalIcon(pal.instance_id) then icon}
 									{#if icon}
-										<!-- svelte-ignore element_invalid_self_closing_tag -->
-										<enhanced:img src={icon} alt={pal.name} class="h-8 w-8" />
+										<enhanced:img src={icon} alt={pal.name} class="h-8 w-8"></enhanced:img>
 									{/if}
 								{/await}
 							</div>
@@ -299,8 +300,8 @@
 									{#each pal.elements as elementType}
 										{#await getPalElementBadge(elementType) then icon}
 											{#if icon}
-												<!-- svelte-ignore element_invalid_self_closing_tag -->
-												<enhanced:img src={icon} alt={elementType} class="pal-element-badge" />
+												<enhanced:img src={icon} alt={elementType} class="pal-element-badge"
+												></enhanced:img>
 											{/if}
 										{/await}
 									{/each}

@@ -13,16 +13,13 @@
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { palsData, elementsData } from '$lib/data';
 	import { cn } from '$theme';
-	import { getAppState, getSocketState, getModalState, getNavigationState } from '$states';
+	import { getAppState, getModalState } from '$states';
 
 	const appState = getAppState();
-	const ws = getSocketState();
 	const modal = getModalState();
-	const nav = getNavigationState();
 
 	let palLevel: string = $state('');
 	let palLevelClass: string = $state('');
-	let group = $state('player');
 
 	async function loadPalImage(): Promise<string | undefined> {
 		const pal = $state.snapshot(appState.selectedPal);
@@ -94,7 +91,7 @@
 		if (!result) return;
 		appState.selectedPal.nickname = result as string;
 		if (appState.selectedPlayer && appState.selectedPlayer.pals)
-			appState.selectedPlayer.pals[appState.selectedPalId].nickname = result as string;
+			appState.selectedPlayer.pals[appState.selectedPal.instance_id].nickname = result as string;
 	}
 
 	function handleUpdateActiveSkill(newSkill: string, oldSkill: string): void {

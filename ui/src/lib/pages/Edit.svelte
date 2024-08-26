@@ -26,7 +26,13 @@
 		let modifiedData: ModifiedData = {};
 
 		if (Object.keys(appState.modifiedPals).length > 0) {
-			modifiedData.modified_pals = appState.modifiedPals;
+			modifiedData.modified_pals = Object.fromEntries(
+				Object.entries(appState.modifiedPals).map(([key, pal]) => {
+					// @ts-ignore - We're removing the id from the pal object, no clue where it's coming from...
+					const { id, ...palWithoutId } = pal;
+					return [key, palWithoutId];
+				})
+			);
 		}
 
 		if (Object.keys(appState.modifiedPlayers).length > 0) {
