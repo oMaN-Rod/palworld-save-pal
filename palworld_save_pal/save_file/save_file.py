@@ -198,7 +198,9 @@ class SaveFile(BaseModel):
         )
         self._gvas_file = gvas_file
         self._get_file_size(data)
-        self._set_active_data()
+        self._set_data()
+        self._load_pals()
+        self._get_players()
         return self
 
     def pal_count(self):
@@ -264,7 +266,6 @@ class SaveFile(BaseModel):
         logger.info("Updated %d pals in the save file.", len(modified_pals))
 
         await ws_callback("Saving changes to file")
-        self._set_active_data()
 
     async def update_players(
         self, modified_players: Dict[UUID, Player], ws_callback
@@ -278,7 +279,6 @@ class SaveFile(BaseModel):
 
         logger.info("Updated %d players in the save file.", len(modified_players))
 
-        self._set_active_data()
         for uid, player in self._players.items():
             await ws_callback(f"Updating storage for player {player.nickname}")
             self._update_player_storage(uid)
@@ -299,18 +299,14 @@ class SaveFile(BaseModel):
         }
         return pals
 
-    def _get_world_save_data(self, deep_copy=True):
+    def _get_world_save_data(self):
         world_save_data = PalObjects.get_value(
             self._gvas_file.properties["worldSaveData"]
         )
-        if deep_copy:
-            return copy.deepcopy(world_save_data)
         return world_save_data
 
-    def _get_player_save_data(self, player_gvas: Dict[str, Any], deep_copy=True):
+    def _get_player_save_data(self, player_gvas: Dict[str, Any]):
         player_save_data = PalObjects.get_value(player_gvas.properties["SaveData"])
-        if deep_copy:
-            return copy.deepcopy(player_save_data)
         return player_save_data
 
     def _is_player(self, entry):
@@ -337,7 +333,7 @@ class SaveFile(BaseModel):
             else:
                 logger.warning("Failed to create PalEntity summary")
 
-    def _set_active_data(self) -> None:
+    def _set_data(self) -> None:
         world_save_data = self._get_world_save_data()
         self._character_save_parameter_map = PalObjects.get_value(
             world_save_data["CharacterSaveParameterMap"]
@@ -348,8 +344,6 @@ class SaveFile(BaseModel):
         self._dynamic_item_save_data = PalObjects.get_array_property(
             world_save_data["DynamicItemSaveData"]
         )
-        self._load_pals()
-        self._get_players()
 
     def _get_players(self):
         if not self._character_save_parameter_map:
@@ -507,7 +501,7 @@ class SaveFile(BaseModel):
         self._load_player_storage(uid, player_save_data)
 
     def _update_pal(self, pal_id: UUID, pal: Pal) -> None:
-        world_save_data = self._get_world_save_data(False)
+        world_save_data = self._get_world_save_data()
         character_save_parameter_map = PalObjects.get_value(
             world_save_data["CharacterSaveParameterMap"]
         )
@@ -532,7 +526,7 @@ class SaveFile(BaseModel):
         pal.update(pal_obj)
 
     def _update_player(self, player: Player) -> None:
-        world_save_data = self._get_world_save_data(False)
+        world_save_data = self._get_world_save_data()
         item_container_save_data = PalObjects.get_value(
             world_save_data["ItemContainerSaveData"]
         )
