@@ -62,6 +62,8 @@
 					return item.details.group == 'Weapon';
 				case 'KeyItem':
 					return item.details.group == 'KeyItem';
+				case 'Common':
+					return item.details.group != 'KeyItem';
 				default:
 					return true;
 			}

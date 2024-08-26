@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { cn } from '$theme';
-	import { MessageType, type PalSummary } from '$types';
+	import { type Pal } from '$types';
 	import { elementsData, palsData } from '$lib/data';
 	import { Input, Tooltip } from '$components/ui';
-	import { Accordion, Switch } from '@skeletonlabs/skeleton-svelte';
+	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import {
 		Search,
 		GalleryVerticalEnd,
@@ -14,13 +14,12 @@
 	} from 'lucide-svelte';
 	import { assetLoader, debounce } from '$utils';
 	import { ASSET_DATA_PATH } from '$lib/constants';
-	import { getAppState, getSocketState } from '$states';
+	import { getAppState } from '$states';
 
 	type SortBy = 'name' | 'level';
 	type SortOrder = 'asc' | 'desc';
 
 	const appState = getAppState();
-	const ws = getSocketState();
 
 	let { ...additionalProps } = $props<{
 		[key: string]: any;
@@ -30,7 +29,7 @@
 	let selectedElement = $state('All');
 	let elementTypes: string[] = $state([]);
 	let elementIcons: Record<string, string> = $state({});
-	let filteredPals: Array<PalSummary & { id: string }> = $state([]);
+	let filteredPals: Array<Pal & { id: string }> = $state([]);
 	let sortBy: SortBy | undefined = $state(undefined);
 	let sortOrder: SortOrder | undefined = $state(undefined);
 
@@ -43,7 +42,7 @@
 
 	async function filterPals() {
 		if (!appState.selectedPlayer || !appState.selectedPlayer.pals) return;
-		const pals = Object.entries(appState.selectedPlayer.pals as Record<string, PalSummary>);
+		const pals = Object.entries(appState.selectedPlayer.pals as Record<string, Pal>);
 		const palsWithInfo = await Promise.all(
 			pals.map(async ([id, pal]) => {
 				const palInfo = await palsData.getPalInfo(pal.character_id);
@@ -55,7 +54,7 @@
 			.filter(({ pal, palInfo }) => {
 				const matchesSearch =
 					pal.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-					pal.nickname.toLowerCase().includes(searchQuery.toLowerCase());
+					pal.nickname?.toLowerCase().includes(searchQuery.toLowerCase());
 				const matchesElement =
 					selectedElement === 'All' ||
 					(palInfo &&
@@ -75,13 +74,13 @@
 
 	const debouncedFilterPals = debounce(filterPals, 300);
 
-	function handlePalSelect(palId: string) {
-		appState.selectedPalId = palId;
+	function handlePalSelect(pal: Pal) {
+		appState.selectedPal = pal;
 	}
 
-	function handleKeyDown(event: KeyboardEvent, palId: string) {
+	function handleKeyDown(event: KeyboardEvent, pal: Pal) {
 		if (event.key === 'Enter' || event.key === ' ') {
-			handlePalSelect(palId);
+			handlePalSelect(pal);
 		}
 	}
 
@@ -272,13 +271,13 @@
 					class={cn(
 						'hover:bg-secondary-500/25',
 						itemClass,
-						appState.selectedPalId === pal.id ? 'bg-secondary-500/25' : ''
+						appState.selectedPal?.instance_id === pal.id ? 'bg-secondary-500/25' : ''
 					)}
 				>
 					<button
 						class="flex w-full items-center text-left"
-						onclick={() => handlePalSelect(pal.id)}
-						onkeydown={(event) => handleKeyDown(event, pal.id)}
+						onclick={() => handlePalSelect(pal)}
+						onkeydown={(event) => handleKeyDown(event, pal)}
 					>
 						<div class="grid w-full grid-cols-[55px_auto_1fr_auto] gap-2">
 							<div>

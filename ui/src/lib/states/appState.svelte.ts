@@ -8,7 +8,6 @@ export function createAppState() {
 	let players: Record<string, Player> = $state({});
 	let selectedPlayerUid: string = $state("");
 	let selectedPlayer: Player | null = $state(null);
-	let selectedPalId: string = $state("");
 	let selectedPal: Pal | null = $state(null);
 	let saveFile: SaveFile | null = $state(null);
 	let modifiedPals: Record<string, Pal> = $state({});
@@ -44,21 +43,9 @@ export function createAppState() {
 
 	function setSelectedPlayer(player: Player | null) {
 		selectedPlayer = player;
+		selectedPal = null;
 		if (player) {
 			modifiedPlayers[player.uid] = player;
-		}
-	}
-
-	function handlePalSelect(palId: string) {
-		selectedPalId = palId;
-		if (modifiedPals[palId]) {
-			setSelectedPal(modifiedPals[palId]);
-		} else {
-			const data = {
-				type: MessageType.GET_PAL_DETAILS,
-				data: palId
-			};
-			ws.send(JSON.stringify(data));
 		}
 	}
 
@@ -71,9 +58,6 @@ export function createAppState() {
 
 		get selectedPlayer() { return selectedPlayer as Player; },
 		set selectedPlayer(player: Player | null) { setSelectedPlayer(player); },
-
-		get selectedPalId() { return selectedPalId; },
-		set selectedPalId(palId: string) { handlePalSelect(palId); },
 
 		get selectedPal() { return selectedPal; },
 		set selectedPal(pal: Pal | null) { setSelectedPal(pal); },

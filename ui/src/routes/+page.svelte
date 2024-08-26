@@ -55,18 +55,6 @@
 					URL.revokeObjectURL(url);
 					nav.activePage = 'File';
 					break;
-				case MessageType.SYNC_APP_STATE:
-				case MessageType.GET_PAL_DETAILS:
-					const checkMessage = async (message: Message) => {
-						const { data } = message;
-						let newPal = JSON.parse(data);
-						const palInfo = await palsData.getPalInfo(newPal.character_id);
-						newPal.name = palInfo?.localized_name || 'Unknown';
-						newPal.elements = palInfo?.elements || [];
-						appState.selectedPal = newPal;
-					};
-					checkMessage(ws.message);
-					break;
 				case MessageType.ERROR:
 					errorMessage = data as string;
 					nav.activePage = 'Error';

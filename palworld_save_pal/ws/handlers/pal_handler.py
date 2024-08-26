@@ -2,6 +2,7 @@ import traceback
 from uuid import UUID
 
 from fastapi import WebSocket
+from fastapi.encoders import jsonable_encoder
 
 from palworld_save_pal.state import get_app_state
 from palworld_save_pal.utils.logging_config import create_logger
@@ -31,7 +32,7 @@ async def get_pal_details_handler(message: GetPalDetailsMessage, ws: WebSocket):
         if not pal:
             raise ValueError(f"No Pal found with ID {pal_id}")
 
-        data = pal.model_dump_json()
+        data = jsonable_encoder(pal)
         response = build_response(MessageType.GET_PAL_DETAILS, data)
         await ws.send_json(response)
 

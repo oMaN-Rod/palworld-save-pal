@@ -143,7 +143,6 @@
 		})) as [string, number] | undefined;
 		if (result) {
 			const [static_id, count] = result;
-			console.log('Selected item:', static_id, count);
 			slot.static_id = !static_id ? 'None' : static_id;
 			slot.count = count;
 			if (slot.static_id == 'None') {
@@ -173,7 +172,6 @@
 	}
 
 	$effect(() => {
-		console.log('Slot:', slot);
 		initItem(slot.static_id);
 	});
 </script>

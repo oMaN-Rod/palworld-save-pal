@@ -1,25 +1,30 @@
 from enum import Enum
 from typing import Any, Dict, List, Optional
 from uuid import UUID
+import uuid
 
 from palworld_save_tools.archive import UUID as ArchiveUUID
 
+from palworld_save_pal.save_file.item_container import ContainerSlot
 from palworld_save_pal.utils.logging_config import create_logger
 
 logger = create_logger(__name__)
 
+
 class PrefixedEnum(Enum):
     @classmethod
     def _prefix(cls):
-        return getattr(cls, '_enum_prefix', f"{cls.__name__}::")
+        return getattr(cls, "_enum_prefix", f"{cls.__name__}::")
 
     def prefixed(self):
         return f"{self._prefix()}{self.value}"
+
 
 class ArrayType(str, Enum):
     BYTE_PROPERTY = "ByteProperty"
     ENUM_PROPERTY = "EnumProperty"
     NAME_PROPERTY = "NameProperty"
+
 
 class Element(str, Enum):
     FIRE = "Fire"
@@ -31,7 +36,7 @@ class Element(str, Enum):
     GRASS = "Grass"
     DRAGON = "Dragon"
     ELECTRIC = "Electric"
-    
+
     @staticmethod
     def from_value(value: str):
         try:
@@ -39,12 +44,13 @@ class Element(str, Enum):
         except:
             logger.warning("%s is not a valid element", value)
 
+
 class PalGender(str, PrefixedEnum):
     _enum_prefix = "EPalGenderType::"
-    
+
     MALE = "Male"
     FEMALE = "Female"
-    
+
     @staticmethod
     def from_value(value: str):
         try:
@@ -52,17 +58,18 @@ class PalGender(str, PrefixedEnum):
             return PalGender(value)
         except:
             logger.warning("%s is not a valid gender", value)
-            
+
+
 class PalRank(int, Enum):
     RANK0 = 1
     RANK1 = 2
     RANK2 = 3
     RANK3 = 4
     RANK4 = 5
-    
+
     def get_index(self):
         return self.value - 1
-    
+
     @staticmethod
     def from_value(value: int):
         try:
@@ -73,7 +80,7 @@ class PalRank(int, Enum):
 
 class WorkSuitability(str, PrefixedEnum):
     _enum_prefix = "EPalWorkSuitability::"
-    
+
     EMIT_FLAME = "EmitFlame"
     WATERING = "Watering"
     SEEDING = "Seeding"
@@ -87,7 +94,7 @@ class WorkSuitability(str, PrefixedEnum):
     COOL = "Cool"
     TRANSPORT = "Transport"
     MONSTER_FARM = "MonsterFarm"
-    
+
     @staticmethod
     def from_value(value: str):
         try:
@@ -96,6 +103,7 @@ class WorkSuitability(str, PrefixedEnum):
         except:
             logger.warning("%s is not a valid work suitability", value)
 
+
 def toUUID(guid: Any) -> Optional[UUID]:
     if isinstance(guid, UUID):
         return guid
@@ -103,11 +111,12 @@ def toUUID(guid: Any) -> Optional[UUID]:
         return UUID(guid)
     if isinstance(guid, ArchiveUUID):
         return guid.UUID()
-            
+
+
 class PalObjects:
     EMPTY_UUID = toUUID("00000000-0000-0000-0000-000000000000")
     TIME = 638486453957560000
-    
+
     @staticmethod
     def StrProperty(value: str):
         return {
@@ -115,7 +124,7 @@ class PalObjects:
             "type": "StrProperty",
             "value": value,
         }
-        
+
     @staticmethod
     def NameProperty(value: str):
         return {
@@ -123,7 +132,7 @@ class PalObjects:
             "type": "NameProperty",
             "value": value,
         }
-        
+
     @staticmethod
     def BoolProperty(value: bool):
         return {
@@ -131,7 +140,7 @@ class PalObjects:
             "type": "BoolProperty",
             "value": value,
         }
-        
+
     @staticmethod
     def IntProperty(value: int):
         return {
@@ -139,7 +148,7 @@ class PalObjects:
             "type": "IntProperty",
             "value": value,
         }
-        
+
     @staticmethod
     def Int64Property(value: int):
         return {
@@ -155,7 +164,7 @@ class PalObjects:
             "type": "FloatProperty",
             "value": value,
         }
-    
+
     @staticmethod
     def Guid(value: str | UUID):
         return {
@@ -165,22 +174,20 @@ class PalObjects:
             "value": toUUID(value),
             "type": "StructProperty",
         }
-        
+
     @staticmethod
     def get_guid(d: Dict[str, Any]) -> Optional[UUID]:
-        logger.debug("Getting GUID from %s", d)
         value = PalObjects.get_value(d)
-        logger.debug("GUID value: %s", value)
         return toUUID(value)
-        
+
     @staticmethod
     def set_value(d: Dict[str, Any], value: Any):
         d["value"] = value
-        
+
     @staticmethod
     def get_value(d: Dict[str, Any], default: Any = None) -> Optional[Any]:
         return PalObjects.get_nested(d, "value", default=default)
-    
+
     @staticmethod
     def get_nested(d: Dict[str, Any], *keys: str, default: Any = None) -> Any:
         try:
@@ -199,7 +206,7 @@ class PalObjects:
                 raise KeyError(f"Key not found: {key}, {keys}, {d.keys()}")
             d = d[key]
         d[keys[-1]] = value
-    
+
     @staticmethod
     def EnumProperty(type: str, value: str):
         return {
@@ -207,23 +214,23 @@ class PalObjects:
             "type": "EnumProperty",
             "value": {"type": type, "value": value},
         }
-        
+
     @staticmethod
     def get_enum_property(d: Dict[str, Any]) -> Optional[str]:
         return PalObjects.get_nested(d, "value", "value")
-    
+
     @staticmethod
     def set_enum_property(d: Dict[str, Any], value: str):
         PalObjects.set_nested(d, "value", "value", value)
-        
+
     @staticmethod
-    def ArrayProperty(array_type: ArrayType, values: List[str], custom_type: Optional[str] = None):
+    def ArrayProperty(
+        array_type: ArrayType, values: List[str], custom_type: Optional[str] = None
+    ):
         struct = {
-            "array_type": array_type.value(),
+            "array_type": array_type.value,
             "id": None,
-            "value": {
-                "values": values
-            },
+            "value": {"values": values},
             "type": "ArrayProperty",
         }
 
@@ -231,19 +238,23 @@ class PalObjects:
             struct["custom_type"] = custom_type
 
         return struct
-    
+
     @staticmethod
     def get_array_property(d: Dict[str, Any]) -> Optional[List[Any]]:
-        return PalObjects.get_nested(d, "value", "values")
-    
+        return PalObjects.get_nested(d, "value", "values", default=[])
+
     @staticmethod
     def append_array_item(d: Dict[str, Any], value: Any):
         PalObjects.get_array_property(d).append(value)
-        
+
     @staticmethod
     def pop_array_item(d: Dict[str, Any], index: Any) -> Optional[Any]:
         return PalObjects.get_array_property(d).pop(index)
-    
+
+    @staticmethod
+    def set_array_property(d: Dict[str, Any], values: List[Any]):
+        PalObjects.set_nested(d, "value", "values", value=values)
+
     @staticmethod
     def FixedPoint64(value: int):
         return {
@@ -253,15 +264,15 @@ class PalObjects:
             "value": {"Value": PalObjects.Int64Property(value)},
             "type": "StructProperty",
         }
-        
+
     @staticmethod
     def get_fixed_point64(d: Dict[str, Any]) -> Optional[int]:
         return PalObjects.get_value(d["value"]["Value"])
-    
+
     @staticmethod
     def set_fixed_point64(d: Dict[str, Any], value: int):
         PalObjects.set_value(d["value"]["Value"], value)
-        
+
     @staticmethod
     def PalContainerId(id: UUID | str):
         return {
@@ -271,7 +282,7 @@ class PalObjects:
             "value": {"ID": PalObjects.Guid(id)},
             "type": "StructProperty",
         }
-        
+
     @staticmethod
     def get_pal_container_id(d: Dict[str, Any]) -> Optional[UUID]:
         return PalObjects.get_value(d["value"]["ID"])
@@ -280,7 +291,7 @@ class PalObjects:
     def set_pal_container_id(d: Dict[str, Any], container_id: str | UUID):
         container_id = toUUID(container_id)
         PalObjects.set_value(d["value"]["ID"], container_id)
-        
+
     @staticmethod
     def PalCharacterSlotId(container_id: UUID | str, slot_idx: int):
         return {
@@ -293,23 +304,25 @@ class PalObjects:
             },
             "type": "StructProperty",
         }
-        
+
     @staticmethod
     def get_pal_character_slot_id(d: Dict[str, Any]) -> Optional[tuple[UUID, int]]:
         container_id = PalObjects.get_pal_container_id(
             PalObjects.get_nested(d, "value", "ContainerId")
         )
         slot_idx = PalObjects.get_value(d["value"]["SlotIndex"])
-        
+
         if container_id is None or slot_idx is None:
             return None
         return (container_id, slot_idx)
-    
+
     @staticmethod
-    def set_pal_character_slot_id(d: Dict[str, Any], container_id: UUID | str, slot_idx: int):
+    def set_pal_character_slot_id(
+        d: Dict[str, Any], container_id: UUID | str, slot_idx: int
+    ):
         PalObjects.set_pal_container_id(d["value"]["ContainerId"], container_id)
         PalObjects.set_value(d["value"]["SlotIndex"], slot_idx)
-        
+
     @staticmethod
     def FloatContainer(d: Dict[str, Any] = None):
         return {
@@ -319,18 +332,22 @@ class PalObjects:
             "value": d or {},
             "type": "StructProperty",
         }
-        
+
     @staticmethod
     def ContainerSlotData(slot_idx: int):
         return {
             "SlotIndex": PalObjects.IntProperty(slot_idx),
-            "RawData": PalObjects.ArrayProperty(ArrayType.BYTE_PROPERTY, {
+            "RawData": PalObjects.ArrayProperty(
+                ArrayType.BYTE_PROPERTY,
+                {
                     "player_uid": PalObjects.EMPTY_UUID,
                     "instance_id": PalObjects.EMPTY_UUID,
                     "permission_tribe_id": 0,
-                }, '.worldSaveData.CharacterContainerSaveData.Value.Slots.Slots.RawData')
+                },
+                ".worldSaveData.CharacterContainerSaveData.Value.Slots.Slots.RawData",
+            ),
         }
-        
+
     @staticmethod
     def DateTime(time):
         return {
@@ -340,7 +357,7 @@ class PalObjects:
             "value": time,
             "type": "StructProperty",
         }
-        
+
     @staticmethod
     def Vector(x, y, z):
         return {
@@ -354,7 +371,7 @@ class PalObjects:
             },
             "type": "StructProperty",
         }
-        
+
     @staticmethod
     def PalLoggedinPlayerSaveDataRecordData(d: Dict[str, Any] = None):
         return {
@@ -364,7 +381,7 @@ class PalObjects:
             "value": d or {},
             "type": "StructProperty",
         }
-        
+
     @staticmethod
     def MapProperty(
         key_type: str, value_type: str, key_struct_type=None, value_struct_type=None
@@ -378,11 +395,11 @@ class PalObjects:
             "value": [],
             "type": "MapProperty",
         }
-        
+
     @staticmethod
     def get_map_property(d: dict) -> Optional[list[dict]]:
         return PalObjects.get_value(d)
-    
+
     @staticmethod
     def WorkSuitabilityStruct(work_suitability: str, rank: int):
         return {
@@ -391,33 +408,39 @@ class PalObjects:
             ),
             "Rank": PalObjects.IntProperty(rank),
         }
-    
+
     @staticmethod
     def StatusPointStruct(name: str, point: int):
         return {
             "StatusName": PalObjects.NameProperty(name),
             "StatusPoint": PalObjects.IntProperty(point),
         }
-        
+
     StatusNames = [
-        "最大HP", # Max HP
-        "最大SP", # Max SP
-        "攻撃力", # Attack Power
-        "所持重量", # Carrying Capacity
-        "捕獲率", # Capture Rate
-        "作業速度", # Work Speed
+        "最大HP",  # Max HP
+        "最大SP",  # Max SP
+        "攻撃力",  # Attack Power
+        "所持重量",  # Carrying Capacity
+        "捕獲率",  # Capture Rate
+        "作業速度",  # Work Speed
     ]
 
     ExStatusNames = [
-        "最大HP", # Max HP
-        "最大SP", # Max SP
-        "攻撃力", # Attack Power
-        "所持重量", # Carrying Capacity
-        "作業速度", # Work Speed
+        "最大HP",  # Max HP
+        "最大SP",  # Max SP
+        "攻撃力",  # Attack Power
+        "所持重量",  # Carrying Capacity
+        "作業速度",  # Work Speed
     ]
-        
+
     @staticmethod
-    def PalSaveParameter(instance_id: UUID | str, owner_uid: UUID | str, container_id: UUID | str, slot_idx: int, group_id: UUID | str):
+    def PalSaveParameter(
+        instance_id: UUID | str,
+        owner_uid: UUID | str,
+        container_id: UUID | str,
+        slot_idx: int,
+        group_id: UUID | str,
+    ):
         return {
             "key": {
                 "PlayerUId": PalObjects.Guid(PalObjects.EMPTY_UUID),
@@ -538,5 +561,58 @@ class PalObjects:
                     },
                     ".worldSaveData.CharacterSaveParameterMap.Value.RawData",
                 )
+            },
+        }
+
+    @staticmethod
+    def DynamicItem(container_slot: ContainerSlot):
+        return {
+            "ID": {
+                "struct_type": "PalDynamicItemId",
+                "struct_id": "00000000-0000-0000-0000-000000000000",
+                "id": None,
+                "value": {
+                    "CreatedWorldId": {
+                        "struct_type": "Guid",
+                        "struct_id": "00000000-0000-0000-0000-000000000000",
+                        "id": None,
+                        "value": "00000000-0000-0000-0000-000000000000",
+                        "type": "StructProperty",
+                    },
+                    "LocalIdInCreatedWorld": {
+                        "struct_type": "Guid",
+                        "struct_id": "00000000-0000-0000-0000-000000000000",
+                        "id": None,
+                        "value": container_slot.dynamic_item.local_id,
+                        "type": "StructProperty",
+                    },
+                },
+                "type": "StructProperty",
+            },
+            "StaticItemId": {
+                "id": None,
+                "value": container_slot.static_id,
+                "type": "NameProperty",
+            },
+            "RawData": {
+                "array_type": "ByteProperty",
+                "id": None,
+                "value": {
+                    "id": {
+                        "created_world_id": "00000000-0000-0000-0000-000000000000",
+                        "local_id_in_created_world": container_slot.dynamic_item.local_id,
+                        "static_id": container_slot.static_id,
+                    },
+                    "type": container_slot.dynamic_item.type,
+                    "durability": container_slot.dynamic_item.durability,
+                },
+                "type": "ArrayProperty",
+                "custom_type": ".worldSaveData.DynamicItemSaveData.DynamicItemSaveData.RawData",
+            },
+            "CustomVersionData": {
+                "array_type": "ByteProperty",
+                "id": None,
+                "value": {"values": [0, 0, 0, 0]},
+                "type": "ArrayProperty",
             },
         }

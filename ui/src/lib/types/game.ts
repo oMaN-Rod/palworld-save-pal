@@ -31,21 +31,11 @@ type Pal = {
 	elements: ElementType[];
 };
 
-type PalSummary = {
-	instance_id: string;
-	character_id: string;
-	owner_uid: string;
-	name: string;
-	nickname: string;
-	level: number;
-	elements: ElementType[];
-};
-
 type Player = {
 	uid: string;
 	nickname: string;
 	level: number;
-	pals?: Record<string, PalSummary>;
+	pals?: Record<string, Pal>;
 	common_container: ItemContainer;
 	essential_container: ItemContainer;
 	weapon_load_out_container: ItemContainer;
@@ -247,7 +237,6 @@ export type {
 	Element,
 	ElementType,
 	Pal,
-	PalSummary,
 	PassiveSkill,
 	PassiveSkillDetails,
 	Player,

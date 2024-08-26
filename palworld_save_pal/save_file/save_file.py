@@ -20,15 +20,14 @@ from palworld_save_tools.paltypes import (
     PALWORLD_TYPE_HINTS,
 )
 
-from palworld_save_pal.save_file.pal import Pal, PalSummary
+from palworld_save_pal.save_file.pal import Pal
+from palworld_save_pal.save_file.pal_objects import ArrayType, PalGender, PalObjects
 from palworld_save_pal.utils.logging_config import create_logger
 from palworld_save_pal.save_file.dynamic_item import DynamicItem
 from palworld_save_pal.save_file.item_container import ContainerSlot, ItemContainer
 from palworld_save_pal.save_file.player import Player
 from palworld_save_pal.save_file.utils import (
-    safe_get,
     safe_remove,
-    safe_set,
     is_valid_uuid,
     are_equal_uuids,
     is_empty_uuid,
@@ -146,21 +145,12 @@ class SaveFile(BaseModel):
     _gvas_file: Optional[GvasFile] = PrivateAttr(default=None)
     _player_gvas_files: Dict[UUID, GvasFile] = PrivateAttr(default_factory=dict)
     _players: Dict[UUID, Player] = PrivateAttr(default_factory=dict)
-    _pals: Dict[UUID, PalSummary] = PrivateAttr(default_factory=dict)
+    _pals: Dict[UUID, Pal] = PrivateAttr(default_factory=dict)
     _character_save_parameter_map: List[Dict[str, Any]] = PrivateAttr(
         default_factory=dict
     )
     _item_container_save_data: List[Dict[str, Any]] = PrivateAttr(default_factory=dict)
     _dynamic_item_save_data: List[Dict[str, Any]] = PrivateAttr(default_factory=dict)
-
-    def get_pal(self, instance_id: UUID):
-        for e in self._character_save_parameter_map:
-            current_instance_id = safe_get(e, "key", "InstanceId", "value")
-            if not self._is_player(e) and are_equal_uuids(
-                current_instance_id, instance_id
-            ):
-                return Pal.create_safe(copy.deepcopy(e))
-        return None
 
     def get_json(self, minify=False, allow_nan=True):
         logger.info("Converting %s to JSON", self.name)
@@ -183,6 +173,7 @@ class SaveFile(BaseModel):
         return self
 
     def load_gvas_files(self, level_sav: bytes, player_savs: Dict[str, bytes]):
+        logger.info("Loading %s as GVAS", self.name)
         self.load_level_sav(level_sav)
         for player_id, player_data in player_savs.items():
             player_uuid = self._get_player_uuid(player_id)
@@ -303,59 +294,61 @@ class SaveFile(BaseModel):
             self.size = data.__sizeof__()
 
     def _get_player_pals(self, uid):
+        logger.info("Loading Pals for player %s", uid)
         pals = {}
-        pals = {k: v for k, v in self._pals.items() if f"{v.owner_uid}" == uid}
+        pals = {
+            k: v for k, v in self._pals.items() if are_equal_uuids(v.owner_uid, uid)
+        }
         return pals
 
     def _get_world_save_data(self, deep_copy=True):
-        world_save_data = safe_get(self._gvas_file.properties, "worldSaveData", "value")
+        world_save_data = PalObjects.get_value(
+            self._gvas_file.properties["worldSaveData"]
+        )
         if deep_copy:
             return copy.deepcopy(world_save_data)
         return world_save_data
 
     def _get_player_save_data(self, player_gvas: Dict[str, Any], deep_copy=True):
-        player_save_data = safe_get(player_gvas.properties, "SaveData", "value")
+        player_save_data = PalObjects.get_value(player_gvas.properties["SaveData"])
         if deep_copy:
             return copy.deepcopy(player_save_data)
         return player_save_data
 
     def _is_player(self, entry):
-        is_player_path = [
-            "value",
-            "RawData",
-            "value",
-            "object",
-            "SaveParameter",
-            "value",
-            "IsPlayer",
-            "value",
-        ]
-        return safe_get(entry, *is_player_path, default=False)
+        save_parameter_path = PalObjects.get_nested(
+            entry, "value", "RawData", "value", "object", "SaveParameter", "value"
+        )
+        return (
+            PalObjects.get_value(save_parameter_path["IsPlayer"])
+            if "IsPlayer" in save_parameter_path
+            else False
+        )
 
     def _load_pals(self):
         if not self._gvas_file:
             raise ValueError("No GvasFile has been loaded.")
         self._pals = {}
+        logger.info("Loading Pals")
         for e in self._character_save_parameter_map:
             if self._is_player(e):
                 continue
-            instance = Pal.create_summary(e)
+            instance = Pal(e)
             if instance:
-                pal_summary = PalSummary(**instance.model_dump())
-                self._pals[instance.instance_id] = pal_summary
+                self._pals[instance.instance_id] = instance
             else:
                 logger.warning("Failed to create PalEntity summary")
 
     def _set_active_data(self) -> None:
         world_save_data = self._get_world_save_data()
-        self._character_save_parameter_map = safe_get(
-            world_save_data, "CharacterSaveParameterMap", "value", default=[]
+        self._character_save_parameter_map = PalObjects.get_value(
+            world_save_data["CharacterSaveParameterMap"]
         )
-        self._item_container_save_data = safe_get(
-            world_save_data, "ItemContainerSaveData", "value", default=[]
+        self._item_container_save_data = PalObjects.get_value(
+            world_save_data["ItemContainerSaveData"]
         )
-        self._dynamic_item_save_data = safe_get(
-            world_save_data, "DynamicItemSaveData", "value", "values", default=[]
+        self._dynamic_item_save_data = PalObjects.get_array_property(
+            world_save_data["DynamicItemSaveData"]
         )
         self._load_pals()
         self._get_players()
@@ -363,32 +356,17 @@ class SaveFile(BaseModel):
     def _get_players(self):
         if not self._character_save_parameter_map:
             return {}
+        logger.info("Loading Players")
 
         def extract_player_info(entry):
-            uid = safe_get(entry, "key", "PlayerUId", "value")
-            nickname_path = [
-                "value",
-                "RawData",
-                "value",
-                "object",
-                "SaveParameter",
-                "value",
-                "NickName",
-                "value",
-            ]
-            nickname = safe_get(entry, *nickname_path)
-            level_path = [
-                "value",
-                "RawData",
-                "value",
-                "object",
-                "SaveParameter",
-                "value",
-                "Level",
-                "value",
-            ]
-            level = safe_get(entry, *level_path)
-            player = Player(uid=uid.UUID(), nickname=nickname, level=level)
+            uid = PalObjects.get_guid(entry["key"]["PlayerUId"])
+            save_parameter = PalObjects.get_nested(
+                entry, "value", "RawData", "value", "object", "SaveParameter", "value"
+            )
+            nickname = PalObjects.get_value(save_parameter["NickName"])
+            level = PalObjects.get_value(save_parameter["Level"])
+            player = Player(uid=uid, nickname=nickname, level=level)
+            logger.info("Loaded player %s", player.model_dump())
             player.pals = self._get_player_pals(uid)
             return player
 
@@ -410,17 +388,18 @@ class SaveFile(BaseModel):
     def _get_dynamic_item(self, local_id: UUID):
         item = None
         for entry in self._dynamic_item_save_data:
-            current_local_id = safe_get(
-                entry, "ID", "value", "LocalIdInCreatedWorld", "value"
+            current_local_id = PalObjects.get_guid(
+                PalObjects.get_nested(entry, "ID", "value", "LocalIdInCreatedWorld")
             )
             if are_equal_uuids(current_local_id, local_id):
                 item = entry
                 break
 
         if item:
-            item_type = safe_get(item, "RawData", "value", "type")
-            durability = safe_get(item, "RawData", "value", "durability")
-            remaining_bullets = safe_get(item, "RawData", "value", "remaining_bullets")
+            raw_data = PalObjects.get_value(item["RawData"])
+            item_type = PalObjects.get_nested(raw_data, "type")
+            durability = PalObjects.get_nested(raw_data, "durability")
+            remaining_bullets = PalObjects.get_nested(raw_data, "remaining_bullets")
             item = DynamicItem(
                 local_id=(
                     local_id.UUID() if isinstance(local_id, ArchiveUUID) else local_id
@@ -434,26 +413,26 @@ class SaveFile(BaseModel):
     def _get_container_items(self, container: ItemContainer):
         container.slots = []
         for entry in self._item_container_save_data:
-            current_container_id = safe_get(entry, "key", "ID", "value")
+            current_container_id = PalObjects.get_guid(
+                PalObjects.get_nested(entry, "key", "ID")
+            )
             if are_equal_uuids(current_container_id, container.id):
-                slots = safe_get(entry, "value", "Slots", "value", "values", default=[])
+                slots = PalObjects.get_array_property(
+                    PalObjects.get_nested(entry, "value", "Slots")
+                )
                 for slot in slots:
-                    slot_index = safe_get(slot, "SlotIndex", "value")
-                    static_id = safe_get(slot, "ItemId", "value", "StaticId", "value")
-                    local_id = safe_get(
-                        slot,
-                        "ItemId",
-                        "value",
-                        "DynamicId",
-                        "value",
-                        "LocalIdInCreatedWorld",
-                        "value",
+                    slot_index = PalObjects.get_value(slot["SlotIndex"])
+                    item_id = PalObjects.get_value(slot["ItemId"])
+                    static_id = PalObjects.get_value(item_id["StaticId"])
+                    local_id = PalObjects.get_guid(
+                        PalObjects.get_nested(
+                            item_id, "DynamicId", "LocalIdInCreatedWorld"
+                        )
                     )
                     dynamic_item = None
-                    if str(local_id) != get_empty_property(PropertyType.UUID):
+                    if not is_empty_uuid(local_id):
                         dynamic_item = self._get_dynamic_item(local_id)
-
-                    count = safe_get(slot, "StackCount", "value")
+                    count = PalObjects.get_value(slot["StackCount"])
                     container.slots.append(
                         ContainerSlot(
                             slot_index=slot_index,
@@ -466,59 +445,62 @@ class SaveFile(BaseModel):
 
     def _load_player_storage(self, uid: UUID, player_save_data: Dict[str, Any]):
         player = self._players[uid]
-        inventory_info = safe_get(player_save_data, "InventoryInfo", "value")
+        inventory_info = PalObjects.get_value(player_save_data["InventoryInfo"])
         if not inventory_info:
             # Older save file had inventoryInfo 🤷‍♂️
-            inventory_info = safe_get(
-                player_save_data, "inventoryInfo", "value", default={}
-            )
+            inventory_info = PalObjects.get_value(player_save_data["inventoryInfo"])
 
         if not inventory_info:
             logger.error("No inventory info found for player %s", uid)
             return
-
-        common_container_id = safe_get(
-            inventory_info, "CommonContainerId", "value", "ID", "value"
+        logger.info("Loading storage for player %s", player.nickname)
+        common_container_id = PalObjects.get_guid(
+            PalObjects.get_nested(inventory_info, "CommonContainerId", "value", "ID")
         )
         player.common_container = ItemContainer(
-            id=common_container_id.UUID(), type="CommonContainer"
+            id=common_container_id, type="CommonContainer"
         )
         self._get_container_items(player.common_container)
 
-        essential_container_id = safe_get(
-            inventory_info, "EssentialContainerId", "value", "ID", "value"
+        essential_container_id = PalObjects.get_guid(
+            PalObjects.get_nested(inventory_info, "EssentialContainerId", "value", "ID")
         )
         player.essential_container = ItemContainer(
-            id=essential_container_id.UUID(), type="EssentialContainer"
+            id=essential_container_id, type="EssentialContainer"
         )
         self._get_container_items(player.essential_container)
 
-        weapon_load_out_container_id = safe_get(
-            inventory_info, "WeaponLoadOutContainerId", "value", "ID", "value"
+        weapon_load_out_container_id = PalObjects.get_guid(
+            PalObjects.get_nested(
+                inventory_info, "WeaponLoadOutContainerId", "value", "ID"
+            )
         )
         player.weapon_load_out_container = ItemContainer(
-            id=weapon_load_out_container_id.UUID(), type="WeaponLoadOutContainer"
+            id=weapon_load_out_container_id, type="WeaponLoadOutContainer"
         )
         self._get_container_items(player.weapon_load_out_container)
 
-        player_equipment_armor_container_id = safe_get(
-            inventory_info, "PlayerEquipArmorContainerId", "value", "ID", "value"
+        player_equipment_armor_container_id = PalObjects.get_guid(
+            PalObjects.get_nested(
+                inventory_info, "PlayerEquipArmorContainerId", "value", "ID"
+            )
         )
         player.player_equipment_armor_container = ItemContainer(
-            id=player_equipment_armor_container_id.UUID(),
+            id=player_equipment_armor_container_id,
             type="PlayerEquipArmorContainer",
         )
         self._get_container_items(player.player_equipment_armor_container)
 
-        food_equip_container_id = safe_get(
-            inventory_info, "FoodEquipContainerId", "value", "ID", "value"
+        food_equip_container_id = PalObjects.get_guid(
+            PalObjects.get_nested(inventory_info, "FoodEquipContainerId", "value", "ID")
         )
         player.food_equip_container = ItemContainer(
-            id=food_equip_container_id.UUID(), type="FoodEquipContainer"
+            id=food_equip_container_id, type="FoodEquipContainer"
         )
         self._get_container_items(player.food_equip_container)
 
     def _update_player_storage(self, uid: UUID):
+        logger.info("Updating storage for player %s", uid)
         player_gvas_file = self._player_gvas_files.get(uid)
         if not player_gvas_file:
             logger.warning("No GvasFile found for player %s", uid)
@@ -528,19 +510,23 @@ class SaveFile(BaseModel):
 
     def _update_pal(self, pal_id: UUID, pal: Pal) -> None:
         world_save_data = self._get_world_save_data(False)
-        character_save_parameter_map = safe_get(
-            world_save_data, "CharacterSaveParameterMap", "value", default=[]
+        character_save_parameter_map = PalObjects.get_value(
+            world_save_data["CharacterSaveParameterMap"]
         )
         for entry in character_save_parameter_map:
-            current_instance_id = safe_get(entry, "key", "InstanceId", "value")
+            current_instance_id = PalObjects.get_guid(
+                PalObjects.get_nested(entry, "key", "InstanceId")
+            )
             if are_equal_uuids(current_instance_id, pal_id):
                 self._update_pal_entry(entry, pal)
                 return
         logger.warning("Pal with ID %s not found in the save file.", pal_id)
 
     def _update_pal_entry(self, entry: Dict[str, Any], pal: Pal) -> None:
-        pal_obj = safe_get(
-            entry, "value", "RawData", "value", "object", "SaveParameter", "value"
+        pal_obj = PalObjects.get_value(
+            PalObjects.get_nested(
+                entry, "value", "RawData", "value", "object", "SaveParameter"
+            )
         )
         if not pal_obj:
             logger.error("Invalid pal entry structure for pal %s", pal.instance_id)
@@ -550,7 +536,7 @@ class SaveFile(BaseModel):
         self._update_pal_gender(pal_obj, pal.gender)
         self._update_pal_equip_waza(pal_obj, pal.active_skills)
         self._update_mastered_waza(pal_obj, pal.learned_skills)
-        self._update_pal_array(pal_obj, "PassiveSkillList", pal.passive_skills)
+        self._update_passive_skills(pal_obj, pal.passive_skills)
 
     def _update_pal_equip_waza(
         self, pal_obj: Dict[str, Any], active_skills: List[str]
@@ -559,23 +545,28 @@ class SaveFile(BaseModel):
             return
         active_skills = [f"EPalWazaID::{skill}" for skill in active_skills]
         if "EquipWaza" in pal_obj:
-            safe_set(pal_obj["EquipWaza"], "value", "values", value=active_skills)
+            PalObjects.set_array_property(pal_obj["EquipWaza"], value=active_skills)
         else:
-            pal_obj["EquipWaza"] = get_empty_property(PropertyType.ENUM_ARRAY)
-            safe_set(pal_obj["EquipWaza"], "value", "values", value=active_skills)
+            pal_obj["EquipWaza"] = PalObjects.ArrayProperty(
+                ArrayType.ENUM_PROPERTY, active_skills
+            )
 
     def _update_pal_gender(self, pal_obj: Dict[str, Any], gender: str) -> None:
-        gender = f"EPalGenderType::{gender.capitalize()}"
-        safe_set(pal_obj["Gender"], "value", "value", value=gender)
+        gender = PalGender.from_value(gender.capitalize())
+        if "Gender" in pal_obj:
+            PalObjects.set_enum_property(pal_obj["Gender"], value=gender.prefixed())
+        else:
+            pal_obj["Gender"] = PalObjects.EnumProperty(
+                "EPalGenderType", gender.prefixed()
+            )
 
     def _update_pal_nickname(self, pal_obj: Dict[str, Any], nickname: str) -> None:
         if not nickname or len(nickname) == 0:
             return
         if "NickName" in pal_obj:
-            safe_set(pal_obj["NickName"], "value", value=nickname)
+            PalObjects.set_value(pal_obj["NickName"], value=nickname)
         else:
-            pal_obj["NickName"] = get_empty_property(PropertyType.STR)
-            safe_set(pal_obj["NickName"], "value", value=nickname)
+            pal_obj["NickName"] = PalObjects.StrProperty(nickname)
 
     def _update_mastered_waza(
         self, pal_obj: Dict[str, Any], learned_skills: List[str]
@@ -583,34 +574,37 @@ class SaveFile(BaseModel):
         if not learned_skills or len(learned_skills) == 0:
             return
         if "MasteredWaza" in pal_obj:
-            safe_set(pal_obj["MasteredWaza"], "value", "values", value=learned_skills)
+            PalObjects.set_array_property(pal_obj["MasteredWaza"], value=learned_skills)
         else:
-            pal_obj["MasteredWaza"] = get_empty_property(PropertyType.ENUM_ARRAY)
-            safe_set(pal_obj["MasteredWaza"], "value", "values", value=learned_skills)
+            pal_obj["MasteredWaza"] = PalObjects.ArrayProperty(
+                ArrayType.ENUM_PROPERTY, learned_skills
+            )
 
     def _update_pal_field(
         self, pal_obj: Dict[str, Any], field: str, value: Any
     ) -> None:
         if field in pal_obj:
-            safe_set(pal_obj[field], "value", value=value)
+            PalObjects.set_value(pal_obj[field], value)
         else:
             logger.warning("Field %s not found in pal object.", field)
 
-    def _update_pal_array(
-        self, pal_obj: Dict[str, Any], field: str, values: List[str]
+    def _update_passive_skills(
+        self, pal_obj: Dict[str, Any], values: List[str]
     ) -> None:
-        if field in pal_obj:
-            safe_set(pal_obj[field], "value", "values", value=values)
+        if "PassiveSkillList" in pal_obj:
+            PalObjects.set_array_property(pal_obj["PassiveSkillList"], value=values)
         else:
-            logger.warning("Array field %s not found in pal object.", field)
+            pal_obj["PassiveSkillList"] = PalObjects.ArrayProperty(
+                ArrayType.NAME_PROPERTY, values
+            )
 
     def _update_player(self, player: Player) -> None:
         world_save_data = self._get_world_save_data(False)
-        item_container_save_data = safe_get(
-            world_save_data, "ItemContainerSaveData", "value", default=[]
+        item_container_save_data = PalObjects.get_value(
+            world_save_data["ItemContainerSaveData"]
         )
-        dynamic_item_save_data = safe_get(
-            world_save_data, "DynamicItemSaveData", "value", "values", default=[]
+        dynamic_item_save_data = PalObjects.get_array_property(
+            world_save_data["DynamicItemSaveData"]
         )
         self._set_container_items(
             player.common_container, item_container_save_data, dynamic_item_save_data
@@ -640,8 +634,8 @@ class SaveFile(BaseModel):
         dynamic_item: DynamicItem,
         dynamic_item_data: Dict[str, Any],
     ) -> Dict[str, Any]:
-        # Set UUIDs
-        safe_set(
+        # Set
+        PalObjects.set_nested(
             dynamic_item_data,
             "ID",
             "value",
@@ -649,7 +643,7 @@ class SaveFile(BaseModel):
             "value",
             value=str(dynamic_item.local_id),
         )
-        safe_set(
+        PalObjects.set_nested(
             dynamic_item_data,
             "RawData",
             "value",
@@ -658,48 +652,33 @@ class SaveFile(BaseModel):
             value=str(dynamic_item.local_id),
         )
         # Set static ID
-        safe_set(dynamic_item_data, "StaticItemId", "value", value=static_id)
-        safe_set(
-            dynamic_item_data, "RawData", "value", "id", "static_id", value=static_id
-        )
-        safe_set(dynamic_item_data, "RawData", "value", "type", value=dynamic_item.type)
+        PalObjects.set_value(dynamic_item_data, "StaticItemId", value=static_id)
+        raw_data = PalObjects.get_value(dynamic_item_data["RawData"])
+        PalObjects.set_nested(raw_data, "id", "static_id", value=static_id)
+        PalObjects.set_nested(raw_data, "type", value=dynamic_item.type)
         if dynamic_item.type == "armor":
-            safe_set(
-                dynamic_item_data,
-                "RawData",
-                "value",
+            PalObjects.set_nested(
+                raw_data,
                 "durability",
                 value=dynamic_item.durability,
             )
-            safe_remove(dynamic_item_data, "RawData", "value", "remaining_bullets")
-            safe_remove(dynamic_item_data, "RawData", "value", "passive_skill_list")
+            safe_remove(raw_data, "remaining_bullets")
+            safe_remove(raw_data, "passive_skill_list")
 
         if dynamic_item.type == "weapon":
-            safe_set(
-                dynamic_item_data,
-                "RawData",
-                "value",
+            PalObjects.set_nested(
+                raw_data,
                 "durability",
                 value=dynamic_item.durability,
             )
-            safe_set(
-                dynamic_item_data,
-                "RawData",
-                "value",
+            PalObjects.set_nested(
+                raw_data,
                 "remaining_bullets",
                 value=dynamic_item.remaining_bullets,
             )
-            passive_skill_list = safe_get(
-                dynamic_item_data, "RawData", "value", "passive_skill_list", None
-            )
+            passive_skill_list = PalObjects.get_nested(raw_data, "passive_skill_list")
             if not passive_skill_list:
-                safe_set(
-                    dynamic_item_data,
-                    "RawData",
-                    "value",
-                    "passive_skill_list",
-                    value=[],
-                )
+                raw_data["passive_skill_list"] = []
 
     def _set_dynamic_item(
         self,
@@ -707,14 +686,10 @@ class SaveFile(BaseModel):
         container_slot: ContainerSlot,
         dynamic_item_save_data: List[Dict[str, Any]],
     ):
-        slot_local_id = safe_get(
-            slot,
-            "ItemId",
-            "value",
-            "DynamicId",
-            "value",
-            "LocalIdInCreatedWorld",
-            "value",
+        slot_local_id = PalObjects.get_guid(
+            PalObjects.get_nested(
+                slot, "ItemId", "value", "DynamicId", "LocalIdInCreatedWorld"
+            )
         )
         # New container slot does not have a dynamic item, we need to check if slot
         # has a dynamic item, if it does we need to delete it
@@ -724,22 +699,22 @@ class SaveFile(BaseModel):
             and is_valid_uuid(str(slot_local_id))
         ):
             for entry in dynamic_item_save_data:
-                local_id = safe_get(
-                    entry, "ID", "value", "LocalIdInCreatedWorld", "value"
+                local_id = PalObjects.get_guid(
+                    PalObjects.get_nested(entry, "ID", "value", "LocalIdInCreatedWorld")
                 )
                 if are_equal_uuids(local_id, slot_local_id):
                     dynamic_item_save_data.remove(entry)
                     break
-            return get_empty_property(PropertyType.UUID)
+            return PalObjects.EMPTY_UUID
 
         if not container_slot.dynamic_item:
-            return get_empty_property(PropertyType.UUID)
+            return PalObjects.EMPTY_UUID
 
         if is_empty_uuid(container_slot.dynamic_item.local_id) and is_empty_uuid(
             slot_local_id
         ):
             container_slot.dynamic_item.local_id = uuid.uuid4()
-            new_dynamic_item = get_empty_property(PropertyType.DYNAMIC_ITEM)
+            new_dynamic_item = PalObjects.DynamicItem(container_slot)
             self._set_dynamic_data(
                 container_slot.static_id,
                 container_slot.dynamic_item,
@@ -755,7 +730,9 @@ class SaveFile(BaseModel):
 
         # If the dynamic item is not empty, we need to update it
         for entry in dynamic_item_save_data:
-            local_id = safe_get(entry, "ID", "value", "LocalIdInCreatedWorld", "value")
+            local_id = PalObjects.get_guid(
+                PalObjects.get_nested(entry, "ID", "value", "LocalIdInCreatedWorld")
+            )
             if are_equal_uuids(local_id, container_slot.dynamic_item.local_id):
                 self._set_dynamic_data(
                     container_slot.static_id, container_slot.dynamic_item, entry
@@ -769,19 +746,23 @@ class SaveFile(BaseModel):
         dynamic_item_save_data: List[Dict[str, Any]],
     ):
         for entry in item_container_save_data:
-            current_container_id = safe_get(entry, "key", "ID", "value")
+            current_container_id = PalObjects.get_guid(
+                PalObjects.get_nested(entry, "key", "ID")
+            )
             if not are_equal_uuids(current_container_id, container.id):
                 continue
-            slots = safe_get(entry, "value", "Slots", "value", "values", default=[])
+            slots = PalObjects.get_array_property(
+                PalObjects.get_nested(entry, "value", "Slots")
+            )
             for slot in slots:
-                slot_index = safe_get(slot, "SlotIndex", "value")
+                slot_index = PalObjects.get_value(slot["SlotIndex"])
                 container_slot = container.get_slot(slot_index)
                 local_id = self._set_dynamic_item(
                     slot,
                     container_slot,
                     dynamic_item_save_data,
                 )
-                safe_set(
+                PalObjects.set_nested(
                     slot,
                     "ItemId",
                     "value",
@@ -791,7 +772,7 @@ class SaveFile(BaseModel):
                     "value",
                     value=str(local_id),
                 )
-                safe_set(
+                PalObjects.set_nested(
                     slot,
                     "ItemId",
                     "value",
@@ -799,5 +780,5 @@ class SaveFile(BaseModel):
                     "value",
                     value=container_slot.static_id,
                 )
-                safe_set(slot, "StackCount", "value", value=container_slot.count)
+                PalObjects.set_value(slot["StackCount"], value=container_slot.count)
             break
