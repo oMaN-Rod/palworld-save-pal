@@ -193,7 +193,7 @@
 			<h6 class="h6">Clear</h6>
 			<Tooltip>
 				<button
-					class="btn preset-tonal-primary hover:preset-tonal-secondary"
+					class="btn preset-filled-primary-500 hover:preset-tonal-secondary"
 					onclick={clearCommonContainer}
 				>
 					<ChevronsLeftRight />
@@ -204,7 +204,7 @@
 			</Tooltip>
 			<Tooltip
 				><button
-					class="btn preset-tonal-primary hover:preset-tonal-secondary"
+					class="btn preset-filled-primary-500 hover:preset-tonal-secondary"
 					onclick={clearEssentialContainer}
 				>
 					<Key />
@@ -215,7 +215,7 @@
 			</Tooltip>
 			<Tooltip>
 				<button
-					class="btn preset-tonal-primary hover:preset-tonal-secondary"
+					class="btn preset-filled-primary-500 hover:preset-tonal-secondary"
 					onclick={clearWeaponLoadOutContainer}
 				>
 					<Swords />
@@ -226,7 +226,7 @@
 			</Tooltip>
 			<Tooltip>
 				<button
-					class="btn preset-tonal-primary hover:preset-tonal-secondary"
+					class="btn preset-filled-primary-500 hover:preset-tonal-secondary"
 					onclick={clearEquipmentArmorContainer}
 				>
 					<Shield />
@@ -237,7 +237,7 @@
 			</Tooltip>
 			<Tooltip>
 				<button
-					class="btn preset-tonal-primary hover:preset-tonal-secondary"
+					class="btn preset-filled-primary-500 hover:preset-tonal-secondary"
 					onclick={clearFoodEquipContainer}
 				>
 					<Pizza />
@@ -247,7 +247,10 @@
 				{/snippet}
 			</Tooltip>
 			<Tooltip>
-				<button class="btn preset-tonal-primary hover:preset-tonal-secondary" onclick={clearAll}>
+				<button
+					class="btn preset-filled-primary-500 hover:preset-tonal-secondary"
+					onclick={clearAll}
+				>
 					<Bomb />
 				</button>
 				{#snippet popup()}
@@ -264,7 +267,7 @@
 				/>
 				<Tooltip>
 					<button
-						class="btn preset-tonal-primary hover:preset-tonal-secondary"
+						class="btn preset-filled-primary-500 hover:preset-tonal-secondary"
 						onclick={applyPreset}
 					>
 						<Check />

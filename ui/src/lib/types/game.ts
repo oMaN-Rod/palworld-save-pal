@@ -158,8 +158,8 @@ export interface Bonuses {
 
 enum PalGender {
 	UNKNOWN = 'Unknown',
-	MALE = 'male',
-	FEMALE = 'female'
+	MALE = 'Male',
+	FEMALE = 'Female'
 }
 
 type SkillType = 'Active' | 'Passive' | 'Empty';

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { cn } from '$theme';
-	import { type Pal } from '$types';
+	import { PalGender, type Pal } from '$types';
 	import { elementsData, palsData } from '$lib/data';
 	import { Input, Tooltip } from '$components/ui';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
@@ -182,6 +182,13 @@
 			sortOrder = 'desc';
 		}
 	}
+
+	async function getGenderIcon(gender: PalGender): Promise<string | undefined> {
+		if (gender == PalGender.UNKNOWN) return undefined;
+		const iconPath = `${ASSET_DATA_PATH}/img/icons/${gender.toLowerCase()}.svg`;
+		const icon = await assetLoader.loadSvg(iconPath);
+		return icon;
+	}
 </script>
 
 <div class="flex w-full flex-col space-y-2" {...additionalProps}>
@@ -285,14 +292,23 @@
 							<div>
 								<span class="font-bold">Lvl {pal.level}</span>
 							</div>
-							<div class="justify-start">
+							<div class="relative justify-start">
 								{#await getPalIcon(pal.instance_id) then icon}
 									{#if icon}
 										<enhanced:img src={icon} alt={pal.name} class="h-8 w-8"></enhanced:img>
 									{/if}
 								{/await}
+								{#await getGenderIcon(pal.gender) then icon}
+									{#if icon}
+										{@const color =
+											pal.gender == PalGender.MALE ? 'text-primary-300' : 'text-tertiary-300'}
+										<div class={cn('absolute -right-4 -top-1 h-5 w-5', color)}>
+											{@html icon}
+										</div>
+									{/if}
+								{/await}
 							</div>
-							<div class="justify-start">
+							<div class="ml-4 justify-start">
 								<div>{pal.nickname || pal.name}</div>
 							</div>
 							<div class="flex justify-end">
