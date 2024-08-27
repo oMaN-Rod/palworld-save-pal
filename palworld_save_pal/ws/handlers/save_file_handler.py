@@ -2,6 +2,7 @@ import base64
 import io
 import os
 import traceback
+import uuid
 import zipfile
 from fastapi import WebSocket
 from fastapi.encoders import jsonable_encoder
@@ -160,7 +161,8 @@ async def load_zip_file_handler(message: LoadZipFileMessage, ws: WebSocket):
             player_data = {}
             for player_file in player_files:
                 player_id = os.path.splitext(os.path.basename(player_file))[0]
-                player_data[player_id] = zip_ref.read(player_file)
+                player_uuid = uuid.UUID(player_id)
+                player_data[player_uuid] = zip_ref.read(player_file)
 
             await app_state.process_save_files(
                 save_id, level_sav_data, player_data, ws_callback

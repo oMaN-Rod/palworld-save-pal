@@ -5,7 +5,7 @@ import uuid
 
 from palworld_save_tools.archive import UUID as ArchiveUUID
 
-from palworld_save_pal.save_file.item_container import ContainerSlot
+from palworld_save_pal.save_file.container_slot import ContainerSlot
 from palworld_save_pal.utils.logging_config import create_logger
 
 logger = create_logger(__name__)

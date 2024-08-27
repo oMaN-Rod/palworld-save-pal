@@ -22,7 +22,7 @@ class AppState(BaseModel):
     ):
         logger.info("Processing save files")
         await ws_callback(f"Loading level.sav and {len(player_savs)} players...")
-        self.save_file = SaveFile(name=sav_id).load_gvas_files(level_sav, player_savs)
+        self.save_file = SaveFile(name=sav_id).load_sav_files(level_sav, player_savs)
         await ws_callback("Files loaded, getting players...")
         self.players = self.save_file.get_players()
 
