@@ -209,3 +209,4 @@ These are projects I've found that specifically target PALWorld save files, each
 - [PalEdit](https://github.com/EternalWraith/PalEdit) - PSP was inspired by it. The goal is to reach feature parity with this project, in the mean time if you're looking for a more feature-rich tool, check it out!
 - [palworld-save-tools](https://github.com/cheahjs/palworld-save-tools) - PSP uses this tool for handling save files, can be used directly to convert to/from json.
 - [palworld-uesave-rs](https://github.com/DKingAlpha/palworld-uesave-rs) - I originally considered building this app using Tauri, opted for using Python, but this project was helpful.
+- [Palworld Pal Editor](https://github.com/KrisCris/Palworld-Pal-Editor) - Also served as a reference for Palworld Save Pal, adopted some of this projects approach.
