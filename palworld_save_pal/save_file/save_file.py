@@ -336,7 +336,11 @@ class SaveFile(BaseModel):
                 "value",
             )
             nickname = PalObjects.get_value(save_parameter["NickName"])
-            level = PalObjects.get_value(save_parameter["Level"])
+            level = (
+                PalObjects.get_value(save_parameter["Level"])
+                if "Level" in save_parameter
+                else 1
+            )
             player_sav_bytes = player_sav_files.get(uid)
             if not player_sav_bytes:
                 logger.warning("No player save file found for player %s", uid)
