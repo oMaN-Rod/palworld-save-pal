@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Combobox, ItemHeader } from '$components/ui';
 	import { getAppState } from '$states';
-	import type { ContainerSlot, ItemContainer, SelectOption } from '$types';
+	import { EntryState, type ContainerSlot, type ItemContainer, type SelectOption } from '$types';
 	import { assetLoader } from '$utils/asset-loader';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { itemsData, presetsData } from '$lib/data';
@@ -127,7 +127,7 @@
 				}
 			}
 		}
-
+		appState.selectedPlayer.state = EntryState.MODIFIED;
 		appState.selectedPlayer = {
 			...appState.selectedPlayer,
 			...updatedContainers
@@ -144,6 +144,9 @@
 			slot.static_id = 'None';
 			slot.count = 0;
 		});
+		if (appState.selectedPlayer) {
+			appState.selectedPlayer.state = EntryState.MODIFIED;
+		}
 	}
 
 	function clearEssentialContainer() {
@@ -152,6 +155,9 @@
 			slot.static_id = 'None';
 			slot.count = 0;
 		});
+		if (appState.selectedPlayer) {
+			appState.selectedPlayer.state = EntryState.MODIFIED;
+		}
 	}
 
 	function clearWeaponLoadOutContainer() {
@@ -160,6 +166,9 @@
 			slot.static_id = 'None';
 			slot.count = 0;
 		});
+		if (appState.selectedPlayer) {
+			appState.selectedPlayer.state = EntryState.MODIFIED;
+		}
 	}
 
 	function clearEquipmentArmorContainer() {
@@ -168,6 +177,9 @@
 			slot.static_id = 'None';
 			slot.count = 0;
 		});
+		if (appState.selectedPlayer) {
+			appState.selectedPlayer.state = EntryState.MODIFIED;
+		}
 	}
 
 	function clearFoodEquipContainer() {
@@ -176,6 +188,9 @@
 			slot.static_id = 'None';
 			slot.count = 0;
 		});
+		if (appState.selectedPlayer) {
+			appState.selectedPlayer.state = EntryState.MODIFIED;
+		}
 	}
 
 	function clearAll(event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }) {

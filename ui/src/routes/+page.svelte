@@ -5,7 +5,7 @@
 	import Settings from '$lib/pages/Settings.svelte';
 	import File from '$lib/pages/File.svelte';
 	import { Spinner } from '$components';
-	import { MessageType, type Message } from '$types';
+	import { MessageType, type Message, type Pal } from '$types';
 	import { palsData } from '$lib/data';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 
@@ -21,6 +21,19 @@
 		if (ws.message && ws.message.type) {
 			const { data, type } = ws.message;
 			switch (type) {
+				case MessageType.ADD_PAL:
+					const { player_id, pal } = data;
+					if (appState.players && appState.players[player_id] && appState.players[player_id].pals) {
+						async function loadPal() {
+							const palInfo = await palsData.getPalInfo(pal.character_id);
+							pal.name = palInfo?.localized_name || pal.character_id;
+							pal.elements = palInfo?.elements || [];
+							// @ts-ignore
+							appState.players[player_id].pals[pal.instance_id] = pal;
+							appState.selectedPal = pal;
+						}
+						loadPal();
+					}
 				case MessageType.GET_PLAYERS:
 					appState.players = data;
 					const numOfPlayers = Object.keys(data).length;

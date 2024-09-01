@@ -167,7 +167,7 @@
 					<div
 						class={cn(
 							'hover:bg-surface-700 cursor-pointer p-2',
-							option.value.toString() === selected && 'bg-primary-500'
+							option.value.toString() === selected && 'bg-secondary-500/25'
 						)}
 						role="option"
 						tabindex={0}

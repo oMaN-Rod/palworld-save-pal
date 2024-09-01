@@ -86,7 +86,7 @@
 						<div class="mr-0 flex items-end justify-end pb-2 pr-0">
 							<Tooltip>
 								<button class="btn" onclick={handleSaveState}>
-									<SaveAll class="text-primary-500 mr-2" size="32" />
+									<SaveAll class="mr-2 text-primary-500" size="32" />
 								</button>
 								{#snippet popup()}
 									<span>Save all changes</span>
@@ -99,21 +99,20 @@
 					<PalList />
 				{/if}
 			</Drawer>
+			<Tabs listJustify="justify-center">
+				{#snippet list()}
+					<Tabs.Control bind:group name="player">Player</Tabs.Control>
+					<Tabs.Control bind:group name="pal">Pal</Tabs.Control>
+				{/snippet}
+				{#snippet panels()}
+					<Tabs.Panel bind:group value="player">
+						<PlayerEdit />
+					</Tabs.Panel>
+					<Tabs.Panel bind:group value="pal">
+						<PalEdit />
+					</Tabs.Panel>
+				{/snippet}
+			</Tabs>
 		{/if}
-
-		<Tabs listJustify="justify-center">
-			{#snippet list()}
-				<Tabs.Control bind:group name="player">Player</Tabs.Control>
-				<Tabs.Control bind:group name="pal">Pal</Tabs.Control>
-			{/snippet}
-			{#snippet panels()}
-				<Tabs.Panel bind:group value="player">
-					<PlayerEdit />
-				</Tabs.Panel>
-				<Tabs.Panel bind:group value="pal">
-					<PalEdit />
-				</Tabs.Panel>
-			{/snippet}
-		</Tabs>
 	</div>
 </div>

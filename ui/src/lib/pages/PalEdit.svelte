@@ -9,7 +9,7 @@
 		Spinner
 	} from '$components';
 	import { Card, CornerDotButton, SectionHeader, Tooltip } from '$components/ui';
-	import { type Pal, PalGender } from '$types';
+	import { EntryState, type Pal, PalGender } from '$types';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { palsData, elementsData } from '$lib/data';
 	import { cn } from '$theme';
@@ -90,6 +90,7 @@
 		});
 		if (!result) return;
 		appState.selectedPal.nickname = result as string;
+		appState.selectedPal.state = EntryState.MODIFIED;
 		if (appState.selectedPlayer && appState.selectedPlayer.pals)
 			appState.selectedPlayer.pals[appState.selectedPal.instance_id].nickname = result as string;
 	}
@@ -102,6 +103,7 @@
 			} else {
 				appState.selectedPal.active_skills.push(newSkill.replace('EPalWazaID::', ''));
 			}
+			appState.selectedPal.state = EntryState.MODIFIED;
 		}
 	}
 
@@ -113,6 +115,7 @@
 			} else {
 				appState.selectedPal.passive_skills.push(newSkill);
 			}
+			appState.selectedPal.state = EntryState.MODIFIED;
 		}
 	}
 
@@ -121,6 +124,7 @@
 			const currentGender = appState.selectedPal.gender;
 			appState.selectedPal.gender =
 				currentGender === PalGender.MALE ? PalGender.FEMALE : PalGender.MALE;
+			appState.selectedPal.state = EntryState.MODIFIED;
 		}
 	}
 
@@ -233,13 +237,13 @@
 	<div class="p-4">
 		<div class="flex flex-row">
 			<div
-				class="card border-l-surface-600 preset-filled-surface-100-900 my-2 flex flex-row rounded-none border-l-2 p-4"
+				class="card my-2 flex flex-row rounded-none border-l-2 border-l-surface-600 p-4 preset-filled-surface-100-900"
 			>
 				<!-- <button class="mr-4">
 										<Minus class="text-primary-500" onclick={handleLevelDecrement} />
 									</button> -->
 				<div class="flex flex-col items-center justify-center">
-					<span class={cn('text-surface-400 font-bold', palLevelClass)}>LEVEL</span>
+					<span class={cn('font-bold text-surface-400', palLevelClass)}>LEVEL</span>
 					<span class={cn('text-4xl font-bold', palLevelClass)}>{palLevel}</span>
 				</div>
 				<!-- <button class="ml-4">
@@ -260,7 +264,7 @@
 							</Tooltip>
 							<Tooltip position="bottom">
 								<button
-									class="hover:ring-secondary-500 relative flex h-full w-auto items-center justify-center hover:ring"
+									class="relative flex h-full w-auto items-center justify-center hover:ring hover:ring-secondary-500"
 									onclick={handleEditGender}
 								>
 									{#await getGenderIcon(appState.selectedPal.gender) then icon}
@@ -274,10 +278,10 @@
 											</div>
 										{/if}
 									{/await}
-									<span class="bg-surface-600 absolute left-0 top-0 h-0.5 w-0.5"></span>
-									<span class="bg-surface-600 absolute right-0 top-0 h-0.5 w-0.5"></span>
-									<span class="bg-surface-600 absolute bottom-0 left-0 h-0.5 w-0.5"></span>
-									<span class="bg-surface-600 absolute bottom-0 right-0 h-0.5 w-0.5"></span>
+									<span class="absolute left-0 top-0 h-0.5 w-0.5 bg-surface-600"></span>
+									<span class="absolute right-0 top-0 h-0.5 w-0.5 bg-surface-600"></span>
+									<span class="absolute bottom-0 left-0 h-0.5 w-0.5 bg-surface-600"></span>
+									<span class="absolute bottom-0 right-0 h-0.5 w-0.5 bg-surface-600"></span>
 								</button>
 								{#snippet popup()}
 									<span>Toggle gender</span>
@@ -286,7 +290,7 @@
 						</div>
 						<hr class="hr my-1" />
 						<div class="flex flex-row">
-							<span class="text-surface-400 grow">{appState.selectedPal.nickname}</span>
+							<span class="grow text-surface-400">{appState.selectedPal.nickname}</span>
 							<div class="mt-2 flex flex-row">
 								{#await getPalElementTypes(appState.selectedPal.character_id) then elementTypes}
 									{#if elementTypes}
@@ -327,7 +331,7 @@
 					{/each}
 				</div>
 				<SectionHeader text="Utility Presets" />
-				<div class="btn-group preset-outlined-surface-100-900 my-2 flex-col p-2 md:flex-row">
+				<div class="btn-group my-2 flex-col p-2 preset-outlined-surface-100-900 md:flex-row">
 					<button
 						type="button"
 						class="btn hover:bg-primary-500"
@@ -350,7 +354,7 @@
 					>
 				</div>
 				<SectionHeader text="Attack Presets" />
-				<div class="btn-group preset-outlined-surface-100-900 my-2 flex-col p-2 md:flex-row">
+				<div class="btn-group my-2 flex-col p-2 preset-outlined-surface-100-900 md:flex-row">
 					<button
 						type="button"
 						class="btn hover:bg-primary-500"

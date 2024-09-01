@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { cn } from '$theme';
-	import { PalGender, type Pal } from '$types';
+	import { MessageType, PalGender, type Pal } from '$types';
 	import { elementsData, palsData } from '$lib/data';
-	import { Input, Tooltip } from '$components/ui';
+	import { Input, Tooltip, Checkbox } from '$components/ui';
+	import { PalSelectModal } from '$components/modals';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import {
 		Search,
@@ -14,12 +15,14 @@
 	} from 'lucide-svelte';
 	import { assetLoader, debounce } from '$utils';
 	import { ASSET_DATA_PATH } from '$lib/constants';
-	import { getAppState } from '$states';
+	import { getAppState, getSocketState, getModalState } from '$states';
 
 	type SortBy = 'name' | 'level';
 	type SortOrder = 'asc' | 'desc';
 
 	const appState = getAppState();
+	const ws = getSocketState();
+	const modal = getModalState();
 
 	let { ...additionalProps } = $props<{
 		[key: string]: any;
@@ -32,6 +35,7 @@
 	let filteredPals: Array<Pal> = $state([]);
 	let sortBy: SortBy | undefined = $state(undefined);
 	let sortOrder: SortOrder | undefined = $state(undefined);
+	let selectedPals: Record<string, Pal> = $state({});
 
 	const listContainerClass = $derived(cn('h-[calc(100vh-200px)] overflow-hidden'));
 	const listClass = $derived(
@@ -42,6 +46,7 @@
 
 	async function filterPals() {
 		if (!appState.selectedPlayer || !appState.selectedPlayer.pals) return;
+
 		const pals = Object.entries(appState.selectedPlayer.pals as Record<string, Pal>);
 		const palsWithInfo = await Promise.all(
 			pals.map(async ([id, pal]) => {
@@ -50,6 +55,7 @@
 			})
 		);
 
+		selectedPals = {};
 		filteredPals = palsWithInfo
 			.filter(({ pal, palInfo }) => {
 				const matchesSearch =
@@ -77,6 +83,14 @@
 	function handlePalSelect(pal: Pal) {
 		if (appState.selectedPlayer && appState.selectedPlayer.pals) {
 			appState.selectedPal = appState.selectedPlayer.pals[pal.instance_id];
+		}
+	}
+
+	function handlePalCheckboxChange(pal: Pal, isChecked: boolean) {
+		if (isChecked) {
+			selectedPals[pal.instance_id] = pal;
+		} else {
+			delete selectedPals[pal.instance_id];
 		}
 	}
 
@@ -130,6 +144,26 @@
 		return icon;
 	}
 
+	async function handleAddPal() {
+		if (!appState.selectedPlayer) return;
+		// @ts-ignore
+		const [selectedPal, nickname] = await modal.showModal(PalSelectModal, {
+			title: 'Add a new Pal'
+		});
+		const message = {
+			type: MessageType.ADD_PAL,
+			data: {
+				player_id: appState.selectedPlayer.uid,
+				pal_code_name: selectedPal,
+				nickname: nickname
+			}
+		};
+		ws.send(JSON.stringify(message));
+		if (selectedPal) {
+			console.log('Selected Pal:', selectedPal);
+		}
+	}
+
 	$effect(() => {
 		loadElementTypes();
 	});
@@ -161,6 +195,25 @@
 		}
 	});
 
+	const sortByLevelAscClass = $derived(
+		cn('btn', sortBy === 'level' && sortOrder === 'asc' ? 'bg-secondary-500/25' : '')
+	);
+
+	const sortByLevelDescClass = $derived(
+		cn('btn', sortBy === 'level' && sortOrder === 'desc' ? 'bg-secondary-500/25' : '')
+	);
+
+	const sortByNameAscClass = $derived(
+		cn('btn', sortBy === 'name' && sortOrder === 'asc' ? 'bg-secondary-500/25' : '')
+	);
+
+	const sortByNameDescClass = $derived(
+		cn('btn', sortBy === 'name' && sortOrder === 'desc' ? 'bg-secondary-500/25' : '')
+	);
+
+	const elementClass = (element: string) =>
+		cn('btn', selectedElement === element ? 'bg-secondary-500/25' : '');
+
 	function sortByName(order: string) {
 		sortBy = 'name';
 		if (order === 'asc') {
@@ -189,12 +242,89 @@
 		const icon = await assetLoader.loadSvg(iconPath);
 		return icon;
 	}
+
+	async function cloneSelectedPal() {
+		console.log('Cloning selected pal');
+		if (appState.selectedPlayer && Object.keys(selectedPals).length === 1) {
+			const selectedPal = Object.values(selectedPals)[0];
+			const message = {
+				type: MessageType.CLONE_PAL,
+				data: selectedPal
+			};
+			ws.send(JSON.stringify(message));
+		}
+	}
+
+	async function deleteSelectedPals() {
+		const numOfSelectedPals = Object.keys(selectedPals).length;
+		if (numOfSelectedPals === 0) return;
+		const confirmed = await modal.showConfirmModal({
+			title: 'Delete Pal(s)',
+			message: `Are you sure you want to delete the ${numOfSelectedPals} selected pal${numOfSelectedPals == 1 ? '' : 's'}?`,
+			confirmText: 'Delete',
+			cancelText: 'Cancel'
+		});
+		if (appState.selectedPlayer && appState.selectedPlayer.pals && confirmed) {
+			const selectedPalIds = Object.keys(selectedPals);
+			const data = {
+				player_id: appState.selectedPlayer.uid,
+				pal_ids: selectedPalIds
+			};
+			const message = {
+				type: MessageType.DELETE_PALS,
+				data
+			};
+			ws.send(JSON.stringify(message));
+			selectedPals = {};
+			appState.selectedPlayer.pals = Object.fromEntries(
+				Object.entries(appState.selectedPlayer.pals).filter(([id]) => !selectedPalIds.includes(id))
+			);
+		}
+	}
 </script>
 
 <div class="flex w-full flex-col space-y-2" {...additionalProps}>
 	<div class="w-full">
+		<div class="btn-group bg-surface-900 mb-2 items-center rounded p-0">
+			<Tooltip position="right">
+				<button class="btn hover:preset-tonal-secondary" onclick={handleAddPal}> Add </button>
+				{#snippet popup()}
+					Add a new pal to your Pal box
+				{/snippet}
+			</Tooltip>
+			{#if Object.keys(selectedPals).length === 1}
+				<Tooltip>
+					<button class="btn hover:preset-tonal-secondary" onclick={cloneSelectedPal}>
+						Clone
+					</button>
+					{#snippet popup()}
+						Clone selected pal
+					{/snippet}
+				</Tooltip>
+			{/if}
+			{#if Object.keys(selectedPals).length >= 1}
+				<Tooltip>
+					<button class="btn hover:preset-tonal-secondary" onclick={deleteSelectedPals}>
+						Delete
+					</button>
+					{#snippet popup()}
+						Delete selected pal(s)
+					{/snippet}
+				</Tooltip>
+			{/if}
+			{#if Object.keys(selectedPals).length >= 1}
+				<Tooltip>
+					<button class="btn hover:preset-tonal-secondary" onclick={() => (selectedPals = {})}>
+						Clear
+					</button>
+					{#snippet popup()}
+						Clear selected
+					{/snippet}
+				</Tooltip>
+			{/if}
+		</div>
 		<Accordion classes="bg-surface-900">
-			<Accordion.Item id="filter">
+			<Accordion.Item id="filter" controlHover="hover:bg-secondary-500/25">
 				{#snippet controlLead()}<Search />{/snippet}
 				{#snippet control()}Filter{/snippet}
 				{#snippet panel()}
@@ -209,7 +339,11 @@
 						<hr />
 						<div class="btn-group">
 							<Tooltip>
-								<button type="button" class="btn" onclick={() => sortByLevel('asc')}>
+								<button
+									type="button"
+									class={sortByLevelAscClass}
+									onclick={() => sortByLevel('asc')}
+								>
 									<ArrowUp01 />
 								</button>
 								{#snippet popup()}
@@ -217,7 +351,11 @@
 								{/snippet}
 							</Tooltip>
 							<Tooltip>
-								<button type="button" class="btn" onclick={() => sortByLevel('desc')}>
+								<button
+									type="button"
+									class={sortByLevelDescClass}
+									onclick={() => sortByLevel('desc')}
+								>
 									<ArrowUp10 />
 								</button>
 								{#snippet popup()}
@@ -225,7 +363,7 @@
 								{/snippet}
 							</Tooltip>
 							<Tooltip>
-								<button type="button" class="btn" onclick={() => sortByName('asc')}>
+								<button type="button" class={sortByNameAscClass} onclick={() => sortByName('asc')}>
 									<ArrowUpAZ />
 								</button>
 								{#snippet popup()}
@@ -233,7 +371,11 @@
 								{/snippet}
 							</Tooltip>
 							<Tooltip>
-								<button type="button" class="btn" onclick={() => sortByName('desc')}>
+								<button
+									type="button"
+									class={sortByNameDescClass}
+									onclick={() => sortByName('desc')}
+								>
 									<ArrowUpZA />
 								</button>
 								{#snippet popup()}
@@ -247,7 +389,7 @@
 						<hr />
 						<div class="mt-2 grid grid-cols-5">
 							<Tooltip>
-								<button class="btn flex" onclick={() => (selectedElement = 'All')}>
+								<button class={elementClass('All')} onclick={() => (selectedElement = 'All')}>
 									<GalleryVerticalEnd />
 								</button>
 								{#snippet popup()}All pals{/snippet}
@@ -256,7 +398,10 @@
 								<Tooltip>
 									{#await getPalElementIcon(element) then icon}
 										{#if icon}
-											<button class="btn flex" onclick={() => (selectedElement = element)}>
+											<button
+												class={elementClass(element)}
+												onclick={() => (selectedElement = element)}
+											>
 												<enhanced:img src={icon} alt={element} class="pal-element-badge"
 												></enhanced:img>
 											</button>
@@ -280,9 +425,15 @@
 					class={cn(
 						'hover:bg-secondary-500/25',
 						itemClass,
-						appState.selectedPal?.instance_id === pal.instance_id ? 'bg-secondary-500/25' : ''
+						appState.selectedPal?.instance_id === pal.instance_id ? 'bg-secondary-500/25' : '',
+						selectedPals[pal.instance_id] ? 'bg-secondary-500/25' : ''
 					)}
 				>
+					<Checkbox
+						checked={!!selectedPals[pal.instance_id]}
+						onchange={(isChecked) => handlePalCheckboxChange(pal, isChecked)}
+						class="mr-2"
+					/>
 					<button
 						class="flex w-full items-center text-left"
 						onclick={() => handlePalSelect(pal)}
