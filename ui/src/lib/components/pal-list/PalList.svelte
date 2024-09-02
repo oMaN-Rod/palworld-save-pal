@@ -349,7 +349,7 @@
 				</Tooltip>
 			{/if}
 		</div>
-		<Accordion classes="bg-surface-900">
+		<Accordion classes="bg-surface-900" collapsible>
 			<Accordion.Item id="filter" controlHover="hover:bg-secondary-500/25">
 				{#snippet controlLead()}<Search />{/snippet}
 				{#snippet control()}Filter{/snippet}
