@@ -38,7 +38,7 @@
 </script>
 
 <div class="flex flex-row items-center space-x-2">
-	<span class="w-2/12">HP</span>
+	<span class="w-3/12">HP</span>
 	<Slider
 		classes="grow"
 		height="h-0.5"
@@ -46,6 +46,7 @@
 		thumbRingColor="ring-green-500"
 		min={0}
 		max={100}
+		markers={[25, 50, 75]}
 		step={1}
 		bind:value={hp}
 		onValueChange={handleUpdateHp}
@@ -59,13 +60,14 @@
 	/>
 </div>
 <div class="flex flex-row items-center space-x-2">
-	<span class="w-2/12">Melee</span>
+	<span class="w-3/12">Melee</span>
 	<Slider
 		height="h-0.5"
 		meterBg="bg-red-500"
 		thumbRingColor="ring-red-500"
 		min={0}
 		max={100}
+		markers={[25, 50, 75]}
 		step={1}
 		bind:value={melee}
 		onValueChange={handleUpdateMelee}
@@ -79,13 +81,14 @@
 	/>
 </div>
 <div class="flex flex-row items-center space-x-2">
-	<span class="w-2/12">Ranged</span>
+	<span class="w-3/12">Ranged</span>
 	<Slider
 		height="h-0.5"
 		meterBg="bg-secondary-500"
 		thumbRingColor="ring-secondary-500"
 		min={0}
 		max={100}
+		markers={[25, 50, 75]}
 		step={1}
 		bind:value={ranged}
 		onValueChange={handleUpdateRanged}
@@ -99,13 +102,14 @@
 	/>
 </div>
 <div class="flex h-8 flex-row items-center space-x-2">
-	<span class="w-2/12">Defense</span>
+	<span class="w-3/12">Defense</span>
 	<Slider
 		height="h-0.5"
 		meterBg="bg-primary-500"
 		thumbRingColor="ring-primary-500"
 		min={0}
 		max={100}
+		markers={[25, 50, 75]}
 		step={1}
 		bind:value={defense}
 		onValueChange={handleUpdateDefense}

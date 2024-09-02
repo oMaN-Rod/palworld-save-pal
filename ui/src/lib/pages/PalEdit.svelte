@@ -15,8 +15,8 @@
 	import { palsData, elementsData } from '$lib/data';
 	import { cn } from '$theme';
 	import { getAppState, getModalState } from '$states';
-	import { Rating } from '@skeletonlabs/skeleton-svelte';
-	import { Minus, Plus } from 'lucide-svelte';
+	import { Rating, Progress } from '@skeletonlabs/skeleton-svelte';
+	import { Minus, Plus, Apple } from 'lucide-svelte';
 	import Souls from '$components/souls/Souls.svelte';
 
 	const appState = getAppState();
@@ -25,6 +25,7 @@
 	let palLevel: string = $state('');
 	let palLevelClass: string = $state('');
 	let alphaIcon: string = $state('');
+	let foodIcon: string = $state('');
 
 	async function loadPalImage(): Promise<string | undefined> {
 		const pal = $state.snapshot(appState.selectedPal);
@@ -37,10 +38,14 @@
 		return undefined;
 	}
 
-	async function loadAlphaIcon() {
+	async function loadStaticIcons() {
 		const iconPath = `${ASSET_DATA_PATH}/img/icons/Alpha.png`;
 		const icon = await assetLoader.loadImage(iconPath);
 		alphaIcon = icon;
+
+		const foodPath = `${ASSET_DATA_PATH}/img/icons/Food.png`;
+		const food = await assetLoader.loadImage(foodPath);
+		foodIcon = food;
 	}
 
 	function handleLevelDecrement() {
@@ -268,8 +273,14 @@
 	});
 
 	$effect(() => {
-		loadAlphaIcon();
+		loadStaticIcons();
 	});
+
+	function handleEat() {
+		if (!appState.selectedPal) return;
+		appState.selectedPal.stomach = appState.selectedPal.max_stomach;
+		appState.selectedPal.state = EntryState.MODIFIED;
+	}
 </script>
 
 {#if appState.selectedPal}
@@ -489,6 +500,30 @@
 		</div>
 		<div class="w-1/3 overflow-auto p-2">
 			<div class="flex flex-col space-y-2">
+				<div class="flex flex-row items-center justify-center">
+					{#if foodIcon}
+						<Tooltip>
+							<button class="mr-2" onclick={handleEat}>
+								<enhanced:img
+									src={foodIcon}
+									alt="Food"
+									class="h-8 w-8"
+									style="width: 24px; height: 24px;"
+								></enhanced:img>
+							</button>
+							{#snippet popup()}
+								<span>Feed</span>
+							{/snippet}
+						</Tooltip>
+					{/if}
+					<Progress
+						value={appState.selectedPal.stomach}
+						max={appState.selectedPal.max_stomach}
+						height="h-4"
+						meterBg="bg-orange-500"
+						>{Math.round(appState.selectedPal.stomach)}/{appState.selectedPal.max_stomach}</Progress
+					>
+				</div>
 				<SectionHeader text="Stats" />
 				<StatsBadges bind:pal={appState.selectedPal} bind:player={appState.selectedPlayer} />
 				<SectionHeader text="Talents (IVs)" />

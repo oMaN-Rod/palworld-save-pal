@@ -20,6 +20,8 @@ type Pal = {
 	level: number;
 	nickname?: string;
 	is_tower: boolean;
+	stomach: number;
+	max_stomach: number;
 	storage_id?: string;
 	storage_slot: number;
 	learned_skills: string[];

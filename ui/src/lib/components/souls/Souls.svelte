@@ -37,7 +37,7 @@
 </script>
 
 <div class="flex flex-row items-center space-x-2">
-	<span class="w-2/12">Health</span>
+	<span class="w-3/12">Health</span>
 	<Slider
 		classes="grow"
 		height="h-0.5"
@@ -59,7 +59,7 @@
 	/>
 </div>
 <div class="flex flex-row items-center space-x-2">
-	<span class="w-2/12">Defense</span>
+	<span class="w-3/12">Defense</span>
 	<Slider
 		height="h-0.5"
 		meterBg="bg-primary-500"
@@ -80,7 +80,7 @@
 	/>
 </div>
 <div class="flex flex-row items-center space-x-2">
-	<span class="w-2/12">Attack</span>
+	<span class="w-3/12">Attack</span>
 	<Slider
 		height="h-0.5"
 		meterBg="bg-red-500"
@@ -101,7 +101,7 @@
 	/>
 </div>
 <div class="flex flex-row items-center space-x-2">
-	<span class="w-2/12">Workspeed</span>
+	<span class="w-3/12">Workspeed</span>
 	<Slider
 		height="h-0.5"
 		meterBg="bg-secondary-500"
