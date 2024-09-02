@@ -6,20 +6,25 @@
 		StatsBadges,
 		WorkSuitabilities,
 		TextInputModal,
-		Spinner
+		Spinner,
+		Talents
 	} from '$components';
-	import { Card, CornerDotButton, SectionHeader, Tooltip } from '$components/ui';
+	import { CornerDotButton, SectionHeader, Tooltip } from '$components/ui';
 	import { EntryState, type Pal, PalGender } from '$types';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { palsData, elementsData } from '$lib/data';
 	import { cn } from '$theme';
 	import { getAppState, getModalState } from '$states';
+	import { Rating } from '@skeletonlabs/skeleton-svelte';
+	import { Minus, Plus } from 'lucide-svelte';
+	import Souls from '$components/souls/Souls.svelte';
 
 	const appState = getAppState();
 	const modal = getModalState();
 
 	let palLevel: string = $state('');
 	let palLevelClass: string = $state('');
+	let alphaIcon: string = $state('');
 
 	async function loadPalImage(): Promise<string | undefined> {
 		const pal = $state.snapshot(appState.selectedPal);
@@ -32,17 +37,27 @@
 		return undefined;
 	}
 
-	// function handleLevelDecrement() {
-	// 	if (!appState.selectedPal) return;
-	// 	appState.selectedPal.level = Math.max(appState.selectedPal.level - 1, 1);
-	// 	appState.selectedPlayer.pals[appState.selectedPalId].level = appState.selectedPal.level;
-	// }
+	async function loadAlphaIcon() {
+		const iconPath = `${ASSET_DATA_PATH}/img/icons/Alpha.png`;
+		const icon = await assetLoader.loadImage(iconPath);
+		alphaIcon = icon;
+	}
 
-	// function handleLevelIncrement() {
-	// 	if (!appState.selectedPal) return;
-	// 	appState.selectedPal.level = Math.min(appState.selectedPal.level + 1, 99);
-	// 	appState.selectedPlayer.pals[appState.selectedPalId].level = appState.selectedPal.level;
-	// }
+	function handleLevelDecrement() {
+		if (!appState.selectedPal || !appState.selectedPlayer || !appState.selectedPlayer.pals) return;
+		appState.selectedPal.level = Math.max(appState.selectedPal.level - 1, 1);
+		appState.selectedPlayer.pals[appState.selectedPal.instance_id].level =
+			appState.selectedPal.level;
+		appState.selectedPal.state = EntryState.MODIFIED;
+	}
+
+	function handleLevelIncrement() {
+		if (!appState.selectedPal || !appState.selectedPlayer || !appState.selectedPlayer.pals) return;
+		appState.selectedPal.level = Math.min(appState.selectedPal.level + 1, 55);
+		appState.selectedPlayer.pals[appState.selectedPal.instance_id].level =
+			appState.selectedPal.level;
+		appState.selectedPal.state = EntryState.MODIFIED;
+	}
 
 	function getActiveSkills(pal: Pal): string[] {
 		let skills = [...pal.active_skills];
@@ -192,11 +207,11 @@
 					];
 					break;
 			}
+			appState.selectedPal.state = EntryState.MODIFIED;
 		}
 	}
 
 	function getElementPassive(element: string): string {
-		console.log('Element:', element);
 		switch (element.toLowerCase()) {
 			case 'neutral':
 				return 'ElementBoost_Normal_2_PAL';
@@ -221,6 +236,26 @@
 		}
 	}
 
+	function handleEditLucky() {
+		if (appState.selectedPal) {
+			appState.selectedPal.is_lucky = !appState.selectedPal.is_lucky;
+			appState.selectedPal.is_boss = appState.selectedPal.is_lucky
+				? false
+				: appState.selectedPal.is_boss;
+			appState.selectedPal.state = EntryState.MODIFIED;
+		}
+	}
+
+	function handleEditAlpha() {
+		if (appState.selectedPal) {
+			appState.selectedPal.is_boss = !appState.selectedPal.is_boss;
+			appState.selectedPal.is_lucky = appState.selectedPal.is_boss
+				? false
+				: appState.selectedPal.is_lucky;
+			appState.selectedPal.state = EntryState.MODIFIED;
+		}
+	}
+
 	$effect(() => {
 		if (appState.selectedPlayer && appState.selectedPal) {
 			palLevel =
@@ -231,170 +266,235 @@
 				appState.selectedPlayer.level < appState.selectedPal.level ? 'text-error-500' : '';
 		}
 	});
+
+	$effect(() => {
+		loadAlphaIcon();
+	});
 </script>
 
 {#if appState.selectedPal}
-	<div class="p-4">
-		<div class="flex flex-row">
-			<div
-				class="card my-2 flex flex-row rounded-none border-l-2 border-l-surface-600 p-4 preset-filled-surface-100-900"
-			>
-				<!-- <button class="mr-4">
-										<Minus class="text-primary-500" onclick={handleLevelDecrement} />
-									</button> -->
-				<div class="flex flex-col items-center justify-center">
-					<span class={cn('font-bold text-surface-400', palLevelClass)}>LEVEL</span>
-					<span class={cn('text-4xl font-bold', palLevelClass)}>{palLevel}</span>
-				</div>
-				<!-- <button class="ml-4">
-										<Plus class="text-primary-500" onclick={handleLevelIncrement} />
-									</button> -->
-			</div>
+	<div class="flex h-full p-2">
+		<div class="flex flex-grow flex-col">
+			<div class="flex-shrink-0">
+				<div
+					class="border-l-surface-600 preset-filled-surface-100-900 flex w-2/3 flex-row rounded-none border-l-2 p-4"
+				>
+					<div class="mr-4 flex flex-col items-center justify-center rounded-none">
+						<Rating bind:value={appState.selectedPal.rank} count={4} itemClasses="text-gray" />
+						<div class="flex flex-row px-2">
+							<button class="mr-4">
+								<Minus class="text-primary-500" onclick={handleLevelDecrement} />
+							</button>
+							<div class="flex flex-col items-center justify-center">
+								<span class={cn('text-surface-400 font-bold', palLevelClass)}>LEVEL</span>
+								<span class={cn('text-4xl font-bold', palLevelClass)}>{palLevel}</span>
+							</div>
+							<button class="ml-4">
+								<Plus class="text-primary-500" onclick={handleLevelIncrement} />
+							</button>
+						</div>
+					</div>
 
-			<div class="grow">
-				<Card class="my-2 ml-2 w-1/3 rounded-none p-4">
-					<div class="flex flex-col">
-						<div class="flex flex-row">
-							<span class="grow">{appState.selectedPal.name}</span>
-							<Tooltip position="bottom">
-								<CornerDotButton label="Edit" onClick={handleEditNickname} />
-								{#snippet popup()}
-									<span>Edit nickname</span>
-								{/snippet}
-							</Tooltip>
-							<Tooltip position="bottom">
-								<button
-									class="relative flex h-full w-auto items-center justify-center hover:ring hover:ring-secondary-500"
-									onclick={handleEditGender}
-								>
-									{#await getGenderIcon(appState.selectedPal.gender) then icon}
-										{#if icon}
-											{@const color =
-												appState.selectedPal.gender == PalGender.MALE
-													? 'text-primary-300'
-													: 'text-tertiary-300'}
-											<div class={cn('h-8 w-8', color)}>
-												{@html icon}
-											</div>
+					<div class="grow">
+						<div class="flex flex-col">
+							<div class="flex flex-row items-center space-x-2">
+								<span class="grow">{appState.selectedPal.name}</span>
+								<Tooltip position="bottom">
+									<CornerDotButton label="Edit" onClick={handleEditNickname} />
+									{#snippet popup()}
+										<span>Edit nickname</span>
+									{/snippet}
+								</Tooltip>
+								<Tooltip position="bottom">
+									<button
+										class="hover:ring-secondary-500 relative flex h-full w-auto items-center justify-center hover:ring"
+										onclick={handleEditGender}
+									>
+										{#await getGenderIcon(appState.selectedPal.gender) then icon}
+											{#if icon}
+												{@const color =
+													appState.selectedPal.gender == PalGender.MALE
+														? 'text-primary-300'
+														: 'text-tertiary-300'}
+												<div class={cn('h-8 w-8', color)}>
+													{@html icon}
+												</div>
+											{/if}
+										{/await}
+										<span class="bg-surface-600 absolute left-0 top-0 h-0.5 w-0.5"></span>
+										<span class="bg-surface-600 absolute right-0 top-0 h-0.5 w-0.5"></span>
+										<span class="bg-surface-600 absolute bottom-0 left-0 h-0.5 w-0.5"></span>
+										<span class="bg-surface-600 absolute bottom-0 right-0 h-0.5 w-0.5"></span>
+									</button>
+									{#snippet popup()}
+										<span>Toggle gender</span>
+									{/snippet}
+								</Tooltip>
+								<Tooltip position="bottom">
+									<button
+										class={cn(
+											'hover:ring-secondary-500 relative flex h-full w-auto items-center justify-center hover:ring',
+											appState.selectedPal.is_lucky && 'bg-secondary-500/25'
+										)}
+										onclick={handleEditLucky}
+									>
+										<div class="flex h-8 w-8 items-center justify-center">✨</div>
+										<span class="bg-surface-600 absolute left-0 top-0 h-0.5 w-0.5"></span>
+										<span class="bg-surface-600 absolute right-0 top-0 h-0.5 w-0.5"></span>
+										<span class="bg-surface-600 absolute bottom-0 left-0 h-0.5 w-0.5"></span>
+										<span class="bg-surface-600 absolute bottom-0 right-0 h-0.5 w-0.5"></span>
+									</button>
+									{#snippet popup()}
+										<span>Toggle Lucky</span>
+									{/snippet}
+								</Tooltip>
+								<Tooltip position="bottom">
+									<button
+										class={cn(
+											'hover:ring-secondary-500 relative flex h-full w-auto items-center justify-center hover:ring',
+											appState.selectedPal.is_boss && 'bg-secondary-500/25'
+										)}
+										onclick={handleEditAlpha}
+									>
+										<div class="flex h-8 w-8 items-center justify-center">
+											{#if alphaIcon}
+												<enhanced:img
+													src={alphaIcon}
+													alt="Alpha"
+													class="h-8 w-8"
+													style="width: 24px; height: 24px;"
+												></enhanced:img>
+											{/if}
+										</div>
+										<span class="bg-surface-600 absolute left-0 top-0 h-0.5 w-0.5"></span>
+										<span class="bg-surface-600 absolute right-0 top-0 h-0.5 w-0.5"></span>
+										<span class="bg-surface-600 absolute bottom-0 left-0 h-0.5 w-0.5"></span>
+										<span class="bg-surface-600 absolute bottom-0 right-0 h-0.5 w-0.5"></span>
+									</button>
+									{#snippet popup()}
+										<span>Toggle Alpha</span>
+									{/snippet}
+								</Tooltip>
+							</div>
+							<hr class="hr my-1" />
+							<div class="flex flex-row">
+								<span class="text-surface-400 grow">{appState.selectedPal.nickname}</span>
+								<div class="mt-2 flex flex-row">
+									{#await getPalElementTypes(appState.selectedPal.character_id) then elementTypes}
+										{#if elementTypes}
+											{#each elementTypes as elementType}
+												{#await getPalElementBadge(elementType) then icon}
+													{#if icon}
+														<enhanced:img
+															src={icon}
+															alt={elementType}
+															class="pal-element-badge"
+															style="width: 24px; height: 24px;"
+														></enhanced:img>
+													{/if}
+												{/await}
+											{/each}
 										{/if}
 									{/await}
-									<span class="absolute left-0 top-0 h-0.5 w-0.5 bg-surface-600"></span>
-									<span class="absolute right-0 top-0 h-0.5 w-0.5 bg-surface-600"></span>
-									<span class="absolute bottom-0 left-0 h-0.5 w-0.5 bg-surface-600"></span>
-									<span class="absolute bottom-0 right-0 h-0.5 w-0.5 bg-surface-600"></span>
-								</button>
-								{#snippet popup()}
-									<span>Toggle gender</span>
-								{/snippet}
-							</Tooltip>
-						</div>
-						<hr class="hr my-1" />
-						<div class="flex flex-row">
-							<span class="grow text-surface-400">{appState.selectedPal.nickname}</span>
-							<div class="mt-2 flex flex-row">
-								{#await getPalElementTypes(appState.selectedPal.character_id) then elementTypes}
-									{#if elementTypes}
-										{#each elementTypes as elementType}
-											{#await getPalElementBadge(elementType) then icon}
-												{#if icon}
-													<enhanced:img
-														src={icon}
-														alt={elementType}
-														class="pal-element-badge"
-														style="width: 24px; height: 24px;"
-													></enhanced:img>
-												{/if}
-											{/await}
-										{/each}
-									{/if}
-								{/await}
+								</div>
 							</div>
 						</div>
 					</div>
-				</Card>
+				</div>
+			</div>
+			<div class="flex flex-grow">
+				<div class="flex-1 overflow-auto p-2">
+					<div class="flex flex-col space-y-2">
+						<SectionHeader text="Active Skills" />
+						{#each getActiveSkills(appState.selectedPal) as skill}
+							<ActiveSkillBadge
+								{skill}
+								onSkillUpdate={handleUpdateActiveSkill}
+								palCharacterId={appState.selectedPal.character_id}
+							/>
+						{/each}
+						<SectionHeader text="Passive Skills" />
+						<div class="grid grid-cols-2 gap-2">
+							{#each getPassiveSkills(appState.selectedPal) as skill}
+								<PassiveSkillBadge {skill} onSkillUpdate={handleUpdatePassiveSkill} />
+							{/each}
+						</div>
+						<SectionHeader text="Presets" />
+						<div class="btn-group preset-outlined-surface-100-900 my-2 flex-col p-2 md:flex-row">
+							<button
+								type="button"
+								class="btn hover:bg-primary-500"
+								onclick={() => setBasePreset('Base')}>Base</button
+							>
+							<button
+								type="button"
+								class="btn hover:bg-primary-500"
+								onclick={() => setBasePreset('Worker')}>Worker</button
+							>
+							<button
+								type="button"
+								class="btn hover:bg-primary-500"
+								onclick={() => setBasePreset('Runner')}>Runner</button
+							>
+							<button
+								type="button"
+								class="btn hover:bg-primary-500"
+								onclick={() => setBasePreset('Tank')}>Tank</button
+							>
+						</div>
+						<div class="btn-group preset-outlined-surface-100-900 my-2 flex-col p-2 md:flex-row">
+							<button
+								type="button"
+								class="btn hover:bg-primary-500"
+								onclick={() => setBasePreset('Attack')}>Attack</button
+							>
+							<button
+								type="button"
+								class="btn hover:bg-primary-500"
+								onclick={() => setBasePreset('Balanced')}>Balanced</button
+							>
+							<button
+								type="button"
+								class="btn hover:bg-primary-500"
+								onclick={() => setBasePreset('Mount')}>Mount</button
+							>
+							<button
+								type="button"
+								class="btn hover:bg-primary-500"
+								onclick={() => setBasePreset('Element')}>Element</button
+							>
+						</div>
+						<SectionHeader text="Work Suitability" />
+						<WorkSuitabilities bind:pal={appState.selectedPal} />
+					</div>
+				</div>
+				<div class="flex-1 overflow-auto p-2">
+					<div class="flex h-full flex-col items-center justify-center">
+						{#await loadPalImage() then palImage}
+							{#if palImage}
+								<div class="pal">
+									<enhanced:img
+										src={palImage}
+										alt={`${appState.selectedPal.name} icon`}
+										class="h-auto max-w-full"
+									></enhanced:img>
+								</div>
+							{:else}
+								<Spinner size="size-48" />
+							{/if}
+						{/await}
+					</div>
+				</div>
 			</div>
 		</div>
-		<div class="grid w-full grid-cols-3 gap-2">
-			<div class="flex flex-col space-y-2">
-				<SectionHeader text="Active Skills" />
-				{#each getActiveSkills(appState.selectedPal) as skill}
-					<ActiveSkillBadge
-						{skill}
-						onSkillUpdate={handleUpdateActiveSkill}
-						palCharacterId={appState.selectedPal.character_id}
-					/>
-				{/each}
-				<SectionHeader text="Passive Skills" />
-				<div class="grid grid-cols-2 gap-2">
-					{#each getPassiveSkills(appState.selectedPal) as skill}
-						<PassiveSkillBadge {skill} onSkillUpdate={handleUpdatePassiveSkill} />
-					{/each}
-				</div>
-				<SectionHeader text="Utility Presets" />
-				<div class="btn-group my-2 flex-col p-2 preset-outlined-surface-100-900 md:flex-row">
-					<button
-						type="button"
-						class="btn hover:bg-primary-500"
-						onclick={() => setBasePreset('Base')}>Base</button
-					>
-					<button
-						type="button"
-						class="btn hover:bg-primary-500"
-						onclick={() => setBasePreset('Worker')}>Worker</button
-					>
-					<button
-						type="button"
-						class="btn hover:bg-primary-500"
-						onclick={() => setBasePreset('Runner')}>Runner</button
-					>
-					<button
-						type="button"
-						class="btn hover:bg-primary-500"
-						onclick={() => setBasePreset('Tank')}>Tank</button
-					>
-				</div>
-				<SectionHeader text="Attack Presets" />
-				<div class="btn-group my-2 flex-col p-2 preset-outlined-surface-100-900 md:flex-row">
-					<button
-						type="button"
-						class="btn hover:bg-primary-500"
-						onclick={() => setBasePreset('Attack')}>Attack</button
-					>
-					<button
-						type="button"
-						class="btn hover:bg-primary-500"
-						onclick={() => setBasePreset('Balanced')}>Balanced</button
-					>
-					<button
-						type="button"
-						class="btn hover:bg-primary-500"
-						onclick={() => setBasePreset('Mount')}>Mount</button
-					>
-					<button
-						type="button"
-						class="btn hover:bg-primary-500"
-						onclick={() => setBasePreset('Element')}>Element</button
-					>
-				</div>
-			</div>
-			<div class="flex flex-col items-center justify-center">
-				{#await loadPalImage() then palImage}
-					{#if palImage}
-						<div class="pal">
-							<enhanced:img src={palImage} alt={`${appState.selectedPal.name} icon`}></enhanced:img>
-						</div>
-					{:else}
-						<div class="flex h-96 w-96 items-center justify-center">
-							<Spinner size="size-48" />
-						</div>
-					{/if}
-				{/await}
-			</div>
+		<div class="w-1/3 overflow-auto p-2">
 			<div class="flex flex-col space-y-2">
 				<SectionHeader text="Stats" />
 				<StatsBadges bind:pal={appState.selectedPal} bind:player={appState.selectedPlayer} />
-				<SectionHeader text="Work Suitability" />
-				<WorkSuitabilities bind:pal={appState.selectedPal} />
+				<SectionHeader text="Talents (IVs)" />
+				<Talents bind:pal={appState.selectedPal} />
+				<SectionHeader text="Souls" />
+				<Souls bind:pal={appState.selectedPal} />
 			</div>
 		</div>
 	</div>
@@ -403,9 +503,3 @@
 		<h2 class="h2">Upload a save file and select a Pal to edit 🚀</h2>
 	</div>
 {/if}
-
-<style lang="postcss">
-	.pal img {
-		max-height: 600px;
-	}
-</style>

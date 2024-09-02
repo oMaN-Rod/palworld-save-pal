@@ -18,6 +18,7 @@
 	async function loadPalOptions() {
 		const allPals = await palsData.getAllPals();
 		selectOptions = allPals
+			.filter((pal) => !pal.is_human && !pal.is_tower)
 			.map((pal) => ({
 				value: pal.code_name,
 				label: pal.localized_name

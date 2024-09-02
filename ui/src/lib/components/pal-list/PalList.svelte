@@ -29,13 +29,14 @@
 	}>();
 
 	let searchQuery = $state('');
-	let selectedElement = $state('All');
+	let selectedFilter = $state('All');
 	let elementTypes: string[] = $state([]);
 	let elementIcons: Record<string, string> = $state({});
 	let filteredPals: Array<Pal> = $state([]);
 	let sortBy: SortBy | undefined = $state(undefined);
 	let sortOrder: SortOrder | undefined = $state(undefined);
 	let selectedPals: Record<string, Pal> = $state({});
+	let alphaIcon: string = $state('');
 
 	const listContainerClass = $derived(cn('h-[calc(100vh-200px)] overflow-hidden'));
 	const listClass = $derived(
@@ -43,6 +44,34 @@
 	);
 
 	const itemClass = $derived(cn('list-item p-2 flex items-center cursor-pointer'));
+
+	const sortByLevelAscClass = $derived(
+		cn('btn', sortBy === 'level' && sortOrder === 'asc' ? 'bg-secondary-500/25' : '')
+	);
+
+	const sortByLevelDescClass = $derived(
+		cn('btn', sortBy === 'level' && sortOrder === 'desc' ? 'bg-secondary-500/25' : '')
+	);
+
+	const sortByNameAscClass = $derived(
+		cn('btn', sortBy === 'name' && sortOrder === 'asc' ? 'bg-secondary-500/25' : '')
+	);
+
+	const sortByNameDescClass = $derived(
+		cn('btn', sortBy === 'name' && sortOrder === 'desc' ? 'bg-secondary-500/25' : '')
+	);
+
+	const sortLuckyClass = $derived(
+		cn('btn', selectedFilter === 'lucky' ? 'bg-secondary-500/25' : '')
+	);
+	const sortAlphaClass = $derived(
+		cn('btn', selectedFilter === 'alpha' ? 'bg-secondary-500/25' : '')
+	);
+
+	const elementClass = (element: string) =>
+		cn('btn', selectedFilter === element ? 'bg-secondary-500/25' : '');
+
+	const debouncedFilterPals = debounce(filterPals, 300);
 
 	async function filterPals() {
 		if (!appState.selectedPlayer || !appState.selectedPlayer.pals) return;
@@ -62,23 +91,32 @@
 					pal.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
 					pal.nickname?.toLowerCase().includes(searchQuery.toLowerCase());
 				const matchesElement =
-					selectedElement === 'All' ||
+					selectedFilter === 'All' ||
+					selectedFilter === 'alpha' ||
+					selectedFilter === 'lucky' ||
 					(palInfo &&
-						palInfo.elements.map((e) => e.toLowerCase()).includes(selectedElement.toLowerCase()));
-				return matchesSearch && matchesElement;
+						palInfo.elements.map((e) => e.toLowerCase()).includes(selectedFilter.toLowerCase()));
+				const matchesAlpha = selectedFilter === 'alpha' ? pal.is_boss : true;
+				const matchesLucky = selectedFilter === 'lucky' ? pal.is_lucky : true;
+				return matchesSearch && matchesElement && matchesAlpha && matchesLucky;
 			})
 			.map(({ id, pal }) => ({ id, ...pal }));
 
 		if (sortBy && sortOrder) {
-			if (sortBy === 'name') {
-				sortByName(sortOrder);
-			} else if (sortBy === 'level') {
-				sortByLevel(sortOrder);
-			}
+			handleSort(sortBy, sortOrder);
 		}
 	}
 
-	const debouncedFilterPals = debounce(filterPals, 300);
+	function handleSort(sortBy: SortBy, sortOrder: SortOrder | undefined) {
+		switch (sortBy) {
+			case 'name':
+				sortByName(sortOrder || 'asc');
+				break;
+			case 'level':
+				sortByLevel(sortOrder || 'asc');
+				break;
+		}
+	}
 
 	function handlePalSelect(pal: Pal) {
 		if (appState.selectedPlayer && appState.selectedPlayer.pals) {
@@ -92,6 +130,12 @@
 		} else {
 			delete selectedPals[pal.instance_id];
 		}
+	}
+
+	async function loadAlphaIcon() {
+		const iconPath = `${ASSET_DATA_PATH}/img/icons/Alpha.png`;
+		const icon = await assetLoader.loadImage(iconPath);
+		alphaIcon = icon;
 	}
 
 	function handleKeyDown(event: KeyboardEvent, pal: Pal) {
@@ -164,56 +208,6 @@
 		}
 	}
 
-	$effect(() => {
-		loadElementTypes();
-	});
-
-	$effect(() => {
-		if (elementTypes.length > 0) {
-			loadElementIcons();
-		}
-	});
-
-	$effect(() => {
-		if (appState.selectedPlayer && appState.selectedPlayer.pals) {
-			debouncedFilterPals();
-		}
-	});
-
-	$effect(() => {
-		if (searchQuery || selectedElement) {
-			debouncedFilterPals();
-		}
-	});
-
-	$effect(() => {
-		if (
-			(appState.selectedPal && appState.selectedPal.level) ||
-			(appState.selectedPal && appState.selectedPal.nickname)
-		) {
-			debouncedFilterPals();
-		}
-	});
-
-	const sortByLevelAscClass = $derived(
-		cn('btn', sortBy === 'level' && sortOrder === 'asc' ? 'bg-secondary-500/25' : '')
-	);
-
-	const sortByLevelDescClass = $derived(
-		cn('btn', sortBy === 'level' && sortOrder === 'desc' ? 'bg-secondary-500/25' : '')
-	);
-
-	const sortByNameAscClass = $derived(
-		cn('btn', sortBy === 'name' && sortOrder === 'asc' ? 'bg-secondary-500/25' : '')
-	);
-
-	const sortByNameDescClass = $derived(
-		cn('btn', sortBy === 'name' && sortOrder === 'desc' ? 'bg-secondary-500/25' : '')
-	);
-
-	const elementClass = (element: string) =>
-		cn('btn', selectedElement === element ? 'bg-secondary-500/25' : '');
-
 	function sortByName(order: string) {
 		sortBy = 'name';
 		if (order === 'asc') {
@@ -281,6 +275,38 @@
 			);
 		}
 	}
+
+	$effect(() => {
+		loadElementTypes();
+		loadAlphaIcon();
+	});
+
+	$effect(() => {
+		if (elementTypes.length > 0) {
+			loadElementIcons();
+		}
+	});
+
+	$effect(() => {
+		if (appState.selectedPlayer && appState.selectedPlayer.pals) {
+			debouncedFilterPals();
+		}
+	});
+
+	$effect(() => {
+		if (searchQuery || selectedFilter) {
+			debouncedFilterPals();
+		}
+	});
+
+	$effect(() => {
+		if (
+			(appState.selectedPal && appState.selectedPal.level) ||
+			(appState.selectedPal && appState.selectedPal.nickname)
+		) {
+			debouncedFilterPals();
+		}
+	});
 </script>
 
 <div class="flex w-full flex-col space-y-2" {...additionalProps}>
@@ -337,7 +363,7 @@
 					<div>
 						<legend class="font-bold">Sort</legend>
 						<hr />
-						<div class="btn-group">
+						<div class="grid grid-cols-5">
 							<Tooltip>
 								<button
 									type="button"
@@ -385,11 +411,11 @@
 						</div>
 					</div>
 					<div>
-						<legend class="font-bold">Element</legend>
+						<legend class="font-bold">Element & Type</legend>
 						<hr />
-						<div class="mt-2 grid grid-cols-5">
+						<div class="mt-2 grid grid-cols-6">
 							<Tooltip>
-								<button class={elementClass('All')} onclick={() => (selectedElement = 'All')}>
+								<button class={elementClass('All')} onclick={() => (selectedFilter = 'All')}>
 									<GalleryVerticalEnd />
 								</button>
 								{#snippet popup()}All pals{/snippet}
@@ -400,7 +426,7 @@
 										{#if icon}
 											<button
 												class={elementClass(element)}
-												onclick={() => (selectedElement = element)}
+												onclick={() => (selectedFilter = element)}
 											>
 												<enhanced:img src={icon} alt={element} class="pal-element-badge"
 												></enhanced:img>
@@ -412,6 +438,33 @@
 									{/snippet}
 								</Tooltip>
 							{/each}
+							<Tooltip>
+								<button
+									type="button"
+									class={sortAlphaClass}
+									onclick={() => (selectedFilter = 'alpha')}
+								>
+									{#if alphaIcon}
+										<enhanced:img src={alphaIcon} alt="Aplha" class="pal-element-badge"
+										></enhanced:img>
+									{/if}
+								</button>
+								{#snippet popup()}
+									Alpha Pals
+								{/snippet}
+							</Tooltip>
+							<Tooltip>
+								<button
+									type="button"
+									class={sortLuckyClass}
+									onclick={() => (selectedFilter = 'lucky')}
+								>
+									✨
+								</button>
+								{#snippet popup()}
+									Lucky Pals
+								{/snippet}
+							</Tooltip>
 						</div>
 					</div>
 				{/snippet}
@@ -444,6 +497,17 @@
 								<span class="font-bold">Lvl {pal.level}</span>
 							</div>
 							<div class="relative justify-start">
+								{#if pal.is_boss}
+									{#if alphaIcon}
+										<div class="absolute -left-2 -top-1 h-5 w-5">
+											<enhanced:img src={alphaIcon} alt="Aplha" class="pal-element-badge"
+											></enhanced:img>
+										</div>
+									{/if}
+								{/if}
+								{#if pal.is_lucky}
+									<div class="absolute -left-2 -top-1 h-5 w-5">✨</div>
+								{/if}
 								{#await getPalIcon(pal.instance_id) then icon}
 									{#if icon}
 										<enhanced:img src={icon} alt={pal.name} class="h-8 w-8"></enhanced:img>
@@ -459,7 +523,7 @@
 									{/if}
 								{/await}
 							</div>
-							<div class="ml-4 justify-start">
+							<div class="ml-4 flex flex-row justify-start">
 								<div>{pal.nickname || pal.name}</div>
 							</div>
 							<div class="flex justify-end">

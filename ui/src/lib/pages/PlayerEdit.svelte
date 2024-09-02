@@ -294,42 +294,38 @@
 			</div>
 		</div>
 		<div class="ml-2 grid grid-cols-[auto_1fr] gap-4">
-			<Tabs listBorder="border border-surface-800" listClasses="h-auto">
+			<Tabs listBorder="border border-surface-800" listClasses="h-auto" bind:value={group}>
 				{#snippet list()}
 					<Tabs.Control
-						bind:group
-						name="inventory"
+						value="inventory"
 						classes="w-full"
-						border="border-none"
-						active="bg-surface-700"
-						contentBg="group-hover:font-bold"
-						contentPadding="p-0"
+						base="border-none hover:ring-secondary-500 hover:ring"
+						labelBase="py-1"
+						stateActive="bg-surface-700"
 						padding="p-0"
 					>
 						Inventory
 					</Tabs.Control>
 					<Tabs.Control
-						bind:group
-						name="key_items"
+						value="key_items"
 						classes="w-full"
-						border="border-none"
-						active="bg-surface-700"
-						contentBg="group-hover:font-bold"
-						contentPadding="p-0"
+						base="border-none hover:ring-secondary-500 hover:ring"
+						labelBase="py-1"
+						stateActive="bg-surface-700"
 						padding="p-0"
 					>
 						Key Items
 					</Tabs.Control>
 				{/snippet}
-				{#snippet panels()}
-					<Tabs.Panel bind:group value="inventory">
+				{#snippet content()}
+					<Tabs.Panel value="inventory">
 						<div class="grid grid-cols-6 gap-2">
 							{#each Object.values(commonContainer.slots) as _, index}
 								<ItemBadge bind:slot={commonContainer.slots[index]} itemGroup="Common" />
 							{/each}
 						</div>
 					</Tabs.Panel>
-					<Tabs.Panel bind:group value="key_items">
+					<Tabs.Panel value="key_items">
 						<div class="max-h-[500px] overflow-auto">
 							<div class="grid grid-cols-6 gap-2">
 								{#each Object.values(essentialContainer.slots) as _, index}

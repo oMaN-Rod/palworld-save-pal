@@ -4,6 +4,7 @@ from uuid import UUID
 from pydantic import BaseModel, Field, PrivateAttr
 
 
+from palworld_save_pal.save_file.utils import safe_remove
 from palworld_save_pal.utils.logging_config import create_logger
 from palworld_save_pal.save_file.pal_objects import *
 
@@ -32,6 +33,8 @@ class Pal(BaseModel):
     nickname: Optional[str] = ""
     is_tower: bool = False
     storage_id: Optional[UUID] = None
+    stomach: float = 0
+    max_stomach: float = 0
     storage_slot: int = 0
     learned_skills: List[str] = Field(default_factory=list)
     active_skills: List[str] = Field(default_factory=list)
@@ -41,6 +44,7 @@ class Pal(BaseModel):
     max_hp: int = 0
     elements: List[Element] = Field(default_factory=list)
     state: EntryState = EntryState.NONE
+    group_id: Optional[UUID] = None
 
     _character_save: Dict[str, Any] = PrivateAttr(default_factory=dict)
     _save_parameter: Dict[str, Any] = PrivateAttr(default_factory=dict)
@@ -82,11 +86,18 @@ class Pal(BaseModel):
         return self._character_save
 
     def update(self):
+        self._update_character_id()
         self._update_nickname()
         self._update_gender()
         self._update_equip_waza()
         self._update_mastered_waza()
         self._update_passive_skills()
+        self._update_group_id()
+        self._update_hp()
+        self._update_level()
+        self._update_ranks()
+        self._update_talents()
+        self._heal_pal()
 
     def update_from(self, other_pal: "Pal"):
         data = other_pal.model_dump()
@@ -115,7 +126,7 @@ class Pal(BaseModel):
             if "NickName" in self._save_parameter
             else None
         )
-
+        self._get_group_id()
         self._process_character_id()
         self._get_gender()
         self._get_talents()
@@ -125,6 +136,7 @@ class Pal(BaseModel):
         self._get_skills()
         self._get_work_suitabilities()
         self._get_hp()
+        self._get_stomach()
         logger.info("Parsed PalEntity data: %s", self)
 
     def _process_character_id(self):
@@ -144,6 +156,27 @@ class Pal(BaseModel):
             else None
         )
         self.gender = PalGender.from_value(gender) if gender else None
+
+    def _get_stomach(self):
+        self.max_stomach = (
+            PalObjects.get_value(self._save_parameter["MaxFullStomach"], 0)
+            if "MaxFullStomach" in self._save_parameter
+            else 150.0
+        )
+        self.stomach = (
+            PalObjects.get_value(self._save_parameter["FullStomach"], 0)
+            if "FullStomach" in self._save_parameter
+            else self.max_stomach
+        )
+
+    def _heal_pal(self):
+        safe_remove(self._save_parameter, "PalReviveTimer")
+        safe_remove(self._save_parameter, "PhysicalHealth")
+        safe_remove(self._save_parameter, "WorkerSick")
+        safe_remove(self._save_parameter, "HungerType")
+
+        self.stomach = self.max_stomach
+        PalObjects.set_value(self._save_parameter["FullStomach"], value=self.stomach)
 
     def _get_talents(self):
         self.talent_hp = (
@@ -169,9 +202,9 @@ class Pal(BaseModel):
 
     def _get_ranks(self):
         self.rank = (
-            PalObjects.get_value(self._save_parameter["Rank"], 1)
+            PalObjects.get_value(self._save_parameter["Rank"], 0)
             if "Rank" in self._save_parameter
-            else 1
+            else 0
         )
         self.rank_hp = (
             PalObjects.get_value(self._save_parameter["Rank_HP"], 0)
@@ -193,8 +226,6 @@ class Pal(BaseModel):
             if "Rank_CraftSpeed" in self._save_parameter
             else 0
         )
-        if self.rank < 1 or self.rank > 5:
-            self.rank = 1
 
     def _get_level(self):
         self.level = (
@@ -249,6 +280,13 @@ class Pal(BaseModel):
             PalObjects.get_fixed_point64(self._save_parameter["Hp"])
             if "Hp" in self._save_parameter
             else 0
+        )
+
+    def _get_group_id(self):
+        self.group_id = PalObjects.as_uuid(
+            PalObjects.get_nested(
+                self._character_save, "value", "RawData", "value", "group_id"
+            )
         )
 
     def _update_instance_id(self):
@@ -318,8 +356,119 @@ class Pal(BaseModel):
                 ArrayType.NAME_PROPERTY, self.passive_skills
             )
 
+    def _update_group_id(self) -> None:
+        if "group_id" in self._character_save["value"]["RawData"]["value"]:
+            PalObjects.set_nested(
+                self._character_save,
+                "value",
+                "RawData",
+                "value",
+                "group_id",
+                value=self.group_id,
+            )
+
     def _update_slot_idx(self, slot_idx: int) -> None:
         PalObjects.set_value(
             PalObjects.get_nested(self._save_parameter, "SlotID", "value", "SlotIndex"),
             value=slot_idx,
         )
+
+    def _update_hp(self) -> None:
+        PalObjects.set_fixed_point64(self._save_parameter["Hp"], value=self.hp)
+
+    def _update_level(self) -> None:
+        PalObjects.set_value(self._save_parameter["Level"], value=self.level)
+
+    def _update_ranks(self) -> None:
+        self._update_rank()
+        self._update_rank_hp()
+        self._update_rank_attack()
+        self._update_rank_defense()
+        self._update_rank_craftspeed()
+
+    def _update_rank(self) -> None:
+        if self.rank < 1:
+            safe_remove(self._save_parameter, "Rank")
+            return
+        if "Rank" in self._save_parameter:
+            PalObjects.set_value(self._save_parameter["Rank"], value=self.rank + 1)
+        else:
+            self._save_parameter["Rank"] = PalObjects.IntProperty(self.rank + 1)
+
+    def _update_rank_hp(self) -> None:
+        if self.rank_hp < 1:
+            safe_remove(self._save_parameter, "Rank_HP")
+            return
+        if "Rank_HP" in self._save_parameter:
+            PalObjects.set_value(self._save_parameter["Rank_HP"], value=self.rank_hp)
+        else:
+            self._save_parameter["Rank_HP"] = PalObjects.IntProperty(self.rank_hp)
+
+    def _update_rank_attack(self) -> None:
+        if self.rank_attack < 1:
+            safe_remove(self._save_parameter, "Rank_Attack")
+            return
+        if "Rank_Attack" in self._save_parameter:
+            PalObjects.set_value(
+                self._save_parameter["Rank_Attack"], value=self.rank_attack
+            )
+        else:
+            self._save_parameter["Rank_Attack"] = PalObjects.IntProperty(
+                self.rank_attack
+            )
+
+    def _update_rank_defense(self) -> None:
+        if self.rank_defense < 1:
+            safe_remove(self._save_parameter, "Rank_Defence")
+            return
+        if "Rank_Defence" in self._save_parameter:
+            PalObjects.set_value(
+                self._save_parameter["Rank_Defence"], value=self.rank_defense
+            )
+        else:
+            self._save_parameter["Rank_Defence"] = PalObjects.IntProperty(
+                self.rank_defense
+            )
+
+    def _update_rank_craftspeed(self) -> None:
+        if self.rank_craftspeed < 1:
+            safe_remove(self._save_parameter, "Rank_CraftSpeed")
+            return
+        if "Rank_CraftSpeed" in self._save_parameter:
+            PalObjects.set_value(
+                self._save_parameter["Rank_CraftSpeed"], value=self.rank_craftspeed
+            )
+        else:
+            self._save_parameter["Rank_CraftSpeed"] = PalObjects.IntProperty(
+                self.rank_craftspeed
+            )
+
+    def _update_talents(self) -> None:
+        PalObjects.set_value(self._save_parameter["Talent_HP"], value=self.talent_hp)
+        PalObjects.set_value(
+            self._save_parameter["Talent_Melee"], value=self.talent_melee
+        )
+        PalObjects.set_value(
+            self._save_parameter["Talent_Shot"], value=self.talent_shot
+        )
+        PalObjects.set_value(
+            self._save_parameter["Talent_Defense"], value=self.talent_defense
+        )
+
+    def _update_character_id(self) -> None:
+        character_id = (
+            f"BOSS_{self.character_id}"
+            if self.is_boss or self.is_lucky
+            else self.character_id
+        )
+        PalObjects.set_value(self._save_parameter["CharacterID"], value=character_id)
+
+    def _update_lucky(self) -> None:
+        if not self.is_lucky and "IsRarePal" in self._save_parameter:
+            safe_remove(self._save_parameter, "IsRarePal")
+            return
+
+        if "IsRarePal" in self._save_parameter:
+            PalObjects.set_value(self._save_parameter["IsRarePal"], value=self.is_lucky)
+        else:
+            self._save_parameter["IsRarePal"] = PalObjects.BoolProperty(self.is_lucky)

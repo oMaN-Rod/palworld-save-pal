@@ -464,15 +464,8 @@ class SaveFile(BaseModel):
         self._players = players
 
     def _update_pal(self, pal_id: UUID, updated_pal: Pal) -> None:
-        for entry in self._character_save_parameter_map:
-            current_instance_id = PalObjects.get_guid(
-                PalObjects.get_nested(entry, "key", "InstanceId")
-            )
-            if are_equal_uuids(current_instance_id, pal_id):
-                existing_pal = self._pals[pal_id]
-                existing_pal.update_from(updated_pal)
-                return
-        logger.warning("Pal with ID %s not found in the save file.", pal_id)
+        existing_pal = self._pals[pal_id]
+        existing_pal.update_from(updated_pal)
 
     def _update_player(self, player: Player) -> None:
         existing_player = self._players.get(player.uid)

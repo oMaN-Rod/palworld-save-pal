@@ -7,9 +7,9 @@ const ws = getSocketState();
 export function createAppState() {
 	let players: Record<string, Player> = $state({});
 	let selectedPlayerUid: string = $state('');
-	let selectedPlayer: Player | null = $state(null);
-	let selectedPal: Pal | null = $state(null);
-	let saveFile: SaveFile | null = $state(null);
+	let selectedPlayer: Player | undefined = $state(undefined);
+	let selectedPal: Pal | undefined = $state(undefined);
+	let saveFile: SaveFile | undefined = $state(undefined);
 	let modifiedPals: Record<string, Pal> = $state({});
 	let modifiedPlayers: Record<string, Player> = $state({});
 
@@ -34,16 +34,16 @@ export function createAppState() {
 		});
 	}
 
-	function setSelectedPal(pal: Pal | null) {
+	function setSelectedPal(pal: Pal | undefined) {
 		selectedPal = pal;
 		if (pal) {
 			modifiedPals[pal.instance_id] = pal;
 		}
 	}
 
-	function setSelectedPlayer(player: Player | null) {
+	function setSelectedPlayer(player: Player | undefined) {
 		selectedPlayer = player;
-		selectedPal = null;
+		selectedPal = undefined;
 		if (player) {
 			modifiedPlayers[player.uid] = player;
 		}
@@ -67,21 +67,21 @@ export function createAppState() {
 		get selectedPlayer() {
 			return selectedPlayer as Player;
 		},
-		set selectedPlayer(player: Player | null) {
+		set selectedPlayer(player: Player | undefined) {
 			setSelectedPlayer(player);
 		},
 
 		get selectedPal() {
 			return selectedPal;
 		},
-		set selectedPal(pal: Pal | null) {
+		set selectedPal(pal: Pal | undefined) {
 			setSelectedPal(pal);
 		},
 
 		get saveFile() {
 			return saveFile;
 		},
-		set saveFile(file: SaveFile | null) {
+		set saveFile(file: SaveFile | undefined) {
 			saveFile = file;
 		},
 

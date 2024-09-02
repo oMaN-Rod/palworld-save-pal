@@ -14,7 +14,9 @@
 		value: number;
 	};
 
-	async function getStats(): Promise<Stat[]> {
+	let stats: Stat[] = $state([]);
+
+	async function getStats() {
 		if (!pal) {
 			console.log('No pal provided');
 			return [];
@@ -45,7 +47,6 @@
 			workSpeedBonus += skillData.details.bonuses.work_speed / 100;
 		}
 		const condenserBonus = (pal.rank - 1) * 0.05;
-
 		const hp_iv = (pal.talent_hp * 0.3) / 100;
 		const hp_rank = pal.rank_hp * 0.03;
 		const hp_scale = palData.scaling.hp;
@@ -66,11 +67,12 @@
 		let defense = Math.floor(50 + defense_scale * 0.075 * level * (1 + defense_iv));
 		defense = Math.floor(defense * (1 + condenserBonus) * (1 + defense_rank) * (1 + defenseBonus));
 
-		return [
+		stats = [
 			{ name: 'attack', value: attack },
 			{ name: 'defense', value: defense },
 			{ name: 'work_speed', value: pal.work_speed }
 		];
+		// console.log('Stats:', JSON.stringify(stats));
 	}
 
 	async function loadSvgContent(stat: string): Promise<string> {
@@ -89,26 +91,38 @@
 			.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
 			.join(' ');
 	}
+
+	$effect(() => {
+		getStats();
+	});
+
+	$effect(() => {
+		if (pal?.talent_hp || pal?.talent_melee || pal?.talent_defense || pal?.passive_skills) {
+			console.log('Talent hp:', pal.talent_hp);
+			console.log('Talent melee:', pal.talent_melee);
+			console.log('Talent defense:', pal.talent_defense);
+			console.log('Passive skills:', pal.passive_skills);
+			getStats();
+		}
+	});
 </script>
 
-{#await getStats() then stats}
-	{#each stats as stat}
-		<div
-			class="border-l-primary border-l-surface-600 bg-surface-900 relative w-full overflow-hidden rounded-none border-l-2 p-0 shadow-none"
-		>
-			<div class="flex w-full items-center">
-				{#await loadSvgContent(stat.name)}
-					<div class="ml-2 h-6 w-6"></div>
-				{:then svgContent}
-					<div class="mx-2 h-6 w-6">
-						{@html svgContent}
-					</div>
-				{:catch error}
-					<div class="ml-2 h-6 w-6"></div>
-				{/await}
-				<span class="flex-grow p-2 text-lg">{formatStatText(stat.name)}</span>
-				<span class="p-2 text-lg font-bold">{stat.value}</span>
-			</div>
+{#each stats as stat}
+	<div
+		class="border-l-primary border-l-surface-600 bg-surface-900 relative w-full overflow-hidden rounded-none border-l-2 p-0 shadow-none"
+	>
+		<div class="flex w-full items-center">
+			{#await loadSvgContent(stat.name)}
+				<div class="ml-2 h-6 w-6"></div>
+			{:then svgContent}
+				<div class="mx-2 h-6 w-6">
+					{@html svgContent}
+				</div>
+			{:catch error}
+				<div class="ml-2 h-6 w-6"></div>
+			{/await}
+			<span class="flex-grow p-2 text-lg">{formatStatText(stat.name)}</span>
+			<span class="p-2 text-lg font-bold">{stat.value}</span>
 		</div>
-	{/each}
-{/await}
+	</div>
+{/each}
