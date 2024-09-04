@@ -2,6 +2,7 @@ import ActiveSkillBadge from './badges/active-skill-badge/ActiveSkillBadge.svelt
 import ItemBadge from './badges/item-badge/ItemBadge.svelte';
 import PassiveSkillBadge from './badges/passive-skill-badge/PassiveSkillBadge.svelte';
 import StatsBadges from './badges/stats-badges/StatsBadges.svelte';
+import HealthBadge from './badges/health-badge/HealthBadge.svelte';
 import WorkSuitabilities from './badges/work-suitabilities/WorkSuitabilities.svelte';
 import Drawer from './drawer/Drawer.svelte';
 import Modal from './modal/Modal.svelte';
@@ -28,5 +29,6 @@ export {
 	StatsBadges,
 	Talents,
 	Toast,
-	WorkSuitabilities
+	WorkSuitabilities,
+	HealthBadge
 };

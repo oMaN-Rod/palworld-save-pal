@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { cn } from '$theme';
-	import { MessageType, PalGender, type Pal } from '$types';
-	import { elementsData, palsData } from '$lib/data';
-	import { Input, Tooltip, Checkbox } from '$components/ui';
+	import { MessageType, PalGender, type Pal, type Player } from '$types';
+	import { elementsData, palsData, getStats } from '$lib/data';
+	import { Input, Tooltip, Checkbox, Progress } from '$components/ui';
 	import { PalSelectModal } from '$components/modals';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import {
@@ -16,6 +16,7 @@
 	import { assetLoader, debounce } from '$utils';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { getAppState, getSocketState, getModalState } from '$states';
+	import { HealthBadge } from '$components';
 
 	type SortBy = 'name' | 'level';
 	type SortOrder = 'asc' | 'desc';
@@ -37,6 +38,9 @@
 	let sortOrder: SortOrder | undefined = $state(undefined);
 	let selectedPals: Record<string, Pal> = $state({});
 	let alphaIcon: string = $state('');
+	let foodIcon: string = $state('');
+	let hpIcon: string = $state('');
+	let selectAll: boolean = $state(false);
 
 	const listContainerClass = $derived(cn('h-[calc(100vh-200px)] overflow-hidden'));
 	const listClass = $derived(
@@ -80,6 +84,7 @@
 		const palsWithInfo = await Promise.all(
 			pals.map(async ([id, pal]) => {
 				const palInfo = await palsData.getPalInfo(pal.character_id);
+				await getStats(pal, appState.selectedPlayer as Player);
 				return { id, pal, palInfo };
 			})
 		);
@@ -132,10 +137,18 @@
 		}
 	}
 
-	async function loadAlphaIcon() {
+	async function loadStaticIcons() {
 		const iconPath = `${ASSET_DATA_PATH}/img/icons/Alpha.png`;
 		const icon = await assetLoader.loadImage(iconPath);
 		alphaIcon = icon;
+
+		const foodPath = `${ASSET_DATA_PATH}/img/icons/Food.png`;
+		const food = await assetLoader.loadImage(foodPath);
+		foodIcon = food;
+
+		const hpPath = `${ASSET_DATA_PATH}/img/icons/Heart.png`;
+		const hp = await assetLoader.loadImage(hpPath);
+		hpIcon = hp;
 	}
 
 	function handleKeyDown(event: KeyboardEvent, pal: Pal) {
@@ -249,6 +262,25 @@
 		}
 	}
 
+	async function healSelectedPals() {
+		console.log('Healing selected pal(s)');
+		if (appState.selectedPlayer && appState.selectedPlayer.pals) {
+			const selectedPalIds = Object.keys(selectedPals);
+			const message = {
+				type: MessageType.HEAL_PALS,
+				data: selectedPalIds
+			};
+			ws.send(JSON.stringify(message));
+			Object.values(appState.selectedPlayer.pals).forEach((pal) => {
+				if (selectedPalIds.includes(pal.instance_id)) {
+					pal.hp = pal.max_hp;
+					pal.stomach = pal.max_stomach;
+					pal.sanity = 100;
+				}
+			});
+		}
+	}
+
 	async function deleteSelectedPals() {
 		const numOfSelectedPals = Object.keys(selectedPals).length;
 		if (numOfSelectedPals === 0) return;
@@ -276,9 +308,17 @@
 		}
 	}
 
+	function handleSelectAll() {
+		if (selectAll) {
+			filteredPals.forEach((pal) => (selectedPals[pal.instance_id] = pal));
+		} else {
+			selectedPals = {};
+		}
+	}
+
 	$effect(() => {
 		loadElementTypes();
-		loadAlphaIcon();
+		loadStaticIcons();
 	});
 
 	$effect(() => {
@@ -311,16 +351,16 @@
 
 <div class="flex w-full flex-col space-y-2" {...additionalProps}>
 	<div class="w-full">
-		<div class="btn-group bg-surface-900 mb-2 items-center rounded p-0">
+		<div class="btn-group bg-surface-900 mb-2 items-center rounded p-1">
 			<Tooltip position="right">
-				<button class="btn hover:preset-tonal-secondary" onclick={handleAddPal}> Add </button>
+				<button class="btn hover:preset-tonal-secondary p-2" onclick={handleAddPal}> Add </button>
 				{#snippet popup()}
 					Add a new pal to your Pal box
 				{/snippet}
 			</Tooltip>
 			{#if Object.keys(selectedPals).length === 1}
 				<Tooltip>
-					<button class="btn hover:preset-tonal-secondary" onclick={cloneSelectedPal}>
+					<button class="btn hover:preset-tonal-secondary p-2" onclick={cloneSelectedPal}>
 						Clone
 					</button>
 					{#snippet popup()}
@@ -330,17 +370,24 @@
 			{/if}
 			{#if Object.keys(selectedPals).length >= 1}
 				<Tooltip>
-					<button class="btn hover:preset-tonal-secondary" onclick={deleteSelectedPals}>
+					<button class="btn hover:preset-tonal-secondary p-2" onclick={healSelectedPals}>
+						Heal
+					</button>
+					{#snippet popup()}
+						Heal selected pal(s)
+					{/snippet}
+				</Tooltip>
+
+				<Tooltip>
+					<button class="btn hover:preset-tonal-secondary p-2" onclick={deleteSelectedPals}>
 						Delete
 					</button>
 					{#snippet popup()}
 						Delete selected pal(s)
 					{/snippet}
 				</Tooltip>
-			{/if}
-			{#if Object.keys(selectedPals).length >= 1}
 				<Tooltip>
-					<button class="btn hover:preset-tonal-secondary" onclick={() => (selectedPals = {})}>
+					<button class="btn hover:preset-tonal-secondary p-2" onclick={() => (selectedPals = {})}>
 						Clear
 					</button>
 					{#snippet popup()}
@@ -473,6 +520,21 @@
 	</div>
 	<div class={listContainerClass}>
 		<ul class={listClass}>
+			<li class="bg-surface-900 sticky top-0 flex list-item cursor-pointer items-center p-2">
+				<div class="grid w-full grid-cols-[auto_55px_auto_1fr_auto] gap-2">
+					<Checkbox bind:checked={selectAll} onchange={handleSelectAll} />
+					<div>
+						<span class="font-bold">Level</span>
+					</div>
+					<div class="bg-surface-900 z-50 w-[55px]"></div>
+					<div class="flex justify-start">
+						<span class="font-bold">Name</span>
+					</div>
+					<div class="flex justify-end">
+						<span class="font-bold">Element</span>
+					</div>
+				</div>
+			</li>
 			{#each filteredPals as pal}
 				<li
 					class={cn(
@@ -487,59 +549,68 @@
 						onchange={(isChecked) => handlePalCheckboxChange(pal, isChecked)}
 						class="mr-2"
 					/>
-					<button
-						class="flex w-full items-center text-left"
-						onclick={() => handlePalSelect(pal)}
-						onkeydown={(event) => handleKeyDown(event, pal)}
+					<Tooltip
+						background="bg-surface-700"
+						baseClass="flex w-full items-center text-left"
+						position="right"
 					>
-						<div class="grid w-full grid-cols-[55px_auto_1fr_auto] gap-2">
-							<div>
-								<span class="font-bold">Lvl {pal.level}</span>
-							</div>
-							<div class="relative justify-start">
-								{#if pal.is_boss}
-									{#if alphaIcon}
-										<div class="absolute -left-2 -top-1 h-5 w-5">
-											<enhanced:img src={alphaIcon} alt="Aplha" class="pal-element-badge"
-											></enhanced:img>
-										</div>
-									{/if}
-								{/if}
-								{#if pal.is_lucky}
-									<div class="absolute -left-2 -top-1 h-5 w-5">✨</div>
-								{/if}
-								{#await getPalIcon(pal.instance_id) then icon}
-									{#if icon}
-										<enhanced:img src={icon} alt={pal.name} class="h-8 w-8"></enhanced:img>
-									{/if}
-								{/await}
-								{#await getGenderIcon(pal.gender) then icon}
-									{#if icon}
-										{@const color =
-											pal.gender == PalGender.MALE ? 'text-primary-300' : 'text-tertiary-300'}
-										<div class={cn('absolute -right-4 -top-1 h-5 w-5', color)}>
-											{@html icon}
-										</div>
-									{/if}
-								{/await}
-							</div>
-							<div class="ml-4 flex flex-row justify-start">
-								<div>{pal.nickname || pal.name}</div>
-							</div>
-							<div class="flex justify-end">
-								{#if pal.character_id && pal.elements}
-									{#each pal.elements as elementType}
-										{#await getPalElementBadge(elementType) then icon}
-											{#if icon}
-												<enhanced:img src={icon} alt={elementType} class="pal-element-badge"
+						<button
+							class="flex w-full items-center text-left"
+							onclick={() => handlePalSelect(pal)}
+							onkeydown={(event) => handleKeyDown(event, pal)}
+						>
+							<div class="grid w-full grid-cols-[55px_auto_1fr_auto] gap-2">
+								<div>
+									<span class="font-bold">Lvl {pal.level}</span>
+								</div>
+								<div class="relative justify-start">
+									{#if pal.is_boss}
+										{#if alphaIcon}
+											<div class="absolute -left-2 -top-1 h-5 w-5">
+												<enhanced:img src={alphaIcon} alt="Aplha" class="pal-element-badge"
 												></enhanced:img>
-											{/if}
-										{/await}
-									{/each}
-								{/if}
+											</div>
+										{/if}
+									{/if}
+									{#if pal.is_lucky}
+										<div class="absolute -left-2 -top-1 h-5 w-5">✨</div>
+									{/if}
+									{#await getPalIcon(pal.instance_id) then icon}
+										{#if icon}
+											<enhanced:img src={icon} alt={pal.name} class="h-8 w-8"></enhanced:img>
+										{/if}
+									{/await}
+									{#await getGenderIcon(pal.gender) then icon}
+										{#if icon}
+											{@const color =
+												pal.gender == PalGender.MALE ? 'text-primary-300' : 'text-tertiary-300'}
+											<div class={cn('absolute -right-4 -top-1 h-5 w-5', color)}>
+												{@html icon}
+											</div>
+										{/if}
+									{/await}
+								</div>
+								<div class="ml-4 flex flex-row justify-start">
+									<div>{pal.nickname || pal.name}</div>
+								</div>
+								<div class="flex justify-end">
+									{#if pal.character_id && pal.elements}
+										{#each pal.elements as elementType}
+											{#await getPalElementBadge(elementType) then icon}
+												{#if icon}
+													<enhanced:img src={icon} alt={elementType} class="pal-element-badge"
+													></enhanced:img>
+												{/if}
+											{/await}
+										{/each}
+									{/if}
+								</div>
 							</div>
-						</div>
-					</button>
+						</button>
+						{#snippet popup()}
+							<HealthBadge {pal} player={appState.selectedPlayer} />
+						{/snippet}
+					</Tooltip>
 				</li>
 			{/each}
 		</ul>

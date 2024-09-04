@@ -8,6 +8,7 @@ import ItemHeader from './item-header/ItemHeader.svelte';
 import SectionHeader from './section-header/SectionHeader.svelte';
 import Select from './select/Select.svelte';
 import Tooltip from './tooltip/Tooltip.svelte';
+import Progress from './progress/Progress.svelte';
 
 export {
 	Card,
@@ -19,5 +20,6 @@ export {
 	ItemHeader,
 	SectionHeader,
 	Select,
-	Tooltip
+	Tooltip,
+	Progress
 };

@@ -24,8 +24,7 @@ async def sync_app_state_handler(_: SyncAppStateMessage, ws: WebSocket):
         }
         response = build_response(MessageType.LOAD_SAVE_FILE, data)
         await ws.send_json(response)
-        # data = {f"{k}": v.model_dump() for k, v in app_state.players.items()}
-        data = jsonable_encoder(app_state.players)
+        data = jsonable_encoder(save_file.get_players())
         response = build_response(MessageType.GET_PLAYERS, data)
         await ws.send_json(response)
 

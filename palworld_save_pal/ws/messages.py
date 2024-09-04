@@ -16,6 +16,7 @@ class MessageType(str, Enum):
     ADD_PAL = "add_pal"
     CLONE_PAL = "clone_pal"
     DELETE_PALS = "delete_pals"
+    HEAL_PALS = "heal_pals"
     DOWNLOAD_SAVE_FILE = "download_save_file"
     ERROR = "error"
     GET_PLAYERS = "get_players"
@@ -51,6 +52,11 @@ class DeletePalsData(BaseModel):
 class DeletePalsMessage(BaseMessage):
     type: str = MessageType.DELETE_PALS.value
     data: DeletePalsData
+
+
+class HealPalsMessage(BaseMessage):
+    type: str = MessageType.HEAL_PALS.value
+    data: List[UUID]
 
 
 class DownloadSaveFileMessage(BaseMessage):

@@ -497,7 +497,7 @@ class PalObjects:
         passive_skills: List[str] = None,
         work_suitability_data: Dict[str, int] = None,
     ):
-        nickname = nickname or f"🆕 {code_name}"
+        nickname = nickname or f"[New] {code_name}"
         active_skills = active_skills or []
         passive_skills = passive_skills or []
 

@@ -45,6 +45,7 @@ class Pal(BaseModel):
     elements: List[Element] = Field(default_factory=list)
     state: EntryState = EntryState.NONE
     group_id: Optional[UUID] = None
+    sanity: float = 0.0
 
     _character_save: Dict[str, Any] = PrivateAttr(default_factory=dict)
     _save_parameter: Dict[str, Any] = PrivateAttr(default_factory=dict)
@@ -97,7 +98,7 @@ class Pal(BaseModel):
         self._update_level()
         self._update_ranks()
         self._update_talents()
-        self._heal_pal()
+        self.heal()
 
     def update_from(self, other_pal: "Pal"):
         data = other_pal.model_dump()
@@ -137,6 +138,7 @@ class Pal(BaseModel):
         self._get_work_suitabilities()
         self._get_hp()
         self._get_stomach()
+        self._get_sanity()
         logger.info("Parsed PalEntity data: %s", self)
 
     def _process_character_id(self):
@@ -153,9 +155,9 @@ class Pal(BaseModel):
         gender = (
             PalObjects.get_enum_property(self._save_parameter["Gender"])
             if "Gender" in self._save_parameter
-            else None
+            else PalGender.FEMALE.prefixed()
         )
-        self.gender = PalGender.from_value(gender) if gender else None
+        self.gender = PalGender.from_value(gender)
 
     def _get_stomach(self):
         self.max_stomach = (
@@ -169,14 +171,28 @@ class Pal(BaseModel):
             else self.max_stomach
         )
 
-    def _heal_pal(self):
+    def _get_sanity(self):
+        self.sanity = (
+            PalObjects.get_value(self._save_parameter["SanityValue"], 100.0)
+            if "SanityValue" in self._save_parameter
+            else 100.0
+        )
+
+    def heal(self):
         safe_remove(self._save_parameter, "PalReviveTimer")
         safe_remove(self._save_parameter, "PhysicalHealth")
         safe_remove(self._save_parameter, "WorkerSick")
         safe_remove(self._save_parameter, "HungerType")
+        safe_remove(self._save_parameter, "SanityValue")
 
+        self.sanity = 100.0
         self.stomach = self.max_stomach
-        PalObjects.set_value(self._save_parameter["FullStomach"], value=self.stomach)
+        if "FullStomach" in self._save_parameter:
+            PalObjects.set_value(
+                self._save_parameter["FullStomach"], value=self.stomach
+            )
+        else:
+            self._save_parameter["FullStomach"] = PalObjects.FloatProperty(self.stomach)
 
     def _get_talents(self):
         self.talent_hp = (
@@ -374,10 +390,16 @@ class Pal(BaseModel):
         )
 
     def _update_hp(self) -> None:
-        PalObjects.set_fixed_point64(self._save_parameter["Hp"], value=self.hp)
+        if "Hp" in self._save_parameter:
+            PalObjects.set_fixed_point64(self._save_parameter["Hp"], value=self.hp)
+        else:
+            self._save_parameter["Hp"] = PalObjects.FixedPoint64(self.hp)
 
     def _update_level(self) -> None:
-        PalObjects.set_value(self._save_parameter["Level"], value=self.level)
+        if "Level" in self._save_parameter:
+            PalObjects.set_value(self._save_parameter["Level"], value=self.level)
+        else:
+            self._save_parameter["Level"] = PalObjects.IntProperty(self.level)
 
     def _update_ranks(self) -> None:
         self._update_rank()

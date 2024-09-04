@@ -16,6 +16,7 @@
 	import { getComputedColorHex } from '$utils';
 
 	let {
+		baseClass = '',
 		background = 'bg-surface-500',
 		rounded = 'rounded',
 		popupClass = 'p-4',
@@ -24,6 +25,7 @@
 		useArrow = true,
 		children
 	} = $props<{
+		baseClass?: string;
 		background?: string;
 		rounded?: string;
 		popupClass?: string;
@@ -55,22 +57,24 @@
 	const interactions = useInteractions([role, hover, dismiss]);
 </script>
 
-<div>
-	<div bind:this={floating.elements.reference} {...interactions.getReferenceProps()}>
-		{@render children()}
-	</div>
-	{#if open}
-		<div
-			bind:this={floating.elements.floating}
-			style={floating.floatingStyles}
-			{...interactions.getFloatingProps()}
-			class={cn('floating z-50', background, popupClass, rounded)}
-			transition:fade={{ duration: 200 }}
-		>
-			{@render popup()}
-			{#if useArrow}
-				<FloatingArrow bind:ref={elemArrow} context={floating.context} fill={floatingArrowColor} />
-			{/if}
-		</div>
-	{/if}
+<div
+	class={baseClass}
+	bind:this={floating.elements.reference}
+	{...interactions.getReferenceProps()}
+>
+	{@render children()}
 </div>
+{#if open}
+	<div
+		bind:this={floating.elements.floating}
+		style={floating.floatingStyles}
+		{...interactions.getFloatingProps()}
+		class={cn('floating z-50', background, popupClass, rounded)}
+		transition:fade={{ duration: 200 }}
+	>
+		{@render popup()}
+		{#if useArrow}
+			<FloatingArrow bind:ref={elemArrow} context={floating.context} fill={floatingArrowColor} />
+		{/if}
+	</div>
+{/if}

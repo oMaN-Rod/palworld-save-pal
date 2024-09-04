@@ -8,6 +8,7 @@ from palworld_save_pal.ws.handlers import (
 from palworld_save_pal.ws.messages import (
     AddPalMessage,
     ClonePalMessage,
+    HealPalsMessage,
     LoadSaveFileMessage,
     MessageType,
     SyncAppStateMessage,
@@ -67,6 +68,14 @@ def bootstrap(dispatcher: "MessageDispatcher"):
         {
             "message_class": DeletePalsMessage,
             "handler_func": pal_handler.delete_pals_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.HEAL_PALS.value,
+        {
+            "message_class": HealPalsMessage,
+            "handler_func": pal_handler.heal_pals_handler,
         },
     )
 

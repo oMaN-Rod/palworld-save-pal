@@ -8,6 +8,7 @@ from palworld_save_pal.ws.messages import (
     AddPalMessage,
     ClonePalMessage,
     DeletePalsMessage,
+    HealPalsMessage,
     MessageType,
 )
 from palworld_save_pal.utils.logging_config import create_logger
@@ -71,5 +72,19 @@ async def delete_pals_handler(message: DeletePalsMessage, ws: WebSocket):
         response = build_response(
             MessageType.ERROR, f"Error deleting Pal details: {str(e)}"
         )
+        await ws.send_json(response)
+        traceback.print_exc()
+
+
+async def heal_pals_handler(message: HealPalsMessage, ws: WebSocket):
+    logger.info("Processing heal_pals request: %s", message)
+    try:
+        pal_ids = message.data
+        app_state = get_app_state()
+        save_file = app_state.save_file
+        save_file.heal_pals(pal_ids)
+    except Exception as e:
+        logger.error("Error processing heal_pals: %s", str(e))
+        response = build_response(MessageType.ERROR, f"Error healing Pals: {str(e)}")
         await ws.send_json(response)
         traceback.print_exc()

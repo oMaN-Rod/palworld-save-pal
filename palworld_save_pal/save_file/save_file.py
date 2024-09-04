@@ -190,6 +190,14 @@ class SaveFile(BaseModel):
         for pal_id in pal_ids:
             player.delete_pal(pal_id)
 
+    def heal_pals(self, pal_ids: List[UUID]) -> None:
+        for pal_id in pal_ids:
+            pal = self._pals.get(pal_id)
+            if not pal:
+                logger.error("Pal %s not found in the save file.", pal_id)
+                continue
+            pal.heal()
+
     def get_json(self, minify=False, allow_nan=True):
         logger.info("Converting %s to JSON", self.name)
         return json.dumps(
@@ -242,9 +250,6 @@ class SaveFile(BaseModel):
         self._load_players(player_sav_files)
         self._load_guilds()
         return self
-
-    def pal_count(self):
-        return len(self._pals)
 
     def sav(self):
         logger.info("Converting %s to SAV", self.name)

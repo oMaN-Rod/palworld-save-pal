@@ -32,6 +32,7 @@ type Pal = {
 	max_hp: number;
 	elements: ElementType[];
 	state: EntryState;
+	sanity: number;
 };
 
 type Player = {

@@ -15,17 +15,19 @@
 	import { palsData, elementsData } from '$lib/data';
 	import { cn } from '$theme';
 	import { getAppState, getModalState } from '$states';
-	import { Rating, Progress } from '@skeletonlabs/skeleton-svelte';
-	import { Minus, Plus, Apple } from 'lucide-svelte';
-	import Souls from '$components/souls/Souls.svelte';
+	import { Rating } from '@skeletonlabs/skeleton-svelte';
+	import { Minus, Plus } from 'lucide-svelte';
+	import { Souls } from '$components';
+	import { getStats } from '$lib/data';
 
 	const appState = getAppState();
 	const modal = getModalState();
 
 	let palLevel: string = $state('');
 	let palLevelClass: string = $state('');
+	let palLevelMessage: string = $state('');
+
 	let alphaIcon: string = $state('');
-	let foodIcon: string = $state('');
 
 	async function loadPalImage(): Promise<string | undefined> {
 		const pal = $state.snapshot(appState.selectedPal);
@@ -42,10 +44,6 @@
 		const iconPath = `${ASSET_DATA_PATH}/img/icons/Alpha.png`;
 		const icon = await assetLoader.loadImage(iconPath);
 		alphaIcon = icon;
-
-		const foodPath = `${ASSET_DATA_PATH}/img/icons/Food.png`;
-		const food = await assetLoader.loadImage(foodPath);
-		foodIcon = food;
 	}
 
 	function handleLevelDecrement() {
@@ -113,6 +111,27 @@
 		appState.selectedPal.state = EntryState.MODIFIED;
 		if (appState.selectedPlayer && appState.selectedPlayer.pals)
 			appState.selectedPlayer.pals[appState.selectedPal.instance_id].nickname = result as string;
+	}
+
+	async function handleMaxOutPal() {
+		if (!appState.selectedPal || !appState.selectedPlayer) return;
+		appState.selectedPal.level = 55;
+		appState.selectedPal.is_boss = true;
+		appState.selectedPal.is_lucky = false;
+		setBasePreset('Element');
+		appState.selectedPal.stomach = appState.selectedPal.max_stomach;
+		appState.selectedPal.talent_hp = 100;
+		appState.selectedPal.talent_melee = 100;
+		appState.selectedPal.talent_shot = 100;
+		appState.selectedPal.talent_defense = 100;
+		appState.selectedPal.rank = 4;
+		appState.selectedPal.rank_hp = 10;
+		appState.selectedPal.rank_defense = 10;
+		appState.selectedPal.rank_attack = 10;
+		appState.selectedPal.rank_craftspeed = 10;
+		await getStats(appState.selectedPal, appState.selectedPlayer);
+		appState.selectedPal.hp = appState.selectedPal.max_hp;
+		appState.selectedPal.state = EntryState.MODIFIED;
 	}
 
 	function handleUpdateActiveSkill(newSkill: string, oldSkill: string): void {
@@ -269,18 +288,14 @@
 					: appState.selectedPal.level.toString();
 			palLevelClass =
 				appState.selectedPlayer.level < appState.selectedPal.level ? 'text-error-500' : '';
+			palLevelMessage =
+				appState.selectedPlayer.level < appState.selectedPal.level ? 'Level sync' : 'No Level Sync';
 		}
 	});
 
 	$effect(() => {
 		loadStaticIcons();
 	});
-
-	function handleEat() {
-		if (!appState.selectedPal) return;
-		appState.selectedPal.stomach = appState.selectedPal.max_stomach;
-		appState.selectedPal.state = EntryState.MODIFIED;
-	}
 </script>
 
 {#if appState.selectedPal}
@@ -296,10 +311,17 @@
 							<button class="mr-4">
 								<Minus class="text-primary-500" onclick={handleLevelDecrement} />
 							</button>
-							<div class="flex flex-col items-center justify-center">
-								<span class={cn('text-surface-400 font-bold', palLevelClass)}>LEVEL</span>
-								<span class={cn('text-4xl font-bold', palLevelClass)}>{palLevel}</span>
-							</div>
+
+							<Tooltip>
+								<div class="flex flex-col items-center justify-center">
+									<span class={cn('text-surface-400 font-bold', palLevelClass)}>LEVEL</span>
+									<span class={cn('text-4xl font-bold', palLevelClass)}>{palLevel}</span>
+								</div>
+								{#snippet popup()}
+									{palLevelMessage}
+								{/snippet}
+							</Tooltip>
+
 							<button class="ml-4">
 								<Plus class="text-primary-500" onclick={handleLevelIncrement} />
 							</button>
@@ -314,6 +336,12 @@
 									<CornerDotButton label="Edit" onClick={handleEditNickname} />
 									{#snippet popup()}
 										<span>Edit nickname</span>
+									{/snippet}
+								</Tooltip>
+								<Tooltip position="bottom">
+									<CornerDotButton label="Max" onClick={handleMaxOutPal} />
+									{#snippet popup()}
+										<span>Max out Pal stats 💉💪</span>
 									{/snippet}
 								</Tooltip>
 								<Tooltip position="bottom">
@@ -486,7 +514,7 @@
 								<div class="pal">
 									<enhanced:img
 										src={palImage}
-										alt={`${appState.selectedPal.name} icon`}
+										alt={`${appState.selectedPal?.name} icon`}
 										class="h-auto max-w-full"
 									></enhanced:img>
 								</div>
@@ -500,31 +528,6 @@
 		</div>
 		<div class="w-1/3 overflow-auto p-2">
 			<div class="flex flex-col space-y-2">
-				<div class="flex flex-row items-center justify-center">
-					{#if foodIcon}
-						<Tooltip>
-							<button class="mr-2" onclick={handleEat}>
-								<enhanced:img
-									src={foodIcon}
-									alt="Food"
-									class="h-8 w-8"
-									style="width: 24px; height: 24px;"
-								></enhanced:img>
-							</button>
-							{#snippet popup()}
-								<span>Feed</span>
-							{/snippet}
-						</Tooltip>
-					{/if}
-					<Progress
-						value={appState.selectedPal.stomach}
-						max={appState.selectedPal.max_stomach}
-						height="h-4"
-						meterBg="bg-orange-500"
-						>{Math.round(appState.selectedPal.stomach)}/{appState.selectedPal.max_stomach}</Progress
-					>
-				</div>
-				<SectionHeader text="Stats" />
 				<StatsBadges bind:pal={appState.selectedPal} bind:player={appState.selectedPlayer} />
 				<SectionHeader text="Talents (IVs)" />
 				<Talents bind:pal={appState.selectedPal} />

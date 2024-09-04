@@ -13,6 +13,16 @@ export function createAppState() {
 	let modifiedPals: Record<string, Pal> = $state({});
 	let modifiedPlayers: Record<string, Player> = $state({});
 
+	function resetState() {
+		players = {};
+		selectedPlayerUid = '';
+		selectedPlayer = undefined;
+		selectedPal = undefined;
+		saveFile = undefined;
+		modifiedPals = {};
+		modifiedPlayers = {};
+	}
+
 	function setPlayers(newPlayers: Record<string, Player>) {
 		Object.entries(newPlayers).forEach(([key, player]) => {
 			try {
@@ -91,7 +101,8 @@ export function createAppState() {
 
 		get modifiedPlayers() {
 			return modifiedPlayers;
-		}
+		},
+		resetState,
 	};
 }
 

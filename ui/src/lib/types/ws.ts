@@ -4,6 +4,7 @@ export enum MessageType {
 	ADD_PAL = 'add_pal',
 	CLONE_PAL = 'clone_pal',
 	DELETE_PALS = 'delete_pals',
+	HEAL_PALS = 'heal_pals',
 	DOWNLOAD_SAVE_FILE = 'download_save_file',
 	ERROR = 'error',
 	GET_PLAYERS = 'get_players',
