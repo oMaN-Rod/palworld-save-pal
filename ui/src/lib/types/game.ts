@@ -20,6 +20,8 @@ type Pal = {
 	level: number;
 	nickname?: string;
 	is_tower: boolean;
+	stomach: number;
+	max_stomach: number;
 	storage_id?: string;
 	storage_slot: number;
 	learned_skills: string[];
@@ -29,6 +31,8 @@ type Pal = {
 	hp: number;
 	max_hp: number;
 	elements: ElementType[];
+	state: EntryState;
+	sanity: number;
 };
 
 type Player = {
@@ -41,7 +45,7 @@ type Player = {
 	weapon_load_out_container: ItemContainer;
 	player_equipment_armor_container: ItemContainer;
 	food_equip_container: ItemContainer;
-
+	state: EntryState;
 };
 
 type SaveFile = {
@@ -87,9 +91,18 @@ export type ItemType =
 	| 'Structure'
 	| 'Unknown'
 	| 'Utility'
-	| 'Weapon'
+	| 'Weapon';
 export type DynamicItemType = 'armor' | 'weapon';
-export type ItemGroup = 'Accessory' | 'Body' | 'Common' | 'Food' | 'Glider' | 'Head' | 'Shield' | 'Weapon' | 'KeyItem'
+export type ItemGroup =
+	| 'Accessory'
+	| 'Body'
+	| 'Common'
+	| 'Food'
+	| 'Glider'
+	| 'Head'
+	| 'Shield'
+	| 'Weapon'
+	| 'KeyItem';
 
 export interface DynamicItemDetails {
 	damage: number;
@@ -136,7 +149,6 @@ export type Scaling = {
 export type Suitabilities = {
 	[key: string]: number;
 };
-
 
 export interface PalData {
 	code_name: string;
@@ -230,7 +242,14 @@ type Element = {
 	white_icon: string;
 };
 
-export { PalGender };
+enum EntryState {
+	NONE = 'None',
+	MODIFIED = 'Modified',
+	NEW = 'New',
+	DELETED = 'Deleted'
+}
+
+export { EntryState, PalGender };
 export type {
 	ActiveSkill,
 	ActiveSkillDetails,
@@ -241,9 +260,7 @@ export type {
 	PassiveSkillDetails,
 	Player,
 	SaveFile,
-	WorkSuitability,
+	Skill,
 	SkillType,
-	Skill
+	WorkSuitability
 };
-
-

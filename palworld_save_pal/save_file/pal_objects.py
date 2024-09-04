@@ -5,7 +5,7 @@ import uuid
 
 from palworld_save_tools.archive import UUID as ArchiveUUID
 
-from palworld_save_pal.save_file.container_slot import ContainerSlot
+from palworld_save_pal.save_file.item_container_slot import ItemContainerSlot
 from palworld_save_pal.utils.logging_config import create_logger
 
 logger = create_logger(__name__)
@@ -17,13 +17,14 @@ class PrefixedEnum(Enum):
         return getattr(cls, "_enum_prefix", f"{cls.__name__}::")
 
     def prefixed(self):
-        return f"{self._prefix()}{self.value}"
+        return f"{self._enum_prefix.value}{self.value}"
 
 
 class ArrayType(str, Enum):
     BYTE_PROPERTY = "ByteProperty"
     ENUM_PROPERTY = "EnumProperty"
     NAME_PROPERTY = "NameProperty"
+    STRUCT_PROPERTY = "StructProperty"
 
 
 class Element(str, Enum):
@@ -45,6 +46,28 @@ class Element(str, Enum):
             logger.warning("%s is not a valid element", value)
 
 
+class EntryState(str, Enum):
+    NONE = "None"
+    MODIFIED = "Modified"
+    NEW = "New"
+    DELETED = "Deleted"
+
+
+class GroupType(str, PrefixedEnum):
+    _enum_prefix = "EPalGroupType::"
+
+    GUILD = "Guild"
+    ORGANIZATION = "Organization"
+
+    @staticmethod
+    def from_value(value: str):
+        try:
+            value = value.replace(GroupType._enum_prefix.value, "")
+            return GroupType(value)
+        except:
+            logger.warning("%s is not a valid group type", value)
+
+
 class PalGender(str, PrefixedEnum):
     _enum_prefix = "EPalGenderType::"
 
@@ -54,7 +77,7 @@ class PalGender(str, PrefixedEnum):
     @staticmethod
     def from_value(value: str):
         try:
-            value = value.replace("EPalGenderType::", "")
+            value = value.replace(PalGender._enum_prefix.value, "")
             return PalGender(value)
         except:
             logger.warning("%s is not a valid gender", value)
@@ -98,7 +121,7 @@ class WorkSuitability(str, PrefixedEnum):
     @staticmethod
     def from_value(value: str):
         try:
-            value = value.replace("EPalWorkSuitability::", "")
+            value = value.replace(WorkSuitability._enum_prefix.value, "")
             return WorkSuitability(value)
         except:
             logger.warning("%s is not a valid work suitability", value)
@@ -129,8 +152,8 @@ class PalObjects:
     def NameProperty(value: str):
         return {
             "id": None,
-            "type": "NameProperty",
             "value": value,
+            "type": "NameProperty",
         }
 
     @staticmethod
@@ -181,6 +204,10 @@ class PalObjects:
         return toUUID(value)
 
     @staticmethod
+    def as_uuid(value: Any) -> Optional[UUID]:
+        return toUUID(value)
+
+    @staticmethod
     def set_value(d: Dict[str, Any], value: Any):
         d["value"] = value
 
@@ -224,13 +251,30 @@ class PalObjects:
         PalObjects.set_nested(d, "value", "value", value=value)
 
     @staticmethod
-    def ArrayProperty(
-        array_type: ArrayType, values: List[str], custom_type: Optional[str] = None
+    def ArrayPropertyValues(
+        array_type: ArrayType, values: List[Any], custom_type: Optional[str] = None
     ):
         struct = {
             "array_type": array_type.value,
             "id": None,
             "value": {"values": values},
+            "type": "ArrayProperty",
+        }
+
+        if custom_type:
+            struct["custom_type"] = custom_type
+        return struct
+
+    @staticmethod
+    def ArrayProperty(
+        array_type: ArrayType,
+        value: Optional[Dict[str, Any]] = None,
+        custom_type: Optional[str] = None,
+    ):
+        struct = {
+            "array_type": array_type.value,
+            "id": None,
+            "value": value,
             "type": "ArrayProperty",
         }
 
@@ -313,15 +357,22 @@ class PalObjects:
         slot_idx = PalObjects.get_value(d["value"]["SlotIndex"])
 
         if container_id is None or slot_idx is None:
-            return None
+            return
         return (container_id, slot_idx)
 
     @staticmethod
-    def set_pal_character_slot_id(
-        d: Dict[str, Any], container_id: UUID | str, slot_idx: int
-    ):
+    def set_pal_character_slot_id(d: Dict[str, Any], container_id: UUID, slot_idx: int):
         PalObjects.set_pal_container_id(d["value"]["ContainerId"], container_id)
         PalObjects.set_value(d["value"]["SlotIndex"], slot_idx)
+
+    @staticmethod
+    def individual_character_handle_ids(instance_id: UUID, guid: UUID | None = None):
+        if not guid:
+            guid = PalObjects.EMPTY_UUID
+        return {
+            "guid": guid,
+            "instance_id": instance_id,
+        }
 
     @staticmethod
     def FloatContainer(d: Dict[str, Any] = None):
@@ -334,17 +385,17 @@ class PalObjects:
         }
 
     @staticmethod
-    def ContainerSlotData(slot_idx: int):
+    def ContainerSlotData(slot_idx: int, instance_id: UUID):
         return {
             "SlotIndex": PalObjects.IntProperty(slot_idx),
             "RawData": PalObjects.ArrayProperty(
                 ArrayType.BYTE_PROPERTY,
                 {
                     "player_uid": PalObjects.EMPTY_UUID,
-                    "instance_id": PalObjects.EMPTY_UUID,
+                    "instance_id": instance_id,
                     "permission_tribe_id": 0,
                 },
-                ".worldSaveData.CharacterContainerSaveData.Value.Slots.Slots.RawData",
+                custom_type=".worldSaveData.CharacterContainerSaveData.Value.Slots.Slots.RawData",
             ),
         }
 
@@ -435,12 +486,34 @@ class PalObjects:
 
     @staticmethod
     def PalSaveParameter(
+        code_name: str,
         instance_id: UUID | str,
         owner_uid: UUID | str,
         container_id: UUID | str,
         slot_idx: int,
         group_id: UUID | str,
+        nickname: Optional[str] = None,
+        active_skills: List[str] = None,
+        passive_skills: List[str] = None,
+        work_suitability_data: Dict[str, int] = None,
     ):
+        nickname = nickname or f"[New] {code_name}"
+        active_skills = active_skills or []
+        passive_skills = passive_skills or []
+
+        work_suitability = []
+        if work_suitability_data:
+            for work, value in work_suitability_data.items():
+                suitability = WorkSuitability.from_value(work)
+                work_suitability.append(
+                    PalObjects.WorkSuitabilityStruct(suitability.prefixed(), value)
+                )
+        else:
+            work_suitability = [
+                PalObjects.WorkSuitabilityStruct(work.prefixed(), 0)
+                for work in WorkSuitability
+            ]
+
         return {
             "key": {
                 "PlayerUId": PalObjects.Guid(PalObjects.EMPTY_UUID),
@@ -449,7 +522,7 @@ class PalObjects:
             },
             "value": {
                 "RawData": PalObjects.ArrayProperty(
-                    "ByteProperty",
+                    ArrayType.BYTE_PROPERTY,
                     {
                         "object": {
                             "SaveParameter": {
@@ -457,18 +530,18 @@ class PalObjects:
                                 "struct_id": PalObjects.EMPTY_UUID,
                                 "id": None,
                                 "value": {
-                                    "CharacterID": PalObjects.NameProperty("SheepBall"),
+                                    "CharacterID": PalObjects.NameProperty(code_name),
                                     "Gender": PalObjects.EnumProperty(
-                                        "EPalGenderType", "EPalGenderType::Female"
+                                        "EPalGenderType", PalGender.FEMALE.prefixed()
                                     ),
                                     "Level": PalObjects.IntProperty(1),
                                     "Exp": PalObjects.IntProperty(0),
-                                    "NickName": PalObjects.StrProperty("!!!NEW PAL!!!"),
-                                    "EquipWaza": PalObjects.ArrayProperty(
-                                        "EnumProperty", {"values": []}
+                                    "NickName": PalObjects.StrProperty(nickname),
+                                    "EquipWaza": PalObjects.ArrayPropertyValues(
+                                        ArrayType.ENUM_PROPERTY, active_skills
                                     ),
-                                    "MasteredWaza": PalObjects.ArrayProperty(
-                                        "EnumProperty", {"values": []}
+                                    "MasteredWaza": PalObjects.ArrayPropertyValues(
+                                        ArrayType.ENUM_PROPERTY, []
                                     ),
                                     "HP": PalObjects.FixedPoint64(545000),
                                     "Talent_HP": PalObjects.IntProperty(50),
@@ -476,14 +549,14 @@ class PalObjects:
                                     "Talent_Shot": PalObjects.IntProperty(50),
                                     "Talent_Defense": PalObjects.IntProperty(50),
                                     "FullStomach": PalObjects.FloatProperty(300),
-                                    "PassiveSkillList": PalObjects.ArrayProperty(
-                                        "NameProperty", {"values": []}
+                                    "PassiveSkillList": PalObjects.ArrayPropertyValues(
+                                        ArrayType.NAME_PROPERTY, passive_skills
                                     ),
                                     "MP": PalObjects.FixedPoint64(10000),
                                     "OwnedTime": PalObjects.DateTime(PalObjects.TIME),
                                     "OwnerPlayerUId": PalObjects.Guid(owner_uid),
                                     "OldOwnerPlayerUIds": PalObjects.ArrayProperty(
-                                        "StructProperty",
+                                        ArrayType.STRUCT_PROPERTY,
                                         {
                                             "prop_name": "OldOwnerPlayerUIds",
                                             "prop_type": "StructProperty",
@@ -498,7 +571,7 @@ class PalObjects:
                                     # Do not omit CraftSpeeds, otherwise the pal works super slow
                                     # TODO use accurate data (even tho this is useless)
                                     "CraftSpeeds": PalObjects.ArrayProperty(
-                                        "StructProperty",
+                                        ArrayType.STRUCT_PROPERTY,
                                         {
                                             "prop_name": "CraftSpeeds",
                                             "prop_type": "StructProperty",
@@ -517,12 +590,12 @@ class PalObjects:
                                         str(uuid.uuid4())
                                     ),
                                     "SlotID": PalObjects.PalCharacterSlotId(
-                                        slot_idx, container_id
+                                        container_id, slot_idx
                                     ),
                                     # TODO Need accurate values
                                     "MaxFullStomach": PalObjects.FloatProperty(300.0),
                                     "GotStatusPointList": PalObjects.ArrayProperty(
-                                        "StructProperty",
+                                        ArrayType.STRUCT_PROPERTY,
                                         {
                                             "prop_name": "GotStatusPointList",
                                             "prop_type": "StructProperty",
@@ -535,7 +608,7 @@ class PalObjects:
                                         },
                                     ),
                                     "GotExStatusPointList": PalObjects.ArrayProperty(
-                                        "StructProperty",
+                                        ArrayType.STRUCT_PROPERTY,
                                         {
                                             "prop_name": "GotExStatusPointList",
                                             "prop_type": "StructProperty",
@@ -559,56 +632,40 @@ class PalObjects:
                         "unknown_bytes": [0, 0, 0, 0],
                         "group_id": group_id,
                     },
-                    ".worldSaveData.CharacterSaveParameterMap.Value.RawData",
+                    custom_type=".worldSaveData.CharacterSaveParameterMap.Value.RawData",
                 )
             },
         }
 
     @staticmethod
-    def DynamicItem(container_slot: ContainerSlot):
+    def DynamicItem(container_slot: ItemContainerSlot):
         return {
             "ID": {
                 "struct_type": "PalDynamicItemId",
-                "struct_id": "00000000-0000-0000-0000-000000000000",
+                "struct_id": PalObjects.EMPTY_UUID,
                 "id": None,
                 "value": {
-                    "CreatedWorldId": {
-                        "struct_type": "Guid",
-                        "struct_id": "00000000-0000-0000-0000-000000000000",
-                        "id": None,
-                        "value": "00000000-0000-0000-0000-000000000000",
-                        "type": "StructProperty",
-                    },
-                    "LocalIdInCreatedWorld": {
-                        "struct_type": "Guid",
-                        "struct_id": "00000000-0000-0000-0000-000000000000",
-                        "id": None,
-                        "value": container_slot.dynamic_item.local_id,
-                        "type": "StructProperty",
-                    },
+                    "CreatedWorldId": PalObjects.Guid(PalObjects.EMPTY_UUID),
+                    "LocalIdInCreatedWorld": PalObjects.Guid(
+                        container_slot.dynamic_item.local_id
+                    ),
                 },
                 "type": "StructProperty",
             },
-            "StaticItemId": {
-                "id": None,
-                "value": container_slot.static_id,
-                "type": "NameProperty",
-            },
-            "RawData": {
-                "array_type": "ByteProperty",
-                "id": None,
-                "value": {
+            "StaticItemId": PalObjects.NameProperty(container_slot.static_id),
+            "RawData": PalObjects.ArrayProperty(
+                ArrayType.BYTE_PROPERTY,
+                {
                     "id": {
-                        "created_world_id": "00000000-0000-0000-0000-000000000000",
+                        "created_world_id": PalObjects.EMPTY_UUID,
                         "local_id_in_created_world": container_slot.dynamic_item.local_id,
                         "static_id": container_slot.static_id,
                     },
                     "type": container_slot.dynamic_item.type,
                     "durability": container_slot.dynamic_item.durability,
                 },
-                "type": "ArrayProperty",
-                "custom_type": ".worldSaveData.DynamicItemSaveData.DynamicItemSaveData.RawData",
-            },
+                custom_type=".worldSaveData.DynamicItemSaveData.DynamicItemSaveData.RawData",
+            ),
             "CustomVersionData": {
                 "array_type": "ByteProperty",
                 "id": None,
