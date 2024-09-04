@@ -9027,19 +9027,29 @@
         "image": "Ultimate_Sphere"
     },
     "PalSummon": {
-        "type": "Unknown",
-        "group": "Unknown",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Rare",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
         "image": "Summoning_Altar"
     },
+    "PalSummon_KingBahamut_Dragon": {
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Legendary",
+        "stack": 9999,
+        "weight": 0,
+        "buy_price": 0,
+        "sell_price": 0,
+        "image": "Blazamut_Ryu_Slab"
+    },
     "PalSummon_KingBahamut_Dragon_Parts": {
         "type": "Consumable",
         "group": "Common",
-        "tier": "Common",
+        "tier": "Legendary",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
@@ -9049,7 +9059,7 @@
     "PalSummon_NightLady": {
         "type": "Consumable",
         "group": "Common",
-        "tier": "Common",
+        "tier": "Rare",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
@@ -9059,7 +9069,7 @@
     "PalSummon_NightLady_Dark": {
         "type": "Consumable",
         "group": "Common",
-        "tier": "Uncommon",
+        "tier": "Epic",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
@@ -9069,7 +9079,7 @@
     "PalSummon_NightLady_Dark_2": {
         "type": "Consumable",
         "group": "Common",
-        "tier": "Rare",
+        "tier": "Legendary",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
@@ -9079,7 +9089,7 @@
     "PalSummon_NightLady_Dark_Parts": {
         "type": "Consumable",
         "group": "Common",
-        "tier": "Uncommon",
+        "tier": "Epic",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
@@ -9087,9 +9097,9 @@
         "image": "Bellanoir_Libero's_Slab_Fragment"
     },
     "PalSummon_NightLady_Dark_Parts_2": {
-        "type": "Unknown",
-        "group": "Unknown",
-        "tier": "Uncommon",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Legendary",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,

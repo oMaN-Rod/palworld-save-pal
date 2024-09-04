@@ -3431,8 +3431,12 @@
         "localized_name": "Summoning Altar",
         "description": ""
     },
+    "PalSummon_KingBahamut_Dragon": {
+        "localized_name": "Blazamut Ryu's Slab",
+        "description": ""
+    },
     "PalSummon_KingBahamut_Dragon_Parts": {
-        "localized_name": "PalSummon_KingBahamut_Dragon_Parts",
+        "localized_name": "Blazamut Ryu's Slab Fragment",
         "description": ""
     },
     "PalSummon_NightLady": {
