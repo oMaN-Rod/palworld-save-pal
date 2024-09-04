@@ -1,5 +1,7 @@
-import TextInputModal from "./text-input/TextInputModal.svelte";
-import SkillSelectModal from "./skill-select/SkillSelectModal.svelte";
-import ItemSelectModal from "./item-select/ItemSelectModal.svelte";
+import ConfirmModal from './confirm/ConfirmModal.svelte';
+import ItemSelectModal from './item-select/ItemSelectModal.svelte';
+import PalSelectModal from './pal-select/PalSelectModal.svelte';
+import SkillSelectModal from './skill-select/SkillSelectModal.svelte';
+import TextInputModal from './text-input/TextInputModal.svelte';
 
-export { ItemSelectModal, TextInputModal, SkillSelectModal };
+export { ConfirmModal, ItemSelectModal, PalSelectModal, SkillSelectModal, TextInputModal };

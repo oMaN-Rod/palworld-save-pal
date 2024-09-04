@@ -14,6 +14,7 @@
 
 	function handleOnUpload() {
 		if (!files) return;
+		appState.resetState();
 		nav.activePage = 'Loading';
 		ws.message = { type: MessageType.PROGRESS_MESSAGE, data: 'Uploading zip file 🚀...' };
 		const reader = new FileReader();

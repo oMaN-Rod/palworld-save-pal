@@ -1,23 +1,33 @@
-import { MessageType, type Pal, type Player, type SaveFile } from "$types";
-import { getSocketState } from "./websocketState.svelte";
-import { palsData } from "$lib/data/pals";
+import { palsData } from '$lib/data/pals';
+import { type Pal, type Player, type SaveFile } from '$types';
+import { getSocketState } from './websocketState.svelte';
 
 const ws = getSocketState();
 
 export function createAppState() {
 	let players: Record<string, Player> = $state({});
-	let selectedPlayerUid: string = $state("");
-	let selectedPlayer: Player | null = $state(null);
-	let selectedPal: Pal | null = $state(null);
-	let saveFile: SaveFile | null = $state(null);
+	let selectedPlayerUid: string = $state('');
+	let selectedPlayer: Player | undefined = $state(undefined);
+	let selectedPal: Pal | undefined = $state(undefined);
+	let saveFile: SaveFile | undefined = $state(undefined);
 	let modifiedPals: Record<string, Pal> = $state({});
 	let modifiedPlayers: Record<string, Player> = $state({});
+
+	function resetState() {
+		players = {};
+		selectedPlayerUid = '';
+		selectedPlayer = undefined;
+		selectedPal = undefined;
+		saveFile = undefined;
+		modifiedPals = {};
+		modifiedPlayers = {};
+	}
 
 	function setPlayers(newPlayers: Record<string, Player>) {
 		Object.entries(newPlayers).forEach(([key, player]) => {
 			try {
 				if (player.pals) {
-					Object.values(player.pals).forEach(async pal => {
+					Object.values(player.pals).forEach(async (pal) => {
 						const palInfo = await palsData.getPalInfo(pal.character_id);
 						if (!palInfo) {
 							console.error(`Failed to find pal info for`, pal);
@@ -34,41 +44,66 @@ export function createAppState() {
 		});
 	}
 
-	function setSelectedPal(pal: Pal | null) {
+	function setSelectedPal(pal: Pal | undefined) {
 		selectedPal = pal;
 		if (pal) {
 			modifiedPals[pal.instance_id] = pal;
 		}
 	}
 
-	function setSelectedPlayer(player: Player | null) {
+	function setSelectedPlayer(player: Player | undefined) {
 		selectedPlayer = player;
-		selectedPal = null;
+		selectedPal = undefined;
 		if (player) {
 			modifiedPlayers[player.uid] = player;
 		}
 	}
 
 	return {
-		get players() { return players; },
-		set players(newPlayers: Record<string, Player>) { setPlayers(newPlayers); },
+		get players() {
+			return players;
+		},
+		set players(newPlayers: Record<string, Player>) {
+			setPlayers(newPlayers);
+		},
 
-		get selectedPlayerUid() { return selectedPlayerUid; },
-		set selectedPlayerUid(uid: string) { selectedPlayerUid = uid; },
+		get selectedPlayerUid() {
+			return selectedPlayerUid;
+		},
+		set selectedPlayerUid(uid: string) {
+			selectedPlayerUid = uid;
+		},
 
-		get selectedPlayer() { return selectedPlayer as Player; },
-		set selectedPlayer(player: Player | null) { setSelectedPlayer(player); },
+		get selectedPlayer() {
+			return selectedPlayer as Player;
+		},
+		set selectedPlayer(player: Player | undefined) {
+			setSelectedPlayer(player);
+		},
 
-		get selectedPal() { return selectedPal; },
-		set selectedPal(pal: Pal | null) { setSelectedPal(pal); },
+		get selectedPal() {
+			return selectedPal;
+		},
+		set selectedPal(pal: Pal | undefined) {
+			setSelectedPal(pal);
+		},
 
-		get saveFile() { return saveFile; },
-		set saveFile(file: SaveFile | null) { saveFile = file; },
+		get saveFile() {
+			return saveFile;
+		},
+		set saveFile(file: SaveFile | undefined) {
+			saveFile = file;
+		},
 
-		get modifiedPals() { return modifiedPals; },
+		get modifiedPals() {
+			return modifiedPals;
+		},
 
-		get modifiedPlayers() { return modifiedPlayers; }
-	}
+		get modifiedPlayers() {
+			return modifiedPlayers;
+		},
+		resetState,
+	};
 }
 
 let appState: ReturnType<typeof createAppState>;

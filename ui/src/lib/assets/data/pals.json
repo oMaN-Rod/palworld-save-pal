@@ -2869,7 +2869,7 @@
 				"Electric"
 			],
 			"skill_set": {},
-			"Tower": true,
+			"tower": true,
 			"scaling": {
 				"hp": 100,
 				"attack": 130,
@@ -2882,7 +2882,7 @@
 				"Grass"
 			],
 			"skill_set": {},
-			"Tower": true,
+			"tower": true,
 			"scaling": {
 				"hp": 110,
 				"attack": 110,
@@ -2895,7 +2895,7 @@
 				"Fire"
 			],
 			"skill_set": {},
-			"Tower": true,
+			"tower": true,
 			"scaling": {
 				"hp": 100,
 				"attack": 105,
@@ -2908,7 +2908,7 @@
 				"Dark"
 			],
 			"skill_set": {},
-			"Tower": true,
+			"tower": true,
 			"scaling": {
 				"hp": 120,
 				"attack": 120,
@@ -2921,7 +2921,7 @@
 				"Electric"
 			],
 			"skill_set": {},
-			"Tower": true,
+			"tower": true,
 			"scaling": {
 				"hp": 105,
 				"attack": 100,
@@ -2934,7 +2934,7 @@
 				"None"
 			],
 			"skill_set": {},
-			"Human": true
+			"human": true
 		},
 		{
 			"code_name": "FireCult_FlameThrower",
@@ -2942,7 +2942,7 @@
 				"None"
 			],
 			"skill_set": {},
-			"Human": true
+			"human": true
 		},
 		{
 			"code_name": "FireCult_Rifle",
@@ -2950,7 +2950,7 @@
 				"None"
 			],
 			"skill_set": {},
-			"Human": true
+			"human": true
 		},
 		{
 			"code_name": "Male_Soldier01",
@@ -2958,7 +2958,7 @@
 				"None"
 			],
 			"skill_set": {},
-			"Human": true
+			"human": true
 		},
 		{
 			"code_name": "Female_Soldier01",
@@ -2966,7 +2966,7 @@
 				"None"
 			],
 			"skill_set": {},
-			"Human": true
+			"human": true
 		},
 		{
 			"code_name": "Believer_CrossBow",
@@ -2974,7 +2974,7 @@
 				"None"
 			],
 			"skill_set": {},
-			"Human": true
+			"human": true
 		},
 		{
 			"code_name": "Believer_Bat",
@@ -2982,7 +2982,7 @@
 				"None"
 			],
 			"skill_set": {},
-			"Human": true
+			"human": true
 		},
 		{
 			"code_name": "Male_Scientist01_LaserRifle",
@@ -2990,7 +2990,7 @@
 				"None"
 			],
 			"skill_set": {},
-			"Human": true
+			"human": true
 		},
 		{
 			"code_name": "PalDealer",
@@ -2998,7 +2998,7 @@
 				"None"
 			],
 			"skill_set": {},
-			"Human": true
+			"human": true
 		},
 		{
 			"code_name": "Police_Handgun",
@@ -3006,7 +3006,7 @@
 				"None"
 			],
 			"skill_set": {},
-			"Human": true
+			"human": true
 		},
 		{
 			"code_name": "Hunter_Bat",
@@ -3014,7 +3014,7 @@
 				"None"
 			],
 			"skill_set": {},
-			"Human": true
+			"human": true
 		},
 		{
 			"code_name": "Hunter_FlameThrower",
@@ -3022,7 +3022,7 @@
 				"None"
 			],
 			"skill_set": {},
-			"Human": true
+			"human": true
 		},
 		{
 			"code_name": "Hunter_Fat_GatlingGun",
@@ -3030,7 +3030,7 @@
 				"None"
 			],
 			"skill_set": {},
-			"Human": true
+			"human": true
 		},
 		{
 			"code_name": "Hunter_RocketLauncher",
@@ -3038,7 +3038,7 @@
 				"None"
 			],
 			"skill_set": {},
-			"Human": true
+			"human": true
 		},
 		{
 			"code_name": "Hunter_Grenade",
@@ -3046,7 +3046,7 @@
 				"None"
 			],
 			"skill_set": {},
-			"Human": true
+			"human": true
 		},
 		{
 			"code_name": "Hunter_Rifle",
@@ -3054,7 +3054,7 @@
 				"None"
 			],
 			"skill_set": {},
-			"Human": true
+			"human": true
 		},
 		{
 			"code_name": "Hunter_Shotgun",
@@ -3062,7 +3062,7 @@
 				"None"
 			],
 			"skill_set": {},
-			"Human": true
+			"human": true
 		},
 		{
 			"code_name": "Hunter_Handgun",
@@ -3070,7 +3070,7 @@
 				"None"
 			],
 			"skill_set": {},
-			"Human": true
+			"human": true
 		},
 		{
 			"code_name": "SalesPerson",
@@ -3078,7 +3078,7 @@
 				"None"
 			],
 			"skill_set": {},
-			"Human": true
+			"human": true
 		},
 		{
 			"code_name": "SalesPerson_Desert",
@@ -3086,7 +3086,7 @@
 				"None"
 			],
 			"skill_set": {},
-			"Human": true
+			"human": true
 		},
 		{
 			"code_name": "SalesPerson_Desert2",
@@ -3094,7 +3094,7 @@
 				"None"
 			],
 			"skill_set": {},
-			"Human": true
+			"human": true
 		},
 		{
 			"code_name": "SalesPerson_Volcano",
@@ -3102,7 +3102,7 @@
 				"None"
 			],
 			"skill_set": {},
-			"Human": true
+			"human": true
 		},
 		{
 			"code_name": "SalesPerson_Volcano2",
@@ -3110,7 +3110,7 @@
 				"None"
 			],
 			"skill_set": {},
-			"Human": true
+			"human": true
 		},
 		{
 			"code_name": "Female_DesertPeople02",
@@ -3118,7 +3118,7 @@
 				"None"
 			],
 			"skill_set": {},
-			"Human": true
+			"human": true
 		},
 		{
 			"code_name": "Female_People02",
@@ -3126,7 +3126,7 @@
 				"None"
 			],
 			"skill_set": {},
-			"Human": true
+			"human": true
 		},
 		{
 			"code_name": "Female_People03",
@@ -3134,7 +3134,7 @@
 				"None"
 			],
 			"skill_set": {},
-			"Human": true
+			"human": true
 		},
 		{
 			"code_name": "Male_DesertPeople01",
@@ -3142,7 +3142,7 @@
 				"None"
 			],
 			"skill_set": {},
-			"Human": true
+			"human": true
 		},
 		{
 			"code_name": "Male_People02",
@@ -3150,7 +3150,7 @@
 				"None"
 			],
 			"skill_set": {},
-			"Human": true
+			"human": true
 		},
 		{
 			"code_name": "Male_People03",
@@ -3158,7 +3158,7 @@
 				"None"
 			],
 			"skill_set": {},
-			"Human": true
+			"human": true
 		},
 		{
 			"code_name": "MobuCitizen",
@@ -3166,7 +3166,7 @@
 				"None"
 			],
 			"skill_set": {},
-			"Human": true
+			"human": true
 		},
 		{
 			"code_name": "MobuCitizen_Male",
@@ -3174,7 +3174,7 @@
 				"None"
 			],
 			"skill_set": {},
-			"Human": true
+			"human": true
 		},
 		{
 			"code_name": "MobuCitizen",
@@ -3182,7 +3182,7 @@
 				"None"
 			],
 			"skill_set": {},
-			"Human": true
+			"human": true
 		},
 		{
 			"code_name": "Guard_Rifle",
@@ -3190,7 +3190,7 @@
 				"None"
 			],
 			"skill_set": {},
-			"Human": true
+			"human": true
 		},
 		{
 			"code_name": "Guard_Shotgun",
@@ -3198,7 +3198,7 @@
 				"None"
 			],
 			"skill_set": {},
-			"Human": true
+			"human": true
 		},
 		{
 			"code_name": "PalDealer_Desert",
@@ -3206,7 +3206,7 @@
 				"None"
 			],
 			"skill_set": {},
-			"Human": true
+			"human": true
 		},
 		{
 			"code_name": "PalDealer_Volcano",
@@ -3214,7 +3214,7 @@
 				"None"
 			],
 			"skill_set": {},
-			"Human": true
+			"human": true
 		},
 		{
 			"code_name": "Police_Rifle",
@@ -3222,7 +3222,7 @@
 				"None"
 			],
 			"skill_set": {},
-			"Human": true
+			"human": true
 		},
 		{
 			"code_name": "Police_Shotgun",
@@ -3230,7 +3230,7 @@
 				"None"
 			],
 			"skill_set": {},
-			"Human": true
+			"human": true
 		},
 		{
 			"code_name": "Gorilla_Ground",
@@ -3467,7 +3467,7 @@
 				"Neutral"
 			],
 			"skill_set": {},
-			"Tower": true,
+			"tower": true,
 			"scaling": {
 				"hp": 130,
 				"attack": 115,

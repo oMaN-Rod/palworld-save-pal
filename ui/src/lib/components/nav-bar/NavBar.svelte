@@ -1,21 +1,24 @@
 <script lang="ts">
-	import { getNavigationState } from '$states';
+	import { getNavigationState, getAppState } from '$states';
 	import { Nav } from '@skeletonlabs/skeleton-svelte';
 	import { File, Pencil, Settings, Info } from 'lucide-svelte';
 
 	let navigationState = getNavigationState();
+	let appState = getAppState();
 </script>
 
 <Nav.Rail width="48px">
 	{#snippet tiles()}
-		<Nav.Tile
-			title="Edit"
-			id="0"
-			onclick={() => (navigationState.activePage = 'Edit')}
-			active="bg-secondary-500"
-		>
-			<Pencil />
-		</Nav.Tile>
+		{#if appState.saveFile}
+			<Nav.Tile
+				title="Edit"
+				id="0"
+				onclick={() => (navigationState.activePage = 'Edit')}
+				active="bg-secondary-500"
+			>
+				<Pencil />
+			</Nav.Tile>
+		{/if}
 		<Nav.Tile
 			title="File"
 			id="1"

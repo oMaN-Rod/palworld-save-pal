@@ -172,17 +172,17 @@ Here's what's planned for future releases of Palworld Save Pal:
 - [X] Edit Gender
 - [X] Edit Active Skills
 - [X] Edit Passive Skills
-- [ ] Edit Health
-- [ ] Edit Stomach
-- [ ] Edit Level
+- [X] Edit Health - Modified pals are automatically healed
+- [X] Edit Stomach - Modified pals are automatically healed
+- [X] Edit Level
 - [ ] Edit learned skills
-- [ ] Edit Rank
-- [ ] Edit Souls
-- [ ] Set/Unset Lucky
-- [ ] Set/Unset Boss
+- [X] Edit Rank
+- [X] Edit Souls
+- [X] Set/Unset Lucky
+- [X] Set/Unset Boss
 - [ ] Change Pal species
-- [ ] Add/Remove Pals
-- [ ] Clone Pals
+- [X] Add/Remove Pals
+- [X] Clone Pals
 - [ ] Pal profiles creating presets for level, gender, and skills
 
 ### Players

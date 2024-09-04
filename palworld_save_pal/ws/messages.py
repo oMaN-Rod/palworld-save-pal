@@ -13,15 +13,50 @@ class BaseMessage(BaseModel):
 
 
 class MessageType(str, Enum):
+    ADD_PAL = "add_pal"
+    CLONE_PAL = "clone_pal"
+    DELETE_PALS = "delete_pals"
+    HEAL_PALS = "heal_pals"
+    DOWNLOAD_SAVE_FILE = "download_save_file"
+    ERROR = "error"
     GET_PLAYERS = "get_players"
     GET_PAL_DETAILS = "get_pal_details"
-    DOWNLOAD_SAVE_FILE = "download_save_file"
     LOAD_SAVE_FILE = "load_save_file"
     LOAD_ZIP_FILE = "load_zip_file"
-    UPDATE_SAVE_FILE = "update_save_file"
-    SYNC_APP_STATE = "sync_app_state"
     PROGRESS_MESSAGE = "progress_message"
-    ERROR = "error"
+    SYNC_APP_STATE = "sync_app_state"
+    UPDATE_SAVE_FILE = "update_save_file"
+
+
+class AddPalData(BaseModel):
+    player_id: UUID
+    pal_code_name: str
+    nickname: str
+
+
+class AddPalMessage(BaseMessage):
+    type: str = MessageType.ADD_PAL.value
+    data: AddPalData
+
+
+class ClonePalMessage(BaseMessage):
+    type: str = MessageType.CLONE_PAL.value
+    data: Pal
+
+
+class DeletePalsData(BaseModel):
+    player_id: UUID
+    pal_ids: List[UUID]
+
+
+class DeletePalsMessage(BaseMessage):
+    type: str = MessageType.DELETE_PALS.value
+    data: DeletePalsData
+
+
+class HealPalsMessage(BaseMessage):
+    type: str = MessageType.HEAL_PALS.value
+    data: List[UUID]
 
 
 class DownloadSaveFileMessage(BaseMessage):

@@ -99,21 +99,20 @@
 					<PalList />
 				{/if}
 			</Drawer>
+			<Tabs listJustify="justify-center" bind:value={group}>
+				{#snippet list()}
+					<Tabs.Control value="player">Player</Tabs.Control>
+					<Tabs.Control value="pal">Pal</Tabs.Control>
+				{/snippet}
+				{#snippet content()}
+					<Tabs.Panel value="player">
+						<PlayerEdit />
+					</Tabs.Panel>
+					<Tabs.Panel value="pal">
+						<PalEdit />
+					</Tabs.Panel>
+				{/snippet}
+			</Tabs>
 		{/if}
-
-		<Tabs listJustify="justify-center">
-			{#snippet list()}
-				<Tabs.Control bind:group name="player">Player</Tabs.Control>
-				<Tabs.Control bind:group name="pal">Pal</Tabs.Control>
-			{/snippet}
-			{#snippet panels()}
-				<Tabs.Panel bind:group value="player">
-					<PlayerEdit />
-				</Tabs.Panel>
-				<Tabs.Panel bind:group value="pal">
-					<PalEdit />
-				</Tabs.Panel>
-			{/snippet}
-		</Tabs>
 	</div>
 </div>

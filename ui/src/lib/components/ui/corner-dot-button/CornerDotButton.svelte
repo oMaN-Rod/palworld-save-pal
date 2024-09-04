@@ -5,7 +5,7 @@
 		disabled = false
 	} = $props<{
 		onClick: () => void;
-		label?: string;
+		label: string;
 		disabled?: boolean;
 	}>();
 </script>
