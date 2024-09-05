@@ -2,7 +2,7 @@
 	import { cn } from '$theme';
 	import { MessageType, PalGender, type Pal, type Player } from '$types';
 	import { elementsData, palsData, getStats } from '$lib/data';
-	import { Input, Tooltip, Checkbox, Progress } from '$components/ui';
+	import { Input, Tooltip, Checkbox, List } from '$components/ui';
 	import { PalSelectModal } from '$components/modals';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import {
@@ -11,7 +11,12 @@
 		ArrowUp01,
 		ArrowUp10,
 		ArrowUpAZ,
-		ArrowUpZA
+		ArrowUpZA,
+		Plus,
+		Copy,
+		Ambulance,
+		Trash,
+		X
 	} from 'lucide-svelte';
 	import { assetLoader, debounce } from '$utils';
 	import { ASSET_DATA_PATH } from '$lib/constants';
@@ -33,21 +38,13 @@
 	let selectedFilter = $state('All');
 	let elementTypes: string[] = $state([]);
 	let elementIcons: Record<string, string> = $state({});
-	let filteredPals: Array<Pal> = $state([]);
+	let filteredPals: Pal[] = $state([]);
 	let sortBy: SortBy | undefined = $state(undefined);
 	let sortOrder: SortOrder | undefined = $state(undefined);
-	let selectedPals: Record<string, Pal> = $state({});
+	let selectedPals: Pal[] = $state([]);
 	let alphaIcon: string = $state('');
 	let foodIcon: string = $state('');
 	let hpIcon: string = $state('');
-	let selectAll: boolean = $state(false);
-
-	const listContainerClass = $derived(cn('h-[calc(100vh-200px)] overflow-hidden'));
-	const listClass = $derived(
-		cn('list w-full h-full border-surface-900 border divide-y divide-surface-900 overflow-y-auto')
-	);
-
-	const itemClass = $derived(cn('list-item p-2 flex items-center cursor-pointer'));
 
 	const sortByLevelAscClass = $derived(
 		cn('btn', sortBy === 'level' && sortOrder === 'asc' ? 'bg-secondary-500/25' : '')
@@ -89,7 +86,7 @@
 			})
 		);
 
-		selectedPals = {};
+		selectedPals = [];
 		filteredPals = palsWithInfo
 			.filter(({ pal, palInfo }) => {
 				const matchesSearch =
@@ -129,14 +126,6 @@
 		}
 	}
 
-	function handlePalCheckboxChange(pal: Pal, isChecked: boolean) {
-		if (isChecked) {
-			selectedPals[pal.instance_id] = pal;
-		} else {
-			delete selectedPals[pal.instance_id];
-		}
-	}
-
 	async function loadStaticIcons() {
 		const iconPath = `${ASSET_DATA_PATH}/img/icons/Alpha.png`;
 		const icon = await assetLoader.loadImage(iconPath);
@@ -149,12 +138,6 @@
 		const hpPath = `${ASSET_DATA_PATH}/img/icons/Heart.png`;
 		const hp = await assetLoader.loadImage(hpPath);
 		hpIcon = hp;
-	}
-
-	function handleKeyDown(event: KeyboardEvent, pal: Pal) {
-		if (event.key === 'Enter' || event.key === ' ') {
-			handlePalSelect(pal);
-		}
 	}
 
 	async function loadElementTypes() {
@@ -252,8 +235,8 @@
 
 	async function cloneSelectedPal() {
 		console.log('Cloning selected pal');
-		if (appState.selectedPlayer && Object.keys(selectedPals).length === 1) {
-			const selectedPal = Object.values(selectedPals)[0];
+		if (appState.selectedPlayer && selectedPals.length === 1) {
+			const selectedPal = selectedPals[0];
 			const message = {
 				type: MessageType.CLONE_PAL,
 				data: selectedPal
@@ -265,7 +248,7 @@
 	async function healSelectedPals() {
 		console.log('Healing selected pal(s)');
 		if (appState.selectedPlayer && appState.selectedPlayer.pals) {
-			const selectedPalIds = Object.keys(selectedPals);
+			const selectedPalIds = selectedPals.map((pal) => pal.instance_id);
 			const message = {
 				type: MessageType.HEAL_PALS,
 				data: selectedPalIds
@@ -282,7 +265,7 @@
 	}
 
 	async function deleteSelectedPals() {
-		const numOfSelectedPals = Object.keys(selectedPals).length;
+		const numOfSelectedPals = selectedPals.length;
 		if (numOfSelectedPals === 0) return;
 		const confirmed = await modal.showConfirmModal({
 			title: 'Delete Pal(s)',
@@ -291,7 +274,7 @@
 			cancelText: 'Cancel'
 		});
 		if (appState.selectedPlayer && appState.selectedPlayer.pals && confirmed) {
-			const selectedPalIds = Object.keys(selectedPals);
+			const selectedPalIds = selectedPals.map((pal) => pal.instance_id);
 			const data = {
 				player_id: appState.selectedPlayer.uid,
 				pal_ids: selectedPalIds
@@ -301,18 +284,10 @@
 				data
 			};
 			ws.send(JSON.stringify(message));
-			selectedPals = {};
+			selectedPals = [];
 			appState.selectedPlayer.pals = Object.fromEntries(
 				Object.entries(appState.selectedPlayer.pals).filter(([id]) => !selectedPalIds.includes(id))
 			);
-		}
-	}
-
-	function handleSelectAll() {
-		if (selectAll) {
-			filteredPals.forEach((pal) => (selectedPals[pal.instance_id] = pal));
-		} else {
-			selectedPals = {};
 		}
 	}
 
@@ -353,7 +328,9 @@
 	<div class="w-full">
 		<div class="btn-group bg-surface-900 mb-2 items-center rounded p-1">
 			<Tooltip position="right">
-				<button class="btn hover:preset-tonal-secondary p-2" onclick={handleAddPal}> Add </button>
+				<button class="btn hover:preset-tonal-secondary p-2" onclick={handleAddPal}>
+					<Plus />
+				</button>
 				{#snippet popup()}
 					Add a new pal to your Pal box
 				{/snippet}
@@ -361,7 +338,7 @@
 			{#if Object.keys(selectedPals).length === 1}
 				<Tooltip>
 					<button class="btn hover:preset-tonal-secondary p-2" onclick={cloneSelectedPal}>
-						Clone
+						<Copy />
 					</button>
 					{#snippet popup()}
 						Clone selected pal
@@ -371,7 +348,7 @@
 			{#if Object.keys(selectedPals).length >= 1}
 				<Tooltip>
 					<button class="btn hover:preset-tonal-secondary p-2" onclick={healSelectedPals}>
-						Heal
+						<Ambulance />
 					</button>
 					{#snippet popup()}
 						Heal selected pal(s)
@@ -380,15 +357,15 @@
 
 				<Tooltip>
 					<button class="btn hover:preset-tonal-secondary p-2" onclick={deleteSelectedPals}>
-						Delete
+						<Trash />
 					</button>
 					{#snippet popup()}
 						Delete selected pal(s)
 					{/snippet}
 				</Tooltip>
 				<Tooltip>
-					<button class="btn hover:preset-tonal-secondary p-2" onclick={() => (selectedPals = {})}>
-						Clear
+					<button class="btn hover:preset-tonal-secondary p-2" onclick={() => (selectedPals = [])}>
+						<X />
 					</button>
 					{#snippet popup()}
 						Clear selected
@@ -518,103 +495,71 @@
 			</Accordion.Item>
 		</Accordion>
 	</div>
-	<div class={listContainerClass}>
-		<ul class={listClass}>
-			<li class="bg-surface-900 sticky top-0 flex list-item cursor-pointer items-center p-2">
-				<div class="grid w-full grid-cols-[auto_55px_auto_1fr_auto] gap-2">
-					<Checkbox bind:checked={selectAll} onchange={handleSelectAll} />
-					<div>
-						<span class="font-bold">Level</span>
-					</div>
-					<div class="bg-surface-900 z-50 w-[55px]"></div>
-					<div class="flex justify-start">
-						<span class="font-bold">Name</span>
-					</div>
-					<div class="flex justify-end">
-						<span class="font-bold">Element</span>
-					</div>
+	<List items={filteredPals} onselect={handlePalSelect} bind:selectedItems={selectedPals}>
+		{#snippet listHeader()}
+			<div>
+				<span class="font-bold">Level</span>
+			</div>
+			<div class="bg-surface-900 z-50 w-[55px]"></div>
+			<div class="flex justify-start">
+				<span class="font-bold">Name</span>
+			</div>
+			<div class="flex justify-end">
+				<span class="font-bold">Element</span>
+			</div>
+		{/snippet}
+		{#snippet listItem(pal)}
+			<div class="grid w-full grid-cols-[55px_auto_1fr_auto] gap-2">
+				<div>
+					<span class="font-bold">Lvl {pal.level}</span>
 				</div>
-			</li>
-			{#each filteredPals as pal}
-				<li
-					class={cn(
-						'hover:bg-secondary-500/25',
-						itemClass,
-						appState.selectedPal?.instance_id === pal.instance_id ? 'bg-secondary-500/25' : '',
-						selectedPals[pal.instance_id] ? 'bg-secondary-500/25' : ''
-					)}
-				>
-					<Checkbox
-						checked={!!selectedPals[pal.instance_id]}
-						onchange={(isChecked) => handlePalCheckboxChange(pal, isChecked)}
-						class="mr-2"
-					/>
-					<Tooltip
-						background="bg-surface-700"
-						baseClass="flex w-full items-center text-left"
-						position="right"
-					>
-						<button
-							class="flex w-full items-center text-left"
-							onclick={() => handlePalSelect(pal)}
-							onkeydown={(event) => handleKeyDown(event, pal)}
-						>
-							<div class="grid w-full grid-cols-[55px_auto_1fr_auto] gap-2">
-								<div>
-									<span class="font-bold">Lvl {pal.level}</span>
-								</div>
-								<div class="relative justify-start">
-									{#if pal.is_boss}
-										{#if alphaIcon}
-											<div class="absolute -left-2 -top-1 h-5 w-5">
-												<enhanced:img src={alphaIcon} alt="Aplha" class="pal-element-badge"
-												></enhanced:img>
-											</div>
-										{/if}
-									{/if}
-									{#if pal.is_lucky}
-										<div class="absolute -left-2 -top-1 h-5 w-5">✨</div>
-									{/if}
-									{#await getPalIcon(pal.instance_id) then icon}
-										{#if icon}
-											<enhanced:img src={icon} alt={pal.name} class="h-8 w-8"></enhanced:img>
-										{/if}
-									{/await}
-									{#await getGenderIcon(pal.gender) then icon}
-										{#if icon}
-											{@const color =
-												pal.gender == PalGender.MALE ? 'text-primary-300' : 'text-tertiary-300'}
-											<div class={cn('absolute -right-4 -top-1 h-5 w-5', color)}>
-												{@html icon}
-											</div>
-										{/if}
-									{/await}
-								</div>
-								<div class="ml-4 flex flex-row justify-start">
-									<div>{pal.nickname || pal.name}</div>
-								</div>
-								<div class="flex justify-end">
-									{#if pal.character_id && pal.elements}
-										{#each pal.elements as elementType}
-											{#await getPalElementBadge(elementType) then icon}
-												{#if icon}
-													<enhanced:img src={icon} alt={elementType} class="pal-element-badge"
-													></enhanced:img>
-												{/if}
-											{/await}
-										{/each}
-									{/if}
-								</div>
+				<div class="relative justify-start">
+					{#if pal.is_boss}
+						{#if alphaIcon}
+							<div class="absolute -left-2 -top-1 h-5 w-5">
+								<enhanced:img src={alphaIcon} alt="Aplha" class="pal-element-badge"></enhanced:img>
 							</div>
-						</button>
-						{#snippet popup()}
-							<HealthBadge {pal} player={appState.selectedPlayer} />
-						{/snippet}
-					</Tooltip>
-				</li>
-			{/each}
-		</ul>
-	</div>
+						{/if}
+					{/if}
+					{#if pal.is_lucky}
+						<div class="absolute -left-2 -top-1 h-5 w-5">✨</div>
+					{/if}
+					{#await getPalIcon(pal.instance_id) then icon}
+						{#if icon}
+							<enhanced:img src={icon} alt={pal.name} class="h-8 w-8"></enhanced:img>
+						{/if}
+					{/await}
+					{#await getGenderIcon(pal.gender) then icon}
+						{#if icon}
+							{@const color =
+								pal.gender == PalGender.MALE ? 'text-primary-300' : 'text-tertiary-300'}
+							<div class={cn('absolute -right-4 -top-1 h-5 w-5', color)}>
+								{@html icon}
+							</div>
+						{/if}
+					{/await}
+				</div>
+				<div class="ml-4 flex flex-row justify-start">
+					<div>{pal.nickname || pal.name}</div>
+				</div>
+				<div class="flex justify-end">
+					{#if pal.character_id && pal.elements}
+						{#each pal.elements as elementType}
+							{#await getPalElementBadge(elementType) then icon}
+								{#if icon}
+									<enhanced:img src={icon} alt={elementType} class="pal-element-badge"
+									></enhanced:img>
+								{/if}
+							{/await}
+						{/each}
+					{/if}
+				</div>
+			</div>
+		{/snippet}
+		{#snippet listItemPopup(pal)}
+			<HealthBadge {pal} player={appState.selectedPlayer} />
+		{/snippet}
+	</List>
 </div>
 
 <style>

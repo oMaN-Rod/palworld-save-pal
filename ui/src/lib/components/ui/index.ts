@@ -5,10 +5,11 @@ import CornerDotButton from './corner-dot-button/CornerDotButton.svelte';
 import FileDropzone from './file-dropzone/FileDropzone.svelte';
 import Input from './input/Input.svelte';
 import ItemHeader from './item-header/ItemHeader.svelte';
+import List from './list/List.svelte';
+import Progress from './progress/Progress.svelte';
 import SectionHeader from './section-header/SectionHeader.svelte';
 import Select from './select/Select.svelte';
 import Tooltip from './tooltip/Tooltip.svelte';
-import Progress from './progress/Progress.svelte';
 
 export {
 	Card,
@@ -18,8 +19,9 @@ export {
 	FileDropzone,
 	Input,
 	ItemHeader,
+	List,
+	Progress,
 	SectionHeader,
 	Select,
-	Tooltip,
-	Progress
+	Tooltip
 };

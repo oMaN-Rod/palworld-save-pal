@@ -7,7 +7,7 @@
 	import { itemsData, presetsData } from '$lib/data';
 	import { Tabs } from '@skeletonlabs/skeleton-svelte';
 	import { Tooltip } from '$components/ui';
-	import { ItemBadge } from '$components';
+	import { ItemBadge, PlayerPresets } from '$components';
 	import { Bomb, Check, ChevronsLeftRight, Key, Pizza, Shield, Swords } from 'lucide-svelte';
 
 	const appState = getAppState();
@@ -81,7 +81,7 @@
 	});
 
 	async function getPresetProfiles() {
-		const profiles = await presetsData.getPresetProfiles();
+		const profiles = await presetsData.getPresetProfilesNames();
 		presetOptions = profiles.map((profile) => ({ label: profile, value: profile }));
 	}
 
@@ -272,28 +272,8 @@
 					<span>Clear All</span>
 				{/snippet}
 			</Tooltip>
-			<h6 class="h6">Presets</h6>
-			<div class="flex flex-row items-center space-x-2">
-				<Combobox
-					selectClass="bg-surface-900 max-w-54"
-					options={presetOptions}
-					bind:value={selectedPreset}
-					placeholder="Select a preset"
-				/>
-				<Tooltip>
-					<button
-						class="btn preset-filled-primary-500 hover:preset-tonal-secondary"
-						onclick={applyPreset}
-					>
-						<Check />
-					</button>
-					{#snippet popup()}
-						<span>Apply Preset</span>
-					{/snippet}
-				</Tooltip>
-			</div>
 		</div>
-		<div class="ml-2 grid grid-cols-[auto_1fr] gap-4">
+		<div class="ml-2 grid grid-cols-[auto_1fr_auto] gap-4">
 			<Tabs listBorder="border border-surface-800" listClasses="h-auto" bind:value={group}>
 				{#snippet list()}
 					<Tabs.Control
@@ -374,7 +354,7 @@
 						{/await}
 					</span>
 				</div>
-				<div class="mr-24 flex flex-col space-y-2">
+				<div class="flex flex-col space-y-2">
 					<ItemHeader text="Head" />
 					<ItemBadge bind:slot={headGear} itemGroup="Head" />
 					<ItemHeader text="Body" />
@@ -395,6 +375,7 @@
 					</div>
 				</div>
 			</div>
+			<PlayerPresets />
 		</div>
 	</div>
 {/if}

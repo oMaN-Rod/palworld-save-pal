@@ -5,7 +5,7 @@
 	const { children } = $props();
 </script>
 
-<Toast />
+<Toast position="bottom-center" />
 <Modal>
 	<div class="flex h-[100vh] w-full flex-row overflow-hidden">
 		<NavBar />

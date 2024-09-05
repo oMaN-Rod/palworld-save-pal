@@ -2,64 +2,122 @@
 
 import { ASSET_DATA_PATH } from '$lib/constants';
 import { assetLoader } from '$lib/utils/asset-loader';
+import { persistedState } from '$states/persistedState.svelte';
 import type { ContainerSlot, ItemContainer } from '$types';
 
 export interface PresetProfile {
-    [key: string]: {
-        [key: string]: ContainerSlot[];
-    };
+	name: string;
+	common_container?: ContainerSlot[];
+	essential_container?: ContainerSlot[];
+	weapon_load_out_container?: ContainerSlot[];
+	player_equipment_armor_container?: ContainerSlot[];
+	food_equip_container?: ContainerSlot[];
 }
 
 export class Presets {
-    private presets: PresetProfile = {};
+	private presetsState;
 
-    constructor() {
-        this.initializePresets();
-    }
+	constructor() {
+		this.presetsState = persistedState<PresetProfile[]>('palworld-presets', [], {
+			onParseError: (error) => {
+				console.error('Error parsing presets:', error);
+				this.initializePresets();
+			}
+		});
+		this.initializePresets();
+	}
 
-    private async initializePresets() {
-        this.presets = await assetLoader.loadJson<PresetProfile>(`${ASSET_DATA_PATH}/data/presets.json`);
-    }
+	private async initializePresets() {
+		if (this.presetsState.value.length === 0) {
+			const defaultPresets = await assetLoader.loadJson<PresetProfile[]>(
+				`${ASSET_DATA_PATH}/data/presets.json`
+			);
+			this.presetsState.value = defaultPresets;
+		}
+	}
 
-    async getPresetProfiles(): Promise<string[]> {
-        await this.ensureInitialized();
-        return Object.keys(this.presets);
-    }
+	async getPresetProfiles(): Promise<PresetProfile[]> {
+		await this.ensureInitialized();
+		return this.presetsState.value;
+	}
 
-    async getPresetProfile(profileName: string): Promise<PresetProfile[string] | undefined> {
-        await this.ensureInitialized();
-        return this.presets[profileName];
-    }
+	async getPresetProfilesNames(): Promise<string[]> {
+		await this.ensureInitialized();
+		return this.presetsState.value.map((profile) => profile.name);
+	}
 
-    async applyPreset(profileName: string, containers: Record<string, ItemContainer>): Promise<Record<string, ItemContainer>> {
-        const profile = await this.getPresetProfile(profileName);
-        if (!profile) {
-            throw new Error(`Preset profile "${profileName}" not found`);
-        }
+	async getPresetProfile(profileName: string): Promise<PresetProfile | undefined> {
+		await this.ensureInitialized();
+		return this.presetsState.value.find((profile) => profile.name === profileName);
+	}
 
-        const updatedContainers: Record<string, ItemContainer> = {};
+	async applyPreset(
+		profileName: string,
+		containers: Record<string, ItemContainer>
+	): Promise<Record<string, ItemContainer>> {
+		const profile = await this.getPresetProfile(profileName);
+		if (!profile) {
+			throw new Error(`Preset profile "${profileName}" not found`);
+		}
 
-        for (const [containerName, container] of Object.entries(containers)) {
-            const presetSlots = profile[containerName] || containers[containerName].slots;
-            const updatedSlots = container.slots.map((slot) => {
-                const presetSlot = presetSlots.find(ps => ps.slot_index === slot.slot_index);
-                if (presetSlot) {
-                    return { ...slot, ...presetSlot };
-                }
-                return { ...slot, static_id: 'None', count: 0, dynamic_item: undefined };
-            });
+		const updatedContainers: Record<string, ItemContainer> = {};
 
-            updatedContainers[containerName] = { ...container, slots: updatedSlots };
-        }
+		for (const [containerName, container] of Object.entries(containers)) {
+			const presetSlots = profile[containerName as keyof PresetProfile] || container.slots;
+			const updatedSlots = container.slots.map((slot) => {
+				const presetSlot = (presetSlots as ContainerSlot[])?.find(
+					(ps) => ps.slot_index === slot.slot_index
+				);
+				if (presetSlot) {
+					return { ...slot, ...presetSlot };
+				}
+				return { ...slot, static_id: 'None', count: 0, dynamic_item: undefined };
+			});
 
-        return updatedContainers;
-    }
+			updatedContainers[containerName] = { ...container, slots: updatedSlots };
+		}
 
-    private async ensureInitialized() {
-        if (Object.keys(this.presets).length === 0) {
-            await this.initializePresets();
-        }
-    }
+		return updatedContainers;
+	}
+
+	async addPresetProfile(profile: PresetProfile) {
+		await this.ensureInitialized();
+		this.presetsState.value = [...this.presetsState.value, profile];
+		return this.presetsState.value;
+	}
+
+	async changeProfileName(oldProfileName: string, newProfileName: string) {
+		await this.ensureInitialized();
+		const profile = this.presetsState.value.find((profile) => profile.name === oldProfileName);
+		if (profile) {
+			profile.name = newProfileName;
+		}
+		return this.presetsState.value;
+	}
+
+	async clone(profileName: string, newProfileName: string) {
+		await this.ensureInitialized();
+		const profile = this.presetsState.value.find((profile) => profile.name === profileName);
+		if (profile) {
+			const newProfile = { ...profile, name: newProfileName };
+			this.presetsState.value = [...this.presetsState.value, newProfile];
+		}
+		return this.presetsState.value;
+	}
+
+	async removePresetProfiles(profileNames: string[]) {
+		await this.ensureInitialized();
+		this.presetsState.value = this.presetsState.value.filter(
+			(profile) => !profileNames.includes(profile.name)
+		);
+		return this.presetsState.value;
+	}
+
+	private async ensureInitialized() {
+		if (this.presetsState.value.length === 0) {
+			await this.initializePresets();
+		}
+	}
 }
 
 export const presetsData = new Presets();
