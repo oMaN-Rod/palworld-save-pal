@@ -135,40 +135,39 @@
 
 	async function handleItemSelect() {
 		// @ts-ignore
-		const result = (await modal.showModal(ItemSelectModal, {
+		const result = await modal.showModal<[string, number]>(ItemSelectModal, {
 			group: itemGroup,
 			itemId: slot.static_id,
 			count: !slot.count || slot.count == 0 ? 1 : slot.count,
 			title: 'Select Item'
-		})) as [string, number] | undefined;
-		if (result) {
-			const [static_id, count] = result;
-			slot.static_id = !static_id ? 'None' : static_id;
-			slot.count = count;
-			if (slot.static_id == 'None') {
-				slot.dynamic_item = undefined;
-				item = undefined;
-				icon = undefined;
-				dynamic = undefined;
-				return;
-			}
-			const itemData = await getItemData(static_id);
-			if (itemData?.details.dynamic) {
-				if (!slot.dynamic_item) {
-					slot.dynamic_item = {
-						local_id: '00000000-0000-0000-0000-000000000000',
-						durability: itemData.details.dynamic.durability,
-						remaining_bullets: itemData.details.dynamic.magazine_size,
-						type: itemData.details.dynamic.type
-					};
-				} else {
-					slot.dynamic_item.durability = itemData.details.dynamic.durability;
-					slot.dynamic_item.remaining_bullets = itemData.details.dynamic.magazine_size;
-					slot.dynamic_item.type = itemData.details.dynamic.type;
-				}
-			}
-			initItem(static_id);
+		});
+		if (!result) return;
+		const [static_id, count] = result;
+		slot.static_id = !static_id ? 'None' : static_id;
+		slot.count = count;
+		if (slot.static_id == 'None') {
+			slot.dynamic_item = undefined;
+			item = undefined;
+			icon = undefined;
+			dynamic = undefined;
+			return;
 		}
+		const itemData = await getItemData(static_id);
+		if (itemData?.details.dynamic) {
+			if (!slot.dynamic_item) {
+				slot.dynamic_item = {
+					local_id: '00000000-0000-0000-0000-000000000000',
+					durability: itemData.details.dynamic.durability,
+					remaining_bullets: itemData.details.dynamic.magazine_size,
+					type: itemData.details.dynamic.type
+				};
+			} else {
+				slot.dynamic_item.durability = itemData.details.dynamic.durability;
+				slot.dynamic_item.remaining_bullets = itemData.details.dynamic.magazine_size;
+				slot.dynamic_item.type = itemData.details.dynamic.type;
+			}
+		}
+		initItem(static_id);
 	}
 
 	$effect(() => {

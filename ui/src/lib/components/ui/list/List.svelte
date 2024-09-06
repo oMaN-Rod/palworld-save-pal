@@ -11,7 +11,6 @@
 		listClass: _listClass = '',
 		itemClass: _itemClass = '',
 		headerClass: _headerClass = 'grid-cols-[auto_55px_auto_1fr_auto]',
-		itemsKey = 'instance_id',
 		multiple = true,
 		listItem,
 		listItemActions,
@@ -26,7 +25,6 @@
 		listClass?: string;
 		itemClass?: string;
 		headerClass?: string;
-		itemsKey?: string;
 		multiple?: boolean;
 		listItem: Snippet<[T]>;
 		listItemActions?: Snippet<[T]>;
@@ -35,10 +33,10 @@
 		onselect?: (item: any) => void;
 	}>();
 
-	const baseClass = $derived(cn('h-[calc(100vh-200px)] overflow-hidden', _baseClass));
+	const baseClass = $derived(cn('flex flex-col', _baseClass));
 	const listClass = $derived(
 		cn(
-			'list w-full h-full border-surface-900 border divide-y divide-surface-900 overflow-y-auto',
+			'list flex-grow overflow-y-auto border-surface-900 border divide-y divide-surface-900',
 			_listClass
 		)
 	);
@@ -58,7 +56,8 @@
 		}
 	}
 
-	function handleCheckboxChange(item: any, isChecked: boolean) {
+	function handleCheckboxChange(item: any, event: Event) {
+		const isChecked = (event.target as HTMLInputElement).checked;
 		if (isChecked) {
 			processItem(item);
 		} else {
@@ -67,14 +66,17 @@
 	}
 
 	function handleSelectAll() {
+		console.log('selectAll', selectAll);
 		selectedItem = {};
 		selectedItems = [];
 		if (selectAll) {
 			selectedItems = items;
 		}
+		console.log('selectedItems', JSON.stringify(selectedItems, null, 2));
+		console.log('items', JSON.stringify(items, null, 2));
 	}
 
-	function handleItemSelect(item: any) {
+	function handleItemSelect(event: Event, item: any) {
 		onselect(item);
 		selectedItem = item;
 	}
@@ -84,7 +86,7 @@
 		item: any
 	): any {
 		if (event.key === 'Enter' || event.key === ' ') {
-			handleItemSelect(item);
+			handleItemSelect(event, item);
 		}
 	}
 
@@ -94,18 +96,18 @@
 </script>
 
 <div class={baseClass}>
+	<div class="bg-surface-900 sticky top-0 z-10 flex-shrink-0 p-2">
+		<div class={headerClass}>
+			<Checkbox bind:checked={selectAll} onchange={handleSelectAll} />
+			{@render listHeader()}
+		</div>
+	</div>
 	<ul class={listClass}>
-		<li class="bg-surface-900 sticky top-0 flex list-item cursor-pointer items-center p-2">
-			<div class={headerClass}>
-				<Checkbox bind:checked={selectAll} onchange={handleSelectAll} />
-				{@render listHeader()}
-			</div>
-		</li>
 		{#each items as item}
 			<li class={cn(itemClass, isSelected(item) ? 'bg-secondary-500/25' : '')}>
 				<Checkbox
 					checked={selectedItems.includes(item)}
-					onchange={(isChecked) => handleCheckboxChange(item, isChecked)}
+					onchange={(event) => handleCheckboxChange(item, event)}
 					class="mr-2"
 				/>
 				<Tooltip
@@ -116,7 +118,7 @@
 					<div class="flex w-full flex-row">
 						<button
 							class="flex w-full items-center text-left"
-							onclick={() => handleItemSelect(item)}
+							onclick={(event) => handleItemSelect(event, item)}
 							onkeydown={(event) => handleKeyDown(event, item)}
 						>
 							{@render listItem(item)}

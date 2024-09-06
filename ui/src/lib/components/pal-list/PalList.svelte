@@ -45,6 +45,8 @@
 	let alphaIcon: string = $state('');
 	let foodIcon: string = $state('');
 	let hpIcon: string = $state('');
+	let containerRef: HTMLDivElement;
+	let listWrapperStyle = $state('');
 
 	const sortByLevelAscClass = $derived(
 		cn('btn', sortBy === 'level' && sortOrder === 'asc' ? 'bg-secondary-500/25' : '')
@@ -73,6 +75,15 @@
 		cn('btn', selectedFilter === element ? 'bg-secondary-500/25' : '');
 
 	const debouncedFilterPals = debounce(filterPals, 300);
+
+	function calculateHeight() {
+		if (containerRef) {
+			const rect = containerRef.getBoundingClientRect();
+			const windowHeight = window.innerHeight;
+			const listHeight = windowHeight - rect.top - 110;
+			listWrapperStyle = `height: ${listHeight}px;`;
+		}
+	}
 
 	async function filterPals() {
 		if (!appState.selectedPlayer || !appState.selectedPlayer.pals) return;
@@ -187,7 +198,7 @@
 	async function handleAddPal() {
 		if (!appState.selectedPlayer) return;
 		// @ts-ignore
-		const [selectedPal, nickname] = await modal.showModal(PalSelectModal, {
+		const [selectedPal, nickname] = await modal.showModal<string>(PalSelectModal, {
 			title: 'Add a new Pal'
 		});
 		const message = {
@@ -199,9 +210,6 @@
 			}
 		};
 		ws.send(JSON.stringify(message));
-		if (selectedPal) {
-			console.log('Selected Pal:', selectedPal);
-		}
 	}
 
 	function sortByName(order: string) {
@@ -265,11 +273,10 @@
 	}
 
 	async function deleteSelectedPals() {
-		const numOfSelectedPals = selectedPals.length;
-		if (numOfSelectedPals === 0) return;
+		if (selectedPals.length === 0) return;
 		const confirmed = await modal.showConfirmModal({
 			title: 'Delete Pal(s)',
-			message: `Are you sure you want to delete the ${numOfSelectedPals} selected pal${numOfSelectedPals == 1 ? '' : 's'}?`,
+			message: `Are you sure you want to delete the ${selectedPals.length} selected pal${selectedPals.length == 1 ? '' : 's'}?`,
 			confirmText: 'Delete',
 			cancelText: 'Cancel'
 		});
@@ -294,6 +301,7 @@
 	$effect(() => {
 		loadElementTypes();
 		loadStaticIcons();
+		calculateHeight();
 	});
 
 	$effect(() => {
@@ -324,8 +332,8 @@
 	});
 </script>
 
-<div class="flex w-full flex-col space-y-2" {...additionalProps}>
-	<div class="w-full">
+<div class="flex h-full w-full flex-col space-y-2" bind:this={containerRef} {...additionalProps}>
+	<div class="flex-shrink-0">
 		<div class="btn-group bg-surface-900 mb-2 items-center rounded p-1">
 			<Tooltip position="right">
 				<button class="btn hover:preset-tonal-secondary p-2" onclick={handleAddPal}>
@@ -495,71 +503,79 @@
 			</Accordion.Item>
 		</Accordion>
 	</div>
-	<List items={filteredPals} onselect={handlePalSelect} bind:selectedItems={selectedPals}>
-		{#snippet listHeader()}
-			<div>
-				<span class="font-bold">Level</span>
-			</div>
-			<div class="bg-surface-900 z-50 w-[55px]"></div>
-			<div class="flex justify-start">
-				<span class="font-bold">Name</span>
-			</div>
-			<div class="flex justify-end">
-				<span class="font-bold">Element</span>
-			</div>
-		{/snippet}
-		{#snippet listItem(pal)}
-			<div class="grid w-full grid-cols-[55px_auto_1fr_auto] gap-2">
+	<div class="overflow-hidden" style={listWrapperStyle}>
+		<List
+			baseClass="h-full"
+			items={filteredPals}
+			onselect={handlePalSelect}
+			bind:selectedItems={selectedPals}
+		>
+			{#snippet listHeader()}
 				<div>
-					<span class="font-bold">Lvl {pal.level}</span>
+					<span class="font-bold">Level</span>
 				</div>
-				<div class="relative justify-start">
-					{#if pal.is_boss}
-						{#if alphaIcon}
-							<div class="absolute -left-2 -top-1 h-5 w-5">
-								<enhanced:img src={alphaIcon} alt="Aplha" class="pal-element-badge"></enhanced:img>
-							</div>
-						{/if}
-					{/if}
-					{#if pal.is_lucky}
-						<div class="absolute -left-2 -top-1 h-5 w-5">✨</div>
-					{/if}
-					{#await getPalIcon(pal.instance_id) then icon}
-						{#if icon}
-							<enhanced:img src={icon} alt={pal.name} class="h-8 w-8"></enhanced:img>
-						{/if}
-					{/await}
-					{#await getGenderIcon(pal.gender) then icon}
-						{#if icon}
-							{@const color =
-								pal.gender == PalGender.MALE ? 'text-primary-300' : 'text-tertiary-300'}
-							<div class={cn('absolute -right-4 -top-1 h-5 w-5', color)}>
-								{@html icon}
-							</div>
-						{/if}
-					{/await}
-				</div>
-				<div class="ml-4 flex flex-row justify-start">
-					<div>{pal.nickname || pal.name}</div>
+				<div class="bg-surface-900 z-50 w-[55px]"></div>
+				<div class="flex justify-start">
+					<span class="font-bold">Name</span>
 				</div>
 				<div class="flex justify-end">
-					{#if pal.character_id && pal.elements}
-						{#each pal.elements as elementType}
-							{#await getPalElementBadge(elementType) then icon}
-								{#if icon}
-									<enhanced:img src={icon} alt={elementType} class="pal-element-badge"
-									></enhanced:img>
-								{/if}
-							{/await}
-						{/each}
-					{/if}
+					<span class="font-bold">Element</span>
 				</div>
-			</div>
-		{/snippet}
-		{#snippet listItemPopup(pal)}
-			<HealthBadge {pal} player={appState.selectedPlayer} />
-		{/snippet}
-	</List>
+			{/snippet}
+			{#snippet listItem(pal)}
+				<div class="grid w-full grid-cols-[55px_auto_1fr_auto] gap-2">
+					<div>
+						<span class="font-bold">Lvl {pal.level}</span>
+					</div>
+					<div class="relative justify-start">
+						{#if pal.is_boss}
+							{#if alphaIcon}
+								<div class="absolute -left-2 -top-1 h-5 w-5">
+									<enhanced:img src={alphaIcon} alt="Aplha" class="pal-element-badge"
+									></enhanced:img>
+								</div>
+							{/if}
+						{/if}
+						{#if pal.is_lucky}
+							<div class="absolute -left-2 -top-1 h-5 w-5">✨</div>
+						{/if}
+						{#await getPalIcon(pal.instance_id) then icon}
+							{#if icon}
+								<enhanced:img src={icon} alt={pal.name} class="h-8 w-8"></enhanced:img>
+							{/if}
+						{/await}
+						{#await getGenderIcon(pal.gender) then icon}
+							{#if icon}
+								{@const color =
+									pal.gender == PalGender.MALE ? 'text-primary-300' : 'text-tertiary-300'}
+								<div class={cn('absolute -right-4 -top-1 h-5 w-5', color)}>
+									{@html icon}
+								</div>
+							{/if}
+						{/await}
+					</div>
+					<div class="ml-4 flex flex-row justify-start">
+						<div>{pal.nickname || pal.name}</div>
+					</div>
+					<div class="flex justify-end">
+						{#if pal.character_id && pal.elements}
+							{#each pal.elements as elementType}
+								{#await getPalElementBadge(elementType) then icon}
+									{#if icon}
+										<enhanced:img src={icon} alt={elementType} class="pal-element-badge"
+										></enhanced:img>
+									{/if}
+								{/await}
+							{/each}
+						{/if}
+					</div>
+				</div>
+			{/snippet}
+			{#snippet listItemPopup(pal)}
+				<HealthBadge {pal} player={appState.selectedPlayer} />
+			{/snippet}
+		</List>
+	</div>
 </div>
 
 <style>

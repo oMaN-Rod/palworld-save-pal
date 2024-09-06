@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-	@apply bg-surface-950;
+	@apply bg-surface-950 h-full overflow-hidden;
 }
 
 .floating {

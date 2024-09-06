@@ -33,14 +33,13 @@
 
 	async function handleSelectSkill() {
 		// @ts-ignore
-		const result = await modal.showModal(SkillSelectModal, {
+		const result = await modal.showModal<string>(SkillSelectModal, {
 			type: 'Passive',
 			value: skill,
 			title: 'Select Passive Skill'
 		});
-		if (result) {
-			onSkillUpdate(result, skill);
-		}
+		if (!result) return;
+		onSkillUpdate(result, skill);
 	}
 </script>
 

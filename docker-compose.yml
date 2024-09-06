@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   backend:
     build:
@@ -8,11 +6,8 @@ services:
     ports:
       - "5174:5174"
     volumes:
-      - ./static:/app/static
+      - ./build:/app/build
       - ./palworld_save_pal:/app/palworld_save_pal
     environment:
       - PORT=5174
     command: python psp.py
-
-volumes:
-  static:

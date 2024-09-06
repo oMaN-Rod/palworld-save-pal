@@ -76,41 +76,49 @@
 	});
 </script>
 
-<div class="flex w-full">
-	<div class="grid w-full" style="grid-template-columns: var(--drawer-width) 1fr;">
+<div class="flex h-full w-full overflow-hidden">
+	<div class="grid h-full w-full" style="grid-template-columns: var(--drawer-width) 1fr;">
 		{#if appState.saveFile}
 			<Drawer initiallyExpanded={true}>
-				<div class="flex flex-row">
-					<PlayerList />
-					{#if (appState.modifiedPals && Object.keys(appState.modifiedPals).length > 0) || (appState.modifiedPlayers && Object.keys(appState.modifiedPlayers).length > 0)}
-						<div class="mr-0 flex items-end justify-end pb-2 pr-0">
-							<Tooltip>
-								<button class="btn" onclick={handleSaveState}>
-									<SaveAll class="text-primary-500 mr-2" size="32" />
-								</button>
-								{#snippet popup()}
-									<span>Save all changes</span>
-								{/snippet}
-							</Tooltip>
+				<div class="flex h-full flex-col">
+					<div class="flex flex-shrink-0 flex-row">
+						<PlayerList />
+						{#if (appState.modifiedPals && Object.keys(appState.modifiedPals).length > 0) || (appState.modifiedPlayers && Object.keys(appState.modifiedPlayers).length > 0)}
+							<div class="mr-0 flex items-end justify-end pb-2 pr-0">
+								<Tooltip>
+									<button class="btn" onclick={handleSaveState}>
+										<SaveAll class="text-primary-500 mr-2" size="32" />
+									</button>
+									{#snippet popup()}
+										<span>Save all changes</span>
+									{/snippet}
+								</Tooltip>
+							</div>
+						{/if}
+					</div>
+					{#if appState.selectedPlayer}
+						<div class="overflow-hideen flex-grow">
+							<PalList />
 						</div>
 					{/if}
 				</div>
-				{#if appState.selectedPlayer}
-					<PalList />
-				{/if}
 			</Drawer>
-			<Tabs listJustify="justify-center" bind:value={group}>
+			<Tabs listJustify="justify-center" bind:value={group} class="flex h-full flex-col">
 				{#snippet list()}
-					<Tabs.Control value="player">Player</Tabs.Control>
-					<Tabs.Control value="pal">Pal</Tabs.Control>
+					<div class="flex-shrink-0">
+						<Tabs.Control value="player">Player</Tabs.Control>
+						<Tabs.Control value="pal">Pal</Tabs.Control>
+					</div>
 				{/snippet}
 				{#snippet content()}
-					<Tabs.Panel value="player">
-						<PlayerEdit />
-					</Tabs.Panel>
-					<Tabs.Panel value="pal">
-						<PalEdit />
-					</Tabs.Panel>
+					<div class="flex-grow overflow-hidden">
+						<Tabs.Panel value="player" class="h-full">
+							<PlayerEdit />
+						</Tabs.Panel>
+						<Tabs.Panel value="pal" class="h-full">
+							<PalEdit />
+						</Tabs.Panel>
+					</div>
 				{/snippet}
 			</Tabs>
 		{/if}

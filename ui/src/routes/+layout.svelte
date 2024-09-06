@@ -7,8 +7,10 @@
 
 <Toast position="bottom-center" />
 <Modal>
-	<div class="flex h-[100vh] w-full flex-row overflow-hidden">
+	<div class="flex h-screen w-full overflow-hidden">
 		<NavBar />
-		{@render children()}
+		<main class="flex-1 overflow-hidden">
+			{@render children()}
+		</main>
 	</div>
 </Modal>

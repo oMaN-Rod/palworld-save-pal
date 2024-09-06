@@ -102,15 +102,15 @@
 	async function handleEditNickname() {
 		if (!appState.selectedPal) return;
 		// @ts-ignore
-		const result = await modal.showModal(TextInputModal, {
+		const result = await modal.showModal<string>(TextInputModal, {
 			title: 'Edit nickname',
 			value: appState.selectedPal.nickname || appState.selectedPal.name
 		});
 		if (!result) return;
-		appState.selectedPal.nickname = result as string;
+		appState.selectedPal.nickname = result;
 		appState.selectedPal.state = EntryState.MODIFIED;
 		if (appState.selectedPlayer && appState.selectedPlayer.pals)
-			appState.selectedPlayer.pals[appState.selectedPal.instance_id].nickname = result as string;
+			appState.selectedPlayer.pals[appState.selectedPal.instance_id].nickname = result;
 	}
 
 	async function handleMaxOutPal() {
@@ -299,7 +299,7 @@
 </script>
 
 {#if appState.selectedPal}
-	<div class="flex h-full p-2">
+	<div class="flex h-full overflow-auto p-2">
 		<div class="flex flex-grow flex-col">
 			<div class="flex-shrink-0">
 				<div

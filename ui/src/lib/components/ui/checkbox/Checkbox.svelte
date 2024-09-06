@@ -6,19 +6,13 @@
 		checked = $bindable(false),
 		label = '',
 		class: className = '',
-		onchange = (checked: boolean) => {}
+		onchange = () => {}
 	} = $props<{
 		checked?: boolean;
 		label?: string;
 		class?: string;
-		onchange?: (checked: boolean) => void;
+		onchange?: (event: Event) => void;
 	}>();
-
-	function handleChange(event: Event) {
-		const isChecked = (event.target as HTMLInputElement).checked;
-		checked = isChecked;
-		onchange(isChecked);
-	}
 </script>
 
 <label class={cn('flex cursor-pointer items-center space-x-2', className)}>
@@ -35,5 +29,5 @@
 	{#if label}
 		<span>{label}</span>
 	{/if}
-	<input type="checkbox" class="sr-only" {checked} onchange={handleChange} />
+	<input type="checkbox" aria-hidden="true" style="display: none;" bind:checked {onchange} />
 </label>

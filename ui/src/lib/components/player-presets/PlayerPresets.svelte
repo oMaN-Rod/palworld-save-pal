@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { TextInputModal } from '$components/modals';
-	import { ItemHeader, List, Tooltip } from '$components/ui';
+	import { List, Tooltip } from '$components/ui';
 	import { presetsData, itemsData } from '$lib/data';
 	import type { PresetProfile } from '$lib/data/presets';
 	import { getAppState, getModalState } from '$states';
@@ -14,6 +14,17 @@
 	let selectedPreset: PresetProfile = $state({ name: '' });
 	let selectedPresets: PresetProfile[] = $state([]);
 	let presets: PresetProfile[] = $state([]);
+	let containerRef: HTMLDivElement;
+	let listWrapperStyle = $state('');
+
+	function calculateHeight() {
+		if (containerRef) {
+			const rect = containerRef.getBoundingClientRect();
+			const windowHeight = window.innerHeight;
+			const listHeight = windowHeight - rect.top - 60;
+			listWrapperStyle = `height: ${listHeight}px`;
+		}
+	}
 
 	async function getPresetProfiles() {
 		presets = await presetsData.getPresetProfiles();
@@ -21,7 +32,6 @@
 
 	async function handleApplyPreset() {
 		if (!selectedPreset || !appState.selectedPlayer) return;
-		console.log('Applying preset:', selectedPreset);
 		const containers = {
 			common_container: appState.selectedPlayer.common_container,
 			essential_container: appState.selectedPlayer.essential_container,
@@ -31,9 +41,7 @@
 		};
 
 		const updatedContainers = await presetsData.applyPreset(selectedPreset.name, containers);
-		console.log('Updated containers:', updatedContainers);
-		// Update dynamic items
-		for (const [containerName, container] of Object.entries(updatedContainers)) {
+		for (const [_, container] of Object.entries(updatedContainers)) {
 			for (const slot of container.slots) {
 				if (slot.static_id !== 'None') {
 					const itemData = await itemsData.searchItems(slot.static_id);
@@ -68,66 +76,66 @@
 		};
 	}
 
-	$effect(() => {
-		getPresetProfiles();
-	});
-
 	async function handleAddPreset() {
 		if (!appState.selectedPlayer) return;
 		// @ts-ignore
-		const result = (await modal.showModal(TextInputModal, {
+		const result = await modal.showModal<string>(TextInputModal, {
 			title: 'Add preset',
 			value: ''
-		})) as string;
-		if (result) {
-			let newPreset = {
-				name: result,
-				common_container: deepCopy(appState.selectedPlayer.common_container.slots),
-				essential_container: deepCopy(appState.selectedPlayer.essential_container.slots),
-				weapon_load_out_container: deepCopy(
-					appState.selectedPlayer.weapon_load_out_container.slots
-				),
-				player_equipment_armor_container: deepCopy(
-					appState.selectedPlayer.player_equipment_armor_container.slots
-				),
-				food_equip_container: deepCopy(appState.selectedPlayer.food_equip_container.slots)
-			};
-			presets = await presetsData.addPresetProfile(newPreset);
-		}
+		});
+		if (!result) return;
+		let newPreset = {
+			name: result,
+			common_container: deepCopy(appState.selectedPlayer.common_container.slots),
+			essential_container: deepCopy(appState.selectedPlayer.essential_container.slots),
+			weapon_load_out_container: deepCopy(appState.selectedPlayer.weapon_load_out_container.slots),
+			player_equipment_armor_container: deepCopy(
+				appState.selectedPlayer.player_equipment_armor_container.slots
+			),
+			food_equip_container: deepCopy(appState.selectedPlayer.food_equip_container.slots)
+		};
+		presets = await presetsData.addPresetProfile(newPreset);
 	}
 
 	async function handleClonePreset() {
 		if (!selectedPreset) return;
 		// @ts-ignore
-		const result = (await modal.showModal(TextInputModal, {
+		const result = await modal.showModal<string>(TextInputModal, {
 			title: 'Edit preset name',
 			value: selectedPreset.name
-		})) as string;
-		if (result) {
-			console.log('Cloning preset:', selectedPreset);
-			presets = await presetsData.clone(selectedPreset.name, result);
-		}
+		});
+		if (!result) return;
+		presets = await presetsData.clone(selectedPreset.name, result);
 	}
 
 	async function handleDeletePreset() {
 		if (selectedPresets.length === 0) return;
+		// @ts-ignore
+		const result = await modal.showConfirmModal({
+			title: 'Delete presets',
+			message: `Are you sure you want to delete ${selectedPresets.length} preset${selectedPresets.length > 0 ? 's' : ''}?`
+		});
+		if (!result) return;
 		presets = await presetsData.removePresetProfiles(selectedPresets.map((preset) => preset.name));
 	}
 
 	async function handleEditPreset(preset: PresetProfile) {
 		// @ts-ignore
-		const result = (await modal.showModal(TextInputModal, {
+		const result = await modal.showModal<string>(TextInputModal, {
 			title: 'Edit preset name',
 			value: preset.name
-		})) as string;
-		if (result) {
-			console.log('Editing preset:', selectedPreset);
-			presets = await presetsData.changeProfileName(preset.name, result);
-		}
+		});
+		if (!result) return;
+		presets = await presetsData.changeProfileName(preset.name, result);
 	}
+
+	$effect(() => {
+		getPresetProfiles();
+		calculateHeight();
+	});
 </script>
 
-<div class="mr-4 flex min-w-64 max-w-96 flex-col space-y-2">
+<div class="mr-4 flex min-w-64 max-w-96 flex-col space-y-2" bind:this={containerRef}>
 	<div class="btn-group bg-surface-900 items-center rounded p-1">
 		<Tooltip position="left">
 			<button class="btn hover:preset-tonal-secondary p-2" onclick={handleAddPreset}>
@@ -174,73 +182,74 @@
 			</Tooltip>
 		{/if}
 	</div>
-	<List
-		baseClass="bg-surface-800"
-		itemsKey="name"
-		bind:items={presets}
-		bind:selectedItems={selectedPresets}
-		bind:selectedItem={selectedPreset}
-	>
-		{#snippet listHeader()}
-			<div class="flex justify-start">
-				<span class="font-bold">Presets</span>
-			</div>
-		{/snippet}
-		{#snippet listItem(preset)}
-			<span class="grow">{preset.name}</span>
-		{/snippet}
-		{#snippet listItemActions(preset)}
-			<button class="btn" onclick={() => handleEditPreset(preset)}>
-				<Edit class="h-4 w-4" />
-			</button>
-		{/snippet}
-		{#snippet listItemPopup(preset)}
-			{@const commonContainerString =
-				preset.common_container && preset.common_container.length > 0
-					? `${preset.common_container.length} items`
-					: '💩'}
-			{@const essentialContainerString =
-				preset.essential_container && preset.essential_container.length > 0
-					? `${preset.essential_container.length} items`
-					: '💩'}
-			{@const weaponLoadOutContainerString =
-				preset.weapon_load_out_container && preset.weapon_load_out_container.length > 0
-					? `${preset.weapon_load_out_container.length} items`
-					: '💩'}
-			{@const playerEquipmentArmorContainerString =
-				preset.player_equipment_armor_container &&
-				preset.player_equipment_armor_container.length > 0
-					? `${preset.player_equipment_armor_container.length} items`
-					: '💩'}
-			{@const foodEquipContainerString =
-				preset.food_equip_container && preset.food_equip_container.length > 0
-					? `${preset.food_equip_container.length} items`
-					: '💩'}
-			<div class="flex flex-col">
-				<span class="text-lg font-bold">{preset.name}</span>
-				<div class="flex flex-col space-y-2">
-					<div class="flex justify-between">
-						<span class="mr-2">Common container:</span>
-						<span>{commonContainerString}</span>
-					</div>
-					<div class="flex justify-between">
-						<span class="mr-2">Essential container:</span>
-						<span>{essentialContainerString}</span>
-					</div>
-					<div class="flex justify-between">
-						<span class="mr-2">Weapon load out container:</span>
-						<span>{weaponLoadOutContainerString}</span>
-					</div>
-					<div class="flex justify-between">
-						<span class="mr-2">Player equipment armor container:</span>
-						<span>{playerEquipmentArmorContainerString}</span>
-					</div>
-					<div class="flex justify-between">
-						<span class="mr-2">Food equip container:</span>
-						<span>{foodEquipContainerString}</span>
+	<div class="overflow-hidden" style={listWrapperStyle}>
+		<List
+			baseClass="h-full bg-surface-800"
+			bind:items={presets}
+			bind:selectedItems={selectedPresets}
+			bind:selectedItem={selectedPreset}
+		>
+			{#snippet listHeader()}
+				<div class="flex justify-start">
+					<span class="font-bold">Presets</span>
+				</div>
+			{/snippet}
+			{#snippet listItem(preset)}
+				<span class="grow">{preset.name}</span>
+			{/snippet}
+			{#snippet listItemActions(preset)}
+				<button class="btn" onclick={() => handleEditPreset(preset)}>
+					<Edit class="h-4 w-4" />
+				</button>
+			{/snippet}
+			{#snippet listItemPopup(preset)}
+				{@const commonContainerString =
+					preset.common_container && preset.common_container.length > 0
+						? `${preset.common_container.length} items`
+						: '💩'}
+				{@const essentialContainerString =
+					preset.essential_container && preset.essential_container.length > 0
+						? `${preset.essential_container.length} items`
+						: '💩'}
+				{@const weaponLoadOutContainerString =
+					preset.weapon_load_out_container && preset.weapon_load_out_container.length > 0
+						? `${preset.weapon_load_out_container.length} items`
+						: '💩'}
+				{@const playerEquipmentArmorContainerString =
+					preset.player_equipment_armor_container &&
+					preset.player_equipment_armor_container.length > 0
+						? `${preset.player_equipment_armor_container.length} items`
+						: '💩'}
+				{@const foodEquipContainerString =
+					preset.food_equip_container && preset.food_equip_container.length > 0
+						? `${preset.food_equip_container.length} items`
+						: '💩'}
+				<div class="flex flex-col">
+					<span class="text-lg font-bold">{preset.name}</span>
+					<div class="flex flex-col space-y-2">
+						<div class="flex justify-between">
+							<span class="mr-2">Common container:</span>
+							<span>{commonContainerString}</span>
+						</div>
+						<div class="flex justify-between">
+							<span class="mr-2">Essential container:</span>
+							<span>{essentialContainerString}</span>
+						</div>
+						<div class="flex justify-between">
+							<span class="mr-2">Weapon load out container:</span>
+							<span>{weaponLoadOutContainerString}</span>
+						</div>
+						<div class="flex justify-between">
+							<span class="mr-2">Player equipment armor container:</span>
+							<span>{playerEquipmentArmorContainerString}</span>
+						</div>
+						<div class="flex justify-between">
+							<span class="mr-2">Food equip container:</span>
+							<span>{foodEquipContainerString}</span>
+						</div>
 					</div>
 				</div>
-			</div>
-		{/snippet}
-	</List>
+			{/snippet}
+		</List>
+	</div>
 </div>

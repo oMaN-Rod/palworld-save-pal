@@ -203,7 +203,7 @@
 </script>
 
 {#if appState.selectedPlayer}
-	<div class="flex flex-col">
+	<div class="flex h-full flex-col overflow-auto">
 		<div class="m-2 flex flex-row items-center space-x-2 p-2">
 			<h6 class="h6">Clear</h6>
 			<Tooltip>
@@ -364,7 +364,7 @@
 					<ItemHeader text="Glider" />
 					<ItemBadge bind:slot={gliderGear} itemGroup="Glider" />
 				</div>
-				<div class="col-span-3 ml-12 mt-4 space-y-2">
+				<div class="col-span-3 ml-12 space-y-2">
 					<ItemHeader text="Food" />
 					<div class="ml-2">
 						<div class="flex flex-row space-x-2">

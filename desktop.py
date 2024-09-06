@@ -107,7 +107,7 @@ def start_server(host, port, dev_mode):
     app_state.server_instance.start()
 
 
-def start_webview(url):
+def start_webview(url, debug):
     logger.info("Starting webview with URL: %s", url)
     webview.settings["ALLOW_DOWNLOADS"] = True
     app_state.webview_window = webview.create_window(
@@ -115,9 +115,10 @@ def start_webview(url):
         url,
         width=1366,
         height=768,
+        min_size=(1366, 768),
     )
     app_state.webview_window.events.closed += on_closed
-    webview.start()
+    webview.start(debug=debug)
 
 
 def on_closed():
@@ -159,8 +160,8 @@ def main():
     start_server(args.host, args.port, args.dev)
 
     time.sleep(2)
-
-    start_webview(f"http://{args.host}:{args.port}")
+    url = f"http://{args.host}:{args.port}"
+    start_webview(url, args.dev)
 
     logger.info("Main thread waiting for termination signal")
     app_state.terminate_flag.wait()
