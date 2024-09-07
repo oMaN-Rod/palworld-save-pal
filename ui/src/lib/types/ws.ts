@@ -19,6 +19,7 @@ export enum MessageType {
 	UPDATE_PRESET = 'update_preset',
 	DELETE_PRESET = 'delete_preset',
 	GET_ACTIVE_SKILLS = 'get_active_skills',
+	GET_PASSIVE_SKILLS = 'get_passive_skills',
 }
 
 interface UpdateSaveFileData {

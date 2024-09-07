@@ -75,7 +75,7 @@
 	</button>
 	{#snippet popup()}
 		<div class="p-4">
-			{passiveSkill?.details.description}
+			{passiveSkill?.description}
 		</div>
 	{/snippet}
 </Tooltip>

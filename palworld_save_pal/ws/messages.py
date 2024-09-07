@@ -32,6 +32,7 @@ class MessageType(str, Enum):
     UPDATE_PRESET = "update_preset"
     DELETE_PRESET = "delete_preset"
     GET_ACTIVE_SKILLS = "get_active_skills"
+    GET_PASSIVE_SKILLS = "get_passive_skills"
 
 
 class AddPalData(BaseModel):
@@ -130,3 +131,7 @@ class DeletePresetMessage(BaseMessage):
 
 class GetActiveSkillsMessage(BaseModel):
     type: str = MessageType.GET_ACTIVE_SKILLS.value
+
+
+class GetPassiveSkillsMessage(BaseModel):
+    type: str = MessageType.GET_PASSIVE_SKILLS.value
