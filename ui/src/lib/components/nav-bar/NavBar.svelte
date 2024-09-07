@@ -7,12 +7,12 @@
 	let appState = getAppState();
 </script>
 
-<Nav.Rail width="48px">
+<Nav.Rail width="48px" bind:value={navigationState.activePage}>
 	{#snippet tiles()}
 		{#if appState.saveFile}
 			<Nav.Tile
 				title="Edit"
-				id="0"
+				id="Edit"
 				onclick={() => (navigationState.activePage = 'Edit')}
 				active="bg-secondary-500"
 			>
@@ -21,7 +21,7 @@
 		{/if}
 		<Nav.Tile
 			title="File"
-			id="1"
+			id="File"
 			onclick={() => (navigationState.activePage = 'File')}
 			active="bg-secondary-500"
 		>

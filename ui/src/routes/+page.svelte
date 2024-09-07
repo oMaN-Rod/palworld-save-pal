@@ -5,7 +5,7 @@
 	import Settings from '$lib/pages/Settings.svelte';
 	import File from '$lib/pages/File.svelte';
 	import { Spinner } from '$components';
-	import { MessageType, type Message, type Pal } from '$types';
+	import { MessageType } from '$types';
 	import { palsData } from '$lib/data';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 
@@ -27,7 +27,7 @@
 						async function loadPal() {
 							const palInfo = await palsData.getPalInfo(pal.character_id);
 							pal.name = palInfo?.localized_name || pal.character_id;
-							pal.elements = palInfo?.elements || [];
+							pal.elements = palInfo?.type || [];
 							// @ts-ignore
 							appState.players[player_id].pals[pal.instance_id] = pal;
 							appState.selectedPal = pal;
@@ -78,7 +78,7 @@
 				case MessageType.UPDATE_SAVE_FILE:
 					const updateMessage = data as string;
 					toast.add(updateMessage, 'Success!');
-					appState.selectedPlayer = null;
+					appState.selectedPlayer = undefined;
 					nav.activePage = 'Edit';
 					break;
 			}
