@@ -81,8 +81,7 @@
 	async function getPalElementTypes(character_id: string): Promise<string[] | undefined> {
 		const pal = await palsData.getPalInfo(character_id);
 		if (!pal) return undefined;
-		console.log('Pal elements', pal.elements);
-		return pal.elements.length > 0 ? pal.elements : undefined;
+		return pal.type.length > 0 ? pal.type : undefined;
 	}
 
 	async function getPalElementBadge(elementType: string): Promise<string | undefined> {
@@ -139,9 +138,9 @@
 		if (appState.selectedPal) {
 			const targetSkill = appState.selectedPal.active_skills.findIndex((s) => s === oldSkill);
 			if (targetSkill >= 0) {
-				appState.selectedPal.active_skills[targetSkill] = newSkill.replace('EPalWazaID::', '');
+				appState.selectedPal.active_skills[targetSkill] = newSkill;
 			} else {
-				appState.selectedPal.active_skills.push(newSkill.replace('EPalWazaID::', ''));
+				appState.selectedPal.active_skills.push(newSkill);
 			}
 			appState.selectedPal.state = EntryState.MODIFIED;
 		}

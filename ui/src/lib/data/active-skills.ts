@@ -4,10 +4,12 @@ import { MessageType, type ActiveSkill, type ActiveSkillDetails } from '$types';
 export class ActiveSkills {
     private ws = getSocketState();
     private activeSkills: Record<string, ActiveSkill> = {};
+    private loading = false;
 
     private async ensureActiveSkillsLoaded(): Promise<void> {
-        if (Object.keys(this.activeSkills).length === 0) {
+        if (Object.keys(this.activeSkills).length === 0 && !this.loading) {
             try {
+                this.loading = true;
                 const response = await this.ws.sendAndWait({ 
                     type: MessageType.GET_ACTIVE_SKILLS 
                 });
@@ -15,10 +17,15 @@ export class ActiveSkills {
                     throw new Error(response.data);
                 }
                 this.activeSkills = response.data;
+                this.loading = false;
             } catch (error) {
                 console.error('Error fetching active skills:', error);
                 throw error;
             }
+        }
+        if (this.loading) {
+            await new Promise((resolve) => setTimeout(resolve, 100));
+            await this.ensureActiveSkillsLoaded();
         }
     }
 

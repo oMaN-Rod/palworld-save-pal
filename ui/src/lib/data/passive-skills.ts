@@ -4,10 +4,12 @@ import { MessageType, type PassiveSkill, type PassiveSkillDetails, type Bonuses 
 export class PassiveSkills {
     private ws = getSocketState();
     private passive_skills: Record<string, PassiveSkill> = {};
+    private loading = false;
 
     private async ensurePassiveSkillsLoaded(): Promise<void> {
-        if (Object.keys(this.passive_skills).length === 0) {
+        if (Object.keys(this.passive_skills).length === 0 && !this.loading) {
             try {
+                this.loading = true;
                 const response = await this.ws.sendAndWait({ 
                     type: MessageType.GET_PASSIVE_SKILLS 
                 });
@@ -15,10 +17,15 @@ export class PassiveSkills {
                     throw new Error(response.data);
                 }
                 this.passive_skills = response.data;
+                this.loading = false;
             } catch (error) {
                 console.error('Error fetching passive skills:', error);
                 throw error;
             }
+        }
+        if (this.loading) {
+            await new Promise((resolve) => setTimeout(resolve, 100));
+            await this.ensurePassiveSkillsLoaded();
         }
     }
 

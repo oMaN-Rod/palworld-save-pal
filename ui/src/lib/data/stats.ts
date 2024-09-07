@@ -15,7 +15,7 @@ export async function getStats(pal: Pal, player: Player) {
         console.log('No pal data found');
         return [];
     }
-    if (palData.is_human || palData.is_tower) {
+    if (palData.human || palData.tower) {
         return [];
     }
 

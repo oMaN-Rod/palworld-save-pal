@@ -17,6 +17,7 @@ from palworld_save_pal.ws.messages import (
     GetActiveSkillsMessage,
     GetElementsMessage,
     GetItemsMessage,
+    GetPalsMessage,
     GetPassiveSkillsMessage,
     HealPalsMessage,
     LoadSaveFileMessage,
@@ -169,5 +170,13 @@ def bootstrap(dispatcher: "MessageDispatcher"):
         {
             "message_class": GetItemsMessage,
             "handler_func": items_handler.get_items_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.GET_PALS.value,
+        {
+            "message_class": GetPalsMessage,
+            "handler_func": pal_handler.get_pals_handler,
         },
     )

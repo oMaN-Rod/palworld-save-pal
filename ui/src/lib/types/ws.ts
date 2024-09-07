@@ -22,6 +22,7 @@ export enum MessageType {
 	GET_PASSIVE_SKILLS = 'get_passive_skills',
 	GET_ELEMENTS = 'get_elements',
 	GET_ITEMS = 'get_items',
+	GET_PALS = 'get_pals',
 }
 
 interface UpdateSaveFileData {

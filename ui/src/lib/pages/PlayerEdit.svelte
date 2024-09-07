@@ -1,19 +1,14 @@
 <script lang="ts">
-	import { Combobox, ItemHeader } from '$components/ui';
+	import { ItemHeader } from '$components/ui';
 	import { getAppState } from '$states';
-	import {
-		EntryState,
-		type ItemContainerSlot,
-		type ItemContainer,
-		type SelectOption
-	} from '$types';
+	import { EntryState, type ItemContainerSlot, type ItemContainer } from '$types';
 	import { assetLoader } from '$utils/asset-loader';
 	import { ASSET_DATA_PATH } from '$lib/constants';
-	import { itemsData, presetsData } from '$lib/data';
+	import { itemsData } from '$lib/data';
 	import { Tabs } from '@skeletonlabs/skeleton-svelte';
 	import { Tooltip } from '$components/ui';
 	import { ItemBadge, PlayerPresets } from '$components';
-	import { Bomb, Check, ChevronsLeftRight, Key, Pizza, Shield, Swords } from 'lucide-svelte';
+	import { Bomb, ChevronsLeftRight, Key, Pizza, Shield, Swords } from 'lucide-svelte';
 
 	const appState = getAppState();
 
@@ -53,9 +48,6 @@
 	let accessoryGear: ItemContainerSlot[] = $state([]);
 	let group = $state('inventory');
 
-	let presetOptions: SelectOption[] = $state([]);
-	let selectedPreset = $state('');
-
 	async function getItemIcon(staticId: string) {
 		if (!staticId) return;
 		const itemData = await itemsData.searchItems(staticId);
@@ -67,23 +59,6 @@
 		const icon = await assetLoader.loadImage(iconPath);
 		return icon;
 	}
-
-	$effect(() => {
-		if (appState.selectedPlayer) {
-			commonContainer = appState.selectedPlayer.common_container;
-			weaponLoadOutContainer = appState.selectedPlayer.weapon_load_out_container;
-			playerEquipmentArmorContainer = appState.selectedPlayer.player_equipment_armor_container;
-			headGear = playerEquipmentArmorContainer.slots[0];
-			bodyGear = playerEquipmentArmorContainer.slots[1];
-			shieldGear = playerEquipmentArmorContainer.slots[4];
-			gliderGear = playerEquipmentArmorContainer.slots[5];
-			accessoryGear = playerEquipmentArmorContainer.slots
-				.slice(2, 4)
-				.concat(playerEquipmentArmorContainer.slots.slice(6, 8));
-			foodEquipContainer = appState.selectedPlayer.food_equip_container;
-			essentialContainer = appState.selectedPlayer.essential_container;
-		}
-	});
 
 	function clearCommonContainer() {
 		Object.values(commonContainer.slots).forEach((slot) => {
@@ -147,6 +122,23 @@
 		clearEquipmentArmorContainer();
 		clearFoodEquipContainer();
 	}
+
+	$effect(() => {
+		if (appState.selectedPlayer) {
+			commonContainer = appState.selectedPlayer.common_container;
+			weaponLoadOutContainer = appState.selectedPlayer.weapon_load_out_container;
+			playerEquipmentArmorContainer = appState.selectedPlayer.player_equipment_armor_container;
+			headGear = playerEquipmentArmorContainer.slots[0];
+			bodyGear = playerEquipmentArmorContainer.slots[1];
+			shieldGear = playerEquipmentArmorContainer.slots[4];
+			gliderGear = playerEquipmentArmorContainer.slots[5];
+			accessoryGear = playerEquipmentArmorContainer.slots
+				.slice(2, 4)
+				.concat(playerEquipmentArmorContainer.slots.slice(6, 8));
+			foodEquipContainer = appState.selectedPlayer.food_equip_container;
+			essentialContainer = appState.selectedPlayer.essential_container;
+		}
+	});
 </script>
 
 {#if appState.selectedPlayer}

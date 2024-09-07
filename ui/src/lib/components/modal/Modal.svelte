@@ -34,7 +34,7 @@
 			>
 				×
 			</button>
-			<svelte:component this={modal.component} {...modal.props} closeModal={modal.closeModal} />
+			<modal.component {...modal.props} closeModal={modal.closeModal} />
 		</div>
 	</div>
 {/if}

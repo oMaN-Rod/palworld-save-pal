@@ -6,10 +6,12 @@ import { MessageType, type Element } from '$types';
 export class Elements {
     private ws = getSocketState();
     private elements: Record<string, Element> = {};
+    private loading = false;
 
     private async ensureElementsLoaded(): Promise<void> {
-        if (Object.keys(this.elements).length === 0) {
+        if (Object.keys(this.elements).length === 0 && !this.loading) {
             try {
+                this.loading = true;
                 const response = await this.ws.sendAndWait({ 
                     type: MessageType.GET_ELEMENTS 
                 });
@@ -17,10 +19,15 @@ export class Elements {
                     throw new Error(response.data);
                 }
                 this.elements = response.data;
+                this.loading = false
             } catch (error) {
                 console.error('Error fetching elements:', error);
                 throw error;
             }
+        }
+        if (this.loading) {
+            await new Promise((resolve) => setTimeout(resolve, 100));
+            await this.ensureElementsLoaded();
         }
     }
 

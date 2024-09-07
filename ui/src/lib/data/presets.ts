@@ -3,18 +3,37 @@ import { MessageType, type PresetProfile } from '$types';
 
 export class Presets {
     private ws = getSocketState();
+    private presetProfiles: Record<string, PresetProfile> = {};
+    private loading = false;
 
-    async getPresetProfiles(): Promise<Record<string, PresetProfile>> {
+    private async ensurePresetProfilesLoaded(): Promise<void> {
+        if (Object.keys(this.presetProfiles).length === 0 && !this.loading) {
+            await this.getAllPresets();
+        }
+        if (this.loading) {
+            await new Promise((resolve) => setTimeout(resolve, 100));
+            await this.ensurePresetProfilesLoaded();
+        }
+    }
+
+    async getAllPresets(): Promise<void> {
         try {
+            this.loading = true;
             const response = await this.ws.sendAndWait({ type: MessageType.GET_PRESETS });
             if (response.type === 'error') {
                 throw new Error(response.data);
             }
-            return response.data;
+            this.presetProfiles = response.data;
+            this.loading = false;
         } catch (error) {
             console.error('Error fetching presets:', error);
             throw error;
         }
+    }
+
+    async getPresetProfiles(): Promise<Record<string, PresetProfile>> {
+        await this.ensurePresetProfilesLoaded();
+        return this.presetProfiles;
     }
 
     async addPresetProfile(profile: PresetProfile): Promise<Record<string, PresetProfile>> {
@@ -26,6 +45,7 @@ export class Presets {
             if (response.type === 'error') {
                 throw new Error(response.data);
             }
+            await this.getAllPresets();
             return this.getPresetProfiles();
         } catch (error) {
             console.error('Error adding preset:', error);
@@ -49,6 +69,7 @@ export class Presets {
 				};
                 await this.ws.send(JSON.stringify(message));
             }
+            await this.getAllPresets();
             return this.getPresetProfiles();
         } catch (error) {
             console.error('Error changing profile name:', error);
@@ -67,6 +88,7 @@ export class Presets {
                     data: newProfile 
                 });
             }
+            await this.getAllPresets();
             return this.getPresetProfiles();
         } catch (error) {
             console.error('Error cloning profile:', error);
@@ -81,6 +103,7 @@ export class Presets {
 				data: ids 
 			}
             await this.ws.sendAndWait(message);
+            await this.getAllPresets();
             return this.getPresetProfiles();
         } catch (error) {
             console.error('Error removing preset profiles:', error);

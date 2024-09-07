@@ -7,15 +7,11 @@
 	import { MessageType, type Pal, type Player } from '$types';
 	import { SaveAll } from 'lucide-svelte';
 	import { getAppState, getSocketState, getNavigationState } from '$states';
-	import { activeSkillsData, elementsData, itemsData, passiveSkillsData } from '$lib/data';
 	import { Tabs } from '@skeletonlabs/skeleton-svelte';
 
 	const appState = getAppState();
 	const ws = getSocketState();
 	const nav = getNavigationState();
-
-	let palLevel: string = $state('');
-	let palLevelClass: string = $state('');
 	let group = $state('player');
 
 	interface ModifiedData {
@@ -64,27 +60,6 @@
 		ws.message = { type: MessageType.PROGRESS_MESSAGE, data: `Updating modified ${entityMessage}` };
 		nav.activePage = 'Loading';
 	}
-
-	$effect(() => {
-		const loadData = async () => {
-			await activeSkillsData.getActiveSkills();
-			await passiveSkillsData.getPassiveSkills();
-			await elementsData.getAllElements();
-			await itemsData.getAllItems();
-		};
-		loadData();
-	});
-
-	$effect(() => {
-		if (appState.selectedPlayer && appState.selectedPal) {
-			palLevel =
-				appState.selectedPlayer.level < appState.selectedPal.level
-					? appState.selectedPlayer.level.toString()
-					: appState.selectedPal.level.toString();
-			palLevelClass =
-				appState.selectedPlayer.level < appState.selectedPal.level ? 'text-error-500' : '';
-		}
-	});
 </script>
 
 <div class="flex h-full w-full overflow-hidden">

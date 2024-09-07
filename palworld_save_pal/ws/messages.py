@@ -35,6 +35,7 @@ class MessageType(str, Enum):
     GET_PASSIVE_SKILLS = "get_passive_skills"
     GET_ELEMENTS = "get_elements"
     GET_ITEMS = "get_items"
+    GET_PALS = "get_pals"
 
 
 class AddPalData(BaseModel):
@@ -145,3 +146,7 @@ class GetElementsMessage(BaseModel):
 
 class GetItemsMessage(BaseModel):
     type: str = MessageType.GET_ITEMS.value
+
+
+class GetPalsMessage(BaseModel):
+    type: str = MessageType.GET_PALS.value

@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="ts" generics="T">
 	import { cn } from '$theme';
 	import { nanoid } from 'nanoid';
 
@@ -21,7 +21,7 @@
 		labelTextClass: _labelTextClass = '',
 		placeholder = '',
 		label = '',
-		value = $bindable(''),
+		value = $bindable(),
 		disabled = false,
 		name = nanoid(),
 		autocomplete = undefined,
@@ -38,7 +38,7 @@
 		labelTextClass?: string;
 		placeholder?: string;
 		label?: string;
-		value?: string | number;
+		value?: T;
 		disabled?: boolean;
 		name?: string;
 		autocomplete?: string | null | undefined;

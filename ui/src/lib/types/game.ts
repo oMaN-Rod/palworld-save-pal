@@ -143,12 +143,6 @@ export interface Item {
 	info: ItemInfo;
 }
 
-export type MovesetKey = `EPalWazaID::${string}`;
-
-export type Moveset = {
-	[K in MovesetKey]?: number;
-};
-
 export type Scaling = {
 	hp: number;
 	attack: number;
@@ -161,9 +155,10 @@ export type Suitabilities = {
 
 export interface PalData {
 	code_name: string;
+	localized_name: string;
 	type: ElementType[];
-	skill_set: Moveset;
-	raid_skill_set?: Moveset;
+	skill_set: string[];
+	raid_skill_set?: string[];
 	scaling: Scaling;
 	suitabilities: Suitabilities;
 	tower?: boolean;
@@ -178,7 +173,6 @@ export interface Bonuses {
 }
 
 enum PalGender {
-	UNKNOWN = 'Unknown',
 	MALE = 'Male',
 	FEMALE = 'Female'
 }

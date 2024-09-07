@@ -6,9 +6,10 @@ import { MessageType, type Item, type ItemDetails, type ItemInfo } from '$types'
 export class Items {
     private ws = getSocketState();
     private items: Record<string, Item> = {};
+    private loading = false;
 
     private async ensureItemsLoaded(): Promise<void> {
-        if (Object.keys(this.items).length === 0) {
+        if (Object.keys(this.items).length === 0 && !this.loading) {
             try {
                 const response = await this.ws.sendAndWait({ 
                     type: MessageType.GET_ITEMS 
@@ -21,6 +22,10 @@ export class Items {
                 console.error('Error fetching items:', error);
                 throw error;
             }
+        }
+        if (this.loading) {
+            await new Promise((resolve) => setTimeout(resolve, 100));
+            await this.ensureItemsLoaded();
         }
     }
 

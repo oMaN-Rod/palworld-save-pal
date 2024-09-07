@@ -4,10 +4,12 @@ from fastapi.encoders import jsonable_encoder
 
 from palworld_save_pal.save_file.pal_objects import PalObjects
 from palworld_save_pal.state import get_app_state
+from palworld_save_pal.utils.json_manager import JsonManager
 from palworld_save_pal.ws.messages import (
     AddPalMessage,
     ClonePalMessage,
     DeletePalsMessage,
+    GetPalsMessage,
     HealPalsMessage,
     MessageType,
 )
@@ -15,6 +17,34 @@ from palworld_save_pal.utils.logging_config import create_logger
 from palworld_save_pal.ws.utils import build_response
 
 logger = create_logger(__name__)
+
+pals_json = JsonManager("data/json/pals.json")
+pals_i18n_json = JsonManager("data/json/en-GB/pals.json")
+
+
+async def get_pals_handler(_: GetPalsMessage, ws: WebSocket):
+    logger.info("Processing get_pals request")
+    try:
+        pals_data = pals_json.read()
+        pals_i18n = pals_i18n_json.read()
+
+        combined_pals = []
+        for pal in pals_data["values"]:
+            code_name = pal["code_name"]
+            localized_name = pals_i18n.get(code_name, code_name)
+            combined_pal = {
+                "code_name": code_name,
+                "localized_name": localized_name,
+                **pal,
+            }
+            combined_pals.append(combined_pal)
+
+        response = build_response(MessageType.GET_PALS, combined_pals)
+        await ws.send_json(response)
+    except Exception as e:
+        logger.error("Error getting pals: %s", str(e))
+        response = build_response(MessageType.ERROR, f"Error getting pals: {str(e)}")
+        await ws.send_json(response)
 
 
 async def add_pal_handler(message: AddPalMessage, ws: WebSocket):

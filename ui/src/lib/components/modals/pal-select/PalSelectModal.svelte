@@ -18,7 +18,7 @@
 	async function loadPalOptions() {
 		const allPals = await palsData.getAllPals();
 		selectOptions = allPals
-			.filter((pal) => !pal.is_human && !pal.is_tower)
+			.filter((pal) => !pal.human && !pal.tower)
 			.map((pal) => ({
 				value: pal.code_name,
 				label: pal.localized_name
@@ -60,8 +60,8 @@
 				{/await}
 				<span class="grow">{option.label}</span>
 				{#await palsData.getPalInfo(option.value) then palInfo}
-					{#if palInfo && palInfo.elements.length > 0}
-						{#await getElementIcon(palInfo.elements[0]) then elementIcon}
+					{#if palInfo && palInfo.type.length > 0}
+						{#await getElementIcon(palInfo.type[0]) then elementIcon}
 							{#if elementIcon}
 								<enhanced:img src={elementIcon} alt="Element" class="h-6 w-6"></enhanced:img>
 							{/if}

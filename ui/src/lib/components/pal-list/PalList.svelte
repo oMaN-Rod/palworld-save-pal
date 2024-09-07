@@ -34,26 +34,33 @@
 		[key: string]: any;
 	}>();
 
-	type PalWithInfo = {
+	type PalWithData = {
 		id: string;
 		pal: Pal;
-		palInfo: any;
+		palData: any;
 	};
 
 	let searchQuery = $state('');
 	let selectedFilter = $state('All');
 	let elementTypes: string[] = $state([]);
+	let elementBadges: Record<string, string> = $state({});
 	let elementIcons: Record<string, string> = $state({});
-	let filteredPals: Pal[] = $state([]);
+	let genderIcons: Record<PalGender, string> = $state({
+		[PalGender.MALE]: '',
+		[PalGender.FEMALE]: ''
+	});
+	let pals: PalWithData[] = $state([]);
+	let filteredPals: PalWithData[] = $state([]);
+	let selectedPals: PalWithData[] = $state([]);
+	let selectedPal: PalWithData | undefined = $state(undefined);
+	let palMenuIcons: Record<string, string> = $state({});
 	let sortBy: SortBy | undefined = $state(undefined);
 	let sortOrder: SortOrder | undefined = $state(undefined);
-	let selectedPals: Pal[] = $state([]);
 	let alphaIcon: string = $state('');
 	let foodIcon: string = $state('');
 	let hpIcon: string = $state('');
 	let containerRef: HTMLDivElement;
 	let listWrapperStyle = $state('');
-	let palsInfo: PalWithInfo[] = $state([]);
 	let selectAll: boolean = $state(false);
 
 	const sortByLevelAscClass = $derived(
@@ -96,35 +103,33 @@
 	async function getPalsInfo() {
 		if (!appState.selectedPlayer || !appState.selectedPlayer.pals) return;
 
-		const pals = Object.entries(appState.selectedPlayer.pals as Record<string, Pal>);
-		palsInfo = await Promise.all(
-			pals.map(async ([id, pal]) => {
-				const palInfo = await palsData.getPalInfo(pal.character_id);
+		const playerPals = Object.entries(appState.selectedPlayer.pals as Record<string, Pal>);
+		pals = await Promise.all(
+			playerPals.map(async ([id, pal]) => {
+				const palData = await palsData.getPalInfo(pal.character_id);
 				await getStats(pal, appState.selectedPlayer as Player);
-				return { id, pal, palInfo };
+				return { id, pal, palData };
 			})
 		);
 	}
 
 	async function filterPals() {
-		if (!palsInfo) return;
+		if (!pals) return;
 		selectedPals = [];
-		filteredPals = palsInfo
-			.filter(({ pal, palInfo }) => {
-				const matchesSearch =
-					pal.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-					pal.nickname?.toLowerCase().includes(searchQuery.toLowerCase());
-				const matchesElement =
-					selectedFilter === 'All' ||
-					selectedFilter === 'alpha' ||
-					selectedFilter === 'lucky' ||
-					(palInfo &&
-						palInfo.elements.map((e) => e.toLowerCase()).includes(selectedFilter.toLowerCase()));
-				const matchesAlpha = selectedFilter === 'alpha' ? pal.is_boss : true;
-				const matchesLucky = selectedFilter === 'lucky' ? pal.is_lucky : true;
-				return matchesSearch && matchesElement && matchesAlpha && matchesLucky;
-			})
-			.map(({ id, pal }) => ({ id, ...pal }));
+		filteredPals = pals.filter(({ pal, palData }) => {
+			const matchesSearch =
+				pal.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+				pal.nickname?.toLowerCase().includes(searchQuery.toLowerCase());
+			const matchesElement =
+				selectedFilter === 'All' ||
+				selectedFilter === 'alpha' ||
+				selectedFilter === 'lucky' ||
+				(palData &&
+					palData.type.map((e: string) => e.toLowerCase()).includes(selectedFilter.toLowerCase()));
+			const matchesAlpha = selectedFilter === 'alpha' ? pal.is_boss : true;
+			const matchesLucky = selectedFilter === 'lucky' ? pal.is_lucky : true;
+			return matchesSearch && matchesElement && matchesAlpha && matchesLucky;
+		});
 
 		if (sortBy && sortOrder) {
 			handleSort(sortBy, sortOrder);
@@ -142,24 +147,27 @@
 		}
 	}
 
-	function handlePalSelect(pal: Pal) {
+	function handlePalSelect(p: PalWithData) {
 		if (appState.selectedPlayer && appState.selectedPlayer.pals) {
-			appState.selectedPal = appState.selectedPlayer.pals[pal.instance_id];
+			appState.selectedPal = appState.selectedPlayer.pals[p.pal.instance_id];
 		}
 	}
 
 	async function loadStaticIcons() {
 		const iconPath = `${ASSET_DATA_PATH}/img/icons/Alpha.png`;
-		const icon = await assetLoader.loadImage(iconPath);
-		alphaIcon = icon;
+		alphaIcon = await assetLoader.loadImage(iconPath);
 
 		const foodPath = `${ASSET_DATA_PATH}/img/icons/Food.png`;
-		const food = await assetLoader.loadImage(foodPath);
-		foodIcon = food;
+		foodIcon = await assetLoader.loadImage(foodPath);
 
 		const hpPath = `${ASSET_DATA_PATH}/img/icons/Heart.png`;
-		const hp = await assetLoader.loadImage(hpPath);
-		hpIcon = hp;
+		hpIcon = await assetLoader.loadImage(hpPath);
+
+		const malePath = `${ASSET_DATA_PATH}/img/icons/${PalGender.MALE.toLowerCase()}.svg`;
+		genderIcons[PalGender.MALE] = await assetLoader.loadSvg(malePath);
+
+		const femalePath = `${ASSET_DATA_PATH}/img/icons/${PalGender.FEMALE.toLowerCase()}.svg`;
+		genderIcons[PalGender.FEMALE] = await assetLoader.loadSvg(femalePath);
 	}
 
 	async function loadElementTypes() {
@@ -170,8 +178,10 @@
 		for (const elementType of elementTypes) {
 			const elementObj = await elementsData.searchElement(elementType);
 			if (elementObj) {
-				const iconPath = `${ASSET_DATA_PATH}/img/elements/${elementObj.badge_icon}.png`;
+				const badgePath = `${ASSET_DATA_PATH}/img/elements/${elementObj.badge_icon}.png`;
+				const iconPath = `${ASSET_DATA_PATH}/img/elements/${elementObj.icon}.png`;
 				try {
+					elementBadges[elementType] = await assetLoader.loadImage(badgePath, true);
 					elementIcons[elementType] = await assetLoader.loadImage(iconPath, true);
 				} catch (error) {
 					console.error(`Failed to load icon for ${elementType}:`, error);
@@ -180,29 +190,23 @@
 		}
 	}
 
-	async function getPalElementBadge(elementType: string): Promise<string | undefined> {
-		const elementObj = await elementsData.searchElement(elementType);
-		if (!elementObj) return undefined;
-		const icon_path = `${ASSET_DATA_PATH}/img/elements/${elementObj.badge_icon}.png`;
-		const icon = await assetLoader.loadImage(icon_path, true);
-		return icon;
+	function getElementBadge(elementType: string): string | undefined {
+		return elementBadges[elementType];
 	}
 
-	async function getPalElementIcon(elementType: string): Promise<string | undefined> {
-		const elementObj = await elementsData.searchElement(elementType);
-		if (!elementObj) return undefined;
-		const icon_path = `${ASSET_DATA_PATH}/img/elements/${elementObj.icon}.png`;
-		const icon = await assetLoader.loadImage(icon_path, true);
-		return icon;
+	function getElementIcon(elementType: string): string | undefined {
+		return elementIcons[elementType];
 	}
 
-	async function getPalIcon(palId: string): Promise<string | undefined> {
+	async function getPalMenuIcon(palId: string): Promise<string | undefined> {
 		if (!appState.selectedPlayer || !appState.selectedPlayer.pals) return undefined;
 		const pal = appState.selectedPlayer.pals[palId];
 		if (!pal) return undefined;
+		if (palMenuIcons[pal.character_id]) return palMenuIcons[pal.character_id];
 		const palImgName = pal.name.toLowerCase().replaceAll(' ', '_');
 		const icon_path = `${ASSET_DATA_PATH}/img/pals/menu/${palImgName}_menu.png`;
 		const icon = await assetLoader.loadImage(icon_path, true);
+		palMenuIcons[pal.character_id] = icon;
 		return icon;
 	}
 
@@ -226,10 +230,10 @@
 	function sortByName(order: string) {
 		sortBy = 'name';
 		if (order === 'asc') {
-			filteredPals = filteredPals.sort((a, b) => a.name.localeCompare(b.name));
+			filteredPals = filteredPals.sort((a, b) => a.pal.name.localeCompare(b.pal.name));
 			sortOrder = 'asc';
 		} else if (order === 'desc') {
-			filteredPals = filteredPals.sort((a, b) => b.name.localeCompare(a.name));
+			filteredPals = filteredPals.sort((a, b) => b.pal.name.localeCompare(a.pal.name));
 			sortOrder = 'desc';
 		}
 	}
@@ -237,37 +241,33 @@
 	function sortByLevel(order: string) {
 		sortBy = 'level';
 		if (order === 'asc') {
-			filteredPals = filteredPals.sort((a, b) => a.level - b.level);
+			filteredPals = filteredPals.sort((a, b) => a.pal.level - b.pal.level);
 			sortOrder = 'asc';
 		} else if (order === 'desc') {
-			filteredPals = filteredPals.sort((a, b) => b.level - a.level);
+			filteredPals = filteredPals.sort((a, b) => b.pal.level - a.pal.level);
 			sortOrder = 'desc';
 		}
 	}
 
-	async function getGenderIcon(gender: PalGender): Promise<string | undefined> {
-		if (gender == PalGender.UNKNOWN) return undefined;
-		const iconPath = `${ASSET_DATA_PATH}/img/icons/${gender.toLowerCase()}.svg`;
-		const icon = await assetLoader.loadSvg(iconPath);
-		return icon;
+	function getGenderIcon(gender: PalGender): string | undefined {
+		return genderIcons[gender];
 	}
 
-	async function cloneSelectedPal() {
-		console.log('Cloning selected pal');
-		if (appState.selectedPlayer && selectedPals.length === 1) {
-			const selectedPal = selectedPals[0];
+	async function cloneSelectedPal(event: Event) {
+		if (appState.selectedPlayer && appState.selectedPlayer.pals && selectedPal) {
+			const pal = appState.selectedPlayer.pals[selectedPal.id];
+			if (!pal) return;
 			const message = {
 				type: MessageType.CLONE_PAL,
-				data: selectedPal
+				data: pal
 			};
 			ws.send(JSON.stringify(message));
 		}
 	}
 
 	async function healSelectedPals() {
-		console.log('Healing selected pal(s)');
 		if (appState.selectedPlayer && appState.selectedPlayer.pals) {
-			const selectedPalIds = selectedPals.map((pal) => pal.instance_id);
+			const selectedPalIds = selectedPals.map((p) => p.pal.instance_id);
 			const message = {
 				type: MessageType.HEAL_PALS,
 				data: selectedPalIds
@@ -294,7 +294,7 @@
 			cancelText: 'Cancel'
 		});
 		if (appState.selectedPlayer && appState.selectedPlayer.pals && confirmed) {
-			const selectedPalIds = selectedPals.map((pal) => pal.instance_id);
+			const selectedPalIds = selectedPals.map((p) => p.pal.instance_id);
 			const data = {
 				player_id: appState.selectedPlayer.uid,
 				pal_ids: selectedPalIds
@@ -313,8 +313,8 @@
 	}
 
 	$effect(() => {
-		loadElementTypes();
 		loadStaticIcons();
+		loadElementTypes();
 		calculateHeight();
 	});
 
@@ -358,7 +358,7 @@
 					Add a new pal to your Pal box
 				{/snippet}
 			</Tooltip>
-			{#if Object.keys(selectedPals).length === 1}
+			{#if selectedPals.length === 1}
 				<Tooltip>
 					<button class="btn hover:preset-tonal-secondary p-2" onclick={cloneSelectedPal}>
 						<Copy />
@@ -368,7 +368,7 @@
 					{/snippet}
 				</Tooltip>
 			{/if}
-			{#if Object.keys(selectedPals).length >= 1}
+			{#if selectedPals.length >= 1}
 				<Tooltip>
 					<button class="btn hover:preset-tonal-secondary p-2" onclick={healSelectedPals}>
 						<Ambulance />
@@ -399,7 +399,12 @@
 		<Accordion classes="bg-surface-900" collapsible>
 			<Accordion.Item id="filter" controlHover="hover:bg-secondary-500/25">
 				{#snippet controlLead()}<Search />{/snippet}
-				{#snippet control()}Filter{/snippet}
+				{#snippet control()}
+					<div class="flex flex-row items-center">
+						<Search class="mr-2 h-5 w-5" />
+						<span class="font-bold">Filter & Sort</span>
+					</div>
+				{/snippet}
 				{#snippet panel()}
 					<Input
 						type="text"
@@ -469,7 +474,7 @@
 							</Tooltip>
 							{#each [...elementTypes] as element}
 								<Tooltip>
-									{#await getPalElementIcon(element) then icon}
+									{#await getElementIcon(element) then icon}
 										{#if icon}
 											<button
 												class={elementClass(element)}
@@ -523,6 +528,7 @@
 			baseClass="h-full"
 			bind:items={filteredPals}
 			bind:selectedItems={selectedPals}
+			bind:selectedItem={selectedPal}
 			bind:selectAll
 			onselect={handlePalSelect}
 		>
@@ -538,13 +544,13 @@
 					<span class="font-bold">Element</span>
 				</div>
 			{/snippet}
-			{#snippet listItem(pal)}
+			{#snippet listItem(p)}
 				<div class="grid w-full grid-cols-[55px_auto_1fr_auto] gap-2">
 					<div>
-						<span class="font-bold">Lvl {pal.level}</span>
+						<span class="font-bold">Lvl {p.pal.level}</span>
 					</div>
 					<div class="relative justify-start">
-						{#if pal.is_boss}
+						{#if p.pal.is_boss}
 							{#if alphaIcon}
 								<div class="absolute -left-2 -top-1 h-5 w-5">
 									<enhanced:img src={alphaIcon} alt="Aplha" class="pal-element-badge"
@@ -552,18 +558,18 @@
 								</div>
 							{/if}
 						{/if}
-						{#if pal.is_lucky}
+						{#if p.pal.is_lucky}
 							<div class="absolute -left-2 -top-1 h-5 w-5">✨</div>
 						{/if}
-						{#await getPalIcon(pal.instance_id) then icon}
+						{#await getPalMenuIcon(p.pal.instance_id) then icon}
 							{#if icon}
-								<enhanced:img src={icon} alt={pal.name} class="h-8 w-8"></enhanced:img>
+								<enhanced:img src={icon} alt={p.pal.name} class="h-8 w-8"></enhanced:img>
 							{/if}
 						{/await}
-						{#await getGenderIcon(pal.gender) then icon}
+						{#await getGenderIcon(p.pal.gender) then icon}
 							{#if icon}
 								{@const color =
-									pal.gender == PalGender.MALE ? 'text-primary-300' : 'text-tertiary-300'}
+									p.pal.gender == PalGender.MALE ? 'text-primary-300' : 'text-tertiary-300'}
 								<div class={cn('absolute -right-4 -top-1 h-5 w-5', color)}>
 									{@html icon}
 								</div>
@@ -571,12 +577,12 @@
 						{/await}
 					</div>
 					<div class="ml-4 flex flex-row justify-start">
-						<div>{pal.nickname || pal.name}</div>
+						<div>{p.pal.nickname || p.pal.name}</div>
 					</div>
 					<div class="flex justify-end">
-						{#if pal.character_id && pal.elements}
-							{#each pal.elements as elementType}
-								{#await getPalElementBadge(elementType) then icon}
+						{#if p.palData}
+							{#each p.palData.type as elementType}
+								{#await getElementIcon(elementType) then icon}
 									{#if icon}
 										<enhanced:img src={icon} alt={elementType} class="pal-element-badge"
 										></enhanced:img>
@@ -587,8 +593,8 @@
 					</div>
 				</div>
 			{/snippet}
-			{#snippet listItemPopup(pal)}
-				<HealthBadge {pal} player={appState.selectedPlayer} />
+			{#snippet listItemPopup(p)}
+				<HealthBadge bind:pal={p.pal} player={appState.selectedPlayer} />
 			{/snippet}
 		</List>
 	</div>

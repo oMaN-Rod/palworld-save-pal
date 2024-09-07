@@ -50,6 +50,7 @@
 	const headerClass = $derived(cn('grid w-full gap-2', _headerClass));
 
 	function processItem(item: any) {
+		selectedItem = item;
 		if (multiple) {
 			selectedItems.push(item);
 		} else {
@@ -77,7 +78,7 @@
 	function handleItemSelect(event: Event, item: any) {
 		event.preventDefault();
 		selectedItem = item;
-		onselect(item);
+		onselect(selectedItem);
 	}
 
 	function handleKeyDown(

@@ -33,7 +33,7 @@ export function createAppState() {
 							console.error(`Failed to find pal info for`, pal);
 						}
 						pal.name = palInfo?.localized_name || pal.character_id;
-						pal.elements = palInfo?.elements || [];
+						pal.elements = palInfo?.type || [];
 					});
 				}
 
