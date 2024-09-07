@@ -81,7 +81,8 @@
 	async function getPalElementTypes(character_id: string): Promise<string[] | undefined> {
 		const pal = await palsData.getPalInfo(character_id);
 		if (!pal) return undefined;
-		return pal.elements.length > 0 ? pal.elements.map((e) => e.toLowerCase()) : undefined;
+		console.log('Pal elements', pal.elements);
+		return pal.elements.length > 0 ? pal.elements : undefined;
 	}
 
 	async function getPalElementBadge(elementType: string): Promise<string | undefined> {
@@ -424,11 +425,7 @@
 											{#each elementTypes as elementType}
 												{#await getPalElementBadge(elementType) then icon}
 													{#if icon}
-														<enhanced:img
-															src={icon}
-															alt={elementType}
-															class="pal-element-badge"
-															style="width: 24px; height: 24px;"
+														<enhanced:img src={icon} alt={elementType} class="h-8 w-8"
 														></enhanced:img>
 													{/if}
 												{/await}

@@ -1,54 +1,48 @@
-// src/lib/data/Elements.ts
+// src/lib/data/elements.ts
 
-import { ASSET_DATA_PATH } from '$lib/constants';
-import { assetLoader } from '$lib/utils/asset-loader';
-import type { Element } from '$types';
+import { getSocketState } from '$states/websocketState.svelte';
+import { MessageType, type Element } from '$types';
 
-class Elements {
-	private elementsDict: Record<string, Element> = {};
+export class Elements {
+    private ws = getSocketState();
+    private elements: Record<string, Element> = {};
 
-	constructor() {
-		this.initializeElements();
-	}
+    private async ensureElementsLoaded(): Promise<void> {
+        if (Object.keys(this.elements).length === 0) {
+            try {
+                const response = await this.ws.sendAndWait({ 
+                    type: MessageType.GET_ELEMENTS 
+                });
+                if (response.type === 'error') {
+                    throw new Error(response.data);
+                }
+                this.elements = response.data;
+            } catch (error) {
+                console.error('Error fetching elements:', error);
+                throw error;
+            }
+        }
+    }
 
-	private async initializeElements() {
-		const elementsData = await assetLoader.loadJson<Record<string, Element>>(
-			`${ASSET_DATA_PATH}/data/elements.json`
-		);
-		this.elementsDict = Object.entries(elementsData).reduce(
-			(acc, [key, value]) => {
-				acc[key.toLowerCase()] = value;
-				return acc;
-			},
-			{} as Record<string, Element>
-		);
-	}
+    async searchElement(key: string): Promise<Element | undefined> {
+        await this.ensureElementsLoaded();
+        return this.elements[key];
+    }
 
-	async searchElement(key: string): Promise<Element | undefined> {
-		await this.ensureInitialized();
-		return this.elementsDict[key.toLowerCase()];
-	}
+    async getField(key: string, field: keyof Element): Promise<string | undefined> {
+        const element = await this.searchElement(key);
+        return element ? element[field] : undefined;
+    }
 
-	async getField(key: string, field: keyof Element): Promise<string | undefined> {
-		const element = await this.searchElement(key);
-		return element ? element[field] : undefined;
-	}
+    async getAllElementTypes(): Promise<string[]> {
+        await this.ensureElementsLoaded();
+        return Object.keys(this.elements);
+    }
 
-	async getAllElementTypes(): Promise<string[]> {
-		await this.ensureInitialized();
-		return Object.keys(this.elementsDict);
-	}
-
-	async getAllElements(): Promise<Element[]> {
-		await this.ensureInitialized();
-		return Object.values(this.elementsDict);
-	}
-
-	private async ensureInitialized() {
-		if (Object.keys(this.elementsDict).length === 0) {
-			await this.initializeElements();
-		}
-	}
+    async getAllElements(): Promise<Element[]> {
+        await this.ensureElementsLoaded();
+        return Object.values(this.elements);
+    }
 }
 
 export const elementsData = new Elements();

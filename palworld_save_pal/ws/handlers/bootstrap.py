@@ -3,6 +3,7 @@ from typing import TYPE_CHECKING
 from palworld_save_pal.ws.handlers import (
     active_skills_handler,
     app_state_handler,
+    elements_handler,
     passive_skills_handler,
     preset_handler,
     save_file_handler,
@@ -13,6 +14,7 @@ from palworld_save_pal.ws.messages import (
     AddPresetMessage,
     ClonePalMessage,
     GetActiveSkillsMessage,
+    GetElementsMessage,
     GetPassiveSkillsMessage,
     HealPalsMessage,
     LoadSaveFileMessage,
@@ -149,5 +151,13 @@ def bootstrap(dispatcher: "MessageDispatcher"):
         {
             "message_class": GetPassiveSkillsMessage,
             "handler_func": passive_skills_handler.get_passive_skills_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.GET_ELEMENTS.value,
+        {
+            "message_class": GetElementsMessage,
+            "handler_func": elements_handler.get_elements_handler,
         },
     )

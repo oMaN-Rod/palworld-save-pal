@@ -7,7 +7,7 @@
 	import { MessageType, type Pal, type Player } from '$types';
 	import { SaveAll } from 'lucide-svelte';
 	import { getAppState, getSocketState, getNavigationState } from '$states';
-	import { activeSkillsData, passiveSkillsData } from '$lib/data';
+	import { activeSkillsData, elementsData, passiveSkillsData } from '$lib/data';
 	import { Tabs } from '@skeletonlabs/skeleton-svelte';
 
 	const appState = getAppState();
@@ -66,11 +66,12 @@
 	}
 
 	$effect(() => {
-		const loadSkills = async () => {
+		const loadData = async () => {
 			await activeSkillsData.getActiveSkills();
 			await passiveSkillsData.getPassiveSkills();
+			await elementsData.getAllElements();
 		};
-		loadSkills();
+		loadData();
 	});
 
 	$effect(() => {
