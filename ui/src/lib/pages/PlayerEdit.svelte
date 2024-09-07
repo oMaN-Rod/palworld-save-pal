@@ -1,7 +1,12 @@
 <script lang="ts">
 	import { Combobox, ItemHeader } from '$components/ui';
 	import { getAppState } from '$states';
-	import { EntryState, type ContainerSlot, type ItemContainer, type SelectOption } from '$types';
+	import {
+		EntryState,
+		type ItemContainerSlot,
+		type ItemContainer,
+		type SelectOption
+	} from '$types';
 	import { assetLoader } from '$utils/asset-loader';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { itemsData, presetsData } from '$lib/data';
@@ -17,35 +22,35 @@
 	let weaponLoadOutContainer: ItemContainer = $state({ id: '', type: '', slots: [] });
 	let playerEquipmentArmorContainer: ItemContainer = $state({ id: '', type: '', slots: [] });
 	let foodEquipContainer: ItemContainer = $state({ id: '', type: '', slots: [] });
-	let headGear: ContainerSlot = $state({
+	let headGear: ItemContainerSlot = $state({
 		id: '',
 		static_id: '',
 		slot_index: 0,
 		type: '',
 		count: 0
 	});
-	let bodyGear: ContainerSlot = $state({
+	let bodyGear: ItemContainerSlot = $state({
 		id: '',
 		static_id: '',
 		slot_index: 0,
 		type: '',
 		count: 0
 	});
-	let shieldGear: ContainerSlot = $state({
+	let shieldGear: ItemContainerSlot = $state({
 		id: '',
 		static_id: '',
 		slot_index: 0,
 		type: '',
 		count: 0
 	});
-	let gliderGear: ContainerSlot = $state({
+	let gliderGear: ItemContainerSlot = $state({
 		id: '',
 		static_id: '',
 		slot_index: 0,
 		type: '',
 		count: 0
 	});
-	let accessoryGear: ContainerSlot[] = $state([]);
+	let accessoryGear: ItemContainerSlot[] = $state([]);
 	let group = $state('inventory');
 
 	let presetOptions: SelectOption[] = $state([]);
@@ -78,64 +83,6 @@
 			foodEquipContainer = appState.selectedPlayer.food_equip_container;
 			essentialContainer = appState.selectedPlayer.essential_container;
 		}
-	});
-
-	async function getPresetProfiles() {
-		const profiles = await presetsData.getPresetProfilesNames();
-		presetOptions = profiles.map((profile) => ({ label: profile, value: profile }));
-	}
-
-	async function applyPreset() {
-		if (!selectedPreset || !appState.selectedPlayer) return;
-		console.log('Applying preset:', selectedPreset);
-		const containers = {
-			common_container: appState.selectedPlayer.common_container,
-			essential_container: appState.selectedPlayer.essential_container,
-			weapon_load_out_container: appState.selectedPlayer.weapon_load_out_container,
-			player_equipment_armor_container: appState.selectedPlayer.player_equipment_armor_container,
-			food_equip_container: appState.selectedPlayer.food_equip_container
-		};
-
-		const updatedContainers = await presetsData.applyPreset(selectedPreset, containers);
-		console.log('Updated containers:', updatedContainers);
-		// Update dynamic items
-		for (const [containerName, container] of Object.entries(updatedContainers)) {
-			for (const slot of container.slots) {
-				if (slot.static_id !== 'None') {
-					const itemData = await itemsData.searchItems(slot.static_id);
-					if (itemData?.details.dynamic) {
-						switch (itemData.details.dynamic.type) {
-							case 'weapon':
-								slot.dynamic_item = {
-									local_id: '00000000-0000-0000-0000-000000000000',
-									durability: itemData.details.dynamic.durability,
-									remaining_bullets: itemData.details.dynamic.magazine_size,
-									type: itemData.details.dynamic.type
-								};
-								break;
-							case 'armor':
-								slot.dynamic_item = {
-									local_id: '00000000-0000-0000-0000-000000000000',
-									durability: itemData.details.dynamic.durability,
-									type: itemData.details.dynamic.type
-								};
-								break;
-						}
-					} else {
-						slot.dynamic_item = undefined;
-					}
-				}
-			}
-		}
-		appState.selectedPlayer.state = EntryState.MODIFIED;
-		appState.selectedPlayer = {
-			...appState.selectedPlayer,
-			...updatedContainers
-		};
-	}
-
-	$effect(() => {
-		getPresetProfiles();
 	});
 
 	function clearCommonContainer() {

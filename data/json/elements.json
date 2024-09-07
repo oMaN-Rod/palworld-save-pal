@@ -1,0 +1,83 @@
+{
+	"Neutral": {
+		"name": "Neutral",
+		"color": "#d8a796",
+		"icon": "neutral/Neutral",
+		"badge_icon": "neutral/Neutral_icon",
+		"egg_icon": "neutral/Common_Egg_icon",
+		"fruit_icon": "neutral/Neutral_Skill_Fruit_icon",
+		"white_icon": "neutral/Neutral_white"
+	},
+	"Dark": {
+		"name": "Dark",
+		"color": "#ad0035",
+		"icon": "dark/Dark",
+		"badge_icon": "dark/Dark_icon",
+		"egg_icon": "dark/Dark_Egg_icon",
+		"fruit_icon": "dark/Dark_Skill_Fruit_icon",
+		"white_icon": "dark/Dark_white"
+	},
+	"Dragon": {
+		"name": "Dragon",
+		"color": "#c22df9",
+		"icon": "dragon/Dragon",
+		"badge_icon": "dragon/Dragon_icon",
+		"egg_icon": "dragon/Dragon_Egg_icon",
+		"fruit_icon": "dragon/Dragon_Skill_Fruit_icon",
+		"white_icon": "dragon/Dragon_white"
+	},
+	"Ice": {
+		"name": "Ice",
+		"color": "#00f2ff",
+		"icon": "ice/Ice",
+		"badge_icon": "ice/Ice_icon",
+		"egg_icon": "ice/Frozen_Egg_icon",
+		"fruit_icon": "ice/Ice_Skill_Fruit_icon",
+		"white_icon": "ice/Ice_white"
+	},
+	"Fire": {
+		"name": "Fire",
+		"color": "#ff4208",
+		"icon": "fire/Fire",
+		"badge_icon": "fire/Fire_icon",
+		"egg_icon": "fire/Scorching_Egg_icon",
+		"fruit_icon": "fire/Fire_Skill_Fruit_icon",
+		"white_icon": "fire/Fire_white"
+	},
+	"Grass": {
+		"name": "Grass",
+		"color": "#83f001",
+		"icon": "grass/Grass",
+		"badge_icon": "grass/Grass_icon",
+		"egg_icon": "grass/Verdant_Egg_icon",
+		"fruit_icon": "grass/Grass_Skill_Fruit_icon",
+		"white_icon": "grass/Grass_white"
+	},
+	"Ground": {
+		"name": "Ground",
+		"color": "#ba5608",
+		"icon": "ground/Ground",
+		"badge_icon": "ground/Ground_icon",
+		"egg_icon": "ground/Rocky_Egg_icon",
+		"fruit_icon": "ground/Ground_Skill_Fruit_icon",
+		"white_icon": "ground/Ground_white"
+	},
+	"Electric": {
+		"name": "Electric",
+		"color": "#feed01",
+		"icon": "electric/Electric",
+		"badge_icon": "electric/Electric_icon",
+		"egg_icon": "electric/Electric_Egg_icon",
+		"fruit_icon": "electric/Electric_Skill_Fruit_icon",
+		"white_icon": "electric/Electric_white"
+	},
+	"Water": {
+		"name": "Water",
+		"color": "#0074ff",
+		"icon": "water/Water",
+		"badge_icon": "water/Water_icon",
+		"egg_icon": "water/Damp_Egg_icon",
+		"fruit_icon": "water/Water_Skill_Fruit_icon",
+		"white_icon": "water/Water_white"
+	}
+}

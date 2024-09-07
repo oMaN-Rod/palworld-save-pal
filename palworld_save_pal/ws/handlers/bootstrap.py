@@ -2,11 +2,13 @@ from typing import TYPE_CHECKING
 
 from palworld_save_pal.ws.handlers import (
     app_state_handler,
+    preset_handler,
     save_file_handler,
     pal_handler,
 )
 from palworld_save_pal.ws.messages import (
     AddPalMessage,
+    AddPresetMessage,
     ClonePalMessage,
     HealPalsMessage,
     LoadSaveFileMessage,
@@ -16,6 +18,9 @@ from palworld_save_pal.ws.messages import (
     DownloadSaveFileMessage,
     LoadZipFileMessage,
     DeletePalsMessage,
+    GetPresetsMessage,
+    DeletePresetMessage,
+    UpdatePresetMessage,
 )
 
 if TYPE_CHECKING:
@@ -92,5 +97,37 @@ def bootstrap(dispatcher: "MessageDispatcher"):
         {
             "message_class": ClonePalMessage,
             "handler_func": pal_handler.clone_pal_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.ADD_PRESET.value,
+        {
+            "message_class": AddPresetMessage,
+            "handler_func": preset_handler.add_preset_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.GET_PRESETS.value,
+        {
+            "message_class": GetPresetsMessage,
+            "handler_func": preset_handler.get_presets_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.UPDATE_PRESET.value,
+        {
+            "message_class": UpdatePresetMessage,
+            "handler_func": preset_handler.update_preset_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.DELETE_PRESET.value,
+        {
+            "message_class": DeletePresetMessage,
+            "handler_func": preset_handler.delete_presets_handler,
         },
     )

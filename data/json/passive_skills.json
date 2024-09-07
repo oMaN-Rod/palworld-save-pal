@@ -1,0 +1,596 @@
+{
+	"ElementResist_Normal_1_PAL": {
+		"rating": "Okay",
+		"tier": "C",
+		"bonuses": {
+			"attack": 0,
+			"defense": 10,
+			"work_speed": 0
+		}
+	},
+	"ElementResist_Dark_1_PAL": {
+		"rating": "Okay",
+		"tier": "C",
+		"bonuses": {
+			"attack": 0,
+			"defense": 10,
+			"work_speed": 0
+		}
+	},
+	"ElementResist_Dragon_1_PAL": {
+		"rating": "Okay",
+		"tier": "C",
+		"bonuses": {
+			"attack": 0,
+			"defense": 10,
+			"work_speed": 0
+		}
+	},
+	"ElementResist_Ice_1_PAL": {
+		"rating": "Okay",
+		"tier": "C",
+		"bonuses": {
+			"attack": 0,
+			"defense": 10,
+			"work_speed": 0
+		}
+	},
+	"ElementResist_Fire_1_PAL": {
+		"rating": "Okay",
+		"tier": "C",
+		"bonuses": {
+			"attack": 0,
+			"defense": 10,
+			"work_speed": 0
+		}
+	},
+	"ElementResist_Leaf_1_PAL": {
+		"rating": "Okay",
+		"tier": "C",
+		"bonuses": {
+			"attack": 0,
+			"defense": 10,
+			"work_speed": 0
+		}
+	},
+	"ElementResist_Earth_1_PAL": {
+		"rating": "Okay",
+		"tier": "C",
+		"bonuses": {
+			"attack": 0,
+			"defense": 10,
+			"work_speed": 0
+		}
+	},
+	"ElementResist_Thunder_1_PAL": {
+		"rating": "Okay",
+		"tier": "C",
+		"bonuses": {
+			"attack": 0,
+			"defense": 10,
+			"work_speed": 0
+		}
+	},
+	"ElementResist_Aqua_1_PAL": {
+		"rating": "Okay",
+		"tier": "C",
+		"bonuses": {
+			"attack": 0,
+			"defense": 10,
+			"work_speed": 0
+		}
+	},
+	"ElementBoost_Normal_1_PAL": {
+		"rating": "Okay",
+		"tier": "C",
+		"bonuses": {
+			"attack": 10,
+			"defense": 0,
+			"work_speed": 0
+		}
+	},
+	"ElementBoost_Dark_1_PAL": {
+		"rating": "Okay",
+		"tier": "C",
+		"bonuses": {
+			"attack": 10,
+			"defense": 0,
+			"work_speed": 0
+		}
+	},
+	"ElementBoost_Dragon_1_PAL": {
+		"rating": "Okay",
+		"tier": "C",
+		"bonuses": {
+			"attack": 10,
+			"defense": 0,
+			"work_speed": 0
+		}
+	},
+	"ElementBoost_Ice_1_PAL": {
+		"rating": "Okay",
+		"tier": "C",
+		"bonuses": {
+			"attack": 10,
+			"defense": 0,
+			"work_speed": 0
+		}
+	},
+	"ElementBoost_Fire_1_PAL": {
+		"rating": "Okay",
+		"tier": "C",
+		"bonuses": {
+			"attack": 10,
+			"defense": 0,
+			"work_speed": 0
+		}
+	},
+	"ElementBoost_Leaf_1_PAL": {
+		"rating": "Okay",
+		"tier": "C",
+		"bonuses": {
+			"attack": 10,
+			"defense": 0,
+			"work_speed": 0
+		}
+	},
+	"ElementBoost_Earth_1_PAL": {
+		"rating": "Okay",
+		"tier": "C",
+		"bonuses": {
+			"attack": 10,
+			"defense": 0,
+			"work_speed": 0
+		}
+	},
+	"ElementBoost_Thunder_1_PAL": {
+		"rating": "Okay",
+		"tier": "C",
+		"bonuses": {
+			"attack": 10,
+			"defense": 0,
+			"work_speed": 0
+		}
+	},
+	"ElementBoost_Aqua_1_PAL": {
+		"rating": "Okay",
+		"tier": "C",
+		"bonuses": {
+			"attack": 10,
+			"defense": 0,
+			"work_speed": 0
+		}
+	},
+	"ElementBoost_Normal_2_PAL": {
+		"rating": "Good",
+		"tier": "A",
+		"bonuses": {
+			"attack": 20,
+			"defense": 0,
+			"work_speed": 0
+		}
+	},
+	"ElementBoost_Dark_2_PAL": {
+		"rating": "Good",
+		"tier": "A",
+		"bonuses": {
+			"attack": 20,
+			"defense": 0,
+			"work_speed": 0
+		}
+	},
+	"ElementBoost_Dragon_2_PAL": {
+		"rating": "Good",
+		"tier": "A",
+		"bonuses": {
+			"attack": 20,
+			"defense": 0,
+			"work_speed": 0
+		}
+	},
+	"ElementBoost_Ice_2_PAL": {
+		"rating": "Good",
+		"tier": "A",
+		"bonuses": {
+			"attack": 20,
+			"defense": 0,
+			"work_speed": 0
+		}
+	},
+	"ElementBoost_Fire_2_PAL": {
+		"rating": "Good",
+		"tier": "A",
+		"bonuses": {
+			"attack": 20,
+			"defense": 0,
+			"work_speed": 0
+		}
+	},
+	"ElementBoost_Leaf_2_PAL": {
+		"rating": "Good",
+		"tier": "A",
+		"bonuses": {
+			"attack": 20,
+			"defense": 0,
+			"work_speed": 0
+		}
+	},
+	"ElementBoost_Earth_2_PAL": {
+		"rating": "Good",
+		"tier": "A",
+		"bonuses": {
+			"attack": 20,
+			"defense": 0,
+			"work_speed": 0
+		}
+	},
+	"ElementBoost_Thunder_2_PAL": {
+		"rating": "Good",
+		"tier": "A",
+		"bonuses": {
+			"attack": 20,
+			"defense": 0,
+			"work_speed": 0
+		}
+	},
+	"ElementBoost_Aqua_2_PAL": {
+		"rating": "Good",
+		"tier": "A",
+		"bonuses": {
+			"attack": 20,
+			"defense": 0,
+			"work_speed": 0
+		}
+	},
+	"PAL_ALLAttack_up1": {
+		"rating": "Okay",
+		"tier": "C",
+		"bonuses": {
+			"attack": 10,
+			"defense": 0,
+			"work_speed": 0
+		}
+	},
+	"PAL_ALLAttack_up2": {
+		"rating": "Good",
+		"tier": "A",
+		"bonuses": {
+			"attack": 20,
+			"defense": 0,
+			"work_speed": 0
+		}
+	},
+	"PAL_ALLAttack_down1": {
+		"rating": "Okay",
+		"tier": "X",
+		"bonuses": {
+			"attack": -10,
+			"defense": 0,
+			"work_speed": 0
+		}
+	},
+	"PAL_ALLAttack_down2": {
+		"rating": "Bad",
+		"tier": "Z",
+		"bonuses": {
+			"attack": -20,
+			"defense": 0,
+			"work_speed": 0
+		}
+	},
+	"Deffence_up1": {
+		"rating": "Okay",
+		"tier": "C",
+		"bonuses": {
+			"attack": 0,
+			"defense": 10,
+			"work_speed": 0
+		}
+	},
+	"Deffence_up2": {
+		"rating": "Good",
+		"tier": "A",
+		"bonuses": {
+			"attack": 0,
+			"defense": 20,
+			"work_speed": 0
+		}
+	},
+	"Deffence_down1": {
+		"rating": "Okay",
+		"tier": "X",
+		"bonuses": {
+			"attack": 0,
+			"defense": -10,
+			"work_speed": 0
+		}
+	},
+	"Deffence_down2": {
+		"rating": "Bad",
+		"tier": "Z",
+		"bonuses": {
+			"attack": 0,
+			"defense": -20,
+			"work_speed": 0
+		}
+	},
+	"TrainerMining_up1": {
+		"rating": "Good",
+		"tier": "A",
+		"bonuses": {
+			"attack": 0,
+			"defense": 0,
+			"work_speed": 25
+		}
+	},
+	"TrainerLogging_up1": {
+		"rating": "Good",
+		"tier": "A",
+		"bonuses": {
+			"attack": 0,
+			"defense": 0,
+			"work_speed": 25
+		}
+	},
+	"TrainerATK_UP_1": {
+		"rating": "Good",
+		"tier": "A",
+		"bonuses": {
+			"attack": 10,
+			"defense": 0,
+			"work_speed": 0
+		}
+	},
+	"TrainerWorkSpeed_UP_1": {
+		"rating": "Good",
+		"tier": "A",
+		"bonuses": {
+			"attack": 0,
+			"defense": 0,
+			"work_speed": 25
+		}
+	},
+	"TrainerDEF_UP_1": {
+		"rating": "Good",
+		"tier": "A",
+		"bonuses": {
+			"attack": 0,
+			"defense": 10,
+			"work_speed": 0
+		}
+	},
+	"PAL_Sanity_Down_1": {
+		"rating": "Okay",
+		"tier": "C",
+		"bonuses": {
+			"attack": 0,
+			"defense": 0,
+			"work_speed": 0
+		}
+	},
+	"PAL_Sanity_Down_2": {
+		"rating": "Good",
+		"tier": "A",
+		"bonuses": {
+			"attack": 0,
+			"defense": 0,
+			"work_speed": 0
+		}
+	},
+	"PAL_Sanity_Up_1": {
+		"rating": "Okay",
+		"tier": "X",
+		"bonuses": {
+			"attack": 0,
+			"defense": 0,
+			"work_speed": 0
+		}
+	},
+	"PAL_Sanity_Up_2": {
+		"rating": "Bad",
+		"tier": "Y",
+		"bonuses": {
+			"attack": 0,
+			"defense": 0,
+			"work_speed": 0
+		}
+	},
+	"PAL_FullStomach_Down_1": {
+		"rating": "Okay",
+		"tier": "C",
+		"bonuses": {
+			"attack": 0,
+			"defense": 0,
+			"work_speed": 0
+		}
+	},
+	"PAL_FullStomach_Down_2": {
+		"rating": "Good",
+		"tier": "A",
+		"bonuses": {
+			"attack": 0,
+			"defense": 0,
+			"work_speed": 0
+		}
+	},
+	"PAL_FullStomach_Up_1": {
+		"rating": "Okay",
+		"tier": "X",
+		"bonuses": {
+			"attack": 0,
+			"defense": 0,
+			"work_speed": 0
+		}
+	},
+	"PAL_FullStomach_Up_2": {
+		"rating": "Bad",
+		"tier": "Y",
+		"bonuses": {
+			"attack": 0,
+			"defense": 0,
+			"work_speed": 0
+		}
+	},
+	"CraftSpeed_up1": {
+		"rating": "Okay",
+		"tier": "C",
+		"bonuses": {
+			"attack": 0,
+			"defense": 0,
+			"work_speed": 20
+		}
+	},
+	"CraftSpeed_up2": {
+		"rating": "Good",
+		"tier": "A",
+		"bonuses": {
+			"attack": 0,
+			"defense": 0,
+			"work_speed": 50
+		}
+	},
+	"CraftSpeed_down1": {
+		"rating": "Okay",
+		"tier": "X",
+		"bonuses": {
+			"attack": 0,
+			"defense": 0,
+			"work_speed": -10
+		}
+	},
+	"CraftSpeed_down2": {
+		"rating": "Bad",
+		"tier": "Z",
+		"bonuses": {
+			"attack": 0,
+			"defense": 0,
+			"work_speed": -30
+		}
+	},
+	"MoveSpeed_up_1": {
+		"rating": "Okay",
+		"tier": "C",
+		"bonuses": {
+			"attack": 0,
+			"defense": 0,
+			"work_speed": 0
+		}
+	},
+	"MoveSpeed_up_2": {
+		"rating": "Okay",
+		"tier": "B",
+		"bonuses": {
+			"attack": 0,
+			"defense": 0,
+			"work_speed": 0
+		}
+	},
+	"MoveSpeed_up_3": {
+		"rating": "Good",
+		"tier": "A",
+		"bonuses": {
+			"attack": 0,
+			"defense": 0,
+			"work_speed": 0
+		}
+	},
+	"PAL_CorporateSlave": {
+		"rating": "Good",
+		"tier": "C",
+		"bonuses": {
+			"attack": -30,
+			"defense": 0,
+			"work_speed": 30
+		}
+	},
+	"PAL_rude": {
+		"rating": "Okay",
+		"tier": "C",
+		"bonuses": {
+			"attack": 15,
+			"defense": 0,
+			"work_speed": -10
+		}
+	},
+	"Noukin": {
+		"rating": "Good",
+		"tier": "B",
+		"bonuses": {
+			"attack": 30,
+			"defense": 0,
+			"work_speed": -50
+		}
+	},
+	"PAL_oraora": {
+		"rating": "Okay",
+		"tier": "C",
+		"bonuses": {
+			"attack": 10,
+			"defense": -10,
+			"work_speed": 0
+		}
+	},
+	"PAL_conceited": {
+		"rating": "Okay",
+		"tier": "C",
+		"bonuses": {
+			"attack": 0,
+			"defense": -10,
+			"work_speed": 10
+		}
+	},
+	"PAL_masochist": {
+		"rating": "Okay",
+		"tier": "C",
+		"bonuses": {
+			"attack": -15,
+			"defense": 15,
+			"work_speed": 0
+		}
+	},
+	"PAL_sadist": {
+		"rating": "Okay",
+		"tier": "C",
+		"bonuses": {
+			"attack": 15,
+			"defense": -15,
+			"work_speed": 0
+		}
+	},
+	"Rare": {
+		"rating": "Good",
+		"tier": "A",
+		"bonuses": {
+			"attack": 15,
+			"defense": 0,
+			"work_speed": 15
+		}
+	},
+	"Legend": {
+		"rating": "Good",
+		"tier": "A",
+		"bonuses": {
+			"attack": 20,
+			"defense": 20,
+			"work_speed": 0
+		}
+	},
+	"Witch": {
+		"rating": "Good",
+		"tier": "A",
+		"bonuses": {
+			"attack": 20,
+			"defense": 0,
+			"work_speed": 0
+		}
+	},
+	"NonKilling": {
+		"rating": "Bad",
+		"tier": "X",
+		"bonuses": {
+			"attack": 0,
+			"defense": 0,
+			"work_speed": 0
+		}
+	}
+}

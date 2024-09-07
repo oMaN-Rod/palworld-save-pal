@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Tooltip } from '$components/ui';
-	import type { ContainerSlot, DynamicItemDetails, Item, ItemGroup, Tier } from '$types';
+	import type { ItemContainerSlot, DynamicItemDetails, Item, ItemGroup, Tier } from '$types';
 	import { assetLoader } from '$utils/asset-loader';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { itemsData, palsData } from '$lib/data';
@@ -10,8 +10,8 @@
 	import { Progress } from '@skeletonlabs/skeleton-svelte';
 	import { Package } from 'lucide-svelte';
 
-	let { slot = $bindable<ContainerSlot>(), itemGroup } = $props<{
-		slot: ContainerSlot;
+	let { slot = $bindable<ItemContainerSlot>(), itemGroup } = $props<{
+		slot: ItemContainerSlot;
 		itemGroup: ItemGroup;
 	}>();
 

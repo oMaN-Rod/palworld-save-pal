@@ -1,123 +1,92 @@
-// src/lib/data/presets.ts
-
-import { ASSET_DATA_PATH } from '$lib/constants';
-import { assetLoader } from '$lib/utils/asset-loader';
-import { persistedState } from '$states/persistedState.svelte';
-import type { ContainerSlot, ItemContainer } from '$types';
-
-export interface PresetProfile {
-	name: string;
-	common_container?: ContainerSlot[];
-	essential_container?: ContainerSlot[];
-	weapon_load_out_container?: ContainerSlot[];
-	player_equipment_armor_container?: ContainerSlot[];
-	food_equip_container?: ContainerSlot[];
-}
+import { getSocketState } from '$states/websocketState.svelte';
+import { MessageType, type PresetProfile } from '$types';
 
 export class Presets {
-	private presetsState;
+    private ws = getSocketState();
 
-	constructor() {
-		this.presetsState = persistedState<PresetProfile[]>('palworld-presets', [], {
-			onParseError: (error) => {
-				console.error('Error parsing presets:', error);
-				this.initializePresets();
+    async getPresetProfiles(): Promise<Record<string, PresetProfile>> {
+        try {
+            const response = await this.ws.sendAndWait({ type: MessageType.GET_PRESETS });
+            if (response.type === 'error') {
+                throw new Error(response.data);
+            }
+            return response.data;
+        } catch (error) {
+            console.error('Error fetching presets:', error);
+            throw error;
+        }
+    }
+
+    async addPresetProfile(profile: PresetProfile): Promise<Record<string, PresetProfile>> {
+        try {
+            const response = await this.ws.sendAndWait({ 
+                type: 'add_preset', 
+                data: profile
+            });
+            if (response.type === 'error') {
+                throw new Error(response.data);
+            }
+            return this.getPresetProfiles();
+        } catch (error) {
+            console.error('Error adding preset:', error);
+            throw error;
+        }
+    }
+
+    async changePresetName(id: string, name: string): Promise<Record<string, PresetProfile>> {
+        console.log('changeProfileName', id, name);
+        try {
+            const profiles = await this.getPresetProfiles();
+            const profile = profiles[id];
+            if (profile) {
+                profile.name = name;
+				const message = {
+					type: 'update_preset',
+					data: { 
+						id: id,
+						name: profile.name
+					 }
+				};
+                await this.ws.send(JSON.stringify(message));
+            }
+            return this.getPresetProfiles();
+        } catch (error) {
+            console.error('Error changing profile name:', error);
+            throw error;
+        }
+    }
+
+    async clone(id: string, name: string): Promise<Record<string, PresetProfile>> {
+        try {
+            const profiles = await this.getPresetProfiles();
+            const profile = profiles[id];
+            if (profile) {
+                const newProfile = { ...profile, name: name};
+                await this.ws.sendAndWait({ 
+                    type: 'add_preset', 
+                    data: newProfile 
+                });
+            }
+            return this.getPresetProfiles();
+        } catch (error) {
+            console.error('Error cloning profile:', error);
+            throw error;
+        }
+    }
+
+    async removePresetProfiles(ids: string[]): Promise<Record<string, PresetProfile>> {
+        try {
+			const message = { 
+				type: 'delete_preset', 
+				data: ids 
 			}
-		});
-		this.initializePresets();
-	}
-
-	private async initializePresets() {
-		if (this.presetsState.value.length === 0) {
-			const defaultPresets = await assetLoader.loadJson<PresetProfile[]>(
-				`${ASSET_DATA_PATH}/data/presets.json`
-			);
-			this.presetsState.value = defaultPresets;
-		}
-	}
-
-	async getPresetProfiles(): Promise<PresetProfile[]> {
-		await this.ensureInitialized();
-		return this.presetsState.value;
-	}
-
-	async getPresetProfilesNames(): Promise<string[]> {
-		await this.ensureInitialized();
-		return this.presetsState.value.map((profile) => profile.name);
-	}
-
-	async getPresetProfile(profileName: string): Promise<PresetProfile | undefined> {
-		await this.ensureInitialized();
-		return this.presetsState.value.find((profile) => profile.name === profileName);
-	}
-
-	async applyPreset(
-		profileName: string,
-		containers: Record<string, ItemContainer>
-	): Promise<Record<string, ItemContainer>> {
-		const profile = await this.getPresetProfile(profileName);
-		if (!profile) {
-			throw new Error(`Preset profile "${profileName}" not found`);
-		}
-
-		const updatedContainers: Record<string, ItemContainer> = {};
-
-		for (const [containerName, container] of Object.entries(containers)) {
-			const presetSlots = profile[containerName as keyof PresetProfile] || container.slots;
-			const updatedSlots = container.slots.map((slot) => {
-				const presetSlot = (presetSlots as ContainerSlot[])?.find(
-					(ps) => ps.slot_index === slot.slot_index
-				);
-				if (presetSlot) {
-					return { ...slot, ...presetSlot };
-				}
-				return { ...slot, static_id: 'None', count: 0, dynamic_item: undefined };
-			});
-
-			updatedContainers[containerName] = { ...container, slots: updatedSlots };
-		}
-
-		return updatedContainers;
-	}
-
-	async addPresetProfile(profile: PresetProfile) {
-		await this.ensureInitialized();
-		this.presetsState.value = [...this.presetsState.value, profile];
-		return this.presetsState.value;
-	}
-
-	async changeProfileName(oldProfileName: string, newProfileName: string) {
-		await this.ensureInitialized();
-		const profile = this.presetsState.value.find((profile) => profile.name === oldProfileName);
-		if (profile) {
-			profile.name = newProfileName;
-		}
-		return this.presetsState.value;
-	}
-
-	async clone(profileName: string, newProfileName: string) {
-		await this.ensureInitialized();
-		const profile = this.presetsState.value.find((profile) => profile.name === profileName);
-		if (profile) {
-			const newProfile = { ...profile, name: newProfileName };
-			this.presetsState.value = [...this.presetsState.value, newProfile];
-		}
-		return this.presetsState.value;
-	}
-
-	async removePresetProfiles(profileNames: string[]) {
-		await this.ensureInitialized();
-		this.presetsState.value = this.presetsState.value.filter(
-			(profile) => !profileNames.includes(profile.name)
-		);
-		return this.presetsState.value;
-	}
-
-	private async ensureInitialized() {
-		if (this.presetsState.value.length === 0) {
-			await this.initializePresets();
-		}
-	}
+            await this.ws.sendAndWait(message);
+            return this.getPresetProfiles();
+        } catch (error) {
+            console.error('Error removing preset profiles:', error);
+            throw error;
+        }
+    }
 }
 
 export const presetsData = new Presets();

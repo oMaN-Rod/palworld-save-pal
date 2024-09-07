@@ -3,6 +3,7 @@ from typing import Any, Dict, List, Optional
 from pydantic import BaseModel
 from uuid import UUID
 
+from palworld_save_pal.presets.player_preset import PlayerPreset
 from palworld_save_pal.save_file.pal import Pal
 from palworld_save_pal.save_file.player import Player
 
@@ -26,6 +27,10 @@ class MessageType(str, Enum):
     PROGRESS_MESSAGE = "progress_message"
     SYNC_APP_STATE = "sync_app_state"
     UPDATE_SAVE_FILE = "update_save_file"
+    GET_PRESETS = "get_presets"
+    ADD_PRESET = "add_preset"
+    UPDATE_PRESET = "update_preset"
+    DELETE_PRESET = "delete_preset"
 
 
 class AddPalData(BaseModel):
@@ -96,3 +101,27 @@ class ProgressMessage(BaseMessage):
 class LoadZipFileMessage(BaseMessage):
     type: str = MessageType.LOAD_ZIP_FILE.value
     data: List[int]
+
+
+class GetPresetsMessage(BaseMessage):
+    type: str = MessageType.GET_PRESETS.value
+
+
+class UpdatePresetData(BaseModel):
+    id: UUID
+    name: str
+
+
+class UpdatePresetMessage(BaseMessage):
+    type: str = MessageType.UPDATE_PRESET.value
+    data: UpdatePresetData
+
+
+class AddPresetMessage(BaseMessage):
+    type: str = MessageType.ADD_PRESET.value
+    data: PlayerPreset
+
+
+class DeletePresetMessage(BaseMessage):
+    type: str = MessageType.DELETE_PRESET.value
+    data: List[UUID]

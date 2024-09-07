@@ -87,5 +87,6 @@ Set-Location -Path ".."
 
 # Copy build to dist
 Copy-Item -Path ".\build\" -Destination ".\dist\" -Recurse -Force
+Copy-Item -Path ".\data\" -Destination ".\dist\" -Recurse -Force
 
 Write-Host "Done building the desktop app."

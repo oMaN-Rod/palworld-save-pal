@@ -2,7 +2,7 @@
 	import { TextInputModal } from '$components/modals';
 	import { List, Tooltip } from '$components/ui';
 	import { presetsData, itemsData } from '$lib/data';
-	import type { PresetProfile } from '$lib/data/presets';
+	import type { ItemContainer, ItemContainerSlot, PresetProfile } from '$lib/types';
 	import { getAppState, getModalState } from '$states';
 	import { EntryState } from '$types';
 	import { deepCopy } from '$utils';
@@ -13,9 +13,11 @@
 
 	let selectedPreset: PresetProfile = $state({ name: '' });
 	let selectedPresets: PresetProfile[] = $state([]);
-	let presets: PresetProfile[] = $state([]);
+	let presets: Record<string, PresetProfile> = $state({});
+	let filteredPresets: PresetProfile[] = $state([]);
 	let containerRef: HTMLDivElement;
 	let listWrapperStyle = $state('');
+	let selectAll: boolean = $state(false);
 
 	function calculateHeight() {
 		if (containerRef) {
@@ -28,10 +30,11 @@
 
 	async function getPresetProfiles() {
 		presets = await presetsData.getPresetProfiles();
+		filteredPresets = Object.values(presets);
 	}
 
 	async function handleApplyPreset() {
-		if (!selectedPreset || !appState.selectedPlayer) return;
+		if (!selectedPresets || !appState.selectedPlayer) return;
 		const containers = {
 			common_container: appState.selectedPlayer.common_container,
 			essential_container: appState.selectedPlayer.essential_container,
@@ -40,7 +43,24 @@
 			food_equip_container: appState.selectedPlayer.food_equip_container
 		};
 
-		const updatedContainers = await presetsData.applyPreset(selectedPreset.name, containers);
+		const updatedContainers: Record<string, ItemContainer> = {};
+
+		for (const [containerName, container] of Object.entries(containers)) {
+			const presetSlots =
+				selectedPresets[0][containerName as keyof PresetProfile] || container.slots;
+			const updatedSlots = container.slots.map((slot) => {
+				const presetSlot = (presetSlots as ItemContainerSlot[])?.find(
+					(ps) => ps.slot_index === slot.slot_index
+				);
+				if (presetSlot) {
+					return { ...slot, ...presetSlot };
+				}
+				return { ...slot, static_id: 'None', count: 0, dynamic_item: undefined };
+			});
+
+			updatedContainers[containerName] = { ...container, slots: updatedSlots };
+		}
+
 		for (const [_, container] of Object.entries(updatedContainers)) {
 			for (const slot of container.slots) {
 				if (slot.static_id !== 'None') {
@@ -95,20 +115,12 @@
 			food_equip_container: deepCopy(appState.selectedPlayer.food_equip_container.slots)
 		};
 		presets = await presetsData.addPresetProfile(newPreset);
+		filteredPresets = Object.values(presets);
+		selectedPresets = [];
+		selectAll = false;
 	}
 
-	async function handleClonePreset() {
-		if (!selectedPreset) return;
-		// @ts-ignore
-		const result = await modal.showModal<string>(TextInputModal, {
-			title: 'Edit preset name',
-			value: selectedPreset.name
-		});
-		if (!result) return;
-		presets = await presetsData.clone(selectedPreset.name, result);
-	}
-
-	async function handleDeletePreset() {
+	async function handleDeletePresets() {
 		if (selectedPresets.length === 0) return;
 		// @ts-ignore
 		const result = await modal.showConfirmModal({
@@ -116,17 +128,27 @@
 			message: `Are you sure you want to delete ${selectedPresets.length} preset${selectedPresets.length > 0 ? 's' : ''}?`
 		});
 		if (!result) return;
-		presets = await presetsData.removePresetProfiles(selectedPresets.map((preset) => preset.name));
+		const presetIds = selectedPresets
+			.map((preset) => Object.keys(presets).find((key) => presets[key] === preset))
+			.filter((id) => id !== undefined) as string[];
+		if (!presetIds || presetIds.length === 0) return;
+		presets = await presetsData.removePresetProfiles(presetIds);
+		filteredPresets = Object.values(presets);
+		selectedPresets = [];
+		selectAll = false;
 	}
 
-	async function handleEditPreset(preset: PresetProfile) {
+	async function handleEditPresetName(preset: PresetProfile) {
 		// @ts-ignore
 		const result = await modal.showModal<string>(TextInputModal, {
 			title: 'Edit preset name',
 			value: preset.name
 		});
 		if (!result) return;
-		presets = await presetsData.changeProfileName(preset.name, result);
+		const presetId = Object.keys(presets).find((key) => presets[key] === preset);
+		if (!presetId) return;
+		presets = await presetsData.changePresetName(presetId, result);
+		filteredPresets = Object.values(presets);
 	}
 
 	$effect(() => {
@@ -154,18 +176,10 @@
 					Apply selected preset
 				{/snippet}
 			</Tooltip>
-			<Tooltip>
-				<button class="btn hover:preset-tonal-secondary p-2" onclick={handleClonePreset}>
-					<Copy />
-				</button>
-				{#snippet popup()}
-					Clone selected preset
-				{/snippet}
-			</Tooltip>
 		{/if}
 		{#if selectedPresets.length >= 1}
 			<Tooltip>
-				<button class="btn hover:preset-tonal-secondary p-2" onclick={handleDeletePreset}>
+				<button class="btn hover:preset-tonal-secondary p-2" onclick={handleDeletePresets}>
 					<Trash />
 				</button>
 				{#snippet popup()}
@@ -185,9 +199,11 @@
 	<div class="overflow-hidden" style={listWrapperStyle}>
 		<List
 			baseClass="h-full bg-surface-800"
-			bind:items={presets}
+			bind:items={filteredPresets}
 			bind:selectedItems={selectedPresets}
 			bind:selectedItem={selectedPreset}
+			bind:selectAll
+			onlyHighlightChecked
 		>
 			{#snippet listHeader()}
 				<div class="flex justify-start">
@@ -198,7 +214,7 @@
 				<span class="grow">{preset.name}</span>
 			{/snippet}
 			{#snippet listItemActions(preset)}
-				<button class="btn" onclick={() => handleEditPreset(preset)}>
+				<button class="btn" onclick={() => handleEditPresetName(preset)}>
 					<Edit class="h-4 w-4" />
 				</button>
 			{/snippet}

@@ -59,7 +59,7 @@ export interface DynamicItem {
 	type: DynamicItemType;
 }
 
-export interface ContainerSlot {
+export interface ItemContainerSlot {
 	slot_index: number;
 	static_id: string;
 	count: number;
@@ -69,7 +69,16 @@ export interface ContainerSlot {
 export interface ItemContainer {
 	id: string;
 	type: string;
-	slots: ContainerSlot[];
+	slots: ItemContainerSlot[];
+}
+
+export interface PresetProfile {
+	name: string;
+	common_container?: ItemContainerSlot[];
+	essential_container?: ItemContainerSlot[];
+	weapon_load_out_container?: ItemContainerSlot[];
+	player_equipment_armor_container?: ItemContainerSlot[];
+	food_equip_container?: ItemContainerSlot[];
 }
 
 // Frontend types

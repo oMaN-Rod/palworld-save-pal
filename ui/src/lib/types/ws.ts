@@ -13,7 +13,11 @@ export enum MessageType {
 	LOAD_ZIP_FILE = 'load_zip_file',
 	PROGRESS_MESSAGE = 'progress_message',
 	SYNC_APP_STATE = 'sync_app_state',
-	UPDATE_SAVE_FILE = 'update_save_file'
+	UPDATE_SAVE_FILE = 'update_save_file',
+	GET_PRESETS = 'get_presets',
+	ADD_PRESET = 'add_preset',
+	UPDATE_PRESET = 'update_preset',
+	DELETE_PRESET = 'delete_preset',
 }
 
 interface UpdateSaveFileData {

@@ -1,0 +1,3649 @@
+{
+	"values": [
+		{
+			"code_name": "Alpaca",
+			"type": [
+				"Neutral"
+			],
+			"skill_set": {
+				"EPalWazaID::AirCanon": 1,
+				"EPalWazaID::Unique_Alpaca_Tackle": 7,
+				"EPalWazaID::MudShot": 15,
+				"EPalWazaID::PowerShot": 22,
+				"EPalWazaID::ElecWave": 30,
+				"EPalWazaID::PowerBall": 40,
+				"EPalWazaID::HyperBeam": 50
+			},
+			"scaling": {
+				"hp": 90,
+				"attack": 75,
+				"defense": 90
+			}
+		},
+		{
+			"code_name": "AmaterasuWolf",
+			"type": [
+				"Fire"
+			],
+			"skill_set": {
+				"EPalWazaID::FireBlast": 1,
+				"EPalWazaID::FireSeed": 7,
+				"EPalWazaID::GhostFlame": 15,
+				"EPalWazaID::Unique_AmaterasuWolf_FireCharge": 22,
+				"EPalWazaID::FlareTornado": 30,
+				"EPalWazaID::Inferno": 40,
+				"EPalWazaID::FireBall": 50
+			},
+			"scaling": {
+				"hp": 100,
+				"attack": 115,
+				"defense": 100
+			}
+		},
+		{
+			"code_name": "Anubis",
+			"type": [
+				"Ground"
+			],
+			"skill_set": {
+				"EPalWazaID::StoneShotgun": 1,
+				"EPalWazaID::PowerBall": 7,
+				"EPalWazaID::SandTornado": 15,
+				"EPalWazaID::Unique_Anubis_LowRoundKick": 22,
+				"EPalWazaID::Unique_Anubis_Tackle": 30,
+				"EPalWazaID::Unique_Anubis_GroundPunch": 40,
+				"EPalWazaID::RockLance": 50
+			},
+			"scaling": {
+				"hp": 120,
+				"attack": 130,
+				"defense": 100
+			}
+		},
+		{
+			"code_name": "Baphomet",
+			"type": [
+				"Fire",
+				"Dark"
+			],
+			"skill_set": {
+				"EPalWazaID::FireBlast": 1,
+				"EPalWazaID::FireSeed": 7,
+				"EPalWazaID::FlareArrow": 15,
+				"EPalWazaID::Unique_Baphomet_SwallowKite": 22,
+				"EPalWazaID::DarkWave": 30,
+				"EPalWazaID::FireBall": 40,
+				"EPalWazaID::Inferno": 50
+			},
+			"scaling": {
+				"hp": 95,
+				"attack": 100,
+				"defense": 85
+			}
+		},
+		{
+			"code_name": "Baphomet_Dark",
+			"type": [
+				"Dark"
+			],
+			"skill_set": {
+				"EPalWazaID::FireBlast": 1,
+				"EPalWazaID::FireSeed": 7,
+				"EPalWazaID::FlareArrow": 15,
+				"EPalWazaID::Unique_Baphomet_SwallowKite": 22,
+				"EPalWazaID::DarkWave": 30,
+				"EPalWazaID::FireBall": 40,
+				"EPalWazaID::Inferno": 50
+			},
+			"scaling": {
+				"hp": 95,
+				"attack": 105,
+				"defense": 85
+			}
+		},
+		{
+			"code_name": "Bastet",
+			"type": [
+				"Dark"
+			],
+			"skill_set": {
+				"EPalWazaID::MudShot": 1,
+				"EPalWazaID::DarkBall": 7,
+				"EPalWazaID::DarkWave": 15,
+				"EPalWazaID::SandTornado": 22,
+				"EPalWazaID::GhostFlame": 30,
+				"EPalWazaID::ShadowBall": 40,
+				"EPalWazaID::DarkLaser": 50
+			},
+			"scaling": {
+				"hp": 70,
+				"attack": 60,
+				"defense": 70
+			}
+		},
+		{
+			"code_name": "Bastet_Ice",
+			"type": [
+				"Ice"
+			],
+			"skill_set": {
+				"EPalWazaID::IceMissile": 1,
+				"EPalWazaID::AirCanon": 7,
+				"EPalWazaID::MudShot": 15,
+				"EPalWazaID::IceBlade": 22,
+				"EPalWazaID::BlizzardLance": 30,
+				"EPalWazaID::FrostBreath": 40,
+				"EPalWazaID::IcicleThrow": 50
+			},
+			"scaling": {
+				"hp": 70,
+				"attack": 65,
+				"defense": 70
+			}
+		},
+		{
+			"code_name": "BerryGoat",
+			"type": [
+				"Grass"
+			],
+			"skill_set": {
+				"EPalWazaID::WindCutter": 1,
+				"EPalWazaID::AirCanon": 7,
+				"EPalWazaID::MudShot": 15,
+				"EPalWazaID::PowerShot": 22,
+				"EPalWazaID::GrassTornado": 30,
+				"EPalWazaID::RootAttack": 40,
+				"EPalWazaID::SolarBeam": 50
+			},
+			"scaling": {
+				"hp": 100,
+				"attack": 70,
+				"defense": 90
+			}
+		},
+		{
+			"code_name": "BirdDragon",
+			"type": [
+				"Fire",
+				"Dark"
+			],
+			"skill_set": {
+				"EPalWazaID::AirCanon": 1,
+				"EPalWazaID::FireBlast": 7,
+				"EPalWazaID::FireSeed": 15,
+				"EPalWazaID::Flamethrower": 22,
+				"EPalWazaID::ShadowBall": 30,
+				"EPalWazaID::FireBall": 40,
+				"EPalWazaID::DarkLaser": 50
+			},
+			"scaling": {
+				"hp": 90,
+				"attack": 115,
+				"defense": 90
+			}
+		},
+		{
+			"code_name": "BirdDragon_Ice",
+			"type": [
+				"Ice",
+				"Dark"
+			],
+			"skill_set": {
+				"EPalWazaID::AirCanon": 1,
+				"EPalWazaID::IceMissile": 7,
+				"EPalWazaID::IceBlade": 15,
+				"EPalWazaID::FrostBreath": 22,
+				"EPalWazaID::ShadowBall": 30,
+				"EPalWazaID::IcicleThrow": 40,
+				"EPalWazaID::DarkLaser": 50
+			},
+			"scaling": {
+				"hp": 90,
+				"attack": 120,
+				"defense": 95
+			}
+		},
+		{
+			"code_name": "BlackCentaur",
+			"type": [
+				"Dark"
+			],
+			"skill_set": {
+				"EPalWazaID::DarkWave": 1,
+				"EPalWazaID::FireSeed": 7,
+				"EPalWazaID::GhostFlame": 15,
+				"EPalWazaID::ShadowBall": 22,
+				"EPalWazaID::RockLance": 30,
+				"EPalWazaID::Unique_BlackCentaur_TwoSpearRushes": 40,
+				"EPalWazaID::DarkLaser": 50
+			},
+			"scaling": {
+				"hp": 130,
+				"attack": 145,
+				"defense": 120
+			}
+		},
+		{
+			"code_name": "BlackGriffon",
+			"type": [
+				"Dark"
+			],
+			"skill_set": {
+				"EPalWazaID::AirCanon": 1,
+				"EPalWazaID::DarkBall": 7,
+				"EPalWazaID::DarkWave": 15,
+				"EPalWazaID::GhostFlame": 22,
+				"EPalWazaID::ShadowBall": 30,
+				"EPalWazaID::Unique_BlackGriffon_TackleLaser": 40,
+				"EPalWazaID::DarkLaser": 50
+			},
+			"scaling": {
+				"hp": 120,
+				"attack": 120,
+				"defense": 140
+			}
+		},
+		{
+			"code_name": "BlackMetalDragon",
+			"type": [
+				"Dragon",
+				"Dark"
+			],
+			"skill_set": {
+				"EPalWazaID::DragonCanon": 1,
+				"EPalWazaID::GhostFlame": 7,
+				"EPalWazaID::DragonWave": 15,
+				"EPalWazaID::ShadowBall": 22,
+				"EPalWazaID::DragonBreath": 30,
+				"EPalWazaID::DarkLaser": 40,
+				"EPalWazaID::DragonMeteor": 50
+			},
+			"scaling": {
+				"hp": 100,
+				"attack": 125,
+				"defense": 125
+			}
+		},
+		{
+			"code_name": "BlueDragon",
+			"type": [
+				"Water",
+				"Dragon"
+			],
+			"skill_set": {
+				"EPalWazaID::WaterGun": 1,
+				"EPalWazaID::DragonCanon": 7,
+				"EPalWazaID::BubbleShot": 15,
+				"EPalWazaID::DragonWave": 22,
+				"EPalWazaID::DragonBreath": 30,
+				"EPalWazaID::HydroPump": 40,
+				"EPalWazaID::DragonMeteor": 50
+			},
+			"scaling": {
+				"hp": 110,
+				"attack": 100,
+				"defense": 100
+			}
+		},
+		{
+			"code_name": "BluePlatypus",
+			"type": [
+				"Water"
+			],
+			"skill_set": {
+				"EPalWazaID::WaterGun": 1,
+				"EPalWazaID::PowerShot": 7,
+				"EPalWazaID::AquaJet": 15,
+				"EPalWazaID::IceMissile": 22,
+				"EPalWazaID::BubbleShot": 30,
+				"EPalWazaID::WaterBall": 40,
+				"EPalWazaID::HydroPump": 50
+			},
+			"scaling": {
+				"hp": 60,
+				"attack": 80,
+				"defense": 60
+			}
+		},
+		{
+			"code_name": "Boar",
+			"type": [
+				"Ground"
+			],
+			"skill_set": {
+				"EPalWazaID::Unique_Boar_Tackle": 1,
+				"EPalWazaID::MudShot": 7,
+				"EPalWazaID::PowerShot": 15,
+				"EPalWazaID::StoneShotgun": 22,
+				"EPalWazaID::PowerBall": 30,
+				"EPalWazaID::RockLance": 40,
+				"EPalWazaID::HyperBeam": 50
+			},
+			"scaling": {
+				"hp": 80,
+				"attack": 70,
+				"defense": 70
+			}
+		},
+		{
+			"code_name": "CaptainPenguin",
+			"type": [
+				"Water",
+				"Ice"
+			],
+			"skill_set": {
+				"EPalWazaID::WaterGun": 1,
+				"EPalWazaID::BlizzardLance": 7,
+				"EPalWazaID::Unique_CaptainPenguin_BodySlide": 15,
+				"EPalWazaID::FrostBreath": 22,
+				"EPalWazaID::WaterBall": 30,
+				"EPalWazaID::IcicleThrow": 40,
+				"EPalWazaID::HydroPump": 50
+			},
+			"scaling": {
+				"hp": 95,
+				"attack": 95,
+				"defense": 95
+			}
+		},
+		{
+			"code_name": "Carbunclo",
+			"type": [
+				"Grass"
+			],
+			"skill_set": {
+				"EPalWazaID::WindCutter": 1,
+				"EPalWazaID::AirCanon": 7,
+				"EPalWazaID::PowerShot": 15,
+				"EPalWazaID::SeedMachinegun": 22,
+				"EPalWazaID::PowerBall": 30,
+				"EPalWazaID::RootAttack": 40,
+				"EPalWazaID::SolarBeam": 50
+			},
+			"scaling": {
+				"hp": 75,
+				"attack": 70,
+				"defense": 70
+			}
+		},
+		{
+			"code_name": "CatBat",
+			"type": [
+				"Dark"
+			],
+			"skill_set": {
+				"EPalWazaID::AirCanon": 1,
+				"EPalWazaID::PoisonShot": 7,
+				"EPalWazaID::DarkBall": 15,
+				"EPalWazaID::DarkWave": 22,
+				"EPalWazaID::GhostFlame": 30,
+				"EPalWazaID::ShadowBall": 40,
+				"EPalWazaID::DarkLaser": 50
+			},
+			"scaling": {
+				"hp": 95,
+				"attack": 95,
+				"defense": 80
+			}
+		},
+		{
+			"code_name": "CatMage",
+			"type": [
+				"Dark"
+			],
+			"skill_set": {
+				"EPalWazaID::FireBlast": 1,
+				"EPalWazaID::DarkBall": 7,
+				"EPalWazaID::FlareArrow": 15,
+				"EPalWazaID::DarkWave": 22,
+				"EPalWazaID::GhostFlame": 30,
+				"EPalWazaID::ShadowBall": 40,
+				"EPalWazaID::DarkLaser": 50
+			},
+			"scaling": {
+				"hp": 90,
+				"attack": 105,
+				"defense": 90
+			}
+		},
+		{
+			"code_name": "CatVampire",
+			"type": [
+				"Dark"
+			],
+			"skill_set": {
+				"EPalWazaID::PoisonShot": 1,
+				"EPalWazaID::DarkBall": 7,
+				"EPalWazaID::DarkWave": 15,
+				"EPalWazaID::GhostFlame": 22,
+				"EPalWazaID::ShadowBall": 30,
+				"EPalWazaID::Inferno": 40,
+				"EPalWazaID::DarkLaser": 50
+			},
+			"scaling": {
+				"hp": 100,
+				"attack": 105,
+				"defense": 110
+			}
+		},
+		{
+			"code_name": "ChickenPal",
+			"type": [
+				"Neutral"
+			],
+			"skill_set": {
+				"EPalWazaID::Unique_ChickenPal_ChickenPeck": 1,
+				"EPalWazaID::AirCanon": 7,
+				"EPalWazaID::PowerShot": 15,
+				"EPalWazaID::SelfDestruct": 22,
+				"EPalWazaID::GrassTornado": 30,
+				"EPalWazaID::SandTornado": 40,
+				"EPalWazaID::FlareTornado": 50
+			},
+			"scaling": {
+				"hp": 60,
+				"attack": 60,
+				"defense": 60
+			}
+		},
+		{
+			"code_name": "ColorfulBird",
+			"type": [
+				"Neutral"
+			],
+			"skill_set": {
+				"EPalWazaID::SelfDestruct": 1,
+				"EPalWazaID::AirCanon": 7,
+				"EPalWazaID::PowerShot": 15,
+				"EPalWazaID::SelfExplosion": 22,
+				"EPalWazaID::SandTornado": 30,
+				"EPalWazaID::PowerBall": 40,
+				"EPalWazaID::HyperBeam": 50
+			},
+			"scaling": {
+				"hp": 60,
+				"attack": 75,
+				"defense": 70
+			}
+		},
+		{
+			"code_name": "CowPal",
+			"type": [
+				"Neutral"
+			],
+			"skill_set": {
+				"EPalWazaID::PowerShot": 1,
+				"EPalWazaID::MudShot": 7,
+				"EPalWazaID::AirCanon": 15,
+				"EPalWazaID::StoneShotgun": 22,
+				"EPalWazaID::ThrowRock": 30,
+				"EPalWazaID::PowerBall": 40,
+				"EPalWazaID::HyperBeam": 50
+			},
+			"scaling": {
+				"hp": 90,
+				"attack": 50,
+				"defense": 80
+			}
+		},
+		{
+			"code_name": "CuteButterfly",
+			"type": [
+				"Grass"
+			],
+			"skill_set": {
+				"EPalWazaID::AirCanon": 1,
+				"EPalWazaID::WindCutter": 7,
+				"EPalWazaID::PoisonFog": 15,
+				"EPalWazaID::SandTornado": 22,
+				"EPalWazaID::SeedMine": 30,
+				"EPalWazaID::GrassTornado": 40,
+				"EPalWazaID::SolarBeam": 50
+			},
+			"scaling": {
+				"hp": 70,
+				"attack": 80,
+				"defense": 80
+			}
+		},
+		{
+			"code_name": "CuteFox",
+			"type": [
+				"Neutral"
+			],
+			"skill_set": {
+				"EPalWazaID::AirCanon": 1,
+				"EPalWazaID::MudShot": 7,
+				"EPalWazaID::PowerShot": 15,
+				"EPalWazaID::WindCutter": 22,
+				"EPalWazaID::SeedMachinegun": 30,
+				"EPalWazaID::PowerBall": 40,
+				"EPalWazaID::HyperBeam": 50
+			},
+			"scaling": {
+				"hp": 70,
+				"attack": 70,
+				"defense": 70
+			}
+		},
+		{
+			"code_name": "CuteMole",
+			"type": [
+				"Ground"
+			],
+			"skill_set": {
+				"EPalWazaID::MudShot": 1,
+				"EPalWazaID::PowerShot": 7,
+				"EPalWazaID::StoneShotgun": 15,
+				"EPalWazaID::ThrowRock": 22,
+				"EPalWazaID::PowerBall": 30,
+				"EPalWazaID::SandTornado": 40,
+				"EPalWazaID::RockLance": 50
+			},
+			"scaling": {
+				"hp": 65,
+				"attack": 80,
+				"defense": 50
+			}
+		},
+		{
+			"code_name": "DarkCrow",
+			"type": [
+				"Dark"
+			],
+			"skill_set": {
+				"EPalWazaID::AirCanon": 1,
+				"EPalWazaID::DarkBall": 7,
+				"EPalWazaID::Unique_DarkCrow_TelePoke": 15,
+				"EPalWazaID::DarkWave": 22,
+				"EPalWazaID::GhostFlame": 30,
+				"EPalWazaID::ShadowBall": 40,
+				"EPalWazaID::DarkLaser": 50
+			},
+			"scaling": {
+				"hp": 75,
+				"attack": 95,
+				"defense": 80
+			}
+		},
+		{
+			"code_name": "DarkScorpion",
+			"type": [
+				"Dark",
+				"Ground"
+			],
+			"skill_set": {
+				"EPalWazaID::MudShot": 1,
+				"EPalWazaID::PoisonShot": 7,
+				"EPalWazaID::DarkWave": 15,
+				"EPalWazaID::ThrowRock": 22,
+				"EPalWazaID::ShadowBall": 30,
+				"EPalWazaID::RockLance": 40,
+				"EPalWazaID::DarkLaser": 50
+			},
+			"scaling": {
+				"hp": 100,
+				"attack": 100,
+				"defense": 130
+			}
+		},
+		{
+			"code_name": "Deer",
+			"type": [
+				"Neutral"
+			],
+			"skill_set": {
+				"EPalWazaID::PowerShot": 1,
+				"EPalWazaID::Unique_Deer_PushupHorn": 7,
+				"EPalWazaID::StoneShotgun": 15,
+				"EPalWazaID::ThrowRock": 22,
+				"EPalWazaID::PowerBall": 30,
+				"EPalWazaID::RockLance": 40,
+				"EPalWazaID::HyperBeam": 50
+			},
+			"scaling": {
+				"hp": 95,
+				"attack": 80,
+				"defense": 80
+			}
+		},
+		{
+			"code_name": "Deer_Ground",
+			"type": [
+				"Ground"
+			],
+			"skill_set": {
+				"EPalWazaID::PowerShot": 1,
+				"EPalWazaID::Unique_Deer_PushupHorn": 7,
+				"EPalWazaID::StoneShotgun": 15,
+				"EPalWazaID::ThrowRock": 22,
+				"EPalWazaID::PowerBall": 30,
+				"EPalWazaID::SandTornado": 40,
+				"EPalWazaID::RockLance": 50
+			},
+			"scaling": {
+				"hp": 95,
+				"attack": 80,
+				"defense": 80
+			}
+		},
+		{
+			"code_name": "DreamDemon",
+			"type": [
+				"Dark"
+			],
+			"skill_set": {
+				"EPalWazaID::DarkBall": 1,
+				"EPalWazaID::PoisonShot": 7,
+				"EPalWazaID::DarkWave": 15,
+				"EPalWazaID::FrostBreath": 22,
+				"EPalWazaID::GhostFlame": 30,
+				"EPalWazaID::ShadowBall": 40,
+				"EPalWazaID::DarkLaser": 50
+			},
+			"scaling": {
+				"hp": 70,
+				"attack": 75,
+				"defense": 60
+			}
+		},
+		{
+			"code_name": "DrillGame",
+			"type": [
+				"Ground"
+			],
+			"skill_set": {
+				"EPalWazaID::WaterGun": 1,
+				"EPalWazaID::StoneShotgun": 7,
+				"EPalWazaID::Unique_DrillGame_ShellAttack": 15,
+				"EPalWazaID::ThrowRock": 22,
+				"EPalWazaID::SandTornado": 30,
+				"EPalWazaID::WaterBall": 40,
+				"EPalWazaID::RockLance": 50
+			},
+			"scaling": {
+				"hp": 80,
+				"attack": 95,
+				"defense": 120
+			}
+		},
+		{
+			"code_name": "Eagle",
+			"type": [
+				"Neutral"
+			],
+			"skill_set": {
+				"EPalWazaID::Unique_Eagle_GlidingNail": 1,
+				"EPalWazaID::AirCanon": 7,
+				"EPalWazaID::MudShot": 15,
+				"EPalWazaID::WindCutter": 22,
+				"EPalWazaID::SandTornado": 30,
+				"EPalWazaID::GrassTornado": 40,
+				"EPalWazaID::HyperBeam": 50
+			},
+			"scaling": {
+				"hp": 75,
+				"attack": 85,
+				"defense": 60
+			}
+		},
+		{
+			"code_name": "ElecCat",
+			"type": [
+				"Electric"
+			],
+			"skill_set": {
+				"EPalWazaID::SpreadPulse": 1,
+				"EPalWazaID::MudShot": 7,
+				"EPalWazaID::ElecWave": 15,
+				"EPalWazaID::ThunderBall": 22,
+				"EPalWazaID::ThreeThunder": 30,
+				"EPalWazaID::LineThunder": 40,
+				"EPalWazaID::Thunderbolt": 50
+			},
+			"scaling": {
+				"hp": 60,
+				"attack": 75,
+				"defense": 70
+			}
+		},
+		{
+			"code_name": "ElecPanda",
+			"type": [
+				"Electric"
+			],
+			"skill_set": {
+				"EPalWazaID::SpreadPulse": 1,
+				"EPalWazaID::ElecWave": 7,
+				"EPalWazaID::Unique_ElecPanda_ElecScratch": 15,
+				"EPalWazaID::LineThunder": 22,
+				"EPalWazaID::ThreeThunder": 30,
+				"EPalWazaID::LightningStrike": 40,
+				"EPalWazaID::Thunderbolt": 50
+			},
+			"scaling": {
+				"hp": 105,
+				"attack": 100,
+				"defense": 100
+			}
+		},
+		{
+			"code_name": "FairyDragon",
+			"type": [
+				"Dragon"
+			],
+			"skill_set": {
+				"EPalWazaID::DragonCanon": 1,
+				"EPalWazaID::DragonWave": 7,
+				"EPalWazaID::FlareArrow": 15,
+				"EPalWazaID::Unique_FairyDragon_FairyTornado": 22,
+				"EPalWazaID::DragonBreath": 30,
+				"EPalWazaID::HyperBeam": 40,
+				"EPalWazaID::DragonMeteor": 50
+			},
+			"scaling": {
+				"hp": 110,
+				"attack": 80,
+				"defense": 90
+			}
+		},
+		{
+			"code_name": "FairyDragon_Water",
+			"type": [
+				"Dragon",
+				"Water"
+			],
+			"skill_set": {
+				"EPalWazaID::WaterGun": 1,
+				"EPalWazaID::DragonCanon": 7,
+				"EPalWazaID::DragonWave": 15,
+				"EPalWazaID::Unique_FairyDragon_FairyTornado": 22,
+				"EPalWazaID::AcidRain": 30,
+				"EPalWazaID::HydroPump": 40,
+				"EPalWazaID::DragonMeteor": 50
+			},
+			"scaling": {
+				"hp": 115,
+				"attack": 80,
+				"defense": 95
+			}
+		},
+		{
+			"code_name": "FengyunDeeper",
+			"type": [
+				"Neutral"
+			],
+			"skill_set": {
+				"EPalWazaID::AirCanon": 1,
+				"EPalWazaID::WaterGun": 7,
+				"EPalWazaID::Unique_FengyunDeeper_CloudTempest": 15,
+				"EPalWazaID::AcidRain": 22,
+				"EPalWazaID::WaterBall": 30,
+				"EPalWazaID::IcicleThrow": 40,
+				"EPalWazaID::HyperBeam": 50
+			},
+			"scaling": {
+				"hp": 110,
+				"attack": 110,
+				"defense": 90
+			}
+		},
+		{
+			"code_name": "FireKirin",
+			"type": [
+				"Fire"
+			],
+			"skill_set": {
+				"EPalWazaID::MudShot": 1,
+				"EPalWazaID::FireBlast": 7,
+				"EPalWazaID::FireSeed": 15,
+				"EPalWazaID::FlareArrow": 22,
+				"EPalWazaID::Unique_FireKirin_Tackle": 30,
+				"EPalWazaID::Inferno": 40,
+				"EPalWazaID::FireBall": 50
+			},
+			"scaling": {
+				"hp": 100,
+				"attack": 95,
+				"defense": 90
+			}
+		},
+		{
+			"code_name": "FireKirin_Dark",
+			"type": [
+				"Fire",
+				"Dark"
+			],
+			"skill_set": {
+				"EPalWazaID::FireBlast": 1,
+				"EPalWazaID::DarkWave": 7,
+				"EPalWazaID::Flamethrower": 15,
+				"EPalWazaID::GhostFlame": 22,
+				"EPalWazaID::Unique_FireKirin_Dark_DarkTossin": 30,
+				"EPalWazaID::Inferno": 40,
+				"EPalWazaID::DarkLaser": 50
+			},
+			"scaling": {
+				"hp": 100,
+				"attack": 95,
+				"defense": 90
+			}
+		},
+		{
+			"code_name": "FlameBambi",
+			"type": [
+				"Fire"
+			],
+			"skill_set": {
+				"EPalWazaID::FireBlast": 1,
+				"EPalWazaID::PowerShot": 7,
+				"EPalWazaID::FireSeed": 15,
+				"EPalWazaID::FlareArrow": 22,
+				"EPalWazaID::FlareTornado": 30,
+				"EPalWazaID::Inferno": 40,
+				"EPalWazaID::FireBall": 50
+			},
+			"scaling": {
+				"hp": 75,
+				"attack": 70,
+				"defense": 75
+			}
+		},
+		{
+			"code_name": "FlameBuffalo",
+			"type": [
+				"Fire"
+			],
+			"skill_set": {
+				"EPalWazaID::FireBlast": 1,
+				"EPalWazaID::Unique_FlameBuffalo_FlameHorn": 7,
+				"EPalWazaID::FireSeed": 15,
+				"EPalWazaID::FlareArrow": 22,
+				"EPalWazaID::Flamethrower": 30,
+				"EPalWazaID::Inferno": 40,
+				"EPalWazaID::FireBall": 50
+			},
+			"scaling": {
+				"hp": 85,
+				"attack": 95,
+				"defense": 95
+			}
+		},
+		{
+			"code_name": "FlowerDinosaur",
+			"type": [
+				"Grass",
+				"Dragon"
+			],
+			"skill_set": {
+				"EPalWazaID::WindCutter": 1,
+				"EPalWazaID::Unique_FlowerDinosaur_Whip": 7,
+				"EPalWazaID::DragonWave": 15,
+				"EPalWazaID::SeedMine": 22,
+				"EPalWazaID::DragonBreath": 30,
+				"EPalWazaID::RootAttack": 40,
+				"EPalWazaID::SolarBeam": 50
+			},
+			"scaling": {
+				"hp": 110,
+				"attack": 85,
+				"defense": 90
+			}
+		},
+		{
+			"code_name": "FlowerDinosaur_Electric",
+			"type": [
+				"Electric",
+				"Dragon"
+			],
+			"skill_set": {
+				"EPalWazaID::ElecWave": 1,
+				"EPalWazaID::ThunderFunnel": 7,
+				"EPalWazaID::Unique_FlowerDinosaur_Whip": 15,
+				"EPalWazaID::DragonBreath": 22,
+				"EPalWazaID::ThreeThunder": 30,
+				"EPalWazaID::LightningStrike": 40,
+				"EPalWazaID::Thunderbolt": 50
+			},
+			"scaling": {
+				"hp": 110,
+				"attack": 90,
+				"defense": 90
+			}
+		},
+		{
+			"code_name": "FlowerDoll",
+			"type": [
+				"Grass"
+			],
+			"skill_set": {
+				"EPalWazaID::WindCutter": 1,
+				"EPalWazaID::WaterGun": 7,
+				"EPalWazaID::SeedMachinegun": 15,
+				"EPalWazaID::BubbleShot": 22,
+				"EPalWazaID::GrassTornado": 30,
+				"EPalWazaID::RootAttack": 40,
+				"EPalWazaID::SolarBeam": 50
+			},
+			"scaling": {
+				"hp": 100,
+				"attack": 95,
+				"defense": 100
+			}
+		},
+		{
+			"code_name": "FlowerRabbit",
+			"type": [
+				"Grass"
+			],
+			"skill_set": {
+				"EPalWazaID::WindCutter": 1,
+				"EPalWazaID::AirCanon": 7,
+				"EPalWazaID::AquaJet": 15,
+				"EPalWazaID::SeedMachinegun": 22,
+				"EPalWazaID::BubbleShot": 30,
+				"EPalWazaID::GrassTornado": 40,
+				"EPalWazaID::SolarBeam": 50
+			},
+			"scaling": {
+				"hp": 75,
+				"attack": 65,
+				"defense": 70
+			}
+		},
+		{
+			"code_name": "FlyingManta",
+			"type": [
+				"Water"
+			],
+			"skill_set": {
+				"EPalWazaID::AquaJet": 1,
+				"EPalWazaID::WaterGun": 7,
+				"EPalWazaID::PowerShot": 15,
+				"EPalWazaID::BubbleShot": 22,
+				"EPalWazaID::SeedMachinegun": 30,
+				"EPalWazaID::WaterBall": 40,
+				"EPalWazaID::HydroPump": 50
+			},
+			"scaling": {
+				"hp": 80,
+				"attack": 70,
+				"defense": 80
+			}
+		},
+		{
+			"code_name": "FoxMage",
+			"type": [
+				"Fire"
+			],
+			"skill_set": {
+				"EPalWazaID::FireBlast": 1,
+				"EPalWazaID::FireSeed": 7,
+				"EPalWazaID::FlareArrow": 15,
+				"EPalWazaID::GhostFlame": 22,
+				"EPalWazaID::FlareTornado": 30,
+				"EPalWazaID::FireBall": 40,
+				"EPalWazaID::DragonMeteor": 50
+			},
+			"scaling": {
+				"hp": 90,
+				"attack": 110,
+				"defense": 80
+			}
+		},
+		{
+			"code_name": "Ganesha",
+			"type": [
+				"Water"
+			],
+			"skill_set": {
+				"EPalWazaID::WaterGun": 1,
+				"EPalWazaID::AquaJet": 7,
+				"EPalWazaID::MudShot": 15,
+				"EPalWazaID::BubbleShot": 22,
+				"EPalWazaID::AcidRain": 30,
+				"EPalWazaID::WaterBall": 40,
+				"EPalWazaID::HydroPump": 50
+			},
+			"scaling": {
+				"hp": 70,
+				"attack": 60,
+				"defense": 70
+			}
+		},
+		{
+			"code_name": "Garm",
+			"type": [
+				"Neutral"
+			],
+			"skill_set": {
+				"EPalWazaID::Unique_Garm_Bite": 1,
+				"EPalWazaID::MudShot": 7,
+				"EPalWazaID::AirCanon": 15,
+				"EPalWazaID::PowerShot": 22,
+				"EPalWazaID::FireBlast": 30,
+				"EPalWazaID::PowerBall": 40,
+				"EPalWazaID::HyperBeam": 50
+			},
+			"scaling": {
+				"hp": 80,
+				"attack": 90,
+				"defense": 75
+			}
+		},
+		{
+			"code_name": "GhostBeast",
+			"type": [
+				"Dark"
+			],
+			"skill_set": {
+				"EPalWazaID::FireBlast": 1,
+				"EPalWazaID::DarkBall": 7,
+				"EPalWazaID::FlareArrow": 15,
+				"EPalWazaID::DarkWave": 22,
+				"EPalWazaID::GhostFlame": 30,
+				"EPalWazaID::ShadowBall": 40,
+				"EPalWazaID::DarkLaser": 50
+			},
+			"scaling": {
+				"hp": 75,
+				"attack": 105,
+				"defense": 80
+			}
+		},
+		{
+			"code_name": "Gorilla",
+			"type": [
+				"Neutral"
+			],
+			"skill_set": {
+				"EPalWazaID::MudShot": 1,
+				"EPalWazaID::PowerShot": 7,
+				"EPalWazaID::Unique_Gorilla_GroundPunch": 15,
+				"EPalWazaID::StoneShotgun": 22,
+				"EPalWazaID::SeedMachinegun": 30,
+				"EPalWazaID::PowerBall": 40,
+				"EPalWazaID::HyperBeam": 50
+			},
+			"scaling": {
+				"hp": 90,
+				"attack": 95,
+				"defense": 90
+			}
+		},
+		{
+			"code_name": "GrassMammoth",
+			"type": [
+				"Grass"
+			],
+			"skill_set": {
+				"EPalWazaID::MudShot": 1,
+				"EPalWazaID::SeedMachinegun": 7,
+				"EPalWazaID::PowerBall": 15,
+				"EPalWazaID::GrassTornado": 22,
+				"EPalWazaID::Unique_Grassmammoth_Earthquake": 30,
+				"EPalWazaID::RootAttack": 40,
+				"EPalWazaID::SolarBeam": 50
+			},
+			"scaling": {
+				"hp": 150,
+				"attack": 85,
+				"defense": 90
+			}
+		},
+		{
+			"code_name": "GrassMammoth_Ice",
+			"type": [
+				"Ice"
+			],
+			"skill_set": {
+				"EPalWazaID::ThrowRock": 1,
+				"EPalWazaID::IceBlade": 7,
+				"EPalWazaID::PowerBall": 15,
+				"EPalWazaID::BlizzardLance": 22,
+				"EPalWazaID::Unique_Grassmammoth_Earthquake": 30,
+				"EPalWazaID::FrostBreath": 40,
+				"EPalWazaID::IcicleThrow": 50
+			},
+			"scaling": {
+				"hp": 150,
+				"attack": 85,
+				"defense": 90
+			}
+		},
+		{
+			"code_name": "GrassPanda",
+			"type": [
+				"Grass"
+			],
+			"skill_set": {
+				"EPalWazaID::PowerShot": 1,
+				"EPalWazaID::SeedMachinegun": 7,
+				"EPalWazaID::ThrowRock": 15,
+				"EPalWazaID::Unique_GrassPanda_MusclePunch": 22,
+				"EPalWazaID::SeedMine": 30,
+				"EPalWazaID::RootAttack": 40,
+				"EPalWazaID::SolarBeam": 50
+			},
+			"scaling": {
+				"hp": 100,
+				"attack": 90,
+				"defense": 90
+			}
+		},
+		{
+			"code_name": "GrassPanda_Electric",
+			"type": [
+				"Electric"
+			],
+			"skill_set": {
+				"EPalWazaID::SpreadPulse": 1,
+				"EPalWazaID::ElecWave": 7,
+				"EPalWazaID::LineThunder": 15,
+				"EPalWazaID::Unique_GrassPanda_Electric_ElectricPunch": 22,
+				"EPalWazaID::ThreeThunder": 30,
+				"EPalWazaID::LightningStrike": 40,
+				"EPalWazaID::Thunderbolt": 50
+			},
+			"scaling": {
+				"hp": 100,
+				"attack": 100,
+				"defense": 100
+			}
+		},
+		{
+			"code_name": "GrassRabbitMan",
+			"type": [
+				"Grass"
+			],
+			"skill_set": {
+				"EPalWazaID::WindCutter": 1,
+				"EPalWazaID::ThrowRock": 7,
+				"EPalWazaID::SeedMachinegun": 15,
+				"EPalWazaID::StoneShotgun": 22,
+				"EPalWazaID::GrassTornado": 30,
+				"EPalWazaID::RootAttack": 40,
+				"EPalWazaID::SolarBeam": 50
+			},
+			"scaling": {
+				"hp": 90,
+				"attack": 115,
+				"defense": 90
+			}
+		},
+		{
+			"code_name": "HadesBird",
+			"type": [
+				"Dark"
+			],
+			"skill_set": {
+				"EPalWazaID::FireSeed": 1,
+				"EPalWazaID::DarkBall": 7,
+				"EPalWazaID::DarkWave": 15,
+				"EPalWazaID::FlareTornado": 22,
+				"EPalWazaID::GhostFlame": 30,
+				"EPalWazaID::ShadowBall": 40,
+				"EPalWazaID::DarkLaser": 50
+			},
+			"scaling": {
+				"hp": 100,
+				"attack": 125,
+				"defense": 100
+			}
+		},
+		{
+			"code_name": "HawkBird",
+			"type": [
+				"Neutral"
+			],
+			"skill_set": {
+				"EPalWazaID::AirCanon": 1,
+				"EPalWazaID::Unique_HawkBird_Storm": 7,
+				"EPalWazaID::WindCutter": 15,
+				"EPalWazaID::PowerBall": 22,
+				"EPalWazaID::SandTornado": 30,
+				"EPalWazaID::GrassTornado": 40,
+				"EPalWazaID::HyperBeam": 50
+			},
+			"scaling": {
+				"hp": 100,
+				"attack": 95,
+				"defense": 80
+			}
+		},
+		{
+			"code_name": "Hedgehog",
+			"type": [
+				"Electric"
+			],
+			"skill_set": {
+				"EPalWazaID::ElecWave": 1,
+				"EPalWazaID::PowerShot": 7,
+				"EPalWazaID::ThunderBall": 15,
+				"EPalWazaID::PowerBall": 22,
+				"EPalWazaID::ThreeThunder": 30,
+				"EPalWazaID::LineThunder": 40,
+				"EPalWazaID::Thunderbolt": 50
+			},
+			"scaling": {
+				"hp": 70,
+				"attack": 75,
+				"defense": 70
+			}
+		},
+		{
+			"code_name": "Hedgehog_Ice",
+			"type": [
+				"Ice"
+			],
+			"skill_set": {
+				"EPalWazaID::IceMissile": 1,
+				"EPalWazaID::PowerShot": 7,
+				"EPalWazaID::BlizzardLance": 15,
+				"EPalWazaID::PowerBall": 22,
+				"EPalWazaID::IceBlade": 30,
+				"EPalWazaID::FrostBreath": 40,
+				"EPalWazaID::IcicleThrow": 50
+			},
+			"scaling": {
+				"hp": 70,
+				"attack": 75,
+				"defense": 80
+			}
+		},
+		{
+			"code_name": "HerculesBeetle",
+			"type": [
+				"Ground",
+				"Grass"
+			],
+			"skill_set": {
+				"EPalWazaID::WindCutter": 1,
+				"EPalWazaID::SeedMachinegun": 7,
+				"EPalWazaID::StoneShotgun": 15,
+				"EPalWazaID::ThrowRock": 22,
+				"EPalWazaID::Unique_HerculesBeetle_BeetleTackle": 30,
+				"EPalWazaID::RockLance": 40,
+				"EPalWazaID::SolarBeam": 50
+			},
+			"scaling": {
+				"hp": 120,
+				"attack": 100,
+				"defense": 120
+			}
+		},
+		{
+			"code_name": "Horus",
+			"type": [
+				"Fire"
+			],
+			"skill_set": {
+				"EPalWazaID::FireBlast": 1,
+				"EPalWazaID::FlareArrow": 7,
+				"EPalWazaID::FireSeed": 15,
+				"EPalWazaID::Flamethrower": 22,
+				"EPalWazaID::Unique_Horus_FlareBird": 30,
+				"EPalWazaID::Inferno": 40,
+				"EPalWazaID::FireBall": 50
+			},
+			"scaling": {
+				"hp": 100,
+				"attack": 105,
+				"defense": 110
+			}
+		},
+		{
+			"code_name": "IceDeer",
+			"type": [
+				"Ice"
+			],
+			"skill_set": {
+				"EPalWazaID::AirCanon": 1,
+				"EPalWazaID::IceMissile": 7,
+				"EPalWazaID::IceBlade": 15,
+				"EPalWazaID::Unique_IceDeer_IceHorn": 22,
+				"EPalWazaID::BlizzardLance": 30,
+				"EPalWazaID::FrostBreath": 40,
+				"EPalWazaID::IcicleThrow": 50
+			},
+			"scaling": {
+				"hp": 100,
+				"attack": 85,
+				"defense": 110
+			}
+		},
+		{
+			"code_name": "IceFox",
+			"type": [
+				"Ice"
+			],
+			"skill_set": {
+				"EPalWazaID::AirCanon": 1,
+				"EPalWazaID::IceMissile": 7,
+				"EPalWazaID::IceBlade": 15,
+				"EPalWazaID::GhostFlame": 22,
+				"EPalWazaID::BlizzardLance": 30,
+				"EPalWazaID::FrostBreath": 40,
+				"EPalWazaID::IcicleThrow": 50
+			},
+			"scaling": {
+				"hp": 90,
+				"attack": 95,
+				"defense": 105
+			}
+		},
+		{
+			"code_name": "IceHorse",
+			"type": [
+				"Ice"
+			],
+			"skill_set": {
+				"EPalWazaID::AirCanon": 1,
+				"EPalWazaID::IceMissile": 7,
+				"EPalWazaID::IceBlade": 15,
+				"EPalWazaID::BlizzardLance": 22,
+				"EPalWazaID::Unique_IceHorse_IceBladeAttack": 30,
+				"EPalWazaID::FrostBreath": 40,
+				"EPalWazaID::IcicleThrow": 50
+			},
+			"scaling": {
+				"hp": 140,
+				"attack": 140,
+				"defense": 120
+			}
+		},
+		{
+			"code_name": "IceHorse_Dark",
+			"type": [
+				"Dark"
+			],
+			"skill_set": {
+				"EPalWazaID::AirCanon": 1,
+				"EPalWazaID::DarkBall": 7,
+				"EPalWazaID::DarkWave": 15,
+				"EPalWazaID::GhostFlame": 22,
+				"EPalWazaID::Unique_IceHorse_IceBladeAttack": 30,
+				"EPalWazaID::ShadowBall": 40,
+				"EPalWazaID::DarkLaser": 50
+			},
+			"scaling": {
+				"hp": 140,
+				"attack": 140,
+				"defense": 135
+			}
+		},
+		{
+			"code_name": "JetDragon",
+			"type": [
+				"Dragon"
+			],
+			"skill_set": {
+				"EPalWazaID::FireSeed": 1,
+				"EPalWazaID::DragonWave": 7,
+				"EPalWazaID::FlareTornado": 15,
+				"EPalWazaID::DragonBreath": 22,
+				"EPalWazaID::Unique_JetDragon_JumpBeam": 30,
+				"EPalWazaID::FireBall": 40,
+				"EPalWazaID::DragonMeteor": 50
+			},
+			"scaling": {
+				"hp": 110,
+				"attack": 140,
+				"defense": 110
+			}
+		},
+		{
+			"code_name": "Kelpie",
+			"type": [
+				"Water"
+			],
+			"skill_set": {
+				"EPalWazaID::AquaJet": 1,
+				"EPalWazaID::DragonCanon": 7,
+				"EPalWazaID::WaterGun": 15,
+				"EPalWazaID::BubbleShot": 22,
+				"EPalWazaID::PowerBall": 30,
+				"EPalWazaID::WaterBall": 40,
+				"EPalWazaID::HydroPump": 50
+			},
+			"scaling": {
+				"hp": 70,
+				"attack": 70,
+				"defense": 70
+			}
+		},
+		{
+			"code_name": "Kelpie_Fire",
+			"type": [
+				"Fire"
+			],
+			"skill_set": {
+				"EPalWazaID::FireBlast": 1,
+				"EPalWazaID::DragonCanon": 7,
+				"EPalWazaID::FireSeed": 15,
+				"EPalWazaID::FlareArrow": 22,
+				"EPalWazaID::DragonWave": 30,
+				"EPalWazaID::Flamethrower": 40,
+				"EPalWazaID::FireBall": 50
+			},
+			"scaling": {
+				"hp": 70,
+				"attack": 70,
+				"defense": 70
+			}
+		},
+		{
+			"code_name": "KingAlpaca",
+			"type": [
+				"Neutral"
+			],
+			"skill_set": {
+				"EPalWazaID::MudShot": 1,
+				"EPalWazaID::PowerShot": 7,
+				"EPalWazaID::PowerBall": 15,
+				"EPalWazaID::Unique_KingAlpaca_BodyPress": 22,
+				"EPalWazaID::ThreeThunder": 30,
+				"EPalWazaID::RockLance": 40,
+				"EPalWazaID::HyperBeam": 50
+			},
+			"scaling": {
+				"hp": 120,
+				"attack": 85,
+				"defense": 90
+			}
+		},
+		{
+			"code_name": "KingAlpaca_Ice",
+			"type": [
+				"Ice"
+			],
+			"skill_set": {
+				"EPalWazaID::IceMissile": 1,
+				"EPalWazaID::IceBlade": 7,
+				"EPalWazaID::BlizzardLance": 15,
+				"EPalWazaID::Unique_KingAlpaca_BodyPress": 22,
+				"EPalWazaID::FrostBreath": 30,
+				"EPalWazaID::WaterBall": 40,
+				"EPalWazaID::IcicleThrow": 50
+			},
+			"scaling": {
+				"hp": 120,
+				"attack": 85,
+				"defense": 90
+			}
+		},
+		{
+			"code_name": "KingBahamut",
+			"type": [
+				"Fire"
+			],
+			"skill_set": {
+				"EPalWazaID::PowerShot": 1,
+				"EPalWazaID::FireBlast": 7,
+				"EPalWazaID::StoneShotgun": 15,
+				"EPalWazaID::Flamethrower": 22,
+				"EPalWazaID::Inferno": 30,
+				"EPalWazaID::FireBall": 40,
+				"EPalWazaID::RockLance": 50
+			},
+			"scaling": {
+				"hp": 100,
+				"attack": 125,
+				"defense": 120
+			}
+		},
+		{
+			"code_name": "Kirin",
+			"type": [
+				"Electric"
+			],
+			"skill_set": {
+				"EPalWazaID::SpreadPulse": 1,
+				"EPalWazaID::ElecWave": 7,
+				"EPalWazaID::LockonLaser": 15,
+				"EPalWazaID::LineThunder": 22,
+				"EPalWazaID::ThreeThunder": 30,
+				"EPalWazaID::LightningStrike": 40,
+				"EPalWazaID::Thunderbolt": 50
+			},
+			"scaling": {
+				"hp": 80,
+				"attack": 105,
+				"defense": 105
+			}
+		},
+		{
+			"code_name": "Kitsunebi",
+			"type": [
+				"Fire"
+			],
+			"skill_set": {
+				"EPalWazaID::FireBlast": 1,
+				"EPalWazaID::MudShot": 7,
+				"EPalWazaID::FireSeed": 15,
+				"EPalWazaID::FlareArrow": 22,
+				"EPalWazaID::Flamethrower": 30,
+				"EPalWazaID::GhostFlame": 40,
+				"EPalWazaID::FireBall": 50
+			},
+			"scaling": {
+				"hp": 65,
+				"attack": 75,
+				"defense": 70
+			}
+		},
+		{
+			"code_name": "LavaGirl",
+			"type": [
+				"Fire"
+			],
+			"skill_set": {
+				"EPalWazaID::FireBlast": 1,
+				"EPalWazaID::FireSeed": 7,
+				"EPalWazaID::FlareArrow": 15,
+				"EPalWazaID::GhostFlame": 22,
+				"EPalWazaID::FlareTornado": 30,
+				"EPalWazaID::Inferno": 40,
+				"EPalWazaID::FireBall": 50
+			},
+			"scaling": {
+				"hp": 60,
+				"attack": 70,
+				"defense": 80
+			}
+		},
+		{
+			"code_name": "LazyCatfish",
+			"type": [
+				"Ground"
+			],
+			"skill_set": {},
+			"scaling": {
+				"hp": 100,
+				"attack": 70,
+				"defense": 95
+			}
+		},
+		{
+			"code_name": "LazyDragon",
+			"type": [
+				"Dragon",
+				"Water"
+			],
+			"skill_set": {
+				"EPalWazaID::DragonCanon": 1,
+				"EPalWazaID::WaterGun": 7,
+				"EPalWazaID::DragonWave": 15,
+				"EPalWazaID::BubbleShot": 22,
+				"EPalWazaID::DragonBreath": 30,
+				"EPalWazaID::WaterBall": 40,
+				"EPalWazaID::DragonMeteor": 50
+			},
+			"scaling": {
+				"hp": 110,
+				"attack": 100,
+				"defense": 70
+			}
+		},
+		{
+			"code_name": "LazyDragon_Electric",
+			"type": [
+				"Dragon",
+				"Electric"
+			],
+			"skill_set": {
+				"EPalWazaID::SpreadPulse": 1,
+				"EPalWazaID::DragonCanon": 7,
+				"EPalWazaID::ElecWave": 15,
+				"EPalWazaID::LineThunder": 22,
+				"EPalWazaID::DragonBreath": 30,
+				"EPalWazaID::LightningStrike": 40,
+				"EPalWazaID::Thunderbolt": 50
+			},
+			"scaling": {
+				"hp": 110,
+				"attack": 110,
+				"defense": 75
+			}
+		},
+		{
+			"code_name": "LilyQueen",
+			"type": [
+				"Grass"
+			],
+			"skill_set": {
+				"EPalWazaID::WindCutter": 1,
+				"EPalWazaID::SeedMachinegun": 7,
+				"EPalWazaID::SeedMine": 15,
+				"EPalWazaID::WaterBall": 22,
+				"EPalWazaID::GrassTornado": 30,
+				"EPalWazaID::RootAttack": 40,
+				"EPalWazaID::SolarBeam": 50
+			},
+			"scaling": {
+				"hp": 110,
+				"attack": 110,
+				"defense": 105
+			}
+		},
+		{
+			"code_name": "LilyQueen_Dark",
+			"type": [
+				"Dark"
+			],
+			"skill_set": {
+				"EPalWazaID::DarkBall": 1,
+				"EPalWazaID::IceBlade": 7,
+				"EPalWazaID::DarkWave": 15,
+				"EPalWazaID::FrostBreath": 22,
+				"EPalWazaID::ShadowBall": 30,
+				"EPalWazaID::IcicleThrow": 40,
+				"EPalWazaID::DarkLaser": 50
+			},
+			"scaling": {
+				"hp": 110,
+				"attack": 110,
+				"defense": 115
+			}
+		},
+		{
+			"code_name": "LittleBriarRose",
+			"type": [
+				"Grass"
+			],
+			"skill_set": {
+				"EPalWazaID::WindCutter": 1,
+				"EPalWazaID::SeedMachinegun": 7,
+				"EPalWazaID::IceMissile": 15,
+				"EPalWazaID::GrassTornado": 22,
+				"EPalWazaID::BlizzardLance": 30,
+				"EPalWazaID::RootAttack": 40,
+				"EPalWazaID::SolarBeam": 50
+			},
+			"scaling": {
+				"hp": 80,
+				"attack": 80,
+				"defense": 80
+			}
+		},
+		{
+			"code_name": "LizardMan",
+			"type": [
+				"Dark"
+			],
+			"skill_set": {
+				"EPalWazaID::PoisonShot": 1,
+				"EPalWazaID::DarkBall": 7,
+				"EPalWazaID::DarkWave": 15,
+				"EPalWazaID::GhostFlame": 22,
+				"EPalWazaID::ShadowBall": 30,
+				"EPalWazaID::Flamethrower": 40,
+				"EPalWazaID::DarkLaser": 50
+			},
+			"scaling": {
+				"hp": 80,
+				"attack": 80,
+				"defense": 50
+			}
+		},
+		{
+			"code_name": "LizardMan_Fire",
+			"type": [
+				"Fire"
+			],
+			"skill_set": {
+				"EPalWazaID::FireBlast": 1,
+				"EPalWazaID::PoisonShot": 7,
+				"EPalWazaID::FireSeed": 15,
+				"EPalWazaID::Flamethrower": 22,
+				"EPalWazaID::FlareTornado": 30,
+				"EPalWazaID::Inferno": 40,
+				"EPalWazaID::FireBall": 50
+			},
+			"scaling": {
+				"hp": 80,
+				"attack": 80,
+				"defense": 50
+			}
+		},
+		{
+			"code_name": "Manticore",
+			"type": [
+				"Fire"
+			],
+			"skill_set": {
+				"EPalWazaID::FireBlast": 1,
+				"EPalWazaID::PowerShot": 7,
+				"EPalWazaID::FlareArrow": 15,
+				"EPalWazaID::Flamethrower": 22,
+				"EPalWazaID::Inferno": 30,
+				"EPalWazaID::FireBall": 40,
+				"EPalWazaID::HyperBeam": 50
+			},
+			"scaling": {
+				"hp": 105,
+				"attack": 110,
+				"defense": 80
+			}
+		},
+		{
+			"code_name": "Manticore_Dark",
+			"type": [
+				"Fire",
+				"Dark"
+			],
+			"skill_set": {
+				"EPalWazaID::DarkWave": 1,
+				"EPalWazaID::FlareArrow": 7,
+				"EPalWazaID::Flamethrower": 15,
+				"EPalWazaID::GhostFlame": 22,
+				"EPalWazaID::Inferno": 30,
+				"EPalWazaID::FireBall": 40,
+				"EPalWazaID::DarkLaser": 50
+			},
+			"scaling": {
+				"hp": 105,
+				"attack": 115,
+				"defense": 80
+			}
+		},
+		{
+			"code_name": "Monkey",
+			"type": [
+				"Grass"
+			],
+			"skill_set": {
+				"EPalWazaID::WindCutter": 1,
+				"EPalWazaID::MudShot": 7,
+				"EPalWazaID::SeedMachinegun": 15,
+				"EPalWazaID::SeedMine": 22,
+				"EPalWazaID::ThrowRock": 30,
+				"EPalWazaID::GrassTornado": 40,
+				"EPalWazaID::SolarBeam": 50
+			},
+			"scaling": {
+				"hp": 80,
+				"attack": 70,
+				"defense": 70
+			}
+		},
+		{
+			"code_name": "MopBaby",
+			"type": [
+				"Ice"
+			],
+			"skill_set": {
+				"EPalWazaID::AirCanon": 1,
+				"EPalWazaID::IceMissile": 7,
+				"EPalWazaID::IceBlade": 15,
+				"EPalWazaID::PowerBall": 22,
+				"EPalWazaID::BlizzardLance": 30,
+				"EPalWazaID::FrostBreath": 40,
+				"EPalWazaID::IcicleThrow": 50
+			},
+			"scaling": {
+				"hp": 60,
+				"attack": 60,
+				"defense": 60
+			}
+		},
+		{
+			"code_name": "MopKing",
+			"type": [
+				"Ice"
+			],
+			"skill_set": {
+				"EPalWazaID::PowerShot": 1,
+				"EPalWazaID::IceMissile": 7,
+				"EPalWazaID::IceBlade": 15,
+				"EPalWazaID::BlizzardLance": 22,
+				"EPalWazaID::FrostBreath": 30,
+				"EPalWazaID::HyperBeam": 40,
+				"EPalWazaID::IcicleThrow": 50
+			},
+			"scaling": {
+				"hp": 100,
+				"attack": 90,
+				"defense": 90
+			}
+		},
+		{
+			"code_name": "Mutant",
+			"type": [
+				"Neutral"
+			],
+			"skill_set": {
+				"EPalWazaID::AirCanon": 1,
+				"EPalWazaID::PowerShot": 7,
+				"EPalWazaID::IceBlade": 15,
+				"EPalWazaID::ThunderFunnel": 22,
+				"EPalWazaID::PowerBall": 30,
+				"EPalWazaID::IcicleThrow": 40,
+				"EPalWazaID::HyperBeam": 50
+			},
+			"scaling": {
+				"hp": 90,
+				"attack": 100,
+				"defense": 90
+			}
+		},
+		{
+			"code_name": "NaughtyCat",
+			"type": [
+				"Neutral"
+			],
+			"skill_set": {
+				"EPalWazaID::MudShot": 1,
+				"EPalWazaID::PowerShot": 7,
+				"EPalWazaID::Unique_NaughtyCat_CatPress": 15,
+				"EPalWazaID::StoneShotgun": 22,
+				"EPalWazaID::ThrowRock": 30,
+				"EPalWazaID::PowerBall": 40,
+				"EPalWazaID::HyperBeam": 50
+			},
+			"scaling": {
+				"hp": 110,
+				"attack": 80,
+				"defense": 80
+			}
+		},
+		{
+			"code_name": "NegativeKoala",
+			"type": [
+				"Dark"
+			],
+			"skill_set": {
+				"EPalWazaID::PoisonShot": 1,
+				"EPalWazaID::MudShot": 7,
+				"EPalWazaID::DarkBall": 15,
+				"EPalWazaID::IceMissile": 22,
+				"EPalWazaID::DarkWave": 30,
+				"EPalWazaID::ShadowBall": 40,
+				"EPalWazaID::DarkLaser": 50
+			},
+			"scaling": {
+				"hp": 70,
+				"attack": 70,
+				"defense": 70
+			}
+		},
+		{
+			"code_name": "NegativeOctopus",
+			"type": [
+				"Dark"
+			],
+			"skill_set": {
+				"EPalWazaID::AquaJet": 1,
+				"EPalWazaID::PoisonShot": 7,
+				"EPalWazaID::DarkBall": 15,
+				"EPalWazaID::DarkWave": 22,
+				"EPalWazaID::AcidRain": 30,
+				"EPalWazaID::ShadowBall": 40,
+				"EPalWazaID::DarkLaser": 50
+			},
+			"scaling": {
+				"hp": 60,
+				"attack": 60,
+				"defense": 70
+			}
+		},
+		{
+			"code_name": "NightFox",
+			"type": [
+				"Dark"
+			],
+			"skill_set": {
+				"EPalWazaID::AirCanon": 1,
+				"EPalWazaID::DarkBall": 7,
+				"EPalWazaID::DarkWave": 15,
+				"EPalWazaID::PowerBall": 22,
+				"EPalWazaID::GhostFlame": 30,
+				"EPalWazaID::ShadowBall": 40,
+				"EPalWazaID::DarkLaser": 50
+			},
+			"scaling": {
+				"hp": 75,
+				"attack": 85,
+				"defense": 70
+			}
+		},
+		{
+			"code_name": "Penguin",
+			"type": [
+				"Water",
+				"Ice"
+			],
+			"skill_set": {
+				"EPalWazaID::IceMissile": 1,
+				"EPalWazaID::AquaJet": 7,
+				"EPalWazaID::WaterGun": 15,
+				"EPalWazaID::IceBlade": 22,
+				"EPalWazaID::BlizzardLance": 30,
+				"EPalWazaID::IcicleThrow": 40,
+				"EPalWazaID::HydroPump": 50
+			},
+			"scaling": {
+				"hp": 70,
+				"attack": 75,
+				"defense": 70
+			}
+		},
+		{
+			"code_name": "PinkCat",
+			"type": [
+				"Neutral"
+			],
+			"skill_set": {
+				"EPalWazaID::Unique_PinkCat_CatPunch": 1,
+				"EPalWazaID::AirCanon": 7,
+				"EPalWazaID::MudShot": 15,
+				"EPalWazaID::PowerShot": 22,
+				"EPalWazaID::WindCutter": 30,
+				"EPalWazaID::SeedMachinegun": 40,
+				"EPalWazaID::HyperBeam": 50
+			},
+			"scaling": {
+				"hp": 70,
+				"attack": 70,
+				"defense": 70
+			}
+		},
+		{
+			"code_name": "PinkLizard",
+			"type": [
+				"Neutral"
+			],
+			"skill_set": {
+				"EPalWazaID::PowerShot": 1,
+				"EPalWazaID::PoisonShot": 7,
+				"EPalWazaID::DarkWave": 15,
+				"EPalWazaID::AcidRain": 22,
+				"EPalWazaID::PowerBall": 30,
+				"EPalWazaID::SelfDestruct": 40,
+				"EPalWazaID::HyperBeam": 50
+			},
+			"scaling": {
+				"hp": 120,
+				"attack": 70,
+				"defense": 70
+			}
+		},
+		{
+			"code_name": "PinkRabbit",
+			"type": [
+				"Neutral"
+			],
+			"skill_set": {
+				"EPalWazaID::AirCanon": 1,
+				"EPalWazaID::PowerShot": 7,
+				"EPalWazaID::IceMissile": 15,
+				"EPalWazaID::IcicleThrow": 22,
+				"EPalWazaID::PowerBall": 30,
+				"EPalWazaID::BlizzardLance": 40,
+				"EPalWazaID::HyperBeam": 50
+			},
+			"scaling": {
+				"hp": 75,
+				"attack": 65,
+				"defense": 70
+			}
+		},
+		{
+			"code_name": "PlantSlime",
+			"type": [
+				"Grass",
+				"Ground"
+			],
+			"skill_set": {
+				"EPalWazaID::MudShot": 1,
+				"EPalWazaID::WindCutter": 7,
+				"EPalWazaID::StoneShotgun": 15,
+				"EPalWazaID::SeedMachinegun": 22,
+				"EPalWazaID::SeedMine": 30,
+				"EPalWazaID::SandTornado": 40,
+				"EPalWazaID::SolarBeam": 50
+			},
+			"scaling": {
+				"hp": 70,
+				"attack": 70,
+				"defense": 70
+			}
+		},
+		{
+			"code_name": "PlantSlime_Flower",
+			"type": [
+				"Grass",
+				"Ground"
+			],
+			"skill_set": {
+				"EPalWazaID::MudShot": 1,
+				"EPalWazaID::WindCutter": 7,
+				"EPalWazaID::StoneShotgun": 15,
+				"EPalWazaID::SeedMachinegun": 22,
+				"EPalWazaID::SeedMine": 30,
+				"EPalWazaID::SandTornado": 40,
+				"EPalWazaID::SolarBeam": 50
+			},
+			"scaling": {
+				"hp": 70,
+				"attack": 70,
+				"defense": 70
+			}
+		},
+		{
+			"code_name": "QueenBee",
+			"type": [
+				"Grass"
+			],
+			"skill_set": {
+				"EPalWazaID::AirCanon": 1,
+				"EPalWazaID::WindCutter": 7,
+				"EPalWazaID::PoisonShot": 15,
+				"EPalWazaID::Unique_QueenBee_SpinLance": 22,
+				"EPalWazaID::GrassTornado": 30,
+				"EPalWazaID::RootAttack": 40,
+				"EPalWazaID::SolarBeam": 50
+			},
+			"scaling": {
+				"hp": 90,
+				"attack": 105,
+				"defense": 100
+			}
+		},
+		{
+			"code_name": "RaijinDaughter",
+			"type": [
+				"Electric"
+			],
+			"skill_set": {
+				"EPalWazaID::AirCanon": 1,
+				"EPalWazaID::ElecWave": 7,
+				"EPalWazaID::AcidRain": 15,
+				"EPalWazaID::LineThunder": 22,
+				"EPalWazaID::ThreeThunder": 30,
+				"EPalWazaID::LightningStrike": 40,
+				"EPalWazaID::Thunderbolt": 50
+			},
+			"scaling": {
+				"hp": 70,
+				"attack": 80,
+				"defense": 70
+			}
+		},
+		{
+			"code_name": "RedArmorBird",
+			"type": [
+				"Fire"
+			],
+			"skill_set": {
+				"EPalWazaID::AirCanon": 1,
+				"EPalWazaID::FireSeed": 7,
+				"EPalWazaID::FlareArrow": 15,
+				"EPalWazaID::SandTornado": 22,
+				"EPalWazaID::FlareTornado": 30,
+				"EPalWazaID::Flamethrower": 40,
+				"EPalWazaID::FireBall": 50
+			},
+			"scaling": {
+				"hp": 95,
+				"attack": 105,
+				"defense": 120
+			}
+		},
+		{
+			"code_name": "RobinHood",
+			"type": [
+				"Grass"
+			],
+			"skill_set": {
+				"EPalWazaID::WindCutter": 1,
+				"EPalWazaID::PowerShot": 7,
+				"EPalWazaID::Unique_RobinHood_BowSnipe": 15,
+				"EPalWazaID::SeedMine": 22,
+				"EPalWazaID::GrassTornado": 30,
+				"EPalWazaID::RootAttack": 40,
+				"EPalWazaID::SolarBeam": 50
+			},
+			"scaling": {
+				"hp": 90,
+				"attack": 105,
+				"defense": 80
+			}
+		},
+		{
+			"code_name": "RobinHood_Ground",
+			"type": [
+				"Grass",
+				"Ground"
+			],
+			"skill_set": {
+				"EPalWazaID::MudShot": 1,
+				"EPalWazaID::WindCutter": 7,
+				"EPalWazaID::Unique_RobinHood_BowSnipe": 15,
+				"EPalWazaID::StoneShotgun": 22,
+				"EPalWazaID::SandTornado": 30,
+				"EPalWazaID::SolarBeam": 40,
+				"EPalWazaID::RockLance": 50
+			},
+			"scaling": {
+				"hp": 90,
+				"attack": 105,
+				"defense": 80
+			}
+		},
+		{
+			"code_name": "Ronin",
+			"type": [
+				"Fire"
+			],
+			"skill_set": {
+				"EPalWazaID::FireBlast": 1,
+				"EPalWazaID::WindCutter": 7,
+				"EPalWazaID::IceBlade": 15,
+				"EPalWazaID::Unique_Ronin_Iai": 22,
+				"EPalWazaID::Flamethrower": 30,
+				"EPalWazaID::LightningStrike": 40,
+				"EPalWazaID::Inferno": 50
+			},
+			"scaling": {
+				"hp": 80,
+				"attack": 125,
+				"defense": 80
+			}
+		},
+		{
+			"code_name": "SaintCentaur",
+			"type": [
+				"Neutral"
+			],
+			"skill_set": {
+				"EPalWazaID::PowerShot": 1,
+				"EPalWazaID::IceMissile": 7,
+				"EPalWazaID::BlizzardLance": 15,
+				"EPalWazaID::PowerBall": 22,
+				"EPalWazaID::IcicleThrow": 30,
+				"EPalWazaID::Unique_SaintCentaur_OneSpearRushes": 40,
+				"EPalWazaID::HyperBeam": 50
+			},
+			"scaling": {
+				"hp": 130,
+				"attack": 120,
+				"defense": 145
+			}
+		},
+		{
+			"code_name": "SakuraSaurus",
+			"type": [
+				"Grass"
+			],
+			"skill_set": {
+				"EPalWazaID::WindCutter": 1,
+				"EPalWazaID::MudShot": 7,
+				"EPalWazaID::Unique_SakuraSaurus_SideTackle": 15,
+				"EPalWazaID::SeedMine": 22,
+				"EPalWazaID::GrassTornado": 30,
+				"EPalWazaID::RootAttack": 40,
+				"EPalWazaID::SolarBeam": 50
+			},
+			"scaling": {
+				"hp": 120,
+				"attack": 90,
+				"defense": 100
+			}
+		},
+		{
+			"code_name": "SakuraSaurus_Water",
+			"type": [
+				"Grass",
+				"Water"
+			],
+			"skill_set": {
+				"EPalWazaID::WaterGun": 1,
+				"EPalWazaID::BubbleShot": 7,
+				"EPalWazaID::Unique_SakuraSaurus_SideTackle": 15,
+				"EPalWazaID::SeedMine": 22,
+				"EPalWazaID::RootAttack": 30,
+				"EPalWazaID::WaterBall": 40,
+				"EPalWazaID::HydroPump": 50
+			},
+			"scaling": {
+				"hp": 120,
+				"attack": 95,
+				"defense": 100
+			}
+		},
+		{
+			"code_name": "Serpent",
+			"type": [
+				"Water"
+			],
+			"skill_set": {
+				"EPalWazaID::AquaJet": 1,
+				"EPalWazaID::DragonCanon": 7,
+				"EPalWazaID::WaterGun": 15,
+				"EPalWazaID::BubbleShot": 22,
+				"EPalWazaID::DragonWave": 30,
+				"EPalWazaID::DragonBreath": 40,
+				"EPalWazaID::HydroPump": 50
+			},
+			"scaling": {
+				"hp": 90,
+				"attack": 90,
+				"defense": 80
+			}
+		},
+		{
+			"code_name": "Serpent_Ground",
+			"type": [
+				"Ground"
+			],
+			"skill_set": {
+				"EPalWazaID::MudShot": 1,
+				"EPalWazaID::DragonCanon": 7,
+				"EPalWazaID::StoneShotgun": 15,
+				"EPalWazaID::ThrowRock": 22,
+				"EPalWazaID::SandTornado": 30,
+				"EPalWazaID::DragonBreath": 40,
+				"EPalWazaID::RockLance": 50
+			},
+			"scaling": {
+				"hp": 90,
+				"attack": 90,
+				"defense": 100
+			}
+		},
+		{
+			"code_name": "SharkKid",
+			"type": [
+				"Water"
+			],
+			"skill_set": {
+				"EPalWazaID::AquaJet": 1,
+				"EPalWazaID::PowerShot": 7,
+				"EPalWazaID::WaterGun": 15,
+				"EPalWazaID::BubbleShot": 22,
+				"EPalWazaID::IceBlade": 30,
+				"EPalWazaID::WaterBall": 40,
+				"EPalWazaID::HydroPump": 50
+			},
+			"scaling": {
+				"hp": 90,
+				"attack": 90,
+				"defense": 75
+			}
+		},
+		{
+			"code_name": "SharkKid_Fire",
+			"type": [
+				"Fire"
+			],
+			"skill_set": {
+				"EPalWazaID::FireBlast": 1,
+				"EPalWazaID::PowerShot": 7,
+				"EPalWazaID::FireSeed": 15,
+				"EPalWazaID::FlareArrow": 22,
+				"EPalWazaID::LineThunder": 30,
+				"EPalWazaID::FireBall": 40,
+				"EPalWazaID::Inferno": 50
+			},
+			"scaling": {
+				"hp": 90,
+				"attack": 90,
+				"defense": 75
+			}
+		},
+		{
+			"code_name": "Sheepball",
+			"type": [
+				"Neutral"
+			],
+			"skill_set": {
+				"EPalWazaID::Unique_SheepBall_Roll": 1,
+				"EPalWazaID::AirCanon": 7,
+				"EPalWazaID::PowerShot": 15,
+				"EPalWazaID::SelfDestruct": 22,
+				"EPalWazaID::ThunderBall": 30,
+				"EPalWazaID::PowerBall": 40,
+				"EPalWazaID::HyperBeam": 50
+			},
+			"scaling": {
+				"hp": 70,
+				"aTK": 70,
+				"defense": 70
+			}
+		},
+		{
+			"code_name": "SkyDragon",
+			"type": [
+				"Dragon"
+			],
+			"skill_set": {
+				"EPalWazaID::DragonCanon": 1,
+				"EPalWazaID::FireSeed": 7,
+				"EPalWazaID::AcidRain": 15,
+				"EPalWazaID::DragonBreath": 22,
+				"EPalWazaID::GrassTornado": 30,
+				"EPalWazaID::WaterBall": 40,
+				"EPalWazaID::DragonMeteor": 50
+			},
+			"scaling": {
+				"hp": 105,
+				"attack": 100,
+				"defense": 100
+			}
+		},
+		{
+			"code_name": "SoldierBee",
+			"type": [
+				"Grass"
+			],
+			"skill_set": {
+				"EPalWazaID::AirCanon": 1,
+				"EPalWazaID::WindCutter": 7,
+				"EPalWazaID::SelfDestruct_Bee": 15,
+				"EPalWazaID::PoisonShot": 22,
+				"EPalWazaID::AcidRain": 30,
+				"EPalWazaID::GrassTornado": 40,
+				"EPalWazaID::SolarBeam": 50
+			},
+			"scaling": {
+				"hp": 80,
+				"attack": 90,
+				"defense": 90
+			}
+		},
+		{
+			"code_name": "Suzaku",
+			"type": [
+				"Fire"
+			],
+			"skill_set": {
+				"EPalWazaID::AirCanon": 1,
+				"EPalWazaID::FireBlast": 7,
+				"EPalWazaID::FireSeed": 15,
+				"EPalWazaID::FlareArrow": 22,
+				"EPalWazaID::Flamethrower": 30,
+				"EPalWazaID::FlareTornado": 40,
+				"EPalWazaID::FireBall": 50
+			},
+			"scaling": {
+				"hp": 120,
+				"attack": 105,
+				"defense": 105
+			}
+		},
+		{
+			"code_name": "Suzaku_Water",
+			"type": [
+				"Water"
+			],
+			"skill_set": {
+				"EPalWazaID::AquaJet": 1,
+				"EPalWazaID::IceMissile": 7,
+				"EPalWazaID::WaterGun": 15,
+				"EPalWazaID::FrostBreath": 22,
+				"EPalWazaID::WaterBall": 30,
+				"EPalWazaID::IcicleThrow": 40,
+				"EPalWazaID::HydroPump": 50
+			},
+			"scaling": {
+				"hp": 125,
+				"attack": 105,
+				"defense": 105
+			}
+		},
+		{
+			"code_name": "SweetsSheep",
+			"type": [
+				"Neutral"
+			],
+			"skill_set": {
+				"EPalWazaID::AirCanon": 1,
+				"EPalWazaID::MudShot": 7,
+				"EPalWazaID::PowerShot": 15,
+				"EPalWazaID::WindCutter": 22,
+				"EPalWazaID::BubbleShot": 30,
+				"EPalWazaID::PowerBall": 40,
+				"EPalWazaID::HyperBeam": 50
+			},
+			"scaling": {
+				"hp": 70,
+				"attack": 70,
+				"defense": 90
+			}
+		},
+		{
+			"code_name": "ThunderBird",
+			"type": [
+				"Electric"
+			],
+			"skill_set": {
+				"EPalWazaID::AirCanon": 1,
+				"EPalWazaID::SpreadPulse": 7,
+				"EPalWazaID::ElecWave": 15,
+				"EPalWazaID::LineThunder": 22,
+				"EPalWazaID::ThreeThunder": 30,
+				"EPalWazaID::SandTornado": 40,
+				"EPalWazaID::Thunderbolt": 50
+			},
+			"scaling": {
+				"hp": 105,
+				"attack": 115,
+				"defense": 80
+			}
+		},
+		{
+			"code_name": "ThunderDog",
+			"type": [
+				"Electric"
+			],
+			"skill_set": {
+				"EPalWazaID::MudShot": 1,
+				"EPalWazaID::ElecWave": 7,
+				"EPalWazaID::SpreadPulse": 15,
+				"EPalWazaID::StoneShotgun": 22,
+				"EPalWazaID::ThunderBall": 30,
+				"EPalWazaID::LineThunder": 40,
+				"EPalWazaID::Thunderbolt": 50
+			},
+			"scaling": {
+				"hp": 90,
+				"attack": 100,
+				"defense": 80
+			}
+		},
+		{
+			"code_name": "ThunderDragonMan",
+			"type": [
+				"Dragon",
+				"Electric"
+			],
+			"skill_set": {
+				"EPalWazaID::Unique_ThunderDragonMan_ThunderSwordAttack": 1,
+				"EPalWazaID::LightningStrike": 7,
+				"EPalWazaID::SpreadPulse": 15,
+				"EPalWazaID::DragonBreath": 22,
+				"EPalWazaID::LineThunder": 30,
+				"EPalWazaID::ThreeThunder": 40,
+				"EPalWazaID::Thunderbolt": 50
+			},
+			"scaling": {
+				"hp": 100,
+				"attack": 130,
+				"defense": 100
+			}
+		},
+		{
+			"code_name": "Umihebi",
+			"type": [
+				"Dragon",
+				"Water"
+			],
+			"skill_set": {
+				"EPalWazaID::WaterGun": 1,
+				"EPalWazaID::DragonCanon": 7,
+				"EPalWazaID::DragonBreath": 15,
+				"EPalWazaID::WaterBall": 22,
+				"EPalWazaID::ThreeThunder": 30,
+				"EPalWazaID::HydroPump": 40,
+				"EPalWazaID::DragonMeteor": 50
+			},
+			"scaling": {
+				"hp": 130,
+				"attack": 120,
+				"defense": 100
+			}
+		},
+		{
+			"code_name": "Umihebi_Fire",
+			"type": [
+				"Dragon",
+				"Fire"
+			],
+			"skill_set": {
+				"EPalWazaID::FireBlast": 1,
+				"EPalWazaID::DragonCanon": 7,
+				"EPalWazaID::FlareTornado": 15,
+				"EPalWazaID::Flamethrower": 22,
+				"EPalWazaID::ThreeThunder": 30,
+				"EPalWazaID::FireBall": 40,
+				"EPalWazaID::DragonMeteor": 50
+			},
+			"scaling": {
+				"hp": 130,
+				"attack": 130,
+				"defense": 100
+			}
+		},
+		{
+			"code_name": "VioletFairy",
+			"type": [
+				"Grass"
+			],
+			"skill_set": {
+				"EPalWazaID::PoisonFog": 1,
+				"EPalWazaID::WindCutter": 7,
+				"EPalWazaID::PoisonShot": 15,
+				"EPalWazaID::SeedMine": 22,
+				"EPalWazaID::GrassTornado": 30,
+				"EPalWazaID::ShadowBall": 40,
+				"EPalWazaID::SolarBeam": 50
+			},
+			"scaling": {
+				"hp": 100,
+				"attack": 100,
+				"defense": 120
+			}
+		},
+		{
+			"code_name": "VolcanicMonster",
+			"type": [
+				"Fire",
+				"Ground"
+			],
+			"skill_set": {
+				"EPalWazaID::FireBlast": 1,
+				"EPalWazaID::StoneShotgun": 7,
+				"EPalWazaID::ThrowRock": 15,
+				"EPalWazaID::Flamethrower": 22,
+				"EPalWazaID::Unique_VolcanicMonster_MagmaAttack": 30,
+				"EPalWazaID::Inferno": 40,
+				"EPalWazaID::RockLance": 50
+			},
+			"scaling": {
+				"hp": 110,
+				"attack": 105,
+				"defense": 120
+			}
+		},
+		{
+			"code_name": "VolcanicMonster_Ice",
+			"type": [
+				"Ice",
+				"Ground"
+			],
+			"skill_set": {
+				"EPalWazaID::IceMissile": 1,
+				"EPalWazaID::StoneShotgun": 7,
+				"EPalWazaID::BlizzardLance": 15,
+				"EPalWazaID::FrostBreath": 22,
+				"EPalWazaID::Unique_VolcanicMonster_Ice_IceAttack": 30,
+				"EPalWazaID::IcicleThrow": 40,
+				"EPalWazaID::RockLance": 50
+			},
+			"scaling": {
+				"hp": 110,
+				"attack": 105,
+				"defense": 130
+			}
+		},
+		{
+			"code_name": "WeaselDragon",
+			"type": [
+				"Ice",
+				"Dragon"
+			],
+			"skill_set": {
+				"EPalWazaID::IceMissile": 1,
+				"EPalWazaID::DragonCanon": 7,
+				"EPalWazaID::Unique_WeaselDragon_FlyingTackle": 11,
+				"EPalWazaID::DragonWave": 15,
+				"EPalWazaID::IceBlade": 22,
+				"EPalWazaID::DragonBreath": 30,
+				"EPalWazaID::FrostBreath": 40,
+				"EPalWazaID::DragonMeteor": 50
+			},
+			"scaling": {
+				"hp": 90,
+				"attack": 80,
+				"defense": 80
+			}
+		},
+		{
+			"code_name": "Werewolf",
+			"type": [
+				"Dark"
+			],
+			"skill_set": {
+				"EPalWazaID::DarkBall": 1,
+				"EPalWazaID::Unique_Werewolf_Scratch": 7,
+				"EPalWazaID::DarkWave": 15,
+				"EPalWazaID::IceBlade": 22,
+				"EPalWazaID::GhostFlame": 30,
+				"EPalWazaID::ShadowBall": 40,
+				"EPalWazaID::DarkLaser": 50
+			},
+			"scaling": {
+				"hp": 80,
+				"attack": 100,
+				"defense": 80
+			}
+		},
+		{
+			"code_name": "WhiteMoth",
+			"type": [
+				"Ice"
+			],
+			"skill_set": {
+				"EPalWazaID::IceMissile": 1,
+				"EPalWazaID::IceBlade": 7,
+				"EPalWazaID::BlizzardLance": 15,
+				"EPalWazaID::FrostBreath": 22,
+				"EPalWazaID::GhostFlame": 30,
+				"EPalWazaID::WaterBall": 40,
+				"EPalWazaID::IcicleThrow": 50
+			},
+			"scaling": {
+				"hp": 110,
+				"attack": 90,
+				"defense": 100
+			}
+		},
+		{
+			"code_name": "WhiteTiger",
+			"type": [
+				"Ice"
+			],
+			"skill_set": {
+				"EPalWazaID::PowerShot": 1,
+				"EPalWazaID::IceMissile": 7,
+				"EPalWazaID::ThrowRock": 15,
+				"EPalWazaID::IceBlade": 22,
+				"EPalWazaID::BlizzardLance": 30,
+				"EPalWazaID::FrostBreath": 40,
+				"EPalWazaID::IcicleThrow": 50
+			},
+			"scaling": {
+				"hp": 100,
+				"attack": 100,
+				"defense": 110
+			}
+		},
+		{
+			"code_name": "WindChimes",
+			"type": [
+				"Ground"
+			],
+			"skill_set": {},
+			"scaling": {
+				"hp": 80,
+				"attack": 70,
+				"defense": 70
+			}
+		},
+		{
+			"code_name": "WindChimes_Ice",
+			"type": [
+				"Ice"
+			],
+			"skill_set": {},
+			"scaling": {
+				"hp": 80,
+				"attack": 80,
+				"defense": 70
+			}
+		},
+		{
+			"code_name": "WizardOwl",
+			"type": [
+				"Dark"
+			],
+			"skill_set": {
+				"EPalWazaID::AirCanon": 1,
+				"EPalWazaID::DarkBall": 7,
+				"EPalWazaID::DarkWave": 15,
+				"EPalWazaID::SandTornado": 22,
+				"EPalWazaID::GhostFlame": 30,
+				"EPalWazaID::ShadowBall": 40,
+				"EPalWazaID::DarkLaser": 50
+			},
+			"scaling": {
+				"hp": 70,
+				"attack": 70,
+				"defense": 80
+			}
+		},
+		{
+			"code_name": "WoolFox",
+			"type": [
+				"Neutral"
+			],
+			"skill_set": {
+				"EPalWazaID::AirCanon": 1,
+				"EPalWazaID::MudShot": 7,
+				"EPalWazaID::SpreadPulse": 15,
+				"EPalWazaID::PowerShot": 22,
+				"EPalWazaID::ElecWave": 30,
+				"EPalWazaID::PowerBall": 40,
+				"EPalWazaID::Thunderbolt": 50
+			},
+			"scaling": {
+				"hp": 70,
+				"attack": 70,
+				"defense": 75
+			}
+		},
+		{
+			"code_name": "Yeti",
+			"type": [
+				"Ice"
+			],
+			"skill_set": {
+				"EPalWazaID::IceMissile": 1,
+				"EPalWazaID::WindCutter": 7,
+				"EPalWazaID::IceBlade": 15,
+				"EPalWazaID::BlizzardLance": 22,
+				"EPalWazaID::FrostBreath": 30,
+				"EPalWazaID::IcicleThrow": 40,
+				"EPalWazaID::SolarBeam": 50
+			},
+			"scaling": {
+				"hp": 140,
+				"attack": 80,
+				"defense": 100
+			}
+		},
+		{
+			"code_name": "Yeti_Grass",
+			"type": [
+				"Grass"
+			],
+			"skill_set": {
+				"EPalWazaID::WindCutter": 1,
+				"EPalWazaID::WaterGun": 7,
+				"EPalWazaID::SeedMine": 15,
+				"EPalWazaID::GrassTornado": 22,
+				"EPalWazaID::RootAttack": 30,
+				"EPalWazaID::WaterBall": 40,
+				"EPalWazaID::SolarBeam": 50
+			},
+			"scaling": {
+				"hp": 140,
+				"attack": 80,
+				"defense": 110
+			}
+		},
+		{
+			"code_name": "BlackFurDragon",
+			"type": [
+				"Dark",
+				"Dragon"
+			],
+			"skill_set": {},
+			"scaling": {
+				"hp": 130,
+				"attack": 130,
+				"defense": 110
+			}
+		},
+		{
+			"code_name": "ElecLion",
+			"type": [
+				"Electric"
+			],
+			"skill_set": {},
+			"scaling": {
+				"hp": 100,
+				"attack": 110,
+				"defense": 70
+			}
+		},
+		{
+			"code_name": "DarkMutant",
+			"type": [
+				"Dark",
+				"Dragon"
+			],
+			"skill_set": {},
+			"scaling": {
+				"hp": 100,
+				"attack": 100,
+				"defense": 100
+			}
+		},
+		{
+			"code_name": "NightLady",
+			"type": [
+				"Dark"
+			],
+			"skill_set": {
+				"EPalWazaID::DarkCanon": 1,
+				"EPalWazaID::DarkPulse": 7,
+				"EPalWazaID::DarkArrow": 15,
+				"EPalWazaID::GhostFlame": 22,
+				"EPalWazaID::ShadowBall": 30,
+				"EPalWazaID::Apocalypse": 40,
+				"EPalWazaID::Unique_NightLady_WarpBeam_Straight": 50
+			},
+			"RaidMoveset": {
+				"EPalWazaID::GhostFlame": 1,
+				"EPalWazaID::DarkPulse": 2,
+				"EPalWazaID::ShadowBall": 3,
+				"EPalWazaID::DarkLaser": 4,
+				"EPalWazaID::DarkCannon": 5,
+				"EPalWazaID::DarkArrow": 6,
+				"EPalWazaID::Apocalypse": 7,
+				"EPalWazaID::Unique_NightLady_WarpBeam_Straight": 8
+			},
+			"scaling": {
+				"hp": 120,
+				"attack": 150,
+				"defense": 100
+			}
+		},
+		{
+			"code_name": "NightLady_Dark",
+			"type": [
+				"Dark"
+			],
+			"skill_set": {
+				"EPalWazaID::DarkCanon": 1,
+				"EPalWazaID::DarkPulse": 7,
+				"EPalWazaID::DarkArrow": 15,
+				"EPalWazaID::ShadowBall": 22,
+				"EPalWazaID::Apocalypse": 30,
+				"EPalWazaID::Unique_NightLady_FlameNightmare": 40,
+				"EPalWazaID::Unique_NightLady_WarpBeam": 50
+			},
+			"RaidMoveset": {
+				"EPalWazaID::DarkPulse": 1,
+				"EPalWazaID::ShadowBall": 2,
+				"EPalWazaID::DarkLaser": 3,
+				"EPalWazaID::DarkCanon": 4,
+				"EPalWazaID::DarkLegion": 5,
+				"EPalWazaID::DarkArrow": 6,
+				"EPalWazaID::Apocalypse": 7,
+				"EPalWazaID::Unique_NightLady_FlameNightmare": 8,
+				"EPalWazaID::Unique_NightLady_WarpBeam": 9
+			},
+			"scaling": {
+				"hp": 120,
+				"attack": 150,
+				"defense": 100
+			}
+		},
+		{
+			"code_name": "GYM_ThunderDragonMan",
+			"type": [
+				"Dragon",
+				"Electric"
+			],
+			"skill_set": {},
+			"tower": true,
+			"scaling": {
+				"hp": 100,
+				"attack": 130,
+				"defense": 110
+			}
+		},
+		{
+			"code_name": "GYM_LilyQueen",
+			"type": [
+				"Grass"
+			],
+			"skill_set": {},
+			"tower": true,
+			"scaling": {
+				"hp": 110,
+				"attack": 110,
+				"defense": 105
+			}
+		},
+		{
+			"code_name": "GYM_Horus",
+			"type": [
+				"Fire"
+			],
+			"skill_set": {},
+			"tower": true,
+			"scaling": {
+				"hp": 100,
+				"attack": 105,
+				"defense": 110
+			}
+		},
+		{
+			"code_name": "GYM_BlackGriffon",
+			"type": [
+				"Dark"
+			],
+			"skill_set": {},
+			"tower": true,
+			"scaling": {
+				"hp": 120,
+				"attack": 120,
+				"defense": 140
+			}
+		},
+		{
+			"code_name": "GYM_ElecPanda",
+			"type": [
+				"Electric"
+			],
+			"skill_set": {},
+			"tower": true,
+			"scaling": {
+				"hp": 105,
+				"attack": 100,
+				"defense": 100
+			}
+		},
+		{
+			"code_name": "Male_DarkTrader01",
+			"type": [
+				"None"
+			],
+			"skill_set": {},
+			"human": true
+		},
+		{
+			"code_name": "FireCult_FlameThrower",
+			"type": [
+				"None"
+			],
+			"skill_set": {},
+			"human": true
+		},
+		{
+			"code_name": "FireCult_Rifle",
+			"type": [
+				"None"
+			],
+			"skill_set": {},
+			"human": true
+		},
+		{
+			"code_name": "Male_Soldier01",
+			"type": [
+				"None"
+			],
+			"skill_set": {},
+			"human": true
+		},
+		{
+			"code_name": "Female_Soldier01",
+			"type": [
+				"None"
+			],
+			"skill_set": {},
+			"human": true
+		},
+		{
+			"code_name": "Believer_CrossBow",
+			"type": [
+				"None"
+			],
+			"skill_set": {},
+			"human": true
+		},
+		{
+			"code_name": "Believer_Bat",
+			"type": [
+				"None"
+			],
+			"skill_set": {},
+			"human": true
+		},
+		{
+			"code_name": "Male_Scientist01_LaserRifle",
+			"type": [
+				"None"
+			],
+			"skill_set": {},
+			"human": true
+		},
+		{
+			"code_name": "PalDealer",
+			"type": [
+				"None"
+			],
+			"skill_set": {},
+			"human": true
+		},
+		{
+			"code_name": "Police_Handgun",
+			"type": [
+				"None"
+			],
+			"skill_set": {},
+			"human": true
+		},
+		{
+			"code_name": "Hunter_Bat",
+			"type": [
+				"None"
+			],
+			"skill_set": {},
+			"human": true
+		},
+		{
+			"code_name": "Hunter_FlameThrower",
+			"type": [
+				"None"
+			],
+			"skill_set": {},
+			"human": true
+		},
+		{
+			"code_name": "Hunter_Fat_GatlingGun",
+			"type": [
+				"None"
+			],
+			"skill_set": {},
+			"human": true
+		},
+		{
+			"code_name": "Hunter_RocketLauncher",
+			"type": [
+				"None"
+			],
+			"skill_set": {},
+			"human": true
+		},
+		{
+			"code_name": "Hunter_Grenade",
+			"type": [
+				"None"
+			],
+			"skill_set": {},
+			"human": true
+		},
+		{
+			"code_name": "Hunter_Rifle",
+			"type": [
+				"None"
+			],
+			"skill_set": {},
+			"human": true
+		},
+		{
+			"code_name": "Hunter_Shotgun",
+			"type": [
+				"None"
+			],
+			"skill_set": {},
+			"human": true
+		},
+		{
+			"code_name": "Hunter_Handgun",
+			"type": [
+				"None"
+			],
+			"skill_set": {},
+			"human": true
+		},
+		{
+			"code_name": "SalesPerson",
+			"type": [
+				"None"
+			],
+			"skill_set": {},
+			"human": true
+		},
+		{
+			"code_name": "SalesPerson_Desert",
+			"type": [
+				"None"
+			],
+			"skill_set": {},
+			"human": true
+		},
+		{
+			"code_name": "SalesPerson_Desert2",
+			"type": [
+				"None"
+			],
+			"skill_set": {},
+			"human": true
+		},
+		{
+			"code_name": "SalesPerson_Volcano",
+			"type": [
+				"None"
+			],
+			"skill_set": {},
+			"human": true
+		},
+		{
+			"code_name": "SalesPerson_Volcano2",
+			"type": [
+				"None"
+			],
+			"skill_set": {},
+			"human": true
+		},
+		{
+			"code_name": "Female_DesertPeople02",
+			"type": [
+				"None"
+			],
+			"skill_set": {},
+			"human": true
+		},
+		{
+			"code_name": "Female_People02",
+			"type": [
+				"None"
+			],
+			"skill_set": {},
+			"human": true
+		},
+		{
+			"code_name": "Female_People03",
+			"type": [
+				"None"
+			],
+			"skill_set": {},
+			"human": true
+		},
+		{
+			"code_name": "Male_DesertPeople01",
+			"type": [
+				"None"
+			],
+			"skill_set": {},
+			"human": true
+		},
+		{
+			"code_name": "Male_People02",
+			"type": [
+				"None"
+			],
+			"skill_set": {},
+			"human": true
+		},
+		{
+			"code_name": "Male_People03",
+			"type": [
+				"None"
+			],
+			"skill_set": {},
+			"human": true
+		},
+		{
+			"code_name": "MobuCitizen",
+			"type": [
+				"None"
+			],
+			"skill_set": {},
+			"human": true
+		},
+		{
+			"code_name": "MobuCitizen_Male",
+			"type": [
+				"None"
+			],
+			"skill_set": {},
+			"human": true
+		},
+		{
+			"code_name": "MobuCitizen",
+			"type": [
+				"None"
+			],
+			"skill_set": {},
+			"human": true
+		},
+		{
+			"code_name": "Guard_Rifle",
+			"type": [
+				"None"
+			],
+			"skill_set": {},
+			"human": true
+		},
+		{
+			"code_name": "Guard_Shotgun",
+			"type": [
+				"None"
+			],
+			"skill_set": {},
+			"human": true
+		},
+		{
+			"code_name": "PalDealer_Desert",
+			"type": [
+				"None"
+			],
+			"skill_set": {},
+			"human": true
+		},
+		{
+			"code_name": "PalDealer_Volcano",
+			"type": [
+				"None"
+			],
+			"skill_set": {},
+			"human": true
+		},
+		{
+			"code_name": "Police_Rifle",
+			"type": [
+				"None"
+			],
+			"skill_set": {},
+			"human": true
+		},
+		{
+			"code_name": "Police_Shotgun",
+			"type": [
+				"None"
+			],
+			"skill_set": {},
+			"human": true
+		},
+		{
+			"code_name": "Gorilla_Ground",
+			"type": [
+				"Ground"
+			],
+			"skill_set": {
+				"EPalWazaID::AirCanon": 1,
+				"EPalWazaID::Unique_Alpaca_Tackle": 7,
+				"EPalWazaID::MudShot": 15,
+				"EPalWazaID::PowerShot": 22,
+				"EPalWazaID::ElecWave": 30,
+				"EPalWazaID::PowerBall": 40,
+				"EPalWazaID::HyperBeam": 50
+			},
+			"scaling": {
+				"hp": 90,
+				"attack": 100,
+				"defense": 90
+			}
+		},
+		{
+			"code_name": "WeaselDragon_Fire",
+			"type": [
+				"Fire",
+				"Dragon"
+			],
+			"skill_set": {
+				"EPalWazaID::AirCanon": 1,
+				"EPalWazaID::Unique_Alpaca_Tackle": 7,
+				"EPalWazaID::MudShot": 15,
+				"EPalWazaID::PowerShot": 22,
+				"EPalWazaID::ElecWave": 30,
+				"EPalWazaID::PowerBall": 40,
+				"EPalWazaID::HyperBeam": 50
+			},
+			"scaling": {
+				"hp": 90,
+				"attack": 85,
+				"defense": 80
+			}
+		},
+		{
+			"code_name": "Ronin_Dark",
+			"type": [
+				"Fire",
+				"Dark"
+			],
+			"skill_set": {
+				"EPalWazaID::AirCanon": 1,
+				"EPalWazaID::Unique_Alpaca_Tackle": 7,
+				"EPalWazaID::MudShot": 15,
+				"EPalWazaID::PowerShot": 22,
+				"EPalWazaID::ElecWave": 30,
+				"EPalWazaID::PowerBall": 40,
+				"EPalWazaID::HyperBeam": 50
+			},
+			"scaling": {
+				"hp": 80,
+				"attack": 130,
+				"defense": 80
+			}
+		},
+		{
+			"code_name": "CatMage_Fire",
+			"type": [
+				"Dark",
+				"Fire"
+			],
+			"skill_set": {
+				"EPalWazaID::AirCanon": 1,
+				"EPalWazaID::Unique_Alpaca_Tackle": 7,
+				"EPalWazaID::MudShot": 15,
+				"EPalWazaID::PowerShot": 22,
+				"EPalWazaID::ElecWave": 30,
+				"EPalWazaID::PowerBall": 40,
+				"EPalWazaID::HyperBeam": 50
+			},
+			"scaling": {
+				"hp": 95,
+				"attack": 105,
+				"defense": 90
+			}
+		},
+		{
+			"code_name": "FoxMage_Dark",
+			"type": [
+				"Fire",
+				"Dark"
+			],
+			"skill_set": {
+				"EPalWazaID::AirCanon": 1,
+				"EPalWazaID::Unique_Alpaca_Tackle": 7,
+				"EPalWazaID::MudShot": 15,
+				"EPalWazaID::PowerShot": 22,
+				"EPalWazaID::ElecWave": 30,
+				"EPalWazaID::PowerBall": 40,
+				"EPalWazaID::HyperBeam": 50
+			},
+			"scaling": {
+				"hp": 90,
+				"attack": 110,
+				"defense": 85
+			}
+		},
+		{
+			"code_name": "HerculesBeetle_Ground",
+			"type": [
+				"Ground"
+			],
+			"skill_set": {
+				"EPalWazaID::AirCanon": 1,
+				"EPalWazaID::Unique_Alpaca_Tackle": 7,
+				"EPalWazaID::MudShot": 15,
+				"EPalWazaID::PowerShot": 22,
+				"EPalWazaID::ElecWave": 30,
+				"EPalWazaID::PowerBall": 40,
+				"EPalWazaID::HyperBeam": 50
+			},
+			"scaling": {
+				"hp": 120,
+				"attack": 105,
+				"defense": 120
+			}
+		},
+		{
+			"code_name": "SkyDragon_Grass",
+			"type": [
+				"Dragon",
+				"Grass"
+			],
+			"skill_set": {
+				"EPalWazaID::AirCanon": 1,
+				"EPalWazaID::Unique_Alpaca_Tackle": 7,
+				"EPalWazaID::MudShot": 15,
+				"EPalWazaID::PowerShot": 22,
+				"EPalWazaID::ElecWave": 30,
+				"EPalWazaID::PowerBall": 40,
+				"EPalWazaID::HyperBeam": 50
+			},
+			"scaling": {
+				"hp": 105,
+				"attack": 105,
+				"defense": 100
+			}
+		},
+		{
+			"code_name": "KingBahamut_Dragon",
+			"type": [
+				"Dragon",
+				"Fire"
+			],
+			"skill_set": {
+				"EPalWazaID::AirCanon": 1,
+				"EPalWazaID::Unique_Alpaca_Tackle": 7,
+				"EPalWazaID::MudShot": 15,
+				"EPalWazaID::PowerShot": 22,
+				"EPalWazaID::ElecWave": 30,
+				"EPalWazaID::PowerBall": 40,
+				"EPalWazaID::HyperBeam": 50
+			},
+			"scaling": {
+				"hp": 105,
+				"attack": 130,
+				"defense": 125
+			}
+		},
+		{
+			"code_name": "HadesBird_Electric",
+			"type": [
+				"Dark",
+				"Electric"
+			],
+			"skill_set": {
+				"EPalWazaID::AirCanon": 1,
+				"EPalWazaID::Unique_Alpaca_Tackle": 7,
+				"EPalWazaID::MudShot": 15,
+				"EPalWazaID::PowerShot": 22,
+				"EPalWazaID::ElecWave": 30,
+				"EPalWazaID::PowerBall": 40,
+				"EPalWazaID::HyperBeam": 50
+			},
+			"scaling": {
+				"hp": 105,
+				"attack": 125,
+				"defense": 100
+			}
+		},
+		{
+			"code_name": "DarkScorpion_Ground",
+			"type": [
+				"Ground"
+			],
+			"skill_set": {
+				"EPalWazaID::AirCanon": 1,
+				"EPalWazaID::Unique_Alpaca_Tackle": 7,
+				"EPalWazaID::MudShot": 15,
+				"EPalWazaID::PowerShot": 22,
+				"EPalWazaID::ElecWave": 30,
+				"EPalWazaID::PowerBall": 40,
+				"EPalWazaID::HyperBeam": 50
+			},
+			"scaling": {
+				"hp": 100,
+				"attack": 105,
+				"defense": 130
+			}
+		},
+		{
+			"code_name": "MoonQueen",
+			"type": [
+				"Dark",
+				"Neutral"
+			],
+			"skill_set": {
+				"EPalWazaID::AirCanon": 1,
+				"EPalWazaID::Unique_Alpaca_Tackle": 7,
+				"EPalWazaID::MudShot": 15,
+				"EPalWazaID::PowerShot": 22,
+				"EPalWazaID::ElecWave": 30,
+				"EPalWazaID::PowerBall": 40,
+				"EPalWazaID::HyperBeam": 50
+			},
+			"scaling": {
+				"hp": 130,
+				"attack": 115,
+				"defense": 110
+			}
+		},
+		{
+			"code_name": "GYM_MoonQueen",
+			"type": [
+				"Dark",
+				"Neutral"
+			],
+			"skill_set": {},
+			"tower": true,
+			"scaling": {
+				"hp": 130,
+				"attack": 115,
+				"defense": 110
+			}
+		},
+		{
+			"code_name": "KendoFrog",
+			"type": [
+				"Water"
+			],
+			"skill_set": {},
+			"scaling": {
+				"hp": 80,
+				"attack": 100,
+				"defense": 85
+			}
+		},
+		{
+			"code_name": "LeafPrincess",
+			"type": [
+				"Grass"
+			],
+			"skill_set": {},
+			"scaling": {
+				"hp": 90,
+				"attack": 90,
+				"defense": 80
+			}
+		},
+		{
+			"code_name": "MushroomDragon",
+			"type": [
+				"Grass"
+			],
+			"skill_set": {},
+			"scaling": {
+				"hp": 110,
+				"attack": 80,
+				"defense": 90
+			}
+		},
+		{
+			"code_name": "MushroomDragon_Dark",
+			"type": [
+				"Dark",
+				"Grass"
+			],
+			"skill_set": {},
+			"scaling": {
+				"hp": 110,
+				"attack": 85,
+				"defense": 90
+			}
+		},
+		{
+			"code_name": "SmallArmadillo",
+			"type": [
+				"Ground"
+			],
+			"skill_set": {},
+			"scaling": {
+				"hp": 75,
+				"attack": 70,
+				"defense": 90
+			}
+		},
+		{
+			"code_name": "CandleGhost",
+			"type": [
+				"Dark",
+				"Fire"
+			],
+			"skill_set": {},
+			"scaling": {
+				"hp": 105,
+				"attack": 125,
+				"defense": 90
+			}
+		},
+		{
+			"code_name": "ScorpionMan",
+			"type": [
+				"Dark",
+				"Ground"
+			],
+			"skill_set": {},
+			"scaling": {
+				"hp": 90,
+				"attack": 110,
+				"defense": 90
+			}
+		},
+		{
+			"code_name": "WingGolem",
+			"type": [
+				"Ground"
+			],
+			"skill_set": {},
+			"scaling": {
+				"hp": 105,
+				"attack": 110,
+				"defense": 135
+			}
+		},
+		{
+			"code_name": "GuardianDog",
+			"type": [
+				"Neutral"
+			],
+			"skill_set": {},
+			"scaling": {
+				"hp": 85,
+				"attack": 85,
+				"defense": 85
+			}
+		},
+		{
+			"code_name": "SifuDog",
+			"type": [
+				"Neutral"
+			],
+			"skill_set": {},
+			"scaling": {
+				"hp": 90,
+				"attack": 100,
+				"defense": 100
+			}
+		},
+		{
+			"code_name": "FeatherOstrich",
+			"type": [
+				"Ground"
+			],
+			"skill_set": {},
+			"scaling": {
+				"hp": 95,
+				"attack": 90,
+				"defense": 80
+			}
+		},
+		{
+			"code_name": "MimicDog",
+			"type": [
+				"Neutral"
+			],
+			"skill_set": {},
+			"scaling": {
+				"hp": 60,
+				"attack": 60,
+				"defense": 130
+			}
+		},
+		{
+			"code_name": "DarkAlien",
+			"type": [
+				"Dark"
+			],
+			"skill_set": {},
+			"scaling": {
+				"hp": 90,
+				"attack": 125,
+				"defense": 85
+			}
+		},
+		{
+			"code_name": "WhiteAlienDragon",
+			"type": [
+				"Dragon"
+			],
+			"skill_set": {},
+			"scaling": {
+				"hp": 110,
+				"attack": 120,
+				"defense": 130
+			}
+		}
+	]
+}

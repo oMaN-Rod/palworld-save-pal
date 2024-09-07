@@ -34,6 +34,12 @@
 		[key: string]: any;
 	}>();
 
+	type PalWithInfo = {
+		id: string;
+		pal: Pal;
+		palInfo: any;
+	};
+
 	let searchQuery = $state('');
 	let selectedFilter = $state('All');
 	let elementTypes: string[] = $state([]);
@@ -47,6 +53,8 @@
 	let hpIcon: string = $state('');
 	let containerRef: HTMLDivElement;
 	let listWrapperStyle = $state('');
+	let palsInfo: PalWithInfo[] = $state([]);
+	let selectAll: boolean = $state(false);
 
 	const sortByLevelAscClass = $derived(
 		cn('btn', sortBy === 'level' && sortOrder === 'asc' ? 'bg-secondary-500/25' : '')
@@ -85,20 +93,23 @@
 		}
 	}
 
-	async function filterPals() {
+	async function getPalsInfo() {
 		if (!appState.selectedPlayer || !appState.selectedPlayer.pals) return;
 
 		const pals = Object.entries(appState.selectedPlayer.pals as Record<string, Pal>);
-		const palsWithInfo = await Promise.all(
+		palsInfo = await Promise.all(
 			pals.map(async ([id, pal]) => {
 				const palInfo = await palsData.getPalInfo(pal.character_id);
 				await getStats(pal, appState.selectedPlayer as Player);
 				return { id, pal, palInfo };
 			})
 		);
+	}
 
+	async function filterPals() {
+		if (!palsInfo) return;
 		selectedPals = [];
-		filteredPals = palsWithInfo
+		filteredPals = palsInfo
 			.filter(({ pal, palInfo }) => {
 				const matchesSearch =
 					pal.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -270,6 +281,8 @@
 				}
 			});
 		}
+		selectedPals = [];
+		selectAll = false;
 	}
 
 	async function deleteSelectedPals() {
@@ -291,11 +304,12 @@
 				data
 			};
 			ws.send(JSON.stringify(message));
-			selectedPals = [];
 			appState.selectedPlayer.pals = Object.fromEntries(
 				Object.entries(appState.selectedPlayer.pals).filter(([id]) => !selectedPalIds.includes(id))
 			);
 		}
+		selectedPals = [];
+		selectAll = false;
 	}
 
 	$effect(() => {
@@ -312,6 +326,7 @@
 
 	$effect(() => {
 		if (appState.selectedPlayer && appState.selectedPlayer.pals) {
+			getPalsInfo();
 			debouncedFilterPals();
 		}
 	});
@@ -506,9 +521,10 @@
 	<div class="overflow-hidden" style={listWrapperStyle}>
 		<List
 			baseClass="h-full"
-			items={filteredPals}
-			onselect={handlePalSelect}
+			bind:items={filteredPals}
 			bind:selectedItems={selectedPals}
+			bind:selectAll
+			onselect={handlePalSelect}
 		>
 			{#snippet listHeader()}
 				<div>

@@ -5,13 +5,15 @@
 
 	let {
 		items = $bindable([]),
-		selectedItem = $bindable({}),
+		selectedItem = $bindable(),
 		selectedItems = $bindable({}),
+		selectAll = $bindable(false),
 		baseClass: _baseClass = '',
 		listClass: _listClass = '',
 		itemClass: _itemClass = '',
 		headerClass: _headerClass = 'grid-cols-[auto_55px_auto_1fr_auto]',
 		multiple = true,
+		onlyHighlightChecked = false,
 		listItem,
 		listItemActions,
 		listHeader,
@@ -21,11 +23,13 @@
 		items: T[];
 		selectedItem?: T;
 		selectedItems?: T[];
+		selectAll?: boolean;
 		baseClass?: string;
 		listClass?: string;
 		itemClass?: string;
 		headerClass?: string;
 		multiple?: boolean;
+		onlyHighlightChecked?: boolean;
 		listItem: Snippet<[T]>;
 		listItemActions?: Snippet<[T]>;
 		listHeader?: Snippet;
@@ -45,10 +49,7 @@
 	);
 	const headerClass = $derived(cn('grid w-full gap-2', _headerClass));
 
-	let selectAll: boolean = $state(false);
-
 	function processItem(item: any) {
-		selectedItem = item;
 		if (multiple) {
 			selectedItems.push(item);
 		} else {
@@ -66,19 +67,17 @@
 	}
 
 	function handleSelectAll() {
-		console.log('selectAll', selectAll);
-		selectedItem = {};
+		selectedItem = null;
 		selectedItems = [];
 		if (selectAll) {
 			selectedItems = items;
 		}
-		console.log('selectedItems', JSON.stringify(selectedItems, null, 2));
-		console.log('items', JSON.stringify(items, null, 2));
 	}
 
 	function handleItemSelect(event: Event, item: any) {
-		onselect(item);
+		event.preventDefault();
 		selectedItem = item;
+		onselect(item);
 	}
 
 	function handleKeyDown(
@@ -91,7 +90,10 @@
 	}
 
 	function isSelected(item: any) {
-		return item === selectedItem || selectedItems.includes(item);
+		return (
+			(JSON.stringify(item) == JSON.stringify(selectedItem) && !onlyHighlightChecked) ||
+			selectedItems.some((i: any) => JSON.stringify(i) == JSON.stringify(item))
+		);
 	}
 </script>
 

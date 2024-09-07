@@ -466,16 +466,48 @@ class Pal(BaseModel):
             )
 
     def _update_talents(self) -> None:
-        PalObjects.set_value(self._save_parameter["Talent_HP"], value=self.talent_hp)
-        PalObjects.set_value(
-            self._save_parameter["Talent_Melee"], value=self.talent_melee
-        )
-        PalObjects.set_value(
-            self._save_parameter["Talent_Shot"], value=self.talent_shot
-        )
-        PalObjects.set_value(
-            self._save_parameter["Talent_Defense"], value=self.talent_defense
-        )
+        self._update_talent_hp()
+        self._update_talent_melee()
+        self._update_talent_shot()
+        self._update_talent_defense()
+
+    def _update_talent_hp(self) -> None:
+        if "Talent_HP" in self._save_parameter:
+            PalObjects.set_value(
+                self._save_parameter["Talent_HP"], value=self.talent_hp
+            )
+        else:
+            self._save_parameter["Talent_HP"] = PalObjects.IntProperty(self.talent_hp)
+
+    def _update_talent_melee(self) -> None:
+        if "Talent_Melee" in self._save_parameter:
+            PalObjects.set_value(
+                self._save_parameter["Talent_Melee"], value=self.talent_melee
+            )
+        else:
+            self._save_parameter["Talent_Melee"] = PalObjects.IntProperty(
+                self.talent_melee
+            )
+
+    def _update_talent_shot(self) -> None:
+        if "Talent_Shot" in self._save_parameter:
+            PalObjects.set_value(
+                self._save_parameter["Talent_Shot"], value=self.talent_shot
+            )
+        else:
+            self._save_parameter["Talent_Shot"] = PalObjects.IntProperty(
+                self.talent_shot
+            )
+
+    def _update_talent_defense(self) -> None:
+        if "Talent_Defense" in self._save_parameter:
+            PalObjects.set_value(
+                self._save_parameter["Talent_Defense"], value=self.talent_defense
+            )
+        else:
+            self._save_parameter["Talent_Defense"] = PalObjects.IntProperty(
+                self.talent_defense
+            )
 
     def _update_character_id(self) -> None:
         character_id = (
