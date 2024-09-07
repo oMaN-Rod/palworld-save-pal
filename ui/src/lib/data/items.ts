@@ -1,43 +1,36 @@
 // src/lib/data/items.ts
 
-import { ASSET_DATA_PATH } from '$lib/constants';
-import { assetLoader } from '$lib/utils/asset-loader';
-import type { Item, ItemDetails, ItemInfo } from '$types';
+import { getSocketState } from '$states/websocketState.svelte';
+import { MessageType, type Item, type ItemDetails, type ItemInfo } from '$types';
 
 export class Items {
+    private ws = getSocketState();
     private items: Record<string, Item> = {};
 
-    constructor() {
-        this.initializeItems();
-    }
-
-    private async initializeItems() {
-        const itemsData = await assetLoader.loadJson<Record<string, ItemDetails>>(
-            `${ASSET_DATA_PATH}/data/items.json`
-        );
-        const itemInfoData = await assetLoader.loadJson<Record<string, ItemInfo>>(
-            `${ASSET_DATA_PATH}/data/en-GB/items.json`
-        );
-
-        for (const [itemId, details] of Object.entries(itemsData)) {
-            const info = itemInfoData[itemId] || { localized_name: itemId, description: "" };
-            const item: Item = {
-                id: itemId,
-                details: details,
-                info: info
-            };
-            this.items[itemId.toLowerCase()] = item;
+    private async ensureItemsLoaded(): Promise<void> {
+        if (Object.keys(this.items).length === 0) {
+            try {
+                const response = await this.ws.sendAndWait({ 
+                    type: MessageType.GET_ITEMS 
+                });
+                if (response.type === 'error') {
+                    throw new Error(response.data);
+                }
+                this.items = response.data;
+            } catch (error) {
+                console.error('Error fetching items:', error);
+                throw error;
+            }
         }
     }
 
     async searchItems(search: string): Promise<Item | null> {
-        await this.ensureInitialized();
-        const searchLower = search.toLowerCase();
-        return this.getByKey(searchLower) || this.getByName(searchLower) || null;
+        await this.ensureItemsLoaded();
+        return this.getByKey(search) || this.getByName(search) || null;
     }
 
     private getByKey(key: string): Item | undefined {
-        return this.items[key.toLowerCase()];
+        return this.items[key];
     }
 
     private getByName(name: string): Item | undefined {
@@ -47,7 +40,7 @@ export class Items {
     }
 
     async getField(key: string, field: keyof Item | keyof ItemDetails | keyof ItemInfo): Promise<any> {
-        await this.ensureInitialized();
+        await this.ensureItemsLoaded();
         const item = await this.searchItems(key);
         if (item) {
             if (field in item) {
@@ -62,19 +55,13 @@ export class Items {
     }
 
     async getAllItems(): Promise<Item[]> {
-        await this.ensureInitialized();
+        await this.ensureItemsLoaded();
         return Object.values(this.items);
     }
 
     async getItemCount(): Promise<number> {
-        await this.ensureInitialized();
+        await this.ensureItemsLoaded();
         return Object.keys(this.items).length;
-    }
-
-    private async ensureInitialized() {
-        if (Object.keys(this.items).length === 0) {
-            await this.initializeItems();
-        }
     }
 }
 

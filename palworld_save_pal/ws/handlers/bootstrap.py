@@ -4,6 +4,7 @@ from palworld_save_pal.ws.handlers import (
     active_skills_handler,
     app_state_handler,
     elements_handler,
+    items_handler,
     passive_skills_handler,
     preset_handler,
     save_file_handler,
@@ -15,6 +16,7 @@ from palworld_save_pal.ws.messages import (
     ClonePalMessage,
     GetActiveSkillsMessage,
     GetElementsMessage,
+    GetItemsMessage,
     GetPassiveSkillsMessage,
     HealPalsMessage,
     LoadSaveFileMessage,
@@ -159,5 +161,13 @@ def bootstrap(dispatcher: "MessageDispatcher"):
         {
             "message_class": GetElementsMessage,
             "handler_func": elements_handler.get_elements_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.GET_ITEMS.value,
+        {
+            "message_class": GetItemsMessage,
+            "handler_func": items_handler.get_items_handler,
         },
     )
