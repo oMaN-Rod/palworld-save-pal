@@ -269,13 +269,10 @@ class Pal(BaseModel):
             if "PassiveSkillList" in self._save_parameter
             else []
         )
-        equip_waza = (
+        self.active_skills = (
             PalObjects.get_array_property(self._save_parameter["EquipWaza"])
             if "EquipWaza" in self._save_parameter
-            else None
-        )
-        self.active_skills = (
-            [skill.split("::")[-1] for skill in equip_waza] if equip_waza else []
+            else []
         )
 
     def _get_work_suitabilities(self):
@@ -330,10 +327,7 @@ class Pal(BaseModel):
             )
 
     def _update_equip_waza(self):
-        if not self.active_skills or len(self.active_skills) == 0:
-            active_skills = []
-        else:
-            active_skills = [f"EPalWazaID::{skill}" for skill in self.active_skills]
+        active_skills = self.active_skills if self.active_skills else []
 
         if "EquipWaza" in self._save_parameter:
             logger.debug(

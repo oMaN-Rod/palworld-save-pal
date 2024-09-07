@@ -7,6 +7,7 @@
 	import { MessageType, type Pal, type Player } from '$types';
 	import { SaveAll } from 'lucide-svelte';
 	import { getAppState, getSocketState, getNavigationState } from '$states';
+	import { activeSkillsData } from '$lib/data';
 	import { Tabs } from '@skeletonlabs/skeleton-svelte';
 
 	const appState = getAppState();
@@ -63,6 +64,13 @@
 		ws.message = { type: MessageType.PROGRESS_MESSAGE, data: `Updating modified ${entityMessage}` };
 		nav.activePage = 'Loading';
 	}
+
+	$effect(() => {
+		const loadActiveSkills = async () => {
+			await activeSkillsData.getActiveSkills();
+		};
+		loadActiveSkills();
+	});
 
 	$effect(() => {
 		if (appState.selectedPlayer && appState.selectedPal) {

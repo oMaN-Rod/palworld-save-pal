@@ -31,6 +31,7 @@ class MessageType(str, Enum):
     ADD_PRESET = "add_preset"
     UPDATE_PRESET = "update_preset"
     DELETE_PRESET = "delete_preset"
+    GET_ACTIVE_SKILLS = "get_active_skills"
 
 
 class AddPalData(BaseModel):
@@ -125,3 +126,7 @@ class AddPresetMessage(BaseMessage):
 class DeletePresetMessage(BaseMessage):
     type: str = MessageType.DELETE_PRESET.value
     data: List[UUID]
+
+
+class GetActiveSkillsMessage(BaseModel):
+    type: str = MessageType.GET_ACTIVE_SKILLS.value

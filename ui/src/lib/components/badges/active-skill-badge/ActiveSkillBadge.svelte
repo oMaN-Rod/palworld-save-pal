@@ -82,7 +82,7 @@
 		</div>
 		{#snippet popup()}
 			<div class="flex flex-row p-2">
-				<span>{activeSkill?.details.description}</span>
+				<span>{activeSkill?.description}</span>
 				<div class="ml-4 flex flex-row">
 					<TimerReset class="h-6 w-6" />
 					{activeSkill?.details.ct}
