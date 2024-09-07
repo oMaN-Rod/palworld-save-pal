@@ -155,6 +155,13 @@
 		getPresetProfiles();
 		calculateHeight();
 	});
+
+	$effect(() => {
+		window.addEventListener('resize', calculateHeight);
+		return () => {
+			window.removeEventListener('resize', calculateHeight);
+		};
+	});
 </script>
 
 <div class="mr-4 flex min-w-64 max-w-96 flex-col space-y-2" bind:this={containerRef}>

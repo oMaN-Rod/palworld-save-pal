@@ -345,6 +345,13 @@
 			debouncedFilterPals();
 		}
 	});
+
+	$effect(() => {
+		window.addEventListener('resize', calculateHeight);
+		return () => {
+			window.removeEventListener('resize', calculateHeight);
+		};
+	});
 </script>
 
 <div class="flex h-full w-full flex-col space-y-2" bind:this={containerRef} {...additionalProps}>
