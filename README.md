@@ -85,6 +85,8 @@ For developers who want to contribute to Palworld Save Pal:
 1. Set up the development environment:
 
    ```bash
+   python -m venv .venv
+   source .venv/bin/activate
    pip install -r requirements.txt
    ```
 
@@ -124,6 +126,7 @@ For developers who want to contribute to Palworld Save Pal:
 
    ```jinja
    PUBLIC_WS_URL={{ ip_address }}:5174/ws
+   PUBLIC_DESKTOP_MODE=true
    ```
 
 2. Build the SPA (replace bun with your package manager of choice). This will create a build directory in the project root containing the static files for the SPA:
@@ -150,9 +153,10 @@ For developers who want to contribute to Palworld Save Pal:
 
    ```powershell
    cp -R .\build\ .\dist\
+   cp -R .\data\ .\dist\
    ```
 
-> **Note:** The `dist` folder will contain the executable and the SPA build files and needs to be distributed together.
+> **Note:** The `dist` folder will contain the executable and the SPA build files, the data folder contains json files with game data, all need to be distributed together.
 
 ## 🗺️ Roadmap
 
@@ -162,9 +166,7 @@ Here's what's planned for future releases of Palworld Save Pal:
 
 - [X] Filter Pals by name, nickname, or Element type
 - [ ] Remote access to save files (sftp to remote server)
-- [ ] Bulk edit pals (e.g., set all stomachs to 100%)
-- [ ] Profile system to save/load presets for pals and players (Partially implemeted for player inventory)
-- [ ] Proper localization support
+- [X] Bulk edit pals (e.g., set all stomachs to 100%)
 
 ### Pals
 
@@ -180,19 +182,15 @@ Here's what's planned for future releases of Palworld Save Pal:
 - [X] Edit Souls
 - [X] Set/Unset Lucky
 - [X] Set/Unset Boss
-- [ ] Change Pal species
 - [X] Add/Remove Pals
 - [X] Clone Pals
-- [ ] Pal profiles creating presets for level, gender, and skills
 
 ### Players
 
 - [ ] Edit Player Name
 - [ ] Edit Player Level
-- [X] Edit Player Money
 - [X] Edit Player Inventory
-- [ ] Add/Remove Players
-- [ ] Player profiles creating presets for level, money, and inventory (Partially implemeted for player inventory)
+- [X] Player presets for inventory
 
 ### Map
 
