@@ -36,6 +36,7 @@ class MessageType(str, Enum):
     GET_ELEMENTS = "get_elements"
     GET_ITEMS = "get_items"
     GET_PALS = "get_pals"
+    OPEN_IN_BROWSER = "open_in_browser"
 
 
 class AddPalData(BaseModel):
@@ -150,3 +151,8 @@ class GetItemsMessage(BaseModel):
 
 class GetPalsMessage(BaseModel):
     type: str = MessageType.GET_PALS.value
+
+
+class OpenInBrowserMessage(BaseMessage):
+    type: str = MessageType.OPEN_IN_BROWSER.value
+    data: str

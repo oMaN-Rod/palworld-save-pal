@@ -20,8 +20,11 @@ if (Test-Path -Path ".\dist\build\") {
 }
 
 
-# Create or update the .env file with PUBLIC_WS_URL
-"PUBLIC_WS_URL=127.0.0.1:5174/ws" | Set-Content -Path ".\ui\.env"
+# Create or update the .env file with PUBLIC_WS_URL and PUBLIC_DESKTOP_MODE
+@"
+PUBLIC_WS_URL=127.0.0.1:5174/ws
+PUBLIC_DESKTOP_MODE=true
+"@ | Set-Content -Path ".\ui\.env"
 
 # Navigate to the ui directory
 Set-Location -Path ".\ui"

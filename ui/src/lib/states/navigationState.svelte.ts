@@ -1,4 +1,4 @@
-export type Page = 'edit' | 'info' | 'file' | 'settings' | 'loading' | 'error';
+export type Page = 'edit' | 'info' | 'file' | 'settings' | 'loading' | 'error' | 'browser';
 export type Tab = 'player' | 'pal';
 
 export interface NavigationState {
@@ -30,7 +30,7 @@ let navigationState: ReturnType<typeof createNavigationState>;
 
 export function getNavigationState() {
 	if (!navigationState) {
-		navigationState = createNavigationState('File');
+		navigationState = createNavigationState('file');
 	}
 	return navigationState;
 }

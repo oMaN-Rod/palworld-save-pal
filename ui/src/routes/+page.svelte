@@ -96,6 +96,11 @@
 		<Info />
 	{:else if nav.activePage === 'settings'}
 		<Settings />
+	{:else if nav.activePage === 'browser'}
+		<div class="flex h-full w-full flex-col items-center justify-center">
+			<h2 class="h2 mb-8">🌐 Opened in browser...</h2>
+			<span class="mt-2">You can work in either window, just be sure to keep this one open.</span>
+		</div>
 	{:else if nav.activePage === 'loading'}
 		<div class="flex h-full w-full flex-col items-center justify-center">
 			<h2 class="h2 mb-8">🤖 Beep Boop, working on it!</h2>

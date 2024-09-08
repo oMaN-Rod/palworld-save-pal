@@ -13,6 +13,7 @@ ip_address=$(hostname -I | awk '{print $1}')
 
 # Create or update the .env file with PUBLIC_WS_URL
 echo "PUBLIC_WS_URL=${ip_address}:5174/ws" >./ui/.env
+echo "PUBLIC_DESKTOP_MODE=false" >>./ui/.env
 
 # Navigate to the ui directory
 cd ./ui

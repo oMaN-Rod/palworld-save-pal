@@ -5,6 +5,7 @@ from palworld_save_pal.ws.handlers import (
     app_state_handler,
     elements_handler,
     items_handler,
+    open_in_browser_handler,
     passive_skills_handler,
     preset_handler,
     save_file_handler,
@@ -22,6 +23,7 @@ from palworld_save_pal.ws.messages import (
     HealPalsMessage,
     LoadSaveFileMessage,
     MessageType,
+    OpenInBrowserMessage,
     SyncAppStateMessage,
     UpdateSaveFileMessage,
     DownloadSaveFileMessage,
@@ -178,5 +180,13 @@ def bootstrap(dispatcher: "MessageDispatcher"):
         {
             "message_class": GetPalsMessage,
             "handler_func": pal_handler.get_pals_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.OPEN_IN_BROWSER.value,
+        {
+            "message_class": OpenInBrowserMessage,
+            "handler_func": open_in_browser_handler.open_in_browser_handler,
         },
     )
