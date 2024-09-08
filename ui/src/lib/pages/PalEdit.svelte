@@ -93,7 +93,6 @@
 	}
 
 	async function getGenderIcon(gender: PalGender): Promise<string | undefined> {
-		if (gender == PalGender.UNKNOWN) return undefined;
 		const iconPath = `${ASSET_DATA_PATH}/img/icons/${gender.toLowerCase()}.svg`;
 		const icon = await assetLoader.loadSvg(iconPath);
 		return icon;

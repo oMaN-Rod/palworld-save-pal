@@ -69,7 +69,7 @@
 		bind:this={floating.elements.floating}
 		style={floating.floatingStyles}
 		{...interactions.getFloatingProps()}
-		class={cn('floating z-50', background, popupClass, rounded)}
+		class={cn('floating tooltip-popup', background, popupClass, rounded)}
 		transition:fade={{ duration: 200 }}
 	>
 		{@render popup()}
@@ -78,3 +78,9 @@
 		{/if}
 	</div>
 {/if}
+
+<style>
+	.tooltip-popup {
+		z-index: var(--tooltip-z-index, 2147483647) !important;
+	}
+</style>

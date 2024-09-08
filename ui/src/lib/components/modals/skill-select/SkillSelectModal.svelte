@@ -98,15 +98,6 @@
 		return icon;
 	}
 
-	function getSkillLevel(skillId: string): number {
-		if (type === 'Passive') return 0;
-		const skill =
-			activeSkills.find((s) => s.id === skillId) || passiveSkills.find((s) => s.id === skillId);
-		if (!skill) return 0;
-		const activeSkill = skill as ActiveSkill;
-		return activeSkill.details.power;
-	}
-
 	$effect(() => {
 		if (type === 'Active') {
 			loadElementTypes();
@@ -130,33 +121,51 @@
 
 {#snippet activeSkillOption(option: SelectOption)}
 	{#await getActiveSkillIcon(option.value) then icon}
-		<div class="grid grid-cols-[auto_1fr_auto] items-center gap-2">
-			{#if icon}
-				<enhanced:img src={icon} alt={option.label} class="h-6 w-6"></enhanced:img>
-			{:else}
-				<div class="w-6"></div>
-			{/if}
-			<span class="truncate">{option.label}</span>
-			<div class="flex items-center space-x-1 justify-self-start">
-				<TimerReset class="h-4 w-4" />
-				<span class="font-bold">{activeSkills.find((s) => s.id === option.value)?.details.ct}</span>
-				<span class="text-xs">Pwr</span>
-				<span class="font-bold">{getSkillLevel(option.value)}</span>
+		{@const activeSkill = activeSkills.find((s) => s.id === option.value)}
+		<Tooltip>
+			<div class="grid grid-cols-[auto_1fr_auto] items-center gap-2">
+				{#if icon}
+					<enhanced:img src={icon} alt={option.label} class="h-6 w-6"></enhanced:img>
+				{:else}
+					<div class="w-6"></div>
+				{/if}
+				<span class="truncate">{option.label}</span>
+				<div class="flex items-center space-x-1 justify-self-start">
+					<TimerReset class="h-4 w-4" />
+					<span class="font-bold">{activeSkill?.details.ct}</span>
+					<span class="text-xs">Pwr</span>
+					<span class="font-bold">{activeSkill?.details.power}</span>
+				</div>
 			</div>
-		</div>
+			{#snippet popup()}
+				<div class="flex flex-row p-2">
+					<span>{activeSkill?.description}</span>
+					<div class="ml-4 flex flex-row">
+						<TimerReset class="h-6 w-6" />
+						{activeSkill?.details.ct}
+					</div>
+				</div>
+			{/snippet}
+		</Tooltip>
 	{/await}
 {/snippet}
 
 {#snippet passiveSkillOption(option: SelectOption)}
 	{#await getPassiveSkillIcon(option.value) then icon}
-		<div class="flex flex-row">
-			<span class="grow truncate">{option.label}</span>
-			{#if icon}
-				<enhanced:img src={icon} alt={option.label} class="h-6 w-6"></enhanced:img>
-			{:else}
-				<div class="w-6"></div>
-			{/if}
-		</div>
+		{@const passiveSkill = passiveSkills.find((s) => s.id === option.value)}
+		<Tooltip>
+			<div class="flex flex-row">
+				<span class="grow truncate">{option.label}</span>
+				{#if icon}
+					<enhanced:img src={icon} alt={option.label} class="h-6 w-6"></enhanced:img>
+				{:else}
+					<div class="w-6"></div>
+				{/if}
+			</div>
+			{#snippet popup()}
+				<span>{passiveSkill?.description}</span>
+			{/snippet}
+		</Tooltip>
 	{/await}
 {/snippet}
 
