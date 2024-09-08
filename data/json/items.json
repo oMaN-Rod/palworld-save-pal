@@ -8056,6 +8056,21 @@
         },
         "image": "Rocket_Launcher"
     },
+    "Launcher_Meteor": {
+        "type": "Weapon",
+        "group": "Weapon",
+        "tier": "Common",
+        "stack": 9999,
+        "weight": 0,
+        "buy_price": 0,
+        "sell_price": 0,
+        "dynamic": {
+            "durability": 300,
+            "magazine_size": 1,
+            "type": "weapon"
+        },
+        "image": "Meteor_Launcher"
+    },
     "Launcher_Meat": {
         "type": "Unknown",
         "group": "Unknown",
@@ -8495,6 +8510,16 @@
         "buy_price": 0,
         "sell_price": 0,
         "image": "Medical_Supplies"
+    },
+    "MeteorBullet": {
+        "type": "Ammo",
+        "group": "Common",
+        "tier": "Common",
+        "stack": 9999,
+        "weight": 0,
+        "buy_price": 0,
+        "sell_price": 0,
+        "image": "Meteorite_Bullet"
     },
     "MeteorDrop": {
         "type": "Material",

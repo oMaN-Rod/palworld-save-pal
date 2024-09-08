@@ -3027,6 +3027,10 @@
         "localized_name": "Rocket Launcher +4",
         "description": "A weapon that fires rockets. It has a wide blast radius and can deal massive damage to enemies."
     },
+    "Launcher_Meteor": {
+        "localized_name": "Meteor Launcher",
+        "description": ""
+    },
     "Launcher_Meat": {
         "localized_name": "Launcher_Meat",
         "description": ""
@@ -3209,6 +3213,10 @@
     },
     "Metal_houseset": {
         "localized_name": "Metal_houseset",
+        "description": ""
+    },
+    "MeteorBullet": {
+        "localized_name": "Meteorite Bullet",
         "description": ""
     },
     "MeteorDrop": {
@@ -3516,8 +3524,8 @@
         "description": ""
     },
     "Plastic": {
-        "localized_name": "Plastic",
-        "description": "Armor made of plasteel.\nIn addition to enhanced defense capabilities, its weight was also reduced.\nEquipment that pushes the limit of technology."
+        "localized_name": "Plasteel",
+        "description": "It is used to make various end game items like the Plasteel Helmet or the Plasteel Armor."
     },
     "PlasticArmor": {
         "localized_name": "Plasteel Armor",
