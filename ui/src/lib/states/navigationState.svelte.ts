@@ -1,11 +1,14 @@
-export type Page = 'Edit' | 'Info' | 'File' | 'Settings' | 'Loading' | 'Error';
+export type Page = 'edit' | 'info' | 'file' | 'settings' | 'loading' | 'error';
+export type Tab = 'player' | 'pal';
 
 export interface NavigationState {
 	activePage: Page;
+	activeTab?: Tab;
 }
 
-export function createNavigationState(initialPage: Page): NavigationState {
+export function createNavigationState(initialPage: Page = 'file', initialTab: Tab = 'player'): NavigationState {
 	let activePage = $state(initialPage);
+	let activeTab = $state(initialTab);
 
 	return {
 		get activePage() {
@@ -13,6 +16,12 @@ export function createNavigationState(initialPage: Page): NavigationState {
 		},
 		set activePage(page: Page) {
 			activePage = page;
+		},
+		get activeTab() {
+			return activeTab;
+		},
+		set activeTab(tab: Tab) {
+			activeTab = tab;
 		}
 	};
 }

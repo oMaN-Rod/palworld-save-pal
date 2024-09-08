@@ -12,7 +12,6 @@
 	const appState = getAppState();
 	const ws = getSocketState();
 	const nav = getNavigationState();
-	let group = $state('player');
 
 	interface ModifiedData {
 		modified_pals?: Record<string, Pal>;
@@ -58,7 +57,7 @@
 		);
 		const entityMessage = entityTypes.join(' and ');
 		ws.message = { type: MessageType.PROGRESS_MESSAGE, data: `Updating modified ${entityMessage}` };
-		nav.activePage = 'Loading';
+		nav.activePage = 'loading';
 	}
 </script>
 
@@ -89,7 +88,7 @@
 					{/if}
 				</div>
 			</Drawer>
-			<Tabs listJustify="justify-center" bind:value={group} class="flex h-full flex-col">
+			<Tabs listJustify="justify-center" bind:value={nav.activeTab} class="flex h-full flex-col">
 				{#snippet list()}
 					<div class="flex-shrink-0">
 						<Tabs.Control value="player">Player</Tabs.Control>

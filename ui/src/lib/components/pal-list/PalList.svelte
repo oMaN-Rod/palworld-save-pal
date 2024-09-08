@@ -20,7 +20,7 @@
 	} from 'lucide-svelte';
 	import { assetLoader, debounce } from '$utils';
 	import { ASSET_DATA_PATH } from '$lib/constants';
-	import { getAppState, getSocketState, getModalState } from '$states';
+	import { getAppState, getSocketState, getModalState, getNavigationState } from '$states';
 	import { HealthBadge } from '$components';
 
 	type SortBy = 'name' | 'level';
@@ -29,6 +29,7 @@
 	const appState = getAppState();
 	const ws = getSocketState();
 	const modal = getModalState();
+	const nav = getNavigationState();
 
 	let { ...additionalProps } = $props<{
 		[key: string]: any;
@@ -150,6 +151,7 @@
 	function handlePalSelect(p: PalWithData) {
 		if (appState.selectedPlayer && appState.selectedPlayer.pals) {
 			appState.selectedPal = appState.selectedPlayer.pals[p.pal.instance_id];
+			nav.activeTab = 'pal';
 		}
 	}
 

@@ -43,7 +43,7 @@
 				case MessageType.LOAD_SAVE_FILE:
 					const file = data as { name: string; size: number };
 					appState.saveFile = file;
-					nav.activePage = 'Edit';
+					nav.activePage = 'edit';
 					toast.add(`Save file uploaded successfully as ${file.name}`, 'Success!');
 					break;
 				case MessageType.DOWNLOAD_SAVE_FILE:
@@ -66,11 +66,11 @@
 					a.download = name;
 					a.click();
 					URL.revokeObjectURL(url);
-					nav.activePage = 'File';
+					nav.activePage = 'file';
 					break;
 				case MessageType.ERROR:
 					errorMessage = data as string;
-					nav.activePage = 'Error';
+					nav.activePage = 'error';
 					break;
 				case MessageType.PROGRESS_MESSAGE:
 					progressMessage = data as string;
@@ -79,7 +79,7 @@
 					const updateMessage = data as string;
 					toast.add(updateMessage, 'Success!');
 					appState.selectedPlayer = undefined;
-					nav.activePage = 'Edit';
+					nav.activePage = 'edit';
 					break;
 			}
 			ws.clear(type);
@@ -88,15 +88,15 @@
 </script>
 
 <div class="flex h-full w-full">
-	{#if nav.activePage === 'Edit'}
+	{#if nav.activePage === 'edit'}
 		<Edit />
-	{:else if nav.activePage === 'File'}
+	{:else if nav.activePage === 'file'}
 		<File />
-	{:else if nav.activePage === 'Info'}
+	{:else if nav.activePage === 'info'}
 		<Info />
-	{:else if nav.activePage === 'Settings'}
+	{:else if nav.activePage === 'settings'}
 		<Settings />
-	{:else if nav.activePage === 'Loading'}
+	{:else if nav.activePage === 'loading'}
 		<div class="flex h-full w-full flex-col items-center justify-center">
 			<h2 class="h2 mb-8">🤖 Beep Boop, working on it!</h2>
 			<Spinner size="size-32" />

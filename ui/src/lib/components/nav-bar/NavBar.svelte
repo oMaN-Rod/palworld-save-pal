@@ -12,8 +12,8 @@
 		{#if appState.saveFile}
 			<Nav.Tile
 				title="Edit"
-				id="Edit"
-				onclick={() => (navigationState.activePage = 'Edit')}
+				id="edit"
+				onclick={() => (navigationState.activePage = 'edit')}
 				active="bg-secondary-500"
 			>
 				<Pencil />
@@ -22,7 +22,7 @@
 		<Nav.Tile
 			title="File"
 			id="File"
-			onclick={() => (navigationState.activePage = 'File')}
+			onclick={() => (navigationState.activePage = 'file')}
 			active="bg-secondary-500"
 		>
 			<File />

@@ -15,7 +15,7 @@
 	function handleOnUpload() {
 		if (!files) return;
 		appState.resetState();
-		nav.activePage = 'Loading';
+		nav.activePage = 'loading';
 		ws.message = { type: MessageType.PROGRESS_MESSAGE, data: 'Uploading zip file 🚀...' };
 		const reader = new FileReader();
 		reader.onload = function () {
@@ -34,7 +34,7 @@
 	function handleDownloadSaveFile() {
 		ws.send(JSON.stringify({ type: MessageType.DOWNLOAD_SAVE_FILE }));
 		toast.add('Generating sav file, grab a ☕...');
-		nav.activePage = 'Loading';
+		nav.activePage = 'loading';
 		ws.message = { type: MessageType.PROGRESS_MESSAGE, data: 'Starting to cook 🧑‍🍳...' };
 	}
 </script>
