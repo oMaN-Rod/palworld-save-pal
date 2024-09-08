@@ -74,8 +74,8 @@
 		<div class="flex w-full flex-col items-center">
 			<FileDropzone baseClass="w-full hover:bg-surface-800" name="file" bind:files>
 				{#snippet message()}
-					<h3 class="h3">Click to upload a save file</h3>
-					<span>or drag and drop it here</span>
+					<h3 class="h3">Click to upload your zipped save files</h3>
+					<span>or drag and drop your zip file here</span>
 				{/snippet}
 			</FileDropzone>
 			{#if files}

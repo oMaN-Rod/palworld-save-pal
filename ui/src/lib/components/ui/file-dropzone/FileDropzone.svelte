@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { FileCheck, FileInput } from 'lucide-svelte';
+	import { FolderArchive } from 'lucide-svelte';
 	import { getAppState } from '$states';
 
 	const appState = getAppState();
@@ -18,6 +18,7 @@
 		lead,
 		message,
 		meta,
+		accept = '.zip',
 		onUpload,
 		...restProps
 	} = $props<{
@@ -34,6 +35,7 @@
 		lead?: any;
 		message?: any;
 		meta?: any;
+		accept?: string;
 		onUpload?: (files: File) => void;
 	}>();
 
@@ -66,7 +68,7 @@
 		{name}
 		class="dropzone-input {classesInput}"
 		{...prunedRestProps()}
-		accept=".sav"
+		{accept}
 		multiple={false}
 	/>
 	<div class="dropzone-interface {classesInterface} {regionInterface}">
@@ -83,11 +85,7 @@
 					<strong>Upload a file</strong> or drag and drop
 				{/if}
 				<div class="mt-2 flex items-center justify-center">
-					{#if appState.saveFile}
-						<FileCheck class="h-24 w-24" />
-					{:else}
-						<FileInput class="h-24 w-24" />
-					{/if}
+					<FolderArchive class="h-24 w-24" />
 				</div>
 				{#if files}
 					<div class="mt-4 flex flex-row items-center justify-center space-x-2">
