@@ -5,6 +5,7 @@ import type { Config } from 'tailwindcss';
 import psp from './src/lib/theme/psp';
 
 export default {
+	darkMode: 'selector',
 	content: [
 		'./src/**/*.{html,js,svelte,ts}',
 		join(require.resolve('@skeletonlabs/skeleton-svelte'), '../**/*.{html,js,svelte,ts}')
