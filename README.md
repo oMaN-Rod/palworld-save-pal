@@ -59,6 +59,7 @@ To run Palworld Save Pal using Docker:
 
       ```jinja
       PUBLIC_WS_URL={{ ip_address }}:5174/ws
+      PUBLIC_DESKTOP_MODE=false
       ```
 
    2. Build the SPA (replace bun with your package manager of choice). This will create a build directory in the project root containing the static files for the SPA:
@@ -100,6 +101,7 @@ For developers who want to contribute to Palworld Save Pal:
 
    ```env
    PUBLIC_WS_URL=127.0.0.1:5174/ws
+   PUBLIC_DESKTOP_MODE=false
    ```
 
 4. Run the frontend in development mode:
