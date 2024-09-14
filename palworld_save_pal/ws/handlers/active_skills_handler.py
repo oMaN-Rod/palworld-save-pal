@@ -10,7 +10,6 @@ active_skills_i18n_json = JsonManager("data/json/en-GB/active_skills.json")
 
 
 async def get_active_skills_handler(_: GetActiveSkillsMessage, ws: WebSocket):
-    logger.info("Processing get_active_skills request")
     try:
         active_skills_data = active_skills_json.read()
         active_skills_i18n = active_skills_i18n_json.read()

@@ -454,7 +454,6 @@ class SaveFile(BaseModel):
                 character_container_save_data=self._character_container_save_data,
                 guild=self._player_guild(uid),
             )
-            logger.info("Loaded player %s", player.model_dump())
             player.pals = self._get_player_pals(uid)
             return player
 

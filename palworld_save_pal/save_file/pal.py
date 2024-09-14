@@ -42,7 +42,7 @@ class Pal(BaseModel):
     work_suitabilities: Optional[Dict[str, int]] = Field(default_factory=dict)
     hp: int = 0
     max_hp: int = 0
-    elements: List[Element] = Field(default_factory=list)
+    elements: Optional[List[Element]] = Field(default_factory=list)
     state: EntryState = EntryState.NONE
     group_id: Optional[UUID] = None
     sanity: float = 0.0
@@ -139,7 +139,7 @@ class Pal(BaseModel):
         self._get_hp()
         self._get_stomach()
         self._get_sanity()
-        logger.info("Parsed PalEntity data: %s", self)
+        logger.debug("Parsed PalEntity data: %s", self)
 
     def _process_character_id(self):
         self.is_boss = False

@@ -35,10 +35,12 @@ class CharacterContainer(BaseModel):
 
     def add_pal(self, pal_id: UUID) -> Optional[int]:
         if not self.available_slots():
-            logger.error("Character container is full")
+            logger.warning("Character container is full")
             return
         slot_idx = len(self.slots)
-        logger.debug("Adding pal %s to slot %s in %s", pal_id, slot_idx, self.id)
+        logger.debug(
+            "pal_id = %s, slot_idx = %s, container_id = %s", pal_id, slot_idx, self.id
+        )
         new_container_slot_data = PalObjects.ContainerSlotData(
             slot_idx=slot_idx, instance_id=pal_id
         )
@@ -47,7 +49,7 @@ class CharacterContainer(BaseModel):
         return slot_idx
 
     def delete_pal(self, pal_id: UUID):
-        logger.debug("Deleting pal with id: %s", pal_id)
+        logger.debug(pal_id)
         for slot in self.slots:
             if are_equal_uuids(slot.pal_id, pal_id):
                 self._slots_data.pop(slot.slot_index)
@@ -60,7 +62,7 @@ class CharacterContainer(BaseModel):
             PalObjects.set_value(slot["SlotIndex"], value=index)
 
     def _get_items(self, character_container_save_data: Dict[str, Any]):
-        logger.debug("Getting items for character container: %s", self.id)
+        logger.debug("container_id = %s", self.id)
         for character_container in character_container_save_data:
             container_id = PalObjects.get_guid(
                 PalObjects.get_nested(character_container, "key", "ID")

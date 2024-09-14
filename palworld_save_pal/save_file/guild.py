@@ -2,10 +2,12 @@ from typing import Any, Dict, List, Optional
 from uuid import UUID
 from pydantic import BaseModel, Field, PrivateAttr
 
-from palworld_save_tools.archive import UUID as ArchiveUUID
 
 from palworld_save_pal.save_file.pal_objects import PalObjects
-from palworld_save_pal.save_file.utils import are_equal_uuids, is_empty_uuid
+from palworld_save_pal.save_file.utils import are_equal_uuids
+from palworld_save_pal.utils.logging_config import create_logger
+
+logger = create_logger(__name__)
 
 
 class Guild(BaseModel):
@@ -30,6 +32,7 @@ class Guild(BaseModel):
             self.load_guild_data()
 
     def add_pal(self, pal_id: UUID):
+        logger.debug("pal_id = %s", pal_id)
         new_pal = PalObjects.individual_character_handle_ids(pal_id)
         self._individual_character_handle_ids.append(new_pal)
 
@@ -37,6 +40,7 @@ class Guild(BaseModel):
         for entry in self._individual_character_handle_ids:
             instance_id = PalObjects.as_uuid(entry["instance_id"])
             if are_equal_uuids(instance_id, pal_id):
+                logger.debug("pal_id = %s", pal_id)
                 self._individual_character_handle_ids.remove(entry)
                 return True
         return False

@@ -10,7 +10,6 @@ passive_skills_i18n_json = JsonManager("data/json/en-GB/passive_skills.json")
 
 
 async def get_passive_skills_handler(_: GetPassiveSkillsMessage, ws: WebSocket):
-    logger.info("Processing get_passive_skills request")
     try:
         passive_skills_data = passive_skills_json.read()
         passive_skills_i18n = passive_skills_i18n_json.read()

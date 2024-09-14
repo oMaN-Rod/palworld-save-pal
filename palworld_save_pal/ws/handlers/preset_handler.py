@@ -19,7 +19,6 @@ presets_json = JsonManager("data/json/presets.json")
 
 
 async def add_preset_handler(message: AddPresetMessage, ws: WebSocket):
-    logger.info("Processing add_preset request")
     try:
         preset = message.data
         presets_json.append(str(uuid.uuid4()), jsonable_encoder(preset))
@@ -32,7 +31,6 @@ async def add_preset_handler(message: AddPresetMessage, ws: WebSocket):
 
 
 async def get_presets_handler(_: GetPresetsMessage, ws: WebSocket):
-    logger.info("Processing get_presets request")
     try:
         presets = presets_json.read()
         response = build_response(MessageType.GET_PRESETS, presets)
@@ -44,7 +42,6 @@ async def get_presets_handler(_: GetPresetsMessage, ws: WebSocket):
 
 
 async def update_preset_handler(message: UpdatePresetMessage, ws: WebSocket):
-    logger.info("Processing update_preset request")
     try:
         preset_id = message.data.id
         preset_name = message.data.name
@@ -60,7 +57,6 @@ async def update_preset_handler(message: UpdatePresetMessage, ws: WebSocket):
 
 
 async def delete_presets_handler(message: DeletePresetMessage, ws: WebSocket):
-    logger.info("Processing delete_preset request")
     try:
         for preset_id in message.data:
             presets_json.delete(str(preset_id))

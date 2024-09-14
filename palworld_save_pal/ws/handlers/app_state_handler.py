@@ -10,7 +10,6 @@ logger = create_logger(__name__)
 
 
 async def sync_app_state_handler(_: SyncAppStateMessage, ws: WebSocket):
-    logger.info("Processing sync_app_state request")
     try:
         app_state = get_app_state()
         save_file = app_state.save_file

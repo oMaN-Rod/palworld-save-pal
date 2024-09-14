@@ -23,7 +23,6 @@ pals_i18n_json = JsonManager("data/json/en-GB/pals.json")
 
 
 async def get_pals_handler(_: GetPalsMessage, ws: WebSocket):
-    logger.info("Processing get_pals request")
     try:
         pals_data = pals_json.read()
         pals_i18n = pals_i18n_json.read()
@@ -48,7 +47,6 @@ async def get_pals_handler(_: GetPalsMessage, ws: WebSocket):
 
 
 async def add_pal_handler(message: AddPalMessage, ws: WebSocket):
-    logger.info("Processing add_pal request: %s", message)
     try:
         player_id = message.data.player_id
         pal_code_name = message.data.pal_code_name
@@ -70,7 +68,6 @@ async def add_pal_handler(message: AddPalMessage, ws: WebSocket):
 
 
 async def clone_pal_handler(message: ClonePalMessage, ws: WebSocket):
-    logger.info("Processing clone_pal request: %s", message)
     try:
         pal = message.data
         app_state = get_app_state()
@@ -90,7 +87,6 @@ async def clone_pal_handler(message: ClonePalMessage, ws: WebSocket):
 
 
 async def delete_pals_handler(message: DeletePalsMessage, ws: WebSocket):
-    logger.info("Processing delete_pals request: %s", message)
     try:
         player_id = message.data.player_id
         pal_ids = message.data.pal_ids
@@ -107,7 +103,6 @@ async def delete_pals_handler(message: DeletePalsMessage, ws: WebSocket):
 
 
 async def heal_pals_handler(message: HealPalsMessage, ws: WebSocket):
-    logger.info("Processing heal_pals request: %s", message)
     try:
         pal_ids = message.data
         app_state = get_app_state()

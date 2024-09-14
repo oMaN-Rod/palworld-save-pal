@@ -46,7 +46,7 @@ async def websocket_endpoint(websocket: WebSocket, client_id: int):
             data = await websocket.receive_text()
             await manager.process_message(data, websocket)
     except WebSocketDisconnect:
-        logger.info("Client %s disconnected", client_id)
+        logger.warning("Client %s disconnected", client_id)
         manager.disconnect(websocket)
 
 

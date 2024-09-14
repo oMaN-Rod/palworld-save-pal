@@ -235,7 +235,7 @@ class Player(BaseModel):
         if not inventory_info:
             logger.error("No inventory info found for player %s", self.uid)
             return
-        logger.info("Loading storage for player %s", self.nickname)
+        logger.debug("Loading storage for player %s", self.nickname)
         self._load_common_container(
             inventory_info, item_container_save_data, dynamic_item_save_data
         )

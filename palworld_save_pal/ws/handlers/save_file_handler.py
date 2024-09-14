@@ -21,7 +21,6 @@ logger = create_logger(__name__)
 
 
 async def load_save_file_handler(message: LoadSaveFileMessage, ws: WebSocket):
-    logger.info("Processing save file upload")
 
     async def ws_callback(message: str):
         response = build_response(MessageType.PROGRESS_MESSAGE, message)
@@ -35,7 +34,6 @@ async def load_save_file_handler(message: LoadSaveFileMessage, ws: WebSocket):
             "name": app_state.save_file.name,
             "size": app_state.save_file.size,
         }
-        logger.info("Save file loaded: %s", app_state.save_file.name)
         await ws_callback(
             "File uploaded and processed successfully, results coming right up!"
         )
@@ -53,7 +51,6 @@ async def load_save_file_handler(message: LoadSaveFileMessage, ws: WebSocket):
 
 
 async def update_save_file_handler(message: UpdateSaveFileMessage, ws: WebSocket):
-    logger.info("Processing save file update")
 
     async def ws_callback(message: str):
         response = build_response(MessageType.PROGRESS_MESSAGE, message)
@@ -93,7 +90,6 @@ async def update_save_file_handler(message: UpdateSaveFileMessage, ws: WebSocket
 
 
 async def download_save_file_handler(_: DownloadSaveFileMessage, ws: WebSocket):
-    logger.info("Processing save file download")
 
     async def ws_callback(message: str):
         response = build_response(MessageType.PROGRESS_MESSAGE, message)
@@ -113,7 +109,6 @@ async def download_save_file_handler(_: DownloadSaveFileMessage, ws: WebSocket):
             "name": "Level.sav",
             "content": encoded_data,
         }
-        logger.info("Generated save file and sending to client")
         response = build_response(MessageType.DOWNLOAD_SAVE_FILE, data)
         await ws.send_json(response)
 
@@ -127,7 +122,6 @@ async def download_save_file_handler(_: DownloadSaveFileMessage, ws: WebSocket):
 
 
 async def load_zip_file_handler(message: LoadZipFileMessage, ws: WebSocket):
-    logger.info("Processing zip file upload")
 
     async def ws_callback(message: str):
         response = build_response(MessageType.PROGRESS_MESSAGE, message)
@@ -143,7 +137,8 @@ async def load_zip_file_handler(message: LoadZipFileMessage, ws: WebSocket):
                 raise ValueError("Zip file is empty")
 
             save_id = file_list[0].split("/")[0]
-            level_sav = f"{save_id}/Level.sav"
+            nested = save_id != "Level.sav"
+            level_sav = f"{save_id}/Level.sav" if nested else "Level.sav"
 
             if level_sav not in file_list:
                 raise ValueError(
@@ -152,11 +147,11 @@ async def load_zip_file_handler(message: LoadZipFileMessage, ws: WebSocket):
 
             level_sav_data = zip_ref.read(level_sav)
 
-            # Process player files
             player_files = [
                 f
                 for f in file_list
-                if f.startswith(f"{save_id}/Players/") and f.endswith(".sav")
+                if f.startswith(f"{save_id}/Players/" if nested else "Players/")
+                and f.endswith(".sav")
             ]
             player_data = {}
             for player_file in player_files:
@@ -168,16 +163,11 @@ async def load_zip_file_handler(message: LoadZipFileMessage, ws: WebSocket):
                 save_id, level_sav_data, player_data, ws_callback
             )
 
-            # Here you would process the player data
-            # For now, we'll just log it
-            logger.info("Found %s player files", len(player_files))
-
         data = {
             "name": app_state.save_file.name,
             "size": app_state.save_file.size,
         }
 
-        logger.info("Zip file processed: %s", app_state.save_file.name)
         await ws_callback(
             "Zip file uploaded and processed successfully, results coming right up!"
         )

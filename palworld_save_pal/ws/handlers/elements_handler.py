@@ -11,7 +11,6 @@ elements_json = JsonManager("data/json/elements.json")
 
 
 async def get_elements_handler(_: GetElementsMessage, ws: WebSocket):
-    logger.info("Processing get_elements request")
     try:
         elements_data = elements_json.read()
 

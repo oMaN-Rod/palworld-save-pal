@@ -15,7 +15,6 @@ from palworld_save_pal.utils.logging_config import create_logger, setup_logging
 
 logger = create_logger(__name__)
 
-# Initialize the FastAPI app
 app = FastAPI(swagger_ui_parameters={"syntaxHighlight.theme": "monokai"})
 manager = ConnectionManager()
 
@@ -56,7 +55,7 @@ async def websocket_endpoint(websocket: WebSocket, client_id: int):
             data = await websocket.receive_text()
             await manager.process_message(data, websocket)
     except WebSocketDisconnect:
-        logger.info("Client %s disconnected", client_id)
+        logger.warning("Client %s disconnected", client_id)
         manager.disconnect(websocket)
 
 
@@ -69,7 +68,7 @@ class ServerThread(threading.Thread):
         self.server = None
 
     def run(self):
-        logger.info("Starting server thread")
+        logger.debug("Starting server thread")
         config = uvicorn.Config(
             app=app,
             host=self.host,
@@ -82,14 +81,14 @@ class ServerThread(threading.Thread):
 
     def stop(self):
         if self.server:
-            logger.info("Stopping server")
+            logger.debug("Stopping server")
             self.server.should_exit = True
         else:
             logger.warning("Server instance not found during stop attempt")
 
 
 def cleanup_processes():
-    logger.info("Starting process cleanup")
+    logger.debug("Starting process cleanup")
     current_process = psutil.Process()
     children = current_process.children(recursive=True)
     for child in children:
@@ -98,7 +97,7 @@ def cleanup_processes():
     for p in alive:
         logger.warning("Force killing process: %s", p.pid)
         p.kill()
-    logger.info("Process cleanup completed")
+    logger.debug("Process cleanup completed")
 
 
 def start_server(host, port, dev_mode):
@@ -163,14 +162,14 @@ def main():
     url = f"http://{args.host}:{args.port}"
     start_webview(url, args.dev)
 
-    logger.info("Main thread waiting for termination signal")
+    logger.debug("Main thread waiting for termination signal")
     app_state.terminate_flag.wait()
 
-    logger.info("Termination signal received, initiating shutdown")
+    logger.debug("Termination signal received, initiating shutdown")
     if app_state.server_instance:
         app_state.server_instance.stop()
     cleanup_processes()
-    logger.info("Application shutdown complete")
+    logger.info("Application shutdown complete, goodbye!")
 
 
 if __name__ == "__main__":

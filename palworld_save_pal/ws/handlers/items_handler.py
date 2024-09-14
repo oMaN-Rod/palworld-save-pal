@@ -11,7 +11,6 @@ items_i18n_json = JsonManager("data/json/en-GB/items.json")
 
 
 async def get_items_handler(_: GetItemsMessage, ws: WebSocket):
-    logger.info("Processing get_items request")
     try:
         items_data = items_json.read()
         items_i18n = items_i18n_json.read()

@@ -39,7 +39,6 @@ class JsonManager:
         self.write(data)
 
     def delete(self, key: str):
-        logger.info("Deleting key %s from %s", key, self.file_path)
         data = self.read()
         if key in data:
             del data[key]

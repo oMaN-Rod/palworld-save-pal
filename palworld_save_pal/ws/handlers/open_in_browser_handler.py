@@ -8,8 +8,6 @@ logger = create_logger(__name__)
 
 
 async def open_in_browser_handler(message: OpenInBrowserMessage, ws: WebSocket):
-    logger.info("Processing open_in_browser request")
-
     try:
         host = message.data
         port = host.split(":")[-1]
