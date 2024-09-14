@@ -17,7 +17,7 @@ async def get_passive_skills_handler(_: GetPassiveSkillsMessage, ws: WebSocket):
         combined_passive_skills = {}
         for skill_id, details in passive_skills_data.items():
             i18n_info = passive_skills_i18n.get(
-                skill_id, {"name": skill_id, "description": "", "effect": ""}
+                skill_id, {"name": skill_id, "description": ""}
             )
             combined_passive_skills[skill_id] = {
                 "id": skill_id,
@@ -25,7 +25,6 @@ async def get_passive_skills_handler(_: GetPassiveSkillsMessage, ws: WebSocket):
                 "description": i18n_info["description"],
                 "details": {
                     **details,
-                    "effect": i18n_info["effect"],
                 },
             }
 

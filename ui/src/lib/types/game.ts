@@ -184,7 +184,7 @@ interface ActiveSkillDetails {
 	power: number;
 	ct: number;
 	name: string;
-	
+
 	exclusive?: string[];
 }
 
@@ -199,8 +199,6 @@ interface ActiveSkill extends Skill {
 }
 
 interface PassiveSkillDetails {
-	effect: string;
-	rating: string;
 	tier: string;
 	bonuses: Bonuses;
 }
