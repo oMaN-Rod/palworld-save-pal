@@ -1,4 +1,5 @@
 import { palsData } from '$lib/data/pals';
+import type { ItemContainerSlot } from '$types';
 import { type Pal, type Player, type SaveFile } from '$types';
 import { getSocketState } from './websocketState.svelte';
 
@@ -12,6 +13,7 @@ export function createAppState() {
 	let saveFile: SaveFile | undefined = $state(undefined);
 	let modifiedPals: Record<string, Pal> = $state({});
 	let modifiedPlayers: Record<string, Player> = $state({});
+	let clipboardItem: ItemContainerSlot | null = $state(null);
 
 	function resetState() {
 		players = {};
@@ -60,6 +62,12 @@ export function createAppState() {
 	}
 
 	return {
+		get clipboardItem() {
+			return clipboardItem;
+		},
+		setClipboardItem(item: ItemContainerSlot | null) {
+			clipboardItem = item;
+		},
 		get players() {
 			return players;
 		},
@@ -102,7 +110,7 @@ export function createAppState() {
 		get modifiedPlayers() {
 			return modifiedPlayers;
 		},
-		resetState,
+		resetState
 	};
 }
 

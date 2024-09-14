@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { ItemHeader } from '$components/ui';
-	import { getAppState } from '$states';
+	import { getAppState, getToastState } from '$states';
 	import { EntryState, type ItemContainerSlot, type ItemContainer } from '$types';
 	import { assetLoader } from '$utils/asset-loader';
 	import { ASSET_DATA_PATH } from '$lib/constants';
@@ -11,6 +11,7 @@
 	import { Bomb, ChevronsLeftRight, Key, Pizza, Shield, Swords } from 'lucide-svelte';
 
 	const appState = getAppState();
+	const toast = getToastState();
 
 	let commonContainer: ItemContainer = $state({ id: '', type: '', slots: [] });
 	let essentialContainer: ItemContainer = $state({ id: '', type: '', slots: [] });
@@ -115,12 +116,66 @@
 		}
 	}
 
-	function clearAll(event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }) {
+	function clearAll() {
 		clearCommonContainer();
 		clearEssentialContainer();
 		clearWeaponLoadOutContainer();
 		clearEquipmentArmorContainer();
 		clearFoodEquipContainer();
+	}
+
+	async function copyItem(slot: ItemContainerSlot) {
+		if (slot.static_id !== 'None') {
+			appState.setClipboardItem(slot);
+			let itemName = slot.static_id;
+			const itemData = await itemsData.searchItems(slot.static_id);
+			if (itemData) {
+				itemName = itemData.info.localized_name;
+			}
+			toast.add(`${itemName} copied to clipboard`);
+		} else {
+			appState.setClipboardItem(null);
+			toast.add('Clipboard cleared');
+		}
+	}
+
+	function clearItem(slot: ItemContainerSlot) {
+		slot.static_id = 'None';
+		slot.count = 0;
+		slot.dynamic_item = undefined;
+		if (appState.selectedPlayer) {
+			appState.selectedPlayer.state = EntryState.MODIFIED;
+		}
+	}
+
+	function pasteItem(slot: ItemContainerSlot) {
+		if (appState.clipboardItem) {
+			slot.static_id = appState.clipboardItem.static_id;
+			slot.count = appState.clipboardItem.count;
+			slot.dynamic_item = appState.clipboardItem.dynamic_item;
+			if (slot.dynamic_item) {
+				slot.dynamic_item.local_id = '00000000-0000-0000-0000-000000000000';
+			}
+			if (appState.selectedPlayer) {
+				appState.selectedPlayer.state = EntryState.MODIFIED;
+			}
+		} else {
+			clearItem(slot);
+		}
+	}
+
+	async function handleCopyPaste(event: MouseEvent, slot: ItemContainerSlot, canPaste = true) {
+		if (event.button === 0) return;
+		event.preventDefault();
+		if (event.ctrlKey && event.button === 2 && canPaste) {
+			pasteItem(slot);
+		} else if (event.ctrlKey && event.button === 1) {
+			clearItem(slot);
+		} else if (!event.ctrlKey && event.button === 2) {
+			await copyItem(slot);
+		} else {
+			toast.add('Cannot paste here (yet™)', undefined, 'warning');
+		}
 	}
 
 	$effect(() => {
@@ -240,7 +295,11 @@
 					<Tabs.Panel value="inventory">
 						<div class="grid grid-cols-6 gap-2">
 							{#each Object.values(commonContainer.slots) as _, index}
-								<ItemBadge bind:slot={commonContainer.slots[index]} itemGroup="Common" />
+								<ItemBadge
+									bind:slot={commonContainer.slots[index]}
+									itemGroup="Common"
+									onCopyPaste={(event) => handleCopyPaste(event, commonContainer.slots[index])}
+								/>
 							{/each}
 						</div>
 					</Tabs.Panel>
@@ -260,14 +319,23 @@
 					<ItemHeader text="Weapon" />
 					<div class="flex max-w-[65px] flex-col space-y-2">
 						{#each Object.values(weaponLoadOutContainer.slots) as _, index}
-							<ItemBadge bind:slot={weaponLoadOutContainer.slots[index]} itemGroup="Weapon" />
+							<ItemBadge
+								bind:slot={weaponLoadOutContainer.slots[index]}
+								itemGroup="Weapon"
+								onCopyPaste={(event) =>
+									handleCopyPaste(event, weaponLoadOutContainer.slots[index], false)}
+							/>
 						{/each}
 					</div>
 					<ItemHeader text="Accessory" />
 					<div class="ml-2">
 						<div class="grid max-h-36 max-w-36 grid-cols-2 gap-2">
 							{#each accessoryGear as _, index}
-								<ItemBadge bind:slot={accessoryGear[index]} itemGroup="Accessory" />
+								<ItemBadge
+									bind:slot={accessoryGear[index]}
+									itemGroup="Accessory"
+									onCopyPaste={(event) => handleCopyPaste(event, accessoryGear[index], false)}
+								/>
 							{/each}
 						</div>
 					</div>
@@ -295,20 +363,41 @@
 				</div>
 				<div class="flex flex-col space-y-2">
 					<ItemHeader text="Head" />
-					<ItemBadge bind:slot={headGear} itemGroup="Head" />
+					<ItemBadge
+						bind:slot={headGear}
+						itemGroup="Head"
+						onCopyPaste={(event) => handleCopyPaste(event, headGear, false)}
+					/>
 					<ItemHeader text="Body" />
-					<ItemBadge bind:slot={bodyGear} itemGroup="Body" />
+					<ItemBadge
+						bind:slot={bodyGear}
+						itemGroup="Body"
+						onCopyPaste={(event) => handleCopyPaste(event, bodyGear, false)}
+					/>
 					<ItemHeader text="Shield" />
-					<ItemBadge bind:slot={shieldGear} itemGroup="Shield" />
+					<ItemBadge
+						bind:slot={shieldGear}
+						itemGroup="Shield"
+						onCopyPaste={(event) => handleCopyPaste(event, shieldGear, false)}
+					/>
 					<ItemHeader text="Glider" />
-					<ItemBadge bind:slot={gliderGear} itemGroup="Glider" />
+					<ItemBadge
+						bind:slot={gliderGear}
+						itemGroup="Glider"
+						onCopyPaste={(event) => handleCopyPaste(event, gliderGear, false)}
+					/>
 				</div>
 				<div class="col-span-3 ml-12 space-y-2">
 					<ItemHeader text="Food" />
 					<div class="ml-2">
 						<div class="flex flex-row space-x-2">
 							{#each Object.values(foodEquipContainer.slots) as _, index}
-								<ItemBadge bind:slot={foodEquipContainer.slots[index]} itemGroup="Food" />
+								<ItemBadge
+									bind:slot={foodEquipContainer.slots[index]}
+									itemGroup="Food"
+									onCopyPaste={(event) =>
+										handleCopyPaste(event, foodEquipContainer.slots[index], false)}
+								/>
 							{/each}
 						</div>
 					</div>

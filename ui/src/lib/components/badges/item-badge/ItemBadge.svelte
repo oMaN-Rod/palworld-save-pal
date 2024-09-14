@@ -10,9 +10,14 @@
 	import { Progress } from '@skeletonlabs/skeleton-svelte';
 	import { Package } from 'lucide-svelte';
 
-	let { slot = $bindable<ItemContainerSlot>(), itemGroup } = $props<{
+	let {
+		slot = $bindable<ItemContainerSlot>(),
+		itemGroup,
+		onCopyPaste
+	} = $props<{
 		slot: ItemContainerSlot;
 		itemGroup: ItemGroup;
+		onCopyPaste?: (event: MouseEvent) => void;
 	}>();
 
 	const modal = getModalState();
@@ -175,7 +180,12 @@
 	});
 </script>
 
-<button class="hover:ring-secondary-500 hover:ring" onclick={handleItemSelect}>
+<button
+	class="hover:ring-secondary-500 hover:ring"
+	onclick={handleItemSelect}
+	oncontextmenu={(event) => event.preventDefault()}
+	onmousedown={(event) => onCopyPaste(event)}
+>
 	{#if item}
 		<Tooltip
 			popupClass="p-0 mt-12 bg-surface-600"
