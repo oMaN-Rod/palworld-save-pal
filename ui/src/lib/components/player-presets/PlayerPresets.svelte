@@ -96,6 +96,17 @@
 		};
 	}
 
+	function processSlots(slots: ItemContainerSlot[]) {
+		const newSlots = deepCopy(slots);
+		return newSlots.map((slot) => {
+			if (slot.dynamic_item) {
+				slot.dynamic_item.local_id = '00000000-0000-0000-0000-000000000000';
+				return { ...slot };
+			}
+			return slot;
+		});
+	}
+
 	async function handleAddPreset() {
 		if (!appState.selectedPlayer) return;
 		// @ts-ignore
@@ -106,13 +117,15 @@
 		if (!result) return;
 		let newPreset = {
 			name: result,
-			common_container: deepCopy(appState.selectedPlayer.common_container.slots),
-			essential_container: deepCopy(appState.selectedPlayer.essential_container.slots),
-			weapon_load_out_container: deepCopy(appState.selectedPlayer.weapon_load_out_container.slots),
-			player_equipment_armor_container: deepCopy(
+			common_container: processSlots(appState.selectedPlayer.common_container.slots),
+			essential_container: processSlots(appState.selectedPlayer.essential_container.slots),
+			weapon_load_out_container: processSlots(
+				appState.selectedPlayer.weapon_load_out_container.slots
+			),
+			player_equipment_armor_container: processSlots(
 				appState.selectedPlayer.player_equipment_armor_container.slots
 			),
-			food_equip_container: deepCopy(appState.selectedPlayer.food_equip_container.slots)
+			food_equip_container: processSlots(appState.selectedPlayer.food_equip_container.slots)
 		};
 		presets = await presetsData.addPresetProfile(newPreset);
 		filteredPresets = Object.values(presets);
