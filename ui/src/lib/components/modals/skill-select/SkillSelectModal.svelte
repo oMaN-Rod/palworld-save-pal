@@ -122,31 +122,23 @@
 {#snippet activeSkillOption(option: SelectOption)}
 	{#await getActiveSkillIcon(option.value) then icon}
 		{@const activeSkill = activeSkills.find((s) => s.id === option.value)}
-		<Tooltip>
-			<div class="grid grid-cols-[auto_1fr_auto] items-center gap-2">
-				{#if icon}
-					<enhanced:img src={icon} alt={option.label} class="h-6 w-6"></enhanced:img>
-				{:else}
-					<div class="w-6"></div>
-				{/if}
+		<div class="grid grid-cols-[auto_1fr_auto] items-center gap-2">
+			{#if icon}
+				<enhanced:img src={icon} alt={option.label} class="h-6 w-6"></enhanced:img>
+			{:else}
+				<div class="w-6"></div>
+			{/if}
+			<div class="flex flex-col">
 				<span class="truncate">{option.label}</span>
-				<div class="flex items-center space-x-1 justify-self-start">
-					<TimerReset class="h-4 w-4" />
-					<span class="font-bold">{activeSkill?.details.ct}</span>
-					<span class="text-xs">Pwr</span>
-					<span class="font-bold">{activeSkill?.details.power}</span>
-				</div>
+				<span class="text-xs">{activeSkill?.description}</span>
 			</div>
-			{#snippet popup()}
-				<div class="flex flex-row p-2">
-					<span>{activeSkill?.description}</span>
-					<div class="ml-4 flex flex-row">
-						<TimerReset class="h-6 w-6" />
-						{activeSkill?.details.ct}
-					</div>
-				</div>
-			{/snippet}
-		</Tooltip>
+			<div class="flex items-center space-x-1 justify-self-start">
+				<TimerReset class="h-4 w-4" />
+				<span class="font-bold">{activeSkill?.details.ct}</span>
+				<span class="text-xs">Pwr</span>
+				<span class="font-bold">{activeSkill?.details.power}</span>
+			</div>
+		</div>
 	{/await}
 {/snippet}
 
