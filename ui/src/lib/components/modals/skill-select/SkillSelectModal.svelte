@@ -145,19 +145,17 @@
 {#snippet passiveSkillOption(option: SelectOption)}
 	{#await getPassiveSkillIcon(option.value) then icon}
 		{@const passiveSkill = passiveSkills.find((s) => s.id === option.value)}
-		<Tooltip>
-			<div class="flex flex-row">
+		<div class="flex flex-row">
+			<div class="flex grow flex-col">
 				<span class="grow truncate">{option.label}</span>
-				{#if icon}
-					<enhanced:img src={icon} alt={option.label} class="h-6 w-6"></enhanced:img>
-				{:else}
-					<div class="w-6"></div>
-				{/if}
+				<span class="text-xs">{passiveSkill?.description}</span>
 			</div>
-			{#snippet popup()}
-				<span>{passiveSkill?.description}</span>
-			{/snippet}
-		</Tooltip>
+			{#if icon}
+				<enhanced:img src={icon} alt={option.label} class="h-6 w-6"></enhanced:img>
+			{:else}
+				<div class="w-6"></div>
+			{/if}
+		</div>
 	{/await}
 {/snippet}
 
