@@ -128,6 +128,7 @@
 		appState.selectedPal.rank_defense = 10;
 		appState.selectedPal.rank_attack = 10;
 		appState.selectedPal.rank_craftspeed = 10;
+		appState.selectedPal.work_speed = 200;
 		await getStats(appState.selectedPal, appState.selectedPlayer);
 		appState.selectedPal.hp = appState.selectedPal.max_hp;
 		appState.selectedPal.state = EntryState.MODIFIED;

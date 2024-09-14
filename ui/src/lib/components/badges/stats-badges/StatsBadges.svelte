@@ -2,21 +2,23 @@
 	import { assetLoader } from '$lib/utils/asset-loader';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { EntryState, type Pal, type Player } from '$types';
-	import { getStats } from '$lib/data';
+	import { getStats, type PalStats } from '$lib/data';
 	import { SectionHeader } from '$components/ui';
 	import { HealthBadge } from '$components';
+	import { getModalState } from '$states';
+	import { NumberInputModal } from '$components/modals';
 
 	let {
 		pal = $bindable(),
 		player = $bindable()
 	}: { pal: Pal | undefined; player: Player | undefined } = $props();
 
-	type Stat = {
-		name: string;
-		value: number;
-	};
+	const modal = getModalState();
 
-	let stats: Stat[] = $state([]);
+	let stats: PalStats | undefined = $state();
+	let attackIcon: string = $state('');
+	let defenseIcon: string = $state('');
+	let workSpeedIcon: string = $state('');
 	let foodIcon: string = $state('');
 	let hpIcon: string = $state('');
 
@@ -28,40 +30,41 @@
 		const hpPath = `${ASSET_DATA_PATH}/img/icons/Heart.png`;
 		const hp = await assetLoader.loadImage(hpPath);
 		hpIcon = hp;
-	}
 
-	async function loadSvgContent(stat: string): Promise<string> {
-		const svgPath = `${ASSET_DATA_PATH}/img/stats/${stat}.svg`;
-		try {
-			return await assetLoader.load(svgPath, 'svg');
-		} catch (error) {
-			console.error(`Failed to load SVG for ${stat}:`, error);
-			return '';
-		}
-	}
+		const attackPath = `${ASSET_DATA_PATH}/img/stats/attack.svg`;
+		const attack = await assetLoader.load(attackPath, 'svg');
+		attackIcon = attack as string;
 
-	function formatStatText(stat: string): string {
-		return stat
-			.split('_')
-			.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-			.join(' ');
-	}
+		const defensePath = `${ASSET_DATA_PATH}/img/stats/defense.svg`;
+		const defense = await assetLoader.load(defensePath, 'svg');
+		defenseIcon = defense as string;
 
-	function handleHeal() {
-		if (!pal) return;
-		pal.hp = pal.max_hp;
-		pal.state = EntryState.MODIFIED;
-	}
-
-	function handleEat() {
-		if (!pal) return;
-		pal.stomach = pal.max_stomach;
-		pal.state = EntryState.MODIFIED;
+		const workPath = `${ASSET_DATA_PATH}/img/stats/work_speed.svg`;
+		const work = await assetLoader.load(workPath, 'svg');
+		workSpeedIcon = work as string;
 	}
 
 	async function handleGetStats() {
 		if (pal && player) {
 			stats = await getStats(pal, player);
+		}
+	}
+
+	async function handleEditWorkSpeed() {
+		if (!pal) {
+			console.error('Pal not found');
+			return;
+		}
+		// @ts-ignore
+		const result = await modal.showModal<number>(NumberInputModal, {
+			title: 'Edit Work Speed',
+			value: pal.work_speed,
+			min: 0,
+			max: 200
+		});
+		if (result !== null) {
+			pal.work_speed = result;
+			pal.state = EntryState.MODIFIED;
 		}
 	}
 
@@ -76,10 +79,6 @@
 			player &&
 			(pal?.talent_hp || pal?.talent_melee || pal?.talent_defense || pal?.passive_skills)
 		) {
-			console.log('Talent hp:', pal.talent_hp);
-			console.log('Talent melee:', pal.talent_melee);
-			console.log('Talent defense:', pal.talent_defense);
-			console.log('Passive skills:', pal.passive_skills);
 			handleGetStats();
 		}
 	});
@@ -87,22 +86,43 @@
 
 <HealthBadge {pal} {player} />
 <SectionHeader text="Stats" />
-{#each stats as stat}
-	<div
-		class="border-l-primary border-l-surface-600 bg-surface-900 relative w-full overflow-hidden rounded-none border-l-2 p-0 shadow-none"
-	>
-		<div class="flex w-full items-center">
-			{#await loadSvgContent(stat.name)}
-				<div class="ml-2 h-6 w-6"></div>
-			{:then svgContent}
-				<div class="mx-2 h-6 w-6">
-					{@html svgContent}
-				</div>
-			{:catch error}
-				<div class="ml-2 h-6 w-6"></div>
-			{/await}
-			<span class="flex-grow p-2 text-lg">{formatStatText(stat.name)}</span>
-			<span class="p-2 text-lg font-bold">{stat.value}</span>
+<div
+	class="border-l-primary border-l-surface-600 bg-surface-900 relative w-full overflow-hidden rounded-none border-l-2 p-0 shadow-none"
+>
+	<div class="flex w-full items-center">
+		<div class="mx-2 h-6 w-6">
+			{@html attackIcon}
 		</div>
+
+		<div class="ml-2 h-6 w-6"></div>
+		<span class="flex-grow p-2 text-lg">Attack</span>
+		<span class="p-2 text-lg font-bold">{stats?.attack}</span>
 	</div>
-{/each}
+</div>
+<div
+	class="border-l-primary border-l-surface-600 bg-surface-900 relative w-full overflow-hidden rounded-none border-l-2 p-0 shadow-none"
+>
+	<div class="flex w-full items-center">
+		<div class="mx-2 h-6 w-6">
+			{@html defenseIcon}
+		</div>
+
+		<div class="ml-2 h-6 w-6"></div>
+		<span class="flex-grow p-2 text-lg">Defense</span>
+		<span class="p-2 text-lg font-bold">{stats?.defense}</span>
+	</div>
+</div>
+<button
+	class="hover:ring-secondary-500 border-l-primary border-l-surface-600 bg-surface-900 hover:bg-surface-800 relative w-full overflow-hidden rounded-none border-l-2 p-0 shadow-none hover:ring"
+	onclick={handleEditWorkSpeed}
+>
+	<div class="flex w-full items-center">
+		<div class="mx-2 h-6 w-6">
+			{@html workSpeedIcon}
+		</div>
+
+		<div class="ml-2 h-6 w-6"></div>
+		<span class="flex-grow p-2 text-start text-lg">Work Speed</span>
+		<span class="p-2 text-lg font-bold">{pal?.work_speed}</span>
+	</div>
+</button>

@@ -2,7 +2,7 @@
 	import { cn } from '$theme';
 	import { MessageType, PalGender, type Pal, type Player } from '$types';
 	import { elementsData, palsData, getStats } from '$lib/data';
-	import { Input, Tooltip, Checkbox, List } from '$components/ui';
+	import { Input, Tooltip, List } from '$components/ui';
 	import { PalSelectModal } from '$components/modals';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import {

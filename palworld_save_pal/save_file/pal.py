@@ -19,7 +19,7 @@ class Pal(BaseModel):
     is_boss: bool = False
     character_id: Optional[str] = Field(None)
     gender: Optional[PalGender] = None
-    work_speed: float = Field(0.0)
+    work_speed: int = Field(0)
     rank_hp: int = 0
     rank_attack: int = 0
     rank_defense: int = 0
@@ -87,6 +87,7 @@ class Pal(BaseModel):
         return self._character_save
 
     def update(self):
+        logger.debug("Updating Pal: %s", self)
         self._update_character_id()
         self._update_nickname()
         self._update_gender()
@@ -98,6 +99,7 @@ class Pal(BaseModel):
         self._update_level()
         self._update_ranks()
         self._update_talents()
+        self._update_work_speed()
         self.heal()
 
     def update_from(self, other_pal: "Pal"):
@@ -121,7 +123,11 @@ class Pal(BaseModel):
             if "IsRarePal" in self._save_parameter
             else False
         )
-        self.work_speed = PalObjects.get_value(self._save_parameter["CraftSpeed"])
+        self.work_speed = (
+            PalObjects.get_value(self._save_parameter["CraftSpeed"])
+            if "CraftSpeed" in self._save_parameter
+            else 70
+        )
         self.nickname = (
             PalObjects.get_value(self._save_parameter["NickName"])
             if "NickName" in self._save_parameter
@@ -330,9 +336,6 @@ class Pal(BaseModel):
         active_skills = self.active_skills if self.active_skills else []
 
         if "EquipWaza" in self._save_parameter:
-            logger.debug(
-                "Updating active skills: %s, %s", active_skills, self._save_parameter
-            )
             PalObjects.set_array_property(
                 self._save_parameter["EquipWaza"], values=active_skills
             )
@@ -520,3 +523,11 @@ class Pal(BaseModel):
             PalObjects.set_value(self._save_parameter["IsRarePal"], value=self.is_lucky)
         else:
             self._save_parameter["IsRarePal"] = PalObjects.BoolProperty(self.is_lucky)
+
+    def _update_work_speed(self) -> None:
+        if "CraftSpeed" in self._save_parameter:
+            PalObjects.set_value(
+                self._save_parameter["CraftSpeed"], value=self.work_speed
+            )
+        else:
+            self._save_parameter["CraftSpeed"] = PalObjects.IntProperty(self.work_speed)
