@@ -858,5 +858,10 @@
 			"WeaselDragon",
 			"WeaselDragon_Fire"
 		]
+	},
+	"EPalWazaID::HolyBlast": {
+		"type": "Neutral",
+		"power": 120,
+		"ct": 30
 	}
 }

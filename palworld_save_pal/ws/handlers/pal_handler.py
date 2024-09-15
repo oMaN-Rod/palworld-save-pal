@@ -27,18 +27,15 @@ async def get_pals_handler(_: GetPalsMessage, ws: WebSocket):
         pals_data = pals_json.read()
         pals_i18n = pals_i18n_json.read()
 
-        combined_pals = []
-        for pal in pals_data["values"]:
-            code_name = pal["code_name"]
-            localized_name = pals_i18n.get(code_name, code_name)
-            combined_pal = {
-                "code_name": code_name,
-                "localized_name": localized_name,
-                **pal,
+        localized_pals_data = {
+            code_name: {
+                "localized_name": pals_i18n.get(code_name, code_name),
+                **pal_info,
             }
-            combined_pals.append(combined_pal)
+            for code_name, pal_info in pals_data.items()
+        }
 
-        response = build_response(MessageType.GET_PALS, combined_pals)
+        response = build_response(MessageType.GET_PALS, localized_pals_data)
         await ws.send_json(response)
     except Exception as e:
         logger.error("Error getting pals: %s", str(e))

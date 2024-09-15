@@ -18,9 +18,9 @@
 	async function loadPalOptions() {
 		const allPals = await palsData.getAllPals();
 		selectOptions = allPals
-			.filter((pal) => !pal.human && !pal.tower)
-			.map((pal) => ({
-				value: pal.code_name,
+			.filter(([_, pal]) => !pal.human && !pal.tower)
+			.map(([code_name, pal]) => ({
+				value: code_name,
 				label: pal.localized_name
 			}))
 			.sort((a, b) => a.label.localeCompare(b.label));

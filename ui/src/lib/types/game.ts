@@ -154,11 +154,9 @@ export type Suitabilities = {
 };
 
 export interface PalData {
-	code_name: string;
 	localized_name: string;
 	type: ElementType[];
-	skill_set: string[];
-	raid_skill_set?: string[];
+	skill_set: Record<string, number>;
 	scaling: Scaling;
 	suitabilities: Suitabilities;
 	tower?: boolean;

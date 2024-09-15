@@ -11176,6 +11176,16 @@
         "sell_price": 0,
         "image": "Pal_Saddle"
     },
+    "SkillUnlock_HadesBird_Electric": {
+        "type": "Key Items",
+        "group": "KeyItem",
+        "tier": "Legendary",
+        "stack": 1,
+        "weight": 0,
+        "buy_price": 0,
+        "sell_price": 0,
+        "image": "Pal_Saddle"
+    },
     "SkillUnlock_HawkBird": {
         "type": "Key Items",
         "group": "KeyItem",
@@ -11366,6 +11376,16 @@
         "sell_price": 0,
         "image": "Pal_Saddle"
     },
+    "SkillUnlock_MushroomDragon": {
+        "type": "Key Items",
+        "group": "KeyItem",
+        "tier": "Legendary",
+        "stack": 1,
+        "weight": 0,
+        "buy_price": 0,
+        "sell_price": 0,
+        "image": "Pal_Saddle"
+    },
     "SkillUnlock_NaughtyCat": {
         "type": "Key Items",
         "group": "KeyItem",
@@ -11476,6 +11496,16 @@
         "sell_price": 0,
         "image": "Pal_Saddle"
     },
+    "SkillUnlock_SkyDragon_Grass": {
+        "type": "Key Items",
+        "group": "KeyItem",
+        "tier": "Legendary",
+        "stack": 1,
+        "weight": 0,
+        "buy_price": 0,
+        "sell_price": 0,
+        "image": "Pal_Saddle"
+    },
     "SkillUnlock_Suzaku": {
         "type": "Key Items",
         "group": "KeyItem",
@@ -11566,6 +11596,16 @@
         "sell_price": 0,
         "image": "Pal_Saddle"
     },
+    "SkillUnlock_WeaselDragon_Fire": {
+        "type": "Key Items",
+        "group": "KeyItem",
+        "tier": "Legendary",
+        "stack": 1,
+        "weight": 0,
+        "buy_price": 0,
+        "sell_price": 0,
+        "image": "Pal_Saddle"
+    },
     "SkillUnlock_WindChimes": {
         "type": "Key Items",
         "group": "KeyItem",
@@ -11587,6 +11627,16 @@
         "image": "Pal_Gloves"
     },
     "SkillUnlock_WingGolem": {
+        "type": "Key Items",
+        "group": "KeyItem",
+        "tier": "Legendary",
+        "stack": 1,
+        "weight": 0,
+        "buy_price": 0,
+        "sell_price": 0,
+        "image": "Pal_Saddle"
+    },
+    "SkillUnlock_WhiteAlienDragon": {
         "type": "Key Items",
         "group": "KeyItem",
         "tier": "Legendary",

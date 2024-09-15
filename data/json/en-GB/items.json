@@ -4231,6 +4231,10 @@
         "localized_name": "Helzephyr Saddle",
         "description": ""
     },
+    "SkillUnlock_HadesBird_Electric": {
+        "localized_name": "Helzephyr Lux Saddle",
+        "description": ""
+    },
     "SkillUnlock_HawkBird": {
         "localized_name": "Nitewing Saddle",
         "description": ""
@@ -4307,6 +4311,10 @@
         "localized_name": "Sweepa Saddle",
         "description": ""
     },
+    "SkillUnlock_MushroomDragon": {
+        "localized_name": "Shroomer Saddle",
+        "description": ""
+    },
     "SkillUnlock_NaughtyCat": {
         "localized_name": "Grintale Saddle",
         "description": ""
@@ -4351,6 +4359,10 @@
         "localized_name": "Quivern Saddle",
         "description": ""
     },
+    "SkillUnlock_SkyDragon_Grass": {
+        "localized_name": "Quivern Botan Saddle",
+        "description": ""
+    },
     "SkillUnlock_Suzaku": {
         "localized_name": "Suzaku Saddle",
         "description": ""
@@ -4387,6 +4399,10 @@
         "localized_name": "Chillet Saddle",
         "description": ""
     },
+    "SkillUnlock_WeaselDragon_Fire": {
+        "localized_name": "Chillet Ignis Saddle",
+        "description": ""
+    },
     "SkillUnlock_WindChimes": {
         "localized_name": "Hangyu's Gloves",
         "description": ""
@@ -4397,6 +4413,10 @@
     },
     "SkillUnlock_WingGolem": {
         "localized_name": "Knocklem Saddle",
+        "description": ""
+    },
+    "SkillUnlock_WhiteAlienDragon": {
+        "localized_name": "Xenogard Saddle",
         "description": ""
     },
     "SkillUnlock_Yeti": {
