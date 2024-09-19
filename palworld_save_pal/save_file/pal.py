@@ -99,7 +99,7 @@ class Pal(BaseModel):
         self._update_level()
         self._update_ranks()
         self._update_talents()
-        self._update_work_speed()
+        # self._update_work_speed()
         self.heal()
 
     def update_from(self, other_pal: "Pal"):
@@ -141,7 +141,7 @@ class Pal(BaseModel):
         self._get_level()
         self._get_storage_info()
         self._get_skills()
-        self._get_work_suitabilities()
+        # self._get_work_suitabilities()
         self._get_hp()
         self._get_stomach()
         self._get_sanity()
@@ -202,56 +202,56 @@ class Pal(BaseModel):
 
     def _get_talents(self):
         self.talent_hp = (
-            PalObjects.get_value(self._save_parameter["Talent_HP"], 0)
+            PalObjects.get_byte_property(self._save_parameter["Talent_HP"])
             if "Talent_HP" in self._save_parameter
             else 0
         )
         self.talent_melee = (
-            PalObjects.get_value(self._save_parameter["Talent_Melee"], 0)
+            PalObjects.get_byte_property(self._save_parameter["Talent_Melee"])
             if "Talent_Melee" in self._save_parameter
             else 0
         )
         self.talent_shot = (
-            PalObjects.get_value(self._save_parameter["Talent_Shot"], 0)
+            PalObjects.get_byte_property(self._save_parameter["Talent_Shot"])
             if "Talent_Shot" in self._save_parameter
             else 0
         )
         self.talent_defense = (
-            PalObjects.get_value(self._save_parameter["Talent_Defense"], 0)
+            PalObjects.get_byte_property(self._save_parameter["Talent_Defense"])
             if "Talent_Defense" in self._save_parameter
             else 0
         )
 
     def _get_ranks(self):
         self.rank = (
-            PalObjects.get_value(self._save_parameter["Rank"], 0)
+            PalObjects.get_byte_property(self._save_parameter["Rank"])
             if "Rank" in self._save_parameter
             else 0
         )
         self.rank_hp = (
-            PalObjects.get_value(self._save_parameter["Rank_HP"], 0)
+            PalObjects.get_byte_property(self._save_parameter["Rank_HP"])
             if "Rank_HP" in self._save_parameter
             else 0
         )
         self.rank_attack = (
-            PalObjects.get_value(self._save_parameter["Rank_Attack"], 0)
+            PalObjects.get_byte_property(self._save_parameter["Rank_Attack"])
             if "Rank_Attack" in self._save_parameter
             else 0
         )
         self.rank_defense = (
-            PalObjects.get_value(self._save_parameter["Rank_Defence"], 0)
+            PalObjects.get_byte_property(self._save_parameter["Rank_Defence"])
             if "Rank_Defence" in self._save_parameter
             else 0
         )
         self.rank_craftspeed = (
-            PalObjects.get_value(self._save_parameter["Rank_CraftSpeed"], 0)
+            PalObjects.get_byte_property(self._save_parameter["Rank_CraftSpeed"])
             if "Rank_CraftSpeed" in self._save_parameter
             else 0
         )
 
     def _get_level(self):
         self.level = (
-            PalObjects.get_value(self._save_parameter["Level"], 1)
+            PalObjects.get_byte_property(self._save_parameter["Level"])
             if "Level" in self._save_parameter
             else 1
         )
@@ -394,9 +394,11 @@ class Pal(BaseModel):
 
     def _update_level(self) -> None:
         if "Level" in self._save_parameter:
-            PalObjects.set_value(self._save_parameter["Level"], value=self.level)
+            PalObjects.set_byte_property(
+                self._save_parameter["Level"], value=self.level
+            )
         else:
-            self._save_parameter["Level"] = PalObjects.IntProperty(self.level)
+            self._save_parameter["Level"] = PalObjects.ByteProperty(self.level)
 
     def _update_ranks(self) -> None:
         self._update_rank()
@@ -406,59 +408,48 @@ class Pal(BaseModel):
         self._update_rank_craftspeed()
 
     def _update_rank(self) -> None:
-        if self.rank < 1:
-            safe_remove(self._save_parameter, "Rank")
-            return
         if "Rank" in self._save_parameter:
-            PalObjects.set_value(self._save_parameter["Rank"], value=self.rank + 1)
+            PalObjects.set_byte_property(
+                self._save_parameter["Rank"], value=self.rank + 1
+            )
         else:
-            self._save_parameter["Rank"] = PalObjects.IntProperty(self.rank + 1)
+            self._save_parameter["Rank"] = PalObjects.ByteProperty(self.rank + 1)
 
     def _update_rank_hp(self) -> None:
-        if self.rank_hp < 1:
-            safe_remove(self._save_parameter, "Rank_HP")
-            return
         if "Rank_HP" in self._save_parameter:
-            PalObjects.set_value(self._save_parameter["Rank_HP"], value=self.rank_hp)
+            PalObjects.set_byte_property(
+                self._save_parameter["Rank_HP"], value=self.rank_hp
+            )
         else:
-            self._save_parameter["Rank_HP"] = PalObjects.IntProperty(self.rank_hp)
+            self._save_parameter["Rank_HP"] = PalObjects.ByteProperty(self.rank_hp)
 
     def _update_rank_attack(self) -> None:
-        if self.rank_attack < 1:
-            safe_remove(self._save_parameter, "Rank_Attack")
-            return
         if "Rank_Attack" in self._save_parameter:
-            PalObjects.set_value(
+            PalObjects.set_byte_property(
                 self._save_parameter["Rank_Attack"], value=self.rank_attack
             )
         else:
-            self._save_parameter["Rank_Attack"] = PalObjects.IntProperty(
+            self._save_parameter["Rank_Attack"] = PalObjects.ByteProperty(
                 self.rank_attack
             )
 
     def _update_rank_defense(self) -> None:
-        if self.rank_defense < 1:
-            safe_remove(self._save_parameter, "Rank_Defence")
-            return
         if "Rank_Defence" in self._save_parameter:
-            PalObjects.set_value(
+            PalObjects.set_byte_property(
                 self._save_parameter["Rank_Defence"], value=self.rank_defense
             )
         else:
-            self._save_parameter["Rank_Defence"] = PalObjects.IntProperty(
+            self._save_parameter["Rank_Defence"] = PalObjects.ByteProperty(
                 self.rank_defense
             )
 
     def _update_rank_craftspeed(self) -> None:
-        if self.rank_craftspeed < 1:
-            safe_remove(self._save_parameter, "Rank_CraftSpeed")
-            return
         if "Rank_CraftSpeed" in self._save_parameter:
-            PalObjects.set_value(
+            PalObjects.set_byte_property(
                 self._save_parameter["Rank_CraftSpeed"], value=self.rank_craftspeed
             )
         else:
-            self._save_parameter["Rank_CraftSpeed"] = PalObjects.IntProperty(
+            self._save_parameter["Rank_CraftSpeed"] = PalObjects.ByteProperty(
                 self.rank_craftspeed
             )
 
@@ -470,39 +461,39 @@ class Pal(BaseModel):
 
     def _update_talent_hp(self) -> None:
         if "Talent_HP" in self._save_parameter:
-            PalObjects.set_value(
+            PalObjects.set_byte_property(
                 self._save_parameter["Talent_HP"], value=self.talent_hp
             )
         else:
-            self._save_parameter["Talent_HP"] = PalObjects.IntProperty(self.talent_hp)
+            self._save_parameter["Talent_HP"] = PalObjects.ByteProperty(self.talent_hp)
 
     def _update_talent_melee(self) -> None:
         if "Talent_Melee" in self._save_parameter:
-            PalObjects.set_value(
+            PalObjects.set_byte_property(
                 self._save_parameter["Talent_Melee"], value=self.talent_melee
             )
         else:
-            self._save_parameter["Talent_Melee"] = PalObjects.IntProperty(
+            self._save_parameter["Talent_Melee"] = PalObjects.ByteProperty(
                 self.talent_melee
             )
 
     def _update_talent_shot(self) -> None:
         if "Talent_Shot" in self._save_parameter:
-            PalObjects.set_value(
+            PalObjects.set_byte_property(
                 self._save_parameter["Talent_Shot"], value=self.talent_shot
             )
         else:
-            self._save_parameter["Talent_Shot"] = PalObjects.IntProperty(
+            self._save_parameter["Talent_Shot"] = PalObjects.ByteProperty(
                 self.talent_shot
             )
 
     def _update_talent_defense(self) -> None:
         if "Talent_Defense" in self._save_parameter:
-            PalObjects.set_value(
+            PalObjects.set_byte_property(
                 self._save_parameter["Talent_Defense"], value=self.talent_defense
             )
         else:
-            self._save_parameter["Talent_Defense"] = PalObjects.IntProperty(
+            self._save_parameter["Talent_Defense"] = PalObjects.ByteProperty(
                 self.talent_defense
             )
 

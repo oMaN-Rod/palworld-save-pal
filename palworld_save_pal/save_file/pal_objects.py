@@ -245,6 +245,25 @@ class PalObjects:
         }
 
     @staticmethod
+    def ByteProperty(value: int):
+        return {
+            "id": None,
+            "value": {
+                "type": "None",
+                "value": value,
+            },
+            "type": "ByteProperty",
+        }
+        
+    @staticmethod
+    def get_byte_property(d: Dict[str, Any]) -> Optional[str]:
+        return PalObjects.get_nested(d, "value", "value")
+    
+    @staticmethod
+    def set_byte_property(d: Dict[str, Any], value: str):
+        PalObjects.set_nested(d, "value", "value", value=value)
+
+    @staticmethod
     def get_enum_property(d: Dict[str, Any]) -> Optional[str]:
         return PalObjects.get_nested(d, "value", "value")
 
@@ -642,19 +661,6 @@ class PalObjects:
     @staticmethod
     def DynamicItem(container_slot: ItemContainerSlot):
         return {
-            "ID": {
-                "struct_type": "PalDynamicItemId",
-                "struct_id": PalObjects.EMPTY_UUID,
-                "id": None,
-                "value": {
-                    "CreatedWorldId": PalObjects.Guid(PalObjects.EMPTY_UUID),
-                    "LocalIdInCreatedWorld": PalObjects.Guid(
-                        container_slot.dynamic_item.local_id
-                    ),
-                },
-                "type": "StructProperty",
-            },
-            "StaticItemId": PalObjects.NameProperty(container_slot.static_id),
             "RawData": PalObjects.ArrayProperty(
                 ArrayType.BYTE_PROPERTY,
                 {
@@ -668,10 +674,7 @@ class PalObjects:
                 },
                 custom_type=".worldSaveData.DynamicItemSaveData.DynamicItemSaveData.RawData",
             ),
-            "CustomVersionData": {
-                "array_type": "ByteProperty",
-                "id": None,
-                "value": {"values": [0, 0, 0, 0]},
-                "type": "ArrayProperty",
-            },
+            "CustomVersionData": PalObjects.ArrayPropertyValues(
+                ArrayType.BYTE_PROPERTY, [0, 0, 0, 0]
+            ),
         }

@@ -226,6 +226,7 @@ class SaveFile(BaseModel):
             for k, v in PALWORLD_CUSTOM_PROPERTIES.items()
             if k not in DISABLED_PROPERTIES
         }
+        logger.debug("Reading GVAS file")
         gvas_file = GvasFile.read(
             raw_gvas, PALWORLD_TYPE_HINTS, custom_properties, allow_nan=True
         )
@@ -379,6 +380,7 @@ class SaveFile(BaseModel):
         for e in self._character_save_parameter_map:
             if self._is_player(e):
                 continue
+            logger.debug(e)
             instance = Pal(e)
             if instance:
                 self._pals[instance.instance_id] = instance
@@ -386,9 +388,11 @@ class SaveFile(BaseModel):
                 logger.warning("Failed to create PalEntity summary")
 
     def _set_data(self) -> None:
+        logger.debug("Properties keys: %s", self._gvas_file.properties.keys())
         world_save_data = PalObjects.get_value(
             self._gvas_file.properties["worldSaveData"]
         )
+        logger.debug("World Save Data keys: %s", world_save_data.keys())
         self._character_save_parameter_map = PalObjects.get_value(
             world_save_data["CharacterSaveParameterMap"]
         )
@@ -431,7 +435,7 @@ class SaveFile(BaseModel):
             )
             nickname = PalObjects.get_value(save_parameter["NickName"])
             level = (
-                PalObjects.get_value(save_parameter["Level"])
+                PalObjects.get_byte_property(save_parameter["Level"])
                 if "Level" in save_parameter
                 else 1
             )

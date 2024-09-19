@@ -47,28 +47,24 @@ class ItemContainer(BaseModel):
     def set_items(self):
         logger.debug("%s (%s)", self.type, self.id)
         for slot in self._container_slots_data:
-            slot_index = PalObjects.get_value(slot["SlotIndex"])
+            raw_data = PalObjects.get_value(slot["RawData"])
+            slot_index = PalObjects.get_nested(raw_data, "permission", "type_a")
             container_slot = self._get_slot(slot_index)
             local_id = self._set_dynamic_item(slot, container_slot)
             PalObjects.set_nested(
-                slot,
-                "ItemId",
-                "value",
-                "DynamicId",
-                "value",
-                "LocalIdInCreatedWorld",
-                "value",
-                value=str(local_id),
+                raw_data, "permission", "type_b", value=container_slot.count
             )
             PalObjects.set_nested(
-                slot,
-                "ItemId",
-                "value",
-                "StaticId",
-                "value",
+                raw_data,
+                "permission",
+                "item_static_id",
                 value=container_slot.static_id,
             )
-            PalObjects.set_value(slot["StackCount"], value=container_slot.count)
+            PalObjects.set_nested(
+                raw_data,
+                "local_id",
+                value=str(local_id),
+            )
 
     def update_from(self, other_container: Dict[str, Any]):
         logger.debug("%s (%s) with keys %s", self.type, self.id, other_container.keys())
@@ -98,8 +94,10 @@ class ItemContainer(BaseModel):
         logger.debug("%s (%s) => %s", self.type, self.id, local_id)
         item = None
         for entry in self._dynamic_item_save_data:
-            current_local_id = PalObjects.get_guid(
-                PalObjects.get_nested(entry, "ID", "value", "LocalIdInCreatedWorld")
+            current_local_id = PalObjects.as_uuid(
+                PalObjects.get_nested(
+                    entry, "RawData", "value", "id", "local_id_in_created_world"
+                )
             )
             if are_equal_uuids(current_local_id, local_id):
                 item = entry
@@ -124,16 +122,20 @@ class ItemContainer(BaseModel):
         logger.debug("%s (%s)", self.type, self.id)
         self.slots = []
         for slot in self._container_slots_data:
-            slot_index = PalObjects.get_value(slot["SlotIndex"])
-            item_id = PalObjects.get_value(slot["ItemId"])
-            static_id = PalObjects.get_value(item_id["StaticId"])
-            local_id = PalObjects.get_guid(
+            raw_data = PalObjects.get_value(slot["RawData"])
+            slot_index = PalObjects.get_nested(raw_data, "permission", "type_a")
+            count = PalObjects.get_nested(raw_data, "permission", "type_b")
+            static_id = PalObjects.get_nested(raw_data, "permission", "item_static_id")
+            local_id = PalObjects.as_uuid(
                 PalObjects.get_nested(
-                    item_id, "DynamicId", "value", "LocalIdInCreatedWorld"
+                    slot,
+                    "RawData",
+                    "value",
+                    "local_id",
                 )
             )
             dynamic_item = None
-            if not is_empty_uuid(local_id):
+            if local_id and not is_empty_uuid(local_id):
                 dynamic_item = self._get_dynamic_item(local_id)
                 if not dynamic_item:
                     logger.error(
@@ -141,7 +143,6 @@ class ItemContainer(BaseModel):
                     )
                     raise ValueError("Dynamic item not found")
 
-            count = PalObjects.get_value(slot["StackCount"])
             self.slots.append(
                 ItemContainerSlot(
                     slot_index=slot_index,
@@ -159,25 +160,13 @@ class ItemContainer(BaseModel):
         dynamic_item_data: Dict[str, Any],
     ) -> Dict[str, Any]:
         logger.debug("%s (%s) => (%s)", self.type, self.id, dynamic_item)
+        raw_data = PalObjects.get_value(dynamic_item_data["RawData"])
         PalObjects.set_nested(
-            dynamic_item_data,
-            "ID",
-            "value",
-            "LocalIdInCreatedWorld",
-            "value",
-            value=str(dynamic_item.local_id),
-        )
-        PalObjects.set_nested(
-            dynamic_item_data,
-            "RawData",
-            "value",
+            raw_data,
             "id",
             "local_id_in_created_world",
             value=str(dynamic_item.local_id),
         )
-        # Set static ID
-        PalObjects.set_value(dynamic_item_data["StaticItemId"], value=static_id)
-        raw_data = PalObjects.get_value(dynamic_item_data["RawData"])
         PalObjects.set_nested(raw_data, "id", "static_id", value=static_id)
         PalObjects.set_nested(raw_data, "type", value=dynamic_item.type)
         if dynamic_item.type == "armor":
@@ -208,9 +197,12 @@ class ItemContainer(BaseModel):
         self, slot: Dict[str, Any], container_slot: ItemContainerSlot
     ) -> UUID:
         logger.debug("%s (%s) => %s", self.type, self.id, container_slot)
-        slot_local_id = PalObjects.get_guid(
+        slot_local_id = PalObjects.as_uuid(
             PalObjects.get_nested(
-                slot, "ItemId", "value", "DynamicId", "value", "LocalIdInCreatedWorld"
+                slot,
+                "RawData",
+                "value",
+                "local_id",
             )
         )
         # New container slot does not have a dynamic item, we need to check if slot
@@ -222,8 +214,10 @@ class ItemContainer(BaseModel):
         ):
             logger.debug("Deleting dynamic item, found %s", slot_local_id)
             for entry in self._dynamic_item_save_data:
-                local_id = PalObjects.get_guid(
-                    PalObjects.get_nested(entry, "ID", "value", "LocalIdInCreatedWorld")
+                local_id = PalObjects.as_uuid(
+                    PalObjects.get_nested(
+                        entry, "RawData", "value", "id", "local_id_in_created_world"
+                    )
                 )
                 if are_equal_uuids(local_id, slot_local_id):
                     logger.debug("Found dynamic item, deleting %s", slot_local_id)
@@ -261,8 +255,10 @@ class ItemContainer(BaseModel):
 
         # If the dynamic item is not empty, we need to update it
         for entry in self._dynamic_item_save_data:
-            local_id = PalObjects.get_guid(
-                PalObjects.get_nested(entry, "ID", "value", "LocalIdInCreatedWorld")
+            local_id = PalObjects.as_uuid(
+                PalObjects.get_nested(
+                    entry, "RawData", "value", "id", "local_id_in_created_world"
+                )
             )
             if are_equal_uuids(local_id, container_slot.dynamic_item.local_id):
                 logger.debug("Updating dynamic item %s", container_slot.dynamic_item)
