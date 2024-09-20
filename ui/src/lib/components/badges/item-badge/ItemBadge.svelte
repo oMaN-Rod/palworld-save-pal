@@ -218,7 +218,13 @@
 					{/if}
 				</div>
 				{#if (dynamic && dynamic.type === 'weapon' && slot.dynamic_item) || (dynamic && dynamic.type === 'armor' && slot.dynamic_item)}
-					<Progress value={slot.dynamic_item.durability} max={dynamic.durability} height="h-1" />
+					<Progress
+						value={slot.dynamic_item.durability}
+						max={dynamic.durability < slot.dynamic_item.durability
+							? slot.dynamic_item.durability
+							: dynamic.durability}
+						height="h-1"
+					/>
 				{/if}
 			</div>
 
