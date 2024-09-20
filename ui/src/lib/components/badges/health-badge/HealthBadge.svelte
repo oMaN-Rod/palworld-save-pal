@@ -43,7 +43,8 @@
 
 	async function handleGetStats() {
 		if (pal && player) {
-			stats = await getStats(pal, player);
+			const result = await getStats(pal, player);
+			stats = Array.isArray(result) ? result : [];
 		}
 	}
 

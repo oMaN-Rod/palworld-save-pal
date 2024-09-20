@@ -16,6 +16,21 @@
 			"hp": 90,
 			"attack": 75,
 			"defense": 90
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 1
 		}
 	},
 	"AmaterasuWolf": {
@@ -35,6 +50,21 @@
 			"hp": 100,
 			"attack": 115,
 			"defense": 100
+		},
+		"work_suitability": {
+			"EmitFlame": 2,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"Anubis": {
@@ -54,6 +84,21 @@
 			"hp": 120,
 			"attack": 130,
 			"defense": 100
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 4,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 3,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 2,
+			"MonsterFarm": 0
 		}
 	},
 	"Baphomet": {
@@ -74,6 +119,21 @@
 			"hp": 95,
 			"attack": 100,
 			"defense": 85
+		},
+		"work_suitability": {
+			"EmitFlame": 1,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 2,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 1,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 2,
+			"MonsterFarm": 0
 		}
 	},
 	"Baphomet_Dark": {
@@ -93,6 +153,21 @@
 			"hp": 95,
 			"attack": 105,
 			"defense": 85
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 2,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 1,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 2,
+			"MonsterFarm": 0
 		}
 	},
 	"Bastet": {
@@ -112,6 +187,21 @@
 			"hp": 70,
 			"attack": 60,
 			"defense": 70
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 1
 		}
 	},
 	"Bastet_Ice": {
@@ -131,6 +221,21 @@
 			"hp": 70,
 			"attack": 65,
 			"defense": 70
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 1,
+			"Transport": 0,
+			"MonsterFarm": 1
 		}
 	},
 	"BerryGoat": {
@@ -150,6 +255,21 @@
 			"hp": 100,
 			"attack": 70,
 			"defense": 90
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 2,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 1
 		}
 	},
 	"BirdDragon": {
@@ -170,6 +290,21 @@
 			"hp": 90,
 			"attack": 115,
 			"defense": 90
+		},
+		"work_suitability": {
+			"EmitFlame": 1,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 3,
+			"MonsterFarm": 0
 		}
 	},
 	"BirdDragon_Ice": {
@@ -190,6 +325,21 @@
 			"hp": 90,
 			"attack": 120,
 			"defense": 95
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 2,
+			"Transport": 3,
+			"MonsterFarm": 0
 		}
 	},
 	"BlackCentaur": {
@@ -209,6 +359,21 @@
 			"hp": 130,
 			"attack": 145,
 			"defense": 120
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 2,
+			"Mining": 2,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"BlackGriffon": {
@@ -228,6 +393,21 @@
 			"hp": 120,
 			"attack": 120,
 			"defense": 140
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 1,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"BlackMetalDragon": {
@@ -248,6 +428,21 @@
 			"hp": 100,
 			"attack": 125,
 			"defense": 125
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 1,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 4,
+			"OilExtraction": 3,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"BlueDragon": {
@@ -268,6 +463,21 @@
 			"hp": 110,
 			"attack": 100,
 			"defense": 100
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 3,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"BluePlatypus": {
@@ -287,6 +497,21 @@
 			"hp": 60,
 			"attack": 80,
 			"defense": 60
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 1,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 1,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 1,
+			"MonsterFarm": 0
 		}
 	},
 	"Boar": {
@@ -306,6 +531,21 @@
 			"hp": 80,
 			"attack": 70,
 			"defense": 70
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 1,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"CaptainPenguin": {
@@ -326,6 +566,21 @@
 			"hp": 95,
 			"attack": 95,
 			"defense": 95
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 2,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 2,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 2,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 2,
+			"Transport": 2,
+			"MonsterFarm": 0
 		}
 	},
 	"Carbunclo": {
@@ -345,6 +600,21 @@
 			"hp": 75,
 			"attack": 70,
 			"defense": 70
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 1,
+			"GenerateElectricity": 0,
+			"Handcraft": 1,
+			"Collection": 1,
+			"Deforest": 1,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 1,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"CatBat": {
@@ -364,6 +634,21 @@
 			"hp": 95,
 			"attack": 95,
 			"defense": 80
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 2,
+			"Deforest": 0,
+			"Mining": 2,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 2,
+			"MonsterFarm": 0
 		}
 	},
 	"CatMage": {
@@ -383,6 +668,21 @@
 			"hp": 90,
 			"attack": 105,
 			"defense": 90
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 2,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 2,
+			"Cool": 0,
+			"Transport": 2,
+			"MonsterFarm": 0
 		}
 	},
 	"CatVampire": {
@@ -402,6 +702,21 @@
 			"hp": 100,
 			"attack": 105,
 			"defense": 110
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 3,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"ChickenPal": {
@@ -421,6 +736,21 @@
 			"hp": 60,
 			"attack": 60,
 			"defense": 60
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 1,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 1
 		}
 	},
 	"ColorfulBird": {
@@ -440,6 +770,21 @@
 			"hp": 60,
 			"attack": 75,
 			"defense": 70
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 1,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"CowPal": {
@@ -459,6 +804,21 @@
 			"hp": 90,
 			"attack": 50,
 			"defense": 80
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 1
 		}
 	},
 	"CuteButterfly": {
@@ -478,6 +838,21 @@
 			"hp": 70,
 			"attack": 80,
 			"defense": 80
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 2,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 1,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"CuteFox": {
@@ -497,6 +872,21 @@
 			"hp": 70,
 			"attack": 70,
 			"defense": 70
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 1,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 1
 		}
 	},
 	"CuteMole": {
@@ -516,6 +906,21 @@
 			"hp": 65,
 			"attack": 80,
 			"defense": 50
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 1,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 1,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 1,
+			"MonsterFarm": 0
 		}
 	},
 	"DarkCrow": {
@@ -535,6 +940,21 @@
 			"hp": 75,
 			"attack": 95,
 			"defense": 80
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 1,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"DarkScorpion": {
@@ -555,6 +975,21 @@
 			"hp": 100,
 			"attack": 100,
 			"defense": 130
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 2,
+			"Mining": 3,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"Deer": {
@@ -574,6 +1009,21 @@
 			"hp": 95,
 			"attack": 80,
 			"defense": 80
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 2,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"Deer_Ground": {
@@ -593,6 +1043,21 @@
 			"hp": 95,
 			"attack": 80,
 			"defense": 80
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 2,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"DreamDemon": {
@@ -612,6 +1077,21 @@
 			"hp": 70,
 			"attack": 75,
 			"defense": 60
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 1,
+			"Collection": 1,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 1,
+			"MonsterFarm": 0
 		}
 	},
 	"DrillGame": {
@@ -631,6 +1111,21 @@
 			"hp": 80,
 			"attack": 95,
 			"defense": 120
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 3,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"Eagle": {
@@ -650,6 +1145,21 @@
 			"hp": 75,
 			"attack": 85,
 			"defense": 60
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 2,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"ElecCat": {
@@ -669,6 +1179,21 @@
 			"hp": 60,
 			"attack": 75,
 			"defense": 70
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 1,
+			"Handcraft": 1,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 1,
+			"MonsterFarm": 0
 		}
 	},
 	"ElecPanda": {
@@ -688,6 +1213,21 @@
 			"hp": 105,
 			"attack": 100,
 			"defense": 100
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 3,
+			"Handcraft": 2,
+			"Collection": 0,
+			"Deforest": 2,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 3,
+			"MonsterFarm": 0
 		}
 	},
 	"FairyDragon": {
@@ -707,6 +1247,21 @@
 			"hp": 110,
 			"attack": 80,
 			"defense": 90
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 2,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"FairyDragon_Water": {
@@ -727,6 +1282,21 @@
 			"hp": 115,
 			"attack": 80,
 			"defense": 95
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 3,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 2,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"FengyunDeeper": {
@@ -746,6 +1316,21 @@
 			"hp": 110,
 			"attack": 110,
 			"defense": 90
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 2,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"FireKirin": {
@@ -765,6 +1350,21 @@
 			"hp": 100,
 			"attack": 95,
 			"defense": 90
+		},
+		"work_suitability": {
+			"EmitFlame": 2,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 1,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"FireKirin_Dark": {
@@ -785,6 +1385,21 @@
 			"hp": 100,
 			"attack": 95,
 			"defense": 90
+		},
+		"work_suitability": {
+			"EmitFlame": 2,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 1,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"FlameBambi": {
@@ -804,6 +1419,21 @@
 			"hp": 75,
 			"attack": 70,
 			"defense": 75
+		},
+		"work_suitability": {
+			"EmitFlame": 1,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"FlameBuffalo": {
@@ -823,6 +1453,21 @@
 			"hp": 85,
 			"attack": 95,
 			"defense": 95
+		},
+		"work_suitability": {
+			"EmitFlame": 2,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 1,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"FlowerDinosaur": {
@@ -843,6 +1488,21 @@
 			"hp": 110,
 			"attack": 85,
 			"defense": 90
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 2,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 2,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"FlowerDinosaur_Electric": {
@@ -863,6 +1523,21 @@
 			"hp": 110,
 			"attack": 90,
 			"defense": 90
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 2,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 2,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"FlowerDoll": {
@@ -882,6 +1557,21 @@
 			"hp": 100,
 			"attack": 95,
 			"defense": 100
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 3,
+			"GenerateElectricity": 0,
+			"Handcraft": 2,
+			"Collection": 2,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 2,
+			"Cool": 0,
+			"Transport": 1,
+			"MonsterFarm": 0
 		}
 	},
 	"FlowerRabbit": {
@@ -901,6 +1591,21 @@
 			"hp": 75,
 			"attack": 65,
 			"defense": 70
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 1,
+			"GenerateElectricity": 0,
+			"Handcraft": 1,
+			"Collection": 1,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 1,
+			"Cool": 0,
+			"Transport": 1,
+			"MonsterFarm": 0
 		}
 	},
 	"FlyingManta": {
@@ -920,6 +1625,21 @@
 			"hp": 80,
 			"attack": 70,
 			"defense": 80
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 1,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 1,
+			"MonsterFarm": 0
 		}
 	},
 	"FoxMage": {
@@ -939,6 +1659,21 @@
 			"hp": 90,
 			"attack": 110,
 			"defense": 80
+		},
+		"work_suitability": {
+			"EmitFlame": 2,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 3,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 2,
+			"MonsterFarm": 0
 		}
 	},
 	"Ganesha": {
@@ -958,6 +1693,21 @@
 			"hp": 70,
 			"attack": 60,
 			"defense": 70
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 1,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"Garm": {
@@ -977,6 +1727,21 @@
 			"hp": 80,
 			"attack": 90,
 			"defense": 75
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 1,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"GhostBeast": {
@@ -996,6 +1761,21 @@
 			"hp": 75,
 			"attack": 105,
 			"defense": 80
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 2,
+			"Deforest": 0,
+			"Mining": 1,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"Gorilla": {
@@ -1015,6 +1795,21 @@
 			"hp": 90,
 			"attack": 95,
 			"defense": 90
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 1,
+			"Collection": 0,
+			"Deforest": 2,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 3,
+			"MonsterFarm": 0
 		}
 	},
 	"GrassMammoth": {
@@ -1034,6 +1829,21 @@
 			"hp": 150,
 			"attack": 85,
 			"defense": 90
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 2,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 2,
+			"Mining": 2,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"GrassMammoth_Ice": {
@@ -1053,6 +1863,21 @@
 			"hp": 150,
 			"attack": 85,
 			"defense": 90
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 2,
+			"Mining": 2,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 2,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"GrassPanda": {
@@ -1072,6 +1897,21 @@
 			"hp": 100,
 			"attack": 90,
 			"defense": 90
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 2,
+			"GenerateElectricity": 0,
+			"Handcraft": 2,
+			"Collection": 0,
+			"Deforest": 2,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 3,
+			"MonsterFarm": 0
 		}
 	},
 	"GrassPanda_Electric": {
@@ -1091,6 +1931,21 @@
 			"hp": 100,
 			"attack": 100,
 			"defense": 100
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 2,
+			"Handcraft": 2,
+			"Collection": 0,
+			"Deforest": 2,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 3,
+			"MonsterFarm": 0
 		}
 	},
 	"GrassRabbitMan": {
@@ -1110,6 +1965,21 @@
 			"hp": 90,
 			"attack": 115,
 			"defense": 90
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 2,
+			"GenerateElectricity": 0,
+			"Handcraft": 3,
+			"Collection": 3,
+			"Deforest": 2,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 2,
+			"MonsterFarm": 0
 		}
 	},
 	"HadesBird": {
@@ -1129,6 +1999,21 @@
 			"hp": 100,
 			"attack": 125,
 			"defense": 100
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 3,
+			"MonsterFarm": 0
 		}
 	},
 	"HawkBird": {
@@ -1148,6 +2033,21 @@
 			"hp": 100,
 			"attack": 95,
 			"defense": 80
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 2,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"Hedgehog": {
@@ -1167,6 +2067,21 @@
 			"hp": 70,
 			"attack": 75,
 			"defense": 70
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 1,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"Hedgehog_Ice": {
@@ -1186,6 +2101,21 @@
 			"hp": 70,
 			"attack": 75,
 			"defense": 80
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 1,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"HerculesBeetle": {
@@ -1206,6 +2136,21 @@
 			"hp": 120,
 			"attack": 100,
 			"defense": 120
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 1,
+			"GenerateElectricity": 0,
+			"Handcraft": 1,
+			"Collection": 0,
+			"Deforest": 3,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 3,
+			"MonsterFarm": 0
 		}
 	},
 	"Horus": {
@@ -1225,6 +2170,21 @@
 			"hp": 100,
 			"attack": 105,
 			"defense": 110
+		},
+		"work_suitability": {
+			"EmitFlame": 3,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 3,
+			"MonsterFarm": 0
 		}
 	},
 	"IceDeer": {
@@ -1244,6 +2204,21 @@
 			"hp": 100,
 			"attack": 85,
 			"defense": 110
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 2,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 2,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"IceFox": {
@@ -1263,6 +2238,21 @@
 			"hp": 90,
 			"attack": 95,
 			"defense": 105
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 2,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"IceHorse": {
@@ -1282,6 +2272,21 @@
 			"hp": 140,
 			"attack": 140,
 			"defense": 120
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 4,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"IceHorse_Dark": {
@@ -1301,6 +2306,21 @@
 			"hp": 140,
 			"attack": 140,
 			"defense": 135
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 4,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"JetDragon": {
@@ -1320,6 +2340,21 @@
 			"hp": 110,
 			"attack": 140,
 			"defense": 110
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 3,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 3,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"Kelpie": {
@@ -1339,6 +2374,21 @@
 			"hp": 70,
 			"attack": 70,
 			"defense": 70
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 1,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 1
 		}
 	},
 	"Kelpie_Fire": {
@@ -1358,6 +2408,21 @@
 			"hp": 70,
 			"attack": 70,
 			"defense": 70
+		},
+		"work_suitability": {
+			"EmitFlame": 1,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 1
 		}
 	},
 	"KingAlpaca": {
@@ -1377,6 +2442,21 @@
 			"hp": 120,
 			"attack": 85,
 			"defense": 90
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 1,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"KingAlpaca_Ice": {
@@ -1396,6 +2476,21 @@
 			"hp": 120,
 			"attack": 85,
 			"defense": 90
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 1,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 3,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"KingBahamut": {
@@ -1415,6 +2510,21 @@
 			"hp": 100,
 			"attack": 125,
 			"defense": 120
+		},
+		"work_suitability": {
+			"EmitFlame": 3,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 4,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"Kirin": {
@@ -1434,6 +2544,21 @@
 			"hp": 80,
 			"attack": 105,
 			"defense": 105
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 2,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 1,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"Kitsunebi": {
@@ -1453,6 +2578,21 @@
 			"hp": 65,
 			"attack": 75,
 			"defense": 70
+		},
+		"work_suitability": {
+			"EmitFlame": 1,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"LavaGirl": {
@@ -1472,6 +2612,21 @@
 			"hp": 60,
 			"attack": 70,
 			"defense": 80
+		},
+		"work_suitability": {
+			"EmitFlame": 1,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 1,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 1,
+			"MonsterFarm": 1
 		}
 	},
 	"LazyCatfish": {
@@ -1483,6 +2638,21 @@
 			"hp": 100,
 			"attack": 70,
 			"defense": 95
+		},
+		"work_suitability": {
+			"EmitFlame": 1,
+			"Watering": 1,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 1,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 2,
+			"OilExtraction": 1,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 1,
+			"MonsterFarm": 1
 		}
 	},
 	"LazyDragon": {
@@ -1503,6 +2673,21 @@
 			"hp": 110,
 			"attack": 100,
 			"defense": 70
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 2,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 1,
+			"MonsterFarm": 0
 		}
 	},
 	"LazyDragon_Electric": {
@@ -1523,6 +2708,21 @@
 			"hp": 110,
 			"attack": 110,
 			"defense": 75
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 3,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 1,
+			"MonsterFarm": 0
 		}
 	},
 	"LilyQueen": {
@@ -1542,6 +2742,21 @@
 			"hp": 110,
 			"attack": 110,
 			"defense": 105
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 4,
+			"GenerateElectricity": 0,
+			"Handcraft": 3,
+			"Collection": 2,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 3,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"LilyQueen_Dark": {
@@ -1561,6 +2776,21 @@
 			"hp": 110,
 			"attack": 110,
 			"defense": 115
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 3,
+			"Collection": 2,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 4,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"LittleBriarRose": {
@@ -1580,6 +2810,21 @@
 			"hp": 80,
 			"attack": 80,
 			"defense": 80
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 1,
+			"GenerateElectricity": 0,
+			"Handcraft": 1,
+			"Collection": 1,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 2,
+			"Cool": 0,
+			"Transport": 1,
+			"MonsterFarm": 0
 		}
 	},
 	"LizardMan": {
@@ -1599,6 +2844,21 @@
 			"hp": 80,
 			"attack": 80,
 			"defense": 50
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 1,
+			"Collection": 1,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 1,
+			"MonsterFarm": 0
 		}
 	},
 	"LizardMan_Fire": {
@@ -1618,6 +2878,21 @@
 			"hp": 80,
 			"attack": 80,
 			"defense": 50
+		},
+		"work_suitability": {
+			"EmitFlame": 1,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 1,
+			"Collection": 1,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 1,
+			"MonsterFarm": 0
 		}
 	},
 	"Manticore": {
@@ -1637,6 +2912,21 @@
 			"hp": 105,
 			"attack": 110,
 			"defense": 80
+		},
+		"work_suitability": {
+			"EmitFlame": 3,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 2,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"Manticore_Dark": {
@@ -1657,6 +2947,21 @@
 			"hp": 105,
 			"attack": 115,
 			"defense": 80
+		},
+		"work_suitability": {
+			"EmitFlame": 3,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 2,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"Monkey": {
@@ -1676,6 +2981,21 @@
 			"hp": 80,
 			"attack": 70,
 			"defense": 70
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 1,
+			"GenerateElectricity": 0,
+			"Handcraft": 1,
+			"Collection": 1,
+			"Deforest": 1,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 1,
+			"MonsterFarm": 0
 		}
 	},
 	"MopBaby": {
@@ -1695,6 +3015,21 @@
 			"hp": 60,
 			"attack": 60,
 			"defense": 60
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 1,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 1,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"MopKing": {
@@ -1714,6 +3049,21 @@
 			"hp": 100,
 			"attack": 90,
 			"defense": 90
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 2,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 2,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"Mutant": {
@@ -1733,6 +3083,21 @@
 			"hp": 90,
 			"attack": 100,
 			"defense": 90
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 3,
+			"Collection": 1,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 1,
+			"MonsterFarm": 0
 		}
 	},
 	"NaughtyCat": {
@@ -1752,6 +3117,21 @@
 			"hp": 110,
 			"attack": 80,
 			"defense": 80
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 2,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"NegativeKoala": {
@@ -1771,6 +3151,21 @@
 			"hp": 70,
 			"attack": 70,
 			"defense": 70
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 1,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 1,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 1,
+			"MonsterFarm": 0
 		}
 	},
 	"NegativeOctopus": {
@@ -1790,6 +3185,21 @@
 			"hp": 60,
 			"attack": 60,
 			"defense": 70
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 1,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 2,
+			"MonsterFarm": 0
 		}
 	},
 	"NightFox": {
@@ -1809,6 +3219,21 @@
 			"hp": 75,
 			"attack": 85,
 			"defense": 70
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 1,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"Penguin": {
@@ -1829,6 +3254,21 @@
 			"hp": 70,
 			"attack": 75,
 			"defense": 70
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 1,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 1,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 1,
+			"Transport": 1,
+			"MonsterFarm": 0
 		}
 	},
 	"PinkCat": {
@@ -1848,6 +3288,21 @@
 			"hp": 70,
 			"attack": 70,
 			"defense": 70
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 1,
+			"Collection": 1,
+			"Deforest": 0,
+			"Mining": 1,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 1,
+			"MonsterFarm": 0
 		}
 	},
 	"PinkLizard": {
@@ -1867,6 +3322,21 @@
 			"hp": 120,
 			"attack": 70,
 			"defense": 70
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 2,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 1,
+			"OilExtraction": 0,
+			"ProductMedicine": 2,
+			"Cool": 0,
+			"Transport": 2,
+			"MonsterFarm": 0
 		}
 	},
 	"PinkRabbit": {
@@ -1886,6 +3356,21 @@
 			"hp": 75,
 			"attack": 65,
 			"defense": 70
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 1,
+			"Collection": 1,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 1,
+			"MonsterFarm": 0
 		}
 	},
 	"PlantSlime": {
@@ -1906,6 +3391,21 @@
 			"hp": 70,
 			"attack": 70,
 			"defense": 70
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 1,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"PlantSlime_Flower": {
@@ -1926,6 +3426,21 @@
 			"hp": 70,
 			"attack": 70,
 			"defense": 70
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 1,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"QueenBee": {
@@ -1945,6 +3460,21 @@
 			"hp": 90,
 			"attack": 105,
 			"defense": 100
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 2,
+			"GenerateElectricity": 0,
+			"Handcraft": 2,
+			"Collection": 2,
+			"Deforest": 1,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 2,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"RaijinDaughter": {
@@ -1964,6 +3494,21 @@
 			"hp": 70,
 			"attack": 80,
 			"defense": 70
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 1,
+			"Handcraft": 1,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 1,
+			"MonsterFarm": 0
 		}
 	},
 	"RedArmorBird": {
@@ -1983,6 +3528,21 @@
 			"hp": 95,
 			"attack": 105,
 			"defense": 120
+		},
+		"work_suitability": {
+			"EmitFlame": 3,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 3,
+			"MonsterFarm": 0
 		}
 	},
 	"RobinHood": {
@@ -2002,6 +3562,21 @@
 			"hp": 90,
 			"attack": 105,
 			"defense": 80
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 1,
+			"GenerateElectricity": 0,
+			"Handcraft": 2,
+			"Collection": 2,
+			"Deforest": 1,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 1,
+			"Cool": 0,
+			"Transport": 2,
+			"MonsterFarm": 0
 		}
 	},
 	"RobinHood_Ground": {
@@ -2022,6 +3597,21 @@
 			"hp": 90,
 			"attack": 105,
 			"defense": 80
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 2,
+			"Collection": 2,
+			"Deforest": 1,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 1,
+			"Cool": 0,
+			"Transport": 2,
+			"MonsterFarm": 0
 		}
 	},
 	"Ronin": {
@@ -2041,6 +3631,21 @@
 			"hp": 80,
 			"attack": 125,
 			"defense": 80
+		},
+		"work_suitability": {
+			"EmitFlame": 2,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 1,
+			"Collection": 1,
+			"Deforest": 3,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 2,
+			"MonsterFarm": 0
 		}
 	},
 	"SaintCentaur": {
@@ -2060,6 +3665,21 @@
 			"hp": 130,
 			"attack": 120,
 			"defense": 145
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 2,
+			"Mining": 2,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"SakuraSaurus": {
@@ -2079,6 +3699,21 @@
 			"hp": 120,
 			"attack": 90,
 			"defense": 100
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 3,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"SakuraSaurus_Water": {
@@ -2099,6 +3734,21 @@
 			"hp": 120,
 			"attack": 95,
 			"defense": 100
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 3,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"Serpent": {
@@ -2118,6 +3768,21 @@
 			"hp": 90,
 			"attack": 90,
 			"defense": 80
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 2,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"Serpent_Ground": {
@@ -2137,6 +3802,21 @@
 			"hp": 90,
 			"attack": 90,
 			"defense": 100
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 1,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"SharkKid": {
@@ -2156,6 +3836,21 @@
 			"hp": 90,
 			"attack": 90,
 			"defense": 75
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 2,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 1,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 1,
+			"MonsterFarm": 0
 		}
 	},
 	"SharkKid_Fire": {
@@ -2175,6 +3870,21 @@
 			"hp": 90,
 			"attack": 90,
 			"defense": 75
+		},
+		"work_suitability": {
+			"EmitFlame": 2,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 1,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 1,
+			"MonsterFarm": 0
 		}
 	},
 	"Sheepball": {
@@ -2194,6 +3904,21 @@
 			"hp": 70,
 			"aTK": 70,
 			"defense": 70
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 1,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 1,
+			"MonsterFarm": 1
 		}
 	},
 	"SkyDragon": {
@@ -2213,6 +3938,21 @@
 			"hp": 105,
 			"attack": 100,
 			"defense": 100
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 1,
+			"Collection": 2,
+			"Deforest": 0,
+			"Mining": 2,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 3,
+			"MonsterFarm": 0
 		}
 	},
 	"SoldierBee": {
@@ -2232,6 +3972,21 @@
 			"hp": 80,
 			"attack": 90,
 			"defense": 90
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 1,
+			"GenerateElectricity": 0,
+			"Handcraft": 1,
+			"Collection": 1,
+			"Deforest": 1,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 1,
+			"Cool": 0,
+			"Transport": 2,
+			"MonsterFarm": 1
 		}
 	},
 	"Suzaku": {
@@ -2251,6 +4006,21 @@
 			"hp": 120,
 			"attack": 105,
 			"defense": 105
+		},
+		"work_suitability": {
+			"EmitFlame": 3,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"Suzaku_Water": {
@@ -2270,6 +4040,21 @@
 			"hp": 125,
 			"attack": 105,
 			"defense": 105
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 3,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"SweetsSheep": {
@@ -2289,6 +4074,21 @@
 			"hp": 70,
 			"attack": 70,
 			"defense": 90
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 1
 		}
 	},
 	"ThunderBird": {
@@ -2308,6 +4108,21 @@
 			"hp": 105,
 			"attack": 115,
 			"defense": 80
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 2,
+			"Handcraft": 0,
+			"Collection": 1,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 3,
+			"MonsterFarm": 0
 		}
 	},
 	"ThunderDog": {
@@ -2327,6 +4142,21 @@
 			"hp": 90,
 			"attack": 100,
 			"defense": 80
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 2,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"ThunderDragonMan": {
@@ -2347,6 +4177,21 @@
 			"hp": 100,
 			"attack": 130,
 			"defense": 100
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 4,
+			"Handcraft": 2,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 3,
+			"MonsterFarm": 0
 		}
 	},
 	"Umihebi": {
@@ -2367,6 +4212,21 @@
 			"hp": 130,
 			"attack": 120,
 			"defense": 100
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 4,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"Umihebi_Fire": {
@@ -2387,6 +4247,21 @@
 			"hp": 130,
 			"attack": 130,
 			"defense": 100
+		},
+		"work_suitability": {
+			"EmitFlame": 4,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"VioletFairy": {
@@ -2406,6 +4281,21 @@
 			"hp": 100,
 			"attack": 100,
 			"defense": 120
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 2,
+			"GenerateElectricity": 0,
+			"Handcraft": 2,
+			"Collection": 2,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 3,
+			"Cool": 0,
+			"Transport": 1,
+			"MonsterFarm": 0
 		}
 	},
 	"VolcanicMonster": {
@@ -2426,6 +4316,21 @@
 			"hp": 110,
 			"attack": 105,
 			"defense": 120
+		},
+		"work_suitability": {
+			"EmitFlame": 3,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 3,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"VolcanicMonster_Ice": {
@@ -2446,6 +4351,21 @@
 			"hp": 110,
 			"attack": 105,
 			"defense": 130
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 3,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 3,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"WeaselDragon": {
@@ -2467,6 +4387,21 @@
 			"hp": 90,
 			"attack": 80,
 			"defense": 80
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 1,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 1,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"Werewolf": {
@@ -2486,6 +4421,21 @@
 			"hp": 80,
 			"attack": 100,
 			"defense": 80
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 2,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"WhiteMoth": {
@@ -2505,6 +4455,21 @@
 			"hp": 110,
 			"attack": 90,
 			"defense": 100
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 2,
+			"Cool": 2,
+			"Transport": 0,
+			"MonsterFarm": 1
 		}
 	},
 	"WhiteTiger": {
@@ -2524,6 +4489,21 @@
 			"hp": 100,
 			"attack": 100,
 			"defense": 110
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 1,
+			"Collection": 0,
+			"Deforest": 2,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 3,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"WindChimes": {
@@ -2535,6 +4515,21 @@
 			"hp": 80,
 			"attack": 70,
 			"defense": 70
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 1,
+			"Collection": 1,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 2,
+			"MonsterFarm": 0
 		}
 	},
 	"WindChimes_Ice": {
@@ -2546,6 +4541,21 @@
 			"hp": 80,
 			"attack": 80,
 			"defense": 70
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 1,
+			"Collection": 1,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 1,
+			"Transport": 2,
+			"MonsterFarm": 0
 		}
 	},
 	"WizardOwl": {
@@ -2565,6 +4575,21 @@
 			"hp": 70,
 			"attack": 70,
 			"defense": 80
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 1,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"WoolFox": {
@@ -2584,6 +4609,21 @@
 			"hp": 70,
 			"attack": 70,
 			"defense": 75
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 1,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 1
 		}
 	},
 	"Yeti": {
@@ -2603,6 +4643,21 @@
 			"hp": 140,
 			"attack": 80,
 			"defense": 100
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 2,
+			"Collection": 0,
+			"Deforest": 3,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 2,
+			"Transport": 4,
+			"MonsterFarm": 0
 		}
 	},
 	"Yeti_Grass": {
@@ -2622,6 +4677,21 @@
 			"hp": 140,
 			"attack": 80,
 			"defense": 110
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 1,
+			"GenerateElectricity": 0,
+			"Handcraft": 2,
+			"Collection": 0,
+			"Deforest": 3,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 4,
+			"MonsterFarm": 0
 		}
 	},
 	"BlackFurDragon": {
@@ -2634,6 +4704,21 @@
 			"hp": 130,
 			"attack": 130,
 			"defense": 110
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 4,
+			"MonsterFarm": 0
 		}
 	},
 	"ElecLion": {
@@ -2645,6 +4730,21 @@
 			"hp": 100,
 			"attack": 110,
 			"defense": 70
+		},
+		"work_suitability": {
+			"EmitFlame": 3,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"DarkMutant": {
@@ -2657,6 +4757,21 @@
 			"hp": 100,
 			"attack": 100,
 			"defense": 100
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 4,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 4,
+			"Cool": 0,
+			"Transport": 3,
+			"MonsterFarm": 0
 		}
 	},
 	"NightLady": {
@@ -2686,6 +4801,21 @@
 			"hp": 120,
 			"attack": 150,
 			"defense": 100
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 2,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 4,
+			"Cool": 0,
+			"Transport": 2,
+			"MonsterFarm": 0
 		}
 	},
 	"NightLady_Dark": {
@@ -2716,6 +4846,21 @@
 			"hp": 120,
 			"attack": 150,
 			"defense": 100
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 2,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 4,
+			"Cool": 0,
+			"Transport": 2,
+			"MonsterFarm": 0
 		}
 	},
 	"GYM_ThunderDragonMan": {
@@ -2729,7 +4874,8 @@
 			"hp": 100,
 			"attack": 130,
 			"defense": 110
-		}
+		},
+		"work_suitability": null
 	},
 	"GYM_LilyQueen": {
 		"type": [
@@ -2741,7 +4887,8 @@
 			"hp": 110,
 			"attack": 110,
 			"defense": 105
-		}
+		},
+		"work_suitability": null
 	},
 	"GYM_Horus": {
 		"type": [
@@ -2753,7 +4900,8 @@
 			"hp": 100,
 			"attack": 105,
 			"defense": 110
-		}
+		},
+		"work_suitability": null
 	},
 	"GYM_BlackGriffon": {
 		"type": [
@@ -2765,7 +4913,8 @@
 			"hp": 120,
 			"attack": 120,
 			"defense": 140
-		}
+		},
+		"work_suitability": null
 	},
 	"GYM_ElecPanda": {
 		"type": [
@@ -2777,266 +4926,304 @@
 			"hp": 105,
 			"attack": 100,
 			"defense": 100
-		}
+		},
+		"work_suitability": null
 	},
 	"Male_DarkTrader01": {
 		"type": [
 			"None"
 		],
 		"skill_set": {},
-		"human": true
+		"human": true,
+		"work_suitability": null
 	},
 	"FireCult_FlameThrower": {
 		"type": [
 			"None"
 		],
 		"skill_set": {},
-		"human": true
+		"human": true,
+		"work_suitability": null
 	},
 	"FireCult_Rifle": {
 		"type": [
 			"None"
 		],
 		"skill_set": {},
-		"human": true
+		"human": true,
+		"work_suitability": null
 	},
 	"Male_Soldier01": {
 		"type": [
 			"None"
 		],
 		"skill_set": {},
-		"human": true
+		"human": true,
+		"work_suitability": null
 	},
 	"Female_Soldier01": {
 		"type": [
 			"None"
 		],
 		"skill_set": {},
-		"human": true
+		"human": true,
+		"work_suitability": null
 	},
 	"Believer_CrossBow": {
 		"type": [
 			"None"
 		],
 		"skill_set": {},
-		"human": true
+		"human": true,
+		"work_suitability": null
 	},
 	"Believer_Bat": {
 		"type": [
 			"None"
 		],
 		"skill_set": {},
-		"human": true
+		"human": true,
+		"work_suitability": null
 	},
 	"Male_Scientist01_LaserRifle": {
 		"type": [
 			"None"
 		],
 		"skill_set": {},
-		"human": true
+		"human": true,
+		"work_suitability": null
 	},
 	"PalDealer": {
 		"type": [
 			"None"
 		],
 		"skill_set": {},
-		"human": true
+		"human": true,
+		"work_suitability": null
 	},
 	"Police_Handgun": {
 		"type": [
 			"None"
 		],
 		"skill_set": {},
-		"human": true
+		"human": true,
+		"work_suitability": null
 	},
 	"Hunter_Bat": {
 		"type": [
 			"None"
 		],
 		"skill_set": {},
-		"human": true
+		"human": true,
+		"work_suitability": null
 	},
 	"Hunter_FlameThrower": {
 		"type": [
 			"None"
 		],
 		"skill_set": {},
-		"human": true
+		"human": true,
+		"work_suitability": null
 	},
 	"Hunter_Fat_GatlingGun": {
 		"type": [
 			"None"
 		],
 		"skill_set": {},
-		"human": true
+		"human": true,
+		"work_suitability": null
 	},
 	"Hunter_RocketLauncher": {
 		"type": [
 			"None"
 		],
 		"skill_set": {},
-		"human": true
+		"human": true,
+		"work_suitability": null
 	},
 	"Hunter_Grenade": {
 		"type": [
 			"None"
 		],
 		"skill_set": {},
-		"human": true
+		"human": true,
+		"work_suitability": null
 	},
 	"Hunter_Rifle": {
 		"type": [
 			"None"
 		],
 		"skill_set": {},
-		"human": true
+		"human": true,
+		"work_suitability": null
 	},
 	"Hunter_Shotgun": {
 		"type": [
 			"None"
 		],
 		"skill_set": {},
-		"human": true
+		"human": true,
+		"work_suitability": null
 	},
 	"Hunter_Handgun": {
 		"type": [
 			"None"
 		],
 		"skill_set": {},
-		"human": true
+		"human": true,
+		"work_suitability": null
 	},
 	"SalesPerson": {
 		"type": [
 			"None"
 		],
 		"skill_set": {},
-		"human": true
+		"human": true,
+		"work_suitability": null
 	},
 	"SalesPerson_Desert": {
 		"type": [
 			"None"
 		],
 		"skill_set": {},
-		"human": true
+		"human": true,
+		"work_suitability": null
 	},
 	"SalesPerson_Desert2": {
 		"type": [
 			"None"
 		],
 		"skill_set": {},
-		"human": true
+		"human": true,
+		"work_suitability": null
 	},
 	"SalesPerson_Volcano": {
 		"type": [
 			"None"
 		],
 		"skill_set": {},
-		"human": true
+		"human": true,
+		"work_suitability": null
 	},
 	"SalesPerson_Volcano2": {
 		"type": [
 			"None"
 		],
 		"skill_set": {},
-		"human": true
+		"human": true,
+		"work_suitability": null
 	},
 	"Female_DesertPeople02": {
 		"type": [
 			"None"
 		],
 		"skill_set": {},
-		"human": true
+		"human": true,
+		"work_suitability": null
 	},
 	"Female_People02": {
 		"type": [
 			"None"
 		],
 		"skill_set": {},
-		"human": true
+		"human": true,
+		"work_suitability": null
 	},
 	"Female_People03": {
 		"type": [
 			"None"
 		],
 		"skill_set": {},
-		"human": true
+		"human": true,
+		"work_suitability": null
 	},
 	"Male_DesertPeople01": {
 		"type": [
 			"None"
 		],
 		"skill_set": {},
-		"human": true
+		"human": true,
+		"work_suitability": null
 	},
 	"Male_People02": {
 		"type": [
 			"None"
 		],
 		"skill_set": {},
-		"human": true
+		"human": true,
+		"work_suitability": null
 	},
 	"Male_People03": {
 		"type": [
 			"None"
 		],
 		"skill_set": {},
-		"human": true
+		"human": true,
+		"work_suitability": null
 	},
 	"MobuCitizen": {
 		"type": [
 			"None"
 		],
 		"skill_set": {},
-		"human": true
+		"human": true,
+		"work_suitability": null
 	},
 	"MobuCitizen_Male": {
 		"type": [
 			"None"
 		],
 		"skill_set": {},
-		"human": true
+		"human": true,
+		"work_suitability": null
 	},
 	"Guard_Rifle": {
 		"type": [
 			"None"
 		],
 		"skill_set": {},
-		"human": true
+		"human": true,
+		"work_suitability": null
 	},
 	"Guard_Shotgun": {
 		"type": [
 			"None"
 		],
 		"skill_set": {},
-		"human": true
+		"human": true,
+		"work_suitability": null
 	},
 	"PalDealer_Desert": {
 		"type": [
 			"None"
 		],
 		"skill_set": {},
-		"human": true
+		"human": true,
+		"work_suitability": null
 	},
 	"PalDealer_Volcano": {
 		"type": [
 			"None"
 		],
 		"skill_set": {},
-		"human": true
+		"human": true,
+		"work_suitability": null
 	},
 	"Police_Rifle": {
 		"type": [
 			"None"
 		],
 		"skill_set": {},
-		"human": true
+		"human": true,
+		"work_suitability": null
 	},
 	"Police_Shotgun": {
 		"type": [
 			"None"
 		],
 		"skill_set": {},
-		"human": true
+		"human": true,
+		"work_suitability": null
 	},
 	"Gorilla_Ground": {
 		"type": [
@@ -3055,6 +5242,21 @@
 			"hp": 90,
 			"attack": 100,
 			"defense": 90
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 1,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 2,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 3,
+			"MonsterFarm": 0
 		}
 	},
 	"WeaselDragon_Fire": {
@@ -3075,6 +5277,21 @@
 			"hp": 90,
 			"attack": 85,
 			"defense": 80
+		},
+		"work_suitability": {
+			"EmitFlame": 2,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 1,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"Ronin_Dark": {
@@ -3095,6 +5312,21 @@
 			"hp": 80,
 			"attack": 130,
 			"defense": 80
+		},
+		"work_suitability": {
+			"EmitFlame": 2,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 1,
+			"Collection": 1,
+			"Deforest": 3,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 2,
+			"MonsterFarm": 0
 		}
 	},
 	"CatMage_Fire": {
@@ -3115,6 +5347,21 @@
 			"hp": 95,
 			"attack": 105,
 			"defense": 90
+		},
+		"work_suitability": {
+			"EmitFlame": 2,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 2,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 2,
+			"Cool": 0,
+			"Transport": 2,
+			"MonsterFarm": 0
 		}
 	},
 	"FoxMage_Dark": {
@@ -3135,6 +5382,21 @@
 			"hp": 90,
 			"attack": 110,
 			"defense": 85
+		},
+		"work_suitability": {
+			"EmitFlame": 2,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 3,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 2,
+			"MonsterFarm": 0
 		}
 	},
 	"HerculesBeetle_Ground": {
@@ -3154,6 +5416,21 @@
 			"hp": 120,
 			"attack": 105,
 			"defense": 120
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 1,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 3,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 3,
+			"MonsterFarm": 0
 		}
 	},
 	"SkyDragon_Grass": {
@@ -3174,6 +5451,21 @@
 			"hp": 105,
 			"attack": 105,
 			"defense": 100
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 2,
+			"GenerateElectricity": 0,
+			"Handcraft": 1,
+			"Collection": 2,
+			"Deforest": 0,
+			"Mining": 2,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 3,
+			"MonsterFarm": 0
 		}
 	},
 	"KingBahamut_Dragon": {
@@ -3194,6 +5486,21 @@
 			"hp": 105,
 			"attack": 130,
 			"defense": 125
+		},
+		"work_suitability": {
+			"EmitFlame": 3,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 4,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"HadesBird_Electric": {
@@ -3214,6 +5521,21 @@
 			"hp": 105,
 			"attack": 125,
 			"defense": 100
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 3,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 3,
+			"MonsterFarm": 0
 		}
 	},
 	"DarkScorpion_Ground": {
@@ -3233,6 +5555,21 @@
 			"hp": 100,
 			"attack": 105,
 			"defense": 130
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 2,
+			"Mining": 3,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"MoonQueen": {
@@ -3253,6 +5590,21 @@
 			"hp": 130,
 			"attack": 115,
 			"defense": 110
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 3,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 3,
+			"Cool": 0,
+			"Transport": 3,
+			"MonsterFarm": 0
 		}
 	},
 	"GYM_MoonQueen": {
@@ -3266,6 +5618,21 @@
 			"hp": 130,
 			"attack": 115,
 			"defense": 110
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 3,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 3,
+			"MonsterFarm": 0
 		}
 	},
 	"KendoFrog": {
@@ -3277,6 +5644,21 @@
 			"hp": 80,
 			"attack": 100,
 			"defense": 85
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 1,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 1,
+			"Collection": 1,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 1,
+			"MonsterFarm": 0
 		}
 	},
 	"LeafPrincess": {
@@ -3288,6 +5670,21 @@
 			"hp": 90,
 			"attack": 90,
 			"defense": 80
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 2,
+			"GenerateElectricity": 0,
+			"Handcraft": 2,
+			"Collection": 1,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 2,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"MushroomDragon": {
@@ -3299,6 +5696,21 @@
 			"hp": 110,
 			"attack": 80,
 			"defense": 90
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 2,
+			"GenerateElectricity": 0,
+			"Handcraft": 1,
+			"Collection": 2,
+			"Deforest": 2,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"MushroomDragon_Dark": {
@@ -3311,6 +5723,21 @@
 			"hp": 110,
 			"attack": 85,
 			"defense": 90
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 2,
+			"GenerateElectricity": 0,
+			"Handcraft": 1,
+			"Collection": 2,
+			"Deforest": 2,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"SmallArmadillo": {
@@ -3322,6 +5749,21 @@
 			"hp": 75,
 			"attack": 70,
 			"defense": 90
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 1,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"CandleGhost": {
@@ -3334,6 +5776,21 @@
 			"hp": 105,
 			"attack": 125,
 			"defense": 90
+		},
+		"work_suitability": {
+			"EmitFlame": 3,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 2,
+			"Collection": 1,
+			"Deforest": 0,
+			"Mining": 2,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 1
 		}
 	},
 	"ScorpionMan": {
@@ -3346,6 +5803,21 @@
 			"hp": 90,
 			"attack": 110,
 			"defense": 90
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 1,
+			"Deforest": 3,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 1,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"WingGolem": {
@@ -3357,6 +5829,21 @@
 			"hp": 105,
 			"attack": 110,
 			"defense": 135
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 3,
+			"Deforest": 0,
+			"Mining": 3,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 4,
+			"MonsterFarm": 0
 		}
 	},
 	"GuardianDog": {
@@ -3368,6 +5855,21 @@
 			"hp": 85,
 			"attack": 85,
 			"defense": 85
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 2,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"SifuDog": {
@@ -3379,6 +5881,21 @@
 			"hp": 90,
 			"attack": 100,
 			"defense": 100
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 3,
+			"Collection": 2,
+			"Deforest": 2,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 1,
+			"Cool": 0,
+			"Transport": 2,
+			"MonsterFarm": 0
 		}
 	},
 	"FeatherOstrich": {
@@ -3390,6 +5907,21 @@
 			"hp": 95,
 			"attack": 90,
 			"defense": 80
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 2,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"MimicDog": {
@@ -3401,6 +5933,21 @@
 			"hp": 60,
 			"attack": 60,
 			"defense": 130
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 1,
+			"Deforest": 0,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	},
 	"DarkAlien": {
@@ -3412,6 +5959,21 @@
 			"hp": 90,
 			"attack": 125,
 			"defense": 85
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 2,
+			"Mining": 0,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 2,
+			"MonsterFarm": 0
 		}
 	},
 	"WhiteAlienDragon": {
@@ -3423,6 +5985,21 @@
 			"hp": 110,
 			"attack": 120,
 			"defense": 130
+		},
+		"work_suitability": {
+			"EmitFlame": 0,
+			"Watering": 0,
+			"Seeding": 0,
+			"GenerateElectricity": 0,
+			"Handcraft": 0,
+			"Collection": 0,
+			"Deforest": 0,
+			"Mining": 3,
+			"OilExtraction": 0,
+			"ProductMedicine": 0,
+			"Cool": 0,
+			"Transport": 0,
+			"MonsterFarm": 0
 		}
 	}
 }

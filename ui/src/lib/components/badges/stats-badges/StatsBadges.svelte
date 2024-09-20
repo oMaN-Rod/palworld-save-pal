@@ -112,9 +112,8 @@
 		<span class="p-2 text-lg font-bold">{stats?.defense}</span>
 	</div>
 </div>
-<button
-	class="hover:ring-secondary-500 border-l-primary border-l-surface-600 bg-surface-900 hover:bg-surface-800 relative w-full overflow-hidden rounded-none border-l-2 p-0 shadow-none hover:ring"
-	onclick={handleEditWorkSpeed}
+<div
+	class="border-l-primary border-l-surface-600 bg-surface-900 relative w-full overflow-hidden rounded-none border-l-2 p-0 shadow-none"
 >
 	<div class="flex w-full items-center">
 		<div class="mx-2 h-6 w-6">
@@ -125,4 +124,4 @@
 		<span class="flex-grow p-2 text-start text-lg">Work Speed</span>
 		<span class="p-2 text-lg font-bold">{pal?.work_speed}</span>
 	</div>
-</button>
+</div>

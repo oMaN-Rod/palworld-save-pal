@@ -1,5 +1,5 @@
 // Backend types
-type Pal = {
+export type Pal = {
 	name: string;
 	instance_id: string;
 	owner_uid: string;
@@ -35,7 +35,7 @@ type Pal = {
 	sanity: number;
 };
 
-type Player = {
+export type Player = {
 	uid: string;
 	nickname: string;
 	level: number;
@@ -48,7 +48,7 @@ type Player = {
 	state: EntryState;
 };
 
-type SaveFile = {
+export type SaveFile = {
 	name: string;
 	size: number;
 };
@@ -149,16 +149,12 @@ export type Scaling = {
 	defense: number;
 };
 
-export type Suitabilities = {
-	[key: string]: number;
-};
-
 export interface PalData {
 	localized_name: string;
 	type: ElementType[];
 	skill_set: Record<string, number>;
 	scaling: Scaling;
-	suitabilities: Suitabilities;
+	work_suitability: Record<WorkSuitability, number>;
 	tower?: boolean;
 	human?: boolean;
 	bonuses?: Bonuses;
@@ -170,14 +166,14 @@ export interface Bonuses {
 	work_speed: number;
 }
 
-enum PalGender {
+export enum PalGender {
 	MALE = 'Male',
 	FEMALE = 'Female'
 }
 
-type SkillType = 'Active' | 'Passive' | 'Empty';
+export type SkillType = 'Active' | 'Passive' | 'Empty';
 
-interface ActiveSkillDetails {
+export interface ActiveSkillDetails {
 	type: string;
 	power: number;
 	ct: number;
@@ -186,26 +182,26 @@ interface ActiveSkillDetails {
 	exclusive?: string[];
 }
 
-interface Skill {
+export interface Skill {
 	id: string;
 	name: string;
 	description: string;
 }
 
-interface ActiveSkill extends Skill {
+export interface ActiveSkill extends Skill {
 	details: ActiveSkillDetails;
 }
 
-interface PassiveSkillDetails {
+export interface PassiveSkillDetails {
 	tier: string;
 	bonuses: Bonuses;
 }
 
-interface PassiveSkill extends Skill {
+export interface PassiveSkill extends Skill {
 	details: PassiveSkillDetails;
 }
 
-type ElementType =
+export type ElementType =
 	| 'Fire'
 	| 'Water'
 	| 'Ground'
@@ -216,7 +212,7 @@ type ElementType =
 	| 'Dragon'
 	| 'Electric';
 
-type WorkSuitability =
+export type WorkSuitability =
 	| 'EmitFlame'
 	| 'Watering'
 	| 'Seeding'
@@ -231,7 +227,7 @@ type WorkSuitability =
 	| 'Transport'
 	| 'MonsterFarm';
 
-type Element = {
+export type Element = {
 	name: string;
 	color: string;
 	icon: string;
@@ -241,25 +237,9 @@ type Element = {
 	white_icon: string;
 };
 
-enum EntryState {
+export enum EntryState {
 	NONE = 'None',
 	MODIFIED = 'Modified',
 	NEW = 'New',
 	DELETED = 'Deleted'
 }
-
-export { EntryState, PalGender };
-export type {
-	ActiveSkill,
-	ActiveSkillDetails,
-	Element,
-	ElementType,
-	Pal,
-	PassiveSkill,
-	PassiveSkillDetails,
-	Player,
-	SaveFile,
-	Skill,
-	SkillType,
-	WorkSuitability
-};
