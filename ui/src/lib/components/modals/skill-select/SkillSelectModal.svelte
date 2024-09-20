@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Card, Tooltip, Combobox } from '$components/ui';
 	import type { ActiveSkill, PassiveSkill, SelectOption, SkillType } from '$types';
-	import { Save, TimerReset, X } from 'lucide-svelte';
+	import { Save, TimerReset, X, Delete } from 'lucide-svelte';
 	import { activeSkillsData, passiveSkillsData, elementsData } from '$lib/data';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { assetLoader } from '$utils';
@@ -72,6 +72,10 @@
 				value: s.id,
 				label: s.name
 			}));
+	}
+
+	function handleClear() {
+		closeModal('Empty');
 	}
 
 	function handleClose(value: any) {
@@ -172,6 +176,14 @@
 	</Combobox>
 
 	<div class="mt-2 flex flex-row items-center space-x-2">
+		<Tooltip position="bottom">
+			<button class="btn hover:bg-secondary-500 px-2" onclick={handleClear}>
+				<Delete />
+			</button>
+			{#snippet popup()}
+				<span>Clear</span>
+			{/snippet}
+		</Tooltip>
 		<Tooltip position="bottom">
 			<button class="btn hover:bg-secondary-500 px-2" onclick={() => handleClose(value)}>
 				<Save />

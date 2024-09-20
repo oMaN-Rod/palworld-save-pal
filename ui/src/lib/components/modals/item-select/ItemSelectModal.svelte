@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Card, Tooltip, Combobox, Input } from '$components/ui';
-	import type { ItemType, SelectOption, Tier } from '$types';
-	import { Apple, Cuboid, Delete, Gem, Pizza, Save, Scroll, Shield, Sword, X } from 'lucide-svelte';
+	import type { ItemType, SelectOption } from '$types';
+	import { Apple, Cuboid, Delete, Gem, Save, Scroll, Shield, Sword, X } from 'lucide-svelte';
 	import { itemsData } from '$lib/data';
 	import type { Item, ItemGroup } from '$types';
 	import { ASSET_DATA_PATH } from '$lib/constants';

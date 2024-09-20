@@ -136,24 +136,40 @@
 
 	function handleUpdateActiveSkill(newSkill: string, oldSkill: string): void {
 		if (appState.selectedPal) {
-			const targetSkill = appState.selectedPal.active_skills.findIndex((s) => s === oldSkill);
-			if (targetSkill >= 0) {
-				appState.selectedPal.active_skills[targetSkill] = newSkill;
+			const targetSkillIndex = appState.selectedPal.active_skills.findIndex((s) => s === oldSkill);
+
+			if (newSkill === 'Empty') {
+				if (targetSkillIndex >= 0) {
+					appState.selectedPal.active_skills.splice(targetSkillIndex, 1);
+				}
 			} else {
-				appState.selectedPal.active_skills.push(newSkill);
+				if (targetSkillIndex >= 0) {
+					appState.selectedPal.active_skills[targetSkillIndex] = newSkill;
+				} else {
+					appState.selectedPal.active_skills.push(newSkill);
+				}
 			}
+
 			appState.selectedPal.state = EntryState.MODIFIED;
 		}
 	}
 
 	function handleUpdatePassiveSkill(newSkill: string, oldSkill: string): void {
 		if (appState.selectedPal) {
-			const targetSkill = appState.selectedPal.passive_skills.findIndex((s) => s === oldSkill);
-			if (targetSkill >= 0) {
-				appState.selectedPal.passive_skills[targetSkill] = newSkill;
+			const targetSkillIndex = appState.selectedPal.passive_skills.findIndex((s) => s === oldSkill);
+
+			if (newSkill === 'Empty') {
+				if (targetSkillIndex >= 0) {
+					appState.selectedPal.passive_skills.splice(targetSkillIndex, 1);
+				}
 			} else {
-				appState.selectedPal.passive_skills.push(newSkill);
+				if (targetSkillIndex >= 0) {
+					appState.selectedPal.passive_skills[targetSkillIndex] = newSkill;
+				} else {
+					appState.selectedPal.passive_skills.push(newSkill);
+				}
 			}
+
 			appState.selectedPal.state = EntryState.MODIFIED;
 		}
 	}
