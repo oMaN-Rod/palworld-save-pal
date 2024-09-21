@@ -7,13 +7,11 @@ export type Pal = {
 	is_boss: boolean;
 	character_id: string;
 	gender: PalGender;
-	work_speed: number;
 	rank_hp: number;
 	rank_attack: number;
 	rank_defense: number;
 	rank_craftspeed: number;
 	talent_hp: number;
-	talent_melee: number;
 	talent_shot: number;
 	talent_defense: number;
 	rank: number;
@@ -21,7 +19,6 @@ export type Pal = {
 	nickname?: string;
 	is_tower: boolean;
 	stomach: number;
-	max_stomach: number;
 	storage_id?: string;
 	storage_slot: number;
 	learned_skills: string[];

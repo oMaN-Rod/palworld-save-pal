@@ -8,15 +8,13 @@
 	}>();
 
 	let hp: number[] = $state([0]);
-	let melee: number[] = $state([0]);
-	let ranged: number[] = $state([0]);
+	let attack: number[] = $state([0]);
 	let defense: number[] = $state([0]);
 
 	$effect(() => {
-		hp = [pal.talent_hp] ?? 0;
-		melee = [pal.talent_melee] ?? 0;
-		ranged = [pal.talent_shot] ?? 0;
-		defense = [pal.talent_defense] ?? 0;
+		hp = [pal.talent_hp ?? 0];
+		attack = [pal.talent_shot ?? 0];
+		defense = [pal.talent_defense ?? 0];
 	});
 
 	function handleUpdateHp(details: any): void {
@@ -24,11 +22,7 @@
 		console.log(pal.talent_hp);
 	}
 
-	function handleUpdateMelee(details: any): void {
-		pal.talent_melee = details.value[0];
-	}
-
-	function handleUpdateRanged(details: any): void {
+	function handleUpdateAttack(details: any): void {
 		pal.talent_shot = details.value[0];
 	}
 
@@ -38,7 +32,7 @@
 </script>
 
 <div class="flex flex-row items-center space-x-2">
-	<span class="w-3/12">HP</span>
+	<span class="ml-2 w-3/12">HP</span>
 	<Slider
 		classes="grow"
 		height="h-0.5"
@@ -60,7 +54,7 @@
 	/>
 </div>
 <div class="flex flex-row items-center space-x-2">
-	<span class="w-3/12">Melee</span>
+	<span class="ml-2 w-3/12">Attack</span>
 	<Slider
 		height="h-0.5"
 		meterBg="bg-red-500"
@@ -69,40 +63,19 @@
 		max={100}
 		markers={[25, 50, 75]}
 		step={1}
-		bind:value={melee}
-		onValueChange={handleUpdateMelee}
+		bind:value={attack}
+		onValueChange={handleUpdateAttack}
 	/>
 	<Input
 		type="number"
 		labelClass="w-24"
 		inputClass="h-8"
-		bind:value={melee[0]}
-		on:change={handleUpdateMelee}
-	/>
-</div>
-<div class="flex flex-row items-center space-x-2">
-	<span class="w-3/12">Ranged</span>
-	<Slider
-		height="h-0.5"
-		meterBg="bg-secondary-500"
-		thumbRingColor="ring-secondary-500"
-		min={0}
-		max={100}
-		markers={[25, 50, 75]}
-		step={1}
-		bind:value={ranged}
-		onValueChange={handleUpdateRanged}
-	/>
-	<Input
-		type="number"
-		labelClass="w-24"
-		inputClass="h-8"
-		bind:value={ranged[0]}
-		on:change={handleUpdateRanged}
+		bind:value={attack[0]}
+		on:change={handleUpdateAttack}
 	/>
 </div>
 <div class="flex h-8 flex-row items-center space-x-2">
-	<span class="w-3/12">Defense</span>
+	<span class="ml-2 w-3/12">Defense</span>
 	<Slider
 		height="h-0.5"
 		meterBg="bg-primary-500"

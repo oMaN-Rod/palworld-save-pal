@@ -118,9 +118,7 @@
 		appState.selectedPal.is_boss = true;
 		appState.selectedPal.is_lucky = false;
 		setBasePreset('Element');
-		appState.selectedPal.stomach = appState.selectedPal.max_stomach;
 		appState.selectedPal.talent_hp = 100;
-		appState.selectedPal.talent_melee = 100;
 		appState.selectedPal.talent_shot = 100;
 		appState.selectedPal.talent_defense = 100;
 		appState.selectedPal.rank = 4;
@@ -128,7 +126,6 @@
 		appState.selectedPal.rank_defense = 10;
 		appState.selectedPal.rank_attack = 10;
 		appState.selectedPal.rank_craftspeed = 10;
-		appState.selectedPal.work_speed = 200;
 		await getStats(appState.selectedPal, appState.selectedPlayer);
 		appState.selectedPal.hp = appState.selectedPal.max_hp;
 		appState.selectedPal.state = EntryState.MODIFIED;

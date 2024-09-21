@@ -35,12 +35,6 @@
 		pal.state = EntryState.MODIFIED;
 	}
 
-	function handleEat() {
-		if (!pal) return;
-		pal.stomach = pal.max_stomach;
-		pal.state = EntryState.MODIFIED;
-	}
-
 	async function handleGetStats() {
 		if (pal && player) {
 			const result = await getStats(pal, player);
@@ -57,10 +51,10 @@
 		if (
 			pal &&
 			player &&
-			(pal?.talent_hp || pal?.talent_melee || pal?.talent_defense || pal?.passive_skills)
+			(pal?.talent_hp || pal?.talent_shot || pal?.talent_defense || pal?.passive_skills)
 		) {
 			console.log('Talent hp:', pal.talent_hp);
-			console.log('Talent melee:', pal.talent_melee);
+			console.log('Talent melee:', pal.talent_shot);
 			console.log('Talent defense:', pal.talent_defense);
 			console.log('Passive skills:', pal.passive_skills);
 			handleGetStats();
@@ -89,27 +83,6 @@
 			color="green"
 			width="w-[400px]"
 			dividend={1000}
-		/>
-	</div>
-	<div class="flex flex-row items-center">
-		{#if foodIcon}
-			<Tooltip>
-				<button class="mr-2" onclick={handleEat}>
-					<enhanced:img src={foodIcon} alt="Food" class="h-6 w-6"></enhanced:img>
-				</button>
-				{#snippet popup()}
-					<span>Feed</span>
-					{Math.round(pal.stomach)}/{pal.max_stomach}
-				{/snippet}
-			</Tooltip>
-		{/if}
-
-		<Progress
-			bind:value={pal.stomach}
-			bind:max={pal.max_stomach}
-			height="h-6"
-			width="w-[400px]"
-			color="orange"
 		/>
 	</div>
 	<div

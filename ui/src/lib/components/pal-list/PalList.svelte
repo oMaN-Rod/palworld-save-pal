@@ -278,7 +278,6 @@
 			Object.values(appState.selectedPlayer.pals).forEach((pal) => {
 				if (selectedPalIds.includes(pal.instance_id)) {
 					pal.hp = pal.max_hp;
-					pal.stomach = pal.max_stomach;
 					pal.sanity = 100;
 				}
 			});

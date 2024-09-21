@@ -19,13 +19,11 @@ class Pal(BaseModel):
     is_boss: bool = False
     character_id: Optional[str] = Field(None)
     gender: Optional[PalGender] = None
-    work_speed: int = Field(0)
     rank_hp: int = 0
     rank_attack: int = 0
     rank_defense: int = 0
     rank_craftspeed: int = 0
     talent_hp: int = 0
-    talent_melee: int = 0
     talent_shot: int = 0
     talent_defense: int = 0
     rank: int = 1
@@ -34,12 +32,10 @@ class Pal(BaseModel):
     is_tower: bool = False
     storage_id: Optional[UUID] = None
     stomach: float = 0
-    max_stomach: float = 0
     storage_slot: int = 0
     learned_skills: List[str] = Field(default_factory=list)
     active_skills: List[str] = Field(default_factory=list)
     passive_skills: List[str] = Field(default_factory=list)
-    work_suitabilities: Optional[Dict[str, int]] = Field(default_factory=dict)
     hp: int = 0
     max_hp: int = 0
     elements: Optional[List[Element]] = Field(default_factory=list)
@@ -99,7 +95,6 @@ class Pal(BaseModel):
         self._update_level()
         self._update_ranks()
         self._update_talents()
-        # self._update_work_speed()
         self.heal()
 
     def update_from(self, other_pal: "Pal"):
@@ -123,11 +118,6 @@ class Pal(BaseModel):
             if "IsRarePal" in self._save_parameter
             else False
         )
-        self.work_speed = (
-            PalObjects.get_value(self._save_parameter["CraftSpeed"])
-            if "CraftSpeed" in self._save_parameter
-            else 70
-        )
         self.nickname = (
             PalObjects.get_value(self._save_parameter["NickName"])
             if "NickName" in self._save_parameter
@@ -141,7 +131,6 @@ class Pal(BaseModel):
         self._get_level()
         self._get_storage_info()
         self._get_skills()
-        # self._get_work_suitabilities()
         self._get_hp()
         self._get_stomach()
         self._get_sanity()
@@ -166,15 +155,10 @@ class Pal(BaseModel):
         self.gender = PalGender.from_value(gender)
 
     def _get_stomach(self):
-        self.max_stomach = (
-            PalObjects.get_value(self._save_parameter["MaxFullStomach"], 0)
-            if "MaxFullStomach" in self._save_parameter
-            else 150.0
-        )
         self.stomach = (
             PalObjects.get_value(self._save_parameter["FullStomach"], 0)
             if "FullStomach" in self._save_parameter
-            else self.max_stomach
+            else 150
         )
 
     def _get_sanity(self):
@@ -190,25 +174,12 @@ class Pal(BaseModel):
         safe_remove(self._save_parameter, "WorkerSick")
         safe_remove(self._save_parameter, "HungerType")
         safe_remove(self._save_parameter, "SanityValue")
-
         self.sanity = 100.0
-        self.stomach = self.max_stomach
-        if "FullStomach" in self._save_parameter:
-            PalObjects.set_value(
-                self._save_parameter["FullStomach"], value=self.stomach
-            )
-        else:
-            self._save_parameter["FullStomach"] = PalObjects.FloatProperty(self.stomach)
 
     def _get_talents(self):
         self.talent_hp = (
             PalObjects.get_byte_property(self._save_parameter["Talent_HP"])
             if "Talent_HP" in self._save_parameter
-            else 0
-        )
-        self.talent_melee = (
-            PalObjects.get_byte_property(self._save_parameter["Talent_Melee"])
-            if "Talent_Melee" in self._save_parameter
             else 0
         )
         self.talent_shot = (
@@ -280,19 +251,6 @@ class Pal(BaseModel):
             if "EquipWaza" in self._save_parameter
             else []
         )
-
-    def _get_work_suitabilities(self):
-        work_suitabilities = PalObjects.get_array_property(
-            self._save_parameter["CraftSpeeds"]
-        )
-        self.work_suitabilities = {}
-        for ws in work_suitabilities:
-            ws_type = WorkSuitability.from_value(
-                PalObjects.get_enum_property(ws["WorkSuitability"])
-            )
-            ws_rank = PalObjects.get_value(ws["Rank"], 0)
-            if ws_type:
-                self.work_suitabilities[ws_type.value] = ws_rank
 
     def _get_hp(self):
         self.hp = (
@@ -455,7 +413,6 @@ class Pal(BaseModel):
 
     def _update_talents(self) -> None:
         self._update_talent_hp()
-        self._update_talent_melee()
         self._update_talent_shot()
         self._update_talent_defense()
 
@@ -466,16 +423,6 @@ class Pal(BaseModel):
             )
         else:
             self._save_parameter["Talent_HP"] = PalObjects.ByteProperty(self.talent_hp)
-
-    def _update_talent_melee(self) -> None:
-        if "Talent_Melee" in self._save_parameter:
-            PalObjects.set_byte_property(
-                self._save_parameter["Talent_Melee"], value=self.talent_melee
-            )
-        else:
-            self._save_parameter["Talent_Melee"] = PalObjects.ByteProperty(
-                self.talent_melee
-            )
 
     def _update_talent_shot(self) -> None:
         if "Talent_Shot" in self._save_parameter:
@@ -514,11 +461,3 @@ class Pal(BaseModel):
             PalObjects.set_value(self._save_parameter["IsRarePal"], value=self.is_lucky)
         else:
             self._save_parameter["IsRarePal"] = PalObjects.BoolProperty(self.is_lucky)
-
-    def _update_work_speed(self) -> None:
-        if "CraftSpeed" in self._save_parameter:
-            PalObjects.set_value(
-                self._save_parameter["CraftSpeed"], value=self.work_speed
-            )
-        else:
-            self._save_parameter["CraftSpeed"] = PalObjects.IntProperty(self.work_speed)

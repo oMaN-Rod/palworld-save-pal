@@ -50,24 +50,6 @@
 		}
 	}
 
-	async function handleEditWorkSpeed() {
-		if (!pal) {
-			console.error('Pal not found');
-			return;
-		}
-		// @ts-ignore
-		const result = await modal.showModal<number>(NumberInputModal, {
-			title: 'Edit Work Speed',
-			value: pal.work_speed,
-			min: 0,
-			max: 200
-		});
-		if (result !== null) {
-			pal.work_speed = result;
-			pal.state = EntryState.MODIFIED;
-		}
-	}
-
 	$effect(() => {
 		handleGetStats();
 		loadStaticIcons();
@@ -77,7 +59,7 @@
 		if (
 			pal &&
 			player &&
-			(pal?.talent_hp || pal?.talent_melee || pal?.talent_defense || pal?.passive_skills)
+			(pal?.talent_hp || pal?.talent_shot || pal?.talent_defense || pal?.passive_skills)
 		) {
 			handleGetStats();
 		}
@@ -108,20 +90,7 @@
 		</div>
 
 		<div class="ml-2 h-6 w-6"></div>
-		<span class="flex-grow p-2 text-lg">Defense</span>
+		<span class="flex-grow p-2 pl-2 text-lg">Defense</span>
 		<span class="p-2 text-lg font-bold">{stats?.defense}</span>
-	</div>
-</div>
-<div
-	class="border-l-primary border-l-surface-600 bg-surface-900 relative w-full overflow-hidden rounded-none border-l-2 p-0 shadow-none"
->
-	<div class="flex w-full items-center">
-		<div class="mx-2 h-6 w-6">
-			{@html workSpeedIcon}
-		</div>
-
-		<div class="ml-2 h-6 w-6"></div>
-		<span class="flex-grow p-2 text-start text-lg">Work Speed</span>
-		<span class="p-2 text-lg font-bold">{pal?.work_speed}</span>
 	</div>
 </div>

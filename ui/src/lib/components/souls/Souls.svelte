@@ -13,10 +13,10 @@
 	let craftspeed: number[] = $state([0]);
 
 	$effect(() => {
-		hp = [pal.rank_hp] ?? 0;
-		attack = [pal.rank_attack] ?? 0;
-		defense = [pal.rank_defense] ?? 0;
-		craftspeed = [pal.rank_craftspeed] ?? 0;
+		hp = [pal.rank_hp ?? 0];
+		attack = [pal.rank_attack ?? 0];
+		defense = [pal.rank_defense ?? 0];
+		craftspeed = [pal.rank_craftspeed ?? 0];
 	});
 
 	function handleUpdateHp(details: any): void {
@@ -37,7 +37,7 @@
 </script>
 
 <div class="flex flex-row items-center space-x-2">
-	<span class="w-3/12">Health</span>
+	<span class="ml-2 w-3/12">Health</span>
 	<Slider
 		classes="grow"
 		height="h-0.5"
@@ -59,7 +59,7 @@
 	/>
 </div>
 <div class="flex flex-row items-center space-x-2">
-	<span class="w-3/12">Defense</span>
+	<span class="ml-2 w-3/12">Defense</span>
 	<Slider
 		height="h-0.5"
 		meterBg="bg-primary-500"
@@ -80,7 +80,7 @@
 	/>
 </div>
 <div class="flex flex-row items-center space-x-2">
-	<span class="w-3/12">Attack</span>
+	<span class="ml-2 w-3/12">Attack</span>
 	<Slider
 		height="h-0.5"
 		meterBg="bg-red-500"
@@ -101,7 +101,7 @@
 	/>
 </div>
 <div class="flex flex-row items-center space-x-2">
-	<span class="w-3/12">Workspeed</span>
+	<span class="ml-2 w-3/12">Workspeed</span>
 	<Slider
 		height="h-0.5"
 		meterBg="bg-secondary-500"

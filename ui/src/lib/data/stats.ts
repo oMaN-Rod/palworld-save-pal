@@ -47,7 +47,7 @@ export async function getStats(pal: Pal, player: Player): Promise<PalStats | und
 	const alphaScaling = pal.is_boss ? 1.2 : 1;
 	pal.max_hp = Math.floor(hp * (1 + condenserBonus) * (1 + hpSoulBonus) * alphaScaling) * 1000;
 
-	const attackIv = (pal.talent_melee * 0.3) / 100;
+	const attackIv = (pal.talent_shot * 0.3) / 100;
 	const attackSoulBonus = pal.rank_attack * 0.03;
 	const attackScale = palData.scaling.attack;
 
