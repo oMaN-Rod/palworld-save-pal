@@ -4852,14 +4852,14 @@
 			"Watering": 0,
 			"Seeding": 0,
 			"GenerateElectricity": 0,
-			"Handcraft": 2,
+			"Handcraft": 3,
 			"Collection": 0,
 			"Deforest": 0,
 			"Mining": 0,
 			"OilExtraction": 0,
-			"ProductMedicine": 4,
+			"ProductMedicine": 5,
 			"Cool": 0,
-			"Transport": 2,
+			"Transport": 3,
 			"MonsterFarm": 0
 		}
 	},

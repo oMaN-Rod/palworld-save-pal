@@ -3624,7 +3624,7 @@
         },
         "image": "Poison_Bow"
     },
-    "Bow_Triple": {
+    "Bow_triple": {
         "type": "Weapon",
         "group": "Weapon",
         "tier": "Common",
