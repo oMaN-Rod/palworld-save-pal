@@ -48,6 +48,7 @@
 	});
 	let accessoryGear: ItemContainerSlot[] = $state([]);
 	let group = $state('inventory');
+	let foodSlotCount: number = 0;
 
 	async function getItemIcon(staticId: string) {
 		if (!staticId) return;
@@ -220,6 +221,9 @@
 					containerSlots.push(emptySlot);
 					appState.selectedPlayer.essential_container.slots.push(emptySlot);
 				} else {
+					if (slot.static_id.includes('AutoMealPouch_Tier')) {
+						foodSlotCount = parseInt(slot.static_id.slice(-1));
+					}
 					containerSlots.push(slot);
 				}
 			}
@@ -227,20 +231,91 @@
 		}
 	}
 
+	function loadFoodContainer() {
+		console.log('loadFoodContainer');
+		if (appState.selectedPlayer) {
+			const container = appState.selectedPlayer.food_equip_container;
+			let containerSlots = [];
+			for (let i = 0; i < foodSlotCount; i++) {
+				const slot = container.slots.find((s) => s.slot_index === i);
+				if (!slot) {
+					const emptySlot = {
+						static_id: 'None',
+						slot_index: i,
+						count: 0,
+						dynamic_item: undefined
+					};
+					containerSlots.push(emptySlot);
+					appState.selectedPlayer.food_equip_container.slots.push(emptySlot);
+				} else {
+					containerSlots.push(slot);
+				}
+			}
+			foodEquipContainer.slots = containerSlots;
+		}
+	}
+
+	function loadWeaponLoadoutContainer() {
+		if (appState.selectedPlayer) {
+			const container = appState.selectedPlayer.weapon_load_out_container;
+			container.slots.sort((a, b) => a.slot_index - b.slot_index);
+			let containerSlots = [];
+			for (let i = 0; i < 4; i++) {
+				const slot = container.slots.find((s) => s.slot_index === i);
+				if (!slot) {
+					const emptySlot = {
+						static_id: 'None',
+						slot_index: i,
+						count: 0,
+						dynamic_item: undefined
+					};
+					containerSlots.push(emptySlot);
+					appState.selectedPlayer.weapon_load_out_container.slots.push(emptySlot);
+				} else {
+					containerSlots.push(slot);
+				}
+			}
+			weaponLoadOutContainer.slots = containerSlots;
+		}
+	}
+
+	function loadPlayerEquipmentArmorContainer() {
+		if (appState.selectedPlayer) {
+			const container = appState.selectedPlayer.player_equipment_armor_container;
+			container.slots.sort((a, b) => a.slot_index - b.slot_index);
+			let containerSlots = [];
+			for (let i = 0; i < 8; i++) {
+				const slot = container.slots.find((s) => s.slot_index === i);
+				if (!slot) {
+					const emptySlot = {
+						static_id: 'None',
+						slot_index: i,
+						count: 0,
+						dynamic_item: undefined
+					};
+					containerSlots.push(emptySlot);
+					appState.selectedPlayer.player_equipment_armor_container.slots.push(emptySlot);
+				} else {
+					containerSlots.push(slot);
+				}
+			}
+
+			headGear = containerSlots[0];
+			bodyGear = containerSlots[1];
+			shieldGear = containerSlots[4];
+			gliderGear = containerSlots[5];
+			accessoryGear = containerSlots.slice(2, 4).concat(containerSlots.slice(6, 8));
+			playerEquipmentArmorContainer.slots = containerSlots;
+		}
+	}
+
 	$effect(() => {
 		if (appState.selectedPlayer) {
 			loadCommonContainer();
 			loadEssentialContainer();
-			weaponLoadOutContainer = appState.selectedPlayer.weapon_load_out_container;
-			playerEquipmentArmorContainer = appState.selectedPlayer.player_equipment_armor_container;
-			headGear = playerEquipmentArmorContainer.slots[0];
-			bodyGear = playerEquipmentArmorContainer.slots[1];
-			shieldGear = playerEquipmentArmorContainer.slots[4];
-			gliderGear = playerEquipmentArmorContainer.slots[5];
-			accessoryGear = playerEquipmentArmorContainer.slots
-				.slice(2, 4)
-				.concat(playerEquipmentArmorContainer.slots.slice(6, 8));
-			foodEquipContainer = appState.selectedPlayer.food_equip_container;
+			loadFoodContainer();
+			loadWeaponLoadoutContainer();
+			loadPlayerEquipmentArmorContainer();
 		}
 	});
 </script>
