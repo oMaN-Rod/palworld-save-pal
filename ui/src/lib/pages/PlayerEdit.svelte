@@ -178,9 +178,59 @@
 		}
 	}
 
+	function loadCommonContainer() {
+		if (appState.selectedPlayer) {
+			commonContainer.slots = [];
+			const container = appState.selectedPlayer.common_container;
+			container.slots.sort((a, b) => a.slot_index - b.slot_index);
+			let containerSlots = [];
+			for (let i = 0; i < 42; i++) {
+				const slot = container.slots.find((s) => s.slot_index === i);
+				if (!slot) {
+					const emptySlot = {
+						static_id: 'None',
+						slot_index: i,
+						count: 0,
+						dynamic_item: undefined
+					};
+					containerSlots.push(emptySlot);
+					appState.selectedPlayer.common_container.slots.push(emptySlot);
+				} else {
+					containerSlots.push(slot);
+				}
+			}
+			commonContainer.slots = containerSlots;
+		}
+	}
+
+	function loadEssentialContainer() {
+		if (appState.selectedPlayer) {
+			const container = appState.selectedPlayer.essential_container;
+			container.slots.sort((a, b) => a.slot_index - b.slot_index);
+			let containerSlots = [];
+			for (let i = 0; i < 100; i++) {
+				const slot = container.slots.find((s) => s.slot_index === i);
+				if (!slot) {
+					const emptySlot = {
+						static_id: 'None',
+						slot_index: i,
+						count: 0,
+						dynamic_item: undefined
+					};
+					containerSlots.push(emptySlot);
+					appState.selectedPlayer.essential_container.slots.push(emptySlot);
+				} else {
+					containerSlots.push(slot);
+				}
+			}
+			essentialContainer.slots = containerSlots;
+		}
+	}
+
 	$effect(() => {
 		if (appState.selectedPlayer) {
-			commonContainer = appState.selectedPlayer.common_container;
+			loadCommonContainer();
+			loadEssentialContainer();
 			weaponLoadOutContainer = appState.selectedPlayer.weapon_load_out_container;
 			playerEquipmentArmorContainer = appState.selectedPlayer.player_equipment_armor_container;
 			headGear = playerEquipmentArmorContainer.slots[0];
@@ -191,7 +241,6 @@
 				.slice(2, 4)
 				.concat(playerEquipmentArmorContainer.slots.slice(6, 8));
 			foodEquipContainer = appState.selectedPlayer.food_equip_container;
-			essentialContainer = appState.selectedPlayer.essential_container;
 		}
 	});
 </script>

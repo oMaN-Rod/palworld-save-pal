@@ -380,7 +380,6 @@ class SaveFile(BaseModel):
         for e in self._character_save_parameter_map:
             if self._is_player(e):
                 continue
-            logger.debug(e)
             instance = Pal(e)
             if instance:
                 self._pals[instance.instance_id] = instance

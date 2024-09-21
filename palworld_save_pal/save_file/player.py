@@ -109,7 +109,6 @@ class Player(BaseModel):
                     self.player_equipment_armor_container.update_from(value)
                 case "food_equip_container":
                     self.food_equip_container.update_from(value)
-        self._update_storage()
 
     def _load_player_data(self):
         player_save_data = PalObjects.get_value(
@@ -228,9 +227,6 @@ class Player(BaseModel):
             self._player_gvas_file.properties["SaveData"]
         )
         inventory_info = PalObjects.get_value(player_save_data["InventoryInfo"])
-        if not inventory_info:
-            # Older save file had inventoryInfo 🤷‍♂️
-            inventory_info = PalObjects.get_value(player_save_data["inventoryInfo"])
 
         if not inventory_info:
             logger.error("No inventory info found for player %s", self.uid)
@@ -251,10 +247,3 @@ class Player(BaseModel):
         self._load_food_equip_container(
             inventory_info, item_container_save_data, dynamic_item_save_data
         )
-
-    def _update_storage(self):
-        self.common_container.set_items()
-        self.essential_container.set_items()
-        self.weapon_load_out_container.set_items()
-        self.player_equipment_armor_container.set_items()
-        self.food_equip_container.set_items()

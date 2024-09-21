@@ -5,7 +5,9 @@ import uuid
 
 from palworld_save_tools.archive import UUID as ArchiveUUID
 
-from palworld_save_pal.save_file.item_container_slot import ItemContainerSlot
+from palworld_save_pal.save_file.item_container_slot import (
+    ItemContainerSlot as IContainerSlot,
+)
 from palworld_save_pal.utils.logging_config import create_logger
 
 logger = create_logger(__name__)
@@ -224,7 +226,7 @@ class PalObjects:
                 else PalObjects.get_nested(d[keys[0]], *keys[1:], default=default)
             )
         except (KeyError, TypeError, IndexError):
-            logger.warning(f"Key not found: {keys}, {d.keys()}")
+            logger.warning(f"Key not found: {keys}, {d}")
             return default
 
     @staticmethod
@@ -254,11 +256,11 @@ class PalObjects:
             },
             "type": "ByteProperty",
         }
-        
+
     @staticmethod
     def get_byte_property(d: Dict[str, Any]) -> Optional[str]:
         return PalObjects.get_nested(d, "value", "value")
-    
+
     @staticmethod
     def set_byte_property(d: Dict[str, Any], value: str):
         PalObjects.set_nested(d, "value", "value", value=value)
@@ -555,8 +557,8 @@ class PalObjects:
                                     "Gender": PalObjects.EnumProperty(
                                         "EPalGenderType", PalGender.FEMALE.prefixed()
                                     ),
-                                    "Level": PalObjects.IntProperty(1),
-                                    "Exp": PalObjects.IntProperty(0),
+                                    "Level": PalObjects.ByteProperty(1),
+                                    "Exp": PalObjects.Int64Property(0),
                                     "NickName": PalObjects.StrProperty(nickname),
                                     "EquipWaza": PalObjects.ArrayPropertyValues(
                                         ArrayType.ENUM_PROPERTY, active_skills
@@ -565,15 +567,13 @@ class PalObjects:
                                         ArrayType.ENUM_PROPERTY, []
                                     ),
                                     "HP": PalObjects.FixedPoint64(545000),
-                                    "Talent_HP": PalObjects.IntProperty(50),
-                                    "Talent_Melee": PalObjects.IntProperty(50),
-                                    "Talent_Shot": PalObjects.IntProperty(50),
-                                    "Talent_Defense": PalObjects.IntProperty(50),
+                                    "Talent_HP": PalObjects.ByteProperty(50),
+                                    "Talent_Shot": PalObjects.ByteProperty(50),
+                                    "Talent_Defense": PalObjects.ByteProperty(50),
                                     "FullStomach": PalObjects.FloatProperty(300),
                                     "PassiveSkillList": PalObjects.ArrayPropertyValues(
                                         ArrayType.NAME_PROPERTY, passive_skills
                                     ),
-                                    "MP": PalObjects.FixedPoint64(10000),
                                     "OwnedTime": PalObjects.DateTime(PalObjects.TIME),
                                     "OwnerPlayerUId": PalObjects.Guid(owner_uid),
                                     "OldOwnerPlayerUIds": PalObjects.ArrayProperty(
@@ -586,35 +586,9 @@ class PalObjects:
                                             "id": PalObjects.EMPTY_UUID,
                                         },
                                     ),
-                                    # MaxHP is no longer stored in the game save.
-                                    # "MaxHP": PalObjects.FixedPoint64(545000),
-                                    "CraftSpeed": PalObjects.IntProperty(70),
-                                    # Do not omit CraftSpeeds, otherwise the pal works super slow
-                                    # TODO use accurate data (even tho this is useless)
-                                    "CraftSpeeds": PalObjects.ArrayProperty(
-                                        ArrayType.STRUCT_PROPERTY,
-                                        {
-                                            "prop_name": "CraftSpeeds",
-                                            "prop_type": "StructProperty",
-                                            "values": [
-                                                PalObjects.WorkSuitabilityStruct(
-                                                    work.prefixed(), 0
-                                                )
-                                                for work in WorkSuitability
-                                            ],
-                                            "type_name": "PalWorkSuitabilityInfo",
-                                            "id": PalObjects.EMPTY_UUID,
-                                        },
-                                    ),
-                                    "SanityValue": PalObjects.FloatProperty(100.0),
-                                    "EquipItemContainerId": PalObjects.PalContainerId(
-                                        str(uuid.uuid4())
-                                    ),
                                     "SlotID": PalObjects.PalCharacterSlotId(
                                         container_id, slot_idx
                                     ),
-                                    # TODO Need accurate values
-                                    "MaxFullStomach": PalObjects.FloatProperty(300.0),
                                     "GotStatusPointList": PalObjects.ArrayProperty(
                                         ArrayType.STRUCT_PROPERTY,
                                         {
@@ -641,8 +615,6 @@ class PalObjects:
                                             "id": PalObjects.EMPTY_UUID,
                                         },
                                     ),
-                                    "DecreaseFullStomachRates": PalObjects.FloatContainer(),
-                                    "CraftSpeedRates": PalObjects.FloatContainer(),
                                     "LastJumpedLocation": PalObjects.Vector(
                                         0, 0, 7088.5
                                     ),
@@ -656,10 +628,43 @@ class PalObjects:
                     custom_type=".worldSaveData.CharacterSaveParameterMap.Value.RawData",
                 )
             },
+            "CustomVersionData": {
+                "array_type": "ByteProperty",
+                "id": None,
+                "value": {
+                    "values": [
+                        1,
+                        0,
+                        0,
+                        0,
+                        108,
+                        246,
+                        252,
+                        15,
+                        153,
+                        72,
+                        144,
+                        17,
+                        248,
+                        156,
+                        96,
+                        177,
+                        94,
+                        71,
+                        70,
+                        74,
+                        1,
+                        0,
+                        0,
+                        0,
+                    ]
+                },
+                "type": "ArrayProperty",
+            },
         }
 
     @staticmethod
-    def DynamicItem(container_slot: ItemContainerSlot):
+    def DynamicItem(container_slot: IContainerSlot):
         return {
             "RawData": PalObjects.ArrayProperty(
                 ArrayType.BYTE_PROPERTY,
@@ -677,4 +682,59 @@ class PalObjects:
             "CustomVersionData": PalObjects.ArrayPropertyValues(
                 ArrayType.BYTE_PROPERTY, [0, 0, 0, 0]
             ),
+        }
+
+    @staticmethod
+    def ItemContainerSlot(container_slot: IContainerSlot) -> Dict[str, Any]:
+        return {
+            "RawData": PalObjects.ArrayProperty(
+                ArrayType.BYTE_PROPERTY,
+                {
+                    "permission": {
+                        "type_a": container_slot.slot_index,
+                        "type_b": container_slot.count,
+                        "item_static_id": container_slot.static_id,
+                    },
+                    "corruption_progress_value": 0.0,
+                    "local_id": (
+                        PalObjects.EMPTY_UUID
+                        if not container_slot.dynamic_item
+                        else container_slot.dynamic_item.local_id
+                    ),
+                },
+                custom_type=".worldSaveData.ItemContainerSaveData.Value.Slots.Slots.RawData",
+            ),
+            "CustomVersionData": {
+                "array_type": "ByteProperty",
+                "id": None,
+                "value": {
+                    "values": [
+                        1,
+                        0,
+                        0,
+                        0,
+                        126,
+                        180,
+                        234,
+                        18,
+                        154,
+                        27,
+                        90,
+                        255,
+                        113,
+                        170,
+                        113,
+                        188,
+                        223,
+                        51,
+                        214,
+                        14,
+                        1,
+                        0,
+                        0,
+                        0,
+                    ]
+                },
+                "type": "ArrayProperty",
+            },
         }
