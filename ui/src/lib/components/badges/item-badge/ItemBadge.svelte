@@ -8,7 +8,7 @@
 	import { getModalState } from '$states';
 	import { ItemSelectModal } from '$components';
 	import { Progress } from '@skeletonlabs/skeleton-svelte';
-	import { Package } from 'lucide-svelte';
+	import { Package, Plus } from 'lucide-svelte';
 
 	let {
 		slot = $bindable<ItemContainerSlot>(),
@@ -26,6 +26,9 @@
 	let itemPopupHeaderClass: string = $state('');
 	let itemPopupTierClass: string = $state('');
 	let icon: string | undefined = $state('');
+	let rightClickIcon: string | undefined = $state('');
+	let middleClickIcon: string | undefined = $state('');
+	let ctrlIcon: string | undefined = $state('');
 	let dynamic: DynamicItemDetails | undefined = $state(undefined);
 	let palIcon: string | undefined = $state('');
 
@@ -72,6 +75,15 @@
 			default:
 				return 'bg-surface-900 text-gray-300 border-gray-500';
 		}
+	}
+
+	async function getStaticIcons() {
+		const rightClickIconPath = `${ASSET_DATA_PATH}/img/actions/right_click.svg`;
+		const middleClickIconPath = `${ASSET_DATA_PATH}/img/actions/middle_click.svg`;
+		const ctrlIconPath = `${ASSET_DATA_PATH}/img/actions/ctrl.svg`;
+		rightClickIcon = await assetLoader.loadSvg(rightClickIconPath);
+		middleClickIcon = await assetLoader.loadSvg(middleClickIconPath);
+		ctrlIcon = await assetLoader.loadSvg(ctrlIconPath);
 	}
 
 	async function getItemIcon(staticId: string) {
@@ -178,6 +190,10 @@
 	$effect(() => {
 		initItem(slot.static_id);
 	});
+
+	$effect(() => {
+		getStaticIcons();
+	});
 </script>
 
 <button
@@ -274,6 +290,46 @@
 					<div class="bg-surface-900 p-2 text-left">
 						<span class="whitespace-pre-line">{item?.info.description}</span>
 					</div>
+					<div class="bg-surface-900 p-2 text-sm">
+						<div class="flex justify-center space-x-8">
+							<div class="flex flex-col space-y-2">
+								<span class="text-xs font-bold">Copy</span>
+								<kbd class="keyboard-shortcut">
+									<div class="mb-3 h-6 w-6">
+										{@html rightClickIcon}
+									</div>
+								</kbd>
+							</div>
+							<div class=" flex flex-col space-y-2">
+								<span class="text-xs font-bold">Paste</span>
+								<div class="flex items-center space-x-2">
+									<kbd class="keyboard-shortcut">
+										{@html ctrlIcon}
+									</kbd>
+									<Plus class="h-4 w-4" />
+									<kbd class="keyboard-shortcut">
+										<div class="mb-3 h-6 w-6">
+											{@html rightClickIcon}
+										</div>
+									</kbd>
+								</div>
+							</div>
+							<div class=" flex flex-col space-y-2">
+								<span class="text-xs font-bold">Delete</span>
+								<div class="flex items-center space-x-2">
+									<kbd class="keyboard-shortcut">
+										{@html ctrlIcon}
+									</kbd>
+									<Plus class="h-4 w-4" />
+									<kbd class="keyboard-shortcut">
+										<div class="mb-2 h-6 w-6">
+											{@html middleClickIcon}
+										</div>
+									</kbd>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			{/snippet}
 		</Tooltip>
@@ -298,3 +354,9 @@
 		</Tooltip>
 	{/if}
 </button>
+
+<style lang="postcss">
+	.keyboard-shortcut {
+		@apply kbd flex h-10 w-10 items-center justify-center p-1;
+	}
+</style>
