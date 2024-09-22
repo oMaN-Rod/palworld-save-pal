@@ -73,12 +73,7 @@ if ($LASTEXITCODE -ne 0) {
 
 # Build the frontend
 Write-Host "Building the frontend..."
-if ($packageManager -eq 'bun') {
-    & $packageManager run build
-}
-else {
-    & $packageManager run build
-}
+& $packageManager run build
 
 if ($LASTEXITCODE -ne 0) {
     Write-Error "$packageManager run build failed. Exiting."

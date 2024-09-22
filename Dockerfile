@@ -12,5 +12,6 @@ COPY palworld_save_pal ./palworld_save_pal
 
 # Copy static files
 COPY build ./build
+COPY data ./data
 
 CMD ["python", "psp.py"]

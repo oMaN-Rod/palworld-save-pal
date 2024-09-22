@@ -7,6 +7,7 @@ services:
       - "5174:5174"
     volumes:
       - ./build:/app/build
+      - ./data:/app/data
       - ./palworld_save_pal:/app/palworld_save_pal
     environment:
       - PORT=5174
