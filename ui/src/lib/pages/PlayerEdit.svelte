@@ -222,7 +222,8 @@
 					appState.selectedPlayer.essential_container.slots.push(emptySlot);
 				} else {
 					if (slot.static_id.includes('AutoMealPouch_Tier')) {
-						foodSlotCount = parseInt(slot.static_id.slice(-1));
+						const foodCount = parseInt(slot.static_id.slice(-1));
+						foodSlotCount = foodCount > foodSlotCount ? foodCount : foodSlotCount;
 					}
 					containerSlots.push(slot);
 				}
