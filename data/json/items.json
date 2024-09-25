@@ -3632,7 +3632,12 @@
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Three_Shot_Bow"
+        "image": "Three_Shot_Bow",
+        "dynamic": {
+            "durability": 250,
+            "magazine_size": 1,
+            "type": "weapon"
+        }
     },
     "Cake": {
         "type": "Ingredient",
