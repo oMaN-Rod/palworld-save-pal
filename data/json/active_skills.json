@@ -657,7 +657,7 @@
 		"ct": 4
 	},
 	"EPalWazaID::SolarBeam": {
-		"type": "Electric",
+		"type": "Grass",
 		"power": 150,
 		"ct": 55
 	},
@@ -757,7 +757,7 @@
 		"power": 30,
 		"ct": 2
 	},
-	"EPalWazaID::WaterWave": {
+	"EPalWazaID::WallSplash": {
 		"type": "Water",
 		"power": 120,
 		"ct": 40

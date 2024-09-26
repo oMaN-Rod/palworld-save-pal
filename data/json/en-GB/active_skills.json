@@ -443,9 +443,9 @@
 		"name": "Wind Cutter",
 		"description": "Fires a high speed blade of wind that flies straight at an enemy."
 	},
-	"EPalWazaID::WaterWave": {
+	"EPalWazaID::WallSplash": {
 		"name": "Curtain Splash",
-		"description": "Continously creates walls made from water columns at the enemy's location."
+		"description": "Continuously creates walls made from water columns at the enemy's location."
 	},
 	"EPalWazaID::Unique_NightLady_FlameNightmare": {
 		"name": "Flame Waltz",
