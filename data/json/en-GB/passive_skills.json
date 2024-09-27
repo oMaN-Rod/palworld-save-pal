@@ -7,6 +7,10 @@
 		"name": "Serenity",
 		"description": "Active skill cooldown reduction 30% Attack +10% "
 	},
+	"CoolTimeReduction_Up_2": {
+		"name": "Impatient",
+		"description": "Active skill cooldown reduction 15%"
+	},
 	"ElementResist_Normal_1_PAL": {
 		"name": "Abnormal",
 		"description": "10% decreased to incoming Neutral damage."

@@ -15,6 +15,14 @@
 			"work_speed": 0
 		}
 	},
+	"CoolTimeReduction_Up_2": {
+		"tier": "C",
+		"bonuses": {
+			"attack": 0,
+			"defense": 0,
+			"work_speed": 0
+		}
+	},
 	"ElementResist_Normal_1_PAL": {
 		"tier": "C",
 		"bonuses": {
