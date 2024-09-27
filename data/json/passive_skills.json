@@ -527,6 +527,22 @@
 			"work_speed": 15
 		}
 	},
+	"SalePrice_Up_1": {
+		"tier": "A",
+		"bonuses": {
+			"attack": 0,
+			"defense": 0,
+			"work_speed": 0
+		}
+	},
+	"SalePrice_Up_2": {
+		"tier": "C",
+		"bonuses": {
+			"attack": 0,
+			"defense": 0,
+			"work_speed": 0
+		}
+	},
 	"Stamina_Up_1": {
 		"tier": "A",
 		"bonuses": {
