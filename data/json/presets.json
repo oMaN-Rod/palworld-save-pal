@@ -906,6 +906,66 @@
         "slot_index": 22,
         "count": 1,
         "static_id": "Blueprint_GuidedMissileLauncher_5"
+      },
+      {
+        "slot_index": 23,
+        "count": 0,
+        "static_id": "None"
+      },
+      {
+        "slot_index": 24,
+        "count": 1,
+        "static_id": "MultiGuidedMissileLauncher"
+      },
+      {
+        "slot_index": 25,
+        "count": 1,
+        "static_id": "MultiGuidedMissileLauncher_2"
+      },
+      {
+        "slot_index": 26,
+        "count": 1,
+        "static_id": "MultiGuidedMissileLauncher_3"
+      },
+      {
+        "slot_index": 27,
+        "count": 1,
+        "static_id": "MultiGuidedMissileLauncher_4"
+      },
+      {
+        "slot_index": 28,
+        "count": 1,
+        "static_id": "MultiGuidedMissileLauncher_5"
+      },
+      {
+        "slot_index": 29,
+        "count": 9999,
+        "static_id": "MissileBullet"
+      },
+      {
+        "slot_index": 30,
+        "count": 0,
+        "static_id": "None"
+      },
+      {
+        "slot_index": 31,
+        "count": 1,
+        "static_id": "Blueprint_MultiGuidedMissileLauncher_2"
+      },
+      {
+        "slot_index": 32,
+        "count": 1,
+        "static_id": "Blueprint_MultiGuidedMissileLauncher_3"
+      },
+      {
+        "slot_index": 33,
+        "count": 1,
+        "static_id": "Blueprint_MultiGuidedMissileLauncher_4"
+      },
+      {
+        "slot_index": 34,
+        "count": 1,
+        "static_id": "Blueprint_MultiGuidedMissileLauncher_5"
       }
     ]
   },

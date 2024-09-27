@@ -1151,6 +1151,22 @@
         "localized_name": "Makeshift Handgun Schematic +2",
         "description": ""
     },
+    "Blueprint_MultiGuidedMissileLauncher_2": {
+        "localized_name": "Multi-Guided Missile Launcher Schematic +1",
+        "description": ""
+    },
+    "Blueprint_MultiGuidedMissileLauncher_3": {
+        "localized_name": "Multi-Guided Missile Launcher Schematic +2",
+        "description": ""
+    },
+    "Blueprint_MultiGuidedMissileLauncher_4": {
+        "localized_name": "Multi-Guided Missile Launcher Schematic +3",
+        "description": ""
+    },
+    "Blueprint_MultiGuidedMissileLauncher_5": {
+        "localized_name": "Multi-Guided Missile Launcher Schematic +4",
+        "description": ""
+    },
     "Blueprint_Musket_2": {
         "localized_name": "Musket Schematic +1",
         "description": ""
@@ -3246,6 +3262,26 @@
     "MonsterEquipWeapon_Dummy": {
         "localized_name": "MonsterEquipWeapon_Dummy",
         "description": ""
+    },
+    "MultiGuidedMissileLauncher": {
+        "name": "Multi Guided Missile Launcher",
+        "descripttion": "A missile launcher that can hold multiple ammo at once. Fires a series of missiles that automatically track and follow enemies."
+    },
+    "MultiGuidedMissileLauncher_2": {
+        "name": "Multi Guided Missile Launcher +1",
+        "descripttion": "A missile launcher that can hold multiple ammo at once. Fires a series of missiles that automatically track and follow enemies."
+    },
+    "MultiGuidedMissileLauncher_3": {
+        "name": "Multi Guided Missile Launcher +2",
+        "descripttion": "A missile launcher that can hold multiple ammo at once. Fires a series of missiles that automatically track and follow enemies."
+    },
+    "MultiGuidedMissileLauncher_4": {
+        "name": "Multi Guided Missile Launcher +3",
+        "descripttion": "A missile launcher that can hold multiple ammo at once. Fires a series of missiles that automatically track and follow enemies."
+    },
+    "MultiGuidedMissileLauncher_5": {
+        "name": "Multi Guided Missile Launcher +4",
+        "descripttion": "A missile launcher that can hold multiple ammo at once. Fires a series of missiles that automatically track and follow enemies."
     },
     "MonsterFarm": {
         "localized_name": "MonsterFarm",

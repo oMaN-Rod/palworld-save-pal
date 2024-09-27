@@ -2939,6 +2939,46 @@
         "sell_price": 0,
         "image": "Schematic"
     },
+    "Blueprint_MultiGuidedMissileLauncher_2": {
+        "type": "Schematic",
+        "group": "Common",
+        "tier": "Uncommon",
+        "stack": 9999,
+        "weight": 0,
+        "buy_price": 0,
+        "sell_price": 0,
+        "image": "Schematic"
+    },
+    "Blueprint_MultiGuidedMissileLauncher_3": {
+        "type": "Schematic",
+        "group": "Common",
+        "tier": "Rare",
+        "stack": 9999,
+        "weight": 0,
+        "buy_price": 0,
+        "sell_price": 0,
+        "image": "Schematic"
+    },
+    "Blueprint_MultiGuidedMissileLauncher_4": {
+        "type": "Schematic",
+        "group": "Common",
+        "tier": "Epic",
+        "stack": 9999,
+        "weight": 0,
+        "buy_price": 0,
+        "sell_price": 0,
+        "image": "Schematic"
+    },
+    "Blueprint_MultiGuidedMissileLauncher_5": {
+        "type": "Schematic",
+        "group": "Common",
+        "tier": "Legendary",
+        "stack": 9999,
+        "weight": 0,
+        "buy_price": 0,
+        "sell_price": 0,
+        "image": "Schematic"
+    },
     "Blueprint_Musket_2": {
         "type": "Schematic",
         "group": "Common",
@@ -8600,6 +8640,81 @@
         "buy_price": 0,
         "sell_price": 0,
         "image": "CashScales"
+    },
+    "MultiGuidedMissileLauncher": {
+        "type": "Weapon",
+        "group": "Weapon",
+        "tier": "Common",
+        "stack": 1,
+        "weight": 0,
+        "buy_price": 0,
+        "sell_price": 0,
+        "dynamic": {
+            "durability": 300,
+            "magazine_size": 4,
+            "type": "weapon"
+        },
+        "image": "Multi_Guided_Missile_Launcher"
+    },
+    "MultiGuidedMissileLauncher_2": {
+        "type": "Weapon",
+        "group": "Weapon",
+        "tier": "Uncommon",
+        "stack": 1,
+        "weight": 0,
+        "buy_price": 0,
+        "sell_price": 0,
+        "dynamic": {
+            "durability": 360,
+            "magazine_size": 4,
+            "type": "weapon"
+        },
+        "image": "Multi_Guided_Missile_Launcher"
+    },
+    "MultiGuidedMissileLauncher_3": {
+        "type": "Weapon",
+        "group": "Weapon",
+        "tier": "Rare",
+        "stack": 1,
+        "weight": 0,
+        "buy_price": 0,
+        "sell_price": 0,
+        "dynamic": {
+            "durability": 390,
+            "magazine_size": 4,
+            "type": "weapon"
+        },
+        "image": "Multi_Guided_Missile_Launcher"
+    },
+    "MultiGuidedMissileLauncher_4": {
+        "type": "Weapon",
+        "group": "Weapon",
+        "tier": "Epic",
+        "stack": 1,
+        "weight": 0,
+        "buy_price": 0,
+        "sell_price": 0,
+        "dynamic": {
+            "durability": 420,
+            "magazine_size": 4,
+            "type": "weapon"
+        },
+        "image": "Multi_Guided_Missile_Launcher"
+    },
+    "MultiGuidedMissileLauncher_5": {
+        "type": "Weapon",
+        "group": "Weapon",
+        "tier": "Legendary",
+        "stack": 1,
+        "weight": 0,
+        "buy_price": 0,
+        "sell_price": 0,
+        "dynamic": {
+            "durability": 600,
+            "magazine_size": 4,
+            "type": "weapon"
+        },
+        "image": "Multi_Guided_Missile_Launcher"
     },
     "Mushroom": {
         "type": "Ingredient",
