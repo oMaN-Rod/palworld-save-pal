@@ -4458,5 +4458,395 @@
         "static_id": "PalSphere_Ultimate"
       }
     ]
+  },
+  "43369375-4c36-4b67-94d1-0bfe2abe47bf": {
+    "name": "Skill Fruits 1",
+    "common_container": [
+      {
+        "slot_index": 0,
+        "count": 1,
+        "static_id": "SkillCard_AcidRain"
+      },
+      {
+        "slot_index": 1,
+        "count": 1,
+        "static_id": "SkillCard_AirBlade"
+      },
+      {
+        "slot_index": 2,
+        "count": 1,
+        "static_id": "SkillCard_AirCanon"
+      },
+      {
+        "slot_index": 3,
+        "count": 1,
+        "static_id": "SkillCard_Apocalypse"
+      },
+      {
+        "slot_index": 4,
+        "count": 1,
+        "static_id": "SkillCard_AquaJet"
+      },
+      {
+        "slot_index": 5,
+        "count": 1,
+        "static_id": "SkillCard_BeamSlicer"
+      },
+      {
+        "slot_index": 6,
+        "count": 1,
+        "static_id": "SkillCard_BlastCanon"
+      },
+      {
+        "slot_index": 7,
+        "count": 1,
+        "static_id": "SkillCard_BlizzardLance"
+      },
+      {
+        "slot_index": 8,
+        "count": 1,
+        "static_id": "SkillCard_BubbleShot"
+      },
+      {
+        "slot_index": 9,
+        "count": 1,
+        "static_id": "SkillCard_Commet"
+      },
+      {
+        "slot_index": 10,
+        "count": 1,
+        "static_id": "SkillCard_DarkArrow"
+      },
+      {
+        "slot_index": 11,
+        "count": 1,
+        "static_id": "SkillCard_DarkCanon"
+      },
+      {
+        "slot_index": 12,
+        "count": 1,
+        "static_id": "SkillCard_DarkLaser"
+      },
+      {
+        "slot_index": 13,
+        "count": 1,
+        "static_id": "SkillCard_DarkPulse"
+      },
+      {
+        "slot_index": 14,
+        "count": 1,
+        "static_id": "SkillCard_DarkWave"
+      },
+      {
+        "slot_index": 15,
+        "count": 1,
+        "static_id": "SkillCard_DiamondFall"
+      },
+      {
+        "slot_index": 16,
+        "count": 1,
+        "static_id": "SkillCard_DragonBreath"
+      },
+      {
+        "slot_index": 17,
+        "count": 1,
+        "static_id": "SkillCard_DragonCanon"
+      },
+      {
+        "slot_index": 18,
+        "count": 1,
+        "static_id": "SkillCard_DragonMeteor"
+      },
+      {
+        "slot_index": 19,
+        "count": 1,
+        "static_id": "SkillCard_DragonWave"
+      },
+      {
+        "slot_index": 20,
+        "count": 1,
+        "static_id": "SkillCard_ElecWave"
+      },
+      {
+        "slot_index": 21,
+        "count": 1,
+        "static_id": "SkillCard_Eruption"
+      },
+      {
+        "slot_index": 22,
+        "count": 1,
+        "static_id": "SkillCard_FireBall"
+      },
+      {
+        "slot_index": 23,
+        "count": 1,
+        "static_id": "SkillCard_FireBlast"
+      },
+      {
+        "slot_index": 24,
+        "count": 1,
+        "static_id": "SkillCard_FireSeed"
+      },
+      {
+        "slot_index": 25,
+        "count": 1,
+        "static_id": "SkillCard_Flamethrower"
+      },
+      {
+        "slot_index": 26,
+        "count": 1,
+        "static_id": "SkillCard_FlameFunnel"
+      },
+      {
+        "slot_index": 27,
+        "count": 1,
+        "static_id": "SkillCard_FlameWall"
+      },
+      {
+        "slot_index": 28,
+        "count": 1,
+        "static_id": "SkillCard_FlareArrow"
+      },
+      {
+        "slot_index": 29,
+        "count": 1,
+        "static_id": "SkillCard_FlareTornado"
+      },
+      {
+        "slot_index": 30,
+        "count": 1,
+        "static_id": "SkillCard_FrostBreath"
+      },
+      {
+        "slot_index": 31,
+        "count": 1,
+        "static_id": "SkillCard_GhostFlame"
+      },
+      {
+        "slot_index": 32,
+        "count": 1,
+        "static_id": "SkillCard_GrassTornado"
+      },
+      {
+        "slot_index": 33,
+        "count": 1,
+        "static_id": "SkillCard_HolyBlast"
+      },
+      {
+        "slot_index": 34,
+        "count": 1,
+        "static_id": "SkillCard_HydroPump"
+      },
+      {
+        "slot_index": 35,
+        "count": 1,
+        "static_id": "SkillCard_HyperBeam"
+      },
+      {
+        "slot_index": 36,
+        "count": 1,
+        "static_id": "SkillCard_IceBlade"
+      },
+      {
+        "slot_index": 37,
+        "count": 1,
+        "static_id": "SkillCard_IceMissile"
+      },
+      {
+        "slot_index": 38,
+        "count": 1,
+        "static_id": "SkillCard_IcicleLine"
+      },
+      {
+        "slot_index": 39,
+        "count": 1,
+        "static_id": "SkillCard_IcicleThrow"
+      },
+      {
+        "slot_index": 40,
+        "count": 1,
+        "static_id": "SkillCard_Inferno"
+      },
+      {
+        "slot_index": 41,
+        "count": 1,
+        "static_id": "SkillCard_LightningStrike"
+      }
+    ]
+  },
+  "6d130fa1-585f-497e-b525-9ee40efc2d60": {
+    "name": "Skill Fruits 2",
+    "common_container": [
+      {
+        "slot_index": 0,
+        "count": 1,
+        "static_id": "SkillCard_LineGeyser"
+      },
+      {
+        "slot_index": 1,
+        "count": 1,
+        "static_id": "SkillCard_LineThunder"
+      },
+      {
+        "slot_index": 2,
+        "count": 1,
+        "static_id": "SkillCard_LockonLaser"
+      },
+      {
+        "slot_index": 3,
+        "count": 1,
+        "static_id": "SkillCard_MudShot"
+      },
+      {
+        "slot_index": 4,
+        "count": 1,
+        "static_id": "SkillCard_PoisonShot"
+      },
+      {
+        "slot_index": 5,
+        "count": 1,
+        "static_id": "SkillCard_PowerBall"
+      },
+      {
+        "slot_index": 6,
+        "count": 1,
+        "static_id": "SkillCard_PowerShot"
+      },
+      {
+        "slot_index": 7,
+        "count": 1,
+        "static_id": "SkillCard_Psychokinesis"
+      },
+      {
+        "slot_index": 8,
+        "count": 1,
+        "static_id": "SkillCard_RockLance"
+      },
+      {
+        "slot_index": 9,
+        "count": 1,
+        "static_id": "SkillCard_RootAttack"
+      },
+      {
+        "slot_index": 10,
+        "count": 1,
+        "static_id": "SkillCard_RootLance"
+      },
+      {
+        "slot_index": 11,
+        "count": 1,
+        "static_id": "SkillCard_SandTornado"
+      },
+      {
+        "slot_index": 12,
+        "count": 1,
+        "static_id": "SkillCard_SandTwister"
+      },
+      {
+        "slot_index": 13,
+        "count": 1,
+        "static_id": "SkillCard_SeedMachinegun"
+      },
+      {
+        "slot_index": 14,
+        "count": 1,
+        "static_id": "SkillCard_SeedMine"
+      },
+      {
+        "slot_index": 15,
+        "count": 1,
+        "static_id": "SkillCard_SelfDestruct"
+      },
+      {
+        "slot_index": 16,
+        "count": 1,
+        "static_id": "SkillCard_ShadowBall"
+      },
+      {
+        "slot_index": 17,
+        "count": 1,
+        "static_id": "SkillCard_SolarBeam"
+      },
+      {
+        "slot_index": 18,
+        "count": 1,
+        "static_id": "SkillCard_SpecialCutter"
+      },
+      {
+        "slot_index": 19,
+        "count": 1,
+        "static_id": "SkillCard_SpreadPulse"
+      },
+      {
+        "slot_index": 20,
+        "count": 1,
+        "static_id": "SkillCard_StoneShotgun"
+      },
+      {
+        "slot_index": 21,
+        "count": 1,
+        "static_id": "SkillCard_ThreeThunder"
+      },
+      {
+        "slot_index": 22,
+        "count": 1,
+        "static_id": "SkillCard_ThrowRock"
+      },
+      {
+        "slot_index": 23,
+        "count": 1,
+        "static_id": "SkillCard_ThunderBall"
+      },
+      {
+        "slot_index": 24,
+        "count": 1,
+        "static_id": "SkillCard_ThunderFunnel"
+      },
+      {
+        "slot_index": 25,
+        "count": 1,
+        "static_id": "SkillCard_ThunderRain"
+      },
+      {
+        "slot_index": 26,
+        "count": 1,
+        "static_id": "SkillCard_ThunderStorm"
+      },
+      {
+        "slot_index": 27,
+        "count": 1,
+        "static_id": "SkillCard_Thunderbolt"
+      },
+      {
+        "slot_index": 28,
+        "count": 1,
+        "static_id": "SkillCard_Tremor"
+      },
+      {
+        "slot_index": 29,
+        "count": 1,
+        "static_id": "SkillCard_TriSpark"
+      },
+      {
+        "slot_index": 30,
+        "count": 1,
+        "static_id": "SkillCard_WallSplash"
+      },
+      {
+        "slot_index": 31,
+        "count": 1,
+        "static_id": "SkillCard_WaterBall"
+      },
+      {
+        "slot_index": 32,
+        "count": 1,
+        "static_id": "SkillCard_WaterGun"
+      },
+      {
+        "slot_index": 33,
+        "count": 1,
+        "static_id": "SkillCard_WindCutter"
+      }
+    ]
   }
 }
