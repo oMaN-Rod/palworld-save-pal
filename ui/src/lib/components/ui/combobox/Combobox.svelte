@@ -196,7 +196,7 @@
 		{#if isOpen}
 			<div
 				id={listboxId}
-				class="bg-surface-800 border-surface-600 absolute left-0 right-0 z-10 mt-1 max-h-60 overflow-auto rounded-sm border shadow-lg"
+				class="bg-surface-800 border-surface-600 select-popup absolute left-0 right-0 mt-1 max-h-60 overflow-auto rounded-sm border shadow-lg"
 				role="listbox"
 			>
 				{#each filteredOptions as option}
@@ -227,3 +227,9 @@
 		{/if}
 	</div>
 </div>
+
+<style>
+	.select-popup {
+		z-index: 99999;
+	}
+</style>
