@@ -3981,6 +3981,31 @@
         "slot_index": 89,
         "count": 1,
         "static_id": "SkillUnlock_Yeti_Grass"
+      },
+      {
+        "slot_index": 90,
+        "count": 1,
+        "static_id": "SkillUnlock_HadesBird_Electric"
+      },
+      {
+        "slot_index": 91,
+        "count": 1,
+        "static_id": "SkillUnlock_MushroomDragon"
+      },
+      {
+        "slot_index": 92,
+        "count": 1,
+        "static_id": "SkillUnlock_SkyDragon_Grass"
+      },
+      {
+        "slot_index": 93,
+        "count": 1,
+        "static_id": "SkillUnlock_WeaselDragon_Fire"
+      },
+      {
+        "slot_index": 94,
+        "count": 1,
+        "static_id": "SkillUnlock_WhiteAlienDragon"
       }
     ]
   },
