@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Card, Tooltip, Combobox, List } from '$components/ui';
 	import type { ActiveSkill, SelectOption } from '$types';
-	import { Plus, Save, X, Trash, TimerReset } from 'lucide-svelte';
+	import { Plus, Save, X, Trash, TimerReset, Delete } from 'lucide-svelte';
 	import { activeSkillsData, elementsData } from '$lib/data';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { assetLoader } from '$utils';
@@ -148,7 +148,7 @@
 	<div class="mt-4 flex justify-end space-x-2">
 		<Tooltip position="bottom">
 			<button class="btn hover:bg-secondary-500/25 px-2" onclick={handleClear}>
-				<X />
+				<Delete />
 			</button>
 			{#snippet popup()}
 				<span>Clear</span>
