@@ -3,7 +3,7 @@
 	import type { ItemContainerSlot, DynamicItemDetails, Item, ItemGroup, Tier } from '$types';
 	import { assetLoader } from '$utils/asset-loader';
 	import { ASSET_DATA_PATH } from '$lib/constants';
-	import { itemsData, palsData } from '$lib/data';
+	import { itemsData, palsData, elementsData } from '$lib/data';
 	import { cn } from '$theme';
 	import { getModalState } from '$states';
 	import { ItemSelectModal } from '$components';
@@ -93,7 +93,12 @@
 			console.error(`Item data not found for static id: ${staticId}`);
 			return;
 		}
-		const iconPath = `${ASSET_DATA_PATH}/img/icons/${itemData.details.image}.png`;
+		let iconPath: string;
+		if (staticId.includes('SkillCard')) {
+			iconPath = `${ASSET_DATA_PATH}/img/elements/${itemData.details.image}.png`;
+		} else {
+			iconPath = `${ASSET_DATA_PATH}/img/icons/${itemData.details.image}.png`;
+		}
 		const icon = await assetLoader.loadImage(iconPath);
 		return icon;
 	}

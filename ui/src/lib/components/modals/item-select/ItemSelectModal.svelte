@@ -83,7 +83,13 @@
 			console.error(`Item data not found for static id: ${staticId}`);
 			return;
 		}
-		const iconPath = `${ASSET_DATA_PATH}/img/icons/${itemData.details.image}.png`;
+		let iconPath: string;
+		if (staticId.includes('SkillCard')) {
+			iconPath = `${ASSET_DATA_PATH}/img/elements/${itemData.details.image}.png`;
+		} else {
+			iconPath = `${ASSET_DATA_PATH}/img/icons/${itemData.details.image}.png`;
+		}
+
 		const icon = await assetLoader.loadImage(iconPath);
 		return icon;
 	}
