@@ -10259,632 +10259,762 @@
     "SkillCard_AcidRain": {
         "type": "Consumable",
         "group": "Common",
-        "tier": "Common",
+        "tier": "Uncommon",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Water_Skill_Fruit__Acid_Rain"
+        "image": "water/Water_Skill_Fruit_icon"
+    },
+    "SkillCard_AirBlade": {
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Uncommon",
+        "stack": 9999,
+        "weight": 0,
+        "buy_price": 0,
+        "sell_price": 0,
+        "image": "neutral/Neutral_Skill_Fruit_icon"
     },
     "SkillCard_AirCanon": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Uncommon",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Skill_Fruit__Air_Cannon"
+        "image": "neutral/Neutral_Skill_Fruit_icon"
     },
     "SkillCard_Apocalypse": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Epic",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "SkillCard_Apocalypse"
+        "image": "dark/Dark_Skill_Fruit_icon"
     },
     "SkillCard_AquaJet": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Uncommon",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Water_Skill_Fruit__Acid_Rain"
+        "image": "water/Water_Skill_Fruit_icon"
+    },
+    "SkillCard_BeamSlicer": {
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Epic",
+        "stack": 9999,
+        "weight": 0,
+        "buy_price": 0,
+        "sell_price": 0,
+        "image": "dragon/Dragon_Skill_Fruit_icon"
+    },
+    "SkillCard_BlastCanon": {
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Rare",
+        "stack": 9999,
+        "weight": 0,
+        "buy_price": 0,
+        "sell_price": 0,
+        "image": "dragon/Dragon_Skill_Fruit_icon"
     },
     "SkillCard_BlizzardLance": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Rare",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Ice_Skill_Fruit__Blizzard_Spike"
+        "image": "ice/Ice_Skill_Fruit_icon"
     },
     "SkillCard_BubbleShot": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Rare",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Water_Skill_Fruit__Acid_Rain"
+        "image": "water/Water_Skill_Fruit_icon"
+    },
+    "SkillCard_Commet": {
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Rare",
+        "stack": 9999,
+        "weight": 0,
+        "buy_price": 0,
+        "sell_price": 0,
+        "image": "dragon/Dragon_Skill_Fruit_icon"
+    },
+    "SkillCard_DarkArrow": {
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Rare",
+        "stack": 9999,
+        "weight": 0,
+        "buy_price": 0,
+        "sell_price": 0,
+        "image": "dark/Dark_Skill_Fruit_icon"
     },
     "SkillCard_DarkCanon": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Uncommon",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "SkillCard_DarkCanon"
+        "image": "dark/Dark_Skill_Fruit_icon"
     },
     "SkillCard_DarkLaser": {
         "type": "Consumable",
         "group": "Common",
-        "tier": "Common",
+        "tier": "Epic",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Dark_Skill_Fruit__Dark_Laser"
+        "image": "dark/Dark_Skill_Fruit_icon"
+    },
+    "SkillCard_DarkPulse": {
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Uncommon",
+        "stack": 9999,
+        "weight": 0,
+        "buy_price": 0,
+        "sell_price": 0,
+        "image": "dark/Dark_Skill_Fruit_icon"
     },
     "SkillCard_DarkWave": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Uncommon",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Dark_Skill_Fruit__Dark_Laser"
+        "image": "dark/Dark_Skill_Fruit_icon"
+    },
+    "SkillCard_DiamondFall": {
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Epic",
+        "stack": 9999,
+        "weight": 0,
+        "buy_price": 0,
+        "sell_price": 0,
+        "image": "ice/Ice_Skill_Fruit_icon"
     },
     "SkillCard_DragonBreath": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Rare",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Dragon_Skill_Fruit__Draconic_Breath"
+        "image": "dragon/Dragon_Skill_Fruit_icon"
     },
     "SkillCard_DragonCanon": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Uncommon",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Dragon_Skill_Fruit__Draconic_Breath"
+        "image": "dragon/Dragon_Skill_Fruit_icon"
     },
     "SkillCard_DragonMeteor": {
         "type": "Consumable",
         "group": "Common",
-        "tier": "Common",
+        "tier": "Epic",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Dragon_Skill_Fruit__Draconic_Breath"
+        "image": "dragon/Dragon_Skill_Fruit_icon"
     },
     "SkillCard_DragonWave": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Rare",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Dragon_Skill_Fruit__Draconic_Breath"
+        "image": "dragon/Dragon_Skill_Fruit_icon"
     },
     "SkillCard_ElecWave": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Uncommon",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Electric_Skill_Fruit__Electric_Ball"
+        "image": "electric/Electric_Skill_Fruit_icon"
     },
     "SkillCard_Eruption": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Epic",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "SkillCard_Eruption"
+        "image": "fire/Fire_Skill_Fruit_icon"
     },
     "SkillCard_FireBall": {
         "type": "Consumable",
         "group": "Common",
-        "tier": "Common",
+        "tier": "Epic",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Fire_Skill_Fruit__Fire_Ball"
+        "image": "fire/Fire_Skill_Fruit_icon"
     },
     "SkillCard_FireBlast": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Uncommon",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Fire_Skill_Fruit__Fire_Ball"
+        "image": "fire/Fire_Skill_Fruit_icon"
     },
     "SkillCard_FireSeed": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Uncommon",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Fire_Skill_Fruit__Fire_Ball"
+        "image": "fire/Fire_Skill_Fruit_icon"
     },
     "SkillCard_Flamethrower": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Rare",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Fire_Skill_Fruit__Fire_Ball"
+        "image": "fire/Fire_Skill_Fruit_icon"
+    },
+    "SkillCard_FlameFunnel": {
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Uncommon",
+        "stack": 9999,
+        "weight": 0,
+        "buy_price": 0,
+        "sell_price": 0,
+        "image": "fire/Fire_Skill_Fruit_icon"
+    },
+    "SkillCard_FlameWall": {
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Rare",
+        "stack": 9999,
+        "weight": 0,
+        "buy_price": 0,
+        "sell_price": 0,
+        "image": "fire/Fire_Skill_Fruit_icon"
     },
     "SkillCard_FlareArrow": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Uncommon",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Fire_Skill_Fruit__Fire_Ball"
+        "image": "fire/Fire_Skill_Fruit_icon"
     },
     "SkillCard_FlareTornado": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Rare",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Fire_Skill_Fruit__Fire_Ball"
+        "image": "fire/Fire_Skill_Fruit_icon"
     },
     "SkillCard_FrostBreath": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Rare",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Ice_Skill_Fruit__Blizzard_Spike"
+        "image": "ice/Ice_Skill_Fruit_icon"
     },
     "SkillCard_GhostFlame": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Uncommon",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Dark_Skill_Fruit__Dark_Laser"
+        "image": "dark/Dark_Skill_Fruit_icon"
     },
     "SkillCard_GrassTornado": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Rare",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Grass_Skill_Fruit__Grass_Tornado"
+        "image": "grass/Grass_Skill_Fruit_icon"
+    },
+    "SkillCard_HolyBlast": {
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Uncommon",
+        "stack": 9999,
+        "weight": 0,
+        "buy_price": 0,
+        "sell_price": 0,
+        "image": "neutral/Neutral_Skill_Fruit_icon"
     },
     "SkillCard_HydroPump": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Epic",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Water_Skill_Fruit__Acid_Rain"
+        "image": "water/Water_Skill_Fruit_icon"
     },
     "SkillCard_HyperBeam": {
         "type": "Consumable",
         "group": "Common",
-        "tier": "Common",
+        "tier": "Epic",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Skill_Fruit__Air_Cannon"
+        "image": "neutral/Neutral_Skill_Fruit_icon"
     },
     "SkillCard_IceBlade": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Uncommon",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Ice_Skill_Fruit__Blizzard_Spike"
+        "image": "ice/Ice_Skill_Fruit_icon"
     },
     "SkillCard_IceMissile": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Uncommon",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Ice_Skill_Fruit__Blizzard_Spike"
+        "image": "ice/Ice_Skill_Fruit_icon"
+    },
+    "SkillCard_IcicleLine": {
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Rare",
+        "stack": 9999,
+        "weight": 0,
+        "buy_price": 0,
+        "sell_price": 0,
+        "image": "ice/Ice_Skill_Fruit_icon"
     },
     "SkillCard_IcicleThrow": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Epic",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Ice_Skill_Fruit__Blizzard_Spike"
+        "image": "ice/Ice_Skill_Fruit_icon"
     },
     "SkillCard_Inferno": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Epic",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Fire_Skill_Fruit__Fire_Ball"
+        "image": "fire/Fire_Skill_Fruit_icon"
     },
     "SkillCard_LightningStrike": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Epic",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Electric_Skill_Fruit__Electric_Ball"
+        "image": "electric/Electric_Skill_Fruit_icon"
     },
     "SkillCard_LineGeyser": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Epic",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "SkillCard_LineGeyser"
+        "image": "water/Water_Skill_Fruit_icon"
     },
     "SkillCard_LineThunder": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Rare",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Electric_Skill_Fruit__Electric_Ball"
+        "image": "electric/Electric_Skill_Fruit_icon"
     },
     "SkillCard_LockonLaser": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Rare",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Electric_Skill_Fruit__Electric_Ball"
+        "image": "electric/Electric_Skill_Fruit_icon"
     },
     "SkillCard_MudShot": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Uncommon",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Earth_Skill_Fruit__Rock_Lance"
+        "image": "ground/Ground_Skill_Fruit_icon"
     },
     "SkillCard_PoisonShot": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Uncommon",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Dark_Skill_Fruit__Dark_Laser"
+        "image": "dark/Dark_Skill_Fruit_icon"
     },
     "SkillCard_PowerBall": {
         "type": "Consumable",
         "group": "Common",
-        "tier": "Common",
+        "tier": "Rare",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Skill_Fruit__Air_Cannon"
+        "image": "neutral/Neutral_Skill_Fruit_icon"
     },
     "SkillCard_PowerShot": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Uncommon",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Skill_Fruit__Air_Cannon"
+        "image": "neutral/Neutral_Skill_Fruit_icon"
     },
     "SkillCard_Psychokinesis": {
         "type": "Consumable",
         "group": "Common",
-        "tier": "Common",
+        "tier": "Epic",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Dark_Skill_Fruit__Dark_Laser"
+        "image": "dark/Dark_Skill_Fruit_icon"
     },
     "SkillCard_RockLance": {
         "type": "Consumable",
         "group": "Common",
-        "tier": "Common",
+        "tier": "Epic",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Earth_Skill_Fruit__Rock_Lance"
+        "image": "ground/Ground_Skill_Fruit_icon"
     },
     "SkillCard_RootAttack": {
         "type": "Consumable",
         "group": "Common",
-        "tier": "Common",
+        "tier": "Rare",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Grass_Skill_Fruit__Grass_Tornado"
+        "image": "grass/Grass_Skill_Fruit_icon"
     },
     "SkillCard_RootLance": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Rare",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "SkillCard_RootLance"
+        "image": "grass/Grass_Skill_Fruit_icon"
     },
     "SkillCard_SandTornado": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Rare",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Earth_Skill_Fruit__Rock_Lance"
+        "image": "ground/Ground_Skill_Fruit_icon"
     },
     "SkillCard_SandTwister": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Rare",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "SkillCard_SandTwister"
+        "image": "ground/Ground_Skill_Fruit_icon"
     },
     "SkillCard_SeedMachinegun": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Uncommon",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Grass_Skill_Fruit__Grass_Tornado"
+        "image": "grass/Grass_Skill_Fruit_icon"
     },
     "SkillCard_SeedMine": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Uncommon",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Grass_Skill_Fruit__Grass_Tornado"
+        "image": "grass/Grass_Skill_Fruit_icon"
     },
     "SkillCard_SelfDestruct": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Epic",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Skill_Fruit__Air_Cannon"
+        "image": "neutral/Neutral_Skill_Fruit_icon"
     },
     "SkillCard_ShadowBall": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Rare",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Dark_Skill_Fruit__Dark_Laser"
+        "image": "dark/Dark_Skill_Fruit_icon"
     },
     "SkillCard_SolarBeam": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Epic",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Grass_Skill_Fruit__Grass_Tornado"
+        "image": "grass/Grass_Skill_Fruit_icon"
+    },
+    "SkillCard_SpecialCutter": {
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Epic",
+        "stack": 9999,
+        "weight": 0,
+        "buy_price": 0,
+        "sell_price": 0,
+        "image": "grass/Grass_Skill_Fruit_icon"
     },
     "SkillCard_SpreadPulse": {
         "type": "Consumable",
         "group": "Common",
-        "tier": "Common",
+        "tier": "Uncommon",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Electric_Skill_Fruit__Electric_Ball"
+        "image": "electric/Electric_Skill_Fruit_icon"
     },
     "SkillCard_StoneShotgun": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Uncommon",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Earth_Skill_Fruit__Rock_Lance"
+        "image": "ground/Ground_Skill_Fruit_icon"
     },
     "SkillCard_ThreeThunder": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Rare",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Electric_Skill_Fruit__Electric_Ball"
+        "image": "electric/Electric_Skill_Fruit_icon"
     },
     "SkillCard_ThrowRock": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Uncommon",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Earth_Skill_Fruit__Rock_Lance"
+        "image": "ground/Ground_Skill_Fruit_icon"
     },
     "SkillCard_ThunderBall": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Uncommon",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Electric_Skill_Fruit__Electric_Ball"
+        "image": "electric/Electric_Skill_Fruit_icon"
     },
     "SkillCard_ThunderFunnel": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Uncommon",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Electric_Skill_Fruit__Electric_Ball"
+        "image": "electric/Electric_Skill_Fruit_icon"
     },
     "SkillCard_ThunderRain": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Epic",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "SkillCard_ThunderRain"
+        "image": "electric/Electric_Skill_Fruit_icon"
+    },
+    "SkillCard_ThunderStorm": {
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Epic",
+        "stack": 9999,
+        "weight": 0,
+        "buy_price": 0,
+        "sell_price": 0,
+        "image": "electric/Electric_Skill_Fruit_icon"
     },
     "SkillCard_Thunderbolt": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Epic",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Electric_Skill_Fruit__Electric_Ball"
+        "image": "electric/Electric_Skill_Fruit_icon"
     },
     "SkillCard_Tremor": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Epic",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "SkillCard_Tremor"
+        "image": "ground/Ground_Skill_Fruit_icon"
     },
     "SkillCard_TriSpark": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Rare",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "SkillCard_TriSpark"
+        "image": "electric/Electric_Skill_Fruit_icon"
     },
     "SkillCard_WallSplash": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Rare",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "SkillCard_WallSplash"
+        "image": "water/Water_Skill_Fruit_icon"
     },
     "SkillCard_WaterBall": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Rare",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Water_Skill_Fruit__Acid_Rain"
+        "image": "water/Water_Skill_Fruit_icon"
     },
     "SkillCard_WaterGun": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Uncommon",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Water_Skill_Fruit__Acid_Rain"
+        "image": "water/Water_Skill_Fruit_icon"
     },
     "SkillCard_WindCutter": {
-        "type": "Key Items",
-        "group": "KeyItem",
-        "tier": "Common",
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Uncommon",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
-        "image": "Grass_Skill_Fruit__Grass_Tornado"
+        "image": "grass/Grass_Skill_Fruit_icon"
     },
     "SkillUnlock_Alpaca": {
         "type": "Key Items",

@@ -3264,23 +3264,23 @@
         "description": ""
     },
     "MultiGuidedMissileLauncher": {
-        "name": "Multi Guided Missile Launcher",
+        "localized_name": "Multi Guided Missile Launcher",
         "descripttion": "A missile launcher that can hold multiple ammo at once. Fires a series of missiles that automatically track and follow enemies."
     },
     "MultiGuidedMissileLauncher_2": {
-        "name": "Multi Guided Missile Launcher +1",
+        "localized_name": "Multi Guided Missile Launcher +1",
         "descripttion": "A missile launcher that can hold multiple ammo at once. Fires a series of missiles that automatically track and follow enemies."
     },
     "MultiGuidedMissileLauncher_3": {
-        "name": "Multi Guided Missile Launcher +2",
+        "localized_name": "Multi Guided Missile Launcher +2",
         "descripttion": "A missile launcher that can hold multiple ammo at once. Fires a series of missiles that automatically track and follow enemies."
     },
     "MultiGuidedMissileLauncher_4": {
-        "name": "Multi Guided Missile Launcher +3",
+        "localized_name": "Multi Guided Missile Launcher +3",
         "descripttion": "A missile launcher that can hold multiple ammo at once. Fires a series of missiles that automatically track and follow enemies."
     },
     "MultiGuidedMissileLauncher_5": {
-        "name": "Multi Guided Missile Launcher +4",
+        "localized_name": "Multi Guided Missile Launcher +4",
         "descripttion": "A missile launcher that can hold multiple ammo at once. Fires a series of missiles that automatically track and follow enemies."
     },
     "MonsterFarm": {
@@ -3855,16 +3855,28 @@
         "localized_name": "Water Skill Fruit: Acid Rain",
         "description": ""
     },
+    "SkillCard_AirBlade": {
+        "localized_name": "Skill Fruit: Air Blade",
+        "description": ""
+    },
     "SkillCard_AirCanon": {
         "localized_name": "Skill Fruit: Air Cannon",
         "description": ""
     },
     "SkillCard_Apocalypse": {
-        "localized_name": "SkillCard_Apocalypse",
+        "localized_name": "Dark Skill Fruit: Apocalypse",
         "description": ""
     },
     "SkillCard_AquaJet": {
         "localized_name": "Water Skill Fruit: Hydro Jet",
+        "description": ""
+    },
+    "SkillCard_BeamSlicer": {
+        "localized_name": "Dragon Skill Fruit: Beam Slicer",
+        "description": ""
+    },
+    "SkillCard_BlastCanon": {
+        "localized_name": "Dragon Skill Fruit: Blast Cannon",
         "description": ""
     },
     "SkillCard_BlizzardLance": {
@@ -3875,16 +3887,32 @@
         "localized_name": "Water Skill Fruit: Bubble Blast",
         "description": ""
     },
+    "SkillCard_Commet": {
+        "localized_name": "Dragon Skill Fruit: Comet",
+        "description": ""
+    },
+    "SkillCard_DarkArrow": {
+        "localized_name": "Dark Skill Fruit: Dark Arrow",
+        "description": ""
+    },
     "SkillCard_DarkCanon": {
-        "localized_name": "SkillCard_DarkCanon",
+        "localized_name": "Dark Skill Fruit: Dark Cannon",
         "description": ""
     },
     "SkillCard_DarkLaser": {
         "localized_name": "Dark Skill Fruit: Dark Laser",
         "description": ""
     },
+    "SkillCard_DarkPulse": {
+        "localized_name": "Dark Skill Fruit: Umbral Surge",
+        "description": ""
+    },
     "SkillCard_DarkWave": {
         "localized_name": "Dark Skill Fruit: Shadow Burst",
+        "description": ""
+    },
+    "SkillCard_DiamondFall": {
+        "localized_name": "Ice Skill Fruit: Diamond Rain",
         "description": ""
     },
     "SkillCard_DragonBreath": {
@@ -3908,7 +3936,7 @@
         "description": ""
     },
     "SkillCard_Eruption": {
-        "localized_name": "SkillCard_Eruption",
+        "localized_name": "Fire Skill Fruit: Volcanic Rain",
         "description": ""
     },
     "SkillCard_FireBall": {
@@ -3925,6 +3953,14 @@
     },
     "SkillCard_Flamethrower": {
         "localized_name": "Fire Skill Fruit: Ignis Breath",
+        "description": ""
+    },
+    "SkillCard_FlameFunnel": {
+        "localized_name": "Fire Skill Fruit: Flame Funnel",
+        "description": ""
+    },
+    "SkillCard_FlameWall": {
+        "localized_name": "Fire Skill Fruit: Flame Wall",
         "description": ""
     },
     "SkillCard_FlareArrow": {
@@ -3947,6 +3983,10 @@
         "localized_name": "Grass Skill Fruit: Grass Tornado",
         "description": ""
     },
+    "SkillCard_HolyBlast": {
+        "localized_name": "Grass Skill Fruit: Holy Burst",
+        "description": ""
+    },
     "SkillCard_HydroPump": {
         "localized_name": "Water Skill Fruit: Hydro Laser",
         "description": ""
@@ -3963,6 +4003,10 @@
         "localized_name": "Ice Skill Fruit: Ice Missile",
         "description": ""
     },
+    "SkillCard_IcicleLine": {
+        "localized_name": "Ice Skill Fruit: Icicle Line",
+        "description": ""
+    },
     "SkillCard_IcicleThrow": {
         "localized_name": "Ice Skill Fruit: Blizzard Spike",
         "description": ""
@@ -3976,7 +4020,7 @@
         "description": ""
     },
     "SkillCard_LineGeyser": {
-        "localized_name": "SkillCard_LineGeyser",
+        "localized_name": "Water Skill Fruit: Splash",
         "description": ""
     },
     "SkillCard_LineThunder": {
@@ -4016,7 +4060,7 @@
         "description": ""
     },
     "SkillCard_RootLance": {
-        "localized_name": "SkillCard_RootLance",
+        "localized_name": "Grass Skill Fruit: Circle Vine",
         "description": ""
     },
     "SkillCard_SandTornado": {
@@ -4024,7 +4068,7 @@
         "description": ""
     },
     "SkillCard_SandTwister": {
-        "localized_name": "SkillCard_SandTwister",
+        "localized_name": "Earth Skill Fruit: Sand Twister",
         "description": ""
     },
     "SkillCard_SeedMachinegun": {
@@ -4045,6 +4089,10 @@
     },
     "SkillCard_SolarBeam": {
         "localized_name": "Grass Skill Fruit: Solar Blast",
+        "description": ""
+    },
+    "SkillCard_SpecialCutter": {
+        "localized_name": "Grass Skill Fruit: Multicutter",
         "description": ""
     },
     "SkillCard_SpreadPulse": {
@@ -4072,7 +4120,11 @@
         "description": ""
     },
     "SkillCard_ThunderRain": {
-        "localized_name": "SkillCard_ThunderRain",
+        "localized_name": "Electric Skill Fruit: Thunder Rain",
+        "description": ""
+    },
+    "SkillCard_ThunderStorm": {
+        "localized_name": "Electric Skill Fruit: Thunderstorm",
         "description": ""
     },
     "SkillCard_Thunderbolt": {
@@ -4080,15 +4132,15 @@
         "description": ""
     },
     "SkillCard_Tremor": {
-        "localized_name": "SkillCard_Tremor",
+        "localized_name": "Earth Skill Fruit: Rockburst",
         "description": ""
     },
     "SkillCard_TriSpark": {
-        "localized_name": "SkillCard_TriSpark",
+        "localized_name": "Electric Skill Fruit: TriSpark",
         "description": ""
     },
     "SkillCard_WallSplash": {
-        "localized_name": "SkillCard_WallSplash",
+        "localized_name": "Water Skill Fruit: Curtain Splash",
         "description": ""
     },
     "SkillCard_WaterBall": {
