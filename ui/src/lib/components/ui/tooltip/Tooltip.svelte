@@ -1,17 +1,6 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-	import {
-		autoUpdate,
-		offset,
-		flip,
-		arrow,
-		useFloating,
-		FloatingArrow,
-		useHover,
-		useInteractions,
-		useRole,
-		useDismiss
-	} from '@skeletonlabs/floating-ui-svelte';
+	import { computePosition, flip, shift, offset, arrow, type Placement } from '@floating-ui/dom';
 	import { cn } from '$theme';
 	import { getComputedColorHex } from '$utils';
 
@@ -30,57 +19,100 @@
 		rounded?: string;
 		popupClass?: string;
 		popup?: any;
-		position?: 'top' | 'bottom' | 'left' | 'right';
+		position?: Placement;
 		useArrow?: boolean;
 		children: any;
 	}>();
 
 	let open = $state(false);
-	let elemArrow: HTMLElement | null = $state(null);
+	let referenceEl: HTMLElement;
+	let floatingEl: HTMLElement | null = $state(null);
+	let arrowEl: HTMLElement | null = $state(null);
 	let floatingArrowColor = getComputedColorHex(`--${background.replace('bg', 'color')}`);
 
-	const floating = useFloating({
-		whileElementsMounted: autoUpdate,
-		get open() {
-			return open;
-		},
-		onOpenChange: (v) => (open = v),
-		placement: position,
-		get middleware() {
-			return [offset(10), flip(), elemArrow && arrow({ element: elemArrow })];
+	$effect(() => {
+		if (open && referenceEl && floatingEl) {
+			updatePosition();
 		}
 	});
 
-	const role = useRole(floating.context, { role: 'tooltip' });
-	const hover = useHover(floating.context, { move: false });
-	const dismiss = useDismiss(floating.context);
-	const interactions = useInteractions([role, hover, dismiss]);
+	async function updatePosition() {
+		if (referenceEl && floatingEl) {
+			const { x, y, placement, middlewareData } = await computePosition(referenceEl, floatingEl, {
+				placement: position,
+				middleware: [
+					offset(8),
+					flip(),
+					shift({ padding: 5 }),
+					arrow({ element: arrowEl as Element })
+				]
+			});
+
+			Object.assign(floatingEl.style, {
+				left: `${x}px`,
+				top: `${y}px`
+			});
+
+			if (useArrow && middlewareData.arrow) {
+				const { x: arrowX, y: arrowY } = middlewareData.arrow;
+				const staticSide = {
+					top: 'bottom',
+					right: 'left',
+					bottom: 'top',
+					left: 'right'
+				}[placement.split('-')[0]];
+
+				if (arrowEl) {
+					Object.assign(arrowEl.style, {
+						left: arrowX != null ? `${arrowX}px` : '',
+						top: arrowY != null ? `${arrowY}px` : '',
+						right: '',
+						bottom: '',
+						[staticSide as string]: '-4px'
+					});
+				}
+			}
+		}
+	}
 </script>
 
 <div
 	class={baseClass}
-	bind:this={floating.elements.reference}
-	{...interactions.getReferenceProps()}
+	bind:this={referenceEl}
+	onmouseenter={() => (open = true)}
+	onmouseleave={() => (open = false)}
+	onfocusin={() => (open = true)}
+	onfocusout={() => (open = false)}
+	role="tooltip"
 >
 	{@render children()}
 </div>
+
 {#if open}
 	<div
-		bind:this={floating.elements.floating}
-		style={floating.floatingStyles}
-		{...interactions.getFloatingProps()}
+		bind:this={floatingEl}
 		class={cn('floating tooltip-popup', background, popupClass, rounded)}
-		transition:fade={{ duration: 200 }}
+		transition:fade={{ duration: 100 }}
 	>
 		{@render popup()}
 		{#if useArrow}
-			<FloatingArrow bind:ref={elemArrow} context={floating.context} fill={floatingArrowColor} />
+			<div bind:this={arrowEl} class="tooltip-arrow" style:--arrow-color={floatingArrowColor}></div>
 		{/if}
 	</div>
 {/if}
 
 <style>
 	.tooltip-popup {
-		z-index: var(--tooltip-z-index, 2147483647) !important;
+		z-index: 99999;
+		position: fixed;
+		pointer-events: none;
+	}
+
+	.tooltip-arrow {
+		position: absolute;
+		width: 8px;
+		height: 8px;
+		background: var(--arrow-color);
+		transform: rotate(45deg);
 	}
 </style>
