@@ -219,6 +219,11 @@
 			"Garm"
 		]
 	},
+	"EPalWazaID::FlameFunnel": {
+		"type": "Fire",
+		"power": 120,
+		"ct": 40
+	},
 	"EPalWazaID::FireBall": {
 		"type": "Fire",
 		"power": 150,

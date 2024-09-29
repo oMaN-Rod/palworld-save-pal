@@ -131,6 +131,10 @@
 		"name": "Fierce Fang",
 		"description": "Swiftly leaps at an enemy and bites into them."
 	},
+	"EPalWazaID::FlameFunnel": {
+		"name": "Flame Funnel",
+		"description": "Creates multiple spheres of fiery energy, from which countless fireballs shoot towards the enemy."
+	},
 	"EPalWazaID::FireBall": {
 		"name": "Fire Ball",
 		"description": "Creates a giant ball of flame and hurls it at an enemy. The ball explodes over a wide area upon impact."
