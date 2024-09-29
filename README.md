@@ -179,7 +179,7 @@ Here's what's planned for future releases of Palworld Save Pal:
 - [X] Edit Health - Modified pals are automatically healed
 - [X] Edit Stomach - Modified pals are automatically healed
 - [X] Edit Level
-- [ ] Edit learned skills
+- [X] Edit learned skills
 - [X] Edit Rank
 - [X] Edit Souls
 - [X] Set/Unset Lucky
