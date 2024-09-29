@@ -13,6 +13,7 @@
 		itemClass: _itemClass = '',
 		headerClass: _headerClass = 'grid-cols-[auto_55px_auto_1fr_auto]',
 		multiple = true,
+		canSelect = true,
 		onlyHighlightChecked = false,
 		listItem,
 		listItemActions,
@@ -29,6 +30,7 @@
 		itemClass?: string;
 		headerClass?: string;
 		multiple?: boolean;
+		canSelect?: boolean;
 		onlyHighlightChecked?: boolean;
 		listItem: Snippet<[T]>;
 		listItemActions?: Snippet<[T]>;
@@ -93,7 +95,9 @@
 	function isSelected(item: any) {
 		return (
 			(JSON.stringify(item) == JSON.stringify(selectedItem) && !onlyHighlightChecked) ||
-			selectedItems.some((i: any) => JSON.stringify(i) == JSON.stringify(item))
+			(Array.isArray(selectedItems) &&
+				selectedItems.length > 0 &&
+				selectedItems.some((i: any) => JSON.stringify(i) == JSON.stringify(item)))
 		);
 	}
 </script>
@@ -101,18 +105,22 @@
 <div class={baseClass}>
 	<div class="bg-surface-900 sticky top-0 z-10 flex-shrink-0 p-2">
 		<div class={headerClass}>
-			<Checkbox bind:checked={selectAll} onchange={handleSelectAll} />
+			{#if canSelect}
+				<Checkbox checked={selectAll} onchange={handleSelectAll} class="mr-2" />
+			{/if}
 			{@render listHeader()}
 		</div>
 	</div>
 	<ul class={listClass}>
 		{#each items as item}
 			<li class={cn(itemClass, isSelected(item) ? 'bg-secondary-500/25' : '')}>
-				<Checkbox
-					checked={selectedItems.includes(item)}
-					onchange={(event) => handleCheckboxChange(item, event)}
-					class="mr-2"
-				/>
+				{#if canSelect}
+					<Checkbox
+						checked={isSelected(item)}
+						onchange={(event) => handleCheckboxChange(item, event)}
+						class="mr-2"
+					/>
+				{/if}
 				<Tooltip
 					background="bg-surface-700"
 					baseClass="flex w-full items-center text-left"

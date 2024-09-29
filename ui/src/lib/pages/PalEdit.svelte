@@ -7,7 +7,8 @@
 		WorkSuitabilities,
 		TextInputModal,
 		Spinner,
-		Talents
+		Talents,
+		LearnedSkillSelectModal
 	} from '$components';
 	import { CornerDotButton, SectionHeader, Tooltip } from '$components/ui';
 	import { EntryState, type Pal, PalGender } from '$types';
@@ -16,7 +17,7 @@
 	import { cn } from '$theme';
 	import { getAppState, getModalState } from '$states';
 	import { Rating } from '@skeletonlabs/skeleton-svelte';
-	import { Minus, Plus } from 'lucide-svelte';
+	import { Minus, Plus, Brain } from 'lucide-svelte';
 	import { Souls } from '$components';
 	import { getStats } from '$lib/data';
 
@@ -110,6 +111,18 @@
 		appState.selectedPal.state = EntryState.MODIFIED;
 		if (appState.selectedPlayer && appState.selectedPlayer.pals)
 			appState.selectedPlayer.pals[appState.selectedPal.instance_id].nickname = result;
+	}
+
+	async function handleEditLearnedSkills() {
+		if (!appState.selectedPal) return;
+		// @ts-ignore
+		const result = await modal.showModal<string[]>(LearnedSkillSelectModal, {
+			pal: appState.selectedPal
+		});
+		if (result) {
+			appState.selectedPal.learned_skills = result;
+			appState.selectedPal.state = EntryState.MODIFIED;
+		}
 	}
 
 	async function handleMaxOutPal() {
@@ -453,7 +466,23 @@
 			<div class="flex flex-grow">
 				<div class="flex-1 overflow-auto p-2">
 					<div class="flex flex-col space-y-2">
-						<SectionHeader text="Active Skills" />
+						<div class="flex flex-row">
+							<SectionHeader text="Active Skills">
+								{#snippet action()}
+									<Tooltip>
+										<button
+											class="btn hover:bg-secondary-500/25 ml-2 p-2"
+											onclick={handleEditLearnedSkills}
+										>
+											<Brain size={20} />
+										</button>
+										{#snippet popup()}
+											<span>Edit Learned Skills</span>
+										{/snippet}
+									</Tooltip>
+								{/snippet}
+							</SectionHeader>
+						</div>
 						{#each getActiveSkills(appState.selectedPal) as skill}
 							<ActiveSkillBadge
 								{skill}
