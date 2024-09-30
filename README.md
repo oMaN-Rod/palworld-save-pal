@@ -25,6 +25,7 @@ Palworld Save Pal is a tool for managing and analyzing save files.
     - [Map](#map)
   - [📜 License](#-license)
   - [➡️ Related Projects](#️-related-projects)
+  - [Buy me a coffee](#-buy-me-a-coffee)
 
 ## 🚀 Installation
 
@@ -210,3 +211,7 @@ These are projects I've found that specifically target PALWorld save files, each
 - [palworld-save-tools](https://github.com/cheahjs/palworld-save-tools) - PSP uses this tool for handling save files, can be used directly to convert to/from json.
 - [palworld-uesave-rs](https://github.com/DKingAlpha/palworld-uesave-rs) - I originally considered building this app using Tauri, opted for using Python, but this project was helpful.
 - [Palworld Pal Editor](https://github.com/KrisCris/Palworld-Pal-Editor) - Also served as a reference for Palworld Save Pal, adopted some of this projects approach.
+
+## Buy me a Coffee ☕
+
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://buymeacoffee.com/i_am_o)
