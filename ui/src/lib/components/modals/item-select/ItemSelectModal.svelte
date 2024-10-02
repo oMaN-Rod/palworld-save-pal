@@ -104,14 +104,14 @@
 		return itemData.details.tier;
 	}
 
-	function getItemType(staticId: string) {
+	function getItem(staticId: string) {
 		if (!staticId) return;
 		const itemData = items.find((item) => item.id === staticId);
 		if (!itemData) {
 			console.error(`Item data not found for static id: ${staticId}`);
 			return;
 		}
-		return itemData.details.type;
+		return itemData;
 	}
 
 	function getBackgroundColor(staticId: string) {
@@ -139,19 +139,19 @@
 
 {#snippet noIcon(itemType: ItemType | undefined)}
 	{#if itemType === 'Weapon'}
-		<Sword class="h-6 w-6"></Sword>
+		<Sword class="h-8 w-8"></Sword>
 	{:else if itemType === 'Armor'}
-		<Shield class="h-6 w-6"></Shield>
+		<Shield class="h-8 w-8"></Shield>
 	{:else if itemType === 'Schematic'}
-		<Scroll class="h-6 w-6"></Scroll>
+		<Scroll class="h-8 w-8"></Scroll>
 	{:else if itemType === 'Accessory'}
-		<Gem class="h-6 w-6"></Gem>
+		<Gem class="h-8 w-8"></Gem>
 	{:else if itemType === 'Material'}
-		<Cuboid class="h-6 w-6"></Cuboid>
+		<Cuboid class="h-8 w-8"></Cuboid>
 	{:else if itemType === 'Ingredient'}
-		<Apple class="h-6 w-6"></Apple>
+		<Apple class="h-8 w-8"></Apple>
 	{:else}
-		<Cuboid class="h-6 w-6"></Cuboid>
+		<Cuboid class="h-8 w-8"></Cuboid>
 	{/if}
 {/snippet}
 
@@ -161,8 +161,8 @@
 		<Combobox options={selectOptions} bind:value={itemId}>
 			{#snippet selectOption(option)}
 				{#await getItemIcon(option.value) then icon}
-					{@const itemType = getItemType(option.value)}
-					<div class="grid grid-cols-[auto_1fr_auto_auto]">
+					{@const item = getItem(option.value)}
+					<div class="grid grid-cols-[auto_1fr_auto] items-center gap-2">
 						{#if icon}
 							<div
 								class={cn(
@@ -170,7 +170,7 @@
 									getBackgroundColor(option.value)
 								)}
 							>
-								<enhanced:img src={icon} alt={option.label} class="h-6 w-6"></enhanced:img>
+								<enhanced:img src={icon} alt={option.label} class="h-8 w-8"></enhanced:img>
 							</div>
 						{:else}
 							<div
@@ -179,19 +179,24 @@
 									getBackgroundColor(option.value)
 								)}
 							>
-								{@render noIcon(itemType)}
+								{@render noIcon(item?.details.type)}
 							</div>
 						{/if}
-						<span class="h-6">{option.label}</span>
-						<span>{getItemTier(option.value)}</span>
+						<div class="flex flex-col">
+							<div class="flex space-x-4">
+								<span class="grow items-center">{option.label}</span>
+								<span class="text-xs">{getItemTier(option.value)}</span>
+							</div>
+
+							<span class="text-xs">{item?.info.description}</span>
+						</div>
 					</div>
 				{:catch}
 					<div class="grid grid-cols-[auto_1fr_auto]">
 						<div
 							class={cn('mr-2 flex items-center justify-center', getBackgroundColor(option.value))}
 						>
-							<!-- svelte-ignore element_invalid_self_closing_tag -->
-							{@render noIcon(getItemType(option.value))}
+							{@render noIcon(getItem(option.value)?.details.type)}
 						</div>
 						<span class="h-6">{option.label}</span>
 						<span>{getItemTier(option.value)}</span>
