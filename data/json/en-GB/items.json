@@ -3476,11 +3476,15 @@
         "description": ""
     },
     "PalSummon_KingBahamut_Dragon": {
-        "localized_name": "Blazamut Ryu's Slab",
-        "description": ""
+        "localized_name": "Blazamut Ryu Slab",
+        "description": "Slab depecting Blazamut Ryu.\nOffer to a Summoning Altar\nto summon a very powerful Lv 55 Blazamut Ryu."
+    },
+    "PalSummon_KingBahamut_Dragon_2": {
+        "localized_name": "Blazamut Ryu Ultra Slab",
+        "description": "Slab depecting Blazamut Ryu.\nOffer to a Summoning Altar\nto summon a inconcievably powerful Lv ?? Blazamut Ryu."
     },
     "PalSummon_KingBahamut_Dragon_Parts": {
-        "localized_name": "Blazamut Ryu's Slab Fragment",
+        "localized_name": "Blazamut Ryu Slab Fragment",
         "description": ""
     },
     "PalSummon_NightLady": {

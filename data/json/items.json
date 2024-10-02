@@ -9184,12 +9184,22 @@
     "PalSummon_KingBahamut_Dragon": {
         "type": "Consumable",
         "group": "Common",
-        "tier": "Legendary",
+        "tier": "Rare",
         "stack": 9999,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
         "image": "Blazamut_Ryu_Slab"
+    },
+    "PalSummon_KingBahamut_Dragon_2": {
+        "type": "Consumable",
+        "group": "Common",
+        "tier": "Legendary",
+        "stack": 9999,
+        "weight": 0,
+        "buy_price": 0,
+        "sell_price": 0,
+        "image": "Blazamut_Ryu_(Ultra)_Slab"
     },
     "PalSummon_KingBahamut_Dragon_Parts": {
         "type": "Consumable",
