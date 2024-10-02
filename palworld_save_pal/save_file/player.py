@@ -78,9 +78,7 @@ class Player(BaseModel):
         if not slot_idx:
             return
         existing_pal = self.pals[pal.instance_id]
-        nickname = (
-            f"[New] {pal.nickname}" if pal.nickname else f"[New] {pal.character_id}"
-        )
+        nickname = pal.nickname if pal.nickname else f"[New] {pal.character_id}"
         new_pal = existing_pal.clone(new_pal_id, slot_idx, nickname)
         self.pals[new_pal_id] = new_pal
         if self.guild:

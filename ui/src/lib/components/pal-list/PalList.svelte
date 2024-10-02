@@ -18,7 +18,7 @@
 		Trash,
 		X
 	} from 'lucide-svelte';
-	import { assetLoader, debounce } from '$utils';
+	import { assetLoader, debounce, deepCopy } from '$utils';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { getAppState, getSocketState, getModalState, getNavigationState } from '$states';
 	import { HealthBadge } from '$components';
@@ -218,12 +218,13 @@
 		const [selectedPal, nickname] = await modal.showModal<string>(PalSelectModal, {
 			title: 'Add a new Pal'
 		});
+		const palData = await palsData.getPalInfo(selectedPal);
 		const message = {
 			type: MessageType.ADD_PAL,
 			data: {
 				player_id: appState.selectedPlayer.uid,
 				pal_code_name: selectedPal,
-				nickname: nickname
+				nickname: nickname || `[New] ${palData?.localized_name}`
 			}
 		};
 		ws.send(JSON.stringify(message));
@@ -255,13 +256,17 @@
 		return genderIcons[gender];
 	}
 
-	async function cloneSelectedPal(event: Event) {
+	async function cloneSelectedPal() {
 		if (appState.selectedPlayer && appState.selectedPlayer.pals && selectedPal) {
 			const pal = appState.selectedPlayer.pals[selectedPal.id];
 			if (!pal) return;
+			const clonedPal = deepCopy(pal);
+			clonedPal.nickname = clonedPal.nickname
+				? `[Clone] ${clonedPal.nickname}`
+				: `[Clone] ${clonedPal.name}`;
 			const message = {
 				type: MessageType.CLONE_PAL,
-				data: pal
+				data: clonedPal
 			};
 			ws.send(JSON.stringify(message));
 		}

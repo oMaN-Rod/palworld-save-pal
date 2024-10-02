@@ -33,7 +33,9 @@
 							appState.selectedPal = pal;
 						}
 						loadPal();
+						nav.activeTab = 'pal';
 					}
+					break;
 				case MessageType.GET_PLAYERS:
 					appState.players = data;
 					const numOfPlayers = Object.keys(data).length;
