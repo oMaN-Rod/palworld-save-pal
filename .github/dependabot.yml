@@ -7,9 +7,6 @@ updates:
     schedule:
       interval: "monthly"
     target-branch: "main"
-    labels:
-      - "dependencies"
-      - "python"
 
   # Node.js dependencies for the Svelte frontend
   - package-ecosystem: "npm"
@@ -17,6 +14,3 @@ updates:
     schedule:
       interval: "monthly"
     target-branch: "main"
-    labels:
-      - "dependencies"
-      - "javascript"
