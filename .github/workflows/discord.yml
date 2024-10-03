@@ -2,7 +2,7 @@ on:
     release:
       types: [published]
   
-  jobs:
+jobs:
     github-releases-to-discord:
       runs-on: ubuntu-latest
       steps:
