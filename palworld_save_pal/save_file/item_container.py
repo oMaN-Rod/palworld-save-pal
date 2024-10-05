@@ -114,14 +114,12 @@ class ItemContainer(BaseModel):
         self.slots = []
         for slot in self._container_slots_data:
             raw_data = PalObjects.get_value(slot["RawData"])
-            slot_index = PalObjects.get_nested(raw_data, "permission", "type_a")
-            count = PalObjects.get_nested(raw_data, "permission", "type_b")
-            static_id = PalObjects.get_nested(raw_data, "permission", "item_static_id")
+            slot_index = PalObjects.get_nested(raw_data, "slot_index")
+            count = PalObjects.get_nested(raw_data, "count")
+            static_id = PalObjects.get_nested(raw_data, "static_id")
             local_id = PalObjects.as_uuid(
                 PalObjects.get_nested(
-                    slot,
-                    "RawData",
-                    "value",
+                    raw_data,
                     "local_id",
                 )
             )
@@ -147,7 +145,7 @@ class ItemContainer(BaseModel):
         logger.debug("%s (%s) => %s", self.type, self.id, slot_index)
         for slot in self._container_slots_data:
             raw_data = PalObjects.get_value(slot["RawData"])
-            current_slot_index = PalObjects.get_nested(raw_data, "permission", "type_a")
+            current_slot_index = PalObjects.get_nested(raw_data, "slot_index")
             if are_equal_uuids(current_slot_index, slot_index):
                 logger.debug("Removing slot %s", slot_index)
                 self._container_slots_data.remove(slot)
@@ -172,7 +170,7 @@ class ItemContainer(BaseModel):
                 s
                 for s in self._container_slots_data
                 if PalObjects.get_nested(
-                    PalObjects.get_value(s["RawData"]), "permission", "type_a"
+                    PalObjects.get_value(s["RawData"]), "slot_index"
                 )
                 == slot.slot_index
             ),
@@ -189,11 +187,9 @@ class ItemContainer(BaseModel):
         self, slot: ItemContainerSlot, slot_data: Dict[str, Any]
     ) -> None:
         raw_data = PalObjects.get_value(slot_data["RawData"])
-        PalObjects.set_nested(raw_data, "permission", "type_a", value=slot.slot_index)
-        PalObjects.set_nested(raw_data, "permission", "type_b", value=slot.count)
-        PalObjects.set_nested(
-            raw_data, "permission", "item_static_id", value=slot.static_id
-        )
+        PalObjects.set_nested(raw_data, "slot_index", value=slot.slot_index)
+        PalObjects.set_nested(raw_data, "count", value=slot.count)
+        PalObjects.set_nested(raw_data, "static_id", value=slot.static_id)
         PalObjects.set_nested(
             raw_data,
             "local_id",

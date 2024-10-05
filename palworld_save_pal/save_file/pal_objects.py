@@ -690,11 +690,9 @@ class PalObjects:
             "RawData": PalObjects.ArrayProperty(
                 ArrayType.BYTE_PROPERTY,
                 {
-                    "permission": {
-                        "type_a": container_slot.slot_index,
-                        "type_b": container_slot.count,
-                        "item_static_id": container_slot.static_id,
-                    },
+                    "slot_index": container_slot.slot_index,
+                    "count": container_slot.count,
+                    "static_id": container_slot.static_id,
                     "corruption_progress_value": 0.0,
                     "local_id": (
                         PalObjects.EMPTY_UUID

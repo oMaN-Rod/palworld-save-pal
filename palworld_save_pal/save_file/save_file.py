@@ -26,6 +26,10 @@ from palworld_save_pal.save_file.player import Player
 from palworld_save_pal.save_file.utils import (
     are_equal_uuids,
 )
+from palworld_save_pal.save_file.item_container_slot import (
+    encode as encode_item_container_slot,
+    decode as decode_item_container_slot,
+)
 
 logger = create_logger(__name__)
 
@@ -127,6 +131,11 @@ CUSTOM_PROPERTIES[".worldSaveData.DungeonPointMarkerSaveData"] = (
 CUSTOM_PROPERTIES[".worldSaveData.GameTimeSaveData"] = (skip_decode, skip_encode)
 CUSTOM_PROPERTIES[".worldSaveData.OilrigSaveData"] = (skip_decode, skip_encode)
 CUSTOM_PROPERTIES[".worldSaveData.SupplySaveData"] = (skip_decode, skip_encode)
+
+CUSTOM_PROPERTIES[".worldSaveData.ItemContainerSaveData.Value.Slots.Slots.RawData"] = (
+    decode_item_container_slot,
+    encode_item_container_slot,
+)
 
 
 class SaveFile(BaseModel):
