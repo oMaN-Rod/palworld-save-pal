@@ -23,10 +23,12 @@
 
 	async function loadSkillOptions() {
 		activeSkills = await activeSkillsData.getActiveSkills();
-		selectOptions = activeSkills.map((skill) => ({
-			value: skill.id,
-			label: skill.name
-		}));
+		selectOptions = activeSkills
+			.sort((a, b) => a.details.type.localeCompare(b.details.type))
+			.map((skill) => ({
+				value: skill.id,
+				label: skill.name
+			}));
 	}
 
 	async function getActiveSkillIcon(skillId: string): Promise<string | undefined> {
