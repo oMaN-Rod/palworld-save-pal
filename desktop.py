@@ -12,6 +12,7 @@ import argparse
 
 from palworld_save_pal.ws.manager import ConnectionManager
 from palworld_save_pal.utils.logging_config import create_logger, setup_logging
+from palworld_save_pal.__version__ import __version__
 
 logger = create_logger(__name__)
 
@@ -110,7 +111,7 @@ def start_webview(url, debug):
     logger.info("Starting webview with URL: %s", url)
     webview.settings["ALLOW_DOWNLOADS"] = True
     app_state.webview_window = webview.create_window(
-        "PALWorld Save Pal",
+        f"Palworld Save Pal v{__version__}",
         url,
         width=1366,
         height=768,
