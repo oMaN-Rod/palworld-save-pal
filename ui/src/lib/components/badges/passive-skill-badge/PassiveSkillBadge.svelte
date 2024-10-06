@@ -57,8 +57,14 @@
 
 {#snippet noSkill()}
 	<div class="flex w-full items-center">
-		<span class="flex-grow p-2 text-start">Empty</span>
-		<span class="mr-2">😞</span>
+		<span class="flex-grow p-2 text-start">
+			{skill}
+		</span>
+		{#if skill === 'Empty'}
+			<span class="mr-2">😞</span>
+		{:else}
+			<span class="mr-2">❓</span>
+		{/if}
 	</div>
 {/snippet}
 
