@@ -795,7 +795,7 @@
 		"power": 120,
 		"ct": 40
 	},
-	"EPalWazaID::Thunderstorm": {
+	"EPalWazaID::ThunderStorm": {
 		"type": "Electric",
 		"power": 160,
 		"ct": 60
@@ -868,5 +868,52 @@
 		"type": "Neutral",
 		"power": 120,
 		"ct": 30
+	},
+	"EPalWazaID::Commet": {
+		"type": "Dragon",
+		"power": 110,
+		"ct": 35
+	},
+	"EPalWazaID::RootLance": {
+		"type": "Grass",
+		"power": 120,
+		"ct": 40
+	},
+	"EPalWazaID::StarMine": {
+		"type": "Neutral",
+		"power": 110,
+		"ct": 55
+	},
+	"EPalWazaID::Unique_FeatherOstrich_Tossin": {
+		"type": "Ground",
+		"power": 100,
+		"ct": 21,
+		"exclusive": [
+			"FeatherOstrich"
+		]
+	},
+	"EPalWazaID::Unique_MoonQueen_MoonBeam": {
+		"type": "Neutral",
+		"power": 170,
+		"ct": 40,
+		"exclusive": [
+			"MoonQueen"
+		]
+	},
+	"EPalWazaID::Unique_MoonQueen_MoonBlade": {
+		"type": "Neutral",
+		"power": 110,
+		"ct": 24,
+		"exclusive": [
+			"MoonQueen"
+		]
+	},
+	"EPalWazaID::Unique_ScorpionMan_Uppercut": {
+		"type": "Dark",
+		"power": 110,
+		"ct": 24,
+		"exclusive": [
+			"ScorpionMan"
+		]
 	}
 }

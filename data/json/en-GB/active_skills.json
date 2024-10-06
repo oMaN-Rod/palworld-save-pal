@@ -499,7 +499,7 @@
 		"name": "Icicle Line",
 		"description": "Generates a pillar of ice that moves in a straight line."
 	},
-	"EPalWazaID::Thunderstorm": {
+	"EPalWazaID::ThunderStorm": {
 		"name": "Thunderstorm",
 		"description": "Generates a huge tornado of lightning that moves slowly towards the enemy."
 	},
@@ -546,5 +546,33 @@
 	"EPalWazaID::HolyBlast": {
 		"name": "Holy Burst",
 		"description": "Creates a wide explosion of light at the enemy's location and around it."
+	},
+	"EPalWazaID::Commet": {
+		"name": "Comet Strike",
+		"description": "Drops a meteorite straight down, generating a shock wave around the impact area."
+	},
+	"EPalWazaID::RootLance": {
+		"name": "Circle Vine",
+		"description": "Sprouts sharp roots in and around the enemy's location."
+	},
+	"EPalWazaID::StarMine": {
+		"name": "Star Mine",
+		"description": "Generates stars around the enemy that explode on contact. Stars also explode after some time."
+	},
+	"EPalWazaID::Unique_FeatherOstrich_Tossin": {
+		"name": "Earth Dash",
+		"description": "Dazemu's special skill. Accelerates all at once and rushes forward at high speed."
+	},
+	"EPalWazaID::Unique_MoonQueen_MoonBeam": {
+		"name": "Moonlight Beam",
+		"description": "Selyne's exclusive skill. Stores energy in the moon on its back, then fires a crescent-shaped beam forward."
+	},
+	"EPalWazaID::Unique_MoonQueen_MoonBlade": {
+		"name": "Seigetsu Blade",
+		"description": "Selyne's exclusive skill. Fires two consecutive high-speed blades imbued with the power of moonlight."
+	},
+	"EPalWazaID::Unique_ScorpionMan_Uppercut": {
+		"name": "Upper Smash",
+		"description": "Prixter's exclusive skill. Closes the distance to the enemy at high speed, then attacks decisively with its pincers."
 	}
 }
