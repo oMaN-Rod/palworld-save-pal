@@ -3,6 +3,10 @@
 		"name": "Otherworldly Cells",
 		"description": "Attack +10%; -15% damage received from Fire and Lightning damage"
 	},
+	"CoolTimeReduction_Down_1": {
+		"name": "Easygoing",
+		"description": "Active skill cooldown extension -15%"
+	},
 	"CoolTimeReduction_Up_1": {
 		"name": "Serenity",
 		"description": "Active skill cooldown reduction 30% Attack +10% "
@@ -118,6 +122,10 @@
 	"ElementBoost_Aqua_2_PAL": {
 		"name": "Lord of the Sea",
 		"description": "20% increase to Water attack damage."
+	},
+	"EternalFlame": {
+		"name": "Eternal Flame",
+		"description": "30% increase to Fire attack damage.\n30% increase to Lightning attack damage."
 	},
 	"PAL_ALLAttack_up1": {
 		"name": "Brave",
@@ -263,6 +271,10 @@
 		"name": "Lucky",
 		"description": "Work Speed +15%, Attack +15%"
 	},
+	"SalePrice_Down_1": {
+		"name": "Shabby",
+		"description": "Sale price -10%"
+	},
 	"SalePrice_Up_1": {
 		"name": "Noble",
 		"description": "Increases the value of items when sold by +5%"
@@ -271,9 +283,17 @@
 		"name": "Fine Furs",
 		"description": "Increases the value of items when sold by +3%"
 	},
+	"Stamina_Down_1": {
+		"name": "Sickly",
+		"description": "Max Stamina -25% (This effect is only valid for rideable pals.)"
+	},
 	"Stamina_Up_1": {
 		"name": "Infinite Stamina",
 		"description": "Max Stamina +50% (This effect is only valid for rideable pals.)"
+	},
+	"Stamina_Up_2": {
+		"name": "Fit as a Fiddle",
+		"description": "Max Stamina +25% (This effect is only valid for rideable pals.)"
 	},
 	"Legend": {
 		"name": "Legend",
@@ -290,5 +310,9 @@
 	"Nocturnal": {
 		"name": "Nocturnal",
 		"description": "The Pal does not sleep at night and continues to work. "
+	},
+	"Test_PalEgg_HatchingSpeed_Up": {
+		"name": "Philanthropist",
+		"description": "When assigned to a Breeding Farm, breeding speed is increased by 100%."
 	}
 }

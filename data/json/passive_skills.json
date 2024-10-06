@@ -7,6 +7,14 @@
 			"work_speed": 0
 		}
 	},
+	"CoolTimeReduction_Down_1": {
+		"tier": "X",
+		"bonuses": {
+			"attack": 0,
+			"defense": 0,
+			"work_speed": 0
+		}
+	},
 	"CoolTimeReduction_Up_1": {
 		"tier": "A",
 		"bonuses": {
@@ -235,6 +243,14 @@
 		"tier": "A",
 		"bonuses": {
 			"attack": 20,
+			"defense": 0,
+			"work_speed": 0
+		}
+	},
+	"EternalFlame": {
+		"tier": "A",
+		"bonuses": {
+			"attack": 30,
 			"defense": 0,
 			"work_speed": 0
 		}
@@ -527,6 +543,14 @@
 			"work_speed": 15
 		}
 	},
+	"SalePrice_Down_1": {
+		"tier": "X",
+		"bonuses": {
+			"attack": 0,
+			"defense": 0,
+			"work_speed": 0
+		}
+	},
 	"SalePrice_Up_1": {
 		"tier": "A",
 		"bonuses": {
@@ -543,8 +567,24 @@
 			"work_speed": 0
 		}
 	},
+	"Stamina_Down_1": {
+		"tier": "X",
+		"bonuses": {
+			"attack": 0,
+			"defense": 0,
+			"work_speed": 0
+		}
+	},
 	"Stamina_Up_1": {
 		"tier": "A",
+		"bonuses": {
+			"attack": 0,
+			"defense": 0,
+			"work_speed": 0
+		}
+	},
+	"Stamina_Up_2": {
+		"tier": "C",
 		"bonuses": {
 			"attack": 0,
 			"defense": 0,
@@ -577,6 +617,14 @@
 	},
 	"Nocturnal": {
 		"tier": "C",
+		"bonuses": {
+			"attack": 0,
+			"defense": 0,
+			"work_speed": 0
+		}
+	},
+	"Test_PalEgg_HatchingSpeed_Up": {
+		"tier": "A",
 		"bonuses": {
 			"attack": 0,
 			"defense": 0,
