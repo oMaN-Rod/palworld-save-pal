@@ -1,6 +1,6 @@
 <script lang="ts">
-	import PalEdit from './PalEdit.svelte';
-	import PlayerEdit from './PlayerEdit.svelte';
+	import PalEdit from './components/PalEdit.svelte';
+	import PlayerEdit from './components/PlayerEdit.svelte';
 
 	import { Drawer, PlayerList, PalList } from '$components';
 	import { Tooltip } from '$components/ui';
@@ -8,6 +8,7 @@
 	import { SaveAll } from 'lucide-svelte';
 	import { getAppState, getSocketState, getNavigationState } from '$states';
 	import { Tabs } from '@skeletonlabs/skeleton-svelte';
+	import { goto } from '$app/navigation';
 
 	const appState = getAppState();
 	const ws = getSocketState();
@@ -59,6 +60,19 @@
 		ws.message = { type: MessageType.PROGRESS_MESSAGE, data: `Updating modified ${entityMessage}` };
 		nav.activePage = 'loading';
 	}
+
+	$effect(() => {
+		if (ws.message && ws.message.type) {
+			const { data, type } = ws.message;
+			switch (type) {
+				case MessageType.GET_PLAYERS:
+					console.log('Players loaded', data);
+					appState.players = data;
+					ws.clear(type);
+					break;
+			}
+		}
+	});
 </script>
 
 <div class="flex h-full w-full overflow-hidden">

@@ -4,6 +4,7 @@
 	import { MessageType } from '$types';
 	import { getAppState, getNavigationState, getToastState } from '$states';
 	import { Download } from 'lucide-svelte';
+	import { goto } from '$app/navigation';
 
 	let appState = getAppState();
 	const ws = getSocketState();
@@ -14,8 +15,8 @@
 
 	function handleOnUpload() {
 		if (!files) return;
+		goto('/loading');
 		appState.resetState();
-		nav.activePage = 'loading';
 		ws.message = { type: MessageType.PROGRESS_MESSAGE, data: 'Uploading zip file 🚀...' };
 		const reader = new FileReader();
 		reader.onload = function () {

@@ -9,8 +9,15 @@
 		passiveSkillsData,
 		presetsData
 	} from '$lib/data';
+	import { getNavigationState, getSocketState, getAppState, getToastState } from '$states';
+	import { MessageType } from '$types';
+	import { error, fail } from '@sveltejs/kit';
+	import { goto } from '$app/navigation';
 
 	const { children } = $props();
+
+	const ws = getSocketState();
+	const appState = getAppState();
 
 	$effect(() => {
 		const loadData = async () => {
@@ -22,6 +29,67 @@
 			await presetsData.getAllPresets();
 		};
 		loadData();
+	});
+
+	$effect(() => {
+		if (ws.message && ws.message.type) {
+			const { data, type } = ws.message;
+			switch (type) {
+				case MessageType.ADD_PAL:
+					const { player_id, pal } = data;
+					if (appState.players && appState.players[player_id] && appState.players[player_id].pals) {
+						async function loadPal() {
+							const palInfo = await palsData.getPalInfo(pal.character_id);
+							pal.name = palInfo?.localized_name || pal.character_id;
+							pal.elements = palInfo?.type || [];
+							// @ts-ignore
+							appState.players[player_id].pals[pal.instance_id] = pal;
+							appState.selectedPal = pal;
+						}
+						loadPal();
+					}
+					ws.clear(type);
+					break;
+				case MessageType.LOAD_ZIP_FILE:
+				case MessageType.LOAD_SAVE_FILE:
+					const file = data as { name: string; size: number };
+					appState.saveFile = file;
+					ws.clear(type);
+					goto('/edit');
+					break;
+				case MessageType.DOWNLOAD_SAVE_FILE:
+					console.log('Download save file', data);
+					const { name, content } = data as { name: string; content: string };
+
+					// Decode the base64 string
+					const binaryString = atob(content);
+					const len = binaryString.length;
+					const bytes = new Uint8Array(len);
+					for (let i = 0; i < len; i++) {
+						bytes[i] = binaryString.charCodeAt(i);
+					}
+
+					// Create blob from the decoded data
+					const blob = new Blob([bytes], { type: 'application/octet-stream' });
+					const url = URL.createObjectURL(blob);
+					const a = document.createElement('a');
+					a.href = url;
+					a.download = name;
+					a.click();
+					URL.revokeObjectURL(url);
+
+					ws.clear(type);
+					break;
+				case MessageType.ERROR:
+					console.error('Error wtf', data);
+					goto('/error', {
+						state: {
+							status: 404,
+							error: { message: data }
+						}
+					});
+			}
+		}
 	});
 </script>
 

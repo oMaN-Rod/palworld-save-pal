@@ -432,7 +432,7 @@
 						<div class="max-h-[500px] overflow-auto">
 							<div class="grid grid-cols-6 gap-2">
 								{#each Object.values(essentialContainer.slots) as _, index}
-									<ItemBadge bind:slot={essentialContainer.slots[index]} itemGroup="KeyItem" />
+									<ItemBadge bind:slot={essentialContainer.slots[index]} itemGroup="Essential" />
 								{/each}
 							</div>
 						</div>
