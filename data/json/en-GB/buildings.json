@@ -1,0 +1,1010 @@
+{
+  "FarmBlockV2_wheet": {
+    "localized_name": "Wheat Plantation",
+    "description": "A farm that can grow Wheat.\r\nIt requires an average amount of time to harvest.\r\nRequires a few Pals to plant seeds, water, and harvest crops."
+  },
+  "FarmBlockV2_tomato": {
+    "localized_name": "Tomato Plantation",
+    "description": "A farm that can grow Tomato.\r\nThey take time to harvest, but increase the variety of meals you can prepare.\r\nRequires a few Pals to plant seeds, water, and harvest the crops."
+  },
+  "FarmBlockV2_Lettuce": {
+    "localized_name": "Lettuce Plantation",
+    "description": "A farm that can grow Lettuce.\r\nIt takes time to harvest, but increases the variety of meals you can prepare.\r\nRequires a few Pals to plant seeds, water, and harvest the crops."
+  },
+  "FarmBlockV2_Berries": {
+    "localized_name": "Berry Plantation",
+    "description": "A farm that can grow Red Berries.\r\nHarvest time is quick, but eating them doesn't provide much sustenance.\r\nRequires a few Pals to plant seeds, water, and harvest the crops."
+  },
+  "PalFoodBox": {
+    "localized_name": "Feed Box",
+    "description": "A box for storing Pal food.\r\nPals can feed from it when hungry.\r\nMake sure to keep it well-stocked to keep your Pals happy."
+  },
+  "Wooden_foundation": {
+    "localized_name": "Wooden Foundation",
+    "description": "A foundation for building walls or facilities on.\r\nMade from wood, it breaks easily."
+  },
+  "Wooden_wall": {
+    "localized_name": "Wooden Wall",
+    "description": "Walls built on foundations for keeping out intruders.\r\nMade from wood, it breaks easily."
+  },
+  "Wood_WindowWall": {
+    "localized_name": "Wooden Wall and Window",
+    "description": "Wall built on a foundation for keeping out intruders. Includes a window.\r\nMade from wood, it breaks easily."
+  },
+  "Wood_TriangleWall": {
+    "localized_name": "Wooden Triangular Wall",
+    "description": "Triangular wall built on a foundation for keeping out intruders.\r\nMade from wood, it breaks easily."
+  },
+  "Wooden_roof": {
+    "localized_name": "Wooden Roof",
+    "description": "A roof built on top of walls to keep out the rain and wind.\r\nMade from wood, it breaks easily."
+  },
+  "Wood_SlantedRoof": {
+    "localized_name": "Wooden Slanted Roof",
+    "description": "Slanted roof built on top of walls to keep out the rain and wind.\r\nMade from wood, it breaks easily."
+  },
+  "Wooden_stair": {
+    "localized_name": "Wooden Stairs",
+    "description": "Stairs placed below a foundation or roof for climbing up.\r\nMade from wood, it breaks easily."
+  },
+  "Wooden_DoorWall": {
+    "localized_name": "Wooden Door",
+    "description": "Door built on a foundation. Becomes an entrance.\r\nMade from wood, it breaks easily."
+  },
+  "Wooden_pillar": {},
+  "DefenseWall_Wood": {
+    "localized_name": "Wooden Defensive Wall",
+    "description": "Massive defensive wall to prevent enemy intrusions.\r\nMade from wood, it breaks easily."
+  },
+  "Wood_Gate": {
+    "localized_name": "Wooden Gate",
+    "description": "Gate large enough for big Pals to pass through.\r\nMade from wood, it breaks easily."
+  },
+  "Stone_foundation": {
+    "localized_name": "Stone Foundation",
+    "description": "A foundation for building walls or facilities on.\r\nMade from stone, it is reasonably sturdy."
+  },
+  "Stone_wall": {
+    "localized_name": "Stone Wall",
+    "description": "Walls built on foundations for keeping out intruders.\r\nMade from stone, it is reasonably sturdy."
+  },
+  "Stone_WindowWall": {
+    "localized_name": "Stone Wall and Window",
+    "description": "Wall built on a foundation for keeping out intruders. Includes a window.\r\nMade from stone, it is reasonably sturdy."
+  },
+  "Stone_TriangleWall": {
+    "localized_name": "Stone Triangular Wall",
+    "description": "Triangular wall built on a foundation for keeping out intruders.\r\nMade from stone, it is reasonably sturdy."
+  },
+  "Stone_roof": {
+    "localized_name": "Stone Roof",
+    "description": "A roof built on top of walls to keep out the rain and wind.\r\nMade from stone, it is reasonably sturdy."
+  },
+  "Stone_SlantedRoof": {
+    "localized_name": "Stone Slanted Roof",
+    "description": "Slanted roof built on top of walls to keep out the rain and wind.\r\nMade from stone, it is reasonably sturdy."
+  },
+  "Stone_stair": {
+    "localized_name": "Stone Stairs",
+    "description": "Stairs placed below a foundation or roof for climbing up.\r\nMade from stone, it is reasonably sturdy."
+  },
+  "Stone_DoorWall": {
+    "localized_name": "Stone Door",
+    "description": "Door built on a foundation. Becomes an entrance.\r\nMade from stone, it is reasonably sturdy."
+  },
+  "Stone_pillar": {},
+  "DefenseWall": {
+    "localized_name": "Defensive Wall",
+    "description": "Massive defensive wall to prevent enemy intrusions.\r\nMade from stone, it is reasonably sturdy."
+  },
+  "Stone_Gate": {
+    "localized_name": "Stone Gate",
+    "description": "Gate large enough for big Pals to pass through.\r\nMade from stone, it is reasonably sturdy."
+  },
+  "Metal_foundation": {
+    "localized_name": "Metal Foundation",
+    "description": "A foundation for building walls or facilities on.\r\nMade from metal, it is extremely durable."
+  },
+  "Metal_wall": {
+    "localized_name": "Metal Wall",
+    "description": "Walls built on foundations for keeping out intruders.\r\nMade from metal, it is extremely durable."
+  },
+  "Metal_WindowWall": {
+    "localized_name": "Metal Wall and Window",
+    "description": "Wall built on a foundation for keeping out intruders. Includes a window.\r\nMade from metal, it is extremely durable."
+  },
+  "Metal_TriangleWall": {
+    "localized_name": "Metal Triangular Wall",
+    "description": "Triangular wall built on a foundation for keeping out intruders.\r\nMade from metal, it is extremely durable."
+  },
+  "Metal_roof": {
+    "localized_name": "Metal Roof",
+    "description": "A roof built on top of walls to keep out the rain and wind.\r\nMade from metal, it is extremely durable."
+  },
+  "Metal_SlantedRoof": {
+    "localized_name": "Metal Slanted Roof",
+    "description": "Slanted roof built on top of walls to keep out the rain and wind.\r\nMade from metal, it is extremely durable."
+  },
+  "Metal_stair": {
+    "localized_name": "Metal Stairs",
+    "description": "Stairs placed below a foundation or roof for climbing up.\r\nMade from metal, it is extremely durable."
+  },
+  "Metal_DoorWall": {
+    "localized_name": "Metal Door",
+    "description": "Door built on a foundation. Becomes an entrance.\r\nMade from metal, it is extremely durable."
+  },
+  "Metal_pillars": {},
+  "DefenseWall_Metal": {
+    "localized_name": "Metal Defensive Wall",
+    "description": "Massive defensive wall to prevent enemy intrusions.\r\nMade from metal, it is extremely durable."
+  },
+  "Metal_Gate": {
+    "localized_name": "Iron Gate",
+    "description": "Gate large enough for big Pals to pass through.\r\nMade from metal, it is extremely durable."
+  },
+  "DefenseBowGun": {
+    "localized_name": "Mounted Crossbow",
+    "description": "Deploy a Pal to operate this defensive installation.\r\nRequires Arrow to use.\r\nPlace ammo in the chest, and the deployed Pal will automatically load the weapon."
+  },
+  "DefenseMachinegun": {
+    "localized_name": "Mounted Machine Gun",
+    "description": "Deploy a Pal to operate this defensive installation.\r\nRequires Rifle Ammo to use.\r\nPlace ammo in the chest, and the deployed Pal will automatically load the weapon."
+  },
+  "DefenseMissile": {
+    "localized_name": "Mounted Missile Launcher",
+    "description": "Deploy a Pal to operate this defensive installation.\r\nRequires Rocket Ammo to use.\r\nPlace ammo in the chest, and the deployed Pal will automatically load the weapon."
+  },
+  "DefenseWait": {
+    "localized_name": "Sandbag",
+    "description": "Defensive installation to protect a base from enemies.\r\nPlace a Pal and it will ignore other work\r\nto stay on lookout and prepare for combat."
+  },
+  "ElectricGenerator": {
+    "localized_name": "Power Generator",
+    "description": "A power generator fueled by Electric Pals.\r\nElectric equipment won't run without this."
+  },
+  "FastTravelPoint": {
+    "localized_name": "Great Eagle Statue",
+    "description": "A stone monument in the shape of a <characterName id=|ChickenPal|/>.\r\nAllows fast travel to the location where it is placed."
+  },
+  "ItemChest": {
+    "localized_name": "Wooden Chest",
+    "description": "Stores items.\r\nMade from wood, it breaks easily.\r\nIt's probably not the best thing to store valuables in."
+  },
+  "ItemChest_02": {
+    "localized_name": "Metal Chest",
+    "description": "Stores items.\r\nReinforced with metal, it is somewhat durable.\r\nThe increased size allows for the storage of more things."
+  },
+  "ItemChest_03": {
+    "localized_name": "Refined Metal Chest",
+    "description": "Stores items.\r\nMade of iron, it is extremely durable.\r\nIt is useful as a large, secure storage box."
+  },
+  "PlayerBed_02": {
+    "localized_name": "Shoddy Bed",
+    "description": "A shoddy bed for humans.\r\nUse it when injured or to sleep at night.\r\nYou won't be able to sleep soundly without a roof over your head."
+  },
+  "PlayerBed_03": {
+    "localized_name": "Fine Bed",
+    "description": "A fluffy bed for humans.\r\nUse it when injured or to sleep at night.\r\nYou won't be able to sleep soundly without a roof over your head."
+  },
+  "BuildableGoddessStatue": {
+    "localized_name": "Statue of Power",
+    "description": "Stone statue spoken of in legends on Palpagos Island.\r\nOffer up Lifmunk Effigy to receive strange powers."
+  },
+  "Heater": {
+    "localized_name": "Heater",
+    "description": "A device that blows warm air, raising the temperature of a base.\r\nIt doesn't provide much warmth, but helps one to endure somewhat cold environments.\r\nRequires a Fire Pal to light a flame."
+  },
+  "ElectricHeater": {
+    "localized_name": "Electric Heater",
+    "description": "A device that blows warm air, raising the temperature of a base.\r\nUsing electricity, it can really heat things up.\r\nRequires a Fire Pal to light a flame."
+  },
+  "Cooler": {
+    "localized_name": "Cooler",
+    "description": "A device that blows cool air, lowering the temperature of a base.\r\nIt doesn't provide much relief from the heat, but helps one to endure somewhat hot environments.\r\nRequires an Ice Pal for cooling."
+  },
+  "ElectricCooler": {
+    "localized_name": "Electric Cooler",
+    "description": "A device that blows cool air, lowering the temperature of a base.\r\nUsing electricity, it can really lower the temperature.\r\nRequires an Ice Pal for cooling."
+  },
+  "Torch": {
+    "localized_name": "Mounted Torch",
+    "description": "A light source that provides illumination to a base even at night.\r\nRequires a Fire Pal to light a flame."
+  },
+  "WallTorch": {
+    "localized_name": "Wall Torch",
+    "description": "A light source that provides illumination to a base even at night.\r\nIt can be placed on walls.\r\nRequires a Fire Pal to light a flame."
+  },
+  "Lamp": {
+    "localized_name": "Lamp",
+    "description": "A light source that provides illumination to a base even at night.\r\nRequires electricity, but lights up a larger area."
+  },
+  "CeilingLamp": {
+    "localized_name": "Ceiling Lamp",
+    "description": "A light source that provides illumination to a base even at night.\r\nIt can be placed on a ceiling.\r\nRequires electricity, but lights up a larger area."
+  },
+  "LargeLamp": {
+    "localized_name": "Large Mounted Lamp",
+    "description": "A light source that provides illumination to a base even at night.\r\nRequires a significant amount of electricity, but lights up an even larger area."
+  },
+  "LargeCeilingLamp": {
+    "localized_name": "Large Ceiling Lamp",
+    "description": "A light source that provides illumination to a base even at night.\r\nIt can be placed on a ceiling.\r\nRequires a significant amount of electricity, but lights up an even larger area."
+  },
+  "Trap_LegHold": {
+    "localized_name": "Bear Trap (Small)",
+    "description": "Trap that immobilizes Pals who step on it. The capture rate with the sphere increases when a Pal is trapped. Only effective on small Pals."
+  },
+  "Trap_LegHold_Big": {
+    "localized_name": "Bear Trap (Large)",
+    "description": "A bear trap to immobilize large Pals. The capture rate with the sphere increases when a Pal is trapped. Only effective on large Pals, small Pals will not be caught."
+  },
+  "Trap_Noose": {
+    "localized_name": "Hanging Trap",
+    "description": "Trap that catches Pals passing through it.\r\nPals caught in the trap are easier to catch with Spheres.\r\nOnly effective on small Pals."
+  },
+  "Trap_MovingPanel": {
+    "localized_name": "Moving panels",
+    "description": "A description of the moving panel"
+  },
+  "Trap_MineElecShock": {
+    "localized_name": "Electric Mine",
+    "description": "Trap that electrocutes the Pal that steps on it. The electrocuted Pal has a higher capture rate with the sphere."
+  },
+  "Trap_MineFreeze": {
+    "localized_name": "Ice Mine",
+    "description": "Trap that freezes the Pal that steps on it. The frozen Pal has a higher capture rate with the sphere."
+  },
+  "Trap_MineAttack": {
+    "localized_name": "Mine",
+    "description": "Trap that explodes when a Pal steps on it. It deals damage to a wide area."
+  },
+  "MedicalPalBed_02": {
+    "localized_name": "Straw Pal Bed",
+    "description": "A straw bed for Pals.\r\nPals can rest on it when injured, or to sleep at night.\r\nIt isn't soft, but it's better than nothing."
+  },
+  "MedicalPalBed_03": {
+    "localized_name": "Fluffy Pal Bed",
+    "description": "A fluffy bed that Pals can get a good rest on.\r\nPals can rest on it when injured, or to sleep at night.\r\nPals love sleeping on fluffy beds like this."
+  },
+  "MedicalPalBed_04": {
+    "localized_name": "Large Pal Bed",
+    "description": "Fluffy bed to give Pals a good rest.\r\nPals can rest when injured or sleep at night.\r\nEven large Pals can sleep soundly on a bed like this."
+  },
+  "PalBoxV2": {
+    "localized_name": "Palbox",
+    "description": "Facility for storing captured Pals.\r\nPals inside gradually recover Health.\r\nArea around this facility becomes a base."
+  },
+  "DisplayCharacter": {
+    "localized_name": "Viewing Cage",
+    "description": "Container for observing captured Pals.\r\nPals inside cannot participate in battle or production,\r\nbut they do not become hungry."
+  },
+  "CharacterRankUp": {
+    "localized_name": "Pal Essence Condenser",
+    "description": "A chamber for increasing a Pal's rank.\r\nPals can surpass their physical limitations if given\r\na concentrated extract taken from a Pal of the same type."
+  },
+  "SphereFactory_Black_01": {
+    "localized_name": "Sphere Workbench",
+    "description": "An Assembly Line for producing spheres used for capturing Pals.\r\nA small workspace keeps the production speed slow.\r\nRequires Pals that can work with their hands."
+  },
+  "SphereFactory_Black_02": {
+    "localized_name": "Sphere Assembly Line",
+    "description": "An Assembly Line for producing spheres used for capturing Pals.\r\nBy splitting Pals into groups, production speeds have somewhat increased.\r\nRequires Pals that can work with their hands."
+  },
+  "SphereFactory_Black_03": {
+    "localized_name": "Sphere Assembly Line II",
+    "description": "An Assembly Line for producing spheres used for capturing Pals.\r\nThrough clever management, production speeds have greatly increased.\r\nRequires Pals that can work with their hands."
+  },
+  "HatchingPalEgg": {
+    "localized_name": "Egg Incubator",
+    "description": "Used for incubating a Pal Egg.\r\nIf a Pal Egg is left in it, it will automatically hatch after some time has passed."
+  },
+  "ElectricHatchingPalEgg": {
+    "localized_name": "Electric Egg Incubator",
+    "description": "Device for incubating Pal eggs.\r\nRequires electricity, but automatically keeps the\r\ninside of the incubator at appropriate temperatures."
+  },
+  "Spa": {
+    "localized_name": "Hot Spring",
+    "description": "Facility where Pals on base can rest.\r\nRestores SAN after a long day of hard work."
+  },
+  "Spa2": {
+    "localized_name": "High Quality Hot Spring",
+    "description": "Facility where Pals on base can rest.\r\nNow comfier and restores more SAN."
+  },
+  "BlastFurnace": {
+    "localized_name": "Primitive Furnace",
+    "description": "Allows refinement of Ingot.\r\nThe quality leaves much to desire, and processing is slow.\r\nRequires a Fire Pal to light a flame."
+  },
+  "BlastFurnace2": {
+    "localized_name": "Improved Furnace",
+    "description": "Allows refinement of Refined Ingot.\r\nThe quality has improved, but the processing speed is still unsatisfactory.\r\nRequires a Fire Pal to light a flame."
+  },
+  "BlastFurnace3": {
+    "localized_name": "Electric Furnace",
+    "description": "Allows refinement of Pal Metal Ingot.\r\nIt requires electricity to use, but is quicker to process.\r\nRequires a Fire Pal to light a flame."
+  },
+  "CampFire": {
+    "localized_name": "Campfire",
+    "description": "Needed for cooking food.\r\nIt can only be used to grill simple ingredients.\r\nRequires a Fire Pal to light a flame."
+  },
+  "CookingStove": {
+    "localized_name": "Cooking Pot",
+    "description": "Needed for cooking food.\r\nUse of a cooking pot allows for a wider variety of meal preparation.\r\nRequires a Fire Pal to light a flame."
+  },
+  "ElectricKitchen": {
+    "localized_name": "Electric Kitchen",
+    "description": "Needed for cooking food.\r\nIt requires electricity to run, but allows a large amount of meals to be prepared rapidly.\r\nRequires a Fire Pal to light a flame."
+  },
+  "Factory_Hard_01": {
+    "localized_name": "High Quality Workbench",
+    "description": "A High Quality Workbench for producing items and gear.\r\nA small workspace limits production speeds.\r\nRequires Pals that can work with their hands."
+  },
+  "Factory_Hard_02": {
+    "localized_name": "Production Assembly Line",
+    "description": "A High Quality Workbench for producing items and gear.\r\nBy splitting Pals into groups, production speeds have somewhat increased.\r\nRequires Pals that can work with their hands."
+  },
+  "Factory_Hard_03": {
+    "localized_name": "Production Assembly Line II",
+    "description": "A High Quality Workbench for producing items and gear.\r\nThrough clever management, production speeds have greatly increased.\r\nRequires Pals that can work with their hands."
+  },
+  "MedicineFacility_01": {
+    "localized_name": "Medieval Medicine Workbench",
+    "description": "A facility for making Pal medicine.\r\nIt can only produce simple medicines.\r\nLeave its operation to a Pal that can make medicine."
+  },
+  "MedicineFacility_02": {
+    "localized_name": "Electric Medicine Workbench",
+    "description": "A facility for making Pal medicine.\r\nIt requires electricity, but can produce high quality medicine.\r\nLeave its operation to a Pal that can make medicine."
+  },
+  "StonePit": {
+    "localized_name": "Stone Pit",
+    "description": "A facility for producing Stone.\r\nMining Stone is hard work that requires much physical endurance.\r\nLeave it to Pals skilled at mining."
+  },
+  "CopperPit": {
+    "localized_name": "Ore Mining Site",
+    "description": "Facility for producing Ore.\r\nMining Ore is hard work that requires physical endurance.\r\nLeave it to Pals skilled at mining."
+  },
+  "CopperPit_2": {
+    "localized_name": "Ore Mining Site II",
+    "description": "Facility for producing large quantities of Ore.\r\nMining Ore is hard work that requires physical endurance.\r\nLeave it to Pals skilled at mining."
+  },
+  "WeaponFactory_Dirty_01": {
+    "localized_name": "Weapon Workbench",
+    "description": "An Assembly Line for producing weapons and ammunition.\r\nA small workspace prevents the production of high quality weapons.\r\nRequires Pals that can work with their hands."
+  },
+  "WeaponFactory_Dirty_02": {
+    "localized_name": "Weapon Assembly Line",
+    "description": "An Assembly Line for producing weapons and ammunition.\r\nDividing up work has allowed for the production of somewhat decent armaments.\r\nRequires Pals that can work with their hands."
+  },
+  "WeaponFactory_Dirty_03": {
+    "localized_name": "Weapon Assembly Line II",
+    "description": "An Assembly Line for producing weapons and ammunition.\r\nCleverly dividing up work has allowed for production of top-class weapons.\r\nRequires Pals that can work with their hands."
+  },
+  "WorkBench": {
+    "localized_name": "Primitive Workbench",
+    "description": "A Primitive Workbench for producing simple items.\r\nRequires a Pal that can work with their hands."
+  },
+  "StationDeforest2": {
+    "localized_name": "Logging Site",
+    "description": "A facility for producing Wood.\r\nCutting wood is hard work that requires much physical endurance.\r\nLeave it to Pals skilled in logging."
+  },
+  "WorkBench_SkillUnlock": {
+    "localized_name": "Pal Gear Workbench",
+    "description": "A Primitive Workbench for producing Pal tools.\r\nMake a saddle to ride Pals, or make a gun for Pals to use."
+  },
+  "Crusher": {
+    "localized_name": "Crusher",
+    "description": "Facility for breaking down Stone and Wood to exchange them for other materials.\r\nRequires Pal with the Watering trait to spin the water turbine."
+  },
+  "FlourMill": {
+    "localized_name": "Mill",
+    "description": "Facility for milling Wheat to produce Flour.\r\nRequires Pal with the Watering trait to spin the water turbine."
+  },
+  "BreedFarm": {
+    "localized_name": "Breeding Farm",
+    "description": "Assign one male and one female Pal to produce eggs.\r\nPlacing Cake in the facility is required for production."
+  },
+  "RepairBench": {
+    "localized_name": "Repair Bench",
+    "description": "Workbench for repairing broken tools.\r\nMaterials are needed to make repairs."
+  },
+  "ToolBoxV1": {
+    "localized_name": "Large Toolbox",
+    "description": "Place in base to improve handiwork speed.\r\nPlacing more than one has no additional effect."
+  },
+  "OlympicCauldron": {
+    "localized_name": "Flame Cauldron",
+    "description": "Place in base to improve fire-making speed.\r\nPlacing more than one has no additional effect."
+  },
+  "Fountain": {
+    "localized_name": "Water Fountain",
+    "description": "Place in base to improve watering speed.\r\nPlacing more than one has no additional effect."
+  },
+  "FlowerBed": {
+    "localized_name": "Flower Bed",
+    "description": "Place in base to improve gathering speed.\r\nPlacing more than one has no additional effect."
+  },
+  "Silo": {
+    "localized_name": "Silo",
+    "description": "Place in base to improve planting speed.\r\nPlacing more than one has no additional effect."
+  },
+  "Stump": {
+    "localized_name": "Stump and Axe",
+    "description": "Place in base to improve logging speed.\r\nPlacing more than one has no additional effect."
+  },
+  "MiningTool": {
+    "localized_name": "Pickaxe and Helmet",
+    "description": "Place in base to improve mining speed.\r\nPlacing more than one has no additional effect."
+  },
+  "Cauldron": {
+    "localized_name": "Witch Cauldron",
+    "description": "Place in base to improve medicine manufacturing speed.\r\nPlacing more than one has no additional effect."
+  },
+  "Snowman": {
+    "localized_name": "Snowman",
+    "description": "Place in base to improve cooling speed.\r\nPlacing more than one has no additional effect."
+  },
+  "TransmissionTower": {
+    "localized_name": "Electric Pylon",
+    "description": "Place in base to improve electricity generating speed.\r\nPlacing more than one has no additional effect."
+  },
+  "BaseCampWorkHard": {
+    "localized_name": "Monitoring Stand",
+    "description": "Command your Pals to work on various things inside a base.\r\nYou can allow or prohibit individual kinds of work."
+  },
+  "CoolerBox": {
+    "localized_name": "Cooler Box",
+    "description": "Small food vault.\r\nAssign an Ice Pal to help prevent\r\nfood stored inside from spoiling."
+  },
+  "Refrigerator": {
+    "localized_name": "Refrigerator",
+    "description": "Large food vault.\r\nAssign an Ice Pal to help prevent\r\nfood stored inside from spoiling."
+  },
+  "Signboard": {
+    "localized_name": "Sign",
+    "description": "Can be written on.\r\nUse for memos or to communicate with others."
+  },
+  "WallSignboard": {
+    "localized_name": "Wall-Mounted Sign",
+    "description": "A signboard to write on.\r\nCan be hung on walls."
+  },
+  "MonsterFarm": {
+    "localized_name": "Ranch",
+    "description": "Farm for raising sheep and fowl-like Pals.\r\nAssign a Pal with the appropriate Partner Skill to a farm\r\nto produce items."
+  },
+  "DamagedScarecrow": {
+    "localized_name": "Training Dummy",
+    "description": "Training dummy shaped like a <characterName id=|Penguin|/>.\r\nCan only be placed in wide open areas."
+  },
+  "BaseCampBattleDirector": {
+    "localized_name": "Alarm Bell",
+    "description": "Bell that sets the alert status for Pals on base.\r\nChange Pal behavior to either attack invading enemies, or focus entirely on work whenever you like."
+  },
+  "Barrel_Wood": {
+    "localized_name": "Wooden Barrel",
+    "description": "Wooden barrel for storing items."
+  },
+  "Box_Wood": {
+    "localized_name": "Wooden Box",
+    "description": "Wooden box for storing items."
+  },
+  "Shelf_Wood": {
+    "localized_name": "Wooden Shelf",
+    "description": "Wooden shelf for storing items."
+  },
+  "Shelf_Cask_Wood": {
+    "localized_name": "Wooden Barrel Shelf",
+    "description": "Wooden barrel shelf for storing items."
+  },
+  "Shelf_Hang01_Wood": {
+    "localized_name": "Wooden Wall Shelf",
+    "description": "Wooden shelf for storing items.\r\nCan be placed on a wall."
+  },
+  "Shelf01_Stone": {
+    "localized_name": "Antique Bookshelf",
+    "description": "Antique bookshelf for storing items."
+  },
+  "Shelf02_Stone": {
+    "localized_name": "Antique Wardrobe",
+    "description": "Antique wardrobe for storing items."
+  },
+  "Shelf03_Stone": {
+    "localized_name": "Antique Chest",
+    "description": "Antique chest for storing items.\r\nAdorned with a photo of a Pal."
+  },
+  "Shelf04_Stone": {
+    "localized_name": "Antique Side Chest",
+    "description": "Antique side chest for storing items.\r\nAdorned with a photo of a Pal."
+  },
+  "Shelf01_Wall_Iron": {
+    "localized_name": "Iron Wall Shelf",
+    "description": "Iron wall shelf for storing items.\r\nCan be placed on a wall."
+  },
+  "Shelf05_Stone": {
+    "localized_name": "Antique Cabinet",
+    "description": "Antique cabinet for storing items."
+  },
+  "Shelf06_Stone": {
+    "localized_name": "Antique Long Cabinet",
+    "description": "Antique long cabinet for storing items.\r\nAdorned with a photo of a Pal."
+  },
+  "Shelf07_Stone": {
+    "localized_name": "Large Antique Cabinet",
+    "description": "Large antique cabinet for storing items."
+  },
+  "Shelf01_Wall_Stone": {
+    "localized_name": "Antique Wall Cabinet",
+    "description": "Antique cabinet for storing items.\r\nCan be placed on walls."
+  },
+  "Shelf01_Iron": {
+    "localized_name": "Iron Shelf",
+    "description": "Iron shelf for storing items."
+  },
+  "Shelf02_Iron": {
+    "localized_name": "Long Iron Shelf",
+    "description": "Long iron shelf for storing items."
+  },
+  "Shelf03_Iron": {
+    "localized_name": "Orange Locker",
+    "description": "Orange locker for storing items.\r\nDecorated with Pal stickers."
+  },
+  "Shelf04_Iron": {
+    "localized_name": "Locker",
+    "description": "Locker for storing items.\r\nDecorated with Pal stickers."
+  },
+  "Container01_Iron": {
+    "localized_name": "Large Container",
+    "description": "Large container for storing items.\r\nImitates the designs left behind by an ancient and prosperous civilization."
+  },
+  "Box01_Iron": {
+    "localized_name": "Small Container",
+    "description": "Small container for storing items."
+  },
+  "Box02_Iron": {
+    "localized_name": "Cloth Covered Container",
+    "description": "Cloth covered container for storing items."
+  },
+  "TableSquare_Wood": {
+    "localized_name": "Square Table",
+    "description": "Decorative square table.\r\n"
+  },
+  "TableCircular_Wood": {
+    "localized_name": "Round Table",
+    "description": "Decorative round table.\r\n"
+  },
+  "Bench_Wood": {
+    "localized_name": "Wooden Bench",
+    "description": "Decorative wooden bench.\r\n"
+  },
+  "Stool_Wood": {
+    "localized_name": "Wooden Stool",
+    "description": "Decorative wooden stool.\r\n"
+  },
+  "Stool_High_Wood": {
+    "localized_name": "Wooden Bar Stool",
+    "description": "Decorative bar stool.\r\n"
+  },
+  "Chair01_Wood": {
+    "localized_name": "Wooden Chair",
+    "description": "Decorative wooden chair.\r\n"
+  },
+  "Shelf_Hang02_Wood": {
+    "localized_name": "Wooden Decorative Wall Shelf",
+    "description": "Decorative wooden shelf.\r\nCan be placed on a wall."
+  },
+  "Counter_Wood": {
+    "localized_name": "Wooden Counter",
+    "description": "Decorative wooden counter.\r\n"
+  },
+  "Plant01_Plant": {
+    "localized_name": "Houseplant",
+    "description": "Decorative houseplant.\r\n"
+  },
+  "Plant02_Plant": {
+    "localized_name": "Houseplant and Chair",
+    "description": "Decorative houseplant and chair.\r\n"
+  },
+  "Plant03_Plant": {
+    "localized_name": "Tabletop Houseplant",
+    "description": "Decorative tabletop houseplant.\r\n"
+  },
+  "Plant04_Plant": {
+    "localized_name": "Potted Houseplant",
+    "description": "Decorative potted houseplant.\r\n"
+  },
+  "Ivy01": {
+    "localized_name": "Big Wall Ivy",
+    "description": "Decorative large ivy.\r\nCan be placed on a wall.\r\n"
+  },
+  "Ivy02": {
+    "localized_name": "Small Wall Ivy",
+    "description": "Decorative small ivy.\r\nCan be placed on a wall.\r\n"
+  },
+  "Ivy03": {
+    "localized_name": "Horizontal Wall Ivy",
+    "description": "Decorative horizontal ivy.\r\nCan be placed on a wall.\r\n"
+  },
+  "Rug01_Stone": {
+    "localized_name": "Antique Carpet",
+    "description": "Decorative antique carpet.\r\n"
+  },
+  "Rug02_Stone": {
+    "localized_name": "Antique Red Carpet",
+    "description": "Decorative antique red carpet.\r\n"
+  },
+  "Rug03_Stone": {
+    "localized_name": "Antique Green Carpet",
+    "description": "Decorative antique green carpet.\r\n"
+  },
+  "Rug04_Stone": {
+    "localized_name": "Antique Long Carpet",
+    "description": "Decorative antique long carpet.\r\n"
+  },
+  "Chair01_Stone": {
+    "localized_name": "Antique Wooden Chair",
+    "description": "Decorative antique wooden chair.\r\n"
+  },
+  "Chair02_Stone": {
+    "localized_name": "Antique Green Wooden Chair",
+    "description": "Decorative antique green wooden chair.\r\n"
+  },
+  "Stool01_Stone": {
+    "localized_name": "Antique Stool",
+    "description": "Decorative antique stool.\r\n"
+  },
+  "Desk01_Stone": {
+    "localized_name": "Antique Desk",
+    "description": "Decorative antique desk.\r\n"
+  },
+  "TableCircular01_Stone": {
+    "localized_name": "Antique Round Table",
+    "description": "Decorative antique round table.\r\n"
+  },
+  "TableDresser01_Stone": {
+    "localized_name": "Antique Dresser",
+    "description": "Dresser useful for giving yourself a remake.\r\nAllows players to edit their appearance."
+  },
+  "Sofa01_Stone": {
+    "localized_name": "Antique Armchair",
+    "description": "Decorative antique armchair.\r\n"
+  },
+  "Sofa02_Stone": {
+    "localized_name": "Antique Couch",
+    "description": "Decorative antique couch.\r\n"
+  },
+  "Sofa03_Stone": {
+    "localized_name": "Antique Ottoman",
+    "description": "Decorative antique ottoman.\r\n"
+  },
+  "BathTub_Stone": {
+    "localized_name": "Antique Bathtub",
+    "description": "Decorative antique bathtub.\r\n"
+  },
+  "Box01_Stone": {
+    "localized_name": "Antique Braided Basket",
+    "description": "Decorative antique braided basket.\r\n"
+  },
+  "Partition_Stone": {
+    "localized_name": "Antique Partition",
+    "description": "Decorative antique partition.\r\n"
+  },
+  "TowlRack01_Stone": {
+    "localized_name": "Antique Towel Rack",
+    "description": "Decorative antique towel rack.\r\n"
+  },
+  "Mirror01_Stone": {
+    "localized_name": "Antique Oval Mirror",
+    "description": "Decorative antique oval mirror.\r\n"
+  },
+  "Mirror02_Stone": {
+    "localized_name": "Antique Mirror",
+    "description": "Decorative antique mirror.\r\n"
+  },
+  "Mirror01_Wall_Stone": {
+    "localized_name": "Antique Wall Mirror",
+    "description": "Decorative antique wall mirror.\r\nCan be placed on walls.\r\n"
+  },
+  "Piano01_Stone": {
+    "localized_name": "Grand Piano",
+    "description": "Decorative grand piano.\r\nCannot be played."
+  },
+  "Piano02_Stone": {
+    "localized_name": "Upright Piano",
+    "description": "Decorative upright piano.\r\nCannot be played."
+  },
+  "TableSink01_Stone": {
+    "localized_name": "Antique Washstand",
+    "description": "Decorative antique washstand.\r\n"
+  },
+  "Toilet01_Stone": {
+    "localized_name": "Antique Toilet",
+    "description": "Decorative antique toilet.\r\nCannot be used for its original purpose."
+  },
+  "ToiletHolder01_Stone": {
+    "localized_name": "Antique Toilet Paper Holder",
+    "description": "Decorative antique toilet paper holder.\r\n"
+  },
+  "Curtain01_Wall_Stone": {
+    "localized_name": "Antique Curtain",
+    "description": "Decorative antique curtain.\r\nCan be placed on walls.\r\n"
+  },
+  "Globe01_Stone": {
+    "localized_name": "Antique Globe",
+    "description": "Decorative antique globe.\r\n"
+  },
+  "Stove01_Stone": {
+    "localized_name": "Antique Stove",
+    "description": "Decorative antique stove.\r\n"
+  },
+  "Clock01_Wall_Iron": {
+    "localized_name": "Wall Clock",
+    "description": "Decorative wall clock.\r\nBroken, it doesn't tell time."
+  },
+  "Clock01_Stone": {
+    "localized_name": "Antique Grandfather Clock",
+    "description": "Decorative antique grandfather clock.\r\nBroken, it doesn't tell time."
+  },
+  "Chair02_Iron": {
+    "localized_name": "Iron Chair",
+    "description": "Decorative wooden chair.\r\n"
+  },
+  "Stool01_Iron": {
+    "localized_name": "Iron Stool",
+    "description": "Decorative iron stool.\r\n"
+  },
+  "TableCircular01_Iron": {
+    "localized_name": "Round Iron Table",
+    "description": "Decorative round iron table.\r\n"
+  },
+  "Desk01_Iron": {
+    "localized_name": "Iron Desk",
+    "description": "Decorative iron desk.\r\n"
+  },
+  "TableSide01_Iron": {
+    "localized_name": "Ironwood Side Table",
+    "description": "Decorative ironwood side table.\r\n"
+  },
+  "TableSquare01_Iron": {
+    "localized_name": "Ironwood Table",
+    "description": "Decorative ironwood table.\r\n"
+  },
+  "TableSquare02_Iron": {
+    "localized_name": "Ironwood Low Table",
+    "description": "Decorative ironwood low table.\r\n"
+  },
+  "CableCoil01_Iron": {
+    "localized_name": "Cable Reel",
+    "description": "Decorative cable reel.\r\n"
+  },
+  "GarbageBag_Iron": {
+    "localized_name": "Garbage Bag",
+    "description": "Decorative garbage bag.\r\n"
+  },
+  "PipeClay01_Iron": {
+    "localized_name": "Earthen Pipe",
+    "description": "Decorative earthen pipe.\r\n"
+  },
+  "Tire01_Iron": {
+    "localized_name": "Tire",
+    "description": "Decorative tire.\r\n"
+  },
+  "Barrel01_Iron": {
+    "localized_name": "Red Metal Barrel",
+    "description": "Decorative red metal barrel.\r\n"
+  },
+  "Barrel02_Iron": {
+    "localized_name": "Blue Metal Barrel",
+    "description": "Decorative blue metal barrel.\r\n"
+  },
+  "Barrel03_Iron": {
+    "localized_name": "Green Metal Barrel",
+    "description": "Decorative green metal barrel.\r\n"
+  },
+  "Chair01_Iron": {
+    "localized_name": "Leather Chair",
+    "description": "Decorative leather chair.\r\n"
+  },
+  "Sofa01_Iron": {
+    "localized_name": "Leather Armchair",
+    "description": "Decorative leather armchair.\r\n"
+  },
+  "Sofa02_Iron": {
+    "localized_name": "Leather Couch",
+    "description": "Decorative leather couch.\r\n"
+  },
+  "Chair01_Pal": {
+    "localized_name": "Frog Chair",
+    "description": "Cute decorative chair."
+  },
+  "GoalSoccer_Iron": {
+    "localized_name": "Soccer Goal",
+    "description": "Decorative soccer goal.\r\nKicking a <characterName id=|SheepBall|/> into it will get you no points."
+  },
+  "MachineGame01_Iron": {
+    "localized_name": "Claw Crane",
+    "description": "Decorative claw crane.\r\nBroken, it can't be played."
+  },
+  "MachineVending01_Iron": {
+    "localized_name": "Cola Vending Machine",
+    "description": "Decorative cola vending machine.\r\nCannot be used to buy items."
+  },
+  "Television01_Iron": {
+    "localized_name": "Old TV",
+    "description": "Decorative old TV.\r\nLeft behind by an ancient civilization,\r\nnow it only shows images of Pengullet."
+  },
+  "SignExit_Ceiling_Iron": {
+    "localized_name": "Emergency Exit Ceiling Sign",
+    "description": "Decorative emergency exit sign.\r\nCan be placed on ceilings.\r\n"
+  },
+  "SignExit_Wall_Iron": {
+    "localized_name": "Emergency Exit Wall Sign",
+    "description": "Decorative emergency exit sign.\r\nCan be placed on walls.\r\n"
+  },
+  "TrafficCone01_Iron": {
+    "localized_name": "Traffic Cone",
+    "description": "Decorative traffic cone.\r\n"
+  },
+  "TrafficCone02_Iron": {
+    "localized_name": "Fat Traffic Cone",
+    "description": "Decorative fat traffic cone.\r\n"
+  },
+  "TrafficCone03_Iron": {
+    "localized_name": "Skinny Traffic Cone",
+    "description": "Decorative skinny traffic cone.\r\n"
+  },
+  "TrafficLight01_Iron": {
+    "localized_name": "Traffic Light",
+    "description": "Decorative traffic light.\r\n"
+  },
+  "TrafficSign01_Iron": {
+    "localized_name": "No Pals Beyond Sign",
+    "description": "Decorative No Pals Beyond sign.\r\nUsed in ancient times, it now serves no real purpose."
+  },
+  "TrafficSign02_Iron": {
+    "localized_name": "Stop Sign",
+    "description": "Decorative Stop sign.\r\nUsed in ancient times, it now serves no real purpose."
+  },
+  "TrafficSign03_Iron": {
+    "localized_name": "Beware of Eikthyrdeer Sign",
+    "description": "Decorative Beware of Eikthyrdeer sign.\r\nIn ancient times, collisions between Eikthyrdeer and other Pals were frequent."
+  },
+  "TrafficSign04_Iron": {
+    "localized_name": "Beware of Mammorest Sign",
+    "description": "Decorative Beware of Mammorest sign.\r\nIn ancient times, those who angered a Mammorest were often killed."
+  },
+  "TrafficBarricade01_Iron": {
+    "localized_name": "Barricade",
+    "description": "Decorative barricade.\r\n"
+  },
+  "TrafficBarricade02_Iron": {
+    "localized_name": "Orange Barricade",
+    "description": "Decorative orange barricade.\r\n"
+  },
+  "TrafficBarricade03_Iron": {
+    "localized_name": "Red Iron Barricade",
+    "description": "Decorative red barricade.\r\n"
+  },
+  "TrafficBarricade04_Iron": {
+    "localized_name": "White Iron Barricade",
+    "description": "Decorative white barricade.\r\n"
+  },
+  "TrafficBarricade05_Iron": {
+    "localized_name": "Iron Fence",
+    "description": "Decorative iron fence.\r\n"
+  },
+  "Decal_PalSticker_PinkCat": {
+    "localized_name": "Tuppanyan sticker",
+    "description": "en Text"
+  },
+  "Rug_Wood": {
+    "localized_name": "Fur rug",
+    "description": "en Text"
+  },
+  "Light_FirePlace01": {
+    "localized_name": "Brick Fireplace",
+    "description": "Brick fireplace that provides illumination.\r\nMust be lit with fire from a Fire Pal."
+  },
+  "Light_FirePlace02": {
+    "localized_name": "Fireplace",
+    "description": "Fireplace that provides illumination.\r\nMust be lit with fire from a Fire Pal."
+  },
+  "Light_LightPole01": {
+    "localized_name": "Simple Street Lamp",
+    "description": "Simple street lamp that provides illumination.\r\nRequires electricity to light."
+  },
+  "Light_LightPole02": {
+    "localized_name": "Double Street Lamp",
+    "description": "Double street lamp that provides illumination.\r\nRequires electricity to light."
+  },
+  "Light_LightPole03": {
+    "localized_name": "Retro Street Lamp",
+    "description": "Retro street lamp that provides illumination.\r\nRequires electricity to light."
+  },
+  "Light_LightPole04": {
+    "localized_name": "Stylish Street Lamp",
+    "description": "Stylish street lamp that provides illumination.\r\nRequires electricity to light."
+  },
+  "Light_FloorLamp01": {
+    "localized_name": "Antique Brown Floor Lamp",
+    "description": "Antique brown floor lamp that provides illumination.\r\nRequires electricity to light."
+  },
+  "Light_FloorLamp02": {
+    "localized_name": "Antique Red Floor Lamp",
+    "description": "Antique red floor lamp that provides illumination.\r\nRequires electricity to light."
+  },
+  "Light_CandleSticks_Top": {
+    "localized_name": "Chandelier",
+    "description": "Chandelier that provides illumination.\r\nRequires electricity to light."
+  },
+  "Light_CandleSticks_Wall": {
+    "localized_name": "Wall Lamp",
+    "description": "Wall lamp that provides illumination.\r\nRequires electricity to light."
+  },
+  "Altar": {
+    "localized_name": "Summoning Altar",
+    "description": "Offer a Slab depicting a Pal\r\nto summon a powerful Pal to your base.\r\nAdequate caution and battle readiness is paramount."
+  },
+  "CoolerPalFoodBox": {
+    "localized_name": "Cold Food Box",
+    "description": "A feeding box that can be kept cold.\r\nAssign an Ice Pal to it and\r\nthe food inside will be less likely to spoil."
+  },
+  "DismantlingConveyor": {
+    "localized_name": "Pal Disassembly Conveyor",
+    "description": "A dream-like facility that automatically butchers any Pal that is placed inside."
+  },
+  "ElectricGenerator_Large": {
+    "localized_name": "Large Power Generator",
+    "description": "A power generator fueled by Electric Pals.\r\nLarger and with improved power generation efficiency."
+  },
+  "OilPump": {
+    "localized_name": "Crude Oil Extractor",
+    "description": "Equipment required to extract Crude Oil from oil fields.\r\nRequires a power supply to operate."
+  },
+  "CoalPit": {
+    "localized_name": "Coal Mine",
+    "description": "Facility for producing Coal.\r\nDigging Coal is grueling physical work.\r\nLeave it to a Pal that is good at mining."
+  },
+  "SulfurPit": {
+    "localized_name": "Sulfur Mine",
+    "description": "Facility for producing Sulfur.\r\nDigging Sulfur is grueling physical work.\r\nLeave it to a Pal that is good at mining."
+  },
+  "IceCrusher": {
+    "localized_name": "Refrigerated Crusher",
+    "description": "Facility that crushes Ore and\r\nconverts it into other materials.\r\nRequires a power supply and a Pal with Cooling suitability, but it's very efficient."
+  },
+  "Glass_foundation": {
+    "localized_name": "Glass Foundation",
+    "description": "A foundation for building walls or facilities on.\r\nMade of industrial-strength glass, it's quite sturdy."
+  },
+  "Glass_wall": {
+    "localized_name": "Glass Wall",
+    "description": "Walls built on foundations for keeping out intruders.\r\nMade of industrial-strength glass, it's quite sturdy."
+  },
+  "Glass_WindowWall": {
+    "localized_name": "Glass Wall and Window",
+    "description": "Wall with windows, built on foundations for keeping out intruders.\r\nMade of industrial-strength glass, it's quite sturdy."
+  },
+  "Glass_TriangleWall": {
+    "localized_name": "Glass Triangular Wall",
+    "description": "Triangular wall built on a foundation for keeping out intruders.\r\nMade of industrial-strength glass, it's quite sturdy."
+  },
+  "Glass_roof": {
+    "localized_name": "Glass Roof",
+    "description": "A roof built on top of walls to keep out the rain and wind.\r\nMade of industrial-strength glass, it's quite sturdy."
+  },
+  "Glass_SlantedRoof": {
+    "localized_name": "Glass Slanted Roof",
+    "description": "Slanted roof built on top of walls to keep out the rain and wind.\r\nMade of industrial-strength glass, it's quite sturdy."
+  },
+  "Glass_stair": {
+    "localized_name": "Glass Stairs",
+    "description": "Stairs placed below a foundation or roof for climbing up.\r\nMade of industrial-strength glass, it's quite sturdy."
+  },
+  "Glass_DoorWall": {
+    "localized_name": "Glass Wall and Door",
+    "description": "Door built on a foundation. Becomes an entrance.\r\nMade of industrial-strength glass, it's quite sturdy."
+  },
+  "Glass_pillars": {},
+  "SkinChange": {
+    "localized_name": "Pal Dressing Facility",
+    "description": "Pal Dressing Facility.\r\nGive your Pals a new look!\r\nSkins obtained inside and outside the game can be applied here!"
+  }
+}
