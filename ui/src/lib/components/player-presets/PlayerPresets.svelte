@@ -11,10 +11,12 @@
 	const appState = getAppState();
 	const modal = getModalState();
 
-	let selectedPreset: PresetProfile = $state({ name: '' });
-	let selectedPresets: PresetProfile[] = $state([]);
+	type ExtendedPresetProfile = PresetProfile & { id: string };
+
+	let selectedPreset: ExtendedPresetProfile = $state({ id: '', name: '' });
+	let selectedPresets: ExtendedPresetProfile[] = $state([]);
 	let presets: Record<string, PresetProfile> = $state({});
-	let filteredPresets: PresetProfile[] = $state([]);
+	let filteredPresets: ExtendedPresetProfile[] = $state([]);
 	let containerRef: HTMLDivElement;
 	let listWrapperStyle = $state('');
 	let selectAll: boolean = $state(false);
@@ -30,11 +32,11 @@
 
 	async function getPresetProfiles() {
 		presets = await presetsData.getPresetProfiles();
-		filteredPresets = Object.values(presets);
+		filteredPresets = Object.entries(presets).map(([id, preset]) => ({ ...preset, id }));
 	}
 
 	async function handleApplyPreset() {
-		if (!selectedPresets || !appState.selectedPlayer) return;
+		if (!selectedPresets.length || !appState.selectedPlayer) return;
 		const containers = {
 			common_container: appState.selectedPlayer.common_container,
 			essential_container: appState.selectedPlayer.essential_container,
@@ -128,7 +130,7 @@
 			food_equip_container: processSlots(appState.selectedPlayer.food_equip_container.slots)
 		};
 		presets = await presetsData.addPresetProfile(newPreset);
-		filteredPresets = Object.values(presets);
+		await getPresetProfiles();
 		selectedPresets = [];
 		selectAll = false;
 	}
@@ -138,30 +140,25 @@
 		// @ts-ignore
 		const result = await modal.showConfirmModal({
 			title: 'Delete presets',
-			message: `Are you sure you want to delete ${selectedPresets.length} preset${selectedPresets.length > 0 ? 's' : ''}?`
+			message: `Are you sure you want to delete ${selectedPresets.length} preset${selectedPresets.length > 1 ? 's' : ''}?`
 		});
 		if (!result) return;
-		const presetIds = selectedPresets
-			.map((preset) => Object.keys(presets).find((key) => presets[key] === preset))
-			.filter((id) => id !== undefined) as string[];
-		if (!presetIds || presetIds.length === 0) return;
+		const presetIds = selectedPresets.map((preset) => preset.id);
 		presets = await presetsData.removePresetProfiles(presetIds);
-		filteredPresets = Object.values(presets);
+		await getPresetProfiles();
 		selectedPresets = [];
 		selectAll = false;
 	}
 
-	async function handleEditPresetName(preset: PresetProfile) {
+	async function handleEditPresetName(preset: ExtendedPresetProfile) {
 		// @ts-ignore
 		const result = await modal.showModal<string>(TextInputModal, {
 			title: 'Edit preset name',
 			value: preset.name
 		});
 		if (!result) return;
-		const presetId = Object.keys(presets).find((key) => presets[key] === preset);
-		if (!presetId) return;
-		presets = await presetsData.changePresetName(presetId, result);
-		filteredPresets = Object.values(presets);
+		presets = await presetsData.changePresetName(preset.id, result);
+		await getPresetProfiles();
 	}
 
 	$effect(() => {

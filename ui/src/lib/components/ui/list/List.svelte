@@ -2,11 +2,12 @@
 	import { cn } from '$theme';
 	import type { Snippet } from 'svelte';
 	import { Checkbox, Tooltip } from '$components/ui';
+	import { nanoid } from 'nanoid';
 
 	let {
 		items = $bindable([]),
 		selectedItem = $bindable(),
-		selectedItems = $bindable({}),
+		selectedItems = $bindable([]),
 		selectAll = $bindable(false),
 		baseClass: _baseClass = '',
 		listClass: _listClass = '',
@@ -19,7 +20,8 @@
 		listItemActions,
 		listHeader,
 		listItemPopup,
-		onselect = (item: T) => {}
+		onselect = (item: T) => {},
+		idKey = 'id'
 	} = $props<{
 		items: T[];
 		selectedItem?: T;
@@ -37,6 +39,7 @@
 		listHeader?: Snippet;
 		listItemPopup?: Snippet<[T]>;
 		onselect?: (item: any) => void;
+		idKey?: string;
 	}>();
 
 	const baseClass = $derived(cn('flex flex-col', _baseClass));
@@ -50,30 +53,39 @@
 		cn('list-item p-2 flex items-center cursor-pointer hover:bg-secondary-500/25', _itemClass)
 	);
 	const headerClass = $derived(cn('grid w-full gap-2', _headerClass));
+	let selectedItemsSet: Set<any> = $state(new Set());
+
+	$effect(() => {
+		selectedItemsSet = new Set(selectedItems.map((item: { [x: string]: any }) => item[idKey]));
+	});
 
 	function processItem(item: any) {
 		selectedItem = item;
 		if (multiple) {
-			selectedItems.push(item);
+			if (selectedItemsSet.has(item[idKey])) {
+				selectedItemsSet.delete(item[idKey]);
+			} else {
+				selectedItemsSet.add(item[idKey]);
+			}
+			selectedItems = items.filter((i: { [x: string]: any }) => selectedItemsSet.has(i[idKey]));
 		} else {
-			selectedItems = [];
+			selectedItems = [item];
+			selectedItemsSet = new Set([item[idKey]]);
 		}
 	}
 
-	function handleCheckboxChange(item: any, event: Event) {
-		const isChecked = (event.target as HTMLInputElement).checked;
-		if (isChecked) {
-			processItem(item);
-		} else {
-			selectedItems = selectedItems.filter((selectedItem: any) => selectedItem !== item);
-		}
+	function handleCheckboxChange(item: any) {
+		processItem(item);
 	}
 
 	function handleSelectAll() {
 		selectedItem = null;
-		selectedItems = [];
 		if (selectAll) {
 			selectedItems = items;
+			selectedItemsSet = new Set(items.map((item: { [x: string]: any }) => item[idKey]));
+		} else {
+			selectedItems = [];
+			selectedItemsSet.clear();
 		}
 	}
 
@@ -93,31 +105,30 @@
 	}
 
 	function isSelected(item: any) {
-		return (
-			(JSON.stringify(item) == JSON.stringify(selectedItem) && !onlyHighlightChecked) ||
-			(Array.isArray(selectedItems) &&
-				selectedItems.length > 0 &&
-				selectedItems.some((i: any) => JSON.stringify(i) == JSON.stringify(item)))
-		);
+		return (!onlyHighlightChecked && item === selectedItem) || selectedItemsSet.has(item[idKey]);
 	}
+
+	$effect(() => {
+		selectAll = items.length > 0 && selectedItemsSet.size === items.length;
+	});
 </script>
 
 <div class={baseClass}>
 	<div class="bg-surface-900 sticky top-0 z-10 flex-shrink-0 p-2">
 		<div class={headerClass}>
 			{#if canSelect}
-				<Checkbox checked={selectAll} onchange={handleSelectAll} class="mr-2" />
+				<Checkbox bind:checked={selectAll} onchange={handleSelectAll} class="mr-2" />
 			{/if}
 			{@render listHeader()}
 		</div>
 	</div>
 	<ul class={listClass}>
-		{#each items as item}
+		{#each items as item (item[idKey])}
 			<li class={cn(itemClass, isSelected(item) ? 'bg-secondary-500/25' : '')}>
 				{#if canSelect}
 					<Checkbox
-						checked={isSelected(item)}
-						onchange={(event) => handleCheckboxChange(item, event)}
+						checked={selectedItemsSet.has(item[idKey])}
+						onchange={() => handleCheckboxChange(item)}
 						class="mr-2"
 					/>
 				{/if}
