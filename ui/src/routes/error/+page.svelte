@@ -3,6 +3,7 @@
 	import { page } from '$app/stores';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { assetLoader } from '$lib/utils/asset-loader';
+	import { goto } from '$app/navigation';
 
 	let sadIcon: string = $state('');
 
@@ -12,6 +13,12 @@
 			sadIcon = await assetLoader.loadImage(sadIconPath, true);
 		};
 		loadSadIcon();
+	});
+
+	$effect(() => {
+		if (!$page.error?.message) {
+			goto('/');
+		}
 	});
 </script>
 

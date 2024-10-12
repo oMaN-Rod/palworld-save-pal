@@ -1419,7 +1419,7 @@
         "localized_name": "Poison Bow",
         "description": "A bow that poisons its target.\r\nUsed with Poison Arrow."
     },
-    "Bow_triple": {
+    "Bow_Triple": {
         "localized_name": "Three Shot Bow",
         "description": ""
     },

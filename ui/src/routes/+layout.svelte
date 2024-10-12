@@ -81,7 +81,6 @@
 					ws.clear(type);
 					break;
 				case MessageType.ERROR:
-					console.error('Error wtf', data);
 					goto('/error', {
 						state: {
 							status: 404,

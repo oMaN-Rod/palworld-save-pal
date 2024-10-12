@@ -33,7 +33,7 @@ class ItemContainer(BaseModel):
         self,
         item_container_save_data: Optional[Dict[str, Any]] = None,
         dynamic_item_save_data: Optional[Dict[str, Any]] = None,
-        **kwargs: Any
+        **kwargs: Any,
     ) -> None:
         super().__init__(**kwargs)
         if item_container_save_data and dynamic_item_save_data:
@@ -128,9 +128,13 @@ class ItemContainer(BaseModel):
                 dynamic_item = self._get_dynamic_item(local_id)
                 if not dynamic_item:
                     logger.error(
-                        "Dynamic item not found for: %s, %s", slot_index, local_id
+                        "Dynamic item not found for: slot-%s, %s, %s",
+                        slot_index,
+                        local_id,
+                        static_id,
                     )
-                    raise ValueError("Dynamic item not found")
+                    self._remove_container_slot(slot_index)
+                    continue
 
             self.slots.append(
                 ItemContainerSlot(

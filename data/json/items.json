@@ -4429,7 +4429,7 @@
         "sort_id": 210,
         "damage": 65
     },
-    "Bow_triple": {
+    "Bow_Triple": {
         "type": "Weapon",
         "group": "Weapon",
         "tier": "Common",
