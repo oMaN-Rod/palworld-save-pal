@@ -30,6 +30,7 @@ export type Pal = {
 	elements: ElementType[];
 	state: EntryState;
 	sanity: number;
+	exp: number;
 };
 
 export type Player = {
@@ -43,6 +44,7 @@ export type Player = {
 	player_equipment_armor_container: ItemContainer;
 	food_equip_container: ItemContainer;
 	state: EntryState;
+	exp: number;
 };
 
 export type SaveFile = {

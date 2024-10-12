@@ -73,6 +73,12 @@
 			}
 		}
 	});
+
+	$effect(() => {
+		if (!appState.saveFile) {
+			goto('/file');
+		}
+	});
 </script>
 
 <div class="flex h-full w-full overflow-hidden">

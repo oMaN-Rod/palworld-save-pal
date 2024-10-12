@@ -4,6 +4,7 @@ from palworld_save_pal.ws.handlers import (
     active_skills_handler,
     app_state_handler,
     elements_handler,
+    exp_handler,
     items_handler,
     open_in_browser_handler,
     passive_skills_handler,
@@ -14,6 +15,7 @@ from palworld_save_pal.ws.handlers import (
 from palworld_save_pal.ws.messages import (
     AddPalMessage,
     AddPresetMessage,
+    BaseMessage,
     ClonePalMessage,
     GetActiveSkillsMessage,
     GetElementsMessage,
@@ -188,5 +190,13 @@ def bootstrap(dispatcher: "MessageDispatcher"):
         {
             "message_class": OpenInBrowserMessage,
             "handler_func": open_in_browser_handler.open_in_browser_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.GET_EXP_DATA.value,
+        {
+            "message_class": BaseMessage,
+            "handler_func": exp_handler.get_exp_data_handler,
         },
     )

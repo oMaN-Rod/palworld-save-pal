@@ -10,10 +10,10 @@
 		Talents,
 		LearnedSkillSelectModal
 	} from '$components';
-	import { CornerDotButton, SectionHeader, Tooltip } from '$components/ui';
+	import { CornerDotButton, Progress, SectionHeader, Tooltip } from '$components/ui';
 	import { EntryState, type Pal, PalGender } from '$types';
 	import { ASSET_DATA_PATH } from '$lib/constants';
-	import { palsData, elementsData } from '$lib/data';
+	import { palsData, elementsData, expData } from '$lib/data';
 	import { cn } from '$theme';
 	import { getAppState, getModalState } from '$states';
 	import { Rating } from '@skeletonlabs/skeleton-svelte';
@@ -29,6 +29,10 @@
 	let palLevelMessage: string = $state('');
 
 	let alphaIcon: string = $state('');
+
+	let palLevelProgressToNext: number = $state(0);
+	let palLevelProgressValue: number = $state(0);
+	let palLevelProgressMax: number = $state(1);
 
 	async function loadPalImage(): Promise<string | undefined> {
 		const pal = $state.snapshot(appState.selectedPal);
@@ -47,20 +51,49 @@
 		alphaIcon = icon;
 	}
 
-	function handleLevelDecrement() {
-		if (!appState.selectedPal || !appState.selectedPlayer || !appState.selectedPlayer.pals) return;
-		appState.selectedPal.level = Math.max(appState.selectedPal.level - 1, 1);
-		appState.selectedPlayer.pals[appState.selectedPal.instance_id].level =
-			appState.selectedPal.level;
-		appState.selectedPal.state = EntryState.MODIFIED;
+	async function initPalLevelProgress() {
+		if (appState.selectedPal) {
+			if (appState.selectedPal.level === 55) {
+				palLevelProgressToNext = 0;
+				palLevelProgressValue = 0;
+				palLevelProgressMax = 1;
+				return;
+			}
+			const nextExp = await expData.getExpDataByLevel(appState.selectedPal.level + 1);
+			palLevelProgressToNext = nextExp.PalTotalEXP - appState.selectedPal.exp;
+			palLevelProgressValue = nextExp.PalNextEXP - palLevelProgressToNext;
+			palLevelProgressMax = nextExp.PalNextEXP;
+		}
 	}
 
-	function handleLevelIncrement() {
+	async function handleLevelIncrement() {
 		if (!appState.selectedPal || !appState.selectedPlayer || !appState.selectedPlayer.pals) return;
-		appState.selectedPal.level = Math.min(appState.selectedPal.level + 1, 55);
-		appState.selectedPlayer.pals[appState.selectedPal.instance_id].level =
-			appState.selectedPal.level;
+
+		const newLevel = Math.min(appState.selectedPal.level + 1, 55);
+		if (newLevel === appState.selectedPal.level) return;
+
+		const nextLevelData = await expData.getExpDataByLevel(newLevel + 1);
+
+		appState.selectedPal.level = newLevel;
+		appState.selectedPal.exp = nextLevelData.PalTotalEXP - nextLevelData.PalNextEXP;
 		appState.selectedPal.state = EntryState.MODIFIED;
+
+		await initPalLevelProgress();
+	}
+
+	async function handleLevelDecrement() {
+		if (!appState.selectedPal || !appState.selectedPlayer || !appState.selectedPlayer.pals) return;
+
+		const newLevel = Math.max(appState.selectedPal.level - 1, 1);
+		if (newLevel === appState.selectedPal.level) return;
+
+		const newLevelData = await expData.getExpDataByLevel(newLevel + 1);
+
+		appState.selectedPal.level = newLevel;
+		appState.selectedPal.exp = newLevelData.PalTotalEXP - newLevelData.PalNextEXP;
+		appState.selectedPal.state = EntryState.MODIFIED;
+
+		await initPalLevelProgress();
 	}
 
 	function getActiveSkills(pal: Pal): string[] {
@@ -321,6 +354,7 @@
 
 	$effect(() => {
 		loadStaticIcons();
+		initPalLevelProgress();
 	});
 </script>
 
@@ -458,6 +492,20 @@
 										{/if}
 									{/await}
 								</div>
+							</div>
+							<div class="flex flex-col space-y-2">
+								<div class="flex">
+									<span class="text-on-surface grow">NEXT</span>
+									<span class="text-on-surface">{palLevelProgressToNext}</span>
+								</div>
+								<Progress
+									bind:value={palLevelProgressValue}
+									bind:max={palLevelProgressMax}
+									height="h-2"
+									width="w-full"
+									rounded="rounded-none"
+									showLabel={false}
+								/>
 							</div>
 						</div>
 					</div>

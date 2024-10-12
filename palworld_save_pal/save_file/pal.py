@@ -28,6 +28,7 @@ class Pal(BaseModel):
     talent_defense: int = 0
     rank: int = 1
     level: int = 1
+    exp: int = 0
     nickname: Optional[str] = ""
     is_tower: bool = False
     storage_id: Optional[UUID] = None
@@ -93,8 +94,10 @@ class Pal(BaseModel):
         self._update_group_id()
         self._update_hp()
         self._update_level()
+        self._update_exp()
         self._update_ranks()
         self._update_talents()
+        self._update_lucky()
         self.heal()
 
     def update_from(self, other_pal: "Pal"):
@@ -108,33 +111,51 @@ class Pal(BaseModel):
         if not self.character_id or self.character_id == "":
             logger.error("Failed to parse character ID: %s", self._save_parameter)
             return
-        self.owner_uid = (
-            PalObjects.get_guid(self._save_parameter["OwnerPlayerUId"])
-            if "OwnerPlayerUId" in self._save_parameter
-            else None
-        )
-        self.is_lucky = (
-            PalObjects.get_value(self._save_parameter["IsRarePal"])
-            if "IsRarePal" in self._save_parameter
-            else False
-        )
-        self.nickname = (
-            PalObjects.get_value(self._save_parameter["NickName"])
-            if "NickName" in self._save_parameter
-            else None
-        )
+        self._get_owner_uid()
+        self._get_is_lucky()
+        self._get_nick_name()
         self._get_group_id()
         self._process_character_id()
         self._get_gender()
         self._get_talents()
         self._get_ranks()
         self._get_level()
+        self._get_exp()
         self._get_storage_info()
         self._get_skills()
         self._get_hp()
         self._get_stomach()
         self._get_sanity()
         logger.debug("Parsed PalEntity data: %s", self)
+
+    @property
+    def owner_uid(self):
+        return (
+            PalObjects.get_guid(self._save_parameter["OwnerPlayerUId"])
+            if "OwnerPlayerUId" in self._save_parameter
+            else None
+        )
+
+    def _get_owner_uid(self):
+        self.owner_uid = (
+            PalObjects.get_guid(self._save_parameter["OwnerPlayerUId"])
+            if "OwnerPlayerUId" in self._save_parameter
+            else None
+        )
+
+    def _get_is_lucky(self):
+        self.is_lucky = (
+            PalObjects.get_value(self._save_parameter["IsRarePal"])
+            if "IsRarePal" in self._save_parameter
+            else False
+        )
+
+    def _get_nick_name(self):
+        self.nickname = (
+            PalObjects.get_value(self._save_parameter["NickName"])
+            if "NickName" in self._save_parameter
+            else None
+        )
 
     def _process_character_id(self):
         self.is_boss = False
@@ -225,6 +246,13 @@ class Pal(BaseModel):
             PalObjects.get_byte_property(self._save_parameter["Level"])
             if "Level" in self._save_parameter
             else 1
+        )
+
+    def _get_exp(self):
+        self.exp = (
+            PalObjects.get_value(self._save_parameter["Exp"])
+            if "Exp" in self._save_parameter
+            else 0
         )
 
     def _get_storage_info(self):
@@ -357,6 +385,12 @@ class Pal(BaseModel):
             )
         else:
             self._save_parameter["Level"] = PalObjects.ByteProperty(self.level)
+
+    def _update_exp(self):
+        if "Exp" in self._save_parameter:
+            PalObjects.set_value(self._save_parameter["Exp"], value=self.exp)
+        elif self.exp > 0:
+            self._save_parameter["Exp"] = PalObjects.Int64Property(self.exp)
 
     def _update_ranks(self) -> None:
         self._update_rank()

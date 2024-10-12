@@ -8,8 +8,9 @@
 		height = 'h-2',
 		width = 'w-full',
 		rounded = 'rounded-none',
-		color = 'primary',
+		color = '',
 		dividend = 1,
+		showLabel = true,
 		...additionalProps
 	} = $props<{
 		value: number;
@@ -19,6 +20,7 @@
 		rounded?: string;
 		color?: string;
 		dividend?: number;
+		showLabel?: boolean;
 		[key: string]: any;
 	}>();
 
@@ -58,7 +60,7 @@
 				progressBg = 'bg-green-500';
 				break;
 			default:
-				progressBg = 'bg-surface-500';
+				progressBg = 'bg-[#34f1fd]';
 				break;
 		}
 	});
@@ -74,11 +76,13 @@
 			)}
 			style={`width: ${progressPercentage}%`}
 		>
-			{value.toFixed(0) / dividend} / {max / dividend}
+			{#if showLabel}
+				{value.toFixed(0) / dividend} / {max / dividend}
+			{/if}
 		</div>
 	</div>
 	{#snippet popup()}
-		<span>{progressPercentage.toFixed(1)}%</span>
+		<span>{value.toFixed(0) / dividend} / {max / dividend} ({progressPercentage.toFixed(1)}%)</span>
 	{/snippet}
 </Tooltip>
 
