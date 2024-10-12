@@ -16,6 +16,7 @@
 
 	let passiveSkill: PassiveSkill | null = $state(null);
 	let tierIcon: string | null = $state(null);
+	let sadIcon: string = $state('');
 
 	$effect(() => {
 		loadSkillData();
@@ -29,6 +30,8 @@
 				tierIcon = await assetLoader.loadImage(iconPath, true);
 			}
 		}
+		const sadIconPath = `${ASSET_DATA_PATH}/img/icons/Cattiva_Pleading.png`;
+		sadIcon = await assetLoader.loadImage(sadIconPath, true);
 	}
 
 	async function handleSelectSkill() {
@@ -43,16 +46,33 @@
 	}
 </script>
 
+{#snippet sad()}
+	{#if sadIcon}
+		<enhanced:img src={sadIcon} alt="Sad face icon" class="mr-2 h-6 w-6"></enhanced:img>
+	{:else}
+		<span class="mr-2">😞</span>
+	{/if}
+{/snippet}
+
 {#snippet hasSkill(passiveSkill: PassiveSkill)}
-	<div class="flex w-full items-center">
-		<span class="flex-grow p-2 text-start">{passiveSkill.name}</span>
-		<div class="relative z-10 flex items-center p-2">
-			{#if tierIcon}
-				<enhanced:img src={tierIcon} alt="Passive skill tier icon" class="h-6 w-6 justify-start"
-				></enhanced:img>
-			{/if}
+	<Tooltip>
+		<div class="flex w-full items-center">
+			<span class="flex-grow p-2 text-start">{passiveSkill.name}</span>
+			<div class="relative z-10 flex items-center p-2">
+				{#if tierIcon}
+					<enhanced:img src={tierIcon} alt="Passive skill tier icon" class="h-6 w-6 justify-start"
+					></enhanced:img>
+				{/if}
+			</div>
 		</div>
-	</div>
+		{#snippet popup()}
+			{#if passiveSkill?.description}
+				{passiveSkill?.description}
+			{:else}
+				{@render sad()}
+			{/if}
+		{/snippet}
+	</Tooltip>
 {/snippet}
 
 {#snippet noSkill()}
@@ -61,27 +81,20 @@
 			{skill}
 		</span>
 		{#if skill === 'Empty'}
-			<span class="mr-2">😞</span>
+			{@render sad()}
 		{:else}
 			<span class="mr-2">❓</span>
 		{/if}
 	</div>
 {/snippet}
 
-<Tooltip>
-	<button
-		class="hover:ring-secondary-500 border-l-surface-600 bg-surface-900 relative w-full overflow-hidden rounded-none border-l-2 p-0 shadow-none hover:ring"
-		onclick={handleSelectSkill}
-	>
-		{#if passiveSkill}
-			{@render hasSkill(passiveSkill)}
-		{:else}
-			{@render noSkill()}
-		{/if}
-	</button>
-	{#snippet popup()}
-		<div class="p-4">
-			{passiveSkill?.description}
-		</div>
-	{/snippet}
-</Tooltip>
+<button
+	class="hover:ring-secondary-500 border-l-surface-600 bg-surface-900 relative w-full overflow-hidden rounded-none border-l-2 p-0 shadow-none hover:ring"
+	onclick={handleSelectSkill}
+>
+	{#if passiveSkill}
+		{@render hasSkill(passiveSkill)}
+	{:else}
+		{@render noSkill()}
+	{/if}
+</button>

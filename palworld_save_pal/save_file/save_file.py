@@ -235,6 +235,12 @@ class SaveFile(BaseModel):
             for k, v in PALWORLD_CUSTOM_PROPERTIES.items()
             if k not in DISABLED_PROPERTIES
         }
+        custom_properties[
+            ".worldSaveData.ItemContainerSaveData.Value.Slots.Slots.RawData"
+        ] = (
+            decode_item_container_slot,
+            encode_item_container_slot,
+        )
         logger.debug("Reading GVAS file")
         gvas_file = GvasFile.read(
             raw_gvas, PALWORLD_TYPE_HINTS, custom_properties, allow_nan=True

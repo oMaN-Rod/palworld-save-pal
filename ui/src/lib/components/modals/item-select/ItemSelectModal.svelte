@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Card, Tooltip, Combobox, Input } from '$components/ui';
-	import type { ItemType, SelectOption } from '$types';
+	import { ItemTypeA, ItemTypeB, Rarity, type ItemType, type SelectOption } from '$types';
 	import { Apple, Cuboid, Delete, Gem, Save, Scroll, Shield, Sword, X } from 'lucide-svelte';
 	import { itemsData } from '$lib/data';
 	import type { Item, ItemGroup } from '$types';
@@ -25,6 +25,10 @@
 	let selectOptions: SelectOption[] = $state([]);
 	let items: Item[] = $state([]);
 
+	let selectedItemMaxStackCount = $derived(
+		items.find((item) => item.id === itemId)?.details.max_stack_count
+	);
+
 	function handleClose(confirmed: boolean) {
 		closeModal(confirmed ? [itemId, count] : undefined);
 	}
@@ -38,10 +42,8 @@
 		const allItems = await itemsData.getAllItems();
 		const applicableItems = allItems.filter((item) => {
 			if (
-				item.details.type == 'Structure' ||
-				item.details.type == 'Egg' ||
-				item.details.type == 'Unknown' ||
-				item.details.type == 'None'
+				item.details.type_a == ItemTypeA.None ||
+				item.details.type_a == ItemTypeA.MonsterEquipWeapon
 			) {
 				return false;
 			}
@@ -85,9 +87,9 @@
 		}
 		let iconPath: string;
 		if (staticId.includes('SkillCard')) {
-			iconPath = `${ASSET_DATA_PATH}/img/elements/${itemData.details.image}.png`;
+			iconPath = `${ASSET_DATA_PATH}/img/elements/${itemData.details.icon}.png`;
 		} else {
-			iconPath = `${ASSET_DATA_PATH}/img/icons/${itemData.details.image}.png`;
+			iconPath = `${ASSET_DATA_PATH}/img/icons/${itemData.details.icon}.png`;
 		}
 
 		const icon = await assetLoader.loadImage(iconPath);
@@ -101,7 +103,7 @@
 			console.error(`Item data not found for static id: ${staticId}`);
 			return;
 		}
-		return itemData.details.tier;
+		return Rarity[itemData.details.rarity];
 	}
 
 	function getItem(staticId: string) {
@@ -121,15 +123,15 @@
 			console.error(`Item data not found for static id: ${staticId}`);
 			return;
 		}
-		const tier = itemData.details.tier;
+		const tier = itemData.details.rarity;
 		switch (tier) {
-			case 'Uncommon':
+			case Rarity.Uncommon:
 				return 'bg-gradient-to-tl from-green-500/50';
-			case 'Rare':
+			case Rarity.Rare:
 				return 'bg-gradient-to-tl from-blue-500/50';
-			case 'Epic':
+			case Rarity.Epic:
 				return 'bg-gradient-to-tl from-purple-500/50';
-			case 'Legendary':
+			case Rarity.Legendary:
 				return 'bg-gradient-to-tl from-yellow-500/50';
 			default:
 				return '';
@@ -137,18 +139,18 @@
 	}
 </script>
 
-{#snippet noIcon(itemType: ItemType | undefined)}
-	{#if itemType === 'Weapon'}
+{#snippet noIcon(typeA: ItemTypeA, typeB: ItemTypeB)}
+	{#if typeA === ItemTypeA.Weapon}
 		<Sword class="h-8 w-8"></Sword>
-	{:else if itemType === 'Armor'}
+	{:else if typeA === ItemTypeA.Armor && typeB === ItemTypeB.Shield}
 		<Shield class="h-8 w-8"></Shield>
-	{:else if itemType === 'Schematic'}
+	{:else if typeA === ItemTypeA.Blueprint}
 		<Scroll class="h-8 w-8"></Scroll>
-	{:else if itemType === 'Accessory'}
+	{:else if typeA === ItemTypeA.Accessory}
 		<Gem class="h-8 w-8"></Gem>
-	{:else if itemType === 'Material'}
+	{:else if typeA === ItemTypeA.Material}
 		<Cuboid class="h-8 w-8"></Cuboid>
-	{:else if itemType === 'Ingredient'}
+	{:else if typeA === ItemTypeA.Food}
 		<Apple class="h-8 w-8"></Apple>
 	{:else}
 		<Cuboid class="h-8 w-8"></Cuboid>
@@ -179,7 +181,7 @@
 									getBackgroundColor(option.value)
 								)}
 							>
-								{@render noIcon(item?.details.type)}
+								{@render noIcon(item?.details.type_a, item?.details.type_b)}
 							</div>
 						{/if}
 						<div class="flex flex-col">
@@ -192,11 +194,12 @@
 						</div>
 					</div>
 				{:catch}
+					{@const item = getItem(option.value)}
 					<div class="grid grid-cols-[auto_1fr_auto]">
 						<div
 							class={cn('mr-2 flex items-center justify-center', getBackgroundColor(option.value))}
 						>
-							{@render noIcon(getItem(option.value)?.details.type)}
+							{@render noIcon(item?.details.type_a, item?.details.type_b)}
 						</div>
 						<span class="h-6">{option.label}</span>
 						<span>{getItemTier(option.value)}</span>
@@ -204,7 +207,7 @@
 				{/await}
 			{/snippet}
 		</Combobox>
-		<Input labelClass="w-1/4" type="number" bind:value={count} />
+		<Input labelClass="w-1/4" type="number" bind:value={count} max={selectedItemMaxStackCount} />
 	</div>
 
 	<div class="mt-2 flex flex-row items-center space-x-2">

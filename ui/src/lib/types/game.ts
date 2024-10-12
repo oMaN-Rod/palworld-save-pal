@@ -53,7 +53,85 @@ export interface DynamicItem {
 	local_id: string;
 	durability: number;
 	remaining_bullets?: number;
-	type: DynamicItemType;
+	type: DynamicItemClass;
+}
+
+export enum ItemTypeA {
+	None,
+	Weapon,
+	SpecialWeapon,
+	Armor,
+	Accessory,
+	Material,
+	Consume,
+	Ammo,
+	Food,
+	Essential,
+	Glider,
+	MonsterEquipWeapon,
+	Blueprint
+}
+
+export enum ItemTypeB {
+	None,
+	WeaponMelee,
+	WeaponBow,
+	WeaponCrossbow,
+	WeaponHandgun,
+	WeaponAssaultRifle,
+	WeaponSniperRifle,
+	WeaponRocketLauncher,
+	WeaponShotgun,
+	WeaponFlameThrower,
+	WeaponGatlingGun,
+	WeaponCollectionTool,
+	WeaponThrowObject,
+	WeaponGrapplingGun,
+	SPWeaponCaptureBall,
+	SPWeaponDamageTrap,
+	SPWeaponCaptureTrap,
+	SPWeaponCaptureRope,
+	ArmorHead,
+	ArmorBody,
+	Accessory,
+	MaterialOre,
+	MaterialJewelry,
+	MaterialIngot,
+	MaterialWood,
+	MaterialStone,
+	MaterialProccessing,
+	MaterialMonster,
+	MaterialPalEgg,
+	ConsumeBandage,
+	ConsumeSeed,
+	ConsumeBullet,
+	ConsumeWazaMachine,
+	ConsumeTechnologyBook,
+	ConsumeAncientTechnologyBook,
+	ConsumeOther,
+	ConsumeGainStatusPoints,
+	ConsumePalLevelUp,
+	ConsumePalGainExp,
+	ConsumePalTalentUp,
+	ConsumePalRankUp,
+	FoodMeat,
+	FoodVegetable,
+	FoodFish,
+	FoodDishMeat,
+	FoodDishVegetable,
+	FoodDishFish,
+	FoodProcessed,
+	Essential,
+	Essential_UnlockPlayerFuture,
+	Glider,
+	Shield,
+	Money,
+	Medicine,
+	Drug,
+	MonsterEquipWeapon,
+	Blueprint,
+	ReturnToBaseCamp,
+	Essential_PalGear
 }
 
 export interface ItemContainerSlot {
@@ -80,7 +158,13 @@ export interface PresetProfile {
 
 // Frontend types
 
-export type Tier = 'None' | 'Uncommon' | 'Rare' | 'Epic' | 'Legendary';
+export enum Rarity {
+	Common,
+	Uncommon,
+	Rare,
+	Epic,
+	Legendary
+}
 export type ItemType =
 	| 'Accessory'
 	| 'Ammo'
@@ -98,7 +182,7 @@ export type ItemType =
 	| 'Unknown'
 	| 'Utility'
 	| 'Weapon';
-export type DynamicItemType = 'armor' | 'weapon';
+export type DynamicItemClass = 'armor' | 'weapon';
 export type ItemGroup =
 	| 'Accessory'
 	| 'Body'
@@ -111,21 +195,22 @@ export type ItemGroup =
 	| 'KeyItem';
 
 export interface DynamicItemDetails {
-	damage: number;
 	durability: number;
-	magazine_size: number;
-	workload: number;
-	type: DynamicItemType;
+	magazine_size?: number;
+	type: DynamicItemClass;
 }
 export interface ItemDetails {
-	image: string;
-	type: ItemType;
 	group: ItemGroup;
-	tier: Tier;
-	stack: number;
 	weight: number;
-	buy_price: number;
-	sell_price: number;
+	type_a: ItemTypeA;
+	type_b: ItemTypeB;
+	price: number;
+	icon: string;
+	rank: number;
+	rarity: Rarity;
+	max_stack_count: number;
+	sort_id: number;
+	damage?: number;
 	dynamic?: DynamicItemDetails;
 }
 

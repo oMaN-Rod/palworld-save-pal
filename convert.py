@@ -5,12 +5,8 @@ from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Dict, Any, List, Set
 
-from palworld_save_tools.paltypes import (
-    DISABLED_PROPERTIES,
-    PALWORLD_CUSTOM_PROPERTIES,
-)
 
-from palworld_save_pal.save_file.save_file import SaveFile
+from palworld_save_pal.save_file.save_file import SaveFile, PALWORLD_CUSTOM_PROPERTIES
 from palworld_save_pal.utils.logging_config import create_logger, setup_logging
 
 save_file = SaveFile()
@@ -27,19 +23,23 @@ class ValidationResults:
     def log_results(self):
         if self.unknown_character_ids:
             logger.warning(
-                f"Unknown character IDs: {', '.join(sorted(self.unknown_character_ids))}"
+                "Unknown character IDs: %s",
+                ", ".join(sorted(self.unknown_character_ids)),
             )
         if self.unexpected_gender_values:
             logger.warning(
-                f"Unexpected gender values: {', '.join(sorted(self.unexpected_gender_values))}"
+                "Unexpected gender values: %s",
+                ", ".join(sorted(self.unexpected_gender_values)),
             )
         if self.unknown_active_skills:
             logger.warning(
-                f"Unknown active skills: {', '.join(sorted(self.unknown_active_skills))}"
+                "Unknown active skills: %s",
+                ", ".join(sorted(self.unknown_active_skills)),
             )
         if self.unknown_passive_skills:
             logger.warning(
-                f"Unknown passive skills: {', '.join(sorted(self.unknown_passive_skills))}"
+                "Unknown passive skills: %s",
+                ", ".join(sorted(self.unknown_passive_skills)),
             )
 
 
@@ -171,12 +171,6 @@ def main():
         "--convert-nan-to-null",
         action="store_true",
         help="Convert NaN/Inf/-Inf floats to null when converting from SAV to JSON. This will lose information in the event Inf/-Inf is in the sav file (default: false)",
-    )
-    parser.add_argument(
-        "--custom-properties",
-        default=",".join(set(PALWORLD_CUSTOM_PROPERTIES.keys()) - DISABLED_PROPERTIES),
-        type=lambda t: [s.strip() for s in t.split(",")],
-        help="Comma-separated list of custom properties to decode, or 'all' for all known properties. This can be used to speed up processing by excluding properties that are not of interest. (default: all)",
     )
     parser.add_argument("--dev", action="store_true", help="Run in development mode")
     parser.add_argument("--minify-json", action="store_true", help="Minify JSON output")

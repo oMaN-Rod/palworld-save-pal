@@ -8,7 +8,7 @@
 	import { Tabs } from '@skeletonlabs/skeleton-svelte';
 	import { Tooltip } from '$components/ui';
 	import { ItemBadge, PlayerPresets } from '$components';
-	import { Bomb, ChevronsLeftRight, Key, Pizza, Shield, Swords } from 'lucide-svelte';
+	import { Bomb, ChevronsLeftRight, Key, Pizza, Shield, Swords, ArrowUp01 } from 'lucide-svelte';
 
 	const appState = getAppState();
 	const toast = getToastState();
@@ -57,7 +57,7 @@
 			console.error(`Item data not found for static id: ${staticId}`);
 			return;
 		}
-		const iconPath = `${ASSET_DATA_PATH}/img/icons/${itemData.details.image}.png`;
+		const iconPath = `${ASSET_DATA_PATH}/img/icons/${itemData.details.icon}.png`;
 		const icon = await assetLoader.loadImage(iconPath);
 		return icon;
 	}
@@ -310,6 +310,30 @@
 		}
 	}
 
+	async function sortCommonContainer() {
+		if (appState.selectedPlayer) {
+			const sortedSlots = await Promise.all(
+				commonContainer.slots.map(async (slot) => {
+					if (slot.static_id !== 'None') {
+						const itemData = await itemsData.searchItems(slot.static_id);
+						return { ...slot, sort_id: itemData?.details.sort_id ?? Infinity };
+					}
+					return { ...slot, sort_id: Infinity };
+				})
+			);
+
+			sortedSlots.sort((a, b) => a.sort_id - b.sort_id);
+
+			commonContainer.slots = sortedSlots.map((slot, index) => ({
+				...slot,
+				slot_index: index
+			}));
+
+			appState.selectedPlayer.common_container.slots = commonContainer.slots;
+			appState.selectedPlayer.state = EntryState.MODIFIED;
+		}
+	}
+
 	$effect(() => {
 		if (appState.selectedPlayer) {
 			loadCommonContainer();
@@ -334,6 +358,17 @@
 				</button>
 				{#snippet popup()}
 					<span>Clear Inventory</span>
+				{/snippet}
+			</Tooltip>
+			<Tooltip>
+				<button
+					class="btn preset-filled-primary-500 hover:preset-tonal-secondary"
+					onclick={sortCommonContainer}
+				>
+					<ArrowUp01 />
+				</button>
+				{#snippet popup()}
+					<span>Sort Inventory</span>
 				{/snippet}
 			</Tooltip>
 			<Tooltip
@@ -432,7 +467,7 @@
 						<div class="max-h-[500px] overflow-auto">
 							<div class="grid grid-cols-6 gap-2">
 								{#each Object.values(essentialContainer.slots) as _, index}
-									<ItemBadge bind:slot={essentialContainer.slots[index]} itemGroup="Essential" />
+									<ItemBadge bind:slot={essentialContainer.slots[index]} itemGroup="KeyItem" />
 								{/each}
 							</div>
 						</div>

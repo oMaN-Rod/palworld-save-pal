@@ -23,6 +23,7 @@
 	let activeSkill: ActiveSkill | null = $state(null);
 	let element: Element | undefined = $state(undefined);
 	let elementIcon: string | null = $state(null);
+	let sadIcon: string = $state('');
 
 	$effect(() => {
 		loadSkillData();
@@ -39,6 +40,8 @@
 		} else {
 			console.log('No active skill found for:', skill);
 		}
+		const sadIconPath = `${ASSET_DATA_PATH}/img/icons/Cattiva_Pleading.png`;
+		sadIcon = await assetLoader.loadImage(sadIconPath, true);
 	}
 
 	async function handleSelectSkill() {
@@ -53,6 +56,14 @@
 		onSkillUpdate(result, skill);
 	}
 </script>
+
+{#snippet sad()}
+	{#if sadIcon}
+		<enhanced:img src={sadIcon} alt="Sad face icon" class="mr-2 h-6 w-6"></enhanced:img>
+	{:else}
+		<span class="mr-2">😞</span>
+	{/if}
+{/snippet}
 
 {#snippet hasSkill()}
 	<Tooltip>
@@ -97,7 +108,12 @@
 		class="border-l-primary border-l-surface-600 bg-surface-900 relative w-full overflow-hidden rounded-none border-l-2 p-0 shadow-none"
 	>
 		<div class="flex w-full items-center">
-			<span class="flex-grow p-2 text-lg">{skill}</span>
+			<span class="grow p-2 text-start text-lg">{skill}</span>
+			{#if skill === 'Empty'}
+				{@render sad()}
+			{:else}
+				<span class="mr-2">❓</span>
+			{/if}
 		</div>
 	</div>
 {/snippet}
