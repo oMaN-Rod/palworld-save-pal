@@ -13,9 +13,9 @@
 
 	let files: FileList | undefined = $state();
 
-	function handleOnUpload() {
+	async function handleOnUpload() {
 		if (!files) return;
-		goto('/loading');
+		await goto('/loading');
 		appState.resetState();
 		ws.message = { type: MessageType.PROGRESS_MESSAGE, data: 'Uploading zip file 🚀...' };
 		const reader = new FileReader();

@@ -14,16 +14,10 @@
 		};
 		loadSadIcon();
 	});
-
-	$effect(() => {
-		if (!$page.error?.message) {
-			goto('/');
-		}
-	});
 </script>
 
 <div class="flex h-full w-full flex-col items-center justify-center">
-	<div class="max-w-2/3 flex flex-col">
+	<div class="flex max-w-[1200px] flex-col">
 		<div class="flex items-center">
 			{#if sadIcon}
 				<enhanced:img src={sadIcon} alt="Sad face icon" class="mr-2 h-14 w-14"></enhanced:img>

@@ -1,17 +1,28 @@
 <script lang="ts">
-	import { ItemHeader } from '$components/ui';
-	import { getAppState, getToastState } from '$states';
+	import { ItemHeader, Progress } from '$components/ui';
+	import { getAppState, getToastState, getModalState } from '$states';
 	import { EntryState, type ItemContainerSlot, type ItemContainer } from '$types';
 	import { assetLoader } from '$utils/asset-loader';
 	import { ASSET_DATA_PATH } from '$lib/constants';
-	import { itemsData } from '$lib/data';
+	import { itemsData, expData } from '$lib/data';
 	import { Tabs } from '@skeletonlabs/skeleton-svelte';
 	import { Tooltip } from '$components/ui';
 	import { ItemBadge, PlayerPresets } from '$components';
-	import { Bomb, ChevronsLeftRight, Key, Pizza, Shield, Swords, ArrowUp01 } from 'lucide-svelte';
+	import {
+		Bomb,
+		ChevronsLeftRight,
+		Key,
+		Pizza,
+		Shield,
+		Swords,
+		ArrowUp01,
+		Minus,
+		Plus
+	} from 'lucide-svelte';
 
 	const appState = getAppState();
 	const toast = getToastState();
+	const modal = getModalState();
 
 	let commonContainer: ItemContainer = $state({ id: '', type: '', slots: [] });
 	let essentialContainer: ItemContainer = $state({ id: '', type: '', slots: [] });
@@ -49,6 +60,9 @@
 	let accessoryGear: ItemContainerSlot[] = $state([]);
 	let group = $state('inventory');
 	let foodSlotCount: number = 0;
+	let levelProgressToNext: number = $state(0);
+	let levelProgressValue: number = $state(0);
+	let levelProgressMax: number = $state(1);
 
 	async function getItemIcon(staticId: string) {
 		if (!staticId) return;
@@ -343,89 +357,178 @@
 			loadPlayerEquipmentArmorContainer();
 		}
 	});
+
+	async function initlevelProgress() {
+		if (appState.selectedPlayer) {
+			if (appState.selectedPlayer.level === 55) {
+				levelProgressToNext = 0;
+				levelProgressValue = 0;
+				levelProgressMax = 1;
+				return;
+			}
+			const nextExp = await expData.getExpDataByLevel(appState.selectedPlayer.level + 1);
+			levelProgressToNext = nextExp.PalTotalEXP - appState.selectedPlayer.exp;
+			levelProgressValue = nextExp.PalNextEXP - levelProgressToNext;
+			levelProgressMax = nextExp.PalNextEXP;
+		}
+	}
+
+	async function handleLevelIncrement() {
+		if (!appState.selectedPlayer || !appState.selectedPlayer || !appState.selectedPlayer.pals)
+			return;
+
+		const newLevel = Math.min(appState.selectedPlayer.level + 1, 55);
+		if (newLevel === appState.selectedPlayer.level) return;
+
+		const nextLevelData = await expData.getExpDataByLevel(newLevel + 1);
+
+		appState.selectedPlayer.level = newLevel;
+		appState.selectedPlayer.exp = nextLevelData.PalTotalEXP - nextLevelData.PalNextEXP;
+		appState.selectedPlayer.state = EntryState.MODIFIED;
+
+		await initlevelProgress();
+	}
+
+	async function handleLevelDecrement() {
+		if (!appState.selectedPlayer || !appState.selectedPlayer || !appState.selectedPlayer.pals)
+			return;
+
+		const newLevel = Math.max(appState.selectedPlayer.level - 1, 1);
+		if (newLevel === appState.selectedPlayer.level) return;
+
+		const newLevelData = await expData.getExpDataByLevel(newLevel + 1);
+
+		appState.selectedPlayer.level = newLevel;
+		appState.selectedPlayer.exp = newLevelData.PalTotalEXP - newLevelData.PalNextEXP;
+		appState.selectedPlayer.state = EntryState.MODIFIED;
+
+		await initlevelProgress();
+	}
 </script>
 
 {#if appState.selectedPlayer}
 	<div class="flex h-full flex-col overflow-auto">
-		<div class="m-2 flex flex-row items-center space-x-2 p-2">
-			<h6 class="h6">Clear</h6>
-			<Tooltip>
-				<button
-					class="btn preset-filled-primary-500 hover:preset-tonal-secondary"
-					onclick={clearCommonContainer}
-				>
-					<ChevronsLeftRight />
-				</button>
-				{#snippet popup()}
-					<span>Clear Inventory</span>
-				{/snippet}
-			</Tooltip>
-			<Tooltip>
-				<button
-					class="btn preset-filled-primary-500 hover:preset-tonal-secondary"
-					onclick={sortCommonContainer}
-				>
-					<ArrowUp01 />
-				</button>
-				{#snippet popup()}
-					<span>Sort Inventory</span>
-				{/snippet}
-			</Tooltip>
-			<Tooltip
-				><button
-					class="btn preset-filled-primary-500 hover:preset-tonal-secondary"
-					onclick={clearEssentialContainer}
-				>
-					<Key />
-				</button>
-				{#snippet popup()}
-					<span>Clear Key Items</span>
-				{/snippet}
-			</Tooltip>
-			<Tooltip>
-				<button
-					class="btn preset-filled-primary-500 hover:preset-tonal-secondary"
-					onclick={clearWeaponLoadOutContainer}
-				>
-					<Swords />
-				</button>
-				{#snippet popup()}
-					<span>Clear Weapons</span>
-				{/snippet}
-			</Tooltip>
-			<Tooltip>
-				<button
-					class="btn preset-filled-primary-500 hover:preset-tonal-secondary"
-					onclick={clearEquipmentArmorContainer}
-				>
-					<Shield />
-				</button>
-				{#snippet popup()}
-					<span>Clear Armor</span>
-				{/snippet}
-			</Tooltip>
-			<Tooltip>
-				<button
-					class="btn preset-filled-primary-500 hover:preset-tonal-secondary"
-					onclick={clearFoodEquipContainer}
-				>
-					<Pizza />
-				</button>
-				{#snippet popup()}
-					<span>Clear Food</span>
-				{/snippet}
-			</Tooltip>
-			<Tooltip>
-				<button
-					class="btn preset-filled-primary-500 hover:preset-tonal-secondary"
-					onclick={clearAll}
-				>
-					<Bomb />
-				</button>
-				{#snippet popup()}
-					<span>Clear All</span>
-				{/snippet}
-			</Tooltip>
+		<div class="m-2 flex items-end space-x-2 p-2">
+			<div class="flex grow items-center space-x-2">
+				<h6 class="h6">Clear</h6>
+				<Tooltip>
+					<button
+						class="btn preset-filled-primary-500 hover:preset-tonal-secondary"
+						onclick={clearCommonContainer}
+					>
+						<ChevronsLeftRight />
+					</button>
+					{#snippet popup()}
+						<span>Clear Inventory</span>
+					{/snippet}
+				</Tooltip>
+				<Tooltip>
+					<button
+						class="btn preset-filled-primary-500 hover:preset-tonal-secondary"
+						onclick={sortCommonContainer}
+					>
+						<ArrowUp01 />
+					</button>
+					{#snippet popup()}
+						<span>Sort Inventory</span>
+					{/snippet}
+				</Tooltip>
+				<Tooltip
+					><button
+						class="btn preset-filled-primary-500 hover:preset-tonal-secondary"
+						onclick={clearEssentialContainer}
+					>
+						<Key />
+					</button>
+					{#snippet popup()}
+						<span>Clear Key Items</span>
+					{/snippet}
+				</Tooltip>
+				<Tooltip>
+					<button
+						class="btn preset-filled-primary-500 hover:preset-tonal-secondary"
+						onclick={clearWeaponLoadOutContainer}
+					>
+						<Swords />
+					</button>
+					{#snippet popup()}
+						<span>Clear Weapons</span>
+					{/snippet}
+				</Tooltip>
+				<Tooltip>
+					<button
+						class="btn preset-filled-primary-500 hover:preset-tonal-secondary"
+						onclick={clearEquipmentArmorContainer}
+					>
+						<Shield />
+					</button>
+					{#snippet popup()}
+						<span>Clear Armor</span>
+					{/snippet}
+				</Tooltip>
+				<Tooltip>
+					<button
+						class="btn preset-filled-primary-500 hover:preset-tonal-secondary"
+						onclick={clearFoodEquipContainer}
+					>
+						<Pizza />
+					</button>
+					{#snippet popup()}
+						<span>Clear Food</span>
+					{/snippet}
+				</Tooltip>
+				<Tooltip>
+					<button
+						class="btn preset-filled-primary-500 hover:preset-tonal-secondary"
+						onclick={clearAll}
+					>
+						<Bomb />
+					</button>
+					{#snippet popup()}
+						<span>Clear All</span>
+					{/snippet}
+				</Tooltip>
+			</div>
+
+			<div
+				class="border-l-surface-600 preset-filled-surface-100-900 flex w-1/2 rounded-none border-l-2 p-4"
+			>
+				<div class="grpw mr-4 flex flex-col items-center justify-center rounded-none">
+					<div class="flex px-2">
+						<button class="mr-4">
+							<Minus class="text-primary-500" onclick={handleLevelDecrement} />
+						</button>
+
+						<div class="flex flex-col items-center justify-center">
+							<span class="text-surface-400 font-bold">LEVEL</span>
+							<span class="text-4xl font-bold">{appState.selectedPlayer.level}</span>
+						</div>
+
+						<button class="ml-4">
+							<Plus class="text-primary-500" onclick={handleLevelIncrement} />
+						</button>
+					</div>
+				</div>
+
+				<div class="grow">
+					<div class="flex flex-col">
+						<div class="flex flex-col space-y-2">
+							<div class="flex">
+								<span class="text-on-surface grow">NEXT</span>
+								<span class="text-on-surface">{levelProgressToNext}</span>
+							</div>
+							<Progress
+								bind:value={levelProgressValue}
+								bind:max={levelProgressMax}
+								height="h-2"
+								width="w-full"
+								rounded="rounded-none"
+								showLabel={false}
+							/>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 		<div class="ml-2 grid grid-cols-[auto_1fr_auto] gap-4">
 			<Tabs listBorder="border border-surface-800" listClasses="h-auto" bind:value={group}>

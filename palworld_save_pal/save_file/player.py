@@ -19,6 +19,7 @@ class Player(BaseModel):
     uid: UUID
     nickname: str
     level: int
+    exp: int
     instance_id: Optional[UUID] = Field(default=None)
     pals: Optional[Dict[UUID, Pal]] = Field(default_factory=dict)
     common_container: Optional[ItemContainer] = Field(default=None)
@@ -30,6 +31,7 @@ class Player(BaseModel):
 
     _pal_box: Optional[CharacterContainer] = PrivateAttr(default=None)
     _player_gvas_file: Optional[GvasFile] = PrivateAttr(default=None)
+    _character_save_parameter: Optional[Dict[str, Any]] = PrivateAttr(default=None)
 
     def __init__(
         self,
@@ -37,6 +39,7 @@ class Player(BaseModel):
         item_container_save_data: Dict[str, Any] = None,
         dynamic_item_save_data: Dict[str, Any] = None,
         character_container_save_data: Dict[str, Any] = None,
+        character_save_parameter: Dict[str, Any] = None,
         **kwargs,
     ):
         super().__init__(**kwargs)
@@ -45,7 +48,9 @@ class Player(BaseModel):
             and item_container_save_data is not None
             and dynamic_item_save_data is not None
             and character_container_save_data is not None
+            and character_save_parameter is not None
         ):
+            self._character_save_parameter = character_save_parameter
             self._player_gvas_file = gvas_file
             self._load_player_data()
             self._load_inventory(item_container_save_data, dynamic_item_save_data)
@@ -63,12 +68,15 @@ class Player(BaseModel):
             owner_uid=self.uid,
             container_id=self._pal_box.id,
             slot_idx=slot_idx,
-            group_id=self.guild.id if self.guild else None,
+            group_id=self.guild.id if isinstance(self.guild, Guild) else None,
             nickname=nickname,
         )
         new_pal = Pal(new_pal_data)
+
+        if not self.pals:
+            self.pals = {}
         self.pals[new_pal_id] = new_pal
-        if self.guild:
+        if isinstance(self.guild, Guild):
             self.guild.add_pal(new_pal_id)
         return new_pal, new_pal_data
 
@@ -81,22 +89,46 @@ class Player(BaseModel):
         nickname = pal.nickname if pal.nickname else f"[New] {pal.character_id}"
         new_pal = existing_pal.clone(new_pal_id, slot_idx, nickname)
         self.pals[new_pal_id] = new_pal
-        if self.guild:
+        if isinstance(self.guild, Guild):
             self.guild.add_pal(new_pal_id)
         return new_pal
 
     def delete_pal(self, pal_id: UUID):
         self.pals.pop(pal_id)
         self._pal_box.delete_pal(pal_id)
-        if self.guild:
+        if isinstance(self.guild, Guild):
             self.guild.remove_pal(pal_id)
 
     def update_from(self, other_player: "Player"):
+        logger.debug(
+            "Updating player %s from player %s", self.nickname, other_player.nickname
+        )
         data = other_player.model_dump()
+        logger.debug("Data to update from: %s", data.keys())
         for key, value in data.items():
             match key:
                 case "pals":
                     continue
+                case "level":
+                    self.level = value
+                    if "Level" in self._character_save_parameter:
+                        PalObjects.set_byte_property(
+                            self._character_save_parameter["Level"], value=value
+                        )
+                    else:
+                        self._character_save_parameter["Level"] = (
+                            PalObjects.ByteProperty(value)
+                        )
+                case "exp":
+                    self.exp = value
+                    if "Exp" in self._character_save_parameter:
+                        PalObjects.set_value(
+                            self._character_save_parameter["Exp"], value=value
+                        )
+                    else:
+                        self._character_save_parameter["Exp"] = (
+                            PalObjects.Int64Property(value)
+                        )
                 case "common_container":
                     self.common_container.update_from(value)
                 case "essential_container":

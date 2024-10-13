@@ -38,7 +38,7 @@
 		"size": "EPalSizeType::M",
 		"rarity": 3,
 		"element_types": [
-			"EPalElementType::Normal"
+			"Neutral"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -108,7 +108,7 @@
 		"size": "EPalSizeType::M",
 		"rarity": 6,
 		"element_types": [
-			"EPalElementType::Fire"
+			"Fire"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -178,7 +178,7 @@
 		"size": "EPalSizeType::M",
 		"rarity": 10,
 		"element_types": [
-			"EPalElementType::Earth"
+			"Ground"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -251,8 +251,8 @@
 		"size": "EPalSizeType::M",
 		"rarity": 4,
 		"element_types": [
-			"EPalElementType::Fire",
-			"EPalElementType::Dark"
+			"Fire",
+			"Dark"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -322,7 +322,7 @@
 		"size": "EPalSizeType::M",
 		"rarity": 5,
 		"element_types": [
-			"EPalElementType::Dark"
+			"Dark"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -392,7 +392,7 @@
 		"size": "EPalSizeType::XS",
 		"rarity": 1,
 		"element_types": [
-			"EPalElementType::Dark"
+			"Dark"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -462,7 +462,7 @@
 		"size": "EPalSizeType::XS",
 		"rarity": 2,
 		"element_types": [
-			"EPalElementType::Ice"
+			"Ice"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -532,7 +532,7 @@
 		"size": "EPalSizeType::S",
 		"rarity": 3,
 		"element_types": [
-			"EPalElementType::Leaf"
+			"Grass"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -603,8 +603,8 @@
 		"size": "EPalSizeType::L",
 		"rarity": 4,
 		"element_types": [
-			"EPalElementType::Fire",
-			"EPalElementType::Dark"
+			"Fire",
+			"Dark"
 		],
 		"genus_category": "EPalGenusCategoryType::Bird",
 		"organization": "EPalOrganizationType::None",
@@ -675,8 +675,8 @@
 		"size": "EPalSizeType::L",
 		"rarity": 5,
 		"element_types": [
-			"EPalElementType::Ice",
-			"EPalElementType::Dark"
+			"Ice",
+			"Dark"
 		],
 		"genus_category": "EPalGenusCategoryType::Bird",
 		"organization": "EPalOrganizationType::None",
@@ -746,7 +746,7 @@
 		"size": "EPalSizeType::L",
 		"rarity": 20,
 		"element_types": [
-			"EPalElementType::Dark"
+			"Dark"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -819,7 +819,7 @@
 		"size": "EPalSizeType::L",
 		"rarity": 10,
 		"element_types": [
-			"EPalElementType::Dark"
+			"Dark"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -890,8 +890,8 @@
 		"size": "EPalSizeType::XL",
 		"rarity": 9,
 		"element_types": [
-			"EPalElementType::Dragon",
-			"EPalElementType::Dark"
+			"Dragon",
+			"Dark"
 		],
 		"genus_category": "EPalGenusCategoryType::Monster",
 		"organization": "EPalOrganizationType::None",
@@ -964,8 +964,8 @@
 		"size": "EPalSizeType::L",
 		"rarity": 7,
 		"element_types": [
-			"EPalElementType::Water",
-			"EPalElementType::Dragon"
+			"Water",
+			"Dragon"
 		],
 		"genus_category": "EPalGenusCategoryType::Fish",
 		"organization": "EPalOrganizationType::None",
@@ -1035,7 +1035,7 @@
 		"size": "EPalSizeType::XS",
 		"rarity": 1,
 		"element_types": [
-			"EPalElementType::Water"
+			"Water"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -1105,7 +1105,7 @@
 		"size": "EPalSizeType::S",
 		"rarity": 1,
 		"element_types": [
-			"EPalElementType::Earth"
+			"Ground"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -1176,8 +1176,8 @@
 		"size": "EPalSizeType::L",
 		"rarity": 6,
 		"element_types": [
-			"EPalElementType::Water",
-			"EPalElementType::Ice"
+			"Water",
+			"Ice"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -1247,7 +1247,7 @@
 		"size": "EPalSizeType::XS",
 		"rarity": 1,
 		"element_types": [
-			"EPalElementType::Leaf"
+			"Grass"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -1317,7 +1317,7 @@
 		"size": "EPalSizeType::M",
 		"rarity": 5,
 		"element_types": [
-			"EPalElementType::Dark"
+			"Dark"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -1387,7 +1387,7 @@
 		"size": "EPalSizeType::M",
 		"rarity": 6,
 		"element_types": [
-			"EPalElementType::Dark"
+			"Dark"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -1457,7 +1457,7 @@
 		"size": "EPalSizeType::M",
 		"rarity": 6,
 		"element_types": [
-			"EPalElementType::Dark"
+			"Dark"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -1527,7 +1527,7 @@
 		"size": "EPalSizeType::XS",
 		"rarity": 1,
 		"element_types": [
-			"EPalElementType::Normal"
+			"Neutral"
 		],
 		"genus_category": "EPalGenusCategoryType::Bird",
 		"organization": "EPalOrganizationType::None",
@@ -1597,7 +1597,7 @@
 		"size": "EPalSizeType::S",
 		"rarity": 1,
 		"element_types": [
-			"EPalElementType::Normal"
+			"Neutral"
 		],
 		"genus_category": "EPalGenusCategoryType::Bird",
 		"organization": "EPalOrganizationType::None",
@@ -1667,7 +1667,7 @@
 		"size": "EPalSizeType::S",
 		"rarity": 2,
 		"element_types": [
-			"EPalElementType::Normal"
+			"Neutral"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -1737,7 +1737,7 @@
 		"size": "EPalSizeType::M",
 		"rarity": 4,
 		"element_types": [
-			"EPalElementType::Leaf"
+			"Grass"
 		],
 		"genus_category": "EPalGenusCategoryType::Bird",
 		"organization": "EPalOrganizationType::None",
@@ -1807,7 +1807,7 @@
 		"size": "EPalSizeType::XS",
 		"rarity": 2,
 		"element_types": [
-			"EPalElementType::Normal"
+			"Neutral"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -1877,7 +1877,7 @@
 		"size": "EPalSizeType::XS",
 		"rarity": 1,
 		"element_types": [
-			"EPalElementType::Earth"
+			"Ground"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -1947,7 +1947,7 @@
 		"size": "EPalSizeType::M",
 		"rarity": 3,
 		"element_types": [
-			"EPalElementType::Dark"
+			"Dark"
 		],
 		"genus_category": "EPalGenusCategoryType::Bird",
 		"organization": "EPalOrganizationType::None",
@@ -2018,8 +2018,8 @@
 		"size": "EPalSizeType::L",
 		"rarity": 9,
 		"element_types": [
-			"EPalElementType::Dark",
-			"EPalElementType::Earth"
+			"Dark",
+			"Ground"
 		],
 		"genus_category": "EPalGenusCategoryType::Other",
 		"organization": "EPalOrganizationType::None",
@@ -2089,7 +2089,7 @@
 		"size": "EPalSizeType::L",
 		"rarity": 4,
 		"element_types": [
-			"EPalElementType::Normal"
+			"Neutral"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -2159,7 +2159,7 @@
 		"size": "EPalSizeType::L",
 		"rarity": 6,
 		"element_types": [
-			"EPalElementType::Earth"
+			"Ground"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -2229,7 +2229,7 @@
 		"size": "EPalSizeType::XS",
 		"rarity": 1,
 		"element_types": [
-			"EPalElementType::Dark"
+			"Dark"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -2299,7 +2299,7 @@
 		"size": "EPalSizeType::M",
 		"rarity": 5,
 		"element_types": [
-			"EPalElementType::Earth"
+			"Ground"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -2371,7 +2371,7 @@
 		"size": "EPalSizeType::M",
 		"rarity": 2,
 		"element_types": [
-			"EPalElementType::Normal"
+			"Neutral"
 		],
 		"genus_category": "EPalGenusCategoryType::Bird",
 		"organization": "EPalOrganizationType::None",
@@ -2441,7 +2441,7 @@
 		"size": "EPalSizeType::XS",
 		"rarity": 1,
 		"element_types": [
-			"EPalElementType::Electricity"
+			"Electric"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -2511,7 +2511,7 @@
 		"size": "EPalSizeType::L",
 		"rarity": 8,
 		"element_types": [
-			"EPalElementType::Electricity"
+			"Electric"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -2581,7 +2581,7 @@
 		"size": "EPalSizeType::L",
 		"rarity": 7,
 		"element_types": [
-			"EPalElementType::Dragon"
+			"Dragon"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -2652,8 +2652,8 @@
 		"size": "EPalSizeType::L",
 		"rarity": 8,
 		"element_types": [
-			"EPalElementType::Dragon",
-			"EPalElementType::Water"
+			"Dragon",
+			"Water"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -2723,7 +2723,7 @@
 		"size": "EPalSizeType::S",
 		"rarity": 3,
 		"element_types": [
-			"EPalElementType::Normal"
+			"Neutral"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -2793,7 +2793,7 @@
 		"size": "EPalSizeType::L",
 		"rarity": 6,
 		"element_types": [
-			"EPalElementType::Fire"
+			"Fire"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -2864,8 +2864,8 @@
 		"size": "EPalSizeType::L",
 		"rarity": 7,
 		"element_types": [
-			"EPalElementType::Fire",
-			"EPalElementType::Dark"
+			"Fire",
+			"Dark"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -2935,7 +2935,7 @@
 		"size": "EPalSizeType::S",
 		"rarity": 2,
 		"element_types": [
-			"EPalElementType::Fire"
+			"Fire"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -3005,7 +3005,7 @@
 		"size": "EPalSizeType::M",
 		"rarity": 4,
 		"element_types": [
-			"EPalElementType::Fire"
+			"Fire"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -3076,8 +3076,8 @@
 		"size": "EPalSizeType::L",
 		"rarity": 6,
 		"element_types": [
-			"EPalElementType::Leaf",
-			"EPalElementType::Dragon"
+			"Grass",
+			"Dragon"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -3148,8 +3148,8 @@
 		"size": "EPalSizeType::L",
 		"rarity": 7,
 		"element_types": [
-			"EPalElementType::Electricity",
-			"EPalElementType::Dragon"
+			"Electric",
+			"Dragon"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -3219,7 +3219,7 @@
 		"size": "EPalSizeType::M",
 		"rarity": 8,
 		"element_types": [
-			"EPalElementType::Leaf"
+			"Grass"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -3289,7 +3289,7 @@
 		"size": "EPalSizeType::XS",
 		"rarity": 1,
 		"element_types": [
-			"EPalElementType::Leaf"
+			"Grass"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -3359,7 +3359,7 @@
 		"size": "EPalSizeType::M",
 		"rarity": 3,
 		"element_types": [
-			"EPalElementType::Water"
+			"Water"
 		],
 		"genus_category": "EPalGenusCategoryType::Other",
 		"organization": "EPalOrganizationType::None",
@@ -3429,7 +3429,7 @@
 		"size": "EPalSizeType::M",
 		"rarity": 6,
 		"element_types": [
-			"EPalElementType::Fire"
+			"Fire"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -3499,7 +3499,7 @@
 		"size": "EPalSizeType::M",
 		"rarity": 1,
 		"element_types": [
-			"EPalElementType::Water"
+			"Water"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -3569,7 +3569,7 @@
 		"size": "EPalSizeType::S",
 		"rarity": 2,
 		"element_types": [
-			"EPalElementType::Normal"
+			"Neutral"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -3639,7 +3639,7 @@
 		"size": "EPalSizeType::M",
 		"rarity": 6,
 		"element_types": [
-			"EPalElementType::Dark"
+			"Dark"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -3709,7 +3709,7 @@
 		"size": "EPalSizeType::S",
 		"rarity": 5,
 		"element_types": [
-			"EPalElementType::Normal"
+			"Neutral"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -3781,7 +3781,7 @@
 		"size": "EPalSizeType::XL",
 		"rarity": 8,
 		"element_types": [
-			"EPalElementType::Leaf"
+			"Grass"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -3851,7 +3851,7 @@
 		"size": "EPalSizeType::XL",
 		"rarity": 9,
 		"element_types": [
-			"EPalElementType::Ice"
+			"Ice"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -3921,7 +3921,7 @@
 		"size": "EPalSizeType::L",
 		"rarity": 6,
 		"element_types": [
-			"EPalElementType::Leaf"
+			"Grass"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -3991,7 +3991,7 @@
 		"size": "EPalSizeType::L",
 		"rarity": 7,
 		"element_types": [
-			"EPalElementType::Electricity"
+			"Electric"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -4061,7 +4061,7 @@
 		"size": "EPalSizeType::M",
 		"rarity": 8,
 		"element_types": [
-			"EPalElementType::Leaf"
+			"Grass"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -4131,7 +4131,7 @@
 		"size": "EPalSizeType::L",
 		"rarity": 7,
 		"element_types": [
-			"EPalElementType::Dark"
+			"Dark"
 		],
 		"genus_category": "EPalGenusCategoryType::Bird",
 		"organization": "EPalOrganizationType::None",
@@ -4201,7 +4201,7 @@
 		"size": "EPalSizeType::L",
 		"rarity": 3,
 		"element_types": [
-			"EPalElementType::Normal"
+			"Neutral"
 		],
 		"genus_category": "EPalGenusCategoryType::Bird",
 		"organization": "EPalOrganizationType::None",
@@ -4271,7 +4271,7 @@
 		"size": "EPalSizeType::XS",
 		"rarity": 1,
 		"element_types": [
-			"EPalElementType::Electricity"
+			"Electric"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -4341,7 +4341,7 @@
 		"size": "EPalSizeType::XS",
 		"rarity": 2,
 		"element_types": [
-			"EPalElementType::Ice"
+			"Ice"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -4412,8 +4412,8 @@
 		"size": "EPalSizeType::L",
 		"rarity": 8,
 		"element_types": [
-			"EPalElementType::Earth",
-			"EPalElementType::Leaf"
+			"Ground",
+			"Grass"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -4485,7 +4485,7 @@
 		"size": "EPalSizeType::L",
 		"rarity": 9,
 		"element_types": [
-			"EPalElementType::Fire"
+			"Fire"
 		],
 		"genus_category": "EPalGenusCategoryType::Bird",
 		"organization": "EPalOrganizationType::None",
@@ -4555,7 +4555,7 @@
 		"size": "EPalSizeType::M",
 		"rarity": 4,
 		"element_types": [
-			"EPalElementType::Ice"
+			"Ice"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -4625,7 +4625,7 @@
 		"size": "EPalSizeType::S",
 		"rarity": 5,
 		"element_types": [
-			"EPalElementType::Ice"
+			"Ice"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -4695,7 +4695,7 @@
 		"size": "EPalSizeType::L",
 		"rarity": 20,
 		"element_types": [
-			"EPalElementType::Ice"
+			"Ice"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -4768,7 +4768,7 @@
 		"size": "EPalSizeType::L",
 		"rarity": 20,
 		"element_types": [
-			"EPalElementType::Dark"
+			"Dark"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -4840,7 +4840,7 @@
 		"size": "EPalSizeType::XL",
 		"rarity": 20,
 		"element_types": [
-			"EPalElementType::Dragon"
+			"Dragon"
 		],
 		"genus_category": "EPalGenusCategoryType::Dragon",
 		"organization": "EPalOrganizationType::None",
@@ -4913,7 +4913,7 @@
 		"size": "EPalSizeType::XS",
 		"rarity": 1,
 		"element_types": [
-			"EPalElementType::Water"
+			"Water"
 		],
 		"genus_category": "EPalGenusCategoryType::Dragon",
 		"organization": "EPalOrganizationType::None",
@@ -4983,7 +4983,7 @@
 		"size": "EPalSizeType::XS",
 		"rarity": 2,
 		"element_types": [
-			"EPalElementType::Fire"
+			"Fire"
 		],
 		"genus_category": "EPalGenusCategoryType::Dragon",
 		"organization": "EPalOrganizationType::None",
@@ -5053,7 +5053,7 @@
 		"size": "EPalSizeType::XL",
 		"rarity": 8,
 		"element_types": [
-			"EPalElementType::Normal"
+			"Neutral"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -5123,7 +5123,7 @@
 		"size": "EPalSizeType::XL",
 		"rarity": 9,
 		"element_types": [
-			"EPalElementType::Ice"
+			"Ice"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -5193,7 +5193,7 @@
 		"size": "EPalSizeType::XL",
 		"rarity": 9,
 		"element_types": [
-			"EPalElementType::Fire"
+			"Fire"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -5265,7 +5265,7 @@
 		"size": "EPalSizeType::M",
 		"rarity": 5,
 		"element_types": [
-			"EPalElementType::Electricity"
+			"Electric"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -5335,7 +5335,7 @@
 		"size": "EPalSizeType::XS",
 		"rarity": 1,
 		"element_types": [
-			"EPalElementType::Fire"
+			"Fire"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -5405,7 +5405,7 @@
 		"size": "EPalSizeType::XS",
 		"rarity": 1,
 		"element_types": [
-			"EPalElementType::Fire"
+			"Fire"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -5467,7 +5467,7 @@
 		"size": "EPalSizeType::M",
 		"rarity": 4,
 		"element_types": [
-			"EPalElementType::Earth"
+			"Ground"
 		],
 		"genus_category": "EPalGenusCategoryType::Fish",
 		"organization": "EPalOrganizationType::None",
@@ -5538,8 +5538,8 @@
 		"size": "EPalSizeType::XL",
 		"rarity": 8,
 		"element_types": [
-			"EPalElementType::Dragon",
-			"EPalElementType::Water"
+			"Dragon",
+			"Water"
 		],
 		"genus_category": "EPalGenusCategoryType::Monster",
 		"organization": "EPalOrganizationType::None",
@@ -5612,8 +5612,8 @@
 		"size": "EPalSizeType::XL",
 		"rarity": 9,
 		"element_types": [
-			"EPalElementType::Dragon",
-			"EPalElementType::Electricity"
+			"Dragon",
+			"Electric"
 		],
 		"genus_category": "EPalGenusCategoryType::Monster",
 		"organization": "EPalOrganizationType::None",
@@ -5683,7 +5683,7 @@
 		"size": "EPalSizeType::L",
 		"rarity": 9,
 		"element_types": [
-			"EPalElementType::Leaf"
+			"Grass"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -5755,7 +5755,7 @@
 		"size": "EPalSizeType::L",
 		"rarity": 10,
 		"element_types": [
-			"EPalElementType::Dark"
+			"Dark"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -5825,7 +5825,7 @@
 		"size": "EPalSizeType::S",
 		"rarity": 1,
 		"element_types": [
-			"EPalElementType::Leaf"
+			"Grass"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -5895,7 +5895,7 @@
 		"size": "EPalSizeType::S",
 		"rarity": 2,
 		"element_types": [
-			"EPalElementType::Dark"
+			"Dark"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -5965,7 +5965,7 @@
 		"size": "EPalSizeType::S",
 		"rarity": 3,
 		"element_types": [
-			"EPalElementType::Fire"
+			"Fire"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -6035,7 +6035,7 @@
 		"size": "EPalSizeType::L",
 		"rarity": 7,
 		"element_types": [
-			"EPalElementType::Fire"
+			"Fire"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -6106,8 +6106,8 @@
 		"size": "EPalSizeType::L",
 		"rarity": 8,
 		"element_types": [
-			"EPalElementType::Fire",
-			"EPalElementType::Dark"
+			"Fire",
+			"Dark"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -6177,7 +6177,7 @@
 		"size": "EPalSizeType::XS",
 		"rarity": 1,
 		"element_types": [
-			"EPalElementType::Leaf"
+			"Grass"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -6247,7 +6247,7 @@
 		"size": "EPalSizeType::XS",
 		"rarity": 1,
 		"element_types": [
-			"EPalElementType::Ice"
+			"Ice"
 		],
 		"genus_category": "EPalGenusCategoryType::Other",
 		"organization": "EPalOrganizationType::None",
@@ -6317,7 +6317,7 @@
 		"size": "EPalSizeType::L",
 		"rarity": 6,
 		"element_types": [
-			"EPalElementType::Ice"
+			"Ice"
 		],
 		"genus_category": "EPalGenusCategoryType::Other",
 		"organization": "EPalOrganizationType::None",
@@ -6387,7 +6387,7 @@
 		"size": "EPalSizeType::M",
 		"rarity": 6,
 		"element_types": [
-			"EPalElementType::Normal"
+			"Neutral"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -6457,7 +6457,7 @@
 		"size": "EPalSizeType::L",
 		"rarity": 6,
 		"element_types": [
-			"EPalElementType::Normal"
+			"Neutral"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -6527,7 +6527,7 @@
 		"size": "EPalSizeType::XS",
 		"rarity": 1,
 		"element_types": [
-			"EPalElementType::Dark"
+			"Dark"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -6597,7 +6597,7 @@
 		"size": "EPalSizeType::XS",
 		"rarity": 1,
 		"element_types": [
-			"EPalElementType::Dark"
+			"Dark"
 		],
 		"genus_category": "EPalGenusCategoryType::Other",
 		"organization": "EPalOrganizationType::None",
@@ -6667,7 +6667,7 @@
 		"size": "EPalSizeType::XS",
 		"rarity": 6,
 		"element_types": [
-			"EPalElementType::Dark"
+			"Dark"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -6738,8 +6738,8 @@
 		"size": "EPalSizeType::XS",
 		"rarity": 1,
 		"element_types": [
-			"EPalElementType::Water",
-			"EPalElementType::Ice"
+			"Water",
+			"Ice"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -6809,7 +6809,7 @@
 		"size": "EPalSizeType::XS",
 		"rarity": 1,
 		"element_types": [
-			"EPalElementType::Normal"
+			"Neutral"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -6881,7 +6881,7 @@
 		"size": "EPalSizeType::L",
 		"rarity": 5,
 		"element_types": [
-			"EPalElementType::Normal"
+			"Neutral"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -6953,7 +6953,7 @@
 		"size": "EPalSizeType::XS",
 		"rarity": 1,
 		"element_types": [
-			"EPalElementType::Normal"
+			"Neutral"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -7024,8 +7024,8 @@
 		"size": "EPalSizeType::XS",
 		"rarity": 1,
 		"element_types": [
-			"EPalElementType::Leaf",
-			"EPalElementType::Earth"
+			"Grass",
+			"Ground"
 		],
 		"genus_category": "EPalGenusCategoryType::Other",
 		"organization": "EPalOrganizationType::None",
@@ -7096,8 +7096,8 @@
 		"size": "EPalSizeType::XS",
 		"rarity": 10,
 		"element_types": [
-			"EPalElementType::Leaf",
-			"EPalElementType::Earth"
+			"Grass",
+			"Ground"
 		],
 		"genus_category": "EPalGenusCategoryType::Other",
 		"organization": "EPalOrganizationType::None",
@@ -7167,7 +7167,7 @@
 		"size": "EPalSizeType::L",
 		"rarity": 8,
 		"element_types": [
-			"EPalElementType::Leaf"
+			"Grass"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -7237,7 +7237,7 @@
 		"size": "EPalSizeType::XS",
 		"rarity": 2,
 		"element_types": [
-			"EPalElementType::Electricity"
+			"Electric"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -7307,7 +7307,7 @@
 		"size": "EPalSizeType::L",
 		"rarity": 7,
 		"element_types": [
-			"EPalElementType::Fire"
+			"Fire"
 		],
 		"genus_category": "EPalGenusCategoryType::Bird",
 		"organization": "EPalOrganizationType::None",
@@ -7377,7 +7377,7 @@
 		"size": "EPalSizeType::M",
 		"rarity": 5,
 		"element_types": [
-			"EPalElementType::Leaf"
+			"Grass"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -7448,8 +7448,8 @@
 		"size": "EPalSizeType::M",
 		"rarity": 6,
 		"element_types": [
-			"EPalElementType::Leaf",
-			"EPalElementType::Earth"
+			"Grass",
+			"Ground"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -7519,7 +7519,7 @@
 		"size": "EPalSizeType::M",
 		"rarity": 7,
 		"element_types": [
-			"EPalElementType::Fire"
+			"Fire"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -7589,7 +7589,7 @@
 		"size": "EPalSizeType::L",
 		"rarity": 20,
 		"element_types": [
-			"EPalElementType::Normal"
+			"Neutral"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -7662,7 +7662,7 @@
 		"size": "EPalSizeType::XL",
 		"rarity": 7,
 		"element_types": [
-			"EPalElementType::Leaf"
+			"Grass"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -7733,8 +7733,8 @@
 		"size": "EPalSizeType::XL",
 		"rarity": 8,
 		"element_types": [
-			"EPalElementType::Leaf",
-			"EPalElementType::Water"
+			"Grass",
+			"Water"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -7804,7 +7804,7 @@
 		"size": "EPalSizeType::M",
 		"rarity": 4,
 		"element_types": [
-			"EPalElementType::Water"
+			"Water"
 		],
 		"genus_category": "EPalGenusCategoryType::Fish",
 		"organization": "EPalOrganizationType::None",
@@ -7874,7 +7874,7 @@
 		"size": "EPalSizeType::M",
 		"rarity": 5,
 		"element_types": [
-			"EPalElementType::Earth"
+			"Ground"
 		],
 		"genus_category": "EPalGenusCategoryType::Fish",
 		"organization": "EPalOrganizationType::None",
@@ -7944,7 +7944,7 @@
 		"size": "EPalSizeType::S",
 		"rarity": 2,
 		"element_types": [
-			"EPalElementType::Water"
+			"Water"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -8014,7 +8014,7 @@
 		"size": "EPalSizeType::S",
 		"rarity": 3,
 		"element_types": [
-			"EPalElementType::Fire"
+			"Fire"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -8050,7 +8050,7 @@
 			"Neutral"
 		],
 		"element_types": [
-			"EPalElementType::Normal"
+			"Neutral"
 		],
 		"skill_set": {
 			"EPalWazaID::Unique_SheepBall_Roll": 1,
@@ -8151,7 +8151,7 @@
 		"size": "EPalSizeType::L",
 		"rarity": 7,
 		"element_types": [
-			"EPalElementType::Dragon"
+			"Dragon"
 		],
 		"genus_category": "EPalGenusCategoryType::Dragon",
 		"organization": "EPalOrganizationType::None",
@@ -8221,7 +8221,7 @@
 		"size": "EPalSizeType::M",
 		"rarity": 4,
 		"element_types": [
-			"EPalElementType::Leaf"
+			"Grass"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -8291,7 +8291,7 @@
 		"size": "EPalSizeType::XL",
 		"rarity": 8,
 		"element_types": [
-			"EPalElementType::Fire"
+			"Fire"
 		],
 		"genus_category": "EPalGenusCategoryType::Bird",
 		"organization": "EPalOrganizationType::None",
@@ -8361,7 +8361,7 @@
 		"size": "EPalSizeType::XL",
 		"rarity": 9,
 		"element_types": [
-			"EPalElementType::Water"
+			"Water"
 		],
 		"genus_category": "EPalGenusCategoryType::Bird",
 		"organization": "EPalOrganizationType::None",
@@ -8431,7 +8431,7 @@
 		"size": "EPalSizeType::S",
 		"rarity": 3,
 		"element_types": [
-			"EPalElementType::Normal"
+			"Neutral"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -8501,7 +8501,7 @@
 		"size": "EPalSizeType::L",
 		"rarity": 6,
 		"element_types": [
-			"EPalElementType::Electricity"
+			"Electric"
 		],
 		"genus_category": "EPalGenusCategoryType::Bird",
 		"organization": "EPalOrganizationType::None",
@@ -8571,7 +8571,7 @@
 		"size": "EPalSizeType::M",
 		"rarity": 5,
 		"element_types": [
-			"EPalElementType::Electricity"
+			"Electric"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -8642,8 +8642,8 @@
 		"size": "EPalSizeType::L",
 		"rarity": 9,
 		"element_types": [
-			"EPalElementType::Dragon",
-			"EPalElementType::Electricity"
+			"Dragon",
+			"Electric"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -8716,8 +8716,8 @@
 		"size": "EPalSizeType::XL",
 		"rarity": 8,
 		"element_types": [
-			"EPalElementType::Dragon",
-			"EPalElementType::Water"
+			"Dragon",
+			"Water"
 		],
 		"genus_category": "EPalGenusCategoryType::Fish",
 		"organization": "EPalOrganizationType::None",
@@ -8790,8 +8790,8 @@
 		"size": "EPalSizeType::XL",
 		"rarity": 9,
 		"element_types": [
-			"EPalElementType::Dragon",
-			"EPalElementType::Fire"
+			"Dragon",
+			"Fire"
 		],
 		"genus_category": "EPalGenusCategoryType::Fish",
 		"organization": "EPalOrganizationType::None",
@@ -8861,7 +8861,7 @@
 		"size": "EPalSizeType::M",
 		"rarity": 8,
 		"element_types": [
-			"EPalElementType::Leaf"
+			"Grass"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -8932,8 +8932,8 @@
 		"size": "EPalSizeType::L",
 		"rarity": 6,
 		"element_types": [
-			"EPalElementType::Fire",
-			"EPalElementType::Earth"
+			"Fire",
+			"Ground"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -9004,8 +9004,8 @@
 		"size": "EPalSizeType::L",
 		"rarity": 7,
 		"element_types": [
-			"EPalElementType::Ice",
-			"EPalElementType::Earth"
+			"Ice",
+			"Ground"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -9077,8 +9077,8 @@
 		"size": "EPalSizeType::M",
 		"rarity": 4,
 		"element_types": [
-			"EPalElementType::Ice",
-			"EPalElementType::Dragon"
+			"Ice",
+			"Dragon"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -9148,7 +9148,7 @@
 		"size": "EPalSizeType::M",
 		"rarity": 3,
 		"element_types": [
-			"EPalElementType::Dark"
+			"Dark"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -9218,7 +9218,7 @@
 		"size": "EPalSizeType::L",
 		"rarity": 7,
 		"element_types": [
-			"EPalElementType::Ice"
+			"Ice"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -9288,7 +9288,7 @@
 		"size": "EPalSizeType::L",
 		"rarity": 7,
 		"element_types": [
-			"EPalElementType::Ice"
+			"Ice"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -9350,7 +9350,7 @@
 		"size": "EPalSizeType::XS",
 		"rarity": 1,
 		"element_types": [
-			"EPalElementType::Earth"
+			"Ground"
 		],
 		"genus_category": "EPalGenusCategoryType::Other",
 		"organization": "EPalOrganizationType::None",
@@ -9412,7 +9412,7 @@
 		"size": "EPalSizeType::XS",
 		"rarity": 2,
 		"element_types": [
-			"EPalElementType::Ice"
+			"Ice"
 		],
 		"genus_category": "EPalGenusCategoryType::Other",
 		"organization": "EPalOrganizationType::None",
@@ -9482,7 +9482,7 @@
 		"size": "EPalSizeType::XS",
 		"rarity": 1,
 		"element_types": [
-			"EPalElementType::Dark"
+			"Dark"
 		],
 		"genus_category": "EPalGenusCategoryType::Bird",
 		"organization": "EPalOrganizationType::None",
@@ -9552,7 +9552,7 @@
 		"size": "EPalSizeType::XS",
 		"rarity": 1,
 		"element_types": [
-			"EPalElementType::Normal"
+			"Neutral"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -9622,7 +9622,7 @@
 		"size": "EPalSizeType::L",
 		"rarity": 7,
 		"element_types": [
-			"EPalElementType::Ice"
+			"Ice"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -9692,7 +9692,7 @@
 		"size": "EPalSizeType::L",
 		"rarity": 8,
 		"element_types": [
-			"EPalElementType::Leaf"
+			"Grass"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -9755,8 +9755,8 @@
 		"size": "EPalSizeType::L",
 		"rarity": 10,
 		"element_types": [
-			"EPalElementType::Dark",
-			"EPalElementType::Dragon"
+			"Dark",
+			"Dragon"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -9818,7 +9818,7 @@
 		"size": "EPalSizeType::M",
 		"rarity": 0,
 		"element_types": [
-			"EPalElementType::Electricity"
+			"Electric"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -9881,7 +9881,7 @@
 		"size": "EPalSizeType::M",
 		"rarity": 5,
 		"element_types": [
-			"EPalElementType::Dark"
+			"Dark"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -9961,7 +9961,7 @@
 		"size": "EPalSizeType::M",
 		"rarity": 20,
 		"element_types": [
-			"EPalElementType::Dark"
+			"Dark"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -10042,7 +10042,7 @@
 		"size": "EPalSizeType::M",
 		"rarity": 20,
 		"element_types": [
-			"EPalElementType::Dark"
+			"Dark"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -10108,8 +10108,8 @@
 		"size": "EPalSizeType::XL",
 		"rarity": 9,
 		"element_types": [
-			"EPalElementType::Dragon",
-			"EPalElementType::Electricity"
+			"Dragon",
+			"Electric"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -10172,7 +10172,7 @@
 		"size": "EPalSizeType::XL",
 		"rarity": 9,
 		"element_types": [
-			"EPalElementType::Leaf"
+			"Grass"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -10235,7 +10235,7 @@
 		"size": "EPalSizeType::XL",
 		"rarity": 9,
 		"element_types": [
-			"EPalElementType::Fire"
+			"Fire"
 		],
 		"genus_category": "EPalGenusCategoryType::Bird",
 		"organization": "EPalOrganizationType::None",
@@ -10298,7 +10298,7 @@
 		"size": "EPalSizeType::XL",
 		"rarity": 10,
 		"element_types": [
-			"EPalElementType::Dark"
+			"Dark"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -10361,7 +10361,7 @@
 		"size": "EPalSizeType::XL",
 		"rarity": 8,
 		"element_types": [
-			"EPalElementType::Electricity"
+			"Electric"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -10727,7 +10727,7 @@
 		"size": "EPalSizeType::S",
 		"rarity": 5,
 		"element_types": [
-			"EPalElementType::Earth"
+			"Ground"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -10800,8 +10800,8 @@
 		"size": "EPalSizeType::M",
 		"rarity": 5,
 		"element_types": [
-			"EPalElementType::Fire",
-			"EPalElementType::Dragon"
+			"Fire",
+			"Dragon"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -10872,8 +10872,8 @@
 		"size": "EPalSizeType::M",
 		"rarity": 7,
 		"element_types": [
-			"EPalElementType::Fire",
-			"EPalElementType::Dark"
+			"Fire",
+			"Dark"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -10944,8 +10944,8 @@
 		"size": "EPalSizeType::M",
 		"rarity": 6,
 		"element_types": [
-			"EPalElementType::Dark",
-			"EPalElementType::Fire"
+			"Dark",
+			"Fire"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -11016,8 +11016,8 @@
 		"size": "EPalSizeType::M",
 		"rarity": 6,
 		"element_types": [
-			"EPalElementType::Fire",
-			"EPalElementType::Dark"
+			"Fire",
+			"Dark"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -11087,7 +11087,7 @@
 		"size": "EPalSizeType::L",
 		"rarity": 9,
 		"element_types": [
-			"EPalElementType::Earth"
+			"Ground"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -11160,8 +11160,8 @@
 		"size": "EPalSizeType::L",
 		"rarity": 8,
 		"element_types": [
-			"EPalElementType::Dragon",
-			"EPalElementType::Leaf"
+			"Dragon",
+			"Grass"
 		],
 		"genus_category": "EPalGenusCategoryType::Dragon",
 		"organization": "EPalOrganizationType::None",
@@ -11232,8 +11232,8 @@
 		"size": "EPalSizeType::XL",
 		"rarity": 10,
 		"element_types": [
-			"EPalElementType::Dragon",
-			"EPalElementType::Fire"
+			"Dragon",
+			"Fire"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -11306,8 +11306,8 @@
 		"size": "EPalSizeType::L",
 		"rarity": 8,
 		"element_types": [
-			"EPalElementType::Dark",
-			"EPalElementType::Electricity"
+			"Dark",
+			"Electric"
 		],
 		"genus_category": "EPalGenusCategoryType::Bird",
 		"organization": "EPalOrganizationType::None",
@@ -11377,7 +11377,7 @@
 		"size": "EPalSizeType::L",
 		"rarity": 10,
 		"element_types": [
-			"EPalElementType::Earth"
+			"Ground"
 		],
 		"genus_category": "EPalGenusCategoryType::Other",
 		"organization": "EPalOrganizationType::None",
@@ -11448,8 +11448,8 @@
 		"size": "EPalSizeType::L",
 		"rarity": 9,
 		"element_types": [
-			"EPalElementType::Dark",
-			"EPalElementType::Normal"
+			"Dark",
+			"Neutral"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -11513,8 +11513,8 @@
 		"size": "EPalSizeType::XL",
 		"rarity": 9,
 		"element_types": [
-			"EPalElementType::Dark",
-			"EPalElementType::Normal"
+			"Dark",
+			"Neutral"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -11576,7 +11576,7 @@
 		"size": "EPalSizeType::XS",
 		"rarity": 4,
 		"element_types": [
-			"EPalElementType::Water"
+			"Water"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -11638,7 +11638,7 @@
 		"size": "EPalSizeType::S",
 		"rarity": 4,
 		"element_types": [
-			"EPalElementType::Leaf"
+			"Grass"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -11700,7 +11700,7 @@
 		"size": "EPalSizeType::S",
 		"rarity": 4,
 		"element_types": [
-			"EPalElementType::Leaf"
+			"Grass"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -11763,8 +11763,8 @@
 		"size": "EPalSizeType::S",
 		"rarity": 5,
 		"element_types": [
-			"EPalElementType::Leaf",
-			"EPalElementType::Dark"
+			"Grass",
+			"Dark"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -11826,7 +11826,7 @@
 		"size": "EPalSizeType::XS",
 		"rarity": 4,
 		"element_types": [
-			"EPalElementType::Earth"
+			"Ground"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -11889,8 +11889,8 @@
 		"size": "EPalSizeType::M",
 		"rarity": 7,
 		"element_types": [
-			"EPalElementType::Dark",
-			"EPalElementType::Fire"
+			"Dark",
+			"Fire"
 		],
 		"genus_category": "EPalGenusCategoryType::Other",
 		"organization": "EPalOrganizationType::None",
@@ -11953,8 +11953,8 @@
 		"size": "EPalSizeType::S",
 		"rarity": 5,
 		"element_types": [
-			"EPalElementType::Dark",
-			"EPalElementType::Earth"
+			"Dark",
+			"Ground"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -12016,7 +12016,7 @@
 		"size": "EPalSizeType::L",
 		"rarity": 9,
 		"element_types": [
-			"EPalElementType::Earth"
+			"Ground"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -12078,7 +12078,7 @@
 		"size": "EPalSizeType::XS",
 		"rarity": 4,
 		"element_types": [
-			"EPalElementType::Normal"
+			"Neutral"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -12140,7 +12140,7 @@
 		"size": "EPalSizeType::S",
 		"rarity": 6,
 		"element_types": [
-			"EPalElementType::Normal"
+			"Neutral"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -12202,7 +12202,7 @@
 		"size": "EPalSizeType::S",
 		"rarity": 5,
 		"element_types": [
-			"EPalElementType::Earth"
+			"Ground"
 		],
 		"genus_category": "EPalGenusCategoryType::Other",
 		"organization": "EPalOrganizationType::None",
@@ -12264,7 +12264,7 @@
 		"size": "EPalSizeType::XS",
 		"rarity": 7,
 		"element_types": [
-			"EPalElementType::Normal"
+			"Neutral"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -12326,7 +12326,7 @@
 		"size": "EPalSizeType::S",
 		"rarity": 7,
 		"element_types": [
-			"EPalElementType::Dark"
+			"Dark"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -12390,7 +12390,7 @@
 		"size": "EPalSizeType::L",
 		"rarity": 9,
 		"element_types": [
-			"EPalElementType::Dragon"
+			"Dragon"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -12430,7 +12430,7 @@
 		"size": "EPalSizeType::XL",
 		"rarity": 10,
 		"element_types": [
-			"EPalElementType::Dark"
+			"Dark"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -12488,7 +12488,7 @@
 		"size": "EPalSizeType::XL",
 		"rarity": 10,
 		"element_types": [
-			"EPalElementType::Dark"
+			"Dark"
 		],
 		"genus_category": "EPalGenusCategoryType::FourLegged",
 		"organization": "EPalOrganizationType::None",
@@ -12546,7 +12546,7 @@
 		"size": "EPalSizeType::XL",
 		"rarity": 8,
 		"element_types": [
-			"EPalElementType::Electricity"
+			"Electric"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -12604,7 +12604,7 @@
 		"size": "EPalSizeType::XL",
 		"rarity": 9,
 		"element_types": [
-			"EPalElementType::Fire"
+			"Fire"
 		],
 		"genus_category": "EPalGenusCategoryType::Bird",
 		"organization": "EPalOrganizationType::None",
@@ -12662,7 +12662,7 @@
 		"size": "EPalSizeType::XL",
 		"rarity": 9,
 		"element_types": [
-			"EPalElementType::Leaf"
+			"Grass"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -12720,8 +12720,8 @@
 		"size": "EPalSizeType::XL",
 		"rarity": 9,
 		"element_types": [
-			"EPalElementType::Dragon",
-			"EPalElementType::Electricity"
+			"Dragon",
+			"Electric"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -12779,8 +12779,8 @@
 		"size": "EPalSizeType::XL",
 		"rarity": 9,
 		"element_types": [
-			"EPalElementType::Dark",
-			"EPalElementType::Normal"
+			"Dark",
+			"Neutral"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",
@@ -12838,8 +12838,8 @@
 		"size": "EPalSizeType::XL",
 		"rarity": 9,
 		"element_types": [
-			"EPalElementType::Dark",
-			"EPalElementType::Normal"
+			"Dark",
+			"Neutral"
 		],
 		"genus_category": "EPalGenusCategoryType::Humanoid",
 		"organization": "EPalOrganizationType::None",

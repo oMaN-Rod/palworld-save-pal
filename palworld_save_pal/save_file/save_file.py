@@ -453,6 +453,11 @@ class SaveFile(BaseModel):
                 if "Level" in save_parameter
                 else 1
             )
+            exp = (
+                PalObjects.get_value(save_parameter["Exp"])
+                if "Exp" in save_parameter
+                else 0
+            )
             player_sav_bytes = player_sav_files.get(uid)
             if not player_sav_bytes:
                 logger.warning("No player save file found for player %s", uid)
@@ -466,10 +471,12 @@ class SaveFile(BaseModel):
                 uid=uid,
                 nickname=nickname,
                 level=level,
+                exp=exp,
                 gvas_file=gvas_file,
                 item_container_save_data=self._item_container_save_data,
                 dynamic_item_save_data=self._dynamic_item_save_data,
                 character_container_save_data=self._character_container_save_data,
+                character_save_parameter=save_parameter,
                 guild=self._player_guild(uid),
             )
             player.pals = self._get_player_pals(uid)

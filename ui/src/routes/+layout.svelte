@@ -11,13 +11,13 @@
 	} from '$lib/data';
 	import { getNavigationState, getSocketState, getAppState, getToastState } from '$states';
 	import { MessageType } from '$types';
-	import { error, fail } from '@sveltejs/kit';
 	import { goto } from '$app/navigation';
 
 	const { children } = $props();
 
 	const ws = getSocketState();
 	const appState = getAppState();
+	const nav = getNavigationState();
 
 	$effect(() => {
 		const loadData = async () => {
@@ -39,14 +39,15 @@
 					const { player_id, pal } = data;
 					if (appState.players && appState.players[player_id] && appState.players[player_id].pals) {
 						async function loadPal() {
-							const palInfo = await palsData.getPalInfo(pal.character_id);
-							pal.name = palInfo?.localized_name || pal.character_id;
-							pal.elements = palInfo?.type || [];
+							const palData = await palsData.getPalInfo(pal.character_id);
+							pal.name = palData?.localized_name || pal.character_id;
+							pal.elements = palData?.element_types || [];
 							// @ts-ignore
 							appState.players[player_id].pals[pal.instance_id] = pal;
 							appState.selectedPal = pal;
 						}
 						loadPal();
+						nav.activeTab = 'pal';
 					}
 					ws.clear(type);
 					break;
@@ -80,13 +81,26 @@
 
 					ws.clear(type);
 					break;
+				case MessageType.GET_PLAYERS:
+					console.log('Players loaded', data);
+					appState.players = data;
+					goto('/edit');
+					ws.clear(type);
+					break;
+				case MessageType.UPDATE_SAVE_FILE:
+					console.log('Save file updated', data);
+					goto('/edit');
+					ws.clear(type);
+					break;
 				case MessageType.ERROR:
+					console.error('Error', data);
 					goto('/error', {
 						state: {
-							status: 404,
+							status: 400,
 							error: { message: data }
 						}
 					});
+					ws.clear(type);
 			}
 		}
 	});

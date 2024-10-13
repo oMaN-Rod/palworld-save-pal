@@ -19,7 +19,7 @@
 		modified_players?: Record<string, Player>;
 	}
 
-	function handleSaveState() {
+	async function handleSaveState() {
 		let modifiedData: ModifiedData = {};
 
 		if (Object.keys(appState.modifiedPals).length > 0) {
@@ -45,6 +45,7 @@
 			console.log('No modifications to save');
 			return;
 		}
+		await goto('/loading');
 
 		const data = {
 			type: MessageType.UPDATE_SAVE_FILE,
@@ -58,21 +59,7 @@
 		);
 		const entityMessage = entityTypes.join(' and ');
 		ws.message = { type: MessageType.PROGRESS_MESSAGE, data: `Updating modified ${entityMessage}` };
-		nav.activePage = 'loading';
 	}
-
-	$effect(() => {
-		if (ws.message && ws.message.type) {
-			const { data, type } = ws.message;
-			switch (type) {
-				case MessageType.GET_PLAYERS:
-					console.log('Players loaded', data);
-					appState.players = data;
-					ws.clear(type);
-					break;
-			}
-		}
-	});
 
 	$effect(() => {
 		if (!appState.saveFile) {
