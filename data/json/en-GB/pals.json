@@ -1,215 +1,886 @@
 {
-	"Alpaca": "Melpaca",
-	"AmaterasuWolf": "Kitsun",
-	"Anubis": "Anubis",
-	"Baphomet": "Incineram",
-	"Baphomet_Dark": "Incineram Noct",
-	"Bastet": "Mau",
-	"Bastet_Ice": "Mau Cryst",
-	"BerryGoat": "Caprity",
-	"BirdDragon": "Vanwyrm",
-	"BirdDragon_Ice": "Vanwyrm Cryst",
-	"BlackCentaur": "Necromus",
-	"BlackGriffon": "Shadowbeak",
-	"BlackMetalDragon": "Astegon",
-	"BlueDragon": "Azurobe",
-	"BluePlatypus": "Fuack",
-	"Boar": "Rushoar",
-	"CaptainPenguin": "Penking",
-	"Carbunclo": "Lifmunk",
-	"CatBat": "Tombat",
-	"CatMage": "Katress",
-	"CatVampire": "Felbat",
-	"ChickenPal": "Chikipi",
-	"ColorfulBird": "Tocotoco",
-	"CowPal": "Mozzarina",
-	"CuteButterfly": "Cinnamoth",
-	"CuteFox": "Vixy",
-	"CuteMole": "Fuddler",
-	"DarkCrow": "Cawgnito",
-	"DarkScorpion": "Menasting",
-	"Deer": "Eikthyrdeer",
-	"Deer_Ground": "Eikthyrdeer Terra",
-	"DreamDemon": "Daedream",
-	"DrillGame": "Digtoise",
-	"Eagle": "Galeclaw",
-	"ElecCat": "Sparkit",
-	"ElecPanda": "Grizzbolt",
-	"FairyDragon": "Elphidran",
-	"FairyDragon_Water": "Elphidran Aqua",
-	"FengyunDeeper": "Fenglope",
-	"FireKirin": "Pyrin",
-	"FireKirin_Dark": "Pyrin Noct",
-	"FlameBambi": "Rooby",
-	"FlameBuffalo": "Arsox",
-	"FlowerDinosaur": "Dinossom",
-	"FlowerDinosaur_Electric": "Dinossom Lux",
-	"FlowerDoll": "Petallia",
-	"FlowerRabbit": "Flopie",
-	"FlyingManta": "Celaray",
-	"FoxMage": "Wixen",
-	"Ganesha": "Teafant",
-	"Garm": "Direhowl",
-	"GhostBeast": "Maraith",
-	"Gorilla": "Gorirat",
-	"GrassMammoth": "Mammorest",
-	"GrassMammoth_Ice": "Mammorest Cryst",
-	"GrassPanda": "Mossanda",
-	"GrassPanda_Electric": "Mossanda Lux",
-	"GrassRabbitMan": "Verdash",
-	"HadesBird": "Helzephyr",
-	"HawkBird": "Nitewing",
-	"Hedgehog": "Jolthog",
-	"Hedgehog_Ice": "Jolthog Cryst",
-	"HerculesBeetle": "Warsect",
-	"Horus": "Faleris",
-	"IceDeer": "Reindrix",
-	"IceFox": "Foxcicle",
-	"IceHorse": "Frostallion",
-	"IceHorse_Dark": "Frostallion Noct",
-	"JetDragon": "JetDragon",
-	"Kelpie": "Kelpsea",
-	"Kelpie_Fire": "Kelpsea Ignis",
-	"KingAlpaca": "Kingpaca",
-	"KingAlpaca_Ice": "Kingpaca Cryst",
-	"KingBahamut": "Blazamut",
-	"Kirin": "Univolt",
-	"Kitsunebi": "Foxparks",
-	"LavaGirl": "Flambelle",
-	"LazyCatfish": "Dumud",
-	"LazyDragon": "Relaxaurus",
-	"LazyDragon_Electric": "Relaxaurus Lux",
-	"LilyQueen": "Lyleen",
-	"LilyQueen_Dark": "Lyleen Noct",
-	"LittleBriarRose": "Bristla",
-	"LizardMan": "Leezpunk",
-	"LizardMan_Fire": "Leezpunk Ignis",
-	"Manticore": "Blazehowl",
-	"Manticore_Dark": "Blazehowl Noct",
-	"Monkey": "Tanzee",
-	"MopBaby": "Swee",
-	"MopKing": "Sweepa",
-	"Mutant": "Lunaris",
-	"NaughtyCat": "Grintale",
-	"NegativeKoala": "Depresso",
-	"NegativeOctopus": "Killamari",
-	"NightFox": "Nox",
-	"Penguin": "Pengullet",
-	"PinkCat": "Cattiva",
-	"PinkLizard": "Lovander",
-	"PinkRabbit": "Ribbuny",
-	"PlantSlime": "Gumoss",
-	"PlantSlime_Flower": "Gumoss (Special)",
-	"QueenBee": "Elizabee",
-	"RaijinDaughter": "Dazzi",
-	"RedArmorBird": "Ragnahawk",
-	"RobinHood": "Robinquill",
-	"RobinHood_Ground": "Robinquill Terra",
-	"Ronin": "Bushi",
-	"SaintCentaur": "Paladius",
-	"SakuraSaurus": "Broncherry",
-	"SakuraSaurus_Water": "Broncherry Aqua",
-	"Serpent": "Surfent",
-	"Serpent_Ground": "Surfent Terra",
-	"SharkKid": "Gobfin",
-	"SharkKid_Fire": "Gobfin Ignis",
-	"Sheepball": "Lamball",
-	"SkyDragon": "Quivern",
-	"SoldierBee": "Beegarde",
-	"Suzaku": "Suzaku",
-	"Suzaku_Water": "Suzaku Aqua",
-	"SweetsSheep": "Woolipop",
-	"ThunderBird": "Beakon",
-	"ThunderDog": "Rayhound",
-	"ThunderDragonMan": "Orserk",
-	"Umihebi": "Jormuntide",
-	"Umihebi_Fire": "Jormuntide Ignis",
-	"VioletFairy": "Vaelet",
-	"VolcanicMonster": "Reptyro",
-	"VolcanicMonster_Ice": "Reptyro Cryst",
-	"WeaselDragon": "Chillet",
-	"Werewolf": "Loupmoon",
-	"WhiteMoth": "Sibelyx",
-	"WhiteTiger": "Cryolinx",
-	"WindChimes": "Hangyu",
-	"WindChimes_Ice": "Hangyu Cryst",
-	"WizardOwl": "Hoocrates",
-	"WoolFox": "Cremis",
-	"Yeti": "Wumpo",
-	"Yeti_Grass": "Wumpo Botan",
-	"BlackFurDragon": "Dragostrophe",
-	"ElecLion": "Boltmane",
-	"DarkMutant": "Dark Mutant",
-	"NightLady": "Bellanoir",
-	"NightLady_Dark": "Bellanoir Libero",
-	"GYM_ThunderDragonMan": "Axel & Orserk",
-	"GYM_LilyQueen": "Lily & Lyleen",
-	"GYM_Horus": "Marus & Faleris",
-	"GYM_BlackGriffon": "Victor & Shadowbeak",
-	"GYM_ElecPanda": "Zoe & Grizzbolt",
-	"Male_DarkTrader01": "Black Marketeer",
-	"FireCult_FlameThrower": "Brothers of the Eternal Pyre Martyr",
-	"FireCult_Rifle": "Brothers of the Eternal Pyre Rifleman",
-	"Male_Soldier01": "Burly Merc",
-	"Female_Soldier01": "Expedition Survivor",
-	"Believer_CrossBow": "Free Pal Alliance Devout",
-	"Believer_Bat": "Free Pal Alliance Thug",
-	"Male_Scientist01_LaserRifle": "PAL Genetic Research Unit Executioner",
-	"PalDealer": "Pal Merchant",
-	"Police_Handgun": "PIDF Guard",
-	"Hunter_Bat": "Syndicate Thug (Bat)",
-	"Hunter_FlameThrower": "Syndicate Cleaner",
-	"Hunter_Fat_GatlingGun": "Syndicate Crusher",
-	"Hunter_RocketLauncher": "Syndicate Elite",
-	"Hunter_Grenade": "Syndicate Grenadier",
-	"Hunter_Rifle": "Syndicate Gunner",
-	"Hunter_Shotgun": "Syndicate Hunter",
-	"Hunter_Handgun": "Syndicate Thug (Handgun)",
-	"SalesPerson": "Wandering Merchant",
-	"SalesPerson_Desert": "Wandering Merchant (Desert)",
-	"SalesPerson_Desert2": "Wandering Merchant (Desert)",
-	"SalesPerson_Volcano": "Wandering Merchant (Volcano)",
-	"SalesPerson_Volcano2": "Wandering Merchant (Volcano)",
-	"Female_DesertPeople02": "Female Villager",
-	"Female_People02": "Female Villager",
-	"Female_People03": "Female Villager",
-	"Male_DesertPeople01": "Male Villager",
-	"Male_People02": "Male Villager",
-	"Male_People03": "Male Villager",
-	"MobuCitizen": "Islander",
-	"MobuCitizen_Male": "Male Islander",
-	"Guard_Rifle": "Guard",
-	"Guard_Shotgun": "PIDF Goody Two-Shoes",
-	"PalDealer_Desert": "Pal Merchant (Desert)",
-	"PalDealer_Volcano": "Pal Merchant (Volcano)",
-	"Police_Rifle": "PIDF Infantry",
-	"Police_Shotgun": "PIDF Elite",
-	"Gorilla_Ground": "Gorirat Terra",
-	"WeaselDragon_Fire": "Chillet Ignis",
-	"Ronin_Dark": "Bushi Noct",
-	"CatMage_Fire": "Katress Ignis",
-	"FoxMage_Dark": "Wixen Noct",
-	"HerculesBeetle_Ground": "Warsect Terra",
-	"SkyDragon_Grass": "Quivern Botan",
-	"KingBahamut_Dragon": "Blazamut Ryu",
-	"HadesBird_Electric": "Helzephyr Lux",
-	"DarkScorpion_Ground": "Menasting Terra",
-	"MoonQueen": "Selyne",
-	"GYM_MoonQueen": "Saya & Selyne",
-	"KendoFrog": "Croajiro",
-	"LeafPrincess": "Lullu",
-	"MushroomDragon": "Shroomer",
-	"MushroomDragon_Dark": "Shroomer Dark",
-	"SmallArmadillo": "Kikit",
-	"CandleGhost": "Sootseer",
-	"ScorpionMan": "Prixter",
-	"WingGolem": "Knocklem",
-	"GuardianDog": "Yakumo",
-	"SifuDog": "Dogen",
-	"FeatherOstrich": "Dazemu",
-	"MimicDog": "Mimog",
-	"DarkAlien": "Xenovader",
-	"WhiteAlienDragon": "Xenogard",
-	"Male_NinjaElite01": "Moonflower Jonin",
-	"Male_Ninja01": "Moonflower Genin"
+	"Alpaca": {
+		"localized_name": "Melpaca",
+		"description": "Don't be fooled by this Pal's fluffy appearance.\r\nA hypersonic kick from one of its long legs may\r\nsend you flying to the other side of the world."
+	},
+	"AmaterasuWolf": {
+		"localized_name": "Kitsun",
+		"description": "Despite its appearance, Kitsun is extremely sensitive and will flee into a cave when spooked.\r\nLong ago, it was considered an ill omen if one were found nearby."
+	},
+	"Anubis": {
+		"localized_name": "Anubis",
+		"description": "Once seen as a symbol of nobility, \r\nand an idol for those who shunned wealth and power.\r\nYet over time, this Pal became a token of death."
+	},
+	"Baphomet": {
+		"localized_name": "Incineram",
+		"description": "In the dark of night, this Pal snatches prey to bring back to its territory.\r\nWhat happens to those poor souls afterwards isn't too hard to imagine."
+	},
+	"Baphomet_Dark": {
+		"localized_name": "Incineram Noct",
+		"description": "It specifically targets baby pals, taking them back to its territory.\r\nOne can only imagine the profound despair\r\nof the parent Pal, whose child has been taken away."
+	},
+	"Bastet": {
+		"localized_name": "Mau",
+		"description": "Its hard tail does not deteriorate even when cut off.\r\nSome believed these severed tails to be good luck,\r\nbut for the innumerable Mau who were\r\npoached as a result, they were anything but."
+	},
+	"Bastet_Ice": {
+		"localized_name": "Mau Cryst",
+		"description": "Its crystalline tail is beautiful, but shatters when this Pal dies.\r\nSome believe it is good luck to raise one,\r\nso Mau Cryst in captivity are treated with great care."
+	},
+	"BerryGoat": {
+		"localized_name": "Caprity",
+		"description": "The shrub on this Pal's back produces berries as long as it is properly fed.\r\nIt offers these berries to potential mates, and if the flavor is to their liking, romance blossoms."
+	},
+	"BirdDragon": {
+		"localized_name": "Vanwyrm",
+		"description": "The melodies of a flute made from the exoskeleton of a Vanwyrm\r\nare said to cross whole mountain ranges.\r\nIn ages past, such flutes were used to signal an attack."
+	},
+	"BirdDragon_Ice": {
+		"localized_name": "Vanwyrm Cryst",
+		"description": "The melodies of a flute made from the exoskeleton of a Vanwyrm Cryst are said to\r\ncross whole mountain ranges.\r\nIn ages past, such flutes were used to signal victory in battle."
+	},
+	"BlackCentaur": {
+		"localized_name": "Necromus",
+		"description": "Once one with Paladius. \r\nIts darkened form is the embodiment of negative emotions. \r\nHowever, a glimmer of compassion can still be seen deep within its eyes."
+	},
+	"BlackGriffon": {
+		"localized_name": "Shadowbeak",
+		"description": "Born from the depths of insanity, its very existence should not be.\r\nHaving lost all genetic ties to other Pals,\r\none wonders if it could still even be considered a Pal."
+	},
+	"BlackMetalDragon": {
+		"localized_name": "Astegon",
+		"description": "A savage beast born of the abyss.\r\nThou shall not stand before the beast.\r\nThou shall not heed the beast."
+	},
+	"BlueDragon": {
+		"localized_name": "Azurobe",
+		"description": "This Pal's white ribbon turns black if doused with impure water.\r\nGiven its usefulness in detecting poison, this Pal was once overhunted.\r\nThis past has left them bitter towards humanity."
+	},
+	"BluePlatypus": {
+		"localized_name": "Fuack",
+		"description": "Using its own body water, this Pal can create waves anywhere.\r\nIt body surfs when in a hurry, but the resulting speed often ends in a fatal collision."
+	},
+	"Boar": {
+		"localized_name": "Rushoar",
+		"description": "Being an extremely aggressive Pal, it often picks fights before gauging its opponents' strength.\r\nThough small, its powerful charge can even send boulders flying."
+	},
+	"CaptainPenguin": {
+		"localized_name": "Penking",
+		"description": "Surprisingly, it is unrelated to Pengullet.\r\nEver wanting to be the center of attention, this Pal will strut its stuff for any onlookers."
+	},
+	"Carbunclo": {
+		"localized_name": "Lifmunk",
+		"description": "Intelligent as a five to seven-year-old human child.\r\nIt makes a wonderful partner, but there have been more than a few cases\r\nwhere they've killed their master after learning to use weapons."
+	},
+	"CatBat": {
+		"localized_name": "Tombat",
+		"description": "Often appears out of the blue to flaunt its prized wings in front of other Pals.\r\nAlthough this appears to be an intimidation tactic, \r\nthe Pal seems to derive some kind of pleasure from the display."
+	},
+	"CatMage": {
+		"localized_name": "Katress",
+		"description": "With the power of shadows, it produces arcane phenomena.\r\nIt prefers to eat food raw and is particularly hostile towards Wixen."
+	},
+	"CatVampire": {
+		"localized_name": "Felbat",
+		"description": "Attacking from the shadows,\r\nthis Pal traps its prey within its cloak-like wings.\r\nIt's probably best not to know what happens within them,\r\nor why the inside of its wings are stained red."
+	},
+	"ChickenPal": {
+		"localized_name": "Chikipi",
+		"description": "Extremely weak and far too delicious.\r\nIt is one of the weakest Pals alongside Sheepball.\r\nNo matter how many are hunted, they just keep appearing."
+	},
+	"ColorfulBird": {
+		"localized_name": "Tocotoco",
+		"description": "A frightening Pal that produces exploding eggs.\r\nIt often fires these eggs from its rear end as a form of defense,\r\nbut when spent, the Pal itself explodes."
+	},
+	"CowPal": {
+		"localized_name": "Mozzarina",
+		"description": "Milk pours from this Pal like water from an open faucet, regardless of its gender.\r\nIt's truly a mystery of life, although this mystery may be better left unsolved."
+	},
+	"CuteButterfly": {
+		"localized_name": "Cinnamoth",
+		"description": "Sniffing its scales produces a feeling of unparalleled euphoria.\r\nThere was some effort to further regulate this byproduct,\r\nbut the Free Pal Alliance have vehemently opposed these measures,\r\nputting a stop to them."
+	},
+	"CuteFox": {
+		"localized_name": "Vixy",
+		"description": "The idol of Palpagos Island.\r\nIf you bully a Vixy,\r\nyou best be prepared to become enemies with the whole world."
+	},
+	"CuteMole": {
+		"localized_name": "Fuddler",
+		"description": "Its large claws boast of diamond-like hardness.\r\nHowever, sharpening these claws consumes most of its energy,\r\nleading it to sometimes spending entire days doing nothing else."
+	},
+	"DarkCrow": {
+		"localized_name": "Cawgnito",
+		"description": "Long ago it freely soared the skies.\r\nAfter losing a contest with Galeclaw, it abandoned the skies,\r\nand now lives a secretive life in the dark of night."
+	},
+	"DarkScorpion": {
+		"localized_name": "Menasting",
+		"description": "Being made of pure energy, its insides are completely hollow.\r\nThis Pal crams still-living prey into its hollow body, where it absorbs them.\r\nHellish screams of pain can often be heard coming from inside this Pal."
+	},
+	"Deer": {
+		"localized_name": "Eikthyrdeer",
+		"description": "The one who possesses the most impressive antlers becomes the leader of the herd.\r\nIf their antlers are broken, they become depressed\r\nand leave the herd never to be seen again."
+	},
+	"Deer_Ground": {
+		"localized_name": "Eikthyrdeer Terra",
+		"description": "The individual with the hardest horns becomes the leader.\r\nOnce the horns are lost, so too is its leadership status.\r\nIt leaves the herd amidst farewell glances and quietly returns to the earth."
+	},
+	"DreamDemon": {
+		"localized_name": "Daedream",
+		"description": "It puts those it is interested in to sleep and shows them\r\nan endless stream of happy dreams.\r\nThose who fall under its spell are never to wake until death takes them."
+	},
+	"DrillGame": {
+		"localized_name": "Digtoise",
+		"description": "A Digtoise possessing the strongest shell and the only drill capable of piercing it,\r\nponders the contradictions of the world in the popular children's tale, |Digtoise's Fable|."
+	},
+	"Eagle": {
+		"localized_name": "Galeclaw",
+		"description": "A Pal that can easily take flight even while grasping a human.\r\nIt is, however, prone to letting go when tired,\r\nwhich has led to the sudden demise of more than a few souls."
+	},
+	"ElecCat": {
+		"localized_name": "Sparkit",
+		"description": "During the dry season,\r\nthis Pal is always on the verge of blowing a fuse.\r\nSparks can fly with even the slightest provocation,\r\neven amongst allies."
+	},
+	"ElecPanda": {
+		"localized_name": "Grizzbolt",
+		"description": "With a friendly smile and a hardy physique, it is docile\r\ntowards one it recognizes as a partner.\r\nFor reasons unexplained, its personality undergoes a drastic change when wielding a minigun."
+	},
+	"FairyDragon": {
+		"localized_name": "Elphidran",
+		"description": "It possesses a demeanor as pure as its appearance suggests.\r\nPerhaps because of this, it is sometimes unable to discern good from evil,\r\noften allowing wrongdoers to take advantage of it."
+	},
+	"FairyDragon_Water": {
+		"localized_name": "Elphidran Aqua",
+		"description": "It possesses a demeanor as pure as its appearance suggests.\r\nPerhaps because of this, it harbors no ill will in any of its actions\r\nand is indifferent even after killing someone."
+	},
+	"FengyunDeeper": {
+		"localized_name": "Fenglope",
+		"description": "In ages past, its beautiful visage was\r\na common sight in paintings.\r\nAs time passed, its beautiful pelt and antlers were\r\noften seen in works of art."
+	},
+	"FireKirin": {
+		"localized_name": "Pyrin",
+		"description": "Its entire body has evolved into a highly efficient radiator,\r\ngifting it with astounding stamina.\r\nWhen someone has mounted it, this Pal takes caution not to burn them."
+	},
+	"FireKirin_Dark": {
+		"localized_name": "Pyrin Noct",
+		"description": "It burns mysterious dark matter as energy\r\nand expels the remaining particles from its body.\r\nIf someone rides it, they should take care so as not to gallop down the path of darkness."
+	},
+	"FlameBambi": {
+		"localized_name": "Rooby",
+		"description": "Wild Rooby surprisingly never get sick.\r\nEating one piece of charcoal a day, made by burning a branch,\r\nis the secret to its eternal health."
+	},
+	"FlameBuffalo": {
+		"localized_name": "Arsox",
+		"description": "In ancient times, carnivorous Pals pursued them relentlessly.\r\nThe absurd fury in the cries of Arsox transformed into a raging inferno,\r\nwhich has been passed on to this day."
+	},
+	"FlowerDinosaur": {
+		"localized_name": "Dinossom",
+		"description": "A Pal who once angered cannot be pacified. It rages on and on like an inferno.\r\nThe phrase |step on a Dinossom's tail| has come to mean enraging someone."
+	},
+	"FlowerDinosaur_Electric": {
+		"localized_name": "Dinossom Lux",
+		"description": "Though struck by lightning, it lives on.\r\nThe phrase |struck by a Dinossom Lux's bolt| has come to mean\r\nnarrowly escaping death."
+	},
+	"FlowerDoll": {
+		"localized_name": "Petallia",
+		"description": "A Pal that transforms into a massive plant when at the end of its life.\r\nOnce every ten years, a beautiful flower blooms\r\nand a new Petallia is born."
+	},
+	"FlowerRabbit": {
+		"localized_name": "Flopie",
+		"description": "It prefers places that have an abundance of vegetation,\r\nbut hay fever has apparently become a problem for\r\nFlopie as of late."
+	},
+	"FlyingManta": {
+		"localized_name": "Celaray",
+		"description": "Riding the wind, this Pal travels where it pleases.\r\nShould it find a partner along the way,\r\nthe encounter will mark its journey's end."
+	},
+	"FoxMage": {
+		"localized_name": "Wixen",
+		"description": "With the power of light, it produces arcane phenomena.\r\nIt prefers to eat food well-done and is particularly hostile towards Katress."
+	},
+	"Ganesha": {
+		"localized_name": "Teafant",
+		"description": "Large amounts of water pour from what is thought to be its nose,\r\nthough some say that it is, in fact, just snot.\r\nThis has sparked a fierce debate among Pal scholars."
+	},
+	"Garm": {
+		"localized_name": "Direhowl",
+		"description": "Long ago Direhowl would hunt alongside humans\r\nbut over the years this bond faded."
+	},
+	"GhostBeast": {
+		"localized_name": "Maraith",
+		"description": "It relishes the peculiar scent living things give off when they are near death.\r\nIf a Maraith has taken a liking to you,\r\nit is safe to assume that is why."
+	},
+	"Gorilla": {
+		"localized_name": "Gorirat",
+		"description": "It beats the ground rhythmically to communicate with its comrades.\r\nThe meaning of each rhythm differs by troop, but the distinction\r\nbetween them is still largely unknown."
+	},
+	"GrassMammoth": {
+		"localized_name": "Mammorest",
+		"description": "The vegetation on its back varies between individuals.\r\nThere is a long history of appreciating this veritable garden of a Pal,\r\nand there are even Mammorest pruning specialists."
+	},
+	"GrassMammoth_Ice": {
+		"localized_name": "Mammorest Cryst",
+		"description": "The vegetation on its back varies between individuals.\r\nThere was a time when seeds of presumed extinct plants were found\r\nstill frozen on the back of a Mammorest Cryst."
+	},
+	"GrassPanda": {
+		"localized_name": "Mossanda",
+		"description": "A Pal so powerful it's hard to believe.\r\nIn one experiment, this Pal tore through 3,000 sheets of paper at once!\r\nIt's only by some miracle that this Pal isn't a meat-eater."
+	},
+	"GrassPanda_Electric": {
+		"localized_name": "Mossanda Lux",
+		"description": "A Pal whose power is truly shocking.\r\nBy altering the electrical currents in its body, this Pal's been able to overload its own strength.\r\nWhen it comes to sheer power, this Pal may be top of the list."
+	},
+	"GrassRabbitMan": {
+		"localized_name": "Verdash",
+		"description": "Land that Verdash has run across becomes extremely fertile,\r\nwith thick vegetation growing there soon after.\r\nIt will not run anywhere that herbicide has been used."
+	},
+	"HadesBird": {
+		"localized_name": "Helzephyr",
+		"description": "It calls forth lightning from the depths of hell.\r\nOne who dies from Helzephyr's inferno\r\nis sure to be sent to the underworld."
+	},
+	"HawkBird": {
+		"localized_name": "Nitewing",
+		"description": "It carries newborn Pals to its nest and raises them\r\nas a surrogate parent.\r\nOnce the baby Pal has fattened up, it hunts them."
+	},
+	"Hedgehog": {
+		"localized_name": "Jolthog",
+		"description": "Releases the electricity stored in its body when under attack,\r\nproducing a shock that can be over 10 million volts.\r\nIf thrown, it can even be more lethal than any conventional heavy weaponry."
+	},
+	"Hedgehog_Ice": {
+		"localized_name": "Jolthog Cryst",
+		"description": "It releases the cold air stored in its body when under attack.\r\nThe frigid blast it radiates is cold enough to freeze the surrounding air\r\nand easily pierces through any attacker's body."
+	},
+	"HerculesBeetle": {
+		"localized_name": "Warsect",
+		"description": "The ultra-hard armor surrounding its body is\r\nextremely strong and heat resistant.\r\nEven a napalm blast would hardly leave a scratch."
+	},
+	"Horus": {
+		"localized_name": "Faleris",
+		"description": "When it finds its prey it unleashes a whirlwind of flames, burning the entire area to ash.\r\nFaleris breath is known for its pleasing scent."
+	},
+	"IceDeer": {
+		"localized_name": "Reindrix",
+		"description": "Its transparent cerulean antlers glow with the cold of absolute zero.\r\nAny who touch them with their bare hands are instantly frozen over\r\nand smashed to pieces."
+	},
+	"IceFox": {
+		"localized_name": "Foxcicle",
+		"description": "On nights when the aurora is visible,\r\nit looks up towards the sky and begins to howl a beautiful song.\r\nThis does, however, leave it vulnerable to attacks from enemies."
+	},
+	"IceHorse": {
+		"localized_name": "Frostallion",
+		"description": "Guardian deity of Palpagos Island, known as the Winter Caller.\r\nIn the past, when a calamity struck the land, it soared into the sky\r\nand sealed away the threat by casting the island into an eternal winter."
+	},
+	"IceHorse_Dark": {
+		"localized_name": "Frostallion Noct",
+		"description": "Guardian deity of Palpagos Island known as the Night Caller.\r\nIn the past, when a calamity struck the land, it soared into the sky\r\nand sealed away the threat by casting the island into eternal darkness."
+	},
+	"JetDragon": {
+		"localized_name": "JetDragon",
+		"description": "Watches over Palpagos Island from high above.\r\nWhen calamity returns to the land, the earth will split open, and the skies will burn.\r\nIt is destined to strike down the calamity in a flash of total destruction."
+	},
+	"Kelpie": {
+		"localized_name": "Kelpsea",
+		"description": "Its personality changes depending on the quality of the water it was born into.\r\nKelpsea born into polluted waters are generally ill-tempered\r\nand quickly become delinquents."
+	},
+	"Kelpie_Fire": {
+		"localized_name": "Kelpsea Ignis",
+		"description": "Their personalities change depending on the temperature of the water where they were born.\r\nKelpsea born in warm waters\r\ngenerally have a passionate, motivated personality."
+	},
+	"KingAlpaca": {
+		"localized_name": "Kingpaca",
+		"description": "Melpaca serve this Pal.\r\nContests between Kingpaca offer up their vassals as a wager.\r\nThose seen alone are losers of such contests."
+	},
+	"KingAlpaca_Ice": {
+		"localized_name": "Kingpaca Cryst",
+		"description": "With a heart of ice, this Pal is terrible at expressing its emotions.\r\nA solitary individual is pitiable,\r\nseen as too clumsy in the eyes of a Melpaca."
+	},
+	"KingBahamut": {
+		"localized_name": "Blazamut",
+		"description": "Legends say it was born during a volcanic eruption.\r\nA strange group even claims that this continent is laid upon\r\nthe back of a giant Blazamut."
+	},
+	"Kirin": {
+		"localized_name": "Univolt",
+		"description": "It used to be considered an emissary of the Thunder God, and thus was not hunted by people.\r\nHowever, after witnesses observed one die from a lightning strike,\r\nits reverence faded, and it quite literally fell into the role of a workhorse."
+	},
+	"Kitsunebi": {
+		"localized_name": "Foxparks",
+		"description": "It is unskilled at controlling fire from the moment it is born\r\nand tends to choke on the flames it breathes unintentionally.\r\nFoxparks sneezes are one of the leading causes of forest fires."
+	},
+	"LavaGirl": {
+		"localized_name": "Flambelle",
+		"description": "When it starts crying, this Pal produces magma in place of tears.\r\nThe magma that pours out is absorbed back into its body, causing it to get hotter and hotter.\r\nThe more it cries, the stronger it becomes."
+	},
+	"LazyCatfish": {
+		"localized_name": "Dumud",
+		"description": "When too relaxed, its reaction time drastically declines.\r\nEven if it were sliced from head to tail,\r\nit probably wouldn't even realize that it should be dead until the next morning."
+	},
+	"LazyDragon": {
+		"localized_name": "Relaxaurus",
+		"description": "Contrary to its blasé appearance, it's quite ferocious.\r\nIt perceives everything in its sight as prey\r\nand will stop at nothing to devour it."
+	},
+	"LazyDragon_Electric": {
+		"localized_name": "Relaxaurus Lux",
+		"description": "One day, Relaxaurus had an idea.\r\nMaybe it was about time for a change.\r\nJust then, an electric shock raced through its body!"
+	},
+	"LilyQueen": {
+		"localized_name": "Lyleen",
+		"description": "A docile Pal full of love.\r\nIt watches over small Pals who have lost their parents.\r\nIt uses a full-power <activeSkillName id=|SolarBeam|/> to discipline naughty Pals."
+	},
+	"LilyQueen_Dark": {
+		"localized_name": "Lyleen Noct",
+		"description": "An elegant Pal full of grace.\r\nIt admonishes any who are disrespectful with a painful slap.\r\nSome Pals actively seek out this punishment."
+	},
+	"LittleBriarRose": {
+		"localized_name": "Bristla",
+		"description": "This prickly Pal's thorns are highly poisonous.\r\nIt is friendly with Cinnamoth and only smiles\r\nwhile a Cinnamoth is drinking its nectar."
+	},
+	"LizardMan": {
+		"localized_name": "Leezpunk",
+		"description": "A Pal that always takes great care to maintain a stylish stance.\r\nAlways on the hunt for the coolest poses, if given a mirror\r\nit will spend all day posing in front of it."
+	},
+	"LizardMan_Fire": {
+		"localized_name": "Leezpunk Ignis",
+		"description": "A Pal that has an unusual obsession with their standing posture.\r\nAlways in search of the hottest pose,\r\nthis Pal's owner is constantly presented with fervent stances."
+	},
+	"Manticore": {
+		"localized_name": "Blazehowl",
+		"description": "While it prefers raw meat, it always ends up eating well-done meat.\r\nThis is due to its blistering claws,\r\nwhich it uses as its weapon—it simply doesn't realize its prey gets burned to a crisp."
+	},
+	"Manticore_Dark": {
+		"localized_name": "Blazehowl Noct",
+		"description": "While it prefers raw meat, it always ends up eating tainted meat.\r\nThis is due to its dark claws,\r\nwhich it uses as its weapon—it simply doesn't realize its prey gets cursed."
+	},
+	"Monkey": {
+		"localized_name": "Tanzee",
+		"description": "Long ago, this Pal used long objects like tree branches as weapons.\r\nAfter coming into contact with humans, however,\r\nit found something slightly more effective: guns."
+	},
+	"MopBaby": {
+		"localized_name": "Swee",
+		"description": "Crawling along the ground, it eats microscopic organic matter.\r\nAfter a while, it discharges any substances that provide no nutrition.\r\nBy using it as a mop for cleaning, everyone wins!"
+	},
+	"MopKing": {
+		"localized_name": "Sweepa",
+		"description": "While hibernating, a large number of Swee\r\nhide within its voluminous body hair.\r\nThe most ever recorded is 101."
+	},
+	"Mutant": {
+		"localized_name": "Lunaris",
+		"description": "It can control those who carelessly stare into its eyes.\r\nThose seen with a Lunaris are in its mind,\r\nsimply under its control."
+	},
+	"NaughtyCat": {
+		"localized_name": "Grintale",
+		"description": "Grintale's eyes light up the moment\r\nanyone enters its territory.\r\nThis is no figure of speech—its eyes literally light up."
+	},
+	"NegativeKoala": {
+		"localized_name": "Depresso",
+		"description": "It has few friends because of the perpetually grouchy look on its face,\r\nbut it is in fact kindhearted.\r\nSome have seen it feeding Vixy who have strayed from their pack."
+	},
+	"NegativeOctopus": {
+		"localized_name": "Killamari",
+		"description": "It wraps itself around an enemy's head, sucking out their insides.\r\nPal mummies are occasionally found, but these are in fact\r\nKillamari victims."
+	},
+	"NightFox": {
+		"localized_name": "Nox",
+		"description": "If you find Nox hair in your bedding, you should\r\nleave it where it lays and leave immediately.\r\nPicking it up is a one-way-ticket to a never ending night."
+	},
+	"Penguin": {
+		"localized_name": "Pengullet",
+		"description": "The feathers of this Pal have all but disappeared,\r\nbut sadly, its desire to fly has remained as strong as ever.\r\nEven now, it tries to fly again in any way it can."
+	},
+	"PinkCat": {
+		"localized_name": "Cattiva",
+		"description": "At a glance it appears full of confidence, but it is in fact weak and cowardly.\r\nBeing toyed with by a Cattiva\r\nis in many ways the greatest of disgraces."
+	},
+	"PinkLizard": {
+		"localized_name": "Lovander",
+		"description": "Seeking a night of love, it is always chasing someone around.\r\nAt first it only showed interest in other Pals, but in recent years\r\neven humans have become the target of its debauchery."
+	},
+	"PinkRabbit": {
+		"localized_name": "Ribbuny",
+		"description": "A Pal who's never without a bright smile.\r\nOccasionally, it gets its tentacles tied up in knots by Cattiva's pranks.\r\nDuring those moments, its expression changes into something altogether demonic."
+	},
+	"PlantSlime": {
+		"localized_name": "Gumoss",
+		"description": "A strange Pal with a body resembling tree sap.\r\nIt gradually loses strength if it has nothing to cover\r\nits body with, eventually rotting away."
+	},
+	"PlantSlime_Flower": {
+		"localized_name": "Gumoss (Special)",
+		"description": "No description available"
+	},
+	"QueenBee": {
+		"localized_name": "Elizabee",
+		"description": "A chosen queen to rule over Beegardes.\r\nThere is a never ending stream of servants willing to work themselves to death\r\nfor the pleasure of serving their queen."
+	},
+	"RaijinDaughter": {
+		"localized_name": "Dazzi",
+		"description": "Often kind to lonely pals.\r\nHowever, the moment a Pal mistakes this for actual companionship,\r\nit seizes the opportunity to blast them with a thunderbolt."
+	},
+	"RedArmorBird": {
+		"localized_name": "Ragnahawk",
+		"description": "Some think it is a related species to Beakon, but there is in fact no connection.\r\nIt mainly eats rocks, and after many long years its\r\nbeak and head have hardened to accommodate this diet."
+	},
+	"RobinHood": {
+		"localized_name": "Robinquill",
+		"description": "A pal that is very similar to humans who hunt and live in the forests.\r\nIt may prove to be a key for understanding what Pals are\r\nand how they diverged from humans so long ago."
+	},
+	"RobinHood_Ground": {
+		"localized_name": "Robinquill Terra",
+		"description": "A Pal that lives a hunting life in rocky areas and is very close to humans.\r\nWhen Robinquill Terra bones are found in ruins,\r\nthere are always human bones found nearby as well."
+	},
+	"Ronin": {
+		"localized_name": "Bushi",
+		"description": "Its body becomes a blade upon death, to be taken up by the next generation.\r\nIf someone other than a Bushi wields this blade, the soul within\r\ntorments them until they are driven mad."
+	},
+	"SaintCentaur": {
+		"localized_name": "Paladius",
+		"description": "Once one with Necromus.\r\nIts gleaming form is free of all negative emotions.\r\nHowever, a glimmer of hatred can still be seen deep within its eyes."
+	},
+	"SakuraSaurus": {
+		"localized_name": "Broncherry",
+		"description": "Its scent drastically changes before and after pairing.\r\nIt exudes a pleasing aroma after finding a partner,\r\nwhich is called the |fragrance of first love.|"
+	},
+	"SakuraSaurus_Water": {
+		"localized_name": "Broncherry Aqua",
+		"description": "Its scent drastically changes before and after pairing.\r\nIt exudes a pleasing aroma before finding a partner,\r\nwhich is called the |perfume of purity.|"
+	},
+	"Serpent": {
+		"localized_name": "Surfent",
+		"description": "Its hydrodynamic form is well suited to life in water.\r\nPoachers often catch them and use them in place of surfboards."
+	},
+	"Serpent_Ground": {
+		"localized_name": "Surfent Terra",
+		"description": "Its aerodynamic form is well suited to life on the sand.\r\nPoachers often catch them and use them in place of surfboards."
+	},
+	"SharkKid": {
+		"localized_name": "Gobfin",
+		"description": "Long ago, it was a large and powerful aquatic Pal.\r\nAs food became scarce it evolved to live on land.\r\nSince walking requires much energy, it gradually became smaller\r\nand is now a small and puny Pal."
+	},
+	"SharkKid_Fire": {
+		"localized_name": "Gobfin Ignis",
+		"description": "Once upon a time, it was a giant and powerful aquatic Pal.\r\nHowever, with the dwindling availability of food, it ventured onto land.\r\nAs a consequence of burning many calories to walk,\r\nit astonishingly awakened its power to control fire!"
+	},
+	"SkyDragon": {
+		"localized_name": "Quivern",
+		"description": "Sleeping while cuddling a Quivern is said to be a heavenly experience,\r\nbut there are some who have been crushed and sent to heaven by ones\r\nthat toss and turn in their sleep."
+	},
+	"SoldierBee": {
+		"localized_name": "Beegarde",
+		"description": "A servant that pledges loyalty to Elizabee.\r\nAny that cause harm to the queen are immediately expelled from the hive.\r\nIt will gladly give its life to protect its queen."
+	},
+	"Suzaku": {
+		"localized_name": "Suzaku",
+		"description": "It was once believed to usher in the dry season.\r\nWhenever there was a drought the previous year, people would relentlessly seek to cull its numbers,\r\nhoping to bring about a plentiful harvest in the next year."
+	},
+	"Suzaku_Water": {
+		"localized_name": "Suzaku Aqua",
+		"description": "It was once believed to usher in the rainy season.\r\nIf there was a flood the previous year, people would relentlessly seek to cull its numbers,\r\nhoping to avert disaster in the coming year."
+	},
+	"SweetsSheep": {
+		"localized_name": "Woolipop",
+		"description": "Its entire body is 18,000 times sweeter than sugar.\r\nCarnivorous Pals lured by its scent will find themselves overwhelmed by sweetness\r\nand even pass out should they take a bite of this Pal."
+	},
+	"ThunderBird": {
+		"localized_name": "Beakon",
+		"description": "Some think it is a related species to Ragnahawk, but there is in fact no connection.\r\nUsing its sharp beak, it descends on its prey in a quick motion\r\nthat resembles a bolt of lightning."
+	},
+	"ThunderDog": {
+		"localized_name": "Rayhound",
+		"description": "At full speed, it could be mistaken for a bolt of lightning.\r\nIf two Rayhounds collide, the sound is like that\r\nof a powerful thunderclap."
+	},
+	"ThunderDragonMan": {
+		"localized_name": "Orserk",
+		"description": "It sends electricity into its foes' wounds, roasting them from the inside out.\r\nFights between Orserk\r\nend in the blink of an eye."
+	},
+	"Umihebi": {
+		"localized_name": "Jormuntide",
+		"description": "Legend says that the Jormuntide was once a wise man,\r\nwho after being wrongly convicted and cast into a whirlpool,\r\nreturned as this Pal to destroy those who wronged him."
+	},
+	"Umihebi_Fire": {
+		"localized_name": "Jormuntide Ignis",
+		"description": "Legend says the Jormuntide Ignis was once a warrior who,\r\nafter being wrongly convicted and cast into a volcano,\r\nreturned as this Pal to destroy those who wronged him."
+	},
+	"VioletFairy": {
+		"localized_name": "Vaelet",
+		"description": "The castle was filled with the king's favorite flowers.\r\nA great battle ensued, and flames approached the castle.\r\nAmidst the chaos, the spirit of a flower appeared.\r\n - From the fairy tale, |The King's Flower.|"
+	},
+	"VolcanicMonster": {
+		"localized_name": "Reptyro",
+		"description": "Magma-like blood runs throughout its body.\r\nIf a large amount of water is thrown on it, this water rapidly heats,\r\ncausing an immense vapor explosion."
+	},
+	"VolcanicMonster_Ice": {
+		"localized_name": "Reptyro Cryst",
+		"description": "Ice cold blood runs throughout its body.\r\nIf heated rapidly, its blood evaporates,\r\ncausing an immense vapor explosion."
+	},
+	"WeaselDragon": {
+		"localized_name": "Chillet",
+		"description": "It can curl up its body and roll around at extremely high speeds.\r\nLong ago, people would tie bags of milk to domesticated\r\nChillet as they grazed to produce butter\r\nusing this spinning force."
+	},
+	"Werewolf": {
+		"localized_name": "Loupmoon",
+		"description": "The horns on its head grow under the moonlight.\r\nIt doesn't hate the sun, but its horns\r\nitch when sunlight hits them."
+	},
+	"WhiteMoth": {
+		"localized_name": "Sibelyx",
+		"description": "A Pal that likes the rain, and will often bask in rain showers\r\nuntil the weather clears up.\r\nOn rainy days, Foxparks can often be found taking shelter beneath it."
+	},
+	"WhiteTiger": {
+		"localized_name": "Cryolinx",
+		"description": "It can easily climb steep mountains with its hard claws.\r\nHowever, its short legs make it difficult to descend,\r\noften leaving it stranded in high places."
+	},
+	"WindChimes": {
+		"localized_name": "Hangyu",
+		"description": "No description available"
+	},
+	"WindChimes_Ice": {
+		"localized_name": "Hangyu Cryst",
+		"description": "No description available"
+	},
+	"WizardOwl": {
+		"localized_name": "Hoocrates",
+		"description": "Often lost in thought, it sometimes\r\nfinds it difficult to sleep.\r\n|I think, therefore I am.|"
+	},
+	"WoolFox": {
+		"localized_name": "Cremis",
+		"description": "Compared to Sheepball, it has finer wool\r\nand a temperament more suited for domestication.\r\nHowever, it has historically always been kept as a pet.\r\nCuteness is considered a virtue."
+	},
+	"Yeti": {
+		"localized_name": "Wumpo",
+		"description": "Researchers once tried to shave off its hair to reveal its true form.\r\nIn the end, only hair was left, as if that was all there was to begin with."
+	},
+	"Yeti_Grass": {
+		"localized_name": "Wumpo Botan",
+		"description": "Researchers once tried to cut the grass off its body to reveal its true form.\r\nIn the end, only grass was left, as if that was all there was to begin with."
+	},
+	"BlackFurDragon": {
+		"localized_name": "Dragostrophe",
+		"description": "A silent beast born of the abyss.\r\nThou shall not stand before the beast.\r\nThou shall not heed the beast."
+	},
+	"ElecLion": {
+		"localized_name": "Boltmane",
+		"description": "The more it moves, the more it heats up and the hair tips increasingly glow brighter.\r\nAt its peak, it becomes so dazzling that you risk blindness if you stare at it directly."
+	},
+	"DarkMutant": {
+		"localized_name": "en_text",
+		"description": "Some say a beam from a en_text that has\r\nperfected its technique can tear holes into other dimensions.\r\nIt's even believed that certain species of Pals were born from such phenomena."
+	},
+	"NightLady": {
+		"localized_name": "Bellanoir",
+		"description": "Without existing, she quietly gazed upon the world.\r\nOne day, she was seized with a longing to be seen.\r\nWith unbridled lust for vengeance against reality,\r\nthus was born the Eclipsed Siren."
+	},
+	"NightLady_Dark": {
+		"localized_name": "Bellanoir Libero",
+		"description": "With her desires set loose, she was soon overwhelmed.\r\nShe longed for a self to gaze upon herself. \r\nAnd the sisters who gazed, resenting reality, \r\nwere driven into the abyss and, at last, closed their eyes."
+	},
+	"GYM_ThunderDragonMan": {
+		"localized_name": "GYM ThunderDragonMan",
+		"description": "No description available"
+	},
+	"GYM_LilyQueen": {
+		"localized_name": "GYM LilyQueen",
+		"description": "No description available"
+	},
+	"GYM_Horus": {
+		"localized_name": "GYM Horus",
+		"description": "No description available"
+	},
+	"GYM_BlackGriffon": {
+		"localized_name": "GYM BlackGriffon",
+		"description": "No description available"
+	},
+	"GYM_ElecPanda": {
+		"localized_name": "GYM ElecPanda",
+		"description": "No description available"
+	},
+	"Male_DarkTrader01": {
+		"localized_name": "Black Marketeer",
+		"description": "No description available"
+	},
+	"FireCult_FlameThrower": {
+		"localized_name": "Brothers of the Eternal Pyre Martyr",
+		"description": "No description available"
+	},
+	"FireCult_Rifle": {
+		"localized_name": "Brothers of the Eternal Pyre Rifleman",
+		"description": "No description available"
+	},
+	"Male_Soldier01": {
+		"localized_name": "Burly Merc",
+		"description": "No description available"
+	},
+	"Female_Soldier01": {
+		"localized_name": "Expedition Survivor",
+		"description": "No description available"
+	},
+	"Believer_CrossBow": {
+		"localized_name": "Free Pal Alliance Devout",
+		"description": "No description available"
+	},
+	"Believer_Bat": {
+		"localized_name": "Free Pal Alliance Thug",
+		"description": "No description available"
+	},
+	"Male_Scientist01_LaserRifle": {
+		"localized_name": "PAL Genetic Research Unit Executioner",
+		"description": "No description available"
+	},
+	"PalDealer": {
+		"localized_name": "Pal Merchant",
+		"description": "No description available"
+	},
+	"Police_Handgun": {
+		"localized_name": "PIDF Guard",
+		"description": "No description available"
+	},
+	"Hunter_Bat": {
+		"localized_name": "Syndicate Thug (Bat)",
+		"description": "No description available"
+	},
+	"Hunter_FlameThrower": {
+		"localized_name": "Syndicate Cleaner",
+		"description": "No description available"
+	},
+	"Hunter_Fat_GatlingGun": {
+		"localized_name": "Syndicate Crusher",
+		"description": "No description available"
+	},
+	"Hunter_RocketLauncher": {
+		"localized_name": "Syndicate Elite",
+		"description": "No description available"
+	},
+	"Hunter_Grenade": {
+		"localized_name": "Syndicate Grenadier",
+		"description": "No description available"
+	},
+	"Hunter_Rifle": {
+		"localized_name": "Syndicate Gunner",
+		"description": "No description available"
+	},
+	"Hunter_Shotgun": {
+		"localized_name": "Syndicate Hunter",
+		"description": "No description available"
+	},
+	"Hunter_Handgun": {
+		"localized_name": "Syndicate Thug (Handgun)",
+		"description": "No description available"
+	},
+	"SalesPerson": {
+		"localized_name": "Wandering Merchant",
+		"description": "No description available"
+	},
+	"SalesPerson_Desert": {
+		"localized_name": "Wandering Merchant (Desert)",
+		"description": "No description available"
+	},
+	"SalesPerson_Desert2": {
+		"localized_name": "Wandering Merchant (Desert)",
+		"description": "No description available"
+	},
+	"SalesPerson_Volcano": {
+		"localized_name": "Wandering Merchant (Volcano)",
+		"description": "No description available"
+	},
+	"SalesPerson_Volcano2": {
+		"localized_name": "Wandering Merchant (Volcano)",
+		"description": "No description available"
+	},
+	"Female_DesertPeople02": {
+		"localized_name": "Female Villager",
+		"description": "No description available"
+	},
+	"Female_People02": {
+		"localized_name": "Female Villager",
+		"description": "No description available"
+	},
+	"Female_People03": {
+		"localized_name": "Female Villager",
+		"description": "No description available"
+	},
+	"Male_DesertPeople01": {
+		"localized_name": "Male Villager",
+		"description": "No description available"
+	},
+	"Male_People02": {
+		"localized_name": "Male Villager",
+		"description": "No description available"
+	},
+	"Male_People03": {
+		"localized_name": "Male Villager",
+		"description": "No description available"
+	},
+	"MobuCitizen": {
+		"localized_name": "Islander",
+		"description": "No description available"
+	},
+	"MobuCitizen_Male": {
+		"localized_name": "Male Islander",
+		"description": "No description available"
+	},
+	"Guard_Rifle": {
+		"localized_name": "Guard",
+		"description": "No description available"
+	},
+	"Guard_Shotgun": {
+		"localized_name": "PIDF Goody Two-Shoes",
+		"description": "No description available"
+	},
+	"PalDealer_Desert": {
+		"localized_name": "Pal Merchant (Desert)",
+		"description": "No description available"
+	},
+	"PalDealer_Volcano": {
+		"localized_name": "Pal Merchant (Volcano)",
+		"description": "No description available"
+	},
+	"Police_Rifle": {
+		"localized_name": "PIDF Infantry",
+		"description": "No description available"
+	},
+	"Police_Shotgun": {
+		"localized_name": "PIDF Elite",
+		"description": "No description available"
+	},
+	"Gorilla_Ground": {
+		"localized_name": "Gorirat Terra",
+		"description": "It communicates with its friends through rhythmic tapping on the ground.\r\nStronger than Gorirat\r\nIf every Gorirat Terra hit the ground at the same time, the island would sink in 1 second."
+	},
+	"WeaselDragon_Fire": {
+		"localized_name": "Chillet Ignis",
+		"description": "It can curl up its body and roll around so fast that sparks fly. \r\nSparks also fly when it feels excited. \r\nIf you stroke it too much, this pal will get fired up, literally!"
+	},
+	"Ronin_Dark": {
+		"localized_name": "Bushi Noct",
+		"description": "Its body becomes a blade upon death, to be taken up by the next generation.\r\nIf the Bushi who inherits it has a weak heart, the voices of the dead will drive it mad.\r\nThe madness turns it into Bushi Noct that endlessly wanders."
+	},
+	"CatMage_Fire": {
+		"localized_name": "Katress Ignis",
+		"description": "Due to its upbringing, it no longer cares about whether its food is raw enough. \r\nThis Pal stopped worrying about those details,\r\nand just prefers its food to be as spicy as possible. \r\nNot on good terms with Wixen Noct."
+	},
+	"FoxMage_Dark": {
+		"localized_name": "Wixen Noct",
+		"description": "Due to its upbringing, it no longer cares about whether its food is cooked enough.\r\nThis Pal stopped worrying about those details,\r\nand just prefers its food to be as sweet as possible. \r\nNot on good terms with Katress Ignis."
+	},
+	"HerculesBeetle_Ground": {
+		"localized_name": "Warsect Terra",
+		"description": "The ultra-hard armor surrounding its body is\r\nextremely strong and heat resistant.\r\nIt doesn't flinch even if a Mammorest steps on it. "
+	},
+	"SkyDragon_Grass": {
+		"localized_name": "Quivern Botan",
+		"description": "When you hug Quivern Botan,\r\nif it smells like sunshine and meadows, tomorrow will be sunny.\r\nIf it smells damp, tomorrow will be wet and miserable."
+	},
+	"KingBahamut_Dragon": {
+		"localized_name": "Blazamut Ryu",
+		"description": "Long ago, it emerged from the depths of the earth.\r\nWith relentless, raging flames showing no mercy,\r\nit burned the entire island until nothing remained.\r\nIt was known as the Eternal Flame."
+	},
+	"HadesBird_Electric": {
+		"localized_name": "Helzephyr Lux",
+		"description": "It calls forth lightning from the depths of hell.\r\nWhile considered a subspecies of Helzephyr,\r\nthere's a theory that suggests Helzephyr Lux, struck by lightning from hell,\r\nwill transform into Helzephyr."
+	},
+	"DarkScorpion_Ground": {
+		"localized_name": "Menasting Terra",
+		"description": "Being made of pure energy, its insides are completely hollow.\r\nIt stuffs earth and minerals into its outer shell, achieving overwhelming mass.\r\nThose who are struck by it can only let out hellish groans."
+	},
+	"MoonQueen": {
+		"localized_name": "Selyne",
+		"description": "The object floating behind, resembling the moon,\r\nis said to gradually become more circular with each passing generation.\r\nNo one knows what will happen when the moon is full. "
+	},
+	"GYM_MoonQueen": {
+		"localized_name": "GYM MoonQueen",
+		"description": "No description available"
+	},
+	"KendoFrog": {
+		"localized_name": "Croajiro",
+		"description": "Those who disgrace the honor of the herd are forced to take their own life.\r\nBy piercing their inflated vocal sac with a tree branch,\r\nthey are blown away into the atmosphere and return to the afterlife."
+	},
+	"LeafPrincess": {
+		"localized_name": "Lullu",
+		"description": "In early spring, pollen floats on the wind throughout the island.\r\nFlopie's hay fever is Lullu's fault."
+	},
+	"MushroomDragon": {
+		"localized_name": "Shroomer",
+		"description": "Inhaling large amounts of its spores will put you into a trance.\r\nSometimes, if Shroomer appears motionless,\r\nit's not because it's mimicking a mushroom,\r\nbut rather because it's high off its own spores."
+	},
+	"MushroomDragon_Dark": {
+		"localized_name": "Shroomer Noct",
+		"description": "The abundance of spores released by this Pal blocks out sunlight.\r\nSometimes, if Shroomer Noct appears motionless,\r\nit's not because it's mimicking a mushroom,\r\nbut rather because its own spores don't let it see anything."
+	},
+	"SmallArmadillo": {
+		"localized_name": "Kikit",
+		"description": "A decade ago, Kikit soccer was popular. \r\nHowever, it quickly fell out of favor due to fierce opposition from the Free Pal Alliance. \r\nNevertheless, the Kikit's themselves didn't mind because it helped shed their old carapace."
+	},
+	"CandleGhost": {
+		"localized_name": "Sootseer",
+		"description": "It was once believed that as the world approached its end, the flame would weaken.\r\nDoomsayers would repeatedly rejoice when the flame began to weaken,\r\nbut in the end, it turned out to be a prank by Sootseer.\r\nAt least, for now."
+	},
+	"ScorpionMan": {
+		"localized_name": "Prixter",
+		"description": "It has about 5,000 types of poison.\r\nSome of them are deadly enough to cause instant death,\r\nbut all of them are too weak to have any effect."
+	},
+	"WingGolem": {
+		"localized_name": "Knocklem",
+		"description": "Can be disassembled into 215 parts, and even if the parts are scattered,\r\nit will reassemble itself and start moving again. \r\nIf parts from different individuals are mixed it will malfunction due to mistaken identity. "
+	},
+	"GuardianDog": {
+		"localized_name": "Yakumo",
+		"description": "It has a strong sense of justice and despises evil.\r\nIn the past they were faithful and loving companions to the islanders.\r\nNowadays, Yakumos are hostile to humans wherever they spot them."
+	},
+	"SifuDog": {
+		"localized_name": "Dogen",
+		"description": "Striving for a state of selflessness, it meditates endlessly. \r\nAfter confronting its worldly desires, it eats a meal and reflects.\r\nIt ate too much today."
+	},
+	"FeatherOstrich": {
+		"localized_name": "Dazemu",
+		"description": "Take one step forward and forget your doubts.\r\nTake two steps forward and forget your worries.\r\nTake three steps forward and forget your fears.\r\nFace any enemy."
+	},
+	"MimicDog": {
+		"localized_name": "Mimog",
+		"description": "There was once a tradition of handing out an award\r\nto the person who met their end in the most foolish way.\r\nThe first award was given for\r\n|being unaware of Mimog, opening the chest, and being bitten to death.|"
+	},
+	"DarkAlien": {
+		"localized_name": "Xenovader",
+		"description": "Can send information and convert it into energy by forgetting it.\r\nRegularly seems to be sending information to someone.\r\n- Respond. Target located. Proceed to immediate destruction."
+	},
+	"WhiteAlienDragon": {
+		"localized_name": "Xenogard",
+		"description": "Consumes information and turns it into energy.\r\nRegularly seems to be sending information to someone.\r\n- Hello? What was the message you just sent? I devoured it before checking."
+	},
+	"Male_NinjaElite01": {
+		"localized_name": "Moonflower Jonin",
+		"description": "No description available"
+	},
+	"Male_Ninja01": {
+		"localized_name": "Moonflower Genin",
+		"description": "No description available"
+	},
+	"GYM_BlackGriffon_2": {
+		"localized_name": "GYM BlackGriffon 2",
+		"description": "No description available"
+	},
+	"GYM_BlackGriffon_2_Avatar": {
+		"localized_name": "GYM BlackGriffon 2 Avatar",
+		"description": "No description available"
+	},
+	"GYM_ElecPanda_2": {
+		"localized_name": "GYM ElecPanda 2",
+		"description": "No description available"
+	},
+	"GYM_Horus_2": {
+		"localized_name": "GYM Horus 2",
+		"description": "No description available"
+	},
+	"GYM_LilyQueen_2": {
+		"localized_name": "GYM LilyQueen 2",
+		"description": "No description available"
+	},
+	"GYM_ThunderDragonMan_2": {
+		"localized_name": "GYM ThunderDragonMan 2",
+		"description": "No description available"
+	},
+	"GYM_MoonQueen_2": {
+		"localized_name": "GYM MoonQueen 2",
+		"description": "No description available"
+	},
+	"GYM_MoonQueen_2_Servant": {
+		"localized_name": "GYM MoonQueen 2 Servant",
+		"description": "No description available"
+	},
+	"Sheepball": {
+		"localized_name": "Lamball",
+		"description": "No description available"
+	}
 }

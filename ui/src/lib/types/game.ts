@@ -233,15 +233,106 @@ export type Scaling = {
 	defense: number;
 };
 
+export enum EPalElementType {
+	None = 'EPalElementType::None',
+	Normal = 'EPalElementType::Normal',
+	Fire = 'EPalElementType::Fire',
+	Water = 'EPalElementType::Water',
+	Leaf = 'EPalElementType::Leaf',
+	Electricity = 'EPalElementType::Electricity',
+	Ice = 'EPalElementType::Ice',
+	Earth = 'EPalElementType::Earth',
+	Dark = 'EPalElementType::Dark',
+	Dragon = 'EPalElementType::Dragon',
+	MAX = 'EPalElementType::MAX'
+}
+
+export type ElementType =
+	| 'Fire'
+	| 'Water'
+	| 'Ground'
+	| 'Ice'
+	| 'Neutral'
+	| 'Dark'
+	| 'Grass'
+	| 'Dragon'
+	| 'Electric';
+
+export function mapElementType(
+	type: EPalElementType | ElementType
+): ElementType | EPalElementType | null {
+	const mapping: Record<string, string> = {
+		[EPalElementType.None]: 'Neutral',
+		[EPalElementType.Normal]: 'Neutral',
+		[EPalElementType.Fire]: 'Fire',
+		[EPalElementType.Water]: 'Water',
+		[EPalElementType.Leaf]: 'Grass',
+		[EPalElementType.Electricity]: 'Electric',
+		[EPalElementType.Ice]: 'Ice',
+		[EPalElementType.Earth]: 'Ground',
+		[EPalElementType.Dark]: 'Dark',
+		[EPalElementType.Dragon]: 'Dragon',
+		[EPalElementType.MAX]: 'Neutral',
+		Fire: EPalElementType.Fire,
+		Water: EPalElementType.Water,
+		Ground: EPalElementType.Earth,
+		Ice: EPalElementType.Ice,
+		Neutral: EPalElementType.Normal,
+		Dark: EPalElementType.Dark,
+		Grass: EPalElementType.Leaf,
+		Dragon: EPalElementType.Dragon,
+		Electric: EPalElementType.Electricity
+	};
+
+	const result = mapping[type];
+
+	if (result === undefined) {
+		console.warn(`No mapping found for element type: ${type}`);
+		return null;
+	}
+
+	return result as ElementType | EPalElementType;
+}
 export interface PalData {
 	localized_name: string;
-	type: ElementType[];
-	skill_set: Record<string, number>;
+	description: string;
+	is_pal: boolean;
+	tribe: string;
+	pal_deck_index: number;
+	size: string;
+	rarity: number;
+	element_types: EPalElementType[];
+	genus_category: string;
+	organization: string;
+	weapon: string;
+	weapon_equip: boolean;
 	scaling: Scaling;
+	enemy_max_hp_rate: number;
+	enemy_receive_damage_rate: number;
+	enemy_inflict_damage_rate: number;
+	capture_rate_correct: number;
+	exp_ratio: number;
+	price: number;
+	slow_walk_speed: number;
+	walk_speed: number;
+	run_speed: number;
+	ride_sprint_speed: number;
+	transport_speed: number;
+	is_boss: boolean;
+	is_tower_boss: boolean;
+	is_raid_boss: boolean;
+	max_full_stomach: number;
+	food_amount: number;
+	nocturnal: boolean;
+	biological_grade: number;
+	predator: boolean;
+	edible: boolean;
+	stamina: number;
+	male_probability: number;
+	combi_rank: number;
 	work_suitability: Record<WorkSuitability, number>;
-	tower?: boolean;
-	human?: boolean;
-	bonuses?: Bonuses;
+	passive_skills: string[];
+	skill_set?: Record<string, number>;
 }
 
 export interface Bonuses {
@@ -284,17 +375,6 @@ export interface PassiveSkillDetails {
 export interface PassiveSkill extends Skill {
 	details: PassiveSkillDetails;
 }
-
-export type ElementType =
-	| 'Fire'
-	| 'Water'
-	| 'Ground'
-	| 'Ice'
-	| 'Neutral'
-	| 'Dark'
-	| 'Grass'
-	| 'Dragon'
-	| 'Electric';
 
 export type WorkSuitability =
 	| 'EmitFlame'

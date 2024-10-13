@@ -1,3 +1,4 @@
+import copy
 import traceback
 from fastapi import WebSocket
 from fastapi.encoders import jsonable_encoder
@@ -27,13 +28,23 @@ async def get_pals_handler(_: GetPalsMessage, ws: WebSocket):
         pals_data = pals_json.read()
         pals_i18n = pals_i18n_json.read()
 
-        localized_pals_data = {
-            code_name: {
-                "localized_name": pals_i18n.get(code_name, code_name),
-                **pal_info,
-            }
-            for code_name, pal_info in pals_data.items()
-        }
+        localized_pals_data = {}
+        for code_name, pal_info in pals_data.items():
+            localized_pal_info = copy.deepcopy(pal_info)
+
+            if code_name in pals_i18n:
+                i18n_data = pals_i18n[code_name]
+                localized_pal_info["localized_name"] = i18n_data.get(
+                    "localized_name", code_name
+                )
+                localized_pal_info["description"] = i18n_data.get(
+                    "description", "No description available"
+                )
+            else:
+                localized_pal_info["localized_name"] = code_name
+                localized_pal_info["description"] = "No description available"
+
+            localized_pals_data[code_name] = localized_pal_info
 
         response = build_response(MessageType.GET_PALS, localized_pals_data)
         await ws.send_json(response)

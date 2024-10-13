@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Card, Tooltip, Combobox, Input } from '$components/ui';
-	import type { SelectOption } from '$types';
+	import { mapElementType, type EPalElementType, type SelectOption } from '$types';
 	import { Save, X } from 'lucide-svelte';
 	import { palsData, elementsData } from '$lib/data';
 	import { ASSET_DATA_PATH } from '$lib/constants';
@@ -18,7 +18,9 @@
 	async function loadPalOptions() {
 		const allPals = await palsData.getAllPals();
 		selectOptions = allPals
-			.filter(([_, pal]) => !pal.human && !pal.tower)
+			.filter(
+				([_, pal]) => pal.is_pal && !pal.is_tower_boss && !pal.localized_name.includes('en_text')
+			)
 			.map(([code_name, pal]) => ({
 				value: code_name,
 				label: pal.localized_name
@@ -26,8 +28,9 @@
 			.sort((a, b) => a.label.localeCompare(b.label));
 	}
 
-	async function getElementIcon(elementType: string): Promise<string | undefined> {
-		const elementObj = await elementsData.searchElement(elementType);
+	async function getElementIcon(elementType: EPalElementType): Promise<string | undefined> {
+		const element = mapElementType(elementType) as string;
+		const elementObj = await elementsData.searchElement(element);
 		if (!elementObj) return undefined;
 		const iconPath = `${ASSET_DATA_PATH}/img/elements/${elementObj.icon}.png`;
 		return await assetLoader.loadImage(iconPath, true);
@@ -35,7 +38,11 @@
 
 	async function getPalIcon(palName: string): Promise<string | undefined> {
 		const palImgName = palName.toLowerCase().replaceAll(' ', '_');
+
 		const iconPath = `${ASSET_DATA_PATH}/img/pals/menu/${palImgName}_menu.png`;
+		if (palImgName.includes('warsect')) {
+			console.log(palImgName, iconPath);
+		}
 		return await assetLoader.loadImage(iconPath, true);
 	}
 
@@ -60,12 +67,14 @@
 				{/await}
 				<span class="grow">{option.label}</span>
 				{#await palsData.getPalInfo(option.value) then palInfo}
-					{#if palInfo && palInfo.type.length > 0}
-						{#await getElementIcon(palInfo.type[0]) then elementIcon}
-							{#if elementIcon}
-								<enhanced:img src={elementIcon} alt="Element" class="h-6 w-6"></enhanced:img>
-							{/if}
-						{/await}
+					{#if palInfo && palInfo.element_types.length > 0}
+						{#each palInfo.element_types as elementType}
+							{#await getElementIcon(elementType) then elementIcon}
+								{#if elementIcon}
+									<enhanced:img src={elementIcon} alt={elementType} class="h-6 w-6"></enhanced:img>
+								{/if}
+							{/await}
+						{/each}
 					{/if}
 				{/await}
 			</div>

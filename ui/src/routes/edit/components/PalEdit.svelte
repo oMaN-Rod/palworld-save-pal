@@ -11,7 +11,7 @@
 		LearnedSkillSelectModal
 	} from '$components';
 	import { CornerDotButton, Progress, SectionHeader, Tooltip } from '$components/ui';
-	import { EntryState, type Pal, PalGender } from '$types';
+	import { type ElementType, EntryState, mapElementType, type Pal, PalGender } from '$types';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { palsData, elementsData, expData } from '$lib/data';
 	import { cn } from '$theme';
@@ -112,10 +112,17 @@
 		return skills;
 	}
 
-	async function getPalElementTypes(character_id: string): Promise<string[] | undefined> {
-		const pal = await palsData.getPalInfo(character_id);
-		if (!pal) return undefined;
-		return pal.type.length > 0 ? pal.type : undefined;
+	async function getPalElementTypes(character_id: string): Promise<ElementType[] | undefined> {
+		const palData = await palsData.getPalInfo(character_id);
+		if (!palData) return undefined;
+		const elementTypes = palData.element_types.map((e) => mapElementType(e)) as ElementType[];
+		return elementTypes.length > 0 ? elementTypes : undefined;
+	}
+
+	async function getPalDescription(character_id: string): Promise<string | undefined> {
+		const palData = await palsData.getPalInfo(character_id);
+		if (!palData) return undefined;
+		return palData.description;
 	}
 
 	async function getPalElementBadge(elementType: string): Promise<string | undefined> {
@@ -163,7 +170,7 @@
 		appState.selectedPal.level = 55;
 		appState.selectedPal.is_boss = true;
 		appState.selectedPal.is_lucky = false;
-		setBasePreset('Element');
+		await setBasePreset('Element');
 		appState.selectedPal.talent_hp = 100;
 		appState.selectedPal.talent_shot = 100;
 		appState.selectedPal.talent_defense = 100;
@@ -175,6 +182,12 @@
 		await getStats(appState.selectedPal, appState.selectedPlayer);
 		appState.selectedPal.hp = appState.selectedPal.max_hp;
 		appState.selectedPal.state = EntryState.MODIFIED;
+		const palData = await palsData.getPalInfo(appState.selectedPal.character_id);
+		if (palData) {
+			appState.selectedPal.stomach = palData.max_full_stomach;
+		} else {
+			appState.selectedPal.stomach = 150;
+		}
 	}
 
 	function handleUpdateActiveSkill(newSkill: string, oldSkill: string): void {
@@ -226,7 +239,7 @@
 		}
 	}
 
-	function setBasePreset(preset: string) {
+	async function setBasePreset(preset: string) {
 		if (appState.selectedPal) {
 			switch (preset) {
 				case 'Base':
@@ -281,7 +294,12 @@
 					];
 					break;
 				case 'Element':
-					const palType = appState.selectedPal.elements[0];
+					const palData = await palsData.getPalInfo(appState.selectedPal.character_id);
+					if (!palData) {
+						await setBasePreset('Attack');
+						return;
+					}
+					const palType = mapElementType(palData.element_types[0]) as string;
 					appState.selectedPal.passive_skills = [
 						'Noukin',
 						'PAL_ALLAttack_up2',
@@ -598,14 +616,29 @@
 						{#await loadPalImage() then palImage}
 							{#if palImage}
 								<div class="pal">
-									<enhanced:img
-										src={palImage}
-										alt={`${appState.selectedPal?.name} icon`}
-										class="h-auto max-w-full"
-									></enhanced:img>
+									<Tooltip
+										popupClass="p-4 bg-surface-800"
+										rounded="rounded-none"
+										position="top-start"
+										useArrow={false}
+									>
+										<enhanced:img
+											src={palImage}
+											alt={`${appState.selectedPal?.name} icon`}
+											class="h-auto max-w-full"
+										></enhanced:img>
+
+										{#snippet popup()}
+											{#await getPalDescription(appState.selectedPal!.character_id) then description}
+												{#if description}
+													<div class="flex max-w-96 flex-col">
+														<p class="text-center">{description}</p>
+													</div>
+												{/if}
+											{/await}
+										{/snippet}
+									</Tooltip>
 								</div>
-							{:else}
-								<Spinner size="size-48" />
 							{/if}
 						{/await}
 					</div>

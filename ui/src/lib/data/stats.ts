@@ -21,7 +21,7 @@ export async function getStats(pal: Pal, player: Player): Promise<PalStats | und
 		console.log('No pal data found');
 		return;
 	}
-	if (palData.human || palData.tower) {
+	if (!palData.is_pal || palData.is_tower_boss || palData.is_raid_boss) {
 		return;
 	}
 

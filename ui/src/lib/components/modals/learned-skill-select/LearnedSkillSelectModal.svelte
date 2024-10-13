@@ -15,6 +15,7 @@
 	let activeSkills: ActiveSkill[] = $state([]);
 	let selectedSkill: string = $state('');
 	let learnedSkills: string[] = $state([]);
+	let sadIcon: string = $state('');
 
 	$effect(() => {
 		loadSkillOptions();
@@ -29,6 +30,8 @@
 				value: skill.id,
 				label: skill.name
 			}));
+		const sadIconPath = `${ASSET_DATA_PATH}/img/icons/Cattiva_Pleading.png`;
+		sadIcon = await assetLoader.loadImage(sadIconPath, true);
 	}
 
 	async function getActiveSkillIcon(skillId: string): Promise<string | undefined> {
@@ -103,48 +106,57 @@
 	</div>
 
 	<div class="mt-4">
-		<List
-			bind:items={learnedSkills}
-			listClass="max-h-60 overflow-y-auto"
-			canSelect={false}
-			multiple={false}
-		>
-			{#snippet listHeader()}
-				<div>
-					<span class="font-bold">Skills</span>
-				</div>
-			{/snippet}
-			{#snippet listItem(skill)}
-				{#await getActiveSkillIcon(skill) then icon}
-					{@const activeSkill = activeSkills.find((s) => s.id === skill)}
-					<div class="grid grid-cols-[auto_1fr_auto] items-center gap-2">
-						{#if icon}
-							<enhanced:img src={icon} alt={activeSkill?.name} class="h-6 w-6"></enhanced:img>
-						{:else}
-							<div class="w-6"></div>
-						{/if}
-						<div class="flex flex-col">
-							<span class="truncate">{activeSkill?.name}</span>
-							<span class="text-xs">{activeSkill?.description}</span>
-						</div>
+		{#if learnedSkills.length > 0}
+			<List
+				bind:items={learnedSkills}
+				listClass="max-h-60 overflow-y-auto"
+				canSelect={false}
+				multiple={false}
+			>
+				{#snippet listHeader()}
+					<div>
+						<span class="font-bold">Skills</span>
 					</div>
-				{/await}
-			{/snippet}
-			{#snippet listItemActions(skill)}
-				<button class="btn hover:bg-error-500/25 p-2" onclick={() => handleRemoveSkill(skill)}>
-					<Trash size={16} />
-				</button>
-			{/snippet}
-			{#snippet listItemPopup(skill)}
-				{@const activeSkill = activeSkills.find((s) => s.id === skill)}
-				<div class="flex items-center space-x-1 justify-self-start">
-					<TimerReset class="h-4 w-4" />
-					<span class="font-bold">{activeSkill?.details.ct}</span>
-					<span class="text-xs">Pwr</span>
-					<span class="font-bold">{activeSkill?.details.power}</span>
-				</div>
-			{/snippet}
-		</List>
+				{/snippet}
+				{#snippet listItem(skill)}
+					{#await getActiveSkillIcon(skill) then icon}
+						{@const activeSkill = activeSkills.find((s) => s.id === skill)}
+						<div class="grid grid-cols-[auto_1fr_auto] items-center gap-2">
+							{#if icon}
+								<enhanced:img src={icon} alt={activeSkill?.name} class="h-6 w-6"></enhanced:img>
+							{:else}
+								<div class="w-6"></div>
+							{/if}
+							<div class="flex flex-col">
+								<span class="truncate">{activeSkill?.name}</span>
+								<span class="text-xs">{activeSkill?.description}</span>
+							</div>
+						</div>
+					{/await}
+				{/snippet}
+				{#snippet listItemActions(skill)}
+					<button class="btn hover:bg-error-500/25 p-2" onclick={() => handleRemoveSkill(skill)}>
+						<Trash size={16} />
+					</button>
+				{/snippet}
+				{#snippet listItemPopup(skill)}
+					{@const activeSkill = activeSkills.find((s) => s.id === skill)}
+					<div class="flex items-center space-x-1 justify-self-start">
+						<TimerReset class="h-4 w-4" />
+						<span class="font-bold">{activeSkill?.details.ct}</span>
+						<span class="text-xs">Pwr</span>
+						<span class="font-bold">{activeSkill?.details.power}</span>
+					</div>
+				{/snippet}
+			</List>
+		{:else}
+			<div class="flex w-full items-center justify-center space-x-2">
+				<span class="text-2xl font-semibold">No skills learned</span>
+				{#if sadIcon}
+					<enhanced:img src={sadIcon} alt="Sad face" class="h-12 w-12"></enhanced:img>
+				{/if}
+			</div>
+		{/if}
 	</div>
 
 	<div class="mt-4 flex justify-end space-x-2">

@@ -4,6 +4,7 @@
 	import { EntryState, type Pal, type Player } from '$types';
 	import { getStats } from '$lib/data';
 	import { Tooltip, Progress } from '$components/ui';
+	import { palsData } from '$lib/data';
 
 	let {
 		pal = $bindable(),
@@ -18,6 +19,7 @@
 	let stats: Stat[] = $state([]);
 	let foodIcon: string = $state('');
 	let hpIcon: string = $state('');
+	let maxStomach: number = $state(0);
 
 	async function loadStaticIcons() {
 		const foodPath = `${ASSET_DATA_PATH}/img/icons/Food.png`;
@@ -35,6 +37,14 @@
 		pal.state = EntryState.MODIFIED;
 	}
 
+	async function handleEat() {
+		if (!pal) return;
+		const palData = await palsData.getPalInfo(pal.character_id);
+		if (!palData) return;
+		pal.stomach = palData.max_full_stomach;
+		pal.state = EntryState.MODIFIED;
+	}
+
 	async function handleGetStats() {
 		if (pal && player) {
 			const result = await getStats(pal, player);
@@ -45,6 +55,18 @@
 	$effect(() => {
 		handleGetStats();
 		loadStaticIcons();
+	});
+
+	$effect(() => {
+		if (pal) {
+			const getMaxStomach = async () => {
+				const palData = await palsData.getPalInfo(pal.character_id);
+				if (palData) {
+					maxStomach = palData.max_full_stomach;
+				}
+			};
+			getMaxStomach();
+		}
 	});
 
 	$effect(() => {
@@ -83,6 +105,27 @@
 			color="green"
 			width="w-[400px]"
 			dividend={1000}
+		/>
+	</div>
+	<div class="flex flex-row items-center">
+		{#if foodIcon}
+			<Tooltip>
+				<button class="mr-2" onclick={handleEat}>
+					<enhanced:img src={foodIcon} alt="Food" class="h-6 w-6"></enhanced:img>
+				</button>
+				{#snippet popup()}
+					<span>Feed</span>
+					{Math.round(pal.stomach)}/{maxStomach}
+				{/snippet}
+			</Tooltip>
+		{/if}
+
+		<Progress
+			bind:value={pal.stomach}
+			bind:max={maxStomach}
+			height="h-6"
+			width="w-[400px]"
+			color="orange"
 		/>
 	</div>
 	<div

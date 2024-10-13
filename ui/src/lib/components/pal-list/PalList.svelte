@@ -1,6 +1,14 @@
 <script lang="ts">
 	import { cn } from '$theme';
-	import { MessageType, PalGender, type Pal, type Player } from '$types';
+	import {
+		EPalElementType,
+		mapElementType,
+		MessageType,
+		PalGender,
+		type Pal,
+		type PalData,
+		type Player
+	} from '$types';
 	import { elementsData, palsData, getStats } from '$lib/data';
 	import { Input, Tooltip, List } from '$components/ui';
 	import { PalSelectModal } from '$components/modals';
@@ -8,22 +16,24 @@
 	import {
 		Search,
 		GalleryVerticalEnd,
-		ArrowUp01,
-		ArrowUp10,
-		ArrowUpAZ,
-		ArrowUpZA,
+		ArrowDown01,
+		ArrowDown10,
+		ArrowDownAZ,
+		ArrowDownZA,
 		Plus,
 		Copy,
 		Ambulance,
 		Trash,
-		X
+		X,
+		ArrowDownWideNarrow,
+		ArrowDownNarrowWide
 	} from 'lucide-svelte';
 	import { assetLoader, debounce, deepCopy } from '$utils';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { getAppState, getSocketState, getModalState, getNavigationState } from '$states';
 	import { HealthBadge } from '$components';
 
-	type SortBy = 'name' | 'level';
+	type SortBy = 'name' | 'level' | 'paldeck-index';
 	type SortOrder = 'asc' | 'desc';
 
 	const appState = getAppState();
@@ -38,7 +48,7 @@
 	type PalWithData = {
 		id: string;
 		pal: Pal;
-		palData: any;
+		palData?: PalData;
 	};
 
 	let searchQuery = $state('');
@@ -87,6 +97,14 @@
 		cn('btn', selectedFilter === 'alpha' ? 'bg-secondary-500/25' : '')
 	);
 
+	const sortByPaldeckIndexAscClass = $derived(
+		cn('btn', sortBy === 'paldeck-index' && sortOrder === 'asc' ? 'bg-secondary-500/25' : '')
+	);
+
+	const sortByPaldeckIndexDescClass = $derived(
+		cn('btn', sortBy === 'paldeck-index' && sortOrder === 'desc' ? 'bg-secondary-500/25' : '')
+	);
+
 	const elementClass = (element: string) =>
 		cn('btn', selectedFilter === element ? 'bg-secondary-500/25' : '');
 
@@ -126,7 +144,10 @@
 				selectedFilter === 'alpha' ||
 				selectedFilter === 'lucky' ||
 				(palData &&
-					palData.type.map((e: string) => e.toLowerCase()).includes(selectedFilter.toLowerCase()));
+					palData.element_types &&
+					palData.element_types
+						.map((e: EPalElementType) => mapElementType(e)!.toLowerCase())
+						.includes(selectedFilter.toLowerCase()));
 			const matchesAlpha = selectedFilter === 'alpha' ? pal.is_boss : true;
 			const matchesLucky = selectedFilter === 'lucky' ? pal.is_lucky : true;
 			return matchesSearch && matchesElement && matchesAlpha && matchesLucky;
@@ -192,12 +213,10 @@
 		}
 	}
 
-	function getElementBadge(elementType: string): string | undefined {
-		return elementBadges[elementType];
-	}
-
-	function getElementIcon(elementType: string): string | undefined {
-		return elementIcons[elementType];
+	function getElementIcon(elementType: EPalElementType | string): string | undefined {
+		if (elementIcons[elementType]) return elementIcons[elementType];
+		const element = mapElementType(elementType as EPalElementType) as string;
+		return elementIcons[element];
 	}
 
 	async function getPalMenuIcon(palId: string): Promise<string | undefined> {
@@ -250,6 +269,28 @@
 			filteredPals = filteredPals.sort((a, b) => b.pal.level - a.pal.level);
 			sortOrder = 'desc';
 		}
+	}
+
+	async function sortByPaldeckIndex(order: SortOrder) {
+		sortBy = 'paldeck-index';
+
+		// Fetch all pal info asynchronously
+		const palInfoPromises = filteredPals.map((pal) => palsData.getPalInfo(pal.pal.character_id));
+		const palInfos = await Promise.all(palInfoPromises);
+
+		// Create an array of [pal, palInfo] pairs
+		const palsWithInfo = filteredPals.map((pal, index) => [pal, palInfos[index]]);
+
+		// Sort the pairs
+		palsWithInfo.sort((a, b) => {
+			const indexA = (a[1] as PalData)?.pal_deck_index ?? Infinity;
+			const indexB = (b[1] as PalData)?.pal_deck_index ?? Infinity;
+			return order === 'asc' ? indexA - indexB : indexB - indexA;
+		});
+
+		// Update filteredPals with the sorted order
+		filteredPals = palsWithInfo.map((pair) => pair[0] as PalWithData);
+		sortOrder = order;
 	}
 
 	function getGenderIcon(gender: PalGender): string | undefined {
@@ -428,14 +469,14 @@
 					<div>
 						<legend class="font-bold">Sort</legend>
 						<hr />
-						<div class="grid grid-cols-5">
+						<div class="grid grid-cols-6">
 							<Tooltip>
 								<button
 									type="button"
 									class={sortByLevelAscClass}
 									onclick={() => sortByLevel('asc')}
 								>
-									<ArrowUp01 />
+									<ArrowDown01 />
 								</button>
 								{#snippet popup()}
 									Sort by level in ascending order
@@ -447,7 +488,7 @@
 									class={sortByLevelDescClass}
 									onclick={() => sortByLevel('desc')}
 								>
-									<ArrowUp10 />
+									<ArrowDown10 />
 								</button>
 								{#snippet popup()}
 									Sort by level in descending order
@@ -455,7 +496,7 @@
 							</Tooltip>
 							<Tooltip>
 								<button type="button" class={sortByNameAscClass} onclick={() => sortByName('asc')}>
-									<ArrowUpAZ />
+									<ArrowDownAZ />
 								</button>
 								{#snippet popup()}
 									Sort by name in ascending order
@@ -467,10 +508,34 @@
 									class={sortByNameDescClass}
 									onclick={() => sortByName('desc')}
 								>
-									<ArrowUpZA />
+									<ArrowDownZA />
 								</button>
 								{#snippet popup()}
 									Sort by name in descending order
+								{/snippet}
+							</Tooltip>
+							<Tooltip>
+								<button
+									type="button"
+									class={sortByPaldeckIndexAscClass}
+									onclick={() => sortByPaldeckIndex('asc')}
+								>
+									<ArrowDownWideNarrow />
+								</button>
+								{#snippet popup()}
+									Sort by Paldeck # in ascending order
+								{/snippet}
+							</Tooltip>
+							<Tooltip>
+								<button
+									type="button"
+									class={sortByPaldeckIndexDescClass}
+									onclick={() => sortByPaldeckIndex('desc')}
+								>
+									<ArrowDownNarrowWide />
+								</button>
+								{#snippet popup()}
+									Sort by Paldeck # in descending order
 								{/snippet}
 							</Tooltip>
 						</div>
@@ -594,7 +659,7 @@
 					</div>
 					<div class="flex justify-end">
 						{#if p.palData}
-							{#each p.palData.type as elementType}
+							{#each p.palData.element_types as elementType}
 								{#await getElementIcon(elementType) then icon}
 									{#if icon}
 										<enhanced:img src={icon} alt={elementType} class="pal-element-badge"
@@ -607,7 +672,10 @@
 				</div>
 			{/snippet}
 			{#snippet listItemPopup(p)}
-				<HealthBadge bind:pal={p.pal} player={appState.selectedPlayer} />
+				<div class="flex w-[450px] flex-col">
+					<HealthBadge bind:pal={p.pal} player={appState.selectedPlayer} />
+					<span>{p.palData?.description}</span>
+				</div>
 			{/snippet}
 		</List>
 	</div>
