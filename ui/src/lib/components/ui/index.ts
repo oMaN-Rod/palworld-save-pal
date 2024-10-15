@@ -1,6 +1,7 @@
 import Card from './card/Card.svelte';
 import Checkbox from './checkbox/Checkbox.svelte';
 import Combobox from './combobox/Combobox.svelte';
+import ContextMenu from './context-menu/ContextMenu.svelte';
 import CornerDotButton from './corner-dot-button/CornerDotButton.svelte';
 import FileDropzone from './file-dropzone/FileDropzone.svelte';
 import Input from './input/Input.svelte';
@@ -15,6 +16,7 @@ export {
 	Card,
 	Checkbox,
 	Combobox,
+	ContextMenu,
 	CornerDotButton,
 	FileDropzone,
 	Input,

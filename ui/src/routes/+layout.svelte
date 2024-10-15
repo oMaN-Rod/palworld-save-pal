@@ -18,6 +18,7 @@
 	const ws = getSocketState();
 	const appState = getAppState();
 	const nav = getNavigationState();
+	const toast = getToastState();
 
 	$effect(() => {
 		const loadData = async () => {
@@ -51,6 +52,15 @@
 					}
 					ws.clear(type);
 					break;
+				case MessageType.MOVE_PAL:
+					const move_data = data as { player_id: string; pal_id: string; container_id: string };
+					if (appState.players && appState.players[move_data.player_id]) {
+						const player = appState.players[move_data.player_id];
+						const pal = player.pals ? player.pals[move_data.pal_id] : undefined;
+						if (pal) {
+							pal.storage_id = move_data.container_id;
+						}
+					}
 				case MessageType.LOAD_ZIP_FILE:
 				case MessageType.LOAD_SAVE_FILE:
 					const file = data as { name: string; size: number };
@@ -100,6 +110,11 @@
 							error: { message: data }
 						}
 					});
+					ws.clear(type);
+					break;
+				case MessageType.WARNING:
+					console.warn(data);
+					toast.add(data, undefined, 'warning');
 					ws.clear(type);
 			}
 		}

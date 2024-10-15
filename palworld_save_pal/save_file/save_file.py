@@ -162,20 +162,28 @@ class SaveFile(BaseModel):
     _group_save_data_map: List[Dict[str, Any]] = PrivateAttr(default_factory=list)
 
     def add_pal(
-        self, player_id: UUID, pal_code_name: str, nickname: str
+        self, player_id: UUID, pal_code_name: str, nickname: str, container_id: UUID
     ) -> Optional[Pal]:
         player = self._players.get(player_id)
         if not player:
             logger.error("Player %s not found in the save file.", player_id)
             return
 
-        data = player.add_pal(pal_code_name, nickname)
+        data = player.add_pal(pal_code_name, nickname, container_id)
         if data is None:
             return
         new_pal, new_pal_data = data
         self._character_save_parameter_map.append(new_pal_data)
         self._pals[new_pal.instance_id] = new_pal
         return new_pal
+
+    def move_pal(self, player_id: UUID, pal_id: UUID, container_id: UUID) -> Pal | None:
+        player = self._players.get(player_id)
+        if not player:
+            logger.error("Player %s not found in the save file.", player_id)
+            return
+
+        return player.move_pal(pal_id, container_id)
 
     def clone_pal(self, pal: Pal) -> Optional[Pal]:
         player = self._players.get(pal.owner_uid)

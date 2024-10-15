@@ -38,6 +38,8 @@ export type Player = {
 	nickname: string;
 	level: number;
 	pals?: Record<string, Pal>;
+	pal_box_id: string;
+	otomo_container_id: string;
 	common_container: ItemContainer;
 	essential_container: ItemContainer;
 	weapon_load_out_container: ItemContainer;

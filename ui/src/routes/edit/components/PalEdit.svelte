@@ -563,7 +563,7 @@
 							{/each}
 						</div>
 						<SectionHeader text="Presets" />
-						<div class="btn-group preset-outlined-surface-100-900 my-2 flex-col p-2 md:flex-row">
+						<div class="btn-group preset-outlined-surface-100-900 my-2 flex p-2">
 							<button
 								type="button"
 								class="btn hover:bg-primary-500"
@@ -585,7 +585,7 @@
 								onclick={() => setBasePreset('Tank')}>Tank</button
 							>
 						</div>
-						<div class="btn-group preset-outlined-surface-100-900 my-2 flex-col p-2 md:flex-row">
+						<div class="btn-group preset-outlined-surface-100-900 my-2 flex p-2">
 							<button
 								type="button"
 								class="btn hover:bg-primary-500"

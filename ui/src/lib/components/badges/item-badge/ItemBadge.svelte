@@ -14,7 +14,7 @@
 	import { getModalState } from '$states';
 	import { ItemSelectModal } from '$components';
 	import { Progress } from '@skeletonlabs/skeleton-svelte';
-	import { Package, Plus } from 'lucide-svelte';
+	import { Package } from 'lucide-svelte';
 
 	let {
 		slot = $bindable<ItemContainerSlot>(),
@@ -221,7 +221,7 @@
 </script>
 
 <button
-	class="hover:ring-secondary-500 hover:ring"
+	class="hover:ring-secondary-500 w-12 hover:ring xl:w-16"
 	onclick={handleItemSelect}
 	oncontextmenu={(event) => event.preventDefault()}
 	onmousedown={(event) => onCopyPaste(event)}
@@ -236,7 +236,7 @@
 			<div class="flex flex-col">
 				<div
 					class={cn(
-						'bg-surface-800/50 relative flex h-16 w-16 items-center justify-center',
+						'bg-surface-800/50 relative flex h-12 w-12 items-center justify-center xl:h-16 xl:w-16',
 						itemClass
 					)}
 				>
@@ -245,7 +245,7 @@
 						<enhanced:img
 							src={icon}
 							alt={item.info.localized_name}
-							style="width: 62px; height: 62px;"
+							class="h-12 w-12 xl:h-16 xl:w-16"
 						></enhanced:img>
 					{/if}
 					{#if palIcon}
@@ -382,7 +382,9 @@
 		</Tooltip>
 	{:else if slot.static_id !== 'None'}
 		<Tooltip>
-			<div class="bg-surface-800 relative flex h-16 w-16 items-center justify-center">
+			<div
+				class="bg-surface-800 relative flex h-12 w-12 items-center justify-center xl:h-16 xl:w-16"
+			>
 				<Package size="48" />
 				<span class="absolute bottom-0 right-0 text-xs">{slot.count}</span>
 			</div>
@@ -393,7 +395,9 @@
 		</Tooltip>
 	{:else}
 		<Tooltip>
-			<div class="bg-surface-800 relative flex h-16 w-16 items-center justify-center"></div>
+			<div
+				class="bg-surface-800 relative flex h-12 w-12 items-center justify-center xl:h-16 xl:w-16"
+			></div>
 
 			{#snippet popup()}
 				<div class="flex">

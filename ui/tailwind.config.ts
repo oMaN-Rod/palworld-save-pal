@@ -12,7 +12,11 @@ export default {
 	],
 
 	theme: {
-		extend: {}
+		extend: {
+			spacing: {
+				'18': '72px'
+			}
+		}
 	},
 
 	plugins: [

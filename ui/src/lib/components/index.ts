@@ -1,6 +1,7 @@
 import ActiveSkillBadge from './badges/active-skill-badge/ActiveSkillBadge.svelte';
 import HealthBadge from './badges/health-badge/HealthBadge.svelte';
 import ItemBadge from './badges/item-badge/ItemBadge.svelte';
+import PalBadge from './badges/pal-badge/PalBadge.svelte';
 import PassiveSkillBadge from './badges/passive-skill-badge/PassiveSkillBadge.svelte';
 import StatsBadges from './badges/stats-badges/StatsBadges.svelte';
 import WorkSuitabilities from './badges/work-suitabilities/WorkSuitabilities.svelte';
@@ -23,6 +24,7 @@ export {
 	ItemBadge,
 	Modal,
 	NavBar,
+	PalBadge,
 	PalList,
 	PassiveSkillBadge,
 	PlayerList,

@@ -33,11 +33,17 @@ class CharacterContainer(BaseModel):
     def available_slots(self) -> bool:
         return len(self.slots) < self.size
 
+    def find_first_available_slot(self) -> int:
+        used_slots = set(slot.slot_index for slot in self.slots)
+        for i in range(self.size):
+            if i not in used_slots:
+                return i
+
     def add_pal(self, pal_id: UUID) -> Optional[int]:
         if not self.available_slots():
             logger.warning("Character container is full")
             return
-        slot_idx = len(self.slots)
+        slot_idx = self.find_first_available_slot()
         logger.debug(
             "pal_id = %s, slot_idx = %s, container_id = %s", pal_id, slot_idx, self.id
         )
@@ -45,6 +51,8 @@ class CharacterContainer(BaseModel):
             slot_idx=slot_idx, instance_id=pal_id
         )
         self._slots_data.append(new_container_slot_data)
+        if not self.slots:
+            self.slots = []
         self.slots.append(CharacterContainerSlot(slot_index=slot_idx, pal_id=pal_id))
         return slot_idx
 

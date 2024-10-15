@@ -10,6 +10,7 @@ from palworld_save_pal.save_file.guild import Guild
 from palworld_save_pal.save_file.pal import Pal
 from palworld_save_pal.save_file.item_container import ItemContainer
 from palworld_save_pal.save_file.pal_objects import PalObjects
+from palworld_save_pal.save_file.utils import are_equal_uuids
 from palworld_save_pal.utils.logging_config import create_logger
 
 logger = create_logger(__name__)
@@ -22,6 +23,8 @@ class Player(BaseModel):
     exp: int
     instance_id: Optional[UUID] = Field(default=None)
     pals: Optional[Dict[UUID, Pal]] = Field(default_factory=dict)
+    pal_box_id: Optional[UUID] = Field(default=None)
+    otomo_container_id: Optional[UUID] = Field(default=None)
     common_container: Optional[ItemContainer] = Field(default=None)
     essential_container: Optional[ItemContainer] = Field(default=None)
     weapon_load_out_container: Optional[ItemContainer] = Field(default=None)
@@ -30,6 +33,7 @@ class Player(BaseModel):
     guild: Optional[Guild] = Field(default=None)
 
     _pal_box: Optional[CharacterContainer] = PrivateAttr(default=None)
+    _party: Optional[CharacterContainer] = PrivateAttr(default=None)
     _player_gvas_file: Optional[GvasFile] = PrivateAttr(default=None)
     _character_save_parameter: Optional[Dict[str, Any]] = PrivateAttr(default=None)
 
@@ -55,10 +59,16 @@ class Player(BaseModel):
             self._load_player_data()
             self._load_inventory(item_container_save_data, dynamic_item_save_data)
             self._load_pal_box(character_container_save_data)
+            self._load_otomo_container(character_container_save_data)
 
-    def add_pal(self, pal_code_name: str, nickname: str):
+    def add_pal(self, pal_code_name: str, nickname: str, container_id: UUID):
         new_pal_id = uuid.uuid4()
-        slot_idx = self._pal_box.add_pal(new_pal_id)
+        container = (
+            self._pal_box
+            if are_equal_uuids(container_id, self.pal_box_id)
+            else self._party
+        )
+        slot_idx = container.add_pal(new_pal_id)
         if slot_idx is None:
             return
 
@@ -66,7 +76,7 @@ class Player(BaseModel):
             code_name=pal_code_name,
             instance_id=new_pal_id,
             owner_uid=self.uid,
-            container_id=self._pal_box.id,
+            container_id=container_id,
             slot_idx=slot_idx,
             group_id=self.guild.id if isinstance(self.guild, Guild) else None,
             nickname=nickname,
@@ -79,6 +89,26 @@ class Player(BaseModel):
         if isinstance(self.guild, Guild):
             self.guild.add_pal(new_pal_id)
         return new_pal, new_pal_data
+
+    def move_pal(self, pal_id: UUID, container_id: UUID):
+        pal = self.pals[pal_id]
+        if are_equal_uuids(container_id, self.pal_box_id):
+            source_container = self._party
+            target_container = self._pal_box
+        elif are_equal_uuids(container_id, self.otomo_container_id):
+            source_container = self._pal_box
+            target_container = self._party
+        else:
+            logger.error("Invalid container id %s", container_id)
+            return
+        slot_idx = target_container.add_pal(pal_id)
+        if slot_idx is None:
+            return
+        source_container.delete_pal(pal_id)
+        pal.storage_id = container_id
+        pal.storage_slot = slot_idx
+        pal.update()
+        return pal
 
     def clone_pal(self, pal: Pal):
         new_pal_id = uuid.uuid4()
@@ -154,13 +184,27 @@ class Player(BaseModel):
         player_save_data = PalObjects.get_value(
             self._player_gvas_file.properties["SaveData"]
         )
-        pal_storage_container_id = PalObjects.get_guid(
+        self.pal_box_id = PalObjects.get_guid(
             PalObjects.get_nested(
                 player_save_data, "PalStorageContainerId", "value", "ID"
             )
         )
         self._pal_box = CharacterContainer(
-            id=pal_storage_container_id,
+            id=self.pal_box_id,
+            character_container_save_data=character_container_save_data,
+        )
+
+    def _load_otomo_container(self, character_container_save_data: Dict[str, Any]):
+        player_save_data = PalObjects.get_value(
+            self._player_gvas_file.properties["SaveData"]
+        )
+        self.otomo_container_id = PalObjects.get_guid(
+            PalObjects.get_nested(
+                player_save_data, "OtomoCharacterContainerId", "value", "ID"
+            )
+        )
+        self._party = CharacterContainer(
+            id=self.otomo_container_id,
             character_container_save_data=character_container_save_data,
         )
 

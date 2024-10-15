@@ -25,6 +25,7 @@ from palworld_save_pal.ws.messages import (
     HealPalsMessage,
     LoadSaveFileMessage,
     MessageType,
+    MovePalMessage,
     OpenInBrowserMessage,
     SyncAppStateMessage,
     UpdateSaveFileMessage,
@@ -198,5 +199,13 @@ def bootstrap(dispatcher: "MessageDispatcher"):
         {
             "message_class": BaseMessage,
             "handler_func": exp_handler.get_exp_data_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.MOVE_PAL.value,
+        {
+            "message_class": MovePalMessage,
+            "handler_func": pal_handler.move_pal_handler,
         },
     )

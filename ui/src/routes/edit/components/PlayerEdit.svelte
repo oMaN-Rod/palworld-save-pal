@@ -1,13 +1,19 @@
 <script lang="ts">
-	import { ItemHeader, Progress } from '$components/ui';
-	import { getAppState, getToastState, getModalState } from '$states';
-	import { EntryState, type ItemContainerSlot, type ItemContainer } from '$types';
+	import { Card, ItemHeader, Progress } from '$components/ui';
+	import { getAppState, getToastState, getSocketState, getModalState } from '$states';
+	import {
+		EntryState,
+		type ItemContainerSlot,
+		type ItemContainer,
+		type Pal,
+		MessageType
+	} from '$types';
 	import { assetLoader } from '$utils/asset-loader';
 	import { ASSET_DATA_PATH } from '$lib/constants';
-	import { itemsData, expData } from '$lib/data';
+	import { itemsData, expData, palsData } from '$lib/data';
 	import { Tabs } from '@skeletonlabs/skeleton-svelte';
 	import { Tooltip } from '$components/ui';
-	import { ItemBadge, PlayerPresets } from '$components';
+	import { ItemBadge, PlayerPresets, PalBadge, PalSelectModal } from '$components';
 	import {
 		Bomb,
 		ChevronsLeftRight,
@@ -20,10 +26,12 @@
 		Plus
 	} from 'lucide-svelte';
 
+	const ws = getSocketState();
 	const appState = getAppState();
 	const toast = getToastState();
 	const modal = getModalState();
 
+	let otomoContainer: Record<string, Pal> = $state({});
 	let commonContainer: ItemContainer = $state({ id: '', type: '', slots: [] });
 	let essentialContainer: ItemContainer = $state({ id: '', type: '', slots: [] });
 	let weaponLoadOutContainer: ItemContainer = $state({ id: '', type: '', slots: [] });
@@ -324,6 +332,31 @@
 		}
 	}
 
+	function loadOtomoContainer() {
+		if (appState.selectedPlayer && appState.selectedPlayer.pals) {
+			const container_id = appState.selectedPlayer.otomo_container_id;
+
+			const otomoEntries = Object.entries(appState.selectedPlayer.pals).filter(
+				([_, pal]) => pal.storage_id === container_id
+			);
+
+			const allSlots = Array(5)
+				.fill(null)
+				.map((_, index) => {
+					const existingPal = otomoEntries.find(([_, pal]) => pal.storage_slot === index);
+					if (existingPal) {
+						return existingPal;
+					} else {
+						const emptyPalId = `empty-${index}`;
+						return [emptyPalId, { character_id: 'None' }];
+					}
+				});
+
+			// Convert the array back to an object
+			otomoContainer = Object.fromEntries(allSlots);
+		}
+	}
+
 	async function sortCommonContainer() {
 		if (appState.selectedPlayer) {
 			const sortedSlots = await Promise.all(
@@ -355,6 +388,7 @@
 			loadFoodContainer();
 			loadWeaponLoadoutContainer();
 			loadPlayerEquipmentArmorContainer();
+			loadOtomoContainer();
 		}
 	});
 
@@ -404,179 +438,257 @@
 
 		await initlevelProgress();
 	}
+
+	function handleMoveToPalbox(pal: Pal) {
+		if (appState.selectedPlayer) {
+			const message = {
+				type: MessageType.MOVE_PAL,
+				data: {
+					player_id: appState.selectedPlayer.uid,
+					pal_id: pal.instance_id,
+					container_id: appState.selectedPlayer.pal_box_id
+				}
+			};
+			ws.send(JSON.stringify(message));
+		}
+	}
+
+	async function handleDeletePal(pal: Pal) {
+		const palData = await palsData.getPalInfo(pal.character_id);
+		const confirmed = await modal.showConfirmModal({
+			title: 'Delete Pal(s)',
+			message: `Are you sure you want to delete ${pal.nickname || palData?.localized_name}?`,
+			confirmText: 'Delete',
+			cancelText: 'Cancel'
+		});
+
+		if (appState.selectedPlayer && appState.selectedPlayer.pals && confirmed) {
+			const data = {
+				player_id: appState.selectedPlayer.uid,
+				pal_ids: [pal.instance_id]
+			};
+
+			const message = {
+				type: MessageType.DELETE_PALS,
+				data
+			};
+			ws.send(JSON.stringify(message));
+			appState.selectedPlayer.pals = Object.fromEntries(
+				Object.entries(appState.selectedPlayer.pals).filter(([id]) => pal.instance_id !== id)
+			);
+		}
+	}
+
+	async function handleAddPal() {
+		if (!appState.selectedPlayer) return;
+		// @ts-ignore
+		const [selectedPal, nickname] = await modal.showModal<string>(PalSelectModal, {
+			title: 'Add a new Pal'
+		});
+		const palData = await palsData.getPalInfo(selectedPal);
+		const message = {
+			type: MessageType.ADD_PAL,
+			data: {
+				player_id: appState.selectedPlayer.uid,
+				pal_code_name: selectedPal,
+				nickname: nickname || `[New] ${palData?.localized_name}`,
+				container_id: appState.selectedPlayer.otomo_container_id
+			}
+		};
+		ws.send(JSON.stringify(message));
+	}
 </script>
 
 {#if appState.selectedPlayer}
 	<div class="flex h-full flex-col overflow-auto">
-		<div class="m-2 flex items-end space-x-2 p-2">
-			<div class="flex grow items-center space-x-2">
-				<h6 class="h6">Clear</h6>
-				<Tooltip>
-					<button
-						class="btn preset-filled-primary-500 hover:preset-tonal-secondary"
-						onclick={clearCommonContainer}
-					>
-						<ChevronsLeftRight />
-					</button>
-					{#snippet popup()}
-						<span>Clear Inventory</span>
-					{/snippet}
-				</Tooltip>
-				<Tooltip>
-					<button
-						class="btn preset-filled-primary-500 hover:preset-tonal-secondary"
-						onclick={sortCommonContainer}
-					>
-						<ArrowUp01 />
-					</button>
-					{#snippet popup()}
-						<span>Sort Inventory</span>
-					{/snippet}
-				</Tooltip>
-				<Tooltip
-					><button
-						class="btn preset-filled-primary-500 hover:preset-tonal-secondary"
-						onclick={clearEssentialContainer}
-					>
-						<Key />
-					</button>
-					{#snippet popup()}
-						<span>Clear Key Items</span>
-					{/snippet}
-				</Tooltip>
-				<Tooltip>
-					<button
-						class="btn preset-filled-primary-500 hover:preset-tonal-secondary"
-						onclick={clearWeaponLoadOutContainer}
-					>
-						<Swords />
-					</button>
-					{#snippet popup()}
-						<span>Clear Weapons</span>
-					{/snippet}
-				</Tooltip>
-				<Tooltip>
-					<button
-						class="btn preset-filled-primary-500 hover:preset-tonal-secondary"
-						onclick={clearEquipmentArmorContainer}
-					>
-						<Shield />
-					</button>
-					{#snippet popup()}
-						<span>Clear Armor</span>
-					{/snippet}
-				</Tooltip>
-				<Tooltip>
-					<button
-						class="btn preset-filled-primary-500 hover:preset-tonal-secondary"
-						onclick={clearFoodEquipContainer}
-					>
-						<Pizza />
-					</button>
-					{#snippet popup()}
-						<span>Clear Food</span>
-					{/snippet}
-				</Tooltip>
-				<Tooltip>
-					<button
-						class="btn preset-filled-primary-500 hover:preset-tonal-secondary"
-						onclick={clearAll}
-					>
-						<Bomb />
-					</button>
-					{#snippet popup()}
-						<span>Clear All</span>
-					{/snippet}
-				</Tooltip>
-			</div>
+		<div class="flex items-end space-x-2 p-2">
+			<div class="grow">
+				<div
+					class="border-l-surface-600 preset-filled-surface-100-900 flex w-10/12 rounded-none border-l-2 p-4"
+				>
+					<div class="mr-4 flex flex-col items-center justify-center rounded-none">
+						<div class="flex px-2">
+							<button class="mr-4">
+								<Minus class="text-primary-500" onclick={handleLevelDecrement} />
+							</button>
 
-			<div
-				class="border-l-surface-600 preset-filled-surface-100-900 flex w-1/2 rounded-none border-l-2 p-4"
-			>
-				<div class="grpw mr-4 flex flex-col items-center justify-center rounded-none">
-					<div class="flex px-2">
-						<button class="mr-4">
-							<Minus class="text-primary-500" onclick={handleLevelDecrement} />
-						</button>
-
-						<div class="flex flex-col items-center justify-center">
-							<span class="text-surface-400 font-bold">LEVEL</span>
-							<span class="text-4xl font-bold">{appState.selectedPlayer.level}</span>
-						</div>
-
-						<button class="ml-4">
-							<Plus class="text-primary-500" onclick={handleLevelIncrement} />
-						</button>
-					</div>
-				</div>
-
-				<div class="grow">
-					<div class="flex flex-col">
-						<div class="flex flex-col space-y-2">
-							<div class="flex">
-								<span class="text-on-surface grow">NEXT</span>
-								<span class="text-on-surface">{levelProgressToNext}</span>
+							<div class="flex flex-col items-center justify-center">
+								<span class="text-surface-400 font-bold">LEVEL</span>
+								<span class="text-2xl font-bold xl:text-4xl">{appState.selectedPlayer.level}</span>
 							</div>
-							<Progress
-								bind:value={levelProgressValue}
-								bind:max={levelProgressMax}
-								height="h-2"
-								width="w-full"
-								rounded="rounded-none"
-								showLabel={false}
-							/>
+
+							<button class="ml-4">
+								<Plus class="text-primary-500" onclick={handleLevelIncrement} />
+							</button>
+						</div>
+					</div>
+
+					<div class="grow">
+						<div class="flex flex-col">
+							<div class="flex flex-col space-y-2">
+								<div class="flex">
+									<span class="text-on-surface grow">NEXT</span>
+									<span class="text-on-surface">{levelProgressToNext}</span>
+								</div>
+								<Progress
+									bind:value={levelProgressValue}
+									bind:max={levelProgressMax}
+									height="h-2"
+									width="w-full"
+									rounded="rounded-none"
+									showLabel={false}
+								/>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="ml-2 grid grid-cols-[auto_1fr_auto] gap-4">
-			<Tabs listBorder="border border-surface-800" listClasses="h-auto" bind:value={group}>
-				{#snippet list()}
-					<Tabs.Control
-						value="inventory"
-						classes="w-full"
-						base="border-none hover:ring-secondary-500 hover:ring"
-						labelBase="py-1"
-						stateActive="bg-surface-700"
-						padding="p-0"
-					>
-						Inventory
-					</Tabs.Control>
-					<Tabs.Control
-						value="key_items"
-						classes="w-full"
-						base="border-none hover:ring-secondary-500 hover:ring"
-						labelBase="py-1"
-						stateActive="bg-surface-700"
-						padding="p-0"
-					>
-						Key Items
-					</Tabs.Control>
-				{/snippet}
-				{#snippet content()}
-					<Tabs.Panel value="inventory">
-						<div class="grid grid-cols-6 gap-2">
-							{#each Object.values(commonContainer.slots) as _, index}
-								<ItemBadge
-									bind:slot={commonContainer.slots[index]}
-									itemGroup="Common"
-									onCopyPaste={(event) => handleCopyPaste(event, commonContainer.slots[index])}
+			<Card rounded="rounded-none" padding="py-2.5 px-4">
+				<div class="flex">
+					<h6 class="h6 mr-4">Party</h6>
+					<div class="flex flex-col">
+						<div class="flex flex-row space-x-4 xl:space-x-8">
+							{#each Object.values(otomoContainer) as pal}
+								<PalBadge
+									bind:pal={otomoContainer[pal.instance_id]}
+									onMoveToPalbox={() => handleMoveToPalbox(pal)}
+									onDelete={() => handleDeletePal(pal)}
+									onAdd={() => handleAddPal()}
 								/>
 							{/each}
 						</div>
-					</Tabs.Panel>
-					<Tabs.Panel value="key_items">
-						<div class="max-h-[500px] overflow-auto">
+					</div>
+				</div>
+			</Card>
+		</div>
+		<div class="ml-2 grid grid-cols-[auto_1fr_auto] gap-4">
+			<div class="flex flex-col">
+				<Tabs listBorder="border border-surface-800" listClasses="h-auto" bind:value={group}>
+					{#snippet list()}
+						<Tabs.Control
+							value="inventory"
+							classes="w-full"
+							base="border-none hover:ring-secondary-500 hover:ring"
+							labelBase="py-1"
+							stateActive="bg-surface-700"
+							padding="p-0"
+						>
+							Inventory
+						</Tabs.Control>
+						<Tabs.Control
+							value="key_items"
+							classes="w-full"
+							base="border-none hover:ring-secondary-500 hover:ring"
+							labelBase="py-1"
+							stateActive="bg-surface-700"
+							padding="p-0"
+						>
+							Key Items
+						</Tabs.Control>
+					{/snippet}
+					{#snippet content()}
+						<Tabs.Panel value="inventory">
 							<div class="grid grid-cols-6 gap-2">
-								{#each Object.values(essentialContainer.slots) as _, index}
-									<ItemBadge bind:slot={essentialContainer.slots[index]} itemGroup="KeyItem" />
+								{#each Object.values(commonContainer.slots) as _, index}
+									<ItemBadge
+										bind:slot={commonContainer.slots[index]}
+										itemGroup="Common"
+										onCopyPaste={(event) => handleCopyPaste(event, commonContainer.slots[index])}
+									/>
 								{/each}
 							</div>
-						</div>
-					</Tabs.Panel>
-				{/snippet}
-			</Tabs>
+						</Tabs.Panel>
+						<Tabs.Panel value="key_items">
+							<div class="max-h-[500px] overflow-auto">
+								<div class="grid grid-cols-6 gap-2">
+									{#each Object.values(essentialContainer.slots) as _, index}
+										<ItemBadge bind:slot={essentialContainer.slots[index]} itemGroup="KeyItem" />
+									{/each}
+								</div>
+							</div>
+						</Tabs.Panel>
+					{/snippet}
+				</Tabs>
+				<div class="mt-4 flex items-center space-x-2">
+					<Tooltip>
+						<button
+							class="btn preset-filled-primary-500 hover:preset-tonal-secondary xl:btn-md btn-sm px-2 xl:px-4"
+							onclick={clearCommonContainer}
+						>
+							<ChevronsLeftRight class="h-4 w-4 xl:h-6 xl:w-6" />
+						</button>
+						{#snippet popup()}
+							<span>Clear Inventory</span>
+						{/snippet}
+					</Tooltip>
+					<Tooltip>
+						<button
+							class="btn preset-filled-primary-500 hover:preset-tonal-secondary btn-sm xl:btn-md px-2 xl:px-4"
+							onclick={sortCommonContainer}
+						>
+							<ArrowUp01 class="h-4 w-4 xl:h-6 xl:w-6" />
+						</button>
+						{#snippet popup()}
+							<span>Sort Inventory</span>
+						{/snippet}
+					</Tooltip>
+					<Tooltip
+						><button
+							class="btn preset-filled-primary-500 hover:preset-tonal-secondary xl:btn-md btn-sm px-2 xl:px-4"
+							onclick={clearEssentialContainer}
+						>
+							<Key class="h-4 w-4 xl:h-6 xl:w-6" />
+						</button>
+						{#snippet popup()}
+							<span>Clear Key Items</span>
+						{/snippet}
+					</Tooltip>
+					<Tooltip>
+						<button
+							class="btn preset-filled-primary-500 hover:preset-tonal-secondary xl:btn-md btn-sm px-2 xl:px-4"
+							onclick={clearWeaponLoadOutContainer}
+						>
+							<Swords class="h-4 w-4 xl:h-6 xl:w-6" />
+						</button>
+						{#snippet popup()}
+							<span>Clear Weapons</span>
+						{/snippet}
+					</Tooltip>
+					<Tooltip>
+						<button
+							class="btn preset-filled-primary-500 hover:preset-tonal-secondary xl:btn-md btn-sm px-2 xl:px-4"
+							onclick={clearEquipmentArmorContainer}
+						>
+							<Shield class="h-4 w-4 xl:h-6 xl:w-6" />
+						</button>
+						{#snippet popup()}
+							<span>Clear Armor</span>
+						{/snippet}
+					</Tooltip>
+					<Tooltip>
+						<button
+							class="btn preset-filled-primary-500 hover:preset-tonal-secondary xl:btn-md btn-sm px-2 xl:px-4"
+							onclick={clearFoodEquipContainer}
+						>
+							<Pizza class="h-4 w-4 xl:h-6 xl:w-6" />
+						</button>
+						{#snippet popup()}
+							<span>Clear Food</span>
+						{/snippet}
+					</Tooltip>
+					<Tooltip>
+						<button
+							class="btn preset-filled-primary-500 hover:preset-tonal-secondary xl:btn-md btn-sm px-2 xl:px-4"
+							onclick={clearAll}
+						>
+							<Bomb class="h-4 w-4 xl:h-6 xl:w-6" />
+						</button>
+						{#snippet popup()}
+							<span>Clear All</span>
+						{/snippet}
+					</Tooltip>
+				</div>
+			</div>
 			<div class="grid grid-cols-[auto_1fr_auto]">
 				<div class="flex flex-col space-y-2">
 					<ItemHeader text="Weapon" />
@@ -607,7 +719,7 @@
 					<span class="flex h-1/3 items-end">
 						{#await getItemIcon(headGear.static_id) then icon}
 							{#if icon}
-								<enhanced:img src={icon} alt={headGear.static_id} style="width: 64px; height: 64px;"
+								<enhanced:img src={icon} alt={headGear.static_id} class="h-12 w-12 xl:h-16 xl:w-16"
 								></enhanced:img>
 							{/if}
 						{/await}
@@ -615,10 +727,7 @@
 					<span class="h-2/3">
 						{#await getItemIcon(bodyGear.static_id) then icon}
 							{#if icon}
-								<enhanced:img
-									src={icon}
-									alt={bodyGear.static_id}
-									style="width: 256px; height: 256px;"
+								<enhanced:img src={icon} alt={bodyGear.static_id} class="h-56 w-56 xl:h-64 xl:w-64"
 								></enhanced:img>
 							{/if}
 						{/await}

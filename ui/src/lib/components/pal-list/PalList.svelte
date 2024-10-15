@@ -26,12 +26,15 @@
 		Trash,
 		X,
 		ArrowDownWideNarrow,
-		ArrowDownNarrowWide
+		ArrowDownNarrowWide,
+		ArchiveRestore,
+		Users
 	} from 'lucide-svelte';
 	import { assetLoader, debounce, deepCopy } from '$utils';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { getAppState, getSocketState, getModalState, getNavigationState } from '$states';
 	import { HealthBadge } from '$components';
+	import ContextMenu from '$components/ui/context-menu/ContextMenu.svelte';
 
 	type SortBy = 'name' | 'level' | 'paldeck-index';
 	type SortOrder = 'asc' | 'desc';
@@ -119,16 +122,33 @@
 		}
 	}
 
+	function handleMoveToParty(pal: Pal) {
+		if (appState.selectedPlayer) {
+			const message = {
+				type: MessageType.MOVE_PAL,
+				data: {
+					player_id: appState.selectedPlayer.uid,
+					pal_id: pal.instance_id,
+					container_id: appState.selectedPlayer.otomo_container_id
+				}
+			};
+			ws.send(JSON.stringify(message));
+		}
+	}
+
 	async function getPalsInfo() {
 		if (!appState.selectedPlayer || !appState.selectedPlayer.pals) return;
 
 		const playerPals = Object.entries(appState.selectedPlayer.pals as Record<string, Pal>);
+		const palBoxId = appState.selectedPlayer.pal_box_id;
 		pals = await Promise.all(
-			playerPals.map(async ([id, pal]) => {
-				const palData = await palsData.getPalInfo(pal.character_id);
-				await getStats(pal, appState.selectedPlayer as Player);
-				return { id, pal, palData };
-			})
+			playerPals
+				.filter(([_, pal]) => pal.storage_id === palBoxId)
+				.map(async ([id, pal]) => {
+					const palData = await palsData.getPalInfo(pal.character_id);
+					await getStats(pal, appState.selectedPlayer as Player);
+					return { id, pal, palData };
+				})
 		);
 	}
 
@@ -243,7 +263,8 @@
 			data: {
 				player_id: appState.selectedPlayer.uid,
 				pal_code_name: selectedPal,
-				nickname: nickname || `[New] ${palData?.localized_name}`
+				nickname: nickname || `[New] ${palData?.localized_name}`,
+				container_id: appState.selectedPlayer.pal_box_id
 			}
 		};
 		ws.send(JSON.stringify(message));
@@ -313,6 +334,18 @@
 		}
 	}
 
+	async function handleClonePal(pal: Pal) {
+		const clonedPal = deepCopy(pal);
+		clonedPal.nickname = clonedPal.nickname
+			? `[Clone] ${clonedPal.nickname}`
+			: `[Clone] ${clonedPal.name}`;
+		const message = {
+			type: MessageType.CLONE_PAL,
+			data: clonedPal
+		};
+		ws.send(JSON.stringify(message));
+	}
+
 	async function healSelectedPals() {
 		if (appState.selectedPlayer && appState.selectedPlayer.pals) {
 			const selectedPalIds = selectedPals.map((p) => p.pal.instance_id);
@@ -321,15 +354,33 @@
 				data: selectedPalIds
 			};
 			ws.send(JSON.stringify(message));
-			Object.values(appState.selectedPlayer.pals).forEach((pal) => {
+			Object.values(appState.selectedPlayer.pals).forEach(async (pal) => {
 				if (selectedPalIds.includes(pal.instance_id)) {
 					pal.hp = pal.max_hp;
 					pal.sanity = 100;
+					const palData = await palsData.getPalInfo(pal.character_id);
+					if (palData) {
+						pal.stomach = palData.max_full_stomach;
+					}
 				}
 			});
 		}
 		selectedPals = [];
 		selectAll = false;
+	}
+
+	async function handleHealPal(pal: Pal) {
+		const message = {
+			type: MessageType.HEAL_PALS,
+			data: [pal.instance_id]
+		};
+		ws.send(JSON.stringify(message));
+		pal.hp = pal.max_hp;
+		pal.sanity = 100;
+		const palData = await palsData.getPalInfo(pal.character_id);
+		if (palData) {
+			pal.stomach = palData.max_full_stomach;
+		}
 	}
 
 	async function deleteSelectedPals() {
@@ -357,6 +408,29 @@
 		}
 		selectedPals = [];
 		selectAll = false;
+	}
+
+	async function handleDeletePal(pal: Pal) {
+		const confirmed = await modal.showConfirmModal({
+			title: 'Delete Pal',
+			message: `Are you sure you want to delete ${pal.nickname || pal.name}?`,
+			confirmText: 'Delete',
+			cancelText: 'Cancel'
+		});
+		if (appState.selectedPlayer && appState.selectedPlayer.pals && confirmed) {
+			const data = {
+				player_id: appState.selectedPlayer.uid,
+				pal_ids: [pal.instance_id]
+			};
+			const message = {
+				type: MessageType.DELETE_PALS,
+				data
+			};
+			ws.send(JSON.stringify(message));
+			appState.selectedPlayer.pals = Object.fromEntries(
+				Object.entries(appState.selectedPlayer.pals).filter(([id]) => id !== pal.instance_id)
+			);
+		}
 	}
 
 	$effect(() => {
@@ -623,53 +697,61 @@
 				</div>
 			{/snippet}
 			{#snippet listItem(p)}
-				<div class="grid w-full grid-cols-[55px_auto_1fr_auto] gap-2">
-					<div>
-						<span class="font-bold">Lvl {p.pal.level}</span>
-					</div>
-					<div class="relative justify-start">
-						{#if p.pal.is_boss}
-							{#if alphaIcon}
-								<div class="absolute -left-2 -top-1 h-5 w-5">
-									<enhanced:img src={alphaIcon} alt="Aplha" class="pal-element-badge"
-									></enhanced:img>
-								</div>
-							{/if}
-						{/if}
-						{#if p.pal.is_lucky}
-							<div class="absolute -left-2 -top-1 h-5 w-5">✨</div>
-						{/if}
-						{#await getPalMenuIcon(p.pal.instance_id) then icon}
-							{#if icon}
-								<enhanced:img src={icon} alt={p.pal.name} class="h-8 w-8"></enhanced:img>
-							{/if}
-						{/await}
-						{#await getGenderIcon(p.pal.gender) then icon}
-							{#if icon}
-								{@const color =
-									p.pal.gender == PalGender.MALE ? 'text-primary-300' : 'text-tertiary-300'}
-								<div class={cn('absolute -right-4 -top-1 h-5 w-5', color)}>
-									{@html icon}
-								</div>
-							{/if}
-						{/await}
-					</div>
-					<div class="ml-4 flex flex-row justify-start">
-						<div>{p.pal.nickname || p.pal.name}</div>
-					</div>
-					<div class="flex justify-end">
-						{#if p.palData}
-							{#each p.palData.element_types as elementType}
-								{#await getElementIcon(elementType) then icon}
-									{#if icon}
-										<enhanced:img src={icon} alt={elementType} class="pal-element-badge"
+				{@const menuItems = [
+					{ label: 'Move to Party', onClick: () => handleMoveToParty(p.pal), icon: Users },
+					{ label: 'Clone Pal', onClick: () => handleClonePal(p.pal), icon: Copy },
+					{ label: 'Heal Pal', onClick: () => handleHealPal(p.pal), icon: Ambulance },
+					{ label: 'Delete Pal', onClick: () => handleDeletePal(p.pal), icon: Trash }
+				]}
+				<ContextMenu items={menuItems} baseClass="w-full" position="bottom">
+					<div class="grid w-full grid-cols-[55px_auto_1fr_auto] gap-2">
+						<div>
+							<span class="font-bold">Lvl {p.pal.level}</span>
+						</div>
+						<div class="relative justify-start">
+							{#if p.pal.is_boss}
+								{#if alphaIcon}
+									<div class="absolute -left-2 -top-1 h-5 w-5">
+										<enhanced:img src={alphaIcon} alt="Aplha" class="pal-element-badge"
 										></enhanced:img>
-									{/if}
-								{/await}
-							{/each}
-						{/if}
+									</div>
+								{/if}
+							{/if}
+							{#if p.pal.is_lucky}
+								<div class="absolute -left-2 -top-1 h-5 w-5">✨</div>
+							{/if}
+							{#await getPalMenuIcon(p.pal.instance_id) then icon}
+								{#if icon}
+									<enhanced:img src={icon} alt={p.pal.name} class="h-8 w-8"></enhanced:img>
+								{/if}
+							{/await}
+							{#await getGenderIcon(p.pal.gender) then icon}
+								{#if icon}
+									{@const color =
+										p.pal.gender == PalGender.MALE ? 'text-primary-300' : 'text-tertiary-300'}
+									<div class={cn('absolute -right-4 -top-1 h-5 w-5', color)}>
+										{@html icon}
+									</div>
+								{/if}
+							{/await}
+						</div>
+						<div class="ml-4 flex flex-row justify-start">
+							<div>{p.pal.nickname || p.pal.name}</div>
+						</div>
+						<div class="flex justify-end">
+							{#if p.palData}
+								{#each p.palData.element_types as elementType}
+									{#await getElementIcon(elementType) then icon}
+										{#if icon}
+											<enhanced:img src={icon} alt={elementType} class="pal-element-badge"
+											></enhanced:img>
+										{/if}
+									{/await}
+								{/each}
+							{/if}
+						</div>
 					</div>
-				</div>
+				</ContextMenu>
 			{/snippet}
 			{#snippet listItemPopup(p)}
 				<div class="flex w-[450px] flex-col">

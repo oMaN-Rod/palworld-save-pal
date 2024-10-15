@@ -6,14 +6,7 @@ from fastapi.encoders import jsonable_encoder
 from palworld_save_pal.save_file.pal_objects import PalObjects
 from palworld_save_pal.state import get_app_state
 from palworld_save_pal.utils.json_manager import JsonManager
-from palworld_save_pal.ws.messages import (
-    AddPalMessage,
-    ClonePalMessage,
-    DeletePalsMessage,
-    GetPalsMessage,
-    HealPalsMessage,
-    MessageType,
-)
+from palworld_save_pal.ws.messages import *
 from palworld_save_pal.utils.logging_config import create_logger
 from palworld_save_pal.ws.utils import build_response
 
@@ -59,9 +52,10 @@ async def add_pal_handler(message: AddPalMessage, ws: WebSocket):
         player_id = message.data.player_id
         pal_code_name = message.data.pal_code_name
         nickname = message.data.nickname
+        container_id = message.data.container_id
         app_state = get_app_state()
         save_file = app_state.save_file
-        new_pal = save_file.add_pal(player_id, pal_code_name, nickname)
+        new_pal = save_file.add_pal(player_id, pal_code_name, nickname, container_id)
         data = {
             "player_id": player_id,
             "pal": new_pal,
@@ -71,6 +65,32 @@ async def add_pal_handler(message: AddPalMessage, ws: WebSocket):
     except Exception as e:
         logger.error("Error adding pal: %s", str(e))
         response = build_response(MessageType.ERROR, f"Error adding Pal: {str(e)}")
+        await ws.send_json(response)
+        traceback.print_exc()
+
+
+async def move_pal_handler(message: MovePalMessage, ws: WebSocket):
+    try:
+        player_id = message.data.player_id
+        pal_id = message.data.pal_id
+        container_id = message.data.container_id
+        app_state = get_app_state()
+        save_file = app_state.save_file
+        pal = save_file.move_pal(player_id, pal_id, container_id)
+        response = {}
+        if isinstance(pal, Pal):
+            data = {
+                "player_id": str(player_id),
+                "pal_id": str(pal.instance_id),
+                "container_id": str(container_id),
+            }
+            response = build_response(MessageType.MOVE_PAL, data)
+        else:
+            response = build_response(MessageType.WARNING, "Error moving Pal")
+        await ws.send_json(response)
+    except Exception as e:
+        logger.error("Error moving pal: %s", str(e))
+        response = build_response(MessageType.ERROR, f"Error moving Pal: {str(e)}")
         await ws.send_json(response)
         traceback.print_exc()
 

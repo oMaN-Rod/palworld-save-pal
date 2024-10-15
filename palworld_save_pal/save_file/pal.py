@@ -98,6 +98,7 @@ class Pal(BaseModel):
         self._update_ranks()
         self._update_talents()
         self._update_lucky()
+        self._update_storage_info()
         self.heal()
 
     def update_from(self, other_pal: "Pal"):
@@ -495,3 +496,16 @@ class Pal(BaseModel):
             PalObjects.set_value(self._save_parameter["IsRarePal"], value=self.is_lucky)
         else:
             self._save_parameter["IsRarePal"] = PalObjects.BoolProperty(self.is_lucky)
+
+    def _update_storage_info(self) -> None:
+        if "SlotID" in self._save_parameter:
+            slot_id = PalObjects.get_value(self._save_parameter["SlotID"])
+            PalObjects.set_value(
+                PalObjects.get_nested(slot_id, "ContainerId", "value", "ID"),
+                value=self.storage_id,
+            )
+            PalObjects.set_value(slot_id["SlotIndex"], value=self.storage_slot)
+        else:
+            self._save_parameter["SlotID"] = PalObjects.PalCharacterSlotId(
+                self.storage_id, self.storage_slot
+            )

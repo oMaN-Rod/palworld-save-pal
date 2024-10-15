@@ -15,11 +15,13 @@ class BaseMessage(BaseModel):
 
 class MessageType(str, Enum):
     ADD_PAL = "add_pal"
+    MOVE_PAL = "move_pal"
     CLONE_PAL = "clone_pal"
     DELETE_PALS = "delete_pals"
     HEAL_PALS = "heal_pals"
     DOWNLOAD_SAVE_FILE = "download_save_file"
     ERROR = "error"
+    WARNING = "warning"
     GET_PLAYERS = "get_players"
     GET_PAL_DETAILS = "get_pal_details"
     LOAD_SAVE_FILE = "load_save_file"
@@ -44,11 +46,23 @@ class AddPalData(BaseModel):
     player_id: UUID
     pal_code_name: str
     nickname: str
+    container_id: UUID
+
+
+class MovePalData(BaseModel):
+    player_id: UUID
+    pal_id: UUID
+    container_id: UUID
 
 
 class AddPalMessage(BaseMessage):
     type: str = MessageType.ADD_PAL.value
     data: AddPalData
+
+
+class MovePalMessage(BaseMessage):
+    type: str = MessageType.MOVE_PAL.value
+    data: MovePalData
 
 
 class ClonePalMessage(BaseMessage):
