@@ -24,7 +24,6 @@ class MessageType(str, Enum):
     WARNING = "warning"
     GET_PLAYERS = "get_players"
     GET_PAL_DETAILS = "get_pal_details"
-    LOAD_SAVE_FILE = "load_save_file"
     LOAD_ZIP_FILE = "load_zip_file"
     PROGRESS_MESSAGE = "progress_message"
     SYNC_APP_STATE = "sync_app_state"
@@ -87,11 +86,6 @@ class HealPalsMessage(BaseMessage):
 
 class DownloadSaveFileMessage(BaseMessage):
     type: str = MessageType.DOWNLOAD_SAVE_FILE.value
-
-
-class LoadSaveFileMessage(BaseMessage):
-    type: str = MessageType.LOAD_SAVE_FILE.value
-    data: List[int]
 
 
 class UpdateSaveFileData(BaseModel):

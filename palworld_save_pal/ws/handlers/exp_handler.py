@@ -11,12 +11,5 @@ with open("data/json/exp.json", "r") as f:
 
 
 async def get_exp_data_handler(_: dict, ws: WebSocket):
-    try:
-        response = build_response(MessageType.GET_EXP_DATA, exp_data)
-        await ws.send_json(response)
-    except Exception as e:
-        logger.error("Error getting exp data: %s", str(e))
-        response = build_response(
-            MessageType.ERROR, f"Error getting exp data: {str(e)}"
-        )
-        await ws.send_json(response)
+    response = build_response(MessageType.GET_EXP_DATA, exp_data)
+    await ws.send_json(response)

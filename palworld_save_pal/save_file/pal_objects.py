@@ -226,14 +226,13 @@ class PalObjects:
                 else PalObjects.get_nested(d[keys[0]], *keys[1:], default=default)
             )
         except (KeyError, TypeError, IndexError):
-            logger.warning(f"Key not found: {keys}, {d}")
+            logger.warning("Key not found: %s not in %s", keys, d)
             return default
 
     @staticmethod
     def set_nested(d: dict, *keys: str, value: Any) -> None:
         for key in keys[:-1]:
             if key not in d:
-                logger.error(f"Key not found: {key}, {keys}, {d.keys()}")
                 raise KeyError(f"Key not found: {key}, {keys}, {d.keys()}")
             d = d[key]
         d[keys[-1]] = value

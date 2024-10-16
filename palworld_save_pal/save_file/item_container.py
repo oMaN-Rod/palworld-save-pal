@@ -1,3 +1,4 @@
+from enum import Enum
 from typing import Any, Dict, List, Optional
 from uuid import UUID
 import uuid
@@ -17,9 +18,17 @@ from palworld_save_pal.utils.logging_config import create_logger
 logger = create_logger(__name__)
 
 
+class ItemContainerType(str, Enum):
+    COMMON = "CommonContainer"
+    ESSENTIAL = "EssentialContainer"
+    WEAPON = "WeaponLoadOutContainer"
+    ARMOR = "PlayerEquipArmorContainer"
+    FOOD = "FoodEquipContainer"
+
+
 class ItemContainer(BaseModel):
     id: UUID = Field(..., json_encoder=custom_uuid_encoder)
-    type: str
+    type: ItemContainerType
     slots: List[ItemContainerSlot] = Field(default_factory=list)
 
     _container_slots_data: Optional[List[Dict[str, Any]]] = PrivateAttr(
@@ -42,13 +51,15 @@ class ItemContainer(BaseModel):
             self._get_items()
 
     def _set_items(self) -> None:
-        logger.debug("%s (%s)", self.type, self.id)
+        logger.debug("%s (%s)", self.type.value, self.id)
         for slot in self.slots:
             self._update_or_create_dynamic_item(slot)
             self._update_or_create_container_slot(slot)
 
     def update_from(self, other_container: Dict[str, Any]) -> None:
-        logger.debug("%s (%s) with keys %s", self.type, self.id, other_container.keys())
+        logger.debug(
+            "%s (%s) with keys %s", self.type.value, self.id, other_container.keys()
+        )
         for key, value in other_container.items():
             if key == "slots":
                 new_slots = [ItemContainerSlot(**slot) for slot in value]
@@ -56,7 +67,7 @@ class ItemContainer(BaseModel):
                 self._set_items()
 
     def _clean_up_inventory(self, new_slots: List[ItemContainerSlot]) -> None:
-        logger.debug("%s (%s)", self.type, self.id)
+        logger.debug("%s (%s)", self.type.value, self.id)
         updated_slots: List[ItemContainerSlot] = []
         for slot in new_slots:
             container_slot = next(
@@ -72,7 +83,7 @@ class ItemContainer(BaseModel):
         self.slots = updated_slots
 
     def _get_container_slots(self, item_container_save_data: Dict[str, Any]) -> None:
-        logger.debug("%s (%s)", self.type, self.id)
+        logger.debug("%s (%s)", self.type.value, self.id)
         for entry in item_container_save_data:
             container_id = PalObjects.get_guid(
                 PalObjects.get_nested(entry, "key", "ID")
@@ -84,7 +95,7 @@ class ItemContainer(BaseModel):
                 break
 
     def _get_dynamic_item(self, local_id: UUID) -> Optional[DynamicItem]:
-        logger.debug("%s (%s) => %s", self.type, self.id, local_id)
+        logger.debug("%s (%s) => %s", self.type.value, self.id, local_id)
         item = None
         for entry in self._dynamic_item_save_data:
             local_id_in_created_world = PalObjects.as_uuid(
@@ -110,7 +121,7 @@ class ItemContainer(BaseModel):
         return item
 
     def _get_items(self):
-        logger.debug("%s (%s)", self.type, self.id)
+        logger.debug("%s (%s)", self.type.value, self.id)
         self.slots = []
         for slot in self._container_slots_data:
             raw_data = PalObjects.get_value(slot["RawData"])
@@ -146,7 +157,7 @@ class ItemContainer(BaseModel):
             )
 
     def _remove_container_slot(self, slot_index: int) -> None:
-        logger.debug("%s (%s) => %s", self.type, self.id, slot_index)
+        logger.debug("%s (%s) => %s", self.type.value, self.id, slot_index)
         for slot in self._container_slots_data:
             raw_data = PalObjects.get_value(slot["RawData"])
             current_slot_index = PalObjects.get_nested(raw_data, "slot_index")
@@ -169,6 +180,7 @@ class ItemContainer(BaseModel):
     def _update_or_create_container_slot(
         self, slot: ItemContainerSlot
     ) -> Dict[str, Any]:
+        logger.debug("%s (%s) => %s", self.type, self.id, slot)
         slot_data = next(
             (
                 s
@@ -190,6 +202,7 @@ class ItemContainer(BaseModel):
     def _update_container_slot(
         self, slot: ItemContainerSlot, slot_data: Dict[str, Any]
     ) -> None:
+        logger.debug("%s (%s) => %s", self.type, self.id, slot)
         raw_data = PalObjects.get_value(slot_data["RawData"])
         PalObjects.set_nested(raw_data, "slot_index", value=slot.slot_index)
         PalObjects.set_nested(raw_data, "count", value=slot.count)
@@ -205,6 +218,7 @@ class ItemContainer(BaseModel):
         )
 
     def _update_or_create_dynamic_item(self, slot: ItemContainerSlot) -> None:
+        logger.debug("%s (%s) => %s", self.type, self.id, slot)
         if slot.dynamic_item:
             dynamic_item_data = next(
                 (
@@ -237,6 +251,7 @@ class ItemContainer(BaseModel):
     def _update_dynamic_item(
         self, slot: ItemContainerSlot, item: Dict[str, Any]
     ) -> None:
+        logger.debug("%s (%s) => %s\n%s", self.type, self.id, slot, item)
         raw_data = PalObjects.get_value(item["RawData"])
         PalObjects.set_nested(raw_data, "id", "static_id", value=slot.static_id)
         PalObjects.set_nested(raw_data, "type", value=slot.dynamic_item.type)
@@ -256,3 +271,4 @@ class ItemContainer(BaseModel):
             )
             if "passive_skill_list" not in raw_data:
                 raw_data["passive_skill_list"] = []
+        logger.debug("%s (%s) => %s\n%s", self.type, self.id, slot, item)

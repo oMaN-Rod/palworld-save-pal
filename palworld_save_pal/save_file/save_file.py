@@ -166,8 +166,7 @@ class SaveFile(BaseModel):
     ) -> Optional[Pal]:
         player = self._players.get(player_id)
         if not player:
-            logger.error("Player %s not found in the save file.", player_id)
-            return
+            raise ValueError(f"Player {player_id} not found in the save file.")
 
         data = player.add_pal(pal_code_name, nickname, container_id)
         if data is None:
@@ -180,16 +179,14 @@ class SaveFile(BaseModel):
     def move_pal(self, player_id: UUID, pal_id: UUID, container_id: UUID) -> Pal | None:
         player = self._players.get(player_id)
         if not player:
-            logger.error("Player %s not found in the save file.", player_id)
-            return
+            raise ValueError(f"Player {player_id} not found in the save file.")
 
         return player.move_pal(pal_id, container_id)
 
     def clone_pal(self, pal: Pal) -> Optional[Pal]:
         player = self._players.get(pal.owner_uid)
         if not player:
-            logger.error("Player %s not found in the save file.", pal.owner_uid)
-            return
+            raise ValueError(f"Player {pal.owner_uid} not found in the save file.")
 
         new_pal = player.clone_pal(pal)
         if new_pal is None:
@@ -201,8 +198,7 @@ class SaveFile(BaseModel):
     def delete_pals(self, player_id: UUID, pal_ids: List[UUID]) -> None:
         player = self._players.get(player_id)
         if not player:
-            logger.error("Player %s not found in the save file.", player_id)
-            return
+            raise ValueError(f"Player {player_id} not found in the save file.")
 
         for pal_id in pal_ids:
             player.delete_pal(pal_id)

@@ -235,20 +235,6 @@ export type Scaling = {
 	defense: number;
 };
 
-export enum EPalElementType {
-	None = 'EPalElementType::None',
-	Normal = 'EPalElementType::Normal',
-	Fire = 'EPalElementType::Fire',
-	Water = 'EPalElementType::Water',
-	Leaf = 'EPalElementType::Leaf',
-	Electricity = 'EPalElementType::Electricity',
-	Ice = 'EPalElementType::Ice',
-	Earth = 'EPalElementType::Earth',
-	Dark = 'EPalElementType::Dark',
-	Dragon = 'EPalElementType::Dragon',
-	MAX = 'EPalElementType::MAX'
-}
-
 export type ElementType =
 	| 'Fire'
 	| 'Water'
@@ -259,42 +245,6 @@ export type ElementType =
 	| 'Grass'
 	| 'Dragon'
 	| 'Electric';
-
-export function mapElementType(
-	type: EPalElementType | ElementType
-): ElementType | EPalElementType | null {
-	const mapping: Record<string, string> = {
-		[EPalElementType.None]: 'Neutral',
-		[EPalElementType.Normal]: 'Neutral',
-		[EPalElementType.Fire]: 'Fire',
-		[EPalElementType.Water]: 'Water',
-		[EPalElementType.Leaf]: 'Grass',
-		[EPalElementType.Electricity]: 'Electric',
-		[EPalElementType.Ice]: 'Ice',
-		[EPalElementType.Earth]: 'Ground',
-		[EPalElementType.Dark]: 'Dark',
-		[EPalElementType.Dragon]: 'Dragon',
-		[EPalElementType.MAX]: 'Neutral',
-		Fire: EPalElementType.Fire,
-		Water: EPalElementType.Water,
-		Ground: EPalElementType.Earth,
-		Ice: EPalElementType.Ice,
-		Neutral: EPalElementType.Normal,
-		Dark: EPalElementType.Dark,
-		Grass: EPalElementType.Leaf,
-		Dragon: EPalElementType.Dragon,
-		Electric: EPalElementType.Electricity
-	};
-
-	const result = mapping[type];
-
-	if (result === undefined) {
-		console.warn(`No mapping found for element type: ${type}`);
-		return null;
-	}
-
-	return result as ElementType | EPalElementType;
-}
 export interface PalData {
 	localized_name: string;
 	description: string;
@@ -303,7 +253,7 @@ export interface PalData {
 	pal_deck_index: number;
 	size: string;
 	rarity: number;
-	element_types: EPalElementType[];
+	element_types: ElementType[];
 	genus_category: string;
 	organization: string;
 	weapon: string;

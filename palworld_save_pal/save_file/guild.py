@@ -32,16 +32,17 @@ class Guild(BaseModel):
             self.load_guild_data()
 
     def add_pal(self, pal_id: UUID):
-        logger.debug("pal_id = %s", pal_id)
+        logger.debug("%s (%s) => %s", self.name, self.id, pal_id)
         new_pal = PalObjects.individual_character_handle_ids(pal_id)
         self._individual_character_handle_ids.append(new_pal)
 
     def remove_pal(self, pal_id: UUID):
+        logger.debug("%s (%s) => %s", self.name, self.id, pal_id)
         for entry in self._individual_character_handle_ids:
             instance_id = PalObjects.as_uuid(entry["instance_id"])
             if are_equal_uuids(instance_id, pal_id):
-                logger.debug("pal_id = %s", pal_id)
                 self._individual_character_handle_ids.remove(entry)
+                logger.debug("%s (%s) => Removed %s", self.name, self.id, pal_id)
                 return True
         return False
 

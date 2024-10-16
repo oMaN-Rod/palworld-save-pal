@@ -1,3 +1,4 @@
+from enum import Enum
 from typing import Any, Dict, List, Optional
 from uuid import UUID
 import uuid
@@ -13,6 +14,11 @@ from palworld_save_pal.utils.logging_config import create_logger
 logger = create_logger(__name__)
 
 
+class CharacterContainerType(str, Enum):
+    PAL_BOX = "PalBox"
+    PARTY = "Party"
+
+
 class CharacterContainerSlot(BaseModel):
     slot_index: int
     pal_id: Optional[UUID] = None
@@ -20,6 +26,7 @@ class CharacterContainerSlot(BaseModel):
 
 class CharacterContainer(BaseModel):
     id: UUID = Field(..., json_encoder=custom_uuid_encoder)
+    type: CharacterContainerType
     size: Optional[int] = 0
     slots: Optional[List[CharacterContainerSlot]] = Field(default_factory=list)
 
@@ -28,7 +35,7 @@ class CharacterContainer(BaseModel):
     def __init__(self, character_container_save_data: Dict[str, Any] = None, **kwargs):
         super().__init__(**kwargs)
         if character_container_save_data is not None:
-            self._get_items(character_container_save_data)
+            self._get_characters(character_container_save_data)
 
     def available_slots(self) -> bool:
         return len(self.slots) < self.size
@@ -39,13 +46,30 @@ class CharacterContainer(BaseModel):
             if i not in used_slots:
                 return i
 
+    def find_last_available_slot(self) -> int:
+        used_slots = set(slot.slot_index for slot in self.slots)
+        for i in range(self.size - 1, -1, -1):
+            if i not in used_slots:
+                return i
+
     def add_pal(self, pal_id: UUID) -> Optional[int]:
         if not self.available_slots():
-            logger.warning("Character container is full")
+            logger.warning(
+                "%s (%s) is full, size is %s", self.type.value, self.id, len(self.slots)
+            )
             return
-        slot_idx = self.find_first_available_slot()
+        slot_idx = (
+            self.find_first_available_slot()
+            if self.type == CharacterContainerType.PARTY
+            else self.find_last_available_slot()
+        )
         logger.debug(
-            "pal_id = %s, slot_idx = %s, container_id = %s", pal_id, slot_idx, self.id
+            "%s (%s) => pal_id = %s, slot_idx = %s, container_id = %s",
+            self.type.value,
+            self.id,
+            pal_id,
+            slot_idx,
+            self.id,
         )
         new_container_slot_data = PalObjects.ContainerSlotData(
             slot_idx=slot_idx, instance_id=pal_id
@@ -56,21 +80,36 @@ class CharacterContainer(BaseModel):
         self.slots.append(CharacterContainerSlot(slot_index=slot_idx, pal_id=pal_id))
         return slot_idx
 
-    def delete_pal(self, pal_id: UUID):
-        logger.debug(pal_id)
+    def remove_pal(self, pal_id: UUID):
+        logger.debug("%s (%s) => %s", self.type.value, self.id, pal_id)
         for slot in self.slots:
             if are_equal_uuids(slot.pal_id, pal_id):
-                self._slots_data.pop(slot.slot_index)
+                self._delete_slot_data(slot.slot_index)
                 self.slots.remove(slot)
+                logger.debug("%s (%s) => Removed %s", self.type.value, self.id, pal_id)
                 break
 
-        # Update slot indexes, ensuring they are in order
+    def _delete_slot_data(self, slot_index: int):
+        logger.debug("%s (%s) => index: %s", self.type.value, self.id, slot_index)
+        for slot in self._slots_data:
+            current_slot_index = PalObjects.get_value(slot["SlotIndex"])
+            if current_slot_index == slot_index:
+                self._slots_data.remove(slot)
+                logger.debug(
+                    "%s (%s) => Removed index %s",
+                    self.type.value,
+                    self.id,
+                    slot_index,
+                )
+                break
+
+    def _order_slots(self):
         for index, slot in enumerate(self._slots_data):
             self.slots[index].slot_index = index
             PalObjects.set_value(slot["SlotIndex"], value=index)
 
-    def _get_items(self, character_container_save_data: Dict[str, Any]):
-        logger.debug("container_id = %s", self.id)
+    def _get_characters(self, character_container_save_data: Dict[str, Any]):
+        logger.debug("%s (%s)", self.type.value, self.id)
         for character_container in character_container_save_data:
             container_id = PalObjects.get_guid(
                 PalObjects.get_nested(character_container, "key", "ID")

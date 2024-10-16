@@ -118,7 +118,7 @@ def start_webview(url, debug):
         min_size=(1366, 768),
     )
     app_state.webview_window.events.closed += on_closed
-    webview.start(debug=debug)
+    webview.start(debug=debug, user_agent="pywebview")
 
 
 def on_closed():

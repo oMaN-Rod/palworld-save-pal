@@ -23,7 +23,6 @@ from palworld_save_pal.ws.messages import (
     GetPalsMessage,
     GetPassiveSkillsMessage,
     HealPalsMessage,
-    LoadSaveFileMessage,
     MessageType,
     MovePalMessage,
     OpenInBrowserMessage,
@@ -47,14 +46,6 @@ def bootstrap(dispatcher: "MessageDispatcher"):
         {
             "message_class": DownloadSaveFileMessage,
             "handler_func": save_file_handler.download_save_file_handler,
-        },
-    )
-
-    dispatcher.register_handler(
-        MessageType.LOAD_SAVE_FILE.value,
-        {
-            "message_class": LoadSaveFileMessage,
-            "handler_func": save_file_handler.load_save_file_handler,
         },
     )
 

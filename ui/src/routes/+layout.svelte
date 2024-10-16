@@ -7,11 +7,14 @@
 		itemsData,
 		palsData,
 		passiveSkillsData,
-		presetsData
+		presetsData,
+		expData
 	} from '$lib/data';
 	import { getNavigationState, getSocketState, getAppState, getToastState } from '$states';
 	import { MessageType } from '$types';
 	import { goto } from '$app/navigation';
+	import { browser } from '$app/environment';
+	import { PUBLIC_WS_URL } from '$env/static/public';
 
 	const { children } = $props();
 
@@ -19,6 +22,28 @@
 	const appState = getAppState();
 	const nav = getNavigationState();
 	const toast = getToastState();
+
+	let isPywebview = $state(false);
+
+	function openInBrowser() {
+		const url = PUBLIC_WS_URL.replace('/ws', '');
+		ws.send(JSON.stringify({ type: MessageType.OPEN_IN_BROWSER, data: url }));
+	}
+
+	$effect(() => {
+		if (browser) {
+			isPywebview = navigator.userAgent.includes('pywebview');
+			console.log('isPywebview', isPywebview, navigator.userAgent);
+		} else {
+			console.log('Browser not available');
+		}
+	});
+
+	$effect(() => {
+		if (isPywebview) {
+			openInBrowser();
+		}
+	});
 
 	$effect(() => {
 		const loadData = async () => {
@@ -28,6 +53,7 @@
 			await itemsData.getAllItems();
 			await palsData.getAllPals();
 			await presetsData.getAllPresets();
+			await expData.getExpData();
 		};
 		loadData();
 	});
@@ -38,6 +64,11 @@
 			switch (type) {
 				case MessageType.ADD_PAL:
 					const { player_id, pal } = data;
+					if (!pal) {
+						toast.add('Container is full', undefined, 'warning');
+						ws.clear(type);
+						break;
+					}
 					if (appState.players && appState.players[player_id] && appState.players[player_id].pals) {
 						async function loadPal() {
 							const palData = await palsData.getPalInfo(pal.character_id);
@@ -53,16 +84,23 @@
 					ws.clear(type);
 					break;
 				case MessageType.MOVE_PAL:
-					const move_data = data as { player_id: string; pal_id: string; container_id: string };
+					const move_data = data as {
+						player_id: string;
+						pal_id: string;
+						container_id: string;
+						slot_index: number;
+					};
 					if (appState.players && appState.players[move_data.player_id]) {
 						const player = appState.players[move_data.player_id];
 						const pal = player.pals ? player.pals[move_data.pal_id] : undefined;
 						if (pal) {
 							pal.storage_id = move_data.container_id;
+							pal.storage_slot = move_data.slot_index;
 						}
 					}
+					ws.clear(type);
+					break;
 				case MessageType.LOAD_ZIP_FILE:
-				case MessageType.LOAD_SAVE_FILE:
 					const file = data as { name: string; size: number };
 					appState.saveFile = file;
 					ws.clear(type);
@@ -104,10 +142,11 @@
 					break;
 				case MessageType.ERROR:
 					console.error('Error', data);
+					const errorMessage = data as { message: string; trace: string };
 					goto('/error', {
 						state: {
-							status: 400,
-							error: { message: data }
+							message: errorMessage.message,
+							trace: errorMessage.trace
 						}
 					});
 					ws.clear(type);
@@ -124,9 +163,20 @@
 <Toast position="bottom-center" />
 <Modal>
 	<div class="flex h-screen w-full overflow-hidden">
-		<NavBar />
-		<main class="flex-1 overflow-hidden">
-			{@render children()}
-		</main>
+		{#if isPywebview}
+			<main class="flex-1 overflow-hidden">
+				<div class="flex h-full w-full flex-col items-center justify-center">
+					<button onclick={openInBrowser} class="hover:ring-secondary-500 hover:ring">
+						<h2 class="h2 mb-8">🌐 Opened in browser...</h2>
+					</button>
+					<span class="mt-2">Be sure to keep this window open.</span>
+				</div>
+			</main>
+		{:else}
+			<NavBar />
+			<main class="flex-1 overflow-hidden">
+				{@render children()}
+			</main>
+		{/if}
 	</div>
 </Modal>

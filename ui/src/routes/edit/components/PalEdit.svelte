@@ -11,7 +11,7 @@
 		LearnedSkillSelectModal
 	} from '$components';
 	import { CornerDotButton, Progress, SectionHeader, Tooltip } from '$components/ui';
-	import { type ElementType, EntryState, mapElementType, type Pal, PalGender } from '$types';
+	import { type ElementType, EntryState, type Pal, PalGender } from '$types';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { palsData, elementsData, expData } from '$lib/data';
 	import { cn } from '$theme';
@@ -115,8 +115,7 @@
 	async function getPalElementTypes(character_id: string): Promise<ElementType[] | undefined> {
 		const palData = await palsData.getPalInfo(character_id);
 		if (!palData) return undefined;
-		const elementTypes = palData.element_types.map((e) => mapElementType(e)) as ElementType[];
-		return elementTypes.length > 0 ? elementTypes : undefined;
+		return palData.element_types.length > 0 ? palData.element_types : undefined;
 	}
 
 	async function getPalDescription(character_id: string): Promise<string | undefined> {
@@ -127,6 +126,7 @@
 
 	async function getPalElementBadge(elementType: string): Promise<string | undefined> {
 		const elementObj = await elementsData.searchElement(elementType);
+		console.log('element', elementType, elementObj);
 		if (!elementObj) return undefined;
 		const icon_path = `${ASSET_DATA_PATH}/img/elements/${elementObj.badge_icon}.png`;
 		const icon = await assetLoader.loadImage(icon_path, true);
@@ -299,7 +299,7 @@
 						await setBasePreset('Attack');
 						return;
 					}
-					const palType = mapElementType(palData.element_types[0]) as string;
+					const palType = palData.element_types[0];
 					appState.selectedPal.passive_skills = [
 						'Noukin',
 						'PAL_ALLAttack_up2',
@@ -381,7 +381,7 @@
 		<div class="flex flex-grow flex-col">
 			<div class="flex-shrink-0">
 				<div
-					class="border-l-surface-600 preset-filled-surface-100-900 flex w-2/3 flex-row rounded-none border-l-2 p-4"
+					class="border-l-surface-600 preset-filled-surface-100-900 flex w-3/4 flex-row rounded-none border-l-2 p-4"
 				>
 					<div class="mr-4 flex flex-col items-center justify-center rounded-none">
 						<Rating bind:value={appState.selectedPal.rank} count={4} itemClasses="text-gray" />
@@ -409,7 +409,9 @@
 					<div class="grow">
 						<div class="flex flex-col">
 							<div class="flex flex-row items-center space-x-2">
-								<span class="grow">{appState.selectedPal.name}</span>
+								<span class="grow">
+									{appState.selectedPal.nickname || appState.selectedPal.name}
+								</span>
 								<Tooltip position="bottom">
 									<CornerDotButton label="Edit" onClick={handleEditNickname} />
 									{#snippet popup()}
@@ -492,25 +494,24 @@
 										<span>Toggle Alpha</span>
 									{/snippet}
 								</Tooltip>
-							</div>
-							<hr class="hr my-1" />
-							<div class="flex flex-row">
-								<span class="text-surface-400 grow">{appState.selectedPal.nickname}</span>
-								<div class="mt-2 flex flex-row">
-									{#await getPalElementTypes(appState.selectedPal.character_id) then elementTypes}
-										{#if elementTypes}
-											{#each elementTypes as elementType}
-												{#await getPalElementBadge(elementType) then icon}
-													{#if icon}
-														<enhanced:img src={icon} alt={elementType} class="h-8 w-8"
-														></enhanced:img>
-													{/if}
-												{/await}
-											{/each}
-										{/if}
-									{/await}
+								<div class="flex flex-row items-center">
+									<div class="flex flex-row">
+										{#await getPalElementTypes(appState.selectedPal.character_id) then elementTypes}
+											{#if elementTypes}
+												{#each elementTypes as elementType}
+													{#await getPalElementBadge(elementType) then icon}
+														{#if icon}
+															<enhanced:img src={icon} alt={elementType} class="h-8 w-8"
+															></enhanced:img>
+														{/if}
+													{/await}
+												{/each}
+											{/if}
+										{/await}
+									</div>
 								</div>
 							</div>
+							<hr class="hr my-1" />
 							<div class="flex flex-col space-y-2">
 								<div class="flex">
 									<span class="text-on-surface grow">NEXT</span>

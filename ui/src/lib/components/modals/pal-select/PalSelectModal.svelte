@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Card, Tooltip, Combobox, Input } from '$components/ui';
-	import { mapElementType, type EPalElementType, type SelectOption } from '$types';
+	import { type ElementType, type SelectOption } from '$types';
 	import { Save, X } from 'lucide-svelte';
 	import { palsData, elementsData } from '$lib/data';
 	import { ASSET_DATA_PATH } from '$lib/constants';
@@ -28,9 +28,8 @@
 			.sort((a, b) => a.label.localeCompare(b.label));
 	}
 
-	async function getElementIcon(elementType: EPalElementType): Promise<string | undefined> {
-		const element = mapElementType(elementType) as string;
-		const elementObj = await elementsData.searchElement(element);
+	async function getElementIcon(elementType: ElementType): Promise<string | undefined> {
+		const elementObj = await elementsData.searchElement(elementType.toString());
 		if (!elementObj) return undefined;
 		const iconPath = `${ASSET_DATA_PATH}/img/elements/${elementObj.icon}.png`;
 		return await assetLoader.loadImage(iconPath, true);

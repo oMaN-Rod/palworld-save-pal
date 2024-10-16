@@ -33,11 +33,18 @@ class ConnectionManager:
             logger.debug("Processing message type ==> %s", message_data["type"])
             await dispatcher.dispatch(message_data, websocket)
         except json.JSONDecodeError:
-            logger.error("Invalid JSON")
-            response = build_response(MessageType.ERROR, "Invalid JSON")
-            await websocket.send_text(json.dumps(response))
+            logger.exception("Invalid JSON received: %s", message)
+            exception = traceback.format_exc()
+            response = build_response(
+                MessageType.ERROR, f"Invalid JSON received:\n{exception}"
+            )
+            await websocket.send_json(response)
         except Exception as e:
-            logger.error("Unexpected error: %s", e)
-            traceback.print_exc()
-            response = build_response(MessageType.ERROR, str(e))
-            await websocket.send_text(json.dumps(response))
+            logger.exception("Error processing message: %s", str(e))
+            exception = traceback.format_exc()
+            data = {
+                "message": str(e),
+                "trace": exception,
+            }
+            response = build_response(MessageType.ERROR, data)
+            await websocket.send_json(response)

@@ -5,10 +5,13 @@ from pydantic import BaseModel, Field, PrivateAttr
 
 from palworld_save_tools.gvas import GvasFile
 
-from palworld_save_pal.save_file.character_container import CharacterContainer
+from palworld_save_pal.save_file.character_container import (
+    CharacterContainer,
+    CharacterContainerType,
+)
 from palworld_save_pal.save_file.guild import Guild
 from palworld_save_pal.save_file.pal import Pal
-from palworld_save_pal.save_file.item_container import ItemContainer
+from palworld_save_pal.save_file.item_container import ItemContainer, ItemContainerType
 from palworld_save_pal.save_file.pal_objects import PalObjects
 from palworld_save_pal.save_file.utils import are_equal_uuids
 from palworld_save_pal.utils.logging_config import create_logger
@@ -22,15 +25,17 @@ class Player(BaseModel):
     level: int
     exp: int
     instance_id: Optional[UUID] = Field(default=None)
+    guild: Optional[Guild] = Field(default=None)
+
     pals: Optional[Dict[UUID, Pal]] = Field(default_factory=dict)
     pal_box_id: Optional[UUID] = Field(default=None)
     otomo_container_id: Optional[UUID] = Field(default=None)
+
     common_container: Optional[ItemContainer] = Field(default=None)
     essential_container: Optional[ItemContainer] = Field(default=None)
     weapon_load_out_container: Optional[ItemContainer] = Field(default=None)
     player_equipment_armor_container: Optional[ItemContainer] = Field(default=None)
     food_equip_container: Optional[ItemContainer] = Field(default=None)
-    guild: Optional[Guild] = Field(default=None)
 
     _pal_box: Optional[CharacterContainer] = PrivateAttr(default=None)
     _party: Optional[CharacterContainer] = PrivateAttr(default=None)
@@ -104,7 +109,7 @@ class Player(BaseModel):
         slot_idx = target_container.add_pal(pal_id)
         if slot_idx is None:
             return
-        source_container.delete_pal(pal_id)
+        source_container.remove_pal(pal_id)
         pal.storage_id = container_id
         pal.storage_slot = slot_idx
         pal.update()
@@ -125,7 +130,7 @@ class Player(BaseModel):
 
     def delete_pal(self, pal_id: UUID):
         self.pals.pop(pal_id)
-        self._pal_box.delete_pal(pal_id)
+        self._pal_box.remove_pal(pal_id)
         if isinstance(self.guild, Guild):
             self.guild.remove_pal(pal_id)
 
@@ -191,6 +196,7 @@ class Player(BaseModel):
         )
         self._pal_box = CharacterContainer(
             id=self.pal_box_id,
+            type=CharacterContainerType.PAL_BOX,
             character_container_save_data=character_container_save_data,
         )
 
@@ -205,6 +211,7 @@ class Player(BaseModel):
         )
         self._party = CharacterContainer(
             id=self.otomo_container_id,
+            type=CharacterContainerType.PARTY,
             character_container_save_data=character_container_save_data,
         )
 
@@ -219,7 +226,7 @@ class Player(BaseModel):
         )
         self.common_container = ItemContainer(
             id=common_container_id,
-            type="CommonContainer",
+            type=ItemContainerType.COMMON,
             item_container_save_data=item_container_save_data,
             dynamic_item_save_data=dynamic_item_save_data,
         )
@@ -235,7 +242,7 @@ class Player(BaseModel):
         )
         self.essential_container = ItemContainer(
             id=essential_container_id,
-            type="EssentialContainer",
+            type=ItemContainerType.ESSENTIAL,
             item_container_save_data=item_container_save_data,
             dynamic_item_save_data=dynamic_item_save_data,
         )
@@ -253,7 +260,7 @@ class Player(BaseModel):
         )
         self.weapon_load_out_container = ItemContainer(
             id=weapon_load_out_container_id,
-            type="WeaponLoadOutContainer",
+            type=ItemContainerType.WEAPON,
             item_container_save_data=item_container_save_data,
             dynamic_item_save_data=dynamic_item_save_data,
         )
@@ -271,7 +278,7 @@ class Player(BaseModel):
         )
         self.player_equipment_armor_container = ItemContainer(
             id=player_equipment_armor_container_id,
-            type="PlayerEquipArmorContainer",
+            type=ItemContainerType.ARMOR,
             item_container_save_data=item_container_save_data,
             dynamic_item_save_data=dynamic_item_save_data,
         )
@@ -287,7 +294,7 @@ class Player(BaseModel):
         )
         self.food_equip_container = ItemContainer(
             id=food_equip_container_id,
-            type="FoodEquipContainer",
+            type=ItemContainerType.FOOD,
             item_container_save_data=item_container_save_data,
             dynamic_item_save_data=dynamic_item_save_data,
         )
