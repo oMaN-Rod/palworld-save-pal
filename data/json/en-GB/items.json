@@ -213,7 +213,7 @@
     },
     "AirGrapplingGun": {
         "localized_name": "en Text",
-        "description": ""
+        "description": "en Text"
     },
     "AncientParts2": {
         "localized_name": "Ancient Civilization Core",
@@ -1041,7 +1041,7 @@
     },
     "Blueprint_Head017_5": {
         "localized_name": "Design Blueprint of Clemence Hat 5",
-        "description": "en Text"
+        "description": ""
     },
     "Blueprint_IronArmorCold_2": {
         "localized_name": "Cold Resistant Refined Metal Armor Schematic 1",
@@ -1384,20 +1384,20 @@
         "description": "This can be used to fire Arrows effortlessly.\r\nIts power more than makes up for its slow reload time."
     },
     "BowGun_2": {
-        "localized_name": "en Text",
-        "description": "en Text"
+        "localized_name": "Crossbow +1",
+        "description": "This can be used to fire Arrows effortlessly.\r\nIts power more than makes up for its slow reload time"
     },
     "BowGun_3": {
-        "localized_name": "en Text",
-        "description": "en Text"
+        "localized_name": "Crossbow +2",
+        "description": "This can be used to fire Arrows effortlessly.\r\nIts power more than makes up for its slow reload time"
     },
     "BowGun_4": {
-        "localized_name": "en Text",
-        "description": "en Text"
+        "localized_name": "Crossbow +3",
+        "description": "This can be used to fire Arrows effortlessly.\r\nIts power more than makes up for its slow reload time"
     },
     "BowGun_5": {
-        "localized_name": "en Text",
-        "description": "en Text"
+        "localized_name": "Crossbow +4",
+        "description": "This can be used to fire Arrows effortlessly.\r\nIts power more than makes up for its slow reload time"
     },
     "BowGun_Fire": {
         "localized_name": "Fire Arrow Crossbow",
@@ -1511,10 +1511,6 @@
         "localized_name": "High Quality Cloth",
         "description": "High Quality Cloth woven from a large amount of Wool.\r\nRequired to create high quality armor."
     },
-    "ClothArmor": {
-        "localized_name": "Cloth Outfit",
-        "description": "Clothes made from Cloth.\r\nProtects against the cold of night."
-    },
     "ClothArmorCold": {
         "localized_name": "Tundra Outfit",
         "description": "A Cloth Outfit produced in cold regions.\r\nCan withstand freezing cold temperatures."
@@ -1555,21 +1551,25 @@
         "localized_name": "Tropical Outfit +4",
         "description": ""
     },
+    "ClothArmor": {
+        "localized_name": "Cloth Outfit",
+        "description": "Clothes made from Cloth.\r\nProtects against the cold of night."
+    },
     "ClothArmor_2": {
-        "localized_name": "en Text",
-        "description": "en Text"
+        "localized_name": "Cloth Outfit +1",
+        "description": "Clothes made from Cloth.\r\nProtects against the cold of night."
     },
     "ClothArmor_3": {
-        "localized_name": "en Text",
-        "description": "en Text"
+        "localized_name": "Cloth Outfit +2",
+        "description": "Clothes made from Cloth.\r\nProtects against the cold of night."
     },
     "ClothArmor_4": {
-        "localized_name": "en Text",
-        "description": "en Text"
+        "localized_name": "Cloth Outfit +3",
+        "description": "Clothes made from Cloth.\r\nProtects against the cold of night."
     },
     "ClothArmor_5": {
-        "localized_name": "en Text",
-        "description": "en Text"
+        "localized_name": "Cloth Outfit +4",
+        "description": "Clothes made from Cloth.\r\nProtects against the cold of night."
     },
     "ClothHat": {
         "localized_name": "en Text",
@@ -1590,10 +1590,6 @@
     "CoolerBox": {
         "localized_name": "CoolerBox",
         "description": ""
-    },
-    "CopperArmor": {
-        "localized_name": "Metal Armor",
-        "description": "Armor made of metal.\r\nIts sheer weight speaks to its sturdiness."
     },
     "CopperArmorCold": {
         "localized_name": "Cold Resistant Metal Armor",
@@ -1635,21 +1631,25 @@
         "localized_name": "Heat Resistant Metal Armor +4",
         "description": ""
     },
+    "CopperArmor": {
+        "localized_name": "Metal Armor",
+        "description": "Armor made of metal.\r\nIts sheer weight speaks to its sturdiness."
+    },
     "CopperArmor_2": {
-        "localized_name": "en Text",
-        "description": "en Text"
+        "localized_name": "Metal Armor +1",
+        "description": "Armor made of metal.\r\nIts sheer weight speaks to its sturdiness."
     },
     "CopperArmor_3": {
-        "localized_name": "en Text",
-        "description": "en Text"
+        "localized_name": "Metal Armor +2",
+        "description": "Armor made of metal.\r\nIts sheer weight speaks to its sturdiness."
     },
     "CopperArmor_4": {
-        "localized_name": "en Text",
-        "description": "en Text"
+        "localized_name": "Metal Armor +3",
+        "description": "Armor made of metal.\r\nIts sheer weight speaks to its sturdiness."
     },
     "CopperArmor_5": {
-        "localized_name": "en Text",
-        "description": "en Text"
+        "localized_name": "Metal Armor +4",
+        "description": "Armor made of metal.\r\nIts sheer weight speaks to its sturdiness."
     },
     "CopperHelmet": {
         "localized_name": "Metal Helm",
@@ -1657,19 +1657,19 @@
     },
     "CopperHelmet_2": {
         "localized_name": "Metal Helm +1",
-        "description": ""
+        "description": "A helm made of metal.\r\nA reliable piece of armor that protects your head, and all the thoughts within."
     },
     "CopperHelmet_3": {
         "localized_name": "Metal Helm +2",
-        "description": ""
+        "description": "A helm made of metal.\r\nA reliable piece of armor that protects your head, and all the thoughts within."
     },
     "CopperHelmet_4": {
         "localized_name": "Metal Helm +3",
-        "description": ""
+        "description": "A helm made of metal.\r\nA reliable piece of armor that protects your head, and all the thoughts within."
     },
     "CopperHelmet_5": {
         "localized_name": "Metal Helm +4",
-        "description": ""
+        "description": "A helm made of metal.\r\nA reliable piece of armor that protects your head, and all the thoughts within."
     },
     "CopperIngot": {
         "localized_name": "Ingot",
@@ -1929,7 +1929,7 @@
     },
     "Flint": {
         "localized_name": "en Text",
-        "description": "A material required to start a fire.\r\nCan sometimes be found when excavating rocks."
+        "description": "en Text"
     },
     "Flour": {
         "localized_name": "Flour",
@@ -3824,7 +3824,7 @@
         "description": ""
     },
     "Silicon": {
-        "localized_name": "Silicon",
+        "localized_name": "en Text",
         "description": "en Text"
     },
     "Silo": {
@@ -4164,8 +4164,8 @@
         "description": "Saddle for safely riding Kitsun."
     },
     "SkillUnlock_BadCatgirl": {
-        "localized_name": "en text's Shotgun",
-        "description": "A shotgun for <characterName id=|BadCatgirl|/> to hold."
+        "localized_name": "en Text",
+        "description": "en Text"
     },
     "SkillUnlock_BirdDragon": {
         "localized_name": "Vanwyrm Saddle",
@@ -4208,8 +4208,8 @@
         "description": "Gloves for gently holding Tocotoco.\r\nActivate its Partner Skill to hold Tocotoco\r\nand use it to fire explosive eggs."
     },
     "SkillUnlock_DarkMutant": {
-        "localized_name": "en text's Power Converter",
-        "description": "A tool for safely riding Dark Mutant."
+        "localized_name": "en Text",
+        "description": "en Text"
     },
     "SkillUnlock_Deer": {
         "localized_name": "Eikthyrdeer Saddle",
@@ -4292,8 +4292,8 @@
         "description": "Saddle for safely riding Maraith."
     },
     "SkillUnlock_GoldenHorse": {
-        "localized_name": "en text Saddle",
-        "description": "A tool for safely riding <characterName id=|GoldenHorse|/>."
+        "localized_name": "en Text",
+        "description": "en Text"
     },
     "SkillUnlock_GrassMammoth": {
         "localized_name": "Mammorest Saddle",
@@ -4500,7 +4500,7 @@
         "description": "Gloves for gently holding on to Hangyu Cryst's arms.\r\nIf Hangyu Cryst is in your team, it can be used as a glider."
     },
     "SkillUnlock_WingGolem": {
-        "localized_name": "en text Saddle",
+        "localized_name": "Knocklem's Saddle",
         "description": "A tool for safely riding Knocklem."
     },
     "SkillUnlock_WhiteAlienDragon": {

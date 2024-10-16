@@ -4433,7 +4433,7 @@
         "type": "Weapon",
         "group": "Weapon",
         "tier": "Common",
-        "stack": 9999,
+        "max_stack_count": 1,
         "weight": 0,
         "buy_price": 0,
         "sell_price": 0,
