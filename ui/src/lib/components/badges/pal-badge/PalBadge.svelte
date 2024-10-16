@@ -62,7 +62,6 @@
 		if (pal && pal.character_id !== 'None') {
 			menuItems = [
 				{ label: 'Move to Palbox', onClick: onMoveToPalbox, icon: ArchiveRestore },
-				{ label: 'Add a new Pal to your party', onClick: onAdd, icon: Plus },
 				{ label: 'Delete Pal', onClick: onDelete, icon: Trash }
 			];
 		} else {
@@ -109,7 +108,8 @@
 				</div>
 
 				{#snippet popup()}
-					<div class="flex w-[450px] flex-col">
+					<div class="flex w-[450px] flex-col space-y-2">
+						<span class="text-start text-2xl font-bold">{pal.nickname || pal.name}</span>
 						<HealthBadge bind:pal player={appState.selectedPlayer} />
 						<span>{palData?.description}</span>
 					</div>
