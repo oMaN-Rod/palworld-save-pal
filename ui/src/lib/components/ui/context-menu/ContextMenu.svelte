@@ -88,6 +88,12 @@
 		}
 	}
 
+	function handleMenuItemClick(event: MouseEvent, onClick: () => void) {
+		event.stopPropagation();
+		onClick();
+		open = false;
+	}
+
 	$effect(() => {
 		if (open) {
 			document.addEventListener('click', handleClickOutside);
@@ -121,10 +127,7 @@
 				<li>
 					<button
 						class="hover:bg-surface-600 flex w-full items-center px-4 py-2 text-left"
-						onclick={() => {
-							item.onClick();
-							open = false;
-						}}
+						onclick={(event) => handleMenuItemClick(event, item.onClick)}
 					>
 						{#if item.icon}
 							<div class="mr-2"><item.icon /></div>
