@@ -1,16 +1,15 @@
 <script lang="ts">
 	import { cn } from '$theme';
 	import {
-		EPalElementType,
-		mapElementType,
 		MessageType,
 		PalGender,
+		type ElementType,
 		type Pal,
 		type PalData,
 		type Player
 	} from '$types';
 	import { elementsData, palsData, getStats } from '$lib/data';
-	import { Input, Tooltip, List } from '$components/ui';
+	import { Input, Tooltip, List, ContextMenu } from '$components/ui';
 	import { PalSelectModal } from '$components/modals';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import {
@@ -27,16 +26,15 @@
 		X,
 		ArrowDownWideNarrow,
 		ArrowDownNarrowWide,
-		ArchiveRestore,
 		Users
 	} from 'lucide-svelte';
 	import { assetLoader, debounce, deepCopy } from '$utils';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { getAppState, getSocketState, getModalState, getNavigationState } from '$states';
 	import { HealthBadge } from '$components';
-	import ContextMenu from '$components/ui/context-menu/ContextMenu.svelte';
+	import type { Component } from 'svelte';
 
-	type SortBy = 'name' | 'level' | 'paldeck-index';
+	type SortBy = 'name' | 'level' | 'paldeck-index' | 'slot-index';
 	type SortOrder = 'asc' | 'desc';
 
 	const appState = getAppState();
@@ -68,30 +66,14 @@
 	let selectedPals: PalWithData[] = $state([]);
 	let selectedPal: PalWithData | undefined = $state(undefined);
 	let palMenuIcons: Record<string, string> = $state({});
-	let sortBy: SortBy | undefined = $state(undefined);
-	let sortOrder: SortOrder | undefined = $state(undefined);
+	let sortBy: SortBy = $state('slot-index');
+	let sortOrder: SortOrder = $state('asc');
 	let alphaIcon: string = $state('');
 	let foodIcon: string = $state('');
 	let hpIcon: string = $state('');
 	let containerRef: HTMLDivElement;
 	let listWrapperStyle = $state('');
 	let selectAll: boolean = $state(false);
-
-	const sortByLevelAscClass = $derived(
-		cn('btn', sortBy === 'level' && sortOrder === 'asc' ? 'bg-secondary-500/25' : '')
-	);
-
-	const sortByLevelDescClass = $derived(
-		cn('btn', sortBy === 'level' && sortOrder === 'desc' ? 'bg-secondary-500/25' : '')
-	);
-
-	const sortByNameAscClass = $derived(
-		cn('btn', sortBy === 'name' && sortOrder === 'asc' ? 'bg-secondary-500/25' : '')
-	);
-
-	const sortByNameDescClass = $derived(
-		cn('btn', sortBy === 'name' && sortOrder === 'desc' ? 'bg-secondary-500/25' : '')
-	);
 
 	const sortLuckyClass = $derived(
 		cn('btn', selectedFilter === 'lucky' ? 'bg-secondary-500/25' : '')
@@ -100,13 +82,8 @@
 		cn('btn', selectedFilter === 'alpha' ? 'bg-secondary-500/25' : '')
 	);
 
-	const sortByPaldeckIndexAscClass = $derived(
-		cn('btn', sortBy === 'paldeck-index' && sortOrder === 'asc' ? 'bg-secondary-500/25' : '')
-	);
-
-	const sortByPaldeckIndexDescClass = $derived(
-		cn('btn', sortBy === 'paldeck-index' && sortOrder === 'desc' ? 'bg-secondary-500/25' : '')
-	);
+	const sortButtonClass = (currentSortBy: SortBy) =>
+		cn('btn', sortBy === currentSortBy ? 'bg-secondary-500/25' : '');
 
 	const elementClass = (element: string) =>
 		cn('btn', selectedFilter === element ? 'bg-secondary-500/25' : '');
@@ -166,25 +143,44 @@
 				(palData &&
 					palData.element_types &&
 					palData.element_types
-						.map((e: EPalElementType) => mapElementType(e)!.toLowerCase())
+						.map((e: ElementType) => e.toString()!.toLowerCase())
 						.includes(selectedFilter.toLowerCase()));
 			const matchesAlpha = selectedFilter === 'alpha' ? pal.is_boss : true;
 			const matchesLucky = selectedFilter === 'lucky' ? pal.is_lucky : true;
 			return matchesSearch && matchesElement && matchesAlpha && matchesLucky;
 		});
 
-		if (sortBy && sortOrder) {
-			handleSort(sortBy, sortOrder);
-		}
+		sortPals();
 	}
 
-	function handleSort(sortBy: SortBy, sortOrder: SortOrder | undefined) {
+	function toggleSort(newSortBy: SortBy) {
+		if (sortBy === newSortBy) {
+			if (sortOrder === 'desc') {
+				sortBy = 'slot-index';
+				sortOrder = 'asc';
+			} else {
+				sortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
+			}
+		} else {
+			sortBy = newSortBy;
+			sortOrder = 'asc';
+		}
+		sortPals();
+	}
+
+	function sortPals() {
 		switch (sortBy) {
 			case 'name':
-				sortByName(sortOrder || 'asc');
+				sortByName();
 				break;
 			case 'level':
-				sortByLevel(sortOrder || 'asc');
+				sortByLevel();
+				break;
+			case 'paldeck-index':
+				sortByPaldeckIndex();
+				break;
+			default:
+				sortBySlotIndex();
 				break;
 		}
 	}
@@ -213,6 +209,42 @@
 		genderIcons[PalGender.FEMALE] = await assetLoader.loadSvg(femalePath);
 	}
 
+	// @ts-ignore
+	let LevelSortIcon: Component = $state(ArrowDown01);
+	$effect(() => {
+		if (sortBy !== 'level') {
+			// @ts-ignore
+			LevelSortIcon = ArrowDown01;
+		} else {
+			// @ts-ignore
+			LevelSortIcon = sortOrder === 'asc' ? ArrowDown01 : ArrowDown10;
+		}
+	});
+
+	// @ts-ignore
+	let NameSortIcon: Component = $state(ArrowDownAZ);
+	$effect(() => {
+		if (sortBy !== 'name') {
+			// @ts-ignore
+			NameSortIcon = ArrowDownAZ;
+		} else {
+			// @ts-ignore
+			NameSortIcon = sortOrder === 'asc' ? ArrowDownAZ : ArrowDownZA;
+		}
+	});
+
+	// @ts-ignore
+	let PaldeckSortIcon: Component = $state(ArrowDownWideNarrow);
+	$effect(() => {
+		if (sortBy !== 'paldeck-index') {
+			// @ts-ignore
+			PaldeckSortIcon = ArrowDownWideNarrow;
+		} else {
+			// @ts-ignore
+			PaldeckSortIcon = sortOrder === 'asc' ? ArrowDownWideNarrow : ArrowDownNarrowWide;
+		}
+	});
+
 	async function loadElementTypes() {
 		elementTypes = await elementsData.getAllElementTypes();
 	}
@@ -233,10 +265,9 @@
 		}
 	}
 
-	function getElementIcon(elementType: EPalElementType | string): string | undefined {
+	function getElementIcon(elementType: string): string | undefined {
 		if (elementIcons[elementType]) return elementIcons[elementType];
-		const element = mapElementType(elementType as EPalElementType) as string;
-		return elementIcons[element];
+		return elementIcons[elementType];
 	}
 
 	async function getPalMenuIcon(palId: string): Promise<string | undefined> {
@@ -270,48 +301,42 @@
 		ws.send(JSON.stringify(message));
 	}
 
-	function sortByName(order: string) {
-		sortBy = 'name';
-		if (order === 'asc') {
-			filteredPals = filteredPals.sort((a, b) => a.pal.name.localeCompare(b.pal.name));
-			sortOrder = 'asc';
-		} else if (order === 'desc') {
-			filteredPals = filteredPals.sort((a, b) => b.pal.name.localeCompare(a.pal.name));
-			sortOrder = 'desc';
-		}
+	function sortByName() {
+		filteredPals = filteredPals.sort((a, b) =>
+			sortOrder === 'asc'
+				? a.pal.name.localeCompare(b.pal.name)
+				: b.pal.name.localeCompare(a.pal.name)
+		);
 	}
 
-	function sortByLevel(order: string) {
-		sortBy = 'level';
-		if (order === 'asc') {
-			filteredPals = filteredPals.sort((a, b) => a.pal.level - b.pal.level);
-			sortOrder = 'asc';
-		} else if (order === 'desc') {
-			filteredPals = filteredPals.sort((a, b) => b.pal.level - a.pal.level);
-			sortOrder = 'desc';
-		}
+	function sortByLevel() {
+		filteredPals = filteredPals.sort((a, b) =>
+			sortOrder === 'asc' ? a.pal.level - b.pal.level : b.pal.level - a.pal.level
+		);
 	}
 
-	async function sortByPaldeckIndex(order: SortOrder) {
-		sortBy = 'paldeck-index';
+	function sortBySlotIndex() {
+		console.log('Sort by slot index');
+		filteredPals = filteredPals.sort((a, b) =>
+			sortOrder === 'asc'
+				? a.pal.storage_slot - b.pal.storage_slot
+				: b.pal.storage_slot - a.pal.storage_slot
+		);
+	}
 
-		// Fetch all pal info asynchronously
+	async function sortByPaldeckIndex() {
 		const palInfoPromises = filteredPals.map((pal) => palsData.getPalInfo(pal.pal.character_id));
 		const palInfos = await Promise.all(palInfoPromises);
 
-		// Create an array of [pal, palInfo] pairs
 		const palsWithInfo = filteredPals.map((pal, index) => [pal, palInfos[index]]);
 
-		// Sort the pairs
 		palsWithInfo.sort((a, b) => {
 			const indexA = (a[1] as PalData)?.pal_deck_index ?? Infinity;
 			const indexB = (b[1] as PalData)?.pal_deck_index ?? Infinity;
-			return order === 'asc' ? indexA - indexB : indexB - indexA;
+			return sortOrder === 'asc' ? indexA - indexB : indexB - indexA;
 		});
 
-		// Update filteredPals with the sorted order
 		filteredPals = palsWithInfo.map((pair) => pair[0] as PalWithData);
-		sortOrder = order;
 	}
 
 	function getGenderIcon(gender: PalGender): string | undefined {
@@ -547,69 +572,37 @@
 							<Tooltip>
 								<button
 									type="button"
-									class={sortByLevelAscClass}
-									onclick={() => sortByLevel('asc')}
+									class={sortButtonClass('level')}
+									onclick={() => toggleSort('level')}
 								>
-									<ArrowDown01 />
+									<LevelSortIcon />
 								</button>
 								{#snippet popup()}
-									Sort by level in ascending order
+									Sort by level
 								{/snippet}
 							</Tooltip>
 							<Tooltip>
 								<button
 									type="button"
-									class={sortByLevelDescClass}
-									onclick={() => sortByLevel('desc')}
+									class={sortButtonClass('name')}
+									onclick={() => toggleSort('name')}
 								>
-									<ArrowDown10 />
+									<NameSortIcon />
 								</button>
 								{#snippet popup()}
-									Sort by level in descending order
-								{/snippet}
-							</Tooltip>
-							<Tooltip>
-								<button type="button" class={sortByNameAscClass} onclick={() => sortByName('asc')}>
-									<ArrowDownAZ />
-								</button>
-								{#snippet popup()}
-									Sort by name in ascending order
+									Sort by name
 								{/snippet}
 							</Tooltip>
 							<Tooltip>
 								<button
 									type="button"
-									class={sortByNameDescClass}
-									onclick={() => sortByName('desc')}
+									class={sortButtonClass('paldeck-index')}
+									onclick={() => toggleSort('paldeck-index')}
 								>
-									<ArrowDownZA />
+									<PaldeckSortIcon />
 								</button>
 								{#snippet popup()}
-									Sort by name in descending order
-								{/snippet}
-							</Tooltip>
-							<Tooltip>
-								<button
-									type="button"
-									class={sortByPaldeckIndexAscClass}
-									onclick={() => sortByPaldeckIndex('asc')}
-								>
-									<ArrowDownWideNarrow />
-								</button>
-								{#snippet popup()}
-									Sort by Paldeck # in ascending order
-								{/snippet}
-							</Tooltip>
-							<Tooltip>
-								<button
-									type="button"
-									class={sortByPaldeckIndexDescClass}
-									onclick={() => sortByPaldeckIndex('desc')}
-								>
-									<ArrowDownNarrowWide />
-								</button>
-								{#snippet popup()}
-									Sort by Paldeck # in descending order
+									Sort by Paldeck #
 								{/snippet}
 							</Tooltip>
 						</div>
