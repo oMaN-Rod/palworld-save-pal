@@ -32,10 +32,9 @@
 		reader.readAsArrayBuffer(files[0]);
 	}
 
-	function handleDownloadSaveFile() {
+	async function handleDownloadSaveFile() {
 		ws.send(JSON.stringify({ type: MessageType.DOWNLOAD_SAVE_FILE }));
-		toast.add('Generating sav file, grab a ☕...');
-		nav.activePage = 'loading';
+		await goto('/loading');
 		ws.message = { type: MessageType.PROGRESS_MESSAGE, data: 'Starting to cook 🧑‍🍳...' };
 	}
 </script>
@@ -58,15 +57,12 @@
 							class="btn preset-filled-primary-500 font-bold"
 							onclick={handleDownloadSaveFile}
 						>
-							<Download /> SAVE
+							<Download /> Download
 						</button>
 						{#snippet popup()}
-							<span>Download current Level.sav file</span>
+							<span>Download modified Level.sav file</span>
 						{/snippet}
 					</Tooltip>
-					<!-- <button class="btn preset-filled-primary-500 font-bold" onclick={handleDownloadSaveFile}>
-						<Download /> JSON
-					</button> -->
 				</div>
 			</div>
 		</Card>

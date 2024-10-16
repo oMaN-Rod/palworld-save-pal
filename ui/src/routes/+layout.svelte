@@ -126,8 +126,8 @@
 					a.download = name;
 					a.click();
 					URL.revokeObjectURL(url);
-
 					ws.clear(type);
+					goto('/file');
 					break;
 				case MessageType.GET_PLAYERS:
 					console.log('Players loaded', data);
