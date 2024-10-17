@@ -131,6 +131,7 @@ class Player(BaseModel):
     def delete_pal(self, pal_id: UUID):
         self.pals.pop(pal_id)
         self._pal_box.remove_pal(pal_id)
+        self._party.remove_pal(pal_id)
         if isinstance(self.guild, Guild):
             self.guild.remove_pal(pal_id)
 
