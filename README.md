@@ -118,8 +118,16 @@ For developers who want to contribute to Palworld Save Pal:
 
 ### Build Desktop App
 
+> Activate the environment
+
+```powershell
+python -m venv .venv
+source .\.venv\Scripts\activate
+pip install -r requirements.txt
+```
+
 #### Using build script
-> Windows
+
 ```powershell
 .\build-desktop.ps1
 ```
@@ -133,27 +141,22 @@ For developers who want to contribute to Palworld Save Pal:
    PUBLIC_DESKTOP_MODE=true
    ```
 
-2. Build the SPA (replace bun with your package manager of choice). This will create a build directory in the project root containing the static files for the SPA:
+2. Create EXE:
 
-   ```bash
+   ```powershell
+   pyinstaller desktop.spec
+   ```
+   
+3. Build the SPA (replace bun with your package manager of choice). This will create a build directory in the project root containing the static files for the SPA:
+
+   ```powershell
    cd ui
-   rm -rf .svelte-kit
+   rm .svelte-kit
    bun run build
    ```
 
-3. Create EXE:
-
-   ```bash
-   pyinstaller desktop.spec
-   ```
-
 4. Copy build to the dist folder:
-   > Linux
-   ```bash
-   cp -r build/* dist/
-   ```
 
-  > Windows
    ```powershell
    cp -R .\build\ .\dist\
    cp -R .\data\ .\dist\
