@@ -42,15 +42,16 @@ To run Palworld Save Pal using Docker:
 1. Clone this repository:
 
    ```bash
-   git clone https://github.com/oMaN-Rod/psp.git
+   git clone https://github.com/oMaN-Rod/palworld-save-pal.git
    ```
 
 2. Run the build script based on your environment, these scripts capture the system IP address and set the environment variable for the svelte SPA:
-
+   > Linux
    ```bash
    ./build-docker.sh
    ```
 
+   > Windows
    ```powershell
    .\build-docker.ps1
    ```
@@ -58,7 +59,7 @@ To run Palworld Save Pal using Docker:
 3. Or you can follow these steps:
    1. Set the environment variable for the svelte SPA `ui/.env`. Replace `{{ ip_address }}` with the IP address of the server::
 
-      ```jinja
+      ```env
       PUBLIC_WS_URL={{ ip_address }}:5174/ws
       PUBLIC_DESKTOP_MODE=false
       ```
@@ -118,17 +119,17 @@ For developers who want to contribute to Palworld Save Pal:
 ### Build Desktop App
 
 #### Using build script
-
+> Windows
 ```powershell
 .\build-desktop.ps1
 ```
 
 #### Manual build
 
-1. Set the environment variable for the svelte SPA `ui/.env`. Replace `{{ ip_address }}` with the IP address of the server:
+1. Set the environment variable for the svelte SPA `ui/.env`.
 
-   ```jinja
-   PUBLIC_WS_URL={{ ip_address }}:5174/ws
+   ```env
+   PUBLIC_WS_URL=127.0.0.1:5174/ws
    PUBLIC_DESKTOP_MODE=true
    ```
 
@@ -147,13 +148,12 @@ For developers who want to contribute to Palworld Save Pal:
    ```
 
 4. Copy build to the dist folder:
-
+   > Linux
    ```bash
    cp -r build/* dist/
    ```
 
-   *Powershell*
-
+  > Windows
    ```powershell
    cp -R .\build\ .\dist\
    cp -R .\data\ .\dist\
@@ -191,7 +191,7 @@ Here's what's planned for future releases of Palworld Save Pal:
 ### Players
 
 - [ ] Edit Player Name
-- [ ] Edit Player Level
+- [X] Edit Player Level
 - [X] Edit Player Inventory
 - [X] Player presets for inventory
 
