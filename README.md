@@ -42,15 +42,16 @@ To run Palworld Save Pal using Docker:
 1. Clone this repository:
 
    ```bash
-   git clone https://github.com/oMaN-Rod/psp.git
+   git clone https://github.com/oMaN-Rod/palworld-save-pal.git
    ```
 
 2. Run the build script based on your environment, these scripts capture the system IP address and set the environment variable for the svelte SPA:
-
+   > Linux
    ```bash
    ./build-docker.sh
    ```
 
+   > Windows
    ```powershell
    .\build-docker.ps1
    ```
@@ -58,7 +59,7 @@ To run Palworld Save Pal using Docker:
 3. Or you can follow these steps:
    1. Set the environment variable for the svelte SPA `ui/.env`. Replace `{{ ip_address }}` with the IP address of the server::
 
-      ```jinja
+      ```env
       PUBLIC_WS_URL={{ ip_address }}:5174/ws
       PUBLIC_DESKTOP_MODE=false
       ```
@@ -117,6 +118,14 @@ For developers who want to contribute to Palworld Save Pal:
 
 ### Build Desktop App
 
+> Activate the environment
+
+```powershell
+python -m venv .venv
+source .\.venv\Scripts\activate
+pip install -r requirements.txt
+```
+
 #### Using build script
 
 ```powershell
@@ -125,34 +134,28 @@ For developers who want to contribute to Palworld Save Pal:
 
 #### Manual build
 
-1. Set the environment variable for the svelte SPA `ui/.env`. Replace `{{ ip_address }}` with the IP address of the server:
+1. Set the environment variable for the svelte SPA `ui/.env`.
 
-   ```jinja
-   PUBLIC_WS_URL={{ ip_address }}:5174/ws
+   ```env
+   PUBLIC_WS_URL=127.0.0.1:5174/ws
    PUBLIC_DESKTOP_MODE=true
    ```
 
-2. Build the SPA (replace bun with your package manager of choice). This will create a build directory in the project root containing the static files for the SPA:
+2. Create EXE:
 
-   ```bash
+   ```powershell
+   pyinstaller desktop.spec
+   ```
+   
+3. Build the SPA (replace bun with your package manager of choice). This will create a build directory in the project root containing the static files for the SPA:
+
+   ```powershell
    cd ui
-   rm -rf .svelte-kit
+   rm .svelte-kit
    bun run build
    ```
 
-3. Create EXE:
-
-   ```bash
-   pyinstaller desktop.spec
-   ```
-
 4. Copy build to the dist folder:
-
-   ```bash
-   cp -r build/* dist/
-   ```
-
-   *Powershell*
 
    ```powershell
    cp -R .\build\ .\dist\
@@ -191,7 +194,7 @@ Here's what's planned for future releases of Palworld Save Pal:
 ### Players
 
 - [ ] Edit Player Name
-- [ ] Edit Player Level
+- [X] Edit Player Level
 - [X] Edit Player Inventory
 - [X] Player presets for inventory
 
