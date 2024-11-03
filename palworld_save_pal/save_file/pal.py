@@ -333,17 +333,16 @@ class Pal(BaseModel):
 
     def _update_mastered_waza(self):
         if not self.learned_skills or len(self.learned_skills) == 0:
-            learned_skills = []
-        else:
-            learned_skills = self.learned_skills
+            safe_remove(self._save_parameter, "MasteredWaza")
+            return
 
         if "MasteredWaza" in self._save_parameter:
             PalObjects.set_array_property(
-                self._save_parameter["MasteredWaza"], values=learned_skills
+                self._save_parameter["MasteredWaza"], values=self.learned_skills
             )
         else:
             self._save_parameter["MasteredWaza"] = PalObjects.ArrayPropertyValues(
-                ArrayType.ENUM_PROPERTY, learned_skills
+                ArrayType.ENUM_PROPERTY, self.learned_skills
             )
 
     def _update_passive_skills(self) -> None:
@@ -380,6 +379,10 @@ class Pal(BaseModel):
             self._save_parameter["Hp"] = PalObjects.FixedPoint64(self.hp)
 
     def _update_level(self) -> None:
+        if self.level <= 1:
+            safe_remove(self._save_parameter, "Level")
+            return
+
         if "Level" in self._save_parameter:
             PalObjects.set_byte_property(
                 self._save_parameter["Level"], value=self.level
@@ -388,6 +391,10 @@ class Pal(BaseModel):
             self._save_parameter["Level"] = PalObjects.ByteProperty(self.level)
 
     def _update_exp(self):
+        if self.exp == 0:
+            safe_remove(self._save_parameter, "Exp")
+            return
+
         if "Exp" in self._save_parameter:
             PalObjects.set_value(self._save_parameter["Exp"], value=self.exp)
         elif self.exp > 0:
@@ -401,6 +408,10 @@ class Pal(BaseModel):
         self._update_rank_craftspeed()
 
     def _update_rank(self) -> None:
+        if self.rank + 1 <= 1:
+            safe_remove(self._save_parameter, "Rank")
+            return
+
         if "Rank" in self._save_parameter:
             PalObjects.set_byte_property(
                 self._save_parameter["Rank"], value=self.rank + 1
@@ -409,6 +420,10 @@ class Pal(BaseModel):
             self._save_parameter["Rank"] = PalObjects.ByteProperty(self.rank + 1)
 
     def _update_rank_hp(self) -> None:
+        if self.rank_hp == 0:
+            safe_remove(self._save_parameter, "Rank_HP")
+            return
+
         if "Rank_HP" in self._save_parameter:
             PalObjects.set_byte_property(
                 self._save_parameter["Rank_HP"], value=self.rank_hp
@@ -417,6 +432,10 @@ class Pal(BaseModel):
             self._save_parameter["Rank_HP"] = PalObjects.ByteProperty(self.rank_hp)
 
     def _update_rank_attack(self) -> None:
+        if self.rank_attack == 0:
+            safe_remove(self._save_parameter, "Rank_Attack")
+            return
+
         if "Rank_Attack" in self._save_parameter:
             PalObjects.set_byte_property(
                 self._save_parameter["Rank_Attack"], value=self.rank_attack
@@ -427,6 +446,10 @@ class Pal(BaseModel):
             )
 
     def _update_rank_defense(self) -> None:
+        if self.rank_defense == 0:
+            safe_remove(self._save_parameter, "Rank_Defence")
+            return
+
         if "Rank_Defence" in self._save_parameter:
             PalObjects.set_byte_property(
                 self._save_parameter["Rank_Defence"], value=self.rank_defense
@@ -437,6 +460,10 @@ class Pal(BaseModel):
             )
 
     def _update_rank_craftspeed(self) -> None:
+        if self.rank_craftspeed == 0:
+            safe_remove(self._save_parameter, "Rank_CraftSpeed")
+            return
+
         if "Rank_CraftSpeed" in self._save_parameter:
             PalObjects.set_byte_property(
                 self._save_parameter["Rank_CraftSpeed"], value=self.rank_craftspeed
@@ -488,7 +515,7 @@ class Pal(BaseModel):
         PalObjects.set_value(self._save_parameter["CharacterID"], value=character_id)
 
     def _update_lucky(self) -> None:
-        if not self.is_lucky and "IsRarePal" in self._save_parameter:
+        if not self.is_lucky:
             safe_remove(self._save_parameter, "IsRarePal")
             return
 
