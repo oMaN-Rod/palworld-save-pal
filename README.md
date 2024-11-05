@@ -1,6 +1,6 @@
 # PALWORLD Save Pal
 
-> **Note**: This project was put together for fun and to kick the tires on Sveltekit 5 and Skeleton UI Next. Things may be broken or not work as expected. 
+> **Note**: This project was put together for fun and to kick the tires on Sveltekit 5 and Skeleton UI Next. Things may be broken or not work as expected.
 
 ⚠️ **Backup your save files before using this tool!!** ⚠️
 
@@ -25,7 +25,7 @@ Palworld Save Pal is a tool for managing and analyzing save files.
     - [Map](#map)
   - [📜 License](#-license)
   - [➡️ Related Projects](#️-related-projects)
-  - [☕ Buy me a coffee](#-buy-me-a-coffee)
+  - [☕ Buy me a Coffee](#-buy-me-a-coffee)
 
 ## 🚀 Installation
 
@@ -47,11 +47,13 @@ To run Palworld Save Pal using Docker:
 
 2. Run the build script based on your environment, these scripts capture the system IP address and set the environment variable for the svelte SPA:
    > Linux
+
    ```bash
    ./build-docker.sh
    ```
 
    > Windows
+
    ```powershell
    .\build-docker.ps1
    ```
@@ -146,7 +148,7 @@ pip install -r requirements.txt
    ```powershell
    pyinstaller desktop.spec
    ```
-   
+
 3. Build the SPA (replace bun with your package manager of choice). This will create a build directory in the project root containing the static files for the SPA:
 
    ```powershell
@@ -183,7 +185,7 @@ Here's what's planned for future releases of Palworld Save Pal:
 - [X] Edit Health - Modified pals are automatically healed
 - [X] Edit Stomach - Modified pals are automatically healed
 - [X] Edit Level
-- [X] Edit learned skills
+- [X] Edit Learned skills
 - [X] Edit Rank
 - [X] Edit Souls
 - [X] Set/Unset Lucky
@@ -193,9 +195,11 @@ Here's what's planned for future releases of Palworld Save Pal:
 
 ### Players
 
-- [ ] Edit Player Name
-- [X] Edit Player Level
-- [X] Edit Player Inventory
+- [ ] Edit Name
+- [X] Edit Level
+- [X] Edit Health
+- [X] Edit Stomach
+- [X] Edit Inventory
 - [X] Player presets for inventory
 
 ### Map
