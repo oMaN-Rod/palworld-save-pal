@@ -1,12 +1,11 @@
 <script lang="ts">
 	import { assetLoader } from '$lib/utils/asset-loader';
 	import { ASSET_DATA_PATH } from '$lib/constants';
-	import { EntryState, type Pal, type Player } from '$types';
+	import { type Pal, type Player } from '$types';
 	import { getStats, type PalStats } from '$lib/data';
 	import { SectionHeader } from '$components/ui';
 	import { HealthBadge } from '$components';
 	import { getModalState } from '$states';
-	import { NumberInputModal } from '$components/modals';
 
 	let {
 		pal = $bindable(),
@@ -31,17 +30,17 @@
 		const hp = await assetLoader.loadImage(hpPath);
 		hpIcon = hp;
 
-		const attackPath = `${ASSET_DATA_PATH}/img/stats/attack.svg`;
-		const attack = await assetLoader.load(attackPath, 'svg');
-		attackIcon = attack as string;
+		const attackPath = `${ASSET_DATA_PATH}/img/stats/attack.png`;
+		const attack = await assetLoader.loadImage(attackPath);
+		attackIcon = attack;
 
-		const defensePath = `${ASSET_DATA_PATH}/img/stats/defense.svg`;
-		const defense = await assetLoader.load(defensePath, 'svg');
-		defenseIcon = defense as string;
+		const defensePath = `${ASSET_DATA_PATH}/img/stats/defense.png`;
+		const defense = await assetLoader.loadImage(defensePath);
+		defenseIcon = defense;
 
-		const workPath = `${ASSET_DATA_PATH}/img/stats/work_speed.svg`;
-		const work = await assetLoader.load(workPath, 'svg');
-		workSpeedIcon = work as string;
+		const workPath = `${ASSET_DATA_PATH}/img/stats/work_speed.png`;
+		const work = await assetLoader.loadImage(workPath);
+		workSpeedIcon = work;
 	}
 
 	async function handleGetStats() {
@@ -72,9 +71,9 @@
 	class="border-l-primary border-l-surface-600 bg-surface-900 relative w-full overflow-hidden rounded-none border-l-2 p-0 shadow-none"
 >
 	<div class="flex w-full items-center">
-		<div class="mx-2 h-6 w-6">
-			{@html attackIcon}
-		</div>
+		{#if attackIcon}
+			<enhanced:img src={attackIcon} alt="HP" class="mx-2 h-6 w-6" />
+		{/if}
 
 		<div class="ml-2 h-6 w-6"></div>
 		<span class="flex-grow p-2 text-lg">Attack</span>
@@ -85,9 +84,9 @@
 	class="border-l-primary border-l-surface-600 bg-surface-900 relative w-full overflow-hidden rounded-none border-l-2 p-0 shadow-none"
 >
 	<div class="flex w-full items-center">
-		<div class="mx-2 h-6 w-6">
-			{@html defenseIcon}
-		</div>
+		{#if defenseIcon}
+			<enhanced:img src={defenseIcon} alt="HP" class="mx-2 h-6 w-6" />
+		{/if}
 
 		<div class="ml-2 h-6 w-6"></div>
 		<span class="flex-grow p-2 pl-2 text-lg">Defense</span>

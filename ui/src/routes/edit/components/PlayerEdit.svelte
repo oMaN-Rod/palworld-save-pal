@@ -11,9 +11,16 @@
 	import { assetLoader } from '$utils/asset-loader';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { itemsData, expData, palsData } from '$lib/data';
-	import { Tabs } from '@skeletonlabs/skeleton-svelte';
+	import { Tabs, Accordion } from '@skeletonlabs/skeleton-svelte';
 	import { Tooltip } from '$components/ui';
-	import { ItemBadge, PlayerPresets, PalBadge, PalSelectModal } from '$components';
+	import {
+		ItemBadge,
+		PlayerPresets,
+		PalBadge,
+		PalSelectModal,
+		PlayerStats,
+		PlayerHealthBadge
+	} from '$components';
 	import {
 		Bomb,
 		ChevronsLeftRight,
@@ -71,6 +78,10 @@
 	let levelProgressToNext: number = $state(0);
 	let levelProgressValue: number = $state(0);
 	let levelProgressMax: number = $state(1);
+	let sideBarExpanded: string[] = $state(['stats']);
+	let sideBarWrapper: HTMLDivElement | null = $state(null);
+
+	let health = $state(500);
 
 	async function getItemIcon(staticId: string) {
 		if (!staticId) return;
@@ -389,6 +400,7 @@
 			loadWeaponLoadoutContainer();
 			loadPlayerEquipmentArmorContainer();
 			loadOtomoContainer();
+			health = 500 + appState.selectedPlayer.status_point_list.max_hp * 100;
 		}
 	});
 
@@ -501,24 +513,250 @@
 
 {#if appState.selectedPlayer}
 	<div class="flex h-full flex-col overflow-auto">
-		<div class="flex items-end space-x-2 p-2">
-			<div class="grow">
+		<div class="ml-2 flex">
+			<!-- Main content wrapper -->
+			<div class="grid w-full grid-cols-[auto_1fr] gap-4 pr-[340px]">
+				<!-- Inventory -->
+				<div class="flex h-[600px] flex-col">
+					<div class="mb-4 flex items-center space-x-2">
+						<Tooltip>
+							<button
+								class="btn preset-filled-primary-500 hover:preset-tonal-secondary xl:btn-md btn-sm px-2 xl:px-4"
+								onclick={clearCommonContainer}
+							>
+								<ChevronsLeftRight class="h-4 w-4 xl:h-6 xl:w-6" />
+							</button>
+							{#snippet popup()}
+								<span>Clear Inventory</span>
+							{/snippet}
+						</Tooltip>
+						<Tooltip>
+							<button
+								class="btn preset-filled-primary-500 hover:preset-tonal-secondary btn-sm xl:btn-md px-2 xl:px-4"
+								onclick={sortCommonContainer}
+							>
+								<ArrowUp01 class="h-4 w-4 xl:h-6 xl:w-6" />
+							</button>
+							{#snippet popup()}
+								<span>Sort Inventory</span>
+							{/snippet}
+						</Tooltip>
+						<Tooltip
+							><button
+								class="btn preset-filled-primary-500 hover:preset-tonal-secondary xl:btn-md btn-sm px-2 xl:px-4"
+								onclick={clearEssentialContainer}
+							>
+								<Key class="h-4 w-4 xl:h-6 xl:w-6" />
+							</button>
+							{#snippet popup()}
+								<span>Clear Key Items</span>
+							{/snippet}
+						</Tooltip>
+						<Tooltip>
+							<button
+								class="btn preset-filled-primary-500 hover:preset-tonal-secondary xl:btn-md btn-sm px-2 xl:px-4"
+								onclick={clearWeaponLoadOutContainer}
+							>
+								<Swords class="h-4 w-4 xl:h-6 xl:w-6" />
+							</button>
+							{#snippet popup()}
+								<span>Clear Weapons</span>
+							{/snippet}
+						</Tooltip>
+						<Tooltip>
+							<button
+								class="btn preset-filled-primary-500 hover:preset-tonal-secondary xl:btn-md btn-sm px-2 xl:px-4"
+								onclick={clearEquipmentArmorContainer}
+							>
+								<Shield class="h-4 w-4 xl:h-6 xl:w-6" />
+							</button>
+							{#snippet popup()}
+								<span>Clear Armor</span>
+							{/snippet}
+						</Tooltip>
+						<Tooltip>
+							<button
+								class="btn preset-filled-primary-500 hover:preset-tonal-secondary xl:btn-md btn-sm px-2 xl:px-4"
+								onclick={clearFoodEquipContainer}
+							>
+								<Pizza class="h-4 w-4 xl:h-6 xl:w-6" />
+							</button>
+							{#snippet popup()}
+								<span>Clear Food</span>
+							{/snippet}
+						</Tooltip>
+						<Tooltip>
+							<button
+								class="btn preset-filled-primary-500 hover:preset-tonal-secondary xl:btn-md btn-sm px-2 xl:px-4"
+								onclick={clearAll}
+							>
+								<Bomb class="h-4 w-4 xl:h-6 xl:w-6" />
+							</button>
+							{#snippet popup()}
+								<span>Clear All</span>
+							{/snippet}
+						</Tooltip>
+					</div>
+					<Tabs listBorder="border border-surface-800" listClasses="h-auto" bind:value={group}>
+						{#snippet list()}
+							<Tabs.Control
+								value="inventory"
+								classes="w-full"
+								base="border-none hover:ring-secondary-500 hover:ring"
+								labelBase="py-1"
+								stateActive="bg-surface-700"
+								padding="p-0"
+							>
+								Inventory
+							</Tabs.Control>
+							<Tabs.Control
+								value="key_items"
+								classes="w-full"
+								base="border-none hover:ring-secondary-500 hover:ring"
+								labelBase="py-1"
+								stateActive="bg-surface-700"
+								padding="p-0"
+							>
+								Key Items
+							</Tabs.Control>
+						{/snippet}
+						{#snippet content()}
+							<Tabs.Panel value="inventory">
+								<div class="grid grid-cols-6 gap-2">
+									{#each Object.values(commonContainer.slots) as _, index}
+										<ItemBadge
+											bind:slot={commonContainer.slots[index]}
+											itemGroup="Common"
+											onCopyPaste={(event) => handleCopyPaste(event, commonContainer.slots[index])}
+										/>
+									{/each}
+								</div>
+							</Tabs.Panel>
+							<Tabs.Panel value="key_items">
+								<div class="max-h-[500px] overflow-auto">
+									<div class="grid grid-cols-6 gap-2">
+										{#each Object.values(essentialContainer.slots) as _, index}
+											<ItemBadge bind:slot={essentialContainer.slots[index]} itemGroup="KeyItem" />
+										{/each}
+									</div>
+								</div>
+							</Tabs.Panel>
+						{/snippet}
+					</Tabs>
+				</div>
+				<!-- Player Equip -->
+				<div class="grid h-[600px] grid-cols-[auto_1fr_auto]">
+					<div class="flex flex-col space-y-2">
+						<ItemHeader text="Weapon" />
+						<div class="flex max-w-[65px] flex-col space-y-2">
+							{#each Object.values(weaponLoadOutContainer.slots) as _, index}
+								<ItemBadge
+									bind:slot={weaponLoadOutContainer.slots[index]}
+									itemGroup="Weapon"
+									onCopyPaste={(event) =>
+										handleCopyPaste(event, weaponLoadOutContainer.slots[index], false)}
+								/>
+							{/each}
+						</div>
+						<ItemHeader text="Accessory" />
+						<div class="ml-2">
+							<div class="grid max-h-36 max-w-36 grid-cols-2 gap-2">
+								{#each accessoryGear as _, index}
+									<ItemBadge
+										bind:slot={accessoryGear[index]}
+										itemGroup="Accessory"
+										onCopyPaste={(event) => handleCopyPaste(event, accessoryGear[index], false)}
+									/>
+								{/each}
+							</div>
+						</div>
+					</div>
+					<div class="flex flex-col items-center justify-center">
+						<span class="flex h-1/3 items-end">
+							{#await getItemIcon(headGear.static_id) then icon}
+								{#if icon}
+									<enhanced:img
+										src={icon}
+										alt={headGear.static_id}
+										class="h-12 w-12 xl:h-16 xl:w-16"
+									></enhanced:img>
+								{/if}
+							{/await}
+						</span>
+						<span class="h-2/3">
+							{#await getItemIcon(bodyGear.static_id) then icon}
+								{#if icon}
+									<enhanced:img
+										src={icon}
+										alt={bodyGear.static_id}
+										class="h-56 w-56 xl:h-64 xl:w-64"
+									></enhanced:img>
+								{/if}
+							{/await}
+						</span>
+					</div>
+					<div class="flex flex-col space-y-2">
+						<ItemHeader text="Head" />
+						<ItemBadge
+							bind:slot={headGear}
+							itemGroup="Head"
+							onCopyPaste={(event) => handleCopyPaste(event, headGear, false)}
+						/>
+						<ItemHeader text="Body" />
+						<ItemBadge
+							bind:slot={bodyGear}
+							itemGroup="Body"
+							onCopyPaste={(event) => handleCopyPaste(event, bodyGear, false)}
+						/>
+						<ItemHeader text="Shield" />
+						<ItemBadge
+							bind:slot={shieldGear}
+							itemGroup="Shield"
+							onCopyPaste={(event) => handleCopyPaste(event, shieldGear, false)}
+						/>
+						<ItemHeader text="Glider" />
+						<ItemBadge
+							bind:slot={gliderGear}
+							itemGroup="Glider"
+							onCopyPaste={(event) => handleCopyPaste(event, gliderGear, false)}
+						/>
+					</div>
+					<div class="col-span-3 ml-12 mt-2 space-y-2">
+						<ItemHeader text="Food" />
+						<div class="ml-2">
+							<div class="flex flex-row space-x-2">
+								{#each Object.values(foodEquipContainer.slots) as _, index}
+									<ItemBadge
+										bind:slot={foodEquipContainer.slots[index]}
+										itemGroup="Food"
+										onCopyPaste={(event) =>
+											handleCopyPaste(event, foodEquipContainer.slots[index], false)}
+									/>
+								{/each}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Stats -->
+			<div class="fixed right-2 top-[60px] w-80 flex-none" bind:this={sideBarWrapper}>
 				<div
-					class="border-l-surface-600 preset-filled-surface-100-900 flex w-10/12 rounded-none border-l-2 p-4"
+					class="border-l-surface-600 preset-filled-surface-100-900 mb-2 mr-2 flex rounded-none border-l-2 p-4"
 				>
 					<div class="mr-4 flex flex-col items-center justify-center rounded-none">
 						<div class="flex px-2">
 							<button class="mr-4">
-								<Minus class="text-primary-500" onclick={handleLevelDecrement} />
+								<Minus class="text-primary-500" size={16} onclick={handleLevelDecrement} />
 							</button>
 
 							<div class="flex flex-col items-center justify-center">
-								<span class="text-surface-400 font-bold">LEVEL</span>
-								<span class="text-2xl font-bold xl:text-4xl">{appState.selectedPlayer.level}</span>
+								<span class="text-surface-400 text-sm font-bold">LEVEL</span>
+								<span class="text-xl font-bold xl:text-2xl">{appState.selectedPlayer.level}</span>
 							</div>
 
 							<button class="ml-4">
-								<Plus class="text-primary-500" onclick={handleLevelIncrement} />
+								<Plus class="text-primary-500" size={16} onclick={handleLevelIncrement} />
 							</button>
 						</div>
 					</div>
@@ -542,8 +780,29 @@
 						</div>
 					</div>
 				</div>
+				<PlayerHealthBadge bind:player={appState.selectedPlayer} bind:maxHp={health} />
+				<Accordion value={sideBarExpanded} collapsible>
+					<Accordion.Item value="stats">
+						{#snippet control()}
+							Stats
+						{/snippet}
+						{#snippet panel()}
+							<PlayerStats player={appState.selectedPlayer!} />
+						{/snippet}
+					</Accordion.Item>
+					<hr class="hr" />
+					<Accordion.Item value="presets">
+						{#snippet control()}Presets{/snippet}
+						{#snippet panel()}
+							<PlayerPresets containerRef={sideBarWrapper} />
+						{/snippet}
+					</Accordion.Item>
+				</Accordion>
 			</div>
-			<Card rounded="rounded-none" padding="py-2.5 px-4">
+		</div>
+		<!-- Party -->
+		<div class="flex">
+			<Card rounded="rounded-none" class="m-2 mt-4 px-4 py-2.5">
 				<div class="flex">
 					<h6 class="h6 mr-4">Party</h6>
 					<div class="flex flex-col">
@@ -560,222 +819,6 @@
 					</div>
 				</div>
 			</Card>
-		</div>
-		<div class="ml-2 grid grid-cols-[auto_1fr_auto] gap-4">
-			<div class="flex flex-col">
-				<Tabs listBorder="border border-surface-800" listClasses="h-auto" bind:value={group}>
-					{#snippet list()}
-						<Tabs.Control
-							value="inventory"
-							classes="w-full"
-							base="border-none hover:ring-secondary-500 hover:ring"
-							labelBase="py-1"
-							stateActive="bg-surface-700"
-							padding="p-0"
-						>
-							Inventory
-						</Tabs.Control>
-						<Tabs.Control
-							value="key_items"
-							classes="w-full"
-							base="border-none hover:ring-secondary-500 hover:ring"
-							labelBase="py-1"
-							stateActive="bg-surface-700"
-							padding="p-0"
-						>
-							Key Items
-						</Tabs.Control>
-					{/snippet}
-					{#snippet content()}
-						<Tabs.Panel value="inventory">
-							<div class="grid grid-cols-6 gap-2">
-								{#each Object.values(commonContainer.slots) as _, index}
-									<ItemBadge
-										bind:slot={commonContainer.slots[index]}
-										itemGroup="Common"
-										onCopyPaste={(event) => handleCopyPaste(event, commonContainer.slots[index])}
-									/>
-								{/each}
-							</div>
-						</Tabs.Panel>
-						<Tabs.Panel value="key_items">
-							<div class="max-h-[500px] overflow-auto">
-								<div class="grid grid-cols-6 gap-2">
-									{#each Object.values(essentialContainer.slots) as _, index}
-										<ItemBadge bind:slot={essentialContainer.slots[index]} itemGroup="KeyItem" />
-									{/each}
-								</div>
-							</div>
-						</Tabs.Panel>
-					{/snippet}
-				</Tabs>
-				<div class="mt-4 flex items-center space-x-2">
-					<Tooltip>
-						<button
-							class="btn preset-filled-primary-500 hover:preset-tonal-secondary xl:btn-md btn-sm px-2 xl:px-4"
-							onclick={clearCommonContainer}
-						>
-							<ChevronsLeftRight class="h-4 w-4 xl:h-6 xl:w-6" />
-						</button>
-						{#snippet popup()}
-							<span>Clear Inventory</span>
-						{/snippet}
-					</Tooltip>
-					<Tooltip>
-						<button
-							class="btn preset-filled-primary-500 hover:preset-tonal-secondary btn-sm xl:btn-md px-2 xl:px-4"
-							onclick={sortCommonContainer}
-						>
-							<ArrowUp01 class="h-4 w-4 xl:h-6 xl:w-6" />
-						</button>
-						{#snippet popup()}
-							<span>Sort Inventory</span>
-						{/snippet}
-					</Tooltip>
-					<Tooltip
-						><button
-							class="btn preset-filled-primary-500 hover:preset-tonal-secondary xl:btn-md btn-sm px-2 xl:px-4"
-							onclick={clearEssentialContainer}
-						>
-							<Key class="h-4 w-4 xl:h-6 xl:w-6" />
-						</button>
-						{#snippet popup()}
-							<span>Clear Key Items</span>
-						{/snippet}
-					</Tooltip>
-					<Tooltip>
-						<button
-							class="btn preset-filled-primary-500 hover:preset-tonal-secondary xl:btn-md btn-sm px-2 xl:px-4"
-							onclick={clearWeaponLoadOutContainer}
-						>
-							<Swords class="h-4 w-4 xl:h-6 xl:w-6" />
-						</button>
-						{#snippet popup()}
-							<span>Clear Weapons</span>
-						{/snippet}
-					</Tooltip>
-					<Tooltip>
-						<button
-							class="btn preset-filled-primary-500 hover:preset-tonal-secondary xl:btn-md btn-sm px-2 xl:px-4"
-							onclick={clearEquipmentArmorContainer}
-						>
-							<Shield class="h-4 w-4 xl:h-6 xl:w-6" />
-						</button>
-						{#snippet popup()}
-							<span>Clear Armor</span>
-						{/snippet}
-					</Tooltip>
-					<Tooltip>
-						<button
-							class="btn preset-filled-primary-500 hover:preset-tonal-secondary xl:btn-md btn-sm px-2 xl:px-4"
-							onclick={clearFoodEquipContainer}
-						>
-							<Pizza class="h-4 w-4 xl:h-6 xl:w-6" />
-						</button>
-						{#snippet popup()}
-							<span>Clear Food</span>
-						{/snippet}
-					</Tooltip>
-					<Tooltip>
-						<button
-							class="btn preset-filled-primary-500 hover:preset-tonal-secondary xl:btn-md btn-sm px-2 xl:px-4"
-							onclick={clearAll}
-						>
-							<Bomb class="h-4 w-4 xl:h-6 xl:w-6" />
-						</button>
-						{#snippet popup()}
-							<span>Clear All</span>
-						{/snippet}
-					</Tooltip>
-				</div>
-			</div>
-			<div class="grid grid-cols-[auto_1fr_auto]">
-				<div class="flex flex-col space-y-2">
-					<ItemHeader text="Weapon" />
-					<div class="flex max-w-[65px] flex-col space-y-2">
-						{#each Object.values(weaponLoadOutContainer.slots) as _, index}
-							<ItemBadge
-								bind:slot={weaponLoadOutContainer.slots[index]}
-								itemGroup="Weapon"
-								onCopyPaste={(event) =>
-									handleCopyPaste(event, weaponLoadOutContainer.slots[index], false)}
-							/>
-						{/each}
-					</div>
-					<ItemHeader text="Accessory" />
-					<div class="ml-2">
-						<div class="grid max-h-36 max-w-36 grid-cols-2 gap-2">
-							{#each accessoryGear as _, index}
-								<ItemBadge
-									bind:slot={accessoryGear[index]}
-									itemGroup="Accessory"
-									onCopyPaste={(event) => handleCopyPaste(event, accessoryGear[index], false)}
-								/>
-							{/each}
-						</div>
-					</div>
-				</div>
-				<div class="flex flex-col items-center justify-center">
-					<span class="flex h-1/3 items-end">
-						{#await getItemIcon(headGear.static_id) then icon}
-							{#if icon}
-								<enhanced:img src={icon} alt={headGear.static_id} class="h-12 w-12 xl:h-16 xl:w-16"
-								></enhanced:img>
-							{/if}
-						{/await}
-					</span>
-					<span class="h-2/3">
-						{#await getItemIcon(bodyGear.static_id) then icon}
-							{#if icon}
-								<enhanced:img src={icon} alt={bodyGear.static_id} class="h-56 w-56 xl:h-64 xl:w-64"
-								></enhanced:img>
-							{/if}
-						{/await}
-					</span>
-				</div>
-				<div class="flex flex-col space-y-2">
-					<ItemHeader text="Head" />
-					<ItemBadge
-						bind:slot={headGear}
-						itemGroup="Head"
-						onCopyPaste={(event) => handleCopyPaste(event, headGear, false)}
-					/>
-					<ItemHeader text="Body" />
-					<ItemBadge
-						bind:slot={bodyGear}
-						itemGroup="Body"
-						onCopyPaste={(event) => handleCopyPaste(event, bodyGear, false)}
-					/>
-					<ItemHeader text="Shield" />
-					<ItemBadge
-						bind:slot={shieldGear}
-						itemGroup="Shield"
-						onCopyPaste={(event) => handleCopyPaste(event, shieldGear, false)}
-					/>
-					<ItemHeader text="Glider" />
-					<ItemBadge
-						bind:slot={gliderGear}
-						itemGroup="Glider"
-						onCopyPaste={(event) => handleCopyPaste(event, gliderGear, false)}
-					/>
-				</div>
-				<div class="col-span-3 ml-12 space-y-2">
-					<ItemHeader text="Food" />
-					<div class="ml-2">
-						<div class="flex flex-row space-x-2">
-							{#each Object.values(foodEquipContainer.slots) as _, index}
-								<ItemBadge
-									bind:slot={foodEquipContainer.slots[index]}
-									itemGroup="Food"
-									onCopyPaste={(event) =>
-										handleCopyPaste(event, foodEquipContainer.slots[index], false)}
-								/>
-							{/each}
-						</div>
-					</div>
-				</div>
-			</div>
-			<PlayerPresets />
 		</div>
 	</div>
 {/if}

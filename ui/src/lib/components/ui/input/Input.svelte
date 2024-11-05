@@ -82,5 +82,6 @@
 		{autocomplete}
 		class={inputClass}
 		{...additionalProps}
+		onchange={() => (value > max ? (value = max) : value < min ? (value = min) : value)}
 	/>
 </label>

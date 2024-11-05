@@ -498,6 +498,15 @@ class PalObjects:
         "作業速度",  # Work Speed
     ]
 
+    StatusNameMap = {
+        "最大HP": "max_hp",
+        "最大SP": "max_sp",
+        "攻撃力": "attack",
+        "所持重量": "weight",
+        "捕獲率": "capture_rate",
+        "作業速度": "work_speed",
+    }
+
     ExStatusNames = [
         "最大HP",  # Max HP
         "最大SP",  # Max SP
@@ -505,6 +514,14 @@ class PalObjects:
         "所持重量",  # Carrying Capacity
         "作業速度",  # Work Speed
     ]
+
+    ExStatusNameMap = {
+        "最大HP": "max_hp",
+        "最大SP": "max_sp",
+        "攻撃力": "attack",
+        "所持重量": "weight",
+        "作業速度": "work_speed",
+    }
 
     @staticmethod
     def PalSaveParameter(

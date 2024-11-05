@@ -1,12 +1,16 @@
 <script lang="ts">
 	import { TextInputModal } from '$components/modals';
-	import { List, Tooltip } from '$components/ui';
+	import { List, Tooltip, TooltipButton } from '$components/ui';
 	import { presetsData, itemsData } from '$lib/data';
 	import type { ItemContainer, ItemContainerSlot, PresetProfile } from '$lib/types';
 	import { getAppState, getModalState } from '$states';
 	import { EntryState } from '$types';
 	import { deepCopy } from '$utils';
-	import { Copy, Edit, Play, Plus, Trash, X } from 'lucide-svelte';
+	import { Edit, Play, Plus, Trash, X } from 'lucide-svelte';
+
+	let { containerRef } = $props<{
+		containerRef: HTMLDivElement | null;
+	}>();
 
 	const appState = getAppState();
 	const modal = getModalState();
@@ -17,16 +21,15 @@
 	let selectedPresets: ExtendedPresetProfile[] = $state([]);
 	let presets: Record<string, PresetProfile> = $state({});
 	let filteredPresets: ExtendedPresetProfile[] = $state([]);
-	let containerRef: HTMLDivElement;
-	let listWrapperStyle = $state('');
 	let selectAll: boolean = $state(false);
+	let listWrapperStyle = $state('');
 
 	function calculateHeight() {
 		if (containerRef) {
 			const rect = containerRef.getBoundingClientRect();
 			const windowHeight = window.innerHeight;
-			const listHeight = windowHeight - rect.top - 60;
-			listWrapperStyle = `height: ${listHeight}px`;
+			const listHeight = windowHeight - rect.top - 320;
+			listWrapperStyle = `height: ${listHeight}px;`;
 		}
 	}
 
@@ -174,48 +177,32 @@
 	});
 </script>
 
-<div class="mr-4 flex min-w-64 max-w-96 flex-col space-y-2" bind:this={containerRef}>
+<div class="flex min-w-64 max-w-96 flex-col space-y-2">
 	<div class="btn-group bg-surface-900 items-center rounded p-1">
-		<Tooltip position="left">
-			<button class="btn hover:preset-tonal-secondary p-2" onclick={handleAddPreset}>
-				<Plus />
-			</button>
-			{#snippet popup()}
-				Create a preset from your current selection
-			{/snippet}
-		</Tooltip>
+		<TooltipButton
+			onclick={handleAddPreset}
+			popupLabel="Create a preset from your current selection"
+		>
+			<Plus />
+		</TooltipButton>
 		{#if selectedPresets.length === 1}
-			<Tooltip>
-				<button class="btn hover:preset-tonal-secondary p-2" onclick={handleApplyPreset}>
-					<Play />
-				</button>
-				{#snippet popup()}
-					Apply selected preset
-				{/snippet}
-			</Tooltip>
+			<TooltipButton onclick={handleApplyPreset} popupLabel="Apply selected preset">
+				<Play />
+			</TooltipButton>
 		{/if}
 		{#if selectedPresets.length >= 1}
-			<Tooltip>
-				<button class="btn hover:preset-tonal-secondary p-2" onclick={handleDeletePresets}>
-					<Trash />
-				</button>
-				{#snippet popup()}
-					Delete selected preset(s)
-				{/snippet}
-			</Tooltip>
-			<Tooltip>
-				<button class="btn hover:preset-tonal-secondary p-2" onclick={() => (selectedPresets = [])}>
-					<X />
-				</button>
-				{#snippet popup()}
-					Clear selected
-				{/snippet}
-			</Tooltip>
+			<TooltipButton onclick={handleDeletePresets} popupLabel="Delete selected preset(s)">
+				<Trash />
+			</TooltipButton>
+			<TooltipButton onclick={() => (selectedPresets = [])} popupLabel="Clear selected">
+				<X />
+			</TooltipButton>
 		{/if}
 	</div>
-	<div class="overflow-hidden" style={listWrapperStyle}>
+	<div class="overflow-scroll" style={listWrapperStyle}>
 		<List
-			baseClass="h-full bg-surface-800"
+			baseClass="bg-surface-800"
+			listClass="overflow-scroll"
 			bind:items={filteredPresets}
 			bind:selectedItems={selectedPresets}
 			bind:selectedItem={selectedPreset}

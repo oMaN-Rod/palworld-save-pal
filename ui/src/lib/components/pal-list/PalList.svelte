@@ -550,8 +550,8 @@
 			{/if}
 		</div>
 		<Accordion classes="bg-surface-900" collapsible>
-			<Accordion.Item id="filter" controlHover="hover:bg-secondary-500/25">
-				{#snippet controlLead()}<Search />{/snippet}
+			<Accordion.Item value="filter" controlHover="hover:bg-secondary-500/25">
+				{#snippet lead()}<Search />{/snippet}
 				{#snippet control()}
 					<div class="flex flex-row items-center">
 						<Search class="mr-2 h-5 w-5" />
@@ -624,6 +624,7 @@
 											<button
 												class={elementClass(element)}
 												onclick={() => (selectedFilter = element)}
+												aria-label={element}
 											>
 												<enhanced:img src={icon} alt={element} class="pal-element-badge"
 												></enhanced:img>

@@ -1,17 +1,24 @@
 <script lang="ts">
+	import { cn } from '$theme';
+
 	let {
 		onClick,
 		label = 'Edit',
+		class: _class = '',
 		disabled = false
 	} = $props<{
 		onClick: () => void;
 		label: string;
+		class?: string;
 		disabled?: boolean;
 	}>();
 </script>
 
 <button
-	class="bg-surface-800 text-one-surface hover:ring-secondary-500 relative mx-2 h-1/2 rounded px-6 py-1 font-semibold hover:ring"
+	class={cn(
+		'bg-surface-800 text-one-surface hover:ring-secondary-500 relative mx-2 h-1/2 rounded px-6 py-1 font-semibold hover:ring',
+		_class
+	)}
 	onclick={onClick}
 	{disabled}
 >

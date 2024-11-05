@@ -50,7 +50,7 @@
 		labelClass="w-24"
 		inputClass="h-8"
 		bind:value={hp[0]}
-		on:change={handleUpdateHp}
+		onchange={handleUpdateHp}
 	/>
 </div>
 <div class="flex flex-row items-center space-x-2">
@@ -71,7 +71,7 @@
 		labelClass="w-24"
 		inputClass="h-8"
 		bind:value={attack[0]}
-		on:change={handleUpdateAttack}
+		onchange={handleUpdateAttack}
 	/>
 </div>
 <div class="flex h-8 flex-row items-center space-x-2">
@@ -92,6 +92,6 @@
 		labelClass="w-24"
 		inputClass="h-8"
 		bind:value={defense[0]}
-		on:change={handleUpdateDefense}
+		onchange={handleUpdateDefense}
 	/>
 </div>

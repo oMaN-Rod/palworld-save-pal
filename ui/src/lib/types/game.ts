@@ -33,10 +33,28 @@ export type Pal = {
 	exp: number;
 };
 
+export type StatusPointList = {
+	max_hp: number;
+	max_sp: number;
+	attack: number;
+	weight: number;
+	capture_rate: number;
+	work_speed: number;
+};
+
+export type ExStatusPointList = {
+	max_hp: number;
+	max_sp: number;
+	attack: number;
+	weight: number;
+	work_speed: number;
+};
+
 export type Player = {
 	uid: string;
 	nickname: string;
 	level: number;
+	hp: number;
 	pals?: Record<string, Pal>;
 	pal_box_id: string;
 	otomo_container_id: string;
@@ -47,6 +65,10 @@ export type Player = {
 	food_equip_container: ItemContainer;
 	state: EntryState;
 	exp: number;
+	stomach: number;
+	sanity: number;
+	status_point_list: StatusPointList;
+	ex_status_point_list: ExStatusPointList;
 };
 
 export type SaveFile = {

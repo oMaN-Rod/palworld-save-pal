@@ -21,7 +21,8 @@
 		listHeader,
 		listItemPopup,
 		onselect = (item: T) => {},
-		idKey = 'id'
+		idKey = 'id',
+		...additionalProps
 	} = $props<{
 		items: T[];
 		selectedItem?: T;
@@ -40,6 +41,7 @@
 		listItemPopup?: Snippet<[T]>;
 		onselect?: (item: any) => void;
 		idKey?: string;
+		[key: string]: any;
 	}>();
 
 	const baseClass = $derived(cn('flex flex-col', _baseClass));
@@ -113,7 +115,7 @@
 	});
 </script>
 
-<div class={baseClass}>
+<div class={baseClass} {...additionalProps}>
 	<div class="bg-surface-900 sticky top-0 z-10 flex-shrink-0 p-2">
 		<div class={headerClass}>
 			{#if canSelect}

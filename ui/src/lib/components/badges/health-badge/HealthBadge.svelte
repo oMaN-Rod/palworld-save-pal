@@ -88,8 +88,8 @@
 	<div class="flex flex-row items-center">
 		{#if hpIcon}
 			<Tooltip>
-				<button onclick={handleHeal}>
-					<enhanced:img src={hpIcon} alt="Food" class="mr-2 h-6 w-6"></enhanced:img>
+				<button onclick={handleHeal} aria-label="Health">
+					<enhanced:img src={hpIcon} alt="Health" class="mr-2 h-6 w-6"></enhanced:img>
 				</button>
 
 				{#snippet popup()}
@@ -110,7 +110,7 @@
 	<div class="flex flex-row items-center">
 		{#if foodIcon}
 			<Tooltip>
-				<button class="mr-2" onclick={handleEat}>
+				<button class="mr-2" onclick={handleEat} aria-label="Food">
 					<enhanced:img src={foodIcon} alt="Food" class="h-6 w-6"></enhanced:img>
 				</button>
 				{#snippet popup()}

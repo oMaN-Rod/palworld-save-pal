@@ -24,6 +24,11 @@ class Player(BaseModel):
     nickname: str
     level: int
     exp: int
+    hp: int = 5000
+    stomach: float = 100.0
+    sanity: float = 100.0
+    status_point_list: Dict[str, int] = Field(default_factory=dict)
+    ext_status_point_list: Dict[str, int] = Field(default_factory=dict)
     instance_id: Optional[UUID] = Field(default=None)
     guild: Optional[Guild] = Field(default=None)
 
@@ -165,6 +170,29 @@ class Player(BaseModel):
                         self._character_save_parameter["Exp"] = (
                             PalObjects.Int64Property(value)
                         )
+                case "status_point_list" | "ext_status_point_list":
+                    setattr(self, key, value)
+                    self._update_status_points()
+                case "hp":
+                    self.hp = value
+                    if "Hp" in self._character_save_parameter:
+                        PalObjects.set_fixed_point64(
+                            self._character_save_parameter["Hp"], value=value
+                        )
+                    else:
+                        self._character_save_parameter["Hp"] = PalObjects.FixedPoint64(
+                            value
+                        )
+                case "stomach":
+                    self.stomach = value
+                    if "FullStomach" in self._character_save_parameter:
+                        PalObjects.set_value(
+                            self._character_save_parameter["FullStomach"], value=value
+                        )
+                    else:
+                        self._character_save_parameter["FullStomach"] = (
+                            PalObjects.FloatProperty(value)
+                        )
                 case "common_container":
                     self.common_container.update_from(value)
                 case "essential_container":
@@ -185,6 +213,77 @@ class Player(BaseModel):
                 player_save_data, "IndividualId", "value", "InstanceId"
             )
         )
+        self._get_hp()
+        self._get_status_points()
+        self._get_stomach()
+        self._get_sanity()
+
+    def _get_hp(self):
+        self.hp = PalObjects.get_fixed_point64(self._character_save_parameter["Hp"])
+
+    def _get_stomach(self):
+        self.stomach = (
+            PalObjects.get_value(self._character_save_parameter["FullStomach"])
+            if "FullStomach" in self._character_save_parameter
+            else 150.0
+        )
+
+    def _get_sanity(self):
+        self.sanity = (
+            PalObjects.get_value(self._character_save_parameter["SanityValue"], 100.0)
+            if "SanityValue" in self._character_save_parameter
+            else 100.0
+        )
+
+    def _get_status_points(self):
+        status_point_list = PalObjects.get_array_property(
+            self._character_save_parameter["GotStatusPointList"]
+        )
+        self.status_point_list = {
+            PalObjects.StatusNameMap[
+                PalObjects.get_value(item["StatusName"])
+            ]: PalObjects.get_value(item["StatusPoint"])
+            for item in status_point_list
+        }
+        ext_status_point_list = PalObjects.get_array_property(
+            self._character_save_parameter["GotExStatusPointList"]
+        )
+        self.ext_status_point_list = {
+            PalObjects.ExStatusNameMap[
+                PalObjects.get_value(item["StatusName"])
+            ]: PalObjects.get_value(item["StatusPoint"])
+            for item in ext_status_point_list
+        }
+        for name, value in self.ext_status_point_list.items():
+            if name in self.status_point_list:
+                self.status_point_list[name] += value
+
+    def _update_status_points(self) -> None:
+        status_point_list = PalObjects.get_array_property(
+            self._character_save_parameter["GotStatusPointList"]
+        )
+
+        reverse_status_map = {v: k for k, v in PalObjects.StatusNameMap.items()}
+
+        for status_name, point_value in self.status_point_list.items():
+            japanese_name = reverse_status_map[status_name]
+            for item in status_point_list:
+                if PalObjects.get_value(item["StatusName"]) == japanese_name:
+                    PalObjects.set_value(item["StatusPoint"], point_value)
+                    break
+
+        ext_status_point_list = PalObjects.get_array_property(
+            self._character_save_parameter["GotExStatusPointList"]
+        )
+
+        reverse_ex_status_map = {v: k for k, v in PalObjects.ExStatusNameMap.items()}
+
+        for status_name, point_value in self.ext_status_point_list.items():
+            japanese_name = reverse_ex_status_map[status_name]
+            for item in ext_status_point_list:
+                if PalObjects.get_value(item["StatusName"]) == japanese_name:
+                    PalObjects.set_value(item["StatusPoint"], 0)
+                    break
 
     def _load_pal_box(self, character_container_save_data: Dict[str, Any]):
         player_save_data = PalObjects.get_value(
