@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getNavigationState, getAppState } from '$states';
-	import { Nav } from '@skeletonlabs/skeleton-svelte';
+	import { Navigation } from '@skeletonlabs/skeleton-svelte';
 	import { File, Pencil } from 'lucide-svelte';
 	import { page } from '$app/stores';
 
@@ -17,10 +17,10 @@
 	});
 </script>
 
-<Nav.Rail width="48px">
+<Navigation.Rail width="48px">
 	{#snippet tiles()}
 		{#if appState.saveFile}
-			<Nav.Tile
+			<Navigation.Tile
 				title="Edit"
 				id="edit"
 				href="/edit"
@@ -28,9 +28,9 @@
 				selected={navigationState.activePage === 'edit'}
 			>
 				<Pencil />
-			</Nav.Tile>
+			</Navigation.Tile>
 		{/if}
-		<Nav.Tile
+		<Navigation.Tile
 			title="File"
 			id="file"
 			href="/file"
@@ -38,6 +38,6 @@
 			selected={navigationState.activePage === 'file'}
 		>
 			<File />
-		</Nav.Tile>
+		</Navigation.Tile>
 	{/snippet}
-</Nav.Rail>
+</Navigation.Rail>
