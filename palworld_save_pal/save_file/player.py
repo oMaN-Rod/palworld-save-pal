@@ -219,7 +219,10 @@ class Player(BaseModel):
         self._get_sanity()
 
     def _get_hp(self):
-        self.hp = PalObjects.get_fixed_point64(self._character_save_parameter["Hp"])
+        if "Hp" in self._character_save_parameter:
+            self.hp = PalObjects.get_fixed_point64(self._character_save_parameter["Hp"])
+        else:
+            self.hp = 0
 
     def _get_stomach(self):
         self.stomach = (
