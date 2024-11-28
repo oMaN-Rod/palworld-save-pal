@@ -10,11 +10,11 @@
 
 	let colorClasses = $derived(
 		{
-			default: 'bg-primary-300 border-primary-500',
-			success: 'bg-success-300 border-success-500',
-			error: 'bg-error-300 border-error-500',
-			warning: 'bg-warning-300 border-warning-500 text-surface-800',
-			info: 'bg-secondary-300 border-secondary-500'
+			default: 'bg-primary-700 border-primary-800',
+			success: 'bg-success-700 border-success-800',
+			error: 'bg-error-700 border-error-800',
+			warning: 'bg-warning-700 border-warning-800 text-surface-800',
+			info: 'bg-secondary-700 border-secondary-800'
 		}[toast.color || 'default']
 	);
 
