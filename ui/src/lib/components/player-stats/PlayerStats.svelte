@@ -102,6 +102,7 @@
 					player.status_point_list.weight = result;
 					break;
 			}
+			player.state = EntryState.MODIFIED;
 		}
 	}
 

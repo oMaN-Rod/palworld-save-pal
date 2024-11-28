@@ -4,15 +4,16 @@
 
 	import { Drawer, PlayerList, PalList } from '$components';
 	import { Tooltip } from '$components/ui';
-	import { MessageType, type Pal, type Player } from '$types';
+	import { EntryState, MessageType, type Pal, type Player } from '$types';
 	import { SaveAll } from 'lucide-svelte';
-	import { getAppState, getSocketState, getNavigationState } from '$states';
+	import { getAppState, getSocketState, getNavigationState, getToastState } from '$states';
 	import { Tabs } from '@skeletonlabs/skeleton-svelte';
 	import { goto } from '$app/navigation';
 
 	const appState = getAppState();
 	const ws = getSocketState();
 	const nav = getNavigationState();
+	const toast = getToastState();
 
 	interface ModifiedData {
 		modified_pals?: Record<string, Pal>;
@@ -21,30 +22,37 @@
 
 	async function handleSaveState() {
 		let modifiedData: ModifiedData = {};
+		const modifiedPals = Object.entries(appState.modifiedPals)
+			.filter(([_, pal]) => pal.state === EntryState.MODIFIED)
+			.map(([key, pal]) => {
+				// @ts-ignore - We're removing the id from the pal object, no clue where it's coming from...
+				const { id, ...palWithoutId } = pal;
+				palWithoutId.state = EntryState.NONE;
+				return [key, palWithoutId];
+			});
 
-		if (Object.keys(appState.modifiedPals).length > 0) {
-			modifiedData.modified_pals = Object.fromEntries(
-				Object.entries(appState.modifiedPals).map(([key, pal]) => {
-					// @ts-ignore - We're removing the id from the pal object, no clue where it's coming from...
-					const { id, ...palWithoutId } = pal;
-					return [key, palWithoutId];
-				})
-			);
-		}
+		const modifiedPlayers = Object.entries(appState.modifiedPlayers)
+			.filter(([_, player]) => player.state === EntryState.MODIFIED)
+			.map(([id, player]) => {
+				const { pals, ...playerWithoutPals } = player;
+				playerWithoutPals.state = EntryState.NONE;
+				return [id, playerWithoutPals];
+			});
 
-		if (Object.keys(appState.modifiedPlayers).length > 0) {
-			modifiedData.modified_players = Object.fromEntries(
-				Object.entries(appState.modifiedPlayers).map(([id, player]) => {
-					const { pals, ...playerWithoutPals } = player;
-					return [id, playerWithoutPals];
-				})
-			);
-		}
-
-		if (Object.keys(modifiedData).length === 0) {
+		if (modifiedPals.length === 0 && modifiedPlayers.length === 0) {
 			console.log('No modifications to save');
+			toast.add('No modifications to save', undefined, 'info');
 			return;
 		}
+
+		if (modifiedPals.length > 0) {
+			modifiedData.modified_pals = Object.fromEntries(modifiedPals);
+		}
+
+		if (modifiedPlayers.length > 0) {
+			modifiedData.modified_players = Object.fromEntries(modifiedPlayers);
+		}
+
 		await goto('/loading');
 
 		const data = {
@@ -53,6 +61,8 @@
 		};
 
 		ws.send(JSON.stringify(data));
+
+		appState.resetModified();
 
 		const entityTypes = Object.keys(modifiedData).map((key) =>
 			key.replace('modified', '').toLowerCase()
@@ -95,7 +105,7 @@
 					{/if}
 				</div>
 			</Drawer>
-			<Tabs listJustify="justify-center" bind:value={nav.activeTab} class="flex h-full flex-col">
+			<Tabs listJustify="justify-center" bind:value={nav.activeTab} classes="flex h-full flex-col">
 				{#snippet list()}
 					<div class="flex-shrink-0">
 						<Tabs.Control value="player">Player</Tabs.Control>
@@ -104,10 +114,10 @@
 				{/snippet}
 				{#snippet content()}
 					<div class="flex-grow overflow-hidden">
-						<Tabs.Panel value="player" class="h-full">
+						<Tabs.Panel value="player" classes="h-full">
 							<PlayerEdit />
 						</Tabs.Panel>
-						<Tabs.Panel value="pal" class="h-full">
+						<Tabs.Panel value="pal" classes="h-full">
 							<PalEdit />
 						</Tabs.Panel>
 					</div>

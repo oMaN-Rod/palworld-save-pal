@@ -160,7 +160,7 @@
 
 	async function copyItem(slot: ItemContainerSlot) {
 		if (slot.static_id !== 'None') {
-			appState.setClipboardItem(slot);
+			appState.clipboardItem = slot;
 			let itemName = slot.static_id;
 			const itemData = await itemsData.searchItems(slot.static_id);
 			if (itemData) {
@@ -168,7 +168,7 @@
 			}
 			toast.add(`${itemName} copied to clipboard`);
 		} else {
-			appState.setClipboardItem(null);
+			appState.clipboardItem = null;
 			toast.add('Clipboard cleared');
 		}
 	}
@@ -209,6 +209,12 @@
 			await copyItem(slot);
 		} else {
 			toast.add('Cannot paste here (yet™)', undefined, 'warning');
+		}
+	}
+
+	function onItemUpdate() {
+		if (appState.selectedPlayer) {
+			appState.selectedPlayer.state = EntryState.MODIFIED;
 		}
 	}
 
@@ -628,6 +634,7 @@
 											bind:slot={commonContainer.slots[index]}
 											itemGroup="Common"
 											onCopyPaste={(event) => handleCopyPaste(event, commonContainer.slots[index])}
+											onUpdate={onItemUpdate}
 										/>
 									{/each}
 								</div>
@@ -636,7 +643,11 @@
 								<div class="max-h-[500px] overflow-auto">
 									<div class="grid grid-cols-6 gap-2">
 										{#each Object.values(essentialContainer.slots) as _, index}
-											<ItemBadge bind:slot={essentialContainer.slots[index]} itemGroup="KeyItem" />
+											<ItemBadge
+												bind:slot={essentialContainer.slots[index]}
+												itemGroup="KeyItem"
+												onUpdate={onItemUpdate}
+											/>
 										{/each}
 									</div>
 								</div>
@@ -655,6 +666,7 @@
 									itemGroup="Weapon"
 									onCopyPaste={(event) =>
 										handleCopyPaste(event, weaponLoadOutContainer.slots[index], false)}
+									onUpdate={onItemUpdate}
 								/>
 							{/each}
 						</div>
@@ -666,6 +678,7 @@
 										bind:slot={accessoryGear[index]}
 										itemGroup="Accessory"
 										onCopyPaste={(event) => handleCopyPaste(event, accessoryGear[index], false)}
+										onUpdate={onItemUpdate}
 									/>
 								{/each}
 							</div>
@@ -701,24 +714,28 @@
 							bind:slot={headGear}
 							itemGroup="Head"
 							onCopyPaste={(event) => handleCopyPaste(event, headGear, false)}
+							onUpdate={onItemUpdate}
 						/>
 						<ItemHeader text="Body" />
 						<ItemBadge
 							bind:slot={bodyGear}
 							itemGroup="Body"
 							onCopyPaste={(event) => handleCopyPaste(event, bodyGear, false)}
+							onUpdate={onItemUpdate}
 						/>
 						<ItemHeader text="Shield" />
 						<ItemBadge
 							bind:slot={shieldGear}
 							itemGroup="Shield"
 							onCopyPaste={(event) => handleCopyPaste(event, shieldGear, false)}
+							onUpdate={onItemUpdate}
 						/>
 						<ItemHeader text="Glider" />
 						<ItemBadge
 							bind:slot={gliderGear}
 							itemGroup="Glider"
 							onCopyPaste={(event) => handleCopyPaste(event, gliderGear, false)}
+							onUpdate={onItemUpdate}
 						/>
 					</div>
 					<div class="col-span-3 ml-12 mt-2 space-y-2">
@@ -731,6 +748,7 @@
 										itemGroup="Food"
 										onCopyPaste={(event) =>
 											handleCopyPaste(event, foodEquipContainer.slots[index], false)}
+										onUpdate={onItemUpdate}
 									/>
 								{/each}
 							</div>

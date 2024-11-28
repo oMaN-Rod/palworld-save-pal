@@ -64,7 +64,7 @@ export function createAppState() {
 		get clipboardItem() {
 			return clipboardItem;
 		},
-		setClipboardItem(item: ItemContainerSlot | null) {
+		set clipboardItem(item: ItemContainerSlot | null) {
 			clipboardItem = item;
 		},
 		get players() {
@@ -109,7 +109,11 @@ export function createAppState() {
 		get modifiedPlayers() {
 			return modifiedPlayers;
 		},
-		resetState
+		resetState,
+		resetModified() {
+			modifiedPlayers = {};
+			modifiedPals = {};
+		}
 	};
 }
 

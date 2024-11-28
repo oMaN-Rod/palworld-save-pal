@@ -19,11 +19,13 @@
 	let {
 		slot = $bindable<ItemContainerSlot>(),
 		itemGroup,
-		onCopyPaste
+		onCopyPaste,
+		onUpdate
 	} = $props<{
 		slot: ItemContainerSlot;
 		itemGroup: ItemGroup;
 		onCopyPaste?: (event: MouseEvent) => void;
+		onUpdate?: (slot: ItemContainerSlot) => void;
 	}>();
 
 	const modal = getModalState();
@@ -209,6 +211,7 @@
 		}
 
 		initItem(static_id);
+		if (onUpdate) onUpdate(slot);
 	}
 
 	$effect(() => {

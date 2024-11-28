@@ -6,7 +6,6 @@
 		StatsBadges,
 		WorkSuitabilities,
 		TextInputModal,
-		Spinner,
 		Talents,
 		LearnedSkillSelectModal
 	} from '$components';
