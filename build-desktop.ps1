@@ -3,10 +3,10 @@
 # Navigate to the script's directory
 Set-Location -Path $PSScriptRoot
 
-pyinstaller desktop.spec
+python -m nuitka --onefile .\desktop.py --output-filename=PSP.exe --windows-icon-from-ico=ui/static/favicon.ico --windows-console-mode=disable
 
 if ($LASTEXITCODE -ne 0) {
-    Write-Error "pyinstaller failed. Exiting."
+    Write-Error "nuitka failed. Exiting."
     exit 1
 }
 
@@ -14,11 +14,6 @@ if ($LASTEXITCODE -ne 0) {
 if (Test-Path -Path ".\build\") {
     Remove-Item -Path ".\build\" -Recurse -Force
 }
-
-if (Test-Path -Path ".\dist\build\") {
-    Remove-Item -Path ".\dist\build\" -Recurse -Force
-}
-
 
 # Create or update the .env file with PUBLIC_WS_URL and PUBLIC_DESKTOP_MODE
 @"
@@ -83,8 +78,23 @@ if ($LASTEXITCODE -ne 0) {
 # Navigate back to the root directory
 Set-Location -Path ".."
 
+# Get version number from palworld_save_pal/__version__.py
+$version = (Get-Content -Path ".\palworld_save_pal\__version__.py" | Select-String -Pattern "__version__").Line.Split('"')[1]
+
+# Create new dist directory with name psp-windows-$version
+$distDir = ".\dist\psp-windows-$version"
+if (Test-Path -Path $distDir) {
+    Remove-Item -Path $distDir -Recurse -Force
+}
+New-Item -Path $distDir -ItemType Directory | Out-Null
+
 # Copy build to dist
-Copy-Item -Path ".\build\" -Destination ".\dist\" -Recurse -Force
-Copy-Item -Path ".\data\" -Destination ".\dist\" -Recurse -Force
+Move-Item -Path ".\PSP.exe" -Destination $distDir -Force
+Move-Item -Path ".\build\" -Destination $distDir -Force
+Copy-Item -Path ".\data\" -Destination $distDir -Recurse -Force
+
+Remove-Item -Path ".\desktop.build\" -Recurse -Force
+Remove-Item -Path ".\desktop.dist\" -Recurse -Force
+Remove-Item -Path ".\desktop.onefile-build\" -Recurse -Force
 
 Write-Host "Done building the desktop app."
