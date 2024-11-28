@@ -114,9 +114,10 @@ def start_server(host, port, dev_mode):
     app_state.server_instance.start()
 
 
-def start_webview(url, debug):
+def start_webview(url):
     logger.info("Starting webview with URL: %s", url)
     webview.settings["ALLOW_DOWNLOADS"] = True
+    webview.settings["OPEN_DEVTOOLS_IN_DEBUG"] = False
     app_state.webview_window = webview.create_window(
         f"Palworld Save Pal v{__version__}",
         url,
@@ -125,7 +126,7 @@ def start_webview(url, debug):
         min_size=(1366, 768),
     )
     app_state.webview_window.events.closed += on_closed
-    webview.start(debug=debug, user_agent="pywebview")
+    webview.start(debug=True, user_agent="pywebview")
 
 
 def on_closed():
@@ -147,6 +148,8 @@ def parse_arguments():
         "--port", default=5174, type=int, help="Port to run the server on"
     )
     parser.add_argument("--host", default="127.0.0.1", help="Host to run the server on")
+    parser.add_argument("--web-host", type=str, help="Host to run the webview on")
+    parser.add_argument("--web-port", type=int, help="Port to run the webview on")
     return parser.parse_args()
 
 
@@ -167,8 +170,10 @@ def main():
     start_server(args.host, args.port, args.dev)
 
     time.sleep(2)
-    url = f"http://{args.host}:{args.port}"
-    start_webview(url, args.dev)
+    host = args.web_host or args.host
+    port = args.web_port or args.port
+    url = f"http://{host}:{port}"
+    start_webview(url)
 
     logger.debug("Main thread waiting for termination signal")
     app_state.terminate_flag.wait()
