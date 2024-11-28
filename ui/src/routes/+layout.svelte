@@ -33,7 +33,6 @@
 	$effect(() => {
 		if (browser) {
 			isPywebview = navigator.userAgent.includes('pywebview');
-			console.log('isPywebview', isPywebview, navigator.userAgent);
 		} else {
 			console.log('Browser not available');
 		}

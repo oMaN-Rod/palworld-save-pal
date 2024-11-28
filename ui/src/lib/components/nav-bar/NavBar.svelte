@@ -1,43 +1,24 @@
 <script lang="ts">
 	import { getNavigationState, getAppState } from '$states';
 	import { Navigation } from '@skeletonlabs/skeleton-svelte';
-	import { File, Pencil } from 'lucide-svelte';
-	import { page } from '$app/stores';
+	import { File, Pencil, Info } from 'lucide-svelte';
 
 	let navigationState = getNavigationState();
 	let appState = getAppState();
-
-	$effect(() => {
-		const currentPath = $page.url.pathname;
-		if (currentPath === '/edit') {
-			navigationState.activePage = 'edit';
-		} else if (currentPath === '/file') {
-			navigationState.activePage = 'file';
-		}
-	});
 </script>
 
-<Navigation.Rail width="48px">
+<Navigation.Rail width="48px" bind:value={navigationState.activePage}>
 	{#snippet tiles()}
 		{#if appState.saveFile}
-			<Navigation.Tile
-				title="Edit"
-				id="edit"
-				href="/edit"
-				active="bg-secondary-500"
-				selected={navigationState.activePage === 'edit'}
-			>
+			<Navigation.Tile label="Edit" title="Edit" id="edit" href="/edit" active="bg-secondary-500">
 				<Pencil />
 			</Navigation.Tile>
 		{/if}
-		<Navigation.Tile
-			title="File"
-			id="file"
-			href="/file"
-			active="bg-secondary-500"
-			selected={navigationState.activePage === 'file'}
-		>
+		<Navigation.Tile label="Files" title="File" id="file" href="/file" active="bg-secondary-500">
 			<File />
+		</Navigation.Tile>
+		<Navigation.Tile label="About" title="About" id="about" href="/about" active="bg-secondary-500">
+			<Info />
 		</Navigation.Tile>
 	{/snippet}
 </Navigation.Rail>

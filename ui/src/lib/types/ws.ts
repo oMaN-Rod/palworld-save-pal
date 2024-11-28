@@ -25,7 +25,8 @@ export enum MessageType {
 	GET_ITEMS = 'get_items',
 	GET_PALS = 'get_pals',
 	OPEN_IN_BROWSER = 'open_in_browser',
-	GET_EXP_DATA = 'get_exp_data'
+	GET_EXP_DATA = 'get_exp_data',
+	GET_VERSION = 'get_version'
 }
 
 interface UpdateSaveFileData {
