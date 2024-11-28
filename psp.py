@@ -1,10 +1,11 @@
 import argparse
 from pathlib import Path
 import multiprocessing
+from urllib.parse import quote
 
 import uvicorn
 from fastapi import FastAPI, Request, WebSocket, WebSocketDisconnect
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, RedirectResponse
 from palworld_save_pal.ws.manager import ConnectionManager
 
 from palworld_save_pal.utils.logging_config import create_logger, setup_logging
@@ -34,6 +35,12 @@ async def static_files_middleware(request: Request, call_next):
             return FileResponse(index_path)
     elif file_path.is_file():
         return FileResponse(file_path)
+
+    # If no static file matches the requested path, redirect to the root path with the
+    # original URL as a query parameter. This is to handle client-side routing in the SPA.
+    if path != "/":
+        encoded_path = quote(path)
+        return RedirectResponse(url=f"/?path={encoded_path}")
     return await call_next(request)
 
 
