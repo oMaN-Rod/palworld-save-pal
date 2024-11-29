@@ -47,6 +47,9 @@
 			) {
 				return false;
 			}
+			if (item.info.localized_name === 'en Text' || item.info.description === 'en Text') {
+				return false;
+			}
 			switch (group as ItemGroup) {
 				case 'Accessory':
 					return item.details.group == 'Accessory';
