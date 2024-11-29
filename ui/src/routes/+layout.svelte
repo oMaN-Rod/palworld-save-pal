@@ -171,7 +171,7 @@
 	});
 </script>
 
-<Toast position="bottom-center" />
+<Toast position="bottom-center" transition={{ type: 'fly', params: { y: 300 } }} />
 <Modal>
 	<div class="flex h-screen w-full overflow-hidden">
 		<NavBar />

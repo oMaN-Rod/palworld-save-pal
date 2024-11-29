@@ -23,12 +23,12 @@
 </script>
 
 <div
-	class="relative flex min-h-16 min-w-60 flex-col items-center justify-center rounded-md border p-2 shadow-md {colorClasses}"
+	class="max-w-1/2 relative flex min-h-16 min-w-60 flex-col items-center justify-center rounded-md border p-4 shadow-md {colorClasses}"
 	transition:transition={transitionParams}
 >
 	<span class="font-bold">{toast.title}</span>
 	<span>{toast.message}</span>
-	<button class="absolute right-2 top-2 size-5" onclick={() => toastState.remove(toast.id)}>
+	<button class="absolute right-1 top-1 size-5" onclick={() => toastState.remove(toast.id)}>
 		<span class="sr-only">Close toast</span>
 		<X class="size-4" />
 	</button>
