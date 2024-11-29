@@ -1,5 +1,6 @@
 import os
 import time
+import shutil
 
 from fastapi import WebSocket
 from palworld_save_pal.utils.file_manager import FileManager
@@ -35,7 +36,7 @@ async def save_modded_save_handler(_: SaveModdedSaveMessage, ws: WebSocket):
     timestamp = time.strftime("%Y-%m-%d-%M")
     backup_path = os.path.join(backup_dir, f"{file_name}_{timestamp}.sav")
     await ws_callback(f"Backing up save file {save_file.name} to {backup_path}...")
-    os.rename(save_file.name, backup_path)
+    shutil.move(save_file.name, backup_path)
     await ws_callback("Saving modded save file...")
     save_file.to_sav_file(save_file.name)
     await ws_callback(f"Modded save file saved to {save_file.name}")
