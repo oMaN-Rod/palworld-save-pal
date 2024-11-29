@@ -73,6 +73,7 @@ export type Player = {
 
 export type SaveFile = {
 	name: string;
+	world_name?: string;
 	size?: number;
 };
 export interface DynamicItem {

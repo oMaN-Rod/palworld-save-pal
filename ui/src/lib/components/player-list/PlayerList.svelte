@@ -11,6 +11,14 @@
 
 	let selectOptions: SelectOption[] = $state([]);
 
+	const label = $derived.by(() => {
+		const worldName =
+			appState.saveFile?.world_name === 'No LevelMeta.sav found'
+				? undefined
+				: appState.saveFile?.world_name;
+		return worldName ? `Players in ${worldName}` : 'Players';
+	});
+
 	$effect(() => {
 		selectOptions = Object.entries(appState.players as Record<string, Player>).map(
 			([uid, player]) => ({
@@ -26,5 +34,5 @@
 </script>
 
 <div class="w-full" {...additionalProps}>
-	<Select label="Players" options={selectOptions} bind:value={appState.selectedPlayerUid} />
+	<Select {label} options={selectOptions} bind:value={appState.selectedPlayerUid} />
 </div>

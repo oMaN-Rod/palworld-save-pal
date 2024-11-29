@@ -148,6 +148,7 @@ class SaveType(int, Enum):
 class SaveFile(BaseModel):
     name: str = ""
     size: int = 0
+    world_name: str = ""
 
     model_config = ConfigDict(arbitrary_types_allowed=True)
 
@@ -156,6 +157,7 @@ class SaveFile(BaseModel):
     _guilds: Dict[UUID, Guild] = PrivateAttr(default_factory=dict)
 
     _gvas_file: Optional[GvasFile] = PrivateAttr(default=None)
+    _level_meta_gvas_file: Optional[GvasFile] = PrivateAttr(default=None)
     _player_gvas_files: Dict[UUID, GvasFile] = PrivateAttr(default_factory=dict)
 
     _character_save_parameter_map: List[Dict[str, Any]] = PrivateAttr(
@@ -238,6 +240,19 @@ class SaveFile(BaseModel):
         self._gvas_file = GvasFile.load(json.loads(data))
         return self
 
+    def load_level_meta(self, data: bytes):
+        logger.info("Loading %s as GVAS", self.name)
+        raw_gvas, _ = decompress_sav_to_gvas(data)
+        custom_properties = {
+            k: v
+            for k, v in PALWORLD_CUSTOM_PROPERTIES.items()
+            if k not in DISABLED_PROPERTIES
+        }
+        gvas_file = GvasFile.read(
+            raw_gvas, PALWORLD_TYPE_HINTS, custom_properties, allow_nan=True
+        )
+        self._level_meta_gvas_file = gvas_file
+
     def load_level_sav(self, data: bytes):
         logger.info("Loading %s as GVAS", self.name)
         raw_gvas, _ = decompress_sav_to_gvas(data)
@@ -263,13 +278,26 @@ class SaveFile(BaseModel):
     def pal_count(self):
         return len(self._pals)
 
-    def load_sav_files(self, level_sav: bytes, player_sav_files: Dict[str, bytes]):
-        logger.info("Loading %s as SAV", self.name)
+    def load_sav_files(
+        self,
+        level_sav: bytes,
+        player_sav_files: Dict[str, bytes],
+        level_meta: Optional[bytes] = None,
+    ):
+        logger.info("Loading %s as GVAS", self.name)
         raw_gvas, _ = decompress_sav_to_gvas(level_sav)
         gvas_file = GvasFile.read(
             raw_gvas, PALWORLD_TYPE_HINTS, CUSTOM_PROPERTIES, allow_nan=True
         )
         self._gvas_file = gvas_file
+
+        if level_meta:
+            logger.info("Loading %s as GVAS", self.name)
+            self.load_level_meta(level_meta)
+            self._load_world_name()
+        else:
+            self.world_name = "No LevelMeta.sav found"
+
         self._get_file_size(level_sav)
         self._set_data()
         self._load_pals()
@@ -410,6 +438,16 @@ class SaveFile(BaseModel):
                 self._pals[instance.instance_id] = instance
             else:
                 logger.warning("Failed to create PalEntity summary")
+
+    def _load_world_name(self):
+        world_name = PalObjects.get_nested(
+            self._level_meta_gvas_file.properties,
+            "SaveData",
+            "value",
+            "WorldName",
+            "value",
+        )
+        self.world_name = world_name if world_name else "Unknown"
 
     def _set_data(self) -> None:
         logger.debug("Properties keys: %s", self._gvas_file.properties.keys())

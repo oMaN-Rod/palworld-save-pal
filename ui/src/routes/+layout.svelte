@@ -98,10 +98,10 @@
 					ws.clear(type);
 					break;
 				case MessageType.LOADED_SAVE_FILES:
-					const { level, players } = data;
-					console.log('Loaded save files', level, players);
+					const { sav_file_name, players, world_name } = data;
+					console.log('Loaded save files', sav_file_name, players);
 					appState.resetState();
-					appState.saveFile = { name: level };
+					appState.saveFile = { name: sav_file_name, world_name };
 					appState.playerSaveFiles = players.map((p: any) => ({ name: p }));
 					ws.clear(type);
 					break;

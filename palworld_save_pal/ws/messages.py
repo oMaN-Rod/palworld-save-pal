@@ -178,6 +178,7 @@ class GetVersionMessage(BaseModel):
 class SelectSaveMessageData(BaseModel):
     type: str
     path: str
+    local: bool
 
 
 class SelectSaveMessage(BaseMessage):

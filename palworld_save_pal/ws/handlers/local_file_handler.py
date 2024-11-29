@@ -50,13 +50,15 @@ async def select_save_files_handler(message: SelectSaveMessage, ws: WebSocket):
 
     save_type = message.data.type
     save_path = message.data.path
+    local = message.data.local
+
     if save_type == "steam":
-        await process_steam_save(save_path, ws)
+        await process_steam_save(save_path, ws, local)
     else:
         pass
 
 
-async def process_steam_save(save_path: str, ws: WebSocket):
+async def process_steam_save(save_path: str, ws: WebSocket, local: bool):
     logger.debug("Processing Steam save files")
     validation_result = FileManager.validate_steam_save_directory(save_path)
     if not validation_result.valid:
@@ -69,19 +71,29 @@ async def process_steam_save(save_path: str, ws: WebSocket):
 
     with open(validation_result.level_sav, "rb") as f:
         level_sav = f.read()
+
+    level_meta = None
+    if validation_result.level_meta:
+        with open(validation_result.level_meta, "rb") as f:
+            level_meta = f.read()
+
     player_files = FileManager.get_player_saves(validation_result.players_dir)
 
     await app_state.process_save_files(
         save_path,
         level_sav,
+        level_meta,
         player_files,
-        lambda msg: ws.send_json(build_response(MessageType.PROGRESS_MESSAGE, msg)),
-        True,
+        ws_callback=lambda msg: ws.send_json(
+            build_response(MessageType.PROGRESS_MESSAGE, msg)
+        ),
+        local=local,
     )
 
     data = {
-        "level": validation_result.level_sav,
+        "sav_file_name": validation_result.level_sav,
         "players": [str(p) for p in player_files],
+        "world_name": app_state.save_file.world_name,
     }
 
     response = build_response(MessageType.LOADED_SAVE_FILES, data)

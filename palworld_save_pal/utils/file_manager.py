@@ -14,6 +14,7 @@ steam_root = os.path.join(os.getenv("LOCALAPPDATA"), "Pal", "Saved", "SaveGames"
 class FileValidationResult(BaseModel):
     valid: bool
     level_sav: Optional[str] = None
+    level_meta: Optional[str] = None
     players_dir: Optional[str] = None
     error: Optional[str] = None
 
@@ -27,12 +28,14 @@ class FileManager:
     ) -> FileValidationResult:
         save_dir = Path(os.path.dirname(save_path))
         level_sav = save_dir / "Level.sav"
+        level_meta = save_dir / "LevelMeta.sav"
         players_dir = save_dir / "Players"
 
         if not level_sav.exists():
             return FileValidationResult(
                 valid=False,
                 level_sav=None,
+                level_meta=None,
                 players_dir=None,
                 error="Level.sav file not found in the selected directory.",
             )
@@ -40,24 +43,24 @@ class FileManager:
         if not players_dir.exists() or not players_dir.is_dir():
             return FileValidationResult(
                 valid=False,
-                level_sav=None,
-                players_dir=None,
                 error="Players directory not found in the selected directory.",
             )
+
+        if not level_meta.exists():
+            level_meta = None
 
         # Check if Players directory contains any .sav files
         player_saves = list(players_dir.glob("*.sav"))
         if not player_saves:
             return FileValidationResult(
                 valid=False,
-                level_sav=None,
-                players_dir=None,
                 error="No player save files found in the Players directory.",
             )
 
         return FileValidationResult(
             valid=True,
             level_sav=str(level_sav),
+            level_meta=str(level_meta) if level_meta else None,
             players_dir=str(players_dir),
             error=None,
         )

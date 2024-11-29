@@ -21,6 +21,12 @@
 	let morpheus: string = $state('');
 
 	function splitPath(path: string) {
+		if (!path) {
+			return {
+				directory: '',
+				filename: ''
+			};
+		}
 		// Handle both forward and back slashes
 		const normalizedPath = path.replace(/\\/g, '/');
 		console.log('normalizedPath', normalizedPath);
@@ -63,7 +69,8 @@
 			JSON.stringify({
 				type: MessageType.SELECT_SAVE,
 				data: {
-					type: saveType
+					type: saveType,
+					local: isDesktopMode
 				}
 			})
 		);
@@ -158,6 +165,7 @@
 				<h4 class="h4">Loaded Files</h4>
 				<p class="text"><strong>Path:</strong> {directory}</p>
 				<p class="text"><strong>Level:</strong> {filename}</p>
+				<p class="text"><strong>World Name:</strong> {appState.saveFile.world_name}</p>
 				<p class="text"><strong>Players:</strong></p>
 				<ul class="list-inside list-disc">
 					{#each appState.playerSaveFiles as playerSaveFile}

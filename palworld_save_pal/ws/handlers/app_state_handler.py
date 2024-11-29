@@ -16,14 +16,17 @@ async def sync_app_state_handler(_: SyncAppStateMessage, ws: WebSocket):
 
     if app_state.local:
         data = {
-            "name": save_file.name,
-            "size": save_file.size,
+            "sav_file_name": save_file.name,
+            "players": [str(p) for p in (save_file.get_players()).keys()],
+            "world_name": save_file.world_name,
         }
     else:
         data = {
-            "level": save_file.name,
-            "players": [str(p) for p in (save_file.get_players()).keys()],
+            "name": save_file.name,
+            "size": save_file.size,
+            "world_name": save_file.world_name,
         }
+
     message_type = (
         MessageType.LOADED_SAVE_FILES if app_state.local else MessageType.LOAD_ZIP_FILE
     )
