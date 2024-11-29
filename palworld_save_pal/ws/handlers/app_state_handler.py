@@ -1,10 +1,8 @@
-import traceback
 from fastapi import WebSocket
 from palworld_save_pal.ws.messages import SyncAppStateMessage, MessageType
 from palworld_save_pal.ws.utils import build_response
 from palworld_save_pal.state import get_app_state
 from palworld_save_pal.utils.logging_config import create_logger
-from fastapi.encoders import jsonable_encoder
 
 logger = create_logger(__name__)
 
@@ -16,12 +14,20 @@ async def sync_app_state_handler(_: SyncAppStateMessage, ws: WebSocket):
         logger.warning("No save file loaded")
         return
 
-    data = {
-        "name": save_file.name,
-        "size": save_file.size,
-    }
-    response = build_response(MessageType.LOAD_ZIP_FILE, data)
+    if app_state.local:
+        data = {
+            "name": save_file.name,
+            "size": save_file.size,
+        }
+    else:
+        data = {
+            "level": save_file.name,
+            "players": [str(p) for p in (save_file.get_players()).keys()],
+        }
+    message_type = (
+        MessageType.LOADED_SAVE_FILES if app_state.local else MessageType.LOAD_ZIP_FILE
+    )
+    response = build_response(message_type, data)
     await ws.send_json(response)
-    data = jsonable_encoder(save_file.get_players())
-    response = build_response(MessageType.GET_PLAYERS, data)
+    response = build_response(MessageType.GET_PLAYERS, save_file.get_players())
     await ws.send_json(response)

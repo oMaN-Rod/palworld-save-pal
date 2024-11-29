@@ -33,14 +33,12 @@
 	$effect(() => {
 		if (browser) {
 			isPywebview = navigator.userAgent.includes('pywebview');
-		} else {
-			console.log('Browser not available');
 		}
 	});
 
 	$effect(() => {
 		if (isPywebview) {
-			openInBrowser();
+			goto('/file');
 		}
 	});
 
@@ -99,8 +97,22 @@
 					}
 					ws.clear(type);
 					break;
+				case MessageType.LOADED_SAVE_FILES:
+					const { level, players } = data;
+					console.log('Loaded save files', level, players);
+					appState.resetState();
+					appState.saveFile = { name: level };
+					appState.playerSaveFiles = players.map((p: any) => ({ name: p }));
+					ws.clear(type);
+					break;
+				case MessageType.SAVE_MODDED_SAVE:
+					toast.add(data, 'Saved!', 'success');
+					ws.clear(type);
+					goto('/file');
+					break;
 				case MessageType.LOAD_ZIP_FILE:
 					const file = data as { name: string; size: number };
+					appState.resetState();
 					appState.saveFile = file;
 					ws.clear(type);
 					goto('/edit');
@@ -162,20 +174,9 @@
 <Toast position="bottom-center" />
 <Modal>
 	<div class="flex h-screen w-full overflow-hidden">
-		{#if isPywebview}
-			<main class="flex-1 overflow-hidden">
-				<div class="flex h-full w-full flex-col items-center justify-center">
-					<button onclick={openInBrowser} class="hover:ring-secondary-500 hover:ring">
-						<h2 class="h2 mb-8">🌐 Opened in browser...</h2>
-					</button>
-					<span class="mt-2">Be sure to keep this window open.</span>
-				</div>
-			</main>
-		{:else}
-			<NavBar />
-			<main class="flex-1 overflow-hidden">
-				{@render children()}
-			</main>
-		{/if}
+		<NavBar />
+		<main class="flex-1 overflow-hidden">
+			{@render children()}
+		</main>
 	</div>
 </Modal>

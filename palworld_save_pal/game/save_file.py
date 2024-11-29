@@ -1,4 +1,5 @@
 import copy
+from enum import Enum
 import json
 import os
 from typing import Any, Dict, List, Optional
@@ -137,6 +138,11 @@ CUSTOM_PROPERTIES[".worldSaveData.ItemContainerSaveData.Value.Slots.Slots.RawDat
     decode_item_container_slot,
     encode_item_container_slot,
 )
+
+
+class SaveType(int, Enum):
+    STEAM = 0
+    GAMEPASS = 1
 
 
 class SaveFile(BaseModel):
@@ -311,13 +317,12 @@ class SaveFile(BaseModel):
         ):
             save_type = 0x32
         else:
+
             save_type = 0x31
 
         logger.info("Compressing GVAS to SAV with save type %s", save_type)
-
-        sav_file = compress_gvas_to_sav(
-            self._gvas_file.write(CUSTOM_PROPERTIES), save_type
-        )
+        gvas = copy.deepcopy(self._gvas_file)
+        sav_file = compress_gvas_to_sav(gvas.write(CUSTOM_PROPERTIES), save_type)
         with open(output_path, "wb") as f:
             f.write(sav_file)
 

@@ -40,6 +40,9 @@ class MessageType(str, Enum):
     OPEN_IN_BROWSER = "open_in_browser"
     GET_EXP_DATA = "get_exp_data"
     GET_VERSION = "get_version"
+    SELECT_SAVE = "select_save"
+    LOADED_SAVE_FILES = "loaded_save_files"
+    SAVE_MODDED_SAVE = "save_modded_save"
 
 
 class AddPalData(BaseModel):
@@ -170,3 +173,17 @@ class OpenInBrowserMessage(BaseMessage):
 
 class GetVersionMessage(BaseModel):
     type: str = MessageType.GET_VERSION.value
+
+
+class SelectSaveMessageData(BaseModel):
+    type: str
+    path: str
+
+
+class SelectSaveMessage(BaseMessage):
+    type: str = MessageType.SELECT_SAVE.value
+    data: SelectSaveMessageData
+
+
+class SaveModdedSaveMessage(BaseMessage):
+    type: str = MessageType.SAVE_MODDED_SAVE.value

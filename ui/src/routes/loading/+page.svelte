@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import { Spinner } from '$components';
 	import { getSocketState } from '$states';
 	import { MessageType } from '$types';
@@ -13,6 +14,9 @@
 			if (type !== MessageType.PROGRESS_MESSAGE) return;
 			progressMessage = data as string;
 			ws.clear(type);
+			if (progressMessage === 'No file selected') {
+				goto('/file');
+			}
 		}
 	});
 </script>

@@ -1,3 +1,4 @@
+import json
 from urllib.parse import quote
 import sys
 from pathlib import Path
@@ -11,9 +12,12 @@ from fastapi.responses import FileResponse, RedirectResponse
 import psutil
 import argparse
 
+from palworld_save_pal.utils.file_manager import FileManager
 from palworld_save_pal.ws.manager import ConnectionManager
 from palworld_save_pal.utils.logging_config import create_logger, setup_logging
 from palworld_save_pal.__version__ import __version__
+from palworld_save_pal.ws.messages import MessageType
+from palworld_save_pal.ws.utils import build_response
 
 logger = create_logger(__name__)
 
@@ -61,6 +65,17 @@ async def websocket_endpoint(websocket: WebSocket, client_id: int):
     try:
         while not app_state.terminate_flag.is_set():
             data = await websocket.receive_text()
+            json_data = json.loads(data)
+            if json_data["type"] == "select_save":
+                result = FileManager.open_file_dialog(app_state.webview_window)
+                if not result:
+                    response = build_response(
+                        MessageType.PROGRESS_MESSAGE, "No file selected"
+                    )
+                    await websocket.send_json(response)
+                    continue
+                json_data["data"]["path"] = result
+                data = json.dumps(json_data)
             await manager.process_message(data, websocket)
     except WebSocketDisconnect:
         logger.warning("Client %s disconnected", client_id)

@@ -73,7 +73,7 @@ export type Player = {
 
 export type SaveFile = {
 	name: string;
-	size: number;
+	size?: number;
 };
 export interface DynamicItem {
 	local_id: string;

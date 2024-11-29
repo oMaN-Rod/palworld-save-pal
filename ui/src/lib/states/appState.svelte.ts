@@ -11,6 +11,7 @@ export function createAppState() {
 	let selectedPlayer: Player | undefined = $state(undefined);
 	let selectedPal: Pal | undefined = $state(undefined);
 	let saveFile: SaveFile | undefined = $state(undefined);
+	let playerSaveFiles: SaveFile[] = $state([]);
 	let modifiedPals: Record<string, Pal> = $state({});
 	let modifiedPlayers: Record<string, Player> = $state({});
 	let clipboardItem: ItemContainerSlot | null = $state(null);
@@ -21,6 +22,7 @@ export function createAppState() {
 		selectedPlayer = undefined;
 		selectedPal = undefined;
 		saveFile = undefined;
+		playerSaveFiles = [];
 		modifiedPals = {};
 		modifiedPlayers = {};
 	}
@@ -100,6 +102,13 @@ export function createAppState() {
 		},
 		set saveFile(file: SaveFile | undefined) {
 			saveFile = file;
+		},
+
+		get playerSaveFiles() {
+			return playerSaveFiles;
+		},
+		set playerSaveFiles(files: SaveFile[]) {
+			playerSaveFiles = files;
 		},
 
 		get modifiedPals() {

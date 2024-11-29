@@ -1,11 +1,9 @@
 import base64
 import io
 import os
-import traceback
 import uuid
 import zipfile
 from fastapi import WebSocket
-from fastapi.encoders import jsonable_encoder
 from palworld_save_pal.ws.messages import (
     DownloadSaveFileMessage,
     MessageType,
@@ -43,8 +41,7 @@ async def update_save_file_handler(message: UpdateSaveFileMessage, ws: WebSocket
     app_state.players = save_file.get_players()
     response = build_response(MessageType.UPDATE_SAVE_FILE, "Changes saved")
     await ws.send_json(response)
-    data = jsonable_encoder(app_state.players)
-    response = build_response(MessageType.GET_PLAYERS, data)
+    response = build_response(MessageType.GET_PLAYERS, app_state.players)
     await ws.send_json(response)
 
 
@@ -127,6 +124,5 @@ async def load_zip_file_handler(message: LoadZipFileMessage, ws: WebSocket):
     response = build_response(MessageType.LOAD_ZIP_FILE, data)
     await ws.send_json(response)
 
-    data = jsonable_encoder(app_state.players)
-    response = build_response(MessageType.GET_PLAYERS, data)
+    response = build_response(MessageType.GET_PLAYERS, app_state.players)
     await ws.send_json(response)

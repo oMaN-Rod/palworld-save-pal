@@ -26,7 +26,10 @@ export enum MessageType {
 	GET_PALS = 'get_pals',
 	OPEN_IN_BROWSER = 'open_in_browser',
 	GET_EXP_DATA = 'get_exp_data',
-	GET_VERSION = 'get_version'
+	GET_VERSION = 'get_version',
+	SELECT_SAVE = 'select_save',
+	LOADED_SAVE_FILES = 'loaded_save_files',
+	SAVE_MODDED_SAVE = 'save_modded_save',
 }
 
 interface UpdateSaveFileData {

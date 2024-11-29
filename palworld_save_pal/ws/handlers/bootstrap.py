@@ -12,6 +12,7 @@ from palworld_save_pal.ws.handlers import (
     save_file_handler,
     pal_handler,
     version_handler,
+    local_file_handler,
 )
 from palworld_save_pal.ws.messages import (
     AddPalMessage,
@@ -36,6 +37,7 @@ from palworld_save_pal.ws.messages import (
     DeletePresetMessage,
     UpdatePresetMessage,
     GetVersionMessage,
+    SelectSaveMessage,
 )
 
 if TYPE_CHECKING:
@@ -208,5 +210,21 @@ def bootstrap(dispatcher: "MessageDispatcher"):
         {
             "message_class": GetVersionMessage,
             "handler_func": version_handler.get_version_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.SELECT_SAVE.value,
+        {
+            "message_class": SelectSaveMessage,
+            "handler_func": local_file_handler.select_save_files_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.SAVE_MODDED_SAVE.value,
+        {
+            "message_class": BaseMessage,
+            "handler_func": local_file_handler.save_modded_save_handler,
         },
     )

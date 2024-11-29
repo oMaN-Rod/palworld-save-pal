@@ -73,3 +73,5 @@ ENV/
 
 # pytest
 .pytest_cache/
+
+backups/

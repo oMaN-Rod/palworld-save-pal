@@ -1,12 +1,18 @@
 import copy
-import traceback
 from fastapi import WebSocket
-from fastapi.encoders import jsonable_encoder
 
-from palworld_save_pal.game.pal_objects import PalObjects
+from palworld_save_pal.game.pal import Pal
 from palworld_save_pal.state import get_app_state
 from palworld_save_pal.utils.json_manager import JsonManager
-from palworld_save_pal.ws.messages import *
+from palworld_save_pal.ws.messages import (
+    GetPalsMessage,
+    AddPalMessage,
+    MovePalMessage,
+    ClonePalMessage,
+    DeletePalsMessage,
+    HealPalsMessage,
+    MessageType,
+)
 from palworld_save_pal.utils.logging_config import create_logger
 from palworld_save_pal.ws.utils import build_response
 
@@ -54,7 +60,7 @@ async def add_pal_handler(message: AddPalMessage, ws: WebSocket):
         "player_id": player_id,
         "pal": new_pal,
     }
-    response = build_response(MessageType.ADD_PAL, jsonable_encoder(data))
+    response = build_response(MessageType.ADD_PAL, data)
     await ws.send_json(response)
 
 
@@ -88,7 +94,7 @@ async def clone_pal_handler(message: ClonePalMessage, ws: WebSocket):
         "player_id": pal.owner_uid if pal.owner_uid else None,
         "pal": new_pal,
     }
-    response = build_response(MessageType.ADD_PAL, jsonable_encoder(data))
+    response = build_response(MessageType.ADD_PAL, data)
     await ws.send_json(response)
 
 

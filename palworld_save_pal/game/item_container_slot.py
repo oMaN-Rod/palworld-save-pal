@@ -53,8 +53,6 @@ def encode_bytes(p: dict[str, Any]) -> bytes:
     if p is None:
         return bytes()
     writer = FArchiveWriter()
-    print(p.keys())
-    print(p)
     writer.u32(p["slot_index"])
     writer.u32(p["count"])
     writer.fstring(p["static_id"])
