@@ -915,5 +915,15 @@
 		"exclusive": [
 			"ScorpionMan"
 		]
+	},
+	"EPalWazaID::CommetRain": {
+		"type": "Dragon",
+		"power": 160,
+		"ct": 55
+	},
+	"EPalWazaID::ThreeCommet": {
+		"type": "Dragon",
+		"power": 120,
+		"ct": 20
 	}
 }

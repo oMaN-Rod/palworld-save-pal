@@ -574,5 +574,13 @@
 	"EPalWazaID::Unique_ScorpionMan_Uppercut": {
 		"name": "Upper Smash",
 		"description": "Prixter's exclusive skill. Closes the distance to the enemy at high speed, then attacks decisively with its pincers."
+	},
+	"EPalWazaID::CommetRain": {
+		"name": "Meteorain",
+		"description": "Drops countless meteorites,\r\ngenerating an array of shock waves"
+	},
+	"EPalWazaID::ThreeCommet": {
+		"name": "Comet Barrage",
+		"description": "Drops meteorites one after another,\r\ngenerating shock waves around the impact areas."
 	}
 }
