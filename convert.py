@@ -7,7 +7,7 @@ from typing import Dict, Any, Set
 from deepdiff import DeepDiff
 
 
-from palworld_save_pal.save_file.save_file import SaveFile
+from palworld_save_pal.game.save_file import SaveFile
 from palworld_save_pal.utils.logging_config import create_logger, setup_logging
 
 save_file = SaveFile()

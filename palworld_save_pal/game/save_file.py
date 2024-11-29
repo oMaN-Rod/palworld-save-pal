@@ -18,15 +18,13 @@ from palworld_save_tools.paltypes import (
     PALWORLD_TYPE_HINTS,
 )
 
-from palworld_save_pal.save_file.guild import Guild
-from palworld_save_pal.save_file.pal import Pal
-from palworld_save_pal.save_file.pal_objects import GroupType, PalObjects
+from palworld_save_pal.game.guild import Guild
+from palworld_save_pal.game.pal import Pal
+from palworld_save_pal.game.pal_objects import GroupType, PalObjects
 from palworld_save_pal.utils.logging_config import create_logger
-from palworld_save_pal.save_file.player import Player
-from palworld_save_pal.save_file.utils import (
-    are_equal_uuids,
-)
-from palworld_save_pal.save_file.item_container_slot import (
+from palworld_save_pal.game.player import Player
+from palworld_save_pal.utils.uuid import are_equal_uuids
+from palworld_save_pal.game.item_container_slot import (
     encode as encode_item_container_slot,
     decode as decode_item_container_slot,
 )
@@ -63,7 +61,7 @@ def skip_decode(reader: FArchiveReader, type_name: str, size: int, path: str):
             "value": reader.read(size),
         }
     else:
-        raise Exception(
+        raise ValueError(
             f"Expected ArrayProperty or MapProperty or StructProperty, got {type_name} in {path}"
         )
     return value
@@ -71,7 +69,10 @@ def skip_decode(reader: FArchiveReader, type_name: str, size: int, path: str):
 
 def skip_encode(writer: FArchiveWriter, property_type: str, properties: dict) -> int:
     if "skip_type" not in properties:
-        if properties["custom_type"] in PALWORLD_CUSTOM_PROPERTIES is not None:
+        if (
+            properties["custom_type"] in PALWORLD_CUSTOM_PROPERTIES
+            and PALWORLD_CUSTOM_PROPERTIES[properties["custom_type"]] is not None
+        ):
             return PALWORLD_CUSTOM_PROPERTIES[properties["custom_type"]][1](
                 writer, property_type, properties
             )
@@ -102,7 +103,7 @@ def skip_encode(writer: FArchiveWriter, property_type: str, properties: dict) ->
         writer.write(properties["value"])
         return len(properties["value"])
     else:
-        raise Exception(
+        raise ValueError(
             f"Expected ArrayProperty or MapProperty or StructProperty, got {property_type}"
         )
 

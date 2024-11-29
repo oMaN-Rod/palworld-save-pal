@@ -3,7 +3,6 @@ from uuid import UUID
 import pytest
 from pathlib import Path
 
-from palworld_save_pal.save_file.save_file import SaveFile
 from palworld_save_pal.state import get_app_state
 
 # Assuming your test save files are stored in a 'test_saves' directory
@@ -13,7 +12,6 @@ SAVE_PATH = os.path.join(SAVE_DIR, "Level.sav")
 app_state = get_app_state()
 file = open(SAVE_PATH, "rb")
 app_state.process_save_file(file.read())
-# app_state.save_file = SaveFile(name="Level.sav").load_gvas(file.read())
 
 
 def test_save_file_loading():

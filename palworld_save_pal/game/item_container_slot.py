@@ -4,7 +4,7 @@ from pydantic import BaseModel
 
 from palworld_save_tools.archive import *
 
-from palworld_save_pal.save_file.dynamic_item import DynamicItem
+from palworld_save_pal.game.dynamic_item import DynamicItem
 
 
 def decode(

@@ -2,8 +2,8 @@ from typing import Dict, Optional
 from uuid import UUID
 from pydantic import BaseModel, Field
 
-from palworld_save_pal.save_file.player import Player
-from palworld_save_pal.save_file.save_file import SaveFile
+from palworld_save_pal.game.player import Player
+from palworld_save_pal.game.save_file import SaveFile
 from palworld_save_pal.utils.logging_config import create_logger
 
 logger = create_logger(__name__)

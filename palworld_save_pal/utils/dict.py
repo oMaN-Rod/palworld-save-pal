@@ -1,25 +1,4 @@
-from typing import Dict, Any
-import uuid
-
-from palworld_save_pal.save_file.empty_objects import get_empty_property, PropertyType
-
-EMPTY_UUID = get_empty_property(PropertyType.UUID)
-
-
-def is_valid_uuid(uuid_test: Any) -> bool:
-    try:
-        uuid.UUID(str(uuid_test))
-        return True
-    except ValueError:
-        return False
-
-
-def is_empty_uuid(uuid_test: Any) -> bool:
-    return str(uuid_test) == EMPTY_UUID
-
-
-def are_equal_uuids(uuid1: Any, uuid2: Any) -> bool:
-    return str(uuid1).lower() == str(uuid2).lower()
+from typing import Any, Dict
 
 
 def safe_get(d: Dict[str, Any], *keys: str, default: Any = None) -> Any:

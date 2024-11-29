@@ -4,15 +4,14 @@ from uuid import UUID
 import uuid
 from pydantic import BaseModel, Field, PrivateAttr
 
-from palworld_save_pal.save_file.item_container_slot import ItemContainerSlot
-from palworld_save_pal.save_file.dynamic_item import DynamicItem
-from palworld_save_pal.save_file.encoders import custom_uuid_encoder
-from palworld_save_pal.save_file.pal_objects import PalObjects
-from palworld_save_pal.save_file.utils import (
+from palworld_save_pal.game.item_container_slot import ItemContainerSlot
+from palworld_save_pal.game.dynamic_item import DynamicItem
+from palworld_save_pal.game.pal_objects import PalObjects
+from palworld_save_pal.utils.uuid import (
     are_equal_uuids,
     is_empty_uuid,
-    safe_remove,
 )
+from palworld_save_pal.utils.dict import safe_remove
 from palworld_save_pal.utils.logging_config import create_logger
 
 logger = create_logger(__name__)
@@ -27,7 +26,7 @@ class ItemContainerType(str, Enum):
 
 
 class ItemContainer(BaseModel):
-    id: UUID = Field(..., json_encoder=custom_uuid_encoder)
+    id: UUID
     type: ItemContainerType
     slots: List[ItemContainerSlot] = Field(default_factory=list)
 

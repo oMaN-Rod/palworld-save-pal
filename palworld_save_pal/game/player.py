@@ -5,15 +5,15 @@ from pydantic import BaseModel, Field, PrivateAttr
 
 from palworld_save_tools.gvas import GvasFile
 
-from palworld_save_pal.save_file.character_container import (
+from palworld_save_pal.game.character_container import (
     CharacterContainer,
     CharacterContainerType,
 )
-from palworld_save_pal.save_file.guild import Guild
-from palworld_save_pal.save_file.pal import Pal
-from palworld_save_pal.save_file.item_container import ItemContainer, ItemContainerType
-from palworld_save_pal.save_file.pal_objects import PalObjects
-from palworld_save_pal.save_file.utils import are_equal_uuids
+from palworld_save_pal.game.guild import Guild
+from palworld_save_pal.game.pal import Pal
+from palworld_save_pal.game.item_container import ItemContainer, ItemContainerType
+from palworld_save_pal.game.pal_objects import PalObjects
+from palworld_save_pal.utils.uuid import are_equal_uuids
 from palworld_save_pal.utils.logging_config import create_logger
 
 logger = create_logger(__name__)

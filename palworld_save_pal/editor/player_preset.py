@@ -1,7 +1,7 @@
 from typing import List
 from pydantic import BaseModel, Field
 
-from palworld_save_pal.save_file.item_container_slot import ItemContainerSlot
+from palworld_save_pal.game.item_container_slot import ItemContainerSlot
 
 
 class PlayerPreset(BaseModel):

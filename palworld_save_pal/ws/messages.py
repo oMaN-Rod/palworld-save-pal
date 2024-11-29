@@ -3,9 +3,9 @@ from typing import Any, Dict, List, Optional
 from pydantic import BaseModel
 from uuid import UUID
 
-from palworld_save_pal.presets.player_preset import PlayerPreset
-from palworld_save_pal.save_file.pal import Pal
-from palworld_save_pal.save_file.player import Player
+from palworld_save_pal.editor.player_preset import PlayerPreset
+from palworld_save_pal.game.pal import Pal
+from palworld_save_pal.game.player import Player
 
 
 class BaseMessage(BaseModel):

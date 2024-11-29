@@ -1,11 +1,10 @@
 from enum import Enum
 from typing import Any, Dict, List, Optional
 from uuid import UUID
-import uuid
 
 from palworld_save_tools.archive import UUID as ArchiveUUID
 
-from palworld_save_pal.save_file.item_container_slot import (
+from palworld_save_pal.game.item_container_slot import (
     ItemContainerSlot as IContainerSlot,
 )
 from palworld_save_pal.utils.logging_config import create_logger

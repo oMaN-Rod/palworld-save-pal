@@ -4,9 +4,9 @@ from uuid import UUID
 from pydantic import BaseModel, Field, PrivateAttr
 
 
-from palworld_save_pal.save_file.utils import safe_remove
+from palworld_save_pal.utils.dict import safe_remove
 from palworld_save_pal.utils.logging_config import create_logger
-from palworld_save_pal.save_file.pal_objects import *
+from palworld_save_pal.game.pal_objects import *
 
 
 logger = create_logger(__name__)

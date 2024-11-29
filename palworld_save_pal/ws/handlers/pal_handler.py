@@ -3,7 +3,7 @@ import traceback
 from fastapi import WebSocket
 from fastapi.encoders import jsonable_encoder
 
-from palworld_save_pal.save_file.pal_objects import PalObjects
+from palworld_save_pal.game.pal_objects import PalObjects
 from palworld_save_pal.state import get_app_state
 from palworld_save_pal.utils.json_manager import JsonManager
 from palworld_save_pal.ws.messages import *
