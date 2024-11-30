@@ -167,7 +167,7 @@
 				<p class="text"><strong>Level:</strong> {filename}</p>
 				<p class="text"><strong>World Name:</strong> {appState.saveFile.world_name}</p>
 				<p class="text"><strong>Players:</strong></p>
-				<ul class="list-inside list-disc">
+				<ul class="max-h-36 list-inside list-disc overflow-y-scroll">
 					{#each appState.playerSaveFiles as playerSaveFile}
 						<li>{playerSaveFile.name.replace(/-/g, '').toUpperCase()}.sav</li>
 					{/each}

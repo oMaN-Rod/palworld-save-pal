@@ -199,10 +199,10 @@
 			</TooltipButton>
 		{/if}
 	</div>
-	<div class="overflow-scroll" style={listWrapperStyle}>
+	<div class="overflow-y-scroll" style={listWrapperStyle}>
 		<List
 			baseClass="bg-surface-800"
-			listClass="overflow-scroll"
+			listClass="overflow-y-scroll"
 			bind:items={filteredPresets}
 			bind:selectedItems={selectedPresets}
 			bind:selectedItem={selectedPreset}
