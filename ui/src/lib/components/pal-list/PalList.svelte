@@ -553,10 +553,7 @@
 			<Accordion.Item value="filter" controlHover="hover:bg-secondary-500/25">
 				{#snippet lead()}<Search />{/snippet}
 				{#snippet control()}
-					<div class="flex flex-row items-center">
-						<Search class="mr-2 h-5 w-5" />
-						<span class="font-bold">Filter & Sort</span>
-					</div>
+					<span class="font-bold">Filter & Sort</span>
 				{/snippet}
 				{#snippet panel()}
 					<Input
