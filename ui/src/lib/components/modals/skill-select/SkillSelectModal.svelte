@@ -56,7 +56,7 @@
 			return false;
 		});
 		selectOptions = applicableSkills
-			.sort((a, b) => a.details.type.localeCompare(b.details.type))
+			.sort((a, b) => a.details.element.localeCompare(b.details.element))
 			.map((s) => ({
 				value: s.id,
 				label: s.name
@@ -86,7 +86,7 @@
 		const skill = activeSkills.find((s) => s.id === skillId);
 		if (!skill || skill.name === 'None') return undefined;
 		const activeSkill = skill as ActiveSkill;
-		const elementObj = await elementsData.searchElement(activeSkill.details.type);
+		const elementObj = await elementsData.searchElement(activeSkill.details.element);
 		if (!elementObj) return undefined;
 		const iconPath = `${ASSET_DATA_PATH}/img/elements/${elementObj.icon}.png`;
 		const icon = await assetLoader.loadImage(iconPath, true);
@@ -132,15 +132,25 @@
 			{:else}
 				<div class="w-6"></div>
 			{/if}
-			<div class="flex flex-col">
+			<div class="mr-0.5 flex flex-col">
 				<span class="truncate">{option.label}</span>
 				<span class="text-xs">{activeSkill?.description}</span>
 			</div>
-			<div class="flex items-center space-x-1 justify-self-start">
-				<TimerReset class="h-4 w-4" />
-				<span class="font-bold">{activeSkill?.details.ct}</span>
-				<span class="text-xs">Pwr</span>
-				<span class="font-bold">{activeSkill?.details.power}</span>
+			<div class="flex flex-col">
+				<div class="flex items-center justify-end space-x-1">
+					<TimerReset class="h-4 w-4" />
+					<span class="font-bold">{activeSkill?.details.ct}</span>
+					<span class="text-xs">Pwr</span>
+					<span class="font-bold">{activeSkill?.details.power}</span>
+				</div>
+				<div class="flex flex-row items-center space-x-2">
+					<div class="text-start">
+						<span class="text-xs">{activeSkill?.details.type} Range</span>
+						<span class="font-bold"
+							>{activeSkill?.details.min_range} - {activeSkill?.details.max_range}</span
+						>
+					</div>
+				</div>
 			</div>
 		</div>
 	{/await}

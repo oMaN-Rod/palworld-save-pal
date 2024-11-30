@@ -325,9 +325,11 @@ export type SkillType = 'Active' | 'Passive' | 'Empty';
 
 export interface ActiveSkillDetails {
 	type: string;
+	element: string;
 	power: number;
 	ct: number;
-	name: string;
+	min_range: number;
+	max_range: number;
 
 	exclusive?: string[];
 }

@@ -23,6 +23,7 @@
 	let activeSkill: ActiveSkill | null = $state(null);
 	let element: Element | undefined = $state(undefined);
 	let elementIcon: string | null = $state(null);
+	let elementIconWhite: string | null = $state(null);
 	let sadIcon: string = $state('');
 
 	$effect(() => {
@@ -32,9 +33,11 @@
 	async function loadSkillData() {
 		activeSkill = await activeSkillsData.searchActiveSkills(skill);
 		if (activeSkill) {
-			element = await elementsData.searchElement(activeSkill.details.type);
+			element = await elementsData.searchElement(activeSkill.details.element);
 			if (element) {
-				const iconPath = `${ASSET_DATA_PATH}/img/elements/${element.white_icon}.png`;
+				const whiteIconPath = `${ASSET_DATA_PATH}/img/elements/${element.white_icon}.png`;
+				elementIconWhite = await assetLoader.loadImage(whiteIconPath, true);
+				const iconPath = `${ASSET_DATA_PATH}/img/elements/${element.icon}.png`;
 				elementIcon = await assetLoader.loadImage(iconPath, true);
 			}
 		} else {
@@ -66,7 +69,12 @@
 {/snippet}
 
 {#snippet hasSkill()}
-	<Tooltip>
+	<Tooltip
+		popupClass="p-0 mt-12 bg-surface-600"
+		rounded="rounded-none"
+		position="right"
+		useArrow={false}
+	>
 		<div
 			class="border-l-primary bg-surface-900 relative w-full overflow-hidden rounded-none border-l-2 p-0 shadow-none"
 			style="border-left-color: {element?.color}"
@@ -77,8 +85,11 @@
 					class="text-on-surface relative z-10 flex items-center p-2"
 					style="background-color: {element?.color}"
 				>
-					{#if elementIcon}
-						<enhanced:img src={elementIcon} alt="{element?.name} icon" class="h-6 w-6 justify-start"
+					{#if elementIconWhite}
+						<enhanced:img
+							src={elementIconWhite}
+							alt="{element?.name} icon"
+							class="h-6 w-6 justify-start"
 						></enhanced:img>
 					{/if}
 					<span class="ml-2 text-lg font-bold"
@@ -92,11 +103,44 @@
 			></div>
 		</div>
 		{#snippet popup()}
-			<div class="flex flex-row p-2">
-				<span>{activeSkill?.description}</span>
-				<div class="ml-4 flex flex-row">
-					<TimerReset class="h-6 w-6" />
-					{activeSkill?.details.ct}
+			<div class="bg-surface-800 flex w-96 flex-col">
+				<div class="flex flex-col space-y-2 border-b p-2">
+					<h4 class="h4 text-left">{activeSkill?.name}</h4>
+					<div class="grid grid-cols-[1fr_auto] gap-2">
+						<span class="grow text-left text-gray-300">
+							{#if elementIcon}
+								<div class="flex">
+									<enhanced:img src={elementIcon} alt="{element?.name} icon" class="h-6 w-6"
+									></enhanced:img>
+									{activeSkill?.details.element}
+								</div>
+							{:else}
+								{activeSkill?.details.element}
+							{/if}
+						</span>
+						<div class="flex items-center space-x-2">
+							<TimerReset class="h-4 w-4" />
+							<span class="font-bold">{activeSkill?.details.ct}</span>
+							<span class="text-xs">Pwr</span>
+							<span class="font-bold">{activeSkill?.details.power}</span>
+						</div>
+					</div>
+				</div>
+				<div class="bg-surface-600 p-2 text-left">
+					<span class="whitespace-pre-line">{activeSkill?.description}</span>
+				</div>
+				<div>
+					<div class="flex flex-row items-center space-x-2 p-2">
+						<div class="grow text-start">
+							<span class="text-xs">Range</span>
+							<span class="font-bold"
+								>{activeSkill?.details.min_range} - {activeSkill?.details.max_range}</span
+							>
+						</div>
+						<div class="border-l border-r p-2 px-2 py-0.5 text-left text-sm font-bold">
+							{activeSkill?.details.type}
+						</div>
+					</div>
 				</div>
 			</div>
 		{/snippet}
