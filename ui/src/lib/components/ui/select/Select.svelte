@@ -160,7 +160,7 @@
 		{#if isOpen}
 			<div
 				id={listboxId}
-				class="bg-surface-800 border-surface-600 absolute left-0 right-0 z-50 mt-1 rounded-sm border shadow-lg"
+				class="bg-surface-800 border-surface-600 absolute left-0 right-0 z-50 mt-1 max-h-[600px] overflow-y-scroll rounded-sm border shadow-lg"
 				role="listbox"
 			>
 				{#each options as option}
