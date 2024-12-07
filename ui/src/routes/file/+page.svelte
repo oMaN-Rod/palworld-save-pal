@@ -166,7 +166,7 @@
 				<p class="text"><strong>Path:</strong> {directory}</p>
 				<p class="text"><strong>Level:</strong> {filename}</p>
 				<p class="text"><strong>World Name:</strong> {appState.saveFile.world_name}</p>
-				<p class="text"><strong>Players:</strong></p>
+				<p class="text"><strong>Players ({appState.playerSaveFiles.length}):</strong></p>
 				<ul class="max-h-36 list-inside list-disc overflow-y-scroll">
 					{#each appState.playerSaveFiles as playerSaveFile}
 						<li>{playerSaveFile.name.replace(/-/g, '').toUpperCase()}.sav</li>
