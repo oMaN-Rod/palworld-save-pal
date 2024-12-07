@@ -219,6 +219,10 @@ class Player(BaseModel):
         self._get_sanity()
 
     def _get_hp(self):
+        if "HP" in self._character_save_parameter:
+            self._character_save_parameter["Hp"] = self._character_save_parameter.pop(
+                "HP"
+            )
         if "Hp" in self._character_save_parameter:
             self.hp = PalObjects.get_fixed_point64(self._character_save_parameter["Hp"])
         else:
@@ -410,11 +414,20 @@ class Player(BaseModel):
         player_save_data = PalObjects.get_value(
             self._player_gvas_file.properties["SaveData"]
         )
+        if "inventoryInfo" in player_save_data:
+            logger.debug(
+                "Converting inventory info to new format for player (%s) %s",
+                self.uid,
+                self.nickname,
+            )
+            player_save_data["InventoryInfo"] = player_save_data.pop("inventoryInfo")
+
         inventory_info = PalObjects.get_value(player_save_data["InventoryInfo"])
 
         if not inventory_info:
             logger.error("No inventory info found for player %s", self.uid)
             return
+
         logger.debug("Loading storage for player %s", self.nickname)
         self._load_common_container(
             inventory_info, item_container_save_data, dynamic_item_save_data
