@@ -25,7 +25,7 @@
 	async function loadSkillOptions() {
 		activeSkills = await activeSkillsData.getActiveSkills();
 		selectOptions = activeSkills
-			.sort((a, b) => a.details.type.localeCompare(b.details.type))
+			.sort((a, b) => a.details.element.localeCompare(b.details.element))
 			.map((skill) => ({
 				value: skill.id,
 				label: skill.name
@@ -38,7 +38,7 @@
 		const skill = activeSkills.find((s) => s.id === skillId);
 		if (!skill || skill.name === 'None') return undefined;
 		const activeSkill = skill as ActiveSkill;
-		const elementObj = await elementsData.searchElement(activeSkill.details.type);
+		const elementObj = await elementsData.searchElement(activeSkill.details.element);
 		if (!elementObj) return undefined;
 		const iconPath = `${ASSET_DATA_PATH}/img/elements/${elementObj.icon}.png`;
 		const icon = await assetLoader.loadImage(iconPath, true);
