@@ -30,6 +30,7 @@ class AppState:
         self.terminate_flag = threading.Event()
         self.server_instance = None
         self.webview_window = None
+        self.save_dir = None
 
 
 app_state = AppState()
@@ -67,13 +68,16 @@ async def websocket_endpoint(websocket: WebSocket, client_id: int):
             data = await websocket.receive_text()
             json_data = json.loads(data)
             if json_data["type"] == "select_save":
-                result = FileManager.open_file_dialog(app_state.webview_window)
+                result = FileManager.open_file_dialog(
+                    app_state.webview_window, app_state.save_dir
+                )
                 if not result:
                     response = build_response(
                         MessageType.PROGRESS_MESSAGE, "No file selected"
                     )
                     await websocket.send_json(response)
                     continue
+                app_state.save_dir = str(Path(result).parent)
                 json_data["data"]["path"] = result
                 data = json.dumps(json_data)
             await manager.process_message(data, websocket)

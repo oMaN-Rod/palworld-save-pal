@@ -66,9 +66,9 @@ class FileManager:
         )
 
     @staticmethod
-    def open_file_dialog(window: webview.Window) -> Optional[str]:
+    def open_file_dialog(window: webview.Window, save_dir: str = None) -> Optional[str]:
         file_types = ("Sav Files (*.sav)", "All files (*.*)")
-        file_path = steam_root
+        file_path = steam_root if save_dir is None else save_dir
         result = window.create_file_dialog(
             webview.OPEN_DIALOG,
             directory=file_path,
