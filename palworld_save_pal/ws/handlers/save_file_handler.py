@@ -109,7 +109,11 @@ async def load_zip_file_handler(message: LoadZipFileMessage, ws: WebSocket):
             player_data[player_uuid] = zip_ref.read(player_file)
 
         await app_state.process_save_files(
-            save_id, level_sav_data, player_data, ws_callback
+            sav_id=save_id,
+            level_sav=level_sav_data,
+            level_meta=None,
+            player_savs=player_data,
+            ws_callback=ws_callback
         )
 
     data = {
