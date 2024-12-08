@@ -7,7 +7,7 @@
 	<div class="max-w-2/3 flex flex-col">
 		<h1 class="text-4xl font-bold">😵‍💫 Oops... Something went wrong</h1>
 		<Accordion classes="mt-4 bg-surface-800">
-			<Accordion.Item id="error">
+			<Accordion.Item value="error">
 				{#snippet control()}
 					<h1 class="ml-4 text-3xl font-bold text-red-500">{$page.status} ERROR</h1>
 				{/snippet}
