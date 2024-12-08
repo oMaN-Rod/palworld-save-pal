@@ -411,7 +411,7 @@
 	async function deleteSelectedPals() {
 		if (selectedPals.length === 0) return;
 		const confirmed = await modal.showConfirmModal({
-			title: 'Delete Pal(s)',
+			title: `Delete Pal${selectedPals.length > 1 ? 's' : ''}`,
 			message: `Are you sure you want to delete the ${selectedPals.length} selected pal${selectedPals.length == 1 ? '' : 's'}?`,
 			confirmText: 'Delete',
 			cancelText: 'Cancel'
