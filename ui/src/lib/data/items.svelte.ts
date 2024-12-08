@@ -5,8 +5,9 @@ import { MessageType, type Item, type ItemDetails, type ItemInfo } from '$types'
 
 export class Items {
     private ws = getSocketState();
-    private items: Record<string, Item> = {};
     private loading = false;
+    
+    items: Record<string, Item> = $state({});
 
     private async ensureItemsLoaded(): Promise<void> {
         if (Object.keys(this.items).length === 0 && !this.loading) {

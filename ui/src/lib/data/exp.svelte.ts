@@ -12,9 +12,10 @@ interface ExpData {
 }
 
 class ExpDataHandler {
-	private expData: Record<string, ExpData> = {};
 	private loading: boolean = false;
 	private ws = getSocketState();
+	
+	expData: Record<string, ExpData> = $state({});
 
 	private async ensureLoaded(): Promise<void> {
 		if (Object.keys(this.expData).length > 0) return;

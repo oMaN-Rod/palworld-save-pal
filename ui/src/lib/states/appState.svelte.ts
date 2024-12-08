@@ -1,4 +1,4 @@
-import { palsData } from '$lib/data/pals';
+import { palsData } from '$lib/data';
 import type { ItemContainerSlot } from '$types';
 import { type Pal, type Player, type SaveFile } from '$types';
 import { getSocketState } from './websocketState.svelte';

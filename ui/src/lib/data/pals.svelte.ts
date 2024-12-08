@@ -4,8 +4,9 @@ import { type PalData, MessageType } from '$types';
 
 export class Pals {
     private ws = getSocketState();
-    private pals: Record<string, PalData> = {};
     private loading = false;
+    
+    pals: Record<string, PalData> = $state({});
 
     private async ensurePalsLoaded(): Promise<void> {
         if (Object.keys(this.pals).length === 0 && !this.loading) {

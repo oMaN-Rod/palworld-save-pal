@@ -1,5 +1,5 @@
 <script lang="ts">
-	import PalEdit from './components/PalEdit.svelte';
+	import PalEdit from './components/pal/Edit.svelte';
 	import PlayerEdit from './components/PlayerEdit.svelte';
 
 	import { Drawer, PlayerList, PalList } from '$components';

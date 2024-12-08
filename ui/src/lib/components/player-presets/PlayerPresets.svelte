@@ -17,10 +17,13 @@
 
 	type ExtendedPresetProfile = PresetProfile & { id: string };
 
-	let selectedPreset: ExtendedPresetProfile = $state({ id: '', name: '' });
+	let selectedPreset: ExtendedPresetProfile = $state({ id: '', name: '', type: 'inventory' });
 	let selectedPresets: ExtendedPresetProfile[] = $state([]);
-	let presets: Record<string, PresetProfile> = $state({});
-	let filteredPresets: ExtendedPresetProfile[] = $state([]);
+	let filteredPresets: ExtendedPresetProfile[] = $derived.by(() => {
+		return Object.entries(presetsData.presetProfiles)
+			.filter(([_, preset]) => preset.type === 'inventory')
+			.map(([id, preset]) => ({ ...preset, id }));
+	});
 	let selectAll: boolean = $state(false);
 	let listWrapperStyle = $state('');
 
@@ -31,11 +34,6 @@
 			const listHeight = windowHeight - rect.top - 320;
 			listWrapperStyle = `height: ${listHeight}px;`;
 		}
-	}
-
-	async function getPresetProfiles() {
-		presets = await presetsData.getPresetProfiles();
-		filteredPresets = Object.entries(presets).map(([id, preset]) => ({ ...preset, id }));
 	}
 
 	async function handleApplyPreset() {
@@ -120,8 +118,9 @@
 			value: ''
 		});
 		if (!result) return;
-		let newPreset = {
+		const newPreset = {
 			name: result,
+			type: 'inventory',
 			common_container: processSlots(appState.selectedPlayer.common_container.slots),
 			essential_container: processSlots(appState.selectedPlayer.essential_container.slots),
 			weapon_load_out_container: processSlots(
@@ -131,9 +130,8 @@
 				appState.selectedPlayer.player_equipment_armor_container.slots
 			),
 			food_equip_container: processSlots(appState.selectedPlayer.food_equip_container.slots)
-		};
-		presets = await presetsData.addPresetProfile(newPreset);
-		await getPresetProfiles();
+		} as PresetProfile;
+		await presetsData.addPresetProfile(newPreset);
 		selectedPresets = [];
 		selectAll = false;
 	}
@@ -147,8 +145,7 @@
 		});
 		if (!result) return;
 		const presetIds = selectedPresets.map((preset) => preset.id);
-		presets = await presetsData.removePresetProfiles(presetIds);
-		await getPresetProfiles();
+		await presetsData.removePresetProfiles(presetIds);
 		selectedPresets = [];
 		selectAll = false;
 	}
@@ -160,12 +157,10 @@
 			value: preset.name
 		});
 		if (!result) return;
-		presets = await presetsData.changePresetName(preset.id, result);
-		await getPresetProfiles();
+		await presetsData.changePresetName(preset.id, result);
 	}
 
 	$effect(() => {
-		getPresetProfiles();
 		calculateHeight();
 	});
 
@@ -203,7 +198,7 @@
 		<List
 			baseClass="bg-surface-800"
 			listClass="overflow-y-scroll"
-			bind:items={filteredPresets}
+			items={filteredPresets}
 			bind:selectedItems={selectedPresets}
 			bind:selectedItem={selectedPreset}
 			bind:selectAll

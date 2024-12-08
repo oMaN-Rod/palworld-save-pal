@@ -3,8 +3,9 @@ import { MessageType, type PresetProfile } from '$types';
 
 export class Presets {
     private ws = getSocketState();
-    private presetProfiles: Record<string, PresetProfile> = {};
     private loading = false;
+    
+    presetProfiles: Record<string, PresetProfile> = $state({});
 
     private async ensurePresetProfilesLoaded(): Promise<void> {
         if (Object.keys(this.presetProfiles).length === 0 && !this.loading) {

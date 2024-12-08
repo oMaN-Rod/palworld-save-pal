@@ -20,59 +20,32 @@
 		closeModal: (value: any) => void;
 	}>();
 
-	let selectOptions: SelectOption[] = $state([]);
-	let activeSkills: ActiveSkill[] = $state([]);
-	let passiveSkills: PassiveSkill[] = $state([]);
-	let elementTypes: string[] = $state([]);
-	let elementIcons: Record<string, string> = $state({});
-
-	async function loadElementTypes() {
-		elementTypes = await elementsData.getAllElementTypes();
-	}
-
-	async function loadElementIcons() {
-		for (const elementType of elementTypes) {
-			const elementObj = await elementsData.searchElement(elementType);
-			if (elementObj) {
-				const iconPath = `${ASSET_DATA_PATH}/img/elements/${elementObj.badge_icon}.png`;
-				try {
-					elementIcons[elementType] = await assetLoader.loadImage(iconPath, true);
-				} catch (error) {
-					console.error(`Failed to load icon for ${elementType}:`, error);
-				}
-			}
+	let selectOptions: SelectOption[] = $derived.by(() => {
+		if (type === 'Active') {
+			return Object.values(activeSkillsData.activeSkills)
+				.filter((skill) => {
+					if (!skill.details.exclusive) {
+						return true;
+					}
+					if (skill.details.exclusive.includes(palCharacterId)) {
+						return true;
+					}
+					return false;
+				})
+				.sort((a, b) => a.details.element.localeCompare(b.details.element))
+				.map((s) => ({
+					value: s.id,
+					label: s.name
+				}));
+		} else {
+			return Object.values(passiveSkillsData.passiveSkills)
+				.sort((a, b) => a.details.tier.localeCompare(b.details.tier))
+				.map((s) => ({
+					value: s.id,
+					label: s.name
+				}));
 		}
-	}
-
-	async function getActiveSkills() {
-		const allSkills = await activeSkillsData.getActiveSkills();
-		const applicableSkills = allSkills.filter((skill) => {
-			if (!skill.details.exclusive) {
-				return true;
-			}
-			if (skill.details.exclusive.includes(palCharacterId)) {
-				return true;
-			}
-			return false;
-		});
-		selectOptions = applicableSkills
-			.sort((a, b) => a.details.element.localeCompare(b.details.element))
-			.map((s) => ({
-				value: s.id,
-				label: s.name
-			}));
-		activeSkills = applicableSkills;
-	}
-
-	async function getPassiveSkills() {
-		passiveSkills = await passiveSkillsData.getPassiveSkills();
-		selectOptions = passiveSkills
-			.sort((a, b) => a.details.tier.localeCompare(b.details.tier))
-			.map((s) => ({
-				value: s.id,
-				label: s.name
-			}));
-	}
+	});
 
 	function handleClear() {
 		closeModal('Empty');
@@ -83,7 +56,7 @@
 	}
 
 	async function getActiveSkillIcon(skillId: string): Promise<string | undefined> {
-		const skill = activeSkills.find((s) => s.id === skillId);
+		const skill = Object.values(activeSkillsData.activeSkills).find((s) => s.id === skillId);
 		if (!skill || skill.name === 'None') return undefined;
 		const activeSkill = skill as ActiveSkill;
 		const elementObj = await elementsData.searchElement(activeSkill.details.element);
@@ -94,38 +67,20 @@
 	}
 
 	async function getPassiveSkillIcon(skillId: string): Promise<string | undefined> {
-		const skill = passiveSkills.find((s) => s.id === skillId);
+		const skill = Object.values(passiveSkillsData.passiveSkills).find((s) => s.id === skillId);
 		if (!skill || skill.name === 'None') return undefined;
 		const passiveSkill = skill as PassiveSkill;
 		const iconPath = `${ASSET_DATA_PATH}/img/passives/Passive_${passiveSkill.details.tier.toUpperCase()}_icon.png`;
 		const icon = await assetLoader.loadImage(iconPath, true);
 		return icon;
 	}
-
-	$effect(() => {
-		if (type === 'Active') {
-			loadElementTypes();
-		}
-	});
-
-	$effect(() => {
-		if (elementTypes.length > 0 && type === 'Active') {
-			loadElementIcons();
-		}
-	});
-
-	$effect(() => {
-		if (type === 'Active') {
-			getActiveSkills();
-		} else {
-			getPassiveSkills();
-		}
-	});
 </script>
 
 {#snippet activeSkillOption(option: SelectOption)}
 	{#await getActiveSkillIcon(option.value) then icon}
-		{@const activeSkill = activeSkills.find((s) => s.id === option.value)}
+		{@const activeSkill = Object.values(activeSkillsData.activeSkills).find(
+			(s) => s.id === option.value
+		)}
 		<div class="grid grid-cols-[auto_1fr_auto] items-center gap-2">
 			{#if icon}
 				<enhanced:img src={icon} alt={option.label} class="h-6 w-6"></enhanced:img>
@@ -158,7 +113,9 @@
 
 {#snippet passiveSkillOption(option: SelectOption)}
 	{#await getPassiveSkillIcon(option.value) then icon}
-		{@const passiveSkill = passiveSkills.find((s) => s.id === option.value)}
+		{@const passiveSkill = Object.values(passiveSkillsData.passiveSkills).find(
+			(s) => s.id === option.value
+		)}
 		<div class="flex flex-row">
 			<div class="flex grow flex-col">
 				<span class="grow truncate">{option.label}</span>

@@ -5,9 +5,10 @@ import { MessageType, type Element } from '$types';
 
 export class Elements {
     private ws = getSocketState();
-    private elements: Record<string, Element> = {};
     private loading = false;
-
+    
+    elements: Record<string, Element> = $state({});
+    
     private async ensureElementsLoaded(): Promise<void> {
         if (Object.keys(this.elements).length === 0 && !this.loading) {
             try {

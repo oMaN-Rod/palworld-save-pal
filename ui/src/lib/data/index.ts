@@ -1,10 +1,10 @@
-import { activeSkillsData } from './active-skills';
-import { elementsData } from './elements';
-import { expData } from './exp';
-import { itemsData } from './items';
-import { palsData } from './pals';
-import { passiveSkillsData } from './passive-skills';
-import { presetsData } from './presets';
+import { activeSkillsData } from './active-skills.svelte';
+import { elementsData } from './elements.svelte';
+import { expData } from './exp.svelte';
+import { itemsData } from './items.svelte';
+import { palsData } from './pals.svelte';
+import { passiveSkillsData } from './passive-skills.svelte.';
+import { presetsData } from './presets.svelte';
 
 export * from './stats';
 export {

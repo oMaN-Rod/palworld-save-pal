@@ -11,13 +11,8 @@
 		closeModal: (value: any) => void;
 	}>();
 
-	let selectOptions: SelectOption[] = $state([]);
-	let selectedPal: string = $state('');
-	let nickname: string = $state('');
-
-	async function loadPalOptions() {
-		const allPals = await palsData.getAllPals();
-		selectOptions = allPals
+	let selectOptions: SelectOption[] = $derived.by(() => {
+		return Object.entries(palsData.pals)
 			.filter(
 				([_, pal]) => pal.is_pal && !pal.is_tower_boss && !pal.localized_name.includes('en_text')
 			)
@@ -26,7 +21,9 @@
 				label: pal.localized_name
 			}))
 			.sort((a, b) => a.label.localeCompare(b.label));
-	}
+	});
+	let selectedPal: string = $state('');
+	let nickname: string = $state('');
 
 	async function getElementIcon(elementType: ElementType): Promise<string | undefined> {
 		const elementObj = await elementsData.searchElement(elementType.toString());
@@ -48,10 +45,6 @@
 	function handleClose(confirmed: boolean) {
 		closeModal(confirmed ? [selectedPal, nickname] : undefined);
 	}
-
-	$effect(() => {
-		loadPalOptions();
-	});
 </script>
 
 <Card class="bg-surface-500 min-w-[calc(100vw/3)]">

@@ -3,7 +3,7 @@ from typing import Any, Dict, List, Optional
 from pydantic import BaseModel
 from uuid import UUID
 
-from palworld_save_pal.editor.player_preset import PlayerPreset
+from palworld_save_pal.editor.preset_profile import PresetProfile
 from palworld_save_pal.game.pal import Pal
 from palworld_save_pal.game.player import Player
 
@@ -138,7 +138,7 @@ class UpdatePresetMessage(BaseMessage):
 
 class AddPresetMessage(BaseMessage):
     type: str = MessageType.ADD_PRESET.value
-    data: PlayerPreset
+    data: PresetProfile
 
 
 class DeletePresetMessage(BaseMessage):

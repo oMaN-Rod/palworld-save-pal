@@ -3,9 +3,10 @@ import { MessageType, type ActiveSkill, type ActiveSkillDetails } from '$types';
 
 export class ActiveSkills {
     private ws = getSocketState();
-    private activeSkills: Record<string, ActiveSkill> = {};
     private loading = false;
-
+    
+    activeSkills: Record<string, ActiveSkill> = $state({});
+    
     private async ensureActiveSkillsLoaded(): Promise<void> {
         if (Object.keys(this.activeSkills).length === 0 && !this.loading) {
             try {

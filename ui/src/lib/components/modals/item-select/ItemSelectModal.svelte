@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Card, Tooltip, Combobox, Input } from '$components/ui';
-	import { ItemTypeA, ItemTypeB, Rarity, type ItemType, type SelectOption } from '$types';
+	import { ItemTypeA, ItemTypeB, Rarity, type SelectOption } from '$types';
 	import { Apple, Cuboid, Delete, Gem, Save, Scroll, Shield, Sword, X } from 'lucide-svelte';
 	import { itemsData } from '$lib/data';
 	import type { Item, ItemGroup } from '$types';
@@ -22,25 +22,8 @@
 		closeModal: (value: [string, number]) => void;
 	}>();
 
-	let selectOptions: SelectOption[] = $state([]);
-	let items: Item[] = $state([]);
-
-	let selectedItemMaxStackCount = $derived(
-		items.find((item) => item.id === itemId)?.details.max_stack_count
-	);
-
-	function handleClose(confirmed: boolean) {
-		closeModal(confirmed ? [itemId, count] : undefined);
-	}
-
-	function handleClear() {
-		itemId = 'None';
-		count = 0;
-	}
-
-	async function getItems() {
-		const allItems = await itemsData.getAllItems();
-		const applicableItems = allItems.filter((item) => {
+	let items: Item[] = $derived.by(() => {
+		return Object.values(itemsData.items).filter((item) => {
 			if (
 				item.details.type_a == ItemTypeA.None ||
 				item.details.type_a == ItemTypeA.MonsterEquipWeapon
@@ -73,13 +56,23 @@
 					return true;
 			}
 		});
-		items = applicableItems;
-		selectOptions = items.map((item) => ({ label: item.info.localized_name, value: item.id }));
+	});
+	let selectOptions: SelectOption[] = $derived.by(() => {
+		return items.map((item) => ({ label: item.info.localized_name, value: item.id }));
+	});
+
+	let selectedItemMaxStackCount = $derived(
+		items.find((item) => item.id === itemId)?.details.max_stack_count
+	);
+
+	function handleClose(confirmed: boolean) {
+		closeModal(confirmed ? [itemId, count] : undefined);
 	}
 
-	$effect(() => {
-		getItems();
-	});
+	function handleClear() {
+		itemId = 'None';
+		count = 0;
+	}
 
 	async function getItemIcon(staticId: string) {
 		if (!staticId) return;
@@ -184,7 +177,7 @@
 									getBackgroundColor(option.value)
 								)}
 							>
-								{@render noIcon(item?.details.type_a, item?.details.type_b)}
+								{@render noIcon(item!.details.type_a, item!.details.type_b)}
 							</div>
 						{/if}
 						<div class="flex flex-col">
@@ -202,7 +195,7 @@
 						<div
 							class={cn('mr-2 flex items-center justify-center', getBackgroundColor(option.value))}
 						>
-							{@render noIcon(item?.details.type_a, item?.details.type_b)}
+							{@render noIcon(item!.details.type_a, item!.details.type_b)}
 						</div>
 						<span class="h-6">{option.label}</span>
 						<span>{getItemTier(option.value)}</span>

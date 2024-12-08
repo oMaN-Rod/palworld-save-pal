@@ -176,6 +176,8 @@ export interface ItemContainer {
 
 export interface PresetProfile {
 	name: string;
+	type: "inventory" | "active_skills" | "passive_skills";
+	skills?: string[];
 	common_container?: ItemContainerSlot[];
 	essential_container?: ItemContainerSlot[];
 	weapon_load_out_container?: ItemContainerSlot[];

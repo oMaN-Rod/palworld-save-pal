@@ -10,15 +10,16 @@
 		LearnedSkillSelectModal
 	} from '$components';
 	import { CornerDotButton, Progress, SectionHeader, Tooltip } from '$components/ui';
-	import { type ElementType, EntryState, type Pal, PalGender } from '$types';
+	import { type ElementType, EntryState, type Pal, PalGender, type PresetProfile } from '$types';
 	import { ASSET_DATA_PATH } from '$lib/constants';
-	import { palsData, elementsData, expData } from '$lib/data';
+	import { palsData, elementsData, expData, presetsData } from '$lib/data';
 	import { cn } from '$theme';
 	import { getAppState, getModalState } from '$states';
 	import { Rating } from '@skeletonlabs/skeleton-svelte';
-	import { Minus, Plus, Brain } from 'lucide-svelte';
+	import { Minus, Plus, Brain, Save } from 'lucide-svelte';
 	import { Souls } from '$components';
 	import { getStats } from '$lib/data';
+	import SkillPresets from './SkillPresets.svelte';
 
 	const appState = getAppState();
 	const modal = getModalState();
@@ -26,12 +27,11 @@
 	let palLevel: string = $state('');
 	let palLevelClass: string = $state('');
 	let palLevelMessage: string = $state('');
-
-	let alphaIcon: string = $state('');
-
 	let palLevelProgressToNext: number = $state(0);
 	let palLevelProgressValue: number = $state(0);
 	let palLevelProgressMax: number = $state(1);
+
+	let alphaIcon: string = $state('');
 
 	async function loadPalImage(): Promise<string | undefined> {
 		const pal = $state.snapshot(appState.selectedPal);
@@ -169,7 +169,6 @@
 		appState.selectedPal.level = 55;
 		appState.selectedPal.is_boss = true;
 		appState.selectedPal.is_lucky = false;
-		await setBasePreset('Element');
 		appState.selectedPal.talent_hp = 100;
 		appState.selectedPal.talent_shot = 100;
 		appState.selectedPal.talent_defense = 100;
@@ -184,6 +183,13 @@
 		const palData = await palsData.getPalInfo(appState.selectedPal.character_id);
 		if (palData) {
 			appState.selectedPal.stomach = palData.max_full_stomach;
+			const palType = palData.element_types[0];
+			appState.selectedPal.passive_skills = [
+				'Noukin',
+				'PAL_ALLAttack_up2',
+				'Legend',
+				getElementPassive(palType)
+			];
 		} else {
 			appState.selectedPal.stomach = 150;
 		}
@@ -238,74 +244,12 @@
 		}
 	}
 
-	async function setBasePreset(preset: string) {
+	async function setSkillPreset(type: 'active' | 'passive', skills: string[]) {
 		if (appState.selectedPal) {
-			switch (preset) {
-				case 'Base':
-					appState.selectedPal.passive_skills = [
-						'CraftSpeed_up2',
-						'PAL_Sanity_Down_2',
-						'Rare',
-						'PAL_FullStomach_Down_2'
-					];
-					break;
-				case 'Worker':
-					appState.selectedPal.passive_skills = [
-						'CraftSpeed_up2',
-						'CraftSpeed_up1',
-						'Rare',
-						'PAL_CorporateSlave'
-					];
-					break;
-				case 'Runner':
-					appState.selectedPal.passive_skills = [
-						'MoveSpeed_up_3',
-						'MoveSpeed_up_2',
-						'MoveSpeed_up_1',
-						'Legend'
-					];
-					break;
-				case 'Tank':
-					appState.selectedPal.passive_skills = [
-						'Deffence_up2',
-						'Deffence_up1',
-						'PAL_masochist',
-						'Legend'
-					];
-					break;
-				case 'Attack':
-					appState.selectedPal.passive_skills = ['Noukin', 'PAL_ALLAttack_up2', 'Rare', 'Legend'];
-					break;
-				case 'Balanced':
-					appState.selectedPal.passive_skills = [
-						'Noukin',
-						'PAL_ALLAttack_up2',
-						'Deffence_up2',
-						'Legend'
-					];
-					break;
-				case 'Mount':
-					appState.selectedPal.passive_skills = [
-						'Noukin',
-						'PAL_ALLAttack_up2',
-						'MoveSpeed_up_3',
-						'Legend'
-					];
-					break;
-				case 'Element':
-					const palData = await palsData.getPalInfo(appState.selectedPal.character_id);
-					if (!palData) {
-						await setBasePreset('Attack');
-						return;
-					}
-					const palType = palData.element_types[0];
-					appState.selectedPal.passive_skills = [
-						'Noukin',
-						'PAL_ALLAttack_up2',
-						'Legend',
-						getElementPassive(palType)
-					];
-					break;
+			if (type === 'active') {
+				appState.selectedPal.active_skills = skills || [];
+			} else {
+				appState.selectedPal.passive_skills = skills || [];
 			}
 			appState.selectedPal.state = EntryState.MODIFIED;
 		}
@@ -354,6 +298,25 @@
 				: appState.selectedPal.is_lucky;
 			appState.selectedPal.state = EntryState.MODIFIED;
 		}
+	}
+	async function handleAddPreset(type: 'active' | 'passive') {
+		if (!appState.selectedPal) return;
+		// @ts-ignore
+		const result = await modal.showModal<string>(TextInputModal, {
+			title: `Add ${type} skills preset`,
+			value: '',
+			inputLabel: 'Preset name'
+		});
+		if (!result) return;
+		const skills =
+			type === 'active' ? appState.selectedPal.active_skills : appState.selectedPal.passive_skills;
+		const newPreset = {
+			name: result,
+			type: type === 'active' ? 'active_skills' : 'passive_skills',
+			skills
+		} as PresetProfile;
+
+		await presetsData.addPresetProfile(newPreset);
 	}
 
 	$effect(() => {
@@ -532,9 +495,9 @@
 			<div class="flex flex-grow">
 				<div class="flex-1 overflow-auto p-2">
 					<div class="flex flex-col space-y-2">
-						<div class="flex flex-row">
-							<SectionHeader text="Active Skills">
-								{#snippet action()}
+						<SectionHeader text="Active Skills">
+							{#snippet action()}
+								<div class="flex">
 									<Tooltip>
 										<button
 											class="btn hover:bg-secondary-500/25 ml-2 p-2"
@@ -546,9 +509,20 @@
 											<span>Edit Learned Skills</span>
 										{/snippet}
 									</Tooltip>
-								{/snippet}
-							</SectionHeader>
-						</div>
+									<Tooltip>
+										<button
+											class="btn hover:bg-secondary-500/25 ml-2 p-2"
+											onclick={() => handleAddPreset('active')}
+										>
+											<Save size={20} />
+										</button>
+										{#snippet popup()}
+											<span>Save as preset</span>
+										{/snippet}
+									</Tooltip>
+								</div>
+							{/snippet}
+						</SectionHeader>
 						{#each getActiveSkills(appState.selectedPal) as skill}
 							<ActiveSkillBadge
 								{skill}
@@ -556,57 +530,30 @@
 								palCharacterId={appState.selectedPal.character_id}
 							/>
 						{/each}
-						<SectionHeader text="Passive Skills" />
+						<SectionHeader text="Passive Skills">
+							{#snippet action()}
+								<div class="flex">
+									<Tooltip>
+										<button
+											class="btn hover:bg-secondary-500/25 ml-2 p-2"
+											onclick={() => handleAddPreset('passive')}
+										>
+											<Save size={20} />
+										</button>
+										{#snippet popup()}
+											<span>Save as preset</span>
+										{/snippet}
+									</Tooltip>
+								</div>
+							{/snippet}
+						</SectionHeader>
 						<div class="grid grid-cols-2 gap-2">
 							{#each getPassiveSkills(appState.selectedPal) as skill}
 								<PassiveSkillBadge {skill} onSkillUpdate={handleUpdatePassiveSkill} />
 							{/each}
 						</div>
 						<SectionHeader text="Presets" />
-						<div class="btn-group preset-outlined-surface-100-900 my-2 flex p-2">
-							<button
-								type="button"
-								class="btn hover:bg-primary-500"
-								onclick={() => setBasePreset('Base')}>Base</button
-							>
-							<button
-								type="button"
-								class="btn hover:bg-primary-500"
-								onclick={() => setBasePreset('Worker')}>Worker</button
-							>
-							<button
-								type="button"
-								class="btn hover:bg-primary-500"
-								onclick={() => setBasePreset('Runner')}>Runner</button
-							>
-							<button
-								type="button"
-								class="btn hover:bg-primary-500"
-								onclick={() => setBasePreset('Tank')}>Tank</button
-							>
-						</div>
-						<div class="btn-group preset-outlined-surface-100-900 my-2 flex p-2">
-							<button
-								type="button"
-								class="btn hover:bg-primary-500"
-								onclick={() => setBasePreset('Attack')}>Attack</button
-							>
-							<button
-								type="button"
-								class="btn hover:bg-primary-500"
-								onclick={() => setBasePreset('Balanced')}>Balanced</button
-							>
-							<button
-								type="button"
-								class="btn hover:bg-primary-500"
-								onclick={() => setBasePreset('Mount')}>Mount</button
-							>
-							<button
-								type="button"
-								class="btn hover:bg-primary-500"
-								onclick={() => setBasePreset('Element')}>Element</button
-							>
-						</div>
+						<SkillPresets onSelect={setSkillPreset} />
 						<SectionHeader text="Work Suitability" />
 						<WorkSuitabilities bind:pal={appState.selectedPal} />
 					</div>

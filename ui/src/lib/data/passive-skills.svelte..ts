@@ -3,11 +3,12 @@ import { MessageType, type PassiveSkill, type PassiveSkillDetails } from '$types
 
 export class PassiveSkills {
 	private ws = getSocketState();
-	private passive_skills: Record<string, PassiveSkill> = {};
 	private loading = false;
+	
+	passiveSkills: Record<string, PassiveSkill> = $state({});
 
 	private async ensurePassiveSkillsLoaded(): Promise<void> {
-		if (Object.keys(this.passive_skills).length === 0 && !this.loading) {
+		if (Object.keys(this.passiveSkills).length === 0 && !this.loading) {
 			try {
 				this.loading = true;
 				const response = await this.ws.sendAndWait({
@@ -16,7 +17,7 @@ export class PassiveSkills {
 				if (response.type === 'error') {
 					throw new Error(response.data);
 				}
-				this.passive_skills = response.data;
+				this.passiveSkills = response.data;
 				this.loading = false;
 			} catch (error) {
 				console.error('Error fetching passive skills:', error);
@@ -35,18 +36,18 @@ export class PassiveSkills {
 	}
 
 	private getByKey(key: string): PassiveSkill | undefined {
-		return this.passive_skills[key];
+		return this.passiveSkills[key];
 	}
 
 	private getByName(name: string): PassiveSkill | undefined {
-		return Object.values(this.passive_skills).find(
+		return Object.values(this.passiveSkills).find(
 			(skill) => skill.name.toLowerCase() === name.toLowerCase()
 		);
 	}
 
 	async getPassiveSkills(): Promise<PassiveSkill[]> {
 		await this.ensurePassiveSkillsLoaded();
-		return Object.values(this.passive_skills);
+		return Object.values(this.passiveSkills);
 	}
 
 	async getField(
@@ -66,7 +67,7 @@ export class PassiveSkills {
 
 	async searchPassiveSkillsByTier(tier: string): Promise<PassiveSkill[]> {
 		await this.ensurePassiveSkillsLoaded();
-		return Object.values(this.passive_skills).filter(
+		return Object.values(this.passiveSkills).filter(
 			(skill) => skill.details.tier.toLowerCase() === tier.toLowerCase()
 		);
 	}
