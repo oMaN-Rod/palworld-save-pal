@@ -15,6 +15,7 @@ Palworld Save Pal is a tool for managing and analyzing save files.
   - [🐳 Docker](#-docker)
   - [👨‍💻 Developer Guide](#-developer-guide)
     - [Web](#web)
+    - [Desktop App](#desktop-app)
     - [Build Desktop App](#build-desktop-app)
       - [Using build script](#using-build-script)
       - [Manual build](#manual-build)
@@ -118,6 +119,37 @@ For developers who want to contribute to Palworld Save Pal:
 
 5. Open your browser and navigate to `http://127.0.0.1:5173`
 
+### Desktop App
+
+1. Set the environment variable for the svelte SPA `ui/.env`.
+
+   ```env
+   PUBLIC_WS_URL=127.0.0.1:5174/ws
+   PUBLIC_DESKTOP_MODE=true
+   ```
+
+2. Run the frontend in development mode:
+
+   ```powershell
+   cd ui
+   bun install
+   bun run dev
+   ```
+
+3. Activate python environment
+
+   ```powershell
+   python -m venv .venv
+   source .\.venv\Scripts\activate
+   pip install -r requirements.txt
+   ```
+
+4. Run the desktop app:
+
+   ```powershell
+   python .\desktop.py --dev --web-host localhost --web-port 5173 
+   ```
+
 ### Build Desktop App
 
 > Activate the environment
@@ -146,7 +178,7 @@ pip install -r requirements.txt
 2. Create EXE:
 
    ```powershell
-   pyinstaller desktop.spec
+   python -m nuitka --onefile .\desktop.py --output-filename=PSP.exe --windows-icon-from-ico=ui/static/favicon.ico --windows-console-mode=disable
    ```
 
 3. Build the SPA (replace bun with your package manager of choice). This will create a build directory in the project root containing the static files for the SPA:
@@ -160,8 +192,10 @@ pip install -r requirements.txt
 4. Copy build to the dist folder:
 
    ```powershell
+   mkdir .\dist\
    cp -R .\build\ .\dist\
    cp -R .\data\ .\dist\
+   cp PSP.exe .\dist\
    ```
 
 > **Note:** The `dist` folder will contain the executable and the SPA build files, the data folder contains json files with game data, all need to be distributed together.
@@ -201,6 +235,7 @@ Here's what's planned for future releases of Palworld Save Pal:
 - [X] Edit Stomach
 - [X] Edit Inventory
 - [X] Player presets for inventory
+- [X] Stats (Health, Stamina, Attack, Work Speed, and Weight)
 
 ### Map
 
