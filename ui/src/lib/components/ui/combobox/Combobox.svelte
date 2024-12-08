@@ -7,7 +7,7 @@
 	import { debounce } from '$utils';
 
 	let {
-		options = [],
+		options = $bindable<SelectOption[]>([]),
 		selectClass: _selectClass = 'bg-surface-900',
 		labelClass: _labelClass = '',
 		labelTextClass: _labelTextClass = '',
@@ -70,6 +70,7 @@
 			debounceSearch();
 		} else {
 			filteredOptions = options;
+			value = '';
 		}
 	});
 
