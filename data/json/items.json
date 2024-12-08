@@ -11688,7 +11688,7 @@
         "weight": 0.2,
         "type_a": "Material",
         "price": 300,
-        "icon": "PalItem_LizardMan",
+        "icon": "Leezpunk_Crest",
         "type_b": "MaterialMonster",
         "rank": 1,
         "rarity": 0,
@@ -15040,6 +15040,18 @@
         "rarity": 1,
         "max_stack_count": 999999,
         "sort_id": 10109
+    },
+    "SkillUnlock_MoonQueen": {
+        "group": "KeyItem",
+        "weight": 0.0,
+        "type_a": "Essential",
+        "price": 0,
+        "icon": "Pal_Saddle",
+        "type_b": "Essential_PalGear",
+        "rank": 0,
+        "rarity": 4,
+        "max_stack_count": 999999,
+        "sort_id": 10131
     },
     "SkillUnlock_MopKing": {
         "group": "KeyItem",

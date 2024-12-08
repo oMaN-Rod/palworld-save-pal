@@ -2753,7 +2753,7 @@
     },
     "HeadEquip025": {
         "localized_name": "Leezpunk Hood",
-        "description": "Hood shaped like a <characterName id=|Lizardman|/>."
+        "description": "Hood shaped like a Leezpunk."
     },
     "HeadEquip026": {
         "localized_name": "Killamari Cap",
@@ -4394,6 +4394,10 @@
     "SkillUnlock_Monkey": {
         "localized_name": "Tanzee's Assault Rifle",
         "description": "Assault rifle made especially for Tanzee.\r\nActivate its Partner Skill, and Tanzee will enter gunner mode\r\nand begin shooting at nearby enemies."
+    },
+    "SkillUnlock_MoonQueen": {
+        "localized_name": "Selyne Saddle",
+        "description": "Saddle for safely riding Selyne."
     },
     "SkillUnlock_MopKing": {
         "localized_name": "Sweepa Saddle",
