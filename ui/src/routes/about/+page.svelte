@@ -1,30 +1,10 @@
 <script lang="ts">
-	import { getSocketState } from '$states';
-	import { MessageType } from '$types';
+	import { getAppState } from '$states';
 	import { Card, TooltipButton } from '$components/ui';
 	import { Github } from 'lucide-svelte';
 	import Saitama from '$lib/assets/img/app/saitama.png?enhanced';
 
-	let version = $state('');
-	const ws = getSocketState();
-
-	$effect(() => {
-		if (ws.message?.type === MessageType.GET_VERSION) {
-			version = ws.message.data;
-			ws.clear(MessageType.GET_VERSION);
-		}
-	});
-
-	$effect(() => {
-		const getCurrentVersion = async () => {
-			ws.send(
-				JSON.stringify({
-					type: MessageType.GET_VERSION
-				})
-			);
-		};
-		getCurrentVersion();
-	});
+	const appState = getAppState();
 </script>
 
 <div class="flex h-full w-full items-center justify-center space-x-2 p-2">
@@ -32,7 +12,7 @@
 		<Card class="max-w-lg">
 			<div class="flex space-x-2">
 				<h1 class="h1">Palworld Save Pal</h1>
-				<span class="font-bold">v{version || 'Loading...'}</span>
+				<span class="font-bold">v{appState.version || 'Loading...'}</span>
 			</div>
 
 			<div class="flex flex-col space-y-2">

@@ -1,4 +1,4 @@
-import { palsData } from '$lib/data';
+// src/lib/states/appState.svelte.ts
 import type { ItemContainerSlot } from '$types';
 import { type Pal, type Player, type SaveFile } from '$types';
 import { getSocketState } from './websocketState.svelte';
@@ -15,6 +15,8 @@ export function createAppState() {
 	let modifiedPals: Record<string, Pal> = $state({});
 	let modifiedPlayers: Record<string, Player> = $state({});
 	let clipboardItem: ItemContainerSlot | null = $state(null);
+	let progressMessage: string = $state('');
+	let version: string = $state('');
 
 	function resetState() {
 		players = {};
@@ -27,26 +29,7 @@ export function createAppState() {
 		modifiedPlayers = {};
 	}
 
-	function setPlayers(newPlayers: Record<string, Player>) {
-		Object.entries(newPlayers).forEach(([key, player]) => {
-			try {
-				if (player.pals) {
-					Object.values(player.pals).forEach(async (pal) => {
-						const palInfo = await palsData.getPalInfo(pal.character_id);
-						if (!palInfo) {
-							console.error(`Failed to find pal info for`, pal);
-						}
-						pal.name = palInfo?.localized_name || pal.character_id;
-					});
-				}
-
-				players[key] = player;
-			} catch (error) {
-				console.error(`Failed to parse player data for key ${key}:`, error);
-			}
-		});
-	}
-
+	// Handle selected player/pal updates
 	function setSelectedPal(pal: Pal | undefined) {
 		selectedPal = pal;
 		if (pal) {
@@ -73,7 +56,7 @@ export function createAppState() {
 			return players;
 		},
 		set players(newPlayers: Record<string, Player>) {
-			setPlayers(newPlayers);
+			players = newPlayers;
 		},
 
 		get selectedPlayerUid() {
@@ -111,6 +94,13 @@ export function createAppState() {
 			playerSaveFiles = files;
 		},
 
+		get progressMessage() {
+			return progressMessage;
+		},
+		set progressMessage(message: string) {
+			progressMessage = message;
+		},
+
 		get modifiedPals() {
 			return modifiedPals;
 		},
@@ -118,6 +108,14 @@ export function createAppState() {
 		get modifiedPlayers() {
 			return modifiedPlayers;
 		},
+
+		get version() {
+			return version;
+		},
+		set version(ver: string) {
+			version = ver;
+		},
+
 		resetState,
 		resetModified() {
 			modifiedPlayers = {};

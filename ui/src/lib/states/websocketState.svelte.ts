@@ -1,8 +1,9 @@
+// src/lib/states/websocketState.svelte.ts
 import { PUBLIC_WS_URL } from '$env/static/public';
+import { getDispatcher } from '$lib/ws/dispatcher';
+import type { WSHandlerContext } from '$lib/ws/types';
 import { MessageType, type Message } from '$types';
-import { ExponentialBackoff, handleAll, retry } from 'cockatiel';
 
-const retryPolicy = retry(handleAll, { maxAttempts: 3, backoff: new ExponentialBackoff() });
 const RECONNECT_DELAY = 5000;
 
 export function createSocketState() {
@@ -10,49 +11,45 @@ export function createSocketState() {
 	let websocket: WebSocket;
 	let message: Message | null = $state(null);
 	let connected: boolean = $state(false);
-	let messageQueue: Map<string, (value: any) => void> = new Map();
+	const dispatcher = getDispatcher();
+	let messageQueue = new Map<string, (value: any) => void>();
 
-	function connect() {
+	function connect(context: WSHandlerContext) {
 		const protocol = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
 		const wsUrl = `${protocol}${PUBLIC_WS_URL}/${clientId}`;
 		websocket = new WebSocket(wsUrl);
 
-		websocket.onopen = async () => {
+		websocket.onopen = () => {
 			connected = true;
 			websocket.send(JSON.stringify({ type: MessageType.SYNC_APP_STATE }));
+			websocket.send(JSON.stringify({ type: MessageType.GET_VERSION }));
 			console.log('Connected to backend!');
 		};
 
-		websocket.onmessage = (event) => {
+		websocket.onmessage = async (event) => {
 			const data = JSON.parse(event.data);
 			message = data;
-			message = { ...message } as Message;
-			console.log('Received message:', JSON.stringify(message, null, 2));
+			if (!message) return;
 
 			if (message.type && messageQueue.has(message.type)) {
 				const resolve = messageQueue.get(message.type);
 				if (resolve) {
 					resolve(message);
 					messageQueue.delete(message.type);
+					return;
 				}
 			}
+
+			await dispatcher.dispatch(message, context);
 		};
 
-		websocket.onclose = (event) => {
-			console.log('Connection closed:', event);
+		websocket.onclose = () => {
 			connected = false;
-			message = {
-				type: MessageType.ERROR,
-				data: 'Lost connection to backend! Attempting to reconnect...'
-			};
-			setTimeout(connect, RECONNECT_DELAY);
+			setTimeout(() => connect(context), RECONNECT_DELAY);
 		};
 	}
 
-	connect();
-
 	async function send(messageData: string) {
-		console.log('Sending message:', messageData);
 		while (websocket.readyState !== websocket.OPEN) {
 			await new Promise((resolve) => setTimeout(resolve, 250));
 		}
@@ -67,13 +64,9 @@ export function createSocketState() {
 		});
 	}
 
-	function clear(messageType: MessageType) {
-		console.log('Clearing message:', messageType);
-		if (message && message.type === messageType) {
+	function clear(messageType: string) {
+		if (message?.type === messageType) {
 			message = null;
-			console.log('Message cleared', messageType);
-		} else {
-			console.log('Message not cleared - type mismatch or message is null');
 		}
 	}
 
@@ -82,7 +75,6 @@ export function createSocketState() {
 			return message;
 		},
 		set message(newMessage: Message | null) {
-			console.log('Setting new message:', newMessage);
 			message = newMessage;
 		},
 		get connected() {
@@ -90,15 +82,16 @@ export function createSocketState() {
 		},
 		send,
 		sendAndWait,
-		clear
+		clear,
+		connect
 	};
 }
 
-let socketStore: ReturnType<typeof createSocketState>;
+let socketState: ReturnType<typeof createSocketState>;
 
 export function getSocketState() {
-	if (!socketStore) {
-		socketStore = createSocketState();
+	if (!socketState) {
+		socketState = createSocketState();
 	}
-	return socketStore;
+	return socketState;
 }
