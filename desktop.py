@@ -43,7 +43,7 @@ async def static_files_middleware(request: Request, call_next):
         response = await call_next(request)
         return response
 
-    file_path = Path("build") / path.lstrip("/")
+    file_path = Path("ui") / path.lstrip("/")
     if file_path.is_dir():
         index_path = file_path / "index.html"
         if index_path.is_file():

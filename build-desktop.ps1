@@ -1,33 +1,34 @@
 # Build and Run Script for PALWorld Save Pal
-
-# Navigate to the script's directory
 Set-Location -Path $PSScriptRoot
 
-python -m nuitka --onefile .\desktop.py --output-filename=PSP.exe --windows-icon-from-ico=ui/static/favicon.ico --windows-console-mode=disable
+$version = (Get-Content -Path ".\palworld_save_pal\__version__.py" | Select-String -Pattern "__version__").Line.Split('"')[1]
+Write-Host "Building PALWorld Save Pal Desktop App version $version"
 
-if ($LASTEXITCODE -ne 0) {
-    Write-Error "nuitka failed. Exiting."
-    exit 1
+
+$distDir = ".\dist\psp-windows-$version"
+if (Test-Path -Path $distDir) {
+    Remove-Item -Path $distDir -Recurse -Force
 }
+New-Item -Path $distDir -ItemType Directory | Out-Null
+Write-Host "Created $distDir"
 
-# Remove build directory
+# Build Front end
+
 if (Test-Path -Path ".\build\") {
     Remove-Item -Path ".\build\" -Recurse -Force
 }
 
-# Create or update the .env file with PUBLIC_WS_URL and PUBLIC_DESKTOP_MODE
+if (Test-Path -Path ".\ui_build\") {
+    Remove-Item -Path ".\ui_build\" -Recurse -Force
+}
+
+
 @"
 PUBLIC_WS_URL=127.0.0.1:5174/ws
 PUBLIC_DESKTOP_MODE=true
 "@ | Set-Content -Path ".\ui\.env"
 
-# Navigate to the ui directory
 Set-Location -Path ".\ui"
-
-# Remove .svelte-kit directory if it exists
-if (Test-Path -Path ".svelte-kit") {
-    Remove-Item -Path ".svelte-kit" -Recurse -Force
-}
 
 # Function to check if a command exists
 function Test-Command($command) {
@@ -75,26 +76,20 @@ if ($LASTEXITCODE -ne 0) {
     exit 1
 }
 
-# Navigate back to the root directory
 Set-Location -Path ".."
 
-# Get version number from palworld_save_pal/__version__.py
-$version = (Get-Content -Path ".\palworld_save_pal\__version__.py" | Select-String -Pattern "__version__").Line.Split('"')[1]
+Write-Host "Building exe..."
 
-# Create new dist directory with name psp-windows-$version
-$distDir = ".\dist\psp-windows-$version"
-if (Test-Path -Path $distDir) {
-    Remove-Item -Path $distDir -Recurse -Force
+python setup.py build
+
+if ($LASTEXITCODE -ne 0) {
+    Write-Error "cx_Freeze build failed. Exiting."
+    exit 1
 }
-New-Item -Path $distDir -ItemType Directory | Out-Null
 
-# Copy build to dist
-Move-Item -Path ".\PSP.exe" -Destination $distDir -Force
-Move-Item -Path ".\build\" -Destination $distDir -Force
-Copy-Item -Path ".\data\" -Destination $distDir -Recurse -Force
+Copy-Item -Path ".\build\exe.win-amd64-*\*" -Destination $distDir -Recurse -Force
 
-Remove-Item -Path ".\desktop.build\" -Recurse -Force
-Remove-Item -Path ".\desktop.dist\" -Recurse -Force
-Remove-Item -Path ".\desktop.onefile-build\" -Recurse -Force
+Write-Host "Cleaning up..."
+Remove-Item -Path ".\ui_build\" -Recurse -Force
 
 Write-Host "Done building the desktop app."

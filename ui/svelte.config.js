@@ -12,7 +12,7 @@ const config = {
 		// If your environment is not supported, or you settled on a specific environment, switch out the adapter.
 		// See https://kit.svelte.dev/docs/adapters for more information about adapters.
 		adapter: adapter({
-			pages: '../build'
+			pages: '../ui_build'
 		}),
 		alias: {
 			$theme: 'src/lib/theme',
@@ -20,7 +20,7 @@ const config = {
 			$ws: 'src/lib/ws',
 			$types: 'src/lib/types',
 			$states: 'src/lib/states',
-			$utils: 'src/lib/utils',
+			$utils: 'src/lib/utils'
 		}
 	}
 };

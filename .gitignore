@@ -54,6 +54,7 @@ node_modules/
 # Distribution / packaging
 dist/
 build/
+ui_build/
 *.egg-info/
 *.egg
 
