@@ -415,6 +415,14 @@
 			window.removeEventListener('resize', calculateHeight);
 		};
 	});
+
+	$effect(() => {
+		if (pals && appState.selectedPlayer) {
+			pals.forEach((p) => {
+				getStats(p.pal, appState.selectedPlayer!);
+			});
+		}
+	});
 </script>
 
 <div class="flex h-full w-full flex-col space-y-2" bind:this={containerRef} {...additionalProps}>
