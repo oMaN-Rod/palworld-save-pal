@@ -817,4 +817,8 @@
 			</Card>
 		</div>
 	</div>
+{:else}
+	<div class="flex w-full items-center justify-center">
+		<h2 class="h2">Select a Player to edit 🚀</h2>
+	</div>
 {/if}

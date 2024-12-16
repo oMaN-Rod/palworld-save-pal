@@ -576,6 +576,6 @@
 	</div>
 {:else}
 	<div class="flex w-full items-center justify-center">
-		<h2 class="h2">Upload a save file and select a Pal to edit 🚀</h2>
+		<h2 class="h2">Select a Player ➡️ Pal to edit 🚀</h2>
 	</div>
 {/if}
