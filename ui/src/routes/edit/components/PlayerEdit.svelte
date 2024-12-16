@@ -677,12 +677,16 @@
 					<div class="flex flex-col items-center justify-center">
 						<span class="flex h-1/3 items-end">
 							{#await getItemIcon(headGear.static_id) then icon}
-								<img src={icon} alt={headGear.static_id} class="h-12 w-12 xl:h-16 xl:w-16" />
+								{#if icon}
+									<img src={icon} alt={headGear.static_id} class="h-12 w-12 xl:h-16 xl:w-16" />
+								{/if}
 							{/await}
 						</span>
 						<span class="h-2/3">
 							{#await getItemIcon(bodyGear.static_id) then icon}
-								<img src={icon} alt={bodyGear.static_id} class="h-56 w-56 xl:h-64 xl:w-64" />
+								{#if icon}
+									<img src={icon} alt={bodyGear.static_id} class="h-56 w-56 xl:h-64 xl:w-64" />
+								{/if}
 							{/await}
 						</span>
 					</div>
