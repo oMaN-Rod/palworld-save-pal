@@ -1,20 +1,14 @@
 <script lang="ts">
 	import { Tooltip } from '$components/ui';
-	import {
-		type ItemContainerSlot,
-		type DynamicItemDetails,
-		type Item,
-		type ItemGroup,
-		Rarity
-	} from '$types';
-	import { assetLoader } from '$utils/asset-loader';
-	import { ASSET_DATA_PATH } from '$lib/constants';
+	import { type ItemContainerSlot, type Item, type ItemGroup, Rarity } from '$types';
+	import { ASSET_DATA_PATH, staticIcons } from '$lib/constants';
 	import { itemsData, palsData } from '$lib/data';
 	import { cn } from '$theme';
 	import { getModalState } from '$states';
 	import { ItemSelectModal } from '$components';
 	import { Progress } from '@skeletonlabs/skeleton-svelte';
 	import { Package } from 'lucide-svelte';
+	import { assetLoader } from '$utils';
 
 	let {
 		slot = $bindable<ItemContainerSlot>(),
@@ -29,23 +23,36 @@
 	}>();
 
 	const modal = getModalState();
-	let item: Item | undefined = $state(undefined);
-	let itemClass: string = $state('');
-	let itemPopupHeaderClass: string = $state('');
-	let itemPopupTierClass: string = $state('');
-	let icon: string | undefined = $state('');
-	let rightClickIcon: string | undefined = $state('');
-	let middleClickIcon: string | undefined = $state('');
-	let ctrlIcon: string | undefined = $state('');
-	let weightIcon: string | undefined = $state('');
-	let sadIcon: string | undefined = $state('');
-	let dynamic: DynamicItemDetails | undefined = $state(undefined);
-	let palIcon: string | undefined = $state('');
 
-	let slotWeight = $derived((item?.details.weight * slot.count).toFixed(1));
+	let item = $derived.by(() => {
+		if (slot.static_id == 'None') return;
+		return itemsData.items[slot.static_id];
+	});
 
-	function getItemClass(tier: Rarity | undefined) {
-		switch (tier) {
+	let dynamic = $derived.by(() => {
+		if (item) {
+			return item.details.dynamic;
+		}
+	});
+
+	let icon = $derived.by(() => {
+		if (item && item.id.includes('SkillCard')) {
+			return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/elements/${item.details.icon}.png`);
+		} else if (item) {
+			return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/icons/${item.details.icon}.png`);
+		}
+	});
+
+	let slotWeight = $derived.by(() => {
+		if (item?.details) {
+			return (item.details.weight * slot.count).toFixed(1);
+		} else {
+			return 0;
+		}
+	});
+
+	let itemClass = $derived.by(() => {
+		switch (item?.details.rarity) {
 			case Rarity.Uncommon:
 				return 'bg-gradient-to-tl from-green-500/50';
 			case Rarity.Rare:
@@ -57,10 +64,9 @@
 			default:
 				return '';
 		}
-	}
-
-	function getItemPopupHeaderClass(tier: Rarity | undefined) {
-		switch (tier) {
+	});
+	let itemPopupHeaderClass = $derived.by(() => {
+		switch (item?.details.rarity) {
 			case Rarity.Uncommon:
 				return 'bg-gradient-to-tl from-green-500/50 to-green-800/50 text-green-300 border-green-500';
 			case Rarity.Rare:
@@ -72,10 +78,10 @@
 			default:
 				return 'bg-surface-800';
 		}
-	}
+	});
 
-	function getItemPopupTierClass(tier: Rarity | undefined) {
-		switch (tier) {
+	let itemPopupTierClass = $derived.by(() => {
+		switch (item?.details.rarity) {
 			case Rarity.Uncommon:
 				return 'bg-green-800 text-green-300 border-green-500';
 			case Rarity.Rare:
@@ -87,89 +93,20 @@
 			default:
 				return 'bg-surface-900 text-gray-300 border-gray-500';
 		}
-	}
+	});
 
-	async function getStaticIcons() {
-		const rightClickIconPath = `${ASSET_DATA_PATH}/img/actions/MouseButtonRight.png`;
-		const middleClickIconPath = `${ASSET_DATA_PATH}/img/actions/MouseWheelButton.png`;
-		const ctrlIconPath = `${ASSET_DATA_PATH}/img/actions/Keyboard_Ctrl.png`;
-		const weightIconPath = `${ASSET_DATA_PATH}/img/icons/weight.png`;
-		const sadIconPath = `${ASSET_DATA_PATH}/img/icons/Cattiva_Pleading.png`;
-		rightClickIcon = await assetLoader.loadImage(rightClickIconPath);
-		middleClickIcon = await assetLoader.loadImage(middleClickIconPath);
-		ctrlIcon = await assetLoader.loadImage(ctrlIconPath);
-		weightIcon = await assetLoader.loadImage(weightIconPath);
-		sadIcon = await assetLoader.loadImage(sadIconPath);
-	}
-
-	async function getItemIcon(staticId: string) {
-		if (!staticId || staticId == 'None') return;
-		const itemData = await itemsData.searchItems(staticId);
-		if (!itemData) {
-			console.error(`Item data not found for static id: ${staticId}`);
-			return;
+	let palIcon = $derived.by(() => {
+		if (slot.static_id && slot.static_id.includes('SkillUnlock_')) {
+			const palCharacterId = slot.static_id.replace('SkillUnlock_', '');
+			const palData = palsData.pals[palCharacterId];
+			if (!palData) {
+				console.error(`Pal data not found for static id: ${slot.static_id}`);
+				return;
+			}
+			const palImgName = palData.localized_name.toLowerCase().replaceAll(' ', '_');
+			return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/pals/menu/${palImgName}_menu.png`);
 		}
-		let iconPath: string;
-		if (staticId.includes('SkillCard')) {
-			iconPath = `${ASSET_DATA_PATH}/img/elements/${itemData.details.icon}.png`;
-		} else {
-			iconPath = `${ASSET_DATA_PATH}/img/icons/${itemData.details.icon}.png`;
-		}
-		const icon = await assetLoader.loadImage(iconPath);
-		return icon;
-	}
-
-	async function getItemData(staticId: string) {
-		if (!staticId || staticId == 'None') return;
-		const itemData = await itemsData.searchItems(staticId);
-		if (!itemData) {
-			console.error(`Item data not found for static id: ${staticId}`);
-			return;
-		}
-		return itemData;
-	}
-
-	async function getPalIcon(staticId: string) {
-		if (!staticId || staticId == 'None' || !staticId.includes('SkillUnlock_')) return;
-		const palName = staticId.replace('SkillUnlock_', '');
-		const palData = await palsData.getPalInfo(palName);
-		if (!palData) {
-			console.error(`Pal data not found for static id: ${staticId}`);
-			return;
-		}
-		const palImgName = palData.localized_name.toLowerCase().replaceAll(' ', '_');
-		const iconPath = `${ASSET_DATA_PATH}/img/pals/menu/${palImgName}_menu.png`;
-		const icon = await assetLoader.loadImage(iconPath);
-		return icon;
-	}
-
-	async function getItemDynamicDetails(staticId: string) {
-		if (!staticId || staticId == 'None') return;
-		const itemData = await itemsData.searchItems(staticId);
-		if (!itemData?.details.dynamic) {
-			return;
-		}
-		return itemData.details.dynamic;
-	}
-
-	const initItem = async (staticId: string) => {
-		if (!staticId) return;
-		if (staticId == 'None') {
-			item = undefined;
-			icon = undefined;
-			dynamic = undefined;
-			return;
-		}
-		const data = await getItemData(staticId);
-		icon = await getItemIcon(staticId);
-		dynamic = await getItemDynamicDetails(staticId);
-		palIcon = await getPalIcon(staticId);
-		if (!data) return;
-		item = data;
-		itemClass = getItemClass(item.details.rarity);
-		itemPopupHeaderClass = getItemPopupHeaderClass(item.details.rarity);
-		itemPopupTierClass = getItemPopupTierClass(item.details.rarity);
-	};
+	});
 
 	async function handleItemSelect() {
 		// @ts-ignore
@@ -185,12 +122,9 @@
 		if (slot.static_id == 'None') {
 			slot.count = 0;
 			slot.dynamic_item = undefined;
-			item = undefined;
-			icon = undefined;
-			dynamic = undefined;
 			return;
 		}
-		const itemData = await getItemData(static_id);
+		const itemData = itemsData.items[slot.static_id];
 		if (itemData) {
 			slot.count =
 				count > itemData.details.max_stack_count ? itemData.details.max_stack_count : count;
@@ -209,18 +143,8 @@
 				}
 			}
 		}
-
-		initItem(static_id);
 		if (onUpdate) onUpdate(slot);
 	}
-
-	$effect(() => {
-		initItem(slot.static_id);
-	});
-
-	$effect(() => {
-		getStaticIcons();
-	});
 </script>
 
 <button
@@ -244,19 +168,13 @@
 					)}
 				>
 					<span class="absolute left-0.5 top-0 text-xs">{slotWeight}</span>
-					{#if icon}
-						<enhanced:img
-							src={icon}
-							alt={item.info.localized_name}
-							class="h-12 w-12 xl:h-16 xl:w-16"
-						></enhanced:img>
-					{/if}
+					<img src={icon} alt={item.info.localized_name} class="h-12 w-12 xl:h-16 xl:w-16" />
 					{#if palIcon}
 						<div class="bg-surface-800 border-surface-600 absolute right-0 top-0 h-7 w-7 border">
-							<enhanced:img src={palIcon} alt="Pal Icon" class="h-full w-full object-cover"
-							></enhanced:img>
+							<img src={palIcon} alt="Pal Icon" class="h-full w-full object-cover" />
 						</div>
 					{/if}
+
 					{#if slot.count}
 						<span class="absolute bottom-0 right-0.5 text-xs">{slot.count}</span>
 					{/if}
@@ -291,29 +209,27 @@
 						</div>
 					</div>
 					<div class="relative flex flex-row">
-						{#if icon}
-							<div class="m-4 ml-8">
-								<enhanced:img
-									src={icon}
-									alt={item?.info.localized_name}
-									style="width: 112px; height: 112px;"
-								></enhanced:img>
+						<div class="m-4 ml-8">
+							<img
+								src={icon}
+								alt={item?.info.localized_name}
+								style="width: 112px; height: 112px;"
+							/>
+						</div>
+						<div
+							class="bg-surface-800 text-one-surface hover:ring-secondary-500 absolute bottom-4 right-4 rounded px-3 py-1 font-semibold hover:ring"
+							style="min-width: 80px; height: 2rem;"
+						>
+							<div class="relative z-10 flex h-full items-center justify-between">
+								<span class="mr-8 text-xs">in inventory</span>
+								<span class="font-bold">{slot.count}</span>
 							</div>
-							<div
-								class="bg-surface-800 text-one-surface hover:ring-secondary-500 absolute bottom-4 right-4 rounded px-3 py-1 font-semibold hover:ring"
-								style="min-width: 80px; height: 2rem;"
-							>
-								<div class="relative z-10 flex h-full items-center justify-between">
-									<span class="mr-8 text-xs">in inventory</span>
-									<span class="font-bold">{slot.count}</span>
-								</div>
-								<span class="border-surface-700 absolute inset-0 rounded border"></span>
-								<span class="bg-surface-400 absolute left-0 top-0 h-0.5 w-0.5"></span>
-								<span class="bg-surface-400 absolute right-0 top-0 h-0.5 w-0.5"></span>
-								<span class="bg-surface-400 absolute bottom-0 left-0 h-0.5 w-0.5"></span>
-								<span class="bg-surface-400 absolute bottom-0 right-0 h-0.5 w-0.5"></span>
-							</div>
-						{/if}
+							<span class="border-surface-700 absolute inset-0 rounded border"></span>
+							<span class="bg-surface-400 absolute left-0 top-0 h-0.5 w-0.5"></span>
+							<span class="bg-surface-400 absolute right-0 top-0 h-0.5 w-0.5"></span>
+							<span class="bg-surface-400 absolute bottom-0 left-0 h-0.5 w-0.5"></span>
+							<span class="bg-surface-400 absolute bottom-0 right-0 h-0.5 w-0.5"></span>
+						</div>
 					</div>
 					<div class="bg-surface-900 p-2 text-left">
 						<span class="whitespace-pre-line">{item?.info.description}</span>
@@ -322,40 +238,25 @@
 						<div class="flex grow flex-col space-y-2">
 							<div class="flex items-center space-x-2">
 								<div class="h-6 w-6">
-									{#if rightClickIcon}
-										<enhanced:img src={rightClickIcon} alt="Right Click" class="h-full w-full"
-										></enhanced:img>
-									{/if}
+									<img src={staticIcons.rightClickIcon} alt="Right Click" class="h-full w-full" />
 								</div>
 								<span class="text-xs font-bold">Copy</span>
 							</div>
 							<div class="flex items-center space-x-2">
 								<div class="h-6 w-6">
-									{#if ctrlIcon}
-										<enhanced:img src={ctrlIcon} alt="Right Click" class="h-full w-full"
-										></enhanced:img>
-									{/if}
+									<img src={staticIcons.ctrlIcon} alt="Right Click" class="h-full w-full" />
 								</div>
 								<div class="h-6 w-6">
-									{#if rightClickIcon}
-										<enhanced:img src={rightClickIcon} alt="Right Click" class="h-full w-full"
-										></enhanced:img>
-									{/if}
+									<img src={staticIcons.rightClickIcon} alt="Right Click" class="h-full w-full" />
 								</div>
 								<span class="text-xs font-bold">Paste</span>
 							</div>
 							<div class="flex items-center space-x-2">
 								<div class="h-6 w-6">
-									{#if ctrlIcon}
-										<enhanced:img src={ctrlIcon} alt="Right Click" class="h-full w-full"
-										></enhanced:img>
-									{/if}
+									<img src={staticIcons.ctrlIcon} alt="Right Click" class="h-full w-full" />
 								</div>
 								<div class="h-6 w-6">
-									{#if middleClickIcon}
-										<enhanced:img src={middleClickIcon} alt="Right Click" class="h-full w-full"
-										></enhanced:img>
-									{/if}
+									<img src={staticIcons.middleClickIcon} alt="Right Click" class="h-full w-full" />
 								</div>
 								<span class="text-xs font-bold">Delete</span>
 							</div>
@@ -365,12 +266,9 @@
 							style="min-width: 80px; height: 2rem;"
 						>
 							<div class="relative z-10 flex h-full items-center justify-between">
-								{#if weightIcon}
-									<div class="h-6 w-6">
-										<enhanced:img src={weightIcon} alt="Weight" class="h-full w-full"
-										></enhanced:img>
-									</div>
-								{/if}
+								<div class="h-6 w-6">
+									<img src={staticIcons.weightIcon} alt="Weight" class="h-full w-full" />
+								</div>
 								<span class="font-bold">{slotWeight}</span>
 							</div>
 							<span class="border-surface-700 absolute inset-0 rounded border"></span>
@@ -405,11 +303,7 @@
 			{#snippet popup()}
 				<div class="flex">
 					<span>Empty </span>
-					{#if sadIcon}
-						<enhanced:img src={sadIcon} alt="Sad Icon" class="h-6 w-6"></enhanced:img>
-					{:else}
-						<span>😢</span>
-					{/if}
+					<img src={staticIcons.sadIcon} alt="Sad Icon" class="h-6 w-6" />
 				</div>
 			{/snippet}
 		</Tooltip>

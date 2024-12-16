@@ -2,7 +2,7 @@
 	import { getAppState } from '$states';
 	import { Card, TooltipButton } from '$components/ui';
 	import { Github } from 'lucide-svelte';
-	import Saitama from '$lib/assets/img/app/saitama.png?enhanced';
+	import Saitama from '$lib/assets/img/app/saitama.png';
 
 	const appState = getAppState();
 </script>
@@ -19,7 +19,7 @@
 				<hr class="border-surface-500" />
 				<p class="text-lg">
 					Built by a guy who is a developer for fun.
-					<enhanced:img src={Saitama} alt="Saitama" class="inline-block h-16 w-16" />
+					<img src={Saitama} alt="Saitama" class="inline-block h-16 w-16" />
 				</p>
 				<div class="flex items-center space-x-2">
 					<span>Check out the</span>

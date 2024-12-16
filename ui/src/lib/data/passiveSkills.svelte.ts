@@ -4,7 +4,7 @@ import { MessageType, type PassiveSkill, type PassiveSkillDetails } from '$types
 export class PassiveSkills {
 	private ws = getSocketState();
 	private loading = false;
-	
+
 	passiveSkills: Record<string, PassiveSkill> = $state({});
 
 	private async ensurePassiveSkillsLoaded(): Promise<void> {
@@ -30,9 +30,9 @@ export class PassiveSkills {
 		}
 	}
 
-	async searchPassiveSkills(search: string): Promise<PassiveSkill | null> {
+	async searchPassiveSkills(search: string): Promise<PassiveSkill | undefined> {
 		await this.ensurePassiveSkillsLoaded();
-		return this.getByKey(search) || this.getByName(search) || null;
+		return this.getByKey(search) || this.getByName(search) || undefined;
 	}
 
 	private getByKey(key: string): PassiveSkill | undefined {

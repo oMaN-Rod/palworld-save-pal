@@ -1,12 +1,11 @@
 <script lang="ts">
-	import { assetLoader } from '$lib/utils/asset-loader';
 	import { activeSkillsData, elementsData } from '$lib/data';
-	import type { ActiveSkill, Element } from '$types';
-	import { ASSET_DATA_PATH } from '$lib/constants';
+	import { ASSET_DATA_PATH, staticIcons } from '$lib/constants';
 	import { getModalState } from '$states';
 	import { SkillSelectModal } from '$components/modals';
 	import { Tooltip } from '$components/ui';
 	import { TimerReset } from 'lucide-svelte';
+	import { assetLoader } from '$utils';
 
 	let {
 		skill = 'Empty',
@@ -20,32 +19,21 @@
 
 	const modal = getModalState();
 
-	let activeSkill: ActiveSkill | null = $state(null);
-	let element: Element | undefined = $state(undefined);
-	let elementIcon: string | null = $state(null);
-	let elementIconWhite: string | null = $state(null);
-	let sadIcon: string = $state('');
-
-	$effect(() => {
-		loadSkillData();
-	});
-
-	async function loadSkillData() {
-		activeSkill = await activeSkillsData.searchActiveSkills(skill);
-		if (activeSkill) {
-			element = await elementsData.searchElement(activeSkill.details.element);
-			if (element) {
-				const whiteIconPath = `${ASSET_DATA_PATH}/img/elements/${element.white_icon}.png`;
-				elementIconWhite = await assetLoader.loadImage(whiteIconPath, true);
-				const iconPath = `${ASSET_DATA_PATH}/img/elements/${element.icon}.png`;
-				elementIcon = await assetLoader.loadImage(iconPath, true);
-			}
-		} else {
-			console.log('No active skill found for:', skill);
+	let { activeSkill, element, elementIconWhite, elementIcon } = $derived.by(() => {
+		const activeSkill = activeSkillsData.activeSkills[skill] || undefined;
+		if (!activeSkill) {
+			console.error(`Active skill ${skill} not found`);
+			return {};
 		}
-		const sadIconPath = `${ASSET_DATA_PATH}/img/icons/Cattiva_Pleading.png`;
-		sadIcon = await assetLoader.loadImage(sadIconPath, true);
-	}
+		const element = elementsData.elements[activeSkill.details.element];
+		const elementIconWhite = assetLoader.loadImage(
+			`${ASSET_DATA_PATH}/img/elements/${element.white_icon}.png`
+		);
+		const elementIcon = assetLoader.loadImage(
+			`${ASSET_DATA_PATH}/img/elements/${element.icon}.png`
+		);
+		return { activeSkill, element, elementIconWhite, elementIcon };
+	});
 
 	async function handleSelectSkill() {
 		// @ts-ignore
@@ -59,14 +47,6 @@
 		onSkillUpdate(result, skill);
 	}
 </script>
-
-{#snippet sad()}
-	{#if sadIcon}
-		<enhanced:img src={sadIcon} alt="Sad face icon" class="mr-2 h-6 w-6"></enhanced:img>
-	{:else}
-		<span class="mr-2">😞</span>
-	{/if}
-{/snippet}
 
 {#snippet hasSkill()}
 	<Tooltip
@@ -86,11 +66,7 @@
 					style="background-color: {element?.color}"
 				>
 					{#if elementIconWhite}
-						<enhanced:img
-							src={elementIconWhite}
-							alt="{element?.name} icon"
-							class="h-6 w-6 justify-start"
-						></enhanced:img>
+						<img src={elementIconWhite} alt="{element?.name} icon" class="h-6 w-6 justify-start" />
 					{/if}
 					<span class="ml-2 text-lg font-bold"
 						>{activeSkill?.details.power == 0 ? 'NA' : activeSkill?.details.power}</span
@@ -108,15 +84,10 @@
 					<h4 class="h4 text-left">{activeSkill?.name}</h4>
 					<div class="grid grid-cols-[1fr_auto] gap-2">
 						<span class="grow text-left text-gray-300">
-							{#if elementIcon}
-								<div class="flex">
-									<enhanced:img src={elementIcon} alt="{element?.name} icon" class="h-6 w-6"
-									></enhanced:img>
-									{activeSkill?.details.element}
-								</div>
-							{:else}
+							<div class="flex">
+								<img src={elementIcon} alt="{element?.name} icon" class="h-6 w-6" />
 								{activeSkill?.details.element}
-							{/if}
+							</div>
 						</span>
 						<div class="flex items-center space-x-2">
 							<TimerReset class="h-4 w-4" />
@@ -154,7 +125,7 @@
 		<div class="flex w-full items-center">
 			<span class="grow p-2 text-start text-lg">{skill}</span>
 			{#if skill === 'Empty'}
-				{@render sad()}
+				<img src={staticIcons.sadIcon} alt="Sad face icon" class="mr-2 h-6 w-6" />
 			{:else}
 				<span class="mr-2">❓</span>
 			{/if}

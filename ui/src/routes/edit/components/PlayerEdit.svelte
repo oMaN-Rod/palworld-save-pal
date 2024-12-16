@@ -8,7 +8,6 @@
 		type Pal,
 		MessageType
 	} from '$types';
-	import { assetLoader } from '$utils/asset-loader';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { itemsData, expData, palsData } from '$lib/data';
 	import { Tabs, Accordion } from '@skeletonlabs/skeleton-svelte';
@@ -32,6 +31,7 @@
 		Minus,
 		Plus
 	} from 'lucide-svelte';
+	import { assetLoader } from '$utils';
 
 	const ws = getSocketState();
 	const appState = getAppState();
@@ -75,13 +75,25 @@
 	let accessoryGear: ItemContainerSlot[] = $state([]);
 	let group = $state('inventory');
 	let foodSlotCount: number = 0;
-	let levelProgressToNext: number = $state(0);
-	let levelProgressValue: number = $state(0);
-	let levelProgressMax: number = $state(1);
 	let sideBarExpanded: string[] = $state(['stats']);
 	let sideBarWrapper: HTMLDivElement | null = $state(null);
 
 	let health = $state(500);
+
+	let { levelProgressToNext, levelProgressValue, levelProgressMax } = $derived.by(() => {
+		if (appState.selectedPlayer) {
+			if (appState.selectedPlayer.level === 55) {
+				return { levelProgressToNext: 0, levelProgressValue: 0, levelProgressMax: 1 };
+			}
+			const nextExp = expData.expData[appState.selectedPlayer.level + 1];
+			return {
+				levelProgressToNext: nextExp.TotalEXP - appState.selectedPlayer.exp,
+				levelProgressValue: nextExp.NextEXP - (nextExp.TotalEXP - appState.selectedPlayer.exp),
+				levelProgressMax: nextExp.NextEXP
+			};
+		}
+		return { levelProgressToNext: 0, levelProgressValue: 0, levelProgressMax: 1 };
+	});
 
 	async function getItemIcon(staticId: string) {
 		if (!staticId) return;
@@ -90,9 +102,7 @@
 			console.error(`Item data not found for static id: ${staticId}`);
 			return;
 		}
-		const iconPath = `${ASSET_DATA_PATH}/img/icons/${itemData.details.icon}.png`;
-		const icon = await assetLoader.loadImage(iconPath);
-		return icon;
+		return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/icons/${itemData.details.icon}.png`);
 	}
 
 	function clearCommonContainer() {
@@ -272,7 +282,6 @@
 	}
 
 	function loadFoodContainer() {
-		console.log('loadFoodContainer');
 		if (appState.selectedPlayer) {
 			const container = appState.selectedPlayer.food_equip_container;
 			let containerSlots = [];
@@ -398,33 +407,6 @@
 		}
 	}
 
-	$effect(() => {
-		if (appState.selectedPlayer) {
-			loadCommonContainer();
-			loadEssentialContainer();
-			loadFoodContainer();
-			loadWeaponLoadoutContainer();
-			loadPlayerEquipmentArmorContainer();
-			loadOtomoContainer();
-			health = 500 + appState.selectedPlayer.status_point_list.max_hp * 100;
-		}
-	});
-
-	async function initlevelProgress() {
-		if (appState.selectedPlayer) {
-			if (appState.selectedPlayer.level === 55) {
-				levelProgressToNext = 0;
-				levelProgressValue = 0;
-				levelProgressMax = 1;
-				return;
-			}
-			const nextExp = await expData.getExpDataByLevel(appState.selectedPlayer.level + 1);
-			levelProgressToNext = nextExp.PalTotalEXP - appState.selectedPlayer.exp;
-			levelProgressValue = nextExp.PalNextEXP - levelProgressToNext;
-			levelProgressMax = nextExp.PalNextEXP;
-		}
-	}
-
 	async function handleLevelIncrement() {
 		if (!appState.selectedPlayer || !appState.selectedPlayer || !appState.selectedPlayer.pals)
 			return;
@@ -435,10 +417,8 @@
 		const nextLevelData = await expData.getExpDataByLevel(newLevel + 1);
 
 		appState.selectedPlayer.level = newLevel;
-		appState.selectedPlayer.exp = nextLevelData.PalTotalEXP - nextLevelData.PalNextEXP;
+		appState.selectedPlayer.exp = nextLevelData.TotalEXP - nextLevelData.NextEXP;
 		appState.selectedPlayer.state = EntryState.MODIFIED;
-
-		await initlevelProgress();
 	}
 
 	async function handleLevelDecrement() {
@@ -451,10 +431,8 @@
 		const newLevelData = await expData.getExpDataByLevel(newLevel + 1);
 
 		appState.selectedPlayer.level = newLevel;
-		appState.selectedPlayer.exp = newLevelData.PalTotalEXP - newLevelData.PalNextEXP;
+		appState.selectedPlayer.exp = newLevelData.TotalEXP - newLevelData.NextEXP;
 		appState.selectedPlayer.state = EntryState.MODIFIED;
-
-		await initlevelProgress();
 	}
 
 	function handleMoveToPalbox(pal: Pal) {
@@ -515,6 +493,18 @@
 		};
 		ws.send(JSON.stringify(message));
 	}
+
+	$effect(() => {
+		if (appState.selectedPlayer) {
+			loadCommonContainer();
+			loadEssentialContainer();
+			loadFoodContainer();
+			loadWeaponLoadoutContainer();
+			loadPlayerEquipmentArmorContainer();
+			loadOtomoContainer();
+			health = 500 + appState.selectedPlayer.status_point_list.max_hp * 100;
+		}
+	});
 </script>
 
 {#if appState.selectedPlayer}
@@ -687,24 +677,12 @@
 					<div class="flex flex-col items-center justify-center">
 						<span class="flex h-1/3 items-end">
 							{#await getItemIcon(headGear.static_id) then icon}
-								{#if icon}
-									<enhanced:img
-										src={icon}
-										alt={headGear.static_id}
-										class="h-12 w-12 xl:h-16 xl:w-16"
-									></enhanced:img>
-								{/if}
+								<img src={icon} alt={headGear.static_id} class="h-12 w-12 xl:h-16 xl:w-16" />
 							{/await}
 						</span>
 						<span class="h-2/3">
 							{#await getItemIcon(bodyGear.static_id) then icon}
-								{#if icon}
-									<enhanced:img
-										src={icon}
-										alt={bodyGear.static_id}
-										class="h-56 w-56 xl:h-64 xl:w-64"
-									></enhanced:img>
-								{/if}
+								<img src={icon} alt={bodyGear.static_id} class="h-56 w-56 xl:h-64 xl:w-64" />
 							{/await}
 						</span>
 					</div>
@@ -787,8 +765,8 @@
 									<span class="text-on-surface">{levelProgressToNext}</span>
 								</div>
 								<Progress
-									bind:value={levelProgressValue}
-									bind:max={levelProgressMax}
+									value={levelProgressValue}
+									max={levelProgressMax}
 									height="h-2"
 									width="w-full"
 									rounded="rounded-none"

@@ -4,71 +4,74 @@ import { getSocketState } from '$states/websocketState.svelte';
 import { MessageType, type Item, type ItemDetails, type ItemInfo } from '$types';
 
 export class Items {
-    private ws = getSocketState();
-    private loading = false;
-    
-    items: Record<string, Item> = $state({});
+	private ws = getSocketState();
+	private loading = false;
 
-    private async ensureItemsLoaded(): Promise<void> {
-        if (Object.keys(this.items).length === 0 && !this.loading) {
-            try {
-                const response = await this.ws.sendAndWait({ 
-                    type: MessageType.GET_ITEMS 
-                });
-                if (response.type === 'error') {
-                    throw new Error(response.data);
-                }
-                this.items = response.data;
-            } catch (error) {
-                console.error('Error fetching items:', error);
-                throw error;
-            }
-        }
-        if (this.loading) {
-            await new Promise((resolve) => setTimeout(resolve, 100));
-            await this.ensureItemsLoaded();
-        }
-    }
+	items: Record<string, Item> = $state({});
 
-    async searchItems(search: string): Promise<Item | null> {
-        await this.ensureItemsLoaded();
-        return this.getByKey(search) || this.getByName(search) || null;
-    }
+	private async ensureItemsLoaded(): Promise<void> {
+		if (Object.keys(this.items).length === 0 && !this.loading) {
+			try {
+				const response = await this.ws.sendAndWait({
+					type: MessageType.GET_ITEMS
+				});
+				if (response.type === 'error') {
+					throw new Error(response.data);
+				}
+				this.items = response.data;
+			} catch (error) {
+				console.error('Error fetching items:', error);
+				throw error;
+			}
+		}
+		if (this.loading) {
+			await new Promise((resolve) => setTimeout(resolve, 100));
+			await this.ensureItemsLoaded();
+		}
+	}
 
-    private getByKey(key: string): Item | undefined {
-        return this.items[key];
-    }
+	async searchItems(search: string): Promise<Item | undefined> {
+		await this.ensureItemsLoaded();
+		return this.getByKey(search) || this.getByName(search) || undefined;
+	}
 
-    private getByName(name: string): Item | undefined {
-        return Object.values(this.items).find(
-            (item) => item.info.localized_name.toLowerCase() === name.toLowerCase()
-        );
-    }
+	private getByKey(key: string): Item | undefined {
+		return this.items[key];
+	}
 
-    async getField(key: string, field: keyof Item | keyof ItemDetails | keyof ItemInfo): Promise<any> {
-        await this.ensureItemsLoaded();
-        const item = await this.searchItems(key);
-        if (item) {
-            if (field in item) {
-                return item[field as keyof Item];
-            } else if (field in item.details) {
-                return item.details[field as keyof ItemDetails];
-            } else if (field in item.info) {
-                return item.info[field as keyof ItemInfo];
-            }
-        }
-        return undefined;
-    }
+	private getByName(name: string): Item | undefined {
+		return Object.values(this.items).find(
+			(item) => item.info.localized_name.toLowerCase() === name.toLowerCase()
+		);
+	}
 
-    async getAllItems(): Promise<Item[]> {
-        await this.ensureItemsLoaded();
-        return Object.values(this.items);
-    }
+	async getField(
+		key: string,
+		field: keyof Item | keyof ItemDetails | keyof ItemInfo
+	): Promise<any> {
+		await this.ensureItemsLoaded();
+		const item = await this.searchItems(key);
+		if (item) {
+			if (field in item) {
+				return item[field as keyof Item];
+			} else if (field in item.details) {
+				return item.details[field as keyof ItemDetails];
+			} else if (field in item.info) {
+				return item.info[field as keyof ItemInfo];
+			}
+		}
+		return undefined;
+	}
 
-    async getItemCount(): Promise<number> {
-        await this.ensureItemsLoaded();
-        return Object.keys(this.items).length;
-    }
+	async getAllItems(): Promise<Item[]> {
+		await this.ensureItemsLoaded();
+		return Object.values(this.items);
+	}
+
+	async getItemCount(): Promise<number> {
+		await this.ensureItemsLoaded();
+		return Object.keys(this.items).length;
+	}
 }
 
 export const itemsData = new Items();

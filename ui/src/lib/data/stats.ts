@@ -4,10 +4,10 @@ import { palsData, passiveSkillsData } from '.';
 export type PalStats = {
 	attack: number;
 	defense: number;
-	work_speed?: number;
+	workSpeed?: number;
 };
 
-export async function getStats(pal: Pal, player: Player): Promise<PalStats | undefined> {
+export function getStats(pal: Pal, player: Player): PalStats | undefined {
 	if (!pal) {
 		console.log('No pal provided');
 		return;
@@ -16,7 +16,7 @@ export async function getStats(pal: Pal, player: Player): Promise<PalStats | und
 		console.log('No player provided');
 		return;
 	}
-	const palData = await palsData.getPalInfo(pal.character_id);
+	const palData = palsData.pals[pal.character_id] || undefined;
 	if (!palData) {
 		console.log('No pal data found');
 		return;
@@ -31,7 +31,7 @@ export async function getStats(pal: Pal, player: Player): Promise<PalStats | und
 	let workSpeedBonus = 0;
 	for (let i = 0; i < pal.passive_skills.length; i++) {
 		const skill = pal.passive_skills[i];
-		const skillData = await passiveSkillsData.searchPassiveSkills(skill);
+		const skillData = passiveSkillsData.passiveSkills[skill] || undefined;
 		if (!skillData) {
 			continue;
 		}
@@ -63,8 +63,11 @@ export async function getStats(pal: Pal, player: Player): Promise<PalStats | und
 		defense * (1 + condenserBonus) * (1 + defenseSoulBonus) * (1 + defenseBonus)
 	);
 
+	let workSpeed = 70 * (1 + workSpeedBonus);
+
 	return {
 		attack,
-		defense
+		defense,
+		workSpeed
 	};
 }

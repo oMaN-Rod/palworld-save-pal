@@ -42,31 +42,28 @@
 	});
 	let selectedPassiveSkillPreset: string = $state('');
 
-	let elementIcons: Record<string, string> = $state({});
-	let passiveSkillIcons: Record<string, string> = $state({});
-
-	async function loadIcons() {
+	let elementIcons = $derived.by(() => {
+		const icons: Record<string, string> = {};
 		for (const elementType of Object.keys(elementsData.elements)) {
 			const elementObj = elementsData.elements[elementType];
 			if (elementObj) {
-				const iconPath = `${ASSET_DATA_PATH}/img/elements/${elementObj.badge_icon}.png`;
-				try {
-					elementIcons[elementType] = await assetLoader.loadImage(iconPath, true);
-				} catch (error) {
-					console.error(`Failed to load icon for ${elementType}:`, error);
-				}
+				icons[elementType] = assetLoader.loadImage(
+					`${ASSET_DATA_PATH}/img/elements/${elementObj.badge_icon}.png`
+				);
 			}
 		}
+		return icons;
+	});
+	let passiveSkillIcons = $derived.by(() => {
+		const icons: Record<string, string> = {};
 		for (const skill of Object.values(passiveSkillsData.passiveSkills)) {
-			if (passiveSkillIcons[skill.details.tier]) continue;
-			const iconPath = `${ASSET_DATA_PATH}/img/passives/Passive_${skill.details.tier.toUpperCase()}_icon.png`;
-			try {
-				passiveSkillIcons[skill.details.tier] = await assetLoader.loadImage(iconPath, true);
-			} catch (error) {
-				console.error(`Failed to load icon for ${skill.id}:`, error);
-			}
+			if (icons[skill.details.tier]) continue;
+			icons[skill.details.tier] = assetLoader.loadImage(
+				`${ASSET_DATA_PATH}/img/passives/Passive_${skill.details.tier.toUpperCase()}_icon.png`
+			);
 		}
-	}
+		return icons;
+	});
 
 	async function handleApplyPreset(type: 'active' | 'passive') {
 		const preset =
@@ -89,10 +86,6 @@
 		if (!confirmed) return;
 		await presetsData.removePresetProfiles([presetId]);
 	}
-
-	$effect(() => {
-		loadIcons();
-	});
 </script>
 
 <Accordion value={['passive']}>
@@ -122,10 +115,7 @@
 											<div
 												class="text-surface-400 border-surface-600 r flex items-center space-x-1 rounded-sm border p-0.5"
 											>
-												{#if icon}
-													<enhanced:img src={icon} alt={skillObj.details.element} class="h-4 w-4"
-													></enhanced:img>
-												{/if}
+												<img src={icon} alt={skillObj.details.element} class="h-4 w-4" />
 												<span class="grow text-xs">
 													{skillObj.name}
 												</span>
@@ -184,10 +174,7 @@
 												<span class="grow text-xs">
 													{skillObj.name}
 												</span>
-												{#if icon}
-													<enhanced:img src={icon} alt={skillObj.details.tier} class="h-4 w-4"
-													></enhanced:img>
-												{/if}
+												<img src={icon} alt={skillObj.details.tier} class="h-4 w-4" />
 											</div>
 										{/if}
 									{/each}

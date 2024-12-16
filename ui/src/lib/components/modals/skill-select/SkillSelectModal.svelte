@@ -59,20 +59,18 @@
 		const skill = Object.values(activeSkillsData.activeSkills).find((s) => s.id === skillId);
 		if (!skill || skill.name === 'None') return undefined;
 		const activeSkill = skill as ActiveSkill;
-		const elementObj = await elementsData.searchElement(activeSkill.details.element);
-		if (!elementObj) return undefined;
-		const iconPath = `${ASSET_DATA_PATH}/img/elements/${elementObj.icon}.png`;
-		const icon = await assetLoader.loadImage(iconPath, true);
-		return icon;
+		const element = await elementsData.searchElement(activeSkill.details.element);
+		if (!element) return undefined;
+		return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/elements/${element.icon}.png`);
 	}
 
 	async function getPassiveSkillIcon(skillId: string): Promise<string | undefined> {
 		const skill = Object.values(passiveSkillsData.passiveSkills).find((s) => s.id === skillId);
 		if (!skill || skill.name === 'None') return undefined;
 		const passiveSkill = skill as PassiveSkill;
-		const iconPath = `${ASSET_DATA_PATH}/img/passives/Passive_${passiveSkill.details.tier.toUpperCase()}_icon.png`;
-		const icon = await assetLoader.loadImage(iconPath, true);
-		return icon;
+		return assetLoader.loadImage(
+			`${ASSET_DATA_PATH}/img/passives/Passive_${passiveSkill.details.tier.toUpperCase()}_icon.png`
+		);
 	}
 </script>
 
@@ -82,11 +80,7 @@
 			(s) => s.id === option.value
 		)}
 		<div class="grid grid-cols-[auto_1fr_auto] items-center gap-2">
-			{#if icon}
-				<enhanced:img src={icon} alt={option.label} class="h-6 w-6"></enhanced:img>
-			{:else}
-				<div class="w-6"></div>
-			{/if}
+			<img src={icon} alt={option.label} class="h-6 w-6" />
 			<div class="mr-0.5 flex flex-col">
 				<span class="truncate">{option.label}</span>
 				<span class="text-xs">{activeSkill?.description}</span>
@@ -121,11 +115,7 @@
 				<span class="grow truncate">{option.label}</span>
 				<span class="text-xs">{passiveSkill?.description}</span>
 			</div>
-			{#if icon}
-				<enhanced:img src={icon} alt={option.label} class="h-6 w-6"></enhanced:img>
-			{:else}
-				<div class="w-6"></div>
-			{/if}
+			<img src={icon} alt={option.label} class="h-6 w-6" />
 		</div>
 	{/await}
 {/snippet}

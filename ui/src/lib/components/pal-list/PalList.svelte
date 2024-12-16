@@ -1,13 +1,6 @@
 <script lang="ts">
 	import { cn } from '$theme';
-	import {
-		MessageType,
-		PalGender,
-		type ElementType,
-		type Pal,
-		type PalData,
-		type Player
-	} from '$types';
+	import { MessageType, type ElementType, type Pal, type PalData, type Player } from '$types';
 	import { elementsData, palsData, getStats } from '$lib/data';
 	import { Input, Tooltip, List, ContextMenu } from '$components/ui';
 	import { PalSelectModal } from '$components/modals';
@@ -29,10 +22,9 @@
 		Users
 	} from 'lucide-svelte';
 	import { assetLoader, debounce, deepCopy } from '$utils';
-	import { ASSET_DATA_PATH } from '$lib/constants';
+	import { ASSET_DATA_PATH, staticIcons } from '$lib/constants';
 	import { getAppState, getSocketState, getModalState, getNavigationState } from '$states';
 	import { HealthBadge } from '$components';
-	import type { Component } from 'svelte';
 
 	type SortBy = 'name' | 'level' | 'paldeck-index' | 'slot-index';
 	type SortOrder = 'asc' | 'desc';
@@ -54,23 +46,12 @@
 
 	let searchQuery = $state('');
 	let selectedFilter = $state('All');
-	let elementTypes: string[] = $state([]);
-	let elementBadges: Record<string, string> = $state({});
-	let elementIcons: Record<string, string> = $state({});
-	let genderIcons: Record<PalGender, string> = $state({
-		[PalGender.MALE]: '',
-		[PalGender.FEMALE]: ''
-	});
-	let pals: PalWithData[] = $state([]);
+
 	let filteredPals: PalWithData[] = $state([]);
 	let selectedPals: PalWithData[] = $state([]);
 	let selectedPal: PalWithData | undefined = $state(undefined);
-	let palMenuIcons: Record<string, string> = $state({});
 	let sortBy: SortBy = $state('slot-index');
 	let sortOrder: SortOrder = $state('asc');
-	let alphaIcon: string = $state('');
-	let foodIcon: string = $state('');
-	let hpIcon: string = $state('');
 	let containerRef: HTMLDivElement;
 	let listWrapperStyle = $state('');
 	let selectAll: boolean = $state(false);
@@ -87,6 +68,56 @@
 
 	const elementClass = (element: string) =>
 		cn('btn', selectedFilter === element ? 'bg-secondary-500/25' : '');
+
+	let pals = $derived.by(() => {
+		if (!appState.selectedPlayer || !appState.selectedPlayer.pals) return;
+		const playerPals = Object.entries(appState.selectedPlayer.pals as Record<string, Pal>);
+		const palBoxId = appState.selectedPlayer.pal_box_id;
+		return playerPals
+			.filter(([_, pal]) => pal.storage_id === palBoxId)
+			.map(([id, pal]) => {
+				const palData = palsData.pals[pal.character_id];
+				return { id, pal, palData };
+			});
+	});
+
+	let elementTypes = $derived(Object.keys(elementsData.elements));
+	let elementIcons = $derived.by(() => {
+		let elementIcons: Record<string, string> = {};
+		for (const element of elementTypes) {
+			const elementData = elementsData.elements[element];
+			if (elementData) {
+				elementIcons[element] = assetLoader.loadImage(
+					`${ASSET_DATA_PATH}/img/elements/${elementData.icon}.png`
+				);
+			}
+		}
+		return elementIcons;
+	});
+
+	let LevelSortIcon = $derived.by(() => {
+		if (sortBy !== 'level') {
+			return ArrowDown01;
+		} else {
+			return sortOrder === 'asc' ? ArrowDown01 : ArrowDown10;
+		}
+	});
+
+	let NameSortIcon = $derived.by(() => {
+		if (sortBy !== 'name') {
+			return ArrowDownAZ;
+		} else {
+			return sortOrder === 'asc' ? ArrowDownAZ : ArrowDownZA;
+		}
+	});
+
+	let PaldeckSortIcon = $derived.by(() => {
+		if (sortBy !== 'paldeck-index') {
+			return ArrowDownWideNarrow;
+		} else {
+			return sortOrder === 'asc' ? ArrowDownWideNarrow : ArrowDownNarrowWide;
+		}
+	});
 
 	const debouncedFilterPals = debounce(filterPals, 300);
 
@@ -111,22 +142,6 @@
 			};
 			ws.send(JSON.stringify(message));
 		}
-	}
-
-	async function getPalsInfo() {
-		if (!appState.selectedPlayer || !appState.selectedPlayer.pals) return;
-
-		const playerPals = Object.entries(appState.selectedPlayer.pals as Record<string, Pal>);
-		const palBoxId = appState.selectedPlayer.pal_box_id;
-		pals = await Promise.all(
-			playerPals
-				.filter(([_, pal]) => pal.storage_id === palBoxId)
-				.map(async ([id, pal]) => {
-					const palData = await palsData.getPalInfo(pal.character_id);
-					await getStats(pal, appState.selectedPlayer as Player);
-					return { id, pal, palData };
-				})
-		);
 	}
 
 	async function filterPals() {
@@ -192,94 +207,12 @@
 		}
 	}
 
-	async function loadStaticIcons() {
-		const iconPath = `${ASSET_DATA_PATH}/img/icons/Alpha.png`;
-		alphaIcon = await assetLoader.loadImage(iconPath);
-
-		const foodPath = `${ASSET_DATA_PATH}/img/icons/Food.png`;
-		foodIcon = await assetLoader.loadImage(foodPath);
-
-		const hpPath = `${ASSET_DATA_PATH}/img/icons/Heart.png`;
-		hpIcon = await assetLoader.loadImage(hpPath);
-
-		const malePath = `${ASSET_DATA_PATH}/img/icons/${PalGender.MALE.toLowerCase()}.svg`;
-		genderIcons[PalGender.MALE] = await assetLoader.loadSvg(malePath);
-
-		const femalePath = `${ASSET_DATA_PATH}/img/icons/${PalGender.FEMALE.toLowerCase()}.svg`;
-		genderIcons[PalGender.FEMALE] = await assetLoader.loadSvg(femalePath);
-	}
-
-	// @ts-ignore
-	let LevelSortIcon: Component = $state(ArrowDown01);
-	$effect(() => {
-		if (sortBy !== 'level') {
-			// @ts-ignore
-			LevelSortIcon = ArrowDown01;
-		} else {
-			// @ts-ignore
-			LevelSortIcon = sortOrder === 'asc' ? ArrowDown01 : ArrowDown10;
-		}
-	});
-
-	// @ts-ignore
-	let NameSortIcon: Component = $state(ArrowDownAZ);
-	$effect(() => {
-		if (sortBy !== 'name') {
-			// @ts-ignore
-			NameSortIcon = ArrowDownAZ;
-		} else {
-			// @ts-ignore
-			NameSortIcon = sortOrder === 'asc' ? ArrowDownAZ : ArrowDownZA;
-		}
-	});
-
-	// @ts-ignore
-	let PaldeckSortIcon: Component = $state(ArrowDownWideNarrow);
-	$effect(() => {
-		if (sortBy !== 'paldeck-index') {
-			// @ts-ignore
-			PaldeckSortIcon = ArrowDownWideNarrow;
-		} else {
-			// @ts-ignore
-			PaldeckSortIcon = sortOrder === 'asc' ? ArrowDownWideNarrow : ArrowDownNarrowWide;
-		}
-	});
-
-	async function loadElementTypes() {
-		elementTypes = await elementsData.getAllElementTypes();
-	}
-
-	async function loadElementIcons() {
-		for (const elementType of elementTypes) {
-			const elementObj = await elementsData.searchElement(elementType);
-			if (elementObj) {
-				const badgePath = `${ASSET_DATA_PATH}/img/elements/${elementObj.badge_icon}.png`;
-				const iconPath = `${ASSET_DATA_PATH}/img/elements/${elementObj.icon}.png`;
-				try {
-					elementBadges[elementType] = await assetLoader.loadImage(badgePath, true);
-					elementIcons[elementType] = await assetLoader.loadImage(iconPath, true);
-				} catch (error) {
-					console.error(`Failed to load icon for ${elementType}:`, error);
-				}
-			}
-		}
-	}
-
-	function getElementIcon(elementType: string): string | undefined {
-		if (elementIcons[elementType]) return elementIcons[elementType];
-		return elementIcons[elementType];
-	}
-
 	async function getPalMenuIcon(palId: string): Promise<string | undefined> {
 		if (!appState.selectedPlayer || !appState.selectedPlayer.pals) return undefined;
 		const pal = appState.selectedPlayer.pals[palId];
 		if (!pal) return undefined;
-		if (palMenuIcons[pal.character_id]) return palMenuIcons[pal.character_id];
 		const palImgName = pal.name.toLowerCase().replaceAll(' ', '_');
-		const icon_path = `${ASSET_DATA_PATH}/img/pals/menu/${palImgName}_menu.png`;
-		const icon = await assetLoader.loadImage(icon_path, true);
-		palMenuIcons[pal.character_id] = icon;
-		return icon;
+		return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/pals/menu/${palImgName}_menu.png`);
 	}
 
 	async function handleAddPal() {
@@ -316,7 +249,6 @@
 	}
 
 	function sortBySlotIndex() {
-		console.log('Sort by slot index');
 		filteredPals = filteredPals.sort((a, b) =>
 			sortOrder === 'asc'
 				? a.pal.storage_slot - b.pal.storage_slot
@@ -325,9 +257,7 @@
 	}
 
 	async function sortByPaldeckIndex() {
-		const palInfoPromises = filteredPals.map((pal) => palsData.getPalInfo(pal.pal.character_id));
-		const palInfos = await Promise.all(palInfoPromises);
-
+		const palInfos = filteredPals.map((p) => palsData.pals[p.pal.character_id]);
 		const palsWithInfo = filteredPals.map((pal, index) => [pal, palInfos[index]]);
 
 		palsWithInfo.sort((a, b) => {
@@ -337,10 +267,6 @@
 		});
 
 		filteredPals = palsWithInfo.map((pair) => pair[0] as PalWithData);
-	}
-
-	function getGenderIcon(gender: PalGender): string | undefined {
-		return genderIcons[gender];
 	}
 
 	async function cloneSelectedPal() {
@@ -402,7 +328,7 @@
 		ws.send(JSON.stringify(message));
 		pal.hp = pal.max_hp;
 		pal.sanity = 100;
-		const palData = await palsData.getPalInfo(pal.character_id);
+		const palData = palsData.pals[pal.character_id];
 		if (palData) {
 			pal.stomach = palData.max_full_stomach;
 		}
@@ -459,20 +385,11 @@
 	}
 
 	$effect(() => {
-		loadStaticIcons();
-		loadElementTypes();
 		calculateHeight();
 	});
 
 	$effect(() => {
-		if (elementTypes.length > 0) {
-			loadElementIcons();
-		}
-	});
-
-	$effect(() => {
 		if (appState.selectedPlayer && appState.selectedPlayer.pals) {
-			getPalsInfo();
 			debouncedFilterPals();
 		}
 	});
@@ -616,18 +533,13 @@
 							</Tooltip>
 							{#each [...elementTypes] as element}
 								<Tooltip>
-									{#await getElementIcon(element) then icon}
-										{#if icon}
-											<button
-												class={elementClass(element)}
-												onclick={() => (selectedFilter = element)}
-												aria-label={element}
-											>
-												<enhanced:img src={icon} alt={element} class="pal-element-badge"
-												></enhanced:img>
-											</button>
-										{/if}
-									{/await}
+									<button
+										class={elementClass(element)}
+										onclick={() => (selectedFilter = element)}
+										aria-label={element}
+									>
+										<img src={elementIcons[element]} alt={element} class="pal-element-badge" />
+									</button>
 									{#snippet popup()}
 										<span>{element}</span>
 									{/snippet}
@@ -639,10 +551,7 @@
 									class={sortAlphaClass}
 									onclick={() => (selectedFilter = 'alpha')}
 								>
-									{#if alphaIcon}
-										<enhanced:img src={alphaIcon} alt="Aplha" class="pal-element-badge"
-										></enhanced:img>
-									{/if}
+									<img src={staticIcons.alphaIcon} alt="Aplha" class="pal-element-badge" />
 								</button>
 								{#snippet popup()}
 									Alpha Pals
@@ -701,30 +610,22 @@
 						</div>
 						<div class="relative justify-start">
 							{#if p.pal.is_boss}
-								{#if alphaIcon}
-									<div class="absolute -left-2 -top-1 h-5 w-5">
-										<enhanced:img src={alphaIcon} alt="Aplha" class="pal-element-badge"
-										></enhanced:img>
-									</div>
-								{/if}
+								<div class="absolute -left-2 -top-1 h-5 w-5">
+									<img src={staticIcons.alphaIcon} alt="Aplha" class="pal-element-badge" />
+								</div>
 							{/if}
 							{#if p.pal.is_lucky}
 								<div class="absolute -left-2 -top-1 h-5 w-5">✨</div>
 							{/if}
 							{#await getPalMenuIcon(p.pal.instance_id) then icon}
-								{#if icon}
-									<enhanced:img src={icon} alt={p.pal.name} class="h-8 w-8"></enhanced:img>
-								{/if}
+								<img src={icon} alt={p.pal.name} class="h-8 w-8" />
 							{/await}
-							{#await getGenderIcon(p.pal.gender) then icon}
-								{#if icon}
-									{@const color =
-										p.pal.gender == PalGender.MALE ? 'text-primary-300' : 'text-tertiary-300'}
-									<div class={cn('absolute -right-4 -top-1 h-5 w-5', color)}>
-										{@html icon}
-									</div>
-								{/if}
-							{/await}
+							<div class="absolute -right-4 -top-1 h-5 w-5">
+								<img
+									src={assetLoader.loadImage(`${ASSET_DATA_PATH}/img/icons/${p.pal.gender}.png`)}
+									alt={p.pal.gender}
+								/>
+							</div>
 						</div>
 						<div class="ml-4 flex flex-row justify-start">
 							<div>{p.pal.nickname || p.pal.name}</div>
@@ -732,12 +633,11 @@
 						<div class="flex justify-end">
 							{#if p.palData}
 								{#each p.palData.element_types as elementType}
-									{#await getElementIcon(elementType) then icon}
-										{#if icon}
-											<enhanced:img src={icon} alt={elementType} class="pal-element-badge"
-											></enhanced:img>
-										{/if}
-									{/await}
+									<img
+										src={elementIcons[elementType]}
+										alt={elementType}
+										class="pal-element-badge"
+									/>
 								{/each}
 							{/if}
 						</div>

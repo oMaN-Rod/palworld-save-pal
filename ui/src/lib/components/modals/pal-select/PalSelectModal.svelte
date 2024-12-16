@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Card, Tooltip, Combobox, Input } from '$components/ui';
-	import { type ElementType, type SelectOption } from '$types';
+	import { type SelectOption } from '$types';
 	import { Save, X } from 'lucide-svelte';
 	import { palsData, elementsData } from '$lib/data';
 	import { ASSET_DATA_PATH } from '$lib/constants';
@@ -25,23 +25,6 @@
 	let selectedPal: string = $state('');
 	let nickname: string = $state('');
 
-	async function getElementIcon(elementType: ElementType): Promise<string | undefined> {
-		const elementObj = await elementsData.searchElement(elementType.toString());
-		if (!elementObj) return undefined;
-		const iconPath = `${ASSET_DATA_PATH}/img/elements/${elementObj.icon}.png`;
-		return await assetLoader.loadImage(iconPath, true);
-	}
-
-	async function getPalIcon(palName: string): Promise<string | undefined> {
-		const palImgName = palName.toLowerCase().replaceAll(' ', '_');
-
-		const iconPath = `${ASSET_DATA_PATH}/img/pals/menu/${palImgName}_menu.png`;
-		if (palImgName.includes('warsect')) {
-			console.log(palImgName, iconPath);
-		}
-		return await assetLoader.loadImage(iconPath, true);
-	}
-
 	function handleClose(confirmed: boolean) {
 		closeModal(confirmed ? [selectedPal, nickname] : undefined);
 	}
@@ -51,24 +34,21 @@
 	<h3 class="h3">{title}</h3>
 	<Combobox options={selectOptions} bind:value={selectedPal}>
 		{#snippet selectOption(option)}
+			{@const palImgName = option.label.toLowerCase().replaceAll(' ', '_')}
+			{@const palImgPath = assetLoader.loadImage(
+				`${ASSET_DATA_PATH}/img/pals/menu/${palImgName}_menu.png`
+			)}
+			{@const palData = palsData.pals[option.value]}
 			<div class="flex items-center space-x-2">
-				{#await getPalIcon(option.label) then icon}
-					{#if icon}
-						<enhanced:img src={icon} alt={option.label} class="h-8 w-8"></enhanced:img>
-					{/if}
-				{/await}
+				<img src={palImgPath} alt={option.label} class="h-8 w-8" />
 				<span class="grow">{option.label}</span>
-				{#await palsData.getPalInfo(option.value) then palInfo}
-					{#if palInfo && palInfo.element_types.length > 0}
-						{#each palInfo.element_types as elementType}
-							{#await getElementIcon(elementType) then elementIcon}
-								{#if elementIcon}
-									<enhanced:img src={elementIcon} alt={elementType} class="h-6 w-6"></enhanced:img>
-								{/if}
-							{/await}
-						{/each}
-					{/if}
-				{/await}
+				{#each palData.element_types as elementType}
+					{@const elementObj = elementsData.elements[elementType.toString()]}
+					{@const elementIcon = assetLoader.loadImage(
+						`${ASSET_DATA_PATH}/img/elements/${elementObj.icon}.png`
+					)}
+					<img src={elementIcon} alt={elementType} class="h-6 w-6" />
+				{/each}
 			</div>
 		{/snippet}
 	</Combobox>

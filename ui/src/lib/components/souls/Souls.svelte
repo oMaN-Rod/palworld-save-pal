@@ -7,17 +7,10 @@
 		pal: Pal;
 	}>();
 
-	let hp: number[] = $state([0]);
-	let attack: number[] = $state([0]);
-	let defense: number[] = $state([0]);
-	let craftspeed: number[] = $state([0]);
-
-	$effect(() => {
-		hp = [pal.rank_hp ?? 0];
-		attack = [pal.rank_attack ?? 0];
-		defense = [pal.rank_defense ?? 0];
-		craftspeed = [pal.rank_craftspeed ?? 0];
-	});
+	let hp = $derived([pal.rank_hp ?? 0]);
+	let attack = $derived([pal.rank_attack ?? 0]);
+	let defense = $derived([pal.rank_defense ?? 0]);
+	let craftspeed = $derived([pal.rank_craftspeed ?? 0]);
 
 	function handleUpdateHp(details: any): void {
 		pal.rank_hp = details.value[0];
@@ -47,15 +40,17 @@
 		max={10}
 		markers={[2, 4, 6, 8]}
 		step={1}
-		bind:value={hp}
+		value={hp}
 		onValueChange={handleUpdateHp}
 	/>
 	<Input
 		type="number"
 		labelClass="w-24"
 		inputClass="h-8"
-		bind:value={hp[0]}
-		on:change={handleUpdateHp}
+		value={hp[0]}
+		onchange={handleUpdateHp}
+		min={0}
+		max={10}
 	/>
 </div>
 <div class="flex flex-row items-center space-x-2">
@@ -68,15 +63,17 @@
 		max={10}
 		markers={[2, 4, 6, 8]}
 		step={1}
-		bind:value={defense}
+		value={defense}
 		onValueChange={handleUpdateDefense}
 	/>
 	<Input
 		type="number"
 		labelClass="w-24"
 		inputClass="h-8"
-		bind:value={defense[0]}
-		on:change={handleUpdateDefense}
+		value={defense[0]}
+		onchange={handleUpdateDefense}
+		min={0}
+		max={10}
 	/>
 </div>
 <div class="flex flex-row items-center space-x-2">
@@ -89,15 +86,17 @@
 		max={10}
 		markers={[2, 4, 6, 8]}
 		step={1}
-		bind:value={attack}
+		value={attack}
 		onValueChange={handleUpdateAttack}
 	/>
 	<Input
 		type="number"
 		labelClass="w-24"
 		inputClass="h-8"
-		bind:value={attack[0]}
-		on:change={handleUpdateAttack}
+		value={attack[0]}
+		onchange={handleUpdateAttack}
+		min={0}
+		max={10}
 	/>
 </div>
 <div class="flex flex-row items-center space-x-2">
@@ -110,14 +109,16 @@
 		max={10}
 		markers={[2, 4, 6, 8]}
 		step={1}
-		bind:value={craftspeed}
+		value={craftspeed}
 		onValueChange={handleUpdateCraftSpeed}
 	/>
 	<Input
 		type="number"
 		labelClass="w-24"
 		inputClass="h-8"
-		bind:value={craftspeed[0]}
-		on:change={handleUpdateCraftSpeed}
+		value={craftspeed[0]}
+		onchange={handleUpdateCraftSpeed}
+		min={0}
+		max={10}
 	/>
 </div>

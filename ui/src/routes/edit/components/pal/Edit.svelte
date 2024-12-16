@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { assetLoader } from '$utils/asset-loader';
 	import {
 		ActiveSkillBadge,
 		PassiveSkillBadge,
@@ -11,7 +10,7 @@
 	} from '$components';
 	import { CornerDotButton, Progress, SectionHeader, Tooltip } from '$components/ui';
 	import { type ElementType, EntryState, type Pal, PalGender, type PresetProfile } from '$types';
-	import { ASSET_DATA_PATH } from '$lib/constants';
+	import { ASSET_DATA_PATH, staticIcons } from '$lib/constants';
 	import { palsData, elementsData, expData, presetsData } from '$lib/data';
 	import { cn } from '$theme';
 	import { getAppState, getModalState } from '$states';
@@ -20,37 +19,45 @@
 	import { Souls } from '$components';
 	import { getStats } from '$lib/data';
 	import SkillPresets from './SkillPresets.svelte';
+	import { assetLoader } from '$utils';
 
 	const appState = getAppState();
 	const modal = getModalState();
 
-	let palLevel: string = $state('');
-	let palLevelClass: string = $state('');
-	let palLevelMessage: string = $state('');
 	let palLevelProgressToNext: number = $state(0);
 	let palLevelProgressValue: number = $state(0);
 	let palLevelProgressMax: number = $state(1);
 
-	let alphaIcon: string = $state('');
-
-	async function loadPalImage(): Promise<string | undefined> {
-		const pal = $state.snapshot(appState.selectedPal);
-		if (pal) {
-			const { name } = pal;
-			let imagePath = `${ASSET_DATA_PATH}/img/pals/full/${name.toLowerCase().replaceAll(' ', '_')}.png`;
-			const image = await assetLoader.loadImage(imagePath, true);
-			return image;
+	let palLevel = $derived.by(() => {
+		if (appState.selectedPlayer && appState.selectedPal) {
+			return appState.selectedPlayer.level < appState.selectedPal.level
+				? appState.selectedPlayer.level.toString()
+				: appState.selectedPal.level.toString();
 		}
-		return undefined;
-	}
+	});
+	let palLevelClass = $derived.by(() => {
+		if (appState.selectedPlayer && appState.selectedPal) {
+			return appState.selectedPlayer.level < appState.selectedPal.level ? 'text-error-500' : '';
+		}
+	});
+	let palLevelMessage = $derived.by(() => {
+		if (appState.selectedPlayer && appState.selectedPal) {
+			return appState.selectedPlayer.level < appState.selectedPal.level
+				? 'Level sync'
+				: 'No Level Sync';
+		}
+	});
 
-	async function loadStaticIcons() {
-		const iconPath = `${ASSET_DATA_PATH}/img/icons/Alpha.png`;
-		const icon = await assetLoader.loadImage(iconPath);
-		alphaIcon = icon;
-	}
+	let palImage = $derived.by(() => {
+		if (appState.selectedPal) {
+			const { name } = appState.selectedPal;
+			return assetLoader.loadImage(
+				`${ASSET_DATA_PATH}/img/pals/full/${name.toLowerCase().replaceAll(' ', '_')}.png`
+			);
+		}
+	});
 
-	async function initPalLevelProgress() {
+	async function calcPalLevelProgress() {
 		if (appState.selectedPal) {
 			if (appState.selectedPal.level === 55) {
 				palLevelProgressToNext = 0;
@@ -77,7 +84,7 @@
 		appState.selectedPal.exp = nextLevelData.PalTotalEXP - nextLevelData.PalNextEXP;
 		appState.selectedPal.state = EntryState.MODIFIED;
 
-		await initPalLevelProgress();
+		await calcPalLevelProgress();
 	}
 
 	async function handleLevelDecrement() {
@@ -92,7 +99,7 @@
 		appState.selectedPal.exp = newLevelData.PalTotalEXP - newLevelData.PalNextEXP;
 		appState.selectedPal.state = EntryState.MODIFIED;
 
-		await initPalLevelProgress();
+		await calcPalLevelProgress();
 	}
 
 	function getActiveSkills(pal: Pal): string[] {
@@ -125,17 +132,8 @@
 
 	async function getPalElementBadge(elementType: string): Promise<string | undefined> {
 		const elementObj = await elementsData.searchElement(elementType);
-		console.log('element', elementType, elementObj);
 		if (!elementObj) return undefined;
-		const icon_path = `${ASSET_DATA_PATH}/img/elements/${elementObj.badge_icon}.png`;
-		const icon = await assetLoader.loadImage(icon_path, true);
-		return icon;
-	}
-
-	async function getGenderIcon(gender: PalGender): Promise<string | undefined> {
-		const iconPath = `${ASSET_DATA_PATH}/img/icons/${gender.toLowerCase()}.svg`;
-		const icon = await assetLoader.loadSvg(iconPath);
-		return icon;
+		return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/elements/${elementObj.badge_icon}.png`);
 	}
 
 	async function handleEditNickname() {
@@ -320,21 +318,7 @@
 	}
 
 	$effect(() => {
-		if (appState.selectedPlayer && appState.selectedPal) {
-			palLevel =
-				appState.selectedPlayer.level < appState.selectedPal.level
-					? appState.selectedPlayer.level.toString()
-					: appState.selectedPal.level.toString();
-			palLevelClass =
-				appState.selectedPlayer.level < appState.selectedPal.level ? 'text-error-500' : '';
-			palLevelMessage =
-				appState.selectedPlayer.level < appState.selectedPal.level ? 'Level sync' : 'No Level Sync';
-		}
-	});
-
-	$effect(() => {
-		loadStaticIcons();
-		initPalLevelProgress();
+		calcPalLevelProgress();
 	});
 </script>
 
@@ -391,17 +375,14 @@
 										class="hover:ring-secondary-500 relative flex h-full w-auto items-center justify-center hover:ring"
 										onclick={handleEditGender}
 									>
-										{#await getGenderIcon(appState.selectedPal.gender) then icon}
-											{#if icon}
-												{@const color =
-													appState.selectedPal.gender == PalGender.MALE
-														? 'text-primary-300'
-														: 'text-tertiary-300'}
-												<div class={cn('h-8 w-8', color)}>
-													{@html icon}
-												</div>
-											{/if}
-										{/await}
+										<div class="h-8 w-8">
+											<img
+												src={assetLoader.loadImage(
+													`${ASSET_DATA_PATH}/img/icons/${appState.selectedPal.gender}.png`
+												)}
+												alt={appState.selectedPal.gender}
+											/>
+										</div>
 										<span class="bg-surface-600 absolute left-0 top-0 h-0.5 w-0.5"></span>
 										<span class="bg-surface-600 absolute right-0 top-0 h-0.5 w-0.5"></span>
 										<span class="bg-surface-600 absolute bottom-0 left-0 h-0.5 w-0.5"></span>
@@ -438,14 +419,12 @@
 										onclick={handleEditAlpha}
 									>
 										<div class="flex h-8 w-8 items-center justify-center">
-											{#if alphaIcon}
-												<enhanced:img
-													src={alphaIcon}
-													alt="Alpha"
-													class="h-8 w-8"
-													style="width: 24px; height: 24px;"
-												></enhanced:img>
-											{/if}
+											<img
+												src={staticIcons.alphaIcon}
+												alt="Alpha"
+												class="h-8 w-8"
+												style="width: 24px; height: 24px;"
+											/>
 										</div>
 										<span class="bg-surface-600 absolute left-0 top-0 h-0.5 w-0.5"></span>
 										<span class="bg-surface-600 absolute right-0 top-0 h-0.5 w-0.5"></span>
@@ -462,10 +441,7 @@
 											{#if elementTypes}
 												{#each elementTypes as elementType}
 													{#await getPalElementBadge(elementType) then icon}
-														{#if icon}
-															<enhanced:img src={icon} alt={elementType} class="h-8 w-8"
-															></enhanced:img>
-														{/if}
+														<img src={icon} alt={elementType} class="h-8 w-8" />
 													{/await}
 												{/each}
 											{/if}
@@ -560,34 +536,30 @@
 				</div>
 				<div class="flex-1 overflow-auto p-2">
 					<div class="flex h-full flex-col items-center justify-center">
-						{#await loadPalImage() then palImage}
-							{#if palImage}
-								<div class="pal">
-									<Tooltip
-										popupClass="p-4 bg-surface-800"
-										rounded="rounded-none"
-										position="top-start"
-										useArrow={false}
-									>
-										<enhanced:img
-											src={palImage}
-											alt={`${appState.selectedPal?.name} icon`}
-											class="h-auto max-w-full"
-										></enhanced:img>
+						<div class="pal">
+							<Tooltip
+								popupClass="p-4 bg-surface-800"
+								rounded="rounded-none"
+								position="top-start"
+								useArrow={false}
+							>
+								<img
+									src={palImage}
+									alt={`${appState.selectedPal?.name} icon`}
+									class="h-auto max-w-full"
+								/>
 
-										{#snippet popup()}
-											{#await getPalDescription(appState.selectedPal!.character_id) then description}
-												{#if description}
-													<div class="flex max-w-96 flex-col">
-														<p class="text-center">{description}</p>
-													</div>
-												{/if}
-											{/await}
-										{/snippet}
-									</Tooltip>
-								</div>
-							{/if}
-						{/await}
+								{#snippet popup()}
+									{#await getPalDescription(appState.selectedPal!.character_id) then description}
+										{#if description}
+											<div class="flex max-w-96 flex-col">
+												<p class="text-center">{description}</p>
+											</div>
+										{/if}
+									{/await}
+								{/snippet}
+							</Tooltip>
+						</div>
 					</div>
 				</div>
 			</div>

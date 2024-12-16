@@ -19,13 +19,14 @@
 
 	let selectedPreset: ExtendedPresetProfile = $state({ id: '', name: '', type: 'inventory' });
 	let selectedPresets: ExtendedPresetProfile[] = $state([]);
+	let selectAll: boolean = $state(false);
+	let listWrapperStyle = $state('');
+
 	let filteredPresets: ExtendedPresetProfile[] = $derived.by(() => {
 		return Object.entries(presetsData.presetProfiles)
 			.filter(([_, preset]) => preset.type === 'inventory')
 			.map(([id, preset]) => ({ ...preset, id }));
 	});
-	let selectAll: boolean = $state(false);
-	let listWrapperStyle = $state('');
 
 	function calculateHeight() {
 		if (containerRef) {

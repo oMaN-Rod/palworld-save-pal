@@ -16,9 +16,9 @@
 	const ws = getSocketState();
 	const isDesktopMode = PUBLIC_DESKTOP_MODE === 'true';
 
-	let steamIcon: string = $state('');
-	let xboxIcon: string = $state('');
-	let morpheus: string = $state('');
+	const steamIcon = assetLoader.loadSvg(`${ASSET_DATA_PATH}/img/app/steam.svg`);
+	const xboxIcon = assetLoader.loadSvg(`${ASSET_DATA_PATH}/img/app/xbox.svg`);
+	const morpheus = assetLoader.loadImage(`${ASSET_DATA_PATH}/img/app/morpheus.png`);
 
 	function splitPath(path: string) {
 		if (!path) {
@@ -27,9 +27,7 @@
 				filename: ''
 			};
 		}
-		// Handle both forward and back slashes
 		const normalizedPath = path.replace(/\\/g, '/');
-		console.log('normalizedPath', normalizedPath);
 		const lastSlashIndex = normalizedPath.lastIndexOf('/');
 
 		if (lastSlashIndex === -1) {
@@ -44,24 +42,6 @@
 			filename: normalizedPath.slice(lastSlashIndex + 1)
 		};
 	}
-
-	$effect(() => {
-		if (!isDesktopMode) {
-			goto('/upload');
-		}
-	});
-
-	$effect(() => {
-		const loadStaticIcons = async () => {
-			const steamIconPath = `${ASSET_DATA_PATH}/img/app/steam.svg`;
-			steamIcon = await assetLoader.loadSvg(steamIconPath);
-			const xboxIconPath = `${ASSET_DATA_PATH}/img/app/xbox.svg`;
-			xboxIcon = await assetLoader.loadSvg(xboxIconPath);
-			const morpheusPath = `${ASSET_DATA_PATH}/img/app/morpheus.png`;
-			morpheus = await assetLoader.loadImage(morpheusPath, true);
-		};
-		loadStaticIcons();
-	});
 
 	async function handleSelectSave(saveType: SaveType) {
 		await goto('/loading');
@@ -84,6 +64,12 @@
 			})
 		);
 	}
+
+	$effect(() => {
+		if (!isDesktopMode) {
+			goto('/upload');
+		}
+	});
 </script>
 
 {#snippet pickYourPoison(size: 'sm' | 'lg' = 'lg')}
@@ -92,67 +78,62 @@
 	{@const offset = size === 'lg' ? 'top-[420px]' : 'top-[280px]'}
 	{@const pillSize = size === 'lg' ? 'h-24 w-24' : 'h-16 w-16'}
 	<div class="relative flex flex-col">
-		{#if morpheus}
-			<div class="relative">
-				<enhanced:img src={morpheus} alt="Choice" class={cn('w-auto', morpheusSize)} />
-				<div class={cn('absolute flex items-center justify-between px-12', inset, offset)}>
-					<Tooltip
-						popupClass="p-0 bg-surface-600 max-w-96"
-						rounded="rounded-none"
-						position="left"
-						useArrow={false}
+		<div class="relative">
+			<img src={morpheus} alt="Choice" class={cn('w-auto', morpheusSize)} />
+			<div class={cn('absolute flex items-center justify-between px-12', inset, offset)}>
+				<Tooltip
+					popupClass="p-0 bg-surface-600 max-w-96"
+					rounded="rounded-none"
+					position="left"
+					useArrow={false}
+				>
+					<button
+						class={cn('rounded-full bg-transparent transition-transform hover:scale-110', pillSize)}
+						onclick={() => handleSelectSave('steam')}
 					>
-						<button
-							class={cn(
-								'rounded-full bg-transparent transition-transform hover:scale-110',
-								pillSize
-							)}
-							onclick={() => handleSelectSave('steam')}
-						>
-							{#if steamIcon}
-								{@html steamIcon}
-							{:else}
-								Steam
-							{/if}
-						</button>
-						{#snippet popup()}
-							<div class="flex flex-col p-4">
-								<h4 class="h4">Steam</h4>
-								<p>Find and select your Level.sav file.</p>
-							</div>
-						{/snippet}
-					</Tooltip>
+						{#if steamIcon}
+							{@html steamIcon}
+						{:else}
+							Steam
+						{/if}
+					</button>
+					{#snippet popup()}
+						<div class="flex flex-col p-4">
+							<h4 class="h4">Steam</h4>
+							<p>Find and select your Level.sav file.</p>
+						</div>
+					{/snippet}
+				</Tooltip>
 
-					<Tooltip
-						popupClass="p-0 bg-surface-600 max-w-96"
-						rounded="rounded-none"
-						position="right"
-						useArrow={false}
+				<Tooltip
+					popupClass="p-0 bg-surface-600 max-w-96"
+					rounded="rounded-none"
+					position="right"
+					useArrow={false}
+				>
+					<button
+						class={cn(
+							'-rotate-90 rounded-full bg-transparent transition-transform hover:scale-110',
+							pillSize
+						)}
+						onclick={() => handleSelectSave('gamepass')}
+						disabled
 					>
-						<button
-							class={cn(
-								'-rotate-90 rounded-full bg-transparent transition-transform hover:scale-110',
-								pillSize
-							)}
-							onclick={() => handleSelectSave('gamepass')}
-							disabled
-						>
-							{#if xboxIcon}
-								{@html xboxIcon}
-							{:else}
-								Xbox
-							{/if}
-						</button>
-						{#snippet popup()}
-							<div class="flex flex-col p-4">
-								<h4 class="h4">XBOX Game Pass</h4>
-								<p>Coming soon!™</p>
-							</div>
-						{/snippet}
-					</Tooltip>
-				</div>
+						{#if xboxIcon}
+							{@html xboxIcon}
+						{:else}
+							Xbox
+						{/if}
+					</button>
+					{#snippet popup()}
+						<div class="flex flex-col p-4">
+							<h4 class="h4">XBOX Game Pass</h4>
+							<p>Coming soon!™</p>
+						</div>
+					{/snippet}
+				</Tooltip>
 			</div>
-		{/if}
+		</div>
 	</div>
 {/snippet}
 

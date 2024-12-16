@@ -5,8 +5,8 @@
 	import { itemsData } from '$lib/data';
 	import type { Item, ItemGroup } from '$types';
 	import { ASSET_DATA_PATH } from '$lib/constants';
-	import { assetLoader } from '$utils';
 	import { cn } from '$theme';
+	import { assetLoader } from '$utils';
 
 	let {
 		title = '',
@@ -81,15 +81,11 @@
 			console.error(`Item data not found for static id: ${staticId}`);
 			return;
 		}
-		let iconPath: string;
 		if (staticId.includes('SkillCard')) {
-			iconPath = `${ASSET_DATA_PATH}/img/elements/${itemData.details.icon}.png`;
+			return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/elements/${itemData.details.icon}.png`);
 		} else {
-			iconPath = `${ASSET_DATA_PATH}/img/icons/${itemData.details.icon}.png`;
+			return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/icons/${itemData.details.icon}.png`);
 		}
-
-		const icon = await assetLoader.loadImage(iconPath);
-		return icon;
 	}
 
 	function getItemTier(staticId: string) {
@@ -168,7 +164,7 @@
 									getBackgroundColor(option.value)
 								)}
 							>
-								<enhanced:img src={icon} alt={option.label} class="h-8 w-8"></enhanced:img>
+								<img src={icon} alt={option.label} class="h-8 w-8" />
 							</div>
 						{:else}
 							<div

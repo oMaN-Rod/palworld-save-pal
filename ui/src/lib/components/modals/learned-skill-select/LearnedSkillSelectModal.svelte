@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { Card, Tooltip, Combobox, List } from '$components/ui';
-	import type { ActiveSkill, SelectOption } from '$types';
+	import type { ActiveSkill } from '$types';
 	import { Plus, Save, X, Trash, TimerReset, Delete } from 'lucide-svelte';
 	import { activeSkillsData, elementsData } from '$lib/data';
-	import { ASSET_DATA_PATH } from '$lib/constants';
+	import { ASSET_DATA_PATH, staticIcons } from '$lib/constants';
 	import { assetLoader } from '$utils';
 
 	let { closeModal, pal } = $props<{
@@ -11,38 +11,26 @@
 		pal: any;
 	}>();
 
-	let selectOptions: SelectOption[] = $state([]);
-	let activeSkills: ActiveSkill[] = $state([]);
 	let selectedSkill: string = $state('');
 	let learnedSkills: string[] = $state([]);
-	let sadIcon: string = $state('');
 
-	$effect(() => {
-		loadSkillOptions();
-		learnedSkills = [...pal.learned_skills];
-	});
-
-	async function loadSkillOptions() {
-		activeSkills = await activeSkillsData.getActiveSkills();
-		selectOptions = activeSkills
+	let activeSkills = $derived(Object.values(activeSkillsData.activeSkills));
+	let selectOptions = $derived(
+		activeSkills
 			.sort((a, b) => a.details.element.localeCompare(b.details.element))
 			.map((skill) => ({
 				value: skill.id,
 				label: skill.name
-			}));
-		const sadIconPath = `${ASSET_DATA_PATH}/img/icons/Cattiva_Pleading.png`;
-		sadIcon = await assetLoader.loadImage(sadIconPath, true);
-	}
+			}))
+	);
 
 	async function getActiveSkillIcon(skillId: string): Promise<string | undefined> {
 		const skill = activeSkills.find((s) => s.id === skillId);
 		if (!skill || skill.name === 'None') return undefined;
 		const activeSkill = skill as ActiveSkill;
-		const elementObj = await elementsData.searchElement(activeSkill.details.element);
-		if (!elementObj) return undefined;
-		const iconPath = `${ASSET_DATA_PATH}/img/elements/${elementObj.icon}.png`;
-		const icon = await assetLoader.loadImage(iconPath, true);
-		return icon;
+		const element = await elementsData.elements[activeSkill.details.element];
+		if (!element) return undefined;
+		return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/elements/${element.icon}.png`);
 	}
 
 	function handleAddSkill() {
@@ -63,6 +51,10 @@
 	function handleSave() {
 		closeModal(learnedSkills);
 	}
+
+	$effect(() => {
+		learnedSkills = [...pal.learned_skills];
+	});
 </script>
 
 <Card class="bg-surface-500 min-w-[calc(100vw/3)]">
@@ -73,11 +65,7 @@
 				{#await getActiveSkillIcon(option.value) then icon}
 					{@const activeSkill = activeSkills.find((s) => s.id === option.value)}
 					<div class="grid grid-cols-[auto_1fr_auto] items-center gap-2">
-						{#if icon}
-							<enhanced:img src={icon} alt={option.label} class="h-6 w-6"></enhanced:img>
-						{:else}
-							<div class="w-6"></div>
-						{/if}
+						<img src={icon} alt={option.label} class="h-6 w-6" />
 						<div class="flex flex-col">
 							<span class="truncate">{option.label}</span>
 							<span class="text-xs">{activeSkill?.description}</span>
@@ -122,11 +110,7 @@
 					{#await getActiveSkillIcon(skill) then icon}
 						{@const activeSkill = activeSkills.find((s) => s.id === skill)}
 						<div class="grid grid-cols-[auto_1fr_auto] items-center gap-2">
-							{#if icon}
-								<enhanced:img src={icon} alt={activeSkill?.name} class="h-6 w-6"></enhanced:img>
-							{:else}
-								<div class="w-6"></div>
-							{/if}
+							<img src={icon} alt={activeSkill?.name} class="h-6 w-6" />
 							<div class="flex flex-col">
 								<span class="truncate">{activeSkill?.name}</span>
 								<span class="text-xs">{activeSkill?.description}</span>
@@ -152,9 +136,7 @@
 		{:else}
 			<div class="flex w-full items-center justify-center space-x-2">
 				<span class="text-2xl font-semibold">No skills learned</span>
-				{#if sadIcon}
-					<enhanced:img src={sadIcon} alt="Sad face" class="h-12 w-12"></enhanced:img>
-				{/if}
+				<img src={staticIcons.sadIcon} alt="Sad face" class="h-12 w-12" />
 			</div>
 		{/if}
 	</div>

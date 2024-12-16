@@ -1,8 +1,6 @@
 <script lang="ts">
-	import { assetLoader } from '$lib/utils/asset-loader';
-	import { ASSET_DATA_PATH } from '$lib/constants';
+	import { staticIcons } from '$lib/constants';
 	import { EntryState, type Pal, type Player } from '$types';
-	import { getStats } from '$lib/data';
 	import { Tooltip, Progress } from '$components/ui';
 	import { palsData } from '$lib/data';
 
@@ -10,26 +8,6 @@
 		pal = $bindable(),
 		player = $bindable()
 	}: { pal: Pal | undefined; player: Player | undefined } = $props();
-
-	type Stat = {
-		name: string;
-		value: number;
-	};
-
-	let stats: Stat[] = $state([]);
-	let foodIcon: string = $state('');
-	let hpIcon: string = $state('');
-	let maxStomach: number = $state(0);
-
-	async function loadStaticIcons() {
-		const foodPath = `${ASSET_DATA_PATH}/img/icons/Food.png`;
-		const food = await assetLoader.loadImage(foodPath);
-		foodIcon = food;
-
-		const hpPath = `${ASSET_DATA_PATH}/img/icons/Heart.png`;
-		const hp = await assetLoader.loadImage(hpPath);
-		hpIcon = hp;
-	}
 
 	function handleHeal() {
 		if (!pal) return;
@@ -45,59 +23,29 @@
 		pal.state = EntryState.MODIFIED;
 	}
 
-	async function handleGetStats() {
+	let maxStomach = $derived.by(() => {
 		if (pal && player) {
-			const result = await getStats(pal, player);
-			stats = Array.isArray(result) ? result : [];
+			const palData = palsData.pals[pal.character_id] || undefined;
+			if (palData) {
+				return palData.max_full_stomach;
+			}
 		}
-	}
-
-	$effect(() => {
-		handleGetStats();
-		loadStaticIcons();
-	});
-
-	$effect(() => {
-		if (pal) {
-			const getMaxStomach = async () => {
-				const palData = await palsData.getPalInfo(pal.character_id);
-				if (palData) {
-					maxStomach = palData.max_full_stomach;
-				}
-			};
-			getMaxStomach();
-		}
-	});
-
-	$effect(() => {
-		if (
-			pal &&
-			player &&
-			(pal?.talent_hp || pal?.talent_shot || pal?.talent_defense || pal?.passive_skills)
-		) {
-			console.log('Talent hp:', pal.talent_hp);
-			console.log('Talent melee:', pal.talent_shot);
-			console.log('Talent defense:', pal.talent_defense);
-			console.log('Passive skills:', pal.passive_skills);
-			handleGetStats();
-		}
+		return 150;
 	});
 </script>
 
 {#if pal}
 	<div class="flex flex-row items-center">
-		{#if hpIcon}
-			<Tooltip>
-				<button onclick={handleHeal} aria-label="Health">
-					<enhanced:img src={hpIcon} alt="Health" class="mr-2 h-6 w-6"></enhanced:img>
-				</button>
+		<Tooltip>
+			<button onclick={handleHeal} aria-label="Health">
+				<img src={staticIcons.hpIcon} alt="Health" class="mr-2 h-6 w-6" />
+			</button>
 
-				{#snippet popup()}
-					<span>HP</span>
-					{Math.round(pal.hp / 1000)}/{pal.max_hp / 1000}
-				{/snippet}
-			</Tooltip>
-		{/if}
+			{#snippet popup()}
+				<span>HP</span>
+				{Math.round(pal.hp / 1000)}/{pal.max_hp / 1000}
+			{/snippet}
+		</Tooltip>
 		<Progress
 			bind:value={pal.hp}
 			bind:max={pal.max_hp}
@@ -108,21 +56,19 @@
 		/>
 	</div>
 	<div class="flex flex-row items-center">
-		{#if foodIcon}
-			<Tooltip>
-				<button class="mr-2" onclick={handleEat} aria-label="Food">
-					<enhanced:img src={foodIcon} alt="Food" class="h-6 w-6"></enhanced:img>
-				</button>
-				{#snippet popup()}
-					<span>Feed</span>
-					{Math.round(pal.stomach)}/{maxStomach}
-				{/snippet}
-			</Tooltip>
-		{/if}
+		<Tooltip>
+			<button class="mr-2" onclick={handleEat} aria-label="Food">
+				<img src={staticIcons.foodIcon} alt="Food" class="h-6 w-6" />
+			</button>
+			{#snippet popup()}
+				<span>Feed</span>
+				{Math.round(pal.stomach)}/{maxStomach}
+			{/snippet}
+		</Tooltip>
 
 		<Progress
 			bind:value={pal.stomach}
-			bind:max={maxStomach}
+			max={maxStomach}
 			height="h-6"
 			width="w-[400px]"
 			color="orange"

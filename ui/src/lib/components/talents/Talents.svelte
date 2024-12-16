@@ -7,19 +7,12 @@
 		pal: Pal;
 	}>();
 
-	let hp: number[] = $state([0]);
-	let attack: number[] = $state([0]);
-	let defense: number[] = $state([0]);
-
-	$effect(() => {
-		hp = [pal.talent_hp ?? 0];
-		attack = [pal.talent_shot ?? 0];
-		defense = [pal.talent_defense ?? 0];
-	});
+	let hp = $derived([pal.talent_hp ?? 0]);
+	let attack = $derived([pal.talent_shot ?? 0]);
+	let defense = $derived([pal.talent_defense ?? 0]);
 
 	function handleUpdateHp(details: any): void {
 		pal.talent_hp = details.value[0];
-		console.log(pal.talent_hp);
 	}
 
 	function handleUpdateAttack(details: any): void {
@@ -42,15 +35,17 @@
 		max={100}
 		markers={[25, 50, 75]}
 		step={1}
-		bind:value={hp}
+		value={hp}
 		onValueChange={handleUpdateHp}
 	/>
 	<Input
 		type="number"
 		labelClass="w-24"
 		inputClass="h-8"
-		bind:value={hp[0]}
+		value={hp[0]}
 		onchange={handleUpdateHp}
+		min={0}
+		max={100}
 	/>
 </div>
 <div class="flex flex-row items-center space-x-2">
@@ -63,15 +58,17 @@
 		max={100}
 		markers={[25, 50, 75]}
 		step={1}
-		bind:value={attack}
+		value={attack}
 		onValueChange={handleUpdateAttack}
 	/>
 	<Input
 		type="number"
 		labelClass="w-24"
 		inputClass="h-8"
-		bind:value={attack[0]}
+		value={attack[0]}
 		onchange={handleUpdateAttack}
+		min={0}
+		max={100}
 	/>
 </div>
 <div class="flex h-8 flex-row items-center space-x-2">
@@ -84,14 +81,16 @@
 		max={100}
 		markers={[25, 50, 75]}
 		step={1}
-		bind:value={defense}
+		value={defense}
 		onValueChange={handleUpdateDefense}
 	/>
 	<Input
 		type="number"
 		labelClass="w-24"
 		inputClass="h-8"
-		bind:value={defense[0]}
+		value={defense[0]}
 		onchange={handleUpdateDefense}
+		min={0}
+		max={100}
 	/>
 </div>
