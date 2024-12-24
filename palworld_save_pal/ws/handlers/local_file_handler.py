@@ -33,7 +33,7 @@ async def save_modded_save_handler(_: SaveModdedSaveMessage, ws: WebSocket):
     backup_dir = "backups"
     if not os.path.exists(backup_dir):
         os.makedirs(backup_dir)
-    timestamp = time.strftime("%Y-%m-%d-%M")
+    timestamp = time.strftime("%Y-%m-%d-%H-%M")
     backup_path = os.path.join(backup_dir, f"{file_name}_{timestamp}.sav")
     await ws_callback(f"Backing up save file {save_file.name} to {backup_path}...")
     shutil.move(save_file.name, backup_path)
