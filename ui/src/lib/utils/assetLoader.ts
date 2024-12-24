@@ -14,7 +14,7 @@ class AssetLoader {
 		import: 'default'
 	});
 
-	load<T>(path: string, type: AssetType): T {
+	load<T>(path: string, type: AssetType): T | undefined {
 		if (this.cache[path]) {
 			return this.cache[path];
 		}
@@ -31,22 +31,23 @@ class AssetLoader {
 		}
 
 		if (!glob[path]) {
-			throw new Error(`Asset not found: ${path}`);
+			console.error(`Asset not found: ${path}`);
+			return undefined;
 		}
 
 		this.cache[path] = glob[path];
 		return this.cache[path];
 	}
 
-	loadJson<T>(path: string): T {
+	loadJson<T>(path: string): T | undefined {
 		return this.load<T>(path, 'json');
 	}
 
-	loadImage(path: string): string {
-		return this.load<any>(path, 'image');
+	loadImage(path: string): string | undefined {
+		return this.load<any>(path.toLowerCase(), 'image');
 	}
 
-	loadSvg(path: string): string {
+	loadSvg(path: string): string | undefined {
 		return this.load<string>(path, 'svg');
 	}
 }
