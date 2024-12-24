@@ -4,7 +4,7 @@ from pydantic import BaseModel, Field, PrivateAttr
 
 
 from palworld_save_pal.game.pal_objects import PalObjects
-from palworld_save_pal.utils.uuid import are_equal_uuids
+from palworld_save_pal.utils.uuid import are_equal_uuids, is_empty_uuid
 from palworld_save_pal.utils.logging_config import create_logger
 
 logger = create_logger(__name__)
@@ -47,8 +47,8 @@ class Guild(BaseModel):
         return False
 
     def load_guild_data(self):
-        self._load_players()
         self._load_individual_character_handle_ids()
+        self._load_players()
 
     def _load_guild_name(self):
         self.name = PalObjects.get_nested(
@@ -65,12 +65,6 @@ class Guild(BaseModel):
         )
 
     def _load_players(self):
-        players = PalObjects.get_nested(
-            self._group_save_data, "value", "RawData", "value", "players"
-        )
-        if players:
-            for player in players:
-                player_uid = PalObjects.as_uuid(
-                    PalObjects.get_nested(player, "player_uid")
-                )
-                self.players.append(player_uid)
+        for entry in self._individual_character_handle_ids:
+            if "guid" in entry and not is_empty_uuid(entry["guid"]):
+                self.players.append(PalObjects.as_uuid(entry["guid"]))
