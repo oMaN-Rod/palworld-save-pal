@@ -5,8 +5,11 @@ import { itemsData } from './items.svelte';
 import { palsData } from './pals.svelte';
 import { passiveSkillsData } from './passiveSkills.svelte';
 import { presetsData } from './presets.svelte';
+import { uiCommonData } from './ui.svelte';
 
+export * from './bootstrap';
 export * from './stats';
+
 export {
 	activeSkillsData,
 	elementsData,
@@ -14,5 +17,6 @@ export {
 	itemsData,
 	palsData,
 	passiveSkillsData,
-	presetsData
+	presetsData,
+	uiCommonData
 };

@@ -30,9 +30,6 @@
 			) {
 				return false;
 			}
-			if (item.info.localized_name === 'en Text' || item.info.description === 'en Text') {
-				return false;
-			}
 			switch (group as ItemGroup) {
 				case 'Accessory':
 					return item.details.group == 'Accessory';
@@ -74,17 +71,28 @@
 		count = 0;
 	}
 
-	async function getItemIcon(staticId: string) {
+	function getItemIcon(staticId: string) {
 		if (!staticId) return;
-		const itemData = await itemsData.searchItems(staticId);
+		const itemData = itemsData.items[staticId];
 		if (!itemData) {
 			console.error(`Item data not found for static id: ${staticId}`);
 			return;
 		}
-		if (staticId.includes('SkillCard')) {
-			return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/elements/${itemData.details.icon}.png`);
-		} else {
-			return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/icons/${itemData.details.icon}.png`);
+		if (!itemData.details.icon) {
+			console.error(`Item icon not found for static id: ${staticId}`);
+			return;
+		}
+		try {
+			if (staticId.includes('SkillCard')) {
+				return assetLoader.loadImage(
+					`${ASSET_DATA_PATH}/img/elements/${itemData.details.icon}.png`
+				);
+			} else {
+				return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/icons/${itemData.details.icon}.png`);
+			}
+		} catch (error) {
+			console.error(`Failed to load image for static id: ${staticId}`);
+			return;
 		}
 	}
 

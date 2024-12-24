@@ -20,13 +20,13 @@
 			.sort((a, b) => a.details.element.localeCompare(b.details.element))
 			.map((skill) => ({
 				value: skill.id,
-				label: skill.name
+				label: skill.localized_name
 			}))
 	);
 
 	async function getActiveSkillIcon(skillId: string): Promise<string | undefined> {
 		const skill = activeSkills.find((s) => s.id === skillId);
-		if (!skill || skill.name === 'None') return undefined;
+		if (!skill || skill.localized_name === 'None') return undefined;
 		const activeSkill = skill as ActiveSkill;
 		const element = await elementsData.elements[activeSkill.details.element];
 		if (!element) return undefined;
@@ -72,7 +72,7 @@
 						</div>
 						<div class="flex items-center space-x-1 justify-self-start">
 							<TimerReset class="h-4 w-4" />
-							<span class="font-bold">{activeSkill?.details.ct}</span>
+							<span class="font-bold">{activeSkill?.details.cool_time}</span>
 							<span class="text-xs">Pwr</span>
 							<span class="font-bold">{activeSkill?.details.power}</span>
 						</div>
@@ -110,9 +110,9 @@
 					{#await getActiveSkillIcon(skill) then icon}
 						{@const activeSkill = activeSkills.find((s) => s.id === skill)}
 						<div class="grid grid-cols-[auto_1fr_auto] items-center gap-2">
-							<img src={icon} alt={activeSkill?.name} class="h-6 w-6" />
+							<img src={icon} alt={activeSkill?.localized_name} class="h-6 w-6" />
 							<div class="flex flex-col">
-								<span class="truncate">{activeSkill?.name}</span>
+								<span class="truncate">{activeSkill?.localized_name}</span>
 								<span class="text-xs">{activeSkill?.description}</span>
 							</div>
 						</div>
@@ -127,7 +127,7 @@
 					{@const activeSkill = activeSkills.find((s) => s.id === skill)}
 					<div class="flex items-center space-x-1 justify-self-start">
 						<TimerReset class="h-4 w-4" />
-						<span class="font-bold">{activeSkill?.details.ct}</span>
+						<span class="font-bold">{activeSkill?.details.cool_time}</span>
 						<span class="text-xs">Pwr</span>
 						<span class="font-bold">{activeSkill?.details.power}</span>
 					</div>

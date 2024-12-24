@@ -11,6 +11,8 @@ from palworld_save_pal.ws.handlers import (
     preset_handler,
     save_file_handler,
     pal_handler,
+    settings_handler,
+    ui_common_handler,
     version_handler,
     local_file_handler,
 )
@@ -24,6 +26,7 @@ from palworld_save_pal.ws.messages import (
     GetItemsMessage,
     GetPalsMessage,
     GetPassiveSkillsMessage,
+    GetSettingsMessage,
     HealPalsMessage,
     MessageType,
     MovePalMessage,
@@ -38,6 +41,7 @@ from palworld_save_pal.ws.messages import (
     UpdatePresetMessage,
     GetVersionMessage,
     SelectSaveMessage,
+    UpdateSettingsMessage,
 )
 
 if TYPE_CHECKING:
@@ -226,5 +230,29 @@ def bootstrap(dispatcher: "MessageDispatcher"):
         {
             "message_class": BaseMessage,
             "handler_func": local_file_handler.save_modded_save_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.GET_SETTINGS.value,
+        {
+            "message_class": GetSettingsMessage,
+            "handler_func": settings_handler.get_settings_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.UPDATE_SETTINGS.value,
+        {
+            "message_class": UpdateSettingsMessage,
+            "handler_func": settings_handler.update_settings_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.GET_UI_COMMON.value,
+        {
+            "message_class": BaseMessage,
+            "handler_func": ui_common_handler.get_ui_common_handler,
         },
     )

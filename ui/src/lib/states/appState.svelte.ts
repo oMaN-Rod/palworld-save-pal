@@ -1,9 +1,13 @@
 // src/lib/states/appState.svelte.ts
-import type { ItemContainerSlot } from '$types';
+import type { ItemContainerSlot, SupportedLanguage } from '$types';
 import { type Pal, type Player, type SaveFile } from '$types';
 import { getSocketState } from './websocketState.svelte';
 
 const ws = getSocketState();
+
+interface AppSettings {
+	language: SupportedLanguage;
+}
 
 export function createAppState() {
 	let players: Record<string, Player> = $state({});
@@ -17,6 +21,7 @@ export function createAppState() {
 	let clipboardItem: ItemContainerSlot | null = $state(null);
 	let progressMessage: string = $state('');
 	let version: string = $state('');
+	let settings: AppSettings = $state({ language: 'en' });
 
 	function resetState() {
 		players = {};
@@ -114,6 +119,13 @@ export function createAppState() {
 		},
 		set version(ver: string) {
 			version = ver;
+		},
+
+		get settings() {
+			return settings;
+		},
+		set settings(settings: AppSettings) {
+			settings = settings;
 		},
 
 		resetState,

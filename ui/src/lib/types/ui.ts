@@ -1,0 +1,32 @@
+export interface UICommon {
+	accessory?: string;
+	active_skills?: string;
+	all?: string;
+	attack?: string;
+	body?: string;
+	clear?: string;
+	defense?: string;
+	edit?: string;
+	element?: string;
+	filter?: string;
+	food?: string;
+	glider?: string;
+	head?: string;
+	health?: string;
+	inventory?: string;
+	key_items?: string;
+	level?: string;
+	max?: string;
+	next?: string;
+	passive_skills?: string;
+	san?: string;
+	search?: string;
+	shield?: string;
+	sort?: string;
+	stamina?: string;
+	stats?: string;
+	weapon?: string;
+	weight?: string;
+	work_speed?: string;
+	work_suitability?: string;
+}

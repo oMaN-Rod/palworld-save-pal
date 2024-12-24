@@ -1,5 +1,5 @@
 import { getSocketState } from '$states/websocketState.svelte';
-import { MessageType, type PassiveSkill, type PassiveSkillDetails } from '$types';
+import { MessageType, type PassiveSkill } from '$types';
 
 export class PassiveSkills {
 	private ws = getSocketState();
@@ -41,7 +41,7 @@ export class PassiveSkills {
 
 	private getByName(name: string): PassiveSkill | undefined {
 		return Object.values(this.passiveSkills).find(
-			(skill) => skill.name.toLowerCase() === name.toLowerCase()
+			(skill) => skill.localized_name.toLowerCase() === name.toLowerCase()
 		);
 	}
 
@@ -50,26 +50,14 @@ export class PassiveSkills {
 		return Object.values(this.passiveSkills);
 	}
 
-	async getField(
-		key: string,
-		field: keyof PassiveSkill | keyof PassiveSkillDetails
-	): Promise<string | null> {
-		const passiveSkill = await this.searchPassiveSkills(key);
-		if (passiveSkill) {
-			if (field in passiveSkill) {
-				return passiveSkill[field as keyof PassiveSkill] as string;
-			} else if (field in passiveSkill.details) {
-				return passiveSkill.details[field as keyof PassiveSkillDetails] as string;
-			}
-		}
-		return null;
+	async searchPassiveSkillsByTier(tier: number): Promise<PassiveSkill[]> {
+		await this.ensurePassiveSkillsLoaded();
+		return Object.values(this.passiveSkills).filter((skill) => skill.details.rank === tier);
 	}
 
-	async searchPassiveSkillsByTier(tier: string): Promise<PassiveSkill[]> {
+	async reset(): Promise<void> {
+		this.passiveSkills = {};
 		await this.ensurePassiveSkillsLoaded();
-		return Object.values(this.passiveSkills).filter(
-			(skill) => skill.details.tier.toLowerCase() === tier.toLowerCase()
-		);
 	}
 }
 

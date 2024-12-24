@@ -30,7 +30,8 @@ export function createSocketState() {
 			const data = JSON.parse(event.data);
 			message = data;
 			if (!message) return;
-
+			const messageSnapshot = $state.snapshot(message);
+			console.log(`Received message: ${message.type}`, messageSnapshot);
 			if (message.type && messageQueue.has(message.type)) {
 				const resolve = messageQueue.get(message.type);
 				if (resolve) {

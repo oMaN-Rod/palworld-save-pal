@@ -50,10 +50,14 @@
 
 	let palImage = $derived.by(() => {
 		if (appState.selectedPal) {
-			const { name } = appState.selectedPal;
-			return assetLoader.loadImage(
-				`${ASSET_DATA_PATH}/img/pals/full/${name.toLowerCase().replaceAll(' ', '_')}.png`
-			);
+			const { character_id } = appState.selectedPal;
+			const palData = palsData.pals[character_id];
+			let palImage =
+				!palData || palData?.is_pal
+					? `${ASSET_DATA_PATH}/img/pals/full/${character_id.toLowerCase().replaceAll(' ', '_')}.png`
+					: `${ASSET_DATA_PATH}/img/pals/full/human.png`;
+			palImage = palImage.replace('GYM_', '').replace('RAID_', '');
+			return assetLoader.loadImage(palImage);
 		}
 	});
 
@@ -107,6 +111,7 @@
 		while (skills.length < 3) {
 			skills.push('Empty');
 		}
+		console.log(skills);
 		return skills;
 	}
 

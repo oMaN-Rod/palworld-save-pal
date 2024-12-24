@@ -9,6 +9,10 @@ logger = create_logger(__name__)
 
 async def sync_app_state_handler(_: SyncAppStateMessage, ws: WebSocket):
     app_state = get_app_state()
+
+    response = build_response(MessageType.GET_SETTINGS, app_state.settings)
+    await ws.send_json(response)
+
     save_file = app_state.save_file
     if save_file is None:
         logger.warning("No save file loaded")
@@ -32,5 +36,6 @@ async def sync_app_state_handler(_: SyncAppStateMessage, ws: WebSocket):
     )
     response = build_response(message_type, data)
     await ws.send_json(response)
+
     response = build_response(MessageType.GET_PLAYERS, save_file.get_players())
     await ws.send_json(response)

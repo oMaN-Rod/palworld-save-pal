@@ -14,7 +14,7 @@ interface ExpData {
 class ExpDataHandler {
 	private loading: boolean = false;
 	private ws = getSocketState();
-	
+
 	expData: Record<string, ExpData> = $state({});
 
 	private async ensureLoaded(): Promise<void> {
@@ -78,6 +78,11 @@ class ExpDataHandler {
 		await this.ensureLoaded();
 		const levelData = this.expData[level.toString()];
 		return levelData.PalNextEXP;
+	}
+
+	async reset(): Promise<void> {
+		this.expData = {};
+		await this.ensureLoaded();
 	}
 }
 

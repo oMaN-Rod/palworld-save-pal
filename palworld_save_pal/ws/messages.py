@@ -4,6 +4,7 @@ from pydantic import BaseModel
 from uuid import UUID
 
 from palworld_save_pal.editor.preset_profile import PresetProfile
+from palworld_save_pal.editor.settings import Settings
 from palworld_save_pal.game.pal import Pal
 from palworld_save_pal.game.player import Player
 
@@ -43,6 +44,9 @@ class MessageType(str, Enum):
     SELECT_SAVE = "select_save"
     LOADED_SAVE_FILES = "loaded_save_files"
     SAVE_MODDED_SAVE = "save_modded_save"
+    GET_SETTINGS = "get_settings"
+    UPDATE_SETTINGS = "update_settings"
+    GET_UI_COMMON = "get_ui_common"
 
 
 class AddPalData(BaseModel):
@@ -188,3 +192,16 @@ class SelectSaveMessage(BaseMessage):
 
 class SaveModdedSaveMessage(BaseMessage):
     type: str = MessageType.SAVE_MODDED_SAVE.value
+
+
+class GetSettingsMessage(BaseMessage):
+    type: str = MessageType.GET_SETTINGS.value
+
+
+class UpdateSettingsMessage(BaseMessage):
+    type: str = MessageType.UPDATE_SETTINGS.value
+    data: Settings
+
+
+class GetUICommonMessage(BaseMessage):
+    type: str = MessageType.GET_UI_COMMON.value

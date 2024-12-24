@@ -41,7 +41,7 @@ export class ActiveSkills {
 
 	private getByName(name: string): ActiveSkill | undefined {
 		return Object.values(this.activeSkills).find(
-			(skill) => skill.name.toLowerCase() === name.toLowerCase()
+			(skill) => skill.localized_name.toLowerCase() === name.toLowerCase()
 		);
 	}
 
@@ -78,6 +78,11 @@ export class ActiveSkills {
 	async getActiveSkills(): Promise<ActiveSkill[]> {
 		await this.ensureActiveSkillsLoaded();
 		return Object.values(this.activeSkills);
+	}
+
+	async reset(): Promise<void> {
+		this.activeSkills = {};
+		await this.ensureActiveSkillsLoaded();
 	}
 }
 

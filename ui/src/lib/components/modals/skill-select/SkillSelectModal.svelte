@@ -1,6 +1,12 @@
 <script lang="ts">
 	import { Card, Tooltip, Combobox } from '$components/ui';
-	import type { ActiveSkill, PassiveSkill, SelectOption, SkillType } from '$types';
+	import {
+		passiveSkillTier,
+		type ActiveSkill,
+		type PassiveSkill,
+		type SelectOption,
+		type SkillType
+	} from '$types';
 	import { Save, TimerReset, X, Delete } from 'lucide-svelte';
 	import { activeSkillsData, passiveSkillsData, elementsData } from '$lib/data';
 	import { ASSET_DATA_PATH } from '$lib/constants';
@@ -35,14 +41,16 @@
 				.sort((a, b) => a.details.element.localeCompare(b.details.element))
 				.map((s) => ({
 					value: s.id,
-					label: s.name
+					label: s.localized_name
 				}));
 		} else {
 			return Object.values(passiveSkillsData.passiveSkills)
-				.sort((a, b) => a.details.tier.localeCompare(b.details.tier))
+				.sort((a, b) =>
+					passiveSkillTier(a.details.rank).localeCompare(passiveSkillTier(b.details.rank))
+				)
 				.map((s) => ({
 					value: s.id,
-					label: s.name
+					label: s.localized_name
 				}));
 		}
 	});
@@ -57,7 +65,7 @@
 
 	async function getActiveSkillIcon(skillId: string): Promise<string | undefined> {
 		const skill = Object.values(activeSkillsData.activeSkills).find((s) => s.id === skillId);
-		if (!skill || skill.name === 'None') return undefined;
+		if (!skill || skill.localized_name === 'None') return undefined;
 		const activeSkill = skill as ActiveSkill;
 		const element = await elementsData.searchElement(activeSkill.details.element);
 		if (!element) return undefined;
@@ -66,10 +74,10 @@
 
 	async function getPassiveSkillIcon(skillId: string): Promise<string | undefined> {
 		const skill = Object.values(passiveSkillsData.passiveSkills).find((s) => s.id === skillId);
-		if (!skill || skill.name === 'None') return undefined;
+		if (!skill || skill.localized_name === 'None') return undefined;
 		const passiveSkill = skill as PassiveSkill;
 		return assetLoader.loadImage(
-			`${ASSET_DATA_PATH}/img/passives/Passive_${passiveSkill.details.tier.toUpperCase()}_icon.png`
+			`${ASSET_DATA_PATH}/img/passives/Passive_${passiveSkillTier(passiveSkill.details.rank)}_icon.png`
 		);
 	}
 </script>
@@ -88,7 +96,7 @@
 			<div class="flex flex-col">
 				<div class="flex items-center justify-end space-x-1">
 					<TimerReset class="h-4 w-4" />
-					<span class="font-bold">{activeSkill?.details.ct}</span>
+					<span class="font-bold">{activeSkill?.details.cool_time}</span>
 					<span class="text-xs">Pwr</span>
 					<span class="font-bold">{activeSkill?.details.power}</span>
 				</div>

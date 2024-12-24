@@ -3,7 +3,7 @@
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { elementsData, presetsData, activeSkillsData, passiveSkillsData } from '$lib/data';
 	import { getModalState } from '$states';
-	import { type PresetProfile, type SelectOption } from '$types';
+	import { passiveSkillTier, type PresetProfile, type SelectOption } from '$types';
 	import { assetLoader } from '$utils';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import { Play, Trash } from 'lucide-svelte';
@@ -57,9 +57,9 @@
 	let passiveSkillIcons = $derived.by(() => {
 		const icons: Record<string, string> = {};
 		for (const skill of Object.values(passiveSkillsData.passiveSkills)) {
-			if (icons[skill.details.tier]) continue;
-			icons[skill.details.tier] = assetLoader.loadImage(
-				`${ASSET_DATA_PATH}/img/passives/Passive_${skill.details.tier.toUpperCase()}_icon.png`
+			if (icons[skill.details.rank]) continue;
+			icons[skill.details.rank] = assetLoader.loadImage(
+				`${ASSET_DATA_PATH}/img/passives/Passive_${passiveSkillTier(skill.details.rank)}_icon.png`
 			);
 		}
 		return icons;
@@ -117,7 +117,7 @@
 											>
 												<img src={icon} alt={skillObj.details.element} class="h-4 w-4" />
 												<span class="grow text-xs">
-													{skillObj.name}
+													{skillObj.localized_name}
 												</span>
 												<span class=" text-xs font-bold">
 													{skillObj.details.power}
@@ -167,14 +167,18 @@
 											(s) => s.id === skill
 										)}
 										{#if skillObj}
-											{@const icon = passiveSkillIcons[skillObj.details.tier]}
+											{@const icon = passiveSkillIcons[skillObj.details.rank]}
 											<div
 												class="text-surface-400 border-surface-600 r flex items-center space-x-1 rounded-sm border p-0.5"
 											>
 												<span class="grow text-xs">
-													{skillObj.name}
+													{skillObj.localized_name}
 												</span>
-												<img src={icon} alt={skillObj.details.tier} class="h-4 w-4" />
+												<img
+													src={icon}
+													alt={passiveSkillTier(skillObj.details.rank)}
+													class="h-4 w-4"
+												/>
 											</div>
 										{/if}
 									{/each}

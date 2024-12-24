@@ -12,6 +12,7 @@ export class Items {
 	private async ensureItemsLoaded(): Promise<void> {
 		if (Object.keys(this.items).length === 0 && !this.loading) {
 			try {
+				this.loading = true;
 				const response = await this.ws.sendAndWait({
 					type: MessageType.GET_ITEMS
 				});
@@ -71,6 +72,11 @@ export class Items {
 	async getItemCount(): Promise<number> {
 		await this.ensureItemsLoaded();
 		return Object.keys(this.items).length;
+	}
+
+	async reset(): Promise<void> {
+		this.items = {};
+		await this.ensureItemsLoaded();
 	}
 }
 

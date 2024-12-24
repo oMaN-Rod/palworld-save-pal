@@ -19,7 +19,8 @@
 		X,
 		ArrowDownWideNarrow,
 		ArrowDownNarrowWide,
-		Users
+		Users,
+		User
 	} from 'lucide-svelte';
 	import { assetLoader, debounce, deepCopy } from '$utils';
 	import { ASSET_DATA_PATH, staticIcons } from '$lib/constants';
@@ -61,6 +62,9 @@
 	);
 	const sortAlphaClass = $derived(
 		cn('btn', selectedFilter === 'alpha' ? 'bg-secondary-500/25' : '')
+	);
+	const sortHumanClass = $derived(
+		cn('btn', selectedFilter === 'human' ? 'bg-secondary-500/25' : '')
 	);
 
 	const sortButtonClass = (currentSortBy: SortBy) =>
@@ -150,19 +154,17 @@
 		filteredPals = pals.filter(({ pal, palData }) => {
 			const matchesSearch =
 				pal.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-				pal.nickname?.toLowerCase().includes(searchQuery.toLowerCase());
-			const matchesElement =
-				selectedFilter === 'All' ||
-				selectedFilter === 'alpha' ||
-				selectedFilter === 'lucky' ||
-				(palData &&
-					palData.element_types &&
-					palData.element_types
+				pal.nickname?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+				pal.character_id.toLowerCase().includes(searchQuery.toLowerCase());
+			const matchesElement = elementTypes.includes(selectedFilter)
+				? palData.element_types
 						.map((e: ElementType) => e.toString()!.toLowerCase())
-						.includes(selectedFilter.toLowerCase()));
+						.includes(selectedFilter.toLowerCase())
+				: true;
 			const matchesAlpha = selectedFilter === 'alpha' ? pal.is_boss : true;
 			const matchesLucky = selectedFilter === 'lucky' ? pal.is_lucky : true;
-			return matchesSearch && matchesElement && matchesAlpha && matchesLucky;
+			const matchesHuman = selectedFilter === 'human' ? !palData.is_pal : true;
+			return matchesSearch && matchesElement && matchesAlpha && matchesLucky && matchesHuman;
 		});
 
 		sortPals();
@@ -211,16 +213,20 @@
 		if (!appState.selectedPlayer || !appState.selectedPlayer.pals) return undefined;
 		const pal = appState.selectedPlayer.pals[palId];
 		if (!pal) return undefined;
-		const palImgName = pal.name.toLowerCase().replaceAll(' ', '_');
-		return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/pals/menu/${palImgName}_menu.png`);
+		const palData = palsData.pals[pal.character_id];
+		let palImage = palData.is_pal ? pal.character_id.toLowerCase().replaceAll(' ', '_') : 'human';
+		palImage = palImage.replace('GYM_', '').replace('RAID_', '');
+		return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/pals/menu/${palImage}_menu.png`);
 	}
 
 	async function handleAddPal() {
 		if (!appState.selectedPlayer) return;
 		// @ts-ignore
-		const [selectedPal, nickname] = await modal.showModal<string>(PalSelectModal, {
+		const result = await modal.showModal<[string, string] | undefined>(PalSelectModal, {
 			title: 'Add a new Pal'
 		});
+		if (!result) return;
+		const [selectedPal, nickname] = result;
 		const palData = await palsData.getPalInfo(selectedPal);
 		const message = {
 			type: MessageType.ADD_PAL,
@@ -540,16 +546,21 @@
 								{#snippet popup()}All pals{/snippet}
 							</Tooltip>
 							{#each [...elementTypes] as element}
+								{@const localizedName = elementsData.elements[element].localized_name}
 								<Tooltip>
 									<button
 										class={elementClass(element)}
 										onclick={() => (selectedFilter = element)}
-										aria-label={element}
+										aria-label={localizedName}
 									>
-										<img src={elementIcons[element]} alt={element} class="pal-element-badge" />
+										<img
+											src={elementIcons[element]}
+											alt={localizedName}
+											class="pal-element-badge"
+										/>
 									</button>
 									{#snippet popup()}
-										<span>{element}</span>
+										<span>{localizedName}</span>
 									{/snippet}
 								</Tooltip>
 							{/each}
@@ -575,6 +586,18 @@
 								</button>
 								{#snippet popup()}
 									Lucky Pals
+								{/snippet}
+							</Tooltip>
+							<Tooltip>
+								<button
+									type="button"
+									class={sortHumanClass}
+									onclick={() => (selectedFilter = 'human')}
+								>
+									<User />
+								</button>
+								{#snippet popup()}
+									Humans
 								{/snippet}
 							</Tooltip>
 						</div>

@@ -176,7 +176,7 @@ export interface ItemContainer {
 
 export interface PresetProfile {
 	name: string;
-	type: "inventory" | "active_skills" | "passive_skills";
+	type: 'inventory' | 'active_skills' | 'passive_skills';
 	skills?: string[];
 	common_container?: ItemContainerSlot[];
 	essential_container?: ItemContainerSlot[];
@@ -312,10 +312,109 @@ export interface PalData {
 	skill_set?: Record<string, number>;
 }
 
-export interface Bonuses {
-	attack: number;
-	defense: number;
-	work_speed: number;
+export interface SkillEffect {
+	type: EffectType;
+	value: number;
+	target: TargetType;
+}
+
+export enum TargetType {
+	ToSelf = 'ToSelf',
+	ToTrainer = 'ToTrainer',
+	ToSelfAndTrainer = 'ToSelfAndTrainer',
+	ToBaseCampPal = 'ToBaseCampPal',
+	ToBuildObject = 'ToBuildObject',
+	EPalPassiveSkillEffectTargetType_MAX = 'EPalPassiveSkillEffectTargetType_MAX',
+	NONE = 'None'
+}
+
+export enum EffectType {
+	no = 'no',
+	MaxHP = 'MaxHP',
+	MeleeAttack = 'MeleeAttack',
+	ShotAttack = 'ShotAttack',
+	Defense = 'Defense',
+	Support = 'Support',
+	CraftSpeed = 'CraftSpeed',
+	MoveSpeed = 'MoveSpeed',
+	Homing = 'Homing',
+	Explosive = 'Explosive',
+	BulletSpeed = 'BulletSpeed',
+	BulletAccuracy = 'BulletAccuracy',
+	Recoil = 'Recoil',
+	ElementFire = 'ElementFire',
+	ElementWater = 'ElementWater',
+	ElementLeaf = 'ElementLeaf',
+	ElementElectricity = 'ElementElectricity',
+	ElementIce = 'ElementIce',
+	ElementEarth = 'ElementEarth',
+	ElementDark = 'ElementDark',
+	ElementDragon = 'ElementDragon',
+	ElementResist_Normal = 'ElementResist_Normal',
+	ElementResist_Fire = 'ElementResist_Fire',
+	ElementResist_Water = 'ElementResist_Water',
+	ElementResist_Leaf = 'ElementResist_Leaf',
+	ElementResist_Electricity = 'ElementResist_Electricity',
+	ElementResist_Ice = 'ElementResist_Ice',
+	ElementResist_Earth = 'ElementResist_Earth',
+	ElementResist_Dark = 'ElementResist_Dark',
+	ElementResist_Dragon = 'ElementResist_Dragon',
+	ElementBoost_Normal = 'ElementBoost_Normal',
+	ElementBoost_Fire = 'ElementBoost_Fire',
+	ElementBoost_Water = 'ElementBoost_Water',
+	ElementBoost_Leaf = 'ElementBoost_Leaf',
+	ElementBoost_Electricity = 'ElementBoost_Electricity',
+	ElementBoost_Ice = 'ElementBoost_Ice',
+	ElementBoost_Earth = 'ElementBoost_Earth',
+	ElementBoost_Dark = 'ElementBoost_Dark',
+	ElementBoost_Dragon = 'ElementBoost_Dragon',
+	ElementAddItemDrop_Normal = 'ElementAddItemDrop_Normal',
+	ElementAddItemDrop_Fire = 'ElementAddItemDrop_Fire',
+	ElementAddItemDrop_Water = 'ElementAddItemDrop_Water',
+	ElementAddItemDrop_Leaf = 'ElementAddItemDrop_Leaf',
+	ElementAddItemDrop_Electricity = 'ElementAddItemDrop_Electricity',
+	ElementAddItemDrop_Ice = 'ElementAddItemDrop_Ice',
+	ElementAddItemDrop_Earth = 'ElementAddItemDrop_Earth',
+	ElementAddItemDrop_Dark = 'ElementAddItemDrop_Dark',
+	ElementAddItemDrop_Dragon = 'ElementAddItemDrop_Dragon',
+	MoveSpeed_Ground = 'MoveSpeed_Ground',
+	MoveSpeed_Wood = 'MoveSpeed_Wood',
+	MoveSpeed_Grass = 'MoveSpeed_Grass',
+	MoveSpeed_Stone = 'MoveSpeed_Stone',
+	MoveSpeed_Water = 'MoveSpeed_Water',
+	MoveSpeed_Snow = 'MoveSpeed_Snow',
+	MoveSpeed_Lava = 'MoveSpeed_Lava',
+	CollectItem = 'CollectItem',
+	Mute = 'Mute',
+	Logging = 'Logging',
+	Mining = 'Mining',
+	GainItemDrop = 'GainItemDrop',
+	CollectItemDrop = 'CollectItemDrop',
+	LifeSteal = 'LifeSteal',
+	TemperatureResist_Heat = 'TemperatureResist_Heat',
+	TemperatureResist_Cold = 'TemperatureResist_Cold',
+	TemperatureInvalid_Heat = 'TemperatureInvalid_Heat',
+	TemperatureInvalid_Cold = 'TemperatureInvalid_Cold',
+	MaxInventoryWeight = 'MaxInventoryWeight',
+	FullStomatch_Decrease = 'FullStomatch_Decrease',
+	Sanity_Decrease = 'Sanity_Decrease',
+	BodyPartsWeakDamage = 'BodyPartsWeakDamage',
+	NonKilling = 'NonKilling',
+	ItemWeightReduction = 'ItemWeightReduction',
+	PalExp_Increase = 'PalExp_Increase',
+	PalSP_Increase = 'PalSP_Increase',
+	ShopBuyPrice_Money_Increase = 'ShopBuyPrice_Money_Increase',
+	ShopSellPrice_Money_Increase = 'ShopSellPrice_Money_Increase',
+	BreedSpeed = 'BreedSpeed',
+	Nocturnal = 'Nocturnal',
+	JumpPower_Increase = 'JumpPower_Increase',
+	JumpCount_Increase = 'JumpCount_Increase',
+	PalEggHatchingSpeed = 'PalEggHatchingSpeed',
+	FarmCropGrowupSpeed = 'FarmCropGrowupSpeed',
+	SyncroPassiveWhenCapture = 'SyncroPassiveWhenCapture',
+	ActiveSkillCoolTime_Decrease = 'ActiveSkillCoolTime_Decrease',
+	EPalPassiveSkillEffectType_MAX = 'EPalPassiveSkillEffectType_MAX',
+	NONE = 'None'
 }
 
 export enum PalGender {
@@ -329,7 +428,7 @@ export interface ActiveSkillDetails {
 	type: string;
 	element: string;
 	power: number;
-	ct: number;
+	cool_time: number;
 	min_range: number;
 	max_range: number;
 
@@ -338,7 +437,7 @@ export interface ActiveSkillDetails {
 
 export interface Skill {
 	id: string;
-	name: string;
+	localized_name: string;
 	description: string;
 }
 
@@ -346,9 +445,25 @@ export interface ActiveSkill extends Skill {
 	details: ActiveSkillDetails;
 }
 
+export const passiveSkillTier = (tier: number): string => {
+	switch (tier) {
+		case 3:
+			return 'A';
+		case 2:
+			return 'B';
+		case 1:
+			return 'C';
+		case -1:
+			return 'X';
+		case -2:
+			return 'Y';
+		default:
+			return 'Z';
+	}
+};
 export interface PassiveSkillDetails {
-	tier: string;
-	bonuses: Bonuses;
+	rank: number;
+	effects: SkillEffect[];
 }
 
 export interface PassiveSkill extends Skill {
@@ -378,6 +493,7 @@ export type Element = {
 	egg_icon: string;
 	fruit_icon: string;
 	white_icon: string;
+	localized_name: string;
 };
 
 export enum EntryState {

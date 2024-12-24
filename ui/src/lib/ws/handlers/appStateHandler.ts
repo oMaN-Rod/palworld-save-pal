@@ -1,3 +1,4 @@
+import { goto } from '$app/navigation';
 import { getAppState } from '$states';
 import { MessageType } from '$types';
 import type { WSMessageHandler } from '../types';
@@ -18,4 +19,30 @@ export const getVersionHandler: WSMessageHandler = {
 	}
 };
 
-export const appStateHandlers = [getVersionHandler, progressMessageHandler];
+export const errorHandler: WSMessageHandler = {
+	type: MessageType.ERROR,
+	async handle(data) {
+		const errorMessage = data as { message: string; trace: string };
+		goto('/error', {
+			state: {
+				message: errorMessage.message,
+				trace: errorMessage.trace
+			}
+		});
+	}
+};
+
+export const settingsHandler: WSMessageHandler = {
+	type: MessageType.GET_SETTINGS,
+	async handle(data) {
+		const { language } = data;
+		appState.settings.language = language;
+	}
+};
+
+export const appStateHandlers = [
+	getVersionHandler,
+	progressMessageHandler,
+	errorHandler,
+	settingsHandler
+];

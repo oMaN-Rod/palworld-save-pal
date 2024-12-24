@@ -45,7 +45,7 @@
 	);
 	let palIcon = $derived.by(() => {
 		if (!pal) return '';
-		const palImgName = pal.name.toLowerCase().replaceAll(' ', '_');
+		const palImgName = pal.character_id.toLowerCase().replaceAll(' ', '_');
 		return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/pals/menu/${palImgName}_menu.png`);
 	});
 

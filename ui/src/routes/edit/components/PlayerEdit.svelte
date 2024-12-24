@@ -96,8 +96,8 @@
 	});
 
 	async function getItemIcon(staticId: string) {
-		if (!staticId) return;
-		const itemData = await itemsData.searchItems(staticId);
+		if (!staticId || staticId === 'None') return;
+		const itemData = itemsData.items[staticId] || undefined;
 		if (!itemData) {
 			console.error(`Item data not found for static id: ${staticId}`);
 			return;

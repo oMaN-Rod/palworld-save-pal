@@ -26,7 +26,11 @@
 
 	let item = $derived.by(() => {
 		if (slot.static_id == 'None') return;
-		return itemsData.items[slot.static_id];
+		let key: string | undefined = undefined;
+		if (slot.static_id == 'CheeseBurger_2') {
+			key = 'Cheeseburger_2';
+		}
+		return itemsData.items[key || slot.static_id];
 	});
 
 	let dynamic = $derived.by(() => {
@@ -103,7 +107,7 @@
 				console.error(`Pal data not found for static id: ${slot.static_id}`);
 				return;
 			}
-			const palImgName = palData.localized_name.toLowerCase().replaceAll(' ', '_');
+			const palImgName = palCharacterId.toLowerCase().replaceAll(' ', '_');
 			return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/pals/menu/${palImgName}_menu.png`);
 		}
 	});

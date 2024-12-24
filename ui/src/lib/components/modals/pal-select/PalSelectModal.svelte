@@ -13,20 +13,51 @@
 
 	let selectOptions: SelectOption[] = $derived.by(() => {
 		return Object.entries(palsData.pals)
-			.filter(
-				([_, pal]) => pal.is_pal && !pal.is_tower_boss && !pal.localized_name.includes('en_text')
-			)
+			.filter(([_, pal]) => {
+				if (!pal.localized_name || pal.localized_name === '-') return false;
+				return true;
+			})
 			.map(([code_name, pal]) => ({
 				value: code_name,
-				label: pal.localized_name
+				label: formatLabel(code_name, pal.localized_name)
 			}))
 			.sort((a, b) => a.label.localeCompare(b.label));
 	});
 	let selectedPal: string = $state('');
 	let nickname: string = $state('');
 
+	function formatLabel(palId: string, palName: string) {
+		if (palId.toLowerCase().includes('predator_')) {
+			palName = `${palName} (Predator)`;
+		}
+		if (palId.toLowerCase().includes('_oilrig')) {
+			palName = `${palName} (Oil Rig)`;
+		}
+		return palName;
+	}
+
 	function handleClose(confirmed: boolean) {
 		closeModal(confirmed ? [selectedPal, nickname] : undefined);
+	}
+
+	function getIconPath(option: SelectOption) {
+		const palData = palsData.pals[option.value];
+		let palImgName = undefined;
+		if (palData && palData.is_pal) {
+			palImgName = option.value
+				.toLocaleLowerCase()
+				.replace('predator_', '')
+				.replace('_oilrig', '')
+				.replace('raid_', '')
+				.replace(/_\d+$/, '');
+		} else if (palData && !palData.is_pal) {
+			palImgName = 'commonhuman';
+		}
+
+		if (!palImgName || palImgName === '-') return '';
+		const palImg = assetLoader.loadImage(`${ASSET_DATA_PATH}/img/pals/menu/${palImgName}_menu.png`);
+		if (!palImg) return '';
+		return palImg;
 	}
 </script>
 
@@ -34,13 +65,9 @@
 	<h3 class="h3">{title}</h3>
 	<Combobox options={selectOptions} bind:value={selectedPal}>
 		{#snippet selectOption(option)}
-			{@const palImgName = option.label.toLowerCase().replaceAll(' ', '_')}
-			{@const palImgPath = assetLoader.loadImage(
-				`${ASSET_DATA_PATH}/img/pals/menu/${palImgName}_menu.png`
-			)}
 			{@const palData = palsData.pals[option.value]}
 			<div class="flex items-center space-x-2">
-				<img src={palImgPath} alt={option.label} class="h-8 w-8" />
+				<img src={getIconPath(option)} alt={option.label} class="h-8 w-8" />
 				<span class="grow">{option.label}</span>
 				{#each palData.element_types as elementType}
 					{@const elementObj = elementsData.elements[elementType.toString()]}

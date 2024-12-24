@@ -1,4 +1,5 @@
 import type { Pal, Player } from '$types';
+import { EffectType, TargetType } from '$types';
 import { palsData, passiveSkillsData } from '.';
 
 export type PalStats = {
@@ -6,6 +7,59 @@ export type PalStats = {
 	defense: number;
 	workSpeed?: number;
 };
+
+function isDefenseEffect(type: EffectType): boolean {
+	return type === EffectType.Defense || type.toString().startsWith('ElementResist_');
+}
+
+function isAttackEffect(type: EffectType): boolean {
+	return (
+		type === EffectType.ShotAttack ||
+		type.toString().startsWith('Element') ||
+		type.toString().startsWith('ElementBoost_')
+	);
+}
+
+function isWorkSpeedEffect(type: EffectType): boolean {
+	return type === EffectType.CraftSpeed;
+}
+
+function calculateSkillEffects(skills: string[]): {
+	attackBonus: number;
+	defenseBonus: number;
+	workSpeedBonus: number;
+} {
+	let attackBonus = 0;
+	let defenseBonus = 0;
+	let workSpeedBonus = 0;
+
+	for (const skillId of skills) {
+		const skillData = passiveSkillsData.passiveSkills[skillId];
+		if (!skillData) continue;
+
+		for (const effect of skillData.details.effects) {
+			if (effect.target !== TargetType.ToSelf && effect.target !== TargetType.ToSelfAndTrainer) {
+				continue;
+			}
+
+			const effectValue = effect.value / 100;
+
+			if (isDefenseEffect(effect.type)) {
+				defenseBonus += effectValue;
+			} else if (isAttackEffect(effect.type)) {
+				attackBonus += effectValue;
+			} else if (isWorkSpeedEffect(effect.type)) {
+				workSpeedBonus += effectValue;
+			}
+		}
+	}
+
+	return {
+		attackBonus,
+		defenseBonus,
+		workSpeedBonus
+	};
+}
 
 export function getStats(pal: Pal, player: Player): PalStats | undefined {
 	if (!pal) {
@@ -16,7 +70,8 @@ export function getStats(pal: Pal, player: Player): PalStats | undefined {
 		console.log('No player provided');
 		return;
 	}
-	const palData = palsData.pals[pal.character_id] || undefined;
+
+	const palData = palsData.pals[pal.character_id];
 	if (!palData) {
 		console.log('No pal data found');
 		return;
@@ -25,44 +80,39 @@ export function getStats(pal: Pal, player: Player): PalStats | undefined {
 		return;
 	}
 
-	const level = player.level < pal.level ? player.level : pal.level;
-	let attackBonus = 0;
-	let defenseBonus = 0;
-	let workSpeedBonus = 0;
-	for (let i = 0; i < pal.passive_skills.length; i++) {
-		const skill = pal.passive_skills[i];
-		const skillData = passiveSkillsData.passiveSkills[skill] || undefined;
-		if (!skillData) {
-			continue;
-		}
-		attackBonus += skillData.details.bonuses.attack / 100;
-		defenseBonus += skillData.details.bonuses.defense / 100;
-		workSpeedBonus += skillData.details.bonuses.work_speed / 100;
-	}
+	const level = Math.min(player.level, pal.level);
+
+	// Calculate bonuses from passive skills
+	const { attackBonus, defenseBonus, workSpeedBonus } = calculateSkillEffects(pal.passive_skills);
+
+	// Soul and condenser bonuses
 	const condenserBonus = (pal.rank - 1) * 0.05;
 	const hpIv = (pal.talent_hp * 0.3) / 100;
 	const hpSoulBonus = pal.rank_hp * 0.03;
 	const hpScale = palData.scaling.hp;
+
+	// HP calculation
 	const hp = Math.floor(500 + 5 * level + hpScale * 0.5 * level * (1 + hpIv));
 	const alphaScaling = pal.is_boss ? 1.2 : 1;
 	pal.max_hp = Math.floor(hp * (1 + condenserBonus) * (1 + hpSoulBonus) * alphaScaling) * 1000;
 
+	// Attack calculation
 	const attackIv = (pal.talent_shot * 0.3) / 100;
 	const attackSoulBonus = pal.rank_attack * 0.03;
 	const attackScale = palData.scaling.attack;
-
 	let attack = Math.floor(attackScale * 0.075 * level * (1 + attackIv));
 	attack = Math.floor(attack * (1 + condenserBonus) * (1 + attackSoulBonus) * (1 + attackBonus));
 
+	// Defense calculation
 	const defenseIv = (pal.talent_defense * 0.3) / 100;
 	const defenseSoulBonus = pal.rank_defense * 0.03;
 	const defenseScale = palData.scaling.defense;
-
 	let defense = Math.floor(50 + defenseScale * 0.075 * level * (1 + defenseIv));
 	defense = Math.floor(
 		defense * (1 + condenserBonus) * (1 + defenseSoulBonus) * (1 + defenseBonus)
 	);
 
+	// Work speed calculation with base value of 70
 	let workSpeed = 70 * (1 + workSpeedBonus);
 
 	return {

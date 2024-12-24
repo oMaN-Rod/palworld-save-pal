@@ -18,33 +18,31 @@ from palworld_save_pal.ws.utils import build_response
 
 logger = create_logger(__name__)
 
-pals_json = JsonManager("data/json/pals.json")
-pals_i18n_json = JsonManager("data/json/en-GB/pals.json")
-
 
 async def get_pals_handler(_: GetPalsMessage, ws: WebSocket):
+    app_state = get_app_state()
+    pals_json = JsonManager("data/json/pals.json")
+    pals_i18n_json = JsonManager(
+        f"data/json/l10n/{app_state.settings.language}/pals.json"
+    )
     pals_data = pals_json.read()
     pals_i18n = pals_i18n_json.read()
 
-    localized_pals_data = {}
+    localized_data = {}
     for code_name, pal_info in pals_data.items():
-        localized_pal_info = copy.deepcopy(pal_info)
-
         if code_name in pals_i18n:
             i18n_data = pals_i18n[code_name]
-            localized_pal_info["localized_name"] = i18n_data.get(
-                "localized_name", code_name
-            )
-            localized_pal_info["description"] = i18n_data.get(
+            pal_info["localized_name"] = i18n_data.get("localized_name", code_name)
+            pal_info["description"] = i18n_data.get(
                 "description", "No description available"
             )
         else:
-            localized_pal_info["localized_name"] = code_name
-            localized_pal_info["description"] = "No description available"
+            pal_info["localized_name"] = code_name
+            pal_info["description"] = "No description available"
 
-        localized_pals_data[code_name] = localized_pal_info
+        localized_data[code_name] = pal_info
 
-    response = build_response(MessageType.GET_PALS, localized_pals_data)
+    response = build_response(MessageType.GET_PALS, localized_data)
     await ws.send_json(response)
 
 

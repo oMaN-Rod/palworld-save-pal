@@ -19,7 +19,7 @@ export const getPlayersHandler: WSMessageHandler = {
 							Object.values(player.pals).map(async (pal) => {
 								const palInfo = await palsData.getPalInfo(pal.character_id);
 								if (!palInfo) {
-									console.error(`Failed to find pal info for`, pal);
+									console.error(`Failed to find pal info for`, JSON.parse(JSON.stringify(pal)));
 								}
 								pal.name = palInfo?.localized_name || pal.character_id;
 							})

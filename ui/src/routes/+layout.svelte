@@ -8,12 +8,14 @@
 		palsData,
 		passiveSkillsData,
 		presetsData,
-		expData
+		expData,
+		bootstrap
 	} from '$lib/data';
 	import { getSocketState } from '$states';
 	import { goto } from '$app/navigation';
 	import { getDispatcher } from '$lib/ws/dispatcher';
 	import { handlers } from '$lib/ws/handlers';
+	import { onMount } from 'svelte';
 
 	const { children } = $props();
 	const ws = getSocketState();
@@ -27,17 +29,8 @@
 		ws.connect({ goto });
 	});
 
-	$effect(() => {
-		const loadData = async () => {
-			await activeSkillsData.getActiveSkills();
-			await passiveSkillsData.getPassiveSkills();
-			await elementsData.getAllElements();
-			await itemsData.getAllItems();
-			await palsData.getAllPals();
-			await presetsData.getAllPresets();
-			await expData.getExpData();
-		};
-		loadData();
+	onMount(() => {
+		bootstrap();
 	});
 </script>
 
