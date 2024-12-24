@@ -29,22 +29,32 @@ class ArrayType(str, Enum):
 
 
 class Element(str, Enum):
-    FIRE = "Fire"
-    WATER = "Water"
-    GROUND = "Ground"
-    ICE = "Ice"
-    NEUTRAL = "Neutral"
-    DARK = "Dark"
-    GRASS = "Grass"
-    DRAGON = "Dragon"
-    ELECTRIC = "Electric"
+    """Element types in the game"""
 
-    @staticmethod
-    def from_value(value: str):
+    NEUTRAL = "Normal"
+    DARK = "Dark"
+    DRAGON = "Dragon"
+    ICE = "Ice"
+    FIRE = "Fire"
+    GRASS = "Leaf"
+    GROUND = "Earth"
+    ELECTRIC = "Electricity"
+    WATER = "Water"
+    UNKNOWN = "Unknown"
+
+    @classmethod
+    def get_all_elements(cls) -> list[str]:
+        """Get all element type values"""
+        return [member.value for member in cls]
+
+    @classmethod
+    def from_value(cls, value: str) -> "Element":
+        """Convert from game's enum format to our enum"""
+        type_str = value.split("::")[-1]
         try:
-            return Element(value)
-        except:
-            logger.warning("%s is not a valid element", value)
+            return next((t for t in cls if t.value == type_str), cls.UNKNOWN)
+        except KeyError:
+            return cls.UNKNOWN
 
 
 class EntryState(str, Enum):
