@@ -1,0 +1,794 @@
+{
+  "AirDash_1": {
+    "localized_name": "Corrida no ar +1.",
+    "description": "Corrida no ar +1."
+  },
+  "AirDash_2": {
+    "localized_name": "Corrida no ar +2.",
+    "description": "Corrida no ar +2."
+  },
+  "AirDash_3": {
+    "localized_name": "Corrida no ar +3.",
+    "description": "Corrida no ar +3."
+  },
+  "AirDash_4": {
+    "localized_name": "Corrida no ar +4.",
+    "description": "Corrida no ar +4."
+  },
+  "Alien": {
+    "localized_name": "Célula Viva Desconhecida",
+    "description": "Ataque +10.0% Reduz o dano por ataques de fogo em 15.0% Reduz o dano por ataques elétricos em 15.0%"
+  },
+  "Attack_ACC_up1": {
+    "localized_name": "Aumento de Ataque Nv. 1",
+    "description": null
+  },
+  "Attack_ACC_up2": {
+    "localized_name": "Aumento de Ataque Nv. 2",
+    "description": null
+  },
+  "Attack_ACC_up3": {
+    "localized_name": "Aumento de Ataque Nv. 3",
+    "description": null
+  },
+  "CaptureLevel_Up_1": {
+    "localized_name": "Poder de Captura +1",
+    "description": null
+  },
+  "CaptureLevel_Up_2": {
+    "localized_name": "Poder de Captura +2",
+    "description": null
+  },
+  "CaptureLevel_Up_3": {
+    "localized_name": "Poder de Captura +3",
+    "description": null
+  },
+  "CaptureLevel_Up_4": {
+    "localized_name": "Poder de Captura +4",
+    "description": null
+  },
+  "CaptureLevel_Up_5": {
+    "localized_name": "Poder de Captura +5",
+    "description": null
+  },
+  "CaptureLevel_Up_6": {
+    "localized_name": "Poder de Captura +6",
+    "description": null
+  },
+  "CollectItem_Berries": {
+    "localized_name": "Coleta de Frutinhas",
+    "description": null
+  },
+  "CollectItem_Egg": {
+    "localized_name": "Produção de Ovo",
+    "description": null
+  },
+  "CollectItem_Milk": {
+    "localized_name": "Produção de Leite",
+    "description": null
+  },
+  "CollectItem_Money": {
+    "localized_name": "Pérolas aos Porcos",
+    "description": null
+  },
+  "CollectItem_Sweets": {
+    "localized_name": "Produção de Doces",
+    "description": null
+  },
+  "CollectItem_Wool_Alpaca": {
+    "localized_name": "Produção de Lã",
+    "description": null
+  },
+  "CollectItem_Wool_SheepBall": {
+    "localized_name": "Produção de Lã",
+    "description": null
+  },
+  "CollectItem_Wool_WhiteMoth": {
+    "localized_name": "Tecedura de Seda",
+    "description": null
+  },
+  "CoolTimeReduction_Down_1": {
+    "localized_name": "Relaxado",
+    "description": "Resfriamento de habilidade ativa aumentado em -15.0%"
+  },
+  "CoolTimeReduction_Up_1": {
+    "localized_name": "Sossegado",
+    "description": "Resfriamento de habilidade ativa reduzido em 30.0% Ataque +10.0%"
+  },
+  "CoolTimeReduction_Up_2": {
+    "localized_name": "Impaciente",
+    "description": "Resfriamento de habilidade ativa reduzido em 15.0%"
+  },
+  "CoolTimeReduction_Up_3": {
+    "localized_name": "Tempestade e Ímpeto",
+    "description": "Resfriamento de habilidade ativa reduzido em 0.0% Ataque +0.0%"
+  },
+  "CraftSpeed_down1": {
+    "localized_name": "Desajeitado",
+    "description": null
+  },
+  "CraftSpeed_down2": {
+    "localized_name": "Tendência ao ócio",
+    "description": null
+  },
+  "CraftSpeed_up1": {
+    "localized_name": "Dedicado",
+    "description": null
+  },
+  "CraftSpeed_up2": {
+    "localized_name": "Espírito artesão",
+    "description": null
+  },
+  "CraftSpeed_up3": {
+    "localized_name": "Artesão Transcendental",
+    "description": null
+  },
+  "Deffence_down1": {
+    "localized_name": "Delicado",
+    "description": null
+  },
+  "Deffence_down2": {
+    "localized_name": "Quebradiço",
+    "description": null
+  },
+  "Deffence_up1": {
+    "localized_name": "Casca grossa",
+    "description": null
+  },
+  "Deffence_up2": {
+    "localized_name": "Corpo fechado",
+    "description": null
+  },
+  "Deffence_up3": {
+    "localized_name": "Corpo de Diamante",
+    "description": null
+  },
+  "ElementBoost_Aqua_1_PAL": {
+    "localized_name": "Brincando com Água",
+    "description": "Aumenta o dano de ataques de água em 10.0%."
+  },
+  "ElementBoost_Aqua_2_PAL": {
+    "localized_name": "Realeza Marinha",
+    "description": null
+  },
+  "ElementBoost_Dark_1_BossDefeat": {
+    "localized_name": "Aumento Pequeno de Dano de Escuridão",
+    "description": null
+  },
+  "ElementBoost_Dark_1_PAL": {
+    "localized_name": "Véu de Escuridão",
+    "description": "Aumenta o dano de ataques de escuridão em 10.0%."
+  },
+  "ElementBoost_Dark_2_BossDefeat": {
+    "localized_name": "Aumento Médio de Dano de Escuridão",
+    "description": null
+  },
+  "ElementBoost_Dark_2_PAL": {
+    "localized_name": "Monarca do Breu",
+    "description": null
+  },
+  "ElementBoost_Dark_3_BossDefeat": {
+    "localized_name": "Aumento Grande de Dano de Escuridão",
+    "description": null
+  },
+  "ElementBoost_Dragon_1_BossDefeat": {
+    "localized_name": "Aumento Pequeno de Dano Dracônico",
+    "description": null
+  },
+  "ElementBoost_Dragon_1_PAL": {
+    "localized_name": "Casta Dracônica",
+    "description": "Aumenta o dano de ataques dracônicos em 10.0%."
+  },
+  "ElementBoost_Dragon_2_BossDefeat": {
+    "localized_name": "Aumento Médio de Dano Dracônico",
+    "description": null
+  },
+  "ElementBoost_Dragon_2_PAL": {
+    "localized_name": "Dragão Divino",
+    "description": null
+  },
+  "ElementBoost_Dragon_3_BossDefeat": {
+    "localized_name": "Aumento Grande de Dano Dracônico",
+    "description": null
+  },
+  "ElementBoost_Earth_1_BossDefeat": {
+    "localized_name": "Aumento Pequeno de Dano de Terra",
+    "description": null
+  },
+  "ElementBoost_Earth_1_PAL": {
+    "localized_name": "Força da Terra",
+    "description": "Aumenta o dano de ataques de terra em 10.0%."
+  },
+  "ElementBoost_Earth_2_BossDefeat": {
+    "localized_name": "Aumento Médio de Dano de Terra",
+    "description": null
+  },
+  "ElementBoost_Earth_2_PAL": {
+    "localized_name": "Regente de Terra",
+    "description": null
+  },
+  "ElementBoost_Earth_3_BossDefeat": {
+    "localized_name": "Aumento Grande de Dano de Terra",
+    "description": null
+  },
+  "ElementBoost_Electricity_1_BossDefeat": {
+    "localized_name": "Aumento Pequeno de Dano Elétrico",
+    "description": null
+  },
+  "ElementBoost_Electricity_2_BossDefeat": {
+    "localized_name": "Aumento Médio de Dano Elétrico",
+    "description": null
+  },
+  "ElementBoost_Electricity_3_BossDefeat": {
+    "localized_name": "Aumento Grande de Dano Elétrico",
+    "description": null
+  },
+  "ElementBoost_Fire_1_BossDefeat": {
+    "localized_name": "Aumento Pequeno de Dano de Fogo",
+    "description": null
+  },
+  "ElementBoost_Fire_1_PAL": {
+    "localized_name": "Brincando com Fogo",
+    "description": "Aumenta o dano de ataques de fogo em 10.0%."
+  },
+  "ElementBoost_Fire_2_BossDefeat": {
+    "localized_name": "Aumento Médio de Dano de Fogo",
+    "description": null
+  },
+  "ElementBoost_Fire_2_PAL": {
+    "localized_name": "Regente de Fogo",
+    "description": null
+  },
+  "ElementBoost_Fire_3_BossDefeat": {
+    "localized_name": "Aumento Grande de Dano de Fogo",
+    "description": null
+  },
+  "ElementBoost_Ice_1_BossDefeat": {
+    "localized_name": "Aumento Pequeno de Dano de Gelo",
+    "description": null
+  },
+  "ElementBoost_Ice_1_PAL": {
+    "localized_name": "Sangue Frio",
+    "description": "Aumenta o dano de ataques de gelo em 10.0%."
+  },
+  "ElementBoost_Ice_2_BossDefeat": {
+    "localized_name": "Aumento Médio de Dano de Gelo",
+    "description": null
+  },
+  "ElementBoost_Ice_2_PAL": {
+    "localized_name": "Regente de Gelo",
+    "description": null
+  },
+  "ElementBoost_Ice_3_BossDefeat": {
+    "localized_name": "Aumento Grande de Dano de Gelo",
+    "description": null
+  },
+  "ElementBoost_Leaf_1_BossDefeat": {
+    "localized_name": "Aumento Pequeno de Dano de Grama",
+    "description": null
+  },
+  "ElementBoost_Leaf_1_PAL": {
+    "localized_name": "Aroma Verdejante",
+    "description": "Aumenta o dano de ataques de grama em 10.0%."
+  },
+  "ElementBoost_Leaf_2_BossDefeat": {
+    "localized_name": "Aumento Médio de Dano de Grama",
+    "description": null
+  },
+  "ElementBoost_Leaf_2_PAL": {
+    "localized_name": "Monarca de Espíritos",
+    "description": null
+  },
+  "ElementBoost_Leaf_3_BossDefeat": {
+    "localized_name": "Aumento Grande de Dano de Grama",
+    "description": null
+  },
+  "ElementBoost_Normal_1_BossDefeat": {
+    "localized_name": "Aumento Pequeno de Dano Não Elemental",
+    "description": null
+  },
+  "ElementBoost_Normal_1_PAL": {
+    "localized_name": "Território do Nada",
+    "description": "Aumenta o dano de ataques não elementais em 10.0%."
+  },
+  "ElementBoost_Normal_2_BossDefeat": {
+    "localized_name": "Aumento Médio de Dano Não Elemental",
+    "description": null
+  },
+  "ElementBoost_Normal_2_PAL": {
+    "localized_name": "Ascensão",
+    "description": null
+  },
+  "ElementBoost_Normal_3_BossDefeat": {
+    "localized_name": "Aumento Grande de Dano Não Elemental",
+    "description": null
+  },
+  "ElementBoost_Thunder_1_PAL": {
+    "localized_name": "Capacitor",
+    "description": "Aumenta o dano de ataques elétricos em 10.0%."
+  },
+  "ElementBoost_Thunder_2_PAL": {
+    "localized_name": "Regente de Raio",
+    "description": null
+  },
+  "ElementBoost_Water_1_BossDefeat": {
+    "localized_name": "Aumento Pequeno de Dano de Água",
+    "description": null
+  },
+  "ElementBoost_Water_2_BossDefeat": {
+    "localized_name": "Aumento Médio de Dano de Água",
+    "description": null
+  },
+  "ElementBoost_Water_3_BossDefeat": {
+    "localized_name": "Aumento Grande de Dano de Água",
+    "description": null
+  },
+  "ElementResist_Aqua_1": {
+    "localized_name": "Redução de Dano de Água Nv. 1",
+    "description": null
+  },
+  "ElementResist_Aqua_1_PAL": {
+    "localized_name": "Impermeabilização",
+    "description": "Reduz o dano por ataques de água em 10.0%."
+  },
+  "ElementResist_Aqua_2": {
+    "localized_name": "Redução de Dano de Água Nv. 2",
+    "description": null
+  },
+  "ElementResist_Aqua_3": {
+    "localized_name": "Redução de Dano de Água Nv. 3",
+    "description": null
+  },
+  "ElementResist_Dark_1": {
+    "localized_name": "Redução de Dano de Escuridão Nv. 1",
+    "description": null
+  },
+  "ElementResist_Dark_1_PAL": {
+    "localized_name": "De Bem com a Vida",
+    "description": "Reduz o dano por ataques de escuridão em 10.0%."
+  },
+  "ElementResist_Dark_2": {
+    "localized_name": "Redução de Dano de Escuridão Nv. 2",
+    "description": null
+  },
+  "ElementResist_Dark_3": {
+    "localized_name": "Redução de Dano de Escuridão Nv. 3",
+    "description": null
+  },
+  "ElementResist_Dragon_1": {
+    "localized_name": "Redução de Dano Dracônico Nv. 1",
+    "description": null
+  },
+  "ElementResist_Dragon_1_PAL": {
+    "localized_name": "Matador de Dragões",
+    "description": "Reduz o dano por ataques dracônicos em 10.0%."
+  },
+  "ElementResist_Dragon_2": {
+    "localized_name": "Redução de Dano Dracônico Nv. 2",
+    "description": null
+  },
+  "ElementResist_Dragon_3": {
+    "localized_name": "Redução de Dano Dracônico Nv. 3",
+    "description": null
+  },
+  "ElementResist_Earth_1": {
+    "localized_name": "Redução de Dano de Terra Nv. 1",
+    "description": null
+  },
+  "ElementResist_Earth_1_PAL": {
+    "localized_name": "Reforço Antissísmico",
+    "description": "Reduz o dano por ataques de terra em 10.0%."
+  },
+  "ElementResist_Earth_2": {
+    "localized_name": "Redução de Dano de Terra Nv. 2",
+    "description": null
+  },
+  "ElementResist_Earth_3": {
+    "localized_name": "Redução de Dano de Terra Nv. 3",
+    "description": null
+  },
+  "ElementResist_Fire_1": {
+    "localized_name": "Redução de Dano de Fogo Nv. 1",
+    "description": null
+  },
+  "ElementResist_Fire_1_PAL": {
+    "localized_name": "Um Bom Bronzeado",
+    "description": "Reduz o dano por ataques de fogo em 10.0%."
+  },
+  "ElementResist_Fire_2": {
+    "localized_name": "Redução de Dano de Fogo Nv. 2",
+    "description": null
+  },
+  "ElementResist_Fire_3": {
+    "localized_name": "Redução de Dano de Fogo Nv. 3",
+    "description": null
+  },
+  "ElementResist_Ice_1": {
+    "localized_name": "Redução de Dano de Gelo Nv. 1",
+    "description": null
+  },
+  "ElementResist_Ice_1_PAL": {
+    "localized_name": "Corpo Quente",
+    "description": "Reduz o dano por ataques de gelo em 10.0%."
+  },
+  "ElementResist_Ice_2": {
+    "localized_name": "Redução de Dano de Gelo Nv. 2",
+    "description": null
+  },
+  "ElementResist_Ice_3": {
+    "localized_name": "Redução de Dano de Gelo Nv. 3",
+    "description": null
+  },
+  "ElementResist_Leaf_1": {
+    "localized_name": "Redução de Dano de Grama Nv. 1",
+    "description": null
+  },
+  "ElementResist_Leaf_1_PAL": {
+    "localized_name": "Efeito Herbicida",
+    "description": "Reduz o dano por ataques de grama em 10.0%."
+  },
+  "ElementResist_Leaf_2": {
+    "localized_name": "Redução de Dano de Grama Nv. 2",
+    "description": null
+  },
+  "ElementResist_Leaf_3": {
+    "localized_name": "Redução de Dano de Grama Nv. 3",
+    "description": null
+  },
+  "ElementResist_Normal_1": {
+    "localized_name": "Redução de Dano Não Elemental Nv. 1",
+    "description": null
+  },
+  "ElementResist_Normal_1_PAL": {
+    "localized_name": "Anormal",
+    "description": "Reduz o dano por ataques não elementais em 10.0%."
+  },
+  "ElementResist_Normal_2": {
+    "localized_name": "Redução de Dano Não Elemental Nv. 2",
+    "description": null
+  },
+  "ElementResist_Normal_3": {
+    "localized_name": "Redução de Dano Não Elemental Nv. 3",
+    "description": null
+  },
+  "ElementResist_Thunder_1": {
+    "localized_name": "Redução de Dano Elétrico Nv. 1",
+    "description": null
+  },
+  "ElementResist_Thunder_1_PAL": {
+    "localized_name": "Isolamento Elétrico",
+    "description": "Reduz o dano por ataques elétricos em 10.0%."
+  },
+  "ElementResist_Thunder_2": {
+    "localized_name": "Redução de Dano Elétrico Nv. 2",
+    "description": null
+  },
+  "ElementResist_Thunder_3": {
+    "localized_name": "Redução de Dano Elétrico Nv. 3",
+    "description": null
+  },
+  "EternalFlame": {
+    "localized_name": "Chama Eterna",
+    "description": null
+  },
+  "HP_ACC_up1": {
+    "localized_name": "Aumento de PV Nv. 1",
+    "description": null
+  },
+  "HP_ACC_up2": {
+    "localized_name": "Aumento de PV Nv. 2",
+    "description": null
+  },
+  "HP_ACC_up3": {
+    "localized_name": "Aumento de PV Nv. 3",
+    "description": null
+  },
+  "Invader": {
+    "localized_name": "Invasor",
+    "description": null
+  },
+  "JumpCount_Increase1": {
+    "localized_name": "Número de pulos +1.",
+    "description": "Número de pulos +1."
+  },
+  "JumpCount_Increase2": {
+    "localized_name": "Número de pulos +2.",
+    "description": "Número de pulos +2."
+  },
+  "JumpCount_Increase3": {
+    "localized_name": "Número de pulos +3.",
+    "description": "Número de pulos +3."
+  },
+  "JumpPower_Increase": {
+    "localized_name": "Fortalece o pulo.",
+    "description": "Fortalece o pulo."
+  },
+  "Legend": {
+    "localized_name": "Lendário",
+    "description": "Ataque +20.0% Defesa +20.0% Velocidade de movimento +15.0%"
+  },
+  "MaxInventoryWeight_up": {
+    "localized_name": "Aumento de Peso Máximo Nv. 1",
+    "description": null
+  },
+  "MaxInventoryWeight_up2": {
+    "localized_name": "Aumento de Peso Máximo Nv. 2",
+    "description": null
+  },
+  "MaxInventoryWeight_up3": {
+    "localized_name": "Aumento de Peso Máximo Nv. 3",
+    "description": null
+  },
+  "MaxInventoryWeight_up_Equip_1": {
+    "localized_name": "Aumento de Peso Máximo Nv. 1",
+    "description": null
+  },
+  "MaxInventoryWeight_up_Equip_2": {
+    "localized_name": "Aumento de Peso Máximo Nv. 2",
+    "description": null
+  },
+  "MaxInventoryWeight_up_Equip_3": {
+    "localized_name": "Aumento de Peso Máximo Nv. 3",
+    "description": null
+  },
+  "MoveSpeed_up_1": {
+    "localized_name": "Ligeiro",
+    "description": "Aumenta a velocidade de movimento em 10.0%."
+  },
+  "MoveSpeed_up_2": {
+    "localized_name": "Bom corredor",
+    "description": "Aumenta a velocidade de movimento em 20.0%."
+  },
+  "MoveSpeed_up_3": {
+    "localized_name": "Vertiginoso",
+    "description": "Aumenta a velocidade de movimento em 30.0%."
+  },
+  "Nocturnal": {
+    "localized_name": "Noturno",
+    "description": "Não dorme ao cair da noite, continuando a trabalhar."
+  },
+  "NonKilling": {
+    "localized_name": "Clemência",
+    "description": "Pacifista. Não pode deixar os alvos de seus ataques com vida inferior a 1."
+  },
+  "Noukin": {
+    "localized_name": "Brutamontes",
+    "description": null
+  },
+  "PAL_ALLAttack_down1": {
+    "localized_name": "Medroso",
+    "description": null
+  },
+  "PAL_ALLAttack_down2": {
+    "localized_name": "Pusilânime",
+    "description": null
+  },
+  "PAL_ALLAttack_up1": {
+    "localized_name": "Ousado",
+    "description": null
+  },
+  "PAL_ALLAttack_up2": {
+    "localized_name": "Brutal",
+    "description": null
+  },
+  "PAL_ALLAttack_up3": {
+    "localized_name": "Deus Inclemente",
+    "description": null
+  },
+  "PAL_CorporateSlave": {
+    "localized_name": "Escravo do trabalho",
+    "description": null
+  },
+  "PAL_FullStomach_Down_1": {
+    "localized_name": "Comedido",
+    "description": "Manutenção de Fartura <NumBlue_13>+10.0%</>"
+  },
+  "PAL_FullStomach_Down_2": {
+    "localized_name": "Mestre da dieta",
+    "description": "Manutenção de Fartura <NumBlue_13>+15.0%</>"
+  },
+  "PAL_FullStomach_Down_3": {
+    "localized_name": "Jejuador Supremo",
+    "description": "Manutenção de Fartura <NumBlue_13>+20.0%</>"
+  },
+  "PAL_FullStomach_Up_1": {
+    "localized_name": "Comilão",
+    "description": "Redução de Fartura <NumRed_13>+10.0%</>"
+  },
+  "PAL_FullStomach_Up_2": {
+    "localized_name": "Saco sem fundo",
+    "description": "Redução de Fartura <NumRed_13>+15.0%</>"
+  },
+  "PAL_Sanity_Down_1": {
+    "localized_name": "Pensamento positivo",
+    "description": "Manutenção de SAN <NumBlue_13>+10.0%</>"
+  },
+  "PAL_Sanity_Down_2": {
+    "localized_name": "Viciado no trabalho",
+    "description": "Manutenção de SAN <NumBlue_13>+15.0%</>"
+  },
+  "PAL_Sanity_Down_3": {
+    "localized_name": "Espírito Inalterável",
+    "description": "Manutenção de SAN <NumBlue_13>+20.0%</>"
+  },
+  "PAL_Sanity_Up_1": {
+    "localized_name": "Mente instável",
+    "description": "Redução de SAN <NumRed_13>+10.0%</>"
+  },
+  "PAL_Sanity_Up_2": {
+    "localized_name": "Tendência suicida",
+    "description": "Redução de SAN <NumRed_13>+15.0%</>"
+  },
+  "PAL_SpiritualInst": {
+    "localized_name": "pt-BR_Text",
+    "description": null
+  },
+  "PAL_conceited": {
+    "localized_name": "Presunçoso",
+    "description": null
+  },
+  "PAL_masochist": {
+    "localized_name": "Masoquista",
+    "description": null
+  },
+  "PAL_oraora": {
+    "localized_name": "Confrontador",
+    "description": null
+  },
+  "PAL_rude": {
+    "localized_name": "Violento",
+    "description": null
+  },
+  "PAL_sadist": {
+    "localized_name": "Sádico",
+    "description": null
+  },
+  "Rare": {
+    "localized_name": "Da sorte",
+    "description": null
+  },
+  "SalePrice_Down_1": {
+    "localized_name": "Deplorável",
+    "description": "Preço de venda piorado: --10.0%"
+  },
+  "SalePrice_Up_1": {
+    "localized_name": "Nobre",
+    "description": "Preço de venda melhorado: +5.0%"
+  },
+  "SalePrice_Up_2": {
+    "localized_name": "Linhagem Distinta",
+    "description": "Preço de venda melhorado: +3.0%"
+  },
+  "SphereModule_Curve": {
+    "localized_name": "Curva de Esfera +1",
+    "description": null
+  },
+  "SphereModule_Curve2": {
+    "localized_name": "Deslize de Esfera",
+    "description": null
+  },
+  "SphereModule_Heavy": {
+    "localized_name": "Peso de Esfera +1",
+    "description": null
+  },
+  "SphereModule_Homing": {
+    "localized_name": "Rastreio de Esfera",
+    "description": null
+  },
+  "SphereModule_Sniper": {
+    "localized_name": "Alcance de Esfera +1",
+    "description": null
+  },
+  "SphereModule_Sniper2": {
+    "localized_name": "Alcance de Esfera +2",
+    "description": null
+  },
+  "Stamina_Down_1": {
+    "localized_name": "Enfurnado",
+    "description": "Fôlego máximo -25.0% *Só funciona com Pals que servem de montaria"
+  },
+  "Stamina_Up_1": {
+    "localized_name": "Fôlego Interminável",
+    "description": "Fôlego máximo +50.0% *Só funciona com Pals que servem de montaria"
+  },
+  "Stamina_Up_2": {
+    "localized_name": "Criança Serelepe",
+    "description": "Fôlego máximo +25.0% *Só funciona com Pals que servem de montaria"
+  },
+  "Stamina_Up_3": {
+    "localized_name": "Movimento Perpétuo",
+    "description": "Fôlego máximo +75.0% *Só funciona com Pals que servem de montaria"
+  },
+  "TemperatureResist_Cold1": {
+    "localized_name": "Resistência ao Frio Nv. 1",
+    "description": null
+  },
+  "TemperatureResist_Cold2": {
+    "localized_name": "Resistência ao Frio Nv. 2",
+    "description": null
+  },
+  "TemperatureResist_Cold3": {
+    "localized_name": "Resistência ao Frio Nv. 3",
+    "description": null
+  },
+  "TemperatureResist_Heat1": {
+    "localized_name": "Resistência ao Calor Nv. 1",
+    "description": null
+  },
+  "TemperatureResist_Heat1Cold1": {
+    "localized_name": "Resistência ao Calor Nv. 1 / Resistência ao Frio Nv. 1",
+    "description": null
+  },
+  "TemperatureResist_Heat2": {
+    "localized_name": "Resistência ao Calor Nv. 2",
+    "description": null
+  },
+  "TemperatureResist_Heat2Cold2": {
+    "localized_name": "Resistência ao Calor Nv. 2 / Resistência ao Frio Nv. 2",
+    "description": null
+  },
+  "TemperatureResist_Heat3": {
+    "localized_name": "Resistência ao Calor Nv. 3",
+    "description": null
+  },
+  "TemperatureResist_Heat3Cold3": {
+    "localized_name": "Resistência ao Calor Nv. 3 / Resistência ao Frio Nv. 3",
+    "description": null
+  },
+  "Test_PalEgg_HatchingSpeed_Up": {
+    "localized_name": "Filantropo",
+    "description": "Enquanto estiver em uma fazenda de acasalamento, a velocidade de produção de ovos é aumentada em 100.0%"
+  },
+  "TrainerATK_UP_1": {
+    "localized_name": "Comandante Intrépido",
+    "description": "Aumenta o ataque do jogador em 10.0%."
+  },
+  "TrainerDEF_UP_1": {
+    "localized_name": "Estrategista Inabalável",
+    "description": "Aumenta a defesa do jogador em 10.0%."
+  },
+  "TrainerLogging_up1": {
+    "localized_name": "Lenhador Líder",
+    "description": "Aumenta a eficiência do jogador ao cortar árvores em 25.0%."
+  },
+  "TrainerMining_up1": {
+    "localized_name": "Mineiro-Chefe",
+    "description": "Aumenta a eficiência de garimpo do jogador em 25.0%."
+  },
+  "TrainerWorkSpeed_UP_1": {
+    "localized_name": "Motivador",
+    "description": "Aumenta a velocidade de trabalho do jogador em 25.0%."
+  },
+  "Vampire": {
+    "localized_name": "Vampiro",
+    "description": "Absorve parte do dano causado e restaura seu PV. Não dorme ao cair da noite, continuando a trabalhar."
+  },
+  "Witch": {
+    "localized_name": "Bruxa",
+    "description": null
+  },
+  "WorkSpeed_ACC_up1": {
+    "localized_name": "Velocidade de Trabalho Nv. 1",
+    "description": null
+  },
+  "WorkSpeed_ACC_up2": {
+    "localized_name": "Velocidade de Trabalho Nv. 2",
+    "description": null
+  },
+  "WorkSpeed_ACC_up3": {
+    "localized_name": "Velocidade de Trabalho Nv. 3",
+    "description": null
+  },
+  "defense_ACC_up1": {
+    "localized_name": "Aumento de Defesa Nv. 1",
+    "description": null
+  },
+  "defense_ACC_up2": {
+    "localized_name": "Aumento de Defesa Nv. 2",
+    "description": null
+  },
+  "defense_ACC_up3": {
+    "localized_name": "Aumento de Defesa Nv. 3",
+    "description": null
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "Collection": {
+    "localized_name": "Sammeln",
+    "description": null
+  },
+  "Cool": {
+    "localized_name": "Kühlung",
+    "description": null
+  },
+  "Deforest": {
+    "localized_name": "Holzfällen",
+    "description": null
+  },
+  "EmitFlame": {
+    "localized_name": "Feuererzeugung",
+    "description": null
+  },
+  "GenerateElectricity": {
+    "localized_name": "Stromerzeugung",
+    "description": null
+  },
+  "Handcraft": {
+    "localized_name": "Handwerk",
+    "description": null
+  },
+  "Mining": {
+    "localized_name": "Bergbau",
+    "description": null
+  },
+  "MonsterFarm": {
+    "localized_name": "Farmarbeit",
+    "description": null
+  },
+  "OilExtraction": {
+    "localized_name": "Rohöl -Extraktion",
+    "description": null
+  },
+  "ProductMedicine": {
+    "localized_name": "Arzneimittelherstellung",
+    "description": null
+  },
+  "Seeding": {
+    "localized_name": "Aussaat",
+    "description": null
+  },
+  "Transport": {
+    "localized_name": "Transport",
+    "description": null
+  },
+  "Watering": {
+    "localized_name": "Bewässerung",
+    "description": null
+  }
+}

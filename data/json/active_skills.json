@@ -1,1575 +1,2776 @@
 {
-	"EPalWazaID::AcidRain": {
-		"type": "Shot",
-		"ct": 18.0,
-		"max_range": 1000,
-		"min_range": 100,
-		"power": 80,
-		"element": "Water"
-	},
-	"EPalWazaID::AirBlade": {
-		"type": "Shot",
-		"ct": 20.0,
-		"max_range": 5000,
-		"min_range": 0,
-		"power": 85,
-		"element": "Neutral"
-	},
-	"EPalWazaID::AirCanon": {
-		"type": "Shot",
-		"ct": 2.0,
-		"max_range": 4000,
-		"min_range": 500,
-		"power": 25,
-		"element": "Neutral"
-	},
-	"EPalWazaID::Apocalypse": {
-		"type": "Shot",
-		"ct": 55.0,
-		"max_range": 9999,
-		"min_range": 100,
-		"power": 110,
-		"element": "Dark"
-	},
-	"EPalWazaID::AquaJet": {
-		"type": "Shot",
-		"ct": 2.0,
-		"max_range": 5000,
-		"min_range": 500,
-		"power": 30,
-		"element": "Water"
-	},
-	"EPalWazaID::BeamSlicer": {
-		"type": "Shot",
-		"ct": 45.0,
-		"max_range": 4000,
-		"min_range": 0,
-		"power": 130,
-		"element": "Dragon"
-	},
-	"EPalWazaID::BlastCanon": {
-		"type": "Shot",
-		"ct": 30.0,
-		"max_range": 6000,
-		"min_range": 0,
-		"power": 100,
-		"element": "Dragon"
-	},
-	"EPalWazaID::BlizzardLance": {
-		"type": "Shot",
-		"ct": 15.0,
-		"max_range": 9999,
-		"min_range": 100,
-		"power": 70,
-		"element": "Ice"
-	},
-	"EPalWazaID::BubbleShot": {
-		"type": "Shot",
-		"ct": 13.0,
-		"max_range": 3500,
-		"min_range": 1000,
-		"power": 65,
-		"element": "Water"
-	},
-	"EPalWazaID::BubbleShower": {
-		"type": "Shot",
-		"ct": 24.0,
-		"max_range": 1000,
-		"min_range": 0,
-		"power": 110,
-		"element": "Dark"
-	},
-	"EPalWazaID::ChaosLaser": {
-		"type": "Shot",
-		"ct": 60.0,
-		"max_range": 3000,
-		"min_range": 500,
-		"power": 300,
-		"element": "Dark"
-	},
-	"EPalWazaID::ChargeCanon": {
-		"type": "Shot",
-		"ct": 40.0,
-		"max_range": 4000,
-		"min_range": 0,
-		"power": 120,
-		"element": "Dragon"
-	},
-	"EPalWazaID::Commet": {
-		"type": "Shot",
-		"ct": 35.0,
-		"max_range": 9999,
-		"min_range": 0,
-		"power": 110,
-		"element": "Dragon"
-	},
-	"EPalWazaID::CommetRain": {
-		"type": "Shot",
-		"ct": 55.0,
-		"max_range": 9999,
-		"min_range": 0,
-		"power": 160,
-		"element": "Dragon"
-	},
-	"EPalWazaID::CrossThunder": {
-		"type": "Shot",
-		"ct": 7.0,
-		"max_range": 1000,
-		"min_range": 500,
-		"power": 1,
-		"element": "Electric"
-	},
-	"EPalWazaID::DarkArrow": {
-		"type": "Shot",
-		"ct": 10.0,
-		"max_range": 5000,
-		"min_range": 500,
-		"power": 65,
-		"element": "Dark"
-	},
-	"EPalWazaID::DarkBall": {
-		"type": "Shot",
-		"ct": 4.0,
-		"max_range": 1000,
-		"min_range": 500,
-		"power": 40,
-		"element": "Dark"
-	},
-	"EPalWazaID::DarkCanon": {
-		"type": "Shot",
-		"ct": 2.0,
-		"max_range": 5000,
-		"min_range": 500,
-		"power": 50,
-		"element": "Dark"
-	},
-	"EPalWazaID::DarkLaser": {
-		"type": "Shot",
-		"ct": 55.0,
-		"max_range": 1800,
-		"min_range": 500,
-		"power": 150,
-		"element": "Dark"
-	},
-	"EPalWazaID::DarkLegion": {
-		"type": "Shot",
-		"ct": 45.0,
-		"max_range": 1500,
-		"min_range": 0,
-		"power": 160,
-		"element": "Dark"
-	},
-	"EPalWazaID::DarkPulse": {
-		"type": "Shot",
-		"ct": 2.0,
-		"max_range": 5000,
-		"min_range": 500,
-		"power": 40,
-		"element": "Dark"
-	},
-	"EPalWazaID::DarkWave": {
-		"type": "Shot",
-		"ct": 10.0,
-		"max_range": 300,
-		"min_range": 0,
-		"power": 55,
-		"element": "Dark"
-	},
-	"EPalWazaID::DiamondFall": {
-		"type": "Shot",
-		"ct": 60.0,
-		"max_range": 9999,
-		"min_range": 0,
-		"power": 160,
-		"element": "Ice"
-	},
-	"EPalWazaID::DoubleIcicleThrow": {
-		"type": "Shot",
-		"ct": 60.0,
-		"max_range": 9999,
-		"min_range": 1000,
-		"power": 200,
-		"element": "Ice"
-	},
-	"EPalWazaID::DragonBreath": {
-		"type": "Shot",
-		"ct": 15.0,
-		"max_range": 1500,
-		"min_range": 500,
-		"power": 70,
-		"element": "Dragon"
-	},
-	"EPalWazaID::DragonCanon": {
-		"type": "Shot",
-		"ct": 2.0,
-		"max_range": 4000,
-		"min_range": 500,
-		"power": 30,
-		"element": "Dragon"
-	},
-	"EPalWazaID::DragonMeteor": {
-		"type": "Shot",
-		"ct": 55.0,
-		"max_range": 5000,
-		"min_range": 500,
-		"power": 150,
-		"element": "Dragon"
-	},
-	"EPalWazaID::DragonWave": {
-		"type": "Shot",
-		"ct": 10.0,
-		"max_range": 200,
-		"min_range": 0,
-		"power": 55,
-		"element": "Dragon"
-	},
-	"EPalWazaID::ElecWave": {
-		"type": "Shot",
-		"ct": 4.0,
-		"max_range": 300,
-		"min_range": 0,
-		"power": 40,
-		"element": "Electric"
-	},
-	"EPalWazaID::Eruption": {
-		"type": "Shot",
-		"ct": 45.0,
-		"max_range": 2000,
-		"min_range": 0,
-		"power": 130,
-		"element": "Fire"
-	},
-	"EPalWazaID::FireBall": {
-		"type": "Shot",
-		"ct": 55.0,
-		"max_range": 9999,
-		"min_range": 500,
-		"power": 150,
-		"element": "Fire"
-	},
-	"EPalWazaID::FireBlast": {
-		"type": "Shot",
-		"ct": 2.0,
-		"max_range": 5000,
-		"min_range": 500,
-		"power": 30,
-		"element": "Fire"
-	},
-	"EPalWazaID::FireSeed": {
-		"type": "Shot",
-		"ct": 7.0,
-		"max_range": 3000,
-		"min_range": 1000,
-		"power": 45,
-		"element": "Fire"
-	},
-	"EPalWazaID::FlameFunnel": {
-		"type": "Shot",
-		"ct": 40.0,
-		"max_range": 5000,
-		"min_range": 0,
-		"power": 120,
-		"element": "Fire"
-	},
-	"EPalWazaID::FlameWall": {
-		"type": "Shot",
-		"ct": 30.0,
-		"max_range": 5000,
-		"min_range": 0,
-		"power": 100,
-		"element": "Fire"
-	},
-	"EPalWazaID::Flamethrower": {
-		"type": "Shot",
-		"ct": 15.0,
-		"max_range": 1500,
-		"min_range": 500,
-		"power": 70,
-		"element": "Fire"
-	},
-	"EPalWazaID::FlareArrow": {
-		"type": "Shot",
-		"ct": 10.0,
-		"max_range": 5000,
-		"min_range": 500,
-		"power": 55,
-		"element": "Fire"
-	},
-	"EPalWazaID::FlareTornado": {
-		"type": "Shot",
-		"ct": 18.0,
-		"max_range": 3000,
-		"min_range": 700,
-		"power": 80,
-		"element": "Fire"
-	},
-	"EPalWazaID::FlareTwister": {
-		"type": "Shot",
-		"ct": 45.0,
-		"max_range": 9999,
-		"min_range": 0,
-		"power": 130,
-		"element": "Fire"
-	},
-	"EPalWazaID::FrostBreath": {
-		"type": "Shot",
-		"ct": 22.0,
-		"max_range": 1000,
-		"min_range": 100,
-		"power": 90,
-		"element": "Ice"
-	},
-	"EPalWazaID::GhostFlame": {
-		"type": "Shot",
-		"ct": 16.0,
-		"max_range": 5000,
-		"min_range": 500,
-		"power": 75,
-		"element": "Dark"
-	},
-	"EPalWazaID::GrassTornado": {
-		"type": "Shot",
-		"ct": 18.0,
-		"max_range": 3000,
-		"min_range": 700,
-		"power": 80,
-		"element": "Grass"
-	},
-	"EPalWazaID::HolyBlast": {
-		"type": "Shot",
-		"ct": 30.0,
-		"max_range": 9999,
-		"min_range": 0,
-		"power": 120,
-		"element": "Neutral"
-	},
-	"EPalWazaID::Human_Punch": {
-		"type": "Melee",
-		"ct": 1.0,
-		"max_range": 600,
-		"min_range": 500,
-		"power": 12,
-		"element": "Neutral"
-	},
-	"EPalWazaID::HydroPump": {
-		"type": "Shot",
-		"ct": 55.0,
-		"max_range": 1800,
-		"min_range": 500,
-		"power": 150,
-		"element": "Water"
-	},
-	"EPalWazaID::HyperBeam": {
-		"type": "Shot",
-		"ct": 55.0,
-		"max_range": 1800,
-		"min_range": 500,
-		"power": 150,
-		"element": "Neutral"
-	},
-	"EPalWazaID::IceAge": {
-		"type": "Shot",
-		"ct": 50.0,
-		"max_range": 3000,
-		"min_range": 100,
-		"power": 140,
-		"element": "Ice"
-	},
-	"EPalWazaID::IceBlade": {
-		"type": "Shot",
-		"ct": 10.0,
-		"max_range": 4000,
-		"min_range": 500,
-		"power": 55,
-		"element": "Ice"
-	},
-	"EPalWazaID::IceMissile": {
-		"type": "Shot",
-		"ct": 3.0,
-		"max_range": 3000,
-		"min_range": 800,
-		"power": 30,
-		"element": "Ice"
-	},
-	"EPalWazaID::IcicleLine": {
-		"type": "Shot",
-		"ct": 40.0,
-		"max_range": 2500,
-		"min_range": 0,
-		"power": 120,
-		"element": "Ice"
-	},
-	"EPalWazaID::IciclePierce": {
-		"type": "Shot",
-		"ct": 35.0,
-		"max_range": 3000,
-		"min_range": 100,
-		"power": 110,
-		"element": "Ice"
-	},
-	"EPalWazaID::IcicleThrow": {
-		"type": "Shot",
-		"ct": 45.0,
-		"max_range": 9999,
-		"min_range": 1000,
-		"power": 130,
-		"element": "Ice"
-	},
-	"EPalWazaID::Inferno": {
-		"type": "Shot",
-		"ct": 40.0,
-		"max_range": 1000,
-		"min_range": 100,
-		"power": 120,
-		"element": "Fire"
-	},
-	"EPalWazaID::Intimidate": {
-		"ct": 30,
-		"power": 0,
-		"element": "Neutral"
-	},
-	"EPalWazaID::LightningStrike": {
-		"type": "Shot",
-		"ct": 40.0,
-		"max_range": 500,
-		"min_range": 0,
-		"power": 120,
-		"element": "Electric"
-	},
-	"EPalWazaID::LineGeyser": {
-		"type": "Shot",
-		"ct": 22.0,
-		"max_range": 9999,
-		"min_range": 0,
-		"power": 90,
-		"element": "Water"
-	},
-	"EPalWazaID::LineThunder": {
-		"type": "Shot",
-		"ct": 16.0,
-		"max_range": 2000,
-		"min_range": 500,
-		"power": 75,
-		"element": "Electric"
-	},
-	"EPalWazaID::LockonLaser": {
-		"type": "Shot",
-		"ct": 15.0,
-		"max_range": 5000,
-		"min_range": 0,
-		"power": 70,
-		"element": "Electric"
-	},
-	"EPalWazaID::MudShot": {
-		"type": "Shot",
-		"ct": 4.0,
-		"max_range": 3000,
-		"min_range": 500,
-		"power": 40,
-		"element": "Ground"
-	},
-	"EPalWazaID::PoisonFog": {
-		"type": "Shot",
-		"ct": 30.0,
-		"max_range": 200,
-		"min_range": 0,
-		"power": 0,
-		"element": "Dark"
-	},
-	"EPalWazaID::PoisonShot": {
-		"type": "Shot",
-		"ct": 2.0,
-		"max_range": 3000,
-		"min_range": 500,
-		"power": 30,
-		"element": "Dark"
-	},
-	"EPalWazaID::PowerBall": {
-		"type": "Shot",
-		"ct": 15.0,
-		"max_range": 9999,
-		"min_range": 1000,
-		"power": 70,
-		"element": "Neutral"
-	},
-	"EPalWazaID::PowerShot": {
-		"type": "Shot",
-		"ct": 4.0,
-		"max_range": 3000,
-		"min_range": 600,
-		"power": 35,
-		"element": "Neutral"
-	},
-	"EPalWazaID::Psychokinesis": {
-		"type": "Shot",
-		"ct": 35.0,
-		"max_range": 1500,
-		"min_range": 0,
-		"power": 110,
-		"element": "Dark"
-	},
-	"EPalWazaID::RaidCutter": {
-		"type": "Shot",
-		"ct": 35.0,
-		"max_range": 5000,
-		"min_range": 500,
-		"power": 110,
-		"element": "Grass"
-	},
-	"EPalWazaID::Railbolt": {
-		"type": "Shot",
-		"ct": 60.0,
-		"max_range": 3000,
-		"min_range": 500,
-		"power": 200,
-		"element": "Electric"
-	},
-	"EPalWazaID::RangeThunder": {
-		"type": "Shot",
-		"ct": 40.0,
-		"max_range": 2000,
-		"min_range": 0,
-		"power": 125,
-		"element": "Electric"
-	},
-	"EPalWazaID::RockLance": {
-		"type": "Shot",
-		"ct": 55.0,
-		"max_range": 9999,
-		"min_range": 100,
-		"power": 150,
-		"element": "Ground"
-	},
-	"EPalWazaID::RootAttack": {
-		"type": "Shot",
-		"ct": 25.0,
-		"max_range": 9999,
-		"min_range": 500,
-		"power": 95,
-		"element": "Grass"
-	},
-	"EPalWazaID::RootLance": {
-		"type": "Shot",
-		"ct": 40.0,
-		"max_range": 9999,
-		"min_range": 0,
-		"power": 120,
-		"element": "Grass"
-	},
-	"EPalWazaID::SandTornado": {
-		"type": "Shot",
-		"ct": 18.0,
-		"max_range": 3000,
-		"min_range": 100,
-		"power": 80,
-		"element": "Ground"
-	},
-	"EPalWazaID::SandTwister": {
-		"type": "Shot",
-		"ct": 60.0,
-		"max_range": 9999,
-		"min_range": 0,
-		"power": 160,
-		"element": "Ground"
-	},
-	"EPalWazaID::SeedMachinegun": {
-		"type": "Shot",
-		"ct": 9.0,
-		"max_range": 300,
-		"min_range": 0,
-		"power": 50,
-		"element": "Grass"
-	},
-	"EPalWazaID::SeedMine": {
-		"type": "Shot",
-		"ct": 13.0,
-		"max_range": 9999,
-		"min_range": 800,
-		"power": 65,
-		"element": "Grass"
-	},
-	"EPalWazaID::SelfDestruct": {
-		"type": "Shot",
-		"ct": 55.0,
-		"max_range": 1000,
-		"min_range": 0,
-		"power": 230,
-		"element": "Neutral"
-	},
-	"EPalWazaID::SelfDestruct_Bee": {
-		"type": "Shot",
-		"ct": 55.0,
-		"exclusive": [
-			"SoldierBee"
-		],
-		"max_range": 1000,
-		"min_range": 0,
-		"power": 250,
-		"element": "Grass"
-	},
-	"EPalWazaID::SelfExplosion": {
-		"type": "Shot",
-		"ct": 55.0,
-		"max_range": 1000,
-		"min_range": 0,
-		"power": 500,
-		"element": "Neutral"
-	},
-	"EPalWazaID::ShadowBall": {
-		"type": "Shot",
-		"ct": 30.0,
-		"max_range": 9999,
-		"min_range": 1000,
-		"power": 100,
-		"element": "Dark"
-	},
-	"EPalWazaID::ShokeiLaser": {
-		"type": "Shot",
-		"ct": 50.0,
-		"max_range": 5000,
-		"min_range": 0,
-		"power": 170,
-		"element": "Electric"
-	},
-	"EPalWazaID::SolarBeam": {
-		"type": "Shot",
-		"ct": 55.0,
-		"max_range": 1800,
-		"min_range": 500,
-		"power": 150,
-		"element": "Grass"
-	},
-	"EPalWazaID::SpecialCutter": {
-		"type": "Shot",
-		"ct": 12.0,
-		"max_range": 5000,
-		"min_range": 500,
-		"power": 60,
-		"element": "Grass"
-	},
-	"EPalWazaID::SpreadPulse": {
-		"type": "Shot",
-		"ct": 2.0,
-		"max_range": 5000,
-		"min_range": 500,
-		"power": 30,
-		"element": "Electric"
-	},
-	"EPalWazaID::StarMine": {
-		"type": "Shot",
-		"ct": 55.0,
-		"max_range": 9999,
-		"min_range": 0,
-		"power": 110,
-		"element": "Neutral"
-	},
-	"EPalWazaID::StoneShotgun": {
-		"type": "Shot",
-		"ct": 10.0,
-		"max_range": 4000,
-		"min_range": 500,
-		"power": 55,
-		"element": "Ground"
-	},
-	"EPalWazaID::ThreeCommet": {
-		"type": "Shot",
-		"ct": 40.0,
-		"max_range": 9999,
-		"min_range": 0,
-		"power": 120,
-		"element": "Dragon"
-	},
-	"EPalWazaID::ThreeThunder": {
-		"type": "Shot",
-		"ct": 22.0,
-		"max_range": 9999,
-		"min_range": 0,
-		"power": 90,
-		"element": "Electric"
-	},
-	"EPalWazaID::ThrowRock": {
-		"type": "Shot",
-		"ct": 15.0,
-		"max_range": 2500,
-		"min_range": 500,
-		"power": 70,
-		"element": "Ground"
-	},
-	"EPalWazaID::ThunderBall": {
-		"type": "Shot",
-		"ct": 9.0,
-		"max_range": 2500,
-		"min_range": 500,
-		"power": 50,
-		"element": "Electric"
-	},
-	"EPalWazaID::ThunderFunnel": {
-		"type": "Shot",
-		"ct": 13.0,
-		"max_range": 9999,
-		"min_range": 500,
-		"power": 65,
-		"element": "Electric"
-	},
-	"EPalWazaID::ThunderRain": {
-		"type": "Shot",
-		"ct": 45.0,
-		"max_range": 2000,
-		"min_range": 0,
-		"power": 135,
-		"element": "Electric"
-	},
-	"EPalWazaID::ThunderStorm": {
-		"type": "Shot",
-		"ct": 60.0,
-		"max_range": 5000,
-		"min_range": 0,
-		"power": 160,
-		"element": "Electric"
-	},
-	"EPalWazaID::Thunderbolt": {
-		"type": "Shot",
-		"ct": 55.0,
-		"max_range": 3000,
-		"min_range": 500,
-		"power": 150,
-		"element": "Electric"
-	},
-	"EPalWazaID::Tremor": {
-		"type": "Shot",
-		"ct": 35.0,
-		"max_range": 1200,
-		"min_range": 0,
-		"power": 130,
-		"element": "Ground"
-	},
-	"EPalWazaID::TriSpark": {
-		"type": "Shot",
-		"ct": 35.0,
-		"max_range": 3000,
-		"min_range": 300,
-		"power": 110,
-		"element": "Electric"
-	},
-	"EPalWazaID::TripleCannon": {
-		"type": "Shot",
-		"ct": 40.0,
-		"max_range": 4000,
-		"min_range": 500,
-		"power": 120,
-		"element": "Dragon"
-	},
-	"EPalWazaID::Unique_Alpaca_Tackle": {
-		"type": "Melee",
-		"ct": 4.0,
-		"exclusive": [
-			"Alpaca"
-		],
-		"max_range": 1500,
-		"min_range": 300,
-		"power": 40,
-		"element": "Neutral"
-	},
-	"EPalWazaID::Unique_AmaterasuWolf_FireCharge": {
-		"type": "Melee",
-		"ct": 10.0,
-		"exclusive": [
-			"AmaterasuWolf"
-		],
-		"max_range": 3500,
-		"min_range": 1000,
-		"power": 75,
-		"element": "Fire"
-	},
-	"EPalWazaID::Unique_Anubis_GroundPunch": {
-		"type": "Melee",
-		"ct": 35.0,
-		"exclusive": [
-			"Anubis"
-		],
-		"max_range": 5000,
-		"min_range": 0,
-		"power": 140,
-		"element": "Ground"
-	},
-	"EPalWazaID::Unique_Anubis_LowRoundKick": {
-		"type": "Melee",
-		"ct": 21.0,
-		"exclusive": [
-			"Anubis"
-		],
-		"max_range": 300,
-		"min_range": 0,
-		"power": 100,
-		"element": "Ground"
-	},
-	"EPalWazaID::Unique_Anubis_Tackle": {
-		"type": "Melee",
-		"ct": 28.0,
-		"exclusive": [
-			"Anubis"
-		],
-		"max_range": 5000,
-		"min_range": 1500,
-		"power": 120,
-		"element": "Ground"
-	},
-	"EPalWazaID::Unique_Baphomet_SwallowKite": {
-		"type": "Melee",
-		"ct": 10.0,
-		"exclusive": [
-			"Baphomet",
-			"Baphomet_Dark"
-		],
-		"max_range": 1200,
-		"min_range": 1100,
-		"power": 70,
-		"element": "Fire"
-	},
-	"EPalWazaID::Unique_BlackCentaur_TwoSpearRushes": {
-		"type": "Melee",
-		"ct": 40.0,
-		"exclusive": [
-			"BlackCentaur"
-		],
-		"max_range": 1000,
-		"min_range": 0,
-		"power": 120,
-		"element": "Dark"
-	},
-	"EPalWazaID::Unique_BlackGriffon_TackleLaser": {
-		"type": "Shot",
-		"ct": 45.0,
-		"exclusive": [
-			"BlackGriffon",
-			"GYM_BlackGriffon"
-		],
-		"max_range": 2500,
-		"min_range": 0,
-		"power": 160,
-		"element": "Dark"
-	},
-	"EPalWazaID::Unique_BlackGriffon_TackleLaser2": {
-		"type": "Shot",
-		"ct": 45.0,
-		"max_range": 2500,
-		"min_range": 0,
-		"power": 170,
-		"element": "Dark"
-	},
-	"EPalWazaID::Unique_BluePlatypus_Toboggan": {
-		"type": "Melee",
-		"ct": 120.0,
-		"exclusive": [
-			"BluePlatypus"
-		],
-		"max_range": 500,
-		"min_range": 0,
-		"power": 100,
-		"element": "Water"
-	},
-	"EPalWazaID::Unique_Boar_Tackle": {
-		"type": "Melee",
-		"ct": 2.0,
-		"exclusive": [
-			"Boar"
-		],
-		"max_range": 2500,
-		"min_range": 300,
-		"power": 55,
-		"element": "Neutral"
-	},
-	"EPalWazaID::Unique_CaptainPenguin_BodySlide": {
-		"type": "Shot",
-		"ct": 10.0,
-		"exclusive": [
-			"CaptainPenguin"
-		],
-		"max_range": 3000,
-		"min_range": 500,
-		"power": 70,
-		"element": "Ice"
-	},
-	"EPalWazaID::Unique_ChickenPal_ChickenPeck": {
-		"type": "Melee",
-		"ct": 1.0,
-		"exclusive": [
-			"ChickenPal"
-		],
-		"max_range": 500,
-		"min_range": 0,
-		"power": 30,
-		"element": "Neutral"
-	},
-	"EPalWazaID::Unique_DarkCrow_TelePoke": {
-		"type": "Melee",
-		"ct": 7.0,
-		"exclusive": [
-			"DarkCrow"
-		],
-		"max_range": 9999,
-		"min_range": 0,
-		"power": 55,
-		"element": "Dark"
-	},
-	"EPalWazaID::Unique_DarkScorpion_Pierce": {
-		"type": "Melee",
-		"ct": 24.0,
-		"exclusive": [
-			"DarkScorpion",
-			"DarkScorpion_Ground"
-		],
-		"max_range": 3000,
-		"min_range": 0,
-		"power": 110,
-		"element": "Ground"
-	},
-	"EPalWazaID::Unique_Deer_PushupHorn": {
-		"type": "Melee",
-		"ct": 5.0,
-		"exclusive": [
-			"Deer",
-			"Deer_Ground"
-		],
-		"max_range": 2000,
-		"min_range": 550,
-		"power": 50,
-		"element": "Neutral"
-	},
-	"EPalWazaID::Unique_DrillGame_ShellAttack": {
-		"type": "Melee",
-		"ct": 9.0,
-		"exclusive": [
-			"DrillGame"
-		],
-		"max_range": 1500,
-		"min_range": 200,
-		"power": 65,
-		"element": "Ground"
-	},
-	"EPalWazaID::Unique_Eagle_GlidingNail": {
-		"type": "Melee",
-		"ct": 8.0,
-		"exclusive": [
-			"Eagle"
-		],
-		"max_range": 1000,
-		"min_range": 0,
-		"power": 60,
-		"element": "Neutral"
-	},
-	"EPalWazaID::Unique_ElecPanda_ElecScratch": {
-		"type": "Melee",
-		"ct": 22.0,
-		"exclusive": [
-			"ElecPanda",
-			"GYM_ElecPanda"
-		],
-		"max_range": 700,
-		"min_range": 0,
-		"power": 90,
-		"element": "Electric"
-	},
-	"EPalWazaID::Unique_ElecPanda_GatlingAttack": {
-		"type": "Shot",
-		"ct": 42.0,
-		"max_range": 3000,
-		"min_range": 300,
-		"power": 160,
-		"element": "Electric",
-		"exclusive": [
-			"ElecPanda",
-			"GYM_ElecPanda"
-		]
-	},
-	"EPalWazaID::Unique_FairyDragon_FairyTornado": {
-		"type": "Shot",
-		"ct": 10.0,
-		"exclusive": [
-			"FairyDragon",
-			"FairyDragon_Water"
-		],
-		"max_range": 3000,
-		"min_range": 0,
-		"power": 70,
-		"element": "Dragon"
-	},
-	"EPalWazaID::Unique_FeatherOstrich_Tossin": {
-		"type": "Melee",
-		"ct": 21.0,
-		"exclusive": [
-			"FeatherOstrich"
-		],
-		"max_range": 3500,
-		"min_range": 300,
-		"power": 100,
-		"element": "Ground"
-	},
-	"EPalWazaID::Unique_FengyunDeeper_CloudTempest": {
-		"type": "Melee",
-		"ct": 15.0,
-		"exclusive": [
-			"FengyunDeeper"
-		],
-		"max_range": 2000,
-		"min_range": 550,
-		"power": 90,
-		"element": "Neutral"
-	},
-	"EPalWazaID::Unique_FireKirin_Dark_DarkTossin": {
-		"type": "Melee",
-		"ct": 14.0,
-		"exclusive": [
-			"FireKirin_Dark"
-		],
-		"max_range": 2500,
-		"min_range": 0,
-		"power": 85,
-		"element": "Dark"
-	},
-	"EPalWazaID::Unique_FireKirin_Tackle": {
-		"type": "Melee",
-		"ct": 14.0,
-		"exclusive": [
-			"FireKirin"
-		],
-		"max_range": 2500,
-		"min_range": 0,
-		"power": 85,
-		"element": "Fire"
-	},
-	"EPalWazaID::Unique_FlameBuffalo_FlameHorn": {
-		"type": "Melee",
-		"ct": 9.0,
-		"exclusive": [
-			"FlameBuffalo"
-		],
-		"max_range": 2500,
-		"min_range": 1000,
-		"power": 50,
-		"element": "Fire"
-	},
-	"EPalWazaID::Unique_FlowerDinosaur_Whip": {
-		"type": "Shot",
-		"ct": 8.0,
-		"exclusive": [
-			"FlowerDinosaur"
-		],
-		"max_range": 1500,
-		"min_range": 0,
-		"power": 60,
-		"element": "Grass"
-	},
-	"EPalWazaID::Unique_Garm_Bite": {
-		"type": "Melee",
-		"ct": 2.0,
-		"exclusive": [
-			"Garm"
-		],
-		"max_range": 900,
-		"min_range": 800,
-		"power": 45,
-		"element": "Neutral"
-	},
-	"EPalWazaID::Unique_Gorilla_GroundPunch": {
-		"type": "Melee",
-		"ct": 14.0,
-		"exclusive": [
-			"Gorilla"
-		],
-		"max_range": 500,
-		"min_range": 0,
-		"power": 85,
-		"element": "Neutral"
-	},
-	"EPalWazaID::Unique_GrassPanda_Electric_ElectricPunch": {
-		"type": "Melee",
-		"ct": 14.0,
-		"exclusive": [
-			"GrassPanda_Electric"
-		],
-		"max_range": 700,
-		"min_range": 0,
-		"power": 85,
-		"element": "Electric"
-	},
-	"EPalWazaID::Unique_GrassPanda_MusclePunch": {
-		"type": "Melee",
-		"ct": 18.0,
-		"exclusive": [
-			"GrassPanda"
-		],
-		"max_range": 700,
-		"min_range": 0,
-		"power": 85,
-		"element": "Grass"
-	},
-	"EPalWazaID::Unique_Grassmammoth_Earthquake": {
-		"type": "Shot",
-		"ct": 30.0,
-		"exclusive": [
-			"Grassmammoth",
-			"Grassmammoth_Ice"
-		],
-		"max_range": 9999,
-		"min_range": 0,
-		"power": 100,
-		"element": "Ground"
-	},
-	"EPalWazaID::Unique_HawkBird_Storm": {
-		"type": "Melee",
-		"ct": 13.0,
-		"exclusive": [
-			"HawkBird"
-		],
-		"max_range": 2500,
-		"min_range": 0,
-		"power": 65,
-		"element": "Neutral"
-	},
-	"EPalWazaID::Unique_HerculesBeetle_BeetleTackle": {
-		"type": "Melee",
-		"ct": 11.0,
-		"exclusive": [
-			"HerculesBeetle"
-		],
-		"max_range": 2500,
-		"min_range": 0,
-		"power": 75,
-		"element": "Ground"
-	},
-	"EPalWazaID::Unique_Horus_FlareBird": {
-		"type": "Melee",
-		"ct": 28.0,
-		"exclusive": [
-			"Horus",
-			"GYM_Horus"
-		],
-		"max_range": 3000,
-		"min_range": 500,
-		"power": 135,
-		"element": "Fire"
-	},
-	"EPalWazaID::Unique_Horus_PerfectStorm": {
-		"type": "Shot",
-		"ct": 38.0,
-		"max_range": 3000,
-		"min_range": 0,
-		"power": 145,
-		"element": "Fire",
-		"exclusive": [
-			"Horus",
-			"GYM_Horus"
-		]
-	},
-	"EPalWazaID::Unique_IceDeer_IceHorn": {
-		"type": "Melee",
-		"ct": 9.0,
-		"exclusive": [
-			"IceDeer"
-		],
-		"max_range": 2000,
-		"min_range": 550,
-		"power": 65,
-		"element": "Ice"
-	},
-	"EPalWazaID::Unique_IceHorse_IceBladeAttack": {
-		"type": "Melee",
-		"ct": 24.0,
-		"exclusive": [
-			"IceHorse",
-			"IceHorse_Dark"
-		],
-		"max_range": 2500,
-		"min_range": 0,
-		"power": 110,
-		"element": "Ice"
-	},
-	"EPalWazaID::Unique_JetDragon_JumpBeam": {
-		"type": "Shot",
-		"ct": 50.0,
-		"exclusive": [
-			"JetDragon"
-		],
-		"max_range": 9999,
-		"min_range": 1000,
-		"power": 140,
-		"element": "Dragon"
-	},
-	"EPalWazaID::Unique_KingAlpaca_BodyPress": {
-		"type": "Melee",
-		"ct": 21.0,
-		"exclusive": [
-			"KingAlpaca",
-			"KingAlpaca_Ice"
-		],
-		"max_range": 1000,
-		"min_range": 0,
-		"power": 100,
-		"element": "Neutral"
-	},
-	"EPalWazaID::Unique_KingBahamut_AirCrash": {
-		"type": "Melee",
-		"ct": 42.0,
-		"max_range": 9999,
-		"min_range": 0,
-		"power": 160,
-		"element": "Dragon",
-		"exclusive": [
-			"KingBahamut"
-		]
-	},
-	"EPalWazaID::Unique_KingBahamut_ArmSmash": {
-		"type": "Melee",
-		"ct": 38.0,
-		"exclusive": [
-			"KingBahamut"
-		],
-		"max_range": 600,
-		"min_range": 0,
-		"power": 150,
-		"element": "Fire"
-	},
-	"EPalWazaID::Unique_Kirin_LightningTackle": {
-		"type": "Melee",
-		"ct": 1.0,
-		"exclusive": [
-			"Kirin"
-		],
-		"max_range": 3000,
-		"min_range": 1000,
-		"power": 100,
-		"element": "Electric"
-	},
-	"EPalWazaID::Unique_LilyQueen_LilyHealing": {
-		"type": "Shot",
-		"ct": 240.0,
-		"max_range": 9999,
-		"min_range": 0,
-		"power": 0,
-		"element": "Grass",
-		"exclusive": [
-			"LilyQueen"
-		]
-	},
-	"EPalWazaID::Unique_LilyQueen_WindBarrier": {
-		"type": "Shot",
-		"ct": 60.0,
-		"max_range": 9999,
-		"min_range": 0,
-		"power": 60,
-		"element": "Grass",
-		"exclusive": [
-			"LilyQueen"
-		]
-	},
-	"EPalWazaID::Unique_MoonQueen_IceMoonBlade": {
-		"type": "Shot",
-		"ct": 24.0,
-		"max_range": 3000,
-		"min_range": 300,
-		"power": 110,
-		"element": "Neutral",
-		"exclusive": [
-			"MoonQueen"
-		]
-	},
-	"EPalWazaID::Unique_MoonQueen_MoonBeam": {
-		"type": "Shot",
-		"ct": 40.0,
-		"exclusive": [
-			"MoonQueen"
-		],
-		"max_range": 3000,
-		"min_range": 300,
-		"power": 170,
-		"element": "Neutral"
-	},
-	"EPalWazaID::Unique_MoonQueen_MoonBlade": {
-		"type": "Shot",
-		"ct": 24.0,
-		"exclusive": [
-			"MoonQueen"
-		],
-		"max_range": 3000,
-		"min_range": 300,
-		"power": 110,
-		"element": "Neutral"
-	},
-	"EPalWazaID::Unique_NaughtyCat_CatPress": {
-		"type": "Melee",
-		"ct": 9.0,
-		"exclusive": [
-			"NaughtyCat"
-		],
-		"max_range": 1500,
-		"min_range": 0,
-		"power": 60,
-		"element": "Neutral"
-	},
-	"EPalWazaID::Unique_NightLady_FlameNightmare": {
-		"type": "Shot",
-		"ct": 45.0,
-		"exclusive": [
-			"NightLady_Dark"
-		],
-		"max_range": 3000,
-		"min_range": 0,
-		"power": 130,
-		"element": "Dark"
-	},
-	"EPalWazaID::Unique_NightLady_WarpBeam": {
-		"type": "Shot",
-		"ct": 50.0,
-		"exclusive": [
-			"NightLady_Dark"
-		],
-		"max_range": 9999,
-		"min_range": 0,
-		"power": 160,
-		"element": "Dark"
-	},
-	"EPalWazaID::Unique_NightLady_WarpBeam_Straight": {
-		"type": "Shot",
-		"ct": 50.0,
-		"exclusive": [
-			"NightLady"
-		],
-		"max_range": 9999,
-		"min_range": 0,
-		"power": 140,
-		"element": "Dark"
-	},
-	"EPalWazaID::Unique_PinkCat_CatPunch": {
-		"type": "Melee",
-		"ct": 1.0,
-		"exclusive": [
-			"PinkCat"
-		],
-		"max_range": 500,
-		"min_range": 0,
-		"power": 40,
-		"element": "Neutral"
-	},
-	"EPalWazaID::Unique_QueenBee_SpinLance": {
-		"type": "Shot",
-		"ct": 9.0,
-		"exclusive": [
-			"Queenbee"
-		],
-		"max_range": 600,
-		"min_range": 0,
-		"power": 70,
-		"element": "Grass"
-	},
-	"EPalWazaID::Unique_RedArmorBird_TriplePeck": {
-		"type": "Melee",
-		"ct": 1.0,
-		"max_range": 9999,
-		"min_range": 0,
-		"power": 1,
-		"element": "Fire",
-		"exclusive": [
-			"RedArmorBird"
-		]
-	},
-	"EPalWazaID::Unique_RobinHood_BowSnipe": {
-		"type": "Shot",
-		"ct": 9.0,
-		"exclusive": [
-			"RobinHood",
-			"RobinHood_Ground"
-		],
-		"max_range": 5000,
-		"min_range": 1000,
-		"power": 65,
-		"element": "Grass"
-	},
-	"EPalWazaID::Unique_Ronin_Iai": {
-		"type": "Melee",
-		"ct": 9.0,
-		"exclusive": [
-			"Ronin"
-		],
-		"max_range": 9999,
-		"min_range": 1000,
-		"power": 65,
-		"element": "Fire"
-	},
-	"EPalWazaID::Unique_SaintCentaur_OneSpearRushes": {
-		"type": "Melee",
-		"ct": 40.0,
-		"exclusive": [
-			"SaintCentaur"
-		],
-		"max_range": 2500,
-		"min_range": 0,
-		"power": 120,
-		"element": "Neutral"
-	},
-	"EPalWazaID::Unique_SakuraSaurus_SideTackle": {
-		"type": "Melee",
-		"ct": 12.0,
-		"exclusive": [
-			"SakuraSaurus",
-			"SakuraSaurus_Water"
-		],
-		"max_range": 400,
-		"min_range": 0,
-		"power": 80,
-		"element": "Neutral"
-	},
-	"EPalWazaID::Unique_ScorpionMan_Uppercut": {
-		"type": "Melee",
-		"ct": 24.0,
-		"exclusive": [
-			"ScorpionMan"
-		],
-		"max_range": 3000,
-		"min_range": 0,
-		"power": 110,
-		"element": "Dark"
-	},
-	"EPalWazaID::Unique_SheepBall_Roll": {
-		"type": "Melee",
-		"ct": 1.0,
-		"exclusive": [
-			"Sheepball"
-		],
-		"max_range": 1000,
-		"min_range": 0,
-		"power": 35,
-		"element": "Neutral"
-	},
-	"EPalWazaID::Unique_SifuDog_Counter": {
-		"type": "Melee",
-		"ct": 30.0,
-		"exclusive": [
-			"SifuDog"
-		],
-		"max_range": 9999,
-		"min_range": 0,
-		"power": 170,
-		"element": "Neutral"
-	},
-	"EPalWazaID::Unique_ThunderDragonMan_NumerousSwordAttack": {
-		"type": "Shot",
-		"ct": 50.0,
-		"max_range": 9999,
-		"min_range": 0,
-		"power": 180,
-		"element": "Electric",
-		"exclusive": [
-			"ThunderDragonMan",
-			"GYM_ThunderDragonMan"
-		]
-	},
-	"EPalWazaID::Unique_ThunderDragonMan_ThunderSwordAttack": {
-		"type": "Shot",
-		"ct": 30.0,
-		"exclusive": [
-			"ThunderDragonMan",
-			"GYM_ThunderDragonMan"
-		],
-		"max_range": 9999,
-		"min_range": 0,
-		"power": 100,
-		"element": "Electric"
-	},
-	"EPalWazaID::Unique_VolcanicMonster_Ice_IceAttack": {
-		"type": "Shot",
-		"ct": 45.0,
-		"exclusive": [
-			"VolcanicMonster_Ice"
-		],
-		"max_range": 9999,
-		"min_range": 0,
-		"power": 100,
-		"element": "Ice"
-	},
-	"EPalWazaID::Unique_VolcanicMonster_MagmaAttack": {
-		"type": "Shot",
-		"ct": 45.0,
-		"exclusive": [
-			"VolcanicMonster"
-		],
-		"max_range": 9999,
-		"min_range": 0,
-		"power": 100,
-		"element": "Fire"
-	},
-	"EPalWazaID::Unique_WeaselDragon_FlyingTackle": {
-		"type": "Melee",
-		"ct": 6.0,
-		"exclusive": [
-			"WeaselDragon",
-			"WeaselDragon_Fire"
-		],
-		"max_range": 1500,
-		"min_range": 300,
-		"power": 50,
-		"element": "Dragon"
-	},
-	"EPalWazaID::Unique_Werewolf_Scratch": {
-		"type": "Melee",
-		"ct": 7.0,
-		"exclusive": [
-			"Werewolf"
-		],
-		"max_range": 500,
-		"min_range": 400,
-		"power": 55,
-		"element": "Dark"
-	},
-	"EPalWazaID::Unique_WingGolem_RoundCutter": {
-		"type": "Shot",
-		"ct": 35.0,
-		"exclusive": [
-			"WingGolem"
-		],
-		"max_range": 3500,
-		"min_range": 0,
-		"power": 145,
-		"element": "Ground"
-	},
-	"EPalWazaID::WallSplash": {
-		"type": "Shot",
-		"ct": 40.0,
-		"max_range": 9999,
-		"min_range": 0,
-		"power": 120,
-		"element": "Water"
-	},
-	"EPalWazaID::WaterBall": {
-		"type": "Shot",
-		"ct": 30.0,
-		"max_range": 9999,
-		"min_range": 1000,
-		"power": 100,
-		"element": "Water"
-	},
-	"EPalWazaID::WaterGun": {
-		"type": "Shot",
-		"ct": 4.0,
-		"max_range": 5000,
-		"min_range": 500,
-		"power": 40,
-		"element": "Water"
-	},
-	"EPalWazaID::WindCutter": {
-		"type": "Shot",
-		"ct": 2.0,
-		"max_range": 5000,
-		"min_range": 500,
-		"power": 30,
-		"element": "Grass"
-	},
-	"EPalWazaID::WindEdge": {
-		"type": "Shot",
-		"ct": 22.0,
-		"max_range": 5000,
-		"min_range": 500,
-		"power": 90,
-		"element": "Grass"
-	}
+  "EPalWazaID::AcidRain": {
+    "element": "Water",
+    "type": "Shot",
+    "power": 80,
+    "min_range": 100,
+    "max_range": 1000,
+    "cool_time": 18.0,
+    "effects": [
+      {
+        "type": "Wetness",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::AirBlade": {
+    "element": "Normal",
+    "type": "Shot",
+    "power": 85,
+    "min_range": 0,
+    "max_range": 5000,
+    "cool_time": 20.0,
+    "effects": []
+  },
+  "EPalWazaID::AirCanon": {
+    "element": "Normal",
+    "type": "Shot",
+    "power": 25,
+    "min_range": 500,
+    "max_range": 4000,
+    "cool_time": 2.0,
+    "effects": []
+  },
+  "EPalWazaID::Apocalypse": {
+    "element": "Dark",
+    "type": "Shot",
+    "power": 110,
+    "min_range": 100,
+    "max_range": 9999,
+    "cool_time": 55.0,
+    "effects": [
+      {
+        "type": "Darkness",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::AquaJet": {
+    "element": "Water",
+    "type": "Shot",
+    "power": 30,
+    "min_range": 500,
+    "max_range": 5000,
+    "cool_time": 2.0,
+    "effects": [
+      {
+        "type": "Wetness",
+        "value": 35,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::BeamSlicer": {
+    "element": "Dragon",
+    "type": "Shot",
+    "power": 130,
+    "min_range": 0,
+    "max_range": 4000,
+    "cool_time": 45.0,
+    "effects": [
+      {
+        "type": "Burn",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::BlastCanon": {
+    "element": "Dragon",
+    "type": "Shot",
+    "power": 100,
+    "min_range": 0,
+    "max_range": 6000,
+    "cool_time": 30.0,
+    "effects": [
+      {
+        "type": "Burn",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::BlizzardLance": {
+    "element": "Ice",
+    "type": "Shot",
+    "power": 70,
+    "min_range": 100,
+    "max_range": 9999,
+    "cool_time": 15.0,
+    "effects": [
+      {
+        "type": "Freeze",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::BubbleShot": {
+    "element": "Water",
+    "type": "Shot",
+    "power": 65,
+    "min_range": 1000,
+    "max_range": 3500,
+    "cool_time": 13.0,
+    "effects": [
+      {
+        "type": "Wetness",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::BubbleShower": {
+    "element": "Dark",
+    "type": "Shot",
+    "power": 90,
+    "min_range": 0,
+    "max_range": 1000,
+    "cool_time": 22.0,
+    "effects": [
+      {
+        "type": "Poison",
+        "value": 500,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::ChaosLaser": {
+    "element": "Dark",
+    "type": "Shot",
+    "power": 300,
+    "min_range": 500,
+    "max_range": 3000,
+    "cool_time": 60.0,
+    "effects": [
+      {
+        "type": "Darkness",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::ChargeCanon": {
+    "element": "Dragon",
+    "type": "Shot",
+    "power": 140,
+    "min_range": 0,
+    "max_range": 4000,
+    "cool_time": 50.0,
+    "effects": [
+      {
+        "type": "Burn",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Commet": {
+    "element": "Dragon",
+    "type": "Shot",
+    "power": 110,
+    "min_range": 0,
+    "max_range": 9999,
+    "cool_time": 35.0,
+    "effects": [
+      {
+        "type": "Burn",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::CommetRain": {
+    "element": "Dragon",
+    "type": "Shot",
+    "power": 160,
+    "min_range": 0,
+    "max_range": 9999,
+    "cool_time": 55.0,
+    "effects": [
+      {
+        "type": "Burn",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::CrossThunder": {
+    "element": "Electricity",
+    "type": "Shot",
+    "power": 1,
+    "min_range": 500,
+    "max_range": 1000,
+    "cool_time": 7.0,
+    "effects": []
+  },
+  "EPalWazaID::DarkArrow": {
+    "element": "Dark",
+    "type": "Shot",
+    "power": 65,
+    "min_range": 500,
+    "max_range": 5000,
+    "cool_time": 10.0,
+    "effects": [
+      {
+        "type": "Darkness",
+        "value": 103,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::DarkBall": {
+    "element": "Dark",
+    "type": "Shot",
+    "power": 40,
+    "min_range": 500,
+    "max_range": 1000,
+    "cool_time": 4.0,
+    "effects": [
+      {
+        "type": "Darkness",
+        "value": 35,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::DarkCanon": {
+    "element": "Dark",
+    "type": "Shot",
+    "power": 50,
+    "min_range": 500,
+    "max_range": 5000,
+    "cool_time": 2.0,
+    "effects": [
+      {
+        "type": "Darkness",
+        "value": 20,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::DarkLaser": {
+    "element": "Dark",
+    "type": "Shot",
+    "power": 150,
+    "min_range": 500,
+    "max_range": 1800,
+    "cool_time": 55.0,
+    "effects": [
+      {
+        "type": "Darkness",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::DarkLegion": {
+    "element": "Dark",
+    "type": "Shot",
+    "power": 160,
+    "min_range": 0,
+    "max_range": 1500,
+    "cool_time": 45.0,
+    "effects": [
+      {
+        "type": "Darkness",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::DarkPulse": {
+    "element": "Dark",
+    "type": "Shot",
+    "power": 40,
+    "min_range": 500,
+    "max_range": 5000,
+    "cool_time": 2.0,
+    "effects": [
+      {
+        "type": "Darkness",
+        "value": 20,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::DarkWave": {
+    "element": "Dark",
+    "type": "Shot",
+    "power": 55,
+    "min_range": 0,
+    "max_range": 300,
+    "cool_time": 10.0,
+    "effects": [
+      {
+        "type": "Darkness",
+        "value": 50,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::DiamondFall": {
+    "element": "Ice",
+    "type": "Shot",
+    "power": 160,
+    "min_range": 0,
+    "max_range": 9999,
+    "cool_time": 60.0,
+    "effects": [
+      {
+        "type": "Freeze",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::DoubleIcicleThrow": {
+    "element": "Ice",
+    "type": "Shot",
+    "power": 200,
+    "min_range": 1000,
+    "max_range": 9999,
+    "cool_time": 60.0,
+    "effects": [
+      {
+        "type": "Freeze",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::DragonBreath": {
+    "element": "Dragon",
+    "type": "Shot",
+    "power": 70,
+    "min_range": 500,
+    "max_range": 1500,
+    "cool_time": 15.0,
+    "effects": [
+      {
+        "type": "Burn",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::DragonCanon": {
+    "element": "Dragon",
+    "type": "Shot",
+    "power": 30,
+    "min_range": 500,
+    "max_range": 4000,
+    "cool_time": 2.0,
+    "effects": [
+      {
+        "type": "Burn",
+        "value": 35,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::DragonMeteor": {
+    "element": "Dragon",
+    "type": "Shot",
+    "power": 150,
+    "min_range": 500,
+    "max_range": 5000,
+    "cool_time": 55.0,
+    "effects": [
+      {
+        "type": "Burn",
+        "value": 45,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::DragonWave": {
+    "element": "Dragon",
+    "type": "Shot",
+    "power": 55,
+    "min_range": 0,
+    "max_range": 200,
+    "cool_time": 10.0,
+    "effects": [
+      {
+        "type": "Burn",
+        "value": 50,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::ElecWave": {
+    "element": "Electricity",
+    "type": "Shot",
+    "power": 40,
+    "min_range": 0,
+    "max_range": 300,
+    "cool_time": 4.0,
+    "effects": [
+      {
+        "type": "Electrical",
+        "value": 103,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Eruption": {
+    "element": "Fire",
+    "type": "Shot",
+    "power": 130,
+    "min_range": 0,
+    "max_range": 2000,
+    "cool_time": 45.0,
+    "effects": [
+      {
+        "type": "Burn",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::FireBall": {
+    "element": "Fire",
+    "type": "Shot",
+    "power": 150,
+    "min_range": 500,
+    "max_range": 9999,
+    "cool_time": 55.0,
+    "effects": [
+      {
+        "type": "Burn",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::FireBlast": {
+    "element": "Fire",
+    "type": "Shot",
+    "power": 30,
+    "min_range": 500,
+    "max_range": 5000,
+    "cool_time": 2.0,
+    "effects": [
+      {
+        "type": "Burn",
+        "value": 50,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::FireSeed": {
+    "element": "Fire",
+    "type": "Shot",
+    "power": 45,
+    "min_range": 1000,
+    "max_range": 3000,
+    "cool_time": 7.0,
+    "effects": [
+      {
+        "type": "Burn",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::FlameFunnel": {
+    "element": "Fire",
+    "type": "Shot",
+    "power": 120,
+    "min_range": 0,
+    "max_range": 5000,
+    "cool_time": 40.0,
+    "effects": [
+      {
+        "type": "Burn",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::FlameWall": {
+    "element": "Fire",
+    "type": "Shot",
+    "power": 100,
+    "min_range": 0,
+    "max_range": 5000,
+    "cool_time": 30.0,
+    "effects": [
+      {
+        "type": "Burn",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Flamethrower": {
+    "element": "Fire",
+    "type": "Shot",
+    "power": 70,
+    "min_range": 500,
+    "max_range": 1500,
+    "cool_time": 15.0,
+    "effects": [
+      {
+        "type": "Burn",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::FlareArrow": {
+    "element": "Fire",
+    "type": "Shot",
+    "power": 55,
+    "min_range": 500,
+    "max_range": 5000,
+    "cool_time": 10.0,
+    "effects": [
+      {
+        "type": "Burn",
+        "value": 103,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::FlareTornado": {
+    "element": "Fire",
+    "type": "Shot",
+    "power": 80,
+    "min_range": 700,
+    "max_range": 3000,
+    "cool_time": 18.0,
+    "effects": [
+      {
+        "type": "Burn",
+        "value": 65,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::FlareTwister": {
+    "element": "Fire",
+    "type": "Shot",
+    "power": 130,
+    "min_range": 0,
+    "max_range": 9999,
+    "cool_time": 45.0,
+    "effects": [
+      {
+        "type": "Burn",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::FrostBreath": {
+    "element": "Ice",
+    "type": "Shot",
+    "power": 90,
+    "min_range": 100,
+    "max_range": 1000,
+    "cool_time": 22.0,
+    "effects": [
+      {
+        "type": "Freeze",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::GhostFlame": {
+    "element": "Dark",
+    "type": "Shot",
+    "power": 75,
+    "min_range": 500,
+    "max_range": 5000,
+    "cool_time": 16.0,
+    "effects": [
+      {
+        "type": "Burn",
+        "value": 102,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::GrassTornado": {
+    "element": "Leaf",
+    "type": "Shot",
+    "power": 80,
+    "min_range": 700,
+    "max_range": 3000,
+    "cool_time": 18.0,
+    "effects": [
+      {
+        "type": "IvyCling",
+        "value": 65,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::HolyBlast": {
+    "element": "Normal",
+    "type": "Shot",
+    "power": 120,
+    "min_range": 0,
+    "max_range": 9999,
+    "cool_time": 30.0,
+    "effects": []
+  },
+  "EPalWazaID::Human_Punch": {
+    "element": "Normal",
+    "type": "Melee",
+    "power": 12,
+    "min_range": 500,
+    "max_range": 600,
+    "cool_time": 1.0,
+    "effects": []
+  },
+  "EPalWazaID::HydroPump": {
+    "element": "Water",
+    "type": "Shot",
+    "power": 150,
+    "min_range": 500,
+    "max_range": 1800,
+    "cool_time": 55.0,
+    "effects": [
+      {
+        "type": "Wetness",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::HyperBeam": {
+    "element": "Normal",
+    "type": "Shot",
+    "power": 150,
+    "min_range": 500,
+    "max_range": 1800,
+    "cool_time": 55.0,
+    "effects": []
+  },
+  "EPalWazaID::IceAge": {
+    "element": "Ice",
+    "type": "Shot",
+    "power": 140,
+    "min_range": 100,
+    "max_range": 3000,
+    "cool_time": 50.0,
+    "effects": [
+      {
+        "type": "Freeze",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::IceBlade": {
+    "element": "Ice",
+    "type": "Shot",
+    "power": 55,
+    "min_range": 500,
+    "max_range": 4000,
+    "cool_time": 10.0,
+    "effects": [
+      {
+        "type": "Freeze",
+        "value": 50,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::IceMissile": {
+    "element": "Ice",
+    "type": "Shot",
+    "power": 30,
+    "min_range": 800,
+    "max_range": 3000,
+    "cool_time": 3.0,
+    "effects": [
+      {
+        "type": "Freeze",
+        "value": 103,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::IcicleLine": {
+    "element": "Ice",
+    "type": "Shot",
+    "power": 120,
+    "min_range": 0,
+    "max_range": 2500,
+    "cool_time": 40.0,
+    "effects": [
+      {
+        "type": "Freeze",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::IciclePierce": {
+    "element": "Ice",
+    "type": "Shot",
+    "power": 110,
+    "min_range": 100,
+    "max_range": 3000,
+    "cool_time": 35.0,
+    "effects": [
+      {
+        "type": "Freeze",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::IcicleThrow": {
+    "element": "Ice",
+    "type": "Shot",
+    "power": 130,
+    "min_range": 1000,
+    "max_range": 9999,
+    "cool_time": 45.0,
+    "effects": [
+      {
+        "type": "Freeze",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Inferno": {
+    "element": "Fire",
+    "type": "Shot",
+    "power": 120,
+    "min_range": 100,
+    "max_range": 1000,
+    "cool_time": 40.0,
+    "effects": [
+      {
+        "type": "Burn",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::LightningStrike": {
+    "element": "Electricity",
+    "type": "Shot",
+    "power": 120,
+    "min_range": 0,
+    "max_range": 500,
+    "cool_time": 40.0,
+    "effects": [
+      {
+        "type": "Electrical",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::LineGeyser": {
+    "element": "Water",
+    "type": "Shot",
+    "power": 90,
+    "min_range": 0,
+    "max_range": 9999,
+    "cool_time": 22.0,
+    "effects": [
+      {
+        "type": "Wetness",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::LineThunder": {
+    "element": "Electricity",
+    "type": "Shot",
+    "power": 75,
+    "min_range": 500,
+    "max_range": 2000,
+    "cool_time": 16.0,
+    "effects": [
+      {
+        "type": "Electrical",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::LockonLaser": {
+    "element": "Electricity",
+    "type": "Shot",
+    "power": 70,
+    "min_range": 0,
+    "max_range": 5000,
+    "cool_time": 15.0,
+    "effects": [
+      {
+        "type": "Electrical",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::MudShot": {
+    "element": "Earth",
+    "type": "Shot",
+    "power": 40,
+    "min_range": 500,
+    "max_range": 3000,
+    "cool_time": 4.0,
+    "effects": [
+      {
+        "type": "Muddy",
+        "value": 50,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::PoisonFog": {
+    "element": "Dark",
+    "type": "Shot",
+    "power": 0,
+    "min_range": 0,
+    "max_range": 200,
+    "cool_time": 30.0,
+    "effects": [
+      {
+        "type": "Poison",
+        "value": 9999,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::PoisonShot": {
+    "element": "Dark",
+    "type": "Shot",
+    "power": 30,
+    "min_range": 500,
+    "max_range": 3000,
+    "cool_time": 2.0,
+    "effects": [
+      {
+        "type": "Poison",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::PowerBall": {
+    "element": "Normal",
+    "type": "Shot",
+    "power": 70,
+    "min_range": 1000,
+    "max_range": 9999,
+    "cool_time": 15.0,
+    "effects": []
+  },
+  "EPalWazaID::PowerShot": {
+    "element": "Normal",
+    "type": "Shot",
+    "power": 35,
+    "min_range": 600,
+    "max_range": 3000,
+    "cool_time": 4.0,
+    "effects": []
+  },
+  "EPalWazaID::PredatorBeam": {
+    "element": "Normal",
+    "type": "Shot",
+    "power": 200,
+    "min_range": 0,
+    "max_range": 3000,
+    "cool_time": 20.0,
+    "effects": []
+  },
+  "EPalWazaID::PredatorLockon": {
+    "element": "Normal",
+    "type": "Shot",
+    "power": 180,
+    "min_range": 0,
+    "max_range": 5000,
+    "cool_time": 20.0,
+    "effects": []
+  },
+  "EPalWazaID::PredatorWave": {
+    "element": "Normal",
+    "type": "Shot",
+    "power": 100,
+    "min_range": 0,
+    "max_range": 1000,
+    "cool_time": 20.0,
+    "effects": []
+  },
+  "EPalWazaID::Psychokinesis": {
+    "element": "Dark",
+    "type": "Shot",
+    "power": 110,
+    "min_range": 0,
+    "max_range": 1500,
+    "cool_time": 35.0,
+    "effects": []
+  },
+  "EPalWazaID::RaidCutter": {
+    "element": "Leaf",
+    "type": "Shot",
+    "power": 110,
+    "min_range": 500,
+    "max_range": 5000,
+    "cool_time": 35.0,
+    "effects": [
+      {
+        "type": "IvyCling",
+        "value": 35,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Railbolt": {
+    "element": "Electricity",
+    "type": "Shot",
+    "power": 200,
+    "min_range": 500,
+    "max_range": 3000,
+    "cool_time": 60.0,
+    "effects": [
+      {
+        "type": "Electrical",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::RangeThunder": {
+    "element": "Electricity",
+    "type": "Shot",
+    "power": 125,
+    "min_range": 0,
+    "max_range": 2000,
+    "cool_time": 40.0,
+    "effects": [
+      {
+        "type": "Electrical",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::RockBeat": {
+    "element": "Earth",
+    "type": "Melee",
+    "power": 170,
+    "min_range": 0,
+    "max_range": 5000,
+    "cool_time": 60.0,
+    "effects": [
+      {
+        "type": "Muddy",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::RockLance": {
+    "element": "Earth",
+    "type": "Shot",
+    "power": 150,
+    "min_range": 100,
+    "max_range": 9999,
+    "cool_time": 55.0,
+    "effects": [
+      {
+        "type": "Muddy",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::RootAttack": {
+    "element": "Leaf",
+    "type": "Shot",
+    "power": 95,
+    "min_range": 500,
+    "max_range": 9999,
+    "cool_time": 25.0,
+    "effects": [
+      {
+        "type": "IvyCling",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::RootLance": {
+    "element": "Leaf",
+    "type": "Shot",
+    "power": 120,
+    "min_range": 0,
+    "max_range": 9999,
+    "cool_time": 40.0,
+    "effects": [
+      {
+        "type": "IvyCling",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::SandTornado": {
+    "element": "Earth",
+    "type": "Shot",
+    "power": 80,
+    "min_range": 100,
+    "max_range": 3000,
+    "cool_time": 18.0,
+    "effects": [
+      {
+        "type": "Muddy",
+        "value": 65,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::SandTwister": {
+    "element": "Earth",
+    "type": "Shot",
+    "power": 160,
+    "min_range": 0,
+    "max_range": 9999,
+    "cool_time": 60.0,
+    "effects": [
+      {
+        "type": "Muddy",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::SeedMachinegun": {
+    "element": "Leaf",
+    "type": "Shot",
+    "power": 50,
+    "min_range": 0,
+    "max_range": 300,
+    "cool_time": 9.0,
+    "effects": [
+      {
+        "type": "IvyCling",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::SeedMine": {
+    "element": "Leaf",
+    "type": "Shot",
+    "power": 65,
+    "min_range": 800,
+    "max_range": 9999,
+    "cool_time": 13.0,
+    "effects": [
+      {
+        "type": "IvyCling",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::SelfDestruct": {
+    "element": "Normal",
+    "type": "Shot",
+    "power": 230,
+    "min_range": 0,
+    "max_range": 1000,
+    "cool_time": 55.0,
+    "effects": [
+      {
+        "type": "Burn",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::SelfDestruct_Bee": {
+    "element": "Leaf",
+    "type": "Shot",
+    "power": 250,
+    "min_range": 0,
+    "max_range": 1000,
+    "cool_time": 55.0,
+    "effects": [
+      {
+        "type": "Burn",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::SelfExplosion": {
+    "element": "Normal",
+    "type": "Shot",
+    "power": 500,
+    "min_range": 0,
+    "max_range": 1000,
+    "cool_time": 55.0,
+    "effects": [
+      {
+        "type": "Burn",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::ShadowBall": {
+    "element": "Dark",
+    "type": "Shot",
+    "power": 100,
+    "min_range": 1000,
+    "max_range": 9999,
+    "cool_time": 30.0,
+    "effects": [
+      {
+        "type": "Darkness",
+        "value": 65,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::ShokeiLaser": {
+    "element": "Electricity",
+    "type": "Shot",
+    "power": 170,
+    "min_range": 0,
+    "max_range": 5000,
+    "cool_time": 50.0,
+    "effects": [
+      {
+        "type": "Electrical",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::SolarBeam": {
+    "element": "Leaf",
+    "type": "Shot",
+    "power": 150,
+    "min_range": 500,
+    "max_range": 1800,
+    "cool_time": 55.0,
+    "effects": [
+      {
+        "type": "IvyCling",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::SpecialCutter": {
+    "element": "Leaf",
+    "type": "Shot",
+    "power": 60,
+    "min_range": 500,
+    "max_range": 5000,
+    "cool_time": 12.0,
+    "effects": [
+      {
+        "type": "IvyCling",
+        "value": 35,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::SpreadPulse": {
+    "element": "Electricity",
+    "type": "Shot",
+    "power": 30,
+    "min_range": 500,
+    "max_range": 5000,
+    "cool_time": 2.0,
+    "effects": [
+      {
+        "type": "Electrical",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::StarMine": {
+    "element": "Normal",
+    "type": "Shot",
+    "power": 110,
+    "min_range": 0,
+    "max_range": 9999,
+    "cool_time": 55.0,
+    "effects": []
+  },
+  "EPalWazaID::StoneShotgun": {
+    "element": "Earth",
+    "type": "Shot",
+    "power": 55,
+    "min_range": 500,
+    "max_range": 4000,
+    "cool_time": 10.0,
+    "effects": [
+      {
+        "type": "Muddy",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::ThreeCommet": {
+    "element": "Dragon",
+    "type": "Shot",
+    "power": 120,
+    "min_range": 0,
+    "max_range": 9999,
+    "cool_time": 40.0,
+    "effects": [
+      {
+        "type": "Burn",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::ThreeThunder": {
+    "element": "Electricity",
+    "type": "Shot",
+    "power": 90,
+    "min_range": 0,
+    "max_range": 9999,
+    "cool_time": 22.0,
+    "effects": [
+      {
+        "type": "Electrical",
+        "value": 103,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::ThrowRock": {
+    "element": "Earth",
+    "type": "Shot",
+    "power": 70,
+    "min_range": 500,
+    "max_range": 2500,
+    "cool_time": 15.0,
+    "effects": [
+      {
+        "type": "Muddy",
+        "value": 35,
+        "value_ex": 0.0
+      },
+      {
+        "type": "Stun",
+        "value": 20,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::ThunderBall": {
+    "element": "Electricity",
+    "type": "Shot",
+    "power": 50,
+    "min_range": 500,
+    "max_range": 2500,
+    "cool_time": 9.0,
+    "effects": [
+      {
+        "type": "Electrical",
+        "value": 50,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::ThunderFunnel": {
+    "element": "Electricity",
+    "type": "Shot",
+    "power": 65,
+    "min_range": 500,
+    "max_range": 9999,
+    "cool_time": 13.0,
+    "effects": [
+      {
+        "type": "Electrical",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::ThunderRain": {
+    "element": "Electricity",
+    "type": "Shot",
+    "power": 135,
+    "min_range": 0,
+    "max_range": 2000,
+    "cool_time": 45.0,
+    "effects": [
+      {
+        "type": "Electrical",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::ThunderStorm": {
+    "element": "Electricity",
+    "type": "Shot",
+    "power": 160,
+    "min_range": 0,
+    "max_range": 5000,
+    "cool_time": 60.0,
+    "effects": []
+  },
+  "EPalWazaID::Thunderbolt": {
+    "element": "Electricity",
+    "type": "Shot",
+    "power": 150,
+    "min_range": 500,
+    "max_range": 3000,
+    "cool_time": 55.0,
+    "effects": [
+      {
+        "type": "Electrical",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Tremor": {
+    "element": "Earth",
+    "type": "Shot",
+    "power": 130,
+    "min_range": 0,
+    "max_range": 1200,
+    "cool_time": 35.0,
+    "effects": [
+      {
+        "type": "Muddy",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::TriSpark": {
+    "element": "Electricity",
+    "type": "Shot",
+    "power": 110,
+    "min_range": 300,
+    "max_range": 3000,
+    "cool_time": 35.0,
+    "effects": [
+      {
+        "type": "Electrical",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::TripleCannon": {
+    "element": "Dragon",
+    "type": "Shot",
+    "power": 120,
+    "min_range": 500,
+    "max_range": 4000,
+    "cool_time": 40.0,
+    "effects": [
+      {
+        "type": "Burn",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_Alpaca_Tackle": {
+    "element": "Normal",
+    "type": "Melee",
+    "power": 40,
+    "min_range": 300,
+    "max_range": 1500,
+    "cool_time": 4.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_AmaterasuWolf_Dark_DarkCharge": {
+    "element": "Dark",
+    "type": "Melee",
+    "power": 75,
+    "min_range": 1000,
+    "max_range": 3500,
+    "cool_time": 10.0,
+    "effects": [
+      {
+        "type": "Darkness",
+        "value": 50,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_AmaterasuWolf_FireCharge": {
+    "element": "Fire",
+    "type": "Melee",
+    "power": 75,
+    "min_range": 1000,
+    "max_range": 3500,
+    "cool_time": 10.0,
+    "effects": [
+      {
+        "type": "Burn",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_Anubis_GroundPunch": {
+    "element": "Earth",
+    "type": "Melee",
+    "power": 140,
+    "min_range": 0,
+    "max_range": 5000,
+    "cool_time": 35.0,
+    "effects": [
+      {
+        "type": "Muddy",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_Anubis_LowRoundKick": {
+    "element": "Earth",
+    "type": "Melee",
+    "power": 100,
+    "min_range": 0,
+    "max_range": 300,
+    "cool_time": 21.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_Anubis_Tackle": {
+    "element": "Earth",
+    "type": "Melee",
+    "power": 120,
+    "min_range": 1500,
+    "max_range": 5000,
+    "cool_time": 28.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_Baphomet_SwallowKite": {
+    "element": "Fire",
+    "type": "Melee",
+    "power": 70,
+    "min_range": 1100,
+    "max_range": 1200,
+    "cool_time": 10.0,
+    "effects": [
+      {
+        "type": "Burn",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_BirdDragon_FireBreath": {
+    "element": "Fire",
+    "type": "Shot",
+    "power": 90,
+    "min_range": 0,
+    "max_range": 1000,
+    "cool_time": 15.0,
+    "effects": [
+      {
+        "type": "Burn",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_BirdDragon_Ice_IceBreath": {
+    "element": "Ice",
+    "type": "Shot",
+    "power": 90,
+    "min_range": 0,
+    "max_range": 1000,
+    "cool_time": 15.0,
+    "effects": [
+      {
+        "type": "Freeze",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_BlackCentaur_TwoSpearRushes": {
+    "element": "Dark",
+    "type": "Melee",
+    "power": 120,
+    "min_range": 0,
+    "max_range": 1000,
+    "cool_time": 40.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_BlackGriffon_TackleLaser": {
+    "element": "Dark",
+    "type": "Shot",
+    "power": 160,
+    "min_range": 0,
+    "max_range": 2500,
+    "cool_time": 45.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_BlackGriffon_TackleLaser2": {
+    "element": "Dark",
+    "type": "Shot",
+    "power": 170,
+    "min_range": 0,
+    "max_range": 2500,
+    "cool_time": 45.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_BlackMetalDragon_FirePunch": {
+    "element": "Dragon",
+    "type": "Shot",
+    "power": 130,
+    "min_range": 0,
+    "max_range": 1000,
+    "cool_time": 30.0,
+    "effects": [
+      {
+        "type": "Burn",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_BluePlatypus_Toboggan": {
+    "element": "Water",
+    "type": "Melee",
+    "power": 100,
+    "min_range": 0,
+    "max_range": 500,
+    "cool_time": 120.0,
+    "effects": [
+      {
+        "type": "Wetness",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_BlueThunderHorse_FlashDash": {
+    "element": "Electricity",
+    "type": "Melee",
+    "power": 200,
+    "min_range": 0,
+    "max_range": 5000,
+    "cool_time": 45.0,
+    "effects": [
+      {
+        "type": "Electrical",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_Boar_Tackle": {
+    "element": "Normal",
+    "type": "Melee",
+    "power": 55,
+    "min_range": 300,
+    "max_range": 2500,
+    "cool_time": 2.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_CaptainPenguin_BodySlide": {
+    "element": "Ice",
+    "type": "Shot",
+    "power": 70,
+    "min_range": 500,
+    "max_range": 3000,
+    "cool_time": 10.0,
+    "effects": [
+      {
+        "type": "Freeze",
+        "value": 50,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_ChickenPal_ChickenPeck": {
+    "element": "Normal",
+    "type": "Melee",
+    "power": 30,
+    "min_range": 0,
+    "max_range": 500,
+    "cool_time": 1.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_DarkAlien_JumpScractch": {
+    "element": "Dark",
+    "type": "Shot",
+    "power": 95,
+    "min_range": 500,
+    "max_range": 3000,
+    "cool_time": 17.0,
+    "effects": [
+      {
+        "type": "Darkness",
+        "value": 30,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_DarkCrow_TelePoke": {
+    "element": "Dark",
+    "type": "Melee",
+    "power": 55,
+    "min_range": 0,
+    "max_range": 9999,
+    "cool_time": 7.0,
+    "effects": [
+      {
+        "type": "Darkness",
+        "value": 50,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_DarkMechaDragon_BeamSlash": {
+    "element": "Dragon",
+    "type": "Shot",
+    "power": 120,
+    "min_range": 0,
+    "max_range": 3000,
+    "cool_time": 28.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_DarkMechaDragon_ConvergentBeam": {
+    "element": "Dark",
+    "type": "Shot",
+    "power": 170,
+    "min_range": 0,
+    "max_range": 5000,
+    "cool_time": 45.0,
+    "effects": [
+      {
+        "type": "Burn",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_DarkMechaDragon_FunnelLaser": {
+    "element": "Dragon",
+    "type": "Shot",
+    "power": 200,
+    "min_range": 0,
+    "max_range": 3500,
+    "cool_time": 55.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_DarkMechaDragon_SetFunnel": {
+    "element": "Dragon",
+    "type": "Shot",
+    "power": 80,
+    "min_range": 0,
+    "max_range": 9999,
+    "cool_time": 12.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_DarkMechaDragon_WarpComet": {
+    "element": "Dragon",
+    "type": "Shot",
+    "power": 180,
+    "min_range": 0,
+    "max_range": 9999,
+    "cool_time": 50.0,
+    "effects": [
+      {
+        "type": "Burn",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_DarkScorpion_Pierce": {
+    "element": "Earth",
+    "type": "Melee",
+    "power": 110,
+    "min_range": 0,
+    "max_range": 3000,
+    "cool_time": 24.0,
+    "effects": [
+      {
+        "type": "Poison",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_Deer_PushupHorn": {
+    "element": "Normal",
+    "type": "Melee",
+    "power": 50,
+    "min_range": 550,
+    "max_range": 2000,
+    "cool_time": 5.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_DrillGame_ShellAttack": {
+    "element": "Earth",
+    "type": "Melee",
+    "power": 65,
+    "min_range": 200,
+    "max_range": 1500,
+    "cool_time": 9.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_Eagle_GlidingNail": {
+    "element": "Normal",
+    "type": "Melee",
+    "power": 60,
+    "min_range": 0,
+    "max_range": 1000,
+    "cool_time": 8.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_ElecPanda_ElecScratch": {
+    "element": "Electricity",
+    "type": "Melee",
+    "power": 90,
+    "min_range": 0,
+    "max_range": 700,
+    "cool_time": 22.0,
+    "effects": [
+      {
+        "type": "Electrical",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_ElecPanda_GatlingAttack": {
+    "element": "Electricity",
+    "type": "Shot",
+    "power": 160,
+    "min_range": 300,
+    "max_range": 3000,
+    "cool_time": 42.0,
+    "effects": [
+      {
+        "type": "Electrical",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_FairyDragon_FairyTornado": {
+    "element": "Dragon",
+    "type": "Shot",
+    "power": 70,
+    "min_range": 0,
+    "max_range": 3000,
+    "cool_time": 10.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_FeatherOstrich_Tossin": {
+    "element": "Earth",
+    "type": "Melee",
+    "power": 100,
+    "min_range": 300,
+    "max_range": 3500,
+    "cool_time": 21.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_FengyunDeeper_CloudTempest": {
+    "element": "Normal",
+    "type": "Melee",
+    "power": 90,
+    "min_range": 550,
+    "max_range": 2000,
+    "cool_time": 15.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_FengyunDeeper_Electric_ThunderTempest": {
+    "element": "Electricity",
+    "type": "Melee",
+    "power": 90,
+    "min_range": 550,
+    "max_range": 2000,
+    "cool_time": 15.0,
+    "effects": [
+      {
+        "type": "Electrical",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_FireKirin_Dark_DarkTossin": {
+    "element": "Dark",
+    "type": "Melee",
+    "power": 85,
+    "min_range": 0,
+    "max_range": 2500,
+    "cool_time": 14.0,
+    "effects": [
+      {
+        "type": "Darkness",
+        "value": 50,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_FireKirin_Tackle": {
+    "element": "Fire",
+    "type": "Melee",
+    "power": 85,
+    "min_range": 0,
+    "max_range": 2500,
+    "cool_time": 14.0,
+    "effects": [
+      {
+        "type": "Burn",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_FlameBuffalo_FlameHorn": {
+    "element": "Fire",
+    "type": "Melee",
+    "power": 50,
+    "min_range": 1000,
+    "max_range": 2500,
+    "cool_time": 9.0,
+    "effects": [
+      {
+        "type": "Burn",
+        "value": 50,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_FlowerDinosaur_Whip": {
+    "element": "Leaf",
+    "type": "Shot",
+    "power": 60,
+    "min_range": 0,
+    "max_range": 1500,
+    "cool_time": 8.0,
+    "effects": [
+      {
+        "type": "IvyCling",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_Garm_Bite": {
+    "element": "Normal",
+    "type": "Melee",
+    "power": 45,
+    "min_range": 800,
+    "max_range": 900,
+    "cool_time": 2.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_GhostBeast_Tossin": {
+    "element": "Dark",
+    "type": "Melee",
+    "power": 90,
+    "min_range": 1000,
+    "max_range": 2500,
+    "cool_time": 15.0,
+    "effects": [
+      {
+        "type": "Darkness",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_GoldenHorse_StoneDash": {
+    "element": "Earth",
+    "type": "Melee",
+    "power": 120,
+    "min_range": 500,
+    "max_range": 3000,
+    "cool_time": 28.0,
+    "effects": [
+      {
+        "type": "Muddy",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_Gorilla_GroundPunch": {
+    "element": "Normal",
+    "type": "Melee",
+    "power": 85,
+    "min_range": 0,
+    "max_range": 500,
+    "cool_time": 14.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_GrassPanda_Electric_ElectricPunch": {
+    "element": "Electricity",
+    "type": "Melee",
+    "power": 85,
+    "min_range": 0,
+    "max_range": 700,
+    "cool_time": 14.0,
+    "effects": [
+      {
+        "type": "Electrical",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_GrassPanda_MusclePunch": {
+    "element": "Leaf",
+    "type": "Melee",
+    "power": 85,
+    "min_range": 0,
+    "max_range": 700,
+    "cool_time": 18.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_GrassRabbitMan_GrassRoundKick": {
+    "element": "Leaf",
+    "type": "Melee",
+    "power": 90,
+    "min_range": 0,
+    "max_range": 1200,
+    "cool_time": 15.0,
+    "effects": [
+      {
+        "type": "IvyCling",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_Grassmammoth_Earthquake": {
+    "element": "Earth",
+    "type": "Shot",
+    "power": 100,
+    "min_range": 0,
+    "max_range": 9999,
+    "cool_time": 30.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_GrimGirl_BrutalMachete": {
+    "element": "Dark",
+    "type": "Melee",
+    "power": 130,
+    "min_range": 0,
+    "max_range": 4000,
+    "cool_time": 31.0,
+    "effects": [
+      {
+        "type": "Darkness",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_HawkBird_Storm": {
+    "element": "Normal",
+    "type": "Melee",
+    "power": 65,
+    "min_range": 0,
+    "max_range": 2500,
+    "cool_time": 13.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_HerculesBeetle_BeetleTackle": {
+    "element": "Earth",
+    "type": "Melee",
+    "power": 75,
+    "min_range": 0,
+    "max_range": 2500,
+    "cool_time": 11.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_Horus_FlareBird": {
+    "element": "Fire",
+    "type": "Melee",
+    "power": 135,
+    "min_range": 500,
+    "max_range": 3000,
+    "cool_time": 28.0,
+    "effects": [
+      {
+        "type": "Burn",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_Horus_PerfectStorm": {
+    "element": "Fire",
+    "type": "Shot",
+    "power": 145,
+    "min_range": 0,
+    "max_range": 3000,
+    "cool_time": 38.0,
+    "effects": [
+      {
+        "type": "Burn",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_Horus_Water_AquaStorm": {
+    "element": "Water",
+    "type": "Melee",
+    "power": 135,
+    "min_range": 500,
+    "max_range": 3000,
+    "cool_time": 28.0,
+    "effects": [
+      {
+        "type": "Wetness",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_IceDeer_IceHorn": {
+    "element": "Ice",
+    "type": "Melee",
+    "power": 65,
+    "min_range": 550,
+    "max_range": 2000,
+    "cool_time": 9.0,
+    "effects": [
+      {
+        "type": "Freeze",
+        "value": 50,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_IceHorse_IceBladeAttack": {
+    "element": "Ice",
+    "type": "Melee",
+    "power": 110,
+    "min_range": 0,
+    "max_range": 2500,
+    "cool_time": 24.0,
+    "effects": [
+      {
+        "type": "Freeze",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_JetDragon_JumpBeam": {
+    "element": "Dragon",
+    "type": "Shot",
+    "power": 140,
+    "min_range": 1000,
+    "max_range": 9999,
+    "cool_time": 50.0,
+    "effects": [
+      {
+        "type": "Burn",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_KingAlpaca_BodyPress": {
+    "element": "Normal",
+    "type": "Melee",
+    "power": 100,
+    "min_range": 0,
+    "max_range": 1000,
+    "cool_time": 21.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_KingBahamut_AirCrash": {
+    "element": "Dragon",
+    "type": "Melee",
+    "power": 160,
+    "min_range": 0,
+    "max_range": 9999,
+    "cool_time": 42.0,
+    "effects": [
+      {
+        "type": "Burn",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_KingBahamut_ArmSmash": {
+    "element": "Fire",
+    "type": "Melee",
+    "power": 150,
+    "min_range": 0,
+    "max_range": 600,
+    "cool_time": 38.0,
+    "effects": [
+      {
+        "type": "Burn",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_Kirin_LightningTackle": {
+    "element": "Electricity",
+    "type": "Melee",
+    "power": 60,
+    "min_range": 500,
+    "max_range": 1200,
+    "cool_time": 8.0,
+    "effects": [
+      {
+        "type": "Electrical",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_LilyQueen_LilyHealing": {
+    "element": "Leaf",
+    "type": "Shot",
+    "power": 0,
+    "min_range": 0,
+    "max_range": 9999,
+    "cool_time": 240.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_LilyQueen_WindBarrier": {
+    "element": "Leaf",
+    "type": "Shot",
+    "power": 60,
+    "min_range": 0,
+    "max_range": 9999,
+    "cool_time": 60.0,
+    "effects": [
+      {
+        "type": "IvyCling",
+        "value": 35,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_Manticore_InfernoStrike": {
+    "element": "Fire",
+    "type": "Melee",
+    "power": 125,
+    "min_range": 1500,
+    "max_range": 4000,
+    "cool_time": 30.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_MoonQueen_IceMoonBlade": {
+    "element": "Normal",
+    "type": "Shot",
+    "power": 110,
+    "min_range": 300,
+    "max_range": 3000,
+    "cool_time": 24.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_MoonQueen_MoonBeam": {
+    "element": "Normal",
+    "type": "Shot",
+    "power": 170,
+    "min_range": 300,
+    "max_range": 3000,
+    "cool_time": 40.0,
+    "effects": [
+      {
+        "type": "Burn",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_MoonQueen_MoonBlade": {
+    "element": "Normal",
+    "type": "Shot",
+    "power": 110,
+    "min_range": 300,
+    "max_range": 3000,
+    "cool_time": 24.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_MysteryMask_LifeSteal": {
+    "element": "Dark",
+    "type": "Melee",
+    "power": 100,
+    "min_range": 0,
+    "max_range": 5000,
+    "cool_time": 30.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_NaughtyCat_CatPress": {
+    "element": "Normal",
+    "type": "Melee",
+    "power": 60,
+    "min_range": 0,
+    "max_range": 1500,
+    "cool_time": 9.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_NightBlueHorse_DeathStep": {
+    "element": "Dark",
+    "type": "Melee",
+    "power": 140,
+    "min_range": 1200,
+    "max_range": 3000,
+    "cool_time": 35.0,
+    "effects": [
+      {
+        "type": "Darkness",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_NightLady_FlameNightmare": {
+    "element": "Dark",
+    "type": "Shot",
+    "power": 130,
+    "min_range": 0,
+    "max_range": 3000,
+    "cool_time": 45.0,
+    "effects": [
+      {
+        "type": "Burn",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_NightLady_WarpBeam": {
+    "element": "Dark",
+    "type": "Shot",
+    "power": 160,
+    "min_range": 0,
+    "max_range": 9999,
+    "cool_time": 50.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_NightLady_WarpBeam_Straight": {
+    "element": "Dark",
+    "type": "Shot",
+    "power": 140,
+    "min_range": 0,
+    "max_range": 9999,
+    "cool_time": 50.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_PinkCat_CatPunch": {
+    "element": "Normal",
+    "type": "Melee",
+    "power": 40,
+    "min_range": 0,
+    "max_range": 500,
+    "cool_time": 1.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_PurpleSpider_SpiderRaid": {
+    "element": "Dark",
+    "type": "Melee",
+    "power": 85,
+    "min_range": 0,
+    "max_range": 1500,
+    "cool_time": 14.0,
+    "effects": [
+      {
+        "type": "Poison",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_QueenBee_SpinLance": {
+    "element": "Leaf",
+    "type": "Shot",
+    "power": 70,
+    "min_range": 0,
+    "max_range": 600,
+    "cool_time": 9.0,
+    "effects": [
+      {
+        "type": "IvyCling",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_RedArmorBird_TriplePeck": {
+    "element": "Fire",
+    "type": "Melee",
+    "power": 85,
+    "min_range": 0,
+    "max_range": 550,
+    "cool_time": 14.0,
+    "effects": [
+      {
+        "type": "Burn",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_RobinHood_BowSnipe": {
+    "element": "Leaf",
+    "type": "Shot",
+    "power": 65,
+    "min_range": 1000,
+    "max_range": 5000,
+    "cool_time": 9.0,
+    "effects": [
+      {
+        "type": "IvyCling",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_Ronin_Iai": {
+    "element": "Fire",
+    "type": "Melee",
+    "power": 65,
+    "min_range": 1000,
+    "max_range": 5000,
+    "cool_time": 9.0,
+    "effects": [
+      {
+        "type": "Burn",
+        "value": 50,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_SaintCentaur_OneSpearRushes": {
+    "element": "Normal",
+    "type": "Melee",
+    "power": 120,
+    "min_range": 0,
+    "max_range": 2500,
+    "cool_time": 40.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_SakuraSaurus_SideTackle": {
+    "element": "Normal",
+    "type": "Melee",
+    "power": 80,
+    "min_range": 0,
+    "max_range": 400,
+    "cool_time": 12.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_ScorpionMan_Uppercut": {
+    "element": "Dark",
+    "type": "Melee",
+    "power": 110,
+    "min_range": 0,
+    "max_range": 3000,
+    "cool_time": 24.0,
+    "effects": [
+      {
+        "type": "Poison",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_SheepBall_Roll": {
+    "element": "Normal",
+    "type": "Melee",
+    "power": 35,
+    "min_range": 0,
+    "max_range": 1000,
+    "cool_time": 1.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_SifuDog_Counter": {
+    "element": "Normal",
+    "type": "Melee",
+    "power": 170,
+    "min_range": 0,
+    "max_range": 9999,
+    "cool_time": 30.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_SnowTigerBeastman_SnowImpact": {
+    "element": "Ice",
+    "type": "Melee",
+    "power": 190,
+    "min_range": 0,
+    "max_range": 3000,
+    "cool_time": 52.0,
+    "effects": [
+      {
+        "type": "Freeze",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_SnowTigerBeastman_TrampleSlash": {
+    "element": "Ice",
+    "type": "Melee",
+    "power": 95,
+    "min_range": 0,
+    "max_range": 1200,
+    "cool_time": 17.0,
+    "effects": [
+      {
+        "type": "Freeze",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_SoldierBee_NeedleLance": {
+    "element": "Leaf",
+    "type": "Melee",
+    "power": 55,
+    "min_range": 0,
+    "max_range": 2000,
+    "cool_time": 7.0,
+    "effects": [
+      {
+        "type": "Poison",
+        "value": 55,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_ThunderBird_ThunderStorm": {
+    "element": "Electricity",
+    "type": "Melee",
+    "power": 80,
+    "min_range": 500,
+    "max_range": 1500,
+    "cool_time": 12.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_ThunderDog_InazumaShorai": {
+    "element": "Electricity",
+    "type": "Melee",
+    "power": 65,
+    "min_range": 500,
+    "max_range": 1200,
+    "cool_time": 9.0,
+    "effects": [
+      {
+        "type": "Electrical",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_ThunderDragonMan_NumerousSwordAttack": {
+    "element": "Electricity",
+    "type": "Shot",
+    "power": 180,
+    "min_range": 0,
+    "max_range": 9999,
+    "cool_time": 50.0,
+    "effects": [
+      {
+        "type": "Electrical",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_ThunderDragonMan_ThunderSwordAttack": {
+    "element": "Electricity",
+    "type": "Shot",
+    "power": 100,
+    "min_range": 0,
+    "max_range": 9999,
+    "cool_time": 30.0,
+    "effects": [
+      {
+        "type": "Electrical",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_Umihebi_Fire_FireWindingTackle": {
+    "element": "Fire",
+    "type": "Melee",
+    "power": 145,
+    "min_range": 0,
+    "max_range": 2000,
+    "cool_time": 30.0,
+    "effects": [
+      {
+        "type": "Burn",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_Umihebi_WindingTackle": {
+    "element": "Water",
+    "type": "Melee",
+    "power": 145,
+    "min_range": 0,
+    "max_range": 2000,
+    "cool_time": 30.0,
+    "effects": [
+      {
+        "type": "Wetness",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_VolcanicMonster_Ice_IceAttack": {
+    "element": "Ice",
+    "type": "Shot",
+    "power": 100,
+    "min_range": 0,
+    "max_range": 9999,
+    "cool_time": 45.0,
+    "effects": [
+      {
+        "type": "Freeze",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_VolcanicMonster_MagmaAttack": {
+    "element": "Fire",
+    "type": "Shot",
+    "power": 100,
+    "min_range": 0,
+    "max_range": 9999,
+    "cool_time": 45.0,
+    "effects": [
+      {
+        "type": "Burn",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_WeaselDragon_FlyingTackle": {
+    "element": "Dragon",
+    "type": "Melee",
+    "power": 50,
+    "min_range": 300,
+    "max_range": 1500,
+    "cool_time": 6.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_Werewolf_Ice_SnowScratch": {
+    "element": "Ice",
+    "type": "Melee",
+    "power": 55,
+    "min_range": 400,
+    "max_range": 500,
+    "cool_time": 7.0,
+    "effects": [
+      {
+        "type": "Freeze",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_Werewolf_Scratch": {
+    "element": "Dark",
+    "type": "Melee",
+    "power": 55,
+    "min_range": 400,
+    "max_range": 500,
+    "cool_time": 7.0,
+    "effects": [
+      {
+        "type": "Darkness",
+        "value": 50,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_WhiteDeer_HolyPillar": {
+    "element": "Normal",
+    "type": "Shot",
+    "power": 200,
+    "min_range": 0,
+    "max_range": 2000,
+    "cool_time": 45.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_WhiteShieldDragon_ShieldTackle": {
+    "element": "Dragon",
+    "type": "Melee",
+    "power": 170,
+    "min_range": 0,
+    "max_range": 4000,
+    "cool_time": 50.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_WhiteTiger_Ground_IronScratch": {
+    "element": "Earth",
+    "type": "Melee",
+    "power": 95,
+    "min_range": 0,
+    "max_range": 300,
+    "cool_time": 17.0,
+    "effects": [
+      {
+        "type": "Muddy",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_WhiteTiger_IceScratch": {
+    "element": "Ice",
+    "type": "Melee",
+    "power": 85,
+    "min_range": 0,
+    "max_range": 300,
+    "cool_time": 14.0,
+    "effects": [
+      {
+        "type": "Freeze",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_WingGolem_RoundCutter": {
+    "element": "Earth",
+    "type": "Shot",
+    "power": 145,
+    "min_range": 0,
+    "max_range": 3500,
+    "cool_time": 35.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_Yeti_Grass_GrassBall": {
+    "element": "Leaf",
+    "type": "Melee",
+    "power": 100,
+    "min_range": 0,
+    "max_range": 3000,
+    "cool_time": 20.0,
+    "effects": [
+      {
+        "type": "IvyCling",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_Yeti_SnowBall": {
+    "element": "Ice",
+    "type": "Melee",
+    "power": 100,
+    "min_range": 0,
+    "max_range": 3000,
+    "cool_time": 20.0,
+    "effects": [
+      {
+        "type": "Freeze",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::WallSplash": {
+    "element": "Water",
+    "type": "Shot",
+    "power": 120,
+    "min_range": 0,
+    "max_range": 9999,
+    "cool_time": 40.0,
+    "effects": [
+      {
+        "type": "Wetness",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::WaterBall": {
+    "element": "Water",
+    "type": "Shot",
+    "power": 100,
+    "min_range": 1000,
+    "max_range": 9999,
+    "cool_time": 30.0,
+    "effects": [
+      {
+        "type": "Wetness",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::WaterGun": {
+    "element": "Water",
+    "type": "Shot",
+    "power": 40,
+    "min_range": 500,
+    "max_range": 5000,
+    "cool_time": 4.0,
+    "effects": [
+      {
+        "type": "Wetness",
+        "value": 50,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::WindCutter": {
+    "element": "Leaf",
+    "type": "Shot",
+    "power": 30,
+    "min_range": 500,
+    "max_range": 5000,
+    "cool_time": 2.0,
+    "effects": [
+      {
+        "type": "IvyCling",
+        "value": 35,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::WindEdge": {
+    "element": "Leaf",
+    "type": "Shot",
+    "power": 90,
+    "min_range": 500,
+    "max_range": 5000,
+    "cool_time": 22.0,
+    "effects": [
+      {
+        "type": "IvyCling",
+        "value": 35,
+        "value_ex": 0.0
+      }
+    ]
+  }
 }

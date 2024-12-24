@@ -1,0 +1,794 @@
+{
+  "AirDash_1": {
+    "localized_name": "Luftsprint +1",
+    "description": "Luftsprint +1"
+  },
+  "AirDash_2": {
+    "localized_name": "Luftsprint +2",
+    "description": "Luftsprint +2"
+  },
+  "AirDash_3": {
+    "localized_name": "Luftsprint +3",
+    "description": "Luftsprint +3"
+  },
+  "AirDash_4": {
+    "localized_name": "Luftsprint +4",
+    "description": "Luftsprint +4"
+  },
+  "Alien": {
+    "localized_name": "Unerforschte Zellen",
+    "description": "Angriff +10.0 % Feuerschaden −15.0 % Blitzschaden −15.0 %"
+  },
+  "Attack_ACC_up1": {
+    "localized_name": "ANG-Erhöhung St. 1",
+    "description": null
+  },
+  "Attack_ACC_up2": {
+    "localized_name": "ANG-Erhöhung St. 2",
+    "description": null
+  },
+  "Attack_ACC_up3": {
+    "localized_name": "ANG-Erhöhung St. 3",
+    "description": null
+  },
+  "CaptureLevel_Up_1": {
+    "localized_name": "Fangkraftverstärkung +1",
+    "description": null
+  },
+  "CaptureLevel_Up_2": {
+    "localized_name": "Fangkraftverstärkung +2",
+    "description": null
+  },
+  "CaptureLevel_Up_3": {
+    "localized_name": "Fangkraftverstärkung +3",
+    "description": null
+  },
+  "CaptureLevel_Up_4": {
+    "localized_name": "Fangkraftverstärkung +4",
+    "description": null
+  },
+  "CaptureLevel_Up_5": {
+    "localized_name": "Fangkraftverstärkung +5",
+    "description": null
+  },
+  "CaptureLevel_Up_6": {
+    "localized_name": "Fangkraftverstärkung +6",
+    "description": null
+  },
+  "CollectItem_Berries": {
+    "localized_name": "Beeren pflücken",
+    "description": null
+  },
+  "CollectItem_Egg": {
+    "localized_name": "Eierlegen",
+    "description": null
+  },
+  "CollectItem_Milk": {
+    "localized_name": "Milchproduktion",
+    "description": null
+  },
+  "CollectItem_Money": {
+    "localized_name": "Schatzsuche",
+    "description": null
+  },
+  "CollectItem_Sweets": {
+    "localized_name": "Zuckerbäcker",
+    "description": null
+  },
+  "CollectItem_Wool_Alpaca": {
+    "localized_name": "Wollproduktion",
+    "description": null
+  },
+  "CollectItem_Wool_SheepBall": {
+    "localized_name": "Wollproduktion",
+    "description": null
+  },
+  "CollectItem_Wool_WhiteMoth": {
+    "localized_name": "Seidenspinnerei",
+    "description": null
+  },
+  "CoolTimeReduction_Down_1": {
+    "localized_name": "Gelassenheit",
+    "description": "Verlängert Abklingzeit von Aktivfähigkeiten um -15.0 %"
+  },
+  "CoolTimeReduction_Up_1": {
+    "localized_name": "Konzentration",
+    "description": "Reduziert Abklingzeit von Aktivfähigkeiten um 30.0 % Angriff +10.0 %"
+  },
+  "CoolTimeReduction_Up_2": {
+    "localized_name": "Ungeduld",
+    "description": "Reduziert Abklingzeit von Aktivfähigkeiten um 15.0 %"
+  },
+  "CoolTimeReduction_Up_3": {
+    "localized_name": "Sturm und Drang",
+    "description": "Reduziert Abklingzeit von Aktivfähigkeiten um 0.0 % Angriff +0.0 %"
+  },
+  "CraftSpeed_down1": {
+    "localized_name": "Ungeschickt",
+    "description": null
+  },
+  "CraftSpeed_down2": {
+    "localized_name": "Faulpelz",
+    "description": null
+  },
+  "CraftSpeed_up1": {
+    "localized_name": "Fleißig",
+    "description": null
+  },
+  "CraftSpeed_up2": {
+    "localized_name": "Handwerksmeister",
+    "description": null
+  },
+  "CraftSpeed_up3": {
+    "localized_name": "Goldenes Händchen",
+    "description": null
+  },
+  "Deffence_down1": {
+    "localized_name": "Unbelastbar",
+    "description": null
+  },
+  "Deffence_down2": {
+    "localized_name": "Fragil",
+    "description": null
+  },
+  "Deffence_up1": {
+    "localized_name": "Hart im Nehmen",
+    "description": null
+  },
+  "Deffence_up2": {
+    "localized_name": "Stämmiger Wuchs",
+    "description": null
+  },
+  "Deffence_up3": {
+    "localized_name": "Diamantkörper",
+    "description": null
+  },
+  "ElementBoost_Aqua_1_PAL": {
+    "localized_name": "Wasserratte",
+    "description": "Wasserangriffsschaden +10.0 %"
+  },
+  "ElementBoost_Aqua_2_PAL": {
+    "localized_name": "Gebieter der Meere",
+    "description": null
+  },
+  "ElementBoost_Dark_1_BossDefeat": {
+    "localized_name": "Schattenschadenssteigerung (S)",
+    "description": null
+  },
+  "ElementBoost_Dark_1_PAL": {
+    "localized_name": "Grufti",
+    "description": "Schattenangriffsschaden +10.0 %"
+  },
+  "ElementBoost_Dark_2_BossDefeat": {
+    "localized_name": "Schattenschadenssteigerung (M)",
+    "description": null
+  },
+  "ElementBoost_Dark_2_PAL": {
+    "localized_name": "Gebieter der Unterwelt",
+    "description": null
+  },
+  "ElementBoost_Dark_3_BossDefeat": {
+    "localized_name": "Schattenschadenssteigerung (L)",
+    "description": null
+  },
+  "ElementBoost_Dragon_1_BossDefeat": {
+    "localized_name": "Drachenschadenssteigerung (S)",
+    "description": null
+  },
+  "ElementBoost_Dragon_1_PAL": {
+    "localized_name": "Drachengeborener",
+    "description": "Drachenangriffsschaden +10.0 %"
+  },
+  "ElementBoost_Dragon_2_BossDefeat": {
+    "localized_name": "Drachenschadenssteigerung (M)",
+    "description": null
+  },
+  "ElementBoost_Dragon_2_PAL": {
+    "localized_name": "Drachengott",
+    "description": null
+  },
+  "ElementBoost_Dragon_3_BossDefeat": {
+    "localized_name": "Drachenschadenssteigerung (L)",
+    "description": null
+  },
+  "ElementBoost_Earth_1_BossDefeat": {
+    "localized_name": "Erdschadenssteigerung (S)",
+    "description": null
+  },
+  "ElementBoost_Earth_1_PAL": {
+    "localized_name": "Macht von Gaia",
+    "description": "Erdangriffsschaden +10.0 %"
+  },
+  "ElementBoost_Earth_2_BossDefeat": {
+    "localized_name": "Erdschadenssteigerung (M)",
+    "description": null
+  },
+  "ElementBoost_Earth_2_PAL": {
+    "localized_name": "Zar des Erdreichs",
+    "description": null
+  },
+  "ElementBoost_Earth_3_BossDefeat": {
+    "localized_name": "Erdschadenssteigerung (L)",
+    "description": null
+  },
+  "ElementBoost_Electricity_1_BossDefeat": {
+    "localized_name": "Elektroschadenssteigerung (S)",
+    "description": null
+  },
+  "ElementBoost_Electricity_2_BossDefeat": {
+    "localized_name": "Elektroschadenssteigerung (M)",
+    "description": null
+  },
+  "ElementBoost_Electricity_3_BossDefeat": {
+    "localized_name": "Elektroschadenssteigerung (L)",
+    "description": null
+  },
+  "ElementBoost_Fire_1_BossDefeat": {
+    "localized_name": "Feuerschadenssteigerung (S)",
+    "description": null
+  },
+  "ElementBoost_Fire_1_PAL": {
+    "localized_name": "Pyromane",
+    "description": "Feuerangriffsschaden +10.0 %"
+  },
+  "ElementBoost_Fire_2_BossDefeat": {
+    "localized_name": "Feuerschadenssteigerung (M)",
+    "description": null
+  },
+  "ElementBoost_Fire_2_PAL": {
+    "localized_name": "Flammenkaiser",
+    "description": null
+  },
+  "ElementBoost_Fire_3_BossDefeat": {
+    "localized_name": "Feuerschadenssteigerung (L)",
+    "description": null
+  },
+  "ElementBoost_Ice_1_BossDefeat": {
+    "localized_name": "Eisschadenssteigerung (S)",
+    "description": null
+  },
+  "ElementBoost_Ice_1_PAL": {
+    "localized_name": "Kaltblütig",
+    "description": "Eisangriffsschaden +10.0 %"
+  },
+  "ElementBoost_Ice_2_BossDefeat": {
+    "localized_name": "Eisschadenssteigerung (M)",
+    "description": null
+  },
+  "ElementBoost_Ice_2_PAL": {
+    "localized_name": "Imperator des Eises",
+    "description": null
+  },
+  "ElementBoost_Ice_3_BossDefeat": {
+    "localized_name": "Eisschadenssteigerung (L)",
+    "description": null
+  },
+  "ElementBoost_Leaf_1_BossDefeat": {
+    "localized_name": "Grasschadenssteigerung (S)",
+    "description": null
+  },
+  "ElementBoost_Leaf_1_PAL": {
+    "localized_name": "Grüner Daumen",
+    "description": "Grasangriffsschaden +10.0 %"
+  },
+  "ElementBoost_Leaf_2_BossDefeat": {
+    "localized_name": "Grasschadenssteigerung (M)",
+    "description": null
+  },
+  "ElementBoost_Leaf_2_PAL": {
+    "localized_name": "Feenkönig",
+    "description": null
+  },
+  "ElementBoost_Leaf_3_BossDefeat": {
+    "localized_name": "Grasschadenssteigerung (L)",
+    "description": null
+  },
+  "ElementBoost_Normal_1_BossDefeat": {
+    "localized_name": "Neutralschadenssteigerung (S)",
+    "description": null
+  },
+  "ElementBoost_Normal_1_PAL": {
+    "localized_name": "Neutralisator",
+    "description": "Neutralangriffsschaden +10.0 %"
+  },
+  "ElementBoost_Normal_2_BossDefeat": {
+    "localized_name": "Neutralschadenssteigerung (M)",
+    "description": null
+  },
+  "ElementBoost_Normal_2_PAL": {
+    "localized_name": "Erleuchteter",
+    "description": null
+  },
+  "ElementBoost_Normal_3_BossDefeat": {
+    "localized_name": "Neutralschadenssteigerung (L)",
+    "description": null
+  },
+  "ElementBoost_Thunder_1_PAL": {
+    "localized_name": "Dynamo",
+    "description": "Elektroangriffsschaden +10.0 %"
+  },
+  "ElementBoost_Thunder_2_PAL": {
+    "localized_name": "Meister des Donners",
+    "description": null
+  },
+  "ElementBoost_Water_1_BossDefeat": {
+    "localized_name": "Wasserschadenssteigerung (S)",
+    "description": null
+  },
+  "ElementBoost_Water_2_BossDefeat": {
+    "localized_name": "Wasserschadenssteigerung (M)",
+    "description": null
+  },
+  "ElementBoost_Water_3_BossDefeat": {
+    "localized_name": "Wasserschadenssteigerung (L)",
+    "description": null
+  },
+  "ElementResist_Aqua_1": {
+    "localized_name": "Wasserschadensminderung St. 1",
+    "description": null
+  },
+  "ElementResist_Aqua_1_PAL": {
+    "localized_name": "Imprägniert",
+    "description": "Wasserschaden −10.0 %"
+  },
+  "ElementResist_Aqua_2": {
+    "localized_name": "Wasserschadensminderung St. 2",
+    "description": null
+  },
+  "ElementResist_Aqua_3": {
+    "localized_name": "Wasserschadensminderung St. 3",
+    "description": null
+  },
+  "ElementResist_Dark_1": {
+    "localized_name": "Schattenschadensminderung St. 1",
+    "description": null
+  },
+  "ElementResist_Dark_1_PAL": {
+    "localized_name": "Frohnatur",
+    "description": "Schattenschaden −10.0 %"
+  },
+  "ElementResist_Dark_2": {
+    "localized_name": "Schattenschadensminderung St. 2",
+    "description": null
+  },
+  "ElementResist_Dark_3": {
+    "localized_name": "Schattenschadensminderung St. 3",
+    "description": null
+  },
+  "ElementResist_Dragon_1": {
+    "localized_name": "Drachenschadensminderung St. 1",
+    "description": null
+  },
+  "ElementResist_Dragon_1_PAL": {
+    "localized_name": "Drachentöter",
+    "description": "Drachenschaden −10.0 %"
+  },
+  "ElementResist_Dragon_2": {
+    "localized_name": "Drachenschadensminderung St. 2",
+    "description": null
+  },
+  "ElementResist_Dragon_3": {
+    "localized_name": "Drachenschadensminderung St. 3",
+    "description": null
+  },
+  "ElementResist_Earth_1": {
+    "localized_name": "Erdschadensminderung St. 1",
+    "description": null
+  },
+  "ElementResist_Earth_1_PAL": {
+    "localized_name": "Erdbebensicher",
+    "description": "Erdschaden −10.0 %"
+  },
+  "ElementResist_Earth_2": {
+    "localized_name": "Erdschadensminderung St. 2",
+    "description": null
+  },
+  "ElementResist_Earth_3": {
+    "localized_name": "Erdschadensminderung St. 3",
+    "description": null
+  },
+  "ElementResist_Fire_1": {
+    "localized_name": "Feuerschadensminderung St. 1",
+    "description": null
+  },
+  "ElementResist_Fire_1_PAL": {
+    "localized_name": "Cooler Typ",
+    "description": "Feuerschaden −10.0 %"
+  },
+  "ElementResist_Fire_2": {
+    "localized_name": "Feuerschadensminderung St. 2",
+    "description": null
+  },
+  "ElementResist_Fire_3": {
+    "localized_name": "Feuerschadensminderung St. 3",
+    "description": null
+  },
+  "ElementResist_Ice_1": {
+    "localized_name": "Eisschadensminderung St. 1",
+    "description": null
+  },
+  "ElementResist_Ice_1_PAL": {
+    "localized_name": "Hitzkopf",
+    "description": "Eisschaden −10.0 %"
+  },
+  "ElementResist_Ice_2": {
+    "localized_name": "Eisschadensminderung St. 2",
+    "description": null
+  },
+  "ElementResist_Ice_3": {
+    "localized_name": "Eisschadensminderung St. 3",
+    "description": null
+  },
+  "ElementResist_Leaf_1": {
+    "localized_name": "Grasschadensminderung St. 1",
+    "description": null
+  },
+  "ElementResist_Leaf_1_PAL": {
+    "localized_name": "Herbizid",
+    "description": "Grasschaden −10.0 %"
+  },
+  "ElementResist_Leaf_2": {
+    "localized_name": "Grasschadensminderung St. 2",
+    "description": null
+  },
+  "ElementResist_Leaf_3": {
+    "localized_name": "Grasschadensminderung St. 3",
+    "description": null
+  },
+  "ElementResist_Normal_1": {
+    "localized_name": "Neutralschadensminderung St. 1",
+    "description": null
+  },
+  "ElementResist_Normal_1_PAL": {
+    "localized_name": "Neutralitätspakt",
+    "description": "Neutralschaden −10.0 %"
+  },
+  "ElementResist_Normal_2": {
+    "localized_name": "Neutralschadensminderung St. 2",
+    "description": null
+  },
+  "ElementResist_Normal_3": {
+    "localized_name": "Neutralschadensminderung St. 3",
+    "description": null
+  },
+  "ElementResist_Thunder_1": {
+    "localized_name": "Elektroschadensminderung St. 1",
+    "description": null
+  },
+  "ElementResist_Thunder_1_PAL": {
+    "localized_name": "Blitzableiter",
+    "description": "Elektroschaden −10.0 %"
+  },
+  "ElementResist_Thunder_2": {
+    "localized_name": "Elektroschadensminderung St. 2",
+    "description": null
+  },
+  "ElementResist_Thunder_3": {
+    "localized_name": "Elektroschadensminderung St. 3",
+    "description": null
+  },
+  "EternalFlame": {
+    "localized_name": "Ewige Lohe",
+    "description": null
+  },
+  "HP_ACC_up1": {
+    "localized_name": "LP-Erhöhung St. 1",
+    "description": null
+  },
+  "HP_ACC_up2": {
+    "localized_name": "LP-Erhöhung St. 2",
+    "description": null
+  },
+  "HP_ACC_up3": {
+    "localized_name": "LP-Erhöhung St. 3",
+    "description": null
+  },
+  "Invader": {
+    "localized_name": "Eindringling",
+    "description": null
+  },
+  "JumpCount_Increase1": {
+    "localized_name": "Sprungzahl +1",
+    "description": "Sprungzahl +1"
+  },
+  "JumpCount_Increase2": {
+    "localized_name": "Sprungzahl +2",
+    "description": "Sprungzahl +2"
+  },
+  "JumpCount_Increase3": {
+    "localized_name": "Sprungzahl +3",
+    "description": "Sprungzahl +3"
+  },
+  "JumpPower_Increase": {
+    "localized_name": "Sprungkrafterhöhung",
+    "description": "Sprungkrafterhöhung"
+  },
+  "Legend": {
+    "localized_name": "Legendär",
+    "description": "Angriff +20.0 % Verteidigung +20.0 % Bewegungstempo +15.0 %"
+  },
+  "MaxInventoryWeight_up": {
+    "localized_name": "Maximallasterhöhung St. 1",
+    "description": null
+  },
+  "MaxInventoryWeight_up2": {
+    "localized_name": "Maximallasterhöhung St. 2",
+    "description": null
+  },
+  "MaxInventoryWeight_up3": {
+    "localized_name": "Maximallasterhöhung St. 3",
+    "description": null
+  },
+  "MaxInventoryWeight_up_Equip_1": {
+    "localized_name": "Maximallasterhöhung St. 1",
+    "description": null
+  },
+  "MaxInventoryWeight_up_Equip_2": {
+    "localized_name": "Maximallasterhöhung St. 2",
+    "description": null
+  },
+  "MaxInventoryWeight_up_Equip_3": {
+    "localized_name": "Maximallasterhöhung St. 3",
+    "description": null
+  },
+  "MoveSpeed_up_1": {
+    "localized_name": "Flink",
+    "description": "Bewegungstempo +10.0 %"
+  },
+  "MoveSpeed_up_2": {
+    "localized_name": "Guter Läufer",
+    "description": "Bewegungstempo +20.0 %"
+  },
+  "MoveSpeed_up_3": {
+    "localized_name": "Blitzschnell",
+    "description": "Bewegungstempo +30.0 %"
+  },
+  "Nocturnal": {
+    "localized_name": "Nachtaktiv",
+    "description": "Schläft nachts nicht und arbeitet weiter."
+  },
+  "NonKilling": {
+    "localized_name": "Rücksichtsvoll",
+    "description": "Pazifist. Senkt die LP seines Angriffsziels nicht unter 1 LP."
+  },
+  "Noukin": {
+    "localized_name": "Mehr Kraft als Verstand",
+    "description": null
+  },
+  "PAL_ALLAttack_down1": {
+    "localized_name": "Angsthase",
+    "description": null
+  },
+  "PAL_ALLAttack_down2": {
+    "localized_name": "Duckmäuser",
+    "description": null
+  },
+  "PAL_ALLAttack_up1": {
+    "localized_name": "Mutig",
+    "description": null
+  },
+  "PAL_ALLAttack_up2": {
+    "localized_name": "Wild",
+    "description": null
+  },
+  "PAL_ALLAttack_up3": {
+    "localized_name": "Unbändig",
+    "description": null
+  },
+  "PAL_CorporateSlave": {
+    "localized_name": "Arbeitsvieh",
+    "description": null
+  },
+  "PAL_FullStomach_Down_1": {
+    "localized_name": "Genügsam",
+    "description": "Sattheit sinkt um <NumBlue_13>10.0 %</> langsamer."
+  },
+  "PAL_FullStomach_Down_2": {
+    "localized_name": "Fastenprofi",
+    "description": "Sattheit sinkt um <NumBlue_13>15.0 %</> langsamer."
+  },
+  "PAL_FullStomach_Down_3": {
+    "localized_name": "Asket",
+    "description": "Sattheit sinkt um <NumBlue_13>20.0 %</> langsamer."
+  },
+  "PAL_FullStomach_Up_1": {
+    "localized_name": "Verfressen",
+    "description": "Sattheit sinkt um <NumRed_13>10.0 %</> schneller."
+  },
+  "PAL_FullStomach_Up_2": {
+    "localized_name": "Endlosmagen",
+    "description": "Sattheit sinkt um <NumRed_13>15.0 %</> schneller."
+  },
+  "PAL_Sanity_Down_1": {
+    "localized_name": "Positive Gedanken",
+    "description": "GEI sinkt um <NumBlue_13>10.0 %</> langsamer."
+  },
+  "PAL_Sanity_Down_2": {
+    "localized_name": "Workaholic",
+    "description": "GEI sinkt um <NumBlue_13>15.0 %</> langsamer."
+  },
+  "PAL_Sanity_Down_3": {
+    "localized_name": "Unerschütterlich",
+    "description": "GEI sinkt um <NumBlue_13>20.0 %</> langsamer."
+  },
+  "PAL_Sanity_Up_1": {
+    "localized_name": "Geistig labil",
+    "description": "GEI sinkt um <NumRed_13>10.0 %</> schneller."
+  },
+  "PAL_Sanity_Up_2": {
+    "localized_name": "Selbstzerstörerisch",
+    "description": "GEI sinkt um <NumRed_13>15.0 %</> schneller."
+  },
+  "PAL_SpiritualInst": {
+    "localized_name": "de_Text",
+    "description": null
+  },
+  "PAL_conceited": {
+    "localized_name": "Eingebildet",
+    "description": null
+  },
+  "PAL_masochist": {
+    "localized_name": "Masochist",
+    "description": null
+  },
+  "PAL_oraora": {
+    "localized_name": "Großkotz",
+    "description": null
+  },
+  "PAL_rude": {
+    "localized_name": "Grobian",
+    "description": null
+  },
+  "PAL_sadist": {
+    "localized_name": "Sadist",
+    "description": null
+  },
+  "Rare": {
+    "localized_name": "Außergewöhnlich",
+    "description": null
+  },
+  "SalePrice_Down_1": {
+    "localized_name": "Räudig",
+    "description": "Verkaufspreis −-10.0 %"
+  },
+  "SalePrice_Up_1": {
+    "localized_name": "Kostbar",
+    "description": "Verkaufspreis +5.0 %"
+  },
+  "SalePrice_Up_2": {
+    "localized_name": "Edles Fell",
+    "description": "Verkaufspreis +3.0 %"
+  },
+  "SphereModule_Curve": {
+    "localized_name": "Sphärenkurve +1",
+    "description": null
+  },
+  "SphereModule_Curve2": {
+    "localized_name": "Sphärendrall",
+    "description": null
+  },
+  "SphereModule_Heavy": {
+    "localized_name": "Sphärengewicht +1",
+    "description": null
+  },
+  "SphereModule_Homing": {
+    "localized_name": "Sphärenzielsuche",
+    "description": null
+  },
+  "SphereModule_Sniper": {
+    "localized_name": "Sphärenreichweite +1",
+    "description": null
+  },
+  "SphereModule_Sniper2": {
+    "localized_name": "Sphärenreichweite +2",
+    "description": null
+  },
+  "Stamina_Down_1": {
+    "localized_name": "Stubenhocker",
+    "description": "Maximale Ausdauer -25.0 % (Gilt nur für reitbare Pals.)"
+  },
+  "Stamina_Up_1": {
+    "localized_name": "Unermüdlich",
+    "description": "Maximale Ausdauer +50.0 % (Gilt nur für reitbare Pals.)"
+  },
+  "Stamina_Up_2": {
+    "localized_name": "Fit wie ein Turnschuh",
+    "description": "Maximale Ausdauer +25.0 % (Gilt nur für reitbare Pals.)"
+  },
+  "Stamina_Up_3": {
+    "localized_name": "Perpetuum mobile",
+    "description": "Maximale Ausdauer +75.0 % (Gilt nur für reitbare Pals.)"
+  },
+  "TemperatureResist_Cold1": {
+    "localized_name": "Kälteresistenz St. 1",
+    "description": null
+  },
+  "TemperatureResist_Cold2": {
+    "localized_name": "Kälteresistenz St. 2",
+    "description": null
+  },
+  "TemperatureResist_Cold3": {
+    "localized_name": "Kälteresistenz St. 3",
+    "description": null
+  },
+  "TemperatureResist_Heat1": {
+    "localized_name": "Hitzeresistenz St. 1",
+    "description": null
+  },
+  "TemperatureResist_Heat1Cold1": {
+    "localized_name": "Hitzeresistenz St. 1 / Kälteresistenz St. 1",
+    "description": null
+  },
+  "TemperatureResist_Heat2": {
+    "localized_name": "Hitzeresistenz St. 2",
+    "description": null
+  },
+  "TemperatureResist_Heat2Cold2": {
+    "localized_name": "Hitzeresistenz St. 2 / Kälteresistenz St. 2",
+    "description": null
+  },
+  "TemperatureResist_Heat3": {
+    "localized_name": "Hitzeresistenz St. 3",
+    "description": null
+  },
+  "TemperatureResist_Heat3Cold3": {
+    "localized_name": "Hitzeresistenz St. 3 / Kälteresistenz St. 3",
+    "description": null
+  },
+  "Test_PalEgg_HatchingSpeed_Up": {
+    "localized_name": "Philanthrop",
+    "description": "Wenn dieser Pal auf einer Zuchtfarm ist, erhöht sich das Eierlegetempo um 100.0 %."
+  },
+  "TrainerATK_UP_1": {
+    "localized_name": "Angriffsstratege",
+    "description": "Spieler ANG +10.0 %"
+  },
+  "TrainerDEF_UP_1": {
+    "localized_name": "Festungskommandant",
+    "description": "Spieler VTD +10.0 %"
+  },
+  "TrainerLogging_up1": {
+    "localized_name": "Forstmeister",
+    "description": "Spieler Effizienz (Holzfällen) +25.0 %"
+  },
+  "TrainerMining_up1": {
+    "localized_name": "Oberbergmann",
+    "description": "Spieler Effizienz (Bergbau) +25.0 %"
+  },
+  "TrainerWorkSpeed_UP_1": {
+    "localized_name": "Motivationscoach",
+    "description": "Spieler Arbeitstempo +25.0 %"
+  },
+  "Vampire": {
+    "localized_name": "Vampir",
+    "description": "Absorbiert einen Teil des ausgeteilten Schadens und wandelt diesen in LP um. Schläft nachts nicht und arbeitet weiter."
+  },
+  "Witch": {
+    "localized_name": "Hexe",
+    "description": null
+  },
+  "WorkSpeed_ACC_up1": {
+    "localized_name": "Schnellfertigung St. 1",
+    "description": null
+  },
+  "WorkSpeed_ACC_up2": {
+    "localized_name": "Schnellfertigung St. 2",
+    "description": null
+  },
+  "WorkSpeed_ACC_up3": {
+    "localized_name": "Schnellfertigung St. 3",
+    "description": null
+  },
+  "defense_ACC_up1": {
+    "localized_name": "VTD-Erhöhung St. 1",
+    "description": null
+  },
+  "defense_ACC_up2": {
+    "localized_name": "VTD-Erhöhung St. 2",
+    "description": null
+  },
+  "defense_ACC_up3": {
+    "localized_name": "VTD-Erhöhung St. 3",
+    "description": null
+  }
+}

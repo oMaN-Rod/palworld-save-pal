@@ -1,0 +1,38 @@
+{
+  "Dark": {
+    "localized_name": "暗屬性",
+    "description": null
+  },
+  "Dragon": {
+    "localized_name": "龍屬性",
+    "description": null
+  },
+  "Earth": {
+    "localized_name": "地屬性",
+    "description": null
+  },
+  "Electricity": {
+    "localized_name": "雷屬性",
+    "description": null
+  },
+  "Fire": {
+    "localized_name": "火屬性",
+    "description": null
+  },
+  "Ice": {
+    "localized_name": "冰屬性",
+    "description": null
+  },
+  "Leaf": {
+    "localized_name": "草屬性",
+    "description": null
+  },
+  "Normal": {
+    "localized_name": "無屬性",
+    "description": null
+  },
+  "Water": {
+    "localized_name": "水屬性",
+    "description": null
+  }
+}

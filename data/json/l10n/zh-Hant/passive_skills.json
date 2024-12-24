@@ -1,0 +1,794 @@
+{
+  "AirDash_1": {
+    "localized_name": "空中衝刺+1",
+    "description": "空中衝刺+1"
+  },
+  "AirDash_2": {
+    "localized_name": "空中衝刺+2",
+    "description": "空中衝刺+2"
+  },
+  "AirDash_3": {
+    "localized_name": "空中衝刺+3",
+    "description": "空中衝刺+3"
+  },
+  "AirDash_4": {
+    "localized_name": "空中衝刺+4",
+    "description": "空中衝刺+4"
+  },
+  "Alien": {
+    "localized_name": "未知生物細胞",
+    "description": "攻擊力+10.0% 火屬性傷害減免15.0% 雷屬性傷害減免15.0%"
+  },
+  "Attack_ACC_up1": {
+    "localized_name": "提升攻擊Lv1",
+    "description": null
+  },
+  "Attack_ACC_up2": {
+    "localized_name": "提升攻擊Lv2",
+    "description": null
+  },
+  "Attack_ACC_up3": {
+    "localized_name": "提升攻擊Lv3",
+    "description": null
+  },
+  "CaptureLevel_Up_1": {
+    "localized_name": "捕獲力強化+1",
+    "description": null
+  },
+  "CaptureLevel_Up_2": {
+    "localized_name": "捕獲力強化+2",
+    "description": null
+  },
+  "CaptureLevel_Up_3": {
+    "localized_name": "捕獲力強化+3",
+    "description": null
+  },
+  "CaptureLevel_Up_4": {
+    "localized_name": "捕獲力強化+4",
+    "description": null
+  },
+  "CaptureLevel_Up_5": {
+    "localized_name": "捕獲力強化+5",
+    "description": null
+  },
+  "CaptureLevel_Up_6": {
+    "localized_name": "捕獲力強化+6",
+    "description": null
+  },
+  "CollectItem_Berries": {
+    "localized_name": "摘取莓果",
+    "description": null
+  },
+  "CollectItem_Egg": {
+    "localized_name": "產蛋",
+    "description": null
+  },
+  "CollectItem_Milk": {
+    "localized_name": "產牛奶",
+    "description": null
+  },
+  "CollectItem_Money": {
+    "localized_name": "招財貓",
+    "description": null
+  },
+  "CollectItem_Sweets": {
+    "localized_name": "生產點心",
+    "description": null
+  },
+  "CollectItem_Wool_Alpaca": {
+    "localized_name": "產羊毛",
+    "description": null
+  },
+  "CollectItem_Wool_SheepBall": {
+    "localized_name": "產羊毛",
+    "description": null
+  },
+  "CollectItem_Wool_WhiteMoth": {
+    "localized_name": "絲織",
+    "description": null
+  },
+  "CoolTimeReduction_Down_1": {
+    "localized_name": "慢性子",
+    "description": "主動技能的冷卻時間延長-15.0%"
+  },
+  "CoolTimeReduction_Up_1": {
+    "localized_name": "沈著冷靜",
+    "description": "主動技能的冷卻時間縮短30.0% 攻擊+10.0%"
+  },
+  "CoolTimeReduction_Up_2": {
+    "localized_name": "急性子",
+    "description": "主動技能的冷卻時間縮短15.0%"
+  },
+  "CoolTimeReduction_Up_3": {
+    "localized_name": "疾風怒濤",
+    "description": "主動技能的冷卻時間縮短0.0% 攻擊+0.0%"
+  },
+  "CraftSpeed_down1": {
+    "localized_name": "笨手笨腳",
+    "description": null
+  },
+  "CraftSpeed_down2": {
+    "localized_name": "偷懶成癮",
+    "description": null
+  },
+  "CraftSpeed_up1": {
+    "localized_name": "認真",
+    "description": null
+  },
+  "CraftSpeed_up2": {
+    "localized_name": "工匠精神",
+    "description": null
+  },
+  "CraftSpeed_up3": {
+    "localized_name": "卓絕技藝",
+    "description": null
+  },
+  "Deffence_down1": {
+    "localized_name": "弱不禁風",
+    "description": null
+  },
+  "Deffence_down2": {
+    "localized_name": "骨質疏鬆",
+    "description": null
+  },
+  "Deffence_up1": {
+    "localized_name": "堅硬皮膚",
+    "description": null
+  },
+  "Deffence_up2": {
+    "localized_name": "頑強肉體",
+    "description": null
+  },
+  "Deffence_up3": {
+    "localized_name": "金剛之驅",
+    "description": null
+  },
+  "ElementBoost_Aqua_1_PAL": {
+    "localized_name": "喜歡玩水",
+    "description": "提升水屬性攻擊傷害10.0%"
+  },
+  "ElementBoost_Aqua_2_PAL": {
+    "localized_name": "海皇",
+    "description": null
+  },
+  "ElementBoost_Dark_1_BossDefeat": {
+    "localized_name": "增強暗屬性傷害 小",
+    "description": null
+  },
+  "ElementBoost_Dark_1_PAL": {
+    "localized_name": "夜幕",
+    "description": "提升暗屬性攻擊傷害10.0%"
+  },
+  "ElementBoost_Dark_2_BossDefeat": {
+    "localized_name": "增強暗屬性傷害 中",
+    "description": null
+  },
+  "ElementBoost_Dark_2_PAL": {
+    "localized_name": "冥王",
+    "description": null
+  },
+  "ElementBoost_Dark_3_BossDefeat": {
+    "localized_name": "增強暗屬性傷害 大",
+    "description": null
+  },
+  "ElementBoost_Dragon_1_BossDefeat": {
+    "localized_name": "增強龍屬性傷害 小",
+    "description": null
+  },
+  "ElementBoost_Dragon_1_PAL": {
+    "localized_name": "龍之血脈",
+    "description": "提升龍屬性攻擊傷害10.0%"
+  },
+  "ElementBoost_Dragon_2_BossDefeat": {
+    "localized_name": "增強龍屬性傷害 中",
+    "description": null
+  },
+  "ElementBoost_Dragon_2_PAL": {
+    "localized_name": "神龍",
+    "description": null
+  },
+  "ElementBoost_Dragon_3_BossDefeat": {
+    "localized_name": "增強龍屬性傷害 大",
+    "description": null
+  },
+  "ElementBoost_Earth_1_BossDefeat": {
+    "localized_name": "增強地屬性傷害 小",
+    "description": null
+  },
+  "ElementBoost_Earth_1_PAL": {
+    "localized_name": "大地之力",
+    "description": "提升地屬性攻擊傷害10.0%"
+  },
+  "ElementBoost_Earth_2_BossDefeat": {
+    "localized_name": "增強地屬性傷害 中",
+    "description": null
+  },
+  "ElementBoost_Earth_2_PAL": {
+    "localized_name": "岩帝",
+    "description": null
+  },
+  "ElementBoost_Earth_3_BossDefeat": {
+    "localized_name": "增強地屬性傷害 大",
+    "description": null
+  },
+  "ElementBoost_Electricity_1_BossDefeat": {
+    "localized_name": "增強雷屬性傷害 小",
+    "description": null
+  },
+  "ElementBoost_Electricity_2_BossDefeat": {
+    "localized_name": "增強雷屬性傷害 中",
+    "description": null
+  },
+  "ElementBoost_Electricity_3_BossDefeat": {
+    "localized_name": "增強雷屬性傷害 大",
+    "description": null
+  },
+  "ElementBoost_Fire_1_BossDefeat": {
+    "localized_name": "增強火屬性傷害 小",
+    "description": null
+  },
+  "ElementBoost_Fire_1_PAL": {
+    "localized_name": "喜歡玩火",
+    "description": "提升火屬性攻擊傷害10.0%"
+  },
+  "ElementBoost_Fire_2_BossDefeat": {
+    "localized_name": "增強火屬性傷害 中",
+    "description": null
+  },
+  "ElementBoost_Fire_2_PAL": {
+    "localized_name": "炎帝",
+    "description": null
+  },
+  "ElementBoost_Fire_3_BossDefeat": {
+    "localized_name": "增強火屬性傷害 大",
+    "description": null
+  },
+  "ElementBoost_Ice_1_BossDefeat": {
+    "localized_name": "增強冰屬性傷害 小",
+    "description": null
+  },
+  "ElementBoost_Ice_1_PAL": {
+    "localized_name": "冷血",
+    "description": "提升冰屬性攻擊傷害10.0%"
+  },
+  "ElementBoost_Ice_2_BossDefeat": {
+    "localized_name": "增強冰屬性傷害 中",
+    "description": null
+  },
+  "ElementBoost_Ice_2_PAL": {
+    "localized_name": "冰帝",
+    "description": null
+  },
+  "ElementBoost_Ice_3_BossDefeat": {
+    "localized_name": "增強冰屬性傷害 大",
+    "description": null
+  },
+  "ElementBoost_Leaf_1_BossDefeat": {
+    "localized_name": "增強草屬性傷害 小",
+    "description": null
+  },
+  "ElementBoost_Leaf_1_PAL": {
+    "localized_name": "草木馨香",
+    "description": "提升草屬性攻擊傷害10.0%"
+  },
+  "ElementBoost_Leaf_2_BossDefeat": {
+    "localized_name": "增強草屬性傷害 中",
+    "description": null
+  },
+  "ElementBoost_Leaf_2_PAL": {
+    "localized_name": "精靈王",
+    "description": null
+  },
+  "ElementBoost_Leaf_3_BossDefeat": {
+    "localized_name": "增強草屬性傷害 大",
+    "description": null
+  },
+  "ElementBoost_Normal_1_BossDefeat": {
+    "localized_name": "增強無屬性傷害 小",
+    "description": null
+  },
+  "ElementBoost_Normal_1_PAL": {
+    "localized_name": "禪境",
+    "description": "提升無屬性攻擊傷害10.0%"
+  },
+  "ElementBoost_Normal_2_BossDefeat": {
+    "localized_name": "增強無屬性傷害 中",
+    "description": null
+  },
+  "ElementBoost_Normal_2_PAL": {
+    "localized_name": "聖天",
+    "description": null
+  },
+  "ElementBoost_Normal_3_BossDefeat": {
+    "localized_name": "增強無屬性傷害 大",
+    "description": null
+  },
+  "ElementBoost_Thunder_1_PAL": {
+    "localized_name": "電容",
+    "description": "提升雷屬性攻擊傷害10.0%"
+  },
+  "ElementBoost_Thunder_2_PAL": {
+    "localized_name": "雷帝",
+    "description": null
+  },
+  "ElementBoost_Water_1_BossDefeat": {
+    "localized_name": "增強水屬性傷害 小",
+    "description": null
+  },
+  "ElementBoost_Water_2_BossDefeat": {
+    "localized_name": "增強水屬性傷害 中",
+    "description": null
+  },
+  "ElementBoost_Water_3_BossDefeat": {
+    "localized_name": "增強水屬性傷害 大",
+    "description": null
+  },
+  "ElementResist_Aqua_1": {
+    "localized_name": "減輕水屬性傷害Lv1",
+    "description": null
+  },
+  "ElementResist_Aqua_1_PAL": {
+    "localized_name": "防水性能",
+    "description": "減輕水屬性傷害10.0%"
+  },
+  "ElementResist_Aqua_2": {
+    "localized_name": "減輕水屬性傷害Lv2",
+    "description": null
+  },
+  "ElementResist_Aqua_3": {
+    "localized_name": "減輕水屬性傷害Lv3",
+    "description": null
+  },
+  "ElementResist_Dark_1": {
+    "localized_name": "減輕暗屬性傷害Lv1",
+    "description": null
+  },
+  "ElementResist_Dark_1_PAL": {
+    "localized_name": "陽光開朗",
+    "description": "減輕暗屬性傷害10.0%"
+  },
+  "ElementResist_Dark_2": {
+    "localized_name": "減輕暗屬性傷害Lv2",
+    "description": null
+  },
+  "ElementResist_Dark_3": {
+    "localized_name": "減輕暗屬性傷害Lv3",
+    "description": null
+  },
+  "ElementResist_Dragon_1": {
+    "localized_name": "減輕龍屬性傷害Lv1",
+    "description": null
+  },
+  "ElementResist_Dragon_1_PAL": {
+    "localized_name": "屠龍者",
+    "description": "減輕龍屬性傷害10.0%"
+  },
+  "ElementResist_Dragon_2": {
+    "localized_name": "減輕龍屬性傷害Lv2",
+    "description": null
+  },
+  "ElementResist_Dragon_3": {
+    "localized_name": "減輕龍屬性傷害Lv3",
+    "description": null
+  },
+  "ElementResist_Earth_1": {
+    "localized_name": "減輕地屬性傷害Lv1",
+    "description": null
+  },
+  "ElementResist_Earth_1_PAL": {
+    "localized_name": "抗震結構",
+    "description": "減輕地屬性傷害10.0%"
+  },
+  "ElementResist_Earth_2": {
+    "localized_name": "減輕地屬性傷害Lv2",
+    "description": null
+  },
+  "ElementResist_Earth_3": {
+    "localized_name": "減輕地屬性傷害Lv3",
+    "description": null
+  },
+  "ElementResist_Fire_1": {
+    "localized_name": "減輕火屬性傷害Lv1",
+    "description": null
+  },
+  "ElementResist_Fire_1_PAL": {
+    "localized_name": "擁抱烈日",
+    "description": "減輕火屬性傷害10.0%"
+  },
+  "ElementResist_Fire_2": {
+    "localized_name": "減輕火屬性傷害Lv2",
+    "description": null
+  },
+  "ElementResist_Fire_3": {
+    "localized_name": "減輕火屬性傷害Lv3",
+    "description": null
+  },
+  "ElementResist_Ice_1": {
+    "localized_name": "減輕冰屬性傷害Lv1",
+    "description": null
+  },
+  "ElementResist_Ice_1_PAL": {
+    "localized_name": "高溫體質",
+    "description": "減輕冰屬性傷害10.0%"
+  },
+  "ElementResist_Ice_2": {
+    "localized_name": "減輕冰屬性傷害Lv2",
+    "description": null
+  },
+  "ElementResist_Ice_3": {
+    "localized_name": "減輕冰屬性傷害Lv3",
+    "description": null
+  },
+  "ElementResist_Leaf_1": {
+    "localized_name": "減輕草屬性傷害Lv1",
+    "description": null
+  },
+  "ElementResist_Leaf_1_PAL": {
+    "localized_name": "除草效果",
+    "description": "減輕草屬性傷害10.0%"
+  },
+  "ElementResist_Leaf_2": {
+    "localized_name": "減輕草屬性傷害Lv2",
+    "description": null
+  },
+  "ElementResist_Leaf_3": {
+    "localized_name": "減輕草屬性傷害Lv3",
+    "description": null
+  },
+  "ElementResist_Normal_1": {
+    "localized_name": "減輕無屬性傷害Lv1",
+    "description": null
+  },
+  "ElementResist_Normal_1_PAL": {
+    "localized_name": "一反常態",
+    "description": "減輕無屬性傷害10.0%"
+  },
+  "ElementResist_Normal_2": {
+    "localized_name": "減輕無屬性傷害Lv2",
+    "description": null
+  },
+  "ElementResist_Normal_3": {
+    "localized_name": "減輕無屬性傷害Lv3",
+    "description": null
+  },
+  "ElementResist_Thunder_1": {
+    "localized_name": "減輕雷屬性傷害Lv1",
+    "description": null
+  },
+  "ElementResist_Thunder_1_PAL": {
+    "localized_name": "絕緣體",
+    "description": "減輕雷屬性傷害10.0%"
+  },
+  "ElementResist_Thunder_2": {
+    "localized_name": "減輕雷屬性傷害Lv2",
+    "description": null
+  },
+  "ElementResist_Thunder_3": {
+    "localized_name": "減輕雷屬性傷害Lv3",
+    "description": null
+  },
+  "EternalFlame": {
+    "localized_name": "永炎",
+    "description": null
+  },
+  "HP_ACC_up1": {
+    "localized_name": "提升體力Lv1",
+    "description": null
+  },
+  "HP_ACC_up2": {
+    "localized_name": "提升體力Lv2",
+    "description": null
+  },
+  "HP_ACC_up3": {
+    "localized_name": "提升體力Lv3",
+    "description": null
+  },
+  "Invader": {
+    "localized_name": "侵略者",
+    "description": null
+  },
+  "JumpCount_Increase1": {
+    "localized_name": "連續跳躍次數+1",
+    "description": "連續跳躍次數+1"
+  },
+  "JumpCount_Increase2": {
+    "localized_name": "連續跳躍次數+2",
+    "description": "連續跳躍次數+2"
+  },
+  "JumpCount_Increase3": {
+    "localized_name": "連續跳躍次數+3",
+    "description": "連續跳躍次數+3"
+  },
+  "JumpPower_Increase": {
+    "localized_name": "跳躍力強化",
+    "description": "跳躍力強化"
+  },
+  "Legend": {
+    "localized_name": "傳說",
+    "description": "攻擊+20.0% 防禦+20.0% 提升移動速度15.0%"
+  },
+  "MaxInventoryWeight_up": {
+    "localized_name": "提升負重上限Lv1",
+    "description": null
+  },
+  "MaxInventoryWeight_up2": {
+    "localized_name": "提升負重上限Lv2",
+    "description": null
+  },
+  "MaxInventoryWeight_up3": {
+    "localized_name": "提升負重上限Lv3",
+    "description": null
+  },
+  "MaxInventoryWeight_up_Equip_1": {
+    "localized_name": "提升負重上限Lv1",
+    "description": null
+  },
+  "MaxInventoryWeight_up_Equip_2": {
+    "localized_name": "提升負重上限Lv2",
+    "description": null
+  },
+  "MaxInventoryWeight_up_Equip_3": {
+    "localized_name": "提升負重上限Lv3",
+    "description": null
+  },
+  "MoveSpeed_up_1": {
+    "localized_name": "俐落",
+    "description": "提升移動速度10.0%"
+  },
+  "MoveSpeed_up_2": {
+    "localized_name": "運動健將",
+    "description": "提升移動速度20.0%"
+  },
+  "MoveSpeed_up_3": {
+    "localized_name": "神速",
+    "description": "提升移動速度30.0%"
+  },
+  "Nocturnal": {
+    "localized_name": "夜行性",
+    "description": "即使到夜晚也不會睡覺，會一直工作。"
+  },
+  "NonKilling": {
+    "localized_name": "手下留情",
+    "description": "和平主義者。 使攻擊目標的生命值不會小於1。"
+  },
+  "Noukin": {
+    "localized_name": "腦筋",
+    "description": null
+  },
+  "PAL_ALLAttack_down1": {
+    "localized_name": "膽小",
+    "description": null
+  },
+  "PAL_ALLAttack_down2": {
+    "localized_name": "消極主義者",
+    "description": null
+  },
+  "PAL_ALLAttack_up1": {
+    "localized_name": "勇敢",
+    "description": null
+  },
+  "PAL_ALLAttack_up2": {
+    "localized_name": "兇猛",
+    "description": null
+  },
+  "PAL_ALLAttack_up3": {
+    "localized_name": "鬼神",
+    "description": null
+  },
+  "PAL_CorporateSlave": {
+    "localized_name": "社畜",
+    "description": null
+  },
+  "PAL_FullStomach_Down_1": {
+    "localized_name": "小鳥胃",
+    "description": "減少飽足度下降速度<NumBlue_13>+10.0%</>"
+  },
+  "PAL_FullStomach_Down_2": {
+    "localized_name": "節食大師",
+    "description": "減少飽足度下降速度<NumBlue_13>+15.0%</>"
+  },
+  "PAL_FullStomach_Down_3": {
+    "localized_name": "極限絕食",
+    "description": "減少飽足度下降速度<NumBlue_13>+20.0%</>"
+  },
+  "PAL_FullStomach_Up_1": {
+    "localized_name": "貪吃",
+    "description": "增加飽足度下降速度<NumRed_13>+10.0%</>"
+  },
+  "PAL_FullStomach_Up_2": {
+    "localized_name": "無底之胃",
+    "description": "增加飽足度下降速度<NumRed_13>+15.0%</>"
+  },
+  "PAL_Sanity_Down_1": {
+    "localized_name": "正向思考",
+    "description": "減少SAN值下降速度<NumBlue_13>+10.0%</>"
+  },
+  "PAL_Sanity_Down_2": {
+    "localized_name": "工作狂",
+    "description": "減少SAN值下降速度<NumBlue_13>+15.0%</>"
+  },
+  "PAL_Sanity_Down_3": {
+    "localized_name": "明鏡止水",
+    "description": "減少SAN值下降速度<NumBlue_13>+20.0%</>"
+  },
+  "PAL_Sanity_Up_1": {
+    "localized_name": "情緒不穩",
+    "description": "增加SAN值下降速度<NumRed_13>+10.0%</>"
+  },
+  "PAL_Sanity_Up_2": {
+    "localized_name": "毀滅欲望",
+    "description": "增加SAN值下降速度<NumRed_13>+15.0%</>"
+  },
+  "PAL_SpiritualInst": {
+    "localized_name": "zh-Hant Text",
+    "description": null
+  },
+  "PAL_conceited": {
+    "localized_name": "自戀狂",
+    "description": null
+  },
+  "PAL_masochist": {
+    "localized_name": "受虐狂",
+    "description": null
+  },
+  "PAL_oraora": {
+    "localized_name": "強勢",
+    "description": null
+  },
+  "PAL_rude": {
+    "localized_name": "粗暴",
+    "description": null
+  },
+  "PAL_sadist": {
+    "localized_name": "虐待狂",
+    "description": null
+  },
+  "Rare": {
+    "localized_name": "稀有",
+    "description": null
+  },
+  "SalePrice_Down_1": {
+    "localized_name": "寒酸",
+    "description": "交易價格惡化-10.0%"
+  },
+  "SalePrice_Up_1": {
+    "localized_name": "高貴",
+    "description": "改善交易價格+5.0%"
+  },
+  "SalePrice_Up_2": {
+    "localized_name": "貴族",
+    "description": "改善交易價格+3.0%"
+  },
+  "SphereModule_Curve": {
+    "localized_name": "投擲曲線+1",
+    "description": null
+  },
+  "SphereModule_Curve2": {
+    "localized_name": "滑球模組",
+    "description": null
+  },
+  "SphereModule_Heavy": {
+    "localized_name": "帕魯球重量+1",
+    "description": null
+  },
+  "SphereModule_Homing": {
+    "localized_name": "追蹤模組",
+    "description": null
+  },
+  "SphereModule_Sniper": {
+    "localized_name": "投擲距離+1",
+    "description": null
+  },
+  "SphereModule_Sniper2": {
+    "localized_name": "投擲距離+2",
+    "description": null
+  },
+  "Stamina_Down_1": {
+    "localized_name": "家裏蹲",
+    "description": "最大耐力-25.0% ※此效果僅對可騎乘的帕魯有效。"
+  },
+  "Stamina_Up_1": {
+    "localized_name": "無限精力",
+    "description": "最大耐力+50.0% ※此效果僅對可騎乘的帕魯有效。"
+  },
+  "Stamina_Up_2": {
+    "localized_name": "健康寶寶",
+    "description": "最大耐力+25.0% ※此效果僅對可騎乘的帕魯有效。"
+  },
+  "Stamina_Up_3": {
+    "localized_name": "永動機",
+    "description": "最大耐力+75.0% ※此效果僅對可騎乘的帕魯有效。"
+  },
+  "TemperatureResist_Cold1": {
+    "localized_name": "耐寒Lv1",
+    "description": null
+  },
+  "TemperatureResist_Cold2": {
+    "localized_name": "耐寒Lv2",
+    "description": null
+  },
+  "TemperatureResist_Cold3": {
+    "localized_name": "耐寒Lv3",
+    "description": null
+  },
+  "TemperatureResist_Heat1": {
+    "localized_name": "耐暑Lv1",
+    "description": null
+  },
+  "TemperatureResist_Heat1Cold1": {
+    "localized_name": "耐暑Lv1 / 耐寒Lv1",
+    "description": null
+  },
+  "TemperatureResist_Heat2": {
+    "localized_name": "耐暑Lv2",
+    "description": null
+  },
+  "TemperatureResist_Heat2Cold2": {
+    "localized_name": "耐暑Lv2 / 耐寒Lv2",
+    "description": null
+  },
+  "TemperatureResist_Heat3": {
+    "localized_name": "耐暑Lv3",
+    "description": null
+  },
+  "TemperatureResist_Heat3Cold3": {
+    "localized_name": "耐暑Lv3 / 耐寒Lv3",
+    "description": null
+  },
+  "Test_PalEgg_HatchingSpeed_Up": {
+    "localized_name": "博愛主義者",
+    "description": "當分配到配種牧場時，產出蛋的速度將加快 100.0%。"
+  },
+  "TrainerATK_UP_1": {
+    "localized_name": "突襲指揮官",
+    "description": "提升玩家的攻擊10.0%"
+  },
+  "TrainerDEF_UP_1": {
+    "localized_name": "鐵壁軍師",
+    "description": "提升玩家的防禦10.0%"
+  },
+  "TrainerLogging_up1": {
+    "localized_name": "採伐領袖",
+    "description": "提升玩家的採伐效率25.0%"
+  },
+  "TrainerMining_up1": {
+    "localized_name": "礦山首領",
+    "description": "提升玩家的挖掘效率25.0%"
+  },
+  "TrainerWorkSpeed_UP_1": {
+    "localized_name": "啦啦隊",
+    "description": "提升玩家的工作速度25.0%"
+  },
+  "Vampire": {
+    "localized_name": "吸血鬼",
+    "description": "會吸收造成傷害的一部分來恢復自身的生命值。 即使到夜晚也不會睡覺，會一直工作。"
+  },
+  "Witch": {
+    "localized_name": "魔女",
+    "description": null
+  },
+  "WorkSpeed_ACC_up1": {
+    "localized_name": "高速作業Lv1",
+    "description": null
+  },
+  "WorkSpeed_ACC_up2": {
+    "localized_name": "高速作業Lv2",
+    "description": null
+  },
+  "WorkSpeed_ACC_up3": {
+    "localized_name": "高速作業Lv3",
+    "description": null
+  },
+  "defense_ACC_up1": {
+    "localized_name": "提升防禦Lv1",
+    "description": null
+  },
+  "defense_ACC_up2": {
+    "localized_name": "提升防禦Lv2",
+    "description": null
+  },
+  "defense_ACC_up3": {
+    "localized_name": "提升防禦Lv3",
+    "description": null
+  }
+}

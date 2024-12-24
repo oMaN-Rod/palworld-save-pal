@@ -1,0 +1,54 @@
+{
+  "Collection": {
+    "localized_name": "采集",
+    "description": null
+  },
+  "Cool": {
+    "localized_name": "冷却",
+    "description": null
+  },
+  "Deforest": {
+    "localized_name": "伐木",
+    "description": null
+  },
+  "EmitFlame": {
+    "localized_name": "生火",
+    "description": null
+  },
+  "GenerateElectricity": {
+    "localized_name": "发电",
+    "description": null
+  },
+  "Handcraft": {
+    "localized_name": "手工作业",
+    "description": null
+  },
+  "Mining": {
+    "localized_name": "采矿",
+    "description": null
+  },
+  "MonsterFarm": {
+    "localized_name": "牧场",
+    "description": null
+  },
+  "OilExtraction": {
+    "localized_name": "原油提取",
+    "description": null
+  },
+  "ProductMedicine": {
+    "localized_name": "制药",
+    "description": null
+  },
+  "Seeding": {
+    "localized_name": "播种",
+    "description": null
+  },
+  "Transport": {
+    "localized_name": "搬运",
+    "description": null
+  },
+  "Watering": {
+    "localized_name": "浇水",
+    "description": null
+  }
+}

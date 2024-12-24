@@ -1,0 +1,794 @@
+{
+  "AirDash_1": {
+    "localized_name": "Aerial Dash +1",
+    "description": "Aerial Dash +1"
+  },
+  "AirDash_2": {
+    "localized_name": "Aerial Dash +2",
+    "description": "Aerial Dash +2"
+  },
+  "AirDash_3": {
+    "localized_name": "Aerial Dash +3",
+    "description": "Aerial Dash +3"
+  },
+  "AirDash_4": {
+    "localized_name": "Aerial Dash +4",
+    "description": "Aerial Dash +4"
+  },
+  "Alien": {
+    "localized_name": "Otherworldly Cells",
+    "description": "Attack +10.0% Fire damage reduction 15.0% Lightning damage reduction 15.0%"
+  },
+  "Attack_ACC_up1": {
+    "localized_name": "Attack Up Lv. 1",
+    "description": null
+  },
+  "Attack_ACC_up2": {
+    "localized_name": "Attack Up Lv. 2",
+    "description": null
+  },
+  "Attack_ACC_up3": {
+    "localized_name": "Attack Up Lv. 3",
+    "description": null
+  },
+  "CaptureLevel_Up_1": {
+    "localized_name": "Capture Strength +1",
+    "description": null
+  },
+  "CaptureLevel_Up_2": {
+    "localized_name": "Capture Strength +2",
+    "description": null
+  },
+  "CaptureLevel_Up_3": {
+    "localized_name": "Capture Strength +3",
+    "description": null
+  },
+  "CaptureLevel_Up_4": {
+    "localized_name": "Capture Strength +4",
+    "description": null
+  },
+  "CaptureLevel_Up_5": {
+    "localized_name": "Capture Strength +5",
+    "description": null
+  },
+  "CaptureLevel_Up_6": {
+    "localized_name": "Capture Strength +6",
+    "description": null
+  },
+  "CollectItem_Berries": {
+    "localized_name": "Berry Picker",
+    "description": null
+  },
+  "CollectItem_Egg": {
+    "localized_name": "Egg Layer",
+    "description": null
+  },
+  "CollectItem_Milk": {
+    "localized_name": "Milk Maker",
+    "description": null
+  },
+  "CollectItem_Money": {
+    "localized_name": "Gold Digger",
+    "description": null
+  },
+  "CollectItem_Sweets": {
+    "localized_name": "Confectioner",
+    "description": null
+  },
+  "CollectItem_Wool_Alpaca": {
+    "localized_name": "Wool Maker",
+    "description": null
+  },
+  "CollectItem_Wool_SheepBall": {
+    "localized_name": "Wool Maker",
+    "description": null
+  },
+  "CollectItem_Wool_WhiteMoth": {
+    "localized_name": "Silk Spinner",
+    "description": null
+  },
+  "CoolTimeReduction_Down_1": {
+    "localized_name": "Easygoing",
+    "description": "Active skill cooldown extension -15.0%"
+  },
+  "CoolTimeReduction_Up_1": {
+    "localized_name": "Serenity",
+    "description": "Active skill cooldown reduction 30.0% Attack +10.0%"
+  },
+  "CoolTimeReduction_Up_2": {
+    "localized_name": "Impatient",
+    "description": "Active skill cooldown reduction 15.0%"
+  },
+  "CoolTimeReduction_Up_3": {
+    "localized_name": "Tempest Fury",
+    "description": "Active skill cooldown reduction 0.0% Attack +0.0%"
+  },
+  "CraftSpeed_down1": {
+    "localized_name": "Clumsy",
+    "description": null
+  },
+  "CraftSpeed_down2": {
+    "localized_name": "Slacker",
+    "description": null
+  },
+  "CraftSpeed_up1": {
+    "localized_name": "Serious",
+    "description": null
+  },
+  "CraftSpeed_up2": {
+    "localized_name": "Artisan",
+    "description": null
+  },
+  "CraftSpeed_up3": {
+    "localized_name": "Remarkable Craftsmanship",
+    "description": null
+  },
+  "Deffence_down1": {
+    "localized_name": "Downtrodden",
+    "description": null
+  },
+  "Deffence_down2": {
+    "localized_name": "Brittle",
+    "description": null
+  },
+  "Deffence_up1": {
+    "localized_name": "Hard Skin",
+    "description": null
+  },
+  "Deffence_up2": {
+    "localized_name": "Burly Body",
+    "description": null
+  },
+  "Deffence_up3": {
+    "localized_name": "Diamond Body",
+    "description": null
+  },
+  "ElementBoost_Aqua_1_PAL": {
+    "localized_name": "Hydromaniac",
+    "description": "10.0% increase in Water attack damage."
+  },
+  "ElementBoost_Aqua_2_PAL": {
+    "localized_name": "Lord of the Sea",
+    "description": null
+  },
+  "ElementBoost_Dark_1_BossDefeat": {
+    "localized_name": "Dark Damage Enhancement (Small)",
+    "description": null
+  },
+  "ElementBoost_Dark_1_PAL": {
+    "localized_name": "Veil of Darkness",
+    "description": "10.0% increase in Dark attack damage."
+  },
+  "ElementBoost_Dark_2_BossDefeat": {
+    "localized_name": "Dark Damage Enhancement (Medium)",
+    "description": null
+  },
+  "ElementBoost_Dark_2_PAL": {
+    "localized_name": "Lord of the Underworld",
+    "description": null
+  },
+  "ElementBoost_Dark_3_BossDefeat": {
+    "localized_name": "Dark Damage Enhancement (Large)",
+    "description": null
+  },
+  "ElementBoost_Dragon_1_BossDefeat": {
+    "localized_name": "Dragon Damage Enhancement (Small)",
+    "description": null
+  },
+  "ElementBoost_Dragon_1_PAL": {
+    "localized_name": "Blood of the Dragon",
+    "description": "10.0% increase in Dragon attack damage."
+  },
+  "ElementBoost_Dragon_2_BossDefeat": {
+    "localized_name": "Dragon Damage Enhancement (Medium)",
+    "description": null
+  },
+  "ElementBoost_Dragon_2_PAL": {
+    "localized_name": "Divine Dragon",
+    "description": null
+  },
+  "ElementBoost_Dragon_3_BossDefeat": {
+    "localized_name": "Dragon Damage Enhancement (Large)",
+    "description": null
+  },
+  "ElementBoost_Earth_1_BossDefeat": {
+    "localized_name": "Ground Damage Enhancement (Small)",
+    "description": null
+  },
+  "ElementBoost_Earth_1_PAL": {
+    "localized_name": "Power of Gaia",
+    "description": "10.0% increase in Earth attack damage."
+  },
+  "ElementBoost_Earth_2_BossDefeat": {
+    "localized_name": "Ground Damage Enhancement (Medium)",
+    "description": null
+  },
+  "ElementBoost_Earth_2_PAL": {
+    "localized_name": "Earth Emperor",
+    "description": null
+  },
+  "ElementBoost_Earth_3_BossDefeat": {
+    "localized_name": "Ground Damage Enhancement (Large)",
+    "description": null
+  },
+  "ElementBoost_Electricity_1_BossDefeat": {
+    "localized_name": "Electric Damage Enhancement (Small)",
+    "description": null
+  },
+  "ElementBoost_Electricity_2_BossDefeat": {
+    "localized_name": "Electric Damage Enhancement (Medium)",
+    "description": null
+  },
+  "ElementBoost_Electricity_3_BossDefeat": {
+    "localized_name": "Electric Damage Enhancement (Large)",
+    "description": null
+  },
+  "ElementBoost_Fire_1_BossDefeat": {
+    "localized_name": "Fire Damage Enhancement (Small)",
+    "description": null
+  },
+  "ElementBoost_Fire_1_PAL": {
+    "localized_name": "Pyromaniac",
+    "description": "10.0% increase in Fire attack damage."
+  },
+  "ElementBoost_Fire_2_BossDefeat": {
+    "localized_name": "Fire Damage Enhancement (Medium)",
+    "description": null
+  },
+  "ElementBoost_Fire_2_PAL": {
+    "localized_name": "Flame Emperor",
+    "description": null
+  },
+  "ElementBoost_Fire_3_BossDefeat": {
+    "localized_name": "Fire Damage Enhancement (Large)",
+    "description": null
+  },
+  "ElementBoost_Ice_1_BossDefeat": {
+    "localized_name": "Ice Damage Enhancement (Small)",
+    "description": null
+  },
+  "ElementBoost_Ice_1_PAL": {
+    "localized_name": "Coldblooded",
+    "description": "10.0% increase in Ice attack damage."
+  },
+  "ElementBoost_Ice_2_BossDefeat": {
+    "localized_name": "Ice Damage Enhancement (Medium)",
+    "description": null
+  },
+  "ElementBoost_Ice_2_PAL": {
+    "localized_name": "Ice Emperor",
+    "description": null
+  },
+  "ElementBoost_Ice_3_BossDefeat": {
+    "localized_name": "Ice Damage Enhancement (Large)",
+    "description": null
+  },
+  "ElementBoost_Leaf_1_BossDefeat": {
+    "localized_name": "Grass Damage Enhancement (Small)",
+    "description": null
+  },
+  "ElementBoost_Leaf_1_PAL": {
+    "localized_name": "Fragrant Foliage",
+    "description": "10.0% increase in Grass attack damage."
+  },
+  "ElementBoost_Leaf_2_BossDefeat": {
+    "localized_name": "Grass Damage Enhancement (Medium)",
+    "description": null
+  },
+  "ElementBoost_Leaf_2_PAL": {
+    "localized_name": "Spirit Emperor",
+    "description": null
+  },
+  "ElementBoost_Leaf_3_BossDefeat": {
+    "localized_name": "Grass Damage Enhancement (Large)",
+    "description": null
+  },
+  "ElementBoost_Normal_1_BossDefeat": {
+    "localized_name": "Neutral Damage Enhancement (Small)",
+    "description": null
+  },
+  "ElementBoost_Normal_1_PAL": {
+    "localized_name": "Zen Mind",
+    "description": "10.0% increase in Neutral attack damage."
+  },
+  "ElementBoost_Normal_2_BossDefeat": {
+    "localized_name": "Neutral Damage Enhancement (Medium)",
+    "description": null
+  },
+  "ElementBoost_Normal_2_PAL": {
+    "localized_name": "Celestial Emperor",
+    "description": null
+  },
+  "ElementBoost_Normal_3_BossDefeat": {
+    "localized_name": "Neutral Damage Enhancement (Large)",
+    "description": null
+  },
+  "ElementBoost_Thunder_1_PAL": {
+    "localized_name": "Capacitor",
+    "description": "10.0% increase in Lightning attack damage."
+  },
+  "ElementBoost_Thunder_2_PAL": {
+    "localized_name": "Lord of Lightning",
+    "description": null
+  },
+  "ElementBoost_Water_1_BossDefeat": {
+    "localized_name": "Water Damage Enhancement (Small)",
+    "description": null
+  },
+  "ElementBoost_Water_2_BossDefeat": {
+    "localized_name": "Water Damage Enhancement (Medium)",
+    "description": null
+  },
+  "ElementBoost_Water_3_BossDefeat": {
+    "localized_name": "Water Damage Enhancement (Large)",
+    "description": null
+  },
+  "ElementResist_Aqua_1": {
+    "localized_name": "Water Damage Reduction Lv. 1",
+    "description": null
+  },
+  "ElementResist_Aqua_1_PAL": {
+    "localized_name": "Waterproof",
+    "description": "10.0% decrease in incoming Water damage."
+  },
+  "ElementResist_Aqua_2": {
+    "localized_name": "Water Damage Reduction Lv. 2",
+    "description": null
+  },
+  "ElementResist_Aqua_3": {
+    "localized_name": "Water Damage Reduction Lv. 3",
+    "description": null
+  },
+  "ElementResist_Dark_1": {
+    "localized_name": "Dark Damage Reduction Lv. 1",
+    "description": null
+  },
+  "ElementResist_Dark_1_PAL": {
+    "localized_name": "Cheery",
+    "description": "10.0% decrease in incoming Dark damage."
+  },
+  "ElementResist_Dark_2": {
+    "localized_name": "Dark Damage Reduction Lv. 2",
+    "description": null
+  },
+  "ElementResist_Dark_3": {
+    "localized_name": "Dark Damage Reduction Lv. 3",
+    "description": null
+  },
+  "ElementResist_Dragon_1": {
+    "localized_name": "Dragon Damage Reduction Lv. 1",
+    "description": null
+  },
+  "ElementResist_Dragon_1_PAL": {
+    "localized_name": "Dragonkiller",
+    "description": "10.0% decrease in incoming Dragon damage."
+  },
+  "ElementResist_Dragon_2": {
+    "localized_name": "Dragon Damage Reduction Lv. 2",
+    "description": null
+  },
+  "ElementResist_Dragon_3": {
+    "localized_name": "Dragon Damage Reduction Lv. 3",
+    "description": null
+  },
+  "ElementResist_Earth_1": {
+    "localized_name": "Earth Damage Reduction Lv. 1",
+    "description": null
+  },
+  "ElementResist_Earth_1_PAL": {
+    "localized_name": "Earthquake Resistant",
+    "description": "10.0% decrease in incoming Earth damage."
+  },
+  "ElementResist_Earth_2": {
+    "localized_name": "Earth Damage Reduction Lv. 2",
+    "description": null
+  },
+  "ElementResist_Earth_3": {
+    "localized_name": "Earth Damage Reduction Lv. 3",
+    "description": null
+  },
+  "ElementResist_Fire_1": {
+    "localized_name": "Fire Damage Reduction Lv. 1",
+    "description": null
+  },
+  "ElementResist_Fire_1_PAL": {
+    "localized_name": "Suntan Lover",
+    "description": "10.0% decrease in incoming Fire damage."
+  },
+  "ElementResist_Fire_2": {
+    "localized_name": "Fire Damage Reduction Lv. 2",
+    "description": null
+  },
+  "ElementResist_Fire_3": {
+    "localized_name": "Fire Damage Reduction Lv. 3",
+    "description": null
+  },
+  "ElementResist_Ice_1": {
+    "localized_name": "Ice Damage Reduction Lv. 1",
+    "description": null
+  },
+  "ElementResist_Ice_1_PAL": {
+    "localized_name": "Heated Body",
+    "description": "10.0% decrease in incoming Ice damage."
+  },
+  "ElementResist_Ice_2": {
+    "localized_name": "Ice Damage Reduction Lv. 2",
+    "description": null
+  },
+  "ElementResist_Ice_3": {
+    "localized_name": "Ice Damage Reduction Lv. 3",
+    "description": null
+  },
+  "ElementResist_Leaf_1": {
+    "localized_name": "Grass Damage Reduction Lv. 1",
+    "description": null
+  },
+  "ElementResist_Leaf_1_PAL": {
+    "localized_name": "Botanical Barrier",
+    "description": "10.0% decrease in incoming Grass damage."
+  },
+  "ElementResist_Leaf_2": {
+    "localized_name": "Grass Damage Reduction Lv. 2",
+    "description": null
+  },
+  "ElementResist_Leaf_3": {
+    "localized_name": "Grass Damage Reduction Lv. 3",
+    "description": null
+  },
+  "ElementResist_Normal_1": {
+    "localized_name": "Neutral Damage Reduction Lv. 1",
+    "description": null
+  },
+  "ElementResist_Normal_1_PAL": {
+    "localized_name": "Abnormal",
+    "description": "10.0% decrease in incoming Neutral damage."
+  },
+  "ElementResist_Normal_2": {
+    "localized_name": "Neutral Damage Reduction Lv. 2",
+    "description": null
+  },
+  "ElementResist_Normal_3": {
+    "localized_name": "Neutral Damage Reduction Lv. 3",
+    "description": null
+  },
+  "ElementResist_Thunder_1": {
+    "localized_name": "Electric Damage Reduction Lv. 1",
+    "description": null
+  },
+  "ElementResist_Thunder_1_PAL": {
+    "localized_name": "Insulated Body",
+    "description": "10.0% decrease in incoming Lightning damage."
+  },
+  "ElementResist_Thunder_2": {
+    "localized_name": "Electric Damage Reduction Lv. 2",
+    "description": null
+  },
+  "ElementResist_Thunder_3": {
+    "localized_name": "Electric Damage Reduction Lv. 3",
+    "description": null
+  },
+  "EternalFlame": {
+    "localized_name": "Eternal Flame",
+    "description": null
+  },
+  "HP_ACC_up1": {
+    "localized_name": "Health Up Lv. 1",
+    "description": null
+  },
+  "HP_ACC_up2": {
+    "localized_name": "Health Up Lv. 2",
+    "description": null
+  },
+  "HP_ACC_up3": {
+    "localized_name": "Health Up Lv. 3",
+    "description": null
+  },
+  "Invader": {
+    "localized_name": "Invader",
+    "description": null
+  },
+  "JumpCount_Increase1": {
+    "localized_name": "Jump Count Increase +1",
+    "description": "Jump Count Increase +1"
+  },
+  "JumpCount_Increase2": {
+    "localized_name": "Jump Count Increase +2",
+    "description": "Jump Count Increase +2"
+  },
+  "JumpCount_Increase3": {
+    "localized_name": "Jump Count Increase +3",
+    "description": "Jump Count Increase +3"
+  },
+  "JumpPower_Increase": {
+    "localized_name": "Jump Power Boost",
+    "description": "Jump Power Boost"
+  },
+  "Legend": {
+    "localized_name": "Legend",
+    "description": "Attack +20.0% Defense +20.0% Movement Speed increases 15.0%"
+  },
+  "MaxInventoryWeight_up": {
+    "localized_name": "Max Carrying Capacity Lv. 1",
+    "description": null
+  },
+  "MaxInventoryWeight_up2": {
+    "localized_name": "Max Carrying Capacity Lv. 2",
+    "description": null
+  },
+  "MaxInventoryWeight_up3": {
+    "localized_name": "Max Carrying Capacity Lv. 3",
+    "description": null
+  },
+  "MaxInventoryWeight_up_Equip_1": {
+    "localized_name": "Max Carrying Capacity Lv. 1",
+    "description": null
+  },
+  "MaxInventoryWeight_up_Equip_2": {
+    "localized_name": "Max Carrying Capacity Lv. 2",
+    "description": null
+  },
+  "MaxInventoryWeight_up_Equip_3": {
+    "localized_name": "Max Carrying Capacity Lv. 3",
+    "description": null
+  },
+  "MoveSpeed_up_1": {
+    "localized_name": "Nimble",
+    "description": "10.0% increase to movement speed."
+  },
+  "MoveSpeed_up_2": {
+    "localized_name": "Runner",
+    "description": "20.0% increase to movement speed."
+  },
+  "MoveSpeed_up_3": {
+    "localized_name": "Swift",
+    "description": "30.0% increase to movement speed."
+  },
+  "Nocturnal": {
+    "localized_name": "Nocturnal",
+    "description": "Does not sleep and continues to work even at night."
+  },
+  "NonKilling": {
+    "localized_name": "Mercy Hit",
+    "description": "Pacifist. Will not reduce the target's Health below 1."
+  },
+  "Noukin": {
+    "localized_name": "Musclehead",
+    "description": null
+  },
+  "PAL_ALLAttack_down1": {
+    "localized_name": "Coward",
+    "description": null
+  },
+  "PAL_ALLAttack_down2": {
+    "localized_name": "Pacifist",
+    "description": null
+  },
+  "PAL_ALLAttack_up1": {
+    "localized_name": "Brave",
+    "description": null
+  },
+  "PAL_ALLAttack_up2": {
+    "localized_name": "Ferocious",
+    "description": null
+  },
+  "PAL_ALLAttack_up3": {
+    "localized_name": "Demon God",
+    "description": null
+  },
+  "PAL_CorporateSlave": {
+    "localized_name": "Work Slave",
+    "description": null
+  },
+  "PAL_FullStomach_Down_1": {
+    "localized_name": "Dainty Eater",
+    "description": "Hunger decreases <NumBlue_13>+10.0%</> slower."
+  },
+  "PAL_FullStomach_Down_2": {
+    "localized_name": "Diet Lover",
+    "description": "Hunger decreases <NumBlue_13>+15.0%</> slower."
+  },
+  "PAL_FullStomach_Down_3": {
+    "localized_name": "Mastery of Fasting",
+    "description": "Hunger decreases <NumBlue_13>+20.0%</> slower."
+  },
+  "PAL_FullStomach_Up_1": {
+    "localized_name": "Glutton",
+    "description": "Hunger decreases <NumRed_13>+10.0%</> faster."
+  },
+  "PAL_FullStomach_Up_2": {
+    "localized_name": "Bottomless Stomach",
+    "description": "Hunger decreases <NumRed_13>+15.0%</> faster."
+  },
+  "PAL_Sanity_Down_1": {
+    "localized_name": "Positive Thinker",
+    "description": "SAN drops <NumBlue_13>+10.0%</> slower."
+  },
+  "PAL_Sanity_Down_2": {
+    "localized_name": "Workaholic",
+    "description": "SAN drops <NumBlue_13>+15.0%</> slower."
+  },
+  "PAL_Sanity_Down_3": {
+    "localized_name": "Heart of the Immovable King",
+    "description": "SAN drops <NumBlue_13>+20.0%</> slower."
+  },
+  "PAL_Sanity_Up_1": {
+    "localized_name": "Unstable",
+    "description": "SAN drops <NumRed_13>+10.0%</> faster."
+  },
+  "PAL_Sanity_Up_2": {
+    "localized_name": "Destructive",
+    "description": "SAN drops <NumRed_13>+15.0%</> faster."
+  },
+  "PAL_SpiritualInst": {
+    "localized_name": "Mentally unstable",
+    "description": null
+  },
+  "PAL_conceited": {
+    "localized_name": "Conceited",
+    "description": null
+  },
+  "PAL_masochist": {
+    "localized_name": "Masochist",
+    "description": null
+  },
+  "PAL_oraora": {
+    "localized_name": "Aggressive",
+    "description": null
+  },
+  "PAL_rude": {
+    "localized_name": "Hooligan",
+    "description": null
+  },
+  "PAL_sadist": {
+    "localized_name": "Sadist",
+    "description": null
+  },
+  "Rare": {
+    "localized_name": "Lucky",
+    "description": null
+  },
+  "SalePrice_Down_1": {
+    "localized_name": "Shabby",
+    "description": "Decrease the value of items when sold by -10.0%"
+  },
+  "SalePrice_Up_1": {
+    "localized_name": "Noble",
+    "description": "Increases the value of items when sold by +5.0%"
+  },
+  "SalePrice_Up_2": {
+    "localized_name": "Fine Furs",
+    "description": "Increases the value of items when sold by +3.0%"
+  },
+  "SphereModule_Curve": {
+    "localized_name": "Sphere Curve +1",
+    "description": null
+  },
+  "SphereModule_Curve2": {
+    "localized_name": "Sphere Slider",
+    "description": null
+  },
+  "SphereModule_Heavy": {
+    "localized_name": "Sphere Weight +1",
+    "description": null
+  },
+  "SphereModule_Homing": {
+    "localized_name": "Sphere Homing",
+    "description": null
+  },
+  "SphereModule_Sniper": {
+    "localized_name": "Sphere Range +1",
+    "description": null
+  },
+  "SphereModule_Sniper2": {
+    "localized_name": "Sphere Range +2",
+    "description": null
+  },
+  "Stamina_Down_1": {
+    "localized_name": "Sickly",
+    "description": "Max Stamina -25.0% *This effect is only valid for rideable pals."
+  },
+  "Stamina_Up_1": {
+    "localized_name": "Infinite Stamina",
+    "description": "Max stamina +50.0% *This effect is only valid for rideable pals."
+  },
+  "Stamina_Up_2": {
+    "localized_name": "Fit as a Fiddle",
+    "description": "Max stamina +25.0% *This effect is only valid for rideable pals."
+  },
+  "Stamina_Up_3": {
+    "localized_name": "Eternal Engine",
+    "description": "Max stamina +75.0% *This effect is only valid for rideable pals."
+  },
+  "TemperatureResist_Cold1": {
+    "localized_name": "Cold Resistant Lv. 1",
+    "description": null
+  },
+  "TemperatureResist_Cold2": {
+    "localized_name": "Cold Resistant Lv. 2",
+    "description": null
+  },
+  "TemperatureResist_Cold3": {
+    "localized_name": "Cold Resistant Lv. 3",
+    "description": null
+  },
+  "TemperatureResist_Heat1": {
+    "localized_name": "Heat Resistant Lv. 1",
+    "description": null
+  },
+  "TemperatureResist_Heat1Cold1": {
+    "localized_name": "Heat Resistant Lv. 1 / Cold Resistant Lv. 1",
+    "description": null
+  },
+  "TemperatureResist_Heat2": {
+    "localized_name": "Heat Resistant Lv. 2",
+    "description": null
+  },
+  "TemperatureResist_Heat2Cold2": {
+    "localized_name": "Heat Resistant Lv. 2 / Cold Resistant Lv. 2",
+    "description": null
+  },
+  "TemperatureResist_Heat3": {
+    "localized_name": "Heat Resistant Lv. 3",
+    "description": null
+  },
+  "TemperatureResist_Heat3Cold3": {
+    "localized_name": "Heat Resistant Lv. 3 / Cold Resistant Lv. 3",
+    "description": null
+  },
+  "Test_PalEgg_HatchingSpeed_Up": {
+    "localized_name": "Philanthropist",
+    "description": "When assigned to a Breeding Farm, breeding speed is increased by 100.0%."
+  },
+  "TrainerATK_UP_1": {
+    "localized_name": "Vanguard",
+    "description": "10.0% increase in Player Attack."
+  },
+  "TrainerDEF_UP_1": {
+    "localized_name": "Stronghold Strategist",
+    "description": "10.0% increase in Player Defense."
+  },
+  "TrainerLogging_up1": {
+    "localized_name": "Logging Foreman",
+    "description": "25.0% increase in Player Logging Efficiency."
+  },
+  "TrainerMining_up1": {
+    "localized_name": "Mine Foreman",
+    "description": "25.0% increase in Player Mining Efficiency."
+  },
+  "TrainerWorkSpeed_UP_1": {
+    "localized_name": "Motivational Leader",
+    "description": "25.0% increase in Player Work Speed."
+  },
+  "Vampire": {
+    "localized_name": "Vampiric",
+    "description": "Absorbs a portion of the damage dealt to restore Health. Does not sleep at night and continues to work."
+  },
+  "Witch": {
+    "localized_name": "Siren of the Void",
+    "description": null
+  },
+  "WorkSpeed_ACC_up1": {
+    "localized_name": "Speedy Worker Lv. 1",
+    "description": null
+  },
+  "WorkSpeed_ACC_up2": {
+    "localized_name": "Speedy Worker Lv. 2",
+    "description": null
+  },
+  "WorkSpeed_ACC_up3": {
+    "localized_name": "Speedy Worker Lv. 3",
+    "description": null
+  },
+  "defense_ACC_up1": {
+    "localized_name": "Defense Up Lv. 1",
+    "description": null
+  },
+  "defense_ACC_up2": {
+    "localized_name": "Defense Up Lv. 2",
+    "description": null
+  },
+  "defense_ACC_up3": {
+    "localized_name": "Defense Up Lv. 3",
+    "description": null
+  }
+}

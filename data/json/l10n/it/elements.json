@@ -1,0 +1,38 @@
+{
+  "Dark": {
+    "localized_name": "oscurità",
+    "description": null
+  },
+  "Dragon": {
+    "localized_name": "drago",
+    "description": null
+  },
+  "Earth": {
+    "localized_name": "terra",
+    "description": null
+  },
+  "Electricity": {
+    "localized_name": "elettricità",
+    "description": null
+  },
+  "Fire": {
+    "localized_name": "fuoco",
+    "description": null
+  },
+  "Ice": {
+    "localized_name": "ghiaccio",
+    "description": null
+  },
+  "Leaf": {
+    "localized_name": "erba",
+    "description": null
+  },
+  "Normal": {
+    "localized_name": "non elementale",
+    "description": null
+  },
+  "Water": {
+    "localized_name": "acqua",
+    "description": null
+  }
+}

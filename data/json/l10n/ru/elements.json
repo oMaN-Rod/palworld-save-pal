@@ -1,0 +1,38 @@
+{
+  "Dark": {
+    "localized_name": "Тьма",
+    "description": null
+  },
+  "Dragon": {
+    "localized_name": "Дракон",
+    "description": null
+  },
+  "Earth": {
+    "localized_name": "Земля",
+    "description": null
+  },
+  "Electricity": {
+    "localized_name": "Молния",
+    "description": null
+  },
+  "Fire": {
+    "localized_name": "Огонь",
+    "description": null
+  },
+  "Ice": {
+    "localized_name": "Лед",
+    "description": null
+  },
+  "Leaf": {
+    "localized_name": "Природа",
+    "description": null
+  },
+  "Normal": {
+    "localized_name": "Обычный",
+    "description": null
+  },
+  "Water": {
+    "localized_name": "Вода",
+    "description": null
+  }
+}

@@ -1,0 +1,1214 @@
+{
+  "Altar": {
+    "localized_name": "Beschwörungsaltar",
+    "description": "Opfere hier Steintafeln, auf denen Pals abgebildet sind, um mächtige Pals zu beschwören. Bereite dich zuvor gut auf den Kampf vor!"
+  },
+  "Andon": {
+    "localized_name": "Papierlaterne",
+    "description": "Eine dekorative Papierlaterne. Passt perfekt zu Gebäuden im fernöstlichen Stil."
+  },
+  "Barrel01_Iron": {
+    "localized_name": "Rote Metalltonne",
+    "description": "Eine dekorative rote Metalltonne."
+  },
+  "Barrel02_Iron": {
+    "localized_name": "Blaue Metalltonne",
+    "description": "Eine dekorative blaue Metalltonne."
+  },
+  "Barrel03_Iron": {
+    "localized_name": "Grüne Metalltonne",
+    "description": "Eine dekorative grüne Metalltonne."
+  },
+  "Barrel_Wood": {
+    "localized_name": "Holzfass",
+    "description": "Ein Holzfass zur Aufbewahrung von Gegenständen."
+  },
+  "BaseCampBattleDirector": {
+    "localized_name": "Alarmglocke",
+    "description": "Eine Glocke, mit der du die Alarmbereitschaft der Pals im Lager ändern kannst. Lege jederzeit fest, ob deine Pals bei einem Angriff Eindringlinge zurückschlagen oder sich auf die Arbeit konzentrieren sollen."
+  },
+  "BaseCampItemDispenser": {
+    "localized_name": "Gegenstandsdispenser",
+    "description": "Ein Apparat, mit dessen Hilfe Gegenstände aus allen Truhen im Lager entnommen werden können."
+  },
+  "BaseCampWorkHard": {
+    "localized_name": "Aufsichtskanzel",
+    "description": "Von hier aus kannst du anordnen, wie deine Arbeitspals arbeiten sollen und ihnen bestimmte Arbeiten erlauben oder verbieten."
+  },
+  "BathTub_Stone": {
+    "localized_name": "Antike Badewanne",
+    "description": "Eine dekorative antike Badewanne."
+  },
+  "Bench_Wood": {
+    "localized_name": "Holzbank",
+    "description": "Eine dekorative Holzbank."
+  },
+  "BlastFurnace": {
+    "localized_name": "Primitiver Hochofen",
+    "description": "Eine Anlage, in der Metallbarren raffiniert werden kann. Die Qualität ist nicht besonders gut und der Prozess langsam. Muss von einem Feuer-Pal angefacht werden."
+  },
+  "BlastFurnace2": {
+    "localized_name": "Verbesserter Hochofen",
+    "description": "Eine Anlage, in der Hochwertiger Metallbarren raffiniert werden kann. Die Qualität ist schon etwas besser, aber das Tempo lässt noch zu wünschen übrig. Muss von einem Feuer-Pal angefacht werden."
+  },
+  "BlastFurnace3": {
+    "localized_name": "Elektrischer Hochofen",
+    "description": "Eine Anlage, in der Paluminiumbarren raffiniert werden kann. Benötigt Strom, ermöglicht dafür aber eine schnellere Raffination. Muss von einem Feuer-Pal angefacht werden."
+  },
+  "BlastFurnace4": {
+    "localized_name": "Industrieller Hochofen",
+    "description": "Eine Anlage, in der Hexolit raffiniert werden kann. Dank ihrer Größe können hier mehrere Pals gemeinsam arbeiten. Muss von einem Feuer-Pal angefacht werden."
+  },
+  "Bonsai": {
+    "localized_name": "Bonsai",
+    "description": "Ein dekorativer Bonsai. Passt perfekt zu Gebäuden im fernöstlichen Stil."
+  },
+  "Box01_Iron": {
+    "localized_name": "Kleine Kiste",
+    "description": "Eine kleine Kiste zur Aufbewahrung von Gegenständen."
+  },
+  "Box01_Stone": {
+    "localized_name": "Antike Rattankiste",
+    "description": "Eine dekorative antike Rattankiste."
+  },
+  "Box02_Iron": {
+    "localized_name": "Kiste mit Stoffabdeckung",
+    "description": "Eine Kiste mit Stoffabdeckung zur Aufbewahrung von Gegenständen."
+  },
+  "Box_Wood": {
+    "localized_name": "Holzkiste",
+    "description": "Eine Holzkiste zur Aufbewahrung von Gegenständen."
+  },
+  "BreedFarm": {
+    "localized_name": "Zuchtfarm",
+    "description": "Hier kannst du zwei Pals (♂ und ♀) hinschicken, um sie Eier legen zu lassen. Als Motivation zum Eierlegen wird „Torte“ benötigt."
+  },
+  "BuildableGoddessStatue": {
+    "localized_name": "Statue der Kraft",
+    "description": "Eine steinerne Statue, wie sie in den Überlieferungen von Palapagos erwähnt werden. Opfere ihr Lifmunk-Statuetten, um mysteriöse Kräfte zu erhalten."
+  },
+  "Byobu": {
+    "localized_name": "Paravent",
+    "description": "Ein dekorativer Paravent. Passt perfekt zu Gebäuden im fernöstlichen Stil."
+  },
+  "CableCoil01_Iron": {
+    "localized_name": "Kabeltrommel",
+    "description": "Eine dekorative Kabeltrommel."
+  },
+  "CampFire": {
+    "localized_name": "Lagerfeuer",
+    "description": "Eine Anlage zur Zubereitung von Speisen. Mehr als ein simples Anbraten ist allerdings nicht drin. Muss von einem Feuer-Pal angefacht werden."
+  },
+  "Cauldron": {
+    "localized_name": "Hexenkessel",
+    "description": "Kann im Lager aufgestellt werden und erhöht das Arbeitstempo bei der Arzneimittelherstellung. Mehrere aufzustellen, bringt keinen zusätzlichen Nutzen."
+  },
+  "CeilingLamp": {
+    "localized_name": "Deckenlampe",
+    "description": "Eine Lichtquelle, die dein Lager auch in dunklen Nächten erhellt. Kann an Decken angebracht werden. Benötigt Strom, erhellt dafür aber einen größeren Bereich."
+  },
+  "Chair01_Iron": {
+    "localized_name": "Stuhl mit Lederbezug",
+    "description": "Ein dekorativer Stuhl mit Lederbezug."
+  },
+  "Chair01_Pal": {
+    "localized_name": "Frosch-Stuhl",
+    "description": "Ein dekorativer, niedlicher Stuhl."
+  },
+  "Chair01_Stone": {
+    "localized_name": "Antiker Holzstuhl",
+    "description": "Ein dekorativer antiker Holzstuhl."
+  },
+  "Chair01_Wood": {
+    "localized_name": "Holzstuhl",
+    "description": "Ein dekorativer Holzstuhl."
+  },
+  "Chair02_Iron": {
+    "localized_name": "Metallstuhl",
+    "description": "Ein dekorativer Metallstuhl."
+  },
+  "Chair02_Stone": {
+    "localized_name": "Antiker Holzstuhl (grün)",
+    "description": "Ein dekorativer antiker Holzstuhl in Grün."
+  },
+  "CharacterRankUp": {
+    "localized_name": "Pal-Entsafter",
+    "description": "Eine Anlage, mit der sich der Rang von Pals erhöhen lässt, indem man ausgepressten Pal-Extrakt konzentriert und einem Pal derselben Art verabreicht. Damit lassen sich dessen körperliche Grenzen erweitern."
+  },
+  "Clock01_Stone": {
+    "localized_name": "Antike Pendeluhr",
+    "description": "Eine dekorative antike Pendeluhr. Ist leider kaputt. Die richtige Zeit lässt sich daran nicht ablesen."
+  },
+  "Clock01_Wall_Iron": {
+    "localized_name": "Wanduhr",
+    "description": "Eine dekorative Wanduhr. Ist leider kaputt. Die richtige Zeit lässt sich daran nicht ablesen."
+  },
+  "CoalPit": {
+    "localized_name": "Steinkohlemine",
+    "description": "Eine Anlage zur Gewinnung von Steinkohle. Der Steinkohle-Abbau ist körperlich anstrengend. Überlasse die Arbeit Pals, die sich mit Bergbau auskennen."
+  },
+  "Container01_Iron": {
+    "localized_name": "Große Kiste",
+    "description": "Eine große Kiste zur Aufbewahrung von Gegenständen. Ornamente einer einst florierenden Kultur sind darauf zu sehen."
+  },
+  "CookingStove": {
+    "localized_name": "Kochtopf",
+    "description": "Eine Anlage zur Zubereitung von Speisen. Mit Kochgeschirr kann eine größere Vielfalt an Zutaten verarbeitet werden. Muss von einem Feuer-Pal angefacht werden."
+  },
+  "Cooler": {
+    "localized_name": "Eiskühler",
+    "description": "Ein Gerät, das Kälte verströmt und dein Lager kühlt. Die Kühlleistung ist nicht sehr hoch, aber ausreichend, wenn es nicht allzu heiß ist. Muss von einem Eis-Pal abgekühlt werden."
+  },
+  "CoolerBox": {
+    "localized_name": "Kühlbox",
+    "description": "Ein kleiner Vorratsbehälter für Lebensmittel. Weise einen Eis-Pal zu, um den Inhalt länger frisch zu halten."
+  },
+  "CoolerPalFoodBox": {
+    "localized_name": "Gekühlter Futtertrog",
+    "description": "Ein Futtertrog, der gekühlt werden kann. Weise einen Eis-Pal zu, um den Inhalt länger frisch zu halten."
+  },
+  "CopperPit": {
+    "localized_name": "Erzbruch",
+    "description": "Eine Anlage zur Gewinnung von Erz. Der Erz-Abbau ist körperlich anstrengend. Überlasse die Arbeit Pals, die sich mit Bergbau auskennen."
+  },
+  "CopperPit_2": {
+    "localized_name": "Erzbruch Ⅱ",
+    "description": "Eine Anlage zur Gewinnung von Erz in großem Stil. Der Erz-Abbau ist körperlich anstrengend. Überlasse die Arbeit Pals, die sich mit Bergbau auskennen."
+  },
+  "Counter_Wood": {
+    "localized_name": "Holztresen",
+    "description": "Ein dekorativer Holztresen."
+  },
+  "Crusher": {
+    "localized_name": "Zerkleinerer",
+    "description": "Eine Anlage zum Zerkleinern und Umwandeln von Stein und Holz. Um das Wasserrad zu drehen, benötigt man einen Pal, der „Gießen“ beherrscht."
+  },
+  "Curtain01_Wall_Stone": {
+    "localized_name": "Antiker Vorhang",
+    "description": "Ein dekorativer antiker Vorhang. Muss an einer Wand angebracht werden."
+  },
+  "DamagedScarecrow": {
+    "localized_name": "Übungsdummy",
+    "description": "Ein Übungsdummy in Gestalt eines Pengullet. Zum Aufstellen benötigst du viel Platz."
+  },
+  "Decal_PalSticker_PinkCat": {
+    "localized_name": "de_Text",
+    "description": "de_Text"
+  },
+  "DefenseBowGun": {
+    "localized_name": "Stationäre Armbrust",
+    "description": "Eine Verteidigungsanlage, die mit einem Pal besetzt werden kann, um gegen Angriffe gewappnet zu sein. Für den Betrieb wird Munition vom Typ „Pfeil“ benötigt. Lege Munition in einer Truhe bereit, und der stationierte Pal wird automatisch nachladen."
+  },
+  "DefenseMachinegun": {
+    "localized_name": "Stationäres Maschinengewehr",
+    "description": "Eine Verteidigungsanlage, die mit einem Pal besetzt werden kann, um gegen Angriffe gewappnet zu sein. Für den Betrieb wird Gewehrmunition benötigt. Lege Munition in einer Truhe bereit, und der stationierte Pal wird automatisch nachladen."
+  },
+  "DefenseMissile": {
+    "localized_name": "Stationärer Raketenwerfer",
+    "description": "Eine Verteidigungsanlage, die mit einem Pal besetzt werden kann, um gegen Angriffe gewappnet zu sein. Für den Betrieb wird Munition vom Typ „Panzerfaustmunition“ benötigt. Lege Munition in einer Truhe bereit, und der stationierte Pal wird automatisch nachladen."
+  },
+  "DefenseWait": {
+    "localized_name": "Sandsack",
+    "description": "Eine Militäranlage zur Verteidigung deines Lagers. Besetze sie mit einem Pal, der kampfbereit Ausschau hält."
+  },
+  "DefenseWall": {
+    "localized_name": "Steinschutzwand",
+    "description": "Eine imposante Wand, die vor feindlichen Überfällen schützt. Ist aus Stein und dadurch ziemlich robust."
+  },
+  "DefenseWall_Metal": {
+    "localized_name": "Metallschutzwand",
+    "description": "Eine imposante Wand, die vor feindlichen Überfällen schützt. Ist aus Metall und dadurch extrem solide."
+  },
+  "DefenseWall_Wood": {
+    "localized_name": "Holzschutzwand",
+    "description": "Eine imposante Wand, die vor feindlichen Überfällen schützt. Ist aus Holz und nicht sonderlich stabil."
+  },
+  "Desk01_Iron": {
+    "localized_name": "Metalltisch",
+    "description": "Ein dekorativer Metalltisch."
+  },
+  "Desk01_Stone": {
+    "localized_name": "Antiker Schreibtisch",
+    "description": "Ein dekorativer antiker Schreibtisch."
+  },
+  "DismantlingConveyor": {
+    "localized_name": "Pal-Schlachtfließband",
+    "description": "Ein Träumchen von einer Maschine, mit der sich Pals automatisch schlachten lassen."
+  },
+  "DisplayCharacter": {
+    "localized_name": "Schaukäfig",
+    "description": "Käfig zum Ausstellen gefangener Pals. Ausgestellte Pals können weder mitkämpfen noch Arbeiten verrichten, werden dafür aber auch nicht hungrig."
+  },
+  "ElectricCooler": {
+    "localized_name": "Elektrokühler",
+    "description": "Ein Gerät, das Kälte verströmt und dein Lager kühlt. Durch den zusätzlichen elektrischen Betrieb lassen sich tiefere Temperaturen erreichen. Muss von einem Eis-Pal abgekühlt werden."
+  },
+  "ElectricGenerator": {
+    "localized_name": "Generator",
+    "description": "Eine Anlage zum Speichern von Strom, der von Elektro-Pals erzeugt wird. Wird benötigt, um elektrische Anlagen zu betreiben."
+  },
+  "ElectricGenerator_Large": {
+    "localized_name": "Großer Generator",
+    "description": "Eine Anlage zum Speichern von Strom, der von Elektro-Pals erzeugt wird. Ist größer und effizienter."
+  },
+  "ElectricHatchingPalEgg": {
+    "localized_name": "Elektrischer Brutkasten",
+    "description": "Ein Gerät zum Ausbrüten von Pal-Eiern. Benötigt Strom, hält aber jedes Ei automatisch bei optimaler Temperatur."
+  },
+  "ElectricHeater": {
+    "localized_name": "Elektroheizung",
+    "description": "Ein Gerät, das Wärme verströmt und dein Lager heizt. Durch den zusätzlichen elektrischen Betrieb lassen sich höhere Temperaturen erreichen. Muss von einem Feuer-Pal angefacht werden."
+  },
+  "ElectricKitchen": {
+    "localized_name": "Elektrische Küche",
+    "description": "Eine Anlage zur Zubereitung von Speisen. Benötigt Strom, ermöglicht dafür aber eine schnelle Verarbeitung zahlreicher Zutaten. Muss von einem Feuer-Pal angefacht werden."
+  },
+  "EnergyStorage_Electric": {
+    "localized_name": "Speicherbatterie",
+    "description": "Eine Anlage zum Speichern von überproduziertem Strom, der mit einem Generator erzeugt wird."
+  },
+  "Expedition": {
+    "localized_name": "Expeditionszentrale",
+    "description": "Eine Einrichtung, von wo aus du Pals auf Expeditionen entsenden kannst. Die entsandten Pals führen am jeweiligen Zielort Kämpfe durch, sammeln Gegenstände und bringen Ressourcen ins Lager zurück."
+  },
+  "Factory_Hard_01": {
+    "localized_name": "Hochwertige Werkbank",
+    "description": "Eine Hochwertige Werkbank zur Fertigung von Gegenständen und Rüstungen. Bietet noch wenig Platz und die Fertigung läuft nicht besonders schnell. Für die Arbeit benötigt man Pals, die Handwerk beherrschen."
+  },
+  "Factory_Hard_02": {
+    "localized_name": "Fließbandwerk",
+    "description": "Eine Werkstatt zur Fertigung von Gegenständen und Rüstungen. Durch Arbeitsteilung läuft die Fertigung mittlerweile einigermaßen schnell. Für die Arbeit benötigt man Pals, die Handwerk beherrschen."
+  },
+  "Factory_Hard_03": {
+    "localized_name": "Fließbandwerk II",
+    "description": "Eine Werkstatt zur Fertigung von Gegenständen und Rüstungen. Durch Spezialisierung läuft die Fertigung jetzt wirklich flott. Für die Arbeit benötigt man Pals, die Handwerk beherrschen."
+  },
+  "Factory_Money": {
+    "localized_name": "Goldmünzen-Prägewerk",
+    "description": "Eine Werkstatt zur Prägung von Goldmünze. Die Arbeit verlangt einiges ab, weshalb die GEI der hier beschäftigten Pals sinkt. Für die Arbeit benötigt man Pals, die Handwerk beherrschen."
+  },
+  "FarmBlockV2_Berries": {
+    "localized_name": "Beerengarten",
+    "description": "Ein Feld zum Anbau von Rote Beeren. Können schnell geerntet werden, sind aber nicht besonders sättigend. Zum Säen, Gießen und Ernten werden mehrere Pals benötigt."
+  },
+  "FarmBlockV2_Carrot": {
+    "localized_name": "Karottenbeet",
+    "description": "Ein Feld zum Anbau von Karotte. Bis zur Ernte dauert es etwas, dafür steigt die Vielfalt der Gerichte, die sich zubereiten lassen. Zum Säen, Gießen und Ernten werden mehrere Pals benötigt."
+  },
+  "FarmBlockV2_Lettuce": {
+    "localized_name": "Salatacker",
+    "description": "Ein Feld zum Anbau von Kopfsalat. Bis zur Ernte dauert es länger, dafür steigt die Vielfalt der Gerichte, die sich zubereiten lassen. Zum Säen, Gießen und Ernten werden mehrere Pals benötigt."
+  },
+  "FarmBlockV2_Onion": {
+    "localized_name": "Zwiebelbeet",
+    "description": "Ein Feld zum Anbau von Zwiebel. Bis zur Ernte dauert es etwas, dafür steigt die Vielfalt der Gerichte, die sich zubereiten lassen. Zum Säen, Gießen und Ernten werden mehrere Pals benötigt."
+  },
+  "FarmBlockV2_Potato": {
+    "localized_name": "Kartoffelacker",
+    "description": "Ein Feld zum Anbau von Kartoffel. Bis zur Ernte dauert es etwas, dafür steigt die Vielfalt der Gerichte, die sich zubereiten lassen. Zum Säen, Gießen und Ernten werden mehrere Pals benötigt."
+  },
+  "FarmBlockV2_tomato": {
+    "localized_name": "Tomatenacker",
+    "description": "Ein Feld zum Anbau von Tomate. Bis zur Ernte dauert es länger, dafür steigt die Vielfalt der Gerichte, die sich zubereiten lassen. Zum Säen, Gießen und Ernten werden mehrere Pals benötigt."
+  },
+  "FarmBlockV2_wheet": {
+    "localized_name": "Weizenfeld",
+    "description": "Ein Feld zum Anbau von Weizen. Kann durchschnittlich schnell geerntet werden. Zum Säen, Gießen und Ernten werden mehrere Pals benötigt."
+  },
+  "Farm_SkillFruits": {
+    "localized_name": "Technikfruchtgarten",
+    "description": "Ein Garten, in dem du Technikfrüchte kultivieren kannst. Pflanze hier eine Technikfrucht ein, um später mehrere Früchte der gleichen Sorte zu ernten."
+  },
+  "FastTravelPoint": {
+    "localized_name": "Adlerstatue",
+    "description": "Ein Steinmonument in Gestalt eines Chikipi. Errichte es, um Schnellreisen zu ermöglichen."
+  },
+  "FlourMill": {
+    "localized_name": "Mühle",
+    "description": "Eine Anlage, um aus Weizen Mehl zu mahlen. Um das Wasserrad zu drehen, benötigt man einen Pal, der „Gießen“ beherrscht."
+  },
+  "FlowerBed": {
+    "localized_name": "Blumenbeet",
+    "description": "Kann im Lager aufgestellt werden und erhöht das Arbeitstempo beim Sammeln. Mehrere aufzustellen, bringt keinen zusätzlichen Nutzen."
+  },
+  "Fountain": {
+    "localized_name": "Springbrunnen",
+    "description": "Kann im Lager aufgestellt werden und erhöht das Arbeitstempo beim Gießen. Mehrere aufzustellen, bringt keinen zusätzlichen Nutzen."
+  },
+  "Fudukue": {
+    "localized_name": "Fernöstlicher Schreibtisch",
+    "description": "Ein dekorativer fernöstlicher Schreibtisch. Passt perfekt zu Gebäuden im fernöstlichen Stil."
+  },
+  "GarbageBag_Iron": {
+    "localized_name": "Müllsack",
+    "description": "Dekorative Müllsäcke. Wem’s gefällt..."
+  },
+  "Glass_DoorWall": {
+    "localized_name": "Glaswand mit Tür",
+    "description": "Eine Eingangstür, die du auf einem Fundament errichten kannst. Ist aus Hartglas und dadurch sehr robust."
+  },
+  "Glass_SlantedRoof": {
+    "localized_name": "Schräges Glasdach",
+    "description": "Ein Schrägdach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist aus Hartglas und dadurch sehr robust."
+  },
+  "Glass_TriangleWall": {
+    "localized_name": "Dreieckige Glaswand",
+    "description": "Eine dreieckige Wand, die du auf einem Fundament errichten kannst. Ist aus Hartglas und dadurch sehr robust."
+  },
+  "Glass_WindowWall": {
+    "localized_name": "Glaswand mit Fenster",
+    "description": "Eine Wand mit Fenster, die du auf einem Fundament errichten kannst, um Eindringlinge fernzuhalten. Ist aus Hartglas und dadurch sehr robust."
+  },
+  "Glass_foundation": {
+    "localized_name": "Glasfundament",
+    "description": "Ein Fundament, worauf du Wände oder Gebäude errichten kannst. Ist aus Hartglas und dadurch sehr robust."
+  },
+  "Glass_roof": {
+    "localized_name": "Glasdach",
+    "description": "Ein Dach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist aus Hartglas und dadurch sehr robust."
+  },
+  "Glass_stair": {
+    "localized_name": "Glastreppe",
+    "description": "Eine Treppe, mit der du auf Fundamente oder Dächer steigen kannst. Ist aus Hartglas und dadurch sehr robust."
+  },
+  "Glass_wall": {
+    "localized_name": "Glaswand",
+    "description": "Eine Wand, die du auf einem Fundament errichten kannst, um Eindringlinge fernzuhalten. Ist aus Hartglas und dadurch sehr robust."
+  },
+  "Globe01_Stone": {
+    "localized_name": "Antiker Globus",
+    "description": "Ein dekorativer antiker Globus."
+  },
+  "GoalSoccer_Iron": {
+    "localized_name": "Fußballtor",
+    "description": "Ein dekoratives Fußballtor. Auch wenn du ein SheepBall reinbolzt, kriegst du keine EP."
+  },
+  "GuildChest": {
+    "localized_name": "Gildentruhe",
+    "description": "Eine Truhe, die ihre Daten via Subraum in Echtzeit kommuniziert. Du kannst von jedem Lager aus, wo eine platziert ist, auf ihren Inhalt zugreifen."
+  },
+  "HatchingPalEgg": {
+    "localized_name": "Brutkasten",
+    "description": "Ein Gerät zum Ausbrüten von Pal-Ei. Lege ein Pal-Ei hinein, und es wird automatisch ausgebrütet. Du musst nur etwas Geduld mitbringen."
+  },
+  "Headstone": {
+    "localized_name": "Grabstein",
+    "description": "Zum Draufschreiben. Für Memos oder als Memento."
+  },
+  "Heater": {
+    "localized_name": "Feuerheizung",
+    "description": "Ein Gerät, das Wärme verströmt und dein Lager heizt. Die Heizleistung ist nicht sehr hoch, aber ausreichend, wenn es nicht allzu kalt ist. Muss von einem Feuer-Pal angefacht werden."
+  },
+  "HugeKitchen": {
+    "localized_name": "Großküche",
+    "description": "Eine Anlage zur Zubereitung von Speisen. Dank ihrer Größe können hier mehrere Pals gemeinsam kochen. Muss von einem Feuer-Pal angefacht werden."
+  },
+  "IceCrusher": {
+    "localized_name": "Gefrierzerkleinerer",
+    "description": "Eine Anlage zum Zerkleinern und Umwandeln von Erz. Für den Betrieb benötigt man Strom sowie einen Pal, der „Kühlung“ beherrscht. Sehr effizient."
+  },
+  "Irori": {
+    "localized_name": "Fernöstliche Feuerstelle",
+    "description": "Eine dekorative fernöstliche Feuerstelle. Passt perfekt zu Gebäuden im fernöstlichen Stil."
+  },
+  "ItemBooth": {
+    "localized_name": "Flohmarkt (Gegenstände)",
+    "description": "Eine Einrichtung zum Verkauf von Gegenständen. Fülle deine Angebotsliste mit Gegenständen, um sie anderen Spielern zum Verkauf anzubieten."
+  },
+  "ItemChest": {
+    "localized_name": "Holztruhe",
+    "description": "Zur Aufbewahrung von Gegenständen. Ist aus Holz und nicht sonderlich stabil. Nicht als Aufbewahrungsort für Wertsachen zu empfehlen."
+  },
+  "ItemChest_02": {
+    "localized_name": "Eisentruhe",
+    "description": "Zur Aufbewahrung von Gegenständen. Mit Metall verstärkt und dadurch recht robust. Hat außerdem ein höheres Fassungsvermögen."
+  },
+  "ItemChest_03": {
+    "localized_name": "Stahltruhe",
+    "description": "Zur Aufbewahrung von Gegenständen. Aus hochwertigem Metall und extrem solide. Ist riesig und perfekt geeignet zur sicheren Lagerung all deiner Habseligkeiten."
+  },
+  "ItemChest_04": {
+    "localized_name": "Hightech-Truhe",
+    "description": "Zur Aufbewahrung von Gegenständen. Ist extrem solide und bietet massig Stauraum. Perfekt geeignet zur sicheren Lagerung all deiner Habseligkeiten."
+  },
+  "Ivy01": {
+    "localized_name": "Großer Wand-Efeu",
+    "description": "Eine dekorative große Efeupflanze. Muss an einer Wand angebracht werden."
+  },
+  "Ivy02": {
+    "localized_name": "Kleiner Wand-Efeu",
+    "description": "Eine dekorative kleine Efeupflanze. Muss an einer Wand angebracht werden."
+  },
+  "Ivy03": {
+    "localized_name": "Breiter Wand-Efeu",
+    "description": "Eine dekorative breite Efeupflanze. Muss an einer Wand angebracht werden."
+  },
+  "JapaneseStyle_DoorWall_01": {
+    "localized_name": "Fernöstliche Wand mit Tür",
+    "description": "Eine Eingangstür, die du auf einem Fundament errichten kannst. Besticht mit fernöstlicher Eleganz."
+  },
+  "JapaneseStyle_DoorWall_02": {
+    "localized_name": "Fernöstliche Wand mit Tür B",
+    "description": "Eine Schiebetür aus Papier für drinnen, die du auf einem Fundament errichten kannst. Besticht mit fernöstlicher Eleganz."
+  },
+  "JapaneseStyle_DoorWall_03": {
+    "localized_name": "Fernöstliche Wand mit Tür C",
+    "description": "Eine Schiebetür für drinnen, die du auf einem Fundament errichten kannst. Besticht mit fernöstlicher Eleganz."
+  },
+  "JapaneseStyle_Pillar": {
+    "localized_name": "Fernöstliche Säule",
+    "description": "Eine Säule zum Abstützen von Gebäuden. Besticht mit fernöstlicher Eleganz."
+  },
+  "JapaneseStyle_SlantedRoof": {
+    "localized_name": "Fernöstliches Schrägdach",
+    "description": "Ein Schrägdach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Besticht mit fernöstlicher Eleganz."
+  },
+  "JapaneseStyle_TriangleWall": {
+    "localized_name": "Fernöstliche dreieckige Wand",
+    "description": "Eine dreieckige Wand, die du auf einem Fundament errichten kannst. Besticht mit fernöstlicher Eleganz."
+  },
+  "JapaneseStyle_WindowWall": {
+    "localized_name": "Fernöstliche Wand mit Fenster",
+    "description": "Eine Wand mit Fenster, die du auf einem Fundament errichten kannst, um Eindringlinge fernzuhalten. Besticht mit fernöstlicher Eleganz."
+  },
+  "JapaneseStyle_foundation": {
+    "localized_name": "Fernöstliches Fundament",
+    "description": "Ein Fundament, worauf du Wände oder Gebäude errichten kannst. Besticht mit fernöstlicher Eleganz."
+  },
+  "JapaneseStyle_roof_01": {
+    "localized_name": "Fernöstliches Dach",
+    "description": "Ein Dach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Die Oberseite ist aus Tatami-Matten. Besticht mit fernöstlicher Eleganz."
+  },
+  "JapaneseStyle_roof_02": {
+    "localized_name": "Fernöstliches Dach B",
+    "description": "Ein Dach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Die Oberseite ist aus Ziegeln. Besticht mit fernöstlicher Eleganz."
+  },
+  "JapaneseStyle_stair": {
+    "localized_name": "Fernöstliche Treppe",
+    "description": "Eine Treppe, mit der du auf Fundamente oder Dächer steigen kannst. Besticht mit fernöstlicher Eleganz."
+  },
+  "JapaneseStyle_wall_01": {
+    "localized_name": "Fernöstliche Wand",
+    "description": "Eine Wand, die du auf einem Fundament errichten kannst, um Eindringlinge fernzuhalten. Besticht mit fernöstlicher Eleganz."
+  },
+  "Kakejiku": {
+    "localized_name": "Hängebild",
+    "description": "Ein dekoratives Hängebild. Passt perfekt zu Gebäuden im fernöstlichen Stil."
+  },
+  "Koro": {
+    "localized_name": "Weihrauchbecken",
+    "description": "Ein dekoratives Weihrauchbecken. Passt perfekt zu Gebäuden im fernöstlichen Stil."
+  },
+  "Lab": {
+    "localized_name": "Pal-Arbeitsinstitut",
+    "description": "Eine Einrichtung, in der Pals arbeitsbezogene Forschung betreiben können. Lasse Pals im Institut arbeiten, um Forschungsprojekte voranzutreiben und allerlei Vorteile zu erzielen."
+  },
+  "Lamp": {
+    "localized_name": "Stehlampe",
+    "description": "Eine Lichtquelle, die dein Lager auch in dunklen Nächten erhellt. Benötigt Strom, erhellt dafür aber einen größeren Bereich."
+  },
+  "LargeCeilingLamp": {
+    "localized_name": "Große Deckenlampe",
+    "description": "Eine Lichtquelle, die dein Lager auch in dunklen Nächten erhellt. Kann an Decken angebracht werden. Benötigt mehr Strom, erhellt dafür aber einen noch größeren Bereich."
+  },
+  "LargeLamp": {
+    "localized_name": "Große Stehlampe",
+    "description": "Eine Lichtquelle, die dein Lager auch in dunklen Nächten erhellt. Benötigt mehr Strom, erhellt dafür aber einen noch größeren Bereich."
+  },
+  "Light_CandleSticks_Top": {
+    "localized_name": "Kronleuchter",
+    "description": "Ein Kronleuchter. Benötigt zum Leuchten Strom."
+  },
+  "Light_CandleSticks_Wall": {
+    "localized_name": "Wandleuchte",
+    "description": "Eine Wandleuchte. Benötigt zum Leuchten Strom."
+  },
+  "Light_FirePlace01": {
+    "localized_name": "Gemauerter Kamin",
+    "description": "Ein gemauerter Kamin, der als Lichtquelle dienen kann. Muss dafür von einem Pal angefeuert werden."
+  },
+  "Light_FirePlace02": {
+    "localized_name": "Kamin",
+    "description": "Ein Kamin, der als Lichtquelle dienen kann. Muss dafür von einem Pal angefeuert werden."
+  },
+  "Light_FloorLamp01": {
+    "localized_name": "Antike Stehlampe (braun)",
+    "description": "Eine antike Stehlampe in Braun. Benötigt zum Leuchten Strom."
+  },
+  "Light_FloorLamp02": {
+    "localized_name": "Antike Stehlampe (rot)",
+    "description": "Eine antike Stehlampe in Rot. Benötigt zum Leuchten Strom."
+  },
+  "Light_LightPole01": {
+    "localized_name": "Einfache Straßenlaterne",
+    "description": "Eine einfache Straßenlaterne. Benötigt zum Leuchten Strom."
+  },
+  "Light_LightPole02": {
+    "localized_name": "Doppelköpfige Straßenlaterne",
+    "description": "Eine doppelköpfige Straßenlaterne. Benötigt zum Leuchten Strom."
+  },
+  "Light_LightPole03": {
+    "localized_name": "Retro-Straßenlaterne",
+    "description": "Eine Retro-Straßenlaterne. Benötigt zum Leuchten Strom."
+  },
+  "Light_LightPole04": {
+    "localized_name": "Elegante Straßenlaterne",
+    "description": "Eine elegante Straßenlaterne. Benötigt zum Leuchten Strom."
+  },
+  "MachineGame01_Iron": {
+    "localized_name": "Greifautomat",
+    "description": "Ein dekorativer Greifautomat. Ist leider kaputt. Plüsch-Pals kannst du hier keine ziehen."
+  },
+  "MachineVending01_Iron": {
+    "localized_name": "Cola-Automat",
+    "description": "Ein dekorativer Cola-Automat. Gegenstände lassen sich hier keine kaufen."
+  },
+  "ManualElectricGenerator": {
+    "localized_name": "Manueller Stromgenerator",
+    "description": "Eine Anlage, die Drehbewegung in elektrische Energie umsetzt. Ist ineffizient und senkt die GEI der hier beschäftigten Pals, bringt jedoch EP ein."
+  },
+  "MedicalPalBed_02": {
+    "localized_name": "Pal-Strohbett",
+    "description": "Ein Strohbett für Pals. Wird als nächtliche Schlafstätte oder zum Ausruhen für verletzte Pals verwendet. Ist ziemlich hart, aber allemal besser als nichts."
+  },
+  "MedicalPalBed_03": {
+    "localized_name": "Pal-Flauschbett",
+    "description": "Ein gemütliches Bett für Pals. Wird als nächtliche Schlafstätte oder zum Ausruhen für verletzte Pals verwendet. Flauschig weich für schönste Träume."
+  },
+  "MedicalPalBed_04": {
+    "localized_name": "Großes Palbett",
+    "description": "Ein bequemes, großes Bett für Pals. Wird als nächtliche Schlafstätte oder zum Ausruhen für verletzte Pals verwendet. Darauf können auch große Pals gemütlich schlafen."
+  },
+  "MedicalPalBed_05": {
+    "localized_name": "Hightech-Medipod",
+    "description": "Ein Heilpod für Pals. Kann als nächtliche Schlafstätte oder zum Ausruhen für verletzte Pals verwendet werden. Dank innovativer Technik verbessert sich die Regeneration."
+  },
+  "MedicineFacility_01": {
+    "localized_name": "Mittelalterliche Pharmaziewerkbank",
+    "description": "Eine Anlage zur Herstellung von Pal-Medizin. Damit können nur simple Präparate hergestellt werden. Überlasse die Arbeit Pals, die Pharmazie beherrschen."
+  },
+  "MedicineFacility_02": {
+    "localized_name": "Elektrische Pharmazieanlage",
+    "description": "Eine Anlage zur Herstellung von Pal-Medizin. Benötigt Strom, dafür können hier auch erstklassige Arzneimittel hergestellt werden. Überlasse die Arbeit Pals, die Pharmazie beherrschen."
+  },
+  "MedicineFacility_03": {
+    "localized_name": "Hightech-Pharmaziewerkbank",
+    "description": "Eine Anlage zur Herstellung von Pal-Medizin. Mit futuristischer Technologie können hier auch neuartige Pharmaka hergestellt werden. Überlasse die Arbeit Pals, die Pharmazie beherrschen."
+  },
+  "Metal_DoorWall": {
+    "localized_name": "Metalltür",
+    "description": "Eine Eingangstür, die du auf einem Fundament errichten kannst. Ist aus Metall und dadurch extrem solide."
+  },
+  "Metal_Gate": {
+    "localized_name": "Metalltor",
+    "description": "Ein Tor, durch das auch größere Pals hindurchpassen. Ist aus Metall und dadurch extrem solide."
+  },
+  "Metal_SlantedRoof": {
+    "localized_name": "Schräges Metalldach",
+    "description": "Ein Schrägdach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist aus Metall und dadurch extrem solide."
+  },
+  "Metal_TriangleWall": {
+    "localized_name": "Dreieckige Metallwand",
+    "description": "Eine dreieckige Wand, die du auf einem Fundament errichten kannst. Ist aus Metall und dadurch extrem solide."
+  },
+  "Metal_WindowWall": {
+    "localized_name": "Metallwand mit Fenster",
+    "description": "Eine Wand mit Fenster, die du auf einem Fundament errichten kannst, um Eindringlinge fernzuhalten. Ist aus Metall und dadurch extrem solide."
+  },
+  "Metal_foundation": {
+    "localized_name": "Metallfundament",
+    "description": "Ein Fundament, worauf du Wände oder Gebäude errichten kannst. Ist aus Metall und dadurch extrem solide."
+  },
+  "Metal_roof": {
+    "localized_name": "Metalldach",
+    "description": "Ein Dach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist aus Metall und dadurch extrem solide."
+  },
+  "Metal_stair": {
+    "localized_name": "Metalltreppe",
+    "description": "Eine Treppe, mit der du auf Fundamente oder Dächer steigen kannst. Ist aus Metall und dadurch extrem solide."
+  },
+  "Metal_wall": {
+    "localized_name": "Metallwand",
+    "description": "Eine Wand, die du auf einem Fundament errichten kannst, um Eindringlinge fernzuhalten. Ist aus Metall und dadurch extrem solide."
+  },
+  "MiningTool": {
+    "localized_name": "Spitzhacke und Helm",
+    "description": "Kann im Lager aufgestellt werden und erhöht das Arbeitstempo beim Bergbau. Mehrere aufzustellen, bringt keinen zusätzlichen Nutzen."
+  },
+  "Mirror01_Stone": {
+    "localized_name": "Antiker Spiegel (oval)",
+    "description": "Ein dekorativer, ovaler antiker Spiegel."
+  },
+  "Mirror01_Wall_Stone": {
+    "localized_name": "Antiker Wandspiegel",
+    "description": "Ein dekorativer antiker Wandspiegel. Muss an einer Wand angebracht werden."
+  },
+  "Mirror02_Stone": {
+    "localized_name": "Antiker Spiegel",
+    "description": "Ein dekorativer antiker Spiegel."
+  },
+  "MonsterFarm": {
+    "localized_name": "Viehfarm",
+    "description": "Eine Farm für Schafe, Hühner und ähnliche Pals. Weise der Farm Pals mit besonderen Partnerfähigkeiten zu, und sie werden Gegenstände produzieren."
+  },
+  "MultiElectricHatchingPalEgg": {
+    "localized_name": "Großer elektrischer Brutkasten",
+    "description": "Ein Gerät zum Ausbrüten von Pal-Eiern. Benötigt Strom, kann aber mehrere Eier gleichzeitig bei optimaler Temperatur ausbrüten."
+  },
+  "OilPump": {
+    "localized_name": "Ölförderpumpe",
+    "description": "Eine Anlage, die zur Förderung von Rohöl aus Ölfeldern benötigt wird. Der Betrieb erfordert viel Strom."
+  },
+  "OlympicCauldron": {
+    "localized_name": "Olympisches Feuer",
+    "description": "Kann im Lager aufgestellt werden und erhöht das Arbeitstempo beim Arbeiten mit Feuer. Mehrere aufzustellen, bringt keinen zusätzlichen Nutzen."
+  },
+  "OperatingTable": {
+    "localized_name": "de_Text",
+    "description": "de_text"
+  },
+  "PalBooth": {
+    "localized_name": "Flohmarkt (Pals)",
+    "description": "Eine Einrichtung zum Verkauf von Pals. Fülle deine Angebotsliste mit Pals, um sie anderen Spielern zum Verkauf anzubieten."
+  },
+  "PalBoxV2": {
+    "localized_name": "Pal-Box",
+    "description": "Eine Anlage zur Aufbewahrung gefangener Pals. Den Pals in der Box werden nach und nach LP wiederhergestellt. Der Bereich ringsum ist dein Lager."
+  },
+  "PalFoodBox": {
+    "localized_name": "Futtertrog",
+    "description": "Ein Trog für Pal-Futter. Hungrige Pals können sich hier sattfressen. Achte darauf, dass immer genügend Futter da ist."
+  },
+  "PalMedicineBox": {
+    "localized_name": "Medizinregal",
+    "description": "Ein Erste-Hilfe-Regal für Pal-Medizin. Kranke Pals können sich hier Medizin holen. Achte darauf, dass immer genügend Medizin da ist."
+  },
+  "Partition_Stone": {
+    "localized_name": "Antiker Wandschirm",
+    "description": "Ein dekorativer antiker Wandschirm."
+  },
+  "Piano01_Stone": {
+    "localized_name": "Flügel",
+    "description": "Ein dekorativer Flügel. Gibt keinen Laut von sich."
+  },
+  "Piano02_Stone": {
+    "localized_name": "Klavier",
+    "description": "Ein dekoratives Klavier. Gibt keinen Laut von sich."
+  },
+  "PipeClay01_Iron": {
+    "localized_name": "Tonrohr",
+    "description": "Ein dekoratives Tonrohr."
+  },
+  "Plant01_Plant": {
+    "localized_name": "Zierpflanze",
+    "description": "Eine dekorative Zierpflanze."
+  },
+  "Plant02_Plant": {
+    "localized_name": "Topfpflanze auf Stuhl",
+    "description": "Eine dekorative Topfpflanze auf einem Stuhl."
+  },
+  "Plant03_Plant": {
+    "localized_name": "Tisch-Topfpflanze",
+    "description": "Eine dekorative Topfpflanze für deinen Tisch."
+  },
+  "Plant04_Plant": {
+    "localized_name": "Topfpflanze",
+    "description": "Eine dekorative Topfpflanze."
+  },
+  "PlayerBed_02": {
+    "localized_name": "Mieses Bett",
+    "description": "Ein abgenutztes Bett für Menschen. Wird als nächtliche Schlafstätte oder zum Ausruhen bei Verletzungen verwendet. Um ruhig darauf schlafen zu können, muss es an einem überdachten Ort aufgestellt sein."
+  },
+  "PlayerBed_03": {
+    "localized_name": "Komfortables Bett",
+    "description": "Ein gemütliches Bett für Menschen. Wird als nächtliche Schlafstätte oder zum Ausruhen bei Verletzungen verwendet. Um ruhig darauf schlafen zu können, muss es an einem überdachten Ort aufgestellt sein."
+  },
+  "QuartzPit": {
+    "localized_name": "Reinquarzmine",
+    "description": "Eine Anlage zur Gewinnung von Reinquarz. Der Reinquarz-Abbau ist körperlich anstrengend. Überlasse die Arbeit Pals, die sich mit Bergbau auskennen."
+  },
+  "Refrigerator": {
+    "localized_name": "Kühlschrank",
+    "description": "Ein Vorratsschrank für Lebensmittel mit großem Fassungsvermögen. Weise einen Eis-Pal zu, um den Inhalt länger frisch zu halten."
+  },
+  "RepairBench": {
+    "localized_name": "Reparaturbank",
+    "description": "Eine Werkbank zur Reparatur kaputter Werkzeuge und Hilfsmittel. Bei der Reparatur wird Material verbraucht."
+  },
+  "Rug01_Stone": {
+    "localized_name": "Antiker Teppich",
+    "description": "Ein dekorativer antiker Teppich."
+  },
+  "Rug02_Stone": {
+    "localized_name": "Antiker Teppich (rot)",
+    "description": "Ein dekorativer, antiker roter Teppich."
+  },
+  "Rug03_Stone": {
+    "localized_name": "Antiker Teppich (grün)",
+    "description": "Ein dekorativer, antiker grüner Teppich."
+  },
+  "Rug04_Stone": {
+    "localized_name": "Antiker Teppich (lang)",
+    "description": "Ein dekorativer, langer antiker Teppich."
+  },
+  "Rug_Wood": {
+    "localized_name": "de_Text",
+    "description": "de_Text"
+  },
+  "SanityDecrease1": {
+    "localized_name": "Alphawellengenerator",
+    "description": "Diese Maschine generiert Alphawellen, die auf Pals eine entspannende Wirkung haben. Die GEI von Pals im Lager sinkt dadurch langsamer. Mehrere aufzustellen, bringt keinen zusätzlichen Nutzen."
+  },
+  "Seika": {
+    "localized_name": "Ikebana",
+    "description": "Ein dekoratives Ikebana-Blumengesteck. Passt perfekt zu Gebäuden im fernöstlichen Stil."
+  },
+  "Shelf01_Iron": {
+    "localized_name": "Metallregal",
+    "description": "Ein Metallregal zur Aufbewahrung von Gegenständen."
+  },
+  "Shelf01_Stone": {
+    "localized_name": "Antikes Bücherregal",
+    "description": "Ein antikes Bücherregal zur Aufbewahrung von Gegenständen."
+  },
+  "Shelf01_Wall_Iron": {
+    "localized_name": "Metallwandregal",
+    "description": "Ein Metallregal zur Aufbewahrung von Gegenständen. Muss an einer Wand angebracht werden."
+  },
+  "Shelf01_Wall_Stone": {
+    "localized_name": "Antiker Wandschrank",
+    "description": "Ein antiker Schrank zur Aufbewahrung von Gegenständen. Muss an einer Wand angebracht werden."
+  },
+  "Shelf02_Iron": {
+    "localized_name": "Breites Metallregal",
+    "description": "Ein breites Metallregal zur Aufbewahrung von Gegenständen."
+  },
+  "Shelf02_Stone": {
+    "localized_name": "Antiker Kleiderschrank",
+    "description": "Ein antiker Kleiderschrank zur Aufbewahrung von Gegenständen."
+  },
+  "Shelf03_Iron": {
+    "localized_name": "Orangefarbener Spind",
+    "description": "Ein orangefarbener Spind zur Aufbewahrung von Gegenständen. Mit niedlichen Pal-Stickern drauf."
+  },
+  "Shelf03_Stone": {
+    "localized_name": "Antike Kommode",
+    "description": "Eine antike Kommode zur Aufbewahrung von Gegenständen. Mit Fotos von Pals ausgeschmückt."
+  },
+  "Shelf04_Iron": {
+    "localized_name": "Spind",
+    "description": "Ein Spind zur Aufbewahrung von Gegenständen. Mit niedlichen Pal-Stickern drauf."
+  },
+  "Shelf04_Stone": {
+    "localized_name": "Antiker Nachttisch",
+    "description": "Eine antike Beistellkommode zur Aufbewahrung von Gegenständen. Mit Fotos von Pals ausgeschmückt."
+  },
+  "Shelf05_Stone": {
+    "localized_name": "Antiker Schrank",
+    "description": "Ein antiker Schrank zur Aufbewahrung von Gegenständen."
+  },
+  "Shelf06_Stone": {
+    "localized_name": "Antiker Schrank (breit)",
+    "description": "Ein antiker breiter Schrank zur Aufbewahrung von Gegenständen. Mit Fotos von Pals ausgeschmückt."
+  },
+  "Shelf07_Stone": {
+    "localized_name": "Antiker Schrank (groß)",
+    "description": "Ein antiker großer Schrank zur Aufbewahrung von Gegenständen."
+  },
+  "Shelf_Cask_Wood": {
+    "localized_name": "Holzfassregal",
+    "description": "Ein Holzfassregal zur Aufbewahrung von Gegenständen."
+  },
+  "Shelf_Hang01_Wood": {
+    "localized_name": "Hölzernes Wandregal",
+    "description": "Ein Holzregal zur Aufbewahrung von Gegenständen. Muss an einer Wand angebracht werden."
+  },
+  "Shelf_Hang02_Wood": {
+    "localized_name": "Hölzernes Wandzierregal",
+    "description": "Ein dekoratives Holzregal. Muss an einer Wand angebracht werden."
+  },
+  "Shelf_Wood": {
+    "localized_name": "Holzregal",
+    "description": "Ein Holzregal zur Aufbewahrung von Gegenständen."
+  },
+  "Shishiodoshi": {
+    "localized_name": "Rehscheuche",
+    "description": "Eine dekorative Rehscheuche. Passt perfekt zu Gebäuden im fernöstlichen Stil."
+  },
+  "SignExit_Ceiling_Iron": {
+    "localized_name": "Fluchtwegschild (Decke)",
+    "description": "Ein dekoratives Fluchtwegschild. Muss an der Decke angebracht werden."
+  },
+  "SignExit_Wall_Iron": {
+    "localized_name": "Fluchtwegschild (Wand)",
+    "description": "Ein dekoratives Fluchtwegschild. Muss an einer Wand angebracht werden."
+  },
+  "Signboard": {
+    "localized_name": "Schild",
+    "description": "Zum Draufschreiben. Für Memos, Kommunikation oder deine Einkaufsliste."
+  },
+  "Silo": {
+    "localized_name": "Silo",
+    "description": "Kann im Lager aufgestellt werden und erhöht das Arbeitstempo beim Säen. Mehrere aufzustellen, bringt keinen zusätzlichen Nutzen."
+  },
+  "SkinChange": {
+    "localized_name": "Pal-Aufhübscher",
+    "description": "Eine Anlage, in der du Pals ein besonderes Aussehen verpassen kannst. Für Skins, die du außerhalb des Spiels bekommen hast."
+  },
+  "Snowman": {
+    "localized_name": "Schneemann",
+    "description": "Kann im Lager aufgestellt werden und erhöht das Arbeitstempo beim Kühlen. Mehrere aufzustellen, bringt keinen zusätzlichen Nutzen."
+  },
+  "Sofa01_Iron": {
+    "localized_name": "Ledersessel",
+    "description": "Ein dekorativer Ledersessel."
+  },
+  "Sofa01_Stone": {
+    "localized_name": "Antiker Sessel",
+    "description": "Ein dekorativer antiker Sessel."
+  },
+  "Sofa02_Iron": {
+    "localized_name": "Ledersofa",
+    "description": "Ein dekoratives Ledersofa."
+  },
+  "Sofa02_Stone": {
+    "localized_name": "Antikes Sofa",
+    "description": "Ein dekoratives antikes Sofa."
+  },
+  "Sofa03_Stone": {
+    "localized_name": "Antiker Ottomane",
+    "description": "Ein dekorativer antiker Ottomane."
+  },
+  "Spa": {
+    "localized_name": "Heiße Quelle",
+    "description": "Eine Anlage, in der müde Pals sich von ihrer Arbeit ausruhen und ihre GEI regenerieren können."
+  },
+  "Spa2": {
+    "localized_name": "Luxuriöse heiße Quelle",
+    "description": "Eine Anlage, in der müde Pals sich von ihrer Arbeit noch besser entspannen und ihre GEI schneller regenerieren können."
+  },
+  "SphereFactory_Black_01": {
+    "localized_name": "Pal-Sphären-Werkbank",
+    "description": "Eine Werkbank zur Fertigung von Pal-Sphären, mit denen sich Pals fangen lassen. Bietet noch wenig Platz und die Fertigung läuft nicht besonders schnell. Für die Arbeit benötigt man Pals, die Handwerk beherrschen."
+  },
+  "SphereFactory_Black_02": {
+    "localized_name": "Pal-Sphären-Fließbandwerk",
+    "description": "Eine Werkstatt zur Fertigung von Pal-Sphären, mit denen sich Pals fangen lassen. Durch Arbeitsteilung läuft die Fertigung mittlerweile einigermaßen schnell. Für die Arbeit benötigt man Pals, die Handwerk beherrschen."
+  },
+  "SphereFactory_Black_03": {
+    "localized_name": "Pal-Sphären-Fließbandwerk II",
+    "description": "Eine Werkstatt zur Fertigung von Pal-Sphären, mit denen sich Pals fangen lassen. Durch Spezialisierung läuft die Fertigung jetzt wirklich flott. Für die Arbeit benötigt man Pals, die Handwerk beherrschen."
+  },
+  "SphereFactory_Black_04": {
+    "localized_name": "Hightech-Sphärenfabrik",
+    "description": "Eine Werkstatt zur Fertigung von Pal-Sphären, mit denen sich Pals fangen lassen. Mithilfe modernster Maschinen läuft die Sphärenfertigung jetzt blitzschnell. Für die Arbeit benötigt man Pals, die Handwerk beherrschen."
+  },
+  "StationDeforest2": {
+    "localized_name": "Holzfällerlager",
+    "description": "Eine Anlage zur Gewinnung von Holz. Bäume zu fällen ist körperlich anstrengend. Überlasse die Arbeit Pals, die sich mit Holzfällen auskennen."
+  },
+  "StonePit": {
+    "localized_name": "Steinbruch",
+    "description": "Eine Anlage zur Gewinnung von Stein. Der Stein-Abbau ist körperlich anstrengend. Überlasse die Arbeit Pals, die sich mit Bergbau auskennen."
+  },
+  "Stone_DoorWall": {
+    "localized_name": "Steintür",
+    "description": "Eine Eingangstür, die du auf einem Fundament errichten kannst. Ist aus Stein und dadurch ziemlich robust."
+  },
+  "Stone_Gate": {
+    "localized_name": "Steintor",
+    "description": "Ein Tor, durch das auch größere Pals hindurchpassen. Ist aus Stein und dadurch ziemlich robust."
+  },
+  "Stone_SlantedRoof": {
+    "localized_name": "Schräges Steindach",
+    "description": "Ein Schrägdach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist aus Stein und dadurch ziemlich robust."
+  },
+  "Stone_TriangleWall": {
+    "localized_name": "Dreieckige Steinwand",
+    "description": "Eine dreieckige Wand, die du auf einem Fundament errichten kannst. Ist aus Stein und dadurch ziemlich robust."
+  },
+  "Stone_WindowWall": {
+    "localized_name": "Steinwand mit Fenster",
+    "description": "Eine Wand mit Fenster, die du auf einem Fundament errichten kannst, um Eindringlinge fernzuhalten. Ist aus Stein und dadurch ziemlich robust."
+  },
+  "Stone_foundation": {
+    "localized_name": "Steinfundament",
+    "description": "Ein Fundament, worauf du Wände oder Gebäude errichten kannst. Ist aus Stein und dadurch ziemlich robust."
+  },
+  "Stone_roof": {
+    "localized_name": "Steindach",
+    "description": "Ein Dach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist aus Stein und dadurch ziemlich robust."
+  },
+  "Stone_stair": {
+    "localized_name": "Steintreppe",
+    "description": "Eine Treppe, mit der du auf Fundamente oder Dächer steigen kannst. Ist aus Stein und dadurch ziemlich robust."
+  },
+  "Stone_wall": {
+    "localized_name": "Steinwand",
+    "description": "Eine Wand, die du auf einem Fundament errichten kannst, um Eindringlinge fernzuhalten. Ist aus Stein und dadurch ziemlich robust."
+  },
+  "Stool01_Iron": {
+    "localized_name": "Metallhocker",
+    "description": "Ein dekorativer Metallhocker."
+  },
+  "Stool01_Stone": {
+    "localized_name": "Antiker Hocker",
+    "description": "Ein dekorativer antiker Hocker."
+  },
+  "Stool_High_Wood": {
+    "localized_name": "Holzbarhocker",
+    "description": "Ein dekorativer Barhocker."
+  },
+  "Stool_Wood": {
+    "localized_name": "Holzhocker",
+    "description": "Ein dekorativer Holzhocker."
+  },
+  "Stove01_Stone": {
+    "localized_name": "Antiker Ofen",
+    "description": "Ein dekorativer antiker Ofen."
+  },
+  "Stump": {
+    "localized_name": "Hackklotz und Beil",
+    "description": "Kann im Lager aufgestellt werden und erhöht das Arbeitstempo beim Holzfällen. Mehrere aufzustellen, bringt keinen zusätzlichen Nutzen."
+  },
+  "SulfurPit": {
+    "localized_name": "Schwefelmine",
+    "description": "Eine Anlage zur Gewinnung von Schwefel. Der Schwefel-Abbau ist körperlich anstrengend. Überlasse die Arbeit Pals, die sich mit Bergbau auskennen."
+  },
+  "TableCircular01_Iron": {
+    "localized_name": "Runder Metalltisch",
+    "description": "Ein dekorativer runder Metalltisch."
+  },
+  "TableCircular01_Stone": {
+    "localized_name": "Antiker Tisch (rund)",
+    "description": "Ein dekorativer, runder antiker Tisch."
+  },
+  "TableCircular_Wood": {
+    "localized_name": "Runder Tisch",
+    "description": "Ein dekorativer runder Tisch."
+  },
+  "TableDresser01_Stone": {
+    "localized_name": "Antike Frisierkommode",
+    "description": "Eine Frisierkommode zum Hübschmachen. Damit kannst du das Aussehen deines Charakters ändern."
+  },
+  "TableSide01_Iron": {
+    "localized_name": "Eisenholz-Beistelltisch",
+    "description": "Ein dekorativer Beistelltisch aus Eisenholz."
+  },
+  "TableSink01_Stone": {
+    "localized_name": "Antiker Waschtisch",
+    "description": "Ein dekorativer antiker Waschtisch."
+  },
+  "TableSquare01_Iron": {
+    "localized_name": "Eisenholz-Tisch",
+    "description": "Ein dekorativer Tisch aus Eisenholz."
+  },
+  "TableSquare02_Iron": {
+    "localized_name": "Eisenholz-Couchtisch",
+    "description": "Ein dekorativer Couchtisch aus Eisenholz."
+  },
+  "TableSquare_Wood": {
+    "localized_name": "Viereckiger Tisch",
+    "description": "Ein dekorativer viereckiger Tisch."
+  },
+  "Tansu": {
+    "localized_name": "Fernöstliche Kommode",
+    "description": "Eine fernöstliche Kommode zur Aufbewahrung von Gegenständen. Passt perfekt zu Gebäuden im fernöstlichen Stil."
+  },
+  "Television01_Iron": {
+    "localized_name": "Alter Fernseher",
+    "description": "Ein dekorativer alter Fernseher. Relikt einer untergegangenen Zivilisation. Zeigt jetzt nur noch Pengullet-Bilder."
+  },
+  "Tire01_Iron": {
+    "localized_name": "Reifen",
+    "description": "Ein dekorativer Reifen."
+  },
+  "Toilet01_Stone": {
+    "localized_name": "Antike Toilette",
+    "description": "Eine dekorative antike Toilette. Die Notdurft bitte woanders verrichten."
+  },
+  "ToiletHolder01_Stone": {
+    "localized_name": "Antiker WC-Rollenhalter",
+    "description": "Ein dekorativer antiker Toilettenpapierhalter."
+  },
+  "ToolBoxV1": {
+    "localized_name": "Große Werkzeugkiste",
+    "description": "Kann im Lager aufgestellt werden und erhöht das Arbeitstempo beim Handwerk. Mehrere aufzustellen, bringt keinen zusätzlichen Nutzen."
+  },
+  "Torch": {
+    "localized_name": "Standfackel",
+    "description": "Eine Lichtquelle, die dein Lager auch in dunklen Nächten erhellt. Muss von einem Feuer-Pal angefacht werden."
+  },
+  "Toro": {
+    "localized_name": "Steinlaterne",
+    "description": "Eine dekorative Steinlaterne. Passt perfekt zu Gebäuden im fernöstlichen Stil."
+  },
+  "TowlRack01_Stone": {
+    "localized_name": "Antiker Handtuchhalter",
+    "description": "Ein dekorativer antiker Handtuchhalter."
+  },
+  "TrafficBarricade01_Iron": {
+    "localized_name": "Absperrung",
+    "description": "Eine dekorative Absperrung."
+  },
+  "TrafficBarricade02_Iron": {
+    "localized_name": "Orangefarbene Absperrung",
+    "description": "Eine dekorative orangefarbene Absperrung."
+  },
+  "TrafficBarricade03_Iron": {
+    "localized_name": "Rote Metallabsperrung",
+    "description": "Eine dekorative rote Metallabsperrung."
+  },
+  "TrafficBarricade04_Iron": {
+    "localized_name": "Weiße Metallabsperrung",
+    "description": "Eine dekorative weiße Metallabsperrung."
+  },
+  "TrafficBarricade05_Iron": {
+    "localized_name": "Metallzaun",
+    "description": "Ein dekorativer Metallzaun."
+  },
+  "TrafficCone01_Iron": {
+    "localized_name": "Leitkegel",
+    "description": "Ein dekorativer Leitkegel."
+  },
+  "TrafficCone02_Iron": {
+    "localized_name": "Breiter Leitkegel",
+    "description": "Ein dekorativer breiter Leitkegel."
+  },
+  "TrafficCone03_Iron": {
+    "localized_name": "Schmaler Leitkegel",
+    "description": "Ein dekorativer schmaler Leitkegel."
+  },
+  "TrafficLight01_Iron": {
+    "localized_name": "Ampel",
+    "description": "Eine dekorative Ampel."
+  },
+  "TrafficSign01_Iron": {
+    "localized_name": "Verkehrsschild „Keine Pals“",
+    "description": "Ein dekoratives Verkehrsschild „Keine Pals“. Heutzutage hält sich keiner mehr dran."
+  },
+  "TrafficSign02_Iron": {
+    "localized_name": "Verkehrsschild „Vorfahrt gewähren“",
+    "description": "Ein dekoratives Verkehrsschild „Vorfahrt gewähren“. Heutzutage hält sich keiner mehr dran."
+  },
+  "TrafficSign03_Iron": {
+    "localized_name": "Verkehrsschild „Vorsicht, Eikthyrdeer“",
+    "description": "Ein dekoratives Verkehrsschild „Vorsicht, Eikthyrdeer“. Zu Zeiten der antiken Zivilisation soll es öfters zu Wildunfällen zwischen Eikthyrdeer und anderen Pals gekommen sein."
+  },
+  "TrafficSign04_Iron": {
+    "localized_name": "Verkehrsschild „Vorsicht, Mammorest“",
+    "description": "Ein dekoratives Verkehrsschild „Vorsicht, Mammorest“. Zu Zeiten der antiken Zivilisation soll es öfters tödliche Unfälle mit wütenden Mammorest gegeben haben."
+  },
+  "TransmissionTower": {
+    "localized_name": "Strommast",
+    "description": "Kann im Lager aufgestellt werden und erhöht das Arbeitstempo bei der Stromerzeugung. Mehrere aufzustellen, bringt keinen zusätzlichen Nutzen."
+  },
+  "Trap_LegHold": {
+    "localized_name": "Kleines Fangeisen",
+    "description": "Mit dieser Falle können Pals, die drauftreten, festgesetzt werden. Festsitzende Pals sind leichter zu fangen. Nur für kleine Pals."
+  },
+  "Trap_LegHold_Big": {
+    "localized_name": "Großes Fangeisen",
+    "description": "Fangeisen, mit dem große Pals festgesetzt werden können. Festsitzende Pals haben eine höhere Fangrate. Wirkt nur bei großen Pals; kleine Pals lösen die Falle nicht aus."
+  },
+  "Trap_MineAttack": {
+    "localized_name": "Tretmine",
+    "description": "Tritt ein Pal in diese Falle, explodiert sie und verursacht in einem weiten Umkreis Schaden."
+  },
+  "Trap_MineElecShock": {
+    "localized_name": "Elektroschockmine",
+    "description": "Tritt ein Pal in diese Falle, bekommt er einen elektrischen Schock. Betäubte Pals haben eine höhere Fangrate."
+  },
+  "Trap_MineFreeze": {
+    "localized_name": "Eismine",
+    "description": "Tritt ein Pal in diese Falle, friert er ein. Eingefrorene Pals haben eine höhere Fangrate."
+  },
+  "Trap_MovingPanel": {
+    "localized_name": "de_Text",
+    "description": "de_Text"
+  },
+  "Trap_Noose": {
+    "localized_name": "Schlingenfalle",
+    "description": "Mit dieser Falle können Pals, die hindurchlaufen, festgesetzt werden. Festsitzende Pals sind leichter zu fangen. Nur für kleine Pals."
+  },
+  "WallSignboard": {
+    "localized_name": "Hängeschild",
+    "description": "Ein Schild zum Draufschreiben. Kann an Wänden aufgehängt werden."
+  },
+  "WallTorch": {
+    "localized_name": "Wandfackel",
+    "description": "Eine Lichtquelle, die dein Lager auch in dunklen Nächten erhellt. Kann an Wänden angebracht werden. Muss von einem Feuer-Pal angefacht werden."
+  },
+  "WeaponFactory_Dirty_01": {
+    "localized_name": "Waffen-Werkbank",
+    "description": "Eine Werkbank zur Fertigung von Waffen und Munition. Bietet noch wenig Platz und allzu gute Waffen können hier nicht gebaut werden. Für die Arbeit benötigt man Pals, die Handwerk beherrschen."
+  },
+  "WeaponFactory_Dirty_02": {
+    "localized_name": "Waffen-Fließbandwerk",
+    "description": "Eine Werkstatt zur Fertigung von Waffen und Munition. Durch Arbeitsteilung können nun verhältnismäßig gute Waffen gebaut werden. Für die Arbeit benötigt man Pals, die Handwerk beherrschen."
+  },
+  "WeaponFactory_Dirty_03": {
+    "localized_name": "Waffen-Fließbandwerk II",
+    "description": "Eine Werkstatt zur Fertigung von Waffen und Munition. Durch Spezialisierung können nun modernste Waffen gebaut werden. Für die Arbeit benötigt man Pals, die Handwerk beherrschen."
+  },
+  "Wood_Gate": {
+    "localized_name": "Holztor",
+    "description": "Ein Tor, durch das auch größere Pals hindurchpassen. Ist aus Holz und nicht sonderlich stabil."
+  },
+  "Wood_SlantedRoof": {
+    "localized_name": "Schräges Holzdach",
+    "description": "Ein Schrägdach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist aus Holz und nicht sonderlich stabil."
+  },
+  "Wood_TriangleWall": {
+    "localized_name": "Dreieckige Holzwand",
+    "description": "Eine dreieckige Wand, die du auf einem Fundament errichten kannst. Ist aus Holz und nicht sonderlich stabil."
+  },
+  "Wood_WindowWall": {
+    "localized_name": "Holzwand mit Fenster",
+    "description": "Eine Wand mit Fenster, die du auf einem Fundament errichten kannst, um Eindringlinge fernzuhalten. Ist aus Holz und nicht sonderlich stabil."
+  },
+  "Wooden_DoorWall": {
+    "localized_name": "Holztür",
+    "description": "Eine Eingangstür, die du auf einem Fundament errichten kannst. Ist aus Holz und nicht sonderlich stabil."
+  },
+  "Wooden_foundation": {
+    "localized_name": "Holzfundament",
+    "description": "Ein Fundament, worauf du Wände oder Gebäude errichten kannst. Ist aus Holz und nicht sonderlich stabil."
+  },
+  "Wooden_ladder": {
+    "localized_name": "Leiter",
+    "description": "Wenn du mal etwas höher hinaus willst."
+  },
+  "Wooden_roof": {
+    "localized_name": "Holzdach",
+    "description": "Ein Dach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist aus Holz und nicht sonderlich stabil."
+  },
+  "Wooden_stair": {
+    "localized_name": "Holztreppe",
+    "description": "Eine Treppe, mit der du auf Fundamente oder Dächer steigen kannst. Ist aus Holz und nicht sonderlich stabil."
+  },
+  "Wooden_wall": {
+    "localized_name": "Holzwand",
+    "description": "Eine Wand, die du auf einem Fundament errichten kannst, um Eindringlinge fernzuhalten. Ist aus Holz und nicht sonderlich stabil."
+  },
+  "WorkBench": {
+    "localized_name": "Primitive Werkbank",
+    "description": "Eine Primitive Werkbank zur Fertigung einfacher Gegenstände. Für die Arbeit benötigt man Pals, die Handwerk beherrschen."
+  },
+  "WorkBench_SkillUnlock": {
+    "localized_name": "Pal-Ausrüstungs-Werkbank",
+    "description": "Eine Primitive Werkbank zur Fertigung von Utensilien für Pals. Mache einen Sattel und lass dich von einem Pal tragen, oder baue Gewehre und bewaffne deine Pals."
+  },
+  "WorkSpeedIncrease1": {
+    "localized_name": "Betawellengenerator",
+    "description": "Diese Maschine generiert Betawellen, die auf Pals eine anregende Wirkung haben. Das Arbeitstempo von Pals im Lager wird dadurch erhöht. Mehrere aufzustellen, bringt keinen zusätzlichen Nutzen."
+  },
+  "Zabuton": {
+    "localized_name": "Sitzkissen",
+    "description": "Ein dekoratives Sitzkissen. Passt perfekt zu Gebäuden im fernöstlichen Stil."
+  },
+  "Zaisu": {
+    "localized_name": "Bodensessel",
+    "description": "Ein dekorativer Bodensessel. Passt perfekt zu Gebäuden im fernöstlichen Stil."
+  }
+}

@@ -1,0 +1,794 @@
+{
+  "AirDash_1": {
+    "localized_name": "Ruée aérienne +1",
+    "description": "Ruée aérienne +1"
+  },
+  "AirDash_2": {
+    "localized_name": "Ruée aérienne +2",
+    "description": "Ruée aérienne +2"
+  },
+  "AirDash_3": {
+    "localized_name": "Ruée aérienne +3",
+    "description": "Ruée aérienne +3"
+  },
+  "AirDash_4": {
+    "localized_name": "Ruée aérienne +4",
+    "description": "Ruée aérienne +4"
+  },
+  "Alien": {
+    "localized_name": "Organisme inconnu",
+    "description": "Attaque +10.0 % Réduction des dégâts de type feu 15.0 % Réduction des dégâts de type foudre 15.0 %"
+  },
+  "Attack_ACC_up1": {
+    "localized_name": "Attaque augmentée niv. 1",
+    "description": null
+  },
+  "Attack_ACC_up2": {
+    "localized_name": "Attaque augmentée niv. 2",
+    "description": null
+  },
+  "Attack_ACC_up3": {
+    "localized_name": "Attaque augmentée niv. 3",
+    "description": null
+  },
+  "CaptureLevel_Up_1": {
+    "localized_name": "Force de capture +1",
+    "description": null
+  },
+  "CaptureLevel_Up_2": {
+    "localized_name": "Force de capture +2",
+    "description": null
+  },
+  "CaptureLevel_Up_3": {
+    "localized_name": "Force de capture +3",
+    "description": null
+  },
+  "CaptureLevel_Up_4": {
+    "localized_name": "Force de capture +4",
+    "description": null
+  },
+  "CaptureLevel_Up_5": {
+    "localized_name": "Force de capture +5",
+    "description": null
+  },
+  "CaptureLevel_Up_6": {
+    "localized_name": "Force de capture +6",
+    "description": null
+  },
+  "CollectItem_Berries": {
+    "localized_name": "Cueillette de baies",
+    "description": null
+  },
+  "CollectItem_Egg": {
+    "localized_name": "Production d'œufs",
+    "description": null
+  },
+  "CollectItem_Milk": {
+    "localized_name": "Production de lait",
+    "description": null
+  },
+  "CollectItem_Money": {
+    "localized_name": "Jet de perles aux pourceaux",
+    "description": null
+  },
+  "CollectItem_Sweets": {
+    "localized_name": "Production de bonbons",
+    "description": null
+  },
+  "CollectItem_Wool_Alpaca": {
+    "localized_name": "Production de laine",
+    "description": null
+  },
+  "CollectItem_Wool_SheepBall": {
+    "localized_name": "Production de laine",
+    "description": null
+  },
+  "CollectItem_Wool_WhiteMoth": {
+    "localized_name": "Tissage de soie",
+    "description": null
+  },
+  "CoolTimeReduction_Down_1": {
+    "localized_name": "Tranquille",
+    "description": "Extension du temps de recharge des compétences actives -15.0 %"
+  },
+  "CoolTimeReduction_Up_1": {
+    "localized_name": "Calme",
+    "description": "Réduction du temps de recharge des compétences actives 30.0 % Attaque +10.0 %"
+  },
+  "CoolTimeReduction_Up_2": {
+    "localized_name": "Impatient",
+    "description": "Réduction du temps de recharge des compétences actives 15.0 %"
+  },
+  "CoolTimeReduction_Up_3": {
+    "localized_name": "Agitation",
+    "description": "Réduction du temps de recharge des compétences actives 0.0 % Attaque +0.0 %"
+  },
+  "CraftSpeed_down1": {
+    "localized_name": "Maladroit",
+    "description": null
+  },
+  "CraftSpeed_down2": {
+    "localized_name": "Négligent",
+    "description": null
+  },
+  "CraftSpeed_up1": {
+    "localized_name": "Sérieux",
+    "description": null
+  },
+  "CraftSpeed_up2": {
+    "localized_name": "Appliqué",
+    "description": null
+  },
+  "CraftSpeed_up3": {
+    "localized_name": "Excellence",
+    "description": null
+  },
+  "Deffence_down1": {
+    "localized_name": "Vulnérable aux coups",
+    "description": null
+  },
+  "Deffence_down2": {
+    "localized_name": "Os fragiles",
+    "description": null
+  },
+  "Deffence_up1": {
+    "localized_name": "Peau dure",
+    "description": null
+  },
+  "Deffence_up2": {
+    "localized_name": "Corps robuste",
+    "description": null
+  },
+  "Deffence_up3": {
+    "localized_name": "Corps adamantin",
+    "description": null
+  },
+  "ElementBoost_Aqua_1_PAL": {
+    "localized_name": "Hydrophile",
+    "description": "Les dégâts de type eau augmentent de 10.0 %."
+  },
+  "ElementBoost_Aqua_2_PAL": {
+    "localized_name": "Divinité aquatique",
+    "description": null
+  },
+  "ElementBoost_Dark_1_BossDefeat": {
+    "localized_name": "Dégâts de type ténèbres augmentés (faible)",
+    "description": null
+  },
+  "ElementBoost_Dark_1_PAL": {
+    "localized_name": "Grimoire",
+    "description": "Les dégâts de type ténèbres augmentent de 10.0 %."
+  },
+  "ElementBoost_Dark_2_BossDefeat": {
+    "localized_name": "Dégâts de type ténèbres augmentés (moyen)",
+    "description": null
+  },
+  "ElementBoost_Dark_2_PAL": {
+    "localized_name": "Hadès",
+    "description": null
+  },
+  "ElementBoost_Dark_3_BossDefeat": {
+    "localized_name": "Dégâts de type ténèbres augmentés (fort)",
+    "description": null
+  },
+  "ElementBoost_Dragon_1_BossDefeat": {
+    "localized_name": "Dégâts de type dragon augmentés (faible)",
+    "description": null
+  },
+  "ElementBoost_Dragon_1_PAL": {
+    "localized_name": "Sang de dragon",
+    "description": "Les dégâts de type dragon augmentent de 10.0 %."
+  },
+  "ElementBoost_Dragon_2_BossDefeat": {
+    "localized_name": "Dégâts de type dragon augmentés (moyen)",
+    "description": null
+  },
+  "ElementBoost_Dragon_2_PAL": {
+    "localized_name": "Shenron",
+    "description": null
+  },
+  "ElementBoost_Dragon_3_BossDefeat": {
+    "localized_name": "Dégâts de type dragon augmentés (fort)",
+    "description": null
+  },
+  "ElementBoost_Earth_1_BossDefeat": {
+    "localized_name": "Dégâts de type terre augmentés (faible)",
+    "description": null
+  },
+  "ElementBoost_Earth_1_PAL": {
+    "localized_name": "Force tellurique",
+    "description": "Les dégâts de type terre augmentent de 10.0 %."
+  },
+  "ElementBoost_Earth_2_BossDefeat": {
+    "localized_name": "Dégâts de type terre augmentés (moyen)",
+    "description": null
+  },
+  "ElementBoost_Earth_2_PAL": {
+    "localized_name": "Empereur terrestre",
+    "description": null
+  },
+  "ElementBoost_Earth_3_BossDefeat": {
+    "localized_name": "Dégâts de type terre augmentés (fort)",
+    "description": null
+  },
+  "ElementBoost_Electricity_1_BossDefeat": {
+    "localized_name": "Dégâts de type foudre augmentés (faible)",
+    "description": null
+  },
+  "ElementBoost_Electricity_2_BossDefeat": {
+    "localized_name": "Dégâts de type foudre augmentés (moyen)",
+    "description": null
+  },
+  "ElementBoost_Electricity_3_BossDefeat": {
+    "localized_name": "Dégâts de type foudre augmentés (fort)",
+    "description": null
+  },
+  "ElementBoost_Fire_1_BossDefeat": {
+    "localized_name": "Dégâts de type feu augmentés (faible)",
+    "description": null
+  },
+  "ElementBoost_Fire_1_PAL": {
+    "localized_name": "Pyromane",
+    "description": "Les dégâts de type feu augmentent de 10.0 %."
+  },
+  "ElementBoost_Fire_2_BossDefeat": {
+    "localized_name": "Dégâts de type feu augmentés (moyen)",
+    "description": null
+  },
+  "ElementBoost_Fire_2_PAL": {
+    "localized_name": "Empereur enflammé",
+    "description": null
+  },
+  "ElementBoost_Fire_3_BossDefeat": {
+    "localized_name": "Dégâts de type feu augmentés (fort)",
+    "description": null
+  },
+  "ElementBoost_Ice_1_BossDefeat": {
+    "localized_name": "Dégâts de type glace augmentés (faible)",
+    "description": null
+  },
+  "ElementBoost_Ice_1_PAL": {
+    "localized_name": "Sang froid",
+    "description": "Les dégâts de type glace augmentent de 10.0 %."
+  },
+  "ElementBoost_Ice_2_BossDefeat": {
+    "localized_name": "Dégâts de type glace augmentés (moyen)",
+    "description": null
+  },
+  "ElementBoost_Ice_2_PAL": {
+    "localized_name": "Empereur glacial",
+    "description": null
+  },
+  "ElementBoost_Ice_3_BossDefeat": {
+    "localized_name": "Dégâts de type glace augmentés (fort)",
+    "description": null
+  },
+  "ElementBoost_Leaf_1_BossDefeat": {
+    "localized_name": "Dégâts de type plante augmentés (faible)",
+    "description": null
+  },
+  "ElementBoost_Leaf_1_PAL": {
+    "localized_name": "Fragrance boisée",
+    "description": "Les dégâts de type plante augmentent de 10.0 %."
+  },
+  "ElementBoost_Leaf_2_BossDefeat": {
+    "localized_name": "Dégâts de type plante augmentés (moyen)",
+    "description": null
+  },
+  "ElementBoost_Leaf_2_PAL": {
+    "localized_name": "Roi des esprits",
+    "description": null
+  },
+  "ElementBoost_Leaf_3_BossDefeat": {
+    "localized_name": "Dégâts de type plante augmentés (fort)",
+    "description": null
+  },
+  "ElementBoost_Normal_1_BossDefeat": {
+    "localized_name": "Dégâts non élémentaires augmentés (faible)",
+    "description": null
+  },
+  "ElementBoost_Normal_1_PAL": {
+    "localized_name": "Stoïque",
+    "description": "Les dégâts non élémentaires augmentent de 10.0 %."
+  },
+  "ElementBoost_Normal_2_BossDefeat": {
+    "localized_name": "Dégâts non élémentaires augmentés (moyen)",
+    "description": null
+  },
+  "ElementBoost_Normal_2_PAL": {
+    "localized_name": "Dieu saint",
+    "description": null
+  },
+  "ElementBoost_Normal_3_BossDefeat": {
+    "localized_name": "Dégâts non élémentaires augmentés (fort)",
+    "description": null
+  },
+  "ElementBoost_Thunder_1_PAL": {
+    "localized_name": "Condensateur",
+    "description": "Les dégâts de type foudre augmentent de 10.0 %."
+  },
+  "ElementBoost_Thunder_2_PAL": {
+    "localized_name": "Empereur orageux",
+    "description": null
+  },
+  "ElementBoost_Water_1_BossDefeat": {
+    "localized_name": "Dégâts de type eau augmentés (faible)",
+    "description": null
+  },
+  "ElementBoost_Water_2_BossDefeat": {
+    "localized_name": "Dégâts de type eau augmentés (moyen)",
+    "description": null
+  },
+  "ElementBoost_Water_3_BossDefeat": {
+    "localized_name": "Dégâts de type eau augmentés (fort)",
+    "description": null
+  },
+  "ElementResist_Aqua_1": {
+    "localized_name": "Réduction des dégâts de type eau niv. 1",
+    "description": null
+  },
+  "ElementResist_Aqua_1_PAL": {
+    "localized_name": "Imperméabilité",
+    "description": "Les dégâts de type eau sont réduits de 10.0 %."
+  },
+  "ElementResist_Aqua_2": {
+    "localized_name": "Réduction des dégâts de type eau niv. 2",
+    "description": null
+  },
+  "ElementResist_Aqua_3": {
+    "localized_name": "Réduction des dégâts de type eau niv. 3",
+    "description": null
+  },
+  "ElementResist_Dark_1": {
+    "localized_name": "Réduction des dégâts de type ténèbres niv. 1",
+    "description": null
+  },
+  "ElementResist_Dark_1_PAL": {
+    "localized_name": "Solaire",
+    "description": "Les dégâts de type ténèbres sont réduits de 10.0 %."
+  },
+  "ElementResist_Dark_2": {
+    "localized_name": "Réduction des dégâts de type ténèbres niv. 2",
+    "description": null
+  },
+  "ElementResist_Dark_3": {
+    "localized_name": "Réduction des dégâts de type ténèbres niv. 3",
+    "description": null
+  },
+  "ElementResist_Dragon_1": {
+    "localized_name": "Réduction des dégâts de type dragon niv. 1",
+    "description": null
+  },
+  "ElementResist_Dragon_1_PAL": {
+    "localized_name": "Tueur de dragons",
+    "description": "Les dégâts de type dragon sont réduits de 10.0 %."
+  },
+  "ElementResist_Dragon_2": {
+    "localized_name": "Réduction des dégâts de type dragon niv. 2",
+    "description": null
+  },
+  "ElementResist_Dragon_3": {
+    "localized_name": "Réduction des dégâts de type dragon niv. 3",
+    "description": null
+  },
+  "ElementResist_Earth_1": {
+    "localized_name": "Réduction des dégâts de type terre niv. 1",
+    "description": null
+  },
+  "ElementResist_Earth_1_PAL": {
+    "localized_name": "Parasismique",
+    "description": "Les dégâts de type terre sont réduits de 10.0 %."
+  },
+  "ElementResist_Earth_2": {
+    "localized_name": "Réduction des dégâts de type terre niv. 2",
+    "description": null
+  },
+  "ElementResist_Earth_3": {
+    "localized_name": "Réduction des dégâts de type terre niv. 3",
+    "description": null
+  },
+  "ElementResist_Fire_1": {
+    "localized_name": "Réduction des dégâts de type feu niv. 1",
+    "description": null
+  },
+  "ElementResist_Fire_1_PAL": {
+    "localized_name": "Hyperpigmentation",
+    "description": "Les dégâts de type feu sont réduits de 10.0 %."
+  },
+  "ElementResist_Fire_2": {
+    "localized_name": "Réduction des dégâts de type feu niv. 2",
+    "description": null
+  },
+  "ElementResist_Fire_3": {
+    "localized_name": "Réduction des dégâts de type feu niv. 3",
+    "description": null
+  },
+  "ElementResist_Ice_1": {
+    "localized_name": "Réduction des dégâts de type glace niv. 1",
+    "description": null
+  },
+  "ElementResist_Ice_1_PAL": {
+    "localized_name": "Sang chaud",
+    "description": "Les dégâts de type glace sont réduits de 10.0 %."
+  },
+  "ElementResist_Ice_2": {
+    "localized_name": "Réduction des dégâts de type glace niv. 2",
+    "description": null
+  },
+  "ElementResist_Ice_3": {
+    "localized_name": "Réduction des dégâts de type glace niv. 3",
+    "description": null
+  },
+  "ElementResist_Leaf_1": {
+    "localized_name": "Réduction des dégâts de type plante niv. 1",
+    "description": null
+  },
+  "ElementResist_Leaf_1_PAL": {
+    "localized_name": "Anti-irritations",
+    "description": "Les dégâts de type plante sont réduits de 10.0 %."
+  },
+  "ElementResist_Leaf_2": {
+    "localized_name": "Réduction des dégâts de type plante niv. 2",
+    "description": null
+  },
+  "ElementResist_Leaf_3": {
+    "localized_name": "Réduction des dégâts de type plante niv. 3",
+    "description": null
+  },
+  "ElementResist_Normal_1": {
+    "localized_name": "Réduction des dégâts non élémentaires niv. 1",
+    "description": null
+  },
+  "ElementResist_Normal_1_PAL": {
+    "localized_name": "Anormal",
+    "description": "Les dégâts non élémentaires sont réduits de 10.0 %."
+  },
+  "ElementResist_Normal_2": {
+    "localized_name": "Réduction des dégâts non élémentaires niv. 2",
+    "description": null
+  },
+  "ElementResist_Normal_3": {
+    "localized_name": "Réduction des dégâts non élémentaires niv. 3",
+    "description": null
+  },
+  "ElementResist_Thunder_1": {
+    "localized_name": "Réduction des dégâts de type foudre niv. 1",
+    "description": null
+  },
+  "ElementResist_Thunder_1_PAL": {
+    "localized_name": "Isolant",
+    "description": "Les dégâts de type foudre sont réduits de 10.0 %."
+  },
+  "ElementResist_Thunder_2": {
+    "localized_name": "Réduction des dégâts de type foudre niv. 2",
+    "description": null
+  },
+  "ElementResist_Thunder_3": {
+    "localized_name": "Réduction des dégâts de type foudre niv. 3",
+    "description": null
+  },
+  "EternalFlame": {
+    "localized_name": "Feu éternel",
+    "description": null
+  },
+  "HP_ACC_up1": {
+    "localized_name": "PV augmentée niv. 1",
+    "description": null
+  },
+  "HP_ACC_up2": {
+    "localized_name": "PV augmentée niv. 2",
+    "description": null
+  },
+  "HP_ACC_up3": {
+    "localized_name": "PV augmentée niv. 3",
+    "description": null
+  },
+  "Invader": {
+    "localized_name": "Envahisseur",
+    "description": null
+  },
+  "JumpCount_Increase1": {
+    "localized_name": "Saut additionnel 1",
+    "description": "Saut additionnel 1"
+  },
+  "JumpCount_Increase2": {
+    "localized_name": "Saut additionnel 2",
+    "description": "Saut additionnel 2"
+  },
+  "JumpCount_Increase3": {
+    "localized_name": "Saut additionnel 3",
+    "description": "Saut additionnel 3"
+  },
+  "JumpPower_Increase": {
+    "localized_name": "Saut renforcé",
+    "description": "Saut renforcé"
+  },
+  "Legend": {
+    "localized_name": "Légende",
+    "description": "Attaque +20.0 % Défense +20.0 % Vitesse de déplacement +15.0 %"
+  },
+  "MaxInventoryWeight_up": {
+    "localized_name": "Augmentation du poids max niv. 1",
+    "description": null
+  },
+  "MaxInventoryWeight_up2": {
+    "localized_name": "Augmentation du poids max niv. 2",
+    "description": null
+  },
+  "MaxInventoryWeight_up3": {
+    "localized_name": "Augmentation du poids max niv. 3",
+    "description": null
+  },
+  "MaxInventoryWeight_up_Equip_1": {
+    "localized_name": "Augmentation du poids max niv. 1",
+    "description": null
+  },
+  "MaxInventoryWeight_up_Equip_2": {
+    "localized_name": "Augmentation du poids max niv. 2",
+    "description": null
+  },
+  "MaxInventoryWeight_up_Equip_3": {
+    "localized_name": "Augmentation du poids max niv. 3",
+    "description": null
+  },
+  "MoveSpeed_up_1": {
+    "localized_name": "Vif",
+    "description": "La vitesse de déplacement augmente de 10.0 %."
+  },
+  "MoveSpeed_up_2": {
+    "localized_name": "Coursier",
+    "description": "La vitesse de déplacement augmente de 20.0 %."
+  },
+  "MoveSpeed_up_3": {
+    "localized_name": "Sprinteur",
+    "description": "La vitesse de déplacement augmente de 30.0 %."
+  },
+  "Nocturnal": {
+    "localized_name": "Nocturne",
+    "description": "Ne dort pas et continue à travailler la nuit."
+  },
+  "NonKilling": {
+    "localized_name": "Ménagement",
+    "description": "Pacifiste. Impossible de réduire la santé de la cible à moins de 1."
+  },
+  "Noukin": {
+    "localized_name": "Impulsif",
+    "description": null
+  },
+  "PAL_ALLAttack_down1": {
+    "localized_name": "Frileux",
+    "description": null
+  },
+  "PAL_ALLAttack_down2": {
+    "localized_name": "Médiateur",
+    "description": null
+  },
+  "PAL_ALLAttack_up1": {
+    "localized_name": "Brave",
+    "description": null
+  },
+  "PAL_ALLAttack_up2": {
+    "localized_name": "Féroce",
+    "description": null
+  },
+  "PAL_ALLAttack_up3": {
+    "localized_name": "Colère divine",
+    "description": null
+  },
+  "PAL_CorporateSlave": {
+    "localized_name": "Soumis",
+    "description": null
+  },
+  "PAL_FullStomach_Down_1": {
+    "localized_name": "Frugal",
+    "description": "Le degré de satiété diminue plus lentement <NumBlue_13>+10.0 %</>"
+  },
+  "PAL_FullStomach_Down_2": {
+    "localized_name": "Nutritionniste",
+    "description": "Le degré de satiété diminue plus lentement <NumBlue_13>+15.0 %</>"
+  },
+  "PAL_FullStomach_Down_3": {
+    "localized_name": "Grève de la faim",
+    "description": "Le degré de satiété diminue plus lentement <NumBlue_13>+20.0 %</>"
+  },
+  "PAL_FullStomach_Up_1": {
+    "localized_name": "Glouton",
+    "description": "Le degré de satiété diminue rapidement <NumRed_13>+10.0 %</>"
+  },
+  "PAL_FullStomach_Up_2": {
+    "localized_name": "Estomac sans fond",
+    "description": "Le degré de satiété diminue rapidement <NumRed_13>+15.0 %</>"
+  },
+  "PAL_Sanity_Down_1": {
+    "localized_name": "Positif",
+    "description": "Les points MEN diminuent plus lentement <NumBlue_13>+10.0 %</>"
+  },
+  "PAL_Sanity_Down_2": {
+    "localized_name": "Acharné",
+    "description": "Les points MEN diminuent plus lentement <NumBlue_13>+15.0 %</>"
+  },
+  "PAL_Sanity_Down_3": {
+    "localized_name": "Impassible",
+    "description": "Les points MEN diminuent plus lentement <NumBlue_13>+20.0 %</>"
+  },
+  "PAL_Sanity_Up_1": {
+    "localized_name": "Mentalement instable",
+    "description": "Les points MEN diminuent rapidement <NumRed_13>+10.0 %</>"
+  },
+  "PAL_Sanity_Up_2": {
+    "localized_name": "Soif de destruction",
+    "description": "Les points MEN diminuent rapidement <NumRed_13>+15.0 %</>"
+  },
+  "PAL_SpiritualInst": {
+    "localized_name": "fr_Text",
+    "description": null
+  },
+  "PAL_conceited": {
+    "localized_name": "Vaniteux",
+    "description": null
+  },
+  "PAL_masochist": {
+    "localized_name": "Masochiste",
+    "description": null
+  },
+  "PAL_oraora": {
+    "localized_name": "Rentre-dedans",
+    "description": null
+  },
+  "PAL_rude": {
+    "localized_name": "Grossier",
+    "description": null
+  },
+  "PAL_sadist": {
+    "localized_name": "Sadique",
+    "description": null
+  },
+  "Rare": {
+    "localized_name": "Chanceux",
+    "description": null
+  },
+  "SalePrice_Down_1": {
+    "localized_name": "Miteux",
+    "description": "Montant de vente - : -10.0 %"
+  },
+  "SalePrice_Up_1": {
+    "localized_name": "Noble",
+    "description": "Montant des ventes + : 5.0 %"
+  },
+  "SalePrice_Up_2": {
+    "localized_name": "Belle fourrure",
+    "description": "Montant des ventes + : 3.0 %"
+  },
+  "SphereModule_Curve": {
+    "localized_name": "Courbe des sphères +1",
+    "description": null
+  },
+  "SphereModule_Curve2": {
+    "localized_name": "Sphères glissantes",
+    "description": null
+  },
+  "SphereModule_Heavy": {
+    "localized_name": "Poids des sphères +1",
+    "description": null
+  },
+  "SphereModule_Homing": {
+    "localized_name": "Sphères à tête chercheuse",
+    "description": null
+  },
+  "SphereModule_Sniper": {
+    "localized_name": "Portée des sphères +1",
+    "description": null
+  },
+  "SphereModule_Sniper2": {
+    "localized_name": "Portée des sphères +2",
+    "description": null
+  },
+  "Stamina_Down_1": {
+    "localized_name": "Reclus",
+    "description": "Endurance maximale -25.0 % (Pals montures uniquement)"
+  },
+  "Stamina_Up_1": {
+    "localized_name": "Infatigable",
+    "description": "Endurance maximale + 50.0 % (Pals montures uniquement)"
+  },
+  "Stamina_Up_2": {
+    "localized_name": "Force de la nature",
+    "description": "Endurance maximale + 25.0 % (Pals montures uniquement)"
+  },
+  "Stamina_Up_3": {
+    "localized_name": "Infatigable",
+    "description": "Endurance maximale + 75.0 % (Pals montures uniquement)"
+  },
+  "TemperatureResist_Cold1": {
+    "localized_name": "Antifroid niv. 1",
+    "description": null
+  },
+  "TemperatureResist_Cold2": {
+    "localized_name": "Antifroid niv. 2",
+    "description": null
+  },
+  "TemperatureResist_Cold3": {
+    "localized_name": "Antifroid niv. 3",
+    "description": null
+  },
+  "TemperatureResist_Heat1": {
+    "localized_name": "Antichaleur niv. 1",
+    "description": null
+  },
+  "TemperatureResist_Heat1Cold1": {
+    "localized_name": "Antichaleur niv. 1 / Antifroid niv. 1",
+    "description": null
+  },
+  "TemperatureResist_Heat2": {
+    "localized_name": "Antichaleur niv. 2",
+    "description": null
+  },
+  "TemperatureResist_Heat2Cold2": {
+    "localized_name": "Antichaleur niv. 2 / Antifroid niv. 2",
+    "description": null
+  },
+  "TemperatureResist_Heat3": {
+    "localized_name": "Antichaleur niv. 3",
+    "description": null
+  },
+  "TemperatureResist_Heat3Cold3": {
+    "localized_name": "Antichaleur niv. 3 / Antifroid niv. 3",
+    "description": null
+  },
+  "Test_PalEgg_HatchingSpeed_Up": {
+    "localized_name": "Philanthrope",
+    "description": "Lorsqu'il est affecté à un ranch, la vitesse de production des œufs augmente de 100.0 %."
+  },
+  "TrainerATK_UP_1": {
+    "localized_name": "Chef d'assaut",
+    "description": "L'attaque du joueur augmente de 10.0 %."
+  },
+  "TrainerDEF_UP_1": {
+    "localized_name": "Stratège de forteresse",
+    "description": "La défense du joueur augmente de 10.0 %."
+  },
+  "TrainerLogging_up1": {
+    "localized_name": "Chef d'abattage",
+    "description": "La capacité d'abattage du joueur augmente de 25.0 %."
+  },
+  "TrainerMining_up1": {
+    "localized_name": "Chef d'extraction",
+    "description": "La capacité d'extraction du joueur augmente de 25.0 %."
+  },
+  "TrainerWorkSpeed_UP_1": {
+    "localized_name": "Motivateur",
+    "description": "La productivité du joueur augmente de 25.0 %."
+  },
+  "Vampire": {
+    "localized_name": "Nocturne",
+    "description": "Absorbe une partie des dégâts infligés pour restaurer ses PV. Ne dort pas et continue à travailler la nuit."
+  },
+  "Witch": {
+    "localized_name": "Sorcière",
+    "description": null
+  },
+  "WorkSpeed_ACC_up1": {
+    "localized_name": "Productivité niv. 1",
+    "description": null
+  },
+  "WorkSpeed_ACC_up2": {
+    "localized_name": "Productivité niv. 2",
+    "description": null
+  },
+  "WorkSpeed_ACC_up3": {
+    "localized_name": "Productivité niv. 3",
+    "description": null
+  },
+  "defense_ACC_up1": {
+    "localized_name": "Défense augmentée niv. 1",
+    "description": null
+  },
+  "defense_ACC_up2": {
+    "localized_name": "Défense augmentée niv. 2",
+    "description": null
+  },
+  "defense_ACC_up3": {
+    "localized_name": "Défense augmentée niv. 3",
+    "description": null
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "Collection": {
+    "localized_name": "Сбор",
+    "description": null
+  },
+  "Cool": {
+    "localized_name": "Охлаждение",
+    "description": null
+  },
+  "Deforest": {
+    "localized_name": "Рубка деревьев",
+    "description": null
+  },
+  "EmitFlame": {
+    "localized_name": "Разжигание огня",
+    "description": null
+  },
+  "GenerateElectricity": {
+    "localized_name": "Генерация энергии",
+    "description": null
+  },
+  "Handcraft": {
+    "localized_name": "Ручная работа",
+    "description": null
+  },
+  "Mining": {
+    "localized_name": "Добыча ископаемых",
+    "description": null
+  },
+  "MonsterFarm": {
+    "localized_name": "Пастбище",
+    "description": null
+  },
+  "OilExtraction": {
+    "localized_name": "Вытягивание сырой нефти",
+    "description": null
+  },
+  "ProductMedicine": {
+    "localized_name": "Производство лекарств",
+    "description": null
+  },
+  "Seeding": {
+    "localized_name": "Посев семян",
+    "description": null
+  },
+  "Transport": {
+    "localized_name": "Транспортировка",
+    "description": null
+  },
+  "Watering": {
+    "localized_name": "Полив",
+    "description": null
+  }
+}

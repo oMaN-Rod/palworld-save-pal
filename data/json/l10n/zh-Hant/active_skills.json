@@ -1,0 +1,830 @@
+{
+  "EPalWazaID::AcidRain": {
+    "localized_name": "酸雨",
+    "description": "製造出酸性的雲， 在敵人上方降下酸雨。"
+  },
+  "EPalWazaID::AirBlade": {
+    "localized_name": "真空刃",
+    "description": "扇形發射鋒利的氣刃。"
+  },
+  "EPalWazaID::AirCanon": {
+    "localized_name": "空氣彈",
+    "description": "以急速射出空氣團塊。"
+  },
+  "EPalWazaID::Apocalypse": {
+    "localized_name": "啟示錄",
+    "description": "在敵人周圍生成多個暗黑龍捲風。"
+  },
+  "EPalWazaID::AquaJet": {
+    "localized_name": "水流射擊",
+    "description": "朝敵人發射高速水彈。"
+  },
+  "EPalWazaID::BeamSlicer": {
+    "localized_name": "切割龍息",
+    "description": "用龍屬性的射線一掃前方。 被掃過地方將產生延遲爆炸。"
+  },
+  "EPalWazaID::BlastCanon": {
+    "localized_name": "綻裂龍息",
+    "description": "向敵人的位置發射充滿龍屬性的能量彈。 能量彈在著彈時將向周圍擴散，在前方廣範圍引發爆炸。"
+  },
+  "EPalWazaID::BlizzardLance": {
+    "localized_name": "冰刺",
+    "description": "在敵人的腳下生成銳利的冰刃。"
+  },
+  "EPalWazaID::BubbleShot": {
+    "localized_name": "泡泡射擊",
+    "description": "發射大量以緩慢速度追擊敵人的泡泡。"
+  },
+  "EPalWazaID::BubbleShower": {
+    "localized_name": "毒雨",
+    "description": "使出渾身力量 向各個方向噴灑毒球。"
+  },
+  "EPalWazaID::ChaosLaser": {
+    "localized_name": "混沌射線",
+    "description": "zh-Hant Text"
+  },
+  "EPalWazaID::ChargeCanon": {
+    "localized_name": "龍息炮",
+    "description": "向敵人發射積蓄著龍屬性力量的能量彈。 能量彈在著彈時將引發大範圍爆炸。"
+  },
+  "EPalWazaID::Commet": {
+    "localized_name": "隕星",
+    "description": "召喚隕石垂直落下， 並在撞擊點產生衝擊波。"
+  },
+  "EPalWazaID::CommetRain": {
+    "localized_name": "隕星雨",
+    "description": "召喚無數隕石落下， 並在撞擊點產生衝擊波。"
+  },
+  "EPalWazaID::CrossThunder": {
+    "localized_name": "十字雷擊",
+    "description": "製造往兩個方向前進的雷擊， 從左右兩側夾攻敵人。"
+  },
+  "EPalWazaID::DarkArrow": {
+    "localized_name": "黑暗箭",
+    "description": "使用黑暗力量， 連續迅速射出多支追擊敵人的黑暗箭。"
+  },
+  "EPalWazaID::DarkBall": {
+    "localized_name": "暗黑球",
+    "description": "發射以緩慢速度追擊敵人的黑暗球體。"
+  },
+  "EPalWazaID::DarkCanon": {
+    "localized_name": "黑暗彈",
+    "description": "將帶有黑暗力量的高速能量彈射向敵人。"
+  },
+  "EPalWazaID::DarkLaser": {
+    "localized_name": "暗黑雷射",
+    "description": "積蓄黑暗之力後 瞄準敵人發射強力光束。"
+  },
+  "EPalWazaID::DarkLegion": {
+    "localized_name": "黑暗之擁",
+    "description": "發射多個黑暗球體追擊敵人。"
+  },
+  "EPalWazaID::DarkPulse": {
+    "localized_name": "黑暗霰射",
+    "description": "向目標發射以扇形散開的高速黑暗球體。"
+  },
+  "EPalWazaID::DarkWave": {
+    "localized_name": "暗影波動",
+    "description": "迅速放出黑暗的力量， 對四周的敵人造成衝擊。"
+  },
+  "EPalWazaID::DiamondFall": {
+    "localized_name": "晶鑽之雨",
+    "description": "在敵人上方生成無數個冰塊， 隨後接連落下攻擊目標。"
+  },
+  "EPalWazaID::DoubleIcicleThrow": {
+    "localized_name": "極寒雙星",
+    "description": "做出兩個巨大的冰塊， 瞄準敵人先後發射。 撞擊後對周圍造成衝擊。"
+  },
+  "EPalWazaID::DragonBreath": {
+    "localized_name": "龍息",
+    "description": "朝前方噴出帶有龍之力量的氣息， 連續對目標造成傷害。"
+  },
+  "EPalWazaID::DragonCanon": {
+    "localized_name": "龍息彈",
+    "description": "將帶有龍之力量的能量彈射向敵人。"
+  },
+  "EPalWazaID::DragonMeteor": {
+    "localized_name": "龍彗星",
+    "description": "召喚大量小型隕石並砸向敵人。"
+  },
+  "EPalWazaID::DragonWave": {
+    "localized_name": "龍之波動",
+    "description": "迅速放出龍之力量， 對四周的敵人造成衝擊。"
+  },
+  "EPalWazaID::ElecWave": {
+    "localized_name": "衝擊波",
+    "description": "迅速放出電流， 對四周的敵人造成衝擊。"
+  },
+  "EPalWazaID::Eruption": {
+    "localized_name": "熔岩爆發",
+    "description": "向上空噴射無數熔岩彈。 一段時間後，射出的熔岩彈將如雨一般散落在周圍。"
+  },
+  "EPalWazaID::FireBall": {
+    "localized_name": "烈焰球",
+    "description": "在頭頂製造巨大火球，並將它砸向敵人。 命中目標便會爆炸，並造成大範圍的爆風。"
+  },
+  "EPalWazaID::FireBlast": {
+    "localized_name": "烈焰射擊",
+    "description": "瞄準敵人發射直線飛行的火焰彈。"
+  },
+  "EPalWazaID::FireSeed": {
+    "localized_name": "烈焰濺射",
+    "description": "朝敵人發射火球。 火球前進一段距離後， 便會裂解為許多小火球。"
+  },
+  "EPalWazaID::FlameFunnel": {
+    "localized_name": "流火",
+    "description": "使用火焰的力量做出複數個球體， 然後向敵人發射無數火球。"
+  },
+  "EPalWazaID::FlameWall": {
+    "localized_name": "爆烈火牆",
+    "description": "在敵人的位置燃起火焰之牆。 火牆將持續一段時間， 對碰到的敵人造成傷害。"
+  },
+  "EPalWazaID::Flamethrower": {
+    "localized_name": "烈焰放射",
+    "description": "朝敵人噴出火焰，連續對目標造成傷害。"
+  },
+  "EPalWazaID::FlareArrow": {
+    "localized_name": "烈焰箭",
+    "description": "連續射出三支追擊敵人的高速火焰箭。"
+  },
+  "EPalWazaID::FlareTornado": {
+    "localized_name": "烈焰風暴",
+    "description": "在左右兩側製造出熾熱的龍捲風， 朝敵人步步進逼。"
+  },
+  "EPalWazaID::FlareTwister": {
+    "localized_name": "炎龍舞",
+    "description": "zh-Hant Text"
+  },
+  "EPalWazaID::FrostBreath": {
+    "localized_name": "凜冬之息",
+    "description": "朝敵人噴出冰冷空氣， 連續對目標造成傷害。"
+  },
+  "EPalWazaID::GhostFlame": {
+    "localized_name": "鬼火",
+    "description": "發射三團緊追敵人不放的怨念。"
+  },
+  "EPalWazaID::GrassTornado": {
+    "localized_name": "綠野颶風",
+    "description": "在左右兩側製造出龍捲風， 朝敵人步步進逼。"
+  },
+  "EPalWazaID::HolyBlast": {
+    "localized_name": "光擊陣",
+    "description": "在敵人腳下和四周引發大範圍的光柱爆炸。"
+  },
+  "EPalWazaID::Human_Punch": {
+    "localized_name": "擊打",
+    "description": "相信自己的拳頭，出拳攻擊。"
+  },
+  "EPalWazaID::HydroPump": {
+    "localized_name": "高壓水炮",
+    "description": "以驚人氣勢噴出水柱， 橫掃前方大範圍的目標。"
+  },
+  "EPalWazaID::HyperBeam": {
+    "localized_name": "帕魯光束",
+    "description": "蓄積破壞性的能量， 朝前方大範圍射出極強力的光束。"
+  },
+  "EPalWazaID::IceAge": {
+    "localized_name": "冰極凍域",
+    "description": "大範圍地在目標的腳下生成冰柱貫穿敵人。"
+  },
+  "EPalWazaID::IceBlade": {
+    "localized_name": "冰刃",
+    "description": "製造出新月型的冰刃， 將之射向前方。"
+  },
+  "EPalWazaID::IceMissile": {
+    "localized_name": "冰雪飛彈",
+    "description": "在空中製造出尖銳的冰礫， 並將之射向敵人。"
+  },
+  "EPalWazaID::IcicleLine": {
+    "localized_name": "冰鋒之路",
+    "description": "召喚朝前方三個方向直線推進的冰柱。"
+  },
+  "EPalWazaID::IciclePierce": {
+    "localized_name": "冰霜連彈",
+    "description": "在空中生成複數個冰錐， 瞄準敵人一齊射出。"
+  },
+  "EPalWazaID::IcicleThrow": {
+    "localized_name": "鑽石星辰",
+    "description": "製造巨大冰塊，將它高速砸向敵人。 冰塊命中敵人後， 四周的目標也會受到衝擊波的影響。"
+  },
+  "EPalWazaID::Inferno": {
+    "localized_name": "地獄火",
+    "description": "活化敵人四周的地面， 並在一段時間後爆炸。"
+  },
+  "EPalWazaID::LightningStrike": {
+    "localized_name": "閃電衝擊",
+    "description": "讓自己化作避雷針引來雷電， 並在原地引發閃電爆炸。"
+  },
+  "EPalWazaID::LineGeyser": {
+    "localized_name": "瀑流擊",
+    "description": "召喚一束直線前進的水柱。"
+  },
+  "EPalWazaID::LineThunder": {
+    "localized_name": "雷擊",
+    "description": "製造沿直線前進的雷擊。"
+  },
+  "EPalWazaID::LockonLaser": {
+    "localized_name": "鎖定雷射",
+    "description": "鎖定敵人後， 朝對方發射極高速的雷電雷射。"
+  },
+  "EPalWazaID::MudShot": {
+    "localized_name": "泥漿投擲",
+    "description": "將黏答答的泥巴砸向敵人。"
+  },
+  "EPalWazaID::PoisonFog": {
+    "localized_name": "毒霧",
+    "description": "於前方製造毒霧， 使目標陷入中毒狀態。"
+  },
+  "EPalWazaID::PoisonShot": {
+    "localized_name": "劇毒射擊",
+    "description": "將帶有猛毒力量的爛泥砸向敵人。"
+  },
+  "EPalWazaID::PowerBall": {
+    "localized_name": "元氣彈",
+    "description": "蓄積大量能量， 將之化作巨大球體後射出。"
+  },
+  "EPalWazaID::PowerShot": {
+    "localized_name": "能量射擊",
+    "description": "蓄積能量， 將之化作子彈後射出。"
+  },
+  "EPalWazaID::PredatorBeam": {
+    "localized_name": "捕食者光束",
+    "description": null
+  },
+  "EPalWazaID::PredatorLockon": {
+    "localized_name": "捕食者鎖定雷射",
+    "description": null
+  },
+  "EPalWazaID::PredatorWave": {
+    "localized_name": "捕食者激波",
+    "description": null
+  },
+  "EPalWazaID::Psychokinesis": {
+    "localized_name": "念動引力",
+    "description": "以超能力控制四周的敵人， 將他們從高處猛力摔向地面。"
+  },
+  "EPalWazaID::RaidCutter": {
+    "localized_name": "連環風刃",
+    "description": "瞄準敵人射出無數風刃。"
+  },
+  "EPalWazaID::Railbolt": {
+    "localized_name": "Railbolt",
+    "description": "積蓄雷電的力量到極限， 朝敵人同時發射多道強力雷擊。"
+  },
+  "EPalWazaID::RangeThunder": {
+    "localized_name": "雷動八方",
+    "description": "向八個方向召喚直線推進的雷擊。"
+  },
+  "EPalWazaID::RockBeat": {
+    "localized_name": "震岩",
+    "description": "震動地面， 並使巨大的岩石飛起。"
+  },
+  "EPalWazaID::RockLance": {
+    "localized_name": "岩石銳矛",
+    "description": "在敵人的腳邊 生成尖銳的岩石長矛。"
+  },
+  "EPalWazaID::RootAttack": {
+    "localized_name": "纏繞地刺",
+    "description": "以地面下尖銳的樹根追擊敵人， 並從下而上刺穿目標。"
+  },
+  "EPalWazaID::RootLance": {
+    "localized_name": "纏根牢獄",
+    "description": "在敵人的位置和其周圍刺出尖銳的根刺。"
+  },
+  "EPalWazaID::SandTornado": {
+    "localized_name": "沙塵旋風",
+    "description": "在左右兩側製造出沙龍捲， 朝敵人步步進逼。"
+  },
+  "EPalWazaID::SandTwister": {
+    "localized_name": "沙塵暴",
+    "description": "生成複數個砂龍捲。 龍捲風們將一邊自旋一邊繞中心旋轉。"
+  },
+  "EPalWazaID::SeedMachinegun": {
+    "localized_name": "種子機關槍",
+    "description": "射出大量堅硬種子攻擊前方的敵人。"
+  },
+  "EPalWazaID::SeedMine": {
+    "localized_name": "種子地雷",
+    "description": "發射危險的種子。 種子碰到敵人便會繃裂爆炸。"
+  },
+  "EPalWazaID::SelfDestruct": {
+    "localized_name": "自爆",
+    "description": "賭上性命引發爆炸。 使用後會陷入無法戰鬥的狀態。"
+  },
+  "EPalWazaID::SelfDestruct_Bee": {
+    "localized_name": "蜂！蜂！蜂！",
+    "description": "賭上性命引發爆炸。 是種為了榮譽而犧牲自己的技能。"
+  },
+  "EPalWazaID::SelfExplosion": {
+    "localized_name": "超自爆",
+    "description": "賭上性命引發大規模爆炸。 犧牲自我，化作夜空中閃耀的星星。"
+  },
+  "EPalWazaID::ShadowBall": {
+    "localized_name": "惡夢球",
+    "description": "在頭頂製造大型黑暗球體， 並將它高速砸向敵人。"
+  },
+  "EPalWazaID::ShokeiLaser": {
+    "localized_name": "處刑雷射",
+    "description": "鎖定敵人後，連續射出超高速的雷射。"
+  },
+  "EPalWazaID::SolarBeam": {
+    "localized_name": "太陽光束",
+    "description": "蓄積太陽的力量， 瞄準敵人射出強大的光束。"
+  },
+  "EPalWazaID::SpecialCutter": {
+    "localized_name": "三重風刃",
+    "description": "瞄準敵人發射 3發直線飛行的極高速風刃。"
+  },
+  "EPalWazaID::SpreadPulse": {
+    "localized_name": "電火花",
+    "description": "向目標發射以扇形散開的雷電球。"
+  },
+  "EPalWazaID::StarMine": {
+    "localized_name": "詭雷繁星",
+    "description": "在敵人周圍生成一碰就爆炸的星星。 星星在經過一定時間後，沒有觸碰也會爆炸。"
+  },
+  "EPalWazaID::StoneShotgun": {
+    "localized_name": "碎石霰彈",
+    "description": "向前方射出大量的小石頭碎屑。"
+  },
+  "EPalWazaID::ThreeCommet": {
+    "localized_name": "三重隕星",
+    "description": "召喚隕石接連落下， 並在撞擊點產生衝擊波。"
+  },
+  "EPalWazaID::ThreeThunder": {
+    "localized_name": "三重雷擊",
+    "description": "在敵人頭上落下三次落雷。"
+  },
+  "EPalWazaID::ThrowRock": {
+    "localized_name": "投石",
+    "description": "從眼前的地面挖出岩石， 並將它砸向敵人。"
+  },
+  "EPalWazaID::ThunderBall": {
+    "localized_name": "閃電球",
+    "description": "發射以緩慢速度追擊敵人的雷電球。"
+  },
+  "EPalWazaID::ThunderFunnel": {
+    "localized_name": "等離子浮游砲",
+    "description": "製造兩顆蘊含雷電能量的球體後， 瞄準敵人，從中發射無數雷電球。"
+  },
+  "EPalWazaID::ThunderRain": {
+    "localized_name": "廣域雷擊",
+    "description": "召喚雷電， 並於一段時間後降下大量落雷。"
+  },
+  "EPalWazaID::ThunderStorm": {
+    "localized_name": "雷霆颶風",
+    "description": "召喚巨大的雷屬性龍捲風。 龍捲風將追蹤敵人緩慢移動。"
+  },
+  "EPalWazaID::Thunderbolt": {
+    "localized_name": "閃電伏特",
+    "description": "蓄積雷電的力量， 瞄準敵人釋放強大的電擊。"
+  },
+  "EPalWazaID::Tremor": {
+    "localized_name": "岩爆",
+    "description": "撼動地面， 使大塊岩石射向四面八方"
+  },
+  "EPalWazaID::TriSpark": {
+    "localized_name": "三相火花",
+    "description": "同時發射直線飛行的高速雷球， 和追蹤敵人的慢速雷球。"
+  },
+  "EPalWazaID::TripleCannon": {
+    "localized_name": "三重龍息彈",
+    "description": "zh-Hant Text"
+  },
+  "EPalWazaID::Unique_Alpaca_Tackle": {
+    "localized_name": "絨毛衝撞",
+    "description": "美露帕的專屬技能。 散發出可愛的氣場並朝向前方衝刺。"
+  },
+  "EPalWazaID::Unique_AmaterasuWolf_Dark_DarkCharge": {
+    "localized_name": "火陰山雷",
+    "description": "幽焰狼的專屬技能。 帶著纏繞全身的紫色火焰，氣勢洶洶地向前猛衝。"
+  },
+  "EPalWazaID::Unique_AmaterasuWolf_FireCharge": {
+    "localized_name": "風林火山",
+    "description": "蒼焰狼的專屬技能。 帶著纏繞全身的青藍火焰，氣勢洶洶地向前猛衝。"
+  },
+  "EPalWazaID::Unique_Anubis_GroundPunch": {
+    "localized_name": "粉碎大地",
+    "description": "阿努比斯的專屬技能。 高高躍起後，對地面使出猛烈一擊。 產生的衝擊波將對大範圍的目標造成傷害。"
+  },
+  "EPalWazaID::Unique_Anubis_LowRoundKick": {
+    "localized_name": "迴旋踢擊",
+    "description": "阿努比斯的專屬技能。 以強壯的腿腳使出大範圍迴旋踢，橫掃四周的目標。"
+  },
+  "EPalWazaID::Unique_Anubis_Tackle": {
+    "localized_name": "巨力衝鋒",
+    "description": "阿努比斯的專屬技能。 高速移動追逐敵人， 釋放能量並使出強力拳擊。"
+  },
+  "EPalWazaID::Unique_Baphomet_SwallowKite": {
+    "localized_name": "獄火爪",
+    "description": "炎魔羊及亞種的專屬技能。 接近目標後跳起同時以左手爪子向上揮擊， 再用右手爪子迅速向下揮砍。"
+  },
+  "EPalWazaID::Unique_BirdDragon_FireBreath": {
+    "localized_name": "熾焰掠空",
+    "description": "烽歌龍的專屬技能。 一邊從口中噴出火焰一邊前進。"
+  },
+  "EPalWazaID::Unique_BirdDragon_Ice_IceBreath": {
+    "localized_name": "寒霜掠空",
+    "description": "霜歌龍的專屬技能。 一邊從口中呼出冷氣一邊前進。"
+  },
+  "EPalWazaID::Unique_BlackCentaur_TwoSpearRushes": {
+    "localized_name": "雙槍一閃",
+    "description": "混沌騎士的專屬技能。 以旋風包覆雙手的長槍後， 朝前方衝刺並左右交替刺擊。"
+  },
+  "EPalWazaID::Unique_BlackGriffon_TackleLaser": {
+    "localized_name": "神聖災禍",
+    "description": "異構格里芬的專屬技能。 在向前猛衝的同時製造出光球。 光球會自動捕捉敵人，並射出大量雷射。"
+  },
+  "EPalWazaID::Unique_BlackGriffon_TackleLaser2": {
+    "localized_name": "神聖災禍Ⅱ",
+    "description": "異構格里芬的專屬技能。 一邊突進，一邊從身體的圓環出射出無數的藍色光束。 光束會自動追蹤敵人。"
+  },
+  "EPalWazaID::Unique_BlackMetalDragon_FirePunch": {
+    "localized_name": "魔龍焚炎",
+    "description": "魔淵龍的專屬技能。 在向前方揮出兩拳後， 向下呼出龍屬性的吐息。"
+  },
+  "EPalWazaID::Unique_BluePlatypus_Toboggan": {
+    "localized_name": "乘風破浪",
+    "description": null
+  },
+  "EPalWazaID::Unique_BlueThunderHorse_FlashDash": {
+    "localized_name": "風馳電掣",
+    "description": "馭雷馬的專屬技能。 以閃電般的高速移動， 席捲路徑上的一切事物。"
+  },
+  "EPalWazaID::Unique_Boar_Tackle": {
+    "localized_name": "豬突猛進",
+    "description": "草莽豬的專屬技能。 鎖定敵人後，以兇猛的氣勢撞向對方。"
+  },
+  "EPalWazaID::Unique_CaptainPenguin_BodySlide": {
+    "localized_name": "王者滑擊",
+    "description": "企丸王的專屬技能。 全身散發寒氣，並採腹部著地之姿滑行， 往敵人的方向用力撞去。"
+  },
+  "EPalWazaID::Unique_ChickenPal_ChickenPeck": {
+    "localized_name": "皮皮衝雞",
+    "description": "皮皮雞的專屬技能。 瞄準並撲向敵人，以尖銳的喙突擊對方。"
+  },
+  "EPalWazaID::Unique_DarkAlien_JumpScractch": {
+    "localized_name": "惡之爪",
+    "description": "傑諾貝達的專屬技能。 靈活的躍起，用左手撕裂敵人。"
+  },
+  "EPalWazaID::Unique_DarkCrow_TelePoke": {
+    "localized_name": "幻影突襲",
+    "description": "黑鴉隱士的專屬技能。 瞬間移動至敵人身旁， 再以鳥喙發動攻擊。"
+  },
+  "EPalWazaID::Unique_DarkMechaDragon_BeamSlash": {
+    "localized_name": "光連斬",
+    "description": "傑諾多蘭的專屬技能。 在右手生成高功率的光劍， 高速移動同時進行二連斬擊。"
+  },
+  "EPalWazaID::Unique_DarkMechaDragon_ConvergentBeam": {
+    "localized_name": "星幽炮",
+    "description": "傑諾多蘭的專屬技能。 凝聚充滿暗黑力量的能量， 一口氣釋放出直線光束。"
+  },
+  "EPalWazaID::Unique_DarkMechaDragon_FunnelLaser": {
+    "localized_name": "歐米伽雷射",
+    "description": "傑諾多蘭的專屬技能。 從亞空間呼喚毀滅的光束不斷地肆意掃射， 將視野範圍內的一切燃燒殆盡。"
+  },
+  "EPalWazaID::Unique_DarkMechaDragon_SetFunnel": {
+    "localized_name": "喚星",
+    "description": "傑諾多蘭的專屬技能。 召喚4個有自動攻擊能力的衛星型羽毛。 羽毛在進行攻擊時會自動追蹤敵人。"
+  },
+  "EPalWazaID::Unique_DarkMechaDragon_WarpComet": {
+    "localized_name": "蒼穹落星",
+    "description": "傑諾多蘭的專屬技能。 以光速飛上高空，射出無數的流星彈。 之後將自身化為彗星向地面突進， 在撞擊的地點引發大範圍的爆炸。"
+  },
+  "EPalWazaID::Unique_DarkScorpion_Pierce": {
+    "localized_name": "跳躍重刺",
+    "description": "冥鎧蠍及亞種的專屬技能。 高高躍起，用尾巴狠狠地將獵物刺穿。 尾部含有毒素。"
+  },
+  "EPalWazaID::Unique_Deer_PushupHorn": {
+    "localized_name": "尖角頂擊",
+    "description": "紫霞鹿及亞種的專屬技能。 衝向敵人，並以犄角猛頂攻擊對方。 如在騎乘時發動此技能，即可操控其前進方向。"
+  },
+  "EPalWazaID::Unique_DrillGame_ShellAttack": {
+    "localized_name": "甲殼迴旋",
+    "description": "碎岩龜的專屬技能。 以全身高速旋轉的方式移動， 並以鑽頭刨削敵人，連續對目標造成傷害。"
+  },
+  "EPalWazaID::Unique_Eagle_GlidingNail": {
+    "localized_name": "滑空爪",
+    "description": "天擒鳥的專屬技能。 向前伸出腳爪， 以滑翔的姿態猛力衝向目標。"
+  },
+  "EPalWazaID::Unique_ElecPanda_ElecScratch": {
+    "localized_name": "霹靂連爪",
+    "description": "暴電熊的專屬技能。 撲向敵人，並以帶有電氣的利爪撕裂對方。 撲向敵人兩次後再將爪子揮向地面， 對大範圍釋放電擊。"
+  },
+  "EPalWazaID::Unique_ElecPanda_GatlingAttack": {
+    "localized_name": "雷擊的重型戰車",
+    "description": "暴電熊的專屬技能。 不知從哪取出加特林機槍進行掃射。 最後一發將射出強力的充能彈。"
+  },
+  "EPalWazaID::Unique_FairyDragon_FairyTornado": {
+    "localized_name": "神秘颶風",
+    "description": "精靈龍及亞種的專屬技能。 射出兩股充滿不可思議力量的龍捲風， 以此追擊敵人。"
+  },
+  "EPalWazaID::Unique_FeatherOstrich_Tossin": {
+    "localized_name": "地之衝鋒",
+    "description": "戰冠雀的專屬技能。 一口氣提高速度，向前方突進。"
+  },
+  "EPalWazaID::Unique_FengyunDeeper_CloudTempest": {
+    "localized_name": "陰雲之嵐",
+    "description": "雲海鹿的專屬技能。 操控大氣，借助風壓向前猛衝。"
+  },
+  "EPalWazaID::Unique_FengyunDeeper_Electric_ThunderTempest": {
+    "localized_name": "雷雲之嵐",
+    "description": "雷隱鹿的專屬技能。 操控大氣，身纏雷雲向前猛衝。"
+  },
+  "EPalWazaID::Unique_FireKirin_Dark_DarkTossin": {
+    "localized_name": "暗焰衝撞",
+    "description": "邪麒麟的專屬技能。 帶著纏繞全身的黑暗火焰向前猛衝。 途經之處均會留下滾滾火焰。"
+  },
+  "EPalWazaID::Unique_FireKirin_Tackle": {
+    "localized_name": "烈焰衝撞",
+    "description": "火麒麟的專屬技能。 帶著纏繞全身的火焰向前猛衝。 途經之處均會留下滾滾火焰。"
+  },
+  "EPalWazaID::Unique_FlameBuffalo_FlameHorn": {
+    "localized_name": "熾熱角擊",
+    "description": "熾焰牛的專屬技能。 鎖定敵人後， 以兇猛氣勢頂著銳利牛角衝向對方。"
+  },
+  "EPalWazaID::Unique_FlowerDinosaur_Whip": {
+    "localized_name": "花龍擺尾",
+    "description": "花冠龍及亞種的專屬技能。 以巨大尾巴猛擊前方地面， 藉由衝擊波攻擊直線範圍的目標。"
+  },
+  "EPalWazaID::Unique_Garm_Bite": {
+    "localized_name": "狂野獠牙",
+    "description": "獵狼的專屬技能。 迅速撲向敵人，以撕咬的方式發動攻擊。"
+  },
+  "EPalWazaID::Unique_GhostBeast_Tossin": {
+    "localized_name": "心靈衝刺",
+    "description": "噬魂獸的專屬技能。 緩慢奔跑的同時，不斷召喚搖曳的火球飛向敵人。"
+  },
+  "EPalWazaID::Unique_GoldenHorse_StoneDash": {
+    "localized_name": "碎岩衝鋒",
+    "description": "金馳獸的專屬技能。 在氣勢洶洶突進的同時，令碎岩向左右飛濺。"
+  },
+  "EPalWazaID::Unique_Gorilla_GroundPunch": {
+    "localized_name": "猩猩連打",
+    "description": "鐵拳猿及亞種的專屬技能。 猛擊地面兩次後高高跳起， 再賞給對方強力的一拳。"
+  },
+  "EPalWazaID::Unique_GrassPanda_Electric_ElectricPunch": {
+    "localized_name": "爆裂拳擊",
+    "description": "雷胖達的專屬技能。 不停轉動右臂，向前方揮出帶電的一拳。"
+  },
+  "EPalWazaID::Unique_GrassPanda_MusclePunch": {
+    "localized_name": "筋肉重拳",
+    "description": "葉胖達的專屬技能。 不停轉動右臂，向前方猛力出拳攻擊。"
+  },
+  "EPalWazaID::Unique_GrassRabbitMan_GrassRoundKick": {
+    "localized_name": "迴旋猛踢",
+    "description": "踏春兔的專屬技能。 向前方躍起的同時使出高速迴旋踢擊， 將周圍一掃而淨。"
+  },
+  "EPalWazaID::Unique_Grassmammoth_Earthquake": {
+    "localized_name": "地震",
+    "description": "森猛獁及亞種的專屬技能。 以巨大的身軀撼動大地， 對四周大範圍的目標造成傷害。"
+  },
+  "EPalWazaID::Unique_GrimGirl_BrutalMachete": {
+    "localized_name": "怨念連擊",
+    "description": "幽戀娜的專屬技能。 瞬間移動離開原地後揮出斬擊。 接著瞬移至目標上方， 用利刃刺穿獵物並產生黑暗波動。"
+  },
+  "EPalWazaID::Unique_HawkBird_Storm": {
+    "localized_name": "龍捲風",
+    "description": "疾風隼的專屬技能。 在前方製造出龍捲風後， 以滑翔的姿態衝向敵人。"
+  },
+  "EPalWazaID::Unique_HerculesBeetle_BeetleTackle": {
+    "localized_name": "終極角擊",
+    "description": "鎧格力斯的專屬技能。 以四支粗壯的角串起敵人。"
+  },
+  "EPalWazaID::Unique_Horus_FlareBird": {
+    "localized_name": "鳳凰翔波",
+    "description": "荷魯斯的專屬技能。 捲起烈焰龍捲風後，讓地獄之火纏繞身體， 以滑翔的姿態衝向目標。"
+  },
+  "EPalWazaID::Unique_Horus_PerfectStorm": {
+    "localized_name": "炎凰烈波",
+    "description": "荷魯斯的專屬技能。 捲起數個灼熱的龍捲風， 同時身纏烈焰，飛空向敵人突進。 龍捲風最終將融合為巨大火龍捲。"
+  },
+  "EPalWazaID::Unique_Horus_Water_AquaStorm": {
+    "localized_name": "鳳凰浪濤",
+    "description": "伊西斯的專屬技能。 捲起漩渦龍捲風後，化身為波濤， 以滑翔的姿態衝向目標。"
+  },
+  "EPalWazaID::Unique_IceDeer_IceHorn": {
+    "localized_name": "霜角猛攻",
+    "description": "嚴冬鹿的專屬技能。 向前衝刺並以雄偉的冰角刺穿敵人。"
+  },
+  "EPalWazaID::Unique_IceHorse_IceBladeAttack": {
+    "localized_name": "冰晶之翼",
+    "description": "喚冬獸及亞種的專屬技能。 凝結冷空氣，讓翅膀覆上冰晶， 並在全力奔跑的同時以冰翼撕裂敵人。"
+  },
+  "EPalWazaID::Unique_JetDragon_JumpBeam": {
+    "localized_name": "光束彗星",
+    "description": "空渦龍的專屬技能。 展開發光的翅膀， 並發射大量光束朝敵人飛去。 光束命中目標便會引發爆炸。"
+  },
+  "EPalWazaID::Unique_KingAlpaca_BodyPress": {
+    "localized_name": "泰山壓頂",
+    "description": "君王美露帕及亞種的專屬技能。 向上高高跳起後， 用豐滿的龐大身軀輾壓敵人。"
+  },
+  "EPalWazaID::Unique_KingBahamut_AirCrash": {
+    "localized_name": "龍隕震擊",
+    "description": "歿殃的專屬技能。 高高躍上空中後，邊在空中高速移動，邊積蓄力量。 然後打出全力一擊。"
+  },
+  "EPalWazaID::Unique_KingBahamut_ArmSmash": {
+    "localized_name": "焚天爆炎",
+    "description": "焰煌及亞種的專屬技能。 伸展開手臂，使肌肉劇烈膨脹後， 猛地拍擊在一起引發巨大爆炸。"
+  },
+  "EPalWazaID::Unique_Kirin_LightningTackle": {
+    "localized_name": "疾風雷擊",
+    "description": "雷角馬的專屬技能。 在自身的周圍降下落雷， 同時猛力衝向敵人。"
+  },
+  "EPalWazaID::Unique_LilyQueen_LilyHealing": {
+    "localized_name": "豐饒加護",
+    "description": "百合女王的專屬技能。 使用治癒的力量恢復自身的HP。 並不會幫玩家恢復生命值。"
+  },
+  "EPalWazaID::Unique_LilyQueen_WindBarrier": {
+    "localized_name": "風之結界",
+    "description": "zh-Hant Text"
+  },
+  "EPalWazaID::Unique_Manticore_InfernoStrike": {
+    "localized_name": "火山獠牙",
+    "description": "獄焰王及亞種的專屬技能。 毫不留情的氣勢洶洶撲向敵人， 在撲擊的地點引發火屬性的爆炸。"
+  },
+  "EPalWazaID::Unique_MoonQueen_IceMoonBlade": {
+    "localized_name": "青月閃",
+    "description": "輝月伊的專屬技能。 揮出蘊含月光力量的高速三連斬擊。"
+  },
+  "EPalWazaID::Unique_MoonQueen_MoonBeam": {
+    "localized_name": "皎月射線",
+    "description": "輝月伊的專屬技能。 將能量積蓄於背後的月亮， 然後向前方發出新月形的射線。"
+  },
+  "EPalWazaID::Unique_MoonQueen_MoonBlade": {
+    "localized_name": "青月刃",
+    "description": "輝月伊的專屬技能。 揮出蘊含月光力量的高速二連斬擊。"
+  },
+  "EPalWazaID::Unique_MysteryMask_LifeSteal": {
+    "localized_name": "竊魂",
+    "description": "面懼的專屬技能。 突然出現在敵人附近並用雙手將其束縛， 並吸收受到束縛敵人的HP。"
+  },
+  "EPalWazaID::Unique_NaughtyCat_CatPress": {
+    "localized_name": "喵咪撲擊",
+    "description": "笑魘猫的專屬技能。 帶著無所畏懼的笑容跳起， 再用全身的力量輾壓敵人。"
+  },
+  "EPalWazaID::Unique_NightBlueHorse_DeathStep": {
+    "localized_name": "致命舞步",
+    "description": "夜冥駒的專屬技能。 用鬼魅般的步伐玩弄敵人， 同時用銳利的角揮出斬擊。"
+  },
+  "EPalWazaID::Unique_NightLady_FlameNightmare": {
+    "localized_name": "烈焰華爾茲",
+    "description": "貝菈露潔的專屬技能。 在搖曳起舞的同時製造一圈圈火焰， 使之向周圍擴散， 並發射妖異的火球來追擊敵人。"
+  },
+  "EPalWazaID::Unique_NightLady_WarpBeam": {
+    "localized_name": "噩夢綻放",
+    "description": "貝菈露潔的專屬技能。 趁敵人不注意時隱去身影，並在現身的瞬間射出無數光線， 且光線會猶如綻放的花朵般擴散。"
+  },
+  "EPalWazaID::Unique_NightLady_WarpBeam_Straight": {
+    "localized_name": "噩夢射線",
+    "description": "貝菈諾娃的專屬技能。 趁敵人不注意時隱去身影，並在再次現身的瞬間射出無數光線。"
+  },
+  "EPalWazaID::Unique_PinkCat_CatPunch": {
+    "localized_name": "喵喵拳",
+    "description": "搗蛋貓的專屬技能。 揮動雙手追逐敵人， 並連續出拳攻擊對方。"
+  },
+  "EPalWazaID::Unique_PurpleSpider_SpiderRaid": {
+    "localized_name": "蜘蛛猛襲",
+    "description": "桃蛛娘的專屬技能。 吐出絲線纏繞住獵物。 接著全速衝向獵物，使出三連爪擊造成致命傷害。"
+  },
+  "EPalWazaID::Unique_QueenBee_SpinLance": {
+    "localized_name": "迴旋杖擊",
+    "description": "女皇蜂的專屬技能。 以法杖聚集力量後，再旋轉法杖來釋放能量。"
+  },
+  "EPalWazaID::Unique_RedArmorBird_TriplePeck": {
+    "localized_name": "燧火連擊",
+    "description": "燧火鳥的專屬技能。 飛向前方的同時，朝正面、右、左啄擊， 並透過點火引發小規模的爆炸。"
+  },
+  "EPalWazaID::Unique_RobinHood_BowSnipe": {
+    "localized_name": "精準狙擊",
+    "description": "羽箭射手及亞種的專屬技能。 拉滿弓全神貫注瞄準敵人後， 對敵人進行射擊。"
+  },
+  "EPalWazaID::Unique_Ronin_Iai": {
+    "localized_name": "居合斬",
+    "description": "浪刃武士的專屬技能。 擺出迎戰姿勢後瞬間移動至敵人面前， 並使出超高速的拔刀攻擊。"
+  },
+  "EPalWazaID::Unique_SaintCentaur_OneSpearRushes": {
+    "localized_name": "閃槍衝鋒",
+    "description": "聖光騎士的專屬技能。 讓神聖的力量覆滿自身， 並以左手持長槍向前衝鋒。 右手的盾牌在衝鋒時能擋下所有攻擊。"
+  },
+  "EPalWazaID::Unique_SakuraSaurus_SideTackle": {
+    "localized_name": "鐵山靠",
+    "description": "連理龍及亞種的專屬技能。 側身站立， 然後向前猛撞敵人，並將其擊飛。"
+  },
+  "EPalWazaID::Unique_ScorpionMan_Uppercut": {
+    "localized_name": "升蟲拳",
+    "description": "蠱刺妖的專屬技能。 快速縮短和敵人的距離， 狠狠的用鉗子使出上勾拳。"
+  },
+  "EPalWazaID::Unique_SheepBall_Roll": {
+    "localized_name": "滾滾毛球",
+    "description": "SheepBall的專屬技能。 以翻滾的方式追逐敵人並發動攻擊。 之後會頭昏眼花得無法動彈。"
+  },
+  "EPalWazaID::Unique_SifuDog_Counter": {
+    "localized_name": "氣合返",
+    "description": "汪宗師的專屬技能。 擺出合氣道的架勢，在架勢中受到的攻擊將無效化， 同時一瞬間迫近敵人，使出全身力量掌擊。"
+  },
+  "EPalWazaID::Unique_SnowTigerBeastman_SnowImpact": {
+    "localized_name": "冰川碎擊",
+    "description": "霜牙王的專屬技能。 大聲咆哮後高高躍起， 落地時將雙爪埋入地面，產生巨大的龜裂冰川。 接著不斷往地面注入力量，最終引發冰屬性的巨大爆炸。"
+  },
+  "EPalWazaID::Unique_SnowTigerBeastman_TrampleSlash": {
+    "localized_name": "烈凍爪",
+    "description": "霜牙王的專屬技能。 踩踏地面，在前方產生斷裂的冰川。 之後一口氣接近敵人，用右手將其撕裂。"
+  },
+  "EPalWazaID::Unique_SoldierBee_NeedleLance": {
+    "localized_name": "針刺長矛",
+    "description": "騎士蜂的專屬技能。 朝向敵人高速突刺。 最後使出致命一擊貫穿敵人。"
+  },
+  "EPalWazaID::Unique_ThunderBird_ThunderStorm": {
+    "localized_name": "閃電俯衝",
+    "description": "迅雷鳥的專屬技能。 先在敵人所在位置降下落雷。 然後在空中突進的同時，於左右兩側召喚落雷。"
+  },
+  "EPalWazaID::Unique_ThunderDog_InazumaShorai": {
+    "localized_name": "召雷",
+    "description": "霹靂犬的專屬技能。 在前方呼喚連續不斷的雷擊， 在落下的雷電間高速突進。"
+  },
+  "EPalWazaID::Unique_ThunderDragonMan_NumerousSwordAttack": {
+    "localized_name": "雷神之怒",
+    "description": "波魯傑克斯的專屬技能。 召喚數把雷槍，向敵人投擲而出，並引發爆炸。"
+  },
+  "EPalWazaID::Unique_ThunderDragonMan_ThunderSwordAttack": {
+    "localized_name": "雷神之槍",
+    "description": "波魯傑克斯的專屬技能。 向上跳起後召喚雷槍， 將之丟向敵人。"
+  },
+  "EPalWazaID::Unique_Umihebi_Fire_FireWindingTackle": {
+    "localized_name": "騰龍奔炎",
+    "description": "騰炎龍的專屬技能。 氣勢勇猛的咆哮，使用身纏熾炎的巨大身軀蛇形向敵人突進。"
+  },
+  "EPalWazaID::Unique_Umihebi_WindingTackle": {
+    "localized_name": "斷海覆潮",
+    "description": "覆海龍的專屬技能。 氣勢勇猛的咆哮，使用身纏浪濤的巨大身軀蛇形向敵人突進。"
+  },
+  "EPalWazaID::Unique_VolcanicMonster_Ice_IceAttack": {
+    "localized_name": "霜凍爆裂",
+    "description": "寒霜獸的專屬技能。 舉起前腳猛擊地面， 使冰雪於敵人所在處噴出。 噴出時四周更會有雪球傾瀉而下。"
+  },
+  "EPalWazaID::Unique_VolcanicMonster_MagmaAttack": {
+    "localized_name": "火山爆發",
+    "description": "熔岩獸的專屬技能。 舉起前腳猛擊地面， 使岩漿於敵人所在處噴發。 噴發時四周更會有火山彈傾瀉而下。"
+  },
+  "EPalWazaID::Unique_WeaselDragon_FlyingTackle": {
+    "localized_name": "火箭衝撞",
+    "description": "疾旋鼬及亞種的專屬技能。 短時間蓄力後，向前躍起。 在著地時因為害怕一直都是緊閉著眼睛。"
+  },
+  "EPalWazaID::Unique_Werewolf_Ice_SnowScratch": {
+    "localized_name": "吹雪爪擊",
+    "description": "WereWolf_Ice的專屬技能。 向前一躍，迅速斬下兩擊。 且每次斬擊都充滿了冰屬性的力量。"
+  },
+  "EPalWazaID::Unique_Werewolf_Scratch": {
+    "localized_name": "飛躍爪擊",
+    "description": "WereWolf的專屬技能。 向前一躍，迅速斬下兩擊。 且每次斬擊都充滿了暗屬性的力量。"
+  },
+  "EPalWazaID::Unique_WhiteDeer_HolyPillar": {
+    "localized_name": "神聖新星",
+    "description": "淨世鹿的專屬技能。 在前方引發大範圍的聖光爆炸後， 邊緩慢行走邊在自身周圍降下神聖之光。"
+  },
+  "EPalWazaID::Unique_WhiteShieldDragon_ShieldTackle": {
+    "localized_name": "聖盾衝鋒",
+    "description": "艾基魯迦的專屬技能。 在前方展開能夠減輕各種傷害的能量盾， 同時向前突進壓碎路徑上的敵人。"
+  },
+  "EPalWazaID::Unique_WhiteTiger_Ground_IronScratch": {
+    "localized_name": "碎岩爪",
+    "description": "金棘獸的專屬技能。 以巨爪連續揮擊兩次，最後用渾身力氣使出巨大爪擊 每次揮動巨爪時，都會向前方扇形範圍射出碎岩。"
+  },
+  "EPalWazaID::Unique_WhiteTiger_IceScratch": {
+    "localized_name": "暴雪爪",
+    "description": "冰棘獸的專屬技能。 以巨爪連續揮擊兩次，最後用渾身力氣使出巨大爪擊 每次揮動巨爪時，都會向前方扇形範圍射出冰柱。"
+  },
+  "EPalWazaID::Unique_WingGolem_RoundCutter": {
+    "localized_name": "迴旋岩鋸",
+    "description": "泰鋒的專屬技能。 大幅回旋身體投擲出背後的岩盤。 岩盤將會以圓弧軌道狀飛行。"
+  },
+  "EPalWazaID::Unique_Yeti_Grass_GrassBall": {
+    "localized_name": "滾草球",
+    "description": "綠苔絨怪的專屬技能。 一邊向前突進一邊滾動草球， 在草球滾的足夠大時投擲出去並引爆。"
+  },
+  "EPalWazaID::Unique_Yeti_SnowBall": {
+    "localized_name": "滾雪球",
+    "description": "白絨雪怪的專屬技能。 一邊向前突進一邊滾動雪球， 在雪球滾的足夠大時投擲出去並引爆。"
+  },
+  "EPalWazaID::WallSplash": {
+    "localized_name": "間隙潮",
+    "description": "連續在敵人的腳下生成水柱組成的牆壁。"
+  },
+  "EPalWazaID::WaterBall": {
+    "localized_name": "爆裂水球",
+    "description": "在頭頂製造巨大水球， 並將它砸向敵人。"
+  },
+  "EPalWazaID::WaterGun": {
+    "localized_name": "水槍",
+    "description": "朝攻擊對象發射直線飛行的水彈。"
+  },
+  "EPalWazaID::WindCutter": {
+    "localized_name": "風刃",
+    "description": "瞄準敵人發射直線飛行的極高速風刃。"
+  },
+  "EPalWazaID::WindEdge": {
+    "localized_name": "烈風切",
+    "description": "扇形射出銳利的風刃。"
+  }
+}
