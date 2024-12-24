@@ -4,7 +4,7 @@
 	import { presetsData, itemsData } from '$lib/data';
 	import type { ItemContainer, ItemContainerSlot, PresetProfile } from '$lib/types';
 	import { getAppState, getModalState } from '$states';
-	import { EntryState } from '$types';
+	import { EntryState, ItemTypeA } from '$types';
 	import { deepCopy } from '$utils';
 	import { Edit, Play, Plus, Trash, X } from 'lucide-svelte';
 
@@ -68,8 +68,13 @@
 		for (const [_, container] of Object.entries(updatedContainers)) {
 			for (const slot of container.slots) {
 				if (slot.static_id !== 'None') {
-					const itemData = await itemsData.searchItems(slot.static_id);
-					if (itemData?.details.dynamic) {
+					const itemData = itemsData.items[slot.static_id];
+					if (
+						itemData &&
+						(itemData.details.type_a === ItemTypeA.Accessory || !itemData.details.dynamic)
+					) {
+						slot.dynamic_item = undefined;
+					} else if (itemData?.details.dynamic) {
 						switch (itemData.details.dynamic.type) {
 							case 'weapon':
 								slot.dynamic_item = {
@@ -87,8 +92,6 @@
 								};
 								break;
 						}
-					} else {
-						slot.dynamic_item = undefined;
 					}
 				}
 			}
