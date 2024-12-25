@@ -486,6 +486,10 @@ class SaveFile(BaseModel):
 
         def extract_player_info(entry):
             uid = PalObjects.get_guid(entry["key"]["PlayerUId"])
+            player_sav_bytes = player_sav_files.get(uid)
+            if not player_sav_bytes:
+                logger.warning("No player save file found for player %s", uid)
+                return
             save_parameter = PalObjects.get_nested(
                 entry,
                 "value",
@@ -506,10 +510,7 @@ class SaveFile(BaseModel):
                 if "Exp" in save_parameter
                 else 0
             )
-            player_sav_bytes = player_sav_files.get(uid)
-            if not player_sav_bytes:
-                logger.warning("No player save file found for player %s", uid)
-                return
+
             raw_gvas, _ = decompress_sav_to_gvas(player_sav_bytes)
             gvas_file = GvasFile.read(
                 raw_gvas, PALWORLD_TYPE_HINTS, CUSTOM_PROPERTIES, allow_nan=True
@@ -530,14 +531,12 @@ class SaveFile(BaseModel):
             player.pals = self._get_player_pals(uid)
             return player
 
-        players = {
-            x.uid: x
-            for x in [
-                extract_player_info(entry)
-                for entry in self._character_save_parameter_map
-                if self._is_player(entry)
-            ]
-        }
+        players = {}
+        for entry in self._character_save_parameter_map:
+            if self._is_player(entry):
+                player = extract_player_info(entry)
+                if player:
+                    players[player.uid] = player
         self._players = players
 
     def _update_pal(self, pal_id: UUID, updated_pal: Pal) -> None:
