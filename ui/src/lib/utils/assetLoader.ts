@@ -1,3 +1,5 @@
+import { ASSET_DATA_PATH, staticIcons } from '$lib/constants';
+
 type AssetType = 'json' | 'image' | 'svg';
 
 class AssetLoader {
@@ -45,6 +47,26 @@ class AssetLoader {
 
 	loadImage(path: string): string | undefined {
 		return this.load<any>(path.toLowerCase(), 'image');
+	}
+
+	loadMenuImage(character_id: string, is_pal: boolean = true): string | undefined {
+		if (is_pal) {
+			character_id = character_id
+				.toLocaleLowerCase()
+				.replace('predator_', '')
+				.replace('_oilrig', '')
+				.replace('raid_', '')
+				.replace('summon_', '')
+				.replace('_max', '')
+				.replace(/_\d+$/, '');
+		} else {
+			character_id = 'commonhuman';
+		}
+		const image = this.loadImage(`${ASSET_DATA_PATH}/img/pals/menu/${character_id}_menu.png`);
+		if (image) {
+			return image;
+		}
+		return staticIcons.sadIcon;
 	}
 
 	loadSvg(path: string): string | undefined {

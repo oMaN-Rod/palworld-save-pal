@@ -52,12 +52,17 @@
 		if (appState.selectedPal) {
 			const { character_id } = appState.selectedPal;
 			const palData = palsData.pals[character_id];
-			let palImage =
+			let palImagePath =
 				!palData || palData?.is_pal
 					? `${ASSET_DATA_PATH}/img/pals/full/${character_id.toLowerCase().replaceAll(' ', '_')}.png`
 					: `${ASSET_DATA_PATH}/img/pals/full/human.png`;
-			palImage = palImage.replace('GYM_', '').replace('RAID_', '');
-			return assetLoader.loadImage(palImage);
+			palImagePath = palImagePath.replace('GYM_', '').replace('RAID_', '');
+			let palImage = assetLoader.loadImage(palImagePath);
+			if (palImage) {
+				return palImage;
+			} else {
+				return staticIcons.sadIcon;
+			}
 		}
 	});
 

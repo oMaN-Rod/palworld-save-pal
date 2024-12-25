@@ -3,7 +3,7 @@
 	import { type SelectOption } from '$types';
 	import { Save, X } from 'lucide-svelte';
 	import { palsData, elementsData } from '$lib/data';
-	import { ASSET_DATA_PATH } from '$lib/constants';
+	import { ASSET_DATA_PATH, staticIcons } from '$lib/constants';
 	import { assetLoader } from '$utils';
 
 	let { title = 'Select a Pal', closeModal } = $props<{
@@ -33,6 +33,12 @@
 		if (palId.toLowerCase().includes('_oilrig')) {
 			palName = `${palName} (Oil Rig)`;
 		}
+		if (palId.toLowerCase().includes('summon_')) {
+			palName = `${palName} (Summon)`;
+		}
+		if (palId.toLowerCase().includes('_max')) {
+			palName = `${palName} (MAX)`;
+		}
 		return palName;
 	}
 
@@ -42,22 +48,13 @@
 
 	function getIconPath(option: SelectOption) {
 		const palData = palsData.pals[option.value];
-		let palImgName = undefined;
 		if (palData && palData.is_pal) {
-			palImgName = option.value
-				.toLocaleLowerCase()
-				.replace('predator_', '')
-				.replace('_oilrig', '')
-				.replace('raid_', '')
-				.replace(/_\d+$/, '');
+			return assetLoader.loadMenuImage(option.value);
 		} else if (palData && !palData.is_pal) {
-			palImgName = 'commonhuman';
+			return assetLoader.loadMenuImage(option.value, false);
+		} else {
+			return staticIcons.sadIcon;
 		}
-
-		if (!palImgName || palImgName === '-') return '';
-		const palImg = assetLoader.loadImage(`${ASSET_DATA_PATH}/img/pals/menu/${palImgName}_menu.png`);
-		if (!palImg) return '';
-		return palImg;
 	}
 </script>
 
@@ -68,7 +65,10 @@
 			{@const palData = palsData.pals[option.value]}
 			<div class="flex items-center space-x-2">
 				<img src={getIconPath(option)} alt={option.label} class="h-8 w-8" />
-				<span class="grow">{option.label}</span>
+				<div class="grow">
+					<span>{option.label}</span>
+					<span class="text-xs">{option.value}</span>
+				</div>
 				{#each palData.element_types as elementType}
 					{@const elementObj = elementsData.elements[elementType.toString()]}
 					{@const elementIcon = assetLoader.loadImage(

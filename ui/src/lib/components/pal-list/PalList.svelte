@@ -93,7 +93,7 @@
 			if (elementData) {
 				elementIcons[element] = assetLoader.loadImage(
 					`${ASSET_DATA_PATH}/img/elements/${elementData.icon}.png`
-				);
+				) as string;
 			}
 		}
 		return elementIcons;
@@ -214,9 +214,13 @@
 		const pal = appState.selectedPlayer.pals[palId];
 		if (!pal) return undefined;
 		const palData = palsData.pals[pal.character_id];
-		let palImage = palData.is_pal ? pal.character_id.toLowerCase().replaceAll(' ', '_') : 'human';
-		palImage = palImage.replace('GYM_', '').replace('RAID_', '');
-		return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/pals/menu/${palImage}_menu.png`);
+		if (palData && palData.is_pal) {
+			return assetLoader.loadMenuImage(pal.character_id);
+		} else if (palData && !palData.is_pal) {
+			return assetLoader.loadMenuImage(pal.character_id, false);
+		} else {
+			return staticIcons.sadIcon;
+		}
 	}
 
 	async function handleAddPal() {
@@ -636,8 +640,9 @@
 				]}
 				<ContextMenu items={menuItems} baseClass="w-full" position="bottom">
 					<div class="grid w-full grid-cols-[55px_auto_1fr_auto] gap-2">
-						<div>
-							<span class="font-bold">Lvl {p.pal.level}</span>
+						<div class="flex items-end space-x-1">
+							<span class="text-surface-300 text-xs">Lvl</span>
+							<span class="font-bold">{p.pal.level}</span>
 						</div>
 						<div class="relative justify-start">
 							{#if p.pal.is_boss}
