@@ -711,7 +711,9 @@
 								</div>
 							{/if}
 							{#if p.pal.is_lucky}
-								<img src={staticIcons.luckyIcon} alt="Lucky" class="pal-element-badge" />
+								<div class="absolute -left-2 -top-1 h-5 w-5">
+									<img src={staticIcons.luckyIcon} alt="Lucky" class="pal-element-badge" />
+								</div>
 							{/if}
 							{#await getPalMenuIcon(p.pal.instance_id) then icon}
 								<img src={icon} alt={p.pal.name} class="h-8 w-8" />
