@@ -74,11 +74,32 @@
 	});
 	let accessoryGear: ItemContainerSlot[] = $state([]);
 	let group = $state('inventory');
-	let foodSlotCount: number = 0;
 	let sideBarExpanded: string[] = $state(['stats']);
 	let sideBarWrapper: HTMLDivElement | null = $state(null);
 
 	let health = $state(500);
+
+	let foodSlotCount = $derived.by(() => {
+		let slotCount = 0;
+		Object.values(essentialContainer.slots).forEach((slot) => {
+			if (slot.static_id.includes('AutoMealPouch_Tier')) {
+				const foodCount = parseInt(slot.static_id.slice(-1));
+				slotCount = foodCount > slotCount ? foodCount : slotCount;
+			}
+		});
+		return slotCount;
+	});
+
+	let inventorySlotCount = $derived.by(() => {
+		let slotCount = 0;
+		Object.values(essentialContainer.slots).forEach((slot) => {
+			if (slot.static_id.includes('AdditionalInventory_')) {
+				const inventoryCount = parseInt(slot.static_id.slice(-1));
+				slotCount = inventoryCount > slotCount ? inventoryCount : slotCount;
+			}
+		});
+		return 42 + slotCount * 3;
+	});
 
 	let { levelProgressToNext, levelProgressValue, levelProgressMax } = $derived.by(() => {
 		if (appState.selectedPlayer) {
@@ -234,7 +255,7 @@
 			const container = appState.selectedPlayer.common_container;
 			container.slots.sort((a, b) => a.slot_index - b.slot_index);
 			let containerSlots = [];
-			for (let i = 0; i < 42; i++) {
+			for (let i = 0; i < inventorySlotCount; i++) {
 				const slot = container.slots.find((s) => s.slot_index === i);
 				if (!slot) {
 					const emptySlot = {
@@ -270,10 +291,6 @@
 					containerSlots.push(emptySlot);
 					appState.selectedPlayer.essential_container.slots.push(emptySlot);
 				} else {
-					if (slot.static_id.includes('AutoMealPouch_Tier')) {
-						const foodCount = parseInt(slot.static_id.slice(-1));
-						foodSlotCount = foodCount > foodSlotCount ? foodCount : foodSlotCount;
-					}
 					containerSlots.push(slot);
 				}
 			}
@@ -616,25 +633,30 @@
 						{/snippet}
 						{#snippet content()}
 							<Tabs.Panel value="inventory">
-								<div class="grid grid-cols-6 gap-2">
-									{#each Object.values(commonContainer.slots) as _, index}
-										<ItemBadge
-											bind:slot={commonContainer.slots[index]}
-											itemGroup="Common"
-											onCopyPaste={(event) => handleCopyPaste(event, commonContainer.slots[index])}
-											onUpdate={onItemUpdate}
-										/>
-									{/each}
+								<div class="max-h-[500px] overflow-y-auto">
+									<div class="grid grid-cols-6 gap-2">
+										{#each Object.values(commonContainer.slots) as _, index}
+											<ItemBadge
+												bind:slot={commonContainer.slots[index]}
+												itemGroup="Common"
+												onCopyPaste={(event) =>
+													handleCopyPaste(event, commonContainer.slots[index])}
+												onUpdate={onItemUpdate}
+											/>
+										{/each}
+									</div>
 								</div>
 							</Tabs.Panel>
 							<Tabs.Panel value="key_items">
-								<div class="max-h-[500px] overflow-auto">
+								<div class="max-h-[500px] overflow-y-auto">
 									<div class="grid grid-cols-6 gap-2">
 										{#each Object.values(essentialContainer.slots) as _, index}
 											<ItemBadge
 												bind:slot={essentialContainer.slots[index]}
 												itemGroup="KeyItem"
 												onUpdate={onItemUpdate}
+												onCopyPaste={(event) =>
+													handleCopyPaste(event, essentialContainer.slots[index], false)}
 											/>
 										{/each}
 									</div>
