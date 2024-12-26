@@ -385,15 +385,13 @@
 
 	async function sortCommonContainer() {
 		if (appState.selectedPlayer) {
-			const sortedSlots = await Promise.all(
-				commonContainer.slots.map(async (slot) => {
-					if (slot.static_id !== 'None') {
-						const itemData = await itemsData.searchItems(slot.static_id);
-						return { ...slot, sort_id: itemData?.details.sort_id ?? Infinity };
-					}
-					return { ...slot, sort_id: Infinity };
-				})
-			);
+			const sortedSlots = commonContainer.slots.map((slot) => {
+				if (slot.static_id !== 'None') {
+					const itemData = itemsData.items[slot.static_id];
+					return { ...slot, sort_id: itemData?.details.sort_id ?? Infinity };
+				}
+				return { ...slot, sort_id: Infinity };
+			});
 
 			sortedSlots.sort((a, b) => a.sort_id - b.sort_id);
 
