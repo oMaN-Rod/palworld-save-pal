@@ -2,6 +2,8 @@ import { assetLoader } from '$utils';
 
 export const ASSET_DATA_PATH = '/src/lib/assets';
 
+export const MAX_LEVEL = 60;
+
 export const staticIcons = {
 	foodIcon: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/icons/Food.png`),
 	hpIcon: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/icons/Heart.png`),

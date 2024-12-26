@@ -10,7 +10,7 @@
 	} from '$components';
 	import { CornerDotButton, Progress, SectionHeader, Tooltip } from '$components/ui';
 	import { type ElementType, EntryState, type Pal, PalGender, type PresetProfile } from '$types';
-	import { ASSET_DATA_PATH, staticIcons } from '$lib/constants';
+	import { ASSET_DATA_PATH, MAX_LEVEL, staticIcons } from '$lib/constants';
 	import { palsData, elementsData, expData, presetsData } from '$lib/data';
 	import { cn } from '$theme';
 	import { getAppState, getModalState } from '$states';
@@ -68,7 +68,7 @@
 
 	async function calcPalLevelProgress() {
 		if (appState.selectedPal) {
-			if (appState.selectedPal.level === 55) {
+			if (appState.selectedPal.level === 60) {
 				palLevelProgressToNext = 0;
 				palLevelProgressValue = 0;
 				palLevelProgressMax = 1;
@@ -84,7 +84,7 @@
 	async function handleLevelIncrement() {
 		if (!appState.selectedPal || !appState.selectedPlayer || !appState.selectedPlayer.pals) return;
 
-		const newLevel = Math.min(appState.selectedPal.level + 1, 55);
+		const newLevel = Math.min(appState.selectedPal.level + 1, MAX_LEVEL);
 		if (newLevel === appState.selectedPal.level) return;
 
 		const nextLevelData = await expData.getExpDataByLevel(newLevel + 1);
@@ -174,7 +174,7 @@
 
 	async function handleMaxOutPal() {
 		if (!appState.selectedPal || !appState.selectedPlayer) return;
-		appState.selectedPal.level = 55;
+		appState.selectedPal.level = MAX_LEVEL;
 		appState.selectedPal.is_boss = true;
 		appState.selectedPal.is_lucky = false;
 		appState.selectedPal.talent_hp = 100;

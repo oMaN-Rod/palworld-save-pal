@@ -8,7 +8,7 @@
 		type Pal,
 		MessageType
 	} from '$types';
-	import { ASSET_DATA_PATH } from '$lib/constants';
+	import { ASSET_DATA_PATH, MAX_LEVEL } from '$lib/constants';
 	import { itemsData, expData, palsData } from '$lib/data';
 	import { Tabs, Accordion } from '@skeletonlabs/skeleton-svelte';
 	import { Tooltip } from '$components/ui';
@@ -82,7 +82,7 @@
 
 	let { levelProgressToNext, levelProgressValue, levelProgressMax } = $derived.by(() => {
 		if (appState.selectedPlayer) {
-			if (appState.selectedPlayer.level === 55) {
+			if (appState.selectedPlayer.level === MAX_LEVEL) {
 				return { levelProgressToNext: 0, levelProgressValue: 0, levelProgressMax: 1 };
 			}
 			const nextExp = expData.expData[appState.selectedPlayer.level + 1];
@@ -411,7 +411,7 @@
 		if (!appState.selectedPlayer || !appState.selectedPlayer || !appState.selectedPlayer.pals)
 			return;
 
-		const newLevel = Math.min(appState.selectedPlayer.level + 1, 55);
+		const newLevel = Math.min(appState.selectedPlayer.level + 1, MAX_LEVEL);
 		if (newLevel === appState.selectedPlayer.level) return;
 
 		const nextLevelData = await expData.getExpDataByLevel(newLevel + 1);
