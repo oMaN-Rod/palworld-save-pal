@@ -61,7 +61,7 @@
 			if (palImage) {
 				return palImage;
 			} else {
-				return staticIcons.sadIcon;
+				return staticIcons.unknownIcon;
 			}
 		}
 	});
@@ -410,7 +410,9 @@
 										)}
 										onclick={handleEditLucky}
 									>
-										<div class="flex h-8 w-8 items-center justify-center">✨</div>
+										<div class="flex h-8 w-8 items-center justify-center">
+											<img src={staticIcons.luckyIcon} alt="Lucky" class="pal-element-badge" />
+										</div>
 										<span class="bg-surface-600 absolute left-0 top-0 h-0.5 w-0.5"></span>
 										<span class="bg-surface-600 absolute right-0 top-0 h-0.5 w-0.5"></span>
 										<span class="bg-surface-600 absolute bottom-0 left-0 h-0.5 w-0.5"></span>

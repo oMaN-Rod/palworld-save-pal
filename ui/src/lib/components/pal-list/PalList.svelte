@@ -66,6 +66,15 @@
 	const sortHumanClass = $derived(
 		cn('btn', selectedFilter === 'human' ? 'bg-secondary-500/25' : '')
 	);
+	const sortPredatorClass = $derived(
+		cn('btn', selectedFilter === 'predator' ? 'bg-secondary-500/25' : '')
+	);
+	const sortOilrigClass = $derived(
+		cn('btn', selectedFilter === 'oilrig' ? 'bg-secondary-500/25' : '')
+	);
+	const sortSummonClass = $derived(
+		cn('btn', selectedFilter === 'summon' ? 'bg-secondary-500/25' : '')
+	);
 
 	const sortButtonClass = (currentSortBy: SortBy) =>
 		cn('btn', sortBy === currentSortBy ? 'bg-secondary-500/25' : '');
@@ -164,7 +173,22 @@
 			const matchesAlpha = selectedFilter === 'alpha' ? pal.is_boss : true;
 			const matchesLucky = selectedFilter === 'lucky' ? pal.is_lucky : true;
 			const matchesHuman = selectedFilter === 'human' ? !palData.is_pal : true;
-			return matchesSearch && matchesElement && matchesAlpha && matchesLucky && matchesHuman;
+			const matchesPredator =
+				selectedFilter === 'predator' ? pal.character_id.toLowerCase().includes('predator_') : true;
+			const matchesOilrig =
+				selectedFilter === 'oilrig' ? pal.character_id.toLowerCase().includes('_oilrig') : true;
+			const matchesSummon =
+				selectedFilter === 'summon' ? pal.character_id.toLowerCase().includes('summon_') : true;
+			return (
+				matchesSearch &&
+				matchesElement &&
+				matchesAlpha &&
+				matchesLucky &&
+				matchesHuman &&
+				matchesPredator &&
+				matchesOilrig &&
+				matchesSummon
+			);
 		});
 
 		sortPals();
@@ -219,7 +243,7 @@
 		} else if (palData && !palData.is_pal) {
 			return assetLoader.loadMenuImage(pal.character_id, false);
 		} else {
-			return staticIcons.sadIcon;
+			return staticIcons.unknownIcon;
 		}
 	}
 
@@ -574,7 +598,7 @@
 									class={sortAlphaClass}
 									onclick={() => (selectedFilter = 'alpha')}
 								>
-									<img src={staticIcons.alphaIcon} alt="Aplha" class="pal-element-badge" />
+									<img src={staticIcons.alphaIcon} alt="Alpha" class="pal-element-badge" />
 								</button>
 								{#snippet popup()}
 									Alpha Pals
@@ -586,7 +610,7 @@
 									class={sortLuckyClass}
 									onclick={() => (selectedFilter = 'lucky')}
 								>
-									✨
+									<img src={staticIcons.luckyIcon} alt="Alpha" class="pal-element-badge" />
 								</button>
 								{#snippet popup()}
 									Lucky Pals
@@ -602,6 +626,42 @@
 								</button>
 								{#snippet popup()}
 									Humans
+								{/snippet}
+							</Tooltip>
+							<Tooltip>
+								<button
+									type="button"
+									class={sortPredatorClass}
+									onclick={() => (selectedFilter = 'predator')}
+								>
+									<img src={staticIcons.predatorIcon} alt="Predator" class="pal-element-badge" />
+								</button>
+								{#snippet popup()}
+									Predator Pals
+								{/snippet}
+							</Tooltip>
+							<Tooltip>
+								<button
+									type="button"
+									class={sortOilrigClass}
+									onclick={() => (selectedFilter = 'oilrig')}
+								>
+									<img src={staticIcons.oilrigIcon} alt="Oil Rig" class="pal-element-badge" />
+								</button>
+								{#snippet popup()}
+									Oil Rig Pals
+								{/snippet}
+							</Tooltip>
+							<Tooltip>
+								<button
+									type="button"
+									class={sortSummonClass}
+									onclick={() => (selectedFilter = 'summon')}
+								>
+									<img src={staticIcons.altarIcon} alt="Summoned" class="pal-element-badge" />
+								</button>
+								{#snippet popup()}
+									Summoned Pals
 								{/snippet}
 							</Tooltip>
 						</div>
@@ -621,7 +681,7 @@
 		>
 			{#snippet listHeader()}
 				<div>
-					<span class="font-bold">Level</span>
+					<span class="font-bold">Lvl</span>
 				</div>
 				<div class="bg-surface-900 z-50 w-[55px]"></div>
 				<div class="flex justify-start">
@@ -639,19 +699,19 @@
 					{ label: 'Delete Pal', onClick: () => handleDeletePal(p.pal), icon: Trash }
 				]}
 				<ContextMenu items={menuItems} baseClass="w-full" position="bottom">
-					<div class="grid w-full grid-cols-[55px_auto_1fr_auto] gap-2">
-						<div class="flex items-end space-x-1">
-							<span class="text-surface-300 text-xs">Lvl</span>
+					<div class="grid w-full grid-cols-[32px_auto_1fr_auto] gap-2">
+						<div class="flex items-end justify-center space-x-1">
+							<!-- <span class="text-surface-300 text-xs">Lvl</span> -->
 							<span class="font-bold">{p.pal.level}</span>
 						</div>
 						<div class="relative justify-start">
 							{#if p.pal.is_boss}
 								<div class="absolute -left-2 -top-1 h-5 w-5">
-									<img src={staticIcons.alphaIcon} alt="Aplha" class="pal-element-badge" />
+									<img src={staticIcons.alphaIcon} alt="Alpha" class="pal-element-badge" />
 								</div>
 							{/if}
 							{#if p.pal.is_lucky}
-								<div class="absolute -left-2 -top-1 h-5 w-5">✨</div>
+								<img src={staticIcons.luckyIcon} alt="Lucky" class="pal-element-badge" />
 							{/if}
 							{#await getPalMenuIcon(p.pal.instance_id) then icon}
 								<img src={icon} alt={p.pal.name} class="h-8 w-8" />
@@ -681,9 +741,30 @@
 				</ContextMenu>
 			{/snippet}
 			{#snippet listItemPopup(p)}
-				<div class="flex w-[450px] flex-col">
+				<div class="flex w-[450px] flex-col space-y-2">
 					<HealthBadge bind:pal={p.pal} player={appState.selectedPlayer} />
 					<span>{p.palData?.description}</span>
+					{#if p.pal.character_id.toLowerCase().includes('predator_')}
+						<div class="flex">
+							<div class="grow"></div>
+							<span class="text-xs">Predator</span>
+							<img src={staticIcons.predatorIcon} alt="Predator" class="h-8 w-8" />
+						</div>
+					{/if}
+					{#if p.pal.character_id.toLowerCase().includes('_oilrig')}
+						<div class="flex">
+							<div class="grow"></div>
+							<span class="text-xs">Oilrig</span>
+							<img src={staticIcons.oilrigIcon} alt="Predator" class="h-8 w-8" />
+						</div>
+					{/if}
+					{#if p.pal.character_id.toLowerCase().includes('summon_')}
+						<div class="flex">
+							<div class="grow"></div>
+							<span class="text-xs">Summon</span>
+							<img src={staticIcons.altarIcon} alt="Predator" class="h-8 w-8" />
+						</div>
+					{/if}
 				</div>
 			{/snippet}
 		</List>

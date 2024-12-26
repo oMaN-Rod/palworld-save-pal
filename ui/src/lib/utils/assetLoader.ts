@@ -66,7 +66,7 @@ class AssetLoader {
 		if (image) {
 			return image;
 		}
-		return staticIcons.sadIcon;
+		return staticIcons.unknownIcon;
 	}
 
 	loadSvg(path: string): string | undefined {

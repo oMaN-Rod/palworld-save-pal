@@ -14,5 +14,10 @@ export const staticIcons = {
 	attackIcon: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/stats/attack.png`),
 	defenseIcon: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/stats/defense.png`),
 	workSpeedIcon: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/stats/work_speed.png`),
-	staminaIcon: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/stats/stamina.png`)
+	staminaIcon: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/stats/stamina.png`),
+	predatorIcon: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/icons/predator.png`),
+	oilrigIcon: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/icons/oilrig.png`),
+	unknownIcon: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/icons/unknown.png`),
+	altarIcon: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/icons/altar.png`),
+	luckyIcon: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/icons/lucky.png`)
 };

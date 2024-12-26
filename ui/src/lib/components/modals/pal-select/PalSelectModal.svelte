@@ -39,6 +39,14 @@
 		if (palId.toLowerCase().includes('_max')) {
 			palName = `${palName} (MAX)`;
 		}
+		if (palId.toLowerCase().includes('raid_')) {
+			palName = `${palName} (Raid)`;
+		}
+		if (/_(\d+)$/.test(palId.toLowerCase())) {
+			const match = palId.toLowerCase().match(/_(\d+)$/);
+			const level = match ? match[1] : '0';
+			palName = `${palName} (Lvl ${level})`;
+		}
 		return palName;
 	}
 
@@ -67,7 +75,7 @@
 				<img src={getIconPath(option)} alt={option.label} class="h-8 w-8" />
 				<div class="grow">
 					<span>{option.label}</span>
-					<span class="text-xs">{option.value}</span>
+					<!-- <span class="text-xs">{option.value}</span> -->
 				</div>
 				{#each palData.element_types as elementType}
 					{@const elementObj = elementsData.elements[elementType.toString()]}
