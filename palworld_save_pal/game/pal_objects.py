@@ -235,7 +235,8 @@ class PalObjects:
                 else PalObjects.get_nested(d[keys[0]], *keys[1:], default=default)
             )
         except (KeyError, TypeError, IndexError):
-            logger.warning("Key not found: %s not in %s", keys, d)
+            if "remaining_bullets" not in keys:
+                logger.warning("Key not found: %s not in %s", keys, d)
             return default
 
     @staticmethod
