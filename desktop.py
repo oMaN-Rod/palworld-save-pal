@@ -117,13 +117,55 @@ class ServerThread(threading.Thread):
 def cleanup_processes():
     logger.debug("Starting process cleanup")
     current_process = psutil.Process()
-    children = current_process.children(recursive=True)
+    children = []
+
+    try:
+        children = current_process.children(recursive=True)
+    except psutil.Error as e:
+        logger.error("Error getting child processes: %s", str(e))
+        return
+
+    # First attempt to terminate processes gracefully
     for child in children:
-        child.terminate()
-    _, alive = psutil.wait_procs(children, timeout=5)
+        try:
+            if child.is_running():
+                logger.debug("Attempting to terminate process: %s", child.pid)
+                child.terminate()
+        except (psutil.NoSuchProcess, psutil.AccessDenied, ProcessLookupError) as e:
+            logger.debug(
+                "Process already terminated or inaccessible: %s (%s)", child.pid, str(e)
+            )
+            continue
+        except Exception as e:
+            logger.error(
+                "Unexpected error terminating process %s: %s", child.pid, str(e)
+            )
+            continue
+
+    # Wait for processes to terminate and collect remaining ones
+    _, alive = [], []
+    try:
+        _, alive = psutil.wait_procs(children, timeout=5)
+    except Exception as e:
+        logger.error("Error waiting for processes to terminate: %s", str(e))
+
+    # Force kill any remaining processes
     for p in alive:
-        logger.warning("Force killing process: %s", p.pid)
-        p.kill()
+        try:
+            if p.is_running():
+                logger.warning("Force killing process: %s", p.pid)
+                p.kill()
+        except (psutil.NoSuchProcess, psutil.AccessDenied, ProcessLookupError) as e:
+            logger.debug(
+                "Process already terminated or inaccessible during force kill: %s (%s)",
+                p.pid,
+                str(e),
+            )
+            continue
+        except Exception as e:
+            logger.error("Unexpected error killing process %s: %s", p.pid, str(e))
+            continue
+
     logger.debug("Process cleanup completed")
 
 
