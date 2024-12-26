@@ -45,8 +45,7 @@
 	);
 	let palIcon = $derived.by(() => {
 		if (!pal) return '';
-		const palImgName = pal.character_id.toLowerCase().replaceAll(' ', '_');
-		return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/pals/menu/${palImgName}_menu.png`);
+		return assetLoader.loadMenuImage(pal.character_id);
 	});
 
 	function handlePalSelect() {
