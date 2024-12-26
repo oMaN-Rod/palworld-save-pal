@@ -181,10 +181,10 @@
 		appState.selectedPal.talent_shot = 100;
 		appState.selectedPal.talent_defense = 100;
 		appState.selectedPal.rank = 4;
-		appState.selectedPal.rank_hp = 10;
-		appState.selectedPal.rank_defense = 10;
-		appState.selectedPal.rank_attack = 10;
-		appState.selectedPal.rank_craftspeed = 10;
+		appState.selectedPal.rank_hp = 20;
+		appState.selectedPal.rank_defense = 20;
+		appState.selectedPal.rank_attack = 20;
+		appState.selectedPal.rank_craftspeed = 20;
 		await getStats(appState.selectedPal, appState.selectedPlayer);
 		appState.selectedPal.hp = appState.selectedPal.max_hp;
 		appState.selectedPal.state = EntryState.MODIFIED;

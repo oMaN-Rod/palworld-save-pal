@@ -37,8 +37,8 @@
 		meterBg="bg-green-500"
 		thumbRingColor="ring-green-500"
 		min={0}
-		max={10}
-		markers={[2, 4, 6, 8]}
+		max={20}
+		markers={[5, 10, 15]}
 		step={1}
 		value={hp}
 		onValueChange={handleUpdateHp}
@@ -50,7 +50,7 @@
 		value={hp[0]}
 		onchange={handleUpdateHp}
 		min={0}
-		max={10}
+		max={20}
 	/>
 </div>
 <div class="flex flex-row items-center space-x-2">
@@ -60,8 +60,8 @@
 		meterBg="bg-primary-500"
 		thumbRingColor="ring-primary-500"
 		min={0}
-		max={10}
-		markers={[2, 4, 6, 8]}
+		max={20}
+		markers={[5, 10, 15]}
 		step={1}
 		value={defense}
 		onValueChange={handleUpdateDefense}
@@ -73,7 +73,7 @@
 		value={defense[0]}
 		onchange={handleUpdateDefense}
 		min={0}
-		max={10}
+		max={20}
 	/>
 </div>
 <div class="flex flex-row items-center space-x-2">
@@ -83,8 +83,8 @@
 		meterBg="bg-red-500"
 		thumbRingColor="ring-red-500"
 		min={0}
-		max={10}
-		markers={[2, 4, 6, 8]}
+		max={20}
+		markers={[5, 10, 15]}
 		step={1}
 		value={attack}
 		onValueChange={handleUpdateAttack}
@@ -96,7 +96,7 @@
 		value={attack[0]}
 		onchange={handleUpdateAttack}
 		min={0}
-		max={10}
+		max={20}
 	/>
 </div>
 <div class="flex flex-row items-center space-x-2">
@@ -106,8 +106,8 @@
 		meterBg="bg-secondary-500"
 		thumbRingColor="ring-secondary-500"
 		min={0}
-		max={10}
-		markers={[2, 4, 6, 8]}
+		max={20}
+		markers={[5, 10, 15]}
 		step={1}
 		value={craftspeed}
 		onValueChange={handleUpdateCraftSpeed}
@@ -119,6 +119,6 @@
 		value={craftspeed[0]}
 		onchange={handleUpdateCraftSpeed}
 		min={0}
-		max={10}
+		max={20}
 	/>
 </div>
