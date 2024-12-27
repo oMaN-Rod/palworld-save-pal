@@ -106,7 +106,6 @@
 		while (skills.length < 3) {
 			skills.push('Empty');
 		}
-		console.log(skills);
 		return skills;
 	}
 
@@ -162,10 +161,19 @@
 		}
 	}
 
+	function canBeBoss(character_id: string): boolean {
+		if (character_id.toLowerCase().includes('predator_')) return false;
+		if (character_id.toLowerCase().includes('summon_')) return false;
+		if (character_id.toLowerCase().includes('raid_')) return false;
+		return true;
+	}
+
 	async function handleMaxOutPal() {
 		if (!appState.selectedPal || !appState.selectedPlayer) return;
 		appState.selectedPal.level = MAX_LEVEL;
-		appState.selectedPal.is_boss = true;
+		const maxLevelData = expData.expData['61'];
+		appState.selectedPal.exp = maxLevelData.PalTotalEXP - maxLevelData.PalNextEXP;
+		appState.selectedPal.is_boss = canBeBoss(appState.selectedPal.character_id);
 		appState.selectedPal.is_lucky = false;
 		appState.selectedPal.talent_hp = 100;
 		appState.selectedPal.talent_shot = 100;
@@ -175,19 +183,12 @@
 		appState.selectedPal.rank_defense = 20;
 		appState.selectedPal.rank_attack = 20;
 		appState.selectedPal.rank_craftspeed = 20;
-		await getStats(appState.selectedPal, appState.selectedPlayer);
+		getStats(appState.selectedPal, appState.selectedPlayer);
 		appState.selectedPal.hp = appState.selectedPal.max_hp;
 		appState.selectedPal.state = EntryState.MODIFIED;
-		const palData = await palsData.getPalInfo(appState.selectedPal.character_id);
+		const palData = palsData.pals[appState.selectedPal.character_id];
 		if (palData) {
 			appState.selectedPal.stomach = palData.max_full_stomach;
-			const palType = palData.element_types[0];
-			appState.selectedPal.passive_skills = [
-				'Noukin',
-				'PAL_ALLAttack_up2',
-				'Legend',
-				getElementPassive(palType)
-			];
 		} else {
 			appState.selectedPal.stomach = 150;
 		}
@@ -253,33 +254,8 @@
 		}
 	}
 
-	function getElementPassive(element: string): string {
-		switch (element.toLowerCase()) {
-			case 'neutral':
-				return 'ElementBoost_Normal_2_PAL';
-			case 'dark':
-				return 'ElementBoost_Dark_2_PAL';
-			case 'dragon':
-				return 'ElementBoost_Dragon_2_PAL';
-			case 'ice':
-				return 'ElementBoost_Ice_2_PAL';
-			case 'fire':
-				return 'ElementBoost_Fire_2_PAL';
-			case 'grass':
-				return 'ElementBoost_Leaf_2_PAL';
-			case 'ground':
-				return 'ElementBoost_Earth_2_PAL';
-			case 'electric':
-				return 'ElementBoost_Thunder_2_PAL';
-			case 'water':
-				return 'ElementBoost_Aqua_2_PAL';
-			default:
-				return 'Rare';
-		}
-	}
-
 	function handleEditLucky() {
-		if (appState.selectedPal) {
+		if (appState.selectedPal && canBeBoss(appState.selectedPal.character_id)) {
 			appState.selectedPal.is_lucky = !appState.selectedPal.is_lucky;
 			appState.selectedPal.is_boss = appState.selectedPal.is_lucky
 				? false
@@ -289,7 +265,7 @@
 	}
 
 	function handleEditAlpha() {
-		if (appState.selectedPal) {
+		if (appState.selectedPal && canBeBoss(appState.selectedPal.character_id)) {
 			appState.selectedPal.is_boss = !appState.selectedPal.is_boss;
 			appState.selectedPal.is_lucky = appState.selectedPal.is_boss
 				? false
