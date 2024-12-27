@@ -10,7 +10,7 @@
 	import { Save, TimerReset, X, Delete } from 'lucide-svelte';
 	import { activeSkillsData, passiveSkillsData, elementsData } from '$lib/data';
 	import { ASSET_DATA_PATH } from '$lib/constants';
-	import { assetLoader } from '$utils';
+	import { assetLoader, calculateFilters } from '$utils';
 
 	let {
 		title = '',
@@ -45,9 +45,7 @@
 				}));
 		} else {
 			return Object.values(passiveSkillsData.passiveSkills)
-				.sort((a, b) =>
-					passiveSkillTier(a.details.rank).localeCompare(passiveSkillTier(b.details.rank))
-				)
+				.sort((a, b) => b.details.rank - a.details.rank)
 				.map((s) => ({
 					value: s.id,
 					label: s.localized_name
@@ -77,8 +75,25 @@
 		if (!skill || skill.localized_name === 'None') return undefined;
 		const passiveSkill = skill as PassiveSkill;
 		return assetLoader.loadImage(
-			`${ASSET_DATA_PATH}/img/passives/Passive_${passiveSkillTier(passiveSkill.details.rank)}_icon.png`
+			`${ASSET_DATA_PATH}/img/passives/rank_${passiveSkill.details.rank}.png`
 		);
+	}
+
+	function getPassiveSkillIconFilter(skillId: string): string {
+		const skill = Object.values(passiveSkillsData.passiveSkills).find((s) => s.id === skillId);
+		if (!skill || skill.localized_name === 'None') return '';
+		const passiveSkill = skill as PassiveSkill;
+		switch (passiveSkill.details.rank) {
+			case 1:
+				return '';
+			case 2:
+			case 3:
+				return calculateFilters('#fcdf19');
+			case 4:
+				return calculateFilters('#68ffd8');
+			default:
+				return calculateFilters('#FF0000');
+		}
 	}
 </script>
 
@@ -123,7 +138,12 @@
 				<span class="grow truncate">{option.label}</span>
 				<span class="text-xs">{passiveSkill?.description}</span>
 			</div>
-			<img src={icon} alt={option.label} class="h-6 w-6" />
+			<img
+				src={icon}
+				alt={option.label}
+				class="h-6 w-6"
+				style="filter: {getPassiveSkillIconFilter(option.value)};"
+			/>
 		</div>
 	{/await}
 {/snippet}

@@ -3,8 +3,9 @@
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { elementsData, presetsData, activeSkillsData, passiveSkillsData } from '$lib/data';
 	import { getModalState } from '$states';
-	import { passiveSkillTier, type PresetProfile, type SelectOption } from '$types';
-	import { assetLoader } from '$utils';
+	import { cn } from '$theme';
+	import { type PassiveSkill, type PresetProfile, type SelectOption } from '$types';
+	import { assetLoader, calculateFilters } from '$utils';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import { Play, Trash } from 'lucide-svelte';
 
@@ -13,6 +14,7 @@
 	}>();
 
 	const modal = getModalState();
+	const backgroundImage = assetLoader.loadImage(`${ASSET_DATA_PATH}/img/passives/bg.png`);
 
 	type ExtendedPresetProfile = PresetProfile & { id: string };
 
@@ -49,7 +51,7 @@
 			if (elementObj) {
 				icons[elementType] = assetLoader.loadImage(
 					`${ASSET_DATA_PATH}/img/elements/${elementObj.badge_icon}.png`
-				);
+				) as string;
 			}
 		}
 		return icons;
@@ -59,8 +61,8 @@
 		for (const skill of Object.values(passiveSkillsData.passiveSkills)) {
 			if (icons[skill.details.rank]) continue;
 			icons[skill.details.rank] = assetLoader.loadImage(
-				`${ASSET_DATA_PATH}/img/passives/Passive_${passiveSkillTier(skill.details.rank)}_icon.png`
-			);
+				`${ASSET_DATA_PATH}/img/passives/rank_${skill.details.rank}.png`
+			) as string;
 		}
 		return icons;
 	});
@@ -85,6 +87,48 @@
 		});
 		if (!confirmed) return;
 		await presetsData.removePresetProfiles([presetId]);
+	}
+
+	async function getPassiveSkillIcon(skillId: string): Promise<string | undefined> {
+		const skill = Object.values(passiveSkillsData.passiveSkills).find((s) => s.id === skillId);
+		if (!skill || skill.localized_name === 'None') return undefined;
+		const passiveSkill = skill as PassiveSkill;
+		return assetLoader.loadImage(
+			`${ASSET_DATA_PATH}/img/passives/rank_${passiveSkill.details.rank}.png`
+		);
+	}
+
+	function getPassiveSkillIconFilter(skillId: string): string {
+		const skill = passiveSkillsData.passiveSkills[skillId];
+		if (!skill || skill.localized_name === 'None') return '';
+		const passiveSkill = skill as PassiveSkill;
+		switch (passiveSkill.details.rank) {
+			case 1:
+				return '';
+			case 2:
+			case 3:
+				return calculateFilters('#fcdf19');
+			case 4:
+				return calculateFilters('#68ffd8');
+			default:
+				return calculateFilters('#FF0000');
+		}
+	}
+
+	function getPassiveSkillBorderClass(skillId: string): string {
+		const skill = passiveSkillsData.passiveSkills[skillId];
+		if (!skill) return '';
+		switch (skill.details.rank) {
+			case 1:
+				return 'border-l-surface-600';
+			case 2:
+			case 3:
+				return 'border-l-[#fcdf19]';
+			case 4:
+				return 'border-l-[#68ffd8]';
+			default:
+				return 'border-l-[#FF0000]';
+		}
 	}
 </script>
 
@@ -169,15 +213,25 @@
 										{#if skillObj}
 											{@const icon = passiveSkillIcons[skillObj.details.rank]}
 											<div
-												class="text-surface-400 border-surface-600 r flex items-center space-x-1 rounded-sm border p-0.5"
+												class={cn(
+													'relative flex items-center space-x-1 border-l-2 p-0.5',
+													getPassiveSkillBorderClass(skill)
+												)}
 											>
+												<div
+													class="absolute inset-0 bg-cover bg-center opacity-25"
+													style="background-image: url('{backgroundImage}'); filter: {getPassiveSkillIconFilter(
+														skill
+													)};"
+												></div>
 												<span class="grow text-xs">
 													{skillObj.localized_name}
 												</span>
 												<img
 													src={icon}
-													alt={passiveSkillTier(skillObj.details.rank)}
+													alt={skillObj.details.rank}
 													class="h-4 w-4"
+													style="filter: {getPassiveSkillIconFilter(skill)};"
 												/>
 											</div>
 										{/if}

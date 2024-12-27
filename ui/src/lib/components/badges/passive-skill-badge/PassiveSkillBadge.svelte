@@ -5,7 +5,7 @@
 	import { SkillSelectModal } from '$components';
 	import { getModalState } from '$states';
 	import { Tooltip } from '$components/ui';
-	import { assetLoader } from '$utils';
+	import { assetLoader, calculateFilters } from '$utils';
 	import { cn } from '$theme';
 
 	let { skill, onSkillUpdate } = $props<{
@@ -33,20 +33,20 @@
 		}
 	});
 
-	let backgroundImage = $derived.by(() => {
-		return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/passives/bg.png`);
-	});
+	const backgroundImage = assetLoader.loadImage(`${ASSET_DATA_PATH}/img/passives/bg.png`);
 
 	let borderClass = $derived.by(() => {
 		if (skillData) {
 			switch (skillData.details.rank) {
+				case 1:
+					return 'border-l-surface-600';
 				case 2:
 				case 3:
 					return 'border-l-[#fcdf19]';
 				case 4:
 					return 'border-l-[#68ffd8]';
 				default:
-					return 'border-l-surface-600';
+					return 'border-l-[#FF0000]';
 			}
 		}
 	});
@@ -60,6 +60,7 @@
 				case 4:
 					return 'opacity-25';
 			}
+			return 'opacity-15';
 		}
 		return 'opacity-0';
 	});
@@ -67,58 +68,20 @@
 	let filterStyle = $derived.by(() => {
 		if (skillData) {
 			switch (skillData.details.rank) {
+				case 1:
+					return '';
 				case 2:
 				case 3:
 					return calculateFilters('#fcdf19');
 				case 4:
 					return calculateFilters('#68ffd8');
 				default:
-					return '';
+					return calculateFilters('#FF0000');
 			}
 		}
 	});
 
-	function hexToRGB(hex: string) {
-		// Remove # if present
-		hex = hex.replace('#', '');
-
-		const r = parseInt(hex.substring(0, 2), 16) / 255;
-		const g = parseInt(hex.substring(2, 4), 16) / 255;
-		const b = parseInt(hex.substring(4, 6), 16) / 255;
-
-		return { r, g, b };
-	}
-
 	// Calculate CSS filter values
-	function calculateFilters(hex: string) {
-		const rgb = hexToRGB(hex);
-
-		// Matrix for color transformation
-		const matrix = [
-			rgb.r,
-			0,
-			0,
-			0,
-			0, // Red
-			0,
-			rgb.g,
-			0,
-			0,
-			0, // Green
-			0,
-			0,
-			rgb.b,
-			0,
-			0, // Blue
-			0,
-			0,
-			0,
-			1,
-			0 // Alpha
-		];
-
-		return `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='colorize'><feColorMatrix type='matrix' values='${matrix.join(' ')}'/></filter></svg>#colorize")`;
-	}
 
 	async function handleSelectSkill() {
 		// @ts-ignore
