@@ -46,7 +46,27 @@ class AssetLoader {
 	}
 
 	loadImage(path: string): string | undefined {
-		return this.load<any>(path.toLowerCase(), 'image');
+		return this.load<any>(path.toLowerCase().replaceAll(' ', '_'), 'image');
+	}
+
+	loadPalImage(character_id: string, is_pal: boolean = true): string | undefined {
+		if (is_pal) {
+			character_id = character_id
+				.toLocaleLowerCase()
+				.replace('predator_', '')
+				.replace('_oilrig', '')
+				.replace('raid_', '')
+				.replace('summon_', '')
+				.replace('_max', '')
+				.replace(/_\d+$/, '');
+		} else {
+			character_id = 'commonhuman';
+		}
+		const image = this.loadImage(`${ASSET_DATA_PATH}/img/pals/full/${character_id}.png`);
+		if (image) {
+			return image;
+		}
+		return staticIcons.unknownIcon;
 	}
 
 	loadMenuImage(character_id: string, is_pal: boolean = true): string | undefined {
