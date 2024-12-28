@@ -62,11 +62,13 @@ class AssetLoader {
 		} else {
 			character_id = 'commonhuman';
 		}
-		const image = this.loadImage(`${ASSET_DATA_PATH}/img/pals/full/${character_id}.png`);
+		let image = this.loadImage(`${ASSET_DATA_PATH}/img/pals/full/${character_id}.png`);
 		if (image) {
 			return image;
+		} else {
+			image = this.loadMenuImage(character_id, is_pal);
 		}
-		return staticIcons.unknownIcon;
+		return image || staticIcons.unknownIcon;
 	}
 
 	loadMenuImage(character_id: string, is_pal: boolean = true): string | undefined {
