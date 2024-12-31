@@ -108,8 +108,11 @@ class Pal(BaseModel):
         self.update()
 
     def _parse_pal_data(self):
-        self.character_id = PalObjects.get_value(self._save_parameter["CharacterID"])
-        if not self.character_id or self.character_id == "":
+        if "CharacterID" in self._save_parameter:
+            self.character_id = PalObjects.get_value(
+                self._save_parameter["CharacterID"]
+            )
+        elif "CharacterID" not in self._save_parameter or self.character_id == "":
             logger.error("Failed to parse character ID: %s", self._save_parameter)
             return
         self._get_owner_uid()
