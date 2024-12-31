@@ -32,7 +32,8 @@ export enum MessageType {
 	SAVE_MODDED_SAVE = 'save_modded_save',
 	GET_SETTINGS = 'get_settings',
 	UPDATE_SETTINGS = 'update_settings',
-	GET_UI_COMMON = 'get_ui_common'
+	GET_UI_COMMON = 'get_ui_common',
+	NO_FILE_SELECTED = 'no_file_selected'
 }
 
 interface UpdateSaveFileData {

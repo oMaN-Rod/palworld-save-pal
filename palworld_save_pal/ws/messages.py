@@ -47,6 +47,7 @@ class MessageType(str, Enum):
     GET_SETTINGS = "get_settings"
     UPDATE_SETTINGS = "update_settings"
     GET_UI_COMMON = "get_ui_common"
+    NO_FILE_SELECTED = "no_file_selected"
 
 
 class AddPalData(BaseModel):

@@ -59,6 +59,18 @@ async def static_files_middleware(request: Request, call_next):
     return await call_next(request)
 
 
+async def handle_file_selection(
+    window: webview.Window, websocket: WebSocket
+) -> tuple[str | None, str | None]:
+    result = FileManager.open_file_dialog(window, app_state.save_dir)
+    if not result:
+        response = build_response(MessageType.NO_FILE_SELECTED, "No file selected")
+        await websocket.send_json(response)
+        return None, None
+    save_dir = str(Path(result).parent)
+    return save_dir, result
+
+
 @app.websocket("/ws/{client_id}")
 async def websocket_endpoint(websocket: WebSocket, client_id: int):
     logger.info("Client %s connected", client_id)
@@ -68,17 +80,13 @@ async def websocket_endpoint(websocket: WebSocket, client_id: int):
             data = await websocket.receive_text()
             json_data = json.loads(data)
             if json_data["type"] == "select_save":
-                result = FileManager.open_file_dialog(
-                    app_state.webview_window, app_state.save_dir
+                save_dir, file_path = await handle_file_selection(
+                    app_state.webview_window, websocket
                 )
-                if not result:
-                    response = build_response(
-                        MessageType.PROGRESS_MESSAGE, "No file selected"
-                    )
-                    await websocket.send_json(response)
+                if not save_dir or not file_path:
                     continue
-                app_state.save_dir = str(Path(result).parent)
-                json_data["data"]["path"] = result
+                app_state.save_dir = save_dir
+                json_data["data"]["path"] = file_path
                 data = json.dumps(json_data)
             await manager.process_message(data, websocket)
     except WebSocketDisconnect:

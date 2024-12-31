@@ -4,6 +4,15 @@ import type { WSMessageHandler } from '../types';
 
 const appState = getAppState();
 
+export const noFileSelectedHandler: WSMessageHandler = {
+	type: MessageType.NO_FILE_SELECTED,
+	async handle(_: string, { goto }) {
+		const toast = getToastState();
+		toast.add('No file was selected', 'Warning', 'warning');
+		await goto('/file');
+	}
+};
+
 export const loadedSaveFilesHandler: WSMessageHandler = {
 	type: MessageType.LOADED_SAVE_FILES,
 	async handle(data) {
@@ -71,5 +80,6 @@ export const saveFileHandlers = [
 	saveModdedSaveHandler,
 	loadZipFileHandler,
 	downloadSaveFileHandler,
-	updateSaveFileHandler
+	updateSaveFileHandler,
+	noFileSelectedHandler
 ];
