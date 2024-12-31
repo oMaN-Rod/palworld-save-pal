@@ -30,6 +30,9 @@
 		if (slot.static_id == 'CheeseBurger_2') {
 			key = 'Cheeseburger_2';
 		}
+		if (slot.static_id == 'bone') {
+			key = 'Bone';
+		}
 		return itemsData.items[key || slot.static_id];
 	});
 

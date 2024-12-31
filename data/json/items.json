@@ -22283,7 +22283,8 @@
     "weight": 0.0,
     "price": 0,
     "sort_id": 10286,
-    "disabled": false
+    "disabled": false,
+    "icon": "Pal_Saddle"
   },
   "SkillUnlock_Kirin": {
     "group": "KeyItem",
@@ -22321,7 +22322,8 @@
     "weight": 0.0,
     "price": 0,
     "sort_id": 10166,
-    "disabled": false
+    "disabled": false,
+    "icon": "Pal_Harness"
   },
   "SkillUnlock_LazyDragon": {
     "group": "KeyItem",
@@ -22398,7 +22400,8 @@
     "weight": 0.0,
     "price": 0,
     "sort_id": 10278,
-    "disabled": false
+    "disabled": false,
+    "icon": "Pal_Saddle"
   },
   "SkillUnlock_MopKing": {
     "group": "KeyItem",
@@ -22436,7 +22439,8 @@
     "weight": 0.0,
     "price": 0,
     "sort_id": 10256,
-    "disabled": false
+    "disabled": false,
+    "icon": "Pal_Saddle"
   },
   "SkillUnlock_NaughtyCat": {
     "group": "KeyItem",
@@ -22474,7 +22478,8 @@
     "weight": 0.0,
     "price": 0,
     "sort_id": 10294,
-    "disabled": false
+    "disabled": false,
+    "icon": "Pal_Saddle"
   },
   "SkillUnlock_Penguin": {
     "group": "KeyItem",
@@ -22499,7 +22504,8 @@
     "weight": 0.0,
     "price": 0,
     "sort_id": 10186,
-    "disabled": false
+    "disabled": false,
+    "icon": "Pal_Saddle"
   },
   "SkillUnlock_RaijinDaughter": {
     "group": "KeyItem",
@@ -22524,7 +22530,8 @@
     "weight": 0.0,
     "price": 0,
     "sort_id": 10276,
-    "disabled": false
+    "disabled": false,
+    "icon": "Pal_Necklace"
   },
   "SkillUnlock_RedArmorBird": {
     "group": "KeyItem",
@@ -22640,7 +22647,8 @@
     "weight": 0.0,
     "price": 0,
     "sort_id": 10300,
-    "disabled": false
+    "disabled": false,
+    "icon": "Pal_Saddle"
   },
   "SkillUnlock_Suzaku": {
     "group": "KeyItem",
@@ -22795,7 +22803,8 @@
     "weight": 0.0,
     "price": 0,
     "sort_id": 10298,
-    "disabled": false
+    "disabled": false,
+    "icon": "Pal_Saddle"
   },
   "SkillUnlock_WhiteShieldDragon": {
     "group": "KeyItem",
@@ -22807,7 +22816,8 @@
     "weight": 0.0,
     "price": 0,
     "sort_id": 10296,
-    "disabled": false
+    "disabled": false,
+    "icon": "Pal_Saddle"
   },
   "SkillUnlock_WindChimes": {
     "group": "KeyItem",
