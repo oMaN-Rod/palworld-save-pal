@@ -8,7 +8,11 @@ from palworld_save_pal.utils.logging_config import create_logger
 
 logger = create_logger(__name__)
 
-steam_root = os.path.join(os.getenv("LOCALAPPDATA"), "Pal", "Saved", "SaveGames")
+steam_root = (
+    os.path.join(os.getenv("LOCALAPPDATA"), "Pal", "Saved", "SaveGames")
+    if os.name == "nt"
+    else None
+)
 
 
 class FileValidationResult(BaseModel):
