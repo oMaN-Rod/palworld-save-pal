@@ -1,7 +1,17 @@
-FROM python:3.12 as builder
+FROM python:3.12 AS builder
 
 # Clone the temp palworld-save-tools repo until it gets updated
 RUN git clone https://github.com/oMaN-Rod/palworld-save-tools.git -b v0.4.11
+
+FROM node:23 AS ui_builder
+
+COPY . /app
+WORKDIR /app/ui
+RUN rm -rf .svelte-kit 
+RUN echo "PUBLIC_WS_URL=127.0.0.1:5174/ws" >.env
+RUN echo "PUBLIC_DESKTOP_MODE=false" >>.env
+RUN npm install
+RUN npm run build
 
 FROM python:3.12
 
@@ -19,7 +29,7 @@ RUN pip install -e palworld-save-tools
 # Copy necessary files and directories
 COPY psp.py .
 COPY palworld_save_pal ./palworld_save_pal
-COPY ui_build ./ui
+COPY --from=ui_builder /app/ui_build ./ui
 COPY data ./data
 
 CMD ["python", "psp.py"]
