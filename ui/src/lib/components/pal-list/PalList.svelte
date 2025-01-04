@@ -22,7 +22,7 @@
 		Users,
 		User
 	} from 'lucide-svelte';
-	import { assetLoader, debounce, deepCopy } from '$utils';
+	import { assetLoader, calculateFilters, debounce, deepCopy } from '$utils';
 	import { ASSET_DATA_PATH, staticIcons } from '$lib/constants';
 	import { getAppState, getSocketState, getModalState, getNavigationState } from '$states';
 	import { HealthBadge } from '$components';
@@ -89,7 +89,7 @@
 		return playerPals
 			.filter(([_, pal]) => pal.storage_id === palBoxId)
 			.map(([id, pal]) => {
-				const palData = palsData.pals[pal.character_id];
+				const palData = palsData.pals[pal.character_key];
 				return { id, pal, palData };
 			});
 	});
@@ -237,11 +237,11 @@
 		if (!appState.selectedPlayer || !appState.selectedPlayer.pals) return undefined;
 		const pal = appState.selectedPlayer.pals[palId];
 		if (!pal) return undefined;
-		const palData = palsData.pals[pal.character_id];
+		const palData = palsData.pals[pal.character_key];
 		if (palData && palData.is_pal) {
-			return assetLoader.loadMenuImage(pal.character_id);
+			return assetLoader.loadMenuImage(pal.character_key);
 		} else if (palData && !palData.is_pal) {
-			return assetLoader.loadMenuImage(pal.character_id, false);
+			return assetLoader.loadMenuImage(pal.character_key, false);
 		} else {
 			return staticIcons.unknownIcon;
 		}
@@ -255,7 +255,7 @@
 		});
 		if (!result) return;
 		const [selectedPal, nickname] = result;
-		const palData = await palsData.getPalInfo(selectedPal);
+		const palData = palsData.pals[selectedPal];
 		const message = {
 			type: MessageType.ADD_PAL,
 			data: {
@@ -291,7 +291,7 @@
 	}
 
 	async function sortByPaldeckIndex() {
-		const palInfos = filteredPals.map((p) => palsData.pals[p.pal.character_id]);
+		const palInfos = filteredPals.map((p) => palsData.pals[p.pal.character_key]);
 		const palsWithInfo = filteredPals.map((pal, index) => [pal, palInfos[index]]);
 
 		palsWithInfo.sort((a, b) => {
@@ -343,7 +343,7 @@
 				if (selectedPalIds.includes(pal.instance_id)) {
 					pal.hp = pal.max_hp;
 					pal.sanity = 100;
-					const palData = await palsData.getPalInfo(pal.character_id);
+					const palData = palsData.pals[pal.character_key] || undefined;
 					if (palData) {
 						pal.stomach = palData.max_full_stomach;
 					}
@@ -362,7 +362,7 @@
 		ws.send(JSON.stringify(message));
 		pal.hp = pal.max_hp;
 		pal.sanity = 100;
-		const palData = palsData.pals[pal.character_id];
+		const palData = palsData.pals[pal.character_key];
 		if (palData) {
 			pal.stomach = palData.max_full_stomach;
 		}
@@ -634,7 +634,12 @@
 									class={sortPredatorClass}
 									onclick={() => (selectedFilter = 'predator')}
 								>
-									<img src={staticIcons.predatorIcon} alt="Predator" class="pal-element-badge" />
+									<img
+										src={staticIcons.predatorIcon}
+										alt="Predator"
+										class="pal-element-badge"
+										style="filter: {calculateFilters('#FF0000')};"
+									/>
 								</button>
 								{#snippet popup()}
 									Predator Pals
@@ -746,21 +751,26 @@
 				<div class="flex w-[450px] flex-col space-y-2">
 					<HealthBadge bind:pal={p.pal} player={appState.selectedPlayer} />
 					<span>{p.palData?.description}</span>
-					{#if p.pal.character_id.toLowerCase().includes('predator_')}
+					{#if p.pal.character_key.toLowerCase().includes('predator_')}
 						<div class="flex">
 							<div class="grow"></div>
 							<span class="text-xs">Predator</span>
-							<img src={staticIcons.predatorIcon} alt="Predator" class="h-8 w-8" />
+							<img
+								src={staticIcons.predatorIcon}
+								alt="Predator"
+								class="h-8 w-8"
+								style="filter: {calculateFilters('#FF0000')};"
+							/>
 						</div>
 					{/if}
-					{#if p.pal.character_id.toLowerCase().includes('_oilrig')}
+					{#if p.pal.character_key.toLowerCase().includes('_oilrig')}
 						<div class="flex">
 							<div class="grow"></div>
 							<span class="text-xs">Oilrig</span>
 							<img src={staticIcons.oilrigIcon} alt="Predator" class="h-8 w-8" />
 						</div>
 					{/if}
-					{#if p.pal.character_id.toLowerCase().includes('summon_')}
+					{#if p.pal.character_key.toLowerCase().includes('summon_')}
 						<div class="flex">
 							<div class="grow"></div>
 							<span class="text-xs">Summon</span>

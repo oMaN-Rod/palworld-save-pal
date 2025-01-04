@@ -13,7 +13,7 @@
 		<Card class="max-w-lg">
 			<div class="flex space-x-2">
 				<h1 class="h1">Palworld Save Pal</h1>
-				<span class="font-bold">v{appState.version || 'Loading...'}</span>
+				<span class="font-bold">{appState.version ? `v${appState.version}` : ''}</span>
 			</div>
 			<hr class="border-surface-500" />
 			<div class="flex flex-col space-y-2">
@@ -38,65 +38,37 @@
 		<Card class="max-w-lg">
 			<div class="flex-col space-y-2">
 				<h4 class="h4">Shortcuts</h4>
-
-				<h6 class="h6">Keyboard</h6>
-				<table class="w-full">
-					<tbody>
-						<tr>
-							<td>
-								<div class="flex items-center">
-									<img src={staticIcons.f5Icon} alt="Right Click" class="shortcut-icon" />
-									<span class="mx-1">/</span>
-									<img src={staticIcons.ctrlIcon} alt="Right Click" class="shortcut-icon" />
-									<img src={staticIcons.rIcon} alt="Right Click" class="shortcut-icon" />
-								</div>
-							</td>
-							<td>Refresh (Purge unsaved changes)</td>
-						</tr>
-						<tr>
-							<td>
-								<div class="flex items-center">
-									<img src={staticIcons.ctrlIcon} alt="Right Click" class="shortcut-icon" />
-									<img src={staticIcons.plusIcon} alt="Right Click" class="shortcut-icon" />
-									<span class="mx-1">/</span>
-									<img src={staticIcons.ctrlIcon} alt="Right Click" class="shortcut-icon" />
-									<img src={staticIcons.minusIcon} alt="Right Click" class="shortcut-icon" />
-								</div>
-							</td>
-							<td>Zoom in/out</td>
-						</tr>
-					</tbody>
-				</table>
-				<hr class="border-surface-500" />
-				<h6 class="h6">Mouse</h6>
-				<table class="w-full">
-					<tbody>
-						<tr>
-							<td class="font-bold">
-								<img src={staticIcons.rightClickIcon} alt="Right Click" class="shortcut-icon" />
-							</td>
-							<td>Copy</td>
-						</tr>
-						<tr>
-							<td class="font-bold">
-								<div class="flex">
-									<img src={staticIcons.ctrlIcon} alt="Right Click" class="shortcut-icon" />
-									<img src={staticIcons.rightClickIcon} alt="Right Click" class="shortcut-icon" />
-								</div>
-							</td>
-							<td>Paste</td>
-						</tr>
-						<tr>
-							<td>
-								<div class="flex">
-									<img src={staticIcons.ctrlIcon} alt="Right Click" class="shortcut-icon" />
-									<img src={staticIcons.middleClickIcon} alt="Right Click" class="shortcut-icon" />
-								</div>
-							</td>
-							<td>Delete</td>
-						</tr>
-					</tbody>
-				</table>
+				<div class="grid grid-cols-2">
+					<div class="flex items-center">
+						<img src={staticIcons.f5Icon} alt="Right Click" class="shortcut-icon" />
+						<span class="mx-1">/</span>
+						<img src={staticIcons.ctrlIcon} alt="Right Click" class="shortcut-icon" />
+						<img src={staticIcons.rIcon} alt="Right Click" class="shortcut-icon" />
+					</div>
+					<span> Refresh (Purge unsaved changes) </span>
+					<div class="flex items-center">
+						<img src={staticIcons.ctrlIcon} alt="Right Click" class="shortcut-icon" />
+						<img src={staticIcons.plusIcon} alt="Right Click" class="shortcut-icon" />
+						<span class="mx-1">/</span>
+						<img src={staticIcons.ctrlIcon} alt="Right Click" class="shortcut-icon" />
+						<img src={staticIcons.minusIcon} alt="Right Click" class="shortcut-icon" />
+					</div>
+					<span>Zoom in/out</span>
+					<div class="flex items-center">
+						<img src={staticIcons.rightClickIcon} alt="Right Click" class="shortcut-icon" />
+					</div>
+					<span>Copy</span>
+					<div class="flex items-center">
+						<img src={staticIcons.ctrlIcon} alt="Right Click" class="shortcut-icon" />
+						<img src={staticIcons.rightClickIcon} alt="Right Click" class="shortcut-icon" />
+					</div>
+					<span>Paste</span>
+					<div class="flex items-center">
+						<img src={staticIcons.ctrlIcon} alt="Right Click" class="shortcut-icon" />
+						<img src={staticIcons.middleClickIcon} alt="Right Click" class="shortcut-icon" />
+					</div>
+					<span>Delete</span>
+				</div>
 			</div>
 		</Card>
 	</div>

@@ -16,7 +16,7 @@ export const addPalHandler: WSMessageHandler = {
 		}
 
 		if (appState.players && appState.players[player_id]?.pals) {
-			const palData = await palsData.getPalInfo(pal.character_id);
+			const palData = palsData.pals[pal.character_key];
 			pal.name = palData?.localized_name || pal.character_id;
 			pal.elements = palData?.element_types || [];
 			appState.players[player_id].pals[pal.instance_id] = pal;

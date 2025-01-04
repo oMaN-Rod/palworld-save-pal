@@ -13,16 +13,17 @@
 	import { ASSET_DATA_PATH, MAX_LEVEL, staticIcons } from '$lib/constants';
 	import { palsData, elementsData, expData, presetsData } from '$lib/data';
 	import { cn } from '$theme';
-	import { getAppState, getModalState } from '$states';
+	import { getAppState, getModalState, getToastState } from '$states';
 	import { Rating } from '@skeletonlabs/skeleton-svelte';
 	import { Minus, Plus, Brain, Save } from 'lucide-svelte';
 	import { Souls } from '$components';
 	import { getStats } from '$lib/data';
 	import SkillPresets from './SkillPresets.svelte';
-	import { assetLoader } from '$utils';
+	import { assetLoader, calculateFilters } from '$utils';
 
 	const appState = getAppState();
 	const modal = getModalState();
+	const toast = getToastState();
 
 	let palLevelProgressToNext: number = $state(0);
 	let palLevelProgressValue: number = $state(0);
@@ -50,7 +51,7 @@
 
 	let palImage = $derived.by(() => {
 		if (appState.selectedPal) {
-			const { character_id } = appState.selectedPal;
+			const { character_key: character_id } = appState.selectedPal;
 			const palData = palsData.pals[character_id];
 			return assetLoader.loadPalImage(character_id, palData?.is_pal);
 		}
@@ -118,13 +119,13 @@
 	}
 
 	async function getPalElementTypes(character_id: string): Promise<ElementType[] | undefined> {
-		const palData = await palsData.getPalInfo(character_id);
+		const palData = palsData.pals[character_id];
 		if (!palData) return undefined;
 		return palData.element_types.length > 0 ? palData.element_types : undefined;
 	}
 
 	async function getPalDescription(character_id: string): Promise<string | undefined> {
-		const palData = await palsData.getPalInfo(character_id);
+		const palData = palsData.pals[character_id];
 		if (!palData) return undefined;
 		return palData.description;
 	}
@@ -161,11 +162,25 @@
 		}
 	}
 
-	function canBeBoss(character_id: string): boolean {
-		if (character_id.toLowerCase().includes('predator_')) return false;
-		if (character_id.toLowerCase().includes('summon_')) return false;
-		if (character_id.toLowerCase().includes('raid_')) return false;
-		return true;
+	function canBeBoss(character_id: string, target: string): boolean {
+		let valid = true;
+		let type = '';
+		if (character_id.toLowerCase().includes('predator_')) {
+			valid = false;
+			type = 'Predator';
+		}
+		if (character_id.toLowerCase().includes('summon_')) {
+			valid = false;
+			type = 'Summon';
+		}
+		if (character_id.toLowerCase().includes('raid_')) {
+			valid = false;
+			type = 'Raid';
+		}
+		if (!valid) {
+			toast.add(`${type} Pal cannot be ${target}`, undefined, 'warning');
+		}
+		return valid;
 	}
 
 	async function handleMaxOutPal() {
@@ -173,7 +188,7 @@
 		appState.selectedPal.level = MAX_LEVEL;
 		const maxLevelData = expData.expData['61'];
 		appState.selectedPal.exp = maxLevelData.PalTotalEXP - maxLevelData.PalNextEXP;
-		appState.selectedPal.is_boss = canBeBoss(appState.selectedPal.character_id);
+		appState.selectedPal.is_boss = canBeBoss(appState.selectedPal.character_id, 'Alpha');
 		appState.selectedPal.is_lucky = false;
 		appState.selectedPal.talent_hp = 100;
 		appState.selectedPal.talent_shot = 100;
@@ -186,7 +201,7 @@
 		getStats(appState.selectedPal, appState.selectedPlayer);
 		appState.selectedPal.hp = appState.selectedPal.max_hp;
 		appState.selectedPal.state = EntryState.MODIFIED;
-		const palData = palsData.pals[appState.selectedPal.character_id];
+		const palData = palsData.pals[appState.selectedPal.character_key];
 		if (palData) {
 			appState.selectedPal.stomach = palData.max_full_stomach;
 		} else {
@@ -255,7 +270,7 @@
 	}
 
 	function handleEditLucky() {
-		if (appState.selectedPal && canBeBoss(appState.selectedPal.character_id)) {
+		if (appState.selectedPal && canBeBoss(appState.selectedPal.character_id, 'Lucky')) {
 			appState.selectedPal.is_lucky = !appState.selectedPal.is_lucky;
 			appState.selectedPal.is_boss = appState.selectedPal.is_lucky
 				? false
@@ -265,7 +280,7 @@
 	}
 
 	function handleEditAlpha() {
-		if (appState.selectedPal && canBeBoss(appState.selectedPal.character_id)) {
+		if (appState.selectedPal && canBeBoss(appState.selectedPal.character_id, 'Alpha')) {
 			appState.selectedPal.is_boss = !appState.selectedPal.is_boss;
 			appState.selectedPal.is_lucky = appState.selectedPal.is_boss
 				? false
@@ -306,7 +321,12 @@
 					class="border-l-surface-600 preset-filled-surface-100-900 flex w-3/4 flex-row rounded-none border-l-2 p-4"
 				>
 					<div class="mr-4 flex flex-col items-center justify-center rounded-none">
-						<Rating bind:value={appState.selectedPal.rank} count={4} itemClasses="text-gray" />
+						<Rating
+							bind:value={appState.selectedPal.rank}
+							count={4}
+							itemClasses="text-gray"
+							onValueChange={() => (appState.selectedPal!.state = EntryState.MODIFIED)}
+						/>
 						<div class="flex flex-row px-2">
 							<button class="mr-4">
 								<Minus class="text-primary-500" onclick={handleLevelDecrement} />
@@ -415,7 +435,7 @@
 								</Tooltip>
 								<div class="flex flex-row items-center">
 									<div class="flex flex-row">
-										{#await getPalElementTypes(appState.selectedPal.character_id) then elementTypes}
+										{#await getPalElementTypes(appState.selectedPal.character_key) then elementTypes}
 											{#if elementTypes}
 												{#each elementTypes as elementType}
 													{#await getPalElementBadge(elementType) then icon}
@@ -481,7 +501,7 @@
 							<ActiveSkillBadge
 								{skill}
 								onSkillUpdate={handleUpdateActiveSkill}
-								palCharacterId={appState.selectedPal.character_id}
+								palCharacterId={appState.selectedPal.character_key}
 							/>
 						{/each}
 						<SectionHeader text="Passive Skills">
@@ -521,14 +541,24 @@
 								position="top-start"
 								useArrow={false}
 							>
-								<img
-									src={palImage}
-									alt={`${appState.selectedPal?.name} icon`}
-									class="h-auto max-w-full"
-								/>
+								<div class="relative">
+									<img
+										src={palImage}
+										alt={`${appState.selectedPal?.name} icon`}
+										class="h-auto max-w-full"
+									/>
+									{#if appState.selectedPal.is_predator}
+										<img
+											src={staticIcons.predatorIcon}
+											alt="Predator"
+											class="absolute bottom-0 right-0 h-12 w-12"
+											style="filter: {calculateFilters('#FF0000')};"
+										/>
+									{/if}
+								</div>
 
 								{#snippet popup()}
-									{#await getPalDescription(appState.selectedPal!.character_id) then description}
+									{#await getPalDescription(appState.selectedPal!.character_key) then description}
 										{#if description}
 											<div class="flex max-w-96 flex-col">
 												<p class="text-center">{description}</p>

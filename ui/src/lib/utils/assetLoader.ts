@@ -49,16 +49,21 @@ class AssetLoader {
 		return this.load<any>(path.toLowerCase().replaceAll(' ', '_'), 'image');
 	}
 
+	cleanseCharacterId(character_id: string): string {
+		return character_id
+			.toLocaleLowerCase()
+			.replace('predator_', '')
+			.replace('_oilrig', '')
+			.replace('raid_', '')
+			.replace('summon_', '')
+			.replace('_max', '')
+			.replace(/_\d+$/, '')
+			.replace('boss_', '');
+	}
+
 	loadPalImage(character_id: string, is_pal: boolean = true): string | undefined {
 		if (is_pal) {
-			character_id = character_id
-				.toLocaleLowerCase()
-				.replace('predator_', '')
-				.replace('_oilrig', '')
-				.replace('raid_', '')
-				.replace('summon_', '')
-				.replace('_max', '')
-				.replace(/_\d+$/, '');
+			character_id = this.cleanseCharacterId(character_id);
 		} else {
 			character_id = 'commonhuman';
 		}
@@ -73,20 +78,15 @@ class AssetLoader {
 
 	loadMenuImage(character_id: string, is_pal: boolean = true): string | undefined {
 		if (is_pal) {
-			character_id = character_id
-				.toLocaleLowerCase()
-				.replace('predator_', '')
-				.replace('_oilrig', '')
-				.replace('raid_', '')
-				.replace('summon_', '')
-				.replace('_max', '')
-				.replace(/_\d+$/, '');
+			character_id = this.cleanseCharacterId(character_id);
 		} else {
 			character_id = 'commonhuman';
 		}
 		const image = this.loadImage(`${ASSET_DATA_PATH}/img/pals/menu/${character_id}_menu.png`);
 		if (image) {
 			return image;
+		} else {
+			console.warn(`Failed to load menu image for ${`${ASSET_DATA_PATH}/img/pals/menu/${character_id}_menu.png`}`);
 		}
 		return staticIcons.unknownIcon;
 	}

@@ -391,7 +391,7 @@
 						return existingPal;
 					} else {
 						const emptyPalId = `empty-${index}`;
-						return [emptyPalId, { character_id: 'None' }];
+						return [emptyPalId, { character_key: 'None' }];
 					}
 				});
 
@@ -465,7 +465,7 @@
 	}
 
 	async function handleDeletePal(pal: Pal) {
-		const palData = await palsData.getPalInfo(pal.character_id);
+		const palData = palsData.pals[pal.character_key];
 		const confirmed = await modal.showConfirmModal({
 			title: 'Delete Pal(s)',
 			message: `Are you sure you want to delete ${pal.nickname || palData?.localized_name}?`,
@@ -496,7 +496,7 @@
 		const [selectedPal, nickname] = await modal.showModal<string>(PalSelectModal, {
 			title: 'Add a new Pal'
 		});
-		const palData = await palsData.getPalInfo(selectedPal);
+		const palData = palsData.pals[selectedPal];
 		const message = {
 			type: MessageType.ADD_PAL,
 			data: {

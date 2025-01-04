@@ -1,4 +1,4 @@
-import { getSocketState } from '$states/websocketState.svelte';
+import { getSocketState } from '$states';
 import { MessageType, type PresetProfile } from '$types';
 
 export class Presets {
@@ -18,6 +18,7 @@ export class Presets {
 				this.presetProfiles = response.data;
 				this.loading = false;
 			} catch (error) {
+				this.loading = false;
 				console.error('Error fetching presets:', error);
 				throw error;
 			}

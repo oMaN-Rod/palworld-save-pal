@@ -20,6 +20,7 @@ export class Pals {
 				this.pals = response.data;
 				this.loading = false;
 			} catch (error) {
+				this.loading = false;
 				console.error('Error fetching pals:', error);
 				throw error;
 			}

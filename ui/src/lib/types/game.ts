@@ -3,9 +3,11 @@ export type Pal = {
 	name: string;
 	instance_id: string;
 	owner_uid: string;
+	character_id: string;
+	character_key: string;
 	is_lucky: boolean;
 	is_boss: boolean;
-	character_id: string;
+	is_predator: boolean;
 	gender: PalGender;
 	rank_hp: number;
 	rank_attack: number;

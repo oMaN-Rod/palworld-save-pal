@@ -1,6 +1,6 @@
 // src/lib/data/elements.ts
 
-import { getSocketState } from '$states/websocketState.svelte';
+import { getSocketState } from '$states';
 import { MessageType, type Element } from '$types';
 
 export class Elements {
@@ -22,6 +22,7 @@ export class Elements {
 				this.elements = response.data;
 				this.loading = false;
 			} catch (error) {
+				this.loading = false;
 				console.error('Error fetching elements:', error);
 				throw error;
 			}

@@ -20,7 +20,7 @@ from palworld_save_tools.paltypes import (
 )
 
 from palworld_save_pal.game.guild import Guild
-from palworld_save_pal.game.pal import Pal
+from palworld_save_pal.game.pal import Pal, PalDTO
 from palworld_save_pal.game.pal_objects import GroupType, PalObjects
 from palworld_save_pal.utils.logging_config import create_logger
 from palworld_save_pal.game.player import Player
@@ -354,12 +354,13 @@ class SaveFile(BaseModel):
         with open(output_path, "wb") as f:
             f.write(sav_file)
 
-    async def update_pals(self, modified_pals: Dict[UUID, Pal], ws_callback) -> None:
+    async def update_pals(self, modified_pals: Dict[UUID, PalDTO], ws_callback) -> None:
         if not self._gvas_file:
             raise ValueError("No GvasFile has been loaded.")
 
         for pal_id, pal in modified_pals.items():
-            await ws_callback(f"Updating pal {pal.nickname}")
+            pal_name = pal.nickname if pal.nickname else pal.character_id
+            await ws_callback(f"Updating pal {pal_name}")
             self._update_pal(pal_id, pal)
 
         logger.info("Updated %d pals in the save file.", len(modified_pals))
@@ -433,9 +434,10 @@ class SaveFile(BaseModel):
         for e in self._character_save_parameter_map:
             if self._is_player(e):
                 continue
-            instance = Pal(e)
-            if instance:
-                self._pals[instance.instance_id] = instance
+            pal = Pal(e)
+            if pal:
+                self._pals[pal.instance_id] = pal
+                logger.debug("Loaded Pal %s", pal)
             else:
                 logger.warning("Failed to create PalEntity summary")
 
@@ -539,7 +541,7 @@ class SaveFile(BaseModel):
                     players[player.uid] = player
         self._players = players
 
-    def _update_pal(self, pal_id: UUID, updated_pal: Pal) -> None:
+    def _update_pal(self, pal_id: UUID, updated_pal: PalDTO) -> None:
         existing_pal = self._pals[pal_id]
         existing_pal.update_from(updated_pal)
 

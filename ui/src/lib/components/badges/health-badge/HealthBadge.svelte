@@ -17,7 +17,7 @@
 
 	async function handleEat() {
 		if (!pal) return;
-		const palData = await palsData.getPalInfo(pal.character_id);
+		const palData = palsData.pals[pal.character_key] || undefined;
 		if (!palData) return;
 		pal.stomach = palData.max_full_stomach;
 		pal.state = EntryState.MODIFIED;
@@ -25,7 +25,7 @@
 
 	let maxStomach = $derived.by(() => {
 		if (pal && player) {
-			const palData = palsData.pals[pal.character_id] || undefined;
+			const palData = palsData.pals[pal.character_key] || undefined;
 			if (palData) {
 				return palData.max_full_stomach;
 			}

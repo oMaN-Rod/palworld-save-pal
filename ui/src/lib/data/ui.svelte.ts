@@ -53,6 +53,7 @@ export class UICommonData {
 				this.strings = response.data;
 				this.loading = false;
 			} catch (error) {
+				this.loading = false;
 				console.error('Error fetching active skills:', error);
 				throw error;
 			}

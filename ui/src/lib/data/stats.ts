@@ -71,7 +71,7 @@ export function getStats(pal: Pal, player: Player): PalStats | undefined {
 		return;
 	}
 
-	const palData = palsData.pals[pal.character_id];
+	const palData = palsData.pals[pal.character_key];
 	if (!palData) {
 		console.log('No pal data found');
 		return;

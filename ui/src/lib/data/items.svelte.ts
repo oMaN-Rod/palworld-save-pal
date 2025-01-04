@@ -1,6 +1,6 @@
 // src/lib/data/items.ts
 
-import { getSocketState } from '$states/websocketState.svelte';
+import { getSocketState } from '$states';
 import { MessageType, type Item, type ItemDetails, type ItemInfo } from '$types';
 
 export class Items {
@@ -20,7 +20,9 @@ export class Items {
 					throw new Error(response.data);
 				}
 				this.items = response.data;
+				this.loading = false;
 			} catch (error) {
+				this.loading = false;
 				console.error('Error fetching items:', error);
 				throw error;
 			}
