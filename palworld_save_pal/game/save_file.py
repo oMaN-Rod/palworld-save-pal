@@ -427,7 +427,6 @@ class SaveFile(BaseModel):
                 continue
             guild_id = PalObjects.as_uuid(PalObjects.get_nested(entry, "key"))
             self._guilds[guild_id] = Guild(
-                id=guild_id,
                 group_save_data=entry,
             )
 

@@ -40,8 +40,6 @@
 		)
 	);
 
-	$inspect(selected);
-
 	let activeSkills = $derived.by(() => {
 		if (pal) {
 			let skills = [...pal.active_skills];
