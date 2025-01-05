@@ -9,7 +9,8 @@ import WorkSuitabilities from './badges/work-suitabilities/WorkSuitabilities.sve
 import Drawer from './drawer/Drawer.svelte';
 import Modal from './modal/Modal.svelte';
 import NavBar from './nav-bar/NavBar.svelte';
-import PalList from './pal-list/PalList.svelte';
+import PalCard from './pal-card/PalCard.svelte';
+import PalHeader from './pal-header/PalHeader.svelte';
 import PlayerList from './player-list/PlayerList.svelte';
 import PlayerPresets from './player-presets/PlayerPresets.svelte';
 import PlayerStats from './player-stats/PlayerStats.svelte';
@@ -17,7 +18,6 @@ import Souls from './souls/Souls.svelte';
 import Spinner from './spinner/Spinner.svelte';
 import Talents from './talents/Talents.svelte';
 import Toast from './toast/Toast.svelte';
-
 export * from './modals';
 export {
 	ActiveSkillBadge,
@@ -27,7 +27,8 @@ export {
 	Modal,
 	NavBar,
 	PalBadge,
-	PalList,
+	PalCard,
+	PalHeader,
 	PassiveSkillBadge,
 	PlayerHealthBadge,
 	PlayerList,

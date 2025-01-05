@@ -2,7 +2,7 @@ import copy
 from enum import Enum
 import json
 import os
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Union
 from uuid import UUID
 from pydantic import BaseModel, ConfigDict, PrivateAttr
 
@@ -171,13 +171,18 @@ class SaveFile(BaseModel):
     _group_save_data_map: List[Dict[str, Any]] = PrivateAttr(default_factory=list)
 
     def add_pal(
-        self, player_id: UUID, pal_code_name: str, nickname: str, container_id: UUID
+        self,
+        player_id: UUID,
+        character_id: str,
+        nickname: str,
+        container_id: UUID,
+        storage_slot: Union[int | None] = None,
     ) -> Optional[Pal]:
         player = self._players.get(player_id)
         if not player:
             raise ValueError(f"Player {player_id} not found in the save file.")
 
-        data = player.add_pal(pal_code_name, nickname, container_id)
+        data = player.add_pal(character_id, nickname, container_id, storage_slot)
         if data is None:
             return
         new_pal, new_pal_data = data
@@ -192,7 +197,7 @@ class SaveFile(BaseModel):
 
         return player.move_pal(pal_id, container_id)
 
-    def clone_pal(self, pal: Pal) -> Optional[Pal]:
+    def clone_pal(self, pal: PalDTO) -> Optional[Pal]:
         player = self._players.get(pal.owner_uid)
         if not player:
             raise ValueError(f"Player {pal.owner_uid} not found in the save file.")
@@ -200,7 +205,7 @@ class SaveFile(BaseModel):
         new_pal = player.clone_pal(pal)
         if new_pal is None:
             return
-        self._character_save_parameter_map.append(new_pal.character_save())
+        self._character_save_parameter_map.append(new_pal.character_save)
         self._pals[new_pal.instance_id] = new_pal
         return new_pal
 

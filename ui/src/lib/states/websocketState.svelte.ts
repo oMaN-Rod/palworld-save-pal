@@ -51,6 +51,7 @@ export function createSocketState() {
 		while (websocket.readyState !== websocket.OPEN) {
 			await new Promise((resolve) => setTimeout(resolve, 250));
 		}
+		console.log(`Sending message: ${messageData}`);
 		websocket.send(messageData);
 	}
 

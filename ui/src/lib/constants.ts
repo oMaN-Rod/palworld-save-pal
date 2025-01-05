@@ -13,6 +13,8 @@ export const staticIcons = {
 	middleClickIcon: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/actions/MouseWheelButton.png`),
 	ctrlIcon: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/actions/Keyboard_Ctrl.png`),
 	rIcon: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/actions/Keyboard_R.png`),
+	qIcon: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/actions/Keyboard_Q.png`),
+	eIcon: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/actions/Keyboard_E.png`),
 	plusIcon: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/actions/Keyboard_Num_Plus.png`),
 	minusIcon: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/actions/Keyboard_Num_Minus.png`),
 	f5Icon: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/actions/Keyboard_F5.png`),

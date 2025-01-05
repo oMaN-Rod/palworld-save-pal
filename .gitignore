@@ -76,3 +76,5 @@ ENV/
 .pytest_cache/
 
 backups/
+debug/
+settings.json

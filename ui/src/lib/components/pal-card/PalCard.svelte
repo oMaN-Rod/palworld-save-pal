@@ -12,7 +12,7 @@
 
 	let {
 		pal = $bindable(),
-		onMove: onMove,
+		onMove,
 		onAdd,
 		onClone,
 		onDelete,
@@ -31,14 +31,16 @@
 	const appState = getAppState();
 	const nav = getNavigationState();
 
-	const buttonClass = $derived(
+	let cardClass = $derived(
 		cn(
-			'outline-surface-600 xl:h-18 xl:w-18 h-16 w-16 rounded-full outline outline-2 outline-offset-2',
-			selected.includes(pal.instance_id)
+			'relative w-full outline outline-2 outline-offset-2 outline-surface-600',
+			pal && selected.includes(pal.instance_id)
 				? 'ring-4 ring-secondary-500'
-				: 'hover:ring hover:ring-secondary-500'
+				: 'hover:ring hover:ring-secondary-500 outline-surface-600'
 		)
 	);
+
+	$inspect(selected);
 
 	let activeSkills = $derived.by(() => {
 		if (pal) {
@@ -94,11 +96,13 @@
 	function handleClick(event: MouseEvent) {
 		if (!pal || pal.character_id === 'None') return;
 
+		// If ctrl/cmd is pressed and onSelect is provided, handle selection
 		if ((event.ctrlKey || event.metaKey) && onSelect) {
 			event.preventDefault();
 			event.stopPropagation();
 			onSelect(pal, event);
 		} else {
+			// Otherwise handle normal pal selection
 			handlePalSelect();
 		}
 	}
@@ -111,7 +115,7 @@
 </script>
 
 <ContextMenu items={menuItems} menuClass="bg-surface-700" xOffset={-32}>
-	<button class={buttonClass} onclick={handleClick}>
+	<button class={cardClass} onclick={handleClick}>
 		{#if pal && pal.character_id !== 'None'}
 			<Tooltip
 				popupClass="p-4 mt-12 bg-surface-800"
@@ -119,40 +123,48 @@
 				position="right"
 				useArrow={false}
 			>
-				<div class="flex flex-col">
-					<div class={cn('relative flex items-center justify-center ')}>
-						{#if pal.is_boss}
-							<div class="absolute -left-4 -top-1 h-6 w-6 xl:h-8 xl:w-8">
-								<img src={staticIcons.alphaIcon} alt="Alpha" class="pal-element-badge" />
+				<div class="grid grid-cols-[1fr_auto] overflow-hidden">
+					<div class="ml-4 flex flex-col">
+						<div class="flex space-x-2">
+							<div class="flex items-end space-x-0.5">
+								<span class="text-xs"> LV </span>
+								<span class="text-lg font-bold">{pal.level}</span>
 							</div>
-						{/if}
-						{#if pal.is_predator}
-							<div class="absolute -left-4 -top-1 h-6 w-6 xl:h-8 xl:w-8">
-								<img
-									src={staticIcons.predatorIcon}
-									alt="Alpha"
-									class="pal-element-badge"
-									style="filter: {calculateFilters('#FF0000')};"
-								/>
+							<span class="text-lg font-bold">{pal.name}</span>
+							<div class="h-4 w-4 xl:h-6 xl:w-6">
+								<img src={genderIcon} alt={pal.gender} />
 							</div>
-						{/if}
-						{#if pal.is_lucky}
-							<div class="absolute -left-4 -top-1 h-6 w-6 xl:h-8 xl:w-8">
-								<img src={staticIcons.luckyIcon} alt="Lucky" class="pal-element-badge" />
-							</div>
-						{/if}
-						<img src={palIcon} alt={pal.name} class="xl:h-18 xl:w-18 h-16 w-16 rounded-full" />
-
-						<div
-							class={cn(
-								'absolute -right-4 -top-1 h-6 w-6 xl:h-8 xl:w-8',
-								pal.gender == PalGender.MALE ? 'text-primary-300' : 'text-tertiary-300'
-							)}
-						>
-							<img src={genderIcon} alt={pal.gender} />
+							{#if pal.is_boss}
+								<div class="h-4 w-4 xl:h-6 xl:w-6">
+									<img src={staticIcons.alphaIcon} alt="Alpha" />
+								</div>
+							{/if}
+							{#if pal.is_predator}
+								<div class="h-4 w-4 xl:h-6 xl:w-6">
+									<img
+										src={staticIcons.predatorIcon}
+										alt="Alpha"
+										class="pal-element-badge"
+										style="filter: {calculateFilters('#FF0000')};"
+									/>
+								</div>
+							{/if}
+							{#if pal.is_lucky}
+								<div class="h-4 w-4 xl:h-6 xl:w-6">✨</div>
+							{/if}
 						</div>
-						<div class="absolute -bottom-4 -left-3 h-6 w-6 xl:h-8 xl:w-8">
-							<span class="text-xs">lvl {pal.level}</span>
+						<HealthBadge
+							bind:pal
+							player={appState.selectedPlayer}
+							width="w-64"
+							showActions={false}
+							stomachHeight="h-2"
+							showStomachLabel={false}
+						/>
+					</div>
+					<div class="flex flex-col">
+						<div class={cn('relative flex items-center justify-center ')}>
+							<img src={palIcon} alt={pal.name} class="xl:h-18 xl:w-18 h-16 w-16" />
 						</div>
 					</div>
 				</div>
@@ -180,11 +192,7 @@
 				{/snippet}
 			</Tooltip>
 		{:else}
-			<div
-				class={cn(
-					'bg-surface-700 xl:h-18 xl:w-18 relative flex h-16 w-16 items-center justify-center rounded-full'
-				)}
-			></div>
+			<div class="h-18"></div>
 		{/if}
 	</button>
 </ContextMenu>

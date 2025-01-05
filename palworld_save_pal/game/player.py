@@ -1,4 +1,4 @@
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Union
 from uuid import UUID
 import uuid
 from pydantic import BaseModel, Field, PrivateAttr
@@ -10,7 +10,7 @@ from palworld_save_pal.game.character_container import (
     CharacterContainerType,
 )
 from palworld_save_pal.game.guild import Guild
-from palworld_save_pal.game.pal import Pal
+from palworld_save_pal.game.pal import Pal, PalDTO
 from palworld_save_pal.game.item_container import ItemContainer, ItemContainerType
 from palworld_save_pal.game.pal_objects import PalObjects
 from palworld_save_pal.utils.uuid import are_equal_uuids
@@ -71,19 +71,25 @@ class Player(BaseModel):
             self._load_pal_box(character_container_save_data)
             self._load_otomo_container(character_container_save_data)
 
-    def add_pal(self, pal_code_name: str, nickname: str, container_id: UUID):
+    def add_pal(
+        self,
+        pal_code_name: str,
+        nickname: str,
+        container_id: UUID,
+        storage_slot: Union[int | None] = None,
+    ):
         new_pal_id = uuid.uuid4()
         container = (
             self._pal_box
             if are_equal_uuids(container_id, self.pal_box_id)
             else self._party
         )
-        slot_idx = container.add_pal(new_pal_id)
+        slot_idx = container.add_pal(new_pal_id, storage_slot)
         if slot_idx is None:
             return
 
         new_pal_data = PalObjects.PalSaveParameter(
-            code_name=pal_code_name,
+            character_id=pal_code_name,
             instance_id=new_pal_id,
             owner_uid=self.uid,
             container_id=container_id,
@@ -117,17 +123,18 @@ class Player(BaseModel):
         source_container.remove_pal(pal_id)
         pal.storage_id = container_id
         pal.storage_slot = slot_idx
-        pal.update()
         return pal
 
-    def clone_pal(self, pal: Pal):
+    def clone_pal(self, pal: PalDTO) -> Optional[Pal]:
         new_pal_id = uuid.uuid4()
-        slot_idx = self._pal_box.add_pal(new_pal_id)
-        if not slot_idx:
+        storage_slot = self._pal_box.add_pal(new_pal_id)
+        if not storage_slot:
             return
         existing_pal = self.pals[pal.instance_id]
-        nickname = pal.nickname if pal.nickname else f"[New] {pal.character_id}"
-        new_pal = existing_pal.clone(new_pal_id, slot_idx, nickname)
+        nickname = pal.nickname if pal.nickname else pal.character_id
+        new_pal = existing_pal.clone(
+            new_pal_id, self.pal_box_id, storage_slot, nickname
+        )
         self.pals[new_pal_id] = new_pal
         if isinstance(self.guild, Guild):
             self.guild.add_pal(new_pal_id)

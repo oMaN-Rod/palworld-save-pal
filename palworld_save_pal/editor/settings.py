@@ -15,12 +15,19 @@ STEAM_ROOT = (
 )
 
 
+class SettingsDTO(BaseModel):
+    language: str
+    save_dir: str
+    clone_prefix: str
+    new_pal_prefix: str
+
+
 class Settings(BaseModel):
     _language: str = "en"
     _save_dir: str = STEAM_ROOT
     _clone_prefix: str = "[Clone]"
     _new_pal_prefix: str = "[New Pal]"
-    _initial_load: bool = True
+    _is_busy: bool = True
 
     def __init__(self):
         super().__init__()
@@ -63,7 +70,7 @@ class Settings(BaseModel):
         self.write()
 
     def write(self):
-        if not self._initial_load:
+        if not self._is_busy:
             settings_json.write(self.model_dump())
 
     def _load_settings(self) -> "Settings":
@@ -73,11 +80,18 @@ class Settings(BaseModel):
             if saved_settings:
                 for key, value in saved_settings.items():
                     setattr(self, key, value)
-                self._initial_load = False
+                self._is_busy = False
                 return
         except Exception as e:
-            self._initial_load = False
+            self._is_busy = False
             logger.warning("Error loading settings: %s", e)
 
         # Return and save default settings if none exist
+        self.write()
+
+    def update_from(self, settings: SettingsDTO):
+        self._is_busy = True
+        for key, value in settings.model_dump().items():
+            setattr(self, key, value)
+        self._is_busy = False
         self.write()

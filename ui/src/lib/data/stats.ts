@@ -73,7 +73,7 @@ export function getStats(pal: Pal, player: Player): PalStats | undefined {
 
 	const palData = palsData.pals[pal.character_key];
 	if (!palData) {
-		console.log('No pal data found');
+		console.log(`No pal data found for ${pal.character_key}`);
 		return;
 	}
 	if (!palData.is_pal || palData.is_tower_boss || palData.is_raid_boss) {

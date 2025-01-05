@@ -35,8 +35,7 @@ export const errorHandler: WSMessageHandler = {
 export const settingsHandler: WSMessageHandler = {
 	type: MessageType.GET_SETTINGS,
 	async handle(data) {
-		const { language } = data;
-		appState.settings.language = language;
+		appState.settings = data;
 	}
 };
 

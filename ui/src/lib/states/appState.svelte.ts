@@ -1,13 +1,9 @@
 // src/lib/states/appState.svelte.ts
-import type { ItemContainerSlot, SupportedLanguage } from '$types';
+import type { AppSettings, ItemContainerSlot } from '$types';
 import { type Pal, type Player, type SaveFile } from '$types';
 import { getSocketState } from './websocketState.svelte';
 
 const ws = getSocketState();
-
-interface AppSettings {
-	language: SupportedLanguage;
-}
 
 export function createAppState() {
 	let players: Record<string, Player> = $state({});
@@ -124,8 +120,8 @@ export function createAppState() {
 		get settings() {
 			return settings;
 		},
-		set settings(settings: AppSettings) {
-			settings = settings;
+		set settings(newSettings: AppSettings) {
+			settings = newSettings;
 		},
 
 		resetState,

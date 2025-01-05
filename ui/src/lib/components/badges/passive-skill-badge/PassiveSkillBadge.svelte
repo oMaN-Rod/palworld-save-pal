@@ -10,7 +10,7 @@
 
 	let { skill, onSkillUpdate } = $props<{
 		skill: string | undefined;
-		onSkillUpdate: (newSkill: string, oldSkill: string) => void;
+		onSkillUpdate?: (newSkill: string, oldSkill: string) => void;
 	}>();
 
 	const modal = getModalState();

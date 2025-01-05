@@ -7,12 +7,11 @@
 		getSocketState
 	} from '$states';
 	import { Navigation } from '@skeletonlabs/skeleton-svelte';
-	import { File, Pencil, Info, Upload, Languages } from 'lucide-svelte';
+	import { File, Pencil, Info, Upload, Languages, Settings } from 'lucide-svelte';
 	import { page } from '$app/stores';
 	import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
-	import { LanguageSelectModal } from '$components/modals';
+	import { SettingsModal } from '$components/modals';
 	import { MessageType } from '$types';
-	import { bootstrap } from '$lib/data';
 
 	let navigationState = getNavigationState();
 	let appState = getAppState();
@@ -26,9 +25,9 @@
 
 	async function handleLanguageSelect(): Promise<void> {
 		// @ts-ignore
-		const result = await modal.showModal<string>(LanguageSelectModal, {
-			title: 'Choose Language',
-			value: appState.settings.language
+		const result = await modal.showModal<string>(SettingsModal, {
+			title: 'Settings',
+			settings: appState.settings
 		});
 
 		if (result) {
@@ -74,8 +73,8 @@
 		</Navigation.Tile>
 	{/snippet}
 	{#snippet footer()}
-		<Navigation.Tile label="Lang" title="Language" id="language" onclick={handleLanguageSelect}>
-			<Languages />
+		<Navigation.Tile label="Settings" title="Settings" id="settings" onclick={handleLanguageSelect}>
+			<Settings />
 		</Navigation.Tile>
 	{/snippet}
 </Navigation.Rail>

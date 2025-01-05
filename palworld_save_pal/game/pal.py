@@ -42,7 +42,6 @@ class PalDTO(BaseModel):
     passive_skills: List[str]
     hp: int
     max_hp: int
-    state: EntryState
     group_id: Optional[UUID]
     sanity: float
 
@@ -130,9 +129,9 @@ class Pal(BaseModel):
 
     @computed_field
     def character_key(self) -> Optional[str]:
-        if self.character_id.startswith("BOSS_"):
+        if self.character_id.lower().startswith("boss_"):
             self._character_key = self.character_id[5:]
-        elif self.character_id.startswith("PREDATOR_"):
+        elif self.character_id.lower().startswith("predator_"):
             self._character_key = self.character_id[9:]
         else:
             self._character_key = self.character_id
@@ -692,11 +691,14 @@ class Pal(BaseModel):
     def character_save(self) -> Dict[str, Any]:
         return self._character_save
 
-    def clone(self, instance_id: UUID, slot_idx: int, nickname: str) -> "Pal":
+    def clone(
+        self, instance_id: UUID, storage_id: UUID, storage_slot: int, nickname: str
+    ) -> "Pal":
         new_pal = copy.deepcopy(self)
         new_pal.instance_id = instance_id
         new_pal.nickname = nickname
-        new_pal.storage_slot = slot_idx
+        new_pal.storage_id = storage_id
+        new_pal.storage_slot = storage_slot
         return new_pal
 
     def update_from(self, other_pal: PalDTO):
@@ -734,7 +736,6 @@ class Pal(BaseModel):
             "is_tower",
             "name",
             "max_hp",
-            "state",
             "character_key",
         }
 

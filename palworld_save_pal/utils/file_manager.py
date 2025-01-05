@@ -8,12 +8,6 @@ from palworld_save_pal.utils.logging_config import create_logger
 
 logger = create_logger(__name__)
 
-steam_root = (
-    os.path.join(os.getenv("LOCALAPPDATA"), "Pal", "Saved", "SaveGames")
-    if os.name == "nt"
-    else None
-)
-
 
 class FileValidationResult(BaseModel):
     valid: bool
@@ -70,9 +64,9 @@ class FileManager:
         )
 
     @staticmethod
-    def open_file_dialog(window: webview.Window, save_dir: str = None) -> Optional[str]:
+    def open_file_dialog(window: webview.Window, save_dir: str) -> Optional[str]:
         file_types = ("Sav Files (*.sav)", "All files (*.*)")
-        file_path = steam_root if save_dir is None else save_dir
+        file_path = save_dir
         result = window.create_file_dialog(
             webview.OPEN_DIALOG,
             directory=file_path,

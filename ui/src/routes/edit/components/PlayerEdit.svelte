@@ -1,25 +1,12 @@
 <script lang="ts">
-	import { Card, ItemHeader, Progress } from '$components/ui';
+	import { ItemHeader, Progress } from '$components/ui';
 	import { getAppState, getToastState, getSocketState, getModalState } from '$states';
-	import {
-		EntryState,
-		type ItemContainerSlot,
-		type ItemContainer,
-		type Pal,
-		MessageType
-	} from '$types';
+	import { EntryState, type ItemContainerSlot, type ItemContainer, type Pal } from '$types';
 	import { ASSET_DATA_PATH, MAX_LEVEL } from '$lib/constants';
-	import { itemsData, expData, palsData } from '$lib/data';
+	import { itemsData, expData } from '$lib/data';
 	import { Tabs, Accordion } from '@skeletonlabs/skeleton-svelte';
 	import { Tooltip } from '$components/ui';
-	import {
-		ItemBadge,
-		PlayerPresets,
-		PalBadge,
-		PalSelectModal,
-		PlayerStats,
-		PlayerHealthBadge
-	} from '$components';
+	import { ItemBadge, PlayerPresets, PlayerStats, PlayerHealthBadge } from '$components';
 	import {
 		Bomb,
 		ChevronsLeftRight,
@@ -33,12 +20,9 @@
 	} from 'lucide-svelte';
 	import { assetLoader } from '$utils';
 
-	const ws = getSocketState();
 	const appState = getAppState();
 	const toast = getToastState();
-	const modal = getModalState();
 
-	let otomoContainer: Record<string, Pal> = $state({});
 	let commonContainer: ItemContainer = $state({ id: '', type: '', slots: [] });
 	let essentialContainer: ItemContainer = $state({ id: '', type: '', slots: [] });
 	let weaponLoadOutContainer: ItemContainer = $state({ id: '', type: '', slots: [] });
@@ -375,31 +359,6 @@
 		}
 	}
 
-	function loadOtomoContainer() {
-		if (appState.selectedPlayer && appState.selectedPlayer.pals) {
-			const container_id = appState.selectedPlayer.otomo_container_id;
-
-			const otomoEntries = Object.entries(appState.selectedPlayer.pals).filter(
-				([_, pal]) => pal.storage_id === container_id
-			);
-
-			const allSlots = Array(5)
-				.fill(null)
-				.map((_, index) => {
-					const existingPal = otomoEntries.find(([_, pal]) => pal.storage_slot === index);
-					if (existingPal) {
-						return existingPal;
-					} else {
-						const emptyPalId = `empty-${index}`;
-						return [emptyPalId, { character_key: 'None' }];
-					}
-				});
-
-			// Convert the array back to an object
-			otomoContainer = Object.fromEntries(allSlots);
-		}
-	}
-
 	async function sortCommonContainer() {
 		if (appState.selectedPlayer) {
 			const sortedSlots = commonContainer.slots.map((slot) => {
@@ -450,65 +409,6 @@
 		appState.selectedPlayer.state = EntryState.MODIFIED;
 	}
 
-	function handleMoveToPalbox(pal: Pal) {
-		if (appState.selectedPlayer) {
-			const message = {
-				type: MessageType.MOVE_PAL,
-				data: {
-					player_id: appState.selectedPlayer.uid,
-					pal_id: pal.instance_id,
-					container_id: appState.selectedPlayer.pal_box_id
-				}
-			};
-			ws.send(JSON.stringify(message));
-		}
-	}
-
-	async function handleDeletePal(pal: Pal) {
-		const palData = palsData.pals[pal.character_key];
-		const confirmed = await modal.showConfirmModal({
-			title: 'Delete Pal(s)',
-			message: `Are you sure you want to delete ${pal.nickname || palData?.localized_name}?`,
-			confirmText: 'Delete',
-			cancelText: 'Cancel'
-		});
-
-		if (appState.selectedPlayer && appState.selectedPlayer.pals && confirmed) {
-			const data = {
-				player_id: appState.selectedPlayer.uid,
-				pal_ids: [pal.instance_id]
-			};
-
-			const message = {
-				type: MessageType.DELETE_PALS,
-				data
-			};
-			ws.send(JSON.stringify(message));
-			appState.selectedPlayer.pals = Object.fromEntries(
-				Object.entries(appState.selectedPlayer.pals).filter(([id]) => pal.instance_id !== id)
-			);
-		}
-	}
-
-	async function handleAddPal() {
-		if (!appState.selectedPlayer) return;
-		// @ts-ignore
-		const [selectedPal, nickname] = await modal.showModal<string>(PalSelectModal, {
-			title: 'Add a new Pal'
-		});
-		const palData = palsData.pals[selectedPal];
-		const message = {
-			type: MessageType.ADD_PAL,
-			data: {
-				player_id: appState.selectedPlayer.uid,
-				pal_code_name: selectedPal,
-				nickname: nickname || `[New] ${palData?.localized_name}`,
-				container_id: appState.selectedPlayer.otomo_container_id
-			}
-		};
-		ws.send(JSON.stringify(message));
-	}
-
 	$effect(() => {
 		if (appState.selectedPlayer) {
 			loadCommonContainer();
@@ -516,7 +416,6 @@
 			loadFoodContainer();
 			loadWeaponLoadoutContainer();
 			loadPlayerEquipmentArmorContainer();
-			loadOtomoContainer();
 			health = 500 + appState.selectedPlayer.status_point_list.max_hp * 100;
 		}
 	});
@@ -819,26 +718,6 @@
 					</Accordion.Item>
 				</Accordion>
 			</div>
-		</div>
-		<!-- Party -->
-		<div class="flex">
-			<Card rounded="rounded-none" class="m-2 mt-4 px-4 py-2.5">
-				<div class="flex">
-					<h6 class="h6 mr-4">Party</h6>
-					<div class="flex flex-col">
-						<div class="flex flex-row space-x-4 xl:space-x-8">
-							{#each Object.values(otomoContainer) as pal}
-								<PalBadge
-									bind:pal={otomoContainer[pal.instance_id]}
-									onMoveToPalbox={() => handleMoveToPalbox(pal)}
-									onDelete={() => handleDeletePal(pal)}
-									onAdd={() => handleAddPal()}
-								/>
-							{/each}
-						</div>
-					</div>
-				</div>
-			</Card>
 		</div>
 	</div>
 {:else}
