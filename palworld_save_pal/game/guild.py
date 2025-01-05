@@ -10,6 +10,13 @@ from palworld_save_pal.utils.logging_config import create_logger
 logger = create_logger(__name__)
 
 
+class GuildDTO(BaseModel):
+    id: UUID
+    admin_player_uid: UUID
+    name: str
+    players: List[UUID]
+
+
 class Guild(BaseModel):
     _id: UUID
     _admin_player_uid: UUID
@@ -48,7 +55,7 @@ class Guild(BaseModel):
 
     @computed_field
     def name(self) -> str:
-        self._name = PalObjects.get_nested(self._raw_data, "name")
+        self._name = PalObjects.get_nested(self._raw_data, "guild_name")
         return self._name
 
     @computed_field

@@ -490,59 +490,31 @@ class SaveFile(BaseModel):
             return {}
         logger.info("Loading Players")
 
-        def extract_player_info(entry):
-            uid = PalObjects.get_guid(entry["key"]["PlayerUId"])
-            player_sav_bytes = player_sav_files.get(uid)
-            if not player_sav_bytes:
-                logger.warning("No player save file found for player %s", uid)
-                return
-            save_parameter = PalObjects.get_nested(
-                entry,
-                "value",
-                "RawData",
-                "value",
-                "object",
-                "SaveParameter",
-                "value",
-            )
-            nickname = PalObjects.get_value(save_parameter["NickName"])
-            level = (
-                PalObjects.get_byte_property(save_parameter["Level"])
-                if "Level" in save_parameter
-                else 1
-            )
-            exp = (
-                PalObjects.get_value(save_parameter["Exp"])
-                if "Exp" in save_parameter
-                else 0
-            )
-
-            raw_gvas, _ = decompress_sav_to_gvas(player_sav_bytes)
-            gvas_file = GvasFile.read(
-                raw_gvas, PALWORLD_TYPE_HINTS, CUSTOM_PROPERTIES, allow_nan=True
-            )
-            self._player_gvas_files[uid] = gvas_file
-            player = Player(
-                uid=uid,
-                nickname=nickname,
-                level=level,
-                exp=exp,
-                gvas_file=gvas_file,
-                item_container_save_data=self._item_container_save_data,
-                dynamic_item_save_data=self._dynamic_item_save_data,
-                character_container_save_data=self._character_container_save_data,
-                character_save_parameter=save_parameter,
-                guild=self._player_guild(uid),
-            )
-            player.pals = self._get_player_pals(uid)
-            return player
-
         players = {}
         for entry in self._character_save_parameter_map:
             if self._is_player(entry):
-                player = extract_player_info(entry)
-                if player:
-                    players[player.uid] = player
+                uid = PalObjects.get_guid(entry["key"]["PlayerUId"])
+                player_sav_bytes = player_sav_files.get(uid)
+                if not player_sav_bytes:
+                    logger.warning("No player save file found for player %s", uid)
+                    return
+
+                raw_gvas, _ = decompress_sav_to_gvas(player_sav_bytes)
+                gvas_file = GvasFile.read(
+                    raw_gvas, PALWORLD_TYPE_HINTS, CUSTOM_PROPERTIES, allow_nan=True
+                )
+                self._player_gvas_files[uid] = gvas_file
+                player = Player(
+                    gvas_file=gvas_file,
+                    item_container_save_data=self._item_container_save_data,
+                    dynamic_item_save_data=self._dynamic_item_save_data,
+                    character_container_save_data=self._character_container_save_data,
+                    character_save_parameter=entry,
+                    guild=self._player_guild(uid),
+                    pals=self._get_player_pals(uid),
+                )
+                players[uid] = player
+
         self._players = players
 
     def _update_pal(self, pal_id: UUID, updated_pal: PalDTO) -> None:
