@@ -8,6 +8,7 @@ build_exe_options = {
         ("data", "data"),
     ],
     "packages": ["uvicorn", "fastapi", "webview", "palworld_save_tools", "websockets"],
+    "replace_paths": [("*", "")],
 }
 
 base = "Win32GUI" if sys.platform == "win32" else None
