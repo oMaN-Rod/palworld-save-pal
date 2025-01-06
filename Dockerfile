@@ -5,13 +5,15 @@ RUN git clone https://github.com/oMaN-Rod/palworld-save-tools.git -b v0.4.11
 
 FROM node:23 AS ui_builder
 
+ARG PUBLIC_WS_URL=127.0.0.1:5174/ws
+
 COPY . /app
 WORKDIR /app/ui
-RUN rm -rf .svelte-kit 
-RUN echo "PUBLIC_WS_URL=127.0.0.1:5174/ws" >.env
-RUN echo "PUBLIC_DESKTOP_MODE=false" >>.env
-RUN npm install
-RUN npm run build
+RUN rm -rf .svelte-kit; \
+    echo "PUBLIC_WS_URL=${PUBLIC_WS_URL}" >.env; \
+    echo "PUBLIC_DESKTOP_MODE=false" >>.env; \
+    npm install; \
+    npm run build
 
 FROM python:3.12
 
