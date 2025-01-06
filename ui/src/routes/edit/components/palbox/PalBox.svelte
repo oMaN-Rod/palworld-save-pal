@@ -553,16 +553,14 @@
 	});
 
 	$effect(() => {
-		if (pals && appState.selectedPlayer) {
-			pals.forEach((p) => {
-				getStats(p.pal, appState.selectedPlayer!);
-			});
+		if (currentPage > totalPages) {
+			currentPage = 1;
 		}
 	});
 
 	$effect(() => {
-		if (currentPage > totalPages) {
-			currentPage = 1;
+		if (pals) {
+			debouncedFilterPals();
 		}
 	});
 </script>
