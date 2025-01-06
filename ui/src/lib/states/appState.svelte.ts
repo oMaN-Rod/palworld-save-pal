@@ -1,5 +1,5 @@
 // src/lib/states/appState.svelte.ts
-import type { AppSettings, ItemContainerSlot } from '$types';
+import type { AppSettings, GamepassSave, ItemContainerSlot } from '$types';
 import { type Pal, type Player, type SaveFile } from '$types';
 import { getSocketState } from './websocketState.svelte';
 
@@ -18,6 +18,7 @@ export function createAppState() {
 	let progressMessage: string = $state('');
 	let version: string = $state('');
 	let settings: AppSettings = $state({ language: 'en' });
+	let gamepassSaves: Record<string, GamepassSave> = $state({});
 
 	function resetState() {
 		players = {};
@@ -123,7 +124,12 @@ export function createAppState() {
 		set settings(newSettings: AppSettings) {
 			settings = newSettings;
 		},
-
+		get gamepassSaves() {
+			return gamepassSaves;
+		},
+		set gamepassSaves(saves: Record<string, GamepassSave>) {
+			gamepassSaves = saves;
+		},
 		resetState,
 		resetModified() {
 			modifiedPlayers = {};

@@ -48,6 +48,7 @@ class MessageType(str, Enum):
     UPDATE_SETTINGS = "update_settings"
     GET_UI_COMMON = "get_ui_common"
     NO_FILE_SELECTED = "no_file_selected"
+    SELECT_GAMEPASS_SAVE = "select_gamepass_save"
 
 
 class AddPalData(BaseModel):
@@ -207,3 +208,8 @@ class UpdateSettingsMessage(BaseMessage):
 
 class GetUICommonMessage(BaseMessage):
     type: str = MessageType.GET_UI_COMMON.value
+
+
+class SelectGamepassSaveMessage(BaseMessage):
+    type: str = MessageType.SELECT_GAMEPASS_SAVE.value
+    data: str

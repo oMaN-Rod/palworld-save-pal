@@ -47,10 +47,10 @@
 					</div>
 					<span> Refresh (Purge unsaved changes) </span>
 					<div class="flex items-center">
-						<img src={staticIcons.ctrlIcon} alt="Right Click" class="shortcut-icon" />
+						<img src={staticIcons.ctrlIcon} alt="Ctrl" class="shortcut-icon" />
 						<img src={staticIcons.plusIcon} alt="Right Click" class="shortcut-icon" />
 						<span class="mx-1">/</span>
-						<img src={staticIcons.ctrlIcon} alt="Right Click" class="shortcut-icon" />
+						<img src={staticIcons.ctrlIcon} alt="Ctrl" class="shortcut-icon" />
 						<img src={staticIcons.minusIcon} alt="Right Click" class="shortcut-icon" />
 					</div>
 					<span>Zoom in/out</span>
@@ -59,15 +59,20 @@
 					</div>
 					<span>Copy</span>
 					<div class="flex items-center">
-						<img src={staticIcons.ctrlIcon} alt="Right Click" class="shortcut-icon" />
+						<img src={staticIcons.ctrlIcon} alt="Ctrl" class="shortcut-icon" />
 						<img src={staticIcons.rightClickIcon} alt="Right Click" class="shortcut-icon" />
 					</div>
 					<span>Paste</span>
 					<div class="flex items-center">
-						<img src={staticIcons.ctrlIcon} alt="Right Click" class="shortcut-icon" />
+						<img src={staticIcons.ctrlIcon} alt="Ctrl" class="shortcut-icon" />
 						<img src={staticIcons.middleClickIcon} alt="Right Click" class="shortcut-icon" />
 					</div>
 					<span>Delete</span>
+					<div class="flex items-center">
+						<img src={staticIcons.ctrlIcon} alt="Ctrl" class="shortcut-icon" />
+						<img src={staticIcons.leftClickIcon} alt="Left Click" class="shortcut-icon" />
+					</div>
+					<span>Select</span>
 				</div>
 			</div>
 		</Card>

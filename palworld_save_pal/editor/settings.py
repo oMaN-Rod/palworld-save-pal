@@ -1,18 +1,13 @@
 import os
 from pydantic import BaseModel, computed_field
 
+from palworld_save_pal.utils.file_manager import STEAM_ROOT
 from palworld_save_pal.utils.logging_config import create_logger
 from palworld_save_pal.utils.json_manager import JsonManager
 
 logger = create_logger(__name__)
 
 settings_json = JsonManager("data/json/settings.json")
-
-STEAM_ROOT = (
-    os.path.join(os.getenv("LOCALAPPDATA"), "Pal", "Saved", "SaveGames")
-    if os.name == "nt"
-    else None
-)
 
 
 class SettingsDTO(BaseModel):

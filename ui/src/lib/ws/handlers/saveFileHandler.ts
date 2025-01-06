@@ -75,11 +75,21 @@ export const updateSaveFileHandler: WSMessageHandler = {
 	}
 };
 
+export const selectGamepassSaveHandler: WSMessageHandler = {
+	type: MessageType.SELECT_GAMEPASS_SAVE,
+	async handle(data, { goto }) {
+		appState.resetState();
+		appState.gamepassSaves = data;
+		await goto('/file');
+	}
+};
+
 export const saveFileHandlers = [
 	loadedSaveFilesHandler,
 	saveModdedSaveHandler,
 	loadZipFileHandler,
 	downloadSaveFileHandler,
 	updateSaveFileHandler,
-	noFileSelectedHandler
+	noFileSelectedHandler,
+	selectGamepassSaveHandler
 ];

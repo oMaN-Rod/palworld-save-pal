@@ -257,6 +257,7 @@ class SaveFile(BaseModel):
             raw_gvas, PALWORLD_TYPE_HINTS, custom_properties, allow_nan=True
         )
         self._level_meta_gvas_file = gvas_file
+        return self._level_meta_gvas_file.properties
 
     def load_level_sav(self, data: bytes):
         logger.info("Loading %s as GVAS", self.name)

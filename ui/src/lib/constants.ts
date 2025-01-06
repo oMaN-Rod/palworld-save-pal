@@ -9,6 +9,7 @@ export const staticIcons = {
 	hpIcon: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/icons/Heart.png`),
 	sadIcon: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/icons/Cattiva_Pleading.png`),
 	alphaIcon: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/icons/Alpha.png`),
+	leftClickIcon: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/actions/MouseButtonLeft.png`),
 	rightClickIcon: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/actions/MouseButtonRight.png`),
 	middleClickIcon: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/actions/MouseWheelButton.png`),
 	ctrlIcon: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/actions/Keyboard_Ctrl.png`),

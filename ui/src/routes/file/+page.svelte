@@ -9,6 +9,7 @@
 	import { assetLoader } from '$utils';
 	import { cn } from '$theme';
 	import { Download } from 'lucide-svelte';
+	import { GamepassSaveList } from '$components';
 
 	type SaveType = 'steam' | 'gamepass';
 
@@ -117,7 +118,6 @@
 							pillSize
 						)}
 						onclick={() => handleSelectSave('gamepass')}
-						disabled
 					>
 						{#if xboxIcon}
 							{@html xboxIcon}
@@ -165,6 +165,8 @@
 				{/snippet}
 			</Tooltip>
 		</div>
+	{:else if appState.gamepassSaves && Object.keys(appState.gamepassSaves).length > 0}
+		<GamepassSaveList bind:saves={appState.gamepassSaves} />
 	{:else}
 		<div class="relative flex h-full w-full items-center justify-center">
 			{@render pickYourPoison()}

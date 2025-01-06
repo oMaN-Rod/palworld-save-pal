@@ -1,4 +1,18 @@
 // Backend types
+export interface GamePassContainer {
+	path: string;
+	guid: string;
+	num: number;
+	name: string;
+}
+
+export interface GamepassSave {
+	save_id: string;
+	world_name: string;
+	player_count: number;
+	containers: GamePassContainer[];
+}
+
 export type Pal = {
 	name: string;
 	instance_id: string;

@@ -51,9 +51,11 @@ async def static_files_middleware(request: Request, call_next):
 
 
 async def handle_file_selection(
-    window: webview.Window, websocket: WebSocket
+    save_type: str, window: webview.Window, websocket: WebSocket
 ) -> tuple[str | None, str | None]:
-    result = FileManager.open_file_dialog(window, app_state.settings.save_dir)
+    result = FileManager.open_file_dialog(
+        save_type, window, app_state.settings.save_dir
+    )
     if not result:
         response = build_response(MessageType.NO_FILE_SELECTED, "No file selected")
         await websocket.send_json(response)
@@ -71,8 +73,9 @@ async def websocket_endpoint(websocket: WebSocket, client_id: int):
             data = await websocket.receive_text()
             json_data = json.loads(data)
             if json_data["type"] == "select_save":
+                save_type = json_data["data"]["type"]
                 save_dir, file_path = await handle_file_selection(
-                    app_state.webview_window, websocket
+                    save_type, app_state.webview_window, websocket
                 )
                 if not save_dir or not file_path:
                     continue
