@@ -257,7 +257,7 @@ class SaveFile(BaseModel):
             raw_gvas, PALWORLD_TYPE_HINTS, custom_properties, allow_nan=True
         )
         self._level_meta_gvas_file = gvas_file
-        return self._level_meta_gvas_file.properties
+        return self._level_meta_gvas_file
 
     def load_level_sav(self, data: bytes):
         logger.info("Loading %s as GVAS", self.name)
@@ -312,17 +312,17 @@ class SaveFile(BaseModel):
         self._load_guilds()
         return self
 
-    def sav(self):
+    def sav(self, gvas_file: GvasFile = None) -> bytes:
         logger.info("Converting %s to SAV", self.name)
+        target_gvas = gvas_file if gvas_file else self._gvas_file
         if (
-            "Pal.PalWorldSaveGame" in self._gvas_file.header.save_game_class_name
-            or "Pal.PalLocalWorldSaveGame"
-            in self._gvas_file.header.save_game_class_name
+            "Pal.PalWorldSaveGame" in target_gvas.header.save_game_class_name
+            or "Pal.PalLocalWorldSaveGame" in target_gvas.header.save_game_class_name
         ):
             save_type = 0x32
         else:
             save_type = 0x31
-        gvas = copy.deepcopy(self._gvas_file)
+        gvas = copy.deepcopy(target_gvas)
         return compress_gvas_to_sav(gvas.write(CUSTOM_PROPERTIES), save_type)
 
     def to_json_file(

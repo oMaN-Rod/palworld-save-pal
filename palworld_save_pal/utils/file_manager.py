@@ -155,9 +155,9 @@ class FileManager:
     def read_level_meta(file_path: Path) -> Optional[str]:
         logger.debug("Reading LevelMeta.sav: %s", file_path)
         with open(file_path, "rb") as f:
-            data = SaveFile().load_level_meta(f.read())
+            level_meta = SaveFile().load_level_meta(f.read())
             world_name = PalObjects.get_nested(
-                data, "SaveData", "value", "WorldName", "value"
+                level_meta.properties, "SaveData", "value", "WorldName", "value"
             )
             return world_name if world_name else "Unknown World"
 

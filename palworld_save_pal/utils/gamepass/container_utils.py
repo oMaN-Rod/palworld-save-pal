@@ -6,6 +6,8 @@ import uuid
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
+from palworld_save_pal.game.pal_objects import PalObjects
+from palworld_save_pal.game.save_file import SaveFile
 from palworld_save_pal.utils.gamepass.container_types import (
     FILETIME,
     Container,
@@ -143,6 +145,7 @@ def copy_container(
     source_path: str,
     dest_path: str,
     new_save_name: str,
+    suffix: str,
 ) -> Container:
     """
     Copy an existing container with a new UUID and name,
@@ -171,6 +174,26 @@ def copy_container(
     new_files: List[ContainerFile] = []
     for file in source_files:
         new_file_uuid = uuid.uuid4()
+        if suffix == "LevelMeta":
+            level_meta = SaveFile().load_level_meta(file.data)
+            world_name = PalObjects.get_nested(
+                level_meta.properties, "SaveData", "value", "WorldName", "value"
+            )
+            # detect if world name has PSP-{timestamp} appended, if it does not, then append it.
+            # if it does have PSP-{timestamp}, replace it with f"PSP-{datetime.now().strftime('%Y%m%d%H%M%S')}"
+            world_name = (
+                re.sub(
+                    r"PSP-\d+",
+                    f"PSP-{datetime.now().strftime('%Y%m%d%H%M%S')}",
+                    world_name,
+                )
+                if "PSP-" in world_name
+                else f"{world_name} PSP-{datetime.now().strftime('%Y%m%d%H%M%S')}"
+            )
+            level_meta.properties["SaveData"]["value"]["WorldName"][
+                "value"
+            ] = world_name
+            file.data = SaveFile().sav(level_meta)
         new_files.append(ContainerFile(file.name, new_file_uuid, file.data))
 
         file_path = os.path.join(
@@ -235,10 +258,7 @@ def save_modified_gamepass(
             continue
         logger.debug("Copying container: %s", original_container.container_name)
         new_container = copy_container(
-            original_container,
-            container_path,
-            container_path,
-            save_name,
+            original_container, container_path, container_path, save_name, suffix
         )
         container_index.containers.append(new_container)
 
