@@ -128,7 +128,7 @@
 					{#snippet popup()}
 						<div class="flex flex-col p-4">
 							<h4 class="h4">XBOX Game Pass</h4>
-							<p>Coming soon!™</p>
+							<p>Find and select your container.index file</p>
 						</div>
 					{/snippet}
 				</Tooltip>
