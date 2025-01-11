@@ -43,7 +43,7 @@ export class Presets {
 			if (response.type === 'error') {
 				throw new Error(response.data);
 			}
-			return await this.getPresetProfiles();
+			return await this.reset();
 		} catch (error) {
 			console.error('Error adding preset:', error);
 			throw error;
@@ -66,7 +66,7 @@ export class Presets {
 				};
 				await this.ws.send(JSON.stringify(message));
 			}
-			return this.getPresetProfiles();
+			return await this.reset();
 		} catch (error) {
 			console.error('Error changing profile name:', error);
 			throw error;
@@ -84,7 +84,7 @@ export class Presets {
 					data: newProfile
 				});
 			}
-			return this.getPresetProfiles();
+			return this.reset();
 		} catch (error) {
 			console.error('Error cloning profile:', error);
 			throw error;
@@ -98,16 +98,16 @@ export class Presets {
 				data: ids
 			};
 			await this.ws.sendAndWait(message);
-			return this.getPresetProfiles();
+			return await this.reset();
 		} catch (error) {
 			console.error('Error removing preset profiles:', error);
 			throw error;
 		}
 	}
 
-	async reset(): Promise<void> {
+	async reset(): Promise<Record<string, PresetProfile>> {
 		this.presetProfiles = {};
-		await this.ensurePresetProfilesLoaded();
+		return this.getPresetProfiles();
 	}
 }
 
