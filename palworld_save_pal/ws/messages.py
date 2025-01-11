@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional, Union
 from pydantic import BaseModel
 from uuid import UUID
 
@@ -11,7 +11,7 @@ from palworld_save_pal.game.player import PlayerDTO
 
 class BaseMessage(BaseModel):
     type: str
-    data: None = None
+    data: Any = None
 
 
 class MessageType(str, Enum):
@@ -195,6 +195,7 @@ class SelectSaveMessage(BaseMessage):
 
 class SaveModdedSaveMessage(BaseMessage):
     type: str = MessageType.SAVE_MODDED_SAVE.value
+    data: str
 
 
 class GetSettingsMessage(BaseMessage):

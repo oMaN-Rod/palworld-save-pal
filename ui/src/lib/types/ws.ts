@@ -34,7 +34,8 @@ export enum MessageType {
 	UPDATE_SETTINGS = 'update_settings',
 	GET_UI_COMMON = 'get_ui_common',
 	NO_FILE_SELECTED = 'no_file_selected',
-	SELECT_GAMEPASS_SAVE = 'select_gamepass_save'
+	SELECT_GAMEPASS_SAVE = 'select_gamepass_save',
+	GET_SAVE_TYPE = 'get_save_type'
 }
 
 interface UpdateSaveFileData {

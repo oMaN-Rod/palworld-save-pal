@@ -113,19 +113,22 @@ async def load_zip_file_handler(message: LoadZipFileMessage, ws: WebSocket):
             level_sav=level_sav_data,
             level_meta=None,
             player_savs=player_data,
-            ws_callback=ws_callback
+            ws_callback=ws_callback,
         )
 
     data = {
+        "level": app_state.save_file.world_name,
+        "players": [str(p) for p in app_state.players.keys()],
         "name": app_state.save_file.name,
         "size": app_state.save_file.size,
+        "type": app_state.save_type.name.lower(),
     }
 
     await ws_callback(
         "Zip file uploaded and processed successfully, results coming right up!"
     )
 
-    response = build_response(MessageType.LOAD_ZIP_FILE, data)
+    response = build_response(MessageType.LOADED_SAVE_FILES, data)
     await ws.send_json(response)
 
     response = build_response(MessageType.GET_PLAYERS, app_state.players)

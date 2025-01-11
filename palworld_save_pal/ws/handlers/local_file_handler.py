@@ -46,8 +46,9 @@ async def backup_file(file_path: str, save_type: str, ws_callback):
         await ws_callback(f"Save file {file_path} not found, skipping backup")
 
 
-async def save_modded_save_handler(_: SaveModdedSaveMessage, ws: WebSocket):
+async def save_modded_save_handler(message: SaveModdedSaveMessage, ws: WebSocket):
     logger.debug("Saving modded save file")
+    world_name = message.data
 
     async def ws_callback(message: str):
         response = build_response(MessageType.PROGRESS_MESSAGE, message)
@@ -62,10 +63,10 @@ async def save_modded_save_handler(_: SaveModdedSaveMessage, ws: WebSocket):
     if app_state.save_type == SaveType.STEAM:
         await save_modded_steam_save(ws, ws_callback, save_file)
     else:
-        await save_modded_gamepass_save(ws, ws_callback)
+        await save_modded_gamepass_save(world_name, ws, ws_callback)
 
 
-async def save_modded_gamepass_save(ws: WebSocket, ws_callback):
+async def save_modded_gamepass_save(world_name: str, ws: WebSocket, ws_callback):
     app_state = get_app_state()
     gamepass_save = app_state.selected_gamepass_save
     if not gamepass_save:
@@ -105,6 +106,7 @@ async def save_modded_gamepass_save(ws: WebSocket, ws_callback):
             save_id=new_save_id,
             modified_level_data=save_data,
             original_containers=original_containers,
+            world_name=world_name,
         )
 
         await ws_callback(f"Modded save created as: {new_save_id}")
@@ -178,9 +180,11 @@ async def process_steam_save(save_path: str, ws: WebSocket, local: bool):
     )
 
     data = {
-        "sav_file_name": validation_result.level_sav,
+        "level": validation_result.level_sav,
         "players": [str(p) for p in player_files],
         "world_name": app_state.save_file.world_name,
+        "type": "steam",
+        "size": app_state.save_file.size,
     }
 
     response = build_response(MessageType.LOADED_SAVE_FILES, data)
@@ -219,7 +223,6 @@ async def select_gamepass_save_handler(
     level_sav = None
     level_meta = None
     player_files = {}
-    app_state = get_app_state()
     container_index: ContainerIndex = read_container_index(app_state.settings.save_dir)
     containers = container_index.get_save_containers(save_id)
 
@@ -230,8 +233,10 @@ async def select_gamepass_save_handler(
         app_state.settings.save_dir,
         level_sav_container.container_uuid.bytes_le.hex().upper(),
     )
+    seq = 0
     for filename in os.listdir(level_sav_dir):
         if filename.startswith("container."):
+            seq = int(filename.split(".")[1])
             logger.debug("Reading container file: %s", filename)
             with open(os.path.join(level_sav_dir, filename), "rb") as f:
                 file_list = ContainerFileList.from_stream(f)
@@ -280,11 +285,17 @@ async def select_gamepass_save_handler(
         lambda msg: ws.send_json(build_response(MessageType.PROGRESS_MESSAGE, msg)),
         save_type=SaveType.GAMEPASS,
     )
-
-    response = build_response(
-        MessageType.LOADED_SAVE_FILES,
-        {"level": save_id, "players": list(player_files.keys())},
+    world_name = (
+        app_state.save_file.world_name if app_state.save_file.world_name else "Unknown"
     )
+    data = {
+        "level": f"{level_sav_dir}/container.{seq}",
+        "players": list(player_files.keys()),
+        "world_name": world_name,
+        "type": "gamepass",
+        "size": app_state.save_file.size,
+    }
+    response = build_response(MessageType.LOADED_SAVE_FILES, data)
     await ws.send_json(response)
 
     response = build_response(MessageType.GET_PLAYERS, app_state.players)

@@ -87,8 +87,11 @@ export type Player = {
 	ex_status_point_list: ExStatusPointList;
 };
 
+export type SaveFileType = 'gamepass' | 'steam';
+
 export type SaveFile = {
 	name: string;
+	type: SaveFileType;
 	world_name?: string;
 	size?: number;
 };

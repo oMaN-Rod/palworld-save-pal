@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
 	import { goto } from '$app/navigation';
-	import { getAppState } from '$states';
+	import { getAppState, getModalState } from '$states';
 	import { Card, Tooltip } from '$components/ui';
 	import { getSocketState } from '$states';
 	import { MessageType } from '$types';
@@ -9,12 +9,14 @@
 	import { assetLoader } from '$utils';
 	import { cn } from '$theme';
 	import { Download } from 'lucide-svelte';
-	import { GamepassSaveList } from '$components';
+	import { GamepassSaveList, TextInputModal } from '$components';
 
 	type SaveType = 'steam' | 'gamepass';
 
 	const appState = getAppState();
 	const ws = getSocketState();
+	const modal = getModalState();
+
 	const isDesktopMode = PUBLIC_DESKTOP_MODE === 'true';
 
 	const steamIcon = assetLoader.loadSvg(`${ASSET_DATA_PATH}/img/app/steam.svg`);
@@ -57,11 +59,61 @@
 		);
 	}
 
+	function generatePSPTimestamp(): string {
+		return new Date()
+			.toLocaleString('en-GB', {
+				year: '2-digit',
+				month: '2-digit',
+				day: '2-digit',
+				hour: '2-digit',
+				minute: '2-digit'
+			})
+			.replace(/[/,]/g, '')
+			.replace(/\s/g, '_');
+	}
+
+	function processPSPWorldName(worldName: string): string {
+		const split = worldName.split('PSP-');
+		const baseName = split.length > 1 ? split[0].trim() : worldName;
+		const timestamp = generatePSPTimestamp();
+
+		return `${baseName} PSP-${timestamp}`;
+	}
+
 	async function handleSave() {
+		if (appState.saveFile?.type === 'gamepass') {
+			await handleGamepassSave();
+		} else if (appState.saveFile?.type === 'steam') {
+			await handleSteamSave();
+		}
+	}
+
+	async function handleGamepassSave() {
+		// @ts-ignore
+		const result = await modal.showModal<string>(TextInputModal, {
+			title: 'Edit World Name',
+			value: processPSPWorldName(appState.saveFile?.world_name || '')
+		});
+
+		if (!result) return;
+
 		await goto('/loading');
+
 		ws.send(
 			JSON.stringify({
-				type: MessageType.SAVE_MODDED_SAVE
+				type: MessageType.SAVE_MODDED_SAVE,
+				data: result
+			})
+		);
+	}
+
+	async function handleSteamSave() {
+		await goto('/loading');
+
+		ws.send(
+			JSON.stringify({
+				type: MessageType.SAVE_MODDED_SAVE,
+				data: ''
 			})
 		);
 	}

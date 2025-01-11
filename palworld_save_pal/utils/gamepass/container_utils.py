@@ -185,6 +185,7 @@ def copy_container(
     dest_path: str,
     new_save_id: str,
     key: str,
+    world_name: str,
 ) -> Container:
     source_dir = os.path.join(
         source_path, source_container.container_uuid.bytes_le.hex().upper()
@@ -211,19 +212,6 @@ def copy_container(
         new_file_uuid = uuid.uuid4()
         if key == "LevelMeta":
             level_meta = SaveFile().load_level_meta(file.data)
-            world_name = PalObjects.get_nested(
-                level_meta.properties, "SaveData", "value", "WorldName", "value"
-            )
-            current_timestamp = f"PSP-{datetime.now().strftime('%Y-%m-%d_%H:%M')}"
-
-            if match := re.search(
-                r"(.*?)\s*PSP-\d{4}-\d{2}-\d{2}_\d{2}:\d{2}\s*$", world_name
-            ):
-                base_name = match.group(1).strip()
-                world_name = f"{base_name} {current_timestamp}"
-            else:
-                world_name = f"{world_name.strip()} {current_timestamp}"
-
             level_meta.properties["SaveData"]["value"]["WorldName"][
                 "value"
             ] = world_name
@@ -276,6 +264,7 @@ def save_modified_gamepass(
     save_id: str,
     modified_level_data: bytes,
     original_containers: Dict[str, Container],
+    world_name: str,
 ) -> None:
     logger.info("Saving modified gamepass save: %s", save_id)
 
@@ -291,7 +280,7 @@ def save_modified_gamepass(
             continue
         logger.debug("Copying container: %s", original_container.container_name)
         new_container = copy_container(
-            original_container, container_path, container_path, save_id, key
+            original_container, container_path, container_path, save_id, key, world_name
         )
         container_index.containers.append(new_container)
 
