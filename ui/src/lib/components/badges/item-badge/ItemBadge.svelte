@@ -26,14 +26,19 @@
 
 	let item = $derived.by(() => {
 		if (slot.static_id == 'None') return;
-		let key: string | undefined = undefined;
-		if (slot.static_id == 'CheeseBurger_2') {
-			key = 'Cheeseburger_2';
+		let key: string = slot.static_id;
+		switch (slot.static_id) {
+			case 'CheeseBurger_2':
+				key = 'Cheeseburger_2';
+				break;
+			case 'bone':
+				key = 'Bone';
+				break;
+			case 'potato':
+				key = 'Potato';
+				break;
 		}
-		if (slot.static_id == 'bone') {
-			key = 'Bone';
-		}
-		return itemsData.items[key || slot.static_id];
+		return itemsData.items[key];
 	});
 
 	let dynamic = $derived.by(() => {
