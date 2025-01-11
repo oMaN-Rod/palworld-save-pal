@@ -56,6 +56,13 @@
 		type: '',
 		count: 0
 	});
+	let sphereModule: ItemContainerSlot = $state({
+		id: '',
+		static_id: '',
+		slot_index: 0,
+		type: '',
+		count: 0
+	});
 	let accessoryGear: ItemContainerSlot[] = $state([]);
 	let group = $state('inventory');
 	let sideBarExpanded: string[] = $state(['stats']);
@@ -75,14 +82,13 @@
 	});
 
 	let inventorySlotCount = $derived.by(() => {
-		let slotCount = 0;
+		let extraSlots = 0;
 		Object.values(essentialContainer.slots).forEach((slot) => {
 			if (slot.static_id.includes('AdditionalInventory_')) {
-				const inventoryCount = parseInt(slot.static_id.slice(-1));
-				slotCount = inventoryCount > slotCount ? inventoryCount : slotCount;
+				extraSlots += 3;
 			}
 		});
-		return 42 + slotCount * 3;
+		return Math.min(42 + extraSlots, 54);
 	});
 
 	let { levelProgressToNext, levelProgressValue, levelProgressMax } = $derived.by(() => {
@@ -334,7 +340,7 @@
 			const container = appState.selectedPlayer.player_equipment_armor_container;
 			container.slots.sort((a, b) => a.slot_index - b.slot_index);
 			let containerSlots = [];
-			for (let i = 0; i < 8; i++) {
+			for (let i = 0; i < 9; i++) {
 				const slot = container.slots.find((s) => s.slot_index === i);
 				if (!slot) {
 					const emptySlot = {
@@ -354,6 +360,7 @@
 			bodyGear = containerSlots[1];
 			shieldGear = containerSlots[4];
 			gliderGear = containerSlots[5];
+			sphereModule = containerSlots[8];
 			accessoryGear = containerSlots.slice(2, 4).concat(containerSlots.slice(6, 8));
 			playerEquipmentArmorContainer.slots = containerSlots;
 		}
@@ -636,6 +643,13 @@
 							bind:slot={gliderGear}
 							itemGroup="Glider"
 							onCopyPaste={(event) => handleCopyPaste(event, gliderGear, false)}
+							onUpdate={onItemUpdate}
+						/>
+						<ItemHeader text="Sphere Module" />
+						<ItemBadge
+							bind:slot={sphereModule}
+							itemGroup="SphereModule"
+							onCopyPaste={(event) => handleCopyPaste(event, sphereModule, false)}
 							onUpdate={onItemUpdate}
 						/>
 					</div>

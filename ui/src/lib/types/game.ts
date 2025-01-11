@@ -237,7 +237,8 @@ export type ItemGroup =
 	| 'Head'
 	| 'Shield'
 	| 'Weapon'
-	| 'KeyItem';
+	| 'KeyItem'
+	| 'SphereModule';
 
 export interface DynamicItemDetails {
 	durability: number;
