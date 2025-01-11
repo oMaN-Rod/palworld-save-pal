@@ -1,12 +1,18 @@
 <script lang="ts">
-	import { ItemHeader, Progress } from '$components/ui';
+	import { Input, ItemHeader, Progress } from '$components/ui';
 	import { getAppState, getToastState, getSocketState, getModalState } from '$states';
 	import { EntryState, type ItemContainerSlot, type ItemContainer, type Pal } from '$types';
 	import { ASSET_DATA_PATH, MAX_LEVEL } from '$lib/constants';
 	import { itemsData, expData } from '$lib/data';
 	import { Tabs, Accordion } from '@skeletonlabs/skeleton-svelte';
 	import { Tooltip } from '$components/ui';
-	import { ItemBadge, PlayerPresets, PlayerStats, PlayerHealthBadge } from '$components';
+	import {
+		ItemBadge,
+		PlayerPresets,
+		PlayerStats,
+		PlayerHealthBadge,
+		TextInputModal
+	} from '$components';
 	import {
 		Bomb,
 		ChevronsLeftRight,
@@ -16,12 +22,14 @@
 		Swords,
 		ArrowUp01,
 		Minus,
-		Plus
+		Plus,
+		Edit
 	} from 'lucide-svelte';
 	import { assetLoader } from '$utils';
 
 	const appState = getAppState();
 	const toast = getToastState();
+	const modal = getModalState();
 
 	let commonContainer: ItemContainer = $state({ id: '', type: '', slots: [] });
 	let essentialContainer: ItemContainer = $state({ id: '', type: '', slots: [] });
@@ -426,13 +434,26 @@
 			health = 500 + appState.selectedPlayer.status_point_list.max_hp * 100;
 		}
 	});
+
+	async function handleUpdateNickname() {
+		if (!appState.selectedPlayer) return;
+		// @ts-ignore
+		const result = await modal.showModal<string>(TextInputModal, {
+			title: 'Change Player Name',
+			value: appState.selectedPlayer.nickname
+		});
+		if (result) {
+			appState.selectedPlayer.nickname = result;
+			appState.selectedPlayer.state = EntryState.MODIFIED;
+		}
+	}
 </script>
 
 {#if appState.selectedPlayer}
 	<div class="flex h-full flex-col overflow-auto">
 		<div class="ml-2 flex">
 			<!-- Main content wrapper -->
-			<div class="grid w-full grid-cols-[auto_1fr] gap-4 pr-[340px]">
+			<div class="grid w-full grid-cols-[auto_1fr] gap-4 pr-[420px]">
 				<!-- Inventory -->
 				<div class="flex h-[600px] flex-col">
 					<div class="mb-4 flex items-center space-x-2">
@@ -673,7 +694,7 @@
 			</div>
 
 			<!-- Stats -->
-			<div class="fixed right-2 top-[60px] w-80 flex-none" bind:this={sideBarWrapper}>
+			<div class="fixed right-2 w-96 flex-none" bind:this={sideBarWrapper}>
 				<div
 					class="border-l-surface-600 preset-filled-surface-100-900 mb-2 mr-2 flex rounded-none border-l-2 p-4"
 				>
@@ -696,6 +717,15 @@
 
 					<div class="grow">
 						<div class="flex flex-col">
+							<div class="flex space-x-2">
+								<button
+									class="hover:ring-secondary-500 hover:ring-offset-surface-900 text-start font-bold hover:ring hover:ring-offset-4"
+									onclick={handleUpdateNickname}
+								>
+									<Edit class="h-4 w-4" />
+								</button>
+								<span>{appState.selectedPlayer.nickname}</span>
+							</div>
 							<div class="flex flex-col space-y-2">
 								<div class="flex">
 									<span class="text-on-surface grow">NEXT</span>
