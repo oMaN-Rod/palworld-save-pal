@@ -254,7 +254,7 @@
 									<img
 										src={palImage}
 										alt={`${appState.selectedPal?.name} icon`}
-										class="h-auto max-w-full"
+										class="max-h-[600px] max-w-full"
 									/>
 									{#if appState.selectedPal.is_predator}
 										<img
