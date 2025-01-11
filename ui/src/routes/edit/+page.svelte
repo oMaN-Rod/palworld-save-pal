@@ -111,13 +111,13 @@
 				{/snippet}
 				{#snippet content()}
 					<div class="flex-grow overflow-hidden">
-						<Tabs.Panel value="player" classes="h-full">
+						<Tabs.Panel value="player" classes="h-screen">
 							<PlayerEdit />
 						</Tabs.Panel>
-						<Tabs.Panel value="pal-box" classes="h-full">
+						<Tabs.Panel value="pal-box" classes="h-screen">
 							<PalBox />
 						</Tabs.Panel>
-						<Tabs.Panel value="pal" classes="h-full">
+						<Tabs.Panel value="pal" classes="h-screen">
 							<PalEdit />
 						</Tabs.Panel>
 					</div>
