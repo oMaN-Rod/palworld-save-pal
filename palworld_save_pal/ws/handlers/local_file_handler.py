@@ -1,11 +1,17 @@
 import os
 import time
 import shutil
+from typing import Dict
 import uuid
 
 from fastapi import WebSocket
 from palworld_save_pal.game.save_file import SaveFile, SaveType
 from palworld_save_pal.utils.file_manager import FileManager
+from palworld_save_pal.utils.gamepass.container_types import (
+    Container,
+    ContainerFileList,
+    ContainerIndex,
+)
 from palworld_save_pal.ws.messages import (
     MessageType,
     SaveModdedSaveMessage,
@@ -16,10 +22,9 @@ from palworld_save_pal.utils.logging_config import create_logger
 from palworld_save_pal.ws.utils import build_response
 from palworld_save_pal.state import get_app_state
 from palworld_save_pal.utils.gamepass.container_utils import (
-    find_container_path,
     backup_container_path,
+    cleanup_container_path,
     read_container_index,
-    get_save_containers,
     save_modified_gamepass,
 )
 
@@ -69,8 +74,7 @@ async def save_modded_gamepass_save(ws: WebSocket, ws_callback):
     logger.debug("Saving modded GamePass save file: %s", gamepass_save.save_id)
 
     try:
-        # Get container path
-        container_path = find_container_path()
+        container_path = app_state.settings.save_dir
 
         # Create backup of container path
         await ws_callback("Creating backup of container path...")
@@ -79,10 +83,12 @@ async def save_modded_gamepass_save(ws: WebSocket, ws_callback):
 
         # Read container index and get save containers
         container_index = read_container_index(container_path)
+        cleanup_container_path(container_index, container_path)
+
         original_save_name = gamepass_save.save_id
         # create a new save_name which consist of a uuid4 all uppercase with no dashes
-        new_save_name = uuid.uuid4().hex.upper()
-        original_containers = get_save_containers(container_index, original_save_name)
+        new_save_id = uuid.uuid4().hex.upper()
+        original_containers = container_index.get_save_containers(original_save_name)
 
         if not original_containers:
             raise ValueError(f"No containers found for save: {original_save_name}")
@@ -94,16 +100,17 @@ async def save_modded_gamepass_save(ws: WebSocket, ws_callback):
         # Save modified gamepass save with new containers
         await ws_callback("Creating new containers for modified save...")
         save_modified_gamepass(
+            container_index=container_index,
             container_path=container_path,
-            save_name=new_save_name,
+            save_id=new_save_id,
             modified_level_data=save_data,
             original_containers=original_containers,
         )
 
-        await ws_callback(f"Modded save created as: {new_save_name}")
+        await ws_callback(f"Modded save created as: {new_save_id}")
         response = build_response(
             MessageType.SAVE_MODDED_SAVE,
-            f"Created modded save as: {new_save_name}",
+            f"Created modded save as: {new_save_id}",
         )
         await ws.send_json(response)
 
@@ -212,29 +219,52 @@ async def select_gamepass_save_handler(
     level_sav = None
     level_meta = None
     player_files = {}
+    app_state = get_app_state()
+    container_index: ContainerIndex = read_container_index(app_state.settings.save_dir)
+    containers = container_index.get_save_containers(save_id)
 
-    for container in gamepass_save.containers:
-        logger.debug("Processing container: %s", container.name)
-        parts = container.name.split("-")
-        if len(parts) < 2:
-            continue
+    level_sav_container = containers.get("Level", None)
+    if level_sav_container is None:
+        return
+    level_sav_dir = os.path.join(
+        app_state.settings.save_dir,
+        level_sav_container.container_uuid.bytes_le.hex().upper(),
+    )
+    for filename in os.listdir(level_sav_dir):
+        if filename.startswith("container."):
+            logger.debug("Reading container file: %s", filename)
+            with open(os.path.join(level_sav_dir, filename), "rb") as f:
+                file_list = ContainerFileList.from_stream(f)
+                level_sav = file_list.files[0].data
 
-        if parts[-2] == "Level" and os.path.exists(container.file):
-            with open(container.file, "rb") as f:
-                level_sav = f.read()
+    level_meta_container = containers.get("LevelMeta", None)
+    if level_meta_container is None:
+        return
+    level_meta_dir = os.path.join(
+        app_state.settings.save_dir,
+        level_meta_container.container_uuid.bytes_le.hex().upper(),
+    )
+    for filename in os.listdir(level_meta_dir):
+        if filename.startswith("container."):
+            logger.debug("Reading container file: %s", filename)
+            with open(os.path.join(level_meta_dir, filename), "rb") as f:
+                file_list = ContainerFileList.from_stream(f)
+                level_meta = file_list.files[0].data
 
-        if parts[-1] == "Level" and os.path.exists(container.file):
-            with open(container.file, "rb") as f:
-                level_sav = f.read()
-
-        if parts[-2] == "Players" and os.path.exists(container.file):
-            player_id = uuid.UUID(parts[-1])
-            with open(container.file, "rb") as f:
-                player_files[player_id] = f.read()
-
-        if parts[-1] == "LevelMeta" and os.path.exists(container.file):
-            with open(container.file, "rb") as f:
-                level_meta = f.read()
+    player_containers = [c for k, c in containers.items() if "Player" in k]
+    for player_container in player_containers:
+        player_dir = os.path.join(
+            app_state.settings.save_dir,
+            player_container.container_uuid.bytes_le.hex().upper(),
+        )
+        for filename in os.listdir(player_dir):
+            if filename.startswith("container."):
+                logger.debug("Reading container file: %s", filename)
+                with open(os.path.join(player_dir, filename), "rb") as f:
+                    file_list = ContainerFileList.from_stream(f)
+                    player_files[
+                        uuid.UUID(player_container.container_name.split("-")[-1])
+                    ] = file_list.files[0].data
 
     if not level_sav:
         raise ValueError("Level.sav not found in selected save")

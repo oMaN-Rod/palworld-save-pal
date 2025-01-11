@@ -2,7 +2,7 @@ from datetime import datetime, timezone
 import io
 import os
 import uuid
-from typing import BinaryIO, List, Optional
+from typing import BinaryIO, Dict, List, Optional
 
 from palworld_save_pal.utils.logging_config import create_logger
 
@@ -48,6 +48,126 @@ class FILETIME:
     def to_timestamp(self) -> float:
         """Convert to Unix timestamp"""
         return (self.value - 116444736000000000) / 10000000
+
+    def __eq__(self, other: "FILETIME") -> bool:
+        """Equal to comparison"""
+        if not isinstance(other, FILETIME):
+            return NotImplemented
+        return self.value == other.value
+
+    def __lt__(self, other: "FILETIME") -> bool:
+        """Less than comparison"""
+        if not isinstance(other, FILETIME):
+            return NotImplemented
+        return self.value < other.value
+
+    def __gt__(self, other: "FILETIME") -> bool:
+        """Greater than comparison"""
+        if not isinstance(other, FILETIME):
+            return NotImplemented
+        return self.value > other.value
+
+    def __le__(self, other: "FILETIME") -> bool:
+        """Less than or equal to comparison"""
+        if not isinstance(other, FILETIME):
+            return NotImplemented
+        return self.value <= other.value
+
+    def __ge__(self, other: "FILETIME") -> bool:
+        """Greater than or equal to comparison"""
+        if not isinstance(other, FILETIME):
+            return NotImplemented
+        return self.value >= other.value
+
+
+class ContainerFile:
+    """Represents a file within a container"""
+
+    def __init__(self, name: str, file_uuid: uuid.UUID, data: bytes):
+        self.name = name
+        self.uuid = file_uuid
+        self.data = data
+
+    def __repr__(self):
+        return f"ContainerFile(name={self.name}, uuid={self.uuid})"
+
+
+class ContainerFileList:
+    """Represents a list of files in a container"""
+
+    def __init__(self, *, seq: int, files: List[ContainerFile]):
+        self.seq = seq
+        self.files = files
+
+    @classmethod
+    def from_stream(cls, stream: BinaryIO) -> "ContainerFileList":
+        """Read ContainerFileList from binary stream"""
+        try:
+            seq = int(os.path.splitext(os.path.basename(stream.name))[1][1:])
+        except ValueError:
+            raise ContainerError(f"Invalid container file name: {stream.name}")
+
+        path = os.path.dirname(stream.name)
+        version = int.from_bytes(stream.read(4), "little")
+
+        if version != CONTAINER_FILE_VERSION:
+            raise ContainerError(f"Unsupported container file version: {version}")
+
+        file_count = int.from_bytes(stream.read(4), "little")
+        files = []
+
+        for _ in range(file_count):
+            # Read file entry
+            file_name = cls._read_utf16_fixed_string(stream, 64)
+            # Skip cloud UUID
+            stream.read(16)
+            file_uuid = uuid.UUID(bytes=stream.read(16))
+
+            # Read file data
+            file_path = os.path.join(path, file_uuid.bytes_le.hex().upper())
+            if not os.path.exists(file_path):
+                raise ContainerError(f"File does not exist: {file_path}")
+
+            with open(file_path, "rb") as f:
+                file_data = f.read()
+
+            files.append(ContainerFile(file_name, file_uuid, file_data))
+
+        return cls(seq=seq, files=files)
+
+    def write_container(self, path: str):
+        """Write ContainerFileList and its files to disk"""
+        os.makedirs(path, exist_ok=True)
+
+        # Write container list file
+        container_path = os.path.join(path, f"container.{self.seq}")
+        with open(container_path, "wb") as f:
+            # Write header
+            f.write(CONTAINER_FILE_VERSION.to_bytes(4, "little"))
+            f.write(len(self.files).to_bytes(4, "little"))
+
+            # Write file entries
+            for file in self.files:
+                self._write_utf16_fixed_string(f, file.name, 64)
+                f.write(b"\0" * 16)  # Empty cloud UUID
+                f.write(file.uuid.bytes)
+
+                # Write file data
+                file_path = os.path.join(path, file.uuid.bytes_le.hex().upper())
+                with open(file_path, "wb") as data_file:
+                    data_file.write(file.data)
+
+    @staticmethod
+    def _read_utf16_fixed_string(stream: BinaryIO, length: int) -> str:
+        """Read fixed-length UTF-16 string from stream"""
+        return stream.read(length * 2).decode("utf-16-le").rstrip("\0")
+
+    @staticmethod
+    def _write_utf16_fixed_string(stream: BinaryIO, value: str, length: int):
+        """Write fixed-length UTF-16 string to stream"""
+        encoded = value.encode("utf-16-le")
+        padding = b"\0" * (length * 2 - len(encoded))
+        stream.write(encoded + padding)
 
 
 class Container:
@@ -142,93 +262,6 @@ class Container:
         stream.write(value.encode("utf-16-le"))
 
 
-class ContainerFile:
-    """Represents a file within a container"""
-
-    def __init__(self, name: str, file_uuid: uuid.UUID, data: bytes):
-        self.name = name
-        self.uuid = file_uuid
-        self.data = data
-
-
-class ContainerFileList:
-    """Represents a list of files in a container"""
-
-    def __init__(self, *, seq: int, files: List[ContainerFile]):
-        self.seq = seq
-        self.files = files
-
-    @classmethod
-    def from_stream(cls, stream: BinaryIO) -> "ContainerFileList":
-        """Read ContainerFileList from binary stream"""
-        try:
-            seq = int(os.path.splitext(os.path.basename(stream.name))[1][1:])
-        except ValueError:
-            raise ContainerError(f"Invalid container file name: {stream.name}")
-
-        path = os.path.dirname(stream.name)
-        version = int.from_bytes(stream.read(4), "little")
-
-        if version != CONTAINER_FILE_VERSION:
-            raise ContainerError(f"Unsupported container file version: {version}")
-
-        file_count = int.from_bytes(stream.read(4), "little")
-        files = []
-
-        for _ in range(file_count):
-            # Read file entry
-            file_name = cls._read_utf16_fixed_string(stream, 64)
-            # Skip cloud UUID
-            stream.read(16)
-            file_uuid = uuid.UUID(bytes=stream.read(16))
-
-            # Read file data
-            file_path = os.path.join(path, file_uuid.bytes_le.hex().upper())
-            if not os.path.exists(file_path):
-                raise ContainerError(f"File does not exist: {file_path}")
-
-            with open(file_path, "rb") as f:
-                file_data = f.read()
-
-            files.append(ContainerFile(file_name, file_uuid, file_data))
-
-        return cls(seq=seq, files=files)
-
-    def write_container(self, path: str):
-        """Write ContainerFileList and its files to disk"""
-        os.makedirs(path, exist_ok=True)
-
-        # Write container list file
-        container_path = os.path.join(path, f"container.{self.seq}")
-        with open(container_path, "wb") as f:
-            # Write header
-            f.write(CONTAINER_FILE_VERSION.to_bytes(4, "little"))
-            f.write(len(self.files).to_bytes(4, "little"))
-
-            # Write file entries
-            for file in self.files:
-                self._write_utf16_fixed_string(f, file.name, 64)
-                f.write(b"\0" * 16)  # Empty cloud UUID
-                f.write(file.uuid.bytes)
-
-                # Write file data
-                file_path = os.path.join(path, file.uuid.bytes_le.hex().upper())
-                with open(file_path, "wb") as data_file:
-                    data_file.write(file.data)
-
-    @staticmethod
-    def _read_utf16_fixed_string(stream: BinaryIO, length: int) -> str:
-        """Read fixed-length UTF-16 string from stream"""
-        return stream.read(length * 2).decode("utf-16-le").rstrip("\0")
-
-    @staticmethod
-    def _write_utf16_fixed_string(stream: BinaryIO, value: str, length: int):
-        """Write fixed-length UTF-16 string to stream"""
-        encoded = value.encode("utf-16-le")
-        padding = b"\0" * (length * 2 - len(encoded))
-        stream.write(encoded + padding)
-
-
 class ContainerIndex:
     """Represents the main container index file"""
 
@@ -282,6 +315,43 @@ class ContainerIndex:
             unknown=unknown,
             containers=containers,
         )
+
+    def get_save_containers(self, save_name: str) -> Dict[str, Container]:
+        latest_containers: Dict[str, Container] = {}
+
+        for container in self.containers:
+            if not container.container_name.startswith(f"{save_name}-"):
+                continue
+
+            # Handle player containers
+            if "Players-" in container.container_name:
+                player_id = container.container_name.split("Players-")[-1]
+                key = f"Players-{player_id}"
+            # Handle other container types
+            else:
+                # Map container name to standardized key
+                if "LocalData" in container.container_name:
+                    key = "LocalData"
+                elif "LevelMeta" in container.container_name:
+                    key = "LevelMeta"
+                elif "Level" in container.container_name:
+                    key = "Level"
+                elif "WorldOption" in container.container_name:
+                    key = "WorldOption"
+                else:
+                    continue  # Skip containers that don't match our expected types
+
+            # Update if this container is more recent
+            if key not in latest_containers or (
+                container.seq > latest_containers[key].seq
+                or (
+                    container.seq == latest_containers[key].seq
+                    and container.mtime > latest_containers[key].mtime
+                )
+            ):
+                latest_containers[key] = container
+
+        return latest_containers
 
     def write_file(self, path: str):
         """Write ContainerIndex to disk"""

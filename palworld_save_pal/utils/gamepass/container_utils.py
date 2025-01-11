@@ -28,7 +28,6 @@ WGS_PATH = os.path.join(GAMEPASS_PATH, "SystemAppData", "wgs")
 
 
 def find_container_path() -> Optional[str]:
-    """Find the gamepass container directory path"""
     if not os.path.exists(GAMEPASS_PATH):
         raise ContainerError("Could not find Xbox Palworld installation")
 
@@ -40,7 +39,6 @@ def find_container_path() -> Optional[str]:
 
 
 def backup_container_path(container_path: str) -> str:
-    """Create a backup of the entire container directory in the application's backup folder"""
     timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
     backup_dir = Path("backups/gamepass")
     backup_dir.mkdir(parents=True, exist_ok=True)
@@ -53,8 +51,60 @@ def backup_container_path(container_path: str) -> str:
     return str(backup_path)
 
 
+def cleanup_container_path(
+    container_index: ContainerIndex, container_path: str
+) -> None:
+    for root, dirs, files in os.walk(container_path, topdown=False):
+        directory_name = os.path.basename(root)
+        if "_" in directory_name:
+            continue
+        should_remove = False
+
+        # Check if directory is empty
+        if len(files) == 0 and len(dirs) == 0:
+            logger.debug("Empty directory found: %s", directory_name)
+            should_remove = True
+
+        # Check container file list
+        container_file = next((f for f in files if f.startswith("container.")), None)
+        if container_file:
+            with open(os.path.join(root, container_file), "rb") as f:
+                file_list = ContainerFileList.from_stream(f)
+                if len(file_list.files) == 0:
+                    logger.debug(
+                        "Empty container file list: %s/%s",
+                        directory_name,
+                        container_file,
+                    )
+                    should_remove = True
+
+        # Find matching container in index
+        matching_container = next(
+            (
+                c
+                for c in container_index.containers
+                if directory_name == c.container_uuid.bytes_le.hex().upper()
+            ),
+            None,
+        )
+
+        # If no matching container found, remove directory
+        if not matching_container:
+            logger.debug(
+                "No matching container found for directory: %s",
+                directory_name,
+            )
+            shutil.rmtree(root)
+            continue
+
+        # Remove marked directories and their container index entries
+        if should_remove:
+            logger.debug("Purging container: %s", matching_container.container_name)
+            container_index.containers.remove(matching_container)
+            shutil.rmtree(root)
+
+
 def read_container_index(container_path: str) -> ContainerIndex:
-    """Read and parse the container index file"""
     index_path = os.path.join(container_path, "containers.index")
     if not os.path.exists(index_path):
         raise ContainerError(f"Container index not found: {index_path}")
@@ -64,24 +114,6 @@ def read_container_index(container_path: str) -> ContainerIndex:
         return ContainerIndex.from_stream(f)
 
 
-def get_container_files(
-    container_path: str, container: Container
-) -> List[ContainerFile]:
-    """Get all files from a specific container"""
-    container_dir = os.path.join(
-        container_path, container.container_uuid.bytes_le.hex().upper()
-    )
-
-    files = []
-    for filename in os.listdir(container_dir):
-        if filename.startswith("container."):
-            file_path = os.path.join(container_dir, filename)
-            with open(file_path, "rb") as f:
-                container_file_list = ContainerFileList.from_stream(f)
-                files.extend(container_file_list.files)
-    return files
-
-
 def create_new_container(
     container_path: str,
     save_name: str,
@@ -89,17 +121,12 @@ def create_new_container(
     file_name: str = "Data",
     container_suffix: str = "Level",
 ) -> Container:
-    """
-    Create a new container with the given save data,
-    and ensure we also track which file is "Data".
-    """
     container_name = f"{save_name}-{container_suffix}"
     container_uuid = uuid.uuid4()
     container_dir = os.path.join(container_path, container_uuid.bytes_le.hex().upper())
 
     # Create container file list with unique file UUID
     file_uuid = uuid.uuid4()
-    files = [ContainerFile(file_name, file_uuid, data)]
 
     # Write container list file with explicit format
     os.makedirs(container_dir, exist_ok=True)
@@ -107,25 +134,27 @@ def create_new_container(
     with open(container_file, "wb") as f:
         # Write container version
         f.write((4).to_bytes(4, "little"))  # Version 4
-        f.write(len(files).to_bytes(4, "little"))  # File count
+        f.write((1).to_bytes(4, "little"))  # File count
 
         # Write file entries
-        for file in files:
-            name_bytes = file.name.encode("utf-16-le")
-            name_padding = b"\0" * (128 - len(name_bytes))  # 64 chars * 2 bytes
-            f.write(name_bytes + name_padding)
-            # Cloud UUID (zeros)
-            f.write(b"\0" * 16)
-            # Actual file UUID
-            f.write(file.uuid.bytes)
+        name_bytes = file_name.encode("utf-16-le")
+        name_padding = b"\0" * (128 - len(name_bytes))  # 64 chars * 2 bytes
+        f.write(name_bytes + name_padding)
+        # Cloud UUID (zeros)
+        f.write(b"\0" * 16)
+        # Actual file UUID
+        f.write(file_uuid.bytes)
 
-            # Write file data
-            file_path = os.path.join(container_dir, file.uuid.bytes_le.hex().upper())
-            with open(file_path, "wb") as data_file:
-                data_file.write(file.data)
+        # Write file data
+        file_path = os.path.join(container_dir, file_uuid.bytes_le.hex().upper())
+        with open(file_path, "wb") as data_file:
+            data_file.write(data)
 
-    logger.info("Created new container with UUID: %s", container_uuid)
-    logger.info("Created file with UUID: %s", file_uuid)
+    logger.info(
+        "Created new container with; uuid=%s, file_uuid=%s",
+        container_uuid.bytes.hex().upper(),
+        file_uuid.bytes.hex().upper(),
+    )
 
     container = Container(
         container_name=container_name,
@@ -140,17 +169,23 @@ def create_new_container(
     return container
 
 
+def clean_file_name(input_str):
+    # Remove -Slot[number]- pattern
+    temp_str = re.sub(r"-Slot\d*-", "-", input_str)
+
+    # Remove trailing -[number] pattern
+    result = re.sub(r"-(\d{2})$", "", temp_str)
+    logger.debug("Cleaned file name: %s => %s", input_str, result)
+    return result
+
+
 def copy_container(
     source_container: Container,
     source_path: str,
     dest_path: str,
-    new_save_name: str,
-    suffix: str,
+    new_save_id: str,
+    key: str,
 ) -> Container:
-    """
-    Copy an existing container with a new UUID and name,
-    then set container.file if needed.
-    """
     source_dir = os.path.join(
         source_path, source_container.container_uuid.bytes_le.hex().upper()
     )
@@ -163,7 +198,7 @@ def copy_container(
 
     new_container_uuid = uuid.uuid4()
     new_container_name = source_container.container_name.replace(
-        source_container.container_name.split("-")[0], new_save_name
+        source_container.container_name.split("-")[0], new_save_id
     )
 
     new_container_dir = os.path.join(
@@ -174,34 +209,35 @@ def copy_container(
     new_files: List[ContainerFile] = []
     for file in source_files:
         new_file_uuid = uuid.uuid4()
-        if suffix == "LevelMeta":
+        if key == "LevelMeta":
             level_meta = SaveFile().load_level_meta(file.data)
             world_name = PalObjects.get_nested(
                 level_meta.properties, "SaveData", "value", "WorldName", "value"
             )
-            # detect if world name has PSP-{timestamp} appended, if it does not, then append it.
-            # if it does have PSP-{timestamp}, replace it with f"PSP-{datetime.now().strftime('%Y%m%d%H%M%S')}"
-            world_name = (
-                re.sub(
-                    r"PSP-\d+",
-                    f"PSP-{datetime.now().strftime('%Y%m%d%H%M%S')}",
-                    world_name,
-                )
-                if "PSP-" in world_name
-                else f"{world_name} PSP-{datetime.now().strftime('%Y%m%d%H%M%S')}"
-            )
+            current_timestamp = f"PSP-{datetime.now().strftime('%Y-%m-%d_%H:%M')}"
+
+            if match := re.search(
+                r"(.*?)\s*PSP-\d{4}-\d{2}-\d{2}_\d{2}:\d{2}\s*$", world_name
+            ):
+                base_name = match.group(1).strip()
+                world_name = f"{base_name} {current_timestamp}"
+            else:
+                world_name = f"{world_name.strip()} {current_timestamp}"
+
             level_meta.properties["SaveData"]["value"]["WorldName"][
                 "value"
             ] = world_name
             file.data = SaveFile().sav(level_meta)
-        new_files.append(ContainerFile(file.name, new_file_uuid, file.data))
+
+        file_name = clean_file_name(file.name)
+        new_files.append(ContainerFile(file_name, new_file_uuid, file.data))
 
         file_path = os.path.join(
             new_container_dir, new_file_uuid.bytes_le.hex().upper()
         )
         with open(file_path, "wb") as f:
             f.write(file.data)
-        logger.info("Created new file UUID: %s", new_file_uuid)
+        logger.debug("Created new file: %s", file_path)
 
     # Now create the new container.1
     container_file = os.path.join(new_container_dir, "container.1")
@@ -214,7 +250,7 @@ def copy_container(
             f.write(name_bytes + name_padding)
             f.write(b"\0" * 16)
             f.write(file.uuid.bytes)
-            logger.debug("Wrote new file UUID: %s", file.uuid)
+    logger.debug("Created new container file: %s", container_file)
 
     new_container = Container(
         container_name=new_container_name,
@@ -226,63 +262,42 @@ def copy_container(
         size=sum(len(f.data) for f in new_files),
     )
 
-    logger.info("Copied container with UUID: %s", source_container.container_uuid)
+    logger.debug(
+        "Copied container: %s => %s",
+        new_container_name,
+        source_container.container_uuid,
+    )
     return new_container
 
 
 def save_modified_gamepass(
+    container_index: ContainerIndex,
     container_path: str,
-    save_name: str,
+    save_id: str,
     modified_level_data: bytes,
     original_containers: Dict[str, Container],
 ) -> None:
-    """
-    Save modified gamepass save: create a new container for the Level,
-    then copy other containers (LevelMeta, LocalData, etc.) so the new
-    containers all have file paths as well.
-    """
-    logger.info("Saving modified gamepass save: %s", save_name)
-
-    # Read existing container index
-    container_index = read_container_index(container_path)
+    logger.info("Saving modified gamepass save: %s", save_id)
 
     # Create new container for modified Level.sav
     new_level_container = create_new_container(
-        container_path, save_name, modified_level_data
+        container_path, save_id, modified_level_data
     )
     container_index.containers.append(new_level_container)
 
     # Copy other containers
-    for suffix, original_container in original_containers.items():
-        if suffix == "Level" or suffix.isdigit():
+    for key, original_container in original_containers.items():
+        if key == "Level":
             continue
         logger.debug("Copying container: %s", original_container.container_name)
         new_container = copy_container(
-            original_container, container_path, container_path, save_name, suffix
+            original_container, container_path, container_path, save_id, key
         )
         container_index.containers.append(new_container)
-
-        # (Similarly, you can read its container.1 and set .file)
 
     # Update container index timestamp
     container_index.mtime = FILETIME.from_timestamp(datetime.now().timestamp())
 
     # Write updated container index
     container_index.write_file(container_path)
-    logger.info("Successfully saved modified gamepass save: %s", save_name)
-
-
-def get_save_containers(
-    container_index: ContainerIndex, save_name: str
-) -> Dict[str, Container]:
-    """Get all containers for a specific save"""
-    containers = {}
-    for container in container_index.containers:
-        if container.container_name.startswith(f"{save_name}-"):
-            suffix = container.container_name.split("-")[-1]
-            if not container.container_name.startswith(f"{save_name}-Players-"):
-                containers[suffix] = container
-            else:
-                player_id = container.container_name.split("-")[-1]
-                containers[f"Players-{player_id}"] = container
-    return containers
+    logger.info("Successfully saved modified gamepass save: %s", save_id)

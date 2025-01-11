@@ -1,13 +1,18 @@
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timezone
 import os
 from pathlib import Path
-import struct
-from typing import Dict, List, Optional
+from typing import Dict, Optional
 import uuid
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict
 import webview
 from palworld_save_pal.game.pal_objects import PalObjects
 from palworld_save_pal.game.save_file import SaveFile
+from palworld_save_pal.utils.gamepass.container_types import (
+    Container,
+    ContainerFileList,
+    ContainerIndex,
+)
+from palworld_save_pal.utils.gamepass.container_utils import read_container_index
 from palworld_save_pal.utils.logging_config import create_logger
 
 logger = create_logger(__name__)
@@ -27,19 +32,10 @@ GAMEPASS_ROOT = os.path.join(
 )
 
 
-class GamepassContainer(BaseModel):
-    container_dir: Path
-    container_file: Path
-    file: Optional[Path]
-    guid: str
-    name: str
-
-
 class GamepassSaveData(BaseModel):
     save_id: str
     world_name: str
     player_count: int
-    containers: List[GamepassContainer] = Field(default_factory=list)
 
 
 class FileValidationResult(BaseModel):
@@ -132,141 +128,94 @@ class FileManager:
         players_path = Path(players_dir)
 
         for save_file in players_path.glob("*.sav"):
-            player_id = save_file.stem
-            player_uuid = uuid.UUID(player_id)
-            with open(save_file, "rb") as f:
-                player_saves[player_uuid] = f.read()
+            try:
+                player_id = save_file.stem
+                logger.debug("Reading player save: %s, uuid: %s", save_file, player_id)
+                player_uuid = uuid.UUID(player_id)
+                with open(save_file, "rb") as f:
+                    player_saves[player_uuid] = f.read()
+            except:
+                logger.error("Failed to read player save: %s", save_file, exc_info=True)
+                continue
 
         return player_saves
 
     @staticmethod
-    def read_utf16_str(f, str_len: Optional[int] = None) -> str:
-        if not str_len:
-            str_len = struct.unpack("<i", f.read(4))[0]
-        return f.read(str_len * 2).decode("utf-16").rstrip("\0")
-
-    @staticmethod
-    def read_filetime(f) -> datetime:
-        filetime = struct.unpack("<Q", f.read(8))[0]
-        filetime_seconds = filetime / 10_000_000
-        return FILETIME_EPOCH + timedelta(seconds=filetime_seconds)
-
-    @staticmethod
-    def read_level_meta(file_path: Path) -> Optional[str]:
-        logger.debug("Reading LevelMeta.sav: %s", file_path)
-        with open(file_path, "rb") as f:
-            level_meta = SaveFile().load_level_meta(f.read())
-            world_name = PalObjects.get_nested(
-                level_meta.properties, "SaveData", "value", "WorldName", "value"
-            )
-            return world_name if world_name else "Unknown World"
-
-    @staticmethod
-    def read_gamepass_containers(containers_path: Path) -> Dict[str, GamepassContainer]:
-        containers: Dict[str, GamepassContainer] = {}
-        containers_dir = containers_path.parent
-
-        with containers_path.open("rb") as f:
-            f.read(4)  # version
-            container_count = struct.unpack("<i", f.read(4))[0]
-            FileManager.read_utf16_str(f)  # flag1
-            FileManager.read_utf16_str(f)  # package name
-            FileManager.read_filetime(f)  # mtime
-            f.read(4)  # flag2
-            FileManager.read_utf16_str(f)  # index uuid
-            f.read(8)  # unknown
-
-            for _ in range(container_count):
-                container_name = FileManager.read_utf16_str(f)
-                FileManager.read_utf16_str(f)  # container name
-                FileManager.read_utf16_str(f)  # cloud id
-
-                seq = struct.unpack("B", f.read(1))[0]
-                f.read(4)  # flag
-
-                container_guid = uuid.UUID(bytes_le=f.read(16))
-                FileManager.read_filetime(f)  # mtime
-                f.read(16)  # reserved and size
-
-                container_path = containers_dir / container_guid.hex.upper()
-                container_file = container_path / f"container.{seq}"
-
-                if container_file.exists():
-                    container_files = FileManager.read_container_files(container_file)
-                    file = container_files.get("Data")
-                    if container_guid.hex.upper() not in containers:
-                        containers[container_guid.hex.upper()] = GamepassContainer(
-                            container_dir=container_path,
-                            container_file=container_file,
-                            guid=container_guid.hex.upper(),
-                            name=container_name,
-                            file=file,
-                        )
-
-        return containers
-
-    @staticmethod
-    def read_container_files(container_path: Path) -> Dict[str, Path]:
-        logger.debug("Reading container file: %s", container_path)
-        files: Dict[str, Path] = {}
-        container_dir = container_path.parent
-
-        with container_path.open("rb") as f:
-            f.read(4)
-            file_count = int.from_bytes(f.read(4), "little")
-            for _ in range(file_count):
-                file_name = FileManager.read_utf16_str(f, 64)
-                f.read(16)
-                file_guid = uuid.UUID(bytes=f.read(16))
-
-                file_path = container_dir / file_guid.bytes_le.hex().upper()
-                if file_path.exists():
-                    files[file_name] = file_path
-        return files
+    def read_level_meta(data: bytes) -> Optional[str]:
+        level_meta = SaveFile().load_level_meta(data)
+        world_name = PalObjects.get_nested(
+            level_meta.properties, "SaveData", "value", "WorldName", "value"
+        )
+        return world_name if world_name else "Unknown World"
 
     @staticmethod
     def parse_gamepass_saves(containers_path: Path) -> Dict[str, GamepassSaveData]:
-        logger.debug("Parsing GamePass saves from containers.index")
+        logger.debug("Parsing GamePass saves using path: %s", containers_path)
         saves: Dict[str, GamepassSaveData] = {}
 
-        containers = FileManager.read_gamepass_containers(containers_path)
-        for container in containers.values():
+        container_index: ContainerIndex = read_container_index(containers_path)
+        recent_containers: Dict[str, Dict[str, Container]] = {}
 
-            # Parse save folder structure from container name
-            parts = container.name.split("-")
+        for container in container_index.containers:
+            parts = container.container_name.split("-")
             if len(parts) < 2:
                 continue
             save_id = parts[0]
-
-            if save_id not in saves:
-                saves[save_id] = GamepassSaveData(
-                    save_id=save_id, world_name="Unknown", player_count=0, containers=[]
+            if save_id not in recent_containers:
+                recent_containers[save_id] = container_index.get_save_containers(
+                    save_id
                 )
-                saves[save_id].containers.append(container)
-            else:
-                saves[save_id].containers.append(container)
 
-            if parts[-1] == "LevelMeta":
-                level_meta_path = container.file
-                world_name = "Unknown"
-                if level_meta_path and level_meta_path.exists():
-                    world_name = (
-                        FileManager.read_level_meta(level_meta_path) or world_name
-                    )
-                saves[save_id].world_name = world_name
+        for save_id, container in recent_containers.items():
+            level_meta_container = container.get("LevelMeta", None)
+            if level_meta_container is None:
+                continue
 
-            if parts[-2] == "Players":
-                if "player_count" not in container:
-                    saves[save_id].player_count = 0
-                saves[save_id].player_count += 1
+            level_meta_dir = os.path.join(
+                containers_path,
+                level_meta_container.container_uuid.bytes_le.hex().upper(),
+            )
+            logger.debug("Reading container files from: %s", level_meta_dir)
+            world_name = "Unknown World"
+
+            valid = False
+            for filename in os.listdir(level_meta_dir):
+                if filename.startswith("container."):
+                    logger.debug("Reading container file: %s", filename)
+                    with open(os.path.join(level_meta_dir, filename), "rb") as f:
+                        file_list = ContainerFileList.from_stream(f)
+                        if len(file_list.files) > 0:
+                            valid = True
+                            world_name = FileManager.read_level_meta(
+                                file_list.files[0].data
+                            )
+                    break
+
+            if not valid:
+                continue
+
+            player_count = len(
+                [c for c in container.values() if "Player" in c.container_name]
+            )
+            logger.debug(
+                "Found save: %s with world name: %s and %s players",
+                save_id,
+                world_name,
+                player_count,
+            )
+            saves[save_id] = GamepassSaveData(
+                save_id=save_id,
+                world_name=world_name,
+                player_count=player_count,
+            )
 
         return saves
 
     @staticmethod
     def validate_gamepass_directory(file_path: str) -> FileValidationResult:
         logger.debug("Validating GamePass save directory: %s", file_path)
-        save_dir = Path(os.path.dirname(file_path))
-        containers_index = save_dir / "containers.index"
+        containers_path = Path(os.path.dirname(file_path))
+        containers_index = containers_path / "containers.index"
 
         if not containers_index.exists():
             return FileValidationResult(
@@ -274,7 +223,7 @@ class FileManager:
                 error="containers.index file not found in the selected directory.",
             )
 
-        saves = FileManager.parse_gamepass_saves(containers_index)
+        saves = FileManager.parse_gamepass_saves(containers_path)
         if not saves:
             return FileValidationResult(
                 valid=False,
