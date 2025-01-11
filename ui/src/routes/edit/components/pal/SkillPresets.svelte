@@ -229,7 +229,7 @@
 												</span>
 												<img
 													src={icon}
-													alt={skillObj.details.rank}
+													alt={skillObj.details.rank.toString()}
 													class="h-4 w-4"
 													style="filter: {getPassiveSkillIconFilter(skill)};"
 												/>
