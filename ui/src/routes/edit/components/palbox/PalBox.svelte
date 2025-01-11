@@ -342,7 +342,7 @@
 		}
 	}
 
-	async function handleAddPal(index: number | undefined = undefined) {
+	async function handleAddPal(target: 'party' | 'palbox', index: number | undefined = undefined) {
 		if (!appState.selectedPlayer) return;
 		// @ts-ignore
 		const result = await modal.showModal<[string, string] | undefined>(PalSelectModal, {
@@ -351,15 +351,17 @@
 		if (!result) return;
 		const [selectedPal, nickname] = result;
 		const palData = palsData.pals[selectedPal];
+		const containerId =
+			target === 'party'
+				? appState.selectedPlayer.otomo_container_id
+				: appState.selectedPlayer.pal_box_id;
 		const message = {
 			type: MessageType.ADD_PAL,
 			data: {
 				player_id: appState.selectedPlayer.uid,
 				character_id: selectedPal,
-				nickname: nickname || palData?.localized_name,
-				container_id: index
-					? appState.selectedPlayer.pal_box_id
-					: appState.selectedPlayer.otomo_container_id,
+				nickname: nickname || palData?.localized_name || selectedPal,
+				container_id: containerId,
 				storage_slot: index
 			}
 		};
@@ -570,7 +572,10 @@
 		<div class="flex-shrink-0 p-4">
 			<div class="btn-group bg-surface-900 mb-2 items-center rounded p-1">
 				<Tooltip position="right">
-					<button class="btn hover:preset-tonal-secondary p-2" onclick={() => handleAddPal()}>
+					<button
+						class="btn hover:preset-tonal-secondary p-2"
+						onclick={() => handleAddPal('palbox')}
+					>
 						<Plus />
 					</button>
 					{#snippet popup()}
@@ -788,14 +793,14 @@
 				<Card rounded="rounded-none" class="w-full p-4">
 					<div class="flex flex-col space-y-2">
 						<h6 class="h6 mr-4">Party</h6>
-						{#each Object.values(otomoContainer) as pal}
+						{#each Object.values(otomoContainer) as pal, index}
 							<PalCard
 								bind:pal={otomoContainer[pal.instance_id]}
 								bind:selected={selectedPals}
 								onSelect={handlePalSelect}
 								onMove={() => handleMoveToPalbox(pal)}
 								onDelete={() => handleDeletePal(pal)}
-								onAdd={() => handleAddPal()}
+								onAdd={() => handleAddPal('party', index + 1)}
 								onClone={() => clonePal(pal)}
 							/>
 						{/each}
@@ -840,7 +845,7 @@
 								onSelect={handlePalSelect}
 								onMove={() => handleMoveToParty(item.pal)}
 								onDelete={() => handleDeletePal(item.pal)}
-								onAdd={() => handleAddPal(item.pal.storage_slot)}
+								onAdd={() => handleAddPal('palbox', item.pal.storage_slot)}
 								onClone={() => clonePal(item.pal)}
 							/>
 						{/if}
