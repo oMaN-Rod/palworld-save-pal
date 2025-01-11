@@ -77,4 +77,4 @@ ENV/
 
 backups/
 debug/
-settings.json
+data/json/settings.json
