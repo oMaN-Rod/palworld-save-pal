@@ -26,7 +26,8 @@
 		return Object.values(itemsData.items).filter((item) => {
 			if (
 				item.details.type_a == ItemTypeA.None ||
-				item.details.type_a == ItemTypeA.MonsterEquipWeapon
+				item.details.type_a == ItemTypeA.MonsterEquipWeapon ||
+				item.details.disabled
 			) {
 				return false;
 			}

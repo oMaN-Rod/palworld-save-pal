@@ -2973,7 +2973,7 @@
   },
   "Gunpowder": {
     "localized_name": "Gunpowder",
-    "description": "Gunpowder"
+    "description": "Gunpowder used to fire ammunition. Required to make bullets."
   },
   "Gunpowder2": {
     "localized_name": "Gunpowder",

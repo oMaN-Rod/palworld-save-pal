@@ -8953,7 +8953,7 @@
     "sort_id": 4001,
     "corruption_factor": 0.16666667,
     "disabled": false,
-    "icon": "CashScales",
+    "icon": "Curry",
     "effect": {
       "duration": 600,
       "modifiers": [
@@ -8976,7 +8976,7 @@
     "price": 50,
     "sort_id": 9999,
     "corruption_factor": 0.027777778,
-    "disabled": false
+    "disabled": true
   },
   "DecalGun_1": {
     "group": "Weapon",
@@ -11328,7 +11328,7 @@
     "weight": 0.2,
     "price": 10,
     "sort_id": 9999,
-    "disabled": false,
+    "disabled": true,
     "icon": "Gunpowder"
   },
   "Gunpowder2": {
@@ -11342,7 +11342,7 @@
     "price": 220,
     "sort_id": 5403,
     "disabled": false,
-    "icon": "Gunpowder_1"
+    "icon": "Gunpowder_2"
   },
   "Gyoza": {
     "group": "Food",

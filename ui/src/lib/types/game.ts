@@ -261,6 +261,7 @@ export interface ItemDetails {
 	sort_id: number;
 	damage?: number;
 	dynamic?: DynamicItemDetails;
+	disabled?: boolean;
 }
 
 export interface ItemInfo {
