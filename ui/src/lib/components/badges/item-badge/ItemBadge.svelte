@@ -37,6 +37,11 @@
 			case 'potato':
 				key = 'Potato';
 				break;
+			case 'GunPowder':
+				key = 'Gunpowder';
+				break;
+			case 'GunPowder2':
+				key = 'Gunpowder2';
 		}
 		return itemsData.items[key];
 	});
