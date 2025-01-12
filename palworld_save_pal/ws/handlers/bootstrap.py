@@ -31,6 +31,7 @@ from palworld_save_pal.ws.messages import (
     MessageType,
     MovePalMessage,
     OpenInBrowserMessage,
+    SelectGamepassSaveMessage,
     SyncAppStateMessage,
     UpdateSaveFileMessage,
     DownloadSaveFileMessage,
@@ -230,6 +231,14 @@ def bootstrap(dispatcher: "MessageDispatcher"):
         {
             "message_class": BaseMessage,
             "handler_func": local_file_handler.save_modded_save_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.SELECT_GAMEPASS_SAVE.value,
+        {
+            "message_class": SelectGamepassSaveMessage,
+            "handler_func": local_file_handler.select_gamepass_save_handler,
         },
     )
 

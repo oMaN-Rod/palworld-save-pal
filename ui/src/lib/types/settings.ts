@@ -22,3 +22,10 @@ export const languages: Record<SupportedLanguage, string> = {
 	'zh-Hans': '简体中文',
 	'zh-Hant': '繁體中文'
 };
+
+export interface AppSettings {
+	language: SupportedLanguage;
+	save_dir?: string;
+	clone_prefix?: string;
+	new_pal_prefix?: string;
+}

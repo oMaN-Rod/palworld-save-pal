@@ -235,8 +235,7 @@ class PalObjects:
                 else PalObjects.get_nested(d[keys[0]], *keys[1:], default=default)
             )
         except (KeyError, TypeError, IndexError):
-            if "remaining_bullets" not in keys:
-                logger.warning("Key not found: %s not in %s", keys, d)
+            logger.warning("Key(s) not found: %s", keys)
             return default
 
     @staticmethod
@@ -535,7 +534,7 @@ class PalObjects:
 
     @staticmethod
     def PalSaveParameter(
-        code_name: str,
+        character_id: str,
         instance_id: UUID | str,
         owner_uid: UUID | str,
         container_id: UUID | str,
@@ -546,7 +545,7 @@ class PalObjects:
         passive_skills: List[str] = None,
         work_suitability_data: Dict[str, int] = None,
     ):
-        nickname = nickname or f"[New] {code_name}"
+        nickname = nickname or character_id
         active_skills = active_skills or []
         passive_skills = passive_skills or []
 
@@ -579,7 +578,9 @@ class PalObjects:
                                 "struct_id": PalObjects.EMPTY_UUID,
                                 "id": None,
                                 "value": {
-                                    "CharacterID": PalObjects.NameProperty(code_name),
+                                    "CharacterID": PalObjects.NameProperty(
+                                        character_id
+                                    ),
                                     "Gender": PalObjects.EnumProperty(
                                         "EPalGenderType", PalGender.FEMALE.prefixed()
                                     ),

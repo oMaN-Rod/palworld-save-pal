@@ -9,15 +9,13 @@ const appState = getAppState();
 export const getPlayersHandler: WSMessageHandler = {
 	type: MessageType.GET_PLAYERS,
 	async handle(data: Record<string, Player>, { goto }) {
-		console.log('Players loaded', data);
-
 		const processedPlayers = await Promise.all(
 			Object.entries(data).map(async ([key, player]) => {
 				try {
 					if (player.pals) {
 						await Promise.all(
 							Object.values(player.pals).map(async (pal) => {
-								const palInfo = await palsData.getPalInfo(pal.character_id);
+								const palInfo = palsData.pals[pal.character_key];
 								if (!palInfo) {
 									console.error(`Failed to find pal info for`, JSON.parse(JSON.stringify(pal)));
 								}
@@ -36,7 +34,6 @@ export const getPlayersHandler: WSMessageHandler = {
 		appState.players = Object.fromEntries(
 			processedPlayers.filter((entry): entry is [string, Player] => entry !== null)
 		);
-
 		await goto('/edit');
 	}
 };

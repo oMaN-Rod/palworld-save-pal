@@ -1,8 +1,7 @@
-// src/lib/states/websocketState.svelte.ts
 import { PUBLIC_WS_URL } from '$env/static/public';
 import { getDispatcher } from '$lib/ws/dispatcher';
 import type { WSHandlerContext } from '$lib/ws/types';
-import { MessageType, type Message } from '$types';
+import { type Message } from '$types';
 
 const RECONNECT_DELAY = 5000;
 
@@ -21,8 +20,6 @@ export function createSocketState() {
 
 		websocket.onopen = () => {
 			connected = true;
-			websocket.send(JSON.stringify({ type: MessageType.SYNC_APP_STATE }));
-			websocket.send(JSON.stringify({ type: MessageType.GET_VERSION }));
 			console.log('Connected to backend!');
 		};
 
@@ -54,6 +51,7 @@ export function createSocketState() {
 		while (websocket.readyState !== websocket.OPEN) {
 			await new Promise((resolve) => setTimeout(resolve, 250));
 		}
+		console.log(`Sending message: ${messageData}`);
 		websocket.send(messageData);
 	}
 

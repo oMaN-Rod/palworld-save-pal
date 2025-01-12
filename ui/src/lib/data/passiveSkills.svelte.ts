@@ -1,4 +1,4 @@
-import { getSocketState } from '$states/websocketState.svelte';
+import { getSocketState } from '$states';
 import { MessageType, type PassiveSkill } from '$types';
 
 export class PassiveSkills {
@@ -20,6 +20,7 @@ export class PassiveSkills {
 				this.passiveSkills = response.data;
 				this.loading = false;
 			} catch (error) {
+				this.loading = false;
 				console.error('Error fetching passive skills:', error);
 				throw error;
 			}

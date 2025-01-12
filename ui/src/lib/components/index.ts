@@ -7,9 +7,11 @@ import PlayerHealthBadge from './badges/player-health-badge/PlayerHealthBadge.sv
 import StatsBadges from './badges/stats-badges/StatsBadges.svelte';
 import WorkSuitabilities from './badges/work-suitabilities/WorkSuitabilities.svelte';
 import Drawer from './drawer/Drawer.svelte';
+import GamepassSaveList from './gamepass-save-list/GamepassSaveList.svelte';
 import Modal from './modal/Modal.svelte';
 import NavBar from './nav-bar/NavBar.svelte';
-import PalList from './pal-list/PalList.svelte';
+import PalCard from './pal-card/PalCard.svelte';
+import PalHeader from './pal-header/PalHeader.svelte';
 import PlayerList from './player-list/PlayerList.svelte';
 import PlayerPresets from './player-presets/PlayerPresets.svelte';
 import PlayerStats from './player-stats/PlayerStats.svelte';
@@ -22,12 +24,14 @@ export * from './modals';
 export {
 	ActiveSkillBadge,
 	Drawer,
+	GamepassSaveList,
 	HealthBadge,
 	ItemBadge,
 	Modal,
 	NavBar,
 	PalBadge,
-	PalList,
+	PalCard,
+	PalHeader,
 	PassiveSkillBadge,
 	PlayerHealthBadge,
 	PlayerList,

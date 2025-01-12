@@ -5012,7 +5012,7 @@
     "name": "Grass",
     "type": "active_skills",
     "skills": [
-      "EPalWazaID::Unique_SelfDestruct_Bee",
+      "EPalWazaID::RootAttack",
       "EPalWazaID::SolarBeam",
       "EPalWazaID::RootLance"
     ]

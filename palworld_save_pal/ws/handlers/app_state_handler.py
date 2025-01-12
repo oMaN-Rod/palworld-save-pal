@@ -18,23 +18,15 @@ async def sync_app_state_handler(_: SyncAppStateMessage, ws: WebSocket):
         logger.warning("No save file loaded")
         return
 
-    if app_state.local:
-        data = {
-            "sav_file_name": save_file.name,
-            "players": [str(p) for p in (save_file.get_players()).keys()],
-            "world_name": save_file.world_name,
-        }
-    else:
-        data = {
-            "name": save_file.name,
-            "size": save_file.size,
-            "world_name": save_file.world_name,
-        }
+    data = {
+        "level": save_file.name,
+        "players": [str(p) for p in (save_file.get_players()).keys()],
+        "world_name": save_file.world_name,
+        "type": app_state.save_type.name.lower(),
+        "size": save_file.size,
+    }
 
-    message_type = (
-        MessageType.LOADED_SAVE_FILES if app_state.local else MessageType.LOAD_ZIP_FILE
-    )
-    response = build_response(message_type, data)
+    response = build_response(MessageType.LOADED_SAVE_FILES, data)
     await ws.send_json(response)
 
     response = build_response(MessageType.GET_PLAYERS, save_file.get_players())

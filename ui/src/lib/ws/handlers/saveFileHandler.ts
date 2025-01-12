@@ -16,10 +16,10 @@ export const noFileSelectedHandler: WSMessageHandler = {
 export const loadedSaveFilesHandler: WSMessageHandler = {
 	type: MessageType.LOADED_SAVE_FILES,
 	async handle(data) {
-		const { sav_file_name, players, world_name } = data;
-		console.log('Loaded save files', sav_file_name, players);
+		const { level, players, world_name, size, type } = data;
+		console.log('Loaded save files', level, players);
 		appState.resetState();
-		appState.saveFile = { name: sav_file_name, world_name };
+		appState.saveFile = { name: level, world_name, type };
 		appState.playerSaveFiles = players.map((p: any) => ({ name: p }));
 	}
 };
@@ -30,17 +30,6 @@ export const saveModdedSaveHandler: WSMessageHandler = {
 		const toast = getToastState();
 		toast.add(data, 'Saved!', 'success');
 		await goto('/file');
-	}
-};
-
-export const loadZipFileHandler: WSMessageHandler = {
-	type: MessageType.LOAD_ZIP_FILE,
-	async handle(data, { goto }) {
-		const file = data as { name: string; size: number };
-
-		appState.resetState();
-		appState.saveFile = file;
-		await goto('/edit');
 	}
 };
 
@@ -75,11 +64,20 @@ export const updateSaveFileHandler: WSMessageHandler = {
 	}
 };
 
+export const selectGamepassSaveHandler: WSMessageHandler = {
+	type: MessageType.SELECT_GAMEPASS_SAVE,
+	async handle(data, { goto }) {
+		appState.resetState();
+		appState.gamepassSaves = data;
+		await goto('/file');
+	}
+};
+
 export const saveFileHandlers = [
 	loadedSaveFilesHandler,
 	saveModdedSaveHandler,
-	loadZipFileHandler,
 	downloadSaveFileHandler,
 	updateSaveFileHandler,
-	noFileSelectedHandler
+	noFileSelectedHandler,
+	selectGamepassSaveHandler
 ];

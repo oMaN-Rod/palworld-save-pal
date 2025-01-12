@@ -6,8 +6,10 @@ build_exe_options = {
     "include_files": [
         ("ui_build", "ui"),
         ("data", "data"),
+        ("debug.bat", "debug.bat"),
     ],
     "packages": ["uvicorn", "fastapi", "webview", "palworld_save_tools", "websockets"],
+    "replace_paths": [("*", "")],
 }
 
 base = "Win32GUI" if sys.platform == "win32" else None

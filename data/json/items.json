@@ -8953,7 +8953,7 @@
     "sort_id": 4001,
     "corruption_factor": 0.16666667,
     "disabled": false,
-    "icon": "CashScales",
+    "icon": "Curry",
     "effect": {
       "duration": 600,
       "modifiers": [
@@ -8976,7 +8976,7 @@
     "price": 50,
     "sort_id": 9999,
     "corruption_factor": 0.027777778,
-    "disabled": false
+    "disabled": true
   },
   "DecalGun_1": {
     "group": "Weapon",
@@ -11328,7 +11328,7 @@
     "weight": 0.2,
     "price": 10,
     "sort_id": 9999,
-    "disabled": false,
+    "disabled": true,
     "icon": "Gunpowder"
   },
   "Gunpowder2": {
@@ -11342,7 +11342,7 @@
     "price": 220,
     "sort_id": 5403,
     "disabled": false,
-    "icon": "Gunpowder_1"
+    "icon": "Gunpowder_2"
   },
   "Gyoza": {
     "group": "Food",
@@ -23020,9 +23020,9 @@
     "icon": "Homing_Sphere_Launcher"
   },
   "SphereModule_Curve": {
-    "group": "None",
-    "type_a": "None",
-    "type_b": "NONE",
+    "group": "SphereModule",
+    "type_a": "SphereModule",
+    "type_b": "SphereModule",
     "rank": 1,
     "rarity": 2,
     "max_stack_count": 1,
@@ -23040,9 +23040,9 @@
     "icon": "T_itemicon_SphereModule_Curve"
   },
   "SphereModule_Curve2": {
-    "group": "None",
-    "type_a": "None",
-    "type_b": "NONE",
+    "group": "SphereModule",
+    "type_a": "SphereModule",
+    "type_b": "SphereModule",
     "rank": 1,
     "rarity": 3,
     "max_stack_count": 1,
@@ -23060,9 +23060,9 @@
     "icon": "T_itemicon_SphereModule_Curve2"
   },
   "SphereModule_Heavy": {
-    "group": "None",
-    "type_a": "None",
-    "type_b": "NONE",
+    "group": "SphereModule",
+    "type_a": "SphereModule",
+    "type_b": "SphereModule",
     "rank": 1,
     "rarity": 1,
     "max_stack_count": 1,
@@ -23080,9 +23080,9 @@
     "icon": "T_itemicon_SphereModule_Heavy"
   },
   "SphereModule_Homing": {
-    "group": "None",
-    "type_a": "None",
-    "type_b": "NONE",
+    "group": "SphereModule",
+    "type_a": "SphereModule",
+    "type_b": "SphereModule",
     "rank": 1,
     "rarity": 4,
     "max_stack_count": 1,
@@ -23100,9 +23100,9 @@
     "icon": "T_itemicon_SphereModule_Homing"
   },
   "SphereModule_Sniper": {
-    "group": "None",
-    "type_a": "None",
-    "type_b": "NONE",
+    "group": "SphereModule",
+    "type_a": "SphereModule",
+    "type_b": "SphereModule",
     "rank": 1,
     "rarity": 3,
     "max_stack_count": 1,
@@ -23120,9 +23120,9 @@
     "icon": "T_itemicon_SphereModule_Spiper"
   },
   "SphereModule_Sniper2": {
-    "group": "None",
-    "type_a": "None",
-    "type_b": "NONE",
+    "group": "SphereModule",
+    "type_a": "SphereModule",
+    "type_b": "SphereModule",
     "rank": 1,
     "rarity": 4,
     "max_stack_count": 1,

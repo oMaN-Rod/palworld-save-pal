@@ -26,7 +26,8 @@
 		return Object.values(itemsData.items).filter((item) => {
 			if (
 				item.details.type_a == ItemTypeA.None ||
-				item.details.type_a == ItemTypeA.MonsterEquipWeapon
+				item.details.type_a == ItemTypeA.MonsterEquipWeapon ||
+				item.details.disabled
 			) {
 				return false;
 			}
@@ -47,6 +48,8 @@
 					return item.details.group == 'Weapon';
 				case 'KeyItem':
 					return item.details.group == 'KeyItem';
+				case 'SphereModule':
+					return item.details.group == 'SphereModule';
 				case 'Common':
 					return item.details.group != 'KeyItem';
 				default:

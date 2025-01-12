@@ -1,7 +1,7 @@
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Union
 from uuid import UUID
 import uuid
-from pydantic import BaseModel, Field, PrivateAttr
+from pydantic import BaseModel, Field, PrivateAttr, computed_field
 
 from palworld_save_tools.gvas import GvasFile
 
@@ -9,8 +9,8 @@ from palworld_save_pal.game.character_container import (
     CharacterContainer,
     CharacterContainerType,
 )
-from palworld_save_pal.game.guild import Guild
-from palworld_save_pal.game.pal import Pal
+from palworld_save_pal.game.guild import Guild, GuildDTO
+from palworld_save_pal.game.pal import Pal, PalDTO
 from palworld_save_pal.game.item_container import ItemContainer, ItemContainerType
 from palworld_save_pal.game.pal_objects import PalObjects
 from palworld_save_pal.utils.uuid import are_equal_uuids
@@ -19,7 +19,7 @@ from palworld_save_pal.utils.logging_config import create_logger
 logger = create_logger(__name__)
 
 
-class Player(BaseModel):
+class PlayerDTO(BaseModel):
     uid: UUID
     nickname: str
     level: int
@@ -30,22 +30,46 @@ class Player(BaseModel):
     status_point_list: Dict[str, int] = Field(default_factory=dict)
     ext_status_point_list: Dict[str, int] = Field(default_factory=dict)
     instance_id: Optional[UUID] = Field(default=None)
-    guild: Optional[Guild] = Field(default=None)
-
-    pals: Optional[Dict[UUID, Pal]] = Field(default_factory=dict)
+    guild: Optional[GuildDTO] = Field(default=None)
     pal_box_id: Optional[UUID] = Field(default=None)
     otomo_container_id: Optional[UUID] = Field(default=None)
-
     common_container: Optional[ItemContainer] = Field(default=None)
     essential_container: Optional[ItemContainer] = Field(default=None)
     weapon_load_out_container: Optional[ItemContainer] = Field(default=None)
     player_equipment_armor_container: Optional[ItemContainer] = Field(default=None)
     food_equip_container: Optional[ItemContainer] = Field(default=None)
 
-    _pal_box: Optional[CharacterContainer] = PrivateAttr(default=None)
-    _party: Optional[CharacterContainer] = PrivateAttr(default=None)
-    _player_gvas_file: Optional[GvasFile] = PrivateAttr(default=None)
-    _character_save_parameter: Optional[Dict[str, Any]] = PrivateAttr(default=None)
+
+class Player(BaseModel):
+    _uid: UUID
+    _nickname: str
+    _level: int
+    _exp: int
+    _hp: int
+    _stomach: float
+    _sanity: float
+    _status_point_list: Dict[str, int]
+    _ext_status_point_list: Dict[str, int]
+    _instance_id: UUID
+    _pal_box_id: UUID
+    _otomo_container_id: UUID
+
+    guild: Optional[Guild] = Field(default=None)
+    pals: Optional[Dict[UUID, Pal]] = Field(default_factory=dict)
+    common_container: Optional[ItemContainer] = Field(default=None)
+    essential_container: Optional[ItemContainer] = Field(default=None)
+    weapon_load_out_container: Optional[ItemContainer] = Field(default=None)
+    player_equipment_armor_container: Optional[ItemContainer] = Field(default=None)
+    food_equip_container: Optional[ItemContainer] = Field(default=None)
+
+    _pal_box: CharacterContainer
+    _party: CharacterContainer
+    _player_gvas_file: GvasFile
+    _save_data: Dict[str, Any]
+    _inventory_info: Dict[str, Any]
+    _dynamic_item_save_data: Dict[str, Any]
+    _character_save: Dict[str, Any]
+    _save_parameter: Dict[str, Any]
 
     def __init__(
         self,
@@ -64,26 +88,231 @@ class Player(BaseModel):
             and character_container_save_data is not None
             and character_save_parameter is not None
         ):
-            self._character_save_parameter = character_save_parameter
+            self._character_save = character_save_parameter
+            self._save_parameter = PalObjects.get_nested(
+                self._character_save,
+                "value",
+                "RawData",
+                "value",
+                "object",
+                "SaveParameter",
+                "value",
+            )
             self._player_gvas_file = gvas_file
-            self._load_player_data()
+            self._save_data = PalObjects.get_value(
+                self._player_gvas_file.properties["SaveData"]
+            )
             self._load_inventory(item_container_save_data, dynamic_item_save_data)
             self._load_pal_box(character_container_save_data)
             self._load_otomo_container(character_container_save_data)
 
-    def add_pal(self, pal_code_name: str, nickname: str, container_id: UUID):
+    @computed_field
+    def uid(self) -> UUID:
+        self._uid = PalObjects.get_guid(self._character_save["key"]["PlayerUId"])
+        return self._uid
+
+    @computed_field
+    def instance_id(self) -> Optional[UUID]:
+        self._instance_id = PalObjects.get_guid(
+            self._character_save["key"]["InstanceId"]
+        )
+        return self._instance_id
+
+    @computed_field
+    def nickname(self) -> str:
+        self._nickname = PalObjects.get_value(self._save_parameter["NickName"])
+        return self._nickname
+
+    @nickname.setter
+    def nickname(self, value: str):
+        self._nickname = value
+        PalObjects.set_value(self._save_parameter["NickName"], value=value)
+
+    @computed_field
+    def level(self) -> int:
+        self._level = (
+            PalObjects.get_byte_property(self._save_parameter["Level"])
+            if "Level" in self._save_parameter
+            else 1
+        )
+        return self._level
+
+    @level.setter
+    def level(self, value: int):
+        self._level = value
+        if "Level" in self._save_parameter:
+            PalObjects.set_byte_property(self._save_parameter["Level"], value=value)
+        else:
+            self._save_parameter["Level"] = PalObjects.ByteProperty(value)
+
+    @computed_field
+    def exp(self) -> int:
+        self._exp = (
+            PalObjects.get_value(self._save_parameter["Exp"])
+            if "Exp" in self._save_parameter
+            else 0
+        )
+        return self._exp
+
+    @exp.setter
+    def exp(self, value: int):
+        self._exp = value
+        if "Exp" in self._save_parameter:
+            PalObjects.set_value(self._save_parameter["Exp"], value=value)
+        else:
+            self._save_parameter["Exp"] = PalObjects.Int64Property(value)
+
+    @computed_field
+    def hp(self) -> int:
+        if "HP" in self._save_parameter:
+            self._save_parameter["Hp"] = self._save_parameter.pop("HP")
+        if "Hp" in self._save_parameter:
+            self._hp = PalObjects.get_fixed_point64(self._save_parameter["Hp"])
+        else:
+            self._hp = 0
+        return self._hp
+
+    @hp.setter
+    def hp(self, value: int):
+        self._hp = value
+        if "Hp" in self._save_parameter:
+            PalObjects.set_fixed_point64(self._save_parameter["Hp"], value=value)
+        else:
+            self._save_parameter["Hp"] = PalObjects.FixedPoint64(value)
+
+    @computed_field
+    def stomach(self) -> float:
+        self._stomach = (
+            PalObjects.get_value(self._save_parameter["FullStomach"])
+            if "FullStomach" in self._save_parameter
+            else 150.0
+        )
+        return self._stomach
+
+    @stomach.setter
+    def stomach(self, value: float):
+        self._stomach = value
+        if "FullStomach" in self._save_parameter:
+            PalObjects.set_value(self._save_parameter["FullStomach"], value=value)
+        else:
+            self._save_parameter["FullStomach"] = PalObjects.FloatProperty(value)
+
+    @computed_field
+    def sanity(self) -> float:
+        self._sanity = (
+            PalObjects.get_value(self._save_parameter["SanityValue"], 100.0)
+            if "SanityValue" in self._save_parameter
+            else 100.0
+        )
+        return self._sanity
+
+    @sanity.setter
+    def sanity(self, value: float):
+        self._sanity = value
+        if "SanityValue" in self._save_parameter:
+            PalObjects.set_value(self._save_parameter["SanityValue"], value=value)
+        else:
+            self._save_parameter["SanityValue"] = PalObjects.FloatProperty(value)
+
+    @computed_field
+    def status_point_list(self) -> Dict[str, int]:
+        status_point_list = PalObjects.get_array_property(
+            self._save_parameter["GotStatusPointList"]
+        )
+        self._status_point_list = {
+            PalObjects.StatusNameMap[
+                PalObjects.get_value(item["StatusName"])
+            ]: PalObjects.get_value(item["StatusPoint"])
+            for item in status_point_list
+        }
+        return self._status_point_list
+
+    @status_point_list.setter
+    def status_point_list(self, value: Dict[str, int]):
+        self._status_point_list = value
+        status_point_list = PalObjects.get_array_property(
+            self._save_parameter["GotStatusPointList"]
+        )
+        reverse_status_map = {v: k for k, v in PalObjects.StatusNameMap.items()}
+        for status_name, point_value in self._status_point_list.items():
+            japanese_name = reverse_status_map[status_name]
+            for item in status_point_list:
+                if PalObjects.get_value(item["StatusName"]) == japanese_name:
+                    PalObjects.set_value(item["StatusPoint"], point_value)
+                    break
+
+    @computed_field
+    def ext_status_point_list(self) -> Dict[str, int]:
+        ext_status_point_list = PalObjects.get_array_property(
+            self._save_parameter["GotExStatusPointList"]
+        )
+        self._ext_status_point_list = {
+            PalObjects.ExStatusNameMap[
+                PalObjects.get_value(item["StatusName"])
+            ]: PalObjects.get_value(item["StatusPoint"])
+            for item in ext_status_point_list
+        }
+        return self._ext_status_point_list
+
+    @ext_status_point_list.setter
+    def ext_status_point_list(self, value: Dict[str, int]):
+        self._ext_status_point_list = value
+        ext_status_point_list = PalObjects.get_array_property(
+            self._save_parameter["GotExStatusPointList"]
+        )
+        reverse_ex_status_map = {v: k for k, v in PalObjects.ExStatusNameMap.items()}
+        for status_name, point_value in self._ext_status_point_list.items():
+            japanese_name = reverse_ex_status_map[status_name]
+            for item in ext_status_point_list:
+                if PalObjects.get_value(item["StatusName"]) == japanese_name:
+                    PalObjects.set_value(item["StatusPoint"], point_value)
+                    break
+
+    @computed_field
+    def pal_box_id(self) -> Optional[UUID]:
+        self._pal_box_id = PalObjects.get_guid(
+            PalObjects.get_nested(
+                self._player_gvas_file.properties["SaveData"],
+                "value",
+                "PalStorageContainerId",
+                "value",
+                "ID",
+            )
+        )
+        return self._pal_box_id
+
+    @computed_field
+    def otomo_container_id(self) -> Optional[UUID]:
+        self._otomo_container_id = PalObjects.get_guid(
+            PalObjects.get_nested(
+                self._player_gvas_file.properties["SaveData"],
+                "value",
+                "OtomoCharacterContainerId",
+                "value",
+                "ID",
+            )
+        )
+        return self._otomo_container_id
+
+    def add_pal(
+        self,
+        pal_code_name: str,
+        nickname: str,
+        container_id: UUID,
+        storage_slot: Union[int | None] = None,
+    ):
         new_pal_id = uuid.uuid4()
         container = (
             self._pal_box
             if are_equal_uuids(container_id, self.pal_box_id)
             else self._party
         )
-        slot_idx = container.add_pal(new_pal_id)
+        slot_idx = container.add_pal(new_pal_id, storage_slot)
         if slot_idx is None:
             return
 
         new_pal_data = PalObjects.PalSaveParameter(
-            code_name=pal_code_name,
+            character_id=pal_code_name,
             instance_id=new_pal_id,
             owner_uid=self.uid,
             container_id=container_id,
@@ -117,17 +346,18 @@ class Player(BaseModel):
         source_container.remove_pal(pal_id)
         pal.storage_id = container_id
         pal.storage_slot = slot_idx
-        pal.update()
         return pal
 
-    def clone_pal(self, pal: Pal):
+    def clone_pal(self, pal: PalDTO) -> Optional[Pal]:
         new_pal_id = uuid.uuid4()
-        slot_idx = self._pal_box.add_pal(new_pal_id)
-        if not slot_idx:
+        storage_slot = self._pal_box.add_pal(new_pal_id)
+        if not storage_slot:
             return
         existing_pal = self.pals[pal.instance_id]
-        nickname = pal.nickname if pal.nickname else f"[New] {pal.character_id}"
-        new_pal = existing_pal.clone(new_pal_id, slot_idx, nickname)
+        nickname = pal.nickname if pal.nickname else pal.character_id
+        new_pal = existing_pal.clone(
+            new_pal_id, self.pal_box_id, storage_slot, nickname
+        )
         self.pals[new_pal_id] = new_pal
         if isinstance(self.guild, Guild):
             self.guild.add_pal(new_pal_id)
@@ -140,7 +370,7 @@ class Player(BaseModel):
         if isinstance(self.guild, Guild):
             self.guild.remove_pal(pal_id)
 
-    def update_from(self, other_player: "Player"):
+    def update_from(self, other_player: PlayerDTO):
         logger.debug(
             "Updating player %s from player %s", self.nickname, other_player.nickname
         )
@@ -148,51 +378,17 @@ class Player(BaseModel):
         logger.debug("Data to update from: %s", data.keys())
         for key, value in data.items():
             match key:
-                case "pals":
-                    continue
-                case "level":
-                    self.level = value
-                    if "Level" in self._character_save_parameter:
-                        PalObjects.set_byte_property(
-                            self._character_save_parameter["Level"], value=value
-                        )
-                    else:
-                        self._character_save_parameter["Level"] = (
-                            PalObjects.ByteProperty(value)
-                        )
-                case "exp":
-                    self.exp = value
-                    if "Exp" in self._character_save_parameter:
-                        PalObjects.set_value(
-                            self._character_save_parameter["Exp"], value=value
-                        )
-                    else:
-                        self._character_save_parameter["Exp"] = (
-                            PalObjects.Int64Property(value)
-                        )
-                case "status_point_list" | "ext_status_point_list":
+                case (
+                    "level"
+                    | "exp"
+                    | "status_point_list"
+                    | "ext_status_point_list"
+                    | "hp"
+                    | "stomach"
+                    | "nickname"
+                    | "sanity"
+                ):
                     setattr(self, key, value)
-                    self._update_status_points()
-                case "hp":
-                    self.hp = value
-                    if "Hp" in self._character_save_parameter:
-                        PalObjects.set_fixed_point64(
-                            self._character_save_parameter["Hp"], value=value
-                        )
-                    else:
-                        self._character_save_parameter["Hp"] = PalObjects.FixedPoint64(
-                            value
-                        )
-                case "stomach":
-                    self.stomach = value
-                    if "FullStomach" in self._character_save_parameter:
-                        PalObjects.set_value(
-                            self._character_save_parameter["FullStomach"], value=value
-                        )
-                    else:
-                        self._character_save_parameter["FullStomach"] = (
-                            PalObjects.FloatProperty(value)
-                        )
                 case "common_container":
                     self.common_container.update_from(value)
                 case "essential_container":
@@ -203,104 +399,11 @@ class Player(BaseModel):
                     self.player_equipment_armor_container.update_from(value)
                 case "food_equip_container":
                     self.food_equip_container.update_from(value)
-
-    def _load_player_data(self):
-        player_save_data = PalObjects.get_value(
-            self._player_gvas_file.properties["SaveData"]
-        )
-        self.instance_id = PalObjects.get_guid(
-            PalObjects.get_nested(
-                player_save_data, "IndividualId", "value", "InstanceId"
-            )
-        )
-        self._get_hp()
-        self._get_status_points()
-        self._get_stomach()
-        self._get_sanity()
-
-    def _get_hp(self):
-        if "HP" in self._character_save_parameter:
-            self._character_save_parameter["Hp"] = self._character_save_parameter.pop(
-                "HP"
-            )
-        if "Hp" in self._character_save_parameter:
-            self.hp = PalObjects.get_fixed_point64(self._character_save_parameter["Hp"])
-        else:
-            self.hp = 0
-
-    def _get_stomach(self):
-        self.stomach = (
-            PalObjects.get_value(self._character_save_parameter["FullStomach"])
-            if "FullStomach" in self._character_save_parameter
-            else 150.0
-        )
-
-    def _get_sanity(self):
-        self.sanity = (
-            PalObjects.get_value(self._character_save_parameter["SanityValue"], 100.0)
-            if "SanityValue" in self._character_save_parameter
-            else 100.0
-        )
-
-    def _get_status_points(self):
-        status_point_list = PalObjects.get_array_property(
-            self._character_save_parameter["GotStatusPointList"]
-        )
-        self.status_point_list = {
-            PalObjects.StatusNameMap[
-                PalObjects.get_value(item["StatusName"])
-            ]: PalObjects.get_value(item["StatusPoint"])
-            for item in status_point_list
-        }
-        ext_status_point_list = PalObjects.get_array_property(
-            self._character_save_parameter["GotExStatusPointList"]
-        )
-        self.ext_status_point_list = {
-            PalObjects.ExStatusNameMap[
-                PalObjects.get_value(item["StatusName"])
-            ]: PalObjects.get_value(item["StatusPoint"])
-            for item in ext_status_point_list
-        }
-        for name, value in self.ext_status_point_list.items():
-            if name in self.status_point_list:
-                self.status_point_list[name] += value
-
-    def _update_status_points(self) -> None:
-        status_point_list = PalObjects.get_array_property(
-            self._character_save_parameter["GotStatusPointList"]
-        )
-
-        reverse_status_map = {v: k for k, v in PalObjects.StatusNameMap.items()}
-
-        for status_name, point_value in self.status_point_list.items():
-            japanese_name = reverse_status_map[status_name]
-            for item in status_point_list:
-                if PalObjects.get_value(item["StatusName"]) == japanese_name:
-                    PalObjects.set_value(item["StatusPoint"], point_value)
-                    break
-
-        ext_status_point_list = PalObjects.get_array_property(
-            self._character_save_parameter["GotExStatusPointList"]
-        )
-
-        reverse_ex_status_map = {v: k for k, v in PalObjects.ExStatusNameMap.items()}
-
-        for status_name, point_value in self.ext_status_point_list.items():
-            japanese_name = reverse_ex_status_map[status_name]
-            for item in ext_status_point_list:
-                if PalObjects.get_value(item["StatusName"]) == japanese_name:
-                    PalObjects.set_value(item["StatusPoint"], 0)
-                    break
+                case _:
+                    logger.debug("Ignoring key %s", key)
+                    continue
 
     def _load_pal_box(self, character_container_save_data: Dict[str, Any]):
-        player_save_data = PalObjects.get_value(
-            self._player_gvas_file.properties["SaveData"]
-        )
-        self.pal_box_id = PalObjects.get_guid(
-            PalObjects.get_nested(
-                player_save_data, "PalStorageContainerId", "value", "ID"
-            )
-        )
         self._pal_box = CharacterContainer(
             id=self.pal_box_id,
             type=CharacterContainerType.PAL_BOX,
@@ -308,14 +411,6 @@ class Player(BaseModel):
         )
 
     def _load_otomo_container(self, character_container_save_data: Dict[str, Any]):
-        player_save_data = PalObjects.get_value(
-            self._player_gvas_file.properties["SaveData"]
-        )
-        self.otomo_container_id = PalObjects.get_guid(
-            PalObjects.get_nested(
-                player_save_data, "OtomoCharacterContainerId", "value", "ID"
-            )
-        )
         self._party = CharacterContainer(
             id=self.otomo_container_id,
             type=CharacterContainerType.PARTY,
@@ -411,18 +506,15 @@ class Player(BaseModel):
         item_container_save_data: Dict[str, Any],
         dynamic_item_save_data: Dict[str, Any],
     ):
-        player_save_data = PalObjects.get_value(
-            self._player_gvas_file.properties["SaveData"]
-        )
-        if "inventoryInfo" in player_save_data:
+        if "inventoryInfo" in self._save_data:
             logger.debug(
                 "Converting inventory info to new format for player (%s) %s",
                 self.uid,
                 self.nickname,
             )
-            player_save_data["InventoryInfo"] = player_save_data.pop("inventoryInfo")
+            self._save_data["InventoryInfo"] = self._save_data.pop("inventoryInfo")
 
-        inventory_info = PalObjects.get_value(player_save_data["InventoryInfo"])
+        inventory_info = PalObjects.get_value(self._save_data["InventoryInfo"])
 
         if not inventory_info:
             logger.error("No inventory info found for player %s", self.uid)

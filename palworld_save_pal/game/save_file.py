@@ -2,7 +2,7 @@ import copy
 from enum import Enum
 import json
 import os
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Union
 from uuid import UUID
 from pydantic import BaseModel, ConfigDict, PrivateAttr
 
@@ -20,7 +20,7 @@ from palworld_save_tools.paltypes import (
 )
 
 from palworld_save_pal.game.guild import Guild
-from palworld_save_pal.game.pal import Pal
+from palworld_save_pal.game.pal import Pal, PalDTO
 from palworld_save_pal.game.pal_objects import GroupType, PalObjects
 from palworld_save_pal.utils.logging_config import create_logger
 from palworld_save_pal.game.player import Player
@@ -171,13 +171,18 @@ class SaveFile(BaseModel):
     _group_save_data_map: List[Dict[str, Any]] = PrivateAttr(default_factory=list)
 
     def add_pal(
-        self, player_id: UUID, pal_code_name: str, nickname: str, container_id: UUID
+        self,
+        player_id: UUID,
+        character_id: str,
+        nickname: str,
+        container_id: UUID,
+        storage_slot: Union[int | None] = None,
     ) -> Optional[Pal]:
         player = self._players.get(player_id)
         if not player:
             raise ValueError(f"Player {player_id} not found in the save file.")
 
-        data = player.add_pal(pal_code_name, nickname, container_id)
+        data = player.add_pal(character_id, nickname, container_id, storage_slot)
         if data is None:
             return
         new_pal, new_pal_data = data
@@ -192,7 +197,7 @@ class SaveFile(BaseModel):
 
         return player.move_pal(pal_id, container_id)
 
-    def clone_pal(self, pal: Pal) -> Optional[Pal]:
+    def clone_pal(self, pal: PalDTO) -> Optional[Pal]:
         player = self._players.get(pal.owner_uid)
         if not player:
             raise ValueError(f"Player {pal.owner_uid} not found in the save file.")
@@ -200,7 +205,7 @@ class SaveFile(BaseModel):
         new_pal = player.clone_pal(pal)
         if new_pal is None:
             return
-        self._character_save_parameter_map.append(new_pal.character_save())
+        self._character_save_parameter_map.append(new_pal.character_save)
         self._pals[new_pal.instance_id] = new_pal
         return new_pal
 
@@ -252,6 +257,7 @@ class SaveFile(BaseModel):
             raw_gvas, PALWORLD_TYPE_HINTS, custom_properties, allow_nan=True
         )
         self._level_meta_gvas_file = gvas_file
+        return self._level_meta_gvas_file
 
     def load_level_sav(self, data: bytes):
         logger.info("Loading %s as GVAS", self.name)
@@ -306,17 +312,17 @@ class SaveFile(BaseModel):
         self._load_guilds()
         return self
 
-    def sav(self):
+    def sav(self, gvas_file: GvasFile = None) -> bytes:
         logger.info("Converting %s to SAV", self.name)
+        target_gvas = gvas_file if gvas_file else self._gvas_file
         if (
-            "Pal.PalWorldSaveGame" in self._gvas_file.header.save_game_class_name
-            or "Pal.PalLocalWorldSaveGame"
-            in self._gvas_file.header.save_game_class_name
+            "Pal.PalWorldSaveGame" in target_gvas.header.save_game_class_name
+            or "Pal.PalLocalWorldSaveGame" in target_gvas.header.save_game_class_name
         ):
             save_type = 0x32
         else:
             save_type = 0x31
-        gvas = copy.deepcopy(self._gvas_file)
+        gvas = copy.deepcopy(target_gvas)
         return compress_gvas_to_sav(gvas.write(CUSTOM_PROPERTIES), save_type)
 
     def to_json_file(
@@ -354,12 +360,13 @@ class SaveFile(BaseModel):
         with open(output_path, "wb") as f:
             f.write(sav_file)
 
-    async def update_pals(self, modified_pals: Dict[UUID, Pal], ws_callback) -> None:
+    async def update_pals(self, modified_pals: Dict[UUID, PalDTO], ws_callback) -> None:
         if not self._gvas_file:
             raise ValueError("No GvasFile has been loaded.")
 
         for pal_id, pal in modified_pals.items():
-            await ws_callback(f"Updating pal {pal.nickname}")
+            pal_name = pal.nickname if pal.nickname else pal.character_id
+            await ws_callback(f"Updating pal {pal_name}")
             self._update_pal(pal_id, pal)
 
         logger.info("Updated %d pals in the save file.", len(modified_pals))
@@ -421,7 +428,6 @@ class SaveFile(BaseModel):
                 continue
             guild_id = PalObjects.as_uuid(PalObjects.get_nested(entry, "key"))
             self._guilds[guild_id] = Guild(
-                id=guild_id,
                 group_save_data=entry,
             )
 
@@ -433,9 +439,10 @@ class SaveFile(BaseModel):
         for e in self._character_save_parameter_map:
             if self._is_player(e):
                 continue
-            instance = Pal(e)
-            if instance:
-                self._pals[instance.instance_id] = instance
+            pal = Pal(e)
+            if pal:
+                self._pals[pal.instance_id] = pal
+                logger.debug("Loaded Pal %s", pal)
             else:
                 logger.warning("Failed to create PalEntity summary")
 
@@ -484,62 +491,34 @@ class SaveFile(BaseModel):
             return {}
         logger.info("Loading Players")
 
-        def extract_player_info(entry):
-            uid = PalObjects.get_guid(entry["key"]["PlayerUId"])
-            player_sav_bytes = player_sav_files.get(uid)
-            if not player_sav_bytes:
-                logger.warning("No player save file found for player %s", uid)
-                return
-            save_parameter = PalObjects.get_nested(
-                entry,
-                "value",
-                "RawData",
-                "value",
-                "object",
-                "SaveParameter",
-                "value",
-            )
-            nickname = PalObjects.get_value(save_parameter["NickName"])
-            level = (
-                PalObjects.get_byte_property(save_parameter["Level"])
-                if "Level" in save_parameter
-                else 1
-            )
-            exp = (
-                PalObjects.get_value(save_parameter["Exp"])
-                if "Exp" in save_parameter
-                else 0
-            )
-
-            raw_gvas, _ = decompress_sav_to_gvas(player_sav_bytes)
-            gvas_file = GvasFile.read(
-                raw_gvas, PALWORLD_TYPE_HINTS, CUSTOM_PROPERTIES, allow_nan=True
-            )
-            self._player_gvas_files[uid] = gvas_file
-            player = Player(
-                uid=uid,
-                nickname=nickname,
-                level=level,
-                exp=exp,
-                gvas_file=gvas_file,
-                item_container_save_data=self._item_container_save_data,
-                dynamic_item_save_data=self._dynamic_item_save_data,
-                character_container_save_data=self._character_container_save_data,
-                character_save_parameter=save_parameter,
-                guild=self._player_guild(uid),
-            )
-            player.pals = self._get_player_pals(uid)
-            return player
-
         players = {}
         for entry in self._character_save_parameter_map:
             if self._is_player(entry):
-                player = extract_player_info(entry)
-                if player:
-                    players[player.uid] = player
+                uid = PalObjects.get_guid(entry["key"]["PlayerUId"])
+                player_sav_bytes = player_sav_files.get(uid)
+                if not player_sav_bytes:
+                    logger.warning("No player save file found for player %s", uid)
+                    return
+
+                raw_gvas, _ = decompress_sav_to_gvas(player_sav_bytes)
+                gvas_file = GvasFile.read(
+                    raw_gvas, PALWORLD_TYPE_HINTS, CUSTOM_PROPERTIES, allow_nan=True
+                )
+                self._player_gvas_files[uid] = gvas_file
+                player = Player(
+                    gvas_file=gvas_file,
+                    item_container_save_data=self._item_container_save_data,
+                    dynamic_item_save_data=self._dynamic_item_save_data,
+                    character_container_save_data=self._character_container_save_data,
+                    character_save_parameter=entry,
+                    guild=self._player_guild(uid),
+                    pals=self._get_player_pals(uid),
+                )
+                players[uid] = player
+
         self._players = players
 
-    def _update_pal(self, pal_id: UUID, updated_pal: Pal) -> None:
+    def _update_pal(self, pal_id: UUID, updated_pal: PalDTO) -> None:
         existing_pal = self._pals[pal_id]
         existing_pal.update_from(updated_pal)
 

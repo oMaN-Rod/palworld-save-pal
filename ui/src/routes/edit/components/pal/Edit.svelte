@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { PalHeader } from '$components';
+
 	import {
 		ActiveSkillBadge,
 		PassiveSkillBadge,
@@ -8,51 +10,53 @@
 		Talents,
 		LearnedSkillSelectModal
 	} from '$components';
-	import { CornerDotButton, Progress, SectionHeader, Tooltip } from '$components/ui';
-	import { type ElementType, EntryState, type Pal, PalGender, type PresetProfile } from '$types';
-	import { ASSET_DATA_PATH, MAX_LEVEL, staticIcons } from '$lib/constants';
-	import { palsData, elementsData, expData, presetsData } from '$lib/data';
-	import { cn } from '$theme';
-	import { getAppState, getModalState } from '$states';
-	import { Rating } from '@skeletonlabs/skeleton-svelte';
-	import { Minus, Plus, Brain, Save } from 'lucide-svelte';
+	import { SectionHeader, Tooltip } from '$components/ui';
+	import { EntryState, type PresetProfile } from '$types';
+	import { staticIcons } from '$lib/constants';
+	import { palsData, expData, presetsData } from '$lib/data';
+	import { getAppState, getModalState, getToastState } from '$states';
+	import { Brain, Save } from 'lucide-svelte';
 	import { Souls } from '$components';
-	import { getStats } from '$lib/data';
 	import SkillPresets from './SkillPresets.svelte';
-	import { assetLoader } from '$utils';
+	import { assetLoader, calculateFilters } from '$utils';
 
 	const appState = getAppState();
 	const modal = getModalState();
+	const toast = getToastState();
 
 	let palLevelProgressToNext: number = $state(0);
 	let palLevelProgressValue: number = $state(0);
 	let palLevelProgressMax: number = $state(1);
 
-	let palLevel = $derived.by(() => {
-		if (appState.selectedPlayer && appState.selectedPal) {
-			return appState.selectedPlayer.level < appState.selectedPal.level
-				? appState.selectedPlayer.level.toString()
-				: appState.selectedPal.level.toString();
-		}
-	});
-	let palLevelClass = $derived.by(() => {
-		if (appState.selectedPlayer && appState.selectedPal) {
-			return appState.selectedPlayer.level < appState.selectedPal.level ? 'text-error-500' : '';
-		}
-	});
-	let palLevelMessage = $derived.by(() => {
-		if (appState.selectedPlayer && appState.selectedPal) {
-			return appState.selectedPlayer.level < appState.selectedPal.level
-				? 'Level sync'
-				: 'No Level Sync';
+	let palImage = $derived.by(() => {
+		if (appState.selectedPal) {
+			const { character_key } = appState.selectedPal;
+			const palData = palsData.pals[character_key];
+			return assetLoader.loadPalImage(character_key, palData?.is_pal);
 		}
 	});
 
-	let palImage = $derived.by(() => {
+	let activeSkills = $derived.by(() => {
 		if (appState.selectedPal) {
-			const { character_id } = appState.selectedPal;
-			const palData = palsData.pals[character_id];
-			return assetLoader.loadPalImage(character_id, palData?.is_pal);
+			let skills = [...appState.selectedPal.active_skills];
+			while (skills.length < 3) {
+				skills.push('Empty');
+			}
+			return skills;
+		} else {
+			return [];
+		}
+	});
+
+	let passiveSkills = $derived.by(() => {
+		if (appState.selectedPal) {
+			let skills = [...appState.selectedPal.passive_skills];
+			while (skills.length < 4) {
+				skills.push('Empty');
+			}
+			return skills;
+		} else {
+			return [];
 		}
 	});
 
@@ -71,82 +75,10 @@
 		}
 	}
 
-	async function handleLevelIncrement() {
-		if (!appState.selectedPal || !appState.selectedPlayer || !appState.selectedPlayer.pals) return;
-
-		const newLevel = Math.min(appState.selectedPal.level + 1, MAX_LEVEL);
-		if (newLevel === appState.selectedPal.level) return;
-
-		const nextLevelData = await expData.getExpDataByLevel(newLevel + 1);
-
-		appState.selectedPal.level = newLevel;
-		appState.selectedPal.exp = nextLevelData.PalTotalEXP - nextLevelData.PalNextEXP;
-		appState.selectedPal.state = EntryState.MODIFIED;
-
-		await calcPalLevelProgress();
-	}
-
-	async function handleLevelDecrement() {
-		if (!appState.selectedPal || !appState.selectedPlayer || !appState.selectedPlayer.pals) return;
-
-		const newLevel = Math.max(appState.selectedPal.level - 1, 1);
-		if (newLevel === appState.selectedPal.level) return;
-
-		const newLevelData = await expData.getExpDataByLevel(newLevel + 1);
-
-		appState.selectedPal.level = newLevel;
-		appState.selectedPal.exp = newLevelData.PalTotalEXP - newLevelData.PalNextEXP;
-		appState.selectedPal.state = EntryState.MODIFIED;
-
-		await calcPalLevelProgress();
-	}
-
-	function getActiveSkills(pal: Pal): string[] {
-		let skills = [...pal.active_skills];
-		while (skills.length < 3) {
-			skills.push('Empty');
-		}
-		return skills;
-	}
-
-	function getPassiveSkills(pal: Pal): string[] {
-		let skills = [...pal.passive_skills];
-		while (skills.length < 4) {
-			skills.push('Empty');
-		}
-		return skills;
-	}
-
-	async function getPalElementTypes(character_id: string): Promise<ElementType[] | undefined> {
-		const palData = await palsData.getPalInfo(character_id);
-		if (!palData) return undefined;
-		return palData.element_types.length > 0 ? palData.element_types : undefined;
-	}
-
 	async function getPalDescription(character_id: string): Promise<string | undefined> {
-		const palData = await palsData.getPalInfo(character_id);
+		const palData = palsData.pals[character_id];
 		if (!palData) return undefined;
 		return palData.description;
-	}
-
-	async function getPalElementBadge(elementType: string): Promise<string | undefined> {
-		const elementObj = await elementsData.searchElement(elementType);
-		if (!elementObj) return undefined;
-		return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/elements/${elementObj.badge_icon}.png`);
-	}
-
-	async function handleEditNickname() {
-		if (!appState.selectedPal) return;
-		// @ts-ignore
-		const result = await modal.showModal<string>(TextInputModal, {
-			title: 'Edit nickname',
-			value: appState.selectedPal.nickname || appState.selectedPal.name
-		});
-		if (!result) return;
-		appState.selectedPal.nickname = result;
-		appState.selectedPal.state = EntryState.MODIFIED;
-		if (appState.selectedPlayer && appState.selectedPlayer.pals)
-			appState.selectedPlayer.pals[appState.selectedPal.instance_id].nickname = result;
 	}
 
 	async function handleEditLearnedSkills() {
@@ -158,39 +90,6 @@
 		if (result) {
 			appState.selectedPal.learned_skills = result;
 			appState.selectedPal.state = EntryState.MODIFIED;
-		}
-	}
-
-	function canBeBoss(character_id: string): boolean {
-		if (character_id.toLowerCase().includes('predator_')) return false;
-		if (character_id.toLowerCase().includes('summon_')) return false;
-		if (character_id.toLowerCase().includes('raid_')) return false;
-		return true;
-	}
-
-	async function handleMaxOutPal() {
-		if (!appState.selectedPal || !appState.selectedPlayer) return;
-		appState.selectedPal.level = MAX_LEVEL;
-		const maxLevelData = expData.expData['61'];
-		appState.selectedPal.exp = maxLevelData.PalTotalEXP - maxLevelData.PalNextEXP;
-		appState.selectedPal.is_boss = canBeBoss(appState.selectedPal.character_id);
-		appState.selectedPal.is_lucky = false;
-		appState.selectedPal.talent_hp = 100;
-		appState.selectedPal.talent_shot = 100;
-		appState.selectedPal.talent_defense = 100;
-		appState.selectedPal.rank = 4;
-		appState.selectedPal.rank_hp = 20;
-		appState.selectedPal.rank_defense = 20;
-		appState.selectedPal.rank_attack = 20;
-		appState.selectedPal.rank_craftspeed = 20;
-		getStats(appState.selectedPal, appState.selectedPlayer);
-		appState.selectedPal.hp = appState.selectedPal.max_hp;
-		appState.selectedPal.state = EntryState.MODIFIED;
-		const palData = palsData.pals[appState.selectedPal.character_id];
-		if (palData) {
-			appState.selectedPal.stomach = palData.max_full_stomach;
-		} else {
-			appState.selectedPal.stomach = 150;
 		}
 	}
 
@@ -234,15 +133,6 @@
 		}
 	}
 
-	function handleEditGender() {
-		if (appState.selectedPal) {
-			const currentGender = appState.selectedPal.gender;
-			appState.selectedPal.gender =
-				currentGender === PalGender.MALE ? PalGender.FEMALE : PalGender.MALE;
-			appState.selectedPal.state = EntryState.MODIFIED;
-		}
-	}
-
 	async function setSkillPreset(type: 'active' | 'passive', skills: string[]) {
 		if (appState.selectedPal) {
 			if (type === 'active') {
@@ -254,25 +144,6 @@
 		}
 	}
 
-	function handleEditLucky() {
-		if (appState.selectedPal && canBeBoss(appState.selectedPal.character_id)) {
-			appState.selectedPal.is_lucky = !appState.selectedPal.is_lucky;
-			appState.selectedPal.is_boss = appState.selectedPal.is_lucky
-				? false
-				: appState.selectedPal.is_boss;
-			appState.selectedPal.state = EntryState.MODIFIED;
-		}
-	}
-
-	function handleEditAlpha() {
-		if (appState.selectedPal && canBeBoss(appState.selectedPal.character_id)) {
-			appState.selectedPal.is_boss = !appState.selectedPal.is_boss;
-			appState.selectedPal.is_lucky = appState.selectedPal.is_boss
-				? false
-				: appState.selectedPal.is_lucky;
-			appState.selectedPal.state = EntryState.MODIFIED;
-		}
-	}
 	async function handleAddPreset(type: 'active' | 'passive') {
 		if (!appState.selectedPal) return;
 		// @ts-ignore
@@ -301,150 +172,8 @@
 {#if appState.selectedPal}
 	<div class="flex h-full overflow-auto p-2">
 		<div class="flex flex-grow flex-col">
-			<div class="flex-shrink-0">
-				<div
-					class="border-l-surface-600 preset-filled-surface-100-900 flex w-3/4 flex-row rounded-none border-l-2 p-4"
-				>
-					<div class="mr-4 flex flex-col items-center justify-center rounded-none">
-						<Rating bind:value={appState.selectedPal.rank} count={4} itemClasses="text-gray" />
-						<div class="flex flex-row px-2">
-							<button class="mr-4">
-								<Minus class="text-primary-500" onclick={handleLevelDecrement} />
-							</button>
-
-							<Tooltip>
-								<div class="flex flex-col items-center justify-center">
-									<span class={cn('text-surface-400 font-bold', palLevelClass)}>LEVEL</span>
-									<span class={cn('text-4xl font-bold', palLevelClass)}>{palLevel}</span>
-								</div>
-								{#snippet popup()}
-									{palLevelMessage}
-								{/snippet}
-							</Tooltip>
-
-							<button class="ml-4">
-								<Plus class="text-primary-500" onclick={handleLevelIncrement} />
-							</button>
-						</div>
-					</div>
-
-					<div class="grow">
-						<div class="flex flex-col">
-							<div class="flex flex-row items-center space-x-2">
-								<span class="grow">
-									{appState.selectedPal.nickname || appState.selectedPal.name}
-								</span>
-								<Tooltip position="bottom">
-									<CornerDotButton label="Edit" onClick={handleEditNickname} />
-									{#snippet popup()}
-										<span>Edit nickname</span>
-									{/snippet}
-								</Tooltip>
-								<Tooltip position="bottom">
-									<CornerDotButton label="Max" onClick={handleMaxOutPal} />
-									{#snippet popup()}
-										<span>Max out Pal stats 💉💪</span>
-									{/snippet}
-								</Tooltip>
-								<Tooltip position="bottom">
-									<button
-										class="hover:ring-secondary-500 relative flex h-full w-auto items-center justify-center hover:ring"
-										onclick={handleEditGender}
-									>
-										<div class="h-8 w-8">
-											<img
-												src={assetLoader.loadImage(
-													`${ASSET_DATA_PATH}/img/icons/${appState.selectedPal.gender}.png`
-												)}
-												alt={appState.selectedPal.gender}
-											/>
-										</div>
-										<span class="bg-surface-600 absolute left-0 top-0 h-0.5 w-0.5"></span>
-										<span class="bg-surface-600 absolute right-0 top-0 h-0.5 w-0.5"></span>
-										<span class="bg-surface-600 absolute bottom-0 left-0 h-0.5 w-0.5"></span>
-										<span class="bg-surface-600 absolute bottom-0 right-0 h-0.5 w-0.5"></span>
-									</button>
-									{#snippet popup()}
-										<span>Toggle gender</span>
-									{/snippet}
-								</Tooltip>
-								<Tooltip position="bottom">
-									<button
-										class={cn(
-											'hover:ring-secondary-500 relative flex h-full w-auto items-center justify-center hover:ring',
-											appState.selectedPal.is_lucky && 'bg-secondary-500/25'
-										)}
-										onclick={handleEditLucky}
-									>
-										<div class="flex h-8 w-8 items-center justify-center">
-											<img src={staticIcons.luckyIcon} alt="Lucky" class="pal-element-badge" />
-										</div>
-										<span class="bg-surface-600 absolute left-0 top-0 h-0.5 w-0.5"></span>
-										<span class="bg-surface-600 absolute right-0 top-0 h-0.5 w-0.5"></span>
-										<span class="bg-surface-600 absolute bottom-0 left-0 h-0.5 w-0.5"></span>
-										<span class="bg-surface-600 absolute bottom-0 right-0 h-0.5 w-0.5"></span>
-									</button>
-									{#snippet popup()}
-										<span>Toggle Lucky</span>
-									{/snippet}
-								</Tooltip>
-								<Tooltip position="bottom">
-									<button
-										class={cn(
-											'hover:ring-secondary-500 relative flex h-full w-auto items-center justify-center hover:ring',
-											appState.selectedPal.is_boss && 'bg-secondary-500/25'
-										)}
-										onclick={handleEditAlpha}
-									>
-										<div class="flex h-8 w-8 items-center justify-center">
-											<img
-												src={staticIcons.alphaIcon}
-												alt="Alpha"
-												class="h-8 w-8"
-												style="width: 24px; height: 24px;"
-											/>
-										</div>
-										<span class="bg-surface-600 absolute left-0 top-0 h-0.5 w-0.5"></span>
-										<span class="bg-surface-600 absolute right-0 top-0 h-0.5 w-0.5"></span>
-										<span class="bg-surface-600 absolute bottom-0 left-0 h-0.5 w-0.5"></span>
-										<span class="bg-surface-600 absolute bottom-0 right-0 h-0.5 w-0.5"></span>
-									</button>
-									{#snippet popup()}
-										<span>Toggle Alpha</span>
-									{/snippet}
-								</Tooltip>
-								<div class="flex flex-row items-center">
-									<div class="flex flex-row">
-										{#await getPalElementTypes(appState.selectedPal.character_id) then elementTypes}
-											{#if elementTypes}
-												{#each elementTypes as elementType}
-													{#await getPalElementBadge(elementType) then icon}
-														<img src={icon} alt={elementType} class="h-8 w-8" />
-													{/await}
-												{/each}
-											{/if}
-										{/await}
-									</div>
-								</div>
-							</div>
-							<hr class="hr my-1" />
-							<div class="flex flex-col space-y-2">
-								<div class="flex">
-									<span class="text-on-surface grow">NEXT</span>
-									<span class="text-on-surface">{palLevelProgressToNext}</span>
-								</div>
-								<Progress
-									bind:value={palLevelProgressValue}
-									bind:max={palLevelProgressMax}
-									height="h-2"
-									width="w-full"
-									rounded="rounded-none"
-									showLabel={false}
-								/>
-							</div>
-						</div>
-					</div>
-				</div>
+			<div class="w-2/3 flex-shrink-0">
+				<PalHeader bind:pal={appState.selectedPal} />
 			</div>
 			<div class="flex flex-grow">
 				<div class="flex-1 overflow-auto p-2">
@@ -477,11 +206,11 @@
 								</div>
 							{/snippet}
 						</SectionHeader>
-						{#each getActiveSkills(appState.selectedPal) as skill}
+						{#each activeSkills as skill}
 							<ActiveSkillBadge
 								{skill}
 								onSkillUpdate={handleUpdateActiveSkill}
-								palCharacterId={appState.selectedPal.character_id}
+								palCharacterId={appState.selectedPal.character_key}
 							/>
 						{/each}
 						<SectionHeader text="Passive Skills">
@@ -502,7 +231,7 @@
 							{/snippet}
 						</SectionHeader>
 						<div class="grid grid-cols-2 gap-2">
-							{#each getPassiveSkills(appState.selectedPal) as skill}
+							{#each passiveSkills as skill}
 								<PassiveSkillBadge {skill} onSkillUpdate={handleUpdatePassiveSkill} />
 							{/each}
 						</div>
@@ -521,14 +250,24 @@
 								position="top-start"
 								useArrow={false}
 							>
-								<img
-									src={palImage}
-									alt={`${appState.selectedPal?.name} icon`}
-									class="h-auto max-w-full"
-								/>
+								<div class="relative">
+									<img
+										src={palImage}
+										alt={`${appState.selectedPal?.name} icon`}
+										class="max-h-[600px] max-w-full"
+									/>
+									{#if appState.selectedPal.is_predator}
+										<img
+											src={staticIcons.predatorIcon}
+											alt="Predator"
+											class="absolute bottom-0 right-0 h-12 w-12"
+											style="filter: {calculateFilters('#FF0000')};"
+										/>
+									{/if}
+								</div>
 
 								{#snippet popup()}
-									{#await getPalDescription(appState.selectedPal!.character_id) then description}
+									{#await getPalDescription(appState.selectedPal!.character_key) then description}
 										{#if description}
 											<div class="flex max-w-96 flex-col">
 												<p class="text-center">{description}</p>

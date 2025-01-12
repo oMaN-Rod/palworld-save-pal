@@ -1,3 +1,5 @@
+import { getSocketState } from '$states';
+import { MessageType } from '$types';
 import {
 	activeSkillsData,
 	elementsData,
@@ -8,6 +10,8 @@ import {
 	presetsData
 } from '.';
 
+const ws = getSocketState();
+
 export const bootstrap = async () => {
 	await presetsData.reset();
 	await palsData.reset();
@@ -16,5 +20,6 @@ export const bootstrap = async () => {
 	await elementsData.reset();
 	await expData.reset();
 	await itemsData.reset();
-	// await uiCommonData.reset();
+	ws.send(JSON.stringify({ type: MessageType.GET_VERSION }));
+	ws.send(JSON.stringify({ type: MessageType.SYNC_APP_STATE }));
 };

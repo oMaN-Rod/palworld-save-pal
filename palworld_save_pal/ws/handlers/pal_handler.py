@@ -48,12 +48,15 @@ async def get_pals_handler(_: GetPalsMessage, ws: WebSocket):
 
 async def add_pal_handler(message: AddPalMessage, ws: WebSocket):
     player_id = message.data.player_id
-    pal_code_name = message.data.pal_code_name
+    character_id = message.data.character_id
     nickname = message.data.nickname
     container_id = message.data.container_id
+    storage_slot = message.data.storage_slot
     app_state = get_app_state()
     save_file = app_state.save_file
-    new_pal = save_file.add_pal(player_id, pal_code_name, nickname, container_id)
+    new_pal = save_file.add_pal(
+        player_id, character_id, nickname, container_id, storage_slot
+    )
     data = {
         "player_id": player_id,
         "pal": new_pal,

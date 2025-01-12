@@ -1,17 +1,17 @@
 from enum import Enum
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Union
 from pydantic import BaseModel
 from uuid import UUID
 
 from palworld_save_pal.editor.preset_profile import PresetProfile
-from palworld_save_pal.editor.settings import Settings
-from palworld_save_pal.game.pal import Pal
-from palworld_save_pal.game.player import Player
+from palworld_save_pal.editor.settings import SettingsDTO
+from palworld_save_pal.game.pal import PalDTO
+from palworld_save_pal.game.player import PlayerDTO
 
 
 class BaseMessage(BaseModel):
     type: str
-    data: None = None
+    data: Any = None
 
 
 class MessageType(str, Enum):
@@ -48,24 +48,26 @@ class MessageType(str, Enum):
     UPDATE_SETTINGS = "update_settings"
     GET_UI_COMMON = "get_ui_common"
     NO_FILE_SELECTED = "no_file_selected"
+    SELECT_GAMEPASS_SAVE = "select_gamepass_save"
 
 
 class AddPalData(BaseModel):
     player_id: UUID
-    pal_code_name: str
+    character_id: str
     nickname: str
     container_id: UUID
+    storage_slot: Union[int | None] = None
+
+
+class AddPalMessage(BaseMessage):
+    type: str = MessageType.ADD_PAL.value
+    data: AddPalData
 
 
 class MovePalData(BaseModel):
     player_id: UUID
     pal_id: UUID
     container_id: UUID
-
-
-class AddPalMessage(BaseMessage):
-    type: str = MessageType.ADD_PAL.value
-    data: AddPalData
 
 
 class MovePalMessage(BaseMessage):
@@ -75,7 +77,7 @@ class MovePalMessage(BaseMessage):
 
 class ClonePalMessage(BaseMessage):
     type: str = MessageType.CLONE_PAL.value
-    data: Pal
+    data: PalDTO
 
 
 class DeletePalsData(BaseModel):
@@ -98,8 +100,8 @@ class DownloadSaveFileMessage(BaseMessage):
 
 
 class UpdateSaveFileData(BaseModel):
-    modified_pals: Optional[Dict[UUID, Pal]] = None
-    modified_players: Optional[Dict[UUID, Player]] = None
+    modified_pals: Optional[Dict[UUID, PalDTO]] = None
+    modified_players: Optional[Dict[UUID, PlayerDTO]] = None
 
 
 class UpdateSaveFileMessage(BaseMessage):
@@ -193,6 +195,7 @@ class SelectSaveMessage(BaseMessage):
 
 class SaveModdedSaveMessage(BaseMessage):
     type: str = MessageType.SAVE_MODDED_SAVE.value
+    data: str
 
 
 class GetSettingsMessage(BaseMessage):
@@ -201,8 +204,13 @@ class GetSettingsMessage(BaseMessage):
 
 class UpdateSettingsMessage(BaseMessage):
     type: str = MessageType.UPDATE_SETTINGS.value
-    data: Settings
+    data: SettingsDTO
 
 
 class GetUICommonMessage(BaseMessage):
     type: str = MessageType.GET_UI_COMMON.value
+
+
+class SelectGamepassSaveMessage(BaseMessage):
+    type: str = MessageType.SELECT_GAMEPASS_SAVE.value
+    data: str

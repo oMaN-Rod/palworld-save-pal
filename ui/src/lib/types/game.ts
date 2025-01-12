@@ -1,11 +1,27 @@
 // Backend types
+export interface GamePassContainer {
+	path: string;
+	guid: string;
+	num: number;
+	name: string;
+}
+
+export interface GamepassSave {
+	save_id: string;
+	world_name: string;
+	player_count: number;
+	containers: GamePassContainer[];
+}
+
 export type Pal = {
 	name: string;
 	instance_id: string;
 	owner_uid: string;
+	character_id: string;
+	character_key: string;
 	is_lucky: boolean;
 	is_boss: boolean;
-	character_id: string;
+	is_predator: boolean;
 	gender: PalGender;
 	rank_hp: number;
 	rank_attack: number;
@@ -71,8 +87,11 @@ export type Player = {
 	ex_status_point_list: ExStatusPointList;
 };
 
+export type SaveFileType = 'gamepass' | 'steam';
+
 export type SaveFile = {
 	name: string;
+	type: SaveFileType;
 	world_name?: string;
 	size?: number;
 };
@@ -221,7 +240,8 @@ export type ItemGroup =
 	| 'Head'
 	| 'Shield'
 	| 'Weapon'
-	| 'KeyItem';
+	| 'KeyItem'
+	| 'SphereModule';
 
 export interface DynamicItemDetails {
 	durability: number;
@@ -241,6 +261,7 @@ export interface ItemDetails {
 	sort_id: number;
 	damage?: number;
 	dynamic?: DynamicItemDetails;
+	disabled?: boolean;
 }
 
 export interface ItemInfo {

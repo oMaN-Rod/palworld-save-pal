@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Slider } from '@skeletonlabs/skeleton-svelte';
-	import type { Pal } from '$types';
+	import { EntryState, type Pal } from '$types';
 	import { Input } from '$components/ui';
 
 	let { pal = $bindable() } = $props<{
@@ -13,14 +13,17 @@
 
 	function handleUpdateHp(details: any): void {
 		pal.talent_hp = details.value[0];
+		pal.state = EntryState.MODIFIED;
 	}
 
 	function handleUpdateAttack(details: any): void {
 		pal.talent_shot = details.value[0];
+		pal.state = EntryState.MODIFIED;
 	}
 
 	function handleUpdateDefense(details: any): void {
 		pal.talent_defense = details.value[0];
+		pal.state = EntryState.MODIFIED;
 	}
 </script>
 

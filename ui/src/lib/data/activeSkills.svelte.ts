@@ -1,4 +1,4 @@
-import { getSocketState } from '$states/websocketState.svelte';
+import { getSocketState } from '$states';
 import { MessageType, type ActiveSkill, type ActiveSkillDetails } from '$types';
 
 export class ActiveSkills {
@@ -20,6 +20,7 @@ export class ActiveSkills {
 				this.activeSkills = response.data;
 				this.loading = false;
 			} catch (error) {
+				this.loading = false;
 				console.error('Error fetching active skills:', error);
 				throw error;
 			}

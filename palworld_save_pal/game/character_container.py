@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Union
 from uuid import UUID
 from pydantic import BaseModel, Field, PrivateAttr
 
@@ -50,16 +50,18 @@ class CharacterContainer(BaseModel):
             if i not in used_slots:
                 return i
 
-    def add_pal(self, pal_id: UUID) -> Optional[int]:
+    def add_pal(
+        self, pal_id: UUID, storage_slot: Union[int | None] = None
+    ) -> Optional[int]:
         if not self.available_slots():
             logger.warning(
                 "%s (%s) is full, size is %s", self.type.value, self.id, len(self.slots)
             )
             return
         slot_idx = (
-            self.find_first_available_slot()
-            if self.type == CharacterContainerType.PARTY
-            else self.find_last_available_slot()
+            storage_slot
+            if storage_slot is not None
+            else self.find_first_available_slot()
         )
         logger.debug(
             "%s (%s) => pal_id = %s, slot_idx = %s, container_id = %s",

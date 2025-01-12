@@ -42,26 +42,30 @@ class AssetLoader {
 	}
 
 	loadJson<T>(path: string): T | undefined {
+		if (!path) return;
 		return this.load<T>(path, 'json');
 	}
 
-	loadImage(path: string): string | undefined {
+	loadImage(path: string): string {
+		if (!path) return staticIcons.unknownIcon;
 		return this.load<any>(path.toLowerCase().replaceAll(' ', '_'), 'image');
 	}
 
-	loadPalImage(character_id: string, is_pal: boolean = true): string | undefined {
-		if (is_pal) {
-			character_id = character_id
-				.toLocaleLowerCase()
-				.replace('predator_', '')
-				.replace('_oilrig', '')
-				.replace('raid_', '')
-				.replace('summon_', '')
-				.replace('_max', '')
-				.replace(/_\d+$/, '');
-		} else {
-			character_id = 'commonhuman';
-		}
+	cleanseCharacterId(character_id: string): string {
+		return character_id
+			.toLocaleLowerCase()
+			.replace('predator_', '')
+			.replace('_oilrig', '')
+			.replace('raid_', '')
+			.replace('summon_', '')
+			.replace('_max', '')
+			.replace(/_\d+$/, '')
+			.replace('boss_', '');
+	}
+
+	loadPalImage(character_id: string, is_pal: boolean = true): string {
+		if (!character_id) return staticIcons.unknownIcon;
+		character_id = is_pal ? this.cleanseCharacterId(character_id) : 'commonhuman';
 		let image = this.loadImage(`${ASSET_DATA_PATH}/img/pals/full/${character_id}.png`);
 		if (image) {
 			return image;
@@ -71,22 +75,16 @@ class AssetLoader {
 		return image || staticIcons.unknownIcon;
 	}
 
-	loadMenuImage(character_id: string, is_pal: boolean = true): string | undefined {
-		if (is_pal) {
-			character_id = character_id
-				.toLocaleLowerCase()
-				.replace('predator_', '')
-				.replace('_oilrig', '')
-				.replace('raid_', '')
-				.replace('summon_', '')
-				.replace('_max', '')
-				.replace(/_\d+$/, '');
-		} else {
-			character_id = 'commonhuman';
-		}
+	loadMenuImage(character_id: string, is_pal: boolean = true): string {
+		if (!character_id) return staticIcons.unknownIcon;
+		character_id = is_pal ? this.cleanseCharacterId(character_id) : 'commonhuman';
 		const image = this.loadImage(`${ASSET_DATA_PATH}/img/pals/menu/${character_id}_menu.png`);
 		if (image) {
 			return image;
+		} else {
+			console.warn(
+				`Failed to load menu image for ${`${ASSET_DATA_PATH}/img/pals/menu/${character_id}_menu.png`}`
+			);
 		}
 		return staticIcons.unknownIcon;
 	}

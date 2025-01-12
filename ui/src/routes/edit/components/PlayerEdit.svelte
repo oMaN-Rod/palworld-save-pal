@@ -1,24 +1,17 @@
 <script lang="ts">
-	import { Card, ItemHeader, Progress } from '$components/ui';
+	import { Input, ItemHeader, Progress } from '$components/ui';
 	import { getAppState, getToastState, getSocketState, getModalState } from '$states';
-	import {
-		EntryState,
-		type ItemContainerSlot,
-		type ItemContainer,
-		type Pal,
-		MessageType
-	} from '$types';
+	import { EntryState, type ItemContainerSlot, type ItemContainer, type Pal } from '$types';
 	import { ASSET_DATA_PATH, MAX_LEVEL } from '$lib/constants';
-	import { itemsData, expData, palsData } from '$lib/data';
+	import { itemsData, expData } from '$lib/data';
 	import { Tabs, Accordion } from '@skeletonlabs/skeleton-svelte';
 	import { Tooltip } from '$components/ui';
 	import {
 		ItemBadge,
 		PlayerPresets,
-		PalBadge,
-		PalSelectModal,
 		PlayerStats,
-		PlayerHealthBadge
+		PlayerHealthBadge,
+		TextInputModal
 	} from '$components';
 	import {
 		Bomb,
@@ -29,16 +22,15 @@
 		Swords,
 		ArrowUp01,
 		Minus,
-		Plus
+		Plus,
+		Edit
 	} from 'lucide-svelte';
 	import { assetLoader } from '$utils';
 
-	const ws = getSocketState();
 	const appState = getAppState();
 	const toast = getToastState();
 	const modal = getModalState();
 
-	let otomoContainer: Record<string, Pal> = $state({});
 	let commonContainer: ItemContainer = $state({ id: '', type: '', slots: [] });
 	let essentialContainer: ItemContainer = $state({ id: '', type: '', slots: [] });
 	let weaponLoadOutContainer: ItemContainer = $state({ id: '', type: '', slots: [] });
@@ -72,6 +64,13 @@
 		type: '',
 		count: 0
 	});
+	let sphereModule: ItemContainerSlot = $state({
+		id: '',
+		static_id: '',
+		slot_index: 0,
+		type: '',
+		count: 0
+	});
 	let accessoryGear: ItemContainerSlot[] = $state([]);
 	let group = $state('inventory');
 	let sideBarExpanded: string[] = $state(['stats']);
@@ -91,14 +90,13 @@
 	});
 
 	let inventorySlotCount = $derived.by(() => {
-		let slotCount = 0;
+		let extraSlots = 0;
 		Object.values(essentialContainer.slots).forEach((slot) => {
 			if (slot.static_id.includes('AdditionalInventory_')) {
-				const inventoryCount = parseInt(slot.static_id.slice(-1));
-				slotCount = inventoryCount > slotCount ? inventoryCount : slotCount;
+				extraSlots += 3;
 			}
 		});
-		return 42 + slotCount * 3;
+		return Math.min(42 + extraSlots, 54);
 	});
 
 	let { levelProgressToNext, levelProgressValue, levelProgressMax } = $derived.by(() => {
@@ -350,7 +348,7 @@
 			const container = appState.selectedPlayer.player_equipment_armor_container;
 			container.slots.sort((a, b) => a.slot_index - b.slot_index);
 			let containerSlots = [];
-			for (let i = 0; i < 8; i++) {
+			for (let i = 0; i < 9; i++) {
 				const slot = container.slots.find((s) => s.slot_index === i);
 				if (!slot) {
 					const emptySlot = {
@@ -370,33 +368,9 @@
 			bodyGear = containerSlots[1];
 			shieldGear = containerSlots[4];
 			gliderGear = containerSlots[5];
+			sphereModule = containerSlots[8];
 			accessoryGear = containerSlots.slice(2, 4).concat(containerSlots.slice(6, 8));
 			playerEquipmentArmorContainer.slots = containerSlots;
-		}
-	}
-
-	function loadOtomoContainer() {
-		if (appState.selectedPlayer && appState.selectedPlayer.pals) {
-			const container_id = appState.selectedPlayer.otomo_container_id;
-
-			const otomoEntries = Object.entries(appState.selectedPlayer.pals).filter(
-				([_, pal]) => pal.storage_id === container_id
-			);
-
-			const allSlots = Array(5)
-				.fill(null)
-				.map((_, index) => {
-					const existingPal = otomoEntries.find(([_, pal]) => pal.storage_slot === index);
-					if (existingPal) {
-						return existingPal;
-					} else {
-						const emptyPalId = `empty-${index}`;
-						return [emptyPalId, { character_id: 'None' }];
-					}
-				});
-
-			// Convert the array back to an object
-			otomoContainer = Object.fromEntries(allSlots);
 		}
 	}
 
@@ -450,65 +424,6 @@
 		appState.selectedPlayer.state = EntryState.MODIFIED;
 	}
 
-	function handleMoveToPalbox(pal: Pal) {
-		if (appState.selectedPlayer) {
-			const message = {
-				type: MessageType.MOVE_PAL,
-				data: {
-					player_id: appState.selectedPlayer.uid,
-					pal_id: pal.instance_id,
-					container_id: appState.selectedPlayer.pal_box_id
-				}
-			};
-			ws.send(JSON.stringify(message));
-		}
-	}
-
-	async function handleDeletePal(pal: Pal) {
-		const palData = await palsData.getPalInfo(pal.character_id);
-		const confirmed = await modal.showConfirmModal({
-			title: 'Delete Pal(s)',
-			message: `Are you sure you want to delete ${pal.nickname || palData?.localized_name}?`,
-			confirmText: 'Delete',
-			cancelText: 'Cancel'
-		});
-
-		if (appState.selectedPlayer && appState.selectedPlayer.pals && confirmed) {
-			const data = {
-				player_id: appState.selectedPlayer.uid,
-				pal_ids: [pal.instance_id]
-			};
-
-			const message = {
-				type: MessageType.DELETE_PALS,
-				data
-			};
-			ws.send(JSON.stringify(message));
-			appState.selectedPlayer.pals = Object.fromEntries(
-				Object.entries(appState.selectedPlayer.pals).filter(([id]) => pal.instance_id !== id)
-			);
-		}
-	}
-
-	async function handleAddPal() {
-		if (!appState.selectedPlayer) return;
-		// @ts-ignore
-		const [selectedPal, nickname] = await modal.showModal<string>(PalSelectModal, {
-			title: 'Add a new Pal'
-		});
-		const palData = await palsData.getPalInfo(selectedPal);
-		const message = {
-			type: MessageType.ADD_PAL,
-			data: {
-				player_id: appState.selectedPlayer.uid,
-				pal_code_name: selectedPal,
-				nickname: nickname || `[New] ${palData?.localized_name}`,
-				container_id: appState.selectedPlayer.otomo_container_id
-			}
-		};
-		ws.send(JSON.stringify(message));
-	}
-
 	$effect(() => {
 		if (appState.selectedPlayer) {
 			loadCommonContainer();
@@ -516,17 +431,29 @@
 			loadFoodContainer();
 			loadWeaponLoadoutContainer();
 			loadPlayerEquipmentArmorContainer();
-			loadOtomoContainer();
 			health = 500 + appState.selectedPlayer.status_point_list.max_hp * 100;
 		}
 	});
+
+	async function handleUpdateNickname() {
+		if (!appState.selectedPlayer) return;
+		// @ts-ignore
+		const result = await modal.showModal<string>(TextInputModal, {
+			title: 'Change Player Name',
+			value: appState.selectedPlayer.nickname
+		});
+		if (result) {
+			appState.selectedPlayer.nickname = result;
+			appState.selectedPlayer.state = EntryState.MODIFIED;
+		}
+	}
 </script>
 
 {#if appState.selectedPlayer}
 	<div class="flex h-full flex-col overflow-auto">
 		<div class="ml-2 flex">
 			<!-- Main content wrapper -->
-			<div class="grid w-full grid-cols-[auto_1fr] gap-4 pr-[340px]">
+			<div class="grid w-full grid-cols-[auto_1fr] gap-4 pr-[420px]">
 				<!-- Inventory -->
 				<div class="flex h-[600px] flex-col">
 					<div class="mb-4 flex items-center space-x-2">
@@ -739,6 +666,13 @@
 							onCopyPaste={(event) => handleCopyPaste(event, gliderGear, false)}
 							onUpdate={onItemUpdate}
 						/>
+						<ItemHeader text="Sphere Module" />
+						<ItemBadge
+							bind:slot={sphereModule}
+							itemGroup="SphereModule"
+							onCopyPaste={(event) => handleCopyPaste(event, sphereModule, false)}
+							onUpdate={onItemUpdate}
+						/>
 					</div>
 					<div class="col-span-3 ml-12 mt-2 space-y-2">
 						<ItemHeader text="Food" />
@@ -760,7 +694,7 @@
 			</div>
 
 			<!-- Stats -->
-			<div class="fixed right-2 top-[60px] w-80 flex-none" bind:this={sideBarWrapper}>
+			<div class="fixed right-2 w-96 flex-none" bind:this={sideBarWrapper}>
 				<div
 					class="border-l-surface-600 preset-filled-surface-100-900 mb-2 mr-2 flex rounded-none border-l-2 p-4"
 				>
@@ -783,6 +717,15 @@
 
 					<div class="grow">
 						<div class="flex flex-col">
+							<div class="flex space-x-2">
+								<button
+									class="hover:ring-secondary-500 hover:ring-offset-surface-900 text-start font-bold hover:ring hover:ring-offset-4"
+									onclick={handleUpdateNickname}
+								>
+									<Edit class="h-4 w-4" />
+								</button>
+								<span>{appState.selectedPlayer.nickname}</span>
+							</div>
 							<div class="flex flex-col space-y-2">
 								<div class="flex">
 									<span class="text-on-surface grow">NEXT</span>
@@ -819,26 +762,6 @@
 					</Accordion.Item>
 				</Accordion>
 			</div>
-		</div>
-		<!-- Party -->
-		<div class="flex">
-			<Card rounded="rounded-none" class="m-2 mt-4 px-4 py-2.5">
-				<div class="flex">
-					<h6 class="h6 mr-4">Party</h6>
-					<div class="flex flex-col">
-						<div class="flex flex-row space-x-4 xl:space-x-8">
-							{#each Object.values(otomoContainer) as pal}
-								<PalBadge
-									bind:pal={otomoContainer[pal.instance_id]}
-									onMoveToPalbox={() => handleMoveToPalbox(pal)}
-									onDelete={() => handleDeletePal(pal)}
-									onAdd={() => handleAddPal()}
-								/>
-							{/each}
-						</div>
-					</div>
-				</div>
-			</Card>
 		</div>
 	</div>
 {:else}

@@ -1,16 +1,7 @@
 <script lang="ts">
 	import '../app.css';
 	import { NavBar, Toast, Modal } from '$components';
-	import {
-		activeSkillsData,
-		elementsData,
-		itemsData,
-		palsData,
-		passiveSkillsData,
-		presetsData,
-		expData,
-		bootstrap
-	} from '$lib/data';
+	import { bootstrap } from '$lib/data';
 	import { getSocketState } from '$states';
 	import { goto } from '$app/navigation';
 	import { getDispatcher } from '$lib/ws/dispatcher';
@@ -29,8 +20,8 @@
 		ws.connect({ goto });
 	});
 
-	onMount(() => {
-		bootstrap();
+	onMount(async () => {
+		await bootstrap();
 	});
 </script>
 
