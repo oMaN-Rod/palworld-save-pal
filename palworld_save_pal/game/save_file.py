@@ -498,7 +498,7 @@ class SaveFile(BaseModel):
                 player_sav_bytes = player_sav_files.get(uid)
                 if not player_sav_bytes:
                     logger.warning("No player save file found for player %s", uid)
-                    return
+                    continue
 
                 raw_gvas, _ = decompress_sav_to_gvas(player_sav_bytes)
                 gvas_file = GvasFile.read(
