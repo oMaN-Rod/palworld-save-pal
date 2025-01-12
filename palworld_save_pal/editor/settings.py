@@ -1,4 +1,3 @@
-import os
 from pydantic import BaseModel, computed_field
 
 from palworld_save_pal.utils.file_manager import STEAM_ROOT
@@ -12,7 +11,6 @@ settings_json = JsonManager("data/json/settings.json")
 
 class SettingsDTO(BaseModel):
     language: str
-    save_dir: str
     clone_prefix: str
     new_pal_prefix: str
 
@@ -37,7 +35,7 @@ class Settings(BaseModel):
         self._language = value
         self.write()
 
-    @computed_field
+    @property
     def save_dir(self) -> str:
         return self._save_dir
 

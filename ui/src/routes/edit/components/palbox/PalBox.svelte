@@ -342,6 +342,16 @@
 		}
 	}
 
+	function formatNickname(nickname: string, type: 'clone' | 'new' = 'new') {
+		if (type === 'new' && appState.settings.new_pal_prefix) {
+			return `${appState.settings.new_pal_prefix} ${nickname}`;
+		}
+		if (type === 'clone' && appState.settings.clone_prefix) {
+			return `${appState.settings.clone_prefix} ${nickname}`;
+		}
+		return nickname;
+	}
+
 	async function handleAddPal(target: 'party' | 'palbox', index: number | undefined = undefined) {
 		if (!appState.selectedPlayer) return;
 		// @ts-ignore
@@ -360,7 +370,7 @@
 			data: {
 				player_id: appState.selectedPlayer.uid,
 				character_id: selectedPal,
-				nickname: nickname || palData?.localized_name || selectedPal,
+				nickname: formatNickname(nickname || palData?.localized_name || selectedPal),
 				container_id: containerId,
 				storage_slot: index
 			}
@@ -408,9 +418,10 @@
 			const pal = appState.selectedPlayer.pals[selectedPal.id];
 			if (!pal) return;
 			const clonedPal = deepCopy(pal);
-			clonedPal.nickname = clonedPal.nickname
-				? `[Clone] ${clonedPal.nickname}`
-				: `[Clone] ${clonedPal.name}`;
+			clonedPal.nickname = formatNickname(
+				clonedPal.nickname || clonedPal.name || clonedPal.character_id,
+				'clone'
+			);
 			const message = {
 				type: MessageType.CLONE_PAL,
 				data: clonedPal
@@ -419,11 +430,12 @@
 		}
 	}
 
-	async function clonePal(pal: Pal) {
+	async function handleClonePal(pal: Pal) {
 		const clonedPal = deepCopy(pal);
-		clonedPal.nickname = clonedPal.nickname
-			? `[Clone] ${clonedPal.nickname}`
-			: `[Clone] ${clonedPal.name}`;
+		clonedPal.nickname = formatNickname(
+			clonedPal.nickname || clonedPal.name || clonedPal.character_id,
+			'clone'
+		);
 		const message = {
 			type: MessageType.CLONE_PAL,
 			data: clonedPal
@@ -440,13 +452,6 @@
 			} else {
 				selectedPals = [...selectedPals, pal.instance_id];
 			}
-		}
-	}
-
-	// Clear selections when clicking outside
-	function handleBackgroundClick(event: MouseEvent) {
-		if (event.target === event.currentTarget) {
-			selectedPals = [];
 		}
 	}
 
@@ -801,7 +806,7 @@
 								onMove={() => handleMoveToPalbox(pal)}
 								onDelete={() => handleDeletePal(pal)}
 								onAdd={() => handleAddPal('party', index + 1)}
-								onClone={() => clonePal(pal)}
+								onClone={() => handleClonePal(pal)}
 							/>
 						{/each}
 					</div>
@@ -846,7 +851,7 @@
 								onMove={() => handleMoveToParty(item.pal)}
 								onDelete={() => handleDeletePal(item.pal)}
 								onAdd={() => handleAddPal('palbox', item.pal.storage_slot)}
-								onClone={() => clonePal(item.pal)}
+								onClone={() => handleClonePal(item.pal)}
 							/>
 						{/if}
 					{/each}

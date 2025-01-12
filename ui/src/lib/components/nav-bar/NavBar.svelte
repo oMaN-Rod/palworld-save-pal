@@ -35,7 +35,7 @@
 			const message = {
 				type: MessageType.UPDATE_SETTINGS,
 				data: {
-					language: result
+					...appState.settings
 				}
 			};
 			ws.send(JSON.stringify(message));
