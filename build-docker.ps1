@@ -23,78 +23,12 @@ function Get-BestIPAddress {
 }
 
 # Get the IP address
-$ip_address = Get-BestIPAddress
+$IPAddress = Get-BestIPAddress
 
-# Create or update the .env file with PUBLIC_WS_URL and PUBLIC_DESKTOP_MODE
-@"
-PUBLIC_WS_URL=${ip_address}:5174/ws
-PUBLIC_DESKTOP_MODE=false
-"@ | Set-Content -Path ".\ui\.env"
+Write-Host "Using IP Address: $IPAddress"
 
-# Navigate to the ui directory
-Set-Location -Path ".\ui"
-
-# Remove .svelte-kit directory if it exists
-if (Test-Path -Path ".svelte-kit") {
-    Remove-Item -Path ".svelte-kit" -Recurse -Force
-}
-
-# Function to check if a command exists
-function Test-Command($command) {
-    $oldPreference = $ErrorActionPreference
-    $ErrorActionPreference = 'stop'
-    try {
-        if (Get-Command $command) { return $true }
-    }
-    catch { return $false }
-    finally { $ErrorActionPreference = $oldPreference }
-}
-
-# Determine which package manager to use
-$packageManager = if (Test-Command 'bun') {
-    'bun'
-}
-elseif (Test-Command 'npm') {
-    'npm'
-}
-elseif (Test-Command 'yarn') {
-    'yarn'
-}
-else {
-    Write-Error "No suitable package manager found. Please install Bun, npm, or Yarn."
-    exit 1
-}
-
-Write-Host "Using $packageManager as the package manager."
-
-# Install dependencies
-Write-Host "Installing dependencies..."
-& $packageManager install
-
-if ($LASTEXITCODE -ne 0) {
-    Write-Error "$packageManager install failed. Exiting."
-    exit 1
-}
-
-# Build the frontend
-Write-Host "Building the frontend..."
-& $packageManager run build
-
-if ($LASTEXITCODE -ne 0) {
-    Write-Error "$packageManager run build failed. Exiting."
-    exit 1
-}
-
-# Navigate back to the root directory
-Set-Location -Path ".."
-
-# Run docker-compose up --build -d
-Write-Host "Starting Docker Compose..."
-docker-compose up --build -d
-
-if ($LASTEXITCODE -ne 0) {
-    Write-Error "docker-compose up failed. Exiting."
-    exit 1
-}
+# Build and run docker compose
+docker-compose build --build-arg PUBLIC_WS_URL=$IPAddress
+docker-compose up -d
 
 Write-Host "Build and deployment completed successfully."

@@ -60,26 +60,31 @@ To run Palworld Save Pal using Docker:
    ```
 
 3. Or you can follow these steps:
-   1. Set the environment variable for the svelte SPA `ui/.env`. Replace `{{ ip_address }}` with the IP address of the server::
+   1. Modify the `docker-compose.yml` file to set the IP/URL address of your docker host:
 
-      ```env
-      PUBLIC_WS_URL={{ ip_address }}:5174/ws
-      PUBLIC_DESKTOP_MODE=false
+      ```yaml
+      services:
+         backend:
+            build:
+               context: .
+               dockerfile: Dockerfile
+               args:
+               # Change this to the URL of your public server
+               - PUBLIC_WS_URL=127.0.0.1:5174/ws
+            ports:
+               - "5174:5174"
+            volumes:
+               - ./data:/app/data
+               - ./palworld_save_pal:/app/palworld_save_pal
+            environment:
+               - PORT=5174
+            command: python psp.py
       ```
 
-   2. Build the SPA (replace bun with your package manager of choice). This will create a build directory in the project root containing the static files for the SPA:
+   2. Build the docker container:
 
       ```bash
-      cd ui
-      rm -rf .svelte-kit
-      bun install
-      bun run build
-      ```
-
-   3. Build the docker image:
-
-      ```bash
-      docker-compose up --build -d
+      docker compose up --build -d
       ```
 
 ## 👨‍💻 Developer Guide

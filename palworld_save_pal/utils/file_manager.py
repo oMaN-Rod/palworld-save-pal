@@ -23,12 +23,16 @@ STEAM_ROOT = (
     if os.name == "nt"
     else None
 )
-GAMEPASS_ROOT = os.path.join(
-    os.getenv("LOCALAPPDATA"),
-    "Packages",
-    "PocketpairInc.Palworld_ad4psfrxyesvt",
-    "SystemAppData",
-    "wgs",
+GAMEPASS_ROOT = (
+    os.path.join(
+        os.getenv("LOCALAPPDATA"),
+        "Packages",
+        "PocketpairInc.Palworld_ad4psfrxyesvt",
+        "SystemAppData",
+        "wgs",
+    )
+    if os.name == "nt"
+    else None
 )
 
 
