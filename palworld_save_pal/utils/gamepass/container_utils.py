@@ -198,10 +198,16 @@ def copy_container(
                 source_files.extend(file_list.files)
 
     new_container_uuid = uuid.uuid4()
-    new_container_name = source_container.container_name.replace(
-        source_container.container_name.split("-")[0], new_save_id
+    new_container_name = clean_file_name(
+        source_container.container_name.replace(
+            source_container.container_name.split("-")[0], new_save_id
+        )
     )
-
+    logger.debug(
+        "Container renamed from %s => %s",
+        source_container.container_name,
+        new_container_name,
+    )
     new_container_dir = os.path.join(
         dest_path, new_container_uuid.bytes_le.hex().upper()
     )
@@ -216,9 +222,9 @@ def copy_container(
                 "value"
             ] = world_name
             file.data = SaveFile().sav(level_meta)
+            logger.debug("Updated world name in LevelMeta: %s", world_name)
 
-        file_name = clean_file_name(file.name)
-        new_files.append(ContainerFile(file_name, new_file_uuid, file.data))
+        new_files.append(ContainerFile(file.name, new_file_uuid, file.data))
 
         file_path = os.path.join(
             new_container_dir, new_file_uuid.bytes_le.hex().upper()
@@ -238,7 +244,6 @@ def copy_container(
             f.write(name_bytes + name_padding)
             f.write(b"\0" * 16)
             f.write(file.uuid.bytes)
-    logger.debug("Created new container file: %s", container_file)
 
     new_container = Container(
         container_name=new_container_name,
@@ -251,9 +256,11 @@ def copy_container(
     )
 
     logger.debug(
-        "Copied container: %s => %s",
-        new_container_name,
-        source_container.container_uuid,
+        "Created new container; name: %s, uuid: %s, path: %s, file: %s",
+        new_container.container_name,
+        new_container.container_uuid,
+        container_file,
+        os.path.join(new_container_dir, new_files[0].uuid.bytes_le.hex().upper()),
     )
     return new_container
 

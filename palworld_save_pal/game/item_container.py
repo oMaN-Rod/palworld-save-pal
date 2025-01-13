@@ -217,35 +217,36 @@ class ItemContainer(BaseModel):
         )
 
     def _update_or_create_dynamic_item(self, slot: ItemContainerSlot) -> None:
+        if not slot.dynamic_item:
+            return
         logger.debug("%s (%s) => %s", self.type, self.id, slot)
-        if slot.dynamic_item:
-            dynamic_item_data = next(
-                (
-                    item
-                    for item in self._dynamic_item_save_data
-                    if are_equal_uuids(
-                        PalObjects.as_uuid(
-                            PalObjects.get_nested(
-                                item,
-                                "RawData",
-                                "value",
-                                "id",
-                                "local_id_in_created_world",
-                            )
-                        ),
-                        slot.dynamic_item.local_id,
-                    )
-                ),
-                None,
-            )
+        dynamic_item_data = next(
+            (
+                item
+                for item in self._dynamic_item_save_data
+                if are_equal_uuids(
+                    PalObjects.as_uuid(
+                        PalObjects.get_nested(
+                            item,
+                            "RawData",
+                            "value",
+                            "id",
+                            "local_id_in_created_world",
+                        )
+                    ),
+                    slot.dynamic_item.local_id,
+                )
+            ),
+            None,
+        )
 
-            if dynamic_item_data:
-                self._update_dynamic_item(slot, dynamic_item_data)
-            else:
-                slot.dynamic_item.local_id = uuid.uuid4()
-                new_item = PalObjects.DynamicItem(slot)
-                self._update_dynamic_item(slot, new_item)
-                self._dynamic_item_save_data.append(new_item)
+        if dynamic_item_data:
+            self._update_dynamic_item(slot, dynamic_item_data)
+        else:
+            slot.dynamic_item.local_id = uuid.uuid4()
+            new_item = PalObjects.DynamicItem(slot)
+            self._update_dynamic_item(slot, new_item)
+            self._dynamic_item_save_data.append(new_item)
 
     def _update_dynamic_item(
         self, slot: ItemContainerSlot, item: Dict[str, Any]

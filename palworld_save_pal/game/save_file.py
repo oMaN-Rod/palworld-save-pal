@@ -290,7 +290,7 @@ class SaveFile(BaseModel):
         player_sav_files: Dict[str, bytes],
         level_meta: Optional[bytes] = None,
     ):
-        logger.info("Loading %s as GVAS", self.name)
+        logger.info("Loading %s", self.name)
         raw_gvas, _ = decompress_sav_to_gvas(level_sav)
         gvas_file = GvasFile.read(
             raw_gvas, PALWORLD_TYPE_HINTS, CUSTOM_PROPERTIES, allow_nan=True
@@ -298,7 +298,6 @@ class SaveFile(BaseModel):
         self._gvas_file = gvas_file
 
         if level_meta:
-            logger.info("Loading %s as GVAS", self.name)
             self.load_level_meta(level_meta)
             self._load_world_name()
         else:

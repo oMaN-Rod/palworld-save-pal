@@ -87,8 +87,6 @@ async def save_modded_gamepass_save(world_name: str, ws: WebSocket, ws_callback)
         cleanup_container_path(container_index, container_path)
 
         original_save_name = gamepass_save.save_id
-        # create a new save_name which consist of a uuid4 all uppercase with no dashes
-        new_save_id = uuid.uuid4().hex.upper()
         original_containers = container_index.get_save_containers(original_save_name)
 
         if not original_containers:
@@ -96,6 +94,10 @@ async def save_modded_gamepass_save(world_name: str, ws: WebSocket, ws_callback)
 
         # Convert current save to SAV format in memory
         await ws_callback("Converting modified save to SAV format...")
+        # create a new save_name which consist of a uuid4 all uppercase with no dashes
+        new_save_id = uuid.uuid4().hex.upper()
+        logger.debug("New save id: %s => %s", gamepass_save.save_id, new_save_id)
+        app_state.save_file.name = new_save_id
         save_data = app_state.save_file.sav()
 
         # Save modified gamepass save with new containers
