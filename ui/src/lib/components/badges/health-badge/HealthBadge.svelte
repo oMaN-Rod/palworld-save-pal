@@ -7,7 +7,6 @@
 	let {
 		pal = $bindable(),
 		player = $bindable(),
-		width = 'w-[400px]',
 		showActions = true,
 		showStomachLabel = true,
 		healthHeight = 'h-6',
@@ -48,7 +47,7 @@
 </script>
 
 {#if pal}
-	<div class="flex flex-row items-center">
+	<div class="flex items-center">
 		{#if showActions}
 			<Tooltip>
 				<button onclick={handleHeal} aria-label="Health">
@@ -66,7 +65,6 @@
 			bind:max={pal.max_hp}
 			height={healthHeight}
 			color="green"
-			{width}
 			dividend={1000}
 		/>
 	</div>
@@ -87,7 +85,6 @@
 			bind:value={pal.stomach}
 			max={maxStomach}
 			height={stomachHeight}
-			{width}
 			color="orange"
 			showLabel={showStomachLabel}
 		/>

@@ -6,7 +6,6 @@
 		value = $bindable(0),
 		max = $bindable(100),
 		height = 'h-2',
-		width = 'w-full',
 		rounded = 'rounded-none',
 		color = '',
 		dividend = 1,
@@ -66,8 +65,8 @@
 	});
 </script>
 
-<Tooltip>
-	<div class={cn('bg-surface-800', width, height, rounded)} {...additionalProps}>
+<Tooltip baseClass="w-full">
+	<div class={cn('bg-surface-800', height, rounded)} {...additionalProps}>
 		<div
 			class={cn(
 				'h-full overflow-visible whitespace-nowrap pl-1 text-start align-middle text-sm font-bold transition-all',
