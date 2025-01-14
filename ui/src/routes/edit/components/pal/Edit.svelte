@@ -15,7 +15,7 @@
 	import { staticIcons } from '$lib/constants';
 	import { palsData, expData, presetsData } from '$lib/data';
 	import { getAppState, getModalState, getToastState } from '$states';
-	import { Brain, Save } from 'lucide-svelte';
+	import { BicepsFlexed, Brain, Save } from 'lucide-svelte';
 	import { Souls } from '$components';
 	import SkillPresets from './SkillPresets.svelte';
 	import { assetLoader, calculateFilters } from '$utils';
@@ -167,6 +167,25 @@
 	$effect(() => {
 		calcPalLevelProgress();
 	});
+
+	function handleMaxIVs() {
+		if (appState.selectedPal) {
+			appState.selectedPal.talent_hp = 100;
+			appState.selectedPal.talent_shot = 100;
+			appState.selectedPal.talent_defense = 100;
+			appState.selectedPal.state = EntryState.MODIFIED;
+		}
+	}
+
+	function handleMaxSouls() {
+		if (appState.selectedPal) {
+			appState.selectedPal.rank_hp = 20;
+			appState.selectedPal.rank_attack = 20;
+			appState.selectedPal.rank_defense = 20;
+			appState.selectedPal.rank_craftspeed = 20;
+			appState.selectedPal.state = EntryState.MODIFIED;
+		}
+	}
 </script>
 
 {#if appState.selectedPal}
@@ -284,9 +303,35 @@
 		<div class="w-1/3 overflow-auto p-2">
 			<div class="flex flex-col space-y-2">
 				<StatsBadges bind:pal={appState.selectedPal} bind:player={appState.selectedPlayer} />
-				<SectionHeader text="Talents (IVs)" />
+				<SectionHeader text="Talents (IVs)">
+					{#snippet action()}
+						<div class="flex">
+							<Tooltip>
+								<button class="btn hover:bg-secondary-500/25 ml-2 p-2" onclick={handleMaxIVs}>
+									<BicepsFlexed />
+								</button>
+								{#snippet popup()}
+									<span>Max out IVs</span>
+								{/snippet}
+							</Tooltip>
+						</div>
+					{/snippet}
+				</SectionHeader>
 				<Talents bind:pal={appState.selectedPal} />
-				<SectionHeader text="Souls" />
+				<SectionHeader text="Souls">
+					{#snippet action()}
+						<div class="flex">
+							<Tooltip>
+								<button class="btn hover:bg-secondary-500/25 ml-2 p-2" onclick={handleMaxSouls}>
+									<BicepsFlexed />
+								</button>
+								{#snippet popup()}
+									<span>Max out Souls</span>
+								{/snippet}
+							</Tooltip>
+						</div>
+					{/snippet}
+				</SectionHeader>
 				<Souls bind:pal={appState.selectedPal} />
 			</div>
 		</div>
