@@ -1,10 +1,11 @@
 <script lang="ts">
-	import { SectionHeader, Tooltip } from '$components/ui';
+	import { PalInfoPopup } from '$components';
+
+	import { Tooltip } from '$components/ui';
 	import { type Pal, PalGender } from '$types';
 	import { ASSET_DATA_PATH, staticIcons } from '$lib/constants';
 	import { cn } from '$theme';
 	import { getAppState, getNavigationState } from '$states';
-	import { ActiveSkillBadge, HealthBadge, PalHeader, PassiveSkillBadge } from '$components';
 	import { palsData } from '$lib/data';
 	import ContextMenu from '$components/ui/context-menu/ContextMenu.svelte';
 	import { Plus, ArchiveRestore, Trash, Copy } from 'lucide-svelte';
@@ -39,30 +40,6 @@
 				: 'hover:ring hover:ring-secondary-500'
 		)
 	);
-
-	let activeSkills = $derived.by(() => {
-		if (pal) {
-			let skills = [...pal.active_skills];
-			while (skills.length < 3) {
-				skills.push('Empty');
-			}
-			return skills;
-		} else {
-			return [];
-		}
-	});
-
-	let passiveSkills = $derived.by(() => {
-		if (pal) {
-			let skills = [...pal.passive_skills];
-			while (skills.length < 4) {
-				skills.push('Empty');
-			}
-			return skills;
-		} else {
-			return [];
-		}
-	});
 
 	let palData = $derived(palsData.pals[pal.character_key]);
 
@@ -158,25 +135,7 @@
 				</div>
 
 				{#snippet popup()}
-					<div class="flex w-[450px] flex-col space-y-2">
-						<PalHeader bind:pal showActions={false} />
-						<HealthBadge bind:pal player={appState.selectedPlayer} />
-						{#if activeSkills.length > 0}
-							<SectionHeader text="Active Skills" />
-							{#each activeSkills as skill}
-								<ActiveSkillBadge {skill} palCharacterId={pal.character_key} />
-							{/each}
-						{/if}
-						{#if passiveSkills.length > 0}
-							<SectionHeader text="Passive Skills" />
-							<div class="grid grid-cols-2 gap-2">
-								{#each passiveSkills as skill}
-									<PassiveSkillBadge {skill} />
-								{/each}
-							</div>
-						{/if}
-						<span class="text-justify">{palData?.description}</span>
-					</div>
+					<PalInfoPopup bind:pal />
 				{/snippet}
 			</Tooltip>
 		{:else}

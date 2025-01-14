@@ -12,6 +12,7 @@ import Modal from './modal/Modal.svelte';
 import NavBar from './nav-bar/NavBar.svelte';
 import PalCard from './pal-card/PalCard.svelte';
 import PalHeader from './pal-header/PalHeader.svelte';
+import PalInfoPopup from './pal-info-popup/PalInfoPopup.svelte';
 import PlayerList from './player-list/PlayerList.svelte';
 import PlayerPresets from './player-presets/PlayerPresets.svelte';
 import PlayerStats from './player-stats/PlayerStats.svelte';
@@ -32,6 +33,7 @@ export {
 	PalBadge,
 	PalCard,
 	PalHeader,
+	PalInfoPopup,
 	PassiveSkillBadge,
 	PlayerHealthBadge,
 	PlayerList,

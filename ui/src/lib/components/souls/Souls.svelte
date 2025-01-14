@@ -58,29 +58,6 @@
 	/>
 </div>
 <div class="flex flex-row items-center space-x-2">
-	<span class="ml-2 w-3/12">Defense</span>
-	<Slider
-		height="h-0.5"
-		meterBg="bg-primary-500"
-		thumbRingColor="ring-primary-500"
-		min={0}
-		max={20}
-		markers={[5, 10, 15]}
-		step={1}
-		value={defense}
-		onValueChange={handleUpdateDefense}
-	/>
-	<Input
-		type="number"
-		labelClass="w-24"
-		inputClass="h-8"
-		value={defense[0]}
-		onchange={handleUpdateDefense}
-		min={0}
-		max={20}
-	/>
-</div>
-<div class="flex flex-row items-center space-x-2">
 	<span class="ml-2 w-3/12">Attack</span>
 	<Slider
 		height="h-0.5"
@@ -99,6 +76,29 @@
 		inputClass="h-8"
 		value={attack[0]}
 		onchange={handleUpdateAttack}
+		min={0}
+		max={20}
+	/>
+</div>
+<div class="flex flex-row items-center space-x-2">
+	<span class="ml-2 w-3/12">Defense</span>
+	<Slider
+		height="h-0.5"
+		meterBg="bg-primary-500"
+		thumbRingColor="ring-primary-500"
+		min={0}
+		max={20}
+		markers={[5, 10, 15]}
+		step={1}
+		value={defense}
+		onValueChange={handleUpdateDefense}
+	/>
+	<Input
+		type="number"
+		labelClass="w-24"
+		inputClass="h-8"
+		value={defense[0]}
+		onchange={handleUpdateDefense}
 		min={0}
 		max={20}
 	/>
