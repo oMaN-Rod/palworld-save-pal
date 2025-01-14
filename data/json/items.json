@@ -10,7 +10,7 @@
     "price": 4000,
     "sort_id": 2010,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "Attack_ACC_up1"
       ]
@@ -29,7 +29,7 @@
     "price": 7000,
     "sort_id": 2011,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "Attack_ACC_up2"
       ]
@@ -48,7 +48,7 @@
     "price": 10000,
     "sort_id": 2012,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "Attack_ACC_up3"
       ]
@@ -67,7 +67,7 @@
     "price": 30000,
     "sort_id": 2152,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "AirDash_1"
       ]
@@ -86,7 +86,7 @@
     "price": 30000,
     "sort_id": 2153,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "AirDash_2"
       ]
@@ -105,7 +105,7 @@
     "price": 30000,
     "sort_id": 2154,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "AirDash_3"
       ]
@@ -124,7 +124,7 @@
     "price": 30000,
     "sort_id": 2155,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "AirDash_4"
       ]
@@ -143,7 +143,7 @@
     "price": 4000,
     "sort_id": 2080,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "ElementResist_Aqua_1"
       ]
@@ -162,7 +162,7 @@
     "price": 7000,
     "sort_id": 2081,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "ElementResist_Aqua_2"
       ]
@@ -181,7 +181,7 @@
     "price": 10000,
     "sort_id": 2082,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "ElementResist_Aqua_3"
       ]
@@ -200,7 +200,7 @@
     "price": 7000,
     "sort_id": 2050,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "TemperatureResist_Cold1"
       ]
@@ -219,7 +219,7 @@
     "price": 10000,
     "sort_id": 2051,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "TemperatureResist_Cold2"
       ]
@@ -238,7 +238,7 @@
     "price": 15000,
     "sort_id": 2052,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "TemperatureResist_Cold3"
       ]
@@ -257,7 +257,7 @@
     "price": 4000,
     "sort_id": 2130,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "ElementResist_Dark_1"
       ]
@@ -276,7 +276,7 @@
     "price": 7000,
     "sort_id": 2131,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "ElementResist_Dark_2"
       ]
@@ -295,7 +295,7 @@
     "price": 10000,
     "sort_id": 2132,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "ElementResist_Dark_3"
       ]
@@ -314,7 +314,7 @@
     "price": 4000,
     "sort_id": 2140,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "ElementResist_Dragon_1"
       ]
@@ -333,7 +333,7 @@
     "price": 7000,
     "sort_id": 2141,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "ElementResist_Dragon_2"
       ]
@@ -352,7 +352,7 @@
     "price": 10000,
     "sort_id": 2142,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "ElementResist_Dragon_3"
       ]
@@ -371,7 +371,7 @@
     "price": 4000,
     "sort_id": 2120,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "ElementResist_Earth_1"
       ]
@@ -390,7 +390,7 @@
     "price": 7000,
     "sort_id": 2121,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "ElementResist_Earth_2"
       ]
@@ -409,7 +409,7 @@
     "price": 10000,
     "sort_id": 2122,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "ElementResist_Earth_3"
       ]
@@ -428,7 +428,7 @@
     "price": 4000,
     "sort_id": 2070,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "ElementResist_Fire_1"
       ]
@@ -447,7 +447,7 @@
     "price": 7000,
     "sort_id": 2071,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "ElementResist_Fire_2"
       ]
@@ -466,7 +466,7 @@
     "price": 10000,
     "sort_id": 2072,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "ElementResist_Fire_3"
       ]
@@ -485,7 +485,7 @@
     "price": 4000,
     "sort_id": 2000,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "HP_ACC_up1"
       ]
@@ -504,7 +504,7 @@
     "price": 7000,
     "sort_id": 2001,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "HP_ACC_up2"
       ]
@@ -523,7 +523,7 @@
     "price": 10000,
     "sort_id": 2002,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "HP_ACC_up3"
       ]
@@ -542,7 +542,7 @@
     "price": 30000,
     "sort_id": 2046,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "TemperatureResist_Heat1Cold1"
       ]
@@ -561,7 +561,7 @@
     "price": 50000,
     "sort_id": 2047,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "TemperatureResist_Heat2Cold2"
       ]
@@ -580,7 +580,7 @@
     "price": 100000,
     "sort_id": 2048,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "TemperatureResist_Heat3Cold3"
       ]
@@ -599,7 +599,7 @@
     "price": 7000,
     "sort_id": 2040,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "TemperatureResist_Heat1"
       ]
@@ -618,7 +618,7 @@
     "price": 10000,
     "sort_id": 2041,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "TemperatureResist_Heat2"
       ]
@@ -637,7 +637,7 @@
     "price": 15000,
     "sort_id": 2042,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "TemperatureResist_Heat3"
       ]
@@ -656,7 +656,7 @@
     "price": 4000,
     "sort_id": 2110,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "ElementResist_Ice_1"
       ]
@@ -675,7 +675,7 @@
     "price": 7000,
     "sort_id": 2111,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "ElementResist_Ice_2"
       ]
@@ -694,7 +694,7 @@
     "price": 10000,
     "sort_id": 2112,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "ElementResist_Ice_3"
       ]
@@ -713,7 +713,7 @@
     "price": 30000,
     "sort_id": 2149,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "JumpCount_Increase1"
       ]
@@ -732,7 +732,7 @@
     "price": 30000,
     "sort_id": 2150,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "JumpCount_Increase2"
       ]
@@ -751,7 +751,7 @@
     "price": 30000,
     "sort_id": 2151,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "JumpCount_Increase3"
       ]
@@ -770,7 +770,7 @@
     "price": 30000,
     "sort_id": 2148,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "JumpPower_Increase"
       ]
@@ -789,7 +789,7 @@
     "price": 4000,
     "sort_id": 2100,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "ElementResist_Leaf_1"
       ]
@@ -808,7 +808,7 @@
     "price": 7000,
     "sort_id": 2101,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "ElementResist_Leaf_2"
       ]
@@ -827,7 +827,7 @@
     "price": 10000,
     "sort_id": 2102,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "ElementResist_Leaf_3"
       ]
@@ -846,7 +846,7 @@
     "price": 1000,
     "sort_id": 2145,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "MaxInventoryWeight_up_Equip_1"
       ]
@@ -865,7 +865,7 @@
     "price": 4000,
     "sort_id": 2146,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "MaxInventoryWeight_up_Equip_2"
       ]
@@ -884,7 +884,7 @@
     "price": 7000,
     "sort_id": 2147,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "MaxInventoryWeight_up_Equip_3"
       ]
@@ -903,7 +903,7 @@
     "price": 30000,
     "sort_id": 2143,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "NonKilling"
       ]
@@ -922,7 +922,7 @@
     "price": 1000,
     "sort_id": 2060,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "ElementResist_Normal_1"
       ]
@@ -941,7 +941,7 @@
     "price": 4000,
     "sort_id": 2061,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "ElementResist_Normal_2"
       ]
@@ -960,7 +960,7 @@
     "price": 7000,
     "sort_id": 2062,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "ElementResist_Normal_3"
       ]
@@ -979,7 +979,7 @@
     "price": 5000,
     "sort_id": 2144,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": []
     },
     "disabled": false,
@@ -996,7 +996,7 @@
     "price": 4000,
     "sort_id": 2090,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "ElementResist_Thunder_1"
       ]
@@ -1015,7 +1015,7 @@
     "price": 7000,
     "sort_id": 2091,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "ElementResist_Thunder_2"
       ]
@@ -1034,7 +1034,7 @@
     "price": 10000,
     "sort_id": 2092,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "ElementResist_Thunder_3"
       ]
@@ -1053,7 +1053,7 @@
     "price": 4000,
     "sort_id": 2030,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "WorkSpeed_ACC_up1"
       ]
@@ -1072,7 +1072,7 @@
     "price": 7000,
     "sort_id": 2031,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "WorkSpeed_ACC_up2"
       ]
@@ -1091,7 +1091,7 @@
     "price": 10000,
     "sort_id": 2032,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "WorkSpeed_ACC_up3"
       ]
@@ -1110,7 +1110,7 @@
     "price": 4000,
     "sort_id": 2020,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "defense_ACC_up1"
       ]
@@ -1129,7 +1129,7 @@
     "price": 7000,
     "sort_id": 2021,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "defense_ACC_up2"
       ]
@@ -1148,7 +1148,7 @@
     "price": 10000,
     "sort_id": 2022,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "defense_ACC_up3"
       ]
@@ -1375,7 +1375,7 @@
     "price": 82400,
     "sort_id": 540,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 3000,
       "magazine_size": 20,
       "passive_skills": []
@@ -1395,7 +1395,7 @@
     "price": 82400,
     "sort_id": 541,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 3000,
       "magazine_size": 24,
       "passive_skills": []
@@ -1415,7 +1415,7 @@
     "price": 82400,
     "sort_id": 542,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 4000,
       "magazine_size": 26,
       "passive_skills": []
@@ -1435,7 +1435,7 @@
     "price": 82400,
     "sort_id": 543,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 5000,
       "magazine_size": 28,
       "passive_skills": []
@@ -1455,7 +1455,7 @@
     "price": 82400,
     "sort_id": 544,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 6000,
       "magazine_size": 30,
       "passive_skills": []
@@ -1540,7 +1540,7 @@
     "price": 33000,
     "sort_id": 114,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 400,
       "passive_skills": []
     },
@@ -1559,7 +1559,7 @@
     "price": 200,
     "sort_id": 110,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 150,
       "passive_skills": []
     },
@@ -1578,7 +1578,7 @@
     "price": 2800,
     "sort_id": 111,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 250,
       "passive_skills": []
     },
@@ -1597,7 +1597,7 @@
     "price": 7000,
     "sort_id": 112,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 300,
       "passive_skills": []
     },
@@ -1616,7 +1616,7 @@
     "price": 33000,
     "sort_id": 113,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 400,
       "passive_skills": []
     },
@@ -1879,7 +1879,7 @@
     "price": 80,
     "sort_id": 101,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 150,
       "passive_skills": []
     },
@@ -1898,7 +1898,7 @@
     "price": 80,
     "sort_id": 103,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 150,
       "passive_skills": []
     },
@@ -1917,7 +1917,7 @@
     "price": 10440,
     "sort_id": 142,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 500,
       "passive_skills": []
     },
@@ -7359,7 +7359,7 @@
     "price": 25200,
     "sort_id": 230,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 300,
       "magazine_size": 1,
       "passive_skills": []
@@ -7379,7 +7379,7 @@
     "price": 25200,
     "sort_id": 231,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 800,
       "magazine_size": 1,
       "passive_skills": []
@@ -7399,7 +7399,7 @@
     "price": 25200,
     "sort_id": 232,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 1000,
       "magazine_size": 1,
       "passive_skills": []
@@ -7419,7 +7419,7 @@
     "price": 25200,
     "sort_id": 233,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 1200,
       "magazine_size": 1,
       "passive_skills": []
@@ -7439,7 +7439,7 @@
     "price": 25200,
     "sort_id": 234,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 1400,
       "magazine_size": 1,
       "passive_skills": []
@@ -7459,7 +7459,7 @@
     "price": 25200,
     "sort_id": 241,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 300,
       "magazine_size": 1,
       "passive_skills": []
@@ -7479,7 +7479,7 @@
     "price": 25200,
     "sort_id": 246,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 800,
       "magazine_size": 1,
       "passive_skills": []
@@ -7499,7 +7499,7 @@
     "price": 25200,
     "sort_id": 247,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 1000,
       "magazine_size": 1,
       "passive_skills": []
@@ -7519,7 +7519,7 @@
     "price": 25200,
     "sort_id": 248,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 1200,
       "magazine_size": 1,
       "passive_skills": []
@@ -7539,7 +7539,7 @@
     "price": 25200,
     "sort_id": 249,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 1400,
       "magazine_size": 1,
       "passive_skills": []
@@ -7559,7 +7559,7 @@
     "price": 25200,
     "sort_id": 240,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 300,
       "magazine_size": 1,
       "passive_skills": []
@@ -7579,7 +7579,7 @@
     "price": 25200,
     "sort_id": 242,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 800,
       "magazine_size": 1,
       "passive_skills": []
@@ -7599,7 +7599,7 @@
     "price": 25200,
     "sort_id": 243,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 1000,
       "magazine_size": 1,
       "passive_skills": []
@@ -7619,7 +7619,7 @@
     "price": 25200,
     "sort_id": 244,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 1200,
       "magazine_size": 1,
       "passive_skills": []
@@ -7639,7 +7639,7 @@
     "price": 25200,
     "sort_id": 245,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 1400,
       "magazine_size": 1,
       "passive_skills": []
@@ -7659,7 +7659,7 @@
     "price": 10,
     "sort_id": 221,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 350,
       "magazine_size": 1,
       "passive_skills": []
@@ -7679,7 +7679,7 @@
     "price": 480,
     "sort_id": 211,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 150,
       "magazine_size": 1,
       "passive_skills": []
@@ -7699,7 +7699,7 @@
     "price": 480,
     "sort_id": 210,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 150,
       "magazine_size": 1,
       "passive_skills": []
@@ -7719,7 +7719,7 @@
     "price": 1000,
     "sort_id": 220,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 250,
       "magazine_size": 1,
       "passive_skills": []
@@ -8033,7 +8033,7 @@
     "price": 320,
     "sort_id": 1010,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 150,
       "passive_skills": [
         "TemperatureResist_Cold1"
@@ -8054,7 +8054,7 @@
     "price": 320,
     "sort_id": 1020,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 300,
       "passive_skills": [
         "TemperatureResist_Cold2"
@@ -8075,7 +8075,7 @@
     "price": 384,
     "sort_id": 1021,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 360,
       "passive_skills": [
         "TemperatureResist_Cold2"
@@ -8096,7 +8096,7 @@
     "price": 480,
     "sort_id": 1022,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 450,
       "passive_skills": [
         "TemperatureResist_Cold2"
@@ -8117,7 +8117,7 @@
     "price": 576,
     "sort_id": 1023,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 540,
       "passive_skills": [
         "TemperatureResist_Cold2"
@@ -8138,7 +8138,7 @@
     "price": 704,
     "sort_id": 1024,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 660,
       "passive_skills": [
         "TemperatureResist_Cold2"
@@ -8159,7 +8159,7 @@
     "price": 320,
     "sort_id": 1015,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 300,
       "passive_skills": [
         "TemperatureResist_Heat2"
@@ -8180,7 +8180,7 @@
     "price": 384,
     "sort_id": 1016,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 360,
       "passive_skills": [
         "TemperatureResist_Heat2"
@@ -8201,7 +8201,7 @@
     "price": 480,
     "sort_id": 1017,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 450,
       "passive_skills": [
         "TemperatureResist_Heat2"
@@ -8222,7 +8222,7 @@
     "price": 576,
     "sort_id": 1018,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 540,
       "passive_skills": [
         "TemperatureResist_Heat2"
@@ -8243,7 +8243,7 @@
     "price": 704,
     "sort_id": 1019,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 660,
       "passive_skills": [
         "TemperatureResist_Heat2"
@@ -8264,7 +8264,7 @@
     "price": 416,
     "sort_id": 1011,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 400,
       "passive_skills": [
         "TemperatureResist_Cold1"
@@ -8285,7 +8285,7 @@
     "price": 480,
     "sort_id": 1012,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 500,
       "passive_skills": [
         "TemperatureResist_Cold1"
@@ -8306,7 +8306,7 @@
     "price": 544,
     "sort_id": 1013,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 600,
       "passive_skills": [
         "TemperatureResist_Cold1"
@@ -8327,7 +8327,7 @@
     "price": 608,
     "sort_id": 1014,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 700,
       "passive_skills": [
         "TemperatureResist_Cold1"
@@ -8361,7 +8361,7 @@
     "price": 25200,
     "sort_id": 250,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 400,
       "magazine_size": 1,
       "passive_skills": []
@@ -8381,7 +8381,7 @@
     "price": 25200,
     "sort_id": 251,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 400,
       "magazine_size": 1,
       "passive_skills": []
@@ -8401,7 +8401,7 @@
     "price": 25200,
     "sort_id": 252,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 450,
       "magazine_size": 1,
       "passive_skills": []
@@ -8421,7 +8421,7 @@
     "price": 25200,
     "sort_id": 253,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 500,
       "magazine_size": 1,
       "passive_skills": []
@@ -8441,7 +8441,7 @@
     "price": 25200,
     "sort_id": 254,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 700,
       "magazine_size": 1,
       "passive_skills": []
@@ -8474,7 +8474,7 @@
     "price": 4920,
     "sort_id": 1040,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 700,
       "passive_skills": [
         "TemperatureResist_Cold1",
@@ -8496,7 +8496,7 @@
     "price": 4920,
     "sort_id": 1050,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 1400,
       "passive_skills": [
         "TemperatureResist_Cold2",
@@ -8518,7 +8518,7 @@
     "price": 5904,
     "sort_id": 1051,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 1680,
       "passive_skills": [
         "TemperatureResist_Cold2",
@@ -8540,7 +8540,7 @@
     "price": 7380,
     "sort_id": 1052,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 2100,
       "passive_skills": [
         "TemperatureResist_Cold2",
@@ -8562,7 +8562,7 @@
     "price": 8856,
     "sort_id": 1053,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 2520,
       "passive_skills": [
         "TemperatureResist_Cold2",
@@ -8584,7 +8584,7 @@
     "price": 10824,
     "sort_id": 1054,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 3080,
       "passive_skills": [
         "TemperatureResist_Cold2",
@@ -8606,7 +8606,7 @@
     "price": 4920,
     "sort_id": 1045,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 1400,
       "passive_skills": [
         "TemperatureResist_Heat2",
@@ -8628,7 +8628,7 @@
     "price": 5904,
     "sort_id": 1046,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 1680,
       "passive_skills": [
         "TemperatureResist_Heat2",
@@ -8650,7 +8650,7 @@
     "price": 7380,
     "sort_id": 1047,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 2100,
       "passive_skills": [
         "TemperatureResist_Heat2",
@@ -8672,7 +8672,7 @@
     "price": 8856,
     "sort_id": 1048,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 2520,
       "passive_skills": [
         "TemperatureResist_Heat2",
@@ -8694,7 +8694,7 @@
     "price": 10824,
     "sort_id": 1049,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 3080,
       "passive_skills": [
         "TemperatureResist_Heat2",
@@ -8716,7 +8716,7 @@
     "price": 6396,
     "sort_id": 1041,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 1800,
       "passive_skills": [
         "TemperatureResist_Cold1",
@@ -8738,7 +8738,7 @@
     "price": 7380,
     "sort_id": 1042,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 2200,
       "passive_skills": [
         "TemperatureResist_Cold1",
@@ -8760,7 +8760,7 @@
     "price": 8364,
     "sort_id": 1043,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 2600,
       "passive_skills": [
         "TemperatureResist_Cold1",
@@ -8782,7 +8782,7 @@
     "price": 9348,
     "sort_id": 1044,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 3000,
       "passive_skills": [
         "TemperatureResist_Cold1",
@@ -8804,7 +8804,7 @@
     "price": 2460,
     "sort_id": 1205,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 700,
       "passive_skills": []
     },
@@ -8823,7 +8823,7 @@
     "price": 3198,
     "sort_id": 1206,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 1820,
       "passive_skills": []
     },
@@ -8842,7 +8842,7 @@
     "price": 3690,
     "sort_id": 1207,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 2100,
       "passive_skills": []
     },
@@ -8861,7 +8861,7 @@
     "price": 4182,
     "sort_id": 1208,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 2380,
       "passive_skills": []
     },
@@ -8880,7 +8880,7 @@
     "price": 4674,
     "sort_id": 1209,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 2660,
       "passive_skills": []
     },
@@ -8989,7 +8989,7 @@
     "price": 33000,
     "sort_id": 320,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "magazine_size": 99,
       "passive_skills": []
     },
@@ -9007,7 +9007,7 @@
     "price": 33000,
     "sort_id": 321,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "magazine_size": 99,
       "passive_skills": []
     },
@@ -9025,7 +9025,7 @@
     "price": 33000,
     "sort_id": 322,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "magazine_size": 99,
       "passive_skills": []
     },
@@ -9043,7 +9043,7 @@
     "price": 33000,
     "sort_id": 323,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "magazine_size": 99,
       "passive_skills": []
     },
@@ -9061,7 +9061,7 @@
     "price": 33000,
     "sort_id": 324,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "magazine_size": 99,
       "passive_skills": []
     },
@@ -9153,7 +9153,7 @@
     "price": 55200,
     "sort_id": 410,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 200,
       "magazine_size": 2,
       "passive_skills": []
@@ -9173,7 +9173,7 @@
     "price": 55200,
     "sort_id": 411,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 400,
       "magazine_size": 2,
       "passive_skills": []
@@ -9193,7 +9193,7 @@
     "price": 55200,
     "sort_id": 412,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 500,
       "magazine_size": 2,
       "passive_skills": []
@@ -9213,7 +9213,7 @@
     "price": 55200,
     "sort_id": 413,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 600,
       "magazine_size": 2,
       "passive_skills": []
@@ -9233,7 +9233,7 @@
     "price": 55200,
     "sort_id": 414,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 700,
       "magazine_size": 2,
       "passive_skills": []
@@ -9304,7 +9304,7 @@
     "price": 19000,
     "sort_id": 160,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 300,
       "passive_skills": []
     },
@@ -9479,7 +9479,7 @@
     "price": 324000,
     "sort_id": 710,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 300,
       "magazine_size": 2,
       "passive_skills": []
@@ -9499,7 +9499,7 @@
     "price": 324000,
     "sort_id": 711,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 360,
       "magazine_size": 2,
       "passive_skills": []
@@ -9519,7 +9519,7 @@
     "price": 324000,
     "sort_id": 712,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 390,
       "magazine_size": 2,
       "passive_skills": []
@@ -9539,7 +9539,7 @@
     "price": 324000,
     "sort_id": 713,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 420,
       "magazine_size": 2,
       "passive_skills": []
@@ -9559,7 +9559,7 @@
     "price": 324000,
     "sort_id": 714,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 600,
       "magazine_size": 2,
       "passive_skills": []
@@ -9696,7 +9696,7 @@
     "price": 10,
     "sort_id": 9999,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "passive_skills": []
     },
     "disabled": false,
@@ -9713,7 +9713,7 @@
     "price": 10,
     "sort_id": 9999,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "passive_skills": []
     },
     "disabled": false,
@@ -9730,7 +9730,7 @@
     "price": 10,
     "sort_id": 9999,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "passive_skills": []
     },
     "disabled": false,
@@ -9747,7 +9747,7 @@
     "price": 10,
     "sort_id": 9999,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "passive_skills": []
     },
     "disabled": false,
@@ -9764,7 +9764,7 @@
     "price": 324000,
     "sort_id": 650,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 6000,
       "magazine_size": 100,
       "passive_skills": []
@@ -9784,7 +9784,7 @@
     "price": 324000,
     "sort_id": 651,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 7200,
       "magazine_size": 100,
       "passive_skills": []
@@ -9804,7 +9804,7 @@
     "price": 324000,
     "sort_id": 652,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 7800,
       "magazine_size": 100,
       "passive_skills": []
@@ -9824,7 +9824,7 @@
     "price": 324000,
     "sort_id": 653,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 8400,
       "magazine_size": 100,
       "passive_skills": []
@@ -9844,7 +9844,7 @@
     "price": 324000,
     "sort_id": 654,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 12000,
       "magazine_size": 100,
       "passive_skills": []
@@ -10166,7 +10166,7 @@
     "price": 360,
     "sort_id": 1025,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 300,
       "passive_skills": [
         "TemperatureResist_Cold1"
@@ -10187,7 +10187,7 @@
     "price": 3000,
     "sort_id": 1035,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 600,
       "passive_skills": [
         "TemperatureResist_Cold2"
@@ -10208,7 +10208,7 @@
     "price": 3600,
     "sort_id": 1036,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 720,
       "passive_skills": [
         "TemperatureResist_Cold2"
@@ -10229,7 +10229,7 @@
     "price": 4500,
     "sort_id": 1037,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 900,
       "passive_skills": [
         "TemperatureResist_Cold2"
@@ -10250,7 +10250,7 @@
     "price": 5400,
     "sort_id": 1038,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 1080,
       "passive_skills": [
         "TemperatureResist_Cold2"
@@ -10271,7 +10271,7 @@
     "price": 6600,
     "sort_id": 1039,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 1320,
       "passive_skills": [
         "TemperatureResist_Cold2"
@@ -10292,7 +10292,7 @@
     "price": 3000,
     "sort_id": 1030,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 600,
       "passive_skills": [
         "TemperatureResist_Heat2"
@@ -10313,7 +10313,7 @@
     "price": 3600,
     "sort_id": 1031,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 720,
       "passive_skills": [
         "TemperatureResist_Heat2"
@@ -10334,7 +10334,7 @@
     "price": 4500,
     "sort_id": 1032,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 900,
       "passive_skills": [
         "TemperatureResist_Heat2"
@@ -10355,7 +10355,7 @@
     "price": 5400,
     "sort_id": 1033,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 1080,
       "passive_skills": [
         "TemperatureResist_Heat2"
@@ -10376,7 +10376,7 @@
     "price": 6600,
     "sort_id": 1034,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 1320,
       "passive_skills": [
         "TemperatureResist_Heat2"
@@ -10397,7 +10397,7 @@
     "price": 468,
     "sort_id": 1026,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 800,
       "passive_skills": [
         "TemperatureResist_Cold1"
@@ -10418,7 +10418,7 @@
     "price": 540,
     "sort_id": 1027,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 1000,
       "passive_skills": [
         "TemperatureResist_Cold1"
@@ -10439,7 +10439,7 @@
     "price": 612,
     "sort_id": 1028,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 1200,
       "passive_skills": [
         "TemperatureResist_Cold1"
@@ -10460,7 +10460,7 @@
     "price": 684,
     "sort_id": 1029,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 1400,
       "passive_skills": [
         "TemperatureResist_Cold1"
@@ -10481,7 +10481,7 @@
     "price": 180,
     "sort_id": 1200,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 200,
       "passive_skills": []
     },
@@ -10500,7 +10500,7 @@
     "price": 234,
     "sort_id": 1201,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 520,
       "passive_skills": []
     },
@@ -10519,7 +10519,7 @@
     "price": 270,
     "sort_id": 1202,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 600,
       "passive_skills": []
     },
@@ -10538,7 +10538,7 @@
     "price": 306,
     "sort_id": 1203,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 680,
       "passive_skills": []
     },
@@ -10557,7 +10557,7 @@
     "price": 342,
     "sort_id": 1204,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 760,
       "passive_skills": []
     },
@@ -10576,7 +10576,7 @@
     "price": 180,
     "sort_id": 1603,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 5000,
       "passive_skills": []
     },
@@ -10595,7 +10595,7 @@
     "price": 180,
     "sort_id": 1602,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 5000,
       "passive_skills": []
     },
@@ -10614,7 +10614,7 @@
     "price": 180,
     "sort_id": 1601,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 5000,
       "passive_skills": []
     },
@@ -10633,7 +10633,7 @@
     "price": 180,
     "sort_id": 1600,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 5000,
       "passive_skills": []
     },
@@ -10652,7 +10652,7 @@
     "price": 180,
     "sort_id": 1605,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 5000,
       "passive_skills": []
     },
@@ -10671,7 +10671,7 @@
     "price": 180,
     "sort_id": 1604,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 5000,
       "passive_skills": []
     },
@@ -10690,7 +10690,7 @@
     "price": 180,
     "sort_id": 1606,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 5000,
       "passive_skills": []
     },
@@ -10709,7 +10709,7 @@
     "price": 1500,
     "sort_id": 9999,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": []
     },
     "disabled": false,
@@ -10739,7 +10739,7 @@
     "price": 324000,
     "sort_id": 695,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 6000,
       "magazine_size": 100,
       "passive_skills": []
@@ -10759,7 +10759,7 @@
     "price": 324000,
     "sort_id": 696,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 7200,
       "magazine_size": 100,
       "passive_skills": []
@@ -10779,7 +10779,7 @@
     "price": 324000,
     "sort_id": 697,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 7800,
       "magazine_size": 100,
       "passive_skills": []
@@ -10799,7 +10799,7 @@
     "price": 324000,
     "sort_id": 698,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 8400,
       "magazine_size": 100,
       "passive_skills": []
@@ -10819,7 +10819,7 @@
     "price": 324000,
     "sort_id": 699,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 12000,
       "magazine_size": 100,
       "passive_skills": []
@@ -10868,7 +10868,7 @@
     "price": 3000,
     "sort_id": 3001,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": []
     },
     "disabled": false,
@@ -10885,7 +10885,7 @@
     "price": 45200,
     "sort_id": 3003,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": []
     },
     "disabled": false,
@@ -10902,7 +10902,7 @@
     "price": 1200,
     "sort_id": 3000,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": []
     },
     "disabled": false,
@@ -10919,7 +10919,7 @@
     "price": 13200,
     "sort_id": 3002,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": []
     },
     "disabled": false,
@@ -10936,7 +10936,7 @@
     "price": 45200,
     "sort_id": 3003,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": []
     },
     "disabled": false,
@@ -10967,7 +10967,7 @@
     "price": 10,
     "sort_id": 340,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "passive_skills": []
     },
     "disabled": false,
@@ -10984,7 +10984,7 @@
     "price": 10,
     "sort_id": 341,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "passive_skills": []
     },
     "disabled": false,
@@ -11001,7 +11001,7 @@
     "price": 10,
     "sort_id": 342,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "passive_skills": []
     },
     "disabled": false,
@@ -11018,7 +11018,7 @@
     "price": 10,
     "sort_id": 343,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "passive_skills": []
     },
     "disabled": false,
@@ -11077,7 +11077,7 @@
     "price": 324000,
     "sort_id": 670,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 600,
       "magazine_size": 5,
       "passive_skills": []
@@ -11097,7 +11097,7 @@
     "price": 324000,
     "sort_id": 671,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 720,
       "magazine_size": 5,
       "passive_skills": []
@@ -11117,7 +11117,7 @@
     "price": 324000,
     "sort_id": 672,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 780,
       "magazine_size": 5,
       "passive_skills": []
@@ -11137,7 +11137,7 @@
     "price": 324000,
     "sort_id": 673,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 840,
       "magazine_size": 5,
       "passive_skills": []
@@ -11157,7 +11157,7 @@
     "price": 324000,
     "sort_id": 674,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 1200,
       "magazine_size": 5,
       "passive_skills": []
@@ -11229,7 +11229,7 @@
     "price": 324000,
     "sort_id": 680,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 300,
       "magazine_size": 1,
       "passive_skills": []
@@ -11249,7 +11249,7 @@
     "price": 324000,
     "sort_id": 681,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 360,
       "magazine_size": 1,
       "passive_skills": []
@@ -11269,7 +11269,7 @@
     "price": 324000,
     "sort_id": 682,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 390,
       "magazine_size": 1,
       "passive_skills": []
@@ -11289,7 +11289,7 @@
     "price": 324000,
     "sort_id": 683,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 420,
       "magazine_size": 1,
       "passive_skills": []
@@ -11309,7 +11309,7 @@
     "price": 324000,
     "sort_id": 684,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 600,
       "magazine_size": 1,
       "passive_skills": []
@@ -11442,7 +11442,7 @@
     "price": 33000,
     "sort_id": 310,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 400,
       "magazine_size": 8,
       "passive_skills": []
@@ -11462,7 +11462,7 @@
     "price": 33000,
     "sort_id": 311,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 1200,
       "magazine_size": 10,
       "passive_skills": []
@@ -11482,7 +11482,7 @@
     "price": 33000,
     "sort_id": 312,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 1600,
       "magazine_size": 12,
       "passive_skills": []
@@ -11502,7 +11502,7 @@
     "price": 33000,
     "sort_id": 313,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 2000,
       "magazine_size": 14,
       "passive_skills": []
@@ -11522,7 +11522,7 @@
     "price": 33000,
     "sort_id": 314,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 2400,
       "magazine_size": 16,
       "passive_skills": []
@@ -11555,7 +11555,7 @@
     "price": 180,
     "sort_id": 1300,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 525,
       "passive_skills": [
         "ElementResist_Dragon_1"
@@ -11576,7 +11576,7 @@
     "price": 216,
     "sort_id": 1301,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 630,
       "passive_skills": [
         "ElementResist_Dragon_1"
@@ -11597,7 +11597,7 @@
     "price": 270,
     "sort_id": 1302,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 787,
       "passive_skills": [
         "ElementResist_Dragon_1"
@@ -11618,7 +11618,7 @@
     "price": 324,
     "sort_id": 1303,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 945,
       "passive_skills": [
         "ElementResist_Dragon_1"
@@ -11639,7 +11639,7 @@
     "price": 396,
     "sort_id": 1304,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 1155,
       "passive_skills": [
         "ElementResist_Dragon_1"
@@ -11660,7 +11660,7 @@
     "price": 180,
     "sort_id": 1305,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 450,
       "passive_skills": [
         "ElementResist_Ice_1"
@@ -11681,7 +11681,7 @@
     "price": 216,
     "sort_id": 1306,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 540,
       "passive_skills": [
         "ElementResist_Ice_1"
@@ -11702,7 +11702,7 @@
     "price": 270,
     "sort_id": 1307,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 675,
       "passive_skills": [
         "ElementResist_Ice_1"
@@ -11723,7 +11723,7 @@
     "price": 324,
     "sort_id": 1308,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 810,
       "passive_skills": [
         "ElementResist_Ice_1"
@@ -11744,7 +11744,7 @@
     "price": 396,
     "sort_id": 1309,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 990,
       "passive_skills": [
         "ElementResist_Ice_1"
@@ -11765,7 +11765,7 @@
     "price": 180,
     "sort_id": 1310,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 225,
       "passive_skills": [
         "ElementResist_Leaf_1"
@@ -11786,7 +11786,7 @@
     "price": 216,
     "sort_id": 1311,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 270,
       "passive_skills": [
         "ElementResist_Leaf_1"
@@ -11807,7 +11807,7 @@
     "price": 270,
     "sort_id": 1312,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 337,
       "passive_skills": [
         "ElementResist_Leaf_1"
@@ -11828,7 +11828,7 @@
     "price": 324,
     "sort_id": 1313,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 405,
       "passive_skills": [
         "ElementResist_Leaf_1"
@@ -11849,7 +11849,7 @@
     "price": 396,
     "sort_id": 1314,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 495,
       "passive_skills": [
         "ElementResist_Leaf_1"
@@ -11870,7 +11870,7 @@
     "price": 180,
     "sort_id": 1315,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 300,
       "passive_skills": [
         "ElementResist_Dark_1"
@@ -11891,7 +11891,7 @@
     "price": 216,
     "sort_id": 1316,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 360,
       "passive_skills": [
         "ElementResist_Dark_1"
@@ -11912,7 +11912,7 @@
     "price": 270,
     "sort_id": 1317,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 450,
       "passive_skills": [
         "ElementResist_Dark_1"
@@ -11933,7 +11933,7 @@
     "price": 324,
     "sort_id": 1318,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 540,
       "passive_skills": [
         "ElementResist_Dark_1"
@@ -11954,7 +11954,7 @@
     "price": 396,
     "sort_id": 1319,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 660,
       "passive_skills": [
         "ElementResist_Dark_1"
@@ -11975,7 +11975,7 @@
     "price": 180,
     "sort_id": 1320,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 270,
       "passive_skills": [
         "ElementResist_Earth_1"
@@ -11996,7 +11996,7 @@
     "price": 216,
     "sort_id": 1321,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 324,
       "passive_skills": [
         "ElementResist_Earth_1"
@@ -12017,7 +12017,7 @@
     "price": 270,
     "sort_id": 1322,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 405,
       "passive_skills": [
         "ElementResist_Earth_1"
@@ -12038,7 +12038,7 @@
     "price": 324,
     "sort_id": 1323,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 486,
       "passive_skills": [
         "ElementResist_Earth_1"
@@ -12059,7 +12059,7 @@
     "price": 396,
     "sort_id": 1324,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 594,
       "passive_skills": [
         "ElementResist_Earth_1"
@@ -12080,7 +12080,7 @@
     "price": 180,
     "sort_id": 1325,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 600,
       "passive_skills": [
         "ElementResist_Thunder_1"
@@ -12101,7 +12101,7 @@
     "price": 216,
     "sort_id": 1326,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 720,
       "passive_skills": [
         "ElementResist_Thunder_1"
@@ -12122,7 +12122,7 @@
     "price": 270,
     "sort_id": 1327,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 900,
       "passive_skills": [
         "ElementResist_Thunder_1"
@@ -12143,7 +12143,7 @@
     "price": 324,
     "sort_id": 1328,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 1080,
       "passive_skills": [
         "ElementResist_Thunder_1"
@@ -12164,7 +12164,7 @@
     "price": 396,
     "sort_id": 1329,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 1320,
       "passive_skills": [
         "ElementResist_Thunder_1"
@@ -12185,7 +12185,7 @@
     "price": 180,
     "sort_id": 1330,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 300,
       "passive_skills": [
         "ElementResist_Fire_1"
@@ -12206,7 +12206,7 @@
     "price": 216,
     "sort_id": 1331,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 360,
       "passive_skills": [
         "ElementResist_Fire_1"
@@ -12227,7 +12227,7 @@
     "price": 270,
     "sort_id": 1332,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 450,
       "passive_skills": [
         "ElementResist_Fire_1"
@@ -12248,7 +12248,7 @@
     "price": 324,
     "sort_id": 1333,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 540,
       "passive_skills": [
         "ElementResist_Fire_1"
@@ -12269,7 +12269,7 @@
     "price": 396,
     "sort_id": 1334,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 660,
       "passive_skills": [
         "ElementResist_Fire_1"
@@ -12290,7 +12290,7 @@
     "price": 180,
     "sort_id": 1335,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 375,
       "passive_skills": [
         "ElementResist_Aqua_1"
@@ -12311,7 +12311,7 @@
     "price": 216,
     "sort_id": 1336,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 450,
       "passive_skills": [
         "ElementResist_Aqua_1"
@@ -12332,7 +12332,7 @@
     "price": 270,
     "sort_id": 1337,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 562,
       "passive_skills": [
         "ElementResist_Aqua_1"
@@ -12353,7 +12353,7 @@
     "price": 324,
     "sort_id": 1338,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 675,
       "passive_skills": [
         "ElementResist_Aqua_1"
@@ -12374,7 +12374,7 @@
     "price": 396,
     "sort_id": 1339,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 825,
       "passive_skills": [
         "ElementResist_Aqua_1"
@@ -12395,7 +12395,7 @@
     "price": 180,
     "sort_id": 1340,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 270,
       "passive_skills": [
         "TemperatureResist_Heat1"
@@ -12416,7 +12416,7 @@
     "price": 216,
     "sort_id": 1341,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 324,
       "passive_skills": [
         "TemperatureResist_Heat1"
@@ -12437,7 +12437,7 @@
     "price": 270,
     "sort_id": 1342,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 405,
       "passive_skills": [
         "TemperatureResist_Heat1"
@@ -12458,7 +12458,7 @@
     "price": 324,
     "sort_id": 1343,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 486,
       "passive_skills": [
         "TemperatureResist_Heat1"
@@ -12479,7 +12479,7 @@
     "price": 396,
     "sort_id": 1344,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 594,
       "passive_skills": [
         "TemperatureResist_Heat1"
@@ -12500,7 +12500,7 @@
     "price": 180,
     "sort_id": 1345,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 300,
       "passive_skills": [
         "WorkSpeed_ACC_up1"
@@ -12521,7 +12521,7 @@
     "price": 216,
     "sort_id": 1346,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 360,
       "passive_skills": [
         "WorkSpeed_ACC_up1"
@@ -12542,7 +12542,7 @@
     "price": 270,
     "sort_id": 1347,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 450,
       "passive_skills": [
         "WorkSpeed_ACC_up1"
@@ -12563,7 +12563,7 @@
     "price": 324,
     "sort_id": 1348,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 540,
       "passive_skills": [
         "WorkSpeed_ACC_up1"
@@ -12584,7 +12584,7 @@
     "price": 396,
     "sort_id": 1349,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 660,
       "passive_skills": [
         "WorkSpeed_ACC_up1"
@@ -12605,7 +12605,7 @@
     "price": 180,
     "sort_id": 1350,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 270,
       "passive_skills": [
         "TemperatureResist_Heat1"
@@ -12626,7 +12626,7 @@
     "price": 216,
     "sort_id": 1351,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 324,
       "passive_skills": [
         "TemperatureResist_Heat1"
@@ -12647,7 +12647,7 @@
     "price": 270,
     "sort_id": 1352,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 405,
       "passive_skills": [
         "TemperatureResist_Heat1"
@@ -12668,7 +12668,7 @@
     "price": 324,
     "sort_id": 1353,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 486,
       "passive_skills": [
         "TemperatureResist_Heat1"
@@ -12689,7 +12689,7 @@
     "price": 396,
     "sort_id": 1354,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 594,
       "passive_skills": [
         "TemperatureResist_Heat1"
@@ -12710,7 +12710,7 @@
     "price": 180,
     "sort_id": 1355,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 300,
       "passive_skills": [
         "ElementResist_Normal_1"
@@ -12731,7 +12731,7 @@
     "price": 216,
     "sort_id": 1356,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 360,
       "passive_skills": [
         "ElementResist_Normal_1"
@@ -12752,7 +12752,7 @@
     "price": 270,
     "sort_id": 1357,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 450,
       "passive_skills": [
         "ElementResist_Normal_1"
@@ -12773,7 +12773,7 @@
     "price": 324,
     "sort_id": 1358,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 540,
       "passive_skills": [
         "ElementResist_Normal_1"
@@ -12794,7 +12794,7 @@
     "price": 396,
     "sort_id": 1359,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 660,
       "passive_skills": [
         "ElementResist_Normal_1"
@@ -12815,7 +12815,7 @@
     "price": 180,
     "sort_id": 1360,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 300,
       "passive_skills": [
         "ElementResist_Normal_1"
@@ -12836,7 +12836,7 @@
     "price": 216,
     "sort_id": 1361,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 360,
       "passive_skills": [
         "ElementResist_Normal_1"
@@ -12857,7 +12857,7 @@
     "price": 270,
     "sort_id": 1362,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 450,
       "passive_skills": [
         "ElementResist_Normal_1"
@@ -12878,7 +12878,7 @@
     "price": 324,
     "sort_id": 1363,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 540,
       "passive_skills": [
         "ElementResist_Normal_1"
@@ -12899,7 +12899,7 @@
     "price": 396,
     "sort_id": 1364,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 660,
       "passive_skills": [
         "ElementResist_Normal_1"
@@ -12920,7 +12920,7 @@
     "price": 180,
     "sort_id": 1365,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 300,
       "passive_skills": [
         "ElementResist_Normal_1"
@@ -12941,7 +12941,7 @@
     "price": 216,
     "sort_id": 1366,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 360,
       "passive_skills": [
         "ElementResist_Normal_1"
@@ -12962,7 +12962,7 @@
     "price": 270,
     "sort_id": 1367,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 450,
       "passive_skills": [
         "ElementResist_Normal_1"
@@ -12983,7 +12983,7 @@
     "price": 324,
     "sort_id": 1368,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 540,
       "passive_skills": [
         "ElementResist_Normal_1"
@@ -13004,7 +13004,7 @@
     "price": 396,
     "sort_id": 1369,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 660,
       "passive_skills": [
         "ElementResist_Normal_1"
@@ -13025,7 +13025,7 @@
     "price": 180,
     "sort_id": 1370,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 300,
       "passive_skills": [
         "ElementResist_Leaf_1"
@@ -13046,7 +13046,7 @@
     "price": 216,
     "sort_id": 1371,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 360,
       "passive_skills": [
         "ElementResist_Leaf_1"
@@ -13067,7 +13067,7 @@
     "price": 270,
     "sort_id": 1372,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 450,
       "passive_skills": [
         "ElementResist_Leaf_1"
@@ -13088,7 +13088,7 @@
     "price": 324,
     "sort_id": 1373,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 540,
       "passive_skills": [
         "ElementResist_Leaf_1"
@@ -13109,7 +13109,7 @@
     "price": 396,
     "sort_id": 1374,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 660,
       "passive_skills": [
         "ElementResist_Leaf_1"
@@ -13130,7 +13130,7 @@
     "price": 180,
     "sort_id": 1375,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 300,
       "passive_skills": [
         "ElementResist_Ice_1"
@@ -13151,7 +13151,7 @@
     "price": 216,
     "sort_id": 1376,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 360,
       "passive_skills": [
         "ElementResist_Ice_1"
@@ -13172,7 +13172,7 @@
     "price": 270,
     "sort_id": 1377,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 450,
       "passive_skills": [
         "ElementResist_Ice_1"
@@ -13193,7 +13193,7 @@
     "price": 324,
     "sort_id": 1378,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 540,
       "passive_skills": [
         "ElementResist_Ice_1"
@@ -13214,7 +13214,7 @@
     "price": 396,
     "sort_id": 1379,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 660,
       "passive_skills": [
         "ElementResist_Ice_1"
@@ -13235,7 +13235,7 @@
     "price": 180,
     "sort_id": 1380,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 300,
       "passive_skills": [
         "ElementResist_Dark_1"
@@ -13256,7 +13256,7 @@
     "price": 216,
     "sort_id": 1381,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 360,
       "passive_skills": [
         "ElementResist_Dark_1"
@@ -13277,7 +13277,7 @@
     "price": 270,
     "sort_id": 1382,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 450,
       "passive_skills": [
         "ElementResist_Dark_1"
@@ -13298,7 +13298,7 @@
     "price": 324,
     "sort_id": 1383,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 540,
       "passive_skills": [
         "ElementResist_Dark_1"
@@ -13319,7 +13319,7 @@
     "price": 396,
     "sort_id": 1384,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 660,
       "passive_skills": [
         "ElementResist_Dark_1"
@@ -13340,7 +13340,7 @@
     "price": 180,
     "sort_id": 1500,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 5000,
       "passive_skills": [
         "ElementResist_Dragon_1"
@@ -13361,7 +13361,7 @@
     "price": 180,
     "sort_id": 1385,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 300,
       "passive_skills": [
         "ElementResist_Leaf_1"
@@ -13382,7 +13382,7 @@
     "price": 180,
     "sort_id": 1386,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 300,
       "passive_skills": [
         "ElementResist_Ice_1"
@@ -13403,7 +13403,7 @@
     "price": 180,
     "sort_id": 1387,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 300,
       "passive_skills": [
         "ElementResist_Dark_1"
@@ -13424,7 +13424,7 @@
     "price": 180,
     "sort_id": 1388,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 360,
       "passive_skills": [
         "ElementResist_Dark_1"
@@ -13445,7 +13445,7 @@
     "price": 180,
     "sort_id": 1389,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 390,
       "passive_skills": [
         "ElementResist_Dark_1"
@@ -13466,7 +13466,7 @@
     "price": 180,
     "sort_id": 1390,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 420,
       "passive_skills": [
         "ElementResist_Dark_1"
@@ -13487,7 +13487,7 @@
     "price": 180,
     "sort_id": 1391,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 600,
       "passive_skills": [
         "ElementResist_Dark_1"
@@ -13508,7 +13508,7 @@
     "price": 180,
     "sort_id": 1392,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 300,
       "passive_skills": [
         "ElementResist_Dark_1"
@@ -13529,7 +13529,7 @@
     "price": 180,
     "sort_id": 1393,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 360,
       "passive_skills": [
         "ElementResist_Dark_1"
@@ -13550,7 +13550,7 @@
     "price": 180,
     "sort_id": 1394,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 390,
       "passive_skills": [
         "ElementResist_Dark_1"
@@ -13571,7 +13571,7 @@
     "price": 180,
     "sort_id": 1395,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 420,
       "passive_skills": [
         "ElementResist_Dark_1"
@@ -13592,7 +13592,7 @@
     "price": 180,
     "sort_id": 1396,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 600,
       "passive_skills": [
         "ElementResist_Dark_1"
@@ -13613,7 +13613,7 @@
     "price": 180,
     "sort_id": 1397,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 300,
       "passive_skills": [
         "ElementResist_Dark_1"
@@ -13634,7 +13634,7 @@
     "price": 180,
     "sort_id": 1398,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 300,
       "passive_skills": [
         "ElementResist_Normal_1"
@@ -13655,7 +13655,7 @@
     "price": 180,
     "sort_id": 1399,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 360,
       "passive_skills": [
         "ElementResist_Dark_1"
@@ -13676,7 +13676,7 @@
     "price": 180,
     "sort_id": 1400,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 390,
       "passive_skills": [
         "ElementResist_Dark_1"
@@ -13697,7 +13697,7 @@
     "price": 180,
     "sort_id": 1401,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 420,
       "passive_skills": [
         "ElementResist_Dark_1"
@@ -13718,7 +13718,7 @@
     "price": 180,
     "sort_id": 1402,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 600,
       "passive_skills": [
         "ElementResist_Dark_1"
@@ -13739,7 +13739,7 @@
     "price": 180,
     "sort_id": 1403,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 300,
       "passive_skills": [
         "ElementResist_Normal_1"
@@ -13760,7 +13760,7 @@
     "price": 180,
     "sort_id": 1404,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 300,
       "passive_skills": [
         "ElementResist_Earth_1"
@@ -13781,7 +13781,7 @@
     "price": 180,
     "sort_id": 1405,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 300,
       "passive_skills": [
         "ElementResist_Ice_1"
@@ -13802,7 +13802,7 @@
     "price": 180,
     "sort_id": 1406,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 360,
       "passive_skills": [
         "ElementResist_Dark_1"
@@ -13823,7 +13823,7 @@
     "price": 180,
     "sort_id": 1407,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 390,
       "passive_skills": [
         "ElementResist_Dark_1"
@@ -13844,7 +13844,7 @@
     "price": 180,
     "sort_id": 1408,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 420,
       "passive_skills": [
         "ElementResist_Dark_1"
@@ -13865,7 +13865,7 @@
     "price": 180,
     "sort_id": 1409,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 600,
       "passive_skills": [
         "ElementResist_Dark_1"
@@ -13886,7 +13886,7 @@
     "price": 180,
     "sort_id": 1410,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 300,
       "passive_skills": [
         "ElementResist_Thunder_1"
@@ -13907,7 +13907,7 @@
     "price": 180,
     "sort_id": 1411,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 360,
       "passive_skills": [
         "ElementResist_Dark_1"
@@ -13928,7 +13928,7 @@
     "price": 180,
     "sort_id": 1412,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 390,
       "passive_skills": [
         "ElementResist_Dark_1"
@@ -13949,7 +13949,7 @@
     "price": 180,
     "sort_id": 1413,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 420,
       "passive_skills": [
         "ElementResist_Dark_1"
@@ -13970,7 +13970,7 @@
     "price": 180,
     "sort_id": 1414,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 600,
       "passive_skills": [
         "ElementResist_Dark_1"
@@ -13991,7 +13991,7 @@
     "price": 180,
     "sort_id": 1415,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 300,
       "passive_skills": [
         "ElementResist_Normal_1"
@@ -14012,7 +14012,7 @@
     "price": 180,
     "sort_id": 1501,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 5000,
       "passive_skills": [
         "ElementResist_Aqua_1"
@@ -14033,7 +14033,7 @@
     "price": 180,
     "sort_id": 1502,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 5000,
       "passive_skills": [
         "ElementResist_Ice_1"
@@ -14080,7 +14080,7 @@
     "price": 460000,
     "sort_id": 622,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "passive_skills": []
     },
     "disabled": false,
@@ -14225,7 +14225,7 @@
     "price": 9840,
     "sort_id": 1055,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 1500,
       "passive_skills": [
         "TemperatureResist_Cold1",
@@ -14247,7 +14247,7 @@
     "price": 9840,
     "sort_id": 1065,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 3000,
       "passive_skills": [
         "TemperatureResist_Cold2",
@@ -14269,7 +14269,7 @@
     "price": 11808,
     "sort_id": 1066,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 3600,
       "passive_skills": [
         "TemperatureResist_Cold2",
@@ -14291,7 +14291,7 @@
     "price": 14760,
     "sort_id": 1067,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 4500,
       "passive_skills": [
         "TemperatureResist_Cold2",
@@ -14313,7 +14313,7 @@
     "price": 17712,
     "sort_id": 1068,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 5400,
       "passive_skills": [
         "TemperatureResist_Cold2",
@@ -14335,7 +14335,7 @@
     "price": 21648,
     "sort_id": 1069,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 6600,
       "passive_skills": [
         "TemperatureResist_Cold2",
@@ -14357,7 +14357,7 @@
     "price": 9840,
     "sort_id": 1060,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 3000,
       "passive_skills": [
         "TemperatureResist_Heat2",
@@ -14379,7 +14379,7 @@
     "price": 11808,
     "sort_id": 1061,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 3600,
       "passive_skills": [
         "TemperatureResist_Heat2",
@@ -14401,7 +14401,7 @@
     "price": 14760,
     "sort_id": 1062,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 4500,
       "passive_skills": [
         "TemperatureResist_Heat2",
@@ -14423,7 +14423,7 @@
     "price": 17712,
     "sort_id": 1063,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 5400,
       "passive_skills": [
         "TemperatureResist_Heat2",
@@ -14445,7 +14445,7 @@
     "price": 21648,
     "sort_id": 1064,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 6600,
       "passive_skills": [
         "TemperatureResist_Heat2",
@@ -14467,7 +14467,7 @@
     "price": 12792,
     "sort_id": 1056,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 4000,
       "passive_skills": [
         "TemperatureResist_Cold1",
@@ -14489,7 +14489,7 @@
     "price": 14760,
     "sort_id": 1057,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 5000,
       "passive_skills": [
         "TemperatureResist_Cold1",
@@ -14511,7 +14511,7 @@
     "price": 16728,
     "sort_id": 1058,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 6000,
       "passive_skills": [
         "TemperatureResist_Cold1",
@@ -14533,7 +14533,7 @@
     "price": 18696,
     "sort_id": 1059,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 7000,
       "passive_skills": [
         "TemperatureResist_Cold1",
@@ -14555,7 +14555,7 @@
     "price": 5240,
     "sort_id": 1210,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 1500,
       "passive_skills": []
     },
@@ -14574,7 +14574,7 @@
     "price": 6812,
     "sort_id": 1211,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 3900,
       "passive_skills": []
     },
@@ -14593,7 +14593,7 @@
     "price": 7860,
     "sort_id": 1212,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 4500,
       "passive_skills": []
     },
@@ -14612,7 +14612,7 @@
     "price": 8908,
     "sort_id": 1213,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 5100,
       "passive_skills": []
     },
@@ -14631,7 +14631,7 @@
     "price": 9956,
     "sort_id": 1214,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 5700,
       "passive_skills": []
     },
@@ -14677,7 +14677,7 @@
     "price": 10440,
     "sort_id": 141,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 500,
       "passive_skills": []
     },
@@ -14735,7 +14735,7 @@
     "price": 324000,
     "sort_id": 700,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 8000,
       "magazine_size": 100,
       "passive_skills": []
@@ -14755,7 +14755,7 @@
     "price": 324000,
     "sort_id": 701,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 9600,
       "magazine_size": 100,
       "passive_skills": []
@@ -14775,7 +14775,7 @@
     "price": 324000,
     "sort_id": 702,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 10400,
       "magazine_size": 100,
       "passive_skills": []
@@ -14795,7 +14795,7 @@
     "price": 324000,
     "sort_id": 703,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 11200,
       "magazine_size": 100,
       "passive_skills": []
@@ -14815,7 +14815,7 @@
     "price": 324000,
     "sort_id": 704,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 16000,
       "magazine_size": 100,
       "passive_skills": []
@@ -14835,7 +14835,7 @@
     "price": 324000,
     "sort_id": 640,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 3000,
       "magazine_size": 30,
       "passive_skills": []
@@ -14855,7 +14855,7 @@
     "price": 324000,
     "sort_id": 641,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 3600,
       "magazine_size": 30,
       "passive_skills": []
@@ -14875,7 +14875,7 @@
     "price": 324000,
     "sort_id": 642,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 3900,
       "magazine_size": 30,
       "passive_skills": []
@@ -14895,7 +14895,7 @@
     "price": 324000,
     "sort_id": 643,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 4200,
       "magazine_size": 30,
       "passive_skills": []
@@ -14915,7 +14915,7 @@
     "price": 324000,
     "sort_id": 644,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 6000,
       "magazine_size": 30,
       "passive_skills": []
@@ -14935,7 +14935,7 @@
     "price": 324000,
     "sort_id": 610,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 300,
       "magazine_size": 1,
       "passive_skills": []
@@ -14955,7 +14955,7 @@
     "price": 324000,
     "sort_id": 612,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 800,
       "magazine_size": 1,
       "passive_skills": []
@@ -14975,7 +14975,7 @@
     "price": 324000,
     "sort_id": 613,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 1000,
       "magazine_size": 1,
       "passive_skills": []
@@ -14995,7 +14995,7 @@
     "price": 324000,
     "sort_id": 614,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 1200,
       "magazine_size": 1,
       "passive_skills": []
@@ -15015,7 +15015,7 @@
     "price": 324000,
     "sort_id": 615,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 1400,
       "magazine_size": 1,
       "passive_skills": []
@@ -15035,7 +15035,7 @@
     "price": 324000,
     "sort_id": 600,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 300,
       "magazine_size": 1,
       "passive_skills": []
@@ -15108,7 +15108,7 @@
     "price": 180,
     "sort_id": 9999,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 500,
       "passive_skills": []
     },
@@ -15349,7 +15349,7 @@
     "price": 82400,
     "sort_id": 530,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 1500,
       "magazine_size": 15,
       "passive_skills": []
@@ -15369,7 +15369,7 @@
     "price": 82400,
     "sort_id": 531,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 1800,
       "magazine_size": 17,
       "passive_skills": []
@@ -15389,7 +15389,7 @@
     "price": 82400,
     "sort_id": 532,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 1950,
       "magazine_size": 19,
       "passive_skills": []
@@ -15409,7 +15409,7 @@
     "price": 82400,
     "sort_id": 533,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 2100,
       "magazine_size": 21,
       "passive_skills": []
@@ -15429,7 +15429,7 @@
     "price": 82400,
     "sort_id": 534,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 3000,
       "magazine_size": 23,
       "passive_skills": []
@@ -15449,7 +15449,7 @@
     "price": 16600,
     "sort_id": 300,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 300,
       "magazine_size": 6,
       "passive_skills": []
@@ -15469,7 +15469,7 @@
     "price": 16600,
     "sort_id": 301,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 600,
       "magazine_size": 6,
       "passive_skills": []
@@ -15489,7 +15489,7 @@
     "price": 16600,
     "sort_id": 302,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 900,
       "magazine_size": 6,
       "passive_skills": []
@@ -15509,7 +15509,7 @@
     "price": 16600,
     "sort_id": 303,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 1200,
       "magazine_size": 6,
       "passive_skills": []
@@ -15529,7 +15529,7 @@
     "price": 16600,
     "sort_id": 304,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 1500,
       "magazine_size": 6,
       "passive_skills": []
@@ -15549,7 +15549,7 @@
     "price": 55200,
     "sort_id": 400,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 200,
       "magazine_size": 1,
       "passive_skills": []
@@ -15569,7 +15569,7 @@
     "price": 55200,
     "sort_id": 401,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 240,
       "magazine_size": 1,
       "passive_skills": []
@@ -15589,7 +15589,7 @@
     "price": 55200,
     "sort_id": 402,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 260,
       "magazine_size": 1,
       "passive_skills": []
@@ -15609,7 +15609,7 @@
     "price": 55200,
     "sort_id": 403,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 280,
       "magazine_size": 1,
       "passive_skills": []
@@ -15629,7 +15629,7 @@
     "price": 55200,
     "sort_id": 404,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 400,
       "magazine_size": 1,
       "passive_skills": []
@@ -15649,7 +15649,7 @@
     "price": 82400,
     "sort_id": 550,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 1000,
       "magazine_size": 24,
       "passive_skills": []
@@ -15669,7 +15669,7 @@
     "price": 82400,
     "sort_id": 551,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 1200,
       "magazine_size": 26,
       "passive_skills": []
@@ -15689,7 +15689,7 @@
     "price": 82400,
     "sort_id": 552,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 1300,
       "magazine_size": 28,
       "passive_skills": []
@@ -15709,7 +15709,7 @@
     "price": 82400,
     "sort_id": 553,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 1400,
       "magazine_size": 30,
       "passive_skills": []
@@ -15729,7 +15729,7 @@
     "price": 82400,
     "sort_id": 554,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 2000,
       "magazine_size": 32,
       "passive_skills": []
@@ -15825,7 +15825,7 @@
     "price": 100,
     "sort_id": 150,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 300,
       "passive_skills": []
     },
@@ -16054,7 +16054,7 @@
     "price": 33000,
     "sort_id": 170,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 400,
       "passive_skills": []
     },
@@ -16188,7 +16188,7 @@
     "price": 324000,
     "sort_id": 690,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 300,
       "magazine_size": 4,
       "passive_skills": []
@@ -16208,7 +16208,7 @@
     "price": 324000,
     "sort_id": 691,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 360,
       "magazine_size": 4,
       "passive_skills": []
@@ -16228,7 +16228,7 @@
     "price": 324000,
     "sort_id": 692,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 390,
       "magazine_size": 4,
       "passive_skills": []
@@ -16248,7 +16248,7 @@
     "price": 324000,
     "sort_id": 693,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 420,
       "magazine_size": 4,
       "passive_skills": []
@@ -16268,7 +16268,7 @@
     "price": 324000,
     "sort_id": 694,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 600,
       "magazine_size": 4,
       "passive_skills": []
@@ -16383,7 +16383,7 @@
     "price": 37600,
     "sort_id": 500,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 200,
       "magazine_size": 1,
       "passive_skills": []
@@ -16403,7 +16403,7 @@
     "price": 37600,
     "sort_id": 501,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 400,
       "magazine_size": 1,
       "passive_skills": []
@@ -16423,7 +16423,7 @@
     "price": 37600,
     "sort_id": 502,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 500,
       "magazine_size": 1,
       "passive_skills": []
@@ -16443,7 +16443,7 @@
     "price": 37600,
     "sort_id": 503,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 600,
       "magazine_size": 1,
       "passive_skills": []
@@ -16463,7 +16463,7 @@
     "price": 37600,
     "sort_id": 504,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 700,
       "magazine_size": 1,
       "passive_skills": []
@@ -16524,7 +16524,7 @@
     "price": 1500,
     "sort_id": 9999,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": []
     },
     "disabled": false,
@@ -16541,7 +16541,7 @@
     "price": 33000,
     "sort_id": 330,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 400,
       "magazine_size": 6,
       "passive_skills": []
@@ -16561,7 +16561,7 @@
     "price": 33000,
     "sort_id": 331,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 480,
       "magazine_size": 6,
       "passive_skills": []
@@ -16581,7 +16581,7 @@
     "price": 33000,
     "sort_id": 332,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 520,
       "magazine_size": 6,
       "passive_skills": []
@@ -16601,7 +16601,7 @@
     "price": 33000,
     "sort_id": 333,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 560,
       "magazine_size": 6,
       "passive_skills": []
@@ -16621,7 +16621,7 @@
     "price": 33000,
     "sort_id": 334,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 800,
       "magazine_size": 6,
       "passive_skills": []
@@ -16720,7 +16720,7 @@
     "price": 10,
     "sort_id": 9999,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": []
     },
     "disabled": true,
@@ -16763,7 +16763,7 @@
     "price": 10,
     "sort_id": 5735,
     "dynamic": {
-      "class_name": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false,
@@ -16780,7 +16780,7 @@
     "price": 10,
     "sort_id": 5736,
     "dynamic": {
-      "class_name": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false,
@@ -16797,7 +16797,7 @@
     "price": 10,
     "sort_id": 5737,
     "dynamic": {
-      "class_name": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false,
@@ -16814,7 +16814,7 @@
     "price": 10,
     "sort_id": 5738,
     "dynamic": {
-      "class_name": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false,
@@ -16831,7 +16831,7 @@
     "price": 10,
     "sort_id": 5739,
     "dynamic": {
-      "class_name": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false,
@@ -16848,7 +16848,7 @@
     "price": 10,
     "sort_id": 5740,
     "dynamic": {
-      "class_name": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false,
@@ -16865,7 +16865,7 @@
     "price": 10,
     "sort_id": 5741,
     "dynamic": {
-      "class_name": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false,
@@ -16882,7 +16882,7 @@
     "price": 10,
     "sort_id": 5742,
     "dynamic": {
-      "class_name": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false,
@@ -16899,7 +16899,7 @@
     "price": 10,
     "sort_id": 5743,
     "dynamic": {
-      "class_name": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false,
@@ -16916,7 +16916,7 @@
     "price": 10,
     "sort_id": 5744,
     "dynamic": {
-      "class_name": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false,
@@ -16933,7 +16933,7 @@
     "price": 10,
     "sort_id": 5730,
     "dynamic": {
-      "class_name": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false,
@@ -16950,7 +16950,7 @@
     "price": 10,
     "sort_id": 5731,
     "dynamic": {
-      "class_name": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false,
@@ -16967,7 +16967,7 @@
     "price": 10,
     "sort_id": 5732,
     "dynamic": {
-      "class_name": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false,
@@ -16984,7 +16984,7 @@
     "price": 10,
     "sort_id": 5733,
     "dynamic": {
-      "class_name": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false,
@@ -17001,7 +17001,7 @@
     "price": 10,
     "sort_id": 5734,
     "dynamic": {
-      "class_name": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false,
@@ -17018,7 +17018,7 @@
     "price": 10,
     "sort_id": 5720,
     "dynamic": {
-      "class_name": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false,
@@ -17035,7 +17035,7 @@
     "price": 10,
     "sort_id": 5721,
     "dynamic": {
-      "class_name": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false,
@@ -17052,7 +17052,7 @@
     "price": 10,
     "sort_id": 5722,
     "dynamic": {
-      "class_name": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false,
@@ -17069,7 +17069,7 @@
     "price": 10,
     "sort_id": 5723,
     "dynamic": {
-      "class_name": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false,
@@ -17086,7 +17086,7 @@
     "price": 10,
     "sort_id": 5724,
     "dynamic": {
-      "class_name": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false,
@@ -17103,7 +17103,7 @@
     "price": 10,
     "sort_id": 5705,
     "dynamic": {
-      "class_name": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false,
@@ -17120,7 +17120,7 @@
     "price": 10,
     "sort_id": 5706,
     "dynamic": {
-      "class_name": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false,
@@ -17137,7 +17137,7 @@
     "price": 10,
     "sort_id": 5707,
     "dynamic": {
-      "class_name": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false,
@@ -17154,7 +17154,7 @@
     "price": 10,
     "sort_id": 5708,
     "dynamic": {
-      "class_name": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false,
@@ -17171,7 +17171,7 @@
     "price": 10,
     "sort_id": 5709,
     "dynamic": {
-      "class_name": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false,
@@ -17188,7 +17188,7 @@
     "price": 10,
     "sort_id": 5725,
     "dynamic": {
-      "class_name": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false,
@@ -17205,7 +17205,7 @@
     "price": 10,
     "sort_id": 5726,
     "dynamic": {
-      "class_name": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false,
@@ -17222,7 +17222,7 @@
     "price": 10,
     "sort_id": 5727,
     "dynamic": {
-      "class_name": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false,
@@ -17239,7 +17239,7 @@
     "price": 10,
     "sort_id": 5728,
     "dynamic": {
-      "class_name": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false,
@@ -17256,7 +17256,7 @@
     "price": 10,
     "sort_id": 5729,
     "dynamic": {
-      "class_name": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false,
@@ -17273,7 +17273,7 @@
     "price": 10,
     "sort_id": 5715,
     "dynamic": {
-      "class_name": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false,
@@ -17290,7 +17290,7 @@
     "price": 10,
     "sort_id": 5716,
     "dynamic": {
-      "class_name": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false,
@@ -17307,7 +17307,7 @@
     "price": 10,
     "sort_id": 5717,
     "dynamic": {
-      "class_name": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false,
@@ -17324,7 +17324,7 @@
     "price": 10,
     "sort_id": 5718,
     "dynamic": {
-      "class_name": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false,
@@ -17341,7 +17341,7 @@
     "price": 10,
     "sort_id": 5719,
     "dynamic": {
-      "class_name": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false,
@@ -17358,7 +17358,7 @@
     "price": 10,
     "sort_id": 5700,
     "dynamic": {
-      "class_name": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false,
@@ -17375,7 +17375,7 @@
     "price": 10,
     "sort_id": 5701,
     "dynamic": {
-      "class_name": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false,
@@ -17392,7 +17392,7 @@
     "price": 10,
     "sort_id": 5702,
     "dynamic": {
-      "class_name": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false,
@@ -17409,7 +17409,7 @@
     "price": 10,
     "sort_id": 5703,
     "dynamic": {
-      "class_name": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false,
@@ -17426,7 +17426,7 @@
     "price": 10,
     "sort_id": 5704,
     "dynamic": {
-      "class_name": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false,
@@ -17443,7 +17443,7 @@
     "price": 10,
     "sort_id": 5710,
     "dynamic": {
-      "class_name": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false,
@@ -17460,7 +17460,7 @@
     "price": 10,
     "sort_id": 5711,
     "dynamic": {
-      "class_name": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false,
@@ -17477,7 +17477,7 @@
     "price": 10,
     "sort_id": 5712,
     "dynamic": {
-      "class_name": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false,
@@ -17494,7 +17494,7 @@
     "price": 10,
     "sort_id": 5713,
     "dynamic": {
-      "class_name": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false,
@@ -17511,7 +17511,7 @@
     "price": 10,
     "sort_id": 5714,
     "dynamic": {
-      "class_name": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false,
@@ -18201,7 +18201,7 @@
     "price": 33000,
     "sort_id": 124,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 400,
       "passive_skills": []
     },
@@ -18220,7 +18220,7 @@
     "price": 200,
     "sort_id": 120,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 150,
       "passive_skills": []
     },
@@ -18239,7 +18239,7 @@
     "price": 2800,
     "sort_id": 121,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 250,
       "passive_skills": []
     },
@@ -18258,7 +18258,7 @@
     "price": 7000,
     "sort_id": 122,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 300,
       "passive_skills": []
     },
@@ -18319,7 +18319,7 @@
     "price": 35000,
     "sort_id": 1085,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 18000,
       "passive_skills": [
         "TemperatureResist_Cold1",
@@ -18341,7 +18341,7 @@
     "price": 35000,
     "sort_id": 1087,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 18000,
       "passive_skills": [
         "TemperatureResist_Cold2",
@@ -18363,7 +18363,7 @@
     "price": 35000,
     "sort_id": 1097,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 21600,
       "passive_skills": [
         "TemperatureResist_Cold2",
@@ -18385,7 +18385,7 @@
     "price": 35000,
     "sort_id": 1098,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 23400,
       "passive_skills": [
         "TemperatureResist_Cold2",
@@ -18407,7 +18407,7 @@
     "price": 35000,
     "sort_id": 1099,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 25200,
       "passive_skills": [
         "TemperatureResist_Cold2",
@@ -18429,7 +18429,7 @@
     "price": 35000,
     "sort_id": 1100,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 36000,
       "passive_skills": [
         "TemperatureResist_Cold2",
@@ -18451,7 +18451,7 @@
     "price": 35000,
     "sort_id": 1086,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 18000,
       "passive_skills": [
         "TemperatureResist_Cold1",
@@ -18473,7 +18473,7 @@
     "price": 35000,
     "sort_id": 1093,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 21600,
       "passive_skills": [
         "TemperatureResist_Cold1",
@@ -18495,7 +18495,7 @@
     "price": 35000,
     "sort_id": 1094,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 23400,
       "passive_skills": [
         "TemperatureResist_Cold1",
@@ -18517,7 +18517,7 @@
     "price": 35000,
     "sort_id": 1095,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 25200,
       "passive_skills": [
         "TemperatureResist_Cold1",
@@ -18539,7 +18539,7 @@
     "price": 35000,
     "sort_id": 1096,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 36000,
       "passive_skills": [
         "TemperatureResist_Cold1",
@@ -18561,7 +18561,7 @@
     "price": 35000,
     "sort_id": 1088,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 18000,
       "passive_skills": [
         "TemperatureResist_Cold1",
@@ -18584,7 +18584,7 @@
     "price": 35000,
     "sort_id": 1101,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 21600,
       "passive_skills": [
         "TemperatureResist_Cold1",
@@ -18607,7 +18607,7 @@
     "price": 35000,
     "sort_id": 1102,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 23400,
       "passive_skills": [
         "TemperatureResist_Cold1",
@@ -18630,7 +18630,7 @@
     "price": 35000,
     "sort_id": 1103,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 25200,
       "passive_skills": [
         "TemperatureResist_Cold1",
@@ -18653,7 +18653,7 @@
     "price": 35000,
     "sort_id": 1104,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 36000,
       "passive_skills": [
         "TemperatureResist_Cold1",
@@ -18676,7 +18676,7 @@
     "price": 35000,
     "sort_id": 1089,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 21600,
       "passive_skills": [
         "TemperatureResist_Cold1",
@@ -18698,7 +18698,7 @@
     "price": 35000,
     "sort_id": 1090,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 23400,
       "passive_skills": [
         "TemperatureResist_Cold1",
@@ -18720,7 +18720,7 @@
     "price": 35000,
     "sort_id": 1091,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 25200,
       "passive_skills": [
         "TemperatureResist_Cold1",
@@ -18742,7 +18742,7 @@
     "price": 35000,
     "sort_id": 1092,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 36000,
       "passive_skills": [
         "TemperatureResist_Cold1",
@@ -18764,7 +18764,7 @@
     "price": 18000,
     "sort_id": 1220,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 18000,
       "passive_skills": []
     },
@@ -18783,7 +18783,7 @@
     "price": 18000,
     "sort_id": 1221,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 21600,
       "passive_skills": []
     },
@@ -18802,7 +18802,7 @@
     "price": 18000,
     "sort_id": 1222,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 23400,
       "passive_skills": []
     },
@@ -18821,7 +18821,7 @@
     "price": 18000,
     "sort_id": 1223,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 25200,
       "passive_skills": []
     },
@@ -18840,7 +18840,7 @@
     "price": 18000,
     "sort_id": 1225,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 36000,
       "passive_skills": []
     },
@@ -19092,7 +19092,7 @@
     "price": 153600,
     "sort_id": 420,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 150,
       "magazine_size": 8,
       "passive_skills": []
@@ -19112,7 +19112,7 @@
     "price": 153600,
     "sort_id": 421,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 500,
       "magazine_size": 9,
       "passive_skills": []
@@ -19132,7 +19132,7 @@
     "price": 153600,
     "sort_id": 422,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 600,
       "magazine_size": 10,
       "passive_skills": []
@@ -19152,7 +19152,7 @@
     "price": 153600,
     "sort_id": 423,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 700,
       "magazine_size": 11,
       "passive_skills": []
@@ -19172,7 +19172,7 @@
     "price": 153600,
     "sort_id": 424,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 800,
       "magazine_size": 12,
       "passive_skills": []
@@ -19390,7 +19390,7 @@
     "price": 40000,
     "sort_id": 1105,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 20000,
       "passive_skills": [
         "TemperatureResist_Cold1",
@@ -19412,7 +19412,7 @@
     "price": 35000,
     "sort_id": 1115,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 18000,
       "passive_skills": [
         "TemperatureResist_Cold2",
@@ -19434,7 +19434,7 @@
     "price": 40000,
     "sort_id": 1116,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 21600,
       "passive_skills": [
         "TemperatureResist_Cold2",
@@ -19456,7 +19456,7 @@
     "price": 40000,
     "sort_id": 1117,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 23400,
       "passive_skills": [
         "TemperatureResist_Cold2",
@@ -19478,7 +19478,7 @@
     "price": 40000,
     "sort_id": 1118,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 25200,
       "passive_skills": [
         "TemperatureResist_Cold2",
@@ -19500,7 +19500,7 @@
     "price": 40000,
     "sort_id": 1119,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 36000,
       "passive_skills": [
         "TemperatureResist_Cold2",
@@ -19522,7 +19522,7 @@
     "price": 35000,
     "sort_id": 1110,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 18000,
       "passive_skills": [
         "TemperatureResist_Cold1",
@@ -19544,7 +19544,7 @@
     "price": 40000,
     "sort_id": 1111,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 21600,
       "passive_skills": [
         "TemperatureResist_Cold1",
@@ -19566,7 +19566,7 @@
     "price": 40000,
     "sort_id": 1112,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 23400,
       "passive_skills": [
         "TemperatureResist_Cold1",
@@ -19588,7 +19588,7 @@
     "price": 40000,
     "sort_id": 1113,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 25200,
       "passive_skills": [
         "TemperatureResist_Cold1",
@@ -19610,7 +19610,7 @@
     "price": 40000,
     "sort_id": 1114,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 36000,
       "passive_skills": [
         "TemperatureResist_Cold1",
@@ -19632,7 +19632,7 @@
     "price": 35000,
     "sort_id": 1120,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 18000,
       "passive_skills": [
         "TemperatureResist_Cold1",
@@ -19655,7 +19655,7 @@
     "price": 40000,
     "sort_id": 1121,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 21600,
       "passive_skills": [
         "TemperatureResist_Cold1",
@@ -19678,7 +19678,7 @@
     "price": 40000,
     "sort_id": 1122,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 23400,
       "passive_skills": [
         "TemperatureResist_Cold1",
@@ -19701,7 +19701,7 @@
     "price": 40000,
     "sort_id": 1123,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 25200,
       "passive_skills": [
         "TemperatureResist_Cold1",
@@ -19724,7 +19724,7 @@
     "price": 40000,
     "sort_id": 1124,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 36000,
       "passive_skills": [
         "TemperatureResist_Cold1",
@@ -19747,7 +19747,7 @@
     "price": 40000,
     "sort_id": 1106,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 24000,
       "passive_skills": [
         "TemperatureResist_Cold1",
@@ -19769,7 +19769,7 @@
     "price": 40000,
     "sort_id": 1107,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 26000,
       "passive_skills": [
         "TemperatureResist_Cold1",
@@ -19791,7 +19791,7 @@
     "price": 40000,
     "sort_id": 1108,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 28000,
       "passive_skills": [
         "TemperatureResist_Cold1",
@@ -19813,7 +19813,7 @@
     "price": 40000,
     "sort_id": 1109,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 40000,
       "passive_skills": [
         "TemperatureResist_Cold1",
@@ -19848,7 +19848,7 @@
     "price": 25200,
     "sort_id": 255,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 500,
       "magazine_size": 1,
       "passive_skills": []
@@ -19868,7 +19868,7 @@
     "price": 25200,
     "sort_id": 256,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 600,
       "magazine_size": 1,
       "passive_skills": []
@@ -19888,7 +19888,7 @@
     "price": 25200,
     "sort_id": 257,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 650,
       "magazine_size": 1,
       "passive_skills": []
@@ -19908,7 +19908,7 @@
     "price": 25200,
     "sort_id": 258,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 700,
       "magazine_size": 1,
       "passive_skills": []
@@ -19928,7 +19928,7 @@
     "price": 25200,
     "sort_id": 259,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 1000,
       "magazine_size": 1,
       "passive_skills": []
@@ -19948,7 +19948,7 @@
     "price": 20000,
     "sort_id": 1224,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 20000,
       "passive_skills": []
     },
@@ -19967,7 +19967,7 @@
     "price": 20000,
     "sort_id": 1226,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 24000,
       "passive_skills": []
     },
@@ -19986,7 +19986,7 @@
     "price": 20000,
     "sort_id": 1227,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 26000,
       "passive_skills": []
     },
@@ -20005,7 +20005,7 @@
     "price": 20000,
     "sort_id": 1228,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 28000,
       "passive_skills": []
     },
@@ -20024,7 +20024,7 @@
     "price": 20000,
     "sort_id": 1229,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 40000,
       "passive_skills": []
     },
@@ -20108,7 +20108,7 @@
     "price": 37600,
     "sort_id": 520,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 1000,
       "magazine_size": 8,
       "passive_skills": []
@@ -20128,7 +20128,7 @@
     "price": 37600,
     "sort_id": 521,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 1200,
       "magazine_size": 9,
       "passive_skills": []
@@ -20148,7 +20148,7 @@
     "price": 37600,
     "sort_id": 522,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 1300,
       "magazine_size": 10,
       "passive_skills": []
@@ -20168,7 +20168,7 @@
     "price": 37600,
     "sort_id": 523,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 1400,
       "magazine_size": 11,
       "passive_skills": []
@@ -20188,7 +20188,7 @@
     "price": 37600,
     "sort_id": 524,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 2000,
       "magazine_size": 12,
       "passive_skills": []
@@ -20208,7 +20208,7 @@
     "price": 153600,
     "sort_id": 430,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 300,
       "magazine_size": 10,
       "passive_skills": []
@@ -20228,7 +20228,7 @@
     "price": 153600,
     "sort_id": 431,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 400,
       "magazine_size": 11,
       "passive_skills": []
@@ -20248,7 +20248,7 @@
     "price": 153600,
     "sort_id": 432,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 550,
       "magazine_size": 12,
       "passive_skills": []
@@ -20268,7 +20268,7 @@
     "price": 153600,
     "sort_id": 433,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 750,
       "magazine_size": 13,
       "passive_skills": []
@@ -20288,7 +20288,7 @@
     "price": 153600,
     "sort_id": 434,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 1000,
       "magazine_size": 14,
       "passive_skills": []
@@ -20308,7 +20308,7 @@
     "price": 800,
     "sort_id": 1000,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 1000,
       "passive_skills": [],
       "shield": 100
@@ -20327,7 +20327,7 @@
     "price": 31200,
     "sort_id": 1001,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 1500,
       "passive_skills": [],
       "shield": 260
@@ -20346,7 +20346,7 @@
     "price": 62000,
     "sort_id": 1002,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 2250,
       "passive_skills": [],
       "shield": 540
@@ -20365,7 +20365,7 @@
     "price": 104000,
     "sort_id": 1003,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 3500,
       "passive_skills": [],
       "shield": 1045
@@ -20384,7 +20384,7 @@
     "price": 120000,
     "sort_id": 1005,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 21000,
       "passive_skills": [],
       "shield": 1800
@@ -20403,7 +20403,7 @@
     "price": 100000,
     "sort_id": 1004,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 20000,
       "passive_skills": [],
       "shield": 1520
@@ -20435,7 +20435,7 @@
     "price": 37600,
     "sort_id": 510,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 1000,
       "magazine_size": 1,
       "passive_skills": []
@@ -20455,7 +20455,7 @@
     "price": 37600,
     "sort_id": 511,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 2000,
       "magazine_size": 1,
       "passive_skills": []
@@ -20475,7 +20475,7 @@
     "price": 37600,
     "sort_id": 512,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 2500,
       "magazine_size": 1,
       "passive_skills": []
@@ -20495,7 +20495,7 @@
     "price": 37600,
     "sort_id": 513,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 3000,
       "magazine_size": 1,
       "passive_skills": []
@@ -20515,7 +20515,7 @@
     "price": 37600,
     "sort_id": 514,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 3500,
       "magazine_size": 1,
       "passive_skills": []
@@ -22882,7 +22882,7 @@
     "price": 480,
     "sort_id": 130,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 200,
       "passive_skills": []
     },
@@ -22901,7 +22901,7 @@
     "price": 8780,
     "sort_id": 131,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 250,
       "passive_skills": []
     },
@@ -22920,7 +22920,7 @@
     "price": 13880,
     "sort_id": 132,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 300,
       "passive_skills": []
     },
@@ -22939,7 +22939,7 @@
     "price": 20000,
     "sort_id": 135,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 500,
       "passive_skills": []
     },
@@ -22958,7 +22958,7 @@
     "price": 20000,
     "sort_id": 133,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 300,
       "passive_skills": []
     },
@@ -22977,7 +22977,7 @@
     "price": 20000,
     "sort_id": 134,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 400,
       "passive_skills": []
     },
@@ -22996,7 +22996,7 @@
     "price": 44000,
     "sort_id": 621,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "passive_skills": []
     },
     "disabled": false,
@@ -23013,7 +23013,7 @@
     "price": 109200,
     "sort_id": 620,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "passive_skills": []
     },
     "disabled": false,
@@ -23030,7 +23030,7 @@
     "price": 100,
     "sort_id": 12001,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "SphereModule_Curve",
         "CaptureLevel_Up_2"
@@ -23050,7 +23050,7 @@
     "price": 100,
     "sort_id": 12003,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "SphereModule_Curve2",
         "CaptureLevel_Up_3"
@@ -23070,7 +23070,7 @@
     "price": 100,
     "sort_id": 12000,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "SphereModule_Heavy",
         "CaptureLevel_Up_1"
@@ -23090,7 +23090,7 @@
     "price": 100,
     "sort_id": 12005,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "SphereModule_Homing",
         "CaptureLevel_Up_3"
@@ -23110,7 +23110,7 @@
     "price": 100,
     "sort_id": 12002,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "SphereModule_Sniper",
         "CaptureLevel_Up_2"
@@ -23130,7 +23130,7 @@
     "price": 100,
     "sort_id": 12004,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": [
         "SphereModule_Sniper2",
         "CaptureLevel_Up_3"
@@ -23205,7 +23205,7 @@
     "price": 32300,
     "sort_id": 1070,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 5000,
       "passive_skills": [
         "TemperatureResist_Cold1",
@@ -23227,7 +23227,7 @@
     "price": 32300,
     "sort_id": 1080,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 10000,
       "passive_skills": [
         "TemperatureResist_Cold2",
@@ -23249,7 +23249,7 @@
     "price": 38760,
     "sort_id": 1081,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 12000,
       "passive_skills": [
         "TemperatureResist_Cold2",
@@ -23271,7 +23271,7 @@
     "price": 48450,
     "sort_id": 1082,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 15000,
       "passive_skills": [
         "TemperatureResist_Cold2",
@@ -23293,7 +23293,7 @@
     "price": 58140,
     "sort_id": 1083,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 18000,
       "passive_skills": [
         "TemperatureResist_Cold2",
@@ -23315,7 +23315,7 @@
     "price": 71060,
     "sort_id": 1084,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 22000,
       "passive_skills": [
         "TemperatureResist_Cold2",
@@ -23337,7 +23337,7 @@
     "price": 32300,
     "sort_id": 1075,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 10000,
       "passive_skills": [
         "TemperatureResist_Heat2",
@@ -23359,7 +23359,7 @@
     "price": 38760,
     "sort_id": 1076,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 12000,
       "passive_skills": [
         "TemperatureResist_Heat2",
@@ -23381,7 +23381,7 @@
     "price": 48450,
     "sort_id": 1077,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 15000,
       "passive_skills": [
         "TemperatureResist_Heat2",
@@ -23403,7 +23403,7 @@
     "price": 58140,
     "sort_id": 1078,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 18000,
       "passive_skills": [
         "TemperatureResist_Heat2",
@@ -23425,7 +23425,7 @@
     "price": 71060,
     "sort_id": 1079,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 22000,
       "passive_skills": [
         "TemperatureResist_Heat2",
@@ -23447,7 +23447,7 @@
     "price": 41990,
     "sort_id": 1071,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 14000,
       "passive_skills": [
         "TemperatureResist_Cold1",
@@ -23469,7 +23469,7 @@
     "price": 48450,
     "sort_id": 1072,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 18000,
       "passive_skills": [
         "TemperatureResist_Cold1",
@@ -23491,7 +23491,7 @@
     "price": 54910,
     "sort_id": 1073,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 22000,
       "passive_skills": [
         "TemperatureResist_Cold1",
@@ -23513,7 +23513,7 @@
     "price": 61370,
     "sort_id": 1074,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 26000,
       "passive_skills": [
         "TemperatureResist_Cold1",
@@ -23535,7 +23535,7 @@
     "price": 16180,
     "sort_id": 1215,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 5000,
       "passive_skills": []
     },
@@ -23554,7 +23554,7 @@
     "price": 21034,
     "sort_id": 1216,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 13000,
       "passive_skills": []
     },
@@ -23573,7 +23573,7 @@
     "price": 24270,
     "sort_id": 1217,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 15000,
       "passive_skills": []
     },
@@ -23592,7 +23592,7 @@
     "price": 27506,
     "sort_id": 1218,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 17000,
       "passive_skills": []
     },
@@ -23611,7 +23611,7 @@
     "price": 30742,
     "sort_id": 1219,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "durability": 19000,
       "passive_skills": []
     },
@@ -23723,7 +23723,7 @@
     "price": 82400,
     "sort_id": 560,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 2000,
       "magazine_size": 24,
       "passive_skills": []
@@ -23743,7 +23743,7 @@
     "price": 82400,
     "sort_id": 561,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 2400,
       "magazine_size": 26,
       "passive_skills": []
@@ -23763,7 +23763,7 @@
     "price": 82400,
     "sort_id": 562,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 2600,
       "magazine_size": 28,
       "passive_skills": []
@@ -23783,7 +23783,7 @@
     "price": 82400,
     "sort_id": 563,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 2800,
       "magazine_size": 30,
       "passive_skills": []
@@ -23803,7 +23803,7 @@
     "price": 82400,
     "sort_id": 564,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 4000,
       "magazine_size": 32,
       "passive_skills": []
@@ -23849,7 +23849,7 @@
     "price": 10440,
     "sort_id": 140,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 500,
       "passive_skills": []
     },
@@ -23880,7 +23880,7 @@
     "price": 100,
     "sort_id": 12000,
     "dynamic": {
-      "class_name": "CommonArmor",
+      "type": "armor",
       "passive_skills": []
     },
     "disabled": true
@@ -23962,7 +23962,7 @@
     "price": 80,
     "sort_id": 102,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 100,
       "passive_skills": []
     },
@@ -24124,7 +24124,7 @@
     "price": 360,
     "sort_id": 200,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 150,
       "magazine_size": 1,
       "passive_skills": []
@@ -24144,7 +24144,7 @@
     "price": 360,
     "sort_id": 201,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 400,
       "magazine_size": 1,
       "passive_skills": []
@@ -24164,7 +24164,7 @@
     "price": 360,
     "sort_id": 202,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 500,
       "magazine_size": 1,
       "passive_skills": []
@@ -24184,7 +24184,7 @@
     "price": 360,
     "sort_id": 203,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 600,
       "magazine_size": 1,
       "passive_skills": []
@@ -24204,7 +24204,7 @@
     "price": 360,
     "sort_id": 204,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 700,
       "magazine_size": 1,
       "passive_skills": []
@@ -24458,7 +24458,7 @@
     "price": 200,
     "sort_id": 143,
     "dynamic": {
-      "class_name": "CommonWeapon",
+      "type": "weapon",
       "durability": 2222,
       "passive_skills": []
     },

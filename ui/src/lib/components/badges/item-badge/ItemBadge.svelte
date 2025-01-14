@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Tooltip } from '$components/ui';
-	import { type ItemContainerSlot, type Item, type ItemGroup, Rarity } from '$types';
+	import { type ItemContainerSlot, type Item, type ItemGroup, Rarity, ItemTypeA } from '$types';
 	import { ASSET_DATA_PATH, staticIcons } from '$lib/constants';
 	import { itemsData, palsData } from '$lib/data';
 	import { cn } from '$theme';
@@ -50,6 +50,25 @@
 		if (item) {
 			return item.details.dynamic;
 		}
+	});
+
+	let showDurability = $derived.by(() => {
+		if (
+			item?.details.type_a.toString() === 'Accessory' ||
+			item?.details.type_a.toString() === 'Glider' ||
+			item?.details.type_a.toString() === 'SphereModule' ||
+			item?.details.type_b.toString() === 'WeaponGrapplingGun' ||
+			item?.details.type_b.toString() === 'MaterialPalEgg'
+		) {
+			return false;
+		}
+		if (dynamic && dynamic.type === 'weapon' && slot.dynamic_item) {
+			return true;
+		}
+		if (dynamic && dynamic.type === 'armor' && slot.dynamic_item) {
+			return true;
+		}
+		return false;
 	});
 
 	let icon = $derived.by(() => {
@@ -196,7 +215,7 @@
 						<span class="absolute bottom-0 right-0.5 text-xs">{slot.count}</span>
 					{/if}
 				</div>
-				{#if (dynamic && dynamic.type === 'weapon' && slot.dynamic_item) || (dynamic && dynamic.type === 'armor' && slot.dynamic_item)}
+				{#if showDurability && dynamic}
 					<Progress
 						value={slot.dynamic_item.durability}
 						max={dynamic.durability < slot.dynamic_item.durability

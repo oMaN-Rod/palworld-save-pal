@@ -230,7 +230,7 @@ export type ItemType =
 	| 'Unknown'
 	| 'Utility'
 	| 'Weapon';
-export type DynamicItemClass = 'armor' | 'weapon';
+export type DynamicItemClass = 'armor' | 'weapon' | 'egg';
 export type ItemGroup =
 	| 'Accessory'
 	| 'Body'
@@ -247,6 +247,7 @@ export interface DynamicItemDetails {
 	durability: number;
 	magazine_size?: number;
 	type: DynamicItemClass;
+	passive_skills?: string[];
 }
 export interface ItemDetails {
 	group: ItemGroup;
