@@ -45,6 +45,7 @@ def setup_logging(dev_mode: bool = False):
                 "class": "logging.FileHandler",
                 "filename": str(log_file),
                 "mode": "a",
+                "encoding": "utf-8",
             },
         },
         "loggers": {
