@@ -6,10 +6,18 @@
 	let {
 		title = '',
 		value = 0,
+		markers = [5, 10, 15, 20, 25, 30, 35, 40, 45],
+		step = 1,
+		min = 0,
+		max = 50,
 		closeModal
 	} = $props<{
 		title?: string;
 		value?: number;
+		markers?: number[];
+		step?: number;
+		min?: number;
+		max?: number;
 		closeModal: (value: any) => void;
 	}>();
 
@@ -28,15 +36,15 @@
 			<Slider
 				classes="w-10/12 mr-2"
 				bind:value={sliderValue}
-				min={0}
-				max={50}
+				{min}
+				{max}
+				{markers}
+				{step}
 				height="h-0.5"
 				meterBg="bg-secondary-500"
 				thumbRingColor="ring-secondary-500"
-				markers={[5, 10, 15, 20, 25, 30, 35, 40, 45]}
-				step={1}
 			/>
-			<Input labelClass="w-2/12" type="number" bind:value={sliderValue[0]} min={0} max={50} />
+			<Input labelClass="w-2/12" type="number" bind:value={sliderValue[0]} {min} {max} />
 		</div>
 		<div class="flex w-full justify-end">
 			<Tooltip position="bottom">

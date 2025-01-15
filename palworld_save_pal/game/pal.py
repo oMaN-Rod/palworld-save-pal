@@ -44,6 +44,7 @@ class PalDTO(BaseModel):
     max_hp: int
     group_id: Optional[UUID]
     sanity: float
+    work_suitability: Dict[WorkSuitability, int]
 
 
 class Pal(BaseModel):
@@ -77,6 +78,7 @@ class Pal(BaseModel):
     _learned_skills: List[str] = []
     _active_skills: List[str] = []
     _passive_skills: List[str] = []
+    _work_suitability: Dict[WorkSuitability, int] = {}
 
     _character_save: Dict[str, Any] = PrivateAttr(default_factory=dict)
     _save_parameter: Dict[str, Any] = PrivateAttr(default_factory=dict)
@@ -691,6 +693,34 @@ class Pal(BaseModel):
     def character_save(self) -> Dict[str, Any]:
         return self._character_save
 
+    @computed_field
+    def work_suitability(self) -> Dict[WorkSuitability, int]:
+        if "GotWorkSuitabilityAddRankList" not in self._save_parameter:
+            return {}
+
+        work_suitability_rank_list = PalObjects.get_array_property(
+            self._save_parameter["GotWorkSuitabilityAddRankList"]
+        )
+        self._work_suitability = {}
+
+        for work_suitability_rank in work_suitability_rank_list:
+            work_suitability = WorkSuitability.from_value(
+                PalObjects.get_enum_property(work_suitability_rank["WorkSuitability"])
+            )
+            rank = PalObjects.get_value(work_suitability_rank["Rank"])
+            self._work_suitability[work_suitability] = rank
+        return self._work_suitability
+
+    @work_suitability.setter
+    def work_suitability(self, value: Dict[WorkSuitability, int]):
+        self._work_suitability = value
+        safe_remove(self._save_parameter, "GotWorkSuitabilityAddRankList")
+        if not value or len(value.values()) == 0:
+            return
+        self._save_parameter["GotWorkSuitabilityAddRankList"] = (
+            PalObjects.GotWorkSuitabilityRankList(self._work_suitability)
+        )
+
     def clone(
         self, instance_id: UUID, storage_id: UUID, storage_slot: int, nickname: str
     ) -> "Pal":
@@ -729,6 +759,7 @@ class Pal(BaseModel):
             "learned_skills": list,
             "active_skills": list,
             "passive_skills": list,
+            "work_suitability": dict,
         }
 
         skip_properties = {

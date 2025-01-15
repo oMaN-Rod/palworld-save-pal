@@ -2,7 +2,7 @@
 	import { EntryState, type Player } from '$types';
 	import { staticIcons } from '$lib/constants';
 	import { getModalState } from '$states';
-	import { PlayerStatModal } from '$components/modals';
+	import { NumberSliderModal } from '$components/modals';
 	import { CornerDotButton } from '$components/ui';
 
 	let { player = $bindable() } = $props<{
@@ -44,7 +44,10 @@
 				break;
 		}
 		// @ts-ignore
-		const result = await modal.showModal<number[]>(PlayerStatModal, { title, value: initialValue });
+		const result = await modal.showModal<number[]>(NumberSliderModal, {
+			title,
+			value: initialValue
+		});
 		if (result) {
 			console.log('result', result);
 			switch (statType) {

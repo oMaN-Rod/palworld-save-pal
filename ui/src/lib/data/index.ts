@@ -6,6 +6,7 @@ import { palsData } from './pals.svelte';
 import { passiveSkillsData } from './passiveSkills.svelte';
 import { presetsData } from './presets.svelte';
 import { uiCommonData } from './ui.svelte';
+import { workSuitabilityData } from './workSuitability.svelte';
 
 export * from './bootstrap';
 export * from './stats';
@@ -18,5 +19,6 @@ export {
 	palsData,
 	passiveSkillsData,
 	presetsData,
-	uiCommonData
+	uiCommonData,
+	workSuitabilityData
 };

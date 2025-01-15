@@ -40,7 +40,7 @@ export type Pal = {
 	learned_skills: string[];
 	active_skills: string[];
 	passive_skills: string[];
-	work_suitabilities: Record<WorkSuitability, number>;
+	work_suitability: Record<WorkSuitability, number>;
 	hp: number;
 	max_hp: number;
 	elements: ElementType[];

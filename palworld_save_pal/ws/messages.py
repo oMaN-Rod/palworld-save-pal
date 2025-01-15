@@ -49,6 +49,7 @@ class MessageType(str, Enum):
     GET_UI_COMMON = "get_ui_common"
     NO_FILE_SELECTED = "no_file_selected"
     SELECT_GAMEPASS_SAVE = "select_gamepass_save"
+    GET_WORK_SUITABILITY = "get_work_suitability"
 
 
 class AddPalData(BaseModel):
@@ -214,3 +215,7 @@ class GetUICommonMessage(BaseMessage):
 class SelectGamepassSaveMessage(BaseMessage):
     type: str = MessageType.SELECT_GAMEPASS_SAVE.value
     data: str
+
+
+class GetWorkSuitabilityMessage(BaseMessage):
+    type: str = MessageType.GET_WORK_SUITABILITY.value

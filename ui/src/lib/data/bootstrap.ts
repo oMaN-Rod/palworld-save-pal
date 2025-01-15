@@ -7,7 +7,8 @@ import {
 	itemsData,
 	palsData,
 	passiveSkillsData,
-	presetsData
+	presetsData,
+	workSuitabilityData
 } from '.';
 
 const ws = getSocketState();
@@ -20,6 +21,7 @@ export const bootstrap = async () => {
 	await elementsData.reset();
 	await expData.reset();
 	await itemsData.reset();
+	await workSuitabilityData.reset();
 	ws.send(JSON.stringify({ type: MessageType.GET_VERSION }));
 	ws.send(JSON.stringify({ type: MessageType.SYNC_APP_STATE }));
 };

@@ -15,6 +15,7 @@ from palworld_save_pal.ws.handlers import (
     ui_common_handler,
     version_handler,
     local_file_handler,
+    work_suitability_handler,
 )
 from palworld_save_pal.ws.messages import (
     AddPalMessage,
@@ -27,6 +28,7 @@ from palworld_save_pal.ws.messages import (
     GetPalsMessage,
     GetPassiveSkillsMessage,
     GetSettingsMessage,
+    GetWorkSuitabilityMessage,
     HealPalsMessage,
     MessageType,
     MovePalMessage,
@@ -263,5 +265,13 @@ def bootstrap(dispatcher: "MessageDispatcher"):
         {
             "message_class": BaseMessage,
             "handler_func": ui_common_handler.get_ui_common_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.GET_WORK_SUITABILITY.value,
+        {
+            "message_class": GetWorkSuitabilityMessage,
+            "handler_func": work_suitability_handler.get_work_suitability_handler,
         },
     )

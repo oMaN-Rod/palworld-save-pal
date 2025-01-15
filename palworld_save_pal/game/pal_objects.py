@@ -763,3 +763,19 @@ class PalObjects:
                 "type": "ArrayProperty",
             },
         }
+
+    @staticmethod
+    def GotWorkSuitabilityRankList(work_suitabilities: Dict[WorkSuitability, int]):
+        return PalObjects.ArrayProperty(
+            ArrayType.STRUCT_PROPERTY,
+            {
+                "prop_name": "GotWorkSuitabilityAddRankList",
+                "prop_type": "StructProperty",
+                "values": [
+                    PalObjects.WorkSuitabilityStruct(work.prefixed(), rank)
+                    for work, rank in work_suitabilities.items()
+                ],
+                "type_name": "PalWorkSuitabilityInfo",
+                "id": "00000000-0000-0000-0000-000000000000",
+            },
+        )
