@@ -490,20 +490,40 @@ class SaveFile(BaseModel):
             return {}
         logger.info("Loading Players")
 
+        loaded_sav_files: Dict[UUID, GvasFile] = {}
+
+        for uid, player_sav_bytes in player_sav_files.items():
+            raw_gvas, _ = decompress_sav_to_gvas(player_sav_bytes)
+            gvas_file = GvasFile.read(
+                raw_gvas, PALWORLD_TYPE_HINTS, CUSTOM_PROPERTIES, allow_nan=True
+            )
+            player_uuid = PalObjects.get_guid(
+                PalObjects.get_nested(
+                    gvas_file.properties,
+                    "SaveData",
+                    "value",
+                    "IndividualId",
+                    "value",
+                    "PlayerUId",
+                )
+            )
+            if not are_equal_uuids(uid, player_uuid):
+                logger.warning(
+                    "Player UIDs do not match (host fix detected): %s != %s",
+                    uid,
+                    player_uuid,
+                )
+            loaded_sav_files[player_uuid] = gvas_file
+
         players = {}
         for entry in self._character_save_parameter_map:
             if self._is_player(entry):
                 uid = PalObjects.get_guid(entry["key"]["PlayerUId"])
-                player_sav_bytes = player_sav_files.get(uid)
-                if not player_sav_bytes:
+                if uid not in loaded_sav_files:
                     logger.warning("No player save file found for player %s", uid)
                     continue
 
-                raw_gvas, _ = decompress_sav_to_gvas(player_sav_bytes)
-                gvas_file = GvasFile.read(
-                    raw_gvas, PALWORLD_TYPE_HINTS, CUSTOM_PROPERTIES, allow_nan=True
-                )
-                self._player_gvas_files[uid] = gvas_file
+                self._player_gvas_files[uid] = loaded_sav_files[uid]
                 player = Player(
                     gvas_file=gvas_file,
                     item_container_save_data=self._item_container_save_data,
