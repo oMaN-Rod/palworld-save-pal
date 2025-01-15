@@ -581,43 +581,43 @@
   },
   "PAL_FullStomach_Down_1": {
     "localized_name": "Dainty Eater",
-    "description": "Hunger decreases <NumBlue_13>+10.0%</> slower."
+    "description": "Hunger decreases +10.0% slower."
   },
   "PAL_FullStomach_Down_2": {
     "localized_name": "Diet Lover",
-    "description": "Hunger decreases <NumBlue_13>+15.0%</> slower."
+    "description": "Hunger decreases +15.0% slower."
   },
   "PAL_FullStomach_Down_3": {
     "localized_name": "Mastery of Fasting",
-    "description": "Hunger decreases <NumBlue_13>+20.0%</> slower."
+    "description": "Hunger decreases +20.0% slower."
   },
   "PAL_FullStomach_Up_1": {
     "localized_name": "Glutton",
-    "description": "Hunger decreases <NumRed_13>+10.0%</> faster."
+    "description": "Hunger decreases +10.0% faster."
   },
   "PAL_FullStomach_Up_2": {
     "localized_name": "Bottomless Stomach",
-    "description": "Hunger decreases <NumRed_13>+15.0%</> faster."
+    "description": "Hunger decreases +15.0% faster."
   },
   "PAL_Sanity_Down_1": {
     "localized_name": "Positive Thinker",
-    "description": "SAN drops <NumBlue_13>+10.0%</> slower."
+    "description": "SAN drops +10.0% slower."
   },
   "PAL_Sanity_Down_2": {
     "localized_name": "Workaholic",
-    "description": "SAN drops <NumBlue_13>+15.0%</> slower."
+    "description": "SAN drops +15.0% slower."
   },
   "PAL_Sanity_Down_3": {
     "localized_name": "Heart of the Immovable King",
-    "description": "SAN drops <NumBlue_13>+20.0%</> slower."
+    "description": "SAN drops +20.0% slower."
   },
   "PAL_Sanity_Up_1": {
     "localized_name": "Unstable",
-    "description": "SAN drops <NumRed_13>+10.0%</> faster."
+    "description": "SAN drops +10.0% faster."
   },
   "PAL_Sanity_Up_2": {
     "localized_name": "Destructive",
-    "description": "SAN drops <NumRed_13>+15.0%</> faster."
+    "description": "SAN drops +15.0% faster."
   },
   "PAL_SpiritualInst": {
     "localized_name": "Mentally unstable",
