@@ -4,6 +4,7 @@
 	import { getAppState } from '$states';
 	import { ActiveSkillBadge, HealthBadge, PalHeader, PassiveSkillBadge } from '$components';
 	import { palsData } from '$lib/data';
+	import { staticIcons } from '$lib/constants';
 
 	let { pal = $bindable() } = $props<{
 		pal: Pal;
@@ -41,34 +42,36 @@
 	<PalHeader bind:pal showActions={false} />
 	<HealthBadge bind:pal player={appState.selectedPlayer} />
 	<div class="flex justify-center space-x-2">
+		<span class="text-surface-300 mr-1 text-xs">IVs</span>
 		<div class="chip bg-green-700">
-			<span class="text-xs font-light">HP</span>
+			<img src={staticIcons.hpIcon} alt="HP" class="h-4 w-4" />
 			<span class="text-sm font-bold">{pal.talent_hp}</span>
 		</div>
 		<div class="chip bg-red-700">
-			<span class="text-xs font-light">Attack</span>
+			<img src={staticIcons.attackIcon} alt="Attack" class="h-6 w-6" />
 			<span class="text-sm font-bold">{pal.talent_shot}</span>
 		</div>
 		<div class="chip bg-blue-700">
-			<span class="text-xs font-light">Defense</span>
+			<img src={staticIcons.defenseIcon} alt="Defense" class="h-6 w-6" />
 			<span class="text-sm font-bold">{pal.talent_defense}</span>
 		</div>
 	</div>
 	<div class="flex justify-center space-x-2">
+		<span class="text-surface-300 mr-1 text-xs">Souls</span>
 		<div class="chip bg-green-700">
-			<span class="text-xs font-light">Health</span>
+			<img src={staticIcons.hpIcon} alt="HP" class="h-4 w-4" />
 			<span class="text-sm font-bold">{pal.rank_hp}</span>
 		</div>
 		<div class="chip bg-red-700">
-			<span class="text-xs font-light">Attack</span>
+			<img src={staticIcons.attackIcon} alt="Attack" class="h-6 w-6" />
 			<span class="text-sm font-bold">{pal.rank_attack}</span>
 		</div>
 		<div class="chip bg-blue-700">
-			<span class="text-xs font-light">Defense</span>
+			<img src={staticIcons.defenseIcon} alt="Defense" class="h-6 w-6" />
 			<span class="text-sm font-bold">{pal.rank_defense}</span>
 		</div>
 		<div class="chip bg-purple-700">
-			<span class="text-xs font-light">Craftspeed</span>
+			<img src={staticIcons.workSpeedIcon} alt="Defense" class="h-6 w-6" />
 			<span class="text-sm font-bold">{pal.rank_craftspeed}</span>
 		</div>
 	</div>

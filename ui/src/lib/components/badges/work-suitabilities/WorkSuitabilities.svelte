@@ -88,7 +88,7 @@
 			...pal!.work_suitability,
 			[workSuitability]: Math.min(
 				result - (palData?.work_suitability[workSuitability as WorkSuitability] ?? 0),
-				5
+				4
 			)
 		};
 

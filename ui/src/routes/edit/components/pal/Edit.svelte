@@ -11,7 +11,7 @@
 		LearnedSkillSelectModal
 	} from '$components';
 	import { SectionHeader, Tooltip } from '$components/ui';
-	import { EntryState, type PresetProfile } from '$types';
+	import { EntryState, type PresetProfile, type WorkSuitability } from '$types';
 	import { staticIcons } from '$lib/constants';
 	import { palsData, expData, presetsData } from '$lib/data';
 	import { getAppState, getModalState, getToastState } from '$states';
@@ -186,6 +186,16 @@
 			appState.selectedPal.state = EntryState.MODIFIED;
 		}
 	}
+
+	function handleMaxWorkSuitability() {
+		if (!appState.selectedPal) return;
+		const palData = palsData.pals[appState.selectedPal.character_key] ?? null;
+		if (!palData) return;
+		for (const [key, value] of Object.entries(palData.work_suitability)) {
+			if (value === 0) continue;
+			appState.selectedPal.work_suitability[key as WorkSuitability] = Math.min(5 - value, 4);
+		}
+	}
 </script>
 
 {#if appState.selectedPal}
@@ -256,7 +266,23 @@
 						</div>
 						<SectionHeader text="Presets" />
 						<SkillPresets onSelect={setSkillPreset} />
-						<SectionHeader text="Work Suitability" />
+						<SectionHeader text="Work Suitability">
+							{#snippet action()}
+								<div class="flex">
+									<Tooltip>
+										<button
+											class="btn hover:bg-secondary-500/25 ml-2 p-2"
+											onclick={handleMaxWorkSuitability}
+										>
+											<BicepsFlexed />
+										</button>
+										{#snippet popup()}
+											<span>Max out Work Suitability</span>
+										{/snippet}
+									</Tooltip>
+								</div>
+							{/snippet}
+						</SectionHeader>
 						<WorkSuitabilities bind:pal={appState.selectedPal} />
 					</div>
 				</div>

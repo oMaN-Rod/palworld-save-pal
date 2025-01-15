@@ -713,9 +713,9 @@ class Pal(BaseModel):
 
     @work_suitability.setter
     def work_suitability(self, value: Dict[WorkSuitability, int]):
-        self._work_suitability = value
+        self._work_suitability = {k: v for k, v in value.items() if v != 0}
         safe_remove(self._save_parameter, "GotWorkSuitabilityAddRankList")
-        if not value or len(value.values()) == 0:
+        if not self._work_suitability or len(self._work_suitability.values()) == 0:
             return
         self._save_parameter["GotWorkSuitabilityAddRankList"] = (
             PalObjects.GotWorkSuitabilityRankList(self._work_suitability)
