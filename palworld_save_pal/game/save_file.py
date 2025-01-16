@@ -525,7 +525,7 @@ class SaveFile(BaseModel):
 
                 self._player_gvas_files[uid] = loaded_sav_files[uid]
                 player = Player(
-                    gvas_file=gvas_file,
+                    gvas_file=loaded_sav_files[uid],
                     item_container_save_data=self._item_container_save_data,
                     dynamic_item_save_data=self._dynamic_item_save_data,
                     character_container_save_data=self._character_container_save_data,
