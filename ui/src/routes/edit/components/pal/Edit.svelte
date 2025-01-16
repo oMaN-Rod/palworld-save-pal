@@ -195,6 +195,7 @@
 			if (value === 0) continue;
 			appState.selectedPal.work_suitability[key as WorkSuitability] = Math.min(5 - value, 4);
 		}
+		appState.selectedPal.state = EntryState.MODIFIED;
 	}
 </script>
 
