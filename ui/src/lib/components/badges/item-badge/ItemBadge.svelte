@@ -168,13 +168,13 @@
 				if (!slot.dynamic_item) {
 					slot.dynamic_item = {
 						local_id: '00000000-0000-0000-0000-000000000000',
-						durability: itemData.details.dynamic.durability,
-						remaining_bullets: itemData.details.dynamic.magazine_size,
+						durability: itemData.details.dynamic.durability || 0,
+						remaining_bullets: itemData.details.dynamic.magazine_size || 0,
 						type: itemData.details.dynamic.type
 					};
 				} else {
-					slot.dynamic_item.durability = itemData.details.dynamic.durability;
-					slot.dynamic_item.remaining_bullets = itemData.details.dynamic.magazine_size;
+					slot.dynamic_item.durability = itemData.details.dynamic.durability || 0;
+					slot.dynamic_item.remaining_bullets = itemData.details.dynamic.magazine_size || 0;
 					slot.dynamic_item.type = itemData.details.dynamic.type;
 				}
 			}

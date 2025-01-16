@@ -79,15 +79,15 @@
 							case 'weapon':
 								slot.dynamic_item = {
 									local_id: '00000000-0000-0000-0000-000000000000',
-									durability: itemData.details.dynamic.durability,
-									remaining_bullets: itemData.details.dynamic.magazine_size,
+									durability: itemData.details.dynamic.durability || 0,
+									remaining_bullets: itemData.details.dynamic.magazine_size || 0,
 									type: itemData.details.dynamic.type
 								};
 								break;
 							case 'armor':
 								slot.dynamic_item = {
 									local_id: '00000000-0000-0000-0000-000000000000',
-									durability: itemData.details.dynamic.durability,
+									durability: itemData.details.dynamic.durability || 0,
 									type: itemData.details.dynamic.type
 								};
 								break;
