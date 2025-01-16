@@ -120,6 +120,8 @@ class Player(BaseModel):
 
     @computed_field
     def nickname(self) -> str:
+        if "Nickname" in self._save_parameter:
+            self._save_parameter["NickName"] = self._save_parameter.pop("Nickname")
         self._nickname = PalObjects.get_value(self._save_parameter["NickName"])
         return self._nickname
 
