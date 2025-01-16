@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { TextInputModal } from '$components';
 	import { CornerDotButton, Progress, Tooltip } from '$components/ui';
-	import { type ElementType, EntryState, type Pal, PalGender } from '$types';
+	import { type ElementType, EntryState, type Pal, PalGender, type WorkSuitability } from '$types';
 	import { ASSET_DATA_PATH, MAX_LEVEL, staticIcons } from '$lib/constants';
 	import { palsData, elementsData, expData } from '$lib/data';
 	import { cn } from '$theme';
@@ -155,6 +155,10 @@
 		const palData = palsData.pals[pal.character_key];
 		if (palData) {
 			pal.stomach = palData.max_full_stomach;
+			for (const [key, value] of Object.entries(palData.work_suitability)) {
+				if (value === 0) continue;
+				pal.work_suitability[key as WorkSuitability] = Math.min(5 - value, 4);
+			}
 		} else {
 			pal.stomach = 150;
 		}
