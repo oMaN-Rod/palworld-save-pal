@@ -13,6 +13,7 @@ from palworld_save_pal.game.guild import Guild, GuildDTO
 from palworld_save_pal.game.pal import Pal, PalDTO
 from palworld_save_pal.game.item_container import ItemContainer, ItemContainerType
 from palworld_save_pal.game.pal_objects import PalObjects
+from palworld_save_pal.utils.dict import safe_remove
 from palworld_save_pal.utils.uuid import are_equal_uuids
 from palworld_save_pal.utils.logging_config import create_logger
 
@@ -120,13 +121,19 @@ class Player(BaseModel):
 
     @computed_field
     def nickname(self) -> str:
-        if "Nickname" in self._save_parameter:
-            self._save_parameter["NickName"] = self._save_parameter.pop("Nickname")
-        self._nickname = PalObjects.get_value(self._save_parameter["NickName"])
+        if "NickName" not in self._save_parameter:
+            self._nickname = f"🥷 ({str(self.uid).split("-")[0]})"
+        else:
+            self._nickname = PalObjects.get_value(self._save_parameter["NickName"])
         return self._nickname
 
     @nickname.setter
     def nickname(self, value: str):
+        default_pattern = f"🥷 ({str(self.uid).split("-")[0]})"
+        if value == default_pattern:
+            safe_remove(self._save_parameter, "NickName")
+            return
+
         self._nickname = value
         PalObjects.set_value(self._save_parameter["NickName"], value=value)
 
