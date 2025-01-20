@@ -24,7 +24,8 @@
 		X,
 		ArrowDownWideNarrow,
 		ArrowDownNarrowWide,
-		User
+		User,
+		ReplaceAll
 	} from 'lucide-svelte';
 	import Card from '$components/ui/card/Card.svelte';
 	import { PalCard } from '$components';
@@ -531,6 +532,26 @@
 		}
 	}
 
+	function handleSelectAll(event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }) {
+		if (event.ctrlKey || event.metaKey) {
+			const otomoPalIds = Object.values(otomoContainer)
+				.filter((pal) => pal.character_id !== 'None')
+				.map((pal) => pal.instance_id);
+
+			if (selectedPals.length === filteredPals.length + otomoPalIds.length) {
+				selectedPals = [];
+			} else {
+				selectedPals = [...filteredPals.map((p) => p.id), ...otomoPalIds];
+			}
+		} else {
+			if (selectedPals.length === filteredPals.length) {
+				selectedPals = [];
+			} else {
+				selectedPals = filteredPals.map((p) => p.id);
+			}
+		}
+	}
+
 	$effect(() => {
 		if (appState.selectedPlayer && appState.selectedPlayer.pals) {
 			debouncedFilterPals();
@@ -585,6 +606,28 @@
 					</button>
 					{#snippet popup()}
 						Add a new pal to your Pal box
+					{/snippet}
+				</Tooltip>
+				<Tooltip>
+					<button
+						class="btn hover:preset-tonal-secondary p-2"
+						onclick={(event) => handleSelectAll(event)}
+					>
+						<ReplaceAll />
+					</button>
+					{#snippet popup()}
+						<div class="flex flex-col">
+							<span>Select all in</span>
+							<div class="grid grid-cols-[auto_1fr] gap-1">
+								<img src={staticIcons.leftClickIcon} alt="Left Click" class="h-6 w-6" />
+								<span class="text-sm">pal box</span>
+								<div class="flex">
+									<img src={staticIcons.ctrlIcon} alt="Ctrl" class="h-6 w-6" />
+									<img src={staticIcons.leftClickIcon} alt="Left Click" class="h-6 w-6" />
+								</div>
+								<span class="text-sm">pal box + party</span>
+							</div>
+						</div>
 					{/snippet}
 				</Tooltip>
 				{#if selectedPals.length === 1}
