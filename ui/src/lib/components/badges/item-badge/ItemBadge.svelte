@@ -177,6 +177,8 @@
 					slot.dynamic_item.remaining_bullets = itemData.details.dynamic.magazine_size || 0;
 					slot.dynamic_item.type = itemData.details.dynamic.type;
 				}
+			} else {
+				slot.dynamic_item = undefined;
 			}
 		}
 		if (onUpdate) onUpdate(slot);
