@@ -1,11 +1,11 @@
 <script lang="ts">
 	import PalBadge from '$components/badges/pal-badge/PalBadge.svelte';
 	import { ASSET_DATA_PATH } from '$lib/constants';
-	import { elementsData, palsData, getStats } from '$lib/data';
-	import { getAppState, getSocketState, getModalState, getNavigationState } from '$states';
+	import { elementsData, palsData } from '$lib/data';
+	import { getAppState, getSocketState, getModalState, getToastState } from '$states';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import { Input, Tooltip, TooltipButton } from '$components/ui';
-	import { PalSelectModal } from '$components/modals';
+	import { NumberInputModal, PalSelectModal } from '$components/modals';
 	import { type ElementType, type Pal, type PalData, MessageType } from '$types';
 	import { assetLoader, debounce, calculateFilters, deepCopy, handleMaxOutPal } from '$utils';
 	import { cn } from '$theme';
@@ -41,6 +41,7 @@
 	const appState = getAppState();
 	const ws = getSocketState();
 	const modal = getModalState();
+	const toast = getToastState();
 
 	let { ...additionalProps } = $props<{
 		[key: string]: any;
@@ -345,10 +346,18 @@
 	}
 
 	function formatNickname(nickname: string, type: 'clone' | 'new' = 'new') {
-		if (type === 'new' && appState.settings.new_pal_prefix) {
+		if (
+			type === 'new' &&
+			appState.settings.new_pal_prefix &&
+			!nickname.startsWith(appState.settings.new_pal_prefix)
+		) {
 			return `${appState.settings.new_pal_prefix} ${nickname}`;
 		}
-		if (type === 'clone' && appState.settings.clone_prefix) {
+		if (
+			type === 'clone' &&
+			appState.settings.clone_prefix &&
+			!nickname.startsWith(appState.settings.clone_prefix)
+		) {
 			return `${appState.settings.clone_prefix} ${nickname}`;
 		}
 		return nickname;
@@ -372,7 +381,7 @@
 			data: {
 				player_id: appState.selectedPlayer.uid,
 				character_id: selectedPal,
-				nickname: formatNickname(nickname || palData?.localized_name || selectedPal),
+				nickname: nickname || formatNickname(palData?.localized_name || selectedPal),
 				container_id: containerId,
 				storage_slot: index
 			}
@@ -415,10 +424,24 @@
 		filteredPals = palsWithInfo.map((pair) => pair[0] as PalWithData);
 	}
 
-	async function cloneSelectedPal() {
-		if (appState.selectedPlayer && appState.selectedPlayer.pals && selectedPal) {
-			const pal = appState.selectedPlayer.pals[selectedPal.id];
-			if (!pal) return;
+	async function clonePal(pal: Pal) {
+		const maxClones = appState.selectedPlayer!.pals
+			? 965 - Object.values(appState.selectedPlayer!.pals).length
+			: 0;
+		if (maxClones === 0) {
+			toast.add('There are no slots available in your Pal box.', 'Error', 'error');
+			return;
+		}
+		// @ts-ignore
+		const result = await modal.showModal<number>(NumberInputModal, {
+			title: 'How many clones?',
+			message: `There are ${maxClones} slots available in your Pal box.`,
+			value: 1,
+			min: 0,
+			max: maxClones
+		});
+		if (!result) return;
+		for (let i = 0; i < result; i++) {
 			const clonedPal = deepCopy(pal);
 			clonedPal.nickname = formatNickname(
 				clonedPal.nickname || clonedPal.name || clonedPal.character_id,
@@ -432,17 +455,16 @@
 		}
 	}
 
+	async function cloneSelectedPal() {
+		if (appState.selectedPlayer && appState.selectedPlayer.pals) {
+			const pal = appState.selectedPlayer.pals[selectedPals[0]];
+			if (!pal) return;
+			await clonePal(pal);
+		}
+	}
+
 	async function handleClonePal(pal: Pal) {
-		const clonedPal = deepCopy(pal);
-		clonedPal.nickname = formatNickname(
-			clonedPal.nickname || clonedPal.name || clonedPal.character_id,
-			'clone'
-		);
-		const message = {
-			type: MessageType.CLONE_PAL,
-			data: clonedPal
-		};
-		ws.send(JSON.stringify(message));
+		await clonePal(pal);
 	}
 
 	function handlePalSelect(pal: Pal, event: MouseEvent) {

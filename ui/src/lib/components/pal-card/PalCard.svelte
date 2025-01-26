@@ -33,10 +33,10 @@
 
 	let cardClass = $derived(
 		cn(
-			'relative w-full outline outline-2 outline-offset-2 outline-surface-600',
+			'relative w-full outline outline-2 outline-surface-600',
 			pal && selected.includes(pal.instance_id)
 				? 'ring-4 ring-secondary-500'
-				: 'hover:ring hover:ring-secondary-500 outline-surface-600'
+				: 'hover:ring-4 hover:ring-secondary-500 outline-surface-600'
 		)
 	);
 	let palData = $derived(palsData.pals[pal.character_key]);
