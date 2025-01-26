@@ -31,7 +31,7 @@ export async function handleMaxOutPal(pal: Pal, player: Player): Promise<void> {
 	pal.talent_hp = 100;
 	pal.talent_shot = 100;
 	pal.talent_defense = 100;
-	pal.rank = 4;
+	pal.rank = 5;
 	pal.rank_hp = 20;
 	pal.rank_defense = 20;
 	pal.rank_attack = 20;

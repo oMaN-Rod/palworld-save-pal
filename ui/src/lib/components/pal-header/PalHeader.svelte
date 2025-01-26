@@ -157,10 +157,13 @@
 	>
 		<div class="mr-4 flex flex-col items-center justify-center rounded-none">
 			<Rating
-				bind:value={pal.rank}
+				value={pal.rank - 1}
 				count={4}
 				itemClasses="text-gray"
-				onValueChange={() => (pal!.state = EntryState.MODIFIED)}
+				onValueChange={(value) => {
+					pal!.rank = value + 1;
+					pal!.state = EntryState.MODIFIED;
+				}}
 			/>
 			<div class="flex flex-row px-2">
 				{#if showActions}

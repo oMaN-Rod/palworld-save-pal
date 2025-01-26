@@ -378,7 +378,7 @@ class Pal(BaseModel):
     @computed_field
     def rank(self) -> int:
         self._rank = (
-            int(PalObjects.get_byte_property(self._save_parameter["Rank"])) - 1
+            int(PalObjects.get_byte_property(self._save_parameter["Rank"]))
             if "Rank" in self._save_parameter
             else 0
         )
@@ -386,8 +386,7 @@ class Pal(BaseModel):
 
     @rank.setter
     def rank(self, value: int):
-        if value != self._rank:
-            self._rank = min(value + 1, 5)
+        self._rank = min(value, 5)
         if self._rank == 0:
             safe_remove(self._save_parameter, "Rank")
             return
