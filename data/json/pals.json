@@ -8920,7 +8920,8 @@
     "size": "XL",
     "rarity": 8,
     "element_types": [
-      "Leaf"
+      "Leaf",
+      "Earth"
     ],
     "genus_category": "Unknown",
     "weapon": "None",
@@ -8987,7 +8988,8 @@
     "size": "XL",
     "rarity": 9,
     "element_types": [
-      "Ice"
+      "Ice",
+      "Earth"
     ],
     "genus_category": "Unknown",
     "weapon": "None",
@@ -17146,7 +17148,7 @@
     "combi_rank": 1290,
     "work_suitability": {
       "EmitFlame": 0,
-      "Watering": 0,
+      "Watering": 1,
       "Seeding": 0,
       "GenerateElectricity": 0,
       "Handcraft": 0,
