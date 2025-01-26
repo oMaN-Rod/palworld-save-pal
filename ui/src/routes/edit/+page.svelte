@@ -5,71 +5,18 @@
 
 	import { PlayerList } from '$components';
 	import { Tooltip } from '$components/ui';
-	import { EntryState, MessageType, type Pal, type Player } from '$types';
+	import { type Pal, type Player } from '$types';
 	import { SaveAll } from 'lucide-svelte';
-	import { getAppState, getSocketState, getNavigationState, getToastState } from '$states';
+	import { getAppState, getNavigationState } from '$states';
 	import { Tabs } from '@skeletonlabs/skeleton-svelte';
 	import { goto } from '$app/navigation';
 
 	const appState = getAppState();
-	const ws = getSocketState();
 	const nav = getNavigationState();
-	const toast = getToastState();
 
 	interface ModifiedData {
 		modified_pals?: Record<string, Pal>;
 		modified_players?: Record<string, Player>;
-	}
-
-	async function handleSaveState() {
-		let modifiedData: ModifiedData = {};
-		const modifiedPals = Object.entries(appState.modifiedPals)
-			.filter(([_, pal]) => pal.state === EntryState.MODIFIED)
-			.map(([key, pal]) => {
-				// @ts-ignore - We're removing the id from the pal object, no clue where it's coming from...
-				const { id, ...palWithoutId } = pal;
-				palWithoutId.state = EntryState.NONE;
-				return [key, palWithoutId];
-			});
-
-		const modifiedPlayers = Object.entries(appState.modifiedPlayers)
-			.filter(([_, player]) => player.state === EntryState.MODIFIED)
-			.map(([id, player]) => {
-				const { pals, ...playerWithoutPals } = player;
-				playerWithoutPals.state = EntryState.NONE;
-				return [id, playerWithoutPals];
-			});
-
-		if (modifiedPals.length === 0 && modifiedPlayers.length === 0) {
-			console.log('No modifications to save');
-			toast.add('No modifications to save', undefined, 'info');
-			return;
-		}
-
-		if (modifiedPals.length > 0) {
-			modifiedData.modified_pals = Object.fromEntries(modifiedPals);
-		}
-
-		if (modifiedPlayers.length > 0) {
-			modifiedData.modified_players = Object.fromEntries(modifiedPlayers);
-		}
-
-		await goto('/loading');
-
-		const data = {
-			type: MessageType.UPDATE_SAVE_FILE,
-			data: modifiedData
-		};
-
-		ws.send(JSON.stringify(data));
-
-		appState.resetModified();
-
-		const entityTypes = Object.keys(modifiedData).map((key) =>
-			key.replace('modified', '').toLowerCase()
-		);
-		const entityMessage = entityTypes.join(' and ');
-		ws.message = { type: MessageType.PROGRESS_MESSAGE, data: `Updating modified ${entityMessage}` };
 	}
 
 	$effect(() => {
@@ -87,7 +34,7 @@
 				{#if (appState.modifiedPals && Object.keys(appState.modifiedPals).length > 0) || (appState.modifiedPlayers && Object.keys(appState.modifiedPlayers).length > 0)}
 					<div class="mr-0 flex items-end justify-end pb-2 pr-0">
 						<Tooltip>
-							<button class="btn" onclick={handleSaveState}>
+							<button class="btn" onclick={appState.saveState}>
 								<SaveAll class="text-primary-500 mr-2" size="32" />
 							</button>
 							{#snippet popup()}

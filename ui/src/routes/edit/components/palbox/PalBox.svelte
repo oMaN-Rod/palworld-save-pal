@@ -7,7 +7,7 @@
 	import { Input, Tooltip, TooltipButton } from '$components/ui';
 	import { PalSelectModal } from '$components/modals';
 	import { type ElementType, type Pal, type PalData, MessageType } from '$types';
-	import { assetLoader, debounce, calculateFilters, deepCopy } from '$utils';
+	import { assetLoader, debounce, calculateFilters, deepCopy, handleMaxOutPal } from '$utils';
 	import { cn } from '$theme';
 	import { staticIcons } from '$lib/constants';
 	import {
@@ -25,7 +25,8 @@
 		ArrowDownWideNarrow,
 		ArrowDownNarrowWide,
 		User,
-		ReplaceAll
+		ReplaceAll,
+		BicepsFlexed
 	} from 'lucide-svelte';
 	import Card from '$components/ui/card/Card.svelte';
 	import { PalCard } from '$components';
@@ -456,7 +457,6 @@
 		}
 	}
 
-	// Modify bulk operations to work with selections
 	async function healSelectedPals() {
 		if (!appState.selectedPlayer || !appState.selectedPlayer.pals) return;
 		if (selectedPals.length === 0) return;
@@ -479,6 +479,17 @@
 		});
 
 		selectedPals = [];
+	}
+
+	async function maxSelectedPals() {
+		if (!appState.selectedPlayer || !appState.selectedPlayer.pals) return;
+		if (selectedPals.length === 0) return;
+
+		for (const palId of selectedPals) {
+			const pal = appState.selectedPlayer.pals[palId];
+			handleMaxOutPal(pal, appState.selectedPlayer);
+		}
+		await appState.saveState();
 	}
 
 	async function deleteSelectedPals() {
@@ -647,6 +658,14 @@
 						</button>
 						{#snippet popup()}
 							Heal selected pal(s)
+						{/snippet}
+					</Tooltip>
+					<Tooltip>
+						<button class="btn hover:preset-tonal-secondary p-2" onclick={maxSelectedPals}>
+							<BicepsFlexed />
+						</button>
+						{#snippet popup()}
+							Max out selected pal(s)
 						{/snippet}
 					</Tooltip>
 

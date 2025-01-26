@@ -1,15 +1,14 @@
 <script lang="ts">
 	import { TextInputModal } from '$components';
 	import { CornerDotButton, Progress, Tooltip } from '$components/ui';
-	import { type ElementType, EntryState, type Pal, PalGender, type WorkSuitability } from '$types';
+	import { type ElementType, EntryState, type Pal, PalGender } from '$types';
 	import { ASSET_DATA_PATH, MAX_LEVEL, staticIcons } from '$lib/constants';
 	import { palsData, elementsData, expData } from '$lib/data';
 	import { cn } from '$theme';
 	import { getAppState, getModalState, getToastState } from '$states';
 	import { Rating } from '@skeletonlabs/skeleton-svelte';
 	import { Minus, Plus } from 'lucide-svelte';
-	import { getStats } from '$lib/data';
-	import { assetLoader } from '$utils';
+	import { assetLoader, handleMaxOutPal, canBeBoss } from '$utils';
 
 	let { pal = $bindable(), showActions = true } = $props<{
 		pal?: Pal;
@@ -113,57 +112,6 @@
 			appState.selectedPlayer.pals[pal.instance_id].nickname = result;
 	}
 
-	function canBeBoss(character_id: string, target: string): boolean {
-		let valid = true;
-		let type = '';
-		if (character_id.toLowerCase().includes('predator_')) {
-			valid = false;
-			type = 'Predator';
-		}
-		if (character_id.toLowerCase().includes('summon_')) {
-			valid = false;
-			type = 'Summon';
-		}
-		if (character_id.toLowerCase().includes('raid_')) {
-			valid = false;
-			type = 'Raid';
-		}
-		if (!valid) {
-			toast.add(`${type} Pal cannot be ${target}`, undefined, 'warning');
-		}
-		return valid;
-	}
-
-	async function handleMaxOutPal() {
-		if (!pal || !appState.selectedPlayer) return;
-		pal.level = MAX_LEVEL;
-		const maxLevelData = expData.expData['61'];
-		pal.exp = maxLevelData.PalTotalEXP - maxLevelData.PalNextEXP;
-		pal.is_boss = canBeBoss(pal.character_id, 'Alpha');
-		pal.is_lucky = false;
-		pal.talent_hp = 100;
-		pal.talent_shot = 100;
-		pal.talent_defense = 100;
-		pal.rank = 4;
-		pal.rank_hp = 20;
-		pal.rank_defense = 20;
-		pal.rank_attack = 20;
-		pal.rank_craftspeed = 20;
-		getStats(pal, appState.selectedPlayer);
-		pal.hp = pal.max_hp;
-		pal.state = EntryState.MODIFIED;
-		const palData = palsData.pals[pal.character_key];
-		if (palData) {
-			pal.stomach = palData.max_full_stomach;
-			for (const [key, value] of Object.entries(palData.work_suitability)) {
-				if (value === 0) continue;
-				pal.work_suitability[key as WorkSuitability] = Math.min(5 - value, 4);
-			}
-		} else {
-			pal.stomach = 150;
-		}
-	}
-
 	function handleEditGender() {
 		if (pal) {
 			const currentGender = pal.gender;
@@ -173,7 +121,12 @@
 	}
 
 	function handleEditLucky() {
-		if (pal && canBeBoss(pal.character_id, 'Lucky')) {
+		const [type, valid] = canBeBoss(pal.character_id);
+		if (!valid) {
+			toast.add(`${type} Pal cannot be Lucky`, undefined, 'warning');
+			return;
+		}
+		if (pal) {
 			pal.is_lucky = !pal.is_lucky;
 			pal.is_boss = pal.is_lucky ? false : pal.is_boss;
 			pal.state = EntryState.MODIFIED;
@@ -181,7 +134,12 @@
 	}
 
 	function handleEditAlpha() {
-		if (pal && canBeBoss(pal.character_id, 'Alpha')) {
+		const [type, valid] = canBeBoss(pal.character_id);
+		if (!valid) {
+			toast.add(`${type} Pal cannot be Alpha`, undefined, 'warning');
+			return;
+		}
+		if (pal) {
 			pal.is_boss = !pal.is_boss;
 			pal.is_lucky = pal.is_boss ? false : pal.is_lucky;
 			pal.state = EntryState.MODIFIED;
@@ -243,7 +201,10 @@
 							{/snippet}
 						</Tooltip>
 						<Tooltip position="bottom">
-							<CornerDotButton label="Max" onClick={handleMaxOutPal} />
+							<CornerDotButton
+								label="Max"
+								onClick={() => handleMaxOutPal(pal, appState.selectedPlayer!)}
+							/>
 							{#snippet popup()}
 								<span>Max out Pal stats 💉💪</span>
 							{/snippet}
