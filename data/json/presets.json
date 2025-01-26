@@ -4916,10 +4916,10 @@
     "name": "Worker",
     "type": "passive_skills",
     "skills": [
-      "CraftSpeed_up2",
       "CraftSpeed_up1",
-      "Rare",
-      "PAL_CorporateSlave"
+      "CraftSpeed_up2",
+      "CraftSpeed_up3",
+      "Rare"
     ]
   },
   "e334d785-9383-49c2-8d65-c1c877652619": {
