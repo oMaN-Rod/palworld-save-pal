@@ -18,8 +18,8 @@ class SettingsDTO(BaseModel):
 class Settings(BaseModel):
     _language: str = "en"
     _save_dir: str = STEAM_ROOT
-    _clone_prefix: str = "[Clone]"
-    _new_pal_prefix: str = "[New Pal]"
+    _clone_prefix: str = "©️"
+    _new_pal_prefix: str = "🆕"
     _is_busy: bool = True
 
     def __init__(self):
