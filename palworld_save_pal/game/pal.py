@@ -196,6 +196,9 @@ class Pal(BaseModel):
                 self.character_id = f"BOSS_{self.character_key}"
             if self.is_lucky:
                 self.is_lucky = False
+        else:
+            if self.character_id.startswith("BOSS_"):
+                self.character_id = self.character_key
 
         logger.debug(f"Setting is_boss to {self._is_boss} {self._character_id}")
 
