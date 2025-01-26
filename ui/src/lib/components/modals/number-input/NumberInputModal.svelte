@@ -5,12 +5,14 @@
 
 	let {
 		title = '',
+		message = '',
 		value = $bindable(0),
 		min = 0,
 		max = 100,
 		closeModal
 	} = $props<{
 		title?: string;
+		message?: string;
 		value?: number;
 		min?: number;
 		max?: number;
@@ -24,6 +26,9 @@
 
 <Card class="bg-surface-500 min-w-[calc(100vw/3)]">
 	<h3 class="h3">{title}</h3>
+	{#if message}
+		<p class="text-sm">{message}</p>
+	{/if}
 
 	<div class="mt-2 flex flex-row items-center space-x-2">
 		<Input type="number" inputClass="grow" bind:value {min} {max} />
