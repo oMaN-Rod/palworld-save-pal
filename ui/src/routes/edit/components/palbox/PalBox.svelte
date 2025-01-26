@@ -867,7 +867,7 @@
 								onSelect={handlePalSelect}
 								onMove={() => handleMoveToPalbox(pal)}
 								onDelete={() => handleDeletePal(pal)}
-								onAdd={() => handleAddPal('party', index + 1)}
+								onAdd={() => handleAddPal('party', index)}
 								onClone={() => handleClonePal(pal)}
 							/>
 						{/each}
