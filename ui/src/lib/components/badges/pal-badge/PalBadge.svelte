@@ -37,7 +37,7 @@
 			'outline-surface-600 xl:h-18 xl:w-18 h-16 w-16 rounded-full outline outline-2 outline-offset-2',
 			selected.includes(pal.instance_id)
 				? 'ring-4 ring-secondary-500'
-				: 'hover:ring hover:ring-secondary-500'
+				: 'hover:ring-4 hover:ring-secondary-500'
 		)
 	);
 
@@ -54,7 +54,7 @@
 			];
 		}
 		return [
-			{ label: 'Move to Palbox', onClick: onMove, icon: ArchiveRestore },
+			{ label: 'Move to Party', onClick: onMove, icon: ArchiveRestore },
 			{ label: 'Clone Pal', onClick: onClone, icon: Copy },
 			{ label: 'Delete Pal', onClick: onDelete, icon: Trash }
 		];
