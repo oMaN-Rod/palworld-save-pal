@@ -7,6 +7,7 @@ from pydantic import BaseModel, ConfigDict, Field
 from webview import Window
 
 from palworld_save_pal.editor.settings import Settings
+from palworld_save_pal.game.guild import Guild
 from palworld_save_pal.game.player import Player
 from palworld_save_pal.game.save_file import SaveFile, SaveType
 from palworld_save_pal.server_thread import ServerThread
@@ -22,6 +23,7 @@ class AppState(BaseModel):
     save_file: Optional[SaveFile] = None
     save_type: SaveType = SaveType.STEAM
     players: Dict[UUID, Player] = Field(default_factory=dict)
+    guilds: Dict[UUID, Guild] = Field(default_factory=dict)
     local: bool = False
     settings: Settings = Field(default_factory=Settings)
     terminate_flag: threading.Event = threading.Event()
@@ -52,6 +54,7 @@ class AppState(BaseModel):
         )
         await ws_callback("Files loaded, getting players...")
         self.players = self.save_file.get_players()
+        self.guilds = self.save_file.get_guilds()
 
     def select_gamepass_save(self, save_id: str) -> Optional[GamepassSaveData]:
         gamepass_save = self.gamepass_saves.get(save_id)

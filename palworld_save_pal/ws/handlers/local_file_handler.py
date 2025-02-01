@@ -195,6 +195,9 @@ async def process_steam_save(save_path: str, ws: WebSocket, local: bool):
     response = build_response(MessageType.GET_PLAYERS, app_state.players)
     await ws.send_json(response)
 
+    response = build_response(MessageType.GET_GUILDS, app_state.guilds)
+    await ws.send_json(response)
+
 
 async def get_gamepass_saves(file_path: str, ws: WebSocket):
     logger.debug("Getting GamePass saves")
@@ -301,4 +304,7 @@ async def select_gamepass_save_handler(
     await ws.send_json(response)
 
     response = build_response(MessageType.GET_PLAYERS, app_state.players)
+    await ws.send_json(response)
+
+    response = build_response(MessageType.GET_GUILDS, app_state.guilds)
     await ws.send_json(response)

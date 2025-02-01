@@ -19,6 +19,7 @@ from palworld_save_tools.paltypes import (
     PALWORLD_TYPE_HINTS,
 )
 
+from palworld_save_pal.game.base import Base
 from palworld_save_pal.game.guild import Guild
 from palworld_save_pal.game.pal import Pal, PalDTO
 from palworld_save_pal.game.pal_objects import GroupType, PalObjects
@@ -169,6 +170,7 @@ class SaveFile(BaseModel):
         default_factory=list
     )
     _group_save_data_map: List[Dict[str, Any]] = PrivateAttr(default_factory=list)
+    _base_camp_save_data_map: List[Dict[str, Any]] = PrivateAttr(default_factory=list)
 
     def add_pal(
         self,
@@ -240,6 +242,9 @@ class SaveFile(BaseModel):
     def get_players(self):
         return self._players
 
+    def get_guilds(self):
+        return self._guilds
+
     def load_json(self, data: bytes):
         logger.info("Loading %s as JSON", self.name)
         self._gvas_file = GvasFile.load(json.loads(data))
@@ -309,6 +314,7 @@ class SaveFile(BaseModel):
         self._load_guilds()
         self._load_players(player_sav_files)
         self._load_guilds()
+        self._load_bases()
         return self
 
     def sav(self, gvas_file: GvasFile = None) -> bytes:
@@ -430,6 +436,29 @@ class SaveFile(BaseModel):
                 group_save_data=entry,
             )
 
+    def _load_bases(self):
+        if not self._base_camp_save_data_map:
+            logger.warning("No bases found in the save file.")
+
+        for entry in self._base_camp_save_data_map:
+            # Guild to add to
+            group_id_belong_to = PalObjects.as_uuid(PalObjects.get_nested(entry, "value", "RawData", "value", "group_id_belong_to"))
+            # Pal Container ID
+            container_id = PalObjects.as_uuid(PalObjects.get_nested(entry, "value", "WorkerDirector", "value", "RawData", "value", "container_id"))
+
+            # Find all pals that have that container ID
+            pal_ids = [pal.instance_id for pal in self._pals.values() if pal.storage_id == container_id]
+
+            base = Base(
+                data=entry,
+                pals=pal_ids,
+            )
+            self._guilds[group_id_belong_to].add_base(base)
+
+            # Debug, print the guild name, and pals at base
+            logger.debug("Guild %s has %d pals at base", self._guilds[group_id_belong_to].name, len(pal_ids))
+            
+
     def _load_pals(self):
         if not self._gvas_file:
             raise ValueError("No GvasFile has been loaded.")
@@ -475,6 +504,9 @@ class SaveFile(BaseModel):
         )
         self._group_save_data_map = PalObjects.get_value(
             world_save_data["GroupSaveDataMap"]
+        )
+        self._base_camp_save_data_map = PalObjects.get_value(
+            world_save_data["BaseCampSaveData"]
         )
 
     def _player_guild(self, player_id: UUID) -> Optional[Guild]:

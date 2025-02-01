@@ -23,6 +23,7 @@ class MessageType(str, Enum):
     DOWNLOAD_SAVE_FILE = "download_save_file"
     ERROR = "error"
     WARNING = "warning"
+    GET_GUILDS = "get_guilds"
     GET_PLAYERS = "get_players"
     GET_PAL_DETAILS = "get_pal_details"
     LOAD_ZIP_FILE = "load_zip_file"

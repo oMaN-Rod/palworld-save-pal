@@ -2,7 +2,7 @@ from typing import Any, Dict, List, Optional
 from uuid import UUID
 from pydantic import BaseModel, Field, PrivateAttr, computed_field
 
-
+from palworld_save_pal.game.base import Base
 from palworld_save_pal.game.pal_objects import PalObjects
 from palworld_save_pal.utils.uuid import are_equal_uuids, is_empty_uuid
 from palworld_save_pal.utils.logging_config import create_logger
@@ -28,6 +28,8 @@ class Guild(BaseModel):
     _character_handle_ids: Optional[List[Dict[str, Any]]] = PrivateAttr(
         default_factory=list
     )
+
+    bases: Dict[UUID, Base] = Field(default_factory=dict)
 
     def __init__(self, group_save_data: Dict[str, Any] = None):
         super().__init__()
@@ -84,3 +86,7 @@ class Guild(BaseModel):
                 logger.debug("%s (%s) => Removed %s", self.name, self.id, pal_id)
                 return True
         return False
+    
+    def add_base(self, base: Base):
+        self.bases[base.id] = base
+        logger.debug("Added base %s to guild %s", base.id, self.id)
