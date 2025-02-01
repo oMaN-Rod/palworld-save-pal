@@ -415,6 +415,7 @@ class Player(BaseModel):
     def _load_pal_box(self, character_container_save_data: Dict[str, Any]):
         self._pal_box = CharacterContainer(
             id=self.pal_box_id,
+            player_uid=self.uid,
             type=CharacterContainerType.PAL_BOX,
             character_container_save_data=character_container_save_data,
         )
@@ -422,6 +423,7 @@ class Player(BaseModel):
     def _load_otomo_container(self, character_container_save_data: Dict[str, Any]):
         self._party = CharacterContainer(
             id=self.otomo_container_id,
+            player_uid=self.uid,
             type=CharacterContainerType.PARTY,
             character_container_save_data=character_container_save_data,
         )

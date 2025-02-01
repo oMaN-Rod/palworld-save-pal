@@ -24,6 +24,7 @@ class CharacterContainerSlot(BaseModel):
 
 class CharacterContainer(BaseModel):
     id: UUID
+    player_uid: UUID
     type: CharacterContainerType
     size: Optional[int] = 0
     slots: Optional[List[CharacterContainerSlot]] = Field(default_factory=list)
@@ -72,7 +73,7 @@ class CharacterContainer(BaseModel):
             self.id,
         )
         new_container_slot_data = PalObjects.ContainerSlotData(
-            slot_idx=slot_idx, instance_id=pal_id
+            slot_idx=slot_idx, instance_id=pal_id, player_uid=self.player_uid
         )
         self._slots_data.append(new_container_slot_data)
         if not self.slots:
