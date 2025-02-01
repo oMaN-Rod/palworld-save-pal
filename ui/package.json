@@ -23,7 +23,7 @@
     "@sveltejs/kit": "^2.15.1",
     "@sveltejs/vite-plugin-svelte": "^4.0.4",
     "@types/eslint": "^9.6.1",
-    "@types/node": "^20.17.10",
+    "@types/node": "^22.13.0",
     "@types/uuid": "^10.0.0",
     "autoprefixer": "^10.4.20",
     "eslint": "^9.17.0",
