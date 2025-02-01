@@ -308,7 +308,6 @@ class SaveFile(BaseModel):
         self._load_pals()
         self._load_guilds()
         self._load_players(player_sav_files)
-        self._load_guilds()
         return self
 
     def sav(self, gvas_file: GvasFile = None) -> bytes:
