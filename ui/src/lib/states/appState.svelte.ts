@@ -1,6 +1,6 @@
 // src/lib/states/appState.svelte.ts
 import { goto } from '$app/navigation';
-import type { AppSettings, GamepassSave, ItemContainerSlot } from '$types';
+import type { AppSettings, GamepassSave, Guild, ItemContainerSlot } from '$types';
 import { EntryState, MessageType, type Pal, type Player, type SaveFile } from '$types';
 import { getToastState } from './toastState.svelte';
 import { getSocketState } from './websocketState.svelte';
@@ -15,6 +15,7 @@ interface ModifiedData {
 
 export function createAppState() {
 	let players: Record<string, Player> = $state({});
+	let guilds: Record<string, Guild> = $state({});
 	let selectedPlayerUid: string = $state('');
 	let selectedPlayer: Player | undefined = $state(undefined);
 	let selectedPal: Pal | undefined = $state(undefined);
@@ -30,6 +31,7 @@ export function createAppState() {
 
 	function resetState() {
 		players = {};
+		guilds = {};
 		selectedPlayerUid = '';
 		selectedPlayer = undefined;
 		selectedPal = undefined;
@@ -118,6 +120,12 @@ export function createAppState() {
 		},
 		set players(newPlayers: Record<string, Player>) {
 			players = newPlayers;
+		},
+		get guilds() {
+			return guilds;
+		},
+		set guilds(newGuilds: Record<string, Guild>) {
+			guilds = newGuilds;
 		},
 
 		get selectedPlayerUid() {

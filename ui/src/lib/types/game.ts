@@ -87,6 +87,19 @@ export type Player = {
 	ex_status_point_list: ExStatusPointList;
 };
 
+export type Guild = {
+	admin_player_uid: string;
+	bases: Record<string, Base>;
+	id: string;
+	name: string;
+	players: Player[];
+};
+
+export type Base = {
+	id: string;
+	pals: Record<string, Pal>;
+};
+
 export type SaveFileType = 'gamepass' | 'steam';
 
 export type SaveFile = {

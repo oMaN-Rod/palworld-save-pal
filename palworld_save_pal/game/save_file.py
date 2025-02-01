@@ -447,16 +447,16 @@ class SaveFile(BaseModel):
             container_id = PalObjects.as_uuid(PalObjects.get_nested(entry, "value", "WorkerDirector", "value", "RawData", "value", "container_id"))
 
             # Find all pals that have that container ID
-            pal_ids = [pal.instance_id for pal in self._pals.values() if pal.storage_id == container_id]
+            pals = {pal.instance_id: pal for pal in self._pals.values() if pal.storage_id == container_id}
 
             base = Base(
                 data=entry,
-                pals=pal_ids,
+                pals=pals,
             )
             self._guilds[group_id_belong_to].add_base(base)
 
             # Debug, print the guild name, and pals at base
-            logger.debug("Guild %s has %d pals at base", self._guilds[group_id_belong_to].name, len(pal_ids))
+            logger.debug("Guild %s has %d pals at base", self._guilds[group_id_belong_to].name, len(pals))
             
 
     def _load_pals(self):
