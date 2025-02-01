@@ -20,7 +20,7 @@
     "@skeletonlabs/skeleton-svelte": "^1.0.0-next.16",
     "@sveltejs/adapter-static": "^3.0.8",
     "@sveltejs/enhanced-img": "^0.3.10",
-    "@sveltejs/kit": "^2.15.1",
+    "@sveltejs/kit": "^2.16.1",
     "@sveltejs/vite-plugin-svelte": "^4.0.4",
     "@types/eslint": "^9.6.1",
     "@types/node": "^20.17.10",
