@@ -51,7 +51,7 @@
     "cockatiel": "^3.2.1",
     "lucide-svelte": "^0.469.0",
     "tailwind-merge": "^2.6.0",
-    "uuid": "^11.0.3"
+    "uuid": "^11.0.5"
   },
   "trustedDependencies": [
     "@sveltejs/kit",
