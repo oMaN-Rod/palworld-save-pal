@@ -562,8 +562,8 @@ class SaveFile(BaseModel):
                     dynamic_item_save_data=self._dynamic_item_save_data,
                     character_container_save_data=self._character_container_save_data,
                     character_save_parameter=entry,
-                    guild=self._player_guild(uid),
                     pals=self._get_player_pals(uid),
+                    guild=self._player_guild(uid),
                 )
                 players[uid] = player
 
