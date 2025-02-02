@@ -17,7 +17,7 @@
   },
   "Alien": {
     "localized_name": "Otherworldly Cells",
-    "description": "Attack +10.0% Fire damage reduction 15.0% Lightning damage reduction 15.0%"
+    "description": "Attack +10% Fire damage reduction 15% Lightning damage reduction 15%"
   },
   "Attack_ACC_up1": {
     "localized_name": "Attack Up Lv. 1",
@@ -89,15 +89,15 @@
   },
   "CoolTimeReduction_Down_1": {
     "localized_name": "Easygoing",
-    "description": "Active skill cooldown extension -15.0%"
+    "description": "Active skill cooldown extension -15%"
   },
   "CoolTimeReduction_Up_1": {
     "localized_name": "Serenity",
-    "description": "Active skill cooldown reduction 30.0% Attack +10.0%"
+    "description": "Active skill cooldown reduction 30% Attack +10%"
   },
   "CoolTimeReduction_Up_2": {
     "localized_name": "Impatient",
-    "description": "Active skill cooldown reduction 15.0%"
+    "description": "Active skill cooldown reduction 15%"
   },
   "CoolTimeReduction_Up_3": {
     "localized_name": "Tempest Fury",
@@ -105,51 +105,51 @@
   },
   "CraftSpeed_down1": {
     "localized_name": "Clumsy",
-    "description": null
+    "description": "Work Speed -10%"
   },
   "CraftSpeed_down2": {
     "localized_name": "Slacker",
-    "description": null
+    "description": "Work Speed -30%"
   },
   "CraftSpeed_up1": {
     "localized_name": "Serious",
-    "description": null
+    "description": "Work Speed +20%"
   },
   "CraftSpeed_up2": {
     "localized_name": "Artisan",
-    "description": null
+    "description": "Work Speed +50%"
   },
   "CraftSpeed_up3": {
     "localized_name": "Remarkable Craftsmanship",
-    "description": null
+    "description": "Work Speed +75%"
   },
   "Deffence_down1": {
     "localized_name": "Downtrodden",
-    "description": null
+    "description": "Defense -10%"
   },
   "Deffence_down2": {
     "localized_name": "Brittle",
-    "description": null
+    "description": "Defense -20%"
   },
   "Deffence_up1": {
     "localized_name": "Hard Skin",
-    "description": null
+    "description": "Defense +10%"
   },
   "Deffence_up2": {
     "localized_name": "Burly Body",
-    "description": null
+    "description": "Defense +20%"
   },
   "Deffence_up3": {
     "localized_name": "Diamond Body",
-    "description": null
+    "description": "Defense +30%"
   },
   "ElementBoost_Aqua_1_PAL": {
     "localized_name": "Hydromaniac",
-    "description": "10.0% increase in Water attack damage."
+    "description": "10% increase in Water attack damage."
   },
   "ElementBoost_Aqua_2_PAL": {
     "localized_name": "Lord of the Sea",
-    "description": null
+    "description": "20% increase in Water attack damage."
   },
   "ElementBoost_Dark_1_BossDefeat": {
     "localized_name": "Dark Damage Enhancement (Small)",
@@ -157,7 +157,7 @@
   },
   "ElementBoost_Dark_1_PAL": {
     "localized_name": "Veil of Darkness",
-    "description": "10.0% increase in Dark attack damage."
+    "description": "10% increase in Dark attack damage."
   },
   "ElementBoost_Dark_2_BossDefeat": {
     "localized_name": "Dark Damage Enhancement (Medium)",
@@ -165,7 +165,7 @@
   },
   "ElementBoost_Dark_2_PAL": {
     "localized_name": "Lord of the Underworld",
-    "description": null
+    "description": "20% increase in Dark attack damage."
   },
   "ElementBoost_Dark_3_BossDefeat": {
     "localized_name": "Dark Damage Enhancement (Large)",
@@ -177,7 +177,7 @@
   },
   "ElementBoost_Dragon_1_PAL": {
     "localized_name": "Blood of the Dragon",
-    "description": "10.0% increase in Dragon attack damage."
+    "description": "10% increase in Dragon attack damage."
   },
   "ElementBoost_Dragon_2_BossDefeat": {
     "localized_name": "Dragon Damage Enhancement (Medium)",
@@ -185,7 +185,7 @@
   },
   "ElementBoost_Dragon_2_PAL": {
     "localized_name": "Divine Dragon",
-    "description": null
+    "description": "20% increase in Dragon attack damage."
   },
   "ElementBoost_Dragon_3_BossDefeat": {
     "localized_name": "Dragon Damage Enhancement (Large)",
@@ -197,7 +197,7 @@
   },
   "ElementBoost_Earth_1_PAL": {
     "localized_name": "Power of Gaia",
-    "description": "10.0% increase in Earth attack damage."
+    "description": "10% increase in Earth attack damage."
   },
   "ElementBoost_Earth_2_BossDefeat": {
     "localized_name": "Ground Damage Enhancement (Medium)",
@@ -205,7 +205,7 @@
   },
   "ElementBoost_Earth_2_PAL": {
     "localized_name": "Earth Emperor",
-    "description": null
+    "description": "20% increase in Earth attack damage."
   },
   "ElementBoost_Earth_3_BossDefeat": {
     "localized_name": "Ground Damage Enhancement (Large)",
@@ -229,7 +229,7 @@
   },
   "ElementBoost_Fire_1_PAL": {
     "localized_name": "Pyromaniac",
-    "description": "10.0% increase in Fire attack damage."
+    "description": "10% increase in Fire attack damage."
   },
   "ElementBoost_Fire_2_BossDefeat": {
     "localized_name": "Fire Damage Enhancement (Medium)",
@@ -237,7 +237,7 @@
   },
   "ElementBoost_Fire_2_PAL": {
     "localized_name": "Flame Emperor",
-    "description": null
+    "description": "20% increase in Fire attack damage."
   },
   "ElementBoost_Fire_3_BossDefeat": {
     "localized_name": "Fire Damage Enhancement (Large)",
@@ -249,7 +249,7 @@
   },
   "ElementBoost_Ice_1_PAL": {
     "localized_name": "Coldblooded",
-    "description": "10.0% increase in Ice attack damage."
+    "description": "10% increase in Ice attack damage."
   },
   "ElementBoost_Ice_2_BossDefeat": {
     "localized_name": "Ice Damage Enhancement (Medium)",
@@ -257,7 +257,7 @@
   },
   "ElementBoost_Ice_2_PAL": {
     "localized_name": "Ice Emperor",
-    "description": null
+    "description": "20% increase in Ice attack damage."
   },
   "ElementBoost_Ice_3_BossDefeat": {
     "localized_name": "Ice Damage Enhancement (Large)",
@@ -269,7 +269,7 @@
   },
   "ElementBoost_Leaf_1_PAL": {
     "localized_name": "Fragrant Foliage",
-    "description": "10.0% increase in Grass attack damage."
+    "description": "10% increase in Grass attack damage."
   },
   "ElementBoost_Leaf_2_BossDefeat": {
     "localized_name": "Grass Damage Enhancement (Medium)",
@@ -277,7 +277,7 @@
   },
   "ElementBoost_Leaf_2_PAL": {
     "localized_name": "Spirit Emperor",
-    "description": null
+    "description": "20% increase in Grass attack damage."
   },
   "ElementBoost_Leaf_3_BossDefeat": {
     "localized_name": "Grass Damage Enhancement (Large)",
@@ -289,7 +289,7 @@
   },
   "ElementBoost_Normal_1_PAL": {
     "localized_name": "Zen Mind",
-    "description": "10.0% increase in Neutral attack damage."
+    "description": "10% increase in Neutral attack damage."
   },
   "ElementBoost_Normal_2_BossDefeat": {
     "localized_name": "Neutral Damage Enhancement (Medium)",
@@ -297,7 +297,7 @@
   },
   "ElementBoost_Normal_2_PAL": {
     "localized_name": "Celestial Emperor",
-    "description": null
+    "description": "20% increase in Neutral attack damage."
   },
   "ElementBoost_Normal_3_BossDefeat": {
     "localized_name": "Neutral Damage Enhancement (Large)",
@@ -305,11 +305,11 @@
   },
   "ElementBoost_Thunder_1_PAL": {
     "localized_name": "Capacitor",
-    "description": "10.0% increase in Lightning attack damage."
+    "description": "10% increase in Lightning attack damage."
   },
   "ElementBoost_Thunder_2_PAL": {
     "localized_name": "Lord of Lightning",
-    "description": null
+    "description": "20% increase in Lightning attack damage."
   },
   "ElementBoost_Water_1_BossDefeat": {
     "localized_name": "Water Damage Enhancement (Small)",
@@ -329,7 +329,7 @@
   },
   "ElementResist_Aqua_1_PAL": {
     "localized_name": "Waterproof",
-    "description": "10.0% decrease in incoming Water damage."
+    "description": "10% decrease in incoming Water damage."
   },
   "ElementResist_Aqua_2": {
     "localized_name": "Water Damage Reduction Lv. 2",
@@ -345,7 +345,7 @@
   },
   "ElementResist_Dark_1_PAL": {
     "localized_name": "Cheery",
-    "description": "10.0% decrease in incoming Dark damage."
+    "description": "10% decrease in incoming Dark damage."
   },
   "ElementResist_Dark_2": {
     "localized_name": "Dark Damage Reduction Lv. 2",
@@ -361,7 +361,7 @@
   },
   "ElementResist_Dragon_1_PAL": {
     "localized_name": "Dragonkiller",
-    "description": "10.0% decrease in incoming Dragon damage."
+    "description": "10% decrease in incoming Dragon damage."
   },
   "ElementResist_Dragon_2": {
     "localized_name": "Dragon Damage Reduction Lv. 2",
@@ -377,7 +377,7 @@
   },
   "ElementResist_Earth_1_PAL": {
     "localized_name": "Earthquake Resistant",
-    "description": "10.0% decrease in incoming Earth damage."
+    "description": "10% decrease in incoming Earth damage."
   },
   "ElementResist_Earth_2": {
     "localized_name": "Earth Damage Reduction Lv. 2",
@@ -393,7 +393,7 @@
   },
   "ElementResist_Fire_1_PAL": {
     "localized_name": "Suntan Lover",
-    "description": "10.0% decrease in incoming Fire damage."
+    "description": "10% decrease in incoming Fire damage."
   },
   "ElementResist_Fire_2": {
     "localized_name": "Fire Damage Reduction Lv. 2",
@@ -409,7 +409,7 @@
   },
   "ElementResist_Ice_1_PAL": {
     "localized_name": "Heated Body",
-    "description": "10.0% decrease in incoming Ice damage."
+    "description": "10% decrease in incoming Ice damage."
   },
   "ElementResist_Ice_2": {
     "localized_name": "Ice Damage Reduction Lv. 2",
@@ -425,7 +425,7 @@
   },
   "ElementResist_Leaf_1_PAL": {
     "localized_name": "Botanical Barrier",
-    "description": "10.0% decrease in incoming Grass damage."
+    "description": "10% decrease in incoming Grass damage."
   },
   "ElementResist_Leaf_2": {
     "localized_name": "Grass Damage Reduction Lv. 2",
@@ -441,7 +441,7 @@
   },
   "ElementResist_Normal_1_PAL": {
     "localized_name": "Abnormal",
-    "description": "10.0% decrease in incoming Neutral damage."
+    "description": "10% decrease in incoming Neutral damage."
   },
   "ElementResist_Normal_2": {
     "localized_name": "Neutral Damage Reduction Lv. 2",
@@ -457,7 +457,7 @@
   },
   "ElementResist_Thunder_1_PAL": {
     "localized_name": "Insulated Body",
-    "description": "10.0% decrease in incoming Lightning damage."
+    "description": "10% decrease in incoming Lightning damage."
   },
   "ElementResist_Thunder_2": {
     "localized_name": "Electric Damage Reduction Lv. 2",
@@ -469,7 +469,7 @@
   },
   "EternalFlame": {
     "localized_name": "Eternal Flame",
-    "description": null
+    "description": "30% increase to Fire attack damage. 30% increase to Lightning attack damage."
   },
   "HP_ACC_up1": {
     "localized_name": "Health Up Lv. 1",
@@ -485,7 +485,7 @@
   },
   "Invader": {
     "localized_name": "Invader",
-    "description": null
+    "description": "30% increase in Dark attack damage. 30% increase in Dragon attack damage."
   },
   "JumpCount_Increase1": {
     "localized_name": "Jump Count Increase +1",
@@ -505,7 +505,7 @@
   },
   "Legend": {
     "localized_name": "Legend",
-    "description": "Attack +20.0% Defense +20.0% Movement Speed increases 15.0%"
+    "description": "Attack +20% Defense +20% Movement Speed increases 15%"
   },
   "MaxInventoryWeight_up": {
     "localized_name": "Max Carrying Capacity Lv. 1",
@@ -533,15 +533,15 @@
   },
   "MoveSpeed_up_1": {
     "localized_name": "Nimble",
-    "description": "10.0% increase to movement speed."
+    "description": "10% increase to movement speed."
   },
   "MoveSpeed_up_2": {
     "localized_name": "Runner",
-    "description": "20.0% increase to movement speed."
+    "description": "20% increase to movement speed."
   },
   "MoveSpeed_up_3": {
     "localized_name": "Swift",
-    "description": "30.0% increase to movement speed."
+    "description": "30% increase to movement speed."
   },
   "Nocturnal": {
     "localized_name": "Nocturnal",
@@ -553,31 +553,31 @@
   },
   "Noukin": {
     "localized_name": "Musclehead",
-    "description": null
+    "description": "Attack +30% Work Speed -50%"
   },
   "PAL_ALLAttack_down1": {
     "localized_name": "Coward",
-    "description": null
+    "description": "Attack -10%"
   },
   "PAL_ALLAttack_down2": {
     "localized_name": "Pacifist",
-    "description": null
+    "description": "Attack -20%"
   },
   "PAL_ALLAttack_up1": {
     "localized_name": "Brave",
-    "description": null
+    "description": "Attack +10%"
   },
   "PAL_ALLAttack_up2": {
     "localized_name": "Ferocious",
-    "description": null
+    "description": "Attack +20%"
   },
   "PAL_ALLAttack_up3": {
     "localized_name": "Demon God",
-    "description": null
+    "description": "Attack +30% Defense +5%"
   },
   "PAL_CorporateSlave": {
     "localized_name": "Work Slave",
-    "description": null
+    "description": "Work Speed +30% Attack -30%"
   },
   "PAL_FullStomach_Down_1": {
     "localized_name": "Dainty Eater",
@@ -625,39 +625,39 @@
   },
   "PAL_conceited": {
     "localized_name": "Conceited",
-    "description": null
+    "description": "Work Speed +10% Defense -10%"
   },
   "PAL_masochist": {
     "localized_name": "Masochist",
-    "description": null
+    "description": "Defense +15% Attack -15%"
   },
   "PAL_oraora": {
     "localized_name": "Aggressive",
-    "description": null
+    "description": "Attack +10% Defense -10%"
   },
   "PAL_rude": {
     "localized_name": "Hooligan",
-    "description": null
+    "description": "Attack +15% Work Speed -10%"
   },
   "PAL_sadist": {
     "localized_name": "Sadist",
-    "description": null
+    "description": "Attack +15% Defense -15%"
   },
   "Rare": {
     "localized_name": "Lucky",
-    "description": null
+    "description": "Work Speed +15% Attack +15%"
   },
   "SalePrice_Down_1": {
     "localized_name": "Shabby",
-    "description": "Decrease the value of items when sold by -10.0%"
+    "description": "Decrease the value of items when sold by -10%"
   },
   "SalePrice_Up_1": {
     "localized_name": "Noble",
-    "description": "Increases the value of items when sold by +5.0%"
+    "description": "Increases the value of items when sold by +5%"
   },
   "SalePrice_Up_2": {
     "localized_name": "Fine Furs",
-    "description": "Increases the value of items when sold by +3.0%"
+    "description": "Increases the value of items when sold by +3%"
   },
   "SphereModule_Curve": {
     "localized_name": "Sphere Curve +1",
@@ -685,19 +685,19 @@
   },
   "Stamina_Down_1": {
     "localized_name": "Sickly",
-    "description": "Max Stamina -25.0% *This effect is only valid for rideable pals."
+    "description": "Max Stamina -25% *This effect is only valid for rideable pals."
   },
   "Stamina_Up_1": {
     "localized_name": "Infinite Stamina",
-    "description": "Max stamina +50.0% *This effect is only valid for rideable pals."
+    "description": "Max stamina +50% *This effect is only valid for rideable pals."
   },
   "Stamina_Up_2": {
     "localized_name": "Fit as a Fiddle",
-    "description": "Max stamina +25.0% *This effect is only valid for rideable pals."
+    "description": "Max stamina +25% *This effect is only valid for rideable pals."
   },
   "Stamina_Up_3": {
     "localized_name": "Eternal Engine",
-    "description": "Max stamina +75.0% *This effect is only valid for rideable pals."
+    "description": "Max stamina +75% *This effect is only valid for rideable pals."
   },
   "TemperatureResist_Cold1": {
     "localized_name": "Cold Resistant Lv. 1",
@@ -737,35 +737,35 @@
   },
   "Test_PalEgg_HatchingSpeed_Up": {
     "localized_name": "Philanthropist",
-    "description": "When assigned to a Breeding Farm, breeding speed is increased by 100.0%."
+    "description": "When assigned to a Breeding Farm, breeding speed is increased by 100%."
   },
   "TrainerATK_UP_1": {
     "localized_name": "Vanguard",
-    "description": "10.0% increase in Player Attack."
+    "description": "10% increase in Player Attack."
   },
   "TrainerDEF_UP_1": {
     "localized_name": "Stronghold Strategist",
-    "description": "10.0% increase in Player Defense."
+    "description": "10% increase in Player Defense."
   },
   "TrainerLogging_up1": {
     "localized_name": "Logging Foreman",
-    "description": "25.0% increase in Player Logging Efficiency."
+    "description": "25% increase in Player Logging Efficiency."
   },
   "TrainerMining_up1": {
     "localized_name": "Mine Foreman",
-    "description": "25.0% increase in Player Mining Efficiency."
+    "description": "25% increase in Player Mining Efficiency."
   },
   "TrainerWorkSpeed_UP_1": {
     "localized_name": "Motivational Leader",
-    "description": "25.0% increase in Player Work Speed."
+    "description": "25% increase in Player Work Speed."
   },
   "Vampire": {
     "localized_name": "Vampiric",
-    "description": "Absorbs a portion of the damage dealt to restore Health. Does not sleep at night and continues to work."
+    "description": "Absorbs a portion of the damage dealt to restore. Does not sleep at night and continues to work."
   },
   "Witch": {
     "localized_name": "Siren of the Void",
-    "description": null
+    "description": "30% increase in Dark attack damage. 30% increase in Ice attack damage."
   },
   "WorkSpeed_ACC_up1": {
     "localized_name": "Speedy Worker Lv. 1",

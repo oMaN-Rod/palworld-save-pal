@@ -416,13 +416,13 @@ class PalObjects:
         }
 
     @staticmethod
-    def ContainerSlotData(slot_idx: int, instance_id: UUID):
+    def ContainerSlotData(slot_idx: int, instance_id: UUID, player_uid: UUID):
         return {
             "SlotIndex": PalObjects.IntProperty(slot_idx),
             "RawData": PalObjects.ArrayProperty(
                 ArrayType.BYTE_PROPERTY,
                 {
-                    "player_uid": PalObjects.EMPTY_UUID,
+                    "player_uid": player_uid,
                     "instance_id": instance_id,
                     "permission_tribe_id": 0,
                 },
@@ -564,7 +564,7 @@ class PalObjects:
 
         return {
             "key": {
-                "PlayerUId": PalObjects.Guid(PalObjects.EMPTY_UUID),
+                "PlayerUId": PalObjects.Guid(owner_uid),
                 "InstanceId": PalObjects.Guid(instance_id),
                 "DebugName": PalObjects.StrProperty(""),
             },
