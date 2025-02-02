@@ -8,7 +8,7 @@ const appState = getAppState();
 
 export const getGuildsHandler: WSMessageHandler = {
 	type: MessageType.GET_GUILDS,
-	async handle(data: Record<string, Guild>) {
+	async handle(data: Record<string, Guild>, { goto }) {
 		const processedGuilds = await Promise.all(
 			Object.entries(data).map(async ([key, guild]) => {
 				try {
@@ -42,6 +42,9 @@ export const getGuildsHandler: WSMessageHandler = {
 		appState.guilds = Object.fromEntries(
 			processedGuilds.filter((entry): entry is [string, Guild] => entry !== null)
 		);
+		console.log(`Loaded ${Object.keys(appState.guilds).length} guilds`);
+
+		await goto('/edit');
 	}
 };
 

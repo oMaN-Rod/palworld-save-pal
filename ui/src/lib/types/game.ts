@@ -85,6 +85,7 @@ export type Player = {
 	sanity: number;
 	status_point_list: StatusPointList;
 	ex_status_point_list: ExStatusPointList;
+	guild_id: string;
 };
 
 export type Guild = {

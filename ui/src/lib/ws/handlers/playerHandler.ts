@@ -8,7 +8,7 @@ const appState = getAppState();
 
 export const getPlayersHandler: WSMessageHandler = {
 	type: MessageType.GET_PLAYERS,
-	async handle(data: Record<string, Player>, { goto }) {
+	async handle(data: Record<string, Player>) {
 		const processedPlayers = await Promise.all(
 			Object.entries(data).map(async ([key, player]) => {
 				try {
@@ -34,7 +34,6 @@ export const getPlayersHandler: WSMessageHandler = {
 		appState.players = Object.fromEntries(
 			processedPlayers.filter((entry): entry is [string, Player] => entry !== null)
 		);
-		await goto('/edit');
 	}
 };
 
