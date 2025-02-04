@@ -7,7 +7,14 @@
 	import { Input, Tooltip, TooltipButton } from '$components/ui';
 	import { NumberInputModal, PalSelectModal } from '$components/modals';
 	import { type ElementType, type Pal, type PalData, MessageType } from '$types';
-	import { assetLoader, debounce, calculateFilters, deepCopy, handleMaxOutPal } from '$utils';
+	import {
+		assetLoader,
+		debounce,
+		calculateFilters,
+		deepCopy,
+		handleMaxOutPal,
+		formatNickname
+	} from '$utils';
 	import { cn } from '$theme';
 	import { staticIcons } from '$lib/constants';
 	import {
@@ -345,24 +352,6 @@
 		}
 	}
 
-	function formatNickname(nickname: string, type: 'clone' | 'new' = 'new') {
-		if (
-			type === 'new' &&
-			appState.settings.new_pal_prefix &&
-			!nickname.startsWith(appState.settings.new_pal_prefix)
-		) {
-			return `${appState.settings.new_pal_prefix} ${nickname}`;
-		}
-		if (
-			type === 'clone' &&
-			appState.settings.clone_prefix &&
-			!nickname.startsWith(appState.settings.clone_prefix)
-		) {
-			return `${appState.settings.clone_prefix} ${nickname}`;
-		}
-		return nickname;
-	}
-
 	async function handleAddPal(target: 'party' | 'palbox', index: number | undefined = undefined) {
 		if (!appState.selectedPlayer) return;
 		// @ts-ignore
@@ -449,7 +438,9 @@
 			);
 			const message = {
 				type: MessageType.CLONE_PAL,
-				data: clonedPal
+				data: {
+					pal: clonedPal
+				}
 			};
 			ws.send(JSON.stringify(message));
 		}

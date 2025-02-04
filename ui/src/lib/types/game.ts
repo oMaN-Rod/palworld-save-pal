@@ -99,6 +99,8 @@ export type Guild = {
 export type Base = {
 	id: string;
 	pals: Record<string, Pal>;
+	container_id: string;
+	slot_count: number;
 };
 
 export type SaveFileType = 'gamepass' | 'steam';

@@ -65,7 +65,7 @@
 	);
 	let palIcon = $derived.by(() => {
 		if (!pal) return '';
-		return assetLoader.loadMenuImage(pal.character_id, palData.is_pal);
+		return assetLoader.loadMenuImage(pal.character_id, palData ? palData.is_pal : false);
 	});
 
 	function handleClick(event: MouseEvent) {

@@ -77,6 +77,17 @@ class Guild(BaseModel):
         new_pal = PalObjects.individual_character_handle_ids(pal_id)
         self._character_handle_ids.append(new_pal)
 
+    def add_base_pal(
+        self, character_id: str, nickname: str, base_id: UUID, storage_slot: int = None
+    ):
+        logger.debug("%s (%s) => %s", self.name, self.id, character_id)
+        data = self.bases[base_id].add_pal(character_id, nickname, storage_slot)
+        if data is None:
+            return
+        new_pal, _ = data
+        self.add_pal(new_pal.instance_id)
+        return data
+
     def remove_pal(self, pal_id: UUID):
         logger.debug("%s (%s) => %s", self.name, self.id, pal_id)
         for entry in self._character_handle_ids:
@@ -86,7 +97,7 @@ class Guild(BaseModel):
                 logger.debug("%s (%s) => Removed %s", self.name, self.id, pal_id)
                 return True
         return False
-    
+
     def add_base(self, base: Base):
         self.bases[base.id] = base
         logger.debug("Added base %s to guild %s", base.id, self.id)

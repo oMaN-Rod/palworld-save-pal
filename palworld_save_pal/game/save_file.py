@@ -172,7 +172,7 @@ class SaveFile(BaseModel):
     _group_save_data_map: List[Dict[str, Any]] = PrivateAttr(default_factory=list)
     _base_camp_save_data_map: List[Dict[str, Any]] = PrivateAttr(default_factory=list)
 
-    def add_pal(
+    def add_player_pal(
         self,
         player_id: UUID,
         character_id: str,
@@ -185,6 +185,28 @@ class SaveFile(BaseModel):
             raise ValueError(f"Player {player_id} not found in the save file.")
 
         data = player.add_pal(character_id, nickname, container_id, storage_slot)
+        if data is None:
+            return
+        new_pal, new_pal_data = data
+        self._character_save_parameter_map.append(new_pal_data)
+        self._pals[new_pal.instance_id] = new_pal
+        return new_pal
+
+    def add_base_pal(
+        self,
+        character_id: str,
+        nickname: str,
+        guild_id: UUID,
+        base_id: UUID,
+        storage_slot: Union[int | None] = None,
+    ):
+        guild = self._guilds.get(guild_id)
+        if not guild:
+            raise ValueError(f"Guild {guild_id} not found in the save file.")
+        base = guild.bases.get(base_id)
+        if not base:
+            raise ValueError(f"Base {base_id} not found in the guild {guild_id}.")
+        data = base.add_pal(character_id, nickname, storage_slot)
         if data is None:
             return
         new_pal, new_pal_data = data
@@ -211,13 +233,38 @@ class SaveFile(BaseModel):
         self._pals[new_pal.instance_id] = new_pal
         return new_pal
 
-    def delete_pals(self, player_id: UUID, pal_ids: List[UUID]) -> None:
+    def clone_base_pal(
+        self, guild_id: UUID, base_id: UUID, pal: PalDTO
+    ) -> Optional[Pal]:
+        base = self._guilds.get(guild_id).bases.get(base_id)
+        if not base:
+            raise ValueError(f"Base {base_id} not found in the guild {guild_id}.")
+        new_pal = base.clone_pal(pal)
+        if new_pal is None:
+            return
+        self._character_save_parameter_map.append(new_pal.character_save)
+        self._pals[new_pal.instance_id] = new_pal
+        return new_pal
+
+    def delete_player_pals(self, player_id: UUID, pal_ids: List[UUID]) -> None:
         player = self._players.get(player_id)
         if not player:
             raise ValueError(f"Player {player_id} not found in the save file.")
 
         for pal_id in pal_ids:
             player.delete_pal(pal_id)
+            self._delete_pal_by_id(pal_id)
+
+    def delete_guild_pals(
+        self, guild_id: UUID, base_id: UUID, pal_ids: List[UUID]
+    ) -> None:
+        base = self._guilds.get(guild_id).bases.get(base_id)
+        if not base:
+            raise ValueError(f"Base {base_id} not found in the guild {guild_id}.")
+
+        for pal_id in pal_ids:
+            base.delete_pal(pal_id)
+            self._delete_pal_by_id(pal_id)
 
     def heal_pals(self, pal_ids: List[UUID]) -> None:
         for pal_id in pal_ids:
@@ -389,6 +436,14 @@ class SaveFile(BaseModel):
 
         logger.info("Updated %d players in the save file.", len(modified_players))
 
+    def _delete_pal_by_id(self, pal_id: UUID) -> None:
+        del self._pals[pal_id]
+        for entry in self._character_save_parameter_map:
+            if are_equal_uuids(PalObjects.get_guid(entry["key"]["InstanceId"]), pal_id):
+                logger.debug("Deleting pal %s from CharacterSaveParameterMap", pal_id)
+                self._character_save_parameter_map.remove(entry)
+                break
+
     def _get_file_size(self, data: bytes):
         if hasattr(data, "seek") and hasattr(data, "tell"):
             data.seek(0, os.SEEK_END)
@@ -441,22 +496,59 @@ class SaveFile(BaseModel):
 
         for entry in self._base_camp_save_data_map:
             # Guild to add to
-            group_id_belong_to = PalObjects.as_uuid(PalObjects.get_nested(entry, "value", "RawData", "value", "group_id_belong_to"))
+            group_id_belong_to = PalObjects.as_uuid(
+                PalObjects.get_nested(
+                    entry, "value", "RawData", "value", "group_id_belong_to"
+                )
+            )
             # Pal Container ID
-            container_id = PalObjects.as_uuid(PalObjects.get_nested(entry, "value", "WorkerDirector", "value", "RawData", "value", "container_id"))
+            container_id = PalObjects.as_uuid(
+                PalObjects.get_nested(
+                    entry,
+                    "value",
+                    "WorkerDirector",
+                    "value",
+                    "RawData",
+                    "value",
+                    "container_id",
+                )
+            )
+            character_container = next(
+                (
+                    c
+                    for c in self._character_container_save_data
+                    if are_equal_uuids(
+                        PalObjects.get_guid(PalObjects.get_nested(c, "key", "ID")),
+                        container_id,
+                    )
+                )
+            )
+            container_slot_count = PalObjects.get_value(
+                character_container["value"]["SlotNum"]
+            )
 
             # Find all pals that have that container ID
-            pals = {pal.instance_id: pal for pal in self._pals.values() if pal.storage_id == container_id}
+            pals = {
+                pal.instance_id: pal
+                for pal in self._pals.values()
+                if pal.storage_id == container_id
+            }
 
             base = Base(
                 data=entry,
                 pals=pals,
+                container_id=container_id,
+                slot_count=container_slot_count,
+                character_container_save_data=self._character_container_save_data,
             )
             self._guilds[group_id_belong_to].add_base(base)
 
             # Debug, print the guild name, and pals at base
-            logger.debug("Guild %s has %d pals at base", self._guilds[group_id_belong_to].name, len(pals))
-            
+            logger.debug(
+                "Guild %s has %d pals at base",
+                self._guilds[group_id_belong_to].name,
+                len(pals),
+            )
 
     def _load_pals(self):
         if not self._gvas_file:

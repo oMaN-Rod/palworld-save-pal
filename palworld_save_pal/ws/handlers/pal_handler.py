@@ -48,19 +48,34 @@ async def get_pals_handler(_: GetPalsMessage, ws: WebSocket):
 
 async def add_pal_handler(message: AddPalMessage, ws: WebSocket):
     player_id = message.data.player_id
+    guild_id = message.data.guild_id
+    base_id = message.data.base_id
     character_id = message.data.character_id
     nickname = message.data.nickname
     container_id = message.data.container_id
     storage_slot = message.data.storage_slot
+
     app_state = get_app_state()
     save_file = app_state.save_file
-    new_pal = save_file.add_pal(
-        player_id, character_id, nickname, container_id, storage_slot
-    )
-    data = {
-        "player_id": player_id,
-        "pal": new_pal,
-    }
+
+    if player_id:
+        new_pal = save_file.add_player_pal(
+            player_id, character_id, nickname, container_id, storage_slot
+        )
+        data = {
+            "player_id": player_id,
+            "pal": new_pal,
+        }
+
+    if guild_id:
+        new_pal = save_file.add_base_pal(
+            character_id, nickname, guild_id, base_id, storage_slot
+        )
+        data = {
+            "guild_id": guild_id,
+            "base_id": base_id,
+            "pal": new_pal,
+        }
     response = build_response(MessageType.ADD_PAL, data)
     await ws.send_json(response)
 
@@ -87,24 +102,39 @@ async def move_pal_handler(message: MovePalMessage, ws: WebSocket):
 
 
 async def clone_pal_handler(message: ClonePalMessage, ws: WebSocket):
-    pal = message.data
+    pal = message.data.pal
+    guild_id = message.data.guild_id
+    base_id = message.data.base_id
     app_state = get_app_state()
     save_file = app_state.save_file
-    new_pal = save_file.clone_pal(pal)
-    data = {
-        "player_id": pal.owner_uid if pal.owner_uid else None,
-        "pal": new_pal,
-    }
+    if guild_id:
+        new_pal = save_file.clone_base_pal(guild_id, base_id, pal)
+        data = {
+            "guild_id": guild_id,
+            "base_id": base_id,
+            "pal": new_pal,
+        }
+    else:
+        new_pal = save_file.clone_pal(pal)
+        data = {
+            "player_id": pal.owner_uid if pal.owner_uid else None,
+            "pal": new_pal,
+        }
     response = build_response(MessageType.ADD_PAL, data)
     await ws.send_json(response)
 
 
 async def delete_pals_handler(message: DeletePalsMessage, _: WebSocket):
     player_id = message.data.player_id
+    guild_id = message.data.guild_id
+    base_id = message.data.base_id
     pal_ids = message.data.pal_ids
     app_state = get_app_state()
     save_file = app_state.save_file
-    save_file.delete_pals(player_id, pal_ids)
+    if player_id:
+        save_file.delete_player_pals(player_id, pal_ids)
+    if guild_id:
+        save_file.delete_guild_pals(guild_id, base_id, pal_ids)
 
 
 async def heal_pals_handler(message: HealPalsMessage, _: WebSocket):

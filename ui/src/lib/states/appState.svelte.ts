@@ -78,6 +78,21 @@ export function createAppState() {
 			}
 		}
 
+		for (const guild of Object.values(appState.guilds)) {
+			if (guild.bases) {
+				for (const base of Object.values(guild.bases)) {
+					if (base.pals) {
+						for (const pal of Object.values(base.pals)) {
+							if (pal.state === EntryState.MODIFIED) {
+								modifiedPals = [...modifiedPals, [pal.instance_id, pal]];
+								pal.state = EntryState.NONE;
+							}
+						}
+					}
+				}
+			}
+		}
+
 		if (modifiedPals.length === 0 && modifiedPlayers.length === 0) {
 			console.log('No modifications to save');
 			toast.add('No modifications to save', undefined, 'info');

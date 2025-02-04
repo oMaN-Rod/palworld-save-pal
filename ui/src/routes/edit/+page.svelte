@@ -15,11 +15,6 @@
 	const appState = getAppState();
 	const nav = getNavigationState();
 
-	interface ModifiedData {
-		modified_pals?: Record<string, Pal>;
-		modified_players?: Record<string, Player>;
-	}
-
 	$effect(() => {
 		if (!appState.saveFile) {
 			goto('/file');
@@ -54,7 +49,7 @@
 					<div class="flex-shrink-0">
 						<Tabs.Control value="player">Player</Tabs.Control>
 						<Tabs.Control value="pal-box">Pal Box</Tabs.Control>
-						<Tabs.Control value="guilds">Guilds</Tabs.Control>
+						<Tabs.Control value="guilds">Bases</Tabs.Control>
 						<Tabs.Control value="pal">Pal</Tabs.Control>
 					</div>
 				{/snippet}

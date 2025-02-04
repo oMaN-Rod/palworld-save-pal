@@ -15,6 +15,7 @@ logger = create_logger(__name__)
 class CharacterContainerType(str, Enum):
     PAL_BOX = "PalBox"
     PARTY = "Party"
+    BASE = "Base"
 
 
 class CharacterContainerSlot(BaseModel):

@@ -17,7 +17,7 @@ PAL_DATA = JsonManager("data/json/pals.json").read()
 
 class PalDTO(BaseModel):
     instance_id: UUID
-    owner_uid: UUID
+    owner_uid: Optional[UUID]
     character_id: str
     is_lucky: bool
     is_boss: bool
@@ -794,4 +794,7 @@ class Pal(BaseModel):
         safe_remove(self._save_parameter, "WorkerSick")
         safe_remove(self._save_parameter, "HungerType")
         safe_remove(self._save_parameter, "SanityValue")
+        self.stomach = PalObjects.get_nested(
+            PAL_DATA, self._character_key, "max_full_stomach"
+        )
         self.sanity = 100.0
