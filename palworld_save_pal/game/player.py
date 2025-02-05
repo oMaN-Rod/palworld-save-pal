@@ -56,7 +56,7 @@ class Player(BaseModel):
     _otomo_container_id: UUID
 
     _guild: Optional[Guild] = PrivateAttr(default=None)
-    
+
     pals: Optional[Dict[UUID, Pal]] = Field(default_factory=dict)
     common_container: Optional[ItemContainer] = Field(default=None)
     essential_container: Optional[ItemContainer] = Field(default=None)
@@ -316,7 +316,7 @@ class Player(BaseModel):
         nickname: str,
         container_id: UUID,
         storage_slot: Union[int | None] = None,
-    ):
+    ) -> Optional[Pal]:
         new_pal_id = uuid.uuid4()
         container = (
             self._pal_box
@@ -343,7 +343,7 @@ class Player(BaseModel):
         self.pals[new_pal_id] = new_pal
         if isinstance(self._guild, Guild):
             self._guild.add_pal(new_pal_id)
-        return new_pal, new_pal_data
+        return new_pal
 
     def move_pal(self, pal_id: UUID, container_id: UUID):
         pal = self.pals[pal_id]
@@ -426,7 +426,7 @@ class Player(BaseModel):
             type=CharacterContainerType.PAL_BOX,
             character_container_save_data=character_container_save_data,
         )
-    
+
     def _load_otomo_container(self, character_container_save_data: Dict[str, Any]):
         self._party = CharacterContainer(
             id=self.otomo_container_id,

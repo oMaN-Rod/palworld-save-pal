@@ -184,11 +184,10 @@ class SaveFile(BaseModel):
         if not player:
             raise ValueError(f"Player {player_id} not found in the save file.")
 
-        data = player.add_pal(character_id, nickname, container_id, storage_slot)
-        if data is None:
+        new_pal = player.add_pal(character_id, nickname, container_id, storage_slot)
+        if new_pal is None:
             return
-        new_pal, new_pal_data = data
-        self._character_save_parameter_map.append(new_pal_data)
+        self._character_save_parameter_map.append(new_pal.character_save)
         self._pals[new_pal.instance_id] = new_pal
         return new_pal
 
@@ -203,14 +202,8 @@ class SaveFile(BaseModel):
         guild = self._guilds.get(guild_id)
         if not guild:
             raise ValueError(f"Guild {guild_id} not found in the save file.")
-        base = guild.bases.get(base_id)
-        if not base:
-            raise ValueError(f"Base {base_id} not found in the guild {guild_id}.")
-        data = base.add_pal(character_id, nickname, storage_slot)
-        if data is None:
-            return
-        new_pal, new_pal_data = data
-        self._character_save_parameter_map.append(new_pal_data)
+        new_pal = guild.add_base_pal(character_id, nickname, base_id, storage_slot)
+        self._character_save_parameter_map.append(new_pal.character_save)
         self._pals[new_pal.instance_id] = new_pal
         return new_pal
 

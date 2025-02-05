@@ -81,12 +81,11 @@ class Guild(BaseModel):
         self, character_id: str, nickname: str, base_id: UUID, storage_slot: int = None
     ):
         logger.debug("%s (%s) => %s", self.name, self.id, character_id)
-        data = self.bases[base_id].add_pal(character_id, nickname, storage_slot)
-        if data is None:
+        new_pal = self.bases[base_id].add_pal(character_id, nickname, storage_slot)
+        if new_pal is None:
             return
-        new_pal, _ = data
         self.add_pal(new_pal.instance_id)
-        return data
+        return new_pal
 
     def remove_pal(self, pal_id: UUID):
         logger.debug("%s (%s) => %s", self.name, self.id, pal_id)

@@ -10,7 +10,7 @@ from palworld_save_pal.game.character_container import (
 )
 from palworld_save_pal.game.pal import Pal, PalDTO
 from palworld_save_pal.game.pal_objects import PalObjects
-from palworld_save_pal.utils.uuid import are_equal_uuids, is_empty_uuid
+from palworld_save_pal.utils.dict import safe_remove
 from palworld_save_pal.utils.logging_config import create_logger
 
 logger = create_logger(__name__)
@@ -78,7 +78,8 @@ class Base(BaseModel):
         )
         new_pal = Pal(new_pal_data)
         self.pals[new_pal.instance_id] = new_pal
-        return new_pal, new_pal_data
+        safe_remove(new_pal.character_save, "OwnerPlayerUId")
+        return new_pal
 
     def clone_pal(self, pal: PalDTO) -> Pal | None:
         new_pal_id = uuid.uuid4()
@@ -88,6 +89,8 @@ class Base(BaseModel):
         existing_pal = self.pals[pal.instance_id]
         nickname = pal.nickname if pal.nickname else pal.character_id
         new_pal = existing_pal.clone(new_pal_id, self.container_id, slot_idx, nickname)
+        safe_remove(new_pal.character_save, "OwnerPlayerUId")
+        new_pal.character_save["key"]["PlayerUId"]["value"] = PalObjects.EMPTY_UUID
         self.pals[new_pal_id] = new_pal
         return new_pal
 
