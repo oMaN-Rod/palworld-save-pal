@@ -203,6 +203,8 @@ class SaveFile(BaseModel):
         if not guild:
             raise ValueError(f"Guild {guild_id} not found in the save file.")
         new_pal = guild.add_base_pal(character_id, nickname, base_id, storage_slot)
+        if new_pal is None:
+            return
         self._character_save_parameter_map.append(new_pal.character_save)
         self._pals[new_pal.instance_id] = new_pal
         return new_pal
