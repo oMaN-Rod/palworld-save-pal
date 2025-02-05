@@ -62,7 +62,7 @@
 		assetLoader.loadImage(`${ASSET_DATA_PATH}/img/icons/${pal.gender}.png`)
 	);
 	let palIcon = $derived.by(() => {
-		if (!pal) return '';
+		if (!pal || !palData) return '';
 		return assetLoader.loadMenuImage(pal.character_id, palData.is_pal);
 	});
 
