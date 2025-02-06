@@ -62,8 +62,8 @@
 		assetLoader.loadImage(`${ASSET_DATA_PATH}/img/icons/${pal.gender}.png`)
 	);
 	let palIcon = $derived.by(() => {
-		if (!pal || !palData) return '';
-		return assetLoader.loadMenuImage(pal.character_id, palData ? palData.is_pal : false);
+		if (!pal) return '';
+		return assetLoader.loadMenuImage(pal.character_id, palData?.is_pal || false);
 	});
 
 	function handleClick(event: MouseEvent) {

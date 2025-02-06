@@ -298,7 +298,7 @@
 				: true;
 			const matchesAlpha = selectedFilter === 'alpha' ? pal.is_boss : true;
 			const matchesLucky = selectedFilter === 'lucky' ? pal.is_lucky : true;
-			const matchesHuman = selectedFilter === 'human' ? (palData ? palData.is_pal : false) : true;
+			const matchesHuman = selectedFilter === 'human' ? !palData?.is_pal : true;
 			const matchesPredator =
 				selectedFilter === 'predator' ? pal.character_id.toLowerCase().includes('predator_') : true;
 			const matchesOilrig =
