@@ -21548,7 +21548,8 @@
     "weight": 0.0,
     "price": 0,
     "sort_id": 10282,
-    "disabled": false
+    "disabled": false,
+    "icon": "Pal_Saddle"
   },
   "SkillUnlock_BadCatgirl": {
     "group": "KeyItem",
@@ -21651,7 +21652,8 @@
     "weight": 0.0,
     "price": 0,
     "sort_id": 10292,
-    "disabled": false
+    "disabled": false,
+    "icon": "Pal_Harness"
   },
   "SkillUnlock_BlueDragon": {
     "group": "KeyItem",
@@ -21676,7 +21678,8 @@
     "weight": 0.0,
     "price": 0,
     "sort_id": 10290,
-    "disabled": false
+    "disabled": false,
+    "icon": "Pal_Saddle"
   },
   "SkillUnlock_Boar": {
     "group": "KeyItem",
@@ -21727,7 +21730,8 @@
     "weight": 0.0,
     "price": 0,
     "sort_id": 10302,
-    "disabled": false
+    "disabled": false,
+    "icon": "Pal_Saddle"
   },
   "SkillUnlock_DarkMutant": {
     "group": "KeyItem",
@@ -21895,7 +21899,8 @@
     "weight": 0.0,
     "price": 0,
     "sort_id": 10274,
-    "disabled": false
+    "disabled": false,
+    "icon": "Pal_Saddle"
   },
   "SkillUnlock_FireKirin": {
     "group": "KeyItem",
@@ -22180,7 +22185,8 @@
     "weight": 0.0,
     "price": 0,
     "sort_id": 10288,
-    "disabled": false
+    "disabled": false,
+    "icon": "Pal_Saddle"
   },
   "SkillUnlock_IceDeer": {
     "group": "KeyItem",
