@@ -59,7 +59,6 @@
 	let currentPage = $state(1);
 	let filteredPals: PalWithData[] = $state([]);
 	let selectedPals: string[] = $state([]);
-	let selectedPal: PalWithData | undefined = $state(undefined);
 	let sortBy: SortBy = $state('slot-index');
 	let sortOrder: SortOrder = $state('asc');
 
@@ -69,7 +68,7 @@
 		palData?: PalData;
 	};
 
-	let otomoContainer: Record<string, Pal> = $derived.by(() => {
+	const otomoContainer: Record<string, Pal> = $derived.by(() => {
 		if (appState.selectedPlayer && appState.selectedPlayer.pals) {
 			const container_id = appState.selectedPlayer.otomo_container_id;
 
@@ -94,14 +93,14 @@
 		}
 	});
 
-	let totalPages = $derived(
+	const totalPages = $derived(
 		Math.ceil(
 			searchQuery || selectedFilter !== 'All' || sortBy !== 'slot-index'
 				? filteredPals.length
 				: TOTAL_SLOTS
 		) / PALS_PER_PAGE
 	);
-	let visiblePageStart = $derived(
+	const visiblePageStart = $derived(
 		Math.max(
 			1,
 			Math.min(
@@ -110,12 +109,14 @@
 			)
 		)
 	);
-	let visiblePageEnd = $derived(Math.min(visiblePageStart + VISIBLE_PAGE_BUBBLES - 1, totalPages));
-	let visiblePages = $derived(
+	const visiblePageEnd = $derived(
+		Math.min(visiblePageStart + VISIBLE_PAGE_BUBBLES - 1, totalPages)
+	);
+	const visiblePages = $derived(
 		Array.from({ length: visiblePageEnd - visiblePageStart + 1 }, (_, i) => visiblePageStart + i)
 	);
 
-	let currentPageItems = $derived.by(() => {
+	const currentPageItems = $derived.by(() => {
 		const startIndex = (currentPage - 1) * PALS_PER_PAGE;
 		const endIndex = startIndex + PALS_PER_PAGE;
 
@@ -174,7 +175,6 @@
 
 	let pals = $derived.by(() => {
 		if (!appState.selectedPlayer || !appState.selectedPlayer.pals) return;
-		console.log('Loading pals');
 		const playerPals = Object.entries(appState.selectedPlayer.pals as Record<string, Pal>);
 		const palBoxId = appState.selectedPlayer.pal_box_id;
 		return playerPals
@@ -284,7 +284,6 @@
 		if (!pals) return;
 		filteredPals = pals.filter(({ pal, palData }) => {
 			if (!palData) {
-				console.log('No pal data for', pal);
 				return false;
 			}
 			const matchesSearch =
@@ -671,7 +670,7 @@
 						</div>
 					{/snippet}
 				</Tooltip>
-				<Tooltip label="Heal all in current base">
+				<Tooltip label="Heal all in pal box">
 					<button class="btn hover:preset-tonal-secondary p-2" onclick={handleHealAll}>
 						<Bandage />
 					</button>
