@@ -1,4 +1,4 @@
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, Optional, Union
 from uuid import UUID
 import uuid
 from pydantic import BaseModel, Field, PrivateAttr, computed_field
@@ -31,7 +31,7 @@ class PlayerDTO(BaseModel):
     status_point_list: Dict[str, int] = Field(default_factory=dict)
     ext_status_point_list: Dict[str, int] = Field(default_factory=dict)
     instance_id: Optional[UUID] = Field(default=None)
-    guild: Optional[GuildDTO] = Field(default=None)
+    guild_id: Optional[UUID] = Field(default=None)
     pal_box_id: Optional[UUID] = Field(default=None)
     otomo_container_id: Optional[UUID] = Field(default=None)
     common_container: Optional[ItemContainer] = Field(default=None)
@@ -55,7 +55,8 @@ class Player(BaseModel):
     _pal_box_id: UUID
     _otomo_container_id: UUID
 
-    guild: Optional[Guild] = Field(default=None)
+    _guild: Optional[Guild] = PrivateAttr(default=None)
+
     pals: Optional[Dict[UUID, Pal]] = Field(default_factory=dict)
     common_container: Optional[ItemContainer] = Field(default=None)
     essential_container: Optional[ItemContainer] = Field(default=None)
@@ -79,6 +80,7 @@ class Player(BaseModel):
         dynamic_item_save_data: Dict[str, Any] = None,
         character_container_save_data: Dict[str, Any] = None,
         character_save_parameter: Dict[str, Any] = None,
+        guild: Optional[Guild] = None,
         **kwargs,
     ):
         super().__init__(**kwargs)
@@ -103,9 +105,14 @@ class Player(BaseModel):
             self._save_data = PalObjects.get_value(
                 self._player_gvas_file.properties["SaveData"]
             )
+            self._guild = guild
             self._load_inventory(item_container_save_data, dynamic_item_save_data)
             self._load_pal_box(character_container_save_data)
             self._load_otomo_container(character_container_save_data)
+
+    @computed_field
+    def guild_id(self) -> Optional[UUID]:
+        return self._guild.id if self._guild else None
 
     @computed_field
     def uid(self) -> UUID:
@@ -309,7 +316,7 @@ class Player(BaseModel):
         nickname: str,
         container_id: UUID,
         storage_slot: Union[int | None] = None,
-    ):
+    ) -> Optional[Pal]:
         new_pal_id = uuid.uuid4()
         container = (
             self._pal_box
@@ -326,7 +333,7 @@ class Player(BaseModel):
             owner_uid=self.uid,
             container_id=container_id,
             slot_idx=slot_idx,
-            group_id=self.guild.id if isinstance(self.guild, Guild) else None,
+            group_id=self._guild.id if isinstance(self._guild, Guild) else None,
             nickname=nickname,
         )
         new_pal = Pal(new_pal_data)
@@ -334,9 +341,9 @@ class Player(BaseModel):
         if not self.pals:
             self.pals = {}
         self.pals[new_pal_id] = new_pal
-        if isinstance(self.guild, Guild):
-            self.guild.add_pal(new_pal_id)
-        return new_pal, new_pal_data
+        if isinstance(self._guild, Guild):
+            self._guild.add_pal(new_pal_id)
+        return new_pal
 
     def move_pal(self, pal_id: UUID, container_id: UUID):
         pal = self.pals[pal_id]
@@ -368,16 +375,16 @@ class Player(BaseModel):
             new_pal_id, self.pal_box_id, storage_slot, nickname
         )
         self.pals[new_pal_id] = new_pal
-        if isinstance(self.guild, Guild):
-            self.guild.add_pal(new_pal_id)
+        if isinstance(self._guild, Guild):
+            self._guild.add_pal(new_pal_id)
         return new_pal
 
     def delete_pal(self, pal_id: UUID):
         self.pals.pop(pal_id)
         self._pal_box.remove_pal(pal_id)
         self._party.remove_pal(pal_id)
-        if isinstance(self.guild, Guild):
-            self.guild.remove_pal(pal_id)
+        if isinstance(self._guild, Guild):
+            self._guild.delete_pal(pal_id)
 
     def update_from(self, other_player: PlayerDTO):
         logger.debug(

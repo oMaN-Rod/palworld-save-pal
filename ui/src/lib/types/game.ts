@@ -47,6 +47,7 @@ export type Pal = {
 	state: EntryState;
 	sanity: number;
 	exp: number;
+	is_sick: boolean;
 };
 
 export type StatusPointList = {
@@ -85,6 +86,22 @@ export type Player = {
 	sanity: number;
 	status_point_list: StatusPointList;
 	ex_status_point_list: ExStatusPointList;
+	guild_id: string;
+};
+
+export type Guild = {
+	admin_player_uid: string;
+	bases: Record<string, Base>;
+	id: string;
+	name: string;
+	players: Player[];
+};
+
+export type Base = {
+	id: string;
+	pals: Record<string, Pal>;
+	container_id: string;
+	slot_count: number;
 };
 
 export type SaveFileType = 'gamepass' | 'steam';

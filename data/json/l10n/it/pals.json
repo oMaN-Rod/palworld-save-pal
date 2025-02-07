@@ -19,6 +19,138 @@
     "localized_name": "Anubis",
     "description": "Da sempre simbolo di grande nobiltà, ma anche ideale di chi rifugge ricchezza e autorità. Nel tempo è passato a simboleggiare la morte."
   },
+  "Believer_CrossBow": {
+    "localized_name": "Ego",
+    "description": null
+  },
+  "Believer_Fat_GiantClub": {
+    "localized_name": "Bruto",
+    "description": null
+  },
+  "DarkTrader": {
+    "localized_name": "Ram",
+    "description": null
+  },
+  "Female_DesertPeople": {
+    "localized_name": "Sussurratrice",
+    "description": null
+  },
+  "Female_People": {
+    "localized_name": "Fiammetta",
+    "description": null
+  },
+  "Female_People02": {
+    "localized_name": "Sirena",
+    "description": null
+  },
+  "Female_People03": {
+    "localized_name": "Turncoat",
+    "description": null
+  },
+  "Female_Soldier": {
+    "localized_name": "Jade",
+    "description": null
+  },
+  "Female_Soldier02": {
+    "localized_name": "Esibizionista",
+    "description": null
+  },
+  "Female_Soldier03": {
+    "localized_name": "Aloha",
+    "description": null
+  },
+  "Female_Soldier04": {
+    "localized_name": "Mano Lesta",
+    "description": null
+  },
+  "FireCult_FlameThrower": {
+    "localized_name": "Shadow",
+    "description": null
+  },
+  "Hunter_Fat_GatlingGun": {
+    "localized_name": "Graticola",
+    "description": null
+  },
+  "Hunter_Rifle": {
+    "localized_name": "Occhio di falco",
+    "description": null
+  },
+  "Male_DesertPeople": {
+    "localized_name": "Spettro",
+    "description": null
+  },
+  "Male_NinjaElite": {
+    "localized_name": "Urchin",
+    "description": null
+  },
+  "Male_People": {
+    "localized_name": "Dina",
+    "description": null
+  },
+  "Male_People02": {
+    "localized_name": "Segaossa",
+    "description": null
+  },
+  "Male_People03": {
+    "localized_name": "Scroccone",
+    "description": null
+  },
+  "Male_People2": {
+    "localized_name": "Mite",
+    "description": null
+  },
+  "Male_Soldier": {
+    "localized_name": "Mr. Incidente",
+    "description": null
+  },
+  "Male_Soldier02": {
+    "localized_name": "Mozzicone",
+    "description": null
+  },
+  "Male_Soldier03": {
+    "localized_name": "Clint",
+    "description": null
+  },
+  "Male_Soldier04": {
+    "localized_name": "Lazoman",
+    "description": null
+  },
+  "Male_Trader01": {
+    "localized_name": "Viscido",
+    "description": null
+  },
+  "Male_Trader02": {
+    "localized_name": "Mimo",
+    "description": null
+  },
+  "Male_Trader03": {
+    "localized_name": "Billy",
+    "description": null
+  },
+  "Ninja": {
+    "localized_name": "Imbranato",
+    "description": null
+  },
+  "Police_Rifle": {
+    "localized_name": "Frusta Lesta",
+    "description": null
+  },
+  "Police_old": {
+    "localized_name": "Pinch",
+    "description": null
+  },
+  "Scientist_LaserRifle": {
+    "localized_name": "Whisk",
+    "description": null
+  },
+  "Viking": {
+    "localized_name": "Gnam Gnam",
+    "description": null
+  },
+  "VikingElite": {
+    "localized_name": "Esattore",
+    "description": null
+  },
   "BadCatgirl": {
     "localized_name": "Nyafia",
     "description": "Detesta sopra ogni altra cosa mostrare più di un occhio alla volta. Se sbirci sotto il ciuffo senza il suo permesso, scoppia a piangere e non si fa più vedere per due settimane."

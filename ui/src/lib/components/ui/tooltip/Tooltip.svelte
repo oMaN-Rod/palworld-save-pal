@@ -3,6 +3,7 @@
 	import { computePosition, flip, shift, offset, arrow, type Placement } from '@floating-ui/dom';
 	import { cn } from '$theme';
 	import { getComputedColorHex } from '$utils';
+	import type { Snippet } from 'svelte';
 
 	let {
 		baseClass = '',
@@ -10,6 +11,7 @@
 		rounded = 'rounded',
 		popupClass = 'p-4',
 		popup,
+		label,
 		position = 'bottom',
 		useArrow = true,
 		children
@@ -18,7 +20,8 @@
 		background?: string;
 		rounded?: string;
 		popupClass?: string;
-		popup?: any;
+		popup?: Snippet<any>;
+		label?: string;
 		position?: Placement;
 		useArrow?: boolean;
 		children: any;
@@ -94,7 +97,11 @@
 		class={cn('floating tooltip-popup', background, popupClass, rounded)}
 		transition:fade={{ duration: 100 }}
 	>
-		{@render popup()}
+		{#if popup}
+			{@render popup()}
+		{:else if label}
+			{label}
+		{/if}
 		{#if useArrow}
 			<div bind:this={arrowEl} class="tooltip-arrow" style:--arrow-color={floatingArrowColor}></div>
 		{/if}

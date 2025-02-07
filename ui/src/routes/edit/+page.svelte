@@ -10,14 +10,10 @@
 	import { getAppState, getNavigationState } from '$states';
 	import { Tabs } from '@skeletonlabs/skeleton-svelte';
 	import { goto } from '$app/navigation';
+	import Guilds from './components/guilds/Guilds.svelte';
 
 	const appState = getAppState();
 	const nav = getNavigationState();
-
-	interface ModifiedData {
-		modified_pals?: Record<string, Pal>;
-		modified_players?: Record<string, Player>;
-	}
 
 	$effect(() => {
 		if (!appState.saveFile) {
@@ -53,6 +49,7 @@
 					<div class="flex-shrink-0">
 						<Tabs.Control value="player">Player</Tabs.Control>
 						<Tabs.Control value="pal-box">Pal Box</Tabs.Control>
+						<Tabs.Control value="guilds">Bases</Tabs.Control>
 						<Tabs.Control value="pal">Pal</Tabs.Control>
 					</div>
 				{/snippet}
@@ -63,6 +60,9 @@
 						</Tabs.Panel>
 						<Tabs.Panel value="pal-box" classes="h-screen">
 							<PalBox />
+						</Tabs.Panel>
+						<Tabs.Panel value="guilds" classes="h-screen">
+							<Guilds />
 						</Tabs.Panel>
 						<Tabs.Panel value="pal" classes="h-screen">
 							<PalEdit />

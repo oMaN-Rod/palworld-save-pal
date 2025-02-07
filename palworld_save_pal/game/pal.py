@@ -14,10 +14,18 @@ from palworld_save_pal.game.pal_objects import *
 logger = create_logger(__name__)
 PAL_DATA = JsonManager("data/json/pals.json").read()
 
+PAL_SICK_TYPES = [
+    "PalReviveTimer",
+    "PhysicalHealth",
+    "WorkerSick",
+    "HungerType",
+    "SanityValue",
+]
+
 
 class PalDTO(BaseModel):
     instance_id: UUID
-    owner_uid: UUID
+    owner_uid: Optional[UUID]
     character_id: str
     is_lucky: bool
     is_boss: bool
@@ -45,6 +53,7 @@ class PalDTO(BaseModel):
     group_id: Optional[UUID]
     sanity: float
     work_suitability: Dict[WorkSuitability, int]
+    is_sick: bool
 
 
 class Pal(BaseModel):
@@ -79,6 +88,7 @@ class Pal(BaseModel):
     _active_skills: List[str] = []
     _passive_skills: List[str] = []
     _work_suitability: Dict[WorkSuitability, int] = {}
+    _is_sick: bool = False
 
     _character_save: Dict[str, Any] = PrivateAttr(default_factory=dict)
     _save_parameter: Dict[str, Any] = PrivateAttr(default_factory=dict)
@@ -723,6 +733,17 @@ class Pal(BaseModel):
             PalObjects.GotWorkSuitabilityRankList(self._work_suitability)
         )
 
+    @computed_field
+    def is_sick(self) -> bool:
+        self._is_sick = False
+        for sick_type in (
+            t for t in PAL_SICK_TYPES if t not in ["HungerType", "SanityValue"]
+        ):
+            if sick_type in self._save_parameter:
+                self._is_sick = True
+                break
+        return self._is_sick
+
     def clone(
         self, instance_id: UUID, storage_id: UUID, storage_slot: int, nickname: str
     ) -> "Pal":
@@ -789,9 +810,10 @@ class Pal(BaseModel):
         self.heal()
 
     def heal(self):
-        safe_remove(self._save_parameter, "PalReviveTimer")
-        safe_remove(self._save_parameter, "PhysicalHealth")
-        safe_remove(self._save_parameter, "WorkerSick")
-        safe_remove(self._save_parameter, "HungerType")
-        safe_remove(self._save_parameter, "SanityValue")
+        for sick_type in PAL_SICK_TYPES:
+            safe_remove(self._save_parameter, sick_type)
+
+        self.stomach = PalObjects.get_nested(
+            PAL_DATA, self._character_key, "max_full_stomach"
+        )
         self.sanity = 100.0

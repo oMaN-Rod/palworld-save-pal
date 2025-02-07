@@ -8,21 +8,29 @@ const appState = getAppState();
 export const addPalHandler: WSMessageHandler = {
 	type: MessageType.ADD_PAL,
 	async handle(data) {
-		const { player_id, pal } = data;
+		const { player_id, guild_id, base_id, pal } = data;
 		const nav = getNavigationState();
 
 		if (!pal) {
 			return;
 		}
 
-		if (appState.players && appState.players[player_id]?.pals) {
+		if (player_id && appState.players) {
 			const palData = palsData.pals[pal.character_key];
 			pal.name = palData?.localized_name || pal.character_id;
 			pal.elements = palData?.element_types || [];
-			appState.players[player_id].pals[pal.instance_id] = pal;
-			appState.selectedPal = pal;
-			nav.activeTab = 'pal';
+			appState.players[player_id].pals![pal.instance_id] = pal;
 		}
+
+		if (guild_id && appState.guilds) {
+			const palData = palsData.pals[pal.character_key];
+			pal.name = palData?.localized_name || pal.character_id;
+			pal.elements = palData?.element_types || [];
+			appState.guilds[guild_id].bases[base_id].pals[pal.instance_id] = pal;
+		}
+
+		appState.selectedPal = pal;
+		nav.activeTab = 'pal';
 	}
 };
 

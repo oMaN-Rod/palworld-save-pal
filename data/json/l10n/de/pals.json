@@ -19,6 +19,138 @@
     "localized_name": "Anubis",
     "description": "War für die Gegner der Reichen und Mächtigen einst ein verhasstes Symbol des Adels. Irgendwann wurde Anubis zum Sinnbild des Todes."
   },
+  "Believer_CrossBow": {
+    "localized_name": "Ego",
+    "description": null
+  },
+  "Believer_Fat_GiantClub": {
+    "localized_name": "Ziegelhardt",
+    "description": null
+  },
+  "DarkTrader": {
+    "localized_name": "Dietrich",
+    "description": null
+  },
+  "Female_DesertPeople": {
+    "localized_name": "Tuschel",
+    "description": null
+  },
+  "Female_People": {
+    "localized_name": "Zündaya",
+    "description": null
+  },
+  "Female_People02": {
+    "localized_name": "Sirena",
+    "description": null
+  },
+  "Female_People03": {
+    "localized_name": "Wendy",
+    "description": null
+  },
+  "Female_Soldier": {
+    "localized_name": "Trixi",
+    "description": null
+  },
+  "Female_Soldier02": {
+    "localized_name": "Diva",
+    "description": null
+  },
+  "Female_Soldier03": {
+    "localized_name": "Aloha",
+    "description": null
+  },
+  "Female_Soldier04": {
+    "localized_name": "Klaudia",
+    "description": null
+  },
+  "FireCult_FlameThrower": {
+    "localized_name": "Nekrolf",
+    "description": null
+  },
+  "Hunter_Fat_GatlingGun": {
+    "localized_name": "Grillbert",
+    "description": null
+  },
+  "Hunter_Rifle": {
+    "localized_name": "Falk",
+    "description": null
+  },
+  "Male_DesertPeople": {
+    "localized_name": "Phantom",
+    "description": null
+  },
+  "Male_NinjaElite": {
+    "localized_name": "Rip",
+    "description": null
+  },
+  "Male_People": {
+    "localized_name": "Dyna",
+    "description": null
+  },
+  "Male_People02": {
+    "localized_name": "Quentin",
+    "description": null
+  },
+  "Male_People03": {
+    "localized_name": "Zisch",
+    "description": null
+  },
+  "Male_People2": {
+    "localized_name": "Mite",
+    "description": null
+  },
+  "Male_Soldier": {
+    "localized_name": "Crash",
+    "description": null
+  },
+  "Male_Soldier02": {
+    "localized_name": "Schlotto",
+    "description": null
+  },
+  "Male_Soldier03": {
+    "localized_name": "Clint",
+    "description": null
+  },
+  "Male_Soldier04": {
+    "localized_name": "Lasso",
+    "description": null
+  },
+  "Male_Trader01": {
+    "localized_name": "Raff",
+    "description": null
+  },
+  "Male_Trader02": {
+    "localized_name": "Blütwig XIV.",
+    "description": null
+  },
+  "Male_Trader03": {
+    "localized_name": "Pferdinand",
+    "description": null
+  },
+  "Ninja": {
+    "localized_name": "Patz",
+    "description": null
+  },
+  "Police_Rifle": {
+    "localized_name": "Knut",
+    "description": null
+  },
+  "Police_old": {
+    "localized_name": "Borgio",
+    "description": null
+  },
+  "Scientist_LaserRifle": {
+    "localized_name": "Nap",
+    "description": null
+  },
+  "Viking": {
+    "localized_name": "Knurps",
+    "description": null
+  },
+  "VikingElite": {
+    "localized_name": "Horton",
+    "description": null
+  },
   "BadCatgirl": {
     "localized_name": "Nyafia",
     "description": "Findet es extrem uncool, wenn man ihm in beide Augen schauen kann. Schafft man es doch irgendwie, bricht es direkt in Tränen aus und schmollt mindestens die nächsten zwei Wochen."

@@ -72,6 +72,10 @@
 	});
 
 	let icon = $derived.by(() => {
+		if (!item || !item.details.icon) {
+			console.warn('Item icon not found:', item);
+			return staticIcons.unknownIcon;
+		}
 		if (item && item.id.includes('SkillCard')) {
 			return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/elements/${item.details.icon}.png`);
 		} else if (item) {

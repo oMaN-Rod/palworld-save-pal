@@ -43,6 +43,8 @@ async def update_save_file_handler(message: UpdateSaveFileMessage, ws: WebSocket
     await ws.send_json(response)
     response = build_response(MessageType.GET_PLAYERS, app_state.players)
     await ws.send_json(response)
+    response = build_response(MessageType.GET_GUILDS, app_state.guilds)
+    await ws.send_json(response)
 
 
 async def download_save_file_handler(_: DownloadSaveFileMessage, ws: WebSocket):
@@ -83,8 +85,9 @@ async def load_zip_file_handler(message: LoadZipFileMessage, ws: WebSocket):
             raise ValueError("Zip file is empty")
 
         save_id = file_list[0].split("/")[0]
-        nested = save_id != "Level.sav"
+        nested = not any(f == "Level.sav" for f in file_list)
         level_sav = f"{save_id}/Level.sav" if nested else "Level.sav"
+        level_meta_sav = f"{save_id}/LevelMeta.sav" if nested else "LevelMeta.sav"
         players_folder = f"{save_id}/Players/" if nested else "Players/"
 
         if level_sav not in file_list:
@@ -94,6 +97,10 @@ async def load_zip_file_handler(message: LoadZipFileMessage, ws: WebSocket):
             raise ValueError("Zip file does not contain 'Players' folder")
 
         level_sav_data = zip_ref.read(level_sav)
+
+        level_meta_data = None
+        if level_meta_sav in file_list:
+            level_meta_data = zip_ref.read(level_meta_sav)
 
         player_files = [
             f for f in file_list if f.startswith(players_folder) and f.endswith(".sav")
@@ -111,7 +118,7 @@ async def load_zip_file_handler(message: LoadZipFileMessage, ws: WebSocket):
         await app_state.process_save_files(
             sav_id=save_id,
             level_sav=level_sav_data,
-            level_meta=None,
+            level_meta=level_meta_data,
             player_savs=player_data,
             ws_callback=ws_callback,
         )
@@ -132,4 +139,7 @@ async def load_zip_file_handler(message: LoadZipFileMessage, ws: WebSocket):
     await ws.send_json(response)
 
     response = build_response(MessageType.GET_PLAYERS, app_state.players)
+    await ws.send_json(response)
+
+    response = build_response(MessageType.GET_GUILDS, app_state.guilds)
     await ws.send_json(response)

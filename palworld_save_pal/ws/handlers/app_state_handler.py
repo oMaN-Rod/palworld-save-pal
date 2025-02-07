@@ -21,6 +21,7 @@ async def sync_app_state_handler(_: SyncAppStateMessage, ws: WebSocket):
     data = {
         "level": save_file.name,
         "players": [str(p) for p in (save_file.get_players()).keys()],
+        "guilds": [str(g) for g in (save_file.get_guilds()).keys()],
         "world_name": save_file.world_name,
         "type": app_state.save_type.name.lower(),
         "size": save_file.size,
@@ -30,4 +31,7 @@ async def sync_app_state_handler(_: SyncAppStateMessage, ws: WebSocket):
     await ws.send_json(response)
 
     response = build_response(MessageType.GET_PLAYERS, save_file.get_players())
+    await ws.send_json(response)
+
+    response = build_response(MessageType.GET_GUILDS, save_file.get_guilds())
     await ws.send_json(response)

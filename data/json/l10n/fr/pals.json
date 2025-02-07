@@ -19,6 +19,138 @@
     "localized_name": "Anubis",
     "description": "Son apparence faisait autrefois de lui un symbole de noblesse. Il est ainsi devenu un repère pour ceux qui méprisaient richesse et autorité. Puis un jour, Anubis est devenu symbole de mort."
   },
+  "Believer_CrossBow": {
+    "localized_name": "Ego",
+    "description": null
+  },
+  "Believer_Fat_GiantClub": {
+    "localized_name": "Brick",
+    "description": null
+  },
+  "DarkTrader": {
+    "localized_name": "Ram",
+    "description": null
+  },
+  "Female_DesertPeople": {
+    "localized_name": "Whisper",
+    "description": null
+  },
+  "Female_People": {
+    "localized_name": "Flare",
+    "description": null
+  },
+  "Female_People02": {
+    "localized_name": "Siren",
+    "description": null
+  },
+  "Female_People03": {
+    "localized_name": "Tanko",
+    "description": null
+  },
+  "Female_Soldier": {
+    "localized_name": "Jade",
+    "description": null
+  },
+  "Female_Soldier02": {
+    "localized_name": "Dazzle",
+    "description": null
+  },
+  "Female_Soldier03": {
+    "localized_name": "Aloha",
+    "description": null
+  },
+  "Female_Soldier04": {
+    "localized_name": "Nimble",
+    "description": null
+  },
+  "FireCult_FlameThrower": {
+    "localized_name": "Shadow",
+    "description": null
+  },
+  "Hunter_Fat_GatlingGun": {
+    "localized_name": "Grill",
+    "description": null
+  },
+  "Hunter_Rifle": {
+    "localized_name": "Hawk",
+    "description": null
+  },
+  "Male_DesertPeople": {
+    "localized_name": "Phantom",
+    "description": null
+  },
+  "Male_NinjaElite": {
+    "localized_name": "Urchin",
+    "description": null
+  },
+  "Male_People": {
+    "localized_name": "Dyna",
+    "description": null
+  },
+  "Male_People02": {
+    "localized_name": "Quill",
+    "description": null
+  },
+  "Male_People03": {
+    "localized_name": "Scoot",
+    "description": null
+  },
+  "Male_People2": {
+    "localized_name": "Mite",
+    "description": null
+  },
+  "Male_Soldier": {
+    "localized_name": "Crash",
+    "description": null
+  },
+  "Male_Soldier02": {
+    "localized_name": "Dart",
+    "description": null
+  },
+  "Male_Soldier03": {
+    "localized_name": "Clint",
+    "description": null
+  },
+  "Male_Soldier04": {
+    "localized_name": "Lasso",
+    "description": null
+  },
+  "Male_Trader01": {
+    "localized_name": "Skim",
+    "description": null
+  },
+  "Male_Trader02": {
+    "localized_name": "Mimic",
+    "description": null
+  },
+  "Male_Trader03": {
+    "localized_name": "Billy",
+    "description": null
+  },
+  "Ninja": {
+    "localized_name": "Fumble",
+    "description": null
+  },
+  "Police_Rifle": {
+    "localized_name": "Whip",
+    "description": null
+  },
+  "Police_old": {
+    "localized_name": "Pinch",
+    "description": null
+  },
+  "Scientist_LaserRifle": {
+    "localized_name": "Whisk",
+    "description": null
+  },
+  "Viking": {
+    "localized_name": "Gnaw",
+    "description": null
+  },
+  "VikingElite": {
+    "localized_name": "Cache",
+    "description": null
+  },
   "BadCatgirl": {
     "localized_name": "Nyafia",
     "description": "Déteste par-dessus tout regarder dans les yeux. Fond en larmes et refuse toute interaction pendant une quinzaine de jours s'il y est forcé."

@@ -29,6 +29,7 @@ from palworld_save_pal.ws.messages import (
     GetPassiveSkillsMessage,
     GetSettingsMessage,
     GetWorkSuitabilityMessage,
+    HealAllPalsMessage,
     HealPalsMessage,
     MessageType,
     MovePalMessage,
@@ -273,5 +274,13 @@ def bootstrap(dispatcher: "MessageDispatcher"):
         {
             "message_class": GetWorkSuitabilityMessage,
             "handler_func": work_suitability_handler.get_work_suitability_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.HEAL_ALL_PALS.value,
+        {
+            "message_class": HealAllPalsMessage,
+            "handler_func": pal_handler.heal_all_pals_handler,
         },
     )

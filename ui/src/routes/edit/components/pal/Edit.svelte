@@ -32,7 +32,7 @@
 		if (appState.selectedPal) {
 			const { character_key } = appState.selectedPal;
 			const palData = palsData.pals[character_key];
-			return assetLoader.loadPalImage(character_key, palData?.is_pal);
+			return assetLoader.loadPalImage(character_key, palData?.is_pal || false);
 		}
 	});
 
