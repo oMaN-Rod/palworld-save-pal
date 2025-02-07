@@ -28,7 +28,7 @@
 		<img src={staticIcons.attackIcon} alt="HP" class="mx-2 h-6 w-6" />
 		<div class="ml-2 h-6 w-6"></div>
 		<span class="flex-grow p-2 text-lg">Attack</span>
-		<span class="p-2 text-lg font-bold">{stats?.attack}</span>
+		<span class="p-2 text-lg font-bold">{Math.round(stats?.attack || 0)}</span>
 	</div>
 </div>
 <div
@@ -39,7 +39,7 @@
 
 		<div class="ml-2 h-6 w-6"></div>
 		<span class="flex-grow p-2 pl-2 text-lg">Defense</span>
-		<span class="p-2 text-lg font-bold">{stats?.defense}</span>
+		<span class="p-2 text-lg font-bold">{Math.round(stats?.defense || 0)}</span>
 	</div>
 </div>
 <div
@@ -50,6 +50,6 @@
 
 		<div class="ml-2 h-6 w-6"></div>
 		<span class="flex-grow p-2 pl-2 text-lg">Work Speed</span>
-		<span class="p-2 text-lg font-bold">{stats?.workSpeed}</span>
+		<span class="p-2 text-lg font-bold">{Math.round(stats?.workSpeed || 0)}</span>
 	</div>
 </div>
