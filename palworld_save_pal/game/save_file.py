@@ -191,7 +191,7 @@ class SaveFile(BaseModel):
         self._pals[new_pal.instance_id] = new_pal
         return new_pal
 
-    def add_base_pal(
+    def add_guild_pal(
         self,
         character_id: str,
         nickname: str,
@@ -228,13 +228,13 @@ class SaveFile(BaseModel):
         self._pals[new_pal.instance_id] = new_pal
         return new_pal
 
-    def clone_base_pal(
+    def clone_guild_pal(
         self, guild_id: UUID, base_id: UUID, pal: PalDTO
     ) -> Optional[Pal]:
-        base = self._guilds.get(guild_id).bases.get(base_id)
-        if not base:
+        guild = self._guilds.get(guild_id)
+        if not guild:
             raise ValueError(f"Base {base_id} not found in the guild {guild_id}.")
-        new_pal = base.clone_pal(pal)
+        new_pal = guild.clone_base_pal(base_id, pal)
         if new_pal is None:
             return
         self._character_save_parameter_map.append(new_pal.character_save)
@@ -253,12 +253,12 @@ class SaveFile(BaseModel):
     def delete_guild_pals(
         self, guild_id: UUID, base_id: UUID, pal_ids: List[UUID]
     ) -> None:
-        base = self._guilds.get(guild_id).bases.get(base_id)
-        if not base:
+        guild = self._guilds.get(guild_id)
+        if not guild:
             raise ValueError(f"Base {base_id} not found in the guild {guild_id}.")
 
         for pal_id in pal_ids:
-            base.delete_pal(pal_id)
+            guild.delete_base_pal(base_id, pal_id)
             self._delete_pal_by_id(pal_id)
 
     def heal_pals(self, pal_ids: List[UUID]) -> None:

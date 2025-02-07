@@ -68,7 +68,7 @@ async def add_pal_handler(message: AddPalMessage, ws: WebSocket):
         }
 
     if guild_id:
-        new_pal = save_file.add_base_pal(
+        new_pal = save_file.add_guild_pal(
             character_id, nickname, guild_id, base_id, storage_slot
         )
         data = {
@@ -108,7 +108,7 @@ async def clone_pal_handler(message: ClonePalMessage, ws: WebSocket):
     app_state = get_app_state()
     save_file = app_state.save_file
     if guild_id:
-        new_pal = save_file.clone_base_pal(guild_id, base_id, pal)
+        new_pal = save_file.clone_guild_pal(guild_id, base_id, pal)
         data = {
             "guild_id": guild_id,
             "base_id": base_id,

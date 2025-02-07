@@ -3,6 +3,7 @@ from uuid import UUID
 from pydantic import BaseModel, Field, PrivateAttr, computed_field
 
 from palworld_save_pal.game.base import Base
+from palworld_save_pal.game.pal import PalDTO
 from palworld_save_pal.game.pal_objects import PalObjects
 from palworld_save_pal.utils.uuid import are_equal_uuids, is_empty_uuid
 from palworld_save_pal.utils.logging_config import create_logger
@@ -87,15 +88,28 @@ class Guild(BaseModel):
         self.add_pal(new_pal.instance_id)
         return new_pal
 
-    def remove_pal(self, pal_id: UUID):
+    def clone_base_pal(self, base_id: UUID, pal: PalDTO):
+        logger.debug(
+            "%s (%s) => %s (%s)", self.name, self.id, pal.character_id, pal.instance_id
+        )
+        new_pal = self.bases[base_id].clone_pal(pal)
+        if new_pal is None:
+            return
+        self.add_pal(new_pal.instance_id)
+        return new_pal
+
+    def delete_base_pal(self, base_id: UUID, pal_id: UUID):
+        logger.debug("%s (%s) => %s", self.name, self.id, pal_id)
+        self.bases[base_id].delete_pal(pal_id)
+        self.delete_pal(pal_id)
+
+    def delete_pal(self, pal_id: UUID):
         logger.debug("%s (%s) => %s", self.name, self.id, pal_id)
         for entry in self._character_handle_ids:
             instance_id = PalObjects.as_uuid(entry["instance_id"])
             if are_equal_uuids(instance_id, pal_id):
                 self._character_handle_ids.remove(entry)
                 logger.debug("%s (%s) => Removed %s", self.name, self.id, pal_id)
-                return True
-        return False
 
     def add_base(self, base: Base):
         self.bases[base.id] = base
