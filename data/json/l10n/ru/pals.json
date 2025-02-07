@@ -19,6 +19,138 @@
     "localized_name": "Анубис",
     "description": "Благодаря своему облику когда-то считался символом знати. Для тех, кто богатство и власть не жаловал, служил олицетворением оных. В какой-то момент превратился в символ смерти."
   },
+  "Believer_CrossBow": {
+    "localized_name": "Эго",
+    "description": null
+  },
+  "Believer_Fat_GiantClub": {
+    "localized_name": "Кирпич",
+    "description": null
+  },
+  "DarkTrader": {
+    "localized_name": "Рам",
+    "description": null
+  },
+  "Female_DesertPeople": {
+    "localized_name": "Шепот",
+    "description": null
+  },
+  "Female_People": {
+    "localized_name": "Огонек",
+    "description": null
+  },
+  "Female_People02": {
+    "localized_name": "Сирена",
+    "description": null
+  },
+  "Female_People03": {
+    "localized_name": "Танко",
+    "description": null
+  },
+  "Female_Soldier": {
+    "localized_name": "Джейд",
+    "description": null
+  },
+  "Female_Soldier02": {
+    "localized_name": "Мишура",
+    "description": null
+  },
+  "Female_Soldier03": {
+    "localized_name": "Алоха",
+    "description": null
+  },
+  "Female_Soldier04": {
+    "localized_name": "Ловкач",
+    "description": null
+  },
+  "FireCult_FlameThrower": {
+    "localized_name": "Тень",
+    "description": null
+  },
+  "Hunter_Fat_GatlingGun": {
+    "localized_name": "Гриль",
+    "description": null
+  },
+  "Hunter_Rifle": {
+    "localized_name": "Ястреб",
+    "description": null
+  },
+  "Male_DesertPeople": {
+    "localized_name": "Фантом",
+    "description": null
+  },
+  "Male_NinjaElite": {
+    "localized_name": "Урчин",
+    "description": null
+  },
+  "Male_People": {
+    "localized_name": "Дина",
+    "description": null
+  },
+  "Male_People02": {
+    "localized_name": "Квилл",
+    "description": null
+  },
+  "Male_People03": {
+    "localized_name": "Скут",
+    "description": null
+  },
+  "Male_People2": {
+    "localized_name": "Мит",
+    "description": null
+  },
+  "Male_Soldier": {
+    "localized_name": "Краш",
+    "description": null
+  },
+  "Male_Soldier02": {
+    "localized_name": "Окурок",
+    "description": null
+  },
+  "Male_Soldier03": {
+    "localized_name": "Клинт",
+    "description": null
+  },
+  "Male_Soldier04": {
+    "localized_name": "Лассо",
+    "description": null
+  },
+  "Male_Trader01": {
+    "localized_name": "Ским",
+    "description": null
+  },
+  "Male_Trader02": {
+    "localized_name": "Мимик",
+    "description": null
+  },
+  "Male_Trader03": {
+    "localized_name": "Билли",
+    "description": null
+  },
+  "Ninja": {
+    "localized_name": "Мямля",
+    "description": null
+  },
+  "Police_Rifle": {
+    "localized_name": "Кнут",
+    "description": null
+  },
+  "Police_old": {
+    "localized_name": "Пинч",
+    "description": null
+  },
+  "Scientist_LaserRifle": {
+    "localized_name": "Виск",
+    "description": null
+  },
+  "Viking": {
+    "localized_name": "Глод",
+    "description": null
+  },
+  "VikingElite": {
+    "localized_name": "Схрон",
+    "description": null
+  },
   "BadCatgirl": {
     "localized_name": "Няфия",
     "description": "Очень не любит, когда кто-то смотрит ему в глаза. Если уставиться на него, тут же расплачется и будет избегать общения еще пару недель."

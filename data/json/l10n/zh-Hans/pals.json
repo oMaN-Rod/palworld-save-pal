@@ -19,6 +19,138 @@
     "localized_name": "阿努比斯",
     "description": "它的外表曾被视作高贵的象征。 而在那些蔑视权贵的人眼里，它就成了醒目的标靶。 于是在不知不觉间，阿努比斯成为了死亡的象征。"
   },
+  "Believer_CrossBow": {
+    "localized_name": "埃戈",
+    "description": null
+  },
+  "Believer_Fat_GiantClub": {
+    "localized_name": "布里克",
+    "description": null
+  },
+  "DarkTrader": {
+    "localized_name": "拉姆",
+    "description": null
+  },
+  "Female_DesertPeople": {
+    "localized_name": "低语",
+    "description": null
+  },
+  "Female_People": {
+    "localized_name": "芙蕾雅",
+    "description": null
+  },
+  "Female_People02": {
+    "localized_name": "赛莲",
+    "description": null
+  },
+  "Female_People03": {
+    "localized_name": "逆裳",
+    "description": null
+  },
+  "Female_Soldier": {
+    "localized_name": "姬蒂",
+    "description": null
+  },
+  "Female_Soldier02": {
+    "localized_name": "黛姿",
+    "description": null
+  },
+  "Female_Soldier03": {
+    "localized_name": "阿罗哈",
+    "description": null
+  },
+  "Female_Soldier04": {
+    "localized_name": "妮波",
+    "description": null
+  },
+  "FireCult_FlameThrower": {
+    "localized_name": "暗影",
+    "description": null
+  },
+  "Hunter_Fat_GatlingGun": {
+    "localized_name": "格里尔",
+    "description": null
+  },
+  "Hunter_Rifle": {
+    "localized_name": "霍克",
+    "description": null
+  },
+  "Male_DesertPeople": {
+    "localized_name": "幻影",
+    "description": null
+  },
+  "Male_NinjaElite": {
+    "localized_name": "厄棘",
+    "description": null
+  },
+  "Male_People": {
+    "localized_name": "戴拿",
+    "description": null
+  },
+  "Male_People02": {
+    "localized_name": "柯伊尔",
+    "description": null
+  },
+  "Male_People03": {
+    "localized_name": "斯科特",
+    "description": null
+  },
+  "Male_People2": {
+    "localized_name": "麦特",
+    "description": null
+  },
+  "Male_Soldier": {
+    "localized_name": "克雷斯",
+    "description": null
+  },
+  "Male_Soldier02": {
+    "localized_name": "达特",
+    "description": null
+  },
+  "Male_Soldier03": {
+    "localized_name": "克林特",
+    "description": null
+  },
+  "Male_Soldier04": {
+    "localized_name": "拉索",
+    "description": null
+  },
+  "Male_Trader01": {
+    "localized_name": "斯吉姆",
+    "description": null
+  },
+  "Male_Trader02": {
+    "localized_name": "模仿者",
+    "description": null
+  },
+  "Male_Trader03": {
+    "localized_name": "比利",
+    "description": null
+  },
+  "Ninja": {
+    "localized_name": "方博",
+    "description": null
+  },
+  "Police_Rifle": {
+    "localized_name": "威普",
+    "description": null
+  },
+  "Police_old": {
+    "localized_name": "狄奇",
+    "description": null
+  },
+  "Scientist_LaserRifle": {
+    "localized_name": "威斯克",
+    "description": null
+  },
+  "Viking": {
+    "localized_name": "奈尔",
+    "description": null
+  },
+  "VikingElite": {
+    "localized_name": "卡什",
+    "description": null
+  },
   "BadCatgirl": {
     "localized_name": "妮瞅莎",
     "description": "异常讨厌被人看到双眼。 如果有人强行盯着，它就会突然哭出来 之后两周左右的时间，对对方不理不睬。"
