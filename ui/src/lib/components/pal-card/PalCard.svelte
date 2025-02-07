@@ -36,7 +36,8 @@
 			'relative w-full outline outline-2 outline-surface-600',
 			pal && selected.includes(pal.instance_id)
 				? 'ring-4 ring-secondary-500'
-				: 'hover:ring-4 hover:ring-secondary-500 outline-surface-600'
+				: 'hover:ring-4 hover:ring-secondary-500 outline-surface-600',
+			pal.is_sick ? 'animate-pulse ring-4 ring-red-500' : ''
 		)
 	);
 	let palData = $derived(palsData.pals[pal.character_key]);

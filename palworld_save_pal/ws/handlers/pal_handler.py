@@ -7,6 +7,7 @@ from palworld_save_pal.utils.json_manager import JsonManager
 from palworld_save_pal.ws.messages import (
     GetPalsMessage,
     AddPalMessage,
+    HealAllPalsMessage,
     MovePalMessage,
     ClonePalMessage,
     DeletePalsMessage,
@@ -142,3 +143,15 @@ async def heal_pals_handler(message: HealPalsMessage, _: WebSocket):
     app_state = get_app_state()
     save_file = app_state.save_file
     save_file.heal_pals(pal_ids)
+
+
+async def heal_all_pals_handler(message: HealAllPalsMessage, _: WebSocket):
+    player_id = message.data.player_id
+    guild_id = message.data.guild_id
+    base_id = message.data.base_id
+    app_state = get_app_state()
+    save_file = app_state.save_file
+    if player_id:
+        save_file.heal_all_player_pals(player_id)
+    if guild_id:
+        save_file.heal_all_base_pals(guild_id, base_id)

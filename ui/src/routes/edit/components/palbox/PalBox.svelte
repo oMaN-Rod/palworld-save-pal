@@ -1,5 +1,4 @@
 <script lang="ts">
-	import PalBadge from '$components/badges/pal-badge/PalBadge.svelte';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { elementsData, palsData } from '$lib/data';
 	import { getAppState, getSocketState, getModalState, getToastState } from '$states';
@@ -33,10 +32,11 @@
 		ArrowDownNarrowWide,
 		User,
 		ReplaceAll,
-		BicepsFlexed
+		BicepsFlexed,
+		Bandage
 	} from 'lucide-svelte';
 	import Card from '$components/ui/card/Card.svelte';
-	import { PalCard } from '$components';
+	import { PalCard, PalBadge } from '$components';
 
 	const PALS_PER_PAGE = 30;
 	const TOTAL_SLOTS = 960;
@@ -615,22 +615,39 @@
 			debouncedFilterPals();
 		}
 	});
+
+	function handleHealAll() {
+		if (!appState.selectedPlayer || !appState.selectedPlayer.pals) return;
+		const message = {
+			type: MessageType.HEAL_ALL_PALS,
+			data: {
+				player_id: appState.selectedPlayer.uid
+			}
+		};
+		ws.send(JSON.stringify(message));
+		Object.values(appState.selectedPlayer.pals).forEach((pal) => {
+			pal.hp = pal.max_hp;
+			pal.sanity = 100;
+			pal.is_sick = false;
+			const palData = palsData.pals[pal.character_key];
+			if (palData) {
+				pal.stomach = palData.max_full_stomach;
+			}
+		});
+	}
 </script>
 
 {#if appState.selectedPlayer}
 	<div class="grid h-full w-full grid-cols-[25%_1fr]" {...additionalProps}>
 		<div class="flex-shrink-0 p-4">
 			<div class="btn-group bg-surface-900 mb-2 items-center rounded p-1">
-				<Tooltip position="right">
+				<Tooltip position="right" label="Add a new pal to your Pal Box">
 					<button
 						class="btn hover:preset-tonal-secondary p-2"
 						onclick={() => handleAddPal('palbox')}
 					>
 						<Plus />
 					</button>
-					{#snippet popup()}
-						Add a new pal to your Pal box
-					{/snippet}
 				</Tooltip>
 				<Tooltip>
 					<button
@@ -654,52 +671,42 @@
 						</div>
 					{/snippet}
 				</Tooltip>
+				<Tooltip label="Heal all in current base">
+					<button class="btn hover:preset-tonal-secondary p-2" onclick={handleHealAll}>
+						<Bandage />
+					</button>
+				</Tooltip>
 				{#if selectedPals.length === 1}
-					<Tooltip>
+					<Tooltip label="Clone selected pal">
 						<button class="btn hover:preset-tonal-secondary p-2" onclick={cloneSelectedPal}>
 							<Copy />
 						</button>
-						{#snippet popup()}
-							Clone selected pal
-						{/snippet}
 					</Tooltip>
 				{/if}
 				{#if selectedPals.length >= 1}
-					<Tooltip>
+					<Tooltip label="Heal selected pal(s)">
 						<button class="btn hover:preset-tonal-secondary p-2" onclick={healSelectedPals}>
 							<Ambulance />
 						</button>
-						{#snippet popup()}
-							Heal selected pal(s)
-						{/snippet}
 					</Tooltip>
-					<Tooltip>
+					<Tooltip label="Max out selected pal(s)">
 						<button class="btn hover:preset-tonal-secondary p-2" onclick={maxSelectedPals}>
 							<BicepsFlexed />
 						</button>
-						{#snippet popup()}
-							Max out selected pal(s)
-						{/snippet}
 					</Tooltip>
 
-					<Tooltip>
+					<Tooltip label="Delete selected pal(s)">
 						<button class="btn hover:preset-tonal-secondary p-2" onclick={deleteSelectedPals}>
 							<Trash />
 						</button>
-						{#snippet popup()}
-							Delete selected pal(s)
-						{/snippet}
 					</Tooltip>
-					<Tooltip>
+					<Tooltip label="Clear selected pal(s)">
 						<button
 							class="btn hover:preset-tonal-secondary p-2"
 							onclick={() => (selectedPals = [])}
 						>
 							<X />
 						</button>
-						{#snippet popup()}
-							Clear selected
-						{/snippet}
 					</Tooltip>
 				{/if}
 			</div>
@@ -720,7 +727,7 @@
 							<legend class="font-bold">Sort</legend>
 							<hr />
 							<div class="grid grid-cols-6">
-								<Tooltip>
+								<Tooltip label="Sort by level">
 									<button
 										type="button"
 										class={sortButtonClass('level')}
@@ -728,11 +735,8 @@
 									>
 										<LevelSortIcon />
 									</button>
-									{#snippet popup()}
-										Sort by level
-									{/snippet}
 								</Tooltip>
-								<Tooltip>
+								<Tooltip label="Sort by name">
 									<button
 										type="button"
 										class={sortButtonClass('name')}
@@ -740,11 +744,8 @@
 									>
 										<NameSortIcon />
 									</button>
-									{#snippet popup()}
-										Sort by name
-									{/snippet}
 								</Tooltip>
-								<Tooltip>
+								<Tooltip label="Sort by Paldeck #">
 									<button
 										type="button"
 										class={sortButtonClass('paldeck-index')}
@@ -752,9 +753,6 @@
 									>
 										<PaldeckSortIcon />
 									</button>
-									{#snippet popup()}
-										Sort by Paldeck #
-									{/snippet}
 								</Tooltip>
 							</div>
 						</div>
@@ -770,7 +768,7 @@
 								</Tooltip>
 								{#each [...elementTypes] as element}
 									{@const localizedName = elementsData.elements[element].localized_name}
-									<Tooltip>
+									<Tooltip label={localizedName}>
 										<button
 											class={elementClass(element)}
 											onclick={() => (selectedFilter = element)}
@@ -782,12 +780,9 @@
 												class="pal-element-badge"
 											/>
 										</button>
-										{#snippet popup()}
-											<span>{localizedName}</span>
-										{/snippet}
 									</Tooltip>
 								{/each}
-								<Tooltip>
+								<Tooltip label="Alpha Pals">
 									<button
 										type="button"
 										class={sortAlphaClass}
@@ -795,11 +790,8 @@
 									>
 										<img src={staticIcons.alphaIcon} alt="Alpha" class="pal-element-badge" />
 									</button>
-									{#snippet popup()}
-										Alpha Pals
-									{/snippet}
 								</Tooltip>
-								<Tooltip>
+								<Tooltip label="Lucky Pals">
 									<button
 										type="button"
 										class={sortLuckyClass}
@@ -807,11 +799,8 @@
 									>
 										<img src={staticIcons.luckyIcon} alt="Alpha" class="pal-element-badge" />
 									</button>
-									{#snippet popup()}
-										Lucky Pals
-									{/snippet}
 								</Tooltip>
-								<Tooltip>
+								<Tooltip label="Humans">
 									<button
 										type="button"
 										class={sortHumanClass}
@@ -819,11 +808,8 @@
 									>
 										<User />
 									</button>
-									{#snippet popup()}
-										Humans
-									{/snippet}
 								</Tooltip>
-								<Tooltip>
+								<Tooltip label="Predator Pals">
 									<button
 										type="button"
 										class={sortPredatorClass}
@@ -836,11 +822,8 @@
 											style="filter: {calculateFilters('#FF0000')};"
 										/>
 									</button>
-									{#snippet popup()}
-										Predator Pals
-									{/snippet}
 								</Tooltip>
-								<Tooltip>
+								<Tooltip label="Oil Rig Pals">
 									<button
 										type="button"
 										class={sortOilrigClass}
@@ -848,11 +831,8 @@
 									>
 										<img src={staticIcons.oilrigIcon} alt="Oil Rig" class="pal-element-badge" />
 									</button>
-									{#snippet popup()}
-										Oil Rig Pals
-									{/snippet}
 								</Tooltip>
-								<Tooltip>
+								<Tooltip label="Summoned Pals">
 									<button
 										type="button"
 										class={sortSummonClass}
@@ -860,9 +840,6 @@
 									>
 										<img src={staticIcons.altarIcon} alt="Summoned" class="pal-element-badge" />
 									</button>
-									{#snippet popup()}
-										Summoned Pals
-									{/snippet}
 								</Tooltip>
 							</div>
 						</div>

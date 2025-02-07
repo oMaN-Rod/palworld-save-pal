@@ -1,14 +1,13 @@
 <script lang="ts">
 	import { palsData } from '$lib/data';
 	import { getAppState, getSocketState, getModalState, getToastState } from '$states';
-	import { Tooltip, TooltipButton, Input } from '$components/ui';
-	import { type Pal, type Base, MessageType } from '$types';
+	import { Tooltip, TooltipButton } from '$components/ui';
+	import { type Pal, MessageType } from '$types';
 	import { staticIcons } from '$lib/constants';
-	import { Ambulance, X, ReplaceAll, Plus, Search, Trash } from 'lucide-svelte';
+	import { Ambulance, X, ReplaceAll, Plus, Trash, Bandage } from 'lucide-svelte';
 	import { PalBadge } from '$components';
 	import { PalSelectModal, NumberInputModal } from '$components/modals';
 	import { debounce, deepCopy, formatNickname } from '$utils';
-	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 
 	interface PalWithBaseId {
 		pal: Pal;
@@ -335,6 +334,29 @@
 			currentPage = totalPages;
 		}
 	});
+
+	function handleHealAll() {
+		if (!guildBases || !playerGuild || !currentBase) return;
+		const message = {
+			type: MessageType.HEAL_ALL_PALS,
+			data: {
+				guild_id: playerGuild.id,
+				base_id: currentBase[0]
+			}
+		};
+		ws.send(JSON.stringify(message));
+		Object.values(guildBases).forEach((base) => {
+			Object.values(base.pals).forEach((pal) => {
+				pal.hp = pal.max_hp;
+				pal.sanity = 100;
+				pal.is_sick = false;
+				const palData = palsData.pals[pal.character_key];
+				if (palData) {
+					pal.stomach = palData.max_full_stomach;
+				}
+			});
+		});
+	}
 </script>
 
 {#if appState.selectedPlayer}
@@ -352,54 +374,42 @@
 			<div class="mb-2 flex-shrink-0 p-4">
 				<h4 class="h4">Base {currentPage}</h4>
 				<div class="btn-group bg-surface-900 mb-2 items-center rounded p-1">
-					<Tooltip position="right">
+					<Tooltip position="right" label="Add Pal to Base">
 						<button
 							class="btn hover:preset-tonal-secondary p-2"
 							onclick={() => currentBase && handleAddPal(currentBase[0])}
 						>
 							<Plus />
 						</button>
-						{#snippet popup()}
-							Add a new pal to base
-						{/snippet}
 					</Tooltip>
-					<Tooltip>
+					<Tooltip label="Select all in current base">
 						<button class="btn hover:preset-tonal-secondary p-2" onclick={handleSelectAll}>
 							<ReplaceAll />
 						</button>
-						{#snippet popup()}
-							<div class="flex flex-col">
-								<span>Select all in current base</span>
-							</div>
-						{/snippet}
+					</Tooltip>
+					<Tooltip label="Heal all in current base">
+						<button class="btn hover:preset-tonal-secondary p-2" onclick={handleHealAll}>
+							<Bandage />
+						</button>
 					</Tooltip>
 					{#if selectedPals.length > 0}
-						<Tooltip>
+						<Tooltip label="Heal selected pal(s)">
 							<button class="btn hover:preset-tonal-secondary p-2" onclick={healSelectedPals}>
 								<Ambulance />
 							</button>
-							{#snippet popup()}
-								Heal selected pal(s)
-							{/snippet}
 						</Tooltip>
-						<Tooltip>
+						<Tooltip label="Delete selected pal(s)">
 							<button class="btn hover:preset-tonal-secondary p-2" onclick={deleteSelectedPals}>
 								<Trash />
 							</button>
-							{#snippet popup()}
-								Delete selected pal(s)
-							{/snippet}
 						</Tooltip>
-						<Tooltip>
+						<Tooltip label="Clear selected">
 							<button
 								class="btn hover:preset-tonal-secondary p-2"
 								onclick={() => (selectedPals = [])}
 							>
 								<X />
 							</button>
-							{#snippet popup()}
-								Clear selected
-							{/snippet}
 						</Tooltip>
 					{/if}
 				</div>

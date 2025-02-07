@@ -269,6 +269,20 @@ class SaveFile(BaseModel):
                 continue
             pal.heal()
 
+    def heal_all_player_pals(self, player_id: UUID) -> None:
+        player = self._players.get(player_id)
+        if not player:
+            raise ValueError(f"Player {player_id} not found in the save file.")
+        for pal in player.pals.values():
+            pal.heal()
+
+    def heal_all_base_pals(self, guild_id: UUID, base_id: UUID) -> None:
+        base = self._guilds.get(guild_id).bases.get(base_id)
+        if not base:
+            raise ValueError(f"Base {base_id} not found in the guild {guild_id}.")
+        for pal in base.pals.values():
+            pal.heal()
+
     def get_json(self, minify=False, allow_nan=True):
         logger.info("Converting %s to JSON", self.name)
         return json.dumps(

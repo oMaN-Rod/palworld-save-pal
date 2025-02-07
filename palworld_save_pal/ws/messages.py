@@ -21,6 +21,7 @@ class MessageType(str, Enum):
     DELETE_PALS = "delete_pals"
     GET_PAL_DETAILS = "get_pal_details"  # remove
     GET_PALS = "get_pals"
+    HEAL_ALL_PALS = "heal_all_pals"
     HEAL_PALS = "heal_pals"
     MOVE_PAL = "move_pal"
 
@@ -243,3 +244,14 @@ class SelectGamepassSaveMessage(BaseMessage):
 
 class GetWorkSuitabilityMessage(BaseMessage):
     type: str = MessageType.GET_WORK_SUITABILITY.value
+
+
+class HealAllPalData(BaseModel):
+    player_id: Optional[UUID] = None
+    guild_id: Optional[UUID] = None
+    base_id: Optional[UUID] = None
+
+
+class HealAllPalsMessage(BaseMessage):
+    type: str = MessageType.HEAL_ALL_PALS.value
+    data: HealAllPalData

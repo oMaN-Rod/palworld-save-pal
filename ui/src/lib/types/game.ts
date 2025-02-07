@@ -47,6 +47,7 @@ export type Pal = {
 	state: EntryState;
 	sanity: number;
 	exp: number;
+	is_sick: boolean;
 };
 
 export type StatusPointList = {

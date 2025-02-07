@@ -6,6 +6,7 @@ export enum MessageType {
 	MOVE_PAL = 'move_pal',
 	DELETE_PALS = 'delete_pals',
 	HEAL_PALS = 'heal_pals',
+	HEAL_ALL_PALS = 'heal_all_pals',
 	DOWNLOAD_SAVE_FILE = 'download_save_file',
 	ERROR = 'error',
 	WARNING = 'warning',
