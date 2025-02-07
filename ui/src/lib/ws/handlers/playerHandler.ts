@@ -13,15 +13,13 @@ export const getPlayersHandler: WSMessageHandler = {
 			Object.entries(data).map(async ([key, player]) => {
 				try {
 					if (player.pals) {
-						await Promise.all(
-							Object.values(player.pals).map(async (pal) => {
-								const palInfo = palsData.pals[pal.character_key];
-								if (!palInfo) {
-									console.error(`Failed to find pal info for`, JSON.parse(JSON.stringify(pal)));
-								}
-								pal.name = palInfo?.localized_name || pal.character_id;
-							})
-						);
+						Object.values(player.pals).map((pal) => {
+							const palInfo = palsData.pals[pal.character_key];
+							if (!palInfo) {
+								console.error(`Failed to find pal info for`, JSON.parse(JSON.stringify(pal)));
+							}
+							pal.name = palInfo?.localized_name || pal.character_id;
+						});
 					}
 					return [key, player];
 				} catch (error) {
