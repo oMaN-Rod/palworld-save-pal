@@ -37,9 +37,12 @@
 			'outline-surface-600 xl:h-18 xl:w-18 h-16 w-16 rounded-full outline outline-2 outline-offset-2',
 			selected.includes(pal.instance_id)
 				? 'ring-4 ring-secondary-500'
-				: 'hover:ring-4 hover:ring-secondary-500',
-			pal.is_sick ? 'animate-pulse ring-4 ring-red-500' : ''
+				: 'hover:ring-4 hover:ring-secondary-500'
 		)
+	);
+
+	const sickClass = $derived(
+		pal && pal.is_sick ? 'animate-pulse ring-4 ring-red-500 rounded-full' : ''
 	);
 
 	let palData = $derived(palsData.pals[pal.character_key]);
@@ -98,7 +101,7 @@
 				useArrow={false}
 			>
 				<div class="flex flex-col">
-					<div class={cn('relative flex items-center justify-center ')}>
+					<div class={cn('relative flex items-center justify-center', sickClass)}>
 						{#if pal.is_boss}
 							<div class="absolute -left-4 -top-1 h-6 w-6 xl:h-8 xl:w-8">
 								<img src={staticIcons.alphaIcon} alt="Alpha" class="pal-element-badge" />

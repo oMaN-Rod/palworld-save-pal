@@ -31,18 +31,18 @@
 	const appState = getAppState();
 	const nav = getNavigationState();
 
-	let cardClass = $derived(
+	const cardClass = $derived(
 		cn(
 			'relative w-full outline outline-2 outline-surface-600',
 			pal && selected.includes(pal.instance_id)
 				? 'ring-4 ring-secondary-500'
-				: 'hover:ring-4 hover:ring-secondary-500 outline-surface-600',
-			pal.is_sick ? 'animate-pulse ring-4 ring-red-500' : ''
+				: 'hover:ring-4 hover:ring-secondary-500 outline-surface-600'
 		)
 	);
-	let palData = $derived(palsData.pals[pal.character_key]);
+	const sickClass = $derived(pal && pal.is_sick ? 'animate-pulse ring-4 ring-red-500' : '');
+	const palData = $derived(palsData.pals[pal.character_key]);
 
-	let menuItems = $derived.by(() => {
+	const menuItems = $derived.by(() => {
 		if (!pal || pal.character_id === 'None') {
 			return [
 				{
@@ -59,10 +59,10 @@
 		];
 	});
 
-	let genderIcon = $derived(
+	const genderIcon = $derived(
 		assetLoader.loadImage(`${ASSET_DATA_PATH}/img/icons/${pal.gender}.png`)
 	);
-	let palIcon = $derived.by(() => {
+	const palIcon = $derived.by(() => {
 		if (!pal) return '';
 		return assetLoader.loadMenuImage(pal.character_id, palData?.is_pal || false);
 	});
@@ -97,7 +97,7 @@
 				position="right"
 				useArrow={false}
 			>
-				<div class="grid grid-cols-[1fr_auto] overflow-hidden">
+				<div class={cn('grid grid-cols-[1fr_auto] overflow-hidden', sickClass)}>
 					<div class="ml-4 flex flex-col">
 						<div class="flex space-x-2">
 							<div class="flex items-end space-x-0.5">
