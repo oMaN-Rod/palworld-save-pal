@@ -80,7 +80,10 @@ Set-Location -Path ".."
 
 Write-Host "Building exe..."
 
+# Build standalone executable
 python setup.py build
+# Create MSI installer
+python setup.py bdist_msi
 
 if ($LASTEXITCODE -ne 0) {
     Write-Error "cx_Freeze build failed. Exiting."
