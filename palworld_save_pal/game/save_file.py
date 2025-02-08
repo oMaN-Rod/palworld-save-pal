@@ -623,6 +623,9 @@ class SaveFile(BaseModel):
         logger.info("Loading Players")
 
         loaded_sav_files: Dict[UUID, GvasFile] = {}
+        # This is a temp fix, need to look into fixing player uid
+        # mismatches due to host fix
+        host_fix_players = {}
 
         for uid, player_sav_bytes in player_sav_files.items():
             raw_gvas, _ = decompress_sav_to_gvas(player_sav_bytes)
@@ -645,6 +648,7 @@ class SaveFile(BaseModel):
                     uid,
                     player_uuid,
                 )
+                host_fix_players[player_uuid] = uid
             loaded_sav_files[player_uuid] = gvas_file
 
         players = {}
@@ -656,13 +660,18 @@ class SaveFile(BaseModel):
                     continue
 
                 self._player_gvas_files[uid] = loaded_sav_files[uid]
+                player_pals = self._get_player_pals(uid)
+                if uid in host_fix_players:
+                    player_pals = player_pals | self._get_player_pals(
+                        host_fix_players[uid]
+                    )
                 player = Player(
                     gvas_file=loaded_sav_files[uid],
                     item_container_save_data=self._item_container_save_data,
                     dynamic_item_save_data=self._dynamic_item_save_data,
                     character_container_save_data=self._character_container_save_data,
                     character_save_parameter=entry,
-                    pals=self._get_player_pals(uid),
+                    pals=player_pals,
                     guild=self._player_guild(uid),
                 )
                 players[uid] = player

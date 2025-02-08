@@ -139,4 +139,11 @@ class CharacterContainer(BaseModel):
                     CharacterContainerSlot(slot_index=slot_index, pal_id=instance_id)
                 )
             break
+        logger.debug(
+            "%s (%s) => slots: %s, slots data: %s",
+            self.type.value,
+            self.id,
+            self.size,
+            len(self.slots),
+        )
         return self
