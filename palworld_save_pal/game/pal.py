@@ -147,8 +147,11 @@ class Pal(BaseModel):
             self._character_key = self.character_id[9:]
         else:
             self._character_key = self.character_id
+
         if self._character_key.lower() == "sheepball":
             self._character_key = "Sheepball"
+        if self._character_key.lower() == "lazycatfish":
+            self._character_key = "LazyCatfish"
         return self._character_key
 
     @computed_field
