@@ -23,23 +23,24 @@
 	let palLevelProgressValue: number = $state(0);
 	let palLevelProgressMax: number = $state(1);
 
-	let palLevel = $derived.by(() => {
+	const palLevel = $derived.by(() => {
 		if (appState.selectedPlayer && pal) {
 			return appState.selectedPlayer.level < pal.level
 				? appState.selectedPlayer.level.toString()
 				: pal.level.toString();
 		}
 	});
-	let palLevelClass = $derived.by(() => {
+	const palLevelClass = $derived.by(() => {
 		if (appState.selectedPlayer && pal) {
 			return appState.selectedPlayer.level < pal.level ? 'text-error-500' : '';
 		}
 	});
-	let palLevelMessage = $derived.by(() => {
+	const palLevelMessage = $derived.by(() => {
 		if (appState.selectedPlayer && pal) {
 			return appState.selectedPlayer.level < pal.level ? 'Level sync' : 'No Level Sync';
 		}
 	});
+	const palRank = $derived(pal ? pal.rank - 1 : 0);
 
 	async function calcPalLevelProgress() {
 		if (pal) {
@@ -157,12 +158,12 @@
 	>
 		<div class="mr-4 flex flex-col items-center justify-center rounded-none">
 			<Rating
-				value={pal.rank - 1}
+				value={palRank}
 				count={4}
 				itemClasses="text-gray"
-				onValueChange={(value) => {
-					pal!.rank = value + 1;
-					pal!.state = EntryState.MODIFIED;
+				onValueChange={(e) => {
+					pal.rank = e.value + 1;
+					pal.state = EntryState.MODIFIED;
 				}}
 			/>
 			<div class="flex flex-row px-2">

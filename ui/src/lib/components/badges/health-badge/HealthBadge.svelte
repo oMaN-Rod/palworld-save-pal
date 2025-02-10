@@ -21,6 +21,18 @@
 		stomachHeight?: string;
 	} = $props();
 
+	const palMaxHp = $derived(pal ? pal.max_hp : 1000);
+
+	const maxStomach = $derived.by(() => {
+		if (pal) {
+			const palData = palsData.pals[pal.character_key] || undefined;
+			if (palData) {
+				return palData.max_full_stomach;
+			}
+		}
+		return 150;
+	});
+
 	function handleHeal() {
 		if (!pal) return;
 		pal.hp = pal.max_hp;
@@ -34,16 +46,6 @@
 		pal.stomach = palData.max_full_stomach;
 		pal.state = EntryState.MODIFIED;
 	}
-
-	let maxStomach = $derived.by(() => {
-		if (pal && player) {
-			const palData = palsData.pals[pal.character_key] || undefined;
-			if (palData) {
-				return palData.max_full_stomach;
-			}
-		}
-		return 150;
-	});
 </script>
 
 {#if pal}
@@ -56,13 +58,13 @@
 
 				{#snippet popup()}
 					<span>HP</span>
-					{Math.round(pal.hp / 1000)}/{pal.max_hp / 1000}
+					{Math.round(pal.hp / 1000)}/{palMaxHp / 1000}
 				{/snippet}
 			</Tooltip>
 		{/if}
 		<Progress
 			bind:value={pal.hp}
-			bind:max={pal.max_hp}
+			max={palMaxHp}
 			height={healthHeight}
 			color="green"
 			dividend={1000}
