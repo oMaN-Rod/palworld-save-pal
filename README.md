@@ -23,7 +23,7 @@ Palworld Save Pal is a tool for managing and analyzing save files.
     - [General](#general)
     - [Pals](#pals)
     - [Players](#players)
-    - [Map](#map)
+    - [What's cooking :man\_cook::pinched\_fingers:](#whats-cooking-man_cookpinched_fingers)
   - [📜 License](#-license)
   - [➡️ Related Projects](#️-related-projects)
   - [☕ Buy me a Coffee](#-buy-me-a-coffee)
@@ -211,39 +211,42 @@ Here's what's planned for future releases of Palworld Save Pal:
 
 ### General
 
-- [X] Filter Pals by name, nickname, or Element type
-- [ ] Remote access to save files (sftp to remote server)
-- [X] Bulk edit pals (e.g., set all stomachs to 100%)
+- [X] Filter/Sort Pals by name, nickname, character ID, Boss, Lucky, Human, Level, Paldeck #,  Predator, Oil Rig, Summon, or Element type
+- [X] Gamepass & Steam support (solo/coop/dedicated)
+- [X] Localization; supports Deutsch, English, Español, Français, Italiano, 한국어, Português, Русский, 简体中文, and 繁體中文
 
 ### Pals
 
+- [X] Edit Pal box and Guild Pals
 - [X] Edit Nickname
 - [X] Edit Gender
-- [X] Edit Active Skills
+- [X] Edit Active Skills / Learned Skills
 - [X] Edit Passive Skills
-- [X] Edit Health - Modified pals are automatically healed
-- [X] Edit Stomach - Modified pals are automatically healed
 - [X] Edit Level
-- [X] Edit Learned skills
 - [X] Edit Rank
 - [X] Edit Souls
 - [X] Set/Unset Lucky
 - [X] Set/Unset Boss
-- [X] Add/Remove Pals
-- [X] Clone Pals
+- [X] Add/Remove/Clone Pals
+- [X] Edit Work Suitability
+- [X] Heal Pals - edit health and stomach (Modified pals are automatically healed)
+- [X] Create your own Active/Passive Skill presets, making it easy af to apply skills.
 
 ### Players
 
-- [ ] Edit Name
+- [X] Edit Name
 - [X] Edit Level
-- [X] Edit Health
-- [X] Edit Stomach
+- [X] Edit Stats (Health, Stamina, Attack, Work Speed, and Weight)
+- [X] Heal Player - edit health and stomach
 - [X] Edit Inventory
-- [X] Player presets for inventory
-- [X] Stats (Health, Stamina, Attack, Work Speed, and Weight)
+- [X] Create your own inventory presets/loadouts and apply them across players and saves.
 
-### Map
+### What's cooking :man_cook::pinched_fingers:
 
+- [ ] Converting to/from gamepass/steam
+- [ ] Converting to/from solo/co-op/dedicated
+- [ ] Transferring Players and Pals across saves
+- [ ] Apply Pal preset on multiple Pals, e.g., max out all Dragon types with a specific profile.
 - [ ] Edit Storage items
 
 ## 📜 License
@@ -252,12 +255,13 @@ MIT License (do whatever you want with it).
 
 ## ➡️ Related Projects
 
-These are projects I've found that specifically target PALWorld save files, each was helpful in some way during the development of this project:
+These are projects I've found that specifically target Palworld save files, each was helpful in some way during the development of this project:
 
 - [PalEdit](https://github.com/EternalWraith/PalEdit) - PSP was inspired by it.
 - [palworld-save-tools](https://github.com/cheahjs/palworld-save-tools) - PSP uses this tool for handling save files, can be used directly to convert to/from json.
 - [palworld-uesave-rs](https://github.com/DKingAlpha/palworld-uesave-rs) - I originally considered building this app using Tauri, opted for using Python, but this project was helpful.
 - [Palworld Pal Editor](https://github.com/KrisCris/Palworld-Pal-Editor) - Also served as a reference for Palworld Save Pal, adopted some of this projects approach.
+- [PalWorldSaveTools](https://github.com/deafdudecomputers/PalWorldSaveTools) - Has a bunch of useful features for parsing, editing, and converting save files.
 
 ## ☕ Buy me a Coffee
 
