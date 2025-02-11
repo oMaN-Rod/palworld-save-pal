@@ -27,6 +27,7 @@
 			if (
 				item.details.type_a == ItemTypeA.None ||
 				item.details.type_a == ItemTypeA.MonsterEquipWeapon ||
+				item.details.type_b == ItemTypeB.MaterialPalEgg ||
 				item.details.disabled
 			) {
 				return false;
