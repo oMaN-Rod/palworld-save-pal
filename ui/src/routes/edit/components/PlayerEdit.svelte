@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { Input, ItemHeader, Progress } from '$components/ui';
-	import { getAppState, getToastState, getSocketState, getModalState } from '$states';
-	import { EntryState, type ItemContainerSlot, type ItemContainer, type Pal } from '$types';
+	import { ItemHeader, Progress } from '$components/ui';
+	import { getAppState, getToastState, getModalState } from '$states';
+	import { EntryState, type ItemContainerSlot, type ItemContainer } from '$types';
 	import { ASSET_DATA_PATH, MAX_LEVEL } from '$lib/constants';
 	import { itemsData, expData } from '$lib/data';
 	import { Tabs, Accordion } from '@skeletonlabs/skeleton-svelte';
@@ -625,14 +625,22 @@
 						<span class="flex h-1/3 items-end">
 							{#await getItemIcon(headGear.static_id) then icon}
 								{#if icon}
-									<img src={icon} alt={headGear.static_id} class="h-12 w-12 xl:h-16 xl:w-16" />
+									<img
+										src={icon}
+										alt={headGear.static_id}
+										class="hidden 2xl:block 2xl:h-16 2xl:w-16"
+									/>
 								{/if}
 							{/await}
 						</span>
 						<span class="h-2/3">
 							{#await getItemIcon(bodyGear.static_id) then icon}
 								{#if icon}
-									<img src={icon} alt={bodyGear.static_id} class="h-56 w-56 xl:h-64 xl:w-64" />
+									<img
+										src={icon}
+										alt={bodyGear.static_id}
+										class="hidden 2xl:block 2xl:h-64 2xl:w-64"
+									/>
 								{/if}
 							{/await}
 						</span>
@@ -769,3 +777,32 @@
 		<h2 class="h2">Select a Player to edit 🚀</h2>
 	</div>
 {/if}
+
+<style lang="postcss">
+	img {
+		opacity: 0;
+		animation: fadeIn 0.3s ease-in forwards;
+	}
+
+	@keyframes fadeIn {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	}
+
+	img:not([src]) {
+		animation: fadeOut 0.3s ease-out forwards;
+	}
+
+	@keyframes fadeOut {
+		from {
+			opacity: 1;
+		}
+		to {
+			opacity: 0;
+		}
+	}
+</style>
