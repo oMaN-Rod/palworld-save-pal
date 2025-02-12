@@ -502,6 +502,7 @@ class SaveFile(BaseModel):
     def _load_bases(self):
         if not self._base_camp_save_data_map:
             logger.warning("No bases found in the save file.")
+            return
 
         for entry in self._base_camp_save_data_map:
             # Guild to add to
@@ -607,7 +608,7 @@ class SaveFile(BaseModel):
         )
         self._base_camp_save_data_map = PalObjects.get_value(
             world_save_data["BaseCampSaveData"]
-        )
+        ) if "BaseCampSaveData" in world_save_data else None
 
     def _player_guild(self, player_id: UUID) -> Optional[Guild]:
         if not self._guilds:
