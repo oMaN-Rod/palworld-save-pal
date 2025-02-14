@@ -364,9 +364,10 @@
 		<div class="flex w-full items-center justify-center">
 			<h2 class="h2">No Guild found</h2>
 		</div>
-	{:else if !guildBases}
-		<div class="flex w-full items-center justify-center">
+	{:else if !guildBases || Object.values(guildBases).length === 0}
+		<div class="flex w-full items-center justify-center space-x-4">
 			<h2 class="h2">No Guild Bases found</h2>
+			<img src={staticIcons.sadIcon} alt="Sad" class="h-18 w-18" />
 		</div>
 	{:else}
 		<div class="grid h-full w-full grid-cols-[25%_1fr]">
