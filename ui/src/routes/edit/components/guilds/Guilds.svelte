@@ -15,6 +15,7 @@
 	import { ItemBadge, PalBadge, StoragePresets } from '$components';
 	import { PalSelectModal, NumberInputModal } from '$components/modals';
 	import { assetLoader, debounce, deepCopy, formatNickname } from '$utils';
+	import { cn } from '$theme';
 
 	interface PalWithBaseId {
 		pal: Pal;
@@ -520,12 +521,26 @@
 						</Tooltip>
 					{/if}
 				</div>
-				<button class="btn preset-filled-primary-500" onclick={() => (activeTab = 'pals')}>
-					Pals
-				</button>
-				<button class="btn preset-filled-primary-500" onclick={() => (activeTab = 'storage')}>
-					Storage
-				</button>
+				<div class="flex w-full">
+					<button
+						class={cn(
+							'bg-surface-800 hover:ring-secondary-800 w-1/2 hover:ring-2',
+							activeTab == 'pals' ? 'bg-secondary-800' : ''
+						)}
+						onclick={() => (activeTab = 'pals')}
+					>
+						<span class={activeTab == 'pals' ? 'font-bold' : ''}>Pals</span>
+					</button>
+					<button
+						class={cn(
+							'bg-surface-800 hover:ring-secondary-800 w-1/2 hover:ring-2',
+							activeTab == 'storage' ? 'bg-secondary-800' : ''
+						)}
+						onclick={() => (activeTab = 'storage')}
+					>
+						<span class={activeTab == 'storage' ? 'font-bold' : ''}>Storage</span>
+					</button>
+				</div>
 			</div>
 
 			<!-- Right Content -->
