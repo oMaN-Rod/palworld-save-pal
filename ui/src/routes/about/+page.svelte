@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getAppState } from '$states';
-	import { Card, TooltipButton } from '$components/ui';
+	import { Card, Tooltip, TooltipButton } from '$components/ui';
 	import { Github } from 'lucide-svelte';
 	import Saitama from '$lib/assets/img/app/saitama.png';
 	import { staticIcons } from '$lib/constants';
@@ -9,18 +9,20 @@
 </script>
 
 <div class="flex h-full w-full items-center justify-center space-x-2 p-2">
-	<div class="flex w-1/3 flex-col space-y-2">
-		<Card class="max-w-lg">
+	<div class="flex flex-col space-y-2">
+		<Card>
 			<div class="flex space-x-2">
-				<h1 class="h1">Palworld Save Pal</h1>
+				<img src={staticIcons.pspWhite} alt="Palworld Save Pal" class="mb-2" />
 				<span class="font-bold">{appState.version ? `v${appState.version}` : ''}</span>
 			</div>
 			<hr class="border-surface-500" />
-			<div class="flex flex-col space-y-2">
-				<p class="text-lg">
-					Built by a guy who is a developer for fun.
-					<img src={Saitama} alt="Saitama" class="inline-block h-16 w-16" />
-				</p>
+			<div class="mt-2 flex flex-col space-y-2">
+				<Tooltip position="left" background="bg-transparent">
+					Built <s>by a guy who is a developer</s> some guys who are developers for fun.
+					{#snippet popup()}
+						<img src={Saitama} alt="Saitama" class="inline-block h-48 w-48" />
+					{/snippet}
+				</Tooltip>
 				<div class="flex items-center space-x-2">
 					<span>Check out the</span>
 					<TooltipButton icon={Github} popupLabel="Github repo">
@@ -35,7 +37,7 @@
 				</div>
 			</div>
 		</Card>
-		<Card class="max-w-lg">
+		<Card>
 			<div class="flex-col space-y-2">
 				<h4 class="h4">Shortcuts</h4>
 				<div class="grid grid-cols-2">
