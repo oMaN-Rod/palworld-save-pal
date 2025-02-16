@@ -19,12 +19,12 @@ from palworld_save_tools.paltypes import (
     PALWORLD_TYPE_HINTS,
 )
 
-from palworld_save_pal.game.base import Base
+from palworld_save_pal.game.base import Base, BaseDTO
 from palworld_save_pal.game.guild import Guild
 from palworld_save_pal.game.pal import Pal, PalDTO
 from palworld_save_pal.game.pal_objects import GroupType, PalObjects
 from palworld_save_pal.utils.logging_config import create_logger
-from palworld_save_pal.game.player import Player
+from palworld_save_pal.game.player import Player, PlayerDTO
 from palworld_save_pal.utils.uuid import are_equal_uuids
 from palworld_save_pal.game.item_container_slot import (
     encode as encode_item_container_slot,
@@ -113,7 +113,6 @@ def skip_encode(writer: FArchiveWriter, property_type: str, properties: dict) ->
 CUSTOM_PROPERTIES = {
     k: v for k, v in PALWORLD_CUSTOM_PROPERTIES.items() if k not in DISABLED_PROPERTIES
 }
-CUSTOM_PROPERTIES[".worldSaveData.MapObjectSaveData"] = (skip_decode, skip_encode)
 CUSTOM_PROPERTIES[".worldSaveData.FoliageGridSaveDataMap"] = (skip_decode, skip_encode)
 CUSTOM_PROPERTIES[".worldSaveData.MapObjectSpawnerInStageSaveData"] = (
     skip_decode,
@@ -171,6 +170,7 @@ class SaveFile(BaseModel):
     )
     _group_save_data_map: List[Dict[str, Any]] = PrivateAttr(default_factory=list)
     _base_camp_save_data_map: List[Dict[str, Any]] = PrivateAttr(default_factory=list)
+    _map_object_save_data: List[Dict[str, Any]] = PrivateAttr(default_factory=list)
 
     def add_player_pal(
         self,
@@ -323,20 +323,9 @@ class SaveFile(BaseModel):
     def load_level_sav(self, data: bytes):
         logger.info("Loading %s as GVAS", self.name)
         raw_gvas, _ = decompress_sav_to_gvas(data)
-        custom_properties = {
-            k: v
-            for k, v in PALWORLD_CUSTOM_PROPERTIES.items()
-            if k not in DISABLED_PROPERTIES
-        }
-        custom_properties[
-            ".worldSaveData.ItemContainerSaveData.Value.Slots.Slots.RawData"
-        ] = (
-            decode_item_container_slot,
-            encode_item_container_slot,
-        )
         logger.debug("Reading GVAS file")
         gvas_file = GvasFile.read(
-            raw_gvas, PALWORLD_TYPE_HINTS, custom_properties, allow_nan=True
+            raw_gvas, PALWORLD_TYPE_HINTS, CUSTOM_PROPERTIES, allow_nan=True
         )
         self._gvas_file = gvas_file
         self._get_file_size(data)
@@ -445,6 +434,19 @@ class SaveFile(BaseModel):
 
         logger.info("Updated %d players in the save file.", len(modified_players))
 
+    async def update_guilds(
+        self, modified_bases: Dict[UUID, BaseDTO], ws_callback
+    ) -> None:
+        if not self._gvas_file:
+            raise ValueError("No GvasFile has been loaded.")
+
+        for id, base in modified_bases.items():
+            await ws_callback(f"Updating base {id}")
+            guild = self._guilds.get(id)
+            guild.update_from(base)
+
+        logger.info("Updated %d bases in the save file.", len(modified_bases))
+
     def _delete_pal_by_id(self, pal_id: UUID) -> None:
         del self._pals[pal_id]
         for entry in self._character_save_parameter_map:
@@ -550,6 +552,9 @@ class SaveFile(BaseModel):
                 container_id=container_id,
                 slot_count=container_slot_count,
                 character_container_save_data=self._character_container_save_data,
+                map_object_save_data=self._map_object_save_data,
+                item_container_save_data=self._item_container_save_data,
+                dynamic_item_save_data=self._dynamic_item_save_data,
             )
             self._guilds[group_id_belong_to].add_base(base)
 
@@ -606,9 +611,14 @@ class SaveFile(BaseModel):
         self._group_save_data_map = PalObjects.get_value(
             world_save_data["GroupSaveDataMap"]
         )
-        self._base_camp_save_data_map = PalObjects.get_value(
-            world_save_data["BaseCampSaveData"]
-        ) if "BaseCampSaveData" in world_save_data else None
+        self._base_camp_save_data_map = (
+            PalObjects.get_value(world_save_data["BaseCampSaveData"])
+            if "BaseCampSaveData" in world_save_data
+            else None
+        )
+        self._map_object_save_data = PalObjects.get_value(
+            world_save_data["MapObjectSaveData"]
+        )
 
     def _player_guild(self, player_id: UUID) -> Optional[Guild]:
         if not self._guilds:
@@ -683,6 +693,6 @@ class SaveFile(BaseModel):
         existing_pal = self._pals[pal_id]
         existing_pal.update_from(updated_pal)
 
-    def _update_player(self, player: Player) -> None:
+    def _update_player(self, player: PlayerDTO) -> None:
         existing_player = self._players.get(player.uid)
         existing_player.update_from(player)

@@ -2,6 +2,7 @@ import { getSocketState } from '$states';
 import { MessageType } from '$types';
 import {
 	activeSkillsData,
+	buildingsData,
 	elementsData,
 	expData,
 	itemsData,
@@ -22,6 +23,7 @@ export const bootstrap = async () => {
 	await expData.reset();
 	await itemsData.reset();
 	await workSuitabilityData.reset();
+	await buildingsData.reset();
 	ws.send(JSON.stringify({ type: MessageType.GET_VERSION }));
 	ws.send(JSON.stringify({ type: MessageType.SYNC_APP_STATE }));
 };

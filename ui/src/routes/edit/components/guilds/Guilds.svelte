@@ -1,13 +1,20 @@
 <script lang="ts">
-	import { palsData } from '$lib/data';
+	import { palsData, buildingsData } from '$lib/data';
 	import { getAppState, getSocketState, getModalState, getToastState } from '$states';
-	import { Tooltip, TooltipButton } from '$components/ui';
-	import { type Pal, MessageType } from '$types';
-	import { staticIcons } from '$lib/constants';
+	import { List, Tooltip, TooltipButton } from '$components/ui';
+	import {
+		type ItemContainer,
+		type Pal,
+		type ItemContainerSlot,
+		MessageType,
+		EntryState,
+		BuildingTypeA
+	} from '$types';
+	import { ASSET_DATA_PATH, staticIcons } from '$lib/constants';
 	import { Ambulance, X, ReplaceAll, Plus, Trash, Bandage } from 'lucide-svelte';
-	import { PalBadge } from '$components';
+	import { ItemBadge, PalBadge } from '$components';
 	import { PalSelectModal, NumberInputModal } from '$components/modals';
-	import { debounce, deepCopy, formatNickname } from '$utils';
+	import { assetLoader, debounce, deepCopy, formatNickname } from '$utils';
 
 	interface PalWithBaseId {
 		pal: Pal;
@@ -25,13 +32,15 @@
 	let searchQuery = $state('');
 	let currentPage = $state(1);
 	let filteredPals: PalWithBaseId[] = $state([]);
+	let activeTab: 'pals' | 'storage' = $state('pals');
+	let currentStorageContainer: (ItemContainer & { slots: ItemContainerSlot[] }) | undefined =
+		$state(undefined);
 
 	const playerGuild = $derived.by(() => {
 		if (appState.selectedPlayer?.guild_id) {
 			return appState.guilds[appState.selectedPlayer.guild_id];
 		}
 	});
-	$inspect(playerGuild);
 
 	const guildBases = $derived.by(() => {
 		if (playerGuild) {
@@ -63,6 +72,29 @@
 		if (!guildBases) return null;
 		const baseEntries = Object.entries(guildBases);
 		return baseEntries[currentPage - 1] || null;
+	});
+
+	const currentBaseStorageContainers = $derived.by(() => {
+		if (!currentBase) return null;
+		const [_, base] = currentBase;
+		return Object.values(base.storage_containers)
+			.filter(
+				(container) =>
+					container.slot_num !== 0 &&
+					!container.key.includes('TreasureBox') &&
+					!container.key.includes('PalEgg') &&
+					!container.key.includes('CommonDropItem')
+			)
+			.sort((a, b) => a.key.localeCompare(b.key));
+	});
+
+	const currentStorageContainerIcon = $derived.by(() => {
+		if (!currentStorageContainer) return null;
+		const building = buildingsData.buildings[currentStorageContainer.key];
+		if (building) {
+			return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/buildings/${building.icon}.png`);
+		}
+		return staticIcons.unknownIcon;
 	});
 
 	const currentPageItems = $derived.by(() => {
@@ -114,6 +146,7 @@
 		} else {
 			currentPage = totalPages;
 		}
+		currentStorageContainer = undefined;
 	}
 
 	function incrementPage() {
@@ -122,6 +155,7 @@
 		} else {
 			currentPage = 1;
 		}
+		currentStorageContainer = undefined;
 	}
 
 	function handlePalSelect(pal: Pal, event: MouseEvent) {
@@ -357,6 +391,26 @@
 			});
 		});
 	}
+
+	function handleSelectStorageContainer(item: any): void {
+		let containerSlots = [];
+		for (let i = 0; i < item.slot_num; i++) {
+			const slot = item.slots.find((slot: ItemContainerSlot) => slot.slot_index === i);
+			if (!slot) {
+				const emptySlot = {
+					static_id: 'None',
+					slot_index: i,
+					count: 0,
+					dynamic_item: undefined
+				};
+				containerSlots.push(emptySlot);
+			} else {
+				containerSlots.push(slot);
+			}
+		}
+		item.slots = containerSlots;
+		currentStorageContainer = item;
+	}
 </script>
 
 {#if appState.selectedPlayer}
@@ -414,6 +468,12 @@
 						</Tooltip>
 					{/if}
 				</div>
+				<button class="btn preset-filled-primary-500" onclick={() => (activeTab = 'pals')}>
+					Pals
+				</button>
+				<button class="btn preset-filled-primary-500" onclick={() => (activeTab = 'storage')}>
+					Storage
+				</button>
 			</div>
 
 			<!-- Right Content -->
@@ -431,7 +491,7 @@
 									? 'bg-primary-500 text-white'
 									: 'bg-surface-800 hover:bg-gray-300'}"
 								onclick={() => (currentPage = page)}
-								popupLabel={`Base ${Object.entries(guildBases)[page - 1]?.[0]}`}
+								popupLabel={`Base ${Object.entries(guildBases!)[page - 1]?.[0]}`}
 							>
 								{page}
 							</TooltipButton>
@@ -442,24 +502,110 @@
 						<img src={staticIcons.eIcon} alt="Next" class="h-10 w-10" />
 					</button>
 				</div>
-
-				<div class="overflow-hidden">
-					<div class="grid grid-cols-6 gap-4 p-4">
-						{#each currentPageItems as item (item.pal.instance_id)}
-							{#if item.pal.character_id !== 'None' || !searchQuery}
-								<PalBadge
-									bind:pal={item.pal}
-									bind:selected={selectedPals}
-									onSelect={handlePalSelect}
-									onDelete={() => handleDeletePal(currentBase![0], item.pal)}
-									onAdd={() => handleAddPal(currentBase![0], item.pal.storage_slot)}
-									onClone={() => handleClonePal(item)}
-									onMove={() => {}}
-								/>
-							{/if}
-						{/each}
+				{#if activeTab == 'pals'}
+					<div class="overflow-hidden">
+						<div class="grid grid-cols-6 gap-4 p-4">
+							{#each currentPageItems as item (item.pal.instance_id)}
+								{#if item.pal.character_id !== 'None' || !searchQuery}
+									<PalBadge
+										bind:pal={item.pal}
+										bind:selected={selectedPals}
+										onSelect={handlePalSelect}
+										onDelete={() => handleDeletePal(currentBase![0], item.pal)}
+										onAdd={() => handleAddPal(currentBase![0], item.pal.storage_slot)}
+										onClone={() => handleClonePal(item)}
+										onMove={() => {}}
+									/>
+								{/if}
+							{/each}
+						</div>
 					</div>
-				</div>
+				{:else if activeTab == 'storage'}
+					{#if currentBaseStorageContainers && currentBaseStorageContainers.length > 0}
+						<div class="flex space-x-4">
+							<List
+								items={currentBaseStorageContainers}
+								baseClass="w-1/4"
+								listClass="h-[800px]"
+								canSelect={false}
+								onselect={(item) => handleSelectStorageContainer(item)}
+							>
+								{#snippet listItem(item)}
+									{@const building = buildingsData.buildings[item.key]}
+									{#if building}
+										{@const buildingIcon = assetLoader.loadImage(
+											`${ASSET_DATA_PATH}/img/buildings/${building.icon}.png`
+										)}
+										<div class="grid grid-cols-[auto_1fr] gap-2">
+											<img
+												src={buildingIcon || staticIcons.unknownIcon}
+												alt={building.localized_name}
+												class="h-8 w-8"
+											/>
+											<span>{building.localized_name}</span>
+										</div>
+									{:else}
+										{item.key}
+									{/if}
+								{/snippet}
+								{#snippet listItemPopup(item)}
+									{@const building = buildingsData.buildings[item.key]}
+									{#if building}
+										<div class="flex flex-col">
+											<h4 class="h4">{building.localized_name}</h4>
+											<div class="grid w-full grid-cols-2 gap-2">
+												<span class="font-bold"> Available Slots: </span>
+												<span>{item.slot_num}</span>
+											</div>
+											<div class="grid w-full grid-cols-2 gap-2">
+												<span class="font-bold"> Used Slots: </span>
+												<span>
+													{item?.slots?.filter((slot) => slot.static_id !== 'None').length}
+												</span>
+											</div>
+										</div>
+									{:else}
+										{item.key}
+									{/if}
+								{/snippet}
+							</List>
+							<div class="max-h-[800px] overflow-y-auto">
+								{#if currentStorageContainer}
+									{@const building = buildingsData.buildings[currentStorageContainer.key]}
+									{@const itemGroup = building?.type_a == BuildingTypeA.Food ? 'Food' : 'Common'}
+									<div class="flex items-start">
+										<div class="grid grid-cols-6 gap-2">
+											{#each Object.values(currentStorageContainer.slots) as _, index}
+												<ItemBadge
+													bind:slot={currentStorageContainer.slots[index]}
+													{itemGroup}
+													onUpdate={() => {
+														currentStorageContainer!.state = EntryState.MODIFIED;
+													}}
+												/>
+											{/each}
+										</div>
+										{#if currentStorageContainerIcon}
+											<img
+												src={currentStorageContainerIcon}
+												alt="Storage Container Icon"
+												class="ml-8 h-64 w-64"
+											/>
+										{/if}
+									</div>
+								{:else}
+									<div class="flex w-full items-center justify-center">
+										<h2 class="h2">Select a Storage Container</h2>
+									</div>
+								{/if}
+							</div>
+						</div>
+					{:else}
+						<div class="flex w-full items-center justify-center">
+							<h2 class="h2">No Storage Containers</h2>
+						</div>
+					{/if}
+				{/if}
 			</div>
 		</div>
 	{/if}

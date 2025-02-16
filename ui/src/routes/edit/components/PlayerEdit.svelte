@@ -31,46 +31,31 @@
 	const toast = getToastState();
 	const modal = getModalState();
 
-	let commonContainer: ItemContainer = $state({ id: '', type: '', slots: [] });
-	let essentialContainer: ItemContainer = $state({ id: '', type: '', slots: [] });
-	let weaponLoadOutContainer: ItemContainer = $state({ id: '', type: '', slots: [] });
-	let playerEquipmentArmorContainer: ItemContainer = $state({ id: '', type: '', slots: [] });
-	let foodEquipContainer: ItemContainer = $state({ id: '', type: '', slots: [] });
-	let headGear: ItemContainerSlot = $state({
+	const defaultItem = {
+		id: '',
+		type: '',
+		slots: [],
+		key: '',
+		slot_num: 0
+	};
+	const defaultItemContainerSlot = {
 		id: '',
 		static_id: '',
 		slot_index: 0,
 		type: '',
 		count: 0
-	});
-	let bodyGear: ItemContainerSlot = $state({
-		id: '',
-		static_id: '',
-		slot_index: 0,
-		type: '',
-		count: 0
-	});
-	let shieldGear: ItemContainerSlot = $state({
-		id: '',
-		static_id: '',
-		slot_index: 0,
-		type: '',
-		count: 0
-	});
-	let gliderGear: ItemContainerSlot = $state({
-		id: '',
-		static_id: '',
-		slot_index: 0,
-		type: '',
-		count: 0
-	});
-	let sphereModule: ItemContainerSlot = $state({
-		id: '',
-		static_id: '',
-		slot_index: 0,
-		type: '',
-		count: 0
-	});
+	};
+
+	let commonContainer: ItemContainer = $state(defaultItem);
+	let essentialContainer: ItemContainer = $state(defaultItem);
+	let weaponLoadOutContainer: ItemContainer = $state(defaultItem);
+	let playerEquipmentArmorContainer: ItemContainer = $state(defaultItem);
+	let foodEquipContainer: ItemContainer = $state(defaultItem);
+	let headGear: ItemContainerSlot = $state(defaultItemContainerSlot);
+	let bodyGear: ItemContainerSlot = $state(defaultItemContainerSlot);
+	let shieldGear: ItemContainerSlot = $state(defaultItemContainerSlot);
+	let gliderGear: ItemContainerSlot = $state(defaultItemContainerSlot);
+	let sphereModule: ItemContainerSlot = $state(defaultItemContainerSlot);
 	let accessoryGear: ItemContainerSlot[] = $state([]);
 	let group = $state('inventory');
 	let sideBarExpanded: string[] = $state(['stats']);

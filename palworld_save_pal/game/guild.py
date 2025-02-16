@@ -2,7 +2,7 @@ from typing import Any, Dict, List, Optional
 from uuid import UUID
 from pydantic import BaseModel, Field, PrivateAttr, computed_field
 
-from palworld_save_pal.game.base import Base
+from palworld_save_pal.game.base import Base, BaseDTO
 from palworld_save_pal.game.pal import PalDTO
 from palworld_save_pal.game.pal_objects import PalObjects
 from palworld_save_pal.utils.uuid import are_equal_uuids, is_empty_uuid
@@ -114,3 +114,7 @@ class Guild(BaseModel):
     def add_base(self, base: Base):
         self.bases[base.id] = base
         logger.debug("Added base %s to guild %s", base.id, self.id)
+
+    def update_from(self, baseDTO: BaseDTO):
+        base = next(b for b in self.bases.values() if are_equal_uuids(b.id, baseDTO.id))
+        base.update_from(baseDTO)

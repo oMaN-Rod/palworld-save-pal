@@ -1,4 +1,5 @@
 import { activeSkillsData } from './activeSkills.svelte';
+import { buildingsData } from './buildings.svelte';
 import { elementsData } from './elements.svelte';
 import { expData } from './exp.svelte';
 import { itemsData } from './items.svelte';
@@ -13,6 +14,7 @@ export * from './stats';
 
 export {
 	activeSkillsData,
+	buildingsData,
 	elementsData,
 	expData,
 	itemsData,

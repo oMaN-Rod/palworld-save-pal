@@ -5,6 +5,7 @@ from uuid import UUID
 
 from palworld_save_pal.editor.preset_profile import PresetProfile
 from palworld_save_pal.editor.settings import SettingsDTO
+from palworld_save_pal.game.base import BaseDTO
 from palworld_save_pal.game.pal import PalDTO
 from palworld_save_pal.game.player import PlayerDTO
 
@@ -27,6 +28,7 @@ class MessageType(str, Enum):
 
     # Game Data Retrieval
     GET_ACTIVE_SKILLS = "get_active_skills"
+    GET_BUILDINGS = "get_buildings"
     GET_ELEMENTS = "get_elements"
     GET_EXP_DATA = "get_exp_data"
     GET_GUILDS = "get_guilds"
@@ -128,6 +130,7 @@ class DownloadSaveFileMessage(BaseMessage):
 class UpdateSaveFileData(BaseModel):
     modified_pals: Optional[Dict[UUID, PalDTO]] = None
     modified_players: Optional[Dict[UUID, PlayerDTO]] = None
+    modified_guilds: Optional[Dict[UUID, BaseDTO]] = None
 
 
 class UpdateSaveFileMessage(BaseMessage):
@@ -255,3 +258,7 @@ class HealAllPalData(BaseModel):
 class HealAllPalsMessage(BaseMessage):
     type: str = MessageType.HEAL_ALL_PALS.value
     data: HealAllPalData
+
+
+class GetBuildingsMessage(BaseModel):
+    type: str = MessageType.GET_BUILDINGS.value

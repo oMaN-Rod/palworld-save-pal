@@ -38,7 +38,8 @@ export enum MessageType {
 	NO_FILE_SELECTED = 'no_file_selected',
 	SELECT_GAMEPASS_SAVE = 'select_gamepass_save',
 	GET_SAVE_TYPE = 'get_save_type',
-	GET_WORK_SUITABILITY = 'get_work_suitability'
+	GET_WORK_SUITABILITY = 'get_work_suitability',
+	GET_BUILDINGS = 'get_buildings'
 }
 
 interface UpdateSaveFileData {

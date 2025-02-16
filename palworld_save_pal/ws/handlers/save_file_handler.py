@@ -27,6 +27,9 @@ async def update_save_file_handler(message: UpdateSaveFileMessage, ws: WebSocket
     modified_players = (
         message.data.modified_players if message.data.modified_players else None
     )
+    modified_guilds = (
+        message.data.modified_guilds if message.data.modified_guilds else None
+    )
     app_state = get_app_state()
     save_file = app_state.save_file
 
@@ -37,6 +40,8 @@ async def update_save_file_handler(message: UpdateSaveFileMessage, ws: WebSocket
         await save_file.update_pals(modified_pals, ws_callback)
     if modified_players:
         await save_file.update_players(modified_players, ws_callback)
+    if modified_guilds:
+        await save_file.update_guilds(modified_guilds, ws_callback)
 
     app_state.players = save_file.get_players()
     response = build_response(MessageType.UPDATE_SAVE_FILE, "Changes saved")

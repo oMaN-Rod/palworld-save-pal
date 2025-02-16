@@ -102,6 +102,13 @@ export type Base = {
 	pals: Record<string, Pal>;
 	container_id: string;
 	slot_count: number;
+	storage_containers: Record<string, ItemContainer>;
+	state: EntryState;
+};
+
+export type BaseDTO = {
+	id: string;
+	storage_containers: Record<string, ItemContainer>;
 };
 
 export type SaveFileType = 'gamepass' | 'steam';
@@ -208,6 +215,9 @@ export interface ItemContainer {
 	id: string;
 	type: string;
 	slots: ItemContainerSlot[];
+	key: string;
+	slot_num: number;
+	state?: EntryState;
 }
 
 export interface PresetProfile {
@@ -533,6 +543,62 @@ export type Element = {
 	fruit_icon: string;
 	white_icon: string;
 	localized_name: string;
+};
+
+export enum BuildingTypeA {
+	Product = 'Product',
+	Pal = 'Pal',
+	Storage = 'Storage',
+	Food = 'Food',
+	Infrastructure = 'Infrastructure',
+	Light = 'Light',
+	Foundation = 'Foundation',
+	Defense = 'Defense',
+	Other = 'Other',
+	Furniture = 'Furniture',
+	Dismantle = 'Dismantle',
+	EPalBuildObjectTypeA_MAX = 'EPalBuildObjectTypeA_MAX'
+}
+
+export enum BuildingTypeB {
+	Prod_Craft = 'Prod_Craft',
+	Prod_Resource = 'Prod_Resource',
+	Prod_Furnace = 'Prod_Furnace',
+	Prod_Medicine = 'Prod_Medicine',
+	Pal_Capture = 'Pal_Capture',
+	Pal_Breed = 'Pal_Breed',
+	Pal_Modify = 'Pal_Modify',
+	Infra_Medical = 'Infra_Medical',
+	Infra_Storage = 'Infra_Storage',
+	Infra_Trade = 'Infra_Trade',
+	Infra_GeneratePower = 'Infra_GeneratePower',
+	Infra_Defense = 'Infra_Defense',
+	Infra_Environment = 'Infra_Environment',
+	Food_Basic = 'Food_Basic',
+	Food_Agriculture = 'Food_Agriculture',
+	Food_Cooking = 'Food_Cooking',
+	Food_Livestock = 'Food_Livestock',
+	Found_Basic = 'Found_Basic',
+	Found_House = 'Found_House',
+	Other = 'Other',
+	EPalBuildObjectTypeB_MAX = 'EPalBuildObjectTypeB_MAX'
+}
+
+export type Building = {
+	localized_name: string;
+	type_a: BuildingTypeA;
+	type_b: BuildingTypeB;
+	rank: number;
+	required_work_amount: number;
+	required_energy_type: string;
+	consume_energy_speed: number;
+	materials: { id: string; count: number }[];
+	material_type: string;
+	material_sub_type: string;
+	hp: number;
+	defense: number;
+	deterioration_damage: number;
+	icon: string;
 };
 
 export enum EntryState {
