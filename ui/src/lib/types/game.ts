@@ -222,13 +222,17 @@ export interface ItemContainer {
 
 export interface PresetProfile {
 	name: string;
-	type: 'inventory' | 'active_skills' | 'passive_skills';
+	type: 'inventory' | 'active_skills' | 'passive_skills' | 'storage';
 	skills?: string[];
 	common_container?: ItemContainerSlot[];
 	essential_container?: ItemContainerSlot[];
 	weapon_load_out_container?: ItemContainerSlot[];
 	player_equipment_armor_container?: ItemContainerSlot[];
 	food_equip_container?: ItemContainerSlot[];
+	storage_container?: {
+		key: string;
+		slots: ItemContainerSlot[];
+	};
 }
 
 // Frontend types

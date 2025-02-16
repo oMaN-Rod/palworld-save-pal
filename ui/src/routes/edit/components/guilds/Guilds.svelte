@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { palsData, buildingsData } from '$lib/data';
+	import { palsData, buildingsData, itemsData } from '$lib/data';
 	import { getAppState, getSocketState, getModalState, getToastState } from '$states';
 	import { List, Tooltip, TooltipButton } from '$components/ui';
 	import {
@@ -12,7 +12,7 @@
 	} from '$types';
 	import { ASSET_DATA_PATH, staticIcons } from '$lib/constants';
 	import { Ambulance, X, ReplaceAll, Plus, Trash, Bandage } from 'lucide-svelte';
-	import { ItemBadge, PalBadge } from '$components';
+	import { ItemBadge, PalBadge, StoragePresets } from '$components';
 	import { PalSelectModal, NumberInputModal } from '$components/modals';
 	import { assetLoader, debounce, deepCopy, formatNickname } from '$utils';
 
@@ -411,6 +411,58 @@
 		item.slots = containerSlots;
 		currentStorageContainer = item;
 	}
+
+	async function copyItem(slot: ItemContainerSlot) {
+		if (slot.static_id !== 'None') {
+			appState.clipboardItem = slot;
+			let itemName = slot.static_id;
+			const itemData = itemsData.items[slot.static_id];
+			if (itemData) {
+				itemName = itemData.info.localized_name;
+			}
+			toast.add(`${itemName} copied to clipboard`);
+		} else {
+			appState.clipboardItem = null;
+			toast.add('Clipboard cleared');
+		}
+	}
+
+	function clearItem(slot: ItemContainerSlot) {
+		slot.static_id = 'None';
+		slot.count = 0;
+		slot.dynamic_item = undefined;
+		currentStorageContainer!.state = EntryState.MODIFIED;
+	}
+
+	function pasteItem(slot: ItemContainerSlot) {
+		if (appState.clipboardItem) {
+			slot.static_id = appState.clipboardItem.static_id;
+			slot.count = appState.clipboardItem.count;
+			slot.dynamic_item = appState.clipboardItem.dynamic_item;
+			if (slot.dynamic_item) {
+				slot.dynamic_item.local_id = '00000000-0000-0000-0000-000000000000';
+			}
+			if (appState.selectedPlayer) {
+				appState.selectedPlayer.state = EntryState.MODIFIED;
+			}
+		} else {
+			clearItem(slot);
+		}
+	}
+
+	async function handleCopyPaste(event: MouseEvent, slot: ItemContainerSlot, canPaste = true) {
+		if (event.button === 0) return;
+		event.preventDefault();
+		if (event.ctrlKey && event.button === 2 && canPaste) {
+			pasteItem(slot);
+		} else if (event.ctrlKey && event.button === 1) {
+			clearItem(slot);
+		} else if (!event.ctrlKey && event.button === 2) {
+			await copyItem(slot);
+		} else {
+			toast.add('Cannot paste here (yet™)', undefined, 'warning');
+		}
+	}
 </script>
 
 {#if appState.selectedPlayer}
@@ -573,7 +625,7 @@
 								{#if currentStorageContainer}
 									{@const building = buildingsData.buildings[currentStorageContainer.key]}
 									{@const itemGroup = building?.type_a == BuildingTypeA.Food ? 'Food' : 'Common'}
-									<div class="flex items-start">
+									<div class="flex items-start space-x-4">
 										<div class="grid grid-cols-6 gap-2">
 											{#each Object.values(currentStorageContainer.slots) as _, index}
 												<ItemBadge
@@ -582,15 +634,25 @@
 													onUpdate={() => {
 														currentStorageContainer!.state = EntryState.MODIFIED;
 													}}
+													onCopyPaste={(event) =>
+														handleCopyPaste(event, currentStorageContainer!.slots[index], false)}
 												/>
 											{/each}
 										</div>
 										{#if currentStorageContainerIcon}
-											<img
-												src={currentStorageContainerIcon}
-												alt="Storage Container Icon"
-												class="ml-8 h-64 w-64"
-											/>
+											<div class="flex flex-col">
+												<img
+													src={currentStorageContainerIcon}
+													alt="Storage Container Icon"
+													class="ml-8 h-64 w-64"
+												/>
+												<StoragePresets
+													container={currentStorageContainer}
+													onUpdate={() => {
+														currentStorageContainer!.state = EntryState.MODIFIED;
+													}}
+												/>
+											</div>
 										{/if}
 									</div>
 								{:else}

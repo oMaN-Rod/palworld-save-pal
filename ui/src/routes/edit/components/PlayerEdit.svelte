@@ -176,7 +176,7 @@
 		if (slot.static_id !== 'None') {
 			appState.clipboardItem = slot;
 			let itemName = slot.static_id;
-			const itemData = await itemsData.searchItems(slot.static_id);
+			const itemData = itemsData.items[slot.static_id];
 			if (itemData) {
 				itemName = itemData.info.localized_name;
 			}

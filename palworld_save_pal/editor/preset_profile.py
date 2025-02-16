@@ -4,6 +4,11 @@ from pydantic import BaseModel
 from palworld_save_pal.game.item_container_slot import ItemContainerSlot
 
 
+class StorageContainerPreset(BaseModel):
+    key: str
+    slots: List[ItemContainerSlot]
+
+
 class PresetProfile(BaseModel):
     name: str
     type: str
@@ -13,3 +18,4 @@ class PresetProfile(BaseModel):
     weapon_load_out_container: Optional[List[ItemContainerSlot]] = None
     player_equipment_armor_container: Optional[List[ItemContainerSlot]] = None
     food_equip_container: Optional[List[ItemContainerSlot]] = None
+    storage_container: Optional[StorageContainerPreset] = None

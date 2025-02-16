@@ -18,6 +18,7 @@ import PlayerPresets from './player-presets/PlayerPresets.svelte';
 import PlayerStats from './player-stats/PlayerStats.svelte';
 import Souls from './souls/Souls.svelte';
 import Spinner from './spinner/Spinner.svelte';
+import StoragePresets from './storage-presets/StoragePresets.svelte';
 import Talents from './talents/Talents.svelte';
 import Toast from './toast/Toast.svelte';
 
@@ -42,6 +43,7 @@ export {
 	Souls,
 	Spinner,
 	StatsBadges,
+	StoragePresets,
 	Talents,
 	Toast,
 	WorkSuitabilities
