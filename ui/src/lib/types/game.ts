@@ -220,9 +220,30 @@ export interface ItemContainer {
 	state?: EntryState;
 }
 
+export type PalPreset = {
+	is_lucky: boolean;
+	is_boss: boolean;
+	gender: PalGender;
+	rank_hp: number;
+	rank_attack: number;
+	rank_defense: number;
+	rank_craftspeed: number;
+	talent_hp: number;
+	talent_shot: number;
+	talent_defense: number;
+	rank: number;
+	level: number;
+	learned_skills: string[];
+	active_skills: string[];
+	passive_skills: string[];
+	work_suitability: Record<WorkSuitability, number>;
+	sanity: number;
+	exp: number;
+};
+
 export interface PresetProfile {
 	name: string;
-	type: 'inventory' | 'active_skills' | 'passive_skills' | 'storage';
+	type: 'inventory' | 'active_skills' | 'passive_skills' | 'storage' | 'pal_preset';
 	skills?: string[];
 	common_container?: ItemContainerSlot[];
 	essential_container?: ItemContainerSlot[];
@@ -233,6 +254,7 @@ export interface PresetProfile {
 		key: string;
 		slots: ItemContainerSlot[];
 	};
+	pal_preset?: PalPreset;
 }
 
 // Frontend types

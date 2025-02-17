@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { TextInputModal } from '$components';
 	import { CornerDotButton, Progress, Tooltip } from '$components/ui';
-	import { type ElementType, EntryState, type Pal, PalGender } from '$types';
+	import { type ElementType, EntryState, type Pal, PalGender, type PresetProfile } from '$types';
 	import { ASSET_DATA_PATH, MAX_LEVEL, staticIcons } from '$lib/constants';
-	import { palsData, elementsData, expData } from '$lib/data';
+	import { palsData, elementsData, expData, presetsData } from '$lib/data';
 	import { cn } from '$theme';
 	import { getAppState, getModalState, getToastState } from '$states';
 	import { Rating } from '@skeletonlabs/skeleton-svelte';
@@ -150,6 +150,42 @@
 	$effect(() => {
 		calcPalLevelProgress();
 	});
+
+	async function handleSavePreset() {
+		// @ts-ignore
+		const result = await modal.showModal<string>(TextInputModal, {
+			title: 'Add Pal preset',
+			value: ''
+		});
+		if (!result) return;
+
+		const newPreset = {
+			name: result,
+			type: 'pal_preset',
+			pal_preset: {
+				is_lucky: pal.is_lucky,
+				is_boss: pal.is_boss,
+				gender: pal.gender,
+				rank_hp: pal.rank_hp,
+				rank_attack: pal.rank_attack,
+				rank_defense: pal.rank_defense,
+				rank_craftspeed: pal.rank_craftspeed,
+				talent_hp: pal.talent_hp,
+				talent_shot: pal.talent_shot,
+				talent_defense: pal.talent_defense,
+				rank: pal.rank,
+				level: pal.level,
+				learned_skills: pal.learned_skills,
+				active_skills: pal.active_skills,
+				passive_skills: pal.passive_skills,
+				work_suitability: pal.work_suitability,
+				sanity: pal.sanity,
+				exp: pal.exp
+			}
+		} as PresetProfile;
+
+		await presetsData.addPresetProfile(newPreset);
+	}
 </script>
 
 {#if pal}
@@ -198,20 +234,17 @@
 						{pal.nickname || pal.name}
 					</h6>
 					{#if showActions}
-						<Tooltip position="bottom">
+						<Tooltip position="bottom" label="Edit nickname">
 							<CornerDotButton label="Edit" onClick={handleEditNickname} />
-							{#snippet popup()}
-								<span>Edit nickname</span>
-							{/snippet}
 						</Tooltip>
-						<Tooltip position="bottom">
+						<Tooltip position="bottom" label="Max out Pal stats 💉💪">
 							<CornerDotButton
 								label="Max"
 								onClick={() => handleMaxOutPal(pal, appState.selectedPlayer!)}
 							/>
-							{#snippet popup()}
-								<span>Max out Pal stats 💉💪</span>
-							{/snippet}
+						</Tooltip>
+						<Tooltip position="bottom" label="Save as preset">
+							<CornerDotButton label="Save" onClick={handleSavePreset} />
 						</Tooltip>
 					{/if}
 

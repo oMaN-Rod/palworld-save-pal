@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { palsData, buildingsData, itemsData } from '$lib/data';
+	import { palsData, buildingsData, itemsData, presetsData } from '$lib/data';
 	import { getAppState, getSocketState, getModalState, getToastState } from '$states';
 	import { List, Tooltip, TooltipButton } from '$components/ui';
 	import {
@@ -11,9 +11,9 @@
 		BuildingTypeA
 	} from '$types';
 	import { ASSET_DATA_PATH, staticIcons } from '$lib/constants';
-	import { Ambulance, X, ReplaceAll, Plus, Trash, Bandage } from 'lucide-svelte';
+	import { Ambulance, X, ReplaceAll, Plus, Trash, Bandage, Play } from 'lucide-svelte';
 	import { ItemBadge, PalBadge, StoragePresets } from '$components';
-	import { PalSelectModal, NumberInputModal } from '$components/modals';
+	import { PalSelectModal, NumberInputModal, PalPresetSelectModal } from '$components/modals';
 	import { assetLoader, debounce, deepCopy, formatNickname } from '$utils';
 	import { cn } from '$theme';
 
@@ -464,6 +464,42 @@
 			toast.add('Cannot paste here (yet™)', undefined, 'warning');
 		}
 	}
+
+	async function handleSelectPreset() {
+		// @ts-ignore
+		const result = await modal.showModal<string>(PalPresetSelectModal, {
+			title: 'Select preset',
+			value: ''
+		});
+		if (!result) return;
+
+		const presetProfile = presetsData.presetProfiles[result];
+
+		selectedPals.forEach((id) => {
+			const pal = Object.values(currentBase![1].pals).find((p) => p.instance_id === id);
+			if (pal) {
+				pal.is_lucky = presetProfile.pal_preset!.is_lucky;
+				pal.is_boss = presetProfile.pal_preset!.is_boss;
+				pal.gender = presetProfile.pal_preset!.gender;
+				pal.rank_hp = presetProfile.pal_preset!.rank_hp;
+				pal.rank_attack = presetProfile.pal_preset!.rank_attack;
+				pal.rank_defense = presetProfile.pal_preset!.rank_defense;
+				pal.rank_craftspeed = presetProfile.pal_preset!.rank_craftspeed;
+				pal.talent_hp = presetProfile.pal_preset!.talent_hp;
+				pal.talent_shot = presetProfile.pal_preset!.talent_shot;
+				pal.talent_defense = presetProfile.pal_preset!.talent_defense;
+				pal.rank = presetProfile.pal_preset!.rank;
+				pal.level = presetProfile.pal_preset!.level;
+				pal.learned_skills = presetProfile.pal_preset!.learned_skills;
+				pal.active_skills = presetProfile.pal_preset!.active_skills;
+				pal.passive_skills = presetProfile.pal_preset!.passive_skills;
+				pal.work_suitability = presetProfile.pal_preset!.work_suitability;
+				pal.sanity = presetProfile.pal_preset!.sanity;
+				pal.exp = presetProfile.pal_preset!.exp;
+				pal.state = EntryState.MODIFIED;
+			}
+		});
+	}
 </script>
 
 {#if appState.selectedPlayer}
@@ -501,6 +537,11 @@
 						</button>
 					</Tooltip>
 					{#if selectedPals.length > 0}
+						<Tooltip label="Apply preset to selected pal(s)">
+							<button class="btn hover:preset-tonal-secondary p-2" onclick={handleSelectPreset}>
+								<Play />
+							</button>
+						</Tooltip>
 						<Tooltip label="Heal selected pal(s)">
 							<button class="btn hover:preset-tonal-secondary p-2" onclick={healSelectedPals}>
 								<Ambulance />
