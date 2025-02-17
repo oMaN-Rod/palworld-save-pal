@@ -22,5 +22,9 @@
 </script>
 
 <div class="w-full" {...additionalProps}>
-	<Combobox options={selectOptions} bind:value={appState.selectedPlayerUid} />
+	<Combobox
+		options={selectOptions}
+		bind:value={appState.selectedPlayerUid}
+		placeholder="Select Player"
+	/>
 </div>
