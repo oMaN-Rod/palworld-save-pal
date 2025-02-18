@@ -110,21 +110,14 @@ def skip_encode(writer: FArchiveWriter, property_type: str, properties: dict) ->
         )
 
 
-CUSTOM_PROPERTIES = {
-    k: v for k, v in PALWORLD_CUSTOM_PROPERTIES.items() if k not in DISABLED_PROPERTIES
-}
+CUSTOM_PROPERTIES = {k: v for k, v in PALWORLD_CUSTOM_PROPERTIES.items()}
 CUSTOM_PROPERTIES[".worldSaveData.FoliageGridSaveDataMap"] = (skip_decode, skip_encode)
 CUSTOM_PROPERTIES[".worldSaveData.MapObjectSpawnerInStageSaveData"] = (
     skip_decode,
     skip_encode,
 )
-CUSTOM_PROPERTIES[".worldSaveData.WorkSaveData"] = (skip_decode, skip_encode)
 CUSTOM_PROPERTIES[".worldSaveData.DungeonSaveData"] = (skip_decode, skip_encode)
 CUSTOM_PROPERTIES[".worldSaveData.EnemyCampSaveData"] = (skip_decode, skip_encode)
-CUSTOM_PROPERTIES[".worldSaveData.CharacterParameterStorageSaveData"] = (
-    skip_decode,
-    skip_encode,
-)
 CUSTOM_PROPERTIES[".worldSaveData.InvaderSaveData"] = (skip_decode, skip_encode)
 CUSTOM_PROPERTIES[".worldSaveData.DungeonPointMarkerSaveData"] = (
     skip_decode,
