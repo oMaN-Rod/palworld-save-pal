@@ -719,13 +719,19 @@ class PalObjects:
                 {
                     "slot_index": container_slot.slot_index,
                     "count": container_slot.count,
-                    "static_id": container_slot.static_id,
-                    "corruption_progress_value": 0.0,
-                    "local_id": (
-                        PalObjects.EMPTY_UUID
-                        if not container_slot.dynamic_item
-                        else container_slot.dynamic_item.local_id
-                    ),
+                    "item": {
+                        "static_id": container_slot.static_id,
+                        "dynamic_id": {
+                            "created_world_id": PalObjects.EMPTY_UUID,
+                            "local_id_in_created_world": (
+                                PalObjects.EMPTY_UUID
+                                if not container_slot.dynamic_item
+                                else container_slot.dynamic_item.local_id
+                            ),
+                            "static_id": container_slot.static_id,
+                        },
+                    },
+                    "trailing_bytes_length": 16,
                 },
                 custom_type=".worldSaveData.ItemContainerSaveData.Value.Slots.Slots.RawData",
             ),

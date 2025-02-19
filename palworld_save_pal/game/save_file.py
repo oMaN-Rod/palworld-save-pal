@@ -26,10 +26,6 @@ from palworld_save_pal.game.pal_objects import GroupType, PalObjects
 from palworld_save_pal.utils.logging_config import create_logger
 from palworld_save_pal.game.player import Player, PlayerDTO
 from palworld_save_pal.utils.uuid import are_equal_uuids
-from palworld_save_pal.game.item_container_slot import (
-    encode as encode_item_container_slot,
-    decode as decode_item_container_slot,
-)
 
 logger = create_logger(__name__)
 
@@ -126,11 +122,6 @@ CUSTOM_PROPERTIES[".worldSaveData.DungeonPointMarkerSaveData"] = (
 CUSTOM_PROPERTIES[".worldSaveData.GameTimeSaveData"] = (skip_decode, skip_encode)
 CUSTOM_PROPERTIES[".worldSaveData.OilrigSaveData"] = (skip_decode, skip_encode)
 CUSTOM_PROPERTIES[".worldSaveData.SupplySaveData"] = (skip_decode, skip_encode)
-
-CUSTOM_PROPERTIES[".worldSaveData.ItemContainerSaveData.Value.Slots.Slots.RawData"] = (
-    decode_item_container_slot,
-    encode_item_container_slot,
-)
 
 
 class SaveType(int, Enum):

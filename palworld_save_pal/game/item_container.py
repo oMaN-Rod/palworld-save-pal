@@ -132,11 +132,10 @@ class ItemContainer(BaseModel):
             raw_data = PalObjects.get_value(slot["RawData"])
             slot_index = PalObjects.get_nested(raw_data, "slot_index")
             count = PalObjects.get_nested(raw_data, "count")
-            static_id = PalObjects.get_nested(raw_data, "static_id")
+            static_id = PalObjects.get_nested(raw_data, "item", "static_id")
             local_id = PalObjects.as_uuid(
                 PalObjects.get_nested(
-                    raw_data,
-                    "local_id",
+                    raw_data, "item" "dynamic_id", "local_id_in_created_world"
                 )
             )
             dynamic_item = None
