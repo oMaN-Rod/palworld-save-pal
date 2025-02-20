@@ -61,7 +61,9 @@
 			style="border-left-color: {element?.color}"
 		>
 			<div class="flex w-full">
-				<span class="flex-grow p-2 text-left text-lg">{activeSkill?.localized_name}</span>
+				<span class="flex-grow p-2 text-left text-sm 2xl:text-base"
+					>{activeSkill?.localized_name}</span
+				>
 				<div
 					class="text-on-surface relative z-10 flex items-center p-2"
 					style="background-color: {element?.color}"
@@ -73,7 +75,7 @@
 							class="h-6 w-6 justify-start"
 						/>
 					{/if}
-					<span class="ml-2 text-lg font-bold"
+					<span class="ml-2 text-sm font-bold 2xl:text-base"
 						>{activeSkill?.details.power == 0 ? 'NA' : activeSkill?.details.power}</span
 					>
 				</div>

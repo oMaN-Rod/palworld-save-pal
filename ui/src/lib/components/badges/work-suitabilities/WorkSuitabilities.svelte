@@ -111,15 +111,20 @@
 					onclick={() => handleEditSuitability(ws, value)}
 				>
 					<div class="flex w-full items-center">
-						<img src={iconPath} alt="{suitability} icon" class="ml-2 h-6 w-6" />
-						<span class="p-2 text-lg font-bold">{value}</span>
+						<img src={iconPath} alt="{suitability} icon" class="ml-2 h-4 w-4 2xl:h-6 2xl:w-6" />
+						<span class="p-2 text-sm font-bold 2xl:text-lg">{value}</span>
 					</div>
 				</button>
 				{#snippet popup()}
-					<span class="flex-grow p-2 text-lg">
-						{workSuitabilityData.workSuitability[suitability].localized_name ??
-							getFormattedName(suitability)}
-					</span>
+					<div class="flex items-center space-x-2">
+						{#if value !== 0}
+							<span class="p-2 text-lg font-bold">Lvl {value}</span>
+						{/if}
+						<span class="text-lg">
+							{workSuitabilityData.workSuitability[suitability].localized_name ??
+								getFormattedName(suitability)}
+						</span>
+					</div>
 				{/snippet}
 			</Tooltip>
 		{/each}

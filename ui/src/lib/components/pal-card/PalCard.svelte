@@ -105,16 +105,16 @@
 								<span class="text-lg font-bold">{pal.level}</span>
 							</div>
 							<span class="text-lg font-bold">{pal.name}</span>
-							<div class="h-4 w-4 xl:h-6 xl:w-6">
+							<div class="h-4 w-4 2xl:h-6 2xl:w-6">
 								<img src={genderIcon} alt={pal.gender} />
 							</div>
 							{#if pal.is_boss}
-								<div class="h-4 w-4 xl:h-6 xl:w-6">
+								<div class="h-4 w-4 2xl:h-6 2xl:w-6">
 									<img src={staticIcons.alphaIcon} alt="Alpha" />
 								</div>
 							{/if}
 							{#if pal.is_predator}
-								<div class="h-4 w-4 xl:h-6 xl:w-6">
+								<div class="h-4 w-4 2xl:h-6 2xl:w-6">
 									<img
 										src={staticIcons.predatorIcon}
 										alt="Alpha"
@@ -124,21 +124,21 @@
 								</div>
 							{/if}
 							{#if pal.is_lucky}
-								<div class="h-4 w-4 xl:h-6 xl:w-6">✨</div>
+								<div class="h-4 w-4 2xl:h-6 2xl:w-6">✨</div>
 							{/if}
 						</div>
 						<HealthBadge
 							bind:pal
-							player={appState.selectedPlayer}
 							width="w-64"
 							showActions={false}
+							healthHeight="h-4 2xl:h-6"
 							stomachHeight="h-2"
 							showStomachLabel={false}
 						/>
 					</div>
 					<div class="flex flex-col">
 						<div class={cn('relative flex items-center justify-center ')}>
-							<img src={palIcon} alt={pal.name} class="xl:h-18 xl:w-18 h-16 w-16" />
+							<img src={palIcon} alt={pal.name} class="2xl:h-18 2xl:w-18 h-16 w-16" />
 						</div>
 					</div>
 				</div>
@@ -148,7 +148,7 @@
 				{/snippet}
 			</Tooltip>
 		{:else}
-			<div class="h-18"></div>
+			<div class="2xl:h-18 2xl:w-18 h-16 w-16"></div>
 		{/if}
 	</button>
 </ContextMenu>

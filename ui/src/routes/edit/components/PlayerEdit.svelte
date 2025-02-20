@@ -545,7 +545,7 @@
 						{/snippet}
 						{#snippet content()}
 							<Tabs.Panel value="inventory">
-								<div class="max-h-[500px] overflow-y-auto">
+								<div class="max-h-[500px] overflow-y-auto 2xl:max-h-[800px]">
 									<div class="grid grid-cols-6 gap-2">
 										{#each Object.values(commonContainer.slots) as _, index}
 											<ItemBadge
@@ -560,7 +560,7 @@
 								</div>
 							</Tabs.Panel>
 							<Tabs.Panel value="key_items">
-								<div class="max-h-[500px] overflow-y-auto">
+								<div class="max-h-[500px] overflow-y-auto 2xl:max-h-[800px]">
 									<div class="grid grid-cols-6 gap-2">
 										{#each Object.values(essentialContainer.slots) as _, index}
 											<ItemBadge

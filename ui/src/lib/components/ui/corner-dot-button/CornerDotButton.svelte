@@ -3,14 +3,16 @@
 
 	let {
 		onClick,
-		label = 'Edit',
+		label,
 		class: _class = '',
-		disabled = false
+		disabled = false,
+		children
 	} = $props<{
 		onClick: () => void;
-		label: string;
+		label?: string;
 		class?: string;
 		disabled?: boolean;
+		children?: any;
 	}>();
 </script>
 
@@ -22,8 +24,11 @@
 	onclick={onClick}
 	{disabled}
 >
-	<span class="relative z-10">{label}</span>
-	<span class="border-surface-700 absolute inset-0 rounded border"></span>
+	{#if label}
+		<span class="relative z-10">{label}</span>
+	{:else}
+		{@render children()}
+	{/if}
 	<span class="bg-surface-600 absolute left-0 top-0 h-0.5 w-0.5"></span>
 	<span class="bg-surface-600 absolute right-0 top-0 h-0.5 w-0.5"></span>
 	<span class="bg-surface-600 absolute bottom-0 left-0 h-0.5 w-0.5"></span>

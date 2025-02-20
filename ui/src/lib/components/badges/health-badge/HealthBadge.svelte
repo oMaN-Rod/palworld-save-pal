@@ -6,14 +6,12 @@
 
 	let {
 		pal = $bindable(),
-		player = $bindable(),
 		showActions = true,
 		showStomachLabel = true,
 		healthHeight = 'h-6',
 		stomachHeight = 'h-6'
 	}: {
 		pal: Pal | undefined;
-		player: Player | undefined;
 		width?: string;
 		showActions?: boolean;
 		showStomachLabel?: boolean;
