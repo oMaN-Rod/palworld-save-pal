@@ -1,13 +1,21 @@
 <script lang="ts">
-	import { TextInputModal } from '$components';
+	import { PresetConfigModal, TextInputModal } from '$components';
 	import { CornerDotButton, Progress, Tooltip } from '$components/ui';
-	import { type ElementType, EntryState, type Pal, PalGender, type PresetProfile } from '$types';
+	import {
+		defaultPresetConfig,
+		type ElementType,
+		EntryState,
+		type Pal,
+		PalGender,
+		type PalPresetConfig,
+		type PresetProfile
+	} from '$types';
 	import { ASSET_DATA_PATH, MAX_LEVEL, staticIcons } from '$lib/constants';
 	import { palsData, elementsData, expData, presetsData } from '$lib/data';
 	import { cn } from '$theme';
 	import { getAppState, getModalState, getToastState } from '$states';
 	import { Rating } from '@skeletonlabs/skeleton-svelte';
-	import { Minus, Plus } from 'lucide-svelte';
+	import { BicepsFlexed, Edit, Minus, Plus, Save } from 'lucide-svelte';
 	import { assetLoader, handleMaxOutPal, canBeBoss } from '$utils';
 
 	let { pal = $bindable(), showActions = true } = $props<{
@@ -153,34 +161,38 @@
 
 	async function handleSavePreset() {
 		// @ts-ignore
-		const result = await modal.showModal<string>(TextInputModal, {
-			title: 'Add Pal preset',
-			value: ''
+		const result = await modal.showModal(PresetConfigModal, {
+			config: defaultPresetConfig,
+			characterId: pal.name
 		});
 		if (!result) return;
 
+		const { name, config } = result as { name: string; config: PalPresetConfig };
+
 		const newPreset = {
-			name: result,
+			name: name,
 			type: 'pal_preset',
 			pal_preset: {
-				is_lucky: pal.is_lucky,
-				is_boss: pal.is_boss,
-				gender: pal.gender,
-				rank_hp: pal.rank_hp,
-				rank_attack: pal.rank_attack,
-				rank_defense: pal.rank_defense,
-				rank_craftspeed: pal.rank_craftspeed,
-				talent_hp: pal.talent_hp,
-				talent_shot: pal.talent_shot,
-				talent_defense: pal.talent_defense,
-				rank: pal.rank,
-				level: pal.level,
-				learned_skills: pal.learned_skills,
-				active_skills: pal.active_skills,
-				passive_skills: pal.passive_skills,
-				work_suitability: pal.work_suitability,
-				sanity: pal.sanity,
-				exp: pal.exp
+				lock: config.lock,
+				character_id: pal.character_id,
+				is_lucky: config.is_lucky ? pal.is_lucky : null,
+				is_boss: config.is_boss ? pal.is_boss : null,
+				gender: config.gender ? pal.gender : null,
+				rank_hp: config.rank_hp ? pal.rank_hp : null,
+				rank_attack: config.rank_attack ? pal.rank_attack : null,
+				rank_defense: config.rank_defense ? pal.rank_defense : null,
+				rank_craftspeed: config.rank_craftspeed ? pal.rank_craftspeed : null,
+				talent_hp: config.talent_hp ? pal.talent_hp : null,
+				talent_shot: config.talent_shot ? pal.talent_shot : null,
+				talent_defense: config.talent_defense ? pal.talent_defense : null,
+				rank: config.rank ? pal.rank : null,
+				level: config.level ? pal.level : null,
+				learned_skills: config.learned_skills ? pal.learned_skills : null,
+				active_skills: config.active_skills ? pal.active_skills : null,
+				passive_skills: config.passive_skills ? pal.passive_skills : null,
+				work_suitability: config.work_suitability ? pal.work_suitability : null,
+				sanity: config.sanity ? pal.sanity : null,
+				exp: config.exp ? pal.exp : null
 			}
 		} as PresetProfile;
 
@@ -229,105 +241,72 @@
 
 		<div class="grow">
 			<div class="flex flex-col">
-				<div class="flex flex-row items-center space-x-2">
+				<div class="flex flex-col items-start space-y-2 2xl:flex-row 2xl:space-x-2 2xl:space-y-0">
 					<h6 class="h6 grow">
 						{pal.nickname || pal.name}
 					</h6>
-					{#if showActions}
-						<Tooltip position="bottom" label="Edit nickname">
-							<CornerDotButton label="Edit" onClick={handleEditNickname} />
-						</Tooltip>
-						<Tooltip position="bottom" label="Max out Pal stats 💉💪">
-							<CornerDotButton
-								label="Max"
-								onClick={() => handleMaxOutPal(pal, appState.selectedPlayer!)}
-							/>
-						</Tooltip>
-						<Tooltip position="bottom" label="Save as preset">
-							<CornerDotButton label="Save" onClick={handleSavePreset} />
-						</Tooltip>
-					{/if}
+					<div class="flex space-x-2">
+						{#if showActions}
+							<Tooltip position="bottom" label="Edit nickname">
+								<CornerDotButton onClick={handleEditNickname} class="h-8 w-8 p-1">
+									<Edit />
+								</CornerDotButton>
+							</Tooltip>
+							<Tooltip position="bottom" label="Max out Pal stats 💉💪">
+								<CornerDotButton
+									onClick={() => handleMaxOutPal(pal, appState.selectedPlayer!)}
+									class="h-8 w-8 p-1"
+								>
+									<BicepsFlexed />
+								</CornerDotButton>
+							</Tooltip>
+							<Tooltip position="bottom" label="Save as preset">
+								<CornerDotButton onClick={handleSavePreset} class="h-8 w-8 p-1">
+									<Save />
+								</CornerDotButton>
+							</Tooltip>
+						{/if}
 
-					<Tooltip position="bottom">
-						<button
-							class="hover:ring-secondary-500 relative flex h-full w-auto items-center justify-center hover:ring"
-							onclick={handleEditGender}
-							disabled={!showActions}
-						>
-							<div class="h-8 w-8">
+						<Tooltip position="bottom" label="Toggle gender">
+							<CornerDotButton onClick={handleEditGender} class="h-8 w-8 p-1">
 								<img
 									src={assetLoader.loadImage(`${ASSET_DATA_PATH}/img/icons/${pal.gender}.png`)}
 									alt={pal.gender}
 								/>
-							</div>
-							<span class="bg-surface-600 absolute left-0 top-0 h-0.5 w-0.5"></span>
-							<span class="bg-surface-600 absolute right-0 top-0 h-0.5 w-0.5"></span>
-							<span class="bg-surface-600 absolute bottom-0 left-0 h-0.5 w-0.5"></span>
-							<span class="bg-surface-600 absolute bottom-0 right-0 h-0.5 w-0.5"></span>
-						</button>
-						{#snippet popup()}
-							<span>Toggle gender</span>
-						{/snippet}
-					</Tooltip>
-					<Tooltip position="bottom">
-						<button
-							class={cn(
-								'hover:ring-secondary-500 relative flex h-full w-auto items-center justify-center hover:ring',
-								pal.is_lucky && 'bg-secondary-500/25'
-							)}
-							onclick={handleEditLucky}
-							disabled={!showActions}
-						>
-							<div class="flex h-8 w-8 items-center justify-center">
+							</CornerDotButton>
+						</Tooltip>
+						<Tooltip position="bottom" label="Toggle Lucky">
+							<CornerDotButton
+								onClick={handleEditLucky}
+								class={cn('h-8 w-8 p-1', pal.is_lucky && 'bg-secondary-500/25')}
+								disabled={!showActions}
+							>
 								<img src={staticIcons.luckyIcon} alt="Lucky" class="pal-element-badge" />
-							</div>
-							<span class="bg-surface-600 absolute left-0 top-0 h-0.5 w-0.5"></span>
-							<span class="bg-surface-600 absolute right-0 top-0 h-0.5 w-0.5"></span>
-							<span class="bg-surface-600 absolute bottom-0 left-0 h-0.5 w-0.5"></span>
-							<span class="bg-surface-600 absolute bottom-0 right-0 h-0.5 w-0.5"></span>
-						</button>
-						{#snippet popup()}
-							<span>Toggle Lucky</span>
-						{/snippet}
-					</Tooltip>
-					<Tooltip position="bottom">
-						<button
-							class={cn(
-								'hover:ring-secondary-500 relative flex h-full w-auto items-center justify-center hover:ring',
-								pal.is_boss && 'bg-secondary-500/25'
-							)}
-							onclick={handleEditAlpha}
-							disabled={!showActions}
-						>
-							<div class="flex h-8 w-8 items-center justify-center">
+							</CornerDotButton>
+						</Tooltip>
+						<Tooltip position="bottom" label="Toggle Alpha">
+							<CornerDotButton
+								onClick={handleEditAlpha}
+								class={cn('h-8 w-8 p-1', pal.is_boss && 'bg-secondary-500/25')}
+								disabled={!showActions}
+							>
 								<img
 									src={staticIcons.alphaIcon}
 									alt="Alpha"
 									class="h-8 w-8"
 									style="width: 24px; height: 24px;"
 								/>
-							</div>
-							<span class="bg-surface-600 absolute left-0 top-0 h-0.5 w-0.5"></span>
-							<span class="bg-surface-600 absolute right-0 top-0 h-0.5 w-0.5"></span>
-							<span class="bg-surface-600 absolute bottom-0 left-0 h-0.5 w-0.5"></span>
-							<span class="bg-surface-600 absolute bottom-0 right-0 h-0.5 w-0.5"></span>
-						</button>
-						{#snippet popup()}
-							<span>Toggle Alpha</span>
-						{/snippet}
-					</Tooltip>
-					<div class="flex flex-row items-center">
-						<div class="flex flex-row">
-							{#await getPalElementTypes(pal.character_key) then elementTypes}
-								{#if elementTypes}
-									{#each elementTypes as elementType}
-										{#await getPalElementBadge(elementType) then icon}
-											<img src={icon} alt={elementType} class="h-8 w-8" />
-										{/await}
-									{/each}
-								{/if}
-							{/await}
-						</div>
+							</CornerDotButton>
+						</Tooltip>
+						{#await getPalElementTypes(pal.character_key) then elementTypes}
+							{#if elementTypes}
+								{#each elementTypes as elementType}
+									{#await getPalElementBadge(elementType) then icon}
+										<img src={icon} alt={elementType} class="h-8 w-8" />
+									{/await}
+								{/each}
+							{/if}
+						{/await}
 					</div>
 				</div>
 				<hr class="hr my-1" />

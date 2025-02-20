@@ -466,10 +466,17 @@
 	}
 
 	async function handleSelectPreset() {
+		const selectedPalsData = selectedPals.map((id) => {
+			const pal = Object.values(currentBase![1].pals).find((p) => p.instance_id === id);
+			return {
+				character_id: pal?.character_id,
+				character_key: pal?.character_key
+			};
+		});
 		// @ts-ignore
 		const result = await modal.showModal<string>(PalPresetSelectModal, {
 			title: 'Select preset',
-			value: ''
+			selectedPals: selectedPalsData
 		});
 		if (!result) return;
 
@@ -478,24 +485,14 @@
 		selectedPals.forEach((id) => {
 			const pal = Object.values(currentBase![1].pals).find((p) => p.instance_id === id);
 			if (pal) {
-				pal.is_lucky = presetProfile.pal_preset!.is_lucky;
-				pal.is_boss = presetProfile.pal_preset!.is_boss;
-				pal.gender = presetProfile.pal_preset!.gender;
-				pal.rank_hp = presetProfile.pal_preset!.rank_hp;
-				pal.rank_attack = presetProfile.pal_preset!.rank_attack;
-				pal.rank_defense = presetProfile.pal_preset!.rank_defense;
-				pal.rank_craftspeed = presetProfile.pal_preset!.rank_craftspeed;
-				pal.talent_hp = presetProfile.pal_preset!.talent_hp;
-				pal.talent_shot = presetProfile.pal_preset!.talent_shot;
-				pal.talent_defense = presetProfile.pal_preset!.talent_defense;
-				pal.rank = presetProfile.pal_preset!.rank;
-				pal.level = presetProfile.pal_preset!.level;
-				pal.learned_skills = presetProfile.pal_preset!.learned_skills;
-				pal.active_skills = presetProfile.pal_preset!.active_skills;
-				pal.passive_skills = presetProfile.pal_preset!.passive_skills;
-				pal.work_suitability = presetProfile.pal_preset!.work_suitability;
-				pal.sanity = presetProfile.pal_preset!.sanity;
-				pal.exp = presetProfile.pal_preset!.exp;
+				for (const [key, value] of Object.entries(presetProfile.pal_preset!)) {
+					if (key === 'character_id') continue;
+					if (key === 'lock' && value) {
+						pal.character_id = presetProfile.pal_preset?.character_id as string;
+					} else if (value) {
+						(pal as Record<string, any>)[key] = value;
+					}
+				}
 				pal.state = EntryState.MODIFIED;
 			}
 		});
@@ -612,7 +609,7 @@
 				</div>
 				{#if activeTab == 'pals'}
 					<div class="overflow-hidden">
-						<div class="grid grid-cols-6 gap-4 p-4">
+						<div class="grid grid-cols-6 place-items-center gap-4 p-4">
 							{#each currentPageItems as item (item.pal.instance_id)}
 								{#if item.pal.character_id !== 'None' || !searchQuery}
 									<PalBadge
@@ -634,7 +631,7 @@
 							<List
 								items={currentBaseStorageContainers}
 								baseClass="w-1/4"
-								listClass="h-[800px]"
+								listClass="h-[550px] 2xl:h-[800px]"
 								canSelect={false}
 								onselect={(item) => handleSelectStorageContainer(item)}
 							>
@@ -677,7 +674,7 @@
 									{/if}
 								{/snippet}
 							</List>
-							<div class="max-h-[800px] overflow-y-auto">
+							<div class="max-h-[550px] overflow-y-auto 2xl:max-h-[800px]">
 								{#if currentStorageContainer}
 									{@const building = buildingsData.buildings[currentStorageContainer.key]}
 									{@const itemGroup = building?.type_a == BuildingTypeA.Food ? 'Food' : 'Common'}
@@ -700,7 +697,7 @@
 												<img
 													src={currentStorageContainerIcon}
 													alt="Storage Container Icon"
-													class="ml-8 h-64 w-64"
+													class="ml-8 h-48 w-48 2xl:h-64 2xl:w-64"
 												/>
 												<StoragePresets
 													container={currentStorageContainer}

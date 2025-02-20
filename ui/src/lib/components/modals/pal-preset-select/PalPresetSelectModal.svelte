@@ -1,11 +1,16 @@
 <script lang="ts">
 	import { Card, Tooltip, Combobox } from '$components/ui';
 	import { type SelectOption } from '$types';
-	import { Save, X } from 'lucide-svelte';
-	import { presetsData } from '$lib/data';
+	import { Lock, Save, X } from 'lucide-svelte';
+	import { presetsData, palsData } from '$lib/data';
 
-	let { title = 'Select a Pal Preset', closeModal } = $props<{
+	let {
+		title = 'Select a Pal Preset',
+		selectedPals,
+		closeModal
+	} = $props<{
 		title?: string;
+		selectedPals: { character_id: string; character_key: string }[];
 		closeModal: (value: any) => void;
 	}>();
 
@@ -13,6 +18,12 @@
 		return Object.entries(presetsData.presetProfiles)
 			.filter(([_, profile]) => {
 				if (profile.type !== 'pal_preset') return false;
+				if (profile.pal_preset?.lock) {
+					return selectedPals.every(
+						(pal: { character_id: string; character_key: string }) =>
+							pal.character_id === profile.pal_preset?.character_id
+					);
+				}
 				return true;
 			})
 			.map(([id, preset]) => ({
@@ -32,7 +43,20 @@
 	<h3 class="h3">{title}</h3>
 	<Combobox options={selectOptions} bind:value={selectedPreset}>
 		{#snippet selectOption(option)}
-			{option.label}
+			{@const presetProfile = presetsData.presetProfiles[option.value]}
+			<div class="grid grid-cols-[1fr_auto_auto] items-center gap-2">
+				<span>{option.label}</span>
+				{#if presetProfile.pal_preset?.lock}
+					{@const palCharacterKey = selectedPals.find(
+						(p: { character_id: string; character_key: string }) =>
+							p.character_id === presetProfile.pal_preset?.character_id
+					).character_key}
+					<span class="text-sm">
+						{palsData.pals[palCharacterKey].localized_name}
+					</span>
+					<Lock class="h-4 w-4" />
+				{/if}
+			</div>
 		{/snippet}
 	</Combobox>
 

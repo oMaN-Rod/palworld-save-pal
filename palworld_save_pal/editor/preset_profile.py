@@ -12,24 +12,26 @@ class StorageContainerPreset(BaseModel):
 
 
 class PalPreset(BaseModel):
-    is_lucky: bool
-    is_boss: bool
-    gender: PalGender
-    rank_hp: int
-    rank_attack: int
-    rank_defense: int
-    rank_craftspeed: int
-    talent_hp: int
-    talent_shot: int
-    talent_defense: int
-    rank: int
-    level: int
-    exp: int
-    learned_skills: List[str]
-    active_skills: List[str]
-    passive_skills: List[str]
-    sanity: float
-    work_suitability: Dict[WorkSuitability, int]
+    lock: bool
+    character_id: Optional[str]
+    is_lucky: Optional[bool]
+    is_boss: Optional[bool]
+    gender: Optional[PalGender]
+    rank_hp: Optional[int]
+    rank_attack: Optional[int]
+    rank_defense: Optional[int]
+    rank_craftspeed: Optional[int]
+    talent_hp: Optional[int]
+    talent_shot: Optional[int]
+    talent_defense: Optional[int]
+    rank: Optional[int]
+    level: Optional[int]
+    exp: Optional[int]
+    learned_skills: Optional[List[str]]
+    active_skills: Optional[List[str]]
+    passive_skills: Optional[List[str]]
+    sanity: Optional[float]
+    work_suitability: Optional[Dict[WorkSuitability, int]]
 
 
 class PresetProfile(BaseModel):
