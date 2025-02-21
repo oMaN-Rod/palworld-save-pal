@@ -7966,7 +7966,7 @@
     "max_stack_count": 9999,
     "weight": 3.0,
     "price": 70,
-    "sort_id": 5025,
+    "sort_id": 5026,
     "disabled": false,
     "icon": "T_itemicon_Material_Chromium"
   },
@@ -8076,7 +8076,7 @@
     "sort_id": 1021,
     "dynamic": {
       "type": "armor",
-      "durability": 360,
+      "durability": 450,
       "passive_skills": [
         "TemperatureResist_Cold2"
       ]
@@ -8097,7 +8097,7 @@
     "sort_id": 1022,
     "dynamic": {
       "type": "armor",
-      "durability": 450,
+      "durability": 600,
       "passive_skills": [
         "TemperatureResist_Cold2"
       ]
@@ -8118,7 +8118,7 @@
     "sort_id": 1023,
     "dynamic": {
       "type": "armor",
-      "durability": 540,
+      "durability": 900,
       "passive_skills": [
         "TemperatureResist_Cold2"
       ]
@@ -8139,7 +8139,7 @@
     "sort_id": 1024,
     "dynamic": {
       "type": "armor",
-      "durability": 660,
+      "durability": 1200,
       "passive_skills": [
         "TemperatureResist_Cold2"
       ]
@@ -8181,7 +8181,7 @@
     "sort_id": 1016,
     "dynamic": {
       "type": "armor",
-      "durability": 360,
+      "durability": 450,
       "passive_skills": [
         "TemperatureResist_Heat2"
       ]
@@ -8202,7 +8202,7 @@
     "sort_id": 1017,
     "dynamic": {
       "type": "armor",
-      "durability": 450,
+      "durability": 600,
       "passive_skills": [
         "TemperatureResist_Heat2"
       ]
@@ -8223,7 +8223,7 @@
     "sort_id": 1018,
     "dynamic": {
       "type": "armor",
-      "durability": 540,
+      "durability": 900,
       "passive_skills": [
         "TemperatureResist_Heat2"
       ]
@@ -8244,7 +8244,7 @@
     "sort_id": 1019,
     "dynamic": {
       "type": "armor",
-      "durability": 660,
+      "durability": 1200,
       "passive_skills": [
         "TemperatureResist_Heat2"
       ]
@@ -8382,7 +8382,7 @@
     "sort_id": 251,
     "dynamic": {
       "type": "weapon",
-      "durability": 400,
+      "durability": 600,
       "magazine_size": 1,
       "passive_skills": []
     },
@@ -8402,7 +8402,7 @@
     "sort_id": 252,
     "dynamic": {
       "type": "weapon",
-      "durability": 450,
+      "durability": 800,
       "magazine_size": 1,
       "passive_skills": []
     },
@@ -8422,7 +8422,7 @@
     "sort_id": 253,
     "dynamic": {
       "type": "weapon",
-      "durability": 500,
+      "durability": 1200,
       "magazine_size": 1,
       "passive_skills": []
     },
@@ -8442,7 +8442,7 @@
     "sort_id": 254,
     "dynamic": {
       "type": "weapon",
-      "durability": 700,
+      "durability": 1600,
       "magazine_size": 1,
       "passive_skills": []
     },
@@ -8519,7 +8519,7 @@
     "sort_id": 1051,
     "dynamic": {
       "type": "armor",
-      "durability": 1680,
+      "durability": 2100,
       "passive_skills": [
         "TemperatureResist_Cold2",
         "TemperatureResist_Heat1"
@@ -8541,7 +8541,7 @@
     "sort_id": 1052,
     "dynamic": {
       "type": "armor",
-      "durability": 2100,
+      "durability": 2800,
       "passive_skills": [
         "TemperatureResist_Cold2",
         "TemperatureResist_Heat1"
@@ -8563,7 +8563,7 @@
     "sort_id": 1053,
     "dynamic": {
       "type": "armor",
-      "durability": 2520,
+      "durability": 4200,
       "passive_skills": [
         "TemperatureResist_Cold2",
         "TemperatureResist_Heat1"
@@ -8585,7 +8585,7 @@
     "sort_id": 1054,
     "dynamic": {
       "type": "armor",
-      "durability": 3080,
+      "durability": 5600,
       "passive_skills": [
         "TemperatureResist_Cold2",
         "TemperatureResist_Heat1"
@@ -8629,7 +8629,7 @@
     "sort_id": 1046,
     "dynamic": {
       "type": "armor",
-      "durability": 1680,
+      "durability": 2100,
       "passive_skills": [
         "TemperatureResist_Heat2",
         "TemperatureResist_Cold1"
@@ -8651,7 +8651,7 @@
     "sort_id": 1047,
     "dynamic": {
       "type": "armor",
-      "durability": 2100,
+      "durability": 2800,
       "passive_skills": [
         "TemperatureResist_Heat2",
         "TemperatureResist_Cold1"
@@ -8673,7 +8673,7 @@
     "sort_id": 1048,
     "dynamic": {
       "type": "armor",
-      "durability": 2520,
+      "durability": 4200,
       "passive_skills": [
         "TemperatureResist_Heat2",
         "TemperatureResist_Cold1"
@@ -8695,7 +8695,7 @@
     "sort_id": 1049,
     "dynamic": {
       "type": "armor",
-      "durability": 3080,
+      "durability": 5600,
       "passive_skills": [
         "TemperatureResist_Heat2",
         "TemperatureResist_Cold1"
@@ -8881,7 +8881,7 @@
     "sort_id": 1209,
     "dynamic": {
       "type": "armor",
-      "durability": 2660,
+      "durability": 2800,
       "passive_skills": []
     },
     "defense": 80,
@@ -8937,7 +8937,7 @@
     "max_stack_count": 9999,
     "weight": 0.5,
     "price": 100,
-    "sort_id": 9999,
+    "sort_id": 5025,
     "disabled": false,
     "icon": "Crude_Oil"
   },
@@ -9234,7 +9234,7 @@
     "sort_id": 414,
     "dynamic": {
       "type": "weapon",
-      "durability": 700,
+      "durability": 800,
       "magazine_size": 2,
       "passive_skills": []
     },
@@ -9500,7 +9500,7 @@
     "sort_id": 711,
     "dynamic": {
       "type": "weapon",
-      "durability": 360,
+      "durability": 450,
       "magazine_size": 2,
       "passive_skills": []
     },
@@ -9520,7 +9520,7 @@
     "sort_id": 712,
     "dynamic": {
       "type": "weapon",
-      "durability": 390,
+      "durability": 600,
       "magazine_size": 2,
       "passive_skills": []
     },
@@ -9540,7 +9540,7 @@
     "sort_id": 713,
     "dynamic": {
       "type": "weapon",
-      "durability": 420,
+      "durability": 900,
       "magazine_size": 2,
       "passive_skills": []
     },
@@ -9560,7 +9560,7 @@
     "sort_id": 714,
     "dynamic": {
       "type": "weapon",
-      "durability": 600,
+      "durability": 1200,
       "magazine_size": 2,
       "passive_skills": []
     },
@@ -9785,7 +9785,7 @@
     "sort_id": 651,
     "dynamic": {
       "type": "weapon",
-      "durability": 7200,
+      "durability": 9000,
       "magazine_size": 100,
       "passive_skills": []
     },
@@ -9805,7 +9805,7 @@
     "sort_id": 652,
     "dynamic": {
       "type": "weapon",
-      "durability": 7800,
+      "durability": 12000,
       "magazine_size": 100,
       "passive_skills": []
     },
@@ -9825,7 +9825,7 @@
     "sort_id": 653,
     "dynamic": {
       "type": "weapon",
-      "durability": 8400,
+      "durability": 18000,
       "magazine_size": 100,
       "passive_skills": []
     },
@@ -9845,7 +9845,7 @@
     "sort_id": 654,
     "dynamic": {
       "type": "weapon",
-      "durability": 12000,
+      "durability": 24000,
       "magazine_size": 100,
       "passive_skills": []
     },
@@ -10209,7 +10209,7 @@
     "sort_id": 1036,
     "dynamic": {
       "type": "armor",
-      "durability": 720,
+      "durability": 900,
       "passive_skills": [
         "TemperatureResist_Cold2"
       ]
@@ -10230,7 +10230,7 @@
     "sort_id": 1037,
     "dynamic": {
       "type": "armor",
-      "durability": 900,
+      "durability": 1200,
       "passive_skills": [
         "TemperatureResist_Cold2"
       ]
@@ -10251,7 +10251,7 @@
     "sort_id": 1038,
     "dynamic": {
       "type": "armor",
-      "durability": 1080,
+      "durability": 1800,
       "passive_skills": [
         "TemperatureResist_Cold2"
       ]
@@ -10272,7 +10272,7 @@
     "sort_id": 1039,
     "dynamic": {
       "type": "armor",
-      "durability": 1320,
+      "durability": 2400,
       "passive_skills": [
         "TemperatureResist_Cold2"
       ]
@@ -10314,7 +10314,7 @@
     "sort_id": 1031,
     "dynamic": {
       "type": "armor",
-      "durability": 720,
+      "durability": 900,
       "passive_skills": [
         "TemperatureResist_Heat2"
       ]
@@ -10335,7 +10335,7 @@
     "sort_id": 1032,
     "dynamic": {
       "type": "armor",
-      "durability": 900,
+      "durability": 1200,
       "passive_skills": [
         "TemperatureResist_Heat2"
       ]
@@ -10356,7 +10356,7 @@
     "sort_id": 1033,
     "dynamic": {
       "type": "armor",
-      "durability": 1080,
+      "durability": 1800,
       "passive_skills": [
         "TemperatureResist_Heat2"
       ]
@@ -10377,7 +10377,7 @@
     "sort_id": 1034,
     "dynamic": {
       "type": "armor",
-      "durability": 1320,
+      "durability": 2400,
       "passive_skills": [
         "TemperatureResist_Heat2"
       ]
@@ -10558,7 +10558,7 @@
     "sort_id": 1204,
     "dynamic": {
       "type": "armor",
-      "durability": 760,
+      "durability": 800,
       "passive_skills": []
     },
     "defense": 24,
@@ -10760,7 +10760,7 @@
     "sort_id": 696,
     "dynamic": {
       "type": "weapon",
-      "durability": 7200,
+      "durability": 9000,
       "magazine_size": 100,
       "passive_skills": []
     },
@@ -10780,7 +10780,7 @@
     "sort_id": 697,
     "dynamic": {
       "type": "weapon",
-      "durability": 7800,
+      "durability": 12000,
       "magazine_size": 100,
       "passive_skills": []
     },
@@ -10800,7 +10800,7 @@
     "sort_id": 698,
     "dynamic": {
       "type": "weapon",
-      "durability": 8400,
+      "durability": 18000,
       "magazine_size": 100,
       "passive_skills": []
     },
@@ -10820,7 +10820,7 @@
     "sort_id": 699,
     "dynamic": {
       "type": "weapon",
-      "durability": 12000,
+      "durability": 24000,
       "magazine_size": 100,
       "passive_skills": []
     },
@@ -11098,7 +11098,7 @@
     "sort_id": 671,
     "dynamic": {
       "type": "weapon",
-      "durability": 720,
+      "durability": 900,
       "magazine_size": 5,
       "passive_skills": []
     },
@@ -11118,7 +11118,7 @@
     "sort_id": 672,
     "dynamic": {
       "type": "weapon",
-      "durability": 780,
+      "durability": 1200,
       "magazine_size": 5,
       "passive_skills": []
     },
@@ -11138,7 +11138,7 @@
     "sort_id": 673,
     "dynamic": {
       "type": "weapon",
-      "durability": 840,
+      "durability": 1800,
       "magazine_size": 5,
       "passive_skills": []
     },
@@ -11158,7 +11158,7 @@
     "sort_id": 674,
     "dynamic": {
       "type": "weapon",
-      "durability": 1200,
+      "durability": 2400,
       "magazine_size": 5,
       "passive_skills": []
     },
@@ -11250,7 +11250,7 @@
     "sort_id": 681,
     "dynamic": {
       "type": "weapon",
-      "durability": 360,
+      "durability": 450,
       "magazine_size": 1,
       "passive_skills": []
     },
@@ -11270,7 +11270,7 @@
     "sort_id": 682,
     "dynamic": {
       "type": "weapon",
-      "durability": 390,
+      "durability": 600,
       "magazine_size": 1,
       "passive_skills": []
     },
@@ -11290,7 +11290,7 @@
     "sort_id": 683,
     "dynamic": {
       "type": "weapon",
-      "durability": 420,
+      "durability": 900,
       "magazine_size": 1,
       "passive_skills": []
     },
@@ -11310,7 +11310,7 @@
     "sort_id": 684,
     "dynamic": {
       "type": "weapon",
-      "durability": 600,
+      "durability": 1200,
       "magazine_size": 1,
       "passive_skills": []
     },
@@ -11328,7 +11328,7 @@
     "weight": 0.2,
     "price": 10,
     "sort_id": 9999,
-    "disabled": true,
+    "disabled": false,
     "icon": "Gunpowder"
   },
   "Gunpowder2": {
@@ -11577,7 +11577,7 @@
     "sort_id": 1301,
     "dynamic": {
       "type": "armor",
-      "durability": 630,
+      "durability": 787,
       "passive_skills": [
         "ElementResist_Dragon_1"
       ]
@@ -11598,7 +11598,7 @@
     "sort_id": 1302,
     "dynamic": {
       "type": "armor",
-      "durability": 787,
+      "durability": 1050,
       "passive_skills": [
         "ElementResist_Dragon_1"
       ]
@@ -11619,7 +11619,7 @@
     "sort_id": 1303,
     "dynamic": {
       "type": "armor",
-      "durability": 945,
+      "durability": 1575,
       "passive_skills": [
         "ElementResist_Dragon_1"
       ]
@@ -11640,7 +11640,7 @@
     "sort_id": 1304,
     "dynamic": {
       "type": "armor",
-      "durability": 1155,
+      "durability": 2100,
       "passive_skills": [
         "ElementResist_Dragon_1"
       ]
@@ -11682,7 +11682,7 @@
     "sort_id": 1306,
     "dynamic": {
       "type": "armor",
-      "durability": 540,
+      "durability": 675,
       "passive_skills": [
         "ElementResist_Ice_1"
       ]
@@ -11703,7 +11703,7 @@
     "sort_id": 1307,
     "dynamic": {
       "type": "armor",
-      "durability": 675,
+      "durability": 900,
       "passive_skills": [
         "ElementResist_Ice_1"
       ]
@@ -11724,7 +11724,7 @@
     "sort_id": 1308,
     "dynamic": {
       "type": "armor",
-      "durability": 810,
+      "durability": 1350,
       "passive_skills": [
         "ElementResist_Ice_1"
       ]
@@ -11745,7 +11745,7 @@
     "sort_id": 1309,
     "dynamic": {
       "type": "armor",
-      "durability": 990,
+      "durability": 1800,
       "passive_skills": [
         "ElementResist_Ice_1"
       ]
@@ -11787,7 +11787,7 @@
     "sort_id": 1311,
     "dynamic": {
       "type": "armor",
-      "durability": 270,
+      "durability": 337,
       "passive_skills": [
         "ElementResist_Leaf_1"
       ]
@@ -11808,7 +11808,7 @@
     "sort_id": 1312,
     "dynamic": {
       "type": "armor",
-      "durability": 337,
+      "durability": 450,
       "passive_skills": [
         "ElementResist_Leaf_1"
       ]
@@ -11829,7 +11829,7 @@
     "sort_id": 1313,
     "dynamic": {
       "type": "armor",
-      "durability": 405,
+      "durability": 675,
       "passive_skills": [
         "ElementResist_Leaf_1"
       ]
@@ -11850,7 +11850,7 @@
     "sort_id": 1314,
     "dynamic": {
       "type": "armor",
-      "durability": 495,
+      "durability": 900,
       "passive_skills": [
         "ElementResist_Leaf_1"
       ]
@@ -11892,7 +11892,7 @@
     "sort_id": 1316,
     "dynamic": {
       "type": "armor",
-      "durability": 360,
+      "durability": 450,
       "passive_skills": [
         "ElementResist_Dark_1"
       ]
@@ -11913,7 +11913,7 @@
     "sort_id": 1317,
     "dynamic": {
       "type": "armor",
-      "durability": 450,
+      "durability": 600,
       "passive_skills": [
         "ElementResist_Dark_1"
       ]
@@ -11934,7 +11934,7 @@
     "sort_id": 1318,
     "dynamic": {
       "type": "armor",
-      "durability": 540,
+      "durability": 900,
       "passive_skills": [
         "ElementResist_Dark_1"
       ]
@@ -11955,7 +11955,7 @@
     "sort_id": 1319,
     "dynamic": {
       "type": "armor",
-      "durability": 660,
+      "durability": 1200,
       "passive_skills": [
         "ElementResist_Dark_1"
       ]
@@ -11997,7 +11997,7 @@
     "sort_id": 1321,
     "dynamic": {
       "type": "armor",
-      "durability": 324,
+      "durability": 405,
       "passive_skills": [
         "ElementResist_Earth_1"
       ]
@@ -12018,7 +12018,7 @@
     "sort_id": 1322,
     "dynamic": {
       "type": "armor",
-      "durability": 405,
+      "durability": 540,
       "passive_skills": [
         "ElementResist_Earth_1"
       ]
@@ -12039,7 +12039,7 @@
     "sort_id": 1323,
     "dynamic": {
       "type": "armor",
-      "durability": 486,
+      "durability": 810,
       "passive_skills": [
         "ElementResist_Earth_1"
       ]
@@ -12060,7 +12060,7 @@
     "sort_id": 1324,
     "dynamic": {
       "type": "armor",
-      "durability": 594,
+      "durability": 1080,
       "passive_skills": [
         "ElementResist_Earth_1"
       ]
@@ -12102,7 +12102,7 @@
     "sort_id": 1326,
     "dynamic": {
       "type": "armor",
-      "durability": 720,
+      "durability": 900,
       "passive_skills": [
         "ElementResist_Thunder_1"
       ]
@@ -12123,7 +12123,7 @@
     "sort_id": 1327,
     "dynamic": {
       "type": "armor",
-      "durability": 900,
+      "durability": 1200,
       "passive_skills": [
         "ElementResist_Thunder_1"
       ]
@@ -12144,7 +12144,7 @@
     "sort_id": 1328,
     "dynamic": {
       "type": "armor",
-      "durability": 1080,
+      "durability": 1800,
       "passive_skills": [
         "ElementResist_Thunder_1"
       ]
@@ -12165,7 +12165,7 @@
     "sort_id": 1329,
     "dynamic": {
       "type": "armor",
-      "durability": 1320,
+      "durability": 2400,
       "passive_skills": [
         "ElementResist_Thunder_1"
       ]
@@ -12207,7 +12207,7 @@
     "sort_id": 1331,
     "dynamic": {
       "type": "armor",
-      "durability": 360,
+      "durability": 450,
       "passive_skills": [
         "ElementResist_Fire_1"
       ]
@@ -12228,7 +12228,7 @@
     "sort_id": 1332,
     "dynamic": {
       "type": "armor",
-      "durability": 450,
+      "durability": 600,
       "passive_skills": [
         "ElementResist_Fire_1"
       ]
@@ -12249,7 +12249,7 @@
     "sort_id": 1333,
     "dynamic": {
       "type": "armor",
-      "durability": 540,
+      "durability": 900,
       "passive_skills": [
         "ElementResist_Fire_1"
       ]
@@ -12270,7 +12270,7 @@
     "sort_id": 1334,
     "dynamic": {
       "type": "armor",
-      "durability": 660,
+      "durability": 1200,
       "passive_skills": [
         "ElementResist_Fire_1"
       ]
@@ -12312,7 +12312,7 @@
     "sort_id": 1336,
     "dynamic": {
       "type": "armor",
-      "durability": 450,
+      "durability": 562,
       "passive_skills": [
         "ElementResist_Aqua_1"
       ]
@@ -12333,7 +12333,7 @@
     "sort_id": 1337,
     "dynamic": {
       "type": "armor",
-      "durability": 562,
+      "durability": 750,
       "passive_skills": [
         "ElementResist_Aqua_1"
       ]
@@ -12354,7 +12354,7 @@
     "sort_id": 1338,
     "dynamic": {
       "type": "armor",
-      "durability": 675,
+      "durability": 1125,
       "passive_skills": [
         "ElementResist_Aqua_1"
       ]
@@ -12375,7 +12375,7 @@
     "sort_id": 1339,
     "dynamic": {
       "type": "armor",
-      "durability": 825,
+      "durability": 1500,
       "passive_skills": [
         "ElementResist_Aqua_1"
       ]
@@ -12522,7 +12522,7 @@
     "sort_id": 1346,
     "dynamic": {
       "type": "armor",
-      "durability": 360,
+      "durability": 450,
       "passive_skills": [
         "WorkSpeed_ACC_up1"
       ]
@@ -12543,7 +12543,7 @@
     "sort_id": 1347,
     "dynamic": {
       "type": "armor",
-      "durability": 450,
+      "durability": 600,
       "passive_skills": [
         "WorkSpeed_ACC_up1"
       ]
@@ -12564,7 +12564,7 @@
     "sort_id": 1348,
     "dynamic": {
       "type": "armor",
-      "durability": 540,
+      "durability": 900,
       "passive_skills": [
         "WorkSpeed_ACC_up1"
       ]
@@ -12585,7 +12585,7 @@
     "sort_id": 1349,
     "dynamic": {
       "type": "armor",
-      "durability": 660,
+      "durability": 1200,
       "passive_skills": [
         "WorkSpeed_ACC_up1"
       ]
@@ -12627,7 +12627,7 @@
     "sort_id": 1351,
     "dynamic": {
       "type": "armor",
-      "durability": 324,
+      "durability": 405,
       "passive_skills": [
         "TemperatureResist_Heat1"
       ]
@@ -12648,7 +12648,7 @@
     "sort_id": 1352,
     "dynamic": {
       "type": "armor",
-      "durability": 405,
+      "durability": 540,
       "passive_skills": [
         "TemperatureResist_Heat1"
       ]
@@ -12669,7 +12669,7 @@
     "sort_id": 1353,
     "dynamic": {
       "type": "armor",
-      "durability": 486,
+      "durability": 810,
       "passive_skills": [
         "TemperatureResist_Heat1"
       ]
@@ -12690,7 +12690,7 @@
     "sort_id": 1354,
     "dynamic": {
       "type": "armor",
-      "durability": 594,
+      "durability": 1080,
       "passive_skills": [
         "TemperatureResist_Heat1"
       ]
@@ -12732,7 +12732,7 @@
     "sort_id": 1356,
     "dynamic": {
       "type": "armor",
-      "durability": 360,
+      "durability": 450,
       "passive_skills": [
         "ElementResist_Normal_1"
       ]
@@ -12753,7 +12753,7 @@
     "sort_id": 1357,
     "dynamic": {
       "type": "armor",
-      "durability": 450,
+      "durability": 600,
       "passive_skills": [
         "ElementResist_Normal_1"
       ]
@@ -12774,7 +12774,7 @@
     "sort_id": 1358,
     "dynamic": {
       "type": "armor",
-      "durability": 540,
+      "durability": 900,
       "passive_skills": [
         "ElementResist_Normal_1"
       ]
@@ -12795,7 +12795,7 @@
     "sort_id": 1359,
     "dynamic": {
       "type": "armor",
-      "durability": 660,
+      "durability": 1200,
       "passive_skills": [
         "ElementResist_Normal_1"
       ]
@@ -12837,7 +12837,7 @@
     "sort_id": 1361,
     "dynamic": {
       "type": "armor",
-      "durability": 360,
+      "durability": 450,
       "passive_skills": [
         "ElementResist_Normal_1"
       ]
@@ -12858,7 +12858,7 @@
     "sort_id": 1362,
     "dynamic": {
       "type": "armor",
-      "durability": 450,
+      "durability": 600,
       "passive_skills": [
         "ElementResist_Normal_1"
       ]
@@ -12879,7 +12879,7 @@
     "sort_id": 1363,
     "dynamic": {
       "type": "armor",
-      "durability": 540,
+      "durability": 900,
       "passive_skills": [
         "ElementResist_Normal_1"
       ]
@@ -12900,7 +12900,7 @@
     "sort_id": 1364,
     "dynamic": {
       "type": "armor",
-      "durability": 660,
+      "durability": 1200,
       "passive_skills": [
         "ElementResist_Normal_1"
       ]
@@ -12942,7 +12942,7 @@
     "sort_id": 1366,
     "dynamic": {
       "type": "armor",
-      "durability": 360,
+      "durability": 450,
       "passive_skills": [
         "ElementResist_Normal_1"
       ]
@@ -12963,7 +12963,7 @@
     "sort_id": 1367,
     "dynamic": {
       "type": "armor",
-      "durability": 450,
+      "durability": 600,
       "passive_skills": [
         "ElementResist_Normal_1"
       ]
@@ -12984,7 +12984,7 @@
     "sort_id": 1368,
     "dynamic": {
       "type": "armor",
-      "durability": 540,
+      "durability": 900,
       "passive_skills": [
         "ElementResist_Normal_1"
       ]
@@ -13005,7 +13005,7 @@
     "sort_id": 1369,
     "dynamic": {
       "type": "armor",
-      "durability": 660,
+      "durability": 1200,
       "passive_skills": [
         "ElementResist_Normal_1"
       ]
@@ -13047,7 +13047,7 @@
     "sort_id": 1371,
     "dynamic": {
       "type": "armor",
-      "durability": 360,
+      "durability": 450,
       "passive_skills": [
         "ElementResist_Leaf_1"
       ]
@@ -13068,7 +13068,7 @@
     "sort_id": 1372,
     "dynamic": {
       "type": "armor",
-      "durability": 450,
+      "durability": 600,
       "passive_skills": [
         "ElementResist_Leaf_1"
       ]
@@ -13089,7 +13089,7 @@
     "sort_id": 1373,
     "dynamic": {
       "type": "armor",
-      "durability": 540,
+      "durability": 900,
       "passive_skills": [
         "ElementResist_Leaf_1"
       ]
@@ -13110,7 +13110,7 @@
     "sort_id": 1374,
     "dynamic": {
       "type": "armor",
-      "durability": 660,
+      "durability": 1200,
       "passive_skills": [
         "ElementResist_Leaf_1"
       ]
@@ -13152,7 +13152,7 @@
     "sort_id": 1376,
     "dynamic": {
       "type": "armor",
-      "durability": 360,
+      "durability": 450,
       "passive_skills": [
         "ElementResist_Ice_1"
       ]
@@ -13173,7 +13173,7 @@
     "sort_id": 1377,
     "dynamic": {
       "type": "armor",
-      "durability": 450,
+      "durability": 600,
       "passive_skills": [
         "ElementResist_Ice_1"
       ]
@@ -13194,7 +13194,7 @@
     "sort_id": 1378,
     "dynamic": {
       "type": "armor",
-      "durability": 540,
+      "durability": 900,
       "passive_skills": [
         "ElementResist_Ice_1"
       ]
@@ -13215,7 +13215,7 @@
     "sort_id": 1379,
     "dynamic": {
       "type": "armor",
-      "durability": 660,
+      "durability": 1200,
       "passive_skills": [
         "ElementResist_Ice_1"
       ]
@@ -13257,7 +13257,7 @@
     "sort_id": 1381,
     "dynamic": {
       "type": "armor",
-      "durability": 360,
+      "durability": 450,
       "passive_skills": [
         "ElementResist_Dark_1"
       ]
@@ -13278,7 +13278,7 @@
     "sort_id": 1382,
     "dynamic": {
       "type": "armor",
-      "durability": 450,
+      "durability": 600,
       "passive_skills": [
         "ElementResist_Dark_1"
       ]
@@ -13299,7 +13299,7 @@
     "sort_id": 1383,
     "dynamic": {
       "type": "armor",
-      "durability": 540,
+      "durability": 900,
       "passive_skills": [
         "ElementResist_Dark_1"
       ]
@@ -13320,7 +13320,7 @@
     "sort_id": 1384,
     "dynamic": {
       "type": "armor",
-      "durability": 660,
+      "durability": 1200,
       "passive_skills": [
         "ElementResist_Dark_1"
       ]
@@ -13425,7 +13425,7 @@
     "sort_id": 1388,
     "dynamic": {
       "type": "armor",
-      "durability": 360,
+      "durability": 450,
       "passive_skills": [
         "ElementResist_Dark_1"
       ]
@@ -13446,7 +13446,7 @@
     "sort_id": 1389,
     "dynamic": {
       "type": "armor",
-      "durability": 390,
+      "durability": 600,
       "passive_skills": [
         "ElementResist_Dark_1"
       ]
@@ -13467,7 +13467,7 @@
     "sort_id": 1390,
     "dynamic": {
       "type": "armor",
-      "durability": 420,
+      "durability": 900,
       "passive_skills": [
         "ElementResist_Dark_1"
       ]
@@ -13488,7 +13488,7 @@
     "sort_id": 1391,
     "dynamic": {
       "type": "armor",
-      "durability": 600,
+      "durability": 1200,
       "passive_skills": [
         "ElementResist_Dark_1"
       ]
@@ -13530,7 +13530,7 @@
     "sort_id": 1393,
     "dynamic": {
       "type": "armor",
-      "durability": 360,
+      "durability": 450,
       "passive_skills": [
         "ElementResist_Dark_1"
       ]
@@ -13551,7 +13551,7 @@
     "sort_id": 1394,
     "dynamic": {
       "type": "armor",
-      "durability": 390,
+      "durability": 600,
       "passive_skills": [
         "ElementResist_Dark_1"
       ]
@@ -13572,7 +13572,7 @@
     "sort_id": 1395,
     "dynamic": {
       "type": "armor",
-      "durability": 420,
+      "durability": 900,
       "passive_skills": [
         "ElementResist_Dark_1"
       ]
@@ -13593,7 +13593,7 @@
     "sort_id": 1396,
     "dynamic": {
       "type": "armor",
-      "durability": 600,
+      "durability": 1200,
       "passive_skills": [
         "ElementResist_Dark_1"
       ]
@@ -13656,7 +13656,7 @@
     "sort_id": 1399,
     "dynamic": {
       "type": "armor",
-      "durability": 360,
+      "durability": 450,
       "passive_skills": [
         "ElementResist_Dark_1"
       ]
@@ -13677,7 +13677,7 @@
     "sort_id": 1400,
     "dynamic": {
       "type": "armor",
-      "durability": 390,
+      "durability": 600,
       "passive_skills": [
         "ElementResist_Dark_1"
       ]
@@ -13698,7 +13698,7 @@
     "sort_id": 1401,
     "dynamic": {
       "type": "armor",
-      "durability": 420,
+      "durability": 900,
       "passive_skills": [
         "ElementResist_Dark_1"
       ]
@@ -13719,7 +13719,7 @@
     "sort_id": 1402,
     "dynamic": {
       "type": "armor",
-      "durability": 600,
+      "durability": 1200,
       "passive_skills": [
         "ElementResist_Dark_1"
       ]
@@ -13803,7 +13803,7 @@
     "sort_id": 1406,
     "dynamic": {
       "type": "armor",
-      "durability": 360,
+      "durability": 450,
       "passive_skills": [
         "ElementResist_Dark_1"
       ]
@@ -13824,7 +13824,7 @@
     "sort_id": 1407,
     "dynamic": {
       "type": "armor",
-      "durability": 390,
+      "durability": 600,
       "passive_skills": [
         "ElementResist_Dark_1"
       ]
@@ -13845,7 +13845,7 @@
     "sort_id": 1408,
     "dynamic": {
       "type": "armor",
-      "durability": 420,
+      "durability": 900,
       "passive_skills": [
         "ElementResist_Dark_1"
       ]
@@ -13866,7 +13866,7 @@
     "sort_id": 1409,
     "dynamic": {
       "type": "armor",
-      "durability": 600,
+      "durability": 1200,
       "passive_skills": [
         "ElementResist_Dark_1"
       ]
@@ -13908,7 +13908,7 @@
     "sort_id": 1411,
     "dynamic": {
       "type": "armor",
-      "durability": 360,
+      "durability": 450,
       "passive_skills": [
         "ElementResist_Dark_1"
       ]
@@ -13929,7 +13929,7 @@
     "sort_id": 1412,
     "dynamic": {
       "type": "armor",
-      "durability": 390,
+      "durability": 600,
       "passive_skills": [
         "ElementResist_Dark_1"
       ]
@@ -13950,7 +13950,7 @@
     "sort_id": 1413,
     "dynamic": {
       "type": "armor",
-      "durability": 420,
+      "durability": 900,
       "passive_skills": [
         "ElementResist_Dark_1"
       ]
@@ -13971,7 +13971,7 @@
     "sort_id": 1414,
     "dynamic": {
       "type": "armor",
-      "durability": 600,
+      "durability": 1200,
       "passive_skills": [
         "ElementResist_Dark_1"
       ]
@@ -14270,7 +14270,7 @@
     "sort_id": 1066,
     "dynamic": {
       "type": "armor",
-      "durability": 3600,
+      "durability": 4500,
       "passive_skills": [
         "TemperatureResist_Cold2",
         "TemperatureResist_Heat1"
@@ -14292,7 +14292,7 @@
     "sort_id": 1067,
     "dynamic": {
       "type": "armor",
-      "durability": 4500,
+      "durability": 6000,
       "passive_skills": [
         "TemperatureResist_Cold2",
         "TemperatureResist_Heat1"
@@ -14314,7 +14314,7 @@
     "sort_id": 1068,
     "dynamic": {
       "type": "armor",
-      "durability": 5400,
+      "durability": 9000,
       "passive_skills": [
         "TemperatureResist_Cold2",
         "TemperatureResist_Heat1"
@@ -14336,7 +14336,7 @@
     "sort_id": 1069,
     "dynamic": {
       "type": "armor",
-      "durability": 6600,
+      "durability": 12000,
       "passive_skills": [
         "TemperatureResist_Cold2",
         "TemperatureResist_Heat1"
@@ -14380,7 +14380,7 @@
     "sort_id": 1061,
     "dynamic": {
       "type": "armor",
-      "durability": 3600,
+      "durability": 4500,
       "passive_skills": [
         "TemperatureResist_Heat2",
         "TemperatureResist_Cold1"
@@ -14402,7 +14402,7 @@
     "sort_id": 1062,
     "dynamic": {
       "type": "armor",
-      "durability": 4500,
+      "durability": 6000,
       "passive_skills": [
         "TemperatureResist_Heat2",
         "TemperatureResist_Cold1"
@@ -14424,7 +14424,7 @@
     "sort_id": 1063,
     "dynamic": {
       "type": "armor",
-      "durability": 5400,
+      "durability": 9000,
       "passive_skills": [
         "TemperatureResist_Heat2",
         "TemperatureResist_Cold1"
@@ -14446,7 +14446,7 @@
     "sort_id": 1064,
     "dynamic": {
       "type": "armor",
-      "durability": 6600,
+      "durability": 12000,
       "passive_skills": [
         "TemperatureResist_Heat2",
         "TemperatureResist_Cold1"
@@ -14632,7 +14632,7 @@
     "sort_id": 1214,
     "dynamic": {
       "type": "armor",
-      "durability": 5700,
+      "durability": 6000,
       "passive_skills": []
     },
     "defense": 160,
@@ -14756,7 +14756,7 @@
     "sort_id": 701,
     "dynamic": {
       "type": "weapon",
-      "durability": 9600,
+      "durability": 12000,
       "magazine_size": 100,
       "passive_skills": []
     },
@@ -14776,7 +14776,7 @@
     "sort_id": 702,
     "dynamic": {
       "type": "weapon",
-      "durability": 10400,
+      "durability": 16000,
       "magazine_size": 100,
       "passive_skills": []
     },
@@ -14796,7 +14796,7 @@
     "sort_id": 703,
     "dynamic": {
       "type": "weapon",
-      "durability": 11200,
+      "durability": 24000,
       "magazine_size": 100,
       "passive_skills": []
     },
@@ -14816,7 +14816,7 @@
     "sort_id": 704,
     "dynamic": {
       "type": "weapon",
-      "durability": 16000,
+      "durability": 32000,
       "magazine_size": 100,
       "passive_skills": []
     },
@@ -14856,7 +14856,7 @@
     "sort_id": 641,
     "dynamic": {
       "type": "weapon",
-      "durability": 3600,
+      "durability": 4500,
       "magazine_size": 30,
       "passive_skills": []
     },
@@ -14876,7 +14876,7 @@
     "sort_id": 642,
     "dynamic": {
       "type": "weapon",
-      "durability": 3900,
+      "durability": 6000,
       "magazine_size": 30,
       "passive_skills": []
     },
@@ -14896,7 +14896,7 @@
     "sort_id": 643,
     "dynamic": {
       "type": "weapon",
-      "durability": 4200,
+      "durability": 9000,
       "magazine_size": 30,
       "passive_skills": []
     },
@@ -14916,7 +14916,7 @@
     "sort_id": 644,
     "dynamic": {
       "type": "weapon",
-      "durability": 6000,
+      "durability": 12000,
       "magazine_size": 30,
       "passive_skills": []
     },
@@ -15370,7 +15370,7 @@
     "sort_id": 531,
     "dynamic": {
       "type": "weapon",
-      "durability": 1800,
+      "durability": 2250,
       "magazine_size": 17,
       "passive_skills": []
     },
@@ -15390,7 +15390,7 @@
     "sort_id": 532,
     "dynamic": {
       "type": "weapon",
-      "durability": 1950,
+      "durability": 3000,
       "magazine_size": 19,
       "passive_skills": []
     },
@@ -15410,7 +15410,7 @@
     "sort_id": 533,
     "dynamic": {
       "type": "weapon",
-      "durability": 2100,
+      "durability": 4500,
       "magazine_size": 21,
       "passive_skills": []
     },
@@ -15430,7 +15430,7 @@
     "sort_id": 534,
     "dynamic": {
       "type": "weapon",
-      "durability": 3000,
+      "durability": 6000,
       "magazine_size": 23,
       "passive_skills": []
     },
@@ -15570,7 +15570,7 @@
     "sort_id": 401,
     "dynamic": {
       "type": "weapon",
-      "durability": 240,
+      "durability": 300,
       "magazine_size": 1,
       "passive_skills": []
     },
@@ -15590,7 +15590,7 @@
     "sort_id": 402,
     "dynamic": {
       "type": "weapon",
-      "durability": 260,
+      "durability": 400,
       "magazine_size": 1,
       "passive_skills": []
     },
@@ -15610,7 +15610,7 @@
     "sort_id": 403,
     "dynamic": {
       "type": "weapon",
-      "durability": 280,
+      "durability": 600,
       "magazine_size": 1,
       "passive_skills": []
     },
@@ -15630,7 +15630,7 @@
     "sort_id": 404,
     "dynamic": {
       "type": "weapon",
-      "durability": 400,
+      "durability": 800,
       "magazine_size": 1,
       "passive_skills": []
     },
@@ -15670,7 +15670,7 @@
     "sort_id": 551,
     "dynamic": {
       "type": "weapon",
-      "durability": 1200,
+      "durability": 1500,
       "magazine_size": 26,
       "passive_skills": []
     },
@@ -15690,7 +15690,7 @@
     "sort_id": 552,
     "dynamic": {
       "type": "weapon",
-      "durability": 1300,
+      "durability": 2000,
       "magazine_size": 28,
       "passive_skills": []
     },
@@ -15710,7 +15710,7 @@
     "sort_id": 553,
     "dynamic": {
       "type": "weapon",
-      "durability": 1400,
+      "durability": 3000,
       "magazine_size": 30,
       "passive_skills": []
     },
@@ -15730,7 +15730,7 @@
     "sort_id": 554,
     "dynamic": {
       "type": "weapon",
-      "durability": 2000,
+      "durability": 4000,
       "magazine_size": 32,
       "passive_skills": []
     },
@@ -16132,7 +16132,7 @@
       "modifiers": [
         {
           "type": "WorkSpeed",
-          "value": 30,
+          "value": 40,
           "interval": 0
         }
       ]
@@ -16209,7 +16209,7 @@
     "sort_id": 691,
     "dynamic": {
       "type": "weapon",
-      "durability": 360,
+      "durability": 450,
       "magazine_size": 4,
       "passive_skills": []
     },
@@ -16229,7 +16229,7 @@
     "sort_id": 692,
     "dynamic": {
       "type": "weapon",
-      "durability": 390,
+      "durability": 600,
       "magazine_size": 4,
       "passive_skills": []
     },
@@ -16249,7 +16249,7 @@
     "sort_id": 693,
     "dynamic": {
       "type": "weapon",
-      "durability": 420,
+      "durability": 900,
       "magazine_size": 4,
       "passive_skills": []
     },
@@ -16269,7 +16269,7 @@
     "sort_id": 694,
     "dynamic": {
       "type": "weapon",
-      "durability": 600,
+      "durability": 1200,
       "magazine_size": 4,
       "passive_skills": []
     },
@@ -16464,7 +16464,7 @@
     "sort_id": 504,
     "dynamic": {
       "type": "weapon",
-      "durability": 700,
+      "durability": 800,
       "magazine_size": 1,
       "passive_skills": []
     },
@@ -16509,7 +16509,7 @@
     "max_stack_count": 9999,
     "weight": 1.0,
     "price": 10,
-    "sort_id": 5026,
+    "sort_id": 5027,
     "disabled": false,
     "icon": "T_itemicon_Material_NightStone"
   },
@@ -16562,7 +16562,7 @@
     "sort_id": 331,
     "dynamic": {
       "type": "weapon",
-      "durability": 480,
+      "durability": 600,
       "magazine_size": 6,
       "passive_skills": []
     },
@@ -16582,7 +16582,7 @@
     "sort_id": 332,
     "dynamic": {
       "type": "weapon",
-      "durability": 520,
+      "durability": 800,
       "magazine_size": 6,
       "passive_skills": []
     },
@@ -16602,7 +16602,7 @@
     "sort_id": 333,
     "dynamic": {
       "type": "weapon",
-      "durability": 560,
+      "durability": 1200,
       "magazine_size": 6,
       "passive_skills": []
     },
@@ -16622,7 +16622,7 @@
     "sort_id": 334,
     "dynamic": {
       "type": "weapon",
-      "durability": 800,
+      "durability": 1600,
       "magazine_size": 6,
       "passive_skills": []
     },
@@ -18364,7 +18364,7 @@
     "sort_id": 1097,
     "dynamic": {
       "type": "armor",
-      "durability": 21600,
+      "durability": 27000,
       "passive_skills": [
         "TemperatureResist_Cold2",
         "TemperatureResist_Heat1"
@@ -18386,7 +18386,7 @@
     "sort_id": 1098,
     "dynamic": {
       "type": "armor",
-      "durability": 23400,
+      "durability": 36000,
       "passive_skills": [
         "TemperatureResist_Cold2",
         "TemperatureResist_Heat1"
@@ -18408,7 +18408,7 @@
     "sort_id": 1099,
     "dynamic": {
       "type": "armor",
-      "durability": 25200,
+      "durability": 54000,
       "passive_skills": [
         "TemperatureResist_Cold2",
         "TemperatureResist_Heat1"
@@ -18430,7 +18430,7 @@
     "sort_id": 1100,
     "dynamic": {
       "type": "armor",
-      "durability": 36000,
+      "durability": 72000,
       "passive_skills": [
         "TemperatureResist_Cold2",
         "TemperatureResist_Heat1"
@@ -18474,7 +18474,7 @@
     "sort_id": 1093,
     "dynamic": {
       "type": "armor",
-      "durability": 21600,
+      "durability": 27000,
       "passive_skills": [
         "TemperatureResist_Cold1",
         "TemperatureResist_Heat2"
@@ -18496,7 +18496,7 @@
     "sort_id": 1094,
     "dynamic": {
       "type": "armor",
-      "durability": 23400,
+      "durability": 36000,
       "passive_skills": [
         "TemperatureResist_Cold1",
         "TemperatureResist_Heat2"
@@ -18518,7 +18518,7 @@
     "sort_id": 1095,
     "dynamic": {
       "type": "armor",
-      "durability": 25200,
+      "durability": 54000,
       "passive_skills": [
         "TemperatureResist_Cold1",
         "TemperatureResist_Heat2"
@@ -18540,7 +18540,7 @@
     "sort_id": 1096,
     "dynamic": {
       "type": "armor",
-      "durability": 36000,
+      "durability": 72000,
       "passive_skills": [
         "TemperatureResist_Cold1",
         "TemperatureResist_Heat2"
@@ -18585,7 +18585,7 @@
     "sort_id": 1101,
     "dynamic": {
       "type": "armor",
-      "durability": 21600,
+      "durability": 27000,
       "passive_skills": [
         "TemperatureResist_Cold1",
         "TemperatureResist_Heat1",
@@ -18608,7 +18608,7 @@
     "sort_id": 1102,
     "dynamic": {
       "type": "armor",
-      "durability": 23400,
+      "durability": 36000,
       "passive_skills": [
         "TemperatureResist_Cold1",
         "TemperatureResist_Heat1",
@@ -18631,7 +18631,7 @@
     "sort_id": 1103,
     "dynamic": {
       "type": "armor",
-      "durability": 25200,
+      "durability": 54000,
       "passive_skills": [
         "TemperatureResist_Cold1",
         "TemperatureResist_Heat1",
@@ -18654,7 +18654,7 @@
     "sort_id": 1104,
     "dynamic": {
       "type": "armor",
-      "durability": 36000,
+      "durability": 72000,
       "passive_skills": [
         "TemperatureResist_Cold1",
         "TemperatureResist_Heat1",
@@ -18677,7 +18677,7 @@
     "sort_id": 1089,
     "dynamic": {
       "type": "armor",
-      "durability": 21600,
+      "durability": 27000,
       "passive_skills": [
         "TemperatureResist_Cold1",
         "TemperatureResist_Heat1"
@@ -18699,7 +18699,7 @@
     "sort_id": 1090,
     "dynamic": {
       "type": "armor",
-      "durability": 23400,
+      "durability": 36000,
       "passive_skills": [
         "TemperatureResist_Cold1",
         "TemperatureResist_Heat1"
@@ -18721,7 +18721,7 @@
     "sort_id": 1091,
     "dynamic": {
       "type": "armor",
-      "durability": 25200,
+      "durability": 54000,
       "passive_skills": [
         "TemperatureResist_Cold1",
         "TemperatureResist_Heat1"
@@ -18743,7 +18743,7 @@
     "sort_id": 1092,
     "dynamic": {
       "type": "armor",
-      "durability": 36000,
+      "durability": 72000,
       "passive_skills": [
         "TemperatureResist_Cold1",
         "TemperatureResist_Heat1"
@@ -18784,7 +18784,7 @@
     "sort_id": 1221,
     "dynamic": {
       "type": "armor",
-      "durability": 21600,
+      "durability": 27000,
       "passive_skills": []
     },
     "defense": 312,
@@ -18803,7 +18803,7 @@
     "sort_id": 1222,
     "dynamic": {
       "type": "armor",
-      "durability": 23400,
+      "durability": 36000,
       "passive_skills": []
     },
     "defense": 338,
@@ -18822,7 +18822,7 @@
     "sort_id": 1223,
     "dynamic": {
       "type": "armor",
-      "durability": 25200,
+      "durability": 54000,
       "passive_skills": []
     },
     "defense": 364,
@@ -18841,7 +18841,7 @@
     "sort_id": 1225,
     "dynamic": {
       "type": "armor",
-      "durability": 36000,
+      "durability": 72000,
       "passive_skills": []
     },
     "defense": 390,
@@ -19232,7 +19232,7 @@
     "max_stack_count": 9999,
     "weight": 2.0,
     "price": 70,
-    "sort_id": 5027,
+    "sort_id": 5028,
     "disabled": false,
     "icon": "T_itemicon_Material_RainbowCrystal"
   },
@@ -19435,7 +19435,7 @@
     "sort_id": 1116,
     "dynamic": {
       "type": "armor",
-      "durability": 21600,
+      "durability": 27000,
       "passive_skills": [
         "TemperatureResist_Cold2",
         "TemperatureResist_Heat1"
@@ -19457,7 +19457,7 @@
     "sort_id": 1117,
     "dynamic": {
       "type": "armor",
-      "durability": 23400,
+      "durability": 36000,
       "passive_skills": [
         "TemperatureResist_Cold2",
         "TemperatureResist_Heat1"
@@ -19479,7 +19479,7 @@
     "sort_id": 1118,
     "dynamic": {
       "type": "armor",
-      "durability": 25200,
+      "durability": 54000,
       "passive_skills": [
         "TemperatureResist_Cold2",
         "TemperatureResist_Heat1"
@@ -19501,7 +19501,7 @@
     "sort_id": 1119,
     "dynamic": {
       "type": "armor",
-      "durability": 36000,
+      "durability": 72000,
       "passive_skills": [
         "TemperatureResist_Cold2",
         "TemperatureResist_Heat1"
@@ -19545,7 +19545,7 @@
     "sort_id": 1111,
     "dynamic": {
       "type": "armor",
-      "durability": 21600,
+      "durability": 27000,
       "passive_skills": [
         "TemperatureResist_Cold1",
         "TemperatureResist_Heat2"
@@ -19567,7 +19567,7 @@
     "sort_id": 1112,
     "dynamic": {
       "type": "armor",
-      "durability": 23400,
+      "durability": 36000,
       "passive_skills": [
         "TemperatureResist_Cold1",
         "TemperatureResist_Heat2"
@@ -19589,7 +19589,7 @@
     "sort_id": 1113,
     "dynamic": {
       "type": "armor",
-      "durability": 25200,
+      "durability": 54000,
       "passive_skills": [
         "TemperatureResist_Cold1",
         "TemperatureResist_Heat2"
@@ -19611,7 +19611,7 @@
     "sort_id": 1114,
     "dynamic": {
       "type": "armor",
-      "durability": 36000,
+      "durability": 72000,
       "passive_skills": [
         "TemperatureResist_Cold1",
         "TemperatureResist_Heat2"
@@ -19656,7 +19656,7 @@
     "sort_id": 1121,
     "dynamic": {
       "type": "armor",
-      "durability": 21600,
+      "durability": 27000,
       "passive_skills": [
         "TemperatureResist_Cold1",
         "TemperatureResist_Heat1",
@@ -19679,7 +19679,7 @@
     "sort_id": 1122,
     "dynamic": {
       "type": "armor",
-      "durability": 23400,
+      "durability": 36000,
       "passive_skills": [
         "TemperatureResist_Cold1",
         "TemperatureResist_Heat1",
@@ -19702,7 +19702,7 @@
     "sort_id": 1123,
     "dynamic": {
       "type": "armor",
-      "durability": 25200,
+      "durability": 54000,
       "passive_skills": [
         "TemperatureResist_Cold1",
         "TemperatureResist_Heat1",
@@ -19725,7 +19725,7 @@
     "sort_id": 1124,
     "dynamic": {
       "type": "armor",
-      "durability": 36000,
+      "durability": 72000,
       "passive_skills": [
         "TemperatureResist_Cold1",
         "TemperatureResist_Heat1",
@@ -19748,7 +19748,7 @@
     "sort_id": 1106,
     "dynamic": {
       "type": "armor",
-      "durability": 24000,
+      "durability": 30000,
       "passive_skills": [
         "TemperatureResist_Cold1",
         "TemperatureResist_Heat1"
@@ -19770,7 +19770,7 @@
     "sort_id": 1107,
     "dynamic": {
       "type": "armor",
-      "durability": 26000,
+      "durability": 40000,
       "passive_skills": [
         "TemperatureResist_Cold1",
         "TemperatureResist_Heat1"
@@ -19792,7 +19792,7 @@
     "sort_id": 1108,
     "dynamic": {
       "type": "armor",
-      "durability": 28000,
+      "durability": 60000,
       "passive_skills": [
         "TemperatureResist_Cold1",
         "TemperatureResist_Heat1"
@@ -19814,7 +19814,7 @@
     "sort_id": 1109,
     "dynamic": {
       "type": "armor",
-      "durability": 40000,
+      "durability": 80000,
       "passive_skills": [
         "TemperatureResist_Cold1",
         "TemperatureResist_Heat1"
@@ -19869,7 +19869,7 @@
     "sort_id": 256,
     "dynamic": {
       "type": "weapon",
-      "durability": 600,
+      "durability": 750,
       "magazine_size": 1,
       "passive_skills": []
     },
@@ -19889,7 +19889,7 @@
     "sort_id": 257,
     "dynamic": {
       "type": "weapon",
-      "durability": 650,
+      "durability": 1000,
       "magazine_size": 1,
       "passive_skills": []
     },
@@ -19909,7 +19909,7 @@
     "sort_id": 258,
     "dynamic": {
       "type": "weapon",
-      "durability": 700,
+      "durability": 1500,
       "magazine_size": 1,
       "passive_skills": []
     },
@@ -19929,7 +19929,7 @@
     "sort_id": 259,
     "dynamic": {
       "type": "weapon",
-      "durability": 1000,
+      "durability": 2000,
       "magazine_size": 1,
       "passive_skills": []
     },
@@ -19968,7 +19968,7 @@
     "sort_id": 1226,
     "dynamic": {
       "type": "armor",
-      "durability": 24000,
+      "durability": 30000,
       "passive_skills": []
     },
     "defense": 385,
@@ -19987,7 +19987,7 @@
     "sort_id": 1227,
     "dynamic": {
       "type": "armor",
-      "durability": 26000,
+      "durability": 40000,
       "passive_skills": []
     },
     "defense": 402,
@@ -20006,7 +20006,7 @@
     "sort_id": 1228,
     "dynamic": {
       "type": "armor",
-      "durability": 28000,
+      "durability": 60000,
       "passive_skills": []
     },
     "defense": 420,
@@ -20025,7 +20025,7 @@
     "sort_id": 1229,
     "dynamic": {
       "type": "armor",
-      "durability": 40000,
+      "durability": 80000,
       "passive_skills": []
     },
     "defense": 455,
@@ -20129,7 +20129,7 @@
     "sort_id": 521,
     "dynamic": {
       "type": "weapon",
-      "durability": 1200,
+      "durability": 1500,
       "magazine_size": 9,
       "passive_skills": []
     },
@@ -20149,7 +20149,7 @@
     "sort_id": 522,
     "dynamic": {
       "type": "weapon",
-      "durability": 1300,
+      "durability": 2000,
       "magazine_size": 10,
       "passive_skills": []
     },
@@ -20169,7 +20169,7 @@
     "sort_id": 523,
     "dynamic": {
       "type": "weapon",
-      "durability": 1400,
+      "durability": 3000,
       "magazine_size": 11,
       "passive_skills": []
     },
@@ -20189,7 +20189,7 @@
     "sort_id": 524,
     "dynamic": {
       "type": "weapon",
-      "durability": 2000,
+      "durability": 4000,
       "magazine_size": 12,
       "passive_skills": []
     },
@@ -20229,7 +20229,7 @@
     "sort_id": 431,
     "dynamic": {
       "type": "weapon",
-      "durability": 400,
+      "durability": 450,
       "magazine_size": 11,
       "passive_skills": []
     },
@@ -20249,7 +20249,7 @@
     "sort_id": 432,
     "dynamic": {
       "type": "weapon",
-      "durability": 550,
+      "durability": 600,
       "magazine_size": 12,
       "passive_skills": []
     },
@@ -20269,7 +20269,7 @@
     "sort_id": 433,
     "dynamic": {
       "type": "weapon",
-      "durability": 750,
+      "durability": 900,
       "magazine_size": 13,
       "passive_skills": []
     },
@@ -20289,7 +20289,7 @@
     "sort_id": 434,
     "dynamic": {
       "type": "weapon",
-      "durability": 1000,
+      "durability": 1200,
       "magazine_size": 14,
       "passive_skills": []
     },
@@ -20516,7 +20516,7 @@
     "sort_id": 514,
     "dynamic": {
       "type": "weapon",
-      "durability": 3500,
+      "durability": 4000,
       "magazine_size": 1,
       "passive_skills": []
     },
@@ -23256,7 +23256,7 @@
     "sort_id": 1081,
     "dynamic": {
       "type": "armor",
-      "durability": 12000,
+      "durability": 15000,
       "passive_skills": [
         "TemperatureResist_Cold2",
         "TemperatureResist_Heat1"
@@ -23278,7 +23278,7 @@
     "sort_id": 1082,
     "dynamic": {
       "type": "armor",
-      "durability": 15000,
+      "durability": 20000,
       "passive_skills": [
         "TemperatureResist_Cold2",
         "TemperatureResist_Heat1"
@@ -23300,7 +23300,7 @@
     "sort_id": 1083,
     "dynamic": {
       "type": "armor",
-      "durability": 18000,
+      "durability": 30000,
       "passive_skills": [
         "TemperatureResist_Cold2",
         "TemperatureResist_Heat1"
@@ -23322,7 +23322,7 @@
     "sort_id": 1084,
     "dynamic": {
       "type": "armor",
-      "durability": 22000,
+      "durability": 40000,
       "passive_skills": [
         "TemperatureResist_Cold2",
         "TemperatureResist_Heat1"
@@ -23366,7 +23366,7 @@
     "sort_id": 1076,
     "dynamic": {
       "type": "armor",
-      "durability": 12000,
+      "durability": 15000,
       "passive_skills": [
         "TemperatureResist_Heat2",
         "TemperatureResist_Cold1"
@@ -23388,7 +23388,7 @@
     "sort_id": 1077,
     "dynamic": {
       "type": "armor",
-      "durability": 15000,
+      "durability": 20000,
       "passive_skills": [
         "TemperatureResist_Heat2",
         "TemperatureResist_Cold1"
@@ -23410,7 +23410,7 @@
     "sort_id": 1078,
     "dynamic": {
       "type": "armor",
-      "durability": 18000,
+      "durability": 30000,
       "passive_skills": [
         "TemperatureResist_Heat2",
         "TemperatureResist_Cold1"
@@ -23432,7 +23432,7 @@
     "sort_id": 1079,
     "dynamic": {
       "type": "armor",
-      "durability": 22000,
+      "durability": 40000,
       "passive_skills": [
         "TemperatureResist_Heat2",
         "TemperatureResist_Cold1"
@@ -23618,7 +23618,7 @@
     "sort_id": 1219,
     "dynamic": {
       "type": "armor",
-      "durability": 19000,
+      "durability": 20000,
       "passive_skills": []
     },
     "defense": 240,
@@ -23750,7 +23750,7 @@
     "sort_id": 561,
     "dynamic": {
       "type": "weapon",
-      "durability": 2400,
+      "durability": 3000,
       "magazine_size": 26,
       "passive_skills": []
     },
@@ -23770,7 +23770,7 @@
     "sort_id": 562,
     "dynamic": {
       "type": "weapon",
-      "durability": 2600,
+      "durability": 4000,
       "magazine_size": 28,
       "passive_skills": []
     },
@@ -23790,7 +23790,7 @@
     "sort_id": 563,
     "dynamic": {
       "type": "weapon",
-      "durability": 2800,
+      "durability": 6000,
       "magazine_size": 30,
       "passive_skills": []
     },
@@ -23810,7 +23810,7 @@
     "sort_id": 564,
     "dynamic": {
       "type": "weapon",
-      "durability": 4000,
+      "durability": 8000,
       "magazine_size": 32,
       "passive_skills": []
     },
