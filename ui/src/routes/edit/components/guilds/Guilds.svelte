@@ -443,9 +443,7 @@
 			if (slot.dynamic_item) {
 				slot.dynamic_item.local_id = '00000000-0000-0000-0000-000000000000';
 			}
-			if (appState.selectedPlayer) {
-				appState.selectedPlayer.state = EntryState.MODIFIED;
-			}
+			currentStorageContainer!.state = EntryState.MODIFIED;
 		} else {
 			clearItem(slot);
 		}
@@ -688,7 +686,7 @@
 														currentStorageContainer!.state = EntryState.MODIFIED;
 													}}
 													onCopyPaste={(event) =>
-														handleCopyPaste(event, currentStorageContainer!.slots[index], false)}
+														handleCopyPaste(event, currentStorageContainer!.slots[index], true)}
 												/>
 											{/each}
 										</div>

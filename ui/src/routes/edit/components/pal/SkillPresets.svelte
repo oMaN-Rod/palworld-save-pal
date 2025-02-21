@@ -133,7 +133,7 @@
 </script>
 
 <Accordion value={['passive']}>
-	<Accordion.Item value="active">
+	<Accordion.Item value="active" controlHover="hover:preset-tonal-secondary">
 		{#snippet control()}
 			Active Skills
 		{/snippet}
@@ -193,7 +193,7 @@
 			</div>
 		{/snippet}
 	</Accordion.Item>
-	<Accordion.Item value="passive">
+	<Accordion.Item value="passive" controlHover="hover:preset-tonal-secondary">
 		{#snippet control()}
 			Passive Skills
 		{/snippet}
