@@ -4,7 +4,6 @@ Set-Location -Path $PSScriptRoot
 $version = (Get-Content -Path ".\palworld_save_pal\__version__.py" | Select-String -Pattern "__version__").Line.Split('"')[1]
 Write-Host "Building PALWorld Save Pal Desktop App version $version"
 
-
 $distDir = ".\dist\psp-windows-$version"
 if (Test-Path -Path $distDir) {
     Remove-Item -Path $distDir -Recurse -Force
@@ -21,7 +20,6 @@ if (Test-Path -Path ".\build\") {
 if (Test-Path -Path ".\ui_build\") {
     Remove-Item -Path ".\ui_build\" -Recurse -Force
 }
-
 
 @"
 PUBLIC_WS_URL=127.0.0.1:5174/ws
@@ -94,5 +92,10 @@ Copy-Item -Path ".\build\exe.win-amd64-*\*" -Destination $distDir -Recurse -Forc
 
 Write-Host "Cleaning up..."
 Remove-Item -Path ".\ui_build\" -Recurse -Force
+
+# Create ZIP archive of the distribution files
+$zipPath = ".\dist\psp-windows-$version-standalone.zip"
+Write-Host "Creating ZIP archive at $zipPath..."
+Compress-Archive -Path "$distDir\*" -DestinationPath $zipPath -Force
 
 Write-Host "Done building the desktop app."
