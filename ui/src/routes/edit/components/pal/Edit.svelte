@@ -204,7 +204,7 @@
 	<SectionHeader text="Active Skills">
 		{#snippet action()}
 			<div class="flex">
-				<Tooltip>
+				<Tooltip label="Edit Learned Skills">
 					<button
 						class="btn hover:bg-secondary-500/25 ml-2 p-2"
 						onclick={(event) => {
@@ -214,11 +214,8 @@
 					>
 						<Brain size={20} />
 					</button>
-					{#snippet popup()}
-						<span>Edit Learned Skills</span>
-					{/snippet}
 				</Tooltip>
-				<Tooltip>
+				<Tooltip label="Save as preset">
 					<button
 						class="btn hover:bg-secondary-500/25 ml-2 p-2"
 						onclick={(event) => {
@@ -228,9 +225,6 @@
 					>
 						<Save size={20} />
 					</button>
-					{#snippet popup()}
-						<span>Save as preset</span>
-					{/snippet}
 				</Tooltip>
 			</div>
 		{/snippet}
@@ -253,7 +247,7 @@
 	<SectionHeader text="Passive Skills">
 		{#snippet action()}
 			<div class="flex">
-				<Tooltip>
+				<Tooltip label="Save as preset">
 					<button
 						class="btn hover:bg-secondary-500/25 ml-2 p-2"
 						onclick={(event) => {
@@ -263,9 +257,6 @@
 					>
 						<Save size={20} />
 					</button>
-					{#snippet popup()}
-						<span>Save as preset</span>
-					{/snippet}
 				</Tooltip>
 			</div>
 		{/snippet}
@@ -284,13 +275,16 @@
 	<SectionHeader text="Work Suitability">
 		{#snippet action()}
 			<div class="flex">
-				<Tooltip>
-					<button class="btn hover:bg-secondary-500/25 ml-2 p-2" onclick={handleMaxWorkSuitability}>
+				<Tooltip label="Max out Work Suitability">
+					<button
+						class="btn hover:bg-secondary-500/25 ml-2 p-2"
+						onclick={(event) => {
+							event.stopPropagation();
+							handleMaxWorkSuitability();
+						}}
+					>
 						<BicepsFlexed />
 					</button>
-					{#snippet popup()}
-						<span>Max out Work Suitability</span>
-					{/snippet}
 				</Tooltip>
 			</div>
 		{/snippet}
@@ -301,13 +295,16 @@
 	<SectionHeader text="Talents (IVs)">
 		{#snippet action()}
 			<div class="flex">
-				<Tooltip>
-					<button class="btn hover:bg-secondary-500/25 ml-2 p-2" onclick={handleMaxIVs}>
+				<Tooltip label="Max out IVs">
+					<button
+						class="btn hover:bg-secondary-500/25 ml-2 p-2"
+						onclick={(event) => {
+							event.stopPropagation();
+							handleMaxIVs();
+						}}
+					>
 						<BicepsFlexed />
 					</button>
-					{#snippet popup()}
-						<span>Max out IVs</span>
-					{/snippet}
 				</Tooltip>
 			</div>
 		{/snippet}
@@ -318,13 +315,16 @@
 	<SectionHeader text="Souls">
 		{#snippet action()}
 			<div class="flex">
-				<Tooltip>
-					<button class="btn hover:bg-secondary-500/25 ml-2 p-2" onclick={handleMaxSouls}>
+				<Tooltip label="Max out Souls">
+					<button
+						class="btn hover:bg-secondary-500/25 ml-2 p-2"
+						onclick={(event) => {
+							event.stopPropagation();
+							handleMaxSouls();
+						}}
+					>
 						<BicepsFlexed />
 					</button>
-					{#snippet popup()}
-						<span>Max out Souls</span>
-					{/snippet}
 				</Tooltip>
 			</div>
 		{/snippet}
@@ -361,7 +361,7 @@
 								{@render activeSkillsBody()}
 							{/snippet}
 						</Accordion.Item>
-						<Accordion.Item value="passive_skills">
+						<Accordion.Item value="passive_skills" controlHover="hover:preset-tonal-secondary">
 							{#snippet control()}
 								{@render passiveSkillsHeader()}
 							{/snippet}
@@ -369,7 +369,7 @@
 								{@render passiveSkillsBody()}
 							{/snippet}
 						</Accordion.Item>
-						<Accordion.Item value="presets">
+						<Accordion.Item value="presets" controlHover="hover:preset-tonal-secondary">
 							{#snippet control()}
 								<SectionHeader text="Presets" />
 							{/snippet}
@@ -377,7 +377,7 @@
 								<SkillPresets onSelect={setSkillPreset} />
 							{/snippet}
 						</Accordion.Item>
-						<Accordion.Item value="work_suitability">
+						<Accordion.Item value="work_suitability" controlHover="hover:preset-tonal-secondary">
 							{#snippet control()}
 								{@render workSuitabilityHeader()}
 							{/snippet}

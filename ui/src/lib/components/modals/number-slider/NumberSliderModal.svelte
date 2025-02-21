@@ -40,7 +40,7 @@
 				{max}
 				{markers}
 				{step}
-				height="h-0.5"
+				height="h-2"
 				meterBg="bg-secondary-500"
 				thumbRingColor="ring-secondary-500"
 			/>

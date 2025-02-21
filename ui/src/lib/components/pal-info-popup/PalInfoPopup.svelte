@@ -39,8 +39,8 @@
 </script>
 
 <div class="flex w-[450px] flex-col space-y-2">
-	<PalHeader bind:pal showActions={false} />
-	<HealthBadge bind:pal player={appState.selectedPlayer} />
+	<PalHeader bind:pal showActions={false} popup />
+	<HealthBadge bind:pal />
 	<div class="flex justify-center space-x-2">
 		<span class="text-surface-300 mr-1 text-xs">IVs</span>
 		<div class="chip bg-green-700">

@@ -18,9 +18,14 @@
 	import { BicepsFlexed, Edit, Minus, Plus, Save } from 'lucide-svelte';
 	import { assetLoader, handleMaxOutPal, canBeBoss } from '$utils';
 
-	let { pal = $bindable(), showActions = true } = $props<{
+	let {
+		pal = $bindable(),
+		showActions = true,
+		popup = false
+	} = $props<{
 		pal?: Pal;
 		showActions?: boolean;
+		popup?: boolean;
 	}>();
 
 	const appState = getAppState();
@@ -241,7 +246,12 @@
 
 		<div class="grow">
 			<div class="flex flex-col">
-				<div class="flex flex-col items-start space-y-2 2xl:flex-row 2xl:space-x-2 2xl:space-y-0">
+				<div
+					class={cn(
+						'flex flex-col items-start space-y-2 2xl:flex-row 2xl:space-x-2 2xl:space-y-0',
+						popup ? '2xl:flex-col 2xl:space-y-0' : ''
+					)}
+				>
 					<h6 class="h6 grow">
 						{pal.nickname || pal.name}
 					</h6>
