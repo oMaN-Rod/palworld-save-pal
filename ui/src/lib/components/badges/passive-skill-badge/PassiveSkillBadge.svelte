@@ -98,7 +98,9 @@
 {#snippet hasSkill(passiveSkill: PassiveSkill)}
 	<Tooltip>
 		<div class="flex w-full items-center">
-			<span class="flex-grow p-2 text-start">{passiveSkill.localized_name}</span>
+			<span class="flex-grow p-2 text-start text-sm 2xl:text-base"
+				>{passiveSkill.localized_name}</span
+			>
 			<div class="relative z-10 flex items-center p-2">
 				<img
 					src={tierIcon}

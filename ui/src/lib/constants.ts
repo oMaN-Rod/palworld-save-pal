@@ -28,5 +28,6 @@ export const staticIcons = {
 	oilrigIcon: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/icons/oilrig.png`),
 	unknownIcon: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/icons/unknown.png`),
 	altarIcon: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/icons/altar.png`),
-	luckyIcon: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/icons/lucky.png`)
+	luckyIcon: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/icons/lucky.png`),
+	pspWhite: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/app/psp_white.png`)
 };

@@ -16,6 +16,7 @@
 		value = $bindable(''),
 		disabled = false,
 		error = false,
+		placeholder = 'Search...',
 		selectOption,
 		onChange = (value: string | number) => {},
 		...additionalProps
@@ -29,6 +30,7 @@
 		value?: string | number;
 		disabled?: boolean;
 		error?: boolean;
+		placeholder?: string;
 		selectOption?: Snippet<[SelectOption]>;
 		onChange?: (value: string | number) => void;
 		[key: string]: any;
@@ -184,7 +186,7 @@
 			<input
 				type="text"
 				class="w-full bg-transparent focus:outline-none"
-				placeholder="Search..."
+				{placeholder}
 				bind:value={searchTerm}
 				onfocus={() => (isOpen = true)}
 				oninput={() => (isOpen = true)}

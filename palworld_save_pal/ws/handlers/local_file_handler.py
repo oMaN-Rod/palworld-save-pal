@@ -39,9 +39,9 @@ async def backup_file(file_path: str, save_type: str, ws_callback):
     timestamp = time.strftime("%Y-%m-%d-%H-%M")
     extension = ".sav" if save_type == "steam" else ""
     backup_path = os.path.join(backup_dir, f"{file_name}_{timestamp}{extension}")
-    await ws_callback(f"Backing up save file {file_path} to {backup_path}...")
+    await ws_callback("Backing up save file... 🤓")
     if os.path.exists(file_path):
-        shutil.move(file_path, backup_path)
+        shutil.copy2(file_path, backup_path)
     else:
         await ws_callback(f"Save file {file_path} not found, skipping backup")
 
@@ -129,6 +129,7 @@ async def save_modded_gamepass_save(world_name: str, ws: WebSocket, ws_callback)
 
 async def save_modded_steam_save(ws: WebSocket, ws_callback, save_file: SaveFile):
     await backup_file(save_file.name, "steam", ws_callback)
+    await ws_callback("Writing new save file... 🚀")
     save_file.to_sav_file(save_file.name)
     response = build_response(
         MessageType.SAVE_MODDED_SAVE, f"Modded save file saved to {save_file.name}"

@@ -102,6 +102,13 @@ export type Base = {
 	pals: Record<string, Pal>;
 	container_id: string;
 	slot_count: number;
+	storage_containers: Record<string, ItemContainer>;
+	state: EntryState;
+};
+
+export type BaseDTO = {
+	id: string;
+	storage_containers: Record<string, ItemContainer>;
 };
 
 export type SaveFileType = 'gamepass' | 'steam';
@@ -208,17 +215,164 @@ export interface ItemContainer {
 	id: string;
 	type: string;
 	slots: ItemContainerSlot[];
+	key: string;
+	slot_num: number;
+	state?: EntryState;
 }
+
+export type PalPresetConfig = {
+	[K in keyof PalPreset]: boolean;
+};
+
+export type PalPresetPropertyNames = keyof PalPresetConfig;
+export type PalPresetNameDescriptionText = {
+	label: string;
+	description: string;
+};
+
+export const palPresetNameDescriptionMap: Record<keyof PalPreset, PalPresetNameDescriptionText> = {
+	is_lucky: {
+		label: 'Lucky',
+		description: 'Apply Lucky to preset'
+	},
+	is_boss: {
+		label: 'Boss',
+		description: 'Apply Boss to preset'
+	},
+	gender: {
+		label: 'Gender',
+		description: 'Apply Gender to preset'
+	},
+	rank_hp: {
+		label: 'HP Souls',
+		description: 'Apply HP Souls to preset'
+	},
+	rank_attack: {
+		label: 'Attack Souls',
+		description: 'Apply Attack Souls to preset'
+	},
+	rank_defense: {
+		label: 'Defense Souls',
+		description: 'Apply Defense Souls to preset'
+	},
+	rank_craftspeed: {
+		label: 'Craft Speed Souls',
+		description: 'Apply Craft Speed Souls to preset'
+	},
+	talent_hp: {
+		label: 'HP IV',
+		description: 'Apply HP IV to preset'
+	},
+	talent_shot: {
+		label: 'Shot IV',
+		description: 'Apply Shot IV to preset'
+	},
+	talent_defense: {
+		label: 'Defense IV',
+		description: 'Apply Defense IV to preset'
+	},
+	rank: {
+		label: 'Rank',
+		description: 'Apply Rank to preset'
+	},
+	level: {
+		label: 'Level',
+		description: 'Apply Level to preset'
+	},
+	learned_skills: {
+		label: 'Learned Skills',
+		description: 'Apply Learned Skills to preset'
+	},
+	active_skills: {
+		label: 'Active Skills',
+		description: 'Apply Active Skills to preset'
+	},
+	passive_skills: {
+		label: 'Passive Skills',
+		description: 'Apply Passive Skills to preset'
+	},
+	work_suitability: {
+		label: 'Work Suitability',
+		description: 'Apply Work Suitability to preset'
+	},
+	sanity: {
+		label: 'Sanity',
+		description: 'Apply Sanity to preset'
+	},
+	exp: {
+		label: 'EXP',
+		description: 'Apply EXP to preset'
+	},
+	lock: {
+		label: 'Lock Pal',
+		description: 'Lock specific Pal to preset, can only be used on this Pal'
+	},
+	character_id: {
+		label: 'Pal',
+		description: ''
+	}
+};
+
+export const defaultPresetConfig: PalPresetConfig = {
+	lock: false,
+	character_id: false,
+	is_lucky: true,
+	is_boss: true,
+	gender: true,
+	rank_hp: true,
+	rank_attack: true,
+	rank_defense: true,
+	rank_craftspeed: true,
+	talent_hp: true,
+	talent_shot: true,
+	talent_defense: true,
+	rank: true,
+	level: true,
+	learned_skills: true,
+	active_skills: true,
+	passive_skills: true,
+	work_suitability: true,
+	sanity: true,
+	exp: true
+};
+
+export type PalPreset = {
+	lock: boolean;
+	character_id?: string;
+	is_lucky?: boolean;
+	is_boss?: boolean;
+	gender?: PalGender;
+	rank_hp?: number;
+	rank_attack?: number;
+	rank_defense?: number;
+	rank_craftspeed?: number;
+	talent_hp?: number;
+	talent_shot?: number;
+	talent_defense?: number;
+	rank?: number;
+	level?: number;
+	learned_skills?: string[];
+	active_skills?: string[];
+	passive_skills?: string[];
+	work_suitability?: Record<WorkSuitability, number>;
+	sanity?: number;
+	exp?: number;
+};
 
 export interface PresetProfile {
 	name: string;
-	type: 'inventory' | 'active_skills' | 'passive_skills';
+	type: 'inventory' | 'active_skills' | 'passive_skills' | 'storage' | 'pal_preset';
 	skills?: string[];
 	common_container?: ItemContainerSlot[];
 	essential_container?: ItemContainerSlot[];
 	weapon_load_out_container?: ItemContainerSlot[];
 	player_equipment_armor_container?: ItemContainerSlot[];
 	food_equip_container?: ItemContainerSlot[];
+	storage_container?: {
+		key: string;
+		slots: ItemContainerSlot[];
+	};
+	pal_preset?: PalPreset;
 }
 
 // Frontend types
@@ -533,6 +687,62 @@ export type Element = {
 	fruit_icon: string;
 	white_icon: string;
 	localized_name: string;
+};
+
+export enum BuildingTypeA {
+	Product = 'Product',
+	Pal = 'Pal',
+	Storage = 'Storage',
+	Food = 'Food',
+	Infrastructure = 'Infrastructure',
+	Light = 'Light',
+	Foundation = 'Foundation',
+	Defense = 'Defense',
+	Other = 'Other',
+	Furniture = 'Furniture',
+	Dismantle = 'Dismantle',
+	EPalBuildObjectTypeA_MAX = 'EPalBuildObjectTypeA_MAX'
+}
+
+export enum BuildingTypeB {
+	Prod_Craft = 'Prod_Craft',
+	Prod_Resource = 'Prod_Resource',
+	Prod_Furnace = 'Prod_Furnace',
+	Prod_Medicine = 'Prod_Medicine',
+	Pal_Capture = 'Pal_Capture',
+	Pal_Breed = 'Pal_Breed',
+	Pal_Modify = 'Pal_Modify',
+	Infra_Medical = 'Infra_Medical',
+	Infra_Storage = 'Infra_Storage',
+	Infra_Trade = 'Infra_Trade',
+	Infra_GeneratePower = 'Infra_GeneratePower',
+	Infra_Defense = 'Infra_Defense',
+	Infra_Environment = 'Infra_Environment',
+	Food_Basic = 'Food_Basic',
+	Food_Agriculture = 'Food_Agriculture',
+	Food_Cooking = 'Food_Cooking',
+	Food_Livestock = 'Food_Livestock',
+	Found_Basic = 'Found_Basic',
+	Found_House = 'Found_House',
+	Other = 'Other',
+	EPalBuildObjectTypeB_MAX = 'EPalBuildObjectTypeB_MAX'
+}
+
+export type Building = {
+	localized_name: string;
+	type_a: BuildingTypeA;
+	type_b: BuildingTypeB;
+	rank: number;
+	required_work_amount: number;
+	required_energy_type: string;
+	consume_energy_speed: number;
+	materials: { id: string; count: number }[];
+	material_type: string;
+	material_sub_type: string;
+	hp: number;
+	defense: number;
+	deterioration_damage: number;
+	icon: string;
 };
 
 export enum EntryState {

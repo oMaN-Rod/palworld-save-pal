@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { ASSET_DATA_PATH } from '$lib/constants';
-	import { elementsData, palsData } from '$lib/data';
+	import { elementsData, palsData, presetsData } from '$lib/data';
 	import { getAppState, getSocketState, getModalState, getToastState } from '$states';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import { Input, Tooltip, TooltipButton } from '$components/ui';
-	import { NumberInputModal, PalSelectModal } from '$components/modals';
-	import { type ElementType, type Pal, type PalData, MessageType } from '$types';
+	import { NumberInputModal, PalSelectModal, PalPresetSelectModal } from '$components/modals';
+	import { type ElementType, type Pal, type PalData, EntryState, MessageType } from '$types';
 	import {
 		assetLoader,
 		debounce,
@@ -33,7 +33,8 @@
 		User,
 		ReplaceAll,
 		BicepsFlexed,
-		Bandage
+		Bandage,
+		Play
 	} from 'lucide-svelte';
 	import Card from '$components/ui/card/Card.svelte';
 	import { PalCard, PalBadge } from '$components';
@@ -634,7 +635,56 @@
 			}
 		});
 	}
+
+	async function handleSelectPreset() {
+		const selectedPalsData = selectedPals.map((id) => {
+			const palWithData = pals?.find((p) => p.id === id);
+			return {
+				character_id: palWithData?.pal.character_id,
+				character_key: palWithData?.pal.character_key
+			};
+		});
+		// @ts-ignore
+		const result = await modal.showModal<string>(PalPresetSelectModal, {
+			title: 'Select preset',
+			selectedPals: selectedPalsData
+		});
+		if (!result) return;
+
+		const presetProfile = presetsData.presetProfiles[result];
+
+		selectedPals.forEach((id) => {
+			const palWithData = pals?.find((p) => p.id === id);
+			if (palWithData) {
+				for (const [key, value] of Object.entries(presetProfile.pal_preset!)) {
+					if (key === 'character_id') continue;
+					if (key === 'lock' && value) {
+						palWithData.pal.character_id = presetProfile.pal_preset?.character_id as string;
+					} else if (value) {
+						(palWithData.pal as Record<string, any>)[key] = value;
+					}
+				}
+				palWithData.pal.state = EntryState.MODIFIED;
+			}
+		});
+	}
 </script>
+
+{#snippet party()}
+	<div class="flex flex-col space-y-2">
+		{#each Object.values(otomoContainer) as pal, index}
+			<PalCard
+				bind:pal={otomoContainer[pal.instance_id]}
+				bind:selected={selectedPals}
+				onSelect={handlePalSelect}
+				onMove={() => handleMoveToPalbox(pal)}
+				onDelete={() => handleDeletePal(pal)}
+				onAdd={() => handleAddPal('party', index)}
+				onClone={() => handleClonePal(pal)}
+			/>
+		{/each}
+	</div>
+{/snippet}
 
 {#if appState.selectedPlayer}
 	<div class="grid h-full w-full grid-cols-[25%_1fr]" {...additionalProps}>
@@ -683,6 +733,11 @@
 					</Tooltip>
 				{/if}
 				{#if selectedPals.length >= 1}
+					<Tooltip label="Apply preset to selected pal(s)">
+						<button class="btn hover:preset-tonal-secondary p-2" onclick={handleSelectPreset}>
+							<Play />
+						</button>
+					</Tooltip>
 					<Tooltip label="Heal selected pal(s)">
 						<button class="btn hover:preset-tonal-secondary p-2" onclick={healSelectedPals}>
 							<Ambulance />
@@ -693,7 +748,6 @@
 							<BicepsFlexed />
 						</button>
 					</Tooltip>
-
 					<Tooltip label="Delete selected pal(s)">
 						<button class="btn hover:preset-tonal-secondary p-2" onclick={deleteSelectedPals}>
 							<Trash />
@@ -709,8 +763,12 @@
 					</Tooltip>
 				{/if}
 			</div>
-			<Accordion classes="bg-surface-900" collapsible>
-				<Accordion.Item value="filter" controlHover="hover:bg-secondary-500/25">
+			<Accordion collapsible>
+				<Accordion.Item
+					value="filter"
+					base="rounded bg-surface-900"
+					controlHover="hover:bg-secondary-500/25"
+				>
 					{#snippet lead()}<Search />{/snippet}
 					{#snippet control()}
 						<span class="font-bold">Filter & Sort</span>
@@ -758,7 +816,7 @@
 						<div>
 							<legend class="font-bold">Element & Type</legend>
 							<hr />
-							<div class="mt-2 grid grid-cols-6">
+							<div class="mt-2 grid grid-cols-4 2xl:grid-cols-6">
 								<Tooltip>
 									<button class={elementClass('All')} onclick={() => (selectedFilter = 'All')}>
 										<GalleryVerticalEnd />
@@ -844,25 +902,25 @@
 						</div>
 					{/snippet}
 				</Accordion.Item>
+				<Accordion.Item
+					value="party"
+					base="block 2xl:hidden rounded bg-surface-900"
+					controlHover="hover:bg-secondary-500/25"
+				>
+					{#snippet lead()}<User />{/snippet}
+					{#snippet control()}
+						<span class="font-bold">Party</span>
+					{/snippet}
+					{#snippet panel()}
+						{@render party()}
+					{/snippet}
+				</Accordion.Item>
 			</Accordion>
-			<div class="mt-2 flex">
-				<Card rounded="rounded-none" class="w-full p-4">
-					<div class="flex flex-col space-y-2">
-						<h6 class="h6 mr-4">Party</h6>
-						{#each Object.values(otomoContainer) as pal, index}
-							<PalCard
-								bind:pal={otomoContainer[pal.instance_id]}
-								bind:selected={selectedPals}
-								onSelect={handlePalSelect}
-								onMove={() => handleMoveToPalbox(pal)}
-								onDelete={() => handleDeletePal(pal)}
-								onAdd={() => handleAddPal('party', index)}
-								onClone={() => handleClonePal(pal)}
-							/>
-						{/each}
-					</div>
-				</Card>
-			</div>
+
+			<Card rounded="rounded" class="mt-2 hidden 2xl:block">
+				<h4 class="h4 mb-2">Party</h4>
+				{@render party()}
+			</Card>
 		</div>
 
 		<div>
@@ -892,7 +950,7 @@
 			</div>
 
 			<div class="overflow-hidden">
-				<div class="grid grid-cols-6 gap-4 p-4">
+				<div class="grid grid-cols-6 place-items-center gap-4 p-4">
 					{#each currentPageItems as item (item.pal.instance_id)}
 						{#if item.pal.character_id !== 'None' || (!searchQuery && selectedFilter === 'All' && sortBy === 'slot-index')}
 							<PalBadge

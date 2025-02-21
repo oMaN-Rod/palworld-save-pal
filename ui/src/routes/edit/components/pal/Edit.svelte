@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { PalHeader } from '$components';
+	import { HealthBadge, PalHeader } from '$components';
 
 	import {
 		ActiveSkillBadge,
@@ -19,6 +19,7 @@
 	import { Souls } from '$components';
 	import SkillPresets from './SkillPresets.svelte';
 	import { assetLoader, calculateFilters } from '$utils';
+	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 
 	const appState = getAppState();
 	const modal = getModalState();
@@ -199,6 +200,137 @@
 	}
 </script>
 
+{#snippet activeSkillsHeader()}
+	<SectionHeader text="Active Skills">
+		{#snippet action()}
+			<div class="flex">
+				<Tooltip>
+					<button
+						class="btn hover:bg-secondary-500/25 ml-2 p-2"
+						onclick={(event) => {
+							event.stopPropagation();
+							handleEditLearnedSkills();
+						}}
+					>
+						<Brain size={20} />
+					</button>
+					{#snippet popup()}
+						<span>Edit Learned Skills</span>
+					{/snippet}
+				</Tooltip>
+				<Tooltip>
+					<button
+						class="btn hover:bg-secondary-500/25 ml-2 p-2"
+						onclick={(event) => {
+							event.stopPropagation();
+							handleAddPreset('active');
+						}}
+					>
+						<Save size={20} />
+					</button>
+					{#snippet popup()}
+						<span>Save as preset</span>
+					{/snippet}
+				</Tooltip>
+			</div>
+		{/snippet}
+	</SectionHeader>
+{/snippet}
+
+{#snippet activeSkillsBody()}
+	<div class="flex flex-col space-y-2">
+		{#each activeSkills as skill}
+			<ActiveSkillBadge
+				{skill}
+				onSkillUpdate={handleUpdateActiveSkill}
+				palCharacterId={appState.selectedPal!.character_key}
+			/>
+		{/each}
+	</div>
+{/snippet}
+
+{#snippet passiveSkillsHeader()}
+	<SectionHeader text="Passive Skills">
+		{#snippet action()}
+			<div class="flex">
+				<Tooltip>
+					<button
+						class="btn hover:bg-secondary-500/25 ml-2 p-2"
+						onclick={(event) => {
+							event.stopPropagation();
+							handleAddPreset('passive');
+						}}
+					>
+						<Save size={20} />
+					</button>
+					{#snippet popup()}
+						<span>Save as preset</span>
+					{/snippet}
+				</Tooltip>
+			</div>
+		{/snippet}
+	</SectionHeader>
+{/snippet}
+
+{#snippet passiveSkillsBody()}
+	<div class="grid grid-cols-2 gap-2">
+		{#each passiveSkills as skill}
+			<PassiveSkillBadge {skill} onSkillUpdate={handleUpdatePassiveSkill} />
+		{/each}
+	</div>
+{/snippet}
+
+{#snippet workSuitabilityHeader()}
+	<SectionHeader text="Work Suitability">
+		{#snippet action()}
+			<div class="flex">
+				<Tooltip>
+					<button class="btn hover:bg-secondary-500/25 ml-2 p-2" onclick={handleMaxWorkSuitability}>
+						<BicepsFlexed />
+					</button>
+					{#snippet popup()}
+						<span>Max out Work Suitability</span>
+					{/snippet}
+				</Tooltip>
+			</div>
+		{/snippet}
+	</SectionHeader>
+{/snippet}
+
+{#snippet talentsHeader()}
+	<SectionHeader text="Talents (IVs)">
+		{#snippet action()}
+			<div class="flex">
+				<Tooltip>
+					<button class="btn hover:bg-secondary-500/25 ml-2 p-2" onclick={handleMaxIVs}>
+						<BicepsFlexed />
+					</button>
+					{#snippet popup()}
+						<span>Max out IVs</span>
+					{/snippet}
+				</Tooltip>
+			</div>
+		{/snippet}
+	</SectionHeader>
+{/snippet}
+
+{#snippet soulsHeader()}
+	<SectionHeader text="Souls">
+		{#snippet action()}
+			<div class="flex">
+				<Tooltip>
+					<button class="btn hover:bg-secondary-500/25 ml-2 p-2" onclick={handleMaxSouls}>
+						<BicepsFlexed />
+					</button>
+					{#snippet popup()}
+						<span>Max out Souls</span>
+					{/snippet}
+				</Tooltip>
+			</div>
+		{/snippet}
+	</SectionHeader>
+{/snippet}
+
 {#if appState.selectedPal}
 	<div class="flex h-full overflow-auto p-2">
 		<div class="flex flex-grow flex-col">
@@ -206,86 +338,54 @@
 				<PalHeader bind:pal={appState.selectedPal} />
 			</div>
 			<div class="flex flex-grow">
-				<div class="flex-1 overflow-auto p-2">
+				<div class="hidden flex-1 overflow-auto p-2 2xl:block">
 					<div class="flex flex-col space-y-2">
-						<SectionHeader text="Active Skills">
-							{#snippet action()}
-								<div class="flex">
-									<Tooltip>
-										<button
-											class="btn hover:bg-secondary-500/25 ml-2 p-2"
-											onclick={handleEditLearnedSkills}
-										>
-											<Brain size={20} />
-										</button>
-										{#snippet popup()}
-											<span>Edit Learned Skills</span>
-										{/snippet}
-									</Tooltip>
-									<Tooltip>
-										<button
-											class="btn hover:bg-secondary-500/25 ml-2 p-2"
-											onclick={() => handleAddPreset('active')}
-										>
-											<Save size={20} />
-										</button>
-										{#snippet popup()}
-											<span>Save as preset</span>
-										{/snippet}
-									</Tooltip>
-								</div>
-							{/snippet}
-						</SectionHeader>
-						{#each activeSkills as skill}
-							<ActiveSkillBadge
-								{skill}
-								onSkillUpdate={handleUpdateActiveSkill}
-								palCharacterId={appState.selectedPal.character_key}
-							/>
-						{/each}
-						<SectionHeader text="Passive Skills">
-							{#snippet action()}
-								<div class="flex">
-									<Tooltip>
-										<button
-											class="btn hover:bg-secondary-500/25 ml-2 p-2"
-											onclick={() => handleAddPreset('passive')}
-										>
-											<Save size={20} />
-										</button>
-										{#snippet popup()}
-											<span>Save as preset</span>
-										{/snippet}
-									</Tooltip>
-								</div>
-							{/snippet}
-						</SectionHeader>
-						<div class="grid grid-cols-2 gap-2">
-							{#each passiveSkills as skill}
-								<PassiveSkillBadge {skill} onSkillUpdate={handleUpdatePassiveSkill} />
-							{/each}
-						</div>
+						{@render activeSkillsHeader()}
+						{@render activeSkillsBody()}
+						{@render passiveSkillsHeader()}
+						{@render passiveSkillsBody()}
+
 						<SectionHeader text="Presets" />
 						<SkillPresets onSelect={setSkillPreset} />
-						<SectionHeader text="Work Suitability">
-							{#snippet action()}
-								<div class="flex">
-									<Tooltip>
-										<button
-											class="btn hover:bg-secondary-500/25 ml-2 p-2"
-											onclick={handleMaxWorkSuitability}
-										>
-											<BicepsFlexed />
-										</button>
-										{#snippet popup()}
-											<span>Max out Work Suitability</span>
-										{/snippet}
-									</Tooltip>
-								</div>
-							{/snippet}
-						</SectionHeader>
+						{@render workSuitabilityHeader()}
 						<WorkSuitabilities bind:pal={appState.selectedPal} />
 					</div>
+				</div>
+				<div class="mt-4 2xl:hidden">
+					<Accordion classes="min-w-96 max-w-96" value={['active_skills']} collapsible>
+						<Accordion.Item value="active_skills" controlHover="hover:preset-tonal-secondary">
+							{#snippet control()}
+								{@render activeSkillsHeader()}
+							{/snippet}
+							{#snippet panel()}
+								{@render activeSkillsBody()}
+							{/snippet}
+						</Accordion.Item>
+						<Accordion.Item value="passive_skills">
+							{#snippet control()}
+								{@render passiveSkillsHeader()}
+							{/snippet}
+							{#snippet panel()}
+								{@render passiveSkillsBody()}
+							{/snippet}
+						</Accordion.Item>
+						<Accordion.Item value="presets">
+							{#snippet control()}
+								<SectionHeader text="Presets" />
+							{/snippet}
+							{#snippet panel()}
+								<SkillPresets onSelect={setSkillPreset} />
+							{/snippet}
+						</Accordion.Item>
+						<Accordion.Item value="work_suitability">
+							{#snippet control()}
+								{@render workSuitabilityHeader()}
+							{/snippet}
+							{#snippet panel()}
+								<WorkSuitabilities bind:pal={appState.selectedPal} />
+							{/snippet}
+						</Accordion.Item>
+					</Accordion>
 				</div>
 				<div class="flex-1 overflow-auto p-2">
 					<div class="flex h-full flex-col items-center justify-center">
@@ -300,7 +400,7 @@
 									<img
 										src={palImage}
 										alt={`${appState.selectedPal?.name} icon`}
-										class="max-h-[600px] max-w-full"
+										class="max-h-[350px] max-w-full 2xl:max-h-[600px]"
 									/>
 									{#if appState.selectedPal.is_predator}
 										<img
@@ -328,38 +428,43 @@
 			</div>
 		</div>
 		<div class="w-1/3 overflow-auto p-2">
-			<div class="flex flex-col space-y-2">
+			<div class="hidden flex-col space-y-2 2xl:flex">
+				<HealthBadge bind:pal={appState.selectedPal} />
+				<SectionHeader text="Stats" />
 				<StatsBadges bind:pal={appState.selectedPal} bind:player={appState.selectedPlayer} />
-				<SectionHeader text="Talents (IVs)">
-					{#snippet action()}
-						<div class="flex">
-							<Tooltip>
-								<button class="btn hover:bg-secondary-500/25 ml-2 p-2" onclick={handleMaxIVs}>
-									<BicepsFlexed />
-								</button>
-								{#snippet popup()}
-									<span>Max out IVs</span>
-								{/snippet}
-							</Tooltip>
-						</div>
-					{/snippet}
-				</SectionHeader>
+				{@render talentsHeader()}
 				<Talents bind:pal={appState.selectedPal} />
-				<SectionHeader text="Souls">
-					{#snippet action()}
-						<div class="flex">
-							<Tooltip>
-								<button class="btn hover:bg-secondary-500/25 ml-2 p-2" onclick={handleMaxSouls}>
-									<BicepsFlexed />
-								</button>
-								{#snippet popup()}
-									<span>Max out Souls</span>
-								{/snippet}
-							</Tooltip>
-						</div>
-					{/snippet}
-				</SectionHeader>
+				{@render soulsHeader()}
 				<Souls bind:pal={appState.selectedPal} />
+			</div>
+			<div class="flex flex-col space-y-2 2xl:hidden">
+				<HealthBadge bind:pal={appState.selectedPal} />
+				<Accordion classes="min-w-96" value={['stats']} collapsible>
+					<Accordion.Item value="stats" controlHover="hover:preset-tonal-secondary">
+						{#snippet control()}
+							<SectionHeader text="Stats" />
+						{/snippet}
+						{#snippet panel()}
+							<StatsBadges bind:pal={appState.selectedPal} bind:player={appState.selectedPlayer} />
+						{/snippet}
+					</Accordion.Item>
+					<Accordion.Item value="talents" controlHover="hover:preset-tonal-secondary">
+						{#snippet control()}
+							{@render talentsHeader()}
+						{/snippet}
+						{#snippet panel()}
+							<Talents bind:pal={appState.selectedPal!} />
+						{/snippet}
+					</Accordion.Item>
+					<Accordion.Item value="souls" controlHover="hover:preset-tonal-secondary">
+						{#snippet control()}
+							{@render soulsHeader()}
+						{/snippet}
+						{#snippet panel()}
+							<Souls bind:pal={appState.selectedPal!} />
+						{/snippet}
+					</Accordion.Item>
+				</Accordion>
 			</div>
 		</div>
 	</div>

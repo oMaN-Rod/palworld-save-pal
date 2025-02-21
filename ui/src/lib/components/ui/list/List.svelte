@@ -121,7 +121,7 @@
 			{#if canSelect}
 				<Checkbox bind:checked={selectAll} onchange={handleSelectAll} class="mr-2" />
 			{/if}
-			{@render listHeader()}
+			{@render listHeader?.()}
 		</div>
 	</div>
 	<ul class={listClass}>
@@ -147,9 +147,7 @@
 						>
 							{@render listItem(item)}
 						</button>
-						{#if listItemActions}
-							{@render listItemActions(item)}
-						{/if}
+						{@render listItemActions?.(item)}
 					</div>
 					{#snippet popup()}
 						{@render listItemPopup(item)}

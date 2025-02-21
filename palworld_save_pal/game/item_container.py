@@ -2,7 +2,7 @@ from enum import Enum
 from typing import Any, Dict, List, Optional
 from uuid import UUID
 import uuid
-from pydantic import BaseModel, Field, PrivateAttr
+from pydantic import BaseModel, Field, PrivateAttr, computed_field
 
 from palworld_save_pal.game.item_container_slot import ItemContainerSlot
 from palworld_save_pal.game.dynamic_item import DynamicItem
@@ -23,12 +23,15 @@ class ItemContainerType(str, Enum):
     WEAPON = "WeaponLoadOutContainer"
     ARMOR = "PlayerEquipArmorContainer"
     FOOD = "FoodEquipContainer"
+    BASE = "BaseContainer"
 
 
 class ItemContainer(BaseModel):
     id: UUID
     type: ItemContainerType
     slots: List[ItemContainerSlot] = Field(default_factory=list)
+    key: Optional[str] = None
+    slot_num: int = 0
 
     _container_slots_data: Optional[List[Dict[str, Any]]] = PrivateAttr(
         default_factory=list
@@ -91,6 +94,9 @@ class ItemContainer(BaseModel):
                 self._container_slots_data = PalObjects.get_array_property(
                     PalObjects.get_nested(entry, "value", "Slots")
                 )
+                self.slot_num = PalObjects.get_value(
+                    PalObjects.get_nested(entry, "value", "SlotNum")
+                )
                 break
 
     def _get_dynamic_item(self, local_id: UUID) -> Optional[DynamicItem]:
@@ -126,11 +132,10 @@ class ItemContainer(BaseModel):
             raw_data = PalObjects.get_value(slot["RawData"])
             slot_index = PalObjects.get_nested(raw_data, "slot_index")
             count = PalObjects.get_nested(raw_data, "count")
-            static_id = PalObjects.get_nested(raw_data, "static_id")
+            static_id = PalObjects.get_nested(raw_data, "item", "static_id")
             local_id = PalObjects.as_uuid(
                 PalObjects.get_nested(
-                    raw_data,
-                    "local_id",
+                    raw_data, "item", "dynamic_id", "local_id_in_created_world"
                 )
             )
             dynamic_item = None

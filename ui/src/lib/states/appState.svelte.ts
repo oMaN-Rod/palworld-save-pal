@@ -1,6 +1,13 @@
 // src/lib/states/appState.svelte.ts
 import { goto } from '$app/navigation';
-import type { AppSettings, GamepassSave, Guild, ItemContainerSlot } from '$types';
+import type {
+	AppSettings,
+	BaseDTO,
+	GamepassSave,
+	Guild,
+	ItemContainer,
+	ItemContainerSlot
+} from '$types';
 import { EntryState, MessageType, type Pal, type Player, type SaveFile } from '$types';
 import { getToastState } from './toastState.svelte';
 import { getSocketState } from './websocketState.svelte';
@@ -11,6 +18,7 @@ const toast = getToastState();
 interface ModifiedData {
 	modified_pals?: Record<string, Pal>;
 	modified_players?: Record<string, Player>;
+	modified_guilds?: Record<string, BaseDTO>;
 }
 
 export function createAppState() {
@@ -61,6 +69,7 @@ export function createAppState() {
 		let modifiedData: ModifiedData = {};
 		let modifiedPals: [string, Pal][] = [];
 		let modifiedPlayers: [string, Player][] = [];
+		let modifiedGuilds: [string, BaseDTO][] = [];
 
 		for (const player of Object.values(appState.modifiedPlayers)) {
 			if (player.state === EntryState.MODIFIED) {
@@ -89,11 +98,30 @@ export function createAppState() {
 							}
 						}
 					}
+					let modifiedContainers: [string, ItemContainer][] = [];
+					for (const container of Object.values(base.storage_containers)) {
+						if (container.state === EntryState.MODIFIED) {
+							modifiedContainers = [...modifiedContainers, [container.id, container]];
+							container.state = EntryState.NONE;
+						}
+					}
+					if (modifiedContainers.length > 0) {
+						modifiedGuilds = [
+							...modifiedGuilds,
+							[
+								guild.id,
+								{
+									id: base.id,
+									storage_containers: Object.fromEntries(modifiedContainers)
+								}
+							]
+						];
+					}
 				}
 			}
 		}
 
-		if (modifiedPals.length === 0 && modifiedPlayers.length === 0) {
+		if (modifiedPals.length === 0 && modifiedPlayers.length === 0 && modifiedGuilds.length === 0) {
 			console.log('No modifications to save');
 			toast.add('No modifications to save', undefined, 'info');
 			return;
@@ -105,6 +133,10 @@ export function createAppState() {
 
 		if (modifiedPlayers.length > 0) {
 			modifiedData.modified_players = Object.fromEntries(modifiedPlayers);
+		}
+
+		if (modifiedGuilds.length > 0) {
+			modifiedData.modified_guilds = Object.fromEntries(modifiedGuilds);
 		}
 
 		await goto('/loading');
