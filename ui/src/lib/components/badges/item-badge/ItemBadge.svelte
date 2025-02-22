@@ -77,9 +77,9 @@
 			return staticIcons.unknownIcon;
 		}
 		if (item && item.id.includes('SkillCard')) {
-			return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/elements/${item.details.icon}.png`);
+			return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${item.details.icon}.png`);
 		} else if (item) {
-			return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/icons/${item.details.icon}.png`);
+			return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${item.details.icon}.png`);
 		}
 	});
 
@@ -144,7 +144,7 @@
 				return;
 			}
 			const palImgName = palCharacterId.toLowerCase().replaceAll(' ', '_');
-			return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/pals/menu/${palImgName}_menu.png`);
+			return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${palImgName}_menu.png`);
 		}
 	});
 

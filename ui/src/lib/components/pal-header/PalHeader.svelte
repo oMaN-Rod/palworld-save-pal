@@ -109,7 +109,7 @@
 	async function getPalElementBadge(elementType: string): Promise<string | undefined> {
 		const elementObj = await elementsData.searchElement(elementType);
 		if (!elementObj) return undefined;
-		return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/elements/${elementObj.badge_icon}.png`);
+		return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${elementObj.badge_icon}.png`);
 	}
 
 	async function handleEditNickname() {
@@ -280,7 +280,7 @@
 						<Tooltip position="bottom" label="Toggle gender">
 							<CornerDotButton onClick={handleEditGender} class="h-8 w-8 p-1">
 								<img
-									src={assetLoader.loadImage(`${ASSET_DATA_PATH}/img/icons/${pal.gender}.png`)}
+									src={assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${pal.gender}.png`)}
 									alt={pal.gender}
 								/>
 							</CornerDotButton>

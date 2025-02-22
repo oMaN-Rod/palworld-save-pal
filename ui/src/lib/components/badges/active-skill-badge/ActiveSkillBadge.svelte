@@ -28,10 +28,10 @@
 		}
 		const element = elementsData.elements[activeSkill.details.element];
 		const elementIconWhite = assetLoader.loadImage(
-			`${ASSET_DATA_PATH}/img/elements/${element.white_icon}.png`
+			`${ASSET_DATA_PATH}/img/${element.white_icon}.png`
 		);
 		const elementIcon = assetLoader.loadImage(
-			`${ASSET_DATA_PATH}/img/elements/${element.icon}.png`
+			`${ASSET_DATA_PATH}/img/${element.icon}.png`
 		);
 		return { activeSkill, element, elementIconWhite, elementIcon };
 	});

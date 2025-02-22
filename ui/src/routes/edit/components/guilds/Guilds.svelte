@@ -93,7 +93,7 @@
 		if (!currentStorageContainer) return null;
 		const building = buildingsData.buildings[currentStorageContainer.key];
 		if (building) {
-			return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/buildings/${building.icon}.png`);
+			return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${building.icon}.png`);
 		}
 		return staticIcons.unknownIcon;
 	});
@@ -637,7 +637,7 @@
 									{@const building = buildingsData.buildings[item.key]}
 									{#if building}
 										{@const buildingIcon = assetLoader.loadImage(
-											`${ASSET_DATA_PATH}/img/buildings/${building.icon}.png`
+											`${ASSET_DATA_PATH}/img/${building.icon}.png`
 										)}
 										<div class="grid grid-cols-[auto_1fr] gap-2">
 											<img

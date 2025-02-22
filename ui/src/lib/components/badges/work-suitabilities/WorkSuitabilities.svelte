@@ -59,7 +59,7 @@
 		const active = value >= 1;
 		const prefix = active ? '' : 'no_';
 		return assetLoader.loadImage(
-			`${ASSET_DATA_PATH}/img/icons/${prefix}${suitabilityImageMap[ws]}.png`
+			`${ASSET_DATA_PATH}/img/${prefix}${suitabilityImageMap[ws]}.png`
 		);
 	}
 
