@@ -20,7 +20,7 @@ from palworld_save_tools.paltypes import (
 )
 
 from palworld_save_pal.game.base import Base, BaseDTO
-from palworld_save_pal.game.guild import Guild
+from palworld_save_pal.game.guild import Guild, GuildDTO
 from palworld_save_pal.game.pal import Pal, PalDTO
 from palworld_save_pal.game.pal_objects import GroupType, PalObjects
 from palworld_save_pal.utils.logging_config import create_logger
@@ -155,6 +155,7 @@ class SaveFile(BaseModel):
     _group_save_data_map: List[Dict[str, Any]] = PrivateAttr(default_factory=list)
     _base_camp_save_data_map: List[Dict[str, Any]] = PrivateAttr(default_factory=list)
     _map_object_save_data: List[Dict[str, Any]] = PrivateAttr(default_factory=list)
+    _guild_extra_save_data_map: List[Dict[str, Any]] = PrivateAttr(default_factory=list)
 
     def add_player_pal(
         self,
@@ -419,17 +420,17 @@ class SaveFile(BaseModel):
         logger.info("Updated %d players in the save file.", len(modified_players))
 
     async def update_guilds(
-        self, modified_bases: Dict[UUID, BaseDTO], ws_callback
+        self, modified_guilds: Dict[UUID, GuildDTO], ws_callback
     ) -> None:
         if not self._gvas_file:
             raise ValueError("No GvasFile has been loaded.")
 
-        for id, base in modified_bases.items():
-            await ws_callback(f"Updating base {id}")
+        for id, dto in modified_guilds.items():
+            await ws_callback(f"Updating guild {id}")
             guild = self._guilds.get(id)
-            guild.update_from(base)
+            guild.update_from(dto)
 
-        logger.info("Updated %d bases in the save file.", len(modified_bases))
+        logger.info("Updated %d bases in the save file.", len(modified_guilds))
 
     def _delete_pal_by_id(self, pal_id: UUID) -> None:
         del self._pals[pal_id]
@@ -481,8 +482,18 @@ class SaveFile(BaseModel):
             if group_type != GroupType.GUILD:
                 continue
             guild_id = PalObjects.as_uuid(PalObjects.get_nested(entry, "key"))
+            guild_extra_save_data = next(
+                (
+                    g
+                    for g in self._guild_extra_save_data_map
+                    if are_equal_uuids(g["key"], guild_id)
+                ),
+            )
             self._guilds[guild_id] = Guild(
                 group_save_data=entry,
+                guild_extra_data=guild_extra_save_data,
+                item_container_save_data=self._item_container_save_data,
+                dynamic_item_save_data=self._dynamic_item_save_data,
             )
 
     def _load_bases(self):
@@ -602,6 +613,9 @@ class SaveFile(BaseModel):
         )
         self._map_object_save_data = PalObjects.get_value(
             world_save_data["MapObjectSaveData"]
+        )
+        self._guild_extra_save_data_map = PalObjects.get_value(
+            world_save_data["GuildExtraSaveDataMap"]
         )
 
     def _player_guild(self, player_id: UUID) -> Optional[Guild]:

@@ -546,7 +546,7 @@
 						{#snippet content()}
 							<Tabs.Panel value="inventory">
 								<div class="max-h-[500px] overflow-y-auto 2xl:max-h-[800px]">
-									<div class="grid grid-cols-6 gap-2">
+									<div class="m-1 grid grid-cols-6 gap-2">
 										{#each Object.values(commonContainer.slots) as _, index}
 											<ItemBadge
 												bind:slot={commonContainer.slots[index]}
@@ -561,7 +561,7 @@
 							</Tabs.Panel>
 							<Tabs.Panel value="key_items">
 								<div class="max-h-[500px] overflow-y-auto 2xl:max-h-[800px]">
-									<div class="grid grid-cols-6 gap-2">
+									<div class="m-1 grid grid-cols-6 gap-2">
 										{#each Object.values(essentialContainer.slots) as _, index}
 											<ItemBadge
 												bind:slot={essentialContainer.slots[index]}

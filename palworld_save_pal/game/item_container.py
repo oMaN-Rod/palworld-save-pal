@@ -24,6 +24,7 @@ class ItemContainerType(str, Enum):
     ARMOR = "PlayerEquipArmorContainer"
     FOOD = "FoodEquipContainer"
     BASE = "BaseContainer"
+    GUILD = "GuildChest"
 
 
 class ItemContainer(BaseModel):

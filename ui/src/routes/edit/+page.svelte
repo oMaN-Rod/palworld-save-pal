@@ -49,7 +49,7 @@
 					<div class="flex-shrink-0">
 						<Tabs.Control value="player">Player</Tabs.Control>
 						<Tabs.Control value="pal-box">Pal Box</Tabs.Control>
-						<Tabs.Control value="guilds">Bases</Tabs.Control>
+						<Tabs.Control value="guilds">Guild</Tabs.Control>
 						<Tabs.Control value="pal">Pal</Tabs.Control>
 					</div>
 				{/snippet}

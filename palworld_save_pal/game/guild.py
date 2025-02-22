@@ -3,6 +3,7 @@ from uuid import UUID
 from pydantic import BaseModel, Field, PrivateAttr, computed_field
 
 from palworld_save_pal.game.base import Base, BaseDTO
+from palworld_save_pal.game.item_container import ItemContainer, ItemContainerType
 from palworld_save_pal.game.pal import PalDTO
 from palworld_save_pal.game.pal_objects import PalObjects
 from palworld_save_pal.utils.uuid import are_equal_uuids, is_empty_uuid
@@ -12,10 +13,8 @@ logger = create_logger(__name__)
 
 
 class GuildDTO(BaseModel):
-    id: UUID
-    admin_player_uid: UUID
-    name: str
-    players: List[UUID]
+    base: Optional[BaseDTO] = None
+    guild_chest: Optional[ItemContainer] = Field(default=None)
 
 
 class Guild(BaseModel):
@@ -25,14 +24,22 @@ class Guild(BaseModel):
     _players = List[UUID]
 
     _group_save_data: Optional[Dict[str, Any]] = PrivateAttr(default_factory=dict)
+    _guild_extra_data: Optional[Dict[str, Any]] = PrivateAttr(default_factory=dict)
     _raw_data: Optional[Dict[str, Any]] = PrivateAttr(default_factory=dict)
     _character_handle_ids: Optional[List[Dict[str, Any]]] = PrivateAttr(
         default_factory=list
     )
 
     bases: Dict[UUID, Base] = Field(default_factory=dict)
+    guild_chest: Optional[ItemContainer] = Field(default=None)
 
-    def __init__(self, group_save_data: Dict[str, Any] = None):
+    def __init__(
+        self,
+        group_save_data: Dict[str, Any] = None,
+        guild_extra_data: Dict[str, Any] = None,
+        item_container_save_data: Dict[str, Any] = None,
+        dynamic_item_save_data: Dict[str, Any] = None,
+    ):
         super().__init__()
         if group_save_data:
             self._group_save_data = group_save_data
@@ -43,6 +50,9 @@ class Guild(BaseModel):
                 self._raw_data,
                 "individual_character_handle_ids",
             )
+        if guild_extra_data and item_container_save_data and dynamic_item_save_data:
+            self._guild_extra_data = guild_extra_data
+            self._load_guild_chest(item_container_save_data, dynamic_item_save_data)
 
     @computed_field
     def id(self) -> UUID:
@@ -72,6 +82,22 @@ class Guild(BaseModel):
                 )
                 self._players.append(player_uid)
         return self._players
+
+    @computed_field
+    def container_id(self) -> Optional[UUID]:
+        if self._guild_extra_data is None:
+            return
+        return PalObjects.as_uuid(
+            PalObjects.get_nested(
+                self._guild_extra_data,
+                "value",
+                "GuildItemStorage",
+                "value",
+                "RawData",
+                "value",
+                "container_id",
+            )
+        )
 
     def add_pal(self, pal_id: UUID):
         logger.debug("%s (%s) => %s", self.name, self.id, pal_id)
@@ -115,6 +141,27 @@ class Guild(BaseModel):
         self.bases[base.id] = base
         logger.debug("Added base %s to guild %s", base.id, self.id)
 
-    def update_from(self, baseDTO: BaseDTO):
-        base = next(b for b in self.bases.values() if are_equal_uuids(b.id, baseDTO.id))
-        base.update_from(baseDTO)
+    def update_from(self, guildDTO: GuildDTO):
+        if guildDTO.base:
+            base = next(
+                b
+                for b in self.bases.values()
+                if are_equal_uuids(b.id, guildDTO.base.id)
+            )
+            base.update_from(guildDTO.base)
+        if guildDTO.guild_chest:
+            if self.guild_chest is None:
+                return
+            self.guild_chest.update_from(guildDTO.guild_chest.model_dump())
+
+    def _load_guild_chest(self, item_container_save_data, dynamic_item_save_data):
+        if self.container_id is None:
+            return
+        self.guild_chest = ItemContainer(
+            id=self.container_id,
+            key="GuildChest",
+            type=ItemContainerType.GUILD,
+            item_container_save_data=item_container_save_data,
+            dynamic_item_save_data=dynamic_item_save_data,
+        )
+        logger.debug("Loaded guild chest %s", self.container_id)

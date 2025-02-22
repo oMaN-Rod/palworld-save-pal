@@ -5,7 +5,7 @@ from uuid import UUID
 
 from palworld_save_pal.editor.preset_profile import PresetProfile
 from palworld_save_pal.editor.settings import SettingsDTO
-from palworld_save_pal.game.base import BaseDTO
+from palworld_save_pal.game.guild import GuildDTO
 from palworld_save_pal.game.pal import PalDTO
 from palworld_save_pal.game.player import PlayerDTO
 
@@ -130,7 +130,7 @@ class DownloadSaveFileMessage(BaseMessage):
 class UpdateSaveFileData(BaseModel):
     modified_pals: Optional[Dict[UUID, PalDTO]] = None
     modified_players: Optional[Dict[UUID, PlayerDTO]] = None
-    modified_guilds: Optional[Dict[UUID, BaseDTO]] = None
+    modified_guilds: Optional[Dict[UUID, GuildDTO]] = None
 
 
 class UpdateSaveFileMessage(BaseMessage):

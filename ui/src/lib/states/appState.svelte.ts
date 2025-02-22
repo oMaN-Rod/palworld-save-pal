@@ -2,9 +2,9 @@
 import { goto } from '$app/navigation';
 import type {
 	AppSettings,
-	BaseDTO,
 	GamepassSave,
 	Guild,
+	GuildDTO,
 	ItemContainer,
 	ItemContainerSlot
 } from '$types';
@@ -18,7 +18,7 @@ const toast = getToastState();
 interface ModifiedData {
 	modified_pals?: Record<string, Pal>;
 	modified_players?: Record<string, Player>;
-	modified_guilds?: Record<string, BaseDTO>;
+	modified_guilds?: Record<string, GuildDTO>;
 }
 
 export function createAppState() {
@@ -69,7 +69,7 @@ export function createAppState() {
 		let modifiedData: ModifiedData = {};
 		let modifiedPals: [string, Pal][] = [];
 		let modifiedPlayers: [string, Player][] = [];
-		let modifiedGuilds: [string, BaseDTO][] = [];
+		let modifiedGuilds: [string, GuildDTO][] = [];
 
 		for (const player of Object.values(appState.modifiedPlayers)) {
 			if (player.state === EntryState.MODIFIED) {
@@ -111,13 +111,19 @@ export function createAppState() {
 							[
 								guild.id,
 								{
-									id: base.id,
-									storage_containers: Object.fromEntries(modifiedContainers)
+									base: {
+										id: base.id,
+										storage_containers: Object.fromEntries(modifiedContainers)
+									}
 								}
 							]
 						];
 					}
 				}
+			}
+			if (guild.guild_chest && guild.guild_chest.state === EntryState.MODIFIED) {
+				modifiedGuilds = [...modifiedGuilds, [guild.id, { guild_chest: guild.guild_chest }]];
+				guild.guild_chest.state = EntryState.NONE;
 			}
 		}
 

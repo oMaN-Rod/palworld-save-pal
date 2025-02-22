@@ -16,6 +16,7 @@
 	import { PalSelectModal, NumberInputModal, PalPresetSelectModal } from '$components/modals';
 	import { assetLoader, debounce, deepCopy, formatNickname } from '$utils';
 	import { cn } from '$theme';
+	import { onMount } from 'svelte';
 
 	interface PalWithBaseId {
 		pal: Pal;
@@ -33,14 +34,24 @@
 	let searchQuery = $state('');
 	let currentPage = $state(1);
 	let filteredPals: PalWithBaseId[] = $state([]);
-	let activeTab: 'pals' | 'storage' = $state('pals');
+	let activeTab: 'pals' | 'storage' | 'guildChest' = $state('pals');
 	let currentStorageContainer: (ItemContainer & { slots: ItemContainerSlot[] }) | undefined =
 		$state(undefined);
+	let guildChest: (ItemContainer & { slots: ItemContainerSlot[] }) | undefined = $state(undefined);
 
 	const playerGuild = $derived.by(() => {
 		if (appState.selectedPlayer?.guild_id) {
 			return appState.guilds[appState.selectedPlayer.guild_id];
 		}
+	});
+
+	const guildChestIcon = $derived.by(() => {
+		if (!playerGuild?.guild_chest) return null;
+		const building = buildingsData.buildings['GuildChest'];
+		if (building) {
+			return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/buildings/${building.icon}.png`);
+		}
+		return staticIcons.unknownIcon;
 	});
 
 	const guildBases = $derived.by(() => {
@@ -393,10 +404,10 @@
 		});
 	}
 
-	function handleSelectStorageContainer(item: any): void {
+	function handleSelectStorageContainer(container: ItemContainer): void {
 		let containerSlots = [];
-		for (let i = 0; i < item.slot_num; i++) {
-			const slot = item.slots.find((slot: ItemContainerSlot) => slot.slot_index === i);
+		for (let i = 0; i < container.slot_num; i++) {
+			const slot = container.slots.find((slot: ItemContainerSlot) => slot.slot_index === i);
 			if (!slot) {
 				const emptySlot = {
 					static_id: 'None',
@@ -409,8 +420,8 @@
 				containerSlots.push(slot);
 			}
 		}
-		item.slots = containerSlots;
-		currentStorageContainer = item;
+		container.slots = containerSlots;
+		currentStorageContainer = container;
 	}
 
 	async function copyItem(slot: ItemContainerSlot) {
@@ -432,7 +443,6 @@
 		slot.static_id = 'None';
 		slot.count = 0;
 		slot.dynamic_item = undefined;
-		currentStorageContainer!.state = EntryState.MODIFIED;
 	}
 
 	function pasteItem(slot: ItemContainerSlot) {
@@ -443,7 +453,6 @@
 			if (slot.dynamic_item) {
 				slot.dynamic_item.local_id = '00000000-0000-0000-0000-000000000000';
 			}
-			currentStorageContainer!.state = EntryState.MODIFIED;
 		} else {
 			clearItem(slot);
 		}
@@ -495,6 +504,28 @@
 			}
 		});
 	}
+
+	function handleSelectGuildChest() {
+		if (playerGuild?.guild_chest) {
+			let chestSlots = [];
+			for (let i = 0; i < playerGuild.guild_chest.slot_num; i++) {
+				const slot = playerGuild.guild_chest.slots.find((slot) => slot.slot_index === i);
+				if (!slot) {
+					const emptySlot = {
+						static_id: 'None',
+						slot_index: i,
+						count: 0,
+						dynamic_item: undefined
+					};
+					chestSlots.push(emptySlot);
+				} else {
+					chestSlots.push(slot);
+				}
+			}
+			playerGuild.guild_chest.slots = chestSlots;
+		}
+		activeTab = 'guildChest';
+	}
 </script>
 
 {#if appState.selectedPlayer}
@@ -510,57 +541,14 @@
 	{:else}
 		<div class="grid h-full w-full grid-cols-[25%_1fr]">
 			<!-- Left Controls -->
-			<div class="mb-2 flex-shrink-0 p-4">
-				<h4 class="h4">Base {currentPage}</h4>
-				<div class="btn-group bg-surface-900 mb-2 items-center rounded p-1">
-					<Tooltip position="right" label="Add Pal to Base">
-						<button
-							class="btn hover:preset-tonal-secondary p-2"
-							onclick={() => currentBase && handleAddPal(currentBase[0])}
-						>
-							<Plus />
-						</button>
-					</Tooltip>
-					<Tooltip label="Select all in current base">
-						<button class="btn hover:preset-tonal-secondary p-2" onclick={handleSelectAll}>
-							<ReplaceAll />
-						</button>
-					</Tooltip>
-					<Tooltip label="Heal all in current base">
-						<button class="btn hover:preset-tonal-secondary p-2" onclick={handleHealAll}>
-							<Bandage />
-						</button>
-					</Tooltip>
-					{#if selectedPals.length > 0}
-						<Tooltip label="Apply preset to selected pal(s)">
-							<button class="btn hover:preset-tonal-secondary p-2" onclick={handleSelectPreset}>
-								<Play />
-							</button>
-						</Tooltip>
-						<Tooltip label="Heal selected pal(s)">
-							<button class="btn hover:preset-tonal-secondary p-2" onclick={healSelectedPals}>
-								<Ambulance />
-							</button>
-						</Tooltip>
-						<Tooltip label="Delete selected pal(s)">
-							<button class="btn hover:preset-tonal-secondary p-2" onclick={deleteSelectedPals}>
-								<Trash />
-							</button>
-						</Tooltip>
-						<Tooltip label="Clear selected">
-							<button
-								class="btn hover:preset-tonal-secondary p-2"
-								onclick={() => (selectedPals = [])}
-							>
-								<X />
-							</button>
-						</Tooltip>
-					{/if}
-				</div>
-				<div class="flex w-full">
+			<div class=" flex-shrink-0 space-y-2 p-4">
+				<h4 class="h4">{playerGuild!.name}</h4>
+				<h5 class="h5 font-light">Base {currentPage}</h5>
+
+				<nav class="btn-group preset-outlined-surface-200-800 flex-col p-2 md:flex-row">
 					<button
 						class={cn(
-							'bg-surface-800 hover:ring-secondary-800 w-1/2 hover:ring-2',
+							'hover:ring-secondary-800 w-1/3 hover:ring-2',
 							activeTab == 'pals' ? 'bg-secondary-800' : ''
 						)}
 						onclick={() => (activeTab = 'pals')}
@@ -569,14 +557,70 @@
 					</button>
 					<button
 						class={cn(
-							'bg-surface-800 hover:ring-secondary-800 w-1/2 hover:ring-2',
+							'hover:ring-secondary-800 w-1/3 hover:ring-2',
 							activeTab == 'storage' ? 'bg-secondary-800' : ''
 						)}
 						onclick={() => (activeTab = 'storage')}
 					>
 						<span class={activeTab == 'storage' ? 'font-bold' : ''}>Storage</span>
 					</button>
-				</div>
+					<button
+						class={cn(
+							'hover:ring-secondary-800 w-1/3 hover:ring-2',
+							activeTab == 'guildChest' ? 'bg-secondary-800' : ''
+						)}
+						onclick={handleSelectGuildChest}
+					>
+						<span class={activeTab == 'guildChest' ? 'font-bold' : ''}>Guild Chest</span>
+					</button>
+				</nav>
+				{#if activeTab === 'pals'}
+					<div class="btn-group bg-surface-900 items-center rounded p-1">
+						<Tooltip position="right" label="Add Pal to Base">
+							<button
+								class="btn hover:preset-tonal-secondary p-2"
+								onclick={() => currentBase && handleAddPal(currentBase[0])}
+							>
+								<Plus />
+							</button>
+						</Tooltip>
+						<Tooltip label="Select all in current base">
+							<button class="btn hover:preset-tonal-secondary p-2" onclick={handleSelectAll}>
+								<ReplaceAll />
+							</button>
+						</Tooltip>
+						<Tooltip label="Heal all in current base">
+							<button class="btn hover:preset-tonal-secondary p-2" onclick={handleHealAll}>
+								<Bandage />
+							</button>
+						</Tooltip>
+						{#if selectedPals.length > 0}
+							<Tooltip label="Apply preset to selected pal(s)">
+								<button class="btn hover:preset-tonal-secondary p-2" onclick={handleSelectPreset}>
+									<Play />
+								</button>
+							</Tooltip>
+							<Tooltip label="Heal selected pal(s)">
+								<button class="btn hover:preset-tonal-secondary p-2" onclick={healSelectedPals}>
+									<Ambulance />
+								</button>
+							</Tooltip>
+							<Tooltip label="Delete selected pal(s)">
+								<button class="btn hover:preset-tonal-secondary p-2" onclick={deleteSelectedPals}>
+									<Trash />
+								</button>
+							</Tooltip>
+							<Tooltip label="Clear selected">
+								<button
+									class="btn hover:preset-tonal-secondary p-2"
+									onclick={() => (selectedPals = [])}
+								>
+									<X />
+								</button>
+							</Tooltip>
+						{/if}
+					</div>
+				{/if}
 			</div>
 
 			<!-- Right Content -->
@@ -631,7 +675,7 @@
 								baseClass="w-1/4"
 								listClass="h-[550px] 2xl:h-[800px]"
 								canSelect={false}
-								onselect={(item) => handleSelectStorageContainer(item)}
+								onselect={(itemContainer) => handleSelectStorageContainer(itemContainer)}
 							>
 								{#snippet listItem(item)}
 									{@const building = buildingsData.buildings[item.key]}
@@ -677,7 +721,7 @@
 									{@const building = buildingsData.buildings[currentStorageContainer.key]}
 									{@const itemGroup = building?.type_a == BuildingTypeA.Food ? 'Food' : 'Common'}
 									<div class="flex items-start space-x-4">
-										<div class="grid grid-cols-6 gap-2">
+										<div class="m-1 grid grid-cols-6 gap-2">
 											{#each Object.values(currentStorageContainer.slots) as _, index}
 												<ItemBadge
 													bind:slot={currentStorageContainer.slots[index]}
@@ -685,8 +729,10 @@
 													onUpdate={() => {
 														currentStorageContainer!.state = EntryState.MODIFIED;
 													}}
-													onCopyPaste={(event) =>
-														handleCopyPaste(event, currentStorageContainer!.slots[index], true)}
+													onCopyPaste={(event) => {
+														handleCopyPaste(event, currentStorageContainer!.slots[index], true);
+														currentStorageContainer!.state = EntryState.MODIFIED;
+													}}
 												/>
 											{/each}
 										</div>
@@ -718,6 +764,43 @@
 							<h2 class="h2">No Storage Containers</h2>
 						</div>
 					{/if}
+				{:else if activeTab == 'guildChest' && playerGuild?.guild_chest}
+					{@const building = buildingsData.buildings['GuildChest']}
+					{@const itemGroup = building?.type_a == BuildingTypeA.Food ? 'Food' : 'Common'}
+					<div class="max-h-[550px] overflow-y-auto 2xl:max-h-[800px]">
+						<div class="flex items-start space-x-4">
+							<div class="grid grid-cols-6 gap-2">
+								{#each Object.values(playerGuild.guild_chest.slots) as _, index}
+									<ItemBadge
+										bind:slot={playerGuild.guild_chest.slots[index]}
+										{itemGroup}
+										onUpdate={() => {
+											playerGuild.guild_chest!.state = EntryState.MODIFIED;
+										}}
+										onCopyPaste={(event) => {
+											handleCopyPaste(event, playerGuild.guild_chest!.slots[index], true);
+											playerGuild.guild_chest!.state = EntryState.MODIFIED;
+										}}
+									/>
+								{/each}
+							</div>
+							{#if guildChestIcon}
+								<div class="flex flex-col">
+									<img
+										src={guildChestIcon}
+										alt="Storage Container Icon"
+										class="ml-8 h-48 w-48 2xl:h-64 2xl:w-64"
+									/>
+									<StoragePresets
+										container={playerGuild.guild_chest}
+										onUpdate={() => {
+											playerGuild.guild_chest!.state = EntryState.MODIFIED;
+										}}
+									/>
+								</div>
+							{/if}
+						</div>
+					</div>
 				{/if}
 			</div>
 		</div>

@@ -95,6 +95,8 @@ export type Guild = {
 	id: string;
 	name: string;
 	players: Player[];
+	container_id?: string;
+	guild_chest?: ItemContainer;
 };
 
 export type Base = {
@@ -109,6 +111,11 @@ export type Base = {
 export type BaseDTO = {
 	id: string;
 	storage_containers: Record<string, ItemContainer>;
+};
+
+export type GuildDTO = {
+	base?: BaseDTO;
+	guild_chest?: ItemContainer;
 };
 
 export type SaveFileType = 'gamepass' | 'steam';
