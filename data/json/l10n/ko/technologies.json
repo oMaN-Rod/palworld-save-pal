@@ -1,0 +1,1786 @@
+{
+  "Accessory_AirDash1": {
+    "localized_name": "<itemName id=|Accessory_AirDash1|/>",
+    "description": null
+  },
+  "Accessory_AirDash2": {
+    "localized_name": "<itemName id=|Accessory_AirDash2|/>",
+    "description": null
+  },
+  "Accessory_JumpCount_Increase1": {
+    "localized_name": "<itemName id=|Accessory_JumpCount_Increase1|/>",
+    "description": null
+  },
+  "Accessory_JumpCount_Increase2": {
+    "localized_name": "<itemName id=|Accessory_JumpCount_Increase2|/>",
+    "description": null
+  },
+  "Accessory_JumpPower_Increase": {
+    "localized_name": "<itemName id=|Accessory_JumpPower_Increase|/>",
+    "description": null
+  },
+  "Accessory_Nonkilling": {
+    "localized_name": "<itemName id=|Accessory_Nonkilling|/>",
+    "description": null
+  },
+  "Accessory_TalentChecker": {
+    "localized_name": "<itemName id=|Accessory_TalentChecker|/>",
+    "description": null
+  },
+  "AdditionalInventory_001": {
+    "localized_name": "<itemName id=|AdditionalInventory_001|/>",
+    "description": null
+  },
+  "AdditionalInventory_002": {
+    "localized_name": "<itemName id=|AdditionalInventory_002|/>",
+    "description": null
+  },
+  "AdditionalInventory_003": {
+    "localized_name": "<itemName id=|AdditionalInventory_003|/>",
+    "description": null
+  },
+  "AdditionalInventory_004": {
+    "localized_name": "<itemName id=|AdditionalInventory_004|/>",
+    "description": null
+  },
+  "Altar": {
+    "localized_name": "<mapObjectName id=|Altar|/>",
+    "description": null
+  },
+  "Arrow": {
+    "localized_name": "<itemName id=|Arrow|/>",
+    "description": "활로 발사할 수 있는 <itemName id=|Arrow|/>. 제작하려면 |<mapObjectName id=|WorkBench|/>|이(가) 필요하다."
+  },
+  "Arrow_Fire": {
+    "localized_name": "<itemName id=|Arrow_Fire|/>",
+    "description": "|<itemName id=|Bow_Fire|/>| 및 |<itemName id=|BowGun_Fire|/>|으(로) 발사할 수 있는 <itemName id=|Arrow|/>. COMMON_ELEMENT_NAME_Fire 피해를 준다. 제작하려면 |<mapObjectName id=|WorkBench|/>|이(가) 필요하다."
+  },
+  "Arrow_Poison": {
+    "localized_name": "<itemName id=|Arrow_Poison|/>",
+    "description": "|<itemName id=|Bow_Poison|/>| 및 |<itemName id=|BowGun_Poison|/>|으(로) 발사할 수 있는 <itemName id=|Arrow|/>. 적중한 상대를 중독시킨다. 제작하려면 |<mapObjectName id=|WorkBench|/>|이(가) 필요하다."
+  },
+  "AssaultRifleBullet": {
+    "localized_name": "<itemName id=|AssaultRifleBullet|/>",
+    "description": "|<itemName id=|AssaultRifle_Default1|/>| 등에 사용하는 탄. 제작하려면 |<mapObjectName id=|WeaponFactory_Dirty_02|/>|이(가) 필요하다."
+  },
+  "AutoMealPouch_Tier1": {
+    "localized_name": "<itemName id=|AutoMealPouch_Tier1|/>",
+    "description": null
+  },
+  "AutoMealPouch_Tier2": {
+    "localized_name": "<itemName id=|AutoMealPouch_Tier2|/>",
+    "description": null
+  },
+  "AutoMealPouch_Tier3": {
+    "localized_name": "<itemName id=|AutoMealPouch_Tier3|/>",
+    "description": null
+  },
+  "AutoMealPouch_Tier4": {
+    "localized_name": "<itemName id=|AutoMealPouch_Tier4|/>",
+    "description": null
+  },
+  "AutoMealPouch_Tier5": {
+    "localized_name": "<itemName id=|AutoMealPouch_Tier5|/>",
+    "description": null
+  },
+  "BaseCampBattleDirector": {
+    "localized_name": "<mapObjectName id=|BaseCampBattleDirector|/>",
+    "description": "거점 내 팰을 경계 상태로 전환하는 종. 외적 대비 태세와 작업 전념 태세를 원하는 때에 변경할 수 있다."
+  },
+  "BaseCampItemDispenser": {
+    "localized_name": "<mapObjectName id=|BaseCampItemDispenser|/>",
+    "description": null
+  },
+  "BaseCampWorkHard": {
+    "localized_name": "<mapObjectName id=|BaseCampWorkHard|/>",
+    "description": null
+  },
+  "Battle_Armor_Grade_01_Cloth": {
+    "localized_name": "<itemName id=|ClothArmor|/>",
+    "description": "<itemName id=|Cloth|/>'(으)로 만든 옷. 밤의 한기를 막아준다. 제작하려면 '<mapObjectName id=|WorkBench|/>'이(가) 필요하다."
+  },
+  "Battle_Armor_Grade_01_Cloth_Cold": {
+    "localized_name": "<itemName id=|ClothArmorCold|/>",
+    "description": "한랭 지역에서 생산한 |<itemName id=|ClothArmor|/>|. 몸이 얼 정도의 추위를 막아준다. 제작하려면 |<mapObjectName id=|WorkBench|/>|이(가) 필요하다."
+  },
+  "Battle_Armor_Grade_01_Cloth_Heat": {
+    "localized_name": "<itemName id=|ClothArmorHeat|/>",
+    "description": "더운 지역에서 생산한 |<itemName id=|ClothArmor|/>|. 뛰어난 내열성을 자랑한다. 제작하려면 |<mapObjectName id=|WorkBench|/>|이(가) 필요하다."
+  },
+  "Battle_Armor_Grade_02_Fur": {
+    "localized_name": "<itemName id=|FurArmor|/>",
+    "description": "|<itemName id=|Leather|/>|(으)로 만든 갑옷. 보온성도 방어력도 향상됐다. 제작하려면 <mapObjectName id=|Factory_Hard_01|/>|이(가) 필요하다."
+  },
+  "Battle_Armor_Grade_02_Fur_Cold": {
+    "localized_name": "<itemName id=|FurArmorCold|/>",
+    "description": "한랭 지역에서 생산한 '<itemName id=|FurArmor|/>'. 몸이 얼 정도의 추위를 막아준다. 제작하려면 '<mapObjectName id=|Factory_Hard_01|/>'이(가) 필요하다."
+  },
+  "Battle_Armor_Grade_02_Fur_Heat": {
+    "localized_name": "<itemName id=|FurArmorHeat|/>",
+    "description": "더운 지역에서 생산한 |<itemName id=|FurArmor|/>|. 뛰어난 내열성을 자랑한다. 제작하려면 |<mapObjectName id=|Factory_Hard_01|/>|이(가) 필요하다."
+  },
+  "Battle_Armor_Grade_03_Copper": {
+    "localized_name": "<itemName id=|CopperArmor|/>",
+    "description": "금속으로 완성한 갑옷. 적당한 무게에 적당한 방어력을 자랑한다. 제작하려면 '<mapObjectName id=|Factory_Hard_01|/>'이(가) 필요하다."
+  },
+  "Battle_Armor_Grade_03_Copper_Cold": {
+    "localized_name": "<itemName id=|CopperArmorCold|/>",
+    "description": "개량형 |<itemName id=|CopperArmor|/>|. 몸이 얼 정도의 추위를 막아준다. 제작하려면 |<mapObjectName id=|Factory_Hard_01|/>|이(가) 필요하다."
+  },
+  "Battle_Armor_Grade_03_Copper_Heat": {
+    "localized_name": "<itemName id=|CopperArmorHeat|/>",
+    "description": "개량된 '<itemName id=|CopperArmor|/>'. 뛰어난 내열성을 자랑한다. 제작하려면 '<mapObjectName id=|Factory_Hard_01|/>'이(가) 필요하다."
+  },
+  "Battle_Armor_Grade_03_Iron": {
+    "localized_name": "<itemName id=|IronArmor|/>",
+    "description": "고급 금속으로 완성한 갑옷. 상당한 방어력을 자랑하는 만큼 무겁다. 제작하려면 '<mapObjectName id=|Factory_Hard_02|/>'이(가) 필요하다."
+  },
+  "Battle_Armor_Grade_03_Iron_Cold": {
+    "localized_name": "<itemName id=|IronArmorCold|/>",
+    "description": "개량형 |<itemName id=|IronArmor|/>|. 몸이 얼 정도의 추위를 막아준다. 제작하려면 |<mapObjectName id=|Factory_Hard_02|/>|이(가) 필요하다."
+  },
+  "Battle_Armor_Grade_03_Iron_Heat": {
+    "localized_name": "<itemName id=|IronArmorHeat|/>",
+    "description": "개량된 '<itemName id=|IronArmor|/>'. 뛰어난 내열성을 자랑한다. 제작하려면 '<mapObjectName id=|Factory_Hard_02|/>'이(가) 필요하다."
+  },
+  "Battle_Armor_Grade_04_Steal": {
+    "localized_name": "<itemName id=|StealArmor|/>",
+    "description": "<itemName id=|StealIngot|/>(으)로 만든 갑옷. 터무니없는 방어력을 자랑하지만 매우 무겁다. 제작하려면 |<mapObjectName id=|Factory_Hard_03|/>|이(가) 필요하다."
+  },
+  "Battle_Armor_Grade_04_Steal_Cold": {
+    "localized_name": "<itemName id=|StealArmorCold|/>",
+    "description": "개량형 |<itemName id=|StealArmor|/>|. 몸이 얼 정도의 추위를 막아준다. 제작하려면 |<mapObjectName id=|Factory_Hard_03|/>|이(가) 필요하다."
+  },
+  "Battle_Armor_Grade_04_Steal_Heat": {
+    "localized_name": "<itemName id=|StealArmorHeat|/>",
+    "description": "개량된 |<itemName id=|StealArmor|/>|. 뛰어난 내열성을 자랑한다. 제작하려면 |<mapObjectName id=|Factory_Hard_03|/>|이(가) 필요하다."
+  },
+  "Battle_Armor_Grade_05_Plastic": {
+    "localized_name": "<itemName id=|PlasticArmor|/>",
+    "description": "<itemName id=|Plastic|/>(으)로 만든 갑옷. 방어력 향상은 물론 경량화에도 성공했다. 제작하려면 |<mapObjectName id=|Factory_Hard_03|/>|이(가) 필요하다."
+  },
+  "Battle_Armor_Grade_05_Plastic_Cold": {
+    "localized_name": "<itemName id=|PlasticArmorCold|/>",
+    "description": "개량형 |<itemName id=|PlasticArmor|/>|. 몸이 얼 정도의 추위를 막아준다. 제작하려면 |<mapObjectName id=|Factory_Hard_03|/>|이(가) 필요하다."
+  },
+  "Battle_Armor_Grade_05_Plastic_Heat": {
+    "localized_name": "<itemName id=|PlasticArmorHeat|/>",
+    "description": "개량형 |<itemName id=|PlasticArmor|/>|. 뛰어난 내열성을 자랑한다. 제작하려면 |<mapObjectName id=|Factory_Hard_03|/>|이(가) 필요하다."
+  },
+  "Battle_Armor_Grade_05_Plastic_Weight": {
+    "localized_name": "<itemName id=|PlasticArmorWeight|/>",
+    "description": "개량형 |<itemName id=|PlasticArmor|/>|. 플레이어의 소지 중량 제한이 증가한다. 제작하려면 |<mapObjectName id=|Factory_Hard_03|/>|이(가) 필요하다."
+  },
+  "Battle_Cloth": {
+    "localized_name": "<itemName id=|Cloth|/>",
+    "description": null
+  },
+  "Battle_Defense_BowGun": {
+    "localized_name": "<mapObjectName id=|DefenseBowGun|/>",
+    "description": "|COMMON_WORK_SUITABILITY_Handcraft| 적성을 가진 팰을 배치하면 쇠뇌를 사용해 거점을 수호한다."
+  },
+  "Battle_Defense_MachineGun": {
+    "localized_name": "<mapObjectName id=|DefenseMachinegun|/>",
+    "description": "|COMMON_WORK_SUITABILITY_Handcraft| 적성을 가진 팰을 배치하면 해당 방어 시설을 사용해 거점을 수호한다."
+  },
+  "Battle_Defense_Missile": {
+    "localized_name": "<mapObjectName id=|DefenseMissile|/>",
+    "description": "|COMMON_WORK_SUITABILITY_Handcraft| 적성을 가진 팰을 배치하면 미사일 발사기를 사용해 거점을 수호한다."
+  },
+  "Battle_Glider_Grade_01": {
+    "localized_name": "<itemName id=|Glider_Old|/>",
+    "description": "펼쳐서 활공할 때 쓰는 글라이더. 간소한 만듦새 덕에 속도가 느리다."
+  },
+  "Battle_Glider_Grade_02": {
+    "localized_name": "<itemName id=|Glider_Good|/>",
+    "description": "펼쳐서 활공할 때 쓰는 글라이더. 양산형인 덕에 제법 속도가 난다. '<mapObjectName id=|Factory_Hard_01|/>'에서 만들 수 있다."
+  },
+  "Battle_Glider_Grade_03": {
+    "localized_name": "<itemName id=|Glider_Super|/>",
+    "description": "펼쳐서 활공할 때 쓰는 글라이더. 성능을 끌어올려 꽤 빠른 속도로 날 수 있게 된다. '<mapObjectName id=|Factory_Hard_02|/>'에서 만들 수 있다."
+  },
+  "Battle_Glider_Grade_04": {
+    "localized_name": "<itemName id=|Glider_Tera|/>",
+    "description": "펼쳐서 활공할 때 쓰는 글라이더. 성능을 더욱 끌어올려 속도와 장력이 향상됐다. '<mapObjectName id=|Factory_Hard_03|/>'에서 만들 수 있다."
+  },
+  "Battle_GunPowder_Grade_02": {
+    "localized_name": "<itemName id=|Gunpowder2|/>",
+    "description": "탄환을 발사할 때 쓰는 '<itemName id=|Gunpowder2|/>'. 탄환을 만들 때 필요하다. '<mapObjectName id=|Factory_Hard_01|/>'에서 만들 수 있다."
+  },
+  "Battle_Helm_Grade_02_Fur": {
+    "localized_name": "<itemName id=|FurHelmet|/>",
+    "description": "아름다운 날개 머리 장식. 어쩐지 머리 쪽 치명상을 막아줄 것만 같다. 제작하려면 |<mapObjectName id=|Workbench|/>|이(가) 필요하다."
+  },
+  "Battle_Helm_Grade_03_Copper": {
+    "localized_name": "<itemName id=|CopperHelmet|/>",
+    "description": "금속으로 만든 투구. 사고 능력을 지켜주는 신뢰와 안심의 방어구다. 제작하려면 '<mapObjectName id=|Factory_Hard_01|/>'이(가) 필요하다."
+  },
+  "Battle_Helm_Grade_04_Iron": {
+    "localized_name": "<itemName id=|IronHelmet|/>",
+    "description": "고급 금속으로 만든 투구. 반짝반짝 윤을 낸 금속 덕분에 자신의 가치가 상승한다. 제작하려면 '<mapObjectName id=|Factory_Hard_02|/>'이(가) 필요하다."
+  },
+  "Battle_Helm_Grade_05_Steal": {
+    "localized_name": "<itemName id=|StealHelmet|/>",
+    "description": "<itemName id=|StealIngot|/>(으)로 만든 투구. 누구나 부러워할 최상의 품질로, 선택받은 전사임을 증명한다. 제작하려면 |<mapObjectName id=|Factory_Hard_03|/>|이(가) 필요하다."
+  },
+  "Battle_Helm_Grade_06_Plastic": {
+    "localized_name": "<itemName id=|PlasticHelmet|/>",
+    "description": "<itemName id=|Plastic|/>(으)로 만든 투구. 방어력 향상은 물론 경량화에도 성공했다. 제작하려면 |<mapObjectName id=|Factory_Hard_03|/>|이(가) 필요하다."
+  },
+  "Battle_MeleeWeapon_Axe_Steal": {
+    "localized_name": "<itemName id=|Axe_Steal|/>",
+    "description": null
+  },
+  "Battle_MeleeWeapon_Bat": {
+    "localized_name": "<itemName id=|Bat|/>",
+    "description": "근접 전투용 <itemName id=|Bat|/>. 작은 팰이라면 때려눕힐 수 있을지도 모른다."
+  },
+  "Battle_MeleeWeapon_Bat2": {
+    "localized_name": "<itemName id=|Bat2|/>",
+    "description": null
+  },
+  "Battle_MeleeWeapon_Pickaxe_Steal": {
+    "localized_name": "<itemName id=|Pickaxe_Steal|/>",
+    "description": null
+  },
+  "Battle_MeleeWeapon_Sword": {
+    "localized_name": "<itemName id=|Sword|/>",
+    "description": "휘두르는 맛이 일품인 근접 전투용 |<itemName id=|Sword|/>|. 적에게 접근하는 위험을 감수해야 한다. 제작하려면 |<mapObjectName id=|WeaponFactory_Dirty_01|/>|이(가) 필요하다."
+  },
+  "Battle_RangeWeapon_AssaultRifle": {
+    "localized_name": "<itemName id=|AssaultRifle_Default1|/>",
+    "description": "압도적인 연사력으로 적을 제압하는 <itemName id=|AssaultRifle_Default1|/>. 강력한 상대와 싸우기에 안성맞춤이다. 제작하려면 |<mapObjectName id=|WeaponFactory_Dirty_02|/>|이(가) 필요하다."
+  },
+  "Battle_RangeWeapon_Bow1": {
+    "localized_name": "<itemName id=|WeakerBow|/>",
+    "description": "원시적인 원거리 공격 무기. 이것저것 긁어모아 만든 탓에 위력은 떨어진다. 제작하려면 |<mapObjectName id=|WorkBench|/>|이(가) 필요하다."
+  },
+  "Battle_RangeWeapon_Bow3": {
+    "localized_name": "<itemName id=|Bow_Triple|/>",
+    "description": "3대의 화살을 동시에 발사하는 개량형 활. 신비한 힘 덕분에 1번 쏠 때 1대의 <itemName id=|Arrow|/>만 소비된다."
+  },
+  "Battle_RangeWeapon_BowGun": {
+    "localized_name": "<itemName id=|BowGun|/>",
+    "description": "힘들이지 않고 '<itemName id=|Arrow|/>'을 쏠 수 있다. 장전에 시간이 걸리지만 강력한 한 발을 쏜다. 제작하려면 '<mapObjectName id=|Factory_Hard_01|/>'이(가) 필요하다."
+  },
+  "Battle_RangeWeapon_BowGun_Fire": {
+    "localized_name": "<itemName id=|BowGun_Fire|/>",
+    "description": "COMMON_ELEMENT_NAME_Fire 피해를 주는 <itemName id=|BowGun|/>. 쏘려면 |<itemName id=|Arrow_Fire|/>|이(가) 필요하다. 제작하려면 |<mapObjectName id=|Factory_Hard_01|/>|이(가) 필요하다."
+  },
+  "Battle_RangeWeapon_BowGun_Poison": {
+    "localized_name": "<itemName id=|BowGun_Poison|/>",
+    "description": "공격 대상을 중독시키는 무서운 <itemName id=|BowGun|/>. 쏘려면 |<itemName id=|Arrow_Poison|/>|이(가) 필요하다. 제작하려면 |<mapObjectName id=|Factory_Hard_01|/>|이(가) 필요하다."
+  },
+  "Battle_RangeWeapon_Bow_Fire": {
+    "localized_name": "<itemName id=|Bow_Fire|/>",
+    "description": "COMMON_ELEMENT_NAME_Fire 피해를 주는 활. 화상 상태의 팰은 잡기 수월해진다. |<itemName id=|Arrow_Fire|/>|이(가) 필요하다."
+  },
+  "Battle_RangeWeapon_Bow_Poison": {
+    "localized_name": "<itemName id=|Bow_Poison|/>",
+    "description": "공격 대상을 중독시키는 무서운 활. 중독 상태의 팰은 잡기 수월해진다. '<itemName id=|Arrow_Poison|/>'이 필요하다."
+  },
+  "Battle_RangeWeapon_CompoundBow": {
+    "localized_name": "<itemName id=|CompoundBow|/>",
+    "description": null
+  },
+  "Battle_RangeWeapon_FlameThrower": {
+    "localized_name": "<itemName id=|FlameThrower|/>",
+    "description": null
+  },
+  "Battle_RangeWeapon_GatlingGun": {
+    "localized_name": "<itemName id=|GatlingGun|/>",
+    "description": "고속 연사로 제압 사격을 할 수 있는 개틀링 건. 사격 범위에 들어온 목표를 벌집으로 만들 수 있다. 제작하려면 |<mapObjectName id=|WeaponFactory_Dirty_03|/>|이(가) 필요하다."
+  },
+  "Battle_RangeWeapon_GrenadeLauncher": {
+    "localized_name": "<itemName id=|GrenadeLauncher|/>",
+    "description": "광범위한 폭발을 일으키는 유탄을 발사한다. 많은 적을 상대할 때 유용하다. 제작하려면 |<mapObjectName id=|WeaponFactory_Dirty_03|/>|이(가) 필요하다."
+  },
+  "Battle_RangeWeapon_GuidedMissileLauncher": {
+    "localized_name": "<itemName id=|GuidedMissileLauncher|/>",
+    "description": "적을 자동으로 포착해 추적하는 마사일을 발사한다. 미사일은 적중 시 폭발하여 광범위한 피해를 준다. 제작하려면 |<mapObjectName id=|WeaponFactory_Dirty_03|/>|이(가) 필요하다."
+  },
+  "Battle_RangeWeapon_HandGun": {
+    "localized_name": "<itemName id=|HandGun_Default|/>",
+    "description": "장전 수와 연사성이 강화된 권총. 순간 화력이 <itemName id=|MakeshiftHandgun|/>보다도 강하다. |<mapObjectName id=|WeaponFactory_Dirty_01|/>|에서 제작할 수 있다."
+  },
+  "Battle_RangeWeapon_HomingSphereLauncher": {
+    "localized_name": "<itemName id=|HomingSphereLauncher|/>",
+    "description": "스피어 발사용 발사기. 발사한 스피어는 팰을 추적한다. 제작하려면 '<mapObjectName id=|WeaponFactory_Dirty_03|/>'이(가) 필요하다."
+  },
+  "Battle_RangeWeapon_LaserRifle": {
+    "localized_name": "<itemName id=|LaserRifle|/>",
+    "description": "레이저를 발사하는 무기. 다루기 쉬우며 화력도 높다. 제작하려면 |<mapObjectName id=|WeaponFactory_Dirty_03|/>|이(가) 필요하다."
+  },
+  "Battle_RangeWeapon_OldRevolver": {
+    "localized_name": "<itemName id=|OldRevolver|/>",
+    "description": null
+  },
+  "Battle_RangeWeapon_Rifle": {
+    "localized_name": "<itemName id=|SingleShotRifle|/>",
+    "description": "삽탄에 다소 시간이 걸리는 단발식 소총. 장전 수는 적지만 한 발 한 발이 강력하다. |<mapObjectName id=|WeaponFactory_Dirty_02|/>|에서 제작할 수 있다."
+  },
+  "Battle_RangeWeapon_RocketLauncher": {
+    "localized_name": "<itemName id=|Launcher_Default|/>",
+    "description": "원거리에서 강력한 폭격을 할 수 있는 <itemName id=|Launcher_Default|/>. 제작하려면 |<mapObjectName id=|WeaponFactory_Dirty_03|/>|이(가) 필요하다."
+  },
+  "Battle_RangeWeapon_SemiAutoRifle": {
+    "localized_name": "<itemName id=|SemiAutoRifle|/>",
+    "description": null
+  },
+  "Battle_RangeWeapon_SemiAutoShotgun": {
+    "localized_name": "<itemName id=|SemiAutoShotgun|/>",
+    "description": null
+  },
+  "Battle_RangeWeapon_ShotGun": {
+    "localized_name": "<itemName id=|DoubleBarrelShotgun|/>",
+    "description": "근거리에서 맹위를 떨치는 산탄총. 2발을 연사할 수 있다. 장전 수는 적지만 고화력이다. |<mapObjectName id=|WeaponFactory_Dirty_02|/>|에서 제작할 수 있다."
+  },
+  "Battle_RangeWeapon_ShotGun_Multi": {
+    "localized_name": "<itemName id=|PumpActionShotgun|/>",
+    "description": "장전 수가 증가하여 더욱 강력해진 산탄총. 근거리 DPS가 수준급이다. 제작하려면 |<mapObjectName id=|WeaponFactory_Dirty_02|/>|이(가) 필요하다."
+  },
+  "Battle_RangeWeapon_SphereLauncher": {
+    "localized_name": "<itemName id=|SphereLauncher|/>",
+    "description": "대량의 스피어를 동시에 발사하는 신형 발사기. 팰 무리를 남획할 수 있다. 제작하려면 '<mapObjectName id=|WeaponFactory_Dirty_02|/>'이(가) 필요하다."
+  },
+  "Battle_RangeWeapon_SphereLauncher_Once": {
+    "localized_name": "<itemName id=|SphereLauncher_Once|/>",
+    "description": "스피어 발사용 발사기. 더 멀리 있는 팰까지 포획할 수 있다. 제작하려면 '<mapObjectName id=|WeaponFactory_Dirty_01|/>'이(가) 필요하다."
+  },
+  "Battle_RangeWeapon_SubmachineGun": {
+    "localized_name": "<itemName id=|SubmachineGun|/>",
+    "description": null
+  },
+  "BeamSword": {
+    "localized_name": "<itemName id=|BeamSword|/>",
+    "description": null
+  },
+  "BlastFurnace4": {
+    "localized_name": "<mapObjectName id=|BlastFurnace4|/>",
+    "description": null
+  },
+  "BreedFarm": {
+    "localized_name": "<mapObjectName id=|BreedFarm|/>",
+    "description": "♂ 및 ♀ 팰을 1마리씩 배치하면 알을 낳게 할 수 있다. 생산하려면 '<itemName id=|Cake|/>'을(를) 넣어놔야 한다."
+  },
+  "BuildableGoddessStatue": {
+    "localized_name": "<mapObjectName id=|BuildableGoddessStatue|/>",
+    "description": "공물을 바치면 플레이어와 팰을 강화할 수 있다."
+  },
+  "CarbonFiber": {
+    "localized_name": "<itemName id=|CarbonFiber|/>",
+    "description": null
+  },
+  "Cauldron": {
+    "localized_name": "<mapObjectName id=|Cauldron|/>",
+    "description": null
+  },
+  "CeilingLamp": {
+    "localized_name": "<mapObjectName id=|CeilingLamp|/>",
+    "description": "천장에 부착할 수 있다."
+  },
+  "Cement": {
+    "localized_name": "<itemName id=|Cement|/>",
+    "description": null
+  },
+  "Cloth2": {
+    "localized_name": "<itemName id=|Cloth2|/>",
+    "description": null
+  },
+  "Cooler": {
+    "localized_name": "<mapObjectName id=|Cooler|/>",
+    "description": "주변이 시원해져 더위를 막을 수 있다."
+  },
+  "CoolerBox": {
+    "localized_name": "<mapObjectName id=|CoolerBox|/>",
+    "description": null
+  },
+  "CoolerPalFoodBox": {
+    "localized_name": "<mapObjectName id=|CoolerPalFoodBox|/>",
+    "description": null
+  },
+  "Crusher": {
+    "localized_name": "<mapObjectName id=|Crusher|/>",
+    "description": "<itemName id=|Stone|/> 혹은 <itemName id=|Wood|/>을(를) 분쇄하여 다른 소재로 변환할 수 있는 시설. 물레방아를 돌리는 |관개| 적성의 팰이 필요하다."
+  },
+  "DamagedScarecrow": {
+    "localized_name": "<mapObjectName id=|DamagedScarecrow|/>",
+    "description": "<characterName id=|Penguin|/>을 본뜬 훈련용 허수아비."
+  },
+  "DecalGunSet": {
+    "localized_name": "데칼 총 세트",
+    "description": "데칼 총 세트. 착탄 지점에 팰의 스티커를 붙일 수 있는 신비한 총과 그 탄약을 만들 수 있게 된다."
+  },
+  "DefenseWait": {
+    "localized_name": "<mapObjectName id=|DefenseWait|/>",
+    "description": "이곳에 배치한 팰은 외적에 대비하는 감시자 역할을 맡는다."
+  },
+  "DefenseWall": {
+    "localized_name": "<mapObjectName id=|DefenseWall|/>",
+    "description": "외적의 침입을 막는 용도의 거대한 방벽."
+  },
+  "DefenseWall_Metal": {
+    "localized_name": "<mapObjectName id=|DefenseWall_Metal|/>",
+    "description": "외적의 침입을 막는 용도의 거대한 방벽. 금속으로 만들어서 매우 튼튼하다."
+  },
+  "DefenseWall_Wood": {
+    "localized_name": "<mapObjectName id=|DefenseWall_Wood|/>",
+    "description": "외적의 침입을 막는 용도의 거대한 방벽. 나무로 만들어서 약하다."
+  },
+  "DismantlingConveyor": {
+    "localized_name": "<mapObjectName id=|DismantlingConveyor|/>",
+    "description": null
+  },
+  "DisplayCharacter": {
+    "localized_name": "<mapObjectName id=|DisplayCharacter|/>",
+    "description": "포획한 팰을 감상하는 박스. 안에 든 팰은 전투도 작업도 불가능하지만 대신 배가 고플 일도 없다."
+  },
+  "ElecBaton": {
+    "localized_name": "<itemName id=|ElecBaton|/>",
+    "description": "때려서 감전 상태에 빠뜨리는 근접 무기. 감전된 팰은 포획하기 수월해진다. 제작하려면 '<mapObjectName id=|Factory_Hard_01|/>'이(가) 필요하다."
+  },
+  "ElectricCooler": {
+    "localized_name": "<mapObjectName id=|ElectricCooler|/>",
+    "description": "전기의 힘으로 강화되어 넓은 범위에 고출력 냉방을 해준다."
+  },
+  "ElectricGenerator_Large": {
+    "localized_name": "<mapObjectName id=|ElectricGenerator_Large|/>",
+    "description": null
+  },
+  "ElectricHeater": {
+    "localized_name": "<mapObjectName id=|ElectricHeater|/>",
+    "description": "전기의 힘으로 강화되어 넓은 범위에 고출력 난방을 해준다."
+  },
+  "EnergyLauncherBullet": {
+    "localized_name": "<itemName id=|EnergyLauncherBullet|/>",
+    "description": null
+  },
+  "EnergyRocketLauncher": {
+    "localized_name": "<itemName id=|EnergyRocketLauncher|/>",
+    "description": null
+  },
+  "EnergyStorage_Electric": {
+    "localized_name": "<mapObjectName id=|EnergyStorage_Electric|/>",
+    "description": null
+  },
+  "Expedition": {
+    "localized_name": "<mapObjectName id=|Expedition|/>",
+    "description": null
+  },
+  "Factory_Money": {
+    "localized_name": "<mapObjectName id=|Factory_Money|/>",
+    "description": null
+  },
+  "Farm_SkillFruits": {
+    "localized_name": "<mapObjectName id=|Farm_SkillFruits|/>",
+    "description": null
+  },
+  "FlamethrowerBullet": {
+    "localized_name": "<itemName id=|FlamethrowerBullet|/>",
+    "description": null
+  },
+  "FlourMill": {
+    "localized_name": "<mapObjectName id=|FlourMill|/>",
+    "description": "<itemName id=|Wheat|/>을(를) 빻아 <itemName id=|Flour|/>을(를) 생산할 수 있는 시설. 물레방아를 돌리는 |관개| 적성의 팰이 필요하다."
+  },
+  "FlowerBed": {
+    "localized_name": "<mapObjectName id=|FlowerBed|/>",
+    "description": null
+  },
+  "Fountain": {
+    "localized_name": "<mapObjectName id=|Fountain|/>",
+    "description": null
+  },
+  "FragGrenade": {
+    "localized_name": "<itemName id=|FragGrenade|/>",
+    "description": null
+  },
+  "FragGrenade_Dark": {
+    "localized_name": "<itemName id=|FragGrenade_Dark|/>",
+    "description": null
+  },
+  "FragGrenade_Dragon": {
+    "localized_name": "<itemName id=|FragGrenade_Dragon|/>",
+    "description": null
+  },
+  "FragGrenade_Elec": {
+    "localized_name": "<itemName id=|FragGrenade_Elec|/>",
+    "description": null
+  },
+  "FragGrenade_Fire": {
+    "localized_name": "<itemName id=|FragGrenade_Fire|/>",
+    "description": null
+  },
+  "FragGrenade_Ground": {
+    "localized_name": "<itemName id=|FragGrenade_Ground|/>",
+    "description": null
+  },
+  "FragGrenade_Ice": {
+    "localized_name": "<itemName id=|FragGrenade_Ice|/>",
+    "description": null
+  },
+  "FragGrenade_Leaf": {
+    "localized_name": "<itemName id=|FragGrenade_Leaf|/>",
+    "description": null
+  },
+  "FragGrenade_Super": {
+    "localized_name": "<itemName id=|FragGrenade_Super|/>",
+    "description": null
+  },
+  "FragGrenade_Water": {
+    "localized_name": "<itemName id=|FragGrenade_Water|/>",
+    "description": null
+  },
+  "FurnitureSet_1": {
+    "localized_name": "나무 거실 가구 세트",
+    "description": "장식용 가구 세트. 거실에 배치하여 팰과 즐겁게 생활하자."
+  },
+  "FurnitureSet_10": {
+    "localized_name": "바리케이드 세트",
+    "description": "장식용 가구 세트. 통행을 막고 싶은 장소에 배치하자."
+  },
+  "FurnitureSet_11": {
+    "localized_name": "교통 정리 세트",
+    "description": "장식용 가구 세트. 도로가 없으므로 교통정리에는 사용할 수 없다."
+  },
+  "FurnitureSet_12": {
+    "localized_name": "도로 표식 세트",
+    "description": "장식용 가구 세트. 도로가 없으므로 교통정리에는 사용할 수 없다."
+  },
+  "FurnitureSet_13": {
+    "localized_name": "금속 의자와 책상 세트",
+    "description": "장식용 가구 세트. 금속 건축물과 함께 팰과 즐겁게 생활하자."
+  },
+  "FurnitureSet_14": {
+    "localized_name": "경질 목재 탁자 세트",
+    "description": "장식용 가구 세트. 금속 건축물과 함께 팰과 즐겁게 생활하자."
+  },
+  "FurnitureSet_15": {
+    "localized_name": "피아노 가구 세트",
+    "description": "장식용 가구 세트. 거점에 배치하여 풍족한 생활을 연출해 보자."
+  },
+  "FurnitureSet_16": {
+    "localized_name": "앤티크 거울 세트",
+    "description": "장식용 가구 세트. 자신의 모습을 보며 몸가짐을 체크해 보자."
+  },
+  "FurnitureSet_17": {
+    "localized_name": "카펫 세트",
+    "description": "장식용 가구 세트. 거점의 토대에 배치하여 내 집 같은 느낌을 연출해 보자."
+  },
+  "FurnitureSet_18": {
+    "localized_name": "앤티크 소파 세트",
+    "description": "장식용 가구 세트. 거점에 고급스러움을 더해준다."
+  },
+  "FurnitureSet_19": {
+    "localized_name": "앤티크 의자 세트",
+    "description": "장식용 가구 세트. 앤티크 책상과 함께 사용하자."
+  },
+  "FurnitureSet_2": {
+    "localized_name": "나무 술집 수납 가구 세트",
+    "description": "술집에 있을 법한 목재 수납 가구 세트. 아이템을 수납할 수 있다."
+  },
+  "FurnitureSet_20": {
+    "localized_name": "앤티크 욕실 세트",
+    "description": "장식용 가구 세트. 앤티크한 느낌의 욕실 세트로 이루어져 있다."
+  },
+  "FurnitureSet_21": {
+    "localized_name": "앤티크 수납 세트",
+    "description": "앤티크 수납 가구 세트. 아이템을 수납할 수 있다."
+  },
+  "FurnitureSet_22": {
+    "localized_name": "앤티크 수납 캐비닛 세트",
+    "description": "앤티크 수납 캐비닛 세트. 아이템을 수납할 수 있다."
+  },
+  "FurnitureSet_23": {
+    "localized_name": "시계 세트",
+    "description": "장식용 가구 세트. 시간은 확인할 수 없다."
+  },
+  "FurnitureSet_24": {
+    "localized_name": "앤티크 책상 세트",
+    "description": "장식용 가구 세트. 앤티크 의자와 함께 사용하자."
+  },
+  "FurnitureSet_25": {
+    "localized_name": "화장실 세트",
+    "description": "장식용 가구 세트. 여기서 일은 볼 수 없다."
+  },
+  "FurnitureSet_26": {
+    "localized_name": "오락 가구 세트",
+    "description": "장식용 가구 세트. 팰 무리는 계속해서 일한다."
+  },
+  "FurnitureSet_27": {
+    "localized_name": "가로등 세트",
+    "description": "광원이 되는 가로등 세트. 불을 켜려면 전기가 필요하다."
+  },
+  "FurnitureSet_28": {
+    "localized_name": "난로 세트",
+    "description": "광원이 되는 벽돌 난로 세트. 불을 붙여줘야 한다."
+  },
+  "FurnitureSet_29": {
+    "localized_name": "앤티크 등불 세트",
+    "description": "광원이 되는 앤티크 등불 세트. 불을 켜려면 전기가 필요하다."
+  },
+  "FurnitureSet_3": {
+    "localized_name": "나무 술집 가구 세트",
+    "description": "장식용 가구 세트. 술집 느낌으로 배치하여 팰과 즐겁게 생활하자."
+  },
+  "FurnitureSet_30": {
+    "localized_name": "금속 선반 세트",
+    "description": "금속 선반 세트. 아이템을 수납할 수 있다."
+  },
+  "FurnitureSet_31": {
+    "localized_name": "야외 가구 세트",
+    "description": "장식용 가구 세트. 야외 가구 세트로 이루어져 있다."
+  },
+  "FurnitureSet_32": {
+    "localized_name": "앤티크 고급 가구 세트",
+    "description": "장식용 가구 세트. 앤티크한 고급 가구 세트로 이루어져 있다."
+  },
+  "FurnitureSet_4": {
+    "localized_name": "벽걸이 관엽식물 세트",
+    "description": "장식용 가구 세트. 식물을 벽에 배치하여 거점을 화사하게 꾸미자."
+  },
+  "FurnitureSet_5": {
+    "localized_name": "드럼통 세트",
+    "description": "장식용 가구 세트. 드럼통 욕조엔 들어갈 수 없다."
+  },
+  "FurnitureSet_6": {
+    "localized_name": "수납 컨테이너 세트",
+    "description": "컨테이너 가구 세트. 아이템을 수납할 수 있다."
+  },
+  "FurnitureSet_7": {
+    "localized_name": "가죽 의자 세트",
+    "description": "장식용 가구 세트. 가죽으로 되어 있어 고급스럽다."
+  },
+  "FurnitureSet_8": {
+    "localized_name": "비상구 표식 세트",
+    "description": "장식용 가구 세트. 문명이 있던 시기에 유용하게 쓰였다고 한다."
+  },
+  "FurnitureSet_9": {
+    "localized_name": "관엽식물 세트",
+    "description": "장식용 가구 세트. 식물을 배치하여 거점을 화사하게 꾸미자."
+  },
+  "FurnitureSet_Japanese": {
+    "localized_name": "일본식 가구 세트",
+    "description": "일본식 장식용 가구 세트. 일본식 거점을 만들 수 있다."
+  },
+  "GatlingBullet": {
+    "localized_name": "<itemName id=|GatlingBullet|/>",
+    "description": null
+  },
+  "Glass_houseset": {
+    "localized_name": "유리 건축 세트",
+    "description": "유리로 거점을 제작할 때 쓰는 세트. 유리 토대, 벽, 지붕, 계단 등 집을 지을 때 필요한 것들을 만들 수 있다."
+  },
+  "GrapplingGun": {
+    "localized_name": "<itemName id=|GrapplingGun|/>",
+    "description": null
+  },
+  "GrapplingGun2": {
+    "localized_name": "<itemName id=|GrapplingGun2|/>",
+    "description": null
+  },
+  "GrapplingGun3": {
+    "localized_name": "<itemName id=|GrapplingGun3|/>",
+    "description": null
+  },
+  "GrapplingGun4": {
+    "localized_name": "<itemName id=|GrapplingGun4|/>",
+    "description": null
+  },
+  "GrenadeBullet": {
+    "localized_name": "<itemName id=|GrenadeBullet|/>",
+    "description": null
+  },
+  "GuildChest": {
+    "localized_name": "<mapObjectName id=|GuildChest|/>",
+    "description": null
+  },
+  "HandTorch": {
+    "localized_name": "<itemName id=|Torch|/>",
+    "description": "어둠을 밝히고 추위를 녹여 준다. 어느 정도 근접 전투도 가능하다. 제작하려면 |<mapObjectName id=|WorkBench|/>|이(가) 필요하다."
+  },
+  "HandgunBullet": {
+    "localized_name": "<itemName id=|HandgunBullet|/>",
+    "description": "|<itemName id=|HandGun_Default|/>| 등에 사용하는 탄. 제작하려면 |<mapObjectName id=|WeaponFactory_Dirty_01|/>|이(가) 필요하다."
+  },
+  "Headstone": {
+    "localized_name": "<mapObjectName id=|Headstone|/>",
+    "description": null
+  },
+  "Heater": {
+    "localized_name": "<mapObjectName id=|Heater|/>",
+    "description": "주변이 따뜻해져 한기를 막을 수 있다."
+  },
+  "Homeward": {
+    "localized_name": "<itemName id=|Homeward|/>",
+    "description": null
+  },
+  "HugeKitchen": {
+    "localized_name": "<mapObjectName id=|HugeKitchen|/>",
+    "description": null
+  },
+  "IceCrusher": {
+    "localized_name": "<mapObjectName id=|IceCrusher|/>",
+    "description": null
+  },
+  "Infra_ElectricGenerator_Grade_01": {
+    "localized_name": "<mapObjectName id=|ElectricGenerator|/>",
+    "description": "거점의 번개 속성 팰이 전기를 축적하도록 하여 전기 시설을 사용할 수 있게 된다."
+  },
+  "Infra_ElectronicCircuit": {
+    "localized_name": "<itemName id=|MachineParts2|/>",
+    "description": "정밀 기기 제작에 필요한 '<itemName id=|MachineParts2|/>'. '<mapObjectName id=|Factory_Hard_02|/>'에서 만들 수 있다."
+  },
+  "Infra_ItemChest_Grade_01": {
+    "localized_name": "<mapObjectName id=|ItemChest|/>",
+    "description": "아이템을 수납할 수 있다. 거점에 배치하면 |COMMON_WORK_SUITABILITY_Transport| 적성을 가진 팰이 아이템을 자동으로 운반한다."
+  },
+  "Infra_ItemChest_Grade_02": {
+    "localized_name": "<mapObjectName id=|ItemChest_02|/>",
+    "description": "더 많은 아이템을 수납할 수 있으며 내구도도 상승했다. |COMMON_WORK_SUITABILITY_Transport| 적성을 가진 팰이 아이템을 자동으로 운반한다."
+  },
+  "Infra_ItemChest_Grade_03": {
+    "localized_name": "<mapObjectName id=|ItemChest_03|/>",
+    "description": "훨씬 많은 아이템을 수납할 수 있으며 내구도도 상승했다. |COMMON_WORK_SUITABILITY_Transport| 적성을 가진 팰이 아이템을 자동으로 운반한다."
+  },
+  "Infra_MachineParts": {
+    "localized_name": "<itemName id=|MachineParts|/>",
+    "description": null
+  },
+  "Infra_PalBed_Grade_01": {
+    "localized_name": "<mapObjectName id=|MedicalPalBed_02|/>",
+    "description": "거점에 있는 팰은 밤에 침대에서 자며 SAN 수치를 회복한다. 침대가 없으면 잠자리가 뒤숭숭해 SAN 수치를 회복하지 못한다."
+  },
+  "Infra_PalBed_Grade_02": {
+    "localized_name": "<mapObjectName id=|MedicalPalBed_03|/>",
+    "description": "팰 무리가 더 쾌적한 수면을 취하게 돼 수면 시 HP 및 SAN 수치 회복력이 상승한다."
+  },
+  "Infra_PlayerBed_Grade_01": {
+    "localized_name": "<mapObjectName id=|PlayerBed_02|/>",
+    "description": "인간이 자면 HP가 회복되는 침대. 밤에 잠들면 아침까지 시간이 흐른다. 지붕 아래에 설치해야만 잠들 수 있다."
+  },
+  "Infra_PlayerBed_Grade_02": {
+    "localized_name": "<mapObjectName id=|PlayerBed_03|/>",
+    "description": "회복력이 상승한 푹신푹신한 침대. 지붕 아래에 설치해야만 잠들 수 있다."
+  },
+  "ItemBooth": {
+    "localized_name": "<mapObjectName id=|ItemBooth|/>",
+    "description": null
+  },
+  "ItemChest_04": {
+    "localized_name": "<mapObjectName id=|ItemChest_04|/>",
+    "description": null
+  },
+  "JapaneseStyle_houseset": {
+    "localized_name": "일본식 건축 세트",
+    "description": "일본식 건축물로 거점을 제작할 때 쓰는 세트. 토대, 벽, 지붕, 계단 등 집을 지을 때 필요한 것들을 만들 수 있다."
+  },
+  "Katana": {
+    "localized_name": "<itemName id=|Katana|/>",
+    "description": null
+  },
+  "Lab": {
+    "localized_name": "<mapObjectName id=|Lab|/>",
+    "description": null
+  },
+  "Lamp": {
+    "localized_name": "<mapObjectName id=|Lamp|/>",
+    "description": "전기의 힘으로 거점을 더 환하게 비춘다."
+  },
+  "Lantern": {
+    "localized_name": "<itemName id=|Lantern|/>",
+    "description": null
+  },
+  "LargeCeilingLamp": {
+    "localized_name": "<mapObjectName id=|LargeCeilingLamp|/>",
+    "description": "천장에 부착해 더 넓은 범위를 환하게 비춘다."
+  },
+  "LargeLamp": {
+    "localized_name": "<mapObjectName id=|LargeLamp|/>",
+    "description": "훨씬 커진 만큼 더 넓은 범위를 환하게 비춘다."
+  },
+  "LaserBullet": {
+    "localized_name": "<itemName id=|LaserBullet|/>",
+    "description": null
+  },
+  "LaserGatlingBullet": {
+    "localized_name": "<itemName id=|LaserGatlingBullet|/>",
+    "description": null
+  },
+  "LaserGatlingGun": {
+    "localized_name": "<itemName id=|LaserGatlingGun|/>",
+    "description": null
+  },
+  "LauncherBullet": {
+    "localized_name": "<itemName id=|ExplosiveBullet|/>",
+    "description": "<itemName id=|Launcher_Default|/>' 등에 사용하는 탄. 제작하려면 '<mapObjectName id=|WeaponFactory_Dirty_03|/>'이(가) 필요하다."
+  },
+  "Launcher_Meteor": {
+    "localized_name": "<itemName id=|Launcher_Meteor|/>",
+    "description": "운석을 가공하여 만든 아주 유별난 무기. 착탄 시 운석과도 같은 폭발을 일으킨다. 제작하려면 |<mapObjectName id=|WeaponFactory_Dirty_02|/>|이(가) 필요하다."
+  },
+  "MakeshiftAssaultRifle": {
+    "localized_name": "<itemName id=|MakeshiftAssaultRifle|/>",
+    "description": null
+  },
+  "MakeshiftHandgun": {
+    "localized_name": "<itemName id=|MakeshiftHandgun|/>",
+    "description": "잡다한 재료로 직접 만든 단발식 권총. 비교적 근거리 전투에 적합하지만, 1발씩밖에 쏘지 못한다. |<mapObjectName id=|WeaponFactory_Dirty_01|/>|에서 제작할 수 있다."
+  },
+  "MakeshiftShotgun": {
+    "localized_name": "<itemName id=|MakeshiftShotgun|/>",
+    "description": null
+  },
+  "MakeshiftSubmachineGun": {
+    "localized_name": "<itemName id=|MakeshiftSubmachineGun|/>",
+    "description": null
+  },
+  "ManualElectricGenerator": {
+    "localized_name": "<mapObjectName id=|ManualElectricGenerator|/>",
+    "description": null
+  },
+  "MeatCutterKnife": {
+    "localized_name": "<itemName id=|MeatCutterKnife|/>",
+    "description": "소환 중인 팰을 해체할 수 있는 칼. 장착 중에는 |쓰다듬기|가 |해체|로 변경된다. 해체한 팰은 두 번 다시 돌아오지 않는다."
+  },
+  "MedicalPalBed_04": {
+    "localized_name": "<mapObjectName id=|MedicalPalBed_04|/>",
+    "description": null
+  },
+  "MedicalPalBed_05": {
+    "localized_name": "<mapObjectName id=|MedicalPalBed_05|/>",
+    "description": null
+  },
+  "MedicineFacility_03": {
+    "localized_name": "<mapObjectName id=|MedicineFacility_03|/>",
+    "description": null
+  },
+  "MetalDetector": {
+    "localized_name": "<itemName id=|MetalDetector|/>",
+    "description": null
+  },
+  "Metal_Gate": {
+    "localized_name": "<mapObjectName id=|Metal_Gate|/>",
+    "description": "덩치 큰 팰도 드나들 수 있는 금속 문."
+  },
+  "Metal_houseset": {
+    "localized_name": "금속 건축 세트",
+    "description": "금속으로 거점을 제작할 때 쓰는 세트. 금속제 토대, 벽, 지붕, 계단 등 집을 지을 때 필요한 것들을 만들 수 있다."
+  },
+  "MiningTool": {
+    "localized_name": "<mapObjectName id=|MiningTool|/>",
+    "description": null
+  },
+  "MissileBullet": {
+    "localized_name": "<itemName id=|MissileBullet|/>",
+    "description": null
+  },
+  "MonsterFarm": {
+    "localized_name": "<mapObjectName id=|MonsterFarm|/>",
+    "description": "양이나 닭 등의 팰을 방목하는 목장. 목장에 적성을 가진 팰을 배치하면 자동으로 아이템을 생산한다."
+  },
+  "MultiElectricHatchingPalEgg": {
+    "localized_name": "<mapObjectName id=|MultiElectricHatchingPalEgg|/>",
+    "description": null
+  },
+  "Musket": {
+    "localized_name": "<itemName id=|Musket|/>",
+    "description": "오래된 느낌의 간소한 총. 한 발의 위력은 강하지만, 재장전이 오래 걸린다. 제작하려면 |<mapObjectName id=|WeaponFactory_Dirty_01|/>|이(가) 필요하다."
+  },
+  "OilPump": {
+    "localized_name": "<mapObjectName id=|OilPump|/>",
+    "description": null
+  },
+  "OlympicCauldron": {
+    "localized_name": "<mapObjectName id=|OlympicCauldron|/>",
+    "description": null
+  },
+  "PALBOX": {
+    "localized_name": "<mapObjectName id=|PalBoxV2|/>",
+    "description": "포획한 팰을 보관하는 시설. 박스 내 팰은 천천히 HP를 회복한다. 이 시설을 중심으로 한 범위가 거점이 된다."
+  },
+  "PalBooth": {
+    "localized_name": "<mapObjectName id=|PalBooth|/>",
+    "description": null
+  },
+  "PalFoodBox": {
+    "localized_name": "<mapObjectName id=|PalFoodBox|/>",
+    "description": "음식을 넣어두면 거점의 팰 무리가 이곳에서 식사한다."
+  },
+  "PalMedicineBox": {
+    "localized_name": "<mapObjectName id=|PalMedicineBox|/>",
+    "description": null
+  },
+  "PalRevive": {
+    "localized_name": "<itemName id=|PalRevive|/>",
+    "description": null
+  },
+  "PalSphere_Exotic": {
+    "localized_name": "<itemName id=|PalSphere_Exotic|/>",
+    "description": null
+  },
+  "Plastic": {
+    "localized_name": "<itemName id=|Plastic|/>",
+    "description": null
+  },
+  "Polymer": {
+    "localized_name": "<itemName id=|Polymer|/>",
+    "description": null
+  },
+  "Potion_Extreme": {
+    "localized_name": "<itemName id=|Potion_Extreme|/>",
+    "description": null
+  },
+  "Product_Axe_Grade_01": {
+    "localized_name": "<itemName id=|Axe_Tier_00|/>",
+    "description": "벌목용 도끼. 돌로 만들었기에 절삭력이 그리 좋지는 않다."
+  },
+  "Product_Axe_Grade_02": {
+    "localized_name": "<itemName id=|Axe_Tier_01|/>",
+    "description": "벌목용 도끼. 금속으로 만들어 내구도와 절삭력이 향상됐다. 제작하려면 |<mapObjectName id=|Factory_Hard_01|/>|이(가) 필요하다."
+  },
+  "Product_Axe_Grade_03": {
+    "localized_name": "<itemName id=|Axe_Tier_02|/>",
+    "description": "벌목용 도끼. 내구도와 절삭력이 더욱 향상됐다. 제작하려면 |<mapObjectName id=|Factory_Hard_02|/>|이(가) 필요하다."
+  },
+  "Product_CoalPit": {
+    "localized_name": "<mapObjectName id=|CoalPit|/>",
+    "description": null
+  },
+  "Product_Cooking_Grade_01": {
+    "localized_name": "<mapObjectName id=|CampFire|/>",
+    "description": "간단한 요리를 만들 수 있으며 약간의 온기와 불빛을 제공한다."
+  },
+  "Product_Cooking_Grade_02": {
+    "localized_name": "<mapObjectName id=|CookingStove|/>",
+    "description": "조리할 수 있는 요리의 폭이 넓어지며 효율적인 조리가 가능하다."
+  },
+  "Product_Cooking_Grade_03": {
+    "localized_name": "<mapObjectName id=|ElectricKitchen|/>",
+    "description": "전기가 필요하지만, 고도로 효율적인 조리를 할 수 있게 된다. 작업하려면 |COMMON_WORK_SUITABILITY_EmitFlame| 적성을 가진 팰이 필요하다."
+  },
+  "Product_CopperPit": {
+    "localized_name": "<mapObjectName id=|CopperPit|/>",
+    "description": null
+  },
+  "Product_CopperPit_2": {
+    "localized_name": "<mapObjectName id=|CopperPit_2|/>",
+    "description": null
+  },
+  "Product_Factory_Hard_Grade_01": {
+    "localized_name": "<mapObjectName id=|Factory_Hard_01|/>",
+    "description": "|<mapObjectName id=|WorkBench|/>|보다도 생산 속도가 빠르다. 작업하려면 |COMMON_WORK_SUITABILITY_Handcraft| 적성을 가진 팰이 필요하다."
+  },
+  "Product_Factory_Hard_Grade_02": {
+    "localized_name": "<mapObjectName id=|Factory_Hard_02|/>",
+    "description": "전기가 필요하지만 보다 빠르게 다양한 아이템을 생산할 수 있게 된다. 작업하려면 |COMMON_WORK_SUITABILITY_Handcraft| 적성을 가진 팰이 필요하다."
+  },
+  "Product_Factory_Hard_Grade_03": {
+    "localized_name": "<mapObjectName id=|Factory_Hard_03|/>",
+    "description": "전기가 필요하지만 더욱 빠르게 다양한 아이템을 생산할 수 있게 된다. 작업하려면 |COMMON_WORK_SUITABILITY_Handcraft| 적성을 가진 팰이 필요하다."
+  },
+  "Product_Farm_Berries": {
+    "localized_name": "<mapObjectName id=|FarmBlockV2_Berries|/>",
+    "description": "열매를 생산하는 농원. 작업하려면 |COMMON_WORK_TYPE_Seeding|, |COMMON_WORK_TYPE_Watering|, |COMMON_WORK_TYPE_CollectResourcePickable| 적성을 가진 팰이 필요하다."
+  },
+  "Product_Farm_Carrot": {
+    "localized_name": "<mapObjectName id=|FarmBlockV2_Carrot|/>",
+    "description": null
+  },
+  "Product_Farm_Lettuce": {
+    "localized_name": "<mapObjectName id=|FarmBlockV2_Lettuce|/>",
+    "description": "양상추를 생산하는 농원. 작업하려면 |COMMON_WORK_TYPE_Seeding|, |COMMON_WORK_TYPE_Watering|, |COMMON_WORK_TYPE_CollectResourcePickable| 적성을 가진 팰이 필요하다."
+  },
+  "Product_Farm_Onion": {
+    "localized_name": "<mapObjectName id=|FarmBlockV2_Onion|/>",
+    "description": null
+  },
+  "Product_Farm_Potato": {
+    "localized_name": "<mapObjectName id=|FarmBlockV2_Potato|/>",
+    "description": null
+  },
+  "Product_Farm_tomato": {
+    "localized_name": "<mapObjectName id=|FarmBlockV2_tomato|/>",
+    "description": "토마토를 생산하는 농원. 작업하려면 |COMMON_WORK_TYPE_Seeding|, |COMMON_WORK_TYPE_Watering|, |COMMON_WORK_TYPE_CollectResourcePickable| 적성을 가진 팰이 필요하다."
+  },
+  "Product_Farm_wheat": {
+    "localized_name": "<mapObjectName id=|FarmBlockV2_wheet|/>",
+    "description": "|<itemName id=|Pan|/>|의 원료. 작업하려면 |COMMON_WORK_TYPE_Seeding|, |COMMON_WORK_TYPE_Watering|, |COMMON_WORK_TYPE_CollectResourcePickable| 적성을 가진 팰이 필요하다."
+  },
+  "Product_Ingot_Grade_01_Copper": {
+    "localized_name": "<mapObjectName id=|BlastFurnace|/>",
+    "description": "|<mapObjectName id=|BlastFurnace|/>|을(를) 건축할 수 있게 된다. |<itemName id=|CopperOre|/>|을(를) 제련해 주괴를 만들 수 있게 된다."
+  },
+  "Product_Ingot_Grade_02_Iron": {
+    "localized_name": "<mapObjectName id=|BlastFurnace2|/>",
+    "description": "<itemName id=|IronIngot|/>을(를) 제련할 수 있게 된다."
+  },
+  "Product_Ingot_Grade_03_Steal": {
+    "localized_name": "<mapObjectName id=|BlastFurnace3|/>",
+    "description": "<itemName id=|StealIngot|/> 을(를) 제련할 수 있게 된다."
+  },
+  "Product_Medicine_Grade_01": {
+    "localized_name": "<mapObjectName id=|MedicineFacility_01|/>",
+    "description": "간단한 약을 만들 수 있게 된다. 작업하려면 |COMMON_WORK_SUITABILITY_ProductMedicine| 적성을 가진 팰이 필요하다."
+  },
+  "Product_Medicine_Grade_02": {
+    "localized_name": "<mapObjectName id=|MedicineFacility_02|/>",
+    "description": "전기가 필요하지만 보다 높은 단계의 약을 만들 수 있게 된다. 작업하려면 |COMMON_WORK_SUITABILITY_ProductMedicine| 적성을 가진 팰이 필요하다."
+  },
+  "Product_Pickaxe_Grade_01": {
+    "localized_name": "<itemName id=|Pickaxe_Tier_00|/>",
+    "description": "채굴용 곡괭이. 돌로 만들었기에 효율이 그리 좋지는 않다."
+  },
+  "Product_Pickaxe_Grade_02": {
+    "localized_name": "<itemName id=|Pickaxe_Tier_01|/>",
+    "description": "채굴용 곡괭이. 금속으로 만들어 내구도와 효율이 향상됐다. 제작하려면 |<mapObjectName id=|Factory_Hard_01|/>|이(가) 필요하다."
+  },
+  "Product_Pickaxe_Grade_03": {
+    "localized_name": "<itemName id=|Pickaxe_Tier_02|/>",
+    "description": "채굴용 곡괭이. 내구도와 효율이 더욱 향상됐다. 제작하려면 |<mapObjectName id=|Factory_Hard_02|/>|이(가) 필요하다."
+  },
+  "Product_QuartzPit": {
+    "localized_name": "<mapObjectName id=|QuartzPit|/>",
+    "description": null
+  },
+  "Product_StationDeforest": {
+    "localized_name": "<mapObjectName id=|StationDeforest2|/>",
+    "description": "거점에서 나무를 생산할 수 있게 된다. 작업하려면 |COMMON_WORK_SUITABILITY_Deforest| 적성을 가진 팰이 필요하다."
+  },
+  "Product_StonePit": {
+    "localized_name": "<mapObjectName id=|StonePit|/>",
+    "description": "거점에서 돌을 생산할 수 있게 된다. 작업하려면 |COMMON_WORK_SUITABILITY_Mining| 적성을 가진 팰이 필요하다."
+  },
+  "Product_SulfurPit": {
+    "localized_name": "<mapObjectName id=|SulfurPit|/>",
+    "description": null
+  },
+  "Product_WeaponFactory_Dirty_Grade_01": {
+    "localized_name": "<mapObjectName id=|WeaponFactory_Dirty_01|/>",
+    "description": "간단한 기계식 무기를 제작할 수 있는 시설. 작업하려면 'COMMON_WORK_SUITABILITY_Handcraft' 적성을 가진 팰이 필요하다."
+  },
+  "Product_WeaponFactory_Dirty_Grade_02": {
+    "localized_name": "<mapObjectName id=|WeaponFactory_Dirty_02|/>",
+    "description": "전기가 필요하지만 보다 빠르게 무기나 탄약을 생산할 수 있게 된다. 작업하려면 |COMMON_WORK_SUITABILITY_Handcraft| 적성을 가진 팰이 필요하다."
+  },
+  "Product_WeaponFactory_Dirty_Grade_03": {
+    "localized_name": "<mapObjectName id=|WeaponFactory_Dirty_03|/>",
+    "description": "전기가 필요하지만 더욱 빠르게 무기나 탄약을 생산할 수 있게 된다. 작업하려면 |COMMON_WORK_SUITABILITY_Handcraft| 적성을 가진 팰이 필요하다."
+  },
+  "Product_WorkBench_SkillUnlock": {
+    "localized_name": "<mapObjectName id=|WorkBench_SkillUnlock|/>",
+    "description": "팰의 파트너 스킬에 쓰이는 도구를 제작한다."
+  },
+  "Refrigerator": {
+    "localized_name": "<mapObjectName id=|Refrigerator|/>",
+    "description": null
+  },
+  "ReinforcedArrow": {
+    "localized_name": "<itemName id=|ReinforcedArrow|/>",
+    "description": null
+  },
+  "RepairBench": {
+    "localized_name": "<mapObjectName id=|RepairBench|/>",
+    "description": "파손된 무기나 도구를 수리할 수 있다."
+  },
+  "RepairKit": {
+    "localized_name": "<itemName id=|RepairKit|/>",
+    "description": null
+  },
+  "RifleBullet": {
+    "localized_name": "<itemName id=|RifleBullet|/>",
+    "description": "소총 등에 사용하는 탄. 제작하려면 |<mapObjectName id=|WeaponFactory_Dirty_01|/>|이(가) 필요하다."
+  },
+  "RoughBullet": {
+    "localized_name": "<itemName id=|RoughBullet|/>",
+    "description": "|<itemName id=|Musket|/>| 혹은 |<itemName id=|MakeshiftHandgun|/>| 등에 사용하는 탄. 제작하려면 |<mapObjectName id=|WeaponFactory_Dirty_01|/>|이(가) 필요하다."
+  },
+  "SFArmor": {
+    "localized_name": "<itemName id=|SFArmor|/>",
+    "description": null
+  },
+  "SFArmorCold": {
+    "localized_name": "<itemName id=|SFArmorCold|/>",
+    "description": null
+  },
+  "SFArmorHeat": {
+    "localized_name": "<itemName id=|SFArmorHeat|/>",
+    "description": null
+  },
+  "SFArmorWeight": {
+    "localized_name": "<itemName id=|SFArmorWeight|/>",
+    "description": null
+  },
+  "SFArrow": {
+    "localized_name": "<itemName id=|SFArrow|/>",
+    "description": null
+  },
+  "SFBow": {
+    "localized_name": "<itemName id=|SFBow|/>",
+    "description": null
+  },
+  "SFHelmet": {
+    "localized_name": "<itemName id=|SFHelmet|/>",
+    "description": null
+  },
+  "SanityDecrease1": {
+    "localized_name": "<mapObjectName id=|SanityDecrease1|/>",
+    "description": null
+  },
+  "Shield_01": {
+    "localized_name": "<itemName id=|Shield_01|/>",
+    "description": "팰지움 기술로 탄생한 신비한 방패. 한동안 공격받지 않으면 자동으로 수리된다."
+  },
+  "Shield_02": {
+    "localized_name": "<itemName id=|Shield_02|/>",
+    "description": "팰지움 기술로 탄생한 신비한 방패. 시제품을 개선해 방어력이 증가했다. |<mapObjectName id=|Factory_Hard_01|/>|에서 만들 수 있다."
+  },
+  "Shield_03": {
+    "localized_name": "<itemName id=|Shield_03|/>",
+    "description": "팰지움 기술로 탄생한 신비한 방패. 개량을 거쳐 성능이 더욱 향상됐다. |<mapObjectName id=|Factory_Hard_02|/>|에서 제작할 수 있다."
+  },
+  "Shield_04": {
+    "localized_name": "<itemName id=|Shield_04|/>",
+    "description": "팰지움 기술로 탄생한 신비한 방패. 실험을 거듭한 결과 품질 면에서 최고봉에 도달했다. |<mapObjectName id=|Factory_Hard_03|/>|에서 제작할 수 있다."
+  },
+  "Shield_05": {
+    "localized_name": "<itemName id=|Shield_Ultra|/>",
+    "description": "팰지움 기술로 탄생한 신비한 방패. 실험을 더욱 거듭한 결과 품질 면에서 궁극에 도달했다. |<mapObjectName id=|Factory_Hard_03|/>|에서 제작할 수 있다."
+  },
+  "Shield_SF": {
+    "localized_name": "<itemName id=|Shield_SF|/>",
+    "description": null
+  },
+  "ShotGunBullet": {
+    "localized_name": "<itemName id=|ShotgunBullet|/>",
+    "description": "산탄총 등에 사용하는 탄. 제작하려면 |<mapObjectName id=|WeaponFactory_Dirty_01|/>|이(가) 필요하다."
+  },
+  "Signboard": {
+    "localized_name": "<mapObjectName id=|Signboard|/>",
+    "description": "문자를 쓸 수 있다."
+  },
+  "Silo": {
+    "localized_name": "<mapObjectName id=|Silo|/>",
+    "description": null
+  },
+  "SkillUnlock_Alpaca": {
+    "localized_name": "<itemName id=|SkillUnlock_Alpaca|/>",
+    "description": null
+  },
+  "SkillUnlock_AmaterasuWolf": {
+    "localized_name": "<itemName id=|SkillUnlock_AmaterasuWolf|/>",
+    "description": null
+  },
+  "SkillUnlock_AmaterasuWolf_Dark": {
+    "localized_name": "<itemName id=|SkillUnlock_AmaterasuWolf_Dark|/>",
+    "description": null
+  },
+  "SkillUnlock_BadCatgirl": {
+    "localized_name": "<itemName id=|SkillUnlock_BadCatgirl|/>",
+    "description": null
+  },
+  "SkillUnlock_BirdDragon": {
+    "localized_name": "<itemName id=|SkillUnlock_BirdDragon|/>",
+    "description": null
+  },
+  "SkillUnlock_BirdDragon_Ice": {
+    "localized_name": "<itemName id=|SkillUnlock_BirdDragon_Ice|/>",
+    "description": null
+  },
+  "SkillUnlock_BlackCentaur": {
+    "localized_name": "<itemName id=|SkillUnlock_BlackCentaur|/>",
+    "description": null
+  },
+  "SkillUnlock_BlackGriffon": {
+    "localized_name": "<itemName id=|SkillUnlock_BlackGriffon|/>",
+    "description": null
+  },
+  "SkillUnlock_BlackMetalDragon": {
+    "localized_name": "<itemName id=|SkillUnlock_BlackMetalDragon|/>",
+    "description": null
+  },
+  "SkillUnlock_BlackPuppy": {
+    "localized_name": "<itemName id=|SkillUnlock_BlackPuppy|/>",
+    "description": null
+  },
+  "SkillUnlock_BlueDragon": {
+    "localized_name": "<itemName id=|SkillUnlock_BlueDragon|/>",
+    "description": null
+  },
+  "SkillUnlock_BlueThunderHorse": {
+    "localized_name": "<itemName id=|SkillUnlock_BlueThunderHorse|/>",
+    "description": null
+  },
+  "SkillUnlock_Boar": {
+    "localized_name": "<itemName id=|SkillUnlock_Boar|/>",
+    "description": null
+  },
+  "SkillUnlock_Carbunclo": {
+    "localized_name": "<itemName id=|SkillUnlock_Carbunclo|/>",
+    "description": null
+  },
+  "SkillUnlock_ColorfulBird": {
+    "localized_name": "<itemName id=|SkillUnlock_ColorfulBird|/>",
+    "description": null
+  },
+  "SkillUnlock_DarkMechaDragon": {
+    "localized_name": "<itemName id=|SkillUnlock_DarkMechaDragon|/>",
+    "description": null
+  },
+  "SkillUnlock_Deer": {
+    "localized_name": "<itemName id=|SkillUnlock_Deer|/>",
+    "description": null
+  },
+  "SkillUnlock_Deer_Ground": {
+    "localized_name": "<itemName id=|SkillUnlock_Deer_Ground|/>",
+    "description": null
+  },
+  "SkillUnlock_DreamDemon": {
+    "localized_name": "<itemName id=|SkillUnlock_DreamDemon|/>",
+    "description": null
+  },
+  "SkillUnlock_DrillGame": {
+    "localized_name": "<itemName id=|SkillUnlock_DrillGame|/>",
+    "description": null
+  },
+  "SkillUnlock_Eagle": {
+    "localized_name": "<itemName id=|SkillUnlock_Eagle|/>",
+    "description": null
+  },
+  "SkillUnlock_ElecPanda": {
+    "localized_name": "<itemName id=|SkillUnlock_ElecPanda|/>",
+    "description": null
+  },
+  "SkillUnlock_FairyDragon": {
+    "localized_name": "<itemName id=|SkillUnlock_FairyDragon|/>",
+    "description": null
+  },
+  "SkillUnlock_FairyDragon_Water": {
+    "localized_name": "<itemName id=|SkillUnlock_FairyDragon_Water|/>",
+    "description": null
+  },
+  "SkillUnlock_FeatherOstrich": {
+    "localized_name": "<itemName id=|SkillUnlock_FeatherOstrich|/>",
+    "description": null
+  },
+  "SkillUnlock_FengyunDeeper": {
+    "localized_name": "<itemName id=|SkillUnlock_FengyunDeeper|/>",
+    "description": null
+  },
+  "SkillUnlock_FengyunDeeper_Electric": {
+    "localized_name": "<itemName id=|SkillUnlock_FengyunDeeper_Electric|/>",
+    "description": null
+  },
+  "SkillUnlock_FireKirin": {
+    "localized_name": "<itemName id=|SkillUnlock_FireKirin|/>",
+    "description": null
+  },
+  "SkillUnlock_FireKirin_Dark": {
+    "localized_name": "<itemName id=|SkillUnlock_FireKirin_Dark|/>",
+    "description": null
+  },
+  "SkillUnlock_FlameBuffalo": {
+    "localized_name": "<itemName id=|SkillUnlock_FlameBuffalo|/>",
+    "description": null
+  },
+  "SkillUnlock_FlowerDinosaur": {
+    "localized_name": "<itemName id=|SkillUnlock_FlowerDinosaur|/>",
+    "description": null
+  },
+  "SkillUnlock_FlowerDinosaur_Electric": {
+    "localized_name": "<itemName id=|SkillUnlock_FlowerDinosaur_Electric|/>",
+    "description": null
+  },
+  "SkillUnlock_FlowerRabbit": {
+    "localized_name": "<itemName id=|SkillUnlock_FlowerRabbit|/>",
+    "description": null
+  },
+  "SkillUnlock_FlyingManta": {
+    "localized_name": "<itemName id=|SkillUnlock_FlyingManta|/>",
+    "description": null
+  },
+  "SkillUnlock_Garm": {
+    "localized_name": "<itemName id=|SkillUnlock_Garm|/>",
+    "description": null
+  },
+  "SkillUnlock_GhostBeast": {
+    "localized_name": "<itemName id=|SkillUnlock_GhostBeast|/>",
+    "description": null
+  },
+  "SkillUnlock_GoldenHorse": {
+    "localized_name": "<itemName id=|SkillUnlock_GoldenHorse|/>",
+    "description": null
+  },
+  "SkillUnlock_GrassMammoth": {
+    "localized_name": "<itemName id=|SkillUnlock_GrassMammoth|/>",
+    "description": null
+  },
+  "SkillUnlock_GrassMammoth_Ice": {
+    "localized_name": "<itemName id=|SkillUnlock_GrassMammoth_Ice|/>",
+    "description": null
+  },
+  "SkillUnlock_GrassPanda": {
+    "localized_name": "<itemName id=|SkillUnlock_GrassPanda|/>",
+    "description": null
+  },
+  "SkillUnlock_GrassPanda_Electric": {
+    "localized_name": "<itemName id=|SkillUnlock_GrassPanda_Electric|/>",
+    "description": null
+  },
+  "SkillUnlock_GuardianDog": {
+    "localized_name": "<itemName id=|SkillUnlock_GuardianDog|/>",
+    "description": null
+  },
+  "SkillUnlock_HadesBird": {
+    "localized_name": "<itemName id=|SkillUnlock_HadesBird|/>",
+    "description": null
+  },
+  "SkillUnlock_HadesBird_Electric": {
+    "localized_name": "<itemName id=|SkillUnlock_HadesBird_Electric|/>",
+    "description": null
+  },
+  "SkillUnlock_HawkBird": {
+    "localized_name": "<itemName id=|SkillUnlock_HawkBird|/>",
+    "description": null
+  },
+  "SkillUnlock_Hedgehog": {
+    "localized_name": "<itemName id=|SkillUnlock_Hedgehog|/>",
+    "description": null
+  },
+  "SkillUnlock_Hedgehog_Ice": {
+    "localized_name": "<itemName id=|SkillUnlock_Hedgehog_Ice|/>",
+    "description": null
+  },
+  "SkillUnlock_Horus": {
+    "localized_name": "<itemName id=|SkillUnlock_Horus|/>",
+    "description": null
+  },
+  "SkillUnlock_Horus_Water": {
+    "localized_name": "<itemName id=|SkillUnlock_Horus_Water|/>",
+    "description": null
+  },
+  "SkillUnlock_IceDeer": {
+    "localized_name": "<itemName id=|SkillUnlock_IceDeer|/>",
+    "description": null
+  },
+  "SkillUnlock_IceHorse": {
+    "localized_name": "<itemName id=|SkillUnlock_IceHorse|/>",
+    "description": null
+  },
+  "SkillUnlock_IceHorse_Dark": {
+    "localized_name": "<itemName id=|SkillUnlock_IceHorse_Dark|/>",
+    "description": null
+  },
+  "SkillUnlock_JetDragon": {
+    "localized_name": "<itemName id=|SkillUnlock_JetDragon|/>",
+    "description": null
+  },
+  "SkillUnlock_KingAlpaca": {
+    "localized_name": "<itemName id=|SkillUnlock_KingAlpaca|/>",
+    "description": null
+  },
+  "SkillUnlock_KingAlpaca_Ice": {
+    "localized_name": "<itemName id=|SkillUnlock_KingAlpaca_Ice|/>",
+    "description": null
+  },
+  "SkillUnlock_KingBahamut": {
+    "localized_name": "<itemName id=|SkillUnlock_KingBahamut|/>",
+    "description": null
+  },
+  "SkillUnlock_KingBahamut_Dragon": {
+    "localized_name": "<itemName id=|SkillUnlock_KingBahamut_Dragon|/>",
+    "description": null
+  },
+  "SkillUnlock_Kirin": {
+    "localized_name": "<itemName id=|SkillUnlock_Kirin|/>",
+    "description": null
+  },
+  "SkillUnlock_Kitsunebi": {
+    "localized_name": "<itemName id=|SkillUnlock_Kitsunebi|/>",
+    "description": null
+  },
+  "SkillUnlock_Kitsunebi_Ice": {
+    "localized_name": "<itemName id=|SkillUnlock_Kitsunebi_Ice|/>",
+    "description": null
+  },
+  "SkillUnlock_LazyDragon": {
+    "localized_name": "<itemName id=|SkillUnlock_LazyDragon|/>",
+    "description": null
+  },
+  "SkillUnlock_LazyDragon_Electric": {
+    "localized_name": "<itemName id=|SkillUnlock_LazyDragon_Electric|/>",
+    "description": null
+  },
+  "SkillUnlock_Manticore": {
+    "localized_name": "<itemName id=|SkillUnlock_Manticore|/>",
+    "description": null
+  },
+  "SkillUnlock_Manticore_Dark": {
+    "localized_name": "<itemName id=|SkillUnlock_Manticore_Dark|/>",
+    "description": null
+  },
+  "SkillUnlock_Monkey": {
+    "localized_name": "<itemName id=|SkillUnlock_Monkey|/>",
+    "description": null
+  },
+  "SkillUnlock_MoonQueen": {
+    "localized_name": "<itemName id=|SkillUnlock_MoonQueen|/>",
+    "description": null
+  },
+  "SkillUnlock_MopKing": {
+    "localized_name": "<itemName id=|SkillUnlock_MopKing|/>",
+    "description": null
+  },
+  "SkillUnlock_MushroomDragon": {
+    "localized_name": "<itemName id=|SkillUnlock_MushroomDragon|/>",
+    "description": null
+  },
+  "SkillUnlock_MushroomDragon_Dark": {
+    "localized_name": "<itemName id=|SkillUnlock_MushroomDragon_Dark|/>",
+    "description": null
+  },
+  "SkillUnlock_NaughtyCat": {
+    "localized_name": "<itemName id=|SkillUnlock_NaughtyCat|/>",
+    "description": null
+  },
+  "SkillUnlock_NegativeOctopus": {
+    "localized_name": "<itemName id=|SkillUnlock_NegativeOctopus|/>",
+    "description": null
+  },
+  "SkillUnlock_NightBlueHorse": {
+    "localized_name": "<itemName id=|SkillUnlock_NightBlueHorse|/>",
+    "description": null
+  },
+  "SkillUnlock_Penguin": {
+    "localized_name": "<itemName id=|SkillUnlock_Penguin|/>",
+    "description": null
+  },
+  "SkillUnlock_PurpleSpider": {
+    "localized_name": "<itemName id=|SkillUnlock_PurpleSpider|/>",
+    "description": null
+  },
+  "SkillUnlock_RaijinDaughter": {
+    "localized_name": "<itemName id=|SkillUnlock_RaijinDaughter|/>",
+    "description": null
+  },
+  "SkillUnlock_RaijinDaughter_Water": {
+    "localized_name": "<itemName id=|SkillUnlock_RaijinDaughter_Water|/>",
+    "description": null
+  },
+  "SkillUnlock_RedArmorBird": {
+    "localized_name": "<itemName id=|SkillUnlock_RedArmorBird|/>",
+    "description": null
+  },
+  "SkillUnlock_SaintCentaur": {
+    "localized_name": "<itemName id=|SkillUnlock_SaintCentaur|/>",
+    "description": null
+  },
+  "SkillUnlock_SakuraSaurus": {
+    "localized_name": "<itemName id=|SkillUnlock_SakuraSaurus|/>",
+    "description": null
+  },
+  "SkillUnlock_SakuraSaurus_Water": {
+    "localized_name": "<itemName id=|SkillUnlock_SakuraSaurus_Water|/>",
+    "description": null
+  },
+  "SkillUnlock_Serpent": {
+    "localized_name": "<itemName id=|SkillUnlock_Serpent|/>",
+    "description": null
+  },
+  "SkillUnlock_Serpent_Ground": {
+    "localized_name": "<itemName id=|SkillUnlock_Serpent_Ground|/>",
+    "description": null
+  },
+  "SkillUnlock_SkyDragon": {
+    "localized_name": "<itemName id=|SkillUnlock_SkyDragon|/>",
+    "description": null
+  },
+  "SkillUnlock_SkyDragon_Grass": {
+    "localized_name": "<itemName id=|SkillUnlock_SkyDragon_Grass|/>",
+    "description": null
+  },
+  "SkillUnlock_SnowTigerBeastman": {
+    "localized_name": "<itemName id=|SkillUnlock_SnowTigerBeastman|/>",
+    "description": null
+  },
+  "SkillUnlock_Suzaku": {
+    "localized_name": "<itemName id=|SkillUnlock_Suzaku|/>",
+    "description": null
+  },
+  "SkillUnlock_Suzaku_Water": {
+    "localized_name": "<itemName id=|SkillUnlock_Suzaku_Water|/>",
+    "description": null
+  },
+  "SkillUnlock_ThunderBird": {
+    "localized_name": "<itemName id=|SkillUnlock_ThunderBird|/>",
+    "description": null
+  },
+  "SkillUnlock_ThunderDog": {
+    "localized_name": "<itemName id=|SkillUnlock_ThunderDog|/>",
+    "description": null
+  },
+  "SkillUnlock_Umihebi": {
+    "localized_name": "<itemName id=|SkillUnlock_Umihebi|/>",
+    "description": null
+  },
+  "SkillUnlock_Umihebi_Fire": {
+    "localized_name": "<itemName id=|SkillUnlock_Umihebi_Fire|/>",
+    "description": null
+  },
+  "SkillUnlock_VolcanicMonster": {
+    "localized_name": "<itemName id=|SkillUnlock_VolcanicMonster|/>",
+    "description": null
+  },
+  "SkillUnlock_VolcanicMonster_Ice": {
+    "localized_name": "<itemName id=|SkillUnlock_VolcanicMonster_Ice|/>",
+    "description": null
+  },
+  "SkillUnlock_WeaselDragon": {
+    "localized_name": "<itemName id=|SkillUnlock_WeaselDragon|/>",
+    "description": null
+  },
+  "SkillUnlock_WeaselDragon_Fire": {
+    "localized_name": "<itemName id=|SkillUnlock_WeaselDragon_Fire|/>",
+    "description": null
+  },
+  "SkillUnlock_WhiteAlienDragon": {
+    "localized_name": "<itemName id=|SkillUnlock_WhiteAlienDragon|/>",
+    "description": null
+  },
+  "SkillUnlock_WhiteDeer": {
+    "localized_name": "<itemName id=|SkillUnlock_WhiteDeer|/>",
+    "description": null
+  },
+  "SkillUnlock_WhiteShieldDragon": {
+    "localized_name": "<itemName id=|SkillUnlock_WhiteShieldDragon|/>",
+    "description": null
+  },
+  "SkillUnlock_WindChimes": {
+    "localized_name": "<itemName id=|SkillUnlock_WindChimes|/>",
+    "description": null
+  },
+  "SkillUnlock_WindChimes_Ice": {
+    "localized_name": "<itemName id=|SkillUnlock_WindChimes_Ice|/>",
+    "description": null
+  },
+  "SkillUnlock_Yeti": {
+    "localized_name": "<itemName id=|SkillUnlock_Yeti|/>",
+    "description": null
+  },
+  "SkillUnlock_Yeti_Grass": {
+    "localized_name": "<itemName id=|SkillUnlock_Yeti_Grass|/>",
+    "description": null
+  },
+  "SkinChange": {
+    "localized_name": "<mapObjectName id=|SkinChange|/>",
+    "description": null
+  },
+  "Snowman": {
+    "localized_name": "<mapObjectName id=|Snowman|/>",
+    "description": null
+  },
+  "Spa": {
+    "localized_name": "<mapObjectName id=|Spa|/>",
+    "description": "팰이 |<mapObjectName id=|Spa|/>|에 들어가 SAN 수치를 회복한다."
+  },
+  "Spa2": {
+    "localized_name": "<mapObjectName id=|Spa2|/>",
+    "description": "들어간 팰이 SAN 수치를 더 많이 회복한다."
+  },
+  "Spear": {
+    "localized_name": "<itemName id=|Spear|/>",
+    "description": null
+  },
+  "Spear_2": {
+    "localized_name": "<itemName id=|Spear_2|/>",
+    "description": "근접 전투에서 유용한 창. 금속으로 만들어 공격력이 더 높다. 제작하려면 |<mapObjectName id=|Factory_Hard_01|/>|이(가) 필요하다."
+  },
+  "Spear_3": {
+    "localized_name": "<itemName id=|Spear_3|/>",
+    "description": "근접 전투에서 유용한 창. 고급 금속으로 만들어 공격력이 더 높다. 제작하려면 |<mapObjectName id=|Factory_Hard_02|/>|이(가) 필요하다."
+  },
+  "Spear_ForestBoss": {
+    "localized_name": "<itemName id=|Spear_ForestBoss|/>",
+    "description": null
+  },
+  "Special_ElectricHatchingPalEgg": {
+    "localized_name": "<mapObjectName id=|ElectricHatchingPalEgg|/>",
+    "description": null
+  },
+  "Special_HatchingPalEgg": {
+    "localized_name": "<mapObjectName id=|HatchingPalEgg|/>",
+    "description": "팰의 알을 놓으면 부화시킬 수 있다."
+  },
+  "Special_PalRankUp": {
+    "localized_name": "<mapObjectName id=|CharacterRankUp|/>",
+    "description": "같은 종류의 팰 여러 마리를 농축 후 합성하여 높은 랭크의 개체로 강화한다."
+  },
+  "Special_PalSphere_Grade_01": {
+    "localized_name": "<itemName id=|PalSphere|/>",
+    "description": "던져서 팰을 포획하는 도구. 양산형이라 레벨이 낮은 팰에게만 유효하다."
+  },
+  "Special_PalSphere_Grade_02": {
+    "localized_name": "<itemName id=|PalSphere_Mega|/>",
+    "description": "던져서 팰을 포획하는 도구. 성능이 향상돼 더 많은 팰을 잡을 수 있다. 제작하려면 '<mapObjectName id=|SphereFactory_Black_01|/>'이(가) 필요하다."
+  },
+  "Special_PalSphere_Grade_03": {
+    "localized_name": "<itemName id=|PalSphere_Giga|/>",
+    "description": "던져서 팰을 포획하는 도구. 어느 정도 강력한 팰도 잡을 수 있다. 제작하려면 '<mapObjectName id=|SphereFactory_Black_01|/>'이(가) 필요하다."
+  },
+  "Special_PalSphere_Grade_04": {
+    "localized_name": "<itemName id=|PalSphere_Tera|/>",
+    "description": "던져서 팰을 포획하는 도구. 꽤 강력한 팰도 잡을 수 있다. 제작하려면 '<mapObjectName id=|SphereFactory_Black_02|/>'이(가) 필요하다."
+  },
+  "Special_PalSphere_Grade_05": {
+    "localized_name": "<itemName id=|PalSphere_Master|/>",
+    "description": "던져서 팰을 포획하는 도구. 상당한 성능 덕에 도망칠 수 있는 팰이 별로 없다. 제작하려면 '<mapObjectName id=|SphereFactory_Black_03|/>'이(가) 필요하다."
+  },
+  "Special_PalSphere_Grade_06": {
+    "localized_name": "<itemName id=|PalSphere_Legend|/>",
+    "description": "던져서 팰을 포획하는 도구. 이 스피어를 피해 도망칠 수 있는 팰은 거의 없다. 제작하려면 '<mapObjectName id=|SphereFactory_Black_03|/>'이(가) 필요하다."
+  },
+  "Special_PalSphere_Grade_07": {
+    "localized_name": "<itemName id=|PalSphere_Ultimate|/>",
+    "description": "던져서 팰을 포획하는 도구. 압도적인 성능으로, 그 어떤 팰이라도 잡을 수 있다. 제작하려면 |<mapObjectName id=|SphereFactory_Black_03|/>|이(가) 필요하다."
+  },
+  "Special_SphereFactory_Black_Grade_01": {
+    "localized_name": "<mapObjectName id=|SphereFactory_Black_01|/>",
+    "description": "팰 포획용 스피어 제작 작업대. 제작하려면 |COMMON_WORK_SUITABILITY_Handcraft| 적성을 가진 팰이 필요하다."
+  },
+  "Special_SphereFactory_Black_Grade_02": {
+    "localized_name": "<mapObjectName id=|SphereFactory_Black_02|/>",
+    "description": "빠르게 |<itemName id=|PalSphere|/>|을(를) 생산할 수 있게 된다. 작업하려면 |COMMON_WORK_SUITABILITY_Handcraft| 적성을 가진 팰이 필요하다."
+  },
+  "Special_SphereFactory_Black_Grade_03": {
+    "localized_name": "<mapObjectName id=|SphereFactory_Black_03|/>",
+    "description": "더욱 빠르게 |<itemName id=|PalSphere|/>|을(를) 생산할 수 있게 된다. 작업하려면 |COMMON_WORK_SUITABILITY_Handcraft| 적성을 가진 팰이 필요하다."
+  },
+  "SphereFactory_Black_04": {
+    "localized_name": "<mapObjectName id=|SphereFactory_Black_04|/>",
+    "description": null
+  },
+  "SphereModule_Curve": {
+    "localized_name": "<itemName id=|SphereModule_Curve|/>",
+    "description": null
+  },
+  "SphereModule_Curve2": {
+    "localized_name": "<itemName id=|SphereModule_Curve2|/>",
+    "description": null
+  },
+  "SphereModule_Heavy": {
+    "localized_name": "<itemName id=|SphereModule_Heavy|/>",
+    "description": null
+  },
+  "SphereModule_Homing": {
+    "localized_name": "<itemName id=|SphereModule_Homing|/>",
+    "description": null
+  },
+  "SphereModule_Sniper": {
+    "localized_name": "<itemName id=|SphereModule_Sniper|/>",
+    "description": null
+  },
+  "SphereModule_Sniper2": {
+    "localized_name": "<itemName id=|SphereModule_Sniper2|/>",
+    "description": null
+  },
+  "StainlessSteel": {
+    "localized_name": "<itemName id=|StainlessSteel|/>",
+    "description": null
+  },
+  "Stone_Gate": {
+    "localized_name": "<mapObjectName id=|Stone_Gate|/>",
+    "description": "덩치 큰 팰도 드나들 수 있는 돌 문."
+  },
+  "Stone_houseset": {
+    "localized_name": "돌 건축 세트",
+    "description": "돌로 거점을 제작할 때 쓰는 세트. 석제 토대, 벽, 지붕, 계단 등 집을 지을 때 필요한 것들을 만들 수 있다."
+  },
+  "Stump": {
+    "localized_name": "<mapObjectName id=|Stump|/>",
+    "description": null
+  },
+  "TableDresser01_Stone": {
+    "localized_name": "<mapObjectName id=|TableDresser01_Stone|/>",
+    "description": null
+  },
+  "ToolBoxV1": {
+    "localized_name": "<mapObjectName id=|ToolBoxV1|/>",
+    "description": null
+  },
+  "Torch": {
+    "localized_name": "<mapObjectName id=|Torch|/>",
+    "description": "거점에 설치하면 주변을 환하게 비춘다."
+  },
+  "TransmissionTower": {
+    "localized_name": "<mapObjectName id=|TransmissionTower|/>",
+    "description": null
+  },
+  "Trap_LegHold": {
+    "localized_name": "<mapObjectName id=|Trap_LegHold|/>",
+    "description": "밟은 적의 발을 묶을 수 있다. 작은 팰이나 인간에게만 유효하다."
+  },
+  "Trap_LegHold_Big": {
+    "localized_name": "<mapObjectName id=|Trap_LegHold_Big|/>",
+    "description": "밟은 적의 발을 묶을 수 있다. 대형 팰에게만 유효하다."
+  },
+  "Trap_MineAttack": {
+    "localized_name": "<mapObjectName id=|Trap_MineAttack|/>",
+    "description": "적이 밟으면 자동으로 폭발한다."
+  },
+  "Trap_MineElecShock": {
+    "localized_name": "<mapObjectName id=|Trap_MineElecShock|/>",
+    "description": "밟은 적을 감전시킨다. 감전 상태의 팰은 잡기 수월해진다."
+  },
+  "Trap_MineFreeze": {
+    "localized_name": "<mapObjectName id=|Trap_MineFreeze|/>",
+    "description": "밟은 적을 빙결시킨다. 빙결 상태의 팰은 잡기 수월해진다."
+  },
+  "Trap_Noose": {
+    "localized_name": "<mapObjectName id=|Trap_Noose|/>",
+    "description": "통과한 팰을 붙잡을 수 있다. 작은 팰이나 인간에게만 유효하다."
+  },
+  "Unlock_Picking_Tier1": {
+    "localized_name": "<itemName id=|Unlock_Picking_Tier1|/>",
+    "description": null
+  },
+  "Unlock_Picking_Tier2": {
+    "localized_name": "<itemName id=|Unlock_Picking_Tier2|/>",
+    "description": null
+  },
+  "Unlock_Picking_Tier3": {
+    "localized_name": "<itemName id=|Unlock_Picking_Tier3|/>",
+    "description": null
+  },
+  "WallSignboard": {
+    "localized_name": "<mapObjectName id=|WallSignBoard|/>",
+    "description": null
+  },
+  "WallTorch": {
+    "localized_name": "<mapObjectName id=|WallTorch|/>",
+    "description": "벽에 걸 수 있다."
+  },
+  "Wood_Gate": {
+    "localized_name": "<mapObjectName id=|Wood_Gate|/>",
+    "description": "덩치 큰 팰도 드나들 수 있는 나무 문."
+  },
+  "Wooden_houseset": {
+    "localized_name": "나무 건축 세트",
+    "description": "나무로 거점을 제작할 때 쓰는 세트. 목제 토대, 벽, 지붕, 계단 등 집을 지을 때 필요한 것들을 만들 수 있다."
+  },
+  "Wooden_ladder": {
+    "localized_name": "<mapObjectName id=|Wooden_ladder|/>",
+    "description": null
+  },
+  "WorkSpeedIncrease1": {
+    "localized_name": "<mapObjectName id=|WorkSpeedIncrease1|/>",
+    "description": null
+  },
+  "Workbench": {
+    "localized_name": "<mapObjectName id=|WorkBench|/>",
+    "description": "간단한 아이템을 제작하는 |<mapObjectName id=|WorkBench|/>|. |COMMON_WORK_SUITABILITY_Handcraft| 적성을 가진 팰이 있다면 작업을 도와준다."
+  },
+  "YakushimaBlade": {
+    "localized_name": "<itemName id=|YakushimaBlade|/>",
+    "description": null
+  }
+}

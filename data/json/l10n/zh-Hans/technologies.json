@@ -1,0 +1,1786 @@
+{
+  "Accessory_AirDash1": {
+    "localized_name": "<itemName id=|Accessory_AirDash1|/>",
+    "description": null
+  },
+  "Accessory_AirDash2": {
+    "localized_name": "<itemName id=|Accessory_AirDash2|/>",
+    "description": null
+  },
+  "Accessory_JumpCount_Increase1": {
+    "localized_name": "<itemName id=|Accessory_JumpCount_Increase1|/>",
+    "description": null
+  },
+  "Accessory_JumpCount_Increase2": {
+    "localized_name": "<itemName id=|Accessory_JumpCount_Increase2|/>",
+    "description": null
+  },
+  "Accessory_JumpPower_Increase": {
+    "localized_name": "<itemName id=|Accessory_JumpPower_Increase|/>",
+    "description": null
+  },
+  "Accessory_Nonkilling": {
+    "localized_name": "<itemName id=|Accessory_Nonkilling|/>",
+    "description": null
+  },
+  "Accessory_TalentChecker": {
+    "localized_name": "<itemName id=|Accessory_TalentChecker|/>",
+    "description": null
+  },
+  "AdditionalInventory_001": {
+    "localized_name": "<itemName id=|AdditionalInventory_001|/>",
+    "description": null
+  },
+  "AdditionalInventory_002": {
+    "localized_name": "<itemName id=|AdditionalInventory_002|/>",
+    "description": null
+  },
+  "AdditionalInventory_003": {
+    "localized_name": "<itemName id=|AdditionalInventory_003|/>",
+    "description": null
+  },
+  "AdditionalInventory_004": {
+    "localized_name": "<itemName id=|AdditionalInventory_004|/>",
+    "description": null
+  },
+  "Altar": {
+    "localized_name": "<mapObjectName id=|Altar|/>",
+    "description": null
+  },
+  "Arrow": {
+    "localized_name": "<itemName id=|Arrow|/>",
+    "description": "弓专用的<itemName id=|Arrow|/>。 可在｢<mapObjectName id=|WorkBench|/>｣制作。"
+  },
+  "Arrow_Fire": {
+    "localized_name": "<itemName id=|Arrow_Fire|/>",
+    "description": "｢<itemName id=|Bow_Fire|/>｣与｢<itemName id=|BowGun_Fire|/>｣等用的<itemName id=|Arrow|/>。 可对目标造成COMMON_ELEMENT_NAME_Fire伤害。 可在｢<mapObjectName id=|WorkBench|/>｣制作。"
+  },
+  "Arrow_Poison": {
+    "localized_name": "<itemName id=|Arrow_Poison|/>",
+    "description": "｢<itemName id=|Bow_Poison|/>｣与｢<itemName id=|BowGun_Poison|/>｣等用的<itemName id=|Arrow|/>。 可以让被射中的目标中毒。 可在｢<mapObjectName id=|WorkBench|/>｣制作。"
+  },
+  "AssaultRifleBullet": {
+    "localized_name": "<itemName id=|AssaultRifleBullet|/>",
+    "description": "｢<itemName id=|AssaultRifle_Default1|/>｣等使用的子弹。 可在｢<mapObjectName id=|WeaponFactory_Dirty_02|/>｣制作。"
+  },
+  "AutoMealPouch_Tier1": {
+    "localized_name": "<itemName id=|AutoMealPouch_Tier1|/>",
+    "description": null
+  },
+  "AutoMealPouch_Tier2": {
+    "localized_name": "<itemName id=|AutoMealPouch_Tier2|/>",
+    "description": null
+  },
+  "AutoMealPouch_Tier3": {
+    "localized_name": "<itemName id=|AutoMealPouch_Tier3|/>",
+    "description": null
+  },
+  "AutoMealPouch_Tier4": {
+    "localized_name": "<itemName id=|AutoMealPouch_Tier4|/>",
+    "description": null
+  },
+  "AutoMealPouch_Tier5": {
+    "localized_name": "<itemName id=|AutoMealPouch_Tier5|/>",
+    "description": null
+  },
+  "BaseCampBattleDirector": {
+    "localized_name": "<mapObjectName id=|BaseCampBattleDirector|/>",
+    "description": "用于更改据点内帕鲁警戒状态的钟。 可随时于「迎击外敌」及「专心工作」之间切换。"
+  },
+  "BaseCampItemDispenser": {
+    "localized_name": "<mapObjectName id=|BaseCampItemDispenser|/>",
+    "description": null
+  },
+  "BaseCampWorkHard": {
+    "localized_name": "<mapObjectName id=|BaseCampWorkHard|/>",
+    "description": null
+  },
+  "Battle_Armor_Grade_01_Cloth": {
+    "localized_name": "<itemName id=|ClothArmor|/>",
+    "description": "以｢<itemName id=|Cloth|/>｣制成的服装。 可以抵御夜间的寒意。 可在｢<mapObjectName id=|WorkBench|/>｣制作。"
+  },
+  "Battle_Armor_Grade_01_Cloth_Cold": {
+    "localized_name": "<itemName id=|ClothArmorCold|/>",
+    "description": "在寒冷地区生产的｢<itemName id=|ClothArmor|/>｣。 能够抵御让身体都冻僵的寒意。 可在｢<mapObjectName id=|WorkBench|/>｣制作。"
+  },
+  "Battle_Armor_Grade_01_Cloth_Heat": {
+    "localized_name": "<itemName id=|ClothArmorHeat|/>",
+    "description": "在炎热地区生产的｢<itemName id=|ClothArmor|/>｣。 具备傲人的耐热性能。 可在｢<mapObjectName id=|WorkBench|/>｣制作。"
+  },
+  "Battle_Armor_Grade_02_Fur": {
+    "localized_name": "<itemName id=|FurArmor|/>",
+    "description": "以｢<itemName id=|Leather|/>｣制成的盔甲。 耐久度和防御力都得到了提升。 可在｢<mapObjectName id=|Factory_Hard_01|/>｣制作。"
+  },
+  "Battle_Armor_Grade_02_Fur_Cold": {
+    "localized_name": "<itemName id=|FurArmorCold|/>",
+    "description": "在寒冷地区生产的｢<itemName id=|FurArmor|/>｣。 能够抵御让身体都冻僵的寒意。 可在｢<mapObjectName id=|Factory_Hard_01|/>｣制作。"
+  },
+  "Battle_Armor_Grade_02_Fur_Heat": {
+    "localized_name": "<itemName id=|FurArmorHeat|/>",
+    "description": "在炎热地区生产的｢<itemName id=|FurArmor|/>｣。 具备傲人的耐热性能。 可在｢<mapObjectName id=|Factory_Hard_01|/>｣制作。"
+  },
+  "Battle_Armor_Grade_03_Copper": {
+    "localized_name": "<itemName id=|CopperArmor|/>",
+    "description": "以金属制成的盔甲。 有一定防御力，也有一定重量。 可在｢<mapObjectName id=|Factory_Hard_01|/>｣制作。"
+  },
+  "Battle_Armor_Grade_03_Copper_Cold": {
+    "localized_name": "<itemName id=|CopperArmorCold|/>",
+    "description": "经过改良的｢<itemName id=|CopperArmor|/>｣。 能够抵御使身体冻僵的寒意。 可在｢<mapObjectName id=|Factory_Hard_01|/>｣制作。"
+  },
+  "Battle_Armor_Grade_03_Copper_Heat": {
+    "localized_name": "<itemName id=|CopperArmorHeat|/>",
+    "description": "经过改良的｢<itemName id=|CopperArmor|/>｣。 具备傲人的耐热功能。 可在｢<mapObjectName id=|Factory_Hard_01|/>｣制作。"
+  },
+  "Battle_Armor_Grade_03_Iron": {
+    "localized_name": "<itemName id=|IronArmor|/>",
+    "description": "以优质金属制成的盔甲。 防御力极优，但也相当沉重。 可在｢<mapObjectName id=|Factory_Hard_02|/>｣制作。"
+  },
+  "Battle_Armor_Grade_03_Iron_Cold": {
+    "localized_name": "<itemName id=|IronArmorCold|/>",
+    "description": "经过改良的｢<itemName id=|IronArmor|/>｣。 能够抵御使身体冻僵的寒意。 可在｢<mapObjectName id=|Factory_Hard_02|/>｣制作。"
+  },
+  "Battle_Armor_Grade_03_Iron_Heat": {
+    "localized_name": "<itemName id=|IronArmorHeat|/>",
+    "description": "经过改良的｢<itemName id=|IronArmor|/>｣。 具备傲人的耐热功能。 可在｢<mapObjectName id=|Factory_Hard_02|/>｣制作。"
+  },
+  "Battle_Armor_Grade_04_Steal": {
+    "localized_name": "<itemName id=|StealArmor|/>",
+    "description": "以<itemName id=|StealIngot|/>制成的盔甲。 有着惊人的防御力，但是十分沉重。 可在｢<mapObjectName id=|Factory_Hard_03|/>｣制作。"
+  },
+  "Battle_Armor_Grade_04_Steal_Cold": {
+    "localized_name": "<itemName id=|StealArmorCold|/>",
+    "description": "经过改良的｢<itemName id=|StealArmor|/>｣。 能够抵御使身体冻僵的寒意。 可在｢<mapObjectName id=|Factory_Hard_03|/>｣制作。"
+  },
+  "Battle_Armor_Grade_04_Steal_Heat": {
+    "localized_name": "<itemName id=|StealArmorHeat|/>",
+    "description": "经过改良的｢<itemName id=|StealArmor|/>｣。 具备傲人的耐热性能。 可在｢<mapObjectName id=|Factory_Hard_03|/>｣制作。"
+  },
+  "Battle_Armor_Grade_05_Plastic": {
+    "localized_name": "<itemName id=|PlasticArmor|/>",
+    "description": "以<itemName id=|Plastic|/>制成的盔甲。 在增强防御力的同时，实现了轻量化。 可在｢<mapObjectName id=|Factory_Hard_03|/>｣制作。"
+  },
+  "Battle_Armor_Grade_05_Plastic_Cold": {
+    "localized_name": "<itemName id=|PlasticArmorCold|/>",
+    "description": "经过改良的｢<itemName id=|PlasticArmor|/>｣。 能够抵御使身体冻僵的寒意。 可在｢<mapObjectName id=|Factory_Hard_03|/>｣制作。"
+  },
+  "Battle_Armor_Grade_05_Plastic_Heat": {
+    "localized_name": "<itemName id=|PlasticArmorHeat|/>",
+    "description": "经过改良的｢<itemName id=|PlasticArmor|/>｣。 具备傲人的耐热性能。 可在｢<mapObjectName id=|Factory_Hard_03|/>｣制作。"
+  },
+  "Battle_Armor_Grade_05_Plastic_Weight": {
+    "localized_name": "<itemName id=|PlasticArmorWeight|/>",
+    "description": "经过改良的｢<itemName id=|PlasticArmor|/>｣。 能增加玩家的负重上限。 可在｢<mapObjectName id=|Factory_Hard_03|/>｣制作。"
+  },
+  "Battle_Cloth": {
+    "localized_name": "<itemName id=|Cloth|/>",
+    "description": null
+  },
+  "Battle_Defense_BowGun": {
+    "localized_name": "<mapObjectName id=|DefenseBowGun|/>",
+    "description": "将具备｢COMMON_WORK_SUITABILITY_Handcraft｣适应性的帕鲁分派到这里， 它就会操控十字弓坚守据点。"
+  },
+  "Battle_Defense_MachineGun": {
+    "localized_name": "<mapObjectName id=|DefenseMachinegun|/>",
+    "description": "将具备｢COMMON_WORK_SUITABILITY_Handcraft｣适应性的帕鲁分派到这里， 它就会操控机关枪坚守据点。"
+  },
+  "Battle_Defense_Missile": {
+    "localized_name": "<mapObjectName id=|DefenseMissile|/>",
+    "description": "将具备｢COMMON_WORK_SUITABILITY_Handcraft｣适应性的帕鲁分派到这裡， 它就会操控飞弹发射器坚守据点。"
+  },
+  "Battle_Glider_Grade_01": {
+    "localized_name": "<itemName id=|Glider_Old|/>",
+    "description": "展开后即可在空中滑翔的滑翔伞。 构造简单，无法高速飞行。"
+  },
+  "Battle_Glider_Grade_02": {
+    "localized_name": "<itemName id=|Glider_Good|/>",
+    "description": "展开后即可在空中滑翔的滑翔伞。 此为量产款式，有一定的飞行速度。 可在｢<mapObjectName id=|Factory_Hard_01|/>｣制作。"
+  },
+  "Battle_Glider_Grade_03": {
+    "localized_name": "<itemName id=|Glider_Super|/>",
+    "description": "展开后即可在空中滑翔的滑翔伞。 此款式性能有所提升，能以相当快的速度飞行。 可在｢<mapObjectName id=|Factory_Hard_02|/>｣制作。"
+  },
+  "Battle_Glider_Grade_04": {
+    "localized_name": "<itemName id=|Glider_Tera|/>",
+    "description": "展开后可在空中滑翔的滑翔伞。 性能得到进一步提升，速度和升力都提高了。 可在｢<mapObjectName id=|Factory_Hard_03|/>｣制作。"
+  },
+  "Battle_GunPowder_Grade_02": {
+    "localized_name": "<itemName id=|Gunpowder2|/>",
+    "description": "用于发射炮弹的｢<itemName id=|Gunpowder2|/>｣。 制作子弹时会用到。 可在｢<mapObjectName id=|Factory_Hard_01|/>｣制作。"
+  },
+  "Battle_Helm_Grade_02_Fur": {
+    "localized_name": "<itemName id=|FurHelmet|/>",
+    "description": "美丽的羽毛发饰。 不知为何，总觉得它能保护头部不受致命伤害。 可在｢<mapObjectName id=|Workbench|/>｣制作。"
+  },
+  "Battle_Helm_Grade_03_Copper": {
+    "localized_name": "<itemName id=|CopperHelmet|/>",
+    "description": "以金属制成的头盔。 安全可靠，能守护你的大脑。 可在｢<mapObjectName id=|Factory_Hard_01|/>｣制作。"
+  },
+  "Battle_Helm_Grade_04_Iron": {
+    "localized_name": "<itemName id=|IronHelmet|/>",
+    "description": "以优质金属制成的头盔。 精心打磨后耀眼的金属光泽提高了它的价值。 可在｢<mapObjectName id=|Factory_Hard_02|/>｣制作。"
+  },
+  "Battle_Helm_Grade_05_Steal": {
+    "localized_name": "<itemName id=|StealHelmet|/>",
+    "description": "以<itemName id=|StealIngot|/>制成的头盔。 拥有人人都会羡慕的绝佳品质，是会选择其穿戴者的战士证明。 可在｢<mapObjectName id=|Factory_Hard_03|/>｣制作。"
+  },
+  "Battle_Helm_Grade_06_Plastic": {
+    "localized_name": "<itemName id=|PlasticHelmet|/>",
+    "description": "以<itemName id=|Plastic|/>制成的头盔。 在增强防御力的同时，实现了轻量化。 可在｢<mapObjectName id=|Factory_Hard_03|/>｣制作。"
+  },
+  "Battle_MeleeWeapon_Axe_Steal": {
+    "localized_name": "<itemName id=|Axe_Steal|/>",
+    "description": null
+  },
+  "Battle_MeleeWeapon_Bat": {
+    "localized_name": "<itemName id=|Bat|/>",
+    "description": "用于近距离战斗的<itemName id=|Bat|/>。 也许能够用来打倒小型帕鲁。"
+  },
+  "Battle_MeleeWeapon_Bat2": {
+    "localized_name": "<itemName id=|Bat2|/>",
+    "description": null
+  },
+  "Battle_MeleeWeapon_Pickaxe_Steal": {
+    "localized_name": "<itemName id=|Pickaxe_Steal|/>",
+    "description": null
+  },
+  "Battle_MeleeWeapon_Sword": {
+    "localized_name": "<itemName id=|Sword|/>",
+    "description": "近距离战斗用的｢<itemName id=|Sword|/>｣。 锋利无比！但需要靠近敌人攻击，相当危险。 可在｢<mapObjectName id=|WeaponFactory_Dirty_01|/>｣制作。"
+  },
+  "Battle_RangeWeapon_AssaultRifle": {
+    "localized_name": "<itemName id=|AssaultRifle_Default1|/>",
+    "description": "以压倒性的连射能力镇压敌人的<itemName id=|AssaultRifle_Default1|/>。 火力优秀，是与强敌对战时的首选。 可在｢<mapObjectName id=|WeaponFactory_Dirty_02|/>｣制作。"
+  },
+  "Battle_RangeWeapon_Bow1": {
+    "localized_name": "<itemName id=|WeakerBow|/>",
+    "description": "原始的远距离攻击武器。 因为是东拼西凑而成的，威力较弱。 可在｢<mapObjectName id=|WorkBench|/>｣制作。"
+  },
+  "Battle_RangeWeapon_Bow3": {
+    "localized_name": "<itemName id=|Bow_Triple|/>",
+    "description": "改良后的弓，可同时发射3支箭。 拥有不可思议的力量，每次射击只消耗1支<itemName id=|Arrow|/>。"
+  },
+  "Battle_RangeWeapon_BowGun": {
+    "localized_name": "<itemName id=|BowGun|/>",
+    "description": "无须用力即可射出｢<itemName id=|Arrow|/>｣。 装箭需要花些时间，但攻击威力强大。 必须有｢<mapObjectName id=|Factory_Hard_01|/>｣才能制作。"
+  },
+  "Battle_RangeWeapon_BowGun_Fire": {
+    "localized_name": "<itemName id=|BowGun_Fire|/>",
+    "description": "可造成COMMON_ELEMENT_NAME_Fire伤害的<itemName id=|BowGun|/>。 需要<itemName id=|Arrow_Fire|/>才能使用。 可在｢<mapObjectName id=|Factory_Hard_01|/>｣制作。"
+  },
+  "Battle_RangeWeapon_BowGun_Poison": {
+    "localized_name": "<itemName id=|BowGun_Poison|/>",
+    "description": "可让攻击对象中毒的可怕<itemName id=|BowGun|/>。 需要｢<itemName id=|Arrow_Poison|/>｣才能使用。 可在｢<mapObjectName id=|Factory_Hard_01|/>｣制作。"
+  },
+  "Battle_RangeWeapon_Bow_Fire": {
+    "localized_name": "<itemName id=|Bow_Fire|/>",
+    "description": "可造成COMMON_ELEMENT_NAME_Fire伤害的弓。 利用火箭让帕鲁着火，变得更容易捕捉。 需要<itemName id=|Arrow_Fire|/>才能使用。"
+  },
+  "Battle_RangeWeapon_Bow_Poison": {
+    "localized_name": "<itemName id=|Bow_Poison|/>",
+    "description": "可让攻击对象中毒的可怕毒弓。 帕鲁中毒以后，会变得更容易捕捉。 需要｢<itemName id=|Arrow_Poison|/>｣才能使用。"
+  },
+  "Battle_RangeWeapon_CompoundBow": {
+    "localized_name": "<itemName id=|CompoundBow|/>",
+    "description": null
+  },
+  "Battle_RangeWeapon_FlameThrower": {
+    "localized_name": "<itemName id=|FlameThrower|/>",
+    "description": null
+  },
+  "Battle_RangeWeapon_GatlingGun": {
+    "localized_name": "<itemName id=|GatlingGun|/>",
+    "description": "可通过高速扫射实现压制战场的加特林机枪。 压制射击能够将敌人射成蜂窝。 可在｢<mapObjectName id=|WeaponFactory_Dirty_03|/>｣制作。"
+  },
+  "Battle_RangeWeapon_GrenadeLauncher": {
+    "localized_name": "<itemName id=|GrenadeLauncher|/>",
+    "description": "能够发射造成大范围爆炸的榴弹。 对付大群敌人时很有用。 可在｢<mapObjectName id=|WeaponFactory_Dirty_03|/>｣制作。"
+  },
+  "Battle_RangeWeapon_GuidedMissileLauncher": {
+    "localized_name": "<itemName id=|GuidedMissileLauncher|/>",
+    "description": "能够发射自动追踪敌人的导弹。 导弹在命中后将爆炸，造成大范围伤害。 可在｢<mapObjectName id=|WeaponFactory_Dirty_03|/>｣制作。"
+  },
+  "Battle_RangeWeapon_HandGun": {
+    "localized_name": "<itemName id=|HandGun_Default|/>",
+    "description": "子弹容纳量及连射能力经过强化的手枪。 每秒火力比<itemName id=|MakeshiftHandgun|/>更强。 可在｢<mapObjectName id=|WeaponFactory_Dirty_01|/>｣制作。"
+  },
+  "Battle_RangeWeapon_HomingSphereLauncher": {
+    "localized_name": "<itemName id=|HomingSphereLauncher|/>",
+    "description": "用于发射帕鲁球的发射器。 用它射出的帕鲁球会追踪帕鲁。 可在｢<mapObjectName id=|WeaponFactory_Dirty_03|/>｣制作。"
+  },
+  "Battle_RangeWeapon_LaserRifle": {
+    "localized_name": "<itemName id=|LaserRifle|/>",
+    "description": "能够发射激光的武器。 威力高又易于使用。 可在｢<mapObjectName id=|WeaponFactory_Dirty_03|/>｣制作。"
+  },
+  "Battle_RangeWeapon_OldRevolver": {
+    "localized_name": "<itemName id=|OldRevolver|/>",
+    "description": null
+  },
+  "Battle_RangeWeapon_Rifle": {
+    "localized_name": "<itemName id=|SingleShotRifle|/>",
+    "description": "单发型来福枪，得花费时间装填子弹。 填装数量少，但单发火力强劲。 可在｢<mapObjectName id=|WeaponFactory_Dirty_02|/>｣制作。"
+  },
+  "Battle_RangeWeapon_RocketLauncher": {
+    "localized_name": "<itemName id=|Launcher_Default|/>",
+    "description": "可远距离进行强劲轰炸的<itemName id=|Launcher_Default|/>。 可在｢<mapObjectName id=|WeaponFactory_Dirty_03|/>｣制作。"
+  },
+  "Battle_RangeWeapon_SemiAutoRifle": {
+    "localized_name": "<itemName id=|SemiAutoRifle|/>",
+    "description": null
+  },
+  "Battle_RangeWeapon_SemiAutoShotgun": {
+    "localized_name": "<itemName id=|SemiAutoShotgun|/>",
+    "description": null
+  },
+  "Battle_RangeWeapon_ShotGun": {
+    "localized_name": "<itemName id=|DoubleBarrelShotgun|/>",
+    "description": "近距离战斗能力强劲的霰弹枪，可以连射2发。 弹容量虽少，但火力很强。 可在｢<mapObjectName id=|WeaponFactory_Dirty_02|/>｣制作。"
+  },
+  "Battle_RangeWeapon_ShotGun_Multi": {
+    "localized_name": "<itemName id=|PumpActionShotgun|/>",
+    "description": "增加填装数量，更加强劲的霰弹枪。 拥有屈指可数的近距离DPS能力。 可在｢<mapObjectName id=|WeaponFactory_Dirty_02|/>｣制作。"
+  },
+  "Battle_RangeWeapon_SphereLauncher": {
+    "localized_name": "<itemName id=|SphereLauncher|/>",
+    "description": "可同时发射大量帕鲁球的新型发射器。 可用来捕捉成群的帕鲁。 可在｢<mapObjectName id=|WeaponFactory_Dirty_02|/>｣制作。"
+  },
+  "Battle_RangeWeapon_SphereLauncher_Once": {
+    "localized_name": "<itemName id=|SphereLauncher_Once|/>",
+    "description": "用于发射帕鲁球的发射器。 用它就能捕捉到更远处的帕鲁。 可在｢<mapObjectName id=|WeaponFactory_Dirty_01|/>｣制作。"
+  },
+  "Battle_RangeWeapon_SubmachineGun": {
+    "localized_name": "<itemName id=|SubmachineGun|/>",
+    "description": null
+  },
+  "BeamSword": {
+    "localized_name": "<itemName id=|BeamSword|/>",
+    "description": null
+  },
+  "BlastFurnace4": {
+    "localized_name": "<mapObjectName id=|BlastFurnace4|/>",
+    "description": null
+  },
+  "BreedFarm": {
+    "localized_name": "<mapObjectName id=|BreedFarm|/>",
+    "description": "分派♂♀帕鲁各一只， 即可让它们产下帕鲁蛋。 要放入｢<itemName id=|Cake|/>｣才会顺利生蛋。"
+  },
+  "BuildableGoddessStatue": {
+    "localized_name": "<mapObjectName id=|BuildableGoddessStatue|/>",
+    "description": "只要献上供品， 就能强化玩家和帕鲁。"
+  },
+  "CarbonFiber": {
+    "localized_name": "<itemName id=|CarbonFiber|/>",
+    "description": null
+  },
+  "Cauldron": {
+    "localized_name": "<mapObjectName id=|Cauldron|/>",
+    "description": null
+  },
+  "CeilingLamp": {
+    "localized_name": "<mapObjectName id=|CeilingLamp|/>",
+    "description": "可安装在天花板上。"
+  },
+  "Cement": {
+    "localized_name": "<itemName id=|Cement|/>",
+    "description": null
+  },
+  "Cloth2": {
+    "localized_name": "<itemName id=|Cloth2|/>",
+    "description": null
+  },
+  "Cooler": {
+    "localized_name": "<mapObjectName id=|Cooler|/>",
+    "description": "可让周围凉快起来，消除暑气。"
+  },
+  "CoolerBox": {
+    "localized_name": "<mapObjectName id=|CoolerBox|/>",
+    "description": null
+  },
+  "CoolerPalFoodBox": {
+    "localized_name": "<mapObjectName id=|CoolerPalFoodBox|/>",
+    "description": null
+  },
+  "Crusher": {
+    "localized_name": "<mapObjectName id=|Crusher|/>",
+    "description": "可以将<itemName id=|Stone|/>或<itemName id=|Wood|/>粉碎之后 转换成其他素材的设施。 需要有具备｢浇水｣适应性的帕鲁来使水车转动。"
+  },
+  "DamagedScarecrow": {
+    "localized_name": "<mapObjectName id=|DamagedScarecrow|/>",
+    "description": "模仿<characterName id=|Penguin|/>制作的训练用稻草人。"
+  },
+  "DecalGunSet": {
+    "localized_name": "印花枪套装",
+    "description": "印花枪套组。 持有此套组，即可制作能在命中处留下帕鲁图案 的奇妙枪支与其专用子弹。"
+  },
+  "DefenseWait": {
+    "localized_name": "<mapObjectName id=|DefenseWait|/>",
+    "description": "被分派到这里的帕鲁， 会负责防范外敌的哨兵工作。"
+  },
+  "DefenseWall": {
+    "localized_name": "<mapObjectName id=|DefenseWall|/>",
+    "description": "防止外敌入侵的巨大防御墙。"
+  },
+  "DefenseWall_Metal": {
+    "localized_name": "<mapObjectName id=|DefenseWall_Metal|/>",
+    "description": "防止外敌入侵的巨大防御墙。 因为是金属制的，所以非常坚固。"
+  },
+  "DefenseWall_Wood": {
+    "localized_name": "<mapObjectName id=|DefenseWall_Wood|/>",
+    "description": "防止外敌入侵的巨大防御墙。 因为是木制的，所以很脆弱。"
+  },
+  "DismantlingConveyor": {
+    "localized_name": "<mapObjectName id=|DismantlingConveyor|/>",
+    "description": null
+  },
+  "DisplayCharacter": {
+    "localized_name": "<mapObjectName id=|DisplayCharacter|/>",
+    "description": "放置抓来的帕鲁的观赏用笼子。 在里头的帕鲁无法战斗或进行作业， 但也不会肚子饿。"
+  },
+  "ElecBaton": {
+    "localized_name": "<itemName id=|ElecBaton|/>",
+    "description": "敲下去就会触电的近战武器。 帕鲁在触电状态下比较容易捕获。 可在｢<mapObjectName id=|Factory_Hard_01|/>｣制作。"
+  },
+  "ElectricCooler": {
+    "localized_name": "<mapObjectName id=|ElectricCooler|/>",
+    "description": "使用电力，效果更强的冷气，范围广且输出功率高。"
+  },
+  "ElectricGenerator_Large": {
+    "localized_name": "<mapObjectName id=|ElectricGenerator_Large|/>",
+    "description": null
+  },
+  "ElectricHeater": {
+    "localized_name": "<mapObjectName id=|ElectricHeater|/>",
+    "description": "使用电力，效果更强的暖炉，范围广且输出功率高。"
+  },
+  "EnergyLauncherBullet": {
+    "localized_name": "<itemName id=|EnergyLauncherBullet|/>",
+    "description": null
+  },
+  "EnergyRocketLauncher": {
+    "localized_name": "<itemName id=|EnergyRocketLauncher|/>",
+    "description": null
+  },
+  "EnergyStorage_Electric": {
+    "localized_name": "<mapObjectName id=|EnergyStorage_Electric|/>",
+    "description": null
+  },
+  "Expedition": {
+    "localized_name": "<mapObjectName id=|Expedition|/>",
+    "description": null
+  },
+  "Factory_Money": {
+    "localized_name": "<mapObjectName id=|Factory_Money|/>",
+    "description": null
+  },
+  "Farm_SkillFruits": {
+    "localized_name": "<mapObjectName id=|Farm_SkillFruits|/>",
+    "description": null
+  },
+  "FlamethrowerBullet": {
+    "localized_name": "<itemName id=|FlamethrowerBullet|/>",
+    "description": null
+  },
+  "FlourMill": {
+    "localized_name": "<mapObjectName id=|FlourMill|/>",
+    "description": "可以将<itemName id=|Wheat|/>磨碎之后 生产出<itemName id=|Flour|/>的设施。 需要有具备｢浇水｣适应性的帕鲁来使水车转动。"
+  },
+  "FlowerBed": {
+    "localized_name": "<mapObjectName id=|FlowerBed|/>",
+    "description": null
+  },
+  "Fountain": {
+    "localized_name": "<mapObjectName id=|Fountain|/>",
+    "description": null
+  },
+  "FragGrenade": {
+    "localized_name": "<itemName id=|FragGrenade|/>",
+    "description": null
+  },
+  "FragGrenade_Dark": {
+    "localized_name": "<itemName id=|FragGrenade_Dark|/>",
+    "description": null
+  },
+  "FragGrenade_Dragon": {
+    "localized_name": "<itemName id=|FragGrenade_Dragon|/>",
+    "description": null
+  },
+  "FragGrenade_Elec": {
+    "localized_name": "<itemName id=|FragGrenade_Elec|/>",
+    "description": null
+  },
+  "FragGrenade_Fire": {
+    "localized_name": "<itemName id=|FragGrenade_Fire|/>",
+    "description": null
+  },
+  "FragGrenade_Ground": {
+    "localized_name": "<itemName id=|FragGrenade_Ground|/>",
+    "description": null
+  },
+  "FragGrenade_Ice": {
+    "localized_name": "<itemName id=|FragGrenade_Ice|/>",
+    "description": null
+  },
+  "FragGrenade_Leaf": {
+    "localized_name": "<itemName id=|FragGrenade_Leaf|/>",
+    "description": null
+  },
+  "FragGrenade_Super": {
+    "localized_name": "<itemName id=|FragGrenade_Super|/>",
+    "description": null
+  },
+  "FragGrenade_Water": {
+    "localized_name": "<itemName id=|FragGrenade_Water|/>",
+    "description": null
+  },
+  "FurnitureSet_1": {
+    "localized_name": "木制客厅家具套装",
+    "description": "装饰用的家具套组。 放在客厅，尽情享受和帕鲁一起的快乐生活吧。"
+  },
+  "FurnitureSet_10": {
+    "localized_name": "路障套装",
+    "description": "装饰用的家具套组。 放在你想限制通行的地方吧。"
+  },
+  "FurnitureSet_11": {
+    "localized_name": "交通标志套装",
+    "description": "装饰用的家具套组。 因为没有道路，无法发挥管理交通的效果。"
+  },
+  "FurnitureSet_12": {
+    "localized_name": "道路标志套装",
+    "description": "装饰用的家具套组。 因为没有道路，无法发挥管理交通的效果。"
+  },
+  "FurnitureSet_13": {
+    "localized_name": "金属桌椅套装",
+    "description": "装饰用的家具套组。 用它来搭配金属建筑，尽情享受和帕鲁一起的快乐生活吧。"
+  },
+  "FurnitureSet_14": {
+    "localized_name": "铁木桌椅套装",
+    "description": "装饰用的家具套组。 用它来搭配金属建筑，尽情享受和帕鲁一起的快乐生活吧。"
+  },
+  "FurnitureSet_15": {
+    "localized_name": "钢琴家具套装",
+    "description": "装饰用的家具套组。 把它放在据点里，打造出丰富多彩的生活吧。"
+  },
+  "FurnitureSet_16": {
+    "localized_name": "古典镜子套装",
+    "description": "装饰用的家具套组。 时刻检查一下自己的仪表吧。"
+  },
+  "FurnitureSet_17": {
+    "localized_name": "地毯套装",
+    "description": "装饰用的家具套组。 把它放在据点的地基上，增添一丝生活感吧。"
+  },
+  "FurnitureSet_18": {
+    "localized_name": "古典沙发套装",
+    "description": "装饰用的家具套组。 可以让据点看起来高级感十足。"
+  },
+  "FurnitureSet_19": {
+    "localized_name": "古典椅子套装",
+    "description": "装饰用的家具套组。 搭配古典式书桌一起使用吧。"
+  },
+  "FurnitureSet_2": {
+    "localized_name": "木制酒吧收纳家具套装",
+    "description": "酒吧常见的木制收纳家具套组。 可用于收纳道具。"
+  },
+  "FurnitureSet_20": {
+    "localized_name": "古典浴室套装",
+    "description": "装饰用的家具套组。 可以打造出充满古典风格的浴室。"
+  },
+  "FurnitureSet_21": {
+    "localized_name": "古典收纳套装",
+    "description": "古典式收纳用家具套组。 可以用来收纳道具。"
+  },
+  "FurnitureSet_22": {
+    "localized_name": "古典收纳柜套装",
+    "description": "古典式收纳用橱柜套组。 可以用来收纳道具。"
+  },
+  "FurnitureSet_23": {
+    "localized_name": "时钟套装",
+    "description": "装饰用的家具套组。 无法用来确认时间。"
+  },
+  "FurnitureSet_24": {
+    "localized_name": "古典书桌套装",
+    "description": "装饰用的家具套组。 搭配古典式椅子一起使用吧。"
+  },
+  "FurnitureSet_25": {
+    "localized_name": "厕所套装",
+    "description": "装饰用的家具套组。 无法在这里如厕。"
+  },
+  "FurnitureSet_26": {
+    "localized_name": "娱乐家具套装",
+    "description": "装饰用的家具套组。 别担心，帕鲁们会继续工作的。"
+  },
+  "FurnitureSet_27": {
+    "localized_name": "街灯套装",
+    "description": "可以当作光源的路灯套组。 需要通电才可以使用。"
+  },
+  "FurnitureSet_28": {
+    "localized_name": "壁炉套装",
+    "description": "可以当作光源的砖制暖炉套组。 需要点上火才可以使用。"
+  },
+  "FurnitureSet_29": {
+    "localized_name": "古典灯具套装",
+    "description": "可以当作光源的古典式灯具套组。 需要通电才可以使用。"
+  },
+  "FurnitureSet_3": {
+    "localized_name": "木制酒吧家具套装",
+    "description": "装饰用的家具套组。 可以打造酒吧风格，尽情享受和帕鲁一起的快乐生活吧。"
+  },
+  "FurnitureSet_30": {
+    "localized_name": "金属书架套装",
+    "description": "金属架子套组。 可以用来收纳道具。"
+  },
+  "FurnitureSet_31": {
+    "localized_name": "户外家具套装",
+    "description": "装饰用的家具套组。 专为户外打造的家具套组。"
+  },
+  "FurnitureSet_32": {
+    "localized_name": "古典高级家具套装",
+    "description": "装饰用的家具套组。 充满高级感的家具套组。"
+  },
+  "FurnitureSet_4": {
+    "localized_name": "挂墙观叶植物套装",
+    "description": "装饰用的家具套组。 在墙上挂上一些植被，为据点增添一些色彩吧。"
+  },
+  "FurnitureSet_5": {
+    "localized_name": "铁桶套装",
+    "description": "装饰用的家具套组。 铁桶可不能用来泡澡。"
+  },
+  "FurnitureSet_6": {
+    "localized_name": "集装箱套組",
+    "description": "集装箱套组。 可以用来收纳道具。"
+  },
+  "FurnitureSet_7": {
+    "localized_name": "皮质椅子套装",
+    "description": "装饰用的家具套组。 皮革制的家具很有高级感。"
+  },
+  "FurnitureSet_8": {
+    "localized_name": "紧急出口标志套装",
+    "description": "装饰用的家具套组。 据说在文明时代曾被视为珍宝。"
+  },
+  "FurnitureSet_9": {
+    "localized_name": "观叶植物套装",
+    "description": "装饰用的家具套组。 放置一些植被，为据点增添一些色彩吧。"
+  },
+  "FurnitureSet_Japanese": {
+    "localized_name": "和风家具套组",
+    "description": "装饰用的家具套组。 用它打造日式风格的据点吧。"
+  },
+  "GatlingBullet": {
+    "localized_name": "<itemName id=|GatlingBullet|/>",
+    "description": null
+  },
+  "Glass_houseset": {
+    "localized_name": "玻璃建筑套组",
+    "description": "持有此套组即可用玻璃建造据点。 可以建造玻璃制的地基、墙壁、屋顶和楼梯等 建造房屋时所需的构造。"
+  },
+  "GrapplingGun": {
+    "localized_name": "<itemName id=|GrapplingGun|/>",
+    "description": null
+  },
+  "GrapplingGun2": {
+    "localized_name": "<itemName id=|GrapplingGun2|/>",
+    "description": null
+  },
+  "GrapplingGun3": {
+    "localized_name": "<itemName id=|GrapplingGun3|/>",
+    "description": null
+  },
+  "GrapplingGun4": {
+    "localized_name": "<itemName id=|GrapplingGun4|/>",
+    "description": null
+  },
+  "GrenadeBullet": {
+    "localized_name": "<itemName id=|GrenadeBullet|/>",
+    "description": null
+  },
+  "GuildChest": {
+    "localized_name": "<mapObjectName id=|GuildChest|/>",
+    "description": null
+  },
+  "HandTorch": {
+    "localized_name": "<itemName id=|Torch|/>",
+    "description": "照亮夜晚的黑暗，为人驱逐寒意。 可勉强用于近战。 可在｢<mapObjectName id=|WorkBench|/>｣制作。"
+  },
+  "HandgunBullet": {
+    "localized_name": "<itemName id=|HandgunBullet|/>",
+    "description": "｢<itemName id=|HandGun_Default|/>｣等使用的子弹。 可在｢<mapObjectName id=|WeaponFactory_Dirty_01|/>｣制作。"
+  },
+  "Headstone": {
+    "localized_name": "<mapObjectName id=|Headstone|/>",
+    "description": null
+  },
+  "Heater": {
+    "localized_name": "<mapObjectName id=|Heater|/>",
+    "description": "可让周围暖和起来，抵御寒意。"
+  },
+  "Homeward": {
+    "localized_name": "<itemName id=|Homeward|/>",
+    "description": null
+  },
+  "HugeKitchen": {
+    "localized_name": "<mapObjectName id=|HugeKitchen|/>",
+    "description": null
+  },
+  "IceCrusher": {
+    "localized_name": "<mapObjectName id=|IceCrusher|/>",
+    "description": null
+  },
+  "Infra_ElectricGenerator_Grade_01": {
+    "localized_name": "<mapObjectName id=|ElectricGenerator|/>",
+    "description": "能让据点的雷系帕鲁储存电力， 供应给需要用电的设施。"
+  },
+  "Infra_ElectronicCircuit": {
+    "localized_name": "<itemName id=|MachineParts2|/>",
+    "description": "制作精密机械时会用到的<itemName id=|MachineParts2|/>。 可在<mapObjectName id=|Factory_Hard_02|/>制作。"
+  },
+  "Infra_ItemChest_Grade_01": {
+    "localized_name": "<mapObjectName id=|ItemChest|/>",
+    "description": "可用于收纳道具。将之设置在据点后， 具备｢COMMON_WORK_SUITABILITY_Transport｣适应性的帕鲁便会自动搬运道具。"
+  },
+  "Infra_ItemChest_Grade_02": {
+    "localized_name": "<mapObjectName id=|ItemChest_02|/>",
+    "description": "可收纳更多道具，耐久度也有所提升。 具备｢COMMON_WORK_SUITABILITY_Transport｣适应性的帕鲁会自动搬运道具。"
+  },
+  "Infra_ItemChest_Grade_03": {
+    "localized_name": "<mapObjectName id=|ItemChest_03|/>",
+    "description": "可进一步收纳更多道具，耐久度也有所提升。 具备｢COMMON_WORK_SUITABILITY_Transport｣适应性的帕鲁会自动搬运道具。"
+  },
+  "Infra_MachineParts": {
+    "localized_name": "<itemName id=|MachineParts|/>",
+    "description": null
+  },
+  "Infra_PalBed_Grade_01": {
+    "localized_name": "<mapObjectName id=|MedicalPalBed_02|/>",
+    "description": "据点里的帕鲁晚上若能睡在床上，便可恢复SAN值。 没有床的话会因睡不舒服而无法恢复SAN值。"
+  },
+  "Infra_PalBed_Grade_02": {
+    "localized_name": "<mapObjectName id=|MedicalPalBed_03|/>",
+    "description": "让帕鲁们睡得更加舒适， 提高睡觉时生命值和SAN值的恢复效率。"
+  },
+  "Infra_PlayerBed_Grade_01": {
+    "localized_name": "<mapObjectName id=|PlayerBed_02|/>",
+    "description": "专供人类使用的床铺，可回复生命值。 晚上入睡后，就会一觉睡到早上。 必须建造在有屋顶的地方才能让人安眠。"
+  },
+  "Infra_PlayerBed_Grade_02": {
+    "localized_name": "<mapObjectName id=|PlayerBed_03|/>",
+    "description": "柔软蓬松的床铺，恢复效率有所改善。 必须建造在有屋顶的地方才能让人安眠。"
+  },
+  "ItemBooth": {
+    "localized_name": "<mapObjectName id=|ItemBooth|/>",
+    "description": null
+  },
+  "ItemChest_04": {
+    "localized_name": "<mapObjectName id=|ItemChest_04|/>",
+    "description": null
+  },
+  "JapaneseStyle_houseset": {
+    "localized_name": "和风建筑套组",
+    "description": "持有此套组即可用和风的建筑建造据点。 可以建造的有地基、墙壁、屋顶和楼梯等 建造房屋时所需的构造。"
+  },
+  "Katana": {
+    "localized_name": "<itemName id=|Katana|/>",
+    "description": null
+  },
+  "Lab": {
+    "localized_name": "<mapObjectName id=|Lab|/>",
+    "description": null
+  },
+  "Lamp": {
+    "localized_name": "<mapObjectName id=|Lamp|/>",
+    "description": "使用电力让据点更加明亮。"
+  },
+  "Lantern": {
+    "localized_name": "<itemName id=|Lantern|/>",
+    "description": null
+  },
+  "LargeCeilingLamp": {
+    "localized_name": "<mapObjectName id=|LargeCeilingLamp|/>",
+    "description": "可安装在天花板上，照亮广阔的范围。"
+  },
+  "LargeLamp": {
+    "localized_name": "<mapObjectName id=|LargeLamp|/>",
+    "description": "外型加大，能照亮更广阔的范围。"
+  },
+  "LaserBullet": {
+    "localized_name": "<itemName id=|LaserBullet|/>",
+    "description": null
+  },
+  "LaserGatlingBullet": {
+    "localized_name": "<itemName id=|LaserGatlingBullet|/>",
+    "description": null
+  },
+  "LaserGatlingGun": {
+    "localized_name": "<itemName id=|LaserGatlingGun|/>",
+    "description": null
+  },
+  "LauncherBullet": {
+    "localized_name": "<itemName id=|ExplosiveBullet|/>",
+    "description": "｢<itemName id=|Launcher_Default|/>｣等使用的弹药。 可在｢<mapObjectName id=|WeaponFactory_Dirty_03|/>｣制作。"
+  },
+  "Launcher_Meteor": {
+    "localized_name": "<itemName id=|Launcher_Meteor|/>",
+    "description": "加工陨石制作而成的发射器。 命中时会像陨石一样引发爆炸。 可在｢<mapObjectName id=|WeaponFactory_Dirty_02|/>｣制作。"
+  },
+  "MakeshiftAssaultRifle": {
+    "localized_name": "<itemName id=|MakeshiftAssaultRifle|/>",
+    "description": null
+  },
+  "MakeshiftHandgun": {
+    "localized_name": "<itemName id=|MakeshiftHandgun|/>",
+    "description": "手工制造的破旧手枪。 较适合用于近距离战斗，但每次只能射出一发子弹。 可在｢<mapObjectName id=|WeaponFactory_Dirty_01|/>｣制作。"
+  },
+  "MakeshiftShotgun": {
+    "localized_name": "<itemName id=|MakeshiftShotgun|/>",
+    "description": null
+  },
+  "MakeshiftSubmachineGun": {
+    "localized_name": "<itemName id=|MakeshiftSubmachineGun|/>",
+    "description": null
+  },
+  "ManualElectricGenerator": {
+    "localized_name": "<mapObjectName id=|ManualElectricGenerator|/>",
+    "description": null
+  },
+  "MeatCutterKnife": {
+    "localized_name": "<itemName id=|MeatCutterKnife|/>",
+    "description": "可用于肢解召唤出的帕鲁的菜刀。 装备此道具时「抚摸」选项会转变为「肢解」。 帕鲁一经解体后将无法再度复生。"
+  },
+  "MedicalPalBed_04": {
+    "localized_name": "<mapObjectName id=|MedicalPalBed_04|/>",
+    "description": null
+  },
+  "MedicalPalBed_05": {
+    "localized_name": "<mapObjectName id=|MedicalPalBed_05|/>",
+    "description": null
+  },
+  "MedicineFacility_03": {
+    "localized_name": "<mapObjectName id=|MedicineFacility_03|/>",
+    "description": null
+  },
+  "MetalDetector": {
+    "localized_name": "<itemName id=|MetalDetector|/>",
+    "description": null
+  },
+  "Metal_Gate": {
+    "localized_name": "<mapObjectName id=|Metal_Gate|/>",
+    "description": "稍大体型的帕鲁也能通过的金属大门。"
+  },
+  "Metal_houseset": {
+    "localized_name": "金属建筑套组",
+    "description": "持有此套组即可用金属建造据点。 可以建造金属制的地基、墙壁、屋顶和楼梯等 建造房屋时所需的构造。"
+  },
+  "MiningTool": {
+    "localized_name": "<mapObjectName id=|MiningTool|/>",
+    "description": null
+  },
+  "MissileBullet": {
+    "localized_name": "<itemName id=|MissileBullet|/>",
+    "description": null
+  },
+  "MonsterFarm": {
+    "localized_name": "<mapObjectName id=|MonsterFarm|/>",
+    "description": "可以放牧羊或鸡等类型帕鲁的牧场。 如将具备适应性的帕鲁分派到牧场， 即可自动生产道具。"
+  },
+  "MultiElectricHatchingPalEgg": {
+    "localized_name": "<mapObjectName id=|MultiElectricHatchingPalEgg|/>",
+    "description": null
+  },
+  "Musket": {
+    "localized_name": "<itemName id=|Musket|/>",
+    "description": "古旧又简朴的枪。 每一发均威力惊人，但装填子弹较花时间。 可在｢<mapObjectName id=|WeaponFactory_Dirty_01|/>｣制作。"
+  },
+  "OilPump": {
+    "localized_name": "<mapObjectName id=|OilPump|/>",
+    "description": null
+  },
+  "OlympicCauldron": {
+    "localized_name": "<mapObjectName id=|OlympicCauldron|/>",
+    "description": null
+  },
+  "PALBOX": {
+    "localized_name": "<mapObjectName id=|PalBoxV2|/>",
+    "description": "用来存放抓到的帕鲁的设施。 箱子里的帕鲁会逐渐恢复生命值。 此设施周围的区域即为据点。"
+  },
+  "PalBooth": {
+    "localized_name": "<mapObjectName id=|PalBooth|/>",
+    "description": null
+  },
+  "PalFoodBox": {
+    "localized_name": "<mapObjectName id=|PalFoodBox|/>",
+    "description": "将食物放进来， 据点的帕鲁们就会来这里进食。"
+  },
+  "PalMedicineBox": {
+    "localized_name": "<mapObjectName id=|PalMedicineBox|/>",
+    "description": null
+  },
+  "PalRevive": {
+    "localized_name": "<itemName id=|PalRevive|/>",
+    "description": null
+  },
+  "PalSphere_Exotic": {
+    "localized_name": "<itemName id=|PalSphere_Exotic|/>",
+    "description": null
+  },
+  "Plastic": {
+    "localized_name": "<itemName id=|Plastic|/>",
+    "description": null
+  },
+  "Polymer": {
+    "localized_name": "<itemName id=|Polymer|/>",
+    "description": null
+  },
+  "Potion_Extreme": {
+    "localized_name": "<itemName id=|Potion_Extreme|/>",
+    "description": null
+  },
+  "Product_Axe_Grade_01": {
+    "localized_name": "<itemName id=|Axe_Tier_00|/>",
+    "description": "砍树用的斧子。 因为是石头做的，感觉不怎么锋利。"
+  },
+  "Product_Axe_Grade_02": {
+    "localized_name": "<itemName id=|Axe_Tier_01|/>",
+    "description": "砍树用的斧子。 以金属制成，耐久度与锋利度都得到了提升。 可在｢<mapObjectName id=|Factory_Hard_01|/>｣制作。"
+  },
+  "Product_Axe_Grade_03": {
+    "localized_name": "<itemName id=|Axe_Tier_02|/>",
+    "description": "砍树用的斧子。 耐久度与锋利度均有更进一步的提升。 可在｢<mapObjectName id=|Factory_Hard_02|/>｣制作。"
+  },
+  "Product_CoalPit": {
+    "localized_name": "<mapObjectName id=|CoalPit|/>",
+    "description": null
+  },
+  "Product_Cooking_Grade_01": {
+    "localized_name": "<mapObjectName id=|CampFire|/>",
+    "description": "可烹饪简单的料理， 并带来一些温暖及照明效果。"
+  },
+  "Product_Cooking_Grade_02": {
+    "localized_name": "<mapObjectName id=|CookingStove|/>",
+    "description": "能烹饪的料理种类更多， 制作餐点会更有效率。"
+  },
+  "Product_Cooking_Grade_03": {
+    "localized_name": "<mapObjectName id=|ElectricKitchen|/>",
+    "description": "虽需使用电力，但可应对更复杂、更有效率的烹饪需求。 需要有具备｢COMMON_WORK_SUITABILITY_EmitFlame｣适应性的帕鲁才能进行作业。"
+  },
+  "Product_CopperPit": {
+    "localized_name": "<mapObjectName id=|CopperPit|/>",
+    "description": null
+  },
+  "Product_CopperPit_2": {
+    "localized_name": "<mapObjectName id=|CopperPit_2|/>",
+    "description": null
+  },
+  "Product_Factory_Hard_Grade_01": {
+    "localized_name": "<mapObjectName id=|Factory_Hard_01|/>",
+    "description": "生产速度比｢<mapObjectName id=|WorkBench|/>｣更快。 需要有具备｢COMMON_WORK_SUITABILITY_Handcraft｣适应性的帕鲁才能进行作业。"
+  },
+  "Product_Factory_Hard_Grade_02": {
+    "localized_name": "<mapObjectName id=|Factory_Hard_02|/>",
+    "description": "虽需使用电力，但生产各种道具的速度较为快速。 需要有具备｢COMMON_WORK_SUITABILITY_Handcraft｣适应性的帕鲁才能进行作业。"
+  },
+  "Product_Factory_Hard_Grade_03": {
+    "localized_name": "<mapObjectName id=|Factory_Hard_03|/>",
+    "description": "虽需使用电力，但生产各种道具的速度更为快速。 需要有具备｢COMMON_WORK_SUITABILITY_Handcraft｣适应性的帕鲁才能进行作业。"
+  },
+  "Product_Farm_Berries": {
+    "localized_name": "<mapObjectName id=|FarmBlockV2_Berries|/>",
+    "description": "可产出野莓的农园。 需要有具备｢COMMON_WORK_TYPE_Seeding｣、｢COMMON_WORK_TYPE_Watering｣和｢COMMON_WORK_TYPE_CollectResourcePickable｣适应性的帕鲁才能进行作业。"
+  },
+  "Product_Farm_Carrot": {
+    "localized_name": "<mapObjectName id=|FarmBlockV2_Carrot|/>",
+    "description": null
+  },
+  "Product_Farm_Lettuce": {
+    "localized_name": "<mapObjectName id=|FarmBlockV2_Lettuce|/>",
+    "description": "能够生产生菜的农园。 需要有具备｢COMMON_WORK_TYPE_Seeding｣、｢COMMON_WORK_TYPE_Watering｣和｢COMMON_WORK_TYPE_CollectResourcePickable｣适应性的帕鲁才能进行作业。"
+  },
+  "Product_Farm_Onion": {
+    "localized_name": "<mapObjectName id=|FarmBlockV2_Onion|/>",
+    "description": null
+  },
+  "Product_Farm_Potato": {
+    "localized_name": "<mapObjectName id=|FarmBlockV2_Potato|/>",
+    "description": null
+  },
+  "Product_Farm_tomato": {
+    "localized_name": "<mapObjectName id=|FarmBlockV2_tomato|/>",
+    "description": "能够生产番茄的农园。 需要有具备｢COMMON_WORK_TYPE_Seeding｣、｢COMMON_WORK_TYPE_Watering｣和｢COMMON_WORK_TYPE_CollectResourcePickable｣适应性的帕鲁才能进行作业。"
+  },
+  "Product_Farm_wheat": {
+    "localized_name": "<mapObjectName id=|FarmBlockV2_wheet|/>",
+    "description": "能够生产｢<itemName id=|Pan|/>｣的原料。 需要有具备｢COMMON_WORK_TYPE_Seeding｣、｢COMMON_WORK_TYPE_Watering｣和｢COMMON_WORK_TYPE_CollectResourcePickable｣适应性的帕鲁才能进行作业。"
+  },
+  "Product_Ingot_Grade_01_Copper": {
+    "localized_name": "<mapObjectName id=|BlastFurnace|/>",
+    "description": "可建造｢<mapObjectName id=|BlastFurnace|/>｣。 之后将可冶炼｢<itemName id=|CopperOre|/>｣， 并进一步制造金属锭。"
+  },
+  "Product_Ingot_Grade_02_Iron": {
+    "localized_name": "<mapObjectName id=|BlastFurnace2|/>",
+    "description": "可冶炼｢<itemName id=|IronIngot|/>｣。"
+  },
+  "Product_Ingot_Grade_03_Steal": {
+    "localized_name": "<mapObjectName id=|BlastFurnace3|/>",
+    "description": "可冶炼 ｢<itemName id=|StealIngot|/>｣。"
+  },
+  "Product_Medicine_Grade_01": {
+    "localized_name": "<mapObjectName id=|MedicineFacility_01|/>",
+    "description": "可制作简单的药物。 需要有具备｢COMMON_WORK_SUITABILITY_ProductMedicine｣适应性的帕鲁才能进行作业。"
+  },
+  "Product_Medicine_Grade_02": {
+    "localized_name": "<mapObjectName id=|MedicineFacility_02|/>",
+    "description": "虽需使用电力，但可制作更高级的药物。 需要有具备｢COMMON_WORK_SUITABILITY_ProductMedicine｣适应性的帕鲁才能进行作业。"
+  },
+  "Product_Pickaxe_Grade_01": {
+    "localized_name": "<itemName id=|Pickaxe_Tier_00|/>",
+    "description": "采矿用的十字镐。 因为是石头做的，效率不怎么样。"
+  },
+  "Product_Pickaxe_Grade_02": {
+    "localized_name": "<itemName id=|Pickaxe_Tier_01|/>",
+    "description": "采矿用的十字镐。 以金属制成，耐久度和效率都得到了提升。 可在｢<mapObjectName id=|Factory_Hard_01|/>｣制作。"
+  },
+  "Product_Pickaxe_Grade_03": {
+    "localized_name": "<itemName id=|Pickaxe_Tier_02|/>",
+    "description": "采矿用的十字镐。 耐久度和效率均有更进一步的提升。 可在｢<mapObjectName id=|Factory_Hard_02|/>｣制作。"
+  },
+  "Product_QuartzPit": {
+    "localized_name": "<mapObjectName id=|QuartzPit|/>",
+    "description": null
+  },
+  "Product_StationDeforest": {
+    "localized_name": "<mapObjectName id=|StationDeforest2|/>",
+    "description": "可在据点内生产木材。 需要有具备｢COMMON_WORK_SUITABILITY_Deforest｣适应性的帕鲁才能进行作业。"
+  },
+  "Product_StonePit": {
+    "localized_name": "<mapObjectName id=|StonePit|/>",
+    "description": "可在据点内生产石材。 需要有具备｢COMMON_WORK_SUITABILITY_Mining｣适应性的帕鲁才能进行作业。"
+  },
+  "Product_SulfurPit": {
+    "localized_name": "<mapObjectName id=|SulfurPit|/>",
+    "description": null
+  },
+  "Product_WeaponFactory_Dirty_Grade_01": {
+    "localized_name": "<mapObjectName id=|WeaponFactory_Dirty_01|/>",
+    "description": "可以制作具有简易机关的武器的设施。 需要有具备｢COMMON_WORK_SUITABILITY_Handcraft｣适应性的帕鲁才能进行作业。"
+  },
+  "Product_WeaponFactory_Dirty_Grade_02": {
+    "localized_name": "<mapObjectName id=|WeaponFactory_Dirty_02|/>",
+    "description": "虽需使用电力，但生产武器及弹药的速度较为快速。 需要有具备｢COMMON_WORK_SUITABILITY_Handcraft｣适应性的帕鲁才能进行作业。"
+  },
+  "Product_WeaponFactory_Dirty_Grade_03": {
+    "localized_name": "<mapObjectName id=|WeaponFactory_Dirty_03|/>",
+    "description": "虽需使用电力，但生产武器及弹药的速度更为快速。 需要有具备｢COMMON_WORK_SUITABILITY_Handcraft｣适应性的帕鲁才能进行作业。"
+  },
+  "Product_WorkBench_SkillUnlock": {
+    "localized_name": "<mapObjectName id=|WorkBench_SkillUnlock|/>",
+    "description": "可制作帕鲁使用伙伴技能时 所需的道具。"
+  },
+  "Refrigerator": {
+    "localized_name": "<mapObjectName id=|Refrigerator|/>",
+    "description": null
+  },
+  "ReinforcedArrow": {
+    "localized_name": "<itemName id=|ReinforcedArrow|/>",
+    "description": null
+  },
+  "RepairBench": {
+    "localized_name": "<mapObjectName id=|RepairBench|/>",
+    "description": "可以修理损坏的武器或道具。"
+  },
+  "RepairKit": {
+    "localized_name": "<itemName id=|RepairKit|/>",
+    "description": null
+  },
+  "RifleBullet": {
+    "localized_name": "<itemName id=|RifleBullet|/>",
+    "description": "步枪等使用的子弹。 可在｢<mapObjectName id=|WeaponFactory_Dirty_01|/>｣制作。"
+  },
+  "RoughBullet": {
+    "localized_name": "<itemName id=|RoughBullet|/>",
+    "description": "｢<itemName id=|Musket|/>｣和｢<itemName id=|MakeshiftHandgun|/>｣等使用的子弹。 可在｢<mapObjectName id=|WeaponFactory_Dirty_01|/>｣制作。"
+  },
+  "SFArmor": {
+    "localized_name": "<itemName id=|SFArmor|/>",
+    "description": null
+  },
+  "SFArmorCold": {
+    "localized_name": "<itemName id=|SFArmorCold|/>",
+    "description": null
+  },
+  "SFArmorHeat": {
+    "localized_name": "<itemName id=|SFArmorHeat|/>",
+    "description": null
+  },
+  "SFArmorWeight": {
+    "localized_name": "<itemName id=|SFArmorWeight|/>",
+    "description": null
+  },
+  "SFArrow": {
+    "localized_name": "<itemName id=|SFArrow|/>",
+    "description": null
+  },
+  "SFBow": {
+    "localized_name": "<itemName id=|SFBow|/>",
+    "description": null
+  },
+  "SFHelmet": {
+    "localized_name": "<itemName id=|SFHelmet|/>",
+    "description": null
+  },
+  "SanityDecrease1": {
+    "localized_name": "<mapObjectName id=|SanityDecrease1|/>",
+    "description": null
+  },
+  "Shield_01": {
+    "localized_name": "<itemName id=|Shield_01|/>",
+    "description": "以帕鲁矿技术制成的神奇护盾。 一定时间不受攻击时可自动修复。"
+  },
+  "Shield_02": {
+    "localized_name": "<itemName id=|Shield_02|/>",
+    "description": "以帕鲁矿技术制成的神奇护盾。 改良原型设计，提高了防御力。 可在｢<mapObjectName id=|Factory_Hard_01|/>｣制作。"
+  },
+  "Shield_03": {
+    "localized_name": "<itemName id=|Shield_03|/>",
+    "description": "以帕鲁矿技术制成的神奇护盾。 经过改良，进一步提升了性能。 可在｢<mapObjectName id=|Factory_Hard_02|/>｣制作。"
+  },
+  "Shield_04": {
+    "localized_name": "<itemName id=|Shield_04|/>",
+    "description": "以帕鲁矿技术制成的神奇护盾。 经过多次实验，实现了最高峰的品质。 可在｢<mapObjectName id=|Factory_Hard_03|/>｣制作。"
+  },
+  "Shield_05": {
+    "localized_name": "<itemName id=|Shield_Ultra|/>",
+    "description": "以帕鲁矿技术制成的神奇护盾。 在进一步多次实验后，结果实现了究极的品质。 可在｢<mapObjectName id=|Factory_Hard_03|/>｣制作。"
+  },
+  "Shield_SF": {
+    "localized_name": "<itemName id=|Shield_SF|/>",
+    "description": null
+  },
+  "ShotGunBullet": {
+    "localized_name": "<itemName id=|ShotgunBullet|/>",
+    "description": "霰弹枪等使用的子弹。 可在｢<mapObjectName id=|WeaponFactory_Dirty_01|/>｣制作。"
+  },
+  "Signboard": {
+    "localized_name": "<mapObjectName id=|Signboard|/>",
+    "description": "可以在上面输入文字。"
+  },
+  "Silo": {
+    "localized_name": "<mapObjectName id=|Silo|/>",
+    "description": null
+  },
+  "SkillUnlock_Alpaca": {
+    "localized_name": "<itemName id=|SkillUnlock_Alpaca|/>",
+    "description": null
+  },
+  "SkillUnlock_AmaterasuWolf": {
+    "localized_name": "<itemName id=|SkillUnlock_AmaterasuWolf|/>",
+    "description": null
+  },
+  "SkillUnlock_AmaterasuWolf_Dark": {
+    "localized_name": "<itemName id=|SkillUnlock_AmaterasuWolf_Dark|/>",
+    "description": null
+  },
+  "SkillUnlock_BadCatgirl": {
+    "localized_name": "<itemName id=|SkillUnlock_BadCatgirl|/>",
+    "description": null
+  },
+  "SkillUnlock_BirdDragon": {
+    "localized_name": "<itemName id=|SkillUnlock_BirdDragon|/>",
+    "description": null
+  },
+  "SkillUnlock_BirdDragon_Ice": {
+    "localized_name": "<itemName id=|SkillUnlock_BirdDragon_Ice|/>",
+    "description": null
+  },
+  "SkillUnlock_BlackCentaur": {
+    "localized_name": "<itemName id=|SkillUnlock_BlackCentaur|/>",
+    "description": null
+  },
+  "SkillUnlock_BlackGriffon": {
+    "localized_name": "<itemName id=|SkillUnlock_BlackGriffon|/>",
+    "description": null
+  },
+  "SkillUnlock_BlackMetalDragon": {
+    "localized_name": "<itemName id=|SkillUnlock_BlackMetalDragon|/>",
+    "description": null
+  },
+  "SkillUnlock_BlackPuppy": {
+    "localized_name": "<itemName id=|SkillUnlock_BlackPuppy|/>",
+    "description": null
+  },
+  "SkillUnlock_BlueDragon": {
+    "localized_name": "<itemName id=|SkillUnlock_BlueDragon|/>",
+    "description": null
+  },
+  "SkillUnlock_BlueThunderHorse": {
+    "localized_name": "<itemName id=|SkillUnlock_BlueThunderHorse|/>",
+    "description": null
+  },
+  "SkillUnlock_Boar": {
+    "localized_name": "<itemName id=|SkillUnlock_Boar|/>",
+    "description": null
+  },
+  "SkillUnlock_Carbunclo": {
+    "localized_name": "<itemName id=|SkillUnlock_Carbunclo|/>",
+    "description": null
+  },
+  "SkillUnlock_ColorfulBird": {
+    "localized_name": "<itemName id=|SkillUnlock_ColorfulBird|/>",
+    "description": null
+  },
+  "SkillUnlock_DarkMechaDragon": {
+    "localized_name": "<itemName id=|SkillUnlock_DarkMechaDragon|/>",
+    "description": null
+  },
+  "SkillUnlock_Deer": {
+    "localized_name": "<itemName id=|SkillUnlock_Deer|/>",
+    "description": null
+  },
+  "SkillUnlock_Deer_Ground": {
+    "localized_name": "<itemName id=|SkillUnlock_Deer_Ground|/>",
+    "description": null
+  },
+  "SkillUnlock_DreamDemon": {
+    "localized_name": "<itemName id=|SkillUnlock_DreamDemon|/>",
+    "description": null
+  },
+  "SkillUnlock_DrillGame": {
+    "localized_name": "<itemName id=|SkillUnlock_DrillGame|/>",
+    "description": null
+  },
+  "SkillUnlock_Eagle": {
+    "localized_name": "<itemName id=|SkillUnlock_Eagle|/>",
+    "description": null
+  },
+  "SkillUnlock_ElecPanda": {
+    "localized_name": "<itemName id=|SkillUnlock_ElecPanda|/>",
+    "description": null
+  },
+  "SkillUnlock_FairyDragon": {
+    "localized_name": "<itemName id=|SkillUnlock_FairyDragon|/>",
+    "description": null
+  },
+  "SkillUnlock_FairyDragon_Water": {
+    "localized_name": "<itemName id=|SkillUnlock_FairyDragon_Water|/>",
+    "description": null
+  },
+  "SkillUnlock_FeatherOstrich": {
+    "localized_name": "<itemName id=|SkillUnlock_FeatherOstrich|/>",
+    "description": null
+  },
+  "SkillUnlock_FengyunDeeper": {
+    "localized_name": "<itemName id=|SkillUnlock_FengyunDeeper|/>",
+    "description": null
+  },
+  "SkillUnlock_FengyunDeeper_Electric": {
+    "localized_name": "<itemName id=|SkillUnlock_FengyunDeeper_Electric|/>",
+    "description": null
+  },
+  "SkillUnlock_FireKirin": {
+    "localized_name": "<itemName id=|SkillUnlock_FireKirin|/>",
+    "description": null
+  },
+  "SkillUnlock_FireKirin_Dark": {
+    "localized_name": "<itemName id=|SkillUnlock_FireKirin_Dark|/>",
+    "description": null
+  },
+  "SkillUnlock_FlameBuffalo": {
+    "localized_name": "<itemName id=|SkillUnlock_FlameBuffalo|/>",
+    "description": null
+  },
+  "SkillUnlock_FlowerDinosaur": {
+    "localized_name": "<itemName id=|SkillUnlock_FlowerDinosaur|/>",
+    "description": null
+  },
+  "SkillUnlock_FlowerDinosaur_Electric": {
+    "localized_name": "<itemName id=|SkillUnlock_FlowerDinosaur_Electric|/>",
+    "description": null
+  },
+  "SkillUnlock_FlowerRabbit": {
+    "localized_name": "<itemName id=|SkillUnlock_FlowerRabbit|/>",
+    "description": null
+  },
+  "SkillUnlock_FlyingManta": {
+    "localized_name": "<itemName id=|SkillUnlock_FlyingManta|/>",
+    "description": null
+  },
+  "SkillUnlock_Garm": {
+    "localized_name": "<itemName id=|SkillUnlock_Garm|/>",
+    "description": null
+  },
+  "SkillUnlock_GhostBeast": {
+    "localized_name": "<itemName id=|SkillUnlock_GhostBeast|/>",
+    "description": null
+  },
+  "SkillUnlock_GoldenHorse": {
+    "localized_name": "<itemName id=|SkillUnlock_GoldenHorse|/>",
+    "description": null
+  },
+  "SkillUnlock_GrassMammoth": {
+    "localized_name": "<itemName id=|SkillUnlock_GrassMammoth|/>",
+    "description": null
+  },
+  "SkillUnlock_GrassMammoth_Ice": {
+    "localized_name": "<itemName id=|SkillUnlock_GrassMammoth_Ice|/>",
+    "description": null
+  },
+  "SkillUnlock_GrassPanda": {
+    "localized_name": "<itemName id=|SkillUnlock_GrassPanda|/>",
+    "description": null
+  },
+  "SkillUnlock_GrassPanda_Electric": {
+    "localized_name": "<itemName id=|SkillUnlock_GrassPanda_Electric|/>",
+    "description": null
+  },
+  "SkillUnlock_GuardianDog": {
+    "localized_name": "<itemName id=|SkillUnlock_GuardianDog|/>",
+    "description": null
+  },
+  "SkillUnlock_HadesBird": {
+    "localized_name": "<itemName id=|SkillUnlock_HadesBird|/>",
+    "description": null
+  },
+  "SkillUnlock_HadesBird_Electric": {
+    "localized_name": "<itemName id=|SkillUnlock_HadesBird_Electric|/>",
+    "description": null
+  },
+  "SkillUnlock_HawkBird": {
+    "localized_name": "<itemName id=|SkillUnlock_HawkBird|/>",
+    "description": null
+  },
+  "SkillUnlock_Hedgehog": {
+    "localized_name": "<itemName id=|SkillUnlock_Hedgehog|/>",
+    "description": null
+  },
+  "SkillUnlock_Hedgehog_Ice": {
+    "localized_name": "<itemName id=|SkillUnlock_Hedgehog_Ice|/>",
+    "description": null
+  },
+  "SkillUnlock_Horus": {
+    "localized_name": "<itemName id=|SkillUnlock_Horus|/>",
+    "description": null
+  },
+  "SkillUnlock_Horus_Water": {
+    "localized_name": "<itemName id=|SkillUnlock_Horus_Water|/>",
+    "description": null
+  },
+  "SkillUnlock_IceDeer": {
+    "localized_name": "<itemName id=|SkillUnlock_IceDeer|/>",
+    "description": null
+  },
+  "SkillUnlock_IceHorse": {
+    "localized_name": "<itemName id=|SkillUnlock_IceHorse|/>",
+    "description": null
+  },
+  "SkillUnlock_IceHorse_Dark": {
+    "localized_name": "<itemName id=|SkillUnlock_IceHorse_Dark|/>",
+    "description": null
+  },
+  "SkillUnlock_JetDragon": {
+    "localized_name": "<itemName id=|SkillUnlock_JetDragon|/>",
+    "description": null
+  },
+  "SkillUnlock_KingAlpaca": {
+    "localized_name": "<itemName id=|SkillUnlock_KingAlpaca|/>",
+    "description": null
+  },
+  "SkillUnlock_KingAlpaca_Ice": {
+    "localized_name": "<itemName id=|SkillUnlock_KingAlpaca_Ice|/>",
+    "description": null
+  },
+  "SkillUnlock_KingBahamut": {
+    "localized_name": "<itemName id=|SkillUnlock_KingBahamut|/>",
+    "description": null
+  },
+  "SkillUnlock_KingBahamut_Dragon": {
+    "localized_name": "<itemName id=|SkillUnlock_KingBahamut_Dragon|/>",
+    "description": null
+  },
+  "SkillUnlock_Kirin": {
+    "localized_name": "<itemName id=|SkillUnlock_Kirin|/>",
+    "description": null
+  },
+  "SkillUnlock_Kitsunebi": {
+    "localized_name": "<itemName id=|SkillUnlock_Kitsunebi|/>",
+    "description": null
+  },
+  "SkillUnlock_Kitsunebi_Ice": {
+    "localized_name": "<itemName id=|SkillUnlock_Kitsunebi_Ice|/>",
+    "description": null
+  },
+  "SkillUnlock_LazyDragon": {
+    "localized_name": "<itemName id=|SkillUnlock_LazyDragon|/>",
+    "description": null
+  },
+  "SkillUnlock_LazyDragon_Electric": {
+    "localized_name": "<itemName id=|SkillUnlock_LazyDragon_Electric|/>",
+    "description": null
+  },
+  "SkillUnlock_Manticore": {
+    "localized_name": "<itemName id=|SkillUnlock_Manticore|/>",
+    "description": null
+  },
+  "SkillUnlock_Manticore_Dark": {
+    "localized_name": "<itemName id=|SkillUnlock_Manticore_Dark|/>",
+    "description": null
+  },
+  "SkillUnlock_Monkey": {
+    "localized_name": "<itemName id=|SkillUnlock_Monkey|/>",
+    "description": null
+  },
+  "SkillUnlock_MoonQueen": {
+    "localized_name": "<itemName id=|SkillUnlock_MoonQueen|/>",
+    "description": null
+  },
+  "SkillUnlock_MopKing": {
+    "localized_name": "<itemName id=|SkillUnlock_MopKing|/>",
+    "description": null
+  },
+  "SkillUnlock_MushroomDragon": {
+    "localized_name": "<itemName id=|SkillUnlock_MushroomDragon|/>",
+    "description": null
+  },
+  "SkillUnlock_MushroomDragon_Dark": {
+    "localized_name": "<itemName id=|SkillUnlock_MushroomDragon_Dark|/>",
+    "description": null
+  },
+  "SkillUnlock_NaughtyCat": {
+    "localized_name": "<itemName id=|SkillUnlock_NaughtyCat|/>",
+    "description": null
+  },
+  "SkillUnlock_NegativeOctopus": {
+    "localized_name": "<itemName id=|SkillUnlock_NegativeOctopus|/>",
+    "description": null
+  },
+  "SkillUnlock_NightBlueHorse": {
+    "localized_name": "<itemName id=|SkillUnlock_NightBlueHorse|/>",
+    "description": null
+  },
+  "SkillUnlock_Penguin": {
+    "localized_name": "<itemName id=|SkillUnlock_Penguin|/>",
+    "description": null
+  },
+  "SkillUnlock_PurpleSpider": {
+    "localized_name": "<itemName id=|SkillUnlock_PurpleSpider|/>",
+    "description": null
+  },
+  "SkillUnlock_RaijinDaughter": {
+    "localized_name": "<itemName id=|SkillUnlock_RaijinDaughter|/>",
+    "description": null
+  },
+  "SkillUnlock_RaijinDaughter_Water": {
+    "localized_name": "<itemName id=|SkillUnlock_RaijinDaughter_Water|/>",
+    "description": null
+  },
+  "SkillUnlock_RedArmorBird": {
+    "localized_name": "<itemName id=|SkillUnlock_RedArmorBird|/>",
+    "description": null
+  },
+  "SkillUnlock_SaintCentaur": {
+    "localized_name": "<itemName id=|SkillUnlock_SaintCentaur|/>",
+    "description": null
+  },
+  "SkillUnlock_SakuraSaurus": {
+    "localized_name": "<itemName id=|SkillUnlock_SakuraSaurus|/>",
+    "description": null
+  },
+  "SkillUnlock_SakuraSaurus_Water": {
+    "localized_name": "<itemName id=|SkillUnlock_SakuraSaurus_Water|/>",
+    "description": null
+  },
+  "SkillUnlock_Serpent": {
+    "localized_name": "<itemName id=|SkillUnlock_Serpent|/>",
+    "description": null
+  },
+  "SkillUnlock_Serpent_Ground": {
+    "localized_name": "<itemName id=|SkillUnlock_Serpent_Ground|/>",
+    "description": null
+  },
+  "SkillUnlock_SkyDragon": {
+    "localized_name": "<itemName id=|SkillUnlock_SkyDragon|/>",
+    "description": null
+  },
+  "SkillUnlock_SkyDragon_Grass": {
+    "localized_name": "<itemName id=|SkillUnlock_SkyDragon_Grass|/>",
+    "description": null
+  },
+  "SkillUnlock_SnowTigerBeastman": {
+    "localized_name": "<itemName id=|SkillUnlock_SnowTigerBeastman|/>",
+    "description": null
+  },
+  "SkillUnlock_Suzaku": {
+    "localized_name": "<itemName id=|SkillUnlock_Suzaku|/>",
+    "description": null
+  },
+  "SkillUnlock_Suzaku_Water": {
+    "localized_name": "<itemName id=|SkillUnlock_Suzaku_Water|/>",
+    "description": null
+  },
+  "SkillUnlock_ThunderBird": {
+    "localized_name": "<itemName id=|SkillUnlock_ThunderBird|/>",
+    "description": null
+  },
+  "SkillUnlock_ThunderDog": {
+    "localized_name": "<itemName id=|SkillUnlock_ThunderDog|/>",
+    "description": null
+  },
+  "SkillUnlock_Umihebi": {
+    "localized_name": "<itemName id=|SkillUnlock_Umihebi|/>",
+    "description": null
+  },
+  "SkillUnlock_Umihebi_Fire": {
+    "localized_name": "<itemName id=|SkillUnlock_Umihebi_Fire|/>",
+    "description": null
+  },
+  "SkillUnlock_VolcanicMonster": {
+    "localized_name": "<itemName id=|SkillUnlock_VolcanicMonster|/>",
+    "description": null
+  },
+  "SkillUnlock_VolcanicMonster_Ice": {
+    "localized_name": "<itemName id=|SkillUnlock_VolcanicMonster_Ice|/>",
+    "description": null
+  },
+  "SkillUnlock_WeaselDragon": {
+    "localized_name": "<itemName id=|SkillUnlock_WeaselDragon|/>",
+    "description": null
+  },
+  "SkillUnlock_WeaselDragon_Fire": {
+    "localized_name": "<itemName id=|SkillUnlock_WeaselDragon_Fire|/>",
+    "description": null
+  },
+  "SkillUnlock_WhiteAlienDragon": {
+    "localized_name": "<itemName id=|SkillUnlock_WhiteAlienDragon|/>",
+    "description": null
+  },
+  "SkillUnlock_WhiteDeer": {
+    "localized_name": "<itemName id=|SkillUnlock_WhiteDeer|/>",
+    "description": null
+  },
+  "SkillUnlock_WhiteShieldDragon": {
+    "localized_name": "<itemName id=|SkillUnlock_WhiteShieldDragon|/>",
+    "description": null
+  },
+  "SkillUnlock_WindChimes": {
+    "localized_name": "<itemName id=|SkillUnlock_WindChimes|/>",
+    "description": null
+  },
+  "SkillUnlock_WindChimes_Ice": {
+    "localized_name": "<itemName id=|SkillUnlock_WindChimes_Ice|/>",
+    "description": null
+  },
+  "SkillUnlock_Yeti": {
+    "localized_name": "<itemName id=|SkillUnlock_Yeti|/>",
+    "description": null
+  },
+  "SkillUnlock_Yeti_Grass": {
+    "localized_name": "<itemName id=|SkillUnlock_Yeti_Grass|/>",
+    "description": null
+  },
+  "SkinChange": {
+    "localized_name": "<mapObjectName id=|SkinChange|/>",
+    "description": null
+  },
+  "Snowman": {
+    "localized_name": "<mapObjectName id=|Snowman|/>",
+    "description": null
+  },
+  "Spa": {
+    "localized_name": "<mapObjectName id=|Spa|/>",
+    "description": "帕鲁进入｢<mapObjectName id=|Spa|/>｣即可恢复SAN值。"
+  },
+  "Spa2": {
+    "localized_name": "<mapObjectName id=|Spa2|/>",
+    "description": "进入此设施的帕鲁能够恢复更多SAN值。"
+  },
+  "Spear": {
+    "localized_name": "<itemName id=|Spear|/>",
+    "description": null
+  },
+  "Spear_2": {
+    "localized_name": "<itemName id=|Spear_2|/>",
+    "description": "利于近距离战斗的矛。 以金属制成，攻击力有所提升。 可在｢<mapObjectName id=|Factory_Hard_01|/>｣制作。"
+  },
+  "Spear_3": {
+    "localized_name": "<itemName id=|Spear_3|/>",
+    "description": "利于近距离战斗的矛。 以优质金属制成，攻击力有所提升。 可在｢<mapObjectName id=|Factory_Hard_02|/>｣制作。"
+  },
+  "Spear_ForestBoss": {
+    "localized_name": "<itemName id=|Spear_ForestBoss|/>",
+    "description": null
+  },
+  "Special_ElectricHatchingPalEgg": {
+    "localized_name": "<mapObjectName id=|ElectricHatchingPalEgg|/>",
+    "description": null
+  },
+  "Special_HatchingPalEgg": {
+    "localized_name": "<mapObjectName id=|HatchingPalEgg|/>",
+    "description": "设置帕鲁蛋后， 便可使之孵化。"
+  },
+  "Special_PalRankUp": {
+    "localized_name": "<mapObjectName id=|CharacterRankUp|/>",
+    "description": "将多只同种帕鲁浓缩后合成， 便可将该帕鲁强化为更高阶级的个体。"
+  },
+  "Special_PalSphere_Grade_01": {
+    "localized_name": "<itemName id=|PalSphere|/>",
+    "description": "可扔出并捕捉帕鲁的道具。 此为量产款式，只对低等级的帕鲁有效。"
+  },
+  "Special_PalSphere_Grade_02": {
+    "localized_name": "<itemName id=|PalSphere_Mega|/>",
+    "description": "可扔出并捕捉帕鲁的道具。 此款式性能得到提升，可捕捉的帕鲁范围更广。 可在｢<mapObjectName id=|SphereFactory_Black_01|/>｣制作。"
+  },
+  "Special_PalSphere_Grade_03": {
+    "localized_name": "<itemName id=|PalSphere_Giga|/>",
+    "description": "可扔出并捕捉帕鲁的道具。 此款式可捕捉有一定强度的帕鲁。 可在｢<mapObjectName id=|SphereFactory_Black_01|/>｣制作。"
+  },
+  "Special_PalSphere_Grade_04": {
+    "localized_name": "<itemName id=|PalSphere_Tera|/>",
+    "description": "可扔出并捕捉帕鲁的道具。 此款式可捕捉相当强大的帕鲁。 可在｢<mapObjectName id=|SphereFactory_Black_02|/>｣制作。"
+  },
+  "Special_PalSphere_Grade_05": {
+    "localized_name": "<itemName id=|PalSphere_Master|/>",
+    "description": "可扔出并捕捉帕鲁的道具。 此款式性能相当好，没多少帕鲁能逃得掉。 可在｢<mapObjectName id=|SphereFactory_Black_03|/>｣制作。"
+  },
+  "Special_PalSphere_Grade_06": {
+    "localized_name": "<itemName id=|PalSphere_Legend|/>",
+    "description": "可扔出并捕捉帕鲁的道具。 此款式性能极高，几乎没有帕鲁能逃得掉。 可在｢<mapObjectName id=|SphereFactory_Black_03|/>｣制作。"
+  },
+  "Special_PalSphere_Grade_07": {
+    "localized_name": "<itemName id=|PalSphere_Ultimate|/>",
+    "description": "可扔出并捕捉帕鲁的道具。 拥有压倒性的性能，几乎可以抓住任何帕鲁。 可在｢<mapObjectName id=|SphereFactory_Black_03|/>｣制作。"
+  },
+  "Special_SphereFactory_Black_Grade_01": {
+    "localized_name": "<mapObjectName id=|SphereFactory_Black_01|/>",
+    "description": "捕捉帕鲁用的帕鲁球制作台。 需要有具备｢COMMON_WORK_SUITABILITY_Handcraft｣适应性的帕鲁才能进行作业。"
+  },
+  "Special_SphereFactory_Black_Grade_02": {
+    "localized_name": "<mapObjectName id=|SphereFactory_Black_02|/>",
+    "description": "生产｢<itemName id=|PalSphere|/>｣的速度较为快速。 需要有具备｢COMMON_WORK_SUITABILITY_Handcraft｣适应性的帕鲁才能进行作业。"
+  },
+  "Special_SphereFactory_Black_Grade_03": {
+    "localized_name": "<mapObjectName id=|SphereFactory_Black_03|/>",
+    "description": "生产｢<itemName id=|PalSphere|/>｣的速度更为快速。 需要有具备｢COMMON_WORK_SUITABILITY_Handcraft｣适应性的帕鲁才能进行作业。"
+  },
+  "SphereFactory_Black_04": {
+    "localized_name": "<mapObjectName id=|SphereFactory_Black_04|/>",
+    "description": null
+  },
+  "SphereModule_Curve": {
+    "localized_name": "<itemName id=|SphereModule_Curve|/>",
+    "description": null
+  },
+  "SphereModule_Curve2": {
+    "localized_name": "<itemName id=|SphereModule_Curve2|/>",
+    "description": null
+  },
+  "SphereModule_Heavy": {
+    "localized_name": "<itemName id=|SphereModule_Heavy|/>",
+    "description": null
+  },
+  "SphereModule_Homing": {
+    "localized_name": "<itemName id=|SphereModule_Homing|/>",
+    "description": null
+  },
+  "SphereModule_Sniper": {
+    "localized_name": "<itemName id=|SphereModule_Sniper|/>",
+    "description": null
+  },
+  "SphereModule_Sniper2": {
+    "localized_name": "<itemName id=|SphereModule_Sniper2|/>",
+    "description": null
+  },
+  "StainlessSteel": {
+    "localized_name": "<itemName id=|StainlessSteel|/>",
+    "description": null
+  },
+  "Stone_Gate": {
+    "localized_name": "<mapObjectName id=|Stone_Gate|/>",
+    "description": "稍大体型的帕鲁也能通过的石制大门。"
+  },
+  "Stone_houseset": {
+    "localized_name": "石头建筑套组",
+    "description": "持有此套组即可用石材建造据点。 可以建造石制的地基、墙壁、屋顶和楼梯等 建造房屋时所需的构造。"
+  },
+  "Stump": {
+    "localized_name": "<mapObjectName id=|Stump|/>",
+    "description": null
+  },
+  "TableDresser01_Stone": {
+    "localized_name": "<mapObjectName id=|TableDresser01_Stone|/>",
+    "description": null
+  },
+  "ToolBoxV1": {
+    "localized_name": "<mapObjectName id=|ToolBoxV1|/>",
+    "description": null
+  },
+  "Torch": {
+    "localized_name": "<mapObjectName id=|Torch|/>",
+    "description": "设置在据点即可照亮四周。"
+  },
+  "TransmissionTower": {
+    "localized_name": "<mapObjectName id=|TransmissionTower|/>",
+    "description": null
+  },
+  "Trap_LegHold": {
+    "localized_name": "<mapObjectName id=|Trap_LegHold|/>",
+    "description": "能让踩到的目标被困住。 只对小型帕鲁或人类有效。"
+  },
+  "Trap_LegHold_Big": {
+    "localized_name": "<mapObjectName id=|Trap_LegHold_Big|/>",
+    "description": "能让踩到的目标被困住。 只对大型帕鲁有效。"
+  },
+  "Trap_MineAttack": {
+    "localized_name": "<mapObjectName id=|Trap_MineAttack|/>",
+    "description": "敌人踩上去就会自动爆炸。"
+  },
+  "Trap_MineElecShock": {
+    "localized_name": "<mapObjectName id=|Trap_MineElecShock|/>",
+    "description": "能让踩到的目标遭受电击。 帕鲁在遭受电击时会比较容易捕获。"
+  },
+  "Trap_MineFreeze": {
+    "localized_name": "<mapObjectName id=|Trap_MineFreeze|/>",
+    "description": "能让踩到的目标冻结。 帕鲁被冻结时会比较容易捕获。"
+  },
+  "Trap_Noose": {
+    "localized_name": "<mapObjectName id=|Trap_Noose|/>",
+    "description": "可以抓住途经的帕鲁。 只对小型帕鲁和人类有效。"
+  },
+  "Unlock_Picking_Tier1": {
+    "localized_name": "<itemName id=|Unlock_Picking_Tier1|/>",
+    "description": null
+  },
+  "Unlock_Picking_Tier2": {
+    "localized_name": "<itemName id=|Unlock_Picking_Tier2|/>",
+    "description": null
+  },
+  "Unlock_Picking_Tier3": {
+    "localized_name": "<itemName id=|Unlock_Picking_Tier3|/>",
+    "description": null
+  },
+  "WallSignboard": {
+    "localized_name": "<mapObjectName id=|WallSignBoard|/>",
+    "description": null
+  },
+  "WallTorch": {
+    "localized_name": "<mapObjectName id=|WallTorch|/>",
+    "description": "可安装在墙壁上。"
+  },
+  "Wood_Gate": {
+    "localized_name": "<mapObjectName id=|Wood_Gate|/>",
+    "description": "稍大体型的帕鲁也能通过的木制大门。"
+  },
+  "Wooden_houseset": {
+    "localized_name": "木质建筑套组",
+    "description": "持有此套组即可用木材建造据点。 可以建造木制的地基、墙壁、屋顶和楼梯等 建造房屋时所需的构造。"
+  },
+  "Wooden_ladder": {
+    "localized_name": "<mapObjectName id=|Wooden_ladder|/>",
+    "description": null
+  },
+  "WorkSpeedIncrease1": {
+    "localized_name": "<mapObjectName id=|WorkSpeedIncrease1|/>",
+    "description": null
+  },
+  "Workbench": {
+    "localized_name": "<mapObjectName id=|WorkBench|/>",
+    "description": "用来制作简单道具的｢<mapObjectName id=|WorkBench|/>｣。 如有具备｢COMMON_WORK_SUITABILITY_Handcraft｣适应性的帕鲁， 它就会前来协助。"
+  },
+  "YakushimaBlade": {
+    "localized_name": "<itemName id=|YakushimaBlade|/>",
+    "description": null
+  }
+}

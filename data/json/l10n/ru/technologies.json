@@ -1,0 +1,1786 @@
+{
+  "Accessory_AirDash1": {
+    "localized_name": "<itemName id=|Accessory_AirDash1|/>",
+    "description": null
+  },
+  "Accessory_AirDash2": {
+    "localized_name": "<itemName id=|Accessory_AirDash2|/>",
+    "description": null
+  },
+  "Accessory_JumpCount_Increase1": {
+    "localized_name": "<itemName id=|Accessory_JumpCount_Increase1|/>",
+    "description": null
+  },
+  "Accessory_JumpCount_Increase2": {
+    "localized_name": "<itemName id=|Accessory_JumpCount_Increase2|/>",
+    "description": null
+  },
+  "Accessory_JumpPower_Increase": {
+    "localized_name": "<itemName id=|Accessory_JumpPower_Increase|/>",
+    "description": null
+  },
+  "Accessory_Nonkilling": {
+    "localized_name": "<itemName id=|Accessory_Nonkilling|/>",
+    "description": null
+  },
+  "Accessory_TalentChecker": {
+    "localized_name": "<itemName id=|Accessory_TalentChecker|/>",
+    "description": null
+  },
+  "AdditionalInventory_001": {
+    "localized_name": "<itemName id=|AdditionalInventory_001|/>",
+    "description": null
+  },
+  "AdditionalInventory_002": {
+    "localized_name": "<itemName id=|AdditionalInventory_002|/>",
+    "description": null
+  },
+  "AdditionalInventory_003": {
+    "localized_name": "<itemName id=|AdditionalInventory_003|/>",
+    "description": null
+  },
+  "AdditionalInventory_004": {
+    "localized_name": "<itemName id=|AdditionalInventory_004|/>",
+    "description": null
+  },
+  "Altar": {
+    "localized_name": "<mapObjectName id=|Altar|/>",
+    "description": null
+  },
+  "Arrow": {
+    "localized_name": "<itemName id=|Arrow|/>",
+    "description": "<itemName id=|Arrow|/> для стрельбы из лука. Для изготовления требуется ｢<mapObjectName id=|WorkBench|/>｣."
+  },
+  "Arrow_Fire": {
+    "localized_name": "<itemName id=|Arrow_Fire|/>",
+    "description": "<itemName id=|Arrow|/> для стрельбы из оружия ｢<itemName id=|Bow_Fire|/>｣ и ｢<itemName id=|BowGun_Fire|/>｣. Наносит элементальный урон (COMMON_ELEMENT_NAME_Fire). Для изготовления требуется ｢<mapObjectName id=|WorkBench|/>｣."
+  },
+  "Arrow_Poison": {
+    "localized_name": "<itemName id=|Arrow_Poison|/>",
+    "description": "<itemName id=|Arrow|/> для стрельбы из оружия ｢<itemName id=|Bow_Poison|/>｣ и ｢<itemName id=|BowGun_Poison|/>｣. При попадании отравляет противника. Для изготовления требуется ｢<mapObjectName id=|WorkBench|/>｣."
+  },
+  "AssaultRifleBullet": {
+    "localized_name": "<itemName id=|AssaultRifleBullet|/>",
+    "description": "Снаряд для оружия: [<itemName id=|AssaultRifle_Default1|/>]. Для изготовления требуется [<mapObjectName id=|WeaponFactory_Dirty_02|/>]."
+  },
+  "AutoMealPouch_Tier1": {
+    "localized_name": "<itemName id=|AutoMealPouch_Tier1|/>",
+    "description": null
+  },
+  "AutoMealPouch_Tier2": {
+    "localized_name": "<itemName id=|AutoMealPouch_Tier2|/>",
+    "description": null
+  },
+  "AutoMealPouch_Tier3": {
+    "localized_name": "<itemName id=|AutoMealPouch_Tier3|/>",
+    "description": null
+  },
+  "AutoMealPouch_Tier4": {
+    "localized_name": "<itemName id=|AutoMealPouch_Tier4|/>",
+    "description": null
+  },
+  "AutoMealPouch_Tier5": {
+    "localized_name": "<itemName id=|AutoMealPouch_Tier5|/>",
+    "description": null
+  },
+  "BaseCampBattleDirector": {
+    "localized_name": "<mapObjectName id=|BaseCampBattleDirector|/>",
+    "description": "Колокол для перевода Палов на базе в состояние тревоги. Вы можете переключаться между режимом обороны и режимом работы в любое время."
+  },
+  "BaseCampItemDispenser": {
+    "localized_name": "<mapObjectName id=|BaseCampItemDispenser|/>",
+    "description": null
+  },
+  "BaseCampWorkHard": {
+    "localized_name": "<mapObjectName id=|BaseCampWorkHard|/>",
+    "description": null
+  },
+  "Battle_Armor_Grade_01_Cloth": {
+    "localized_name": "<itemName id=|ClothArmor|/>",
+    "description": "Одежда, для пошива которой используется ｢<itemName id=|Cloth|/>」. Защищает от ночного холода. Для изготовления требуется ｢<mapObjectName id=|WorkBench|/>｣."
+  },
+  "Battle_Armor_Grade_01_Cloth_Cold": {
+    "localized_name": "<itemName id=|ClothArmorCold|/>",
+    "description": "｢<itemName id=|ClothArmor|/>｣ из региона с холодным климатом. Помогает легче переносить морозы. Для изготовления требуется ｢<mapObjectName id=|WorkBench|/>｣."
+  },
+  "Battle_Armor_Grade_01_Cloth_Heat": {
+    "localized_name": "<itemName id=|ClothArmorHeat|/>",
+    "description": "｢<itemName id=|ClothArmor|/>｣ из региона с жарким климатом. Помогает легче переносить жару. Для изготовления требуется ｢<mapObjectName id=|WorkBench|/>｣."
+  },
+  "Battle_Armor_Grade_02_Fur": {
+    "localized_name": "<itemName id=|FurArmor|/>",
+    "description": "Доспех, для изготовления которого используется ｢<itemName id=|Leather|/>｣. Обладает улучшенной прочностью и защитой. Для изготовления требуется ｢<mapObjectName id=|Factory_Hard_01|/>｣."
+  },
+  "Battle_Armor_Grade_02_Fur_Cold": {
+    "localized_name": "<itemName id=|FurArmorCold|/>",
+    "description": "｢<itemName id=|FurArmor|/>｣ из региона с холодным климатом. Помогает переносить сильные морозы. Для изготовления требуется ｢<mapObjectName id=|Factory_Hard_01|/>｣."
+  },
+  "Battle_Armor_Grade_02_Fur_Heat": {
+    "localized_name": "<itemName id=|FurArmorHeat|/>",
+    "description": "｢<itemName id=|FurArmor|/>｣ из региона с жарким климатом. Отлично защищает от высоких температур. Для изготовления требуется ｢<mapObjectName id=|Factory_Hard_01|/>｣."
+  },
+  "Battle_Armor_Grade_03_Copper": {
+    "localized_name": "<itemName id=|CopperArmor|/>",
+    "description": "Изготовленный из металла доспех. Средний уровень защиты, средний вес. Для изготовления требуется ｢<mapObjectName id=|Factory_Hard_01|/>｣."
+  },
+  "Battle_Armor_Grade_03_Copper_Cold": {
+    "localized_name": "<itemName id=|CopperArmorCold|/>",
+    "description": "｢<itemName id=|CopperArmor|/>｣ с улучшенными характеристиками. Незаменимая вещь в холодных регионах. Для изготовления требуется ｢<mapObjectName id=|Factory_Hard_01|/>｣."
+  },
+  "Battle_Armor_Grade_03_Copper_Heat": {
+    "localized_name": "<itemName id=|CopperArmorHeat|/>",
+    "description": "｢<itemName id=|CopperArmor|/>｣ с улучшенными характеристиками. Отлично защищает от высоких температур. Для изготовления требуется ｢<mapObjectName id=|Factory_Hard_01|/>｣."
+  },
+  "Battle_Armor_Grade_03_Iron": {
+    "localized_name": "<itemName id=|IronArmor|/>",
+    "description": "Доспех из качественного металла. Тяжелый, но дает отличную защиту. Для изготовления требуется ｢<mapObjectName id=|Factory_Hard_02|/>｣."
+  },
+  "Battle_Armor_Grade_03_Iron_Cold": {
+    "localized_name": "<itemName id=|IronArmorCold|/>",
+    "description": "｢<itemName id=|IronArmor|/>｣ с улучшенными характеристиками. Незаменимая вещь в холодных регионах. Для изготовления требуется ｢<mapObjectName id=|Factory_Hard_02|/>｣."
+  },
+  "Battle_Armor_Grade_03_Iron_Heat": {
+    "localized_name": "<itemName id=|IronArmorHeat|/>",
+    "description": "｢<itemName id=|IronArmor|/>｣ с улучшенными характеристиками. Отлично защищает от высоких температур. Для изготовления требуется ｢<mapObjectName id=|Factory_Hard_02|/>｣."
+  },
+  "Battle_Armor_Grade_04_Steal": {
+    "localized_name": "<itemName id=|StealArmor|/>",
+    "description": "Для изготовления этого доспеха используется <itemName id=|StealIngot|/>. Обладает превосходной защитой, но весит очень много. Для изготовления требуется [<mapObjectName id=|Factory_Hard_03|/>]."
+  },
+  "Battle_Armor_Grade_04_Steal_Cold": {
+    "localized_name": "<itemName id=|StealArmorCold|/>",
+    "description": "[<itemName id=|StealArmor|/>] с улучшенными характеристиками. Незаменимая вещь в холодных регионах. Для изготовления требуется [<mapObjectName id=|Factory_Hard_03|/>]."
+  },
+  "Battle_Armor_Grade_04_Steal_Heat": {
+    "localized_name": "<itemName id=|StealArmorHeat|/>",
+    "description": "[<itemName id=|StealArmor|/>] с улучшенными характеристиками. Отлично защищает от высоких температур. Для изготовления требуется [<mapObjectName id=|Factory_Hard_03|/>]."
+  },
+  "Battle_Armor_Grade_05_Plastic": {
+    "localized_name": "<itemName id=|PlasticArmor|/>",
+    "description": "Для изготовления этого доспеха используется <itemName id=|Plastic|/>. Обладает повышенной защитой и облегченным весом. Для изготовления требуется [<mapObjectName id=|Factory_Hard_03|/>]."
+  },
+  "Battle_Armor_Grade_05_Plastic_Cold": {
+    "localized_name": "<itemName id=|PlasticArmorCold|/>",
+    "description": "[<itemName id=|PlasticArmor|/>] с улучшенными характеристиками. Помогает легче переносить морозы. Для изготовления требуется [<mapObjectName id=|Factory_Hard_03|/>]."
+  },
+  "Battle_Armor_Grade_05_Plastic_Heat": {
+    "localized_name": "<itemName id=|PlasticArmorHeat|/>",
+    "description": "[<itemName id=|PlasticArmor|/>] с улучшенными характеристиками. Отлично защищает от высоких температур. Для изготовления требуется [<mapObjectName id=|Factory_Hard_03|/>]."
+  },
+  "Battle_Armor_Grade_05_Plastic_Weight": {
+    "localized_name": "<itemName id=|PlasticArmorWeight|/>",
+    "description": "[<itemName id=|PlasticArmor|/>] с улучшенными характеристиками. Увеличивает максимальный переносимый игроком вес. Для изготовления требуется [<mapObjectName id=|Factory_Hard_03|/>]."
+  },
+  "Battle_Cloth": {
+    "localized_name": "<itemName id=|Cloth|/>",
+    "description": null
+  },
+  "Battle_Defense_BowGun": {
+    "localized_name": "<mapObjectName id=|DefenseBowGun|/>",
+    "description": "Прикрепите к этому сооружению Палов с умением ｢COMMON_WORK_SUITABILITY_Handcraft｣, и они будут охранять базу, вооружившись арбалетами."
+  },
+  "Battle_Defense_MachineGun": {
+    "localized_name": "<mapObjectName id=|DefenseMachinegun|/>",
+    "description": "Прикрепите к этому сооружению Палов с умением ｢COMMON_WORK_SUITABILITY_Handcraft｣, и они будут охранять базу, используя соответствующие защитные постройки."
+  },
+  "Battle_Defense_Missile": {
+    "localized_name": "<mapObjectName id=|DefenseMissile|/>",
+    "description": "Прикрепите к этому сооружению Палов с умением ｢COMMON_WORK_SUITABILITY_Handcraft｣, и они будут охранять базу, используя ракетницы."
+  },
+  "Battle_Glider_Grade_01": {
+    "localized_name": "<itemName id=|Glider_Old|/>",
+    "description": "Глайдер для планирования. Простая конструкция не позволяет развить высокую скорость."
+  },
+  "Battle_Glider_Grade_02": {
+    "localized_name": "<itemName id=|Glider_Good|/>",
+    "description": "Глайдер для планирования. Массовая модель, развивающая среднюю скорость. Место изготовления: ｢<mapObjectName id=|Factory_Hard_01|/>｣."
+  },
+  "Battle_Glider_Grade_03": {
+    "localized_name": "<itemName id=|Glider_Super|/>",
+    "description": "Глайдер для планирования. Улучшенная модель, позволяют развивать приличную скорость. Место изготовления: ｢<mapObjectName id=|Factory_Hard_02|/>｣."
+  },
+  "Battle_Glider_Grade_04": {
+    "localized_name": "<itemName id=|Glider_Tera|/>",
+    "description": "Глайдер для планирования. Еще более совершенная модель с повышенной скоростью и подъемной силой. Место изготовления: ｢<mapObjectName id=|Factory_Hard_03|/>｣."
+  },
+  "Battle_GunPowder_Grade_02": {
+    "localized_name": "<itemName id=|Gunpowder2|/>",
+    "description": "｢<itemName id=|Gunpowder2|/>｣ для стрельбы из огнестрельного оружия. Требуется для создания снарядов. Место изготовления: ｢<mapObjectName id=|Factory_Hard_01|/>｣."
+  },
+  "Battle_Helm_Grade_02_Fur": {
+    "localized_name": "<itemName id=|FurHelmet|/>",
+    "description": "Украшение для волос с красивыми перьями. Кажется, будто они защищают владельца от смертельных ранений в голову. Для изготовления требуется ｢<mapObjectName id=|Workbench|/>｣."
+  },
+  "Battle_Helm_Grade_03_Copper": {
+    "localized_name": "<itemName id=|CopperHelmet|/>",
+    "description": "Изготовленный из металла шлем. Верное и надежное снаряжение, защищающее ваши мысли. Для изготовления требуется ｢<mapObjectName id=|Factory_Hard_01|/>｣."
+  },
+  "Battle_Helm_Grade_04_Iron": {
+    "localized_name": "<itemName id=|IronHelmet|/>",
+    "description": "Шлем, выполненный из качественного металла. Блеск его тщательно отполированной поверхности дает ощущение собственной важности. Для изготовления требуется ｢<mapObjectName id=|Factory_Hard_02|/>｣."
+  },
+  "Battle_Helm_Grade_05_Steal": {
+    "localized_name": "<itemName id=|StealHelmet|/>",
+    "description": "Для изготовления этого шлема используется <itemName id=|StealIngot|/>. Качество всем на зависть, знак избранного воина. Для изготовления требуется [<mapObjectName id=|Factory_Hard_03|/>]."
+  },
+  "Battle_Helm_Grade_06_Plastic": {
+    "localized_name": "<itemName id=|PlasticHelmet|/>",
+    "description": "Для изготовления этого шлема используется <itemName id=|Plastic|/>. Обладает повышенной защитой и облегченным весом. Для изготовления требуется [<mapObjectName id=|Factory_Hard_03|/>]."
+  },
+  "Battle_MeleeWeapon_Axe_Steal": {
+    "localized_name": "<itemName id=|Axe_Steal|/>",
+    "description": null
+  },
+  "Battle_MeleeWeapon_Bat": {
+    "localized_name": "<itemName id=|Bat|/>",
+    "description": "<itemName id=|Bat|/> для боя на ближней дистанции. Возможно, сгодится в качестве ударного оружия против небольших Палов."
+  },
+  "Battle_MeleeWeapon_Bat2": {
+    "localized_name": "<itemName id=|Bat2|/>",
+    "description": null
+  },
+  "Battle_MeleeWeapon_Pickaxe_Steal": {
+    "localized_name": "<itemName id=|Pickaxe_Steal|/>",
+    "description": null
+  },
+  "Battle_MeleeWeapon_Sword": {
+    "localized_name": "<itemName id=|Sword|/>",
+    "description": "｢<itemName id=|Sword|/>｣ для боя на ближней дистанции. Острота его лезвия поражает! Чем короче дистанция с врагом, тем оно опаснее. Для изготовления требуется ｢<mapObjectName id=|WeaponFactory_Dirty_01|/>｣."
+  },
+  "Battle_RangeWeapon_AssaultRifle": {
+    "localized_name": "<itemName id=|AssaultRifle_Default1|/>",
+    "description": "<itemName id=|AssaultRifle_Default1|/> для ведения непрерывного подавляющего огня. Подходит для сражений с сильными противниками. Для изготовления требуется ｢<mapObjectName id=|WeaponFactory_Dirty_02|/>｣."
+  },
+  "Battle_RangeWeapon_Bow1": {
+    "localized_name": "<itemName id=|WeakerBow|/>",
+    "description": "Примитивное оружие дальнего боя. Сделан из подручных материалов, поэтому обладает небольшой убойной силой. Для изготовления требуется ｢<mapObjectName id=|WorkBench|/>｣."
+  },
+  "Battle_RangeWeapon_Bow3": {
+    "localized_name": "<itemName id=|Bow_Triple|/>",
+    "description": "Улучшенный лук, способный выпускать одновременно 3 стрелы. Благодаря его чудесным свойствам для выстрела требуется всего 1 <itemName id=|Arrow|/>."
+  },
+  "Battle_RangeWeapon_BowGun": {
+    "localized_name": "<itemName id=|BowGun|/>",
+    "description": "Стреляет без приложения усилий, в качестве снаряда используется ｢<itemName id=|Arrow|/>｣. Требует времени для зарядки, но стреляет мощно. Для изготовления понадобится ｢<mapObjectName id=|Factory_Hard_01|/>｣."
+  },
+  "Battle_RangeWeapon_BowGun_Fire": {
+    "localized_name": "<itemName id=|BowGun_Fire|/>",
+    "description": "<itemName id=|BowGun|/>, наносящий элементальный урон (COMMON_ELEMENT_NAME_Fire). Для выстрела требуется ｢<itemName id=|Arrow_Fire|/>｣. Для изготовления понадобится ｢<mapObjectName id=|Factory_Hard_01|/>｣."
+  },
+  "Battle_RangeWeapon_BowGun_Poison": {
+    "localized_name": "<itemName id=|BowGun_Poison|/>",
+    "description": "Грозный <itemName id=|BowGun|/>, выстрелы из которого отравляют цель. Для выстрела требуется ｢<itemName id=|Arrow_Poison|/>｣. Для изготовления понадобится ｢<mapObjectName id=|Factory_Hard_01|/>｣."
+  },
+  "Battle_RangeWeapon_Bow_Fire": {
+    "localized_name": "<itemName id=|Bow_Fire|/>",
+    "description": "Лук, наносящий элементальный урон (COMMON_ELEMENT_NAME_Fire). Поджигает Палов огненными стрелами, после чего их становится проще поймать. Для выстрела требуется ｢<itemName id=|Arrow_Fire|/>｣."
+  },
+  "Battle_RangeWeapon_Bow_Poison": {
+    "localized_name": "<itemName id=|Bow_Poison|/>",
+    "description": "Устрашающий лук, отравляющий цель ядом. Отравленных Палов становится проще поймать. Для выстрела требуется ｢<itemName id=|Arrow_Poison|/>｣."
+  },
+  "Battle_RangeWeapon_CompoundBow": {
+    "localized_name": "<itemName id=|CompoundBow|/>",
+    "description": null
+  },
+  "Battle_RangeWeapon_FlameThrower": {
+    "localized_name": "<itemName id=|FlameThrower|/>",
+    "description": null
+  },
+  "Battle_RangeWeapon_GatlingGun": {
+    "localized_name": "<itemName id=|GatlingGun|/>",
+    "description": "Картечница Гатлинга, обеспечивающая огонь на подавление за счет своей скорострельности. Способна изрешетить противника подавляющим огнем. Для изготовления требуется ｢<mapObjectName id=|WeaponFactory_Dirty_03|/>｣."
+  },
+  "Battle_RangeWeapon_GrenadeLauncher": {
+    "localized_name": "<itemName id=|GrenadeLauncher|/>",
+    "description": "Выпускает гранаты, наносящие урон по области при взрыве. Пригодится в бою против большого количества врагов. Для изготовления требуется ｢<mapObjectName id=|WeaponFactory_Dirty_03|/>｣."
+  },
+  "Battle_RangeWeapon_GuidedMissileLauncher": {
+    "localized_name": "<itemName id=|GuidedMissileLauncher|/>",
+    "description": "Выпускает ракеты, автоматически захватывающие и преследующие цели. При попадании ракеты взрываются, нанося урон по области. Для изготовления требуется ｢<mapObjectName id=|WeaponFactory_Dirty_03|/>｣."
+  },
+  "Battle_RangeWeapon_HandGun": {
+    "localized_name": "<itemName id=|HandGun_Default|/>",
+    "description": "Пистолет с улучшенным магазином и скорострельностью. Превосходит <itemName id=|MakeshiftHandgun|/> по своей огневой мощи. Место изготовления: ｢<mapObjectName id=|WeaponFactory_Dirty_01|/>｣."
+  },
+  "Battle_RangeWeapon_HomingSphereLauncher": {
+    "localized_name": "<itemName id=|HomingSphereLauncher|/>",
+    "description": "Пусковая установка для стрельбы сферами. Выпущенные сферы преследуют Палов. Для изготовления требуется ｢<mapObjectName id=|WeaponFactory_Dirty_03|/>｣."
+  },
+  "Battle_RangeWeapon_LaserRifle": {
+    "localized_name": "<itemName id=|LaserRifle|/>",
+    "description": "Оружие, стреляющее лазерными лучами. Обладает высокой огневой мощью и удобно в использовании. Для изготовления требуется ｢<mapObjectName id=|WeaponFactory_Dirty_03|/>｣."
+  },
+  "Battle_RangeWeapon_OldRevolver": {
+    "localized_name": "<itemName id=|OldRevolver|/>",
+    "description": null
+  },
+  "Battle_RangeWeapon_Rifle": {
+    "localized_name": "<itemName id=|SingleShotRifle|/>",
+    "description": "Однозарядная винтовка. Перезарядка требует времени. Малый размер обоймы компенсируется мощью. Место изготовления: ｢<mapObjectName id=|WeaponFactory_Dirty_02|/>｣."
+  },
+  "Battle_RangeWeapon_RocketLauncher": {
+    "localized_name": "<itemName id=|Launcher_Default|/>",
+    "description": "<itemName id=|Launcher_Default|/> может бомбить противника мощными снарядами с большого расстояния. Для выстрела требуется ｢<mapObjectName id=|WeaponFactory_Dirty_03|/>｣."
+  },
+  "Battle_RangeWeapon_SemiAutoRifle": {
+    "localized_name": "<itemName id=|SemiAutoRifle|/>",
+    "description": null
+  },
+  "Battle_RangeWeapon_SemiAutoShotgun": {
+    "localized_name": "<itemName id=|SemiAutoShotgun|/>",
+    "description": null
+  },
+  "Battle_RangeWeapon_ShotGun": {
+    "localized_name": "<itemName id=|DoubleBarrelShotgun|/>",
+    "description": "Ружье, демонстрирующее высокую огневую мощь на короткой дистанции. Позволяет сделать 2 выстрела подряд. Малый размер обоймы компенсируется мощью. Место изготовления: ｢<mapObjectName id=|WeaponFactory_Dirty_02|/>｣."
+  },
+  "Battle_RangeWeapon_ShotGun_Multi": {
+    "localized_name": "<itemName id=|PumpActionShotgun|/>",
+    "description": "Эффективность этого ружья повышена благодаря увеличенной обойме. Наносит наибольший урон на короткой дистанции. Для изготовления требуется ｢<mapObjectName id=|WeaponFactory_Dirty_02|/>｣."
+  },
+  "Battle_RangeWeapon_SphereLauncher": {
+    "localized_name": "<itemName id=|SphereLauncher|/>",
+    "description": "Сферомёт новой модели, способный выпускать несколько сфер одновременно. Можно использовать для поимки группы Палов. Для изготовления требуется ｢<mapObjectName id=|WeaponFactory_Dirty_02|/>｣."
+  },
+  "Battle_RangeWeapon_SphereLauncher_Once": {
+    "localized_name": "<itemName id=|SphereLauncher_Once|/>",
+    "description": "Сферомёт для выпуска сфер. Дистанция поимки Палов увеличена. Для изготовления требуется ｢<mapObjectName id=|WeaponFactory_Dirty_01|/>｣."
+  },
+  "Battle_RangeWeapon_SubmachineGun": {
+    "localized_name": "<itemName id=|SubmachineGun|/>",
+    "description": null
+  },
+  "BeamSword": {
+    "localized_name": "<itemName id=|BeamSword|/>",
+    "description": null
+  },
+  "BlastFurnace4": {
+    "localized_name": "<mapObjectName id=|BlastFurnace4|/>",
+    "description": null
+  },
+  "BreedFarm": {
+    "localized_name": "<mapObjectName id=|BreedFarm|/>",
+    "description": "Поместите сюда по одному ♂ и ♀ Палу, чтобы получить яйцо. Чтобы процесс прошел успешно, требуется ｢<itemName id=|Cake|/>｣."
+  },
+  "BuildableGoddessStatue": {
+    "localized_name": "<mapObjectName id=|BuildableGoddessStatue|/>",
+    "description": "В обмен на подношение усиливает персонажа и Палов."
+  },
+  "CarbonFiber": {
+    "localized_name": "<itemName id=|CarbonFiber|/>",
+    "description": null
+  },
+  "Cauldron": {
+    "localized_name": "<mapObjectName id=|Cauldron|/>",
+    "description": null
+  },
+  "CeilingLamp": {
+    "localized_name": "<mapObjectName id=|CeilingLamp|/>",
+    "description": "Можно прикрепить к потолку."
+  },
+  "Cement": {
+    "localized_name": "<itemName id=|Cement|/>",
+    "description": null
+  },
+  "Cloth2": {
+    "localized_name": "<itemName id=|Cloth2|/>",
+    "description": null
+  },
+  "Cooler": {
+    "localized_name": "<mapObjectName id=|Cooler|/>",
+    "description": "Помогает справиться с жарой, охлаждая воздух вокруг."
+  },
+  "CoolerBox": {
+    "localized_name": "<mapObjectName id=|CoolerBox|/>",
+    "description": null
+  },
+  "CoolerPalFoodBox": {
+    "localized_name": "<mapObjectName id=|CoolerPalFoodBox|/>",
+    "description": null
+  },
+  "Crusher": {
+    "localized_name": "<mapObjectName id=|Crusher|/>",
+    "description": "Постройка, позволяющая измельчать <itemName id=|Stone|/> и <itemName id=|Wood|/> и превращать их в другие материалы. Требуется Пал с умением ｢Полив｣ для вращения водяной мельницы."
+  },
+  "DamagedScarecrow": {
+    "localized_name": "<mapObjectName id=|DamagedScarecrow|/>",
+    "description": "Чучело для тренировок, сделанное в виде Пала <characterName id=|Penguin|/>."
+  },
+  "DecalGunSet": {
+    "localized_name": "Набор для граффити-ружья",
+    "description": "Набор для граффити-ружья. Позволяет создавать чудесное ружье, оставляющее после выстрела изображения Палов, и патроны для него."
+  },
+  "DefenseWait": {
+    "localized_name": "<mapObjectName id=|DefenseWait|/>",
+    "description": "Прикрепленные к этому сооружению Палы ведут дозор, высматривая врага."
+  },
+  "DefenseWall": {
+    "localized_name": "<mapObjectName id=|DefenseWall|/>",
+    "description": "Огромная стена, защищающая от вторжения внешних врагов."
+  },
+  "DefenseWall_Metal": {
+    "localized_name": "<mapObjectName id=|DefenseWall_Metal|/>",
+    "description": "Огромная стена, защищающая от вторжения внешних врагов. Очень прочная, поскольку сделана из металла."
+  },
+  "DefenseWall_Wood": {
+    "localized_name": "<mapObjectName id=|DefenseWall_Wood|/>",
+    "description": "Огромная стена, защищающая от вторжения внешних врагов. Непрочная, поскольку сделана из дерева."
+  },
+  "DismantlingConveyor": {
+    "localized_name": "<mapObjectName id=|DismantlingConveyor|/>",
+    "description": null
+  },
+  "DisplayCharacter": {
+    "localized_name": "<mapObjectName id=|DisplayCharacter|/>",
+    "description": "Место для демонстрации пойманных Палов. Находящиеся внутри Палы не могут работать и участвовать в битвах, но зато не требуют пищи."
+  },
+  "ElecBaton": {
+    "localized_name": "<itemName id=|ElecBaton|/>",
+    "description": "Оружие ближнего боя, бьющее электрическим током при ударе. Пораженных током Палов становится проще поймать. Для изготовления требуется ｢<mapObjectName id=|Factory_Hard_01|/>｣."
+  },
+  "ElectricCooler": {
+    "localized_name": "<mapObjectName id=|ElectricCooler|/>",
+    "description": "Мощный и эффективный охладительный прибор, потребляющий электроэнергию."
+  },
+  "ElectricGenerator_Large": {
+    "localized_name": "<mapObjectName id=|ElectricGenerator_Large|/>",
+    "description": null
+  },
+  "ElectricHeater": {
+    "localized_name": "<mapObjectName id=|ElectricHeater|/>",
+    "description": "Мощный и эффективный отопительный прибор, потребляющий электроэнергию."
+  },
+  "EnergyLauncherBullet": {
+    "localized_name": "<itemName id=|EnergyLauncherBullet|/>",
+    "description": null
+  },
+  "EnergyRocketLauncher": {
+    "localized_name": "<itemName id=|EnergyRocketLauncher|/>",
+    "description": null
+  },
+  "EnergyStorage_Electric": {
+    "localized_name": "<mapObjectName id=|EnergyStorage_Electric|/>",
+    "description": null
+  },
+  "Expedition": {
+    "localized_name": "<mapObjectName id=|Expedition|/>",
+    "description": null
+  },
+  "Factory_Money": {
+    "localized_name": "<mapObjectName id=|Factory_Money|/>",
+    "description": null
+  },
+  "Farm_SkillFruits": {
+    "localized_name": "<mapObjectName id=|Farm_SkillFruits|/>",
+    "description": null
+  },
+  "FlamethrowerBullet": {
+    "localized_name": "<itemName id=|FlamethrowerBullet|/>",
+    "description": null
+  },
+  "FlourMill": {
+    "localized_name": "<mapObjectName id=|FlourMill|/>",
+    "description": "Постройка, где путем перемола зерна производится <itemName id=|Flour|/>. Сырье: <itemName id=|Wheat|/>. Требуется Пал с умением ｢Полив｣ для вращения водяной мельницы."
+  },
+  "FlowerBed": {
+    "localized_name": "<mapObjectName id=|FlowerBed|/>",
+    "description": null
+  },
+  "Fountain": {
+    "localized_name": "<mapObjectName id=|Fountain|/>",
+    "description": null
+  },
+  "FragGrenade": {
+    "localized_name": "<itemName id=|FragGrenade|/>",
+    "description": null
+  },
+  "FragGrenade_Dark": {
+    "localized_name": "<itemName id=|FragGrenade_Dark|/>",
+    "description": null
+  },
+  "FragGrenade_Dragon": {
+    "localized_name": "<itemName id=|FragGrenade_Dragon|/>",
+    "description": null
+  },
+  "FragGrenade_Elec": {
+    "localized_name": "<itemName id=|FragGrenade_Elec|/>",
+    "description": null
+  },
+  "FragGrenade_Fire": {
+    "localized_name": "<itemName id=|FragGrenade_Fire|/>",
+    "description": null
+  },
+  "FragGrenade_Ground": {
+    "localized_name": "<itemName id=|FragGrenade_Ground|/>",
+    "description": null
+  },
+  "FragGrenade_Ice": {
+    "localized_name": "<itemName id=|FragGrenade_Ice|/>",
+    "description": null
+  },
+  "FragGrenade_Leaf": {
+    "localized_name": "<itemName id=|FragGrenade_Leaf|/>",
+    "description": null
+  },
+  "FragGrenade_Super": {
+    "localized_name": "<itemName id=|FragGrenade_Super|/>",
+    "description": null
+  },
+  "FragGrenade_Water": {
+    "localized_name": "<itemName id=|FragGrenade_Water|/>",
+    "description": null
+  },
+  "FurnitureSet_1": {
+    "localized_name": "Набор деревянной мебели для гостиной",
+    "description": "Набор мебели для украшения интерьера. Разместите его в гостиной и наслаждайтесь жизнью вместе с Палами."
+  },
+  "FurnitureSet_10": {
+    "localized_name": "Набор заграждений",
+    "description": "Набор мебели для украшения интерьера. Используйте для загораживания прохода."
+  },
+  "FurnitureSet_11": {
+    "localized_name": "Набор регулировщика",
+    "description": "Набор мебели для украшения интерьера. Не годится для регулировки движения на дорогах в виду отсутствия оных."
+  },
+  "FurnitureSet_12": {
+    "localized_name": "Набор дорожных знаков",
+    "description": "Набор мебели для украшения интерьера. Не годится для регулировки движения на дорогах в виду отсутствия оных."
+  },
+  "FurnitureSet_13": {
+    "localized_name": "Набор металлических столов и стульев",
+    "description": "Набор мебели для украшения интерьера. Обставьте постройки из металла мебелью в том же стиле и наслаждайтесь жизнью вместе с Палами."
+  },
+  "FurnitureSet_14": {
+    "localized_name": "Набор столов из железного дерева",
+    "description": "Набор мебели для украшения интерьера. Обставьте постройки из металла мебелью в том же стиле и наслаждайтесь жизнью вместе с Палами."
+  },
+  "FurnitureSet_15": {
+    "localized_name": "Набор интерьерных пианино",
+    "description": "Набор мебели для украшения интерьера. Разместите на базе, чтобы создать образ роскошной жизни."
+  },
+  "FurnitureSet_16": {
+    "localized_name": "Набор антикварных зеркал",
+    "description": "Набор мебели для украшения интерьера. Посмотрите на себя и проверьте, в порядке ли ваш внешний вид."
+  },
+  "FurnitureSet_17": {
+    "localized_name": "Набор ковров",
+    "description": "Набор мебели для украшения интерьера. Разместите поверх фундамента, чтобы создать образ жилого пространства."
+  },
+  "FurnitureSet_18": {
+    "localized_name": "Набор антикварных диванов",
+    "description": "Набор мебели для украшения интерьера. Добавит вашей базе нотку роскоши."
+  },
+  "FurnitureSet_19": {
+    "localized_name": "Набор антикварных стульев",
+    "description": "Набор мебели для украшения интерьера. Используйте в дополнение к антикварному столу."
+  },
+  "FurnitureSet_2": {
+    "localized_name": "Набор деревянных шкафов для трактира",
+    "description": "Набор деревянной мебели для хранения в барном стиле. Подходит для хранения предметов."
+  },
+  "FurnitureSet_20": {
+    "localized_name": "Набор для антикварной ванной комнаты",
+    "description": "Набор мебели для украшения интерьера. Содержит предметы для антикварной ванной комнаты."
+  },
+  "FurnitureSet_21": {
+    "localized_name": "Набор антикварной мебели для хранения",
+    "description": "Набор антикварной мебели для хранения. Подходит для хранения предметов."
+  },
+  "FurnitureSet_22": {
+    "localized_name": "Набор антикварных шкафов для хранения",
+    "description": "Набор антикварных шкафов для хранения. Подходит для хранения предметов."
+  },
+  "FurnitureSet_23": {
+    "localized_name": "Набор часов",
+    "description": "Набор мебели для украшения интерьера. Вы не сможете узнать по ним время."
+  },
+  "FurnitureSet_24": {
+    "localized_name": "Набор антикварных столов",
+    "description": "Набор мебели для украшения интерьера. Используйте в сочетании с антикварными стульями."
+  },
+  "FurnitureSet_25": {
+    "localized_name": "Набор для туалета",
+    "description": "Набор мебели для украшения интерьера. По назначению не использовать."
+  },
+  "FurnitureSet_26": {
+    "localized_name": "Набор развлекательной мебели",
+    "description": "Набор мебели для украшения интерьера. А Палы продолжают трудиться."
+  },
+  "FurnitureSet_27": {
+    "localized_name": "Набор уличных фонарей",
+    "description": "Набор уличных фонарей для освещения. Для работы требуется электроэнергия."
+  },
+  "FurnitureSet_28": {
+    "localized_name": "Набор каминов",
+    "description": "Набор кирпичных каминов, служащих источником света. Требуется разжигание огня."
+  },
+  "FurnitureSet_29": {
+    "localized_name": "Набор антикварных ламп",
+    "description": "Набор антикварных ламп для освещения. Для работы требуется электроэнергия."
+  },
+  "FurnitureSet_3": {
+    "localized_name": "Набор деревянной мебели для трактира",
+    "description": "Набор мебели для украшения интерьера. Расставьте предметы как в баре и наслаждайтесь жизнью вместе с Палами."
+  },
+  "FurnitureSet_30": {
+    "localized_name": "Набор металлических стеллажей",
+    "description": "Набор металлических стеллажей. Подходит для хранения предметов."
+  },
+  "FurnitureSet_31": {
+    "localized_name": "Набор садовой мебели",
+    "description": "Набор мебели для украшения интерьера. Содержит предметы для двора."
+  },
+  "FurnitureSet_32": {
+    "localized_name": "Набор изысканной антикварной мебели",
+    "description": "Набор мебели для украшения интерьера. Роскошная коллекция антикварной мебели."
+  },
+  "FurnitureSet_4": {
+    "localized_name": "Набор декоративных настенных растений",
+    "description": "Набор мебели для украшения интерьера. Разместите растения на стенах, чтобы украсить базу."
+  },
+  "FurnitureSet_5": {
+    "localized_name": "Набор бочек",
+    "description": "Набор мебели для украшения интерьера. Купаться в этих бочках нельзя."
+  },
+  "FurnitureSet_6": {
+    "localized_name": "Набор контейнеров для хранения",
+    "description": "Набор контейнеров. Подходит для хранения предметов."
+  },
+  "FurnitureSet_7": {
+    "localized_name": "Набор обтянутых кожей стульев",
+    "description": "Набор мебели для украшения интерьера. Кожаная обивка выглядит изысканно."
+  },
+  "FurnitureSet_8": {
+    "localized_name": "Набор знаков |Аварийный выход|",
+    "description": "Набор мебели для украшения интерьера. Говорят, эти предметы ценились во времена существования цивилизации."
+  },
+  "FurnitureSet_9": {
+    "localized_name": "Набор декоративных растений",
+    "description": "Набор мебели для украшения интерьера. Расставьте растения, чтобы украсить базу."
+  },
+  "FurnitureSet_Japanese": {
+    "localized_name": "Набор мебели в японском стиле",
+    "description": "Набор японской мебели для украшения интерьера. Придайте свой базе японский стиль."
+  },
+  "GatlingBullet": {
+    "localized_name": "<itemName id=|GatlingBullet|/>",
+    "description": null
+  },
+  "Glass_houseset": {
+    "localized_name": "Набор для строительство: стекло",
+    "description": "Набор для строительства базы из стекла. Все необходимое для строительства дома: стеклянный фундамент, стены, крыша, лестница."
+  },
+  "GrapplingGun": {
+    "localized_name": "<itemName id=|GrapplingGun|/>",
+    "description": null
+  },
+  "GrapplingGun2": {
+    "localized_name": "<itemName id=|GrapplingGun2|/>",
+    "description": null
+  },
+  "GrapplingGun3": {
+    "localized_name": "<itemName id=|GrapplingGun3|/>",
+    "description": null
+  },
+  "GrapplingGun4": {
+    "localized_name": "<itemName id=|GrapplingGun4|/>",
+    "description": null
+  },
+  "GrenadeBullet": {
+    "localized_name": "<itemName id=|GrenadeBullet|/>",
+    "description": null
+  },
+  "GuildChest": {
+    "localized_name": "<mapObjectName id=|GuildChest|/>",
+    "description": null
+  },
+  "HandTorch": {
+    "localized_name": "<itemName id=|Torch|/>",
+    "description": "Освещает тьму и защищает от холода. Можно приспособить для ближнего боя. Для изготовления требуется ｢<mapObjectName id=|WorkBench|/>｣."
+  },
+  "HandgunBullet": {
+    "localized_name": "<itemName id=|HandgunBullet|/>",
+    "description": "Снаряд для оружия: <itemName id=|HandGun_Default|/>. Для изготовления требуется ｢<mapObjectName id=|WeaponFactory_Dirty_01|/>｣."
+  },
+  "Headstone": {
+    "localized_name": "<mapObjectName id=|Headstone|/>",
+    "description": null
+  },
+  "Heater": {
+    "localized_name": "<mapObjectName id=|Heater|/>",
+    "description": "Помогает справиться с холодом, согревая воздух вокруг."
+  },
+  "Homeward": {
+    "localized_name": "<itemName id=|Homeward|/>",
+    "description": null
+  },
+  "HugeKitchen": {
+    "localized_name": "<mapObjectName id=|HugeKitchen|/>",
+    "description": null
+  },
+  "IceCrusher": {
+    "localized_name": "<mapObjectName id=|IceCrusher|/>",
+    "description": null
+  },
+  "Infra_ElectricGenerator_Grade_01": {
+    "localized_name": "<mapObjectName id=|ElectricGenerator|/>",
+    "description": "Позволяет грозовым Палам на базе накапливать заряд, питая сооружения, потребляющие электроэнергию."
+  },
+  "Infra_ElectronicCircuit": {
+    "localized_name": "<itemName id=|MachineParts2|/>",
+    "description": "｢<itemName id=|MachineParts2|/>｣ для создания точных приборов. Место изготовления: ｢<mapObjectName id=|Factory_Hard_02|/>｣."
+  },
+  "Infra_ItemChest_Grade_01": {
+    "localized_name": "<mapObjectName id=|ItemChest|/>",
+    "description": "Используется для хранения предметов. Разместите на базе, чтобы Палы с умением [COMMON_WORK_SUITABILITY_Transport] автоматически переносили предметы."
+  },
+  "Infra_ItemChest_Grade_02": {
+    "localized_name": "<mapObjectName id=|ItemChest_02|/>",
+    "description": "Обладает большей вместимостью и прочностью. Разместите на базе, чтобы Палы с умением [COMMON_WORK_SUITABILITY_Transport] автоматически переносили предметы."
+  },
+  "Infra_ItemChest_Grade_03": {
+    "localized_name": "<mapObjectName id=|ItemChest_03|/>",
+    "description": "Обладает еще большей вместимостью и прочностью. Разместите на базе, чтобы Палы с умением [COMMON_WORK_SUITABILITY_Transport] автоматически переносили предметы."
+  },
+  "Infra_MachineParts": {
+    "localized_name": "<itemName id=|MachineParts|/>",
+    "description": null
+  },
+  "Infra_PalBed_Grade_01": {
+    "localized_name": "<mapObjectName id=|MedicalPalBed_02|/>",
+    "description": "Ночной сон в кровати восстанавливает рассудок находящихся на базе Палов. Отсутствие кровати ухудшает качество сна, и рассудок не восстанавливается."
+  },
+  "Infra_PalBed_Grade_02": {
+    "localized_name": "<mapObjectName id=|MedicalPalBed_03|/>",
+    "description": "Палы могут отдыхать с большим комфортом, во время сна восстанавливается больше здоровья и рассудка."
+  },
+  "Infra_PlayerBed_Grade_01": {
+    "localized_name": "<mapObjectName id=|PlayerBed_02|/>",
+    "description": "Кровать для людей, восстанавливает ОЗ во сне. Ночной сон в кровати проматывает время до наступления утра. Спать на кровати можно только под крышей."
+  },
+  "Infra_PlayerBed_Grade_02": {
+    "localized_name": "<mapObjectName id=|PlayerBed_03|/>",
+    "description": "Мягкая кровать с повышенным эффектом восстановления. Спать на кровати можно только под крышей."
+  },
+  "ItemBooth": {
+    "localized_name": "<mapObjectName id=|ItemBooth|/>",
+    "description": null
+  },
+  "ItemChest_04": {
+    "localized_name": "<mapObjectName id=|ItemChest_04|/>",
+    "description": null
+  },
+  "JapaneseStyle_houseset": {
+    "localized_name": "Набор для строительства: японский стиль",
+    "description": "Набор для строительства базы в японском стиле. Все необходимое для строительства дома: фундамент, стены, крыша, лестница."
+  },
+  "Katana": {
+    "localized_name": "<itemName id=|Katana|/>",
+    "description": null
+  },
+  "Lab": {
+    "localized_name": "<mapObjectName id=|Lab|/>",
+    "description": null
+  },
+  "Lamp": {
+    "localized_name": "<mapObjectName id=|Lamp|/>",
+    "description": "Благодаря силе электричества еще эффективнее освещает базу."
+  },
+  "Lantern": {
+    "localized_name": "<itemName id=|Lantern|/>",
+    "description": null
+  },
+  "LargeCeilingLamp": {
+    "localized_name": "<mapObjectName id=|LargeCeilingLamp|/>",
+    "description": "Крепится к потолку, имеет большой радиус освещения."
+  },
+  "LargeLamp": {
+    "localized_name": "<mapObjectName id=|LargeLamp|/>",
+    "description": "Имеет больший радиус освещения благодаря увеличенному размеру."
+  },
+  "LaserBullet": {
+    "localized_name": "<itemName id=|LaserBullet|/>",
+    "description": null
+  },
+  "LaserGatlingBullet": {
+    "localized_name": "<itemName id=|LaserGatlingBullet|/>",
+    "description": null
+  },
+  "LaserGatlingGun": {
+    "localized_name": "<itemName id=|LaserGatlingGun|/>",
+    "description": null
+  },
+  "LauncherBullet": {
+    "localized_name": "<itemName id=|ExplosiveBullet|/>",
+    "description": "Снаряд для оружия (<itemName id=|Launcher_Default|/> и др.). Для изготовления требуется ｢<mapObjectName id=|WeaponFactory_Dirty_03|/>｣."
+  },
+  "Launcher_Meteor": {
+    "localized_name": "<itemName id=|Launcher_Meteor|/>",
+    "description": "Невероятное оружие, сделанное из обработанного метеорита. Снаряды взрываются при попадании, подобно метеоритам. Для изготовления требуется [<mapObjectName id=|WeaponFactory_Dirty_02|/>]."
+  },
+  "MakeshiftAssaultRifle": {
+    "localized_name": "<itemName id=|MakeshiftAssaultRifle|/>",
+    "description": null
+  },
+  "MakeshiftHandgun": {
+    "localized_name": "<itemName id=|MakeshiftHandgun|/>",
+    "description": "Самодельный однозарядный пистолет, собранный из подручного хлама. Подходит для боя на относительно близкой дистанции, но выпускает только по одному патрону. Место изготовления: ｢<mapObjectName id=|WeaponFactory_Dirty_01|/>｣."
+  },
+  "MakeshiftShotgun": {
+    "localized_name": "<itemName id=|MakeshiftShotgun|/>",
+    "description": null
+  },
+  "MakeshiftSubmachineGun": {
+    "localized_name": "<itemName id=|MakeshiftSubmachineGun|/>",
+    "description": null
+  },
+  "ManualElectricGenerator": {
+    "localized_name": "<mapObjectName id=|ManualElectricGenerator|/>",
+    "description": null
+  },
+  "MeatCutterKnife": {
+    "localized_name": "<itemName id=|MeatCutterKnife|/>",
+    "description": "Нож для разделки призванного Пала. Во время использования команда |Погладить| меняется на |Разделать|. Разделка Палов необратима."
+  },
+  "MedicalPalBed_04": {
+    "localized_name": "<mapObjectName id=|MedicalPalBed_04|/>",
+    "description": null
+  },
+  "MedicalPalBed_05": {
+    "localized_name": "<mapObjectName id=|MedicalPalBed_05|/>",
+    "description": null
+  },
+  "MedicineFacility_03": {
+    "localized_name": "<mapObjectName id=|MedicineFacility_03|/>",
+    "description": null
+  },
+  "MetalDetector": {
+    "localized_name": "<itemName id=|MetalDetector|/>",
+    "description": null
+  },
+  "Metal_Gate": {
+    "localized_name": "<mapObjectName id=|Metal_Gate|/>",
+    "description": "Металлические ворота, через которые могут пройти даже крупные Палы."
+  },
+  "Metal_houseset": {
+    "localized_name": "Набор для строительство: металл",
+    "description": "Набор для строительства базы из металла. Все необходимое для строительства дома: металлический фундамент, стены, крыша, лестница."
+  },
+  "MiningTool": {
+    "localized_name": "<mapObjectName id=|MiningTool|/>",
+    "description": null
+  },
+  "MissileBullet": {
+    "localized_name": "<itemName id=|MissileBullet|/>",
+    "description": null
+  },
+  "MonsterFarm": {
+    "localized_name": "<mapObjectName id=|MonsterFarm|/>",
+    "description": "Пастбище для Палов-овец и Палов-куриц. Прикрепите к пастбищу Палов с соответствующими умениями, и они будут автоматически производить предметы."
+  },
+  "MultiElectricHatchingPalEgg": {
+    "localized_name": "<mapObjectName id=|MultiElectricHatchingPalEgg|/>",
+    "description": null
+  },
+  "Musket": {
+    "localized_name": "<itemName id=|Musket|/>",
+    "description": "Простое старомодное ружье. Стреляет мощно, но перезарядка требует времени. Для изготовления требуется ｢<mapObjectName id=|WeaponFactory_Dirty_01|/>｣."
+  },
+  "OilPump": {
+    "localized_name": "<mapObjectName id=|OilPump|/>",
+    "description": null
+  },
+  "OlympicCauldron": {
+    "localized_name": "<mapObjectName id=|OlympicCauldron|/>",
+    "description": null
+  },
+  "PALBOX": {
+    "localized_name": "<mapObjectName id=|PalBoxV2|/>",
+    "description": "Сооружение для содержания пойманных Палов. Находящиеся внутри Палы постепенно восстанавливают здоровье. Область вокруг этой постройки становится базой."
+  },
+  "PalBooth": {
+    "localized_name": "<mapObjectName id=|PalBooth|/>",
+    "description": null
+  },
+  "PalFoodBox": {
+    "localized_name": "<mapObjectName id=|PalFoodBox|/>",
+    "description": "Наполните едой, чтобы Палы на базе могли принимать здесь пищу."
+  },
+  "PalMedicineBox": {
+    "localized_name": "<mapObjectName id=|PalMedicineBox|/>",
+    "description": null
+  },
+  "PalRevive": {
+    "localized_name": "<itemName id=|PalRevive|/>",
+    "description": null
+  },
+  "PalSphere_Exotic": {
+    "localized_name": "<itemName id=|PalSphere_Exotic|/>",
+    "description": null
+  },
+  "Plastic": {
+    "localized_name": "<itemName id=|Plastic|/>",
+    "description": null
+  },
+  "Polymer": {
+    "localized_name": "<itemName id=|Polymer|/>",
+    "description": null
+  },
+  "Potion_Extreme": {
+    "localized_name": "<itemName id=|Potion_Extreme|/>",
+    "description": null
+  },
+  "Product_Axe_Grade_01": {
+    "localized_name": "<itemName id=|Axe_Tier_00|/>",
+    "description": "Топор для рубки деревьев. Не слишком острый, поскольку сделан из камня."
+  },
+  "Product_Axe_Grade_02": {
+    "localized_name": "<itemName id=|Axe_Tier_01|/>",
+    "description": "Топор для рубки деревьев. Более прочный и острый, поскольку сделан из металла. Для изготовления требуется ｢<mapObjectName id=|Factory_Hard_01|/>｣."
+  },
+  "Product_Axe_Grade_03": {
+    "localized_name": "<itemName id=|Axe_Tier_02|/>",
+    "description": "Топор для рубки деревьев. Еще более прочный и острый. Для изготовления требуется ｢<mapObjectName id=|Factory_Hard_02|/>｣."
+  },
+  "Product_CoalPit": {
+    "localized_name": "<mapObjectName id=|CoalPit|/>",
+    "description": null
+  },
+  "Product_Cooking_Grade_01": {
+    "localized_name": "<mapObjectName id=|CampFire|/>",
+    "description": "Позволяет готовить простую пищу и дает немного тепла и света."
+  },
+  "Product_Cooking_Grade_02": {
+    "localized_name": "<mapObjectName id=|CookingStove|/>",
+    "description": "Расширяет список доступных для приготовления блюд и делает готовку более эффективной."
+  },
+  "Product_Cooking_Grade_03": {
+    "localized_name": "<mapObjectName id=|ElectricKitchen|/>",
+    "description": "Потребляет электроэнергию, но позволяет готовить более сложные и питательные блюда. Для работы требуются Палы с умением [COMMON_WORK_SUITABILITY_EmitFlame]."
+  },
+  "Product_CopperPit": {
+    "localized_name": "<mapObjectName id=|CopperPit|/>",
+    "description": null
+  },
+  "Product_CopperPit_2": {
+    "localized_name": "<mapObjectName id=|CopperPit_2|/>",
+    "description": null
+  },
+  "Product_Factory_Hard_Grade_01": {
+    "localized_name": "<mapObjectName id=|Factory_Hard_01|/>",
+    "description": "По скорости производства превосходит <mapObjectName id=|WorkBench|/>. Для работы требуются Палы с умением [COMMON_WORK_SUITABILITY_Handcraft]."
+  },
+  "Product_Factory_Hard_Grade_02": {
+    "localized_name": "<mapObjectName id=|Factory_Hard_02|/>",
+    "description": "Потребляет электроэнергию, но позволяет быстрее изготавливать различные предметы. Для работы требуются Палы с умением [COMMON_WORK_SUITABILITY_Handcraft]."
+  },
+  "Product_Factory_Hard_Grade_03": {
+    "localized_name": "<mapObjectName id=|Factory_Hard_03|/>",
+    "description": "Потребляет электроэнергию, но позволяет еще быстрее изготавливать различные предметы. Для работы требуются Палы с умением [COMMON_WORK_SUITABILITY_Handcraft]."
+  },
+  "Product_Farm_Berries": {
+    "localized_name": "<mapObjectName id=|FarmBlockV2_Berries|/>",
+    "description": "Плантация для выращивания ягод. Для работы требуются Палы с умениями [COMMON_WORK_TYPE_Seeding], [COMMON_WORK_TYPE_Watering], [COMMON_WORK_TYPE_CollectResourcePickable]."
+  },
+  "Product_Farm_Carrot": {
+    "localized_name": "<mapObjectName id=|FarmBlockV2_Carrot|/>",
+    "description": null
+  },
+  "Product_Farm_Lettuce": {
+    "localized_name": "<mapObjectName id=|FarmBlockV2_Lettuce|/>",
+    "description": "Плантация для выращивания латука. Для работы требуются Палы с умениями [COMMON_WORK_TYPE_Seeding], [COMMON_WORK_TYPE_Watering], [COMMON_WORK_TYPE_CollectResourcePickable]."
+  },
+  "Product_Farm_Onion": {
+    "localized_name": "<mapObjectName id=|FarmBlockV2_Onion|/>",
+    "description": null
+  },
+  "Product_Farm_Potato": {
+    "localized_name": "<mapObjectName id=|FarmBlockV2_Potato|/>",
+    "description": null
+  },
+  "Product_Farm_tomato": {
+    "localized_name": "<mapObjectName id=|FarmBlockV2_tomato|/>",
+    "description": "Плантация для выращивания помидоров. Для работы требуются Палы с умениями [COMMON_WORK_TYPE_Seeding], [COMMON_WORK_TYPE_Watering], [COMMON_WORK_TYPE_CollectResourcePickable]."
+  },
+  "Product_Farm_wheat": {
+    "localized_name": "<mapObjectName id=|FarmBlockV2_wheet|/>",
+    "description": "Без этого ингредиента ｢<itemName id=|Pan|/>｣ не испечь. Для работы требуются Палы с умениями [COMMON_WORK_TYPE_Seeding], [COMMON_WORK_TYPE_Watering], [COMMON_WORK_TYPE_CollectResourcePickable]."
+  },
+  "Product_Ingot_Grade_01_Copper": {
+    "localized_name": "<mapObjectName id=|BlastFurnace|/>",
+    "description": "Открывает новый объект для строительства: [<mapObjectName id=|BlastFurnace|/>]. Дает возможность создавать слитки. Сырье: [<itemName id=|CopperOre|/>]"
+  },
+  "Product_Ingot_Grade_02_Iron": {
+    "localized_name": "<mapObjectName id=|BlastFurnace2|/>",
+    "description": "Дает возможность создавать [<itemName id=|IronIngot|/>]."
+  },
+  "Product_Ingot_Grade_03_Steal": {
+    "localized_name": "<mapObjectName id=|BlastFurnace3|/>",
+    "description": "Дает возможность создавать [<itemName id=|StealIngot|/>]."
+  },
+  "Product_Medicine_Grade_01": {
+    "localized_name": "<mapObjectName id=|MedicineFacility_01|/>",
+    "description": "Позволяет создавать простые снадобья. Для работы требуются Палы с умением [COMMON_WORK_SUITABILITY_ProductMedicine]."
+  },
+  "Product_Medicine_Grade_02": {
+    "localized_name": "<mapObjectName id=|MedicineFacility_02|/>",
+    "description": "Потребляет электроэнергию, но позволяет создавать более сложные снадобья. Для работы требуются Палы с умением [COMMON_WORK_SUITABILITY_ProductMedicine]."
+  },
+  "Product_Pickaxe_Grade_01": {
+    "localized_name": "<itemName id=|Pickaxe_Tier_00|/>",
+    "description": "Кирка для добычи полезных ископаемых. Не слишком эффективна, поскольку сделана из камня."
+  },
+  "Product_Pickaxe_Grade_02": {
+    "localized_name": "<itemName id=|Pickaxe_Tier_01|/>",
+    "description": "Кирка для добычи полезных ископаемых. Более прочная и эффективная, поскольку сделана из металла. Для изготовления требуется ｢<mapObjectName id=|Factory_Hard_01|/>｣."
+  },
+  "Product_Pickaxe_Grade_03": {
+    "localized_name": "<itemName id=|Pickaxe_Tier_02|/>",
+    "description": "Кирка для добычи полезных ископаемых. Еще более прочная и эффективная. Для изготовления требуется ｢<mapObjectName id=|Factory_Hard_02|/>｣."
+  },
+  "Product_QuartzPit": {
+    "localized_name": "<mapObjectName id=|QuartzPit|/>",
+    "description": null
+  },
+  "Product_StationDeforest": {
+    "localized_name": "<mapObjectName id=|StationDeforest2|/>",
+    "description": "Позволяет заготавливать на базе древесину. Для работы требуются Палы с умением [COMMON_WORK_SUITABILITY_Deforest]."
+  },
+  "Product_StonePit": {
+    "localized_name": "<mapObjectName id=|StonePit|/>",
+    "description": "Позволяет добывать на базе камень. Для работы требуются Палы с умением [COMMON_WORK_SUITABILITY_Mining]."
+  },
+  "Product_SulfurPit": {
+    "localized_name": "<mapObjectName id=|SulfurPit|/>",
+    "description": null
+  },
+  "Product_WeaponFactory_Dirty_Grade_01": {
+    "localized_name": "<mapObjectName id=|WeaponFactory_Dirty_01|/>",
+    "description": "Сооружение для изготовления простого механического оружия. Для работы требуются Палы с подходящим навыком (COMMON_WORK_SUITABILITY_Handcraft)."
+  },
+  "Product_WeaponFactory_Dirty_Grade_02": {
+    "localized_name": "<mapObjectName id=|WeaponFactory_Dirty_02|/>",
+    "description": "Потребляет электроэнергию, но позволяет быстрее производить оружие и патроны. Для работы требуются Палы с умением [COMMON_WORK_SUITABILITY_Handcraft]."
+  },
+  "Product_WeaponFactory_Dirty_Grade_03": {
+    "localized_name": "<mapObjectName id=|WeaponFactory_Dirty_03|/>",
+    "description": "Потребляет электроэнергию, но позволяет еще быстрее производить оружие и патроны. Для работы требуются Палы с умением [COMMON_WORK_SUITABILITY_Handcraft]."
+  },
+  "Product_WorkBench_SkillUnlock": {
+    "localized_name": "<mapObjectName id=|WorkBench_SkillUnlock|/>",
+    "description": "Производит снаряжение, позволяющее использовать навыки спутника Палов."
+  },
+  "Refrigerator": {
+    "localized_name": "<mapObjectName id=|Refrigerator|/>",
+    "description": null
+  },
+  "ReinforcedArrow": {
+    "localized_name": "<itemName id=|ReinforcedArrow|/>",
+    "description": null
+  },
+  "RepairBench": {
+    "localized_name": "<mapObjectName id=|RepairBench|/>",
+    "description": "Позволяет ремонтировать поврежденное оружие и снаряжение."
+  },
+  "RepairKit": {
+    "localized_name": "<itemName id=|RepairKit|/>",
+    "description": null
+  },
+  "RifleBullet": {
+    "localized_name": "<itemName id=|RifleBullet|/>",
+    "description": "Снаряд для винтовок и другого оружия. Для изготовления требуется ｢<mapObjectName id=|WeaponFactory_Dirty_01|/>｣."
+  },
+  "RoughBullet": {
+    "localized_name": "<itemName id=|RoughBullet|/>",
+    "description": "Снаряд для оружия: [<itemName id=|Musket|/>], [<itemName id=|MakeshiftHandgun|/>]. Для изготовления требуется [<mapObjectName id=|WeaponFactory_Dirty_01|/>]."
+  },
+  "SFArmor": {
+    "localized_name": "<itemName id=|SFArmor|/>",
+    "description": null
+  },
+  "SFArmorCold": {
+    "localized_name": "<itemName id=|SFArmorCold|/>",
+    "description": null
+  },
+  "SFArmorHeat": {
+    "localized_name": "<itemName id=|SFArmorHeat|/>",
+    "description": null
+  },
+  "SFArmorWeight": {
+    "localized_name": "<itemName id=|SFArmorWeight|/>",
+    "description": null
+  },
+  "SFArrow": {
+    "localized_name": "<itemName id=|SFArrow|/>",
+    "description": null
+  },
+  "SFBow": {
+    "localized_name": "<itemName id=|SFBow|/>",
+    "description": null
+  },
+  "SFHelmet": {
+    "localized_name": "<itemName id=|SFHelmet|/>",
+    "description": null
+  },
+  "SanityDecrease1": {
+    "localized_name": "<mapObjectName id=|SanityDecrease1|/>",
+    "description": null
+  },
+  "Shield_01": {
+    "localized_name": "<itemName id=|Shield_01|/>",
+    "description": "Удивительный щит, продукт палзиумных технологий. Автоматически восстанавливается, если какое-то время не получает урон."
+  },
+  "Shield_02": {
+    "localized_name": "<itemName id=|Shield_02|/>",
+    "description": "Удивительный щит, продукт палзиумных технологий. Защита увеличена благодаря доработке опытного образца. Место изготовления: ｢<mapObjectName id=|Factory_Hard_01|/>｣."
+  },
+  "Shield_03": {
+    "localized_name": "<itemName id=|Shield_03|/>",
+    "description": "Удивительный щит, продукт палзиумных технологий. Усовершенствованная модель, обладающая улучшенными характеристиками. Место изготовления: ｢<mapObjectName id=|Factory_Hard_02|/>｣."
+  },
+  "Shield_04": {
+    "localized_name": "<itemName id=|Shield_04|/>",
+    "description": "Удивительный щит, продукт палзиумных технологий. Образец качества, полученный в результате многочисленных испытаний. Место изготовления: ｢<mapObjectName id=|Factory_Hard_03|/>｣."
+  },
+  "Shield_05": {
+    "localized_name": "<itemName id=|Shield_Ultra|/>",
+    "description": "Удивительный щит, продукт палзиумных технологий. Многочисленные испытания позволили добиться непревзойденного качества. Место изготовления: ｢<mapObjectName id=|Factory_Hard_03|/>｣."
+  },
+  "Shield_SF": {
+    "localized_name": "<itemName id=|Shield_SF|/>",
+    "description": null
+  },
+  "ShotGunBullet": {
+    "localized_name": "<itemName id=|ShotgunBullet|/>",
+    "description": "Снаряд для ружей и другого оружия. Для изготовления требуется ｢<mapObjectName id=|WeaponFactory_Dirty_01|/>｣."
+  },
+  "Signboard": {
+    "localized_name": "<mapObjectName id=|Signboard|/>",
+    "description": "Здесь можно оставить надпись."
+  },
+  "Silo": {
+    "localized_name": "<mapObjectName id=|Silo|/>",
+    "description": null
+  },
+  "SkillUnlock_Alpaca": {
+    "localized_name": "<itemName id=|SkillUnlock_Alpaca|/>",
+    "description": null
+  },
+  "SkillUnlock_AmaterasuWolf": {
+    "localized_name": "<itemName id=|SkillUnlock_AmaterasuWolf|/>",
+    "description": null
+  },
+  "SkillUnlock_AmaterasuWolf_Dark": {
+    "localized_name": "<itemName id=|SkillUnlock_AmaterasuWolf_Dark|/>",
+    "description": null
+  },
+  "SkillUnlock_BadCatgirl": {
+    "localized_name": "<itemName id=|SkillUnlock_BadCatgirl|/>",
+    "description": null
+  },
+  "SkillUnlock_BirdDragon": {
+    "localized_name": "<itemName id=|SkillUnlock_BirdDragon|/>",
+    "description": null
+  },
+  "SkillUnlock_BirdDragon_Ice": {
+    "localized_name": "<itemName id=|SkillUnlock_BirdDragon_Ice|/>",
+    "description": null
+  },
+  "SkillUnlock_BlackCentaur": {
+    "localized_name": "<itemName id=|SkillUnlock_BlackCentaur|/>",
+    "description": null
+  },
+  "SkillUnlock_BlackGriffon": {
+    "localized_name": "<itemName id=|SkillUnlock_BlackGriffon|/>",
+    "description": null
+  },
+  "SkillUnlock_BlackMetalDragon": {
+    "localized_name": "<itemName id=|SkillUnlock_BlackMetalDragon|/>",
+    "description": null
+  },
+  "SkillUnlock_BlackPuppy": {
+    "localized_name": "<itemName id=|SkillUnlock_BlackPuppy|/>",
+    "description": null
+  },
+  "SkillUnlock_BlueDragon": {
+    "localized_name": "<itemName id=|SkillUnlock_BlueDragon|/>",
+    "description": null
+  },
+  "SkillUnlock_BlueThunderHorse": {
+    "localized_name": "<itemName id=|SkillUnlock_BlueThunderHorse|/>",
+    "description": null
+  },
+  "SkillUnlock_Boar": {
+    "localized_name": "<itemName id=|SkillUnlock_Boar|/>",
+    "description": null
+  },
+  "SkillUnlock_Carbunclo": {
+    "localized_name": "<itemName id=|SkillUnlock_Carbunclo|/>",
+    "description": null
+  },
+  "SkillUnlock_ColorfulBird": {
+    "localized_name": "<itemName id=|SkillUnlock_ColorfulBird|/>",
+    "description": null
+  },
+  "SkillUnlock_DarkMechaDragon": {
+    "localized_name": "<itemName id=|SkillUnlock_DarkMechaDragon|/>",
+    "description": null
+  },
+  "SkillUnlock_Deer": {
+    "localized_name": "<itemName id=|SkillUnlock_Deer|/>",
+    "description": null
+  },
+  "SkillUnlock_Deer_Ground": {
+    "localized_name": "<itemName id=|SkillUnlock_Deer_Ground|/>",
+    "description": null
+  },
+  "SkillUnlock_DreamDemon": {
+    "localized_name": "<itemName id=|SkillUnlock_DreamDemon|/>",
+    "description": null
+  },
+  "SkillUnlock_DrillGame": {
+    "localized_name": "<itemName id=|SkillUnlock_DrillGame|/>",
+    "description": null
+  },
+  "SkillUnlock_Eagle": {
+    "localized_name": "<itemName id=|SkillUnlock_Eagle|/>",
+    "description": null
+  },
+  "SkillUnlock_ElecPanda": {
+    "localized_name": "<itemName id=|SkillUnlock_ElecPanda|/>",
+    "description": null
+  },
+  "SkillUnlock_FairyDragon": {
+    "localized_name": "<itemName id=|SkillUnlock_FairyDragon|/>",
+    "description": null
+  },
+  "SkillUnlock_FairyDragon_Water": {
+    "localized_name": "<itemName id=|SkillUnlock_FairyDragon_Water|/>",
+    "description": null
+  },
+  "SkillUnlock_FeatherOstrich": {
+    "localized_name": "<itemName id=|SkillUnlock_FeatherOstrich|/>",
+    "description": null
+  },
+  "SkillUnlock_FengyunDeeper": {
+    "localized_name": "<itemName id=|SkillUnlock_FengyunDeeper|/>",
+    "description": null
+  },
+  "SkillUnlock_FengyunDeeper_Electric": {
+    "localized_name": "<itemName id=|SkillUnlock_FengyunDeeper_Electric|/>",
+    "description": null
+  },
+  "SkillUnlock_FireKirin": {
+    "localized_name": "<itemName id=|SkillUnlock_FireKirin|/>",
+    "description": null
+  },
+  "SkillUnlock_FireKirin_Dark": {
+    "localized_name": "<itemName id=|SkillUnlock_FireKirin_Dark|/>",
+    "description": null
+  },
+  "SkillUnlock_FlameBuffalo": {
+    "localized_name": "<itemName id=|SkillUnlock_FlameBuffalo|/>",
+    "description": null
+  },
+  "SkillUnlock_FlowerDinosaur": {
+    "localized_name": "<itemName id=|SkillUnlock_FlowerDinosaur|/>",
+    "description": null
+  },
+  "SkillUnlock_FlowerDinosaur_Electric": {
+    "localized_name": "<itemName id=|SkillUnlock_FlowerDinosaur_Electric|/>",
+    "description": null
+  },
+  "SkillUnlock_FlowerRabbit": {
+    "localized_name": "<itemName id=|SkillUnlock_FlowerRabbit|/>",
+    "description": null
+  },
+  "SkillUnlock_FlyingManta": {
+    "localized_name": "<itemName id=|SkillUnlock_FlyingManta|/>",
+    "description": null
+  },
+  "SkillUnlock_Garm": {
+    "localized_name": "<itemName id=|SkillUnlock_Garm|/>",
+    "description": null
+  },
+  "SkillUnlock_GhostBeast": {
+    "localized_name": "<itemName id=|SkillUnlock_GhostBeast|/>",
+    "description": null
+  },
+  "SkillUnlock_GoldenHorse": {
+    "localized_name": "<itemName id=|SkillUnlock_GoldenHorse|/>",
+    "description": null
+  },
+  "SkillUnlock_GrassMammoth": {
+    "localized_name": "<itemName id=|SkillUnlock_GrassMammoth|/>",
+    "description": null
+  },
+  "SkillUnlock_GrassMammoth_Ice": {
+    "localized_name": "<itemName id=|SkillUnlock_GrassMammoth_Ice|/>",
+    "description": null
+  },
+  "SkillUnlock_GrassPanda": {
+    "localized_name": "<itemName id=|SkillUnlock_GrassPanda|/>",
+    "description": null
+  },
+  "SkillUnlock_GrassPanda_Electric": {
+    "localized_name": "<itemName id=|SkillUnlock_GrassPanda_Electric|/>",
+    "description": null
+  },
+  "SkillUnlock_GuardianDog": {
+    "localized_name": "<itemName id=|SkillUnlock_GuardianDog|/>",
+    "description": null
+  },
+  "SkillUnlock_HadesBird": {
+    "localized_name": "<itemName id=|SkillUnlock_HadesBird|/>",
+    "description": null
+  },
+  "SkillUnlock_HadesBird_Electric": {
+    "localized_name": "<itemName id=|SkillUnlock_HadesBird_Electric|/>",
+    "description": null
+  },
+  "SkillUnlock_HawkBird": {
+    "localized_name": "<itemName id=|SkillUnlock_HawkBird|/>",
+    "description": null
+  },
+  "SkillUnlock_Hedgehog": {
+    "localized_name": "<itemName id=|SkillUnlock_Hedgehog|/>",
+    "description": null
+  },
+  "SkillUnlock_Hedgehog_Ice": {
+    "localized_name": "<itemName id=|SkillUnlock_Hedgehog_Ice|/>",
+    "description": null
+  },
+  "SkillUnlock_Horus": {
+    "localized_name": "<itemName id=|SkillUnlock_Horus|/>",
+    "description": null
+  },
+  "SkillUnlock_Horus_Water": {
+    "localized_name": "<itemName id=|SkillUnlock_Horus_Water|/>",
+    "description": null
+  },
+  "SkillUnlock_IceDeer": {
+    "localized_name": "<itemName id=|SkillUnlock_IceDeer|/>",
+    "description": null
+  },
+  "SkillUnlock_IceHorse": {
+    "localized_name": "<itemName id=|SkillUnlock_IceHorse|/>",
+    "description": null
+  },
+  "SkillUnlock_IceHorse_Dark": {
+    "localized_name": "<itemName id=|SkillUnlock_IceHorse_Dark|/>",
+    "description": null
+  },
+  "SkillUnlock_JetDragon": {
+    "localized_name": "<itemName id=|SkillUnlock_JetDragon|/>",
+    "description": null
+  },
+  "SkillUnlock_KingAlpaca": {
+    "localized_name": "<itemName id=|SkillUnlock_KingAlpaca|/>",
+    "description": null
+  },
+  "SkillUnlock_KingAlpaca_Ice": {
+    "localized_name": "<itemName id=|SkillUnlock_KingAlpaca_Ice|/>",
+    "description": null
+  },
+  "SkillUnlock_KingBahamut": {
+    "localized_name": "<itemName id=|SkillUnlock_KingBahamut|/>",
+    "description": null
+  },
+  "SkillUnlock_KingBahamut_Dragon": {
+    "localized_name": "<itemName id=|SkillUnlock_KingBahamut_Dragon|/>",
+    "description": null
+  },
+  "SkillUnlock_Kirin": {
+    "localized_name": "<itemName id=|SkillUnlock_Kirin|/>",
+    "description": null
+  },
+  "SkillUnlock_Kitsunebi": {
+    "localized_name": "<itemName id=|SkillUnlock_Kitsunebi|/>",
+    "description": null
+  },
+  "SkillUnlock_Kitsunebi_Ice": {
+    "localized_name": "<itemName id=|SkillUnlock_Kitsunebi_Ice|/>",
+    "description": null
+  },
+  "SkillUnlock_LazyDragon": {
+    "localized_name": "<itemName id=|SkillUnlock_LazyDragon|/>",
+    "description": null
+  },
+  "SkillUnlock_LazyDragon_Electric": {
+    "localized_name": "<itemName id=|SkillUnlock_LazyDragon_Electric|/>",
+    "description": null
+  },
+  "SkillUnlock_Manticore": {
+    "localized_name": "<itemName id=|SkillUnlock_Manticore|/>",
+    "description": null
+  },
+  "SkillUnlock_Manticore_Dark": {
+    "localized_name": "<itemName id=|SkillUnlock_Manticore_Dark|/>",
+    "description": null
+  },
+  "SkillUnlock_Monkey": {
+    "localized_name": "<itemName id=|SkillUnlock_Monkey|/>",
+    "description": null
+  },
+  "SkillUnlock_MoonQueen": {
+    "localized_name": "<itemName id=|SkillUnlock_MoonQueen|/>",
+    "description": null
+  },
+  "SkillUnlock_MopKing": {
+    "localized_name": "<itemName id=|SkillUnlock_MopKing|/>",
+    "description": null
+  },
+  "SkillUnlock_MushroomDragon": {
+    "localized_name": "<itemName id=|SkillUnlock_MushroomDragon|/>",
+    "description": null
+  },
+  "SkillUnlock_MushroomDragon_Dark": {
+    "localized_name": "<itemName id=|SkillUnlock_MushroomDragon_Dark|/>",
+    "description": null
+  },
+  "SkillUnlock_NaughtyCat": {
+    "localized_name": "<itemName id=|SkillUnlock_NaughtyCat|/>",
+    "description": null
+  },
+  "SkillUnlock_NegativeOctopus": {
+    "localized_name": "<itemName id=|SkillUnlock_NegativeOctopus|/>",
+    "description": null
+  },
+  "SkillUnlock_NightBlueHorse": {
+    "localized_name": "<itemName id=|SkillUnlock_NightBlueHorse|/>",
+    "description": null
+  },
+  "SkillUnlock_Penguin": {
+    "localized_name": "<itemName id=|SkillUnlock_Penguin|/>",
+    "description": null
+  },
+  "SkillUnlock_PurpleSpider": {
+    "localized_name": "<itemName id=|SkillUnlock_PurpleSpider|/>",
+    "description": null
+  },
+  "SkillUnlock_RaijinDaughter": {
+    "localized_name": "<itemName id=|SkillUnlock_RaijinDaughter|/>",
+    "description": null
+  },
+  "SkillUnlock_RaijinDaughter_Water": {
+    "localized_name": "<itemName id=|SkillUnlock_RaijinDaughter_Water|/>",
+    "description": null
+  },
+  "SkillUnlock_RedArmorBird": {
+    "localized_name": "<itemName id=|SkillUnlock_RedArmorBird|/>",
+    "description": null
+  },
+  "SkillUnlock_SaintCentaur": {
+    "localized_name": "<itemName id=|SkillUnlock_SaintCentaur|/>",
+    "description": null
+  },
+  "SkillUnlock_SakuraSaurus": {
+    "localized_name": "<itemName id=|SkillUnlock_SakuraSaurus|/>",
+    "description": null
+  },
+  "SkillUnlock_SakuraSaurus_Water": {
+    "localized_name": "<itemName id=|SkillUnlock_SakuraSaurus_Water|/>",
+    "description": null
+  },
+  "SkillUnlock_Serpent": {
+    "localized_name": "<itemName id=|SkillUnlock_Serpent|/>",
+    "description": null
+  },
+  "SkillUnlock_Serpent_Ground": {
+    "localized_name": "<itemName id=|SkillUnlock_Serpent_Ground|/>",
+    "description": null
+  },
+  "SkillUnlock_SkyDragon": {
+    "localized_name": "<itemName id=|SkillUnlock_SkyDragon|/>",
+    "description": null
+  },
+  "SkillUnlock_SkyDragon_Grass": {
+    "localized_name": "<itemName id=|SkillUnlock_SkyDragon_Grass|/>",
+    "description": null
+  },
+  "SkillUnlock_SnowTigerBeastman": {
+    "localized_name": "<itemName id=|SkillUnlock_SnowTigerBeastman|/>",
+    "description": null
+  },
+  "SkillUnlock_Suzaku": {
+    "localized_name": "<itemName id=|SkillUnlock_Suzaku|/>",
+    "description": null
+  },
+  "SkillUnlock_Suzaku_Water": {
+    "localized_name": "<itemName id=|SkillUnlock_Suzaku_Water|/>",
+    "description": null
+  },
+  "SkillUnlock_ThunderBird": {
+    "localized_name": "<itemName id=|SkillUnlock_ThunderBird|/>",
+    "description": null
+  },
+  "SkillUnlock_ThunderDog": {
+    "localized_name": "<itemName id=|SkillUnlock_ThunderDog|/>",
+    "description": null
+  },
+  "SkillUnlock_Umihebi": {
+    "localized_name": "<itemName id=|SkillUnlock_Umihebi|/>",
+    "description": null
+  },
+  "SkillUnlock_Umihebi_Fire": {
+    "localized_name": "<itemName id=|SkillUnlock_Umihebi_Fire|/>",
+    "description": null
+  },
+  "SkillUnlock_VolcanicMonster": {
+    "localized_name": "<itemName id=|SkillUnlock_VolcanicMonster|/>",
+    "description": null
+  },
+  "SkillUnlock_VolcanicMonster_Ice": {
+    "localized_name": "<itemName id=|SkillUnlock_VolcanicMonster_Ice|/>",
+    "description": null
+  },
+  "SkillUnlock_WeaselDragon": {
+    "localized_name": "<itemName id=|SkillUnlock_WeaselDragon|/>",
+    "description": null
+  },
+  "SkillUnlock_WeaselDragon_Fire": {
+    "localized_name": "<itemName id=|SkillUnlock_WeaselDragon_Fire|/>",
+    "description": null
+  },
+  "SkillUnlock_WhiteAlienDragon": {
+    "localized_name": "<itemName id=|SkillUnlock_WhiteAlienDragon|/>",
+    "description": null
+  },
+  "SkillUnlock_WhiteDeer": {
+    "localized_name": "<itemName id=|SkillUnlock_WhiteDeer|/>",
+    "description": null
+  },
+  "SkillUnlock_WhiteShieldDragon": {
+    "localized_name": "<itemName id=|SkillUnlock_WhiteShieldDragon|/>",
+    "description": null
+  },
+  "SkillUnlock_WindChimes": {
+    "localized_name": "<itemName id=|SkillUnlock_WindChimes|/>",
+    "description": null
+  },
+  "SkillUnlock_WindChimes_Ice": {
+    "localized_name": "<itemName id=|SkillUnlock_WindChimes_Ice|/>",
+    "description": null
+  },
+  "SkillUnlock_Yeti": {
+    "localized_name": "<itemName id=|SkillUnlock_Yeti|/>",
+    "description": null
+  },
+  "SkillUnlock_Yeti_Grass": {
+    "localized_name": "<itemName id=|SkillUnlock_Yeti_Grass|/>",
+    "description": null
+  },
+  "SkinChange": {
+    "localized_name": "<mapObjectName id=|SkinChange|/>",
+    "description": null
+  },
+  "Snowman": {
+    "localized_name": "<mapObjectName id=|Snowman|/>",
+    "description": null
+  },
+  "Spa": {
+    "localized_name": "<mapObjectName id=|Spa|/>",
+    "description": "Находясь в ｢<mapObjectName id=|Spa|/>｣, Палы восстанавливают рассудок."
+  },
+  "Spa2": {
+    "localized_name": "<mapObjectName id=|Spa2|/>",
+    "description": "Находясь здесь, Палы еще эффективнее восстанавливают рассудок."
+  },
+  "Spear": {
+    "localized_name": "<itemName id=|Spear|/>",
+    "description": null
+  },
+  "Spear_2": {
+    "localized_name": "<itemName id=|Spear_2|/>",
+    "description": "Копье для ближнего боя. Сделано из металла, обладает повышенной силой атаки. Для изготовления требуется ｢<mapObjectName id=|Factory_Hard_01|/>｣."
+  },
+  "Spear_3": {
+    "localized_name": "<itemName id=|Spear_3|/>",
+    "description": "Копье для ближнего боя. Сделано из качественного металла, обладает повышенной силой атаки. Для изготовления требуется ｢<mapObjectName id=|Factory_Hard_02|/>｣."
+  },
+  "Spear_ForestBoss": {
+    "localized_name": "<itemName id=|Spear_ForestBoss|/>",
+    "description": null
+  },
+  "Special_ElectricHatchingPalEgg": {
+    "localized_name": "<mapObjectName id=|ElectricHatchingPalEgg|/>",
+    "description": null
+  },
+  "Special_HatchingPalEgg": {
+    "localized_name": "<mapObjectName id=|HatchingPalEgg|/>",
+    "description": "Поместите сюда яйцо Пала, чтобы вылупился детеныш."
+  },
+  "Special_PalRankUp": {
+    "localized_name": "<mapObjectName id=|CharacterRankUp|/>",
+    "description": "Извлекает эссенцию из нескольких Палов одного вида и объединяет их, создавая улучшенного Пала более высокого ранга."
+  },
+  "Special_PalSphere_Grade_01": {
+    "localized_name": "<itemName id=|PalSphere|/>",
+    "description": "Метательное приспособление для поимки Палов. Массовая модель, действующая только на Палов низкого уровня."
+  },
+  "Special_PalSphere_Grade_02": {
+    "localized_name": "<itemName id=|PalSphere_Mega|/>",
+    "description": "Метательное приспособление для поимки Палов. Улучшенные характеристики позволяют ловить Палов различных видов. Для изготовления требуется ｢<mapObjectName id=|SphereFactory_Black_01|/>｣."
+  },
+  "Special_PalSphere_Grade_03": {
+    "localized_name": "<itemName id=|PalSphere_Giga|/>",
+    "description": "Метательное приспособление для поимки Палов. Позволяет ловить более сильных Палов. Для изготовления требуется ｢<mapObjectName id=|SphereFactory_Black_01|/>｣."
+  },
+  "Special_PalSphere_Grade_04": {
+    "localized_name": "<itemName id=|PalSphere_Tera|/>",
+    "description": "Метательное приспособление для поимки Палов. Позволяет ловить довольно сильных Палов. Для изготовления требуется ｢<mapObjectName id=|SphereFactory_Black_02|/>｣."
+  },
+  "Special_PalSphere_Grade_05": {
+    "localized_name": "<itemName id=|PalSphere_Master|/>",
+    "description": "Метательное приспособление для поимки Палов. Лишь немногие Палы могут вырваться из его хватки. Для изготовления требуется ｢<mapObjectName id=|SphereFactory_Black_03|/>｣."
+  },
+  "Special_PalSphere_Grade_06": {
+    "localized_name": "<itemName id=|PalSphere_Legend|/>",
+    "description": "Метательное приспособление для поимки Палов. Обладает невероятной эффективностью, лишь единицы могут вырваться из его хватки. Для изготовления требуется ｢<mapObjectName id=|SphereFactory_Black_03|/>｣."
+  },
+  "Special_PalSphere_Grade_07": {
+    "localized_name": "<itemName id=|PalSphere_Ultimate|/>",
+    "description": "Метательное приспособление для поимки Палов. Обладает потрясающей эффективностью и способно поймать различных Палов. Для изготовления требуется ｢<mapObjectName id=|SphereFactory_Black_03|/>｣."
+  },
+  "Special_SphereFactory_Black_Grade_01": {
+    "localized_name": "<mapObjectName id=|SphereFactory_Black_01|/>",
+    "description": "Верстак для изготовления сфер для поимки Палов. Для работы требуются Палы с подходящим навыком (COMMON_WORK_SUITABILITY_Handcraft)."
+  },
+  "Special_SphereFactory_Black_Grade_02": {
+    "localized_name": "<mapObjectName id=|SphereFactory_Black_02|/>",
+    "description": "Позволяет изготавливать сферы быстрее. Для работы требуются Палы с умением [COMMON_WORK_SUITABILITY_Handcraft]."
+  },
+  "Special_SphereFactory_Black_Grade_03": {
+    "localized_name": "<mapObjectName id=|SphereFactory_Black_03|/>",
+    "description": "Позволяет изготавливать сферы еще быстрее. Для работы требуются Палы с умением [COMMON_WORK_SUITABILITY_Handcraft]."
+  },
+  "SphereFactory_Black_04": {
+    "localized_name": "<mapObjectName id=|SphereFactory_Black_04|/>",
+    "description": null
+  },
+  "SphereModule_Curve": {
+    "localized_name": "<itemName id=|SphereModule_Curve|/>",
+    "description": null
+  },
+  "SphereModule_Curve2": {
+    "localized_name": "<itemName id=|SphereModule_Curve2|/>",
+    "description": null
+  },
+  "SphereModule_Heavy": {
+    "localized_name": "<itemName id=|SphereModule_Heavy|/>",
+    "description": null
+  },
+  "SphereModule_Homing": {
+    "localized_name": "<itemName id=|SphereModule_Homing|/>",
+    "description": null
+  },
+  "SphereModule_Sniper": {
+    "localized_name": "<itemName id=|SphereModule_Sniper|/>",
+    "description": null
+  },
+  "SphereModule_Sniper2": {
+    "localized_name": "<itemName id=|SphereModule_Sniper2|/>",
+    "description": null
+  },
+  "StainlessSteel": {
+    "localized_name": "<itemName id=|StainlessSteel|/>",
+    "description": null
+  },
+  "Stone_Gate": {
+    "localized_name": "<mapObjectName id=|Stone_Gate|/>",
+    "description": "Каменные ворота, через которые могут пройти даже крупные Палы."
+  },
+  "Stone_houseset": {
+    "localized_name": "Набор для строительство: камень",
+    "description": "Набор для строительства базы из камня. Все необходимое для строительства дома: каменный фундамент, стены, крыша, лестница."
+  },
+  "Stump": {
+    "localized_name": "<mapObjectName id=|Stump|/>",
+    "description": null
+  },
+  "TableDresser01_Stone": {
+    "localized_name": "<mapObjectName id=|TableDresser01_Stone|/>",
+    "description": null
+  },
+  "ToolBoxV1": {
+    "localized_name": "<mapObjectName id=|ToolBoxV1|/>",
+    "description": null
+  },
+  "Torch": {
+    "localized_name": "<mapObjectName id=|Torch|/>",
+    "description": "Разместите на базе, чтобы разогнать тьму вокруг."
+  },
+  "TransmissionTower": {
+    "localized_name": "<mapObjectName id=|TransmissionTower|/>",
+    "description": null
+  },
+  "Trap_LegHold": {
+    "localized_name": "<mapObjectName id=|Trap_LegHold|/>",
+    "description": "Пригвождает к месту наступившего на нее противника. Действует только на маленьких Палов и людей."
+  },
+  "Trap_LegHold_Big": {
+    "localized_name": "<mapObjectName id=|Trap_LegHold_Big|/>",
+    "description": "Пригвождает к месту наступившего на нее противника. Действует только на больших Палов."
+  },
+  "Trap_MineAttack": {
+    "localized_name": "<mapObjectName id=|Trap_MineAttack|/>",
+    "description": "Автоматически взрывается, когда на нее наступает противник."
+  },
+  "Trap_MineElecShock": {
+    "localized_name": "<mapObjectName id=|Trap_MineElecShock|/>",
+    "description": "Поражает наступившего на нее противника током. Пораженных током Палов становится проще поймать."
+  },
+  "Trap_MineFreeze": {
+    "localized_name": "<mapObjectName id=|Trap_MineFreeze|/>",
+    "description": "Замораживает наступившего на нее противника. Замороженных Палов становится проще поймать."
+  },
+  "Trap_Noose": {
+    "localized_name": "<mapObjectName id=|Trap_Noose|/>",
+    "description": "Позволяет ловить проходящих мимо Палов. Действует только на маленьких Палов и на людей."
+  },
+  "Unlock_Picking_Tier1": {
+    "localized_name": "<itemName id=|Unlock_Picking_Tier1|/>",
+    "description": null
+  },
+  "Unlock_Picking_Tier2": {
+    "localized_name": "<itemName id=|Unlock_Picking_Tier2|/>",
+    "description": null
+  },
+  "Unlock_Picking_Tier3": {
+    "localized_name": "<itemName id=|Unlock_Picking_Tier3|/>",
+    "description": null
+  },
+  "WallSignboard": {
+    "localized_name": "<mapObjectName id=|WallSignBoard|/>",
+    "description": null
+  },
+  "WallTorch": {
+    "localized_name": "<mapObjectName id=|WallTorch|/>",
+    "description": "Можно прикрепить к стене."
+  },
+  "Wood_Gate": {
+    "localized_name": "<mapObjectName id=|Wood_Gate|/>",
+    "description": "Деревянные ворота, через которые могут пройти даже крупные Палы."
+  },
+  "Wooden_houseset": {
+    "localized_name": "Набор для строительства: дерево",
+    "description": "Набор для строительства базы из дерева. Все необходимое для строительства дома: деревянный фундамент, стены, крыша, лестница."
+  },
+  "Wooden_ladder": {
+    "localized_name": "<mapObjectName id=|Wooden_ladder|/>",
+    "description": null
+  },
+  "WorkSpeedIncrease1": {
+    "localized_name": "<mapObjectName id=|WorkSpeedIncrease1|/>",
+    "description": null
+  },
+  "Workbench": {
+    "localized_name": "<mapObjectName id=|WorkBench|/>",
+    "description": "[<mapObjectName id=|WorkBench|/>] для создания простых предметов. Палы с умением [COMMON_WORK_SUITABILITY_Handcraft] могут помочь с выполнением работ."
+  },
+  "YakushimaBlade": {
+    "localized_name": "<itemName id=|YakushimaBlade|/>",
+    "description": null
+  }
+}
