@@ -1,534 +1,534 @@
 {
   "Accessory_AirDash1": {
-    "localized_name": "<itemName id=|Accessory_AirDash1|/>",
+    "localized_name": "空中衝刺靴",
     "description": null
   },
   "Accessory_AirDash2": {
-    "localized_name": "<itemName id=|Accessory_AirDash2|/>",
+    "localized_name": "空中二段衝刺靴",
     "description": null
   },
   "Accessory_JumpCount_Increase1": {
-    "localized_name": "<itemName id=|Accessory_JumpCount_Increase1|/>",
+    "localized_name": "二段跳靴",
     "description": null
   },
   "Accessory_JumpCount_Increase2": {
-    "localized_name": "<itemName id=|Accessory_JumpCount_Increase2|/>",
+    "localized_name": "三段跳靴",
     "description": null
   },
   "Accessory_JumpPower_Increase": {
-    "localized_name": "<itemName id=|Accessory_JumpPower_Increase|/>",
+    "localized_name": "反重力腰帶",
     "description": null
   },
   "Accessory_Nonkilling": {
-    "localized_name": "<itemName id=|Accessory_Nonkilling|/>",
+    "localized_name": "慈悲戒指",
     "description": null
   },
   "Accessory_TalentChecker": {
-    "localized_name": "<itemName id=|Accessory_TalentChecker|/>",
+    "localized_name": "伯樂眼鏡",
     "description": null
   },
   "AdditionalInventory_001": {
-    "localized_name": "<itemName id=|AdditionalInventory_001|/>",
+    "localized_name": "小型擴展背包",
     "description": null
   },
   "AdditionalInventory_002": {
-    "localized_name": "<itemName id=|AdditionalInventory_002|/>",
+    "localized_name": "中等擴展背包",
     "description": null
   },
   "AdditionalInventory_003": {
-    "localized_name": "<itemName id=|AdditionalInventory_003|/>",
+    "localized_name": "大型擴展背包",
     "description": null
   },
   "AdditionalInventory_004": {
-    "localized_name": "<itemName id=|AdditionalInventory_004|/>",
+    "localized_name": "巨大擴展背包",
     "description": null
   },
   "Altar": {
-    "localized_name": "<mapObjectName id=|Altar|/>",
+    "localized_name": "召喚的祭壇",
     "description": null
   },
   "Arrow": {
-    "localized_name": "<itemName id=|Arrow|/>",
-    "description": "弓專用的<itemName id=|Arrow|/>。 可在｢<mapObjectName id=|WorkBench|/>｣製作。"
+    "localized_name": "箭矢",
+    "description": "弓專用的箭矢。 可在｢初階工作臺｣製作。"
   },
   "Arrow_Fire": {
-    "localized_name": "<itemName id=|Arrow_Fire|/>",
-    "description": "｢<itemName id=|Bow_Fire|/>｣與｢<itemName id=|BowGun_Fire|/>｣等用的<itemName id=|Arrow|/>。 可對目標造成COMMON_ELEMENT_NAME_Fire傷害。 可在｢<mapObjectName id=|WorkBench|/>｣製作。"
+    "localized_name": "火箭矢",
+    "description": "｢火之弓｣與｢火箭十字弓｣等用的箭矢。 可對目標造成火屬性傷害。 可在｢初階工作臺｣製作。"
   },
   "Arrow_Poison": {
-    "localized_name": "<itemName id=|Arrow_Poison|/>",
-    "description": "｢<itemName id=|Bow_Poison|/>｣與｢<itemName id=|BowGun_Poison|/>｣等用的<itemName id=|Arrow|/>。 可以讓被射中的目標中毒。 可在｢<mapObjectName id=|WorkBench|/>｣製作。"
+    "localized_name": "毒箭矢",
+    "description": "｢毒之弓｣與｢毒箭十字弓｣等用的箭矢。 可以讓被射中的目標中毒。 可在｢初階工作臺｣製作。"
   },
   "AssaultRifleBullet": {
-    "localized_name": "<itemName id=|AssaultRifleBullet|/>",
-    "description": "用於｢<itemName id=|AssaultRifle_Default1|/>｣等的子彈。 可在｢<mapObjectName id=|WeaponFactory_Dirty_02|/>｣製作。"
+    "localized_name": "突擊步槍子彈",
+    "description": "用於｢突擊步槍｣等的子彈。 可在｢武器流水線工廠｣製作。"
   },
   "AutoMealPouch_Tier1": {
-    "localized_name": "<itemName id=|AutoMealPouch_Tier1|/>",
+    "localized_name": "小型飼料袋",
     "description": null
   },
   "AutoMealPouch_Tier2": {
-    "localized_name": "<itemName id=|AutoMealPouch_Tier2|/>",
+    "localized_name": "中等飼料袋",
     "description": null
   },
   "AutoMealPouch_Tier3": {
-    "localized_name": "<itemName id=|AutoMealPouch_Tier3|/>",
+    "localized_name": "大型飼料袋",
     "description": null
   },
   "AutoMealPouch_Tier4": {
-    "localized_name": "<itemName id=|AutoMealPouch_Tier4|/>",
+    "localized_name": "巨大飼料袋",
     "description": null
   },
   "AutoMealPouch_Tier5": {
-    "localized_name": "<itemName id=|AutoMealPouch_Tier5|/>",
+    "localized_name": "特大飼料袋",
     "description": null
   },
   "BaseCampBattleDirector": {
-    "localized_name": "<mapObjectName id=|BaseCampBattleDirector|/>",
+    "localized_name": "警鐘",
     "description": "用於更改據點內帕魯警戒狀態的鐘。 可隨時於「迎擊外敵」及「專心工作」之間切換。"
   },
   "BaseCampItemDispenser": {
-    "localized_name": "<mapObjectName id=|BaseCampItemDispenser|/>",
+    "localized_name": "道具存取機",
     "description": null
   },
   "BaseCampWorkHard": {
-    "localized_name": "<mapObjectName id=|BaseCampWorkHard|/>",
+    "localized_name": "監控台",
     "description": null
   },
   "Battle_Armor_Grade_01_Cloth": {
-    "localized_name": "<itemName id=|ClothArmor|/>",
-    "description": "以｢<itemName id=|Cloth|/>｣製成的服裝。 可以抵禦夜間的寒意。 可在｢<mapObjectName id=|WorkBench|/>｣製作。"
+    "localized_name": "布衣",
+    "description": "以｢布｣製成的服裝。 可以抵禦夜間的寒意。 可在｢初階工作臺｣製作。"
   },
   "Battle_Armor_Grade_01_Cloth_Cold": {
-    "localized_name": "<itemName id=|ClothArmorCold|/>",
-    "description": "在寒冷地區生產的｢<itemName id=|ClothArmor|/>｣。 能夠抵禦讓身體都凍僵的寒意。 可在｢<mapObjectName id=|WorkBench|/>｣製作。"
+    "localized_name": "寒冷地區民族服裝",
+    "description": "在寒冷地區生產的｢布衣｣。 能夠抵禦讓身體都凍僵的寒意。 可在｢初階工作臺｣製作。"
   },
   "Battle_Armor_Grade_01_Cloth_Heat": {
-    "localized_name": "<itemName id=|ClothArmorHeat|/>",
-    "description": "在炎熱地區生產的｢<itemName id=|ClothArmor|/>｣。 具備傲人的耐熱功能。 可在｢<mapObjectName id=|WorkBench|/>｣製作。"
+    "localized_name": "熱帶地區民族服裝",
+    "description": "在炎熱地區生產的｢布衣｣。 具備傲人的耐熱功能。 可在｢初階工作臺｣製作。"
   },
   "Battle_Armor_Grade_02_Fur": {
-    "localized_name": "<itemName id=|FurArmor|/>",
-    "description": "以｢<itemName id=|Leather|/>｣製成的盔甲。 耐久度及防禦力均有所提升。 可在｢<mapObjectName id=|Factory_Hard_01|/>｣製作。"
+    "localized_name": "毛皮盔甲",
+    "description": "以｢皮革｣製成的盔甲。 耐久度及防禦力均有所提升。 可在｢優質工作臺｣製作。"
   },
   "Battle_Armor_Grade_02_Fur_Cold": {
-    "localized_name": "<itemName id=|FurArmorCold|/>",
-    "description": "在寒冷地區生產的｢<itemName id=|FurArmor|/>｣。 能夠抵禦讓身體都凍僵的寒意。 可在｢<mapObjectName id=|Factory_Hard_01|/>｣製作。"
+    "localized_name": "耐寒毛皮盔甲",
+    "description": "在寒冷地區生產的｢毛皮盔甲｣。 能夠抵禦讓身體都凍僵的寒意。 可在｢優質工作臺｣製作。"
   },
   "Battle_Armor_Grade_02_Fur_Heat": {
-    "localized_name": "<itemName id=|FurArmorHeat|/>",
-    "description": "在炎熱地區生產的｢<itemName id=|FurArmor|/>｣。 具備傲人的耐熱功能。 可在｢<mapObjectName id=|Factory_Hard_01|/>｣製作。"
+    "localized_name": "耐熱毛皮盔甲",
+    "description": "在炎熱地區生產的｢毛皮盔甲｣。 具備傲人的耐熱功能。 可在｢優質工作臺｣製作。"
   },
   "Battle_Armor_Grade_03_Copper": {
-    "localized_name": "<itemName id=|CopperArmor|/>",
-    "description": "以金屬製成的盔甲。 有一定的防禦力，也有一定的重量。 可在｢<mapObjectName id=|Factory_Hard_01|/>｣製作。"
+    "localized_name": "金屬盔甲",
+    "description": "以金屬製成的盔甲。 有一定的防禦力，也有一定的重量。 可在｢優質工作臺｣製作。"
   },
   "Battle_Armor_Grade_03_Copper_Cold": {
-    "localized_name": "<itemName id=|CopperArmorCold|/>",
-    "description": "經過改良的｢<itemName id=|CopperArmor|/>｣。 能夠抵禦使身體凍僵的寒意。 可在｢<mapObjectName id=|Factory_Hard_01|/>｣製作。"
+    "localized_name": "耐寒金屬盔甲",
+    "description": "經過改良的｢金屬盔甲｣。 能夠抵禦使身體凍僵的寒意。 可在｢優質工作臺｣製作。"
   },
   "Battle_Armor_Grade_03_Copper_Heat": {
-    "localized_name": "<itemName id=|CopperArmorHeat|/>",
-    "description": "經過改良的｢<itemName id=|CopperArmor|/>｣。 具備傲人的耐熱功能。 可在｢<mapObjectName id=|Factory_Hard_01|/>｣製作。"
+    "localized_name": "耐熱金屬盔甲",
+    "description": "經過改良的｢金屬盔甲｣。 具備傲人的耐熱功能。 可在｢優質工作臺｣製作。"
   },
   "Battle_Armor_Grade_03_Iron": {
-    "localized_name": "<itemName id=|IronArmor|/>",
-    "description": "以優質金屬製成的盔甲。 防禦力極優，但也相當沉重。 可在｢<mapObjectName id=|Factory_Hard_02|/>｣製作。"
+    "localized_name": "精煉金屬盔甲",
+    "description": "以優質金屬製成的盔甲。 防禦力極優，但也相當沉重。 可在｢作業流水線工廠｣製作。"
   },
   "Battle_Armor_Grade_03_Iron_Cold": {
-    "localized_name": "<itemName id=|IronArmorCold|/>",
-    "description": "經過改良的｢<itemName id=|IronArmor|/>｣。 能夠抵禦使身體凍僵的寒意。 可在｢<mapObjectName id=|Factory_Hard_02|/>｣製作。"
+    "localized_name": "耐寒精煉金屬盔甲",
+    "description": "經過改良的｢精煉金屬盔甲｣。 能夠抵禦使身體凍僵的寒意。 可在｢作業流水線工廠｣製作。"
   },
   "Battle_Armor_Grade_03_Iron_Heat": {
-    "localized_name": "<itemName id=|IronArmorHeat|/>",
-    "description": "經過改良的｢<itemName id=|IronArmor|/>｣。 具備傲人的耐熱功能。 可在｢<mapObjectName id=|Factory_Hard_02|/>｣製作。"
+    "localized_name": "耐熱精煉金屬盔甲",
+    "description": "經過改良的｢精煉金屬盔甲｣。 具備傲人的耐熱功能。 可在｢作業流水線工廠｣製作。"
   },
   "Battle_Armor_Grade_04_Steal": {
-    "localized_name": "<itemName id=|StealArmor|/>",
-    "description": "以<itemName id=|StealIngot|/>製成的盔甲。 防禦力極為卓越，但也極為沉重。 可在｢<mapObjectName id=|Factory_Hard_03|/>｣製作。"
+    "localized_name": "帕魯金屬盔甲",
+    "description": "以帕魯金屬錠製成的盔甲。 防禦力極為卓越，但也極為沉重。 可在｢作業流水線工廠 II｣製作。"
   },
   "Battle_Armor_Grade_04_Steal_Cold": {
-    "localized_name": "<itemName id=|StealArmorCold|/>",
-    "description": "經過改良的「<itemName id=|StealArmor|/>」。 能夠抵禦使身體凍僵的寒意。 可在｢<mapObjectName id=|Factory_Hard_03|/>｣製作。"
+    "localized_name": "耐寒帕魯金屬盔甲",
+    "description": "經過改良的「帕魯金屬盔甲」。 能夠抵禦使身體凍僵的寒意。 可在｢作業流水線工廠 II｣製作。"
   },
   "Battle_Armor_Grade_04_Steal_Heat": {
-    "localized_name": "<itemName id=|StealArmorHeat|/>",
-    "description": "經過改良的「<itemName id=|StealArmor|/>」。 具備傲人的耐熱功能。 可在｢<mapObjectName id=|Factory_Hard_03|/>｣製作。"
+    "localized_name": "耐熱帕魯金屬盔甲",
+    "description": "經過改良的「帕魯金屬盔甲」。 具備傲人的耐熱功能。 可在｢作業流水線工廠 II｣製作。"
   },
   "Battle_Armor_Grade_05_Plastic": {
-    "localized_name": "<itemName id=|PlasticArmor|/>",
-    "description": "以<itemName id=|Plastic|/>製成的盔甲。 在增強防禦力的同時，實現了輕量化。 可在｢<mapObjectName id=|Factory_Hard_03|/>｣製作。"
+    "localized_name": "塑鋼盔甲",
+    "description": "以塑鋼製成的盔甲。 在增強防禦力的同時，實現了輕量化。 可在｢作業流水線工廠 II｣製作。"
   },
   "Battle_Armor_Grade_05_Plastic_Cold": {
-    "localized_name": "<itemName id=|PlasticArmorCold|/>",
-    "description": "經過改良的「<itemName id=|PlasticArmor|/>」。 能夠抵禦使身體凍僵的寒意。 可在｢<mapObjectName id=|Factory_Hard_03|/>｣製作。"
+    "localized_name": "耐寒塑鋼盔甲",
+    "description": "經過改良的「塑鋼盔甲」。 能夠抵禦使身體凍僵的寒意。 可在｢作業流水線工廠 II｣製作。"
   },
   "Battle_Armor_Grade_05_Plastic_Heat": {
-    "localized_name": "<itemName id=|PlasticArmorHeat|/>",
-    "description": "經過改良的「<itemName id=|PlasticArmor|/>」。 具備傲人的耐熱功能。 可在｢<mapObjectName id=|Factory_Hard_03|/>｣製作。"
+    "localized_name": "耐熱塑鋼盔甲",
+    "description": "經過改良的「塑鋼盔甲」。 具備傲人的耐熱功能。 可在｢作業流水線工廠 II｣製作。"
   },
   "Battle_Armor_Grade_05_Plastic_Weight": {
-    "localized_name": "<itemName id=|PlasticArmorWeight|/>",
-    "description": "經過改良的「<itemName id=|PlasticArmor|/>」。 能增加玩家的負重上限。 可在｢<mapObjectName id=|Factory_Hard_03|/>｣製作。"
+    "localized_name": "輕便塑鋼盔甲",
+    "description": "經過改良的「塑鋼盔甲」。 能增加玩家的負重上限。 可在｢作業流水線工廠 II｣製作。"
   },
   "Battle_Cloth": {
-    "localized_name": "<itemName id=|Cloth|/>",
+    "localized_name": "布",
     "description": null
   },
   "Battle_Defense_BowGun": {
-    "localized_name": "<mapObjectName id=|DefenseBowGun|/>",
-    "description": "將具備「COMMON_WORK_SUITABILITY_Handcraft」適應性的帕魯分派到這裡， 牠就會操控十字弓堅守據點。"
+    "localized_name": "固定式十字弓",
+    "description": "將具備「手工作業」適應性的帕魯分派到這裡， 牠就會操控十字弓堅守據點。"
   },
   "Battle_Defense_MachineGun": {
-    "localized_name": "<mapObjectName id=|DefenseMachinegun|/>",
-    "description": "將具備「COMMON_WORK_SUITABILITY_Handcraft」適應性的帕魯分派到這裡， 牠就會操控機關槍堅守據點。"
+    "localized_name": "固定式機關槍",
+    "description": "將具備「手工作業」適應性的帕魯分派到這裡， 牠就會操控機關槍堅守據點。"
   },
   "Battle_Defense_Missile": {
-    "localized_name": "<mapObjectName id=|DefenseMissile|/>",
-    "description": "將具備「COMMON_WORK_SUITABILITY_Handcraft」適應性的帕魯分派到這裡， 牠就會操控飛彈發射器堅守據點。"
+    "localized_name": "固定式飛彈發射器",
+    "description": "將具備「手工作業」適應性的帕魯分派到這裡， 牠就會操控飛彈發射器堅守據點。"
   },
   "Battle_Glider_Grade_01": {
-    "localized_name": "<itemName id=|Glider_Old|/>",
+    "localized_name": "普通滑翔傘",
     "description": "展開滑翔傘，即可在空中滑翔。 構造簡單，無法高速飛行。"
   },
   "Battle_Glider_Grade_02": {
-    "localized_name": "<itemName id=|Glider_Good|/>",
-    "description": "展開滑翔傘，即可在空中滑翔。 此為量產款式，有一定的飛行速度。 可在｢<mapObjectName id=|Factory_Hard_01|/>｣製作。"
+    "localized_name": "高級滑翔傘",
+    "description": "展開滑翔傘，即可在空中滑翔。 此為量產款式，有一定的飛行速度。 可在｢優質工作臺｣製作。"
   },
   "Battle_Glider_Grade_03": {
-    "localized_name": "<itemName id=|Glider_Super|/>",
-    "description": "展開滑翔傘，即可在空中滑翔。 此款式性能有所提升，能以相當快的速度飛行。 可在｢<mapObjectName id=|Factory_Hard_02|/>｣製作。"
+    "localized_name": "優質滑翔傘",
+    "description": "展開滑翔傘，即可在空中滑翔。 此款式性能有所提升，能以相當快的速度飛行。 可在｢作業流水線工廠｣製作。"
   },
   "Battle_Glider_Grade_04": {
-    "localized_name": "<itemName id=|Glider_Tera|/>",
-    "description": "展開滑翔傘，即可在空中滑翔。 性能得到進一步提升，速度和升力都提高了。 可在｢<mapObjectName id=|Factory_Hard_03|/>｣製作。"
+    "localized_name": "特級滑翔傘",
+    "description": "展開滑翔傘，即可在空中滑翔。 性能得到進一步提升，速度和升力都提高了。 可在｢作業流水線工廠 II｣製作。"
   },
   "Battle_GunPowder_Grade_02": {
-    "localized_name": "<itemName id=|Gunpowder2|/>",
-    "description": "用於發射砲彈的｢<itemName id=|Gunpowder2|/>｣。 製作子彈時會用到。 可在｢<mapObjectName id=|Factory_Hard_01|/>｣製作。"
+    "localized_name": "火藥",
+    "description": "用於發射砲彈的｢火藥｣。 製作子彈時會用到。 可在｢優質工作臺｣製作。"
   },
   "Battle_Helm_Grade_02_Fur": {
-    "localized_name": "<itemName id=|FurHelmet|/>",
-    "description": "美麗的羽毛髮飾。 不知為何，總覺得它能保護頭部不受致命傷害。 可在｢<mapObjectName id=|Workbench|/>｣製作。"
+    "localized_name": "羽毛髮飾",
+    "description": "美麗的羽毛髮飾。 不知為何，總覺得它能保護頭部不受致命傷害。 可在｢Workbench｣製作。"
   },
   "Battle_Helm_Grade_03_Copper": {
-    "localized_name": "<itemName id=|CopperHelmet|/>",
-    "description": "以金屬製成的頭盔。 安全可靠，能守護你的大腦。 可在｢<mapObjectName id=|Factory_Hard_01|/>｣製作。"
+    "localized_name": "金屬頭盔",
+    "description": "以金屬製成的頭盔。 安全可靠，能守護你的大腦。 可在｢優質工作臺｣製作。"
   },
   "Battle_Helm_Grade_04_Iron": {
-    "localized_name": "<itemName id=|IronHelmet|/>",
-    "description": "以優質金屬製成的頭盔。 精心打磨的金屬光澤更進一步提高了它的價值。 可在｢<mapObjectName id=|Factory_Hard_02|/>｣製作。"
+    "localized_name": "精煉金屬頭盔",
+    "description": "以優質金屬製成的頭盔。 精心打磨的金屬光澤更進一步提高了它的價值。 可在｢作業流水線工廠｣製作。"
   },
   "Battle_Helm_Grade_05_Steal": {
-    "localized_name": "<itemName id=|StealHelmet|/>",
-    "description": "以<itemName id=|StealIngot|/>製成的頭盔。 具有人人稱羨的絕佳品質，可謂是頂級戰士的象徵。 可在｢<mapObjectName id=|Factory_Hard_03|/>｣製作。"
+    "localized_name": "帕魯金屬頭盔",
+    "description": "以帕魯金屬錠製成的頭盔。 具有人人稱羨的絕佳品質，可謂是頂級戰士的象徵。 可在｢作業流水線工廠 II｣製作。"
   },
   "Battle_Helm_Grade_06_Plastic": {
-    "localized_name": "<itemName id=|PlasticHelmet|/>",
-    "description": "以<itemName id=|Plastic|/>製成的頭盔。 在增強防禦力的同時，實現了輕量化。 可在｢<mapObjectName id=|Factory_Hard_03|/>｣製作。"
+    "localized_name": "塑鋼頭盔",
+    "description": "以塑鋼製成的頭盔。 在增強防禦力的同時，實現了輕量化。 可在｢作業流水線工廠 II｣製作。"
   },
   "Battle_MeleeWeapon_Axe_Steal": {
-    "localized_name": "<itemName id=|Axe_Steal|/>",
+    "localized_name": "帕魯金屬斧",
     "description": null
   },
   "Battle_MeleeWeapon_Bat": {
-    "localized_name": "<itemName id=|Bat|/>",
-    "description": "用於近距離戰鬥的<itemName id=|Bat|/>。 也許能夠用來打倒體型較小的帕魯。"
+    "localized_name": "木棍",
+    "description": "用於近距離戰鬥的木棍。 也許能夠用來打倒體型較小的帕魯。"
   },
   "Battle_MeleeWeapon_Bat2": {
-    "localized_name": "<itemName id=|Bat2|/>",
+    "localized_name": "棒球棒",
     "description": null
   },
   "Battle_MeleeWeapon_Pickaxe_Steal": {
-    "localized_name": "<itemName id=|Pickaxe_Steal|/>",
+    "localized_name": "帕魯金屬十字鎬",
     "description": null
   },
   "Battle_MeleeWeapon_Sword": {
-    "localized_name": "<itemName id=|Sword|/>",
-    "description": "近距離戰鬥用的｢<itemName id=|Sword|/>｣。 鋒利無比！但需要靠近敵人攻擊，相當危險。 可在｢<mapObjectName id=|WeaponFactory_Dirty_01|/>｣製作。"
+    "localized_name": "劍",
+    "description": "近距離戰鬥用的｢劍｣。 鋒利無比！但需要靠近敵人攻擊，相當危險。 可在｢武器工作臺｣製作。"
   },
   "Battle_RangeWeapon_AssaultRifle": {
-    "localized_name": "<itemName id=|AssaultRifle_Default1|/>",
-    "description": "以壓倒性的連射能力鎮壓敵人的<itemName id=|AssaultRifle_Default1|/>。 火力強大，是對付強敵時的理想選擇。 可在｢<mapObjectName id=|WeaponFactory_Dirty_02|/>｣製作。"
+    "localized_name": "突擊步槍",
+    "description": "以壓倒性的連射能力鎮壓敵人的突擊步槍。 火力強大，是對付強敵時的理想選擇。 可在｢武器流水線工廠｣製作。"
   },
   "Battle_RangeWeapon_Bow1": {
-    "localized_name": "<itemName id=|WeakerBow|/>",
-    "description": "原始的遠距離攻擊武器。 因為是東拼西湊而成的，威力較弱。 可在｢<mapObjectName id=|WorkBench|/>｣製作。"
+    "localized_name": "老舊的弓",
+    "description": "原始的遠距離攻擊武器。 因為是東拼西湊而成的，威力較弱。 可在｢初階工作臺｣製作。"
   },
   "Battle_RangeWeapon_Bow3": {
-    "localized_name": "<itemName id=|Bow_Triple|/>",
-    "description": "經過改良，可同時射出3支箭矢的弓。 具有不可思議的力量，每次射擊只會消耗1支<itemName id=|Arrow|/>。"
+    "localized_name": "三連弓",
+    "description": "經過改良，可同時射出3支箭矢的弓。 具有不可思議的力量，每次射擊只會消耗1支箭矢。"
   },
   "Battle_RangeWeapon_BowGun": {
-    "localized_name": "<itemName id=|BowGun|/>",
-    "description": "無需蓄力拉弓即可射出<itemName id=|Arrow|/>。 裝箭需要花些時間，但能造成強力一擊。 可在｢<mapObjectName id=|Factory_Hard_01|/>｣製作。"
+    "localized_name": "十字弓",
+    "description": "無需蓄力拉弓即可射出箭矢。 裝箭需要花些時間，但能造成強力一擊。 可在｢優質工作臺｣製作。"
   },
   "Battle_RangeWeapon_BowGun_Fire": {
-    "localized_name": "<itemName id=|BowGun_Fire|/>",
-    "description": "可造成COMMON_ELEMENT_NAME_Fire傷害的<itemName id=|BowGun|/>。 需要<itemName id=|Arrow_Fire|/>才能使用。 可在｢<mapObjectName id=|WeaponFactory_Dirty_01|/>｣製作。"
+    "localized_name": "火箭十字弓",
+    "description": "可造成火屬性傷害的十字弓。 需要火箭矢才能使用。 可在｢武器工作臺｣製作。"
   },
   "Battle_RangeWeapon_BowGun_Poison": {
-    "localized_name": "<itemName id=|BowGun_Poison|/>",
-    "description": "可讓攻擊目標中毒的可怕<itemName id=|BowGun|/>。 需要｢<itemName id=|Arrow_Poison|/>｣才能使用。 可在｢<mapObjectName id=|Factory_Hard_01|/>｣製作。"
+    "localized_name": "毒箭十字弓",
+    "description": "可讓攻擊目標中毒的可怕十字弓。 需要｢毒箭矢｣才能使用。 可在｢優質工作臺｣製作。"
   },
   "Battle_RangeWeapon_Bow_Fire": {
-    "localized_name": "<itemName id=|Bow_Fire|/>",
-    "description": "可造成COMMON_ELEMENT_NAME_Fire傷害的弓。 利用火箭矢讓帕魯著火，變得更容易捕捉。 需要<itemName id=|Arrow_Fire|/>才能使用。"
+    "localized_name": "火之弓",
+    "description": "可造成火屬性傷害的弓。 利用火箭矢讓帕魯著火，變得更容易捕捉。 需要火箭矢才能使用。"
   },
   "Battle_RangeWeapon_Bow_Poison": {
-    "localized_name": "<itemName id=|Bow_Poison|/>",
-    "description": "可讓攻擊目標中毒的可怕毒弓。 帕魯中毒以後，會變得更容易捕捉。 需要｢<itemName id=|Arrow_Poison|/>｣才能使用。"
+    "localized_name": "毒之弓",
+    "description": "可讓攻擊目標中毒的可怕毒弓。 帕魯中毒以後，會變得更容易捕捉。 需要｢毒箭矢｣才能使用。"
   },
   "Battle_RangeWeapon_CompoundBow": {
-    "localized_name": "<itemName id=|CompoundBow|/>",
+    "localized_name": "複合弓",
     "description": null
   },
   "Battle_RangeWeapon_FlameThrower": {
-    "localized_name": "<itemName id=|FlameThrower|/>",
+    "localized_name": "FlameThrower",
     "description": null
   },
   "Battle_RangeWeapon_GatlingGun": {
-    "localized_name": "<itemName id=|GatlingGun|/>",
-    "description": "可透過高速連射壓制敵人的加特林機槍。 壓制射擊能夠將敵人射成蜂窩。 可在｢<mapObjectName id=|WeaponFactory_Dirty_03|/>｣製作。"
+    "localized_name": "加特林機槍",
+    "description": "可透過高速連射壓制敵人的加特林機槍。 壓制射擊能夠將敵人射成蜂窩。 可在｢武器流水線工廠II｣製作。"
   },
   "Battle_RangeWeapon_GrenadeLauncher": {
-    "localized_name": "<itemName id=|GrenadeLauncher|/>",
-    "description": "能夠發射造成大範圍爆炸的榴彈。 對付大群敵人時很有用。 可在｢<mapObjectName id=|WeaponFactory_Dirty_03|/>｣製作。"
+    "localized_name": "榴彈發射器",
+    "description": "能夠發射造成大範圍爆炸的榴彈。 對付大群敵人時很有用。 可在｢武器流水線工廠II｣製作。"
   },
   "Battle_RangeWeapon_GuidedMissileLauncher": {
-    "localized_name": "<itemName id=|GuidedMissileLauncher|/>",
-    "description": "能夠發射自動追蹤敵人的導彈。 導彈在命中後將爆炸，造成大範圍傷害。 可在｢<mapObjectName id=|WeaponFactory_Dirty_03|/>｣製作。"
+    "localized_name": "追蹤導彈發射器",
+    "description": "能夠發射自動追蹤敵人的導彈。 導彈在命中後將爆炸，造成大範圍傷害。 可在｢武器流水線工廠II｣製作。"
   },
   "Battle_RangeWeapon_HandGun": {
-    "localized_name": "<itemName id=|HandGun_Default|/>",
-    "description": "子彈容納量及連射能力經過強化的手槍。 每秒火力比<itemName id=|MakeshiftHandgun|/>更強。 可在｢<mapObjectName id=|WeaponFactory_Dirty_01|/>｣製作。"
+    "localized_name": "手槍",
+    "description": "子彈容納量及連射能力經過強化的手槍。 每秒火力比劣質手槍更強。 可在｢武器工作臺｣製作。"
   },
   "Battle_RangeWeapon_HomingSphereLauncher": {
-    "localized_name": "<itemName id=|HomingSphereLauncher|/>",
-    "description": "用於發射帕魯球的發射器。 用它射出的帕魯球會自動追蹤帕魯。 可在｢<mapObjectName id=|WeaponFactory_Dirty_03|/>｣製作。"
+    "localized_name": "自動追蹤帕魯球發射器",
+    "description": "用於發射帕魯球的發射器。 用它射出的帕魯球會自動追蹤帕魯。 可在｢武器流水線工廠II｣製作。"
   },
   "Battle_RangeWeapon_LaserRifle": {
-    "localized_name": "<itemName id=|LaserRifle|/>",
-    "description": "能夠發射雷射的武器。 威力強大又易於使用。 可在｢<mapObjectName id=|WeaponFactory_Dirty_03|/>｣製作。"
+    "localized_name": "雷射步槍",
+    "description": "能夠發射雷射的武器。 威力強大又易於使用。 可在｢武器流水線工廠II｣製作。"
   },
   "Battle_RangeWeapon_OldRevolver": {
-    "localized_name": "<itemName id=|OldRevolver|/>",
+    "localized_name": "古舊左輪手槍",
     "description": null
   },
   "Battle_RangeWeapon_Rifle": {
-    "localized_name": "<itemName id=|SingleShotRifle|/>",
-    "description": "單發型的步槍，得花費時間裝填子彈。 子彈容納量雖少，但每一發均威力驚人。 可在｢<mapObjectName id=|WeaponFactory_Dirty_02|/>｣製作。"
+    "localized_name": "單發步槍",
+    "description": "單發型的步槍，得花費時間裝填子彈。 子彈容納量雖少，但每一發均威力驚人。 可在｢武器流水線工廠｣製作。"
   },
   "Battle_RangeWeapon_RocketLauncher": {
-    "localized_name": "<itemName id=|Launcher_Default|/>",
-    "description": "可從遠距離進行強力轟炸的<itemName id=|Launcher_Default|/>。 可在｢<mapObjectName id=|WeaponFactory_Dirty_03|/>｣製作。"
+    "localized_name": "火箭發射器",
+    "description": "可從遠距離進行強力轟炸的火箭發射器。 可在｢武器流水線工廠II｣製作。"
   },
   "Battle_RangeWeapon_SemiAutoRifle": {
-    "localized_name": "<itemName id=|SemiAutoRifle|/>",
+    "localized_name": "半自動步槍",
     "description": null
   },
   "Battle_RangeWeapon_SemiAutoShotgun": {
-    "localized_name": "<itemName id=|SemiAutoShotgun|/>",
+    "localized_name": "半自動散彈槍",
     "description": null
   },
   "Battle_RangeWeapon_ShotGun": {
-    "localized_name": "<itemName id=|DoubleBarrelShotgun|/>",
-    "description": "近距離時威力驚人的散彈槍，可以連射2發。 子彈容納量較少，但火力強大。 可在｢<mapObjectName id=|WeaponFactory_Dirty_02|/>｣製作。"
+    "localized_name": "雙管散彈槍",
+    "description": "近距離時威力驚人的散彈槍，可以連射2發。 子彈容納量較少，但火力強大。 可在｢武器流水線工廠｣製作。"
   },
   "Battle_RangeWeapon_ShotGun_Multi": {
-    "localized_name": "<itemName id=|PumpActionShotgun|/>",
-    "description": "子彈容納量增加，威力更強的散彈槍。 近距離射擊時的DPS極佳。 可在｢<mapObjectName id=|WeaponFactory_Dirty_02|/>｣製作。"
+    "localized_name": "泵動式散彈槍",
+    "description": "子彈容納量增加，威力更強的散彈槍。 近距離射擊時的DPS極佳。 可在｢武器流水線工廠｣製作。"
   },
   "Battle_RangeWeapon_SphereLauncher": {
-    "localized_name": "<itemName id=|SphereLauncher|/>",
-    "description": "可同時發射大量帕魯球的新型發射器。 可用來捕捉成群的帕魯。 可在｢<mapObjectName id=|WeaponFactory_Dirty_02|/>｣製作。"
+    "localized_name": "擴散型帕魯球發射器",
+    "description": "可同時發射大量帕魯球的新型發射器。 可用來捕捉成群的帕魯。 可在｢武器流水線工廠｣製作。"
   },
   "Battle_RangeWeapon_SphereLauncher_Once": {
-    "localized_name": "<itemName id=|SphereLauncher_Once|/>",
-    "description": "用於發射帕魯球的發射器。 用它就能捕捉到更遠處的帕魯。 可在｢<mapObjectName id=|WeaponFactory_Dirty_01|/>｣製作。"
+    "localized_name": "單發型帕魯球發射器",
+    "description": "用於發射帕魯球的發射器。 用它就能捕捉到更遠處的帕魯。 可在｢武器工作臺｣製作。"
   },
   "Battle_RangeWeapon_SubmachineGun": {
-    "localized_name": "<itemName id=|SubmachineGun|/>",
+    "localized_name": "衝鋒槍",
     "description": null
   },
   "BeamSword": {
-    "localized_name": "<itemName id=|BeamSword|/>",
+    "localized_name": "光劍",
     "description": null
   },
   "BlastFurnace4": {
-    "localized_name": "<mapObjectName id=|BlastFurnace4|/>",
+    "localized_name": "巨大熔爐",
     "description": null
   },
   "BreedFarm": {
-    "localized_name": "<mapObjectName id=|BreedFarm|/>",
-    "description": "分派♂♀帕魯各一隻， 即可讓牠們產下帕魯蛋。 要放入｢<itemName id=|Cake|/>｣才會順利生蛋。"
+    "localized_name": "配種牧場",
+    "description": "分派♂♀帕魯各一隻， 即可讓牠們產下帕魯蛋。 要放入｢蛋糕｣才會順利生蛋。"
   },
   "BuildableGoddessStatue": {
-    "localized_name": "<mapObjectName id=|BuildableGoddessStatue|/>",
+    "localized_name": "力量之像",
     "description": "只要獻上供品， 就能強化玩家和帕魯。"
   },
   "CarbonFiber": {
-    "localized_name": "<itemName id=|CarbonFiber|/>",
+    "localized_name": "碳纖維",
     "description": null
   },
   "Cauldron": {
-    "localized_name": "<mapObjectName id=|Cauldron|/>",
+    "localized_name": "魔女之釜",
     "description": null
   },
   "CeilingLamp": {
-    "localized_name": "<mapObjectName id=|CeilingLamp|/>",
+    "localized_name": "天花板吊燈",
     "description": "可安裝在天花板上。"
   },
   "Cement": {
-    "localized_name": "<itemName id=|Cement|/>",
+    "localized_name": "水泥",
     "description": null
   },
   "Cloth2": {
-    "localized_name": "<itemName id=|Cloth2|/>",
+    "localized_name": "優質布",
     "description": null
   },
   "Cooler": {
-    "localized_name": "<mapObjectName id=|Cooler|/>",
+    "localized_name": "降溫器",
     "description": "可讓周圍涼快起來，消除暑氣。"
   },
   "CoolerBox": {
-    "localized_name": "<mapObjectName id=|CoolerBox|/>",
+    "localized_name": "保冷箱",
     "description": null
   },
   "CoolerPalFoodBox": {
-    "localized_name": "<mapObjectName id=|CoolerPalFoodBox|/>",
+    "localized_name": "低溫保鮮飼料箱",
     "description": null
   },
   "Crusher": {
-    "localized_name": "<mapObjectName id=|Crusher|/>",
-    "description": "可粉碎<itemName id=|Stone|/>或<itemName id=|Wood|/>， 將之轉換為其他素材的設施。 需有具備「澆水」適應性的帕魯負責使水車轉動。"
+    "localized_name": "粉碎機",
+    "description": "可粉碎石頭或木材， 將之轉換為其他素材的設施。 需有具備「澆水」適應性的帕魯負責使水車轉動。"
   },
   "DamagedScarecrow": {
-    "localized_name": "<mapObjectName id=|DamagedScarecrow|/>",
-    "description": "以<characterName id=|Penguin|/>為原型，用於訓練的稻草人。"
+    "localized_name": "受損的稻草人",
+    "description": "以企丸丸為原型，用於訓練的稻草人。"
   },
   "DecalGunSet": {
     "localized_name": "噴漆槍套組",
     "description": "噴漆槍套組。 持有此套組，即可製作能在命中處留下帕魯圖案的 奇妙槍枝與專用子彈。"
   },
   "DefenseWait": {
-    "localized_name": "<mapObjectName id=|DefenseWait|/>",
+    "localized_name": "沙袋",
     "description": "被分派到這裡的帕魯， 會負責防範外敵的哨兵工作。"
   },
   "DefenseWall": {
-    "localized_name": "<mapObjectName id=|DefenseWall|/>",
+    "localized_name": "石砌防禦牆",
     "description": "防止外敵入侵的巨大防禦牆。"
   },
   "DefenseWall_Metal": {
-    "localized_name": "<mapObjectName id=|DefenseWall_Metal|/>",
+    "localized_name": "金屬防禦牆",
     "description": "防止外敵入侵的巨大防禦牆。 以金屬製成，相當堅固。"
   },
   "DefenseWall_Wood": {
-    "localized_name": "<mapObjectName id=|DefenseWall_Wood|/>",
+    "localized_name": "木造防禦牆",
     "description": "防止外敵入侵的巨大防禦牆。 以木頭製成，相當脆弱。"
   },
   "DismantlingConveyor": {
-    "localized_name": "<mapObjectName id=|DismantlingConveyor|/>",
+    "localized_name": "帕魯解體傳送帶",
     "description": null
   },
   "DisplayCharacter": {
-    "localized_name": "<mapObjectName id=|DisplayCharacter|/>",
+    "localized_name": "觀賞專用籠",
     "description": "放置抓來的帕魯的觀賞用籠子。 在裡頭的帕魯無法戰鬥或進行作業， 但也不會肚子餓。"
   },
   "ElecBaton": {
-    "localized_name": "<itemName id=|ElecBaton|/>",
-    "description": "敲下去就會觸電的近戰武器。 帕魯在觸電時會比較容易捕獲。 可在｢<mapObjectName id=|Factory_Hard_01|/>｣製作。"
+    "localized_name": "電擊棒",
+    "description": "敲下去就會觸電的近戰武器。 帕魯在觸電時會比較容易捕獲。 可在｢優質工作臺｣製作。"
   },
   "ElectricCooler": {
-    "localized_name": "<mapObjectName id=|ElectricCooler|/>",
+    "localized_name": "電氣降溫器",
     "description": "使用電力，效果更強的冷氣，範圍廣且輸出功率高。"
   },
   "ElectricGenerator_Large": {
-    "localized_name": "<mapObjectName id=|ElectricGenerator_Large|/>",
+    "localized_name": "大型發電機",
     "description": null
   },
   "ElectricHeater": {
-    "localized_name": "<mapObjectName id=|ElectricHeater|/>",
+    "localized_name": "電氣取暖器",
     "description": "使用電力，效果更強的暖爐，範圍廣且輸出功率高。"
   },
   "EnergyLauncherBullet": {
-    "localized_name": "<itemName id=|EnergyLauncherBullet|/>",
+    "localized_name": "電漿能量盒",
     "description": null
   },
   "EnergyRocketLauncher": {
-    "localized_name": "<itemName id=|EnergyRocketLauncher|/>",
+    "localized_name": "等離子砲",
     "description": null
   },
   "EnergyStorage_Electric": {
-    "localized_name": "<mapObjectName id=|EnergyStorage_Electric|/>",
+    "localized_name": "蓄電器",
     "description": null
   },
   "Expedition": {
-    "localized_name": "<mapObjectName id=|Expedition|/>",
+    "localized_name": "帕魯遠征所",
     "description": null
   },
   "Factory_Money": {
-    "localized_name": "<mapObjectName id=|Factory_Money|/>",
+    "localized_name": "金幣製造工廠",
     "description": null
   },
   "Farm_SkillFruits": {
-    "localized_name": "<mapObjectName id=|Farm_SkillFruits|/>",
+    "localized_name": "技能果實農園",
     "description": null
   },
   "FlamethrowerBullet": {
-    "localized_name": "<itemName id=|FlamethrowerBullet|/>",
+    "localized_name": "火焰噴射器燃料",
     "description": null
   },
   "FlourMill": {
-    "localized_name": "<mapObjectName id=|FlourMill|/>",
-    "description": "可將<itemName id=|Wheat|/>磨碎 以生產<itemName id=|Flour|/>的設施。 需有具備「澆水」適應性的帕魯負責使水車轉動。"
+    "localized_name": "磨粉機",
+    "description": "可將小麥磨碎 以生產麵粉的設施。 需有具備「澆水」適應性的帕魯負責使水車轉動。"
   },
   "FlowerBed": {
-    "localized_name": "<mapObjectName id=|FlowerBed|/>",
+    "localized_name": "花圃",
     "description": null
   },
   "Fountain": {
-    "localized_name": "<mapObjectName id=|Fountain|/>",
+    "localized_name": "噴泉",
     "description": null
   },
   "FragGrenade": {
-    "localized_name": "<itemName id=|FragGrenade|/>",
+    "localized_name": "破片手榴彈",
     "description": null
   },
   "FragGrenade_Dark": {
-    "localized_name": "<itemName id=|FragGrenade_Dark|/>",
+    "localized_name": "暗黑手榴彈",
     "description": null
   },
   "FragGrenade_Dragon": {
-    "localized_name": "<itemName id=|FragGrenade_Dragon|/>",
+    "localized_name": "龍擊手榴彈",
     "description": null
   },
   "FragGrenade_Elec": {
-    "localized_name": "<itemName id=|FragGrenade_Elec|/>",
+    "localized_name": "電擊手榴彈",
     "description": null
   },
   "FragGrenade_Fire": {
-    "localized_name": "<itemName id=|FragGrenade_Fire|/>",
+    "localized_name": "燒夷手榴彈",
     "description": null
   },
   "FragGrenade_Ground": {
-    "localized_name": "<itemName id=|FragGrenade_Ground|/>",
+    "localized_name": "大地手榴彈",
     "description": null
   },
   "FragGrenade_Ice": {
-    "localized_name": "<itemName id=|FragGrenade_Ice|/>",
+    "localized_name": "冰凍手榴彈",
     "description": null
   },
   "FragGrenade_Leaf": {
-    "localized_name": "<itemName id=|FragGrenade_Leaf|/>",
+    "localized_name": "草木手榴彈",
     "description": null
   },
   "FragGrenade_Super": {
-    "localized_name": "<itemName id=|FragGrenade_Super|/>",
+    "localized_name": "破片手榴彈Mk2",
     "description": null
   },
   "FragGrenade_Water": {
-    "localized_name": "<itemName id=|FragGrenade_Water|/>",
+    "localized_name": "水流手榴彈",
     "description": null
   },
   "FurnitureSet_1": {
@@ -664,7 +664,7 @@
     "description": "裝飾用的家具套組。 用它打造日式風格的據點吧。"
   },
   "GatlingBullet": {
-    "localized_name": "<itemName id=|GatlingBullet|/>",
+    "localized_name": "加特林子彈",
     "description": null
   },
   "Glass_houseset": {
@@ -672,103 +672,103 @@
     "description": "持有此套組便可用玻璃打造據點。 可建造玻璃地基、牆壁、屋頂、樓梯等 建造房屋時所需的構造。"
   },
   "GrapplingGun": {
-    "localized_name": "<itemName id=|GrapplingGun|/>",
+    "localized_name": "爪鉤槍",
     "description": null
   },
   "GrapplingGun2": {
-    "localized_name": "<itemName id=|GrapplingGun2|/>",
+    "localized_name": "高級爪鉤槍",
     "description": null
   },
   "GrapplingGun3": {
-    "localized_name": "<itemName id=|GrapplingGun3|/>",
+    "localized_name": "優質爪鉤槍",
     "description": null
   },
   "GrapplingGun4": {
-    "localized_name": "<itemName id=|GrapplingGun4|/>",
+    "localized_name": "特級爪鉤槍",
     "description": null
   },
   "GrenadeBullet": {
-    "localized_name": "<itemName id=|GrenadeBullet|/>",
+    "localized_name": "榴彈",
     "description": null
   },
   "GuildChest": {
-    "localized_name": "<mapObjectName id=|GuildChest|/>",
+    "localized_name": "公會箱子",
     "description": null
   },
   "HandTorch": {
-    "localized_name": "<itemName id=|Torch|/>",
-    "description": "照亮夜晚的黑暗，為人驅逐寒意。 多少也能用於近距離戰鬥。 可在｢<mapObjectName id=|WorkBench|/>｣製作。"
+    "localized_name": "攜帶型火炬",
+    "description": "照亮夜晚的黑暗，為人驅逐寒意。 多少也能用於近距離戰鬥。 可在｢初階工作臺｣製作。"
   },
   "HandgunBullet": {
-    "localized_name": "<itemName id=|HandgunBullet|/>",
-    "description": "用於｢<itemName id=|HandGun_Default|/>｣等的子彈。 可在｢<mapObjectName id=|WeaponFactory_Dirty_01|/>｣製作。"
+    "localized_name": "手槍子彈",
+    "description": "用於｢手槍｣等的子彈。 可在｢武器工作臺｣製作。"
   },
   "Headstone": {
-    "localized_name": "<mapObjectName id=|Headstone|/>",
+    "localized_name": "墓碑",
     "description": null
   },
   "Heater": {
-    "localized_name": "<mapObjectName id=|Heater|/>",
+    "localized_name": "取暖器",
     "description": "可讓周圍暖和起來，抵禦寒意。"
   },
   "Homeward": {
-    "localized_name": "<itemName id=|Homeward|/>",
+    "localized_name": "歸途雷雲",
     "description": null
   },
   "HugeKitchen": {
-    "localized_name": "<mapObjectName id=|HugeKitchen|/>",
+    "localized_name": "大型廚房",
     "description": null
   },
   "IceCrusher": {
-    "localized_name": "<mapObjectName id=|IceCrusher|/>",
+    "localized_name": "冷凍粉碎機",
     "description": null
   },
   "Infra_ElectricGenerator_Grade_01": {
-    "localized_name": "<mapObjectName id=|ElectricGenerator|/>",
+    "localized_name": "發電機",
     "description": "能讓據點的雷系帕魯儲存電力， 供應給需要用電的設施。"
   },
   "Infra_ElectronicCircuit": {
-    "localized_name": "<itemName id=|MachineParts2|/>",
-    "description": "製作精密機械時會用到的｢<itemName id=|MachineParts2|/>｣。 可在｢<mapObjectName id=|Factory_Hard_02|/>｣製作。"
+    "localized_name": "電路板",
+    "description": "製作精密機械時會用到的｢電路板｣。 可在｢作業流水線工廠｣製作。"
   },
   "Infra_ItemChest_Grade_01": {
-    "localized_name": "<mapObjectName id=|ItemChest|/>",
-    "description": "可用於收納道具。將之設置在據點後， 具備「COMMON_WORK_SUITABILITY_Transport」適應性的帕魯便會自動搬運道具。"
+    "localized_name": "木箱",
+    "description": "可用於收納道具。將之設置在據點後， 具備「搬運」適應性的帕魯便會自動搬運道具。"
   },
   "Infra_ItemChest_Grade_02": {
-    "localized_name": "<mapObjectName id=|ItemChest_02|/>",
-    "description": "可收納更多道具，耐久度也有所提升。 具備「COMMON_WORK_SUITABILITY_Transport」適應性的帕魯會自動搬運道具。"
+    "localized_name": "金屬箱",
+    "description": "可收納更多道具，耐久度也有所提升。 具備「搬運」適應性的帕魯會自動搬運道具。"
   },
   "Infra_ItemChest_Grade_03": {
-    "localized_name": "<mapObjectName id=|ItemChest_03|/>",
-    "description": "可進一步收納更多道具，耐久度也有所提升。 具備「COMMON_WORK_SUITABILITY_Transport」適應性的帕魯會自動搬運道具。"
+    "localized_name": "精煉金屬箱",
+    "description": "可進一步收納更多道具，耐久度也有所提升。 具備「搬運」適應性的帕魯會自動搬運道具。"
   },
   "Infra_MachineParts": {
-    "localized_name": "<itemName id=|MachineParts|/>",
+    "localized_name": "釘子",
     "description": null
   },
   "Infra_PalBed_Grade_01": {
-    "localized_name": "<mapObjectName id=|MedicalPalBed_02|/>",
+    "localized_name": "稻草帕魯床鋪",
     "description": "據點裡的帕魯晚上若能睡在床上，便可回復SAN值。 沒有床的話會因睡不舒服而無法回復SAN值。"
   },
   "Infra_PalBed_Grade_02": {
-    "localized_name": "<mapObjectName id=|MedicalPalBed_03|/>",
+    "localized_name": "柔軟帕魯床鋪",
     "description": "讓帕魯們睡得更加舒適， 提高睡覺時生命值和SAN值的回復效率。"
   },
   "Infra_PlayerBed_Grade_01": {
-    "localized_name": "<mapObjectName id=|PlayerBed_02|/>",
+    "localized_name": "劣質床鋪",
     "description": "專供人類使用的床鋪，可回復生命值。 晚上入睡後，就會一覺睡到早上。 必須建造在有屋頂的地方才能讓人安眠。"
   },
   "Infra_PlayerBed_Grade_02": {
-    "localized_name": "<mapObjectName id=|PlayerBed_03|/>",
+    "localized_name": "優質床鋪",
     "description": "柔軟蓬鬆的床鋪，回復效率有所改善。 必須建造在有屋頂的地方才能讓人安眠。"
   },
   "ItemBooth": {
-    "localized_name": "<mapObjectName id=|ItemBooth|/>",
+    "localized_name": "跳蚤市場（道具）",
     "description": null
   },
   "ItemChest_04": {
-    "localized_name": "<mapObjectName id=|ItemChest_04|/>",
+    "localized_name": "高等文明箱子",
     "description": null
   },
   "JapaneseStyle_houseset": {
@@ -776,91 +776,91 @@
     "description": "持有此套組便可用和風的建築打造據點。 可建造和風地基、牆壁、屋頂、樓梯等 建造房屋時所需的構造。"
   },
   "Katana": {
-    "localized_name": "<itemName id=|Katana|/>",
+    "localized_name": "太刀",
     "description": null
   },
   "Lab": {
-    "localized_name": "<mapObjectName id=|Lab|/>",
+    "localized_name": "帕魯工作研究所",
     "description": null
   },
   "Lamp": {
-    "localized_name": "<mapObjectName id=|Lamp|/>",
+    "localized_name": "固定式燈具",
     "description": "使用電力讓據點更加明亮。"
   },
   "Lantern": {
-    "localized_name": "<itemName id=|Lantern|/>",
+    "localized_name": "掛腰燈籠",
     "description": null
   },
   "LargeCeilingLamp": {
-    "localized_name": "<mapObjectName id=|LargeCeilingLamp|/>",
+    "localized_name": "大型天花板吊燈",
     "description": "可安裝在天花板上，照亮廣闊的範圍。"
   },
   "LargeLamp": {
-    "localized_name": "<mapObjectName id=|LargeLamp|/>",
+    "localized_name": "大型固定式燈具",
     "description": "外型加大，能照亮更廣闊的範圍。"
   },
   "LaserBullet": {
-    "localized_name": "<itemName id=|LaserBullet|/>",
+    "localized_name": "能量盒",
     "description": null
   },
   "LaserGatlingBullet": {
-    "localized_name": "<itemName id=|LaserGatlingBullet|/>",
+    "localized_name": "加特林雷射能量盒",
     "description": null
   },
   "LaserGatlingGun": {
-    "localized_name": "<itemName id=|LaserGatlingGun|/>",
+    "localized_name": "雷射加特林",
     "description": null
   },
   "LauncherBullet": {
-    "localized_name": "<itemName id=|ExplosiveBullet|/>",
-    "description": "｢<itemName id=|Launcher_Default|/>｣等使用的彈藥。 可在｢<mapObjectName id=|WeaponFactory_Dirty_03|/>｣製作。"
+    "localized_name": "火箭彈",
+    "description": "｢火箭發射器｣等使用的彈藥。 可在｢武器流水線工廠II｣製作。"
   },
   "Launcher_Meteor": {
-    "localized_name": "<itemName id=|Launcher_Meteor|/>",
-    "description": "加工隕石製作而成的發射器。 命中時會像隕石一樣引發爆炸。 可在｢<mapObjectName id=|WeaponFactory_Dirty_02|/>｣製作。"
+    "localized_name": "隕石發射器",
+    "description": "加工隕石製作而成的發射器。 命中時會像隕石一樣引發爆炸。 可在｢武器流水線工廠｣製作。"
   },
   "MakeshiftAssaultRifle": {
-    "localized_name": "<itemName id=|MakeshiftAssaultRifle|/>",
+    "localized_name": "破舊的突擊步槍",
     "description": null
   },
   "MakeshiftHandgun": {
-    "localized_name": "<itemName id=|MakeshiftHandgun|/>",
-    "description": "手工製造的破舊手槍。 較適合用於近距離戰鬥，但每次只能擊發一發子彈。 可在｢<mapObjectName id=|WeaponFactory_Dirty_01|/>｣製作。"
+    "localized_name": "劣質手槍",
+    "description": "手工製造的破舊手槍。 較適合用於近距離戰鬥，但每次只能擊發一發子彈。 可在｢武器工作臺｣製作。"
   },
   "MakeshiftShotgun": {
-    "localized_name": "<itemName id=|MakeshiftShotgun|/>",
+    "localized_name": "破舊的散彈槍",
     "description": null
   },
   "MakeshiftSubmachineGun": {
-    "localized_name": "<itemName id=|MakeshiftSubmachineGun|/>",
+    "localized_name": "破舊的衝鋒槍",
     "description": null
   },
   "ManualElectricGenerator": {
-    "localized_name": "<mapObjectName id=|ManualElectricGenerator|/>",
+    "localized_name": "人力發電機",
     "description": null
   },
   "MeatCutterKnife": {
-    "localized_name": "<itemName id=|MeatCutterKnife|/>",
+    "localized_name": "切肉刀",
     "description": "可用於肢解召喚出的帕魯的菜刀。 裝備此道具時「撫摸」選項會轉變為「肢解」。 帕魯一經解體後將無法再度復生。"
   },
   "MedicalPalBed_04": {
-    "localized_name": "<mapObjectName id=|MedicalPalBed_04|/>",
+    "localized_name": "大型帕魯床鋪",
     "description": null
   },
   "MedicalPalBed_05": {
-    "localized_name": "<mapObjectName id=|MedicalPalBed_05|/>",
+    "localized_name": "高等文明帕魯膠囊",
     "description": null
   },
   "MedicineFacility_03": {
-    "localized_name": "<mapObjectName id=|MedicineFacility_03|/>",
+    "localized_name": "高等文明製藥台",
     "description": null
   },
   "MetalDetector": {
-    "localized_name": "<itemName id=|MetalDetector|/>",
+    "localized_name": "金屬探測器",
     "description": null
   },
   "Metal_Gate": {
-    "localized_name": "<mapObjectName id=|Metal_Gate|/>",
+    "localized_name": "金屬大門",
     "description": "可讓稍大的帕魯通過的金屬大門。"
   },
   "Metal_houseset": {
@@ -868,827 +868,827 @@
     "description": "持有此套組便可用金屬打造據點。 可建造金屬地基、牆壁、屋頂、樓梯等 建造房屋時所需的構造。"
   },
   "MiningTool": {
-    "localized_name": "<mapObjectName id=|MiningTool|/>",
+    "localized_name": "十字鎬與安全帽",
     "description": null
   },
   "MissileBullet": {
-    "localized_name": "<itemName id=|MissileBullet|/>",
+    "localized_name": "導彈",
     "description": null
   },
   "MonsterFarm": {
-    "localized_name": "<mapObjectName id=|MonsterFarm|/>",
+    "localized_name": "家畜牧場",
     "description": "可放牧羊、雞等類型帕魯的牧場。 將具有適應性的帕魯分派到牧場內， 即可自動生產道具。"
   },
   "MultiElectricHatchingPalEgg": {
-    "localized_name": "<mapObjectName id=|MultiElectricHatchingPalEgg|/>",
+    "localized_name": "大型電能帕魯蛋孵化器",
     "description": null
   },
   "Musket": {
-    "localized_name": "<itemName id=|Musket|/>",
-    "description": "古舊又簡樸的槍。 單發威力強大，但裝填需要較長時間。 可在｢<mapObjectName id=|WeaponFactory_Dirty_01|/>｣製作。"
+    "localized_name": "鳥槍",
+    "description": "古舊又簡樸的槍。 單發威力強大，但裝填需要較長時間。 可在｢武器工作臺｣製作。"
   },
   "OilPump": {
-    "localized_name": "<mapObjectName id=|OilPump|/>",
+    "localized_name": "原油提煉機",
     "description": null
   },
   "OlympicCauldron": {
-    "localized_name": "<mapObjectName id=|OlympicCauldron|/>",
+    "localized_name": "聖火台",
     "description": null
   },
   "PALBOX": {
-    "localized_name": "<mapObjectName id=|PalBoxV2|/>",
+    "localized_name": "帕魯終端",
     "description": "用來存放抓到的帕魯的設施。 終端裡的帕魯會逐漸回復生命值。 此設施周圍的區域即為據點。"
   },
   "PalBooth": {
-    "localized_name": "<mapObjectName id=|PalBooth|/>",
+    "localized_name": "跳蚤市場（帕魯）",
     "description": null
   },
   "PalFoodBox": {
-    "localized_name": "<mapObjectName id=|PalFoodBox|/>",
+    "localized_name": "飼料箱",
     "description": "將食物放進來， 據點的帕魯們就會來這裡進食。"
   },
   "PalMedicineBox": {
-    "localized_name": "<mapObjectName id=|PalMedicineBox|/>",
+    "localized_name": "藥品櫃",
     "description": null
   },
   "PalRevive": {
-    "localized_name": "<itemName id=|PalRevive|/>",
+    "localized_name": "復活藥",
     "description": null
   },
   "PalSphere_Exotic": {
-    "localized_name": "<itemName id=|PalSphere_Exotic|/>",
+    "localized_name": "超限帕魯球",
     "description": null
   },
   "Plastic": {
-    "localized_name": "<itemName id=|Plastic|/>",
+    "localized_name": "塑鋼",
     "description": null
   },
   "Polymer": {
-    "localized_name": "<itemName id=|Polymer|/>",
+    "localized_name": "聚合物",
     "description": null
   },
   "Potion_Extreme": {
-    "localized_name": "<itemName id=|Potion_Extreme|/>",
+    "localized_name": "至高恢復藥",
     "description": null
   },
   "Product_Axe_Grade_01": {
-    "localized_name": "<itemName id=|Axe_Tier_00|/>",
+    "localized_name": "石斧",
     "description": "用於劈砍木材的斧頭。 以石頭製成，感覺不是很鋒利。"
   },
   "Product_Axe_Grade_02": {
-    "localized_name": "<itemName id=|Axe_Tier_01|/>",
-    "description": "用於劈砍木材的斧頭。 以金屬製成，耐久度與鋒利度都得到了提升。 可在｢<mapObjectName id=|Factory_Hard_01|/>｣製作。"
+    "localized_name": "金屬斧",
+    "description": "用於劈砍木材的斧頭。 以金屬製成，耐久度與鋒利度都得到了提升。 可在｢優質工作臺｣製作。"
   },
   "Product_Axe_Grade_03": {
-    "localized_name": "<itemName id=|Axe_Tier_02|/>",
-    "description": "用於劈砍木材的斧頭。 耐久度與鋒利度均有更進一步的提升。 可在｢<mapObjectName id=|Factory_Hard_02|/>｣製作。"
+    "localized_name": "精煉金屬斧",
+    "description": "用於劈砍木材的斧頭。 耐久度與鋒利度均有更進一步的提升。 可在｢作業流水線工廠｣製作。"
   },
   "Product_CoalPit": {
-    "localized_name": "<mapObjectName id=|CoalPit|/>",
+    "localized_name": "石炭採礦場",
     "description": null
   },
   "Product_Cooking_Grade_01": {
-    "localized_name": "<mapObjectName id=|CampFire|/>",
+    "localized_name": "營火",
     "description": "可烹調簡單的料理， 並帶來些許溫暖及照明效果。"
   },
   "Product_Cooking_Grade_02": {
-    "localized_name": "<mapObjectName id=|CookingStove|/>",
+    "localized_name": "烹調鍋具",
     "description": "能烹調的料理種類更多， 製作餐點會更有效率。"
   },
   "Product_Cooking_Grade_03": {
-    "localized_name": "<mapObjectName id=|ElectricKitchen|/>",
-    "description": "雖需使用電力，但可應對更複雜、更有效率的烹調需求。 需有具備「COMMON_WORK_SUITABILITY_EmitFlame」適應性的帕魯。"
+    "localized_name": "電氣廚房",
+    "description": "雖需使用電力，但可應對更複雜、更有效率的烹調需求。 需有具備「生火」適應性的帕魯。"
   },
   "Product_CopperPit": {
-    "localized_name": "<mapObjectName id=|CopperPit|/>",
+    "localized_name": "金屬採礦場",
     "description": null
   },
   "Product_CopperPit_2": {
-    "localized_name": "<mapObjectName id=|CopperPit_2|/>",
+    "localized_name": "金屬採礦場Ⅱ",
     "description": null
   },
   "Product_Factory_Hard_Grade_01": {
-    "localized_name": "<mapObjectName id=|Factory_Hard_01|/>",
-    "description": "生產速度比「<mapObjectName id=|WorkBench|/>」更快。 需有具備「COMMON_WORK_SUITABILITY_Handcraft」適應性的帕魯。"
+    "localized_name": "優質工作臺",
+    "description": "生產速度比「初階工作臺」更快。 需有具備「手工作業」適應性的帕魯。"
   },
   "Product_Factory_Hard_Grade_02": {
-    "localized_name": "<mapObjectName id=|Factory_Hard_02|/>",
-    "description": "雖需使用電力，但生產各種道具的速度較為快速。 需有具備「COMMON_WORK_SUITABILITY_Handcraft」適應性的帕魯。"
+    "localized_name": "作業流水線工廠",
+    "description": "雖需使用電力，但生產各種道具的速度較為快速。 需有具備「手工作業」適應性的帕魯。"
   },
   "Product_Factory_Hard_Grade_03": {
-    "localized_name": "<mapObjectName id=|Factory_Hard_03|/>",
-    "description": "雖需使用電力，但生產各種道具的速度更為快速。 需有具備「COMMON_WORK_SUITABILITY_Handcraft」適應性的帕魯。"
+    "localized_name": "作業流水線工廠 II",
+    "description": "雖需使用電力，但生產各種道具的速度更為快速。 需有具備「手工作業」適應性的帕魯。"
   },
   "Product_Farm_Berries": {
-    "localized_name": "<mapObjectName id=|FarmBlockV2_Berries|/>",
-    "description": "能夠生產莓果的農園。 需有具備「COMMON_WORK_TYPE_Seeding」、「COMMON_WORK_TYPE_Watering」及「COMMON_WORK_TYPE_CollectResourcePickable」適應性的帕魯。"
+    "localized_name": "莓果園",
+    "description": "能夠生產莓果的農園。 需有具備「播種」、「澆水」及「採集」適應性的帕魯。"
   },
   "Product_Farm_Carrot": {
-    "localized_name": "<mapObjectName id=|FarmBlockV2_Carrot|/>",
+    "localized_name": "胡蘿蔔園",
     "description": null
   },
   "Product_Farm_Lettuce": {
-    "localized_name": "<mapObjectName id=|FarmBlockV2_Lettuce|/>",
-    "description": "能夠生產萵苣的農園。 需有具備「COMMON_WORK_TYPE_Seeding」、「COMMON_WORK_TYPE_Watering」及「COMMON_WORK_TYPE_CollectResourcePickable」適應性的帕魯。"
+    "localized_name": "萵苣園",
+    "description": "能夠生產萵苣的農園。 需有具備「播種」、「澆水」及「採集」適應性的帕魯。"
   },
   "Product_Farm_Onion": {
-    "localized_name": "<mapObjectName id=|FarmBlockV2_Onion|/>",
+    "localized_name": "洋蔥園",
     "description": null
   },
   "Product_Farm_Potato": {
-    "localized_name": "<mapObjectName id=|FarmBlockV2_Potato|/>",
+    "localized_name": "馬鈴薯園",
     "description": null
   },
   "Product_Farm_tomato": {
-    "localized_name": "<mapObjectName id=|FarmBlockV2_tomato|/>",
-    "description": "能夠生產番茄的農園。 需有具備「COMMON_WORK_TYPE_Seeding」、「COMMON_WORK_TYPE_Watering」及「COMMON_WORK_TYPE_CollectResourcePickable」適應性的帕魯。"
+    "localized_name": "蕃茄園",
+    "description": "能夠生產番茄的農園。 需有具備「播種」、「澆水」及「採集」適應性的帕魯。"
   },
   "Product_Farm_wheat": {
-    "localized_name": "<mapObjectName id=|FarmBlockV2_wheet|/>",
-    "description": "能夠生產「<itemName id=|Pan|/>」的原料。 需有具備「COMMON_WORK_TYPE_Seeding」、「COMMON_WORK_TYPE_Watering」及「COMMON_WORK_TYPE_CollectResourcePickable」適應性的帕魯。"
+    "localized_name": "小麥園",
+    "description": "能夠生產「麵包」的原料。 需有具備「播種」、「澆水」及「採集」適應性的帕魯。"
   },
   "Product_Ingot_Grade_01_Copper": {
-    "localized_name": "<mapObjectName id=|BlastFurnace|/>",
-    "description": "可建造「<mapObjectName id=|BlastFurnace|/>」。 之後將可冶煉「<itemName id=|CopperOre|/>」， 並進一步製造金屬錠。"
+    "localized_name": "初階熔爐",
+    "description": "可建造「初階熔爐」。 之後將可冶煉「金屬礦石」， 並進一步製造金屬錠。"
   },
   "Product_Ingot_Grade_02_Iron": {
-    "localized_name": "<mapObjectName id=|BlastFurnace2|/>",
-    "description": "可冶煉「<itemName id=|IronIngot|/>」。"
+    "localized_name": "進階熔爐",
+    "description": "可冶煉「精煉金屬錠」。"
   },
   "Product_Ingot_Grade_03_Steal": {
-    "localized_name": "<mapObjectName id=|BlastFurnace3|/>",
-    "description": "可冶煉「<itemName id=|StealIngot|/>」。"
+    "localized_name": "電熔爐",
+    "description": "可冶煉「帕魯金屬錠」。"
   },
   "Product_Medicine_Grade_01": {
-    "localized_name": "<mapObjectName id=|MedicineFacility_01|/>",
-    "description": "可製作簡單的藥物。 需有具備「COMMON_WORK_SUITABILITY_ProductMedicine」適應性的帕魯。"
+    "localized_name": "中世紀製藥工作臺",
+    "description": "可製作簡單的藥物。 需有具備「製藥」適應性的帕魯。"
   },
   "Product_Medicine_Grade_02": {
-    "localized_name": "<mapObjectName id=|MedicineFacility_02|/>",
-    "description": "雖需使用電力，但可製作更高級的藥物。 需有具備「COMMON_WORK_SUITABILITY_ProductMedicine」適應性的帕魯。"
+    "localized_name": "電氣製藥工作臺",
+    "description": "雖需使用電力，但可製作更高級的藥物。 需有具備「製藥」適應性的帕魯。"
   },
   "Product_Pickaxe_Grade_01": {
-    "localized_name": "<itemName id=|Pickaxe_Tier_00|/>",
+    "localized_name": "石製十字鎬",
     "description": "用於挖掘、開採的十字鎬。 以石頭製成，因此效率有待改進。"
   },
   "Product_Pickaxe_Grade_02": {
-    "localized_name": "<itemName id=|Pickaxe_Tier_01|/>",
-    "description": "用於挖掘、開採的十字鎬。 以金屬製成，耐久度與效率都得到了提升。 可在｢<mapObjectName id=|Factory_Hard_01|/>｣製作。"
+    "localized_name": "金屬十字鎬",
+    "description": "用於挖掘、開採的十字鎬。 以金屬製成，耐久度與效率都得到了提升。 可在｢優質工作臺｣製作。"
   },
   "Product_Pickaxe_Grade_03": {
-    "localized_name": "<itemName id=|Pickaxe_Tier_02|/>",
-    "description": "用於挖掘、開採的十字鎬。 耐久度與效率均有更進一步的提升。 可在｢<mapObjectName id=|Factory_Hard_02|/>｣製作。"
+    "localized_name": "精煉金屬十字鎬",
+    "description": "用於挖掘、開採的十字鎬。 耐久度與效率均有更進一步的提升。 可在｢作業流水線工廠｣製作。"
   },
   "Product_QuartzPit": {
-    "localized_name": "<mapObjectName id=|QuartzPit|/>",
+    "localized_name": "純水晶採礦場",
     "description": null
   },
   "Product_StationDeforest": {
-    "localized_name": "<mapObjectName id=|StationDeforest2|/>",
-    "description": "可在據點內生產木材。 需有具備「COMMON_WORK_SUITABILITY_Deforest」適應性的帕魯。"
+    "localized_name": "採伐場",
+    "description": "可在據點內生產木材。 需有具備「採伐」適應性的帕魯。"
   },
   "Product_StonePit": {
-    "localized_name": "<mapObjectName id=|StonePit|/>",
-    "description": "可在據點內生產石材。 需有具備「COMMON_WORK_SUITABILITY_Mining」適應性的帕魯。"
+    "localized_name": "採石場",
+    "description": "可在據點內生產石材。 需有具備「挖掘」適應性的帕魯。"
   },
   "Product_SulfurPit": {
-    "localized_name": "<mapObjectName id=|SulfurPit|/>",
+    "localized_name": "硫磺採礦場",
     "description": null
   },
   "Product_WeaponFactory_Dirty_Grade_01": {
-    "localized_name": "<mapObjectName id=|WeaponFactory_Dirty_01|/>",
-    "description": "本設施可製造具有簡單機關的武器。 需有具備｢COMMON_WORK_SUITABILITY_Handcraft｣適應性的帕魯才能進行作業。"
+    "localized_name": "武器工作臺",
+    "description": "本設施可製造具有簡單機關的武器。 需有具備｢手工作業｣適應性的帕魯才能進行作業。"
   },
   "Product_WeaponFactory_Dirty_Grade_02": {
-    "localized_name": "<mapObjectName id=|WeaponFactory_Dirty_02|/>",
-    "description": "雖需使用電力，但生產武器及彈藥的速度較為快速。 需有具備「COMMON_WORK_SUITABILITY_Handcraft」適應性的帕魯。"
+    "localized_name": "武器流水線工廠",
+    "description": "雖需使用電力，但生產武器及彈藥的速度較為快速。 需有具備「手工作業」適應性的帕魯。"
   },
   "Product_WeaponFactory_Dirty_Grade_03": {
-    "localized_name": "<mapObjectName id=|WeaponFactory_Dirty_03|/>",
-    "description": "雖需使用電力，但生產武器及彈藥的速度更為快速。 需有具備「COMMON_WORK_SUITABILITY_Handcraft」適應性的帕魯。"
+    "localized_name": "武器流水線工廠II",
+    "description": "雖需使用電力，但生產武器及彈藥的速度更為快速。 需有具備「手工作業」適應性的帕魯。"
   },
   "Product_WorkBench_SkillUnlock": {
-    "localized_name": "<mapObjectName id=|WorkBench_SkillUnlock|/>",
+    "localized_name": "帕魯裝備工作臺",
     "description": "可製作帕魯使用夥伴技能時 所需的道具。"
   },
   "Refrigerator": {
-    "localized_name": "<mapObjectName id=|Refrigerator|/>",
+    "localized_name": "冰箱",
     "description": null
   },
   "ReinforcedArrow": {
-    "localized_name": "<itemName id=|ReinforcedArrow|/>",
+    "localized_name": "強化箭矢",
     "description": null
   },
   "RepairBench": {
-    "localized_name": "<mapObjectName id=|RepairBench|/>",
+    "localized_name": "修理工作臺",
     "description": "可修理損壞的武器及道具。"
   },
   "RepairKit": {
-    "localized_name": "<itemName id=|RepairKit|/>",
+    "localized_name": "修理工具組",
     "description": null
   },
   "RifleBullet": {
-    "localized_name": "<itemName id=|RifleBullet|/>",
-    "description": "用於步槍等的子彈。 可在｢<mapObjectName id=|WeaponFactory_Dirty_01|/>｣製作。"
+    "localized_name": "步槍子彈",
+    "description": "用於步槍等的子彈。 可在｢武器工作臺｣製作。"
   },
   "RoughBullet": {
-    "localized_name": "<itemName id=|RoughBullet|/>",
-    "description": "用於｢<itemName id=|Musket|/>｣與｢<itemName id=|MakeshiftHandgun|/>｣等的子彈。 可在｢<mapObjectName id=|WeaponFactory_Dirty_01|/>｣製作。"
+    "localized_name": "劣質彈藥",
+    "description": "用於｢鳥槍｣與｢劣質手槍｣等的子彈。 可在｢武器工作臺｣製作。"
   },
   "SFArmor": {
-    "localized_name": "<itemName id=|SFArmor|/>",
+    "localized_name": "六稜晶盔甲",
     "description": null
   },
   "SFArmorCold": {
-    "localized_name": "<itemName id=|SFArmorCold|/>",
+    "localized_name": "耐寒六稜晶盔甲",
     "description": null
   },
   "SFArmorHeat": {
-    "localized_name": "<itemName id=|SFArmorHeat|/>",
+    "localized_name": "耐熱六稜晶盔甲",
     "description": null
   },
   "SFArmorWeight": {
-    "localized_name": "<itemName id=|SFArmorWeight|/>",
+    "localized_name": "輕便六稜晶盔甲",
     "description": null
   },
   "SFArrow": {
-    "localized_name": "<itemName id=|SFArrow|/>",
+    "localized_name": "卓越箭矢",
     "description": null
   },
   "SFBow": {
-    "localized_name": "<itemName id=|SFBow|/>",
+    "localized_name": "卓越弓",
     "description": null
   },
   "SFHelmet": {
-    "localized_name": "<itemName id=|SFHelmet|/>",
+    "localized_name": "六稜晶頭盔",
     "description": null
   },
   "SanityDecrease1": {
-    "localized_name": "<mapObjectName id=|SanityDecrease1|/>",
+    "localized_name": "α波發生器",
     "description": null
   },
   "Shield_01": {
-    "localized_name": "<itemName id=|Shield_01|/>",
+    "localized_name": "普通護盾",
     "description": "以帕魯礦技術打造的神奇護盾。 只要一段時間沒受到攻擊，就會自我修復。"
   },
   "Shield_02": {
-    "localized_name": "<itemName id=|Shield_02|/>",
-    "description": "以帕魯礦技術打造的神奇護盾。 改良原型設計，提高了防禦力。 可在｢<mapObjectName id=|Factory_Hard_01|/>｣製作。"
+    "localized_name": "高級護盾",
+    "description": "以帕魯礦技術打造的神奇護盾。 改良原型設計，提高了防禦力。 可在｢優質工作臺｣製作。"
   },
   "Shield_03": {
-    "localized_name": "<itemName id=|Shield_03|/>",
-    "description": "以帕魯礦技術打造的神奇護盾。 經過進一步改良，更加提升了性能。 可在｢<mapObjectName id=|Factory_Hard_02|/>｣製作。"
+    "localized_name": "優質護盾",
+    "description": "以帕魯礦技術打造的神奇護盾。 經過進一步改良，更加提升了性能。 可在｢作業流水線工廠｣製作。"
   },
   "Shield_04": {
-    "localized_name": "<itemName id=|Shield_04|/>",
-    "description": "以帕魯礦技術打造的神奇護盾。 歷經無數試驗，達到最高峰的品質。 可在｢<mapObjectName id=|Factory_Hard_03|/>｣製作。"
+    "localized_name": "特級護盾",
+    "description": "以帕魯礦技術打造的神奇護盾。 歷經無數試驗，達到最高峰的品質。 可在｢作業流水線工廠 II｣製作。"
   },
   "Shield_05": {
-    "localized_name": "<itemName id=|Shield_Ultra|/>",
-    "description": "以帕魯礦技術打造的神奇護盾。 經過更進一步的無數試驗，實現了究極的品質。 可在｢<mapObjectName id=|Factory_Hard_03|/>｣製作。"
+    "localized_name": "超級護盾",
+    "description": "以帕魯礦技術打造的神奇護盾。 經過更進一步的無數試驗，實現了究極的品質。 可在｢作業流水線工廠 II｣製作。"
   },
   "Shield_SF": {
-    "localized_name": "<itemName id=|Shield_SF|/>",
+    "localized_name": "卓越護盾",
     "description": null
   },
   "ShotGunBullet": {
-    "localized_name": "<itemName id=|ShotgunBullet|/>",
-    "description": "用於散彈槍等的子彈。 可在｢<mapObjectName id=|WeaponFactory_Dirty_01|/>｣製作。"
+    "localized_name": "散彈槍子彈",
+    "description": "用於散彈槍等的子彈。 可在｢武器工作臺｣製作。"
   },
   "Signboard": {
-    "localized_name": "<mapObjectName id=|Signboard|/>",
+    "localized_name": "告示牌",
     "description": "可在上面書寫文字。"
   },
   "Silo": {
-    "localized_name": "<mapObjectName id=|Silo|/>",
+    "localized_name": "筒倉",
     "description": null
   },
   "SkillUnlock_Alpaca": {
-    "localized_name": "<itemName id=|SkillUnlock_Alpaca|/>",
+    "localized_name": "美露帕專用鞍具",
     "description": null
   },
   "SkillUnlock_AmaterasuWolf": {
-    "localized_name": "<itemName id=|SkillUnlock_AmaterasuWolf|/>",
+    "localized_name": "蒼焰狼專用鞍具",
     "description": null
   },
   "SkillUnlock_AmaterasuWolf_Dark": {
-    "localized_name": "<itemName id=|SkillUnlock_AmaterasuWolf_Dark|/>",
+    "localized_name": "幽焰狼專用鞍具",
     "description": null
   },
   "SkillUnlock_BadCatgirl": {
-    "localized_name": "<itemName id=|SkillUnlock_BadCatgirl|/>",
+    "localized_name": "妮瞅莎專用散彈槍",
     "description": null
   },
   "SkillUnlock_BirdDragon": {
-    "localized_name": "<itemName id=|SkillUnlock_BirdDragon|/>",
+    "localized_name": "烽歌龍專用鞍具",
     "description": null
   },
   "SkillUnlock_BirdDragon_Ice": {
-    "localized_name": "<itemName id=|SkillUnlock_BirdDragon_Ice|/>",
+    "localized_name": "霜歌龍專用鞍具",
     "description": null
   },
   "SkillUnlock_BlackCentaur": {
-    "localized_name": "<itemName id=|SkillUnlock_BlackCentaur|/>",
+    "localized_name": "混沌騎士專用鞍具",
     "description": null
   },
   "SkillUnlock_BlackGriffon": {
-    "localized_name": "<itemName id=|SkillUnlock_BlackGriffon|/>",
+    "localized_name": "異構格里芬專用鞍具",
     "description": null
   },
   "SkillUnlock_BlackMetalDragon": {
-    "localized_name": "<itemName id=|SkillUnlock_BlackMetalDragon|/>",
+    "localized_name": "魔淵龍專用鞍具",
     "description": null
   },
   "SkillUnlock_BlackPuppy": {
-    "localized_name": "<itemName id=|SkillUnlock_BlackPuppy|/>",
+    "localized_name": "墨丸專用背帶",
     "description": null
   },
   "SkillUnlock_BlueDragon": {
-    "localized_name": "<itemName id=|SkillUnlock_BlueDragon|/>",
+    "localized_name": "碧海龍專用鞍具",
     "description": null
   },
   "SkillUnlock_BlueThunderHorse": {
-    "localized_name": "<itemName id=|SkillUnlock_BlueThunderHorse|/>",
+    "localized_name": "馭雷馬專用鞍具",
     "description": null
   },
   "SkillUnlock_Boar": {
-    "localized_name": "<itemName id=|SkillUnlock_Boar|/>",
+    "localized_name": "草莽豬專用鞍具",
     "description": null
   },
   "SkillUnlock_Carbunclo": {
-    "localized_name": "<itemName id=|SkillUnlock_Carbunclo|/>",
+    "localized_name": "翠葉鼠專用衝鋒槍",
     "description": null
   },
   "SkillUnlock_ColorfulBird": {
-    "localized_name": "<itemName id=|SkillUnlock_ColorfulBird|/>",
+    "localized_name": "炸蛋鳥專用手套",
     "description": null
   },
   "SkillUnlock_DarkMechaDragon": {
-    "localized_name": "<itemName id=|SkillUnlock_DarkMechaDragon|/>",
+    "localized_name": "傑諾多蘭專用鞍具",
     "description": null
   },
   "SkillUnlock_Deer": {
-    "localized_name": "<itemName id=|SkillUnlock_Deer|/>",
+    "localized_name": "紫霞鹿專用鞍具",
     "description": null
   },
   "SkillUnlock_Deer_Ground": {
-    "localized_name": "<itemName id=|SkillUnlock_Deer_Ground|/>",
+    "localized_name": "祇岳鹿專用鞍具",
     "description": null
   },
   "SkillUnlock_DreamDemon": {
-    "localized_name": "<itemName id=|SkillUnlock_DreamDemon|/>",
+    "localized_name": "寐魔專用項圈",
     "description": null
   },
   "SkillUnlock_DrillGame": {
-    "localized_name": "<itemName id=|SkillUnlock_DrillGame|/>",
+    "localized_name": "碎岩龜專用頭帶",
     "description": null
   },
   "SkillUnlock_Eagle": {
-    "localized_name": "<itemName id=|SkillUnlock_Eagle|/>",
+    "localized_name": "天擒鳥專用手套",
     "description": null
   },
   "SkillUnlock_ElecPanda": {
-    "localized_name": "<itemName id=|SkillUnlock_ElecPanda|/>",
+    "localized_name": "暴電熊專用機關槍",
     "description": null
   },
   "SkillUnlock_FairyDragon": {
-    "localized_name": "<itemName id=|SkillUnlock_FairyDragon|/>",
+    "localized_name": "精靈龍專用鞍具",
     "description": null
   },
   "SkillUnlock_FairyDragon_Water": {
-    "localized_name": "<itemName id=|SkillUnlock_FairyDragon_Water|/>",
+    "localized_name": "水靈龍專用鞍具",
     "description": null
   },
   "SkillUnlock_FeatherOstrich": {
-    "localized_name": "<itemName id=|SkillUnlock_FeatherOstrich|/>",
+    "localized_name": "戰冠雀專用鞍具",
     "description": null
   },
   "SkillUnlock_FengyunDeeper": {
-    "localized_name": "<itemName id=|SkillUnlock_FengyunDeeper|/>",
+    "localized_name": "雲海鹿專用鞍具",
     "description": null
   },
   "SkillUnlock_FengyunDeeper_Electric": {
-    "localized_name": "<itemName id=|SkillUnlock_FengyunDeeper_Electric|/>",
+    "localized_name": "雷隱鹿專用鞍具",
     "description": null
   },
   "SkillUnlock_FireKirin": {
-    "localized_name": "<itemName id=|SkillUnlock_FireKirin|/>",
+    "localized_name": "火麒麟專用鞍具",
     "description": null
   },
   "SkillUnlock_FireKirin_Dark": {
-    "localized_name": "<itemName id=|SkillUnlock_FireKirin_Dark|/>",
+    "localized_name": "邪麒麟專用鞍具",
     "description": null
   },
   "SkillUnlock_FlameBuffalo": {
-    "localized_name": "<itemName id=|SkillUnlock_FlameBuffalo|/>",
+    "localized_name": "熾焰牛專用鞍具",
     "description": null
   },
   "SkillUnlock_FlowerDinosaur": {
-    "localized_name": "<itemName id=|SkillUnlock_FlowerDinosaur|/>",
+    "localized_name": "花冠龍專用鞍具",
     "description": null
   },
   "SkillUnlock_FlowerDinosaur_Electric": {
-    "localized_name": "<itemName id=|SkillUnlock_FlowerDinosaur_Electric|/>",
+    "localized_name": "雷冠龍專用鞍具",
     "description": null
   },
   "SkillUnlock_FlowerRabbit": {
-    "localized_name": "<itemName id=|SkillUnlock_FlowerRabbit|/>",
+    "localized_name": "波娜兔專用項圈",
     "description": null
   },
   "SkillUnlock_FlyingManta": {
-    "localized_name": "<itemName id=|SkillUnlock_FlyingManta|/>",
+    "localized_name": "魯米兒專用手套",
     "description": null
   },
   "SkillUnlock_Garm": {
-    "localized_name": "<itemName id=|SkillUnlock_Garm|/>",
+    "localized_name": "獵狼專用附鞍具背帶",
     "description": null
   },
   "SkillUnlock_GhostBeast": {
-    "localized_name": "<itemName id=|SkillUnlock_GhostBeast|/>",
+    "localized_name": "噬魂獸專用鞍具",
     "description": null
   },
   "SkillUnlock_GoldenHorse": {
-    "localized_name": "<itemName id=|SkillUnlock_GoldenHorse|/>",
+    "localized_name": "金馳獸專用鞍具",
     "description": null
   },
   "SkillUnlock_GrassMammoth": {
-    "localized_name": "<itemName id=|SkillUnlock_GrassMammoth|/>",
+    "localized_name": "森猛獁專用鞍具",
     "description": null
   },
   "SkillUnlock_GrassMammoth_Ice": {
-    "localized_name": "<itemName id=|SkillUnlock_GrassMammoth_Ice|/>",
+    "localized_name": "雪猛獁專用鞍具",
     "description": null
   },
   "SkillUnlock_GrassPanda": {
-    "localized_name": "<itemName id=|SkillUnlock_GrassPanda|/>",
+    "localized_name": "葉胖達專用榴彈發射器",
     "description": null
   },
   "SkillUnlock_GrassPanda_Electric": {
-    "localized_name": "<itemName id=|SkillUnlock_GrassPanda_Electric|/>",
+    "localized_name": "雷胖達專用榴彈發射器",
     "description": null
   },
   "SkillUnlock_GuardianDog": {
-    "localized_name": "<itemName id=|SkillUnlock_GuardianDog|/>",
+    "localized_name": "八雲犬專用鞍具",
     "description": null
   },
   "SkillUnlock_HadesBird": {
-    "localized_name": "<itemName id=|SkillUnlock_HadesBird|/>",
+    "localized_name": "雷冥鳥專用鞍具",
     "description": null
   },
   "SkillUnlock_HadesBird_Electric": {
-    "localized_name": "<itemName id=|SkillUnlock_HadesBird_Electric|/>",
+    "localized_name": "雷鳴鳥專用鞍具",
     "description": null
   },
   "SkillUnlock_HawkBird": {
-    "localized_name": "<itemName id=|SkillUnlock_HawkBird|/>",
+    "localized_name": "疾風隼專用鞍具",
     "description": null
   },
   "SkillUnlock_Hedgehog": {
-    "localized_name": "<itemName id=|SkillUnlock_Hedgehog|/>",
+    "localized_name": "電棘鼠專用手套",
     "description": null
   },
   "SkillUnlock_Hedgehog_Ice": {
-    "localized_name": "<itemName id=|SkillUnlock_Hedgehog_Ice|/>",
+    "localized_name": "冰刺鼠專用手套",
     "description": null
   },
   "SkillUnlock_Horus": {
-    "localized_name": "<itemName id=|SkillUnlock_Horus|/>",
+    "localized_name": "荷魯斯專用鞍具",
     "description": null
   },
   "SkillUnlock_Horus_Water": {
-    "localized_name": "<itemName id=|SkillUnlock_Horus_Water|/>",
+    "localized_name": "伊西斯專用鞍具",
     "description": null
   },
   "SkillUnlock_IceDeer": {
-    "localized_name": "<itemName id=|SkillUnlock_IceDeer|/>",
+    "localized_name": "嚴冬鹿專用鞍具",
     "description": null
   },
   "SkillUnlock_IceHorse": {
-    "localized_name": "<itemName id=|SkillUnlock_IceHorse|/>",
+    "localized_name": "喚冬獸專用鞍具",
     "description": null
   },
   "SkillUnlock_IceHorse_Dark": {
-    "localized_name": "<itemName id=|SkillUnlock_IceHorse_Dark|/>",
+    "localized_name": "喚夜獸專用鞍具",
     "description": null
   },
   "SkillUnlock_JetDragon": {
-    "localized_name": "<itemName id=|SkillUnlock_JetDragon|/>",
+    "localized_name": "空渦龍專用飛彈發射器",
     "description": null
   },
   "SkillUnlock_KingAlpaca": {
-    "localized_name": "<itemName id=|SkillUnlock_KingAlpaca|/>",
+    "localized_name": "君王美露帕專用鞍具",
     "description": null
   },
   "SkillUnlock_KingAlpaca_Ice": {
-    "localized_name": "<itemName id=|SkillUnlock_KingAlpaca_Ice|/>",
+    "localized_name": "冰帝美露帕專用鞍具",
     "description": null
   },
   "SkillUnlock_KingBahamut": {
-    "localized_name": "<itemName id=|SkillUnlock_KingBahamut|/>",
+    "localized_name": "焰煌專用鞍具",
     "description": null
   },
   "SkillUnlock_KingBahamut_Dragon": {
-    "localized_name": "<itemName id=|SkillUnlock_KingBahamut_Dragon|/>",
+    "localized_name": "歿殃專用鞍具",
     "description": null
   },
   "SkillUnlock_Kirin": {
-    "localized_name": "<itemName id=|SkillUnlock_Kirin|/>",
+    "localized_name": "雷角馬專用鞍具",
     "description": null
   },
   "SkillUnlock_Kitsunebi": {
-    "localized_name": "<itemName id=|SkillUnlock_Kitsunebi|/>",
+    "localized_name": "火絨狐專用背帶",
     "description": null
   },
   "SkillUnlock_Kitsunebi_Ice": {
-    "localized_name": "<itemName id=|SkillUnlock_Kitsunebi_Ice|/>",
+    "localized_name": "雪絨狐專用背帶",
     "description": null
   },
   "SkillUnlock_LazyDragon": {
-    "localized_name": "<itemName id=|SkillUnlock_LazyDragon|/>",
+    "localized_name": "佩克龍專用飛彈發射器",
     "description": null
   },
   "SkillUnlock_LazyDragon_Electric": {
-    "localized_name": "<itemName id=|SkillUnlock_LazyDragon_Electric|/>",
+    "localized_name": "派克龍專用飛彈發射器",
     "description": null
   },
   "SkillUnlock_Manticore": {
-    "localized_name": "<itemName id=|SkillUnlock_Manticore|/>",
+    "localized_name": "獄焰王專用鞍具",
     "description": null
   },
   "SkillUnlock_Manticore_Dark": {
-    "localized_name": "<itemName id=|SkillUnlock_Manticore_Dark|/>",
+    "localized_name": "獄閻王專用鞍具",
     "description": null
   },
   "SkillUnlock_Monkey": {
-    "localized_name": "<itemName id=|SkillUnlock_Monkey|/>",
+    "localized_name": "新葉猿專用突擊步槍",
     "description": null
   },
   "SkillUnlock_MoonQueen": {
-    "localized_name": "<itemName id=|SkillUnlock_MoonQueen|/>",
+    "localized_name": "輝月伊專用鞍具",
     "description": null
   },
   "SkillUnlock_MopKing": {
-    "localized_name": "<itemName id=|SkillUnlock_MopKing|/>",
+    "localized_name": "毛老爹專用鞍具",
     "description": null
   },
   "SkillUnlock_MushroomDragon": {
-    "localized_name": "<itemName id=|SkillUnlock_MushroomDragon|/>",
+    "localized_name": "菇咚專用鞍具",
     "description": null
   },
   "SkillUnlock_MushroomDragon_Dark": {
-    "localized_name": "<itemName id=|SkillUnlock_MushroomDragon_Dark|/>",
+    "localized_name": "菇波專用鞍具",
     "description": null
   },
   "SkillUnlock_NaughtyCat": {
-    "localized_name": "<itemName id=|SkillUnlock_NaughtyCat|/>",
+    "localized_name": "笑魘猫專用鞍具",
     "description": null
   },
   "SkillUnlock_NegativeOctopus": {
-    "localized_name": "<itemName id=|SkillUnlock_NegativeOctopus|/>",
+    "localized_name": "勾魂魷專用手套",
     "description": null
   },
   "SkillUnlock_NightBlueHorse": {
-    "localized_name": "<itemName id=|SkillUnlock_NightBlueHorse|/>",
+    "localized_name": "夜冥駒專用鞍具",
     "description": null
   },
   "SkillUnlock_Penguin": {
-    "localized_name": "<itemName id=|SkillUnlock_Penguin|/>",
+    "localized_name": "企丸丸專用火箭發射器",
     "description": null
   },
   "SkillUnlock_PurpleSpider": {
-    "localized_name": "<itemName id=|SkillUnlock_PurpleSpider|/>",
+    "localized_name": "桃蛛娘專用鞍具",
     "description": null
   },
   "SkillUnlock_RaijinDaughter": {
-    "localized_name": "<itemName id=|SkillUnlock_RaijinDaughter|/>",
+    "localized_name": "雷鳴童子專用項圈",
     "description": null
   },
   "SkillUnlock_RaijinDaughter_Water": {
-    "localized_name": "<itemName id=|SkillUnlock_RaijinDaughter_Water|/>",
+    "localized_name": "天陰童子專用項圈",
     "description": null
   },
   "SkillUnlock_RedArmorBird": {
-    "localized_name": "<itemName id=|SkillUnlock_RedArmorBird|/>",
+    "localized_name": "燧火鳥專用鞍具",
     "description": null
   },
   "SkillUnlock_SaintCentaur": {
-    "localized_name": "<itemName id=|SkillUnlock_SaintCentaur|/>",
+    "localized_name": "聖光騎士專用鞍具",
     "description": null
   },
   "SkillUnlock_SakuraSaurus": {
-    "localized_name": "<itemName id=|SkillUnlock_SakuraSaurus|/>",
+    "localized_name": "連理龍專用鞍具",
     "description": null
   },
   "SkillUnlock_SakuraSaurus_Water": {
-    "localized_name": "<itemName id=|SkillUnlock_SakuraSaurus_Water|/>",
+    "localized_name": "海誓龍專用鞍具",
     "description": null
   },
   "SkillUnlock_Serpent": {
-    "localized_name": "<itemName id=|SkillUnlock_Serpent|/>",
+    "localized_name": "滑水蛇專用鞍具",
     "description": null
   },
   "SkillUnlock_Serpent_Ground": {
-    "localized_name": "<itemName id=|SkillUnlock_Serpent_Ground|/>",
+    "localized_name": "流沙蛇專用鞍具",
     "description": null
   },
   "SkillUnlock_SkyDragon": {
-    "localized_name": "<itemName id=|SkillUnlock_SkyDragon|/>",
+    "localized_name": "天羽龍專用鞍具",
     "description": null
   },
   "SkillUnlock_SkyDragon_Grass": {
-    "localized_name": "<itemName id=|SkillUnlock_SkyDragon_Grass|/>",
+    "localized_name": "翠羽龍專用鞍具",
     "description": null
   },
   "SkillUnlock_SnowTigerBeastman": {
-    "localized_name": "<itemName id=|SkillUnlock_SnowTigerBeastman|/>",
+    "localized_name": "霜牙王專用巨錘",
     "description": null
   },
   "SkillUnlock_Suzaku": {
-    "localized_name": "<itemName id=|SkillUnlock_Suzaku|/>",
+    "localized_name": "朱雀專用鞍具",
     "description": null
   },
   "SkillUnlock_Suzaku_Water": {
-    "localized_name": "<itemName id=|SkillUnlock_Suzaku_Water|/>",
+    "localized_name": "清雀專用鞍具",
     "description": null
   },
   "SkillUnlock_ThunderBird": {
-    "localized_name": "<itemName id=|SkillUnlock_ThunderBird|/>",
+    "localized_name": "迅雷鳥專用鞍具",
     "description": null
   },
   "SkillUnlock_ThunderDog": {
-    "localized_name": "<itemName id=|SkillUnlock_ThunderDog|/>",
+    "localized_name": "霹靂犬專用鞍具",
     "description": null
   },
   "SkillUnlock_Umihebi": {
-    "localized_name": "<itemName id=|SkillUnlock_Umihebi|/>",
+    "localized_name": "覆海龍專用鞍具",
     "description": null
   },
   "SkillUnlock_Umihebi_Fire": {
-    "localized_name": "<itemName id=|SkillUnlock_Umihebi_Fire|/>",
+    "localized_name": "騰炎龍專用鞍具",
     "description": null
   },
   "SkillUnlock_VolcanicMonster": {
-    "localized_name": "<itemName id=|SkillUnlock_VolcanicMonster|/>",
+    "localized_name": "熔岩獸專用鞍具",
     "description": null
   },
   "SkillUnlock_VolcanicMonster_Ice": {
-    "localized_name": "<itemName id=|SkillUnlock_VolcanicMonster_Ice|/>",
+    "localized_name": "寒霜獸專用鞍具",
     "description": null
   },
   "SkillUnlock_WeaselDragon": {
-    "localized_name": "<itemName id=|SkillUnlock_WeaselDragon|/>",
+    "localized_name": "疾旋鼬專用鞍具",
     "description": null
   },
   "SkillUnlock_WeaselDragon_Fire": {
-    "localized_name": "<itemName id=|SkillUnlock_WeaselDragon_Fire|/>",
+    "localized_name": "桃旋鼬專用鞍具",
     "description": null
   },
   "SkillUnlock_WhiteAlienDragon": {
-    "localized_name": "<itemName id=|SkillUnlock_WhiteAlienDragon|/>",
+    "localized_name": "傑諾路達專用鞍具",
     "description": null
   },
   "SkillUnlock_WhiteDeer": {
-    "localized_name": "<itemName id=|SkillUnlock_WhiteDeer|/>",
+    "localized_name": "淨世鹿專用鞍具",
     "description": null
   },
   "SkillUnlock_WhiteShieldDragon": {
-    "localized_name": "<itemName id=|SkillUnlock_WhiteShieldDragon|/>",
+    "localized_name": "艾基魯迦專用鞍具",
     "description": null
   },
   "SkillUnlock_WindChimes": {
-    "localized_name": "<itemName id=|SkillUnlock_WindChimes|/>",
+    "localized_name": "吊縛靈專用手套",
     "description": null
   },
   "SkillUnlock_WindChimes_Ice": {
-    "localized_name": "<itemName id=|SkillUnlock_WindChimes_Ice|/>",
+    "localized_name": "冰縛靈專用手套",
     "description": null
   },
   "SkillUnlock_Yeti": {
-    "localized_name": "<itemName id=|SkillUnlock_Yeti|/>",
+    "localized_name": "白絨雪怪專用鞍具",
     "description": null
   },
   "SkillUnlock_Yeti_Grass": {
-    "localized_name": "<itemName id=|SkillUnlock_Yeti_Grass|/>",
+    "localized_name": "綠苔絨怪專用鞍具",
     "description": null
   },
   "SkinChange": {
-    "localized_name": "<mapObjectName id=|SkinChange|/>",
+    "localized_name": "帕魯裝扮機",
     "description": null
   },
   "Snowman": {
-    "localized_name": "<mapObjectName id=|Snowman|/>",
+    "localized_name": "雪人",
     "description": null
   },
   "Spa": {
-    "localized_name": "<mapObjectName id=|Spa|/>",
-    "description": "帕魯進入「<mapObjectName id=|Spa|/>」即可回復SAN值。"
+    "localized_name": "溫泉",
+    "description": "帕魯進入「溫泉」即可回復SAN值。"
   },
   "Spa2": {
-    "localized_name": "<mapObjectName id=|Spa2|/>",
+    "localized_name": "優質溫泉",
     "description": "進入此設施的帕魯能夠回復更多SAN值。"
   },
   "Spear": {
-    "localized_name": "<itemName id=|Spear|/>",
+    "localized_name": "石矛",
     "description": null
   },
   "Spear_2": {
-    "localized_name": "<itemName id=|Spear_2|/>",
-    "description": "利於近距離戰鬥的矛。 以金屬製成，攻擊力有所提升。 可在｢<mapObjectName id=|Factory_Hard_01|/>｣製作。"
+    "localized_name": "金屬矛",
+    "description": "利於近距離戰鬥的矛。 以金屬製成，攻擊力有所提升。 可在｢優質工作臺｣製作。"
   },
   "Spear_3": {
-    "localized_name": "<itemName id=|Spear_3|/>",
-    "description": "利於近距離戰鬥的矛。 以優質金屬製成，攻擊力有所提升。 可在｢<mapObjectName id=|Factory_Hard_02|/>｣製作。"
+    "localized_name": "精煉金屬矛",
+    "description": "利於近距離戰鬥的矛。 以優質金屬製成，攻擊力有所提升。 可在｢作業流水線工廠｣製作。"
   },
   "Spear_ForestBoss": {
-    "localized_name": "<itemName id=|Spear_ForestBoss|/>",
+    "localized_name": "莉莉之矛",
     "description": null
   },
   "Special_ElectricHatchingPalEgg": {
-    "localized_name": "<mapObjectName id=|ElectricHatchingPalEgg|/>",
+    "localized_name": "電能帕魯蛋孵化器",
     "description": null
   },
   "Special_HatchingPalEgg": {
-    "localized_name": "<mapObjectName id=|HatchingPalEgg|/>",
+    "localized_name": "帕魯蛋孵化器",
     "description": "設置帕魯蛋後， 便可使之孵化。"
   },
   "Special_PalRankUp": {
-    "localized_name": "<mapObjectName id=|CharacterRankUp|/>",
+    "localized_name": "帕魯濃縮機",
     "description": "將多隻同種帕魯濃縮後合成， 便可將該帕魯強化為更高階級的個體。"
   },
   "Special_PalSphere_Grade_01": {
-    "localized_name": "<itemName id=|PalSphere|/>",
+    "localized_name": "帕魯球",
     "description": "投擲這種道具便能捕捉帕魯。 此為量產款式，只對低等級的帕魯有效。"
   },
   "Special_PalSphere_Grade_02": {
-    "localized_name": "<itemName id=|PalSphere_Mega|/>",
-    "description": "投擲這種道具便能捕捉帕魯。 此款式性能有所提升，可捕捉的帕魯範圍更廣。 可在｢<mapObjectName id=|SphereFactory_Black_01|/>｣製作。"
+    "localized_name": "高級帕魯球",
+    "description": "投擲這種道具便能捕捉帕魯。 此款式性能有所提升，可捕捉的帕魯範圍更廣。 可在｢帕魯球工作臺｣製作。"
   },
   "Special_PalSphere_Grade_03": {
-    "localized_name": "<itemName id=|PalSphere_Giga|/>",
-    "description": "投擲這種道具便能捕捉帕魯。 此款式可捕捉有一定強度的帕魯。 可在｢<mapObjectName id=|SphereFactory_Black_01|/>｣製作。"
+    "localized_name": "優質帕魯球",
+    "description": "投擲這種道具便能捕捉帕魯。 此款式可捕捉有一定強度的帕魯。 可在｢帕魯球工作臺｣製作。"
   },
   "Special_PalSphere_Grade_04": {
-    "localized_name": "<itemName id=|PalSphere_Tera|/>",
-    "description": "投擲這種道具便能捕捉帕魯。 此款式可捕捉相當強大的帕魯。 可在｢<mapObjectName id=|SphereFactory_Black_02|/>｣製作。"
+    "localized_name": "特級帕魯球",
+    "description": "投擲這種道具便能捕捉帕魯。 此款式可捕捉相當強大的帕魯。 可在｢帕魯球流水線工廠｣製作。"
   },
   "Special_PalSphere_Grade_05": {
-    "localized_name": "<itemName id=|PalSphere_Master|/>",
-    "description": "投擲這種道具便能捕捉帕魯。 此款式的性能相當好，沒多少帕魯能逃得掉。 可在｢<mapObjectName id=|SphereFactory_Black_03|/>｣製作。"
+    "localized_name": "大師帕魯球",
+    "description": "投擲這種道具便能捕捉帕魯。 此款式的性能相當好，沒多少帕魯能逃得掉。 可在｢帕魯球流水線工廠II｣製作。"
   },
   "Special_PalSphere_Grade_06": {
-    "localized_name": "<itemName id=|PalSphere_Legend|/>",
-    "description": "投擲這種道具便能捕捉帕魯。 此款式的性能極高，幾乎沒有帕魯能逃得掉。 可在｢<mapObjectName id=|SphereFactory_Black_03|/>｣製作。"
+    "localized_name": "傳奇帕魯球",
+    "description": "投擲這種道具便能捕捉帕魯。 此款式的性能極高，幾乎沒有帕魯能逃得掉。 可在｢帕魯球流水線工廠II｣製作。"
   },
   "Special_PalSphere_Grade_07": {
-    "localized_name": "<itemName id=|PalSphere_Ultimate|/>",
-    "description": "投擲這種道具便能捕捉帕魯。 擁有壓倒性的性能，幾乎可以抓住任何帕魯。 可在｢<mapObjectName id=|SphereFactory_Black_03|/>｣製作。"
+    "localized_name": "究極帕魯球",
+    "description": "投擲這種道具便能捕捉帕魯。 擁有壓倒性的性能，幾乎可以抓住任何帕魯。 可在｢帕魯球流水線工廠II｣製作。"
   },
   "Special_SphereFactory_Black_Grade_01": {
-    "localized_name": "<mapObjectName id=|SphereFactory_Black_01|/>",
-    "description": "捕捉帕魯用的帕魯球工作台。 需有具備｢COMMON_WORK_SUITABILITY_Handcraft｣適應性的帕魯才能進行作業。"
+    "localized_name": "帕魯球工作臺",
+    "description": "捕捉帕魯用的帕魯球工作臺。 需有具備｢手工作業｣適應性的帕魯才能進行作業。"
   },
   "Special_SphereFactory_Black_Grade_02": {
-    "localized_name": "<mapObjectName id=|SphereFactory_Black_02|/>",
-    "description": "生產「<itemName id=|PalSphere|/>」的速度較為快速。 需有具備「COMMON_WORK_SUITABILITY_Handcraft」適應性的帕魯。"
+    "localized_name": "帕魯球流水線工廠",
+    "description": "生產「帕魯球」的速度較為快速。 需有具備「手工作業」適應性的帕魯。"
   },
   "Special_SphereFactory_Black_Grade_03": {
-    "localized_name": "<mapObjectName id=|SphereFactory_Black_03|/>",
-    "description": "生產「<itemName id=|PalSphere|/>」的速度更為快速。 需有具備「COMMON_WORK_SUITABILITY_Handcraft」適應性的帕魯。"
+    "localized_name": "帕魯球流水線工廠II",
+    "description": "生產「帕魯球」的速度更為快速。 需有具備「手工作業」適應性的帕魯。"
   },
   "SphereFactory_Black_04": {
-    "localized_name": "<mapObjectName id=|SphereFactory_Black_04|/>",
+    "localized_name": "高等文明帕魯球工廠",
     "description": null
   },
   "SphereModule_Curve": {
-    "localized_name": "<itemName id=|SphereModule_Curve|/>",
+    "localized_name": "曲線模組",
     "description": null
   },
   "SphereModule_Curve2": {
-    "localized_name": "<itemName id=|SphereModule_Curve2|/>",
+    "localized_name": "滑球模組",
     "description": null
   },
   "SphereModule_Heavy": {
-    "localized_name": "<itemName id=|SphereModule_Heavy|/>",
+    "localized_name": "重量模組",
     "description": null
   },
   "SphereModule_Homing": {
-    "localized_name": "<itemName id=|SphereModule_Homing|/>",
+    "localized_name": "追蹤模組",
     "description": null
   },
   "SphereModule_Sniper": {
-    "localized_name": "<itemName id=|SphereModule_Sniper|/>",
+    "localized_name": "狙擊模組",
     "description": null
   },
   "SphereModule_Sniper2": {
-    "localized_name": "<itemName id=|SphereModule_Sniper2|/>",
+    "localized_name": "狙擊模組Ⅱ",
     "description": null
   },
   "StainlessSteel": {
-    "localized_name": "<itemName id=|StainlessSteel|/>",
+    "localized_name": "六稜晶錠",
     "description": null
   },
   "Stone_Gate": {
-    "localized_name": "<mapObjectName id=|Stone_Gate|/>",
+    "localized_name": "石砌大門",
     "description": "可讓稍大的帕魯通過的石砌大門。"
   },
   "Stone_houseset": {
@@ -1696,71 +1696,71 @@
     "description": "持有此套組便可用石頭打造據點。 可建造石砌地基、牆壁、屋頂、樓梯等 建造房屋時所需的構造。"
   },
   "Stump": {
-    "localized_name": "<mapObjectName id=|Stump|/>",
+    "localized_name": "樹樁與斧頭",
     "description": null
   },
   "TableDresser01_Stone": {
-    "localized_name": "<mapObjectName id=|TableDresser01_Stone|/>",
+    "localized_name": "古典梳妝台",
     "description": null
   },
   "ToolBoxV1": {
-    "localized_name": "<mapObjectName id=|ToolBoxV1|/>",
+    "localized_name": "大型工具箱",
     "description": null
   },
   "Torch": {
-    "localized_name": "<mapObjectName id=|Torch|/>",
+    "localized_name": "固定式火炬",
     "description": "設置在據點即可照亮四周。"
   },
   "TransmissionTower": {
-    "localized_name": "<mapObjectName id=|TransmissionTower|/>",
+    "localized_name": "輸電塔",
     "description": null
   },
   "Trap_LegHold": {
-    "localized_name": "<mapObjectName id=|Trap_LegHold|/>",
+    "localized_name": "捕獸夾（小）",
     "description": "能讓踩到的目標被困住。 只對小型帕魯或人類有效。"
   },
   "Trap_LegHold_Big": {
-    "localized_name": "<mapObjectName id=|Trap_LegHold_Big|/>",
+    "localized_name": "捕獸夾（大）",
     "description": "能讓踩到的目標被困住。 只對大型帕魯有效。"
   },
   "Trap_MineAttack": {
-    "localized_name": "<mapObjectName id=|Trap_MineAttack|/>",
+    "localized_name": "地雷",
     "description": "敵人踩上去就會自動爆炸。"
   },
   "Trap_MineElecShock": {
-    "localized_name": "<mapObjectName id=|Trap_MineElecShock|/>",
+    "localized_name": "電擊地雷",
     "description": "能讓踩到的目標觸電 帕魯在觸電時會比較容易捕獲。"
   },
   "Trap_MineFreeze": {
-    "localized_name": "<mapObjectName id=|Trap_MineFreeze|/>",
+    "localized_name": "冰凍地雷",
     "description": "能讓踩到的目標凍結。 帕魯在凍結時會比較容易捕獲。"
   },
   "Trap_Noose": {
-    "localized_name": "<mapObjectName id=|Trap_Noose|/>",
+    "localized_name": "套索陷阱",
     "description": "能抓住途經的帕魯。 只對小型帕魯或人類有效。"
   },
   "Unlock_Picking_Tier1": {
-    "localized_name": "<itemName id=|Unlock_Picking_Tier1|/>",
+    "localized_name": "簡易開鎖工具",
     "description": null
   },
   "Unlock_Picking_Tier2": {
-    "localized_name": "<itemName id=|Unlock_Picking_Tier2|/>",
+    "localized_name": "高級開鎖工具",
     "description": null
   },
   "Unlock_Picking_Tier3": {
-    "localized_name": "<itemName id=|Unlock_Picking_Tier3|/>",
+    "localized_name": "專家開鎖工具",
     "description": null
   },
   "WallSignboard": {
-    "localized_name": "<mapObjectName id=|WallSignBoard|/>",
+    "localized_name": "WallSignBoard",
     "description": null
   },
   "WallTorch": {
-    "localized_name": "<mapObjectName id=|WallTorch|/>",
+    "localized_name": "懸掛型火炬",
     "description": "可安裝在牆壁上。"
   },
   "Wood_Gate": {
-    "localized_name": "<mapObjectName id=|Wood_Gate|/>",
+    "localized_name": "木造大門",
     "description": "可讓稍大的帕魯通過的木造大門。"
   },
   "Wooden_houseset": {
@@ -1768,19 +1768,19 @@
     "description": "持有此套組便可用木頭打造據點。 可建造木造地基、牆壁、屋頂、樓梯等 建造房屋時所需的構造。"
   },
   "Wooden_ladder": {
-    "localized_name": "<mapObjectName id=|Wooden_ladder|/>",
+    "localized_name": "梯子",
     "description": null
   },
   "WorkSpeedIncrease1": {
-    "localized_name": "<mapObjectName id=|WorkSpeedIncrease1|/>",
+    "localized_name": "β波發生器",
     "description": null
   },
   "Workbench": {
-    "localized_name": "<mapObjectName id=|WorkBench|/>",
-    "description": "用來製作簡單道具的「<mapObjectName id=|WorkBench|/>」。 如有具備「COMMON_WORK_SUITABILITY_Handcraft」適應性的帕魯， 牠就會來協助作業。"
+    "localized_name": "初階工作臺",
+    "description": "用來製作簡單道具的「初階工作臺」。 如有具備「手工作業」適應性的帕魯， 牠就會來協助作業。"
   },
   "YakushimaBlade": {
-    "localized_name": "<itemName id=|YakushimaBlade|/>",
+    "localized_name": "彩虹貓之刃",
     "description": null
   }
 }
