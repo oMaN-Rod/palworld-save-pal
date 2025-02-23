@@ -49,7 +49,7 @@
 		if (!playerGuild?.guild_chest) return null;
 		const building = buildingsData.buildings['GuildChest'];
 		if (building) {
-			return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/buildings/${building.icon}.png`);
+			return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${building.icon}.png`);
 		}
 		return staticIcons.unknownIcon;
 	});
