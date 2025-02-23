@@ -66,7 +66,7 @@ class AssetLoader {
 	loadPalImage(character_id: string, is_pal: boolean = true): string {
 		if (!character_id) return staticIcons.unknownIcon;
 		character_id = is_pal ? this.cleanseCharacterId(character_id) : 'commonhuman';
-		let image = this.loadImage(`${ASSET_DATA_PATH}/img/pals/full/${character_id}.png`);
+		let image = this.loadImage(`${ASSET_DATA_PATH}/img/${character_id}.png`);
 		if (image) {
 			return image;
 		} else {
@@ -78,12 +78,12 @@ class AssetLoader {
 	loadMenuImage(character_id: string, is_pal: boolean = true): string {
 		if (!character_id) return staticIcons.unknownIcon;
 		character_id = is_pal ? this.cleanseCharacterId(character_id) : 'commonhuman';
-		const image = this.loadImage(`${ASSET_DATA_PATH}/img/pals/menu/${character_id}_menu.png`);
+		const image = this.loadImage(`${ASSET_DATA_PATH}/img/${character_id}_menu.png`);
 		if (image) {
 			return image;
 		} else {
 			console.warn(
-				`Failed to load menu image for ${`${ASSET_DATA_PATH}/img/pals/menu/${character_id}_menu.png`}`
+				`Failed to load menu image for ${`${ASSET_DATA_PATH}/img/${character_id}_menu.png`}`
 			);
 		}
 		return staticIcons.unknownIcon;

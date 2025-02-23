@@ -14,7 +14,7 @@
 	}>();
 
 	const modal = getModalState();
-	const backgroundImage = assetLoader.loadImage(`${ASSET_DATA_PATH}/img/passives/bg.png`);
+	const backgroundImage = assetLoader.loadImage(`${ASSET_DATA_PATH}/img/bg.png`);
 
 	type ExtendedPresetProfile = PresetProfile & { id: string };
 
@@ -50,7 +50,7 @@
 			const elementObj = elementsData.elements[elementType];
 			if (elementObj) {
 				icons[elementType] = assetLoader.loadImage(
-					`${ASSET_DATA_PATH}/img/elements/${elementObj.badge_icon}.png`
+					`${ASSET_DATA_PATH}/img/${elementObj.badge_icon}.png`
 				) as string;
 			}
 		}
@@ -61,7 +61,7 @@
 		for (const skill of Object.values(passiveSkillsData.passiveSkills)) {
 			if (icons[skill.details.rank]) continue;
 			icons[skill.details.rank] = assetLoader.loadImage(
-				`${ASSET_DATA_PATH}/img/passives/rank_${skill.details.rank}.png`
+				`${ASSET_DATA_PATH}/img/rank_${skill.details.rank}.png`
 			) as string;
 		}
 		return icons;
@@ -94,7 +94,7 @@
 		if (!skill || skill.localized_name === 'None') return undefined;
 		const passiveSkill = skill as PassiveSkill;
 		return assetLoader.loadImage(
-			`${ASSET_DATA_PATH}/img/passives/rank_${passiveSkill.details.rank}.png`
+			`${ASSET_DATA_PATH}/img/rank_${passiveSkill.details.rank}.png`
 		);
 	}
 

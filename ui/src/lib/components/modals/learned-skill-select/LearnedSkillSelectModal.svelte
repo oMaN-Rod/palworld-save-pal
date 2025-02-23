@@ -30,7 +30,7 @@
 		const activeSkill = skill as ActiveSkill;
 		const element = await elementsData.elements[activeSkill.details.element];
 		if (!element) return undefined;
-		return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/elements/${element.icon}.png`);
+		return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${element.icon}.png`);
 	}
 
 	function handleAddSkill() {

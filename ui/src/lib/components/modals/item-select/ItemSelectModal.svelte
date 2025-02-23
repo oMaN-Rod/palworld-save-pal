@@ -89,10 +89,10 @@
 		try {
 			if (staticId.includes('SkillCard')) {
 				return assetLoader.loadImage(
-					`${ASSET_DATA_PATH}/img/elements/${itemData.details.icon}.png`
+					`${ASSET_DATA_PATH}/img/${itemData.details.icon}.png`
 				);
 			} else {
-				return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/icons/${itemData.details.icon}.png`);
+				return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${itemData.details.icon}.png`);
 			}
 		} catch (error) {
 			console.error(`Failed to load image for static id: ${staticId}`);

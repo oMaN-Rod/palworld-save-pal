@@ -60,7 +60,7 @@
 	});
 
 	const genderIcon = $derived(
-		assetLoader.loadImage(`${ASSET_DATA_PATH}/img/icons/${pal.gender}.png`)
+		assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${pal.gender}.png`)
 	);
 	const palIcon = $derived.by(() => {
 		if (!pal) return '';

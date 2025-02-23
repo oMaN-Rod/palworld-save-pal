@@ -67,7 +67,7 @@
 		const activeSkill = skill as ActiveSkill;
 		const element = await elementsData.searchElement(activeSkill.details.element);
 		if (!element) return undefined;
-		return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/elements/${element.icon}.png`);
+		return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${element.icon}.png`);
 	}
 
 	async function getPassiveSkillIcon(skillId: string): Promise<string | undefined> {
@@ -75,7 +75,7 @@
 		if (!skill || skill.localized_name === 'None') return undefined;
 		const passiveSkill = skill as PassiveSkill;
 		return assetLoader.loadImage(
-			`${ASSET_DATA_PATH}/img/passives/rank_${passiveSkill.details.rank}.png`
+			`${ASSET_DATA_PATH}/img/rank_${passiveSkill.details.rank}.png`
 		);
 	}
 

@@ -28,12 +28,12 @@
 	let tierIcon = $derived.by(() => {
 		if (skillData) {
 			return assetLoader.loadImage(
-				`${ASSET_DATA_PATH}/img/passives/rank_${skillData.details.rank}.png`
+				`${ASSET_DATA_PATH}/img/rank_${skillData.details.rank}.png`
 			);
 		}
 	});
 
-	const backgroundImage = assetLoader.loadImage(`${ASSET_DATA_PATH}/img/passives/bg.png`);
+	const backgroundImage = assetLoader.loadImage(`${ASSET_DATA_PATH}/img/bg.png`);
 
 	let borderClass = $derived.by(() => {
 		if (skillData) {
