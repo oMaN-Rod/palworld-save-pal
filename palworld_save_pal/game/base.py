@@ -164,3 +164,12 @@ class Base(BaseModel):
                         item_container_save_data=item_container_save_data,
                         dynamic_item_save_data=dynamic_item_save_data,
                     )
+    
+    def nuke(self):
+        if self._pal_container:
+            self._pal_container.nuke()
+            
+        for container in self.storage_containers.values():
+            container.nuke()
+        
+        self._base_save_data = {}

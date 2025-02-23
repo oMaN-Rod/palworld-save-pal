@@ -628,3 +628,20 @@ class Player(BaseModel):
         self._load_food_equip_container(
             inventory_info, item_container_save_data, dynamic_item_save_data
         )
+    
+    def nuke(self):
+        """
+        Deletes the player and all associated data.
+        
+        Note:
+            Use this function with caution as it will result in the loss of all player data.
+        """
+        logger.info("Nuking player %s (%s)", self.nickname, self.uid)
+        # Call nuke on each container
+        self.common_container.nuke()
+        self.essential_container.nuke()
+        self.weapon_load_out_container.nuke()
+        self.player_equipment_armor_container.nuke()
+        self.food_equip_container.nuke()
+        self._pal_box.nuke()
+        self._party.nuke()
