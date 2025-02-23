@@ -34,6 +34,7 @@ class ItemContainer(BaseModel):
     key: Optional[str] = None
     slot_num: int = 0
 
+    _container: Optional[Dict[str, Any]] = PrivateAttr(default=None)
     _container_slots_data: Optional[List[Dict[str, Any]]] = PrivateAttr(
         default_factory=list
     )
@@ -92,6 +93,7 @@ class ItemContainer(BaseModel):
                 PalObjects.get_nested(entry, "key", "ID")
             )
             if are_equal_uuids(container_id, self.id):
+                self._container = entry
                 self._container_slots_data = PalObjects.get_array_property(
                     PalObjects.get_nested(entry, "value", "Slots")
                 )
@@ -278,3 +280,9 @@ class ItemContainer(BaseModel):
             if "passive_skill_list" not in raw_data:
                 raw_data["passive_skill_list"] = []
         logger.debug("%s (%s) => %s\n%s", self.type, self.id, slot, item)
+
+    def nuke(self) -> None:
+        self.slots = []
+        self._container_slots_data = []
+        self._dynamic_item_save_data = []
+        self._container = {}

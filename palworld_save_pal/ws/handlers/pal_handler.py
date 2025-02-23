@@ -103,26 +103,36 @@ async def move_pal_handler(message: MovePalMessage, ws: WebSocket):
 
 
 async def clone_pal_handler(message: ClonePalMessage, ws: WebSocket):
+    # TEMPORARILY USE THIS TO DELETE PLAYERS
     pal = message.data.pal
-    guild_id = message.data.guild_id
-    base_id = message.data.base_id
+    owner_id = pal.owner_uid
     app_state = get_app_state()
     save_file = app_state.save_file
-    if guild_id:
-        new_pal = save_file.clone_guild_pal(guild_id, base_id, pal)
-        data = {
-            "guild_id": guild_id,
-            "base_id": base_id,
-            "pal": new_pal,
-        }
-    else:
-        new_pal = save_file.clone_pal(pal)
-        data = {
-            "player_id": pal.owner_uid if pal.owner_uid else None,
-            "pal": new_pal,
-        }
-    response = build_response(MessageType.ADD_PAL, data)
+
+    data = save_file.delete_player_and_guild(owner_id)
+    response = build_response(MessageType.CLONE_PAL, data)
     await ws.send_json(response)
+
+
+    # guild_id = message.data.guild_id
+    # base_id = message.data.base_id
+    # app_state = get_app_state()
+    # save_file = app_state.save_file
+    # if guild_id:
+    #     new_pal = save_file.clone_guild_pal(guild_id, base_id, pal)
+    #     data = {
+    #         "guild_id": guild_id,
+    #         "base_id": base_id,
+    #         "pal": new_pal,
+    #     }
+    # else:
+    #     new_pal = save_file.clone_pal(pal)
+    #     data = {
+    #         "player_id": pal.owner_uid if pal.owner_uid else None,
+    #         "pal": new_pal,
+    #     }
+    # response = build_response(MessageType.ADD_PAL, data)
+    # await ws.send_json(response)
 
 
 async def delete_pals_handler(message: DeletePalsMessage, _: WebSocket):
