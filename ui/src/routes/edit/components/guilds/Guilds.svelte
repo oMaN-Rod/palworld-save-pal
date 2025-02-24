@@ -16,7 +16,6 @@
 	import { PalSelectModal, NumberInputModal, PalPresetSelectModal } from '$components/modals';
 	import { assetLoader, debounce, deepCopy, formatNickname } from '$utils';
 	import { cn } from '$theme';
-	import { onMount } from 'svelte';
 
 	interface PalWithBaseId {
 		pal: Pal;
@@ -37,7 +36,6 @@
 	let activeTab: 'pals' | 'storage' | 'guildChest' = $state('pals');
 	let currentStorageContainer: (ItemContainer & { slots: ItemContainerSlot[] }) | undefined =
 		$state(undefined);
-	let guildChest: (ItemContainer & { slots: ItemContainerSlot[] }) | undefined = $state(undefined);
 
 	const playerGuild = $derived.by(() => {
 		if (appState.selectedPlayer?.guild_id) {
@@ -86,18 +84,57 @@
 		return baseEntries[currentPage - 1] || null;
 	});
 
+	const ignoreKeys = ['None', 'Empty', 'TreasureBox', 'PalEgg', 'CommonDropItem'];
+
 	const currentBaseStorageContainers = $derived.by(() => {
 		if (!currentBase) return null;
 		const [_, base] = currentBase;
 		return Object.values(base.storage_containers)
 			.filter(
 				(container) =>
-					container.slot_num !== 0 &&
-					!container.key.includes('TreasureBox') &&
-					!container.key.includes('PalEgg') &&
-					!container.key.includes('CommonDropItem')
+					container.slot_num !== 0 && !ignoreKeys.some((key) => container.key.includes(key))
 			)
 			.sort((a, b) => a.key.localeCompare(b.key));
+	});
+
+	type InventoryInfo = {
+		containers: Record<string, number>;
+		total_count: number;
+	};
+
+	const currentBaseInventory = $derived.by(() => {
+		if (!currentBase) return [];
+		const [_, base] = currentBase;
+		let inventoryItems: Record<string, InventoryInfo> = {};
+		for (const container of Object.values(base.storage_containers)) {
+			for (const slot of container.slots) {
+				if (slot.static_id !== 'None') {
+					if (!inventoryItems[slot.static_id]) {
+						inventoryItems[slot.static_id] = {
+							containers: {},
+							total_count: 0
+						};
+					}
+					inventoryItems[slot.static_id].containers[container.key] =
+						(inventoryItems[slot.static_id].containers[container.key] || 0) + slot.count;
+					inventoryItems[slot.static_id].total_count += slot.count;
+				}
+			}
+		}
+		return Object.entries(inventoryItems)
+			.map(([static_id, info]) => ({
+				static_id,
+				containers: info.containers,
+				total_count: info.total_count
+			}))
+			.sort((a, b) => {
+				const itemA = itemsData.items[a.static_id];
+				const itemB = itemsData.items[b.static_id];
+				if (itemA && itemB) {
+					return itemA.info.localized_name.localeCompare(itemB.info.localized_name);
+				}
+				return a.static_id.localeCompare(b.static_id);
+			});
 	});
 
 	const currentStorageContainerIcon = $derived.by(() => {
@@ -141,6 +178,17 @@
 	});
 
 	const debouncedFilterPals = debounce(filterPals, 300);
+
+	function fixStupidTypos(key: string) {
+		switch (key) {
+			case 'Stonepit':
+				return 'StonePit';
+			case 'bone':
+				return 'Bone';
+			default:
+				return key;
+		}
+	}
 
 	function handleKeydown(event: KeyboardEvent) {
 		if (event.target instanceof HTMLInputElement) return;
@@ -621,6 +669,77 @@
 						{/if}
 					</div>
 				{/if}
+				{#if activeTab == 'storage'}
+					<List
+						items={currentBaseInventory}
+						baseClass="w-full"
+						listClass="h-[450px] 2xl:h-[700px]"
+						canSelect={false}
+						idKey="static_id"
+						headerClass="grid w-full grid-cols-[auto_1fr_auto] gap-"
+					>
+						{#snippet listHeader()}
+							<div class="h-8 w-8"></div>
+							<span class="font-bold">Inventory</span>
+							<span class="font-bold">Total</span>
+						{/snippet}
+						{#snippet listItem(item)}
+							{@const itemData = itemsData.items[fixStupidTypos(item.static_id)]}
+							{#if itemData}
+								{@const itemIcon = assetLoader.loadImage(
+									`${ASSET_DATA_PATH}/img/${itemData.details.icon}.png`
+								)}
+								<div class="grid w-full grid-cols-[auto_1fr_auto] gap-2">
+									<img
+										src={itemIcon || staticIcons.unknownIcon}
+										alt={itemData.info.localized_name}
+										class="h-8 w-8"
+									/>
+									<span>{itemData.info.localized_name}</span>
+									<span>{item.total_count.toLocaleString()}</span>
+								</div>
+							{:else}
+								<div class="grid w-full grid-cols-[auto_1fr_auto] gap-2">
+									<img src={staticIcons.unknownIcon} alt={item.static_id} class="h-8 w-8" />
+									<span>{item.static_id}</span>
+									<span>{item.total_count.toLocaleString()}</span>
+								</div>
+							{/if}
+						{/snippet}
+						{#snippet listItemPopup(item)}
+							{@const itemData = itemsData.items[item.static_id]}
+							{#if itemData}
+								<div class="flex flex-col">
+									<h6 class="h6">Total Count: {item.total_count}</h6>
+									{#each Object.entries(item.containers) as [containerId, count]}
+										{@const building = buildingsData.buildings[fixStupidTypos(containerId)]}
+										{#if building}
+											{@const buildingIcon = assetLoader.loadImage(
+												`${ASSET_DATA_PATH}/img/${building.icon}.png`
+											)}
+											<div class="grid w-full grid-cols-[auto_1fr_auto] gap-2">
+												<img
+													src={buildingIcon || staticIcons.unknownIcon}
+													alt={building.localized_name}
+													class="h-8 w-8"
+												/>
+												<span>{building.localized_name}</span>
+												<span>{count.toLocaleString()}</span>
+											</div>
+										{:else if !ignoreKeys.some((key) => containerId.includes(key))}
+											<div class="grid w-full grid-cols-2 gap-2">
+												<span class="font-bold"> {containerId}: </span>
+												<span>{count.toLocaleString()}</span>
+											</div>
+										{/if}
+									{/each}
+								</div>
+							{:else}
+								{item.static_id}
+							{/if}
+						{/snippet}
+					</List>
+				{/if}
 			</div>
 
 			<!-- Right Content -->
@@ -678,7 +797,7 @@
 								onselect={(itemContainer) => handleSelectStorageContainer(itemContainer)}
 							>
 								{#snippet listItem(item)}
-									{@const building = buildingsData.buildings[item.key]}
+									{@const building = buildingsData.buildings[fixStupidTypos(item.key)]}
 									{#if building}
 										{@const buildingIcon = assetLoader.loadImage(
 											`${ASSET_DATA_PATH}/img/${building.icon}.png`
@@ -692,11 +811,14 @@
 											<span>{building.localized_name}</span>
 										</div>
 									{:else}
-										{item.key}
+										<div class="grid grid-cols-[auto_1fr] gap-2">
+											<img src={staticIcons.unknownIcon} alt={item.key} class="h-8 w-8" />
+											<span>{item.key}</span>
+										</div>
 									{/if}
 								{/snippet}
 								{#snippet listItemPopup(item)}
-									{@const building = buildingsData.buildings[item.key]}
+									{@const building = buildingsData.buildings[fixStupidTypos(item.key)]}
 									{#if building}
 										<div class="flex flex-col">
 											<h4 class="h4">{building.localized_name}</h4>
