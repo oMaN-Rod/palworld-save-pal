@@ -769,7 +769,7 @@
 					{@const itemGroup = building?.type_a == BuildingTypeA.Food ? 'Food' : 'Common'}
 					<div class="max-h-[550px] overflow-y-auto 2xl:max-h-[800px]">
 						<div class="flex items-start space-x-4">
-							<div class="grid grid-cols-6 gap-2">
+							<div class="m-1 grid grid-cols-6 gap-2">
 								{#each Object.values(playerGuild.guild_chest.slots) as _, index}
 									<ItemBadge
 										bind:slot={playerGuild.guild_chest.slots[index]}

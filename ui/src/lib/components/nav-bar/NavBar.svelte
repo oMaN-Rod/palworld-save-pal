@@ -7,7 +7,7 @@
 		getSocketState
 	} from '$states';
 	import { Navigation } from '@skeletonlabs/skeleton-svelte';
-	import { File, Pencil, Info, Upload, Languages, Settings } from 'lucide-svelte';
+	import { File, Pencil, Info, Upload, Languages, Settings, Save } from 'lucide-svelte';
 	import { page } from '$app/stores';
 	import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
 	import { SettingsModal } from '$components/modals';
@@ -47,6 +47,13 @@
 </script>
 
 <Navigation.Rail width="48px" bind:value={navigationState.activePage}>
+	{#snippet header()}
+		{#if appState.saveFile}
+			<Navigation.Tile label="Save" title="Save" id="save" onclick={() => appState.writeSave()}>
+				<Save />
+			</Navigation.Tile>
+		{/if}
+	{/snippet}
 	{#snippet tiles()}
 		{#if appState.saveFile}
 			<Navigation.Tile label="Edit" title="Edit" id="edit" href="/edit" active="bg-secondary-500">

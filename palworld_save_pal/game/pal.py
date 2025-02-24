@@ -791,6 +791,7 @@ class Pal(BaseModel):
         skip_properties = {
             "is_predator",
             "is_tower",
+            "is_sick",
             "name",
             "max_hp",
             "character_key",

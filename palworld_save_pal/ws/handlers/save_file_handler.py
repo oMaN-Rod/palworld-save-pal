@@ -46,10 +46,6 @@ async def update_save_file_handler(message: UpdateSaveFileMessage, ws: WebSocket
     app_state.players = save_file.get_players()
     response = build_response(MessageType.UPDATE_SAVE_FILE, "Changes saved")
     await ws.send_json(response)
-    response = build_response(MessageType.GET_PLAYERS, app_state.players)
-    await ws.send_json(response)
-    response = build_response(MessageType.GET_GUILDS, app_state.guilds)
-    await ws.send_json(response)
 
 
 async def download_save_file_handler(_: DownloadSaveFileMessage, ws: WebSocket):
