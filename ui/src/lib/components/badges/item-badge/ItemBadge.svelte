@@ -144,7 +144,7 @@
 				return;
 			}
 			const palImgName = palCharacterId.toLowerCase().replaceAll(' ', '_');
-			return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${palImgName}_menu.png`);
+			return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_${palImgName}_icon_normal.png`);
 		}
 	});
 

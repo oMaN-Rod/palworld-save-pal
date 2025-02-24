@@ -1,0 +1,1786 @@
+{
+  "Accessory_AirDash1": {
+    "localized_name": "Air Dash Boots",
+    "description": null
+  },
+  "Accessory_AirDash2": {
+    "localized_name": "Double Air Dash Boots",
+    "description": null
+  },
+  "Accessory_JumpCount_Increase1": {
+    "localized_name": "Double Jump Boots",
+    "description": null
+  },
+  "Accessory_JumpCount_Increase2": {
+    "localized_name": "Triple Jump Boots",
+    "description": null
+  },
+  "Accessory_JumpPower_Increase": {
+    "localized_name": "Anti-Gravity Belt",
+    "description": null
+  },
+  "Accessory_Nonkilling": {
+    "localized_name": "Ring of Mercy",
+    "description": null
+  },
+  "Accessory_TalentChecker": {
+    "localized_name": "Ability Glasses",
+    "description": null
+  },
+  "AdditionalInventory_001": {
+    "localized_name": "Small Pouch",
+    "description": null
+  },
+  "AdditionalInventory_002": {
+    "localized_name": "Medium Pouch",
+    "description": null
+  },
+  "AdditionalInventory_003": {
+    "localized_name": "Large Pouch",
+    "description": null
+  },
+  "AdditionalInventory_004": {
+    "localized_name": "Giant Pouch",
+    "description": null
+  },
+  "Altar": {
+    "localized_name": "Summoning Altar",
+    "description": null
+  },
+  "Arrow": {
+    "localized_name": "Arrow",
+    "description": "Used with Old Bow. Requires Primitive Workbench to craft."
+  },
+  "Arrow_Fire": {
+    "localized_name": "Fire Arrow",
+    "description": "Arrows for shooting with Fire Bow and Fire Arrow Crossbow. Deals Fire damage. Requires Primitive Workbench to craft."
+  },
+  "Arrow_Poison": {
+    "localized_name": "Poison Arrow",
+    "description": "Arrows for shooting with Poison Bow and Poison Arrow Crossbow. It poisons any target it hits. Requires Primitive Workbench to craft."
+  },
+  "AssaultRifleBullet": {
+    "localized_name": "Assault Rifle Ammo",
+    "description": "Ammo for Assault Rifle and other similar weapons. Requires Weapon Assembly Line to craft."
+  },
+  "AutoMealPouch_Tier1": {
+    "localized_name": "Small Feed Bag",
+    "description": null
+  },
+  "AutoMealPouch_Tier2": {
+    "localized_name": "Average Feed Bag",
+    "description": null
+  },
+  "AutoMealPouch_Tier3": {
+    "localized_name": "Large Feed Bag",
+    "description": null
+  },
+  "AutoMealPouch_Tier4": {
+    "localized_name": "Huge Feed Bag",
+    "description": null
+  },
+  "AutoMealPouch_Tier5": {
+    "localized_name": "Giant Feed Bag",
+    "description": null
+  },
+  "BaseCampBattleDirector": {
+    "localized_name": "Alarm Bell",
+    "description": "Bell that sets the alert status for Pals on base. Change Pal behavior to either attack invading enemies or focus entirely on work whenever you like."
+  },
+  "BaseCampItemDispenser": {
+    "localized_name": "Item Retrieval Machine",
+    "description": null
+  },
+  "BaseCampWorkHard": {
+    "localized_name": "Monitoring Stand",
+    "description": null
+  },
+  "Battle_Armor_Grade_01_Cloth": {
+    "localized_name": "Cloth Outfit",
+    "description": "Protects against cold nights. Requires Primitive Workbench to craft."
+  },
+  "Battle_Armor_Grade_01_Cloth_Cold": {
+    "localized_name": "Tundra Outfit",
+    "description": "Cloth Outfit produced in cold regions. Useful for surviving in cold climates. Requires Primitive Workbench to craft."
+  },
+  "Battle_Armor_Grade_01_Cloth_Heat": {
+    "localized_name": "Tropical Outfit",
+    "description": "Cloth Outfit produced in hot regions. Boasts high heat resistance. Requires Primitive Workbench to craft."
+  },
+  "Battle_Armor_Grade_02_Fur": {
+    "localized_name": "Pelt Armor",
+    "description": "Armor made from Leather. Its warmth and defense have been improved. Requires High Quality Workbench to craft."
+  },
+  "Battle_Armor_Grade_02_Fur_Cold": {
+    "localized_name": "Cold Resistant Pelt Armor",
+    "description": "Pelt Armor produced in cold regions. Useful for surviving in cold climates. Requires High Quality Workbench to craft."
+  },
+  "Battle_Armor_Grade_02_Fur_Heat": {
+    "localized_name": "Heat Resistant Pelt Armor",
+    "description": "Pelt Armor produced in hot regions. Boasts high heat resistance. Requires High Quality Workbench to craft."
+  },
+  "Battle_Armor_Grade_03_Copper": {
+    "localized_name": "Metal Armor",
+    "description": "Armor made of metal. Somewhat heavy, but provides good defense. Requires High Quality Workbench to craft."
+  },
+  "Battle_Armor_Grade_03_Copper_Cold": {
+    "localized_name": "Cold Resistant Metal Armor",
+    "description": "Improved Metal Armor. Useful for surviving in cold climates. Requires High Quality Workbench to craft."
+  },
+  "Battle_Armor_Grade_03_Copper_Heat": {
+    "localized_name": "Heat Resistant Metal Armor",
+    "description": "Improved Metal Armor. Boasts high heat resistance. Requires High Quality Workbench to craft."
+  },
+  "Battle_Armor_Grade_03_Iron": {
+    "localized_name": "Refined Metal Armor",
+    "description": "Armor made from high quality metal. Quite heavy, but provides excellent defense. Requires Production Assembly Line to craft."
+  },
+  "Battle_Armor_Grade_03_Iron_Cold": {
+    "localized_name": "Cold Resistant Refined Metal Armor",
+    "description": "Improved Refined Metal Armor. Useful for surviving in cold climates. Requires Production Assembly Line to craft."
+  },
+  "Battle_Armor_Grade_03_Iron_Heat": {
+    "localized_name": "Heat Resistant Refined Metal Armor",
+    "description": "Improved Refined Metal Armor. Boasts high heat resistance. Requires Production Assembly Line to craft."
+  },
+  "Battle_Armor_Grade_04_Steal": {
+    "localized_name": "Pal Metal Armor",
+    "description": "Armor fully utilizing the latest technology. Boasts overwhelming defense. Requires Production Assembly Line II to craft."
+  },
+  "Battle_Armor_Grade_04_Steal_Cold": {
+    "localized_name": "Cold Resistant Pal Metal Armor",
+    "description": "Improved Pal Metal Armor. Useful for surviving in cold climates. Requires Production Assembly Line II to craft."
+  },
+  "Battle_Armor_Grade_04_Steal_Heat": {
+    "localized_name": "Heat Resistant Pal Metal Armor",
+    "description": "Improved Pal Metal Armor. Boasts high heat resistance. Requires Production Assembly Line II to craft."
+  },
+  "Battle_Armor_Grade_05_Plastic": {
+    "localized_name": "Plasteel Armor",
+    "description": "Armor developed by pushing the edge of technology. Boasts unparalleled defense. Requires Production Assembly Line II to craft."
+  },
+  "Battle_Armor_Grade_05_Plastic_Cold": {
+    "localized_name": "Cold Resistant Plasteel Armor",
+    "description": "Improved Plasteel Armor. Useful for surviving in cold climates. Requires Production Assembly Line II to craft."
+  },
+  "Battle_Armor_Grade_05_Plastic_Heat": {
+    "localized_name": "Heat Resistant Plasteel Armor",
+    "description": "Improved Plasteel Armor. Boasts high heat resistance. Requires Production Assembly Line II to craft."
+  },
+  "Battle_Armor_Grade_05_Plastic_Weight": {
+    "localized_name": "Lightweight Plasteel Armor",
+    "description": "Improved Plasteel Armor. Increases carrying capacity. Requires Production Assembly Line II to craft."
+  },
+  "Battle_Cloth": {
+    "localized_name": "Cloth",
+    "description": null
+  },
+  "Battle_Defense_BowGun": {
+    "localized_name": "Mounted Crossbow",
+    "description": "Assign a Pal with Handiwork suitability and it will protect a base using the crossbow."
+  },
+  "Battle_Defense_MachineGun": {
+    "localized_name": "Mounted Machine Gun",
+    "description": "Assign Pal to use the machine gun to protect a base."
+  },
+  "Battle_Defense_Missile": {
+    "localized_name": "Mounted Missile Launcher",
+    "description": "Assign a Pal with Handiwork suitability and it will protect a base using the missile launcher."
+  },
+  "Battle_Glider_Grade_01": {
+    "localized_name": "Normal Parachute",
+    "description": "A glider for soaring through the air. Cheaply made, it isn't very fast."
+  },
+  "Battle_Glider_Grade_02": {
+    "localized_name": "Mega Glider",
+    "description": "A glider for soaring through the air. A mass produced commercial model, it’s decently fast. Can be made at High Quality Workbench."
+  },
+  "Battle_Glider_Grade_03": {
+    "localized_name": "Giga Glider",
+    "description": "A glider for soaring through the air. With its capabilities improved, it can soar at high speed. Can be made at Production Assembly Line"
+  },
+  "Battle_Glider_Grade_04": {
+    "localized_name": "Hyper Glider",
+    "description": "A glider for soaring through the air. Its performance has been further improved, with increased speed and lift. Can be made at Production Assembly Line II."
+  },
+  "Battle_GunPowder_Grade_02": {
+    "localized_name": "Gunpowder",
+    "description": "Gunpowder used to fire ammunition. Required to make bullets. Can be made at High Quality Workbench."
+  },
+  "Battle_Helm_Grade_02_Fur": {
+    "localized_name": "Feathered Hair Band",
+    "description": "A beautiful feathered headband. Though improbable, it somehow protects its wearer from lethal head injuries. Requires Workbench to craft."
+  },
+  "Battle_Helm_Grade_03_Copper": {
+    "localized_name": "Metal Helm",
+    "description": "A helm made of metal. A reliable piece of armor that protects your head, and all the thoughts within. Requires High Quality Workbench to craft."
+  },
+  "Battle_Helm_Grade_04_Iron": {
+    "localized_name": "Refined Metal Helm",
+    "description": "A helm made from high quality metal. Its sheen gives the wearer a greater sense of confidence. Requires Production Assembly Line to craft."
+  },
+  "Battle_Helm_Grade_05_Steal": {
+    "localized_name": "Pal Metal Helm",
+    "description": "A helm made from Pal Metal Ingot. Envied for its immaculate quality, it is proof of a chosen warrior. Requires Production Assembly Line II to craft."
+  },
+  "Battle_Helm_Grade_06_Plastic": {
+    "localized_name": "Plasteel Helmet",
+    "description": "Helmet made of Plasteel. In addition to enhanced defense capabilities, its weight was also reduced. Requires Production Assembly Line II to craft."
+  },
+  "Battle_MeleeWeapon_Axe_Steal": {
+    "localized_name": "Pal Metal Axe",
+    "description": null
+  },
+  "Battle_MeleeWeapon_Bat": {
+    "localized_name": "Wooden Club",
+    "description": "A Wooden Club for close range combat. Can beat a small Pal to a pulp if need be."
+  },
+  "Battle_MeleeWeapon_Bat2": {
+    "localized_name": "Bat",
+    "description": null
+  },
+  "Battle_MeleeWeapon_Pickaxe_Steal": {
+    "localized_name": "Pal Metal Pickaxe",
+    "description": null
+  },
+  "Battle_MeleeWeapon_Sword": {
+    "localized_name": "Sword",
+    "description": "Sword for close-range combat. The blade is extremely sharp! Mightier than a pen, for sure. Requires Weapon Workbench to craft."
+  },
+  "Battle_RangeWeapon_AssaultRifle": {
+    "localized_name": "Assault Rifle",
+    "description": "Mows down enemies with overwhelming force. It excels at rapid-fire and is well suited to taking down powerful foes. Crafted at Weapon Assembly Line."
+  },
+  "Battle_RangeWeapon_Bow1": {
+    "localized_name": "Old Bow",
+    "description": "Primitive long range weapon. Requires Primitive Workbench to craft."
+  },
+  "Battle_RangeWeapon_Bow3": {
+    "localized_name": "Three Shot Bow",
+    "description": "An enhanced bow that allows three arrows to be fired simultaneously. By some strange mechanism, it only consumes a single Arrow when fired."
+  },
+  "Battle_RangeWeapon_BowGun": {
+    "localized_name": "Crossbow",
+    "description": "Fires an Arrow effortlessly. Though it takes time to load, it delivers a powerful shot. Requires High Quality Workbench to craft."
+  },
+  "Battle_RangeWeapon_BowGun_Fire": {
+    "localized_name": "Fire Arrow Crossbow",
+    "description": "A Crossbow that deals Fire damage. Requires Fire Arrow. Requires Weapon Workbench to craft."
+  },
+  "Battle_RangeWeapon_BowGun_Poison": {
+    "localized_name": "Poison Arrow Crossbow",
+    "description": "A Crossbow that inflicts poison on its target. Requires Poison Arrow. Requires Weapon Workbench to craft."
+  },
+  "Battle_RangeWeapon_Bow_Fire": {
+    "localized_name": "Fire Bow",
+    "description": "A bow that deals Fire damage. Burns Pals with fire arrows, making them easier to capture. Requires Fire Arrow."
+  },
+  "Battle_RangeWeapon_Bow_Poison": {
+    "localized_name": "Poison Bow",
+    "description": "Frightening bow that poisons its target. Poisoned Pals are easier to capture. Requires Poison Arrow."
+  },
+  "Battle_RangeWeapon_CompoundBow": {
+    "localized_name": "Compound Bow",
+    "description": null
+  },
+  "Battle_RangeWeapon_FlameThrower": {
+    "localized_name": "FlameThrower",
+    "description": null
+  },
+  "Battle_RangeWeapon_GatlingGun": {
+    "localized_name": "Gatling Gun",
+    "description": "A Gatling Gun capable of rapid fire. Mows down enemies with suppressive fire. Crafted at Weapon Assembly Line II."
+  },
+  "Battle_RangeWeapon_GrenadeLauncher": {
+    "localized_name": "Grenade Launcher",
+    "description": "Fires grenades that cause wide-ranging explosions. Useful when dealing with a large number of enemies. Crafted at Weapon Assembly Line II"
+  },
+  "Battle_RangeWeapon_GuidedMissileLauncher": {
+    "localized_name": "Guided Missile Launcher",
+    "description": "Fires missiles that automatically track and pursue enemies. Missiles explode upon impact, causing damage over a wide area."
+  },
+  "Battle_RangeWeapon_HandGun": {
+    "localized_name": "Handgun",
+    "description": "A handgun with improved capacity and rapid-fire capabilities. Has more immediate firepower than a Makeshift Handgun. Crafted at Weapon Workbench."
+  },
+  "Battle_RangeWeapon_HomingSphereLauncher": {
+    "localized_name": "Homing Sphere Launcher",
+    "description": "Fires Pal Spheres that automatically home in on Pals. Requires Weapon Assembly Line II to craft."
+  },
+  "Battle_RangeWeapon_LaserRifle": {
+    "localized_name": "Laser Rifle",
+    "description": "A weapon that fires high-energy lasers. It has impressive firepower and is easy to handle. Crafted at Weapon Assembly Line II."
+  },
+  "Battle_RangeWeapon_OldRevolver": {
+    "localized_name": "Old Revolver",
+    "description": null
+  },
+  "Battle_RangeWeapon_Rifle": {
+    "localized_name": "Single-Shot Rifle",
+    "description": "A single-shot rifle. Takes time to load. What it lacks in capacity, it makes up for with sheer power. Crafted at Weapon Assembly Line."
+  },
+  "Battle_RangeWeapon_RocketLauncher": {
+    "localized_name": "Rocket Launcher",
+    "description": "A Rocket Launcher that can fire a powerful round from long distances. Requires Weapon Assembly Line II to craft."
+  },
+  "Battle_RangeWeapon_SemiAutoRifle": {
+    "localized_name": "Semi-Auto Rifle",
+    "description": null
+  },
+  "Battle_RangeWeapon_SemiAutoShotgun": {
+    "localized_name": "Semi-Auto Shotgun",
+    "description": null
+  },
+  "Battle_RangeWeapon_ShotGun": {
+    "localized_name": "Double-Barreled Shotgun",
+    "description": "Wreaks havoc at close range. Can fire twice before reloading. Despite the limited load capacity, it still packs a punch. Crafted at Weapon Assembly Line."
+  },
+  "Battle_RangeWeapon_ShotGun_Multi": {
+    "localized_name": "Pump-Action Shotgun",
+    "description": "A high capacity, powerful shotgun. It has outstanding close range DPS. Crafted at Weapon Assembly Line."
+  },
+  "Battle_RangeWeapon_SphereLauncher": {
+    "localized_name": "Scatter Sphere Launcher",
+    "description": "Innovative launcher that fires many Spheres simultaneously. Can easily capture a herd of Pals. Requires Weapon Assembly Line to craft."
+  },
+  "Battle_RangeWeapon_SphereLauncher_Once": {
+    "localized_name": "Single-Shot Sphere Launcher",
+    "description": "Can capture distant Pals. Requires Weapon Workbench to craft."
+  },
+  "Battle_RangeWeapon_SubmachineGun": {
+    "localized_name": "SMG",
+    "description": null
+  },
+  "BeamSword": {
+    "localized_name": "Beam Sword",
+    "description": null
+  },
+  "BlastFurnace4": {
+    "localized_name": "Gigantic Furnace",
+    "description": null
+  },
+  "BreedFarm": {
+    "localized_name": "Breeding Farm",
+    "description": "Assign a male and a female Pal to produce eggs. Cake is required for breeding."
+  },
+  "BuildableGoddessStatue": {
+    "localized_name": "Statue of Power",
+    "description": "Make offerings to enhance the stats of the Player and their Pals."
+  },
+  "CarbonFiber": {
+    "localized_name": "Carbon Fiber",
+    "description": null
+  },
+  "Cauldron": {
+    "localized_name": "Witch Cauldron",
+    "description": null
+  },
+  "CeilingLamp": {
+    "localized_name": "Ceiling Lamp",
+    "description": "Lights up dark areas below at a base."
+  },
+  "Cement": {
+    "localized_name": "Cement",
+    "description": null
+  },
+  "Cloth2": {
+    "localized_name": "High Quality Cloth",
+    "description": null
+  },
+  "Cooler": {
+    "localized_name": "Cooler",
+    "description": "Cools the nearby area and protects against the heat."
+  },
+  "CoolerBox": {
+    "localized_name": "Cooler Box",
+    "description": null
+  },
+  "CoolerPalFoodBox": {
+    "localized_name": "Cold Food Box",
+    "description": null
+  },
+  "Crusher": {
+    "localized_name": "Crusher",
+    "description": "Facility for breaking down Stone and Wood to exchange them for other materials. Requires Pal with the Watering suitability to spin the water turbine."
+  },
+  "DamagedScarecrow": {
+    "localized_name": "Training Dummy",
+    "description": "Training dummy shaped like a Pengullet."
+  },
+  "DecalGunSet": {
+    "localized_name": "Decal Gun Set",
+    "description": "Decal gun set. Allows crafting of a strange gun that paints a Pal decal where it is fired. Required ammo also becomes craftable."
+  },
+  "DefenseWait": {
+    "localized_name": "Sandbag",
+    "description": "Pals assigned to it will watch for approaching enemies."
+  },
+  "DefenseWall": {
+    "localized_name": "Stone Defensive Wall",
+    "description": "Large defensive wall that protects from enemy invasions."
+  },
+  "DefenseWall_Metal": {
+    "localized_name": "Metal Defensive Wall",
+    "description": "Massive defensive wall to prevent enemy intrusions. Made from metal, it is extremely durable."
+  },
+  "DefenseWall_Wood": {
+    "localized_name": "Wooden Defensive Wall",
+    "description": "Massive defensive wall to prevent enemy intrusions. Made from wood, it breaks easily."
+  },
+  "DismantlingConveyor": {
+    "localized_name": "Pal Disassembly Conveyor",
+    "description": null
+  },
+  "DisplayCharacter": {
+    "localized_name": "Viewing Cage",
+    "description": "Container for observing captured Pals. Pals inside cannot participate in battle or production, but they do not become hungry."
+  },
+  "ElecBaton": {
+    "localized_name": "Stun Baton",
+    "description": "Close range weapon that sends out an electric jolt upon contact. Pals are easier to capture when electrocuted. Requires High Quality Workbench to craft."
+  },
+  "ElectricCooler": {
+    "localized_name": "Electric Cooler",
+    "description": "Cools the nearby area and protects against the heat. Improved range and cooling capabilities."
+  },
+  "ElectricGenerator_Large": {
+    "localized_name": "Large Power Generator",
+    "description": null
+  },
+  "ElectricHeater": {
+    "localized_name": "Electric Heater",
+    "description": "Warms the nearby area and protects against the cold. Improved range and heating capabilities."
+  },
+  "EnergyLauncherBullet": {
+    "localized_name": "Plasma Cartridge",
+    "description": null
+  },
+  "EnergyRocketLauncher": {
+    "localized_name": "Plasma Cannon",
+    "description": null
+  },
+  "EnergyStorage_Electric": {
+    "localized_name": "Accumulator",
+    "description": null
+  },
+  "Expedition": {
+    "localized_name": "Pal Expedition Station",
+    "description": null
+  },
+  "Factory_Money": {
+    "localized_name": "Gold Coin Assembly Line",
+    "description": null
+  },
+  "Farm_SkillFruits": {
+    "localized_name": "Skillfruit Orchard",
+    "description": null
+  },
+  "FlamethrowerBullet": {
+    "localized_name": "Flamethrower Fuel",
+    "description": null
+  },
+  "FlourMill": {
+    "localized_name": "Mill",
+    "description": "Facility for milling Wheat to produce Flour. Requires Pal with the Watering suitability to spin the water turbine."
+  },
+  "FlowerBed": {
+    "localized_name": "Flower Bed",
+    "description": null
+  },
+  "Fountain": {
+    "localized_name": "Water Fountain",
+    "description": null
+  },
+  "FragGrenade": {
+    "localized_name": "Frag Grenade",
+    "description": null
+  },
+  "FragGrenade_Dark": {
+    "localized_name": "Dark Grenade",
+    "description": null
+  },
+  "FragGrenade_Dragon": {
+    "localized_name": "Dragon Grenade",
+    "description": null
+  },
+  "FragGrenade_Elec": {
+    "localized_name": "Shock Grenade",
+    "description": null
+  },
+  "FragGrenade_Fire": {
+    "localized_name": "Incendiary Grenade",
+    "description": null
+  },
+  "FragGrenade_Ground": {
+    "localized_name": "Ground Grenade",
+    "description": null
+  },
+  "FragGrenade_Ice": {
+    "localized_name": "Ice Grenade",
+    "description": null
+  },
+  "FragGrenade_Leaf": {
+    "localized_name": "Grass Grenade",
+    "description": null
+  },
+  "FragGrenade_Super": {
+    "localized_name": "Frag Grenade Mk2",
+    "description": null
+  },
+  "FragGrenade_Water": {
+    "localized_name": "Water Grenade",
+    "description": null
+  },
+  "FurnitureSet_1": {
+    "localized_name": "Wooden Living Room Furniture Set",
+    "description": "Decorative furniture set. Place furniture in your living space and enjoy life with your Pals."
+  },
+  "FurnitureSet_10": {
+    "localized_name": "Barricade Set",
+    "description": "Decorative furniture set. Place to keep somewhere off limits."
+  },
+  "FurnitureSet_11": {
+    "localized_name": "Traffic Control Set",
+    "description": "Decorative furniture set. No roads mean no traffic control."
+  },
+  "FurnitureSet_12": {
+    "localized_name": "Road Sign Set",
+    "description": "Decorative furniture set. No roads mean no traffic control."
+  },
+  "FurnitureSet_13": {
+    "localized_name": "Metal Chair and Desk Set",
+    "description": "Decorative furniture set. Match with metal structures and enjoy life with your Pals."
+  },
+  "FurnitureSet_14": {
+    "localized_name": "Ironwood Table Set",
+    "description": "Decorative furniture set. Match with metal structures and enjoy life with your Pals."
+  },
+  "FurnitureSet_15": {
+    "localized_name": "Piano Furniture Set",
+    "description": "Decorative furniture set. Place in your base and dream about living a life of luxury."
+  },
+  "FurnitureSet_16": {
+    "localized_name": "Antique Mirror Set",
+    "description": "Decorative furniture set. Essentially for making sure you look good."
+  },
+  "FurnitureSet_17": {
+    "localized_name": "Carpet Set",
+    "description": "Decorative furniture set. Place on a foundation in your base for that homey feel."
+  },
+  "FurnitureSet_18": {
+    "localized_name": "Antique Couch Set",
+    "description": "Decorative furniture set. Gives the air of luxury to your base."
+  },
+  "FurnitureSet_19": {
+    "localized_name": "Antique Chair Set",
+    "description": "Decorative furniture set. Use with an antique desk."
+  },
+  "FurnitureSet_2": {
+    "localized_name": "Wooden Tavern Cabinet Furniture Set",
+    "description": "Set of wooden cabinets that look at home in a tavern. Can store items."
+  },
+  "FurnitureSet_20": {
+    "localized_name": "Antique Bath Set",
+    "description": "Decorative furniture set. Can't actually be used to stay clean."
+  },
+  "FurnitureSet_21": {
+    "localized_name": "Antique Storage Set",
+    "description": "Antique storage furniture set. Can store items."
+  },
+  "FurnitureSet_22": {
+    "localized_name": "Antique Storage Cabinet Set",
+    "description": "Antique storage cabinet set. Can store items."
+  },
+  "FurnitureSet_23": {
+    "localized_name": "Clock Set",
+    "description": "Decorative furniture set. Doesn't actually tell time."
+  },
+  "FurnitureSet_24": {
+    "localized_name": "Antique Desk Set",
+    "description": "Decorative furniture set. Use with an antique chair."
+  },
+  "FurnitureSet_25": {
+    "localized_name": "Bathroom Set",
+    "description": "Decorative furniture set. Can't be used for its original purpose."
+  },
+  "FurnitureSet_26": {
+    "localized_name": "Amusement Furniture Set",
+    "description": "Decorative furniture set. Your Pals will keep on working."
+  },
+  "FurnitureSet_27": {
+    "localized_name": "Street Lamp Set",
+    "description": "Street lamp set to provide illumination. Requires electricity to light."
+  },
+  "FurnitureSet_28": {
+    "localized_name": "Fireplace Set",
+    "description": "Brick fireplace set to provide illumination. Must be lit with fire."
+  },
+  "FurnitureSet_29": {
+    "localized_name": "Antique Lamp Set",
+    "description": "Antique lamp set to provide illumination. Requires electricity to light."
+  },
+  "FurnitureSet_3": {
+    "localized_name": "Wooden Tavern Furniture Set",
+    "description": "Decorative furniture set. Set up a bar and enjoy life with your Pals."
+  },
+  "FurnitureSet_30": {
+    "localized_name": "Metal Shelf Set",
+    "description": "Metal shelf set. Can store items."
+  },
+  "FurnitureSet_31": {
+    "localized_name": "Outdoor Furniture Set",
+    "description": "Decorative furniture set. Spruces up the outside of your base."
+  },
+  "FurnitureSet_32": {
+    "localized_name": "Antique High Quality Furniture Set",
+    "description": "Decorative furniture set. Gives an air of stately elegance to your base."
+  },
+  "FurnitureSet_4": {
+    "localized_name": "Wall-Mounted Houseplant Set",
+    "description": "Decorative furniture set. Place plants on your base's walls for a splash of color."
+  },
+  "FurnitureSet_5": {
+    "localized_name": "Metal Barrel Set",
+    "description": "Decorative furniture set. Not suitable for doing keg stands."
+  },
+  "FurnitureSet_6": {
+    "localized_name": "Storage Container Set",
+    "description": "Container furniture set. Can store items."
+  },
+  "FurnitureSet_7": {
+    "localized_name": "Leather Chair Set",
+    "description": "Decorative furniture set. Leather screams luxury."
+  },
+  "FurnitureSet_8": {
+    "localized_name": "Emergency Exit Sign Set",
+    "description": "Decorative furniture set. Apparently a priceless artifact in more civilized times."
+  },
+  "FurnitureSet_9": {
+    "localized_name": "Houseplant Set",
+    "description": "Decorative furniture set. Place plants around your base for a splash of color."
+  },
+  "FurnitureSet_Japanese": {
+    "localized_name": "Japanese-Style Furniture Set",
+    "description": "Japanese-style decorative furniture set. Transform your base into a traditional Japanese haven."
+  },
+  "GatlingBullet": {
+    "localized_name": "Gatling Gun Ammo",
+    "description": null
+  },
+  "Glass_houseset": {
+    "localized_name": "Glass Structure Set",
+    "description": "Set for building bases using glass. Allows building of glass foundations, walls, ceilings, stairs and other things necessary for shelters."
+  },
+  "GrapplingGun": {
+    "localized_name": "Grappling Gun",
+    "description": null
+  },
+  "GrapplingGun2": {
+    "localized_name": "Mega Grappling Gun",
+    "description": null
+  },
+  "GrapplingGun3": {
+    "localized_name": "Giga Grappling Gun",
+    "description": null
+  },
+  "GrapplingGun4": {
+    "localized_name": "Hyper Grappling Gun",
+    "description": null
+  },
+  "GrenadeBullet": {
+    "localized_name": "Grenade Ammo",
+    "description": null
+  },
+  "GuildChest": {
+    "localized_name": "Guild Chest",
+    "description": null
+  },
+  "HandTorch": {
+    "localized_name": "Hand-Held Torch",
+    "description": "Lights up dark areas and keeps you warm. Can also be used for close range combat in a pinch. Crafts Hand-Held Torch atPrimitive Workbench."
+  },
+  "HandgunBullet": {
+    "localized_name": "Handgun Ammo",
+    "description": "Ammo for Handgun and other similar weapons. Requires Weapon Workbench to craft."
+  },
+  "Headstone": {
+    "localized_name": "Tombstone",
+    "description": null
+  },
+  "Heater": {
+    "localized_name": "Heater",
+    "description": "Warms the nearby area and protects against the cold."
+  },
+  "Homeward": {
+    "localized_name": "Homeward Thundercloud",
+    "description": null
+  },
+  "HugeKitchen": {
+    "localized_name": "Large-Scale Stone Oven",
+    "description": null
+  },
+  "IceCrusher": {
+    "localized_name": "Refrigerated Crusher",
+    "description": null
+  },
+  "Infra_ElectricGenerator_Grade_01": {
+    "localized_name": "Power Generator",
+    "description": "Electric Pals at the base can now store electricity, allowing the use of electric facilities."
+  },
+  "Infra_ElectronicCircuit": {
+    "localized_name": "Circuit Board",
+    "description": "Circuit Board required to create precision equipment. Can be made at Production Assembly Line."
+  },
+  "Infra_ItemChest_Grade_01": {
+    "localized_name": "Wooden Chest",
+    "description": "Used to store items. Place at a base and Pals with Transporting suitability will automatically carry items to it."
+  },
+  "Infra_ItemChest_Grade_02": {
+    "localized_name": "Metal Chest",
+    "description": "Can be used to store more items. Pals with Transporting suitability will automatically carry items to it."
+  },
+  "Infra_ItemChest_Grade_03": {
+    "localized_name": "Refined Metal Chest",
+    "description": "Can be used to store even more items. Pals with Transporting suitability will automatically carry items to it."
+  },
+  "Infra_MachineParts": {
+    "localized_name": "Nail",
+    "description": null
+  },
+  "Infra_PalBed_Grade_01": {
+    "localized_name": "Straw Pal Bed",
+    "description": "Pals at base recover SAN when sleeping in beds at night. Without a bed, Pals cannot sleep soundly, and no SAN is recovered."
+  },
+  "Infra_PalBed_Grade_02": {
+    "localized_name": "Fluffy Pal Bed",
+    "description": "Pals sleep more soundly, improving the amount of Health and SAN recovered while sleeping."
+  },
+  "Infra_PlayerBed_Grade_01": {
+    "localized_name": "Shoddy Bed",
+    "description": "Human bed. Sleeping restores Health. Sleep at night and time will pass until morning. Cannot sleep unless built under a roof."
+  },
+  "Infra_PlayerBed_Grade_02": {
+    "localized_name": "Fine Bed",
+    "description": "Soft bed with improved restorative capabilities. Cannot sleep unless built under a roof."
+  },
+  "ItemBooth": {
+    "localized_name": "Flea Market (Items)",
+    "description": null
+  },
+  "ItemChest_04": {
+    "localized_name": "Advanced Chest",
+    "description": null
+  },
+  "JapaneseStyle_houseset": {
+    "localized_name": "Japanese-Style Structure Set",
+    "description": "Set for building bases using Japanese-style architecture. Allows building of Japanese-style foundations, walls, ceilings, stairs and other things necessary for shelters."
+  },
+  "Katana": {
+    "localized_name": "Katana",
+    "description": null
+  },
+  "Lab": {
+    "localized_name": "Pal Labor Research Laboratory",
+    "description": null
+  },
+  "Lamp": {
+    "localized_name": "Lamp",
+    "description": "Lights up dark areas at a base."
+  },
+  "Lantern": {
+    "localized_name": "Hip Lantern",
+    "description": null
+  },
+  "LargeCeilingLamp": {
+    "localized_name": "Large Ceiling Lamp",
+    "description": "Lights up large areas below at a base."
+  },
+  "LargeLamp": {
+    "localized_name": "Large Mounted Lamp",
+    "description": "Lights up large areas at a base."
+  },
+  "LaserBullet": {
+    "localized_name": "Energy Cartridge",
+    "description": null
+  },
+  "LaserGatlingBullet": {
+    "localized_name": "Laser Gatling Cartridge",
+    "description": null
+  },
+  "LaserGatlingGun": {
+    "localized_name": "Laser Gatling Gun",
+    "description": null
+  },
+  "LauncherBullet": {
+    "localized_name": "Rocket Ammo",
+    "description": "Ammo for the Rocket Launcher and other similar weapons. Requires Weapon Assembly Line II to craft."
+  },
+  "Launcher_Meteor": {
+    "localized_name": "Meteor Launcher",
+    "description": "A phenomenal weapon that fires a meteor. Upon striking its target, it creates an explosion similar to a meteorite impact. Crafted at Weapon Assembly Line."
+  },
+  "MakeshiftAssaultRifle": {
+    "localized_name": "Makeshift Assault Rifle",
+    "description": null
+  },
+  "MakeshiftHandgun": {
+    "localized_name": "Makeshift Handgun",
+    "description": "A handgun created from spare parts. Relatively well suited for close quarters combat, but can only fire one shot before needing to reload. Crafted at Weapon Workbench."
+  },
+  "MakeshiftShotgun": {
+    "localized_name": "Makeshift Shotgun",
+    "description": null
+  },
+  "MakeshiftSubmachineGun": {
+    "localized_name": "Makeshift SMG",
+    "description": null
+  },
+  "ManualElectricGenerator": {
+    "localized_name": "Human-Powered Generator",
+    "description": null
+  },
+  "MeatCutterKnife": {
+    "localized_name": "Meat Cleaver",
+    "description": "Knife for butchering Pals. When equipped, the Pet command becomes Butcher. Butchered Pals will be gone for good."
+  },
+  "MedicalPalBed_04": {
+    "localized_name": "Large Pal Bed",
+    "description": null
+  },
+  "MedicalPalBed_05": {
+    "localized_name": "Pal Pod",
+    "description": null
+  },
+  "MedicineFacility_03": {
+    "localized_name": "Advanced Medicine Workbench",
+    "description": null
+  },
+  "MetalDetector": {
+    "localized_name": "Metal Detector",
+    "description": null
+  },
+  "Metal_Gate": {
+    "localized_name": "Iron Gate",
+    "description": "Metal gate large enough for big Pals to pass through."
+  },
+  "Metal_houseset": {
+    "localized_name": "Metal Structure Set",
+    "description": "Set for building bases using metal. Allows building of metal foundations, walls, ceilings, stairs and other things necessary for shelters."
+  },
+  "MiningTool": {
+    "localized_name": "Pickaxe and Helmet",
+    "description": null
+  },
+  "MissileBullet": {
+    "localized_name": "Missile Ammo",
+    "description": null
+  },
+  "MonsterFarm": {
+    "localized_name": "Ranch",
+    "description": "Farm for raising sheep-and fowl-like Pals. Assign a Pal with the appropriate traits to a farm to automatically produce items."
+  },
+  "MultiElectricHatchingPalEgg": {
+    "localized_name": "Large-Scale Electric Egg Incubator",
+    "description": null
+  },
+  "Musket": {
+    "localized_name": "Musket",
+    "description": "Simple, old fashioned gun. Fires a single, powerful shot at the expense of a long reload time. Requires Weapon Workbench to craft."
+  },
+  "OilPump": {
+    "localized_name": "Crude Oil Extractor",
+    "description": null
+  },
+  "OlympicCauldron": {
+    "localized_name": "Flame Cauldron",
+    "description": null
+  },
+  "PALBOX": {
+    "localized_name": "Palbox",
+    "description": "Facility for storing captured Pals. Pals inside gradually recover Health. The area around this structure will become your base."
+  },
+  "PalBooth": {
+    "localized_name": "Flea Market (Pals)",
+    "description": null
+  },
+  "PalFoodBox": {
+    "localized_name": "Feed Box",
+    "description": "Place food here, and Pals at the base will eat from it."
+  },
+  "PalMedicineBox": {
+    "localized_name": "Medicine Rack",
+    "description": null
+  },
+  "PalRevive": {
+    "localized_name": "Revival Potion",
+    "description": null
+  },
+  "PalSphere_Exotic": {
+    "localized_name": "Exotic Sphere",
+    "description": null
+  },
+  "Plastic": {
+    "localized_name": "Plasteel",
+    "description": null
+  },
+  "Polymer": {
+    "localized_name": "Polymer",
+    "description": null
+  },
+  "Potion_Extreme": {
+    "localized_name": "Advanced Recovery Meds",
+    "description": null
+  },
+  "Product_Axe_Grade_01": {
+    "localized_name": "Stone Axe",
+    "description": "An axe for cutting wood. Made from stone, it's not very sharp."
+  },
+  "Product_Axe_Grade_02": {
+    "localized_name": "Metal Axe",
+    "description": "An axe for cutting wood. Made from metal, its sharpness has improved. Requires High Quality Workbench to craft."
+  },
+  "Product_Axe_Grade_03": {
+    "localized_name": "Refined Metal Axe",
+    "description": "An axe for cutting wood. Made from high quality metal, its sharpness has improved even further. Requires Production Assembly Line to craft."
+  },
+  "Product_CoalPit": {
+    "localized_name": "Coal Mine",
+    "description": null
+  },
+  "Product_Cooking_Grade_01": {
+    "localized_name": "Campfire",
+    "description": "Used to make simple food or provide meager warmth and light."
+  },
+  "Product_Cooking_Grade_02": {
+    "localized_name": "Cooking Pot",
+    "description": "Can efficiently prepare more varieties of foods."
+  },
+  "Product_Cooking_Grade_03": {
+    "localized_name": "Electric Kitchen",
+    "description": "Needs electricity but can prepare high-quality food more efficiently. Requires Pal with Kindling suitability."
+  },
+  "Product_CopperPit": {
+    "localized_name": "Ore Mining Site",
+    "description": null
+  },
+  "Product_CopperPit_2": {
+    "localized_name": "Ore Mining Site II",
+    "description": null
+  },
+  "Product_Factory_Hard_Grade_01": {
+    "localized_name": "High Quality Workbench",
+    "description": "Produces faster than Primitive Workbench. Requires Pal with Handiwork trait."
+  },
+  "Product_Factory_Hard_Grade_02": {
+    "localized_name": "Production Assembly Line",
+    "description": "Needs electricity but produces items at a faster pace. Requires Pal with Handiwork trait."
+  },
+  "Product_Factory_Hard_Grade_03": {
+    "localized_name": "Production Assembly Line II",
+    "description": "Needs electricity but produces items at an even faster pace. Requires Pal with Handiwork trait."
+  },
+  "Product_Farm_Berries": {
+    "localized_name": "Berry Plantation",
+    "description": "Can produce berries at a base. Requires Pal with Planting, Watering, and Gathering suitabilities."
+  },
+  "Product_Farm_Carrot": {
+    "localized_name": "Carrot Plantation",
+    "description": null
+  },
+  "Product_Farm_Lettuce": {
+    "localized_name": "Lettuce Plantation",
+    "description": "Farm for producing lettuce. Requires Pal with Planting, Watering, and Gathering suitabilities."
+  },
+  "Product_Farm_Onion": {
+    "localized_name": "Onion Plantation",
+    "description": null
+  },
+  "Product_Farm_Potato": {
+    "localized_name": "Potato Plantation",
+    "description": null
+  },
+  "Product_Farm_tomato": {
+    "localized_name": "Tomato Plantation",
+    "description": "Farm for producing tomatoes. Requires Pal with Planting, Watering, and Gathering suitabilities."
+  },
+  "Product_Farm_wheat": {
+    "localized_name": "Wheat Plantation",
+    "description": "Use it to grow ingredients for Bread. Requires Pal with Planting, Watering, and Gathering suitabilities."
+  },
+  "Product_Ingot_Grade_01_Copper": {
+    "localized_name": "Primitive Furnace",
+    "description": "Uses Ore to produce Ingots."
+  },
+  "Product_Ingot_Grade_02_Iron": {
+    "localized_name": "Improved Furnace",
+    "description": "Uses Ore and Coal to produce Refined Ingots."
+  },
+  "Product_Ingot_Grade_03_Steal": {
+    "localized_name": "Electric Furnace",
+    "description": "Allows refinement of Pal Metal Ingot."
+  },
+  "Product_Medicine_Grade_01": {
+    "localized_name": "Medieval Medicine Workbench",
+    "description": "Can produce simple medicine. Requires Pal with Medicine Production trait."
+  },
+  "Product_Medicine_Grade_02": {
+    "localized_name": "Electric Medicine Workbench",
+    "description": "Needs electricity but can produce higher-quality medicine. Requires Pal with Medicine Production trait."
+  },
+  "Product_Pickaxe_Grade_01": {
+    "localized_name": "Stone Pickaxe",
+    "description": "A pickaxe used for mining. Made from stone, the efficiency is questionable."
+  },
+  "Product_Pickaxe_Grade_02": {
+    "localized_name": "Metal Pickaxe",
+    "description": "A pickaxe used for mining. Made from metal, its durability and efficiency have improved. Requires High Quality Workbench to craft."
+  },
+  "Product_Pickaxe_Grade_03": {
+    "localized_name": "Refined Metal Pickaxe",
+    "description": "A pickaxe used for mining. Its durability and efficiency have further improved. Requires Production Assembly Line to craft."
+  },
+  "Product_QuartzPit": {
+    "localized_name": "Pure Quartz Mine",
+    "description": null
+  },
+  "Product_StationDeforest": {
+    "localized_name": "Logging Site",
+    "description": "Can produce wood at a base. Requires Pal with Lumbering trait."
+  },
+  "Product_StonePit": {
+    "localized_name": "Stone Pit",
+    "description": "Can produce stone at a base. Requires Pal with Mining trait."
+  },
+  "Product_SulfurPit": {
+    "localized_name": "Sulfur Mine",
+    "description": null
+  },
+  "Product_WeaponFactory_Dirty_Grade_01": {
+    "localized_name": "Weapon Workbench",
+    "description": "Produces simple mechanical weapons. Requires Pal with Handiwork Ability."
+  },
+  "Product_WeaponFactory_Dirty_Grade_02": {
+    "localized_name": "Weapon Assembly Line",
+    "description": "Needs electricity but produces weapons and ammunition at a faster pace. Requires Pal with Handiwork trait."
+  },
+  "Product_WeaponFactory_Dirty_Grade_03": {
+    "localized_name": "Weapon Assembly Line II",
+    "description": "Needs electricity but produces weapons and ammunition at an even faster pace. Requires Pal with Handiwork trait."
+  },
+  "Product_WorkBench_SkillUnlock": {
+    "localized_name": "Pal Gear Workbench",
+    "description": "Produces items that allow Pals to use Partner Skills."
+  },
+  "Refrigerator": {
+    "localized_name": "Refrigerator",
+    "description": null
+  },
+  "ReinforcedArrow": {
+    "localized_name": "Reinforced Arrow",
+    "description": null
+  },
+  "RepairBench": {
+    "localized_name": "Repair Bench",
+    "description": "Repairs damaged weapons and tools."
+  },
+  "RepairKit": {
+    "localized_name": "Repair Kit",
+    "description": null
+  },
+  "RifleBullet": {
+    "localized_name": "Rifle Ammo",
+    "description": "Ammo for Single-Shot Rifle and other similar weapons. Requires Weapon Workbench to craft."
+  },
+  "RoughBullet": {
+    "localized_name": "Coarse Ammo",
+    "description": "Ammo for Musket, Makeshift Handgun and other similar weapons. Requires Weapon Workbench to craft."
+  },
+  "SFArmor": {
+    "localized_name": "Hexolite Armor",
+    "description": null
+  },
+  "SFArmorCold": {
+    "localized_name": "Cold Resistant Hexolite Armor",
+    "description": null
+  },
+  "SFArmorHeat": {
+    "localized_name": "Heat Resistant Hexolite Armor",
+    "description": null
+  },
+  "SFArmorWeight": {
+    "localized_name": "Lightweight Hexolite Armor",
+    "description": null
+  },
+  "SFArrow": {
+    "localized_name": "Advanced Arrow",
+    "description": null
+  },
+  "SFBow": {
+    "localized_name": "Advanced Bow",
+    "description": null
+  },
+  "SFHelmet": {
+    "localized_name": "Hexolite Helmet",
+    "description": null
+  },
+  "SanityDecrease1": {
+    "localized_name": "Alpha Wave Generator",
+    "description": null
+  },
+  "Shield_01": {
+    "localized_name": "Common Shield",
+    "description": "Strange shield made with Paldium technology. It automatically repair itself after not taking damage for a while."
+  },
+  "Shield_02": {
+    "localized_name": "Mega Shield",
+    "description": "Strange shield made with Paldium technology. The new model has been improved, enhancing its defense. Can be made at High Quality Workbench."
+  },
+  "Shield_03": {
+    "localized_name": "Giga Shield",
+    "description": "Strange shield made with Paldium technology. Modifications have enhanced its effectiveness even further. Can be made at Production Assembly Line."
+  },
+  "Shield_04": {
+    "localized_name": "Hyper Shield",
+    "description": "Strange shield made with Paldium technology. Through repeated testing, the highest quality has been achieved. Can be made at Production Assembly Line II."
+  },
+  "Shield_05": {
+    "localized_name": "Ultra Shield",
+    "description": "Strange shield made with Paldium technology. As a result of further experiments, ultimate quality has been achieved. Can be made at Production Assembly Line II."
+  },
+  "Shield_SF": {
+    "localized_name": "Advanced Shield",
+    "description": null
+  },
+  "ShotGunBullet": {
+    "localized_name": "Shotgun Shell",
+    "description": "Ammo for shotguns and other similar weapons. Requires Weapon Workbench to craft."
+  },
+  "Signboard": {
+    "localized_name": "Sign",
+    "description": "Can be written on."
+  },
+  "Silo": {
+    "localized_name": "Silo",
+    "description": null
+  },
+  "SkillUnlock_Alpaca": {
+    "localized_name": "Melpaca Saddle",
+    "description": null
+  },
+  "SkillUnlock_AmaterasuWolf": {
+    "localized_name": "Kitsun Saddle",
+    "description": null
+  },
+  "SkillUnlock_AmaterasuWolf_Dark": {
+    "localized_name": "Kitsun Noct Saddle",
+    "description": null
+  },
+  "SkillUnlock_BadCatgirl": {
+    "localized_name": "Nyafia's Shotgun",
+    "description": null
+  },
+  "SkillUnlock_BirdDragon": {
+    "localized_name": "Vanwyrm Saddle",
+    "description": null
+  },
+  "SkillUnlock_BirdDragon_Ice": {
+    "localized_name": "Vanwyrm Cryst Saddle",
+    "description": null
+  },
+  "SkillUnlock_BlackCentaur": {
+    "localized_name": "Necromus Saddle",
+    "description": null
+  },
+  "SkillUnlock_BlackGriffon": {
+    "localized_name": "Shadowbeak Saddle",
+    "description": null
+  },
+  "SkillUnlock_BlackMetalDragon": {
+    "localized_name": "Astegon Saddle",
+    "description": null
+  },
+  "SkillUnlock_BlackPuppy": {
+    "localized_name": "Smokie's Harness",
+    "description": null
+  },
+  "SkillUnlock_BlueDragon": {
+    "localized_name": "Azurobe Saddle",
+    "description": null
+  },
+  "SkillUnlock_BlueThunderHorse": {
+    "localized_name": "Azurmane Saddle",
+    "description": null
+  },
+  "SkillUnlock_Boar": {
+    "localized_name": "Rushoar Saddle",
+    "description": null
+  },
+  "SkillUnlock_Carbunclo": {
+    "localized_name": "Lifmunk's Submachine Gun",
+    "description": null
+  },
+  "SkillUnlock_ColorfulBird": {
+    "localized_name": "Tocotoco's Gloves",
+    "description": null
+  },
+  "SkillUnlock_DarkMechaDragon": {
+    "localized_name": "Xenolord Saddle",
+    "description": null
+  },
+  "SkillUnlock_Deer": {
+    "localized_name": "Eikthyrdeer Saddle",
+    "description": null
+  },
+  "SkillUnlock_Deer_Ground": {
+    "localized_name": "Eikthyrdeer Terra Saddle",
+    "description": null
+  },
+  "SkillUnlock_DreamDemon": {
+    "localized_name": "Daedream's Necklace",
+    "description": null
+  },
+  "SkillUnlock_DrillGame": {
+    "localized_name": "Digtoise's Headband",
+    "description": null
+  },
+  "SkillUnlock_Eagle": {
+    "localized_name": "Galeclaw's Gloves",
+    "description": null
+  },
+  "SkillUnlock_ElecPanda": {
+    "localized_name": "Grizzbolt's Minigun",
+    "description": null
+  },
+  "SkillUnlock_FairyDragon": {
+    "localized_name": "Elphidran Saddle",
+    "description": null
+  },
+  "SkillUnlock_FairyDragon_Water": {
+    "localized_name": "Elphidran Aqua Saddle",
+    "description": null
+  },
+  "SkillUnlock_FeatherOstrich": {
+    "localized_name": "Dazemu Saddle",
+    "description": null
+  },
+  "SkillUnlock_FengyunDeeper": {
+    "localized_name": "Fenglope Saddle",
+    "description": null
+  },
+  "SkillUnlock_FengyunDeeper_Electric": {
+    "localized_name": "Fenglope Lux Saddle",
+    "description": null
+  },
+  "SkillUnlock_FireKirin": {
+    "localized_name": "Pyrin Saddle",
+    "description": null
+  },
+  "SkillUnlock_FireKirin_Dark": {
+    "localized_name": "Pyrin Noct Saddle",
+    "description": null
+  },
+  "SkillUnlock_FlameBuffalo": {
+    "localized_name": "Arsox Saddle",
+    "description": null
+  },
+  "SkillUnlock_FlowerDinosaur": {
+    "localized_name": "Dinossom Saddle",
+    "description": null
+  },
+  "SkillUnlock_FlowerDinosaur_Electric": {
+    "localized_name": "Dinossom Lux Saddle",
+    "description": null
+  },
+  "SkillUnlock_FlowerRabbit": {
+    "localized_name": "Flopie's Necklace",
+    "description": null
+  },
+  "SkillUnlock_FlyingManta": {
+    "localized_name": "Celaray's Gloves",
+    "description": null
+  },
+  "SkillUnlock_Garm": {
+    "localized_name": "Direhowl's Saddled Harness",
+    "description": null
+  },
+  "SkillUnlock_GhostBeast": {
+    "localized_name": "Maraith Saddle",
+    "description": null
+  },
+  "SkillUnlock_GoldenHorse": {
+    "localized_name": "Gildane Saddle",
+    "description": null
+  },
+  "SkillUnlock_GrassMammoth": {
+    "localized_name": "Mammorest Saddle",
+    "description": null
+  },
+  "SkillUnlock_GrassMammoth_Ice": {
+    "localized_name": "Mammorest Cryst Saddle",
+    "description": null
+  },
+  "SkillUnlock_GrassPanda": {
+    "localized_name": "Mossanda's Grenade Launcher",
+    "description": null
+  },
+  "SkillUnlock_GrassPanda_Electric": {
+    "localized_name": "Mossanda Lux's Grenade Launcher",
+    "description": null
+  },
+  "SkillUnlock_GuardianDog": {
+    "localized_name": "Yakumo Saddle",
+    "description": null
+  },
+  "SkillUnlock_HadesBird": {
+    "localized_name": "Helzephyr Saddle",
+    "description": null
+  },
+  "SkillUnlock_HadesBird_Electric": {
+    "localized_name": "Helzephyr Lux Saddle",
+    "description": null
+  },
+  "SkillUnlock_HawkBird": {
+    "localized_name": "Nitewing Saddle",
+    "description": null
+  },
+  "SkillUnlock_Hedgehog": {
+    "localized_name": "Jolthog's Gloves",
+    "description": null
+  },
+  "SkillUnlock_Hedgehog_Ice": {
+    "localized_name": "Jolthog Cryst's Gloves",
+    "description": null
+  },
+  "SkillUnlock_Horus": {
+    "localized_name": "Faleris Saddle",
+    "description": null
+  },
+  "SkillUnlock_Horus_Water": {
+    "localized_name": "Faleris Aqua Saddle",
+    "description": null
+  },
+  "SkillUnlock_IceDeer": {
+    "localized_name": "Reindrix Saddle",
+    "description": null
+  },
+  "SkillUnlock_IceHorse": {
+    "localized_name": "Frostallion Saddle",
+    "description": null
+  },
+  "SkillUnlock_IceHorse_Dark": {
+    "localized_name": "Frostallion Noct Saddle",
+    "description": null
+  },
+  "SkillUnlock_JetDragon": {
+    "localized_name": "Jetragon's Missile Launcher",
+    "description": null
+  },
+  "SkillUnlock_KingAlpaca": {
+    "localized_name": "Kingpaca Saddle",
+    "description": null
+  },
+  "SkillUnlock_KingAlpaca_Ice": {
+    "localized_name": "Kingpaca Cryst Saddle",
+    "description": null
+  },
+  "SkillUnlock_KingBahamut": {
+    "localized_name": "Blazamut Saddle",
+    "description": null
+  },
+  "SkillUnlock_KingBahamut_Dragon": {
+    "localized_name": "Blazamut Ryu Saddle",
+    "description": null
+  },
+  "SkillUnlock_Kirin": {
+    "localized_name": "Univolt Saddle",
+    "description": null
+  },
+  "SkillUnlock_Kitsunebi": {
+    "localized_name": "Foxparks's Harness",
+    "description": null
+  },
+  "SkillUnlock_Kitsunebi_Ice": {
+    "localized_name": "Foxparks Cryst's Harness",
+    "description": null
+  },
+  "SkillUnlock_LazyDragon": {
+    "localized_name": "Relaxaurus's Missile Launcher",
+    "description": null
+  },
+  "SkillUnlock_LazyDragon_Electric": {
+    "localized_name": "Relaxaurus Lux's Missile Launcher",
+    "description": null
+  },
+  "SkillUnlock_Manticore": {
+    "localized_name": "Blazehowl Saddle",
+    "description": null
+  },
+  "SkillUnlock_Manticore_Dark": {
+    "localized_name": "Blazehowl Noct Saddle",
+    "description": null
+  },
+  "SkillUnlock_Monkey": {
+    "localized_name": "Tanzee's Assault Rifle",
+    "description": null
+  },
+  "SkillUnlock_MoonQueen": {
+    "localized_name": "Selyne Saddle",
+    "description": null
+  },
+  "SkillUnlock_MopKing": {
+    "localized_name": "Sweepa Saddle",
+    "description": null
+  },
+  "SkillUnlock_MushroomDragon": {
+    "localized_name": "Shroomer Saddle",
+    "description": null
+  },
+  "SkillUnlock_MushroomDragon_Dark": {
+    "localized_name": "Shroomer Noct Saddle",
+    "description": null
+  },
+  "SkillUnlock_NaughtyCat": {
+    "localized_name": "Grintale Saddle",
+    "description": null
+  },
+  "SkillUnlock_NegativeOctopus": {
+    "localized_name": "Killamari's Gloves",
+    "description": null
+  },
+  "SkillUnlock_NightBlueHorse": {
+    "localized_name": "Starryon Saddle",
+    "description": null
+  },
+  "SkillUnlock_Penguin": {
+    "localized_name": "Pengullet Rocket Launcher",
+    "description": null
+  },
+  "SkillUnlock_PurpleSpider": {
+    "localized_name": "Tarantriss Saddle",
+    "description": null
+  },
+  "SkillUnlock_RaijinDaughter": {
+    "localized_name": "Dazzi's Necklace",
+    "description": null
+  },
+  "SkillUnlock_RaijinDaughter_Water": {
+    "localized_name": "Dazzi Noct's Necklace",
+    "description": null
+  },
+  "SkillUnlock_RedArmorBird": {
+    "localized_name": "Ragnahawk Saddle",
+    "description": null
+  },
+  "SkillUnlock_SaintCentaur": {
+    "localized_name": "Paladius Saddle",
+    "description": null
+  },
+  "SkillUnlock_SakuraSaurus": {
+    "localized_name": "Broncherry Saddle",
+    "description": null
+  },
+  "SkillUnlock_SakuraSaurus_Water": {
+    "localized_name": "Broncherry Aqua Saddle",
+    "description": null
+  },
+  "SkillUnlock_Serpent": {
+    "localized_name": "Surfent Saddle",
+    "description": null
+  },
+  "SkillUnlock_Serpent_Ground": {
+    "localized_name": "Surfent Terra Saddle",
+    "description": null
+  },
+  "SkillUnlock_SkyDragon": {
+    "localized_name": "Quivern Saddle",
+    "description": null
+  },
+  "SkillUnlock_SkyDragon_Grass": {
+    "localized_name": "Quivern Botan Saddle",
+    "description": null
+  },
+  "SkillUnlock_SnowTigerBeastman": {
+    "localized_name": "Bastigor's Hammer",
+    "description": null
+  },
+  "SkillUnlock_Suzaku": {
+    "localized_name": "Suzaku Saddle",
+    "description": null
+  },
+  "SkillUnlock_Suzaku_Water": {
+    "localized_name": "Suzaku Aqua Saddle",
+    "description": null
+  },
+  "SkillUnlock_ThunderBird": {
+    "localized_name": "Beakon Saddle",
+    "description": null
+  },
+  "SkillUnlock_ThunderDog": {
+    "localized_name": "Rayhound Saddle",
+    "description": null
+  },
+  "SkillUnlock_Umihebi": {
+    "localized_name": "Jormuntide Saddle",
+    "description": null
+  },
+  "SkillUnlock_Umihebi_Fire": {
+    "localized_name": "Jormuntide Ignis Saddle",
+    "description": null
+  },
+  "SkillUnlock_VolcanicMonster": {
+    "localized_name": "Reptyro Saddle",
+    "description": null
+  },
+  "SkillUnlock_VolcanicMonster_Ice": {
+    "localized_name": "Reptyro Cryst Saddle",
+    "description": null
+  },
+  "SkillUnlock_WeaselDragon": {
+    "localized_name": "Chillet Saddle",
+    "description": null
+  },
+  "SkillUnlock_WeaselDragon_Fire": {
+    "localized_name": "Chillet Ignis Saddle",
+    "description": null
+  },
+  "SkillUnlock_WhiteAlienDragon": {
+    "localized_name": "Xenogard Saddle",
+    "description": null
+  },
+  "SkillUnlock_WhiteDeer": {
+    "localized_name": "Celesdir Saddle",
+    "description": null
+  },
+  "SkillUnlock_WhiteShieldDragon": {
+    "localized_name": "Silvegis Saddle",
+    "description": null
+  },
+  "SkillUnlock_WindChimes": {
+    "localized_name": "Hangyu's Gloves",
+    "description": null
+  },
+  "SkillUnlock_WindChimes_Ice": {
+    "localized_name": "Hangyu Cryst's Glove",
+    "description": null
+  },
+  "SkillUnlock_Yeti": {
+    "localized_name": "Wumpo Saddle",
+    "description": null
+  },
+  "SkillUnlock_Yeti_Grass": {
+    "localized_name": "Wumpo Botan Saddle",
+    "description": null
+  },
+  "SkinChange": {
+    "localized_name": "Pal Dressing Facility",
+    "description": null
+  },
+  "Snowman": {
+    "localized_name": "Snowman",
+    "description": null
+  },
+  "Spa": {
+    "localized_name": "Hot Spring",
+    "description": "Pals recover SAN while in a Hot Spring."
+  },
+  "Spa2": {
+    "localized_name": "High Quality Hot Spring",
+    "description": "Pals recover plenty of SAN while in the hot spring."
+  },
+  "Spear": {
+    "localized_name": "Stone Spear",
+    "description": null
+  },
+  "Spear_2": {
+    "localized_name": "Metal Spear",
+    "description": "Useful for close-range combat. The metal tip give it an increased attack power. Requires High Quality Workbench to craft."
+  },
+  "Spear_3": {
+    "localized_name": "Refined Metal Spear",
+    "description": "Useful for close-range combat. The high-quality metal tip give it an increased attack power. Requires Production Assembly Line to craft."
+  },
+  "Spear_ForestBoss": {
+    "localized_name": "Lily's Spear",
+    "description": null
+  },
+  "Special_ElectricHatchingPalEgg": {
+    "localized_name": "Electric Egg Incubator",
+    "description": null
+  },
+  "Special_HatchingPalEgg": {
+    "localized_name": "Egg Incubator",
+    "description": "Place a Pal Egg inside to incubate it."
+  },
+  "Special_PalRankUp": {
+    "localized_name": "Pal Essence Condenser",
+    "description": "Combines several Pals of the same type to create a higher-ranked version."
+  },
+  "Special_PalSphere_Grade_01": {
+    "localized_name": "Pal Sphere",
+    "description": "An item that captures Pals when thrown. This basic model is only effective on low level Pals."
+  },
+  "Special_PalSphere_Grade_02": {
+    "localized_name": "Mega Sphere",
+    "description": "An item that captures Pals when thrown. Its capabilities have been improved, allowing it to catch a wider range of Pals. Requires Sphere Workbench to craft."
+  },
+  "Special_PalSphere_Grade_03": {
+    "localized_name": "Giga Sphere",
+    "description": "An item that captures Pals when thrown. Able to capture moderately powerful Pals. Requires Sphere Workbench to craft."
+  },
+  "Special_PalSphere_Grade_04": {
+    "localized_name": "Hyper Sphere",
+    "description": "An item that captures Pals when thrown. Enhanced capabilities allow it to capture even more powerful Pals. Requires Sphere Assembly Line to craft."
+  },
+  "Special_PalSphere_Grade_05": {
+    "localized_name": "Ultra Sphere",
+    "description": "An item that captures Pals when thrown. Not many Pals can escape its highly efficient design. Requires Sphere Assembly Line II to craft."
+  },
+  "Special_PalSphere_Grade_06": {
+    "localized_name": "Legendary Sphere",
+    "description": "An item that captures Pals when thrown. Very few Pals can escape its perfected design. Requires Sphere Assembly Line II to craft."
+  },
+  "Special_PalSphere_Grade_07": {
+    "localized_name": "Ultimate Sphere",
+    "description": "An item that captures Pals when thrown. Almost no Pals can escape its flawless design. Requires Sphere Assembly Line II to craft."
+  },
+  "Special_SphereFactory_Black_Grade_01": {
+    "localized_name": "Sphere Workbench",
+    "description": "Produces Spheres for capturing Pals. Requires Pal with Handiwork suitability."
+  },
+  "Special_SphereFactory_Black_Grade_02": {
+    "localized_name": "Sphere Assembly Line",
+    "description": "Creates Pal Spheres at a faster pace. Requires Pal with Handiwork suitability."
+  },
+  "Special_SphereFactory_Black_Grade_03": {
+    "localized_name": "Sphere Assembly Line II",
+    "description": "Creates Pal Spheres at an even faster pace. Requires Pal with Handiwork suitability."
+  },
+  "SphereFactory_Black_04": {
+    "localized_name": "Advanced Sphere Assembly Line",
+    "description": null
+  },
+  "SphereModule_Curve": {
+    "localized_name": "Curve Module",
+    "description": null
+  },
+  "SphereModule_Curve2": {
+    "localized_name": "Slider Module",
+    "description": null
+  },
+  "SphereModule_Heavy": {
+    "localized_name": "Heavy Weight Module",
+    "description": null
+  },
+  "SphereModule_Homing": {
+    "localized_name": "Homing Module",
+    "description": null
+  },
+  "SphereModule_Sniper": {
+    "localized_name": "Sniper Module",
+    "description": null
+  },
+  "SphereModule_Sniper2": {
+    "localized_name": "Sniper Module Ⅱ",
+    "description": null
+  },
+  "StainlessSteel": {
+    "localized_name": "Hexolite",
+    "description": null
+  },
+  "Stone_Gate": {
+    "localized_name": "Stone Gate",
+    "description": "Stone gate large enough for big Pals to pass through."
+  },
+  "Stone_houseset": {
+    "localized_name": "Stone Structure Set",
+    "description": "Set for building bases using stone. Allows building of stone foundations, walls, ceilings, stairs and other things necessary for shelters."
+  },
+  "Stump": {
+    "localized_name": "Stump and Axe",
+    "description": null
+  },
+  "TableDresser01_Stone": {
+    "localized_name": "Antique Dresser",
+    "description": null
+  },
+  "ToolBoxV1": {
+    "localized_name": "Large Toolbox",
+    "description": null
+  },
+  "Torch": {
+    "localized_name": "Mounted Torch",
+    "description": "Place it at a base to light the surrounding area."
+  },
+  "TransmissionTower": {
+    "localized_name": "Electric Pylon",
+    "description": null
+  },
+  "Trap_LegHold": {
+    "localized_name": "Bear Trap (Small)",
+    "description": "Immobilizes those who step on it. Only effective on small Pals or humans."
+  },
+  "Trap_LegHold_Big": {
+    "localized_name": "Bear Trap (Large)",
+    "description": "Immobilizes those who step on it. Only effective on large Pals."
+  },
+  "Trap_MineAttack": {
+    "localized_name": "Mine",
+    "description": "Automatically detonates when stepped on."
+  },
+  "Trap_MineElecShock": {
+    "localized_name": "Electric Mine",
+    "description": "Electrocutes those who step on it. Electrocuted Pals are easier to capture."
+  },
+  "Trap_MineFreeze": {
+    "localized_name": "Ice Mine",
+    "description": "Freezes those who step on it. Frozen Pals are easier to capture."
+  },
+  "Trap_Noose": {
+    "localized_name": "Hanging Trap",
+    "description": "Catches Pals that pass through. Only effective on small Pals and humans."
+  },
+  "Unlock_Picking_Tier1": {
+    "localized_name": "Lockpicking Tool v1",
+    "description": null
+  },
+  "Unlock_Picking_Tier2": {
+    "localized_name": "Lockpicking Tool v2",
+    "description": null
+  },
+  "Unlock_Picking_Tier3": {
+    "localized_name": "Lockpicking Tool v3",
+    "description": null
+  },
+  "WallSignboard": {
+    "localized_name": "WallSignBoard",
+    "description": null
+  },
+  "WallTorch": {
+    "localized_name": "Wall Torch",
+    "description": "Place it on a wall to light the surrounding area."
+  },
+  "Wood_Gate": {
+    "localized_name": "Wooden Gate",
+    "description": "Wooden gate large enough for big Pals to pass through."
+  },
+  "Wooden_houseset": {
+    "localized_name": "Wooden Structure Set",
+    "description": "Set for building bases using wood. Allows building of wooden foundations, walls, ceilings, stairs and other things necessary for shelters."
+  },
+  "Wooden_ladder": {
+    "localized_name": "Ladder",
+    "description": null
+  },
+  "WorkSpeedIncrease1": {
+    "localized_name": "Beta Wave Generator",
+    "description": null
+  },
+  "Workbench": {
+    "localized_name": "Primitive Workbench",
+    "description": "Primitive Workbench for producing simple items. Pals with Handiwork suitability help speed up production."
+  },
+  "YakushimaBlade": {
+    "localized_name": "Meowmere",
+    "description": null
+  }
+}

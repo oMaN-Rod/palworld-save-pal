@@ -1,0 +1,1786 @@
+{
+  "Accessory_AirDash1": {
+    "localized_name": "Luftsprintstiefel",
+    "description": null
+  },
+  "Accessory_AirDash2": {
+    "localized_name": "Doppelluftsprintstiefel",
+    "description": null
+  },
+  "Accessory_JumpCount_Increase1": {
+    "localized_name": "Doppelsprungstiefel",
+    "description": null
+  },
+  "Accessory_JumpCount_Increase2": {
+    "localized_name": "Dreifachsprungstiefel",
+    "description": null
+  },
+  "Accessory_JumpPower_Increase": {
+    "localized_name": "Antigravitationsgürtel",
+    "description": null
+  },
+  "Accessory_Nonkilling": {
+    "localized_name": "Ring der Rücksichtnahme",
+    "description": null
+  },
+  "Accessory_TalentChecker": {
+    "localized_name": "Brille der Begabung",
+    "description": null
+  },
+  "AdditionalInventory_001": {
+    "localized_name": "Kleiner Erweiterungsbeutel",
+    "description": null
+  },
+  "AdditionalInventory_002": {
+    "localized_name": "Mittelgroßer Erweiterungsbeutel",
+    "description": null
+  },
+  "AdditionalInventory_003": {
+    "localized_name": "Großer Erweiterungsbeutel",
+    "description": null
+  },
+  "AdditionalInventory_004": {
+    "localized_name": "Riesiger Erweiterungsbeutel",
+    "description": null
+  },
+  "Altar": {
+    "localized_name": "Beschwörungsaltar",
+    "description": null
+  },
+  "Arrow": {
+    "localized_name": "Pfeil",
+    "description": "Ein Pfeil, der mit einem Bogen verschossen werden kann. Für die Herstellung wird „Primitive Werkbank“ benötigt."
+  },
+  "Arrow_Fire": {
+    "localized_name": "Feuerpfeil",
+    "description": "Ein Pfeil, der mit „Feuerbogen“ und „Feuerpfeil-Armbrust“ verschossen werden kann. Fügt Feuerschaden zu. Für die Herstellung wird „Primitive Werkbank“ benötigt."
+  },
+  "Arrow_Poison": {
+    "localized_name": "Giftpfeil",
+    "description": "Ein Pfeil, der mit „Giftbogen“ und „Giftpfeil-Armbrust“ verschossen werden kann. Vergiftet das Ziel. Für die Herstellung wird „Primitive Werkbank“ benötigt."
+  },
+  "AssaultRifleBullet": {
+    "localized_name": "Sturmgewehrmunition",
+    "description": "Munition für Waffen vom Typ „Sturmgewehr“. Für die Herstellung wird „Waffen-Fließbandwerk“ benötigt."
+  },
+  "AutoMealPouch_Tier1": {
+    "localized_name": "Kleiner Futterbeutel",
+    "description": null
+  },
+  "AutoMealPouch_Tier2": {
+    "localized_name": "Normaler Futterbeutel",
+    "description": null
+  },
+  "AutoMealPouch_Tier3": {
+    "localized_name": "Großer Futterbeutel",
+    "description": null
+  },
+  "AutoMealPouch_Tier4": {
+    "localized_name": "Riesiger Futterbeutel",
+    "description": null
+  },
+  "AutoMealPouch_Tier5": {
+    "localized_name": "Gigantischer Futterbeutel",
+    "description": null
+  },
+  "BaseCampBattleDirector": {
+    "localized_name": "Alarmglocke",
+    "description": "Eine Glocke, mit der du die Alarmbereitschaft der Pals im Lager ändern kannst. Lege jederzeit fest, ob deine Pals bei einem Angriff Eindringlinge zurückschlagen oder sich auf die Arbeit konzentrieren sollen."
+  },
+  "BaseCampItemDispenser": {
+    "localized_name": "Gegenstandsdispenser",
+    "description": null
+  },
+  "BaseCampWorkHard": {
+    "localized_name": "Aufsichtskanzel",
+    "description": null
+  },
+  "Battle_Armor_Grade_01_Cloth": {
+    "localized_name": "Stoffkleidung",
+    "description": "Aus Stoff gefertigte Kleidung. Schützt vor nächtlicher Kälte. Für die Herstellung wird „Primitive Werkbank“ benötigt."
+  },
+  "Battle_Armor_Grade_01_Cloth_Cold": {
+    "localized_name": "Arktische Tracht",
+    "description": "Stoffkleidung arktischer Machart. Schützt zuverlässig vor Kälte. Für die Herstellung wird „Primitive Werkbank“ benötigt."
+  },
+  "Battle_Armor_Grade_01_Cloth_Heat": {
+    "localized_name": "Tropische Tracht",
+    "description": "Stoffkleidung tropischer Machart. Schützt extrem gut gegen Hitze. Für die Herstellung wird „Primitive Werkbank“ benötigt."
+  },
+  "Battle_Armor_Grade_02_Fur": {
+    "localized_name": "Fellrüstung",
+    "description": "Eine Rüstung aus Leder. Bietet guten Schutz und ist haltbar. Für die Herstellung wird „Hochwertige Werkbank“ benötigt."
+  },
+  "Battle_Armor_Grade_02_Fur_Cold": {
+    "localized_name": "Kälteresistente Fellrüstung",
+    "description": "Fellrüstung arktischer Machart. Damit lässt sich Kälte besser ertragen. Für die Herstellung wird „Hochwertige Werkbank“ benötigt."
+  },
+  "Battle_Armor_Grade_02_Fur_Heat": {
+    "localized_name": "Hitzeresistente Fellrüstung",
+    "description": "Fellrüstung tropischer Machart. Schützt extrem gut vor Hitze. Für die Herstellung wird „Hochwertige Werkbank“ benötigt."
+  },
+  "Battle_Armor_Grade_03_Copper": {
+    "localized_name": "Metallrüstung",
+    "description": "Eine Rüstung aus Metall. Bietet relativ guten Schutz und ist relativ schwer. Für die Herstellung wird „Hochwertige Werkbank“ benötigt."
+  },
+  "Battle_Armor_Grade_03_Copper_Cold": {
+    "localized_name": "Kälteresistente Metallrüstung",
+    "description": "Metallrüstung mit verbesserter Qualität. Schützt zuverlässig vor Kälte. Für die Herstellung wird „Hochwertige Werkbank“ benötigt."
+  },
+  "Battle_Armor_Grade_03_Copper_Heat": {
+    "localized_name": "Hitzeresistente Metallrüstung",
+    "description": "Metallrüstung mit verbesserter Qualität. Schützt extrem gut gegen Hitze. Für die Herstellung wird „Hochwertige Werkbank“ benötigt."
+  },
+  "Battle_Armor_Grade_03_Iron": {
+    "localized_name": "Hochwertige Metallrüstung",
+    "description": "Eine Rüstung aus hochwertigem Metall. Bietet erheblichen Schutz, ist aber ganz schön schwer. Für die Herstellung wird „Fließbandwerk“ benötigt."
+  },
+  "Battle_Armor_Grade_03_Iron_Cold": {
+    "localized_name": "Kälteresistente Hochwertige Metallrüstung",
+    "description": "Hochwertige Metallrüstung mit verbesserter Qualität. Schützt zuverlässig vor Kälte. Für die Herstellung wird „Fließbandwerk“ benötigt."
+  },
+  "Battle_Armor_Grade_03_Iron_Heat": {
+    "localized_name": "Hitzeresistente Hochwertige Metallrüstung",
+    "description": "Hochwertige Metallrüstung mit verbesserter Qualität. Schützt extrem gut gegen Hitze. Für die Herstellung wird „Fließbandwerk“ benötigt."
+  },
+  "Battle_Armor_Grade_04_Steal": {
+    "localized_name": "Paluminiumrüstung",
+    "description": "Eine Rüstung aus Paluminiumbarren. Bietet wahnsinnigen Schutz, ist aber auch wahnsinnig schwer. Für die Herstellung wird „Fließbandwerk II“ benötigt."
+  },
+  "Battle_Armor_Grade_04_Steal_Cold": {
+    "localized_name": "Kälteresistente Paluminiumrüstung",
+    "description": "Paluminiumrüstung mit verbesserter Qualität. Schützt zuverlässig vor Kälte. Für die Herstellung wird „Fließbandwerk II“ benötigt."
+  },
+  "Battle_Armor_Grade_04_Steal_Heat": {
+    "localized_name": "Hitzeresistente Paluminiumrüstung",
+    "description": "Paluminiumrüstung mit verbesserter Qualität. Schützt extrem gut gegen Hitze. Für die Herstellung wird „Fließbandwerk II“ benötigt."
+  },
+  "Battle_Armor_Grade_05_Plastic": {
+    "localized_name": "Plaststahlrüstung",
+    "description": "Eine Rüstung aus Plaststahl. Bietet verbesserten Schutz und ist dabei auch noch leicht. Für die Herstellung wird „Fließbandwerk II“ benötigt."
+  },
+  "Battle_Armor_Grade_05_Plastic_Cold": {
+    "localized_name": "Kälteresistente Plaststahlrüstung",
+    "description": "Plaststahlrüstung mit verbesserter Qualität. Schützt zuverlässig vor Kälte. Für die Herstellung wird „Fließbandwerk II“ benötigt."
+  },
+  "Battle_Armor_Grade_05_Plastic_Heat": {
+    "localized_name": "Hitzeresistente Plaststahlrüstung",
+    "description": "Plaststahlrüstung mit verbesserter Qualität. Schützt extrem gut gegen Hitze. Für die Herstellung wird „Fließbandwerk II“ benötigt."
+  },
+  "Battle_Armor_Grade_05_Plastic_Weight": {
+    "localized_name": "Leichte Plaststahlrüstung",
+    "description": "Plaststahlrüstung mit verbesserter Qualität. Erhöht deine Maximallast. Für die Herstellung wird „Fließbandwerk II“ benötigt."
+  },
+  "Battle_Cloth": {
+    "localized_name": "Stoff",
+    "description": null
+  },
+  "Battle_Defense_BowGun": {
+    "localized_name": "Stationäre Armbrust",
+    "description": "Setze einen Pal, der „Handwerk“ beherrscht, an die Armbrust, um dein Lager zu verteidigen."
+  },
+  "Battle_Defense_MachineGun": {
+    "localized_name": "Stationäres Maschinengewehr",
+    "description": "Weise einen Pal zu, der „Handwerk“ beherrscht, und er wird dein Lager mithilfe der jeweils zugewiesenen Verteidigungsanlagen verteidigen."
+  },
+  "Battle_Defense_Missile": {
+    "localized_name": "Stationärer Raketenwerfer",
+    "description": "Setze einen Pal, der „Handwerk“ beherrscht, an den Raketenwerfer, um dein Lager zu verteidigen."
+  },
+  "Battle_Glider_Grade_01": {
+    "localized_name": "Einfacher Gleitschirm",
+    "description": "Ein faltbarer Gleiter zum durch die Lüfte Gleiten. Simpel zusammengeschustert und nicht sonderlich schnell."
+  },
+  "Battle_Glider_Grade_02": {
+    "localized_name": "Megagleiter",
+    "description": "Ein faltbarer Gleiter zum durch die Lüfte Gleiten. Ein industriell gefertigtes Produkt mit passabler Fluggeschwindigkeit. Für die Herstellung wird „Hochwertige Werkbank“ benötigt."
+  },
+  "Battle_Glider_Grade_03": {
+    "localized_name": "Gigagleiter",
+    "description": "Ein faltbarer Gleiter zum durch die Lüfte Gleiten. Die verbesserte Konstruktion macht hohe Fluggeschwindigkeiten möglich. Für die Herstellung wird „Fließbandwerk“ benötigt."
+  },
+  "Battle_Glider_Grade_04": {
+    "localized_name": "Teragleiter",
+    "description": "Ein faltbarer Gleiter zum durch die Lüfte Gleiten. Fliegt noch schneller und bleibt länger in der Luft. Für die Herstellung wird „Fließbandwerk II“ benötigt."
+  },
+  "Battle_GunPowder_Grade_02": {
+    "localized_name": "Schießpulver",
+    "description": "Wird bei der Herstellung von Kugeln als Treibmittel benötigt. Für die Herstellung wird „Hochwertige Werkbank“ benötigt."
+  },
+  "Battle_Helm_Grade_02_Fur": {
+    "localized_name": "Federhaarschmuck",
+    "description": "Hübsche Haarnadel aus Federn. Schützt möglicherweise irgendwie vor tödlichen Kopfverletzungen. Für die Herstellung wird „Workbench“ benötigt."
+  },
+  "Battle_Helm_Grade_03_Copper": {
+    "localized_name": "Metallhelm",
+    "description": "Ein Helm aus Metall. Hält deine Gedanken verlässlich am Leben. Für die Herstellung wird „Hochwertige Werkbank“ benötigt."
+  },
+  "Battle_Helm_Grade_04_Iron": {
+    "localized_name": "Hochwertiger Metallhelm",
+    "description": "Ein Helm aus hochwertigem Metall. Die auf Hochglanz polierte Oberfläche steigert das Selbstwertgefühl. Für die Herstellung wird „Fließbandwerk“ benötigt."
+  },
+  "Battle_Helm_Grade_05_Steal": {
+    "localized_name": "Paluminiumhelm",
+    "description": "Ein Helm aus Paluminiumbarren. Das Symbol eines wahren Kriegers. Ist von allerfeinster Qualität und adelt seinen Träger. Für die Herstellung wird „Fließbandwerk II“ benötigt."
+  },
+  "Battle_Helm_Grade_06_Plastic": {
+    "localized_name": "Plaststahlhelm",
+    "description": "Ein Helm aus Plaststahl. Bietet verbesserten Schutz und ist dabei auch noch leicht. Für die Herstellung wird „Fließbandwerk II“ benötigt."
+  },
+  "Battle_MeleeWeapon_Axe_Steal": {
+    "localized_name": "Paluminium-Axt",
+    "description": null
+  },
+  "Battle_MeleeWeapon_Bat": {
+    "localized_name": "Holzkeule",
+    "description": "Holzkeule für den Nahkampf. Kleine Pals sollten sich damit umnieten lassen."
+  },
+  "Battle_MeleeWeapon_Bat2": {
+    "localized_name": "Baseballschläger",
+    "description": null
+  },
+  "Battle_MeleeWeapon_Pickaxe_Steal": {
+    "localized_name": "Paluminium-Spitzhacke",
+    "description": null
+  },
+  "Battle_MeleeWeapon_Sword": {
+    "localized_name": "Schwert",
+    "description": "Schwert für den Nahkampf. Die Schneide ist hervorragend geschärft, man muss aber nah an den Feind ran. Für die Herstellung wird „Waffen-Werkbank“ benötigt."
+  },
+  "Battle_RangeWeapon_AssaultRifle": {
+    "localized_name": "Sturmgewehr",
+    "description": "Sturmgewehr mit erschreckender Feuerrate. Ausgezeichnete Wahl gegen starke Widersacher. Für die Herstellung wird „Waffen-Fließbandwerk“ benötigt."
+  },
+  "Battle_RangeWeapon_Bow1": {
+    "localized_name": "Alter Bogen",
+    "description": "Eine primitive Fernkampfwaffe. Musste schon mehrmals ausgebessert werden und verfügt über eine geringe Angriffskraft. Für die Herstellung wird „Primitive Werkbank“ benötigt."
+  },
+  "Battle_RangeWeapon_Bow3": {
+    "localized_name": "Dreischussbogen",
+    "description": "Ein innovativer Bogen, mit dem sich 3 Pfeile gleichzeitig verschießen lassen. Auf mysteriöse Weise wird pro Schuss trotzdem nur ein Pfeil verbraucht."
+  },
+  "Battle_RangeWeapon_BowGun": {
+    "localized_name": "Armbrust",
+    "description": "Damit lassen sich mühelos Pfeile verschießen. Das Nachladen ist etwas langwierig, umso stärker ist dafür der Wumms. Für die Herstellung wird „Hochwertige Werkbank“ benötigt."
+  },
+  "Battle_RangeWeapon_BowGun_Fire": {
+    "localized_name": "Feuerpfeil-Armbrust",
+    "description": "Eine Armbrust, die Feuerschaden zufügt. Benötigt als Munition „Feuerpfeil“. Für die Herstellung wird „Hochwertige Werkbank“ benötigt."
+  },
+  "Battle_RangeWeapon_BowGun_Poison": {
+    "localized_name": "Giftpfeil-Armbrust",
+    "description": "Eine gefährliche Armbrust, mit deren Hilfe du deine Ziele vergiften kannst. Benötigt als Munition „Giftpfeil“. Für die Herstellung wird „Hochwertige Werkbank“ benötigt."
+  },
+  "Battle_RangeWeapon_Bow_Fire": {
+    "localized_name": "Feuerbogen",
+    "description": "Ein Bogen, der Feuerschaden zufügt. Setze Pals mit Feuerpfeilen in Brand, um sie leichter fangen zu können. Benötigt „Feuerpfeil“."
+  },
+  "Battle_RangeWeapon_Bow_Poison": {
+    "localized_name": "Giftbogen",
+    "description": "Ein gefährlicher Bogen, mit dessen Hilfe du deine Ziele vergiften kannst. Vergiftete Pals lassen sich leichter fangen. Benötigt „Giftpfeil“."
+  },
+  "Battle_RangeWeapon_CompoundBow": {
+    "localized_name": "Compoundbogen",
+    "description": null
+  },
+  "Battle_RangeWeapon_FlameThrower": {
+    "localized_name": "FlameThrower",
+    "description": null
+  },
+  "Battle_RangeWeapon_GatlingGun": {
+    "localized_name": "Gatlinggewehr",
+    "description": "Ein Gatlinggewehr mit hoher Feuerrate, hervorragend zum Legen von Sperrfeuer. Macht aus jedem Gegner Schweizer Käse. Für die Herstellung wird „Waffen-Fließbandwerk II“ benötigt."
+  },
+  "Battle_RangeWeapon_GrenadeLauncher": {
+    "localized_name": "Granatwerfer",
+    "description": "Verschießt explosive Granaten, die Flächenschaden verursachen. Nützlich, wenn man viele Gegner auf einmal abservieren muss. Für die Herstellung wird „Waffen-Fließbandwerk II“ benötigt."
+  },
+  "Battle_RangeWeapon_GuidedMissileLauncher": {
+    "localized_name": "Raketenwerfer",
+    "description": "Verschießt Raketen, die Gegner automatisch erfassen und verfolgen. Die Raketen explodieren beim Aufschlag und verursachen Flächenschaden. Für die Herstellung wird „Waffen-Fließbandwerk II“ benötigt."
+  },
+  "Battle_RangeWeapon_HandGun": {
+    "localized_name": "Pistole",
+    "description": "Eine Handfeuerwaffe mit guter Feuerrate und ordentlich großem Magazin. Hat eine höhere Schadenswirkung als Alte Pistole. Für die Herstellung wird „Waffen-Werkbank“ benötigt."
+  },
+  "Battle_RangeWeapon_HomingSphereLauncher": {
+    "localized_name": "Zielsuch-Sphärenwerfer",
+    "description": "Ein Hilfsmittel zum Verschießen von Sphären. Mit diesem Sphärenwerfer verschossene Sphären verfolgen ihr Ziel. Für die Herstellung wird „Waffen-Fließbandwerk II“ benötigt."
+  },
+  "Battle_RangeWeapon_LaserRifle": {
+    "localized_name": "Lasergewehr",
+    "description": "Eine Waffe, die Laserstrahlen verschießt. Hat eine hohe Feuerkraft und ist einfach zu handhaben. Für die Herstellung wird „Waffen-Fließbandwerk II“ benötigt."
+  },
+  "Battle_RangeWeapon_OldRevolver": {
+    "localized_name": "Alter Revolver",
+    "description": null
+  },
+  "Battle_RangeWeapon_Rifle": {
+    "localized_name": "Einzelschuss-Gewehr",
+    "description": "Ein Gewehr mit Einzellademechanismus. Das Nachladen dauert etwas. Hat eine niedrige Feuerrate, aber wenn der eine Schuss sitzt ... Für die Herstellung wird „Waffen-Fließbandwerk“ benötigt."
+  },
+  "Battle_RangeWeapon_RocketLauncher": {
+    "localized_name": "Panzerfaust",
+    "description": "Wenn man ein weit entferntes Ziel – und alles drumrum – ganz besonders übel zurichten möchte, greift man zur Panzerfaust. Für die Herstellung wird „Waffen-Fließbandwerk II“ benötigt."
+  },
+  "Battle_RangeWeapon_SemiAutoRifle": {
+    "localized_name": "Halbautomatisches Gewehr",
+    "description": null
+  },
+  "Battle_RangeWeapon_SemiAutoShotgun": {
+    "localized_name": "Halbautomatische Flinte",
+    "description": null
+  },
+  "Battle_RangeWeapon_ShotGun": {
+    "localized_name": "Doppelflinte",
+    "description": "Eine Flinte, die auf kurze Distanz Tod und Verderben sät. Hat zwei Schuss. Die geringe Magazingröße macht sie mit höherem Wumms wett. Für die Herstellung wird „Waffen-Fließbandwerk“ benötigt."
+  },
+  "Battle_RangeWeapon_ShotGun_Multi": {
+    "localized_name": "Pumpgun",
+    "description": "Eine Flinte mit größerem Magazin. Liefert auf kurze Distanz unschlagbaren Schadensoutput. Für die Herstellung wird „Waffen-Fließbandwerk“ benötigt."
+  },
+  "Battle_RangeWeapon_SphereLauncher": {
+    "localized_name": "Multi-Sphärenwerfer",
+    "description": "Ein neuartiger Sphärenwerfer, mit dem sich viele Sphären auf einmal verschießen lassen. Praktisch, wenn man eine ganze Gruppe von Pals einfangen möchte. Für die Herstellung wird „Waffen-Fließbandwerk“ benötigt."
+  },
+  "Battle_RangeWeapon_SphereLauncher_Once": {
+    "localized_name": "Einzel-Sphärenwerfer",
+    "description": "Ein Hilfsmittel zum Verschießen von Sphären. Mit diesem Sphärenwerfer lassen sich Pals auf größere Distanz fangen. Für die Herstellung wird „Waffen-Werkbank“ benötigt."
+  },
+  "Battle_RangeWeapon_SubmachineGun": {
+    "localized_name": "Maschinenpistole",
+    "description": null
+  },
+  "BeamSword": {
+    "localized_name": "Lichtschwert",
+    "description": null
+  },
+  "BlastFurnace4": {
+    "localized_name": "Industrieller Hochofen",
+    "description": null
+  },
+  "BreedFarm": {
+    "localized_name": "Zuchtfarm",
+    "description": "Hier kannst du zwei Pals (♂ und ♀) hinschicken, um sie Eier legen zu lassen. Als Motivation zum Eierlegen wird „Torte“ benötigt."
+  },
+  "BuildableGoddessStatue": {
+    "localized_name": "Statue der Kraft",
+    "description": "Bringe hier Opfer dar, um dich und deine Pals stärker zu machen."
+  },
+  "CarbonFiber": {
+    "localized_name": "Karbonfaser",
+    "description": null
+  },
+  "Cauldron": {
+    "localized_name": "Hexenkessel",
+    "description": null
+  },
+  "CeilingLamp": {
+    "localized_name": "Deckenlampe",
+    "description": "Kann an der Decke angebracht werden."
+  },
+  "Cement": {
+    "localized_name": "Zement",
+    "description": null
+  },
+  "Cloth2": {
+    "localized_name": "Hochwertiger Stoff",
+    "description": null
+  },
+  "Cooler": {
+    "localized_name": "Eiskühler",
+    "description": "Hält dein Lager kühl und schützt vor Hitze."
+  },
+  "CoolerBox": {
+    "localized_name": "Kühlbox",
+    "description": null
+  },
+  "CoolerPalFoodBox": {
+    "localized_name": "Gekühlter Futtertrog",
+    "description": null
+  },
+  "Crusher": {
+    "localized_name": "Zerkleinerer",
+    "description": "Eine Anlage zum Zerkleinern und Umwandeln von Stein und Holz. Um das Wasserrad zu drehen, benötigt man einen Pal, der „Gießen“ beherrscht."
+  },
+  "DamagedScarecrow": {
+    "localized_name": "Übungsdummy",
+    "description": "Ein Übungsdummy in Gestalt eines Pengullet."
+  },
+  "DecalGunSet": {
+    "localized_name": "Graffitigewehrset",
+    "description": "Ein Graffitigewehrset. Baue dir ein Gewehr, mit dem man Sticker malen kann, und die dazugehörige Munition."
+  },
+  "DefenseWait": {
+    "localized_name": "Sandsack",
+    "description": "Setze Pals hier ein, um sie nach Feinden Ausschau halten zu lassen."
+  },
+  "DefenseWall": {
+    "localized_name": "Steinschutzwand",
+    "description": "Eine imposante Mauer, die vor feindlichen Überfällen schützt."
+  },
+  "DefenseWall_Metal": {
+    "localized_name": "Metallschutzwand",
+    "description": "Eine imposante Wand, die vor feindlichen Überfällen schützt. Ist aus Metall und dadurch extrem solide."
+  },
+  "DefenseWall_Wood": {
+    "localized_name": "Holzschutzwand",
+    "description": "Eine imposante Wand, die vor feindlichen Überfällen schützt. Ist aus Holz und nicht sonderlich stabil."
+  },
+  "DismantlingConveyor": {
+    "localized_name": "Pal-Schlachtfließband",
+    "description": null
+  },
+  "DisplayCharacter": {
+    "localized_name": "Schaukäfig",
+    "description": "Käfig zum Ausstellen gefangener Pals. Ausgestellte Pals können weder mitkämpfen noch Arbeiten verrichten, werden dafür aber auch nicht hungrig."
+  },
+  "ElecBaton": {
+    "localized_name": "Betäubungsknüppel",
+    "description": "Eine Nahkampfwaffe, die dem Opfer einen elektrischen Schock verpasst. Betäupte Pals sind dadurch leichter zu fangen. Für die Herstellung wird „Hochwertige Werkbank“ benötigt."
+  },
+  "ElectricCooler": {
+    "localized_name": "Elektrokühler",
+    "description": "Durch Stromkraft kann damit ein größerer Bereich angenehm kühl gehalten werden."
+  },
+  "ElectricGenerator_Large": {
+    "localized_name": "Großer Generator",
+    "description": null
+  },
+  "ElectricHeater": {
+    "localized_name": "Elektroheizung",
+    "description": "Durch Stromkraft kann damit ein größerer Bereich mollig warm gehalten werden."
+  },
+  "EnergyLauncherBullet": {
+    "localized_name": "Plasmakartusche",
+    "description": null
+  },
+  "EnergyRocketLauncher": {
+    "localized_name": "Plasmakanone",
+    "description": null
+  },
+  "EnergyStorage_Electric": {
+    "localized_name": "Speicherbatterie",
+    "description": null
+  },
+  "Expedition": {
+    "localized_name": "Expeditionszentrale",
+    "description": null
+  },
+  "Factory_Money": {
+    "localized_name": "Goldmünzen-Prägewerk",
+    "description": null
+  },
+  "Farm_SkillFruits": {
+    "localized_name": "Technikfruchtgarten",
+    "description": null
+  },
+  "FlamethrowerBullet": {
+    "localized_name": "Flammöl",
+    "description": null
+  },
+  "FlourMill": {
+    "localized_name": "Mühle",
+    "description": "Eine Anlage, um aus Weizen Mehl zu mahlen. Um das Wasserrad zu drehen, benötigt man einen Pal, der „Gießen“ beherrscht."
+  },
+  "FlowerBed": {
+    "localized_name": "Blumenbeet",
+    "description": null
+  },
+  "Fountain": {
+    "localized_name": "Springbrunnen",
+    "description": null
+  },
+  "FragGrenade": {
+    "localized_name": "Splittergranate",
+    "description": null
+  },
+  "FragGrenade_Dark": {
+    "localized_name": "Schattengranate",
+    "description": null
+  },
+  "FragGrenade_Dragon": {
+    "localized_name": "Drachengranate",
+    "description": null
+  },
+  "FragGrenade_Elec": {
+    "localized_name": "Elektroschockgranate",
+    "description": null
+  },
+  "FragGrenade_Fire": {
+    "localized_name": "Brandgranate",
+    "description": null
+  },
+  "FragGrenade_Ground": {
+    "localized_name": "Erdgranate",
+    "description": null
+  },
+  "FragGrenade_Ice": {
+    "localized_name": "Gefriergranate",
+    "description": null
+  },
+  "FragGrenade_Leaf": {
+    "localized_name": "Floragranate",
+    "description": null
+  },
+  "FragGrenade_Super": {
+    "localized_name": "Modifizierte Splittergranate",
+    "description": null
+  },
+  "FragGrenade_Water": {
+    "localized_name": "Aquagranate",
+    "description": null
+  },
+  "FurnitureSet_1": {
+    "localized_name": "Hölzernes Wohnzimmermöbelset",
+    "description": "Ein dekoratives Einrichtungsset. Macht das Wohnzimmer gleich gemütlicher."
+  },
+  "FurnitureSet_10": {
+    "localized_name": "Absperrungsset",
+    "description": "Ein dekoratives Einrichtungsset. Für Orte, wo keiner durch soll."
+  },
+  "FurnitureSet_11": {
+    "localized_name": "Verkehrssicherheitsset",
+    "description": "Ein dekoratives Einrichtungsset. Eignet sich zwecks Mangel an Straßen nicht zur Verkehrsregelung."
+  },
+  "FurnitureSet_12": {
+    "localized_name": "Verkehrsschilderset",
+    "description": "Ein dekoratives Einrichtungsset. Eignet sich zwecks Mangel an Straßen nicht zur Verkehrsregelung."
+  },
+  "FurnitureSet_13": {
+    "localized_name": "Metallset Tische & Stühle",
+    "description": "Ein dekoratives Einrichtungsset. Macht sich gut in deinem Metallhaus."
+  },
+  "FurnitureSet_14": {
+    "localized_name": "Eisenholz-Tischset",
+    "description": "Ein dekoratives Einrichtungsset. Macht sich gut in deinem Metallhaus."
+  },
+  "FurnitureSet_15": {
+    "localized_name": "Musikzimmerset",
+    "description": "Ein dekoratives Einrichtungsset. Stelle deinen extravaganten Lebensstil zur Schau."
+  },
+  "FurnitureSet_16": {
+    "localized_name": "Antikes Spiegelset",
+    "description": "Ein dekoratives Einrichtungsset. Für alle, die Wert auf ein gepflegtes Äußeres legen."
+  },
+  "FurnitureSet_17": {
+    "localized_name": "Teppichset",
+    "description": "Ein dekoratives Einrichtungsset. Lege die Teppiche im Lager aus, um eine wohnliche Atmosphäre zu schaffen."
+  },
+  "FurnitureSet_18": {
+    "localized_name": "Antikes Sofaset",
+    "description": "Ein dekoratives Einrichtungsset. Verleiht deinem Lager einen Hauch von Extravaganz."
+  },
+  "FurnitureSet_19": {
+    "localized_name": "Antikes Stuhlset",
+    "description": "Ein dekoratives Einrichtungsset. Macht sich gut mit antiken Tischen."
+  },
+  "FurnitureSet_2": {
+    "localized_name": "Hölzernes Aufbewahrungs-Barmöbelset",
+    "description": "Ein hölzernes Aufbewahrungsmöbelset im Bar-Look. Zur Aufbewahrung von Gegenständen."
+  },
+  "FurnitureSet_20": {
+    "localized_name": "Antikes Badset",
+    "description": "Ein dekoratives Einrichtungsset. Für Freunde gehobener Badekultur."
+  },
+  "FurnitureSet_21": {
+    "localized_name": "Antikes Aufbewahrungsset",
+    "description": "Ein antikes Aufbewahrungskistenset. Zur Aufbewahrung von Gegenständen."
+  },
+  "FurnitureSet_22": {
+    "localized_name": "Antikes Aufbewahrungsschrankset",
+    "description": "Ein antikes Aufbewahrungsschrankset. Zur Aufbewahrung von Gegenständen."
+  },
+  "FurnitureSet_23": {
+    "localized_name": "Uhrenset",
+    "description": "Ein dekoratives Einrichtungsset. Die Uhren zeigen zwei Mal am Tag die korrekte Zeit an."
+  },
+  "FurnitureSet_24": {
+    "localized_name": "Antikes Tischset",
+    "description": "Ein dekoratives Einrichtungsset. Macht sich gut mit antiken Stühlen."
+  },
+  "FurnitureSet_25": {
+    "localized_name": "WC-Set",
+    "description": "Ein dekoratives Einrichtungsset. Die Notdurft bitte woanders verrichten."
+  },
+  "FurnitureSet_26": {
+    "localized_name": "Spiel-und-Spaß-Set",
+    "description": "Ein dekoratives Einrichtungsset. Die Pals arbeiten schön weiter."
+  },
+  "FurnitureSet_27": {
+    "localized_name": "Straßenlaternenset",
+    "description": "Ein Set mit Straßenlaternen, die als Lichtquelle dienen können. Benötigen zum Leuchten Strom."
+  },
+  "FurnitureSet_28": {
+    "localized_name": "Kaminset",
+    "description": "Ein Set mit gemauerten Kaminen, die als Lichtquelle dienen können. Müssen angefeuert werden."
+  },
+  "FurnitureSet_29": {
+    "localized_name": "Antikes Leuchtenset",
+    "description": "Ein Set mit antiken Lampen, die als Lichtquelle dienen können. Benötigen zum Leuchten Strom."
+  },
+  "FurnitureSet_3": {
+    "localized_name": "Hölzernes Barmöbelset",
+    "description": "Ein dekoratives Einrichtungsset. Gibt deinem Wohnzimmer einen coolen Bar-Look."
+  },
+  "FurnitureSet_30": {
+    "localized_name": "Metallregalset",
+    "description": "Ein Metallregalset. Zur Aufbewahrung von Gegenständen."
+  },
+  "FurnitureSet_31": {
+    "localized_name": "Gartenmöbelset",
+    "description": "Ein dekoratives Einrichtungsset. Für Freunde von Gartenmöbeln."
+  },
+  "FurnitureSet_32": {
+    "localized_name": "Antikes Luxus-Einrichtungsset",
+    "description": "Ein dekoratives Einrichtungsset. Man gönnt sich ja sonst nichts."
+  },
+  "FurnitureSet_4": {
+    "localized_name": "Efeuset",
+    "description": "Ein dekoratives Einrichtungsset. Bringe Pflanzen an Wänden an, um dein Lager lebendiger zu machen."
+  },
+  "FurnitureSet_5": {
+    "localized_name": "Metalltonnenset",
+    "description": "Ein dekoratives Einrichtungsset. Nicht zum darin Baden geeignet."
+  },
+  "FurnitureSet_6": {
+    "localized_name": "Aufbewahrungskistenset",
+    "description": "Ein Aufbewahrungskistenset. Zur Aufbewahrung von Gegenständen."
+  },
+  "FurnitureSet_7": {
+    "localized_name": "Lederstuhlset",
+    "description": "Ein dekoratives Einrichtungsset. Das Leder verleiht einen edlen Look."
+  },
+  "FurnitureSet_8": {
+    "localized_name": "Fluchtwegschildset",
+    "description": "Ein dekoratives Einrichtungsset. Essentieller Teil jeder fortschrittlichen Zivilisation."
+  },
+  "FurnitureSet_9": {
+    "localized_name": "Topfpflanzenset",
+    "description": "Ein dekoratives Einrichtungsset. Stelle Pflanzen auf, um dein Lager lebendiger zu machen."
+  },
+  "FurnitureSet_Japanese": {
+    "localized_name": "Fernöstliches Möbelset",
+    "description": "Ein dekoratives Einrichtungsset im fernöstlichen Stil. Verleihe deinem Lager etwas fernöstliche Eleganz."
+  },
+  "GatlingBullet": {
+    "localized_name": "Gatlinggewehrmunition",
+    "description": null
+  },
+  "Glass_houseset": {
+    "localized_name": "Glasbauset",
+    "description": "Ein Set, mit dem du ein Lager aus Glas errichten kannst. Ermöglicht den Bau von Fundamenten, Wänden, Dächern, Treppen und anderen Elementen aus Glas, die du zum Hausbau benötigst."
+  },
+  "GrapplingGun": {
+    "localized_name": "Enterhakenpistole",
+    "description": null
+  },
+  "GrapplingGun2": {
+    "localized_name": "Mega-Enterhakenpistole",
+    "description": null
+  },
+  "GrapplingGun3": {
+    "localized_name": "Giga-Enterhakenpistole",
+    "description": null
+  },
+  "GrapplingGun4": {
+    "localized_name": "Tera-Enterhakenpistole",
+    "description": null
+  },
+  "GrenadeBullet": {
+    "localized_name": "Granatwerfermunition",
+    "description": null
+  },
+  "GuildChest": {
+    "localized_name": "Gildentruhe",
+    "description": null
+  },
+  "HandTorch": {
+    "localized_name": "Handfackel",
+    "description": "Erhellt die Nacht und schützt vor Kälte. Kann theoretisch auch für den Nahkampf verwendet werden. Für die Herstellung wird „Primitive Werkbank“ benötigt."
+  },
+  "HandgunBullet": {
+    "localized_name": "Pistolenmunition",
+    "description": "Munition für Waffen vom Typ „Pistole“. Für die Herstellung wird „Waffen-Werkbank“ benötigt."
+  },
+  "Headstone": {
+    "localized_name": "Grabstein",
+    "description": null
+  },
+  "Heater": {
+    "localized_name": "Feuerheizung",
+    "description": "Heizt dein Lager und schützt vor Kälte."
+  },
+  "Homeward": {
+    "localized_name": "Donnernde Heimkehr",
+    "description": null
+  },
+  "HugeKitchen": {
+    "localized_name": "Großküche",
+    "description": null
+  },
+  "IceCrusher": {
+    "localized_name": "Gefrierzerkleinerer",
+    "description": null
+  },
+  "Infra_ElectricGenerator_Grade_01": {
+    "localized_name": "Generator",
+    "description": "Speichert Strom, den Elektro-Pals erzeugen, und wird benötigt, um elektrische Anlagen in deinem Lager zu betreiben."
+  },
+  "Infra_ElectronicCircuit": {
+    "localized_name": "Platine",
+    "description": "Komponente, die zur Herstellung von Präzisionsinstrumenten benötigt wird. Für die Herstellung wird „Fließbandwerk“ benötigt."
+  },
+  "Infra_ItemChest_Grade_01": {
+    "localized_name": "Holztruhe",
+    "description": "Darin kannst du Gegenstände lagern. Stelle sie in deinem Lager auf und Pals, die „Transport“ beherrschen, sammeln Gegenstände von selbst auf und platzieren sie in die Truhe."
+  },
+  "Infra_ItemChest_Grade_02": {
+    "localized_name": "Eisentruhe",
+    "description": "Fasst mehr Gegenstände und ist außerdem stabiler. Pals, die „Transport“ sammeln Gegenstände von selbst auf und platzieren sie in die Truhe."
+  },
+  "Infra_ItemChest_Grade_03": {
+    "localized_name": "Stahltruhe",
+    "description": "Fasst noch mehr Gegenstände und ist noch stabiler. Pals, die „Transport“ sammeln Gegenstände von selbst auf und platzieren sie in die Truhe."
+  },
+  "Infra_MachineParts": {
+    "localized_name": "Nagel",
+    "description": null
+  },
+  "Infra_PalBed_Grade_01": {
+    "localized_name": "Pal-Strohbett",
+    "description": "Pals, die nachts in einem Bett schlafen, regenerieren ihre GEI. Pals, die kein Bett haben, regenerieren keine GEI. Erholsamer Schlaf ist eben wichtig."
+  },
+  "Infra_PalBed_Grade_02": {
+    "localized_name": "Pal-Flauschbett",
+    "description": "Darin können deine Pals noch erholsamer schlafen und ihre LP und GEI noch besser regenerieren."
+  },
+  "Infra_PlayerBed_Grade_01": {
+    "localized_name": "Mieses Bett",
+    "description": "Schläft ein Mensch darauf, werden ihm LP wiederhergestellt. Leg dich abends schlafen, und die Zeit bis zum Morgen vergeht wie im Flug. Um darauf schlafen zu können, muss es an einem überdachten Ort aufgestellt sein."
+  },
+  "Infra_PlayerBed_Grade_02": {
+    "localized_name": "Komfortables Bett",
+    "description": "Ein flauschiges Bett für tieferen Schlaf und bessere Regeneration. Um darauf schlafen zu können, muss es an einem überdachten Ort aufgestellt sein."
+  },
+  "ItemBooth": {
+    "localized_name": "Flohmarkt (Gegenstände)",
+    "description": null
+  },
+  "ItemChest_04": {
+    "localized_name": "Hightech-Truhe",
+    "description": null
+  },
+  "JapaneseStyle_houseset": {
+    "localized_name": "Fernöstliches Bauset",
+    "description": "Ein Set, mit dem du ein Lager im fernöstlichen Stil errichten kannst. Ermöglicht den Bau von Fundamenten, Wänden, Dächern, Treppen und anderen Elementen, die du zum Hausbau benötigst."
+  },
+  "Katana": {
+    "localized_name": "Katana",
+    "description": null
+  },
+  "Lab": {
+    "localized_name": "Pal-Arbeitsinstitut",
+    "description": null
+  },
+  "Lamp": {
+    "localized_name": "Stehlampe",
+    "description": "Benötigt Strom, ist dafür schön hell."
+  },
+  "Lantern": {
+    "localized_name": "Tragbare Laterne",
+    "description": null
+  },
+  "LargeCeilingLamp": {
+    "localized_name": "Große Deckenlampe",
+    "description": "Kann an der Decke angebracht werden und erhellt einen weiten Bereich."
+  },
+  "LargeLamp": {
+    "localized_name": "Große Stehlampe",
+    "description": "Eine große Lichtquelle, die einen noch weiteren Bereich erhellt."
+  },
+  "LaserBullet": {
+    "localized_name": "Energiekartusche",
+    "description": null
+  },
+  "LaserGatlingBullet": {
+    "localized_name": "Laser-Gatlingkartusche",
+    "description": null
+  },
+  "LaserGatlingGun": {
+    "localized_name": "Laser-Gatlinggewehr",
+    "description": null
+  },
+  "LauncherBullet": {
+    "localized_name": "Panzerfaustmunition",
+    "description": "Munition für Waffen vom Typ „Panzerfaust“. Für die Herstellung wird „Waffen-Fließbandwerk II“ benötigt."
+  },
+  "Launcher_Meteor": {
+    "localized_name": "Meteowerfer",
+    "description": "Eine aus einem Meteoriten gefertigte, verrückte Waffe. Ihre Geschosse schlagen auch ein wie Meteoriten. Für die Herstellung wird „Waffen-Fließbandwerk“ benötigt."
+  },
+  "MakeshiftAssaultRifle": {
+    "localized_name": "Schrottreifes Sturmgewehr",
+    "description": null
+  },
+  "MakeshiftHandgun": {
+    "localized_name": "Alte Pistole",
+    "description": "Eine aus Schrott zusammengeschusterte Pistole. Ist auf relativ kurze Distanz wirkungsvoll, hat aber nur einen Schuss. Für die Herstellung wird „Waffen-Werkbank“ benötigt."
+  },
+  "MakeshiftShotgun": {
+    "localized_name": "Schrottreife Flinte",
+    "description": null
+  },
+  "MakeshiftSubmachineGun": {
+    "localized_name": "Schrottreife Maschinenpistole",
+    "description": null
+  },
+  "ManualElectricGenerator": {
+    "localized_name": "Manueller Stromgenerator",
+    "description": null
+  },
+  "MeatCutterKnife": {
+    "localized_name": "Fleischerbeil",
+    "description": "Ein Messer, mit dem du gerufene Pals schlachten kannst. Wenn du es ausgerüstet hast, ändert sich die Option „Streicheln“ zu „Schlachten“. Ein geschlachteter Pal ist für immer weg."
+  },
+  "MedicalPalBed_04": {
+    "localized_name": "Großes Palbett",
+    "description": null
+  },
+  "MedicalPalBed_05": {
+    "localized_name": "Hightech-Medipod",
+    "description": null
+  },
+  "MedicineFacility_03": {
+    "localized_name": "Hightech-Pharmaziewerkbank",
+    "description": null
+  },
+  "MetalDetector": {
+    "localized_name": "Metalldetektor",
+    "description": null
+  },
+  "Metal_Gate": {
+    "localized_name": "Metalltor",
+    "description": "Ein Metalltor, durch das auch größere Pals hindurchpassen."
+  },
+  "Metal_houseset": {
+    "localized_name": "Metallbauset",
+    "description": "Ein Set, mit dem du ein Lager aus Metall errichten kannst. Ermöglicht den Bau von Fundamenten, Wänden, Dächern, Treppen und anderen Elementen aus Metall, die du zum Hausbau benötigst."
+  },
+  "MiningTool": {
+    "localized_name": "Spitzhacke und Helm",
+    "description": null
+  },
+  "MissileBullet": {
+    "localized_name": "Raketenwerfermunition",
+    "description": null
+  },
+  "MonsterFarm": {
+    "localized_name": "Viehfarm",
+    "description": "Eine Farm für Schafe, Hühner und ähnliche Pals. Weise der Farm geeignete Pals zu, und sie werden automatisch Gegenstände produzieren."
+  },
+  "MultiElectricHatchingPalEgg": {
+    "localized_name": "Großer elektrischer Brutkasten",
+    "description": null
+  },
+  "Musket": {
+    "localized_name": "Muskete",
+    "description": "Ein altmodisches, simples Gewehr. Hat eine hohe Schusskraft, das Nachladen dauert allerdings. Für die Herstellung wird „Waffen-Werkbank“ benötigt."
+  },
+  "OilPump": {
+    "localized_name": "Ölförderpumpe",
+    "description": null
+  },
+  "OlympicCauldron": {
+    "localized_name": "Olympisches Feuer",
+    "description": null
+  },
+  "PALBOX": {
+    "localized_name": "Pal-Box",
+    "description": "Eine Anlage zur Aufbewahrung gefangener Pals. Den Pals in der Box werden nach und nach LP wiederhergestellt. Der Bereich ringsum ist dein Lager."
+  },
+  "PalBooth": {
+    "localized_name": "Flohmarkt (Pals)",
+    "description": null
+  },
+  "PalFoodBox": {
+    "localized_name": "Futtertrog",
+    "description": "Kann mit Futter gefüllt werden und Pals in deinem Lager werden sich daran bedienen."
+  },
+  "PalMedicineBox": {
+    "localized_name": "Medizinregal",
+    "description": null
+  },
+  "PalRevive": {
+    "localized_name": "Wiederbelebungsmedizin",
+    "description": null
+  },
+  "PalSphere_Exotic": {
+    "localized_name": "Infinitum-Sphäre",
+    "description": null
+  },
+  "Plastic": {
+    "localized_name": "Plaststahl",
+    "description": null
+  },
+  "Polymer": {
+    "localized_name": "Polymerplatte",
+    "description": null
+  },
+  "Potion_Extreme": {
+    "localized_name": "Extrem-Heiltrank",
+    "description": null
+  },
+  "Product_Axe_Grade_01": {
+    "localized_name": "Steinaxt",
+    "description": "Eine Axt zum Holzfällen. Ist aus Stein und deshalb nicht sonderlich scharf."
+  },
+  "Product_Axe_Grade_02": {
+    "localized_name": "Metallaxt",
+    "description": "Eine Axt zum Holzfällen. Ist aus Metall und ziemlich scharf und haltbar. Für die Herstellung wird „Hochwertige Werkbank“ benötigt."
+  },
+  "Product_Axe_Grade_03": {
+    "localized_name": "Hochwertige Metallaxt",
+    "description": "Eine Axt zum Holzfällen. Ist aus hochwertigem Metall und dadurch noch schärfer und haltbarer. Für die Herstellung wird „Fließbandwerk“ benötigt."
+  },
+  "Product_CoalPit": {
+    "localized_name": "Steinkohlemine",
+    "description": null
+  },
+  "Product_Cooking_Grade_01": {
+    "localized_name": "Lagerfeuer",
+    "description": "Damit kannst du einfache Gerichte kochen. Spendet zudem etwas Wärme und Licht."
+  },
+  "Product_Cooking_Grade_02": {
+    "localized_name": "Kochtopf",
+    "description": "Damit lässt sich eine größere Vielfalt an Zutaten verarbeiten und das Kochen ist kinderleicht."
+  },
+  "Product_Cooking_Grade_03": {
+    "localized_name": "Elektrische Küche",
+    "description": "Benötigt Strom, ermöglicht dafür die Zubereitung komplexerer Gerichte. Für den Betrieb benötigt man Pals, die „Feuererzeugung“ beherrschen."
+  },
+  "Product_CopperPit": {
+    "localized_name": "Erzbruch",
+    "description": null
+  },
+  "Product_CopperPit_2": {
+    "localized_name": "Erzbruch Ⅱ",
+    "description": null
+  },
+  "Product_Factory_Hard_Grade_01": {
+    "localized_name": "Hochwertige Werkbank",
+    "description": "Erlaubt ein höheres Produktionstempo als „Primitive Werkbank“. Für die Arbeit benötigt man Pals, die „Handwerk“ beherrschen."
+  },
+  "Product_Factory_Hard_Grade_02": {
+    "localized_name": "Fließbandwerk",
+    "description": "Benötigt Strom, ermöglicht dafür eine schnellere Produktion von allerlei Gegenständen. Für die Arbeit benötigt man Pals, die „Handwerk“ beherrschen."
+  },
+  "Product_Factory_Hard_Grade_03": {
+    "localized_name": "Fließbandwerk II",
+    "description": "Benötigt Strom, ermöglicht dafür eine nochmals schnellere Produktion von vielerlei Gegenständen. Für die Arbeit benötigt man Pals, die „Handwerk“ beherrschen."
+  },
+  "Product_Farm_Berries": {
+    "localized_name": "Beerengarten",
+    "description": "Hier kannst du leckere Beeren anbauen. Für die Arbeit benötigt man Pals, die „Aussaat“, „Bewässerung“ und „Sammeln“ beherrschen."
+  },
+  "Product_Farm_Carrot": {
+    "localized_name": "Karottenbeet",
+    "description": null
+  },
+  "Product_Farm_Lettuce": {
+    "localized_name": "Salatacker",
+    "description": "Hier kannst du leckeren Kopfsalat anbauen. Für die Arbeit benötigt man Pals, die „Aussaat“, „Bewässerung“ und „Sammeln“ beherrschen."
+  },
+  "Product_Farm_Onion": {
+    "localized_name": "Zwiebelbeet",
+    "description": null
+  },
+  "Product_Farm_Potato": {
+    "localized_name": "Kartoffelacker",
+    "description": null
+  },
+  "Product_Farm_tomato": {
+    "localized_name": "Tomatenacker",
+    "description": "Hier kannst du leckere Tomaten anbauen. Für die Arbeit benötigt man Pals, die „Aussaat“, „Bewässerung“ und „Sammeln“ beherrschen."
+  },
+  "Product_Farm_wheat": {
+    "localized_name": "Weizenfeld",
+    "description": "Aus Weizen kannst du Brot backen. Für die Arbeit benötigt man Pals, die „Aussaat“, „Bewässerung“ und „Sammeln“ beherrschen."
+  },
+  "Product_Ingot_Grade_01_Copper": {
+    "localized_name": "Primitiver Hochofen",
+    "description": "Ermöglicht den Bau von „Primitiver Hochofen“, mit dessen Hilfe du „Erz“ raffinieren und Metallbarren herstellen kannst."
+  },
+  "Product_Ingot_Grade_02_Iron": {
+    "localized_name": "Verbesserter Hochofen",
+    "description": "Ermöglicht die Herstellung von „Hochwertiger Metallbarren“."
+  },
+  "Product_Ingot_Grade_03_Steal": {
+    "localized_name": "Elektrischer Hochofen",
+    "description": "Ermöglicht die Herstellung von „Paluminiumbarren“."
+  },
+  "Product_Medicine_Grade_01": {
+    "localized_name": "Mittelalterliche Pharmaziewerkbank",
+    "description": "Damit kannst du simple Medikamente herstellen. Für die Arbeit benötigt man Pals, die „Arzneimittelherstellung“ beherrschen."
+  },
+  "Product_Medicine_Grade_02": {
+    "localized_name": "Elektrische Pharmazieanlage",
+    "description": "Benötigt Strom, ermöglicht dafür die Herstellung hochwertigerer Medikamente. Für die Arbeit benötigt man Pals, die „Arzneimittelherstellung“ beherrschen."
+  },
+  "Product_Pickaxe_Grade_01": {
+    "localized_name": "Steinerne Spitzhacke",
+    "description": "Eine Spitzhacke für den Bergbau. Ist aus Stein und die Arbeit damit nicht sonderlich effizient."
+  },
+  "Product_Pickaxe_Grade_02": {
+    "localized_name": "Metall-Spitzhacke",
+    "description": "Eine Spitzhacke für den Bergbau. Ist aus Metall, was die Haltbarkeit und Effizienz erhöht. Für die Herstellung wird „Hochwertige Werkbank“ benötigt."
+  },
+  "Product_Pickaxe_Grade_03": {
+    "localized_name": "Hochwertige Metall-Spitzhacke",
+    "description": "Eine Spitzhacke für den Bergbau. Noch haltbarer und effizienter. Für die Herstellung wird „Fließbandwerk“ benötigt."
+  },
+  "Product_QuartzPit": {
+    "localized_name": "Reinquarzmine",
+    "description": null
+  },
+  "Product_StationDeforest": {
+    "localized_name": "Holzfällerlager",
+    "description": "Damit kannst du Holz in deinem Lager abbauen. Für die Arbeit benötigt man Pals, die „Holzfällen“ beherrschen."
+  },
+  "Product_StonePit": {
+    "localized_name": "Steinbruch",
+    "description": "Damit kannst du Stein in deinem Lager abbauen. Für die Arbeit benötigt man Pals, die „Bergbau“ beherrschen."
+  },
+  "Product_SulfurPit": {
+    "localized_name": "Schwefelmine",
+    "description": null
+  },
+  "Product_WeaponFactory_Dirty_Grade_01": {
+    "localized_name": "Waffen-Werkbank",
+    "description": "Hier kannst du Waffen simpler Bauart herstellen. Für die Arbeit benötigt man Pals, die „Handwerk“ beherrschen."
+  },
+  "Product_WeaponFactory_Dirty_Grade_02": {
+    "localized_name": "Waffen-Fließbandwerk",
+    "description": "Benötigt Strom, ermöglicht dafür eine schnellere Produktion von Waffen und Munition. Für die Arbeit benötigt man Pals, die „Handwerk“ beherrschen."
+  },
+  "Product_WeaponFactory_Dirty_Grade_03": {
+    "localized_name": "Waffen-Fließbandwerk II",
+    "description": "Benötigt Strom, ermöglicht dafür eine nochmals schnellere Produktion von Waffen und Munition. Für die Arbeit benötigt man Pals, die „Handwerk“ beherrschen."
+  },
+  "Product_WorkBench_SkillUnlock": {
+    "localized_name": "Pal-Ausrüstungs-Werkbank",
+    "description": "Damit können Pal-Ausrüstungen gefertigt werden, die für Partnerfähigkeiten benötigt werden."
+  },
+  "Refrigerator": {
+    "localized_name": "Kühlschrank",
+    "description": null
+  },
+  "ReinforcedArrow": {
+    "localized_name": "Verstärkter Pfeil",
+    "description": null
+  },
+  "RepairBench": {
+    "localized_name": "Reparaturbank",
+    "description": "Zur Reparatur kaputter Waffen und Hilfsmittel."
+  },
+  "RepairKit": {
+    "localized_name": "Reparaturset",
+    "description": null
+  },
+  "RifleBullet": {
+    "localized_name": "Gewehrmunition",
+    "description": "Munition für Gewehre. Für die Herstellung wird „Waffen-Werkbank“ benötigt."
+  },
+  "RoughBullet": {
+    "localized_name": "Minderwertige Munition",
+    "description": "Munition für Waffen vom Typ „Muskete“ und „Alte Pistole“. Für die Herstellung wird „Waffen-Werkbank“ benötigt."
+  },
+  "SFArmor": {
+    "localized_name": "Hexolitrüstung",
+    "description": null
+  },
+  "SFArmorCold": {
+    "localized_name": "Kälteresistente Hexolitrüstung",
+    "description": null
+  },
+  "SFArmorHeat": {
+    "localized_name": "Hitzeresistente Hexolitrüstung",
+    "description": null
+  },
+  "SFArmorWeight": {
+    "localized_name": "Leichte Hexolitrüstung",
+    "description": null
+  },
+  "SFArrow": {
+    "localized_name": "Hightech-Pfeil",
+    "description": null
+  },
+  "SFBow": {
+    "localized_name": "Hightech-Bogen",
+    "description": null
+  },
+  "SFHelmet": {
+    "localized_name": "Hexolithelm",
+    "description": null
+  },
+  "SanityDecrease1": {
+    "localized_name": "Alphawellengenerator",
+    "description": null
+  },
+  "Shield_01": {
+    "localized_name": "Normaler Schild",
+    "description": "Ein mithilfe von Paldiumtechnologie entwickelter, mysteriöser Schild. Regeneriert sich automatisch, nachdem er einige Zeit lang keinen Schaden nimmt."
+  },
+  "Shield_02": {
+    "localized_name": "Megaschild",
+    "description": "Ein mithilfe von Paldiumtechnologie entwickelter, mysteriöser Schild. Verbessertes Modell mit höherer Schutzwirkung. Für die Fertigung benötigst du „Hochwertige Werkbank“."
+  },
+  "Shield_03": {
+    "localized_name": "Gigaschild",
+    "description": "Ein mithilfe von Paldiumtechnologie entwickelter, mysteriöser Schild. Bietet eine nochmals bessere Performance. Für die Fertigung benötigst du „Fließbandwerk“."
+  },
+  "Shield_04": {
+    "localized_name": "Teraschild",
+    "description": "Ein mithilfe von Paldiumtechnologie entwickelter, mysteriöser Schild. Dieses Spitzenmodell ist das Ergebnis neuester Forschung. Für die Fertigung benötigst du „Fließbandwerk II“."
+  },
+  "Shield_05": {
+    "localized_name": "Ultraschild",
+    "description": "Ein mithilfe von Paldiumtechnologie entwickelter, mysteriöser Schild. Dieses ultimative Modell ist das Ergebnis allerneuester Forschung. Für die Fertigung benötigst du „Fließbandwerk II“."
+  },
+  "Shield_SF": {
+    "localized_name": "Sci-Fi-Schild",
+    "description": null
+  },
+  "ShotGunBullet": {
+    "localized_name": "Flintenmunition",
+    "description": "Munition für Flinten. Für die Herstellung wird „Waffen-Werkbank“ benötigt."
+  },
+  "Signboard": {
+    "localized_name": "Schild",
+    "description": "Zum Draufschreiben."
+  },
+  "Silo": {
+    "localized_name": "Silo",
+    "description": null
+  },
+  "SkillUnlock_Alpaca": {
+    "localized_name": "Melpaca-Sattel",
+    "description": null
+  },
+  "SkillUnlock_AmaterasuWolf": {
+    "localized_name": "Kitsun-Sattel",
+    "description": null
+  },
+  "SkillUnlock_AmaterasuWolf_Dark": {
+    "localized_name": "Kitsun-Noct-Sattel",
+    "description": null
+  },
+  "SkillUnlock_BadCatgirl": {
+    "localized_name": "Nyafia-Flinte",
+    "description": null
+  },
+  "SkillUnlock_BirdDragon": {
+    "localized_name": "Vanwyrm-Sattel",
+    "description": null
+  },
+  "SkillUnlock_BirdDragon_Ice": {
+    "localized_name": "Vanwyrm-Cryst-Sattel",
+    "description": null
+  },
+  "SkillUnlock_BlackCentaur": {
+    "localized_name": "Necromus-Sattel",
+    "description": null
+  },
+  "SkillUnlock_BlackGriffon": {
+    "localized_name": "Shadowbeak-Sattel",
+    "description": null
+  },
+  "SkillUnlock_BlackMetalDragon": {
+    "localized_name": "Astegon-Sattel",
+    "description": null
+  },
+  "SkillUnlock_BlackPuppy": {
+    "localized_name": "Smokie-Geschirr",
+    "description": null
+  },
+  "SkillUnlock_BlueDragon": {
+    "localized_name": "Azurobe-Sattel",
+    "description": null
+  },
+  "SkillUnlock_BlueThunderHorse": {
+    "localized_name": "Azurmane-Sattel",
+    "description": null
+  },
+  "SkillUnlock_Boar": {
+    "localized_name": "Rushoar-Sattel",
+    "description": null
+  },
+  "SkillUnlock_Carbunclo": {
+    "localized_name": "Lifmunk-Maschinenpistole",
+    "description": null
+  },
+  "SkillUnlock_ColorfulBird": {
+    "localized_name": "Tocotoco-Handschuhe",
+    "description": null
+  },
+  "SkillUnlock_DarkMechaDragon": {
+    "localized_name": "Xenolord-Sattel",
+    "description": null
+  },
+  "SkillUnlock_Deer": {
+    "localized_name": "Eikthyrdeer-Sattel",
+    "description": null
+  },
+  "SkillUnlock_Deer_Ground": {
+    "localized_name": "Eikthyrdeer-Terra-Sattel",
+    "description": null
+  },
+  "SkillUnlock_DreamDemon": {
+    "localized_name": "Daedream-Halsband",
+    "description": null
+  },
+  "SkillUnlock_DrillGame": {
+    "localized_name": "Digtoise-Stirnband",
+    "description": null
+  },
+  "SkillUnlock_Eagle": {
+    "localized_name": "Galeclaw-Handschuhe",
+    "description": null
+  },
+  "SkillUnlock_ElecPanda": {
+    "localized_name": "Grizzbolt-Minigun",
+    "description": null
+  },
+  "SkillUnlock_FairyDragon": {
+    "localized_name": "Elphidran-Sattel",
+    "description": null
+  },
+  "SkillUnlock_FairyDragon_Water": {
+    "localized_name": "Elphidran-Aqua-Sattel",
+    "description": null
+  },
+  "SkillUnlock_FeatherOstrich": {
+    "localized_name": "Dazemu-Sattel",
+    "description": null
+  },
+  "SkillUnlock_FengyunDeeper": {
+    "localized_name": "Fenglope-Sattel",
+    "description": null
+  },
+  "SkillUnlock_FengyunDeeper_Electric": {
+    "localized_name": "Fenglope-Lux-Sattel",
+    "description": null
+  },
+  "SkillUnlock_FireKirin": {
+    "localized_name": "Pyrin-Sattel",
+    "description": null
+  },
+  "SkillUnlock_FireKirin_Dark": {
+    "localized_name": "Pyrin-Noct-Sattel",
+    "description": null
+  },
+  "SkillUnlock_FlameBuffalo": {
+    "localized_name": "Arsox-Sattel",
+    "description": null
+  },
+  "SkillUnlock_FlowerDinosaur": {
+    "localized_name": "Dinossom-Sattel",
+    "description": null
+  },
+  "SkillUnlock_FlowerDinosaur_Electric": {
+    "localized_name": "Dinossom-Lux-Sattel",
+    "description": null
+  },
+  "SkillUnlock_FlowerRabbit": {
+    "localized_name": "Flopie-Halsband",
+    "description": null
+  },
+  "SkillUnlock_FlyingManta": {
+    "localized_name": "Celaray-Handschuhe",
+    "description": null
+  },
+  "SkillUnlock_Garm": {
+    "localized_name": "Direhowl-Sattelgeschirr",
+    "description": null
+  },
+  "SkillUnlock_GhostBeast": {
+    "localized_name": "Maraith-Sattel",
+    "description": null
+  },
+  "SkillUnlock_GoldenHorse": {
+    "localized_name": "Gildane-Sattel",
+    "description": null
+  },
+  "SkillUnlock_GrassMammoth": {
+    "localized_name": "Mammorest-Sattel",
+    "description": null
+  },
+  "SkillUnlock_GrassMammoth_Ice": {
+    "localized_name": "Mammorest-Cryst-Sattel",
+    "description": null
+  },
+  "SkillUnlock_GrassPanda": {
+    "localized_name": "Mossanda-Granatwerfer",
+    "description": null
+  },
+  "SkillUnlock_GrassPanda_Electric": {
+    "localized_name": "Mossanda-Lux-Granatwerfer",
+    "description": null
+  },
+  "SkillUnlock_GuardianDog": {
+    "localized_name": "Yakumo-Sattel",
+    "description": null
+  },
+  "SkillUnlock_HadesBird": {
+    "localized_name": "Helzephyr-Sattel",
+    "description": null
+  },
+  "SkillUnlock_HadesBird_Electric": {
+    "localized_name": "Helzephyr-Lux-Sattel",
+    "description": null
+  },
+  "SkillUnlock_HawkBird": {
+    "localized_name": "Nitewing-Sattel",
+    "description": null
+  },
+  "SkillUnlock_Hedgehog": {
+    "localized_name": "Jolthog-Handschuhe",
+    "description": null
+  },
+  "SkillUnlock_Hedgehog_Ice": {
+    "localized_name": "Jolthog-Cryst-Handschuhe",
+    "description": null
+  },
+  "SkillUnlock_Horus": {
+    "localized_name": "Faleris-Sattel",
+    "description": null
+  },
+  "SkillUnlock_Horus_Water": {
+    "localized_name": "Faleris-Aqua-Sattel",
+    "description": null
+  },
+  "SkillUnlock_IceDeer": {
+    "localized_name": "Reindrix-Sattel",
+    "description": null
+  },
+  "SkillUnlock_IceHorse": {
+    "localized_name": "Frostallion-Sattel",
+    "description": null
+  },
+  "SkillUnlock_IceHorse_Dark": {
+    "localized_name": "Frostallion-Noct-Sattel",
+    "description": null
+  },
+  "SkillUnlock_JetDragon": {
+    "localized_name": "Jetragon-Raketenwerfer",
+    "description": null
+  },
+  "SkillUnlock_KingAlpaca": {
+    "localized_name": "Kingpaca-Sattel",
+    "description": null
+  },
+  "SkillUnlock_KingAlpaca_Ice": {
+    "localized_name": "Kingpaca-Cryst-Sattel",
+    "description": null
+  },
+  "SkillUnlock_KingBahamut": {
+    "localized_name": "Blazamut-Sattel",
+    "description": null
+  },
+  "SkillUnlock_KingBahamut_Dragon": {
+    "localized_name": "Blazamut-Ryu-Sattel",
+    "description": null
+  },
+  "SkillUnlock_Kirin": {
+    "localized_name": "Univolt-Sattel",
+    "description": null
+  },
+  "SkillUnlock_Kitsunebi": {
+    "localized_name": "Foxparks-Geschirr",
+    "description": null
+  },
+  "SkillUnlock_Kitsunebi_Ice": {
+    "localized_name": "Foxparks-Cryst-Geschirr",
+    "description": null
+  },
+  "SkillUnlock_LazyDragon": {
+    "localized_name": "Relaxaurus-Raketenwerfer",
+    "description": null
+  },
+  "SkillUnlock_LazyDragon_Electric": {
+    "localized_name": "Relaxaurus-Lux-Raketenwerfer",
+    "description": null
+  },
+  "SkillUnlock_Manticore": {
+    "localized_name": "Blazehowl-Sattel",
+    "description": null
+  },
+  "SkillUnlock_Manticore_Dark": {
+    "localized_name": "Blazehowl-Noct-Sattel",
+    "description": null
+  },
+  "SkillUnlock_Monkey": {
+    "localized_name": "Tanzee-Sturmgewehr",
+    "description": null
+  },
+  "SkillUnlock_MoonQueen": {
+    "localized_name": "Selyne-Sattel",
+    "description": null
+  },
+  "SkillUnlock_MopKing": {
+    "localized_name": "Sweepa-Sattel",
+    "description": null
+  },
+  "SkillUnlock_MushroomDragon": {
+    "localized_name": "Shroomer-Sattel",
+    "description": null
+  },
+  "SkillUnlock_MushroomDragon_Dark": {
+    "localized_name": "Shroomer-Noct-Sattel",
+    "description": null
+  },
+  "SkillUnlock_NaughtyCat": {
+    "localized_name": "Grintale-Sattel",
+    "description": null
+  },
+  "SkillUnlock_NegativeOctopus": {
+    "localized_name": "Killamari-Handschuhe",
+    "description": null
+  },
+  "SkillUnlock_NightBlueHorse": {
+    "localized_name": "Starryon-Sattel",
+    "description": null
+  },
+  "SkillUnlock_Penguin": {
+    "localized_name": "Pengullet-Panzerfaust",
+    "description": null
+  },
+  "SkillUnlock_PurpleSpider": {
+    "localized_name": "Tarantriss-Sattel",
+    "description": null
+  },
+  "SkillUnlock_RaijinDaughter": {
+    "localized_name": "Dazzi-Halsband",
+    "description": null
+  },
+  "SkillUnlock_RaijinDaughter_Water": {
+    "localized_name": "Dazzi-Noct-Halsband",
+    "description": null
+  },
+  "SkillUnlock_RedArmorBird": {
+    "localized_name": "Ragnahawk-Sattel",
+    "description": null
+  },
+  "SkillUnlock_SaintCentaur": {
+    "localized_name": "Paladius-Sattel",
+    "description": null
+  },
+  "SkillUnlock_SakuraSaurus": {
+    "localized_name": "Broncherry-Sattel",
+    "description": null
+  },
+  "SkillUnlock_SakuraSaurus_Water": {
+    "localized_name": "Broncherry-Aqua-Sattel",
+    "description": null
+  },
+  "SkillUnlock_Serpent": {
+    "localized_name": "Surfent-Sattel",
+    "description": null
+  },
+  "SkillUnlock_Serpent_Ground": {
+    "localized_name": "Surfent-Terra-Sattel",
+    "description": null
+  },
+  "SkillUnlock_SkyDragon": {
+    "localized_name": "Quivern-Sattel",
+    "description": null
+  },
+  "SkillUnlock_SkyDragon_Grass": {
+    "localized_name": "Quivern-Botan-Sattel",
+    "description": null
+  },
+  "SkillUnlock_SnowTigerBeastman": {
+    "localized_name": "Bastigor-Hammer",
+    "description": null
+  },
+  "SkillUnlock_Suzaku": {
+    "localized_name": "Suzaku-Sattel",
+    "description": null
+  },
+  "SkillUnlock_Suzaku_Water": {
+    "localized_name": "Suzaku-Aqua-Sattel",
+    "description": null
+  },
+  "SkillUnlock_ThunderBird": {
+    "localized_name": "Beakon-Sattel",
+    "description": null
+  },
+  "SkillUnlock_ThunderDog": {
+    "localized_name": "Rayhound-Sattel",
+    "description": null
+  },
+  "SkillUnlock_Umihebi": {
+    "localized_name": "Jormuntide-Sattel",
+    "description": null
+  },
+  "SkillUnlock_Umihebi_Fire": {
+    "localized_name": "Jormuntide-Ignis-Sattel",
+    "description": null
+  },
+  "SkillUnlock_VolcanicMonster": {
+    "localized_name": "Reptyro-Sattel",
+    "description": null
+  },
+  "SkillUnlock_VolcanicMonster_Ice": {
+    "localized_name": "Reptyro-Cryst-Sattel",
+    "description": null
+  },
+  "SkillUnlock_WeaselDragon": {
+    "localized_name": "Chillet-Sattel",
+    "description": null
+  },
+  "SkillUnlock_WeaselDragon_Fire": {
+    "localized_name": "Chillet-Ignis-Sattel",
+    "description": null
+  },
+  "SkillUnlock_WhiteAlienDragon": {
+    "localized_name": "Xenogard-Sattel",
+    "description": null
+  },
+  "SkillUnlock_WhiteDeer": {
+    "localized_name": "Celesdir-Sattel",
+    "description": null
+  },
+  "SkillUnlock_WhiteShieldDragon": {
+    "localized_name": "Silvegis-Sattel",
+    "description": null
+  },
+  "SkillUnlock_WindChimes": {
+    "localized_name": "Hangyu-Handschuhe",
+    "description": null
+  },
+  "SkillUnlock_WindChimes_Ice": {
+    "localized_name": "Hangyu-Cryst-Handschuhe",
+    "description": null
+  },
+  "SkillUnlock_Yeti": {
+    "localized_name": "Wumpo-Sattel",
+    "description": null
+  },
+  "SkillUnlock_Yeti_Grass": {
+    "localized_name": "Wumpo-Botan-Sattel",
+    "description": null
+  },
+  "SkinChange": {
+    "localized_name": "Pal-Aufhübscher",
+    "description": null
+  },
+  "Snowman": {
+    "localized_name": "Schneemann",
+    "description": null
+  },
+  "Spa": {
+    "localized_name": "Heiße Quelle",
+    "description": "Pals können sich darin entspannen und ihre GEI regenerieren."
+  },
+  "Spa2": {
+    "localized_name": "Luxuriöse heiße Quelle",
+    "description": "Pals können sich darin entspannen und ihre GEI noch besser regenerieren."
+  },
+  "Spear": {
+    "localized_name": "Steinspeer",
+    "description": null
+  },
+  "Spear_2": {
+    "localized_name": "Metallspeer",
+    "description": "Ein Speer für den Nahkampf. Ist aus Metall, was den Angriff erhöht. Für die Herstellung wird „Hochwertige Werkbank“ benötigt."
+  },
+  "Spear_3": {
+    "localized_name": "Hochwertiger Metallspeer",
+    "description": "Ein Speer für den Nahkampf. Ist aus hochwertigem Metall, was den Angriff erhöht. Für die Herstellung wird „Fließbandwerk“ benötigt."
+  },
+  "Spear_ForestBoss": {
+    "localized_name": "Lilys Speer",
+    "description": null
+  },
+  "Special_ElectricHatchingPalEgg": {
+    "localized_name": "Elektrischer Brutkasten",
+    "description": null
+  },
+  "Special_HatchingPalEgg": {
+    "localized_name": "Brutkasten",
+    "description": "Lege ein Pal-Ei hinein, und es wird automatisch ausgebrütet."
+  },
+  "Special_PalRankUp": {
+    "localized_name": "Pal-Entsafter",
+    "description": "Damit kannst du aus Pals derselben Spezies ein Konzentrat herstellen, um den Rang eines Exemplars zu erhöhen."
+  },
+  "Special_PalSphere_Grade_01": {
+    "localized_name": "Pal-Sphäre",
+    "description": "Ein Hilfsmittel, mit dem sich Pals fangen lassen. Ist Massenware und wirkt deshalb nur bei schwachen Pals."
+  },
+  "Special_PalSphere_Grade_02": {
+    "localized_name": "Mega-Sphäre",
+    "description": "Ein Hilfsmittel, mit dem sich Pals fangen lassen. Die verbesserte Wirksamkeit macht den Fang von einer größeren Auswahl an Pals möglich. Für die Herstellung wird „Pal-Sphären-Werkbank“ benötigt."
+  },
+  "Special_PalSphere_Grade_03": {
+    "localized_name": "Giga-Sphäre",
+    "description": "Ein Hilfsmittel, mit dem sich Pals fangen lassen. Damit ist auch der Fang etwas stärkerer Pals möglich. Für die Herstellung wird „Pal-Sphären-Werkbank“ benötigt."
+  },
+  "Special_PalSphere_Grade_04": {
+    "localized_name": "Tera-Sphäre",
+    "description": "Ein Hilfsmittel, mit dem sich Pals fangen lassen. Damit ist auch der Fang durchaus starker Pals möglich. Für die Herstellung wird „Pal-Sphären-Fließbandwerk“ benötigt."
+  },
+  "Special_PalSphere_Grade_05": {
+    "localized_name": "Ultra-Sphäre",
+    "description": "Ein Hilfsmittel, mit dem sich Pals fangen lassen. Dank der hohen Wirksamkeit gehen einem damit nur wenige Pals durch die Lappen. Für die Herstellung wird „Pal-Sphären-Fließbandwerk II“ benötigt."
+  },
+  "Special_PalSphere_Grade_06": {
+    "localized_name": "Legendäre Sphäre",
+    "description": "Ein Hilfsmittel, mit dem sich Pals fangen lassen. Dank der extrem hohen Wirksamkeit gehen einem damit kaum noch Pals durch die Lappen. Für die Herstellung wird „Pal-Sphären-Fließbandwerk II“ benötigt."
+  },
+  "Special_PalSphere_Grade_07": {
+    "localized_name": "Ultimative Sphäre",
+    "description": "Ein Hilfsmittel, mit dem sich Pals fangen lassen. Dank der überwältigenden Wirksamkeit lassen sich damit fast alle Pals fangen. Für die Herstellung wird „Pal-Sphären-Fließbandwerk II“ benötigt."
+  },
+  "Special_SphereFactory_Black_Grade_01": {
+    "localized_name": "Pal-Sphären-Werkbank",
+    "description": "Eine Werkbank zur Fertigung von Pal-Sphären, mit denen sich Pals fangen lassen. Für die Arbeit benötigt man Pals, die „Handwerk“ beherrschen."
+  },
+  "Special_SphereFactory_Black_Grade_02": {
+    "localized_name": "Pal-Sphären-Fließbandwerk",
+    "description": "Damit läuft die Produktion von „Pal-Sphäre“ noch schneller. Für die Arbeit benötigt man Pals, die „Handwerk“ beherrschen."
+  },
+  "Special_SphereFactory_Black_Grade_03": {
+    "localized_name": "Pal-Sphären-Fließbandwerk II",
+    "description": "Damit läuft die Produktion von „Pal-Sphäre“ nochmals schneller. Für die Arbeit benötigt man Pals, die „Handwerk“ beherrschen."
+  },
+  "SphereFactory_Black_04": {
+    "localized_name": "Hightech-Sphärenfabrik",
+    "description": null
+  },
+  "SphereModule_Curve": {
+    "localized_name": "Kurvenmodul",
+    "description": null
+  },
+  "SphereModule_Curve2": {
+    "localized_name": "Drallmodul",
+    "description": null
+  },
+  "SphereModule_Heavy": {
+    "localized_name": "Gewichtsmodul",
+    "description": null
+  },
+  "SphereModule_Homing": {
+    "localized_name": "Zielsuchmodul",
+    "description": null
+  },
+  "SphereModule_Sniper": {
+    "localized_name": "Scharfschussmodul",
+    "description": null
+  },
+  "SphereModule_Sniper2": {
+    "localized_name": "Scharfschussmodul Ⅱ",
+    "description": null
+  },
+  "StainlessSteel": {
+    "localized_name": "Hexolit",
+    "description": null
+  },
+  "Stone_Gate": {
+    "localized_name": "Steintor",
+    "description": "Ein Steintor, durch das auch größere Pals hindurchpassen."
+  },
+  "Stone_houseset": {
+    "localized_name": "Steinbauset",
+    "description": "Ein Set, mit dem du ein Lager aus Stein errichten kannst. Ermöglicht den Bau von Fundamenten, Wänden, Dächern, Treppen und anderen Elementen aus Stein, die du zum Hausbau benötigst."
+  },
+  "Stump": {
+    "localized_name": "Hackklotz und Beil",
+    "description": null
+  },
+  "TableDresser01_Stone": {
+    "localized_name": "Antike Frisierkommode",
+    "description": null
+  },
+  "ToolBoxV1": {
+    "localized_name": "Große Werkzeugkiste",
+    "description": null
+  },
+  "Torch": {
+    "localized_name": "Standfackel",
+    "description": "Kann aufgestellt werden und erhellt dein Lager."
+  },
+  "TransmissionTower": {
+    "localized_name": "Strommast",
+    "description": null
+  },
+  "Trap_LegHold": {
+    "localized_name": "Kleines Fangeisen",
+    "description": "Tritt ein Opfer darauf, wird es festgesetzt. Nur für kleine Pals und Menschen."
+  },
+  "Trap_LegHold_Big": {
+    "localized_name": "Großes Fangeisen",
+    "description": "Tritt ein Opfer darauf, wird es festgesetzt. Nur für große Pals."
+  },
+  "Trap_MineAttack": {
+    "localized_name": "Tretmine",
+    "description": "Explodiert, wenn ein Gegner drauftritt."
+  },
+  "Trap_MineElecShock": {
+    "localized_name": "Elektroschockmine",
+    "description": "Tritt ein Opfer darauf, bekommt es einen elektrischen Schock. So betäubte Pals sind leichter zu fangen."
+  },
+  "Trap_MineFreeze": {
+    "localized_name": "Eismine",
+    "description": "Tritt ein Opfer darauf, friert es ein. Eingefrorene Pals sind leichter zu fangen."
+  },
+  "Trap_Noose": {
+    "localized_name": "Schlingenfalle",
+    "description": "Läuft ein Pal durch, wird er festgesetzt. Nur für kleine Pals und Menschen."
+  },
+  "Unlock_Picking_Tier1": {
+    "localized_name": "Simpler Schlossknacker",
+    "description": null
+  },
+  "Unlock_Picking_Tier2": {
+    "localized_name": "Hochwertiger Schlossknacker",
+    "description": null
+  },
+  "Unlock_Picking_Tier3": {
+    "localized_name": "Profi-Schlossknacker",
+    "description": null
+  },
+  "WallSignboard": {
+    "localized_name": "WallSignBoard",
+    "description": null
+  },
+  "WallTorch": {
+    "localized_name": "Wandfackel",
+    "description": "Kann an Wänden angebracht werden."
+  },
+  "Wood_Gate": {
+    "localized_name": "Holztor",
+    "description": "Ein Holztor, durch das auch größere Pals hindurchpassen."
+  },
+  "Wooden_houseset": {
+    "localized_name": "Holzbauset",
+    "description": "Ein Set, mit dem du ein Lager aus Holz errichten kannst. Ermöglicht den Bau von Fundamenten, Wänden, Dächern, Treppen und anderen Elementen aus Holz, die du zum Hausbau benötigst."
+  },
+  "Wooden_ladder": {
+    "localized_name": "Leiter",
+    "description": null
+  },
+  "WorkSpeedIncrease1": {
+    "localized_name": "Betawellengenerator",
+    "description": null
+  },
+  "Workbench": {
+    "localized_name": "Primitive Werkbank",
+    "description": "„Primitive Werkbank“ zur Fertigung einfacher Gegenstände. Pals, die „Handwerk“ beherrschen, können dir bei der Arbeit helfen."
+  },
+  "YakushimaBlade": {
+    "localized_name": "Meowmere",
+    "description": null
+  }
+}

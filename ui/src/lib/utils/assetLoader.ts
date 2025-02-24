@@ -78,12 +78,12 @@ class AssetLoader {
 	loadMenuImage(character_id: string, is_pal: boolean = true): string {
 		if (!character_id) return staticIcons.unknownIcon;
 		character_id = is_pal ? this.cleanseCharacterId(character_id) : 'commonhuman';
-		const image = this.loadImage(`${ASSET_DATA_PATH}/img/${character_id}_menu.png`);
+		const image = this.loadImage(`${ASSET_DATA_PATH}/img/t_${character_id}_icon_normal.png`);
 		if (image) {
 			return image;
 		} else {
 			console.warn(
-				`Failed to load menu image for ${`${ASSET_DATA_PATH}/img/${character_id}_menu.png`}`
+				`Failed to load menu image for ${`${ASSET_DATA_PATH}/img/t_${character_id}_icon_normal.png`}`
 			);
 		}
 		return staticIcons.unknownIcon;
