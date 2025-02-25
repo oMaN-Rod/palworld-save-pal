@@ -3,10 +3,13 @@
 	import PlayerEdit from './components/PlayerEdit.svelte';
 	import PalBox from './components/palbox/PalBox.svelte';
 	import { PlayerList } from '$components';
+	import { Tooltip } from '$components/ui';
+	import { SaveAll } from 'lucide-svelte';
 	import { getAppState, getNavigationState } from '$states';
 	import { Tabs } from '@skeletonlabs/skeleton-svelte';
 	import { goto } from '$app/navigation';
 	import Guilds from './components/guilds/Guilds.svelte';
+	import Technologies from './components/technologies/Technologies.svelte';
 
 	const appState = getAppState();
 	const nav = getNavigationState();
@@ -32,6 +35,7 @@
 				{#snippet list()}
 					<div class="flex-shrink-0">
 						<Tabs.Control value="player">Player</Tabs.Control>
+						<Tabs.Control value="technologies">Technologies</Tabs.Control>
 						<Tabs.Control value="pal-box">Pal Box</Tabs.Control>
 						<Tabs.Control value="guilds">Guild</Tabs.Control>
 						<Tabs.Control value="pal">Pal</Tabs.Control>
@@ -41,6 +45,9 @@
 					<div class="flex-grow overflow-hidden">
 						<Tabs.Panel value="player" classes="h-screen">
 							<PlayerEdit />
+						</Tabs.Panel>
+						<Tabs.Panel value="technologies" classes="h-screen">
+							<Technologies />
 						</Tabs.Panel>
 						<Tabs.Panel value="pal-box" classes="h-screen">
 							<PalBox />

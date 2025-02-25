@@ -35,6 +35,7 @@ class MessageType(str, Enum):
     GET_ITEMS = "get_items"
     GET_PASSIVE_SKILLS = "get_passive_skills"
     GET_PLAYERS = "get_players"
+    GET_TECHNOLOGIES = "get_technologies"
     GET_UI_COMMON = "get_ui_common"
     GET_VERSION = "get_version"
     GET_WORK_SUITABILITY = "get_work_suitability"
@@ -262,3 +263,6 @@ class HealAllPalsMessage(BaseMessage):
 
 class GetBuildingsMessage(BaseModel):
     type: str = MessageType.GET_BUILDINGS.value
+
+class GetTechnologiesMessage(BaseModel):
+    type: str = MessageType.GET_TECHNOLOGIES.value

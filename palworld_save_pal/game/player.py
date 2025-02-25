@@ -1,4 +1,4 @@
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, List, Optional, Union
 from uuid import UUID
 import uuid
 from pydantic import BaseModel, Field, PrivateAttr, computed_field
@@ -45,6 +45,7 @@ class Player(BaseModel):
     _uid: UUID
     _nickname: str
     _level: int
+    _technologies: List[str]
     _exp: int
     _hp: int
     _stomach: float
@@ -160,6 +161,26 @@ class Player(BaseModel):
             PalObjects.set_byte_property(self._save_parameter["Level"], value=value)
         else:
             self._save_parameter["Level"] = PalObjects.ByteProperty(value)
+
+    @computed_field
+    def technologies(self) -> List[str]:
+        self._technologies = (
+            PalObjects.get_array_property(
+                self._save_data["UnlockedRecipeTechnologyNames"]
+            )
+        )
+        return self._technologies
+
+    @technologies.setter
+    def technologies(self, value: List[str]):
+        self._technologies = value
+        PalObjects.set_nested(
+            self._save_data,
+            "UnlockedRecipeTechnologyNames",
+            "value",
+            "value",
+            value=value
+        )
 
     @computed_field
     def exp(self) -> int:

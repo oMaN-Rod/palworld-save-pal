@@ -23,6 +23,7 @@ export enum MessageType {
 	DELETE_PRESET = 'delete_preset',
 	GET_ACTIVE_SKILLS = 'get_active_skills',
 	GET_PASSIVE_SKILLS = 'get_passive_skills',
+	GET_TECHNOLOGIES = 'get_technologies',
 	GET_ELEMENTS = 'get_elements',
 	GET_ITEMS = 'get_items',
 	GET_PALS = 'get_pals',

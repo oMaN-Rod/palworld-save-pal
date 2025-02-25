@@ -9,6 +9,7 @@ import {
 	palsData,
 	passiveSkillsData,
 	presetsData,
+	technologiesData,
 	workSuitabilityData
 } from '.';
 
@@ -19,6 +20,7 @@ export const bootstrap = async () => {
 	await palsData.reset();
 	await activeSkillsData.reset();
 	await passiveSkillsData.reset();
+	await technologiesData.reset();
 	await elementsData.reset();
 	await expData.reset();
 	await itemsData.reset();
