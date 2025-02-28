@@ -47,7 +47,7 @@
 	const baseClass = $derived(cn('flex flex-col', _baseClass));
 	const listClass = $derived(
 		cn(
-			'list flex-grow overflow-y-auto border-surface-900 border divide-y divide-surface-900',
+			'list grow overflow-y-auto border-surface-900 border divide-y divide-surface-900',
 			_listClass
 		)
 	);
@@ -116,7 +116,7 @@
 </script>
 
 <div class={baseClass} {...additionalProps}>
-	<div class="bg-surface-900 sticky top-0 z-10 flex-shrink-0 p-2">
+	<div class="bg-surface-900 sticky top-0 z-10 shrink-0 p-2">
 		<div class={headerClass}>
 			{#if canSelect}
 				<Checkbox bind:checked={selectAll} onchange={handleSelectAll} class="mr-2" />

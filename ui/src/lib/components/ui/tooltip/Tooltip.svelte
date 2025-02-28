@@ -8,7 +8,7 @@
 	let {
 		baseClass = '',
 		background = 'bg-surface-500',
-		rounded = 'rounded',
+		rounded = 'rounded-sm',
 		popupClass = 'p-4',
 		popup,
 		label,

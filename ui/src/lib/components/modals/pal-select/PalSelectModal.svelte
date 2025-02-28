@@ -66,7 +66,7 @@
 	}
 </script>
 
-<Card class="bg-surface-500 min-w-[calc(100vw/3)]">
+<Card class="min-w-[calc(100vw/3)]">
 	<h3 class="h3">{title}</h3>
 	<Combobox options={selectOptions} bind:value={selectedPal}>
 		{#snippet selectOption(option)}

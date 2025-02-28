@@ -27,9 +27,7 @@
 
 	let tierIcon = $derived.by(() => {
 		if (skillData) {
-			return assetLoader.loadImage(
-				`${ASSET_DATA_PATH}/img/rank_${skillData.details.rank}.png`
-			);
+			return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/rank_${skillData.details.rank}.png`);
 		}
 	});
 
@@ -98,9 +96,7 @@
 {#snippet hasSkill(passiveSkill: PassiveSkill)}
 	<Tooltip>
 		<div class="flex w-full items-center">
-			<span class="flex-grow p-2 text-start text-sm 2xl:text-base"
-				>{passiveSkill.localized_name}</span
-			>
+			<span class="grow p-2 text-start text-sm 2xl:text-base">{passiveSkill.localized_name}</span>
 			<div class="relative z-10 flex items-center p-2">
 				<img
 					src={tierIcon}
@@ -122,7 +118,7 @@
 
 {#snippet noSkill()}
 	<div class="flex w-full items-center">
-		<span class="flex-grow p-2 text-start">
+		<span class="grow p-2 text-start">
 			{skill}
 		</span>
 		{#if skill === 'Empty'}

@@ -18,7 +18,7 @@
 		error = false,
 		placeholder = 'Search...',
 		selectOption,
-		onChange = (value: string | number) => {},
+		onChange = () => {},
 		...additionalProps
 	} = $props<{
 		options: SelectOption[];
@@ -78,7 +78,7 @@
 
 	const selectClass = $derived(
 		cn(
-			'relative p-2 focus:outline-none ring-surface-200-800 focus-within:ring-secondary-500 ring rounded-sm',
+			'relative p-2 focus:outline-hidden ring-surface-200-800 focus-within:ring-secondary-500 ring rounded-xs',
 			error ? 'border-error' : '',
 			disabled ? 'text-gray-400 cursor-not-allowed' : '',
 			_selectClass
@@ -185,7 +185,7 @@
 		<div class="flex items-center justify-between">
 			<input
 				type="text"
-				class="w-full bg-transparent focus:outline-none"
+				class="focus:outline-hidden w-full bg-transparent"
 				{placeholder}
 				bind:value={searchTerm}
 				onfocus={() => (isOpen = true)}
@@ -199,7 +199,7 @@
 		{#if isOpen}
 			<div
 				id={listboxId}
-				class="bg-surface-800 border-surface-600 select-popup absolute left-0 right-0 mt-1 max-h-60 overflow-auto rounded-sm border shadow-lg"
+				class="bg-surface-900 border-surface-600 select-popup rounded-xs absolute left-0 right-0 mt-1 max-h-60 overflow-auto border shadow-lg"
 				role="listbox"
 			>
 				{#each filteredOptions as option}

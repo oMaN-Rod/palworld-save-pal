@@ -49,24 +49,45 @@
 <Navigation.Rail width="48px" bind:value={navigationState.activePage}>
 	{#snippet header()}
 		{#if appState.saveFile}
-			<Navigation.Tile label="Save" title="Save" id="save" onclick={() => appState.writeSave()}>
+			<Navigation.Tile
+				label="Save"
+				labelBase="text-xs"
+				title="Save"
+				id="save"
+				onclick={() => appState.writeSave()}
+			>
 				<Save />
 			</Navigation.Tile>
 		{/if}
 	{/snippet}
 	{#snippet tiles()}
 		{#if appState.saveFile}
-			<Navigation.Tile label="Edit" title="Edit" id="edit" href="/edit" active="bg-secondary-500">
+			<Navigation.Tile
+				label="Edit"
+				labelBase="text-xs"
+				title="Edit"
+				id="edit"
+				href="/edit"
+				active="bg-secondary-500"
+			>
 				<Pencil />
 			</Navigation.Tile>
 		{/if}
 		{#if PUBLIC_DESKTOP_MODE}
-			<Navigation.Tile label="Files" title="File" id="file" href="/file" active="bg-secondary-500">
+			<Navigation.Tile
+				label="Files"
+				labelBase="text-xs"
+				title="File"
+				id="file"
+				href="/file"
+				active="bg-secondary-500"
+			>
 				<File />
 			</Navigation.Tile>
 		{:else}
 			<Navigation.Tile
 				label="Upload"
+				labelBase="text-xs"
 				title="Upload"
 				id="upload"
 				href="/upload"
@@ -75,12 +96,25 @@
 				<Upload />
 			</Navigation.Tile>
 		{/if}
-		<Navigation.Tile label="About" title="About" id="about" href="/about" active="bg-secondary-500">
+		<Navigation.Tile
+			label="About"
+			labelBase="text-xs"
+			title="About"
+			id="about"
+			href="/about"
+			active="bg-secondary-500"
+		>
 			<Info />
 		</Navigation.Tile>
 	{/snippet}
 	{#snippet footer()}
-		<Navigation.Tile label="Settings" title="Settings" id="settings" onclick={handleLanguageSelect}>
+		<Navigation.Tile
+			label="Settings"
+			labelBase="text-xs"
+			title="Settings"
+			id="settings"
+			onclick={handleLanguageSelect}
+		>
 			<Settings />
 		</Navigation.Tile>
 	{/snippet}

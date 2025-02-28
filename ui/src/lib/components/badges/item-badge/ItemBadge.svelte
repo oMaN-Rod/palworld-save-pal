@@ -94,13 +94,13 @@
 	let itemClass = $derived.by(() => {
 		switch (item?.details.rarity) {
 			case Rarity.Uncommon:
-				return 'bg-gradient-to-tl from-green-500/50';
+				return 'bg-linear-to-tl from-green-500/50';
 			case Rarity.Rare:
-				return 'bg-gradient-to-tl from-blue-500/50';
+				return 'bg-linear-to-tl from-blue-500/50';
 			case Rarity.Epic:
-				return 'bg-gradient-to-tl from-purple-500/50';
+				return 'bg-linear-to-tl from-purple-500/50';
 			case Rarity.Legendary:
-				return 'bg-gradient-to-tl from-yellow-500/50';
+				return 'bg-linear-to-tl from-yellow-500/50';
 			default:
 				return '';
 		}
@@ -108,13 +108,13 @@
 	let itemPopupHeaderClass = $derived.by(() => {
 		switch (item?.details.rarity) {
 			case Rarity.Uncommon:
-				return 'bg-gradient-to-tl from-green-500/50 to-green-800/50 text-green-300 border-green-500';
+				return 'bg-linear-to-tl from-green-500/50 to-green-800/50 text-green-300 border-green-500';
 			case Rarity.Rare:
-				return 'bg-gradient-to-tl from-blue-500/50 to-blue-800/50 text-blue-300 border-blue-500';
+				return 'bg-linear-to-tl from-blue-500/50 to-blue-800/50 text-blue-300 border-blue-500';
 			case Rarity.Epic:
-				return 'bg-gradient-to-tl from-purple-500/50 to-purple-800/50 text-purple-300 border-purple-500';
+				return 'bg-linear-to-tl from-purple-500/50 to-purple-800/50 text-purple-300 border-purple-500';
 			case Rarity.Legendary:
-				return 'bg-gradient-to-tl from-yellow-500/50 to-yellow-800/50 text-yellow-300 border-yellow-500';
+				return 'bg-linear-to-tl from-yellow-500/50 to-yellow-800/50 text-yellow-300 border-yellow-500';
 			default:
 				return 'bg-surface-800';
 		}
@@ -259,14 +259,14 @@
 							/>
 						</div>
 						<div
-							class="bg-surface-800 text-one-surface hover:ring-secondary-500 absolute bottom-4 right-4 rounded px-3 py-1 font-semibold hover:ring"
+							class="bg-surface-800 text-one-surface hover:ring-secondary-500 absolute bottom-4 right-4 rounded-sm px-3 py-1 font-semibold hover:ring"
 							style="min-width: 80px; height: 2rem;"
 						>
 							<div class="relative z-10 flex h-full items-center justify-between">
 								<span class="mr-8 text-xs">in inventory</span>
 								<span class="font-bold">{slot.count}</span>
 							</div>
-							<span class="border-surface-700 absolute inset-0 rounded border"></span>
+							<span class="border-surface-700 absolute inset-0 rounded-sm border"></span>
 							<span class="bg-surface-400 absolute left-0 top-0 h-0.5 w-0.5"></span>
 							<span class="bg-surface-400 absolute right-0 top-0 h-0.5 w-0.5"></span>
 							<span class="bg-surface-400 absolute bottom-0 left-0 h-0.5 w-0.5"></span>
@@ -304,7 +304,7 @@
 							</div>
 						</div>
 						<div
-							class="bg-surface-800 text-one-surface hover:ring-secondary-500 absolute bottom-4 right-4 rounded px-3 py-1 font-semibold hover:ring"
+							class="bg-surface-800 text-one-surface hover:ring-secondary-500 absolute bottom-4 right-4 rounded-sm px-3 py-1 font-semibold hover:ring"
 							style="min-width: 80px; height: 2rem;"
 						>
 							<div class="relative z-10 flex h-full items-center justify-between">
@@ -313,7 +313,7 @@
 								</div>
 								<span class="font-bold">{slotWeight}</span>
 							</div>
-							<span class="border-surface-700 absolute inset-0 rounded border"></span>
+							<span class="border-surface-700 absolute inset-0 rounded-sm border"></span>
 							<span class="bg-surface-400 absolute left-0 top-0 h-0.5 w-0.5"></span>
 							<span class="bg-surface-400 absolute right-0 top-0 h-0.5 w-0.5"></span>
 							<span class="bg-surface-400 absolute bottom-0 left-0 h-0.5 w-0.5"></span>
@@ -351,9 +351,3 @@
 		</Tooltip>
 	{/if}
 </button>
-
-<style lang="postcss">
-	.keyboard-shortcut {
-		@apply kbd flex h-10 w-10 items-center justify-center p-1;
-	}
-</style>

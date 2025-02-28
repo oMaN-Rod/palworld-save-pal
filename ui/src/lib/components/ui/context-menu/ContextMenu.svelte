@@ -7,7 +7,7 @@
 	let {
 		baseClass = '',
 		menuClass = 'bg-surface-700',
-		rounded = 'rounded',
+		rounded = 'rounded-sm',
 		position = 'bottom-start',
 		xOffset = 0,
 		yOffset = 0,

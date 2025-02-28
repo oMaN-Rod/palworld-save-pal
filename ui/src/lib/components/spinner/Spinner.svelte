@@ -1,21 +1,28 @@
 <script lang="ts">
 	import { cn } from '$theme';
-	let {
-		from = 'from-transparent',
-		to = 'to-tertiary-500',
-		via = 'via-secondary-500',
-		size = 'size-10',
-		...additionalProps
-	} = $props<{
-		from?: string;
-		to?: string;
-		via?: string;
+	import { staticIcons } from '$lib/constants';
+
+	let { size = 'size-10', ...additionalProps } = $props<{
 		size?: string;
 		[key: string]: any;
 	}>();
 </script>
 
-<figure
-	class={cn('bg-gradient-conic aspect-square animate-spin rounded-full ', from, to, via, size)}
-	{...additionalProps}
-></figure>
+<figure class={cn('spinner aspect-square rounded-full', size)} {...additionalProps}>
+	<img src={staticIcons.lamball} alt="Loading" class="absolute inset-0 m-auto" />
+</figure>
+
+<style>
+	.spinner {
+		animation: spin 2s linear infinite;
+	}
+
+	@keyframes spin {
+		from {
+			transform: rotate(0deg);
+		}
+		to {
+			transform: rotate(360deg);
+		}
+	}
+</style>

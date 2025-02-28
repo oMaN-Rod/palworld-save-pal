@@ -1,9 +1,40 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@source '../node_modules/@skeletonlabs/skeleton-svelte/dist';
+
+@import '@skeletonlabs/skeleton';
+@import '@skeletonlabs/skeleton/optional/presets';
+@import './psp.css';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+	--spacing-18: 72px;
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+	*,
+	::after,
+	::before,
+	::backdrop,
+	::file-selector-button {
+		border-color: var(--color-gray-200, currentColor);
+	}
+}
 
 body {
-	@apply bg-surface-950 h-full overflow-hidden;
+	background-color: var(--color-surface-950);
+	color: var(--color-surface-50);
+	height: 100%;
+	overflow: hidden;
 }
 
 .floating {

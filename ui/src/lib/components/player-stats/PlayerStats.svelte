@@ -89,7 +89,7 @@
 
 {#snippet statButton(type: string, icon: string, label: string, value: number)}
 	<button
-		class="hover:ring-secondary-500 bg-surface-600/50 flex w-full items-center space-x-2 rounded py-2 pr-2 hover:ring"
+		class="hover:ring-secondary-500 bg-surface-600/50 flex w-full items-center space-x-2 rounded-sm py-2 pr-2 hover:ring"
 		onclick={() => updateStat(type)}
 	>
 		<img src={icon} alt={label} class="mx-2 h-6 w-6" />

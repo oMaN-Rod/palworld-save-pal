@@ -83,6 +83,7 @@
 
 <style lang="postcss">
 	.shortcut-icon {
-		@apply h-8 w-8;
+		height: 32px;
+		width: 32px;
 	}
 </style>

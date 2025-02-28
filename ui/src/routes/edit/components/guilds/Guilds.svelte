@@ -623,13 +623,13 @@
 	function getItemBackground(rarity: Rarity): string {
 		switch (rarity) {
 			case Rarity.Uncommon:
-				return 'bg-gradient-to-tl from-green-500/50';
+				return 'bg-linear-to-tl from-green-500/50';
 			case Rarity.Rare:
-				return 'bg-gradient-to-tl from-blue-500/50';
+				return 'bg-linear-to-tl from-blue-500/50';
 			case Rarity.Epic:
-				return 'bg-gradient-to-tl from-purple-500/50';
+				return 'bg-linear-to-tl from-purple-500/50';
 			case Rarity.Legendary:
-				return 'bg-gradient-to-tl from-yellow-500/50';
+				return 'bg-linear-to-tl from-yellow-500/50';
 			default:
 				return '';
 		}
@@ -649,14 +649,16 @@
 	{:else}
 		<div class="grid h-full w-full grid-cols-[25%_1fr]">
 			<!-- Left Controls -->
-			<div class=" flex-shrink-0 space-y-2 p-4">
+			<div class="shrink-0 space-y-2 p-4">
 				<h4 class="h4">{playerGuild!.name}</h4>
 				<h5 class="h5 font-light">Base {currentPage}</h5>
 
-				<nav class="btn-group preset-outlined-surface-200-800 flex-col p-2 md:flex-row">
+				<nav
+					class="btn-group preset-outlined-surface-200-800 w-full flex-col rounded-sm p-2 md:flex-row"
+				>
 					<button
 						class={cn(
-							'hover:ring-secondary-800 w-1/3 hover:ring-2',
+							'btn hover:bg-secondary-500/50 w-1/3 rounded-sm',
 							activeTab == 'pals' ? 'bg-secondary-800' : ''
 						)}
 						onclick={() => {
@@ -665,11 +667,11 @@
 							selectedInventoryItem = '';
 						}}
 					>
-						<span class={activeTab == 'pals' ? 'font-bold' : ''}>Pals</span>
+						<span>Pals</span>
 					</button>
 					<button
 						class={cn(
-							'hover:ring-secondary-800 w-1/3 hover:ring-2',
+							'btn hover:bg-secondary-500/50 w-1/3 rounded-sm',
 							activeTab == 'storage' ? 'bg-secondary-800' : ''
 						)}
 						onclick={() => {
@@ -678,11 +680,11 @@
 							selectedInventoryItem = '';
 						}}
 					>
-						<span class={activeTab == 'storage' ? 'font-bold' : ''}>Storage</span>
+						<span>Storage</span>
 					</button>
 					<button
 						class={cn(
-							'hover:ring-secondary-800 w-1/3 hover:ring-2',
+							'btn hover:bg-secondary-500/50 w-1/3 rounded-sm',
 							activeTab == 'guildChest' ? 'bg-secondary-800' : ''
 						)}
 						onclick={() => {
@@ -691,48 +693,48 @@
 							handleSelectGuildChest();
 						}}
 					>
-						<span class={activeTab == 'guildChest' ? 'font-bold' : ''}>Guild Chest</span>
+						<span>Guild Chest</span>
 					</button>
 				</nav>
 				{#if activeTab === 'pals'}
-					<div class="btn-group bg-surface-900 items-center rounded p-1">
+					<div class="btn-group bg-surface-900 w-full items-center rounded-sm p-1">
 						<Tooltip position="right" label="Add Pal to Base">
 							<button
-								class="btn hover:preset-tonal-secondary p-2"
+								class="btn hover:bg-secondary-500/50 p-2"
 								onclick={() => currentBase && handleAddPal(currentBase[0])}
 							>
 								<Plus />
 							</button>
 						</Tooltip>
 						<Tooltip label="Select all in current base">
-							<button class="btn hover:preset-tonal-secondary p-2" onclick={handleSelectAll}>
+							<button class="btn hover:bg-secondary-500/50 p-2" onclick={handleSelectAll}>
 								<ReplaceAll />
 							</button>
 						</Tooltip>
 						<Tooltip label="Heal all in current base">
-							<button class="btn hover:preset-tonal-secondary p-2" onclick={handleHealAll}>
+							<button class="btn hover:bg-secondary-500/50 p-2" onclick={handleHealAll}>
 								<Bandage />
 							</button>
 						</Tooltip>
 						{#if selectedPals.length > 0}
 							<Tooltip label="Apply preset to selected pal(s)">
-								<button class="btn hover:preset-tonal-secondary p-2" onclick={handleSelectPreset}>
+								<button class="btn hover:bg-secondary-500/50 p-2" onclick={handleSelectPreset}>
 									<Play />
 								</button>
 							</Tooltip>
 							<Tooltip label="Heal selected pal(s)">
-								<button class="btn hover:preset-tonal-secondary p-2" onclick={healSelectedPals}>
+								<button class="btn hover:bg-secondary-500/50 p-2" onclick={healSelectedPals}>
 									<Ambulance />
 								</button>
 							</Tooltip>
 							<Tooltip label="Delete selected pal(s)">
-								<button class="btn hover:preset-tonal-secondary p-2" onclick={deleteSelectedPals}>
+								<button class="btn hover:bg-secondary-500/50 p-2" onclick={deleteSelectedPals}>
 									<Trash />
 								</button>
 							</Tooltip>
 							<Tooltip label="Clear selected">
 								<button
-									class="btn hover:preset-tonal-secondary p-2"
+									class="btn hover:bg-secondary-500/50 p-2"
 									onclick={() => (selectedPals = [])}
 								>
 									<X />
@@ -760,7 +762,7 @@
 						listClass="h-[380px] 2xl:h-[630px]"
 						canSelect={false}
 						idKey="static_id"
-						headerClass="grid w-full grid-cols-[auto_1fr_auto] gap-"
+						headerClass="grid w-full grid-cols-[auto_1fr_auto] gap-2 rounded-sm"
 						onselect={(item) => {
 							selectedInventoryItem = item.static_id;
 							inventorySearchQuery = '';
@@ -839,7 +841,7 @@
 			<div>
 				<!-- Pager -->
 				<div class="mb-4 flex items-center justify-center space-x-4">
-					<button class="rounded px-4 py-2 font-bold" onclick={decrementPage}>
+					<button class="rounded-sm px-4 py-2 font-bold" onclick={decrementPage}>
 						<img src={staticIcons.qIcon} alt="Previous" class="h-10 w-10" />
 					</button>
 
@@ -857,7 +859,7 @@
 						{/each}
 					</div>
 
-					<button class="rounded px-4 py-2 font-bold" onclick={incrementPage}>
+					<button class="rounded-sm px-4 py-2 font-bold" onclick={incrementPage}>
 						<img src={staticIcons.eIcon} alt="Next" class="h-10 w-10" />
 					</button>
 				</div>
