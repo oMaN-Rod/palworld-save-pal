@@ -74,9 +74,7 @@
 		const skill = Object.values(passiveSkillsData.passiveSkills).find((s) => s.id === skillId);
 		if (!skill || skill.localized_name === 'None') return undefined;
 		const passiveSkill = skill as PassiveSkill;
-		return assetLoader.loadImage(
-			`${ASSET_DATA_PATH}/img/rank_${passiveSkill.details.rank}.png`
-		);
+		return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/rank_${passiveSkill.details.rank}.png`);
 	}
 
 	function getPassiveSkillIconFilter(skillId: string): string {
@@ -148,7 +146,7 @@
 	{/await}
 {/snippet}
 
-<Card class="bg-surface-500 min-w-[calc(100vw/3)]">
+<Card class="min-w-[calc(100vw/3)]">
 	<h3 class="h3">{title}</h3>
 	<Combobox options={selectOptions} bind:value>
 		{#snippet selectOption(option)}

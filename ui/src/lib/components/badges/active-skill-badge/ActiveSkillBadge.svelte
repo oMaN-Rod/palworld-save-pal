@@ -30,9 +30,7 @@
 		const elementIconWhite = assetLoader.loadImage(
 			`${ASSET_DATA_PATH}/img/${element.white_icon}.png`
 		);
-		const elementIcon = assetLoader.loadImage(
-			`${ASSET_DATA_PATH}/img/${element.icon}.png`
-		);
+		const elementIcon = assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${element.icon}.png`);
 		return { activeSkill, element, elementIconWhite, elementIcon };
 	});
 
@@ -61,9 +59,7 @@
 			style="border-left-color: {element?.color}"
 		>
 			<div class="flex w-full">
-				<span class="flex-grow p-2 text-left text-sm 2xl:text-base"
-					>{activeSkill?.localized_name}</span
-				>
+				<span class="grow p-2 text-left text-sm 2xl:text-base">{activeSkill?.localized_name}</span>
 				<div
 					class="text-on-surface relative z-10 flex items-center p-2"
 					style="background-color: {element?.color}"

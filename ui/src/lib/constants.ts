@@ -29,5 +29,6 @@ export const staticIcons = {
 	unknownIcon: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/unknown.png`),
 	altarIcon: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/altar.png`),
 	luckyIcon: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/lucky.png`),
-	pspWhite: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/app/psp_white.png`)
+	pspWhite: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/app/psp_white.png`),
+	lamball: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/sheepball.png`)
 };

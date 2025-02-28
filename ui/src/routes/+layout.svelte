@@ -32,7 +32,7 @@
 	<div class="flex h-screen w-full overflow-hidden">
 		<NavBar />
 		{#if appState.autoSave}
-			<div class="absolute right-2 top-1 flex flex-shrink-0 flex-row" transition:fade>
+			<div class="absolute right-2 top-1 flex shrink-0 flex-row" transition:fade>
 				<div class="flex items-center space-x-2 rounded-full p-3">
 					<span class="text-lg font-bold">Syncing</span>
 					<Spinner size="size-6" />

@@ -88,9 +88,7 @@
 		}
 		try {
 			if (staticId.includes('SkillCard')) {
-				return assetLoader.loadImage(
-					`${ASSET_DATA_PATH}/img/${itemData.details.icon}.png`
-				);
+				return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${itemData.details.icon}.png`);
 			} else {
 				return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${itemData.details.icon}.png`);
 			}
@@ -130,13 +128,13 @@
 		const tier = itemData.details.rarity;
 		switch (tier) {
 			case Rarity.Uncommon:
-				return 'bg-gradient-to-tl from-green-500/50';
+				return 'bg-linear-to-tl from-green-500/50';
 			case Rarity.Rare:
-				return 'bg-gradient-to-tl from-blue-500/50';
+				return 'bg-linear-to-tl from-blue-500/50';
 			case Rarity.Epic:
-				return 'bg-gradient-to-tl from-purple-500/50';
+				return 'bg-linear-to-tl from-purple-500/50';
 			case Rarity.Legendary:
-				return 'bg-gradient-to-tl from-yellow-500/50';
+				return 'bg-linear-to-tl from-yellow-500/50';
 			default:
 				return '';
 		}
@@ -161,9 +159,9 @@
 	{/if}
 {/snippet}
 
-<Card class="bg-surface-500 min-w-[calc(100vw/3)]">
+<Card class="min-w-[calc(100vw/3)]">
 	<h3 class="h3">{title}</h3>
-	<div class="flex flex-row">
+	<div class="flex flex-row items-center">
 		<Combobox options={selectOptions} bind:value={itemId}>
 			{#snippet selectOption(option)}
 				{#await getItemIcon(option.value) then icon}

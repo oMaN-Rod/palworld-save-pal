@@ -28,7 +28,7 @@
 	}
 </script>
 
-<Card class="bg-surface-500 min-w-[calc(100vw/3)]">
+<Card class="min-w-[calc(100vw/3)]">
 	<h3 class="h3">{title}</h3>
 
 	<div class="mt-2 flex flex-col items-center space-x-2">

@@ -18,7 +18,7 @@
 <label class={cn('flex cursor-pointer items-center space-x-2', className)}>
 	<div
 		class={cn(
-			'flex h-5 w-5 items-center justify-center rounded border',
+			'flex h-5 w-5 items-center justify-center rounded-sm border',
 			checked ? 'bg-primary-500 border-primary-500' : 'bg-surface-800 border-surface-600'
 		)}
 	>

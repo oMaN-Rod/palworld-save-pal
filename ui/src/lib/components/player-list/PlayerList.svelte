@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Player, SelectOption } from '$types';
+	import type { Player } from '$types';
 	import { Combobox } from '$components/ui';
 	import { getAppState } from '$states';
 

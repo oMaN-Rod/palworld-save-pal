@@ -333,11 +333,11 @@
 
 {#if appState.selectedPal}
 	<div class="flex h-full overflow-auto p-2">
-		<div class="flex flex-grow flex-col">
-			<div class="w-2/3 flex-shrink-0">
+		<div class="flex grow flex-col">
+			<div class="w-2/3 shrink-0">
 				<PalHeader bind:pal={appState.selectedPal} />
 			</div>
-			<div class="flex flex-grow">
+			<div class="flex grow">
 				<div class="hidden flex-1 overflow-auto p-2 2xl:block">
 					<div class="flex flex-col space-y-2">
 						{@render activeSkillsHeader()}
@@ -353,7 +353,7 @@
 				</div>
 				<div class="mt-4 2xl:hidden">
 					<Accordion classes="min-w-96 max-w-96" value={['active_skills']} collapsible>
-						<Accordion.Item value="active_skills" controlHover="hover:preset-tonal-secondary">
+						<Accordion.Item value="active_skills" controlHover="hover:bg-secondary-500/25">
 							{#snippet control()}
 								{@render activeSkillsHeader()}
 							{/snippet}
@@ -361,7 +361,7 @@
 								{@render activeSkillsBody()}
 							{/snippet}
 						</Accordion.Item>
-						<Accordion.Item value="passive_skills" controlHover="hover:preset-tonal-secondary">
+						<Accordion.Item value="passive_skills" controlHover="hover:bg-secondary-500/25">
 							{#snippet control()}
 								{@render passiveSkillsHeader()}
 							{/snippet}
@@ -369,7 +369,7 @@
 								{@render passiveSkillsBody()}
 							{/snippet}
 						</Accordion.Item>
-						<Accordion.Item value="presets" controlHover="hover:preset-tonal-secondary">
+						<Accordion.Item value="presets" controlHover="hover:bg-secondary-500/25">
 							{#snippet control()}
 								<SectionHeader text="Presets" />
 							{/snippet}
@@ -377,7 +377,7 @@
 								<SkillPresets onSelect={setSkillPreset} />
 							{/snippet}
 						</Accordion.Item>
-						<Accordion.Item value="work_suitability" controlHover="hover:preset-tonal-secondary">
+						<Accordion.Item value="work_suitability" controlHover="hover:bg-secondary-500/25">
 							{#snippet control()}
 								{@render workSuitabilityHeader()}
 							{/snippet}
@@ -440,7 +440,7 @@
 			<div class="flex flex-col space-y-2 2xl:hidden">
 				<HealthBadge bind:pal={appState.selectedPal} />
 				<Accordion classes="min-w-96" value={['stats']} collapsible>
-					<Accordion.Item value="stats" controlHover="hover:preset-tonal-secondary">
+					<Accordion.Item value="stats" controlHover="hover:bg-secondary-500/25">
 						{#snippet control()}
 							<SectionHeader text="Stats" />
 						{/snippet}
@@ -448,7 +448,7 @@
 							<StatsBadges bind:pal={appState.selectedPal} bind:player={appState.selectedPlayer} />
 						{/snippet}
 					</Accordion.Item>
-					<Accordion.Item value="talents" controlHover="hover:preset-tonal-secondary">
+					<Accordion.Item value="talents" controlHover="hover:bg-secondary-500/25">
 						{#snippet control()}
 							{@render talentsHeader()}
 						{/snippet}
@@ -456,7 +456,7 @@
 							<Talents bind:pal={appState.selectedPal!} />
 						{/snippet}
 					</Accordion.Item>
-					<Accordion.Item value="souls" controlHover="hover:preset-tonal-secondary">
+					<Accordion.Item value="souls" controlHover="hover:bg-secondary-500/25">
 						{#snippet control()}
 							{@render soulsHeader()}
 						{/snippet}

@@ -57,7 +57,7 @@
 	});
 </script>
 
-<Card class="bg-surface-500 min-w-[calc(100vw/3)]">
+<Card class="min-w-[calc(100vw/3)]">
 	<h3 class="h3">Edit Learned Skills</h3>
 	<div class="mt-4 flex items-center space-x-2">
 		<Combobox options={selectOptions} bind:value={selectedSkill}>

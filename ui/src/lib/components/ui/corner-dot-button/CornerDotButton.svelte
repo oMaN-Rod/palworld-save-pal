@@ -18,7 +18,7 @@
 
 <button
 	class={cn(
-		'bg-surface-800 text-one-surface hover:ring-secondary-500 relative h-1/2 rounded px-6 py-1 font-semibold hover:ring',
+		'bg-surface-800 text-one-surface hover:ring-secondary-500 relative h-1/2 rounded-sm px-6 py-1 font-semibold hover:ring',
 		_class
 	)}
 	onclick={onClick}

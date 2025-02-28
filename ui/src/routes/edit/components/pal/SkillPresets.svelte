@@ -157,7 +157,7 @@
 										{#if skillObj}
 											{@const icon = elementIcons[skillObj.details.element]}
 											<div
-												class="text-surface-400 border-surface-600 r flex items-center space-x-1 rounded-sm border p-0.5"
+												class="text-surface-400 border-surface-600 r flex items-center space-x-1 rounded-xs border p-0.5"
 											>
 												<img src={icon} alt={skillObj.details.element} class="h-4 w-4" />
 												<span class="grow text-xs">
