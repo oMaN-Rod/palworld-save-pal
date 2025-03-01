@@ -179,9 +179,7 @@ class Player(BaseModel):
         if "UnlockedRecipeTechnologyNames" in self._save_data:
             PalObjects.set_array_property(
                 self._save_data["UnlockedRecipeTechnologyNames"],
-                value=value,
-                key="value",
-                key_name="value",
+                values=value,
             )
         else:
             self._save_data["UnlockedRecipeTechnologyNames"] = PalObjects.ArrayProperty(

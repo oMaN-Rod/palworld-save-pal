@@ -42,7 +42,7 @@ async def set_technology_data_handler(message: SetTechnologyDataMessage, ws: Web
         logger.error("No save file loaded")
         return
     
-    save_file.update_player_technologies(
+    await save_file.update_player_technologies(
         message.data.playerID,
         message.data.technologies,
         message.data.techPoints,
