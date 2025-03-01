@@ -2,15 +2,14 @@
 	import PalEdit from './components/pal/Edit.svelte';
 	import PlayerEdit from './components/PlayerEdit.svelte';
 	import PalBox from './components/palbox/PalBox.svelte';
-
 	import { PlayerList } from '$components';
 	import { Tooltip } from '$components/ui';
-	import { type Pal, type Player } from '$types';
 	import { SaveAll } from 'lucide-svelte';
 	import { getAppState, getNavigationState } from '$states';
 	import { Tabs } from '@skeletonlabs/skeleton-svelte';
 	import { goto } from '$app/navigation';
 	import Guilds from './components/guilds/Guilds.svelte';
+	import Technologies from './components/technologies/Technologies.svelte';
 
 	const appState = getAppState();
 	const nav = getNavigationState();
@@ -27,18 +26,6 @@
 		{#if appState.saveFile}
 			<div class="absolute left-2 top-0 flex min-w-72 flex-shrink-0 flex-row">
 				<PlayerList />
-				{#if (appState.modifiedPals && Object.keys(appState.modifiedPals).length > 0) || (appState.modifiedPlayers && Object.keys(appState.modifiedPlayers).length > 0)}
-					<div class="mr-0 flex items-end justify-end pb-2 pr-0">
-						<Tooltip>
-							<button class="btn" onclick={appState.saveState}>
-								<SaveAll class="text-primary-500 mr-2" size="32" />
-							</button>
-							{#snippet popup()}
-								<span>Save all changes</span>
-							{/snippet}
-						</Tooltip>
-					</div>
-				{/if}
 			</div>
 			<Tabs
 				listJustify="justify-center"
@@ -48,6 +35,7 @@
 				{#snippet list()}
 					<div class="flex-shrink-0">
 						<Tabs.Control value="player">Player</Tabs.Control>
+						<Tabs.Control value="technologies">Technologies</Tabs.Control>
 						<Tabs.Control value="pal-box">Pal Box</Tabs.Control>
 						<Tabs.Control value="guilds">Guild</Tabs.Control>
 						<Tabs.Control value="pal">Pal</Tabs.Control>
@@ -57,6 +45,9 @@
 					<div class="flex-grow overflow-hidden">
 						<Tabs.Panel value="player" classes="h-screen">
 							<PlayerEdit />
+						</Tabs.Panel>
+						<Tabs.Panel value="technologies" classes="h-screen">
+							<Technologies />
 						</Tabs.Panel>
 						<Tabs.Panel value="pal-box" classes="h-screen">
 							<PalBox />

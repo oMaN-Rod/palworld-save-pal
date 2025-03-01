@@ -99,7 +99,7 @@
     "level_cap": 19,
     "tier": 0,
     "cost": 2,
-    "icon": "Ring_of_Mercy"
+    "icon": "t_itemicon_accessory_nonkilling"
   },
   "Accessory_TalentChecker": {
     "unlock_build_objects": [],
@@ -116,7 +116,7 @@
     "level_cap": 33,
     "tier": 0,
     "cost": 4,
-    "icon": "Ability_Glasses"
+    "icon": "t_itemicon_accessory_talentchecker"
   },
   "AdditionalInventory_001": {
     "unlock_build_objects": [],
@@ -218,7 +218,7 @@
     "level_cap": 3,
     "tier": 0,
     "cost": 1,
-    "icon": "Arrow"
+    "icon": "t_itemicon_ammo_arrow"
   },
   "Arrow_Fire": {
     "unlock_build_objects": [],
@@ -235,7 +235,7 @@
     "level_cap": 5,
     "tier": 0,
     "cost": 1,
-    "icon": "Fire_Arrow"
+    "icon": "t_itemicon_ammo_arrow_fire"
   },
   "Arrow_Poison": {
     "unlock_build_objects": [],
@@ -252,7 +252,7 @@
     "level_cap": 8,
     "tier": 0,
     "cost": 1,
-    "icon": "Poison_Arrow"
+    "icon": "t_itemicon_ammo_arrow_poison"
   },
   "AssaultRifleBullet": {
     "unlock_build_objects": [],
@@ -269,7 +269,7 @@
     "level_cap": 45,
     "tier": 0,
     "cost": 1,
-    "icon": "Assault_Rifle_Ammo"
+    "icon": "t_itemicon_ammo_assaultriflebullet"
   },
   "AutoMealPouch_Tier1": {
     "unlock_build_objects": [],
@@ -286,7 +286,7 @@
     "level_cap": 10,
     "tier": 0,
     "cost": 1,
-    "icon": "Small_Feed_Bag"
+    "icon": "t_itemicon_essential_automealpouch_tier1"
   },
   "AutoMealPouch_Tier2": {
     "unlock_build_objects": [],
@@ -303,7 +303,7 @@
     "level_cap": 20,
     "tier": 0,
     "cost": 2,
-    "icon": "Average_Feed_Bag"
+    "icon": "t_itemicon_essential_automealpouch_tier2"
   },
   "AutoMealPouch_Tier3": {
     "unlock_build_objects": [],
@@ -320,7 +320,7 @@
     "level_cap": 25,
     "tier": 0,
     "cost": 3,
-    "icon": "Large_Feed_Bag"
+    "icon": "t_itemicon_essential_automealpouch_tier3"
   },
   "AutoMealPouch_Tier4": {
     "unlock_build_objects": [],
@@ -337,7 +337,7 @@
     "level_cap": 35,
     "tier": 0,
     "cost": 4,
-    "icon": "Huge_Feed_Bag"
+    "icon": "t_itemicon_essential_automealpouch_tier4"
   },
   "AutoMealPouch_Tier5": {
     "unlock_build_objects": [],
@@ -354,7 +354,7 @@
     "level_cap": 46,
     "tier": 0,
     "cost": 5,
-    "icon": "Huge_Feed_Bag"
+    "icon": "t_itemicon_essential_automealpouch_tier5"
   },
   "BaseCampBattleDirector": {
     "unlock_build_objects": [
@@ -1580,7 +1580,7 @@
     "level_cap": 35,
     "tier": 0,
     "cost": 2,
-    "icon": "Carbon_Fiber"
+    "icon": "t_itemicon_material_carbonfiber"
   },
   "Cauldron": {
     "unlock_build_objects": [
@@ -1631,7 +1631,7 @@
     "level_cap": 19,
     "tier": 0,
     "cost": 1,
-    "icon": "Cement"
+    "icon": "t_itemicon_material_cement"
   },
   "Cloth2": {
     "unlock_build_objects": [],
@@ -1874,7 +1874,7 @@
     "level_cap": 22,
     "tier": 0,
     "cost": 2,
-    "icon": "Stun_Baton"
+    "icon": "t_itemicon_weapon_elecbaton"
   },
   "ElectricCooler": {
     "unlock_build_objects": [
@@ -2044,7 +2044,7 @@
     "level_cap": 52,
     "tier": 0,
     "cost": 1,
-    "icon": "Flamethrower_Fuel"
+    "icon": "t_itemicon_ammo_flamethrowerbullet"
   },
   "FlourMill": {
     "unlock_build_objects": [
@@ -2112,7 +2112,7 @@
     "level_cap": 25,
     "tier": 0,
     "cost": 2,
-    "icon": "Frag_Grenade"
+    "icon": "t_itemicon_weapon_fraggrenade"
   },
   "FragGrenade_Dark": {
     "unlock_build_objects": [],
@@ -2163,7 +2163,7 @@
     "level_cap": 27,
     "tier": 0,
     "cost": 2,
-    "icon": "Shock_Grenade"
+    "icon": "t_itemicon_weapon_fraggrenade_elec"
   },
   "FragGrenade_Fire": {
     "unlock_build_objects": [],
@@ -2180,7 +2180,7 @@
     "level_cap": 31,
     "tier": 0,
     "cost": 2,
-    "icon": "Incendiary_Grenade"
+    "icon": "t_itemicon_weapon_fraggrenade_fire"
   },
   "FragGrenade_Ground": {
     "unlock_build_objects": [],
@@ -2214,7 +2214,7 @@
     "level_cap": 29,
     "tier": 0,
     "cost": 2,
-    "icon": "Ice_Grenade"
+    "icon": "t_itemicon_weapon_fraggrenade_ice"
   },
   "FragGrenade_Leaf": {
     "unlock_build_objects": [],
@@ -2935,7 +2935,7 @@
     "level_cap": 54,
     "tier": 0,
     "cost": 1,
-    "icon": "Gatling_Gun_Bullet"
+    "icon": "t_itemicon_ammo_gatlingbullet"
   },
   "Glass_houseset": {
     "unlock_build_objects": [
@@ -2977,7 +2977,7 @@
     "level_cap": 12,
     "tier": 0,
     "cost": 1,
-    "icon": "Grappling_Gun"
+    "icon": null
   },
   "GrapplingGun2": {
     "unlock_build_objects": [],
@@ -2994,7 +2994,7 @@
     "level_cap": 17,
     "tier": 0,
     "cost": 2,
-    "icon": "Grappling_Gun"
+    "icon": null
   },
   "GrapplingGun3": {
     "unlock_build_objects": [],
@@ -3011,7 +3011,7 @@
     "level_cap": 31,
     "tier": 0,
     "cost": 3,
-    "icon": "Grappling_Gun"
+    "icon": null
   },
   "GrapplingGun4": {
     "unlock_build_objects": [],
@@ -3028,7 +3028,7 @@
     "level_cap": 48,
     "tier": 0,
     "cost": 4,
-    "icon": "Grappling_Gun"
+    "icon": "t_itemicon_weapon_grapplinggun"
   },
   "GrenadeBullet": {
     "unlock_build_objects": [],
@@ -3045,7 +3045,7 @@
     "level_cap": 53,
     "tier": 0,
     "cost": 1,
-    "icon": "Grenade_Ammo"
+    "icon": "t_itemicon_ammo_grenadebullet"
   },
   "GuildChest": {
     "unlock_build_objects": [
@@ -3079,7 +3079,7 @@
     "level_cap": 1,
     "tier": 0,
     "cost": 1,
-    "icon": "HandTorch"
+    "icon": "t_itemicon_weapon_torch"
   },
   "HandgunBullet": {
     "unlock_build_objects": [],
@@ -3096,7 +3096,7 @@
     "level_cap": 28,
     "tier": 0,
     "cost": 1,
-    "icon": "Handgun_Ammo"
+    "icon": "t_itemicon_ammo_handgunbullet"
   },
   "Headstone": {
     "unlock_build_objects": [
@@ -3147,7 +3147,7 @@
     "level_cap": 23,
     "tier": 0,
     "cost": 2,
-    "icon": "Homeward_Thundercloud"
+    "icon": "t_itemicon_consume_homeward"
   },
   "HugeKitchen": {
     "unlock_build_objects": [
@@ -3483,7 +3483,7 @@
     "level_cap": 15,
     "tier": 0,
     "cost": 2,
-    "icon": "Hip_Lantern"
+    "icon": "t_itemicon_essential_lantern"
   },
   "LargeCeilingLamp": {
     "unlock_build_objects": [
@@ -3534,7 +3534,7 @@
     "level_cap": 51,
     "tier": 0,
     "cost": 1,
-    "icon": "Energy_Cartridge"
+    "icon": "t_itemicon_ammo_laserbullet"
   },
   "LaserGatlingBullet": {
     "unlock_build_objects": [],
@@ -3603,7 +3603,7 @@
     "level_cap": 38,
     "tier": 0,
     "cost": 3,
-    "icon": "Meteor_Launcher"
+    "icon": "t_itemicon_weapon_launcher_meteor"
   },
   "MakeshiftAssaultRifle": {
     "unlock_build_objects": [],
@@ -3637,7 +3637,7 @@
     "level_cap": 24,
     "tier": 0,
     "cost": 3,
-    "icon": "Makeshift_Handgun"
+    "icon": "t_itemicon_weapon_makeshifthandgun"
   },
   "MakeshiftShotgun": {
     "unlock_build_objects": [],
@@ -3705,7 +3705,7 @@
     "level_cap": 12,
     "tier": 0,
     "cost": 2,
-    "icon": "Meat_Cleaver"
+    "icon": "t_itemicon_weapon_meatcutterknife"
   },
   "MedicalPalBed_04": {
     "unlock_build_objects": [
@@ -3832,7 +3832,7 @@
     "level_cap": 30,
     "tier": 0,
     "cost": 2,
-    "icon": "MiningTool"
+    "icon": null
   },
   "MissileBullet": {
     "unlock_build_objects": [],
@@ -3849,7 +3849,7 @@
     "level_cap": 55,
     "tier": 0,
     "cost": 1,
-    "icon": "Missile_Ammo"
+    "icon": "t_itemicon_ammo_missilebullet"
   },
   "MonsterFarm": {
     "unlock_build_objects": [
@@ -3900,7 +3900,7 @@
     "level_cap": 21,
     "tier": 0,
     "cost": 3,
-    "icon": "Musket"
+    "icon": "t_itemicon_weapon_musket"
   },
   "OilPump": {
     "unlock_build_objects": [
@@ -4053,7 +4053,7 @@
     "level_cap": 50,
     "tier": 0,
     "cost": 2,
-    "icon": "Plasteel"
+    "icon": "t_itemicon_material_plastic"
   },
   "Polymer": {
     "unlock_build_objects": [],
@@ -4070,7 +4070,7 @@
     "level_cap": 33,
     "tier": 0,
     "cost": 2,
-    "icon": "Polymer"
+    "icon": "t_itemicon_material_polymer"
   },
   "Potion_Extreme": {
     "unlock_build_objects": [],
@@ -4750,7 +4750,7 @@
     "level_cap": 3,
     "tier": 0,
     "cost": 1,
-    "icon": "Repair_Kit"
+    "icon": "tex_tools_10.png"
   },
   "RifleBullet": {
     "unlock_build_objects": [],
@@ -4767,7 +4767,7 @@
     "level_cap": 36,
     "tier": 0,
     "cost": 2,
-    "icon": "Rifle_Ammo"
+    "icon": "t_itemicon_ammo_riflebullet"
   },
   "RoughBullet": {
     "unlock_build_objects": [],
@@ -4784,7 +4784,7 @@
     "level_cap": 21,
     "tier": 0,
     "cost": 1,
-    "icon": "Coarse_Ammo"
+    "icon": "t_itemicon_ammo_roughbullet"
   },
   "SFArmor": {
     "unlock_build_objects": [],
@@ -4937,7 +4937,7 @@
     "level_cap": 4,
     "tier": 0,
     "cost": 2,
-    "icon": "Common_Shield"
+    "icon": "t_itemicon_armor_shield_01"
   },
   "Shield_02": {
     "unlock_build_objects": [],
@@ -4954,7 +4954,7 @@
     "level_cap": 16,
     "tier": 0,
     "cost": 2,
-    "icon": "Mega_Shield"
+    "icon": "t_itemicon_armor_shield_02"
   },
   "Shield_03": {
     "unlock_build_objects": [],
@@ -4971,7 +4971,7 @@
     "level_cap": 28,
     "tier": 0,
     "cost": 2,
-    "icon": "Giga_Shield"
+    "icon": "t_itemicon_armor_shield_03"
   },
   "Shield_04": {
     "unlock_build_objects": [],
@@ -4988,7 +4988,7 @@
     "level_cap": 43,
     "tier": 0,
     "cost": 3,
-    "icon": "Hyper_Shield"
+    "icon": "t_itemicon_armor_shield_04"
   },
   "Shield_05": {
     "unlock_build_objects": [],
@@ -6892,7 +6892,7 @@
     "level_cap": 4,
     "tier": 0,
     "cost": 2,
-    "icon": "Stone_Spear"
+    "icon": null
   },
   "Spear_2": {
     "unlock_build_objects": [],
@@ -6909,7 +6909,7 @@
     "level_cap": 13,
     "tier": 0,
     "cost": 2,
-    "icon": "Stone_Spear"
+    "icon": null
   },
   "Spear_3": {
     "unlock_build_objects": [],
@@ -6926,7 +6926,7 @@
     "level_cap": 34,
     "tier": 0,
     "cost": 3,
-    "icon": "Stone_Spear"
+    "icon": "t_itemicon_weapon_spear_tier_00"
   },
   "Spear_ForestBoss": {
     "unlock_build_objects": [],
@@ -6943,7 +6943,7 @@
     "level_cap": 43,
     "tier": 0,
     "cost": 3,
-    "icon": "Lily_s_Spear"
+    "icon": "t_itemicon_weapon_spear_forestboss"
   },
   "Special_ElectricHatchingPalEgg": {
     "unlock_build_objects": [
@@ -6977,7 +6977,7 @@
     "level_cap": 7,
     "tier": 0,
     "cost": 1,
-    "icon": "Special_HatchingPalEgg"
+    "icon": null
   },
   "Special_PalRankUp": {
     "unlock_build_objects": [
@@ -6994,7 +6994,7 @@
     "level_cap": 14,
     "tier": 0,
     "cost": 2,
-    "icon": "Special_PalRankUp"
+    "icon": null
   },
   "Special_PalSphere_Grade_01": {
     "unlock_build_objects": [],
@@ -7130,7 +7130,7 @@
     "level_cap": 14,
     "tier": 0,
     "cost": 3,
-    "icon": "Special_SphereFactory_Black_Grade_01"
+    "icon": null
   },
   "Special_SphereFactory_Black_Grade_02": {
     "unlock_build_objects": [
@@ -7147,7 +7147,7 @@
     "level_cap": 27,
     "tier": 0,
     "cost": 3,
-    "icon": "Special_SphereFactory_Black_Grade_02"
+    "icon": null
   },
   "Special_SphereFactory_Black_Grade_03": {
     "unlock_build_objects": [
@@ -7164,7 +7164,7 @@
     "level_cap": 35,
     "tier": 0,
     "cost": 5,
-    "icon": "Special_SphereFactory_Black_Grade_03"
+    "icon": null
   },
   "SphereFactory_Black_04": {
     "unlock_build_objects": [
@@ -7410,7 +7410,7 @@
     "level_cap": 6,
     "tier": 0,
     "cost": 2,
-    "icon": "Hand-held_Torch"
+    "icon": null
   },
   "TransmissionTower": {
     "unlock_build_objects": [
@@ -7563,7 +7563,7 @@
     "level_cap": 26,
     "tier": 0,
     "cost": 2,
-    "icon": "Lockpicking_Tool_2"
+    "icon": "t_itemicon_essential_unlock_picking_tier2"
   },
   "Unlock_Picking_Tier3": {
     "unlock_build_objects": [],
@@ -7580,7 +7580,7 @@
     "level_cap": 51,
     "tier": 0,
     "cost": 3,
-    "icon": "Lockpicking_Tool_3"
+    "icon": "t_itemicon_essential_unlock_picking_tier3"
   },
   "WallSignboard": {
     "unlock_build_objects": [

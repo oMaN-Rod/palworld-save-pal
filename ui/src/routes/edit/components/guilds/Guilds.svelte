@@ -1,22 +1,22 @@
 <script lang="ts">
 	import { palsData, buildingsData, itemsData, presetsData } from '$lib/data';
 	import { getAppState, getSocketState, getModalState, getToastState } from '$states';
-	import { List, Tooltip, TooltipButton } from '$components/ui';
+	import { Input, List, Tooltip, TooltipButton } from '$components/ui';
 	import {
 		type ItemContainer,
 		type Pal,
 		type ItemContainerSlot,
 		MessageType,
 		EntryState,
-		BuildingTypeA
+		BuildingTypeA,
+		Rarity
 	} from '$types';
 	import { ASSET_DATA_PATH, staticIcons } from '$lib/constants';
-	import { Ambulance, X, ReplaceAll, Plus, Trash, Bandage, Play } from 'lucide-svelte';
+	import { Ambulance, X, ReplaceAll, Plus, Trash, Bandage, Play, RefreshCcw } from 'lucide-svelte';
 	import { ItemBadge, PalBadge, StoragePresets } from '$components';
 	import { PalSelectModal, NumberInputModal, PalPresetSelectModal } from '$components/modals';
 	import { assetLoader, debounce, deepCopy, formatNickname } from '$utils';
 	import { cn } from '$theme';
-	import { onMount } from 'svelte';
 
 	interface PalWithBaseId {
 		pal: Pal;
@@ -31,13 +31,14 @@
 	const VISIBLE_PAGE_BUBBLES = 16;
 
 	let selectedPals: string[] = $state([]);
-	let searchQuery = $state('');
+	let palSearchQuery = $state('');
 	let currentPage = $state(1);
 	let filteredPals: PalWithBaseId[] = $state([]);
 	let activeTab: 'pals' | 'storage' | 'guildChest' = $state('pals');
 	let currentStorageContainer: (ItemContainer & { slots: ItemContainerSlot[] }) | undefined =
 		$state(undefined);
-	let guildChest: (ItemContainer & { slots: ItemContainerSlot[] }) | undefined = $state(undefined);
+	let selectedInventoryItem: string = $state('');
+	let inventorySearchQuery: string = $state('');
 
 	const playerGuild = $derived.by(() => {
 		if (appState.selectedPlayer?.guild_id) {
@@ -86,6 +87,8 @@
 		return baseEntries[currentPage - 1] || null;
 	});
 
+	const ignoreKeys = ['None', 'Empty', 'TreasureBox', 'PalEgg', 'CommonDropItem'];
+
 	const currentBaseStorageContainers = $derived.by(() => {
 		if (!currentBase) return null;
 		const [_, base] = currentBase;
@@ -93,11 +96,80 @@
 			.filter(
 				(container) =>
 					container.slot_num !== 0 &&
-					!container.key.includes('TreasureBox') &&
-					!container.key.includes('PalEgg') &&
-					!container.key.includes('CommonDropItem')
+					!ignoreKeys.some((key) => container.key.includes(key)) &&
+					container.slots.some((s) => {
+						const itemData = itemsData.items[s.static_id];
+						return (
+							s.static_id.toLowerCase().includes(selectedInventoryItem.toLowerCase()) ||
+							(itemData &&
+								itemData.info.localized_name
+									.toLowerCase()
+									.includes(selectedInventoryItem.toLowerCase()))
+						);
+					}) &&
+					container.slots.some((s) => {
+						const itemData = itemsData.items[s.static_id];
+						return (
+							s.static_id.toLowerCase().includes(inventorySearchQuery.toLowerCase()) ||
+							(itemData &&
+								itemData.info.localized_name
+									.toLowerCase()
+									.includes(inventorySearchQuery.toLowerCase()))
+						);
+					})
 			)
 			.sort((a, b) => a.key.localeCompare(b.key));
+	});
+
+	type InventoryInfo = {
+		containers: Record<string, number>;
+		total_count: number;
+	};
+
+	const currentBaseInventory = $derived.by(() => {
+		if (!currentBase) return { current: [] };
+		const [_, base] = currentBase;
+		let inventoryItems: Record<string, InventoryInfo> = {};
+		for (const container of Object.values(base.storage_containers)) {
+			for (const slot of container.slots) {
+				if (slot.static_id !== 'None') {
+					if (!inventoryItems[slot.static_id]) {
+						inventoryItems[slot.static_id] = {
+							containers: {},
+							total_count: 0
+						};
+					}
+					inventoryItems[slot.static_id].containers[container.key] =
+						(inventoryItems[slot.static_id].containers[container.key] || 0) + slot.count;
+					inventoryItems[slot.static_id].total_count += slot.count;
+				}
+			}
+		}
+		const items = Object.entries(inventoryItems)
+			.filter(([static_id, _]) => {
+				const itemData = itemsData.items[static_id];
+				return (
+					static_id.toLowerCase().includes(inventorySearchQuery.toLowerCase()) ||
+					(itemData &&
+						itemData.info.localized_name.toLowerCase().includes(inventorySearchQuery.toLowerCase()))
+				);
+			})
+			.map(([static_id, info]) => ({
+				static_id,
+				containers: info.containers,
+				total_count: info.total_count
+			}))
+			.sort((a, b) => {
+				const itemA = itemsData.items[a.static_id];
+				const itemB = itemsData.items[b.static_id];
+				if (itemA && itemB) {
+					return itemA.info.localized_name.localeCompare(itemB.info.localized_name);
+				}
+				return a.static_id.localeCompare(b.static_id);
+			});
+		return {
+			current: items
+		};
 	});
 
 	const currentStorageContainerIcon = $derived.by(() => {
@@ -113,7 +185,7 @@
 		if (!currentBase) return [];
 		const [baseId, base] = currentBase;
 
-		if (searchQuery) {
+		if (palSearchQuery) {
 			return filteredPals;
 		}
 
@@ -142,6 +214,17 @@
 
 	const debouncedFilterPals = debounce(filterPals, 300);
 
+	function fixStupidTypos(key: string) {
+		switch (key) {
+			case 'Stonepit':
+				return 'StonePit';
+			case 'bone':
+				return 'Bone';
+			default:
+				return key;
+		}
+	}
+
 	function handleKeydown(event: KeyboardEvent) {
 		if (event.target instanceof HTMLInputElement) return;
 
@@ -159,6 +242,8 @@
 			currentPage = totalPages;
 		}
 		currentStorageContainer = undefined;
+		inventorySearchQuery = '';
+		selectedInventoryItem = '';
 	}
 
 	function incrementPage() {
@@ -168,6 +253,8 @@
 			currentPage = 1;
 		}
 		currentStorageContainer = undefined;
+		inventorySearchQuery = '';
+		selectedInventoryItem = '';
 	}
 
 	function handlePalSelect(pal: Pal, event: MouseEvent) {
@@ -306,15 +393,15 @@
 	}
 
 	function filterPals() {
-		if (!guildBases || !searchQuery) return;
+		if (!guildBases || !palSearchQuery) return;
 
 		filteredPals = Object.entries(guildBases).flatMap(([baseId, base]) =>
 			Object.values(base.pals)
 				.filter((pal) => {
 					return (
-						pal.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-						pal.nickname?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-						pal.character_id.toLowerCase().includes(searchQuery.toLowerCase())
+						pal.name.toLowerCase().includes(palSearchQuery.toLowerCase()) ||
+						pal.nickname?.toLowerCase().includes(palSearchQuery.toLowerCase()) ||
+						pal.character_id.toLowerCase().includes(palSearchQuery.toLowerCase())
 					);
 				})
 				.map((pal) => ({
@@ -363,7 +450,7 @@
 	}
 
 	$effect(() => {
-		if (searchQuery) {
+		if (palSearchQuery) {
 			debouncedFilterPals();
 		}
 	});
@@ -378,6 +465,12 @@
 	$effect(() => {
 		if (currentPage > totalPages && totalPages > 0) {
 			currentPage = totalPages;
+		}
+	});
+
+	$effect(() => {
+		if (inventorySearchQuery !== '') {
+			selectedInventoryItem = '';
 		}
 	});
 
@@ -526,6 +619,21 @@
 		}
 		activeTab = 'guildChest';
 	}
+
+	function getItemBackground(rarity: Rarity): string {
+		switch (rarity) {
+			case Rarity.Uncommon:
+				return 'bg-gradient-to-tl from-green-500/50';
+			case Rarity.Rare:
+				return 'bg-gradient-to-tl from-blue-500/50';
+			case Rarity.Epic:
+				return 'bg-gradient-to-tl from-purple-500/50';
+			case Rarity.Legendary:
+				return 'bg-gradient-to-tl from-yellow-500/50';
+			default:
+				return '';
+		}
+	}
 </script>
 
 {#if appState.selectedPlayer}
@@ -551,7 +659,11 @@
 							'hover:ring-secondary-800 w-1/3 hover:ring-2',
 							activeTab == 'pals' ? 'bg-secondary-800' : ''
 						)}
-						onclick={() => (activeTab = 'pals')}
+						onclick={() => {
+							activeTab = 'pals';
+							inventorySearchQuery = '';
+							selectedInventoryItem = '';
+						}}
 					>
 						<span class={activeTab == 'pals' ? 'font-bold' : ''}>Pals</span>
 					</button>
@@ -560,7 +672,11 @@
 							'hover:ring-secondary-800 w-1/3 hover:ring-2',
 							activeTab == 'storage' ? 'bg-secondary-800' : ''
 						)}
-						onclick={() => (activeTab = 'storage')}
+						onclick={() => {
+							activeTab = 'storage';
+							inventorySearchQuery = '';
+							selectedInventoryItem = '';
+						}}
 					>
 						<span class={activeTab == 'storage' ? 'font-bold' : ''}>Storage</span>
 					</button>
@@ -569,7 +685,11 @@
 							'hover:ring-secondary-800 w-1/3 hover:ring-2',
 							activeTab == 'guildChest' ? 'bg-secondary-800' : ''
 						)}
-						onclick={handleSelectGuildChest}
+						onclick={() => {
+							inventorySearchQuery = '';
+							selectedInventoryItem = '';
+							handleSelectGuildChest();
+						}}
 					>
 						<span class={activeTab == 'guildChest' ? 'font-bold' : ''}>Guild Chest</span>
 					</button>
@@ -621,6 +741,98 @@
 						{/if}
 					</div>
 				{/if}
+				{#if activeTab == 'storage'}
+					<div class="flex items-center">
+						<Input bind:value={inventorySearchQuery} placeholder="Search Inventory" />
+						<button
+							class="btn"
+							onclick={() => {
+								inventorySearchQuery = '';
+								selectedInventoryItem = '';
+							}}
+						>
+							<RefreshCcw class="h-6 w-6" />
+						</button>
+					</div>
+					<List
+						bind:items={currentBaseInventory.current}
+						baseClass="w-full"
+						listClass="h-[380px] 2xl:h-[630px]"
+						canSelect={false}
+						idKey="static_id"
+						headerClass="grid w-full grid-cols-[auto_1fr_auto] gap-"
+						onselect={(item) => {
+							selectedInventoryItem = item.static_id;
+							inventorySearchQuery = '';
+						}}
+					>
+						{#snippet listHeader()}
+							<div class="h-8 w-8"></div>
+							<span class="font-bold">Inventory</span>
+							<span class="font-bold">Total</span>
+						{/snippet}
+						{#snippet listItem(item)}
+							{@const itemData = itemsData.items[fixStupidTypos(item.static_id)]}
+							{#if itemData}
+								{@const itemIcon = assetLoader.loadImage(
+									`${ASSET_DATA_PATH}/img/${itemData.details.icon}.png`
+								)}
+								<div class="grid w-full grid-cols-[auto_1fr_auto] gap-2">
+									<div class={getItemBackground(itemData.details.rarity)}>
+										<img
+											src={itemIcon || staticIcons.unknownIcon}
+											alt={itemData.info.localized_name}
+											class="h-8 w-8"
+										/>
+									</div>
+									<span>{itemData.info.localized_name}</span>
+									<span>{item.total_count.toLocaleString()}</span>
+								</div>
+							{:else}
+								<div class="grid w-full grid-cols-[auto_1fr_auto] gap-2">
+									<img src={staticIcons.unknownIcon} alt={item.static_id} class="h-8 w-8" />
+									<span>{item.static_id}</span>
+									<span>{item.total_count.toLocaleString()}</span>
+								</div>
+							{/if}
+						{/snippet}
+						{#snippet listItemPopup(item)}
+							{@const itemData = itemsData.items[item.static_id]}
+							{#if itemData}
+								<div class="flex flex-col">
+									<span class="font-bold">{itemData.info.localized_name}</span>
+									<span class="text-sm">{itemData.info.description}</span>
+									<hr class="border-surface-500 my-2" />
+									<span class="font-bold">Total Count: {item.total_count}</span>
+									{#each Object.entries(item.containers) as [containerId, count]}
+										{@const building = buildingsData.buildings[fixStupidTypos(containerId)]}
+										{#if building}
+											{@const buildingIcon = assetLoader.loadImage(
+												`${ASSET_DATA_PATH}/img/${building.icon}.png`
+											)}
+											<div class="grid w-full grid-cols-[auto_1fr_auto] gap-2">
+												<img
+													src={buildingIcon || staticIcons.unknownIcon}
+													alt={building.localized_name}
+													class="h-8 w-8"
+												/>
+												<span>{building.localized_name}</span>
+												<span>{count.toLocaleString()}</span>
+											</div>
+										{:else if !ignoreKeys.some((key) => containerId.includes(key))}
+											<div class="grid w-full grid-cols-2 gap-2">
+												<span class="font-bold"> {containerId}: </span>
+												<span>{count.toLocaleString()}</span>
+											</div>
+										{/if}
+									{/each}
+								</div>
+							{:else}
+								{item.static_id}
+							{/if}
+						{/snippet}
+					</List>
+				{/if}
 			</div>
 
 			<!-- Right Content -->
@@ -653,7 +865,7 @@
 					<div class="overflow-hidden">
 						<div class="grid grid-cols-6 place-items-center gap-4 p-4">
 							{#each currentPageItems as item (item.pal.instance_id)}
-								{#if item.pal.character_id !== 'None' || !searchQuery}
+								{#if item.pal.character_id !== 'None' || !palSearchQuery}
 									<PalBadge
 										bind:pal={item.pal}
 										bind:selected={selectedPals}
@@ -678,7 +890,7 @@
 								onselect={(itemContainer) => handleSelectStorageContainer(itemContainer)}
 							>
 								{#snippet listItem(item)}
-									{@const building = buildingsData.buildings[item.key]}
+									{@const building = buildingsData.buildings[fixStupidTypos(item.key)]}
 									{#if building}
 										{@const buildingIcon = assetLoader.loadImage(
 											`${ASSET_DATA_PATH}/img/${building.icon}.png`
@@ -692,11 +904,14 @@
 											<span>{building.localized_name}</span>
 										</div>
 									{:else}
-										{item.key}
+										<div class="grid grid-cols-[auto_1fr] gap-2">
+											<img src={staticIcons.unknownIcon} alt={item.key} class="h-8 w-8" />
+											<span>{item.key}</span>
+										</div>
 									{/if}
 								{/snippet}
 								{#snippet listItemPopup(item)}
-									{@const building = buildingsData.buildings[item.key]}
+									{@const building = buildingsData.buildings[fixStupidTypos(item.key)]}
 									{#if building}
 										<div class="flex flex-col">
 											<h4 class="h4">{building.localized_name}</h4>
@@ -769,7 +984,7 @@
 					{@const itemGroup = building?.type_a == BuildingTypeA.Food ? 'Food' : 'Common'}
 					<div class="max-h-[550px] overflow-y-auto 2xl:max-h-[800px]">
 						<div class="flex items-start space-x-4">
-							<div class="grid grid-cols-6 gap-2">
+							<div class="m-1 grid grid-cols-6 gap-2">
 								{#each Object.values(playerGuild.guild_chest.slots) as _, index}
 									<ItemBadge
 										bind:slot={playerGuild.guild_chest.slots[index]}

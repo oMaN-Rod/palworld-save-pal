@@ -1,4 +1,3 @@
-// src/lib/states/appState.svelte.ts
 import { goto } from '$app/navigation';
 import type {
 	AppSettings,
@@ -36,6 +35,7 @@ export function createAppState() {
 	let version: string = $state('');
 	let settings: AppSettings = $state({ language: 'en' });
 	let gamepassSaves: Record<string, GamepassSave> = $state({});
+	let autoSave: boolean = $state(false);
 
 	function resetState() {
 		players = {};
@@ -129,7 +129,6 @@ export function createAppState() {
 
 		if (modifiedPals.length === 0 && modifiedPlayers.length === 0 && modifiedGuilds.length === 0) {
 			console.log('No modifications to save');
-			toast.add('No modifications to save', undefined, 'info');
 			return;
 		}
 
@@ -145,23 +144,71 @@ export function createAppState() {
 			modifiedData.modified_guilds = Object.fromEntries(modifiedGuilds);
 		}
 
-		await goto('/loading');
+		if (modifiedPals.length > 0 || modifiedPlayers.length > 0 || modifiedGuilds.length > 0) {
+			autoSave = true;
+		}
 
 		const data = {
 			type: MessageType.UPDATE_SAVE_FILE,
 			data: modifiedData
 		};
 
-		ws.send(JSON.stringify(data));
+		await ws.sendAndWait(data);
+		await new Promise((resolve) => setTimeout(resolve, 500));
+		autoSave = false;
+	}
 
-		const entityTypes = Object.keys(modifiedData).map((key) =>
-			key.replace('modified', '').toLowerCase()
-		);
-		const entityMessage = entityTypes.join(' and ');
-		ws.message = { type: MessageType.PROGRESS_MESSAGE, data: `Updating modified ${entityMessage}` };
+	async function writeSave() {
+		if (!saveFile) return;
+		await saveState();
+		if (saveFile.type === 'gamepass') {
+			const split = saveFile.world_name?.split('PSP-') || [];
+			const baseName = split.length > 1 ? split[0].trim() : saveFile.world_name || 'PSP';
+			const timestamp = new Date()
+				.toLocaleString('en-GB', {
+					year: '2-digit',
+					month: '2-digit',
+					day: '2-digit',
+					hour: '2-digit',
+					minute: '2-digit'
+				})
+				.replace(/[/,]/g, '')
+				.replace(/\s/g, '_');
+			// @ts-ignore
+			const result = await modal.showModal<string>(TextInputModal, {
+				title: 'Edit World Name',
+				value: `${baseName} PSP-${timestamp}`
+			});
+
+			if (!result) return;
+
+			await goto('/loading');
+
+			ws.send(
+				JSON.stringify({
+					type: MessageType.SAVE_MODDED_SAVE,
+					data: result
+				})
+			);
+		} else if (saveFile.type === 'steam') {
+			await goto('/loading');
+
+			ws.send(
+				JSON.stringify({
+					type: MessageType.SAVE_MODDED_SAVE,
+					data: null
+				})
+			);
+		}
 	}
 
 	return {
+		get autoSave() {
+			return autoSave;
+		},
+		set autoSave(value: boolean) {
+			autoSave = value;
+		},
 		get clipboardItem() {
 			return clipboardItem;
 		},
@@ -252,6 +299,7 @@ export function createAppState() {
 		},
 		resetState,
 		saveState,
+		writeSave,
 		resetModified() {
 			modifiedPlayers = {};
 			modifiedPals = {};

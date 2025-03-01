@@ -358,6 +358,13 @@ class SaveFile(BaseModel):
             save_type = 0x31
         gvas = copy.deepcopy(target_gvas)
         return compress_gvas_to_sav(gvas.write(CUSTOM_PROPERTIES), save_type)
+    
+    def player_savs(self) -> Dict[UUID, bytes]:
+        logger.info("Converting player save files to SAV", len(self._player_gvas_files))
+        return {
+            uid: self._player_gvas_files[uid].write(CUSTOM_PROPERTIES)
+            for uid in self._player_gvas_files
+        }
 
     def to_json_file(
         self,
@@ -394,6 +401,17 @@ class SaveFile(BaseModel):
         with open(output_path, "wb") as f:
             f.write(sav_file)
 
+    def to_player_sav_files(self, output_path):
+        # If it ends with Level.sav, get the directory
+        if output_path.endswith("Level.sav"):
+            output_path = os.path.dirname(output_path)
+
+        logger.info("Converting player save files to SAV, saving to %s", output_path)
+        for uid, gvas in self._player_gvas_files.items():
+            sav_file = compress_gvas_to_sav(gvas.write(CUSTOM_PROPERTIES), 0x32)
+            with open(os.path.join(output_path, f"{uid}.sav"), "wb") as f:
+                f.write(sav_file)
+
     async def update_pals(self, modified_pals: Dict[UUID, PalDTO], ws_callback) -> None:
         if not self._gvas_file:
             raise ValueError("No GvasFile has been loaded.")
@@ -418,6 +436,31 @@ class SaveFile(BaseModel):
             self._update_player(player)
 
         logger.info("Updated %d players in the save file.", len(modified_players))
+
+    async def update_player_technologies(
+        self,
+        player_id: UUID,
+        technologies: Optional[list[str]] = None,
+        technology_points: Optional[int] = None,
+        boss_technology_points: Optional[int] = None,
+        ws_callback=None,
+    ) -> None:
+        if not self._gvas_file:
+            raise ValueError("No GvasFile has been loaded.")
+
+        player = self._players.get(player_id)
+        if not player:
+            raise ValueError(f"Player {player_id} not found in the save file.")
+
+        if technologies is not None:
+            player.technologies = technologies
+        if technology_points is not None:
+            player.technology_points = technology_points 
+        if boss_technology_points is not None:
+            player.boss_technology_points = boss_technology_points
+
+        if ws_callback:
+            await ws_callback("Updating player technologies and points")
 
     async def update_guilds(
         self, modified_guilds: Dict[UUID, GuildDTO], ws_callback
@@ -675,7 +718,7 @@ class SaveFile(BaseModel):
                         host_fix_players[uid]
                     )
                 player = Player(
-                    gvas_file=loaded_sav_files[uid],
+                    gvas_file=self._player_gvas_files[uid],
                     item_container_save_data=self._item_container_save_data,
                     dynamic_item_save_data=self._dynamic_item_save_data,
                     character_container_save_data=self._character_container_save_data,

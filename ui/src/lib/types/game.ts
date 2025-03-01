@@ -87,6 +87,9 @@ export type Player = {
 	status_point_list: StatusPointList;
 	ex_status_point_list: ExStatusPointList;
 	guild_id: string;
+	technologies: string[];
+	technology_points: number;
+	boss_technology_points: number;
 };
 
 export type Guild = {
@@ -668,6 +671,29 @@ export interface PassiveSkillDetails {
 
 export interface PassiveSkill extends Skill {
 	details: PassiveSkillDetails;
+}
+
+export interface TechnologyDetails {
+    unlock_build_objects:      any[];
+    unlock_item_recipes:       string[];
+    __name_key__:              string;
+    __description_key__:       string;
+    icon_name:                 string;
+    require_defeat_tower_boss: string;
+    require_technology:        string;
+    require_research_id:       string;
+    is_boss_technology:        boolean;
+    level_cap:                 number;
+    tier:                      number;
+    cost:                      number;
+    icon:                      string;
+}
+
+export interface Technology {
+	id: string;
+	localized_name: string;
+	description: string;
+	details: TechnologyDetails;
 }
 
 export type WorkSuitability =
