@@ -88,6 +88,8 @@ export type Player = {
 	ex_status_point_list: ExStatusPointList;
 	guild_id: string;
 	technologies: string[];
+	technology_points: number;
+	boss_technology_points: number;
 };
 
 export type Guild = {

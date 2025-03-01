@@ -1,5 +1,5 @@
 from fastapi import WebSocket
-from palworld_save_pal.ws.messages import GetTechnologiesMessage, MessageType
+from palworld_save_pal.ws.messages import GetTechnologiesMessage, MessageType, SetTechnologyDataMessage
 from palworld_save_pal.ws.utils import build_response
 from palworld_save_pal.utils.logging_config import create_logger
 from palworld_save_pal.utils.json_manager import JsonManager
@@ -32,4 +32,22 @@ async def get_technologies_handler(_: GetTechnologiesMessage, ws: WebSocket):
         }
 
     response = build_response(MessageType.GET_TECHNOLOGIES, localized_data)
+    await ws.send_json(response)
+
+async def set_technology_data_handler(message: SetTechnologyDataMessage, ws: WebSocket):
+    app_state = get_app_state()
+    save_file = app_state.save_file
+
+    if save_file is None:
+        logger.error("No save file loaded")
+        return
+    
+    save_file.update_player_technologies(
+        message.data.playerID,
+        message.data.technologies,
+        message.data.techPoints,
+        message.data.ancientTechPoints
+    )
+    
+    response = build_response(MessageType.SET_TECHNOLOGY_DATA, {"success": True})
     await ws.send_json(response)

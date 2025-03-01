@@ -39,6 +39,7 @@ from palworld_save_pal.ws.messages import (
     MovePalMessage,
     OpenInBrowserMessage,
     SelectGamepassSaveMessage,
+    SetTechnologyDataMessage,
     SyncAppStateMessage,
     UpdateSaveFileMessage,
     DownloadSaveFileMessage,
@@ -174,6 +175,14 @@ def bootstrap(dispatcher: "MessageDispatcher"):
         {
             "message_class": GetTechnologiesMessage,
             "handler_func": technologies_handler.get_technologies_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.SET_TECHNOLOGY_DATA.value,
+        {
+            "message_class": SetTechnologyDataMessage,
+            "handler_func": technologies_handler.set_technology_data_handler,
         },
     )
 

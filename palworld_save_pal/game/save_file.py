@@ -419,6 +419,31 @@ class SaveFile(BaseModel):
 
         logger.info("Updated %d players in the save file.", len(modified_players))
 
+    async def update_player_technologies(
+        self,
+        player_id: UUID,
+        technologies: Optional[list[str]] = None,
+        technology_points: Optional[int] = None,
+        boss_technology_points: Optional[int] = None,
+        ws_callback=None,
+    ) -> None:
+        if not self._gvas_file:
+            raise ValueError("No GvasFile has been loaded.")
+
+        player = self._players.get(player_id)
+        if not player:
+            raise ValueError(f"Player {player_id} not found in the save file.")
+
+        if technologies is not None:
+            player.technologies = technologies
+        if technology_points is not None:
+            player.technology_points = technology_points 
+        if boss_technology_points is not None:
+            player.boss_technology_points = boss_technology_points
+
+        if ws_callback:
+            await ws_callback("Updating player technologies and points")
+
     async def update_guilds(
         self, modified_guilds: Dict[UUID, GuildDTO], ws_callback
     ) -> None:

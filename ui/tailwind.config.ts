@@ -15,6 +15,12 @@ export default {
 		extend: {
 			spacing: {
 				'18': '72px'
+			},
+			colors: {
+				'tech-bg': '#001a1a',
+				'tech-border': '#00ffff',
+				'ancient-bg': '#1a001a',
+				'ancient-border': '#ff00ff'
 			}
 		}
 	},
