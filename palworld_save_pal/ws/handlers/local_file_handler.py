@@ -8,7 +8,6 @@ from fastapi import WebSocket
 from palworld_save_pal.game.save_file import SaveFile, SaveType
 from palworld_save_pal.utils.file_manager import FileManager
 from palworld_save_pal.utils.gamepass.container_types import (
-    Container,
     ContainerFileList,
     ContainerIndex,
 )
@@ -29,6 +28,8 @@ from palworld_save_pal.utils.gamepass.container_utils import (
 )
 
 logger = create_logger(__name__)
+
+app_state = get_app_state()
 
 
 async def backup_file(file_path: str, save_type: str, ws_callback):
@@ -67,7 +68,6 @@ async def save_modded_save_handler(message: SaveModdedSaveMessage, ws: WebSocket
 
 
 async def save_modded_gamepass_save(world_name: str, ws: WebSocket, ws_callback):
-    app_state = get_app_state()
     gamepass_save = app_state.selected_gamepass_save
     if not gamepass_save:
         raise ValueError("No GamePass save selected")
@@ -99,6 +99,7 @@ async def save_modded_gamepass_save(world_name: str, ws: WebSocket, ws_callback)
         logger.debug("New save id: %s => %s", gamepass_save.save_id, new_save_id)
         app_state.save_file.name = new_save_id
         save_data = app_state.save_file.sav()
+        player_save_data = app_state.save_file.player_savs()
 
         # Save modified gamepass save with new containers
         await ws_callback("Creating new containers for modified save...")
@@ -107,6 +108,7 @@ async def save_modded_gamepass_save(world_name: str, ws: WebSocket, ws_callback)
             container_path=container_path,
             save_id=new_save_id,
             modified_level_data=save_data,
+            player_sav_data=player_save_data,
             original_containers=original_containers,
             world_name=world_name,
         )
@@ -131,7 +133,9 @@ async def save_modded_steam_save(ws: WebSocket, ws_callback, save_file: SaveFile
     await backup_file(save_file.name, "steam", ws_callback)
     await ws_callback("Writing new save file... 🚀")
     save_file.to_sav_file(save_file.name)
-    save_file.to_player_sav_files(save_file.name)
+    await ws_callback("Writing player files")
+    player_save_dir = os.path.join(app_state.settings.save_dir, "Player")
+    save_file.to_player_sav_files(player_save_dir)
     response = build_response(
         MessageType.SAVE_MODDED_SAVE, f"Modded save file saved to {save_file.name}"
     )

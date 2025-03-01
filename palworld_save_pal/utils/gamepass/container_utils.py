@@ -116,12 +116,12 @@ def read_container_index(container_path: str) -> ContainerIndex:
 
 def create_new_container(
     container_path: str,
-    save_name: str,
+    save_id: str,
     data: bytes,
     file_name: str = "Data",
     container_suffix: str = "Level",
 ) -> Container:
-    container_name = f"{save_name}-{container_suffix}"
+    container_name = f"{save_id}-{container_suffix}"
     container_uuid = uuid.uuid4()
     container_dir = os.path.join(container_path, container_uuid.bytes_le.hex().upper())
 
@@ -186,6 +186,7 @@ def copy_container(
     new_save_id: str,
     key: str,
     world_name: str,
+    player_data: Optional[bytes] = None,
 ) -> Container:
     source_dir = os.path.join(
         source_path, source_container.container_uuid.bytes_le.hex().upper()
@@ -223,6 +224,9 @@ def copy_container(
             ] = world_name
             file.data = SaveFile().sav(level_meta)
             logger.debug("Updated world name in LevelMeta: %s", world_name)
+        elif "Player" in key and player_data:
+            file.data = player_data
+            logger.debug("Updated player data for: %s", key)
 
         new_files.append(ContainerFile(file.name, new_file_uuid, file.data))
 
@@ -270,6 +274,7 @@ def save_modified_gamepass(
     container_path: str,
     save_id: str,
     modified_level_data: bytes,
+    player_sav_data: Dict[uuid.UUID, bytes],
     original_containers: Dict[str, Container],
     world_name: str,
 ) -> None:
@@ -285,9 +290,20 @@ def save_modified_gamepass(
     for key, original_container in original_containers.items():
         if key == "Level":
             continue
+        player_data = None
+        if "Player" in key:
+            player_uuid = uuid.UUID(key.split("-")[1])
+            player_data = player_sav_data.get(player_uuid)
+
         logger.debug("Copying container: %s", original_container.container_name)
         new_container = copy_container(
-            original_container, container_path, container_path, save_id, key, world_name
+            original_container,
+            container_path,
+            container_path,
+            save_id,
+            key,
+            world_name,
+            player_data,
         )
         container_index.containers.append(new_container)
 

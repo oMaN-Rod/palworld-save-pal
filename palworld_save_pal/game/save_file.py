@@ -358,11 +358,13 @@ class SaveFile(BaseModel):
             save_type = 0x31
         gvas = copy.deepcopy(target_gvas)
         return compress_gvas_to_sav(gvas.write(CUSTOM_PROPERTIES), save_type)
-    
+
     def player_savs(self) -> Dict[UUID, bytes]:
         logger.info("Converting player save files to SAV", len(self._player_gvas_files))
         return {
-            uid: self._player_gvas_files[uid].write(CUSTOM_PROPERTIES)
+            uid: compress_gvas_to_sav(
+                self._player_gvas_files[uid].write(CUSTOM_PROPERTIES), 0x32
+            )
             for uid in self._player_gvas_files
         }
 
@@ -402,13 +404,10 @@ class SaveFile(BaseModel):
             f.write(sav_file)
 
     def to_player_sav_files(self, output_path):
-        # If it ends with Level.sav, get the directory
-        if output_path.endswith("Level.sav"):
-            output_path = os.path.dirname(output_path)
-
         logger.info("Converting player save files to SAV, saving to %s", output_path)
         for uid, gvas in self._player_gvas_files.items():
             sav_file = compress_gvas_to_sav(gvas.write(CUSTOM_PROPERTIES), 0x32)
+            uid = str(uid).replace("-", "")
             with open(os.path.join(output_path, f"{uid}.sav"), "wb") as f:
                 f.write(sav_file)
 
@@ -455,7 +454,7 @@ class SaveFile(BaseModel):
         if technologies is not None:
             player.technologies = technologies
         if technology_points is not None:
-            player.technology_points = technology_points 
+            player.technology_points = technology_points
         if boss_technology_points is not None:
             player.boss_technology_points = boss_technology_points
 

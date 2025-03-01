@@ -1,4 +1,5 @@
 import { goto } from '$app/navigation';
+import { TextInputModal } from '$components';
 import type {
 	AppSettings,
 	GamepassSave,
@@ -8,11 +9,13 @@ import type {
 	ItemContainerSlot
 } from '$types';
 import { EntryState, MessageType, type Pal, type Player, type SaveFile } from '$types';
+import { getModalState } from './modalState.svelte';
 import { getToastState } from './toastState.svelte';
 import { getSocketState } from './websocketState.svelte';
 
 const ws = getSocketState();
 const toast = getToastState();
+const modal = getModalState();
 
 interface ModifiedData {
 	modified_pals?: Record<string, Pal>;
