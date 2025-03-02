@@ -87,6 +87,9 @@ export type Player = {
 	status_point_list: StatusPointList;
 	ex_status_point_list: ExStatusPointList;
 	guild_id: string;
+	technologies: string[];
+	technology_points: number;
+	boss_technology_points: number;
 };
 
 export type Guild = {
@@ -108,24 +111,13 @@ export type Base = {
 	state: EntryState;
 };
 
-export type BaseDTO = {
-	id: string;
-	storage_containers: Record<string, ItemContainer>;
-};
+export type BaseDTO = { id: string; storage_containers: Record<string, ItemContainer> };
 
-export type GuildDTO = {
-	base?: BaseDTO;
-	guild_chest?: ItemContainer;
-};
+export type GuildDTO = { base?: BaseDTO; guild_chest?: ItemContainer };
 
 export type SaveFileType = 'gamepass' | 'steam';
 
-export type SaveFile = {
-	name: string;
-	type: SaveFileType;
-	world_name?: string;
-	size?: number;
-};
+export type SaveFile = { name: string; type: SaveFileType; world_name?: string; size?: number };
 export interface DynamicItem {
 	local_id: string;
 	durability: number;
@@ -227,97 +219,35 @@ export interface ItemContainer {
 	state?: EntryState;
 }
 
-export type PalPresetConfig = {
-	[K in keyof PalPreset]: boolean;
-};
+export type PalPresetConfig = { [K in keyof PalPreset]: boolean };
 
 export type PalPresetPropertyNames = keyof PalPresetConfig;
-export type PalPresetNameDescriptionText = {
-	label: string;
-	description: string;
-};
+export type PalPresetNameDescriptionText = { label: string; description: string };
 
 export const palPresetNameDescriptionMap: Record<keyof PalPreset, PalPresetNameDescriptionText> = {
-	is_lucky: {
-		label: 'Lucky',
-		description: 'Apply Lucky to preset'
-	},
-	is_boss: {
-		label: 'Boss',
-		description: 'Apply Boss to preset'
-	},
-	gender: {
-		label: 'Gender',
-		description: 'Apply Gender to preset'
-	},
-	rank_hp: {
-		label: 'HP Souls',
-		description: 'Apply HP Souls to preset'
-	},
-	rank_attack: {
-		label: 'Attack Souls',
-		description: 'Apply Attack Souls to preset'
-	},
-	rank_defense: {
-		label: 'Defense Souls',
-		description: 'Apply Defense Souls to preset'
-	},
-	rank_craftspeed: {
-		label: 'Craft Speed Souls',
-		description: 'Apply Craft Speed Souls to preset'
-	},
-	talent_hp: {
-		label: 'HP IV',
-		description: 'Apply HP IV to preset'
-	},
-	talent_shot: {
-		label: 'Shot IV',
-		description: 'Apply Shot IV to preset'
-	},
-	talent_defense: {
-		label: 'Defense IV',
-		description: 'Apply Defense IV to preset'
-	},
-	rank: {
-		label: 'Rank',
-		description: 'Apply Rank to preset'
-	},
-	level: {
-		label: 'Level',
-		description: 'Apply Level to preset'
-	},
-	learned_skills: {
-		label: 'Learned Skills',
-		description: 'Apply Learned Skills to preset'
-	},
-	active_skills: {
-		label: 'Active Skills',
-		description: 'Apply Active Skills to preset'
-	},
-	passive_skills: {
-		label: 'Passive Skills',
-		description: 'Apply Passive Skills to preset'
-	},
-	work_suitability: {
-		label: 'Work Suitability',
-		description: 'Apply Work Suitability to preset'
-	},
-	sanity: {
-		label: 'Sanity',
-		description: 'Apply Sanity to preset'
-	},
-	exp: {
-		label: 'EXP',
-		description: 'Apply EXP to preset'
-	},
+	is_lucky: { label: 'Lucky', description: 'Apply Lucky to preset' },
+	is_boss: { label: 'Boss', description: 'Apply Boss to preset' },
+	gender: { label: 'Gender', description: 'Apply Gender to preset' },
+	rank_hp: { label: 'HP Souls', description: 'Apply HP Souls to preset' },
+	rank_attack: { label: 'Attack Souls', description: 'Apply Attack Souls to preset' },
+	rank_defense: { label: 'Defense Souls', description: 'Apply Defense Souls to preset' },
+	rank_craftspeed: { label: 'Craft Speed Souls', description: 'Apply Craft Speed Souls to preset' },
+	talent_hp: { label: 'HP IV', description: 'Apply HP IV to preset' },
+	talent_shot: { label: 'Shot IV', description: 'Apply Shot IV to preset' },
+	talent_defense: { label: 'Defense IV', description: 'Apply Defense IV to preset' },
+	rank: { label: 'Rank', description: 'Apply Rank to preset' },
+	level: { label: 'Level', description: 'Apply Level to preset' },
+	learned_skills: { label: 'Learned Skills', description: 'Apply Learned Skills to preset' },
+	active_skills: { label: 'Active Skills', description: 'Apply Active Skills to preset' },
+	passive_skills: { label: 'Passive Skills', description: 'Apply Passive Skills to preset' },
+	work_suitability: { label: 'Work Suitability', description: 'Apply Work Suitability to preset' },
+	sanity: { label: 'Sanity', description: 'Apply Sanity to preset' },
+	exp: { label: 'EXP', description: 'Apply EXP to preset' },
 	lock: {
 		label: 'Lock Pal',
 		description: 'Lock specific Pal to preset, can only be used on this Pal'
 	},
-	character_id: {
-		label: 'Pal',
-		description: ''
-	}
+	character_id: { label: 'Pal', description: '' }
 };
 
 export const defaultPresetConfig: PalPresetConfig = {
@@ -375,10 +305,7 @@ export interface PresetProfile {
 	weapon_load_out_container?: ItemContainerSlot[];
 	player_equipment_armor_container?: ItemContainerSlot[];
 	food_equip_container?: ItemContainerSlot[];
-	storage_container?: {
-		key: string;
-		slots: ItemContainerSlot[];
-	};
+	storage_container?: { key: string; slots: ItemContainerSlot[] };
 	pal_preset?: PalPreset;
 }
 
@@ -454,11 +381,7 @@ export interface Item {
 	info: ItemInfo;
 }
 
-export type Scaling = {
-	hp: number;
-	attack: number;
-	defense: number;
-};
+export type Scaling = { hp: number; attack: number; defense: number };
 
 export type ElementType =
 	| 'Fire'
@@ -668,6 +591,29 @@ export interface PassiveSkillDetails {
 
 export interface PassiveSkill extends Skill {
 	details: PassiveSkillDetails;
+}
+
+export interface TechnologyDetails {
+	unlock_build_objects: string[];
+	unlock_item_recipes: string[];
+	__name_key__: string;
+	__description_key__: string;
+	icon_name: string;
+	require_defeat_tower_boss: string;
+	require_technology: string;
+	require_research_id: string;
+	is_boss_technology: boolean;
+	level_cap: number;
+	tier: number;
+	cost: number;
+	icon: string;
+}
+
+export interface Technology {
+	id: string;
+	localized_name: string;
+	description: string;
+	details: TechnologyDetails;
 }
 
 export type WorkSuitability =

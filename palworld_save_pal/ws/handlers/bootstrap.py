@@ -9,6 +9,7 @@ from palworld_save_pal.ws.handlers import (
     items_handler,
     open_in_browser_handler,
     passive_skills_handler,
+    technologies_handler,
     preset_handler,
     save_file_handler,
     pal_handler,
@@ -30,6 +31,7 @@ from palworld_save_pal.ws.messages import (
     GetPalsMessage,
     GetPassiveSkillsMessage,
     GetSettingsMessage,
+    GetTechnologiesMessage,
     GetWorkSuitabilityMessage,
     HealAllPalsMessage,
     HealPalsMessage,
@@ -37,6 +39,7 @@ from palworld_save_pal.ws.messages import (
     MovePalMessage,
     OpenInBrowserMessage,
     SelectGamepassSaveMessage,
+    SetTechnologyDataMessage,
     SyncAppStateMessage,
     UpdateSaveFileMessage,
     DownloadSaveFileMessage,
@@ -164,6 +167,22 @@ def bootstrap(dispatcher: "MessageDispatcher"):
         {
             "message_class": GetPassiveSkillsMessage,
             "handler_func": passive_skills_handler.get_passive_skills_handler,
+        },
+    )
+    
+    dispatcher.register_handler(
+        MessageType.GET_TECHNOLOGIES.value,
+        {
+            "message_class": GetTechnologiesMessage,
+            "handler_func": technologies_handler.get_technologies_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.SET_TECHNOLOGY_DATA.value,
+        {
+            "message_class": SetTechnologyDataMessage,
+            "handler_func": technologies_handler.set_technology_data_handler,
         },
     )
 

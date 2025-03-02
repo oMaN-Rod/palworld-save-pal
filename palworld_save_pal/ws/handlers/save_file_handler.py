@@ -63,10 +63,22 @@ async def download_save_file_handler(_: DownloadSaveFileMessage, ws: WebSocket):
     sav_file = save_file.sav()
     await ws_callback("Encoding sav file to base64 🤖, get ready here it comes...")
     encoded_data = base64.b64encode(sav_file).decode("utf-8")
-    data = {
+    data = [{
         "name": "Level.sav",
         "content": encoded_data,
-    }
+    }]
+
+    # Prep player save files
+    player_savs = save_file.player_savs()
+    for player_id, save_file in player_savs.items():
+        await ws_callback(f"Sending over {player_id}'s sav! 💪...")
+        encoded_data = base64.b64encode(sav_file).decode("utf-8")
+        player_data = {
+            "name": f"{player_id}.sav",
+            "content": encoded_data,
+        }
+        data.append(player_data)
+    
     response = build_response(MessageType.DOWNLOAD_SAVE_FILE, data)
     await ws.send_json(response)
 

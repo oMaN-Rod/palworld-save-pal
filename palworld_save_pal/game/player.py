@@ -1,4 +1,4 @@
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, List, Optional, Union
 from uuid import UUID
 import uuid
 from pydantic import BaseModel, Field, PrivateAttr, computed_field
@@ -39,12 +39,18 @@ class PlayerDTO(BaseModel):
     weapon_load_out_container: Optional[ItemContainer] = Field(default=None)
     player_equipment_armor_container: Optional[ItemContainer] = Field(default=None)
     food_equip_container: Optional[ItemContainer] = Field(default=None)
+    technologies: List[str] = Field(default_factory=list)
+    technology_points: int = 0
+    boss_technology_points: int = 0
 
 
 class Player(BaseModel):
     _uid: UUID
     _nickname: str
     _level: int
+    _technologies: List[str]
+    _technology_points: int
+    _boss_technology_points: int
     _exp: int
     _hp: int
     _stomach: float
@@ -160,6 +166,60 @@ class Player(BaseModel):
             PalObjects.set_byte_property(self._save_parameter["Level"], value=value)
         else:
             self._save_parameter["Level"] = PalObjects.ByteProperty(value)
+
+    @computed_field
+    def technologies(self) -> List[str]:
+        self._technologies = PalObjects.get_array_property(
+            self._save_data["UnlockedRecipeTechnologyNames"]
+        )
+        return self._technologies
+
+    @technologies.setter
+    def technologies(self, value: List[str]):
+        self._technologies = value
+        if "UnlockedRecipeTechnologyNames" in self._save_data:
+            PalObjects.set_array_property(
+                self._save_data["UnlockedRecipeTechnologyNames"],
+                values=value,
+            )
+        else:
+            self._save_data["UnlockedRecipeTechnologyNames"] = PalObjects.ArrayProperty(
+                value=value
+            )
+
+    @computed_field
+    def technology_points(self) -> int:
+        self._technology_points = (
+            PalObjects.get_value(self._save_data["TechnologyPoint"])
+            if "TechnologyPoint" in self._save_data
+            else 0
+        )
+        return self._technology_points
+
+    @technology_points.setter
+    def technology_points(self, value: int):
+        self._technology_points = value
+        if "TechnologyPoint" in self._save_data:
+            PalObjects.set_value(self._save_data["TechnologyPoint"], value=value)
+        else:
+            self._save_data["TechnologyPoint"] = PalObjects.IntProperty(value)
+
+    @computed_field
+    def boss_technology_points(self) -> int:
+        self._boss_technology_points = (
+            PalObjects.get_value(self._save_data["bossTechnologyPoint"])
+            if "bossTechnologyPoint" in self._save_data
+            else 0
+        )
+        return self._boss_technology_points
+
+    @boss_technology_points.setter
+    def boss_technology_points(self, value: int):
+        self._boss_technology_points = value
+        if "bossTechnologyPoint" in self._save_data:
+            PalObjects.set_value(self._save_data["bossTechnologyPoint"], value=value)
+        else:
+            self._save_data["bossTechnologyPoint"] = PalObjects.IntProperty(value)
 
     @computed_field
     def exp(self) -> int:
@@ -403,6 +463,9 @@ class Player(BaseModel):
                     | "stomach"
                     | "nickname"
                     | "sanity"
+                    | "technologies"
+                    | "technology_points"
+                    | "boss_technology_points"
                 ):
                     setattr(self, key, value)
                 case "common_container":

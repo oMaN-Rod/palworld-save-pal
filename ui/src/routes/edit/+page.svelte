@@ -7,6 +7,7 @@
 	import { Tabs } from '@skeletonlabs/skeleton-svelte';
 	import { goto } from '$app/navigation';
 	import Guilds from './components/guilds/Guilds.svelte';
+	import Technologies from './components/technologies/Technologies.svelte';
 
 	const appState = getAppState();
 	const nav = getNavigationState();
@@ -35,6 +36,7 @@
 				{#snippet list()}
 					<div class="shrink-0">
 						<Tabs.Control value="player">Player</Tabs.Control>
+						<Tabs.Control value="technologies">Technologies</Tabs.Control>
 						<Tabs.Control value="pal-box">Pal Box</Tabs.Control>
 						<Tabs.Control value="guilds">Guild</Tabs.Control>
 						<Tabs.Control value="pal">Pal</Tabs.Control>
@@ -44,6 +46,9 @@
 					<div class="grow overflow-hidden">
 						<Tabs.Panel value="player" classes="h-screen">
 							<PlayerEdit />
+						</Tabs.Panel>
+						<Tabs.Panel value="technologies" classes="h-screen">
+							<Technologies />
 						</Tabs.Panel>
 						<Tabs.Panel value="pal-box" classes="h-screen">
 							<PalBox />
