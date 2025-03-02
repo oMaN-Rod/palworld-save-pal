@@ -177,7 +177,7 @@
 </script>
 
 <div class="flex min-w-64 max-w-96 flex-col space-y-2">
-	<div class="btn-group bg-surface-900 items-center rounded p-1">
+	<div class="btn-group bg-surface-900 items-center rounded-sm p-1">
 		<TooltipButton
 			onclick={handleAddPreset}
 			popupLabel="Create a preset from your current selection"

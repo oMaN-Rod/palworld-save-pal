@@ -24,7 +24,7 @@
 <div class="flex h-full w-full overflow-hidden">
 	<div class="relative h-full w-full">
 		{#if appState.saveFile}
-			<div class="absolute left-2 top-0 flex min-w-72 flex-shrink-0 flex-row">
+			<div class="absolute left-2 top-0 flex min-w-72 shrink-0 flex-row">
 				<PlayerList />
 			</div>
 			<Tabs
@@ -33,7 +33,7 @@
 				classes="flex h-full flex-col mt-4"
 			>
 				{#snippet list()}
-					<div class="flex-shrink-0">
+					<div class="shrink-0">
 						<Tabs.Control value="player">Player</Tabs.Control>
 						<Tabs.Control value="technologies">
 							Technologies
@@ -45,7 +45,7 @@
 					</div>
 				{/snippet}
 				{#snippet content()}
-					<div class="flex-grow overflow-hidden">
+					<div class="grow overflow-hidden">
 						<Tabs.Panel value="player" classes="h-screen">
 							<PlayerEdit />
 						</Tabs.Panel>

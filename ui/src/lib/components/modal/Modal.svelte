@@ -8,7 +8,7 @@
 	let {
 		overlayClass = 'bg-black/50',
 		contentClass = '',
-		rounded = 'rounded',
+		rounded = 'rounded-sm',
 		children
 	} = $props<{
 		overlayClass?: string;

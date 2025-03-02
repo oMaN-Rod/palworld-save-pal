@@ -688,8 +688,8 @@
 
 {#if appState.selectedPlayer}
 	<div class="grid h-full w-full grid-cols-[25%_1fr]" {...additionalProps}>
-		<div class="flex-shrink-0 p-4">
-			<div class="btn-group bg-surface-900 mb-2 items-center rounded p-1">
+		<div class="shrink-0 p-4">
+			<div class="btn-group bg-surface-900 mb-2 w-full items-center rounded-sm p-1">
 				<Tooltip position="right" label="Add a new pal to your Pal Box">
 					<button
 						class="btn hover:preset-tonal-secondary p-2"
@@ -766,7 +766,7 @@
 			<Accordion collapsible>
 				<Accordion.Item
 					value="filter"
-					base="rounded bg-surface-900"
+					base="rounded-sm bg-surface-900"
 					controlHover="hover:bg-secondary-500/25"
 				>
 					{#snippet lead()}<Search />{/snippet}
@@ -904,7 +904,7 @@
 				</Accordion.Item>
 				<Accordion.Item
 					value="party"
-					base="block 2xl:hidden rounded bg-surface-900"
+					base="block 2xl:hidden rounded-sm bg-surface-900"
 					controlHover="hover:bg-secondary-500/25"
 				>
 					{#snippet lead()}<User />{/snippet}
@@ -917,7 +917,7 @@
 				</Accordion.Item>
 			</Accordion>
 
-			<Card rounded="rounded" class="mt-2 hidden 2xl:block">
+			<Card rounded="rounded-sm" class="mt-2 hidden 2xl:block">
 				<h4 class="h4 mb-2">Party</h4>
 				{@render party()}
 			</Card>
@@ -926,7 +926,7 @@
 		<div>
 			<!-- Pager -->
 			<div class="mb-4 flex items-center justify-center space-x-4">
-				<button class="rounded px-4 py-2 font-bold" onclick={decrementPage}>
+				<button class="rounded-sm px-4 py-2 font-bold" onclick={decrementPage}>
 					<img src={staticIcons.qIcon} alt="Previous" class="h-10 w-10" />
 				</button>
 
@@ -944,7 +944,7 @@
 					{/each}
 				</div>
 
-				<button class="rounded px-4 py-2 font-bold" onclick={incrementPage}>
+				<button class="rounded-sm px-4 py-2 font-bold" onclick={incrementPage}>
 					<img src={staticIcons.eIcon} alt="Next" class="h-10 w-10" />
 				</button>
 			</div>

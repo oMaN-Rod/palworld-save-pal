@@ -530,6 +530,7 @@ class SaveFile(BaseModel):
                     for g in self._guild_extra_save_data_map
                     if are_equal_uuids(g["key"], guild_id)
                 ),
+                None,
             )
             self._guilds[guild_id] = Guild(
                 group_save_data=entry,
@@ -656,8 +657,10 @@ class SaveFile(BaseModel):
         self._map_object_save_data = PalObjects.get_value(
             world_save_data["MapObjectSaveData"]
         )
-        self._guild_extra_save_data_map = PalObjects.get_value(
-            world_save_data["GuildExtraSaveDataMap"]
+        self._guild_extra_save_data_map = (
+            PalObjects.get_value(world_save_data["GuildExtraSaveDataMap"])
+            if "GuildExtraSaveDataMap" in world_save_data
+            else None
         )
 
     def _player_guild(self, player_id: UUID) -> Optional[Guild]:

@@ -24,7 +24,7 @@
 	}
 </script>
 
-<Card class="bg-surface-500 min-w-[calc(100vw/3)]">
+<Card class="min-w-[calc(100vw/3)]">
 	<h3 class="h3">{title}</h3>
 	{#if message}
 		<p class="text-sm">{message}</p>

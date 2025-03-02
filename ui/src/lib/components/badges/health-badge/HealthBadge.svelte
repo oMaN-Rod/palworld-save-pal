@@ -91,14 +91,14 @@
 	</div>
 	{#if showActions}
 		<div
-			class="bg-surface-800 text-one-surface hover:ring-secondary-500 relative mx-2 flex h-1/2 rounded px-6 py-1 font-semibold hover:ring"
+			class="bg-surface-800 text-one-surface hover:ring-secondary-500 relative mx-2 flex h-1/2 rounded-sm px-6 py-1 font-semibold hover:ring"
 		>
 			<span class="relative z-10 grow">SAN</span>
 			<div class="relative z-10 flex space-x-0.5">
 				<span class="font-bold">{pal.sanity.toFixed(0)}</span>
 				<span class="text-surface-400 text-sm">/ 100</span>
 			</div>
-			<span class="border-surface-700 absolute inset-0 rounded border"></span>
+			<span class="border-surface-700 absolute inset-0 rounded-sm border"></span>
 			<span class="bg-surface-600 absolute left-0 top-0 h-0.5 w-0.5"></span>
 			<span class="bg-surface-600 absolute right-0 top-0 h-0.5 w-0.5"></span>
 			<span class="bg-surface-600 absolute bottom-0 left-0 h-0.5 w-0.5"></span>

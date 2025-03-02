@@ -440,94 +440,76 @@
 			<!-- Main content wrapper -->
 			<div class="grid w-full grid-cols-[auto_1fr] gap-4 pr-[420px]">
 				<!-- Inventory -->
-				<div class="flex h-[600px] flex-col">
-					<div class="mb-4 flex items-center space-x-2">
-						<Tooltip>
+				<div class="flex flex-col space-y-2">
+					<nav
+						class="btn-group preset-outlined-surface-200-800 w-full flex-col rounded-sm p-2 md:flex-row"
+					>
+						<Tooltip label="Clear Inventory">
 							<button
-								class="btn preset-filled-primary-500 hover:preset-tonal-secondary xl:btn-md btn-sm px-2 xl:px-4"
+								class="hover:bg-secondary-500/50 btn rounded-sm"
 								onclick={clearCommonContainer}
 							>
 								<ChevronsLeftRight class="h-4 w-4 xl:h-6 xl:w-6" />
 							</button>
-							{#snippet popup()}
-								<span>Clear Inventory</span>
-							{/snippet}
 						</Tooltip>
-						<Tooltip>
+						<Tooltip label="Sort Inventory">
 							<button
-								class="btn preset-filled-primary-500 hover:preset-tonal-secondary btn-sm xl:btn-md px-2 xl:px-4"
+								class="hover:bg-secondary-500/50 btn rounded-sm"
 								onclick={sortCommonContainer}
 							>
 								<ArrowUp01 class="h-4 w-4 xl:h-6 xl:w-6" />
 							</button>
-							{#snippet popup()}
-								<span>Sort Inventory</span>
-							{/snippet}
 						</Tooltip>
-						<Tooltip
-							><button
-								class="btn preset-filled-primary-500 hover:preset-tonal-secondary xl:btn-md btn-sm px-2 xl:px-4"
+						<Tooltip label="Clear Key Items">
+							<button
+								class="hover:bg-secondary-500/50 btn rounded-sm"
 								onclick={clearEssentialContainer}
 							>
 								<Key class="h-4 w-4 xl:h-6 xl:w-6" />
 							</button>
-							{#snippet popup()}
-								<span>Clear Key Items</span>
-							{/snippet}
 						</Tooltip>
-						<Tooltip>
+						<Tooltip label="Clear Weapons">
 							<button
-								class="btn preset-filled-primary-500 hover:preset-tonal-secondary xl:btn-md btn-sm px-2 xl:px-4"
+								class="hover:bg-secondary-500/50 btn rounded-sm"
 								onclick={clearWeaponLoadOutContainer}
 							>
 								<Swords class="h-4 w-4 xl:h-6 xl:w-6" />
 							</button>
-							{#snippet popup()}
-								<span>Clear Weapons</span>
-							{/snippet}
 						</Tooltip>
-						<Tooltip>
+						<Tooltip label="Clear Armor">
 							<button
-								class="btn preset-filled-primary-500 hover:preset-tonal-secondary xl:btn-md btn-sm px-2 xl:px-4"
+								class="hover:bg-secondary-500/50 btn rounded-sm"
 								onclick={clearEquipmentArmorContainer}
 							>
 								<Shield class="h-4 w-4 xl:h-6 xl:w-6" />
 							</button>
-							{#snippet popup()}
-								<span>Clear Armor</span>
-							{/snippet}
 						</Tooltip>
-						<Tooltip>
+						<Tooltip label="Clear Food">
 							<button
-								class="btn preset-filled-primary-500 hover:preset-tonal-secondary xl:btn-md btn-sm px-2 xl:px-4"
+								class="hover:bg-secondary-500/50 btn rounded-sm"
 								onclick={clearFoodEquipContainer}
 							>
 								<Pizza class="h-4 w-4 xl:h-6 xl:w-6" />
 							</button>
-							{#snippet popup()}
-								<span>Clear Food</span>
-							{/snippet}
 						</Tooltip>
-						<Tooltip>
-							<button
-								class="btn preset-filled-primary-500 hover:preset-tonal-secondary xl:btn-md btn-sm px-2 xl:px-4"
-								onclick={clearAll}
-							>
+						<Tooltip label="Clear All">
+							<button class="hover:bg-secondary-500/50 btn rounded-sm" onclick={clearAll}>
 								<Bomb class="h-4 w-4 xl:h-6 xl:w-6" />
 							</button>
-							{#snippet popup()}
-								<span>Clear All</span>
-							{/snippet}
 						</Tooltip>
-					</div>
-					<Tabs listBorder="border border-surface-800" listClasses="h-auto" bind:value={group}>
+					</nav>
+					<Tabs
+						listBorder="preset-outlined-surface-200-800"
+						listClasses="btn-group preset-outlined-surface-200-800 w-full flex-col md:flex-row rounded-sm"
+						bind:value={group}
+					>
 						{#snippet list()}
 							<Tabs.Control
 								value="inventory"
 								classes="w-full"
-								base="border-none hover:ring-secondary-500 hover:ring"
-								labelBase="py-1"
-								stateActive="bg-surface-700"
+								base="border-none hover:bg-secondary-500/50 rounded-sm"
+								labelBase="btn"
+								stateActive="bg-secondary-800"
 								padding="p-0"
 							>
 								Inventory
@@ -535,9 +517,9 @@
 							<Tabs.Control
 								value="key_items"
 								classes="w-full"
-								base="border-none hover:ring-secondary-500 hover:ring"
-								labelBase="py-1"
-								stateActive="bg-surface-700"
+								base="border-none hover:bg-secondary-500/50 rounded-sm"
+								labelBase="btn"
+								stateActive="bg-secondary-800"
 								padding="p-0"
 							>
 								Key Items
@@ -712,7 +694,7 @@
 						<div class="flex flex-col">
 							<div class="flex space-x-2">
 								<button
-									class="hover:ring-secondary-500 hover:ring-offset-surface-900 text-start font-bold hover:ring hover:ring-offset-4"
+									class="hover:bg-secondary-500/50 hover:ring-offset-surface-900 text-start font-bold hover:ring hover:ring-offset-4"
 									onclick={handleUpdateNickname}
 								>
 									<Edit class="h-4 w-4" />
