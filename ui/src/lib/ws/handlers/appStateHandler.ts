@@ -1,10 +1,12 @@
 import { goto } from '$app/navigation';
-import { getAppState } from '$states';
+import UpdateAvailableModal from '$components/modals/update-available/UpdateAvailableModal.svelte';
+import { getAppState, getModalState } from '$states';
 import { MessageType } from '$types';
 import { isUpdateAvailableOnGitHub } from '$utils/appVersion';
 import type { WSMessageHandler } from '../types';
 
 const appState = getAppState();
+const modal = getModalState();
 
 export const progressMessageHandler: WSMessageHandler = {
 	type: MessageType.PROGRESS_MESSAGE,
@@ -21,7 +23,8 @@ export const getVersionHandler: WSMessageHandler = {
 		// Check for updates
 		const isUpdateAvailable = await isUpdateAvailableOnGitHub(data);
 		if (isUpdateAvailable) {
-			goto('/update');
+			// @ts-ignore-next-line
+			const result = await modal.showModal<string>(UpdateAvailableModal, {});
 		}
 	}
 };
