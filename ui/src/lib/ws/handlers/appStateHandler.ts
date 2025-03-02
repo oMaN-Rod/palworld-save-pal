@@ -1,6 +1,7 @@
 import { goto } from '$app/navigation';
 import { getAppState } from '$states';
 import { MessageType } from '$types';
+import { isUpdateAvailableOnGitHub } from '$utils/appVersion';
 import type { WSMessageHandler } from '../types';
 
 const appState = getAppState();
@@ -16,6 +17,12 @@ export const getVersionHandler: WSMessageHandler = {
 	type: MessageType.GET_VERSION,
 	async handle(data) {
 		appState.version = data;
+
+		// Check for updates
+		const isUpdateAvailable = await isUpdateAvailableOnGitHub(data);
+		if (isUpdateAvailable) {
+			goto('/update');
+		}
 	}
 };
 
