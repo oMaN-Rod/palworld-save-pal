@@ -134,7 +134,7 @@ async def save_modded_steam_save(ws: WebSocket, ws_callback, save_file: SaveFile
     await ws_callback("Writing new save file... 🚀")
     save_file.to_sav_file(save_file.name)
     await ws_callback("Writing player files")
-    player_save_dir = os.path.join(app_state.settings.save_dir, "Player")
+    player_save_dir = os.path.join(app_state.settings.save_dir, "Players")
     save_file.to_player_sav_files(player_save_dir)
     response = build_response(
         MessageType.SAVE_MODDED_SAVE, f"Modded save file saved to {save_file.name}"

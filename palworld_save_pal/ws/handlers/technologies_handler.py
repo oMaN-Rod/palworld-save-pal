@@ -23,6 +23,10 @@ async def get_technologies_handler(_: GetTechnologiesMessage, ws: WebSocket):
 
     localized_data = {}
     for tech_id, details in technologies_data.items():
+        # Level 1 technologies can't be modified
+        if "level_cap" in details and details["level_cap"] == 1:
+            continue
+
         i18n_info = technologies_i18n.get(
             tech_id, {"localized_name": tech_id, "description": ""}
         )

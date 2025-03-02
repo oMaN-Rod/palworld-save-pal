@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getAppState, getSocketState } from '$states';
+	import { getAppState, getSocketState, getToastState } from '$states';
 	import { technologiesData } from '$lib/data';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { assetLoader } from '$utils';
@@ -7,6 +7,7 @@
 	
 	const appState = getAppState();
 	const ws = getSocketState();
+	const toast = getToastState();
 
 	let unlockedTechnologies: Set<string> = $state(new Set<string>());
 	let techPoints: number = $state(0);
@@ -90,8 +91,9 @@
 		appState.selectedPlayer.technologies = Array.from(unlockedTechnologies);
 		appState.selectedPlayer.technology_points = techPoints;
 		appState.selectedPlayer.boss_technology_points = ancientTechPoints;
-	}
 
+		toast.add('Technology data saved successfully', 'Saved!', 'success');
+	}
 </script>
 
 {#if appState.selectedPlayer}
@@ -99,13 +101,23 @@
 		<div class="mx-auto max-w-7xl">
 			<div class="mb-8 flex items-center justify-between">
 				<div class="flex gap-8">
-					<div class="bg-tech-bg border-tech-border rounded-lg border px-6 py-3">
+					<div class="bg-tech-bg border-tech-border rounded-lg border pl-6 py-3">
 						<div class="text-xs text-gray-400">Technology Points</div>
-						<div class="text-tech-border text-2xl font-bold">{techPoints}</div>
+						<input 
+							type="number"
+							bind:value={techPoints}
+							min="0"
+							class="bg-transparent text-tech-border text-2xl font-bold w-full focus:outline-none"
+						/>
 					</div>
-					<div class="bg-ancient-bg border-ancient-border rounded-lg border px-6 py-3">
+					<div class="bg-ancient-bg border-ancient-border rounded-lg border pl-6 py-3">
 						<div class="text-xs text-gray-400">Ancient Technology Points</div>
-						<div class="text-ancient-border text-2xl font-bold">{ancientTechPoints}</div>
+						<input 
+							type="number"
+							bind:value={ancientTechPoints}
+							min="0"
+							class="bg-transparent text-ancient-border text-2xl font-bold w-full focus:outline-none"
+						/>
 					</div>
 				</div>
 				<div class="flex gap-4">

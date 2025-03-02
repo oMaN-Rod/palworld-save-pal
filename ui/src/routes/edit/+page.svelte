@@ -35,7 +35,10 @@
 				{#snippet list()}
 					<div class="flex-shrink-0">
 						<Tabs.Control value="player">Player</Tabs.Control>
-						<Tabs.Control value="technologies">Technologies</Tabs.Control>
+						<Tabs.Control value="technologies">
+							Technologies
+							<span class="ml-1 rounded bg-primary-500 px-1 py-0.5 text-[0.6rem] font-semibold text-white">BETA</span>
+						</Tabs.Control>
 						<Tabs.Control value="pal-box">Pal Box</Tabs.Control>
 						<Tabs.Control value="guilds">Guild</Tabs.Control>
 						<Tabs.Control value="pal">Pal</Tabs.Control>
