@@ -26,6 +26,9 @@ class MessageType(str, Enum):
     HEAL_PALS = "heal_pals"
     MOVE_PAL = "move_pal"
 
+    # Player Management
+    SET_TECHNOLOGY_DATA = "set_technology_data"
+
     # Game Data Retrieval
     GET_ACTIVE_SKILLS = "get_active_skills"
     GET_BUILDINGS = "get_buildings"
@@ -35,6 +38,7 @@ class MessageType(str, Enum):
     GET_ITEMS = "get_items"
     GET_PASSIVE_SKILLS = "get_passive_skills"
     GET_PLAYERS = "get_players"
+    GET_TECHNOLOGIES = "get_technologies"
     GET_UI_COMMON = "get_ui_common"
     GET_VERSION = "get_version"
     GET_WORK_SUITABILITY = "get_work_suitability"
@@ -262,3 +266,16 @@ class HealAllPalsMessage(BaseMessage):
 
 class GetBuildingsMessage(BaseModel):
     type: str = MessageType.GET_BUILDINGS.value
+
+class GetTechnologiesMessage(BaseModel):
+    type: str = MessageType.GET_TECHNOLOGIES.value
+
+class TechnologyData(BaseModel):
+    playerID: UUID = None
+    technologies: List[str] = None
+    techPoints: int = None
+    ancientTechPoints: int = None
+
+class SetTechnologyDataMessage(BaseModel):
+    type: str = MessageType.SET_TECHNOLOGY_DATA.value
+    data: TechnologyData

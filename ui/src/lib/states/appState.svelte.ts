@@ -1,4 +1,5 @@
 import { goto } from '$app/navigation';
+import { TextInputModal } from '$components';
 import type {
 	AppSettings,
 	GamepassSave,
@@ -8,11 +9,13 @@ import type {
 	ItemContainerSlot
 } from '$types';
 import { EntryState, MessageType, type Pal, type Player, type SaveFile } from '$types';
+import { getModalState } from './modalState.svelte';
 import { getToastState } from './toastState.svelte';
 import { getSocketState } from './websocketState.svelte';
 
 const ws = getSocketState();
 const toast = getToastState();
+const modal = getModalState();
 
 interface ModifiedData {
 	modified_pals?: Record<string, Pal>;
@@ -74,7 +77,7 @@ export function createAppState() {
 		for (const player of Object.values(appState.modifiedPlayers)) {
 			if (player.state === EntryState.MODIFIED) {
 				const { pals, ...playerWithoutPals } = player;
-				playerWithoutPals.state = EntryState.NONE;
+				player.state = EntryState.NONE;
 				modifiedPlayers = [...modifiedPlayers, [player.uid, playerWithoutPals]];
 			}
 			if (player.pals) {
@@ -111,10 +114,7 @@ export function createAppState() {
 							[
 								guild.id,
 								{
-									base: {
-										id: base.id,
-										storage_containers: Object.fromEntries(modifiedContainers)
-									}
+									base: { id: base.id, storage_containers: Object.fromEntries(modifiedContainers) }
 								}
 							]
 						];
@@ -148,10 +148,7 @@ export function createAppState() {
 			autoSave = true;
 		}
 
-		const data = {
-			type: MessageType.UPDATE_SAVE_FILE,
-			data: modifiedData
-		};
+		const data = { type: MessageType.UPDATE_SAVE_FILE, data: modifiedData };
 
 		await ws.sendAndWait(data);
 		await new Promise((resolve) => setTimeout(resolve, 500));
@@ -184,21 +181,11 @@ export function createAppState() {
 
 			await goto('/loading');
 
-			ws.send(
-				JSON.stringify({
-					type: MessageType.SAVE_MODDED_SAVE,
-					data: result
-				})
-			);
+			ws.send(JSON.stringify({ type: MessageType.SAVE_MODDED_SAVE, data: result }));
 		} else if (saveFile.type === 'steam') {
 			await goto('/loading');
 
-			ws.send(
-				JSON.stringify({
-					type: MessageType.SAVE_MODDED_SAVE,
-					data: null
-				})
-			);
+			ws.send(JSON.stringify({ type: MessageType.SAVE_MODDED_SAVE, data: null }));
 		}
 	}
 
