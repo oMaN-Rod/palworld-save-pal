@@ -3,7 +3,7 @@
 	import PlayerEdit from './components/PlayerEdit.svelte';
 	import PalBox from './components/palbox/PalBox.svelte';
 	import { PlayerList } from '$components';
-	import { getAppState, getNavigationState } from '$states';
+	import { getAppState, getNavigationState, type Tab } from '$states';
 	import { Tabs } from '@skeletonlabs/skeleton-svelte';
 	import { goto } from '$app/navigation';
 	import Guilds from './components/guilds/Guilds.svelte';
@@ -26,8 +26,11 @@
 			</div>
 			<Tabs
 				listJustify="justify-center"
-				bind:value={nav.activeTab}
+				value={nav.activeTab}
 				classes="flex h-full flex-col mt-4"
+				onValueChange={(e) => {
+					nav.activeTab = e.value as Tab;
+				}}
 			>
 				{#snippet list()}
 					<div class="shrink-0">

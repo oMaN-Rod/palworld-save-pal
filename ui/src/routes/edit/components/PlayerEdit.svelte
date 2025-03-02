@@ -501,7 +501,8 @@
 					<Tabs
 						listBorder="preset-outlined-surface-200-800"
 						listClasses="btn-group preset-outlined-surface-200-800 w-full flex-col md:flex-row rounded-sm"
-						bind:value={group}
+						value={group}
+						onValueChange={(e) => (group = e.value)}
 					>
 						{#snippet list()}
 							<Tabs.Control

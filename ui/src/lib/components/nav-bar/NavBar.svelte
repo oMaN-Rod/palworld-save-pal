@@ -46,7 +46,11 @@
 	}
 </script>
 
-<Navigation.Rail width="48px" bind:value={navigationState.activePage}>
+<Navigation.Rail
+	width="48px"
+	value={navigationState.activePage}
+	onValueChange={(value) => (navigationState.activePage = value as Page)}
+>
 	{#snippet header()}
 		{#if appState.saveFile}
 			<Navigation.Tile
