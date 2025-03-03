@@ -32,6 +32,22 @@ logger = create_logger(__name__)
 app_state = get_app_state()
 
 
+async def backup_dir(dir_path: str, save_type: str, ws_callback):
+    backup_dir = f"backups/{save_type}"
+    if not os.path.exists(backup_dir):
+        os.makedirs(backup_dir)
+    timestamp = time.strftime("%Y-%m-%d-%H-%M")
+    backup_path = os.path.join(backup_dir, f"{os.path.basename(dir_path)}_{timestamp}")
+    await ws_callback("Backing up save directory... 🤓")
+    if os.path.exists(dir_path):
+        shutil.copytree(dir_path, backup_path)
+    else:
+        await ws_callback(f"Save directory {dir_path} not found, skipping backup")
+    nested_backup_dir = os.path.join(backup_path, "backup")
+    if os.path.exists(nested_backup_dir):
+        shutil.rmtree(nested_backup_dir)
+
+
 async def backup_file(file_path: str, save_type: str, ws_callback):
     file_name = os.path.basename(file_path)
     backup_dir = f"backups/{save_type}"
@@ -130,11 +146,11 @@ async def save_modded_gamepass_save(world_name: str, ws: WebSocket, ws_callback)
 
 
 async def save_modded_steam_save(ws: WebSocket, ws_callback, save_file: SaveFile):
-    await backup_file(save_file.name, "steam", ws_callback)
+    await backup_dir(app_state.settings.save_dir, "steam", ws_callback)
     await ws_callback("Writing new save file... 🚀")
     save_file.to_sav_file(save_file.name)
     await ws_callback("Writing player files")
-    player_save_dir = os.path.join(app_state.settings.save_dir, "Player")
+    player_save_dir = os.path.join(app_state.settings.save_dir, "Players")
     save_file.to_player_sav_files(player_save_dir)
     response = build_response(
         MessageType.SAVE_MODDED_SAVE, f"Modded save file saved to {save_file.name}"
