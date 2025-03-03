@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { PresetConfigModal, TextInputModal } from '$components';
+	import { DebugModal, PresetConfigModal, TextInputModal } from '$components';
 	import { CornerDotButton, Progress, Tooltip } from '$components/ui';
 	import {
 		defaultPresetConfig,
@@ -15,8 +15,9 @@
 	import { cn } from '$theme';
 	import { getAppState, getModalState, getToastState } from '$states';
 	import { Rating } from '@skeletonlabs/skeleton-svelte';
-	import { BicepsFlexed, Edit, Minus, Plus, Save } from 'lucide-svelte';
+	import { BicepsFlexed, Bug, Edit, Minus, Plus, Save } from 'lucide-svelte';
 	import { assetLoader, handleMaxOutPal, canBeBoss } from '$utils';
+	import { goto } from '$app/navigation';
 
 	let {
 		pal = $bindable(),
@@ -203,6 +204,14 @@
 
 		await presetsData.addPresetProfile(newPreset);
 	}
+
+	async function handleDebugPal() {
+		// @ts-ignore
+		await modal.showModal(DebugModal, {
+			title: 'Pal Debug',
+			json: { content: { text: JSON.stringify(pal, null, 2) } }
+		});
+	}
 </script>
 
 {#if pal}
@@ -256,6 +265,20 @@
 						{pal.nickname || pal.name}
 					</h6>
 					<div class="flex space-x-2">
+						{#if appState.settings.debug_mode}
+							<Tooltip position="bottom" label="Debug">
+								<CornerDotButton
+									onClick={() => {
+										goto(
+											`/debug?guildId=${appState.selectedPlayer?.guild_id}&playerId=${appState.selectedPlayer!.uid}&palId=${appState.selectedPal!.instance_id}`
+										);
+									}}
+									class="h-8 w-8 p-1"
+								>
+									<Bug />
+								</CornerDotButton>
+							</Tooltip>
+						{/if}
 						{#if showActions}
 							<Tooltip position="bottom" label="Edit nickname">
 								<CornerDotButton onClick={handleEditNickname} class="h-8 w-8 p-1">

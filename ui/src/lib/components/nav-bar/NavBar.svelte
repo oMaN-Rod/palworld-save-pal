@@ -7,7 +7,7 @@
 		getSocketState
 	} from '$states';
 	import { Navigation } from '@skeletonlabs/skeleton-svelte';
-	import { File, Pencil, Info, Upload, Languages, Settings, Save } from 'lucide-svelte';
+	import { File, Pencil, Info, Upload, Languages, Settings, Save, Bug } from 'lucide-svelte';
 	import { page } from '$app/stores';
 	import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
 	import { SettingsModal } from '$components/modals';
@@ -110,6 +110,18 @@
 		>
 			<Info />
 		</Navigation.Tile>
+		{#if appState.settings.debug_mode}
+			<Navigation.Tile
+				label="Debug"
+				labelBase="text-xs"
+				title="Debug"
+				id="debug"
+				href="/debug"
+				active="bg-secondary-500"
+			>
+				<Bug />
+			</Navigation.Tile>
+		{/if}
 	{/snippet}
 	{#snippet footer()}
 		<Navigation.Tile

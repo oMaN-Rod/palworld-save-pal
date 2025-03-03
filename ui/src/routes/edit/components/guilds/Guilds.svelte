@@ -13,7 +13,7 @@
 	} from '$types';
 	import { ASSET_DATA_PATH, staticIcons } from '$lib/constants';
 	import { Ambulance, X, ReplaceAll, Plus, Trash, Bandage, Play, RefreshCcw } from 'lucide-svelte';
-	import { ItemBadge, PalBadge, StoragePresets } from '$components';
+	import { DebugButton, ItemBadge, PalBadge, StoragePresets } from '$components';
 	import { PalSelectModal, NumberInputModal, PalPresetSelectModal } from '$components/modals';
 	import { assetLoader, debounce, deepCopy, formatNickname } from '$utils';
 	import { cn } from '$theme';
@@ -650,7 +650,15 @@
 		<div class="grid h-full w-full grid-cols-[25%_1fr]">
 			<!-- Left Controls -->
 			<div class="shrink-0 space-y-2 p-4">
-				<h4 class="h4">{playerGuild!.name}</h4>
+				<div class="flex">
+					<h4 class="h4">{playerGuild!.name}</h4>
+					{#if playerGuild && appState.settings.debug_mode}
+						<DebugButton
+							href={`/debug?guildId=${playerGuild.id}&playerId=${appState.selectedPlayer!.uid}`}
+						/>
+					{/if}
+				</div>
+
 				<h5 class="h5 font-light">Base {currentPage}</h5>
 
 				<nav

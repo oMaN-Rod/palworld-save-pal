@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { HealthBadge, PalHeader } from '$components';
+	import { DebugButton, HealthBadge, PalHeader } from '$components';
 
 	import {
 		ActiveSkillBadge,
@@ -15,11 +15,12 @@
 	import { staticIcons } from '$lib/constants';
 	import { palsData, expData, presetsData } from '$lib/data';
 	import { getAppState, getModalState, getToastState } from '$states';
-	import { BicepsFlexed, Brain, Save } from 'lucide-svelte';
+	import { BicepsFlexed, Brain, Bug, Save } from 'lucide-svelte';
 	import { Souls } from '$components';
 	import SkillPresets from './SkillPresets.svelte';
 	import { assetLoader, calculateFilters } from '$utils';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
+	import { goto } from '$app/navigation';
 
 	const appState = getAppState();
 	const modal = getModalState();

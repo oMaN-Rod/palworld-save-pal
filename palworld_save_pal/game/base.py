@@ -28,10 +28,9 @@ class Base(BaseModel):
     container_id: Optional[UUID] = None
     slot_count: Optional[int] = None
     storage_containers: Optional[Dict[UUID, ItemContainer]] = Field(default=None)
+    pal_container: Optional[CharacterContainer] = None
 
-    _pal_container: CharacterContainer
     _base_save_data: Dict[str, Any] = PrivateAttr(default_factory=dict)
-    _raw_data: Dict[str, Any] = PrivateAttr(default_factory=dict)
 
     def __init__(
         self,
@@ -47,7 +46,7 @@ class Base(BaseModel):
         if data:
             self._base_save_data = data
         if character_container_save_data:
-            self._pal_container = CharacterContainer(
+            self.pal_container = CharacterContainer(
                 id=self.container_id,
                 player_uid=PalObjects.EMPTY_UUID,
                 type=CharacterContainerType.BASE,
@@ -65,12 +64,16 @@ class Base(BaseModel):
         self._id = PalObjects.as_uuid(self._base_save_data["key"])
         return self._id
 
+    @property
+    def save_data(self) -> Dict[str, Any]:
+        return self._base_save_data
+
     def add_pal(
         self, character_id: str, nickname: str, storage_slot: Optional[UUID] = None
     ) -> Pal | None:
         logger.debug("%s => %s (%s) #%s", self.id, character_id, nickname, storage_slot)
         new_pal_id = uuid.uuid4()
-        slot_idx = self._pal_container.add_pal(new_pal_id, storage_slot)
+        slot_idx = self.pal_container.add_pal(new_pal_id, storage_slot)
         if slot_idx is None:
             return
 
@@ -99,7 +102,7 @@ class Base(BaseModel):
 
     def clone_pal(self, pal: PalDTO) -> Pal | None:
         new_pal_id = uuid.uuid4()
-        slot_idx = self._pal_container.add_pal(new_pal_id)
+        slot_idx = self.pal_container.add_pal(new_pal_id)
         if slot_idx is None:
             return
         existing_pal = self.pals[pal.instance_id]
@@ -113,7 +116,7 @@ class Base(BaseModel):
     def delete_pal(self, pal_id: UUID):
         logger.debug("%s => %s", self.id, pal_id)
         del self.pals[pal_id]
-        self._pal_container.remove_pal(pal_id)
+        self.pal_container.remove_pal(pal_id)
 
     def update_from(self, other: BaseDTO):
         for id, container in other.storage_containers.items():

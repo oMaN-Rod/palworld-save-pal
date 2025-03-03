@@ -13,6 +13,7 @@ class SettingsDTO(BaseModel):
     language: str
     clone_prefix: str
     new_pal_prefix: str
+    debug_mode: bool
 
 
 class Settings(BaseModel):
@@ -21,6 +22,7 @@ class Settings(BaseModel):
     _clone_prefix: str = "©️"
     _new_pal_prefix: str = "🆕"
     _is_busy: bool = True
+    _debug_mode: bool = False
 
     def __init__(self):
         super().__init__()
@@ -60,6 +62,15 @@ class Settings(BaseModel):
     @new_pal_prefix.setter
     def new_pal_prefix(self, value: str):
         self._new_pal_prefix = value
+        self.write()
+
+    @computed_field
+    def debug_mode(self) -> bool:
+        return self._debug_mode
+
+    @debug_mode.setter
+    def debug_mode(self, value: bool):
+        self._debug_mode = value
         self.write()
 
     def write(self):

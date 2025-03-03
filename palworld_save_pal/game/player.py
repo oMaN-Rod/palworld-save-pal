@@ -69,9 +69,9 @@ class Player(BaseModel):
     weapon_load_out_container: Optional[ItemContainer] = Field(default=None)
     player_equipment_armor_container: Optional[ItemContainer] = Field(default=None)
     food_equip_container: Optional[ItemContainer] = Field(default=None)
+    pal_box: Optional[CharacterContainer] = Field(default=None)
+    party: Optional[CharacterContainer] = Field(default=None)
 
-    _pal_box: CharacterContainer
-    _party: CharacterContainer
     _player_gvas_file: GvasFile
     _save_data: Dict[str, Any]
     _inventory_info: Dict[str, Any]
@@ -370,6 +370,10 @@ class Player(BaseModel):
         )
         return self._otomo_container_id
 
+    @property
+    def character_save(self) -> Dict[str, Any]:
+        return self._character_save
+
     def add_pal(
         self,
         pal_code_name: str,
@@ -379,9 +383,9 @@ class Player(BaseModel):
     ) -> Optional[Pal]:
         new_pal_id = uuid.uuid4()
         container = (
-            self._pal_box
+            self.pal_box
             if are_equal_uuids(container_id, self.pal_box_id)
-            else self._party
+            else self.party
         )
         slot_idx = container.add_pal(new_pal_id, storage_slot)
         if slot_idx is None:
@@ -408,11 +412,11 @@ class Player(BaseModel):
     def move_pal(self, pal_id: UUID, container_id: UUID):
         pal = self.pals[pal_id]
         if are_equal_uuids(container_id, self.pal_box_id):
-            source_container = self._party
-            target_container = self._pal_box
+            source_container = self.party
+            target_container = self.pal_box
         elif are_equal_uuids(container_id, self.otomo_container_id):
-            source_container = self._pal_box
-            target_container = self._party
+            source_container = self.pal_box
+            target_container = self.party
         else:
             logger.error("Invalid container id %s", container_id)
             return
@@ -426,7 +430,7 @@ class Player(BaseModel):
 
     def clone_pal(self, pal: PalDTO) -> Optional[Pal]:
         new_pal_id = uuid.uuid4()
-        storage_slot = self._pal_box.add_pal(new_pal_id)
+        storage_slot = self.pal_box.add_pal(new_pal_id)
         if not storage_slot:
             return
         existing_pal = self.pals[pal.instance_id]
@@ -441,8 +445,8 @@ class Player(BaseModel):
 
     def delete_pal(self, pal_id: UUID):
         self.pals.pop(pal_id)
-        self._pal_box.remove_pal(pal_id)
-        self._party.remove_pal(pal_id)
+        self.pal_box.remove_pal(pal_id)
+        self.party.remove_pal(pal_id)
         if isinstance(self._guild, Guild):
             self._guild.delete_pal(pal_id)
 
@@ -483,7 +487,7 @@ class Player(BaseModel):
                     continue
 
     def _load_pal_box(self, character_container_save_data: Dict[str, Any]):
-        self._pal_box = CharacterContainer(
+        self.pal_box = CharacterContainer(
             id=self.pal_box_id,
             player_uid=self.uid,
             type=CharacterContainerType.PAL_BOX,
@@ -491,7 +495,7 @@ class Player(BaseModel):
         )
 
     def _load_otomo_container(self, character_container_save_data: Dict[str, Any]):
-        self._party = CharacterContainer(
+        self.party = CharacterContainer(
             id=self.otomo_container_id,
             player_uid=self.uid,
             type=CharacterContainerType.PARTY,

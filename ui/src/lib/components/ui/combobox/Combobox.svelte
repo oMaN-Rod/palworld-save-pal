@@ -62,12 +62,6 @@
 	});
 
 	$effect(() => {
-		value = selected;
-		isOpen = false;
-		onChange(selected);
-	});
-
-	$effect(() => {
 		if (searchTerm) {
 			debounceSearch();
 		} else {
@@ -95,9 +89,10 @@
 
 	function handleOptionClick(option: SelectOption) {
 		if (!disabled) {
-			selected = option.value.toString();
+			value = selected = option.value.toString();
 			searchTerm = option.label;
 			isOpen = false;
+			onChange(selected);
 		}
 	}
 

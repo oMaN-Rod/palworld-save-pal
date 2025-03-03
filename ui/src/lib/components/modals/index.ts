@@ -1,4 +1,5 @@
 import ConfirmModal from './confirm/ConfirmModal.svelte';
+import DebugModal from './debug/DebugModal.svelte';
 import ItemSelectModal from './item-select/ItemSelectModal.svelte';
 import LearnedSkillSelectModal from './learned-skill-select/LearnedSkillSelectModal.svelte';
 import NumberInputModal from './number-input/NumberInputModal.svelte';
@@ -12,6 +13,7 @@ import TextInputModal from './text-input/TextInputModal.svelte';
 
 export {
 	ConfirmModal,
+	DebugModal,
 	ItemSelectModal,
 	LearnedSkillSelectModal,
 	NumberInputModal,

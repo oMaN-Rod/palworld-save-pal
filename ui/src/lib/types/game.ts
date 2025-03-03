@@ -67,6 +67,22 @@ export type ExStatusPointList = {
 	work_speed: number;
 };
 
+export type CharacterContainerSlot = { slot_index: number; pal_id?: string };
+
+export enum CharacterContainerType {
+	PAL_BOX = 'PalBox',
+	PARTY = 'Party',
+	BASE = 'Base'
+}
+
+export type CharacterContainer = {
+	id: string;
+	player_uid: string;
+	type: CharacterContainerType;
+	size?: number;
+	slots?: CharacterContainerSlot[];
+};
+
 export type Player = {
 	uid: string;
 	nickname: string;
@@ -74,7 +90,9 @@ export type Player = {
 	hp: number;
 	pals?: Record<string, Pal>;
 	pal_box_id: string;
+	pal_box: CharacterContainer;
 	otomo_container_id: string;
+	party: CharacterContainer;
 	common_container: ItemContainer;
 	essential_container: ItemContainer;
 	weapon_load_out_container: ItemContainer;
@@ -97,7 +115,7 @@ export type Guild = {
 	bases: Record<string, Base>;
 	id: string;
 	name: string;
-	players: Player[];
+	players: string[];
 	container_id?: string;
 	guild_chest?: ItemContainer;
 };
@@ -106,6 +124,7 @@ export type Base = {
 	id: string;
 	pals: Record<string, Pal>;
 	container_id: string;
+	pal_container: CharacterContainer;
 	slot_count: number;
 	storage_containers: Record<string, ItemContainer>;
 	state: EntryState;

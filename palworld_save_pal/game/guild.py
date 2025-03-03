@@ -1,3 +1,4 @@
+import copy
 from typing import Any, Dict, List, Optional
 from uuid import UUID
 from pydantic import BaseModel, Field, PrivateAttr, computed_field
@@ -98,6 +99,13 @@ class Guild(BaseModel):
                 "container_id",
             )
         )
+
+    @property
+    def save_data(self) -> Dict[str, Any]:
+        result = copy.deepcopy(self._group_save_data)
+        if self._guild_extra_data:
+            result["guild_extra_data"] = self._guild_extra_data
+        return result
 
     def add_pal(self, pal_id: UUID):
         logger.debug("%s (%s) => %s", self.name, self.id, pal_id)

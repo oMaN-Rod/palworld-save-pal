@@ -6,6 +6,7 @@ import PassiveSkillBadge from './badges/passive-skill-badge/PassiveSkillBadge.sv
 import PlayerHealthBadge from './badges/player-health-badge/PlayerHealthBadge.svelte';
 import StatsBadges from './badges/stats-badges/StatsBadges.svelte';
 import WorkSuitabilities from './badges/work-suitabilities/WorkSuitabilities.svelte';
+import DebugButton from './debug-button/DebugButton.svelte';
 import Drawer from './drawer/Drawer.svelte';
 import GamepassSaveList from './gamepass-save-list/GamepassSaveList.svelte';
 import Modal from './modal/Modal.svelte';
@@ -25,6 +26,7 @@ import Toast from './toast/Toast.svelte';
 export * from './modals';
 export {
 	ActiveSkillBadge,
+	DebugButton,
 	Drawer,
 	GamepassSaveList,
 	HealthBadge,

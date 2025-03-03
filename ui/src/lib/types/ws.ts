@@ -27,7 +27,7 @@ export enum MessageType {
 	GET_ELEMENTS = 'get_elements',
 	GET_ITEMS = 'get_items',
 	GET_PALS = 'get_pals',
-	SET_TECHNOLOGY_DATA = "set_technology_data",
+	SET_TECHNOLOGY_DATA = 'set_technology_data',
 	OPEN_IN_BROWSER = 'open_in_browser',
 	GET_EXP_DATA = 'get_exp_data',
 	GET_VERSION = 'get_version',
@@ -41,7 +41,8 @@ export enum MessageType {
 	SELECT_GAMEPASS_SAVE = 'select_gamepass_save',
 	GET_SAVE_TYPE = 'get_save_type',
 	GET_WORK_SUITABILITY = 'get_work_suitability',
-	GET_BUILDINGS = 'get_buildings'
+	GET_BUILDINGS = 'get_buildings',
+	GET_RAW_DATA = 'get_raw_data'
 }
 
 interface UpdateSaveFileData {

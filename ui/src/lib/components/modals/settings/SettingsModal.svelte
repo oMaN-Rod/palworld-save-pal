@@ -3,6 +3,7 @@
 	import { X, Save } from 'lucide-svelte';
 	import { languages } from '$types';
 	import type { AppSettings, SelectOption } from '$types';
+	import { Switch } from '@skeletonlabs/skeleton-svelte';
 
 	let {
 		title = 'Select Language',
@@ -27,25 +28,30 @@
 		<Combobox options={languageOptions} bind:value={settings.language} label="Language" />
 		<Input bind:value={settings.clone_prefix} label="Clone Prefix" />
 		<Input bind:value={settings.new_pal_prefix} label="New Pal Prefix" />
+		<div class="flex space-x-2">
+			<Switch
+				checked={settings.debug_mode}
+				onCheckedChange={(mode) => {
+					settings.debug_mode = mode.checked;
+				}}
+				name="debug_mode"
+				label="Debug Mode"
+			/>
+			<span>Debug Mode</span>
+		</div>
 	</div>
 
 	<div class="mt-2 flex justify-end space-x-2">
-		<Tooltip position="bottom">
+		<Tooltip position="bottom" label="Save">
 			<button class="btn hover:bg-secondary-500/25 px-2" onclick={() => closeModal(settings)}>
 				<Save />
 			</button>
-			{#snippet popup()}
-				<span>Save</span>
-			{/snippet}
 		</Tooltip>
 
-		<Tooltip position="bottom">
+		<Tooltip position="bottom" label="Cancel">
 			<button class="btn hover:bg-secondary-500/25 px-2" onclick={() => closeModal(null)}>
 				<X />
 			</button>
-			{#snippet popup()}
-				<span>Cancel</span>
-			{/snippet}
 		</Tooltip>
 	</div>
 </Card>
