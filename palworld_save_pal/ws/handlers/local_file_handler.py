@@ -129,10 +129,10 @@ async def save_modded_gamepass_save(world_name: str, ws: WebSocket, ws_callback)
             world_name=world_name,
         )
 
-        await ws_callback(f"Modded save created as: {new_save_id}")
+        await ws_callback(f"Modded save created")
         response = build_response(
             MessageType.SAVE_MODDED_SAVE,
-            f"Created modded save as: {new_save_id}",
+            f"Created modded save",
         )
         await ws.send_json(response)
 
@@ -153,7 +153,7 @@ async def save_modded_steam_save(ws: WebSocket, ws_callback, save_file: SaveFile
     player_save_dir = os.path.join(app_state.settings.save_dir, "Players")
     save_file.to_player_sav_files(player_save_dir)
     response = build_response(
-        MessageType.SAVE_MODDED_SAVE, f"Modded save file saved to {save_file.name}"
+        MessageType.SAVE_MODDED_SAVE, f"Modded save file saved successfully"
     )
     await ws.send_json(response)
 

@@ -21,6 +21,20 @@
 	const xboxIcon = assetLoader.loadSvg(`${ASSET_DATA_PATH}/img/app/xbox.svg`);
 	const morpheus = assetLoader.loadImage(`${ASSET_DATA_PATH}/img/app/morpheus.png`);
 
+	const totalPals = $derived.by(() => {
+		return Object.values(appState.players).reduce(
+			(total: number, player) => total + (player.pals ? Object.values(player.pals).length : 0),
+			0
+		);
+	});
+
+	const totalBases = $derived.by(() => {
+		return Object.values(appState.guilds).reduce(
+			(total: number, guild) => total + (guild.bases ? Object.values(guild.bases).length : 0),
+			0
+		);
+	});
+
 	function splitPath(path: string) {
 		if (!path) {
 			return {
@@ -133,17 +147,17 @@
 		{@const { directory, filename } = splitPath(appState.saveFile.name)}
 		{@render pickYourPoison('sm')}
 		<Card class="min-w-96">
-			<div class="flex flex-col">
-				<h4 class="h4">Loaded Files</h4>
-				<p class="text"><strong>Path:</strong> {directory}</p>
-				<p class="text"><strong>Level:</strong> {filename}</p>
-				<p class="text"><strong>World Name:</strong> {appState.saveFile.world_name}</p>
-				<p class="text"><strong>Players ({appState.playerSaveFiles.length}):</strong></p>
-				<ul class="hidden max-h-36 list-inside list-disc overflow-y-scroll 2xl:block">
-					{#each appState.playerSaveFiles as playerSaveFile}
-						<li>{playerSaveFile.name.replace(/-/g, '').toUpperCase()}.sav</li>
-					{/each}
-				</ul>
+			<div class="grid grid-cols-[auto_1fr]">
+				<span class="font-bold">World Name:</span>
+				<span class="text-end"> {appState.saveFile.world_name}</span>
+				<span class="font-bold">Players:</span>
+				<span class="text-end"> {appState.playerSaveFiles.length}</span>
+				<span class="font-bold">Pals:</span>
+				<span class="text-end"> {totalPals}</span>
+				<span class="font-bold">Guilds:</span>
+				<span class="text-end"> {Object.values(appState.guilds).length}</span>
+				<span class="font-bold">Bases:</span>
+				<span class="text-end"> {totalBases}</span>
 			</div>
 		</Card>
 	{:else if appState.gamepassSaves && Object.keys(appState.gamepassSaves).length > 0}
