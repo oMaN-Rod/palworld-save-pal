@@ -185,25 +185,17 @@ class SaveFile(BaseModel):
 
         return False
 
-    def delete_player_and_guild(self, player_id: UUID) -> None:
-        player = self._players.get(player_id)
-        if not player:
-            raise ValueError(f"Player {player_id} not found in the save file.")
-                
-        guild_id = player.guild_id
-
+    def delete_guild(self, guild_id: UUID) -> None:
         self._map_object_save_data["values"] = [
             map_object for map_object in self._map_object_save_data["values"]
-            if not self._should_delete_map_object(map_object, guild_id, player_id)
+            if not self._should_delete_map_object(map_object, guild_id)
         ]
-        
-        player_to_remove = self._players.pop(player_id)
-        
-        player_to_remove.nuke()
-        
-        guild = self._player_guild(player_id)
+                
+        guild = self._guilds.get(guild_id)
         if guild:
             guild.nuke()
+        
+        del self._guilds[guild_id]
 
     def add_player_pal(
         self,

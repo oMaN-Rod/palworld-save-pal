@@ -49,6 +49,9 @@ class MessageType(str, Enum):
     GET_PRESETS = "get_presets"
     UPDATE_PRESET = "update_preset"
 
+    # Guild Management
+    DELETE_GUILD = "delete_guild"
+
     # Save File Management
     DOWNLOAD_SAVE_FILE = "download_save_file"
     LOADED_SAVE_FILES = "loaded_save_files"
@@ -296,7 +299,12 @@ class TechnologyData(BaseModel):
     techPoints: int = None
     ancientTechPoints: int = None
 
-
 class SetTechnologyDataMessage(BaseModel):
     type: str = MessageType.SET_TECHNOLOGY_DATA.value
     data: TechnologyData
+
+class DeleteGuildMessage(BaseModel):
+    type: str = MessageType.DELETE_GUILD.value
+
+class DeleteGuildData(BaseModel):
+    guild_id: UUID

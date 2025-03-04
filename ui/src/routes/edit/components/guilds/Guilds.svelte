@@ -680,6 +680,36 @@
 							href={`/debug?guildId=${playerGuild.id}&baseId=${currentBase[1].id}`}
 						/>
 					{/if}
+					<h4 class="h4">{playerGuild!.name}</h4>
+					<Tooltip label="Delete entire guild">
+						<button 
+							class="btn hover:bg-red-500/50 p-2"
+							onclick={async () => {
+								const confirmed = await modal.showConfirmModal({
+									title: 'Delete Guild',
+									message: 'Are you sure you want to delete this guild? This action cannot be undone.',
+									confirmText: 'Delete',
+									cancelText: 'Cancel',
+								});
+								if (confirmed) {
+									const message = {
+										type: MessageType.DELETE_GUILD,
+										data: {
+											guild_id: playerGuild?.id
+										}
+									};
+									const response = await ws.sendAndWait(JSON.stringify(message));
+									if (response.success) {
+										toast.add('Guild deleted successfully', 'Success');
+									} else {
+										toast.add('Failed to delete guild', 'Error');
+									}
+								}
+							}}
+						>
+							<Trash class="h-4 w-4" />
+						</button>
+					</Tooltip>
 				</div>
 
 				<nav

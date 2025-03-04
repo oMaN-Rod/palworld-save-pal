@@ -282,7 +282,6 @@ class ItemContainer(BaseModel):
         logger.debug("%s (%s) => %s\n%s", self.type, self.id, slot, item)
 
     def nuke(self) -> None:
-        self.slots = []
         self._container_slots_data = []
         self._dynamic_item_save_data = []
         self._container = {}
