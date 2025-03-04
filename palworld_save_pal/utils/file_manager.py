@@ -21,7 +21,7 @@ FILETIME_EPOCH = datetime(1601, 1, 1, tzinfo=timezone.utc)
 STEAM_ROOT = (
     os.path.join(os.getenv("LOCALAPPDATA"), "Pal", "Saved", "SaveGames")
     if os.name == "nt"
-    else None
+    else "~"
 )
 GAMEPASS_ROOT = (
     os.path.join(
@@ -32,7 +32,7 @@ GAMEPASS_ROOT = (
         "wgs",
     )
     if os.name == "nt"
-    else None
+    else "~"
 )
 
 
