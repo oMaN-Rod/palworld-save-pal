@@ -1,8 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { Combobox, Tooltip } from '$components/ui';
-	import SectionHeader from '$components/ui/section-header/SectionHeader.svelte';
-	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { buildingsData } from '$lib/data';
 	import { getAppState, getSocketState } from '$states';
 	import {
@@ -14,7 +12,6 @@
 		type Pal,
 		type Player
 	} from '$types';
-	import { assetLoader } from '$utils';
 	import { Switch, Tabs } from '@skeletonlabs/skeleton-svelte';
 	import { Eye, EyeOff, RefreshCcw } from 'lucide-svelte';
 	import { onMount } from 'svelte';
@@ -28,8 +25,6 @@
 
 	const ws = getSocketState();
 	const appState = getAppState();
-	const raw = assetLoader.loadSvg(`${ASSET_DATA_PATH}/img/app/raw.svg`);
-	const straped = assetLoader.loadSvg(`${ASSET_DATA_PATH}/img/app/straped.svg`);
 
 	let jsons: Record<RawDataType, JsonContent> = $state({
 		guild: { content: { text: '' } },
@@ -470,14 +465,10 @@
 					compact
 				>
 					{#snippet inactiveChild()}
-						<div class="text-surface-50 h-6 w-6">
-							{@html straped}
-						</div>
+						<EyeOff size="20" />
 					{/snippet}
 					{#snippet activeChild()}
-						<div class="text-surface-50 h-6 w-6">
-							{@html raw}
-						</div>
+						<Eye size="20" />
 					{/snippet}
 				</Switch>
 			</Tooltip>
@@ -501,14 +492,10 @@
 						compact
 					>
 						{#snippet inactiveChild()}
-							<div class="text-surface-50 h-6 w-6">
-								{@html straped}
-							</div>
+							<EyeOff size="20" />
 						{/snippet}
 						{#snippet activeChild()}
-							<div class="text-surface-50 h-6 w-6">
-								{@html raw}
-							</div>
+							<Eye size="20" />
 						{/snippet}
 					</Switch>
 				</Tooltip>
@@ -533,14 +520,10 @@
 					compact
 				>
 					{#snippet inactiveChild()}
-						<div class="text-surface-50 h-6 w-6">
-							{@html straped}
-						</div>
+						<EyeOff size="20" />
 					{/snippet}
 					{#snippet activeChild()}
-						<div class="text-surface-50 h-6 w-6">
-							{@html raw}
-						</div>
+						<Eye size="20" />
 					{/snippet}
 				</Switch>
 			</Tooltip>
@@ -565,14 +548,10 @@
 						compact
 					>
 						{#snippet inactiveChild()}
-							<div class="text-surface-50 h-6 w-6">
-								{@html straped}
-							</div>
+							<EyeOff size="20" />>
 						{/snippet}
 						{#snippet activeChild()}
-							<div class="text-surface-50 h-6 w-6">
-								{@html raw}
-							</div>
+							<Eye size="20" />
 						{/snippet}
 					</Switch>
 				</Tooltip>
@@ -602,14 +581,10 @@
 						compact
 					>
 						{#snippet inactiveChild()}
-							<div class="text-surface-50 h-6 w-6">
-								{@html straped}
-							</div>
+							<EyeOff size="20" />>
 						{/snippet}
 						{#snippet activeChild()}
-							<div class="text-surface-50 h-6 w-6">
-								{@html raw}
-							</div>
+							<Eye size="20" />
 						{/snippet}
 					</Switch>
 				</Tooltip>
@@ -637,14 +612,10 @@
 						compact
 					>
 						{#snippet inactiveChild()}
-							<div class="text-surface-50 h-6 w-6">
-								{@html straped}
-							</div>
+							<EyeOff size="20" />>
 						{/snippet}
 						{#snippet activeChild()}
-							<div class="text-surface-50 h-6 w-6">
-								{@html raw}
-							</div>
+							<Eye size="20" />
 						{/snippet}
 					</Switch>
 				</Tooltip>
