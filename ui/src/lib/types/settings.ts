@@ -28,4 +28,5 @@ export interface AppSettings {
 	save_dir?: string;
 	clone_prefix?: string;
 	new_pal_prefix?: string;
+	debug_mode?: boolean;
 }

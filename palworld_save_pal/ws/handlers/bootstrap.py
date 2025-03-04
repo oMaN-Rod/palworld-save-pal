@@ -4,6 +4,7 @@ from palworld_save_pal.ws.handlers import (
     active_skills_handler,
     app_state_handler,
     buildings_handler,
+    debug_handler,
     elements_handler,
     exp_handler,
     items_handler,
@@ -30,6 +31,7 @@ from palworld_save_pal.ws.messages import (
     GetItemsMessage,
     GetPalsMessage,
     GetPassiveSkillsMessage,
+    GetRawDataMessage,
     GetSettingsMessage,
     GetTechnologiesMessage,
     GetWorkSuitabilityMessage,
@@ -169,7 +171,7 @@ def bootstrap(dispatcher: "MessageDispatcher"):
             "handler_func": passive_skills_handler.get_passive_skills_handler,
         },
     )
-    
+
     dispatcher.register_handler(
         MessageType.GET_TECHNOLOGIES.value,
         {
@@ -311,5 +313,13 @@ def bootstrap(dispatcher: "MessageDispatcher"):
         {
             "message_class": GetBuildingsMessage,
             "handler_func": buildings_handler.get_buildings_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.GET_RAW_DATA.value,
+        {
+            "message_class": GetRawDataMessage,
+            "handler_func": debug_handler.get_raw_data_handler,
         },
     )

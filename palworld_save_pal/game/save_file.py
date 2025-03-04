@@ -277,14 +277,42 @@ class SaveFile(BaseModel):
             allow_nan=allow_nan,
         )
 
+    def get_pal(self, pal_id: UUID) -> Pal:
+        return self._pals.get(pal_id)
+
     def get_pals(self):
         return self._pals
 
     def get_players(self):
         return self._players
 
+    def get_player(self, player_id: UUID) -> Player:
+        return self._players.get(player_id)
+
+    def get_guild(self, guild_id: UUID) -> Guild:
+        return self._guilds.get(guild_id)
+
     def get_guilds(self):
         return self._guilds
+
+    def get_base(self, base_id: UUID) -> Base:
+        for guild in self._guilds.values():
+            base = guild.bases.get(base_id)
+            if base:
+                return base
+        return None
+
+    def get_character_container(self, container_id: UUID) -> Dict[str, Any]:
+        for entry in self._character_container_save_data:
+            if are_equal_uuids(PalObjects.get_guid(entry["key"]["ID"]), container_id):
+                return entry
+        return None
+
+    def get_item_container(self, container_id: UUID) -> Dict[str, Any]:
+        for entry in self._item_container_save_data:
+            if are_equal_uuids(PalObjects.get_guid(entry["key"]["ID"]), container_id):
+                return entry
+        return None
 
     def load_json(self, data: bytes):
         logger.info("Loading %s as JSON", self.name)

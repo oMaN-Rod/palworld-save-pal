@@ -72,6 +72,10 @@ class MessageType(str, Enum):
     # Utility
     OPEN_IN_BROWSER = "open_in_browser"  # remove
 
+    # Debug
+    GET_GUILD_RAW_DATA = "get_guild_raw_data"
+    GET_RAW_DATA = "get_raw_data"
+
 
 class AddPalData(BaseModel):
     player_id: Optional[UUID] = None
@@ -267,14 +271,31 @@ class HealAllPalsMessage(BaseMessage):
 class GetBuildingsMessage(BaseModel):
     type: str = MessageType.GET_BUILDINGS.value
 
+
+class GetRawDataData(BaseModel):
+    guild_id: Optional[UUID] = None
+    player_id: Optional[UUID] = None
+    pal_id: Optional[UUID] = None
+    base_id: Optional[UUID] = None
+    item_container_id: Optional[UUID] = None
+    character_container_id: Optional[UUID] = None
+
+
+class GetRawDataMessage(BaseModel):
+    type: str = MessageType.GET_RAW_DATA.value
+    data: GetRawDataData
+
+
 class GetTechnologiesMessage(BaseModel):
     type: str = MessageType.GET_TECHNOLOGIES.value
+
 
 class TechnologyData(BaseModel):
     playerID: UUID = None
     technologies: List[str] = None
     techPoints: int = None
     ancientTechPoints: int = None
+
 
 class SetTechnologyDataMessage(BaseModel):
     type: str = MessageType.SET_TECHNOLOGY_DATA.value

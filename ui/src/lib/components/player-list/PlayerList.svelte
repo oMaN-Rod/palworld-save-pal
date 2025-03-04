@@ -5,7 +5,9 @@
 
 	let appState = getAppState();
 
-	let { ...additionalProps } = $props<{
+	let { selected, onselect, ...additionalProps } = $props<{
+		selected?: string;
+		onselect: (player: Player) => void;
 		[key: string]: any;
 	}>();
 
@@ -15,16 +17,13 @@
 			label: player.nickname || `Player ${uid}`
 		}))
 	);
-
-	$effect(() => {
-		appState.selectedPlayer = appState.players[appState.selectedPlayerUid];
-	});
 </script>
 
 <div class="w-full" {...additionalProps}>
 	<Combobox
+		value={selected}
 		options={selectOptions}
-		bind:value={appState.selectedPlayerUid}
 		placeholder="Select Player"
+		onChange={(value) => onselect(appState.players[value])}
 	/>
 </div>

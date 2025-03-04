@@ -264,7 +264,10 @@
 						<div class="flex gap-4">
 							{#each techIDs as techID}
 								{@const technologyItem = technologiesData.technologies[techID]}
-								{@const isSelected = appState.selectedPlayer.technologies.includes(techID)}
+								{@const isSelected =
+									Number(levelCap) === 1
+										? true
+										: appState.selectedPlayer.technologies.includes(techID)}
 								{#if !technologyItem.details.is_boss_technology}
 									{@render technologyButton(techID, isSelected, technologyItem, 'tech')}
 								{/if}
