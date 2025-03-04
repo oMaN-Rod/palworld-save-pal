@@ -42,7 +42,8 @@ export enum MessageType {
 	GET_SAVE_TYPE = 'get_save_type',
 	GET_WORK_SUITABILITY = 'get_work_suitability',
 	GET_BUILDINGS = 'get_buildings',
-	GET_RAW_DATA = 'get_raw_data'
+	GET_RAW_DATA = 'get_raw_data',
+	DELETE_GUILD = 'delete_guild',
 }
 
 interface UpdateSaveFileData {
