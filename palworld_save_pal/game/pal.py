@@ -148,10 +148,18 @@ class Pal(BaseModel):
         else:
             self._character_key = self.character_id
 
-        if self._character_key.lower() == "sheepball":
-            self._character_key = "Sheepball"
-        if self._character_key.lower() == "lazycatfish":
-            self._character_key = "LazyCatfish"
+        key_mapping = {
+            "sheepball": "Sheepball",
+            "lazycatfish": "LazyCatfish",
+            "icedeer": "IceDeer",
+            "blueplatypus": "BluePlatypus",
+            "mopking": "MopKing",
+        }
+
+        lowercase_key = self._character_key.lower()
+        if lowercase_key in key_mapping:
+            self._character_key = key_mapping[lowercase_key]
+
         return self._character_key
 
     @computed_field
