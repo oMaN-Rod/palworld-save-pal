@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { DebugModal, PresetConfigModal, TextInputModal } from '$components';
+	import { PresetConfigModal, TextInputModal } from '$components';
 	import { CornerDotButton, Progress, Tooltip } from '$components/ui';
 	import {
 		defaultPresetConfig,
