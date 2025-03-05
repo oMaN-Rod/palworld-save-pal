@@ -548,7 +548,7 @@
 						compact
 					>
 						{#snippet inactiveChild()}
-							<EyeOff size="20" />>
+							<EyeOff size="20" />
 						{/snippet}
 						{#snippet activeChild()}
 							<Eye size="20" />
@@ -581,7 +581,7 @@
 						compact
 					>
 						{#snippet inactiveChild()}
-							<EyeOff size="20" />>
+							<EyeOff size="20" />
 						{/snippet}
 						{#snippet activeChild()}
 							<Eye size="20" />
@@ -612,7 +612,7 @@
 						compact
 					>
 						{#snippet inactiveChild()}
-							<EyeOff size="20" />>
+							<EyeOff size="20" />
 						{/snippet}
 						{#snippet activeChild()}
 							<Eye size="20" />
