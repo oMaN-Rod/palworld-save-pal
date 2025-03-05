@@ -1,6 +1,6 @@
 from fastapi import WebSocket
 from palworld_save_pal.ws.messages import (
-    DeleteGuildData,
+    DeleteGuildMessage,
     MessageType,
 )
 from palworld_save_pal.ws.utils import build_response
@@ -9,8 +9,8 @@ from palworld_save_pal.state import get_app_state
 
 logger = create_logger(__name__)
 
-async def delete_guild_handler(message: DeleteGuildData, ws: WebSocket):
-    guild_id = message.guild_id
+async def delete_guild_handler(message: DeleteGuildMessage, ws: WebSocket):
+    guild_id = message.data.guild_id
     
     app_state = get_app_state()
     save_file = app_state.save_file
