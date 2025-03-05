@@ -157,31 +157,11 @@ class SaveFile(BaseModel):
     _map_object_save_data: List[Dict[str, Any]] = PrivateAttr(default_factory=list)
     _guild_extra_save_data_map: List[Dict[str, Any]] = PrivateAttr(default_factory=list)
 
-    def _should_delete_map_object(self, map_object: dict, guild_id: UUID, player_id: UUID) -> bool:
+    def _should_delete_map_object(self, map_object: dict, guild_id: UUID) -> bool:
         raw_data = map_object["Model"]["value"]["RawData"]["value"]
         group_id = PalObjects.as_uuid(raw_data.get("group_id_belong_to"))
-        build_player_uid = PalObjects.as_uuid(raw_data.get("build_player_uid"))
-        if are_equal_uuids(group_id, guild_id) or are_equal_uuids(build_player_uid, player_id):
+        if are_equal_uuids(group_id, guild_id):
             return True
-
-        # Handle edge cases
-        if "ConcreteModel" in map_object:
-            concrete_model_raw_data = map_object["ConcreteModel"]["value"]["RawData"]["value"]
-            private_lock_player_uid = PalObjects.as_uuid(concrete_model_raw_data.get("private_lock_player_uid"))
-            if are_equal_uuids(private_lock_player_uid, player_id):
-                return True
-
-            for trade_info in concrete_model_raw_data.get("trade_infos", []):
-                seller_player_uid = PalObjects.as_uuid(trade_info.get("seller_player_uid"))
-                if are_equal_uuids(seller_player_uid, player_id):
-                    return True
-
-            for module in concrete_model_raw_data.get("ModuleMap", {}).get("value", []):
-                if module["key"] == "EPalMapObjectConcreteModelModuleType::PasswordLock":
-                    for player_info in module["value"]["RawData"]["value"].get("player_infos", []):
-                        player_uid = PalObjects.as_uuid(player_info.get("player_uid"))
-                        if are_equal_uuids(player_uid, player_id):
-                            return True
 
         return False
 
@@ -190,7 +170,7 @@ class SaveFile(BaseModel):
             map_object for map_object in self._map_object_save_data["values"]
             if not self._should_delete_map_object(map_object, guild_id)
         ]
-                
+
         guild = self._guilds.get(guild_id)
         if guild:
             guild.nuke()

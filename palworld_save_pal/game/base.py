@@ -166,8 +166,8 @@ class Base(BaseModel):
                     )
     
     def nuke(self):
-        if self._pal_container:
-            self._pal_container.nuke()
+        if self.pal_container:
+            self.pal_container.nuke()
             
         for container in self.storage_containers.values():
             container.nuke()

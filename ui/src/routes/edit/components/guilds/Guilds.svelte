@@ -680,7 +680,6 @@
 							href={`/debug?guildId=${playerGuild.id}&baseId=${currentBase[1].id}`}
 						/>
 					{/if}
-					<h4 class="h4">{playerGuild!.name}</h4>
 					<Tooltip label="Delete entire guild">
 						<button 
 							class="btn hover:bg-red-500/50 p-2"
@@ -698,7 +697,7 @@
 											guild_id: playerGuild?.id
 										}
 									};
-									const response = await ws.sendAndWait(JSON.stringify(message));
+									const response = await ws.sendAndWait(message);
 									if (response.success) {
 										toast.add('Guild deleted successfully', 'Success');
 									} else {

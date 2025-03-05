@@ -7,6 +7,7 @@ from palworld_save_pal.ws.handlers import (
     debug_handler,
     elements_handler,
     exp_handler,
+    guild_handler,
     items_handler,
     open_in_browser_handler,
     passive_skills_handler,
@@ -217,7 +218,7 @@ def bootstrap(dispatcher: "MessageDispatcher"):
         MessageType.DELETE_GUILD.value,
         {
             "message_class": DeleteGuildMessage,
-            "handler_func": pal_handler.delete_pals_handler,
+            "handler_func": guild_handler.delete_guild_handler,
         },
     )
 

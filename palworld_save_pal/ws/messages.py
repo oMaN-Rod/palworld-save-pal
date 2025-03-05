@@ -303,8 +303,10 @@ class SetTechnologyDataMessage(BaseModel):
     type: str = MessageType.SET_TECHNOLOGY_DATA.value
     data: TechnologyData
 
-class DeleteGuildMessage(BaseModel):
-    type: str = MessageType.DELETE_GUILD.value
-
 class DeleteGuildData(BaseModel):
     guild_id: UUID
+
+class DeleteGuildMessage(BaseModel):
+    type: str = MessageType.DELETE_GUILD.value
+    data: DeleteGuildData
+
