@@ -5,7 +5,7 @@
 	import { getModalState } from '$states';
 	import { cn } from '$theme';
 	import { type PassiveSkill, type PresetProfile, type SelectOption } from '$types';
-	import { assetLoader, calculateFilters } from '$utils';
+	import { assetLoader, calculateFilters, deepCopy } from '$utils';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import { Play, Trash } from 'lucide-svelte';
 
@@ -74,7 +74,7 @@
 				? activeSkillPresets.find((p) => p.id === selectedActiveSkillPreset)
 				: passiveSkillPresets.find((p) => p.id === selectedPassiveSkillPreset);
 		if (!preset) return;
-		onSelect(type, preset.skills);
+		onSelect(type, deepCopy(preset.skills));
 	}
 
 	async function handleDeletePreset(type: 'active' | 'passive') {
@@ -88,13 +88,6 @@
 		});
 		if (!confirmed) return;
 		await presetsData.removePresetProfiles([presetId]);
-	}
-
-	async function getPassiveSkillIcon(skillId: string): Promise<string | undefined> {
-		const skill = Object.values(passiveSkillsData.passiveSkills).find((s) => s.id === skillId);
-		if (!skill || skill.localized_name === 'None') return undefined;
-		const passiveSkill = skill as PassiveSkill;
-		return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/rank_${passiveSkill.details.rank}.png`);
 	}
 
 	function getPassiveSkillIconFilter(skillId: string): string {
