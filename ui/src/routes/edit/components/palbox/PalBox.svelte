@@ -62,6 +62,7 @@
 	let selectedPals: string[] = $state([]);
 	let sortBy: SortBy = $state('slot-index');
 	let sortOrder: SortOrder = $state('asc');
+	let filterExpand = $state(['']);
 
 	type PalWithData = {
 		id: string;
@@ -763,7 +764,7 @@
 					</Tooltip>
 				{/if}
 			</div>
-			<Accordion collapsible>
+			<Accordion value={filterExpand} onValueChange={(e) => (filterExpand = e.value)} collapsible>
 				<Accordion.Item
 					value="filter"
 					base="rounded-sm bg-surface-900"

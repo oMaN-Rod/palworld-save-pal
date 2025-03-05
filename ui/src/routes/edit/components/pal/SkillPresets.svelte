@@ -15,6 +15,7 @@
 
 	const modal = getModalState();
 	const backgroundImage = assetLoader.loadImage(`${ASSET_DATA_PATH}/img/bg.png`);
+	let selected: string[] = $state(['passive']);
 
 	type ExtendedPresetProfile = PresetProfile & { id: string };
 
@@ -93,9 +94,7 @@
 		const skill = Object.values(passiveSkillsData.passiveSkills).find((s) => s.id === skillId);
 		if (!skill || skill.localized_name === 'None') return undefined;
 		const passiveSkill = skill as PassiveSkill;
-		return assetLoader.loadImage(
-			`${ASSET_DATA_PATH}/img/rank_${passiveSkill.details.rank}.png`
-		);
+		return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/rank_${passiveSkill.details.rank}.png`);
 	}
 
 	function getPassiveSkillIconFilter(skillId: string): string {
@@ -132,7 +131,7 @@
 	}
 </script>
 
-<Accordion value={['passive']}>
+<Accordion value={selected} onValueChange={(e) => (selected = e.value)} collapsible>
 	<Accordion.Item value="active" controlHover="hover:preset-tonal-secondary">
 		{#snippet control()}
 			Active Skills
@@ -157,7 +156,7 @@
 										{#if skillObj}
 											{@const icon = elementIcons[skillObj.details.element]}
 											<div
-												class="text-surface-400 border-surface-600 r flex items-center space-x-1 rounded-xs border p-0.5"
+												class="text-surface-400 border-surface-600 r rounded-xs flex items-center space-x-1 border p-0.5"
 											>
 												<img src={icon} alt={skillObj.details.element} class="h-4 w-4" />
 												<span class="grow text-xs">

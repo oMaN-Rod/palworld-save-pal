@@ -13,6 +13,7 @@
 	}
 
 	const error = $derived($page.state) as Error;
+	let errorExpand = $state(['']);
 
 	function copyErrorToClipboard() {
 		const errorText = `${error.message}\n\n${error.trace}`;
@@ -35,7 +36,12 @@
 			<h1 class="text-4xl font-bold">Oops... Something went wrong</h1>
 		</div>
 
-		<Accordion classes="mt-4 bg-surface-800" collapsible>
+		<Accordion
+			value={errorExpand}
+			onValueChange={(e) => (errorExpand = e.value)}
+			classes="mt-4 bg-surface-800"
+			collapsible
+		>
 			<Accordion.Item value="error">
 				{#snippet control()}
 					<div class="flex w-full items-center justify-between">

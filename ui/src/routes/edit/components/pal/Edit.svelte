@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { DebugButton, HealthBadge, PalHeader } from '$components';
-
+	import { HealthBadge, PalHeader } from '$components';
 	import {
 		ActiveSkillBadge,
 		PassiveSkillBadge,
@@ -14,23 +13,23 @@
 	import { EntryState, type PresetProfile, type WorkSuitability } from '$types';
 	import { staticIcons } from '$lib/constants';
 	import { palsData, expData, presetsData } from '$lib/data';
-	import { getAppState, getModalState, getToastState } from '$states';
-	import { BicepsFlexed, Brain, Bug, Save } from 'lucide-svelte';
+	import { getAppState, getModalState } from '$states';
+	import { BicepsFlexed, Brain, Save } from 'lucide-svelte';
 	import { Souls } from '$components';
 	import SkillPresets from './SkillPresets.svelte';
 	import { assetLoader, calculateFilters } from '$utils';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
-	import { goto } from '$app/navigation';
 
 	const appState = getAppState();
 	const modal = getModalState();
-	const toast = getToastState();
 
 	let palLevelProgressToNext: number = $state(0);
 	let palLevelProgressValue: number = $state(0);
 	let palLevelProgressMax: number = $state(1);
+	let leftAccordionValue: string[] = $state(['active_skills']);
+	let rightAccordionValue: string[] = $state(['stats']);
 
-	let palImage = $derived.by(() => {
+	const palImage = $derived.by(() => {
 		if (appState.selectedPal) {
 			const { character_key } = appState.selectedPal;
 			const palData = palsData.pals[character_key];
@@ -38,7 +37,7 @@
 		}
 	});
 
-	let activeSkills = $derived.by(() => {
+	const activeSkills = $derived.by(() => {
 		if (appState.selectedPal) {
 			let skills = [...appState.selectedPal.active_skills];
 			while (skills.length < 3) {
@@ -50,7 +49,7 @@
 		}
 	});
 
-	let passiveSkills = $derived.by(() => {
+	const passiveSkills = $derived.by(() => {
 		if (appState.selectedPal) {
 			let skills = [...appState.selectedPal.passive_skills];
 			while (skills.length < 4) {
@@ -353,7 +352,12 @@
 					</div>
 				</div>
 				<div class="mt-4 2xl:hidden">
-					<Accordion classes="min-w-96 max-w-96" value={['active_skills']} collapsible>
+					<Accordion
+						classes="min-w-96 max-w-96"
+						value={leftAccordionValue}
+						onValueChange={(e) => (leftAccordionValue = e.value)}
+						collapsible
+					>
 						<Accordion.Item value="active_skills" controlHover="hover:bg-secondary-500/25">
 							{#snippet control()}
 								{@render activeSkillsHeader()}
@@ -440,7 +444,12 @@
 			</div>
 			<div class="flex flex-col space-y-2 2xl:hidden">
 				<HealthBadge bind:pal={appState.selectedPal} />
-				<Accordion classes="min-w-96" value={['stats']} collapsible>
+				<Accordion
+					classes="min-w-96"
+					value={rightAccordionValue}
+					onValueChange={(e) => (rightAccordionValue = e.value)}
+					collapsible
+				>
 					<Accordion.Item value="stats" controlHover="hover:bg-secondary-500/25">
 						{#snippet control()}
 							<SectionHeader text="Stats" />

@@ -561,35 +561,39 @@
 					</Tabs>
 				</div>
 				<!-- Player Equip -->
-				<div class="grid h-[600px] grid-cols-[auto_1fr_auto]">
+				<div class="flex h-[600px] flex-col 2xl:grid 2xl:grid-cols-[auto_1fr_auto]">
 					<div class="flex flex-col space-y-2">
-						<ItemHeader text="Weapon" />
-						<div class="flex max-w-[65px] flex-col space-y-2">
-							{#each Object.values(weaponLoadOutContainer.slots) as _, index}
-								<ItemBadge
-									bind:slot={weaponLoadOutContainer.slots[index]}
-									itemGroup="Weapon"
-									onCopyPaste={(event) =>
-										handleCopyPaste(event, weaponLoadOutContainer.slots[index], false)}
-									onUpdate={onItemUpdate}
-								/>
-							{/each}
-						</div>
-						<ItemHeader text="Accessory" />
-						<div class="ml-2">
-							<div class="grid max-h-36 max-w-36 grid-cols-2 gap-2">
-								{#each accessoryGear as _, index}
+						<div class="flex flex-col space-y-2">
+							<ItemHeader text="Weapon" />
+							<div class="flex space-x-2 2xl:flex-col 2xl:space-y-2">
+								{#each Object.values(weaponLoadOutContainer.slots) as _, index}
 									<ItemBadge
-										bind:slot={accessoryGear[index]}
-										itemGroup="Accessory"
-										onCopyPaste={(event) => handleCopyPaste(event, accessoryGear[index], false)}
+										bind:slot={weaponLoadOutContainer.slots[index]}
+										itemGroup="Weapon"
+										onCopyPaste={(event) =>
+											handleCopyPaste(event, weaponLoadOutContainer.slots[index], false)}
 										onUpdate={onItemUpdate}
 									/>
 								{/each}
 							</div>
 						</div>
+						<div class="flex flex-col space-y-2">
+							<ItemHeader text="Accessory" />
+							<div class="2xl:ml-2">
+								<div class="flex max-h-36 max-w-36 gap-2 2xl:grid 2xl:grid-cols-2">
+									{#each accessoryGear as _, index}
+										<ItemBadge
+											bind:slot={accessoryGear[index]}
+											itemGroup="Accessory"
+											onCopyPaste={(event) => handleCopyPaste(event, accessoryGear[index], false)}
+											onUpdate={onItemUpdate}
+										/>
+									{/each}
+								</div>
+							</div>
+						</div>
 					</div>
-					<div class="flex flex-col items-center justify-center">
+					<div class="hidden flex-col items-center justify-center 2xl:flex">
 						<span class="flex h-1/3 items-end">
 							{#await getItemIcon(headGear.static_id) then icon}
 								{#if icon}
@@ -613,46 +617,57 @@
 							{/await}
 						</span>
 					</div>
-					<div class="flex flex-col space-y-2">
-						<ItemHeader text="Head" />
-						<ItemBadge
-							bind:slot={headGear}
-							itemGroup="Head"
-							onCopyPaste={(event) => handleCopyPaste(event, headGear, false)}
-							onUpdate={onItemUpdate}
-						/>
-						<ItemHeader text="Body" />
-						<ItemBadge
-							bind:slot={bodyGear}
-							itemGroup="Body"
-							onCopyPaste={(event) => handleCopyPaste(event, bodyGear, false)}
-							onUpdate={onItemUpdate}
-						/>
-						<ItemHeader text="Shield" />
-						<ItemBadge
-							bind:slot={shieldGear}
-							itemGroup="Shield"
-							onCopyPaste={(event) => handleCopyPaste(event, shieldGear, false)}
-							onUpdate={onItemUpdate}
-						/>
-						<ItemHeader text="Glider" />
-						<ItemBadge
-							bind:slot={gliderGear}
-							itemGroup="Glider"
-							onCopyPaste={(event) => handleCopyPaste(event, gliderGear, false)}
-							onUpdate={onItemUpdate}
-						/>
-						<ItemHeader text="Sphere Module" />
-						<ItemBadge
-							bind:slot={sphereModule}
-							itemGroup="SphereModule"
-							onCopyPaste={(event) => handleCopyPaste(event, sphereModule, false)}
-							onUpdate={onItemUpdate}
-						/>
+					<div class="mt-2 flex space-x-2 space-y-2 2xl:flex-col">
+						<div class="flex flex-col space-y-2">
+							<ItemHeader text="Head" />
+							<ItemBadge
+								bind:slot={headGear}
+								itemGroup="Head"
+								onCopyPaste={(event) => handleCopyPaste(event, headGear, false)}
+								onUpdate={onItemUpdate}
+							/>
+						</div>
+						<div class="flex flex-col space-y-2">
+							<ItemHeader text="Body" />
+							<ItemBadge
+								bind:slot={bodyGear}
+								itemGroup="Body"
+								onCopyPaste={(event) => handleCopyPaste(event, bodyGear, false)}
+								onUpdate={onItemUpdate}
+							/>
+						</div>
+						<div class="flex flex-col space-y-2">
+							<ItemHeader text="Shield" />
+							<ItemBadge
+								bind:slot={shieldGear}
+								itemGroup="Shield"
+								onCopyPaste={(event) => handleCopyPaste(event, shieldGear, false)}
+								onUpdate={onItemUpdate}
+							/>
+						</div>
+						<div class="flex flex-col space-y-2">
+							<ItemHeader text="Glider" />
+							<ItemBadge
+								bind:slot={gliderGear}
+								itemGroup="Glider"
+								onCopyPaste={(event) => handleCopyPaste(event, gliderGear, false)}
+								onUpdate={onItemUpdate}
+							/>
+						</div>
+						<div class="flex flex-col space-y-2">
+							<ItemHeader text="Sphere Module" baseClass="hidden 2xl:block" />
+							<ItemHeader text="Module" baseClass="block 2xl:hidden" />
+							<ItemBadge
+								bind:slot={sphereModule}
+								itemGroup="SphereModule"
+								onCopyPaste={(event) => handleCopyPaste(event, sphereModule, false)}
+								onUpdate={onItemUpdate}
+							/>
+						</div>
 					</div>
-					<div class="col-span-3 ml-12 mt-2 space-y-2">
+					<div class="col-span-3 space-y-2 2xl:ml-12 2xl:mt-2">
 						<ItemHeader text="Food" />
-						<div class="ml-2">
+						<div class="2xl:ml-2">
 							<div class="flex flex-row space-x-2">
 								{#each Object.values(foodEquipContainer.slots) as _, index}
 									<ItemBadge
@@ -720,7 +735,11 @@
 					</div>
 				</div>
 				<PlayerHealthBadge bind:player={appState.selectedPlayer} bind:maxHp={health} />
-				<Accordion value={sideBarExpanded} collapsible>
+				<Accordion
+					value={sideBarExpanded}
+					onValueChange={(e) => (sideBarExpanded = e.value)}
+					collapsible
+				>
 					<Accordion.Item value="stats">
 						{#snippet control()}
 							Stats
