@@ -383,6 +383,10 @@
 			.join(' ');
 	}
 
+	function selectClass(tab: RawDataType) {
+		return activePage === tab ? 'bg-surface-900 ring ring-secondary-500' : 'bg-surface-900';
+	}
+
 	onMount(() => {
 		const { url } = page;
 		const params = new URLSearchParams(url.search);
@@ -454,6 +458,7 @@
 				bind:value={selectedGuildId}
 				placeholder="Select Guild"
 				onChange={handleSelectGuild}
+				selectClass={selectClass('guild')}
 			/>
 			<Tooltip label="Toggle Raw">
 				<Switch
@@ -481,6 +486,7 @@
 					bind:value={selectedBaseId}
 					placeholder="Select Base"
 					onChange={handleSelectBase}
+					selectClass={selectClass('base')}
 				/>
 				<Tooltip label="Toggle Raw">
 					<Switch
@@ -509,6 +515,7 @@
 				bind:value={selectedPlayerId}
 				placeholder={guild ? 'Select Guild Player' : 'Select Player'}
 				onChange={handleSelectPlayer}
+				selectClass={selectClass('player')}
 			/>
 			<Tooltip label="Toggle Raw">
 				<Switch
@@ -537,6 +544,7 @@
 					bind:value={selectedPalId}
 					placeholder={base ? 'Select Base Pal' : 'Select Player Pal'}
 					onChange={handleSelectPal}
+					selectClass={selectClass('pal')}
 				/>
 				<Tooltip label="Toggle Raw">
 					<Switch
@@ -568,6 +576,7 @@
 						? 'Select Base Character Container'
 						: 'Select Player Character Container'}
 					onChange={handleSelectCharacterContainer}
+					selectClass={selectClass('character_container')}
 				/>
 				<Tooltip label="Toggle Raw">
 					<Switch
@@ -599,6 +608,7 @@
 					bind:value={selectedItemContainerId}
 					placeholder={base ? 'Select Base Item Container' : 'Select Player Item Container'}
 					onChange={handleSelectItemContainer}
+					selectClass={selectClass('item_container')}
 				/>
 				<Tooltip label="Toggle Raw">
 					<Switch
@@ -626,7 +636,10 @@
 	<Tabs value={activePage} onValueChange={(e) => (activePage = e.value as RawDataType)}>
 		{#snippet list()}
 			{#each Object.keys(jsons) as key}
-				<Tabs.Control value={key}>
+				<Tabs.Control
+					value={key}
+					stateActive="border-b-secondary-500 opacity-100 text-secondary-500"
+				>
 					{formatTabTitle(key as RawDataType)}
 				</Tabs.Control>
 			{/each}

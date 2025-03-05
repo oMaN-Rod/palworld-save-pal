@@ -653,13 +653,19 @@
 				<div class="flex">
 					<h4 class="h4">{playerGuild!.name}</h4>
 					{#if playerGuild && appState.settings.debug_mode}
-						<DebugButton
-							href={`/debug?guildId=${playerGuild.id}&playerId=${appState.selectedPlayer!.uid}`}
-						/>
+						<DebugButton href={`/debug?guildId=${playerGuild.id}`} />
 					{/if}
 				</div>
 
-				<h5 class="h5 font-light">Base {currentPage}</h5>
+				<div class="flex">
+					<h5 class="h5 font-light">Base {currentPage}</h5>
+					{#if playerGuild && currentBase && appState.settings.debug_mode}
+						<DebugButton
+							iconClass="h-4 w-4"
+							href={`/debug?guildId=${playerGuild.id}&baseId=${currentBase[1].id}`}
+						/>
+					{/if}
+				</div>
 
 				<nav
 					class="btn-group preset-outlined-surface-200-800 w-full flex-col rounded-sm p-2 md:flex-row"
