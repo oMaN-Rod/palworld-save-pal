@@ -8,7 +8,7 @@ build_exe_options = {
         ("data", "data"),
         ("debug.bat", "debug.bat"),
     ],
-    "packages": ["uvicorn", "fastapi", "webview", "palworld_save_tools", "websockets"],
+    "packages": ["uvicorn", "fastapi", "webview", "palworld_save_tools", "websockets", "sqlalchemy.dialects.sqlite"],
     "replace_paths": [("*", "")],
 }
 
