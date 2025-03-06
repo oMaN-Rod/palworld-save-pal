@@ -10,6 +10,7 @@ from fastapi.responses import FileResponse, RedirectResponse
 import psutil
 import argparse
 
+from palworld_save_pal.db.bootstrap import create_db_and_tables
 from palworld_save_pal.server_thread import ServerThread
 from palworld_save_pal.utils.file_manager import FileManager
 from palworld_save_pal.ws.manager import ConnectionManager
@@ -191,6 +192,7 @@ def parse_arguments():
 def main():
     multiprocessing.freeze_support()
     args = parse_arguments()
+    create_db_and_tables()
     setup_logging(dev_mode=args.dev)
     global logger
     logger = create_logger(__name__)
