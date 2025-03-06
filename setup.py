@@ -30,19 +30,34 @@ bdist_msi_options = {
     },
 }
 
+# Mac specific options
+bdist_mac_options = {
+    "bundle_name": "Palworld Save Pal",
+    "iconfile": "ui/static/favicon.icns",  # You'll need to convert your .ico to .icns format
+    "custom_info_plist": {
+        "CFBundleShortVersionString": __version__,
+        "CFBundleIdentifier": "com.palworldsavepal",
+        "NSHighResolutionCapable": True,
+    },
+}
+
 base = "Win32GUI" if sys.platform == "win32" else None
 
 setup(
     name="PalworldSavePal",
     version=__version__,
     description="Palworld Save Pal",
-    options={"build_exe": build_exe_options, "bdist_msi": bdist_msi_options},
+    options={
+        "build_exe": build_exe_options,
+        "bdist_msi": bdist_msi_options,
+        "bdist_mac": bdist_mac_options,
+    },
     executables=[
         Executable(
             "desktop.py",
             base=base,
             icon="ui/static/favicon.ico",
-            target_name="PSP.exe",
+            target_name="PSP.exe" if sys.platform == "win32" else "PSP",
             shortcut_name="Palworld Save Pal",
             shortcut_dir="ProgramMenuDir",
         )
