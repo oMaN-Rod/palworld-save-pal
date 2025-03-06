@@ -17,7 +17,7 @@
 	import { PalSelectModal, NumberInputModal, PalPresetSelectModal } from '$components/modals';
 	import { assetLoader, debounce, deepCopy, formatNickname } from '$utils';
 	import { cn } from '$theme';
-
+	import { TextInputModal } from '$components/modals';
 	interface PalWithBaseId {
 		pal: Pal;
 		baseId: string;
@@ -634,6 +634,17 @@
 				return '';
 		}
 	}
+
+	async function handleEditGuildName() {
+		// @ts-ignore
+		const result = await modal.showModal<string>(TextInputModal, {
+			title: 'Edit Guild Name',
+			value: playerGuild!.name
+		});
+		if (!result) return;
+		playerGuild!.name = result;
+		playerGuild!.state = EntryState.MODIFIED;
+	}
 </script>
 
 {#if appState.selectedPlayer}
@@ -651,7 +662,9 @@
 			<!-- Left Controls -->
 			<div class="shrink-0 space-y-2 p-4">
 				<div class="flex">
-					<h4 class="h4">{playerGuild!.name}</h4>
+					<button class="btn px-0 text-start" onclick={handleEditGuildName}>
+						<h4 class="h4 hover:text-secondary-500">{playerGuild!.name}</h4>
+					</button>
 					{#if playerGuild && appState.settings.debug_mode}
 						<DebugButton href={`/debug?guildId=${playerGuild.id}`} />
 					{/if}

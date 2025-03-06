@@ -118,6 +118,7 @@ export type Guild = {
 	players: string[];
 	container_id?: string;
 	guild_chest?: ItemContainer;
+	state: EntryState;
 };
 
 export type Base = {

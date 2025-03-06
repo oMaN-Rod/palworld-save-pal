@@ -14,6 +14,7 @@ logger = create_logger(__name__)
 
 
 class GuildDTO(BaseModel):
+    name: str
     base: Optional[BaseDTO] = None
     guild_chest: Optional[ItemContainer] = Field(default=None)
 
@@ -71,6 +72,11 @@ class Guild(BaseModel):
     def name(self) -> str:
         self._name = PalObjects.get_nested(self._raw_data, "guild_name")
         return self._name
+
+    @name.setter
+    def name(self, value: str):
+        self._name = value
+        PalObjects.set_nested(self._raw_data, "guild_name", value=self._name)
 
     @computed_field
     def players(self) -> List[UUID]:
@@ -150,6 +156,7 @@ class Guild(BaseModel):
         logger.debug("Added base %s to guild %s", base.id, self.id)
 
     def update_from(self, guildDTO: GuildDTO):
+        self.name = guildDTO.name
         if guildDTO.base:
             base = next(
                 b

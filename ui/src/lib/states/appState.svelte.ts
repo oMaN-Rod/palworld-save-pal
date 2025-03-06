@@ -125,6 +125,10 @@ export function createAppState() {
 				modifiedGuilds = [...modifiedGuilds, [guild.id, { guild_chest: guild.guild_chest }]];
 				guild.guild_chest.state = EntryState.NONE;
 			}
+			if (guild.state === EntryState.MODIFIED) {
+				modifiedGuilds = [...modifiedGuilds, [guild.id, guild]];
+				guild.state = EntryState.NONE;
+			}
 		}
 
 		if (modifiedPals.length === 0 && modifiedPlayers.length === 0 && modifiedGuilds.length === 0) {
