@@ -981,11 +981,11 @@
 											{/each}
 										</div>
 										{#if currentStorageContainerIcon}
-											<div class="flex flex-col">
+											<div class="ml-2 flex flex-col">
 												<img
 													src={currentStorageContainerIcon}
 													alt="Storage Container Icon"
-													class="ml-8 h-48 w-48 2xl:h-64 2xl:w-64"
+													class="h-48 w-48 2xl:h-64 2xl:w-64"
 												/>
 												<StoragePresets
 													container={currentStorageContainer}

@@ -14,9 +14,9 @@ logger = create_logger(__name__)
 
 
 class GuildDTO(BaseModel):
-    name: str
+    name: Optional[str] = None
     base: Optional[BaseDTO] = None
-    guild_chest: Optional[ItemContainer] = Field(default=None)
+    guild_chest: Optional[ItemContainer] = None
 
 
 class Guild(BaseModel):
@@ -156,7 +156,8 @@ class Guild(BaseModel):
         logger.debug("Added base %s to guild %s", base.id, self.id)
 
     def update_from(self, guildDTO: GuildDTO):
-        self.name = guildDTO.name
+        if guildDTO.name:
+            self.name = guildDTO.name
         if guildDTO.base:
             base = next(
                 b

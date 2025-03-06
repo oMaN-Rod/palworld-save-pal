@@ -1,18 +1,19 @@
 <script lang="ts">
 	import { TextInputModal } from '$components/modals';
 	import { List, TooltipButton } from '$components/ui';
-	import { presetsData } from '$lib/data';
+	import { itemsData, presetsData } from '$lib/data';
 	import type { ItemContainer, ItemContainerSlot, PresetProfile } from '$lib/types';
 	import { getModalState } from '$states';
 	import { EntryState } from '$types';
 	import { deepCopy } from '$utils';
-	import { Edit, Play, Plus, Trash, X } from 'lucide-svelte';
+	import { Edit, PaintBucket, Play, Plus, Trash, X } from 'lucide-svelte';
+	import { ItemSelectModal } from '$components/modals';
 
 	let { container, onUpdate } = $props<{
 		container: ItemContainer & { slots: ItemContainerSlot[] };
 		onUpdate: () => void;
 	}>();
-	$inspect(container);
+
 	const modal = getModalState();
 
 	type ExtendedPresetProfile = PresetProfile & { id: string };
@@ -109,12 +110,45 @@
 		if (!result) return;
 		await presetsData.changePresetName(preset.id, result);
 	}
+
+	async function handleFillContainer() {
+		// @ts-ignore
+		const result = await modal.showModal<[string, number]>(ItemSelectModal, {
+			group: 'Common',
+			itemId: '',
+			title: 'Select Item'
+		});
+		if (!result) return;
+		let [static_id, count] = result;
+		const itemData = itemsData.items[static_id];
+		if (!itemData) return;
+		count = count > itemData.details.max_stack_count ? itemData.details.max_stack_count : count;
+
+		container.slots.forEach((slot: ItemContainerSlot) => {
+			slot.static_id = static_id;
+			slot.count = count;
+			if (itemData.details.dynamic) {
+				slot.dynamic_item = {
+					local_id: '00000000-0000-0000-0000-000000000000',
+					durability: itemData.details.dynamic.durability || 0,
+					remaining_bullets: itemData.details.dynamic.magazine_size || 0,
+					type: itemData.details.dynamic.type
+				};
+			} else {
+				slot.dynamic_item = undefined;
+			}
+		});
+		container.state = EntryState.MODIFIED;
+	}
 </script>
 
 <div class="flex min-w-64 max-w-96 flex-col space-y-2">
 	<div class="btn-group bg-surface-900 items-center rounded-sm p-1">
 		<TooltipButton onclick={handleAddPreset} popupLabel="Create a preset from current container">
 			<Plus />
+		</TooltipButton>
+		<TooltipButton onclick={handleFillContainer} popupLabel="Fill current container">
+			<PaintBucket />
 		</TooltipButton>
 		{#if selectedPresets.length === 1}
 			<TooltipButton onclick={handleApplyPreset} popupLabel="Apply selected preset">
