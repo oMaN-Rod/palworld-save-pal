@@ -38,29 +38,19 @@ async def backup_dir(dir_path: str, save_type: str, ws_callback):
         os.makedirs(backup_dir)
     timestamp = time.strftime("%Y-%m-%d-%H-%M")
     backup_path = os.path.join(backup_dir, f"{os.path.basename(dir_path)}_{timestamp}")
+    if os.path.exists(backup_path):
+        logger.debug("Backup path exists, appending seconds")
+        backup_path = f"{backup_path}_{time.strftime('%S')}"
+
     await ws_callback("Backing up save directory... 🤓")
     if os.path.exists(dir_path):
         shutil.copytree(dir_path, backup_path)
     else:
         await ws_callback(f"Save directory {dir_path} not found, skipping backup")
+
     nested_backup_dir = os.path.join(backup_path, "backup")
     if os.path.exists(nested_backup_dir):
         shutil.rmtree(nested_backup_dir)
-
-
-async def backup_file(file_path: str, save_type: str, ws_callback):
-    file_name = os.path.basename(file_path)
-    backup_dir = f"backups/{save_type}"
-    if not os.path.exists(backup_dir):
-        os.makedirs(backup_dir)
-    timestamp = time.strftime("%Y-%m-%d-%H-%M")
-    extension = ".sav" if save_type == "steam" else ""
-    backup_path = os.path.join(backup_dir, f"{file_name}_{timestamp}{extension}")
-    await ws_callback("Backing up save file... 🤓")
-    if os.path.exists(file_path):
-        shutil.copy2(file_path, backup_path)
-    else:
-        await ws_callback(f"Save file {file_path} not found, skipping backup")
 
 
 async def save_modded_save_handler(message: SaveModdedSaveMessage, ws: WebSocket):
