@@ -21,6 +21,10 @@ class Settings(BaseModel):
     _debug_mode: bool = PrivateAttr(default=False)
     _is_busy: bool = PrivateAttr(default=True)
 
+    def __init__(self, **data):
+        super().__init__(**data)
+        self._load_settings()
+
     @computed_field
     def language(self) -> str:
         return self._language

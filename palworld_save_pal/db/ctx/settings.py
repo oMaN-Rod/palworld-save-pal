@@ -35,6 +35,9 @@ def get_settings() -> SettingsModel:
 
             settings.id = 1
             session.add(settings)
+            session.flush()
+
+        session.expunge(settings)
 
         return settings
 
