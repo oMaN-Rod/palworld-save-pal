@@ -199,6 +199,7 @@ class Pal(BaseModel):
                 self._save_parameter["IsRarePal"] = PalObjects.BoolProperty(
                     self._is_lucky
                 )
+            self._format_boss_character_id()
         else:
             safe_remove(self._save_parameter, "IsRarePal")
 
@@ -212,16 +213,7 @@ class Pal(BaseModel):
     @is_boss.setter
     def is_boss(self, value: bool):
         self._is_boss = value
-        if self._is_boss:
-            if not self.character_id.startswith("BOSS_"):
-                self.character_id = f"BOSS_{self.character_key}"
-            if self.is_lucky:
-                self.is_lucky = False
-        else:
-            if self.character_id.startswith("BOSS_"):
-                self.character_id = self.character_key
-
-        logger.debug(f"Setting is_boss to {self._is_boss} {self._character_id}")
+        self._format_boss_character_id()
 
     @computed_field
     def is_predator(self) -> bool:
@@ -829,3 +821,11 @@ class Pal(BaseModel):
             PAL_DATA, self._character_key, "max_full_stomach"
         )
         self.sanity = 100.0
+
+    def _format_boss_character_id(self):
+        if self._is_boss or self._is_lucky:
+            if not self.character_id.startswith("BOSS_"):
+                self.character_id = f"BOSS_{self.character_key}"
+        else:
+            if self.character_id.startswith("BOSS_"):
+                self.character_id = self.character_key

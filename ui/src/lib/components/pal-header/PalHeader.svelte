@@ -144,6 +144,7 @@
 		if (pal) {
 			pal.is_lucky = !pal.is_lucky;
 			pal.is_boss = pal.is_lucky ? false : pal.is_boss;
+			formatBossCharacterId();
 			pal.state = EntryState.MODIFIED;
 		}
 	}
@@ -157,7 +158,16 @@
 		if (pal) {
 			pal.is_boss = !pal.is_boss;
 			pal.is_lucky = pal.is_boss ? false : pal.is_lucky;
+			formatBossCharacterId();
 			pal.state = EntryState.MODIFIED;
+		}
+	}
+
+	function formatBossCharacterId() {
+		if (pal && (pal.is_boss || pal.is_lucky) && !pal.character_id.startsWith('BOSS_')) {
+			pal.character_id = `BOSS_${pal.character_id}`;
+		} else if (pal && !pal.is_boss && !pal.is_lucky && pal.character_id.startsWith('BOSS_')) {
+			pal.character_id = pal.character_id.replace('BOSS_', '');
 		}
 	}
 
