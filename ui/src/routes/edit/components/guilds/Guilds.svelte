@@ -275,7 +275,7 @@
 
 		// @ts-ignore
 		const result = await modal.showModal<[string, string] | undefined>(PalSelectModal, {
-			title: 'Add a new Pal'
+			title: `Add a new Pal to Base ${currentPage}`
 		});
 		if (!result) return;
 

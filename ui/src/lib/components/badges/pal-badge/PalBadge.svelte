@@ -64,16 +64,17 @@
 		];
 	});
 
-	let genderIcon = $derived(
-		assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${pal.gender}.png`)
-	);
+	let genderIcon = $derived(assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${pal.gender}.png`));
 	let palIcon = $derived.by(() => {
 		if (!pal) return '';
 		return assetLoader.loadMenuImage(pal.character_id, palData ? palData.is_pal : false);
 	});
 
 	function handleClick(event: MouseEvent) {
-		if (!pal || pal.character_id === 'None') return;
+		if (!pal || pal.character_id === 'None') {
+			onAdd();
+			return;
+		}
 
 		if ((event.ctrlKey || event.metaKey) && onSelect) {
 			event.preventDefault();

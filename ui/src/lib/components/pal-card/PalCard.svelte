@@ -59,16 +59,17 @@
 		];
 	});
 
-	const genderIcon = $derived(
-		assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${pal.gender}.png`)
-	);
+	const genderIcon = $derived(assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${pal.gender}.png`));
 	const palIcon = $derived.by(() => {
 		if (!pal) return '';
 		return assetLoader.loadMenuImage(pal.character_id, palData?.is_pal || false);
 	});
 
 	function handleClick(event: MouseEvent) {
-		if (!pal || pal.character_id === 'None') return;
+		if (!pal || pal.character_id === 'None') {
+			onAdd();
+			return;
+		}
 
 		// If ctrl/cmd is pressed and onSelect is provided, handle selection
 		if ((event.ctrlKey || event.metaKey) && onSelect) {

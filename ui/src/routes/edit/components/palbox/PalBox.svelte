@@ -357,7 +357,7 @@
 		if (!appState.selectedPlayer) return;
 		// @ts-ignore
 		const result = await modal.showModal<[string, string] | undefined>(PalSelectModal, {
-			title: 'Add a new Pal'
+			title: `Add a new Pal to your ${target === 'party' ? 'Party' : 'Pal Box'}`
 		});
 		if (!result) return;
 		const [selectedPal, nickname] = result;
