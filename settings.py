@@ -1,5 +1,5 @@
-filename = 'build/psp-mac-0.10.0.dmg'
-volume_label = 'psp-mac-0.10.0'
+filename = 'build/psp-mac-0.10.1.dmg'
+volume_label = 'psp-mac-0.10.1'
 format = 'UDZO'
 filesystem = 'HFS+'
 size = None
