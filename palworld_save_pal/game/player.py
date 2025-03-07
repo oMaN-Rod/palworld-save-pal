@@ -374,6 +374,13 @@ class Player(BaseModel):
     def character_save(self) -> Dict[str, Any]:
         return self._character_save
 
+    @property
+    def save_data(self) -> Dict[str, Any]:
+        return {
+            "character_save": {**self._character_save},
+            "gvas_properties": {**self._player_gvas_file.properties},
+        }
+
     def add_pal(
         self,
         pal_code_name: str,

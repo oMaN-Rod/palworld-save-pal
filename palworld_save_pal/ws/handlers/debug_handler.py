@@ -22,7 +22,7 @@ async def get_raw_data_handler(message: GetRawDataMessage, ws: WebSocket):
         data = guild.save_data if guild else {}
     elif player_id:
         player = save_file.get_player(player_id)
-        data = player.character_save if player else {}
+        data = player.save_data if player else {}
     elif pal_id:
         pal = save_file.get_pal(pal_id)
         data = pal.character_save if pal else {}
