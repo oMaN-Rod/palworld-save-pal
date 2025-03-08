@@ -61,9 +61,23 @@ jobs:
           python setup.py build
           python setup.py bdist_msi
         
-      - name: Copy to dist folder
+      - name: Prepare dist directory
         run: |
-          cp build/exe.win-amd64-*\* dist/
+          $version = "${{ github.event.inputs.version }}"
+          $distDir = "dist/psp-windows-$version"
+          if (Test-Path $distDir) { Remove-Item -Path $distDir -Recurse -Force }
+          New-Item -Path $distDir -ItemType Directory | Out-Null
+          Copy-Item -Path "build/exe.win-amd64-*\*" -Destination $distDir -Recurse -Force
+          Write-Host "Copied build files to $distDir"
+        shell: pwsh
+  
+      - name: Create ZIP archive
+        run: |
+          $version = "${{ github.event.inputs.version }}"
+          $zipPath = "dist/psp-windows-$version-standalone.zip"
+          Compress-Archive -Path "dist/psp-windows-$version\*" -DestinationPath $zipPath -Force
+          Write-Host "Created ZIP archive at $zipPath"
+        shell: pwsh
 
       - name: Upload Windows ZIP artifact
         uses: actions/upload-artifact@v4
