@@ -126,11 +126,6 @@ jobs:
     needs: [build-windows, build-macos]
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-          ref: main
-
       - name: Download all artifacts
         uses: actions/download-artifact@v4
         with:
