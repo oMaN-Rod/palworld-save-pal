@@ -63,7 +63,6 @@ jobs:
         
       - name: Copy to dist folder
         run: |
-          mkdir -p dist
           cp build/exe.win-amd64-*\* dist/
 
       - name: Upload Windows ZIP artifact
