@@ -10,6 +10,7 @@ from palworld_save_pal.game.character_container import (
     CharacterContainerType,
 )
 from palworld_save_pal.game.guild import Guild, GuildDTO
+from palworld_save_pal.game.map import WorldMapPoint
 from palworld_save_pal.game.pal import Pal, PalDTO
 from palworld_save_pal.game.item_container import ItemContainer, ItemContainerType
 from palworld_save_pal.game.pal_objects import PalObjects
@@ -42,12 +43,6 @@ class PlayerDTO(BaseModel):
     technologies: List[str] = Field(default_factory=list)
     technology_points: int = 0
     boss_technology_points: int = 0
-
-
-class WorldMapPoint(BaseModel):
-    x: float
-    y: float
-    z: float
 
 
 class Player(BaseModel):

@@ -9,6 +9,7 @@ from palworld_save_pal.game.character_container import (
     CharacterContainerType,
 )
 from palworld_save_pal.game.item_container import ItemContainer, ItemContainerType
+from palworld_save_pal.game.map import WorldMapPoint
 from palworld_save_pal.game.pal import Pal, PalDTO
 from palworld_save_pal.game.pal_objects import PalObjects
 from palworld_save_pal.utils.dict import safe_remove
@@ -24,6 +25,8 @@ class BaseDTO(BaseModel):
 
 
 class Base(BaseModel):
+    _location: WorldMapPoint = None
+
     pals: Optional[Dict[UUID, Pal]] = Field(default_factory=dict)
     container_id: Optional[UUID] = None
     slot_count: Optional[int] = None
@@ -64,6 +67,27 @@ class Base(BaseModel):
     def id(self) -> UUID:
         self._id = PalObjects.as_uuid(self._base_save_data["key"])
         return self._id
+
+    @computed_field
+    def location(self) -> Optional[WorldMapPoint]:
+        last_location = PalObjects.get_nested(
+            self._base_save_data,
+            "value",
+            "RawData",
+            "value",
+            "transform",
+            "translation",
+        )
+        self._location = (
+            WorldMapPoint(
+                x=last_location["x"],
+                y=last_location["y"],
+                z=last_location["z"],
+            )
+            if last_location
+            else None
+        )
+        return self._location
 
     @property
     def save_data(self) -> Dict[str, Any]:

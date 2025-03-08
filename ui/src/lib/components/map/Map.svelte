@@ -18,10 +18,9 @@
 		worldToLeaflet,
 		worldToMap
 	} from './utils';
-	import type { Player } from '$types';
 
 	// Props to control which markers to display
-	let { showOrigin = true, showPlayers = true } = $props();
+	let { showOrigin = true, showPlayers = true, showBases = true } = $props();
 
 	const appState = getAppState();
 
@@ -45,6 +44,7 @@
 	let map: L.Map | undefined = $state();
 	let originMarkers: L.Layer[] = [];
 	let playerMarkers: L.Marker[] = [];
+	let baseMarkers: L.Marker[] = [];
 
 	const mapOptions = {
 		center: [0, 0] as [number, number],
@@ -73,6 +73,17 @@
 
 		return L.icon({
 			iconUrl,
+			iconSize: [32, 32],
+			iconAnchor: [16, 16],
+			popupAnchor: [0, -16]
+		});
+	}
+
+	function createBaseIcon(): L.Icon {
+		const baseIcon = assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_icon_camp.png`);
+
+		return L.icon({
+			iconUrl: baseIcon,
 			iconSize: [32, 32],
 			iconAnchor: [16, 16],
 			popupAnchor: [0, -16]
@@ -128,6 +139,46 @@
 
 		originMarkers.push(horizontalLine);
 		originMarkers.push(verticalLine);
+	}
+
+	function addBaseMarkers() {
+		if (!map) return;
+
+		// Clear any existing base markers
+		baseMarkers.forEach((marker) => map!.removeLayer(marker));
+		baseMarkers = [];
+
+		if (!showBases) return;
+
+		// Get all bases from the app state
+		const guilds = Object.values(appState.guilds || {});
+
+		const bases = guilds.reduce((acc, guild) => {
+			if (guild.bases) {
+				Object.values(guild.bases).forEach((base) => {
+					acc.push(base);
+				});
+			}
+			return acc;
+		}, [] as any[]);
+
+		bases.forEach((base) => {
+			if (!base.location) return;
+
+			// Convert base world coordinates to Leaflet coordinates
+			const latlng = worldToLeaflet(base.location.x, base.location.y);
+
+			const icon = createBaseIcon();
+			const baseMarker = L.marker(latlng, { icon }).addTo(map!);
+
+			baseMarker.bindPopup(`
+				<div class="">
+					<h3 class="text-lg font-bold">${base.id}</h3>
+					<p class="text-xs mt-2">World Coords: ${base.location.x.toFixed(2)}, ${base.location.y.toFixed(2)}</p>
+					<p class="text-xs">Map Coords: ${worldToMap(base.location.x, base.location.y).x}, ${worldToMap(base.location.x, base.location.y).y}</p>
+				</div>
+			`);
+		});
 	}
 
 	function addPlayerMarkers() {
@@ -205,17 +256,10 @@
 		// Add markers
 		addOriginMarker();
 		addPlayerMarkers();
+		addBaseMarkers();
 
 		// Add coordinate display
 		addCoordinateDisplay();
-
-		return {
-			destroy: () => {
-				if (map) {
-					map.remove();
-				}
-			}
-		};
 	}
 
 	// Add a coordinate display in the corner that shows both map and world coordinates
@@ -271,6 +315,12 @@
 	$effect(() => {
 		if (map) {
 			addPlayerMarkers();
+		}
+	});
+
+	$effect(() => {
+		if (map) {
+			addBaseMarkers();
 		}
 	});
 

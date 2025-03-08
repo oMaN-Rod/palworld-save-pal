@@ -37,18 +37,21 @@ export const TRANSFORM_B = 5075.45; // Offset for X (calculated to position orig
 export const TRANSFORM_C = -MAP_SIZE / MAP_HEIGHT; // Scale factor for Y (negative because Leaflet Y is inverted)
 export const TRANSFORM_D = 4960.62; // Offset for Y (calculated to position origin correctly)
 
+// Fixed: Y-coordinate is now inverted with * -1
 export function worldToMap(worldX: number, worldY: number): { x: number; y: number } {
 	const mapX = Math.round((worldY - TRANSLATION_Y) / SCALE);
 	const mapY = Math.round((worldX + TRANSLATION_X) / SCALE) * -1;
 	return { x: mapX, y: mapY };
 }
 
+// Since we've inverted Y in worldToMap, we need to invert it again here
 export function mapToWorld(mapX: number, mapY: number): { x: number; y: number } {
-	const worldX = mapY * SCALE - TRANSLATION_X;
+	const worldX = mapY * -1 * SCALE - TRANSLATION_X; // Note the inversion of Y
 	const worldY = mapX * SCALE + TRANSLATION_Y;
 	return { x: worldX, y: worldY };
 }
 
+// This remains correct since we're using the updated mapCoords with inverted Y
 export function worldToLeaflet(worldX: number, worldY: number): L.LatLng {
 	const mapCoords = worldToMap(worldX, worldY);
 	// Transform game coordinates to Leaflet coordinates

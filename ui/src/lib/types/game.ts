@@ -136,6 +136,7 @@ export type Base = {
 	slot_count: number;
 	storage_containers: Record<string, ItemContainer>;
 	state: EntryState;
+	location: WorldMapPoint;
 };
 
 export type BaseDTO = { id: string; storage_containers: Record<string, ItemContainer> };
