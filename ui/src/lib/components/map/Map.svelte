@@ -1,9 +1,7 @@
 <script lang="ts">
-	import { onMount, onDestroy } from 'svelte';
+	import { onDestroy } from 'svelte';
 	import 'leaflet/dist/leaflet.css';
 	import L from 'leaflet';
-	import { ASSET_DATA_PATH } from '$lib/constants';
-	import { assetLoader } from '$utils';
 	import { getAppState } from '$states';
 	import {
 		leafletToWorld,
@@ -18,15 +16,18 @@
 		worldToLeaflet,
 		worldToMap
 	} from './utils';
+	import { mapIcons, mapImg } from './mapImages';
 
 	// Props to control which markers to display
 	let { showOrigin = true, showPlayers = true, showBases = true } = $props();
 
 	const appState = getAppState();
 
-	// Initial view coordinates (center of map in Leaflet coordinates)
-	const mapCenter = worldToLeaflet(0, 0);
-	const initialView: [number, number] = [mapCenter.lat, mapCenter.lng];
+	const initialView = $derived.by(() => {
+		const worldCoords = mapToWorld(ORIGIN_GAME_X, ORIGIN_GAME_Y);
+		const origin = worldToLeaflet(worldCoords.x, worldCoords.y);
+		return [origin.lat, origin.lng] as [number, number];
+	});
 
 	// Custom CRS with corrected transformation
 	const CustomCRS = L.extend({}, L.CRS.Simple, {
@@ -38,8 +39,6 @@
 		[0, 0] as L.LatLngTuple,
 		[MAP_SIZE, MAP_SIZE] as L.LatLngTuple
 	];
-
-	const worldMap = assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_worldmap.png`);
 
 	let map: L.Map | undefined = $state();
 	let originMarkers: L.Layer[] = [];
@@ -57,33 +56,10 @@
 
 	// Create icon for the origin
 	function createOriginIcon(): L.Icon {
-		const iconUrl = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%23FF5722' stroke='%23FFFFFF' stroke-width='2'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cline x1='12' y1='2' x2='12' y2='22' stroke='%23FFFFFF' stroke-width='2'/%3E%3Cline x1='2' y1='12' x2='22' y2='12' stroke='%23FFFFFF' stroke-width='2'/%3E%3C/svg%3E`;
+		const iconUrl = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23FFFFFF' stroke-width='2'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cline x1='12' y1='2' x2='12' y2='22' stroke='%23FFFFFF' stroke-width='2'/%3E%3Cline x1='2' y1='12' x2='22' y2='12' stroke='%23FFFFFF' stroke-width='2'/%3E%3C/svg%3E`;
 
 		return L.icon({
 			iconUrl,
-			iconSize: [32, 32],
-			iconAnchor: [16, 16],
-			popupAnchor: [0, -16]
-		});
-	}
-
-	// Create icon for players
-	function createPlayerIcon(): L.Icon {
-		const iconUrl = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%234CAF50' stroke='%23FFFFFF' stroke-width='2'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Ccircle cx='12' cy='8' r='4' fill='%23FFFFFF'/%3E%3Cpath d='M6 21v-2a6 6 0 0 1 12 0v2' fill='%23FFFFFF'/%3E%3C/svg%3E`;
-
-		return L.icon({
-			iconUrl,
-			iconSize: [32, 32],
-			iconAnchor: [16, 16],
-			popupAnchor: [0, -16]
-		});
-	}
-
-	function createBaseIcon(): L.Icon {
-		const baseIcon = assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_icon_camp.png`);
-
-		return L.icon({
-			iconUrl: baseIcon,
 			iconSize: [32, 32],
 			iconAnchor: [16, 16],
 			popupAnchor: [0, -16]
@@ -99,7 +75,7 @@
 
 		if (!showOrigin) return;
 
-		// The origin in world coordinates corresponds to map coordinates (0,-656)
+		// The origin in world coordinates corresponds to map coordinates (0,0)
 		const worldCoords = mapToWorld(ORIGIN_GAME_X, ORIGIN_GAME_Y);
 
 		// Convert to Leaflet coordinates
@@ -162,13 +138,12 @@
 			return acc;
 		}, [] as any[]);
 
+		const icon = mapIcons.baseCamp;
 		bases.forEach((base) => {
 			if (!base.location) return;
 
 			// Convert base world coordinates to Leaflet coordinates
 			const latlng = worldToLeaflet(base.location.x, base.location.y);
-
-			const icon = createBaseIcon();
 			const baseMarker = L.marker(latlng, { icon }).addTo(map!);
 
 			baseMarker.bindPopup(`
@@ -195,6 +170,7 @@
 
 		// Get all players from the app state
 		const players = Object.values(appState.players || {});
+		const icon = mapIcons.player;
 
 		players.forEach((player) => {
 			if (!player.location) return;
@@ -202,7 +178,6 @@
 			// Convert player world coordinates to Leaflet coordinates
 			const latlng = worldToLeaflet(player.location.x, player.location.y);
 
-			const icon = createPlayerIcon();
 			const playerMarker = L.marker(latlng, { icon }).addTo(map!);
 
 			playerMarker.bindPopup(`
@@ -223,7 +198,7 @@
 		map = L.map(container, mapOptions);
 
 		// Add the world map image
-		L.imageOverlay(worldMap, bounds).addTo(map);
+		L.imageOverlay(mapImg.worldMap, bounds).addTo(map);
 
 		// Fit to bounds and set initial view
 		map.fitBounds(bounds);
