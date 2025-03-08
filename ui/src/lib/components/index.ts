@@ -9,6 +9,7 @@ import WorkSuitabilities from './badges/work-suitabilities/WorkSuitabilities.sve
 import DebugButton from './debug-button/DebugButton.svelte';
 import Drawer from './drawer/Drawer.svelte';
 import GamepassSaveList from './gamepass-save-list/GamepassSaveList.svelte';
+import Map from './map/Map.svelte';
 import Modal from './modal/Modal.svelte';
 import NavBar from './nav-bar/NavBar.svelte';
 import PalCard from './pal-card/PalCard.svelte';
@@ -31,6 +32,7 @@ export {
 	GamepassSaveList,
 	HealthBadge,
 	ItemBadge,
+	Map,
 	Modal,
 	NavBar,
 	PalBadge,

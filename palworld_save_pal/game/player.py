@@ -44,6 +44,12 @@ class PlayerDTO(BaseModel):
     boss_technology_points: int = 0
 
 
+class WorldMapPoint(BaseModel):
+    x: float
+    y: float
+    z: float
+
+
 class Player(BaseModel):
     _uid: UUID
     _nickname: str
@@ -60,6 +66,7 @@ class Player(BaseModel):
     _instance_id: UUID
     _pal_box_id: UUID
     _otomo_container_id: UUID
+    _location: WorldMapPoint = None
 
     _guild: Optional[Guild] = PrivateAttr(default=None)
 
@@ -369,6 +376,20 @@ class Player(BaseModel):
             )
         )
         return self._otomo_container_id
+
+    @computed_field
+    def location(self) -> Optional[WorldMapPoint]:
+        last_location = PalObjects.get_value(self._save_parameter["LastJumpedLocation"])
+        self._location = (
+            WorldMapPoint(
+                x=last_location["x"],
+                y=last_location["y"],
+                z=last_location["z"],
+            )
+            if "LastJumpedLocation" in self._save_parameter
+            else None
+        )
+        return self._location
 
     @property
     def character_save(self) -> Dict[str, Any]:

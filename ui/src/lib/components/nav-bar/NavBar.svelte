@@ -7,7 +7,7 @@
 		getSocketState
 	} from '$states';
 	import { Navigation } from '@skeletonlabs/skeleton-svelte';
-	import { File, Pencil, Info, Upload, Languages, Settings, Save, Bug } from 'lucide-svelte';
+	import { File, Pencil, Info, Upload, Languages, Settings, Save, Bug, Map } from 'lucide-svelte';
 	import { page } from '$app/stores';
 	import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
 	import { SettingsModal } from '$components/modals';
@@ -100,6 +100,16 @@
 				<Upload />
 			</Navigation.Tile>
 		{/if}
+		<Navigation.Tile
+			label="Map"
+			labelBase="text-xs"
+			title="Map"
+			id="map"
+			href="/worldmap"
+			active="bg-secondary-500"
+		>
+			<Map />
+		</Navigation.Tile>
 		<Navigation.Tile
 			label="About"
 			labelBase="text-xs"
