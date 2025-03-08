@@ -95,9 +95,11 @@
 		return Object.values(base.storage_containers)
 			.filter(
 				(container) =>
-					container.slot_num !== 0 &&
-					!ignoreKeys.some((key) => container.key.includes(key)) &&
-					container.slots.some((s) => {
+					(container.slot_num !== 0 &&
+						!ignoreKeys.some((key) => container.key.includes(key)) &&
+						(container.slots.length === 0 ||
+							container.slots.some((s) => s.static_id !== 'None'))) ||
+					(container.slots.some((s) => {
 						const itemData = itemsData.items[s.static_id];
 						return (
 							s.static_id.toLowerCase().includes(selectedInventoryItem.toLowerCase()) ||
@@ -107,16 +109,16 @@
 									.includes(selectedInventoryItem.toLowerCase()))
 						);
 					}) &&
-					container.slots.some((s) => {
-						const itemData = itemsData.items[s.static_id];
-						return (
-							s.static_id.toLowerCase().includes(inventorySearchQuery.toLowerCase()) ||
-							(itemData &&
-								itemData.info.localized_name
-									.toLowerCase()
-									.includes(inventorySearchQuery.toLowerCase()))
-						);
-					})
+						container.slots.some((s) => {
+							const itemData = itemsData.items[s.static_id];
+							return (
+								s.static_id.toLowerCase().includes(inventorySearchQuery.toLowerCase()) ||
+								(itemData &&
+									itemData.info.localized_name
+										.toLowerCase()
+										.includes(inventorySearchQuery.toLowerCase()))
+							);
+						}))
 			)
 			.sort((a, b) => a.key.localeCompare(b.key));
 	});

@@ -19,7 +19,7 @@
 <button
 	class="btn {baseClass}"
 	onclick={async () => {
-		await appState.writeSave();
+		await appState.saveState();
 		goto(href);
 	}}
 >

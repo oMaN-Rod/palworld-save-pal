@@ -31,6 +31,7 @@ class Base(BaseModel):
     pal_container: Optional[CharacterContainer] = None
 
     _base_save_data: Dict[str, Any] = PrivateAttr(default_factory=dict)
+    _map_object_save_data: List[Dict[str, Any]] = PrivateAttr(default_factory=list)
 
     def __init__(
         self,
@@ -66,7 +67,10 @@ class Base(BaseModel):
 
     @property
     def save_data(self) -> Dict[str, Any]:
-        return self._base_save_data
+        return {
+            "base_save_data": {**self._base_save_data},
+            "map_object_save_data": self._map_object_save_data,
+        }
 
     def add_pal(
         self, character_id: str, nickname: str, storage_slot: Optional[UUID] = None
@@ -139,6 +143,7 @@ class Base(BaseModel):
             )
             if not are_equal_uuids(base_camp_id, self.id):
                 continue
+            self._map_object_save_data.append(map_object)
             module_map = PalObjects.get_nested(
                 map_object, "ConcreteModel", "value", "ModuleMap", "value"
             )
