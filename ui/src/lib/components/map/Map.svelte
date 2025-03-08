@@ -172,12 +172,15 @@
 			const baseMarker = L.marker(latlng, { icon }).addTo(map!);
 
 			baseMarker.bindPopup(`
-				<div class="">
-					<h3 class="text-lg font-bold">${base.id}</h3>
-					<p class="text-xs mt-2">World Coords: ${base.location.x.toFixed(2)}, ${base.location.y.toFixed(2)}</p>
-					<p class="text-xs">Map Coords: ${worldToMap(base.location.x, base.location.y).x}, ${worldToMap(base.location.x, base.location.y).y}</p>
-				</div>
-			`);
+            <div class="">
+                <h3 class="text-lg font-bold">${base.id}</h3>
+                <p class="text-xs mt-2">World Coords: ${base.location.x.toFixed(2)}, ${base.location.y.toFixed(2)}</p>
+                <p class="text-xs">Map Coords: ${worldToMap(base.location.x, base.location.y).x}, ${worldToMap(base.location.x, base.location.y).y}</p>
+            </div>
+        `);
+
+			// Add the marker to the baseMarkers array so we can remove it later
+			baseMarkers.push(baseMarker);
 		});
 	}
 

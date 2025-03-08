@@ -80,9 +80,27 @@
 						<div class="text-xs text-gray-400">?</div>
 					</Tooltip>
 				</div>
+				<div class="bg-surface-800 flex items-center justify-between rounded-sm p-2">
+					<div class="flex items-center gap-2">
+						<button
+							class={cn('btn rounded-full p-2', showBases ? 'bg-primary-500' : 'bg-surface-700')}
+							onclick={() => (showBases = !showBases)}
+						>
+							{#if showBases}
+								<Eye class="h-5 w-5" />
+							{:else}
+								<EyeOff class="h-5 w-5" />
+							{/if}
+						</button>
+						<span>Bases ({Object.keys(bases).length})</span>
+					</div>
+					<Tooltip label="Toggle visibility of bases on the map">
+						<div class="text-xs text-gray-400">?</div>
+					</Tooltip>
+				</div>
 			</div>
-			<Accordion value={section} onValueChange={(e) => (section = e.value)}>
-				<Accordion.Item value="player">
+			<Accordion value={section} onValueChange={(e) => (section = e.value)} collapsible>
+				<Accordion.Item value="players" controlHover="hover:bg-secondary-500/25">
 					{#snippet control()}
 						<h2 class="text-lg font-bold">Players</h2>
 					{/snippet}
@@ -109,7 +127,7 @@
 						{/if}
 					{/snippet}
 				</Accordion.Item>
-				<Accordion.Item value="bases">
+				<Accordion.Item value="bases" controlHover="hover:bg-secondary-500/25">
 					{#snippet control()}
 						<h2 class="text-lg font-bold">Bases</h2>
 					{/snippet}

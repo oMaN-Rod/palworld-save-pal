@@ -740,7 +740,7 @@
 					onValueChange={(e) => (sideBarExpanded = e.value)}
 					collapsible
 				>
-					<Accordion.Item value="stats">
+					<Accordion.Item value="stats" controlHover="hover:bg-secondary-500/25">
 						{#snippet control()}
 							Stats
 						{/snippet}
@@ -749,7 +749,7 @@
 						{/snippet}
 					</Accordion.Item>
 					<hr class="hr" />
-					<Accordion.Item value="presets">
+					<Accordion.Item value="presets" controlHover="hover:bg-secondary-500/25">
 						{#snippet control()}Presets{/snippet}
 						{#snippet panel()}
 							<PlayerPresets containerRef={sideBarWrapper} />

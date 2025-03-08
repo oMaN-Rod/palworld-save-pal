@@ -130,6 +130,7 @@ export type Guild = {
 
 export type Base = {
 	id: string;
+	name?: string;
 	pals: Record<string, Pal>;
 	container_id: string;
 	pal_container: CharacterContainer;

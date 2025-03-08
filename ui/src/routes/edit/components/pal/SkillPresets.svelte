@@ -125,7 +125,7 @@
 </script>
 
 <Accordion value={selected} onValueChange={(e) => (selected = e.value)} collapsible>
-	<Accordion.Item value="active" controlHover="hover:preset-tonal-secondary">
+	<Accordion.Item value="active" controlHover="hover:bg-secondary-500/25">
 		{#snippet control()}
 			Active Skills
 		{/snippet}
@@ -185,7 +185,7 @@
 			</div>
 		{/snippet}
 	</Accordion.Item>
-	<Accordion.Item value="passive" controlHover="hover:preset-tonal-secondary">
+	<Accordion.Item value="passive" controlHover="hover:bg-secondary-500/25">
 		{#snippet control()}
 			Passive Skills
 		{/snippet}
