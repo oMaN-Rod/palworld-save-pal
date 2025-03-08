@@ -140,12 +140,11 @@ jobs:
       
       - name: Rename macOS DMG
         run: |
-          $version = "${{ github.event.inputs.version }}"
-          $dmgPath = "dist/PalworldSavePal-$version-macOS.dmg"
-          Move-Item -Path "dist/*.dmg" -Destination $dmgPath -Force
-          Write-Host "Renamed macOS DMG to $dmgPath"
-        shell: pwsh
-
+          version="${{ github.event.inputs.version }}"
+          dmg_path="dist/PalworldSavePal-$version-macos-installer.dmg"
+          mv dist/*.dmg "$dmg_path"
+          echo "Renamed DMG to $dmg_path"
+  
       - name: Upload macOS DMG artifact
         uses: actions/upload-artifact@v4
         with:
