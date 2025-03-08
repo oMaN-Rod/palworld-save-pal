@@ -74,9 +74,17 @@ jobs:
       - name: Create ZIP archive
         run: |
           $version = "${{ github.event.inputs.version }}"
-          $zipPath = "dist/psp-windows-$version-standalone.zip"
+          $zipPath = "dist/PalworldSavePal-$version-windows-standalone.zip"
           Compress-Archive -Path "dist/psp-windows-$version\*" -DestinationPath $zipPath -Force
           Write-Host "Created ZIP archive at $zipPath"
+        shell: pwsh
+      
+      - name: Rename MSI
+        run: |
+          $version = "${{ github.event.inputs.version }}"
+          $msiPath = "dist/PalworldSavePal-$version-windows-installer.msi"
+          Move-Item -Path "dist/*.msi" -Destination $msiPath -Force
+          Write-Host "Renamed MSI to $msiPath"
         shell: pwsh
 
       - name: Upload Windows ZIP artifact
@@ -129,12 +137,20 @@ jobs:
       - name: Build macOS DMG
         run: |
           python setup.py bdist_dmg
+      
+      - name: Rename macOS DMG
+        run: |
+          $version = "${{ github.event.inputs.version }}"
+          $dmgPath = "dist/PalworldSavePal-$version-macOS.dmg"
+          Move-Item -Path "dist/*.dmg" -Destination $dmgPath -Force
+          Write-Host "Renamed macOS DMG to $dmgPath"
+        shell: pwsh
 
       - name: Upload macOS DMG artifact
         uses: actions/upload-artifact@v4
         with:
           name: macos-dmg
-          path: build/*.dmg
+          path: dist/*.dmg
 
   create-release:
     needs: [build-windows, build-macos]
