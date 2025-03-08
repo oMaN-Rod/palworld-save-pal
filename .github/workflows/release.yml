@@ -142,6 +142,7 @@ jobs:
         run: |
           version="${{ github.event.inputs.version }}"
           dmg_path="dist/PalworldSavePal-$version-macos-installer.dmg"
+          mkdir -p dist
           mv dist/*.dmg "$dmg_path"
           echo "Renamed DMG to $dmg_path"
   
