@@ -20,6 +20,7 @@ on:
         required: false
         default: false
         type: boolean
+  pull_request:
 
 jobs:
   build-windows:
