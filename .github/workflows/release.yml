@@ -44,17 +44,14 @@ jobs:
 
       - name: Build Windows ZIP and MSI
         run: |
-          # Run your Windows build script
+          # Run the Windows build script
           python build_windows.py
-          # Alternatively, if you need to run explicit commands:
-          # python setup.py build
-          # python setup.py bdist_msi
 
       - name: Upload Windows ZIP artifact
         uses: actions/upload-artifact@v3
         with:
           name: windows-zip
-          path: dist/*.zip
+          path: dist/*windows.zip
 
       - name: Upload Windows MSI artifact
         uses: actions/upload-artifact@v3
@@ -80,14 +77,12 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip install py2app
+          pip install cx_Freeze
 
       - name: Build macOS DMG
         run: |
-          # Replace with your specific Mac build command
-          python setup.py py2app
-          # Create DMG (you might need to adjust this based on your Mac build script)
-          hdiutil create -volname "YourApp" -srcfolder dist/YourApp.app -ov -format UDZO dist/YourApp.dmg
+          # Build DMG using the command from setup.py
+          python setup.py bdist_dmg
 
       - name: Upload macOS DMG artifact
         uses: actions/upload-artifact@v3
