@@ -196,43 +196,39 @@ def set_mac_working_directory():
         os.chdir(os.path.dirname(sys.executable))
 
 def main():
-    try:
-        set_mac_working_directory()
+    set_mac_working_directory()
 
-        multiprocessing.freeze_support()
-        args = parse_arguments()
-        create_db_and_tables()
-        setup_logging(dev_mode=args.dev)
-        global logger
-        logger = create_logger(__name__)
+    multiprocessing.freeze_support()
+    args = parse_arguments()
+    create_db_and_tables()
+    setup_logging(dev_mode=args.dev)
+    global logger
+    logger = create_logger(__name__)
 
-        logger.info(
-            "Starting application in %s mode on %s:%s",
-            "development" if args.dev else "production",
-            args.host,
-            args.port,
-        )
+    logger.info(
+        "Starting application in %s mode on %s:%s",
+        "development" if args.dev else "production",
+        args.host,
+        args.port,
+    )
 
-        start_server(args.host, args.port, args.dev)
+    start_server(args.host, args.port, args.dev)
 
-        time.sleep(2)
-        host = args.web_host or args.host
-        port = args.web_port or args.port
-        url = f"http://{host}:{port}"
-        start_webview(url)
+    time.sleep(2)
+    host = args.web_host or args.host
+    port = args.web_port or args.port
+    url = f"http://{host}:{port}"
+    start_webview(url)
 
-        logger.debug("Main thread waiting for termination signal")
-        app_state.terminate_flag.wait()
+    logger.debug("Main thread waiting for termination signal")
+    app_state.terminate_flag.wait()
 
-        logger.debug("Termination signal received, initiating shutdown")
-        if app_state.server_instance:
-            app_state.server_instance.stop()
-        cleanup_processes()
-        logger.info("Application shutdown complete, goodbye!")
-    except Exception as e:
-        # Create file in home directory to store error message
-        with open(os.path.expanduser("~/palworld_save_pal_error.txt"), "w") as f:
-            f.write(str(e))
+    logger.debug("Termination signal received, initiating shutdown")
+    if app_state.server_instance:
+        app_state.server_instance.stop()
+    cleanup_processes()
+    logger.info("Application shutdown complete, goodbye!")
+
 
 
 if __name__ == "__main__":
