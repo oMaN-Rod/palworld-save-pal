@@ -24,7 +24,8 @@
 		showOrigin = false,
 		showPlayers = true,
 		showBases = true,
-		showFastTravel = true
+		showFastTravel = true,
+		showDungeons = true
 	} = $props();
 
 	const appState = getAppState();
@@ -50,7 +51,8 @@
 	let originMarkers: L.Layer[] = [];
 	let playerMarkers: L.Marker[] = [];
 	let baseMarkers: L.Marker[] = [];
-	let mapObjectsMarkers: L.Marker[] = [];
+	let fastTravelMarkers: L.Marker[] = [];
+	let dungeonMarkers: L.Marker[] = [];
 
 	const mapOptions = {
 		center: [0, 0] as [number, number],
@@ -67,9 +69,9 @@
 
 		return L.icon({
 			iconUrl,
-			iconSize: [32, 32],
-			iconAnchor: [16, 16],
-			popupAnchor: [0, -16]
+			iconSize: [24, 24],
+			iconAnchor: [12, 12],
+			popupAnchor: [0, -12]
 		});
 	}
 
@@ -92,7 +94,7 @@
 		const originMarker = L.marker(latlng, { icon }).addTo(map!);
 
 		originMarker.bindPopup(`
-            <div class="">
+            <div>
                 <h3 class="text-lg font-bold">Origin (0,0)</h3>
                 <p>This is the origin (0,0) in map coordinates</p>
                 <p class="text-xs mt-2">World Coords: ${worldCoords.x.toFixed(2)}, ${worldCoords.y.toFixed(2)}</p>
@@ -154,7 +156,7 @@
 			const baseMarker = L.marker(latlng, { icon }).addTo(map!);
 
 			baseMarker.bindPopup(`
-            <div class="">
+            <div>
                 <h3 class="text-lg font-bold">${base.id}</h3>
                 <p class="text-xs mt-2">World Coords: ${base.location.x.toFixed(2)}, ${base.location.y.toFixed(2)}</p>
                 <p class="text-xs">Map Coords: ${worldToMap(base.location.x, base.location.y).x}, ${worldToMap(base.location.x, base.location.y).y}</p>
@@ -188,7 +190,7 @@
 			const playerMarker = L.marker(latlng, { icon }).addTo(map!);
 
 			playerMarker.bindPopup(`
-                <div class="">
+                <div>
                     <h3 class="text-lg font-bold">${player.nickname}</h3>
                     <p class="text-xs">Level: ${player.level}</p>
                     <p class="text-xs">HP: ${player.hp}</p>
@@ -205,27 +207,59 @@
 		if (!map) return;
 
 		// Clear any existing fast travel markers
-		mapObjectsMarkers.forEach((marker) => map!.removeLayer(marker));
-		mapObjectsMarkers = [];
+		fastTravelMarkers.forEach((marker) => map!.removeLayer(marker));
+		fastTravelMarkers = [];
 
 		if (!showFastTravel) return;
 		if (!mapObjects) return;
-		mapObjects.points.forEach((point) => {
-			// Convert point world coordinates to Leaflet coordinates
-			const latlng = worldToLeaflet(point.x, point.y);
+		const icon = mapIcons.fastTravel;
+		mapObjects.points
+			.filter((p) => p.type === 'fast_travel')
+			.forEach((point) => {
+				// Convert point world coordinates to Leaflet coordinates
+				const latlng = worldToLeaflet(point.x, point.y);
 
-			const marker = L.marker(latlng, { icon: mapIcons.fastTravel }).addTo(map!);
+				const marker = L.marker(latlng, { icon }).addTo(map!);
 
-			marker.bindPopup(`
-				<div class="">
-					<h3 class="text-lg font-bold">${point.localized_name}</h3>
-					<p class="text-xs mt-2">World Coords: ${point.x.toFixed(2)}, ${point.y.toFixed(2)}</p>
-					<p class="text-xs">Map Coords: ${worldToMap(point.x, point.y).x}, ${worldToMap(point.x, point.y).y}</p>
-				</div>
-			`);
+				marker.bindPopup(`
+					<div>
+						<h3 class="text-lg font-bold">${point.localized_name}</h3>
+						<p class="text-xs mt-2">World Coords: ${point.x.toFixed(2)}, ${point.y.toFixed(2)}</p>
+						<p class="text-xs">Map Coords: ${worldToMap(point.x, point.y).x}, ${worldToMap(point.x, point.y).y}</p>
+					</div>
+				`);
 
-			mapObjectsMarkers.push(marker);
-		});
+				fastTravelMarkers.push(marker);
+			});
+	}
+
+	async function addDungeonMarkers() {
+		if (!map) return;
+
+		// Clear any existing fast travel markers
+		dungeonMarkers.forEach((marker) => map!.removeLayer(marker));
+		dungeonMarkers = [];
+
+		if (!showDungeons) return;
+		if (!mapObjects) return;
+		const icon = mapIcons.dungeon;
+		mapObjects.points
+			.filter((p) => p.type === 'dungeon')
+			.forEach((point) => {
+				// Convert point world coordinates to Leaflet coordinates
+				const latlng = worldToLeaflet(point.x, point.y);
+
+				const marker = L.marker(latlng, { icon }).addTo(map!);
+
+				marker.bindPopup(`
+					<div>
+						<p class="text-xs mt-2">World Coords: ${point.x.toFixed(2)}, ${point.y.toFixed(2)}</p>
+						<p class="text-xs">Map Coords: ${worldToMap(point.x, point.y).x}, ${worldToMap(point.x, point.y).y}</p>
+					</div>
+				`);
+
+				dungeonMarkers.push(marker);
+			});
 	}
 
 	function initialize(container: HTMLElement) {
@@ -263,13 +297,14 @@
 		});
 
 		// Set initial view to the center of the map
-		map.setView(initialView, 0);
+		map.setView(initialView, -3);
 
 		// Add markers
 		addOriginMarker();
 		addPlayerMarkers();
 		addBaseMarkers();
 		addFastTravelMarkers();
+		addDungeonMarkers();
 
 		// Add coordinate display
 		addCoordinateDisplay();
@@ -343,6 +378,12 @@
 		}
 	});
 
+	$effect(() => {
+		if (map) {
+			addDungeonMarkers();
+		}
+	});
+
 	onDestroy(() => {
 		if (map) {
 			map.remove();
@@ -354,7 +395,6 @@
 <div class="h-full w-full" id="map" use:initialize></div>
 
 <style>
-	/* Make both the container and the leaflet container black */
 	:global(.leaflet-container) {
 		background-color: #000 !important;
 	}
@@ -366,5 +406,19 @@
 	:global(.marker-popup h3) {
 		margin-top: 0;
 		margin-bottom: 8px;
+	}
+
+	:global(.leaflet-popup-content-wrapper) {
+		background-color: var(--color-surface-900) !important;
+		color: white !important;
+		border-radius: 4px;
+	}
+
+	:global(.leaflet-popup-tip) {
+		background-color: var(--color-surface-900) !important;
+	}
+
+	:global(.leaflet-popup-close-button) {
+		color: white !important;
 	}
 </style>

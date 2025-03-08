@@ -1,9 +1,11 @@
 <script lang="ts">
 	import { Map } from '$components';
 	import { getAppState } from '$states';
-	import { Checkbox } from '$components/ui';
 	import { worldToMap } from '$components/map/utils';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
+	import { mapImg } from '$components/map/mapImages';
+	import { Target } from 'lucide-svelte';
+	import { mapObjects } from '$lib/data';
 
 	const appState = getAppState();
 
@@ -11,6 +13,7 @@
 	let showPlayers = $state(true);
 	let showBases = $state(true);
 	let showFastTravel = $state(true);
+	let showDungeons = $state(true);
 	let section = $state(['players']);
 
 	const players = $derived(Object.values(appState.players || {}));
@@ -29,6 +32,14 @@
 			{} as Record<string, any>
 		);
 	});
+	const fastTravelCount = $derived.by(() => {
+		return (
+			Object.values(mapObjects.points).filter((point) => point.type === 'fast_travel').length || 0
+		);
+	});
+	const dungeonCount = $derived.by(() => {
+		return Object.values(mapObjects.points).filter((point) => point.type === 'dungeon').length || 0;
+	});
 </script>
 
 <div class="grid h-full grid-cols-[25%_1fr] gap-2">
@@ -43,10 +54,45 @@
 				<div class="flex flex-col gap-2">
 					<h2 class="text-lg font-bold">Map Controls</h2>
 					<div class="grid grid-cols-2 gap-2">
-						<Checkbox label="Origin" bind:checked={showOrigin} />
-						<Checkbox label="Players" bind:checked={showPlayers} />
-						<Checkbox label="Bases" bind:checked={showBases} />
-						<Checkbox label="Fast Travel" bind:checked={showFastTravel} />
+						<button
+							class="flex items-center space-x-2 {showOrigin ? '' : 'opacity-25'}"
+							onclick={() => (showOrigin = !showOrigin)}
+						>
+							<Target class="mr-2 h-6 w-6" />
+							<span>Origin</span>
+						</button>
+						<button
+							class="flex items-center space-x-2 {showFastTravel ? '' : 'opacity-25'} "
+							onclick={() => (showFastTravel = !showFastTravel)}
+						>
+							<img src={mapImg.fastTravel} alt="Fast Travel" class="mr-2 h-6 w-6" />
+							<span>Fast Travel</span>
+							<span class="text-surface-500 text-xs">{fastTravelCount}</span>
+						</button>
+						<button
+							class="flex items-center space-x-2 {showPlayers ? '' : 'opacity-25'}"
+							onclick={() => (showPlayers = !showPlayers)}
+						>
+							<img src={mapImg.player} alt="Players" class="mr-2 h-6 w-6" />
+							<span>Players</span>
+							<span class="text-surface-500 text-xs">{playerCount}</span>
+						</button>
+						<button
+							class="flex items-center space-x-2 {showBases ? '' : 'opacity-25'}"
+							onclick={() => (showBases = !showBases)}
+						>
+							<img src={mapImg.baseCamp} alt="Bases" class="mr-2 h-6 w-6" />
+							<span>Bases</span>
+							<span class="text-surface-500 text-xs">{Object.keys(bases).length}</span>
+						</button>
+						<button
+							class="flex items-center space-x-2 {showDungeons ? '' : 'opacity-25'}"
+							onclick={() => (showDungeons = !showDungeons)}
+						>
+							<img src={mapImg.dungeon} alt="Dungeons" class="mr-2 h-6 w-6" />
+							<span>Dungeons</span>
+							<span class="text-surface-500 text-xs">{dungeonCount}</span>
+						</button>
 					</div>
 				</div>
 				<Accordion value={section} onValueChange={(e) => (section = e.value)} collapsible>
@@ -111,5 +157,5 @@
 			</div>
 		</div>
 	</div>
-	<Map {showOrigin} {showPlayers} {showBases} {showFastTravel} />
+	<Map {showOrigin} {showPlayers} {showBases} {showFastTravel} {showDungeons} />
 </div>
