@@ -1,4 +1,6 @@
 import json
+import os
+import platform
 from urllib.parse import quote
 import sys
 from pathlib import Path
@@ -188,8 +190,14 @@ def parse_arguments():
     parser.add_argument("--web-port", type=int, help="Port to run the webview on")
     return parser.parse_args()
 
+def set_mac_working_directory():
+    """Set the working directory to the executable's directory on macOS."""
+    if getattr(sys, 'frozen', False) and platform.system() == "Darwin":
+        os.chdir(os.path.dirname(sys.executable))
 
 def main():
+    set_mac_working_directory()
+
     multiprocessing.freeze_support()
     args = parse_arguments()
     create_db_and_tables()
@@ -220,6 +228,7 @@ def main():
         app_state.server_instance.stop()
     cleanup_processes()
     logger.info("Application shutdown complete, goodbye!")
+
 
 
 if __name__ == "__main__":

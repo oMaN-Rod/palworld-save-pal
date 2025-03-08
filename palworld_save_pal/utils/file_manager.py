@@ -1,6 +1,7 @@
 from datetime import datetime, timezone
 import os
 from pathlib import Path
+import platform
 from typing import Dict, Optional
 import uuid
 from pydantic import BaseModel, ConfigDict
@@ -21,7 +22,9 @@ FILETIME_EPOCH = datetime(1601, 1, 1, tzinfo=timezone.utc)
 STEAM_ROOT = (
     os.path.join(os.getenv("LOCALAPPDATA"), "Pal", "Saved", "SaveGames")
     if os.name == "nt"
-    else "~"
+    else (os.path.join("/System/Volumes/Data/Users", os.getenv("USER"), "Library/Containers/com.pocketpair.palworld.mac/Data/Library/Application Support/Epic/Pal/Saved/SaveGames") 
+          if platform.system() == "Darwin" 
+          else "~")
 )
 GAMEPASS_ROOT = (
     os.path.join(
