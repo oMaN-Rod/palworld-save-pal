@@ -140,6 +140,13 @@ export type Base = {
 	location: WorldMapPoint;
 };
 
+export type MapObject = {
+	x: number;
+	y: number;
+	type: string;
+	localized_name: string;
+};
+
 export type BaseDTO = { id: string; storage_containers: Record<string, ItemContainer> };
 
 export type GuildDTO = { base?: BaseDTO; guild_chest?: ItemContainer };

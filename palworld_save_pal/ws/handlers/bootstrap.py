@@ -8,6 +8,7 @@ from palworld_save_pal.ws.handlers import (
     elements_handler,
     exp_handler,
     items_handler,
+    map_objects_handler,
     open_in_browser_handler,
     passive_skills_handler,
     technologies_handler,
@@ -29,6 +30,7 @@ from palworld_save_pal.ws.messages import (
     GetBuildingsMessage,
     GetElementsMessage,
     GetItemsMessage,
+    GetMapObjectsMessage,
     GetPalsMessage,
     GetPassiveSkillsMessage,
     GetRawDataMessage,
@@ -321,5 +323,13 @@ def bootstrap(dispatcher: "MessageDispatcher"):
         {
             "message_class": GetRawDataMessage,
             "handler_func": debug_handler.get_raw_data_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.GET_MAP_OBJECTS.value,
+        {
+            "message_class": GetMapObjectsMessage,
+            "handler_func": map_objects_handler.get_map_objects_handler,
         },
     )

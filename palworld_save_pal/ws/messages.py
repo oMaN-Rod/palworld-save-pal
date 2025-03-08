@@ -34,6 +34,7 @@ class MessageType(str, Enum):
     GET_BUILDINGS = "get_buildings"
     GET_ELEMENTS = "get_elements"
     GET_EXP_DATA = "get_exp_data"
+    GET_MAP_OBJECTS = "get_map_objects"
     GET_GUILDS = "get_guilds"
     GET_ITEMS = "get_items"
     GET_PASSIVE_SKILLS = "get_passive_skills"
@@ -300,3 +301,7 @@ class TechnologyData(BaseModel):
 class SetTechnologyDataMessage(BaseModel):
     type: str = MessageType.SET_TECHNOLOGY_DATA.value
     data: TechnologyData
+
+
+class GetMapObjectsMessage(BaseModel):
+    type: str = MessageType.GET_MAP_OBJECTS.value

@@ -6,6 +6,7 @@ import {
 	elementsData,
 	expData,
 	itemsData,
+	mapObjects,
 	palsData,
 	passiveSkillsData,
 	presetsData,
@@ -29,6 +30,7 @@ export const bootstrap = async () => {
 	await itemsData.reset();
 	await workSuitabilityData.reset();
 	await buildingsData.reset();
+	await mapObjects.reset();
 	ws.send(JSON.stringify({ type: MessageType.GET_VERSION }));
 	ws.send(JSON.stringify({ type: MessageType.SYNC_APP_STATE }));
 };

@@ -1,17 +1,16 @@
 <script lang="ts">
 	import { Map } from '$components';
 	import { getAppState } from '$states';
-	import { Tooltip } from '$components/ui';
-	import { Eye, EyeOff } from 'lucide-svelte';
-	import { cn } from '$theme';
+	import { Checkbox } from '$components/ui';
 	import { worldToMap } from '$components/map/utils';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 
 	const appState = getAppState();
 
-	let showOrigin = $state(true);
+	let showOrigin = $state(false);
 	let showPlayers = $state(true);
 	let showBases = $state(true);
+	let showFastTravel = $state(true);
 	let section = $state(['players']);
 
 	const players = $derived(Object.values(appState.players || {}));
@@ -43,64 +42,11 @@
 			{#if appState.saveFile}
 				<div class="flex flex-col gap-2">
 					<h2 class="text-lg font-bold">Map Controls</h2>
-
-					<div class="bg-surface-800 flex items-center justify-between rounded-sm p-2">
-						<div class="flex items-center gap-2">
-							<button
-								class={cn('btn rounded-full p-2', showOrigin ? 'bg-primary-500' : 'bg-surface-700')}
-								onclick={() => (showOrigin = !showOrigin)}
-							>
-								{#if showOrigin}
-									<Eye class="h-5 w-5" />
-								{:else}
-									<EyeOff class="h-5 w-5" />
-								{/if}
-							</button>
-							<span>Origin</span>
-						</div>
-						<Tooltip label="Toggle visibility of the origin marker (0,0)">
-							<div class="text-xs text-gray-400">?</div>
-						</Tooltip>
-					</div>
-
-					<div class="bg-surface-800 flex items-center justify-between rounded-sm p-2">
-						<div class="flex items-center gap-2">
-							<button
-								class={cn(
-									'btn rounded-full p-2',
-									showPlayers ? 'bg-primary-500' : 'bg-surface-700'
-								)}
-								onclick={() => (showPlayers = !showPlayers)}
-							>
-								{#if showPlayers}
-									<Eye class="h-5 w-5" />
-								{:else}
-									<EyeOff class="h-5 w-5" />
-								{/if}
-							</button>
-							<span>Players ({playerCount})</span>
-						</div>
-						<Tooltip label="Toggle visibility of player markers on the map">
-							<div class="text-xs text-gray-400">?</div>
-						</Tooltip>
-					</div>
-					<div class="bg-surface-800 flex items-center justify-between rounded-sm p-2">
-						<div class="flex items-center gap-2">
-							<button
-								class={cn('btn rounded-full p-2', showBases ? 'bg-primary-500' : 'bg-surface-700')}
-								onclick={() => (showBases = !showBases)}
-							>
-								{#if showBases}
-									<Eye class="h-5 w-5" />
-								{:else}
-									<EyeOff class="h-5 w-5" />
-								{/if}
-							</button>
-							<span>Bases ({Object.keys(bases).length})</span>
-						</div>
-						<Tooltip label="Toggle visibility of bases on the map">
-							<div class="text-xs text-gray-400">?</div>
-						</Tooltip>
+					<div class="grid grid-cols-2 gap-2">
+						<Checkbox label="Origin" bind:checked={showOrigin} />
+						<Checkbox label="Players" bind:checked={showPlayers} />
+						<Checkbox label="Bases" bind:checked={showBases} />
+						<Checkbox label="Fast Travel" bind:checked={showFastTravel} />
 					</div>
 				</div>
 				<Accordion value={section} onValueChange={(e) => (section = e.value)} collapsible>
@@ -165,5 +111,5 @@
 			</div>
 		</div>
 	</div>
-	<Map {showOrigin} {showPlayers} {showBases} />
+	<Map {showOrigin} {showPlayers} {showBases} {showFastTravel} />
 </div>

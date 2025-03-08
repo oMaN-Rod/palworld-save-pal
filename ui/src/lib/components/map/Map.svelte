@@ -17,9 +17,15 @@
 		worldToMap
 	} from './utils';
 	import { mapIcons, mapImg } from './mapImages';
+	import { mapObjects } from '$lib/data';
 
 	// Props to control which markers to display
-	let { showOrigin = true, showPlayers = true, showBases = true } = $props();
+	let {
+		showOrigin = false,
+		showPlayers = true,
+		showBases = true,
+		showFastTravel = true
+	} = $props();
 
 	const appState = getAppState();
 
@@ -44,6 +50,7 @@
 	let originMarkers: L.Layer[] = [];
 	let playerMarkers: L.Marker[] = [];
 	let baseMarkers: L.Marker[] = [];
+	let mapObjectsMarkers: L.Marker[] = [];
 
 	const mapOptions = {
 		center: [0, 0] as [number, number],
@@ -194,6 +201,33 @@
 		});
 	}
 
+	async function addFastTravelMarkers() {
+		if (!map) return;
+
+		// Clear any existing fast travel markers
+		mapObjectsMarkers.forEach((marker) => map!.removeLayer(marker));
+		mapObjectsMarkers = [];
+
+		if (!showFastTravel) return;
+		if (!mapObjects) return;
+		mapObjects.points.forEach((point) => {
+			// Convert point world coordinates to Leaflet coordinates
+			const latlng = worldToLeaflet(point.x, point.y);
+
+			const marker = L.marker(latlng, { icon: mapIcons.fastTravel }).addTo(map!);
+
+			marker.bindPopup(`
+				<div class="">
+					<h3 class="text-lg font-bold">${point.localized_name}</h3>
+					<p class="text-xs mt-2">World Coords: ${point.x.toFixed(2)}, ${point.y.toFixed(2)}</p>
+					<p class="text-xs">Map Coords: ${worldToMap(point.x, point.y).x}, ${worldToMap(point.x, point.y).y}</p>
+				</div>
+			`);
+
+			mapObjectsMarkers.push(marker);
+		});
+	}
+
 	function initialize(container: HTMLElement) {
 		map = L.map(container, mapOptions);
 
@@ -235,6 +269,7 @@
 		addOriginMarker();
 		addPlayerMarkers();
 		addBaseMarkers();
+		addFastTravelMarkers();
 
 		// Add coordinate display
 		addCoordinateDisplay();
@@ -299,6 +334,12 @@
 	$effect(() => {
 		if (map) {
 			addBaseMarkers();
+		}
+	});
+
+	$effect(() => {
+		if (map) {
+			addFastTravelMarkers();
 		}
 	});
 
