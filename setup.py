@@ -50,7 +50,7 @@ bdist_mac_options = {
 
 # DMG specific options
 bdist_dmg_options = {
-    "volume_label": f"psp-mac-{__version__}",
+    "volume_label": f"PalworldSavePal-{__version__}-macOS",
     "format": "UDZO",
     "filesystem": "HFS+",
     "size": None,
