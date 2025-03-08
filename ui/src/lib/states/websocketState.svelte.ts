@@ -86,11 +86,5 @@ export function createSocketState() {
 	};
 }
 
-let socketState: ReturnType<typeof createSocketState>;
-
-export function getSocketState() {
-	if (!socketState) {
-		socketState = createSocketState();
-	}
-	return socketState;
-}
+const socketState: ReturnType<typeof createSocketState> = createSocketState();
+export const getSocketState = () => socketState;

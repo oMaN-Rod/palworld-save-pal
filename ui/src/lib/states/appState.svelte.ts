@@ -298,11 +298,5 @@ export function createAppState() {
 	};
 }
 
-let appState: ReturnType<typeof createAppState>;
-
-export function getAppState() {
-	if (!appState) {
-		appState = createAppState();
-	}
-	return appState;
-}
+const appState: ReturnType<typeof createAppState> = createAppState();
+export const getAppState = () => appState;

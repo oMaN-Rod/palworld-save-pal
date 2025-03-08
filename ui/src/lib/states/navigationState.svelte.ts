@@ -50,11 +50,5 @@ export function createNavigationState(
 	};
 }
 
-let navigationState: ReturnType<typeof createNavigationState>;
-
-export function getNavigationState() {
-	if (!navigationState) {
-		navigationState = createNavigationState('file');
-	}
-	return navigationState;
-}
+const navigationState: ReturnType<typeof createNavigationState> = createNavigationState('file');
+export const getNavigationState = () => navigationState;

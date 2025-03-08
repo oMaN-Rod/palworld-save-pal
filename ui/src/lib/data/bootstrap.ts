@@ -16,6 +16,9 @@ import {
 const ws = getSocketState();
 
 export const bootstrap = async () => {
+	while (!ws.connected) {
+		await new Promise((resolve) => setTimeout(resolve, 100));
+	}
 	await presetsData.reset();
 	await palsData.reset();
 	await activeSkillsData.reset();

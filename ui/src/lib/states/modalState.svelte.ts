@@ -55,11 +55,5 @@ export function createModalState() {
 	};
 }
 
-let modalState: ReturnType<typeof createModalState>;
-
-export function getModalState() {
-	if (!modalState) {
-		modalState = createModalState();
-	}
-	return modalState;
-}
+const modalState: ReturnType<typeof createModalState> = createModalState();
+export const getModalState = () => modalState;
