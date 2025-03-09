@@ -157,25 +157,93 @@ class SaveFile(BaseModel):
     _map_object_save_data: List[Dict[str, Any]] = PrivateAttr(default_factory=list)
     _guild_extra_save_data_map: List[Dict[str, Any]] = PrivateAttr(default_factory=list)
 
-    def _should_delete_map_object(self, map_object: dict, guild_id: UUID) -> bool:
+    def _should_delete_map_object(self, map_object: dict, guild_id: UUID, player_ids: List[UUID]) -> bool:
+        """
+        Determine if a map object should be deleted based on guild and player ownership.
+        
+        Args:
+            map_object: The map object data
+            guild_id: The guild ID to check against
+            player_ids: List of player UUIDs to check against
+            
+        Returns:
+            bool: True if the map object should be deleted, False otherwise
+        """
         raw_data = map_object["Model"]["value"]["RawData"]["value"]
         group_id = PalObjects.as_uuid(raw_data.get("group_id_belong_to"))
+        build_player_uid = PalObjects.as_uuid(raw_data.get("build_player_uid"))
+        
+        # Check guild ownership
         if are_equal_uuids(group_id, guild_id):
             return True
+        
+        # Check if any player in the list is the builder
+        if any(are_equal_uuids(build_player_uid, player_id) for player_id in player_ids):
+            return True
+
+        # Handle edge cases
+        if "ConcreteModel" in map_object:
+            concrete_model_raw_data = map_object["ConcreteModel"]["value"]["RawData"]["value"]
+            private_lock_player_uid = PalObjects.as_uuid(concrete_model_raw_data.get("private_lock_player_uid"))
+            
+            # Check if any player in the list is the private lock owner
+            if any(are_equal_uuids(private_lock_player_uid, player_id) for player_id in player_ids):
+                return True
+
+            # Check trade info sellers
+            for trade_info in concrete_model_raw_data.get("trade_infos", []):
+                seller_player_uid = PalObjects.as_uuid(trade_info.get("seller_player_uid"))
+                if any(are_equal_uuids(seller_player_uid, player_id) for player_id in player_ids):
+                    return True
+
+            # Check password lock module
+            for module in concrete_model_raw_data.get("ModuleMap", {}).get("value", []):
+                if module["key"] == "EPalMapObjectConcreteModelModuleType::PasswordLock":
+                    for player_info in module["value"]["RawData"]["value"].get("player_infos", []):
+                        player_uid = PalObjects.as_uuid(player_info.get("player_uid"))
+                        if any(are_equal_uuids(player_uid, player_id) for player_id in player_ids):
+                            return True
 
         return False
 
-    def delete_guild(self, guild_id: UUID) -> None:
-        self._map_object_save_data["values"] = [
-            map_object for map_object in self._map_object_save_data["values"]
-            if not self._should_delete_map_object(map_object, guild_id)
-        ]
-
+    def delete_guild_and_players(self, guild_id: UUID) -> None:
         guild = self._guilds.get(guild_id)
-        if guild:
-            guild.nuke()
+        if not guild:
+            raise ValueError(f"Guild {guild_id} not found in the save file.")
         
-        del self._guilds[guild_id]
+        # Get all players in the guild
+        players_in_guild = guild.players
+
+        # Delete all players in the guild
+        for player_id in players_in_guild:
+            self.delete_player_pals(player_id)
+
+            # Delete the player
+            self._players = {
+                player_id: player for player_id, player in self._players.items()
+                if player_id not in players_in_guild
+            }
+
+            # Delete player save file
+            self._player_gvas_files = {
+                player_id: gvas_file for player_id, gvas_file in self._player_gvas_files.items()
+                if player_id not in players_in_guild
+            }
+
+        # Delete all bases in the guild
+        for base in guild.bases.values():
+            for pal in base.pals.values():
+                self._delete_pal_by_id(pal.instance_id)
+            self._base_camp_save_data_map[:] = [
+                base for base in self._base_camp_save_data_map
+                if not are_equal_uuids(PalObjects.get_nested(base, "value", "key"), base.base_id)
+            ]
+
+        # Delete the guild
+        self._group_save_data_map[:] = [
+            group for group in self._group_save_data_map
+            if not are_equal_uuids(PalObjects.get_nested(group, "key"), guild_id)
+        ]
 
     def add_player_pal(
         self,
