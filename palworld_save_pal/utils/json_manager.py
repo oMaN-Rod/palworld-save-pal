@@ -1,5 +1,7 @@
 import json
 import os
+import platform
+import sys
 from typing import Any, Dict
 
 from palworld_save_pal.utils.logging_config import create_logger
@@ -7,9 +9,19 @@ from palworld_save_pal.utils.logging_config import create_logger
 logger = create_logger(__name__)
 
 
+def find_data_file(filename):
+    # If we're on Mac and frozen, make sure we use the correct path
+    if getattr(sys, 'frozen', False) and platform.system() == "Darwin":
+        # The application is frozen
+        datadir = os.path.dirname(sys.executable)
+    else:
+        # The application is not frozen
+        datadir = ""
+    return os.path.join(datadir, filename)
+
 class JsonManager:
     def __init__(self, file_path: str):
-        self.file_path = file_path
+        self.file_path = find_data_file(file_path)
         self.ensure_file_exists()
 
     def ensure_file_exists(self):

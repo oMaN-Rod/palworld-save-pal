@@ -2,6 +2,9 @@ from cx_Freeze import setup, Executable
 import sys
 from palworld_save_pal.__version__ import __version__
 
+# Import DMG settings from settings.py
+
+# Build options
 build_exe_options = {
     "include_files": [
         ("ui_build", "ui"),
@@ -30,19 +33,55 @@ bdist_msi_options = {
     },
 }
 
+# Mac specific options
+bdist_mac_options = {
+    "bundle_name": "Palworld Save Pal",
+    "iconfile": "ui/static/favicon.icns",
+    "plist_items": [
+        ("CFBundleShortVersionString", __version__),
+        ("CFBundleIdentifier", "com.palworldsavepal"),
+        ("NSHighResolutionCapable", True),
+    ],
+    "include_resources": [
+        ("ui_build", "ui"),
+        ("data", "data"),
+    ],
+}
+
+# DMG specific options
+bdist_dmg_options = {
+    "volume_label": f"PalworldSavePal-{__version__}-macOS",
+    "format": "UDZO",
+    "filesystem": "HFS+",
+    "size": None,
+    "background": "builtin-arrow",
+    "show_status_bar": False,
+    "show_tab_view": False,
+    "show_path_bar": False,
+    "show_sidebar": False,
+    "sidebar_width": None,
+    "show_icon_preview": False,
+    "applications_shortcut": True,
+}
+
 base = "Win32GUI" if sys.platform == "win32" else None
 
 setup(
     name="PalworldSavePal",
     version=__version__,
     description="Palworld Save Pal",
-    options={"build_exe": build_exe_options, "bdist_msi": bdist_msi_options},
+    options={
+        "build_exe": build_exe_options,
+        "bdist_msi": bdist_msi_options,
+        "bdist_mac": bdist_mac_options,
+        "bdist_dmg": bdist_dmg_options,
+    },
     executables=[
         Executable(
             "desktop.py",
             base=base,
             icon="ui/static/favicon.ico",
-            target_name="PSP.exe",
+            target_name="PSP.exe" if sys.platform == "win32" else "PSP",
             shortcut_name="Palworld Save Pal",
             shortcut_dir="ProgramMenuDir",
         )
