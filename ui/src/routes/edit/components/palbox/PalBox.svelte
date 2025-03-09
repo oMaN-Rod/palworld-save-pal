@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { elementsData, palsData, presetsData } from '$lib/data';
-	import { getAppState, getSocketState, getModalState, getToastState } from '$states';
+	import { getAppState, getModalState, getToastState } from '$states';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import { Input, Tooltip, TooltipButton } from '$components/ui';
 	import { NumberInputModal, PalSelectModal, PalPresetSelectModal } from '$components/modals';
@@ -15,7 +15,7 @@
 		formatNickname
 	} from '$utils';
 	import { cn } from '$theme';
-	import { staticIcons } from '$lib/constants';
+	import { staticIcons } from '$types/icons';
 	import {
 		Search,
 		GalleryVerticalEnd,
@@ -38,6 +38,7 @@
 	} from 'lucide-svelte';
 	import Card from '$components/ui/card/Card.svelte';
 	import { PalCard, PalBadge } from '$components';
+	import { send } from '$lib/utils/websocketUtils';
 
 	const PALS_PER_PAGE = 30;
 	const TOTAL_SLOTS = 960;
@@ -47,7 +48,6 @@
 	type SortOrder = 'asc' | 'desc';
 
 	const appState = getAppState();
-	const ws = getSocketState();
 	const modal = getModalState();
 	const toast = getToastState();
 
@@ -256,29 +256,21 @@
 
 	function handleMoveToParty(pal: Pal) {
 		if (appState.selectedPlayer) {
-			const message = {
-				type: MessageType.MOVE_PAL,
-				data: {
-					player_id: appState.selectedPlayer.uid,
-					pal_id: pal.instance_id,
-					container_id: appState.selectedPlayer.otomo_container_id
-				}
-			};
-			ws.send(JSON.stringify(message));
+			send(MessageType.MOVE_PAL, {
+				player_id: appState.selectedPlayer.uid,
+				pal_id: pal.instance_id,
+				container_id: appState.selectedPlayer.otomo_container_id
+			});
 		}
 	}
 
 	function handleMoveToPalbox(pal: Pal) {
 		if (appState.selectedPlayer) {
-			const message = {
-				type: MessageType.MOVE_PAL,
-				data: {
-					player_id: appState.selectedPlayer.uid,
-					pal_id: pal.instance_id,
-					container_id: appState.selectedPlayer.pal_box_id
-				}
-			};
-			ws.send(JSON.stringify(message));
+			send(MessageType.MOVE_PAL, {
+				player_id: appState.selectedPlayer.uid,
+				pal_id: pal.instance_id,
+				container_id: appState.selectedPlayer.pal_box_id
+			});
 		}
 	}
 
@@ -366,17 +358,16 @@
 			target === 'party'
 				? appState.selectedPlayer.otomo_container_id
 				: appState.selectedPlayer.pal_box_id;
-		const message = {
-			type: MessageType.ADD_PAL,
-			data: {
-				player_id: appState.selectedPlayer.uid,
-				character_id: selectedPal,
-				nickname: nickname || formatNickname(palData?.localized_name || selectedPal),
-				container_id: containerId,
-				storage_slot: index
-			}
-		};
-		ws.send(JSON.stringify(message));
+
+		send(MessageType.ADD_PAL, {
+			player_id: appState.selectedPlayer.uid,
+			character_id: selectedPal,
+			nickname:
+				nickname ||
+				formatNickname(palData?.localized_name || selectedPal, appState.settings.new_pal_prefix),
+			container_id: containerId,
+			storage_slot: index
+		});
 	}
 
 	function sortByName() {
@@ -435,15 +426,11 @@
 			const clonedPal = deepCopy(pal);
 			clonedPal.nickname = formatNickname(
 				clonedPal.nickname || clonedPal.name || clonedPal.character_id,
-				'clone'
+				appState.settings.clone_prefix
 			);
-			const message = {
-				type: MessageType.CLONE_PAL,
-				data: {
-					pal: clonedPal
-				}
-			};
-			ws.send(JSON.stringify(message));
+			send(MessageType.CLONE_PAL, {
+				pal: clonedPal
+			});
 		}
 	}
 
@@ -475,11 +462,7 @@
 		if (!appState.selectedPlayer || !appState.selectedPlayer.pals) return;
 		if (selectedPals.length === 0) return;
 
-		const message = {
-			type: MessageType.HEAL_PALS,
-			data: [...selectedPals]
-		};
-		ws.send(JSON.stringify(message));
+		send(MessageType.HEAL_PALS, [...selectedPals]);
 
 		Object.values(appState.selectedPlayer.pals).forEach(async (pal) => {
 			if (selectedPals.includes(pal.instance_id)) {
@@ -517,14 +500,10 @@
 		});
 
 		if (appState.selectedPlayer && appState.selectedPlayer.pals && confirmed) {
-			const message = {
-				type: MessageType.DELETE_PALS,
-				data: {
-					player_id: appState.selectedPlayer.uid,
-					pal_ids: [...selectedPals]
-				}
-			};
-			ws.send(JSON.stringify(message));
+			send(MessageType.DELETE_PALS, {
+				player_id: appState.selectedPlayer.uid,
+				pal_ids: [...selectedPals]
+			});
 
 			appState.selectedPlayer.pals = Object.fromEntries(
 				Object.entries(appState.selectedPlayer.pals).filter(([id]) => !selectedPals.includes(id))
@@ -542,15 +521,10 @@
 			cancelText: 'Cancel'
 		});
 		if (appState.selectedPlayer && appState.selectedPlayer.pals && confirmed) {
-			const data = {
+			send(MessageType.DELETE_PALS, {
 				player_id: appState.selectedPlayer.uid,
 				pal_ids: [pal.instance_id]
-			};
-			const message = {
-				type: MessageType.DELETE_PALS,
-				data
-			};
-			ws.send(JSON.stringify(message));
+			});
 			appState.selectedPlayer.pals = Object.fromEntries(
 				Object.entries(appState.selectedPlayer.pals).filter(([id]) => id !== pal.instance_id)
 			);
@@ -619,13 +593,9 @@
 
 	function handleHealAll() {
 		if (!appState.selectedPlayer || !appState.selectedPlayer.pals) return;
-		const message = {
-			type: MessageType.HEAL_ALL_PALS,
-			data: {
-				player_id: appState.selectedPlayer.uid
-			}
-		};
-		ws.send(JSON.stringify(message));
+		send(MessageType.HEAL_ALL_PALS, {
+			player_id: appState.selectedPlayer.uid
+		});
 		Object.values(appState.selectedPlayer.pals).forEach((pal) => {
 			pal.hp = pal.max_hp;
 			pal.sanity = 100;

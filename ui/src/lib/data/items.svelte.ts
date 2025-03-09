@@ -1,10 +1,7 @@
-// src/lib/data/items.ts
-
-import { getSocketState } from '$states';
+import { sendAndWait } from '$lib/utils/websocketUtils';
 import { MessageType, type Item, type ItemDetails, type ItemInfo } from '$types';
 
-export class Items {
-	private ws = getSocketState();
+class Items {
 	private loading = false;
 
 	items: Record<string, Item> = $state({});
@@ -13,13 +10,7 @@ export class Items {
 		if (Object.keys(this.items).length === 0 && !this.loading) {
 			try {
 				this.loading = true;
-				const response = await this.ws.sendAndWait({
-					type: MessageType.GET_ITEMS
-				});
-				if (response.type === 'error') {
-					throw new Error(response.data);
-				}
-				this.items = response.data;
+				this.items = await sendAndWait(MessageType.GET_ITEMS);
 				this.loading = false;
 			} catch (error) {
 				this.loading = false;

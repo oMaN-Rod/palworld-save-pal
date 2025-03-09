@@ -3,7 +3,7 @@
 	import { goto } from '$app/navigation';
 	import { getAppState } from '$states';
 	import { Card, Tooltip } from '$components/ui';
-	import { getSocketState } from '$states';
+	import { send } from '$lib/utils/websocketUtils';
 	import { MessageType } from '$types';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { assetLoader } from '$utils';
@@ -13,7 +13,6 @@
 	type SaveType = 'steam' | 'gamepass';
 
 	const appState = getAppState();
-	const ws = getSocketState();
 
 	const isDesktopMode = PUBLIC_DESKTOP_MODE === 'true';
 
@@ -60,15 +59,10 @@
 
 	async function handleSelectSave(saveType: SaveType) {
 		await goto('/loading');
-		ws.send(
-			JSON.stringify({
-				type: MessageType.SELECT_SAVE,
-				data: {
-					type: saveType,
-					local: isDesktopMode
-				}
-			})
-		);
+		send(MessageType.SELECT_SAVE, {
+			type: saveType,
+			local: isDesktopMode
+		});
 	}
 
 	$effect(() => {

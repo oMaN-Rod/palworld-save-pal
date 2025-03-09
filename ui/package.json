@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev:desktop": "concurrently \"vite dev\" \"cd .. && python desktop.py --dev --web-host localhost --web-port 5173\"",
+    "dev:web": "concurrently \"vite dev\" \"cd .. && python psp.py --dev\"",
     "dev:vite": "vite dev",
     "build": "vite build",
     "preview": "vite preview",

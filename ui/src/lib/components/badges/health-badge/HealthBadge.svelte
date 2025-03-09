@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { staticIcons } from '$lib/constants';
+	import { staticIcons } from '$types/icons';
 	import { EntryState, type Pal, type Player } from '$types';
 	import { Tooltip, Progress } from '$components/ui';
 	import { palsData } from '$lib/data';

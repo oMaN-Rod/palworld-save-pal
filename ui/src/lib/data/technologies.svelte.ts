@@ -1,8 +1,7 @@
-import { getSocketState } from '$states';
+import { sendAndWait } from '$lib/utils/websocketUtils';
 import { MessageType, type Technology } from '$types';
 
-export class Technologies {
-	private ws = getSocketState();
+class Technologies {
 	private loading = false;
 
 	technologies: Record<string, Technology> = $state({});
@@ -11,13 +10,7 @@ export class Technologies {
 		if (Object.keys(this.technologies).length === 0 && !this.loading) {
 			try {
 				this.loading = true;
-				const response = await this.ws.sendAndWait({
-					type: MessageType.GET_TECHNOLOGIES
-				});
-				if (response.type === 'error') {
-					throw new Error(response.data);
-				}
-				this.technologies = response.data;
+				this.technologies = await sendAndWait(MessageType.GET_TECHNOLOGIES);
 				this.loading = false;
 			} catch (error) {
 				this.loading = false;

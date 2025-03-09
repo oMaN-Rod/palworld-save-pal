@@ -1,6 +1,6 @@
+import { palsData, passiveSkillsData } from '$lib/data';
 import type { Pal, Player } from '$types';
 import { EffectType, TargetType } from '$types';
-import { palsData, passiveSkillsData } from '.';
 
 export type PalStats = {
 	attack: number;

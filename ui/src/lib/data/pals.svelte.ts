@@ -1,8 +1,7 @@
-import { getSocketState } from '$states/websocketState.svelte';
+import { sendAndWait } from '$lib/utils/websocketUtils';
 import { type PalData, MessageType } from '$types';
 
-export class Pals {
-	private ws = getSocketState();
+class Pals {
 	private loading = false;
 
 	pals: Record<string, PalData> = $state({});
@@ -11,13 +10,7 @@ export class Pals {
 		if (Object.keys(this.pals).length === 0 && !this.loading) {
 			try {
 				this.loading = true;
-				const response = await this.ws.sendAndWait({
-					type: MessageType.GET_PALS
-				});
-				if (response.type === 'error') {
-					throw new Error(response.data);
-				}
-				this.pals = response.data;
+				this.pals = await sendAndWait(MessageType.GET_PALS);
 				this.loading = false;
 			} catch (error) {
 				this.loading = false;

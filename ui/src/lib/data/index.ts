@@ -10,9 +10,6 @@ import { technologiesData } from './technologies.svelte';
 import { uiCommonData } from './ui.svelte';
 import { workSuitabilityData } from './workSuitability.svelte';
 
-export * from './bootstrap';
-export * from './stats';
-
 export {
 	activeSkillsData,
 	buildingsData,
@@ -22,7 +19,7 @@ export {
 	palsData,
 	passiveSkillsData,
 	presetsData,
+	technologiesData,
 	uiCommonData,
-	workSuitabilityData,
-	technologiesData
+	workSuitabilityData
 };

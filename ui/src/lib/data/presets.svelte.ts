@@ -1,8 +1,7 @@
-import { getSocketState } from '$states';
+import { send, sendAndWait } from '$lib/utils/websocketUtils';
 import { MessageType, type PresetProfile } from '$types';
 
-export class Presets {
-	private ws = getSocketState();
+class Presets {
 	private loading = false;
 
 	presetProfiles: Record<string, PresetProfile> = $state({});
@@ -11,11 +10,7 @@ export class Presets {
 		if (Object.keys(this.presetProfiles).length === 0 && !this.loading) {
 			try {
 				this.loading = true;
-				const response = await this.ws.sendAndWait({ type: MessageType.GET_PRESETS });
-				if (response.type === 'error') {
-					throw new Error(response.data);
-				}
-				this.presetProfiles = response.data;
+				this.presetProfiles = await sendAndWait(MessageType.GET_PRESETS);
 				this.loading = false;
 			} catch (error) {
 				this.loading = false;
@@ -36,13 +31,7 @@ export class Presets {
 
 	async addPresetProfile(profile: PresetProfile): Promise<Record<string, PresetProfile>> {
 		try {
-			const response = await this.ws.sendAndWait({
-				type: 'add_preset',
-				data: profile
-			});
-			if (response.type === 'error') {
-				throw new Error(response.data);
-			}
+			await sendAndWait(MessageType.ADD_PRESET, profile);
 			return await this.reset();
 		} catch (error) {
 			console.error('Error adding preset:', error);
@@ -57,14 +46,10 @@ export class Presets {
 			const profile = profiles[id];
 			if (profile) {
 				profile.name = name;
-				const message = {
-					type: 'update_preset',
-					data: {
-						id: id,
-						name: profile.name
-					}
-				};
-				await this.ws.send(JSON.stringify(message));
+				await send(MessageType.UPDATE_PRESET, {
+					id: id,
+					name: profile.name
+				});
 			}
 			return await this.reset();
 		} catch (error) {
@@ -79,10 +64,7 @@ export class Presets {
 			const profile = profiles[id];
 			if (profile) {
 				const newProfile = { ...profile, name: name };
-				await this.ws.sendAndWait({
-					type: 'add_preset',
-					data: newProfile
-				});
+				await sendAndWait(MessageType.ADD_PRESET, newProfile);
 			}
 			return this.reset();
 		} catch (error) {
@@ -93,11 +75,7 @@ export class Presets {
 
 	async removePresetProfiles(ids: string[]): Promise<Record<string, PresetProfile>> {
 		try {
-			const message = {
-				type: 'delete_preset',
-				data: ids
-			};
-			await this.ws.sendAndWait(message);
+			await sendAndWait(MessageType.DELETE_PRESET, ids);
 			return await this.reset();
 		} catch (error) {
 			console.error('Error removing preset profiles:', error);

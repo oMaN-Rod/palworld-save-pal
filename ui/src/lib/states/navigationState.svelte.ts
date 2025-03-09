@@ -1,7 +1,5 @@
 import { getAppState } from './appState.svelte';
 
-const appState = getAppState();
-
 export type Page = 'edit' | 'info' | 'file' | 'settings' | 'loading' | 'error' | 'browser' | 'save';
 export type Tab = 'player' | 'pal';
 
@@ -10,51 +8,41 @@ export interface NavigationState {
 	activeTab?: Tab;
 }
 
-export function createNavigationState(
-	initialPage: Page = 'file',
-	initialTab: Tab = 'player'
-): NavigationState {
-	let activePage = $state(initialPage);
-	let activeTab = $state(initialTab);
-	let initialLoad = true;
+class NavigationStateManager implements NavigationState {
+	#activePage = $state<Page>('file');
+	#activeTab = $state<Tab>('player');
+	#initialLoad = true;
+	#appState = getAppState();
 
-	function setActivePage(page: Page) {
-		if (!initialLoad && page !== 'save') {
-			appState.saveState();
-		}
-		activePage = page;
-		initialLoad = false;
+	constructor(initialPage: Page = 'file', initialTab: Tab = 'player') {
+		this.#activePage = initialPage;
+		this.#activeTab = initialTab;
 	}
 
-	function setActiveTab(tab: Tab) {
-		if (!initialLoad) {
-			appState.saveState();
-		}
-		activeTab = tab;
-		initialLoad = false;
+	get activePage(): Page {
+		return this.#activePage;
 	}
 
-	return {
-		get activePage() {
-			return activePage;
-		},
-		set activePage(page: Page) {
-			setActivePage(page);
-		},
-		get activeTab() {
-			return activeTab;
-		},
-		set activeTab(tab: Tab) {
-			setActiveTab(tab);
+	set activePage(page: Page) {
+		if (!this.#initialLoad && page !== 'save') {
+			this.#appState.saveState();
 		}
-	};
+		this.#activePage = page;
+		this.#initialLoad = false;
+	}
+
+	get activeTab(): Tab {
+		return this.#activeTab;
+	}
+
+	set activeTab(tab: Tab) {
+		if (!this.#initialLoad) {
+			this.#appState.saveState();
+		}
+		this.#activeTab = tab;
+		this.#initialLoad = false;
+	}
 }
 
-let navigationState: ReturnType<typeof createNavigationState>;
-
-export function getNavigationState() {
-	if (!navigationState) {
-		navigationState = createNavigationState('file');
-	}
-	return navigationState;
-}
+const navigationStateInstance = new NavigationStateManager('file');
+export const getNavigationState = () => navigationStateInstance;

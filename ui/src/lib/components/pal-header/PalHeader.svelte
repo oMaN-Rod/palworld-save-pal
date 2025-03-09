@@ -10,7 +10,7 @@
 		type PalPresetConfig,
 		type PresetProfile
 	} from '$types';
-	import { ASSET_DATA_PATH, MAX_LEVEL, staticIcons } from '$lib/constants';
+	import { ASSET_DATA_PATH, MAX_LEVEL } from '$lib/constants';
 	import { palsData, elementsData, expData, presetsData } from '$lib/data';
 	import { cn } from '$theme';
 	import { getAppState, getModalState, getToastState } from '$states';
@@ -18,6 +18,7 @@
 	import { BicepsFlexed, Bug, Edit, Minus, Plus, Save } from 'lucide-svelte';
 	import { assetLoader, handleMaxOutPal, canBeBoss } from '$utils';
 	import { goto } from '$app/navigation';
+	import { staticIcons } from '$types/icons';
 
 	let {
 		pal = $bindable(),

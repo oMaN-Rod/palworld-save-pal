@@ -46,7 +46,7 @@
 		'w-full absolute top-0 left-0 right-0 bottom-0 z-1 opacity-0 disabled:opacity-0! cursor-pointer';
 	const cInterface = 'flex justify-center items-center text-center';
 
-	let classesBase = $derived(`${cBase} ${border} ${padding} ${rounded-sm} ${baseClass}`);
+	let classesBase = $derived(`${cBase} ${border} ${padding} ${rounded} ${baseClass}`);
 	let classesInput = $derived(`${cInput} ${inputClass}`);
 	let classesInterface = $derived(`${cInterface} ${interfaceClass}`);
 

@@ -3,8 +3,9 @@
 	import type { ActiveSkill } from '$types';
 	import { Plus, Save, X, Trash, TimerReset, Delete } from 'lucide-svelte';
 	import { activeSkillsData, elementsData } from '$lib/data';
-	import { ASSET_DATA_PATH, staticIcons } from '$lib/constants';
+	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { assetLoader } from '$utils';
+	import { staticIcons } from '$types/icons';
 
 	let { closeModal, pal } = $props<{
 		closeModal: (value: any) => void;

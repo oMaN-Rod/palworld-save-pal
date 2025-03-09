@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Tooltip } from '$components/ui';
-	import { type ItemContainerSlot, type Item, type ItemGroup, Rarity, ItemTypeA } from '$types';
-	import { ASSET_DATA_PATH, staticIcons } from '$lib/constants';
+	import { type ItemContainerSlot, type ItemGroup, Rarity } from '$types';
+	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { itemsData, palsData } from '$lib/data';
 	import { cn } from '$theme';
 	import { getModalState } from '$states';
@@ -9,6 +9,7 @@
 	import { Progress } from '@skeletonlabs/skeleton-svelte';
 	import { Package } from 'lucide-svelte';
 	import { assetLoader } from '$utils';
+	import { staticIcons } from '$types/icons';
 
 	let {
 		slot = $bindable<ItemContainerSlot>(),

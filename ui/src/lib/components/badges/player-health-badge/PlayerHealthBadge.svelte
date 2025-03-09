@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { EntryState, type Player } from '$types';
 	import { Tooltip, Progress } from '$components/ui';
-	import { staticIcons } from '$lib/constants';
+	import { staticIcons } from '$types/icons';
 
 	let {
 		player = $bindable(),

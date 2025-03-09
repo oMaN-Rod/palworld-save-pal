@@ -4,7 +4,7 @@
 	import { getAppState } from '$states';
 	import { ActiveSkillBadge, HealthBadge, PalHeader, PassiveSkillBadge } from '$components';
 	import { palsData } from '$lib/data';
-	import { staticIcons } from '$lib/constants';
+	import { staticIcons } from '$types/icons';
 
 	let { pal = $bindable() } = $props<{
 		pal: Pal;

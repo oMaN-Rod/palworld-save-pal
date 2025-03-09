@@ -3,8 +3,9 @@
 	import { type SelectOption } from '$types';
 	import { Save, X } from 'lucide-svelte';
 	import { palsData, elementsData } from '$lib/data';
-	import { ASSET_DATA_PATH, staticIcons } from '$lib/constants';
+	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { assetLoader } from '$utils';
+	import { staticIcons } from '$types/icons';
 
 	let { title = 'Select a Pal', closeModal } = $props<{
 		title?: string;

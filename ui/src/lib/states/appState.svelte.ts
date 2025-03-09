@@ -1,5 +1,6 @@
 import { goto } from '$app/navigation';
 import { TextInputModal } from '$components';
+import { send, sendAndWait } from '$lib/utils/websocketUtils';
 import type {
 	AppSettings,
 	GamepassSave,
@@ -10,11 +11,7 @@ import type {
 } from '$types';
 import { EntryState, MessageType, type Pal, type Player, type SaveFile } from '$types';
 import { getModalState } from './modalState.svelte';
-import { getToastState } from './toastState.svelte';
-import { getSocketState } from './websocketState.svelte';
 
-const ws = getSocketState();
-const toast = getToastState();
 const modal = getModalState();
 
 interface ModifiedData {
@@ -23,58 +20,60 @@ interface ModifiedData {
 	modified_guilds?: Record<string, GuildDTO>;
 }
 
-export function createAppState() {
-	let players: Record<string, Player> = $state({});
-	let guilds: Record<string, Guild> = $state({});
-	let selectedPlayerUid: string = $state('');
-	let selectedPlayer: Player | undefined = $state(undefined);
-	let selectedPal: Pal | undefined = $state(undefined);
-	let saveFile: SaveFile | undefined = $state(undefined);
-	let playerSaveFiles: SaveFile[] = $state([]);
-	let modifiedPals: Record<string, Pal> = $state({});
-	let modifiedPlayers: Record<string, Player> = $state({});
-	let clipboardItem: ItemContainerSlot | null = $state(null);
-	let progressMessage: string = $state('');
-	let version: string = $state('');
-	let settings: AppSettings = $state({ language: 'en' });
-	let gamepassSaves: Record<string, GamepassSave> = $state({});
-	let autoSave: boolean = $state(false);
+class AppState {
+	players: Record<string, Player> = $state({});
+	guilds: Record<string, Guild> = $state({});
+	selectedPlayerUid: string = $state('');
+	selectedPlayer: Player | undefined = $state(undefined);
+	selectedPal: Pal | undefined = $state(undefined);
+	saveFile: SaveFile | undefined = $state(undefined);
+	playerSaveFiles: SaveFile[] = $state([]);
+	modifiedPals: Record<string, Pal> = $state({});
+	modifiedPlayers: Record<string, Player> = $state({});
+	clipboardItem: ItemContainerSlot | null = $state(null);
+	progressMessage: string = $state('');
+	version: string = $state('');
+	settings: AppSettings = $state({ language: 'en' });
+	gamepassSaves: Record<string, GamepassSave> = $state({});
+	autoSave: boolean = $state(false);
 
-	function resetState() {
-		players = {};
-		guilds = {};
-		selectedPlayerUid = '';
-		selectedPlayer = undefined;
-		selectedPal = undefined;
-		saveFile = undefined;
-		playerSaveFiles = [];
-		modifiedPals = {};
-		modifiedPlayers = {};
+	resetState() {
+		this.players = {};
+		this.guilds = {};
+		this.selectedPlayerUid = '';
+		this.selectedPlayer = undefined;
+		this.selectedPal = undefined;
+		this.saveFile = undefined;
+		this.playerSaveFiles = [];
+		this.modifiedPals = {};
+		this.modifiedPlayers = {};
 	}
+
+	initData() {}
 
 	// Handle selected player/pal updates
-	function setSelectedPal(pal: Pal | undefined) {
-		selectedPal = pal;
+	setSelectedPal(pal: Pal | undefined) {
+		this.selectedPal = pal;
 		if (pal) {
-			modifiedPals[pal.instance_id] = pal;
+			this.modifiedPals[pal.instance_id] = pal;
 		}
 	}
 
-	function setSelectedPlayer(player: Player | undefined) {
-		selectedPlayer = player;
-		selectedPal = undefined;
+	setSelectedPlayer(player: Player | undefined) {
+		this.selectedPlayer = player;
+		this.selectedPal = undefined;
 		if (player) {
-			modifiedPlayers[player.uid] = player;
+			this.modifiedPlayers[player.uid] = player;
 		}
 	}
 
-	async function saveState() {
+	async saveState() {
 		let modifiedData: ModifiedData = {};
 		let modifiedPals: [string, Pal][] = [];
 		let modifiedPlayers: [string, Player][] = [];
 		let modifiedGuilds: [string, GuildDTO][] = [];
 
-		for (const player of Object.values(appState.modifiedPlayers)) {
+		for (const player of Object.values(this.modifiedPlayers)) {
 			if (player.state === EntryState.MODIFIED) {
 				const { pals, ...playerWithoutPals } = player;
 				player.state = EntryState.NONE;
@@ -90,7 +89,7 @@ export function createAppState() {
 			}
 		}
 
-		for (const guild of Object.values(appState.guilds)) {
+		for (const guild of Object.values(this.guilds)) {
 			if (guild.bases) {
 				for (const base of Object.values(guild.bases)) {
 					if (base.pals) {
@@ -149,22 +148,19 @@ export function createAppState() {
 		}
 
 		if (modifiedPals.length > 0 || modifiedPlayers.length > 0 || modifiedGuilds.length > 0) {
-			autoSave = true;
+			this.autoSave = true;
 		}
-
-		const data = { type: MessageType.UPDATE_SAVE_FILE, data: modifiedData };
-
-		await ws.sendAndWait(data);
+		await sendAndWait(MessageType.UPDATE_SAVE_FILE, modifiedData);
 		await new Promise((resolve) => setTimeout(resolve, 500));
-		autoSave = false;
+		this.autoSave = false;
 	}
 
-	async function writeSave() {
-		if (!saveFile) return;
-		await saveState();
-		if (saveFile.type === 'gamepass') {
-			const split = saveFile.world_name?.split('PSP-') || [];
-			const baseName = split.length > 1 ? split[0].trim() : saveFile.world_name || 'PSP';
+	async writeSave() {
+		if (!this.saveFile) return;
+		await this.saveState();
+		if (this.saveFile.type === 'gamepass') {
+			const split = this.saveFile.world_name?.split('PSP-') || [];
+			const baseName = split.length > 1 ? split[0].trim() : this.saveFile.world_name || 'PSP';
 			const timestamp = new Date()
 				.toLocaleString('en-GB', {
 					year: '2-digit',
@@ -175,6 +171,7 @@ export function createAppState() {
 				})
 				.replace(/[/,]/g, '')
 				.replace(/\s/g, '_');
+
 			// @ts-ignore
 			const result = await modal.showModal<string>(TextInputModal, {
 				title: 'Edit World Name',
@@ -185,124 +182,19 @@ export function createAppState() {
 
 			await goto('/loading');
 
-			ws.send(JSON.stringify({ type: MessageType.SAVE_MODDED_SAVE, data: result }));
-		} else if (saveFile.type === 'steam') {
+			send(MessageType.SAVE_MODDED_SAVE, result);
+		} else if (this.saveFile.type === 'steam') {
 			await goto('/loading');
 
-			ws.send(JSON.stringify({ type: MessageType.SAVE_MODDED_SAVE, data: null }));
+			send(MessageType.SAVE_MODDED_SAVE, null);
 		}
 	}
 
-	return {
-		get autoSave() {
-			return autoSave;
-		},
-		set autoSave(value: boolean) {
-			autoSave = value;
-		},
-		get clipboardItem() {
-			return clipboardItem;
-		},
-		set clipboardItem(item: ItemContainerSlot | null) {
-			clipboardItem = item;
-		},
-		get players() {
-			return players;
-		},
-		set players(newPlayers: Record<string, Player>) {
-			players = newPlayers;
-		},
-		get guilds() {
-			return guilds;
-		},
-		set guilds(newGuilds: Record<string, Guild>) {
-			guilds = newGuilds;
-		},
-
-		get selectedPlayerUid() {
-			return selectedPlayerUid;
-		},
-		set selectedPlayerUid(uid: string) {
-			selectedPlayerUid = uid;
-		},
-
-		get selectedPlayer() {
-			return selectedPlayer as Player;
-		},
-		set selectedPlayer(player: Player | undefined) {
-			setSelectedPlayer(player);
-		},
-
-		get selectedPal() {
-			return selectedPal;
-		},
-		set selectedPal(pal: Pal | undefined) {
-			setSelectedPal(pal);
-		},
-
-		get saveFile() {
-			return saveFile;
-		},
-		set saveFile(file: SaveFile | undefined) {
-			saveFile = file;
-		},
-
-		get playerSaveFiles() {
-			return playerSaveFiles;
-		},
-		set playerSaveFiles(files: SaveFile[]) {
-			playerSaveFiles = files;
-		},
-
-		get progressMessage() {
-			return progressMessage;
-		},
-		set progressMessage(message: string) {
-			progressMessage = message;
-		},
-
-		get modifiedPals() {
-			return modifiedPals;
-		},
-
-		get modifiedPlayers() {
-			return modifiedPlayers;
-		},
-
-		get version() {
-			return version;
-		},
-		set version(ver: string) {
-			version = ver;
-		},
-
-		get settings() {
-			return settings;
-		},
-		set settings(newSettings: AppSettings) {
-			settings = newSettings;
-		},
-		get gamepassSaves() {
-			return gamepassSaves;
-		},
-		set gamepassSaves(saves: Record<string, GamepassSave>) {
-			gamepassSaves = saves;
-		},
-		resetState,
-		saveState,
-		writeSave,
-		resetModified() {
-			modifiedPlayers = {};
-			modifiedPals = {};
-		}
-	};
-}
-
-let appState: ReturnType<typeof createAppState>;
-
-export function getAppState() {
-	if (!appState) {
-		appState = createAppState();
+	resetModified() {
+		this.modifiedPlayers = {};
+		this.modifiedPals = {};
 	}
-	return appState;
 }
+
+const appState = new AppState();
+export const getAppState = () => appState;

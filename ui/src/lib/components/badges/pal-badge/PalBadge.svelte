@@ -1,15 +1,15 @@
 <script lang="ts">
 	import { PalInfoPopup } from '$components';
-
 	import { Tooltip } from '$components/ui';
 	import { type Pal, PalGender } from '$types';
-	import { ASSET_DATA_PATH, staticIcons } from '$lib/constants';
+	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { cn } from '$theme';
 	import { getAppState, getNavigationState } from '$states';
 	import { palsData } from '$lib/data';
 	import ContextMenu from '$components/ui/context-menu/ContextMenu.svelte';
 	import { Plus, ArchiveRestore, Trash, Copy } from 'lucide-svelte';
 	import { assetLoader, calculateFilters } from '$utils';
+	import { staticIcons } from '$types/icons';
 
 	let {
 		pal = $bindable(),

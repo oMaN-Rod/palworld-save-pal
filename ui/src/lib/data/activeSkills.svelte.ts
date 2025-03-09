@@ -1,8 +1,7 @@
-import { getSocketState } from '$states';
+import { sendAndWait } from '$lib/utils/websocketUtils';
 import { MessageType, type ActiveSkill, type ActiveSkillDetails } from '$types';
 
-export class ActiveSkills {
-	private ws = getSocketState();
+class ActiveSkills {
 	private loading = false;
 
 	activeSkills: Record<string, ActiveSkill> = $state({});
@@ -11,13 +10,7 @@ export class ActiveSkills {
 		if (Object.keys(this.activeSkills).length === 0 && !this.loading) {
 			try {
 				this.loading = true;
-				const response = await this.ws.sendAndWait({
-					type: MessageType.GET_ACTIVE_SKILLS
-				});
-				if (response.type === 'error') {
-					throw new Error(response.data);
-				}
-				this.activeSkills = response.data;
+				this.activeSkills = await sendAndWait(MessageType.GET_ACTIVE_SKILLS);
 				this.loading = false;
 			} catch (error) {
 				this.loading = false;
