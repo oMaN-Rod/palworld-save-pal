@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import { page } from '$app/stores';
-	import { staticIcons } from '$lib/constants';
+	import { staticIcons } from '$types/icons';
 	import { Copy } from 'lucide-svelte';
 	import { getToastState } from '$states';
 

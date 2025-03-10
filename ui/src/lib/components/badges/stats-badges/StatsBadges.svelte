@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { type Pal, type Player } from '$types';
-	import { getStats, type PalStats } from '$lib/data';
-	import { staticIcons } from '$lib/constants';
+	import { getStats, type PalStats } from '$lib/utils';
+	import { staticIcons } from '$types/icons';
 
 	let {
 		pal = $bindable(),

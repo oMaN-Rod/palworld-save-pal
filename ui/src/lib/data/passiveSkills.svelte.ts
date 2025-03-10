@@ -1,8 +1,7 @@
-import { getSocketState } from '$states';
+import { sendAndWait } from '$lib/utils/websocketUtils';
 import { MessageType, type PassiveSkill } from '$types';
 
-export class PassiveSkills {
-	private ws = getSocketState();
+class PassiveSkills {
 	private loading = false;
 
 	passiveSkills: Record<string, PassiveSkill> = $state({});
@@ -11,13 +10,7 @@ export class PassiveSkills {
 		if (Object.keys(this.passiveSkills).length === 0 && !this.loading) {
 			try {
 				this.loading = true;
-				const response = await this.ws.sendAndWait({
-					type: MessageType.GET_PASSIVE_SKILLS
-				});
-				if (response.type === 'error') {
-					throw new Error(response.data);
-				}
-				this.passiveSkills = response.data;
+				this.passiveSkills = await sendAndWait(MessageType.GET_PASSIVE_SKILLS);
 				this.loading = false;
 			} catch (error) {
 				this.loading = false;

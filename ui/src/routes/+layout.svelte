@@ -1,7 +1,7 @@
 <script lang="ts">
 	import '../app.css';
 	import { NavBar, Toast, Modal, Spinner } from '$components';
-	import { bootstrap } from '$lib/data';
+	import { bootstrap } from '$lib/data/bootstrap';
 	import { getAppState, getSocketState } from '$states';
 	import { goto } from '$app/navigation';
 	import { getDispatcher } from '$lib/ws/dispatcher';
@@ -18,11 +18,9 @@
 		dispatcher.register(handler);
 	});
 
-	$effect(() => {
-		ws.connect({ goto });
-	});
-
 	onMount(async () => {
+		ws.connect({ goto });
+
 		await bootstrap();
 	});
 </script>

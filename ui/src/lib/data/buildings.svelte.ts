@@ -1,10 +1,7 @@
-// src/lib/data/elements.ts
-
-import { getSocketState } from '$states';
+import { sendAndWait } from '$lib/utils/websocketUtils';
 import { MessageType, type Building } from '$types';
 
-export class Buildings {
-	private ws = getSocketState();
+class Buildings {
 	private loading = false;
 
 	buildings: Record<string, Building> = $state({});
@@ -13,13 +10,7 @@ export class Buildings {
 		if (Object.keys(this.buildings).length === 0 && !this.loading) {
 			try {
 				this.loading = true;
-				const response = await this.ws.sendAndWait({
-					type: MessageType.GET_BUILDINGS
-				});
-				if (response.type === 'error') {
-					throw new Error(response.data);
-				}
-				this.buildings = response.data;
+				this.buildings = await sendAndWait(MessageType.GET_BUILDINGS);
 				this.loading = false;
 			} catch (error) {
 				this.loading = false;

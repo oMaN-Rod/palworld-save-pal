@@ -1,25 +1,17 @@
-import { getSocketState } from '$states';
+import { send } from '$lib/utils/websocketUtils';
 import { MessageType } from '$types';
-import {
-	activeSkillsData,
-	buildingsData,
-	elementsData,
-	expData,
-	itemsData,
-	mapObjects,
-	palsData,
-	passiveSkillsData,
-	presetsData,
-	technologiesData,
-	workSuitabilityData
-} from '.';
-
-const ws = getSocketState();
+import { activeSkillsData } from './activeSkills.svelte';
+import { buildingsData } from './buildings.svelte';
+import { elementsData } from './elements.svelte';
+import { expData } from './exp.svelte';
+import { itemsData } from './items.svelte';
+import { palsData } from './pals.svelte';
+import { passiveSkillsData } from './passiveSkills.svelte';
+import { presetsData } from './presets.svelte';
+import { technologiesData } from './technologies.svelte';
+import { workSuitabilityData } from './workSuitability.svelte';
 
 export const bootstrap = async () => {
-	while (!ws.connected) {
-		await new Promise((resolve) => setTimeout(resolve, 100));
-	}
 	await presetsData.reset();
 	await palsData.reset();
 	await activeSkillsData.reset();
@@ -30,7 +22,7 @@ export const bootstrap = async () => {
 	await itemsData.reset();
 	await workSuitabilityData.reset();
 	await buildingsData.reset();
-	await mapObjects.reset();
-	ws.send(JSON.stringify({ type: MessageType.GET_VERSION }));
-	ws.send(JSON.stringify({ type: MessageType.SYNC_APP_STATE }));
+
+	send(MessageType.GET_VERSION);
+	send(MessageType.SYNC_APP_STATE);
 };

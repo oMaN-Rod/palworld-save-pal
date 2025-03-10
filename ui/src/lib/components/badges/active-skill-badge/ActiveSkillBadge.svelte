@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { activeSkillsData, elementsData } from '$lib/data';
-	import { ASSET_DATA_PATH, staticIcons } from '$lib/constants';
+	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { getModalState } from '$states';
 	import { SkillSelectModal } from '$components/modals';
 	import { Tooltip } from '$components/ui';
 	import { TimerReset } from 'lucide-svelte';
 	import { assetLoader } from '$utils';
+	import { staticIcons } from '$types/icons';
 
 	let {
 		skill = 'Empty',

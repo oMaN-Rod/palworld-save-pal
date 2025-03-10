@@ -1,9 +1,7 @@
 import { MAX_LEVEL } from '$lib/constants';
-import { expData, getStats, palsData } from '$lib/data';
-import { getAppState } from '$states';
+import { expData, palsData } from '$lib/data';
+import { getStats } from '$lib/utils';
 import { EntryState, type Pal, type Player, type WorkSuitability } from '$types';
-
-const appState = getAppState();
 
 export function canBeBoss(character_id: string): [string, boolean] {
 	let valid = true;
@@ -23,20 +21,9 @@ export function canBeBoss(character_id: string): [string, boolean] {
 	return [type, valid];
 }
 
-export function formatNickname(nickname: string, type: 'clone' | 'new' = 'new') {
-	if (
-		type === 'new' &&
-		appState.settings.new_pal_prefix &&
-		!nickname.startsWith(appState.settings.new_pal_prefix)
-	) {
-		return `${appState.settings.new_pal_prefix} ${nickname}`;
-	}
-	if (
-		type === 'clone' &&
-		appState.settings.clone_prefix &&
-		!nickname.startsWith(appState.settings.clone_prefix)
-	) {
-		return `${appState.settings.clone_prefix} ${nickname}`;
+export function formatNickname(nickname: string, prefix: string | undefined) {
+	if (prefix && !nickname.startsWith(prefix)) {
+		return `${prefix} ${nickname}`;
 	}
 	return nickname;
 }

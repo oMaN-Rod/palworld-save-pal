@@ -1,4 +1,4 @@
-import { getSocketState } from '$states';
+import { sendAndWait } from '$lib/utils/websocketUtils';
 import { MessageType, type WorkSuitability } from '$types';
 
 interface WorkSuitabilityData {
@@ -8,7 +8,6 @@ interface WorkSuitabilityData {
 
 class WorkSuitabilities {
 	private loading: boolean = false;
-	private ws = getSocketState();
 
 	workSuitability: Record<WorkSuitability, WorkSuitabilityData> = $state({
 		EmitFlame: {},
@@ -27,23 +26,20 @@ class WorkSuitabilities {
 	});
 
 	private async ensureLoaded(): Promise<void> {
-		if (this.loading) {
-			while (this.loading) {
-				await new Promise((resolve) => setTimeout(resolve, 100));
+		if (Object.keys(this.workSuitability).length === 0 && !this.loading) {
+			try {
+				this.loading = true;
+				this.workSuitability = await sendAndWait(MessageType.GET_WORK_SUITABILITY);
+				this.loading = false;
+			} catch (error) {
+				this.loading = false;
+				console.error('Error fetching work suitability:', error);
+				throw error;
 			}
-			return;
 		}
-
-		this.loading = true;
-		try {
-			const response = await this.ws.sendAndWait({ type: MessageType.GET_WORK_SUITABILITY });
-			if (response.type === MessageType.GET_WORK_SUITABILITY) {
-				this.workSuitability = response.data;
-			} else {
-				throw new Error('Failed to fetch work suitability data');
-			}
-		} finally {
-			this.loading = false;
+		if (this.loading) {
+			await new Promise((resolve) => setTimeout(resolve, 100));
+			await this.ensureLoaded();
 		}
 	}
 

@@ -12,11 +12,11 @@
 	import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
 	import { SettingsModal } from '$components/modals';
 	import { MessageType } from '$types';
+	import { send } from '$lib/utils/websocketUtils';
 
 	let navigationState = getNavigationState();
 	let appState = getAppState();
 	let modal = getModalState();
-	let ws = getSocketState();
 
 	page.subscribe((value) => {
 		const { id } = value.route;
@@ -31,14 +31,7 @@
 		});
 
 		if (result) {
-			// Handle language change
-			const message = {
-				type: MessageType.UPDATE_SETTINGS,
-				data: {
-					...appState.settings
-				}
-			};
-			ws.send(JSON.stringify(message));
+			send(MessageType.UPDATE_SETTINGS, { ...appState.settings });
 			setTimeout(() => {
 				location.reload();
 			}, 500);

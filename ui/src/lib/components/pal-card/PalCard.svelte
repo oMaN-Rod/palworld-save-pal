@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Tooltip } from '$components/ui';
 	import { type Pal } from '$types';
-	import { ASSET_DATA_PATH, staticIcons } from '$lib/constants';
+	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { cn } from '$theme';
 	import { getAppState, getNavigationState } from '$states';
 	import { HealthBadge, PalInfoPopup } from '$components';
@@ -9,6 +9,7 @@
 	import ContextMenu from '$components/ui/context-menu/ContextMenu.svelte';
 	import { Plus, ArchiveRestore, Trash, Copy } from 'lucide-svelte';
 	import { assetLoader, calculateFilters } from '$utils';
+	import { staticIcons } from '$types/icons';
 
 	let {
 		pal = $bindable(),

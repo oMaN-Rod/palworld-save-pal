@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { cn } from '$theme';
-	import { staticIcons } from '$lib/constants';
+	import { staticIcons } from '$types/icons';
 
 	let { size = 'size-10', ...additionalProps } = $props<{
 		size?: string;

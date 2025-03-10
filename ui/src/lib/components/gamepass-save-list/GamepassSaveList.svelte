@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { List } from '$components/ui';
-	import { getSocketState } from '$states';
+	import { send } from '$lib/utils/websocketUtils';
 	import { MessageType, type GamepassSave } from '$types';
 	import { Users } from 'lucide-svelte';
 
@@ -8,18 +8,11 @@
 		saves: Record<string, GamepassSave>;
 	}>();
 
-	const ws = getSocketState();
-
 	let gamepassSaves: GamepassSave[] = $state([]);
 
 	async function handleSelectSave(save: GamepassSave) {
 		console.log('handleSelectSave', save);
-		ws.send(
-			JSON.stringify({
-				type: MessageType.SELECT_GAMEPASS_SAVE,
-				data: save.save_id
-			})
-		);
+		send(MessageType.SELECT_GAMEPASS_SAVE, save.save_id);
 	}
 
 	$effect(() => {

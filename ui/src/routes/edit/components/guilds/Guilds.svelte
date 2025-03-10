@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { palsData, buildingsData, itemsData, presetsData } from '$lib/data';
-	import { getAppState, getSocketState, getModalState, getToastState } from '$states';
+	import { getAppState, getModalState, getToastState } from '$states';
 	import { Input, List, Tooltip, TooltipButton } from '$components/ui';
 	import {
 		type ItemContainer,
@@ -11,20 +11,21 @@
 		BuildingTypeA,
 		Rarity
 	} from '$types';
-	import { ASSET_DATA_PATH, staticIcons } from '$lib/constants';
+	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { Ambulance, X, ReplaceAll, Plus, Trash, Bandage, Play, RefreshCcw } from 'lucide-svelte';
 	import { DebugButton, ItemBadge, PalBadge, StoragePresets } from '$components';
 	import { PalSelectModal, NumberInputModal, PalPresetSelectModal } from '$components/modals';
 	import { assetLoader, debounce, deepCopy, formatNickname } from '$utils';
 	import { cn } from '$theme';
 	import { TextInputModal } from '$components/modals';
+	import { staticIcons } from '$types/icons';
+	import { send, sendAndWait } from '$lib/utils/websocketUtils';
 	interface PalWithBaseId {
 		pal: Pal;
 		baseId: string;
 	}
 
 	const appState = getAppState();
-	const ws = getSocketState();
 	const modal = getModalState();
 	const toast = getToastState();
 
@@ -284,18 +285,15 @@
 		const [selectedPal, nickname] = result;
 		const palData = palsData.pals[selectedPal];
 
-		const message = {
-			type: MessageType.ADD_PAL,
-			data: {
-				guild_id: playerGuild?.id,
-				base_id: baseId,
-				character_id: selectedPal,
-				nickname: nickname || formatNickname(palData?.localized_name || selectedPal),
-				container_id: base.container_id,
-				storage_slot: index
-			}
-		};
-		ws.send(JSON.stringify(message));
+		send(MessageType.ADD_PAL, {
+			guild_id: playerGuild?.id,
+			base_id: baseId,
+			character_id: selectedPal,
+			nickname:
+				nickname || formatNickname(palData?.localized_name, appState.settings.new_pal_prefix),
+			container_id: base.container_id,
+			storage_slot: index
+		});
 	}
 
 	async function handleClonePal(item: PalWithBaseId) {
@@ -323,17 +321,14 @@
 			const clonedPal = deepCopy(item.pal);
 			clonedPal.nickname = formatNickname(
 				clonedPal.nickname || clonedPal.name || clonedPal.character_id,
-				'clone'
+				appState.settings.clone_prefix
 			);
-			const message = {
-				type: MessageType.CLONE_PAL,
-				data: {
-					guild_id: playerGuild!.id,
-					base_id: item.baseId,
-					pal: clonedPal
-				}
-			};
-			ws.send(JSON.stringify(message));
+
+			send(MessageType.CLONE_PAL, {
+				guild_id: playerGuild!.id,
+				base_id: item.baseId,
+				pal: clonedPal
+			});
 		}
 	}
 
@@ -350,15 +345,11 @@
 		if (confirmed) {
 			// get base id based on current page
 			const baseId = currentBase ? currentBase[0] : '';
-			const message = {
-				type: MessageType.DELETE_PALS,
-				data: {
-					guild_id: playerGuild?.id,
-					base_id: baseId,
-					pal_ids: selectedPals
-				}
-			};
-			ws.send(JSON.stringify(message));
+			send(MessageType.DELETE_PALS, {
+				guild_id: playerGuild?.id,
+				base_id: baseId,
+				pal_ids: selectedPals
+			});
 
 			playerGuild!.bases[baseId].pals = Object.fromEntries(
 				Object.entries(playerGuild!.bases[baseId].pals).filter(([id]) => !selectedPals.includes(id))
@@ -377,15 +368,11 @@
 		});
 
 		if (appState.selectedPlayer && confirmed) {
-			const message = {
-				type: MessageType.DELETE_PALS,
-				data: {
-					guild_id: playerGuild?.id,
-					base_id: baseId,
-					pal_ids: [pal.instance_id]
-				}
-			};
-			ws.send(JSON.stringify(message));
+			send(MessageType.DELETE_PALS, {
+				guild_id: playerGuild?.id,
+				base_id: baseId,
+				pal_ids: [pal.instance_id]
+			});
 		}
 		playerGuild!.bases[baseId].pals = Object.fromEntries(
 			Object.entries(playerGuild!.bases[baseId].pals).filter(
@@ -428,12 +415,7 @@
 
 	async function healSelectedPals() {
 		if (!guildBases || selectedPals.length === 0) return;
-
-		const message = {
-			type: MessageType.HEAL_PALS,
-			data: [...selectedPals]
-		};
-		ws.send(JSON.stringify(message));
+		send(MessageType.HEAL_PALS, [...selectedPals]);
 
 		Object.values(guildBases).forEach((base) => {
 			Object.values(base.pals).forEach((pal) => {
@@ -478,14 +460,10 @@
 
 	function handleHealAll() {
 		if (!guildBases || !playerGuild || !currentBase) return;
-		const message = {
-			type: MessageType.HEAL_ALL_PALS,
-			data: {
-				guild_id: playerGuild.id,
-				base_id: currentBase[0]
-			}
-		};
-		ws.send(JSON.stringify(message));
+		send(MessageType.HEAL_ALL_PALS, {
+			guild_id: playerGuild.id,
+			base_id: currentBase[0]
+		});
 		Object.values(guildBases).forEach((base) => {
 			Object.values(base.pals).forEach((pal) => {
 				pal.hp = pal.max_hp;

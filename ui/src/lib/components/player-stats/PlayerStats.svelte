@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { EntryState, type Player } from '$types';
-	import { staticIcons } from '$lib/constants';
+	import { staticIcons } from '$types/icons';
 	import { getModalState } from '$states';
 	import { NumberSliderModal } from '$components/modals';
 	import { CornerDotButton } from '$components/ui';

@@ -1,4 +1,4 @@
-import { getSocketState } from '$states/websocketState.svelte';
+import { sendAndWait } from '$lib/utils/websocketUtils';
 import { MessageType, type UICommon } from '$types';
 
 const DEFAULT_UI_COMMON: UICommon = {
@@ -34,8 +34,7 @@ const DEFAULT_UI_COMMON: UICommon = {
 	work_suitability: 'Work Suitability'
 };
 
-export class UICommonData {
-	private ws = getSocketState();
+class UICommonData {
 	private loading = false;
 
 	strings: UICommon = $state(DEFAULT_UI_COMMON);
@@ -44,13 +43,7 @@ export class UICommonData {
 		if (Object.keys(this.strings).length === 0 && !this.loading) {
 			try {
 				this.loading = true;
-				const response = await this.ws.sendAndWait({
-					type: MessageType.GET_UI_COMMON
-				});
-				if (response.type === 'error') {
-					throw new Error(response.data);
-				}
-				this.strings = response.data;
+				this.strings = await sendAndWait(MessageType.GET_UI_COMMON);
 				this.loading = false;
 			} catch (error) {
 				this.loading = false;

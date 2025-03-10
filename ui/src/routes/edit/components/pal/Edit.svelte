@@ -11,7 +11,7 @@
 	} from '$components';
 	import { SectionHeader, Tooltip } from '$components/ui';
 	import { EntryState, type PresetProfile, type WorkSuitability } from '$types';
-	import { staticIcons } from '$lib/constants';
+	import { staticIcons } from '$types/icons';
 	import { palsData, expData, presetsData } from '$lib/data';
 	import { getAppState, getModalState } from '$states';
 	import { BicepsFlexed, Brain, Save } from 'lucide-svelte';

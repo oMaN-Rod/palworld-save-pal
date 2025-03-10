@@ -1,12 +1,13 @@
 <script lang="ts">
 	import { getAppState, getModalState } from '$states';
 	import { buildingsData, itemsData, technologiesData } from '$lib/data';
-	import { ASSET_DATA_PATH, staticIcons } from '$lib/constants';
+	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { assetLoader } from '$utils';
 	import { NumberInputModal } from '$components';
 	import { Tooltip } from '$components/ui';
 	import { Lock, Unlock } from 'lucide-svelte';
 	import { EntryState, type Technology } from '$types';
+	import { staticIcons } from '$types/icons';
 
 	const appState = getAppState();
 	const modal = getModalState();

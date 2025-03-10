@@ -2,6 +2,7 @@ import logging
 import logging.config
 from datetime import datetime
 from pathlib import Path
+import sys
 
 from colorlog import ColoredFormatter
 
@@ -12,6 +13,10 @@ def setup_logging(dev_mode: bool = False):
     log_dir = Path("logs")
     log_dir.mkdir(exist_ok=True)
     log_file = log_dir / f"app_{date}.log"
+
+    if sys.platform == "win32":
+        sys.stdout.reconfigure(encoding="utf-8")
+        sys.stderr.reconfigure(encoding="utf-8")
 
     LOG_CONFIG = {
         "version": 1,

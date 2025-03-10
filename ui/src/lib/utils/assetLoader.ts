@@ -1,5 +1,4 @@
-import { ASSET_DATA_PATH, staticIcons } from '$lib/constants';
-
+import { ASSET_DATA_PATH } from '$lib/constants';
 type AssetType = 'json' | 'image' | 'svg';
 
 class AssetLoader {
@@ -15,6 +14,7 @@ class AssetLoader {
 		query: '?raw',
 		import: 'default'
 	});
+	private unknownIcon = this.loadImage(`${ASSET_DATA_PATH}/img/unknown.png`);
 
 	load<T>(path: string, type: AssetType): T | undefined {
 		if (this.cache[path]) {
@@ -47,7 +47,7 @@ class AssetLoader {
 	}
 
 	loadImage(path: string): string {
-		if (!path) return staticIcons.unknownIcon;
+		if (!path) return this.unknownIcon;
 		return this.load<any>(path.toLowerCase().replaceAll(' ', '_'), 'image');
 	}
 
@@ -64,7 +64,7 @@ class AssetLoader {
 	}
 
 	loadPalImage(character_id: string, is_pal: boolean = true): string {
-		if (!character_id) return staticIcons.unknownIcon;
+		if (!character_id) return this.unknownIcon;
 		character_id = is_pal ? this.cleanseCharacterId(character_id) : 'commonhuman';
 		let image = this.loadImage(`${ASSET_DATA_PATH}/img/${character_id}.png`);
 		if (image) {
@@ -72,11 +72,11 @@ class AssetLoader {
 		} else {
 			image = this.loadMenuImage(character_id, is_pal);
 		}
-		return image || staticIcons.unknownIcon;
+		return image || this.unknownIcon;
 	}
 
 	loadMenuImage(character_id: string, is_pal: boolean = true): string {
-		if (!character_id) return staticIcons.unknownIcon;
+		if (!character_id) return this.unknownIcon;
 		character_id = is_pal ? this.cleanseCharacterId(character_id) : 'commonhuman';
 		const image = this.loadImage(`${ASSET_DATA_PATH}/img/t_${character_id}_icon_normal.png`);
 		if (image) {
@@ -86,7 +86,7 @@ class AssetLoader {
 				`Failed to load menu image for ${`${ASSET_DATA_PATH}/img/t_${character_id}_icon_normal.png`}`
 			);
 		}
-		return staticIcons.unknownIcon;
+		return this.unknownIcon;
 	}
 
 	loadSvg(path: string): string | undefined {

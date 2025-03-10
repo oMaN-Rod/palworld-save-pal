@@ -5,86 +5,85 @@ import { type Message } from '$types';
 
 const RECONNECT_DELAY = 5000;
 
-export function createSocketState() {
-	const clientId = Date.now();
-	let websocket: WebSocket;
-	let message: Message | null = $state(null);
-	let connected: boolean = $state(false);
-	const dispatcher = getDispatcher();
-	let messageQueue = new Map<string, (value: any) => void>();
+class SocketState {
+	#clientId = Date.now();
+	#websocket!: WebSocket;
+	#message = $state<Message | null>(null);
+	#connected = $state(false);
+	#dispatcher = getDispatcher();
+	#messageQueue = new Map<string, (value: any) => void>();
 
-	function connect(context: WSHandlerContext) {
+	connect(context: WSHandlerContext) {
 		const protocol = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
-		const wsUrl = `${protocol}${PUBLIC_WS_URL}/${clientId}`;
-		websocket = new WebSocket(wsUrl);
+		const wsUrl = `${protocol}${PUBLIC_WS_URL}/${this.#clientId}`;
+		this.#websocket = new WebSocket(wsUrl);
 
-		websocket.onopen = () => {
-			connected = true;
+		this.#websocket.onopen = () => {
+			this.#connected = true;
 			console.log('Connected to backend!');
 		};
 
-		websocket.onmessage = async (event) => {
+		this.#websocket.onmessage = async (event) => {
 			const data = JSON.parse(event.data);
-			message = data;
-			if (!message) return;
-			const messageSnapshot = $state.snapshot(message);
-			console.log(`Received message: ${message.type}`, messageSnapshot);
-			if (message.type && messageQueue.has(message.type)) {
-				const resolve = messageQueue.get(message.type);
+			this.#message = data;
+			if (!this.#message) return;
+
+			const messageSnapshot = $state.snapshot(this.#message);
+			console.log(`Received message: ${this.#message.type}`, messageSnapshot);
+
+			if (this.#message.type && this.#messageQueue.has(this.#message.type)) {
+				const resolve = this.#messageQueue.get(this.#message.type);
 				if (resolve) {
-					resolve(message);
-					messageQueue.delete(message.type);
+					resolve(this.#message);
+					this.#messageQueue.delete(this.#message.type);
 					return;
 				}
 			}
 
-			await dispatcher.dispatch(message, context);
+			await this.#dispatcher.dispatch(this.#message, context);
 		};
 
-		websocket.onclose = () => {
-			connected = false;
-			setTimeout(() => connect(context), RECONNECT_DELAY);
+		this.#websocket.onclose = () => {
+			this.#connected = false;
+			setTimeout(() => this.connect(context), RECONNECT_DELAY);
 		};
 	}
 
-	async function send(messageData: string) {
-		while (websocket.readyState !== websocket.OPEN) {
+	async send(messageData: string) {
+		while (this.#websocket.readyState !== this.#websocket.OPEN) {
 			await new Promise((resolve) => setTimeout(resolve, 250));
 		}
 		console.log(`Sending message: ${messageData}`);
-		websocket.send(messageData);
+		this.#websocket.send(messageData);
 	}
 
-	async function sendAndWait(messageData: any): Promise<any> {
+	async sendAndWait(messageData: any): Promise<any> {
 		return new Promise((resolve) => {
 			const messageType = messageData.type;
-			messageQueue.set(messageType, resolve);
-			send(JSON.stringify(messageData));
+			this.#messageQueue.set(messageType, resolve);
+			this.send(JSON.stringify(messageData));
 		});
 	}
 
-	function clear(messageType: string) {
-		if (message?.type === messageType) {
-			message = null;
+	clear(messageType: string) {
+		if (this.#message?.type === messageType) {
+			this.#message = null;
 		}
 	}
 
-	return {
-		get message() {
-			return message;
-		},
-		set message(newMessage: Message | null) {
-			message = newMessage;
-		},
-		get connected() {
-			return connected;
-		},
-		send,
-		sendAndWait,
-		clear,
-		connect
-	};
+	get message() {
+		return this.#message;
+	}
+
+	set message(newMessage: Message | null) {
+		this.#message = newMessage;
+	}
+
+	get connected() {
+		return this.#connected;
+	}
 }
 
-const socketState: ReturnType<typeof createSocketState> = createSocketState();
-export const getSocketState = () => socketState;
+const socketStateInstance = new SocketState();
+
+export const getSocketState = () => socketStateInstance;

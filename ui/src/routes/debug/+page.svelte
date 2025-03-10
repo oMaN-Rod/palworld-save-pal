@@ -2,7 +2,7 @@
 	import { page } from '$app/state';
 	import { Combobox, Tooltip } from '$components/ui';
 	import { buildingsData } from '$lib/data';
-	import { getAppState, getSocketState } from '$states';
+	import { getAppState } from '$states';
 	import {
 		MessageType,
 		type Base,
@@ -15,15 +15,14 @@
 	import { Switch, Tabs } from '@skeletonlabs/skeleton-svelte';
 	import { Eye, EyeOff, RefreshCcw } from 'lucide-svelte';
 	import { onMount } from 'svelte';
-	import { JSONEditor, type ContextMenuItem, type JSONEditorSelection } from 'svelte-jsoneditor';
+	import { JSONEditor, type ContextMenuItem } from 'svelte-jsoneditor';
+	import { sendAndWait } from '$lib/utils/websocketUtils';
 
 	type JsonContent = {
 		content: { text: string };
 	};
 
 	type RawDataType = 'guild' | 'base' | 'player' | 'pal' | 'item_container' | 'character_container';
-
-	const ws = getSocketState();
 	const appState = getAppState();
 
 	let jsons: Record<RawDataType, JsonContent> = $state({
@@ -275,101 +274,72 @@
 		setJson('item_container', itemContainer);
 	}
 
-	async function fetchGuildRawData(message: Record<string, any>) {
-		const res = await ws.sendAndWait(message);
-		if (!res || !res.data) return;
-		guildRawData = res.data;
+	async function fetchGuildRawData(guild_id: any) {
+		const res = await sendAndWait(MessageType.GET_RAW_DATA, { guild_id });
+		if (!res) return;
+		guildRawData = res;
 		setJson('guild', guildRawData);
 	}
 
-	async function fetchBaseRawData(message: Record<string, any>) {
-		const res = await ws.sendAndWait(message);
-		if (!res || !res.data) return;
-		baseRawData = res.data;
+	async function fetchBaseRawData(base_id: any) {
+		const res = await sendAndWait(MessageType.GET_RAW_DATA, { base_id });
+		if (!res) return;
+		baseRawData = res;
 		setJson('base', baseRawData);
 	}
 
-	async function fetchPlayerRawData(message: Record<string, any>) {
-		const res = await ws.sendAndWait(message);
-		if (!res || !res.data) return;
-		playerRawData = res.data;
+	async function fetchPlayerRawData(player_id: any) {
+		const res = await sendAndWait(MessageType.GET_RAW_DATA, { player_id });
+		if (!res) return;
+		console.log('Res', res);
+		playerRawData = res;
 		setJson('player', playerRawData);
 	}
 
-	async function fetchPalRawData(message: Record<string, any>) {
-		const res = await ws.sendAndWait(message);
-		if (!res || !res.data) return;
-		palRawData = res.data;
+	async function fetchPalRawData(pal_id: any) {
+		const res = await sendAndWait(MessageType.GET_RAW_DATA, { pal_id });
+		if (!res) return;
+		palRawData = res;
 		setJson('pal', palRawData);
 	}
 
-	async function fetchCharacterContainerRawData(message: Record<string, any>) {
-		const res = await ws.sendAndWait(message);
-		if (!res || !res.data) return;
-		characterContainerRawData = res.data;
+	async function fetchCharacterContainerRawData(character_container_id: any) {
+		const res = await sendAndWait(MessageType.GET_RAW_DATA, { character_container_id });
+		if (!res) return;
+		characterContainerRawData = res;
 		setJson('character_container', characterContainerRawData);
 	}
 
 	async function handleGetRawData(type: RawDataType) {
-		let message = {
-			type: MessageType.GET_RAW_DATA,
-			data: {}
-		};
 		switch (type) {
 			case 'guild':
 				if (!guild) return;
-				message.data = {
-					guild_id: guild.id
-				};
-				await fetchGuildRawData(message);
+				await fetchGuildRawData(guild.id);
 				break;
 			case 'base':
 				if (!base) return;
-				message.data = {
-					base_id: base.id
-				};
-				await fetchBaseRawData(message);
+				await fetchBaseRawData(base.id);
 				break;
 			case 'player':
 				if (!player) return;
-				message.data = {
-					player_id: player.uid
-				};
-				await fetchPlayerRawData(message);
+				await fetchPlayerRawData(player.uid);
 				break;
 			case 'pal':
 				if (!pal) return;
-				message.data = {
-					pal_id: pal.instance_id
-				};
-				await fetchPalRawData(message);
+				await fetchPalRawData(pal.instance_id);
 				break;
-			case 'item_container':
-				if (!itemContainer) return;
-				message.data = {
-					item_container_id: itemContainer.id
-				};
-				await fetchPalRawData(message);
-				break;
+			// case 'item_container':
+			// 	if (!itemContainer) return;
+			// 	await fetchPalRawData(itemContainer.id);
+			// 	break;
 			case 'character_container':
 				if (!characterContainer) return;
-				message.data = {
-					character_container_id: characterContainer.id
-				};
-				await fetchCharacterContainerRawData(message);
+				await fetchCharacterContainerRawData(characterContainer.id);
 				break;
 		}
 	}
 
-	function onRenderContextMenu(
-		items: ContextMenuItem[],
-		context: {
-			mode: 'tree' | 'text' | 'table';
-			modal: boolean;
-			readOnly: boolean;
-			selection: JSONEditorSelection | undefined;
-		}
-	) {
+	function onRenderContextMenu(items: ContextMenuItem[]) {
 		console.log(items);
 		return items;
 	}
@@ -618,7 +588,7 @@
 								? handleGetRawData('item_container')
 								: setJson('item_container', itemContainer!);
 						}}
-						disabled={!itemContainer}
+						disabled
 						compact
 					>
 						{#snippet inactiveChild()}

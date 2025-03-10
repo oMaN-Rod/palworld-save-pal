@@ -1,6 +1,4 @@
-// ui/src/lib/data/exp.ts
-
-import { getSocketState } from '$states';
+import { sendAndWait } from '$lib/utils/websocketUtils';
 import { MessageType } from '$types';
 
 interface ExpData {
@@ -13,29 +11,24 @@ interface ExpData {
 
 class ExpDataHandler {
 	private loading: boolean = false;
-	private ws = getSocketState();
 
 	expData: Record<string, ExpData> = $state({});
 
 	private async ensureLoaded(): Promise<void> {
-		if (Object.keys(this.expData).length > 0) return;
-		if (this.loading) {
-			while (this.loading) {
-				await new Promise((resolve) => setTimeout(resolve, 100));
+		if (Object.keys(this.expData).length === 0 && !this.loading) {
+			try {
+				this.loading = true;
+				this.expData = await sendAndWait(MessageType.GET_EXP_DATA);
+				this.loading = false;
+			} catch (error) {
+				this.loading = false;
+				console.error('Error fetching elements:', error);
+				throw error;
 			}
-			return;
 		}
-
-		this.loading = true;
-		try {
-			const response = await this.ws.sendAndWait({ type: MessageType.GET_EXP_DATA });
-			if (response.type === MessageType.GET_EXP_DATA) {
-				this.expData = response.data;
-			} else {
-				throw new Error('Failed to fetch exp data');
-			}
-		} finally {
-			this.loading = false;
+		if (this.loading) {
+			await new Promise((resolve) => setTimeout(resolve, 100));
+			await this.ensureLoaded();
 		}
 	}
 

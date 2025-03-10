@@ -3,7 +3,7 @@
 	import { Card, Tooltip, TooltipButton } from '$components/ui';
 	import { Github } from 'lucide-svelte';
 	import Saitama from '$lib/assets/img/app/saitama.png';
-	import { staticIcons } from '$lib/constants';
+	import { staticIcons } from '$types/icons';
 
 	const appState = getAppState();
 </script>

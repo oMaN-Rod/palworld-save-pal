@@ -1,13 +1,12 @@
 <script lang="ts">
 	import { FileDropzone, Card, Tooltip } from '$components/ui';
-	import { getSocketState } from '$states/websocketState.svelte';
 	import { MessageType } from '$types';
 	import { getAppState } from '$states';
 	import { Download } from 'lucide-svelte';
 	import { goto } from '$app/navigation';
+	import { send, pushProgressMessage } from '$lib/utils/websocketUtils';
 
 	let appState = getAppState();
-	const ws = getSocketState();
 
 	let files: FileList | undefined = $state();
 
@@ -15,25 +14,20 @@
 		if (!files) return;
 		await goto('/loading');
 		appState.resetState();
-		ws.message = { type: MessageType.PROGRESS_MESSAGE, data: 'Uploading zip file 🚀...' };
+		pushProgressMessage('Uploading zip file 🚀...');
 		const reader = new FileReader();
 		reader.onload = function () {
 			const arrayBuffer = reader.result as ArrayBuffer;
 			const uint8Array = new Uint8Array(arrayBuffer);
-			const data = {
-				type: MessageType.LOAD_ZIP_FILE,
-				data: Array.from(uint8Array)
-			};
-
-			ws.send(JSON.stringify(data));
+			send(MessageType.LOAD_ZIP_FILE, Array.from(uint8Array));
 		};
 		reader.readAsArrayBuffer(files[0]);
 	}
 
 	async function handleDownloadSaveFile() {
-		ws.send(JSON.stringify({ type: MessageType.DOWNLOAD_SAVE_FILE }));
+		send(MessageType.DOWNLOAD_SAVE_FILE);
 		await goto('/loading');
-		ws.message = { type: MessageType.PROGRESS_MESSAGE, data: 'Starting to cook 🧑‍🍳...' };
+		pushProgressMessage('Starting to cook 🧑‍🍳...');
 	}
 </script>
 
