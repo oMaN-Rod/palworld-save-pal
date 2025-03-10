@@ -257,8 +257,8 @@ class SaveFile(BaseModel):
 
             # Delete the player
             self._players = {
-                player_id: player for player_id, player in self._players.items()
-                if player_id not in players_in_guild
+                pid: player for pid, player in self._players.items()
+                if pid != player_id
             }
 
             # Delete player parameters
@@ -269,8 +269,8 @@ class SaveFile(BaseModel):
             
             # Delete player save file
             self._player_gvas_files = {
-                player_id: gvas_file for player_id, gvas_file in self._player_gvas_files.items()
-                if player_id not in players_in_guild
+                pid: gvas_file for pid, gvas_file in self._player_gvas_files.items()
+                if pid != player_id
             }
 
         # Remove guild extra save data
