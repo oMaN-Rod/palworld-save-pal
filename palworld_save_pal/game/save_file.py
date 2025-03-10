@@ -25,7 +25,7 @@ from palworld_save_pal.game.pal import Pal, PalDTO
 from palworld_save_pal.game.pal_objects import GroupType, PalObjects
 from palworld_save_pal.utils.logging_config import create_logger
 from palworld_save_pal.game.player import Player, PlayerDTO
-from palworld_save_pal.utils.uuid import are_equal_uuids
+from palworld_save_pal.utils.uuid import are_equal_uuids, is_empty_uuid
 
 logger = create_logger(__name__)
 
@@ -405,24 +405,53 @@ class SaveFile(BaseModel):
         self, target_id: UUID, container_ids_to_delete: List[UUID]
     ) -> None:
         logger.debug(
-            "Deleting item containers for %s and %s", target_id, container_ids_to_delete
+            "Deleting %s item containers for %s",
+            len(container_ids_to_delete),
+            target_id,
         )
-        self._item_container_save_data[:] = [
-            entry
-            for entry in self._item_container_save_data
-            if not any(
-                are_equal_uuids(PalObjects.get_guid(entry["key"]["ID"]), container_id)
-                or are_equal_uuids(
+        for container_id in container_ids_to_delete:
+            for entry in self._item_container_save_data:
+                if are_equal_uuids(
                     PalObjects.get_guid(
                         PalObjects.get_nested(
                             entry, "value", "BelongInfo", "value", "GroupId"
                         )
                     ),
                     target_id,
+                ) or are_equal_uuids(
+                    PalObjects.get_guid(entry["key"]["ID"]), container_id
+                ):
+                    self._delete_dynamic_items(entry)
+                    self._item_container_save_data.remove(entry)
+                    break
+
+    def _delete_dynamic_items(self, item_container: UUID) -> None:
+        slots = PalObjects.get_array_property(
+            PalObjects.get_nested(item_container, "value", "Slots")
+        )
+        for slot in slots:
+            raw_data = PalObjects.get_value(slot["RawData"])
+            local_id = PalObjects.as_uuid(
+                PalObjects.get_nested(
+                    raw_data, "item", "dynamic_id", "local_id_in_created_world"
                 )
-                for container_id in container_ids_to_delete
             )
-        ]
+            if local_id and not is_empty_uuid(local_id):
+                logger.debug("Deleting dynamic item %s", local_id)
+                for entry in self._dynamic_item_save_data:
+                    if are_equal_uuids(
+                        PalObjects.get_nested(
+                            entry,
+                            "RawData",
+                            "value",
+                            "id",
+                            "local_id_in_created_world",
+                        ),
+                        local_id,
+                    ):
+                        self._dynamic_item_save_data.remove(entry)
+                        logger.debug("Deleted dynamic item %s", local_id)
+                        break
 
     def _delete_character_containers(self, container_ids_to_delete: List[UUID]) -> None:
         logger.debug("Deleting character containers for %s", container_ids_to_delete)
