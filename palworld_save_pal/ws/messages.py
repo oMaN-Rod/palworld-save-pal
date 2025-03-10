@@ -27,6 +27,7 @@ class MessageType(str, Enum):
     MOVE_PAL = "move_pal"
 
     # Player Management
+    DELETE_PLAYER = "delete_player"
     SET_TECHNOLOGY_DATA = "set_technology_data"
 
     # Game Data Retrieval
@@ -49,6 +50,9 @@ class MessageType(str, Enum):
     DELETE_PRESET = "delete_preset"
     GET_PRESETS = "get_presets"
     UPDATE_PRESET = "update_preset"
+
+    # Guild Management
+    DELETE_GUILD = "delete_guild"
 
     # Save File Management
     DOWNLOAD_SAVE_FILE = "download_save_file"
@@ -305,3 +309,23 @@ class SetTechnologyDataMessage(BaseModel):
 
 class GetMapObjectsMessage(BaseModel):
     type: str = MessageType.GET_MAP_OBJECTS.value
+
+
+class DeleteGuildData(BaseModel):
+    guild_id: UUID
+    origin: str
+
+
+class DeleteGuildMessage(BaseModel):
+    type: str = MessageType.DELETE_GUILD.value
+    data: DeleteGuildData
+
+
+class DeletePlayerData(BaseModel):
+    player_id: UUID
+    origin: str
+
+
+class DeletePlayerMessage(BaseModel):
+    type: str = MessageType.DELETE_PLAYER.value
+    data: DeletePlayerData

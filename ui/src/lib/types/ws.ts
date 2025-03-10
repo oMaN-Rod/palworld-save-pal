@@ -43,7 +43,9 @@ export enum MessageType {
 	GET_WORK_SUITABILITY = 'get_work_suitability',
 	GET_BUILDINGS = 'get_buildings',
 	GET_RAW_DATA = 'get_raw_data',
-	GET_MAP_OBJECTS = 'get_map_objects'
+	GET_MAP_OBJECTS = 'get_map_objects',
+	DELETE_GUILD = 'delete_guild',
+	DELETE_PLAYER = 'delete_player'
 }
 
 interface UpdateSaveFileData {

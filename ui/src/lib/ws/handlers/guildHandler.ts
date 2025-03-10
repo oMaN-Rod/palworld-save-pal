@@ -1,10 +1,11 @@
 import { palsData } from '$lib/data';
-import { getAppState } from '$states';
+import { getAppState, getToastState } from '$states';
 import type { Guild } from '$types';
 import { MessageType } from '$types';
 import type { WSMessageHandler } from '../types';
 
 const appState = getAppState();
+const toast = getToastState();
 
 export const getGuildsHandler: WSMessageHandler = {
 	type: MessageType.GET_GUILDS,
@@ -48,4 +49,22 @@ export const getGuildsHandler: WSMessageHandler = {
 	}
 };
 
-export const guildHandlers = [getGuildsHandler];
+export const deleteGuildHandler: WSMessageHandler = {
+	type: MessageType.DELETE_GUILD,
+	async handle(data: Record<string, any>, { goto }) {
+		console.log(`Deleting guild ${JSON.stringify(data)}`);
+		const { guild_id, origin } = data;
+		appState.selectedPlayer = undefined;
+		appState.selectedPal = undefined;
+		const guild = appState.guilds[guild_id];
+		const guildName = guild?.name || 'Unknown Guild';
+		appState.players = Object.fromEntries(
+			Object.entries(appState.players).filter(([key]) => guild.players?.includes(key) !== true)
+		);
+		delete appState.guilds[guild_id];
+		toast.add(`Guild ${guildName} deleted`, undefined, 'success');
+		await goto(`/${origin}`);
+	}
+};
+
+export const guildHandlers = [deleteGuildHandler, getGuildsHandler];

@@ -7,10 +7,12 @@ from palworld_save_pal.ws.handlers import (
     debug_handler,
     elements_handler,
     exp_handler,
+    guild_handler,
     items_handler,
     map_objects_handler,
     open_in_browser_handler,
     passive_skills_handler,
+    player_handler,
     technologies_handler,
     preset_handler,
     save_file_handler,
@@ -26,6 +28,8 @@ from palworld_save_pal.ws.messages import (
     AddPresetMessage,
     BaseMessage,
     ClonePalMessage,
+    DeleteGuildMessage,
+    DeletePlayerMessage,
     GetActiveSkillsMessage,
     GetBuildingsMessage,
     GetElementsMessage,
@@ -215,6 +219,14 @@ def bootstrap(dispatcher: "MessageDispatcher"):
     )
 
     dispatcher.register_handler(
+        MessageType.DELETE_GUILD.value,
+        {
+            "message_class": DeleteGuildMessage,
+            "handler_func": guild_handler.delete_guild_handler,
+        },
+    )
+
+    dispatcher.register_handler(
         MessageType.OPEN_IN_BROWSER.value,
         {
             "message_class": OpenInBrowserMessage,
@@ -331,5 +343,13 @@ def bootstrap(dispatcher: "MessageDispatcher"):
         {
             "message_class": GetMapObjectsMessage,
             "handler_func": map_objects_handler.get_map_objects_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.DELETE_PLAYER.value,
+        {
+            "message_class": DeletePlayerMessage,
+            "handler_func": player_handler.delete_player_handler,
         },
     )

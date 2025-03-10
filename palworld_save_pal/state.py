@@ -47,8 +47,8 @@ class AppState(BaseModel):
         self.local = local
         self.save_type = save_type
         await ws_callback(f"Loading level.sav and {len(player_savs)} players...")
-        self.save_file = SaveFile(name=sav_id).load_sav_files(
-            level_sav, player_savs, level_meta
+        self.save_file = await SaveFile(name=sav_id).load_sav_files(
+            level_sav, player_savs, level_meta, ws_callback
         )
         await ws_callback("Files loaded, getting players...")
         self.players = self.save_file.get_players()

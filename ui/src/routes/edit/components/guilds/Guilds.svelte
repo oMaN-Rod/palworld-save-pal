@@ -20,6 +20,7 @@
 	import { TextInputModal } from '$components/modals';
 	import { staticIcons } from '$types/icons';
 	import { send, sendAndWait } from '$lib/utils/websocketUtils';
+	import { goto } from '$app/navigation';
 	interface PalWithBaseId {
 		pal: Pal;
 		baseId: string;
@@ -625,6 +626,22 @@
 		playerGuild!.name = result;
 		playerGuild!.state = EntryState.MODIFIED;
 	}
+
+	async function handleDeleteGuild() {
+		const confirmed = await modal.showConfirmModal({
+			title: 'Delete Guild',
+			message: 'Are you sure you want to delete this guild? This action cannot be undone.',
+			confirmText: 'Delete',
+			cancelText: 'Cancel'
+		});
+		if (confirmed) {
+			send(MessageType.DELETE_GUILD, {
+				guild_id: playerGuild?.id,
+				origin: 'edit'
+			});
+			goto('/loading');
+		}
+	}
 </script>
 
 {#if appState.selectedPlayer}
@@ -648,6 +665,11 @@
 					{#if playerGuild && appState.settings.debug_mode}
 						<DebugButton href={`/debug?guildId=${playerGuild.id}`} />
 					{/if}
+					<Tooltip label="Delete entire guild">
+						<button class="btn p-2 hover:bg-red-500/50" onclick={handleDeleteGuild}>
+							<Trash />
+						</button>
+					</Tooltip>
 				</div>
 
 				<div class="flex">
