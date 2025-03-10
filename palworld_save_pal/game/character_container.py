@@ -148,8 +148,3 @@ class CharacterContainer(BaseModel):
         )
         return self
 
-    def nuke(self):
-        logger.debug("Nuking %s (%s)", self.type.value, self.id)
-        self.slots = []
-        self._slots_data = []
-        self.size = 0

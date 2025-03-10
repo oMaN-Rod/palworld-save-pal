@@ -280,8 +280,3 @@ class ItemContainer(BaseModel):
             if "passive_skill_list" not in raw_data:
                 raw_data["passive_skill_list"] = []
         logger.debug("%s (%s) => %s\n%s", self.type, self.id, slot, item)
-
-    def nuke(self) -> None:
-        self._container_slots_data = []
-        self._dynamic_item_save_data = []
-        self._container = {}

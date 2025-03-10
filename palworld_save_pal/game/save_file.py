@@ -212,11 +212,48 @@ class SaveFile(BaseModel):
             raise ValueError(f"Guild {guild_id} not found in the save file.")
         
         # Get all players in the guild
-        players_in_guild = guild.players
+        players_in_guild = list(guild.players)
+
+        # Container ids to delete
+        container_ids_to_delete = []
+
+        # Character container ids to delete
+        character_container_ids_to_delete = []
+
+        # Delete all map objects owned by guild or player in guild
+        self._map_object_save_data["values"][:] = [
+            obj for obj in self._map_object_save_data["values"]
+            if not self._should_delete_map_object(obj, guild_id, players_in_guild)
+        ]
 
         # Delete all players in the guild
         for player_id in players_in_guild:
-            self.delete_player_pals(player_id)
+            if player_id not in self._players:
+                continue
+
+            player = self._players[player_id]
+            container_ids_to_delete = container_ids_to_delete + [
+                player.common_container.id,
+                player.essential_container.id,
+                player.weapon_load_out_container.id,
+                player.player_equipment_armor_container.id,
+                player.food_equip_container.id
+            ]
+            character_container_ids_to_delete = character_container_ids_to_delete + [
+                player.otomo_container_id,
+                player.pal_box_id
+            ]
+            
+            for pal_slot in list(player.pal_box.slots):
+                player.delete_pal(pal_slot.pal_id)
+                self._delete_pal_by_id(pal_slot.pal_id) 
+
+            for pal_slot in list(player.party.slots):
+                player.delete_pal(pal_slot.pal_id)
+                self._delete_pal_by_id(pal_slot.pal_id)
+
+            for pal_id in list(player.pals.keys()):
+                player.delete_pal(pal_id)
 
             # Delete the player
             self._players = {
@@ -224,20 +261,54 @@ class SaveFile(BaseModel):
                 if player_id not in players_in_guild
             }
 
+            # Delete player parameters
+            self._character_save_parameter_map[:] = [
+                entry for entry in self._character_save_parameter_map
+                if not are_equal_uuids(PalObjects.get_guid(PalObjects.get_nested(entry, "key", "PlayerUId")), player_id)
+            ]
+            
             # Delete player save file
             self._player_gvas_files = {
                 player_id: gvas_file for player_id, gvas_file in self._player_gvas_files.items()
                 if player_id not in players_in_guild
             }
 
+        # Remove guild extra save data
+        self._guild_extra_save_data_map[:] = [
+            entry for entry in self._guild_extra_save_data_map
+            if not are_equal_uuids(entry["key"], guild_id)
+        ]
+
         # Delete all bases in the guild
-        for base in guild.bases.values():
-            for pal in base.pals.values():
-                self._delete_pal_by_id(pal.instance_id)
+        for base_id, base in guild.bases.items():
+            container_ids_to_delete = container_ids_to_delete + list(base.storage_containers.keys())
+            
+            self.delete_guild_pals(guild_id, base_id, list(base.pals.keys()))
+
             self._base_camp_save_data_map[:] = [
                 base for base in self._base_camp_save_data_map
-                if not are_equal_uuids(PalObjects.get_nested(base, "value", "key"), base.base_id)
+                if not are_equal_uuids(PalObjects.get_nested(base, "key"), base_id)
             ]
+ 
+        # Delete player items and guild items
+        self._item_container_save_data[:] = [
+            entry for entry in self._item_container_save_data
+            if not any(
+                are_equal_uuids(PalObjects.get_guid(entry["key"]["ID"]), container_id) or
+                are_equal_uuids(PalObjects.get_guid(PalObjects.get_nested(entry, "value", "BelongInfo", "value", "GroupId")), guild_id) or
+                are_equal_uuids(PalObjects.get_guid(PalObjects.get_nested(entry, "value", "BelongInfo", "value", "GroupId")), player_id)
+                for container_id in container_ids_to_delete
+            )
+        ]
+
+        # Delete character containers
+        self._character_container_save_data[:] = [
+            entry for entry in self._character_container_save_data
+            if not any(
+                are_equal_uuids(PalObjects.get_guid(entry["key"]["ID"]), container_id)
+                for container_id in character_container_ids_to_delete
+            )
+        ]
 
         # Delete the guild
         self._group_save_data_map[:] = [

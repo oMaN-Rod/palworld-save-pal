@@ -181,21 +181,3 @@ class Guild(BaseModel):
             dynamic_item_save_data=dynamic_item_save_data,
         )
         logger.debug("Loaded guild chest %s", self.container_id)
-
-    def nuke(self):
-        """
-        Deletes the entire guild and all associated data.
-
-        Note:
-            Use this function with caution as it will result in the loss of all guild data.
-        """
-        logger.info("Nuking guild %s (%s)", self.name, self.id)
-        for base in self.bases.values():
-            base.nuke()
-        
-        self.bases.clear()
-        
-        if self.guild_chest:
-            self.guild_chest.nuke()
-
-        self._group_save_data = None

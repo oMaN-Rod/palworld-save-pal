@@ -15,6 +15,6 @@ async def delete_guild_handler(message: DeleteGuildMessage, ws: WebSocket):
     app_state = get_app_state()
     save_file = app_state.save_file
 
-    data = save_file.delete_guild(guild_id)
+    data = save_file.delete_guild_and_players(guild_id)
     response = build_response(MessageType.DELETE_GUILD, data)
     await ws.send_json(response)
