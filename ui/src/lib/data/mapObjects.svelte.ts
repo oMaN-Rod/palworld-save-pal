@@ -1,8 +1,7 @@
-import { getSocketState } from '$states';
+import { sendAndWait } from '$lib/utils/websocketUtils';
 import { MessageType, type MapObject } from '$types';
 
 export class MapObjects {
-	private ws = getSocketState();
 	private loading = false;
 
 	points: MapObject[] = $state([]);
@@ -11,13 +10,7 @@ export class MapObjects {
 		if (this.points.length === 0 && !this.loading) {
 			try {
 				this.loading = true;
-				const response = await this.ws.sendAndWait({
-					type: MessageType.GET_MAP_OBJECTS
-				});
-				if (response.type === 'error') {
-					throw new Error(response.data);
-				}
-				this.points = response.data;
+				this.points = await sendAndWait(MessageType.GET_MAP_OBJECTS);
 				this.loading = false;
 			} catch (error) {
 				this.loading = false;
