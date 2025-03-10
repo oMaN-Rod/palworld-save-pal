@@ -44,6 +44,7 @@ export enum MessageType {
 	GET_BUILDINGS = 'get_buildings',
 	GET_RAW_DATA = 'get_raw_data',
 	DELETE_GUILD = 'delete_guild',
+	DELETE_PLAYER = 'delete_player'
 }
 
 interface UpdateSaveFileData {

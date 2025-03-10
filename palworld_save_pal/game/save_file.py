@@ -2,7 +2,7 @@ import copy
 from enum import Enum
 import json
 import os
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional, Tuple, Union
 from uuid import UUID
 from pydantic import BaseModel, ConfigDict, PrivateAttr
 
@@ -157,63 +157,188 @@ class SaveFile(BaseModel):
     _map_object_save_data: List[Dict[str, Any]] = PrivateAttr(default_factory=list)
     _guild_extra_save_data_map: List[Dict[str, Any]] = PrivateAttr(default_factory=list)
 
-    def _should_delete_map_object(self, map_object: dict, guild_id: UUID, player_ids: List[UUID]) -> bool:
+    def _should_delete_map_object(
+        self, map_object: dict, guild_id: UUID | None, player_ids: List[UUID]
+    ) -> bool:
         """
         Determine if a map object should be deleted based on guild and player ownership.
-        
+
         Args:
             map_object: The map object data
             guild_id: The guild ID to check against
             player_ids: List of player UUIDs to check against
-            
+
         Returns:
             bool: True if the map object should be deleted, False otherwise
         """
         raw_data = map_object["Model"]["value"]["RawData"]["value"]
         group_id = PalObjects.as_uuid(raw_data.get("group_id_belong_to"))
         build_player_uid = PalObjects.as_uuid(raw_data.get("build_player_uid"))
-        
+
         # Check guild ownership
-        if are_equal_uuids(group_id, guild_id):
+        if guild_id and are_equal_uuids(group_id, guild_id):
             return True
-        
+
         # Check if any player in the list is the builder
-        if any(are_equal_uuids(build_player_uid, player_id) for player_id in player_ids):
+        if any(
+            are_equal_uuids(build_player_uid, player_id) for player_id in player_ids
+        ):
             return True
 
         # Handle edge cases
         if "ConcreteModel" in map_object:
-            concrete_model_raw_data = map_object["ConcreteModel"]["value"]["RawData"]["value"]
-            private_lock_player_uid = PalObjects.as_uuid(concrete_model_raw_data.get("private_lock_player_uid"))
-            
+            concrete_model_raw_data = map_object["ConcreteModel"]["value"]["RawData"][
+                "value"
+            ]
+            private_lock_player_uid = PalObjects.as_uuid(
+                concrete_model_raw_data.get("private_lock_player_uid")
+            )
+
             # Check if any player in the list is the private lock owner
-            if any(are_equal_uuids(private_lock_player_uid, player_id) for player_id in player_ids):
+            if any(
+                are_equal_uuids(private_lock_player_uid, player_id)
+                for player_id in player_ids
+            ):
                 return True
 
             # Check trade info sellers
             for trade_info in concrete_model_raw_data.get("trade_infos", []):
-                seller_player_uid = PalObjects.as_uuid(trade_info.get("seller_player_uid"))
-                if any(are_equal_uuids(seller_player_uid, player_id) for player_id in player_ids):
+                seller_player_uid = PalObjects.as_uuid(
+                    trade_info.get("seller_player_uid")
+                )
+                if any(
+                    are_equal_uuids(seller_player_uid, player_id)
+                    for player_id in player_ids
+                ):
                     return True
 
             # Check password lock module
             for module in concrete_model_raw_data.get("ModuleMap", {}).get("value", []):
-                if module["key"] == "EPalMapObjectConcreteModelModuleType::PasswordLock":
-                    for player_info in module["value"]["RawData"]["value"].get("player_infos", []):
+                if (
+                    module["key"]
+                    == "EPalMapObjectConcreteModelModuleType::PasswordLock"
+                ):
+                    for player_info in module["value"]["RawData"]["value"].get(
+                        "player_infos", []
+                    ):
                         player_uid = PalObjects.as_uuid(player_info.get("player_uid"))
-                        if any(are_equal_uuids(player_uid, player_id) for player_id in player_ids):
+                        if any(
+                            are_equal_uuids(player_uid, player_id)
+                            for player_id in player_ids
+                        ):
                             return True
 
         return False
 
-    def delete_guild_and_players(self, guild_id: UUID) -> None:
+    async def _delete_player_and_pals(
+        self, player_id: UUID, ws_callback
+    ) -> Tuple[List[UUID], List[UUID]] | None:
+        player = self._players[player_id]
+        logger.debug("Deleting player %s with %s pals", player_id, len(player.pals))
+        await ws_callback(
+            f"Deleting player {player.nickname} with {len(player.pals)} pals"
+        )
+
+        # Container ids to delete
+        container_ids_to_delete = [
+            player.common_container.id,
+            player.essential_container.id,
+            player.weapon_load_out_container.id,
+            player.player_equipment_armor_container.id,
+            player.food_equip_container.id,
+        ]
+
+        # Character container ids to delete
+        character_container_ids_to_delete = [
+            player.otomo_container_id,
+            player.pal_box_id,
+        ]
+
+        await ws_callback(
+            f"Deleting {len(player.pal_box.slots)} pals of player {player.nickname} from PalBox"
+        )
+        for pal_slot in list(player.pal_box.slots):
+            self._delete_pal_by_id(pal_slot.pal_id)
+
+        await ws_callback(
+            f"Deleting {len(player.party.slots)} pals of player {player.nickname} from Party"
+        )
+        for pal_slot in list(player.party.slots):
+            self._delete_pal_by_id(pal_slot.pal_id)
+
+        # Delete the player
+        del self._players[player_id]
+
+        # Delete player parameters
+        self._character_save_parameter_map[:] = [
+            entry
+            for entry in self._character_save_parameter_map
+            if not are_equal_uuids(
+                PalObjects.get_guid(PalObjects.get_nested(entry, "key", "PlayerUId")),
+                player_id,
+            )
+        ]
+
+        # Delete player save file
+        del self._player_gvas_files[player_id]
+
+        return container_ids_to_delete, character_container_ids_to_delete
+
+    async def delete_player(self, player_id: UUID, ws_callback) -> bool:
+        player = self._players.get(player_id)
+        if not player:
+            raise ValueError(f"Player {player_id} not found in the save file.")
+
+        player_guild = self._player_guild(player_id)
+        if player_guild and are_equal_uuids(player_guild.admin_player_uid, player_id):
+            logger.warning(
+                "Cannot delete admin player %s from guild %s",
+                player_id,
+                player_guild.id,
+            )
+            return False
+        elif player_guild:
+            logger.debug(
+                "Deleting player %s (%s) from guild %s (%s)",
+                player.nickname,
+                player.uid,
+                player_guild.name,
+                player_guild.id,
+            )
+            await ws_callback(
+                f"Deleting player {player.nickname} from guild {player_guild.name}"
+            )
+            player_guild.delete_player(player_id)
+
+        container_ids_to_delete, character_container_ids_to_delete = (
+            await self._delete_player_and_pals(player_id, ws_callback)
+        )
+
+        # Delete all map objects owned by guild or player in guild
+        await ws_callback(f"Deleting map objects of player {player.nickname}")
+        self._map_object_save_data["values"][:] = [
+            obj
+            for obj in self._map_object_save_data["values"]
+            if not self._should_delete_map_object(obj, None, [player_id])
+        ]
+
+        # Delete player items
+        await ws_callback(f"Deleting item containers of player {player.nickname}")
+        self._delete_item_containers(player_id, container_ids_to_delete)
+
+        # Delete character containers
+        await ws_callback(f"Deleting character containers of player {player.nickname}")
+        self._delete_character_containers(character_container_ids_to_delete)
+        return True
+
+    async def delete_guild_and_players(self, guild_id: UUID, ws_callback) -> None:
         guild = self._guilds.get(guild_id)
         if not guild:
             raise ValueError(f"Guild {guild_id} not found in the save file.")
-        
-        # Get all players in the guild
-        players_in_guild = list(guild.players)
-
+        logger.debug("Deleting guild %s with %s players", guild_id, len(guild.players))
+        await ws_callback(
+            f"Deleting guild {guild.name} with {len(guild.players)} players"
+        )
         # Container ids to delete
         container_ids_to_delete = []
 
@@ -222,95 +347,92 @@ class SaveFile(BaseModel):
 
         # Delete all map objects owned by guild or player in guild
         self._map_object_save_data["values"][:] = [
-            obj for obj in self._map_object_save_data["values"]
-            if not self._should_delete_map_object(obj, guild_id, players_in_guild)
+            obj
+            for obj in self._map_object_save_data["values"]
+            if not self._should_delete_map_object(obj, guild_id, guild.players)
         ]
 
         # Delete all players in the guild
-        for player_id in players_in_guild:
+        for player_id in guild.players:
             if player_id not in self._players:
                 continue
-
-            player = self._players[player_id]
-            container_ids_to_delete = container_ids_to_delete + [
-                player.common_container.id,
-                player.essential_container.id,
-                player.weapon_load_out_container.id,
-                player.player_equipment_armor_container.id,
-                player.food_equip_container.id
-            ]
-            character_container_ids_to_delete = character_container_ids_to_delete + [
-                player.otomo_container_id,
-                player.pal_box_id
-            ]
-            
-            for pal_slot in list(player.pal_box.slots):
-                # player.delete_pal(pal_slot.pal_id)
-                self._delete_pal_by_id(pal_slot.pal_id) 
-
-            for pal_slot in list(player.party.slots):
-                # player.delete_pal(pal_slot.pal_id)
-                self._delete_pal_by_id(pal_slot.pal_id)
-
-            # Delete the player
-            self._players = {
-                pid: player for pid, player in self._players.items()
-                if pid != player_id
-            }
-
-            # Delete player parameters
-            self._character_save_parameter_map[:] = [
-                entry for entry in self._character_save_parameter_map
-                if not are_equal_uuids(PalObjects.get_guid(PalObjects.get_nested(entry, "key", "PlayerUId")), player_id)
-            ]
-            
-            # Delete player save file
-            self._player_gvas_files = {
-                pid: gvas_file for pid, gvas_file in self._player_gvas_files.items()
-                if pid != player_id
-            }
+            container_ids, character_container_ids = await self._delete_player_and_pals(
+                player_id, ws_callback
+            )
+            container_ids_to_delete.extend(container_ids)
+            character_container_ids_to_delete.extend(character_container_ids)
 
         # Remove guild extra save data
         self._guild_extra_save_data_map[:] = [
-            entry for entry in self._guild_extra_save_data_map
+            entry
+            for entry in self._guild_extra_save_data_map
             if not are_equal_uuids(entry["key"], guild_id)
         ]
 
         # Delete all bases in the guild
         for base_id, base in guild.bases.items():
-            container_ids_to_delete = container_ids_to_delete + list(base.storage_containers.keys())
-            
+            logger.debug("Deleting base %s", base_id)
+            await ws_callback(f"Deleting base {base.id}")
+            container_ids_to_delete.extend(list(base.storage_containers.keys()))
+            character_container_ids_to_delete.append(base.container_id)
+
             self.delete_guild_pals(guild_id, base_id, list(base.pals.keys()))
 
             self._base_camp_save_data_map[:] = [
-                base for base in self._base_camp_save_data_map
+                base
+                for base in self._base_camp_save_data_map
                 if not are_equal_uuids(PalObjects.get_nested(base, "key"), base_id)
             ]
- 
+
         # Delete player items and guild items
+        await ws_callback(f"Deleting item containers of guild {guild.name}")
+        self._delete_item_containers(guild_id, container_ids_to_delete)
+        self._delete_item_containers(player_id, container_ids_to_delete)
+
+        # Delete character containers
+        await ws_callback(f"Deleting character containers of guild {guild.name}")
+        self._delete_character_containers(character_container_ids_to_delete)
+
+        # Delete the guild
+        self._group_save_data_map[:] = [
+            group
+            for group in self._group_save_data_map
+            if not are_equal_uuids(PalObjects.get_nested(group, "key"), guild_id)
+        ]
+        del self._guilds[guild_id]
+
+    def _delete_item_containers(
+        self, target_id: UUID, container_ids_to_delete: List[UUID]
+    ) -> None:
+        logger.debug(
+            "Deleting item containers for %s and %s", target_id, container_ids_to_delete
+        )
         self._item_container_save_data[:] = [
-            entry for entry in self._item_container_save_data
+            entry
+            for entry in self._item_container_save_data
             if not any(
-                are_equal_uuids(PalObjects.get_guid(entry["key"]["ID"]), container_id) or
-                are_equal_uuids(PalObjects.get_guid(PalObjects.get_nested(entry, "value", "BelongInfo", "value", "GroupId")), guild_id) or
-                are_equal_uuids(PalObjects.get_guid(PalObjects.get_nested(entry, "value", "BelongInfo", "value", "GroupId")), player_id)
+                are_equal_uuids(PalObjects.get_guid(entry["key"]["ID"]), container_id)
+                or are_equal_uuids(
+                    PalObjects.get_guid(
+                        PalObjects.get_nested(
+                            entry, "value", "BelongInfo", "value", "GroupId"
+                        )
+                    ),
+                    target_id,
+                )
                 for container_id in container_ids_to_delete
             )
         ]
 
-        # Delete character containers
+    def _delete_character_containers(self, container_ids_to_delete: List[UUID]) -> None:
+        logger.debug("Deleting character containers for %s", container_ids_to_delete)
         self._character_container_save_data[:] = [
-            entry for entry in self._character_container_save_data
+            entry
+            for entry in self._character_container_save_data
             if not any(
                 are_equal_uuids(PalObjects.get_guid(entry["key"]["ID"]), container_id)
-                for container_id in character_container_ids_to_delete
+                for container_id in container_ids_to_delete
             )
-        ]
-
-        # Delete the guild
-        self._group_save_data_map[:] = [
-            group for group in self._group_save_data_map
-            if not are_equal_uuids(PalObjects.get_nested(group, "key"), guild_id)
         ]
 
     def add_player_pal(
@@ -503,11 +625,12 @@ class SaveFile(BaseModel):
     def pal_count(self):
         return len(self._pals)
 
-    def load_sav_files(
+    async def load_sav_files(
         self,
         level_sav: bytes,
         player_sav_files: Dict[str, bytes],
         level_meta: Optional[bytes] = None,
+        ws_callback=None,
     ):
         logger.info("Loading %s", self.name)
         raw_gvas, _ = decompress_sav_to_gvas(level_sav)
@@ -517,17 +640,22 @@ class SaveFile(BaseModel):
         self._gvas_file = gvas_file
 
         if level_meta:
+            await ws_callback("Loading level meta...")
             self.load_level_meta(level_meta)
             self._load_world_name()
         else:
+            await ws_callback("No LevelMeta.sav found, skipped.")
             self.world_name = "No LevelMeta.sav found"
 
         self._get_file_size(level_sav)
         self._set_data()
+        await ws_callback("Loading pals...")
         self._load_pals()
+        await ws_callback("Loading guilds...")
         self._load_guilds()
-        self._load_players(player_sav_files)
-        self._load_bases()
+        await self._load_players(player_sav_files, ws_callback)
+        await ws_callback("Loading bases...")
+        await self._load_bases(ws_callback)
         return self
 
     def sav(self, gvas_file: GvasFile = None) -> bytes:
@@ -723,9 +851,10 @@ class SaveFile(BaseModel):
                 dynamic_item_save_data=self._dynamic_item_save_data,
             )
 
-    def _load_bases(self):
+    async def _load_bases(self, ws_callback):
         if not self._base_camp_save_data_map:
             logger.warning("No bases found in the save file.")
+            ws_callback("No bases found in the save file.")
             return
 
         for entry in self._base_camp_save_data_map:
@@ -782,9 +911,13 @@ class SaveFile(BaseModel):
 
             # Debug, print the guild name, and pals at base
             logger.debug(
-                "Guild %s has %d pals at base",
+                "Guild %s has %d pals at base %s",
                 self._guilds[group_id_belong_to].name,
                 len(pals),
+                base.id,
+            )
+            await ws_callback(
+                f"Loaded base {base.id} with {len(pals)} pals from guild {self._guilds[group_id_belong_to].name}"
             )
 
     def _load_pals(self):
@@ -855,7 +988,9 @@ class SaveFile(BaseModel):
                 return guild
         return
 
-    def _load_players(self, player_sav_files: Dict[UUID, bytes] = None):
+    async def _load_players(
+        self, player_sav_files: Dict[UUID, bytes] = None, ws_callback=None
+    ):
         if not self._character_save_parameter_map:
             return {}
         logger.info("Loading Players")
@@ -867,6 +1002,7 @@ class SaveFile(BaseModel):
 
         for uid, player_sav_bytes in player_sav_files.items():
             raw_gvas, _ = decompress_sav_to_gvas(player_sav_bytes)
+            await ws_callback(f"Loading player {uid}...")
             gvas_file = GvasFile.read(
                 raw_gvas, PALWORLD_TYPE_HINTS, CUSTOM_PROPERTIES, allow_nan=True
             )
@@ -886,6 +1022,9 @@ class SaveFile(BaseModel):
                     uid,
                     player_uuid,
                 )
+                await ws_callback(
+                    f"Player UIDs do not match (host fix detected): {uid} != {player_uuid}"
+                )
                 host_fix_players[player_uuid] = uid
             loaded_sav_files[player_uuid] = gvas_file
 
@@ -897,6 +1036,21 @@ class SaveFile(BaseModel):
                     logger.warning("No player save file found for player %s", uid)
                     continue
 
+                save_parameter = PalObjects.get_nested(
+                    entry,
+                    "value",
+                    "RawData",
+                    "value",
+                    "object",
+                    "SaveParameter",
+                    "value",
+                )
+                if "NickName" in save_parameter:
+                    nickname = PalObjects.get_value(save_parameter["NickName"])
+                else:
+                    nickname = f"🥷 ({str(uid).split("-")[0]})"
+
+                await ws_callback(f"Loading player {nickname} ({uid})...")
                 self._player_gvas_files[uid] = loaded_sav_files[uid]
                 player_pals = self._get_player_pals(uid)
                 if uid in host_fix_players:

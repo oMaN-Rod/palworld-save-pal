@@ -27,6 +27,7 @@ class MessageType(str, Enum):
     MOVE_PAL = "move_pal"
 
     # Player Management
+    DELETE_PLAYER = "delete_player"
     SET_TECHNOLOGY_DATA = "set_technology_data"
 
     # Game Data Retrieval
@@ -299,14 +300,27 @@ class TechnologyData(BaseModel):
     techPoints: int = None
     ancientTechPoints: int = None
 
+
 class SetTechnologyDataMessage(BaseModel):
     type: str = MessageType.SET_TECHNOLOGY_DATA.value
     data: TechnologyData
 
+
 class DeleteGuildData(BaseModel):
     guild_id: UUID
+    origin: str
+
 
 class DeleteGuildMessage(BaseModel):
     type: str = MessageType.DELETE_GUILD.value
     data: DeleteGuildData
 
+
+class DeletePlayerData(BaseModel):
+    player_id: UUID
+    origin: str
+
+
+class DeletePlayerMessage(BaseModel):
+    type: str = MessageType.DELETE_PLAYER.value
+    data: DeletePlayerData

@@ -3,29 +3,59 @@
 	import PlayerEdit from './components/PlayerEdit.svelte';
 	import PalBox from './components/palbox/PalBox.svelte';
 	import { DebugButton, PlayerList } from '$components';
-	import { getAppState, getNavigationState, type Tab } from '$states';
+	import {
+		getAppState,
+		getModalState,
+		getNavigationState,
+		getSocketState,
+		type Tab
+	} from '$states';
 	import { Tabs } from '@skeletonlabs/skeleton-svelte';
 	import { goto } from '$app/navigation';
 	import Guilds from './components/guilds/Guilds.svelte';
 	import Technologies from './components/technologies/Technologies.svelte';
-	import type { Player } from '$types';
-	import { Bug } from 'lucide-svelte';
+	import { MessageType, type Player } from '$types';
+	import { Trash } from 'lucide-svelte';
+	import { Tooltip } from '$components/ui';
 
 	const appState = getAppState();
 	const nav = getNavigationState();
+	const ws = getSocketState();
+	const modal = getModalState();
 
 	$effect(() => {
 		if (!appState.saveFile) {
 			goto('/file');
 		}
 	});
+
+	async function handleDeletePlayer() {
+		// @ts-ignore
+		const confirmed = await modal.showConfirmModal({
+			title: 'Delete Player',
+			message: 'Are you sure you want to delete this player? This action cannot be undone.',
+			confirmText: 'Delete',
+			cancelText: 'Cancel'
+		});
+		if (confirmed) {
+			const message = {
+				type: MessageType.DELETE_PLAYER,
+				data: {
+					player_id: appState.selectedPlayer?.uid,
+					origin: 'edit'
+				}
+			};
+			ws.send(JSON.stringify(message));
+			goto('/loading');
+		}
+	}
 </script>
 
 <div class="flex h-full w-full overflow-hidden">
 	<div class="relative h-full w-full">
 		{#if appState.saveFile}
 			<div
-				class="absolute left-2 right-2 top-0 flex min-w-72 flex-row items-center items-center justify-between"
+				class="absolute left-2 right-2 top-0 flex min-w-72 flex-row items-center justify-between"
 			>
 				<div class="flex items-center">
 					<PlayerList
@@ -36,6 +66,13 @@
 						<DebugButton
 							href={`/debug?guildId=${appState.selectedPlayer?.guild_id}&playerId=${appState.selectedPlayer!.uid}`}
 						/>
+					{/if}
+					{#if appState.selectedPlayer}
+						<Tooltip label="Delete player">
+							<button class="btn p-2 hover:bg-red-500/50" onclick={handleDeletePlayer}>
+								<Trash />
+							</button>
+						</Tooltip>
 					{/if}
 				</div>
 				<a

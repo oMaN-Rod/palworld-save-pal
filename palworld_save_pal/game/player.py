@@ -455,7 +455,7 @@ class Player(BaseModel):
         self.pal_box.remove_pal(pal_id)
         self.party.remove_pal(pal_id)
         if isinstance(self._guild, Guild):
-            self._guild.delete_pal(pal_id)
+            self._guild.delete_character_handle(pal_id)
 
     def update_from(self, other_player: PlayerDTO):
         logger.debug(
