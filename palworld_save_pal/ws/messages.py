@@ -3,7 +3,7 @@ from typing import Any, Dict, List, Optional, Union
 from pydantic import BaseModel
 from uuid import UUID
 
-from palworld_save_pal.editor.preset_profile import PresetProfile
+from palworld_save_pal.editor.preset_profile import PresetProfile, PresetProfileDTO
 from palworld_save_pal.editor.settings import SettingsDTO
 from palworld_save_pal.game.guild import GuildDTO
 from palworld_save_pal.game.pal import PalDTO
@@ -182,7 +182,7 @@ class UpdatePresetMessage(BaseMessage):
 
 class AddPresetMessage(BaseMessage):
     type: str = MessageType.ADD_PRESET.value
-    data: PresetProfile
+    data: PresetProfileDTO
 
 
 class DeletePresetMessage(BaseMessage):

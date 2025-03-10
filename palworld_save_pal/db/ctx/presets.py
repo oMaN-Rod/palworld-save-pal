@@ -1,8 +1,9 @@
 from typing import Dict, List
 from uuid import UUID
 from sqlmodel import select
+from sqlalchemy.orm import selectinload
 
-from palworld_save_pal.editor.preset_profile import PresetProfile
+from palworld_save_pal.editor.preset_profile import PresetProfile, PalPreset
 from palworld_save_pal.utils.logging_config import create_logger
 from palworld_save_pal.utils.json_manager import JsonManager
 from palworld_save_pal.db.ctx.utils import get_db_session
@@ -10,15 +11,22 @@ from palworld_save_pal.db.ctx.utils import get_db_session
 logger = create_logger(__name__)
 
 
-def get_all_presets() -> List[Dict]:
+def get_all_presets() -> Dict:
     with get_db_session() as session:
-        statement = select(PresetProfile)
+        statement = select(PresetProfile).options(
+            selectinload(PresetProfile.pal_preset)
+        )
         results = session.exec(statement).all()
 
         presets_dict = {}
         for preset in results:
             preset_dict = preset.model_dump()
             preset_id = str(preset.id)
+
+            if preset.pal_preset:
+                pal_preset_dict = preset.pal_preset.model_dump()
+                preset_dict["pal_preset"] = pal_preset_dict
+
             presets_dict[preset_id] = preset_dict
 
         return presets_dict
@@ -26,11 +34,29 @@ def get_all_presets() -> List[Dict]:
 
 def add_preset(preset_data: Dict) -> str:
     with get_db_session() as session:
-        preset = PresetProfile(**preset_data)
-        session.add(preset)
-        session.flush()
+        try:
+            if "pal_preset" in preset_data:
+                pal_preset_data = preset_data.pop("pal_preset")
+                pal_preset = PalPreset(**pal_preset_data)
+                session.add(pal_preset)
+                session.flush()
 
-        return str(preset.id)
+                preset = PresetProfile(**preset_data)
+                preset.pal_preset_id = str(pal_preset.id)
+                preset.pal_preset = pal_preset
+
+                session.add(preset)
+                session.commit()
+            else:
+                preset = PresetProfile(**preset_data)
+                session.add(preset)
+                session.commit()
+
+            return str(preset.id)
+        except Exception as e:
+            logger.error(f"Error adding preset: {e}")
+            session.rollback()
+            raise
 
 
 def update_preset_name(preset_id: UUID, new_name: str) -> bool:

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { PresetConfigModal, TextInputModal } from '$components';
+	import { PalPresetSelectModal, PresetConfigModal, TextInputModal } from '$components';
 	import { CornerDotButton, Progress, Tooltip } from '$components/ui';
 	import {
 		defaultPresetConfig,
@@ -15,7 +15,7 @@
 	import { cn } from '$theme';
 	import { getAppState, getModalState, getToastState } from '$states';
 	import { Rating } from '@skeletonlabs/skeleton-svelte';
-	import { BicepsFlexed, Bug, Edit, Minus, Plus, Save } from 'lucide-svelte';
+	import { BicepsFlexed, Bug, Edit, Minus, Play, Plus, Save } from 'lucide-svelte';
 	import { assetLoader, handleMaxOutPal, canBeBoss } from '$utils';
 	import { goto } from '$app/navigation';
 	import { staticIcons } from '$types/icons';
@@ -176,6 +176,27 @@
 		calcPalLevelProgress();
 	});
 
+	async function handleSelectPreset() {
+		// @ts-ignore
+		const result = await modal.showModal<string>(PalPresetSelectModal, {
+			title: 'Select preset',
+			selectedPals: [{ character_id: pal.character_id, character_key: pal.character_key }]
+		});
+		if (!result) return;
+
+		const presetProfile = presetsData.presetProfiles[result];
+
+		for (const [key, value] of Object.entries(presetProfile.pal_preset!)) {
+			if (key === 'character_id') continue;
+			if (key === 'lock' && value) {
+				pal.character_id = presetProfile.pal_preset?.character_id as string;
+			} else if (value) {
+				(pal as Record<string, any>)[key] = value;
+			}
+		}
+		pal.state = EntryState.MODIFIED;
+	}
+
 	async function handleSavePreset() {
 		// @ts-ignore
 		const result = await modal.showModal(PresetConfigModal, {
@@ -307,6 +328,11 @@
 							<Tooltip position="bottom" label="Save as preset">
 								<CornerDotButton onClick={handleSavePreset} class="h-8 w-8 p-1">
 									<Save />
+								</CornerDotButton>
+							</Tooltip>
+							<Tooltip position="bottom" label="Apply a preset">
+								<CornerDotButton onClick={handleSelectPreset} class="h-8 w-8 p-1">
+									<Play />
 								</CornerDotButton>
 							</Tooltip>
 						{/if}

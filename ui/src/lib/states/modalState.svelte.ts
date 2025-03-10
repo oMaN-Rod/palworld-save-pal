@@ -7,6 +7,12 @@ class ModalState {
 	#props = $state<Record<string, any>>({});
 	#resolveModal = $state<((value: any) => void) | null>(null);
 
+	constructor() {
+		this.closeModal = this.closeModal.bind(this);
+		this.showModal = this.showModal.bind(this);
+		this.showConfirmModal = this.showConfirmModal.bind(this);
+	}
+
 	showModal<T>(modalComponent: Component, modalProps: Record<string, any> = {}): Promise<T> {
 		return new Promise((resolve) => {
 			this.#component = modalComponent;

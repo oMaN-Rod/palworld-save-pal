@@ -28,8 +28,6 @@ class AppState {
 	selectedPal: Pal | undefined = $state(undefined);
 	saveFile: SaveFile | undefined = $state(undefined);
 	playerSaveFiles: SaveFile[] = $state([]);
-	modifiedPals: Record<string, Pal> = $state({});
-	modifiedPlayers: Record<string, Player> = $state({});
 	clipboardItem: ItemContainerSlot | null = $state(null);
 	progressMessage: string = $state('');
 	version: string = $state('');
@@ -45,27 +43,9 @@ class AppState {
 		this.selectedPal = undefined;
 		this.saveFile = undefined;
 		this.playerSaveFiles = [];
-		this.modifiedPals = {};
-		this.modifiedPlayers = {};
 	}
 
 	initData() {}
-
-	// Handle selected player/pal updates
-	setSelectedPal(pal: Pal | undefined) {
-		this.selectedPal = pal;
-		if (pal) {
-			this.modifiedPals[pal.instance_id] = pal;
-		}
-	}
-
-	setSelectedPlayer(player: Player | undefined) {
-		this.selectedPlayer = player;
-		this.selectedPal = undefined;
-		if (player) {
-			this.modifiedPlayers[player.uid] = player;
-		}
-	}
 
 	async saveState() {
 		let modifiedData: ModifiedData = {};
@@ -73,7 +53,7 @@ class AppState {
 		let modifiedPlayers: [string, Player][] = [];
 		let modifiedGuilds: [string, GuildDTO][] = [];
 
-		for (const player of Object.values(this.modifiedPlayers)) {
+		for (const player of Object.values(this.players)) {
 			if (player.state === EntryState.MODIFIED) {
 				const { pals, ...playerWithoutPals } = player;
 				player.state = EntryState.NONE;
@@ -188,11 +168,6 @@ class AppState {
 
 			send(MessageType.SAVE_MODDED_SAVE, null);
 		}
-	}
-
-	resetModified() {
-		this.modifiedPlayers = {};
-		this.modifiedPals = {};
 	}
 }
 
