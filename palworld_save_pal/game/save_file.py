@@ -245,15 +245,12 @@ class SaveFile(BaseModel):
             ]
             
             for pal_slot in list(player.pal_box.slots):
-                player.delete_pal(pal_slot.pal_id)
+                # player.delete_pal(pal_slot.pal_id)
                 self._delete_pal_by_id(pal_slot.pal_id) 
 
             for pal_slot in list(player.party.slots):
-                player.delete_pal(pal_slot.pal_id)
+                # player.delete_pal(pal_slot.pal_id)
                 self._delete_pal_by_id(pal_slot.pal_id)
-
-            for pal_id in list(player.pals.keys()):
-                player.delete_pal(pal_id)
 
             # Delete the player
             self._players = {
