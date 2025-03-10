@@ -147,4 +147,3 @@ class CharacterContainer(BaseModel):
             len(self.slots),
         )
         return self
-

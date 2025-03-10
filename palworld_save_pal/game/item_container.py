@@ -34,7 +34,6 @@ class ItemContainer(BaseModel):
     key: Optional[str] = None
     slot_num: int = 0
 
-    _container: Optional[Dict[str, Any]] = PrivateAttr(default=None)
     _container_slots_data: Optional[List[Dict[str, Any]]] = PrivateAttr(
         default_factory=list
     )
@@ -93,7 +92,6 @@ class ItemContainer(BaseModel):
                 PalObjects.get_nested(entry, "key", "ID")
             )
             if are_equal_uuids(container_id, self.id):
-                self._container = entry
                 self._container_slots_data = PalObjects.get_array_property(
                     PalObjects.get_nested(entry, "value", "Slots")
                 )
