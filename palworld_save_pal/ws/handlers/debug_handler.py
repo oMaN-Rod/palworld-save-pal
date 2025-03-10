@@ -8,7 +8,7 @@ logger = create_logger(__name__)
 
 
 async def get_raw_data_handler(message: GetRawDataMessage, ws: WebSocket):
-    logger.debug("Get Debug Handler")
+    logger.debug(message)
     guild_id = message.data.guild_id
     player_id = message.data.player_id
     pal_id = message.data.pal_id

@@ -274,36 +274,37 @@
 		setJson('item_container', itemContainer);
 	}
 
-	async function fetchGuildRawData(data: any) {
-		const res = sendAndWait(MessageType.GET_RAW_DATA, data);
+	async function fetchGuildRawData(guild_id: any) {
+		const res = await sendAndWait(MessageType.GET_RAW_DATA, { guild_id });
 		if (!res) return;
 		guildRawData = res;
 		setJson('guild', guildRawData);
 	}
 
-	async function fetchBaseRawData(data: any) {
-		const res = sendAndWait(MessageType.GET_RAW_DATA, data);
+	async function fetchBaseRawData(base_id: any) {
+		const res = await sendAndWait(MessageType.GET_RAW_DATA, { base_id });
 		if (!res) return;
 		baseRawData = res;
 		setJson('base', baseRawData);
 	}
 
-	async function fetchPlayerRawData(data: any) {
-		const res = sendAndWait(MessageType.GET_RAW_DATA, data);
+	async function fetchPlayerRawData(player_id: any) {
+		const res = await sendAndWait(MessageType.GET_RAW_DATA, { player_id });
 		if (!res) return;
+		console.log('Res', res);
 		playerRawData = res;
 		setJson('player', playerRawData);
 	}
 
-	async function fetchPalRawData(data: any) {
-		const res = sendAndWait(MessageType.GET_RAW_DATA, data);
+	async function fetchPalRawData(pal_id: any) {
+		const res = await sendAndWait(MessageType.GET_RAW_DATA, { pal_id });
 		if (!res) return;
 		palRawData = res;
 		setJson('pal', palRawData);
 	}
 
-	async function fetchCharacterContainerRawData(data: any) {
-		const res = sendAndWait(MessageType.GET_RAW_DATA, data);
+	async function fetchCharacterContainerRawData(character_container_id: any) {
+		const res = await sendAndWait(MessageType.GET_RAW_DATA, { character_container_id });
 		if (!res) return;
 		characterContainerRawData = res;
 		setJson('character_container', characterContainerRawData);
@@ -327,10 +328,10 @@
 				if (!pal) return;
 				await fetchPalRawData(pal.instance_id);
 				break;
-			case 'item_container':
-				if (!itemContainer) return;
-				await fetchPalRawData(itemContainer.id);
-				break;
+			// case 'item_container':
+			// 	if (!itemContainer) return;
+			// 	await fetchPalRawData(itemContainer.id);
+			// 	break;
 			case 'character_container':
 				if (!characterContainer) return;
 				await fetchCharacterContainerRawData(characterContainer.id);
@@ -587,7 +588,7 @@
 								? handleGetRawData('item_container')
 								: setJson('item_container', itemContainer!);
 						}}
-						disabled={!itemContainer}
+						disabled
 						compact
 					>
 						{#snippet inactiveChild()}
