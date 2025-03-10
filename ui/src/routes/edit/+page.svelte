@@ -40,9 +40,9 @@
 		});
 		if (confirmed) {
 			send(MessageType.DELETE_PLAYER, {
-					player_id: appState.selectedPlayer?.uid,
-					origin: 'edit'
-				}));
+				player_id: appState.selectedPlayer?.uid,
+				origin: 'edit'
+			});
 			goto('/loading');
 		}
 	}
