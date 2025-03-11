@@ -115,24 +115,22 @@
 						{/snippet}
 						{#snippet panel()}
 							{#if showPlayers && playerCount > 0}
-								<div class="flex flex-col gap-2">
-									<div class="max-h-64 overflow-y-auto">
-										{#each players as player}
-											{#if player.location}
-												{@const mapCoords = worldToMap(player.location.x, player.location.y)}
-												<button
-													class="bg-surface-800 hover:bg-secondary-500/25 w-full rounded-sm p-2 text-start"
-													onclick={() => handlePlayerFocus(player)}
-												>
-													<div class="font-bold">{player.nickname}</div>
-													<div class="text-xs">Level: {player.level} | HP: {player.hp}</div>
-													<div class="text-xs text-gray-400">
-														Location: {Math.round(mapCoords.x)}, {Math.round(mapCoords.y)}
-													</div>
-												</button>
-											{/if}
-										{/each}
-									</div>
+								<div class="max-h-64 space-y-2 overflow-y-auto">
+									{#each players as player}
+										{#if player.location}
+											{@const mapCoords = worldToMap(player.location.x, player.location.y)}
+											<button
+												class="bg-surface-800 hover:bg-secondary-500/25 w-full rounded-sm p-2 text-start"
+												onclick={() => handlePlayerFocus(player)}
+											>
+												<div class="font-bold">{player.nickname}</div>
+												<div class="text-xs">Level: {player.level} | HP: {player.hp}</div>
+												<div class="text-xs text-gray-400">
+													Location: {Math.round(mapCoords.x)}, {Math.round(mapCoords.y)}
+												</div>
+											</button>
+										{/if}
+									{/each}
 								</div>
 							{:else}
 								<p class="text-sm text-gray-500">No players found.</p>
@@ -145,23 +143,21 @@
 						{/snippet}
 						{#snippet panel()}
 							{#if showBases}
-								<div class="flex flex-col gap-2">
-									<div class="max-h-64 overflow-y-auto">
-										{#each Object.values(bases) as base}
-											<button
-												class="bg-surface-800 hover:bg-secondary-500/25 mb-2 w-full rounded-sm p-2 text-start"
-												onclick={() => handleBaseFocus(base)}
-											>
-												<div class="font-bold">{base.id}</div>
-												<div class="text-xs text-gray-400">
-													Location: {worldToMap(base.location.x, base.location.y).x}, {worldToMap(
-														base.location.x,
-														base.location.y
-													).y}
-												</div>
-											</button>
-										{/each}
-									</div>
+								<div class="max-h-64 space-y-2 overflow-y-auto">
+									{#each Object.values(bases) as base}
+										<button
+											class="bg-surface-800 hover:bg-secondary-500/25 mb-2 w-full rounded-sm p-2 text-start"
+											onclick={() => handleBaseFocus(base)}
+										>
+											<div class="font-bold">{base.id}</div>
+											<div class="text-xs text-gray-400">
+												Location: {worldToMap(base.location.x, base.location.y).x}, {worldToMap(
+													base.location.x,
+													base.location.y
+												).y}
+											</div>
+										</button>
+									{/each}
 								</div>
 							{:else}
 								<p class="text-sm text-gray-500">No bases found.</p>
