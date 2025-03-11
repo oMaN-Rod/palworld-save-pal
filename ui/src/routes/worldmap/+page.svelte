@@ -1,11 +1,13 @@
 <script lang="ts">
 	import { Map } from '$components';
 	import { getAppState } from '$states';
-	import { worldToMap } from '$components/map/utils';
+	import { worldToLeaflet, worldToMap } from '$components/map/utils';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import { mapImg } from '$components/map/mapImages';
 	import { Target } from 'lucide-svelte';
 	import { mapObjects } from '$lib/data';
+	import L from 'leaflet';
+	import type { Base, Player } from '$types';
 
 	const appState = getAppState();
 
@@ -15,6 +17,7 @@
 	let showFastTravel = $state(true);
 	let showDungeons = $state(true);
 	let section = $state(['players']);
+	let map: L.Map | undefined = $state();
 
 	const players = $derived(Object.values(appState.players || {}));
 	const playerCount = $derived(players.length);
@@ -40,6 +43,16 @@
 	const dungeonCount = $derived.by(() => {
 		return Object.values(mapObjects.points).filter((point) => point.type === 'dungeon').length || 0;
 	});
+
+	function handlePlayerFocus(player: Player) {
+		const coords = worldToLeaflet(player.location.x, player.location.y);
+		map?.flyTo(coords, 3);
+	}
+
+	function handleBaseFocus(base: Base) {
+		const coords = worldToLeaflet(base.location.x, base.location.y);
+		map?.flyTo(coords, 3);
+	}
 </script>
 
 <div class="grid h-full grid-cols-[25%_1fr] gap-2">
@@ -107,13 +120,16 @@
 										{#each players as player}
 											{#if player.location}
 												{@const mapCoords = worldToMap(player.location.x, player.location.y)}
-												<div class="bg-surface-800 mb-2 rounded-sm p-2">
+												<button
+													class="bg-surface-800 hover:bg-secondary-500/25 w-full rounded-sm p-2 text-start"
+													onclick={() => handlePlayerFocus(player)}
+												>
 													<div class="font-bold">{player.nickname}</div>
 													<div class="text-xs">Level: {player.level} | HP: {player.hp}</div>
 													<div class="text-xs text-gray-400">
 														Location: {Math.round(mapCoords.x)}, {Math.round(mapCoords.y)}
 													</div>
-												</div>
+												</button>
 											{/if}
 										{/each}
 									</div>
@@ -132,7 +148,10 @@
 								<div class="flex flex-col gap-2">
 									<div class="max-h-64 overflow-y-auto">
 										{#each Object.values(bases) as base}
-											<div class="bg-surface-800 mb-2 rounded-sm p-2">
+											<button
+												class="bg-surface-800 hover:bg-secondary-500/25 mb-2 w-full rounded-sm p-2 text-start"
+												onclick={() => handleBaseFocus(base)}
+											>
 												<div class="font-bold">{base.id}</div>
 												<div class="text-xs text-gray-400">
 													Location: {worldToMap(base.location.x, base.location.y).x}, {worldToMap(
@@ -140,7 +159,7 @@
 														base.location.y
 													).y}
 												</div>
-											</div>
+											</button>
 										{/each}
 									</div>
 								</div>
@@ -157,5 +176,5 @@
 			</div>
 		</div>
 	</div>
-	<Map {showOrigin} {showPlayers} {showBases} {showFastTravel} {showDungeons} />
+	<Map bind:map {showOrigin} {showPlayers} {showBases} {showFastTravel} {showDungeons} />
 </div>

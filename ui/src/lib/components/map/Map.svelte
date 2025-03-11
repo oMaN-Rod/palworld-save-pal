@@ -21,6 +21,7 @@
 
 	// Props to control which markers to display
 	let {
+		map = $bindable(),
 		showOrigin = false,
 		showPlayers = true,
 		showBases = true,
@@ -47,7 +48,6 @@
 		[MAP_SIZE, MAP_SIZE] as L.LatLngTuple
 	];
 
-	let map: L.Map | undefined = $state();
 	let originMarkers: L.Layer[] = [];
 	let playerMarkers: L.Marker[] = [];
 	let baseMarkers: L.Marker[] = [];
@@ -272,7 +272,7 @@
 		map.fitBounds(bounds);
 
 		// Add click handler to log zoom level and coordinates
-		map.on('click', (e) => {
+		map.on('click', (e: L.LeafletMouseEvent) => {
 			const zoom = map?.getZoom();
 			const leafletCoords = e.latlng;
 			const worldCoords = leafletToWorld(leafletCoords);
@@ -337,7 +337,7 @@
 		map.addControl(new coordControl());
 
 		// Update coordinates on mouse move
-		map.on('mousemove', function (e) {
+		map.on('mousemove', function (e: L.LeafletMouseEvent) {
 			const display = document.querySelector('.coordinate-display');
 			if (display) {
 				const worldCoords = leafletToWorld(e.latlng);
