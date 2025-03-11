@@ -24408,5 +24408,38 @@
     },
     "damage": 200,
     "disabled": false
+  },
+  "SniperRifle_Default": {
+    "group": "Weapon",
+    "type_a": "Weapon",
+    "type_b": "WeaponSniper",
+    "rank": 1,
+    "rarity": 0,
+    "max_stack_count": 1,
+    "weight": 0,
+    "price": 0,
+    "sort_id": -1,
+    "icon": "t_itemicon_weapon_assaultrifle_default1",
+    "dynamic": {
+      "type": "weapon",
+      "durability": 1000,
+      "magazine_size": 4,
+      "passive_skills": []
+    },
+    "damage": 65,
+    "disabled": false
+  },
+  "LargeBullet": {
+    "group": "Common",
+    "type_a": "Ammo",
+    "type_b": "ConsumeBullet",
+    "rank": 3,
+    "rarity": 0,
+    "max_stack_count": 9999,
+    "weight": 0.01,
+    "price": 150,
+    "sort_id": 26,
+    "icon": "t_itemicon_ammo_assaultriflebullet",
+    "disabled": false
   }
 }

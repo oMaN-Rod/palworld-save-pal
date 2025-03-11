@@ -6030,5 +6030,13 @@
   "YakushimaBlade": {
     "localized_name": "Meowmere",
     "description": "[Terraria Collab] According to the legend, this sword was brought back from a distant land by Croajiro. Why? We have no idea..."
+  },
+  "SniperRifle_Default": {
+    "localized_name": "Sniper Rifle",
+    "description": "A long-range rifle with exceptional accuracy. It’s easy to handle and effective in long-range combat."
+  },
+  "LargeBullet": {
+    "localized_name": "Large Bullet",
+    "description": "A large bullet for use with a Sniper Rifle. It has high accuracy and power."
   }
 }
