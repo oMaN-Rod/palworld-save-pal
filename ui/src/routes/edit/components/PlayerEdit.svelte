@@ -752,7 +752,7 @@
 					<Accordion.Item value="presets" controlHover="hover:bg-secondary-500/25">
 						{#snippet control()}Presets{/snippet}
 						{#snippet panel()}
-							<PlayerPresets containerRef={sideBarWrapper} />
+							<PlayerPresets containerRef={sideBarWrapper} bind:player={appState.selectedPlayer} />
 						{/snippet}
 					</Accordion.Item>
 				</Accordion>
