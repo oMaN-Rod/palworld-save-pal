@@ -17,7 +17,8 @@
 		worldToMap
 	} from './utils';
 	import { mapIcons, mapImg } from './mapImages';
-	import { mapObjects } from '$lib/data';
+	import { mapObjects, palsData } from '$lib/data';
+	import { assetLoader } from '$utils';
 
 	// Props to control which markers to display
 	let {
@@ -26,7 +27,9 @@
 		showPlayers = true,
 		showBases = true,
 		showFastTravel = true,
-		showDungeons = true
+		showDungeons = true,
+		showAlphaPals = true,
+		showPredatorPals = true
 	} = $props();
 
 	const appState = getAppState();
@@ -53,6 +56,8 @@
 	let baseMarkers: L.Marker[] = [];
 	let fastTravelMarkers: L.Marker[] = [];
 	let dungeonMarkers: L.Marker[] = [];
+	let alphaPalMarkers: L.Marker[] = [];
+	let predatorPalMarkers: L.Marker[] = [];
 
 	const mapOptions = {
 		center: [0, 0] as [number, number],
@@ -262,6 +267,80 @@
 			});
 	}
 
+	async function addAlphaPalMarkers() {
+		if (!map) return;
+
+		// Clear any existing alpha pal markers
+		alphaPalMarkers.forEach((marker) => map!.removeLayer(marker));
+		alphaPalMarkers = [];
+
+		if (!showAlphaPals) return;
+		if (!mapObjects) return;
+		mapObjects.points
+			.filter((p) => p.type === 'alpha_pal')
+			.forEach((point) => {
+				// Convert point world coordinates to Leaflet coordinates
+				const latlng = worldToLeaflet(point.x, point.y);
+				const palImage = assetLoader.loadMenuImage(point.pal);
+				const palData = palsData.pals[point.pal];
+				const icon = L.icon({
+					iconUrl: palImage,
+					iconSize: [40, 40],
+					iconAnchor: [20, 20],
+					popupAnchor: [0, -20],
+					className: 'rounded-full border-2 border-white'
+				});
+				const marker = L.marker(latlng, { icon }).addTo(map!);
+
+				marker.bindPopup(`
+					<div>
+						<h3 class="text-lg font-bold">${palData ? palData.localized_name : point.pal}</h3>
+						<p class="text-xs mt-2">World Coords: ${point.x.toFixed(2)}, ${point.y.toFixed(2)}</p>
+						<p class="text-xs">Map Coords: ${worldToMap(point.x, point.y).x}, ${worldToMap(point.x, point.y).y}</p>
+					</div>
+				`);
+
+				alphaPalMarkers.push(marker);
+			});
+	}
+
+	async function addPredatorPalMarkers() {
+		if (!map) return;
+
+		// Clear any existing predator pal markers
+		predatorPalMarkers.forEach((marker) => map!.removeLayer(marker));
+		predatorPalMarkers = [];
+
+		if (!showPredatorPals) return;
+		if (!mapObjects) return;
+		mapObjects.points
+			.filter((p) => p.type === 'predator_pal')
+			.forEach((point) => {
+				// Convert point world coordinates to Leaflet coordinates
+				const latlng = worldToLeaflet(point.x, point.y);
+				const palImage = assetLoader.loadMenuImage(point.pal);
+				const palData = palsData.pals[point.pal];
+				const icon = L.icon({
+					iconUrl: palImage,
+					iconSize: [40, 40],
+					iconAnchor: [20, 20],
+					popupAnchor: [0, -20],
+					className: 'rounded-full border-2 border-red-500'
+				});
+				const marker = L.marker(latlng, { icon }).addTo(map!);
+
+				marker.bindPopup(`
+					<div>
+						<h3 class="text-lg font-bold">${palData ? palData.localized_name : point.pal}</h3>
+						<p class="text-xs mt-2">World Coords: ${point.x.toFixed(2)}, ${point.y.toFixed(2)}</p>
+						<p class="text-xs">Map Coords: ${worldToMap(point.x, point.y).x}, ${worldToMap(point.x, point.y).y}</p>
+					</div>
+				`);
+
+				predatorPalMarkers.push(marker);
+			});
+	}
+
 	function initialize(container: HTMLElement) {
 		map = L.map(container, mapOptions);
 
@@ -305,6 +384,8 @@
 		addBaseMarkers();
 		addFastTravelMarkers();
 		addDungeonMarkers();
+		addAlphaPalMarkers();
+		addPredatorPalMarkers();
 
 		// Add coordinate display
 		addCoordinateDisplay();
@@ -381,6 +462,18 @@
 	$effect(() => {
 		if (map) {
 			addDungeonMarkers();
+		}
+	});
+
+	$effect(() => {
+		if (map) {
+			addAlphaPalMarkers();
+		}
+	});
+
+	$effect(() => {
+		if (map) {
+			addPredatorPalMarkers();
 		}
 	});
 

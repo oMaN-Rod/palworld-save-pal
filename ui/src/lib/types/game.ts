@@ -145,6 +145,7 @@ export type MapObject = {
 	y: number;
 	type: string;
 	localized_name: string;
+	pal: string;
 };
 
 export type BaseDTO = { id: string; storage_containers: Record<string, ItemContainer> };

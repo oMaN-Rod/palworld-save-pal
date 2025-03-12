@@ -8,6 +8,7 @@
 	import { mapObjects } from '$lib/data';
 	import L from 'leaflet';
 	import type { Base, Player } from '$types';
+	import { assetLoader } from '$utils';
 
 	const appState = getAppState();
 
@@ -16,6 +17,8 @@
 	let showBases = $state(true);
 	let showFastTravel = $state(true);
 	let showDungeons = $state(true);
+	let showAlphaPals = $state(true);
+	let showPredatorPals = $state(true);
 	let section = $state(['players']);
 	let map: L.Map | undefined = $state();
 
@@ -43,6 +46,18 @@
 	const dungeonCount = $derived.by(() => {
 		return Object.values(mapObjects.points).filter((point) => point.type === 'dungeon').length || 0;
 	});
+	const alphaPalCount = $derived.by(() => {
+		return (
+			Object.values(mapObjects.points).filter((point) => point.type === 'alpha_pal').length || 0
+		);
+	});
+	const predatorPalCount = $derived.by(() => {
+		return (
+			Object.values(mapObjects.points).filter((point) => point.type === 'predator_pal').length || 0
+		);
+	});
+	const anubisImg = $derived(assetLoader.loadMenuImage('anubis'));
+	const starryonImg = $derived(assetLoader.loadMenuImage('nightbluehorse'));
 
 	function handlePlayerFocus(player: Player) {
 		const coords = worldToLeaflet(player.location.x, player.location.y);
@@ -105,6 +120,22 @@
 							<img src={mapImg.dungeon} alt="Dungeons" class="mr-2 h-6 w-6" />
 							<span>Dungeons</span>
 							<span class="text-surface-500 text-xs">{dungeonCount}</span>
+						</button>
+						<button
+							class="flex items-center space-x-2 {showAlphaPals ? '' : 'opacity-25'}"
+							onclick={() => (showAlphaPals = !showAlphaPals)}
+						>
+							<img src={anubisImg} alt="Alpha Pals" class="mr-2 h-6 w-6" />
+							<span>Alpha Pals</span>
+							<span class="text-surface-500 text-xs">{alphaPalCount}</span>
+						</button>
+						<button
+							class="flex items-center space-x-2 {showPredatorPals ? '' : 'opacity-25'}"
+							onclick={() => (showPredatorPals = !showPredatorPals)}
+						>
+							<img src={starryonImg} alt="Predator Pals" class="mr-2 h-6 w-6" />
+							<span>Predator Pals</span>
+							<span class="text-surface-500 text-xs">{predatorPalCount}</span>
 						</button>
 					</div>
 				</div>
@@ -172,5 +203,14 @@
 			</div>
 		</div>
 	</div>
-	<Map bind:map {showOrigin} {showPlayers} {showBases} {showFastTravel} {showDungeons} />
+	<Map
+		bind:map
+		{showOrigin}
+		{showPlayers}
+		{showBases}
+		{showFastTravel}
+		{showDungeons}
+		{showAlphaPals}
+		{showPredatorPals}
+	/>
 </div>
