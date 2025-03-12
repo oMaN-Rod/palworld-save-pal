@@ -6030,5 +6030,13 @@
   "YakushimaBlade": {
     "localized_name": "Épée arc-en-ciel",
     "description": "[Collaboration avec Terraria] La légende raconte que cette épée aurait été arrachée à une terre lointaine par Croajiro. Mais nul ne sait vraiment dans quel but..."
+  },
+  "SniperRifle_Default": {
+    "localized_name": "Fusil de précision",
+    "description": "Un fusil à longue portée d'une précision exceptionnelle. Il est facile à manier et efficace dans les combats à longue distance."
+  },
+  "LargeBullet": {
+    "localized_name": "Grosse balle",
+    "description": "Une grosse balle destinée au fusil de précision. Elle offre une grande précision et puissance."
   }
 }

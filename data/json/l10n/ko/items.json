@@ -6030,5 +6030,13 @@
   "YakushimaBlade": {
     "localized_name": "미야우미어",
     "description": "[Terraria 컬래버] 먼 나라에 다녀온 칼구리이(가) 들고 왔다는 전설이 붙은 검. 그러나 들고 온 이유에 대해선 알려진 바가 없다고 한다…"
+  },
+  "SniperRifle_Default": {
+    "localized_name": "스나이퍼 라이플",
+    "description": "뛰어난 정확도를 자랑하는 장거리 소총입니다. 다루기 쉽고 장거리 전투에서 효과적입니다."
+  },
+  "LargeBullet": {
+    "localized_name": "대형 총알",
+    "description": "스나이퍼 라이플에 사용되는 대형 총알입니다. 높은 정확도와 파워를 지니고 있습니다."
   }
 }

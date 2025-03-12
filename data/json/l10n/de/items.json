@@ -6030,5 +6030,13 @@
   "YakushimaBlade": {
     "localized_name": "Meowmere",
     "description": "[Terraria-Collab] Der Legende nach wurde dieses Schwert einst von einem Croajiro aus einem fernen Land hierhergebracht Der Grund dafür ist aber nicht überliefert."
+  },
+  "SniperRifle_Default": {
+    "localized_name": "Scharfschützengewehr",
+    "description": "Ein Gewehr mit außergewöhnlicher Präzision für große Entfernungen. Es ist leicht zu handhaben und effektiv im Fernkampf."
+  },
+  "LargeBullet": {
+    "localized_name": "Großkaliber-Munition",
+    "description": "Eine großkalibrige Kugel für Scharfschützengewehre. Sie bietet hohe Präzision und Durchschlagskraft."
   }
 }

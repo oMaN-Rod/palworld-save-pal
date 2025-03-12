@@ -6030,5 +6030,13 @@
   "YakushimaBlade": {
     "localized_name": "彩虹猫之刃",
     "description": "【泰拉瑞亚联动】 传说这把剑是武道蛙从遥远的国度带回来的。 至于原因嘛，我们完全不知道……"
+  },
+  "SniperRifle_Default": {
+    "localized_name": "狙击步枪",
+    "description": "一款具有卓越精准度的远程步枪。它易于操作，在远距离战斗中十分有效。"
+  },
+  "LargeBullet": {
+    "localized_name": "大口径子弹",
+    "description": "一种用于狙击步枪的大口径子弹。具有高精度和强大威力。"
   }
 }
