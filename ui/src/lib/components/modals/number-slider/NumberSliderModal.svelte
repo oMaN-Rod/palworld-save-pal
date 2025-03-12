@@ -35,7 +35,7 @@
 		<div class="flex w-full items-center">
 			<Slider
 				classes="w-10/12 mr-2"
-				bind:value={sliderValue}
+				value={sliderValue}
 				{min}
 				{max}
 				{markers}
@@ -43,6 +43,7 @@
 				height="h-2"
 				meterBg="bg-secondary-500"
 				thumbRingColor="ring-secondary-500"
+				onValueChange={(e) => (sliderValue[0] = e.value[0])}
 			/>
 			<Input labelClass="w-2/12" type="number" bind:value={sliderValue[0]} {min} {max} />
 		</div>
