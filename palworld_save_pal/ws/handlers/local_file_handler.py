@@ -157,6 +157,8 @@ async def select_save_files_handler(message: SelectSaveMessage, ws: WebSocket):
 
     if save_type == "steam":
         await process_steam_save(save_path, ws, local)
+    elif save_type == "sftp":
+        await process_sftp_save(save_path, ws, local)
     else:
         await get_gamepass_saves(save_path, ws)
 
@@ -209,6 +211,10 @@ async def process_steam_save(save_path: str, ws: WebSocket, local: bool):
 
     response = build_response(MessageType.GET_GUILDS, app_state.guilds)
     await ws.send_json(response)
+
+async def process_sftp_save(save_path: str, ws: WebSocket, local: bool):
+    # TODO implement
+    logger.debug("Processing SFTPSteam save files")
 
 
 async def get_gamepass_saves(file_path: str, ws: WebSocket):

@@ -10,7 +10,7 @@
 	import { cn } from '$theme';
 	import { GamepassSaveList } from '$components';
 
-	type SaveType = 'steam' | 'gamepass';
+	type SaveType = 'steam' | 'gamepass' | 'sftp';
 
 	const appState = getAppState();
 
@@ -101,6 +101,29 @@
 						<div class="flex flex-col p-4">
 							<h4 class="h4">Steam</h4>
 							<p>Find and select your Level.sav file.</p>
+						</div>
+					{/snippet}
+				</Tooltip>
+				
+				<Tooltip
+					popupClass="p-0 bg-surface-600 max-w-96"
+					rounded="rounded-none"
+					position="top"
+					useArrow={false}
+				>
+					<button
+						class={cn(
+							'bg-blue-500 rounded-full transition-transform hover:scale-110',
+							pillSize
+						)}
+						onclick={() => goto('/sftp')}
+					>
+						SFTP
+					</button>
+					{#snippet popup()}
+						<div class="flex flex-col p-4">
+							<h4 class="h4">SFTP</h4>
+							<p>Connect to your server via SFTP</p>
 						</div>
 					{/snippet}
 				</Tooltip>

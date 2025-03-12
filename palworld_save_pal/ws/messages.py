@@ -72,6 +72,7 @@ class MessageType(str, Enum):
     # System Messages
     ERROR = "error"
     PROGRESS_MESSAGE = "progress_message"
+    SETUP_SFTP_CONNECTION = "setup_sftp_connection"
     SYNC_APP_STATE = "sync_app_state"
     WARNING = "warning"
 
@@ -156,6 +157,14 @@ class GetPalDetailsMessage(BaseMessage):
     type: str = MessageType.GET_PAL_DETAILS.value
     data: UUID
 
+class SetupSFTPConnectionData(BaseModel):
+    hostname: str
+    username: str
+    password: str
+
+class SetupSFTPConnectionMessage(BaseMessage):
+    type: str = MessageType.SETUP_SFTP_CONNECTION.value
+    data: SetupSFTPConnectionData
 
 class SyncAppStateMessage(BaseMessage):
     type: str = MessageType.SYNC_APP_STATE.value

@@ -49,6 +49,7 @@ from palworld_save_pal.ws.messages import (
     OpenInBrowserMessage,
     SelectGamepassSaveMessage,
     SetTechnologyDataMessage,
+    SetupSFTPConnectionMessage,
     SyncAppStateMessage,
     UpdateSaveFileMessage,
     DownloadSaveFileMessage,
@@ -265,6 +266,14 @@ def bootstrap(dispatcher: "MessageDispatcher"):
             "message_class": GetVersionMessage,
             "handler_func": version_handler.get_version_handler,
         },
+    )
+
+    dispatcher.register_handler(
+        MessageType.SETUP_SFTP_CONNECTION,
+        {
+            "message_class": SetupSFTPConnectionMessage,
+            "handler_func": app_state_handler.setup_sftp_connection,
+        }
     )
 
     dispatcher.register_handler(

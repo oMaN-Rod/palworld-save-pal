@@ -3,6 +3,7 @@ from typing import Dict, Optional
 from uuid import UUID
 from pydantic import BaseModel, ConfigDict, Field
 from webview import Window
+from sftpretty import Connection
 
 from palworld_save_pal.editor.settings import Settings
 from palworld_save_pal.game.guild import Guild
@@ -30,6 +31,8 @@ class AppState(BaseModel):
     gamepass_index_path: Optional[str] = None
     gamepass_saves: Dict[str, GamepassSaveData] = {}
     selected_gamepass_save: Optional[GamepassSaveData] = None
+
+    sftp_connection: Optional[Connection] = None
 
     model_config = ConfigDict(arbitrary_types_allowed=True)
 
