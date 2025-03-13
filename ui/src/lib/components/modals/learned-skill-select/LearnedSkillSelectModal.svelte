@@ -13,7 +13,8 @@
 	}>();
 
 	let selectedSkill: string = $state('');
-	let learnedSkills: string[] = $state([]);
+
+	let learnedSkills: { id: string }[] = $state([]);
 
 	let activeSkills = $derived(Object.values(activeSkillsData.activeSkills));
 	let selectOptions = $derived(
@@ -25,7 +26,9 @@
 			}))
 	);
 
-	const unlearnedSkills = $derived(selectOptions.filter(uskill => !learnedSkills.includes(uskill.value)));
+	const unlearnedSkills = $derived(
+		selectOptions.filter((uskill) => !learnedSkills.some((skill) => skill.id === uskill.value))
+	);
 
 	async function getActiveSkillIcon(skillId: string): Promise<string | undefined> {
 		const skill = activeSkills.find((s) => s.id === skillId);
@@ -37,32 +40,37 @@
 	}
 
 	function handleAddSkill() {
-		if (selectedSkill && !learnedSkills.includes(selectedSkill)) {
-			learnedSkills = [...learnedSkills, selectedSkill];
+		if (selectedSkill && !learnedSkills.some((skill) => skill.id === selectedSkill)) {
+			learnedSkills = [...learnedSkills, { id: selectedSkill }];
 			selectedSkill = '';
 		}
 	}
 
 	function handleLearnType() {
-		let palData = Object.entries(palsData.pals)
-			.find(([key, _]) => key === pal.character_key)?.[1] || null;
-		let elementType = activeSkills.filter(item => palData?.element_types.some(type => item.details.element === type))
-		let elementSkills = elementType.map(item => item.id)
-			.filter(key => !key.includes('Unique'))
-		learnedSkills = [
-			...learnedSkills,
-			...elementSkills.filter(skill => !learnedSkills.includes(skill))
-		];
+		let palData =
+			Object.entries(palsData.pals).find(([key, _]) => key === pal.character_key)?.[1] || null;
+		let elementType = activeSkills.filter((item) =>
+			palData?.element_types.some((type) => item.details.element === type)
+		);
+		let elementSkills = elementType.map((item) => item.id).filter((key) => !key.includes('Unique'));
+
+		const skillsToAdd = elementSkills
+			.filter((skillId) => !learnedSkills.some((skill) => skill.id === skillId))
+			.map((skillId) => ({ id: skillId }));
+
+		learnedSkills = [...learnedSkills, ...skillsToAdd];
 	}
 
 	function handleLearnAll() {
-		learnedSkills = selectOptions
-			.filter(item => !item.value.includes('Unique'))
-			.map(item => item.value);
+		const allSkillIds = selectOptions
+			.filter((item) => !item.value.includes('Unique'))
+			.map((item) => item.value);
+
+		learnedSkills = allSkillIds.map((skillId) => ({ id: skillId }));
 	}
 
-	function handleRemoveSkill(skill: string) {
-		learnedSkills = learnedSkills.filter((s) => s !== skill);
+	function handleRemoveSkill(skill: { id: string }) {
+		learnedSkills = learnedSkills.filter((s) => s.id !== skill.id);
 	}
 
 	function handleClear() {
@@ -70,11 +78,11 @@
 	}
 
 	function handleSave() {
-		closeModal(learnedSkills);
+		closeModal(learnedSkills.map((skill) => skill.id));
 	}
 
 	$effect(() => {
-		learnedSkills = [...pal.learned_skills];
+		learnedSkills = pal.learned_skills.map((skillId: string) => ({ id: skillId }));
 	});
 </script>
 
@@ -121,6 +129,7 @@
 				listClass="max-h-60 overflow-y-auto"
 				canSelect={false}
 				multiple={false}
+				idKey="id"
 			>
 				{#snippet listHeader()}
 					<div>
@@ -128,8 +137,8 @@
 					</div>
 				{/snippet}
 				{#snippet listItem(skill)}
-					{#await getActiveSkillIcon(skill) then icon}
-						{@const activeSkill = activeSkills.find((s) => s.id === skill)}
+					{#await getActiveSkillIcon(skill.id) then icon}
+						{@const activeSkill = activeSkills.find((s) => s.id === skill.id)}
 						<div class="grid grid-cols-[auto_1fr_auto] items-center gap-2">
 							<img src={icon} alt={activeSkill?.localized_name} class="h-6 w-6" />
 							<div class="flex flex-col">
@@ -145,7 +154,7 @@
 					</button>
 				{/snippet}
 				{#snippet listItemPopup(skill)}
-					{@const activeSkill = activeSkills.find((s) => s.id === skill)}
+					{@const activeSkill = activeSkills.find((s) => s.id === skill.id)}
 					<div class="flex items-center space-x-1 justify-self-start">
 						<TimerReset class="h-4 w-4" />
 						<span class="font-bold">{activeSkill?.details.cool_time}</span>
@@ -168,7 +177,7 @@
 				<Brain />
 			</button>
 			{#snippet popup()}
-				<span>Learn All Skills<br>Matching Pal Type</span>
+				<span>Learn All Skills<br />Matching Pal Type</span>
 			{/snippet}
 		</Tooltip>
 		<Tooltip position="bottom">
