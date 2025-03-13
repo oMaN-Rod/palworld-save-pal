@@ -1,10 +1,13 @@
 <script lang="ts">
 	import { Spinner } from '$components';
 	import Input from '$components/ui/input/Input.svelte';
-	import { getAppState, getModalState } from '$states';
+	import { getAppState, getModalState, getSocketState } from '$states';
+	import { MessageType } from '$types';
+	import { sendAndWait } from '$utils/websocketUtils';
 
 	const appState = getAppState();
 	const modal = getModalState();
+	const ws = getSocketState();
 
 	let error = $state("");
 	let isConnecting = $state(false);
@@ -15,8 +18,19 @@
 	async function handleConnect() {
 		if (!hostname || !username || !password) return
 
-		isConnecting = true;
-		error = "An error occurred";
+		try {
+			const resp = await sendAndWait(MessageType.SETUP_SFTP_CONNECTION, {
+				hostname,
+				username,
+				password
+			});
+
+			console.log(resp);
+		} catch (e) {
+			console.log(e);
+			isConnecting = false;
+			error = "An error occurred";
+		}
 
 		console.log(hostname, username, password);
 	}

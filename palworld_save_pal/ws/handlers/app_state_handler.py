@@ -1,5 +1,5 @@
 from fastapi import WebSocket
-import sftpretty
+from sftpretty import CnOpts, Connection
 from palworld_save_pal.ws.messages import SetupSFTPConnectionMessage, SyncAppStateMessage, MessageType
 from palworld_save_pal.ws.utils import build_response
 from palworld_save_pal.state import get_app_state
@@ -45,7 +45,25 @@ async def setup_sftp_connection(message: SetupSFTPConnectionMessage, ws: WebSock
     password = message.data.password
 
     try:
-        app_state.sftp_connection = sftpretty.Connection(hostname, username=username, password=password)
-    except:
-        err_response = build_response(MessageType.SETUP_SFTP_CONNECTION, "An error occured connecting via SFTP. Check your credentials and try again!")
-        ws.send_json(err_response)
+        app_state.sftp_connection = Connection(hostname, port=7767, username=username, password=password, cnopts=CnOpts(knownhosts=None))
+
+        # List home directory
+        files_resp = app_state.sftp_connection.listdir_attr()
+
+        # Map files to their name and file/dir
+        files = [{"name": f.filename, "is_dir": f.longname.startswith("d")} for f in files_resp]
+
+        success_response = build_response(MessageType.SETUP_SFTP_CONNECTION, {
+            "success": True,
+            "message": "Connected to SFTP server",
+            "files": files,
+            "path": app_state.sftp_connection.pwd
+        })
+        await ws.send_json(success_response)
+    except Exception as e:
+        logger.error(f"Failed to connect to SFTP server: {str(e)}")
+        err_response = build_response(MessageType.SETUP_SFTP_CONNECTION, {
+            "success": False,
+            "message": "Failed to connect to SFTP server"
+        })
+        await ws.send_json(err_response)
