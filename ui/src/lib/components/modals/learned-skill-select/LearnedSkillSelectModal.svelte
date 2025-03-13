@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { Card, Tooltip, Combobox, List } from '$components/ui';
 	import type { ActiveSkill } from '$types';
-	import { Plus, Save, X, Trash, TimerReset, Delete } from 'lucide-svelte';
-	import { activeSkillsData, elementsData } from '$lib/data';
+	import { Plus, Save, X, Trash, TimerReset, Delete, BicepsFlexed, Brain } from 'lucide-svelte';
+	import { activeSkillsData, elementsData, palsData } from '$lib/data';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { assetLoader } from '$utils';
 	import { staticIcons } from '$types/icons';
@@ -34,11 +34,34 @@
 		return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${element.icon}.png`);
 	}
 
+	function handleUnlearnedSkills() {
+		let unlearnedSkills = selectOptions.filter(uskill => !learnedSkills.includes(uskill.value))
+		return unlearnedSkills
+	}
+
 	function handleAddSkill() {
 		if (selectedSkill && !learnedSkills.includes(selectedSkill)) {
 			learnedSkills = [...learnedSkills, selectedSkill];
 			selectedSkill = '';
 		}
+	}
+
+	function handleLearnType() {
+		let palData = Object.entries(palsData.pals)
+			.find(([key, _]) => key.includes(pal.character_key))?.[1] || null;
+		let elementType = activeSkills.filter(item => palData?.element_types.some(type => item.details.element === type))
+		let elementSkills = elementType.map(item => item.id)
+			.filter(key => !key.includes('Unique'))
+		learnedSkills = [
+			...learnedSkills,
+			...elementSkills.filter(skill => !learnedSkills.includes(skill))
+		];
+	}
+
+	function handleLearnAll() {
+		learnedSkills = selectOptions
+			.filter(item => !item.value.includes('Unique'))
+			.map(item => item.value);
 	}
 
 	function handleRemoveSkill(skill: string) {
@@ -61,7 +84,7 @@
 <Card class="min-w-[calc(100vw/3)]">
 	<h3 class="h3">Edit Learned Skills</h3>
 	<div class="mt-4 flex items-center space-x-2">
-		<Combobox options={selectOptions} bind:value={selectedSkill}>
+		<Combobox options={handleUnlearnedSkills()} bind:value={selectedSkill}>
 			{#snippet selectOption(option)}
 				{#await getActiveSkillIcon(option.value) then icon}
 					{@const activeSkill = activeSkills.find((s) => s.id === option.value)}
@@ -143,6 +166,22 @@
 	</div>
 
 	<div class="mt-4 flex justify-end space-x-2">
+		<Tooltip position="bottom">
+			<button class="btn hover:bg-secondary-500/25 px-2" onclick={handleLearnType}>
+				<Brain />
+			</button>
+			{#snippet popup()}
+				<span>Learn All Skills<br>Matching Pal Type</span>
+			{/snippet}
+		</Tooltip>
+		<Tooltip position="bottom">
+			<button class="btn hover:bg-secondary-500/25 px-2" onclick={handleLearnAll}>
+				<BicepsFlexed />
+			</button>
+			{#snippet popup()}
+				<span>Learn All Skills</span>
+			{/snippet}
+		</Tooltip>
 		<Tooltip position="bottom">
 			<button class="btn hover:bg-secondary-500/25 px-2" onclick={handleClear}>
 				<Delete />
