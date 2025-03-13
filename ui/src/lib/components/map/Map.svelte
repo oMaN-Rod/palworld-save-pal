@@ -164,7 +164,7 @@
             <div>
                 <h3 class="text-lg font-bold">${base.id}</h3>
                 <p class="text-xs mt-2">World Coords: ${base.location.x.toFixed(2)}, ${base.location.y.toFixed(2)}</p>
-                <p class="text-xs">Map Coords: ${worldToMap(base.location.x, base.location.y).x}, ${worldToMap(base.location.x, base.location.y).y}</p>
+                <p class="text-xs">Map Coords: ${worldToMap(base.location.x, base.location.y).x}, ${worldToMap(base.location.x, base.location.y).y * -1}</p>
             </div>
         `);
 
@@ -200,7 +200,7 @@
                     <p class="text-xs">Level: ${player.level}</p>
                     <p class="text-xs">HP: ${player.hp}</p>
                     <p class="text-xs mt-2">World Coords: ${player.location.x.toFixed(2)}, ${player.location.y.toFixed(2)}, ${player.location.z.toFixed(2)}</p>
-                    <p class="text-xs">Map Coords: ${worldToMap(player.location.x, player.location.y).x}, ${worldToMap(player.location.x, player.location.y).y}</p>
+                    <p class="text-xs">Map Coords: ${worldToMap(player.location.x, player.location.y).x}, ${worldToMap(player.location.x, player.location.y).y * -1}</p>
                 </div>
             `);
 
@@ -230,7 +230,7 @@
 					<div>
 						<h3 class="text-lg font-bold">${point.localized_name}</h3>
 						<p class="text-xs mt-2">World Coords: ${point.x.toFixed(2)}, ${point.y.toFixed(2)}</p>
-						<p class="text-xs">Map Coords: ${worldToMap(point.x, point.y).x}, ${worldToMap(point.x, point.y).y}</p>
+						<p class="text-xs">Map Coords: ${worldToMap(point.x, point.y).x}, ${worldToMap(point.x, point.y).y * -1}</p>
 					</div>
 				`);
 
@@ -259,7 +259,7 @@
 				marker.bindPopup(`
 					<div>
 						<p class="text-xs mt-2">World Coords: ${point.x.toFixed(2)}, ${point.y.toFixed(2)}</p>
-						<p class="text-xs">Map Coords: ${worldToMap(point.x, point.y).x}, ${worldToMap(point.x, point.y).y}</p>
+						<p class="text-xs">Map Coords: ${worldToMap(point.x, point.y).x}, ${worldToMap(point.x, point.y).y * -1}</p>
 					</div>
 				`);
 
@@ -296,7 +296,7 @@
 					<div>
 						<h3 class="text-lg font-bold">${palData ? palData.localized_name : point.pal}</h3>
 						<p class="text-xs mt-2">World Coords: ${point.x.toFixed(2)}, ${point.y.toFixed(2)}</p>
-						<p class="text-xs">Map Coords: ${worldToMap(point.x, point.y).x}, ${worldToMap(point.x, point.y).y}</p>
+						<p class="text-xs">Map Coords: ${worldToMap(point.x, point.y).x}, ${worldToMap(point.x, point.y).y * -1}</p>
 					</div>
 				`);
 
@@ -333,7 +333,7 @@
 					<div>
 						<h3 class="text-lg font-bold">${palData ? palData.localized_name : point.pal}</h3>
 						<p class="text-xs mt-2">World Coords: ${point.x.toFixed(2)}, ${point.y.toFixed(2)}</p>
-						<p class="text-xs">Map Coords: ${worldToMap(point.x, point.y).x}, ${worldToMap(point.x, point.y).y}</p>
+						<p class="text-xs">Map Coords: ${worldToMap(point.x, point.y).x}, ${worldToMap(point.x, point.y).y * -1}</p>
 					</div>
 				`);
 
@@ -358,7 +358,7 @@
 
 			// Calculate game map coordinates from Leaflet coordinates
 			const gameX = (leafletCoords.lng - TRANSFORM_B) / TRANSFORM_A;
-			const gameY = (leafletCoords.lat - TRANSFORM_D) / TRANSFORM_C;
+			const gameY = ((leafletCoords.lat - TRANSFORM_D) / TRANSFORM_C) * -1;
 
 			console.log(`Zoom level: ${zoom}`);
 			console.log(
@@ -425,7 +425,7 @@
 
 				// Calculate game map coordinates from Leaflet coordinates
 				const gameX = (e.latlng.lng - TRANSFORM_B) / TRANSFORM_A;
-				const gameY = (e.latlng.lat - TRANSFORM_D) / TRANSFORM_C;
+				const gameY = ((e.latlng.lat - TRANSFORM_D) / TRANSFORM_C) * -1;
 
 				display.innerHTML = `
                     World: ${Math.round(worldCoords.worldX)}, ${Math.round(worldCoords.worldY)}<br>

@@ -26,7 +26,7 @@ export const mapImg = {
 	oilRig: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_icon_compass_oilrig.png`),
 	tower: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_icon_compass_tower.png`),
 	arrow: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_prt_compass_arrow.png`),
-	worldMap: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_worldmap.png`)
+	worldMap: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_worldmap-min.png`)
 };
 
 export const mapIcons = {
