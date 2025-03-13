@@ -6036,7 +6036,7 @@
     "description": "A long-range rifle with exceptional accuracy. It’s easy to handle and effective in long-range combat."
   },
   "LargeBullet": {
-    "localized_name": "Large Bullet",
-    "description": "A large bullet for use with a Sniper Rifle. It has high accuracy and power."
+    "localized_name": "Sniper Ammo",
+    "description": "Ammo for use with a Sniper Rifle. It has high accuracy and power."
   }
 }

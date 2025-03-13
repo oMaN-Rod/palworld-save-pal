@@ -6036,7 +6036,7 @@
     "description": "Un fusil à longue portée d'une précision exceptionnelle. Il est facile à manier et efficace dans les combats à longue distance."
   },
   "LargeBullet": {
-    "localized_name": "Grosse balle",
+    "localized_name": "Munitions de précision",
     "description": "Une grosse balle destinée au fusil de précision. Elle offre une grande précision et puissance."
   }
 }

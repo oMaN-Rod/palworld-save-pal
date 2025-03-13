@@ -6030,5 +6030,13 @@
   "YakushimaBlade": {
     "localized_name": "Miaospadone",
     "description": "[Collaborazione con Terraria] Stando alla leggenda, un Croajiro ha portato qui questa spada da una terra lontana. Perché l'abbia fatto, rimane un mistero..."
+  },
+  "SniperRifle_Default": {
+    "localized_name": "Fucile di precisione",
+    "description": "Un fucile a lunga gittata con precisione eccezionale. È facile da maneggiare ed efficace nei combattimenti a lunga distanza."
+  },
+  "LargeBullet": {
+    "localized_name": "Munizioni da cecchino",
+    "description": "Un proiettile grande da utilizzare con il fucile di precisione. Ha un'alta precisione e potenza."
   }
 }

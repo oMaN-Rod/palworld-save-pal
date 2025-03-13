@@ -6036,7 +6036,7 @@
     "description": "Ein Gewehr mit außergewöhnlicher Präzision für große Entfernungen. Es ist leicht zu handhaben und effektiv im Fernkampf."
   },
   "LargeBullet": {
-    "localized_name": "Großkaliber-Munition",
+    "localized_name": "Scharfschützenmunition",
     "description": "Eine großkalibrige Kugel für Scharfschützengewehre. Sie bietet hohe Präzision und Durchschlagskraft."
   }
 }

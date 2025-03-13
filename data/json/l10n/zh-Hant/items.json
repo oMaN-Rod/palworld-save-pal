@@ -6036,7 +6036,7 @@
     "description": "一款具有卓越精準度的遠程步槍。它易於操作，在遠距離戰鬥中十分有效。"
   },
   "LargeBullet": {
-    "localized_name": "大口徑子彈",
+    "localized_name": "狙擊彈藥",
     "description": "一種用於狙擊步槍的大口徑子彈。具有高精度和強大威力。"
   }
 }
