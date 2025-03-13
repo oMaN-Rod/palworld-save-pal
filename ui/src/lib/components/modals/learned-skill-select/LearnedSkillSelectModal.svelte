@@ -25,6 +25,8 @@
 			}))
 	);
 
+	const unlearnedSkills = $derived(selectOptions.filter(uskill => !learnedSkills.includes(uskill.value)));
+
 	async function getActiveSkillIcon(skillId: string): Promise<string | undefined> {
 		const skill = activeSkills.find((s) => s.id === skillId);
 		if (!skill || skill.localized_name === 'None') return undefined;
@@ -34,10 +36,6 @@
 		return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${element.icon}.png`);
 	}
 
-	function handleUnlearnedSkills() {
-		let unlearnedSkills = selectOptions.filter(uskill => !learnedSkills.includes(uskill.value))
-		return unlearnedSkills
-	}
 
 	function handleAddSkill() {
 		if (selectedSkill && !learnedSkills.includes(selectedSkill)) {
@@ -84,7 +82,7 @@
 <Card class="min-w-[calc(100vw/3)]">
 	<h3 class="h3">Edit Learned Skills</h3>
 	<div class="mt-4 flex items-center space-x-2">
-		<Combobox options={handleUnlearnedSkills()} bind:value={selectedSkill}>
+		<Combobox options={unlearnedSkills} bind:value={selectedSkill}>
 			{#snippet selectOption(option)}
 				{#await getActiveSkillIcon(option.value) then icon}
 					{@const activeSkill = activeSkills.find((s) => s.id === option.value)}
