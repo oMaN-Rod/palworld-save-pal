@@ -36,7 +36,6 @@
 		return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${element.icon}.png`);
 	}
 
-
 	function handleAddSkill() {
 		if (selectedSkill && !learnedSkills.includes(selectedSkill)) {
 			learnedSkills = [...learnedSkills, selectedSkill];
@@ -46,7 +45,7 @@
 
 	function handleLearnType() {
 		let palData = Object.entries(palsData.pals)
-			.find(([key, _]) => key.includes(pal.character_key))?.[1] || null;
+			.find(([key, _]) => key === pal.character_key)?.[1] || null;
 		let elementType = activeSkills.filter(item => palData?.element_types.some(type => item.details.element === type))
 		let elementSkills = elementType.map(item => item.id)
 			.filter(key => !key.includes('Unique'))
