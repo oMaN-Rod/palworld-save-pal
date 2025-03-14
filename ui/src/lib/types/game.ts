@@ -115,6 +115,7 @@ export type Player = {
 	technology_points: number;
 	boss_technology_points: number;
 	location: WorldMapPoint;
+	last_online_time: string;
 };
 
 export type Guild = {

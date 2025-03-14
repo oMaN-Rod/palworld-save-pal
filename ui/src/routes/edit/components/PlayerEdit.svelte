@@ -715,7 +715,11 @@
 								>
 									<Edit class="h-4 w-4" />
 								</button>
-								<span>{appState.selectedPlayer.nickname}</span>
+								<Tooltip
+									label={new Date(appState.selectedPlayer.last_online_time).toLocaleString()}
+								>
+									<span>{appState.selectedPlayer.nickname}</span>
+								</Tooltip>
 							</div>
 							<div class="flex flex-col space-y-2">
 								<div class="flex">

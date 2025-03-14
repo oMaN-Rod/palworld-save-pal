@@ -159,6 +159,9 @@
 												<div class="text-xs text-gray-400">
 													Location: {Math.round(mapCoords.x)}, {Math.round(mapCoords.y)}
 												</div>
+												<div class="text-xs text-gray-400">
+													Last Online: {new Date(player.last_online_time).toLocaleString()}
+												</div>
 											</button>
 										{/if}
 									{/each}

@@ -197,6 +197,7 @@
 			playerMarker.bindPopup(`
                 <div>
                     <h3 class="text-lg font-bold">${player.nickname}</h3>
+					<p class="text-xs">Last Online: ${new Date(player.last_online_time).toLocaleString()}</p>
                     <p class="text-xs">Level: ${player.level}</p>
                     <p class="text-xs">HP: ${player.hp}</p>
                     <p class="text-xs mt-2">World Coords: ${player.location.x.toFixed(2)}, ${player.location.y.toFixed(2)}, ${player.location.z.toFixed(2)}</p>

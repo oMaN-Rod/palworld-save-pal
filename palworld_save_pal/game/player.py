@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta
 from typing import Any, Dict, List, Optional, Union
 from uuid import UUID
 import uuid
@@ -385,6 +386,15 @@ class Player(BaseModel):
             else None
         )
         return self._location
+
+    @computed_field
+    def last_online_time(self) -> datetime:
+        ticks = PalObjects.get_value(self._player_gvas_file.properties["Timestamp"])
+        seconds = ticks / 10000000
+        days = seconds // 86400
+        seconds_remainder = seconds % 86400
+        base_date = datetime(1, 1, 1)
+        return base_date + timedelta(days=days, seconds=seconds_remainder)
 
     @property
     def character_save(self) -> Dict[str, Any]:
