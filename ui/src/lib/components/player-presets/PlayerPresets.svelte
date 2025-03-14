@@ -109,13 +109,15 @@
 
 	function processSlots(slots: ItemContainerSlot[]) {
 		const newSlots = deepCopy(slots);
-		return newSlots.map((slot) => {
-			if (slot.dynamic_item) {
-				slot.dynamic_item.local_id = '00000000-0000-0000-0000-000000000000';
-				return { ...slot };
-			}
-			return slot;
-		});
+		return newSlots
+			.filter((s) => s.static_id !== 'None')
+			.map((slot) => {
+				if (slot.dynamic_item) {
+					slot.dynamic_item.local_id = '00000000-0000-0000-0000-000000000000';
+					return { ...slot };
+				}
+				return slot;
+			});
 	}
 
 	async function handleAddPreset() {

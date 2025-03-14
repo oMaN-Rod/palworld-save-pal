@@ -33,9 +33,10 @@ def get_all_presets() -> Dict:
 
 
 def add_preset(preset_data: Dict) -> str:
+    logger.debug(f"Adding preset with data: {preset_data}")
     with get_db_session() as session:
         try:
-            if "pal_preset" in preset_data:
+            if "pal_preset" in preset_data and preset_data["pal_preset"] is not None:
                 pal_preset_data = preset_data.pop("pal_preset")
                 pal_preset = PalPreset(**pal_preset_data)
                 session.add(pal_preset)
@@ -72,6 +73,7 @@ def update_preset_name(preset_id: UUID, new_name: str) -> bool:
 
 
 def delete_preset(preset_id: str) -> bool:
+    logger.debug(f"Deleting preset with ID: {preset_id}")
     try:
         with get_db_session() as session:
             statement = select(PresetProfile).where(PresetProfile.id == preset_id)
@@ -93,10 +95,7 @@ def populate_presets_from_json():
             json_manager = JsonManager("data/json/presets.json")
             presets_data = json_manager.read()
 
-            for _, preset_data in presets_data.items():
-                if "id" in preset_data:
-                    del preset_data["id"]
-
+            for preset_data in presets_data:
                 preset = PresetProfile(**preset_data)
                 session.add(preset)
 

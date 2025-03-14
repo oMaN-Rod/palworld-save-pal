@@ -10,7 +10,7 @@
 </script>
 
 <Tooltip>
-	<button class="btn hover:preset-tonal-secondary p-2 {buttonClass}" {...additionalProps}>
+	<button class="btn p-2 {buttonClass}" {...additionalProps}>
 		{@render children()}
 	</button>
 	{#snippet popup()}

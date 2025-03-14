@@ -192,7 +192,7 @@ class AddPresetMessage(BaseMessage):
 
 class DeletePresetMessage(BaseMessage):
     type: str = MessageType.DELETE_PRESET.value
-    data: List[UUID]
+    data: List[str]
 
 
 class GetActiveSkillsMessage(BaseModel):

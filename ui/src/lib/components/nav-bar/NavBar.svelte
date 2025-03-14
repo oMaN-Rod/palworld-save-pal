@@ -1,14 +1,8 @@
 <script lang="ts">
-	import {
-		getNavigationState,
-		getAppState,
-		type Page,
-		getModalState,
-		getSocketState
-	} from '$states';
+	import { getNavigationState, getAppState, type Page, getModalState } from '$states';
 	import { Navigation } from '@skeletonlabs/skeleton-svelte';
-	import { File, Pencil, Info, Upload, Languages, Settings, Save, Bug, Map } from 'lucide-svelte';
-	import { page } from '$app/stores';
+	import { File, Pencil, Info, Upload, Settings, Save, Bug, Map, FileHeart } from 'lucide-svelte';
+	import { page } from '$app/state';
 	import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
 	import { SettingsModal } from '$components/modals';
 	import { MessageType } from '$types';
@@ -18,8 +12,8 @@
 	let appState = getAppState();
 	let modal = getModalState();
 
-	page.subscribe((value) => {
-		const { id } = value.route;
+	$effect(() => {
+		const { id } = page.route;
 		navigationState.activePage = id?.replace('/', '') as Page;
 	});
 
@@ -112,6 +106,16 @@
 			active="bg-secondary-500"
 		>
 			<Info />
+		</Navigation.Tile>
+		<Navigation.Tile
+			label="Presets"
+			labelBase="text-xs"
+			title="Presets"
+			id="presets"
+			href="/presets"
+			active="bg-secondary-500"
+		>
+			<FileHeart />
 		</Navigation.Tile>
 		{#if appState.settings.debug_mode}
 			<Navigation.Tile

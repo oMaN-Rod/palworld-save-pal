@@ -18,6 +18,7 @@
 	import { Trash } from 'lucide-svelte';
 	import { Tooltip } from '$components/ui';
 	import { send } from '$utils/websocketUtils';
+	import Nuke from '$components/ui/icons/Nuke.svelte';
 
 	const appState = getAppState();
 	const nav = getNavigationState();
@@ -66,8 +67,8 @@
 					{/if}
 					{#if appState.selectedPlayer}
 						<Tooltip label="Delete player">
-							<button class="btn p-2 hover:bg-red-500/50" onclick={handleDeletePlayer}>
-								<Trash />
+							<button class="btn ml-4 h-8 w-8 p-2 hover:bg-red-500/50" onclick={handleDeletePlayer}>
+								<Nuke size={24} />
 							</button>
 						</Tooltip>
 					{/if}
