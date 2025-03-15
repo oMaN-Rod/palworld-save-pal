@@ -13,7 +13,6 @@
 	}>();
 
 	let selectedSkill: string = $state('');
-
 	let learnedSkills: { id: string }[] = $state([]);
 
 	let activeSkills = $derived(Object.values(activeSkillsData.activeSkills));
@@ -34,7 +33,7 @@
 		const skill = activeSkills.find((s) => s.id === skillId);
 		if (!skill || skill.localized_name === 'None') return undefined;
 		const activeSkill = skill as ActiveSkill;
-		const element = await elementsData.elements[activeSkill.details.element];
+		const element = elementsData.elements[activeSkill.details.element];
 		if (!element) return undefined;
 		return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${element.icon}.png`);
 	}
@@ -47,18 +46,28 @@
 	}
 
 	function handleLearnType() {
-		let palData =
-			Object.entries(palsData.pals).find(([key, _]) => key === pal.character_key)?.[1] || null;
-		let elementType = activeSkills.filter((item) =>
-			palData?.element_types.some((type) => item.details.element === type)
-		);
-		let elementSkills = elementType.map((item) => item.id).filter((key) => !key.includes('Unique'));
+		const palData = palsData.pals[pal.character_key] || null;
+		if (!palData) return;
 
-		const skillsToAdd = elementSkills
+		const elementSkills = activeSkills
+			.filter((skill) => {
+				const matchesElement = palData.element_types.some((type) => skill.details.element === type);
+				if (
+					matchesElement &&
+					skill.id.toLowerCase().includes(`unique_${pal.character_id.toLowerCase()}`)
+				) {
+					return true;
+				}
+				if (matchesElement && !skill.id.toLowerCase().includes('unique_')) {
+					return true;
+				}
+				return false;
+			})
+			.map((item) => item.id)
 			.filter((skillId) => !learnedSkills.some((skill) => skill.id === skillId))
 			.map((skillId) => ({ id: skillId }));
 
-		learnedSkills = [...learnedSkills, ...skillsToAdd];
+		learnedSkills = [...learnedSkills, ...elementSkills];
 	}
 
 	function handleLearnAll() {

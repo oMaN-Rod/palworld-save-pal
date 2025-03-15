@@ -78,7 +78,7 @@
 	{#if activeSkills.length > 0}
 		<SectionHeader text="Active Skills" />
 		{#each activeSkills as skill}
-			<ActiveSkillBadge {skill} palCharacterId={pal.character_key} />
+			<ActiveSkillBadge {skill} />
 		{/each}
 	{/if}
 	{#if passiveSkills.length > 0}

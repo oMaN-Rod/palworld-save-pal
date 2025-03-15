@@ -8,13 +8,8 @@
 	import { assetLoader } from '$utils';
 	import { staticIcons } from '$types/icons';
 
-	let {
-		skill = 'Empty',
-		palCharacterId,
-		onSkillUpdate
-	} = $props<{
+	let { skill = 'Empty', onSkillUpdate } = $props<{
 		skill: string;
-		palCharacterId: string;
 		onSkillUpdate?: (newSkill: string, oldSkill: string) => void;
 	}>();
 
@@ -42,7 +37,6 @@
 			type: 'Active',
 			value: skill,
 			title: 'Select Active Skill',
-			palCharacterId,
 			pal: appState.selectedPal
 		});
 		if (!result) return;

@@ -592,8 +592,6 @@ export interface ActiveSkillDetails {
 	cool_time: number;
 	min_range: number;
 	max_range: number;
-
-	exclusive?: string[];
 }
 
 export interface Skill {

@@ -234,11 +234,7 @@
 {#snippet activeSkillsBody()}
 	<div class="flex flex-col space-y-2">
 		{#each activeSkills as skill}
-			<ActiveSkillBadge
-				{skill}
-				onSkillUpdate={handleUpdateActiveSkill}
-				palCharacterId={appState.selectedPal!.character_key}
-			/>
+			<ActiveSkillBadge {skill} onSkillUpdate={handleUpdateActiveSkill} />
 		{/each}
 	</div>
 {/snippet}

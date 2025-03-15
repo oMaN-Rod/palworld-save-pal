@@ -62,13 +62,6 @@ class ActiveSkills {
 		);
 	}
 
-	async searchActiveSkillsByExclusive(exclusive: string): Promise<ActiveSkill[]> {
-		await this.ensureActiveSkillsLoaded();
-		return Object.values(this.activeSkills).filter(
-			(skill) => skill.details.exclusive && skill.details.exclusive.includes(exclusive)
-		);
-	}
-
 	async getActiveSkills(): Promise<ActiveSkill[]> {
 		await this.ensureActiveSkillsLoaded();
 		return Object.values(this.activeSkills);

@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { Card, Tooltip, Combobox } from '$components/ui';
 	import {
-		passiveSkillTier,
 		type ActiveSkill,
+		type Pal,
 		type PassiveSkill,
 		type SelectOption,
 		type SkillType
@@ -16,15 +16,13 @@
 		title = '',
 		value = $bindable(''),
 		type = 'Active',
-		palCharacterId = '',
 		pal,
 		closeModal
 	} = $props<{
 		title?: string;
 		value?: string;
 		type?: SkillType;
-		palCharacterId?: string;
-		pal: any;
+		pal?: Pal;
 		closeModal: (value: any) => void;
 	}>();
 
@@ -32,16 +30,15 @@
 		if (type === 'Active') {
 			return Object.values(activeSkillsData.activeSkills)
 				.filter((skill) => {
-					if (!skill.details.exclusive) {
+					if (skill.id.toLowerCase().includes(`unique_${pal.character_id.toLowerCase()}`)) {
 						return true;
 					}
-					if (skill.details.exclusive.includes(palCharacterId)) {
+					if (!skill.id.toLowerCase().includes('unique_')) {
 						return true;
 					}
 					return false;
 				})
-				.filter((aSkill) => !Object.values(pal.active_skills)
-					.some((skill) => skill === aSkill.id))
+				.filter((aSkill) => !Object.values(pal.active_skills).some((skill) => skill === aSkill.id))
 				.sort((a, b) => a.details.element.localeCompare(b.details.element))
 				.map((s) => ({
 					value: s.id,
