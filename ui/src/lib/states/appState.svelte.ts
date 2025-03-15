@@ -49,7 +49,7 @@ class AppState {
 
 	private removeEmptySlots(container: ItemContainer): ItemContainer {
 		const newContainer = { ...container };
-		newContainer.slots = newContainer.slots.filter((slot) => slot.static_id !== 'None');
+		newContainer.slots = newContainer.slots;
 		return newContainer;
 	}
 

@@ -3,7 +3,7 @@
 	import type { PassiveSkill } from '$types';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { SkillSelectModal } from '$components';
-	import { getModalState } from '$states';
+	import { getAppState, getModalState } from '$states';
 	import { Tooltip } from '$components/ui';
 	import { assetLoader, calculateFilters } from '$utils';
 	import { cn } from '$theme';
@@ -14,6 +14,7 @@
 		onSkillUpdate?: (newSkill: string, oldSkill: string) => void;
 	}>();
 
+	const appState = getAppState();
 	const modal = getModalState();
 
 	let skillData = $derived.by(() => {
@@ -87,7 +88,8 @@
 		const result = await modal.showModal<string>(SkillSelectModal, {
 			type: 'Passive',
 			value: skill,
-			title: 'Select Passive Skill'
+			title: 'Select Passive Skill',
+			pal: appState.selectedPal
 		});
 		if (!result) return;
 		onSkillUpdate(result, skill);
