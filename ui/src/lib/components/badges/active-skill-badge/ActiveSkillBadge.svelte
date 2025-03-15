@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { activeSkillsData, elementsData } from '$lib/data';
 	import { ASSET_DATA_PATH } from '$lib/constants';
-	import { getModalState } from '$states';
+	import { getAppState, getModalState } from '$states';
 	import { SkillSelectModal } from '$components/modals';
 	import { Tooltip } from '$components/ui';
 	import { TimerReset } from 'lucide-svelte';
@@ -18,6 +18,7 @@
 		onSkillUpdate?: (newSkill: string, oldSkill: string) => void;
 	}>();
 
+	const appState = getAppState();
 	const modal = getModalState();
 
 	let { activeSkill, element, elementIconWhite, elementIcon } = $derived.by(() => {
@@ -41,7 +42,8 @@
 			type: 'Active',
 			value: skill,
 			title: 'Select Active Skill',
-			palCharacterId
+			palCharacterId,
+			pal: appState.selectedPal
 		});
 		if (!result) return;
 		onSkillUpdate(result, skill);
