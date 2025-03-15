@@ -92,9 +92,9 @@ export function getStats(pal: Pal, player: Player): PalStats | undefined {
 	const hpScale = palData.scaling.hp;
 
 	// HP calculation
-	const hp = Math.floor(500 + 5 * level + hpScale * 0.5 * level * (1 + hpIv));
-	const alphaScaling = pal.is_boss ? 1.2 : 1;
-	pal.max_hp = Math.floor(hp * (1 + condenserBonus) * (1 + hpSoulBonus) * alphaScaling) * 1000;
+	const alphaScaling = pal.is_boss || pal.is_lucky ? 1.2 : 1;
+	const hp = Math.floor(500 + 5 * level + (hpScale * 0.5 * level * (1 + hpIv) * alphaScaling));
+	pal.max_hp = Math.floor(hp * (1 + condenserBonus) * (1 + hpSoulBonus)) * 1000;
 
 	// Attack calculation
 	const attackIv = (pal.talent_shot * 0.3) / 100;

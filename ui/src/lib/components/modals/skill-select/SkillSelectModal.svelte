@@ -46,6 +46,7 @@
 				}));
 		} else {
 			return Object.values(passiveSkillsData.passiveSkills)
+				.filter((pSkill) => !Object.values(pal.passive_skills).some((p) => p === pSkill.id))
 				.sort((a, b) => b.details.rank - a.details.rank)
 				.map((s) => ({
 					value: s.id,

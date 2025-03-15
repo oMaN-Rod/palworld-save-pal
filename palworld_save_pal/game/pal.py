@@ -583,10 +583,12 @@ class Pal(BaseModel):
         hp_soul_bonus = self.rank_hp * 0.03
         alpha_scaling = 1.2 if self.is_boss else 1
         hp = math.floor(
-            500 + 5 * self.level + hp_scaling * 0.5 * self.level * (1 + hp_iv)
+            500
+            + (5 * self.level)
+            + (hp_scaling * 0.5 * self.level * (1 + hp_iv) * alpha_scaling)
         )
         return (
-            math.floor(hp * (1 + condenser_bonus) * (1 + hp_soul_bonus) * alpha_scaling)
+            math.floor(hp * (1 + condenser_bonus) * (1 + hp_soul_bonus))
             * 1000
         )
 
