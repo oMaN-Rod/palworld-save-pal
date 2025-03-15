@@ -18994,7 +18994,8 @@
     "size": "None",
     "rarity": 1,
     "element_types": [
-      "Dark"
+      "Dark",
+      "Water"
     ],
     "genus_category": "Unknown",
     "weapon": "None",

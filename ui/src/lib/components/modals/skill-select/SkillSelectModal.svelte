@@ -17,12 +17,14 @@
 		value = $bindable(''),
 		type = 'Active',
 		palCharacterId = '',
+		pal,
 		closeModal
 	} = $props<{
 		title?: string;
 		value?: string;
 		type?: SkillType;
 		palCharacterId?: string;
+		pal: any;
 		closeModal: (value: any) => void;
 	}>();
 
@@ -38,6 +40,8 @@
 					}
 					return false;
 				})
+				.filter((aSkill) => !Object.values(pal.active_skills)
+					.some((skill) => skill === aSkill.id))
 				.sort((a, b) => a.details.element.localeCompare(b.details.element))
 				.map((s) => ({
 					value: s.id,
@@ -101,9 +105,9 @@
 			(s) => s.id === option.value
 		)}
 		<div class="grid grid-cols-[auto_1fr_auto] items-center gap-2">
-			<img src={icon} alt={option.label} class="h-6 w-6" />
+			<img src={icon} alt={activeSkill?.localized_name} class="h-6 w-6" />
 			<div class="mr-0.5 flex flex-col">
-				<span class="truncate">{option.label}</span>
+				<span class="truncate">{activeSkill?.localized_name}</span>
 				<span class="text-xs">{activeSkill?.description}</span>
 			</div>
 			<div class="flex flex-col">
