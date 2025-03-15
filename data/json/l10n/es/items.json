@@ -6030,5 +6030,13 @@
   "YakushimaBlade": {
     "localized_name": "Filomiau",
     "description": "[Colaboración con Terraria] Según la leyenda, Croajiro trajo esta espada de tierras lejanas. Se desconoce el motivo..."
+  },
+  "SniperRifle_Default": {
+    "localized_name": "Rifle de francotirador",
+    "description": "Un rifle de largo alcance con precisión excepcional. Es fácil de manejar y efectivo en combate a larga distancia."
+  },
+  "LargeBullet": {
+    "localized_name": "Munición de francotirador",
+    "description": "Una bala grande para usar con un rifle de francotirador. Tiene alta precisión y potencia."
   }
 }

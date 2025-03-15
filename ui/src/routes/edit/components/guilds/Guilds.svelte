@@ -20,6 +20,8 @@
 	import { TextInputModal } from '$components/modals';
 	import { staticIcons } from '$types/icons';
 	import { send, sendAndWait } from '$lib/utils/websocketUtils';
+	import { goto } from '$app/navigation';
+	import Nuke from '$components/ui/icons/Nuke.svelte';
 	interface PalWithBaseId {
 		pal: Pal;
 		baseId: string;
@@ -96,11 +98,11 @@
 		return Object.values(base.storage_containers)
 			.filter(
 				(container) =>
-					(container.slot_num !== 0 &&
-						!ignoreKeys.some((key) => container.key.includes(key)) &&
-						(container.slots.length === 0 ||
-							container.slots.some((s) => s.static_id !== 'None'))) ||
-					(container.slots.some((s) => {
+					container.slot_num !== 0 && !ignoreKeys.some((key) => container.key.includes(key))
+			)
+			.filter(
+				(container) =>
+					container.slots.some((s) => {
 						const itemData = itemsData.items[s.static_id];
 						return (
 							s.static_id.toLowerCase().includes(selectedInventoryItem.toLowerCase()) ||
@@ -110,16 +112,16 @@
 									.includes(selectedInventoryItem.toLowerCase()))
 						);
 					}) &&
-						container.slots.some((s) => {
-							const itemData = itemsData.items[s.static_id];
-							return (
-								s.static_id.toLowerCase().includes(inventorySearchQuery.toLowerCase()) ||
-								(itemData &&
-									itemData.info.localized_name
-										.toLowerCase()
-										.includes(inventorySearchQuery.toLowerCase()))
-							);
-						}))
+					container.slots.some((s) => {
+						const itemData = itemsData.items[s.static_id];
+						return (
+							s.static_id.toLowerCase().includes(inventorySearchQuery.toLowerCase()) ||
+							(itemData &&
+								itemData.info.localized_name
+									.toLowerCase()
+									.includes(inventorySearchQuery.toLowerCase()))
+						);
+					})
 			)
 			.sort((a, b) => a.key.localeCompare(b.key));
 	});
@@ -133,7 +135,7 @@
 		if (!currentBase) return { current: [] };
 		const [_, base] = currentBase;
 		let inventoryItems: Record<string, InventoryInfo> = {};
-		for (const container of Object.values(base.storage_containers)) {
+		for (const container of Object.values(currentBaseStorageContainers || {})) {
 			for (const slot of container.slots) {
 				if (slot.static_id !== 'None') {
 					if (!inventoryItems[slot.static_id]) {
@@ -625,6 +627,22 @@
 		playerGuild!.name = result;
 		playerGuild!.state = EntryState.MODIFIED;
 	}
+
+	async function handleDeleteGuild() {
+		const confirmed = await modal.showConfirmModal({
+			title: 'Delete Guild',
+			message: 'Are you sure you want to delete this guild? This action cannot be undone.',
+			confirmText: 'Delete',
+			cancelText: 'Cancel'
+		});
+		if (confirmed) {
+			send(MessageType.DELETE_GUILD, {
+				guild_id: playerGuild?.id,
+				origin: 'edit'
+			});
+			goto('/loading');
+		}
+	}
 </script>
 
 {#if appState.selectedPlayer}
@@ -648,6 +666,11 @@
 					{#if playerGuild && appState.settings.debug_mode}
 						<DebugButton href={`/debug?guildId=${playerGuild.id}`} />
 					{/if}
+					<Tooltip label="Delete entire guild">
+						<button class="btn ml-4 h-8 w-8 p-2 hover:bg-red-500/50" onclick={handleDeleteGuild}>
+							<Nuke size={24} />
+						</button>
+					</Tooltip>
 				</div>
 
 				<div class="flex">
@@ -766,7 +789,7 @@
 					<List
 						bind:items={currentBaseInventory.current}
 						baseClass="w-full"
-						listClass="h-[380px] 2xl:h-[630px]"
+						listClass="h-[calc(100vh-350px)]"
 						canSelect={false}
 						idKey="static_id"
 						headerClass="grid w-full grid-cols-[auto_1fr_auto] gap-2 rounded-sm"
@@ -774,6 +797,7 @@
 							selectedInventoryItem = item.static_id;
 							inventorySearchQuery = '';
 						}}
+						multiple={false}
 					>
 						{#snippet listHeader()}
 							<div class="h-8 w-8"></div>
@@ -894,9 +918,10 @@
 							<List
 								items={currentBaseStorageContainers}
 								baseClass="w-1/4"
-								listClass="h-[550px] 2xl:h-[800px]"
+								listClass="h-[calc(100vh-175px)]"
 								canSelect={false}
 								onselect={(itemContainer) => handleSelectStorageContainer(itemContainer)}
+								multiple={false}
 							>
 								{#snippet listItem(item)}
 									{@const building = buildingsData.buildings[fixStupidTypos(item.key)]}

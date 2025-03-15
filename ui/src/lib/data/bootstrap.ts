@@ -5,6 +5,7 @@ import { buildingsData } from './buildings.svelte';
 import { elementsData } from './elements.svelte';
 import { expData } from './exp.svelte';
 import { itemsData } from './items.svelte';
+import { mapObjects } from './mapObjects.svelte';
 import { palsData } from './pals.svelte';
 import { passiveSkillsData } from './passiveSkills.svelte';
 import { presetsData } from './presets.svelte';
@@ -22,6 +23,7 @@ export const bootstrap = async () => {
 	await itemsData.reset();
 	await workSuitabilityData.reset();
 	await buildingsData.reset();
+	await mapObjects.reset();
 
 	send(MessageType.GET_VERSION);
 	send(MessageType.SYNC_APP_STATE);

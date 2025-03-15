@@ -1,5 +1,5 @@
-{
-  "c52d824b-686b-4b46-adc8-f7d8e57e72ff": {
+[
+  {
     "name": "Melee",
     "type": "inventory",
     "common_container": [
@@ -90,7 +90,7 @@
       }
     ]
   },
-  "410eb6fc-663a-4ad4-b5b3-5bccaeaf8373": {
+  {
     "name": "Ranged 1",
     "type": "inventory",
     "common_container": [
@@ -251,7 +251,7 @@
       }
     ]
   },
-  "6e6c925d-e4ea-406f-8b4b-ffa0b5e477ba": {
+  {
     "name": "Ranged 2",
     "type": "inventory",
     "common_container": [
@@ -432,7 +432,7 @@
       }
     ]
   },
-  "64571994-6152-48e2-b3ed-b256d44df3ae": {
+  {
     "name": "Ranged 3",
     "type": "inventory",
     "common_container": [
@@ -613,7 +613,7 @@
       }
     ]
   },
-  "75231eee-c1f1-445f-9cf6-0db7952f0553": {
+  {
     "name": "Ranged 4",
     "type": "inventory",
     "common_container": [
@@ -794,7 +794,7 @@
       }
     ]
   },
-  "85c858f4-2d12-4abc-9f59-5e4a7a8af885": {
+  {
     "name": "Ranged 5",
     "type": "inventory",
     "common_container": [
@@ -975,7 +975,7 @@
       }
     ]
   },
-  "6ac2e80c-4ee2-49ad-bf99-68356c7c9ff2": {
+  {
     "name": "Cloth Armor",
     "type": "inventory",
     "common_container": [
@@ -1156,7 +1156,7 @@
       }
     ]
   },
-  "e06c85d9-75d7-4b9d-8082-a3d0082bc0f6": {
+  {
     "name": "Pelt Armor",
     "type": "inventory",
     "common_container": [
@@ -1337,7 +1337,7 @@
       }
     ]
   },
-  "779ede18-2247-495a-8835-74465abee55d": {
+  {
     "name": "Metal Armor",
     "type": "inventory",
     "common_container": [
@@ -1518,7 +1518,7 @@
       }
     ]
   },
-  "e9e47638-715f-4e66-9182-cc1ea2167f64": {
+  {
     "name": "Refined Metal Armor",
     "type": "inventory",
     "common_container": [
@@ -1699,7 +1699,7 @@
       }
     ]
   },
-  "b92920b7-80d4-45c9-b042-cb57791e5728": {
+  {
     "name": "Pal Metal Armor",
     "type": "inventory",
     "common_container": [
@@ -1880,7 +1880,7 @@
       }
     ]
   },
-  "d281784d-099c-4194-92a8-0d2f9cb49257": {
+  {
     "name": "Plasteel Armor",
     "type": "inventory",
     "common_container": [
@@ -2061,7 +2061,7 @@
       }
     ]
   },
-  "7a60cd54-ad74-4883-84a5-c83560bfbef5": {
+  {
     "name": "Lightweight Plasteel Armor",
     "type": "inventory",
     "common_container": [
@@ -2122,7 +2122,7 @@
       }
     ]
   },
-  "6d1986ff-61f7-41f6-86ff-f0106325b6a4": {
+  {
     "name": "Head Armor 1",
     "type": "inventory",
     "common_container": [
@@ -2303,7 +2303,7 @@
       }
     ]
   },
-  "f8d40d7d-6ca5-4087-ace0-b6b9d43a6cb6": {
+  {
     "name": "Head Armor 2",
     "type": "inventory",
     "common_container": [
@@ -2484,7 +2484,7 @@
       }
     ]
   },
-  "21a7d707-ab80-4fb5-baf2-d30b7055a1bf": {
+  {
     "name": "Head Armor 3",
     "type": "inventory",
     "common_container": [
@@ -2665,7 +2665,7 @@
       }
     ]
   },
-  "628e5643-24f6-4bab-ae47-7edcaa7f002c": {
+  {
     "name": "Head Armor 4",
     "type": "inventory",
     "common_container": [
@@ -2846,7 +2846,7 @@
       }
     ]
   },
-  "64d42003-6734-4dc3-97ba-91555acb764b": {
+  {
     "name": "Head Armor 5",
     "type": "inventory",
     "common_container": [
@@ -3027,7 +3027,7 @@
       }
     ]
   },
-  "8bb46608-6b97-4292-a618-29d8be2ef5e0": {
+  {
     "name": "Head Armor 6",
     "type": "inventory",
     "common_container": [
@@ -3208,7 +3208,7 @@
       }
     ]
   },
-  "9f132afc-152e-4864-8a5a-0ac1253a92ab": {
+  {
     "name": "Head Armor 7",
     "type": "inventory",
     "common_container": [
@@ -3389,7 +3389,7 @@
       }
     ]
   },
-  "c6db330c-c152-4358-b85f-7a51e6a1e4ef": {
+  {
     "name": "Head Armor 8",
     "type": "inventory",
     "common_container": [
@@ -3550,7 +3550,7 @@
       }
     ]
   },
-  "d5c0ec6e-54bd-460d-b8fe-80c7dc653526": {
+  {
     "name": "Key Items",
     "type": "inventory",
     "essential_container": [
@@ -4491,7 +4491,7 @@
       }
     ]
   },
-  "419dba8d-da2b-4939-b37d-f7e01e59fb5d": {
+  {
     "name": "Shields Utilities",
     "type": "inventory",
     "common_container": [
@@ -4567,7 +4567,7 @@
       }
     ]
   },
-  "fa46bae3-6651-4c60-91fd-4ee54b182d5b": {
+  {
     "name": "Accessories 1",
     "type": "inventory",
     "common_container": [
@@ -4783,7 +4783,7 @@
       }
     ]
   },
-  "f33575d4-f89b-48c0-a0e2-f188cf0a5904": {
+  {
     "name": "Accessories 2",
     "type": "inventory",
     "common_container": [
@@ -4844,7 +4844,7 @@
       }
     ]
   },
-  "85152d5b-cec8-4d07-b15b-41f89ff2337b": {
+  {
     "name": "Misc",
     "type": "inventory",
     "common_container": [
@@ -4970,7 +4970,7 @@
       }
     ]
   },
-  "43369375-4c36-4b67-94d1-0bfe2abe47bf": {
+  {
     "name": "Skill Fruits 1",
     "type": "inventory",
     "common_container": [
@@ -5186,7 +5186,7 @@
       }
     ]
   },
-  "6d130fa1-585f-497e-b525-9ee40efc2d60": {
+  {
     "name": "Skill Fruits 2",
     "type": "inventory",
     "common_container": [
@@ -5362,7 +5362,7 @@
       }
     ]
   },
-  "b0d94dd2-b33c-4f08-a1b8-2a1cae26374b": {
+  {
     "name": "Base",
     "type": "passive_skills",
     "skills": [
@@ -5372,7 +5372,7 @@
       "PAL_FullStomach_Down_2"
     ]
   },
-  "da91e8d3-b8e2-429e-b409-e34c354dba2d": {
+  {
     "name": "Worker",
     "type": "passive_skills",
     "skills": [
@@ -5382,7 +5382,7 @@
       "Rare"
     ]
   },
-  "e334d785-9383-49c2-8d65-c1c877652619": {
+  {
     "name": "Runner",
     "type": "passive_skills",
     "skills": [
@@ -5392,7 +5392,7 @@
       "Legend"
     ]
   },
-  "9afdf8c4-0a4e-456e-9b78-4491d0b235dd": {
+  {
     "name": "Tank",
     "type": "passive_skills",
     "skills": [
@@ -5402,7 +5402,7 @@
       "Legend"
     ]
   },
-  "ab57f1bd-7395-4569-a30f-5af147d9fdfe": {
+  {
     "name": "Attack",
     "type": "passive_skills",
     "skills": [
@@ -5412,7 +5412,7 @@
       "Legend"
     ]
   },
-  "8a806f5a-0f55-48e8-a912-365d233ed4cb": {
+  {
     "name": "Balanced",
     "type": "passive_skills",
     "skills": [
@@ -5422,7 +5422,7 @@
       "Legend"
     ]
   },
-  "ed0531a0-3611-4b9a-b09c-e91c352f1a05": {
+  {
     "name": "Mount",
     "type": "passive_skills",
     "skills": [
@@ -5432,7 +5432,7 @@
       "Legend"
     ]
   },
-  "550e8400-e29b-41d4-a716-446655440000": {
+  {
     "name": "Dark",
     "type": "active_skills",
     "skills": [
@@ -5441,7 +5441,7 @@
       "EPalWazaID::DarkLaser"
     ]
   },
-  "550e8400-e29b-41d4-a716-446655440001": {
+  {
     "name": "Dragon",
     "type": "active_skills",
     "skills": [
@@ -5450,7 +5450,7 @@
       "EPalWazaID::DragonMeteor"
     ]
   },
-  "550e8400-e29b-41d4-a716-446655440002": {
+  {
     "name": "Electric",
     "type": "active_skills",
     "skills": [
@@ -5459,7 +5459,7 @@
       "EPalWazaID::ThunderStorm"
     ]
   },
-  "550e8400-e29b-41d4-a716-446655440003": {
+  {
     "name": "Fire",
     "type": "active_skills",
     "skills": [
@@ -5468,7 +5468,7 @@
       "EPalWazaID::Eruption"
     ]
   },
-  "550e8400-e29b-41d4-a716-446655440004": {
+  {
     "name": "Grass",
     "type": "active_skills",
     "skills": [
@@ -5477,7 +5477,7 @@
       "EPalWazaID::RootLance"
     ]
   },
-  "550e8400-e29b-41d4-a716-446655440005": {
+  {
     "name": "Ground",
     "type": "active_skills",
     "skills": [
@@ -5486,7 +5486,7 @@
       "EPalWazaID::RockLance"
     ]
   },
-  "550e8400-e29b-41d4-a716-446655440006": {
+  {
     "name": "Ice",
     "type": "active_skills",
     "skills": [
@@ -5495,7 +5495,7 @@
       "EPalWazaID::IceAge"
     ]
   },
-  "550e8400-e29b-41d4-a716-446655440007": {
+  {
     "name": "Neutral",
     "type": "active_skills",
     "skills": [
@@ -5504,7 +5504,7 @@
       "EPalWazaID::HyperBeam"
     ]
   },
-  "550e8400-e29b-41d4-a716-446655440008": {
+  {
     "name": "Water",
     "type": "active_skills",
     "skills": [
@@ -5513,4 +5513,4 @@
       "EPalWazaID::WaterBall"
     ]
   }
-}
+]

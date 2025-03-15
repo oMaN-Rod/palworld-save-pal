@@ -1,8 +1,9 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { Combobox, Tooltip } from '$components/ui';
+	import { Combobox, Tooltip, TooltipButton } from '$components/ui';
 	import { buildingsData } from '$lib/data';
-	import { getAppState } from '$states';
+	import { getAppState, getModalState } from '$states';
 	import {
 		MessageType,
 		type Base,
@@ -13,10 +14,10 @@
 		type Player
 	} from '$types';
 	import { Switch, Tabs } from '@skeletonlabs/skeleton-svelte';
-	import { Eye, EyeOff, RefreshCcw } from 'lucide-svelte';
+	import { Eye, EyeOff, RefreshCcw, Trash } from 'lucide-svelte';
 	import { onMount } from 'svelte';
 	import { JSONEditor, type ContextMenuItem } from 'svelte-jsoneditor';
-	import { sendAndWait } from '$lib/utils/websocketUtils';
+	import { send, sendAndWait } from '$lib/utils/websocketUtils';
 
 	type JsonContent = {
 		content: { text: string };
@@ -24,6 +25,7 @@
 
 	type RawDataType = 'guild' | 'base' | 'player' | 'pal' | 'item_container' | 'character_container';
 	const appState = getAppState();
+	const modal = getModalState();
 
 	let jsons: Record<RawDataType, JsonContent> = $state({
 		guild: { content: { text: '' } },
@@ -412,6 +414,36 @@
 		selectedPalId = '';
 		selectedItemContainerId = '';
 	}
+
+	async function handleDeletePlayer() {
+		const confirmed = await modal.showConfirmModal({
+			title: 'Delete Player',
+			message: 'Are you sure you want to delete this player? This action cannot be undone.',
+			confirmText: 'Delete',
+			cancelText: 'Cancel'
+		});
+		if (confirmed) {
+			send(MessageType.DELETE_PLAYER, { player_id: selectedPlayerId, origin: 'debug' });
+			goto('/loading');
+		}
+	}
+
+	async function handleDeleteGuild() {
+		console.log('handleDeleteGuild', selectedGuildId);
+		const confirmed = await modal.showConfirmModal({
+			title: 'Delete Guild',
+			message: 'Are you sure you want to delete this guild? This action cannot be undone.',
+			confirmText: 'Delete',
+			cancelText: 'Cancel'
+		});
+		if (confirmed) {
+			send(MessageType.DELETE_GUILD, {
+				guild_id: selectedGuildId,
+				origin: 'debug'
+			});
+			goto('/loading');
+		}
+	}
 </script>
 
 <div class="grid h-full grid-cols-[25%_1fr] gap-2 p-2">
@@ -447,6 +479,14 @@
 					{/snippet}
 				</Switch>
 			</Tooltip>
+			<TooltipButton
+				popupLabel="Delete Guild"
+				buttonClass="bg-surface-900 rounded-full hover:bg-red-500/50"
+				onclick={handleDeleteGuild}
+				disabled={!guild}
+			>
+				<Trash size="20" />
+			</TooltipButton>
 		</div>
 		{#if baseSelectOptions.length > 0}
 			<div class="flex items-center gap-2">
@@ -504,6 +544,14 @@
 					{/snippet}
 				</Switch>
 			</Tooltip>
+			<TooltipButton
+				popupLabel="Delete Player"
+				buttonClass="bg-surface-900 rounded-full hover:bg-red-500/50"
+				onclick={handleDeletePlayer}
+				disabled={!player}
+			>
+				<Trash size="20" />
+			</TooltipButton>
 		</div>
 
 		{#if palSelectOptions.length > 0}

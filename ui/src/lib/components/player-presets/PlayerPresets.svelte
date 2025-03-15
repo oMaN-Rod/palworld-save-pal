@@ -2,14 +2,15 @@
 	import { TextInputModal } from '$components/modals';
 	import { List, Tooltip, TooltipButton } from '$components/ui';
 	import { presetsData, itemsData } from '$lib/data';
-	import type { ItemContainer, ItemContainerSlot, PresetProfile } from '$lib/types';
+	import type { ItemContainer, ItemContainerSlot, Player, PresetProfile } from '$lib/types';
 	import { getAppState, getModalState } from '$states';
 	import { EntryState, ItemTypeA } from '$types';
 	import { deepCopy } from '$utils';
 	import { Edit, Play, Plus, Trash, X } from 'lucide-svelte';
 
-	let { containerRef } = $props<{
+	let { containerRef, player = $bindable() } = $props<{
 		containerRef: HTMLDivElement | null;
+		player: Player | undefined;
 	}>();
 
 	const appState = getAppState();
@@ -38,34 +39,40 @@
 	}
 
 	async function handleApplyPreset() {
-		if (!selectedPresets.length || !appState.selectedPlayer) return;
+		if (!selectedPresets.length || !player) return;
 		const containers = {
-			common_container: appState.selectedPlayer.common_container,
-			essential_container: appState.selectedPlayer.essential_container,
-			weapon_load_out_container: appState.selectedPlayer.weapon_load_out_container,
-			player_equipment_armor_container: appState.selectedPlayer.player_equipment_armor_container,
-			food_equip_container: appState.selectedPlayer.food_equip_container
+			common_container: player.common_container,
+			essential_container: player.essential_container,
+			weapon_load_out_container: player.weapon_load_out_container,
+			player_equipment_armor_container: player.player_equipment_armor_container,
+			food_equip_container: player.food_equip_container
 		};
 
-		const updatedContainers: Record<string, ItemContainer> = {};
-
 		for (const [containerName, container] of Object.entries(containers)) {
+			if (!selectedPresets[0][containerName as keyof PresetProfile]) {
+				continue;
+			}
+
 			const presetSlots =
 				selectedPresets[0][containerName as keyof PresetProfile] || container.slots;
-			const updatedSlots = container.slots.map((slot) => {
+
+			for (let i = 0; i < container.slots.length; i++) {
+				const slot = container.slots[i];
 				const presetSlot = (presetSlots as ItemContainerSlot[])?.find(
 					(ps) => ps.slot_index === slot.slot_index
 				);
+
 				if (presetSlot) {
-					return { ...slot, ...presetSlot };
+					slot.static_id = presetSlot.static_id;
+					slot.count = presetSlot.count;
+					slot.dynamic_item = presetSlot.dynamic_item;
+				} else {
+					slot.static_id = 'None';
+					slot.count = 0;
+					slot.dynamic_item = undefined;
 				}
-				return { ...slot, static_id: 'None', count: 0, dynamic_item: undefined };
-			});
+			}
 
-			updatedContainers[containerName] = { ...container, slots: updatedSlots };
-		}
-
-		for (const [_, container] of Object.entries(updatedContainers)) {
 			for (const slot of container.slots) {
 				if (slot.static_id !== 'None') {
 					const itemData = itemsData.items[slot.static_id];
@@ -96,26 +103,25 @@
 				}
 			}
 		}
-		appState.selectedPlayer.state = EntryState.MODIFIED;
-		appState.selectedPlayer = {
-			...appState.selectedPlayer,
-			...updatedContainers
-		};
+
+		player.state = EntryState.MODIFIED;
 	}
 
 	function processSlots(slots: ItemContainerSlot[]) {
 		const newSlots = deepCopy(slots);
-		return newSlots.map((slot) => {
-			if (slot.dynamic_item) {
-				slot.dynamic_item.local_id = '00000000-0000-0000-0000-000000000000';
-				return { ...slot };
-			}
-			return slot;
-		});
+		return newSlots
+			.filter((s) => s.static_id !== 'None')
+			.map((slot) => {
+				if (slot.dynamic_item) {
+					slot.dynamic_item.local_id = '00000000-0000-0000-0000-000000000000';
+					return { ...slot };
+				}
+				return slot;
+			});
 	}
 
 	async function handleAddPreset() {
-		if (!appState.selectedPlayer) return;
+		if (!player) return;
 		// @ts-ignore
 		const result = await modal.showModal<string>(TextInputModal, {
 			title: 'Add preset',
@@ -125,15 +131,11 @@
 		const newPreset = {
 			name: result,
 			type: 'inventory',
-			common_container: processSlots(appState.selectedPlayer.common_container.slots),
-			essential_container: processSlots(appState.selectedPlayer.essential_container.slots),
-			weapon_load_out_container: processSlots(
-				appState.selectedPlayer.weapon_load_out_container.slots
-			),
-			player_equipment_armor_container: processSlots(
-				appState.selectedPlayer.player_equipment_armor_container.slots
-			),
-			food_equip_container: processSlots(appState.selectedPlayer.food_equip_container.slots)
+			common_container: processSlots(player.common_container.slots),
+			essential_container: processSlots(player.essential_container.slots),
+			weapon_load_out_container: processSlots(player.weapon_load_out_container.slots),
+			player_equipment_armor_container: processSlots(player.player_equipment_armor_container.slots),
+			food_equip_container: processSlots(player.food_equip_container.slots)
 		} as PresetProfile;
 		await presetsData.addPresetProfile(newPreset);
 		selectedPresets = [];

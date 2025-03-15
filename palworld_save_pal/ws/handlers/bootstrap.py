@@ -7,9 +7,12 @@ from palworld_save_pal.ws.handlers import (
     debug_handler,
     elements_handler,
     exp_handler,
+    guild_handler,
     items_handler,
+    map_objects_handler,
     open_in_browser_handler,
     passive_skills_handler,
+    player_handler,
     technologies_handler,
     preset_handler,
     save_file_handler,
@@ -25,10 +28,13 @@ from palworld_save_pal.ws.messages import (
     AddPresetMessage,
     BaseMessage,
     ClonePalMessage,
+    DeleteGuildMessage,
+    DeletePlayerMessage,
     GetActiveSkillsMessage,
     GetBuildingsMessage,
     GetElementsMessage,
     GetItemsMessage,
+    GetMapObjectsMessage,
     GetPalsMessage,
     GetPassiveSkillsMessage,
     GetRawDataMessage,
@@ -39,6 +45,7 @@ from palworld_save_pal.ws.messages import (
     HealPalsMessage,
     MessageType,
     MovePalMessage,
+    NukePresetsMessage,
     OpenInBrowserMessage,
     SelectGamepassSaveMessage,
     SetTechnologyDataMessage,
@@ -157,6 +164,14 @@ def bootstrap(dispatcher: "MessageDispatcher"):
     )
 
     dispatcher.register_handler(
+        MessageType.NUKE_PRESETS.value,
+        {
+            "message_class": NukePresetsMessage,
+            "handler_func": preset_handler.nuke_presets_handler,
+        },
+    )
+
+    dispatcher.register_handler(
         MessageType.GET_ACTIVE_SKILLS.value,
         {
             "message_class": GetActiveSkillsMessage,
@@ -209,6 +224,14 @@ def bootstrap(dispatcher: "MessageDispatcher"):
         {
             "message_class": GetPalsMessage,
             "handler_func": pal_handler.get_pals_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.DELETE_GUILD.value,
+        {
+            "message_class": DeleteGuildMessage,
+            "handler_func": guild_handler.delete_guild_handler,
         },
     )
 
@@ -321,5 +344,21 @@ def bootstrap(dispatcher: "MessageDispatcher"):
         {
             "message_class": GetRawDataMessage,
             "handler_func": debug_handler.get_raw_data_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.GET_MAP_OBJECTS.value,
+        {
+            "message_class": GetMapObjectsMessage,
+            "handler_func": map_objects_handler.get_map_objects_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.DELETE_PLAYER.value,
+        {
+            "message_class": DeletePlayerMessage,
+            "handler_func": player_handler.delete_player_handler,
         },
     )

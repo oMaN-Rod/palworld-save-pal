@@ -49,7 +49,10 @@
 						<Tooltip position="right">
 							<Switch
 								name={palPresetNameDescriptionMap[property as PalPresetPropertyNames].label}
-								bind:checked={config[property]}
+								checked={config[property]}
+								onCheckedChange={(mode) => {
+									config[property] = mode.checked;
+								}}
 							/>
 							<span>{palPresetNameDescriptionMap[property as PalPresetPropertyNames].label}</span>
 							{#snippet popup()}

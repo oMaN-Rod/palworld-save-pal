@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta
 from typing import Any, Dict, List, Optional, Union
 from uuid import UUID
 import uuid
@@ -10,6 +11,7 @@ from palworld_save_pal.game.character_container import (
     CharacterContainerType,
 )
 from palworld_save_pal.game.guild import Guild, GuildDTO
+from palworld_save_pal.game.map import WorldMapPoint
 from palworld_save_pal.game.pal import Pal, PalDTO
 from palworld_save_pal.game.item_container import ItemContainer, ItemContainerType
 from palworld_save_pal.game.pal_objects import PalObjects
@@ -60,6 +62,7 @@ class Player(BaseModel):
     _instance_id: UUID
     _pal_box_id: UUID
     _otomo_container_id: UUID
+    _location: WorldMapPoint = None
 
     _guild: Optional[Guild] = PrivateAttr(default=None)
 
@@ -370,6 +373,29 @@ class Player(BaseModel):
         )
         return self._otomo_container_id
 
+    @computed_field
+    def location(self) -> Optional[WorldMapPoint]:
+        last_location = PalObjects.get_value(self._save_parameter["LastJumpedLocation"])
+        self._location = (
+            WorldMapPoint(
+                x=last_location["x"],
+                y=last_location["y"],
+                z=last_location["z"],
+            )
+            if "LastJumpedLocation" in self._save_parameter
+            else None
+        )
+        return self._location
+
+    @computed_field
+    def last_online_time(self) -> datetime:
+        ticks = PalObjects.get_value(self._player_gvas_file.properties["Timestamp"])
+        seconds = ticks / 10000000
+        days = seconds // 86400
+        seconds_remainder = seconds % 86400
+        base_date = datetime(1, 1, 1)
+        return base_date + timedelta(days=days, seconds=seconds_remainder)
+
     @property
     def character_save(self) -> Dict[str, Any]:
         return self._character_save
@@ -455,7 +481,7 @@ class Player(BaseModel):
         self.pal_box.remove_pal(pal_id)
         self.party.remove_pal(pal_id)
         if isinstance(self._guild, Guild):
-            self._guild.delete_pal(pal_id)
+            self._guild.delete_character_handle(pal_id)
 
     def update_from(self, other_player: PlayerDTO):
         logger.debug(

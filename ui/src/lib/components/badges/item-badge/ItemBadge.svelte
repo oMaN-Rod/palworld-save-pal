@@ -25,24 +25,21 @@
 
 	const modal = getModalState();
 
+	const stupidTypoMap: Record<string, string> = {
+		cheeseburger_2: 'CheeseBurger_2',
+		bone: 'Bone',
+		potato: 'Potato',
+		gunpowder: 'GunPowder',
+		gunpowder2: 'GunPowder2',
+		bow_triple: 'Bow_Triple'
+	};
+
 	let item = $derived.by(() => {
 		if (slot.static_id == 'None') return;
 		let key: string = slot.static_id;
-		switch (slot.static_id) {
-			case 'CheeseBurger_2':
-				key = 'Cheeseburger_2';
-				break;
-			case 'bone':
-				key = 'Bone';
-				break;
-			case 'potato':
-				key = 'Potato';
-				break;
-			case 'GunPowder':
-				key = 'Gunpowder';
-				break;
-			case 'GunPowder2':
-				key = 'Gunpowder2';
+
+		if (stupidTypoMap[key.toLowerCase()]) {
+			key = stupidTypoMap[key.toLowerCase()];
 		}
 		return itemsData.items[key];
 	});

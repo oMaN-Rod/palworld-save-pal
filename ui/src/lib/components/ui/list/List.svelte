@@ -2,7 +2,6 @@
 	import { cn } from '$theme';
 	import type { Snippet } from 'svelte';
 	import { Checkbox, Tooltip } from '$components/ui';
-	import { nanoid } from 'nanoid';
 
 	let {
 		items = $bindable([]),
@@ -94,6 +93,7 @@
 	function handleItemSelect(event: Event, item: any) {
 		event.preventDefault();
 		selectedItem = item;
+		processItem(item);
 		onselect(selectedItem);
 	}
 

@@ -141,15 +141,31 @@ class Guild(BaseModel):
     def delete_base_pal(self, base_id: UUID, pal_id: UUID):
         logger.debug("%s (%s) => %s", self.name, self.id, pal_id)
         self.bases[base_id].delete_pal(pal_id)
-        self.delete_pal(pal_id)
+        self.delete_character_handle(pal_id)
 
-    def delete_pal(self, pal_id: UUID):
-        logger.debug("%s (%s) => %s", self.name, self.id, pal_id)
+    def delete_character_handle(self, target_id: UUID):
+        logger.debug("%s (%s) => %s", self.name, self.id, target_id)
         for entry in self._character_handle_ids:
             instance_id = PalObjects.as_uuid(entry["instance_id"])
-            if are_equal_uuids(instance_id, pal_id):
+            guid = PalObjects.as_uuid(entry["guid"])
+            if are_equal_uuids(instance_id, target_id) or are_equal_uuids(
+                guid, target_id
+            ):
                 self._character_handle_ids.remove(entry)
-                logger.debug("%s (%s) => Removed %s", self.name, self.id, pal_id)
+                logger.debug("%s (%s) => Removed %s", self.name, self.id, target_id)
+
+    def delete_player(self, player_uid: UUID):
+        logger.debug("%s (%s) => %s", self.name, self.id, player_uid)
+        for entry in self._players:
+            if are_equal_uuids(entry, player_uid):
+                self._players.remove(entry)
+                self.delete_character_handle(player_uid)
+                self._raw_data["players"][:] = [
+                    player
+                    for player in self._raw_data["players"]
+                    if player_uid != player["player_uid"]
+                ]
+                logger.debug("%s (%s) => Removed %s", self.name, self.id, player_uid)
 
     def add_base(self, base: Base):
         self.bases[base.id] = base

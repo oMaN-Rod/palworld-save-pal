@@ -27,6 +27,7 @@ class MessageType(str, Enum):
     MOVE_PAL = "move_pal"
 
     # Player Management
+    DELETE_PLAYER = "delete_player"
     SET_TECHNOLOGY_DATA = "set_technology_data"
 
     # Game Data Retrieval
@@ -34,6 +35,7 @@ class MessageType(str, Enum):
     GET_BUILDINGS = "get_buildings"
     GET_ELEMENTS = "get_elements"
     GET_EXP_DATA = "get_exp_data"
+    GET_MAP_OBJECTS = "get_map_objects"
     GET_GUILDS = "get_guilds"
     GET_ITEMS = "get_items"
     GET_PASSIVE_SKILLS = "get_passive_skills"
@@ -49,6 +51,9 @@ class MessageType(str, Enum):
     GET_PRESETS = "get_presets"
     UPDATE_PRESET = "update_preset"
 
+    # Guild Management
+    DELETE_GUILD = "delete_guild"
+
     # Save File Management
     DOWNLOAD_SAVE_FILE = "download_save_file"
     LOADED_SAVE_FILES = "loaded_save_files"
@@ -62,6 +67,7 @@ class MessageType(str, Enum):
     # Settings Management
     GET_SETTINGS = "get_settings"
     UPDATE_SETTINGS = "update_settings"
+    NUKE_PRESETS = "nuke_presets"
 
     # System Messages
     ERROR = "error"
@@ -187,7 +193,7 @@ class AddPresetMessage(BaseMessage):
 
 class DeletePresetMessage(BaseMessage):
     type: str = MessageType.DELETE_PRESET.value
-    data: List[UUID]
+    data: List[str]
 
 
 class GetActiveSkillsMessage(BaseModel):
@@ -300,3 +306,31 @@ class TechnologyData(BaseModel):
 class SetTechnologyDataMessage(BaseModel):
     type: str = MessageType.SET_TECHNOLOGY_DATA.value
     data: TechnologyData
+
+
+class GetMapObjectsMessage(BaseModel):
+    type: str = MessageType.GET_MAP_OBJECTS.value
+
+
+class DeleteGuildData(BaseModel):
+    guild_id: UUID
+    origin: str
+
+
+class DeleteGuildMessage(BaseModel):
+    type: str = MessageType.DELETE_GUILD.value
+    data: DeleteGuildData
+
+
+class DeletePlayerData(BaseModel):
+    player_id: UUID
+    origin: str
+
+
+class DeletePlayerMessage(BaseModel):
+    type: str = MessageType.DELETE_PLAYER.value
+    data: DeletePlayerData
+
+
+class NukePresetsMessage(BaseMessage):
+    type: str = MessageType.NUKE_PRESETS.value

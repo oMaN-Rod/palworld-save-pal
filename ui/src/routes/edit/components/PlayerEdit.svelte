@@ -715,7 +715,11 @@
 								>
 									<Edit class="h-4 w-4" />
 								</button>
-								<span>{appState.selectedPlayer.nickname}</span>
+								<Tooltip
+									label={new Date(appState.selectedPlayer.last_online_time).toLocaleString()}
+								>
+									<span>{appState.selectedPlayer.nickname}</span>
+								</Tooltip>
 							</div>
 							<div class="flex flex-col space-y-2">
 								<div class="flex">
@@ -740,7 +744,7 @@
 					onValueChange={(e) => (sideBarExpanded = e.value)}
 					collapsible
 				>
-					<Accordion.Item value="stats">
+					<Accordion.Item value="stats" controlHover="hover:bg-secondary-500/25">
 						{#snippet control()}
 							Stats
 						{/snippet}
@@ -749,10 +753,10 @@
 						{/snippet}
 					</Accordion.Item>
 					<hr class="hr" />
-					<Accordion.Item value="presets">
+					<Accordion.Item value="presets" controlHover="hover:bg-secondary-500/25">
 						{#snippet control()}Presets{/snippet}
 						{#snippet panel()}
-							<PlayerPresets containerRef={sideBarWrapper} />
+							<PlayerPresets containerRef={sideBarWrapper} bind:player={appState.selectedPlayer} />
 						{/snippet}
 					</Accordion.Item>
 				</Accordion>

@@ -15,6 +15,7 @@ from palworld_save_pal.db.ctx.presets import (
     update_preset_name,
     delete_preset,
     populate_presets_from_json,
+    nuke_presets,
 )
 
 logger = create_logger(__name__)
@@ -73,4 +74,10 @@ async def delete_presets_handler(message: DeletePresetMessage, ws: WebSocket):
             MessageType.ERROR, "Failed to delete one or more presets"
         )
 
+    await ws.send_json(response)
+
+
+async def nuke_presets_handler(_: None, ws: WebSocket):
+    nuke_presets()
+    response = build_response(MessageType.NUKE_PRESETS, "Presets nuked successfully")
     await ws.send_json(response)

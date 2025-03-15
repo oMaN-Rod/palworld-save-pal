@@ -41,5 +41,4 @@ class ToastState {
 }
 
 const toastState = new ToastState();
-
 export const getToastState = () => toastState;

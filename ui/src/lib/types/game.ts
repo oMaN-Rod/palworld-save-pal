@@ -83,6 +83,12 @@ export type CharacterContainer = {
 	slots?: CharacterContainerSlot[];
 };
 
+export type WorldMapPoint = {
+	x: number;
+	y: number;
+	z: number;
+};
+
 export type Player = {
 	uid: string;
 	nickname: string;
@@ -108,6 +114,8 @@ export type Player = {
 	technologies: string[];
 	technology_points: number;
 	boss_technology_points: number;
+	location: WorldMapPoint;
+	last_online_time: string;
 };
 
 export type Guild = {
@@ -123,12 +131,22 @@ export type Guild = {
 
 export type Base = {
 	id: string;
+	name?: string;
 	pals: Record<string, Pal>;
 	container_id: string;
 	pal_container: CharacterContainer;
 	slot_count: number;
 	storage_containers: Record<string, ItemContainer>;
 	state: EntryState;
+	location: WorldMapPoint;
+};
+
+export type MapObject = {
+	x: number;
+	y: number;
+	type: string;
+	localized_name: string;
+	pal: string;
 };
 
 export type BaseDTO = { id: string; storage_containers: Record<string, ItemContainer> };

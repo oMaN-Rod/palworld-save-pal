@@ -3,6 +3,7 @@ import { buildingsData } from './buildings.svelte';
 import { elementsData } from './elements.svelte';
 import { expData } from './exp.svelte';
 import { itemsData } from './items.svelte';
+import { mapObjects } from './mapObjects.svelte';
 import { palsData } from './pals.svelte';
 import { passiveSkillsData } from './passiveSkills.svelte';
 import { presetsData } from './presets.svelte';
@@ -16,6 +17,7 @@ export {
 	elementsData,
 	expData,
 	itemsData,
+	mapObjects,
 	palsData,
 	passiveSkillsData,
 	presetsData,
