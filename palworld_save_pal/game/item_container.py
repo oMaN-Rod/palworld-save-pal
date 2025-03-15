@@ -215,8 +215,8 @@ class ItemContainer(BaseModel):
         PalObjects.set_nested(
             raw_data,
             "item",
-             "dynamic_id",
-             "local_id_in_created_world",
+            "dynamic_id",
+            "local_id_in_created_world",
             value=(
                 slot.dynamic_item.local_id
                 if slot.dynamic_item
