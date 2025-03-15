@@ -67,6 +67,7 @@ class MessageType(str, Enum):
     # Settings Management
     GET_SETTINGS = "get_settings"
     UPDATE_SETTINGS = "update_settings"
+    NUKE_PRESETS = "nuke_presets"
 
     # System Messages
     ERROR = "error"
@@ -329,3 +330,7 @@ class DeletePlayerData(BaseModel):
 class DeletePlayerMessage(BaseModel):
     type: str = MessageType.DELETE_PLAYER.value
     data: DeletePlayerData
+
+
+class NukePresetsMessage(BaseMessage):
+    type: str = MessageType.NUKE_PRESETS.value

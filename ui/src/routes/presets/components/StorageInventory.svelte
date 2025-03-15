@@ -23,5 +23,5 @@
 			{buildingData.localized_name}
 		</h5>
 	</div>
-	<InventoryItems bind:items={preset.storage_container.items} />
+	<InventoryItems bind:items={preset.storage_container.slots} />
 </div>

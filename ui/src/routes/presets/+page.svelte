@@ -5,7 +5,7 @@
 	import { debounce } from '$utils';
 	import { Trash, RefreshCcw } from 'lucide-svelte';
 	import { cn } from '$theme';
-	import { type PresetProfile } from '$types';
+	import { MessageType, type PresetProfile } from '$types';
 	import { staticIcons } from '$types/icons';
 	import PalPreset from './components/PalPreset.svelte';
 	import ActiveSkills from './components/ActiveSkills.svelte';
@@ -13,6 +13,7 @@
 	import PlayerInventory from './components/PlayerInventory.svelte';
 	import StorageInventory from './components/StorageInventory.svelte';
 	import Nuke from '$components/ui/icons/Nuke.svelte';
+	import { send, sendAndWait } from '$utils/websocketUtils';
 
 	const modal = getModalState();
 	const toast = getToastState();
@@ -150,6 +151,18 @@
 			debouncedSearch();
 		}
 	});
+
+	async function handleNukeAll() {
+		const confirmed = await modal.showConfirmModal({
+			title: `Delete Preset?`,
+			message: `Are you sure you want to delete all presets? This action will restore defaults & cannot be undone.`,
+			confirmText: 'Delete',
+			cancelText: 'Cancel'
+		});
+		if (!confirmed) return;
+		await sendAndWait(MessageType.NUKE_PRESETS);
+		presetsData.reset();
+	}
 </script>
 
 {#snippet tabButton(tab: PresetType)}
@@ -276,7 +289,7 @@
 							Select a preset from the list to view details
 						</span>
 						<Tooltip label="Nuke all preset">
-							<button class="btn mt-2 h-48 w-48 p-2">
+							<button class="btn mt-2 h-48 w-48 p-2" onclick={handleNukeAll}>
 								<Nuke size={120} />
 							</button>
 						</Tooltip>

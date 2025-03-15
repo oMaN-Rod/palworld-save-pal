@@ -45,6 +45,7 @@ from palworld_save_pal.ws.messages import (
     HealPalsMessage,
     MessageType,
     MovePalMessage,
+    NukePresetsMessage,
     OpenInBrowserMessage,
     SelectGamepassSaveMessage,
     SetTechnologyDataMessage,
@@ -159,6 +160,14 @@ def bootstrap(dispatcher: "MessageDispatcher"):
         {
             "message_class": DeletePresetMessage,
             "handler_func": preset_handler.delete_presets_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.NUKE_PRESETS.value,
+        {
+            "message_class": NukePresetsMessage,
+            "handler_func": preset_handler.nuke_presets_handler,
         },
     )
 

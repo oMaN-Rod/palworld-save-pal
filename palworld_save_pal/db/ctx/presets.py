@@ -3,6 +3,7 @@ from uuid import UUID
 from sqlmodel import select
 from sqlalchemy.orm import selectinload
 
+from palworld_save_pal.db.models.settings_model import SettingsModel
 from palworld_save_pal.editor.preset_profile import PresetProfile, PalPreset
 from palworld_save_pal.utils.logging_config import create_logger
 from palworld_save_pal.utils.json_manager import JsonManager
@@ -82,6 +83,26 @@ def delete_preset(preset_id: str) -> bool:
             return True
     except Exception as e:
         logger.error(f"Error deleting preset: {e}")
+        return False
+
+
+def nuke_presets():
+    logger.debug("Nuking all presets")
+    try:
+        with get_db_session() as session:
+            statement = select(PresetProfile)
+            presets = session.exec(statement).all()
+
+            for preset in presets:
+                if preset.pal_preset:
+                    session.delete(preset.pal_preset)
+
+                session.delete(preset)
+
+            session.commit()
+            return True
+    except Exception as e:
+        logger.error(f"Error nuking presets: {e}")
         return False
 
 
