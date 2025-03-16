@@ -581,7 +581,7 @@ class Pal(BaseModel):
         condenser_bonus = (self.rank - 1) * 0.05
         hp_iv = self.talent_hp * 0.3 / 100
         hp_soul_bonus = self.rank_hp * 0.03
-        alpha_scaling = 1.2 if self.is_boss else 1
+        alpha_scaling = 1.2 if self.is_boss or self.is_lucky else 1
         hp = math.floor(
             500
             + (5 * self.level)
