@@ -47,12 +47,6 @@ class AppState {
 
 	initData() {}
 
-	private removeEmptySlots(container: ItemContainer): ItemContainer {
-		const newContainer = { ...container };
-		newContainer.slots = newContainer.slots;
-		return newContainer;
-	}
-
 	async saveState() {
 		let modifiedData: ModifiedData = {};
 		let modifiedPals: [string, Pal][] = [];
@@ -63,15 +57,11 @@ class AppState {
 			if (player.state === EntryState.MODIFIED) {
 				const { pals, ...playerDTO } = player;
 				player.state = EntryState.NONE;
-				playerDTO.common_container = this.removeEmptySlots(player.common_container);
-				playerDTO.essential_container = this.removeEmptySlots(player.essential_container);
-				playerDTO.weapon_load_out_container = this.removeEmptySlots(
-					player.weapon_load_out_container
-				);
-				playerDTO.player_equipment_armor_container = this.removeEmptySlots(
-					player.player_equipment_armor_container
-				);
-				playerDTO.food_equip_container = this.removeEmptySlots(player.food_equip_container);
+				playerDTO.common_container = player.common_container;
+				playerDTO.essential_container = player.essential_container;
+				playerDTO.weapon_load_out_container = player.weapon_load_out_container;
+				playerDTO.player_equipment_armor_container = player.player_equipment_armor_container;
+				playerDTO.food_equip_container = player.food_equip_container;
 				modifiedPlayers = [...modifiedPlayers, [player.uid, playerDTO]];
 			}
 			if (player.pals) {
@@ -98,10 +88,7 @@ class AppState {
 					let modifiedContainers: [string, ItemContainer][] = [];
 					for (const container of Object.values(base.storage_containers)) {
 						if (container.state === EntryState.MODIFIED) {
-							modifiedContainers = [
-								...modifiedContainers,
-								[container.id, this.removeEmptySlots(container)]
-							];
+							modifiedContainers = [...modifiedContainers, [container.id, container]];
 							container.state = EntryState.NONE;
 						}
 					}
