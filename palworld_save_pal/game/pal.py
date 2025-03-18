@@ -581,16 +581,13 @@ class Pal(BaseModel):
         condenser_bonus = (self.rank - 1) * 0.05
         hp_iv = self.talent_hp * 0.3 / 100
         hp_soul_bonus = self.rank_hp * 0.03
-        alpha_scaling = 1.2 if self.is_boss else 1
+        alpha_scaling = 1.2 if self.is_boss or self.is_lucky else 1
         hp = math.floor(
             500
             + (5 * self.level)
             + (hp_scaling * 0.5 * self.level * (1 + hp_iv) * alpha_scaling)
         )
-        return (
-            math.floor(hp * (1 + condenser_bonus) * (1 + hp_soul_bonus))
-            * 1000
-        )
+        return math.floor(hp * (1 + condenser_bonus) * (1 + hp_soul_bonus)) * 1000
 
     @computed_field
     def storage_slot(self) -> int:
@@ -757,6 +754,9 @@ class Pal(BaseModel):
         new_pal.nickname = nickname
         new_pal.storage_id = storage_id
         new_pal.storage_slot = storage_slot
+        PalObjects.set_value(
+            new_pal.character_save["key"]["PlayerUId"], value=PalObjects.EMPTY_UUID
+        )
         return new_pal
 
     def update_from(self, other_pal: PalDTO):

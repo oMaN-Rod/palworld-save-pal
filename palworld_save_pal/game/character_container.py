@@ -74,7 +74,7 @@ class CharacterContainer(BaseModel):
             self.id,
         )
         new_container_slot_data = PalObjects.ContainerSlotData(
-            slot_idx=slot_idx, instance_id=pal_id, player_uid=self.player_uid
+            slot_idx=slot_idx, instance_id=pal_id
         )
         self._slots_data.append(new_container_slot_data)
         if not self.slots:
