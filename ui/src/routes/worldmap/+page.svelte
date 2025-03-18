@@ -78,25 +78,25 @@
 		</div>
 
 		<div class="flex flex-col gap-4">
-			{#if appState.saveFile}
-				<div class="flex flex-col gap-2">
-					<h2 class="text-lg font-bold">Map Controls</h2>
-					<div class="grid grid-cols-2 gap-2">
-						<button
-							class="flex items-center space-x-2 {showOrigin ? '' : 'opacity-25'}"
-							onclick={() => (showOrigin = !showOrigin)}
-						>
-							<Target class="mr-2 h-6 w-6" />
-							<span>Origin</span>
-						</button>
-						<button
-							class="flex items-center space-x-2 {showFastTravel ? '' : 'opacity-25'} "
-							onclick={() => (showFastTravel = !showFastTravel)}
-						>
-							<img src={mapImg.fastTravel} alt="Fast Travel" class="mr-2 h-6 w-6" />
-							<span>Fast Travel</span>
-							<span class="text-surface-500 text-xs">{fastTravelCount}</span>
-						</button>
+			<div class="flex flex-col gap-2">
+				<h2 class="text-lg font-bold">Map Controls</h2>
+				<div class="grid grid-cols-2 gap-2">
+					<button
+						class="flex items-center space-x-2 {showOrigin ? '' : 'opacity-25'}"
+						onclick={() => (showOrigin = !showOrigin)}
+					>
+						<Target class="mr-2 h-6 w-6" />
+						<span>Origin</span>
+					</button>
+					<button
+						class="flex items-center space-x-2 {showFastTravel ? '' : 'opacity-25'} "
+						onclick={() => (showFastTravel = !showFastTravel)}
+					>
+						<img src={mapImg.fastTravel} alt="Fast Travel" class="mr-2 h-6 w-6" />
+						<span>Fast Travel</span>
+						<span class="text-surface-500 text-xs">{fastTravelCount}</span>
+					</button>
+					{#if appState.saveFile}
 						<button
 							class="flex items-center space-x-2 {showPlayers ? '' : 'opacity-25'}"
 							onclick={() => (showPlayers = !showPlayers)}
@@ -113,32 +113,35 @@
 							<span>Bases</span>
 							<span class="text-surface-500 text-xs">{Object.keys(bases).length}</span>
 						</button>
-						<button
-							class="flex items-center space-x-2 {showDungeons ? '' : 'opacity-25'}"
-							onclick={() => (showDungeons = !showDungeons)}
-						>
-							<img src={mapImg.dungeon} alt="Dungeons" class="mr-2 h-6 w-6" />
-							<span>Dungeons</span>
-							<span class="text-surface-500 text-xs">{dungeonCount}</span>
-						</button>
-						<button
-							class="flex items-center space-x-2 {showAlphaPals ? '' : 'opacity-25'}"
-							onclick={() => (showAlphaPals = !showAlphaPals)}
-						>
-							<img src={anubisImg} alt="Alpha Pals" class="mr-2 h-6 w-6" />
-							<span>Alpha Pals</span>
-							<span class="text-surface-500 text-xs">{alphaPalCount}</span>
-						</button>
-						<button
-							class="flex items-center space-x-2 {showPredatorPals ? '' : 'opacity-25'}"
-							onclick={() => (showPredatorPals = !showPredatorPals)}
-						>
-							<img src={starryonImg} alt="Predator Pals" class="mr-2 h-6 w-6" />
-							<span>Predator Pals</span>
-							<span class="text-surface-500 text-xs">{predatorPalCount}</span>
-						</button>
-					</div>
+					{/if}
+
+					<button
+						class="flex items-center space-x-2 {showDungeons ? '' : 'opacity-25'}"
+						onclick={() => (showDungeons = !showDungeons)}
+					>
+						<img src={mapImg.dungeon} alt="Dungeons" class="mr-2 h-6 w-6" />
+						<span>Dungeons</span>
+						<span class="text-surface-500 text-xs">{dungeonCount}</span>
+					</button>
+					<button
+						class="flex items-center space-x-2 {showAlphaPals ? '' : 'opacity-25'}"
+						onclick={() => (showAlphaPals = !showAlphaPals)}
+					>
+						<img src={anubisImg} alt="Alpha Pals" class="mr-2 h-6 w-6" />
+						<span>Alpha Pals</span>
+						<span class="text-surface-500 text-xs">{alphaPalCount}</span>
+					</button>
+					<button
+						class="flex items-center space-x-2 {showPredatorPals ? '' : 'opacity-25'}"
+						onclick={() => (showPredatorPals = !showPredatorPals)}
+					>
+						<img src={starryonImg} alt="Predator Pals" class="mr-2 h-6 w-6" />
+						<span>Predator Pals</span>
+						<span class="text-surface-500 text-xs">{predatorPalCount}</span>
+					</button>
 				</div>
+			</div>
+			{#if appState.saveFile}
 				<Accordion value={section} onValueChange={(e) => (section = e.value)} collapsible>
 					<Accordion.Item value="players" controlHover="hover:bg-secondary-500/25">
 						{#snippet control()}
