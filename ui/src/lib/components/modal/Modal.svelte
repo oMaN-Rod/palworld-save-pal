@@ -24,7 +24,7 @@
 
 {#if modal.isOpen}
 	<div
-		class={cn('fixed inset-0 z-50 flex items-center justify-center', overlayClass)}
+		class={cn('modal-content fixed inset-0 flex items-center justify-center', overlayClass)}
 		transition:fade={{ duration: 200 }}
 	>
 		<div class={cn('relative', contentClass, rounded)}>
@@ -38,3 +38,9 @@
 		</div>
 	</div>
 {/if}
+
+<style>
+	.modal-content {
+		z-index: 2147483647;
+	}
+</style>
