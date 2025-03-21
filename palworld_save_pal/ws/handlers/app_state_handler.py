@@ -37,8 +37,27 @@ async def sync_app_state_handler(_: SyncAppStateMessage, ws: WebSocket):
     response = build_response(MessageType.GET_GUILDS, save_file.get_guilds())
     await ws.send_json(response)
 
+async def _get_sftp_connection_response(connection) -> dict:
+    # List home directory
+    files_resp = connection.listdir_attr()
+
+    # Map files to their name and file/dir
+    files = [{"name": f.filename, "is_dir": f.longname.startswith("d")} for f in files_resp]
+
+    return build_response(MessageType.SETUP_SFTP_CONNECTION, {
+        "success": True,
+        "message": "Connected to SFTP server", 
+        "files": files,
+        "path": connection.pwd
+    })
+
 async def setup_sftp_connection(message: SetupSFTPConnectionMessage, ws: WebSocket):
     app_state = get_app_state()
+
+    if app_state.sftp_connection:
+        response = await _get_sftp_connection_response(app_state.sftp_connection)
+        await ws.send_json(response)
+        return
 
     hostname = message.data.hostname
     username = message.data.username
@@ -46,20 +65,10 @@ async def setup_sftp_connection(message: SetupSFTPConnectionMessage, ws: WebSock
 
     try:
         app_state.sftp_connection = Connection(hostname, port=7767, username=username, password=password, cnopts=CnOpts(knownhosts=None))
-
-        # List home directory
-        files_resp = app_state.sftp_connection.listdir_attr()
-
-        # Map files to their name and file/dir
-        files = [{"name": f.filename, "is_dir": f.longname.startswith("d")} for f in files_resp]
-
-        success_response = build_response(MessageType.SETUP_SFTP_CONNECTION, {
-            "success": True,
-            "message": "Connected to SFTP server",
-            "files": files,
-            "path": app_state.sftp_connection.pwd
-        })
+        
+        success_response = await _get_sftp_connection_response(app_state.sftp_connection)
         await ws.send_json(success_response)
+        
     except Exception as e:
         logger.error(f"Failed to connect to SFTP server: {str(e)}")
         err_response = build_response(MessageType.SETUP_SFTP_CONNECTION, {
