@@ -54,7 +54,7 @@
 				const matchesElement = palData.element_types.some((type) => skill.details.element === type);
 				if (
 					matchesElement &&
-					skill.id.toLowerCase().includes(`unique_${pal.character_id.toLowerCase()}`)
+					skill.id.toLowerCase().includes(`unique_${pal.character_key.toLowerCase()}`)
 				) {
 					return true;
 				}
