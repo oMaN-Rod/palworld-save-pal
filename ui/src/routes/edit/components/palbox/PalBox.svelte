@@ -631,7 +631,16 @@
 					if (key === 'character_id') continue;
 					if (key === 'lock' && value) {
 						palWithData.pal.character_id = presetProfile.pal_preset?.character_id as string;
-					} else if (value) {
+					}
+ 					if (key === 'is_boss' && value && palWithData.pal.is_lucky) {
+ 						palWithData.pal.is_boss = true
+ 						palWithData.pal.is_lucky = false
+ 					}
+ 					if (key === 'is_lucky' && value && palWithData.pal.is_boss) {
+ 						palWithData.pal.is_boss = false
+ 						palWithData.pal.is_lucky = true
+ 					}
+ 					else if (value != null) {
 						(palWithData.pal as Record<string, any>)[key] = value;
 					}
 				}
