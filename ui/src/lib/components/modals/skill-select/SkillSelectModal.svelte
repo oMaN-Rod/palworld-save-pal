@@ -30,7 +30,7 @@
 		if (type === 'Active') {
 			return Object.values(activeSkillsData.activeSkills)
 				.filter((skill) => {
-					if (skill.id.toLowerCase().includes(`unique_${pal.character_id.toLowerCase()}`)) {
+					if (skill.id.toLowerCase().includes(`unique_${pal.character_key.toLowerCase()}`)) {
 						return true;
 					}
 					if (!skill.id.toLowerCase().includes('unique_')) {
