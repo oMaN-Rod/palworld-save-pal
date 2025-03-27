@@ -22,9 +22,15 @@ FILETIME_EPOCH = datetime(1601, 1, 1, tzinfo=timezone.utc)
 STEAM_ROOT = (
     os.path.join(os.getenv("LOCALAPPDATA"), "Pal", "Saved", "SaveGames")
     if os.name == "nt"
-    else (os.path.join("/System/Volumes/Data/Users", os.getenv("USER"), "Library/Containers/com.pocketpair.palworld.mac/Data/Library/Application Support/Epic/Pal/Saved/SaveGames") 
-          if platform.system() == "Darwin" 
-          else "~")
+    else (
+        os.path.join(
+            "/System/Volumes/Data/Users",
+            os.getenv("USER"),
+            "Library/Containers/com.pocketpair.palworld.mac/Data/Library/Application Support/Epic/Pal/Saved/SaveGames",
+        )
+        if platform.system() == "Darwin"
+        else "~"
+    )
 )
 GAMEPASS_ROOT = (
     os.path.join(
@@ -137,6 +143,8 @@ class FileManager:
         for save_file in players_path.glob("*.sav"):
             try:
                 player_id = save_file.stem
+                if "_dps" in player_id:
+                    continue
                 logger.debug("Reading player save: %s, uuid: %s", save_file, player_id)
                 player_uuid = uuid.UUID(player_id)
                 with open(save_file, "rb") as f:

@@ -46,9 +46,13 @@ class ValidationResults:
 
 class SaveComparison:
     TRACKED_OBJECTS = [
+        "BaseCampSaveData",
         "CharacterContainerSaveData",
         "CharacterSaveParameterMap",
         "DynamicItemSaveData",
+        "GroupSaveDataMap",
+        "GuildExtraSaveDataMap",
+        "InLockerCharacterInstanceIDArray",
         "ItemContainerSaveData",
     ]
 

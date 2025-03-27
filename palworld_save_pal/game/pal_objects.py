@@ -731,7 +731,7 @@ class PalObjects:
                             "static_id": container_slot.static_id,
                         },
                     },
-                    "trailing_bytes_length": 16,
+                    "trailing_bytes": [0] * 16,
                 },
                 custom_type=".worldSaveData.ItemContainerSaveData.Value.Slots.Slots.RawData",
             ),

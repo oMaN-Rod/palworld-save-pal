@@ -275,13 +275,23 @@ async def select_gamepass_save_handler(
 
     player_containers = [c for k, c in containers.items() if "Player" in k]
     for player_container in player_containers:
+        if "_dps" in player_container.container_name:
+            logger.debug(
+                "Skipping DPS container (tmp fix until dps supported): %s",
+                player_container.container_name,
+            )
+            continue
         player_dir = os.path.join(
             app_state.settings.save_dir,
             player_container.container_uuid.bytes_le.hex().upper(),
         )
         for filename in os.listdir(player_dir):
             if filename.startswith("container."):
-                logger.debug("Reading container file: %s", filename)
+                logger.debug(
+                    "Reading container file: %s for player container %s",
+                    filename,
+                    player_container.container_name,
+                )
                 with open(os.path.join(player_dir, filename), "rb") as f:
                     file_list = ContainerFileList.from_stream(f)
                     player_files[

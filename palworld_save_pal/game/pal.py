@@ -591,11 +591,12 @@ class Pal(BaseModel):
 
     @computed_field
     def storage_slot(self) -> int:
+        slot_id_key = "SlotID" if "SlotID" in self._save_parameter else "SlotId"
         self._storage_slot = (
             PalObjects.get_value(
-                self._save_parameter["SlotID"]["value"]["SlotIndex"], 0
+                self._save_parameter[slot_id_key]["value"]["SlotIndex"], 0
             )
-            if "SlotID" in self._save_parameter
+            if slot_id_key in self._save_parameter
             else 0
         )
         return self._storage_slot
@@ -603,23 +604,25 @@ class Pal(BaseModel):
     @storage_slot.setter
     def storage_slot(self, value: int):
         self._storage_slot = value
-        if "SlotID" in self._save_parameter:
+        slot_id_key = "SlotID" if "SlotID" in self._save_parameter else "SlotId"
+        if slot_id_key in self._save_parameter:
             PalObjects.set_value(
-                self._save_parameter["SlotID"]["value"]["SlotIndex"],
+                self._save_parameter[slot_id_key]["value"]["SlotIndex"],
                 value=self._storage_slot,
             )
         else:
-            self._save_parameter["SlotID"] = PalObjects.PalCharacterSlotId(
+            self._save_parameter[slot_id_key] = PalObjects.PalCharacterSlotId(
                 self._storage_id, self._storage_slot
             )
 
     @computed_field
     def storage_id(self) -> Optional[UUID]:
+        slot_id_key = "SlotID" if "SlotID" in self._save_parameter else "SlotId"
         self._storage_id = (
             PalObjects.get_guid(
-                self._save_parameter["SlotID"]["value"]["ContainerId"]["value"]["ID"]
+                self._save_parameter[slot_id_key]["value"]["ContainerId"]["value"]["ID"]
             )
-            if "SlotID" in self._save_parameter
+            if slot_id_key in self._save_parameter
             else None
         )
         return self._storage_id
@@ -627,13 +630,16 @@ class Pal(BaseModel):
     @storage_id.setter
     def storage_id(self, value: UUID):
         self._storage_id = value
-        if "SlotID" in self._save_parameter:
+        slot_id_key = "SlotID" if "SlotID" in self._save_parameter else "SlotId"
+        if slot_id_key in self._save_parameter:
             PalObjects.set_value(
-                self._save_parameter["SlotID"]["value"]["ContainerId"]["value"]["ID"],
+                self._save_parameter[slot_id_key]["value"]["ContainerId"]["value"][
+                    "ID"
+                ],
                 value=self._storage_id,
             )
         else:
-            self._save_parameter["SlotID"] = PalObjects.PalCharacterSlotId(
+            self._save_parameter[slot_id_key] = PalObjects.PalCharacterSlotId(
                 self._storage_id, self._storage_slot
             )
 

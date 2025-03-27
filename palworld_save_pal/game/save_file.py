@@ -893,6 +893,11 @@ class SaveFile(BaseModel):
                     entry, "value", "RawData", "value", "group_id_belong_to"
                 )
             )
+            if group_id_belong_to not in self._guilds:
+                logger.warning(
+                    "Base %s does not belong to a guild, skipping.", entry["key"]
+                )
+                continue
             # Pal Container ID
             container_id = PalObjects.as_uuid(
                 PalObjects.get_nested(
@@ -1002,6 +1007,8 @@ class SaveFile(BaseModel):
         )
         self._map_object_save_data = PalObjects.get_value(
             world_save_data["MapObjectSaveData"]
+            if "MapObjectSaveData" in world_save_data
+            else None
         )
         self._guild_extra_save_data_map = (
             PalObjects.get_value(world_save_data["GuildExtraSaveDataMap"])
