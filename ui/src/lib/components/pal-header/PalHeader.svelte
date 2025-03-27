@@ -270,10 +270,6 @@
 			json: { content: { text: JSON.stringify(pal, null, 2) } }
 		});
 	}
-
-	function disableContextMenu(event: MouseEvent) {
-        event.preventDefault();
-    }
 </script>
 
 {#if pal}
