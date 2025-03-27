@@ -15967,7 +15967,8 @@
     "size": "M",
     "rarity": 4,
     "element_types": [
-      "Earth"
+      "Earth",
+      "Water"
     ],
     "genus_category": "Fish",
     "weapon": "None",

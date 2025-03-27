@@ -72,10 +72,23 @@
 		}
 	}
 
-	async function handleLevelIncrement() {
+	async function handleLevelIncrement(event: MouseEvent) {
 		if (!pal || !appState.selectedPlayer || !appState.selectedPlayer.pals) return;
 
-		const newLevel = Math.min(pal.level + 1, MAX_LEVEL);
+		let newLevel = pal.level
+
+		if (event.ctrlKey) {
+			if (event.button === 0) {
+				newLevel = Math.max(pal.level + 5, 1);
+			} else if (event.button === 1) {
+				newLevel = 60
+			} else if (event.button === 2) {
+				newLevel = Math.max(pal.level + 10, 1);
+			}
+		} else {
+			newLevel = Math.max(pal.level + 1, 1);
+		}
+
 		if (newLevel === pal.level) return;
 
 		const nextLevelData = await expData.getExpDataByLevel(newLevel + 1);
@@ -87,10 +100,23 @@
 		await calcPalLevelProgress();
 	}
 
-	async function handleLevelDecrement() {
+	async function handleLevelDecrement(event: MouseEvent) {
 		if (!pal || !appState.selectedPlayer || !appState.selectedPlayer.pals) return;
 
-		const newLevel = Math.max(pal.level - 1, 1);
+		let newLevel = pal.level
+
+		if (event.ctrlKey) {
+			if (event.button === 0) {
+				newLevel = Math.max(pal.level - 5, 1);
+			} else if (event.button === 1) {
+				newLevel = 1
+			} else if (event.button === 2) {
+				newLevel = Math.max(pal.level - 10, 1);
+			}
+		} else {
+			newLevel = Math.max(pal.level - 1, 1);
+		}
+
 		if (newLevel === pal.level) return;
 
 		const newLevelData = await expData.getExpDataByLevel(newLevel + 1);
@@ -262,9 +288,44 @@
 			/>
 			<div class="flex flex-row px-2">
 				{#if showActions}
-					<button class="mr-4">
-						<Minus class="text-primary-500" onclick={handleLevelDecrement} />
-					</button>
+					<Tooltip position='bottom'>
+						<button 
+							oncontextmenu={(event) => event.preventDefault()}
+							class="mr-4 hover:bg-secondary-500/25"
+							onmousedown={(event) => handleLevelDecrement(event)}
+						>
+							<Minus class="text-primary-500" />
+						</button>
+						{#snippet popup()}
+						<div class="flex items-center space-x-2">
+							<div class="h-6 w-6">
+								<img src={staticIcons.ctrlIcon} alt="Control" class="h-full w-full" />
+							</div>
+							<div class="h-6 w-6">
+								<img src={staticIcons.leftClickIcon} alt="Left Click" class="h-full w-full" />
+							</div>
+							<span class="text-xs font-bold">-5</span>
+						</div>
+						<div class="flex items-center space-x-2">
+							<div class="h-6 w-6">
+								<img src={staticIcons.ctrlIcon} alt="Control" class="h-full w-full" />
+							</div>
+							<div class="h-6 w-6">
+								<img src={staticIcons.rightClickIcon} alt="Right Click" class="h-full w-full" />
+							</div>
+							<span class="text-xs font-bold">-10</span>
+						</div>
+						<div class="flex items-center space-x-2">
+							<div class="h-6 w-6">
+								<img src={staticIcons.ctrlIcon} alt="Right Click" class="h-full w-full" />
+							</div>
+							<div class="h-6 w-6">
+								<img src={staticIcons.middleClickIcon} alt="Middle Click" class="h-full w-full" />
+							</div>
+							<span class="text-xs font-bold">Level 1</span>
+						</div>
+						{/snippet}
+					</Tooltip>
 				{/if}
 
 				<Tooltip>
@@ -278,9 +339,44 @@
 				</Tooltip>
 
 				{#if showActions}
-					<button class="ml-4">
-						<Plus class="text-primary-500" onclick={handleLevelIncrement} />
-					</button>
+					<Tooltip position='bottom'>
+						<button
+							oncontextmenu={(event) => event.preventDefault()}
+							class="ml-4 hover:bg-secondary-500/25"
+							onmousedown={(event) => handleLevelIncrement(event)}
+						>
+							<Plus class="text-primary-500" />
+						</button>
+						{#snippet popup()}
+						<div class="flex items-center space-x-2">
+							<div class="h-6 w-6">
+								<img src={staticIcons.ctrlIcon} alt="Control" class="h-full w-full" />
+							</div>
+							<div class="h-6 w-6">
+								<img src={staticIcons.leftClickIcon} alt="Left Click" class="h-full w-full" />
+							</div>
+							<span class="text-xs font-bold">+5</span>
+						</div>
+						<div class="flex items-center space-x-2">
+							<div class="h-6 w-6">
+								<img src={staticIcons.ctrlIcon} alt="Control" class="h-full w-full" />
+							</div>
+							<div class="h-6 w-6">
+								<img src={staticIcons.rightClickIcon} alt="Right Click" class="h-full w-full" />
+							</div>
+							<span class="text-xs font-bold">+10</span>
+						</div>
+						<div class="flex items-center space-x-2">
+							<div class="h-6 w-6">
+								<img src={staticIcons.ctrlIcon} alt="Right Click" class="h-full w-full" />
+							</div>
+							<div class="h-6 w-6">
+								<img src={staticIcons.middleClickIcon} alt="Middle Click" class="h-full w-full" />
+							</div>
+							<span class="text-xs font-bold">Level 60</span>
+						</div>
+						{/snippet}
+					</Tooltip>
 				{/if}
 			</div>
 		</div>

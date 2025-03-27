@@ -26,6 +26,7 @@
 		Edit
 	} from 'lucide-svelte';
 	import { assetLoader } from '$utils';
+	import { staticIcons } from '$types/icons';
 
 	const appState = getAppState();
 	const toast = getToastState();
@@ -381,11 +382,24 @@
 		}
 	}
 
-	async function handleLevelIncrement() {
+	async function handleLevelIncrement(event: MouseEvent) {
 		if (!appState.selectedPlayer || !appState.selectedPlayer || !appState.selectedPlayer.pals)
 			return;
 
-		const newLevel = Math.min(appState.selectedPlayer.level + 1, MAX_LEVEL);
+		let newLevel = appState.selectedPlayer.level
+
+		if (event.ctrlKey) {
+			if (event.button === 0) {
+				newLevel = Math.max(appState.selectedPlayer.level + 5, 1);
+			} else if (event.button === 1) {
+				newLevel = 60
+			} else if (event.button === 2) {
+				newLevel = Math.max(appState.selectedPlayer.level + 10, 1);
+			}
+		} else {
+			newLevel = Math.max(appState.selectedPlayer.level + 1, 1);
+		}
+
 		if (newLevel === appState.selectedPlayer.level) return;
 
 		const nextLevelData = await expData.getExpDataByLevel(newLevel + 1);
@@ -395,11 +409,24 @@
 		appState.selectedPlayer.state = EntryState.MODIFIED;
 	}
 
-	async function handleLevelDecrement() {
+	async function handleLevelDecrement(event: MouseEvent) {
 		if (!appState.selectedPlayer || !appState.selectedPlayer || !appState.selectedPlayer.pals)
 			return;
 
-		const newLevel = Math.max(appState.selectedPlayer.level - 1, 1);
+		let newLevel = appState.selectedPlayer.level
+
+		if (event.ctrlKey) {
+			if (event.button === 0) {
+				newLevel = Math.max(appState.selectedPlayer.level - 5, 1);
+			} else if (event.button === 1) {
+				newLevel = 1
+			} else if (event.button === 2) {
+				newLevel = Math.max(appState.selectedPlayer.level - 10, 1);
+			}
+		} else {
+			newLevel = Math.max(appState.selectedPlayer.level - 1, 1);
+		}
+
 		if (newLevel === appState.selectedPlayer.level) return;
 
 		const newLevelData = await expData.getExpDataByLevel(newLevel + 1);
@@ -690,19 +717,89 @@
 					class="border-l-surface-600 preset-filled-surface-100-900 mb-2 mr-2 flex rounded-none border-l-2 p-4"
 				>
 					<div class="mr-4 flex flex-col items-center justify-center rounded-none">
-						<div class="flex px-2">
-							<button class="mr-4">
-								<Minus class="text-primary-500" size={16} onclick={handleLevelDecrement} />
-							</button>
+						<div class="flex items-center">
+							<Tooltip position='bottom'>
+								<button 
+									oncontextmenu={(event) => event.preventDefault()}
+									class="mr-4 btn hover:bg-secondary-500/25 px-2"
+									onmousedown={(event) => handleLevelDecrement(event)}
+								>
+									<Minus class="text-primary-500" size={16} />
+								</button>
+								{#snippet popup()}
+									<div class="flex items-center space-x-2">
+										<div class="h-6 w-6">
+											<img src={staticIcons.ctrlIcon} alt="Control" class="h-full w-full" />
+										</div>
+										<div class="h-6 w-6">
+											<img src={staticIcons.leftClickIcon} alt="Left Click" class="h-full w-full" />
+										</div>
+										<span class="text-xs font-bold">-5</span>
+									</div>
+									<div class="flex items-center space-x-2">
+										<div class="h-6 w-6">
+											<img src={staticIcons.ctrlIcon} alt="Control" class="h-full w-full" />
+										</div>
+										<div class="h-6 w-6">
+											<img src={staticIcons.rightClickIcon} alt="Right Click" class="h-full w-full" />
+										</div>
+										<span class="text-xs font-bold">-10</span>
+									</div>
+									<div class="flex items-center space-x-2">
+										<div class="h-6 w-6">
+											<img src={staticIcons.ctrlIcon} alt="Right Click" class="h-full w-full" />
+										</div>
+										<div class="h-6 w-6">
+											<img src={staticIcons.middleClickIcon} alt="Middle Click" class="h-full w-full" />
+										</div>
+										<span class="text-xs font-bold">Level 1</span>
+									</div>
+								{/snippet}
+							</Tooltip>
 
 							<div class="flex flex-col items-center justify-center">
 								<span class="text-surface-400 text-sm font-bold">LEVEL</span>
 								<span class="text-xl font-bold xl:text-2xl">{appState.selectedPlayer.level}</span>
 							</div>
 
-							<button class="ml-4">
-								<Plus class="text-primary-500" size={16} onclick={handleLevelIncrement} />
-							</button>
+							<Tooltip position='bottom'>
+								<button 
+									oncontextmenu={(event) => event.preventDefault()}
+									class="ml-4 btn hover:bg-secondary-500/25 px-2"
+									onmousedown={(event) => handleLevelIncrement(event)}
+								>
+									<Plus class="text-primary-500" size={16} />
+								</button>
+								{#snippet popup()}
+								<div class="flex items-center space-x-2">
+									<div class="h-6 w-6">
+										<img src={staticIcons.ctrlIcon} alt="Control" class="h-full w-full" />
+									</div>
+									<div class="h-6 w-6">
+										<img src={staticIcons.leftClickIcon} alt="Left Click" class="h-full w-full" />
+									</div>
+									<span class="text-xs font-bold">+5</span>
+								</div>
+								<div class="flex items-center space-x-2">
+									<div class="h-6 w-6">
+										<img src={staticIcons.ctrlIcon} alt="Control" class="h-full w-full" />
+									</div>
+									<div class="h-6 w-6">
+										<img src={staticIcons.rightClickIcon} alt="Right Click" class="h-full w-full" />
+									</div>
+									<span class="text-xs font-bold">+10</span>
+								</div>
+								<div class="flex items-center space-x-2">
+									<div class="h-6 w-6">
+										<img src={staticIcons.ctrlIcon} alt="Right Click" class="h-full w-full" />
+									</div>
+									<div class="h-6 w-6">
+										<img src={staticIcons.middleClickIcon} alt="Middle Click" class="h-full w-full" />
+									</div>
+									<span class="text-xs font-bold">Level 60</span>
+								</div>
+								{/snippet}
+							</Tooltip>
 						</div>
 					</div>
 
