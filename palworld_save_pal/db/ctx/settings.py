@@ -7,7 +7,6 @@ from palworld_save_pal.editor.settings import SettingsDTO
 from palworld_save_pal.db.models.settings_model import SettingsModel
 
 logger = create_logger(__name__)
-settings_json = JsonManager("data/json/settings.json")
 
 
 def get_settings() -> SettingsModel:
@@ -17,22 +16,7 @@ def get_settings() -> SettingsModel:
 
         if not settings:
             logger.info("No settings found in database. Creating default settings.")
-            try:
-                saved_settings = settings_json.read()
-                if saved_settings:
-                    valid_fields = {
-                        field for field in SettingsModel.__fields__ if field != "id"
-                    }
-                    filtered_settings = {
-                        k: v for k, v in saved_settings.items() if k in valid_fields
-                    }
-                    settings = SettingsModel(**filtered_settings)
-                else:
-                    settings = SettingsModel()
-            except Exception as e:
-                logger.warning(f"Error loading settings from JSON: {e}")
-                settings = SettingsModel()
-
+            settings = SettingsModel()
             settings.id = 1
             session.add(settings)
             session.flush()
