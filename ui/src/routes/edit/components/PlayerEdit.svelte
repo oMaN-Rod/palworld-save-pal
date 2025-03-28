@@ -32,7 +32,7 @@
 	const toast = getToastState();
 	const modal = getModalState();
 
-	const max_level = $derived(appState.settings.cheat_mode ? 255 : 60)
+	const max_level = $derived(appState.settings.cheat_mode ? 99 : 60)
 
 	const defaultItem = {
 		id: '',
@@ -394,7 +394,7 @@
 			if (event.button === 0) {
 				newLevel = Math.min(appState.selectedPlayer.level + 5, max_level);
 			} else if (event.button === 1) {
-				newLevel = 60
+				newLevel = max_level
 			} else if (event.button === 2) {
 				newLevel = Math.min(appState.selectedPlayer.level + 10, max_level);
 			}
@@ -798,7 +798,7 @@
 									<div class="h-6 w-6">
 										<img src={staticIcons.middleClickIcon} alt="Middle Click" class="h-full w-full" />
 									</div>
-									<span class="text-xs font-bold">Level 60</span>
+									<span class="text-xs font-bold">Level {max_level}</span>
 								</div>
 								{/snippet}
 							</Tooltip>
