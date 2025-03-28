@@ -402,7 +402,7 @@ class Pal(BaseModel):
 
     @rank.setter
     def rank(self, value: int):
-        self._rank = min(value, 5)
+        self._rank = min(value, 255)
         if self._rank == 0:
             safe_remove(self._save_parameter, "Rank")
             return

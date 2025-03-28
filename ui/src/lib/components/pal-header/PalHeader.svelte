@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { PalPresetSelectModal, PresetConfigModal, TextInputModal } from '$components';
-	import { CornerDotButton, Progress, Tooltip } from '$components/ui';
+	import { CornerDotButton, Progress, Tooltip, Input } from '$components/ui';
 	import {
 		defaultPresetConfig,
 		type ElementType,
@@ -19,6 +19,7 @@
 	import { assetLoader, handleMaxOutPal, canBeBoss } from '$utils';
 	import { goto } from '$app/navigation';
 	import { staticIcons } from '$types/icons';
+	import { valueType } from 'svelte-jsoneditor';
 
 	let {
 		pal = $bindable(),
@@ -35,6 +36,7 @@
 	const toast = getToastState();
 
 	const max_level = $derived(appState.settings.cheat_mode ? 255 : 60)
+	const max_rank = $derived(appState.settings.cheat_mode ? 255 : 5)
 
 	let palLevelProgressToNext: number = $state(0);
 	let palLevelProgressValue: number = $state(0);
@@ -83,7 +85,7 @@
 			if (event.button === 0) {
 				newLevel = Math.min(pal.level + 5, max_level);
 			} else if (event.button === 1) {
-				newLevel = 60
+				newLevel = max_level
 			} else if (event.button === 2) {
 				newLevel = Math.min(pal.level + 10, max_level);
 			}
@@ -219,15 +221,15 @@
 			if (key === 'lock' && value) {
 				pal.character_id = presetProfile.pal_preset?.character_id as string;
 			} 
- 			if (key === 'is_boss' && value && pal.is_lucky) {
- 				pal.is_boss = true
- 				pal.is_lucky = false
- 			}
- 			if (key === 'is_lucky' && value && pal.is_boss) {
- 				pal.is_boss = false
- 				pal.is_lucky = true
- 			}
- 			else if (value !== null) {
+			if (key === 'is_boss' && value && pal.is_lucky) {
+				pal.is_boss = true
+				pal.is_lucky = false
+			}
+			if (key === 'is_lucky' && value && pal.is_boss) {
+				pal.is_boss = false
+				pal.is_lucky = true
+			}
+			else if (value !== null) {
 				(pal as Record<string, any>)[key] = value;
 			}
 		}
@@ -281,6 +283,11 @@
 			json: { content: { text: JSON.stringify(pal, null, 2) } }
 		});
 	}
+
+	async function handleInputUpdate(value: number) {
+		pal.rank = value
+		pal.state = EntryState.MODIFIED
+	}
 </script>
 
 {#if pal}
@@ -288,15 +295,27 @@
 		class="border-l-surface-600 preset-filled-surface-100-900 flex flex-row rounded-none border-l-2 p-4"
 	>
 		<div class="mr-4 flex flex-col items-center justify-center rounded-none">
-			<Rating
-				value={palRank}
-				count={4}
-				itemClasses="text-gray"
-				onValueChange={(e) => {
-					pal.rank = e.value + 1;
-					pal.state = EntryState.MODIFIED;
-				}}
-			/>
+			{#if appState.settings.cheat_mode}
+				<Input 
+					bind:value={pal.rank} 
+					placeholder="Rank" 
+					type="number"
+					itemClasses="text-gray"
+					min={0}
+					max={max_rank}
+					onchange={handleInputUpdate}
+				/>
+			{:else}
+				<Rating
+					value={palRank}
+					count={4}
+					itemClasses="text-gray"
+					onValueChange={(e) => {
+						pal.rank = e.value + 1;
+						pal.state = EntryState.MODIFIED;
+					}}
+				/>
+			{/if}
 			<div class="flex flex-row px-2">
 				{#if showActions}
 					<Tooltip position='bottom'>
@@ -384,7 +403,7 @@
 							<div class="h-6 w-6">
 								<img src={staticIcons.middleClickIcon} alt="Middle Click" class="h-full w-full" />
 							</div>
-							<span class="text-xs font-bold">Level 60</span>
+							<span class="text-xs font-bold">Level {max_level}</span>
 						</div>
 						{/snippet}
 					</Tooltip>
