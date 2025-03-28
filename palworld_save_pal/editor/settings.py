@@ -19,6 +19,7 @@ class Settings(BaseModel):
     _clone_prefix: str = PrivateAttr(default="©️")
     _new_pal_prefix: str = PrivateAttr(default="🆕")
     _debug_mode: bool = PrivateAttr(default=False)
+    _cheat_mode: bool = PrivateAttr(default=False)
     _is_busy: bool = PrivateAttr(default=True)
 
     def __init__(self, **data):
@@ -71,6 +72,15 @@ class Settings(BaseModel):
         self._debug_mode = value
         self._save()
 
+    @computed_field
+    def cheat_mode(self) -> bool:
+        return self._cheat_mode
+
+    @cheat_mode.setter
+    def cheat_mode(self, value: bool):
+        self._cheat_mode = value
+        self._save()
+
     def _save(self):
         if not self._is_busy:
             settings_dto = SettingsDTO(
@@ -78,6 +88,7 @@ class Settings(BaseModel):
                 clone_prefix=self._clone_prefix,
                 new_pal_prefix=self._new_pal_prefix,
                 debug_mode=self._debug_mode,
+                cheat_mode=self._cheat_mode,
             )
             update_settings(settings_dto)
 
@@ -90,6 +101,7 @@ class Settings(BaseModel):
             self._clone_prefix = db_settings.clone_prefix
             self._new_pal_prefix = db_settings.new_pal_prefix
             self._debug_mode = db_settings.debug_mode
+            self._cheat_mode = db_settings.cheat_mode
 
         except Exception as e:
             logger.warning(f"Error loading settings: {e}")
@@ -103,6 +115,7 @@ class Settings(BaseModel):
         self._clone_prefix = settings.clone_prefix
         self._new_pal_prefix = settings.new_pal_prefix
         self._debug_mode = settings.debug_mode
+        self._cheat_mode = settings.cheat_mode
 
         update_settings(settings)
         self._is_busy = False

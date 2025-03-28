@@ -10,7 +10,7 @@
 		type PalPresetConfig,
 		type PresetProfile
 	} from '$types';
-	import { ASSET_DATA_PATH, MAX_LEVEL } from '$lib/constants';
+	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { palsData, elementsData, expData, presetsData } from '$lib/data';
 	import { cn } from '$theme';
 	import { getAppState, getModalState, getToastState } from '$states';
@@ -33,6 +33,8 @@
 	const appState = getAppState();
 	const modal = getModalState();
 	const toast = getToastState();
+
+	const max_level = $derived(appState.settings.cheat_mode ? 255 : 60)
 
 	let palLevelProgressToNext: number = $state(0);
 	let palLevelProgressValue: number = $state(0);
@@ -79,14 +81,14 @@
 
 		if (event.ctrlKey) {
 			if (event.button === 0) {
-				newLevel = Math.min(pal.level + 5, MAX_LEVEL);
+				newLevel = Math.min(pal.level + 5, max_level);
 			} else if (event.button === 1) {
 				newLevel = 60
 			} else if (event.button === 2) {
-				newLevel = Math.min(pal.level + 10, MAX_LEVEL);
+				newLevel = Math.min(pal.level + 10, max_level);
 			}
 		} else {
-			newLevel = Math.min(pal.level + 1, MAX_LEVEL);
+			newLevel = Math.min(pal.level + 1, max_level);
 		}
 
 		if (newLevel === pal.level) return;

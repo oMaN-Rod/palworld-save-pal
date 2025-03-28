@@ -39,6 +39,17 @@
 			/>
 			<span>Debug Mode</span>
 		</div>
+			<div class="flex space-x-2">
+				<Switch
+					checked={settings.cheat_mode}
+					onCheckedChange={(mode) => {
+						settings.cheat_mode = mode.checked;
+					}}
+					name="cheat_mode"
+					label="Cheat Mode"
+				/>
+				<span>Cheat Mode</span>
+			</div>
 	</div>
 
 	<div class="mt-2 flex justify-end space-x-2">

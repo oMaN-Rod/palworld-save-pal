@@ -10,8 +10,8 @@
 
 	let appState = getAppState();
 
-	const max = $derived(appState.settings.cheat_mode ? 255: 100)
-    const markers = $derived(appState.settings.cheat_mode ? [50, 100, 150, 200]: [25, 50, 75])
+	const max = $derived(appState.settings.cheat_mode ? 255: 100);
+    const markers = $derived(appState.settings.cheat_mode ? [50, 100, 150, 200]: [25, 50, 75]);
 
 	const hp = $derived([pal.talent_hp ?? 0]);
 	const attack = $derived([pal.talent_shot ?? 0]);

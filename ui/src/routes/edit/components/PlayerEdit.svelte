@@ -2,7 +2,7 @@
 	import { ItemHeader, Progress } from '$components/ui';
 	import { getAppState, getToastState, getModalState } from '$states';
 	import { EntryState, type ItemContainerSlot, type ItemContainer } from '$types';
-	import { ASSET_DATA_PATH, MAX_LEVEL } from '$lib/constants';
+	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { itemsData, expData } from '$lib/data';
 	import { Tabs, Accordion } from '@skeletonlabs/skeleton-svelte';
 	import { Tooltip } from '$components/ui';
@@ -31,6 +31,8 @@
 	const appState = getAppState();
 	const toast = getToastState();
 	const modal = getModalState();
+
+	const max_level = $derived(appState.settings.cheat_mode ? 255 : 60)
 
 	const defaultItem = {
 		id: '',
@@ -87,7 +89,7 @@
 
 	let { levelProgressToNext, levelProgressValue, levelProgressMax } = $derived.by(() => {
 		if (appState.selectedPlayer) {
-			if (appState.selectedPlayer.level === MAX_LEVEL) {
+			if (appState.selectedPlayer.level === max_level) {
 				return { levelProgressToNext: 0, levelProgressValue: 0, levelProgressMax: 1 };
 			}
 			const nextExp = expData.expData[appState.selectedPlayer.level + 1];
@@ -390,14 +392,14 @@
 
 		if (event.ctrlKey) {
 			if (event.button === 0) {
-				newLevel = Math.min(appState.selectedPlayer.level + 5, MAX_LEVEL);
+				newLevel = Math.min(appState.selectedPlayer.level + 5, max_level);
 			} else if (event.button === 1) {
 				newLevel = 60
 			} else if (event.button === 2) {
-				newLevel = Math.min(appState.selectedPlayer.level + 10, MAX_LEVEL);
+				newLevel = Math.min(appState.selectedPlayer.level + 10, max_level);
 			}
 		} else {
-			newLevel = Math.min(appState.selectedPlayer.level + 1, MAX_LEVEL);
+			newLevel = Math.min(appState.selectedPlayer.level + 1, max_level);
 		}
 
 		if (newLevel === appState.selectedPlayer.level) return;

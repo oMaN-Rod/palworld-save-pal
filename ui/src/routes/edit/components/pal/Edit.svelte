@@ -18,7 +18,7 @@
 	import { Souls } from '$components';
 	import SkillPresets from './SkillPresets.svelte';
 	import { assetLoader, calculateFilters } from '$utils';
-	import { Accordion, Switch } from '@skeletonlabs/skeleton-svelte';
+	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 
 	const appState = getAppState();
 	const modal = getModalState();
@@ -29,8 +29,8 @@
 	let leftAccordionValue: string[] = $state(['active_skills']);
 	let rightAccordionValue: string[] = $state(['stats']);
 
-	let talentMax: number
-	let soulsMax: number
+	const max_talent = $derived(appState.settings.cheat_mode ? 255: 100);
+	const max_souls = $derived(appState.settings.cheat_mode ? 255: 20);
 
 	const palImage = $derived.by(() => {
 		if (appState.selectedPal) {
@@ -173,30 +173,20 @@
 	});
 
 	function handleMaxIVs() {
-		if (appState.settings.cheat_mode) {
-			talentMax = 255
-		} else {
-			talentMax = 100
-		}
 		if (appState.selectedPal) {
-			appState.selectedPal.talent_hp = talentMax;
-			appState.selectedPal.talent_shot = talentMax;
-			appState.selectedPal.talent_defense = talentMax;
+			appState.selectedPal.talent_hp = max_talent;
+			appState.selectedPal.talent_shot = max_talent;
+			appState.selectedPal.talent_defense = max_talent;
 			appState.selectedPal.state = EntryState.MODIFIED;
 		}
 	}
 
 	function handleMaxSouls() {
-		if (appState.settings.cheat_mode) {
-			soulsMax = 255
-		} else {
-			soulsMax = 20
-		}
 		if (appState.selectedPal) {
-			appState.selectedPal.rank_hp = soulsMax;
-			appState.selectedPal.rank_attack = soulsMax;
-			appState.selectedPal.rank_defense = soulsMax;
-			appState.selectedPal.rank_craftspeed = soulsMax;
+			appState.selectedPal.rank_hp = max_souls;
+			appState.selectedPal.rank_attack = max_souls;
+			appState.selectedPal.rank_defense = max_souls;
+			appState.selectedPal.rank_craftspeed = max_souls;
 			appState.selectedPal.state = EntryState.MODIFIED;
 		}
 	}
@@ -484,19 +474,6 @@
 						{/snippet}
 					</Accordion.Item>
 				</Accordion>
-			</div>
-			<div class="p-3">
-				<div class="flex space-x-2 items-center justify-end bg-100/4">
-					<span>Cheat Mode</span>
-					<Switch
-						checked={appState.settings.cheat_mode}
-						onCheckedChange={(mode) => {
-							appState.settings.cheat_mode = mode.checked;
-						}}
-						name="cheat_mode"
-						label="Cheat Mode"
-					/>
-				</div>
 			</div>
 		</div>
 	</div>
