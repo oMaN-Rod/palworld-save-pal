@@ -390,14 +390,14 @@
 
 		if (event.ctrlKey) {
 			if (event.button === 0) {
-				newLevel = Math.max(appState.selectedPlayer.level + 5, 1);
+				newLevel = Math.min(appState.selectedPlayer.level + 5, MAX_LEVEL);
 			} else if (event.button === 1) {
 				newLevel = 60
 			} else if (event.button === 2) {
-				newLevel = Math.max(appState.selectedPlayer.level + 10, 1);
+				newLevel = Math.min(appState.selectedPlayer.level + 10, MAX_LEVEL);
 			}
 		} else {
-			newLevel = Math.max(appState.selectedPlayer.level + 1, 1);
+			newLevel = Math.min(appState.selectedPlayer.level + 1, MAX_LEVEL);
 		}
 
 		if (newLevel === appState.selectedPlayer.level) return;

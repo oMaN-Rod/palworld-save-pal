@@ -92,45 +92,40 @@
 
 	const ignoreKeys = ['None', 'Empty', 'TreasureBox', 'PalEgg', 'CommonDropItem'];
 
-	const currentBaseStorageContainers = $derived.by(() => {
-		if (!currentBase) return null;
-		const [_, base] = currentBase;
-		return Object.values(base.storage_containers)
-			.filter(
-				(container) =>
-					container.slot_num !== 0 && !ignoreKeys.some((key) => container.key.includes(key))
-			)
-			.filter(
-				(container) => {
-					if (container.slots.length > 0 || buildingsData.buildings[container.key].type_a === 'Storage') {
-						if (selectedInventoryItem !== "" || inventorySearchQuery !== "") {	
-							return container.slots.some((s) => {
-								const itemData = itemsData.items[s.static_id];
-								return (
-									s.static_id.toLowerCase().includes(selectedInventoryItem.toLowerCase()) ||
-									(itemData &&
-										itemData.info.localized_name
-											.toLowerCase()
-											.includes(selectedInventoryItem.toLowerCase()))
-									);
-								}) &&
-								container.slots.some((s) => {
-									const itemData = itemsData.items[s.static_id];
-									return (
-										s.static_id.toLowerCase().includes(inventorySearchQuery.toLowerCase()) ||
-										(itemData &&
-											itemData.info.localized_name
-												.toLowerCase()
-												.includes(inventorySearchQuery.toLowerCase()))
-									);
-								})
-						}
-						return true;
-					}
-				}
-			)
-			.sort((a, b) => a.key.localeCompare(b.key));
-	});
+    const currentBaseStorageContainers = $derived.by(() => {
+        if (!currentBase) return null;
+        const [_, base] = currentBase;
+        return Object.values(base.storage_containers)
+            .filter(
+                (container) =>
+                    container.slot_num !== 0 && !ignoreKeys.some((key) => container.key.includes(key))
+            )
+            .filter(
+                (container) =>
+                    (container.slots.some((s) => {
+                        const itemData = itemsData.items[s.static_id];
+                        return (
+                            s.static_id.toLowerCase().includes(selectedInventoryItem.toLowerCase()) ||
+                            (itemData &&
+                                itemData.info.localized_name
+                                    .toLowerCase()
+                                    .includes(selectedInventoryItem.toLowerCase()))
+                        );
+                    }) &&
+                        container.slots.some((s) => {
+                            const itemData = itemsData.items[s.static_id];
+                            return (
+                                s.static_id.toLowerCase().includes(inventorySearchQuery.toLowerCase()) ||
+                                (itemData &&
+                                    itemData.info.localized_name
+                                        .toLowerCase()
+                                        .includes(inventorySearchQuery.toLowerCase()))
+                            );
+                        })) ||
+                    container.slots.every((s) => s.static_id === 'None')
+            )
+            .sort((a, b) => a.key.localeCompare(b.key));
+    });
 
 	type InventoryInfo = {
 		containers: Record<string, number>;

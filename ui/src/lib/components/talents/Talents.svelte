@@ -8,9 +8,10 @@
 		pal: Pal;
 	}>();
 
-	let appstate = getAppState();
-	let max: number = $state(0);
-	let markers: number[] = $state([]);
+	let appState = getAppState();
+
+	const max = $derived(appState.settings.cheat_mode ? 255: 100)
+    const markers = $derived(appState.settings.cheat_mode ? [50, 100, 150, 200]: [25, 50, 75])
 
 	const hp = $derived([pal.talent_hp ?? 0]);
 	const attack = $derived([pal.talent_shot ?? 0]);
@@ -30,20 +31,6 @@
 		pal.talent_defense = details.value[0];
 		pal.state = EntryState.MODIFIED;
 	}
-
-	async function updateSettings() {
-		if (appstate.settings.cheat_mode) {
-			max = 255;
-			markers = [50, 100, 150, 200];
-		} else {
-			max = 100;
-			markers = [25, 50, 75];
-		}
-	}
-
-	$effect(() => {
-		updateSettings();
-	});
 </script>
 
 <div class="grid grid-cols-[80px_1fr_auto] items-center gap-2">

@@ -79,14 +79,14 @@
 
 		if (event.ctrlKey) {
 			if (event.button === 0) {
-				newLevel = Math.max(pal.level + 5, 1);
+				newLevel = Math.min(pal.level + 5, MAX_LEVEL);
 			} else if (event.button === 1) {
 				newLevel = 60
 			} else if (event.button === 2) {
-				newLevel = Math.max(pal.level + 10, 1);
+				newLevel = Math.min(pal.level + 10, MAX_LEVEL);
 			}
 		} else {
-			newLevel = Math.max(pal.level + 1, 1);
+			newLevel = Math.min(pal.level + 1, MAX_LEVEL);
 		}
 
 		if (newLevel === pal.level) return;
