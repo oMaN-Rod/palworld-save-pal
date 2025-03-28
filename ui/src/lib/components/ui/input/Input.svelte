@@ -30,6 +30,7 @@
 		min = undefined,
 		max = undefined,
 		format = 'text',
+		onValueChange = (newValue: T) => {},
 		...additionalProps
 	} = $props<{
 		type?: InputType;
@@ -47,6 +48,7 @@
 		min?: number | undefined;
 		max?: number | undefined;
 		format?: FormatAs;
+		onValueChange?: (newValue: T) => void;
 		[key: string]: any;
 	}>();
 
@@ -62,6 +64,11 @@
 	const labelClass = $derived(cn('label', _labelClass));
 
 	const labelTextClass = $derived(cn('label-text', _labelTextClass));
+
+	function handleValueChange() {
+		value > max ? (value = max) : value < min ? (value = min) : value;
+		onValueChange(value);
+	}
 </script>
 
 <label class={labelClass}>
@@ -82,6 +89,6 @@
 		{autocomplete}
 		class={inputClass}
 		{...additionalProps}
-		onchange={() => (value > max ? (value = max) : value < min ? (value = min) : value)}
+		onchange={handleValueChange}
 	/>
 </label>
