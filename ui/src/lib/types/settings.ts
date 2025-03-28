@@ -29,4 +29,5 @@ export interface AppSettings {
 	clone_prefix?: string;
 	new_pal_prefix?: string;
 	debug_mode?: boolean;
+	cheat_mode?: boolean;
 }

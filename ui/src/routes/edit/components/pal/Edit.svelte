@@ -18,7 +18,7 @@
 	import { Souls } from '$components';
 	import SkillPresets from './SkillPresets.svelte';
 	import { assetLoader, calculateFilters } from '$utils';
-	import { Accordion } from '@skeletonlabs/skeleton-svelte';
+	import { Accordion, Switch } from '@skeletonlabs/skeleton-svelte';
 
 	const appState = getAppState();
 	const modal = getModalState();
@@ -28,6 +28,9 @@
 	let palLevelProgressMax: number = $state(1);
 	let leftAccordionValue: string[] = $state(['active_skills']);
 	let rightAccordionValue: string[] = $state(['stats']);
+
+	let talentMax: number
+	let soulsMax: number
 
 	const palImage = $derived.by(() => {
 		if (appState.selectedPal) {
@@ -170,20 +173,30 @@
 	});
 
 	function handleMaxIVs() {
+		if (appState.settings.cheat_mode) {
+			talentMax = 255
+		} else {
+			talentMax = 100
+		}
 		if (appState.selectedPal) {
-			appState.selectedPal.talent_hp = 100;
-			appState.selectedPal.talent_shot = 100;
-			appState.selectedPal.talent_defense = 100;
+			appState.selectedPal.talent_hp = talentMax;
+			appState.selectedPal.talent_shot = talentMax;
+			appState.selectedPal.talent_defense = talentMax;
 			appState.selectedPal.state = EntryState.MODIFIED;
 		}
 	}
 
 	function handleMaxSouls() {
+		if (appState.settings.cheat_mode) {
+			soulsMax = 255
+		} else {
+			soulsMax = 20
+		}
 		if (appState.selectedPal) {
-			appState.selectedPal.rank_hp = 20;
-			appState.selectedPal.rank_attack = 20;
-			appState.selectedPal.rank_defense = 20;
-			appState.selectedPal.rank_craftspeed = 20;
+			appState.selectedPal.rank_hp = soulsMax;
+			appState.selectedPal.rank_attack = soulsMax;
+			appState.selectedPal.rank_defense = soulsMax;
+			appState.selectedPal.rank_craftspeed = soulsMax;
 			appState.selectedPal.state = EntryState.MODIFIED;
 		}
 	}
@@ -472,6 +485,19 @@
 					</Accordion.Item>
 				</Accordion>
 			</div>
+			<div class="p-3">
+				<div class="flex space-x-2 items-center justify-end bg-100/4">
+					<span>Cheat Mode</span>
+					<Switch
+						checked={appState.settings.cheat_mode}
+						onCheckedChange={(mode) => {
+							appState.settings.cheat_mode = mode.checked;
+						}}
+						name="cheat_mode"
+						label="Cheat Mode"
+					/>
+				</div>
+			</div>
 		</div>
 	</div>
 {:else}
@@ -479,3 +505,4 @@
 		<h2 class="h2">Select a Player ➡️ Pal to edit 🚀</h2>
 	</div>
 {/if}
+

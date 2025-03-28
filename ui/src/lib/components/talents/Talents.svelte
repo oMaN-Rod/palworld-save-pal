@@ -2,10 +2,19 @@
 	import { Slider } from '@skeletonlabs/skeleton-svelte';
 	import { EntryState, type Pal } from '$types';
 	import { Input } from '$components/ui';
+	import { getAppState } from '$states';
 
-	let { pal = $bindable() } = $props<{
-		pal: Pal;
+	let { 
+		pal = $bindable(),
+		max = 0,
+		markers = [],
+	} = $props<{
+		pal: Pal,
+		max?: number,
+		markers?: number[]
 	}>();
+
+	let appstate = getAppState();
 
 	const hp = $derived([pal.talent_hp ?? 0]);
 	const attack = $derived([pal.talent_shot ?? 0]);
@@ -25,6 +34,20 @@
 		pal.talent_defense = details.value[0];
 		pal.state = EntryState.MODIFIED;
 	}
+
+	async function updateSettings() {
+		if (appstate.settings.cheat_mode) {
+			max = 255;
+			markers = [50, 100, 150, 200];
+		} else {
+			max = 100;
+			markers = [25, 50, 75];
+		}
+	}
+
+	$effect(() => {
+		updateSettings();
+	});
 </script>
 
 <div class="grid grid-cols-[80px_1fr_auto] items-center gap-2">
@@ -35,8 +58,8 @@
 		meterBg="bg-green-500"
 		thumbRingColor="ring-green-500"
 		min={0}
-		max={100}
-		markers={[25, 50, 75]}
+		max={max}
+		markers={markers}
 		step={1}
 		value={hp}
 		onValueChange={handleUpdateHp}
@@ -47,7 +70,7 @@
 		value={hp[0]}
 		onchange={handleUpdateHp}
 		min={0}
-		max={100}
+		max={max}
 	/>
 
 	<span>Attack</span>
@@ -56,8 +79,8 @@
 		meterBg="bg-red-500"
 		thumbRingColor="ring-red-500"
 		min={0}
-		max={100}
-		markers={[25, 50, 75]}
+		max={max}
+		markers={markers}
 		step={1}
 		value={attack}
 		onValueChange={handleUpdateAttack}
@@ -68,7 +91,7 @@
 		value={attack[0]}
 		onchange={handleUpdateAttack}
 		min={0}
-		max={100}
+		max={max}
 	/>
 
 	<span>Defense</span>
@@ -77,8 +100,8 @@
 		meterBg="bg-primary-500"
 		thumbRingColor="ring-primary-500"
 		min={0}
-		max={100}
-		markers={[25, 50, 75]}
+		max={max}
+		markers={markers}
 		step={1}
 		value={defense}
 		onValueChange={handleUpdateDefense}
@@ -89,6 +112,6 @@
 		value={defense[0]}
 		onchange={handleUpdateDefense}
 		min={0}
-		max={100}
+		max={max}
 	/>
 </div>
