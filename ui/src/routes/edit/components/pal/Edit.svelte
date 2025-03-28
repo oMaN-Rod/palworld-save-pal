@@ -29,8 +29,8 @@
 	let leftAccordionValue: string[] = $state(['active_skills']);
 	let rightAccordionValue: string[] = $state(['stats']);
 
-	const max_talent = $derived(appState.settings.cheat_mode ? 255: 100);
-	const max_souls = $derived(appState.settings.cheat_mode ? 255: 20);
+	const max_talent = $derived(appState.settings.cheat_mode ? 255 : 100);
+	const max_souls = $derived(appState.settings.cheat_mode ? 255 : 20);
 
 	const palImage = $derived.by(() => {
 		if (appState.selectedPal) {
@@ -235,7 +235,7 @@
 {/snippet}
 
 {#snippet activeSkillsBody()}
-	<div class="flex flex-col space-y-2">
+	<div class="flex max-h-36 flex-col space-y-2 overflow-y-auto">
 		{#each activeSkills as skill}
 			<ActiveSkillBadge {skill} onSkillUpdate={handleUpdateActiveSkill} />
 		{/each}
@@ -263,7 +263,7 @@
 {/snippet}
 
 {#snippet passiveSkillsBody()}
-	<div class="grid grid-cols-2 gap-2">
+	<div class="grid max-h-24 grid-cols-2 gap-2 overflow-y-auto">
 		{#each passiveSkills as skill}
 			<PassiveSkillBadge {skill} onSkillUpdate={handleUpdatePassiveSkill} />
 		{/each}
@@ -482,4 +482,3 @@
 		<h2 class="h2">Select a Player ➡️ Pal to edit 🚀</h2>
 	</div>
 {/if}
-
