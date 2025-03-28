@@ -8,6 +8,7 @@ class SettingsDTO(BaseModel):
     clone_prefix: str
     new_pal_prefix: str
     debug_mode: bool
+    cheat_mode: bool
 
 
 class SettingsModel(SQLModel, table=True):
@@ -17,3 +18,4 @@ class SettingsModel(SQLModel, table=True):
     clone_prefix: str = Field(default="©️")
     new_pal_prefix: str = Field(default="🆕")
     debug_mode: bool = Field(default=False)
+    cheat_mode: bool = Field(default=False)

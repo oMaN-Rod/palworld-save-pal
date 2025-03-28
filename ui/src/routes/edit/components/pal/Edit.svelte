@@ -29,6 +29,9 @@
 	let leftAccordionValue: string[] = $state(['active_skills']);
 	let rightAccordionValue: string[] = $state(['stats']);
 
+	const max_talent = $derived(appState.settings.cheat_mode ? 255 : 100);
+	const max_souls = $derived(appState.settings.cheat_mode ? 255 : 20);
+
 	const palImage = $derived.by(() => {
 		if (appState.selectedPal) {
 			const { character_key } = appState.selectedPal;
@@ -171,19 +174,19 @@
 
 	function handleMaxIVs() {
 		if (appState.selectedPal) {
-			appState.selectedPal.talent_hp = 100;
-			appState.selectedPal.talent_shot = 100;
-			appState.selectedPal.talent_defense = 100;
+			appState.selectedPal.talent_hp = max_talent;
+			appState.selectedPal.talent_shot = max_talent;
+			appState.selectedPal.talent_defense = max_talent;
 			appState.selectedPal.state = EntryState.MODIFIED;
 		}
 	}
 
 	function handleMaxSouls() {
 		if (appState.selectedPal) {
-			appState.selectedPal.rank_hp = 20;
-			appState.selectedPal.rank_attack = 20;
-			appState.selectedPal.rank_defense = 20;
-			appState.selectedPal.rank_craftspeed = 20;
+			appState.selectedPal.rank_hp = max_souls;
+			appState.selectedPal.rank_attack = max_souls;
+			appState.selectedPal.rank_defense = max_souls;
+			appState.selectedPal.rank_craftspeed = max_souls;
 			appState.selectedPal.state = EntryState.MODIFIED;
 		}
 	}
@@ -232,7 +235,7 @@
 {/snippet}
 
 {#snippet activeSkillsBody()}
-	<div class="flex flex-col space-y-2">
+	<div class="flex max-h-36 flex-col space-y-2 overflow-y-auto">
 		{#each activeSkills as skill}
 			<ActiveSkillBadge {skill} onSkillUpdate={handleUpdateActiveSkill} />
 		{/each}
@@ -260,7 +263,7 @@
 {/snippet}
 
 {#snippet passiveSkillsBody()}
-	<div class="grid grid-cols-2 gap-2">
+	<div class="grid max-h-24 grid-cols-2 gap-2 overflow-y-auto">
 		{#each passiveSkills as skill}
 			<PassiveSkillBadge {skill} onSkillUpdate={handleUpdatePassiveSkill} />
 		{/each}

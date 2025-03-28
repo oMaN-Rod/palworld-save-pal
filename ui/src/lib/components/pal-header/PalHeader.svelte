@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { PalPresetSelectModal, PresetConfigModal, TextInputModal } from '$components';
-	import { CornerDotButton, Progress, Tooltip } from '$components/ui';
+	import { CornerDotButton, Progress, Tooltip, Input } from '$components/ui';
 	import {
 		defaultPresetConfig,
 		type ElementType,
@@ -10,7 +10,7 @@
 		type PalPresetConfig,
 		type PresetProfile
 	} from '$types';
-	import { ASSET_DATA_PATH, MAX_LEVEL } from '$lib/constants';
+	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { palsData, elementsData, expData, presetsData } from '$lib/data';
 	import { cn } from '$theme';
 	import { getAppState, getModalState, getToastState } from '$states';
@@ -33,6 +33,9 @@
 	const appState = getAppState();
 	const modal = getModalState();
 	const toast = getToastState();
+
+	const max_level = $derived(appState.settings.cheat_mode ? 255 : 60);
+	const max_rank = $derived(appState.settings.cheat_mode ? 255 : 5);
 
 	let palLevelProgressToNext: number = $state(0);
 	let palLevelProgressValue: number = $state(0);
@@ -75,18 +78,18 @@
 	async function handleLevelIncrement(event: MouseEvent) {
 		if (!pal || !appState.selectedPlayer || !appState.selectedPlayer.pals) return;
 
-		let newLevel = pal.level
+		let newLevel = pal.level;
 
 		if (event.ctrlKey) {
 			if (event.button === 0) {
-				newLevel = Math.max(pal.level + 5, 1);
+				newLevel = Math.min(pal.level + 5, max_level);
 			} else if (event.button === 1) {
-				newLevel = 60
+				newLevel = max_level;
 			} else if (event.button === 2) {
-				newLevel = Math.max(pal.level + 10, 1);
+				newLevel = Math.min(pal.level + 10, max_level);
 			}
 		} else {
-			newLevel = Math.max(pal.level + 1, 1);
+			newLevel = Math.min(pal.level + 1, max_level);
 		}
 
 		if (newLevel === pal.level) return;
@@ -103,13 +106,13 @@
 	async function handleLevelDecrement(event: MouseEvent) {
 		if (!pal || !appState.selectedPlayer || !appState.selectedPlayer.pals) return;
 
-		let newLevel = pal.level
+		let newLevel = pal.level;
 
 		if (event.ctrlKey) {
 			if (event.button === 0) {
 				newLevel = Math.max(pal.level - 5, 1);
 			} else if (event.button === 1) {
-				newLevel = 1
+				newLevel = 1;
 			} else if (event.button === 2) {
 				newLevel = Math.max(pal.level - 10, 1);
 			}
@@ -216,16 +219,15 @@
 			if (key === 'character_id') continue;
 			if (key === 'lock' && value) {
 				pal.character_id = presetProfile.pal_preset?.character_id as string;
-			} 
- 			if (key === 'is_boss' && value && pal.is_lucky) {
- 				pal.is_boss = true
- 				pal.is_lucky = false
- 			}
- 			if (key === 'is_lucky' && value && pal.is_boss) {
- 				pal.is_boss = false
- 				pal.is_lucky = true
- 			}
- 			else if (value !== null) {
+			}
+			if (key === 'is_boss' && value && pal.is_lucky) {
+				pal.is_boss = true;
+				pal.is_lucky = false;
+			}
+			if (key === 'is_lucky' && value && pal.is_boss) {
+				pal.is_boss = false;
+				pal.is_lucky = true;
+			} else if (value !== null) {
 				(pal as Record<string, any>)[key] = value;
 			}
 		}
@@ -272,12 +274,9 @@
 		await presetsData.addPresetProfile(newPreset);
 	}
 
-	async function handleDebugPal() {
-		// @ts-ignore
-		await modal.showModal(DebugModal, {
-			title: 'Pal Debug',
-			json: { content: { text: JSON.stringify(pal, null, 2) } }
-		});
+	async function handleInputUpdate(value: number) {
+		pal.rank = value;
+		pal.state = EntryState.MODIFIED;
 	}
 </script>
 
@@ -286,53 +285,65 @@
 		class="border-l-surface-600 preset-filled-surface-100-900 flex flex-row rounded-none border-l-2 p-4"
 	>
 		<div class="mr-4 flex flex-col items-center justify-center rounded-none">
-			<Rating
-				value={palRank}
-				count={4}
-				itemClasses="text-gray"
-				onValueChange={(e) => {
-					pal.rank = e.value + 1;
-					pal.state = EntryState.MODIFIED;
-				}}
-			/>
+			{#if appState.settings.cheat_mode}
+				<Input
+					value={pal.rank}
+					placeholder="Rank"
+					type="number"
+					itemClasses="text-gray"
+					min={0}
+					max={max_rank}
+					onValueChange={handleInputUpdate}
+				/>
+			{:else}
+				<Rating
+					value={palRank}
+					count={4}
+					itemClasses="text-gray"
+					onValueChange={(e) => {
+						pal.rank = e.value + 1;
+						pal.state = EntryState.MODIFIED;
+					}}
+				/>
+			{/if}
 			<div class="flex flex-row px-2">
 				{#if showActions}
-					<Tooltip position='bottom'>
-						<button 
+					<Tooltip position="bottom">
+						<button
 							oncontextmenu={(event) => event.preventDefault()}
-							class="mr-4 hover:bg-secondary-500/25"
+							class="hover:bg-secondary-500/25 mr-4"
 							onmousedown={(event) => handleLevelDecrement(event)}
 						>
 							<Minus class="text-primary-500" />
 						</button>
 						{#snippet popup()}
-						<div class="flex items-center space-x-2">
-							<div class="h-6 w-6">
-								<img src={staticIcons.ctrlIcon} alt="Control" class="h-full w-full" />
+							<div class="flex items-center space-x-2">
+								<div class="h-6 w-6">
+									<img src={staticIcons.ctrlIcon} alt="Control" class="h-full w-full" />
+								</div>
+								<div class="h-6 w-6">
+									<img src={staticIcons.leftClickIcon} alt="Left Click" class="h-full w-full" />
+								</div>
+								<span class="text-xs font-bold">-5</span>
 							</div>
-							<div class="h-6 w-6">
-								<img src={staticIcons.leftClickIcon} alt="Left Click" class="h-full w-full" />
+							<div class="flex items-center space-x-2">
+								<div class="h-6 w-6">
+									<img src={staticIcons.ctrlIcon} alt="Control" class="h-full w-full" />
+								</div>
+								<div class="h-6 w-6">
+									<img src={staticIcons.rightClickIcon} alt="Right Click" class="h-full w-full" />
+								</div>
+								<span class="text-xs font-bold">-10</span>
 							</div>
-							<span class="text-xs font-bold">-5</span>
-						</div>
-						<div class="flex items-center space-x-2">
-							<div class="h-6 w-6">
-								<img src={staticIcons.ctrlIcon} alt="Control" class="h-full w-full" />
+							<div class="flex items-center space-x-2">
+								<div class="h-6 w-6">
+									<img src={staticIcons.ctrlIcon} alt="Right Click" class="h-full w-full" />
+								</div>
+								<div class="h-6 w-6">
+									<img src={staticIcons.middleClickIcon} alt="Middle Click" class="h-full w-full" />
+								</div>
+								<span class="text-xs font-bold">Level 1</span>
 							</div>
-							<div class="h-6 w-6">
-								<img src={staticIcons.rightClickIcon} alt="Right Click" class="h-full w-full" />
-							</div>
-							<span class="text-xs font-bold">-10</span>
-						</div>
-						<div class="flex items-center space-x-2">
-							<div class="h-6 w-6">
-								<img src={staticIcons.ctrlIcon} alt="Right Click" class="h-full w-full" />
-							</div>
-							<div class="h-6 w-6">
-								<img src={staticIcons.middleClickIcon} alt="Middle Click" class="h-full w-full" />
-							</div>
-							<span class="text-xs font-bold">Level 1</span>
-						</div>
 						{/snippet}
 					</Tooltip>
 				{/if}
@@ -348,42 +359,42 @@
 				</Tooltip>
 
 				{#if showActions}
-					<Tooltip position='bottom'>
+					<Tooltip position="bottom">
 						<button
 							oncontextmenu={(event) => event.preventDefault()}
-							class="ml-4 hover:bg-secondary-500/25"
+							class="hover:bg-secondary-500/25 ml-4"
 							onmousedown={(event) => handleLevelIncrement(event)}
 						>
 							<Plus class="text-primary-500" />
 						</button>
 						{#snippet popup()}
-						<div class="flex items-center space-x-2">
-							<div class="h-6 w-6">
-								<img src={staticIcons.ctrlIcon} alt="Control" class="h-full w-full" />
+							<div class="flex items-center space-x-2">
+								<div class="h-6 w-6">
+									<img src={staticIcons.ctrlIcon} alt="Control" class="h-full w-full" />
+								</div>
+								<div class="h-6 w-6">
+									<img src={staticIcons.leftClickIcon} alt="Left Click" class="h-full w-full" />
+								</div>
+								<span class="text-xs font-bold">+5</span>
 							</div>
-							<div class="h-6 w-6">
-								<img src={staticIcons.leftClickIcon} alt="Left Click" class="h-full w-full" />
+							<div class="flex items-center space-x-2">
+								<div class="h-6 w-6">
+									<img src={staticIcons.ctrlIcon} alt="Control" class="h-full w-full" />
+								</div>
+								<div class="h-6 w-6">
+									<img src={staticIcons.rightClickIcon} alt="Right Click" class="h-full w-full" />
+								</div>
+								<span class="text-xs font-bold">+10</span>
 							</div>
-							<span class="text-xs font-bold">+5</span>
-						</div>
-						<div class="flex items-center space-x-2">
-							<div class="h-6 w-6">
-								<img src={staticIcons.ctrlIcon} alt="Control" class="h-full w-full" />
+							<div class="flex items-center space-x-2">
+								<div class="h-6 w-6">
+									<img src={staticIcons.ctrlIcon} alt="Right Click" class="h-full w-full" />
+								</div>
+								<div class="h-6 w-6">
+									<img src={staticIcons.middleClickIcon} alt="Middle Click" class="h-full w-full" />
+								</div>
+								<span class="text-xs font-bold">Level {max_level}</span>
 							</div>
-							<div class="h-6 w-6">
-								<img src={staticIcons.rightClickIcon} alt="Right Click" class="h-full w-full" />
-							</div>
-							<span class="text-xs font-bold">+10</span>
-						</div>
-						<div class="flex items-center space-x-2">
-							<div class="h-6 w-6">
-								<img src={staticIcons.ctrlIcon} alt="Right Click" class="h-full w-full" />
-							</div>
-							<div class="h-6 w-6">
-								<img src={staticIcons.middleClickIcon} alt="Middle Click" class="h-full w-full" />
-							</div>
-							<span class="text-xs font-bold">Level 60</span>
-						</div>
 						{/snippet}
 					</Tooltip>
 				{/if}
