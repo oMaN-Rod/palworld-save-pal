@@ -4,17 +4,13 @@
 	import { Input } from '$components/ui';
 	import { getAppState } from '$states';
 
-	let { 
-		pal = $bindable(),
-		max = 0,
-		markers = [],
-	} = $props<{
-		pal: Pal,
-		max?: number,
-		markers?: number[]
+	let { pal = $bindable() } = $props<{
+		pal: Pal;
 	}>();
 
 	let appstate = getAppState();
+	let max: number = $state(0);
+	let markers: number[] = $state([]);
 
 	const hp = $derived([pal.rank_hp ?? 0]);
 	const attack = $derived([pal.rank_attack ?? 0]);

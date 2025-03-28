@@ -95,7 +95,6 @@
 	const currentBaseStorageContainers = $derived.by(() => {
 		if (!currentBase) return null;
 		const [_, base] = currentBase;
-
 		return Object.values(base.storage_containers)
 			.filter(
 				(container) =>
