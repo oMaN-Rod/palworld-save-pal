@@ -36,11 +36,8 @@
 	}
 </script>
 
-<div class="flex gap-2 rounded-sm p-4">
-	<span class="font-bold">Passive Skills:</span>
-	<span class="border-r-surface-600 border-r pr-2">
-		{preset.skills.length}
-	</span>
+<div class="grid grid-cols-[20%_1fr] gap-2 rounded-sm p-4">
+	<span class="border-r-surface-600 border-r pr-2 font-bold">{preset.name}</span>
 	<div class="ml-4 mt-1 grid grid-cols-2 gap-2">
 		{#each preset.skills as skillId}
 			{@const skill = passiveSkillsData.passiveSkills[skillId]}

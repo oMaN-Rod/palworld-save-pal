@@ -25,7 +25,7 @@
 </script>
 
 <div class="space-y-4">
-	<h5 class="h5 border-b-surface-600 mb-2 border-b-2 py-4">Containers</h5>
+	<h5 class="h5 border-b-surface-600 mb-2 border-b-2 py-4">{preset.name}</h5>
 	<div class="">
 		<Accordion collapsible multiple>
 			{#if preset.common_container && preset.common_container.length > 0}

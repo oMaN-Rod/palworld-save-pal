@@ -26,6 +26,11 @@
 	let searchQuery = $state('');
 	let selectedPresets: ExtendedPresetProfile[] = $state([]);
 
+	const presetsClass = $derived(
+		// @ts-ignore
+		activeTab === 'active' || activeTab === 'passive' ? 'grid grid-cols-2' : 'flex flex-col'
+	);
+
 	const palPresets = $derived(
 		Object.values(presetsData.presetProfiles)
 			.filter((p) => p.type === 'pal_preset')
@@ -182,7 +187,7 @@
 
 {#snippet presetContent(index: number)}
 	<div class="bg-surface-900 rounded-sm p-4">
-		<h3 class="h3 mb-4">{selectedPresets[index].name}</h3>
+		<!-- <h3 class="h3 mb-4">{selectedPresets[index].name}</h3> -->
 
 		{#if activeTab === 'pal' && selectedPresets[index].pal_preset}
 			<PalPreset bind:preset={selectedPresets[index]} />
@@ -276,7 +281,7 @@
 				{#if selectedPresets.length === 1}
 					{@render presetContent(0)}
 				{:else if selectedPresets.length > 1}
-					<div class="flex flex-col space-y-2">
+					<div class="{presetsClass} gap-2">
 						{#each selectedPresets as _, index}
 							{@render presetContent(index)}
 						{/each}
