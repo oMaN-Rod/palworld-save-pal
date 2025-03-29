@@ -39,10 +39,6 @@
     "localized_name": "Bolle velenose",
     "description": "Accumula energia nel suo corpo per poi spargere bolle velenose in ogni direzione."
   },
-  "EPalWazaID::ChaosLaser": {
-    "localized_name": "Laser caotico",
-    "description": "it_Text"
-  },
   "EPalWazaID::ChargeCanon": {
     "localized_name": "Cannone a carica",
     "description": "Scaglia un colpo di energia draconica contro il nemico. Al momento dell'impatto, il colpo esplode travolgendo una vasta area."
@@ -167,6 +163,10 @@
     "localized_name": "Tornado floreale",
     "description": "Genera a destra e sinistra dei tornado che travolgono il nemico."
   },
+  "EPalWazaID::GravityShot": {
+    "localized_name": "Colpo oscuro",
+    "description": "Spara un proiettile di energia oscura che vola verso il nemico incrementando gradualmente l'accelerazione."
+  },
   "EPalWazaID::HolyBlast": {
     "localized_name": "Esplosione sacra",
     "description": "Causa una grande esplosione di luce sul nemico e sulla zona circostante."
@@ -268,7 +268,7 @@
     "description": "Scaglia innumerevoli lame d'aria che volano verso il nemico."
   },
   "EPalWazaID::Railbolt": {
-    "localized_name": "Railbolt",
+    "localized_name": "Cannone elettrico",
     "description": "Si carica al massimo di elettricità per poi scagliare contemporaneamente numerose scariche elettriche contro il nemico."
   },
   "EPalWazaID::RangeThunder": {
@@ -371,6 +371,10 @@
     "localized_name": "Pioggia di fulmini",
     "description": "Richiama la tempesta. Poco dopo, iniziano a piovere fulmini a catinelle."
   },
+  "EPalWazaID::ThunderSpear": {
+    "localized_name": "Lancia fulminante",
+    "description": "Scaglia una lancia elettrica che vola ad alta velocità in linea retta contro il nemico."
+  },
   "EPalWazaID::ThunderStorm": {
     "localized_name": "Tempesta fulminante",
     "description": "Genera un enorme tornado elettrico, che avanza lentamente verso il nemico."
@@ -386,10 +390,6 @@
   "EPalWazaID::TriSpark": {
     "localized_name": "Tripla scintilla",
     "description": "Scaglia allo stesso tempo una sfera elettrica ad alta velocità in linea retta e sfere più lente che inseguono il nemico."
-  },
-  "EPalWazaID::TripleCannon": {
-    "localized_name": "Cannone triplo",
-    "description": "it_Text"
   },
   "EPalWazaID::Unique_Alpaca_Tackle": {
     "localized_name": "Schianto soffice",

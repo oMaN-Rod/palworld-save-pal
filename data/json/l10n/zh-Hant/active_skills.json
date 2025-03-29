@@ -39,10 +39,6 @@
     "localized_name": "毒雨",
     "description": "使出渾身力量 向各個方向噴灑毒球。"
   },
-  "EPalWazaID::ChaosLaser": {
-    "localized_name": "混沌射線",
-    "description": "zh-Hant Text"
-  },
   "EPalWazaID::ChargeCanon": {
     "localized_name": "龍息炮",
     "description": "向敵人發射積蓄著龍屬性力量的能量彈。 能量彈在著彈時將引發大範圍爆炸。"
@@ -167,6 +163,10 @@
     "localized_name": "綠野颶風",
     "description": "在左右兩側製造出龍捲風， 朝敵人步步進逼。"
   },
+  "EPalWazaID::GravityShot": {
+    "localized_name": "暗能彈",
+    "description": "發射逐漸加速的黑暗能量彈。"
+  },
   "EPalWazaID::HolyBlast": {
     "localized_name": "光擊陣",
     "description": "在敵人腳下和四周引發大範圍的光柱爆炸。"
@@ -268,7 +268,7 @@
     "description": "瞄準敵人射出無數風刃。"
   },
   "EPalWazaID::Railbolt": {
-    "localized_name": "Railbolt",
+    "localized_name": "並聯雷光",
     "description": "積蓄雷電的力量到極限， 朝敵人同時發射多道強力雷擊。"
   },
   "EPalWazaID::RangeThunder": {
@@ -371,6 +371,10 @@
     "localized_name": "廣域雷擊",
     "description": "召喚雷電， 並於一段時間後降下大量落雷。"
   },
+  "EPalWazaID::ThunderSpear": {
+    "localized_name": "雷矛",
+    "description": "向敵人發射高速直線飛行的雷槍。"
+  },
   "EPalWazaID::ThunderStorm": {
     "localized_name": "雷霆颶風",
     "description": "召喚巨大的雷屬性龍捲風。 龍捲風將追蹤敵人緩慢移動。"
@@ -386,10 +390,6 @@
   "EPalWazaID::TriSpark": {
     "localized_name": "三相火花",
     "description": "同時發射直線飛行的高速雷球， 和追蹤敵人的慢速雷球。"
-  },
-  "EPalWazaID::TripleCannon": {
-    "localized_name": "三重龍息彈",
-    "description": "zh-Hant Text"
   },
   "EPalWazaID::Unique_Alpaca_Tackle": {
     "localized_name": "絨毛衝撞",

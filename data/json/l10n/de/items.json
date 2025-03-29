@@ -345,7 +345,7 @@
   },
   "AutoMealPouch_Tier5": {
     "localized_name": "Gigantischer Futterbeutel",
-    "description": "Ein extragroßer Beutel, in dem man Futter mitnehmen kann. Schaltet bis zu 5 Autofütterungsslots frei. Bei Hunger wird das im Slot ausgerüstete Essen automatisch verbraucht."
+    "description": "Ein riesengroßer Beutel, in dem man Futter mitnehmen kann. Schaltet bis zu 5 Autofütterungsslots frei. Bei Hunger wird das im Slot ausgerüstete Essen automatisch verbraucht."
   },
   "Axe_Steal": {
     "localized_name": "Paluminium-Axt",
@@ -413,7 +413,7 @@
   },
   "BakedMeat_LazyCatfish": {
     "localized_name": "Mariniertes Dumud",
-    "description": "Mit einer traditionellen Sauce gegrillter Fisch, dessen Köstlichkeit Körper und Seele revitalisiert. Perfekt für müde Paltrainer."
+    "description": "Mit einer traditionellen Sauce gegrillter Fisch, dessen Köstlichkeit Körper und Seele revitalisiert. Perfekt für müde Pal Tamer."
   },
   "BakedMeat_SakuraSaurus": {
     "localized_name": "Broncherry-Bratkeule",
@@ -428,7 +428,7 @@
     "description": "Hat im Vergleich zu rohen Pilzen einen höheren Nährwert. Ist ungewöhnlich sättigend."
   },
   "Baked_Berries": {
-    "localized_name": "Gegrillte Beere",
+    "localized_name": "Gegrillte Beeren",
     "description": "Haben im Vergleich zur rohen Variante einen höheren Nährwert. Sind für Beeren ungewöhnlich sättigend."
   },
   "Bat": {
@@ -493,35 +493,35 @@
   },
   "Blueprint_BowGun_Fire_2": {
     "localized_name": "Feuerpfeil-Armbrust: Bauplan 1",
-    "description": "Schaltet das Rezept für „BowGun Fire (Uncommon)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 01“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „BowGun Fire (Uncommon)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 01“ gefertigt werden."
   },
   "Blueprint_BowGun_Fire_3": {
     "localized_name": "Feuerpfeil-Armbrust: Bauplan 2",
-    "description": "Schaltet das Rezept für „BowGun Fire (Rare)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 01“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „BowGun Fire (Rare)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 01“ gefertigt werden."
   },
   "Blueprint_BowGun_Fire_4": {
     "localized_name": "Feuerpfeil-Armbrust: Bauplan 3",
-    "description": "Schaltet das Rezept für „BowGun Fire (Epic)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 01“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „BowGun Fire (Epic)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 01“ gefertigt werden."
   },
   "Blueprint_BowGun_Fire_5": {
     "localized_name": "Feuerpfeil-Armbrust: Bauplan 4",
-    "description": "Schaltet das Rezept für „BowGun Fire (Legendary)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 01“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „BowGun Fire (Legendary)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 01“ gefertigt werden."
   },
   "Blueprint_BowGun_Poison_2": {
     "localized_name": "Giftpfeil-Armbrust: Bauplan 1",
-    "description": "Schaltet das Rezept für „BowGun Poison (Uncommon)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 01“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „BowGun Poison (Uncommon)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 01“ gefertigt werden."
   },
   "Blueprint_BowGun_Poison_3": {
     "localized_name": "Giftpfeil-Armbrust: Bauplan 2",
-    "description": "Schaltet das Rezept für „BowGun Poison (Rare)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 01“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „BowGun Poison (Rare)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 01“ gefertigt werden."
   },
   "Blueprint_BowGun_Poison_4": {
     "localized_name": "Giftpfeil-Armbrust: Bauplan 3",
-    "description": "Schaltet das Rezept für „BowGun Poison (Epic)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 01“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „BowGun Poison (Epic)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 01“ gefertigt werden."
   },
   "Blueprint_BowGun_Poison_5": {
     "localized_name": "Giftpfeil-Armbrust: Bauplan 4",
-    "description": "Schaltet das Rezept für „BowGun Poison (Legendary)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 01“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „BowGun Poison (Legendary)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 01“ gefertigt werden."
   },
   "Blueprint_ClothArmorCold_2": {
     "localized_name": "Arktische Tracht: Bauplan 1",
@@ -573,19 +573,19 @@
   },
   "Blueprint_CompoundBow_2": {
     "localized_name": "Compoundbogen: Bauplan 1",
-    "description": "Schaltet das Rezept für „Compoundbogen (Uncommon)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Compoundbogen (Uncommon)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 02“ gefertigt werden."
   },
   "Blueprint_CompoundBow_3": {
     "localized_name": "Compoundbogen: Bauplan 2",
-    "description": "Schaltet das Rezept für „Compoundbogen (Rare)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Compoundbogen (Rare)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 02“ gefertigt werden."
   },
   "Blueprint_CompoundBow_4": {
     "localized_name": "Compoundbogen: Bauplan 3",
-    "description": "Schaltet das Rezept für „Compoundbogen (Epic)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Compoundbogen (Epic)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 02“ gefertigt werden."
   },
   "Blueprint_CompoundBow_5": {
     "localized_name": "Compoundbogen: Bauplan 4",
-    "description": "Schaltet das Rezept für „Compoundbogen (Legendary)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Compoundbogen (Legendary)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 02“ gefertigt werden."
   },
   "Blueprint_CopperArmorCold_2": {
     "localized_name": "Kälteresistente Metallrüstung: Bauplan 1",
@@ -669,35 +669,35 @@
   },
   "Blueprint_EnergyRocketLauncher_2": {
     "localized_name": "Plasmakanone: Bauplan 1",
-    "description": "Schaltet das Rezept für „Plasmakanone (Uncommon)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Plasmakanone (Uncommon)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
   },
   "Blueprint_EnergyRocketLauncher_3": {
     "localized_name": "Plasmakanone: Bauplan 2",
-    "description": "Schaltet das Rezept für „Plasmakanone (Rare)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Plasmakanone (Rare)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
   },
   "Blueprint_EnergyRocketLauncher_4": {
     "localized_name": "Plasmakanone: Bauplan 3",
-    "description": "Schaltet das Rezept für „Plasmakanone (Epic)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Plasmakanone (Epic)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
   },
   "Blueprint_EnergyRocketLauncher_5": {
     "localized_name": "Plasmakanone: Bauplan 4",
-    "description": "Schaltet das Rezept für „Plasmakanone (Legendary)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Plasmakanone (Legendary)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
   },
   "Blueprint_FlameThrower_2": {
     "localized_name": "Flammenwerfer: Bauplan 1",
-    "description": "Schaltet beim Tragen die Anleitung für „FlameThrower (Uncommon)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Flammenwerfer (Uncommon)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
   },
   "Blueprint_FlameThrower_3": {
     "localized_name": "Flammenwerfer: Bauplan 2",
-    "description": "Schaltet beim Tragen die Anleitung für „FlameThrower (Rare)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Flammenwerfer (Rare)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
   },
   "Blueprint_FlameThrower_4": {
     "localized_name": "Flammenwerfer: Bauplan 3",
-    "description": "Schaltet beim Tragen die Anleitung für „FlameThrower (Epic)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Flammenwerfer (Epic)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
   },
   "Blueprint_FlameThrower_5": {
     "localized_name": "Flammenwerfer: Bauplan 4",
-    "description": "Schaltet beim Tragen die Anleitung für „FlameThrower (Legendary)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Flammenwerfer (Legendary)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
   },
   "Blueprint_FurArmorCold_2": {
     "localized_name": "Kälteresistente Fellrüstung: Bauplan 1",
@@ -1001,7 +1001,7 @@
   },
   "Blueprint_Head009_4": {
     "localized_name": "Tropenhelm: Bauplan 4",
-    "description": "Schaltet das Rezept für „Head009 4 (Epic)“ frei. Der Gegenstand kann fortan mithilfe von „Primitive Werkbank“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Head009 4 (Epic)“ frei. Der Gegenstand kann fortan mithilfe von „Primitive Werkbank“ gefertigt werden."
   },
   "Blueprint_Head009_5": {
     "localized_name": "Plan für den Entdeckerhut 5",
@@ -1333,19 +1333,19 @@
   },
   "Blueprint_LaserGatlingGun_2": {
     "localized_name": "Laser-Gatlinggewehr: Bauplan 1",
-    "description": "Schaltet das Rezept für „Laser-Gatlinggewehr (Uncommon)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 01“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Laser-Gatlinggewehr (Uncommon)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 01“ gefertigt werden."
   },
   "Blueprint_LaserGatlingGun_3": {
     "localized_name": "Laser-Gatlinggewehr: Bauplan 2",
-    "description": "Schaltet das Rezept für „Laser-Gatlinggewehr (Rare)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Laser-Gatlinggewehr (Rare)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
   },
   "Blueprint_LaserGatlingGun_4": {
     "localized_name": "Laser-Gatlinggewehr: Bauplan 3",
-    "description": "Schaltet das Rezept für „Laser-Gatlinggewehr (Epic)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Laser-Gatlinggewehr (Epic)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
   },
   "Blueprint_LaserGatlingGun_5": {
     "localized_name": "Laser-Gatlinggewehr: Bauplan 4",
-    "description": "Schaltet das Rezept für „Laser-Gatlinggewehr (Legendary)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Laser-Gatlinggewehr (Legendary)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
   },
   "Blueprint_LaserRifle_2": {
     "localized_name": "Lasergewehr: Bauplan 1",
@@ -1381,19 +1381,19 @@
   },
   "Blueprint_MakeshiftAssaultRifle_2": {
     "localized_name": "Schrottreifes Sturmgewehr: Bauplan 1",
-    "description": "Schaltet das Rezept für „Schrottreifes Sturmgewehr (Uncommon)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 01“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Schrottreifes Sturmgewehr (Uncommon)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 01“ gefertigt werden."
   },
   "Blueprint_MakeshiftAssaultRifle_3": {
     "localized_name": "Schrottreifes Sturmgewehr: Bauplan 2",
-    "description": "Schaltet das Rezept für „Schrottreifes Sturmgewehr (Rare)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 01“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Schrottreifes Sturmgewehr (Rare)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 01“ gefertigt werden."
   },
   "Blueprint_MakeshiftAssaultRifle_4": {
     "localized_name": "Schrottreifes Sturmgewehr: Bauplan 3",
-    "description": "Schaltet das Rezept für „Schrottreifes Sturmgewehr (Epic)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 01“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Schrottreifes Sturmgewehr (Epic)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 01“ gefertigt werden."
   },
   "Blueprint_MakeshiftAssaultRifle_5": {
     "localized_name": "Schrottreifes Sturmgewehr: Bauplan 4",
-    "description": "Schaltet das Rezept für „Schrottreifes Sturmgewehr (Legendary)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 01“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Schrottreifes Sturmgewehr (Legendary)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 01“ gefertigt werden."
   },
   "Blueprint_MakeshiftHandgun_2": {
     "localized_name": "Alte Pistole: Bauplan 1",
@@ -1413,35 +1413,35 @@
   },
   "Blueprint_MakeshiftShotgun_2": {
     "localized_name": "Schrottreife Flinte: Bauplan 1",
-    "description": "Schaltet das Rezept für „Schrottreife Flinte (Uncommon)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 01“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Schrottreife Flinte (Uncommon)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 01“ gefertigt werden."
   },
   "Blueprint_MakeshiftShotgun_3": {
     "localized_name": "Schrottreife Flinte: Bauplan 2",
-    "description": "Schaltet das Rezept für „Schrottreife Flinte (Rare)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 01“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Schrottreife Flinte (Rare)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 01“ gefertigt werden."
   },
   "Blueprint_MakeshiftShotgun_4": {
     "localized_name": "Schrottreife Flinte: Bauplan 3",
-    "description": "Schaltet das Rezept für „Schrottreife Flinte (Epic)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 01“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Schrottreife Flinte (Epic)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 01“ gefertigt werden."
   },
   "Blueprint_MakeshiftShotgun_5": {
     "localized_name": "Schrottreife Flinte: Bauplan 4",
-    "description": "Schaltet das Rezept für „Schrottreife Flinte (Legendary)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 01“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Schrottreife Flinte (Legendary)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 01“ gefertigt werden."
   },
   "Blueprint_MakeshiftSubmachineGun_2": {
     "localized_name": "Schrottreife Maschinenpistole: Bauplan 1",
-    "description": "Schaltet das Rezept für „Schrottreife Maschinenpistole (Uncommon)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 01“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Schrottreife Maschinenpistole (Uncommon)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 01“ gefertigt werden."
   },
   "Blueprint_MakeshiftSubmachineGun_3": {
     "localized_name": "Schrottreife Maschinenpistole: Bauplan 2",
-    "description": "Schaltet das Rezept für „Schrottreife Maschinenpistole (Rare)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 01“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Schrottreife Maschinenpistole (Rare)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 01“ gefertigt werden."
   },
   "Blueprint_MakeshiftSubmachineGun_4": {
     "localized_name": "Schrottreife Maschinenpistole: Bauplan 3",
-    "description": "Schaltet das Rezept für „Schrottreife Maschinenpistole (Epic)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 01“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Schrottreife Maschinenpistole (Epic)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 01“ gefertigt werden."
   },
   "Blueprint_MakeshiftSubmachineGun_5": {
     "localized_name": "Schrottreife Maschinenpistole: Bauplan 4",
-    "description": "Schaltet das Rezept für „Schrottreife Maschinenpistole (Legendary)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 01“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Schrottreife Maschinenpistole (Legendary)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 01“ gefertigt werden."
   },
   "Blueprint_MultiGuidedMissileLauncher": {
     "localized_name": "Multi-Raketenwerfer-Bauplan",
@@ -1481,19 +1481,19 @@
   },
   "Blueprint_OldRevolver_2": {
     "localized_name": "Alter Revolver: Bauplan 1",
-    "description": "Schaltet das Rezept für „Alter Revolver (Uncommon)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 02“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Alter Revolver (Uncommon)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 02“ gefertigt werden."
   },
   "Blueprint_OldRevolver_3": {
     "localized_name": "Alter Revolver: Bauplan 2",
-    "description": "Schaltet das Rezept für „Alter Revolver (Rare)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 02“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Alter Revolver (Rare)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 02“ gefertigt werden."
   },
   "Blueprint_OldRevolver_4": {
     "localized_name": "Alter Revolver: Bauplan 3",
-    "description": "Schaltet das Rezept für „Alter Revolver (Epic)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 02“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Alter Revolver (Epic)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 02“ gefertigt werden."
   },
   "Blueprint_OldRevolver_5": {
     "localized_name": "Alter Revolver: Bauplan 4",
-    "description": "Schaltet das Rezept für „Alter Revolver (Legendary)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 02“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Alter Revolver (Legendary)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 02“ gefertigt werden."
   },
   "Blueprint_PlasticArmorCold_2": {
     "localized_name": "Kälteresistente Plaststahlrüstung: Bauplan 1",
@@ -1593,131 +1593,131 @@
   },
   "Blueprint_SFArmorCold_2": {
     "localized_name": "Kälteresistente Hexolitrüstung: Bauplan 1",
-    "description": "Schaltet das Rezept für „Kälteresistente Hexolitrüstung (Uncommon)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 03“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Kälteresistente Hexolitrüstung (Uncommon)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 03“ gefertigt werden."
   },
   "Blueprint_SFArmorCold_3": {
     "localized_name": "Kälteresistente Hexolitrüstung: Bauplan 2",
-    "description": "Schaltet das Rezept für „Kälteresistente Hexolitrüstung (Rare)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 03“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Kälteresistente Hexolitrüstung (Rare)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 03“ gefertigt werden."
   },
   "Blueprint_SFArmorCold_4": {
     "localized_name": "Kälteresistente Hexolitrüstung: Bauplan 3",
-    "description": "Schaltet das Rezept für „Kälteresistente Hexolitrüstung (Epic)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 03“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Kälteresistente Hexolitrüstung (Epic)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 03“ gefertigt werden."
   },
   "Blueprint_SFArmorCold_5": {
     "localized_name": "Kälteresistente Hexolitrüstung: Bauplan 4",
-    "description": "Schaltet das Rezept für „Kälteresistente Hexolitrüstung (Legendary)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 03“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Kälteresistente Hexolitrüstung (Legendary)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 03“ gefertigt werden."
   },
   "Blueprint_SFArmorHeat_2": {
     "localized_name": "Hitzeresistente Hexolitrüstung: Bauplan 1",
-    "description": "Schaltet das Rezept für „Hitzeresistente Hexolitrüstung (Uncommon)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 01“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Hitzeresistente Hexolitrüstung (Uncommon)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 01“ gefertigt werden."
   },
   "Blueprint_SFArmorHeat_3": {
     "localized_name": "Hitzeresistente Hexolitrüstung: Bauplan 2",
-    "description": "Schaltet das Rezept für „Hitzeresistente Hexolitrüstung (Rare)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 03“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Hitzeresistente Hexolitrüstung (Rare)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 03“ gefertigt werden."
   },
   "Blueprint_SFArmorHeat_4": {
     "localized_name": "Hitzeresistente Hexolitrüstung: Bauplan 3",
-    "description": "Schaltet das Rezept für „Hitzeresistente Hexolitrüstung (Epic)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 03“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Hitzeresistente Hexolitrüstung (Epic)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 03“ gefertigt werden."
   },
   "Blueprint_SFArmorHeat_5": {
     "localized_name": "Hitzeresistente Hexolitrüstung: Bauplan 4",
-    "description": "Schaltet das Rezept für „Hitzeresistente Hexolitrüstung (Legendary)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 03“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Hitzeresistente Hexolitrüstung (Legendary)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 03“ gefertigt werden."
   },
   "Blueprint_SFArmorWeight_2": {
     "localized_name": "Leichte Hexolitrüstung: Bauplan 1",
-    "description": "Schaltet das Rezept für „Leichte Hexolitrüstung (Uncommon)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 03“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Leichte Hexolitrüstung (Uncommon)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 03“ gefertigt werden."
   },
   "Blueprint_SFArmorWeight_3": {
     "localized_name": "Leichte Hexolitrüstung: Bauplan 2",
-    "description": "Schaltet das Rezept für „Leichte Hexolitrüstung (Rare)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 03“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Leichte Hexolitrüstung (Rare)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 03“ gefertigt werden."
   },
   "Blueprint_SFArmorWeight_4": {
     "localized_name": "Leichte Hexolitrüstung: Bauplan 3",
-    "description": "Schaltet das Rezept für „Leichte Hexolitrüstung (Epic)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 03“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Leichte Hexolitrüstung (Epic)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 03“ gefertigt werden."
   },
   "Blueprint_SFArmorWeight_5": {
     "localized_name": "Leichte Hexolitrüstung: Bauplan 4",
-    "description": "Schaltet das Rezept für „Leichte Hexolitrüstung (Legendary)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 03“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Leichte Hexolitrüstung (Legendary)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 03“ gefertigt werden."
   },
   "Blueprint_SFArmor_2": {
     "localized_name": "Hexolitrüstung: Bauplan 1",
-    "description": "Schaltet das Rezept für „Hexolitrüstung (Uncommon)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 03“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Hexolitrüstung (Uncommon)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 03“ gefertigt werden."
   },
   "Blueprint_SFArmor_3": {
     "localized_name": "Hexolitrüstung: Bauplan 2",
-    "description": "Schaltet das Rezept für „Hexolitrüstung (Rare)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 03“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Hexolitrüstung (Rare)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 03“ gefertigt werden."
   },
   "Blueprint_SFArmor_4": {
     "localized_name": "Hexolitrüstung: Bauplan 3",
-    "description": "Schaltet das Rezept für „Hexolitrüstung (Epic)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 03“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Hexolitrüstung (Epic)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 03“ gefertigt werden."
   },
   "Blueprint_SFArmor_5": {
     "localized_name": "Hexolitrüstung: Bauplan 4",
-    "description": "Schaltet das Rezept für „Hexolitrüstung (Legendary)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 03“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Hexolitrüstung (Legendary)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 03“ gefertigt werden."
   },
   "Blueprint_SFBow_2": {
     "localized_name": "Hightech-Bogen: Bauplan 1",
-    "description": "Schaltet das Rezept für „Hightech-Bogen (Uncommon)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Hightech-Bogen (Uncommon)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
   },
   "Blueprint_SFBow_3": {
     "localized_name": "Hightech-Bogen: Bauplan 2",
-    "description": "Schaltet das Rezept für „Hightech-Bogen (Rare)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Hightech-Bogen (Rare)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
   },
   "Blueprint_SFBow_4": {
     "localized_name": "Hightech-Bogen: Bauplan 3",
-    "description": "Schaltet das Rezept für „Hightech-Bogen (Epic)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Hightech-Bogen (Epic)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
   },
   "Blueprint_SFBow_5": {
     "localized_name": "Hightech-Bogen: Bauplan 4",
-    "description": "Schaltet das Rezept für „Hightech-Bogen (Legendary)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Hightech-Bogen (Legendary)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
   },
   "Blueprint_SFHelmet_2": {
     "localized_name": "Hexolithelm: Bauplan 1",
-    "description": "Schaltet das Rezept für „Hexolithelm (Uncommon)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 03“ gefertigt werden."
+    "description": "Schaltet beim Tragen das Rezept für „Hexolithelm (Uncommon)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 03“ gefertigt werden."
   },
   "Blueprint_SFHelmet_3": {
     "localized_name": "Hexolithelm: Bauplan 2",
-    "description": "Schaltet das Rezept für „Hexolithelm (Rare)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 03“ gefertigt werden."
+    "description": "Schaltet beim Tragen das Rezept für „Hexolithelm (Rare)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 03“ gefertigt werden."
   },
   "Blueprint_SFHelmet_4": {
     "localized_name": "Hexolithelm: Bauplan 3",
-    "description": "Schaltet das Rezept für „Hexolithelm (Epic)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 03“ gefertigt werden."
+    "description": "Schaltet beim Tragen das Rezept für „Hexolithelm (Epic)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 03“ gefertigt werden."
   },
   "Blueprint_SFHelmet_5": {
     "localized_name": "Hexolithelm: Bauplan 4",
-    "description": "Schaltet das Rezept für „Hexolithelm (Legendary)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 03“ gefertigt werden."
+    "description": "Schaltet beim Tragen das Rezept für „Hexolithelm (Legendary)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 03“ gefertigt werden."
   },
   "Blueprint_SemiAutoRifle_2": {
     "localized_name": "Halbautomatisches Gewehr: Bauplan 1",
-    "description": "Schaltet das Rezept für „Halbautomatisches Gewehr (Uncommon)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 02“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Halbautomatisches Gewehr (Uncommon)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 02“ gefertigt werden."
   },
   "Blueprint_SemiAutoRifle_3": {
     "localized_name": "Halbautomatisches Gewehr: Bauplan 2",
-    "description": "Schaltet das Rezept für „Halbautomatisches Gewehr (Rare)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 02“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Halbautomatisches Gewehr (Rare)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 02“ gefertigt werden."
   },
   "Blueprint_SemiAutoRifle_4": {
     "localized_name": "Halbautomatisches Gewehr: Bauplan 3",
-    "description": "Schaltet das Rezept für „Halbautomatisches Gewehr (Epic)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 02“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Halbautomatisches Gewehr (Epic)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 02“ gefertigt werden."
   },
   "Blueprint_SemiAutoRifle_5": {
     "localized_name": "Halbautomatisches Gewehr: Bauplan 4",
-    "description": "Schaltet das Rezept für „Halbautomatisches Gewehr (Legendary)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 02“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Halbautomatisches Gewehr (Legendary)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 02“ gefertigt werden."
   },
   "Blueprint_SemiAutoShotgun_2": {
     "localized_name": "Halbautomatische Flinte: Bauplan 1",
-    "description": "Schaltet das Rezept für „Halbautomatische Flinte (Uncommon)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Halbautomatische Flinte (Uncommon)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
   },
   "Blueprint_SemiAutoShotgun_3": {
     "localized_name": "Halbautomatische Flinte: Bauplan 2",
-    "description": "Schaltet das Rezept für „Halbautomatische Flinte (Rare)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Halbautomatische Flinte (Rare)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
   },
   "Blueprint_SemiAutoShotgun_4": {
     "localized_name": "Halbautomatische Flinte: Bauplan 3",
-    "description": "Schaltet das Rezept für „Halbautomatische Flinte (Epic)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Halbautomatische Flinte (Epic)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
   },
   "Blueprint_SemiAutoShotgun_5": {
     "localized_name": "Halbautomatische Flinte: Bauplan 4",
-    "description": "Schaltet das Rezept für „Halbautomatische Flinte (Legendary)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Halbautomatische Flinte (Legendary)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
   },
   "Blueprint_SingleShotRifle_2": {
     "localized_name": "Einzelschuss-Gewehr: Bauplan 1",
@@ -1801,19 +1801,19 @@
   },
   "Blueprint_SubmachineGun_2": {
     "localized_name": "Maschinenpistole: Bauplan 1",
-    "description": "Schaltet das Rezept für „Maschinenpistole (Uncommon)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 02“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Maschinenpistole (Uncommon)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 02“ gefertigt werden."
   },
   "Blueprint_SubmachineGun_3": {
     "localized_name": "Maschinenpistole: Bauplan 2",
-    "description": "Schaltet das Rezept für „Maschinenpistole (Rare)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 02“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Maschinenpistole (Rare)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 02“ gefertigt werden."
   },
   "Blueprint_SubmachineGun_4": {
     "localized_name": "Maschinenpistole: Bauplan 3",
-    "description": "Schaltet das Rezept für „Maschinenpistole (Epic)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 02“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Maschinenpistole (Epic)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 02“ gefertigt werden."
   },
   "Blueprint_SubmachineGun_5": {
     "localized_name": "Maschinenpistole: Bauplan 4",
-    "description": "Schaltet das Rezept für „Maschinenpistole (Legendary)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 02“ gefertigt werden."
+    "description": "Schaltet beim Tragen die Anleitung für „Maschinenpistole (Legendary)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 02“ gefertigt werden."
   },
   "Blueprint_WeakerBow_2": {
     "localized_name": "Alter Bogen: Bauplan 1",
@@ -2215,6 +2215,10 @@
     "localized_name": "Holzkohle",
     "description": "Holzkohle entsteht durch Verbrennen von Holz. In Verbindung mit Schwefel lässt sich damit Schießpulver herstellen."
   },
+  "ChargeLaserRifle": {
+    "localized_name": "de Text",
+    "description": "de Text"
+  },
   "CheeseBurger": {
     "localized_name": "Cheeseburger",
     "description": "Ein Gericht mit Käse in einem Hamburger. Wenn man es isst, wird man für eine bestimmte Zeit satt und Verteidigung +10%."
@@ -2513,7 +2517,7 @@
   },
   "ElecBaton": {
     "localized_name": "Betäubungsknüppel",
-    "description": "Eine Nahkampfwaffe, die dem Opfer einen elektrischen Schock versetzt. So betäubte Pals sind leichter zu fangen."
+    "description": "Eine Nahkampfwaffe, die dem Opfer einen elektrischen Schock versetzt. Betäubte Pals sind leichter zu fangen."
   },
   "ElectricOrgan": {
     "localized_name": "Elektrodrüse",
@@ -2583,6 +2587,10 @@
     "localized_name": "Plasmakanone",
     "description": "Feuert eine energiegeladene Kugel ab, die beim Einschlag explodiert."
   },
+  "EnergyShotgun": {
+    "localized_name": "de Text",
+    "description": "de Text"
+  },
   "ExpBoost_01": {
     "localized_name": "Kleine Übungsfibel",
     "description": "Gib diese Fibel einem Pal zu lesen, um ein klein wenig Erfahrung zu sammeln."
@@ -2636,23 +2644,23 @@
     "description": "de Text"
   },
   "FlameThrower": {
-    "localized_name": "FlameThrower",
+    "localized_name": "Flammenwerfer",
     "description": "Ein Flamethrower mit hoher Reichweite. Kann getroffene Gegner in Brand setzen."
   },
   "FlameThrower_2": {
-    "localized_name": "FlameThrower",
+    "localized_name": "Flammenwerfer",
     "description": "Ein Flamethrower mit hoher Reichweite. Kann getroffene Gegner in Brand setzen."
   },
   "FlameThrower_3": {
-    "localized_name": "FlameThrower",
+    "localized_name": "Flammenwerfer",
     "description": "Ein Flamethrower mit hoher Reichweite. Kann getroffene Gegner in Brand setzen."
   },
   "FlameThrower_4": {
-    "localized_name": "FlameThrower",
+    "localized_name": "Flammenwerfer",
     "description": "Ein Flamethrower mit hoher Reichweite. Kann getroffene Gegner in Brand setzen."
   },
   "FlameThrower_5": {
-    "localized_name": "FlameThrower",
+    "localized_name": "Flammenwerfer",
     "description": "Ein Flamethrower mit hoher Reichweite. Kann getroffene Gegner in Brand setzen."
   },
   "FlamethrowerBullet": {
@@ -2717,7 +2725,7 @@
   },
   "FriedVegetables": {
     "localized_name": "Gebratenes Gemüse",
-    "description": "Ein Gericht aus gebratenem Kopfsalat und Meat. Wenn Sie es essen, wird für eine bestimmte Zeit Angriff +10%."
+    "description": "Ein Gericht aus gebratenem Kopfsalat und Rohes Fleisch. Wenn Sie es essen, wird für eine bestimmte Zeit Angriff +10%."
   },
   "Fruit__defense_01": {
     "localized_name": "Verteidigungsfrucht",
@@ -3017,343 +3025,343 @@
   },
   "Head001": {
     "localized_name": "Königskrone",
-    "description": null
+    "description": "Eine Krone, die dem hohen Ansehen des Trägers Nachdruck verleiht. Wirkt ziemlich wuchtig und ist nicht für den täglichen Gebrauch zu empfehlen."
   },
   "Head001_2": {
     "localized_name": "Königskrone",
-    "description": null
+    "description": "Eine Krone, die dem hohen Ansehen des Trägers Nachdruck verleiht. Wirkt ziemlich wuchtig und ist nicht für den täglichen Gebrauch zu empfehlen."
   },
   "Head001_3": {
     "localized_name": "Königskrone",
-    "description": null
+    "description": "Eine Krone, die dem hohen Ansehen des Trägers Nachdruck verleiht. Wirkt ziemlich wuchtig und ist nicht für den täglichen Gebrauch zu empfehlen."
   },
   "Head001_4": {
     "localized_name": "Königskrone",
-    "description": null
+    "description": "Eine Krone, die dem hohen Ansehen des Trägers Nachdruck verleiht. Wirkt ziemlich wuchtig und ist nicht für den täglichen Gebrauch zu empfehlen."
   },
   "Head001_5": {
     "localized_name": "Königskrone",
-    "description": null
+    "description": "Eine Krone, die dem hohen Ansehen des Trägers Nachdruck verleiht. Wirkt ziemlich wuchtig und ist nicht für den täglichen Gebrauch zu empfehlen."
   },
   "Head002": {
     "localized_name": "Goldkrone",
-    "description": null
+    "description": "Eine Goldkrone wie diese sieht man nicht alle Tage. Schon das bloße Aufsetzen lässt einen erhaben fühlen."
   },
   "Head002_2": {
     "localized_name": "Goldkrone",
-    "description": null
+    "description": "Eine Goldkrone wie diese sieht man nicht alle Tage. Schon das bloße Aufsetzen lässt einen erhaben fühlen."
   },
   "Head002_3": {
     "localized_name": "Goldkrone",
-    "description": null
+    "description": "Eine Goldkrone wie diese sieht man nicht alle Tage. Schon das bloße Aufsetzen lässt einen erhaben fühlen."
   },
   "Head002_4": {
     "localized_name": "Goldkrone",
-    "description": null
+    "description": "Eine Goldkrone wie diese sieht man nicht alle Tage. Schon das bloße Aufsetzen lässt einen erhaben fühlen."
   },
   "Head002_5": {
     "localized_name": "Goldkrone",
-    "description": null
+    "description": "Eine Goldkrone wie diese sieht man nicht alle Tage. Schon das bloße Aufsetzen lässt einen erhaben fühlen."
   },
   "Head003": {
     "localized_name": "Hasenohren-Haarreif",
-    "description": null
+    "description": "Ein Haarreif mit Ribbuny-Ohren. Zweifelhafte Kopfschutzeigenschaften."
   },
   "Head003_2": {
     "localized_name": "Hasenohren-Haarreif",
-    "description": null
+    "description": "Ein Haarreif mit Ribbuny-Ohren. Zweifelhafte Kopfschutzeigenschaften."
   },
   "Head003_3": {
     "localized_name": "Hasenohren-Haarreif",
-    "description": null
+    "description": "Ein Haarreif mit Ribbuny-Ohren. Zweifelhafte Kopfschutzeigenschaften."
   },
   "Head003_4": {
     "localized_name": "Hasenohren-Haarreif",
-    "description": null
+    "description": "Ein Haarreif mit Ribbuny-Ohren. Zweifelhafte Kopfschutzeigenschaften."
   },
   "Head003_5": {
     "localized_name": "Hasenohren-Haarreif",
-    "description": null
+    "description": "Ein Haarreif mit Ribbuny-Ohren. Zweifelhafte Kopfschutzeigenschaften."
   },
   "Head004": {
     "localized_name": "Hexenhut",
-    "description": null
+    "description": "Ist dem Hut des Vulmag und Katress nachempfunden. Damit fühlt man sich, als könnte man Pal-Fähikeiten anwenden."
   },
   "Head004_2": {
     "localized_name": "Hexenhut",
-    "description": null
+    "description": "Ist dem Hut des Vulmag und Katress nachempfunden. Damit fühlt man sich, als könnte man Pal-Fähikeiten anwenden."
   },
   "Head004_3": {
     "localized_name": "Hexenhut",
-    "description": null
+    "description": "Ist dem Hut des Vulmag und Katress nachempfunden. Damit fühlt man sich, als könnte man Pal-Fähikeiten anwenden."
   },
   "Head004_4": {
     "localized_name": "Hexenhut",
-    "description": null
+    "description": "Ist dem Hut des Vulmag und Katress nachempfunden. Damit fühlt man sich, als könnte man Pal-Fähikeiten anwenden."
   },
   "Head004_5": {
     "localized_name": "Hexenhut",
-    "description": null
+    "description": "Ist dem Hut des Vulmag und Katress nachempfunden. Damit fühlt man sich, als könnte man Pal-Fähikeiten anwenden."
   },
   "Head005": {
     "localized_name": "Krempenhut",
-    "description": null
+    "description": "Leicht und bequem, perfekt für den täglichen Gebrauch. Wurde früher auch auf der Insel gern getragen und strahlt zeitlose Eleganz aus."
   },
   "Head005_2": {
     "localized_name": "Krempenhut",
-    "description": null
+    "description": "Leicht und bequem, perfekt für den täglichen Gebrauch. Wurde früher auch auf der Insel gern getragen und strahlt zeitlose Eleganz aus."
   },
   "Head005_3": {
     "localized_name": "Krempenhut",
-    "description": null
+    "description": "Leicht und bequem, perfekt für den täglichen Gebrauch. Wurde früher auch auf der Insel gern getragen und strahlt zeitlose Eleganz aus."
   },
   "Head005_4": {
     "localized_name": "Krempenhut",
-    "description": null
+    "description": "Leicht und bequem, perfekt für den täglichen Gebrauch. Wurde früher auch auf der Insel gern getragen und strahlt zeitlose Eleganz aus."
   },
   "Head005_5": {
     "localized_name": "Krempenhut",
-    "description": null
+    "description": "Leicht und bequem, perfekt für den täglichen Gebrauch. Wurde früher auch auf der Insel gern getragen und strahlt zeitlose Eleganz aus."
   },
   "Head006": {
     "localized_name": "Helm",
-    "description": null
+    "description": "Ein Helm, der deine Rübe zuverlässig schützt. Wurde wahrscheinlich entwickelt, nachdem sich zu viele Leute bei Stürzen von einem Eikthyrdeer den Kopf aufschlugen."
   },
   "Head006_2": {
     "localized_name": "Helm",
-    "description": null
+    "description": "Ein Helm, der deine Rübe zuverlässig schützt. Wurde wahrscheinlich entwickelt, nachdem sich zu viele Leute bei Stürzen von einem Eikthyrdeer den Kopf aufschlugen."
   },
   "Head006_3": {
     "localized_name": "Helm",
-    "description": null
+    "description": "Ein Helm, der deine Rübe zuverlässig schützt. Wurde wahrscheinlich entwickelt, nachdem sich zu viele Leute bei Stürzen von einem Eikthyrdeer den Kopf aufschlugen."
   },
   "Head006_4": {
     "localized_name": "Helm",
-    "description": null
+    "description": "Ein Helm, der deine Rübe zuverlässig schützt. Wurde wahrscheinlich entwickelt, nachdem sich zu viele Leute bei Stürzen von einem Eikthyrdeer den Kopf aufschlugen."
   },
   "Head006_5": {
     "localized_name": "Helm",
-    "description": null
+    "description": "Ein Helm, der deine Rübe zuverlässig schützt. Wurde wahrscheinlich entwickelt, nachdem sich zu viele Leute bei Stürzen von einem Eikthyrdeer den Kopf aufschlugen."
   },
   "Head007": {
     "localized_name": "Zylinderhut",
-    "description": null
+    "description": "Der Inbegriff von Distinguiertheit. Zylinder aus Sibelyx gelten als besonders hochwertig, es gibt aber auch billige Imitate aus Swee."
   },
   "Head007_2": {
     "localized_name": "Zylinderhut",
-    "description": null
+    "description": "Der Inbegriff von Distinguiertheit. Zylinder aus Sibelyx gelten als besonders hochwertig, es gibt aber auch billige Imitate aus Swee."
   },
   "Head007_3": {
     "localized_name": "Zylinderhut",
-    "description": null
+    "description": "Der Inbegriff von Distinguiertheit. Zylinder aus Sibelyx gelten als besonders hochwertig, es gibt aber auch billige Imitate aus Swee."
   },
   "Head007_4": {
     "localized_name": "Zylinderhut",
-    "description": null
+    "description": "Der Inbegriff von Distinguiertheit. Zylinder aus Sibelyx gelten als besonders hochwertig, es gibt aber auch billige Imitate aus Swee."
   },
   "Head007_5": {
     "localized_name": "Zylinderhut",
-    "description": null
+    "description": "Der Inbegriff von Distinguiertheit. Zylinder aus Sibelyx gelten als besonders hochwertig, es gibt aber auch billige Imitate aus Swee."
   },
   "Head008": {
     "localized_name": "Dreispitz",
-    "description": null
+    "description": "Ein bei kämpferischen Individuen beliebter Hut. Sein ehemaliger Besitzer war ein versessener Azurobe-Jäger."
   },
   "Head008_2": {
     "localized_name": "Dreispitz",
-    "description": null
+    "description": "Ein bei kämpferischen Individuen beliebter Hut. Sein ehemaliger Besitzer war ein versessener Azurobe-Jäger."
   },
   "Head008_3": {
     "localized_name": "Dreispitz",
-    "description": null
+    "description": "Ein bei kämpferischen Individuen beliebter Hut. Sein ehemaliger Besitzer war ein versessener Azurobe-Jäger."
   },
   "Head008_4": {
     "localized_name": "Dreispitz",
-    "description": null
+    "description": "Ein bei kämpferischen Individuen beliebter Hut. Sein ehemaliger Besitzer war ein versessener Azurobe-Jäger."
   },
   "Head008_5": {
     "localized_name": "Dreispitz",
-    "description": null
+    "description": "Ein bei kämpferischen Individuen beliebter Hut. Sein ehemaliger Besitzer war ein versessener Azurobe-Jäger."
   },
   "Head009": {
     "localized_name": "Tropenhelm",
-    "description": null
+    "description": "Ein bei Abenteurern beliebter Hut. Bietet Schutz vor der Sonne."
   },
   "Head009_2": {
     "localized_name": "Tropenhelm",
-    "description": null
+    "description": "Ein bei Abenteurern beliebter Hut. Bietet Schutz vor der Sonne."
   },
   "Head009_3": {
     "localized_name": "Tropenhelm",
-    "description": null
+    "description": "Ein bei Abenteurern beliebter Hut. Bietet Schutz vor der Sonne."
   },
   "Head009_4": {
     "localized_name": "Tropenhelm",
-    "description": null
+    "description": "Ein bei Abenteurern beliebter Hut. Bietet Schutz vor der Sonne."
   },
   "Head009_5": {
     "localized_name": "Tropenhelm",
-    "description": null
+    "description": "Ein bei Abenteurern beliebter Hut. Bietet Schutz vor der Sonne."
   },
   "Head010": {
     "localized_name": "Doktorhut",
-    "description": null
+    "description": "Lässt den Träger intelligenter wirken. Vielleicht gab es früher auch hier auf der Insel eine Schule."
   },
   "Head010_2": {
     "localized_name": "Doktorhut",
-    "description": null
+    "description": "Lässt den Träger intelligenter wirken. Vielleicht gab es früher auch hier auf der Insel eine Schule."
   },
   "Head010_3": {
     "localized_name": "Doktorhut",
-    "description": null
+    "description": "Lässt den Träger intelligenter wirken. Vielleicht gab es früher auch hier auf der Insel eine Schule."
   },
   "Head010_4": {
     "localized_name": "Doktorhut",
-    "description": null
+    "description": "Lässt den Träger intelligenter wirken. Vielleicht gab es früher auch hier auf der Insel eine Schule."
   },
   "Head010_5": {
     "localized_name": "Doktorhut",
-    "description": null
+    "description": "Lässt den Träger intelligenter wirken. Vielleicht gab es früher auch hier auf der Insel eine Schule."
   },
   "Head011": {
     "localized_name": "Bauernhut",
-    "description": null
+    "description": "Perfekt für die Feldarbeit. Bietet Schutz vor der Sonne."
   },
   "Head011_2": {
     "localized_name": "Bauernhut",
-    "description": null
+    "description": "Perfekt für die Feldarbeit. Bietet Schutz vor der Sonne."
   },
   "Head011_3": {
     "localized_name": "Bauernhut",
-    "description": null
+    "description": "Perfekt für die Feldarbeit. Bietet Schutz vor der Sonne."
   },
   "Head011_4": {
     "localized_name": "Bauernhut",
-    "description": null
+    "description": "Perfekt für die Feldarbeit. Bietet Schutz vor der Sonne."
   },
   "Head011_5": {
     "localized_name": "Bauernhut",
-    "description": null
+    "description": "Perfekt für die Feldarbeit. Bietet Schutz vor der Sonne."
   },
   "Head012": {
     "localized_name": "Melone",
-    "description": null
+    "description": "Ein runder, stabiler Hut. Wurde früher mit dem Slogan beworben: „Hält sogar den Tritt eines Mammorest aus!“"
   },
   "Head012_2": {
     "localized_name": "Melone",
-    "description": null
+    "description": "Ein runder, stabiler Hut. Wurde früher mit dem Slogan beworben: „Hält sogar den Tritt eines Mammorest aus!“"
   },
   "Head012_3": {
     "localized_name": "Melone",
-    "description": null
+    "description": "Ein runder, stabiler Hut. Wurde früher mit dem Slogan beworben: „Hält sogar den Tritt eines Mammorest aus!“"
   },
   "Head012_4": {
     "localized_name": "Melone",
-    "description": null
+    "description": "Ein runder, stabiler Hut. Wurde früher mit dem Slogan beworben: „Hält sogar den Tritt eines Mammorest aus!“"
   },
   "Head012_5": {
     "localized_name": "Melone",
-    "description": null
+    "description": "Ein runder, stabiler Hut. Wurde früher mit dem Slogan beworben: „Hält sogar den Tritt eines Mammorest aus!“"
   },
   "Head013": {
     "localized_name": "Tocotoco-Hut",
-    "description": null
+    "description": "Hut in Form eines Tocotoco. Ist sehr ausgefallen und auch von Weitem gut zu erkennen."
   },
   "Head013_2": {
     "localized_name": "Tocotoco-Hut",
-    "description": null
+    "description": "Hut in Form eines Tocotoco. Ist sehr ausgefallen und auch von Weitem gut zu erkennen."
   },
   "Head013_3": {
     "localized_name": "Tocotoco-Hut",
-    "description": null
+    "description": "Hut in Form eines Tocotoco. Ist sehr ausgefallen und auch von Weitem gut zu erkennen."
   },
   "Head013_4": {
     "localized_name": "Tocotoco-Hut",
-    "description": null
+    "description": "Hut in Form eines Tocotoco. Ist sehr ausgefallen und auch von Weitem gut zu erkennen."
   },
   "Head013_5": {
     "localized_name": "Tocotoco-Hut",
-    "description": null
+    "description": "Hut in Form eines Tocotoco. Ist sehr ausgefallen und auch von Weitem gut zu erkennen."
   },
   "Head014": {
     "localized_name": "Verschmitzter Tocotoco-Hut",
-    "description": null
+    "description": "Hut in Form eines Tocotoco. Zaubert dem Träger gewiss ein verschmitztes Lächeln ins Gesicht."
   },
   "Head014_2": {
     "localized_name": "Verschmitzter Tocotoco-Hut",
-    "description": null
+    "description": "Hut in Form eines Tocotoco. Zaubert dem Träger gewiss ein verschmitztes Lächeln ins Gesicht."
   },
   "Head014_3": {
     "localized_name": "Verschmitzter Tocotoco-Hut",
-    "description": null
+    "description": "Hut in Form eines Tocotoco. Zaubert dem Träger gewiss ein verschmitztes Lächeln ins Gesicht."
   },
   "Head014_4": {
     "localized_name": "Verschmitzter Tocotoco-Hut",
-    "description": null
+    "description": "Hut in Form eines Tocotoco. Zaubert dem Träger gewiss ein verschmitztes Lächeln ins Gesicht."
   },
   "Head014_5": {
     "localized_name": "Verschmitzter Tocotoco-Hut",
-    "description": null
+    "description": "Hut in Form eines Tocotoco. Zaubert dem Träger gewiss ein verschmitztes Lächeln ins Gesicht."
   },
   "Head015": {
     "localized_name": "Gumoss-Hut",
-    "description": null
+    "description": "Hut in Form eines Gumoss."
   },
   "Head015_2": {
     "localized_name": "Gumoss-Hut",
-    "description": null
+    "description": "Hut in Form eines Gumoss."
   },
   "Head015_3": {
     "localized_name": "Gumoss-Hut",
-    "description": null
+    "description": "Hut in Form eines Gumoss."
   },
   "Head015_4": {
     "localized_name": "Gumoss-Hut",
-    "description": null
+    "description": "Hut in Form eines Gumoss."
   },
   "Head015_5": {
     "localized_name": "Gumoss-Hut",
-    "description": null
+    "description": "Hut in Form eines Gumoss."
   },
   "Head016": {
     "localized_name": "Penking-Hut",
-    "description": null
+    "description": "Hut in Form eines Penking."
   },
   "Head016_2": {
     "localized_name": "Penking-Hut",
-    "description": null
+    "description": "Hut in Form eines Penking."
   },
   "Head016_3": {
     "localized_name": "Penking-Hut",
-    "description": null
+    "description": "Hut in Form eines Penking."
   },
   "Head016_4": {
     "localized_name": "Penking-Hut",
-    "description": null
+    "description": "Hut in Form eines Penking."
   },
   "Head016_5": {
     "localized_name": "Penking-Hut",
-    "description": null
+    "description": "Hut in Form eines Penking."
   },
   "Head017": {
     "localized_name": "Katress-Hut",
-    "description": null
+    "description": "Hut in Form eines Katress."
   },
   "Head017_2": {
     "localized_name": "Katress-Hut",
-    "description": null
+    "description": "Hut in Form eines Katress."
   },
   "Head017_3": {
     "localized_name": "Katress-Hut",
-    "description": null
+    "description": "Hut in Form eines Katress."
   },
   "Head017_4": {
     "localized_name": "Katress-Hut",
-    "description": null
+    "description": "Hut in Form eines Katress."
   },
   "Head017_5": {
     "localized_name": "Katress-Hut",
-    "description": null
+    "description": "Hut in Form eines Katress."
   },
   "HeadEquip001_purple": {
     "localized_name": "Hexenkrone (Ultra)",
@@ -3620,7 +3628,7 @@
     "description": "Material zur Herstellung von hochwertigen Metallwaffen und -rüstungen. Kann aus Erz und Steinkohle in einem Hochofen gewonnen werden."
   },
   "JamBun": {
-    "localized_name": "Marmeladenbrötchen",
+    "localized_name": "Marmeladenbrot",
     "description": "Brot mit Marmelade. Die Süße der Beeren passt wunderbar zum herzhaften Brot."
   },
   "Katana": {
@@ -3641,23 +3649,23 @@
   },
   "LaserGatlingGun": {
     "localized_name": "Laser-Gatlinggewehr",
-    "description": "Verschießt Laserprojektile und hat eine hohe Feuerrate. Dank der enormen Feuerkraft können damit mehrere Gegner auf einen Schlag „befriedet“ werden."
+    "description": "Verschießt Strahlen mit hoher Feuerrate. Dank der enormen Feuerkraft können damit mehrere Gegner auf einen Schlag „befriedet“ werden."
   },
   "LaserGatlingGun_2": {
     "localized_name": "Laser-Gatlinggewehr",
-    "description": "Verschießt Laserprojektile und hat eine hohe Feuerrate. Dank der enormen Feuerkraft können damit mehrere Gegner auf einen Schlag „befriedet“ werden."
+    "description": "Verschießt Strahlen mit hoher Feuerrate. Dank der enormen Feuerkraft können damit mehrere Gegner auf einen Schlag „befriedet“ werden."
   },
   "LaserGatlingGun_3": {
     "localized_name": "Laser-Gatlinggewehr",
-    "description": "Verschießt Laserprojektile und hat eine hohe Feuerrate. Dank der enormen Feuerkraft können damit mehrere Gegner auf einen Schlag „befriedet“ werden."
+    "description": "Verschießt Strahlen mit hoher Feuerrate. Dank der enormen Feuerkraft können damit mehrere Gegner auf einen Schlag „befriedet“ werden."
   },
   "LaserGatlingGun_4": {
     "localized_name": "Laser-Gatlinggewehr",
-    "description": "Verschießt Laserprojektile und hat eine hohe Feuerrate. Dank der enormen Feuerkraft können damit mehrere Gegner auf einen Schlag „befriedet“ werden."
+    "description": "Verschießt Strahlen mit hoher Feuerrate. Dank der enormen Feuerkraft können damit mehrere Gegner auf einen Schlag „befriedet“ werden."
   },
   "LaserGatlingGun_5": {
     "localized_name": "Laser-Gatlinggewehr",
-    "description": "Verschießt Laserprojektile und hat eine hohe Feuerrate. Dank der enormen Feuerkraft können damit mehrere Gegner auf einen Schlag „befriedet“ werden."
+    "description": "Verschießt Strahlen mit hoher Feuerrate. Dank der enormen Feuerkraft können damit mehrere Gegner auf einen Schlag „befriedet“ werden."
   },
   "LaserRifle": {
     "localized_name": "Lasergewehr",
@@ -3875,8 +3883,12 @@
     "localized_name": "Marinierte Pilze",
     "description": "Ein Gericht aus marinierten Pilzen. Steigert vorübergehend die Verteidigung um 10 %."
   },
+  "MeaninglessItem_ButcheringImportPal": {
+    "localized_name": "Gewebeabfall",
+    "description": "Ein völlig ruiniertes Stück biologisches Gewebe. Verbleibt als Rückstand, wenn ein genetisch rekonstruierter Pal geschlachtet wird. Es hat keinerlei Nutzen und kann nur verkauft oder entsorgt werden."
+  },
   "Meat": {
-    "localized_name": "Meat",
+    "localized_name": "Rohes Fleisch",
     "description": "Palfleisch. Kann ohne Probleme auch roh verzehrt werden."
   },
   "Meat2": {
@@ -4083,6 +4095,10 @@
     "localized_name": "Dubioser Saft",
     "description": "Ein Trank, der die Stimmung verbessert. Nach dem Konsum erhöht sich das Arbeitstempo für eine gewisse Zeit leicht, allerdings sinkt auch die GEI leicht."
   },
+  "OverheatRifle": {
+    "localized_name": "de Text",
+    "description": "de Text"
+  },
   "PalCrystal_Ex": {
     "localized_name": "Antikes Bauteil",
     "description": "Ein kaputter, antiker Apparat, der bei Ausgrabungen entdeckt wurde. Enthält eine Fülle an Informationen über verlorene Technologien. Ist extrem wertvoll und begehrt."
@@ -4090,6 +4106,10 @@
   "PalDarkParts": {
     "localized_name": "Finstere Scherbe",
     "description": "Wird von bestimmten mächtigen Pals des Elements Schatten als Beute zurückgelassen und kann als Material zur Fertigung mächtiger Accessoires verwendet werden."
+  },
+  "PalDopingShot": {
+    "localized_name": "de Text",
+    "description": "de Text"
   },
   "PalEgg_Dark_01": {
     "localized_name": "Düsteres Ei",
@@ -4274,6 +4294,10 @@
   "PalFluid": {
     "localized_name": "Pal-Saft",
     "description": "Eine Flüssigkeit, die sich aus Pals gewinnen lässt. Hat eine hohe Viskosität und ist ziemlich nützlich."
+  },
+  "PalHealingGrenade": {
+    "localized_name": "de Text",
+    "description": "de Text"
   },
   "PalItem_CaptainPenguin": {
     "localized_name": "Penking-Federschmuck",
@@ -4673,7 +4697,7 @@
   },
   "RainbowCrystal": {
     "localized_name": "Hexoquarz",
-    "description": "Ein seltener Kristall, der nur in den Himmelssturzlanden zu finden ist. Hat sich über viele Jahre aus verdichtetem Paldium gebildet und schillert nun in allen Regenbogenfarben."
+    "description": "Ein seltener Kristall, der nur auf Feybreak zu finden ist. Hat sich über viele Jahre aus verdichtetem Paldium gebildet und schillert nun in allen Regenbogenfarben."
   },
   "Rankup_1": {
     "localized_name": "Allzweck-Palextrakt 1☆",
@@ -4914,6 +4938,10 @@
   "Shield_04": {
     "localized_name": "Teraschild",
     "description": "Ein mithilfe von Paldiumtechnologie entwickelter, mysteriöser Schild. Regeneriert sich automatisch, nachdem er einige Zeit lang keinen Schaden nimmt. Dieses Spitzenmodell ist das Ergebnis neuester Forschung."
+  },
+  "Shield_05": {
+    "localized_name": "Ultraschild",
+    "description": "Ein mithilfe von Paldiumtechnologie entwickelter, mysteriöser Schild. Regeneriert sich automatisch, wenn er einige Zeit lang keinen Schaden nimmt. Dieses ultimative Modell übertrifft alles bisher Dagewesene."
   },
   "Shield_SF": {
     "localized_name": "Sci-Fi-Schild",
@@ -5688,7 +5716,7 @@
     "description": "Lilys treuer Speer. Richtet all jene, die Pals schlecht behandeln."
   },
   "Spear_QueenBee": {
-    "localized_name": "Elizabee-Szepter",
+    "localized_name": "Elizabee-Zepter",
     "description": "Stab von Elizabee, der für den menschlichen Gebrauch umgebaut wurde. Die Dominanz der Königin ist darin deutlich zu spüren."
   },
   "Spear_SoldierBee": {
@@ -5980,15 +6008,15 @@
     "description": "Ein Material, das von Schaf-Pals gewonnen werden kann. Wird zur Herstellung von Betten und Stoff benötigt."
   },
   "WorkSuitability_AddTicket_Collection": {
-    "localized_name": "Angewandte Sammelwissenschaften Ⅰ",
+    "localized_name": "Angewandtes Sammeln Ⅰ",
     "description": "Ein kostbares Schriftstück über die Geheimnisse von „Sammeln“. Gib es einem Pal zu lesen, und er erhält permanent Sammeln +1."
   },
   "WorkSuitability_AddTicket_Cool": {
-    "localized_name": "Angewandte Kühltechnik Ⅰ",
+    "localized_name": "Angewandte Kühlung Ⅰ",
     "description": "Ein kostbares Schriftstück über die Geheimnisse von „Kühlung“. Gib es einem Pal zu lesen, und er erhält permanent Kühlung +1."
   },
   "WorkSuitability_AddTicket_Deforest": {
-    "localized_name": "Angewandte Holzfällerei Ⅰ",
+    "localized_name": "Angewandtes Holzfällen Ⅰ",
     "description": "Ein kostbares Schriftstück über die Geheimnisse von „Holzfällen“. Gib es einem Pal zu lesen, und er erhält permanent Holzfällen +1."
   },
   "WorkSuitability_AddTicket_EmitFlame": {
@@ -6008,7 +6036,7 @@
     "description": "Ein kostbares Schriftstück über die Geheimnisse von „Bergbau“. Gib es einem Pal zu lesen, und er erhält permanent Bergbau +1."
   },
   "WorkSuitability_AddTicket_ProductMedicine": {
-    "localized_name": "Angewandte Pharmazie Ⅰ",
+    "localized_name": "Angewandte Arzneimittelherstellung Ⅰ",
     "description": "Ein kostbares Schriftstück über die Geheimnisse von „Arzneimittelherstellung“. Gib es einem Pal zu lesen, und er erhält permanent Arzneimittelherstellung +1."
   },
   "WorkSuitability_AddTicket_Seeding": {
@@ -6016,11 +6044,11 @@
     "description": "Ein kostbares Schriftstück über die Geheimnisse von „Aussaat“. Gib es einem Pal zu lesen, und er erhält permanent Aussaat +1."
   },
   "WorkSuitability_AddTicket_Transport": {
-    "localized_name": "Angewandte Logistik Ⅰ",
+    "localized_name": "Angewandter Transport Ⅰ",
     "description": "Ein kostbares Schriftstück über die Geheimnisse von „Transport“. Gib es einem Pal zu lesen, und er erhält permanent Transport +1."
   },
   "WorkSuitability_AddTicket_Watering": {
-    "localized_name": "Angewandte Gießwissenschaften Ⅰ",
+    "localized_name": "Angewandte Bewässerung Ⅰ",
     "description": "Ein kostbares Schriftstück über die Geheimnisse von „Bewässerung“. Gib es einem Pal zu lesen, und er erhält permanent Bewässerung +1."
   },
   "Yakisoba": {

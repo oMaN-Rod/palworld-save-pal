@@ -31,6 +31,278 @@
     "localized_name": "공격 증가 Lv3",
     "description": null
   },
+  "BossDefeatReward_AmaterasuWolf_Dark": {
+    "localized_name": "어둠 속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_Anubis": {
+    "localized_name": "땅 속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_BadCatgirl": {
+    "localized_name": "어둠 속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_BerryGoat_Dark": {
+    "localized_name": "풀 속성 피해 강화 (중)",
+    "description": null
+  },
+  "BossDefeatReward_BlackMetalDragon": {
+    "localized_name": "용 속성 피해 강화 (중)",
+    "description": null
+  },
+  "BossDefeatReward_BlackPuppy": {
+    "localized_name": "어둠 속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_BlueDragon": {
+    "localized_name": "물 속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_BlueThunderHorse": {
+    "localized_name": "번개 속성 피해 강화 (중)",
+    "description": null
+  },
+  "BossDefeatReward_BlueberryFairy": {
+    "localized_name": "풀 속성 피해 강화 (중)",
+    "description": null
+  },
+  "BossDefeatReward_CaptainPenguin": {
+    "localized_name": "물 속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_CatMage": {
+    "localized_name": "어둠 속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_CatVampire": {
+    "localized_name": "어둠 속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_DarkScorpion": {
+    "localized_name": "어둠 속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_DarkScorpion_Ground": {
+    "localized_name": "땅 속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_FairyDragon": {
+    "localized_name": "용 속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_FengyunDeeper": {
+    "localized_name": "무속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_FengyunDeeper_Electric": {
+    "localized_name": "번개 속성 피해 강화 (중)",
+    "description": null
+  },
+  "BossDefeatReward_FlowerDinosaur_Electric": {
+    "localized_name": "번개 속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_FlowerDoll": {
+    "localized_name": "풀 속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_GhostRabbit": {
+    "localized_name": "어둠 속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_GoldenHorse": {
+    "localized_name": "땅 속성 피해 강화 (중)",
+    "description": null
+  },
+  "BossDefeatReward_GrassMammoth": {
+    "localized_name": "풀 속성 피해 강화 (중)",
+    "description": null
+  },
+  "BossDefeatReward_GrassPanda_Electric": {
+    "localized_name": "번개 속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_GrassRabbitMan": {
+    "localized_name": "풀 속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_GrimGirl": {
+    "localized_name": "어둠 속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_HawkBird": {
+    "localized_name": "무속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_HerculesBeetle": {
+    "localized_name": "땅 속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_HerculesBeetle_Ground": {
+    "localized_name": "땅 속성 피해 강화 (중)",
+    "description": null
+  },
+  "BossDefeatReward_Horus_Water": {
+    "localized_name": "물 속성 피해 강화 (중)",
+    "description": null
+  },
+  "BossDefeatReward_IceHorse": {
+    "localized_name": "얼음 속성 피해 강화 (대)",
+    "description": null
+  },
+  "BossDefeatReward_IceHorse_Dark": {
+    "localized_name": "어둠 속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_JetDragon": {
+    "localized_name": "용 속성 피해 강화 (대)",
+    "description": null
+  },
+  "BossDefeatReward_KingAlpaca": {
+    "localized_name": "무속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_KingAlpaca_Ice": {
+    "localized_name": "얼음 속성 피해 강화 (중)",
+    "description": null
+  },
+  "BossDefeatReward_KingBahamut": {
+    "localized_name": "화염 속성 피해 강화 (대)",
+    "description": null
+  },
+  "BossDefeatReward_Kirin": {
+    "localized_name": "번개 속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_Kitsunebi_Ice": {
+    "localized_name": "얼음 속성 피해 강화 (대)",
+    "description": null
+  },
+  "BossDefeatReward_LazyCatfish": {
+    "localized_name": "땅 속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_LazyDragon_Electric": {
+    "localized_name": "용 속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_LilyQueen_Dark": {
+    "localized_name": "어둠 속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_MopKing": {
+    "localized_name": "얼음 속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_Mutant": {
+    "localized_name": "무속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_MysteryMask": {
+    "localized_name": "어둠 속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_NaughtyCat": {
+    "localized_name": "무속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_NightBlueHorse": {
+    "localized_name": "어둠 속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_PinkRabbit_Grass": {
+    "localized_name": "풀 속성 피해 강화 (중)",
+    "description": null
+  },
+  "BossDefeatReward_PlantSlime": {
+    "localized_name": "땅 속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_PurpleSpider": {
+    "localized_name": "어둠 속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_QueenBee": {
+    "localized_name": "풀 속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_RaijinDaughter_Water": {
+    "localized_name": "어둠 속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_Ronin": {
+    "localized_name": "화염 속성 피해 강화 (중)",
+    "description": null
+  },
+  "BossDefeatReward_SaintCentaur_1": {
+    "localized_name": "무속성 피해 강화 (대)",
+    "description": null
+  },
+  "BossDefeatReward_SaintCentaur_2": {
+    "localized_name": "어둠 속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_SakuraSaurus": {
+    "localized_name": "풀 속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_SakuraSaurus_Water": {
+    "localized_name": "물 속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_SkyDragon": {
+    "localized_name": "용 속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_Suzaku": {
+    "localized_name": "화염 속성 피해 강화 (대)",
+    "description": null
+  },
+  "BossDefeatReward_ThunderBird": {
+    "localized_name": "번개 속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_Umihebi": {
+    "localized_name": "물 속성 피해 강화 (중)",
+    "description": null
+  },
+  "BossDefeatReward_VioletFairy": {
+    "localized_name": "풀 속성 피해 강화 (중)",
+    "description": null
+  },
+  "BossDefeatReward_WeaselDragon": {
+    "localized_name": "얼음 속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_Werewolf_Ice": {
+    "localized_name": "얼음 속성 피해 강화 (대)",
+    "description": null
+  },
+  "BossDefeatReward_WhiteDeer": {
+    "localized_name": "무속성 피해 강화 (중)",
+    "description": null
+  },
+  "BossDefeatReward_WhiteMoth": {
+    "localized_name": "얼음 속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_WhiteShieldDragon": {
+    "localized_name": "용 속성 피해 강화 (중)",
+    "description": null
+  },
+  "BossDefeatReward_WhiteTiger_Ground": {
+    "localized_name": "땅 속성 피해 강화 (중)",
+    "description": null
+  },
+  "BossDefeatReward_WingGolem": {
+    "localized_name": "땅 속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_Yeti_Grass": {
+    "localized_name": "풀 속성 피해 강화 (소)",
+    "description": null
+  },
   "CaptureLevel_Up_1": {
     "localized_name": "포획력 강화 +1",
     "description": null

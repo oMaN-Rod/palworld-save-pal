@@ -31,6 +31,278 @@
     "localized_name": "提升攻擊Lv3",
     "description": null
   },
+  "BossDefeatReward_AmaterasuWolf_Dark": {
+    "localized_name": "增強暗屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_Anubis": {
+    "localized_name": "增強地屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_BadCatgirl": {
+    "localized_name": "增強暗屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_BerryGoat_Dark": {
+    "localized_name": "增強草屬性傷害 中",
+    "description": null
+  },
+  "BossDefeatReward_BlackMetalDragon": {
+    "localized_name": "增強龍屬性傷害 中",
+    "description": null
+  },
+  "BossDefeatReward_BlackPuppy": {
+    "localized_name": "增強暗屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_BlueDragon": {
+    "localized_name": "增強水屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_BlueThunderHorse": {
+    "localized_name": "增強雷屬性傷害 中",
+    "description": null
+  },
+  "BossDefeatReward_BlueberryFairy": {
+    "localized_name": "增強草屬性傷害 中",
+    "description": null
+  },
+  "BossDefeatReward_CaptainPenguin": {
+    "localized_name": "增強水屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_CatMage": {
+    "localized_name": "增強暗屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_CatVampire": {
+    "localized_name": "增強暗屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_DarkScorpion": {
+    "localized_name": "增強暗屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_DarkScorpion_Ground": {
+    "localized_name": "增強地屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_FairyDragon": {
+    "localized_name": "增強龍屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_FengyunDeeper": {
+    "localized_name": "增強無屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_FengyunDeeper_Electric": {
+    "localized_name": "增強雷屬性傷害 中",
+    "description": null
+  },
+  "BossDefeatReward_FlowerDinosaur_Electric": {
+    "localized_name": "增強雷屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_FlowerDoll": {
+    "localized_name": "增強草屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_GhostRabbit": {
+    "localized_name": "增強暗屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_GoldenHorse": {
+    "localized_name": "增強地屬性傷害 中",
+    "description": null
+  },
+  "BossDefeatReward_GrassMammoth": {
+    "localized_name": "增強草屬性傷害 中",
+    "description": null
+  },
+  "BossDefeatReward_GrassPanda_Electric": {
+    "localized_name": "增強雷屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_GrassRabbitMan": {
+    "localized_name": "增強草屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_GrimGirl": {
+    "localized_name": "增強暗屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_HawkBird": {
+    "localized_name": "增強無屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_HerculesBeetle": {
+    "localized_name": "增強地屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_HerculesBeetle_Ground": {
+    "localized_name": "增強地屬性傷害 中",
+    "description": null
+  },
+  "BossDefeatReward_Horus_Water": {
+    "localized_name": "增強水屬性傷害 中",
+    "description": null
+  },
+  "BossDefeatReward_IceHorse": {
+    "localized_name": "增強冰屬性傷害 大",
+    "description": null
+  },
+  "BossDefeatReward_IceHorse_Dark": {
+    "localized_name": "增強暗屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_JetDragon": {
+    "localized_name": "增強龍屬性傷害 大",
+    "description": null
+  },
+  "BossDefeatReward_KingAlpaca": {
+    "localized_name": "增強無屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_KingAlpaca_Ice": {
+    "localized_name": "增強冰屬性傷害 中",
+    "description": null
+  },
+  "BossDefeatReward_KingBahamut": {
+    "localized_name": "增強火屬性傷害 大",
+    "description": null
+  },
+  "BossDefeatReward_Kirin": {
+    "localized_name": "增強雷屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_Kitsunebi_Ice": {
+    "localized_name": "增強冰屬性傷害 大",
+    "description": null
+  },
+  "BossDefeatReward_LazyCatfish": {
+    "localized_name": "增強地屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_LazyDragon_Electric": {
+    "localized_name": "增強龍屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_LilyQueen_Dark": {
+    "localized_name": "增強暗屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_MopKing": {
+    "localized_name": "增強冰屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_Mutant": {
+    "localized_name": "增強無屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_MysteryMask": {
+    "localized_name": "增強暗屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_NaughtyCat": {
+    "localized_name": "增強無屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_NightBlueHorse": {
+    "localized_name": "增強暗屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_PinkRabbit_Grass": {
+    "localized_name": "增強草屬性傷害 中",
+    "description": null
+  },
+  "BossDefeatReward_PlantSlime": {
+    "localized_name": "增強地屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_PurpleSpider": {
+    "localized_name": "增強暗屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_QueenBee": {
+    "localized_name": "增強草屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_RaijinDaughter_Water": {
+    "localized_name": "增強暗屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_Ronin": {
+    "localized_name": "增強火屬性傷害 中",
+    "description": null
+  },
+  "BossDefeatReward_SaintCentaur_1": {
+    "localized_name": "增強無屬性傷害 大",
+    "description": null
+  },
+  "BossDefeatReward_SaintCentaur_2": {
+    "localized_name": "增強暗屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_SakuraSaurus": {
+    "localized_name": "增強草屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_SakuraSaurus_Water": {
+    "localized_name": "增強水屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_SkyDragon": {
+    "localized_name": "增強龍屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_Suzaku": {
+    "localized_name": "增強火屬性傷害 大",
+    "description": null
+  },
+  "BossDefeatReward_ThunderBird": {
+    "localized_name": "增強雷屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_Umihebi": {
+    "localized_name": "增強水屬性傷害 中",
+    "description": null
+  },
+  "BossDefeatReward_VioletFairy": {
+    "localized_name": "增強草屬性傷害 中",
+    "description": null
+  },
+  "BossDefeatReward_WeaselDragon": {
+    "localized_name": "增強冰屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_Werewolf_Ice": {
+    "localized_name": "增強冰屬性傷害 大",
+    "description": null
+  },
+  "BossDefeatReward_WhiteDeer": {
+    "localized_name": "增強無屬性傷害 中",
+    "description": null
+  },
+  "BossDefeatReward_WhiteMoth": {
+    "localized_name": "增強冰屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_WhiteShieldDragon": {
+    "localized_name": "增強龍屬性傷害 中",
+    "description": null
+  },
+  "BossDefeatReward_WhiteTiger_Ground": {
+    "localized_name": "增強地屬性傷害 中",
+    "description": null
+  },
+  "BossDefeatReward_WingGolem": {
+    "localized_name": "增強地屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_Yeti_Grass": {
+    "localized_name": "增強草屬性傷害 小",
+    "description": null
+  },
   "CaptureLevel_Up_1": {
     "localized_name": "捕獲力強化+1",
     "description": null
@@ -140,7 +412,7 @@
     "description": null
   },
   "Deffence_up3": {
-    "localized_name": "金剛之驅",
+    "localized_name": "金剛之軀",
     "description": null
   },
   "ElementBoost_Aqua_1_PAL": {
@@ -684,7 +956,7 @@
     "description": null
   },
   "Stamina_Down_1": {
-    "localized_name": "家裏蹲",
+    "localized_name": "家裡蹲",
     "description": "最大耐力-25.0% ※此效果僅對可騎乘的帕魯有效。"
   },
   "Stamina_Up_1": {

@@ -573,19 +573,19 @@
   },
   "Blueprint_CompoundBow_2": {
     "localized_name": "Esquema de Arco Composto 1",
-    "description": "Com isto em mãos, a receita de [Arco Composto (Uncommon)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 03]."
+    "description": "Com isto em mãos, a receita de [Arco Composto (Uncommon)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 02]."
   },
   "Blueprint_CompoundBow_3": {
     "localized_name": "Esquema de Arco Composto 2",
-    "description": "Com isto em mãos, a receita de [Arco Composto (Rare)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 03]."
+    "description": "Com isto em mãos, a receita de [Arco Composto (Rare)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 02]."
   },
   "Blueprint_CompoundBow_4": {
     "localized_name": "Esquema de Arco Composto 3",
-    "description": "Com isto em mãos, a receita de [Arco Composto (Epic)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 03]."
+    "description": "Com isto em mãos, a receita de [Arco Composto (Epic)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 02]."
   },
   "Blueprint_CompoundBow_5": {
     "localized_name": "Esquema de Arco Composto 4",
-    "description": "Com isto em mãos, a receita de [Arco Composto (Legendary)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 03]."
+    "description": "Com isto em mãos, a receita de [Arco Composto (Legendary)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 02]."
   },
   "Blueprint_CopperArmorCold_2": {
     "localized_name": "Esquema de Armadura de Metal Resistente a Frio 1",
@@ -2215,6 +2215,10 @@
     "localized_name": "Carvão Vegetal",
     "description": "Carvão Vegetal capaz de queimar Madeira. Pode ser combinado com Enxofre para produzir Pólvora."
   },
+  "ChargeLaserRifle": {
+    "localized_name": "pt-BR Text",
+    "description": "pt-BR Text"
+  },
   "CheeseBurger": {
     "localized_name": "X-búrguer",
     "description": "Prato com queijo no Hambúrguer. Ao comer, a saciedade é garantida por um determinado tempo, Defesa +10%."
@@ -2582,6 +2586,10 @@
   "EnergyRocketLauncher_5": {
     "localized_name": "Canhão de Plasma",
     "description": "Dispara um projétil de energia com potência elevada. Causa uma explosão de energia ao atingir o alvo."
+  },
+  "EnergyShotgun": {
+    "localized_name": "pt-BR Text",
+    "description": "pt-BR Text"
   },
   "ExpBoost_01": {
     "localized_name": "Livro de Prática (P)",
@@ -3641,23 +3649,23 @@
   },
   "LaserGatlingGun": {
     "localized_name": "Gatling Gun Laser",
-    "description": "Permite disparar projéteis laser em alta velocidade. Seu poder de fogo elevado é capaz de subjugar vários inimigos ao mesmo tempo."
+    "description": "Arma a laser de alta cadência de disparo. Seu poder de fogo elevado é capaz de subjugar vários inimigos ao mesmo tempo."
   },
   "LaserGatlingGun_2": {
     "localized_name": "Gatling Gun Laser",
-    "description": "Permite disparar projéteis laser em alta velocidade. Seu poder de fogo elevado é capaz de subjugar vários inimigos ao mesmo tempo."
+    "description": "Arma a laser de alta cadência de disparo. Seu poder de fogo elevado é capaz de subjugar vários inimigos ao mesmo tempo."
   },
   "LaserGatlingGun_3": {
     "localized_name": "Gatling Gun Laser",
-    "description": "Permite disparar projéteis laser em alta velocidade. Seu poder de fogo elevado é capaz de subjugar vários inimigos ao mesmo tempo."
+    "description": "Arma a laser de alta cadência de disparo. Seu poder de fogo elevado é capaz de subjugar vários inimigos ao mesmo tempo."
   },
   "LaserGatlingGun_4": {
     "localized_name": "Gatling Gun Laser",
-    "description": "Permite disparar projéteis laser em alta velocidade. Seu poder de fogo elevado é capaz de subjugar vários inimigos ao mesmo tempo."
+    "description": "Arma a laser de alta cadência de disparo. Seu poder de fogo elevado é capaz de subjugar vários inimigos ao mesmo tempo."
   },
   "LaserGatlingGun_5": {
     "localized_name": "Gatling Gun Laser",
-    "description": "Permite disparar projéteis laser em alta velocidade. Seu poder de fogo elevado é capaz de subjugar vários inimigos ao mesmo tempo."
+    "description": "Arma a laser de alta cadência de disparo. Seu poder de fogo elevado é capaz de subjugar vários inimigos ao mesmo tempo."
   },
   "LaserRifle": {
     "localized_name": "Fuzil Laser",
@@ -3875,6 +3883,10 @@
     "localized_name": "Cogumelos Marinados",
     "description": "Prato criado marinando um Cogumelo. Quando ingerido, confere Defesa +10% por tempo limitado."
   },
+  "MeaninglessItem_ButcheringImportPal": {
+    "localized_name": "Amostra Descartada de Tecido",
+    "description": "Tecido biológico inutilizável. Resíduo gerado ao cortar e desmontar um Pal restaurado geneticamente. Totalmente inútil, serve apenas para descarte ou venda."
+  },
   "Meat": {
     "localized_name": "Meat",
     "description": "Carne de Pal. É tão fresca que pode até ser consumida crua pelos humanos."
@@ -4083,6 +4095,10 @@
     "localized_name": "Suco Suspeito",
     "description": "Suco que dá uma boa sensação. Quando bebido, aumenta um pouco a velocidade de trabalho por tempo limitado, embora também faça cair um pouco a SAN."
   },
+  "OverheatRifle": {
+    "localized_name": "pt-BR Text",
+    "description": "pt-BR Text"
+  },
   "PalCrystal_Ex": {
     "localized_name": "Peça da Civilização Antiga",
     "description": "Item defeituoso escavado de ruínas antigas. Contém muitas informações sobre tecnologias perdidas. De valor extremamente elevado, é procurado por todas as pessoas."
@@ -4090,6 +4106,10 @@
   "PalDarkParts": {
     "localized_name": "Fragmento de Escuridão",
     "description": "Item deixado por certos Pals de Escuridão poderosos. Pode servir de material para certos acessórios igualmente poderosos."
+  },
+  "PalDopingShot": {
+    "localized_name": "pt-BR Text",
+    "description": "pt-BR Text"
   },
   "PalEgg_Dark_01": {
     "localized_name": "Ovo Negro",
@@ -4274,6 +4294,10 @@
   "PalFluid": {
     "localized_name": "Fluido de Pal",
     "description": "Fluido extraído de Pals. De alta viscosidade, é bastante útil."
+  },
+  "PalHealingGrenade": {
+    "localized_name": "pt-BR Text",
+    "description": "pt-BR Text"
   },
   "PalItem_CaptainPenguin": {
     "localized_name": "Adorno de Pluma de Penking",

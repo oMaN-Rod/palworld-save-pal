@@ -19,10 +19,6 @@
     "localized_name": "Anubis",
     "description": "Devido ao seu aspecto, já foi considerado símbolo da nobreza. Para os mais distantes da fortuna e do poder, já serviu como ideal de aparência. Em algum momento, contudo, Anubis passou a ser símbolo da morte."
   },
-  "Believer_CrossBow": {
-    "localized_name": "Ego",
-    "description": null
-  },
   "Believer_Fat_GiantClub": {
     "localized_name": "Brick",
     "description": null
@@ -39,40 +35,8 @@
     "localized_name": "Flare",
     "description": null
   },
-  "Female_People02": {
-    "localized_name": "Siren",
-    "description": null
-  },
-  "Female_People03": {
-    "localized_name": "Turncoat",
-    "description": null
-  },
   "Female_Soldier": {
     "localized_name": "Jade",
-    "description": null
-  },
-  "Female_Soldier02": {
-    "localized_name": "Dazzle",
-    "description": null
-  },
-  "Female_Soldier03": {
-    "localized_name": "Aloha",
-    "description": null
-  },
-  "Female_Soldier04": {
-    "localized_name": "Nimble",
-    "description": null
-  },
-  "FireCult_FlameThrower": {
-    "localized_name": "Shadow",
-    "description": null
-  },
-  "Hunter_Fat_GatlingGun": {
-    "localized_name": "Grill",
-    "description": null
-  },
-  "Hunter_Rifle": {
-    "localized_name": "Hawk",
     "description": null
   },
   "Male_DesertPeople": {
@@ -87,14 +51,6 @@
     "localized_name": "Dyna",
     "description": null
   },
-  "Male_People02": {
-    "localized_name": "Quill",
-    "description": null
-  },
-  "Male_People03": {
-    "localized_name": "Scoot",
-    "description": null
-  },
   "Male_People2": {
     "localized_name": "Mite",
     "description": null
@@ -103,36 +59,8 @@
     "localized_name": "Crash",
     "description": null
   },
-  "Male_Soldier02": {
-    "localized_name": "Dart",
-    "description": null
-  },
-  "Male_Soldier03": {
-    "localized_name": "Clint",
-    "description": null
-  },
-  "Male_Soldier04": {
-    "localized_name": "Lasso",
-    "description": null
-  },
-  "Male_Trader01": {
-    "localized_name": "Skim",
-    "description": null
-  },
-  "Male_Trader02": {
-    "localized_name": "Mimic",
-    "description": null
-  },
-  "Male_Trader03": {
-    "localized_name": "Billy",
-    "description": null
-  },
   "Ninja": {
     "localized_name": "Fumble",
-    "description": null
-  },
-  "Police_Rifle": {
-    "localized_name": "Whip",
     "description": null
   },
   "Police_old": {
@@ -141,10 +69,6 @@
   },
   "Scientist_LaserRifle": {
     "localized_name": "Whisk",
-    "description": null
-  },
-  "Viking": {
-    "localized_name": "Gnaw",
     "description": null
   },
   "VikingElite": {
@@ -355,6 +279,10 @@
     "localized_name": "Menasting Terra",
     "description": "Seu corpo é feito de pura energia, sem conteúdo nenhum. Ele enfia terra e minérios dentro da carapaça para dar forma a uma massa esmagadora. Quem é atingido por um golpe seu não pode conter um grito infernal."
   },
+  "DeathPenalty_guide": {
+    "localized_name": "Domadora Veterana",
+    "description": null
+  },
   "Deer": {
     "localized_name": "Eikthyrdeer",
     "description": "O espécime de chifres mais esplêndidos é quem se torna líder da manada. E, quando se partem seus chifres, parte-se também seu coração. Ele então abandona seu grupo para aguardar sozinho o fim da vida."
@@ -497,6 +425,10 @@
   },
   "Female_People03": {
     "localized_name": "Habitante da aldeia",
+    "description": null
+  },
+  "Female_Presenter01": {
+    "localized_name": "Domador simpático",
     "description": null
   },
   "Female_Soldier01": {
@@ -746,6 +678,22 @@
   "Hedgehog_Ice": {
     "localized_name": "Jolthog Cryst",
     "description": "Ele expele o ar gélido que traz acumulado quando sofre algum choque. A rajada disparada em todas as direções congela a atmosfera ao redor, atravessando o corpo do inimigo que tenta atacá-lo."
+  },
+  "Help01": {
+    "localized_name": "Habitante da ilha",
+    "description": null
+  },
+  "Help02": {
+    "localized_name": "Habitante da ilha",
+    "description": null
+  },
+  "Help03": {
+    "localized_name": "Habitante da ilha",
+    "description": null
+  },
+  "Help04": {
+    "localized_name": "Habitante da ilha",
+    "description": null
   },
   "HerculesBeetle": {
     "localized_name": "Warsect",
@@ -1502,6 +1450,10 @@
   "RedArmorBird": {
     "localized_name": "Ragnahawk",
     "description": "Apesar da semelhança, esta espécie não tem relação com a Beakon. Alimentando-se sobretudo de rochas, ao longo de muitas eras enrijeceu-se não apenas seu bico, mas seu corpo inteiro."
+  },
+  "Respawn_guide": {
+    "localized_name": "Domador simpático",
+    "description": null
   },
   "Reward_BossDefeat": {
     "localized_name": "Sentinela",

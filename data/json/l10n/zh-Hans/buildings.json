@@ -45,15 +45,15 @@
   },
   "BlastFurnace": {
     "localized_name": "原始的炉子",
-    "description": "可冶炼金属锭。 品质不佳，速度慢。 需要炎系帕鲁点火。"
+    "description": "可冶炼金属锭。 品质不佳，速度慢。 需要火系帕鲁点火。"
   },
   "BlastFurnace2": {
     "localized_name": "改善后的炉子",
-    "description": "可冶炼精炼金属锭。 品质稍有提升，但速度仍然不足。 需要炎系帕鲁点火。"
+    "description": "可冶炼精炼金属锭。 品质稍有提升，但速度仍然不足。 需要火系帕鲁点火。"
   },
   "BlastFurnace3": {
     "localized_name": "电气炉",
-    "description": "可冶炼帕鲁金属锭。 需要电力，但可以更快完成冶炼。 需要炎系帕鲁点火。"
+    "description": "可冶炼帕鲁金属锭。 需要电力，但可以更快完成冶炼。 需要火系帕鲁点火。"
   },
   "BlastFurnace4": {
     "localized_name": "巨大熔炉",
@@ -81,7 +81,7 @@
   },
   "BreedFarm": {
     "localized_name": "配种牧场",
-    "description": "分派♂♀帕鲁各一只， 即可让它们产下帕鲁蛋。 需要在设施中放入|蛋糕|。"
+    "description": "分派♂♀帕鲁各一只， 即可让它们产下帕鲁蛋。 需在设施中放入蛋糕才会顺利生蛋。"
   },
   "BuildableGoddessStatue": {
     "localized_name": "力量石像",
@@ -97,11 +97,15 @@
   },
   "CampFire": {
     "localized_name": "篝火",
-    "description": "烹制食材时的必要设施。 只能烧制普通食材。 需要炎系帕鲁点火。"
+    "description": "烹制食材时的必要设施。 只能烧制普通食材。 需要火系帕鲁点火。"
+  },
+  "CandleStand": {
+    "localized_name": "-",
+    "description": null
   },
   "Cauldron": {
     "localized_name": "魔女之釜",
-    "description": "如配置在据点， 可以提升制药的工作速度。 但即使配置2个以上，效果也不会叠加。"
+    "description": "如配置在据点， 可以提升「制药」的工作速度。 即使配置复数个，其效果也不会叠加。"
   },
   "CeilingLamp": {
     "localized_name": "天花板吊灯",
@@ -147,13 +151,25 @@
     "localized_name": "石炭采矿场",
     "description": "生产石炭的设施。 挖掘石炭的工作需要大量体力，相当严苛。 把这些工作交给擅长挖掘的帕鲁吧。"
   },
+  "CompositeDesk": {
+    "localized_name": "制图桌",
+    "description": "通过组合复数设计图， 可以制成更高等级设计图的设施。"
+  },
+  "ConservationGroupBannerA": {
+    "localized_name": "-",
+    "description": null
+  },
+  "ConservationGroupBannerB": {
+    "localized_name": "-",
+    "description": null
+  },
   "Container01_Iron": {
     "localized_name": "大型集装箱",
     "description": "可以用来收纳道具的大型集装箱。 设计模仿了古代伟大文明的遗物样式。"
   },
   "CookingStove": {
     "localized_name": "料理锅",
-    "description": "烹制食材时的必要设施。 使用锅子增加了可烹制范围。 需要炎系帕鲁点火。"
+    "description": "烹制食材时的必要设施。 使用锅子增加了可烹制范围。 需要火系帕鲁点火。"
   },
   "Cooler": {
     "localized_name": "降温器",
@@ -161,11 +177,11 @@
   },
   "CoolerBox": {
     "localized_name": "保冷箱",
-    "description": "小型食物储存库。 分派冰帕鲁至此的话， 里面的食物会变得难以腐坏。"
+    "description": "小型食物储存库。 将冰系帕鲁指派到这里工作时， 可以使里面的食物不会轻易腐败。"
   },
   "CoolerPalFoodBox": {
     "localized_name": "低温保鲜饲料箱",
-    "description": "可以冷冻的饲料箱。 将冰系帕鲁指派到这里工作时， 箱子中的食物更难以腐坏。"
+    "description": "可以冷冻的饲料箱。 将冰系帕鲁指派到这里工作时， 可以使里面的食物不会轻易腐败。"
   },
   "CopperPit": {
     "localized_name": "金属采矿场",
@@ -181,7 +197,7 @@
   },
   "Crusher": {
     "localized_name": "粉碎机",
-    "description": "可以将石头或木材粉碎之后 转换成其他素材的设施。 需要有具备|浇水|适应性的帕鲁来使水车转动。"
+    "description": "可以将石头或木材粉碎之后 转换成其他素材的设施。 需要有具备「浇水」适应性的帕鲁来使水车转动。"
   },
   "Curtain01_Wall_Stone": {
     "localized_name": "古典式窗帘",
@@ -231,6 +247,10 @@
     "localized_name": "古典式书桌",
     "description": "装饰用的古典式书桌。"
   },
+  "DimensionPalStorage": {
+    "localized_name": "帕鲁次元仓库",
+    "description": "可以大量存放捕获帕鲁的设施。 只要是公会成员，谁都可以进行帕鲁的存取。 改为私密锁定时，则只能存放自己的帕鲁。"
+  },
   "DismantlingConveyor": {
     "localized_name": "帕鲁解体传送带",
     "description": "能够将放入的帕鲁自动解体的，梦幻般的设备。"
@@ -257,11 +277,11 @@
   },
   "ElectricHeater": {
     "localized_name": "电气取暖器",
-    "description": "输送暖风，提升据点温度的装置。 使用电力，可大幅提升温度。 需要炎系帕鲁点火。"
+    "description": "输送暖风，提升据点温度的装置。 使用电力，可大幅提升温度。 需要火系帕鲁点火。"
   },
   "ElectricKitchen": {
     "localized_name": "电气厨房",
-    "description": "烹制食材时的必要设施。 需要电力，但可快速烹制许多食材。 需要炎系帕鲁点火。"
+    "description": "烹制食材时的必要设施。 需要电力，但可快速烹制许多食材。 需要火系帕鲁点火。"
   },
   "EnergyStorage_Electric": {
     "localized_name": "蓄电器",
@@ -288,7 +308,7 @@
     "description": "生产金币的工厂。 因为精神负担大，工作时SAN值会降低。 需有能进行手工作业的帕鲁。"
   },
   "FarmBlockV2_Berries": {
-    "localized_name": "野莓农园",
+    "localized_name": "野莓园",
     "description": "可培养红色野莓的农园。 收获所需的时间较短，但不怎么能饱腹。 为了收获，需要数只帕鲁进行播种与浇水。"
   },
   "FarmBlockV2_Carrot": {
@@ -296,7 +316,7 @@
     "description": "可培育胡萝卜的农园。 此作物播种至收成所需时间较长，但可让料理更加丰富多元。 需有数名帕鲁负责播种、灌溉及收获。"
   },
   "FarmBlockV2_Lettuce": {
-    "localized_name": "生菜农园",
+    "localized_name": "生菜园",
     "description": "可培养生菜的农园。 收获所需的时间较长，但可增加料理的变化。 为了收获，需要数只帕鲁进行播种与浇水。"
   },
   "FarmBlockV2_Onion": {
@@ -308,32 +328,36 @@
     "description": "可培育土豆的农园。 此作物播种至收成所需时间较长，但可让料理更加丰富多元。 需有数名帕鲁负责播种、灌溉及收获。"
   },
   "FarmBlockV2_tomato": {
-    "localized_name": "番茄农园",
+    "localized_name": "番茄园",
     "description": "可培养番茄的农园。 收获所需的时间较长，但可增加料理的变化。 为了收获，需要数只帕鲁进行播种与浇水。"
   },
   "FarmBlockV2_wheet": {
-    "localized_name": "小麦农园",
+    "localized_name": "小麦园",
     "description": "可培养小麦的农园。 收获所需的时间比较一般。 为了收获，需要数只帕鲁进行播种与浇水。"
   },
   "Farm_SkillFruits": {
-    "localized_name": "技能果实农园",
+    "localized_name": "技能果树园",
     "description": "可以种植技能果实的农园。 将果实作为原种植入地面， 就可以收获多个相同种类的果实。"
   },
   "FastTravelPoint": {
     "localized_name": "巨鹫之像",
     "description": "皮皮鸡造型的石碑。 配置后可进行快速传送。"
   },
+  "FireStand": {
+    "localized_name": "-",
+    "description": null
+  },
   "FlourMill": {
     "localized_name": "磨粉机",
-    "description": "可以将小麦磨碎之后 生产出的面粉设施。 需要有具备|浇水|适应性的帕鲁来使水车转动。"
+    "description": "可以将小麦磨碎之后 生产出的面粉设施。 需要有具备「浇水」适应性的帕鲁来使水车转动。"
   },
   "FlowerBed": {
     "localized_name": "花坛",
-    "description": "如配置在据点， 可以提升采集的工作速度。 但即使配置2个以上，效果也不会叠加。"
+    "description": "如配置在据点， 可以提升「采集」的工作速度。 即使配置复数个，其效果也不会叠加。"
   },
   "Fountain": {
     "localized_name": "喷泉",
-    "description": "如配置在据点， 可以提升浇水的工作速度。 但即使配置2个以上，效果也不会叠加。"
+    "description": "如配置在据点， 可以提升「浇水」的工作速度。 即使配置复数个，其效果也不会叠加。"
   },
   "Fudukue": {
     "localized_name": "日式矮桌",
@@ -363,6 +387,10 @@
     "localized_name": "玻璃地基",
     "description": "用于在上面建造墙壁或设施的地基。 以钢化玻璃制成，非常坚固。"
   },
+  "Glass_pillars": {
+    "localized_name": "玻璃立柱",
+    "description": "用来支撑建筑的立柱。 以钢化玻璃制成，非常坚固。"
+  },
   "Glass_roof": {
     "localized_name": "玻璃屋顶",
     "description": "建在墙壁上，用于遮风避雨的屋顶。 以钢化玻璃制成，非常坚固。"
@@ -374,6 +402,10 @@
   "Glass_wall": {
     "localized_name": "玻璃墙壁",
     "description": "建在地基上，用于防止入侵者的墙壁。 以钢化玻璃制成，非常坚固。"
+  },
+  "GlobalPalStorage": {
+    "localized_name": "跨界帕鲁终端",
+    "description": "具有保存帕鲁的基因序列， 以及通过基因序列复原帕鲁的功能的设施。 保存的基因序列能够带到其他世界使用。"
   },
   "Globe01_Stone": {
     "localized_name": "古典式地球仪",
@@ -397,15 +429,19 @@
   },
   "Heater": {
     "localized_name": "取暖器",
-    "description": "输送暖风，提升据点温度的装置。 虽然不是很暖，但可抵御少许寒冷。 需要炎系帕鲁点火。"
+    "description": "输送暖风，提升据点温度的装置。 虽然不是很暖，但可抵御少许寒冷。 需要火系帕鲁点火。"
   },
   "HugeKitchen": {
     "localized_name": "大型厨房",
     "description": "烹制食材时的必要设施。 扩大了占地面积让复数帕鲁可以同时进行烹调。 需要火系帕鲁点火。"
   },
+  "Hunter_GangFlag": {
+    "localized_name": "-",
+    "description": null
+  },
   "IceCrusher": {
     "localized_name": "冷冻粉碎机",
-    "description": "可粉碎金属矿石以转换成其他材料的设施。 虽然要使其工作需要电力供应，以及有|冷却|适应性的帕鲁，但是效率极佳。"
+    "description": "可粉碎金属矿石以转换成其他材料的设施。 虽然要使其工作需要电力供应，以及有「冷却」适应性的帕鲁，但是效率极佳。"
   },
   "Irori": {
     "localized_name": "地炉",
@@ -413,7 +449,7 @@
   },
   "ItemBooth": {
     "localized_name": "跳蚤市场（道具）",
-    "description": "出售物品的设施。 透过贩售一览面登录商品 可以将物品出售给其他玩家。"
+    "description": "出售物品的设施。 可以将物品出售给其他玩家。 将冰系帕鲁指派到这里工作时， 可以使里面的食物不会轻易腐败。"
   },
   "ItemChest": {
     "localized_name": "木箱",
@@ -525,11 +561,11 @@
   },
   "Light_FirePlace01": {
     "localized_name": "砖制暖炉",
-    "description": "可以当作光源的砖制暖炉。 需要火帕鲁点上火才可以使用。"
+    "description": "可以当作光源的砖制暖炉。 需要火系帕鲁点火。"
   },
   "Light_FirePlace02": {
     "localized_name": "暖炉",
-    "description": "可以当作光源的暖炉。 需要火帕鲁点上火才可以使用。"
+    "description": "可以当作光源的暖炉。 需要火系帕鲁点火。"
   },
   "Light_FloorLamp01": {
     "localized_name": "古典式棕色落地灯",
@@ -554,6 +590,10 @@
   "Light_LightPole04": {
     "localized_name": "时髦路灯",
     "description": "可以当作光源的时髦路灯。 需要通电才可以使用。"
+  },
+  "LilyQueenStatue": {
+    "localized_name": "-",
+    "description": null
   },
   "MachineGame01_Iron": {
     "localized_name": "夹娃娃机",
@@ -619,6 +659,10 @@
     "localized_name": "金属地基",
     "description": "用于在上面建造墙壁或设施的地基。 以金属制成，非常坚固。"
   },
+  "Metal_pillars": {
+    "localized_name": "金属立柱",
+    "description": "用来支撑建筑的立柱。 以金属制成，非常坚固。"
+  },
   "Metal_roof": {
     "localized_name": "金属屋顶",
     "description": "建在墙壁上，用于遮风避雨的屋顶。 以金属制成，非常坚固。"
@@ -633,7 +677,7 @@
   },
   "MiningTool": {
     "localized_name": "十字镐和安全帽",
-    "description": "如配置在据点， 可以提升挖掘的工作速度。 但即使配置2个以上，效果也不会叠加。"
+    "description": "如配置在据点， 可以提升「挖掘」的工作速度。 即使配置复数个，其效果也不会叠加。"
   },
   "Mirror01_Stone": {
     "localized_name": "古典式椭圆镜子",
@@ -661,7 +705,7 @@
   },
   "OlympicCauldron": {
     "localized_name": "圣火台",
-    "description": "如配置在据点， 可以提升生火的工作速度。 但即使配置2个以上，效果也不会叠加。"
+    "description": "如配置在据点， 可以提升「生火」的工作速度。 即使配置复数个，其效果也不会叠加。"
   },
   "OperatingTable": {
     "localized_name": "帕鲁手术台",
@@ -669,11 +713,15 @@
   },
   "PalBooth": {
     "localized_name": "跳蚤市场（帕鲁）",
-    "description": "出售帕鲁的设施。 透过贩售一览页面登录商品 可以将帕鲁出售给其他玩家。"
+    "description": "出售帕鲁的设施。 可以将帕鲁出售给其他玩家。 将冰系帕鲁指派到这里工作时， 可以使里面的食物不会轻易腐败。"
   },
   "PalBoxV2": {
     "localized_name": "帕鲁终端",
     "description": "用来存放抓到的帕鲁的设施。 箱子里的帕鲁会逐渐回复生命值。 此设施周围的区域即为据点。"
+  },
+  "PalCage": {
+    "localized_name": "-",
+    "description": null
   },
   "PalFoodBox": {
     "localized_name": "饲料箱",
@@ -729,7 +777,7 @@
   },
   "Refrigerator": {
     "localized_name": "冰箱",
-    "description": "大型食物储存库。 派遣冰帕鲁至此的话， 里面的食物会变得难以腐坏。"
+    "description": "大型食物储存库。 将冰系帕鲁指派到这里工作时， 可以使里面的食物不会轻易腐败。"
   },
   "RepairBench": {
     "localized_name": "修理台",
@@ -849,7 +897,7 @@
   },
   "Silo": {
     "localized_name": "筒仓",
-    "description": "如配置在据点， 可以提升播种的工作速度。 但即使配置2个以上，效果也不会叠加。"
+    "description": "如配置在据点， 可以提升「播种」的工作速度。 即使配置复数个，其效果也不会叠加。"
   },
   "SkinChange": {
     "localized_name": "帕鲁装扮机",
@@ -857,7 +905,7 @@
   },
   "Snowman": {
     "localized_name": "雪人",
-    "description": "如配置在据点， 可以提升冷却的工作速度。 但即使配置2个以上，效果也不会叠加。"
+    "description": "如配置在据点， 可以提升「冷却」的工作速度。 即使配置复数个，其效果也不会叠加。"
   },
   "Sofa01_Iron": {
     "localized_name": "单人皮制沙发",
@@ -935,6 +983,10 @@
     "localized_name": "石制地基",
     "description": "用于在上面建造墙壁或设施的地基。 以石头制成，还算坚固。"
   },
+  "Stone_pillar": {
+    "localized_name": "石制立柱",
+    "description": "用来支撑建筑的立柱。 以石头制成，还算坚固。"
+  },
   "Stone_roof": {
     "localized_name": "石制屋顶",
     "description": "建在墙壁上，用于遮风避雨的屋顶。 以石头制成，还算坚固。"
@@ -969,7 +1021,7 @@
   },
   "Stump": {
     "localized_name": "树桩和斧头",
-    "description": "如配置在据点， 可以提升采伐的工作速度。 但即使配置2个以上，效果也不会叠加。"
+    "description": "如配置在据点， 可以提升「采伐」的工作速度。 即使配置复数个，其效果也不会叠加。"
   },
   "SulfurPit": {
     "localized_name": "硫磺采矿场",
@@ -1033,11 +1085,11 @@
   },
   "ToolBoxV1": {
     "localized_name": "大型工具箱",
-    "description": "如配置在据点， 可以提升手工作业的工作速度。 但即使配置2个以上，效果也不会叠加。"
+    "description": "如配置在据点， 可以提升「手工作业」的工作速度。 即使配置复数个，其效果也不会叠加。"
   },
   "Torch": {
     "localized_name": "固定式火把",
-    "description": "可在黑夜照亮据点的光源。 需要炎系帕鲁点火。"
+    "description": "可在黑夜照亮据点的光源。 需要火系帕鲁点火。"
   },
   "Toro": {
     "localized_name": "石灯笼",
@@ -1101,7 +1153,7 @@
   },
   "TransmissionTower": {
     "localized_name": "输电塔",
-    "description": "如配置在据点， 可以提升发电的工作速度。 但即使配置2个以上，效果也不会叠加。"
+    "description": "如配置在据点， 可以提升「发电」的工作速度。 即使配置复数个，其效果也不会叠加。"
   },
   "Trap_LegHold": {
     "localized_name": "捕兽夹（小）",
@@ -1137,7 +1189,11 @@
   },
   "WallTorch": {
     "localized_name": "壁挂火把",
-    "description": "可在黑夜照亮据点的光源。 可设置在墙壁上。 需要炎系帕鲁点火。"
+    "description": "可在黑夜照亮据点的光源。 可设置在墙壁上。 需要火系帕鲁点火。"
+  },
+  "WallTorch02": {
+    "localized_name": "-",
+    "description": null
   },
   "WeaponFactory_Dirty_01": {
     "localized_name": "武器制作台",
@@ -1150,6 +1206,10 @@
   "WeaponFactory_Dirty_03": {
     "localized_name": "武器流水线工厂II",
     "description": "用于生产武器及弹药的工厂。 通过详细分工，可用很快速度制作高等武器。 需有能进行手工作业的帕鲁。"
+  },
+  "Wire_Fence": {
+    "localized_name": "-",
+    "description": null
   },
   "Wood_Gate": {
     "localized_name": "木制大门",
@@ -1167,6 +1227,10 @@
     "localized_name": "木制带窗墙壁",
     "description": "建在地基上，用于防止入侵者的带窗墙壁。 以木头制成，相当脆弱。"
   },
+  "WoodenBarricade": {
+    "localized_name": "-",
+    "description": null
+  },
   "Wooden_DoorWall": {
     "localized_name": "木门",
     "description": "建于地基上的门，可作为出入口。 以木头制成，相当脆弱。"
@@ -1178,6 +1242,10 @@
   "Wooden_ladder": {
     "localized_name": "梯子",
     "description": "可以用来爬上高处的梯子。"
+  },
+  "Wooden_pillar": {
+    "localized_name": "木制立柱",
+    "description": "用来支撑建筑的立柱。 以木头制成，相当脆弱。"
   },
   "Wooden_roof": {
     "localized_name": "木制屋顶",

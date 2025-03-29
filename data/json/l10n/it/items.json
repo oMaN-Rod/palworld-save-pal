@@ -573,19 +573,19 @@
   },
   "Blueprint_CompoundBow_2": {
     "localized_name": "Progetto per arco composito 1",
-    "description": "Con questo, è possibile realizzare: Arco composito (Uncommon). Per farlo, hai bisogno di: WeaponFactory Dirty 03."
+    "description": "Con questo, è possibile realizzare: Arco composito (Uncommon). Per farlo, hai bisogno di: WeaponFactory Dirty 02."
   },
   "Blueprint_CompoundBow_3": {
     "localized_name": "Progetto per arco composito 2",
-    "description": "Con questo, è possibile realizzare: Arco composito (Rare). Per farlo, hai bisogno di: WeaponFactory Dirty 03."
+    "description": "Con questo, è possibile realizzare: Arco composito (Rare). Per farlo, hai bisogno di: WeaponFactory Dirty 02."
   },
   "Blueprint_CompoundBow_4": {
     "localized_name": "Progetto per arco composito 3",
-    "description": "Con questo, è possibile realizzare: Arco composito (Epic). Per farlo, hai bisogno di: WeaponFactory Dirty 03."
+    "description": "Con questo, è possibile realizzare: Arco composito (Epic). Per farlo, hai bisogno di: WeaponFactory Dirty 02."
   },
   "Blueprint_CompoundBow_5": {
     "localized_name": "Progetto per arco composito 4",
-    "description": "Con questo, è possibile realizzare: Arco composito (Legendary). Per farlo, hai bisogno di: WeaponFactory Dirty 03."
+    "description": "Con questo, è possibile realizzare: Arco composito (Legendary). Per farlo, hai bisogno di: WeaponFactory Dirty 02."
   },
   "Blueprint_CopperArmorCold_2": {
     "localized_name": "Progetto per armatura di metallo per il gelo 1",
@@ -685,19 +685,19 @@
   },
   "Blueprint_FlameThrower_2": {
     "localized_name": "Progetto per lanciafiamme 1",
-    "description": "Con questo, è possibile realizzare: FlameThrower (Uncommon). Per farlo, hai bisogno di: WeaponFactory Dirty 03."
+    "description": "Con questo, è possibile realizzare: Lanciafiamme (Uncommon). Per farlo, hai bisogno di: WeaponFactory Dirty 03."
   },
   "Blueprint_FlameThrower_3": {
     "localized_name": "Progetto per lanciafiamme 2",
-    "description": "Con questo, è possibile realizzare: FlameThrower (Rare). Per farlo, hai bisogno di: WeaponFactory Dirty 03."
+    "description": "Con questo, è possibile realizzare: Lanciafiamme (Rare). Per farlo, hai bisogno di: WeaponFactory Dirty 03."
   },
   "Blueprint_FlameThrower_4": {
     "localized_name": "Progetto per lanciafiamme 3",
-    "description": "Con questo, è possibile realizzare: FlameThrower (Epic). Per farlo, hai bisogno di: WeaponFactory Dirty 03."
+    "description": "Con questo, è possibile realizzare: Lanciafiamme (Epic). Per farlo, hai bisogno di: WeaponFactory Dirty 03."
   },
   "Blueprint_FlameThrower_5": {
     "localized_name": "Progetto per lanciafiamme 4",
-    "description": "Con questo, è possibile realizzare: FlameThrower (Legendary). Per farlo, hai bisogno di: WeaponFactory Dirty 03."
+    "description": "Con questo, è possibile realizzare: Lanciafiamme (Legendary). Per farlo, hai bisogno di: WeaponFactory Dirty 03."
   },
   "Blueprint_FurArmorCold_2": {
     "localized_name": "Progetto per armatura di pelliccia per il gelo 1",
@@ -2215,6 +2215,10 @@
     "localized_name": "Resti carbonizzati",
     "description": "Resti carbonizzati ricavato bruciando Legno. Combinandolo con lo Zolfo è possibile produrre la Polvere da sparo."
   },
+  "ChargeLaserRifle": {
+    "localized_name": "it Text",
+    "description": "it Text"
+  },
   "CheeseBurger": {
     "localized_name": "Cheeseburger",
     "description": "Un piatto con formaggio in mezzo a un Hamburger. Mangiandolo, ti sentirai sazio per un certo periodo di tempo e aumenterà il tuo Difesa del 10%."
@@ -2583,6 +2587,10 @@
     "localized_name": "Cannone al plasma",
     "description": "Spara un colpo di energia concentrata. Il proiettile esplode al momento dell'impatto."
   },
+  "EnergyShotgun": {
+    "localized_name": "it Text",
+    "description": "it Text"
+  },
   "ExpBoost_01": {
     "localized_name": "Manuale di addestramento (Piccolo)",
     "description": "Far leggere a un Pal questo volume gli permetterà di ottenere poca esperienza."
@@ -2636,23 +2644,23 @@
     "description": "it Text"
   },
   "FlameThrower": {
-    "localized_name": "FlameThrower",
+    "localized_name": "Lanciafiamme",
     "description": "Flamethrower capace di generare una vampata di fiamme. Può far andare a fuoco chi colpisce."
   },
   "FlameThrower_2": {
-    "localized_name": "FlameThrower",
+    "localized_name": "Lanciafiamme",
     "description": "Flamethrower capace di generare una vampata di fiamme. Può far andare a fuoco chi colpisce."
   },
   "FlameThrower_3": {
-    "localized_name": "FlameThrower",
+    "localized_name": "Lanciafiamme",
     "description": "Flamethrower capace di generare una vampata di fiamme. Può far andare a fuoco chi colpisce."
   },
   "FlameThrower_4": {
-    "localized_name": "FlameThrower",
+    "localized_name": "Lanciafiamme",
     "description": "Flamethrower capace di generare una vampata di fiamme. Può far andare a fuoco chi colpisce."
   },
   "FlameThrower_5": {
-    "localized_name": "FlameThrower",
+    "localized_name": "Lanciafiamme",
     "description": "Flamethrower capace di generare una vampata di fiamme. Può far andare a fuoco chi colpisce."
   },
   "FlamethrowerBullet": {
@@ -2717,7 +2725,7 @@
   },
   "FriedVegetables": {
     "localized_name": "Verdure saltate",
-    "description": "Un piatto cucinato con Lattuga e Meat. Mangiare per un certo periodo, Attacco +10%."
+    "description": "Un piatto cucinato con Lattuga e Carne cruda. Mangiare per un certo periodo, Attacco +10%."
   },
   "Fruit__defense_01": {
     "localized_name": "Frutto resistente",
@@ -3017,343 +3025,343 @@
   },
   "Head001": {
     "localized_name": "Corona reale",
-    "description": null
+    "description": "Un copricapo che indica grande autorità. È impegnativo da indossare, inadatto all'uso quotidiano."
   },
   "Head001_2": {
     "localized_name": "Corona reale",
-    "description": null
+    "description": "Un copricapo che indica grande autorità. È impegnativo da indossare, inadatto all'uso quotidiano."
   },
   "Head001_3": {
     "localized_name": "Corona reale",
-    "description": null
+    "description": "Un copricapo che indica grande autorità. È impegnativo da indossare, inadatto all'uso quotidiano."
   },
   "Head001_4": {
     "localized_name": "Corona reale",
-    "description": null
+    "description": "Un copricapo che indica grande autorità. È impegnativo da indossare, inadatto all'uso quotidiano."
   },
   "Head001_5": {
     "localized_name": "Corona reale",
-    "description": null
+    "description": "Un copricapo che indica grande autorità. È impegnativo da indossare, inadatto all'uso quotidiano."
   },
   "Head002": {
     "localized_name": "Corona d'oro",
-    "description": null
+    "description": "Un copricapo d'oro dall'aria davvero peculiare. Basta indossarlo per sembrare importanti."
   },
   "Head002_2": {
     "localized_name": "Corona d'oro",
-    "description": null
+    "description": "Un copricapo d'oro dall'aria davvero peculiare. Basta indossarlo per sembrare importanti."
   },
   "Head002_3": {
     "localized_name": "Corona d'oro",
-    "description": null
+    "description": "Un copricapo d'oro dall'aria davvero peculiare. Basta indossarlo per sembrare importanti."
   },
   "Head002_4": {
     "localized_name": "Corona d'oro",
-    "description": null
+    "description": "Un copricapo d'oro dall'aria davvero peculiare. Basta indossarlo per sembrare importanti."
   },
   "Head002_5": {
     "localized_name": "Corona d'oro",
-    "description": null
+    "description": "Un copricapo d'oro dall'aria davvero peculiare. Basta indossarlo per sembrare importanti."
   },
   "Head003": {
     "localized_name": "Cerchietto con lunghe orecchie",
-    "description": null
+    "description": "Un cerchietto adorabile con orecchie simili a quelle di Ribbuny. Non sembra proteggere granché la testa."
   },
   "Head003_2": {
     "localized_name": "Cerchietto con lunghe orecchie",
-    "description": null
+    "description": "Un cerchietto adorabile con orecchie simili a quelle di Ribbuny. Non sembra proteggere granché la testa."
   },
   "Head003_3": {
     "localized_name": "Cerchietto con lunghe orecchie",
-    "description": null
+    "description": "Un cerchietto adorabile con orecchie simili a quelle di Ribbuny. Non sembra proteggere granché la testa."
   },
   "Head003_4": {
     "localized_name": "Cerchietto con lunghe orecchie",
-    "description": null
+    "description": "Un cerchietto adorabile con orecchie simili a quelle di Ribbuny. Non sembra proteggere granché la testa."
   },
   "Head003_5": {
     "localized_name": "Cerchietto con lunghe orecchie",
-    "description": null
+    "description": "Un cerchietto adorabile con orecchie simili a quelle di Ribbuny. Non sembra proteggere granché la testa."
   },
   "Head004": {
     "localized_name": "Cappello da strega",
-    "description": null
+    "description": "Un copricapo fatto per imitare Pal come Wixen e Katress. Fa sentire capaci di usare le loro abilità."
   },
   "Head004_2": {
     "localized_name": "Cappello da strega",
-    "description": null
+    "description": "Un copricapo fatto per imitare Pal come Wixen e Katress. Fa sentire capaci di usare le loro abilità."
   },
   "Head004_3": {
     "localized_name": "Cappello da strega",
-    "description": null
+    "description": "Un copricapo fatto per imitare Pal come Wixen e Katress. Fa sentire capaci di usare le loro abilità."
   },
   "Head004_4": {
     "localized_name": "Cappello da strega",
-    "description": null
+    "description": "Un copricapo fatto per imitare Pal come Wixen e Katress. Fa sentire capaci di usare le loro abilità."
   },
   "Head004_5": {
     "localized_name": "Cappello da strega",
-    "description": null
+    "description": "Un copricapo fatto per imitare Pal come Wixen e Katress. Fa sentire capaci di usare le loro abilità."
   },
   "Head005": {
     "localized_name": "Cappello a tesa larga",
-    "description": null
+    "description": "Un copricapo comodo e leggero, adatto all'uso quotidiano. È davvero alla moda, e pare che sull'isola sia in uso sin dal passato."
   },
   "Head005_2": {
     "localized_name": "Cappello a tesa larga",
-    "description": null
+    "description": "Un copricapo comodo e leggero, adatto all'uso quotidiano. È davvero alla moda, e pare che sull'isola sia in uso sin dal passato."
   },
   "Head005_3": {
     "localized_name": "Cappello a tesa larga",
-    "description": null
+    "description": "Un copricapo comodo e leggero, adatto all'uso quotidiano. È davvero alla moda, e pare che sull'isola sia in uso sin dal passato."
   },
   "Head005_4": {
     "localized_name": "Cappello a tesa larga",
-    "description": null
+    "description": "Un copricapo comodo e leggero, adatto all'uso quotidiano. È davvero alla moda, e pare che sull'isola sia in uso sin dal passato."
   },
   "Head005_5": {
     "localized_name": "Cappello a tesa larga",
-    "description": null
+    "description": "Un copricapo comodo e leggero, adatto all'uso quotidiano. È davvero alla moda, e pare che sull'isola sia in uso sin dal passato."
   },
   "Head006": {
     "localized_name": "Casco",
-    "description": null
+    "description": "Un solido casco per proteggere la testa. È stato ideato in seguito ai numerosi traumi cranici dovuti alle cadute dalla groppa di Eikthyrdeer."
   },
   "Head006_2": {
     "localized_name": "Casco",
-    "description": null
+    "description": "Un solido casco per proteggere la testa. È stato ideato in seguito ai numerosi traumi cranici dovuti alle cadute dalla groppa di Eikthyrdeer."
   },
   "Head006_3": {
     "localized_name": "Casco",
-    "description": null
+    "description": "Un solido casco per proteggere la testa. È stato ideato in seguito ai numerosi traumi cranici dovuti alle cadute dalla groppa di Eikthyrdeer."
   },
   "Head006_4": {
     "localized_name": "Casco",
-    "description": null
+    "description": "Un solido casco per proteggere la testa. È stato ideato in seguito ai numerosi traumi cranici dovuti alle cadute dalla groppa di Eikthyrdeer."
   },
   "Head006_5": {
     "localized_name": "Casco",
-    "description": null
+    "description": "Un solido casco per proteggere la testa. È stato ideato in seguito ai numerosi traumi cranici dovuti alle cadute dalla groppa di Eikthyrdeer."
   },
   "Head007": {
     "localized_name": "Cilindro",
-    "description": null
+    "description": "Un copricapo per guerrieri. È considerato un accessorio di lusso perché realizzato a partire da Sibelyx. Sul mercato sono apparse molte imitazioni inferiori realizzate con Swee."
   },
   "Head007_2": {
     "localized_name": "Cilindro",
-    "description": null
+    "description": "Un copricapo per guerrieri. È considerato un accessorio di lusso perché realizzato a partire da Sibelyx. Sul mercato sono apparse molte imitazioni inferiori realizzate con Swee."
   },
   "Head007_3": {
     "localized_name": "Cilindro",
-    "description": null
+    "description": "Un copricapo per guerrieri. È considerato un accessorio di lusso perché realizzato a partire da Sibelyx. Sul mercato sono apparse molte imitazioni inferiori realizzate con Swee."
   },
   "Head007_4": {
     "localized_name": "Cilindro",
-    "description": null
+    "description": "Un copricapo per guerrieri. È considerato un accessorio di lusso perché realizzato a partire da Sibelyx. Sul mercato sono apparse molte imitazioni inferiori realizzate con Swee."
   },
   "Head007_5": {
     "localized_name": "Cilindro",
-    "description": null
+    "description": "Un copricapo per guerrieri. È considerato un accessorio di lusso perché realizzato a partire da Sibelyx. Sul mercato sono apparse molte imitazioni inferiori realizzate con Swee."
   },
   "Head008": {
     "localized_name": "Tricorno",
-    "description": null
+    "description": "Un cappello amato dai combattenti. Un tempo, lo indossavano i cacciatori che quasi sterminarono il Azurobe."
   },
   "Head008_2": {
     "localized_name": "Tricorno",
-    "description": null
+    "description": "Un cappello amato dai combattenti. Un tempo, lo indossavano i cacciatori che quasi sterminarono il Azurobe."
   },
   "Head008_3": {
     "localized_name": "Tricorno",
-    "description": null
+    "description": "Un cappello amato dai combattenti. Un tempo, lo indossavano i cacciatori che quasi sterminarono il Azurobe."
   },
   "Head008_4": {
     "localized_name": "Tricorno",
-    "description": null
+    "description": "Un cappello amato dai combattenti. Un tempo, lo indossavano i cacciatori che quasi sterminarono il Azurobe."
   },
   "Head008_5": {
     "localized_name": "Tricorno",
-    "description": null
+    "description": "Un cappello amato dai combattenti. Un tempo, lo indossavano i cacciatori che quasi sterminarono il Azurobe."
   },
   "Head009": {
     "localized_name": "Casco da esploratore",
-    "description": null
+    "description": "Un cappello per avventurieri. Ottimo per proteggersi dal sole eccessivo."
   },
   "Head009_2": {
     "localized_name": "Casco da esploratore",
-    "description": null
+    "description": "Un cappello per avventurieri. Ottimo per proteggersi dal sole eccessivo."
   },
   "Head009_3": {
     "localized_name": "Casco da esploratore",
-    "description": null
+    "description": "Un cappello per avventurieri. Ottimo per proteggersi dal sole eccessivo."
   },
   "Head009_4": {
     "localized_name": "Casco da esploratore",
-    "description": null
+    "description": "Un cappello per avventurieri. Ottimo per proteggersi dal sole eccessivo."
   },
   "Head009_5": {
     "localized_name": "Casco da esploratore",
-    "description": null
+    "description": "Un cappello per avventurieri. Ottimo per proteggersi dal sole eccessivo."
   },
   "Head010": {
     "localized_name": "Tocco accademico",
-    "description": null
+    "description": "Un cappello che fa sembrare più intelligenti. Si vede che in passato sull'isola c'era una qualche accademia."
   },
   "Head010_2": {
     "localized_name": "Tocco accademico",
-    "description": null
+    "description": "Un cappello che fa sembrare più intelligenti. Si vede che in passato sull'isola c'era una qualche accademia."
   },
   "Head010_3": {
     "localized_name": "Tocco accademico",
-    "description": null
+    "description": "Un cappello che fa sembrare più intelligenti. Si vede che in passato sull'isola c'era una qualche accademia."
   },
   "Head010_4": {
     "localized_name": "Tocco accademico",
-    "description": null
+    "description": "Un cappello che fa sembrare più intelligenti. Si vede che in passato sull'isola c'era una qualche accademia."
   },
   "Head010_5": {
     "localized_name": "Tocco accademico",
-    "description": null
+    "description": "Un cappello che fa sembrare più intelligenti. Si vede che in passato sull'isola c'era una qualche accademia."
   },
   "Head011": {
     "localized_name": "Cappello a cono",
-    "description": null
+    "description": "Un cappello per il lavoro nei campi. Ottimo per proteggersi dal sole eccessivo."
   },
   "Head011_2": {
     "localized_name": "Cappello a cono",
-    "description": null
+    "description": "Un cappello per il lavoro nei campi. Ottimo per proteggersi dal sole eccessivo."
   },
   "Head011_3": {
     "localized_name": "Cappello a cono",
-    "description": null
+    "description": "Un cappello per il lavoro nei campi. Ottimo per proteggersi dal sole eccessivo."
   },
   "Head011_4": {
     "localized_name": "Cappello a cono",
-    "description": null
+    "description": "Un cappello per il lavoro nei campi. Ottimo per proteggersi dal sole eccessivo."
   },
   "Head011_5": {
     "localized_name": "Cappello a cono",
-    "description": null
+    "description": "Un cappello per il lavoro nei campi. Ottimo per proteggersi dal sole eccessivo."
   },
   "Head012": {
     "localized_name": "Bombetta",
-    "description": null
+    "description": "Un copricapo estremamente solido. Lo slogan pubblicitario recita: |Resisterebbe persino alla carica di un Mammorest|."
   },
   "Head012_2": {
     "localized_name": "Bombetta",
-    "description": null
+    "description": "Un copricapo estremamente solido. Lo slogan pubblicitario recita: |Resisterebbe persino alla carica di un Mammorest|."
   },
   "Head012_3": {
     "localized_name": "Bombetta",
-    "description": null
+    "description": "Un copricapo estremamente solido. Lo slogan pubblicitario recita: |Resisterebbe persino alla carica di un Mammorest|."
   },
   "Head012_4": {
     "localized_name": "Bombetta",
-    "description": null
+    "description": "Un copricapo estremamente solido. Lo slogan pubblicitario recita: |Resisterebbe persino alla carica di un Mammorest|."
   },
   "Head012_5": {
     "localized_name": "Bombetta",
-    "description": null
+    "description": "Un copricapo estremamente solido. Lo slogan pubblicitario recita: |Resisterebbe persino alla carica di un Mammorest|."
   },
   "Head013": {
     "localized_name": "Cappello di Tocotoco",
-    "description": null
+    "description": "Cappello ispirato a Tocotoco. È molto vistoso e si nota da grandi distanze."
   },
   "Head013_2": {
     "localized_name": "Cappello di Tocotoco",
-    "description": null
+    "description": "Cappello ispirato a Tocotoco. È molto vistoso e si nota da grandi distanze."
   },
   "Head013_3": {
     "localized_name": "Cappello di Tocotoco",
-    "description": null
+    "description": "Cappello ispirato a Tocotoco. È molto vistoso e si nota da grandi distanze."
   },
   "Head013_4": {
     "localized_name": "Cappello di Tocotoco",
-    "description": null
+    "description": "Cappello ispirato a Tocotoco. È molto vistoso e si nota da grandi distanze."
   },
   "Head013_5": {
     "localized_name": "Cappello di Tocotoco",
-    "description": null
+    "description": "Cappello ispirato a Tocotoco. È molto vistoso e si nota da grandi distanze."
   },
   "Head014": {
     "localized_name": "Cappello ammiccante di Tocotoco",
-    "description": null
+    "description": "Cappello ispirato a Tocotoco. Sembra che indossarlo faccia sorridere chiunque."
   },
   "Head014_2": {
     "localized_name": "Cappello ammiccante di Tocotoco",
-    "description": null
+    "description": "Cappello ispirato a Tocotoco. Sembra che indossarlo faccia sorridere chiunque."
   },
   "Head014_3": {
     "localized_name": "Cappello ammiccante di Tocotoco",
-    "description": null
+    "description": "Cappello ispirato a Tocotoco. Sembra che indossarlo faccia sorridere chiunque."
   },
   "Head014_4": {
     "localized_name": "Cappello ammiccante di Tocotoco",
-    "description": null
+    "description": "Cappello ispirato a Tocotoco. Sembra che indossarlo faccia sorridere chiunque."
   },
   "Head014_5": {
     "localized_name": "Cappello ammiccante di Tocotoco",
-    "description": null
+    "description": "Cappello ispirato a Tocotoco. Sembra che indossarlo faccia sorridere chiunque."
   },
   "Head015": {
     "localized_name": "Cappello di Gumoss",
-    "description": null
+    "description": "Cappello ispirato a Gumoss."
   },
   "Head015_2": {
     "localized_name": "Cappello di Gumoss",
-    "description": null
+    "description": "Cappello ispirato a Gumoss."
   },
   "Head015_3": {
     "localized_name": "Cappello di Gumoss",
-    "description": null
+    "description": "Cappello ispirato a Gumoss."
   },
   "Head015_4": {
     "localized_name": "Cappello di Gumoss",
-    "description": null
+    "description": "Cappello ispirato a Gumoss."
   },
   "Head015_5": {
     "localized_name": "Cappello di Gumoss",
-    "description": null
+    "description": "Cappello ispirato a Gumoss."
   },
   "Head016": {
     "localized_name": "Cappello di Penking",
-    "description": null
+    "description": "Cappello ispirato a Penking."
   },
   "Head016_2": {
     "localized_name": "Cappello di Penking",
-    "description": null
+    "description": "Cappello ispirato a Penking."
   },
   "Head016_3": {
     "localized_name": "Cappello di Penking",
-    "description": null
+    "description": "Cappello ispirato a Penking."
   },
   "Head016_4": {
     "localized_name": "Cappello di Penking",
-    "description": null
+    "description": "Cappello ispirato a Penking."
   },
   "Head016_5": {
     "localized_name": "Cappello di Penking",
-    "description": null
+    "description": "Cappello ispirato a Penking."
   },
   "Head017": {
     "localized_name": "Cappello di Katress",
-    "description": null
+    "description": "Cappello ispirato a Katress."
   },
   "Head017_2": {
     "localized_name": "Cappello di Katress",
-    "description": null
+    "description": "Cappello ispirato a Katress."
   },
   "Head017_3": {
     "localized_name": "Cappello di Katress",
-    "description": null
+    "description": "Cappello ispirato a Katress."
   },
   "Head017_4": {
     "localized_name": "Cappello di Katress",
-    "description": null
+    "description": "Cappello ispirato a Katress."
   },
   "Head017_5": {
     "localized_name": "Cappello di Katress",
-    "description": null
+    "description": "Cappello ispirato a Katress."
   },
   "HeadEquip001_purple": {
     "localized_name": "Diadema della strega [Apoteosi]",
@@ -3641,23 +3649,23 @@
   },
   "LaserGatlingGun": {
     "localized_name": "Gatling laser",
-    "description": "Arma che spara proiettili laser dall'elevata cadenza di tiro. Può eliminare più nemici in un colpo solo grazie alla sua potenza incredibile."
+    "description": "Arma che spara raggi luminosi dall'elevata cadenza di tiro. Può eliminare più nemici in un colpo solo grazie alla sua potenza incredibile."
   },
   "LaserGatlingGun_2": {
     "localized_name": "Gatling laser",
-    "description": "Arma che spara proiettili laser dall'elevata cadenza di tiro. Può eliminare più nemici in un colpo solo grazie alla sua potenza incredibile."
+    "description": "Arma che spara raggi luminosi dall'elevata cadenza di tiro. Può eliminare più nemici in un colpo solo grazie alla sua potenza incredibile."
   },
   "LaserGatlingGun_3": {
     "localized_name": "Gatling laser",
-    "description": "Arma che spara proiettili laser dall'elevata cadenza di tiro. Può eliminare più nemici in un colpo solo grazie alla sua potenza incredibile."
+    "description": "Arma che spara raggi luminosi dall'elevata cadenza di tiro. Può eliminare più nemici in un colpo solo grazie alla sua potenza incredibile."
   },
   "LaserGatlingGun_4": {
     "localized_name": "Gatling laser",
-    "description": "Arma che spara proiettili laser dall'elevata cadenza di tiro. Può eliminare più nemici in un colpo solo grazie alla sua potenza incredibile."
+    "description": "Arma che spara raggi luminosi dall'elevata cadenza di tiro. Può eliminare più nemici in un colpo solo grazie alla sua potenza incredibile."
   },
   "LaserGatlingGun_5": {
     "localized_name": "Gatling laser",
-    "description": "Arma che spara proiettili laser dall'elevata cadenza di tiro. Può eliminare più nemici in un colpo solo grazie alla sua potenza incredibile."
+    "description": "Arma che spara raggi luminosi dall'elevata cadenza di tiro. Può eliminare più nemici in un colpo solo grazie alla sua potenza incredibile."
   },
   "LaserRifle": {
     "localized_name": "Fucile laser",
@@ -3875,8 +3883,12 @@
     "localized_name": "Funghi marinati",
     "description": "Ricetta per marinare i Fungo. Difesa: +10% per un po' di tempo"
   },
+  "MeaninglessItem_ButcheringImportPal": {
+    "localized_name": "Campione di tessuto biologico",
+    "description": "Del tessuto biologico in condizioni pietose. È ciò che avanza quando elimini un Pal ripristinato a partire dal suo profilo genetico. Non serve a nulla, puoi solo venderlo o buttarlo."
+  },
   "Meat": {
-    "localized_name": "Meat",
+    "localized_name": "Carne cruda",
     "description": "Della carne di Pal. È così fresca che un essere umano potrebbe mangiarla cruda."
   },
   "Meat2": {
@@ -4083,6 +4095,10 @@
     "localized_name": "Succo di fiore sospetto",
     "description": "Una sostanza che fa sentire meglio. Accelera leggermente la velocità delle attività per un po' di tempo, ma consuma altrettanto velocemente punti SAN."
   },
+  "OverheatRifle": {
+    "localized_name": "it Text",
+    "description": "it Text"
+  },
   "PalCrystal_Ex": {
     "localized_name": "Componenti dell'antica civiltà",
     "description": "Un oggetto difettoso, estratto da antiche rovine. Potrebbe contenere informazioni sulla tecnologia perduta. Ha un grande valore e sono in tanti a cercarlo."
@@ -4090,6 +4106,10 @@
   "PalDarkParts": {
     "localized_name": "Frammento d'oscurità",
     "description": "Si può ottenere da alcuni potenti Pal di attributo oscurità. È una risorsa per creare potenti accessori."
+  },
+  "PalDopingShot": {
+    "localized_name": "it Text",
+    "description": "it Text"
   },
   "PalEgg_Dark_01": {
     "localized_name": "Uovo oscuro",
@@ -4274,6 +4294,10 @@
   "PalFluid": {
     "localized_name": "Fluidi di Pal",
     "description": "Fluidi ricavati dai Pal. Sono utili per via dell'elevata viscosità."
+  },
+  "PalHealingGrenade": {
+    "localized_name": "it Text",
+    "description": "it Text"
   },
   "PalItem_CaptainPenguin": {
     "localized_name": "Piuma decorativa di Penking",
@@ -4914,6 +4938,10 @@
   "Shield_04": {
     "localized_name": "Scudo tera",
     "description": "Uno scudo misterioso creato con la tecnologia Paldium. Si rigenera automaticamente mentre non è sotto attacco. Grazie a continui miglioramenti, offre le prestazioni migliori possibili."
+  },
+  "Shield_05": {
+    "localized_name": "Ultra scudo",
+    "description": "Uno scudo misterioso creato con la tecnologia Paldium. Si rigenera automaticamente mentre non è sotto attacco. Grazie a continui miglioramenti, offre prestazioni che vanno oltre ogni limite."
   },
   "Shield_SF": {
     "localized_name": "Scudo avanzato",

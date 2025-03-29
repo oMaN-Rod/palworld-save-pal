@@ -284,8 +284,8 @@
     "description": null
   },
   "Battle_RangeWeapon_FlameThrower": {
-    "localized_name": "FlameThrower",
-    "description": null
+    "localized_name": "Lanciafiamme",
+    "description": "Flamethrower capace di generare una vampata di fiamme. Può far andare a fuoco chi colpisce. Si può realizzare con una Fabbrica per la produzione in serie di armi II."
   },
   "Battle_RangeWeapon_GatlingGun": {
     "localized_name": "Mitragliatore gatling",
@@ -385,6 +385,10 @@
   },
   "Cloth2": {
     "localized_name": "Stoffa di alta qualità",
+    "description": "Stoffa di alta qualità ricavata tessendo grandi quantità di Lana. È necessaria per creare protezioni di alta qualità. Si può produrre con un Banco da lavoro di qualità."
+  },
+  "CompositeDesk": {
+    "localized_name": "Tavolo da disegno",
     "description": null
   },
   "Cooler": {
@@ -426,6 +430,10 @@
   "DefenseWall_Wood": {
     "localized_name": "Muro difensivo in legno",
     "description": "Gigantesco muro per difendersi dagli invasori. È in legno, quindi è piuttosto fragile."
+  },
+  "DimensionPalStorage": {
+    "localized_name": "Magazzino dimensionale per Pal",
+    "description": null
   },
   "DismantlingConveyor": {
     "localized_name": "Smantella-Pal",
@@ -670,6 +678,10 @@
   "Glass_houseset": {
     "localized_name": "Set da edificazione in vetro",
     "description": "Set per realizzare una base in materiali vetrosi. Include fondamenta, mura, tetto e scale di vetro. C'è tutto il necessario per costruirsi una casa."
+  },
+  "GlobalPalStorage": {
+    "localized_name": "Box per Pal globale",
+    "description": null
   },
   "GrapplingGun": {
     "localized_name": "Pistola con rampino",

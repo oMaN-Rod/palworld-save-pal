@@ -19,10 +19,6 @@
     "localized_name": "阿努比斯",
     "description": "牠的外表曾讓牠被視為高貴的象徵。 而在厭惡財富與權力的人眼中，牠就成了明確的標靶。 因此不知不覺間阿努比斯就成為了死亡的象徵。"
   },
-  "Believer_CrossBow": {
-    "localized_name": "埃戈",
-    "description": null
-  },
   "Believer_Fat_GiantClub": {
     "localized_name": "布里克",
     "description": null
@@ -39,40 +35,8 @@
     "localized_name": "芙蕾雅",
     "description": null
   },
-  "Female_People02": {
-    "localized_name": "賽蓮",
-    "description": null
-  },
-  "Female_People03": {
-    "localized_name": "逆裳",
-    "description": null
-  },
   "Female_Soldier": {
     "localized_name": "姬蒂",
-    "description": null
-  },
-  "Female_Soldier02": {
-    "localized_name": "黛姿",
-    "description": null
-  },
-  "Female_Soldier03": {
-    "localized_name": "阿羅哈",
-    "description": null
-  },
-  "Female_Soldier04": {
-    "localized_name": "妮波",
-    "description": null
-  },
-  "FireCult_FlameThrower": {
-    "localized_name": "暗影",
-    "description": null
-  },
-  "Hunter_Fat_GatlingGun": {
-    "localized_name": "格里爾",
-    "description": null
-  },
-  "Hunter_Rifle": {
-    "localized_name": "霍克",
     "description": null
   },
   "Male_DesertPeople": {
@@ -87,14 +51,6 @@
     "localized_name": "戴拿",
     "description": null
   },
-  "Male_People02": {
-    "localized_name": "柯伊爾",
-    "description": null
-  },
-  "Male_People03": {
-    "localized_name": "斯科特",
-    "description": null
-  },
   "Male_People2": {
     "localized_name": "麥特",
     "description": null
@@ -103,36 +59,8 @@
     "localized_name": "克雷斯",
     "description": null
   },
-  "Male_Soldier02": {
-    "localized_name": "達特",
-    "description": null
-  },
-  "Male_Soldier03": {
-    "localized_name": "克林特",
-    "description": null
-  },
-  "Male_Soldier04": {
-    "localized_name": "拉索",
-    "description": null
-  },
-  "Male_Trader01": {
-    "localized_name": "斯吉姆",
-    "description": null
-  },
-  "Male_Trader02": {
-    "localized_name": "模仿者",
-    "description": null
-  },
-  "Male_Trader03": {
-    "localized_name": "比利",
-    "description": null
-  },
   "Ninja": {
     "localized_name": "方博",
-    "description": null
-  },
-  "Police_Rifle": {
-    "localized_name": "威普",
     "description": null
   },
   "Police_old": {
@@ -141,10 +69,6 @@
   },
   "Scientist_LaserRifle": {
     "localized_name": "威斯克",
-    "description": null
-  },
-  "Viking": {
-    "localized_name": "奈爾",
     "description": null
   },
   "VikingElite": {
@@ -355,6 +279,10 @@
     "localized_name": "金鎧蠍",
     "description": "這種帕魯的本體是一團能量體，內部是空的。 透過將砂石和礦物填充進外殼，得以實現了壓倒性的質量。 被其擊中的生物只能發出如地獄般的呻吟聲。"
   },
+  "DeathPenalty_guide": {
+    "localized_name": "老手帕魯訓練家",
+    "description": null
+  },
   "Deer": {
     "localized_name": "紫霞鹿",
     "description": "擁有最富有力量感的雙角的個體，會成為這種帕魯的領袖。 一旦失去了犄角斷裂就會大受打擊。 這時候牠就會默默離開族群，在遠離人煙的地方結束一生。"
@@ -499,6 +427,10 @@
     "localized_name": "村民",
     "description": null
   },
+  "Female_Presenter01": {
+    "localized_name": "親切的帕魯訓練家",
+    "description": null
+  },
   "Female_Soldier01": {
     "localized_name": "島民",
     "description": null
@@ -613,11 +545,11 @@
   },
   "GYM_Horus": {
     "localized_name": "馬庫斯 & 荷魯斯",
-    "description": "每當牠發現一群獵物， 就會用灼熱的旋風將整個區域盡數燒毀。 因此荷魯斯的棲息地常飄著美味的香氣。"
+    "description": "每當牠發現一群獵物， 就會用灼熱的旋風將整個區域焚燒殆盡。 因此荷魯斯的棲息地常飄著美味的香氣。"
   },
   "GYM_Horus_2": {
     "localized_name": "馬庫斯 & 荷魯斯",
-    "description": "每當牠發現一群獵物， 就會用灼熱的旋風將整個區域盡數燒毀。 因此荷魯斯的棲息地常飄著美味的香氣。"
+    "description": "每當牠發現一群獵物， 就會用灼熱的旋風將整個區域焚燒殆盡。 因此荷魯斯的棲息地常飄著美味的香氣。"
   },
   "GYM_LilyQueen": {
     "localized_name": "莉莉 & 百合女王",
@@ -747,6 +679,22 @@
     "localized_name": "冰刺鼠",
     "description": "牠一受到衝擊，就會放出貯存的冰冷空氣。 以輻射形式釋放的冰冷空氣能使大氣凍結， 並穿透襲擊者的身軀。"
   },
+  "Help01": {
+    "localized_name": "島民",
+    "description": null
+  },
+  "Help02": {
+    "localized_name": "島民",
+    "description": null
+  },
+  "Help03": {
+    "localized_name": "島民",
+    "description": null
+  },
+  "Help04": {
+    "localized_name": "島民",
+    "description": null
+  },
   "HerculesBeetle": {
     "localized_name": "鎧格力斯",
     "description": "牠全身包覆著極為堅韌的裝甲， 其強度與耐熱度可謂無與倫比。 就連燒夷彈對牠都沒什麼效果。"
@@ -757,7 +705,7 @@
   },
   "Horus": {
     "localized_name": "荷魯斯",
-    "description": "每當牠發現一群獵物， 就會用灼熱的旋風將整個區域盡數燒毀。 因此荷魯斯的棲息地常飄著美味的香氣。"
+    "description": "每當牠發現一群獵物， 就會用灼熱的旋風將整個區域焚燒殆盡。 因此荷魯斯的棲息地常飄著美味的香氣。"
   },
   "Horus_Oilrig": {
     "localized_name": "荷魯斯",
@@ -765,7 +713,7 @@
   },
   "Horus_Water": {
     "localized_name": "伊西斯",
-    "description": "每當牠發現一群獵物， 就會用強力的水流將整個區域盡數沖刷。 由於多數時候獵物會被沖走，失去蹤影， 這一行徑能否被定義為捕獵，還有待商確。"
+    "description": "每當牠發現一群獵物， 就會用強力的水流將整個區域沖刷殆盡。 由於多數時候獵物會被沖走，失去蹤影， 這一行徑能否被定義為捕獵，還有待商確。"
   },
   "Hunter_Bat": {
     "localized_name": "盜獵集團 菜鳥",
@@ -1309,7 +1257,7 @@
   },
   "PREDATOR_Horus_Water": {
     "localized_name": "伊西斯",
-    "description": "每當牠發現一群獵物， 就會用強力的水流將整個區域盡數沖刷。 由於多數時候獵物會被沖走，失去蹤影， 這一行徑能否被定義為捕獵，還有待商確。"
+    "description": "每當牠發現一群獵物， 就會用強力的水流將整個區域沖刷殆盡。 由於多數時候獵物會被沖走，失去蹤影， 這一行徑能否被定義為捕獵，還有待商確。"
   },
   "PREDATOR_LazyDragon": {
     "localized_name": "佩克龍",
@@ -1502,6 +1450,10 @@
   "RedArmorBird": {
     "localized_name": "燧火鳥",
     "description": "此一物種外觀類似迅雷鳥，但其實毫無關係。 牠以岩石為主食，因此經過漫長歲月後， 除了鳥喙外，也演化出堅硬的頭顱。"
+  },
+  "Respawn_guide": {
+    "localized_name": "親切的帕魯訓練家",
+    "description": null
   },
   "Reward_BossDefeat": {
     "localized_name": "衛兵",

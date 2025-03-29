@@ -49,19 +49,19 @@
   },
   "Arrow": {
     "localized_name": "箭矢",
-    "description": "弓專用的箭矢。 可在｢初階工作臺｣製作。"
+    "description": "弓專用的箭矢。 可在「初階工作台」製作。"
   },
   "Arrow_Fire": {
     "localized_name": "火箭矢",
-    "description": "｢火之弓｣與｢火箭十字弓｣等用的箭矢。 可對目標造成火屬性傷害。 可在｢初階工作臺｣製作。"
+    "description": "「火之弓」與「火箭十字弓」等用的箭矢。 可對目標造成火屬性傷害。 可在「初階工作台」製作。"
   },
   "Arrow_Poison": {
     "localized_name": "毒箭矢",
-    "description": "｢毒之弓｣與｢毒箭十字弓｣等用的箭矢。 可以讓被射中的目標中毒。 可在｢初階工作臺｣製作。"
+    "description": "「毒之弓」與「毒箭十字弓」等用的箭矢。 可以讓被射中的目標中毒。 可在「初階工作台」製作。"
   },
   "AssaultRifleBullet": {
     "localized_name": "突擊步槍子彈",
-    "description": "用於｢突擊步槍｣等的子彈。 可在｢武器流水線工廠｣製作。"
+    "description": "用於「突擊步槍」等的子彈。 可在「武器流水線工廠」製作。"
   },
   "AutoMealPouch_Tier1": {
     "localized_name": "小型飼料袋",
@@ -97,79 +97,79 @@
   },
   "Battle_Armor_Grade_01_Cloth": {
     "localized_name": "布衣",
-    "description": "以｢布｣製成的服裝。 可以抵禦夜間的寒意。 可在｢初階工作臺｣製作。"
+    "description": "以「布」製成的服裝。 可以抵禦夜間的寒意。 可在「初階工作台」製作。"
   },
   "Battle_Armor_Grade_01_Cloth_Cold": {
     "localized_name": "寒冷地區民族服裝",
-    "description": "在寒冷地區生產的｢布衣｣。 能夠抵禦讓身體都凍僵的寒意。 可在｢初階工作臺｣製作。"
+    "description": "在寒冷地區生產的「布衣」。 能夠抵禦讓身體都凍僵的寒意。 可在「初階工作台」製作。"
   },
   "Battle_Armor_Grade_01_Cloth_Heat": {
     "localized_name": "熱帶地區民族服裝",
-    "description": "在炎熱地區生產的｢布衣｣。 具備傲人的耐熱功能。 可在｢初階工作臺｣製作。"
+    "description": "在炎熱地區生產的「布衣」。 具備傲人的耐熱功能。 可在「初階工作台」製作。"
   },
   "Battle_Armor_Grade_02_Fur": {
     "localized_name": "毛皮盔甲",
-    "description": "以｢皮革｣製成的盔甲。 耐久度及防禦力均有所提升。 可在｢優質工作臺｣製作。"
+    "description": "以「皮革」製成的盔甲。 耐久度及防禦力均有所提升。 可在「優質工作台」製作。"
   },
   "Battle_Armor_Grade_02_Fur_Cold": {
     "localized_name": "耐寒毛皮盔甲",
-    "description": "在寒冷地區生產的｢毛皮盔甲｣。 能夠抵禦讓身體都凍僵的寒意。 可在｢優質工作臺｣製作。"
+    "description": "在寒冷地區生產的「毛皮盔甲」。 能夠抵禦讓身體都凍僵的寒意。 可在「優質工作台」製作。"
   },
   "Battle_Armor_Grade_02_Fur_Heat": {
     "localized_name": "耐熱毛皮盔甲",
-    "description": "在炎熱地區生產的｢毛皮盔甲｣。 具備傲人的耐熱功能。 可在｢優質工作臺｣製作。"
+    "description": "在炎熱地區生產的「毛皮盔甲」。 具備傲人的耐熱功能。 可在「優質工作台」製作。"
   },
   "Battle_Armor_Grade_03_Copper": {
     "localized_name": "金屬盔甲",
-    "description": "以金屬製成的盔甲。 有一定的防禦力，也有一定的重量。 可在｢優質工作臺｣製作。"
+    "description": "以金屬製成的盔甲。 有一定的防禦力，也有一定的重量。 可在「優質工作台」製作。"
   },
   "Battle_Armor_Grade_03_Copper_Cold": {
     "localized_name": "耐寒金屬盔甲",
-    "description": "經過改良的｢金屬盔甲｣。 能夠抵禦使身體凍僵的寒意。 可在｢優質工作臺｣製作。"
+    "description": "經過改良的「金屬盔甲」。 能夠抵禦使身體凍僵的寒意。 可在「優質工作台」製作。"
   },
   "Battle_Armor_Grade_03_Copper_Heat": {
     "localized_name": "耐熱金屬盔甲",
-    "description": "經過改良的｢金屬盔甲｣。 具備傲人的耐熱功能。 可在｢優質工作臺｣製作。"
+    "description": "經過改良的「金屬盔甲」。 具備傲人的耐熱功能。 可在「優質工作台」製作。"
   },
   "Battle_Armor_Grade_03_Iron": {
     "localized_name": "精煉金屬盔甲",
-    "description": "以優質金屬製成的盔甲。 防禦力極優，但也相當沉重。 可在｢作業流水線工廠｣製作。"
+    "description": "以優質金屬製成的盔甲。 防禦力極優，但也相當沉重。 可在「作業流水線工廠」製作。"
   },
   "Battle_Armor_Grade_03_Iron_Cold": {
     "localized_name": "耐寒精煉金屬盔甲",
-    "description": "經過改良的｢精煉金屬盔甲｣。 能夠抵禦使身體凍僵的寒意。 可在｢作業流水線工廠｣製作。"
+    "description": "經過改良的「精煉金屬盔甲」。 能夠抵禦使身體凍僵的寒意。 可在「作業流水線工廠」製作。"
   },
   "Battle_Armor_Grade_03_Iron_Heat": {
     "localized_name": "耐熱精煉金屬盔甲",
-    "description": "經過改良的｢精煉金屬盔甲｣。 具備傲人的耐熱功能。 可在｢作業流水線工廠｣製作。"
+    "description": "經過改良的「精煉金屬盔甲」。 具備傲人的耐熱功能。 可在「作業流水線工廠」製作。"
   },
   "Battle_Armor_Grade_04_Steal": {
     "localized_name": "帕魯金屬盔甲",
-    "description": "以帕魯金屬錠製成的盔甲。 防禦力極為卓越，但也極為沉重。 可在｢作業流水線工廠 II｣製作。"
+    "description": "以帕魯金屬錠製成的盔甲。 防禦力極為卓越，但也極為沉重。 可在「作業流水線工廠 II」製作。"
   },
   "Battle_Armor_Grade_04_Steal_Cold": {
     "localized_name": "耐寒帕魯金屬盔甲",
-    "description": "經過改良的「帕魯金屬盔甲」。 能夠抵禦使身體凍僵的寒意。 可在｢作業流水線工廠 II｣製作。"
+    "description": "經過改良的「帕魯金屬盔甲」。 能夠抵禦使身體凍僵的寒意。 可在「作業流水線工廠 II」製作。"
   },
   "Battle_Armor_Grade_04_Steal_Heat": {
     "localized_name": "耐熱帕魯金屬盔甲",
-    "description": "經過改良的「帕魯金屬盔甲」。 具備傲人的耐熱功能。 可在｢作業流水線工廠 II｣製作。"
+    "description": "經過改良的「帕魯金屬盔甲」。 具備傲人的耐熱功能。 可在「作業流水線工廠 II」製作。"
   },
   "Battle_Armor_Grade_05_Plastic": {
     "localized_name": "塑鋼盔甲",
-    "description": "以塑鋼製成的盔甲。 在增強防禦力的同時，實現了輕量化。 可在｢作業流水線工廠 II｣製作。"
+    "description": "以塑鋼製成的盔甲。 在增強防禦力的同時，實現了輕量化。 可在「作業流水線工廠 II」製作。"
   },
   "Battle_Armor_Grade_05_Plastic_Cold": {
     "localized_name": "耐寒塑鋼盔甲",
-    "description": "經過改良的「塑鋼盔甲」。 能夠抵禦使身體凍僵的寒意。 可在｢作業流水線工廠 II｣製作。"
+    "description": "經過改良的「塑鋼盔甲」。 能夠抵禦使身體凍僵的寒意。 可在「作業流水線工廠 II」製作。"
   },
   "Battle_Armor_Grade_05_Plastic_Heat": {
     "localized_name": "耐熱塑鋼盔甲",
-    "description": "經過改良的「塑鋼盔甲」。 具備傲人的耐熱功能。 可在｢作業流水線工廠 II｣製作。"
+    "description": "經過改良的「塑鋼盔甲」。 具備傲人的耐熱功能。 可在「作業流水線工廠 II」製作。"
   },
   "Battle_Armor_Grade_05_Plastic_Weight": {
     "localized_name": "輕便塑鋼盔甲",
-    "description": "經過改良的「塑鋼盔甲」。 能增加玩家的負重上限。 可在｢作業流水線工廠 II｣製作。"
+    "description": "經過改良的「塑鋼盔甲」。 能增加玩家的負重上限。 可在「作業流水線工廠 II」製作。"
   },
   "Battle_Cloth": {
     "localized_name": "布",
@@ -193,39 +193,39 @@
   },
   "Battle_Glider_Grade_02": {
     "localized_name": "高級滑翔傘",
-    "description": "展開滑翔傘，即可在空中滑翔。 此為量產款式，有一定的飛行速度。 可在｢優質工作臺｣製作。"
+    "description": "展開滑翔傘，即可在空中滑翔。 此為量產款式，有一定的飛行速度。 可在「優質工作台」製作。"
   },
   "Battle_Glider_Grade_03": {
     "localized_name": "優質滑翔傘",
-    "description": "展開滑翔傘，即可在空中滑翔。 此款式性能有所提升，能以相當快的速度飛行。 可在｢作業流水線工廠｣製作。"
+    "description": "展開滑翔傘，即可在空中滑翔。 此款式性能有所提升，能以相當快的速度飛行。 可在「作業流水線工廠」製作。"
   },
   "Battle_Glider_Grade_04": {
     "localized_name": "特級滑翔傘",
-    "description": "展開滑翔傘，即可在空中滑翔。 性能得到進一步提升，速度和升力都提高了。 可在｢作業流水線工廠 II｣製作。"
+    "description": "展開滑翔傘，即可在空中滑翔。 性能得到進一步提升，速度和升力都提高了。 可在「作業流水線工廠 II」製作。"
   },
   "Battle_GunPowder_Grade_02": {
     "localized_name": "火藥",
-    "description": "用於發射砲彈的｢火藥｣。 製作子彈時會用到。 可在｢優質工作臺｣製作。"
+    "description": "用於發射砲彈的「火藥」。 製作子彈時會用到。 可在「優質工作台」製作。"
   },
   "Battle_Helm_Grade_02_Fur": {
     "localized_name": "羽毛髮飾",
-    "description": "美麗的羽毛髮飾。 不知為何，總覺得它能保護頭部不受致命傷害。 可在｢Workbench｣製作。"
+    "description": "美麗的羽毛髮飾。 不知為何，總覺得它能保護頭部不受致命傷害。 可在「Workbench」製作。"
   },
   "Battle_Helm_Grade_03_Copper": {
     "localized_name": "金屬頭盔",
-    "description": "以金屬製成的頭盔。 安全可靠，能守護你的大腦。 可在｢優質工作臺｣製作。"
+    "description": "以金屬製成的頭盔。 安全可靠，能守護你的大腦。 可在「優質工作台」製作。"
   },
   "Battle_Helm_Grade_04_Iron": {
     "localized_name": "精煉金屬頭盔",
-    "description": "以優質金屬製成的頭盔。 精心打磨的金屬光澤更進一步提高了它的價值。 可在｢作業流水線工廠｣製作。"
+    "description": "以優質金屬製成的頭盔。 精心打磨的金屬光澤更進一步提高了它的價值。 可在「作業流水線工廠」製作。"
   },
   "Battle_Helm_Grade_05_Steal": {
     "localized_name": "帕魯金屬頭盔",
-    "description": "以帕魯金屬錠製成的頭盔。 具有人人稱羨的絕佳品質，可謂是頂級戰士的象徵。 可在｢作業流水線工廠 II｣製作。"
+    "description": "以帕魯金屬錠製成的頭盔。 具有人人稱羨的絕佳品質，可謂是頂級戰士的象徵。 可在「作業流水線工廠 II」製作。"
   },
   "Battle_Helm_Grade_06_Plastic": {
     "localized_name": "塑鋼頭盔",
-    "description": "以塑鋼製成的頭盔。 在增強防禦力的同時，實現了輕量化。 可在｢作業流水線工廠 II｣製作。"
+    "description": "以塑鋼製成的頭盔。 在增強防禦力的同時，實現了輕量化。 可在「作業流水線工廠 II」製作。"
   },
   "Battle_MeleeWeapon_Axe_Steal": {
     "localized_name": "帕魯金屬斧",
@@ -245,15 +245,15 @@
   },
   "Battle_MeleeWeapon_Sword": {
     "localized_name": "劍",
-    "description": "近距離戰鬥用的｢劍｣。 鋒利無比！但需要靠近敵人攻擊，相當危險。 可在｢武器工作臺｣製作。"
+    "description": "近距離戰鬥用的「劍」。 鋒利無比！但需要靠近敵人攻擊，相當危險。 可在「武器工作台」製作。"
   },
   "Battle_RangeWeapon_AssaultRifle": {
     "localized_name": "突擊步槍",
-    "description": "以壓倒性的連射能力鎮壓敵人的突擊步槍。 火力強大，是對付強敵時的理想選擇。 可在｢武器流水線工廠｣製作。"
+    "description": "以壓倒性的連射能力鎮壓敵人的突擊步槍。 火力強大，是對付強敵時的理想選擇。 可在「武器流水線工廠」製作。"
   },
   "Battle_RangeWeapon_Bow1": {
     "localized_name": "老舊的弓",
-    "description": "原始的遠距離攻擊武器。 因為是東拼西湊而成的，威力較弱。 可在｢初階工作臺｣製作。"
+    "description": "原始的遠距離攻擊武器。 因為是東拼西湊而成的，威力較弱。 可在「初階工作台」製作。"
   },
   "Battle_RangeWeapon_Bow3": {
     "localized_name": "三連弓",
@@ -261,55 +261,55 @@
   },
   "Battle_RangeWeapon_BowGun": {
     "localized_name": "十字弓",
-    "description": "無需蓄力拉弓即可射出箭矢。 裝箭需要花些時間，但能造成強力一擊。 可在｢優質工作臺｣製作。"
+    "description": "無需蓄力拉弓即可射出「箭矢」。 裝箭需要花些時間，但能造成強力一擊。 可在「優質工作台」製作。"
   },
   "Battle_RangeWeapon_BowGun_Fire": {
     "localized_name": "火箭十字弓",
-    "description": "可造成火屬性傷害的十字弓。 需要火箭矢才能使用。 可在｢武器工作臺｣製作。"
+    "description": "可造成火屬性傷害的十字弓。 需要「火箭矢」才能使用。 可在「武器工作台」製作。"
   },
   "Battle_RangeWeapon_BowGun_Poison": {
     "localized_name": "毒箭十字弓",
-    "description": "可讓攻擊目標中毒的可怕十字弓。 需要｢毒箭矢｣才能使用。 可在｢優質工作臺｣製作。"
+    "description": "可讓攻擊目標中毒的可怕十字弓。 需要「毒箭矢」才能使用。 可在「優質工作台」製作。"
   },
   "Battle_RangeWeapon_Bow_Fire": {
     "localized_name": "火之弓",
-    "description": "可造成火屬性傷害的弓。 利用火箭矢讓帕魯著火，變得更容易捕捉。 需要火箭矢才能使用。"
+    "description": "可造成火屬性傷害的弓。 利用火箭矢讓帕魯著火，變得更容易捕捉。 需要「火箭矢」才能使用。"
   },
   "Battle_RangeWeapon_Bow_Poison": {
     "localized_name": "毒之弓",
-    "description": "可讓攻擊目標中毒的可怕毒弓。 帕魯中毒以後，會變得更容易捕捉。 需要｢毒箭矢｣才能使用。"
+    "description": "可讓攻擊目標中毒的可怕毒弓。 帕魯中毒以後，會變得更容易捕捉。 需要「毒箭矢」才能使用。"
   },
   "Battle_RangeWeapon_CompoundBow": {
     "localized_name": "複合弓",
     "description": null
   },
   "Battle_RangeWeapon_FlameThrower": {
-    "localized_name": "FlameThrower",
-    "description": null
+    "localized_name": "火焰噴射器",
+    "description": "能夠向遠處噴出火舌的Flamethrower。 可以使攻擊目標陷入點燃狀態。 可在「武器流水線工廠II」製作。"
   },
   "Battle_RangeWeapon_GatlingGun": {
     "localized_name": "加特林機槍",
-    "description": "可透過高速連射壓制敵人的加特林機槍。 壓制射擊能夠將敵人射成蜂窩。 可在｢武器流水線工廠II｣製作。"
+    "description": "可透過高速連射壓制敵人的加特林機槍。 壓制射擊能夠將敵人射成蜂窩。 可在「武器流水線工廠II」製作。"
   },
   "Battle_RangeWeapon_GrenadeLauncher": {
     "localized_name": "榴彈發射器",
-    "description": "能夠發射造成大範圍爆炸的榴彈。 對付大群敵人時很有用。 可在｢武器流水線工廠II｣製作。"
+    "description": "能夠發射造成大範圍爆炸的榴彈。 對付大群敵人時很有用。 可在「武器流水線工廠II」製作。"
   },
   "Battle_RangeWeapon_GuidedMissileLauncher": {
     "localized_name": "追蹤導彈發射器",
-    "description": "能夠發射自動追蹤敵人的導彈。 導彈在命中後將爆炸，造成大範圍傷害。 可在｢武器流水線工廠II｣製作。"
+    "description": "能夠發射自動追蹤敵人的導彈。 導彈在命中後將爆炸，造成大範圍傷害。 可在「武器流水線工廠II」製作。"
   },
   "Battle_RangeWeapon_HandGun": {
     "localized_name": "手槍",
-    "description": "子彈容納量及連射能力經過強化的手槍。 每秒火力比劣質手槍更強。 可在｢武器工作臺｣製作。"
+    "description": "子彈容納量及連射能力經過強化的手槍。 每秒火力比劣質手槍更強。 可在「武器工作台」製作。"
   },
   "Battle_RangeWeapon_HomingSphereLauncher": {
     "localized_name": "自動追蹤帕魯球發射器",
-    "description": "用於發射帕魯球的發射器。 用它射出的帕魯球會自動追蹤帕魯。 可在｢武器流水線工廠II｣製作。"
+    "description": "用於發射帕魯球的發射器。 用它射出的帕魯球會自動追蹤帕魯。 可在「武器流水線工廠II」製作。"
   },
   "Battle_RangeWeapon_LaserRifle": {
     "localized_name": "雷射步槍",
-    "description": "能夠發射雷射的武器。 威力強大又易於使用。 可在｢武器流水線工廠II｣製作。"
+    "description": "能夠發射雷射的武器。 威力強大又易於使用。 可在「武器流水線工廠II」製作。"
   },
   "Battle_RangeWeapon_OldRevolver": {
     "localized_name": "古舊左輪手槍",
@@ -317,11 +317,11 @@
   },
   "Battle_RangeWeapon_Rifle": {
     "localized_name": "單發步槍",
-    "description": "單發型的步槍，得花費時間裝填子彈。 子彈容納量雖少，但每一發均威力驚人。 可在｢武器流水線工廠｣製作。"
+    "description": "單發型的步槍，得花費時間裝填子彈。 子彈容納量雖少，但每一發均威力驚人。 可在「武器流水線工廠」製作。"
   },
   "Battle_RangeWeapon_RocketLauncher": {
     "localized_name": "火箭發射器",
-    "description": "可從遠距離進行強力轟炸的火箭發射器。 可在｢武器流水線工廠II｣製作。"
+    "description": "可從遠距離進行強力轟炸的火箭發射器。 可在「武器流水線工廠II」製作。"
   },
   "Battle_RangeWeapon_SemiAutoRifle": {
     "localized_name": "半自動步槍",
@@ -333,19 +333,19 @@
   },
   "Battle_RangeWeapon_ShotGun": {
     "localized_name": "雙管散彈槍",
-    "description": "近距離時威力驚人的散彈槍，可以連射2發。 子彈容納量較少，但火力強大。 可在｢武器流水線工廠｣製作。"
+    "description": "近距離時威力驚人的散彈槍，可以連射2發。 子彈容納量較少，但火力強大。 可在「武器流水線工廠」製作。"
   },
   "Battle_RangeWeapon_ShotGun_Multi": {
     "localized_name": "泵動式散彈槍",
-    "description": "子彈容納量增加，威力更強的散彈槍。 近距離射擊時的DPS極佳。 可在｢武器流水線工廠｣製作。"
+    "description": "子彈容納量增加，威力更強的散彈槍。 近距離射擊時的DPS極佳。 可在「武器流水線工廠」製作。"
   },
   "Battle_RangeWeapon_SphereLauncher": {
     "localized_name": "擴散型帕魯球發射器",
-    "description": "可同時發射大量帕魯球的新型發射器。 可用來捕捉成群的帕魯。 可在｢武器流水線工廠｣製作。"
+    "description": "可同時發射大量帕魯球的新型發射器。 可用來捕捉成群的帕魯。 可在「武器流水線工廠」製作。"
   },
   "Battle_RangeWeapon_SphereLauncher_Once": {
     "localized_name": "單發型帕魯球發射器",
-    "description": "用於發射帕魯球的發射器。 用它就能捕捉到更遠處的帕魯。 可在｢武器工作臺｣製作。"
+    "description": "用於發射帕魯球的發射器。 用它就能捕捉到更遠處的帕魯。 可在「武器工作台」製作。"
   },
   "Battle_RangeWeapon_SubmachineGun": {
     "localized_name": "衝鋒槍",
@@ -361,7 +361,7 @@
   },
   "BreedFarm": {
     "localized_name": "配種牧場",
-    "description": "分派♂♀帕魯各一隻， 即可讓牠們產下帕魯蛋。 要放入｢蛋糕｣才會順利生蛋。"
+    "description": "將♂、♀帕魯各一隻分派至此處， 即可讓牠們產下帕魯蛋。 需在設施中放入「蛋糕」才會順利生蛋。"
   },
   "BuildableGoddessStatue": {
     "localized_name": "力量之像",
@@ -385,6 +385,10 @@
   },
   "Cloth2": {
     "localized_name": "優質布",
+    "description": "編織大量「羊毛」製成的「優質布」。 是製作優質防具時會用到的素材。 可在「優質工作台」製作。"
+  },
+  "CompositeDesk": {
+    "localized_name": "製圖桌",
     "description": null
   },
   "Cooler": {
@@ -409,7 +413,7 @@
   },
   "DecalGunSet": {
     "localized_name": "噴漆槍套組",
-    "description": "噴漆槍套組。 持有此套組，即可製作能在命中處留下帕魯圖案的 奇妙槍枝與專用子彈。"
+    "description": "噴漆槍套組。 解鎖此套組，即可製作能在命中處留下帕魯圖案的 奇妙槍枝與專用子彈。"
   },
   "DefenseWait": {
     "localized_name": "沙袋",
@@ -427,6 +431,10 @@
     "localized_name": "木造防禦牆",
     "description": "防止外敵入侵的巨大防禦牆。 以木頭製成，相當脆弱。"
   },
+  "DimensionPalStorage": {
+    "localized_name": "帕魯次元倉庫",
+    "description": null
+  },
   "DismantlingConveyor": {
     "localized_name": "帕魯解體傳送帶",
     "description": null
@@ -437,7 +445,7 @@
   },
   "ElecBaton": {
     "localized_name": "電擊棒",
-    "description": "敲下去就會觸電的近戰武器。 帕魯在觸電時會比較容易捕獲。 可在｢優質工作臺｣製作。"
+    "description": "敲下去就會觸電的近戰武器。 帕魯在觸電時會比較容易捕獲。 可在「優質工作台」製作。"
   },
   "ElectricCooler": {
     "localized_name": "電氣降溫器",
@@ -472,7 +480,7 @@
     "description": null
   },
   "Farm_SkillFruits": {
-    "localized_name": "技能果實農園",
+    "localized_name": "技能果樹園",
     "description": null
   },
   "FlamethrowerBullet": {
@@ -669,7 +677,11 @@
   },
   "Glass_houseset": {
     "localized_name": "玻璃建築套組",
-    "description": "持有此套組便可用玻璃打造據點。 可建造玻璃地基、牆壁、屋頂、樓梯等 建造房屋時所需的構造。"
+    "description": "解鎖此套組便可用玻璃建築打造據點。 可建造玻璃地基、牆壁、屋頂、樓梯等 建造房屋時所需的構造。"
+  },
+  "GlobalPalStorage": {
+    "localized_name": "跨界帕魯終端",
+    "description": null
   },
   "GrapplingGun": {
     "localized_name": "爪鉤槍",
@@ -697,11 +709,11 @@
   },
   "HandTorch": {
     "localized_name": "攜帶型火炬",
-    "description": "照亮夜晚的黑暗，為人驅逐寒意。 多少也能用於近距離戰鬥。 可在｢初階工作臺｣製作。"
+    "description": "照亮夜晚的黑暗，為人驅逐寒意。 多少也能用於近距離戰鬥。 可在「初階工作台」製作。"
   },
   "HandgunBullet": {
     "localized_name": "手槍子彈",
-    "description": "用於｢手槍｣等的子彈。 可在｢武器工作臺｣製作。"
+    "description": "用於「手槍」等的子彈。 可在「武器工作台」製作。"
   },
   "Headstone": {
     "localized_name": "墓碑",
@@ -729,7 +741,7 @@
   },
   "Infra_ElectronicCircuit": {
     "localized_name": "電路板",
-    "description": "製作精密機械時會用到的｢電路板｣。 可在｢作業流水線工廠｣製作。"
+    "description": "製作精密機械時會用到的「電路板」。 可在「作業流水線工廠」製作。"
   },
   "Infra_ItemChest_Grade_01": {
     "localized_name": "木箱",
@@ -773,7 +785,7 @@
   },
   "JapaneseStyle_houseset": {
     "localized_name": "和風建築套組",
-    "description": "持有此套組便可用和風的建築打造據點。 可建造和風地基、牆壁、屋頂、樓梯等 建造房屋時所需的構造。"
+    "description": "解鎖此套組便可用和風建築打造據點。 可建造和風地基、牆壁、屋頂、樓梯等 建造房屋時所需的構造。"
   },
   "Katana": {
     "localized_name": "太刀",
@@ -813,11 +825,11 @@
   },
   "LauncherBullet": {
     "localized_name": "火箭彈",
-    "description": "｢火箭發射器｣等使用的彈藥。 可在｢武器流水線工廠II｣製作。"
+    "description": "「火箭發射器」等使用的彈藥。 可在「武器流水線工廠II」製作。"
   },
   "Launcher_Meteor": {
     "localized_name": "隕石發射器",
-    "description": "加工隕石製作而成的發射器。 命中時會像隕石一樣引發爆炸。 可在｢武器流水線工廠｣製作。"
+    "description": "加工隕石製作而成的發射器。 命中時會像隕石一樣引發爆炸。 可在「武器流水線工廠」製作。"
   },
   "MakeshiftAssaultRifle": {
     "localized_name": "破舊的突擊步槍",
@@ -825,7 +837,7 @@
   },
   "MakeshiftHandgun": {
     "localized_name": "劣質手槍",
-    "description": "手工製造的破舊手槍。 較適合用於近距離戰鬥，但每次只能擊發一發子彈。 可在｢武器工作臺｣製作。"
+    "description": "手工製造的破舊手槍。 較適合用於近距離戰鬥，但每次只能擊發一發子彈。 可在「武器工作台」製作。"
   },
   "MakeshiftShotgun": {
     "localized_name": "破舊的散彈槍",
@@ -865,7 +877,7 @@
   },
   "Metal_houseset": {
     "localized_name": "金屬建築套組",
-    "description": "持有此套組便可用金屬打造據點。 可建造金屬地基、牆壁、屋頂、樓梯等 建造房屋時所需的構造。"
+    "description": "解鎖此套組便可用金屬建築打造據點。 可建造金屬地基、牆壁、屋頂、樓梯等 建造房屋時所需的構造。"
   },
   "MiningTool": {
     "localized_name": "十字鎬與安全帽",
@@ -885,7 +897,7 @@
   },
   "Musket": {
     "localized_name": "鳥槍",
-    "description": "古舊又簡樸的槍。 單發威力強大，但裝填需要較長時間。 可在｢武器工作臺｣製作。"
+    "description": "古舊又簡樸的槍。 單發威力強大，但裝填需要較長時間。 可在「武器工作台」製作。"
   },
   "OilPump": {
     "localized_name": "原油提煉機",
@@ -937,11 +949,11 @@
   },
   "Product_Axe_Grade_02": {
     "localized_name": "金屬斧",
-    "description": "用於劈砍木材的斧頭。 以金屬製成，耐久度與鋒利度都得到了提升。 可在｢優質工作臺｣製作。"
+    "description": "用於劈砍木材的斧頭。 以金屬製成，耐久度與鋒利度都得到了提升。 可在「優質工作台」製作。"
   },
   "Product_Axe_Grade_03": {
     "localized_name": "精煉金屬斧",
-    "description": "用於劈砍木材的斧頭。 耐久度與鋒利度均有更進一步的提升。 可在｢作業流水線工廠｣製作。"
+    "description": "用於劈砍木材的斧頭。 耐久度與鋒利度均有更進一步的提升。 可在「作業流水線工廠」製作。"
   },
   "Product_CoalPit": {
     "localized_name": "石炭採礦場",
@@ -957,7 +969,7 @@
   },
   "Product_Cooking_Grade_03": {
     "localized_name": "電氣廚房",
-    "description": "雖需使用電力，但可應對更複雜、更有效率的烹調需求。 需有具備「生火」適應性的帕魯。"
+    "description": "雖需使用電力，但可應對更複雜、更有效率的烹調需求。 需有具備「生火」適應性的帕魯才能進行作業。"
   },
   "Product_CopperPit": {
     "localized_name": "金屬採礦場",
@@ -968,20 +980,20 @@
     "description": null
   },
   "Product_Factory_Hard_Grade_01": {
-    "localized_name": "優質工作臺",
-    "description": "生產速度比「初階工作臺」更快。 需有具備「手工作業」適應性的帕魯。"
+    "localized_name": "優質工作台",
+    "description": "生產速度比「初階工作台」更快。 需有具備「手工作業」適應性的帕魯才能進行作業。"
   },
   "Product_Factory_Hard_Grade_02": {
     "localized_name": "作業流水線工廠",
-    "description": "雖需使用電力，但生產各種道具的速度較為快速。 需有具備「手工作業」適應性的帕魯。"
+    "description": "雖需使用電力，但生產各種道具的速度較為快速。 需有具備「手工作業」適應性的帕魯才能進行作業。"
   },
   "Product_Factory_Hard_Grade_03": {
     "localized_name": "作業流水線工廠 II",
-    "description": "雖需使用電力，但生產各種道具的速度更為快速。 需有具備「手工作業」適應性的帕魯。"
+    "description": "雖需使用電力，但生產各種道具的速度更為快速。 需有具備「手工作業」適應性的帕魯才能進行作業。"
   },
   "Product_Farm_Berries": {
     "localized_name": "莓果園",
-    "description": "能夠生產莓果的農園。 需有具備「播種」、「澆水」及「採集」適應性的帕魯。"
+    "description": "能夠生產莓果的農園。 需有具備「播種」、「澆水」及「採集」適應性的帕魯才能進行作業。"
   },
   "Product_Farm_Carrot": {
     "localized_name": "胡蘿蔔園",
@@ -989,7 +1001,7 @@
   },
   "Product_Farm_Lettuce": {
     "localized_name": "萵苣園",
-    "description": "能夠生產萵苣的農園。 需有具備「播種」、「澆水」及「採集」適應性的帕魯。"
+    "description": "能夠生產萵苣的農園。 需有具備「播種」、「澆水」及「採集」適應性的帕魯才能進行作業。"
   },
   "Product_Farm_Onion": {
     "localized_name": "洋蔥園",
@@ -1001,11 +1013,11 @@
   },
   "Product_Farm_tomato": {
     "localized_name": "蕃茄園",
-    "description": "能夠生產番茄的農園。 需有具備「播種」、「澆水」及「採集」適應性的帕魯。"
+    "description": "能夠生產番茄的農園。 需有具備「播種」、「澆水」及「採集」適應性的帕魯才能進行作業。"
   },
   "Product_Farm_wheat": {
     "localized_name": "小麥園",
-    "description": "能夠生產「麵包」的原料。 需有具備「播種」、「澆水」及「採集」適應性的帕魯。"
+    "description": "能夠生產「麵包」的原料。 需有具備「播種」、「澆水」及「採集」適應性的帕魯才能進行作業。"
   },
   "Product_Ingot_Grade_01_Copper": {
     "localized_name": "初階熔爐",
@@ -1020,12 +1032,12 @@
     "description": "可冶煉「帕魯金屬錠」。"
   },
   "Product_Medicine_Grade_01": {
-    "localized_name": "中世紀製藥工作臺",
-    "description": "可製作簡單的藥物。 需有具備「製藥」適應性的帕魯。"
+    "localized_name": "中世紀製藥台",
+    "description": "可製作簡單的藥物。 需有具備「製藥」適應性的帕魯才能進行作業。"
   },
   "Product_Medicine_Grade_02": {
-    "localized_name": "電氣製藥工作臺",
-    "description": "雖需使用電力，但可製作更高級的藥物。 需有具備「製藥」適應性的帕魯。"
+    "localized_name": "電氣製藥台",
+    "description": "雖需使用電力，但可製作更高級的藥物。 需有具備「製藥」適應性的帕魯才能進行作業。"
   },
   "Product_Pickaxe_Grade_01": {
     "localized_name": "石製十字鎬",
@@ -1033,11 +1045,11 @@
   },
   "Product_Pickaxe_Grade_02": {
     "localized_name": "金屬十字鎬",
-    "description": "用於挖掘、開採的十字鎬。 以金屬製成，耐久度與效率都得到了提升。 可在｢優質工作臺｣製作。"
+    "description": "用於挖掘、開採的十字鎬。 以金屬製成，耐久度與效率都得到了提升。 可在「優質工作台」製作。"
   },
   "Product_Pickaxe_Grade_03": {
     "localized_name": "精煉金屬十字鎬",
-    "description": "用於挖掘、開採的十字鎬。 耐久度與效率均有更進一步的提升。 可在｢作業流水線工廠｣製作。"
+    "description": "用於挖掘、開採的十字鎬。 耐久度與效率均有更進一步的提升。 可在「作業流水線工廠」製作。"
   },
   "Product_QuartzPit": {
     "localized_name": "純水晶採礦場",
@@ -1045,30 +1057,30 @@
   },
   "Product_StationDeforest": {
     "localized_name": "採伐場",
-    "description": "可在據點內生產木材。 需有具備「採伐」適應性的帕魯。"
+    "description": "可在據點內生產木材。 需有具備「採伐」適應性的帕魯才能進行作業。"
   },
   "Product_StonePit": {
     "localized_name": "採石場",
-    "description": "可在據點內生產石材。 需有具備「挖掘」適應性的帕魯。"
+    "description": "可在據點內生產石材。 需有具備「挖掘」適應性的帕魯才能進行作業。"
   },
   "Product_SulfurPit": {
     "localized_name": "硫磺採礦場",
     "description": null
   },
   "Product_WeaponFactory_Dirty_Grade_01": {
-    "localized_name": "武器工作臺",
-    "description": "本設施可製造具有簡單機關的武器。 需有具備｢手工作業｣適應性的帕魯才能進行作業。"
+    "localized_name": "武器工作台",
+    "description": "本設施可製造具有簡單機關的武器。 需有具備「手工作業」適應性的帕魯才能進行作業。"
   },
   "Product_WeaponFactory_Dirty_Grade_02": {
     "localized_name": "武器流水線工廠",
-    "description": "雖需使用電力，但生產武器及彈藥的速度較為快速。 需有具備「手工作業」適應性的帕魯。"
+    "description": "雖需使用電力，但生產武器及彈藥的速度較為快速。 需有具備「手工作業」適應性的帕魯才能進行作業。"
   },
   "Product_WeaponFactory_Dirty_Grade_03": {
     "localized_name": "武器流水線工廠II",
-    "description": "雖需使用電力，但生產武器及彈藥的速度更為快速。 需有具備「手工作業」適應性的帕魯。"
+    "description": "雖需使用電力，但生產武器及彈藥的速度更為快速。 需有具備「手工作業」適應性的帕魯才能進行作業。"
   },
   "Product_WorkBench_SkillUnlock": {
-    "localized_name": "帕魯裝備工作臺",
+    "localized_name": "帕魯裝備工作台",
     "description": "可製作帕魯使用夥伴技能時 所需的道具。"
   },
   "Refrigerator": {
@@ -1080,7 +1092,7 @@
     "description": null
   },
   "RepairBench": {
-    "localized_name": "修理工作臺",
+    "localized_name": "修理工作台",
     "description": "可修理損壞的武器及道具。"
   },
   "RepairKit": {
@@ -1089,11 +1101,11 @@
   },
   "RifleBullet": {
     "localized_name": "步槍子彈",
-    "description": "用於步槍等的子彈。 可在｢武器工作臺｣製作。"
+    "description": "用於步槍等的子彈。 可在「武器工作台」製作。"
   },
   "RoughBullet": {
     "localized_name": "劣質彈藥",
-    "description": "用於｢鳥槍｣與｢劣質手槍｣等的子彈。 可在｢武器工作臺｣製作。"
+    "description": "用於「鳥槍」與「劣質手槍」等的子彈。 可在「武器工作台」製作。"
   },
   "SFArmor": {
     "localized_name": "六稜晶盔甲",
@@ -1133,19 +1145,19 @@
   },
   "Shield_02": {
     "localized_name": "高級護盾",
-    "description": "以帕魯礦技術打造的神奇護盾。 改良原型設計，提高了防禦力。 可在｢優質工作臺｣製作。"
+    "description": "以帕魯礦技術打造的神奇護盾。 改良原型設計，提高了防禦力。 可在「優質工作台」製作。"
   },
   "Shield_03": {
     "localized_name": "優質護盾",
-    "description": "以帕魯礦技術打造的神奇護盾。 經過進一步改良，更加提升了性能。 可在｢作業流水線工廠｣製作。"
+    "description": "以帕魯礦技術打造的神奇護盾。 經過進一步改良，更加提升了性能。 可在「作業流水線工廠」製作。"
   },
   "Shield_04": {
     "localized_name": "特級護盾",
-    "description": "以帕魯礦技術打造的神奇護盾。 歷經無數試驗，達到最高峰的品質。 可在｢作業流水線工廠 II｣製作。"
+    "description": "以帕魯礦技術打造的神奇護盾。 歷經無數試驗，達到最高峰的品質。 可在「作業流水線工廠 II」製作。"
   },
   "Shield_05": {
     "localized_name": "超級護盾",
-    "description": "以帕魯礦技術打造的神奇護盾。 經過更進一步的無數試驗，實現了究極的品質。 可在｢作業流水線工廠 II｣製作。"
+    "description": "以帕魯礦技術打造的神奇護盾。 經過更進一步的無數試驗，實現了究極的品質。 可在「作業流水線工廠 II」製作。"
   },
   "Shield_SF": {
     "localized_name": "卓越護盾",
@@ -1153,7 +1165,7 @@
   },
   "ShotGunBullet": {
     "localized_name": "散彈槍子彈",
-    "description": "用於散彈槍等的子彈。 可在｢武器工作臺｣製作。"
+    "description": "用於散彈槍等的子彈。 可在「武器工作台」製作。"
   },
   "Signboard": {
     "localized_name": "告示牌",
@@ -1593,11 +1605,11 @@
   },
   "Spear_2": {
     "localized_name": "金屬矛",
-    "description": "利於近距離戰鬥的矛。 以金屬製成，攻擊力有所提升。 可在｢優質工作臺｣製作。"
+    "description": "利於近距離戰鬥的矛。 以金屬製成，攻擊力有所提升。 可在「優質工作台」製作。"
   },
   "Spear_3": {
     "localized_name": "精煉金屬矛",
-    "description": "利於近距離戰鬥的矛。 以優質金屬製成，攻擊力有所提升。 可在｢作業流水線工廠｣製作。"
+    "description": "利於近距離戰鬥的矛。 以優質金屬製成，攻擊力有所提升。 可在「作業流水線工廠」製作。"
   },
   "Spear_ForestBoss": {
     "localized_name": "莉莉之矛",
@@ -1621,39 +1633,39 @@
   },
   "Special_PalSphere_Grade_02": {
     "localized_name": "高級帕魯球",
-    "description": "投擲這種道具便能捕捉帕魯。 此款式性能有所提升，可捕捉的帕魯範圍更廣。 可在｢帕魯球工作臺｣製作。"
+    "description": "投擲這種道具便能捕捉帕魯。 此款式性能有所提升，可捕捉的帕魯範圍更廣。 可在「帕魯球工作台」製作。"
   },
   "Special_PalSphere_Grade_03": {
     "localized_name": "優質帕魯球",
-    "description": "投擲這種道具便能捕捉帕魯。 此款式可捕捉有一定強度的帕魯。 可在｢帕魯球工作臺｣製作。"
+    "description": "投擲這種道具便能捕捉帕魯。 此款式可捕捉有一定強度的帕魯。 可在「帕魯球工作台」製作。"
   },
   "Special_PalSphere_Grade_04": {
     "localized_name": "特級帕魯球",
-    "description": "投擲這種道具便能捕捉帕魯。 此款式可捕捉相當強大的帕魯。 可在｢帕魯球流水線工廠｣製作。"
+    "description": "投擲這種道具便能捕捉帕魯。 此款式可捕捉相當強大的帕魯。 可在「帕魯球流水線工廠」製作。"
   },
   "Special_PalSphere_Grade_05": {
     "localized_name": "大師帕魯球",
-    "description": "投擲這種道具便能捕捉帕魯。 此款式的性能相當好，沒多少帕魯能逃得掉。 可在｢帕魯球流水線工廠II｣製作。"
+    "description": "投擲這種道具便能捕捉帕魯。 此款式的性能相當好，沒多少帕魯能逃得掉。 可在「帕魯球流水線工廠II」製作。"
   },
   "Special_PalSphere_Grade_06": {
     "localized_name": "傳奇帕魯球",
-    "description": "投擲這種道具便能捕捉帕魯。 此款式的性能極高，幾乎沒有帕魯能逃得掉。 可在｢帕魯球流水線工廠II｣製作。"
+    "description": "投擲這種道具便能捕捉帕魯。 此款式的性能極高，幾乎沒有帕魯能逃得掉。 可在「帕魯球流水線工廠II」製作。"
   },
   "Special_PalSphere_Grade_07": {
     "localized_name": "究極帕魯球",
-    "description": "投擲這種道具便能捕捉帕魯。 擁有壓倒性的性能，幾乎可以抓住任何帕魯。 可在｢帕魯球流水線工廠II｣製作。"
+    "description": "投擲這種道具便能捕捉帕魯。 擁有壓倒性的性能，幾乎可以抓住任何帕魯。 可在「帕魯球流水線工廠II」製作。"
   },
   "Special_SphereFactory_Black_Grade_01": {
-    "localized_name": "帕魯球工作臺",
-    "description": "捕捉帕魯用的帕魯球工作臺。 需有具備｢手工作業｣適應性的帕魯才能進行作業。"
+    "localized_name": "帕魯球工作台",
+    "description": "捕捉帕魯用的帕魯球工作台。 需有具備「手工作業」適應性的帕魯才能進行作業。"
   },
   "Special_SphereFactory_Black_Grade_02": {
     "localized_name": "帕魯球流水線工廠",
-    "description": "生產「帕魯球」的速度較為快速。 需有具備「手工作業」適應性的帕魯。"
+    "description": "生產「帕魯球」的速度較為快速。 需有具備「手工作業」適應性的帕魯才能進行作業。"
   },
   "Special_SphereFactory_Black_Grade_03": {
     "localized_name": "帕魯球流水線工廠II",
-    "description": "生產「帕魯球」的速度更為快速。 需有具備「手工作業」適應性的帕魯。"
+    "description": "生產「帕魯球」的速度更為快速。 需有具備「手工作業」適應性的帕魯才能進行作業。"
   },
   "SphereFactory_Black_04": {
     "localized_name": "高等文明帕魯球工廠",
@@ -1693,7 +1705,7 @@
   },
   "Stone_houseset": {
     "localized_name": "石砌建築套組",
-    "description": "持有此套組便可用石頭打造據點。 可建造石砌地基、牆壁、屋頂、樓梯等 建造房屋時所需的構造。"
+    "description": "解鎖此套組便可用石頭建築打造據點。 可建造石砌地基、牆壁、屋頂、樓梯等 建造房屋時所需的構造。"
   },
   "Stump": {
     "localized_name": "樹樁與斧頭",
@@ -1765,7 +1777,7 @@
   },
   "Wooden_houseset": {
     "localized_name": "木造建築套組",
-    "description": "持有此套組便可用木頭打造據點。 可建造木造地基、牆壁、屋頂、樓梯等 建造房屋時所需的構造。"
+    "description": "解鎖此套組便可用木頭建築打造據點。 可建造木造地基、牆壁、屋頂、樓梯等 建造房屋時所需的構造。"
   },
   "Wooden_ladder": {
     "localized_name": "梯子",
@@ -1776,8 +1788,8 @@
     "description": null
   },
   "Workbench": {
-    "localized_name": "初階工作臺",
-    "description": "用來製作簡單道具的「初階工作臺」。 如有具備「手工作業」適應性的帕魯， 牠就會來協助作業。"
+    "localized_name": "初階工作台",
+    "description": "用來製作簡單道具的「初階工作台」。 如有具備「手工作業」適應性的帕魯， 牠就會來協助作業。"
   },
   "YakushimaBlade": {
     "localized_name": "彩虹貓之刃",

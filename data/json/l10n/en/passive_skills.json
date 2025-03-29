@@ -31,6 +31,278 @@
     "localized_name": "Attack Up Lv. 3",
     "description": null
   },
+  "BossDefeatReward_AmaterasuWolf_Dark": {
+    "localized_name": "Dark Damage Enhancement (Small)",
+    "description": null
+  },
+  "BossDefeatReward_Anubis": {
+    "localized_name": "Ground Damage Enhancement (Small)",
+    "description": null
+  },
+  "BossDefeatReward_BadCatgirl": {
+    "localized_name": "Dark Damage Enhancement (Small)",
+    "description": null
+  },
+  "BossDefeatReward_BerryGoat_Dark": {
+    "localized_name": "Grass Damage Enhancement (Medium)",
+    "description": null
+  },
+  "BossDefeatReward_BlackMetalDragon": {
+    "localized_name": "Dragon Damage Enhancement (Medium)",
+    "description": null
+  },
+  "BossDefeatReward_BlackPuppy": {
+    "localized_name": "Dark Damage Enhancement (Small)",
+    "description": null
+  },
+  "BossDefeatReward_BlueDragon": {
+    "localized_name": "Water Damage Enhancement (Small)",
+    "description": null
+  },
+  "BossDefeatReward_BlueThunderHorse": {
+    "localized_name": "Electric Damage Enhancement (Medium)",
+    "description": null
+  },
+  "BossDefeatReward_BlueberryFairy": {
+    "localized_name": "Grass Damage Enhancement (Medium)",
+    "description": null
+  },
+  "BossDefeatReward_CaptainPenguin": {
+    "localized_name": "Water Damage Enhancement (Small)",
+    "description": null
+  },
+  "BossDefeatReward_CatMage": {
+    "localized_name": "Dark Damage Enhancement (Small)",
+    "description": null
+  },
+  "BossDefeatReward_CatVampire": {
+    "localized_name": "Dark Damage Enhancement (Small)",
+    "description": null
+  },
+  "BossDefeatReward_DarkScorpion": {
+    "localized_name": "Dark Damage Enhancement (Small)",
+    "description": null
+  },
+  "BossDefeatReward_DarkScorpion_Ground": {
+    "localized_name": "Ground Damage Enhancement (Small)",
+    "description": null
+  },
+  "BossDefeatReward_FairyDragon": {
+    "localized_name": "Dragon Damage Enhancement (Small)",
+    "description": null
+  },
+  "BossDefeatReward_FengyunDeeper": {
+    "localized_name": "Neutral Damage Enhancement (Small)",
+    "description": null
+  },
+  "BossDefeatReward_FengyunDeeper_Electric": {
+    "localized_name": "Electric Damage Enhancement (Medium)",
+    "description": null
+  },
+  "BossDefeatReward_FlowerDinosaur_Electric": {
+    "localized_name": "Electric Damage Enhancement (Small)",
+    "description": null
+  },
+  "BossDefeatReward_FlowerDoll": {
+    "localized_name": "Grass Damage Enhancement (Small)",
+    "description": null
+  },
+  "BossDefeatReward_GhostRabbit": {
+    "localized_name": "Dark Damage Enhancement (Small)",
+    "description": null
+  },
+  "BossDefeatReward_GoldenHorse": {
+    "localized_name": "Ground Damage Enhancement (Medium)",
+    "description": null
+  },
+  "BossDefeatReward_GrassMammoth": {
+    "localized_name": "Grass Damage Enhancement (Medium)",
+    "description": null
+  },
+  "BossDefeatReward_GrassPanda_Electric": {
+    "localized_name": "Electric Damage Enhancement (Small)",
+    "description": null
+  },
+  "BossDefeatReward_GrassRabbitMan": {
+    "localized_name": "Grass Damage Enhancement (Small)",
+    "description": null
+  },
+  "BossDefeatReward_GrimGirl": {
+    "localized_name": "Dark Damage Enhancement (Small)",
+    "description": null
+  },
+  "BossDefeatReward_HawkBird": {
+    "localized_name": "Neutral Damage Enhancement (Small)",
+    "description": null
+  },
+  "BossDefeatReward_HerculesBeetle": {
+    "localized_name": "Ground Damage Enhancement (Small)",
+    "description": null
+  },
+  "BossDefeatReward_HerculesBeetle_Ground": {
+    "localized_name": "Ground Damage Enhancement (Medium)",
+    "description": null
+  },
+  "BossDefeatReward_Horus_Water": {
+    "localized_name": "Water Damage Enhancement (Medium)",
+    "description": null
+  },
+  "BossDefeatReward_IceHorse": {
+    "localized_name": "Ice Damage Enhancement (Large)",
+    "description": null
+  },
+  "BossDefeatReward_IceHorse_Dark": {
+    "localized_name": "Dark Damage Enhancement (Small)",
+    "description": null
+  },
+  "BossDefeatReward_JetDragon": {
+    "localized_name": "Dragon Damage Enhancement (Large)",
+    "description": null
+  },
+  "BossDefeatReward_KingAlpaca": {
+    "localized_name": "Neutral Damage Enhancement (Small)",
+    "description": null
+  },
+  "BossDefeatReward_KingAlpaca_Ice": {
+    "localized_name": "Ice Damage Enhancement (Medium)",
+    "description": null
+  },
+  "BossDefeatReward_KingBahamut": {
+    "localized_name": "Fire Damage Enhancement (Large)",
+    "description": null
+  },
+  "BossDefeatReward_Kirin": {
+    "localized_name": "Electric Damage Enhancement (Small)",
+    "description": null
+  },
+  "BossDefeatReward_Kitsunebi_Ice": {
+    "localized_name": "Ice Damage Enhancement (Large)",
+    "description": null
+  },
+  "BossDefeatReward_LazyCatfish": {
+    "localized_name": "Ground Damage Enhancement (Small)",
+    "description": null
+  },
+  "BossDefeatReward_LazyDragon_Electric": {
+    "localized_name": "Dragon Damage Enhancement (Small)",
+    "description": null
+  },
+  "BossDefeatReward_LilyQueen_Dark": {
+    "localized_name": "Dark Damage Enhancement (Small)",
+    "description": null
+  },
+  "BossDefeatReward_MopKing": {
+    "localized_name": "Ice Damage Enhancement (Small)",
+    "description": null
+  },
+  "BossDefeatReward_Mutant": {
+    "localized_name": "Neutral Damage Enhancement (Small)",
+    "description": null
+  },
+  "BossDefeatReward_MysteryMask": {
+    "localized_name": "Dark Damage Enhancement (Small)",
+    "description": null
+  },
+  "BossDefeatReward_NaughtyCat": {
+    "localized_name": "Neutral Damage Enhancement (Small)",
+    "description": null
+  },
+  "BossDefeatReward_NightBlueHorse": {
+    "localized_name": "Dark Damage Enhancement (Small)",
+    "description": null
+  },
+  "BossDefeatReward_PinkRabbit_Grass": {
+    "localized_name": "Grass Damage Enhancement (Medium)",
+    "description": null
+  },
+  "BossDefeatReward_PlantSlime": {
+    "localized_name": "Ground Damage Enhancement (Small)",
+    "description": null
+  },
+  "BossDefeatReward_PurpleSpider": {
+    "localized_name": "Dark Damage Enhancement (Small)",
+    "description": null
+  },
+  "BossDefeatReward_QueenBee": {
+    "localized_name": "Grass Damage Enhancement (Small)",
+    "description": null
+  },
+  "BossDefeatReward_RaijinDaughter_Water": {
+    "localized_name": "Dark Damage Enhancement (Small)",
+    "description": null
+  },
+  "BossDefeatReward_Ronin": {
+    "localized_name": "Fire Damage Enhancement (Medium)",
+    "description": null
+  },
+  "BossDefeatReward_SaintCentaur_1": {
+    "localized_name": "Neutral Damage Enhancement (Large)",
+    "description": null
+  },
+  "BossDefeatReward_SaintCentaur_2": {
+    "localized_name": "Dark Damage Enhancement (Small)",
+    "description": null
+  },
+  "BossDefeatReward_SakuraSaurus": {
+    "localized_name": "Grass Damage Enhancement (Small)",
+    "description": null
+  },
+  "BossDefeatReward_SakuraSaurus_Water": {
+    "localized_name": "Water Damage Enhancement (Small)",
+    "description": null
+  },
+  "BossDefeatReward_SkyDragon": {
+    "localized_name": "Dragon Damage Enhancement (Small)",
+    "description": null
+  },
+  "BossDefeatReward_Suzaku": {
+    "localized_name": "Fire Damage Enhancement (Large)",
+    "description": null
+  },
+  "BossDefeatReward_ThunderBird": {
+    "localized_name": "Electric Damage Enhancement (Small)",
+    "description": null
+  },
+  "BossDefeatReward_Umihebi": {
+    "localized_name": "Water Damage Enhancement (Medium)",
+    "description": null
+  },
+  "BossDefeatReward_VioletFairy": {
+    "localized_name": "Grass Damage Enhancement (Medium)",
+    "description": null
+  },
+  "BossDefeatReward_WeaselDragon": {
+    "localized_name": "Ice Damage Enhancement (Small)",
+    "description": null
+  },
+  "BossDefeatReward_Werewolf_Ice": {
+    "localized_name": "Ice Damage Enhancement (Large)",
+    "description": null
+  },
+  "BossDefeatReward_WhiteDeer": {
+    "localized_name": "Neutral Damage Enhancement (Medium)",
+    "description": null
+  },
+  "BossDefeatReward_WhiteMoth": {
+    "localized_name": "Ice Damage Enhancement (Small)",
+    "description": null
+  },
+  "BossDefeatReward_WhiteShieldDragon": {
+    "localized_name": "Dragon Damage Enhancement (Medium)",
+    "description": null
+  },
+  "BossDefeatReward_WhiteTiger_Ground": {
+    "localized_name": "Ground Damage Enhancement (Medium)",
+    "description": null
+  },
+  "BossDefeatReward_WingGolem": {
+    "localized_name": "Ground Damage Enhancement (Small)",
+    "description": null
+  },
+  "BossDefeatReward_Yeti_Grass": {
+    "localized_name": "Grass Damage Enhancement (Small)",
+    "description": null
+  },
   "CaptureLevel_Up_1": {
     "localized_name": "Capture Strength +1",
     "description": null
@@ -101,7 +373,7 @@
   },
   "CoolTimeReduction_Up_3": {
     "localized_name": "Tempest Fury",
-    "description": "Active skill cooldown reduction 0.0% Attack +0.0%"
+    "description": "Active skill cooldown reduction 0% Attack +0%"
   },
   "CraftSpeed_down1": {
     "localized_name": "Clumsy",
@@ -761,7 +1033,7 @@
   },
   "Vampire": {
     "localized_name": "Vampiric",
-    "description": "Absorbs a portion of the damage dealt to restore. Does not sleep at night and continues to work."
+    "description": "Absorbs a portion of the damage dealt to restore Health. Does not sleep at night and continues to work."
   },
   "Witch": {
     "localized_name": "Siren of the Void",

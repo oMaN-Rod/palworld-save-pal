@@ -19,10 +19,6 @@
     "localized_name": "아누비스",
     "description": "그 풍모 덕택에 일찍이 고귀한 자의 상징이었다. 부와 권력을 멀리하는 이에게도 귀감이었으나 언제부턴가 아누비스은(는) 죽음의 상징이 되었다."
   },
-  "Believer_CrossBow": {
-    "localized_name": "에고",
-    "description": null
-  },
   "Believer_Fat_GiantClub": {
     "localized_name": "브릭",
     "description": null
@@ -39,40 +35,8 @@
     "localized_name": "플레어",
     "description": null
   },
-  "Female_People02": {
-    "localized_name": "사이렌",
-    "description": null
-  },
-  "Female_People03": {
-    "localized_name": "턴코트",
-    "description": null
-  },
   "Female_Soldier": {
     "localized_name": "제이드",
-    "description": null
-  },
-  "Female_Soldier02": {
-    "localized_name": "대즐",
-    "description": null
-  },
-  "Female_Soldier03": {
-    "localized_name": "알로하",
-    "description": null
-  },
-  "Female_Soldier04": {
-    "localized_name": "님블",
-    "description": null
-  },
-  "FireCult_FlameThrower": {
-    "localized_name": "섀도",
-    "description": null
-  },
-  "Hunter_Fat_GatlingGun": {
-    "localized_name": "그릴",
-    "description": null
-  },
-  "Hunter_Rifle": {
-    "localized_name": "호크",
     "description": null
   },
   "Male_DesertPeople": {
@@ -87,14 +51,6 @@
     "localized_name": "다이너",
     "description": null
   },
-  "Male_People02": {
-    "localized_name": "퀼",
-    "description": null
-  },
-  "Male_People03": {
-    "localized_name": "스쿳",
-    "description": null
-  },
   "Male_People2": {
     "localized_name": "마이트",
     "description": null
@@ -103,36 +59,8 @@
     "localized_name": "크래시",
     "description": null
   },
-  "Male_Soldier02": {
-    "localized_name": "다트",
-    "description": null
-  },
-  "Male_Soldier03": {
-    "localized_name": "클린트",
-    "description": null
-  },
-  "Male_Soldier04": {
-    "localized_name": "라쏘",
-    "description": null
-  },
-  "Male_Trader01": {
-    "localized_name": "스킴",
-    "description": null
-  },
-  "Male_Trader02": {
-    "localized_name": "미믹",
-    "description": null
-  },
-  "Male_Trader03": {
-    "localized_name": "빌리",
-    "description": null
-  },
   "Ninja": {
     "localized_name": "펌블",
-    "description": null
-  },
-  "Police_Rifle": {
-    "localized_name": "윕",
     "description": null
   },
   "Police_old": {
@@ -141,10 +69,6 @@
   },
   "Scientist_LaserRifle": {
     "localized_name": "위스크",
-    "description": null
-  },
-  "Viking": {
-    "localized_name": "노우",
     "description": null
   },
   "VikingElite": {
@@ -355,6 +279,10 @@
     "localized_name": "골드 스팅",
     "description": "본체는 에너지 덩어리로 속이 비었다. 토사나 광물을 외피 속에 채워 압도적인 질량을 보여준다. 공격한 상대는 지옥 같은 신음을 내지를 수밖에 없다."
   },
+  "DeathPenalty_guide": {
+    "localized_name": "베테랑 팰 조련사",
+    "description": null
+  },
   "Deer": {
     "localized_name": "신령사슴",
     "description": "가장 멋진 뿔을 가진 개체가 우두머리가 된다. 뿔이 꺾이는 순간 마음도 꺾인다. 그렇게 무리를 떠나 아무도 보지 못하는 곳에서 생을 다한다."
@@ -497,6 +425,10 @@
   },
   "Female_People03": {
     "localized_name": "마을 사람",
+    "description": null
+  },
+  "Female_Presenter01": {
+    "localized_name": "친절한 팰 조련사",
     "description": null
   },
   "Female_Soldier01": {
@@ -746,6 +678,22 @@
   "Hedgehog_Ice": {
     "localized_name": "코치도치",
     "description": "충격을 받으면 모았던 냉기를 방출한다. 방사상에 퍼진 냉기는 대기를 꽁꽁 얼려 습격해온 상대의 몸을 꿰뚫는다."
+  },
+  "Help01": {
+    "localized_name": "섬 주민",
+    "description": null
+  },
+  "Help02": {
+    "localized_name": "섬 주민",
+    "description": null
+  },
+  "Help03": {
+    "localized_name": "섬 주민",
+    "description": null
+  },
+  "Help04": {
+    "localized_name": "섬 주민",
+    "description": null
   },
   "HerculesBeetle": {
     "localized_name": "장수벌레",
@@ -1502,6 +1450,10 @@
   "RedArmorBird": {
     "localized_name": "적토조",
     "description": "라이버드의 근연종이지만 관계는 없다. 암석이 주식이며 오랜 세월에 걸쳐 주둥이는 물론 머리 전체가 단단해졌다."
+  },
+  "Respawn_guide": {
+    "localized_name": "친절한 팰 조련사",
+    "description": null
   },
   "Reward_BossDefeat": {
     "localized_name": "위병",

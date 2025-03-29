@@ -31,6 +31,278 @@
     "localized_name": "Повышение атаки ур.3",
     "description": null
   },
+  "BossDefeatReward_AmaterasuWolf_Dark": {
+    "localized_name": "Малое увеличение темного урона",
+    "description": null
+  },
+  "BossDefeatReward_Anubis": {
+    "localized_name": "Малое увеличение земляного урона",
+    "description": null
+  },
+  "BossDefeatReward_BadCatgirl": {
+    "localized_name": "Малое увеличение темного урона",
+    "description": null
+  },
+  "BossDefeatReward_BerryGoat_Dark": {
+    "localized_name": "Среднее увеличение природного урона",
+    "description": null
+  },
+  "BossDefeatReward_BlackMetalDragon": {
+    "localized_name": "Среднее увеличение драконического урона",
+    "description": null
+  },
+  "BossDefeatReward_BlackPuppy": {
+    "localized_name": "Малое увеличение темного урона",
+    "description": null
+  },
+  "BossDefeatReward_BlueDragon": {
+    "localized_name": "Малое увеличение водяного урона",
+    "description": null
+  },
+  "BossDefeatReward_BlueThunderHorse": {
+    "localized_name": "Среднее увеличение грозового урона",
+    "description": null
+  },
+  "BossDefeatReward_BlueberryFairy": {
+    "localized_name": "Среднее увеличение природного урона",
+    "description": null
+  },
+  "BossDefeatReward_CaptainPenguin": {
+    "localized_name": "Малое увеличение водяного урона",
+    "description": null
+  },
+  "BossDefeatReward_CatMage": {
+    "localized_name": "Малое увеличение темного урона",
+    "description": null
+  },
+  "BossDefeatReward_CatVampire": {
+    "localized_name": "Малое увеличение темного урона",
+    "description": null
+  },
+  "BossDefeatReward_DarkScorpion": {
+    "localized_name": "Малое увеличение темного урона",
+    "description": null
+  },
+  "BossDefeatReward_DarkScorpion_Ground": {
+    "localized_name": "Малое увеличение земляного урона",
+    "description": null
+  },
+  "BossDefeatReward_FairyDragon": {
+    "localized_name": "Малое увеличение драконического урона",
+    "description": null
+  },
+  "BossDefeatReward_FengyunDeeper": {
+    "localized_name": "Малое увеличение обычного урона",
+    "description": null
+  },
+  "BossDefeatReward_FengyunDeeper_Electric": {
+    "localized_name": "Среднее увеличение грозового урона",
+    "description": null
+  },
+  "BossDefeatReward_FlowerDinosaur_Electric": {
+    "localized_name": "Малое увеличение грозового урона",
+    "description": null
+  },
+  "BossDefeatReward_FlowerDoll": {
+    "localized_name": "Малое увеличение природного урона",
+    "description": null
+  },
+  "BossDefeatReward_GhostRabbit": {
+    "localized_name": "Малое увеличение темного урона",
+    "description": null
+  },
+  "BossDefeatReward_GoldenHorse": {
+    "localized_name": "Среднее увеличение земляного урона",
+    "description": null
+  },
+  "BossDefeatReward_GrassMammoth": {
+    "localized_name": "Среднее увеличение природного урона",
+    "description": null
+  },
+  "BossDefeatReward_GrassPanda_Electric": {
+    "localized_name": "Малое увеличение грозового урона",
+    "description": null
+  },
+  "BossDefeatReward_GrassRabbitMan": {
+    "localized_name": "Малое увеличение природного урона",
+    "description": null
+  },
+  "BossDefeatReward_GrimGirl": {
+    "localized_name": "Малое увеличение темного урона",
+    "description": null
+  },
+  "BossDefeatReward_HawkBird": {
+    "localized_name": "Малое увеличение обычного урона",
+    "description": null
+  },
+  "BossDefeatReward_HerculesBeetle": {
+    "localized_name": "Малое увеличение земляного урона",
+    "description": null
+  },
+  "BossDefeatReward_HerculesBeetle_Ground": {
+    "localized_name": "Среднее увеличение земляного урона",
+    "description": null
+  },
+  "BossDefeatReward_Horus_Water": {
+    "localized_name": "Среднее увеличение водяного урона",
+    "description": null
+  },
+  "BossDefeatReward_IceHorse": {
+    "localized_name": "Большое увеличение ледяного урона",
+    "description": null
+  },
+  "BossDefeatReward_IceHorse_Dark": {
+    "localized_name": "Малое увеличение темного урона",
+    "description": null
+  },
+  "BossDefeatReward_JetDragon": {
+    "localized_name": "Большое увеличение драконического урона",
+    "description": null
+  },
+  "BossDefeatReward_KingAlpaca": {
+    "localized_name": "Малое увеличение обычного урона",
+    "description": null
+  },
+  "BossDefeatReward_KingAlpaca_Ice": {
+    "localized_name": "Среднее увеличение ледяного урона",
+    "description": null
+  },
+  "BossDefeatReward_KingBahamut": {
+    "localized_name": "Большое увеличение огненного урона",
+    "description": null
+  },
+  "BossDefeatReward_Kirin": {
+    "localized_name": "Малое увеличение грозового урона",
+    "description": null
+  },
+  "BossDefeatReward_Kitsunebi_Ice": {
+    "localized_name": "Большое увеличение ледяного урона",
+    "description": null
+  },
+  "BossDefeatReward_LazyCatfish": {
+    "localized_name": "Малое увеличение земляного урона",
+    "description": null
+  },
+  "BossDefeatReward_LazyDragon_Electric": {
+    "localized_name": "Малое увеличение драконического урона",
+    "description": null
+  },
+  "BossDefeatReward_LilyQueen_Dark": {
+    "localized_name": "Малое увеличение темного урона",
+    "description": null
+  },
+  "BossDefeatReward_MopKing": {
+    "localized_name": "Малое увеличение ледяного урона",
+    "description": null
+  },
+  "BossDefeatReward_Mutant": {
+    "localized_name": "Малое увеличение обычного урона",
+    "description": null
+  },
+  "BossDefeatReward_MysteryMask": {
+    "localized_name": "Малое увеличение темного урона",
+    "description": null
+  },
+  "BossDefeatReward_NaughtyCat": {
+    "localized_name": "Малое увеличение обычного урона",
+    "description": null
+  },
+  "BossDefeatReward_NightBlueHorse": {
+    "localized_name": "Малое увеличение темного урона",
+    "description": null
+  },
+  "BossDefeatReward_PinkRabbit_Grass": {
+    "localized_name": "Среднее увеличение природного урона",
+    "description": null
+  },
+  "BossDefeatReward_PlantSlime": {
+    "localized_name": "Малое увеличение земляного урона",
+    "description": null
+  },
+  "BossDefeatReward_PurpleSpider": {
+    "localized_name": "Малое увеличение темного урона",
+    "description": null
+  },
+  "BossDefeatReward_QueenBee": {
+    "localized_name": "Малое увеличение природного урона",
+    "description": null
+  },
+  "BossDefeatReward_RaijinDaughter_Water": {
+    "localized_name": "Малое увеличение темного урона",
+    "description": null
+  },
+  "BossDefeatReward_Ronin": {
+    "localized_name": "Среднее увеличение огненного урона",
+    "description": null
+  },
+  "BossDefeatReward_SaintCentaur_1": {
+    "localized_name": "Большое увеличение обычного урона",
+    "description": null
+  },
+  "BossDefeatReward_SaintCentaur_2": {
+    "localized_name": "Малое увеличение темного урона",
+    "description": null
+  },
+  "BossDefeatReward_SakuraSaurus": {
+    "localized_name": "Малое увеличение природного урона",
+    "description": null
+  },
+  "BossDefeatReward_SakuraSaurus_Water": {
+    "localized_name": "Малое увеличение водяного урона",
+    "description": null
+  },
+  "BossDefeatReward_SkyDragon": {
+    "localized_name": "Малое увеличение драконического урона",
+    "description": null
+  },
+  "BossDefeatReward_Suzaku": {
+    "localized_name": "Большое увеличение огненного урона",
+    "description": null
+  },
+  "BossDefeatReward_ThunderBird": {
+    "localized_name": "Малое увеличение грозового урона",
+    "description": null
+  },
+  "BossDefeatReward_Umihebi": {
+    "localized_name": "Среднее увеличение водяного урона",
+    "description": null
+  },
+  "BossDefeatReward_VioletFairy": {
+    "localized_name": "Среднее увеличение природного урона",
+    "description": null
+  },
+  "BossDefeatReward_WeaselDragon": {
+    "localized_name": "Малое увеличение ледяного урона",
+    "description": null
+  },
+  "BossDefeatReward_Werewolf_Ice": {
+    "localized_name": "Большое увеличение ледяного урона",
+    "description": null
+  },
+  "BossDefeatReward_WhiteDeer": {
+    "localized_name": "Среднее увеличение обычного урона",
+    "description": null
+  },
+  "BossDefeatReward_WhiteMoth": {
+    "localized_name": "Малое увеличение ледяного урона",
+    "description": null
+  },
+  "BossDefeatReward_WhiteShieldDragon": {
+    "localized_name": "Среднее увеличение драконического урона",
+    "description": null
+  },
+  "BossDefeatReward_WhiteTiger_Ground": {
+    "localized_name": "Среднее увеличение земляного урона",
+    "description": null
+  },
+  "BossDefeatReward_WingGolem": {
+    "localized_name": "Малое увеличение земляного урона",
+    "description": null
+  },
+  "BossDefeatReward_Yeti_Grass": {
+    "localized_name": "Малое увеличение природного урона",
+    "description": null
+  },
   "CaptureLevel_Up_1": {
     "localized_name": "Увеличение силы захвата +1",
     "description": null
@@ -692,7 +964,7 @@
     "description": "Макс. выносливость +50.0% *Действует только для Палов, которых можно оседлать."
   },
   "Stamina_Up_2": {
-    "localized_name": "Здоровяк",
+    "localized_name": "Крепыш",
     "description": "Макс. выносливость +25.0% *Действует только для Палов, которых можно оседлать."
   },
   "Stamina_Up_3": {

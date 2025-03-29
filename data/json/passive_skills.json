@@ -201,6 +201,1638 @@
     "add_accessory": false,
     "disabled": false
   },
+  "BossDefeatReward_AmaterasuWolf_Dark": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Dark",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_Anubis": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Earth",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_BadCatgirl": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Dark",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_BerryGoat_Dark": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Leaf",
+        "value": 2.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_BlackMetalDragon": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Dragon",
+        "value": 2.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_BlackPuppy": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Dark",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_BlueDragon": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Water",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_BlueThunderHorse": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Electricity",
+        "value": 2.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_BlueberryFairy": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Leaf",
+        "value": 2.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_CaptainPenguin": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Water",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_CatMage": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Dark",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_CatVampire": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Dark",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_DarkScorpion": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Dark",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_DarkScorpion_Ground": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Earth",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_FairyDragon": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Dragon",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_FengyunDeeper": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Normal",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_FengyunDeeper_Electric": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Electricity",
+        "value": 2.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_FlowerDinosaur_Electric": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Electricity",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_FlowerDoll": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Leaf",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_GhostRabbit": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Dark",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_GoldenHorse": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Earth",
+        "value": 2.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_GrassMammoth": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Leaf",
+        "value": 2.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_GrassPanda_Electric": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Electricity",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_GrassRabbitMan": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Leaf",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_GrimGirl": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Dark",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_HawkBird": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Normal",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_HerculesBeetle": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Earth",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_HerculesBeetle_Ground": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Earth",
+        "value": 2.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_Horus_Water": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Water",
+        "value": 2.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_IceHorse": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Ice",
+        "value": 3.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_IceHorse_Dark": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Dark",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_JetDragon": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Dragon",
+        "value": 3.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_KingAlpaca": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Normal",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_KingAlpaca_Ice": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Ice",
+        "value": 2.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_KingBahamut": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Fire",
+        "value": 3.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_Kirin": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Electricity",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_Kitsunebi_Ice": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Ice",
+        "value": 3.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_LazyCatfish": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Earth",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_LazyDragon_Electric": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Dragon",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_LilyQueen_Dark": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Dark",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_MopKing": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Ice",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_Mutant": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Normal",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_MysteryMask": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Dark",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_NaughtyCat": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Normal",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_NightBlueHorse": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Dark",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_PinkRabbit_Grass": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Leaf",
+        "value": 2.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_PlantSlime": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Earth",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_PurpleSpider": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Dark",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_QueenBee": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Leaf",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_RaijinDaughter_Water": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Dark",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_Ronin": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Fire",
+        "value": 2.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_SaintCentaur_1": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Normal",
+        "value": 3.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_SaintCentaur_2": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Dark",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_SakuraSaurus": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Leaf",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_SakuraSaurus_Water": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Water",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_SkyDragon": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Dragon",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_Suzaku": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Fire",
+        "value": 3.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_ThunderBird": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Electricity",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_Umihebi": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Water",
+        "value": 2.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_VioletFairy": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Leaf",
+        "value": 2.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_WeaselDragon": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Ice",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_Werewolf_Ice": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Ice",
+        "value": 3.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_WhiteDeer": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Normal",
+        "value": 2.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_WhiteMoth": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Ice",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_WhiteShieldDragon": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Dragon",
+        "value": 2.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_WhiteTiger_Ground": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Earth",
+        "value": 2.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_WingGolem": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Earth",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_Yeti_Grass": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Leaf",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
   "CaptureLevel_Up_1": {
     "rank": 1,
     "effects": [

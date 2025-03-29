@@ -16,7 +16,7 @@
     "description": "Ruée aérienne +4"
   },
   "Alien": {
-    "localized_name": "Organisme inconnu",
+    "localized_name": "Organisme Inconnu",
     "description": "Attaque +10.0 % Réduction des dégâts de type feu 15.0 % Réduction des dégâts de type foudre 15.0 %"
   },
   "Attack_ACC_up1": {
@@ -29,6 +29,278 @@
   },
   "Attack_ACC_up3": {
     "localized_name": "Attaque augmentée niv. 3",
+    "description": null
+  },
+  "BossDefeatReward_AmaterasuWolf_Dark": {
+    "localized_name": "Dégâts de type ténèbres augmentés (faible)",
+    "description": null
+  },
+  "BossDefeatReward_Anubis": {
+    "localized_name": "Dégâts de type terre augmentés (faible)",
+    "description": null
+  },
+  "BossDefeatReward_BadCatgirl": {
+    "localized_name": "Dégâts de type ténèbres augmentés (faible)",
+    "description": null
+  },
+  "BossDefeatReward_BerryGoat_Dark": {
+    "localized_name": "Dégâts de type plante augmentés (moyen)",
+    "description": null
+  },
+  "BossDefeatReward_BlackMetalDragon": {
+    "localized_name": "Dégâts de type dragon augmentés (moyen)",
+    "description": null
+  },
+  "BossDefeatReward_BlackPuppy": {
+    "localized_name": "Dégâts de type ténèbres augmentés (faible)",
+    "description": null
+  },
+  "BossDefeatReward_BlueDragon": {
+    "localized_name": "Dégâts de type eau augmentés (faible)",
+    "description": null
+  },
+  "BossDefeatReward_BlueThunderHorse": {
+    "localized_name": "Dégâts de type foudre augmentés (moyen)",
+    "description": null
+  },
+  "BossDefeatReward_BlueberryFairy": {
+    "localized_name": "Dégâts de type plante augmentés (moyen)",
+    "description": null
+  },
+  "BossDefeatReward_CaptainPenguin": {
+    "localized_name": "Dégâts de type eau augmentés (faible)",
+    "description": null
+  },
+  "BossDefeatReward_CatMage": {
+    "localized_name": "Dégâts de type ténèbres augmentés (faible)",
+    "description": null
+  },
+  "BossDefeatReward_CatVampire": {
+    "localized_name": "Dégâts de type ténèbres augmentés (faible)",
+    "description": null
+  },
+  "BossDefeatReward_DarkScorpion": {
+    "localized_name": "Dégâts de type ténèbres augmentés (faible)",
+    "description": null
+  },
+  "BossDefeatReward_DarkScorpion_Ground": {
+    "localized_name": "Dégâts de type terre augmentés (faible)",
+    "description": null
+  },
+  "BossDefeatReward_FairyDragon": {
+    "localized_name": "Dégâts de type dragon augmentés (faible)",
+    "description": null
+  },
+  "BossDefeatReward_FengyunDeeper": {
+    "localized_name": "Dégâts non élémentaires augmentés (faible)",
+    "description": null
+  },
+  "BossDefeatReward_FengyunDeeper_Electric": {
+    "localized_name": "Dégâts de type foudre augmentés (moyen)",
+    "description": null
+  },
+  "BossDefeatReward_FlowerDinosaur_Electric": {
+    "localized_name": "Dégâts de type foudre augmentés (faible)",
+    "description": null
+  },
+  "BossDefeatReward_FlowerDoll": {
+    "localized_name": "Dégâts de type plante augmentés (faible)",
+    "description": null
+  },
+  "BossDefeatReward_GhostRabbit": {
+    "localized_name": "Dégâts de type ténèbres augmentés (faible)",
+    "description": null
+  },
+  "BossDefeatReward_GoldenHorse": {
+    "localized_name": "Dégâts de type terre augmentés (moyen)",
+    "description": null
+  },
+  "BossDefeatReward_GrassMammoth": {
+    "localized_name": "Dégâts de type plante augmentés (moyen)",
+    "description": null
+  },
+  "BossDefeatReward_GrassPanda_Electric": {
+    "localized_name": "Dégâts de type foudre augmentés (faible)",
+    "description": null
+  },
+  "BossDefeatReward_GrassRabbitMan": {
+    "localized_name": "Dégâts de type plante augmentés (faible)",
+    "description": null
+  },
+  "BossDefeatReward_GrimGirl": {
+    "localized_name": "Dégâts de type ténèbres augmentés (faible)",
+    "description": null
+  },
+  "BossDefeatReward_HawkBird": {
+    "localized_name": "Dégâts non élémentaires augmentés (faible)",
+    "description": null
+  },
+  "BossDefeatReward_HerculesBeetle": {
+    "localized_name": "Dégâts de type terre augmentés (faible)",
+    "description": null
+  },
+  "BossDefeatReward_HerculesBeetle_Ground": {
+    "localized_name": "Dégâts de type terre augmentés (moyen)",
+    "description": null
+  },
+  "BossDefeatReward_Horus_Water": {
+    "localized_name": "Dégâts de type eau augmentés (moyen)",
+    "description": null
+  },
+  "BossDefeatReward_IceHorse": {
+    "localized_name": "Dégâts de type glace augmentés (fort)",
+    "description": null
+  },
+  "BossDefeatReward_IceHorse_Dark": {
+    "localized_name": "Dégâts de type ténèbres augmentés (faible)",
+    "description": null
+  },
+  "BossDefeatReward_JetDragon": {
+    "localized_name": "Dégâts de type dragon augmentés (fort)",
+    "description": null
+  },
+  "BossDefeatReward_KingAlpaca": {
+    "localized_name": "Dégâts non élémentaires augmentés (faible)",
+    "description": null
+  },
+  "BossDefeatReward_KingAlpaca_Ice": {
+    "localized_name": "Dégâts de type glace augmentés (moyen)",
+    "description": null
+  },
+  "BossDefeatReward_KingBahamut": {
+    "localized_name": "Dégâts de type feu augmentés (fort)",
+    "description": null
+  },
+  "BossDefeatReward_Kirin": {
+    "localized_name": "Dégâts de type foudre augmentés (faible)",
+    "description": null
+  },
+  "BossDefeatReward_Kitsunebi_Ice": {
+    "localized_name": "Dégâts de type glace augmentés (fort)",
+    "description": null
+  },
+  "BossDefeatReward_LazyCatfish": {
+    "localized_name": "Dégâts de type terre augmentés (faible)",
+    "description": null
+  },
+  "BossDefeatReward_LazyDragon_Electric": {
+    "localized_name": "Dégâts de type dragon augmentés (faible)",
+    "description": null
+  },
+  "BossDefeatReward_LilyQueen_Dark": {
+    "localized_name": "Dégâts de type ténèbres augmentés (faible)",
+    "description": null
+  },
+  "BossDefeatReward_MopKing": {
+    "localized_name": "Dégâts de type glace augmentés (faible)",
+    "description": null
+  },
+  "BossDefeatReward_Mutant": {
+    "localized_name": "Dégâts non élémentaires augmentés (faible)",
+    "description": null
+  },
+  "BossDefeatReward_MysteryMask": {
+    "localized_name": "Dégâts de type ténèbres augmentés (faible)",
+    "description": null
+  },
+  "BossDefeatReward_NaughtyCat": {
+    "localized_name": "Dégâts non élémentaires augmentés (faible)",
+    "description": null
+  },
+  "BossDefeatReward_NightBlueHorse": {
+    "localized_name": "Dégâts de type ténèbres augmentés (faible)",
+    "description": null
+  },
+  "BossDefeatReward_PinkRabbit_Grass": {
+    "localized_name": "Dégâts de type plante augmentés (moyen)",
+    "description": null
+  },
+  "BossDefeatReward_PlantSlime": {
+    "localized_name": "Dégâts de type terre augmentés (faible)",
+    "description": null
+  },
+  "BossDefeatReward_PurpleSpider": {
+    "localized_name": "Dégâts de type ténèbres augmentés (faible)",
+    "description": null
+  },
+  "BossDefeatReward_QueenBee": {
+    "localized_name": "Dégâts de type plante augmentés (faible)",
+    "description": null
+  },
+  "BossDefeatReward_RaijinDaughter_Water": {
+    "localized_name": "Dégâts de type ténèbres augmentés (faible)",
+    "description": null
+  },
+  "BossDefeatReward_Ronin": {
+    "localized_name": "Dégâts de type feu augmentés (moyen)",
+    "description": null
+  },
+  "BossDefeatReward_SaintCentaur_1": {
+    "localized_name": "Dégâts non élémentaires augmentés (fort)",
+    "description": null
+  },
+  "BossDefeatReward_SaintCentaur_2": {
+    "localized_name": "Dégâts de type ténèbres augmentés (faible)",
+    "description": null
+  },
+  "BossDefeatReward_SakuraSaurus": {
+    "localized_name": "Dégâts de type plante augmentés (faible)",
+    "description": null
+  },
+  "BossDefeatReward_SakuraSaurus_Water": {
+    "localized_name": "Dégâts de type eau augmentés (faible)",
+    "description": null
+  },
+  "BossDefeatReward_SkyDragon": {
+    "localized_name": "Dégâts de type dragon augmentés (faible)",
+    "description": null
+  },
+  "BossDefeatReward_Suzaku": {
+    "localized_name": "Dégâts de type feu augmentés (fort)",
+    "description": null
+  },
+  "BossDefeatReward_ThunderBird": {
+    "localized_name": "Dégâts de type foudre augmentés (faible)",
+    "description": null
+  },
+  "BossDefeatReward_Umihebi": {
+    "localized_name": "Dégâts de type eau augmentés (moyen)",
+    "description": null
+  },
+  "BossDefeatReward_VioletFairy": {
+    "localized_name": "Dégâts de type plante augmentés (moyen)",
+    "description": null
+  },
+  "BossDefeatReward_WeaselDragon": {
+    "localized_name": "Dégâts de type glace augmentés (faible)",
+    "description": null
+  },
+  "BossDefeatReward_Werewolf_Ice": {
+    "localized_name": "Dégâts de type glace augmentés (fort)",
+    "description": null
+  },
+  "BossDefeatReward_WhiteDeer": {
+    "localized_name": "Dégâts non élémentaires augmentés (moyen)",
+    "description": null
+  },
+  "BossDefeatReward_WhiteMoth": {
+    "localized_name": "Dégâts de type glace augmentés (faible)",
+    "description": null
+  },
+  "BossDefeatReward_WhiteShieldDragon": {
+    "localized_name": "Dégâts de type dragon augmentés (moyen)",
+    "description": null
+  },
+  "BossDefeatReward_WhiteTiger_Ground": {
+    "localized_name": "Dégâts de type terre augmentés (moyen)",
+    "description": null
+  },
+  "BossDefeatReward_WingGolem": {
+    "localized_name": "Dégâts de type terre augmentés (faible)",
+    "description": null
+  },
+  "BossDefeatReward_Yeti_Grass": {
+    "localized_name": "Dégâts de type plante augmentés (faible)",
     "description": null
   },
   "CaptureLevel_Up_1": {
@@ -68,7 +340,7 @@
     "description": null
   },
   "CollectItem_Money": {
-    "localized_name": "Jet de perles aux pourceaux",
+    "localized_name": "Chercheur d'or",
     "description": null
   },
   "CollectItem_Sweets": {
@@ -92,7 +364,7 @@
     "description": "Extension du temps de recharge des compétences actives -15.0 %"
   },
   "CoolTimeReduction_Up_1": {
-    "localized_name": "Calme",
+    "localized_name": "Sérénité",
     "description": "Réduction du temps de recharge des compétences actives 30.0 % Attaque +10.0 %"
   },
   "CoolTimeReduction_Up_2": {
@@ -100,7 +372,7 @@
     "description": "Réduction du temps de recharge des compétences actives 15.0 %"
   },
   "CoolTimeReduction_Up_3": {
-    "localized_name": "Agitation",
+    "localized_name": "Tempête Furieuse",
     "description": "Réduction du temps de recharge des compétences actives 0.0 % Attaque +0.0 %"
   },
   "CraftSpeed_down1": {
@@ -120,11 +392,11 @@
     "description": null
   },
   "CraftSpeed_up3": {
-    "localized_name": "Excellence",
+    "localized_name": "Maîtrise Exceptionnelle",
     "description": null
   },
   "Deffence_down1": {
-    "localized_name": "Vulnérable aux coups",
+    "localized_name": "Vulnérable aux Coups",
     "description": null
   },
   "Deffence_down2": {
@@ -136,11 +408,11 @@
     "description": null
   },
   "Deffence_up2": {
-    "localized_name": "Corps robuste",
+    "localized_name": "Corps Robuste",
     "description": null
   },
   "Deffence_up3": {
-    "localized_name": "Corps adamantin",
+    "localized_name": "Corps Adamantin",
     "description": null
   },
   "ElementBoost_Aqua_1_PAL": {
@@ -148,7 +420,7 @@
     "description": "Les dégâts de type eau augmentent de 10.0 %."
   },
   "ElementBoost_Aqua_2_PAL": {
-    "localized_name": "Divinité aquatique",
+    "localized_name": "Seigneur des Mers",
     "description": null
   },
   "ElementBoost_Dark_1_BossDefeat": {
@@ -156,7 +428,7 @@
     "description": null
   },
   "ElementBoost_Dark_1_PAL": {
-    "localized_name": "Grimoire",
+    "localized_name": "Voile des Ténèbres",
     "description": "Les dégâts de type ténèbres augmentent de 10.0 %."
   },
   "ElementBoost_Dark_2_BossDefeat": {
@@ -164,7 +436,7 @@
     "description": null
   },
   "ElementBoost_Dark_2_PAL": {
-    "localized_name": "Hadès",
+    "localized_name": "Seigneur des Enfers",
     "description": null
   },
   "ElementBoost_Dark_3_BossDefeat": {
@@ -176,7 +448,7 @@
     "description": null
   },
   "ElementBoost_Dragon_1_PAL": {
-    "localized_name": "Sang de dragon",
+    "localized_name": "Sang de Dragon",
     "description": "Les dégâts de type dragon augmentent de 10.0 %."
   },
   "ElementBoost_Dragon_2_BossDefeat": {
@@ -184,7 +456,7 @@
     "description": null
   },
   "ElementBoost_Dragon_2_PAL": {
-    "localized_name": "Shenron",
+    "localized_name": "Dragon Divin",
     "description": null
   },
   "ElementBoost_Dragon_3_BossDefeat": {
@@ -196,7 +468,7 @@
     "description": null
   },
   "ElementBoost_Earth_1_PAL": {
-    "localized_name": "Force tellurique",
+    "localized_name": "Force Tellurique",
     "description": "Les dégâts de type terre augmentent de 10.0 %."
   },
   "ElementBoost_Earth_2_BossDefeat": {
@@ -204,7 +476,7 @@
     "description": null
   },
   "ElementBoost_Earth_2_PAL": {
-    "localized_name": "Empereur terrestre",
+    "localized_name": "Empereur Terrestre",
     "description": null
   },
   "ElementBoost_Earth_3_BossDefeat": {
@@ -236,7 +508,7 @@
     "description": null
   },
   "ElementBoost_Fire_2_PAL": {
-    "localized_name": "Empereur enflammé",
+    "localized_name": "Empereur Enflammé",
     "description": null
   },
   "ElementBoost_Fire_3_BossDefeat": {
@@ -248,7 +520,7 @@
     "description": null
   },
   "ElementBoost_Ice_1_PAL": {
-    "localized_name": "Sang froid",
+    "localized_name": "Sang Froid",
     "description": "Les dégâts de type glace augmentent de 10.0 %."
   },
   "ElementBoost_Ice_2_BossDefeat": {
@@ -256,7 +528,7 @@
     "description": null
   },
   "ElementBoost_Ice_2_PAL": {
-    "localized_name": "Empereur glacial",
+    "localized_name": "Empereur Glacial",
     "description": null
   },
   "ElementBoost_Ice_3_BossDefeat": {
@@ -268,7 +540,7 @@
     "description": null
   },
   "ElementBoost_Leaf_1_PAL": {
-    "localized_name": "Fragrance boisée",
+    "localized_name": "Fragrance Boisée",
     "description": "Les dégâts de type plante augmentent de 10.0 %."
   },
   "ElementBoost_Leaf_2_BossDefeat": {
@@ -276,7 +548,7 @@
     "description": null
   },
   "ElementBoost_Leaf_2_PAL": {
-    "localized_name": "Roi des esprits",
+    "localized_name": "Divinité de la Forêt",
     "description": null
   },
   "ElementBoost_Leaf_3_BossDefeat": {
@@ -288,7 +560,7 @@
     "description": null
   },
   "ElementBoost_Normal_1_PAL": {
-    "localized_name": "Stoïque",
+    "localized_name": "Esprit Zen",
     "description": "Les dégâts non élémentaires augmentent de 10.0 %."
   },
   "ElementBoost_Normal_2_BossDefeat": {
@@ -296,7 +568,7 @@
     "description": null
   },
   "ElementBoost_Normal_2_PAL": {
-    "localized_name": "Dieu saint",
+    "localized_name": "Empereur Céleste",
     "description": null
   },
   "ElementBoost_Normal_3_BossDefeat": {
@@ -308,7 +580,7 @@
     "description": "Les dégâts de type foudre augmentent de 10.0 %."
   },
   "ElementBoost_Thunder_2_PAL": {
-    "localized_name": "Empereur orageux",
+    "localized_name": "Seigneur des Tempêtes",
     "description": null
   },
   "ElementBoost_Water_1_BossDefeat": {
@@ -344,7 +616,7 @@
     "description": null
   },
   "ElementResist_Dark_1_PAL": {
-    "localized_name": "Solaire",
+    "localized_name": "Lumineux",
     "description": "Les dégâts de type ténèbres sont réduits de 10.0 %."
   },
   "ElementResist_Dark_2": {
@@ -360,7 +632,7 @@
     "description": null
   },
   "ElementResist_Dragon_1_PAL": {
-    "localized_name": "Tueur de dragons",
+    "localized_name": "Tueur de Dragons",
     "description": "Les dégâts de type dragon sont réduits de 10.0 %."
   },
   "ElementResist_Dragon_2": {
@@ -392,7 +664,7 @@
     "description": null
   },
   "ElementResist_Fire_1_PAL": {
-    "localized_name": "Hyperpigmentation",
+    "localized_name": "Bronzage Naturel",
     "description": "Les dégâts de type feu sont réduits de 10.0 %."
   },
   "ElementResist_Fire_2": {
@@ -408,7 +680,7 @@
     "description": null
   },
   "ElementResist_Ice_1_PAL": {
-    "localized_name": "Sang chaud",
+    "localized_name": "Sang Chaud",
     "description": "Les dégâts de type glace sont réduits de 10.0 %."
   },
   "ElementResist_Ice_2": {
@@ -424,7 +696,7 @@
     "description": null
   },
   "ElementResist_Leaf_1_PAL": {
-    "localized_name": "Anti-irritations",
+    "localized_name": "Protection Végétale",
     "description": "Les dégâts de type plante sont réduits de 10.0 %."
   },
   "ElementResist_Leaf_2": {
@@ -468,7 +740,7 @@
     "description": null
   },
   "EternalFlame": {
-    "localized_name": "Feu éternel",
+    "localized_name": "Feu Éternel",
     "description": null
   },
   "HP_ACC_up1": {
@@ -488,15 +760,15 @@
     "description": null
   },
   "JumpCount_Increase1": {
-    "localized_name": "Saut additionnel 1",
+    "localized_name": "Saut additionnel +1",
     "description": "Saut additionnel 1"
   },
   "JumpCount_Increase2": {
-    "localized_name": "Saut additionnel 2",
+    "localized_name": "Saut additionnel +2",
     "description": "Saut additionnel 2"
   },
   "JumpCount_Increase3": {
-    "localized_name": "Saut additionnel 3",
+    "localized_name": "Saut additionnel +3",
     "description": "Saut additionnel 3"
   },
   "JumpPower_Increase": {
@@ -556,11 +828,11 @@
     "description": null
   },
   "PAL_ALLAttack_down1": {
-    "localized_name": "Frileux",
+    "localized_name": "Lâche",
     "description": null
   },
   "PAL_ALLAttack_down2": {
-    "localized_name": "Médiateur",
+    "localized_name": "Pacifique",
     "description": null
   },
   "PAL_ALLAttack_up1": {
@@ -572,7 +844,7 @@
     "description": null
   },
   "PAL_ALLAttack_up3": {
-    "localized_name": "Colère divine",
+    "localized_name": "Colère Divine",
     "description": null
   },
   "PAL_CorporateSlave": {
@@ -588,7 +860,7 @@
     "description": "Le degré de satiété diminue plus lentement <NumBlue_13>+15.0 %</>"
   },
   "PAL_FullStomach_Down_3": {
-    "localized_name": "Grève de la faim",
+    "localized_name": "Maîtrise de la Faim",
     "description": "Le degré de satiété diminue plus lentement <NumBlue_13>+20.0 %</>"
   },
   "PAL_FullStomach_Up_1": {
@@ -596,11 +868,11 @@
     "description": "Le degré de satiété diminue rapidement <NumRed_13>+10.0 %</>"
   },
   "PAL_FullStomach_Up_2": {
-    "localized_name": "Estomac sans fond",
+    "localized_name": "Estomac sans Fond",
     "description": "Le degré de satiété diminue rapidement <NumRed_13>+15.0 %</>"
   },
   "PAL_Sanity_Down_1": {
-    "localized_name": "Positif",
+    "localized_name": "Optimiste",
     "description": "Les points MEN diminuent plus lentement <NumBlue_13>+10.0 %</>"
   },
   "PAL_Sanity_Down_2": {
@@ -608,15 +880,15 @@
     "description": "Les points MEN diminuent plus lentement <NumBlue_13>+15.0 %</>"
   },
   "PAL_Sanity_Down_3": {
-    "localized_name": "Impassible",
+    "localized_name": "Inébranlable",
     "description": "Les points MEN diminuent plus lentement <NumBlue_13>+20.0 %</>"
   },
   "PAL_Sanity_Up_1": {
-    "localized_name": "Mentalement instable",
+    "localized_name": "Mentalement Instable",
     "description": "Les points MEN diminuent rapidement <NumRed_13>+10.0 %</>"
   },
   "PAL_Sanity_Up_2": {
-    "localized_name": "Soif de destruction",
+    "localized_name": "Soif de Destruction",
     "description": "Les points MEN diminuent rapidement <NumRed_13>+15.0 %</>"
   },
   "PAL_SpiritualInst": {
@@ -632,11 +904,11 @@
     "description": null
   },
   "PAL_oraora": {
-    "localized_name": "Rentre-dedans",
+    "localized_name": "Rentre-Dedans",
     "description": null
   },
   "PAL_rude": {
-    "localized_name": "Grossier",
+    "localized_name": "Trouble-Fête",
     "description": null
   },
   "PAL_sadist": {
@@ -656,7 +928,7 @@
     "description": "Montant des ventes + : 5.0 %"
   },
   "SalePrice_Up_2": {
-    "localized_name": "Belle fourrure",
+    "localized_name": "Belle Fourrure",
     "description": "Montant des ventes + : 3.0 %"
   },
   "SphereModule_Curve": {
@@ -692,11 +964,11 @@
     "description": "Endurance maximale + 50.0 % (Pals montures uniquement)"
   },
   "Stamina_Up_2": {
-    "localized_name": "Force de la nature",
+    "localized_name": "Force de la Nature",
     "description": "Endurance maximale + 25.0 % (Pals montures uniquement)"
   },
   "Stamina_Up_3": {
-    "localized_name": "Infatigable",
+    "localized_name": "Vigueur Éternelle",
     "description": "Endurance maximale + 75.0 % (Pals montures uniquement)"
   },
   "TemperatureResist_Cold1": {
@@ -740,19 +1012,19 @@
     "description": "Lorsqu'il est affecté à un ranch, la vitesse de production des œufs augmente de 100.0 %."
   },
   "TrainerATK_UP_1": {
-    "localized_name": "Chef d'assaut",
+    "localized_name": "Chef d'Assaut",
     "description": "L'attaque du joueur augmente de 10.0 %."
   },
   "TrainerDEF_UP_1": {
-    "localized_name": "Stratège de forteresse",
+    "localized_name": "Stratège de Forteresse",
     "description": "La défense du joueur augmente de 10.0 %."
   },
   "TrainerLogging_up1": {
-    "localized_name": "Chef d'abattage",
+    "localized_name": "Chef d'Abattage",
     "description": "La capacité d'abattage du joueur augmente de 25.0 %."
   },
   "TrainerMining_up1": {
-    "localized_name": "Chef d'extraction",
+    "localized_name": "Chef d'Extraction",
     "description": "La capacité d'extraction du joueur augmente de 25.0 %."
   },
   "TrainerWorkSpeed_UP_1": {
@@ -760,7 +1032,7 @@
     "description": "La productivité du joueur augmente de 25.0 %."
   },
   "Vampire": {
-    "localized_name": "Nocturne",
+    "localized_name": "Vampire",
     "description": "Absorbe une partie des dégâts infligés pour restaurer ses PV. Ne dort pas et continue à travailler la nuit."
   },
   "Witch": {

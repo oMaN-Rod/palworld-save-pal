@@ -19,10 +19,6 @@
     "localized_name": "Anubis",
     "description": "Es tan imponente que en el pasado se consideraba un símbolo de la nobleza, pero aquellos que rechazaban el poder y las riquezas le tenían ojeriza. Pasado un tiempo, se empezó a vincular a los Anubis con la muerte."
   },
-  "Believer_CrossBow": {
-    "localized_name": "Ego",
-    "description": null
-  },
   "Believer_Fat_GiantClub": {
     "localized_name": "Brick",
     "description": null
@@ -39,40 +35,8 @@
     "localized_name": "Flare",
     "description": null
   },
-  "Female_People02": {
-    "localized_name": "Siren",
-    "description": null
-  },
-  "Female_People03": {
-    "localized_name": "Turncoat",
-    "description": null
-  },
   "Female_Soldier": {
     "localized_name": "Jade",
-    "description": null
-  },
-  "Female_Soldier02": {
-    "localized_name": "Dazzle",
-    "description": null
-  },
-  "Female_Soldier03": {
-    "localized_name": "Aloha",
-    "description": null
-  },
-  "Female_Soldier04": {
-    "localized_name": "Nimble",
-    "description": null
-  },
-  "FireCult_FlameThrower": {
-    "localized_name": "Shadow",
-    "description": null
-  },
-  "Hunter_Fat_GatlingGun": {
-    "localized_name": "Grill",
-    "description": null
-  },
-  "Hunter_Rifle": {
-    "localized_name": "Hawk",
     "description": null
   },
   "Male_DesertPeople": {
@@ -103,36 +67,8 @@
     "localized_name": "Crash",
     "description": null
   },
-  "Male_Soldier02": {
-    "localized_name": "Dirt",
-    "description": null
-  },
-  "Male_Soldier03": {
-    "localized_name": "Clint",
-    "description": null
-  },
-  "Male_Soldier04": {
-    "localized_name": "Rustler",
-    "description": null
-  },
-  "Male_Trader01": {
-    "localized_name": "Skim",
-    "description": null
-  },
-  "Male_Trader02": {
-    "localized_name": "Mimic",
-    "description": null
-  },
-  "Male_Trader03": {
-    "localized_name": "Billy",
-    "description": null
-  },
   "Ninja": {
     "localized_name": "Fumble",
-    "description": null
-  },
-  "Police_Rifle": {
-    "localized_name": "Whip",
     "description": null
   },
   "Police_old": {
@@ -141,10 +77,6 @@
   },
   "Scientist_LaserRifle": {
     "localized_name": "Whisk",
-    "description": null
-  },
-  "Viking": {
-    "localized_name": "Nah",
     "description": null
   },
   "VikingElite": {
@@ -355,6 +287,10 @@
     "localized_name": "Menasting Terra",
     "description": "Su cuerpo es un cúmulo ingente de energía sin nada en su interior. Los sedimentos y minerales se han ido acumulando hasta formar una robusta coraza externa por lo que, con un solo ataque, este Pal te hará chillar de dolor."
   },
+  "DeathPenalty_guide": {
+    "localized_name": "Adiestradora Pal experta",
+    "description": null
+  },
   "Deer": {
     "localized_name": "Eikthyrdeer",
     "description": "El ejemplar con los mejores cuernos se convierte en el líder. Cuando se les rompen los cuernos, se les parte a la vez el corazón, y entonces abandonan la manada para pasar sus últimos días en soledad."
@@ -497,6 +433,10 @@
   },
   "Female_People03": {
     "localized_name": "Aldeano",
+    "description": null
+  },
+  "Female_Presenter01": {
+    "localized_name": "Adiestrador Pal amistoso",
     "description": null
   },
   "Female_Soldier01": {
@@ -746,6 +686,22 @@
   "Hedgehog_Ice": {
     "localized_name": "Jolthog Cryst",
     "description": "Al recibir un ataque, libera el aire frío que hay almacenado en su cuerpo, que sale en forma de témpanos punzantes que congelan todo lo que les rodea y perforan el cuerpo del rival."
+  },
+  "Help01": {
+    "localized_name": "Isleño",
+    "description": null
+  },
+  "Help02": {
+    "localized_name": "Isleño",
+    "description": null
+  },
+  "Help03": {
+    "localized_name": "Isleño",
+    "description": null
+  },
+  "Help04": {
+    "localized_name": "Isleño",
+    "description": null
   },
   "HerculesBeetle": {
     "localized_name": "Warsect",
@@ -1085,14 +1041,6 @@
   },
   "Male_NinjaElite01_Invader": {
     "localized_name": "Ninja sénior de las Flores Lunares",
-    "description": null
-  },
-  "Male_People02": {
-    "localized_name": "Aldeano",
-    "description": null
-  },
-  "Male_People03": {
-    "localized_name": "Aldeano",
     "description": null
   },
   "Male_Police_old": {
@@ -1502,6 +1450,10 @@
   "RedArmorBird": {
     "localized_name": "Ragnahawk",
     "description": "Por su aspecto, parecen parientes cercanos de los Beakon, pero nada más lejos. Se alimenta principalmente de rocas, y por eso, con el paso de los años, se les ha ido endureciendo el pico y la cabeza."
+  },
+  "Respawn_guide": {
+    "localized_name": "Adiestrador Pal amistoso",
+    "description": null
   },
   "Reward_BossDefeat": {
     "localized_name": "Guardia",

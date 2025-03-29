@@ -39,10 +39,6 @@
     "localized_name": "포이즌 샤워",
     "description": "온 몸에 힘을 실은 후 전방위에 독 구슬을 흩뿌린다."
   },
-  "EPalWazaID::ChaosLaser": {
-    "localized_name": "카오스 레이저",
-    "description": "ko_Text"
-  },
   "EPalWazaID::ChargeCanon": {
     "localized_name": "축적 대포",
     "description": "용의 힘이 담긴 에너지탄을 적에게 발사한다. 에너지탄은 착탄 시 광범위한 폭발을 일으킨다."
@@ -167,6 +163,10 @@
     "localized_name": "초록 폭풍",
     "description": "좌우에 회오리를 일으켜 적에게 날린다."
   },
+  "EPalWazaID::GravityShot": {
+    "localized_name": "다크 샷",
+    "description": "천천히 가속하며 날아가는 암흑 에너지 탄환을 발사한다."
+  },
   "EPalWazaID::HolyBlast": {
     "localized_name": "신성 폭발",
     "description": "적이 있는 지점과 그 주변에 광범위한 빛 폭발을 일으킨다."
@@ -268,7 +268,7 @@
     "description": "적을 향해 날아가는 바람의 칼날을 무수히 발사한다."
   },
   "EPalWazaID::Railbolt": {
-    "localized_name": "Railbolt",
+    "localized_name": "썬더 레일",
     "description": "천둥의 힘을 한계까지 끌어모아 적을 향해 강력한 다수의 전기 공격을 동시 발사한다."
   },
   "EPalWazaID::RangeThunder": {
@@ -371,6 +371,10 @@
     "localized_name": "천둥비",
     "description": "천둥을 소환하고 일정 시간이 지나면 많은 벼락을 떨어뜨린다."
   },
+  "EPalWazaID::ThunderSpear": {
+    "localized_name": "번개 창",
+    "description": "직선상으로 날아가는 번개 창을 적을 향해 빠르게 발사한다."
+  },
   "EPalWazaID::ThunderStorm": {
     "localized_name": "번개 폭풍",
     "description": "거대한 번개 회오리를 생성한다. 회오리는 적을 향해 천천히 이동한다."
@@ -386,10 +390,6 @@
   "EPalWazaID::TriSpark": {
     "localized_name": "트라이 스파크",
     "description": "직선상으로 날아가는 빠른 번개 구체와 적을 추적하는 느린 번개 구체를 동시에 발사한다."
-  },
-  "EPalWazaID::TripleCannon": {
-    "localized_name": "삼중 대포",
-    "description": "ko_Text"
   },
   "EPalWazaID::Unique_Alpaca_Tackle": {
     "localized_name": "푹신 태클",

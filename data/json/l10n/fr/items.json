@@ -573,19 +573,19 @@
   },
   "Blueprint_CompoundBow_2": {
     "localized_name": "Plan d'arc composite 1",
-    "description": "Le posséder débloque la recette « Arc composite (Uncommon) ». À fabriquer via une WeaponFactory Dirty 03."
+    "description": "Le posséder débloque la recette « Arc composite (Uncommon) ». À fabriquer via une WeaponFactory Dirty 02."
   },
   "Blueprint_CompoundBow_3": {
     "localized_name": "Plan d'arc composite 2",
-    "description": "Le posséder débloque la recette « Arc composite (Rare) ». À fabriquer via une WeaponFactory Dirty 03."
+    "description": "Le posséder débloque la recette « Arc composite (Rare) ». À fabriquer via une WeaponFactory Dirty 02."
   },
   "Blueprint_CompoundBow_4": {
     "localized_name": "Plan d'arc composite 3",
-    "description": "Le posséder débloque la recette « Arc composite (Epic) ». À fabriquer via une WeaponFactory Dirty 03."
+    "description": "Le posséder débloque la recette « Arc composite (Epic) ». À fabriquer via une WeaponFactory Dirty 02."
   },
   "Blueprint_CompoundBow_5": {
     "localized_name": "Plan d'arc composite 4",
-    "description": "Le posséder débloque la recette « Arc composite (Legendary) ». À fabriquer via une WeaponFactory Dirty 03."
+    "description": "Le posséder débloque la recette « Arc composite (Legendary) ». À fabriquer via une WeaponFactory Dirty 02."
   },
   "Blueprint_CopperArmorCold_2": {
     "localized_name": "Plan d'armure en métal chauffante 1",
@@ -685,19 +685,19 @@
   },
   "Blueprint_FlameThrower_2": {
     "localized_name": "Plan de lance-flammes 1",
-    "description": "Le posséder débloque la recette « FlameThrower (Uncommon) ». À fabriquer via une WeaponFactory Dirty 03."
+    "description": "Le posséder débloque la recette « Lance-flammes (Uncommon) ». À fabriquer via une WeaponFactory Dirty 03."
   },
   "Blueprint_FlameThrower_3": {
     "localized_name": "Plan de lance-flammes 2",
-    "description": "Le posséder débloque la recette « FlameThrower (Rare) ». À fabriquer via une WeaponFactory Dirty 03."
+    "description": "Le posséder débloque la recette « Lance-flammes (Rare) ». À fabriquer via une WeaponFactory Dirty 03."
   },
   "Blueprint_FlameThrower_4": {
     "localized_name": "Plan de lance-flammes 3",
-    "description": "Le posséder débloque la recette « FlameThrower (Epic) ». À fabriquer via une WeaponFactory Dirty 03."
+    "description": "Le posséder débloque la recette « Lance-flammes (Epic) ». À fabriquer via une WeaponFactory Dirty 03."
   },
   "Blueprint_FlameThrower_5": {
     "localized_name": "Plan de lance-flammes 4",
-    "description": "Le posséder débloque la recette « FlameThrower (Legendary) ». À fabriquer via une WeaponFactory Dirty 03."
+    "description": "Le posséder débloque la recette « Lance-flammes (Legendary) ». À fabriquer via une WeaponFactory Dirty 03."
   },
   "Blueprint_FurArmorCold_2": {
     "localized_name": "Plan d'armure en fourrure chauffante 1",
@@ -908,19 +908,19 @@
     "description": "Lorsque vous possédez, la recette de |Head004 5 (Legendary)| est débloquée. Vous pouvez la fabriquer à l' |Établi de fortune|."
   },
   "Blueprint_Head005_1": {
-    "localized_name": "Plan de chapeau de feutre 1",
+    "localized_name": "Patate",
     "description": "Le posséder débloque la recette « Head005 2 (Common) ». À fabriquer via un Établi de fortune."
   },
   "Blueprint_Head005_2": {
-    "localized_name": "Plan de chapeau de feutre 2",
+    "localized_name": "Plan de Chapeau léger 2",
     "description": "Le posséder débloque la recette « Head005 2 (Uncommon) ». À fabriquer via un Établi de fortune."
   },
   "Blueprint_Head005_3": {
-    "localized_name": "Plan de chapeau de feutre 3",
+    "localized_name": "Plan de Chapeau léger 3",
     "description": "Le posséder débloque la recette « Head005 3 (Rare) ». À fabriquer via un Établi de fortune."
   },
   "Blueprint_Head005_4": {
-    "localized_name": "Plan de chapeau de feutre 4",
+    "localized_name": "Plan de Chapeau léger 4",
     "description": "Le posséder débloque la recette « Head005 4 (Epic) ». À fabriquer via un Établi de fortune."
   },
   "Blueprint_Head005_5": {
@@ -2215,6 +2215,10 @@
     "localized_name": "Charbon de bois",
     "description": "Du Charbon de bois obtenu en faisant brûler du Bois de charpente. À mélanger avec du Soufre pour obtenir de la Poudre à canon."
   },
+  "ChargeLaserRifle": {
+    "localized_name": "fr Text",
+    "description": "fr Text"
+  },
   "CheeseBurger": {
     "localized_name": "Cheeseburger",
     "description": "Un plat avec du fromage enfermé dans Hamburger . Lorsque vous le mangez, vous vous sentez rassasié pendant une certaine période, Défense +10%."
@@ -2583,6 +2587,10 @@
     "localized_name": "Canon à plasma",
     "description": "Tire un projectile d'énergie surpuissant. Crée une explosion d'énergie à l'impact."
   },
+  "EnergyShotgun": {
+    "localized_name": "fr Text",
+    "description": "fr Text"
+  },
   "ExpBoost_01": {
     "localized_name": "Manuel de formation (S)",
     "description": "À faire lire à un Pal pour lui octroyer quelques points d'EXP."
@@ -2636,23 +2644,23 @@
     "description": "fr Text"
   },
   "FlameThrower": {
-    "localized_name": "FlameThrower",
+    "localized_name": "Lance-flammes",
     "description": "Un Flamethrower pour souffler du feu sur une longue distance. Permet d'enflammer les individus touchés."
   },
   "FlameThrower_2": {
-    "localized_name": "FlameThrower",
+    "localized_name": "Lance-flammes",
     "description": "Un Flamethrower pour souffler du feu sur une longue distance. Permet d'enflammer les individus touchés."
   },
   "FlameThrower_3": {
-    "localized_name": "FlameThrower",
+    "localized_name": "Lance-flammes",
     "description": "Un Flamethrower pour souffler du feu sur une longue distance. Permet d'enflammer les individus touchés."
   },
   "FlameThrower_4": {
-    "localized_name": "FlameThrower",
+    "localized_name": "Lance-flammes",
     "description": "Un Flamethrower pour souffler du feu sur une longue distance. Permet d'enflammer les individus touchés."
   },
   "FlameThrower_5": {
-    "localized_name": "FlameThrower",
+    "localized_name": "Lance-flammes",
     "description": "Un Flamethrower pour souffler du feu sur une longue distance. Permet d'enflammer les individus touchés."
   },
   "FlamethrowerBullet": {
@@ -2717,7 +2725,7 @@
   },
   "FriedVegetables": {
     "localized_name": "Légumes frits",
-    "description": "Un plat fait de Laitue et Meat sautés. En mangeant, pendant un certain temps, Attaque +10%."
+    "description": "Un plat fait de Laitue et Viande crue sautés. En mangeant, pendant un certain temps, Attaque +10%."
   },
   "Fruit__defense_01": {
     "localized_name": "Fruit de robustesse",
@@ -2913,7 +2921,7 @@
   },
   "Gratin": {
     "localized_name": "Gratin",
-    "description": "Un plat rôti de patates en sauce. À déguster bien chaud. Accroît temporairement le sentiment de satiété, Défense +10 %."
+    "description": "Un plat rôti de Patates en sauce. À déguster bien chaud. Accroît temporairement le sentiment de satiété, Défense +10 %."
   },
   "GrenadeBullet": {
     "localized_name": "Grenade",
@@ -3017,343 +3025,343 @@
   },
   "Head001": {
     "localized_name": "Couronne de roi",
-    "description": null
+    "description": "Une couronne qui aurait été portée par des individus de haut rang. Son poids et sa taille ne sont pas adaptés à une utilisation quotidienne."
   },
   "Head001_2": {
     "localized_name": "Couronne de roi",
-    "description": null
+    "description": "Une couronne qui aurait été portée par des individus de haut rang. Son poids et sa taille ne sont pas adaptés à une utilisation quotidienne."
   },
   "Head001_3": {
     "localized_name": "Couronne de roi",
-    "description": null
+    "description": "Une couronne qui aurait été portée par des individus de haut rang. Son poids et sa taille ne sont pas adaptés à une utilisation quotidienne."
   },
   "Head001_4": {
     "localized_name": "Couronne de roi",
-    "description": null
+    "description": "Une couronne qui aurait été portée par des individus de haut rang. Son poids et sa taille ne sont pas adaptés à une utilisation quotidienne."
   },
   "Head001_5": {
     "localized_name": "Couronne de roi",
-    "description": null
+    "description": "Une couronne qui aurait été portée par des individus de haut rang. Son poids et sa taille ne sont pas adaptés à une utilisation quotidienne."
   },
   "Head002": {
     "localized_name": "Couronne en or",
-    "description": null
+    "description": "Une couronne en or pour le moins inhabituelle. Le simple fait de la porter procure un sentiment d'autorité."
   },
   "Head002_2": {
     "localized_name": "Couronne en or",
-    "description": null
+    "description": "Une couronne en or pour le moins inhabituelle. Le simple fait de la porter procure un sentiment d'autorité."
   },
   "Head002_3": {
     "localized_name": "Couronne en or",
-    "description": null
+    "description": "Une couronne en or pour le moins inhabituelle. Le simple fait de la porter procure un sentiment d'autorité."
   },
   "Head002_4": {
     "localized_name": "Couronne en or",
-    "description": null
+    "description": "Une couronne en or pour le moins inhabituelle. Le simple fait de la porter procure un sentiment d'autorité."
   },
   "Head002_5": {
     "localized_name": "Couronne en or",
-    "description": null
+    "description": "Une couronne en or pour le moins inhabituelle. Le simple fait de la porter procure un sentiment d'autorité."
   },
   "Head003": {
     "localized_name": "Bandeau longues oreilles",
-    "description": null
+    "description": "Un adorable serre-tête avec des oreilles de Ribbuny. Pas sûr qu'il protège vraiment la tête."
   },
   "Head003_2": {
     "localized_name": "Bandeau longues oreilles",
-    "description": null
+    "description": "Un adorable serre-tête avec des oreilles de Ribbuny. Pas sûr qu'il protège vraiment la tête."
   },
   "Head003_3": {
     "localized_name": "Bandeau longues oreilles",
-    "description": null
+    "description": "Un adorable serre-tête avec des oreilles de Ribbuny. Pas sûr qu'il protège vraiment la tête."
   },
   "Head003_4": {
     "localized_name": "Bandeau longues oreilles",
-    "description": null
+    "description": "Un adorable serre-tête avec des oreilles de Ribbuny. Pas sûr qu'il protège vraiment la tête."
   },
   "Head003_5": {
     "localized_name": "Bandeau longues oreilles",
-    "description": null
+    "description": "Un adorable serre-tête avec des oreilles de Ribbuny. Pas sûr qu'il protège vraiment la tête."
   },
   "Head004": {
     "localized_name": "Chapeau de sorcière",
-    "description": null
+    "description": "Un couvre-chef imitant un Wixen ou un Katress. Donne l'impression de pouvoir utiliser les compétences des Pals."
   },
   "Head004_2": {
     "localized_name": "Chapeau de sorcière",
-    "description": null
+    "description": "Un couvre-chef imitant un Wixen ou un Katress. Donne l'impression de pouvoir utiliser les compétences des Pals."
   },
   "Head004_3": {
     "localized_name": "Chapeau de sorcière",
-    "description": null
+    "description": "Un couvre-chef imitant un Wixen ou un Katress. Donne l'impression de pouvoir utiliser les compétences des Pals."
   },
   "Head004_4": {
     "localized_name": "Chapeau de sorcière",
-    "description": null
+    "description": "Un couvre-chef imitant un Wixen ou un Katress. Donne l'impression de pouvoir utiliser les compétences des Pals."
   },
   "Head004_5": {
     "localized_name": "Chapeau de sorcière",
-    "description": null
+    "description": "Un couvre-chef imitant un Wixen ou un Katress. Donne l'impression de pouvoir utiliser les compétences des Pals."
   },
   "Head005": {
-    "localized_name": "Chapeau de feutre",
-    "description": null
+    "localized_name": "Chapeau léger",
+    "description": "Un couvre-chef léger et doux adapté à une utilisation quotidienne. Son style soigné le rendait très populaire à une époque."
   },
   "Head005_2": {
-    "localized_name": "Chapeau de feutre",
-    "description": null
+    "localized_name": "Chapeau léger",
+    "description": "Un couvre-chef léger et doux adapté à une utilisation quotidienne. Son style soigné le rendait très populaire à une époque."
   },
   "Head005_3": {
-    "localized_name": "Chapeau de feutre",
-    "description": null
+    "localized_name": "Chapeau léger",
+    "description": "Un couvre-chef léger et doux adapté à une utilisation quotidienne. Son style soigné le rendait très populaire à une époque."
   },
   "Head005_4": {
-    "localized_name": "Chapeau de feutre",
-    "description": null
+    "localized_name": "Chapeau léger",
+    "description": "Un couvre-chef léger et doux adapté à une utilisation quotidienne. Son style soigné le rendait très populaire à une époque."
   },
   "Head005_5": {
-    "localized_name": "Chapeau de feutre",
-    "description": null
+    "localized_name": "Chapeau léger",
+    "description": "Un couvre-chef léger et doux adapté à une utilisation quotidienne. Son style soigné le rendait très populaire à une époque."
   },
   "Head006": {
     "localized_name": "Casque",
-    "description": null
+    "description": "Un casque pour protéger efficacement la tête. Il a été conçu en réponse à des chutes trop fréquentes à dos de Eikthyrdeer."
   },
   "Head006_2": {
     "localized_name": "Casque",
-    "description": null
+    "description": "Un casque pour protéger efficacement la tête. Il a été conçu en réponse à des chutes trop fréquentes à dos de Eikthyrdeer."
   },
   "Head006_3": {
     "localized_name": "Casque",
-    "description": null
+    "description": "Un casque pour protéger efficacement la tête. Il a été conçu en réponse à des chutes trop fréquentes à dos de Eikthyrdeer."
   },
   "Head006_4": {
     "localized_name": "Casque",
-    "description": null
+    "description": "Un casque pour protéger efficacement la tête. Il a été conçu en réponse à des chutes trop fréquentes à dos de Eikthyrdeer."
   },
   "Head006_5": {
     "localized_name": "Casque",
-    "description": null
+    "description": "Un casque pour protéger efficacement la tête. Il a été conçu en réponse à des chutes trop fréquentes à dos de Eikthyrdeer."
   },
   "Head007": {
     "localized_name": "Chapeau en soie",
-    "description": null
+    "description": "Un chapeau destiné à la bourgeoisie. Sa matière en Sibelyx en fait un objet recherché, même si de nombreuses contrefaçons en Swee circulent."
   },
   "Head007_2": {
     "localized_name": "Chapeau en soie",
-    "description": null
+    "description": "Un chapeau destiné à la bourgeoisie. Sa matière en Sibelyx en fait un objet recherché, même si de nombreuses contrefaçons en Swee circulent."
   },
   "Head007_3": {
     "localized_name": "Chapeau en soie",
-    "description": null
+    "description": "Un chapeau destiné à la bourgeoisie. Sa matière en Sibelyx en fait un objet recherché, même si de nombreuses contrefaçons en Swee circulent."
   },
   "Head007_4": {
     "localized_name": "Chapeau en soie",
-    "description": null
+    "description": "Un chapeau destiné à la bourgeoisie. Sa matière en Sibelyx en fait un objet recherché, même si de nombreuses contrefaçons en Swee circulent."
   },
   "Head007_5": {
     "localized_name": "Chapeau en soie",
-    "description": null
+    "description": "Un chapeau destiné à la bourgeoisie. Sa matière en Sibelyx en fait un objet recherché, même si de nombreuses contrefaçons en Swee circulent."
   },
   "Head008": {
     "localized_name": "Tricorne",
-    "description": null
+    "description": "Un couvre-chef très apprécié des combattants. Il était autrefois porté par les chasseurs de Azurobe."
   },
   "Head008_2": {
     "localized_name": "Tricorne",
-    "description": null
+    "description": "Un couvre-chef très apprécié des combattants. Il était autrefois porté par les chasseurs de Azurobe."
   },
   "Head008_3": {
     "localized_name": "Tricorne",
-    "description": null
+    "description": "Un couvre-chef très apprécié des combattants. Il était autrefois porté par les chasseurs de Azurobe."
   },
   "Head008_4": {
     "localized_name": "Tricorne",
-    "description": null
+    "description": "Un couvre-chef très apprécié des combattants. Il était autrefois porté par les chasseurs de Azurobe."
   },
   "Head008_5": {
     "localized_name": "Tricorne",
-    "description": null
+    "description": "Un couvre-chef très apprécié des combattants. Il était autrefois porté par les chasseurs de Azurobe."
   },
   "Head009": {
     "localized_name": "Chapeau d'expédition",
-    "description": null
+    "description": "Un couvre-chef destiné aux aventuriers. Conçu pour protéger efficacement des rayons du soleil."
   },
   "Head009_2": {
     "localized_name": "Chapeau d'expédition",
-    "description": null
+    "description": "Un couvre-chef destiné aux aventuriers. Conçu pour protéger efficacement des rayons du soleil."
   },
   "Head009_3": {
     "localized_name": "Chapeau d'expédition",
-    "description": null
+    "description": "Un couvre-chef destiné aux aventuriers. Conçu pour protéger efficacement des rayons du soleil."
   },
   "Head009_4": {
     "localized_name": "Chapeau d'expédition",
-    "description": null
+    "description": "Un couvre-chef destiné aux aventuriers. Conçu pour protéger efficacement des rayons du soleil."
   },
   "Head009_5": {
     "localized_name": "Chapeau d'expédition",
-    "description": null
+    "description": "Un couvre-chef destiné aux aventuriers. Conçu pour protéger efficacement des rayons du soleil."
   },
   "Head010": {
     "localized_name": "Chapeau de diplômé",
-    "description": null
+    "description": "Un couvre-chef conférant un air intelligent. Cette île devait abriter une école il fut un temps."
   },
   "Head010_2": {
     "localized_name": "Chapeau de diplômé",
-    "description": null
+    "description": "Un couvre-chef conférant un air intelligent. Cette île devait abriter une école il fut un temps."
   },
   "Head010_3": {
     "localized_name": "Chapeau de diplômé",
-    "description": null
+    "description": "Un couvre-chef conférant un air intelligent. Cette île devait abriter une école il fut un temps."
   },
   "Head010_4": {
     "localized_name": "Chapeau de diplômé",
-    "description": null
+    "description": "Un couvre-chef conférant un air intelligent. Cette île devait abriter une école il fut un temps."
   },
   "Head010_5": {
     "localized_name": "Chapeau de diplômé",
-    "description": null
+    "description": "Un couvre-chef conférant un air intelligent. Cette île devait abriter une école il fut un temps."
   },
   "Head011": {
     "localized_name": "Chapeau d'agriculture",
-    "description": null
+    "description": "Un couvre-chef indiqué pour le travail dans les champs. Conçu pour protéger efficacement des rayons du soleil."
   },
   "Head011_2": {
     "localized_name": "Chapeau d'agriculture",
-    "description": null
+    "description": "Un couvre-chef indiqué pour le travail dans les champs. Conçu pour protéger efficacement des rayons du soleil."
   },
   "Head011_3": {
     "localized_name": "Chapeau d'agriculture",
-    "description": null
+    "description": "Un couvre-chef indiqué pour le travail dans les champs. Conçu pour protéger efficacement des rayons du soleil."
   },
   "Head011_4": {
     "localized_name": "Chapeau d'agriculture",
-    "description": null
+    "description": "Un couvre-chef indiqué pour le travail dans les champs. Conçu pour protéger efficacement des rayons du soleil."
   },
   "Head011_5": {
     "localized_name": "Chapeau d'agriculture",
-    "description": null
+    "description": "Un couvre-chef indiqué pour le travail dans les champs. Conçu pour protéger efficacement des rayons du soleil."
   },
   "Head012": {
     "localized_name": "Melon",
-    "description": null
+    "description": "Un couvre-chef rond très robuste. On utilise souvent l'argument de vente comme quoi il serait même à l'épreuve des Mammorest."
   },
   "Head012_2": {
     "localized_name": "Melon",
-    "description": null
+    "description": "Un couvre-chef rond très robuste. On utilise souvent l'argument de vente comme quoi il serait même à l'épreuve des Mammorest."
   },
   "Head012_3": {
     "localized_name": "Melon",
-    "description": null
+    "description": "Un couvre-chef rond très robuste. On utilise souvent l'argument de vente comme quoi il serait même à l'épreuve des Mammorest."
   },
   "Head012_4": {
     "localized_name": "Melon",
-    "description": null
+    "description": "Un couvre-chef rond très robuste. On utilise souvent l'argument de vente comme quoi il serait même à l'épreuve des Mammorest."
   },
   "Head012_5": {
     "localized_name": "Melon",
-    "description": null
+    "description": "Un couvre-chef rond très robuste. On utilise souvent l'argument de vente comme quoi il serait même à l'épreuve des Mammorest."
   },
   "Head013": {
     "localized_name": "Chapeau Tocotoco",
-    "description": null
+    "description": "Un chapeau en forme de Tocotoco. Son côté extravagant fait qu'on le voit de loin."
   },
   "Head013_2": {
     "localized_name": "Chapeau Tocotoco",
-    "description": null
+    "description": "Un chapeau en forme de Tocotoco. Son côté extravagant fait qu'on le voit de loin."
   },
   "Head013_3": {
     "localized_name": "Chapeau Tocotoco",
-    "description": null
+    "description": "Un chapeau en forme de Tocotoco. Son côté extravagant fait qu'on le voit de loin."
   },
   "Head013_4": {
     "localized_name": "Chapeau Tocotoco",
-    "description": null
+    "description": "Un chapeau en forme de Tocotoco. Son côté extravagant fait qu'on le voit de loin."
   },
   "Head013_5": {
     "localized_name": "Chapeau Tocotoco",
-    "description": null
+    "description": "Un chapeau en forme de Tocotoco. Son côté extravagant fait qu'on le voit de loin."
   },
   "Head014": {
     "localized_name": "Chapeau Tocotoco souriant",
-    "description": null
+    "description": "Un chapeau en forme de Tocotoco. Le mettre donne immédiatement le sourire."
   },
   "Head014_2": {
     "localized_name": "Chapeau Tocotoco souriant",
-    "description": null
+    "description": "Un chapeau en forme de Tocotoco. Le mettre donne immédiatement le sourire."
   },
   "Head014_3": {
     "localized_name": "Chapeau Tocotoco souriant",
-    "description": null
+    "description": "Un chapeau en forme de Tocotoco. Le mettre donne immédiatement le sourire."
   },
   "Head014_4": {
     "localized_name": "Chapeau Tocotoco souriant",
-    "description": null
+    "description": "Un chapeau en forme de Tocotoco. Le mettre donne immédiatement le sourire."
   },
   "Head014_5": {
     "localized_name": "Chapeau Tocotoco souriant",
-    "description": null
+    "description": "Un chapeau en forme de Tocotoco. Le mettre donne immédiatement le sourire."
   },
   "Head015": {
     "localized_name": "Chapeau Gumoss",
-    "description": null
+    "description": "Un chapeau en forme de Gumoss."
   },
   "Head015_2": {
     "localized_name": "Chapeau Gumoss",
-    "description": null
+    "description": "Un chapeau en forme de Gumoss."
   },
   "Head015_3": {
     "localized_name": "Chapeau Gumoss",
-    "description": null
+    "description": "Un chapeau en forme de Gumoss."
   },
   "Head015_4": {
     "localized_name": "Chapeau Gumoss",
-    "description": null
+    "description": "Un chapeau en forme de Gumoss."
   },
   "Head015_5": {
     "localized_name": "Chapeau Gumoss",
-    "description": null
+    "description": "Un chapeau en forme de Gumoss."
   },
   "Head016": {
     "localized_name": "Chapeau Penking",
-    "description": null
+    "description": "Un chapeau en forme de Penking."
   },
   "Head016_2": {
     "localized_name": "Chapeau Penking",
-    "description": null
+    "description": "Un chapeau en forme de Penking."
   },
   "Head016_3": {
     "localized_name": "Chapeau Penking",
-    "description": null
+    "description": "Un chapeau en forme de Penking."
   },
   "Head016_4": {
     "localized_name": "Chapeau Penking",
-    "description": null
+    "description": "Un chapeau en forme de Penking."
   },
   "Head016_5": {
     "localized_name": "Chapeau Penking",
-    "description": null
+    "description": "Un chapeau en forme de Penking."
   },
   "Head017": {
     "localized_name": "Chapeau Katress",
-    "description": null
+    "description": "Un chapeau en forme de Katress."
   },
   "Head017_2": {
     "localized_name": "Chapeau Katress",
-    "description": null
+    "description": "Un chapeau en forme de Katress."
   },
   "Head017_3": {
     "localized_name": "Chapeau Katress",
-    "description": null
+    "description": "Un chapeau en forme de Katress."
   },
   "Head017_4": {
     "localized_name": "Chapeau Katress",
-    "description": null
+    "description": "Un chapeau en forme de Katress."
   },
   "Head017_5": {
     "localized_name": "Chapeau Katress",
-    "description": null
+    "description": "Un chapeau en forme de Katress."
   },
   "HeadEquip001_purple": {
     "localized_name": "Diadème de sorcière (Ultra)",
@@ -3641,23 +3649,23 @@
   },
   "LaserGatlingGun": {
     "localized_name": "Pistolet gatling laser",
-    "description": "Permet de tirer des lasers à grande vitesse. Sa puissance de feu permet d'éliminer plusieurs ennemis à la fois."
+    "description": "Permet de tirer des rayons lumineux à grande vitesse. Sa puissance de feu permet d'éliminer plusieurs ennemis à la fois."
   },
   "LaserGatlingGun_2": {
     "localized_name": "Pistolet gatling laser",
-    "description": "Permet de tirer des lasers à grande vitesse. Sa puissance de feu permet d'éliminer plusieurs ennemis à la fois."
+    "description": "Permet de tirer des rayons lumineux à grande vitesse. Sa puissance de feu permet d'éliminer plusieurs ennemis à la fois."
   },
   "LaserGatlingGun_3": {
     "localized_name": "Pistolet gatling laser",
-    "description": "Permet de tirer des lasers à grande vitesse. Sa puissance de feu permet d'éliminer plusieurs ennemis à la fois."
+    "description": "Permet de tirer des rayons lumineux à grande vitesse. Sa puissance de feu permet d'éliminer plusieurs ennemis à la fois."
   },
   "LaserGatlingGun_4": {
     "localized_name": "Pistolet gatling laser",
-    "description": "Permet de tirer des lasers à grande vitesse. Sa puissance de feu permet d'éliminer plusieurs ennemis à la fois."
+    "description": "Permet de tirer des rayons lumineux à grande vitesse. Sa puissance de feu permet d'éliminer plusieurs ennemis à la fois."
   },
   "LaserGatlingGun_5": {
     "localized_name": "Pistolet gatling laser",
-    "description": "Permet de tirer des lasers à grande vitesse. Sa puissance de feu permet d'éliminer plusieurs ennemis à la fois."
+    "description": "Permet de tirer des rayons lumineux à grande vitesse. Sa puissance de feu permet d'éliminer plusieurs ennemis à la fois."
   },
   "LaserRifle": {
     "localized_name": "Fusil laser",
@@ -3875,8 +3883,12 @@
     "localized_name": "Champignons marinés",
     "description": "Des Champignons en marinade. En manger confère Défense +10 %."
   },
+  "MeaninglessItem_ButcheringImportPal": {
+    "localized_name": "Déchet de tissu",
+    "description": "Des tissus organiques en piteux état. Ces résidus sont générés lorsqu'un Pal génétiquement restauré est découpé, pour ensuite être vendus ou jetés du fait de leur inutilité."
+  },
   "Meat": {
-    "localized_name": "Meat",
+    "localized_name": "Viande crue",
     "description": "De la viande de Pal. Si fraîche qu'elle pourrait être consommée crue par les humains."
   },
   "Meat2": {
@@ -4076,12 +4088,16 @@
     "description": "Une culture peu exigeante appréciée depuis la nuit des temps. Impropre à la consommation crue."
   },
   "OnionSeeds": {
-    "localized_name": "Graine de oignon",
+    "localized_name": "Graine d'oignon",
     "description": "Des graines pour faire pousser des Oignons. Nécessaires à l'établissement d'une culture."
   },
   "Opium": {
     "localized_name": "Boisson douteuse",
     "description": "Une boisson qui remonte le moral. En boire augmente légèrement et temporairement la vitesse de travail au détriment de quelques points MEN."
+  },
+  "OverheatRifle": {
+    "localized_name": "fr Text",
+    "description": "fr Text"
   },
   "PalCrystal_Ex": {
     "localized_name": "Pièces d'une ancienne civilisation",
@@ -4090,6 +4106,10 @@
   "PalDarkParts": {
     "localized_name": "Fragment obscur",
     "description": "Élément laissé par un puissant Pal Ténèbres. Sert de matériau pour certains accessoires puissants."
+  },
+  "PalDopingShot": {
+    "localized_name": "fr Text",
+    "description": "fr Text"
   },
   "PalEgg_Dark_01": {
     "localized_name": "Œuf sombre",
@@ -4100,15 +4120,15 @@
     "description": "Un PalEgg Dark 02. On observe des mouvements fœtaux désordonnés à l'intérieur. À installer dans une Incubateur pour le faire éclore."
   },
   "PalEgg_Dark_03": {
-    "localized_name": "Gros œuf sombre",
+    "localized_name": "Gros Œuf sombre",
     "description": "Un PalEgg Dark 03. Des palpitations malfaisantes le font remuer. À installer dans une Incubateur pour le faire éclore."
   },
   "PalEgg_Dark_04": {
-    "localized_name": "Gros œuf sombre",
+    "localized_name": "Gros Œuf sombre",
     "description": "Un PalEgg Dark 04. Des palpitations malfaisantes le font remuer. À installer dans une Incubateur pour le faire éclore."
   },
   "PalEgg_Dark_05": {
-    "localized_name": "Énorme œuf sombre",
+    "localized_name": "Énorme Œuf sombre",
     "description": "Un PalEgg Dark 05. Fait ressentir l'élan de vie d'une âme abyssale, comme si un monstre allait en sortir. À installer dans une Incubateur pour le faire éclore."
   },
   "PalEgg_Dragon_01": {
@@ -4120,35 +4140,35 @@
     "description": "Un PalEgg Dragon 02. On observe des mouvements fœtaux turbulents à l'intérieur. À installer dans une Incubateur pour le faire éclore."
   },
   "PalEgg_Dragon_03": {
-    "localized_name": "Gros œuf de dragon",
+    "localized_name": "Gros Œuf de dragon",
     "description": "Un PalEgg Dragon 03. Des palpitations anormales le font remuer. À installer dans une Incubateur pour le faire éclore."
   },
   "PalEgg_Dragon_04": {
-    "localized_name": "Gros œuf de dragon",
+    "localized_name": "Gros Œuf de dragon",
     "description": "Un PalEgg Dragon 04. Des palpitations anormales le font remuer. À installer dans une Incubateur pour le faire éclore."
   },
   "PalEgg_Dragon_05": {
-    "localized_name": "Énorme œuf de dragon",
+    "localized_name": "Énorme Œuf de dragon",
     "description": "Un PalEgg Dragon 05. Fait ressentir l'élan de vie d'une âme solennelle, comme si un monstre allait en sortir. À installer dans une Incubateur pour le faire éclore."
   },
   "PalEgg_Earth_01": {
-    "localized_name": "Œuf anguleux",
+    "localized_name": "Œuf rocailleux",
     "description": "Un PalEgg Earth 01. On observe des mouvements fœtaux sereins à l'intérieur. À installer dans une Incubateur pour le faire éclore."
   },
   "PalEgg_Earth_02": {
-    "localized_name": "Œuf anguleux",
+    "localized_name": "Œuf rocailleux",
     "description": "Un PalEgg Earth 02. On observe des mouvements fœtaux sereins à l'intérieur. À installer dans une Incubateur pour le faire éclore."
   },
   "PalEgg_Earth_03": {
-    "localized_name": "Gros œuf anguleux",
+    "localized_name": "Gros Œuf rocailleux",
     "description": "Un PalEgg Earth 03. Des palpitations solides le font remuer. À installer dans une Incubateur pour le faire éclore."
   },
   "PalEgg_Earth_04": {
-    "localized_name": "Gros œuf anguleux",
+    "localized_name": "Gros Œuf rocailleux",
     "description": "Un PalEgg Earth 04. Des palpitations solides le font remuer. À installer dans une Incubateur pour le faire éclore."
   },
   "PalEgg_Earth_05": {
-    "localized_name": "Énorme œuf anguleux",
+    "localized_name": "Énorme Œuf rocailleux",
     "description": "Un PalEgg Earth 05. Fait ressentir l'élan de vie d'une âme terrestre, comme si un monstre allait en sortir. À installer dans une Incubateur pour le faire éclore."
   },
   "PalEgg_Electricity_01": {
@@ -4275,6 +4295,10 @@
     "localized_name": "Fluides de Pal",
     "description": "Des fluides récoltés sur des Pals. Aussi visqueux qu'utiles."
   },
+  "PalHealingGrenade": {
+    "localized_name": "fr Text",
+    "description": "fr Text"
+  },
   "PalItem_CaptainPenguin": {
     "localized_name": "Plume de Penking",
     "description": "Une plume de Penking. Ses couleurs éclatantes font qu'on l'utilise notamment dans la confection d'habits."
@@ -4364,7 +4388,7 @@
     "description": "Des dispositifs à lancer pour capturer les Pals. Leurs performances améliorées permettent de capturer une plus grande variété de Pals."
   },
   "PalSphere_Robbery": {
-    "localized_name": "Sphère de pillard",
+    "localized_name": "Sphère radar",
     "description": "Des dispositifs à lancer pour capturer les Pals. Leur faible taux de réussite est compensé par une capacité à capturer de force les Pals des autres."
   },
   "PalSphere_Tera": {
@@ -4608,12 +4632,12 @@
     "description": "fr Text"
   },
   "Potato": {
-    "localized_name": "patate",
+    "localized_name": "Patate",
     "description": "Une culture nourrissante qui pousse dans n'importe quelle terre. Impropre à la consommation crue."
   },
   "PotatoChips": {
     "localized_name": "Frites",
-    "description": "Un plat à base de patates frites. Très addictif. En manger fait descendre les points MEN un peu plus lentement de façon temporaire."
+    "description": "Un plat à base de Patates frites. Très addictif. En manger fait descendre les points MEN un peu plus lentement de façon temporaire."
   },
   "PotatoSeedPotatoes": {
     "localized_name": "fr Text",
@@ -4621,7 +4645,7 @@
   },
   "PotatoSeeds": {
     "localized_name": "Semence de patate",
-    "description": "Des graines pour faire pousser des patates. Nécessaires à l'établissement d'une culture."
+    "description": "Des graines pour faire pousser des Patates. Nécessaires à l'établissement d'une culture."
   },
   "Potion": {
     "localized_name": "Potion",
@@ -4708,7 +4732,7 @@
     "description": "Un outil pour réparer les structures. S'utilise sur les structures cassées."
   },
   "RifleBullet": {
-    "localized_name": "Balles de fusil d'assaut",
+    "localized_name": "Balles de fusil",
     "description": "Des munitions compatibles notamment avec le fusil."
   },
   "RoughBullet": {
@@ -4915,6 +4939,10 @@
     "localized_name": "Téra bouclier",
     "description": "Un étrange bouclier obtenu grâce à la technologie du paldium. Se régénère automatiquement s'il n'encaisse aucune attaque pendant un certain temps. Des expériences répétées ont permis de révéler toutes ses qualités."
   },
+  "Shield_05": {
+    "localized_name": "Ultra bouclier",
+    "description": "Un bouclier mystérieux issu de la technologie paldium. Se régénère de lui-même lorsqu'il ne subit pas d'attaque. Toute l'expérience accumulée lui confère une qualité sans précédent."
+  },
   "Shield_SF": {
     "localized_name": "Bouclier avancé",
     "description": "Un étrange bouclier obtenu grâce à une technologie ultra-avancée. Se régénère automatiquement s'il n'encaisse aucune attaque pendant un certain temps. Sa qualité est irréprochable."
@@ -4960,7 +4988,7 @@
     "description": "À utiliser sur un Pal pour lui faire apprendre AirCanon."
   },
   "SkillCard_Apocalypse": {
-    "localized_name": "Fruit tenebrae : Apocalypse",
+    "localized_name": "Fruit tenebra : Apocalypse",
     "description": "À utiliser sur un Pal pour lui faire apprendre Apocalypse."
   },
   "SkillCard_AquaJet": {
@@ -4988,23 +5016,23 @@
     "description": "À utiliser sur un Pal pour lui faire apprendre Commet."
   },
   "SkillCard_DarkArrow": {
-    "localized_name": "Fruit tenebrae : Flèche noire",
+    "localized_name": "Fruit tenebra : Flèche noire",
     "description": "À utiliser sur un Pal pour lui faire apprendre DarkArrow."
   },
   "SkillCard_DarkCanon": {
-    "localized_name": "Fruit tenebrae : Canon noir",
+    "localized_name": "Fruit tenebra : Canon noir",
     "description": "À utiliser sur un Pal pour lui faire apprendre DarkCanon."
   },
   "SkillCard_DarkLaser": {
-    "localized_name": "Fruit tenebrae : Laser noir",
+    "localized_name": "Fruit tenebra : Laser noir",
     "description": "À utiliser sur un Pal pour lui faire apprendre DarkLaser."
   },
   "SkillCard_DarkPulse": {
-    "localized_name": "Fruit tenebrae : Noirceur expansive",
+    "localized_name": "Fruit tenebra : Noirceur expansive",
     "description": "À utiliser sur un Pal pour lui faire apprendre DarkPulse."
   },
   "SkillCard_DarkWave": {
-    "localized_name": "Fruit tenebrae : Éclat d'ombre",
+    "localized_name": "Fruit tenebra : Éclat d'ombre",
     "description": "À utiliser sur un Pal pour lui faire apprendre DarkWave."
   },
   "SkillCard_DiamondFall": {
@@ -5044,7 +5072,7 @@
     "description": "À utiliser sur un Pal pour lui faire apprendre FireBlast."
   },
   "SkillCard_FireSeed": {
-    "localized_name": "Fruit flamma : Fente enflammée",
+    "localized_name": "Fruit flamma : Flammes scindées",
     "description": "À utiliser sur un Pal pour lui faire apprendre FireSeed."
   },
   "SkillCard_FlameFunnel": {
@@ -5072,7 +5100,7 @@
     "description": "À utiliser sur un Pal pour lui faire apprendre FrostBreath."
   },
   "SkillCard_GhostFlame": {
-    "localized_name": "Fruit tenebrae : Flamme spirituelle",
+    "localized_name": "Fruit tenebra : Flamme spirituelle",
     "description": "À utiliser sur un Pal pour lui faire apprendre GhostFlame."
   },
   "SkillCard_GrassTornado": {
@@ -5080,11 +5108,11 @@
     "description": "À utiliser sur un Pal pour lui faire apprendre GrassTornado."
   },
   "SkillCard_HolyBlast": {
-    "localized_name": "Fruit de maîtrise : Éclat sacré",
+    "localized_name": "Fruit de maîtrise : Explosion Sacrée",
     "description": "À utiliser sur un Pal pour lui faire apprendre HolyBlast."
   },
   "SkillCard_HydroPump": {
-    "localized_name": "Fruit aqua : Hydro-courant",
+    "localized_name": "Fruit aqua : Hydrocanon",
     "description": "À utiliser sur un Pal pour lui faire apprendre HydroPump."
   },
   "SkillCard_HyperBeam": {
@@ -5096,7 +5124,7 @@
     "description": "À utiliser sur un Pal pour lui faire apprendre IceBlade."
   },
   "SkillCard_IceMissile": {
-    "localized_name": "Fruit glacia : Missile glacé",
+    "localized_name": "Fruit glacia : Missile de glace",
     "description": "À utiliser sur un Pal pour lui faire apprendre IceMissile."
   },
   "SkillCard_IcicleLine": {
@@ -5132,11 +5160,11 @@
     "description": "À utiliser sur un Pal pour lui faire apprendre MudShot."
   },
   "SkillCard_PoisonShot": {
-    "localized_name": "Fruit tenebrae : Tir empoisonné",
+    "localized_name": "Fruit tenebra : Tir empoisonné",
     "description": "À utiliser sur un Pal pour lui faire apprendre PoisonShot."
   },
   "SkillCard_PowerBall": {
-    "localized_name": "Fruit de maîtrise : Rayon puissant",
+    "localized_name": "Fruit de maîtrise : Boule d'énergie",
     "description": "À utiliser sur un Pal pour lui faire apprendre PowerBall."
   },
   "SkillCard_PowerShot": {
@@ -5144,7 +5172,7 @@
     "description": "À utiliser sur un Pal pour lui faire apprendre PowerShot."
   },
   "SkillCard_Psychokinesis": {
-    "localized_name": "Fruit tenebrae : Gravité psy",
+    "localized_name": "Fruit tenebra : Gravité psy",
     "description": "À utiliser sur un Pal pour lui faire apprendre Psychokinesis."
   },
   "SkillCard_RockLance": {
@@ -5160,7 +5188,7 @@
     "description": "À utiliser sur un Pal pour lui faire apprendre RootLance."
   },
   "SkillCard_SandTornado": {
-    "localized_name": "Fruit terra : Tornade de sable",
+    "localized_name": "Fruit terra : Tourbillon de sable",
     "description": "À utiliser sur un Pal pour lui faire apprendre SandTornado."
   },
   "SkillCard_SandTwister": {
@@ -5180,7 +5208,7 @@
     "description": "À utiliser sur un Pal pour lui faire apprendre SelfDestruct."
   },
   "SkillCard_ShadowBall": {
-    "localized_name": "Fruit tenebrae : Balle cauchemar",
+    "localized_name": "Fruit tenebra : Balle cauchemar",
     "description": "À utiliser sur un Pal pour lui faire apprendre ShadowBall."
   },
   "SkillCard_SolarBeam": {
@@ -5212,7 +5240,7 @@
     "description": "À utiliser sur un Pal pour lui faire apprendre ThunderBall."
   },
   "SkillCard_ThunderFunnel": {
-    "localized_name": "Fruit fulgura : Cheminée plasmique",
+    "localized_name": "Fruit fulgura : Boule de Plasma",
     "description": "À utiliser sur un Pal pour lui faire apprendre ThunderFunnel."
   },
   "SkillCard_ThunderRain": {
@@ -5632,7 +5660,7 @@
     "description": "À posséder pour monter Reptyro."
   },
   "SkillUnlock_VolcanicMonster_Ice": {
-    "localized_name": "Reptyro Cryst Reptyro",
+    "localized_name": "Selle pour Reptyro Cryst",
     "description": "À posséder pour monter VolcanicMonster Ice."
   },
   "SkillUnlock_WeaselDragon": {
@@ -5648,7 +5676,7 @@
     "description": "La posséder permet de monter Xenogard."
   },
   "SkillUnlock_WhiteDeer": {
-    "localized_name": "Selle pour Silvegis",
+    "localized_name": "Selle pour Celesdir",
     "description": "La posséder permet de monter Celesdir."
   },
   "SkillUnlock_WhiteShieldDragon": {

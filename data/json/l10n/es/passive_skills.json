@@ -31,6 +31,278 @@
     "localized_name": "Aumento de ataque, nv. 3",
     "description": null
   },
+  "BossDefeatReward_AmaterasuWolf_Dark": {
+    "localized_name": "Aumenta un poco el daño de oscuridad",
+    "description": null
+  },
+  "BossDefeatReward_Anubis": {
+    "localized_name": "Aumenta un poco el daño de tierra",
+    "description": null
+  },
+  "BossDefeatReward_BadCatgirl": {
+    "localized_name": "Aumenta un poco el daño de oscuridad",
+    "description": null
+  },
+  "BossDefeatReward_BerryGoat_Dark": {
+    "localized_name": "Aumenta el daño de planta",
+    "description": null
+  },
+  "BossDefeatReward_BlackMetalDragon": {
+    "localized_name": "Aumenta el daño dragontino",
+    "description": null
+  },
+  "BossDefeatReward_BlackPuppy": {
+    "localized_name": "Aumenta un poco el daño de oscuridad",
+    "description": null
+  },
+  "BossDefeatReward_BlueDragon": {
+    "localized_name": "Aumenta un poco el daño de agua",
+    "description": null
+  },
+  "BossDefeatReward_BlueThunderHorse": {
+    "localized_name": "Aumenta el daño de rayo",
+    "description": null
+  },
+  "BossDefeatReward_BlueberryFairy": {
+    "localized_name": "Aumenta el daño de planta",
+    "description": null
+  },
+  "BossDefeatReward_CaptainPenguin": {
+    "localized_name": "Aumenta un poco el daño de agua",
+    "description": null
+  },
+  "BossDefeatReward_CatMage": {
+    "localized_name": "Aumenta un poco el daño de oscuridad",
+    "description": null
+  },
+  "BossDefeatReward_CatVampire": {
+    "localized_name": "Aumenta un poco el daño de oscuridad",
+    "description": null
+  },
+  "BossDefeatReward_DarkScorpion": {
+    "localized_name": "Aumenta un poco el daño de oscuridad",
+    "description": null
+  },
+  "BossDefeatReward_DarkScorpion_Ground": {
+    "localized_name": "Aumenta un poco el daño de tierra",
+    "description": null
+  },
+  "BossDefeatReward_FairyDragon": {
+    "localized_name": "Aumenta un poco el daño dragontino",
+    "description": null
+  },
+  "BossDefeatReward_FengyunDeeper": {
+    "localized_name": "Aumenta un poco el daño no elemental",
+    "description": null
+  },
+  "BossDefeatReward_FengyunDeeper_Electric": {
+    "localized_name": "Aumenta el daño de rayo",
+    "description": null
+  },
+  "BossDefeatReward_FlowerDinosaur_Electric": {
+    "localized_name": "Aumenta un poco el daño de rayo",
+    "description": null
+  },
+  "BossDefeatReward_FlowerDoll": {
+    "localized_name": "Aumenta un poco el daño de planta",
+    "description": null
+  },
+  "BossDefeatReward_GhostRabbit": {
+    "localized_name": "Aumenta un poco el daño de oscuridad",
+    "description": null
+  },
+  "BossDefeatReward_GoldenHorse": {
+    "localized_name": "Aumenta el daño de tierra",
+    "description": null
+  },
+  "BossDefeatReward_GrassMammoth": {
+    "localized_name": "Aumenta el daño de planta",
+    "description": null
+  },
+  "BossDefeatReward_GrassPanda_Electric": {
+    "localized_name": "Aumenta un poco el daño de rayo",
+    "description": null
+  },
+  "BossDefeatReward_GrassRabbitMan": {
+    "localized_name": "Aumenta un poco el daño de planta",
+    "description": null
+  },
+  "BossDefeatReward_GrimGirl": {
+    "localized_name": "Aumenta un poco el daño de oscuridad",
+    "description": null
+  },
+  "BossDefeatReward_HawkBird": {
+    "localized_name": "Aumenta un poco el daño no elemental",
+    "description": null
+  },
+  "BossDefeatReward_HerculesBeetle": {
+    "localized_name": "Aumenta un poco el daño de tierra",
+    "description": null
+  },
+  "BossDefeatReward_HerculesBeetle_Ground": {
+    "localized_name": "Aumenta el daño de tierra",
+    "description": null
+  },
+  "BossDefeatReward_Horus_Water": {
+    "localized_name": "Aumenta el daño de agua",
+    "description": null
+  },
+  "BossDefeatReward_IceHorse": {
+    "localized_name": "Aumenta mucho el daño de hielo",
+    "description": null
+  },
+  "BossDefeatReward_IceHorse_Dark": {
+    "localized_name": "Aumenta un poco el daño de oscuridad",
+    "description": null
+  },
+  "BossDefeatReward_JetDragon": {
+    "localized_name": "Aumenta mucho el daño dragontino",
+    "description": null
+  },
+  "BossDefeatReward_KingAlpaca": {
+    "localized_name": "Aumenta un poco el daño no elemental",
+    "description": null
+  },
+  "BossDefeatReward_KingAlpaca_Ice": {
+    "localized_name": "Aumenta el daño de hielo",
+    "description": null
+  },
+  "BossDefeatReward_KingBahamut": {
+    "localized_name": "Aumenta mucho el daño de fuego",
+    "description": null
+  },
+  "BossDefeatReward_Kirin": {
+    "localized_name": "Aumenta un poco el daño de rayo",
+    "description": null
+  },
+  "BossDefeatReward_Kitsunebi_Ice": {
+    "localized_name": "Aumenta mucho el daño de hielo",
+    "description": null
+  },
+  "BossDefeatReward_LazyCatfish": {
+    "localized_name": "Aumenta un poco el daño de tierra",
+    "description": null
+  },
+  "BossDefeatReward_LazyDragon_Electric": {
+    "localized_name": "Aumenta un poco el daño dragontino",
+    "description": null
+  },
+  "BossDefeatReward_LilyQueen_Dark": {
+    "localized_name": "Aumenta un poco el daño de oscuridad",
+    "description": null
+  },
+  "BossDefeatReward_MopKing": {
+    "localized_name": "Aumenta un poco el daño de hielo",
+    "description": null
+  },
+  "BossDefeatReward_Mutant": {
+    "localized_name": "Aumenta un poco el daño no elemental",
+    "description": null
+  },
+  "BossDefeatReward_MysteryMask": {
+    "localized_name": "Aumenta un poco el daño de oscuridad",
+    "description": null
+  },
+  "BossDefeatReward_NaughtyCat": {
+    "localized_name": "Aumenta un poco el daño no elemental",
+    "description": null
+  },
+  "BossDefeatReward_NightBlueHorse": {
+    "localized_name": "Aumenta un poco el daño de oscuridad",
+    "description": null
+  },
+  "BossDefeatReward_PinkRabbit_Grass": {
+    "localized_name": "Aumenta el daño de planta",
+    "description": null
+  },
+  "BossDefeatReward_PlantSlime": {
+    "localized_name": "Aumenta un poco el daño de tierra",
+    "description": null
+  },
+  "BossDefeatReward_PurpleSpider": {
+    "localized_name": "Aumenta un poco el daño de oscuridad",
+    "description": null
+  },
+  "BossDefeatReward_QueenBee": {
+    "localized_name": "Aumenta un poco el daño de planta",
+    "description": null
+  },
+  "BossDefeatReward_RaijinDaughter_Water": {
+    "localized_name": "Aumenta un poco el daño de oscuridad",
+    "description": null
+  },
+  "BossDefeatReward_Ronin": {
+    "localized_name": "Aumenta el daño de fuego",
+    "description": null
+  },
+  "BossDefeatReward_SaintCentaur_1": {
+    "localized_name": "Aumenta mucho el daño no elemental",
+    "description": null
+  },
+  "BossDefeatReward_SaintCentaur_2": {
+    "localized_name": "Aumenta un poco el daño de oscuridad",
+    "description": null
+  },
+  "BossDefeatReward_SakuraSaurus": {
+    "localized_name": "Aumenta un poco el daño de planta",
+    "description": null
+  },
+  "BossDefeatReward_SakuraSaurus_Water": {
+    "localized_name": "Aumenta un poco el daño de agua",
+    "description": null
+  },
+  "BossDefeatReward_SkyDragon": {
+    "localized_name": "Aumenta un poco el daño dragontino",
+    "description": null
+  },
+  "BossDefeatReward_Suzaku": {
+    "localized_name": "Aumenta mucho el daño de fuego",
+    "description": null
+  },
+  "BossDefeatReward_ThunderBird": {
+    "localized_name": "Aumenta un poco el daño de rayo",
+    "description": null
+  },
+  "BossDefeatReward_Umihebi": {
+    "localized_name": "Aumenta el daño de agua",
+    "description": null
+  },
+  "BossDefeatReward_VioletFairy": {
+    "localized_name": "Aumenta el daño de planta",
+    "description": null
+  },
+  "BossDefeatReward_WeaselDragon": {
+    "localized_name": "Aumenta un poco el daño de hielo",
+    "description": null
+  },
+  "BossDefeatReward_Werewolf_Ice": {
+    "localized_name": "Aumenta mucho el daño de hielo",
+    "description": null
+  },
+  "BossDefeatReward_WhiteDeer": {
+    "localized_name": "Aumenta el daño no elemental",
+    "description": null
+  },
+  "BossDefeatReward_WhiteMoth": {
+    "localized_name": "Aumenta un poco el daño de hielo",
+    "description": null
+  },
+  "BossDefeatReward_WhiteShieldDragon": {
+    "localized_name": "Aumenta el daño dragontino",
+    "description": null
+  },
+  "BossDefeatReward_WhiteTiger_Ground": {
+    "localized_name": "Aumenta el daño de tierra",
+    "description": null
+  },
+  "BossDefeatReward_WingGolem": {
+    "localized_name": "Aumenta un poco el daño de tierra",
+    "description": null
+  },
+  "BossDefeatReward_Yeti_Grass": {
+    "localized_name": "Aumenta un poco el daño de planta",
+    "description": null
+  },
   "CaptureLevel_Up_1": {
     "localized_name": "Mejora del poder de captura +1",
     "description": null
@@ -136,7 +408,7 @@
     "description": null
   },
   "Deffence_up2": {
-    "localized_name": "Físico fortachón",
+    "localized_name": "Físico fornido",
     "description": null
   },
   "Deffence_up3": {
@@ -544,7 +816,7 @@
     "description": "Aumenta la velocidad de movimiento en un 30.0 %"
   },
   "Nocturnal": {
-    "localized_name": "Nocturnidad",
+    "localized_name": "Nocturno",
     "description": "Seguirá trabajando por la noche sin dormir."
   },
   "NonKilling": {
@@ -572,7 +844,7 @@
     "description": null
   },
   "PAL_ALLAttack_up3": {
-    "localized_name": "Ferocidad",
+    "localized_name": "Dios demoníaco",
     "description": null
   },
   "PAL_CorporateSlave": {
@@ -584,11 +856,11 @@
     "description": "La saciedad baja un <NumBlue_13>+10.0%</> menos."
   },
   "PAL_FullStomach_Down_2": {
-    "localized_name": "Huelga de hambre",
+    "localized_name": "Amante de las dietas",
     "description": "La saciedad baja un <NumBlue_13>+15.0%</> menos."
   },
   "PAL_FullStomach_Down_3": {
-    "localized_name": "Huelga de hambre",
+    "localized_name": "Ayuno supremo",
     "description": "La saciedad baja un <NumBlue_13>+20.0%</> menos."
   },
   "PAL_FullStomach_Up_1": {
@@ -608,7 +880,7 @@
     "description": "La COR baja un <NumBlue_13>+15.0%</> menos."
   },
   "PAL_Sanity_Down_3": {
-    "localized_name": "Adicto al trabajo",
+    "localized_name": "Corazón de rey inmutable",
     "description": "La COR baja un <NumBlue_13>+20.0%</> menos."
   },
   "PAL_Sanity_Up_1": {
@@ -688,15 +960,15 @@
     "description": "Energía máxima: -25.0% *Solo efectivo en Pals que se puedan montar"
   },
   "Stamina_Up_1": {
-    "localized_name": "Resistencia inagotable",
+    "localized_name": "Energía inagotable",
     "description": "Energía máxima + 50.0% *Solo efectivo en Pals que se puedan montar"
   },
   "Stamina_Up_2": {
-    "localized_name": "Sano como una manzana",
+    "localized_name": "Vigor de juventud",
     "description": "Energía máxima + 25.0% *Solo efectivo en Pals que se puedan montar"
   },
   "Stamina_Up_3": {
-    "localized_name": "Sano como una manzana",
+    "localized_name": "Máquina imparable",
     "description": "Energía máxima + 75.0% *Solo efectivo en Pals que se puedan montar"
   },
   "TemperatureResist_Cold1": {
@@ -760,7 +1032,7 @@
     "description": "Aumenta la velocidad de trabajo del jugador en un 25.0 %"
   },
   "Vampire": {
-    "localized_name": "Vampiro",
+    "localized_name": "Vampírico",
     "description": "Al infligir daño, absorbe parte del mismo y recupera PV. Por la noche sigue trabajando sin descanso."
   },
   "Witch": {

@@ -99,6 +99,10 @@
     "localized_name": "Fuoco da campo",
     "description": "Una struttura necessaria per preparare gli ingredienti. Non ci si può fare molto, a parte cuocere alcuni semplici ingredienti. È necessario che un Pal del fuoco accenda la fiamma."
   },
+  "CandleStand": {
+    "localized_name": "-",
+    "description": null
+  },
   "Cauldron": {
     "localized_name": "Calderone da strega",
     "description": "Accelera la velocità di ogni attività relativa alla realizzazione di medicinali nella base. Anche mettendone due o più, il boost rimane uguale."
@@ -146,6 +150,18 @@
   "CoalPit": {
     "localized_name": "Cava di carbone",
     "description": "Una struttura dove produrre Carbone. Estrarre Carbone è un lavoro faticoso, che richiede forza fisica. Sono necessari Pal capaci di svolgere attività minerarie."
+  },
+  "CompositeDesk": {
+    "localized_name": "Tavolo da disegno",
+    "description": "Una struttura dove combinare più progetti per ottenere progetti di qualità maggiore."
+  },
+  "ConservationGroupBannerA": {
+    "localized_name": "-",
+    "description": null
+  },
+  "ConservationGroupBannerB": {
+    "localized_name": "-",
+    "description": null
   },
   "Container01_Iron": {
     "localized_name": "Contenitore grande",
@@ -231,6 +247,10 @@
     "localized_name": "Scrivania d'antiquariato",
     "description": "Scrivania d'antiquariato per l'arredo."
   },
+  "DimensionPalStorage": {
+    "localized_name": "Magazzino dimensionale per Pal",
+    "description": "Una struttura dove custodire grandi quantità di Pal catturati. Qualunque membro della gilda potrà depositare e ritirare Pal. In base alle impostazioni di privacy, puoi renderlo il tuo deposito per Pal esclusivo."
+  },
   "DismantlingConveyor": {
     "localized_name": "Smantella-Pal",
     "description": "Una macchina da sogno che |smantella| automaticamente i Pal inseriti."
@@ -269,7 +289,7 @@
   },
   "Expedition": {
     "localized_name": "Base delle spedizioni Pal",
-    "description": "Una struttura da cui inviare i Pal in spedizioni in dungeon e simili. I Pal in spedizione cercheranno oggetti e combatteranno, portando indietro quanto ottenuto."
+    "description": "Una struttura da cui inviare i Pal in spedizioni in dungeon e simili. I Pal in spedizione cercheranno risorse e combatteranno, riportando alla base il bottino."
   },
   "Factory_Hard_01": {
     "localized_name": "Banco da lavoro di qualità",
@@ -323,6 +343,10 @@
     "localized_name": "Statua del grande volatile",
     "description": "Un monumento in pietra che ritrae un Chikipi. Interagire con esso permette lo Spostamento Rapido."
   },
+  "FireStand": {
+    "localized_name": "-",
+    "description": null
+  },
   "FlourMill": {
     "localized_name": "Mulino",
     "description": "Una struttura dove lavorare il Grano così da ottenere Farina di grano. Sono necessari Pal competenti nell'attività |Irrigazione| per usare la ruota idraulica."
@@ -363,6 +387,10 @@
     "localized_name": "Fondamenta in vetro",
     "description": "Fondamenta su cui edificare muri e strutture. Sono in vetro incredibilmente resistente."
   },
+  "Glass_pillars": {
+    "localized_name": "Pilastro in vetro",
+    "description": "Un pilastro per sostenere l'edificio. È in vetro incredibilmente resistente."
+  },
   "Glass_roof": {
     "localized_name": "Tetto in vetro",
     "description": "Un tetto edificato su dei muri per proteggersi dagli elementi. È in vetro incredibilmente resistente."
@@ -374,6 +402,10 @@
   "Glass_wall": {
     "localized_name": "Muro in vetro",
     "description": "Un muro edificato su delle fondamenta per difendersi dagli invasori. È in vetro incredibilmente resistente."
+  },
+  "GlobalPalStorage": {
+    "localized_name": "Box per Pal globale",
+    "description": "Struttura dove puoi preservare il profilo genetico di un Pal e ripristinare un Pal a partire dal profilo salvato. È possibile trasferire i profili genetici salvati in un altro mondo."
   },
   "Globe01_Stone": {
     "localized_name": "Mappamondo d'antiquariato",
@@ -403,6 +435,10 @@
     "localized_name": "Cucina grande",
     "description": "Una struttura necessaria per cucinare gli ingredienti. È ancora più grande, più Pal possono cucinarci insieme. È necessario che un Pal del fuoco accenda la fiamma."
   },
+  "Hunter_GangFlag": {
+    "localized_name": "-",
+    "description": null
+  },
   "IceCrusher": {
     "localized_name": "Macinatore criogenico",
     "description": "Una struttura per ridurre in polvere Minerale metallico e ottenere così altri tipi di risorse. Richiede Pal competenti nell'attività |Refrigerazione| e il collegamento all'alimentazione, ma è davvero efficiente."
@@ -413,7 +449,7 @@
   },
   "ItemBooth": {
     "localized_name": "Mercatino (oggetti)",
-    "description": "Una struttura per la vendita di oggetti. Imposta una lista di oggetti da vendere agli altri giocatori."
+    "description": "Una struttura per la vendita di oggetti. Qui puoi vendere oggetti agli altri giocatori. Assegnandole un Pal del ghiaccio si rallenta il deterioramento del cibo."
   },
   "ItemChest": {
     "localized_name": "Forziere di legno",
@@ -444,7 +480,7 @@
     "description": "Edera lunga per l'arredo. Si può fissare a un muro."
   },
   "JapaneseStyle_DoorWall_01": {
-    "localized_name": "Muro con porta in stile giapponese",
+    "localized_name": "Muro con porta in stile giapponese A",
     "description": "Una porta d'ingresso edificata su delle fondamenta. È in un raffinato stile giapponese."
   },
   "JapaneseStyle_DoorWall_02": {
@@ -476,7 +512,7 @@
     "description": "Fondamenta su cui edificare muri e strutture. Sono in un raffinato stile giapponese."
   },
   "JapaneseStyle_roof_01": {
-    "localized_name": "Tetto in stile giapponese",
+    "localized_name": "Tetto in stile giapponese A",
     "description": "Un tetto edificato su dei muri per proteggersi dagli elementi. Ha un esterno in tatami. È in un raffinato stile giapponese."
   },
   "JapaneseStyle_roof_02": {
@@ -555,6 +591,10 @@
     "localized_name": "Lampione elegante",
     "description": "Un lampione alla moda per l'illuminazione stradale. Per accenderlo è necessaria l'elettricità."
   },
+  "LilyQueenStatue": {
+    "localized_name": "-",
+    "description": null
+  },
   "MachineGame01_Iron": {
     "localized_name": "Gioco a premi con gru",
     "description": "Un gioco a premi per l'arredo. È rotto, quindi non ci si può giocare."
@@ -619,6 +659,10 @@
     "localized_name": "Fondamenta in metallo",
     "description": "Fondamenta su cui edificare muri e strutture. Sono in metallo, quindi sono molto resistenti."
   },
+  "Metal_pillars": {
+    "localized_name": "Pilastro in metallo",
+    "description": "Un pilastro per sostenere un edificio. È in metallo, quindi è molto resistente."
+  },
   "Metal_roof": {
     "localized_name": "Tetto in metallo",
     "description": "Un tetto edificato su dei muri per proteggersi dagli elementi. È in metallo, quindi è molto resistente."
@@ -669,11 +713,15 @@
   },
   "PalBooth": {
     "localized_name": "Mercatino (Pal)",
-    "description": "Una struttura per la vendita di Pal. Imposta una lista di Pal da vendere agli altri giocatori."
+    "description": "Una struttura per la vendita di Pal. Qui puoi vendere Pal agli altri giocatori. Assegnandole un Pal del ghiaccio si rallenta il deterioramento del cibo presente."
   },
   "PalBoxV2": {
     "localized_name": "Box per Pal",
     "description": "Una struttura dove tenere sotto custodia i Pal catturati. Un Pal nel box recupera lentamente PV. La tua base si svilupperà intorno a questa struttura."
+  },
+  "PalCage": {
+    "localized_name": "-",
+    "description": null
   },
   "PalFoodBox": {
     "localized_name": "Mangiatoia",
@@ -935,6 +983,10 @@
     "localized_name": "Fondamenta in pietra",
     "description": "Fondamenta su cui edificare muri e strutture. Sono in pietra, quindi sono abbastanza resistenti."
   },
+  "Stone_pillar": {
+    "localized_name": "Pilastro in pietra",
+    "description": "Un pilastro per sostenere un edificio. È in pietra, quindi è abbastanza resistente."
+  },
   "Stone_roof": {
     "localized_name": "Tetto in pietra",
     "description": "Un tetto edificato su dei muri per proteggersi dagli elementi. È in pietra, quindi è abbastanza resistente."
@@ -1139,6 +1191,10 @@
     "localized_name": "Torcia a muro",
     "description": "Una fonte di luce per illuminare la base di notte. Può essere fissata a un muro. È necessario che un Pal del fuoco accenda la fiamma."
   },
+  "WallTorch02": {
+    "localized_name": "-",
+    "description": null
+  },
   "WeaponFactory_Dirty_01": {
     "localized_name": "Banco da lavoro per armi",
     "description": "Un banco da lavoro dove realizzare armi e munizioni. Lo spazio di lavoro è molto piccolo e non è possibile produrre armi di qualità. Sono necessari Pal capaci di svolgere lavoro manuale."
@@ -1150,6 +1206,10 @@
   "WeaponFactory_Dirty_03": {
     "localized_name": "Fabbrica per la produzione in serie di armi II",
     "description": "Una fabbrica dove realizzare armi e munizioni. Le fasi di lavoro sono state perfezionate, permettendo di produrre armi di qualità. Sono necessari Pal capaci di svolgere lavoro manuale."
+  },
+  "Wire_Fence": {
+    "localized_name": "-",
+    "description": null
   },
   "Wood_Gate": {
     "localized_name": "Cancello in legno",
@@ -1167,6 +1227,10 @@
     "localized_name": "Muro con finestra in legno",
     "description": "Un muro con finestre, edificato su delle fondamenta per difendersi dagli invasori. È in legno, quindi è piuttosto fragile."
   },
+  "WoodenBarricade": {
+    "localized_name": "-",
+    "description": null
+  },
   "Wooden_DoorWall": {
     "localized_name": "Porta di legno",
     "description": "Una porta d'ingresso edificata su delle fondamenta. È in legno, quindi è piuttosto fragile."
@@ -1178,6 +1242,10 @@
   "Wooden_ladder": {
     "localized_name": "Scaletta",
     "description": "Una scaletta con cui raggiungere punti un po' più in alto."
+  },
+  "Wooden_pillar": {
+    "localized_name": "Pilastro in legno",
+    "description": "Un pilastro per sostenere un edificio. È in legno, quindi è piuttosto fragile."
   },
   "Wooden_roof": {
     "localized_name": "Tetto in legno",

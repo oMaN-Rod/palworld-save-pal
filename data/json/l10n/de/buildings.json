@@ -99,6 +99,10 @@
     "localized_name": "Lagerfeuer",
     "description": "Eine Anlage zur Zubereitung von Speisen. Mehr als ein simples Anbraten ist allerdings nicht drin. Muss von einem Feuer-Pal angefacht werden."
   },
+  "CandleStand": {
+    "localized_name": "-",
+    "description": null
+  },
   "Cauldron": {
     "localized_name": "Hexenkessel",
     "description": "Kann im Lager aufgestellt werden und erhöht das Arbeitstempo bei der Arzneimittelherstellung. Mehrere aufzustellen, bringt keinen zusätzlichen Nutzen."
@@ -146,6 +150,18 @@
   "CoalPit": {
     "localized_name": "Steinkohlemine",
     "description": "Eine Anlage zur Gewinnung von Steinkohle. Der Steinkohle-Abbau ist körperlich anstrengend. Überlasse die Arbeit Pals, die sich mit Bergbau auskennen."
+  },
+  "CompositeDesk": {
+    "localized_name": "Zeichentisch",
+    "description": "Eine Einrichtung, mit der du mehrere Baupläne zu einem höherwertigen Bauplan verbinden kannst."
+  },
+  "ConservationGroupBannerA": {
+    "localized_name": "-",
+    "description": null
+  },
+  "ConservationGroupBannerB": {
+    "localized_name": "-",
+    "description": null
   },
   "Container01_Iron": {
     "localized_name": "Große Kiste",
@@ -231,6 +247,10 @@
     "localized_name": "Antiker Schreibtisch",
     "description": "Ein dekorativer antiker Schreibtisch."
   },
+  "DimensionPalStorage": {
+    "localized_name": "Dimensionaler Pal-Speicher",
+    "description": "Eine Einrichtung zur Massenlagerung gefangener Pals. Standardmäßig können alle Gildenmitglieder darauf zugreifen, du kannst sie aber auch auf privat stellen."
+  },
   "DismantlingConveyor": {
     "localized_name": "Pal-Schlachtfließband",
     "description": "Ein Träumchen von einer Maschine, mit der sich Pals automatisch schlachten lassen."
@@ -269,7 +289,7 @@
   },
   "Expedition": {
     "localized_name": "Expeditionszentrale",
-    "description": "Eine Einrichtung, von wo aus du Pals auf Expeditionen entsenden kannst. Die entsandten Pals führen am jeweiligen Zielort Kämpfe durch, sammeln Gegenstände und bringen Ressourcen ins Lager zurück."
+    "description": "Eine Einrichtung, von wo aus du Pals auf Expeditionen entsenden kannst. Die entsandten Pals führen am jeweiligen Zielort Kämpfe durch, sammeln Ressourcen und bringen ihre Beute ins Lager zurück."
   },
   "Factory_Hard_01": {
     "localized_name": "Hochwertige Werkbank",
@@ -323,6 +343,10 @@
     "localized_name": "Adlerstatue",
     "description": "Ein Steinmonument in Gestalt eines Chikipi. Errichte es, um Schnellreisen zu ermöglichen."
   },
+  "FireStand": {
+    "localized_name": "-",
+    "description": null
+  },
   "FlourMill": {
     "localized_name": "Mühle",
     "description": "Eine Anlage, um aus Weizen Mehl zu mahlen. Um das Wasserrad zu drehen, benötigt man einen Pal, der „Gießen“ beherrscht."
@@ -363,6 +387,10 @@
     "localized_name": "Glasfundament",
     "description": "Ein Fundament, worauf du Wände oder Gebäude errichten kannst. Ist aus Hartglas und dadurch sehr robust."
   },
+  "Glass_pillars": {
+    "localized_name": "Glassäule",
+    "description": "Eine Säule zum Abstützen von Gebäuden. Ist aus Hartglas und dadurch sehr robust."
+  },
   "Glass_roof": {
     "localized_name": "Glasdach",
     "description": "Ein Dach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist aus Hartglas und dadurch sehr robust."
@@ -374,6 +402,10 @@
   "Glass_wall": {
     "localized_name": "Glaswand",
     "description": "Eine Wand, die du auf einem Fundament errichten kannst, um Eindringlinge fernzuhalten. Ist aus Hartglas und dadurch sehr robust."
+  },
+  "GlobalPalStorage": {
+    "localized_name": "Globale Pal-Box",
+    "description": "Hier kannst du die genetischen Daten von Pals speichern und Pals aus ihren gespeicherten genetischen Daten wiederherstellen. Außerdem kannst du gespeicherte Daten in andere Welten übertragen."
   },
   "Globe01_Stone": {
     "localized_name": "Antiker Globus",
@@ -389,7 +421,7 @@
   },
   "HatchingPalEgg": {
     "localized_name": "Brutkasten",
-    "description": "Ein Gerät zum Ausbrüten von Pal-Ei. Lege ein Pal-Ei hinein, und es wird automatisch ausgebrütet. Du musst nur etwas Geduld mitbringen."
+    "description": "Ein Gerät zum Ausbrüten von Pal-Eiern. Lege ein Pal-Ei hinein, und es wird automatisch ausgebrütet. Du musst nur etwas Geduld mitbringen."
   },
   "Headstone": {
     "localized_name": "Grabstein",
@@ -403,6 +435,10 @@
     "localized_name": "Großküche",
     "description": "Eine Anlage zur Zubereitung von Speisen. Dank ihrer Größe können hier mehrere Pals gemeinsam kochen. Muss von einem Feuer-Pal angefacht werden."
   },
+  "Hunter_GangFlag": {
+    "localized_name": "-",
+    "description": null
+  },
   "IceCrusher": {
     "localized_name": "Gefrierzerkleinerer",
     "description": "Eine Anlage zum Zerkleinern und Umwandeln von Erz. Für den Betrieb benötigt man Strom sowie einen Pal, der „Kühlung“ beherrscht. Sehr effizient."
@@ -413,7 +449,7 @@
   },
   "ItemBooth": {
     "localized_name": "Flohmarkt (Gegenstände)",
-    "description": "Eine Einrichtung zum Verkauf von Gegenständen. Fülle deine Angebotsliste mit Gegenständen, um sie anderen Spielern zum Verkauf anzubieten."
+    "description": "Eine Einrichtung zum Verkauf von Gegenständen an andere Spieler. Weise einen Eis-Pal zu, um den Inhalt länger frisch zu halten."
   },
   "ItemChest": {
     "localized_name": "Holztruhe",
@@ -444,7 +480,7 @@
     "description": "Eine dekorative breite Efeupflanze. Muss an einer Wand angebracht werden."
   },
   "JapaneseStyle_DoorWall_01": {
-    "localized_name": "Fernöstliche Wand mit Tür",
+    "localized_name": "Fernöstliche Wand mit Tür A",
     "description": "Eine Eingangstür, die du auf einem Fundament errichten kannst. Besticht mit fernöstlicher Eleganz."
   },
   "JapaneseStyle_DoorWall_02": {
@@ -476,7 +512,7 @@
     "description": "Ein Fundament, worauf du Wände oder Gebäude errichten kannst. Besticht mit fernöstlicher Eleganz."
   },
   "JapaneseStyle_roof_01": {
-    "localized_name": "Fernöstliches Dach",
+    "localized_name": "Fernöstliches Dach A",
     "description": "Ein Dach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Die Oberseite ist aus Tatami-Matten. Besticht mit fernöstlicher Eleganz."
   },
   "JapaneseStyle_roof_02": {
@@ -555,6 +591,10 @@
     "localized_name": "Elegante Straßenlaterne",
     "description": "Eine elegante Straßenlaterne. Benötigt zum Leuchten Strom."
   },
+  "LilyQueenStatue": {
+    "localized_name": "-",
+    "description": null
+  },
   "MachineGame01_Iron": {
     "localized_name": "Greifautomat",
     "description": "Ein dekorativer Greifautomat. Ist leider kaputt. Plüsch-Pals kannst du hier keine ziehen."
@@ -619,6 +659,10 @@
     "localized_name": "Metallfundament",
     "description": "Ein Fundament, worauf du Wände oder Gebäude errichten kannst. Ist aus Metall und dadurch extrem solide."
   },
+  "Metal_pillars": {
+    "localized_name": "Metallsäule",
+    "description": "Eine Säule zum Abstützen von Gebäuden. Ist aus Metall und dadurch extrem solide."
+  },
   "Metal_roof": {
     "localized_name": "Metalldach",
     "description": "Ein Dach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist aus Metall und dadurch extrem solide."
@@ -669,11 +713,15 @@
   },
   "PalBooth": {
     "localized_name": "Flohmarkt (Pals)",
-    "description": "Eine Einrichtung zum Verkauf von Pals. Fülle deine Angebotsliste mit Pals, um sie anderen Spielern zum Verkauf anzubieten."
+    "description": "Eine Einrichtung zum Verkauf von Pals an andere Spieler. Weise einen Eis-Pal zu, um erhaltene Lebensmittel länger frisch zu halten."
   },
   "PalBoxV2": {
     "localized_name": "Pal-Box",
     "description": "Eine Anlage zur Aufbewahrung gefangener Pals. Den Pals in der Box werden nach und nach LP wiederhergestellt. Der Bereich ringsum ist dein Lager."
+  },
+  "PalCage": {
+    "localized_name": "-",
+    "description": null
   },
   "PalFoodBox": {
     "localized_name": "Futtertrog",
@@ -935,6 +983,10 @@
     "localized_name": "Steinfundament",
     "description": "Ein Fundament, worauf du Wände oder Gebäude errichten kannst. Ist aus Stein und dadurch ziemlich robust."
   },
+  "Stone_pillar": {
+    "localized_name": "Steinsäule",
+    "description": "Eine Säule zum Abstützen von Gebäuden. Ist aus Stein und dadurch ziemlich robust."
+  },
   "Stone_roof": {
     "localized_name": "Steindach",
     "description": "Ein Dach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist aus Stein und dadurch ziemlich robust."
@@ -1139,6 +1191,10 @@
     "localized_name": "Wandfackel",
     "description": "Eine Lichtquelle, die dein Lager auch in dunklen Nächten erhellt. Kann an Wänden angebracht werden. Muss von einem Feuer-Pal angefacht werden."
   },
+  "WallTorch02": {
+    "localized_name": "-",
+    "description": null
+  },
   "WeaponFactory_Dirty_01": {
     "localized_name": "Waffen-Werkbank",
     "description": "Eine Werkbank zur Fertigung von Waffen und Munition. Bietet noch wenig Platz und allzu gute Waffen können hier nicht gebaut werden. Für die Arbeit benötigt man Pals, die Handwerk beherrschen."
@@ -1150,6 +1206,10 @@
   "WeaponFactory_Dirty_03": {
     "localized_name": "Waffen-Fließbandwerk II",
     "description": "Eine Werkstatt zur Fertigung von Waffen und Munition. Durch Spezialisierung können nun modernste Waffen gebaut werden. Für die Arbeit benötigt man Pals, die Handwerk beherrschen."
+  },
+  "Wire_Fence": {
+    "localized_name": "-",
+    "description": null
   },
   "Wood_Gate": {
     "localized_name": "Holztor",
@@ -1167,6 +1227,10 @@
     "localized_name": "Holzwand mit Fenster",
     "description": "Eine Wand mit Fenster, die du auf einem Fundament errichten kannst, um Eindringlinge fernzuhalten. Ist aus Holz und nicht sonderlich stabil."
   },
+  "WoodenBarricade": {
+    "localized_name": "-",
+    "description": null
+  },
   "Wooden_DoorWall": {
     "localized_name": "Holztür",
     "description": "Eine Eingangstür, die du auf einem Fundament errichten kannst. Ist aus Holz und nicht sonderlich stabil."
@@ -1178,6 +1242,10 @@
   "Wooden_ladder": {
     "localized_name": "Leiter",
     "description": "Wenn du mal etwas höher hinaus willst."
+  },
+  "Wooden_pillar": {
+    "localized_name": "Holzsäule",
+    "description": "Eine Säule zum Abstützen von Gebäuden. Ist aus Holz und nicht sonderlich stabil."
   },
   "Wooden_roof": {
     "localized_name": "Holzdach",

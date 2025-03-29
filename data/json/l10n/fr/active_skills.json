@@ -1,14 +1,14 @@
 {
   "EPalWazaID::AcidRain": {
-    "localized_name": "Pluie acide",
+    "localized_name": "Pluie Acide",
     "description": "Crée un nuage qui fait pleuvoir de l'acide au-dessus de l'ennemi."
   },
   "EPalWazaID::AirBlade": {
-    "localized_name": "Lame aérienne",
+    "localized_name": "Lame Aérienne",
     "description": "Libère des lames d'air tranchantes en forme d'éventail."
   },
   "EPalWazaID::AirCanon": {
-    "localized_name": "Canon à air",
+    "localized_name": "Canon à Air",
     "description": "Tire une masse d'air à grande vitesse."
   },
   "EPalWazaID::Apocalypse": {
@@ -16,15 +16,15 @@
     "description": "Génère des tornades sombres autour de l'ennemi."
   },
   "EPalWazaID::AquaJet": {
-    "localized_name": "Jet d'eau",
+    "localized_name": "Jet d'Eau",
     "description": "Tire des balles d'eau rapides sur l'ennemi."
   },
   "EPalWazaID::BeamSlicer": {
-    "localized_name": "Tranche-faisceau",
+    "localized_name": "Tranche-Faisceau",
     "description": "Un faisceau lumineux imprégné de force draconique balaie droit devant. La zone touchée explose en différé."
   },
   "EPalWazaID::BlastCanon": {
-    "localized_name": "Canon explosif",
+    "localized_name": "Canon Explosif",
     "description": "Tire un projectile d'énergie imprégné du pouvoir draconique sur l'ennemi. Le projectile se fragmente à l'impact pour créer des explosions sur la zone face à lui."
   },
   "EPalWazaID::BlizzardLance": {
@@ -32,19 +32,15 @@
     "description": "Fait apparaître des lames de glace tranchantes sous les pieds de l'ennemi."
   },
   "EPalWazaID::BubbleShot": {
-    "localized_name": "Tir bulleux",
+    "localized_name": "Tir Bulleux",
     "description": "Tire de nombreuses bulles qui poursuivent lentement l'ennemi."
   },
   "EPalWazaID::BubbleShower": {
-    "localized_name": "Douche toxique",
+    "localized_name": "Douche Toxique",
     "description": "Concentre son énergie pour disperser des boules de poison dans toutes les directions."
   },
-  "EPalWazaID::ChaosLaser": {
-    "localized_name": "Laser chaotique",
-    "description": "fr_Text"
-  },
   "EPalWazaID::ChargeCanon": {
-    "localized_name": "Canon chargé",
+    "localized_name": "Canon Chargé",
     "description": "Tire une boule d'énergie contenant le pouvoir des dragons sur l'ennemi. Celle-ci provoque une grosse explosion à l'impact."
   },
   "EPalWazaID::Commet": {
@@ -52,103 +48,103 @@
     "description": "Fait tomber une météorite à la verticale pour créer une onde de choc dans les environs."
   },
   "EPalWazaID::CommetRain": {
-    "localized_name": "Pluie de météorites",
+    "localized_name": "Pluie de Météorites",
     "description": "Fait tomber d'innombrables météorites pour créer des ondes de choc dans les environs."
   },
   "EPalWazaID::CrossThunder": {
-    "localized_name": "Éclairs croisés",
+    "localized_name": "Éclairs Croisés",
     "description": "Génère des éclairs qui se déplacent dans deux directions pour prendre l'ennemi en tenaille."
   },
   "EPalWazaID::DarkArrow": {
-    "localized_name": "Flèche noire",
+    "localized_name": "Flèche Noire",
     "description": "Tire plusieurs flèches de ténèbres successives qui traquent l'ennemi."
   },
   "EPalWazaID::DarkBall": {
-    "localized_name": "Balle sombre",
+    "localized_name": "Balle Sombre",
     "description": "Tire des boules de ténèbres qui poursuivent lentement l'ennemi."
   },
   "EPalWazaID::DarkCanon": {
-    "localized_name": "Canon noir",
+    "localized_name": "Canon Noir",
     "description": "Tire un projectile d'énergie imprégné du pouvoir des ténèbres sur l'ennemi."
   },
   "EPalWazaID::DarkLaser": {
-    "localized_name": "Laser noir",
+    "localized_name": "Laser Noir",
     "description": "Accumule l'énergie obscure pour tirer un puissant rayon sur l'ennemi."
   },
   "EPalWazaID::DarkLegion": {
-    "localized_name": "Légion sombre",
+    "localized_name": "Légion Sombre",
     "description": "Tire plusieurs boules de ténèbres qui poursuivent l'ennemi."
   },
   "EPalWazaID::DarkPulse": {
-    "localized_name": "Noirceur expansive",
+    "localized_name": "Noirceur Expansive",
     "description": "Génère des sphères de ténèbres qui se propagent rapidement en forme d'éventail."
   },
   "EPalWazaID::DarkWave": {
-    "localized_name": "Éclat d'ombre",
+    "localized_name": "Éclat d'Ombre",
     "description": "Libère rapidement le pouvoir des ténèbres pour toucher toute la zone autour de lui."
   },
   "EPalWazaID::DiamondFall": {
-    "localized_name": "Chute de diamants",
+    "localized_name": "Chute de Diamants",
     "description": "Fait s'abattre des blocs de glace à la chaîne sur l'ennemi."
   },
   "EPalWazaID::DoubleIcicleThrow": {
-    "localized_name": "Double morsure blizzard",
+    "localized_name": "Double Morsure blizzard",
     "description": "Génère deux énormes blocs de glace pour les lancer successivement sur l'ennemi. L'onde de choc impacte également la zone environnante."
   },
   "EPalWazaID::DragonBreath": {
-    "localized_name": "Souffle draconique",
+    "localized_name": "Souffle Draconique",
     "description": "Expulse un air chargé du pouvoir des dragons droit devant pour infliger des dégâts en continu."
   },
   "EPalWazaID::DragonCanon": {
-    "localized_name": "Canon draconique",
+    "localized_name": "Canon Draconique",
     "description": "Tire un projectile d'énergie imprégné du pouvoir des dragons sur l'ennemi."
   },
   "EPalWazaID::DragonMeteor": {
-    "localized_name": "Météore draconique",
+    "localized_name": "Météore Draconique",
     "description": "Invoque tout un tas de petites météorites pour les lancer sur l'ennemi."
   },
   "EPalWazaID::DragonWave": {
-    "localized_name": "Éclat draconique",
+    "localized_name": "Éclat Draconique",
     "description": "Libère rapidement le pouvoir des dragons pour toucher toute la zone autour de lui."
   },
   "EPalWazaID::ElecWave": {
-    "localized_name": "Onde électrique",
+    "localized_name": "Onde Électrique",
     "description": "Produit une décharge rapide touchant toute la zone autour de lui."
   },
   "EPalWazaID::Eruption": {
-    "localized_name": "Pluie volcanique",
+    "localized_name": "Pluie Volcanique",
     "description": "Tire d'innombrables bombes volcaniques dans le ciel. Les bombes s'activent après un certain temps pour faire pleuvoir du feu autour du lanceur."
   },
   "EPalWazaID::FireBall": {
-    "localized_name": "Boule enflammée",
+    "localized_name": "Boule Enflammée",
     "description": "Génère une énorme sphère de feu au-dessus de sa tête pour la lancer sur l'ennemi. L'explosion à l'impact se propage sur une zone étendue."
   },
   "EPalWazaID::FireBlast": {
-    "localized_name": "Tir enflammé",
+    "localized_name": "Tir Enflammé",
     "description": "Tire des projectiles enflammés qui filent droit sur l'ennemi."
   },
   "EPalWazaID::FireSeed": {
-    "localized_name": "Fente enflammée",
+    "localized_name": "Flammes Scindées",
     "description": "Tire une boule de feu sur l'ennemi. Elle explose après un certain temps pour en libérer de plus petites vers l'avant."
   },
   "EPalWazaID::FlameFunnel": {
-    "localized_name": "Entonnoir enflammé",
+    "localized_name": "Concentration de Flammes",
     "description": "Génère plusieurs sphères d'énergie brûlante pour tirer d'innombrables boules de feu sur l'ennemi."
   },
   "EPalWazaID::FlameWall": {
-    "localized_name": "Mur de flammes",
+    "localized_name": "Mur de Flammes",
     "description": "Crée un mur de flammes sur la position de l'ennemi. Celui-ci demeure quelque temps et inflige des dégâts aux ennemis qui le touchent."
   },
   "EPalWazaID::Flamethrower": {
-    "localized_name": "Souffle enflammé",
+    "localized_name": "Souffle Enflammé",
     "description": "Lance des flammes sur l'ennemi pour lui infliger des dégâts en continu."
   },
   "EPalWazaID::FlareArrow": {
-    "localized_name": "Flèche de feu",
+    "localized_name": "Flèche de Feu",
     "description": "Tire 3 flèches de feu successives qui traquent l'ennemi."
   },
   "EPalWazaID::FlareTornado": {
-    "localized_name": "Tempête ardente",
+    "localized_name": "Tempête Ardente",
     "description": "Génère des tornades brûlantes des deux côtés pour assaillir l'ennemi."
   },
   "EPalWazaID::FlareTwister": {
@@ -156,55 +152,59 @@
     "description": "fr_Text"
   },
   "EPalWazaID::FrostBreath": {
-    "localized_name": "Souffle givré",
+    "localized_name": "Souffle Givré",
     "description": "Souffle de l'air glacé sur l'ennemi pour lui infliger des dégâts en continu."
   },
   "EPalWazaID::GhostFlame": {
-    "localized_name": "Flamme spirituelle",
+    "localized_name": "Flamme Spirituelle",
     "description": "Lance trois malédictions qui poursuivent inlassablement l'ennemi."
   },
   "EPalWazaID::GrassTornado": {
-    "localized_name": "Tornade verte",
+    "localized_name": "Tornade Verte",
     "description": "Génère des tornades des deux côtés pour assaillir l'ennemi."
   },
+  "EPalWazaID::GravityShot": {
+    "localized_name": "Tir Obscur",
+    "description": "Tire une balle d'énergie noire qui s'accélère progressivement en volant."
+  },
   "EPalWazaID::HolyBlast": {
-    "localized_name": "Éclat sacré",
+    "localized_name": "Explosion Sacrée",
     "description": "Crée une grosse explosion lumineuse tout autour de l'ennemi."
   },
   "EPalWazaID::Human_Punch": {
-    "localized_name": "Coup de poing",
+    "localized_name": "Coup de Poing",
     "description": "Rassemble toute sa confiance en lui dans un coup de poing."
   },
   "EPalWazaID::HydroPump": {
-    "localized_name": "Hydro-courant",
+    "localized_name": "Hydro-Laser",
     "description": "Libère de l'eau à très haute pression pour ratisser une large zone devant lui."
   },
   "EPalWazaID::HyperBeam": {
-    "localized_name": "Hyper rayon",
+    "localized_name": "Hyper Rayon",
     "description": "Accumule une énergie destructrice pour tirer un puissant rayon sur une zone étendue droit devant."
   },
   "EPalWazaID::IceAge": {
-    "localized_name": "Âge de glace",
+    "localized_name": "Ère Glaciaire",
     "description": "Plante des stalagmites aux pieds de l'ennemi sur une zone étendue."
   },
   "EPalWazaID::IceBlade": {
-    "localized_name": "Coupe-glace",
+    "localized_name": "Coupe-Glace",
     "description": "Crée une lame de glace en forme de croissant pour la projeter vers l'avant."
   },
   "EPalWazaID::IceMissile": {
-    "localized_name": "Missile glacé",
+    "localized_name": "Missile de Glace",
     "description": "Crée une stalactite dans le ciel pour la faire s'abattre sur l'ennemi."
   },
   "EPalWazaID::IcicleLine": {
-    "localized_name": "Ligne glacée",
+    "localized_name": "Ligne Glacée",
     "description": "Génère des pics de glace dans trois directions qui se déplacent en ligne droite."
   },
   "EPalWazaID::IciclePierce": {
-    "localized_name": "Stalagballe",
+    "localized_name": "Grêle Tranchante",
     "description": "Crée des stalactites dans le ciel pour les faire s'abattre sur l'ennemi."
   },
   "EPalWazaID::IcicleThrow": {
-    "localized_name": "Morsure du blizzard",
+    "localized_name": "Morsure du Blizzard",
     "description": "Génère un énorme bloc de glace pour le lancer à toute vitesse sur l'ennemi. L'onde de choc impacte également la zone environnante."
   },
   "EPalWazaID::Inferno": {
@@ -212,7 +212,7 @@
     "description": "Imprègne le sol autour de l'ennemi pour le faire exploser après un certain temps."
   },
   "EPalWazaID::LightningStrike": {
-    "localized_name": "Coup de foudre",
+    "localized_name": "Coup de Foudre",
     "description": "Fait s'abattre la foudre en faisant office de paratonnerre pour provoquer une explosion électrique."
   },
   "EPalWazaID::LineGeyser": {
@@ -220,91 +220,91 @@
     "description": "Génère une colonne d'eau qui se déplace en ligne droite."
   },
   "EPalWazaID::LineThunder": {
-    "localized_name": "Éclair horizontal",
+    "localized_name": "Éclair Horizontal",
     "description": "Génère un éclair qui se déplace en ligne droite."
   },
   "EPalWazaID::LockonLaser": {
-    "localized_name": "Laser chercheur",
+    "localized_name": "Laser Chercheur",
     "description": "Verrouille l'ennemi et tire un laser de foudre ultra-rapide."
   },
   "EPalWazaID::MudShot": {
-    "localized_name": "Tir boueux",
+    "localized_name": "Tir Boueux",
     "description": "Lance de la boue collante sur l'ennemi."
   },
   "EPalWazaID::PoisonFog": {
-    "localized_name": "Nuage toxique",
+    "localized_name": "Nuage Toxique",
     "description": "Génère un brouillard toxique droit devant qui empoisonne l'adversaire."
   },
   "EPalWazaID::PoisonShot": {
-    "localized_name": "Tir empoisonné",
+    "localized_name": "Tir Empoisonné",
     "description": "Tire une flaque saturée de poison sur l'ennemi."
   },
   "EPalWazaID::PowerBall": {
-    "localized_name": "Rayon puissant",
+    "localized_name": "Boule d'Énergie",
     "description": "Accumule une grande quantité d'énergie pour former et tirer une énorme boule."
   },
   "EPalWazaID::PowerShot": {
-    "localized_name": "Tir puissant",
+    "localized_name": "Tir Puissant",
     "description": "Accumule de l'énergie pour former et tirer un projectile."
   },
   "EPalWazaID::PredatorBeam": {
-    "localized_name": "Rayon prédateur",
+    "localized_name": "Rayon Prédateur",
     "description": null
   },
   "EPalWazaID::PredatorLockon": {
-    "localized_name": "Ciblage prédateur",
+    "localized_name": "Ciblage Prédateur",
     "description": null
   },
   "EPalWazaID::PredatorWave": {
-    "localized_name": "Vague prédatrice",
+    "localized_name": "Vague Prédatrice",
     "description": null
   },
   "EPalWazaID::Psychokinesis": {
-    "localized_name": "Gravité psy",
+    "localized_name": "Gravité Psy",
     "description": "Entrave les ennemis environnants avec la psychokinésie et les écrase au sol après les avoir élevés en hauteur."
   },
   "EPalWazaID::RaidCutter": {
-    "localized_name": "Pale à vent",
+    "localized_name": "Tranche-Rafale",
     "description": "Tire d'innombrables lames de vent qui filent droit sur l'ennemi."
   },
   "EPalWazaID::Railbolt": {
-    "localized_name": "Railbolt",
+    "localized_name": "Canon Fulgurant",
     "description": "Accumule l'énergie orageuse au maximum pour frapper l'ennemi de plusieurs chocs électriques simultanés."
   },
   "EPalWazaID::RangeThunder": {
-    "localized_name": "Tonnerre omniprésent",
+    "localized_name": "Tonnerre Omniprésent",
     "description": "Crée des éclairs qui se déplacent en ligne droite dans toutes les directions."
   },
   "EPalWazaID::RockBeat": {
-    "localized_name": "Fracas rocheux",
+    "localized_name": "Fracas Rocheux",
     "description": "Le sol tremble pour faire remonter une énorme masse rocheuse à la surface."
   },
   "EPalWazaID::RockLance": {
-    "localized_name": "Lance-roche",
+    "localized_name": "Lance-Roche",
     "description": "Fait apparaître des pics rocheux tranchants sous les pieds de l'ennemi."
   },
   "EPalWazaID::RootAttack": {
-    "localized_name": "Lierre rampant",
+    "localized_name": "Lierre Rampant",
     "description": "Ses racines acérées dans le sol pourchassent l'ennemi et le transpercent sous ses pieds."
   },
   "EPalWazaID::RootLance": {
-    "localized_name": "Lierre circulaire",
+    "localized_name": "Lierre Circulaire",
     "description": "Tire des racines coupantes tout autour de l'ennemi."
   },
   "EPalWazaID::SandTornado": {
-    "localized_name": "Tornade de sable",
+    "localized_name": "Tornade de Sable",
     "description": "Génère des tornades de sable des deux côtés pour assaillir l'ennemi."
   },
   "EPalWazaID::SandTwister": {
-    "localized_name": "Tornade de sable",
-    "description": "Génère plusieurs tornades de sable qui tournent en dessinant des cercles."
+    "localized_name": "Tourbillon de Sable",
+    "description": "Génère plusieurs tourbillons de sable qui tournent en dessinant des cercles."
   },
   "EPalWazaID::SeedMachinegun": {
-    "localized_name": "Mitraille-graines",
+    "localized_name": "Mitraille-Graines",
     "description": "Libère une salve de graines dures comme la pierre pour attaquer les ennemis devant lui."
   },
   "EPalWazaID::SeedMine": {
-    "localized_name": "Explose-graines",
+    "localized_name": "Explose-Graines",
     "description": "Tire des graines létales qui explosent au contact de l'ennemi."
   },
   "EPalWazaID::SelfDestruct": {
@@ -312,71 +312,75 @@
     "description": "Joue le tout pour le tout en s'autodétruisant. A pour effet de le mettre K.O."
   },
   "EPalWazaID::SelfDestruct_Bee": {
-    "localized_name": "Silence",
+    "localized_name": "Sacrifice Ultime",
     "description": "Joue le tout pour le tout en s'autodétruisant. Une technique d'honneur basée sur le sacrifice."
   },
   "EPalWazaID::SelfExplosion": {
-    "localized_name": "Autodestruction MT",
+    "localized_name": "Autodestruction Ultime",
     "description": "Crée une énorme explosion au prix de sa propre vie. Il peut ensuite aller rejoindre les étoiles dans le ciel."
   },
   "EPalWazaID::ShadowBall": {
-    "localized_name": "Balle cauchemar",
+    "localized_name": "Balle Cauchemar",
     "description": "Génère une grosse sphère d'ombre pour la lancer à toute vitesse sur l'ennemi."
   },
   "EPalWazaID::ShokeiLaser": {
-    "localized_name": "Laser létal",
+    "localized_name": "Laser Léthal",
     "description": "Verrouille l'ennemi et tire plusieurs lasers de foudre ultra-rapides."
   },
   "EPalWazaID::SolarBeam": {
-    "localized_name": "Rayon solaire",
+    "localized_name": "Rayon Solaire",
     "description": "Accumule l'énergie solaire pour tirer un puissant rayon sur l'ennemi."
   },
   "EPalWazaID::SpecialCutter": {
-    "localized_name": "Multi-coupe",
+    "localized_name": "Multi-Coupe",
     "description": "Tire 3 lames de vent supersonique qui filent droit sur l'ennemi."
   },
   "EPalWazaID::SpreadPulse": {
-    "localized_name": "Tir étincelant",
+    "localized_name": "Tir Étincelant",
     "description": "Génère des sphères de foudre qui se propagent en forme d'éventail."
   },
   "EPalWazaID::StarMine": {
-    "localized_name": "Mine d'étoiles",
+    "localized_name": "Pluie d'Étoiles",
     "description": "Fait apparaître des étoiles autour de l'ennemi qui explosent au contact. Les étoiles explosent également après un certain temps."
   },
   "EPalWazaID::StoneShotgun": {
-    "localized_name": "Explosion rocailleuse",
+    "localized_name": "Explosion Rocailleuse",
     "description": "Projette une multitude de pierres vers l'avant."
   },
   "EPalWazaID::ThreeCommet": {
-    "localized_name": "Chute de comètes",
+    "localized_name": "Chute de Comètes",
     "description": "Fait tomber des météorites en continu pour créer des ondes de choc dans les environs."
   },
   "EPalWazaID::ThreeThunder": {
-    "localized_name": "Triple éclair",
+    "localized_name": "Triple Éclair",
     "description": "Fait s'abattre trois éclairs au-dessus de l'ennemi."
   },
   "EPalWazaID::ThrowRock": {
-    "localized_name": "Canon à pierre",
+    "localized_name": "Canon à Pierre",
     "description": "Extrait un rocher du sol devant lui pour le lancer sur l'ennemi."
   },
   "EPalWazaID::ThunderBall": {
-    "localized_name": "Boule de foudre",
+    "localized_name": "Boule de Foudre",
     "description": "Tire des boules de foudre qui poursuivent lentement l'ennemi."
   },
   "EPalWazaID::ThunderFunnel": {
-    "localized_name": "Cheminée plasmique",
+    "localized_name": "Boule de Plasma",
     "description": "Génère deux sphères d'énergie orageuse pour envoyer d'innombrables boules de foudre sur l'ennemi."
   },
   "EPalWazaID::ThunderRain": {
-    "localized_name": "Pluie foudroyante",
+    "localized_name": "Pluie Foudroyante",
     "description": "Invoque le tonnerre pour faire s'abattre la foudre après un certain temps."
   },
+  "EPalWazaID::ThunderSpear": {
+    "localized_name": "Javelot Orageux",
+    "description": "Un Javelot de foudre qui vole en ligne droite est lancé à grande vitesse vers l'ennemi."
+  },
   "EPalWazaID::ThunderStorm": {
-    "localized_name": "Tempête éclair",
+    "localized_name": "Tempête Éclair",
     "description": "Crée une gigantesque tornade orageuse qui se déplace lentement vers l'ennemi."
   },
   "EPalWazaID::Thunderbolt": {
-    "localized_name": "Éclair fulgurant",
+    "localized_name": "Éclair Fulgurant",
     "description": "Accumule l'énergie orageuse pour libérer un puissant choc électrique sur l'ennemi."
   },
   "EPalWazaID::Tremor": {
@@ -384,207 +388,203 @@
     "description": "Fait trembler le sol pour faire voler des rochers autour de soi."
   },
   "EPalWazaID::TriSpark": {
-    "localized_name": "Triple étincelle",
+    "localized_name": "Triple Étincelle",
     "description": "Tire une boule de foudre rapide en ligne droite et une boule de foudre lente qui poursuit l'ennemi."
   },
-  "EPalWazaID::TripleCannon": {
-    "localized_name": "Triple canon",
-    "description": "fr_Text"
-  },
   "EPalWazaID::Unique_Alpaca_Tackle": {
-    "localized_name": "Tacle duveteux",
+    "localized_name": "Tacle Duveteux",
     "description": "Compétence exclusive à Melpaca. Charge vers l'avant enveloppé d'une jolie aura."
   },
   "EPalWazaID::Unique_AmaterasuWolf_Dark_DarkCharge": {
-    "localized_name": "Éclair ardent de l'ombre",
+    "localized_name": "Éclair Ardent de l'Ombre",
     "description": "Compétence exclusive à Kitsun Noct. Enveloppe tout son corps de flammes violettes avant de charger violemment."
   },
   "EPalWazaID::Unique_AmaterasuWolf_FireCharge": {
-    "localized_name": "Inébranlable",
+    "localized_name": "Flammes Azur",
     "description": "Compétence exclusive à Kitsun. Enveloppe tout son corps de flammes bleues avant de charger violemment."
   },
   "EPalWazaID::Unique_Anubis_GroundPunch": {
-    "localized_name": "Fracasse-sol",
+    "localized_name": "Fracasse-Sol",
     "description": "Compétence réservée à Anubis. S'envole haut dans les airs avant de frapper le sol. L'impact se propage pour infliger des dégâts sur une zone étendue."
   },
   "EPalWazaID::Unique_Anubis_LowRoundKick": {
-    "localized_name": "Fauchage bas",
+    "localized_name": "Coup de Pied tournoyant",
     "description": "Compétence réservée à Anubis. Utilise ses puissantes jambes pour donner un coup de pied circulaire fauchant une large zone."
   },
   "EPalWazaID::Unique_Anubis_Tackle": {
-    "localized_name": "Tacle puissant",
+    "localized_name": "Frappe Énergique",
     "description": "Compétence réservée à Anubis. Se déplace à grande vitesse pour pourchasser l'ennemi et libère toute son énergie dans un puissant coup de poing."
   },
   "EPalWazaID::Unique_Baphomet_SwallowKite": {
-    "localized_name": "Griffe infernale",
+    "localized_name": "Griffe Infernale",
     "description": "Compétence exclusive à Incineram. S'approche en donnant des coups de griffes sautés avec sa patte gauche, suivis de coups de griffes rapides vers le bas avec sa patte droite."
   },
   "EPalWazaID::Unique_BirdDragon_FireBreath": {
-    "localized_name": "Souffle aérien",
+    "localized_name": "Souffle Aérien",
     "description": "Compétence exclusive à Vanwyrm. Avance droit devant en crachant du feu."
   },
   "EPalWazaID::Unique_BirdDragon_Ice_IceBreath": {
-    "localized_name": "Blizzard volant",
+    "localized_name": "Tempête de Glace",
     "description": "Compétence exclusive à Vanwyrm Cryst. Avance droit devant en crachant du froid."
   },
   "EPalWazaID::Unique_BlackCentaur_TwoSpearRushes": {
-    "localized_name": "Lance double",
+    "localized_name": "Lance Double",
     "description": "Compétence exclusive à Necromus. Charge vers l'avant en faisant tourbillonner les lances dans ses mains en alternance."
   },
   "EPalWazaID::Unique_BlackGriffon_TackleLaser": {
-    "localized_name": "Catastrophe divine",
+    "localized_name": "Catastrophe Divine",
     "description": "Compétence exclusive à Shadowbeak. Fait apparaître une boule lumineuse tout en chargeant. La boule suit l'ennemi automatiquement en libérant une multitude de lasers."
   },
   "EPalWazaID::Unique_BlackGriffon_TackleLaser2": {
-    "localized_name": "Catastrophe divine II",
+    "localized_name": "Catastrophe Divine II",
     "description": "Compétence exclusive à Shadowbeak. Émet d'innombrables rayons bleus depuis le halo sur son corps en chargeant. Les rayons capturent et poursuivent automatiquement l'ennemi."
   },
   "EPalWazaID::Unique_BlackMetalDragon_FirePunch": {
-    "localized_name": "Poing brûlant",
+    "localized_name": "Poing Brûlant",
     "description": "Compétence exclusive à Astegon. Après avoir asséné deux coups de poing devant lui, libère un souffle de type dragon vers le bas."
   },
   "EPalWazaID::Unique_BluePlatypus_Toboggan": {
-    "localized_name": "Coud'surf",
+    "localized_name": "Coud'Surf",
     "description": null
   },
   "EPalWazaID::Unique_BlueThunderHorse_FlashDash": {
-    "localized_name": "Flash écrasant",
+    "localized_name": "Flash Écrasant",
     "description": "Compétence exclusive à Azurmane. Se déplace à la vitesse de l'éclair pour engloutir tout ce qui orbite autour de lui."
   },
   "EPalWazaID::Unique_Boar_Tackle": {
-    "localized_name": "Ruée mortelle",
+    "localized_name": "Charge Furieuse",
     "description": "Compétence réservée à Rushoar. Verrouille l'ennemi et se jette férocement dessus."
   },
   "EPalWazaID::Unique_CaptainPenguin_BodySlide": {
-    "localized_name": "Capitaine glissade",
+    "localized_name": "Capitaine Glissade",
     "description": "Compétence exclusive à Penking. S'allonge à plat ventre et émet de l'air froid pour glisser et entrer en collision avec l'ennemi."
   },
   "EPalWazaID::Unique_ChickenPal_ChickenPeck": {
-    "localized_name": "Coup de bec",
+    "localized_name": "Coup de Bec",
     "description": "Compétence réservée à Chikipi. Bondit sur l'ennemi pour l'assaillir avec son bec pointu."
   },
   "EPalWazaID::Unique_DarkAlien_JumpScractch": {
-    "localized_name": "Griffe maléfique",
+    "localized_name": "Griffe Maléfique",
     "description": "Compétence exclusive à Xenovader. Bondit sur sa cible et la lacère de sa main gauche."
   },
   "EPalWazaID::Unique_DarkCrow_TelePoke": {
-    "localized_name": "Assaut fantôme",
+    "localized_name": "Assaut Fantôme",
     "description": "Compétence exclusive à Cawgnito. Se téléporte à proximité de l'ennemi pour l'assaillir de coups de bec."
   },
   "EPalWazaID::Unique_DarkMechaDragon_BeamSlash": {
-    "localized_name": "Taillade rayonnante",
+    "localized_name": "Taillade Rayonnante",
     "description": "Compétence exclusive à Xenolord. Matérialise une puissante épée avec sa main droite et effectue deux taillades en se déplaçant à toute vitesse."
   },
   "EPalWazaID::Unique_DarkMechaDragon_ConvergentBeam": {
-    "localized_name": "Rayon astral",
+    "localized_name": "Rayon Astral",
     "description": "Compétence exclusive à Xenolord. Accumule l'énergie obscure pour la libérer d'un seul coup en ligne droite."
   },
   "EPalWazaID::Unique_DarkMechaDragon_FunnelLaser": {
-    "localized_name": "Laser oméga",
+    "localized_name": "Laser Oméga",
     "description": "Compétence exclusive à Xenolord. Émet une lumière destructrice directement issue de l'hyperespace dans toutes les directions pour carboniser tout ce qui se reflète dans ses yeux."
   },
   "EPalWazaID::Unique_DarkMechaDragon_SetFunnel": {
-    "localized_name": "Foret satellite",
+    "localized_name": "Ailes Traqueuses",
     "description": "Compétence exclusive à Xenolord. Fait pousser quatre ailes satellites avec fonction d'attaque automatique. Celles-ci effectueront des assauts pourchassant automatiquement l'ennemi à la prochaine attaque."
   },
   "EPalWazaID::Unique_DarkMechaDragon_WarpComet": {
-    "localized_name": "Météore cosmique",
+    "localized_name": "Météore Cosmique",
     "description": "Compétence exclusive à Xenolord. S'envole dans les airs à la vitesse de la lumière pour générer d'innombrables météorites. Se change ensuite en comète et charge vers l'avant, provoquant une énorme explosion au point d'impact."
   },
   "EPalWazaID::Unique_DarkScorpion_Pierce": {
-    "localized_name": "Piqûre sautée",
+    "localized_name": "Piqûre Sautée",
     "description": "Compétence exclusive à Menasting. Saute haut dans les airs avant de perforer sa proie avec sa queue. Cette dernière contient du poison."
   },
   "EPalWazaID::Unique_Deer_PushupHorn": {
-    "localized_name": "Corne ascendante",
+    "localized_name": "Corne Ascendante",
     "description": "Compétence réservée à Eikthyrdeer. Charge l'ennemi et l'attaque en levant ses cornes. À activer sur son dos pour contrôler sa direction."
   },
   "EPalWazaID::Unique_DrillGame_ShellAttack": {
-    "localized_name": "Coquille rotative",
+    "localized_name": "Coquille Rotative",
     "description": "Compétence exclusive à Digtoise. Tournoie sur lui-même à grande vitesse afin de se déplacer et d'infliger des dégâts en continu à l'ennemi en lui assénant des taillades."
   },
   "EPalWazaID::Unique_Eagle_GlidingNail": {
-    "localized_name": "Griffe planante",
+    "localized_name": "Griffe Planante",
     "description": "Compétence exclusive à Galeclaw. Envoie ses serres en avant pour fendre l'air vigoureusement."
   },
   "EPalWazaID::Unique_ElecPanda_ElecScratch": {
-    "localized_name": "Griffe éclair",
+    "localized_name": "Griffe Éclair",
     "description": "Compétence réservée à Grizzbolt. Se jette sur l'ennemi et le taillade avec ses griffes électrifiées. Tourne ses griffes vers le sol après deux assauts pour diffuser le choc électrique sur une zone étendue."
   },
   "EPalWazaID::Unique_ElecPanda_GatlingAttack": {
-    "localized_name": "Tank foudroyant",
+    "localized_name": "Tank Foudroyant",
     "description": "Compétence exclusive à Grizzbolt. Attaque au moyen d'un minigun sorti de nulle part. Termine sur une balle puissante après une courte charge."
   },
   "EPalWazaID::Unique_FairyDragon_FairyTornado": {
-    "localized_name": "Ouragan mystique",
+    "localized_name": "Ouragan Mystique",
     "description": "Compétence réservée à Elphidran. Génère deux tornades imprégnées d'un pouvoir mystérieux pour pourchasser l'ennemi."
   },
   "EPalWazaID::Unique_FeatherOstrich_Tossin": {
-    "localized_name": "Ruée terrestre",
+    "localized_name": "Ruée Terrestre",
     "description": "Compétence exclusive à Dazemu. Accélère brusquement pour charger à toute vitesse."
   },
   "EPalWazaID::Unique_FengyunDeeper_CloudTempest": {
-    "localized_name": "Tempête nuageuse",
+    "localized_name": "Tempête Nuageuse",
     "description": "Compétence exclusive à Fenglope. Manipule l'atmosphère pour foncer vers l'avant en utilisant la pression du vent."
   },
   "EPalWazaID::Unique_FengyunDeeper_Electric_ThunderTempest": {
-    "localized_name": "Tempête orageuse",
+    "localized_name": "Tempête Orageuse",
     "description": "Compétence exclusive à Fenglope Lux. Manipule l'atmosphère pour foncer vers l'avant en utilisant un nuage d'orage."
   },
   "EPalWazaID::Unique_FireKirin_Dark_DarkTossin": {
-    "localized_name": "Charge-ombre",
+    "localized_name": "Charge-Ombre",
     "description": "Compétence exclusive à Pyrin Noct. S'enveloppe de feu obscur avant de charger vers l'avant. Des flammes restent en suspension après son passage."
   },
   "EPalWazaID::Unique_FireKirin_Tackle": {
-    "localized_name": "Charge-flammes",
+    "localized_name": "Charge-Flammes",
     "description": "Compétence exclusive à Pyrin. S'enveloppe de feu avant de charger vers l'avant. Des flammes restent en suspension après son passage."
   },
   "EPalWazaID::Unique_FlameBuffalo_FlameHorn": {
-    "localized_name": "Corne brûlante",
+    "localized_name": "Corne Brûlante",
     "description": "Compétence exclusive à Arsox. Se concentre sur l'ennemi et le charge à pleine puissance en levant ses cornes vers le ciel."
   },
   "EPalWazaID::Unique_FlowerDinosaur_Whip": {
-    "localized_name": "Fracas botanique",
+    "localized_name": "Fracas Botanique",
     "description": "Compétence réservée à Dinossom. Utilise sa grande queue pour frapper le sol devant lui et toucher en ligne droite."
   },
   "EPalWazaID::Unique_Garm_Bite": {
-    "localized_name": "Croc sauvage",
+    "localized_name": "Croc Sauvage",
     "description": "Compétence réservée à Direhowl. Se jette sur l'ennemi et l'attaque en le mordant."
   },
   "EPalWazaID::Unique_GhostBeast_Tossin": {
-    "localized_name": "Ruée spirituelle",
+    "localized_name": "Ruée Spirituelle",
     "description": "Compétence exclusive à Maraith. Tire des boules de feu vacillantes vers l'ennemi tout en courant lentement."
   },
   "EPalWazaID::Unique_GoldenHorse_StoneDash": {
-    "localized_name": "Ruée écrasante",
+    "localized_name": "Ruée Écrasante",
     "description": "Compétence exclusive à Gildane. Se rue vers l'avant en envoyant des rochers voler à gauche et à droite."
   },
   "EPalWazaID::Unique_Gorilla_GroundPunch": {
-    "localized_name": "Combo gorille",
+    "localized_name": "Combo Gorille",
     "description": "Compétence exclusive à Gorirat. Frappe le sol à deux reprises puis bondit pour asséner un puissant coup de poing."
   },
   "EPalWazaID::Unique_GrassPanda_Electric_ElectricPunch": {
-    "localized_name": "Explo-poing",
+    "localized_name": "Explo-Poing",
     "description": "Compétence exclusive à Mossanda Lux. Fait tournoyer son bras droit avant d'asséner un coup de poing électrifié."
   },
   "EPalWazaID::Unique_GrassPanda_MusclePunch": {
-    "localized_name": "Poing musclé",
+    "localized_name": "Poing Musclé",
     "description": "Compétence exclusive à Mossanda. Fait tournoyer son bras droit avant de donner un violent coup de poing vers l'avant."
   },
   "EPalWazaID::Unique_GrassRabbitMan_GrassRoundKick": {
-    "localized_name": "Ruée rotative",
+    "localized_name": "Ruée Rotative",
     "description": "Compétence exclusive à Verdash. Bondit vers l'avant en effectuant des coups de pied tourbillonnants pour balayer les alentours."
   },
   "EPalWazaID::Unique_Grassmammoth_Earthquake": {
-    "localized_name": "Impact terrestre",
+    "localized_name": "Impact Terrestre",
     "description": "Compétence exclusive à Mammorest. Utilise son corps gigantesque pour faire trembler la terre et infliger des dégâts sur une zone étendue."
   },
   "EPalWazaID::Unique_GrimGirl_BrutalMachete": {
-    "localized_name": "Barrage amer",
+    "localized_name": "Rancune Déchaînée",
     "description": "Compétence exclusive à Splatterina. Se téléporte pour effectuer une attaque tranchante. Apparaît ensuite au-dessus de la tête de l'ennemi et plante son arme pour générer une vague d'obscurité."
   },
   "EPalWazaID::Unique_HawkBird_Storm": {
-    "localized_name": "Attaque tornade",
+    "localized_name": "Attaque Tornade",
     "description": "Compétence exclusive à Nitewing. Crée une tornade devant lui pour charger l'ennemi en planant."
   },
   "EPalWazaID::Unique_HerculesBeetle_BeetleTackle": {
@@ -592,23 +592,23 @@
     "description": "Compétence exclusive à Warsect . Empale l'ennemi avec ses quatre puissantes cornes."
   },
   "EPalWazaID::Unique_Horus_FlareBird": {
-    "localized_name": "Ailes flamboyantes",
+    "localized_name": "Ailes Flamboyantes",
     "description": "Compétence réservée à Faleris. Génère une tornade ardente avant de s'envelopper dans les flammes pour charger en planant."
   },
   "EPalWazaID::Unique_Horus_PerfectStorm": {
-    "localized_name": "Vague brûlante",
+    "localized_name": "Vague Brûlante",
     "description": "Compétence exclusive à Faleris. Génère plusieurs tornades brûlantes, puis s'enveloppe de flammes pour charger. Les tornades se rassemblent au centre pour en former une géante."
   },
   "EPalWazaID::Unique_Horus_Water_AquaStorm": {
-    "localized_name": "Ailes aqueuses",
+    "localized_name": "Ailes Aqueuses",
     "description": "Compétence réservée à Faleris Aqua. Génère une grosse tornade avant de s'envelopper d'eau pour charger en planant."
   },
   "EPalWazaID::Unique_IceDeer_IceHorn": {
-    "localized_name": "Ruée glacée",
+    "localized_name": "Ruée Glacée",
     "description": "Compétence exclusive à Reindrix. Charge pour empaler l'ennemi avec sa majestueuse corne glacée."
   },
   "EPalWazaID::Unique_IceHorse_IceBladeAttack": {
-    "localized_name": "Ailes cristallines",
+    "localized_name": "Ailes Cristallines",
     "description": "Compétence exclusive à Frostallion. Condense l'air froid pour recouvrir ses ailes de glace et s'élance pour trancher l'ennemi."
   },
   "EPalWazaID::Unique_JetDragon_JumpBeam": {
@@ -616,23 +616,23 @@
     "description": "Compétence exclusive à Jetragon. Fait briller ses ailes pour tirer d'innombrables rayons sur l'ennemi qui provoquent une explosion à l'impact."
   },
   "EPalWazaID::Unique_KingAlpaca_BodyPress": {
-    "localized_name": "Presse royale",
+    "localized_name": "Presse Royale",
     "description": "Compétence exclusive à Kingpaca. Écrase l'ennemi avec son corps imposant et dodu après avoir sauté haut dans les airs."
   },
   "EPalWazaID::Unique_KingBahamut_AirCrash": {
-    "localized_name": "Magna-écrasement",
+    "localized_name": "Magna-Écrasement",
     "description": "Compétence exclusive à Blazamut Ryu. Saute haut dans les airs et fend le ciel à vive allure pour concentrer sa force dans un coup de poing."
   },
   "EPalWazaID::Unique_KingBahamut_ArmSmash": {
-    "localized_name": "Impact brûlant",
+    "localized_name": "Impact Brûlant",
     "description": "Compétence exclusive à Blazamut. Balance ses bras et les gonfle avant de les faire s'entrechoquer pour créer une énorme explosion autour de lui."
   },
   "EPalWazaID::Unique_Kirin_LightningTackle": {
-    "localized_name": "Ruée foudroyante",
+    "localized_name": "Ruée Foudroyante",
     "description": "Compétence exclusive à Univolt. Fait s'abattre la foudre autour de lui avant de se ruer sur l'ennemi."
   },
   "EPalWazaID::Unique_LilyQueen_LilyHealing": {
-    "localized_name": "Protection de fertilité",
+    "localized_name": "Protection de Fertilité",
     "description": "Compétence exclusive à Lyleen. Utilise un pouvoir régénérateur pour restaurer ses PV. Ne soigne pas le joueur."
   },
   "EPalWazaID::Unique_LilyQueen_WindBarrier": {
@@ -640,63 +640,63 @@
     "description": "fr_Text"
   },
   "EPalWazaID::Unique_Manticore_InfernoStrike": {
-    "localized_name": "Croc volcanique",
+    "localized_name": "Croc Volcanique",
     "description": "Compétence exclusive à Blazehowl. Concentre sa force avant de se jeter sur l'ennemi en faisant jaillir des flammes là où il atterrit."
   },
   "EPalWazaID::Unique_MoonQueen_IceMoonBlade": {
-    "localized_name": "Flash higetsu",
+    "localized_name": "Flash Seigetsu",
     "description": "Compétence exclusive à Selyne. Tire trois lames consécutives imprégnées de la puissance du clair de lune."
   },
   "EPalWazaID::Unique_MoonQueen_MoonBeam": {
-    "localized_name": "Rayon lunaire",
+    "localized_name": "Rayon Lunaire",
     "description": "Compétence exclusive à Selyne. Concentre de l'énergie dans la lune sur son dos pour tirer un rayon en forme de croissant devant lui."
   },
   "EPalWazaID::Unique_MoonQueen_MoonBlade": {
-    "localized_name": "Lame seigetsu",
+    "localized_name": "Lame Seigetsu",
     "description": "Compétence exclusive à Selyne. Tire deux lames consécutives imprégnées de la puissance du clair de lune."
   },
   "EPalWazaID::Unique_MysteryMask_LifeSteal": {
-    "localized_name": "Vol d'âme",
+    "localized_name": "Vol d'Âme",
     "description": "Compétence exclusive à Omascul. Apparaît d'un coup près de l'ennemi pour l'immobiliser avec ses deux bras et absorber ses PV."
   },
   "EPalWazaID::Unique_NaughtyCat_CatPress": {
-    "localized_name": "Presse féline",
+    "localized_name": "Presse Féline",
     "description": "Compétence exclusive à Grintale. Se jette sur l'ennemi avec un sourire effronté avant de l'écraser de tout son poids."
   },
   "EPalWazaID::Unique_NightBlueHorse_DeathStep": {
-    "localized_name": "Piétinement mortel",
+    "localized_name": "Piétinement Mortel",
     "description": "Compétence exclusive à Starryon. Malmène l'ennemi en titubant avant de le sabrer avec ses cornes acérées."
   },
   "EPalWazaID::Unique_NightLady_FlameNightmare": {
-    "localized_name": "Valse enflammée",
+    "localized_name": "Valse Enflammée",
     "description": "Compétence exclusive à Bellanoir Libero. Génère un anneau de feu qui se propage en ondulant. Il libère des flammes mystérieuses qui pourchassent l'ennemi."
   },
   "EPalWazaID::Unique_NightLady_WarpBeam": {
-    "localized_name": "Floraison cauchemardesque",
+    "localized_name": "Floraison Cauchemardesque",
     "description": "Compétence exclusive à Bellanoir Libero. Disparaît et réapparaît avec des rayons lumineux. Les rayons se propagent telle une floraison."
   },
   "EPalWazaID::Unique_NightLady_WarpBeam_Straight": {
-    "localized_name": "Rayons cauchemardesques",
+    "localized_name": "Rayons Cauchemardesques",
     "description": "Compétence exclusive à Bellanoir. Disparaît et réapparaît avec des rayons lumineux."
   },
   "EPalWazaID::Unique_PinkCat_CatPunch": {
-    "localized_name": "Double poing",
+    "localized_name": "Enchaînement de Poings",
     "description": "Compétence réservée à Cattiva. Agite ses deux pattes tout en poursuivant l'ennemi pour lui asséner des coups de poing successifs."
   },
   "EPalWazaID::Unique_PurpleSpider_SpiderRaid": {
-    "localized_name": "Charge arachnéenne",
+    "localized_name": "Charge Arachnéenne",
     "description": "Compétence exclusive à Tarantriss. Crache une boule de toile pour empêtrer la proie touchée. S'élance ensuite à toute vitesse pour la lacérer trois fois."
   },
   "EPalWazaID::Unique_QueenBee_SpinLance": {
-    "localized_name": "Bâton tournoyant",
+    "localized_name": "Bâton Tournoyant",
     "description": "Compétence exclusive à Elizabee. Accumule de la force dans son bâton pour la relâcher sur l'ennemi en tournoyant."
   },
   "EPalWazaID::Unique_RedArmorBird_TriplePeck": {
-    "localized_name": "Ruée aviaire",
+    "localized_name": "Ruée Aviaire",
     "description": "Compétence exclusive à Ragnahawk. Bat des ailes vers l'avant en donnant des coups de bec enflammés devant, à droite et à gauche, créant ainsi de petites explosions."
   },
   "EPalWazaID::Unique_RobinHood_BowSnipe": {
-    "localized_name": "Tir précis",
+    "localized_name": "Tir Précis",
     "description": "Compétence exclusive à Robinquill. Dégaine son arc pour viser l'ennemi et le cribler de flèches."
   },
   "EPalWazaID::Unique_Ronin_Iai": {
@@ -704,43 +704,43 @@
     "description": "Compétence exclusive à Bushi. Lève son épée pour apparaître instantanément devant l'ennemi et lui asséner un coup ultra rapide."
   },
   "EPalWazaID::Unique_SaintCentaur_OneSpearRushes": {
-    "localized_name": "Lance simple",
+    "localized_name": "Lance Sacrée",
     "description": "Compétence exclusive à Paladius. Concentre l'énergie sacrée dans son corps pour charger en pointant sa lance en avant avec sa main gauche. Le bouclier dans sa main droite permet de le protéger dans sa ruée."
   },
   "EPalWazaID::Unique_SakuraSaurus_SideTackle": {
-    "localized_name": "Fracas corporel",
+    "localized_name": "Fracas Corporel",
     "description": "Compétence exclusive à Broncherry. Fait pivoter son corps à quatre-vingt-dix degrés avant de charger l'ennemi pour l'envoyer valser."
   },
   "EPalWazaID::Unique_ScorpionMan_Uppercut": {
-    "localized_name": "Fracas vertical",
+    "localized_name": "Fracas Vertical",
     "description": "Compétence exclusive à Prixter. Se rapproche de l'ennemi à toute vitesse en levant ses pinces au-dessus de sa tête."
   },
   "EPalWazaID::Unique_SheepBall_Roll": {
-    "localized_name": "Roulé-boulé",
+    "localized_name": "Roulé-Boulé",
     "description": "Compétence réservée à SheepBall. Poursuit l'ennemi en roulant. Des vertiges l'empêchent de bouger après l'attaque."
   },
   "EPalWazaID::Unique_SifuDog_Counter": {
-    "localized_name": "Posture résolue",
+    "localized_name": "Posture Résolue",
     "description": "Compétence exclusive à Dogen. Se met en posture aiki afin d'annuler toute attaque subie et se téléporter sur l'ennemi en lui assénant un coup dévastateur."
   },
   "EPalWazaID::Unique_SnowTigerBeastman_SnowImpact": {
-    "localized_name": "Glace pilée",
+    "localized_name": "Impact Glacial",
     "description": "Compétence exclusive à Bastigor. Après avoir poussé un grand rugissement et sauté, enfonce ses deux pattes dans le sol pour créer une énorme crevasse de glace. La pression continue exercée sur le sol finit par provoquer une grosse explosion de type glace."
   },
   "EPalWazaID::Unique_SnowTigerBeastman_TrampleSlash": {
-    "localized_name": "Griffe glacée",
+    "localized_name": "Griffe Glacée",
     "description": "Compétence exclusive à Bastigor. Écrase le sol pour créer une crevasse de glace devant lui. Se précipite ensuite vers sa cible pour la trancher de sa patte droite."
   },
   "EPalWazaID::Unique_SoldierBee_NeedleLance": {
-    "localized_name": "Lance aiguille",
+    "localized_name": "Lance Aiguille",
     "description": "Compétence exclusive à Beegarde. Se rue à toute vitesse sur l'ennemi et donne un coup de lance précis à la fin."
   },
   "EPalWazaID::Unique_ThunderBird_ThunderStorm": {
-    "localized_name": "Plongeon éclair",
+    "localized_name": "Plongeon Éclair",
     "description": "Compétence exclusive à Beakon. Fait s'abattre la foudre sur la position de l'ennemi avant de le charger en faisant tomber des éclairs à gauche et à droite."
   },
   "EPalWazaID::Unique_ThunderDog_InazumaShorai": {
-    "localized_name": "Appel éclair",
+    "localized_name": "Appel Éclair",
     "description": "Compétence exclusive à Rayhound. Fait tomber plusieurs éclairs devant lui à la suite avant de foncer au milieu."
   },
   "EPalWazaID::Unique_ThunderDragonMan_NumerousSwordAttack": {
@@ -752,63 +752,63 @@
     "description": "Compétence exclusive à Orserk. Saute dans les airs et invoque une lance de foudre qu'il utilise pour attaquer l'ennemi."
   },
   "EPalWazaID::Unique_Umihebi_Fire_FireWindingTackle": {
-    "localized_name": "Serpent de feu",
+    "localized_name": "Serpent de Feu",
     "description": "Compétence exclusive à Jormuntide Ignis. Rugit avant de charger l'ennemi en remuant son corps enflammé."
   },
   "EPalWazaID::Unique_Umihebi_WindingTackle": {
-    "localized_name": "Serpent marin",
+    "localized_name": "Serpent Marin",
     "description": "Compétence exclusive à Jormuntide. Rugit avant de charger l'ennemi en remuant son corps aqueux."
   },
   "EPalWazaID::Unique_VolcanicMonster_Ice_IceAttack": {
-    "localized_name": "Explosion givrée",
+    "localized_name": "Explosion Givrée",
     "description": "Compétence exclusive à Reptyro Cryst. Lève ses pattes avant et les fait s'écraser sur le sol pour souffler un blizzard là où l'ennemi se trouve et faire pleuvoir des bombes de neige tout autour."
   },
   "EPalWazaID::Unique_VolcanicMonster_MagmaAttack": {
-    "localized_name": "Éclat volcanique",
+    "localized_name": "Éclat Volcanique",
     "description": "Compétence exclusive à Reptyro. Lève ses pattes avant et les fait s'écraser sur le sol pour provoquer une éruption dans la zone où l'ennemi se trouve et faire pleuvoir des bombes volcaniques tout autour."
   },
   "EPalWazaID::Unique_WeaselDragon_FlyingTackle": {
-    "localized_name": "Piqué fusée",
+    "localized_name": "Piqué Fusée",
     "description": "Compétence exclusive à Chillet. Fait un bond en avant après avoir accumulé un peu de force. Ferme les yeux au moment d'atterrir pour avoir moins peur."
   },
   "EPalWazaID::Unique_Werewolf_Ice_SnowScratch": {
-    "localized_name": "Griffe neigeuse",
+    "localized_name": "Griffe Neigeuse",
     "description": "Compétence exclusive à WereWolf_Ice. S'élance vers l'avant pour donner deux coups de griffes rapides. Cet assaut est imprégné du pouvoir de la glace."
   },
   "EPalWazaID::Unique_Werewolf_Scratch": {
-    "localized_name": "Griffe sautée",
+    "localized_name": "Griffe Sautée",
     "description": "Compétence exclusive à WereWolf. S'élance vers l'avant pour donner deux coups de griffes rapides. Cet assaut est imprégné du pouvoir des ténèbres."
   },
   "EPalWazaID::Unique_WhiteDeer_HolyPillar": {
-    "localized_name": "Nova sacrée",
+    "localized_name": "Nova Sacrée",
     "description": "Compétence exclusive à Celesdir. Après avoir provoqué une explosion sacrée sur une zone étendue devant lui, diffuse une lumière sacrée autour de lui en marchant."
   },
   "EPalWazaID::Unique_WhiteShieldDragon_ShieldTackle": {
-    "localized_name": "Charge aegis",
+    "localized_name": "Charge Aegis",
     "description": "Compétence exclusive à Silvegis. Déploie un bouclier devant lui qui affaiblit toutes les attaques et charge l'ennemi avec pour l'écraser."
   },
   "EPalWazaID::Unique_WhiteTiger_Ground_IronScratch": {
-    "localized_name": "Griffe rocailleuse",
+    "localized_name": "Griffe Rocailleuse",
     "description": "Compétence exclusive à Cryolinx Terra. Donne deux coups de griffes avant d'utiliser tout son corps pour réduire l'ennemi en pièces. Envoie trois rochers vers l'avant en forme d'éventail lorsqu'il agite ses griffes."
   },
   "EPalWazaID::Unique_WhiteTiger_IceScratch": {
-    "localized_name": "Griffe blizzard",
+    "localized_name": "Griffe Blizzard",
     "description": "Compétence exclusive à Cryolinx. Donne deux coups de griffes avant d'utiliser tout son corps pour réduire l'ennemi en pièces. Envoie trois glaçons vers l'avant en forme d'éventail lorsqu'il agite ses griffes."
   },
   "EPalWazaID::Unique_WingGolem_RoundCutter": {
-    "localized_name": "Coupe-sol",
+    "localized_name": "Coupe-Sol",
     "description": "Compétence exclusive à Knocklem. Se balance violemment avant de lancer l'anneau sur son dos. L'anneau virevolte alors en dessinant des cercles."
   },
   "EPalWazaID::Unique_Yeti_Grass_GrassBall": {
-    "localized_name": "Roulade herbeuse",
+    "localized_name": "Roulade Herbeuse",
     "description": "Compétence exclusive à Wumpo Botan. Fait rouler une boule d'herbe explosive en avançant, qu'il lance lorsqu'elle atteint sa taille maximale."
   },
   "EPalWazaID::Unique_Yeti_SnowBall": {
-    "localized_name": "Bouldeneige",
+    "localized_name": "Boule de Neige",
     "description": "Compétence exclusive à Wumpo. Fait rouler une boule de neige explosive en avançant, qu'il lance lorsqu'elle atteint sa taille maximale."
   },
   "EPalWazaID::WallSplash": {
-    "localized_name": "Éclabousse-mur",
+    "localized_name": "Éclabousse-Mur",
     "description": "Génère des murs consécutifs de colonnes d'eau sur l'ennemi."
   },
   "EPalWazaID::WaterBall": {
@@ -816,15 +816,15 @@
     "description": "Génère une énorme sphère d'eau au-dessus de sa tête pour la lancer sur l'ennemi."
   },
   "EPalWazaID::WaterGun": {
-    "localized_name": "Tir aquatique",
+    "localized_name": "Tir Aquatique",
     "description": "Tire des projectiles constitués d'eau qui filent droit sur la cible."
   },
   "EPalWazaID::WindCutter": {
-    "localized_name": "Coupe-rafale",
+    "localized_name": "Coupe-Rafale",
     "description": "Tire des lames de vent supersonique qui filent droit sur l'ennemi."
   },
   "EPalWazaID::WindEdge": {
-    "localized_name": "Tranche venteuse",
+    "localized_name": "Tranche Venteuse",
     "description": "Libère des lames de vent tranchantes en forme d'éventail."
   }
 }

@@ -19,10 +19,6 @@
     "localized_name": "阿努比斯",
     "description": "它的外表曾被视作高贵的象征。 而在那些蔑视权贵的人眼里，它就成了醒目的标靶。 于是在不知不觉间，阿努比斯成为了死亡的象征。"
   },
-  "Believer_CrossBow": {
-    "localized_name": "埃戈",
-    "description": null
-  },
   "Believer_Fat_GiantClub": {
     "localized_name": "布里克",
     "description": null
@@ -39,40 +35,8 @@
     "localized_name": "芙蕾雅",
     "description": null
   },
-  "Female_People02": {
-    "localized_name": "赛莲",
-    "description": null
-  },
-  "Female_People03": {
-    "localized_name": "逆裳",
-    "description": null
-  },
   "Female_Soldier": {
     "localized_name": "姬蒂",
-    "description": null
-  },
-  "Female_Soldier02": {
-    "localized_name": "黛姿",
-    "description": null
-  },
-  "Female_Soldier03": {
-    "localized_name": "阿罗哈",
-    "description": null
-  },
-  "Female_Soldier04": {
-    "localized_name": "妮波",
-    "description": null
-  },
-  "FireCult_FlameThrower": {
-    "localized_name": "暗影",
-    "description": null
-  },
-  "Hunter_Fat_GatlingGun": {
-    "localized_name": "格里尔",
-    "description": null
-  },
-  "Hunter_Rifle": {
-    "localized_name": "霍克",
     "description": null
   },
   "Male_DesertPeople": {
@@ -87,14 +51,6 @@
     "localized_name": "戴拿",
     "description": null
   },
-  "Male_People02": {
-    "localized_name": "柯伊尔",
-    "description": null
-  },
-  "Male_People03": {
-    "localized_name": "斯科特",
-    "description": null
-  },
   "Male_People2": {
     "localized_name": "麦特",
     "description": null
@@ -103,36 +59,8 @@
     "localized_name": "克雷斯",
     "description": null
   },
-  "Male_Soldier02": {
-    "localized_name": "达特",
-    "description": null
-  },
-  "Male_Soldier03": {
-    "localized_name": "克林特",
-    "description": null
-  },
-  "Male_Soldier04": {
-    "localized_name": "拉索",
-    "description": null
-  },
-  "Male_Trader01": {
-    "localized_name": "斯吉姆",
-    "description": null
-  },
-  "Male_Trader02": {
-    "localized_name": "模仿者",
-    "description": null
-  },
-  "Male_Trader03": {
-    "localized_name": "比利",
-    "description": null
-  },
   "Ninja": {
     "localized_name": "方博",
-    "description": null
-  },
-  "Police_Rifle": {
-    "localized_name": "威普",
     "description": null
   },
   "Police_old": {
@@ -141,10 +69,6 @@
   },
   "Scientist_LaserRifle": {
     "localized_name": "威斯克",
-    "description": null
-  },
-  "Viking": {
-    "localized_name": "奈尔",
     "description": null
   },
   "VikingElite": {
@@ -333,7 +257,7 @@
   },
   "DarkAlien": {
     "localized_name": "杰诺贝达",
-    "description": "具有将信息传输中的损耗变换为能量的能力。 会定期的向不明对象发送情报。 “发现目标，请立刻前往破坏，见信速回。”"
+    "description": "具有将信息传输中的损耗变换为能量的能力。 会定期的向不明对象发送情报。 「发现目标，请立刻前往破坏，见信速回。」"
   },
   "DarkAlien_Oilrig": {
     "localized_name": "杰诺贝达",
@@ -355,6 +279,10 @@
     "localized_name": "金铠蝎",
     "description": "它的本体是一种能量体，内部是空的。 通过将砂石和矿物填充进外壳，得以实现了压倒性的质量。 被其击中的生物只能发出如地狱般的呻吟声。"
   },
+  "DeathPenalty_guide": {
+    "localized_name": "老手帕鲁训练家",
+    "description": null
+  },
   "Deer": {
     "localized_name": "紫霞鹿",
     "description": "拥有最富有力量感的双角的个体，会成为这种帕鲁的领袖。 犄角断裂时，内心也会大受打击。 这时候它就会默默离开族群，在远离人烟的地方结束一生。"
@@ -373,7 +301,7 @@
   },
   "DrillGame": {
     "localized_name": "碎岩龟",
-    "description": "过去有则寓言故事叫做“碎岩龟的钻头”。 那是个关于拥有最强甲壳和钻头的碎岩龟 思考矛盾的道德故事。"
+    "description": "过去有则寓言故事叫做「碎岩龟的钻头」。 那是个关于拥有最强甲壳和钻头的碎岩龟 思考矛盾的道德故事。"
   },
   "Eagle": {
     "localized_name": "天擒鸟",
@@ -499,6 +427,10 @@
     "localized_name": "村民",
     "description": null
   },
+  "Female_Presenter01": {
+    "localized_name": "亲切的帕鲁训练家",
+    "description": null
+  },
   "Female_Soldier01": {
     "localized_name": "岛民",
     "description": null
@@ -565,11 +497,11 @@
   },
   "FlowerDinosaur": {
     "localized_name": "花冠龙",
-    "description": "它只要生气便会暴走，如同烈火一般不受控制。 因此“踩了花冠龙尾巴”这句话就是 指激怒某人的意思。"
+    "description": "它只要生气便会暴走，如同烈火一般不受控制。 因此「踩了花冠龙尾巴」这句话就是 指激怒某人的意思。"
   },
   "FlowerDinosaur_Electric": {
     "localized_name": "雷冠龙",
-    "description": "它曾被落雷击中，但幸运地捡回一条命。 因此“雷落雷冠龙”这句话就是 指九死一生，大难不死的意思。"
+    "description": "它曾被落雷击中，但幸运地捡回一条命。 因此「雷落雷冠龙」这句话就是 指九死一生，大难不死的意思。"
   },
   "FlowerDoll": {
     "localized_name": "花丽娜",
@@ -689,11 +621,11 @@
   },
   "GrassMammoth": {
     "localized_name": "森猛犸",
-    "description": "这种帕鲁背上的植被因个体而异。 有段时间曾被视为观赏帕鲁而受人喜爱 甚至曾经出现过森猛犸的专业修剪师。"
+    "description": "这种帕鲁背部的植被因个体而异。 有段时间曾被视为观赏帕鲁而受人喜爱 甚至曾经出现过森猛犸的专业修剪师。"
   },
   "GrassMammoth_Ice": {
     "localized_name": "雪猛犸",
-    "description": "这种帕鲁背上的植被因个体而异。 在雪猛犸的背上曾发现过被认为已经灭绝的冰冻植物种子， 在冷冻状态下保存良好。"
+    "description": "这种帕鲁背部的植被因个体而异。 在雪猛犸的背上曾发现过被认为已经灭绝的冰冻植物种子， 在冷冻状态下保存良好。"
   },
   "GrassPanda": {
     "localized_name": "叶胖达",
@@ -721,7 +653,7 @@
   },
   "GuardianDog": {
     "localized_name": "八云犬",
-    "description": "有着辟邪的特性， 昔日曾经作为优秀的伙伴，和岛民构筑起了良好的关系。 而现在，八云犬和人们之间已经垒起了名为“邪念”的高墙。"
+    "description": "有着辟邪的特性， 昔日曾经作为优秀的伙伴，和岛民构筑起了良好的关系。 而现在，八云犬和人们之间已经垒起了名为「邪念」的高墙。"
   },
   "HadesBird": {
     "localized_name": "雷冥鸟",
@@ -746,6 +678,22 @@
   "Hedgehog_Ice": {
     "localized_name": "冰刺鼠",
     "description": "它在受到冲击后会释放储存的冷气。 它发射的冷气呈放射状，可冻结大气。 攻击它的对象会被击穿身体。"
+  },
+  "Help01": {
+    "localized_name": "岛民",
+    "description": null
+  },
+  "Help02": {
+    "localized_name": "岛民",
+    "description": null
+  },
+  "Help03": {
+    "localized_name": "岛民",
+    "description": null
+  },
+  "Help04": {
+    "localized_name": "岛民",
+    "description": null
   },
   "HerculesBeetle": {
     "localized_name": "铠格力斯",
@@ -977,7 +925,7 @@
   },
   "Kelpie": {
     "localized_name": "水灵儿",
-    "description": "它的性格会因出生地水质的不同而有所差异。 出生于肮脏水源地的“水灵儿” 大多都性格恶劣，一副街边混混的派头。"
+    "description": "它的性格会因出生地水质的不同而有所差异。 诞生于肮脏水源地的水灵儿大多都性格恶劣， 一副街边混混的派头。"
   },
   "Kelpie_Fire": {
     "localized_name": "火灵儿",
@@ -1005,7 +953,7 @@
   },
   "KingBahamut_Dragon": {
     "localized_name": "殁殃",
-    "description": "自太古时期，其于地底现身。 焚天的烈火在将一切焚烧殆尽前，永远都不会熄灭。 此谓“永炎”。"
+    "description": "自太古时期，其于地底现身。 焚天的烈火在将一切焚烧殆尽前，永远都不会熄灭。 此谓「永炎」。"
   },
   "Kirin": {
     "localized_name": "雷角马",
@@ -1173,7 +1121,7 @@
   },
   "Monkey": {
     "localized_name": "新叶猿",
-    "description": "在古时这种帕鲁会使用树枝等细长状的物品作为武器。 但在它们与人类频繁接触后，便不再使用这些物品。 因为它们发现了同样细长，却更为高效的“枪械”。"
+    "description": "在古时这种帕鲁会使用树枝等细长状的物品作为武器。 但在它们与人类频繁接触后，便不再使用这些物品。 因为它们发现了同样细长，却更为高效的「枪械」。"
   },
   "MoonQueen": {
     "localized_name": "辉月伊",
@@ -1237,7 +1185,7 @@
   },
   "NightLady_Dark": {
     "localized_name": "贝菈露洁",
-    "description": "被解放的欲望，终于再也无法抑制。 「“我”渴望得到“自我”的注视。」 凝聚为恶意的，渴望被注视的姐妹 终于被放逐回世界的狭缝，闭上了凝视的眼睛。"
+    "description": "被解放的欲望，终于再也无法抑制。 「『我』渴望得到『自我』的注视。」 凝聚为恶意的，渴望被注视的姐妹 终于被放逐回世界的狭缝，闭上了凝视的眼睛。"
   },
   "Ninja01_Tower": {
     "localized_name": "月花众 下忍",
@@ -1265,7 +1213,7 @@
   },
   "PREDATOR_DrillGame": {
     "localized_name": "碎岩龟",
-    "description": "过去有则寓言故事叫做“碎岩龟的钻头”。 那是个关于拥有最强甲壳和钻头的碎岩龟 思考矛盾的道德故事。"
+    "description": "过去有则寓言故事叫做「碎岩龟的钻头」。 那是个关于拥有最强甲壳和钻头的碎岩龟 思考矛盾的道德故事。"
   },
   "PREDATOR_FairyDragon": {
     "localized_name": "精灵龙",
@@ -1277,7 +1225,7 @@
   },
   "PREDATOR_FlowerDinosaur": {
     "localized_name": "花冠龙",
-    "description": "它只要生气便会暴走，如同烈火一般不受控制。 因此“踩了花冠龙尾巴”这句话就是 指激怒某人的意思。"
+    "description": "它只要生气便会暴走，如同烈火一般不受控制。 因此「踩了花冠龙尾巴」这句话就是 指激怒某人的意思。"
   },
   "PREDATOR_Garm": {
     "localized_name": "猎狼",
@@ -1337,7 +1285,7 @@
   },
   "PREDATOR_PurpleSpider": {
     "localized_name": "桃蛛娘",
-    "description": "它非常的粘人，字面意义上的如胶似漆。 越是想要甩开它，就会粘的越紧。 以上就是它的“性格”特征。"
+    "description": "它非常的粘人，字面意义上的如胶似漆。 越是想要甩开它，就会粘的越紧。 以上就是它的「性格」特征。"
   },
   "PREDATOR_RedArmorBird": {
     "localized_name": "燧火鸟",
@@ -1353,7 +1301,7 @@
   },
   "PREDATOR_SifuDog": {
     "localized_name": "汪宗师",
-    "description": "为了到达“无我”的境地而不停的冥想。 直面烦恼并顿悟之后，它都会胃口大开吃到撑， 每当此时就会有所感悟——今天吃太多了。"
+    "description": "为了到达「无我」的境地而不停的冥想。 直面烦恼并顿悟之后，它都会胃口大开吃到撑， 每当此时就会有所感悟——今天吃太多了。"
   },
   "PREDATOR_ThunderDog": {
     "localized_name": "霹雳犬",
@@ -1449,7 +1397,7 @@
   },
   "PurpleSpider": {
     "localized_name": "桃蛛娘",
-    "description": "它非常的粘人，字面意义上的如胶似漆。 越是想要甩开它，就会粘的越紧。 以上就是它的“性格”特征。"
+    "description": "它非常的粘人，字面意义上的如胶似漆。 越是想要甩开它，就会粘的越紧。 以上就是它的「性格」特征。"
   },
   "QueenBee": {
     "localized_name": "女皇蜂",
@@ -1502,6 +1450,10 @@
   "RedArmorBird": {
     "localized_name": "燧火鸟",
     "description": "虽说与迅雷鸟外形相似，但并无任何关系。 它主要以岩石为食，因此经年累月后， 不只是鸟喙，它的整个头部也变得十分坚硬。"
+  },
+  "Respawn_guide": {
+    "localized_name": "亲切的帕鲁训练家",
+    "description": null
   },
   "Reward_BossDefeat": {
     "localized_name": "卫兵",
@@ -1601,7 +1553,7 @@
   },
   "RobinHood": {
     "localized_name": "羽箭射手",
-    "description": "这类帕鲁在森林里过着狩猎生活，特征习性等与人类十分接近。 在远古时代，便走上了与人类不同的进化之路。 但也许它们就是能解答“帕鲁为何物”这个问题的关键。"
+    "description": "这类帕鲁在森林里过着狩猎生活，特征习性等与人类十分接近。 在远古时代，便走上了与人类不同的进化之路。 但也许它们就是能解答「帕鲁为何物」这个问题的关键。"
   },
   "RobinHood_Ground": {
     "localized_name": "山岳射手",
@@ -1637,11 +1589,11 @@
   },
   "SakuraSaurus": {
     "localized_name": "连理龙",
-    "description": "它在交配前后，体味会发生巨大变化。 人们认为它找到伴侣后的香味芳香迷人， 并将其称为“初恋之香”。"
+    "description": "它在交配前后，体味会发生巨大变化。 人们认为它找到伴侣后的香味芳香迷人， 并将其称为「初恋之香」。"
   },
   "SakuraSaurus_Water": {
     "localized_name": "海誓龙",
-    "description": "它在交配前后，体味会发生巨大变化。 人们认为它找到伴侣前的香味芳香迷人， 将其称为“纯洁之香”。"
+    "description": "它在交配前后，体味会发生巨大变化。 人们认为它找到伴侣前的香味芳香迷人， 将其称为「纯洁之香」。"
   },
   "SalesPerson": {
     "localized_name": "流浪商人",
@@ -1705,7 +1657,7 @@
   },
   "SifuDog": {
     "localized_name": "汪宗师",
-    "description": "为了到达“无我”的境地而不停的冥想。 直面烦恼并顿悟之后，它都会胃口大开吃到撑， 每当此时就会有所感悟——今天吃太多了。"
+    "description": "为了到达「无我」的境地而不停的冥想。 直面烦恼并顿悟之后，它都会胃口大开吃到撑， 每当此时就会有所感悟——今天吃太多了。"
   },
   "SkyDragon": {
     "localized_name": "天羽龙",
@@ -1829,7 +1781,7 @@
   },
   "WhiteAlienDragon": {
     "localized_name": "杰诺路达",
-    "description": "具有吞食信息并转换为能量的能力。 会定期的向不明对象发送情报。 “喂喂？在查看刚才的讯息前不小心吃掉了，你说了啥？”"
+    "description": "具有吞食信息并转换为能量的能力。 会定期的向不明对象发送情报。 「喂喂？在查看刚才的讯息前不小心吃掉了，你说了啥？」"
   },
   "WhiteDeer": {
     "localized_name": "净世鹿",

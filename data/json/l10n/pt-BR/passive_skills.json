@@ -31,6 +31,278 @@
     "localized_name": "Aumento de Ataque Nv. 3",
     "description": null
   },
+  "BossDefeatReward_AmaterasuWolf_Dark": {
+    "localized_name": "Aumento Pequeno de Dano de Escuridão",
+    "description": null
+  },
+  "BossDefeatReward_Anubis": {
+    "localized_name": "Aumento Pequeno de Dano de Terra",
+    "description": null
+  },
+  "BossDefeatReward_BadCatgirl": {
+    "localized_name": "Aumento Pequeno de Dano de Escuridão",
+    "description": null
+  },
+  "BossDefeatReward_BerryGoat_Dark": {
+    "localized_name": "Aumento Médio de Dano de Grama",
+    "description": null
+  },
+  "BossDefeatReward_BlackMetalDragon": {
+    "localized_name": "Aumento Médio de Dano Dracônico",
+    "description": null
+  },
+  "BossDefeatReward_BlackPuppy": {
+    "localized_name": "Aumento Pequeno de Dano de Escuridão",
+    "description": null
+  },
+  "BossDefeatReward_BlueDragon": {
+    "localized_name": "Aumento Pequeno de Dano de Água",
+    "description": null
+  },
+  "BossDefeatReward_BlueThunderHorse": {
+    "localized_name": "Aumento Médio de Dano Elétrico",
+    "description": null
+  },
+  "BossDefeatReward_BlueberryFairy": {
+    "localized_name": "Aumento Médio de Dano de Grama",
+    "description": null
+  },
+  "BossDefeatReward_CaptainPenguin": {
+    "localized_name": "Aumento Pequeno de Dano de Água",
+    "description": null
+  },
+  "BossDefeatReward_CatMage": {
+    "localized_name": "Aumento Pequeno de Dano de Escuridão",
+    "description": null
+  },
+  "BossDefeatReward_CatVampire": {
+    "localized_name": "Aumento Pequeno de Dano de Escuridão",
+    "description": null
+  },
+  "BossDefeatReward_DarkScorpion": {
+    "localized_name": "Aumento Pequeno de Dano de Escuridão",
+    "description": null
+  },
+  "BossDefeatReward_DarkScorpion_Ground": {
+    "localized_name": "Aumento Pequeno de Dano de Terra",
+    "description": null
+  },
+  "BossDefeatReward_FairyDragon": {
+    "localized_name": "Aumento Pequeno de Dano Dracônico",
+    "description": null
+  },
+  "BossDefeatReward_FengyunDeeper": {
+    "localized_name": "Aumento Pequeno de Dano Não Elemental",
+    "description": null
+  },
+  "BossDefeatReward_FengyunDeeper_Electric": {
+    "localized_name": "Aumento Médio de Dano Elétrico",
+    "description": null
+  },
+  "BossDefeatReward_FlowerDinosaur_Electric": {
+    "localized_name": "Aumento Pequeno de Dano Elétrico",
+    "description": null
+  },
+  "BossDefeatReward_FlowerDoll": {
+    "localized_name": "Aumento Pequeno de Dano de Grama",
+    "description": null
+  },
+  "BossDefeatReward_GhostRabbit": {
+    "localized_name": "Aumento Pequeno de Dano de Escuridão",
+    "description": null
+  },
+  "BossDefeatReward_GoldenHorse": {
+    "localized_name": "Aumento Médio de Dano de Terra",
+    "description": null
+  },
+  "BossDefeatReward_GrassMammoth": {
+    "localized_name": "Aumento Médio de Dano de Grama",
+    "description": null
+  },
+  "BossDefeatReward_GrassPanda_Electric": {
+    "localized_name": "Aumento Pequeno de Dano Elétrico",
+    "description": null
+  },
+  "BossDefeatReward_GrassRabbitMan": {
+    "localized_name": "Aumento Pequeno de Dano de Grama",
+    "description": null
+  },
+  "BossDefeatReward_GrimGirl": {
+    "localized_name": "Aumento Pequeno de Dano de Escuridão",
+    "description": null
+  },
+  "BossDefeatReward_HawkBird": {
+    "localized_name": "Aumento Pequeno de Dano Não Elemental",
+    "description": null
+  },
+  "BossDefeatReward_HerculesBeetle": {
+    "localized_name": "Aumento Pequeno de Dano de Terra",
+    "description": null
+  },
+  "BossDefeatReward_HerculesBeetle_Ground": {
+    "localized_name": "Aumento Médio de Dano de Terra",
+    "description": null
+  },
+  "BossDefeatReward_Horus_Water": {
+    "localized_name": "Aumento Médio de Dano de Água",
+    "description": null
+  },
+  "BossDefeatReward_IceHorse": {
+    "localized_name": "Aumento Grande de Dano de Gelo",
+    "description": null
+  },
+  "BossDefeatReward_IceHorse_Dark": {
+    "localized_name": "Aumento Pequeno de Dano de Escuridão",
+    "description": null
+  },
+  "BossDefeatReward_JetDragon": {
+    "localized_name": "Aumento Grande de Dano Dracônico",
+    "description": null
+  },
+  "BossDefeatReward_KingAlpaca": {
+    "localized_name": "Aumento Pequeno de Dano Não Elemental",
+    "description": null
+  },
+  "BossDefeatReward_KingAlpaca_Ice": {
+    "localized_name": "Aumento Médio de Dano de Gelo",
+    "description": null
+  },
+  "BossDefeatReward_KingBahamut": {
+    "localized_name": "Aumento Grande de Dano de Fogo",
+    "description": null
+  },
+  "BossDefeatReward_Kirin": {
+    "localized_name": "Aumento Pequeno de Dano Elétrico",
+    "description": null
+  },
+  "BossDefeatReward_Kitsunebi_Ice": {
+    "localized_name": "Aumento Grande de Dano de Gelo",
+    "description": null
+  },
+  "BossDefeatReward_LazyCatfish": {
+    "localized_name": "Aumento Pequeno de Dano de Terra",
+    "description": null
+  },
+  "BossDefeatReward_LazyDragon_Electric": {
+    "localized_name": "Aumento Pequeno de Dano Dracônico",
+    "description": null
+  },
+  "BossDefeatReward_LilyQueen_Dark": {
+    "localized_name": "Aumento Pequeno de Dano de Escuridão",
+    "description": null
+  },
+  "BossDefeatReward_MopKing": {
+    "localized_name": "Aumento Pequeno de Dano de Gelo",
+    "description": null
+  },
+  "BossDefeatReward_Mutant": {
+    "localized_name": "Aumento Pequeno de Dano Não Elemental",
+    "description": null
+  },
+  "BossDefeatReward_MysteryMask": {
+    "localized_name": "Aumento Pequeno de Dano de Escuridão",
+    "description": null
+  },
+  "BossDefeatReward_NaughtyCat": {
+    "localized_name": "Aumento Pequeno de Dano Não Elemental",
+    "description": null
+  },
+  "BossDefeatReward_NightBlueHorse": {
+    "localized_name": "Aumento Pequeno de Dano de Escuridão",
+    "description": null
+  },
+  "BossDefeatReward_PinkRabbit_Grass": {
+    "localized_name": "Aumento Médio de Dano de Grama",
+    "description": null
+  },
+  "BossDefeatReward_PlantSlime": {
+    "localized_name": "Aumento Pequeno de Dano de Terra",
+    "description": null
+  },
+  "BossDefeatReward_PurpleSpider": {
+    "localized_name": "Aumento Pequeno de Dano de Escuridão",
+    "description": null
+  },
+  "BossDefeatReward_QueenBee": {
+    "localized_name": "Aumento Pequeno de Dano de Grama",
+    "description": null
+  },
+  "BossDefeatReward_RaijinDaughter_Water": {
+    "localized_name": "Aumento Pequeno de Dano de Escuridão",
+    "description": null
+  },
+  "BossDefeatReward_Ronin": {
+    "localized_name": "Aumento Médio de Dano de Fogo",
+    "description": null
+  },
+  "BossDefeatReward_SaintCentaur_1": {
+    "localized_name": "Aumento Grande de Dano Não Elemental",
+    "description": null
+  },
+  "BossDefeatReward_SaintCentaur_2": {
+    "localized_name": "Aumento Pequeno de Dano de Escuridão",
+    "description": null
+  },
+  "BossDefeatReward_SakuraSaurus": {
+    "localized_name": "Aumento Pequeno de Dano de Grama",
+    "description": null
+  },
+  "BossDefeatReward_SakuraSaurus_Water": {
+    "localized_name": "Aumento Pequeno de Dano de Água",
+    "description": null
+  },
+  "BossDefeatReward_SkyDragon": {
+    "localized_name": "Aumento Pequeno de Dano Dracônico",
+    "description": null
+  },
+  "BossDefeatReward_Suzaku": {
+    "localized_name": "Aumento Grande de Dano de Fogo",
+    "description": null
+  },
+  "BossDefeatReward_ThunderBird": {
+    "localized_name": "Aumento Pequeno de Dano Elétrico",
+    "description": null
+  },
+  "BossDefeatReward_Umihebi": {
+    "localized_name": "Aumento Médio de Dano de Água",
+    "description": null
+  },
+  "BossDefeatReward_VioletFairy": {
+    "localized_name": "Aumento Médio de Dano de Grama",
+    "description": null
+  },
+  "BossDefeatReward_WeaselDragon": {
+    "localized_name": "Aumento Pequeno de Dano de Gelo",
+    "description": null
+  },
+  "BossDefeatReward_Werewolf_Ice": {
+    "localized_name": "Aumento Grande de Dano de Gelo",
+    "description": null
+  },
+  "BossDefeatReward_WhiteDeer": {
+    "localized_name": "Aumento Médio de Dano Não Elemental",
+    "description": null
+  },
+  "BossDefeatReward_WhiteMoth": {
+    "localized_name": "Aumento Pequeno de Dano de Gelo",
+    "description": null
+  },
+  "BossDefeatReward_WhiteShieldDragon": {
+    "localized_name": "Aumento Médio de Dano Dracônico",
+    "description": null
+  },
+  "BossDefeatReward_WhiteTiger_Ground": {
+    "localized_name": "Aumento Médio de Dano de Terra",
+    "description": null
+  },
+  "BossDefeatReward_WingGolem": {
+    "localized_name": "Aumento Pequeno de Dano de Terra",
+    "description": null
+  },
+  "BossDefeatReward_Yeti_Grass": {
+    "localized_name": "Aumento Pequeno de Dano de Grama",
+    "description": null
+  },
   "CaptureLevel_Up_1": {
     "localized_name": "Poder de Captura +1",
     "description": null
@@ -136,7 +408,7 @@
     "description": null
   },
   "Deffence_up2": {
-    "localized_name": "Corpo fechado",
+    "localized_name": "Corpo Fechado",
     "description": null
   },
   "Deffence_up3": {
@@ -584,7 +856,7 @@
     "description": "Manutenção de Fartura <NumBlue_13>+10.0%</>"
   },
   "PAL_FullStomach_Down_2": {
-    "localized_name": "Mestre da dieta",
+    "localized_name": "Mestre da Dieta",
     "description": "Manutenção de Fartura <NumBlue_13>+15.0%</>"
   },
   "PAL_FullStomach_Down_3": {

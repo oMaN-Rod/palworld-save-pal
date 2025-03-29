@@ -39,10 +39,6 @@
     "localized_name": "毒雨",
     "description": "使出浑身力量 向各个方向喷洒毒球。"
   },
-  "EPalWazaID::ChaosLaser": {
-    "localized_name": "混沌射线",
-    "description": "zh-Hans Text"
-  },
   "EPalWazaID::ChargeCanon": {
     "localized_name": "龙息炮",
     "description": "向敌人发射积蓄着龙属性力量的能量弹。 能量弹在着弹时将引发大范围爆炸。"
@@ -167,6 +163,10 @@
     "localized_name": "绿野飓风",
     "description": "在左右两侧生成龙卷风， 并扇向敌人。"
   },
+  "EPalWazaID::GravityShot": {
+    "localized_name": "暗能弹",
+    "description": "发射逐渐加速的黑暗能量弹"
+  },
   "EPalWazaID::HolyBlast": {
     "localized_name": "光击阵",
     "description": "在敌人脚下和四周引发大范围的光柱爆炸。"
@@ -268,7 +268,7 @@
     "description": "瞄准敌人射出无数风刃。"
   },
   "EPalWazaID::Railbolt": {
-    "localized_name": "Railbolt",
+    "localized_name": "并联雷光",
     "description": "积蓄雷电的力量到极限， 朝敌人同时发射多道强力雷击。"
   },
   "EPalWazaID::RangeThunder": {
@@ -371,6 +371,10 @@
     "localized_name": "广域雷击",
     "description": "召唤雷电 在一定时间后生成大量落电。"
   },
+  "EPalWazaID::ThunderSpear": {
+    "localized_name": "雷矛",
+    "description": "向敌人发射高速直线飞行的雷枪。"
+  },
   "EPalWazaID::ThunderStorm": {
     "localized_name": "雷霆飓风",
     "description": "召唤巨大的雷属性龙卷风。 龙卷风将追踪敌人缓慢移动。"
@@ -386,10 +390,6 @@
   "EPalWazaID::TriSpark": {
     "localized_name": "三相火花",
     "description": "同时发射直线飞行的高速雷球， 和追踪敌人的慢速雷球。"
-  },
-  "EPalWazaID::TripleCannon": {
-    "localized_name": "三重龙息弹",
-    "description": "zh-Hans Text"
   },
   "EPalWazaID::Unique_Alpaca_Tackle": {
     "localized_name": "绒毛冲撞",

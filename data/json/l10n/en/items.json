@@ -20,12 +20,12 @@
     "description": "An accessory that allows the player to perform double dashes in mid-air when equipped."
   },
   "Accessory_AirDash3": {
-    "localized_name": "Triple Air Dash Boots",
-    "description": "An accessory that allows the player to perform triple dashes in mid-air when equipped."
+    "localized_name": "Air Dash Boots",
+    "description": "An accessory that allows the player to dash in mid-air when equipped."
   },
   "Accessory_AirDash4": {
-    "localized_name": "Quadruple Air Dash Boots",
-    "description": "An accessory that allows the player to perform quadruple dashes in mid-air when equipped."
+    "localized_name": "Air Dash Boots",
+    "description": "An accessory that allows the player to dash in mid-air when equipped."
   },
   "Accessory_AquaResist_1": {
     "localized_name": "Ring of Water Resistance",
@@ -157,7 +157,7 @@
   },
   "Accessory_JumpCount_Increase3": {
     "localized_name": "Quadruple Jump Boots",
-    "description": "An accessory that allows the player to perform triple jumps in mid-air when equipped.|"
+    "description": "An accessory that allows the player to perform quadruple jumps in mid-air when equipped."
   },
   "Accessory_JumpPower_Increase": {
     "localized_name": "Anti-Gravity Belt",
@@ -573,19 +573,19 @@
   },
   "Blueprint_CompoundBow_2": {
     "localized_name": "Compound Bow Schematic 1",
-    "description": "When in inventory, unlocks recipe for Compound Bow (Uncommon). Can be crafted at WeaponFactory Dirty 03."
+    "description": "When in inventory, unlocks recipe for Compound Bow (Uncommon). Can be crafted at WeaponFactory Dirty 02."
   },
   "Blueprint_CompoundBow_3": {
     "localized_name": "Compound Bow Schematic 2",
-    "description": "When in inventory, unlocks recipe for Compound Bow (Rare). Can be crafted at WeaponFactory Dirty 03."
+    "description": "When in inventory, unlocks recipe for Compound Bow (Rare). Can be crafted at WeaponFactory Dirty 02."
   },
   "Blueprint_CompoundBow_4": {
     "localized_name": "Compound Bow Schematic 3",
-    "description": "When in inventory, unlocks recipe for Compound Bow (Epic). Can be crafted at WeaponFactory Dirty 03."
+    "description": "When in inventory, unlocks recipe for Compound Bow (Epic). Can be crafted at WeaponFactory Dirty 02."
   },
   "Blueprint_CompoundBow_5": {
     "localized_name": "Compound Bow Schematic 4",
-    "description": "When in inventory, unlocks recipe for Compound Bow (Legendary). Can be crafted at WeaponFactory Dirty 03."
+    "description": "When in inventory, unlocks recipe for Compound Bow (Legendary). Can be crafted at WeaponFactory Dirty 02."
   },
   "Blueprint_CopperArmorCold_2": {
     "localized_name": "Cold Resistant Metal Armor Schematic 1",
@@ -685,19 +685,19 @@
   },
   "Blueprint_FlameThrower_2": {
     "localized_name": "Flamethrower Schematic 1",
-    "description": "When in inventory, unlocks recipe for FlameThrower (Uncommon). Can be crafted at WeaponFactory Dirty 03."
+    "description": "When in inventory, unlocks recipe for Flamethrower (Uncommon). Can be crafted at WeaponFactory Dirty 03."
   },
   "Blueprint_FlameThrower_3": {
     "localized_name": "Flamethrower Schematic 2",
-    "description": "When in inventory, unlocks recipe for FlameThrower (Rare). Can be crafted at WeaponFactory Dirty 03."
+    "description": "When in inventory, unlocks recipe for Flamethrower (Rare). Can be crafted at WeaponFactory Dirty 03."
   },
   "Blueprint_FlameThrower_4": {
     "localized_name": "Flamethrower Schematic 3",
-    "description": "When in inventory, unlocks recipe for FlameThrower (Epic). Can be crafted at WeaponFactory Dirty 03."
+    "description": "When in inventory, unlocks recipe for Flamethrower (Epic). Can be crafted at WeaponFactory Dirty 03."
   },
   "Blueprint_FlameThrower_5": {
     "localized_name": "Flamethrower Schematic 4",
-    "description": "When in inventory, unlocks recipe for FlameThrower (Legendary). Can be crafted at WeaponFactory Dirty 03."
+    "description": "When in inventory, unlocks recipe for Flamethrower (Legendary). Can be crafted at WeaponFactory Dirty 03."
   },
   "Blueprint_FurArmorCold_2": {
     "localized_name": "Cold Resistant Pelt Armor Schematic 1",
@@ -1701,7 +1701,7 @@
   },
   "Blueprint_SemiAutoRifle_5": {
     "localized_name": "Semi-Auto Rifle Schematic 4",
-    "description": "When in inventory, unlocks recipe for Semi-Auto Rifle (Legendary). Can be crafted at WeaponFactory Dirty 02>."
+    "description": "When in inventory, unlocks recipe for Semi-Auto Rifle (Legendary). Can be crafted at WeaponFactory Dirty 02."
   },
   "Blueprint_SemiAutoShotgun_2": {
     "localized_name": "Semi-Auto Shotgun Schematic 1",
@@ -1801,7 +1801,7 @@
   },
   "Blueprint_SubmachineGun_2": {
     "localized_name": "SMG Schematic 1",
-    "description": "When in inventory, unlocks recipe for <SMG (Uncommon). Can be crafted at WeaponFactory Dirty 02."
+    "description": "When in inventory, unlocks recipe for SMG (Uncommon). Can be crafted at WeaponFactory Dirty 02."
   },
   "Blueprint_SubmachineGun_3": {
     "localized_name": "SMG Schematic 2",
@@ -1813,7 +1813,7 @@
   },
   "Blueprint_SubmachineGun_5": {
     "localized_name": "SMG Schematic 4",
-    "description": "When in inventory, unlocks recipe for SMG (Legendary). Can be crafted at WeaponFactory Dirty 02>."
+    "description": "When in inventory, unlocks recipe for SMG (Legendary). Can be crafted at WeaponFactory Dirty 02."
   },
   "Blueprint_WeakerBow_2": {
     "localized_name": "Old Bow Schematic 1",
@@ -1833,7 +1833,7 @@
   },
   "Bone": {
     "localized_name": "Bone",
-    "description": "Bone collected from Pals. Used in the creation of high quality Paldium."
+    "description": "Bone collected from Pals. A valuable source of premium calcium."
   },
   "BossDefeatReward_AmaterasuWolf_Dark": {
     "localized_name": "Kitsun Noct Bounty Token",
@@ -1917,7 +1917,7 @@
   },
   "BossDefeatReward_GoldenHorse": {
     "localized_name": "Gildane Bounty Token",
-    "description": "Proof of defeating [Gildane, Gaurdian Beast of Twilight]. Simply possessing it permanently increases the stats of the Pals in your team."
+    "description": "Proof of defeating [Gildane, Guardian Beast of Twilight]. Simply possessing it permanently increases the stats of the Pals in your team."
   },
   "BossDefeatReward_GrassMammoth": {
     "localized_name": "Mammorest Bounty Token",
@@ -2000,7 +2000,7 @@
     "description": "Proof of defeating [Sweepa, Majesty of Fuzz]. Simply possessing it permanently increases the stats of the Pals in your team."
   },
   "BossDefeatReward_Mutant": {
-    "localized_name": "Lunairs Bounty Token",
+    "localized_name": "Lunaris Bounty Token",
     "description": "Proof of defeating [Lunaris, Extraterrestrial]. Simply possessing it permanently increases the stats of the Pals in your team."
   },
   "BossDefeatReward_MysteryMask": {
@@ -2096,7 +2096,7 @@
     "description": "Proof of defeating [Cryolinx Terra, Predator of the Earth]. Simply possessing it permanently increases the stats of the Pals in your team."
   },
   "BossDefeatReward_WingGolem": {
-    "localized_name": "Kncklem Bounty Token",
+    "localized_name": "Knocklem Bounty Token",
     "description": "Proof of defeating [Knocklem, Suit of Armor]. Simply possessing it permanently increases the stats of the Pals in your team."
   },
   "BossDefeatReward_Yeti_Grass": {
@@ -2201,7 +2201,7 @@
   },
   "CarrotSeeds": {
     "localized_name": "Carrot Seeds",
-    "description": "Seeds that produce Carrot>. Necessary for starting a farm."
+    "description": "Seeds that produce Carrot. Necessary for starting a farm."
   },
   "CaveMushroom": {
     "localized_name": "Cavern Mushroom",
@@ -2214,6 +2214,10 @@
   "Charcoal": {
     "localized_name": "Charcoal",
     "description": "Charcoal made from burning Wood. It can be combined with Sulfur to create Gunpowder."
+  },
+  "ChargeLaserRifle": {
+    "localized_name": "ChargeLaserRifle",
+    "description": "ChargeLaserRifle"
   },
   "CheeseBurger": {
     "localized_name": "Cheeseburger",
@@ -2583,6 +2587,10 @@
     "localized_name": "Plasma Cannon",
     "description": "Fires high-output energy projectiles. Causes an energy explosion upon impact."
   },
+  "EnergyShotgun": {
+    "localized_name": "EnergyShotgun",
+    "description": "EnergyShotgun"
+  },
   "ExpBoost_01": {
     "localized_name": "Training Manual (S)",
     "description": "Training manual that grants a tiny amount of EXP when read by a Pal."
@@ -2636,23 +2644,23 @@
     "description": "Fishing Rod Super"
   },
   "FlameThrower": {
-    "localized_name": "FlameThrower",
+    "localized_name": "Flamethrower",
     "description": "Flamethrower that fires long-range flame. Can set the enemy on fire."
   },
   "FlameThrower_2": {
-    "localized_name": "FlameThrower",
+    "localized_name": "Flamethrower",
     "description": "Flamethrower that fires long-range flame. Can set the enemy on fire."
   },
   "FlameThrower_3": {
-    "localized_name": "FlameThrower",
+    "localized_name": "Flamethrower",
     "description": "Flamethrower that fires long-range flame. Can set the enemy on fire."
   },
   "FlameThrower_4": {
-    "localized_name": "FlameThrower",
+    "localized_name": "Flamethrower",
     "description": "Flamethrower that fires long-range flame. Can set the enemy on fire."
   },
   "FlameThrower_5": {
-    "localized_name": "FlameThrower",
+    "localized_name": "Flamethrower",
     "description": "Flamethrower that fires long-range flame. Can set the enemy on fire."
   },
   "FlamethrowerBullet": {
@@ -2717,7 +2725,7 @@
   },
   "FriedVegetables": {
     "localized_name": "Stir-Fried Veggies",
-    "description": "A dish prepared by stir frying Lettuce and Meat. When eaten, it will temporarily increase Attack by +10%."
+    "description": "A dish prepared by stir frying Lettuce and Raw Meat. When eaten, it will temporarily increase Attack by +10%."
   },
   "Fruit__defense_01": {
     "localized_name": "Stout Fruit",
@@ -2837,7 +2845,7 @@
   },
   "GYM_Head_Viking": {
     "localized_name": "Bjorn Hat",
-    "description": "Dress up like Bjorm using this special headpiece!"
+    "description": "Dress up like Bjorn using this special headpiece!"
   },
   "GasMask": {
     "localized_name": "Gas Mask",
@@ -2973,7 +2981,7 @@
   },
   "Gunpowder": {
     "localized_name": "Gunpowder",
-    "description": "Gunpowder used to fire ammunition. Required to make bullets."
+    "description": "Gunpowder"
   },
   "Gunpowder2": {
     "localized_name": "Gunpowder",
@@ -3017,343 +3025,343 @@
   },
   "Head001": {
     "localized_name": "Monarch's Crown",
-    "description": null
+    "description": "A crown for those who possess a high ranking. Being quite heavy, it's not suited for practical use."
   },
   "Head001_2": {
     "localized_name": "Monarch's Crown",
-    "description": null
+    "description": "A crown for those who possess a high ranking. Being quite heavy, it's not suited for practical use."
   },
   "Head001_3": {
     "localized_name": "Monarch's Crown",
-    "description": null
+    "description": "A crown for those who possess a high ranking. Being quite heavy, it's not suited for practical use."
   },
   "Head001_4": {
     "localized_name": "Monarch's Crown",
-    "description": null
+    "description": "A crown for those who possess a high ranking. Being quite heavy, it's not suited for practical use."
   },
   "Head001_5": {
     "localized_name": "Monarch's Crown",
-    "description": null
+    "description": "A crown for those who possess a high ranking. Being quite heavy, it's not suited for practical use."
   },
   "Head002": {
     "localized_name": "Golden Crown",
-    "description": null
+    "description": "A rare golden crown. Just wearing it makes you feel like royalty."
   },
   "Head002_2": {
     "localized_name": "Golden Crown",
-    "description": null
+    "description": "A rare golden crown. Just wearing it makes you feel like royalty."
   },
   "Head002_3": {
     "localized_name": "Golden Crown",
-    "description": null
+    "description": "A rare golden crown. Just wearing it makes you feel like royalty."
   },
   "Head002_4": {
     "localized_name": "Golden Crown",
-    "description": null
+    "description": "A rare golden crown. Just wearing it makes you feel like royalty."
   },
   "Head002_5": {
     "localized_name": "Golden Crown",
-    "description": null
+    "description": "A rare golden crown. Just wearing it makes you feel like royalty."
   },
   "Head003": {
     "localized_name": "Long-Eared Headband",
-    "description": null
+    "description": "A cute headband with ears modeled after a Ribbuny. It doesn't provide much head protection."
   },
   "Head003_2": {
     "localized_name": "Long-Eared Headband",
-    "description": null
+    "description": "A cute headband with ears modeled after a Ribbuny. It doesn't provide much head protection."
   },
   "Head003_3": {
     "localized_name": "Long-Eared Headband",
-    "description": null
+    "description": "A cute headband with ears modeled after a Ribbuny. It doesn't provide much head protection."
   },
   "Head003_4": {
     "localized_name": "Long-Eared Headband",
-    "description": null
+    "description": "A cute headband with ears modeled after a Ribbuny. It doesn't provide much head protection."
   },
   "Head003_5": {
     "localized_name": "Long-Eared Headband",
-    "description": null
+    "description": "A cute headband with ears modeled after a Ribbuny. It doesn't provide much head protection."
   },
   "Head004": {
     "localized_name": "Witch Hat",
-    "description": null
+    "description": "A hat modeled after a Wixen or Katress. It makes you feel like you can use Pal skills."
   },
   "Head004_2": {
     "localized_name": "Witch Hat",
-    "description": null
+    "description": "A hat modeled after a Wixen or Katress. It makes you feel like you can use Pal skills."
   },
   "Head004_3": {
     "localized_name": "Witch Hat",
-    "description": null
+    "description": "A hat modeled after a Wixen or Katress. It makes you feel like you can use Pal skills."
   },
   "Head004_4": {
     "localized_name": "Witch Hat",
-    "description": null
+    "description": "A hat modeled after a Wixen or Katress. It makes you feel like you can use Pal skills."
   },
   "Head004_5": {
     "localized_name": "Witch Hat",
-    "description": null
+    "description": "A hat modeled after a Wixen or Katress. It makes you feel like you can use Pal skills."
   },
   "Head005": {
     "localized_name": "Soft Hat",
-    "description": null
+    "description": "A light and flexible cap perfect for everyday use. Fashionable, it was once a popular item on the island."
   },
   "Head005_2": {
     "localized_name": "Soft Hat",
-    "description": null
+    "description": "A light and flexible cap perfect for everyday use. Fashionable, it was once a popular item on the island."
   },
   "Head005_3": {
     "localized_name": "Soft Hat",
-    "description": null
+    "description": "A light and flexible cap perfect for everyday use. Fashionable, it was once a popular item on the island."
   },
   "Head005_4": {
     "localized_name": "Soft Hat",
-    "description": null
+    "description": "A light and flexible cap perfect for everyday use. Fashionable, it was once a popular item on the island."
   },
   "Head005_5": {
     "localized_name": "Soft Hat",
-    "description": null
+    "description": "A light and flexible cap perfect for everyday use. Fashionable, it was once a popular item on the island."
   },
   "Head006": {
     "localized_name": "Helmet",
-    "description": null
+    "description": "A tough helmet that protects its wearer's head. It was apparently made after a number of people injured their heads after taking a tumble off a Eikthyrdeer."
   },
   "Head006_2": {
     "localized_name": "Helmet",
-    "description": null
+    "description": "A tough helmet that protects its wearer's head. It was apparently made after a number of people injured their heads after taking a tumble off a Eikthyrdeer."
   },
   "Head006_3": {
     "localized_name": "Helmet",
-    "description": null
+    "description": "A tough helmet that protects its wearer's head. It was apparently made after a number of people injured their heads after taking a tumble off a Eikthyrdeer."
   },
   "Head006_4": {
     "localized_name": "Helmet",
-    "description": null
+    "description": "A tough helmet that protects its wearer's head. It was apparently made after a number of people injured their heads after taking a tumble off a Eikthyrdeer."
   },
   "Head006_5": {
     "localized_name": "Helmet",
-    "description": null
+    "description": "A tough helmet that protects its wearer's head. It was apparently made after a number of people injured their heads after taking a tumble off a Eikthyrdeer."
   },
   "Head007": {
     "localized_name": "Silk Hat",
-    "description": null
+    "description": "A gentleman's hat. Those made from Sibelyx materials are considered luxury items, but those made from Swee materials are of poor quality, and more commonly found."
   },
   "Head007_2": {
     "localized_name": "Silk Hat",
-    "description": null
+    "description": "A gentleman's hat. Those made from Sibelyx materials are considered luxury items, but those made from Swee materials are of poor quality, and more commonly found."
   },
   "Head007_3": {
     "localized_name": "Silk Hat",
-    "description": null
+    "description": "A gentleman's hat. Those made from Sibelyx materials are considered luxury items, but those made from Swee materials are of poor quality, and more commonly found."
   },
   "Head007_4": {
     "localized_name": "Silk Hat",
-    "description": null
+    "description": "A gentleman's hat. Those made from Sibelyx materials are considered luxury items, but those made from Swee materials are of poor quality, and more commonly found."
   },
   "Head007_5": {
     "localized_name": "Silk Hat",
-    "description": null
+    "description": "A gentleman's hat. Those made from Sibelyx materials are considered luxury items, but those made from Swee materials are of poor quality, and more commonly found."
   },
   "Head008": {
     "localized_name": "Tricorne",
-    "description": null
+    "description": "A cap for those who love to fight. Its previous owner nearly drove Azurobe to extinction."
   },
   "Head008_2": {
     "localized_name": "Tricorne",
-    "description": null
+    "description": "A cap for those who love to fight. Its previous owner nearly drove Azurobe to extinction."
   },
   "Head008_3": {
     "localized_name": "Tricorne",
-    "description": null
+    "description": "A cap for those who love to fight. Its previous owner nearly drove Azurobe to extinction."
   },
   "Head008_4": {
     "localized_name": "Tricorne",
-    "description": null
+    "description": "A cap for those who love to fight. Its previous owner nearly drove Azurobe to extinction."
   },
   "Head008_5": {
     "localized_name": "Tricorne",
-    "description": null
+    "description": "A cap for those who love to fight. Its previous owner nearly drove Azurobe to extinction."
   },
   "Head009": {
     "localized_name": "Explorer Cap",
-    "description": null
+    "description": "A hat for explorers. It protects from the bright rays of the sun."
   },
   "Head009_2": {
     "localized_name": "Explorer Cap",
-    "description": null
+    "description": "A hat for explorers. It protects from the bright rays of the sun."
   },
   "Head009_3": {
     "localized_name": "Explorer Cap",
-    "description": null
+    "description": "A hat for explorers. It protects from the bright rays of the sun."
   },
   "Head009_4": {
     "localized_name": "Explorer Cap",
-    "description": null
+    "description": "A hat for explorers. It protects from the bright rays of the sun."
   },
   "Head009_5": {
     "localized_name": "Explorer Cap",
-    "description": null
+    "description": "A hat for explorers. It protects from the bright rays of the sun."
   },
   "Head010": {
     "localized_name": "Graduation Cap",
-    "description": null
+    "description": "A cap that makes its wearer feel smarter. Was there once a school on this island?"
   },
   "Head010_2": {
     "localized_name": "Graduation Cap",
-    "description": null
+    "description": "A cap that makes its wearer feel smarter. Was there once a school on this island?"
   },
   "Head010_3": {
     "localized_name": "Graduation Cap",
-    "description": null
+    "description": "A cap that makes its wearer feel smarter. Was there once a school on this island?"
   },
   "Head010_4": {
     "localized_name": "Graduation Cap",
-    "description": null
+    "description": "A cap that makes its wearer feel smarter. Was there once a school on this island?"
   },
   "Head010_5": {
     "localized_name": "Graduation Cap",
-    "description": null
+    "description": "A cap that makes its wearer feel smarter. Was there once a school on this island?"
   },
   "Head011": {
     "localized_name": "Farming Hat",
-    "description": null
+    "description": "A hat for working in the fields. It protects from the bright rays of the sun."
   },
   "Head011_2": {
     "localized_name": "Farming Hat",
-    "description": null
+    "description": "A hat for working in the fields. It protects from the bright rays of the sun."
   },
   "Head011_3": {
     "localized_name": "Farming Hat",
-    "description": null
+    "description": "A hat for working in the fields. It protects from the bright rays of the sun."
   },
   "Head011_4": {
     "localized_name": "Farming Hat",
-    "description": null
+    "description": "A hat for working in the fields. It protects from the bright rays of the sun."
   },
   "Head011_5": {
     "localized_name": "Farming Hat",
-    "description": null
+    "description": "A hat for working in the fields. It protects from the bright rays of the sun."
   },
   "Head012": {
     "localized_name": "Bowler Hat",
-    "description": null
+    "description": "A tough, round hat. It was sold with the guarantee that it wouldn't break even if a Mammorest stepped on it."
   },
   "Head012_2": {
     "localized_name": "Bowler Hat",
-    "description": null
+    "description": "A tough, round hat. It was sold with the guarantee that it wouldn't break even if a Mammorest stepped on it."
   },
   "Head012_3": {
     "localized_name": "Bowler Hat",
-    "description": null
+    "description": "A tough, round hat. It was sold with the guarantee that it wouldn't break even if a Mammorest stepped on it."
   },
   "Head012_4": {
     "localized_name": "Bowler Hat",
-    "description": null
+    "description": "A tough, round hat. It was sold with the guarantee that it wouldn't break even if a Mammorest stepped on it."
   },
   "Head012_5": {
     "localized_name": "Bowler Hat",
-    "description": null
+    "description": "A tough, round hat. It was sold with the guarantee that it wouldn't break even if a Mammorest stepped on it."
   },
   "Head013": {
     "localized_name": "Tocotoco Cap",
-    "description": null
+    "description": "Cap shaped like a Tocotoco. Its gaudy design is visible from far away."
   },
   "Head013_2": {
     "localized_name": "Tocotoco Cap",
-    "description": null
+    "description": "Cap shaped like a Tocotoco. Its gaudy design is visible from far away."
   },
   "Head013_3": {
     "localized_name": "Tocotoco Cap",
-    "description": null
+    "description": "Cap shaped like a Tocotoco. Its gaudy design is visible from far away."
   },
   "Head013_4": {
     "localized_name": "Tocotoco Cap",
-    "description": null
+    "description": "Cap shaped like a Tocotoco. Its gaudy design is visible from far away."
   },
   "Head013_5": {
     "localized_name": "Tocotoco Cap",
-    "description": null
+    "description": "Cap shaped like a Tocotoco. Its gaudy design is visible from far away."
   },
   "Head014": {
     "localized_name": "Grinning Tocotoco Cap",
-    "description": null
+    "description": "Cap shaped like a Tocotoco. It makes those who wear it smile uncontrollably."
   },
   "Head014_2": {
     "localized_name": "Grinning Tocotoco Cap",
-    "description": null
+    "description": "Cap shaped like a Tocotoco. It makes those who wear it smile uncontrollably."
   },
   "Head014_3": {
     "localized_name": "Grinning Tocotoco Cap",
-    "description": null
+    "description": "Cap shaped like a Tocotoco. It makes those who wear it smile uncontrollably."
   },
   "Head014_4": {
     "localized_name": "Grinning Tocotoco Cap",
-    "description": null
+    "description": "Cap shaped like a Tocotoco. It makes those who wear it smile uncontrollably."
   },
   "Head014_5": {
     "localized_name": "Grinning Tocotoco Cap",
-    "description": null
+    "description": "Cap shaped like a Tocotoco. It makes those who wear it smile uncontrollably."
   },
   "Head015": {
     "localized_name": "Gumoss Cap",
-    "description": null
+    "description": "Cap shaped like a Gumoss."
   },
   "Head015_2": {
     "localized_name": "Gumoss Cap",
-    "description": null
+    "description": "Cap shaped like a Gumoss."
   },
   "Head015_3": {
     "localized_name": "Gumoss Cap",
-    "description": null
+    "description": "Cap shaped like a Gumoss."
   },
   "Head015_4": {
     "localized_name": "Gumoss Cap",
-    "description": null
+    "description": "Cap shaped like a Gumoss."
   },
   "Head015_5": {
     "localized_name": "Gumoss Cap",
-    "description": null
+    "description": "Cap shaped like a Gumoss."
   },
   "Head016": {
     "localized_name": "Penking Cap",
-    "description": null
+    "description": "Hat shaped like a Penking."
   },
   "Head016_2": {
     "localized_name": "Penking Cap",
-    "description": null
+    "description": "Hat shaped like a Penking."
   },
   "Head016_3": {
     "localized_name": "Penking Cap",
-    "description": null
+    "description": "Hat shaped like a Penking."
   },
   "Head016_4": {
     "localized_name": "Penking Cap",
-    "description": null
+    "description": "Hat shaped like a Penking."
   },
   "Head016_5": {
     "localized_name": "Penking Cap",
-    "description": null
+    "description": "Hat shaped like a Penking."
   },
   "Head017": {
     "localized_name": "Katress Cap",
-    "description": null
+    "description": "Hat shaped like a Katress."
   },
   "Head017_2": {
     "localized_name": "Katress Cap",
-    "description": null
+    "description": "Hat shaped like a Katress."
   },
   "Head017_3": {
     "localized_name": "Katress Cap",
-    "description": null
+    "description": "Hat shaped like a Katress."
   },
   "Head017_4": {
     "localized_name": "Katress Cap",
-    "description": null
+    "description": "Hat shaped like a Katress."
   },
   "Head017_5": {
     "localized_name": "Katress Cap",
-    "description": null
+    "description": "Hat shaped like a Katress."
   },
   "HeadEquip001_purple": {
     "localized_name": "Witch's Crown (Ultra)",
@@ -3493,7 +3501,7 @@
   },
   "Herbs": {
     "localized_name": "Low Grade Medical Supplies",
-    "description": "Low Grade Medical Supplies good for colds and sprains. They don't heal Health when eaten, however."
+    "description": "Low Grade Medical Supplies good for Sick, Sprain, and Overfull. They don't heal Health when eaten, however."
   },
   "Homeward": {
     "localized_name": "Homeward Thundercloud",
@@ -3641,23 +3649,23 @@
   },
   "LaserGatlingGun": {
     "localized_name": "Laser Gatling Gun",
-    "description": "A Gatling gun capable of rapidly firing lasers. Burns down enemies with suppressive beams."
+    "description": "Fires beam-like energy blasts at high speed. Its overwhelming firepower can take down multple enemies at once."
   },
   "LaserGatlingGun_2": {
     "localized_name": "Laser Gatling Gun",
-    "description": "A Gatling gun capable of rapidly firing lasers. Burns down enemies with suppressive beams."
+    "description": "Fires beam-like energy blasts at high speed. Its overwhelming firepower can take down multple enemies at once."
   },
   "LaserGatlingGun_3": {
     "localized_name": "Laser Gatling Gun",
-    "description": "A Gatling gun capable of rapidly firing lasers. Burns down enemies with suppressive beams."
+    "description": "Fires beam-like energy blasts at high speed. Its overwhelming firepower can take down multple enemies at once."
   },
   "LaserGatlingGun_4": {
     "localized_name": "Laser Gatling Gun",
-    "description": "A Gatling gun capable of rapidly firing lasers. Burns down enemies with suppressive beams."
+    "description": "Fires beam-like energy blasts at high speed. Its overwhelming firepower can take down multple enemies at once."
   },
   "LaserGatlingGun_5": {
     "localized_name": "Laser Gatling Gun",
-    "description": "A Gatling gun capable of rapidly firing lasers. Burns down enemies with suppressive beams."
+    "description": "Fires beam-like energy blasts at high speed. Its overwhelming firepower can take down multple enemies at once."
   },
   "LaserRifle": {
     "localized_name": "Laser Rifle",
@@ -3875,12 +3883,16 @@
     "localized_name": "Marinated Mushrooms",
     "description": "A dish made by marinating Mushrooms in a marinade. Eating it improves Defense by +10% for a period of time."
   },
+  "MeaninglessItem_ButcheringImportPal": {
+    "localized_name": "Scrapped Tissue Sample",
+    "description": "Pulverized remnants of some kind of biological tissue. Leftover residue from butchering a genetically reconstructed Pal, it serves no purpose and can only be sold or discarded."
+  },
   "Meat": {
-    "localized_name": "Meat",
+    "localized_name": "Raw Meat",
     "description": "Pal meat. It’s so fresh that even a human could safely eat it raw."
   },
   "Meat2": {
-    "localized_name": "Meat",
+    "localized_name": "Raw Meat",
     "description": "Pal meat. It’s so fresh that even a human could safely eat it raw."
   },
   "MeatAndPotatoes": {
@@ -4083,6 +4095,10 @@
     "localized_name": "Suspicious Juice",
     "description": "Juice that improves mood when consumed. Drinking it increases work speed for a period of time, but lowers SAN."
   },
+  "OverheatRifle": {
+    "localized_name": "OverheatRifle",
+    "description": "OverheatRifle"
+  },
   "PalCrystal_Ex": {
     "localized_name": "Ancient Civilization Parts",
     "description": "Debris excavated from ancient ruins. Contains abundant information on lost technology. Extremely valuable, people from all walks of life are now seeking such crystals."
@@ -4090,6 +4106,10 @@
   "PalDarkParts": {
     "localized_name": "Dark Fragment",
     "description": "Dropped by some powerful Dark Pals. Used as a material for crafting powerful accessories and other items."
+  },
+  "PalDopingShot": {
+    "localized_name": "PalDopingShot",
+    "description": "PalDopingShot"
   },
   "PalEgg_Dark_01": {
     "localized_name": "Dark Egg",
@@ -4274,6 +4294,10 @@
   "PalFluid": {
     "localized_name": "Pal Fluids",
     "description": "Body fluids taken from a Pal. Useful for its high viscosity."
+  },
+  "PalHealingGrenade": {
+    "localized_name": "PalHealingGrenade",
+    "description": "PalHealingGrenade"
   },
   "PalItem_CaptainPenguin": {
     "localized_name": "Penking Plume",
@@ -4692,7 +4716,7 @@
     "description": "A mysterious extract that can be injected into pals to unlock their potential. Raises Pal's rank from ☆3 to ☆4. For some reason, a resentful voice can be heard from within..."
   },
   "Rankup_Arbitrary": {
-    "localized_name": "Concentrated All-Pupose Pal Extract",
+    "localized_name": "Concentrated All-Purpose Pal Extract",
     "description": "A mysterious extract that can be injected into pals to unlock their potential. Raises Pal's rank by one. For some reason, a resentful voice can be heard from within..."
   },
   "ReinforcedArrow": {
@@ -4914,6 +4938,10 @@
   "Shield_04": {
     "localized_name": "Hyper Shield",
     "description": "Strange shield made with Paldium technology. It automatically repair itself after not taking damage for a while. Through repeated testing, the highest quality has been achieved."
+  },
+  "Shield_05": {
+    "localized_name": "Ultra Shield",
+    "description": "Strange shield made with Paldium technology. It automatically repair itself after not taking damage for a while. As a result of further experiments, ultimate quality has been achieved."
   },
   "Shield_SF": {
     "localized_name": "Advanced Shield",
@@ -5565,7 +5593,7 @@
   },
   "SkillUnlock_RaijinDaughter_Water": {
     "localized_name": "Dazzi Noct's Necklace",
-    "description": "Collar for RaijinDaughter Water Water. If RaijinDaughter Water Water is in your team, it will stay by your side and attack enemies in tandem."
+    "description": "Collar for RaijinDaughter Water. If RaijinDaughter Water is in your team, it will stay by your side and attack enemies in tandem."
   },
   "SkillUnlock_RedArmorBird": {
     "localized_name": "Ragnahawk Saddle",
@@ -5980,47 +6008,47 @@
     "description": "Material sheared from sheep Pals. A necessity for creating bedding, Cloth and more."
   },
   "WorkSuitability_AddTicket_Collection": {
-    "localized_name": "Applied Gathering TechniqueⅠ",
+    "localized_name": "Applied Gathering Technique Ⅰ",
     "description": "A rare book written about the secrets of Gathering. Allowing a Pal to read it permanently increases their Gathering affinity by +1."
   },
   "WorkSuitability_AddTicket_Cool": {
-    "localized_name": "Applied Cooling TechniqueⅠ",
+    "localized_name": "Applied Cooling Technique Ⅰ",
     "description": "A rare book written about the secrets of Cooling. Allowing a Pal to read it permanently increases their Cooling affinity by +1."
   },
   "WorkSuitability_AddTicket_Deforest": {
-    "localized_name": "Applied Lumberjack TechniqueⅠ",
+    "localized_name": "Applied LumberingTechnique Ⅰ",
     "description": "A rare book written about the secrets of Lumbering. Allowing a Pal to read it permanently increases their Lumbering affinity by +1."
   },
   "WorkSuitability_AddTicket_EmitFlame": {
-    "localized_name": "Applied Fire Starting TechniqueⅠ",
+    "localized_name": "Applied Kindling Technique Ⅰ",
     "description": "A rare book written about the secrets of Kindling. Allowing a Pal to read it permanently increases their Kindling affinity by +1."
   },
   "WorkSuitability_AddTicket_GenerateElectricity": {
-    "localized_name": "Applied Power Generation TechniqueⅠ",
-    "description": "A rare book written about the secrets of Generating Electricity. Allowing a Pal to read it permanently increases their uiCommon id=|COMMON WORK SUITABILITY GenerateElectricity|/> affinity by +1."
+    "localized_name": "Applied Generating Electricity Technique Ⅰ",
+    "description": "A rare book written about the secrets of Generating Electricity. Allowing a Pal to read it permanently increases their Generating Electricity affinity by +1."
   },
   "WorkSuitability_AddTicket_Handcraft": {
-    "localized_name": "Applied Manual Labor TechniqueⅠ",
+    "localized_name": "Applied Handiwork Technique Ⅰ",
     "description": "A rare book written about the secrets of Handiwork. Allowing a Pal to read it permanently increases their Handiwork affinity by +1."
   },
   "WorkSuitability_AddTicket_Mining": {
-    "localized_name": "Applied Mining TechniqueⅠ",
+    "localized_name": "Applied Mining Technique Ⅰ",
     "description": "A rare book written about the secrets of Mining. Allowing a Pal to read it permanently increases their Mining affinity by +1."
   },
   "WorkSuitability_AddTicket_ProductMedicine": {
-    "localized_name": "Applied Pharmacology TechniqueⅠ",
+    "localized_name": "Applied Medicine Production Technique Ⅰ",
     "description": "A rare book written about the secrets of Medicine Production. Allowing a Pal to read it permanently increases their Medicine Production affinity by +1."
   },
   "WorkSuitability_AddTicket_Seeding": {
-    "localized_name": "Applied Seed Sowing TechniqueⅠ",
+    "localized_name": "Applied Planting Technique Ⅰ",
     "description": "A rare book written about the secrets of Planting. Allowing a Pal to read it permanently increases their Planting affinity by +1."
   },
   "WorkSuitability_AddTicket_Transport": {
-    "localized_name": "Applied Transportation TechniqueⅠ",
+    "localized_name": "Applied Transporting Technique Ⅰ",
     "description": "A rare book written about the secrets of Transporting. Allowing a Pal to read it permanently increases their Transporting affinity by +1."
   },
   "WorkSuitability_AddTicket_Watering": {
-    "localized_name": "Applied Watering TechniqueⅠ",
+    "localized_name": "Applied Watering Technique Ⅰ",
     "description": "A rare book written about the secrets of Watering. Allowing a Pal to read it permanently increases their Watering affinity by +1."
   },
   "Yakisoba": {

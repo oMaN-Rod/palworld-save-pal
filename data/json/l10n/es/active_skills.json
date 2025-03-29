@@ -20,7 +20,7 @@
     "description": "Apunta al enemigo y dispara balas de agua a toda velocidad."
   },
   "EPalWazaID::BeamSlicer": {
-    "localized_name": "Rayo seccionador",
+    "localized_name": "Rayos seccionadores",
     "description": "Un rayo de luz imbuido de poder dragontino que destruye todo lo que haya ante ti. El área que destruida por el rayo, además, explotará pasados unos momentos."
   },
   "EPalWazaID::BlastCanon": {
@@ -38,10 +38,6 @@
   "EPalWazaID::BubbleShower": {
     "localized_name": "Ducha de burbujas",
     "description": "Concentra energía en su interior y esparce bolas venenosas en todas direcciones."
-  },
-  "EPalWazaID::ChaosLaser": {
-    "localized_name": "Láser del caos",
-    "description": "es_Text"
   },
   "EPalWazaID::ChargeCanon": {
     "localized_name": "Carga cañón",
@@ -167,6 +163,10 @@
     "localized_name": "Tornado de hierba",
     "description": "Crea remolinos a los lados del rival."
   },
+  "EPalWazaID::GravityShot": {
+    "localized_name": "Disparo oscuro",
+    "description": "Dispara una bala de energía oscura que va ganando velocidad."
+  },
   "EPalWazaID::HolyBlast": {
     "localized_name": "Explosión sagrada",
     "description": "Provoca una explosión lumínica de largo alcance alrededor del enemigo."
@@ -188,7 +188,7 @@
     "description": "Genera témpanos de hielo que brotan a los pies del enemigo y lo atraviesan."
   },
   "EPalWazaID::IceBlade": {
-    "localized_name": "Rajahielo",
+    "localized_name": "Cortahielo",
     "description": "Crea cuchillas de hielo en forma de media luna y se las lanza al enemigo."
   },
   "EPalWazaID::IceMissile": {
@@ -268,7 +268,7 @@
     "description": "Dispara innumerables espadas de viento que vuelan directas hacia el enemigo."
   },
   "EPalWazaID::Railbolt": {
-    "localized_name": "Railbolt",
+    "localized_name": "Riel eléctrico",
     "description": "Se carga de energía eléctrica hasta el límite y lanza montones de potentes rayos contra el rival."
   },
   "EPalWazaID::RangeThunder": {
@@ -293,11 +293,11 @@
   },
   "EPalWazaID::SandTornado": {
     "localized_name": "Tornado de arena",
-    "description": "Crea remolinos de arena a los lados del rival."
+    "description": "Crea remolinos de arena a los lados del enemigo."
   },
   "EPalWazaID::SandTwister": {
-    "localized_name": "Tornado de arena",
-    "description": "Genera múltiples tornados de arena que giran en círculos incesantemente."
+    "localized_name": "Arena huracanada",
+    "description": "Genera múltiples remolinos de arena que giran en círculos incesantemente."
   },
   "EPalWazaID::SeedMachinegun": {
     "localized_name": "Ametralladora de semillas",
@@ -371,6 +371,10 @@
     "localized_name": "Lluvia de rayos",
     "description": "Invoca al trueno y, pasado un tiempo, comienzan a caer rayos."
   },
+  "EPalWazaID::ThunderSpear": {
+    "localized_name": "Lanza de rayo",
+    "description": "Dispara una lanza de rayo a toda velocidad en línea recta hacia el enemigo."
+  },
   "EPalWazaID::ThunderStorm": {
     "localized_name": "Tormenta eléctrica",
     "description": "Genera un enorme tornado eléctrico que avanza lentamente hacia el enemigo."
@@ -386,10 +390,6 @@
   "EPalWazaID::TriSpark": {
     "localized_name": "Triple chispa",
     "description": "Por un lado, dispara una bola eléctrica que viaja en línea recta a toda velocidad y, al mismo tiempo, lanza otra igual pero más lenta que persigue al enemigo."
-  },
-  "EPalWazaID::TripleCannon": {
-    "localized_name": "Cañón triple",
-    "description": "es_Text"
   },
   "EPalWazaID::Unique_Alpaca_Tackle": {
     "localized_name": "Placaje acolchado",
@@ -472,7 +472,7 @@
     "description": "Técnica exclusiva de Cawgnito. Se teletransporta al instante al lado del enemigo y lo ataca con el pico."
   },
   "EPalWazaID::Unique_DarkMechaDragon_BeamSlash": {
-    "localized_name": "Tajo radial",
+    "localized_name": "Rayos cortantes",
     "description": "Técnica exclusiva de Xenolord. Crea una poderosa espada de energía con la derecha y asesta 2 mandobles mientras se desplaza a toda velocidad."
   },
   "EPalWazaID::Unique_DarkMechaDragon_ConvergentBeam": {
@@ -672,11 +672,11 @@
     "description": "Técnica especial de Bellanoir Libero. Baila grácilmente mientras genera un anillo de llamas que se extiende a su alrededor. También lanza fuegos fatuos que rastrean al enemigo."
   },
   "EPalWazaID::Unique_NightLady_WarpBeam": {
-    "localized_name": "Rayo fatídico",
+    "localized_name": "Floración del rayo onírico",
     "description": "Técnica especial de Bellanoir Libero. Se desvanece de repente para lanzar incontables rayos de luz en cuanto vuelve a aparecer. Los rayos de luz se abren en flor."
   },
   "EPalWazaID::Unique_NightLady_WarpBeam_Straight": {
-    "localized_name": "Rayo fatídico",
+    "localized_name": "Rayo onírico",
     "description": "Técnica especial de Bellanoir. Se desvanece de repente para lanzar incontables rayos de luz en cuanto vuelve a aparecer."
   },
   "EPalWazaID::Unique_PinkCat_CatPunch": {
@@ -820,7 +820,7 @@
     "description": "Dispara balas de agua que vuelan directas hacia el rival."
   },
   "EPalWazaID::WindCutter": {
-    "localized_name": "Aerofilos",
+    "localized_name": "Cortaviento",
     "description": "Dispara veloces cuchillas de viento que vuelan directas hacia el rival."
   },
   "EPalWazaID::WindEdge": {

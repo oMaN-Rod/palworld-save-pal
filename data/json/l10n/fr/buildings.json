@@ -33,7 +33,7 @@
   },
   "BaseCampWorkHard": {
     "localized_name": "Plateforme de surveillance",
-    "description": "La façon de travailler des Pals du camp ainsi que les autorisations/ interdictions vis-à-vis de chaque tâche peuvent être définies."
+    "description": "La façon de travailler des Pals du camp ainsi que les autorisations / interdictions vis-à-vis de chaque tâche peuvent être définies."
   },
   "BathTub_Stone": {
     "localized_name": "Baignoire ancienne",
@@ -45,19 +45,19 @@
   },
   "BlastFurnace": {
     "localized_name": "Fournaise de fortune",
-    "description": "Tu peux raffiner les Lingot de métal. La vitesse est basse à cause de leur faible valeur. Les Pals de feu requièrent d'allumer un feu."
+    "description": "Permet de raffiner les Lingot de métal. La qualité est médiocre et le processus est lent. Un Pal de feu est requis pour allumer le feu."
   },
   "BlastFurnace2": {
     "localized_name": "Fournaise améliorée",
-    "description": "Tu peux raffiner les Lingot de métal raffiné. Leur valeur a été augmentée plusieurs fois, mais la vitesse demeure insuffisante. Les Pals de feu requièrent d'allumer un feu."
+    "description": "Permet de raffiner les Lingot de métal raffiné. La qualité s'est améliorée, mais la vitesse reste insuffisante. Un Pal de feu est requis pour allumer le feu."
   },
   "BlastFurnace3": {
     "localized_name": "Fournaise électrique",
-    "description": "Tu peux raffiner les Lingot de paluminium. De l'électricité est nécessaire, mais elle permet un raffinage plus rapide. Les Pals de feu requièrent d'allumer un feu."
+    "description": "Permet de raffiner les Lingot de paluminium. Nécessite de l'électricité, mais permet un raffinage plus rapide. Un Pal de feu est requis pour allumer le feu."
   },
   "BlastFurnace4": {
     "localized_name": "Fournaise géante",
-    "description": "Permet de raffiner l'Hexolite. Sa taille gigantesque permet de faire travailler plusieurs Pals en même temps. Les Pals de feu requièrent d'allumer un feu."
+    "description": "Permet de raffiner l'Hexolite. Sa taille gigantesque permet à plusieurs Pals de raffiner ensemble. Un Pal de feu est requis pour allumer le feu."
   },
   "Bonsai": {
     "localized_name": "Arbre nain",
@@ -85,7 +85,7 @@
   },
   "BuildableGoddessStatue": {
     "localized_name": "Statue de puissance",
-    "description": "Une statue en pierre où est gravée une légende de Palpagos. Confère un mystérieux pouvoir pour toute offrande de Statue de Lifmunk."
+    "description": "Une statue en pierre mentionnée dans les légendes de l'île de Palpagos. Offre un Statue de Lifmunk pour recevoir un pouvoir mystérieux."
   },
   "Byobu": {
     "localized_name": "Paravent",
@@ -97,7 +97,11 @@
   },
   "CampFire": {
     "localized_name": "Feu de camp",
-    "description": "Une installation requise pour cuisiner. Elle ne remplit que les fonctions comme la cuisson d'ingrédients simples. Les Pals de feu requièrent d'allumer un feu."
+    "description": "Une installation nécessaire pour cuisiner. Elle ne permet que de cuire des ingrédients simples. Un Pal de feu est requis pour allumer le feu."
+  },
+  "CandleStand": {
+    "localized_name": "-",
+    "description": null
   },
   "Cauldron": {
     "localized_name": "Chaudron de sorcière",
@@ -105,7 +109,7 @@
   },
   "CeilingLamp": {
     "localized_name": "Plafonnier",
-    "description": "Une source de lumière pour éclairer le camp même dans la nuit noire. Peut être installée au plafond. De l'électricité est nécessaire, mais la zone éclairée est plus grande."
+    "description": "Une source de lumière pour éclairer le camp, même dans l'obscurité de la nuit. Peut être installée au plafond. De l'électricité est nécessaire, mais la zone éclairée est plus grande."
   },
   "Chair01_Iron": {
     "localized_name": "Chaise à revêtement en cuir",
@@ -133,7 +137,7 @@
   },
   "CharacterRankUp": {
     "localized_name": "Capsule d'enrichissement pour Pal",
-    "description": "Une installation pour faire monter les Pals au rang supérieur. Concentrer l'extrait d'un Pal pressé et le verser sur un autre Pal de même type lui permet de dépasser les limites de son propre corps."
+    "description": "Une installation permettant d'augmenter le rang d’un Pal. Un extrait concentré obtenu d’un Pal de même type peut lui être injecté pour lui permettre de surpasser ses limites physiques."
   },
   "Clock01_Stone": {
     "localized_name": "Horloge murale ancienne",
@@ -145,7 +149,19 @@
   },
   "CoalPit": {
     "localized_name": "Mine de charbon",
-    "description": "Une installation pour produire du Charbon. Une bonne force physique est nécessaire pour extraire le Charbon. Laisse faire les Pals experts en exploitation minière."
+    "description": "Une installation pour produire du Charbon. Une bonne force physique est nécessaire pour extraire le Charbon. Laisse faire les Pals doué dans l'extraction."
+  },
+  "CompositeDesk": {
+    "localized_name": "Table de dessin",
+    "description": "Une installation qui permet d'associer plusieurs plans pour en obtenir un de qualité supérieure."
+  },
+  "ConservationGroupBannerA": {
+    "localized_name": "-",
+    "description": null
+  },
+  "ConservationGroupBannerB": {
+    "localized_name": "-",
+    "description": null
   },
   "Container01_Iron": {
     "localized_name": "Grosse boîte",
@@ -153,11 +169,11 @@
   },
   "CookingStove": {
     "localized_name": "Marmite",
-    "description": "Une installation requise pour cuisiner. L'utilisation de la marmite offre de nouvelles possibilités de cuisine. Les Pals de feu requièrent d'allumer un feu."
+    "description": "Une installation nécessaire pour cuisiner. L'utilisation d'une marmite permet de préparer une plus grande variété de plats. Un Pal de feu est requis pour allumer le feu."
   },
   "Cooler": {
     "localized_name": "Climatiseur à glace",
-    "description": "Une installation pour faire baisser la température sur le camp en y envoyant de l'air froid. La différence n'est pas flagrante, mais suffisante pour contrer une chaleur modérée. Les Pals de glace requièrent une réfrigération."
+    "description": "Une installation pour faire baisser la température sur le camp en y envoyant de l'air froid. La différence n'est pas flagrante, mais suffisante pour contrer une chaleur modérée. Un Pal de Glace est requis pour s'occuper du refroidissement."
   },
   "CoolerBox": {
     "localized_name": "Glacière",
@@ -169,11 +185,11 @@
   },
   "CopperPit": {
     "localized_name": "Carrière de cuivre",
-    "description": "Une installation pour produire du Minerai de métal. Une bonne force physique est nécessaire pour extraire le Minerai de métal. Laisse faire les Pals experts en exploitation minière."
+    "description": "Une installation pour produire du Minerai de métal. Son extraction est encore plus éprouvante et demande une grande force physique pour extraire le Minerai de métal. Laisse faire les Pals doué dans l'extraction."
   },
   "CopperPit_2": {
     "localized_name": "Carrière de cuivre II",
-    "description": "Une installation pour produire du Minerai de métal en masse. Une bonne force physique est nécessaire pour extraire le Minerai de métal. Laisse faire les Pals experts en exploitation minière."
+    "description": "Une installation pour produire du Minerai de métal. Son extraction est encore plus éprouvante et demande une grande force physique pour extraire le Minerai de métal. Laisse faire les Pals doué dans l'extraction."
   },
   "Counter_Wood": {
     "localized_name": "Comptoir en bois",
@@ -201,7 +217,7 @@
   },
   "DefenseMachinegun": {
     "localized_name": "Mitrailleuse montée",
-    "description": "Une installation défensive où les Pals sont affectés et préparés au combat. Des Balles de fusil d'assaut sont nécessaires à son utilisation. Introduire des munitions dans le coffre permettra aux Pals affectés de les charger automatiquement."
+    "description": "Une installation défensive où les Pals sont affectés et préparés au combat. Des Balles de fusil sont nécessaires à son utilisation. Introduire des munitions dans le coffre permettra aux Pals affectés de les charger automatiquement."
   },
   "DefenseMissile": {
     "localized_name": "Lance-missiles monté",
@@ -231,21 +247,25 @@
     "localized_name": "Bureau ancien",
     "description": "Un bureau ancien décoratif."
   },
+  "DimensionPalStorage": {
+    "localized_name": "Stockage de Pals dimensionnel",
+    "description": "Une installation qui permet de stocker un grand nombre de Pals attrapés. Les membres de la guilde peuvent ajouter et retirer des Pals à leur guise. Passer les paramètres en « privé » restreint l'accès au propriétaire uniquement."
+  },
   "DismantlingConveyor": {
     "localized_name": "Destructeur de Pals",
     "description": "Une installation pour découper automatiquement les Pals introduits."
   },
   "DisplayCharacter": {
     "localized_name": "Cage d'observation",
-    "description": "Une boîte pour observer les Pals capturés. Les Pals qui s'y trouvent ne peuvent ni se battre ni travailler, mais ils ne ressentent pas non plus la faim."
+    "description": "Une cage d'exposition pour les Pals capturés. Les Pals à l'intérieur ne peuvent ni combattre ni travailler, mais ils n'ont pas besoin de se nourrir."
   },
   "ElectricCooler": {
     "localized_name": "Climatiseur électrique",
-    "description": "Une installation pour faire baisser la température sur le camp en y envoyant de l'air froid. L'utilisation de l'électricité permet d'obtenir une température assez basse. Les Pals de glace requièrent une réfrigération."
+    "description": "Une installation pour faire baisser la température sur le camp en y envoyant de l'air froid. L'utilisation de l'électricité permet d'obtenir une température assez basse. Un Pal de Glace est requis pour s'occuper du refroidissement."
   },
   "ElectricGenerator": {
     "localized_name": "Générateur",
-    "description": "Une installation permettant de stocker l'électricité produite par les Pals de foudre. Les installations électriques ne peuvent pas fonctionner sans."
+    "description": "Une installation permettant d’accumuler l’électricité produite par les Pals de foudre. Sans elle, les installations électriques ne peuvent pas fonctionner."
   },
   "ElectricGenerator_Large": {
     "localized_name": "Grand générateur",
@@ -257,11 +277,11 @@
   },
   "ElectricHeater": {
     "localized_name": "Chauffage électrique",
-    "description": "Une installation pour faire monter la température sur le camp en y envoyant de l'air chaud. L'utilisation de l'électricité permet d'obtenir une température assez élevée. Les Pals de feu requièrent d'allumer un feu."
+    "description": "Une installation pour faire monter la température sur le camp en y envoyant de l'air chaud. L'utilisation de l'électricité permet d'obtenir une température assez élevée. Un Pal de feu est requis pour allumer le feu."
   },
   "ElectricKitchen": {
     "localized_name": "Cuisine électrique",
-    "description": "Une installation requise pour cuisiner. De l'électricité est nécessaire, mais elle permet de cuisiner à la vitesse de l'éclair. Les Pals de feu requièrent du feu."
+    "description": "Une installation nécessaire pour cuisiner. De l'électricité est requise, mais elle permet de préparer rapidement une grande quantité de plats différents. Un Pal de feu est requis pour allumer le feu."
   },
   "EnergyStorage_Electric": {
     "localized_name": "Condensateur",
@@ -305,7 +325,7 @@
   },
   "FarmBlockV2_Potato": {
     "localized_name": "Plantation de patates",
-    "description": "Une ferme pour faire pousser des patate. Le délai de récolte est long, mais les possibilités de cuisine sont élargies. Plusieurs Pals sont nécessaires pour les semailles, l'arrosage et la récolte."
+    "description": "Une ferme pour faire pousser des Patate. Le délai de récolte est long, mais les possibilités de cuisine sont élargies. Plusieurs Pals sont nécessaires pour les semailles, l'arrosage et la récolte."
   },
   "FarmBlockV2_tomato": {
     "localized_name": "Plantation de tomates",
@@ -316,12 +336,16 @@
     "description": "Une ferme pour faire pousser du Blé. Le délai de récolte est moyen. Plusieurs Pals sont nécessaires pour les semailles, l'arrosage et la récolte."
   },
   "Farm_SkillFruits": {
-    "localized_name": "Plantation de fruits de techniques",
-    "description": "Un champ pour cultiver des fruits de technique. Mettre un fruit en terre permet d'en récolter plusieurs du même type."
+    "localized_name": "Plantation de Fruits de Maîtrise",
+    "description": "Un champ pour cultiver des Fruits de Maîtrise. Mettre un fruit en terre permet d'en récolter plusieurs du même type."
   },
   "FastTravelPoint": {
-    "localized_name": "Statue d'aigle géant",
+    "localized_name": "Statue du Grand Aigle",
     "description": "Un monument à l'effigie de Chikipi. L'installer rend possible le voyage instantané."
+  },
+  "FireStand": {
+    "localized_name": "-",
+    "description": null
   },
   "FlourMill": {
     "localized_name": "Broyeur",
@@ -363,6 +387,10 @@
     "localized_name": "Base en verre",
     "description": "Une base sur laquelle construire un mur ou une installation. Sa composition en verre la rend très robuste."
   },
+  "Glass_pillars": {
+    "localized_name": "Pilier en verre",
+    "description": "Un pilier pour soutenir les bâtiments. Sa composition en verre le rend très robuste."
+  },
   "Glass_roof": {
     "localized_name": "Toit en verre",
     "description": "Un toit à construire sur des murs pour contrer les éléments. Sa composition en verre le rend très robuste."
@@ -374,6 +402,10 @@
   "Glass_wall": {
     "localized_name": "Mur en verre",
     "description": "Un mur à construire sur une base pour repousser les intrus. Sa composition en verre le rend très robuste."
+  },
+  "GlobalPalStorage": {
+    "localized_name": "Boîte à Pals globale",
+    "description": "Une installation qui permet de sauvegarder les données génétiques des Pals pour ensuite récupérer ces derniers. Les données enregistrées peuvent aussi être transférées vers un autre monde."
   },
   "Globe01_Stone": {
     "localized_name": "Mappemonde ancienne",
@@ -397,11 +429,15 @@
   },
   "Heater": {
     "localized_name": "Chauffage à flammes",
-    "description": "Une installation pour faire monter la température sur le camp en y envoyant de l'air chaud. La différence n'est pas flagrante, mais suffisante pour contrer un froid modéré. Les Pals de feu requièrent d'allumer un feu."
+    "description": "Une installation pour faire monter la température sur le camp en y envoyant de l'air chaud. La différence n'est pas flagrante, mais suffisante pour contrer un froid modéré. Un Pal de feu est requis pour allumer le feu."
   },
   "HugeKitchen": {
     "localized_name": "Grande cuisine",
-    "description": "Une installation requise pour cuisiner. Sa taille gigantesque permet de faire cuisiner plusieurs Pals en même temps. Les Pals de feu requièrent d'allumer un feu."
+    "description": "Une installation requise pour cuisiner. Sa taille gigantesque permet à plusieurs Pals de cuisiner ensemble. Un Pal de feu est requis pour allumer le feu."
+  },
+  "Hunter_GangFlag": {
+    "localized_name": "-",
+    "description": null
   },
   "IceCrusher": {
     "localized_name": "Broyeur à glace",
@@ -413,7 +449,7 @@
   },
   "ItemBooth": {
     "localized_name": "Marché aux puces (Objets)",
-    "description": "Une installation pour vendre ses objets. Ajouter des objets à la liste permet de les proposer aux autres joueurs."
+    "description": "Une installation pour vendre ses objets. Permet de vendre des objets aux autres joueurs. Y déposer un Pal de glace permet de ralentir la dégradation des aliments contenus."
   },
   "ItemChest": {
     "localized_name": "Coffre en bois",
@@ -444,52 +480,52 @@
     "description": "Du lierre horizontal décoratif. Peut être installé sur un mur."
   },
   "JapaneseStyle_DoorWall_01": {
-    "localized_name": "Mur coulissant japonais",
-    "description": "Une porte d'entrée à construire sur une base. Son style japonais permet des constructions exotiques."
+    "localized_name": "Mur coulissant japonais A",
+    "description": "Une porte d'entrée à construire sur une base. Son style japonais permet des constructions raffinées"
   },
   "JapaneseStyle_DoorWall_02": {
     "localized_name": "Mur coulissant japonais B",
-    "description": "Un shoji intérieur coulissant à construire sur une base. Son style japonais permet des constructions exotiques."
+    "description": "Un shoji intérieur coulissant à construire sur une base. Son style japonais permet des constructions raffinées."
   },
   "JapaneseStyle_DoorWall_03": {
     "localized_name": "Mur coulissant japonais C",
-    "description": "Un fusuma intérieur coulissant à construire sur une base. Son style japonais permet des constructions exotiques."
+    "description": "Un fusuma intérieur coulissant à construire sur une base. Son style japonais permet des constructions raffinées."
   },
   "JapaneseStyle_Pillar": {
     "localized_name": "Pilier japonais",
-    "description": "Un pilier pour soutenir les bâtiments. Son style japonais permet des constructions exotiques."
+    "description": "Un pilier pour soutenir les bâtiments. Son style japonais permet des constructions raffinées."
   },
   "JapaneseStyle_SlantedRoof": {
     "localized_name": "Toit incliné japonais",
-    "description": "Un toit incliné à placer sur des murs pour contrer les éléments. Son style japonais permet des constructions exotiques."
+    "description": "Un toit incliné à placer sur des murs pour contrer les éléments. Son style japonais permet des constructions raffinées."
   },
   "JapaneseStyle_TriangleWall": {
     "localized_name": "Mur d'angle japonais",
-    "description": "Un mur triangulaire à construire sur une base. Son style japonais permet des constructions exotiques."
+    "description": "Un mur triangulaire à construire sur une base. Son style japonais permet des constructions raffinées."
   },
   "JapaneseStyle_WindowWall": {
     "localized_name": "Mur avec fenêtre japonais",
-    "description": "Un mur avec fenêtre à construire sur une base pour repousser les intrus. Son style japonais permet des constructions exotiques."
+    "description": "Un mur avec fenêtre à construire sur une base pour repousser les intrus. Son style japonais permet des constructions raffinées."
   },
   "JapaneseStyle_foundation": {
     "localized_name": "Base japonaise",
-    "description": "Une base sur laquelle construire un mur ou une installation. Son style japonais permet des constructions exotiques."
+    "description": "Une base sur laquelle construire un mur ou une installation. Son style japonais permet des constructions raffinées."
   },
   "JapaneseStyle_roof_01": {
-    "localized_name": "Toit japonais",
-    "description": "Un toit à placer sur des murs pour contrer les éléments. Sa surface est en tatami. Son style japonais permet des constructions exotiques."
+    "localized_name": "Toit japonais A",
+    "description": "Un toit à placer sur des murs pour contrer les éléments. Sa surface est en tatami. Son style japonais permet des constructions raffinées."
   },
   "JapaneseStyle_roof_02": {
     "localized_name": "Toit japonais B",
-    "description": "Un toit à placer sur des murs pour contrer les éléments. Sa surface est en tuiles. Son style japonais permet des constructions exotiques."
+    "description": "Un toit à placer sur des murs pour contrer les éléments. Sa surface est en tuiles. Son style japonais permet des constructions raffinées."
   },
   "JapaneseStyle_stair": {
     "localized_name": "Escalier japonais",
-    "description": "Un escalier à placer sur une base ou sous un toit. Son style japonais permet des constructions exotiques."
+    "description": "Un escalier à placer sur une base ou sous un toit. Son style japonais permet des constructions raffinées."
   },
   "JapaneseStyle_wall_01": {
     "localized_name": "Mur japonais",
-    "description": "Un mur à construire sur une base pour repousser les intrus. Son style japonais permet des constructions exotiques."
+    "description": "Un mur à construire sur une base pour repousser les intrus. Son style japonais permet des constructions raffinées."
   },
   "Kakejiku": {
     "localized_name": "Rouleau suspendu",
@@ -501,19 +537,19 @@
   },
   "Lab": {
     "localized_name": "Centre de recherche sur le travail des Pals",
-    "description": "Une structure pour étudier les différents travaux manuels. Faire travailler les Pals par ce biais fait avancer les recherches et permet d'obtenir différents effets."
+    "description": "Une installation dédiée à l'étude des différentes tâches des Pals. Faire travailler les Pals ici permet de faire progresser les recherches et d'obtenir divers effets."
   },
   "Lamp": {
     "localized_name": "Lampadaire",
-    "description": "Une source de lumière pour éclairer le camp même dans la nuit noire. De l'électricité est nécessaire, mais la zone éclairée est plus grande."
+    "description": "Une source de lumière pour éclairer le camp, même dans l'obscurité de la nuit. De l'électricité est nécessaire, mais la zone éclairée est plus grande."
   },
   "LargeCeilingLamp": {
     "localized_name": "Plafonnier (grand)",
-    "description": "Une source de lumière pour éclairer le camp même dans la nuit noire. Peut être installée au plafond. Une plus grande quantité d'électricité est nécessaire, mais la zone éclairée est bien plus grande."
+    "description": "Une source de lumière pour éclairer le camp, même dans l'obscurité de la nuit. Peut être installée au plafond. Une plus grande quantité d'électricité est nécessaire, mais la zone éclairée est bien plus grande."
   },
   "LargeLamp": {
     "localized_name": "Lampadaire (grand)",
-    "description": "Une source de lumière pour éclairer le camp même dans la nuit noire. Une plus grande quantité d'électricité est nécessaire, mais la zone éclairée est bien plus grande."
+    "description": "Une source de lumière pour éclairer le camp, même dans l'obscurité de la nuit. Une plus grande quantité d'électricité est nécessaire, mais la zone éclairée est bien plus grande."
   },
   "Light_CandleSticks_Top": {
     "localized_name": "Chandelier",
@@ -554,6 +590,10 @@
   "Light_LightPole04": {
     "localized_name": "Réverbère chic",
     "description": "Un réverbère chic, source de lumière. De l'électricité est requise pour l'allumer."
+  },
+  "LilyQueenStatue": {
+    "localized_name": "-",
+    "description": null
   },
   "MachineGame01_Iron": {
     "localized_name": "Machine à pince",
@@ -619,6 +659,10 @@
     "localized_name": "Base en métal",
     "description": "Une base sur laquelle construire un mur ou une installation. Sa composition en métal la rend très solide."
   },
+  "Metal_pillars": {
+    "localized_name": "Pilier en métal",
+    "description": "Un pilier pour soutenir les bâtiments. Sa composition en métal le rend très robuste."
+  },
   "Metal_roof": {
     "localized_name": "Toit en métal",
     "description": "Un toit à construire sur des murs pour contrer les éléments. Sa composition en métal le rend très solide."
@@ -669,11 +713,15 @@
   },
   "PalBooth": {
     "localized_name": "Marché aux puces (Pals)",
-    "description": "Une installation pour vendre ses Pals. Ajouter des Pals à la liste permet de les proposer aux autres joueurs."
+    "description": "Une installation pour vendre ses Pals. Permet de vendre des Pals aux autres joueurs. Y déposer un Pal de glace permet de ralentir la dégradation des aliments issue des ventes."
   },
   "PalBoxV2": {
     "localized_name": "Boîte à Pal",
-    "description": "Une installation pour déposer les Pals capturés. Les Pals à l'intérieur des boîtes récupèrent progressivement leurs PV. Le camp est déterminé par un rayon autour de cette installation."
+    "description": "Une installation pour stocker les Pals capturés. Les Pals à l'intérieur des boîtes récupèrent progressivement leurs PV. Le camp est défini par un rayon autour de cette installation."
+  },
+  "PalCage": {
+    "localized_name": "-",
+    "description": null
   },
   "PalFoodBox": {
     "localized_name": "Boîte à nourriture",
@@ -725,7 +773,7 @@
   },
   "QuartzPit": {
     "localized_name": "Carrière de quartz pur",
-    "description": "Une installation pour produire du Quartz pur. Une bonne force physique est nécessaire pour extraire le Quartz pur. Laisse faire les Pals experts en exploitation minière."
+    "description": "Une installation pour produire du Quartz pur. Il faut une bonne condition physique pour extraire le Quartz pur. Laisse faire les Pals doué dans l'extraction."
   },
   "Refrigerator": {
     "localized_name": "Réfrigérateur",
@@ -845,7 +893,7 @@
   },
   "Signboard": {
     "localized_name": "Pancarte",
-    "description": "Permet d'écrire dessus. À utiliser à des fins d'archivage ou de communication."
+    "description": "Un panneau sur lequel on peut écrire. Utilisé pour laisser des notes ou communiquer."
   },
   "Silo": {
     "localized_name": "Silo",
@@ -901,15 +949,15 @@
   },
   "SphereFactory_Black_04": {
     "localized_name": "Usine de sphères d'une civilisation avancée",
-    "description": "Une usine de sphères pour la capture des Pals. L'ajout de machines performantes permet de fabriquer des sphères à vitesse grand V. Un Pal habile dans les travaux manuels est requis."
+    "description": "Une usine de sphères pour la capture des Pals. L'automatisation avancée permet une fabrication ultra-rapide des sphères. Un Pal habile dans les travaux manuels est requis."
   },
   "StationDeforest2": {
     "localized_name": "Scierie",
-    "description": "Une installation pour produire du Bois de charpente. Une bonne force physique est nécessaire pour couper le bois. Laisse faire les Pals experts en déboisement."
+    "description": "Une installation pour produire du Bois de charpente. Il faut une bonne condition physique pour extraire le Bois de charpente. Laisse faire les Pals doué dans l'extraction."
   },
   "StonePit": {
     "localized_name": "Carrière",
-    "description": "Une installation pour produire de la Pierre. Une bonne force physique est nécessaire pour extraire la Pierre. Laisse faire les Pals experts en exploitation minière."
+    "description": "Une installation pour produire de la Pierre. Son extraction demande une grande force physique pour extraire la Pierre. Laisse faire les Pals doué dans l'extraction."
   },
   "Stone_DoorWall": {
     "localized_name": "Porte en pierre",
@@ -934,6 +982,10 @@
   "Stone_foundation": {
     "localized_name": "Base en pierre",
     "description": "Une base sur laquelle construire un mur ou une installation. Le fait qu'elle soit en pierre la rend plus solide."
+  },
+  "Stone_pillar": {
+    "localized_name": "Pilier en pierre",
+    "description": "Un pilier pour soutenir les bâtiments. Sa composition en pierre le rend assez robuste."
   },
   "Stone_roof": {
     "localized_name": "Toit en pierre",
@@ -973,7 +1025,7 @@
   },
   "SulfurPit": {
     "localized_name": "Mine de soufre",
-    "description": "Une installation pour produire du Soufre. Une bonne force physique est nécessaire pour extraire le Soufre. Laisse faire les Pals experts en exploitation minière."
+    "description": "Une installation pour produire du Soufre. Une bonne force physique est nécessaire pour extraire le Soufre. Laisse faire les Pals doué dans l'extraction."
   },
   "TableCircular01_Iron": {
     "localized_name": "Table ronde en fer",
@@ -1037,7 +1089,7 @@
   },
   "Torch": {
     "localized_name": "Torche à poser",
-    "description": "Une source de lumière pour éclairer le camp même dans la nuit noire. Les Pals de feu requièrent d'allumer un feu."
+    "description": "Une source de lumière pour éclairer le camp, même dans l'obscurité de la nuit. Un Pal de feu est requis pour allumer le feu."
   },
   "Toro": {
     "localized_name": "Lanterne en pierre",
@@ -1137,7 +1189,11 @@
   },
   "WallTorch": {
     "localized_name": "Torche murale",
-    "description": "Une source de lumière pour éclairer le camp même dans la nuit noire. Peut être installée sur les murs. Les Pals de feu requièrent d'allumer un feu."
+    "description": "Une source de lumière pour éclairer le camp, même dans l'obscurité de la nuit. Peut être installée sur les murs. Un Pal de feu est requis pour allumer le feu."
+  },
+  "WallTorch02": {
+    "localized_name": "-",
+    "description": null
   },
   "WeaponFactory_Dirty_01": {
     "localized_name": "Établi pour armes",
@@ -1150,6 +1206,10 @@
   "WeaponFactory_Dirty_03": {
     "localized_name": "Chaîne de production d'armes II",
     "description": "Une usine pour produire armes et munitions. La délégation des tâches permet de produire les meilleures armes possibles. Un Pal habile dans les travaux manuels est requis."
+  },
+  "Wire_Fence": {
+    "localized_name": "-",
+    "description": null
   },
   "Wood_Gate": {
     "localized_name": "Portail en bois",
@@ -1167,6 +1227,10 @@
     "localized_name": "Mur avec fenêtres en bois",
     "description": "Un mur avec fenêtres à construire sur une base pour repousser les intrus. Sa composition en bois le rend fragile."
   },
+  "WoodenBarricade": {
+    "localized_name": "-",
+    "description": null
+  },
   "Wooden_DoorWall": {
     "localized_name": "Porte en bois",
     "description": "Une porte à construire sur une base pour servir d'entrée. Sa composition en bois la rend fragile."
@@ -1178,6 +1242,10 @@
   "Wooden_ladder": {
     "localized_name": "Échelle",
     "description": "Une échelle qui permet de monter sur les lieux légèrement surélevés."
+  },
+  "Wooden_pillar": {
+    "localized_name": "Pilier en bois",
+    "description": "Un pilier pour soutenir les bâtiments. Sa composition en bois le rend fragile."
   },
   "Wooden_roof": {
     "localized_name": "Toit en bois",

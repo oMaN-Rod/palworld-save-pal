@@ -19,10 +19,6 @@
     "localized_name": "Анубис",
     "description": "Благодаря своему облику когда-то считался символом знати. Для тех, кто богатство и власть не жаловал, служил олицетворением оных. В какой-то момент превратился в символ смерти."
   },
-  "Believer_CrossBow": {
-    "localized_name": "Эго",
-    "description": null
-  },
   "Believer_Fat_GiantClub": {
     "localized_name": "Кирпич",
     "description": null
@@ -39,40 +35,8 @@
     "localized_name": "Огонек",
     "description": null
   },
-  "Female_People02": {
-    "localized_name": "Сирена",
-    "description": null
-  },
-  "Female_People03": {
-    "localized_name": "Танко",
-    "description": null
-  },
   "Female_Soldier": {
     "localized_name": "Джейд",
-    "description": null
-  },
-  "Female_Soldier02": {
-    "localized_name": "Мишура",
-    "description": null
-  },
-  "Female_Soldier03": {
-    "localized_name": "Алоха",
-    "description": null
-  },
-  "Female_Soldier04": {
-    "localized_name": "Ловкач",
-    "description": null
-  },
-  "FireCult_FlameThrower": {
-    "localized_name": "Тень",
-    "description": null
-  },
-  "Hunter_Fat_GatlingGun": {
-    "localized_name": "Гриль",
-    "description": null
-  },
-  "Hunter_Rifle": {
-    "localized_name": "Ястреб",
     "description": null
   },
   "Male_DesertPeople": {
@@ -87,14 +51,6 @@
     "localized_name": "Дина",
     "description": null
   },
-  "Male_People02": {
-    "localized_name": "Квилл",
-    "description": null
-  },
-  "Male_People03": {
-    "localized_name": "Скут",
-    "description": null
-  },
   "Male_People2": {
     "localized_name": "Мит",
     "description": null
@@ -103,36 +59,8 @@
     "localized_name": "Краш",
     "description": null
   },
-  "Male_Soldier02": {
-    "localized_name": "Окурок",
-    "description": null
-  },
-  "Male_Soldier03": {
-    "localized_name": "Клинт",
-    "description": null
-  },
-  "Male_Soldier04": {
-    "localized_name": "Лассо",
-    "description": null
-  },
-  "Male_Trader01": {
-    "localized_name": "Ским",
-    "description": null
-  },
-  "Male_Trader02": {
-    "localized_name": "Мимик",
-    "description": null
-  },
-  "Male_Trader03": {
-    "localized_name": "Билли",
-    "description": null
-  },
   "Ninja": {
     "localized_name": "Мямля",
-    "description": null
-  },
-  "Police_Rifle": {
-    "localized_name": "Кнут",
     "description": null
   },
   "Police_old": {
@@ -141,10 +69,6 @@
   },
   "Scientist_LaserRifle": {
     "localized_name": "Виск",
-    "description": null
-  },
-  "Viking": {
-    "localized_name": "Глод",
     "description": null
   },
   "VikingElite": {
@@ -355,6 +279,10 @@
     "localized_name": "Менастинг Терра",
     "description": "Их тело это сгусток энергии, внутри которого — пустота. Набивая землей и камнями свой панцирь, они набирают внушительную массу. Удар этого Пала заставит любого истошно кричать от боли."
   },
+  "DeathPenalty_guide": {
+    "localized_name": "Опытный тренер Палов",
+    "description": null
+  },
   "Deer": {
     "localized_name": "Иктирдир",
     "description": "Обладающие самыми выдающимися рогами особи становятся лидерами. Если рога ломаются, впадает в апатию, после чего покидает стаю и гибнет вдалеке от чужих глаз."
@@ -497,6 +425,10 @@
   },
   "Female_People03": {
     "localized_name": "Житель деревни",
+    "description": null
+  },
+  "Female_Presenter01": {
+    "localized_name": "Дружелюбный тренер Палов",
     "description": null
   },
   "Female_Soldier01": {
@@ -746,6 +678,22 @@
   "Hedgehog_Ice": {
     "localized_name": "Джолтхог Крист",
     "description": "В случае потрясения выпускает накопленный холодный воздух. Расходящиеся в разные стороны лучи холода замораживает атмосферу, и нападающий напарывается на лед."
+  },
+  "Help01": {
+    "localized_name": "Житель острова",
+    "description": null
+  },
+  "Help02": {
+    "localized_name": "Житель острова",
+    "description": null
+  },
+  "Help03": {
+    "localized_name": "Житель острова",
+    "description": null
+  },
+  "Help04": {
+    "localized_name": "Житель острова",
+    "description": null
   },
   "HerculesBeetle": {
     "localized_name": "Ворсект",
@@ -1502,6 +1450,10 @@
   "RedArmorBird": {
     "localized_name": "Рагнахавк",
     "description": "Можно подумать, что Райберд - его близкий сородич, но на самом деле это не так. Основа рациона этого Пала - камни, и со временем не только его клюв, но и вся голова стала твердой."
+  },
+  "Respawn_guide": {
+    "localized_name": "Дружелюбный тренер Палов",
+    "description": null
   },
   "Reward_BossDefeat": {
     "localized_name": "Стражник",

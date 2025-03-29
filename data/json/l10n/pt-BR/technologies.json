@@ -387,6 +387,10 @@
     "localized_name": "Pano Requintado",
     "description": null
   },
+  "CompositeDesk": {
+    "localized_name": "Mesa de Projetos",
+    "description": null
+  },
   "Cooler": {
     "localized_name": "Resfriador a Gelo",
     "description": "Resfria os arredores e protege você do calor."
@@ -426,6 +430,10 @@
   "DefenseWall_Wood": {
     "localized_name": "Barreira de Madeira",
     "description": "Barreira gigantesca para proteger contra invasores externos. É frágil por ser feita de madeira."
+  },
+  "DimensionPalStorage": {
+    "localized_name": "Armazenamento Dimensional de Pals",
+    "description": null
   },
   "DismantlingConveyor": {
     "localized_name": "Transportador para Talho de Pal",
@@ -670,6 +678,10 @@
   "Glass_houseset": {
     "localized_name": "Kit de construção de vidro",
     "description": "Kit para criar uma base de vidro. Permite construir em vidro as estruturas necessárias para uma casa, como fundação, paredes, teto e escadas."
+  },
+  "GlobalPalStorage": {
+    "localized_name": "Caixa Global de Pals",
+    "description": null
   },
   "GrapplingGun": {
     "localized_name": "Arpéu",
