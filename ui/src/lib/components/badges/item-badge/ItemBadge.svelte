@@ -38,7 +38,7 @@
 		if (slot.static_id == 'None') return;
 		let key: string = slot.static_id;
 
-		if (key in stupidTypoMap) {
+		if (key.toLowerCase() in stupidTypoMap) {
 			key = stupidTypoMap[key.toLowerCase()];
 		}
 		return itemsData.items[key];
