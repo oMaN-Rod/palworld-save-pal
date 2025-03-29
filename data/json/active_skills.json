@@ -137,21 +137,6 @@
       }
     ]
   },
-  "EPalWazaID::ChaosLaser": {
-    "element": "Dark",
-    "type": "Shot",
-    "power": 300,
-    "min_range": 500,
-    "max_range": 3000,
-    "cool_time": 60.0,
-    "effects": [
-      {
-        "type": "Darkness",
-        "value": 100,
-        "value_ex": 0.0
-      }
-    ]
-  },
   "EPalWazaID::ChargeCanon": {
     "element": "Dragon",
     "type": "Shot",
