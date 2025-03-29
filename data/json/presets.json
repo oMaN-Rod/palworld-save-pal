@@ -5436,7 +5436,7 @@
     "name": "Dark",
     "type": "active_skills",
     "skills": [
-      "EPalWazaID::ChaosLaser",
+      "EPalWazaID::Psychokinesis",
       "EPalWazaID::DarkLegion",
       "EPalWazaID::DarkLaser"
     ]
