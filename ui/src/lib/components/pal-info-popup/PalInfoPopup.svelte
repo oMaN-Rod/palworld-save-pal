@@ -5,37 +5,129 @@
 	import { ActiveSkillBadge, HealthBadge, PalHeader, PassiveSkillBadge } from '$components';
 	import { palsData } from '$lib/data';
 	import { staticIcons } from '$types/icons';
+	import { onMount } from 'svelte';
+	import { Tween } from 'svelte/motion';
+	import { cubicOut } from 'svelte/easing';
 
 	let { pal = $bindable() } = $props<{
 		pal: Pal;
 	}>();
 
 	const appState = getAppState();
-	let activeSkills = $derived.by(() => {
-		if (pal) {
-			let skills = [...pal.active_skills];
+
+	let originalActiveSkills = $derived(pal ? [...pal.active_skills] : []);
+	let originalPassiveSkills = $derived(pal ? [...pal.passive_skills] : []);
+
+	let activeSkillIndex = $state(0);
+	let passiveSkillIndex = $state(0);
+
+	let activeSkillsToShow = $state<string[]>(getInitialActiveSkills());
+	let passiveSkillsToShow = $state<string[]>(getInitialPassiveSkills());
+
+	const ROTATION_INTERVAL = 2000;
+	let activeSkillsIntervalId: number;
+	let passiveSkillsIntervalId: number;
+
+	const activeProgress = new Tween(1, { duration: 500, easing: cubicOut });
+	const passiveProgress = new Tween(1, { duration: 500, easing: cubicOut });
+
+	const palData = $derived(palsData.pals[pal.character_key]);
+
+	function getInitialActiveSkills() {
+		if (!pal || !pal.active_skills || pal.active_skills.length === 0) {
+			return ['Empty', 'Empty', 'Empty'];
+		}
+
+		if (pal.active_skills.length <= 3) {
+			const skills = [...pal.active_skills];
 			while (skills.length < 3) {
 				skills.push('Empty');
 			}
 			return skills;
 		} else {
-			return [];
+			return pal.active_skills.slice(0, 3);
 		}
-	});
+	}
 
-	let passiveSkills = $derived.by(() => {
-		if (pal) {
-			let skills = [...pal.passive_skills];
+	function getInitialPassiveSkills() {
+		if (!pal || !pal.passive_skills || pal.passive_skills.length === 0) {
+			return ['Empty', 'Empty', 'Empty', 'Empty'];
+		}
+
+		if (pal.passive_skills.length <= 4) {
+			const skills = [...pal.passive_skills];
 			while (skills.length < 4) {
 				skills.push('Empty');
 			}
 			return skills;
 		} else {
-			return [];
+			return pal.passive_skills.slice(0, 4);
 		}
+	}
+
+	function updateActiveSkills() {
+		if (originalActiveSkills.length > 3) {
+			activeProgress.set(0).then(() => {
+				activeSkillsToShow = [];
+				for (let i = 0; i < 3; i++) {
+					const index = (activeSkillIndex + i) % originalActiveSkills.length;
+					activeSkillsToShow.push(originalActiveSkills[index]);
+				}
+				activeProgress.set(1);
+			});
+
+			activeSkillIndex = (activeSkillIndex + 1) % originalActiveSkills.length;
+		} else {
+			activeSkillsToShow = [...originalActiveSkills];
+			while (activeSkillsToShow.length < 3) {
+				activeSkillsToShow.push('Empty');
+			}
+		}
+	}
+
+	function updatePassiveSkills() {
+		if (originalPassiveSkills.length > 4) {
+			passiveProgress.set(0).then(() => {
+				passiveSkillsToShow = [];
+				for (let i = 0; i < 4; i++) {
+					const index = (passiveSkillIndex + i) % originalPassiveSkills.length;
+					passiveSkillsToShow.push(originalPassiveSkills[index]);
+				}
+				passiveProgress.set(1);
+			});
+
+			passiveSkillIndex = (passiveSkillIndex + 1) % originalPassiveSkills.length;
+		} else {
+			passiveSkillsToShow = [...originalPassiveSkills];
+			while (passiveSkillsToShow.length < 4) {
+				passiveSkillsToShow.push('Empty');
+			}
+		}
+	}
+
+	$effect(() => {
+		activeSkillIndex = 0;
+		passiveSkillIndex = 0;
+
+		activeSkillsToShow = getInitialActiveSkills();
+		passiveSkillsToShow = getInitialPassiveSkills();
 	});
 
-	let palData = $derived(palsData.pals[pal.character_key]);
+	onMount(() => {
+		if (originalActiveSkills.length > 3) {
+			activeSkillsIntervalId = window.setInterval(updateActiveSkills, ROTATION_INTERVAL);
+		}
+
+		if (originalPassiveSkills.length > 4) {
+			passiveSkillsIntervalId = window.setInterval(updatePassiveSkills, ROTATION_INTERVAL);
+		}
+
+		return () => {
+			if (activeSkillsIntervalId) window.clearInterval(activeSkillsIntervalId);
+			if (passiveSkillsIntervalId) window.clearInterval(passiveSkillsIntervalId);
+		};
+	});
+	``;
 </script>
 
 <div class="flex w-[450px] flex-col space-y-2">
@@ -75,16 +167,24 @@
 			<span class="text-sm font-bold">{pal.rank_craftspeed}</span>
 		</div>
 	</div>
-	{#if activeSkills.length > 0}
+	{#if activeSkillsToShow.length > 0}
 		<SectionHeader text="Active Skills" />
-		{#each activeSkills as skill}
-			<ActiveSkillBadge {skill} />
-		{/each}
+		<div
+			style="opacity: {activeProgress.current}; transition: opacity 300ms ease-out;"
+			class="flex w-full flex-col space-y-2"
+		>
+			{#each activeSkillsToShow as skill}
+				<ActiveSkillBadge {skill} />
+			{/each}
+		</div>
 	{/if}
-	{#if passiveSkills.length > 0}
+	{#if passiveSkillsToShow.length > 0}
 		<SectionHeader text="Passive Skills" />
-		<div class="grid grid-cols-2 gap-2">
-			{#each passiveSkills as skill}
+		<div
+			class="grid grid-cols-2 gap-2"
+			style="opacity: {passiveProgress.current}; transition: opacity 300ms ease-out;"
+		>
+			{#each passiveSkillsToShow as skill}
 				<PassiveSkillBadge {skill} />
 			{/each}
 		</div>
