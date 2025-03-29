@@ -805,15 +805,15 @@
   },
   "MoveSpeed_up_1": {
     "localized_name": "俐落",
-    "description": null
+    "description": "提升移動速度10.0%"
   },
   "MoveSpeed_up_2": {
     "localized_name": "運動健將",
-    "description": null
+    "description": "提升移動速度20.0%"
   },
   "MoveSpeed_up_3": {
     "localized_name": "神速",
-    "description": null
+    "description": "提升移動速度30.0%"
   },
   "Nocturnal": {
     "localized_name": "夜行性",

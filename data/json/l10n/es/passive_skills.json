@@ -805,15 +805,15 @@
   },
   "MoveSpeed_up_1": {
     "localized_name": "Rapidez",
-    "description": null
+    "description": "Aumenta la velocidad de movimiento en un 10.0 %"
   },
   "MoveSpeed_up_2": {
     "localized_name": "Corredor",
-    "description": null
+    "description": "Aumenta la velocidad de movimiento en un 20.0 %"
   },
   "MoveSpeed_up_3": {
     "localized_name": "Velocidad sobrenatural",
-    "description": null
+    "description": "Aumenta la velocidad de movimiento en un 30.0 %"
   },
   "Nocturnal": {
     "localized_name": "Nocturno",

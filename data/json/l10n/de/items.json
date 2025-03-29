@@ -312,20 +312,20 @@
     "description": "AssaultRifle Default1 mit erschreckender Feuerrate. Ausgezeichnete Wahl gegen starke Widersacher."
   },
   "AssaultRifle_Default2": {
-    "localized_name": "de Text",
-    "description": "de Text"
+    "localized_name": "Sturmgewehr",
+    "description": "AssaultRifle Default1 mit erschreckender Feuerrate. Ausgezeichnete Wahl gegen starke Widersacher."
   },
   "AssaultRifle_Default3": {
-    "localized_name": "de Text",
-    "description": "de Text"
+    "localized_name": "Sturmgewehr",
+    "description": "AssaultRifle Default1 mit erschreckender Feuerrate. Ausgezeichnete Wahl gegen starke Widersacher."
   },
   "AssaultRifle_Default4": {
-    "localized_name": "de Text",
-    "description": "de Text"
+    "localized_name": "Sturmgewehr",
+    "description": "AssaultRifle Default1 mit erschreckender Feuerrate. Ausgezeichnete Wahl gegen starke Widersacher."
   },
   "AssaultRifle_Default5": {
-    "localized_name": "de Text",
-    "description": "de Text"
+    "localized_name": "Sturmgewehr",
+    "description": "AssaultRifle Default1 mit erschreckender Feuerrate. Ausgezeichnete Wahl gegen starke Widersacher."
   },
   "AutoMealPouch_Tier1": {
     "localized_name": "Kleiner Futterbeutel",
@@ -2112,20 +2112,20 @@
     "description": "Damit lässt sich ein Pfeil mühelos verschießen. Das Nachladen ist etwas langwierig, umso stärker ist dafür der Wumms."
   },
   "BowGun_2": {
-    "localized_name": "de Text",
-    "description": "de Text"
+    "localized_name": "Armbrust",
+    "description": "Damit lässt sich ein Pfeil mühelos verschießen. Das Nachladen ist etwas langwierig, umso stärker ist dafür der Wumms."
   },
   "BowGun_3": {
-    "localized_name": "de Text",
-    "description": "de Text"
+    "localized_name": "Armbrust",
+    "description": "Damit lässt sich ein Pfeil mühelos verschießen. Das Nachladen ist etwas langwierig, umso stärker ist dafür der Wumms."
   },
   "BowGun_4": {
-    "localized_name": "de Text",
-    "description": "de Text"
+    "localized_name": "Armbrust",
+    "description": "Damit lässt sich ein Pfeil mühelos verschießen. Das Nachladen ist etwas langwierig, umso stärker ist dafür der Wumms."
   },
   "BowGun_5": {
-    "localized_name": "de Text",
-    "description": "de Text"
+    "localized_name": "Armbrust",
+    "description": "Damit lässt sich ein Pfeil mühelos verschießen. Das Nachladen ist etwas langwierig, umso stärker ist dafür der Wumms."
   },
   "BowGun_Fire": {
     "localized_name": "Feuerpfeil-Armbrust",
@@ -2300,20 +2300,20 @@
     "description": "Stoffkleidung tropischer Machart. Schützt extrem gut vor Hitze."
   },
   "ClothArmor_2": {
-    "localized_name": "de Text",
-    "description": "de Text"
+    "localized_name": "Stoffkleidung",
+    "description": "Aus Stoff gefertigte Kleidung. Schützt vor nächtlicher Kälte."
   },
   "ClothArmor_3": {
-    "localized_name": "de Text",
-    "description": "de Text"
+    "localized_name": "Stoffkleidung",
+    "description": "Aus Stoff gefertigte Kleidung. Schützt vor nächtlicher Kälte."
   },
   "ClothArmor_4": {
-    "localized_name": "de Text",
-    "description": "de Text"
+    "localized_name": "Stoffkleidung",
+    "description": "Aus Stoff gefertigte Kleidung. Schützt vor nächtlicher Kälte."
   },
   "ClothArmor_5": {
-    "localized_name": "de Text",
-    "description": "de Text"
+    "localized_name": "Stoffkleidung",
+    "description": "Aus Stoff gefertigte Kleidung. Schützt vor nächtlicher Kälte."
   },
   "Coal": {
     "localized_name": "Steinkohle",
@@ -2388,20 +2388,20 @@
     "description": "Metallrüstung mit verbesserter Qualität. Schützt extrem gut gegen Hitze."
   },
   "CopperArmor_2": {
-    "localized_name": "de Text",
-    "description": "de Text"
+    "localized_name": "Metallrüstung",
+    "description": "Eine Rüstung aus Metall. Bietet relativ guten Schutz und ist relativ schwer."
   },
   "CopperArmor_3": {
-    "localized_name": "de Text",
-    "description": "de Text"
+    "localized_name": "Metallrüstung",
+    "description": "Eine Rüstung aus Metall. Bietet relativ guten Schutz und ist relativ schwer."
   },
   "CopperArmor_4": {
-    "localized_name": "de Text",
-    "description": "de Text"
+    "localized_name": "Metallrüstung",
+    "description": "Eine Rüstung aus Metall. Bietet relativ guten Schutz und ist relativ schwer."
   },
   "CopperArmor_5": {
-    "localized_name": "de Text",
-    "description": "de Text"
+    "localized_name": "Metallrüstung",
+    "description": "Eine Rüstung aus Metall. Bietet relativ guten Schutz und ist relativ schwer."
   },
   "CopperHelmet": {
     "localized_name": "Metallhelm",
@@ -2784,20 +2784,20 @@
     "description": "Fellrüstung tropischer Machart. Schützt extrem gut vor Hitze."
   },
   "FurArmor_2": {
-    "localized_name": "de Text",
-    "description": "de Text"
+    "localized_name": "Fellrüstung",
+    "description": "Eine Rüstung aus Leder. Bietet guten Schutz und ist haltbar."
   },
   "FurArmor_3": {
-    "localized_name": "de Text",
-    "description": "de Text"
+    "localized_name": "Fellrüstung",
+    "description": "Eine Rüstung aus Leder. Bietet guten Schutz und ist haltbar."
   },
   "FurArmor_4": {
-    "localized_name": "de Text",
-    "description": "de Text"
+    "localized_name": "Fellrüstung",
+    "description": "Eine Rüstung aus Leder. Bietet guten Schutz und ist haltbar."
   },
   "FurArmor_5": {
-    "localized_name": "de Text",
-    "description": "de Text"
+    "localized_name": "Fellrüstung",
+    "description": "Eine Rüstung aus Leder. Bietet guten Schutz und ist haltbar."
   },
   "FurHelmet": {
     "localized_name": "Federhaarschmuck",
@@ -2895,9 +2895,29 @@
     "localized_name": "Gigagleiter",
     "description": "Ein faltbarer Gleiter zum durch die Lüfte Gleiten. Die verbesserte Konstruktion macht hohe Fluggeschwindigkeiten möglich."
   },
+  "Glider_Tera": {
+    "localized_name": "Teragleiter",
+    "description": "Ein faltbarer Gleiter zum durch die Lüfte Gleiten. Fliegt noch schneller und bleibt länger in der Luft."
+  },
   "Grape": {
     "localized_name": "de Text",
     "description": "de Text"
+  },
+  "GrapplingGun": {
+    "localized_name": "Enterhakenpistole",
+    "description": "Eine Enterhakenpistole zur schnellen Fortbewegung. Hakt sich am anvisierten Ziel ein und zieht den Anwender nach. Erleichtert die Mobilität auf Terrain mit großen Höhenunterschieden."
+  },
+  "GrapplingGun2": {
+    "localized_name": "Mega-Enterhakenpistole",
+    "description": "Eine Enterhakenpistole zur schnellen Fortbewegung. Hakt sich am anvisierten Ziel ein und zieht den Anwender nach. Verbessertes Modell mit höherer Reichweite."
+  },
+  "GrapplingGun3": {
+    "localized_name": "Giga-Enterhakenpistole",
+    "description": "Eine Enterhakenpistole zur schnellen Fortbewegung. Hakt sich am anvisierten Ziel ein und zieht den Anwender nach. Die innovative Bauweise basiert auf den Daten eines Versuchsmodells."
+  },
+  "GrapplingGun4": {
+    "localized_name": "Tera-Enterhakenpistole",
+    "description": "Eine Enterhakenpistole zur schnellen Fortbewegung. Hakt sich am anvisierten Ziel ein und zieht den Anwender nach. Ihre überragende Mobilität ist das Resultat jahrelanger Forschung."
   },
   "Gratin": {
     "localized_name": "Gratin",
@@ -2984,20 +3004,20 @@
     "description": "Eine Handfeuerwaffe mit guter Feuerrate und ordentlich großem Magazin. Hat eine höhere Schadenswirkung als Alte Pistole."
   },
   "HandGun_Default_2": {
-    "localized_name": "de Text",
-    "description": "de Text"
+    "localized_name": "Pistole",
+    "description": "Eine Handfeuerwaffe mit guter Feuerrate und ordentlich großem Magazin. Hat eine höhere Schadenswirkung als Alte Pistole."
   },
   "HandGun_Default_3": {
-    "localized_name": "de Text",
-    "description": "de Text"
+    "localized_name": "Pistole",
+    "description": "Eine Handfeuerwaffe mit guter Feuerrate und ordentlich großem Magazin. Hat eine höhere Schadenswirkung als Alte Pistole."
   },
   "HandGun_Default_4": {
-    "localized_name": "de Text",
-    "description": "de Text"
+    "localized_name": "Pistole",
+    "description": "Eine Handfeuerwaffe mit guter Feuerrate und ordentlich großem Magazin. Hat eine höhere Schadenswirkung als Alte Pistole."
   },
   "HandGun_Default_5": {
-    "localized_name": "de Text",
-    "description": "de Text"
+    "localized_name": "Pistole",
+    "description": "Eine Handfeuerwaffe mit guter Feuerrate und ordentlich großem Magazin. Hat eine höhere Schadenswirkung als Alte Pistole."
   },
   "HandgunBullet": {
     "localized_name": "Pistolenmunition",
@@ -3568,20 +3588,20 @@
     "description": "Hochwertige Metallrüstung mit verbesserter Qualität. Schützt extrem gut gegen Hitze."
   },
   "IronArmor_2": {
-    "localized_name": "de Text",
-    "description": "de Text"
+    "localized_name": "Hochwertige Metallrüstung",
+    "description": "Eine Rüstung aus hochwertigem Metall. Bietet erheblichen Schutz, ist aber ganz schön schwer."
   },
   "IronArmor_3": {
-    "localized_name": "de Text",
-    "description": "de Text"
+    "localized_name": "Hochwertige Metallrüstung",
+    "description": "Eine Rüstung aus hochwertigem Metall. Bietet erheblichen Schutz, ist aber ganz schön schwer."
   },
   "IronArmor_4": {
-    "localized_name": "de Text",
-    "description": "de Text"
+    "localized_name": "Hochwertige Metallrüstung",
+    "description": "Eine Rüstung aus hochwertigem Metall. Bietet erheblichen Schutz, ist aber ganz schön schwer."
   },
   "IronArmor_5": {
-    "localized_name": "de Text",
-    "description": "de Text"
+    "localized_name": "Hochwertige Metallrüstung",
+    "description": "Eine Rüstung aus hochwertigem Metall. Bietet erheblichen Schutz, ist aber ganz schön schwer."
   },
   "IronHelmet": {
     "localized_name": "Hochwertiger Metallhelm",
@@ -3672,20 +3692,20 @@
     "description": "Wenn man ein weit entferntes Ziel – und alles drumrum – ganz besonders übel zurichten möchte, greift man zur Launcher Default."
   },
   "Launcher_Default_2": {
-    "localized_name": "de Text",
-    "description": "de Text"
+    "localized_name": "Panzerfaust",
+    "description": "Wenn man ein weit entferntes Ziel – und alles drumrum – ganz besonders übel zurichten möchte, greift man zur Launcher Default."
   },
   "Launcher_Default_3": {
-    "localized_name": "de Text",
-    "description": "de Text"
+    "localized_name": "Panzerfaust",
+    "description": "Wenn man ein weit entferntes Ziel – und alles drumrum – ganz besonders übel zurichten möchte, greift man zur Launcher Default."
   },
   "Launcher_Default_4": {
-    "localized_name": "de Text",
-    "description": "de Text"
+    "localized_name": "Panzerfaust",
+    "description": "Wenn man ein weit entferntes Ziel – und alles drumrum – ganz besonders übel zurichten möchte, greift man zur Launcher Default."
   },
   "Launcher_Default_5": {
-    "localized_name": "de Text",
-    "description": "de Text"
+    "localized_name": "Panzerfaust",
+    "description": "Wenn man ein weit entferntes Ziel – und alles drumrum – ganz besonders übel zurichten möchte, greift man zur Launcher Default."
   },
   "Launcher_Meteor": {
     "localized_name": "Meteowerfer",
@@ -4652,20 +4672,20 @@
     "description": "Eine Flinte mit größerem Magazin. Liefert auf kurze Distanz unschlagbaren Schadensoutput."
   },
   "PumpActionShotgun_2": {
-    "localized_name": "de Text",
-    "description": "de Text"
+    "localized_name": "Pumpgun",
+    "description": "Eine Flinte mit größerem Magazin. Liefert auf kurze Distanz unschlagbaren Schadensoutput."
   },
   "PumpActionShotgun_3": {
-    "localized_name": "de Text",
-    "description": "de Text"
+    "localized_name": "Pumpgun",
+    "description": "Eine Flinte mit größerem Magazin. Liefert auf kurze Distanz unschlagbaren Schadensoutput."
   },
   "PumpActionShotgun_4": {
-    "localized_name": "de Text",
-    "description": "de Text"
+    "localized_name": "Pumpgun",
+    "description": "Eine Flinte mit größerem Magazin. Liefert auf kurze Distanz unschlagbaren Schadensoutput."
   },
   "PumpActionShotgun_5": {
-    "localized_name": "de Text",
-    "description": "de Text"
+    "localized_name": "Pumpgun",
+    "description": "Eine Flinte mit größerem Magazin. Liefert auf kurze Distanz unschlagbaren Schadensoutput."
   },
   "Quartz": {
     "localized_name": "Reinquarz",
@@ -4926,6 +4946,10 @@
   "Shield_SF": {
     "localized_name": "Sci-Fi-Schild",
     "description": "Ein mithilfe von ultramoderner Technologie entwickelter, mysteriöser Schild. Regeneriert sich automatisch, nachdem er einige Zeit lang keinen Schaden nimmt. Der Inbegriff von Perfektion."
+  },
+  "Shield_Ultra": {
+    "localized_name": "Ultraschild",
+    "description": "Ein mithilfe von Paldiumtechnologie entwickelter, mysteriöser Schild. Regeneriert sich automatisch, wenn er einige Zeit lang keinen Schaden nimmt. Dieses ultimative Modell übertrifft alles bisher Dagewesene."
   },
   "ShotgunBullet": {
     "localized_name": "Flintenmunition",
@@ -5788,20 +5812,20 @@
     "description": "Paluminiumrüstung mit verbesserter Qualität. Schützt extrem gut gegen Hitze."
   },
   "StealArmor_2": {
-    "localized_name": "de Text",
-    "description": "de Text"
+    "localized_name": "Paluminiumrüstung",
+    "description": "Eine Rüstung aus Paluminiumbarren. Bietet wahnsinnigen Schutz, ist aber auch wahnsinnig schwer."
   },
   "StealArmor_3": {
-    "localized_name": "de Text",
-    "description": "de Text"
+    "localized_name": "Paluminiumrüstung",
+    "description": "Eine Rüstung aus Paluminiumbarren. Bietet wahnsinnigen Schutz, ist aber auch wahnsinnig schwer."
   },
   "StealArmor_4": {
-    "localized_name": "de Text",
-    "description": "de Text"
+    "localized_name": "Paluminiumrüstung",
+    "description": "Eine Rüstung aus Paluminiumbarren. Bietet wahnsinnigen Schutz, ist aber auch wahnsinnig schwer."
   },
   "StealArmor_5": {
-    "localized_name": "de Text",
-    "description": "de Text"
+    "localized_name": "Paluminiumrüstung",
+    "description": "Eine Rüstung aus Paluminiumbarren. Bietet wahnsinnigen Schutz, ist aber auch wahnsinnig schwer."
   },
   "StealHelmet": {
     "localized_name": "Paluminiumhelm",
@@ -5948,20 +5972,20 @@
     "description": "Eine primitive Fernkampfwaffe. Musste schon mehrmals ausgebessert werden und verfügt über eine geringe Angriffskraft."
   },
   "WeakerBow_2": {
-    "localized_name": "de Text",
-    "description": "de Text"
+    "localized_name": "Alter Bogen",
+    "description": "Eine primitive Fernkampfwaffe. Musste schon mehrmals ausgebessert werden und verfügt über eine geringe Angriffskraft."
   },
   "WeakerBow_3": {
-    "localized_name": "de Text",
-    "description": "de Text"
+    "localized_name": "Alter Bogen",
+    "description": "Eine primitive Fernkampfwaffe. Musste schon mehrmals ausgebessert werden und verfügt über eine geringe Angriffskraft."
   },
   "WeakerBow_4": {
-    "localized_name": "de Text",
-    "description": "de Text"
+    "localized_name": "Alter Bogen",
+    "description": "Eine primitive Fernkampfwaffe. Musste schon mehrmals ausgebessert werden und verfügt über eine geringe Angriffskraft."
   },
   "WeakerBow_5": {
-    "localized_name": "de Text",
-    "description": "de Text"
+    "localized_name": "Alter Bogen",
+    "description": "Eine primitive Fernkampfwaffe. Musste schon mehrmals ausgebessert werden und verfügt über eine geringe Angriffskraft."
   },
   "Wheat": {
     "localized_name": "Weizen",
@@ -6034,5 +6058,13 @@
   "YakushimaBlade": {
     "localized_name": "Meowmere",
     "description": "[Terraria-Collab] Der Legende nach wurde dieses Schwert einst von einem Croajiro aus einem fernen Land hierhergebracht Der Grund dafür ist aber nicht überliefert."
+  },
+  "SniperRifle_Default": {
+    "localized_name": "Scharfschützengewehr",
+    "description": "Ein Gewehr mit außergewöhnlicher Präzision für große Entfernungen. Es ist leicht zu handhaben und effektiv im Fernkampf."
+  },
+  "LargeBullet": {
+    "localized_name": "Scharfschützenmunition",
+    "description": "Eine großkalibrige Kugel für Scharfschützengewehre. Sie bietet hohe Präzision und Durchschlagskraft."
   }
 }

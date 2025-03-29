@@ -312,20 +312,20 @@
     "description": "Un AssaultRifle Default1 dont la cadence de tir permet de dominer l'ennemi. Une arme tout indiquée contre les adversaires coriaces."
   },
   "AssaultRifle_Default2": {
-    "localized_name": "fr Text",
-    "description": "fr Text"
+    "localized_name": "Fusil d'assaut",
+    "description": "Un AssaultRifle Default1 dont la cadence de tir permet de dominer l'ennemi. Une arme tout indiquée contre les adversaires coriaces."
   },
   "AssaultRifle_Default3": {
-    "localized_name": "fr Text",
-    "description": "fr Text"
+    "localized_name": "Fusil d'assaut",
+    "description": "Un AssaultRifle Default1 dont la cadence de tir permet de dominer l'ennemi. Une arme tout indiquée contre les adversaires coriaces."
   },
   "AssaultRifle_Default4": {
-    "localized_name": "fr Text",
-    "description": "fr Text"
+    "localized_name": "Fusil d'assaut",
+    "description": "Un AssaultRifle Default1 dont la cadence de tir permet de dominer l'ennemi. Une arme tout indiquée contre les adversaires coriaces."
   },
   "AssaultRifle_Default5": {
-    "localized_name": "fr Text",
-    "description": "fr Text"
+    "localized_name": "Fusil d'assaut",
+    "description": "Un AssaultRifle Default1 dont la cadence de tir permet de dominer l'ennemi. Une arme tout indiquée contre les adversaires coriaces."
   },
   "AutoMealPouch_Tier1": {
     "localized_name": "Petit sac de nourriture",
@@ -2112,20 +2112,20 @@
     "description": "Permet de tirer une Flèche sans le moindre effort. Le charger prend du temps mais ses tirs sont dévastateurs."
   },
   "BowGun_2": {
-    "localized_name": "fr Text",
-    "description": "fr Text"
+    "localized_name": "Arbalète",
+    "description": "Permet de tirer une Flèche sans le moindre effort. Le charger prend du temps mais ses tirs sont dévastateurs."
   },
   "BowGun_3": {
-    "localized_name": "fr Text",
-    "description": "fr Text"
+    "localized_name": "Arbalète",
+    "description": "Permet de tirer une Flèche sans le moindre effort. Le charger prend du temps mais ses tirs sont dévastateurs."
   },
   "BowGun_4": {
-    "localized_name": "fr Text",
-    "description": "fr Text"
+    "localized_name": "Arbalète",
+    "description": "Permet de tirer une Flèche sans le moindre effort. Le charger prend du temps mais ses tirs sont dévastateurs."
   },
   "BowGun_5": {
-    "localized_name": "fr Text",
-    "description": "fr Text"
+    "localized_name": "Arbalète",
+    "description": "Permet de tirer une Flèche sans le moindre effort. Le charger prend du temps mais ses tirs sont dévastateurs."
   },
   "BowGun_Fire": {
     "localized_name": "Arbalète enflammée",
@@ -2300,20 +2300,20 @@
     "description": "Une Vêtement en tissu originaire d'une région chaude. Elle offre une grande résistance à la chaleur."
   },
   "ClothArmor_2": {
-    "localized_name": "fr Text",
-    "description": "fr Text"
+    "localized_name": "Vêtement en tissu",
+    "description": "Des habits en Tissu. Protègent contre le froid nocturne."
   },
   "ClothArmor_3": {
-    "localized_name": "fr Text",
-    "description": "fr Text"
+    "localized_name": "Vêtement en tissu",
+    "description": "Des habits en Tissu. Protègent contre le froid nocturne."
   },
   "ClothArmor_4": {
-    "localized_name": "fr Text",
-    "description": "fr Text"
+    "localized_name": "Vêtement en tissu",
+    "description": "Des habits en Tissu. Protègent contre le froid nocturne."
   },
   "ClothArmor_5": {
-    "localized_name": "fr Text",
-    "description": "fr Text"
+    "localized_name": "Vêtement en tissu",
+    "description": "Des habits en Tissu. Protègent contre le froid nocturne."
   },
   "Coal": {
     "localized_name": "Charbon",
@@ -2388,20 +2388,20 @@
     "description": "Une Armure en métal améliorée. Ses propriétés réfrigérantes ne sont plus à prouver."
   },
   "CopperArmor_2": {
-    "localized_name": "fr Text",
-    "description": "fr Text"
+    "localized_name": "Armure en métal",
+    "description": "Une armure en métal. Pèse un certain poids tout en offrant une protection correcte."
   },
   "CopperArmor_3": {
-    "localized_name": "fr Text",
-    "description": "fr Text"
+    "localized_name": "Armure en métal",
+    "description": "Une armure en métal. Pèse un certain poids tout en offrant une protection correcte."
   },
   "CopperArmor_4": {
-    "localized_name": "fr Text",
-    "description": "fr Text"
+    "localized_name": "Armure en métal",
+    "description": "Une armure en métal. Pèse un certain poids tout en offrant une protection correcte."
   },
   "CopperArmor_5": {
-    "localized_name": "fr Text",
-    "description": "fr Text"
+    "localized_name": "Armure en métal",
+    "description": "Une armure en métal. Pèse un certain poids tout en offrant une protection correcte."
   },
   "CopperHelmet": {
     "localized_name": "Heaume en métal",
@@ -2784,20 +2784,20 @@
     "description": "Une Armure en fourrure originaire d'une région chaude. Elle offre une grande résistance à la chaleur."
   },
   "FurArmor_2": {
-    "localized_name": "fr Text",
-    "description": "fr Text"
+    "localized_name": "Armure en fourrure",
+    "description": "Une armure faite de Cuir. Sa durabilité et sa défense ont été améliorées."
   },
   "FurArmor_3": {
-    "localized_name": "fr Text",
-    "description": "fr Text"
+    "localized_name": "Armure en fourrure",
+    "description": "Une armure faite de Cuir. Sa durabilité et sa défense ont été améliorées."
   },
   "FurArmor_4": {
-    "localized_name": "fr Text",
-    "description": "fr Text"
+    "localized_name": "Armure en fourrure",
+    "description": "Une armure faite de Cuir. Sa durabilité et sa défense ont été améliorées."
   },
   "FurArmor_5": {
-    "localized_name": "fr Text",
-    "description": "fr Text"
+    "localized_name": "Armure en fourrure",
+    "description": "Une armure faite de Cuir. Sa durabilité et sa défense ont été améliorées."
   },
   "FurHelmet": {
     "localized_name": "Barrette à plumes",
@@ -2895,9 +2895,29 @@
     "localized_name": "Giga planeur",
     "description": "Permet de planer une fois déplié. Sa qualité supérieure permet d'atteindre une vitesse considérable."
   },
+  "Glider_Tera": {
+    "localized_name": "Téra planeur",
+    "description": "Permet de planer une fois déplié. Sa qualité encore supérieure décuple sa vitesse et sa portance."
+  },
   "Grape": {
     "localized_name": "fr Text",
     "description": "fr Text"
+  },
+  "GrapplingGun": {
+    "localized_name": "Pistolet-grappin",
+    "description": "Un pistolet-grappin permettant des déplacements plus rapides. Projette un crochet sur une cible pour y tirer l'utilisateur. Permet de se déplacer même entre deux points sur différents niveaux."
+  },
+  "GrapplingGun2": {
+    "localized_name": "Méga pistolet-grappin",
+    "description": "Un pistolet-grappin permettant des déplacements plus rapides. Projette un crochet sur une cible pour y tirer l'utilisateur. Sa portée a été améliorée."
+  },
+  "GrapplingGun3": {
+    "localized_name": "Giga pistolet-grappin",
+    "description": "Un pistolet-grappin permettant des déplacements plus rapides. Projette un crochet sur une cible pour y tirer l'utilisateur. Les données d'un prototype ont permis de l'améliorer davantage."
+  },
+  "GrapplingGun4": {
+    "localized_name": "Téra pistolet-grappin",
+    "description": "Un pistolet-grappin permettant des déplacements plus rapides. Projette un crochet sur une cible pour y tirer l'utilisateur. Les recherches ininterrompues ont permis de l'optimiser."
   },
   "Gratin": {
     "localized_name": "Gratin",
@@ -2984,20 +3004,20 @@
     "description": "Un pistolet à la capacité et à la cadence de tir améliorées. Puissance de feu à la seconde supérieure à celle du Pistolet rouillé."
   },
   "HandGun_Default_2": {
-    "localized_name": "fr Text",
-    "description": "fr Text"
+    "localized_name": "Pistolet",
+    "description": "Un pistolet à la capacité et à la cadence de tir améliorées. Puissance de feu à la seconde supérieure à celle du Pistolet rouillé."
   },
   "HandGun_Default_3": {
-    "localized_name": "fr Text",
-    "description": "fr Text"
+    "localized_name": "Pistolet",
+    "description": "Un pistolet à la capacité et à la cadence de tir améliorées. Puissance de feu à la seconde supérieure à celle du Pistolet rouillé."
   },
   "HandGun_Default_4": {
-    "localized_name": "fr Text",
-    "description": "fr Text"
+    "localized_name": "Pistolet",
+    "description": "Un pistolet à la capacité et à la cadence de tir améliorées. Puissance de feu à la seconde supérieure à celle du Pistolet rouillé."
   },
   "HandGun_Default_5": {
-    "localized_name": "fr Text",
-    "description": "fr Text"
+    "localized_name": "Pistolet",
+    "description": "Un pistolet à la capacité et à la cadence de tir améliorées. Puissance de feu à la seconde supérieure à celle du Pistolet rouillé."
   },
   "HandgunBullet": {
     "localized_name": "Balles de pistolet",
@@ -3568,20 +3588,20 @@
     "description": "Une Armure en métal raffiné améliorée. Ses propriétés réfrigérantes ne sont plus à prouver."
   },
   "IronArmor_2": {
-    "localized_name": "fr Text",
-    "description": "fr Text"
+    "localized_name": "Armure en métal raffiné",
+    "description": "Une armure en métal noble. Sa robustesse à toute épreuve vient compenser son poids élevé."
   },
   "IronArmor_3": {
-    "localized_name": "fr Text",
-    "description": "fr Text"
+    "localized_name": "Armure en métal raffiné",
+    "description": "Une armure en métal noble. Sa robustesse à toute épreuve vient compenser son poids élevé."
   },
   "IronArmor_4": {
-    "localized_name": "fr Text",
-    "description": "fr Text"
+    "localized_name": "Armure en métal raffiné",
+    "description": "Une armure en métal noble. Sa robustesse à toute épreuve vient compenser son poids élevé."
   },
   "IronArmor_5": {
-    "localized_name": "fr Text",
-    "description": "fr Text"
+    "localized_name": "Armure en métal raffiné",
+    "description": "Une armure en métal noble. Sa robustesse à toute épreuve vient compenser son poids élevé."
   },
   "IronHelmet": {
     "localized_name": "Heaume en métal raffiné",
@@ -3672,20 +3692,20 @@
     "description": "Un Launcher Default qui permet des bombardements puissants sur de grandes distances."
   },
   "Launcher_Default_2": {
-    "localized_name": "fr Text",
-    "description": "fr Text"
+    "localized_name": "Lance-fusées",
+    "description": "Un Launcher Default qui permet des bombardements puissants sur de grandes distances."
   },
   "Launcher_Default_3": {
-    "localized_name": "fr Text",
-    "description": "fr Text"
+    "localized_name": "Lance-fusées",
+    "description": "Un Launcher Default qui permet des bombardements puissants sur de grandes distances."
   },
   "Launcher_Default_4": {
-    "localized_name": "fr Text",
-    "description": "fr Text"
+    "localized_name": "Lance-fusées",
+    "description": "Un Launcher Default qui permet des bombardements puissants sur de grandes distances."
   },
   "Launcher_Default_5": {
-    "localized_name": "fr Text",
-    "description": "fr Text"
+    "localized_name": "Lance-fusées",
+    "description": "Un Launcher Default qui permet des bombardements puissants sur de grandes distances."
   },
   "Launcher_Meteor": {
     "localized_name": "Lance-météorites",
@@ -4652,20 +4672,20 @@
     "description": "Un fusil à pompe à la capacité de chargeur améliorée. Inflige d'énormes dégâts à courte distance."
   },
   "PumpActionShotgun_2": {
-    "localized_name": "fr Text",
-    "description": "fr Text"
+    "localized_name": "Fusil à pompe",
+    "description": "Un fusil à pompe à la capacité de chargeur améliorée. Inflige d'énormes dégâts à courte distance."
   },
   "PumpActionShotgun_3": {
-    "localized_name": "fr Text",
-    "description": "fr Text"
+    "localized_name": "Fusil à pompe",
+    "description": "Un fusil à pompe à la capacité de chargeur améliorée. Inflige d'énormes dégâts à courte distance."
   },
   "PumpActionShotgun_4": {
-    "localized_name": "fr Text",
-    "description": "fr Text"
+    "localized_name": "Fusil à pompe",
+    "description": "Un fusil à pompe à la capacité de chargeur améliorée. Inflige d'énormes dégâts à courte distance."
   },
   "PumpActionShotgun_5": {
-    "localized_name": "fr Text",
-    "description": "fr Text"
+    "localized_name": "Fusil à pompe",
+    "description": "Un fusil à pompe à la capacité de chargeur améliorée. Inflige d'énormes dégâts à courte distance."
   },
   "Quartz": {
     "localized_name": "Quartz pur",
@@ -4926,6 +4946,10 @@
   "Shield_SF": {
     "localized_name": "Bouclier avancé",
     "description": "Un étrange bouclier obtenu grâce à une technologie ultra-avancée. Se régénère automatiquement s'il n'encaisse aucune attaque pendant un certain temps. Sa qualité est irréprochable."
+  },
+  "Shield_Ultra": {
+    "localized_name": "Ultra bouclier",
+    "description": "Un bouclier mystérieux issu de la technologie paldium. Se régénère de lui-même lorsqu'il ne subit pas d'attaque. Toute l'expérience accumulée lui confère une qualité sans précédent."
   },
   "ShotgunBullet": {
     "localized_name": "Balles de fusil à pompe",
@@ -5788,20 +5812,20 @@
     "description": "Une Armure en paluminium améliorée. Ses propriétés réfrigérantes ne sont plus à prouver."
   },
   "StealArmor_2": {
-    "localized_name": "fr Text",
-    "description": "fr Text"
+    "localized_name": "Armure en paluminium",
+    "description": "Une armure en Lingot de paluminium. Ses propriétés défensives sont aussi élevées que son poids."
   },
   "StealArmor_3": {
-    "localized_name": "fr Text",
-    "description": "fr Text"
+    "localized_name": "Armure en paluminium",
+    "description": "Une armure en Lingot de paluminium. Ses propriétés défensives sont aussi élevées que son poids."
   },
   "StealArmor_4": {
-    "localized_name": "fr Text",
-    "description": "fr Text"
+    "localized_name": "Armure en paluminium",
+    "description": "Une armure en Lingot de paluminium. Ses propriétés défensives sont aussi élevées que son poids."
   },
   "StealArmor_5": {
-    "localized_name": "fr Text",
-    "description": "fr Text"
+    "localized_name": "Armure en paluminium",
+    "description": "Une armure en Lingot de paluminium. Ses propriétés défensives sont aussi élevées que son poids."
   },
   "StealHelmet": {
     "localized_name": "Heaume en paluminium",
@@ -5948,20 +5972,20 @@
     "description": "Une arme primitive à longue distance. Le fait qu'elle ait été raccommodée lui fait perdre en puissance."
   },
   "WeakerBow_2": {
-    "localized_name": "fr Text",
-    "description": "fr Text"
+    "localized_name": "Vieil arc",
+    "description": "Une arme primitive à longue distance. Le fait qu'elle ait été raccommodée lui fait perdre en puissance."
   },
   "WeakerBow_3": {
-    "localized_name": "fr Text",
-    "description": "fr Text"
+    "localized_name": "Vieil arc",
+    "description": "Une arme primitive à longue distance. Le fait qu'elle ait été raccommodée lui fait perdre en puissance."
   },
   "WeakerBow_4": {
-    "localized_name": "fr Text",
-    "description": "fr Text"
+    "localized_name": "Vieil arc",
+    "description": "Une arme primitive à longue distance. Le fait qu'elle ait été raccommodée lui fait perdre en puissance."
   },
   "WeakerBow_5": {
-    "localized_name": "fr Text",
-    "description": "fr Text"
+    "localized_name": "Vieil arc",
+    "description": "Une arme primitive à longue distance. Le fait qu'elle ait été raccommodée lui fait perdre en puissance."
   },
   "Wheat": {
     "localized_name": "Blé",
@@ -6034,5 +6058,13 @@
   "YakushimaBlade": {
     "localized_name": "Épée arc-en-ciel",
     "description": "[Collaboration avec Terraria] La légende raconte que cette épée aurait été arrachée à une terre lointaine par Croajiro. Mais nul ne sait vraiment dans quel but..."
+  },
+  "SniperRifle_Default": {
+    "localized_name": "Fusil de précision",
+    "description": "Un fusil à longue portée d'une précision exceptionnelle. Il est facile à manier et efficace dans les combats à longue distance."
+  },
+  "LargeBullet": {
+    "localized_name": "Munitions de précision",
+    "description": "Une grosse balle destinée au fusil de précision. Elle offre une grande précision et puissance."
   }
 }

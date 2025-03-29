@@ -805,15 +805,15 @@
   },
   "MoveSpeed_up_1": {
     "localized_name": "Ligeiro",
-    "description": null
+    "description": "Aumenta a velocidade de movimento em 10.0%."
   },
   "MoveSpeed_up_2": {
     "localized_name": "Bom corredor",
-    "description": null
+    "description": "Aumenta a velocidade de movimento em 20.0%."
   },
   "MoveSpeed_up_3": {
     "localized_name": "Vertiginoso",
-    "description": null
+    "description": "Aumenta a velocidade de movimento em 30.0%."
   },
   "Nocturnal": {
     "localized_name": "Noturno",

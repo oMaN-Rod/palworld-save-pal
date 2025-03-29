@@ -312,20 +312,20 @@
     "description": "Un AssaultRifle Default1 de fuego rápido con el que poner al enemigo contra las cuerdas. De disparo rápido y potente, es el arma perfecta contra rivales poderosos."
   },
   "AssaultRifle_Default2": {
-    "localized_name": "es Text",
-    "description": "es Text"
+    "localized_name": "Rifle de asalto",
+    "description": "Un AssaultRifle Default1 de fuego rápido con el que poner al enemigo contra las cuerdas. De disparo rápido y potente, es el arma perfecta contra rivales poderosos."
   },
   "AssaultRifle_Default3": {
-    "localized_name": "es Text",
-    "description": "es Text"
+    "localized_name": "Rifle de asalto",
+    "description": "Un AssaultRifle Default1 de fuego rápido con el que poner al enemigo contra las cuerdas. De disparo rápido y potente, es el arma perfecta contra rivales poderosos."
   },
   "AssaultRifle_Default4": {
-    "localized_name": "es Text",
-    "description": "es Text"
+    "localized_name": "Rifle de asalto",
+    "description": "Un AssaultRifle Default1 de fuego rápido con el que poner al enemigo contra las cuerdas. De disparo rápido y potente, es el arma perfecta contra rivales poderosos."
   },
   "AssaultRifle_Default5": {
-    "localized_name": "es Text",
-    "description": "es Text"
+    "localized_name": "Rifle de asalto",
+    "description": "Un AssaultRifle Default1 de fuego rápido con el que poner al enemigo contra las cuerdas. De disparo rápido y potente, es el arma perfecta contra rivales poderosos."
   },
   "AutoMealPouch_Tier1": {
     "localized_name": "Bolsa de comida pequeña",
@@ -2112,20 +2112,20 @@
     "description": "Puede disparar una «Flecha» sin esfuerzo. Lleva tiempo prepararlo, pero el disparo es muy potente."
   },
   "BowGun_2": {
-    "localized_name": "es Text",
-    "description": "es Text"
+    "localized_name": "Ballesta",
+    "description": "Puede disparar una «Flecha» sin esfuerzo. Lleva tiempo prepararlo, pero el disparo es muy potente."
   },
   "BowGun_3": {
-    "localized_name": "es Text",
-    "description": "es Text"
+    "localized_name": "Ballesta",
+    "description": "Puede disparar una «Flecha» sin esfuerzo. Lleva tiempo prepararlo, pero el disparo es muy potente."
   },
   "BowGun_4": {
-    "localized_name": "es Text",
-    "description": "es Text"
+    "localized_name": "Ballesta",
+    "description": "Puede disparar una «Flecha» sin esfuerzo. Lleva tiempo prepararlo, pero el disparo es muy potente."
   },
   "BowGun_5": {
-    "localized_name": "es Text",
-    "description": "es Text"
+    "localized_name": "Ballesta",
+    "description": "Puede disparar una «Flecha» sin esfuerzo. Lleva tiempo prepararlo, pero el disparo es muy potente."
   },
   "BowGun_Fire": {
     "localized_name": "Ballesta de flechas incendiarias",
@@ -2300,20 +2300,20 @@
     "description": "Ropa de tela elaborada en regiones cálidas. Cuenta con una alta resistencia al calor."
   },
   "ClothArmor_2": {
-    "localized_name": "es Text",
-    "description": "es Text"
+    "localized_name": "Ropa de tela",
+    "description": "Prenda hecha con Tela. Te mantendrá caliente en las noches frías."
   },
   "ClothArmor_3": {
-    "localized_name": "es Text",
-    "description": "es Text"
+    "localized_name": "Ropa de tela",
+    "description": "Prenda hecha con Tela. Te mantendrá caliente en las noches frías."
   },
   "ClothArmor_4": {
-    "localized_name": "es Text",
-    "description": "es Text"
+    "localized_name": "Ropa de tela",
+    "description": "Prenda hecha con Tela. Te mantendrá caliente en las noches frías."
   },
   "ClothArmor_5": {
-    "localized_name": "es Text",
-    "description": "es Text"
+    "localized_name": "Ropa de tela",
+    "description": "Prenda hecha con Tela. Te mantendrá caliente en las noches frías."
   },
   "Coal": {
     "localized_name": "Carbón",
@@ -2388,20 +2388,20 @@
     "description": "Armadura de metal mejorada. Es muy resistente al calor."
   },
   "CopperArmor_2": {
-    "localized_name": "es Text",
-    "description": "es Text"
+    "localized_name": "Armadura de metal",
+    "description": "Armadura hecha de metal. De peso y capacidad defensiva considerables."
   },
   "CopperArmor_3": {
-    "localized_name": "es Text",
-    "description": "es Text"
+    "localized_name": "Armadura de metal",
+    "description": "Armadura hecha de metal. De peso y capacidad defensiva considerables."
   },
   "CopperArmor_4": {
-    "localized_name": "es Text",
-    "description": "es Text"
+    "localized_name": "Armadura de metal",
+    "description": "Armadura hecha de metal. De peso y capacidad defensiva considerables."
   },
   "CopperArmor_5": {
-    "localized_name": "es Text",
-    "description": "es Text"
+    "localized_name": "Armadura de metal",
+    "description": "Armadura hecha de metal. De peso y capacidad defensiva considerables."
   },
   "CopperHelmet": {
     "localized_name": "Yelmo de metal",
@@ -2784,20 +2784,20 @@
     "description": "Armadura de pelaje elaborada en regiones cálidas. Cuenta con una alta resistencia al calor."
   },
   "FurArmor_2": {
-    "localized_name": "es Text",
-    "description": "es Text"
+    "localized_name": "Armadura de pelaje",
+    "description": "Armadura hecha de Cuero. De durabilidad y propiedades defensivas superiores."
   },
   "FurArmor_3": {
-    "localized_name": "es Text",
-    "description": "es Text"
+    "localized_name": "Armadura de pelaje",
+    "description": "Armadura hecha de Cuero. De durabilidad y propiedades defensivas superiores."
   },
   "FurArmor_4": {
-    "localized_name": "es Text",
-    "description": "es Text"
+    "localized_name": "Armadura de pelaje",
+    "description": "Armadura hecha de Cuero. De durabilidad y propiedades defensivas superiores."
   },
   "FurArmor_5": {
-    "localized_name": "es Text",
-    "description": "es Text"
+    "localized_name": "Armadura de pelaje",
+    "description": "Armadura hecha de Cuero. De durabilidad y propiedades defensivas superiores."
   },
   "FurHelmet": {
     "localized_name": "Prendido de plumas",
@@ -2895,9 +2895,29 @@
     "localized_name": "Gigaplaneador",
     "description": "Planeador para surcar los cielos. Rinde bien y es muy rápido."
   },
+  "Glider_Tera": {
+    "localized_name": "Teraplaneador",
+    "description": "Planeador para surcar los cielos. El rendimiento ha mejorado aún más y ahora es más rápido y soporta cargas mayores."
+  },
   "Grape": {
     "localized_name": "es Text",
     "description": "es Text"
+  },
+  "GrapplingGun": {
+    "localized_name": "Pistola de agarre",
+    "description": "Una pistola de agarre con la que desplazarse a toda velocidad. Dispara el gancho hacia un punto fijo y estira del tirador. Te permitirá llegar fácilmente a zonas de más altura."
+  },
+  "GrapplingGun2": {
+    "localized_name": "Megapistola de agarre",
+    "description": "Una pistola de agarre con la que desplazarse a toda velocidad. Dispara el gancho hacia un punto fijo y estira del tirador. Ha sido mejorado y ahora tiene mayor alcance."
+  },
+  "GrapplingGun3": {
+    "localized_name": "Gigapistola de agarre",
+    "description": "Una pistola de agarre con la que desplazarse a toda velocidad. Dispara el gancho hacia un punto fijo y estira del tirador. Su rendimiento ha mejorado enormemente con el estudio del prototipo."
+  },
+  "GrapplingGun4": {
+    "localized_name": "Terapistola de agarre",
+    "description": "Una pistola de agarre con la que desplazarse a toda velocidad. Dispara el gancho hacia un punto fijo y estira del tirador. Gracias a recientes investigaciones, cuenta con una maniobrabilidad abrumadora."
   },
   "Gratin": {
     "localized_name": "Gratinado",
@@ -2984,20 +3004,20 @@
     "description": "Pistola con capacidad de cargador y velocidad de disparo mejoradas. Su potencia de fuego por segundo es mejor que la del Revólver baratillo."
   },
   "HandGun_Default_2": {
-    "localized_name": "es Text",
-    "description": "es Text"
+    "localized_name": "Revólver",
+    "description": "Pistola con capacidad de cargador y velocidad de disparo mejoradas. Su potencia de fuego por segundo es mejor que la del Revólver baratillo."
   },
   "HandGun_Default_3": {
-    "localized_name": "es Text",
-    "description": "es Text"
+    "localized_name": "Revólver",
+    "description": "Pistola con capacidad de cargador y velocidad de disparo mejoradas. Su potencia de fuego por segundo es mejor que la del Revólver baratillo."
   },
   "HandGun_Default_4": {
-    "localized_name": "es Text",
-    "description": "es Text"
+    "localized_name": "Revólver",
+    "description": "Pistola con capacidad de cargador y velocidad de disparo mejoradas. Su potencia de fuego por segundo es mejor que la del Revólver baratillo."
   },
   "HandGun_Default_5": {
-    "localized_name": "es Text",
-    "description": "es Text"
+    "localized_name": "Revólver",
+    "description": "Pistola con capacidad de cargador y velocidad de disparo mejoradas. Su potencia de fuego por segundo es mejor que la del Revólver baratillo."
   },
   "HandgunBullet": {
     "localized_name": "Balas de revólver",
@@ -3568,20 +3588,20 @@
     "description": "Armadura de metal refinado mejorada. Es muy resistente al calor."
   },
   "IronArmor_2": {
-    "localized_name": "es Text",
-    "description": "es Text"
+    "localized_name": "Armadura de metal refinado",
+    "description": "Armadura hecha de metal refinado. Es muy pesada porque cuenta con un poder defensivo considerable."
   },
   "IronArmor_3": {
-    "localized_name": "es Text",
-    "description": "es Text"
+    "localized_name": "Armadura de metal refinado",
+    "description": "Armadura hecha de metal refinado. Es muy pesada porque cuenta con un poder defensivo considerable."
   },
   "IronArmor_4": {
-    "localized_name": "es Text",
-    "description": "es Text"
+    "localized_name": "Armadura de metal refinado",
+    "description": "Armadura hecha de metal refinado. Es muy pesada porque cuenta con un poder defensivo considerable."
   },
   "IronArmor_5": {
-    "localized_name": "es Text",
-    "description": "es Text"
+    "localized_name": "Armadura de metal refinado",
+    "description": "Armadura hecha de metal refinado. Es muy pesada porque cuenta con un poder defensivo considerable."
   },
   "IronHelmet": {
     "localized_name": "Yelmo de metal refinado",
@@ -3672,20 +3692,20 @@
     "description": "Launcher Default para bombardear con fuerza a larga distancia."
   },
   "Launcher_Default_2": {
-    "localized_name": "es Text",
-    "description": "es Text"
+    "localized_name": "Lanzacohetes",
+    "description": "Launcher Default para bombardear con fuerza a larga distancia."
   },
   "Launcher_Default_3": {
-    "localized_name": "es Text",
-    "description": "es Text"
+    "localized_name": "Lanzacohetes",
+    "description": "Launcher Default para bombardear con fuerza a larga distancia."
   },
   "Launcher_Default_4": {
-    "localized_name": "es Text",
-    "description": "es Text"
+    "localized_name": "Lanzacohetes",
+    "description": "Launcher Default para bombardear con fuerza a larga distancia."
   },
   "Launcher_Default_5": {
-    "localized_name": "es Text",
-    "description": "es Text"
+    "localized_name": "Lanzacohetes",
+    "description": "Launcher Default para bombardear con fuerza a larga distancia."
   },
   "Launcher_Meteor": {
     "localized_name": "Lanzameteoros",
@@ -4652,20 +4672,20 @@
     "description": "Escopeta potente con más capacidad para cartuchos. El DPS a corta distancia es excelente."
   },
   "PumpActionShotgun_2": {
-    "localized_name": "es Text",
-    "description": "es Text"
+    "localized_name": "Escopeta de repetición",
+    "description": "Escopeta potente con más capacidad para cartuchos. El DPS a corta distancia es excelente."
   },
   "PumpActionShotgun_3": {
-    "localized_name": "es Text",
-    "description": "es Text"
+    "localized_name": "Escopeta de repetición",
+    "description": "Escopeta potente con más capacidad para cartuchos. El DPS a corta distancia es excelente."
   },
   "PumpActionShotgun_4": {
-    "localized_name": "es Text",
-    "description": "es Text"
+    "localized_name": "Escopeta de repetición",
+    "description": "Escopeta potente con más capacidad para cartuchos. El DPS a corta distancia es excelente."
   },
   "PumpActionShotgun_5": {
-    "localized_name": "es Text",
-    "description": "es Text"
+    "localized_name": "Escopeta de repetición",
+    "description": "Escopeta potente con más capacidad para cartuchos. El DPS a corta distancia es excelente."
   },
   "Quartz": {
     "localized_name": "Cuarzo puro",
@@ -4926,6 +4946,10 @@
   "Shield_SF": {
     "localized_name": "Escudo superior",
     "description": "Escudo misterioso creado con tecnología de última generación. Si no recibe ataques en un tiempo, se repara solo. Es de una calidad intachable."
+  },
+  "Shield_Ultra": {
+    "localized_name": "Ultraescudo",
+    "description": "Escudo misterioso creado con tecnología Paldium. Si no recibe ataques en un tiempo, se repara solo. Tras muchos experimentos, se ha convertido en un artículo de calidad absolutamente inmejorable."
   },
   "ShotgunBullet": {
     "localized_name": "Balas de escopeta",
@@ -5788,20 +5812,20 @@
     "description": "Armadura de Paluminium mejorada. Es muy resistente al calor."
   },
   "StealArmor_2": {
-    "localized_name": "es Text",
-    "description": "es Text"
+    "localized_name": "Armadura de Paluminium",
+    "description": "Armadura hecha de Lingote de Paluminium. Sus propiedades defensivas son prodigiosas, pero es muy pesada."
   },
   "StealArmor_3": {
-    "localized_name": "es Text",
-    "description": "es Text"
+    "localized_name": "Armadura de Paluminium",
+    "description": "Armadura hecha de Lingote de Paluminium. Sus propiedades defensivas son prodigiosas, pero es muy pesada."
   },
   "StealArmor_4": {
-    "localized_name": "es Text",
-    "description": "es Text"
+    "localized_name": "Armadura de Paluminium",
+    "description": "Armadura hecha de Lingote de Paluminium. Sus propiedades defensivas son prodigiosas, pero es muy pesada."
   },
   "StealArmor_5": {
-    "localized_name": "es Text",
-    "description": "es Text"
+    "localized_name": "Armadura de Paluminium",
+    "description": "Armadura hecha de Lingote de Paluminium. Sus propiedades defensivas son prodigiosas, pero es muy pesada."
   },
   "StealHelmet": {
     "localized_name": "Yelmo de Paluminium",
@@ -5948,20 +5972,20 @@
     "description": "Arma de largo alcance primitiva. Al estar hecha de remiendos, no es muy potente."
   },
   "WeakerBow_2": {
-    "localized_name": "es Text",
-    "description": "es Text"
+    "localized_name": "Arco anticuado",
+    "description": "Arma de largo alcance primitiva. Al estar hecha de remiendos, no es muy potente."
   },
   "WeakerBow_3": {
-    "localized_name": "es Text",
-    "description": "es Text"
+    "localized_name": "Arco anticuado",
+    "description": "Arma de largo alcance primitiva. Al estar hecha de remiendos, no es muy potente."
   },
   "WeakerBow_4": {
-    "localized_name": "es Text",
-    "description": "es Text"
+    "localized_name": "Arco anticuado",
+    "description": "Arma de largo alcance primitiva. Al estar hecha de remiendos, no es muy potente."
   },
   "WeakerBow_5": {
-    "localized_name": "es Text",
-    "description": "es Text"
+    "localized_name": "Arco anticuado",
+    "description": "Arma de largo alcance primitiva. Al estar hecha de remiendos, no es muy potente."
   },
   "Wheat": {
     "localized_name": "Trigo",
@@ -6034,5 +6058,13 @@
   "YakushimaBlade": {
     "localized_name": "Filomiau",
     "description": "[Colaboración con Terraria] Según la leyenda, Croajiro trajo esta espada de tierras lejanas. Se desconoce el motivo..."
+  },
+  "SniperRifle_Default": {
+    "localized_name": "Rifle de francotirador",
+    "description": "Un rifle de largo alcance con precisión excepcional. Es fácil de manejar y efectivo en combate a larga distancia."
+  },
+  "LargeBullet": {
+    "localized_name": "Munición de francotirador",
+    "description": "Una bala grande para usar con un rifle de francotirador. Tiene alta precisión y potencia."
   }
 }

@@ -805,15 +805,15 @@
   },
   "MoveSpeed_up_1": {
     "localized_name": "재빠름",
-    "description": null
+    "description": "이동 속도 상승 10.0%"
   },
   "MoveSpeed_up_2": {
     "localized_name": "달리기 왕",
-    "description": null
+    "description": "이동 속도 상승 20.0%"
   },
   "MoveSpeed_up_3": {
     "localized_name": "신속",
-    "description": null
+    "description": "이동 속도 상승 30.0%"
   },
   "Nocturnal": {
     "localized_name": "야행성",

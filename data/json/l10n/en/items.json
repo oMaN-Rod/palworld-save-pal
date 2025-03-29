@@ -157,7 +157,7 @@
   },
   "Accessory_JumpCount_Increase3": {
     "localized_name": "Quadruple Jump Boots",
-    "description": "An accessory that allows the player to perform triple jumps in mid-air when equipped."
+    "description": "An accessory that allows the player to perform quadruple jumps in mid-air when equipped."
   },
   "Accessory_JumpPower_Increase": {
     "localized_name": "Anti-Gravity Belt",
@@ -2895,9 +2895,29 @@
     "localized_name": "Giga Glider",
     "description": "A glider for soaring through the air. With its capabilities improved, it can soar at high speeds."
   },
+  "Glider_Tera": {
+    "localized_name": "Hyper Glider",
+    "description": "A glider for soaring through the air. Its performance has been further improved, with increased speed and lift."
+  },
   "Grape": {
     "localized_name": "Grape",
     "description": "Grape"
+  },
+  "GrapplingGun": {
+    "localized_name": "Grappling Gun",
+    "description": "It fires a hook that latches on to distant targets, pulling the user's body towards the target. It allows for easy movement between places with varying elevation."
+  },
+  "GrapplingGun2": {
+    "localized_name": "Mega Grappling Gun",
+    "description": "It fires a hook that latches on to distant targets, pulling the user's body towards the target. Since it's upgraded, it now has greater range."
+  },
+  "GrapplingGun3": {
+    "localized_name": "Giga Grappling Gun",
+    "description": "It fires a hook that latches on to distant targets, pulling the user's body towards the target. Using data from prototype versions, its capabilities have been further increased."
+  },
+  "GrapplingGun4": {
+    "localized_name": "Hyper Grappling Gun",
+    "description": "It fires a hook that latches on to distant targets, pulling the user's body towards the target. As a result of research, it has achieved overwhelming mobility."
   },
   "Gratin": {
     "localized_name": "Gratin",
@@ -4927,6 +4947,10 @@
     "localized_name": "Advanced Shield",
     "description": "Strange shield made with advanced technology. It automatically repair itself after not taking damage for a while."
   },
+  "Shield_Ultra": {
+    "localized_name": "Ultra Shield",
+    "description": "Strange shield made with Paldium technology. It automatically repair itself after not taking damage for a while. As a result of further experiments, ultimate quality has been achieved."
+  },
   "ShotgunBullet": {
     "localized_name": "Shotgun Shell",
     "description": "Ammo for shotguns and other similar weapons."
@@ -6034,5 +6058,13 @@
   "YakushimaBlade": {
     "localized_name": "Meowmere",
     "description": "[Terraria Collab] According to the legend, this sword was brought back from a distant land by Croajiro. Why? We have no idea..."
+  },
+  "SniperRifle_Default": {
+    "localized_name": "Sniper Rifle",
+    "description": "A long-range rifle with exceptional accuracy. It’s easy to handle and effective in long-range combat."
+  },
+  "LargeBullet": {
+    "localized_name": "Sniper Ammo",
+    "description": "Ammo for use with a Sniper Rifle. It has high accuracy and power."
   }
 }

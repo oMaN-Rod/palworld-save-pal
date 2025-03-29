@@ -7921,7 +7921,20 @@
       "passive_skills": []
     },
     "damage": 1650,
-    "disabled": false
+    "disabled": true
+  },
+  "ChargeLaserRifleBullet": {
+    "group": "Common",
+    "type_a": "Ammo",
+    "type_b": "ConsumeBullet",
+    "rank": 3,
+    "rarity": 0,
+    "max_stack_count": 9999,
+    "weight": 0.01,
+    "price": 150,
+    "sort_id": 26,
+    "icon": "ChargeLaserRifleBullet",
+    "disabled": true
   },
   "CheeseBurger": {
     "group": "Food",
@@ -9873,7 +9886,20 @@
       "passive_skills": []
     },
     "damage": 220,
-    "disabled": false
+    "disabled": true
+  },
+  "EnergyShotgunBullet": {
+    "group": "Common",
+    "type_a": "Ammo",
+    "type_b": "ConsumeBullet",
+    "rank": 2,
+    "rarity": 0,
+    "max_stack_count": 9999,
+    "weight": 0.025,
+    "price": 220,
+    "sort_id": 24,
+    "icon": "EnergyShotgunBullet",
+    "disabled": true
   },
   "ExpBoost_01": {
     "group": "Common",
@@ -11323,7 +11349,7 @@
       "type": "armor",
       "passive_skills": []
     },
-    "disabled": true
+    "disabled": false
   },
   "Grape": {
     "group": "Food",
@@ -11354,7 +11380,7 @@
       "type": "weapon",
       "passive_skills": []
     },
-    "disabled": true
+    "disabled": false
   },
   "GrapplingGun2": {
     "group": "Weapon",
@@ -11371,7 +11397,7 @@
       "type": "weapon",
       "passive_skills": []
     },
-    "disabled": true
+    "disabled": false
   },
   "GrapplingGun3": {
     "group": "Weapon",
@@ -11388,7 +11414,7 @@
       "type": "weapon",
       "passive_skills": []
     },
-    "disabled": true
+    "disabled": false
   },
   "GrapplingGun4": {
     "group": "Weapon",
@@ -11405,7 +11431,7 @@
       "type": "weapon",
       "passive_skills": []
     },
-    "disabled": true
+    "disabled": false
   },
   "Gratin": {
     "group": "Food",
@@ -17919,25 +17945,19 @@
       "passive_skills": []
     },
     "damage": 320,
-    "disabled": false
+    "disabled": true
   },
-  "PV_AssaultRifle_Default1": {
-    "group": "Weapon",
-    "type_a": "Weapon",
-    "type_b": "WeaponAssaultRifle",
-    "rank": 999,
-    "rarity": 999,
-    "max_stack_count": 1,
-    "weight": 0.0,
-    "price": 10,
-    "sort_id": 9999,
-    "icon": "t_itemicon_weapon_assaultrifle_default1",
-    "dynamic": {
-      "type": "weapon",
-      "magazine_size": 20,
-      "passive_skills": []
-    },
-    "damage": 50,
+  "OverheatRifleBullet": {
+    "group": "Common",
+    "type_a": "Ammo",
+    "type_b": "ConsumeBullet",
+    "rank": 3,
+    "rarity": 0,
+    "max_stack_count": 9999,
+    "weight": 0.01,
+    "price": 150,
+    "sort_id": 26,
+    "icon": "OverheatRifleBullet",
     "disabled": true
   },
   "PV_Glider_Manta": {
@@ -18001,7 +18021,20 @@
       "passive_skills": []
     },
     "damage": 250,
-    "disabled": false
+    "disabled": true
+  },
+  "PalDopingShotBullet": {
+    "group": "Common",
+    "type_a": "Ammo",
+    "type_b": "ConsumeBullet",
+    "rank": 2,
+    "rarity": 0,
+    "max_stack_count": 9999,
+    "weight": 0.025,
+    "price": 120,
+    "sort_id": 21,
+    "icon": "PalDopingShotBullet",
+    "disabled": true
   },
   "PalEgg_Dark_01": {
     "group": "Common",
@@ -21727,7 +21760,7 @@
       "passive_skills": [],
       "shield": 1520
     },
-    "disabled": true
+    "disabled": false
   },
   "ShotgunBullet": {
     "group": "Common",

@@ -200,7 +200,7 @@
     "description": "Planeador para surcar los cielos. Rinde bien y es muy rápido. Puede elaborarse en una «Fábrica de producción en cadena»."
   },
   "Battle_Glider_Grade_04": {
-    "localized_name": "Glider_Tera",
+    "localized_name": "Teraplaneador",
     "description": "Planeador para surcar los cielos. El rendimiento ha mejorado aún más y ahora es más rápido y soporta cargas mayores. Puede elaborarse en una «Fábrica de producción en cadena II»."
   },
   "Battle_GunPowder_Grade_02": {
@@ -684,19 +684,19 @@
     "description": null
   },
   "GrapplingGun": {
-    "localized_name": "GrapplingGun",
+    "localized_name": "Pistola de agarre",
     "description": null
   },
   "GrapplingGun2": {
-    "localized_name": "GrapplingGun2",
+    "localized_name": "Megapistola de agarre",
     "description": null
   },
   "GrapplingGun3": {
-    "localized_name": "GrapplingGun3",
+    "localized_name": "Gigapistola de agarre",
     "description": null
   },
   "GrapplingGun4": {
-    "localized_name": "GrapplingGun4",
+    "localized_name": "Terapistola de agarre",
     "description": null
   },
   "GrenadeBullet": {
@@ -774,6 +774,10 @@
   "Infra_PlayerBed_Grade_02": {
     "localized_name": "Cama de buena calidad",
     "description": "Una cama blandita donde poder recuperar fuerzas fácilmente. Si no la construyes bajo un tejado, no te servirá de nada."
+  },
+  "ItemBooth": {
+    "localized_name": "Mercadillo (objeto)",
+    "description": null
   },
   "ItemChest_04": {
     "localized_name": "Cofre de una civilización avanzada",
@@ -1152,7 +1156,7 @@
     "description": "Escudo misterioso creado con tecnología Paldium. Tras muchos experimentos, se ha convertido en un artículo de calidad inmejorable. Puede elaborarse en una «Fábrica de producción en cadena II»."
   },
   "Shield_05": {
-    "localized_name": "Shield_Ultra",
+    "localized_name": "Ultraescudo",
     "description": "Escudo misterioso creado con tecnología Paldium. Tras muchos experimentos, se ha convertido en un artículo de calidad absolutamente inmejorable. Puede elaborarse en una «Fábrica de producción en cadena II»."
   },
   "Shield_SF": {
@@ -1757,6 +1761,10 @@
   },
   "Unlock_Picking_Tier3": {
     "localized_name": "Herramienta de recolecta profesional",
+    "description": null
+  },
+  "WallSignboard": {
+    "localized_name": "WallSignBoard",
     "description": null
   },
   "WallTorch": {

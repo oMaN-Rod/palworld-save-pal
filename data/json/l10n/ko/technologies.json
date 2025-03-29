@@ -200,7 +200,7 @@
     "description": "펼쳐서 활공할 때 쓰는 글라이더. 성능을 끌어올려 꽤 빠른 속도로 날 수 있게 된다. '작업라인 공장'에서 만들 수 있다."
   },
   "Battle_Glider_Grade_04": {
-    "localized_name": "Glider_Tera",
+    "localized_name": "테라 글라이더",
     "description": "펼쳐서 활공할 때 쓰는 글라이더. 성능을 더욱 끌어올려 속도와 장력이 향상됐다. '작업라인 공장 II'에서 만들 수 있다."
   },
   "Battle_GunPowder_Grade_02": {
@@ -684,19 +684,19 @@
     "description": null
   },
   "GrapplingGun": {
-    "localized_name": "GrapplingGun",
+    "localized_name": "갈고리 총",
     "description": null
   },
   "GrapplingGun2": {
-    "localized_name": "GrapplingGun2",
+    "localized_name": "메가 갈고리 총",
     "description": null
   },
   "GrapplingGun3": {
-    "localized_name": "GrapplingGun3",
+    "localized_name": "기가 갈고리 총",
     "description": null
   },
   "GrapplingGun4": {
-    "localized_name": "GrapplingGun4",
+    "localized_name": "테라 갈고리 총",
     "description": null
   },
   "GrenadeBullet": {
@@ -774,6 +774,10 @@
   "Infra_PlayerBed_Grade_02": {
     "localized_name": "상급 침대",
     "description": "회복력이 상승한 푹신푹신한 침대. 지붕 아래에 설치해야만 잠들 수 있다."
+  },
+  "ItemBooth": {
+    "localized_name": "프리마켓 (아이템)",
+    "description": null
   },
   "ItemChest_04": {
     "localized_name": "고도 문명 상자",
@@ -1152,7 +1156,7 @@
     "description": "팰지움 기술로 탄생한 신비한 방패. 실험을 거듭한 결과 품질 면에서 최고봉에 도달했다. |작업라인 공장 II|에서 제작할 수 있다."
   },
   "Shield_05": {
-    "localized_name": "Shield_Ultra",
+    "localized_name": "울트라 방패",
     "description": "팰지움 기술로 탄생한 신비한 방패. 실험을 더욱 거듭한 결과 품질 면에서 궁극에 도달했다. |작업라인 공장 II|에서 제작할 수 있다."
   },
   "Shield_SF": {
@@ -1757,6 +1761,10 @@
   },
   "Unlock_Picking_Tier3": {
     "localized_name": "전문가용 락픽 도구",
+    "description": null
+  },
+  "WallSignboard": {
+    "localized_name": "WallSignBoard",
     "description": null
   },
   "WallTorch": {

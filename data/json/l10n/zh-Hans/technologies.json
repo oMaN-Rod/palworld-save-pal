@@ -200,7 +200,7 @@
     "description": "展开后即可在空中滑翔的滑翔伞。 此款式性能有所提升，能以相当快的速度飞行。 可在「作业流水线工厂」制作。"
   },
   "Battle_Glider_Grade_04": {
-    "localized_name": "Glider_Tera",
+    "localized_name": "特级滑翔伞",
     "description": "展开后可在空中滑翔的滑翔伞。 性能得到进一步提升，速度和升力都提高了。 可在「作业流水线工厂 II」制作。"
   },
   "Battle_GunPowder_Grade_02": {
@@ -684,19 +684,19 @@
     "description": null
   },
   "GrapplingGun": {
-    "localized_name": "GrapplingGun",
+    "localized_name": "爪钩枪",
     "description": null
   },
   "GrapplingGun2": {
-    "localized_name": "GrapplingGun2",
+    "localized_name": "高级爪钩枪",
     "description": null
   },
   "GrapplingGun3": {
-    "localized_name": "GrapplingGun3",
+    "localized_name": "优质爪钩枪",
     "description": null
   },
   "GrapplingGun4": {
-    "localized_name": "GrapplingGun4",
+    "localized_name": "特级爪钩枪",
     "description": null
   },
   "GrenadeBullet": {
@@ -774,6 +774,10 @@
   "Infra_PlayerBed_Grade_02": {
     "localized_name": "优质的床",
     "description": "柔软蓬松的床铺，恢复效率有所改善。 必须建造在有屋顶的地方才能让人安眠。"
+  },
+  "ItemBooth": {
+    "localized_name": "跳蚤市场（道具）",
+    "description": null
   },
   "ItemChest_04": {
     "localized_name": "高等文明箱子",
@@ -1152,7 +1156,7 @@
     "description": "以帕鲁矿技术制成的神奇护盾。 经过多次实验，实现了最高峰的品质。 可在「作业流水线工厂 II」制作。"
   },
   "Shield_05": {
-    "localized_name": "Shield_Ultra",
+    "localized_name": "超级护盾",
     "description": "以帕鲁矿技术制成的神奇护盾。 在进一步多次实验后，结果实现了究极的品质。 可在「作业流水线工厂 II」制作。"
   },
   "Shield_SF": {
@@ -1757,6 +1761,10 @@
   },
   "Unlock_Picking_Tier3": {
     "localized_name": "专家开锁工具",
+    "description": null
+  },
+  "WallSignboard": {
+    "localized_name": "WallSignBoard",
     "description": null
   },
   "WallTorch": {

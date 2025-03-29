@@ -200,7 +200,7 @@
     "description": "展開滑翔傘，即可在空中滑翔。 此款式性能有所提升，能以相當快的速度飛行。 可在「作業流水線工廠」製作。"
   },
   "Battle_Glider_Grade_04": {
-    "localized_name": "Glider_Tera",
+    "localized_name": "特級滑翔傘",
     "description": "展開滑翔傘，即可在空中滑翔。 性能得到進一步提升，速度和升力都提高了。 可在「作業流水線工廠 II」製作。"
   },
   "Battle_GunPowder_Grade_02": {
@@ -684,19 +684,19 @@
     "description": null
   },
   "GrapplingGun": {
-    "localized_name": "GrapplingGun",
+    "localized_name": "爪鉤槍",
     "description": null
   },
   "GrapplingGun2": {
-    "localized_name": "GrapplingGun2",
+    "localized_name": "高級爪鉤槍",
     "description": null
   },
   "GrapplingGun3": {
-    "localized_name": "GrapplingGun3",
+    "localized_name": "優質爪鉤槍",
     "description": null
   },
   "GrapplingGun4": {
-    "localized_name": "GrapplingGun4",
+    "localized_name": "特級爪鉤槍",
     "description": null
   },
   "GrenadeBullet": {
@@ -774,6 +774,10 @@
   "Infra_PlayerBed_Grade_02": {
     "localized_name": "優質床鋪",
     "description": "柔軟蓬鬆的床鋪，回復效率有所改善。 必須建造在有屋頂的地方才能讓人安眠。"
+  },
+  "ItemBooth": {
+    "localized_name": "跳蚤市場（道具）",
+    "description": null
   },
   "ItemChest_04": {
     "localized_name": "高等文明箱子",
@@ -1152,7 +1156,7 @@
     "description": "以帕魯礦技術打造的神奇護盾。 歷經無數試驗，達到最高峰的品質。 可在「作業流水線工廠 II」製作。"
   },
   "Shield_05": {
-    "localized_name": "Shield_Ultra",
+    "localized_name": "超級護盾",
     "description": "以帕魯礦技術打造的神奇護盾。 經過更進一步的無數試驗，實現了究極的品質。 可在「作業流水線工廠 II」製作。"
   },
   "Shield_SF": {
@@ -1757,6 +1761,10 @@
   },
   "Unlock_Picking_Tier3": {
     "localized_name": "專家開鎖工具",
+    "description": null
+  },
+  "WallSignboard": {
+    "localized_name": "WallSignBoard",
     "description": null
   },
   "WallTorch": {

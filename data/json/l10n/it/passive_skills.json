@@ -805,15 +805,15 @@
   },
   "MoveSpeed_up_1": {
     "localized_name": "Rapidità",
-    "description": null
+    "description": "Incremento della velocità di movimento: 10.0%"
   },
   "MoveSpeed_up_2": {
     "localized_name": "Velocista",
-    "description": null
+    "description": "Incremento della velocità di movimento: 20.0%"
   },
   "MoveSpeed_up_3": {
     "localized_name": "Velocità divina",
-    "description": null
+    "description": "Incremento della velocità di movimento: 30.0%"
   },
   "Nocturnal": {
     "localized_name": "Notturno",

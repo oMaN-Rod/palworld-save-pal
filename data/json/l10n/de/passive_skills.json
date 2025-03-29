@@ -805,15 +805,15 @@
   },
   "MoveSpeed_up_1": {
     "localized_name": "Flink",
-    "description": null
+    "description": "Bewegungstempo +10.0 %"
   },
   "MoveSpeed_up_2": {
     "localized_name": "Guter Läufer",
-    "description": null
+    "description": "Bewegungstempo +20.0 %"
   },
   "MoveSpeed_up_3": {
     "localized_name": "Blitzschnell",
-    "description": null
+    "description": "Bewegungstempo +30.0 %"
   },
   "Nocturnal": {
     "localized_name": "Nachtaktiv",

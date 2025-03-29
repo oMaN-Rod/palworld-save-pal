@@ -312,20 +312,20 @@
     "description": "AssaultRifle Default1 обладает высокой скорострельностью, работающей на подавление. Подходит для сражений с сильными противниками."
   },
   "AssaultRifle_Default2": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Штурмовая винтовка",
+    "description": "AssaultRifle Default1 обладает высокой скорострельностью, работающей на подавление. Подходит для сражений с сильными противниками."
   },
   "AssaultRifle_Default3": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Штурмовая винтовка",
+    "description": "AssaultRifle Default1 обладает высокой скорострельностью, работающей на подавление. Подходит для сражений с сильными противниками."
   },
   "AssaultRifle_Default4": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Штурмовая винтовка",
+    "description": "AssaultRifle Default1 обладает высокой скорострельностью, работающей на подавление. Подходит для сражений с сильными противниками."
   },
   "AssaultRifle_Default5": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Штурмовая винтовка",
+    "description": "AssaultRifle Default1 обладает высокой скорострельностью, работающей на подавление. Подходит для сражений с сильными противниками."
   },
   "AutoMealPouch_Tier1": {
     "localized_name": "Небольшой пакет с кормом",
@@ -2112,20 +2112,20 @@
     "description": "Стреляет без приложения усилий, в качестве снаряда используется Стрела. Требует времени для зарядки, но стреляет мощно."
   },
   "BowGun_2": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Арбалет",
+    "description": "Стреляет без приложения усилий, в качестве снаряда используется Стрела. Требует времени для зарядки, но стреляет мощно."
   },
   "BowGun_3": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Арбалет",
+    "description": "Стреляет без приложения усилий, в качестве снаряда используется Стрела. Требует времени для зарядки, но стреляет мощно."
   },
   "BowGun_4": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Арбалет",
+    "description": "Стреляет без приложения усилий, в качестве снаряда используется Стрела. Требует времени для зарядки, но стреляет мощно."
   },
   "BowGun_5": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Арбалет",
+    "description": "Стреляет без приложения усилий, в качестве снаряда используется Стрела. Требует времени для зарядки, но стреляет мощно."
   },
   "BowGun_Fire": {
     "localized_name": "Огненный арбалет",
@@ -2300,20 +2300,20 @@
     "description": "Тканая одежда из региона с жарким климатом. Помогает легче переносить жару."
   },
   "ClothArmor_2": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Тканая одежда",
+    "description": "Одежда, для пошива которой используется Ткань. Защищает от ночного холода."
   },
   "ClothArmor_3": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Тканая одежда",
+    "description": "Одежда, для пошива которой используется Ткань. Защищает от ночного холода."
   },
   "ClothArmor_4": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Тканая одежда",
+    "description": "Одежда, для пошива которой используется Ткань. Защищает от ночного холода."
   },
   "ClothArmor_5": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Тканая одежда",
+    "description": "Одежда, для пошива которой используется Ткань. Защищает от ночного холода."
   },
   "Coal": {
     "localized_name": "Уголь",
@@ -2388,20 +2388,20 @@
     "description": "Металлическая броня с улучшенными характеристиками. Отлично защищает от высоких температур."
   },
   "CopperArmor_2": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Металлическая броня",
+    "description": "Изготовленный из металла доспех. Средний уровень защиты, средний вес."
   },
   "CopperArmor_3": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Металлическая броня",
+    "description": "Изготовленный из металла доспех. Средний уровень защиты, средний вес."
   },
   "CopperArmor_4": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Металлическая броня",
+    "description": "Изготовленный из металла доспех. Средний уровень защиты, средний вес."
   },
   "CopperArmor_5": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Металлическая броня",
+    "description": "Изготовленный из металла доспех. Средний уровень защиты, средний вес."
   },
   "CopperHelmet": {
     "localized_name": "Металлический шлем",
@@ -2784,20 +2784,20 @@
     "description": "Меховая броня из региона с жарким климатом. Помогает легче переносить жару."
   },
   "FurArmor_2": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Меховая броня",
+    "description": "Доспех, для изготовления которого используется Кожа. Обладает улучшенной прочностью и защитой."
   },
   "FurArmor_3": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Меховая броня",
+    "description": "Доспех, для изготовления которого используется Кожа. Обладает улучшенной прочностью и защитой."
   },
   "FurArmor_4": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Меховая броня",
+    "description": "Доспех, для изготовления которого используется Кожа. Обладает улучшенной прочностью и защитой."
   },
   "FurArmor_5": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Меховая броня",
+    "description": "Доспех, для изготовления которого используется Кожа. Обладает улучшенной прочностью и защитой."
   },
   "FurHelmet": {
     "localized_name": "Украшение с перьями",
@@ -2895,9 +2895,29 @@
     "localized_name": "Гигаглайдер",
     "description": "Глайдер для планирования. Улучшенная модель, позволяют развивать приличную скорость."
   },
+  "Glider_Tera": {
+    "localized_name": "Тераглайдер",
+    "description": "Глайдер для планирования. Еще более совершенная модель с повышенной скоростью и подъемной силой."
+  },
   "Grape": {
     "localized_name": "ru Text",
     "description": "ru Text"
+  },
+  "GrapplingGun": {
+    "localized_name": "Пистолет-гарпун",
+    "description": "Пистолет-гарпун для быстрого перемещения. Выпускает крюк и подтягивает к нему владельца. Помогает передвигаться в зонах с крутым рельефом."
+  },
+  "GrapplingGun2": {
+    "localized_name": "Мегапистолет-гарпун",
+    "description": "Пистолет-гарпун для быстрого перемещения. Выпускает крюк и подтягивает к нему владельца. Дальность действия увеличена."
+  },
+  "GrapplingGun3": {
+    "localized_name": "Гигапистолет-гарпун",
+    "description": "Пистолет-гарпун для быстрого перемещения. Выпускает крюк и подтягивает к нему владельца. Испытания опытного образца помогли увеличить эффективность."
+  },
+  "GrapplingGun4": {
+    "localized_name": "Мощный пистолет-гарпун",
+    "description": "Пистолет-гарпун для быстрого перемещения. Выпускает крюк и подтягивает к нему владельца. Эта модель обладает потрясающей маневренностью."
   },
   "Gratin": {
     "localized_name": "Гратен",
@@ -2984,20 +3004,20 @@
     "description": "Пистолет с улучшенным магазином и скорострельностью. Превосходит Дешевый пистолет по своей огневой мощи."
   },
   "HandGun_Default_2": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Пистолет",
+    "description": "Пистолет с улучшенным магазином и скорострельностью. Превосходит Дешевый пистолет по своей огневой мощи."
   },
   "HandGun_Default_3": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Пистолет",
+    "description": "Пистолет с улучшенным магазином и скорострельностью. Превосходит Дешевый пистолет по своей огневой мощи."
   },
   "HandGun_Default_4": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Пистолет",
+    "description": "Пистолет с улучшенным магазином и скорострельностью. Превосходит Дешевый пистолет по своей огневой мощи."
   },
   "HandGun_Default_5": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Пистолет",
+    "description": "Пистолет с улучшенным магазином и скорострельностью. Превосходит Дешевый пистолет по своей огневой мощи."
   },
   "HandgunBullet": {
     "localized_name": "Патрон для пистолета",
@@ -3568,20 +3588,20 @@
     "description": "Броня из рафинированного металла с улучшенными характеристиками. Отлично защищает от высоких температур."
   },
   "IronArmor_2": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Броня из рафинированного металла",
+    "description": "Доспех из качественного металла. Тяжелый, но дает отличную защиту."
   },
   "IronArmor_3": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Броня из рафинированного металла",
+    "description": "Доспех из качественного металла. Тяжелый, но дает отличную защиту."
   },
   "IronArmor_4": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Броня из рафинированного металла",
+    "description": "Доспех из качественного металла. Тяжелый, но дает отличную защиту."
   },
   "IronArmor_5": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Броня из рафинированного металла",
+    "description": "Доспех из качественного металла. Тяжелый, но дает отличную защиту."
   },
   "IronHelmet": {
     "localized_name": "Шлем из рафинированного металла",
@@ -3672,20 +3692,20 @@
     "description": "Launcher Default может бомбить противника мощными снарядами с большого расстояния."
   },
   "Launcher_Default_2": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Ракетница",
+    "description": "Launcher Default может бомбить противника мощными снарядами с большого расстояния."
   },
   "Launcher_Default_3": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Ракетница",
+    "description": "Launcher Default может бомбить противника мощными снарядами с большого расстояния."
   },
   "Launcher_Default_4": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Ракетница",
+    "description": "Launcher Default может бомбить противника мощными снарядами с большого расстояния."
   },
   "Launcher_Default_5": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Ракетница",
+    "description": "Launcher Default может бомбить противника мощными снарядами с большого расстояния."
   },
   "Launcher_Meteor": {
     "localized_name": "Метеоромет",
@@ -4652,20 +4672,20 @@
     "description": "Эффективность этого ружья повышена благодаря увеличенной обойме. Наносит наибольший урон на короткой дистанции."
   },
   "PumpActionShotgun_2": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Помповое ружье",
+    "description": "Эффективность этого ружья повышена благодаря увеличенной обойме. Наносит наибольший урон на короткой дистанции."
   },
   "PumpActionShotgun_3": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Помповое ружье",
+    "description": "Эффективность этого ружья повышена благодаря увеличенной обойме. Наносит наибольший урон на короткой дистанции."
   },
   "PumpActionShotgun_4": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Помповое ружье",
+    "description": "Эффективность этого ружья повышена благодаря увеличенной обойме. Наносит наибольший урон на короткой дистанции."
   },
   "PumpActionShotgun_5": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Помповое ружье",
+    "description": "Эффективность этого ружья повышена благодаря увеличенной обойме. Наносит наибольший урон на короткой дистанции."
   },
   "Quartz": {
     "localized_name": "Чистый кварц",
@@ -4926,6 +4946,10 @@
   "Shield_SF": {
     "localized_name": "Продвинутый щит",
     "description": "Удивительный щит, продукт сверхпродвинутых технологий. Автоматически восстанавливается, если какое-то время не получает урон. Воплощение безукоризненного качества."
+  },
+  "Shield_Ultra": {
+    "localized_name": "Ультращит",
+    "description": "Удивительный щит, появившийся на свет благодаря палзиумным технологиям. Автоматически восстанавливается, если какое-то время не получает урон. Бесчисленные испытания позволили добиться непревзойденного качества."
   },
   "ShotgunBullet": {
     "localized_name": "Ружейный патрон",
@@ -5788,20 +5812,20 @@
     "description": "Паланиумная броня с улучшенными характеристиками. Отлично защищает от высоких температур."
   },
   "StealArmor_2": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Паланиумная броня",
+    "description": "Для изготовления этого доспеха используется Слиток палания. Обладает превосходной защитой, но весит очень много."
   },
   "StealArmor_3": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Паланиумная броня",
+    "description": "Для изготовления этого доспеха используется Слиток палания. Обладает превосходной защитой, но весит очень много."
   },
   "StealArmor_4": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Паланиумная броня",
+    "description": "Для изготовления этого доспеха используется Слиток палания. Обладает превосходной защитой, но весит очень много."
   },
   "StealArmor_5": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Паланиумная броня",
+    "description": "Для изготовления этого доспеха используется Слиток палания. Обладает превосходной защитой, но весит очень много."
   },
   "StealHelmet": {
     "localized_name": "Паланиумный шлем",
@@ -5948,20 +5972,20 @@
     "description": "Примитивное оружие дальнего боя. Сделан из подручных материалов, поэтому обладает небольшой убойной силой."
   },
   "WeakerBow_2": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Старый лук",
+    "description": "Примитивное оружие дальнего боя. Сделан из подручных материалов, поэтому обладает небольшой убойной силой."
   },
   "WeakerBow_3": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Старый лук",
+    "description": "Примитивное оружие дальнего боя. Сделан из подручных материалов, поэтому обладает небольшой убойной силой."
   },
   "WeakerBow_4": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Старый лук",
+    "description": "Примитивное оружие дальнего боя. Сделан из подручных материалов, поэтому обладает небольшой убойной силой."
   },
   "WeakerBow_5": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Старый лук",
+    "description": "Примитивное оружие дальнего боя. Сделан из подручных материалов, поэтому обладает небольшой убойной силой."
   },
   "Wheat": {
     "localized_name": "Пшеница",
@@ -6034,5 +6058,13 @@
   "YakushimaBlade": {
     "localized_name": "Мяумур",
     "description": "[Совместный проект с Terraria] Согласно легенде Кроадзиро привез этот меч из далекой страны. Только совершенно непонятно зачем..."
+  },
+  "SniperRifle_Default": {
+    "localized_name": "Снайперская винтовка",
+    "description": "Дальнобойная винтовка с исключительной точностью. Она проста в обращении и эффективна в бою на дальних дистанциях."
+  },
+  "LargeBullet": {
+    "localized_name": "Снайперские патроны",
+    "description": "Крупнокалиберная пуля для снайперской винтовки. Обладает высокой точностью и убойной силой."
   }
 }

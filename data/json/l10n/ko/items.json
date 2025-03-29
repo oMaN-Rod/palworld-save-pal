@@ -312,20 +312,20 @@
     "description": "압도적인 연사력으로 적을 제압하는 AssaultRifle Default1. 강력한 상대와 싸우기에 안성맞춤이다."
   },
   "AssaultRifle_Default2": {
-    "localized_name": "ko Text",
-    "description": "ko Text"
+    "localized_name": "돌격 소총",
+    "description": "압도적인 연사력으로 적을 제압하는 AssaultRifle Default1. 강력한 상대와 싸우기에 안성맞춤이다."
   },
   "AssaultRifle_Default3": {
-    "localized_name": "ko Text",
-    "description": "ko Text"
+    "localized_name": "돌격 소총",
+    "description": "압도적인 연사력으로 적을 제압하는 AssaultRifle Default1. 강력한 상대와 싸우기에 안성맞춤이다."
   },
   "AssaultRifle_Default4": {
-    "localized_name": "ko Text",
-    "description": "ko Text"
+    "localized_name": "돌격 소총",
+    "description": "압도적인 연사력으로 적을 제압하는 AssaultRifle Default1. 강력한 상대와 싸우기에 안성맞춤이다."
   },
   "AssaultRifle_Default5": {
-    "localized_name": "ko Text",
-    "description": "ko Text"
+    "localized_name": "돌격 소총",
+    "description": "압도적인 연사력으로 적을 제압하는 AssaultRifle Default1. 강력한 상대와 싸우기에 안성맞춤이다."
   },
   "AutoMealPouch_Tier1": {
     "localized_name": "소형 먹이 주머니",
@@ -2112,20 +2112,20 @@
     "description": "힘들이지 않고 |화살|을(를) 쏠 수 있다. 장전 시간이 걸리지만 강력한 한 발을 쏜다."
   },
   "BowGun_2": {
-    "localized_name": "ko Text",
-    "description": "ko Text"
+    "localized_name": "쇠뇌",
+    "description": "힘들이지 않고 |화살|을(를) 쏠 수 있다. 장전 시간이 걸리지만 강력한 한 발을 쏜다."
   },
   "BowGun_3": {
-    "localized_name": "ko Text",
-    "description": "ko Text"
+    "localized_name": "쇠뇌",
+    "description": "힘들이지 않고 |화살|을(를) 쏠 수 있다. 장전 시간이 걸리지만 강력한 한 발을 쏜다."
   },
   "BowGun_4": {
-    "localized_name": "ko Text",
-    "description": "ko Text"
+    "localized_name": "쇠뇌",
+    "description": "힘들이지 않고 |화살|을(를) 쏠 수 있다. 장전 시간이 걸리지만 강력한 한 발을 쏜다."
   },
   "BowGun_5": {
-    "localized_name": "ko Text",
-    "description": "ko Text"
+    "localized_name": "쇠뇌",
+    "description": "힘들이지 않고 |화살|을(를) 쏠 수 있다. 장전 시간이 걸리지만 강력한 한 발을 쏜다."
   },
   "BowGun_Fire": {
     "localized_name": "불화살 쇠뇌",
@@ -2300,20 +2300,20 @@
     "description": "더운 지역에서 생산한 천 옷. 뛰어난 내열성을 자랑한다."
   },
   "ClothArmor_2": {
-    "localized_name": "ko Text",
-    "description": "ko Text"
+    "localized_name": "천 옷",
+    "description": "천(으)로 만든 옷. 밤의 한기를 막아준다."
   },
   "ClothArmor_3": {
-    "localized_name": "ko Text",
-    "description": "ko Text"
+    "localized_name": "천 옷",
+    "description": "천(으)로 만든 옷. 밤의 한기를 막아준다."
   },
   "ClothArmor_4": {
-    "localized_name": "ko Text",
-    "description": "ko Text"
+    "localized_name": "천 옷",
+    "description": "천(으)로 만든 옷. 밤의 한기를 막아준다."
   },
   "ClothArmor_5": {
-    "localized_name": "ko Text",
-    "description": "ko Text"
+    "localized_name": "천 옷",
+    "description": "천(으)로 만든 옷. 밤의 한기를 막아준다."
   },
   "Coal": {
     "localized_name": "석탄",
@@ -2388,20 +2388,20 @@
     "description": "개량한 금속 갑옷. 뛰어난 내열성을 자랑한다."
   },
   "CopperArmor_2": {
-    "localized_name": "ko Text",
-    "description": "ko Text"
+    "localized_name": "금속 갑옷",
+    "description": "금속으로 완성한 갑옷. 적당한 무게에 적당한 방어력을 자랑한다."
   },
   "CopperArmor_3": {
-    "localized_name": "ko Text",
-    "description": "ko Text"
+    "localized_name": "금속 갑옷",
+    "description": "금속으로 완성한 갑옷. 적당한 무게에 적당한 방어력을 자랑한다."
   },
   "CopperArmor_4": {
-    "localized_name": "ko Text",
-    "description": "ko Text"
+    "localized_name": "금속 갑옷",
+    "description": "금속으로 완성한 갑옷. 적당한 무게에 적당한 방어력을 자랑한다."
   },
   "CopperArmor_5": {
-    "localized_name": "ko Text",
-    "description": "ko Text"
+    "localized_name": "금속 갑옷",
+    "description": "금속으로 완성한 갑옷. 적당한 무게에 적당한 방어력을 자랑한다."
   },
   "CopperHelmet": {
     "localized_name": "금속 투구",
@@ -2784,20 +2784,20 @@
     "description": "더운 지역에서 생산한 가죽 갑옷. 뛰어난 내열성을 자랑한다."
   },
   "FurArmor_2": {
-    "localized_name": "ko Text",
-    "description": "ko Text"
+    "localized_name": "가죽 갑옷",
+    "description": "가죽으로 만든 갑옷. 내구도와 방어력 모두 향상됐다."
   },
   "FurArmor_3": {
-    "localized_name": "ko Text",
-    "description": "ko Text"
+    "localized_name": "가죽 갑옷",
+    "description": "가죽으로 만든 갑옷. 내구도와 방어력 모두 향상됐다."
   },
   "FurArmor_4": {
-    "localized_name": "ko Text",
-    "description": "ko Text"
+    "localized_name": "가죽 갑옷",
+    "description": "가죽으로 만든 갑옷. 내구도와 방어력 모두 향상됐다."
   },
   "FurArmor_5": {
-    "localized_name": "ko Text",
-    "description": "ko Text"
+    "localized_name": "가죽 갑옷",
+    "description": "가죽으로 만든 갑옷. 내구도와 방어력 모두 향상됐다."
   },
   "FurHelmet": {
     "localized_name": "깃털 머리 장식",
@@ -2895,9 +2895,29 @@
     "localized_name": "기가 글라이더",
     "description": "펼쳐서 활공할 때 쓰는 글라이더. 성능을 끌어올려 꽤 빠른 속도로 날 수 있다."
   },
+  "Glider_Tera": {
+    "localized_name": "테라 글라이더",
+    "description": "펼쳐서 활공할 때 쓰는 글라이더. 성능을 더욱 끌어올려 속도와 장력이 향상됐다."
+  },
   "Grape": {
     "localized_name": "ko Text",
     "description": "ko Text"
+  },
+  "GrapplingGun": {
+    "localized_name": "갈고리 총",
+    "description": "고속으로 이동하게 해주는 갈고리 총. 사격 지점에 갈고리를 날리면 사격자의 몸을 끌고 간다. 높이 차가 있는 지역에서도 편하게 이동할 수 있다."
+  },
+  "GrapplingGun2": {
+    "localized_name": "메가 갈고리 총",
+    "description": "고속으로 이동하게 해주는 갈고리 총. 사격 지점에 갈고리를 날리면 사격자의 몸을 끌고 간다. 개량해서 사거리가 길어졌다."
+  },
+  "GrapplingGun3": {
+    "localized_name": "기가 갈고리 총",
+    "description": "고속으로 이동하게 해주는 갈고리 총. 사격 지점에 갈고리를 날리면 사격자의 몸을 끌고 간다. 시제품의 데이터를 바탕으로 성능을 더욱 끌어올렸다."
+  },
+  "GrapplingGun4": {
+    "localized_name": "테라 갈고리 총",
+    "description": "고속으로 이동할 수 있도록 돕는 갈고리 총. 사격 지점에 갈고리를 날리면, 사격자의 몸을 끌고 간다. 연구 끝에 압도적인 기동성을 실현해냈다."
   },
   "Gratin": {
     "localized_name": "그라탱",
@@ -2984,20 +3004,20 @@
     "description": "장전 수와 연사성이 강화된 권총. 순간 화력이 즉석 핸드건보다도 강하다."
   },
   "HandGun_Default_2": {
-    "localized_name": "ko Text",
-    "description": "ko Text"
+    "localized_name": "핸드건",
+    "description": "장전 수와 연사성이 강화된 권총. 순간 화력이 즉석 핸드건보다도 강하다."
   },
   "HandGun_Default_3": {
-    "localized_name": "ko Text",
-    "description": "ko Text"
+    "localized_name": "핸드건",
+    "description": "장전 수와 연사성이 강화된 권총. 순간 화력이 즉석 핸드건보다도 강하다."
   },
   "HandGun_Default_4": {
-    "localized_name": "ko Text",
-    "description": "ko Text"
+    "localized_name": "핸드건",
+    "description": "장전 수와 연사성이 강화된 권총. 순간 화력이 즉석 핸드건보다도 강하다."
   },
   "HandGun_Default_5": {
-    "localized_name": "ko Text",
-    "description": "ko Text"
+    "localized_name": "핸드건",
+    "description": "장전 수와 연사성이 강화된 권총. 순간 화력이 즉석 핸드건보다도 강하다."
   },
   "HandgunBullet": {
     "localized_name": "핸드건 탄약",
@@ -3568,20 +3588,20 @@
     "description": "개량한 제련 금속 갑옷. 뛰어난 내열성을 자랑한다."
   },
   "IronArmor_2": {
-    "localized_name": "ko Text",
-    "description": "ko Text"
+    "localized_name": "제련 금속 갑옷",
+    "description": "고품질 금속으로 완성한 갑옷. 상당한 방어력을 자랑하는 만큼 무겁다."
   },
   "IronArmor_3": {
-    "localized_name": "ko Text",
-    "description": "ko Text"
+    "localized_name": "제련 금속 갑옷",
+    "description": "고품질 금속으로 완성한 갑옷. 상당한 방어력을 자랑하는 만큼 무겁다."
   },
   "IronArmor_4": {
-    "localized_name": "ko Text",
-    "description": "ko Text"
+    "localized_name": "제련 금속 갑옷",
+    "description": "고품질 금속으로 완성한 갑옷. 상당한 방어력을 자랑하는 만큼 무겁다."
   },
   "IronArmor_5": {
-    "localized_name": "ko Text",
-    "description": "ko Text"
+    "localized_name": "제련 금속 갑옷",
+    "description": "고품질 금속으로 완성한 갑옷. 상당한 방어력을 자랑하는 만큼 무겁다."
   },
   "IronHelmet": {
     "localized_name": "제련 금속 투구",
@@ -3672,20 +3692,20 @@
     "description": "원거리에서 강력한 폭격을 할 수 있는 Launcher Default."
   },
   "Launcher_Default_2": {
-    "localized_name": "ko Text",
-    "description": "ko Text"
+    "localized_name": "로켓 발사기",
+    "description": "원거리에서 강력한 폭격을 할 수 있는 Launcher Default."
   },
   "Launcher_Default_3": {
-    "localized_name": "ko Text",
-    "description": "ko Text"
+    "localized_name": "로켓 발사기",
+    "description": "원거리에서 강력한 폭격을 할 수 있는 Launcher Default."
   },
   "Launcher_Default_4": {
-    "localized_name": "ko Text",
-    "description": "ko Text"
+    "localized_name": "로켓 발사기",
+    "description": "원거리에서 강력한 폭격을 할 수 있는 Launcher Default."
   },
   "Launcher_Default_5": {
-    "localized_name": "ko Text",
-    "description": "ko Text"
+    "localized_name": "로켓 발사기",
+    "description": "원거리에서 강력한 폭격을 할 수 있는 Launcher Default."
   },
   "Launcher_Meteor": {
     "localized_name": "메테오 발사기",
@@ -4652,20 +4672,20 @@
     "description": "장전 수가 증가해 강력해진 산탄총. 근거리 DPS가 수준급이다."
   },
   "PumpActionShotgun_2": {
-    "localized_name": "ko Text",
-    "description": "ko Text"
+    "localized_name": "펌프식 산탄총",
+    "description": "장전 수가 증가해 강력해진 산탄총. 근거리 DPS가 수준급이다."
   },
   "PumpActionShotgun_3": {
-    "localized_name": "ko Text",
-    "description": "ko Text"
+    "localized_name": "펌프식 산탄총",
+    "description": "장전 수가 증가해 강력해진 산탄총. 근거리 DPS가 수준급이다."
   },
   "PumpActionShotgun_4": {
-    "localized_name": "ko Text",
-    "description": "ko Text"
+    "localized_name": "펌프식 산탄총",
+    "description": "장전 수가 증가해 강력해진 산탄총. 근거리 DPS가 수준급이다."
   },
   "PumpActionShotgun_5": {
-    "localized_name": "ko Text",
-    "description": "ko Text"
+    "localized_name": "펌프식 산탄총",
+    "description": "장전 수가 증가해 강력해진 산탄총. 근거리 DPS가 수준급이다."
   },
   "Quartz": {
     "localized_name": "순수한 석영",
@@ -4926,6 +4946,10 @@
   "Shield_SF": {
     "localized_name": "발전형 방패",
     "description": "초고도 기술로 탄생한 신비한 방패. 한동안 공격받지 않으면 자동으로 수리된다. 품질 면에서 완전무결의 성과를 실현했다."
+  },
+  "Shield_Ultra": {
+    "localized_name": "울트라 방패",
+    "description": "팰지움 기술로 탄생한 신비한 방패. 한동안 공격받지 않으면 자동으로 수리된다. 실험을 더욱 거듭한 결과 품질 면에서 궁극에 도달했다."
   },
   "ShotgunBullet": {
     "localized_name": "산탄총 탄약",
@@ -5788,20 +5812,20 @@
     "description": "개량한 팰 금속 갑옷. 뛰어난 내열성을 자랑한다."
   },
   "StealArmor_2": {
-    "localized_name": "ko Text",
-    "description": "ko Text"
+    "localized_name": "팰 금속 갑옷",
+    "description": "팰 금속 주괴(으)로 만든 갑옷. 터무니없는 방어력을 자랑하지만 매우 무겁다."
   },
   "StealArmor_3": {
-    "localized_name": "ko Text",
-    "description": "ko Text"
+    "localized_name": "팰 금속 갑옷",
+    "description": "팰 금속 주괴(으)로 만든 갑옷. 터무니없는 방어력을 자랑하지만 매우 무겁다."
   },
   "StealArmor_4": {
-    "localized_name": "ko Text",
-    "description": "ko Text"
+    "localized_name": "팰 금속 갑옷",
+    "description": "팰 금속 주괴(으)로 만든 갑옷. 터무니없는 방어력을 자랑하지만 매우 무겁다."
   },
   "StealArmor_5": {
-    "localized_name": "ko Text",
-    "description": "ko Text"
+    "localized_name": "팰 금속 갑옷",
+    "description": "팰 금속 주괴(으)로 만든 갑옷. 터무니없는 방어력을 자랑하지만 매우 무겁다."
   },
   "StealHelmet": {
     "localized_name": "팰 금속 투구",
@@ -5948,20 +5972,20 @@
     "description": "원시적인 원거리 공격 무기. 이것저것 긁어모아 만든 탓에 위력은 떨어진다."
   },
   "WeakerBow_2": {
-    "localized_name": "ko Text",
-    "description": "ko Text"
+    "localized_name": "오래된 활",
+    "description": "원시적인 원거리 공격 무기. 이것저것 긁어모아 만든 탓에 위력은 떨어진다."
   },
   "WeakerBow_3": {
-    "localized_name": "ko Text",
-    "description": "ko Text"
+    "localized_name": "오래된 활",
+    "description": "원시적인 원거리 공격 무기. 이것저것 긁어모아 만든 탓에 위력은 떨어진다."
   },
   "WeakerBow_4": {
-    "localized_name": "ko Text",
-    "description": "ko Text"
+    "localized_name": "오래된 활",
+    "description": "원시적인 원거리 공격 무기. 이것저것 긁어모아 만든 탓에 위력은 떨어진다."
   },
   "WeakerBow_5": {
-    "localized_name": "ko Text",
-    "description": "ko Text"
+    "localized_name": "오래된 활",
+    "description": "원시적인 원거리 공격 무기. 이것저것 긁어모아 만든 탓에 위력은 떨어진다."
   },
   "Wheat": {
     "localized_name": "밀",
@@ -6034,5 +6058,13 @@
   "YakushimaBlade": {
     "localized_name": "미야우미어",
     "description": "[Terraria 컬래버] 먼 나라에 다녀온 칼구리이(가) 들고 왔다는 전설이 붙은 검. 그러나 들고 온 이유에 대해선 알려진 바가 없다고 한다…"
+  },
+  "SniperRifle_Default": {
+    "localized_name": "스나이퍼 라이플",
+    "description": "뛰어난 정확도를 자랑하는 장거리 소총입니다. 다루기 쉽고 장거리 전투에서 효과적입니다."
+  },
+  "LargeBullet": {
+    "localized_name": "스나이퍼 탄약",
+    "description": "스나이퍼 라이플에 사용되는 대형 총알입니다. 높은 정확도와 파워를 지니고 있습니다."
   }
 }

@@ -312,20 +312,20 @@
     "description": "Un AssaultRifle Default1 che annienta i nemici grazie al suo volume di fuoco. È perfetto contro nemici potenti."
   },
   "AssaultRifle_Default2": {
-    "localized_name": "it Text",
-    "description": "it Text"
+    "localized_name": "Fucile d'assalto",
+    "description": "Un AssaultRifle Default1 che annienta i nemici grazie al suo volume di fuoco. È perfetto contro nemici potenti."
   },
   "AssaultRifle_Default3": {
-    "localized_name": "it Text",
-    "description": "it Text"
+    "localized_name": "Fucile d'assalto",
+    "description": "Un AssaultRifle Default1 che annienta i nemici grazie al suo volume di fuoco. È perfetto contro nemici potenti."
   },
   "AssaultRifle_Default4": {
-    "localized_name": "it Text",
-    "description": "it Text"
+    "localized_name": "Fucile d'assalto",
+    "description": "Un AssaultRifle Default1 che annienta i nemici grazie al suo volume di fuoco. È perfetto contro nemici potenti."
   },
   "AssaultRifle_Default5": {
-    "localized_name": "it Text",
-    "description": "it Text"
+    "localized_name": "Fucile d'assalto",
+    "description": "Un AssaultRifle Default1 che annienta i nemici grazie al suo volume di fuoco. È perfetto contro nemici potenti."
   },
   "AutoMealPouch_Tier1": {
     "localized_name": "Borsa di cibo piccola",
@@ -2112,20 +2112,20 @@
     "description": "Strumento per scagliare una Freccia senza fare fatica. Serve tempo per caricarla, ma sferra un colpo molto potente."
   },
   "BowGun_2": {
-    "localized_name": "it Text",
-    "description": "it Text"
+    "localized_name": "Balestra",
+    "description": "Strumento per scagliare una Freccia senza fare fatica. Serve tempo per caricarla, ma sferra un colpo molto potente."
   },
   "BowGun_3": {
-    "localized_name": "it Text",
-    "description": "it Text"
+    "localized_name": "Balestra",
+    "description": "Strumento per scagliare una Freccia senza fare fatica. Serve tempo per caricarla, ma sferra un colpo molto potente."
   },
   "BowGun_4": {
-    "localized_name": "it Text",
-    "description": "it Text"
+    "localized_name": "Balestra",
+    "description": "Strumento per scagliare una Freccia senza fare fatica. Serve tempo per caricarla, ma sferra un colpo molto potente."
   },
   "BowGun_5": {
-    "localized_name": "it Text",
-    "description": "it Text"
+    "localized_name": "Balestra",
+    "description": "Strumento per scagliare una Freccia senza fare fatica. Serve tempo per caricarla, ma sferra un colpo molto potente."
   },
   "BowGun_Fire": {
     "localized_name": "Balestra incendiaria",
@@ -2300,20 +2300,20 @@
     "description": "Abiti di stoffa per i territori più caldi. Estremamente resistente al calore."
   },
   "ClothArmor_2": {
-    "localized_name": "it Text",
-    "description": "it Text"
+    "localized_name": "Abiti di stoffa",
+    "description": "Indumento realizzato a partire dal Stoffa. Protegge dal freddo della notte."
   },
   "ClothArmor_3": {
-    "localized_name": "it Text",
-    "description": "it Text"
+    "localized_name": "Abiti di stoffa",
+    "description": "Indumento realizzato a partire dal Stoffa. Protegge dal freddo della notte."
   },
   "ClothArmor_4": {
-    "localized_name": "it Text",
-    "description": "it Text"
+    "localized_name": "Abiti di stoffa",
+    "description": "Indumento realizzato a partire dal Stoffa. Protegge dal freddo della notte."
   },
   "ClothArmor_5": {
-    "localized_name": "it Text",
-    "description": "it Text"
+    "localized_name": "Abiti di stoffa",
+    "description": "Indumento realizzato a partire dal Stoffa. Protegge dal freddo della notte."
   },
   "Coal": {
     "localized_name": "Carbone",
@@ -2388,20 +2388,20 @@
     "description": "Armatura di metallo modificata. Estremamente ignifuga."
   },
   "CopperArmor_2": {
-    "localized_name": "it Text",
-    "description": "it Text"
+    "localized_name": "Armatura di metallo",
+    "description": "Un'armatura di metallo. Ha una grande capacità difensiva, ma anche un grande peso."
   },
   "CopperArmor_3": {
-    "localized_name": "it Text",
-    "description": "it Text"
+    "localized_name": "Armatura di metallo",
+    "description": "Un'armatura di metallo. Ha una grande capacità difensiva, ma anche un grande peso."
   },
   "CopperArmor_4": {
-    "localized_name": "it Text",
-    "description": "it Text"
+    "localized_name": "Armatura di metallo",
+    "description": "Un'armatura di metallo. Ha una grande capacità difensiva, ma anche un grande peso."
   },
   "CopperArmor_5": {
-    "localized_name": "it Text",
-    "description": "it Text"
+    "localized_name": "Armatura di metallo",
+    "description": "Un'armatura di metallo. Ha una grande capacità difensiva, ma anche un grande peso."
   },
   "CopperHelmet": {
     "localized_name": "Elmo di metallo",
@@ -2784,20 +2784,20 @@
     "description": "Armatura di pelliccia per i territori più caldi. Estremamente resistente al calore."
   },
   "FurArmor_2": {
-    "localized_name": "it Text",
-    "description": "it Text"
+    "localized_name": "Armatura di pelliccia",
+    "description": "Un'armatura di Cuoio. È affidabile e resistente agli attacchi."
   },
   "FurArmor_3": {
-    "localized_name": "it Text",
-    "description": "it Text"
+    "localized_name": "Armatura di pelliccia",
+    "description": "Un'armatura di Cuoio. È affidabile e resistente agli attacchi."
   },
   "FurArmor_4": {
-    "localized_name": "it Text",
-    "description": "it Text"
+    "localized_name": "Armatura di pelliccia",
+    "description": "Un'armatura di Cuoio. È affidabile e resistente agli attacchi."
   },
   "FurArmor_5": {
-    "localized_name": "it Text",
-    "description": "it Text"
+    "localized_name": "Armatura di pelliccia",
+    "description": "Un'armatura di Cuoio. È affidabile e resistente agli attacchi."
   },
   "FurHelmet": {
     "localized_name": "Piuma decorativa",
@@ -2895,9 +2895,29 @@
     "localized_name": "Aliante giga",
     "description": "Un aliante con cui solcare l'aria. Ha prestazioni migliori e può volare a grandi velocità."
   },
+  "Glider_Tera": {
+    "localized_name": "Aliante tera",
+    "description": "Un aliante con cui solcare l'aria. Ha prestazioni incredibili e vola rapidamente a grandi altitudini."
+  },
   "Grape": {
     "localized_name": "it Text",
     "description": "it Text"
+  },
+  "GrapplingGun": {
+    "localized_name": "Pistola con rampino",
+    "description": "Una pistola con rampino che permette di spostarsi a gran velocità. Fissa un rampino nel punto colpito e trasporta chi ha sparato. Per superare agevolmente i dislivelli."
+  },
+  "GrapplingGun2": {
+    "localized_name": "Pistola con rampino mega",
+    "description": "Una pistola con rampino che permette di spostarsi a gran velocità. Fissa un rampino nel punto colpito e trasporta chi ha sparato. È stata migliorata e adesso ha una gittata maggiore."
+  },
+  "GrapplingGun3": {
+    "localized_name": "Pistola con rampino giga",
+    "description": "Una pistola con rampino che permette di spostarsi a gran velocità. Fissa un rampino nel punto colpito e trasporta chi ha sparato. Dopo tante migliorie, garantisce prestazioni impeccabili."
+  },
+  "GrapplingGun4": {
+    "localized_name": "Pistola con rampino tera",
+    "description": "Una pistola con rampino che permette di spostarsi a gran velocità. Fissa un rampino nel punto colpito e trasporta fin lì chi ha sparato. Infinite ricerche ne hanno migliorato drasticamente la mobilità."
   },
   "Gratin": {
     "localized_name": "Gratin",
@@ -2984,20 +3004,20 @@
     "description": "Una pistola con un caricatore più grande e che spara più rapidamente. Ha un volume di fuoco maggiore di Pistola artigianale."
   },
   "HandGun_Default_2": {
-    "localized_name": "it Text",
-    "description": "it Text"
+    "localized_name": "Pistola",
+    "description": "Una pistola con un caricatore più grande e che spara più rapidamente. Ha un volume di fuoco maggiore di Pistola artigianale."
   },
   "HandGun_Default_3": {
-    "localized_name": "it Text",
-    "description": "it Text"
+    "localized_name": "Pistola",
+    "description": "Una pistola con un caricatore più grande e che spara più rapidamente. Ha un volume di fuoco maggiore di Pistola artigianale."
   },
   "HandGun_Default_4": {
-    "localized_name": "it Text",
-    "description": "it Text"
+    "localized_name": "Pistola",
+    "description": "Una pistola con un caricatore più grande e che spara più rapidamente. Ha un volume di fuoco maggiore di Pistola artigianale."
   },
   "HandGun_Default_5": {
-    "localized_name": "it Text",
-    "description": "it Text"
+    "localized_name": "Pistola",
+    "description": "Una pistola con un caricatore più grande e che spara più rapidamente. Ha un volume di fuoco maggiore di Pistola artigianale."
   },
   "HandgunBullet": {
     "localized_name": "Proiettili per pistola",
@@ -3568,20 +3588,20 @@
     "description": "Armatura di metallo raffinato modificata. Estremamente ignifuga."
   },
   "IronArmor_2": {
-    "localized_name": "it Text",
-    "description": "it Text"
+    "localized_name": "Armatura di metallo raffinato",
+    "description": "Un'armatura realizzata con metallo di alta qualità. Vanta un grande potere difensivo, ma pesa un sacco."
   },
   "IronArmor_3": {
-    "localized_name": "it Text",
-    "description": "it Text"
+    "localized_name": "Armatura di metallo raffinato",
+    "description": "Un'armatura realizzata con metallo di alta qualità. Vanta un grande potere difensivo, ma pesa un sacco."
   },
   "IronArmor_4": {
-    "localized_name": "it Text",
-    "description": "it Text"
+    "localized_name": "Armatura di metallo raffinato",
+    "description": "Un'armatura realizzata con metallo di alta qualità. Vanta un grande potere difensivo, ma pesa un sacco."
   },
   "IronArmor_5": {
-    "localized_name": "it Text",
-    "description": "it Text"
+    "localized_name": "Armatura di metallo raffinato",
+    "description": "Un'armatura realizzata con metallo di alta qualità. Vanta un grande potere difensivo, ma pesa un sacco."
   },
   "IronHelmet": {
     "localized_name": "Elmo di metallo raffinato",
@@ -3672,20 +3692,20 @@
     "description": "Potente Launcher Default che permette di bombardare a distanza."
   },
   "Launcher_Default_2": {
-    "localized_name": "it Text",
-    "description": "it Text"
+    "localized_name": "Lanciarazzi",
+    "description": "Potente Launcher Default che permette di bombardare a distanza."
   },
   "Launcher_Default_3": {
-    "localized_name": "it Text",
-    "description": "it Text"
+    "localized_name": "Lanciarazzi",
+    "description": "Potente Launcher Default che permette di bombardare a distanza."
   },
   "Launcher_Default_4": {
-    "localized_name": "it Text",
-    "description": "it Text"
+    "localized_name": "Lanciarazzi",
+    "description": "Potente Launcher Default che permette di bombardare a distanza."
   },
   "Launcher_Default_5": {
-    "localized_name": "it Text",
-    "description": "it Text"
+    "localized_name": "Lanciarazzi",
+    "description": "Potente Launcher Default che permette di bombardare a distanza."
   },
   "Launcher_Meteor": {
     "localized_name": "Lancia-meteore",
@@ -4652,20 +4672,20 @@
     "description": "Un potente fucile con molte munizioni. La sua capacità offensiva a distanza ravvicinata è eccezionale."
   },
   "PumpActionShotgun_2": {
-    "localized_name": "it Text",
-    "description": "it Text"
+    "localized_name": "Fucile a pompa",
+    "description": "Un potente fucile con molte munizioni. La sua capacità offensiva a distanza ravvicinata è eccezionale."
   },
   "PumpActionShotgun_3": {
-    "localized_name": "it Text",
-    "description": "it Text"
+    "localized_name": "Fucile a pompa",
+    "description": "Un potente fucile con molte munizioni. La sua capacità offensiva a distanza ravvicinata è eccezionale."
   },
   "PumpActionShotgun_4": {
-    "localized_name": "it Text",
-    "description": "it Text"
+    "localized_name": "Fucile a pompa",
+    "description": "Un potente fucile con molte munizioni. La sua capacità offensiva a distanza ravvicinata è eccezionale."
   },
   "PumpActionShotgun_5": {
-    "localized_name": "it Text",
-    "description": "it Text"
+    "localized_name": "Fucile a pompa",
+    "description": "Un potente fucile con molte munizioni. La sua capacità offensiva a distanza ravvicinata è eccezionale."
   },
   "Quartz": {
     "localized_name": "Quarzo puro",
@@ -4926,6 +4946,10 @@
   "Shield_SF": {
     "localized_name": "Scudo avanzato",
     "description": "Uno scudo misterioso creato con tecnologie avanzatissime. Si rigenera automaticamente mentre non è sotto attacco. Offre una qualità senza paragoni."
+  },
+  "Shield_Ultra": {
+    "localized_name": "Ultra scudo",
+    "description": "Uno scudo misterioso creato con la tecnologia Paldium. Si rigenera automaticamente mentre non è sotto attacco. Grazie a continui miglioramenti, offre prestazioni che vanno oltre ogni limite."
   },
   "ShotgunBullet": {
     "localized_name": "Proiettili per fucile a canna liscia",
@@ -5788,20 +5812,20 @@
     "description": "Armatura di metallo Pal modificata. Estremamente ignifuga."
   },
   "StealArmor_2": {
-    "localized_name": "it Text",
-    "description": "it Text"
+    "localized_name": "Armatura di metallo Pal",
+    "description": "Un'armatura in Lingotto di metallo Pal. Ha una grande capacità difensiva, ma è molto pesante."
   },
   "StealArmor_3": {
-    "localized_name": "it Text",
-    "description": "it Text"
+    "localized_name": "Armatura di metallo Pal",
+    "description": "Un'armatura in Lingotto di metallo Pal. Ha una grande capacità difensiva, ma è molto pesante."
   },
   "StealArmor_4": {
-    "localized_name": "it Text",
-    "description": "it Text"
+    "localized_name": "Armatura di metallo Pal",
+    "description": "Un'armatura in Lingotto di metallo Pal. Ha una grande capacità difensiva, ma è molto pesante."
   },
   "StealArmor_5": {
-    "localized_name": "it Text",
-    "description": "it Text"
+    "localized_name": "Armatura di metallo Pal",
+    "description": "Un'armatura in Lingotto di metallo Pal. Ha una grande capacità difensiva, ma è molto pesante."
   },
   "StealHelmet": {
     "localized_name": "Elmo di metallo Pal",
@@ -5948,20 +5972,20 @@
     "description": "Un'arma a distanza piuttosto primitiva. È un'arma di fortuna, non molto potente."
   },
   "WeakerBow_2": {
-    "localized_name": "it Text",
-    "description": "it Text"
+    "localized_name": "Arco antiquato",
+    "description": "Un'arma a distanza piuttosto primitiva. È un'arma di fortuna, non molto potente."
   },
   "WeakerBow_3": {
-    "localized_name": "it Text",
-    "description": "it Text"
+    "localized_name": "Arco antiquato",
+    "description": "Un'arma a distanza piuttosto primitiva. È un'arma di fortuna, non molto potente."
   },
   "WeakerBow_4": {
-    "localized_name": "it Text",
-    "description": "it Text"
+    "localized_name": "Arco antiquato",
+    "description": "Un'arma a distanza piuttosto primitiva. È un'arma di fortuna, non molto potente."
   },
   "WeakerBow_5": {
-    "localized_name": "it Text",
-    "description": "it Text"
+    "localized_name": "Arco antiquato",
+    "description": "Un'arma a distanza piuttosto primitiva. È un'arma di fortuna, non molto potente."
   },
   "Wheat": {
     "localized_name": "Grano",
@@ -6034,5 +6058,13 @@
   "YakushimaBlade": {
     "localized_name": "Miaospadone",
     "description": "[Collaborazione con Terraria] Stando alla leggenda, un Croajiro ha portato qui questa spada da una terra lontana. Perché l'abbia fatto, rimane un mistero..."
+  },
+  "SniperRifle_Default": {
+    "localized_name": "Fucile di precisione",
+    "description": "Un fucile a lunga gittata con precisione eccezionale. È facile da maneggiare ed efficace nei combattimenti a lunga distanza."
+  },
+  "LargeBullet": {
+    "localized_name": "Munizioni da cecchino",
+    "description": "Un proiettile grande da utilizzare con il fucile di precisione. Ha un'alta precisione e potenza."
   }
 }

@@ -200,7 +200,7 @@
     "description": "Planador que pode ser estendido para planar pelo ar. De funcionalidade melhorada, é capaz de voar a uma velocidade considerável. Pode ser produzido em [Fábrica de Linha]."
   },
   "Battle_Glider_Grade_04": {
-    "localized_name": "Glider_Tera",
+    "localized_name": "Planador Tera",
     "description": "Planador que pode ser estendido para planar pelo ar. De funcionalidade ainda melhor, tem velocidade e capacidade de sustentação superiores. Pode ser produzido em [Fábrica de Linha II]."
   },
   "Battle_GunPowder_Grade_02": {
@@ -284,8 +284,8 @@
     "description": null
   },
   "Battle_RangeWeapon_FlameThrower": {
-    "localized_name": "Lança-chamas",
-    "description": "Flamethrower que dispara fogo à longa distância. Pode provocar queimaduras em seus alvos. Para criar isto é preciso ter [Fábrica de Linha de Armas II]."
+    "localized_name": "FlameThrower",
+    "description": null
   },
   "Battle_RangeWeapon_GatlingGun": {
     "localized_name": "Gatling Gun",
@@ -385,7 +385,7 @@
   },
   "Cloth2": {
     "localized_name": "Pano Requintado",
-    "description": "[Pano Requintado] feito ao tecer grande quantidade de [Lã]. Necessário para produzir armaduras de qualidade. Para criar isto é preciso ter [Bancada de Alta Qualidade]."
+    "description": null
   },
   "CompositeDesk": {
     "localized_name": "Mesa de Projetos",
@@ -684,19 +684,19 @@
     "description": null
   },
   "GrapplingGun": {
-    "localized_name": "GrapplingGun",
+    "localized_name": "Arpéu",
     "description": null
   },
   "GrapplingGun2": {
-    "localized_name": "GrapplingGun2",
+    "localized_name": "Arpéu Mega",
     "description": null
   },
   "GrapplingGun3": {
-    "localized_name": "GrapplingGun3",
+    "localized_name": "Arpéu Giga",
     "description": null
   },
   "GrapplingGun4": {
-    "localized_name": "GrapplingGun4",
+    "localized_name": "Arpéu Tera",
     "description": null
   },
   "GrenadeBullet": {
@@ -774,6 +774,10 @@
   "Infra_PlayerBed_Grade_02": {
     "localized_name": "Cama de Luxo",
     "description": "Uma cama macia e com capacidades restauradoras melhoradas. Não será possível dormir a não ser que você a construa debaixo de um teto."
+  },
+  "ItemBooth": {
+    "localized_name": "Mercado de Pulgas (Itens)",
+    "description": null
   },
   "ItemChest_04": {
     "localized_name": "Baú de Civilização Avançada",
@@ -1152,7 +1156,7 @@
     "description": "Escudo fantástico criado com a tecnologia do palúdio. Após inúmeros testes, enfim atingiu a máxima qualidade. Pode ser produzido em [Fábrica de Linha II]."
   },
   "Shield_05": {
-    "localized_name": "Shield_Ultra",
+    "localized_name": "Escudo Ultra",
     "description": "Escudo fantástico criado com a tecnologia do palúdio. Após ainda mais testes, enfim atingiu a qualidade absoluta. Pode ser produzido em [Fábrica de Linha II]."
   },
   "Shield_SF": {
@@ -1757,6 +1761,10 @@
   },
   "Unlock_Picking_Tier3": {
     "localized_name": "Ferramenta de Destravar Profissional",
+    "description": null
+  },
+  "WallSignboard": {
+    "localized_name": "WallSignBoard",
     "description": null
   },
   "WallTorch": {

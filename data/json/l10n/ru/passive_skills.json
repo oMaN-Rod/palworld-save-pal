@@ -805,15 +805,15 @@
   },
   "MoveSpeed_up_1": {
     "localized_name": "Бойкий",
-    "description": null
+    "description": "Скорость перемещения +10.0%"
   },
   "MoveSpeed_up_2": {
     "localized_name": "Умелый бегун",
-    "description": null
+    "description": "Скорость перемещения +20.0%"
   },
   "MoveSpeed_up_3": {
     "localized_name": "Спринтер",
-    "description": null
+    "description": "Скорость перемещения +30.0%"
   },
   "Nocturnal": {
     "localized_name": "Ночной образ жизни",

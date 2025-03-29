@@ -200,7 +200,7 @@
     "description": "A glider for soaring through the air. With its capabilities improved, it can soar at high speed. Can be made at Production Assembly Line"
   },
   "Battle_Glider_Grade_04": {
-    "localized_name": "Glider_Tera",
+    "localized_name": "Hyper Glider",
     "description": "A glider for soaring through the air. Its performance has been further improved, with increased speed and lift. Can be made at Production Assembly Line II."
   },
   "Battle_GunPowder_Grade_02": {
@@ -684,19 +684,19 @@
     "description": null
   },
   "GrapplingGun": {
-    "localized_name": "GrapplingGun",
+    "localized_name": "Grappling Gun",
     "description": null
   },
   "GrapplingGun2": {
-    "localized_name": "GrapplingGun2",
+    "localized_name": "Mega Grappling Gun",
     "description": null
   },
   "GrapplingGun3": {
-    "localized_name": "GrapplingGun3",
+    "localized_name": "Giga Grappling Gun",
     "description": null
   },
   "GrapplingGun4": {
-    "localized_name": "GrapplingGun4",
+    "localized_name": "Hyper Grappling Gun",
     "description": null
   },
   "GrenadeBullet": {
@@ -774,6 +774,10 @@
   "Infra_PlayerBed_Grade_02": {
     "localized_name": "Fine Bed",
     "description": "Soft bed with improved restorative capabilities. Cannot sleep unless built under a roof."
+  },
+  "ItemBooth": {
+    "localized_name": "Flea Market (Items)",
+    "description": null
   },
   "ItemChest_04": {
     "localized_name": "Advanced Chest",
@@ -1152,7 +1156,7 @@
     "description": "Strange shield made with Paldium technology. Through repeated testing, the highest quality has been achieved. Can be made at Production Assembly Line II."
   },
   "Shield_05": {
-    "localized_name": "Shield_Ultra",
+    "localized_name": "Ultra Shield",
     "description": "Strange shield made with Paldium technology. As a result of further experiments, ultimate quality has been achieved. Can be made at Production Assembly Line II."
   },
   "Shield_SF": {
@@ -1757,6 +1761,10 @@
   },
   "Unlock_Picking_Tier3": {
     "localized_name": "Lockpicking Tool v3",
+    "description": null
+  },
+  "WallSignboard": {
+    "localized_name": "WallSignBoard",
     "description": null
   },
   "WallTorch": {

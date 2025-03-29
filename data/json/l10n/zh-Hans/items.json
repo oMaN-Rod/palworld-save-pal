@@ -312,20 +312,20 @@
     "description": "以压倒性的连射能力镇压敌人的AssaultRifle Default1。 火力优秀，是与强敌对战时的首选。"
   },
   "AssaultRifle_Default2": {
-    "localized_name": "zh-hans text",
-    "description": "zh-hans text"
+    "localized_name": "突击步枪",
+    "description": "以压倒性的连射能力镇压敌人的AssaultRifle Default1。 火力优秀，是与强敌对战时的首选。"
   },
   "AssaultRifle_Default3": {
-    "localized_name": "zh-hans text",
-    "description": "zh-hans text"
+    "localized_name": "突击步枪",
+    "description": "以压倒性的连射能力镇压敌人的AssaultRifle Default1。 火力优秀，是与强敌对战时的首选。"
   },
   "AssaultRifle_Default4": {
-    "localized_name": "zh-hans text",
-    "description": "zh-hans text"
+    "localized_name": "突击步枪",
+    "description": "以压倒性的连射能力镇压敌人的AssaultRifle Default1。 火力优秀，是与强敌对战时的首选。"
   },
   "AssaultRifle_Default5": {
-    "localized_name": "zh-hans text",
-    "description": "zh-hans text"
+    "localized_name": "突击步枪",
+    "description": "以压倒性的连射能力镇压敌人的AssaultRifle Default1。 火力优秀，是与强敌对战时的首选。"
   },
   "AutoMealPouch_Tier1": {
     "localized_name": "小饲料袋",
@@ -2112,20 +2112,20 @@
     "description": "不用使劲即可射出箭。 虽然填装很费时，但可使出强劲一击。"
   },
   "BowGun_2": {
-    "localized_name": "zh-hans text",
-    "description": "zh-hans text"
+    "localized_name": "十字弓",
+    "description": "不用使劲即可射出箭。 虽然填装很费时，但可使出强劲一击。"
   },
   "BowGun_3": {
-    "localized_name": "zh-hans text",
-    "description": "zh-hans text"
+    "localized_name": "十字弓",
+    "description": "不用使劲即可射出箭。 虽然填装很费时，但可使出强劲一击。"
   },
   "BowGun_4": {
-    "localized_name": "zh-hans text",
-    "description": "zh-hans text"
+    "localized_name": "十字弓",
+    "description": "不用使劲即可射出箭。 虽然填装很费时，但可使出强劲一击。"
   },
   "BowGun_5": {
-    "localized_name": "zh-hans text",
-    "description": "zh-hans text"
+    "localized_name": "十字弓",
+    "description": "不用使劲即可射出箭。 虽然填装很费时，但可使出强劲一击。"
   },
   "BowGun_Fire": {
     "localized_name": "火箭十字弓",
@@ -2300,20 +2300,20 @@
     "description": "在炎热地区生产的布衣服。 具备傲人的耐热性能。"
   },
   "ClothArmor_2": {
-    "localized_name": "zh-hans text",
-    "description": "zh-hans text"
+    "localized_name": "布衣服",
+    "description": "以布制成的衣服。 可以抵御夜间的寒意。"
   },
   "ClothArmor_3": {
-    "localized_name": "zh-hans text",
-    "description": "zh-hans text"
+    "localized_name": "布衣服",
+    "description": "以布制成的衣服。 可以抵御夜间的寒意。"
   },
   "ClothArmor_4": {
-    "localized_name": "zh-hans text",
-    "description": "zh-hans text"
+    "localized_name": "布衣服",
+    "description": "以布制成的衣服。 可以抵御夜间的寒意。"
   },
   "ClothArmor_5": {
-    "localized_name": "zh-hans text",
-    "description": "zh-hans text"
+    "localized_name": "布衣服",
+    "description": "以布制成的衣服。 可以抵御夜间的寒意。"
   },
   "Coal": {
     "localized_name": "石炭",
@@ -2388,20 +2388,20 @@
     "description": "经过改良的金属盔甲。 具备傲人的耐热性能。"
   },
   "CopperArmor_2": {
-    "localized_name": "zh-hans text",
-    "description": "zh-hans text"
+    "localized_name": "金属盔甲",
+    "description": "以金属制成的盔甲。 有一定防御力，也有一定重量。"
   },
   "CopperArmor_3": {
-    "localized_name": "zh-hans text",
-    "description": "zh-hans text"
+    "localized_name": "金属盔甲",
+    "description": "以金属制成的盔甲。 有一定防御力，也有一定重量。"
   },
   "CopperArmor_4": {
-    "localized_name": "zh-hans text",
-    "description": "zh-hans text"
+    "localized_name": "金属盔甲",
+    "description": "以金属制成的盔甲。 有一定防御力，也有一定重量。"
   },
   "CopperArmor_5": {
-    "localized_name": "zh-hans text",
-    "description": "zh-hans text"
+    "localized_name": "金属盔甲",
+    "description": "以金属制成的盔甲。 有一定防御力，也有一定重量。"
   },
   "CopperHelmet": {
     "localized_name": "金属头盔",
@@ -2784,20 +2784,20 @@
     "description": "在炎热地区生产的毛皮盔甲。 具备傲人的耐热性能。"
   },
   "FurArmor_2": {
-    "localized_name": "zh-hans text",
-    "description": "zh-hans text"
+    "localized_name": "毛皮盔甲",
+    "description": "以皮革制成的盔甲。 耐久度和防御力都得到了提升。"
   },
   "FurArmor_3": {
-    "localized_name": "zh-hans text",
-    "description": "zh-hans text"
+    "localized_name": "毛皮盔甲",
+    "description": "以皮革制成的盔甲。 耐久度和防御力都得到了提升。"
   },
   "FurArmor_4": {
-    "localized_name": "zh-hans text",
-    "description": "zh-hans text"
+    "localized_name": "毛皮盔甲",
+    "description": "以皮革制成的盔甲。 耐久度和防御力都得到了提升。"
   },
   "FurArmor_5": {
-    "localized_name": "zh-hans text",
-    "description": "zh-hans text"
+    "localized_name": "毛皮盔甲",
+    "description": "以皮革制成的盔甲。 耐久度和防御力都得到了提升。"
   },
   "FurHelmet": {
     "localized_name": "羽毛发饰",
@@ -2895,9 +2895,29 @@
     "localized_name": "优质滑翔伞",
     "description": "展开后即可在空中滑翔的滑翔伞。 此款式性能有所提升，能以相当快的速度飞行。"
   },
+  "Glider_Tera": {
+    "localized_name": "特级滑翔伞",
+    "description": "展开后可在空中滑翔的滑翔伞。 性能得到进一步提升，速度和升力都提高了。"
+  },
   "Grape": {
     "localized_name": "zh-hans text",
     "description": "zh-hans text"
+  },
+  "GrapplingGun": {
+    "localized_name": "爪钩枪",
+    "description": "可进行高速移动的爪钩枪。 可向射击地点射出爪钩，牽引射击者的身体。 可在有高低差的地方轻松移动。"
+  },
+  "GrapplingGun2": {
+    "localized_name": "高级爪钩枪",
+    "description": "可进行高速移动的爪钩枪。 可向射击地点射出爪钩，牽引射击者的身体。 此款式经过改良，射程变得更远。"
+  },
+  "GrapplingGun3": {
+    "localized_name": "优质爪钩枪",
+    "description": "可进行高速移动的爪钩枪。 可向射击地点射出爪钩，牽引射击者的身体。 此款式在试验品数据的基础上进行了改良，性能得到进一步提升。"
+  },
+  "GrapplingGun4": {
+    "localized_name": "特级爪钩枪",
+    "description": "用于快速移动的爪钩枪。 它能将爪钩射向目的地，再将使用者牵引过去。 此款式经过研究改良，灵活性可谓无与伦比。"
   },
   "Gratin": {
     "localized_name": "法式焗菜",
@@ -2984,20 +3004,20 @@
     "description": "子弹容纳量及连射性能经过强化的手枪。 每秒火力比劣质手枪更强。"
   },
   "HandGun_Default_2": {
-    "localized_name": "zh-hans text",
-    "description": "zh-hans text"
+    "localized_name": "手枪",
+    "description": "子弹容纳量及连射性能经过强化的手枪。 每秒火力比劣质手枪更强。"
   },
   "HandGun_Default_3": {
-    "localized_name": "zh-hans text",
-    "description": "zh-hans text"
+    "localized_name": "手枪",
+    "description": "子弹容纳量及连射性能经过强化的手枪。 每秒火力比劣质手枪更强。"
   },
   "HandGun_Default_4": {
-    "localized_name": "zh-hans text",
-    "description": "zh-hans text"
+    "localized_name": "手枪",
+    "description": "子弹容纳量及连射性能经过强化的手枪。 每秒火力比劣质手枪更强。"
   },
   "HandGun_Default_5": {
-    "localized_name": "zh-hans text",
-    "description": "zh-hans text"
+    "localized_name": "手枪",
+    "description": "子弹容纳量及连射性能经过强化的手枪。 每秒火力比劣质手枪更强。"
   },
   "HandgunBullet": {
     "localized_name": "手枪子弹",
@@ -3568,20 +3588,20 @@
     "description": "经过改良的精炼金属盔甲。 具备傲人的耐热性能。"
   },
   "IronArmor_2": {
-    "localized_name": "zh-hans text",
-    "description": "zh-hans text"
+    "localized_name": "精炼金属盔甲",
+    "description": "以优质金属制成的盔甲。 防御力极优，但也相当沉重。"
   },
   "IronArmor_3": {
-    "localized_name": "zh-hans text",
-    "description": "zh-hans text"
+    "localized_name": "精炼金属盔甲",
+    "description": "以优质金属制成的盔甲。 防御力极优，但也相当沉重。"
   },
   "IronArmor_4": {
-    "localized_name": "zh-hans text",
-    "description": "zh-hans text"
+    "localized_name": "精炼金属盔甲",
+    "description": "以优质金属制成的盔甲。 防御力极优，但也相当沉重。"
   },
   "IronArmor_5": {
-    "localized_name": "zh-hans text",
-    "description": "zh-hans text"
+    "localized_name": "精炼金属盔甲",
+    "description": "以优质金属制成的盔甲。 防御力极优，但也相当沉重。"
   },
   "IronHelmet": {
     "localized_name": "精炼金属头盔",
@@ -3672,20 +3692,20 @@
     "description": "可远距离进行强劲轰炸的Launcher Default。"
   },
   "Launcher_Default_2": {
-    "localized_name": "zh-hans text",
-    "description": "zh-hans text"
+    "localized_name": "火箭发射器",
+    "description": "可远距离进行强劲轰炸的Launcher Default。"
   },
   "Launcher_Default_3": {
-    "localized_name": "zh-hans text",
-    "description": "zh-hans text"
+    "localized_name": "火箭发射器",
+    "description": "可远距离进行强劲轰炸的Launcher Default。"
   },
   "Launcher_Default_4": {
-    "localized_name": "zh-hans text",
-    "description": "zh-hans text"
+    "localized_name": "火箭发射器",
+    "description": "可远距离进行强劲轰炸的Launcher Default。"
   },
   "Launcher_Default_5": {
-    "localized_name": "zh-hans text",
-    "description": "zh-hans text"
+    "localized_name": "火箭发射器",
+    "description": "可远距离进行强劲轰炸的Launcher Default。"
   },
   "Launcher_Meteor": {
     "localized_name": "陨石发射器",
@@ -4652,20 +4672,20 @@
     "description": "增加填装数量，更加强劲的霰弹枪。 拥有屈指可数的近距离DPS能力。"
   },
   "PumpActionShotgun_2": {
-    "localized_name": "zh-hans text",
-    "description": "zh-hans text"
+    "localized_name": "泵动式霰弹枪",
+    "description": "增加填装数量，更加强劲的霰弹枪。 拥有屈指可数的近距离DPS能力。"
   },
   "PumpActionShotgun_3": {
-    "localized_name": "zh-hans text",
-    "description": "zh-hans text"
+    "localized_name": "泵动式霰弹枪",
+    "description": "增加填装数量，更加强劲的霰弹枪。 拥有屈指可数的近距离DPS能力。"
   },
   "PumpActionShotgun_4": {
-    "localized_name": "zh-hans text",
-    "description": "zh-hans text"
+    "localized_name": "泵动式霰弹枪",
+    "description": "增加填装数量，更加强劲的霰弹枪。 拥有屈指可数的近距离DPS能力。"
   },
   "PumpActionShotgun_5": {
-    "localized_name": "zh-hans text",
-    "description": "zh-hans text"
+    "localized_name": "泵动式霰弹枪",
+    "description": "增加填装数量，更加强劲的霰弹枪。 拥有屈指可数的近距离DPS能力。"
   },
   "Quartz": {
     "localized_name": "纯水晶",
@@ -4926,6 +4946,10 @@
   "Shield_SF": {
     "localized_name": "卓越护盾",
     "description": "以超高科技打造的神奇护盾。 一定时间不受攻击时可自动修复。 品质达到完美无缺的境界。"
+  },
+  "Shield_Ultra": {
+    "localized_name": "超级护盾",
+    "description": "以帕鲁矿技术制成的神奇护盾。 一定时间不受攻击时可自动修复。 在进一步多次实验后，结果实现了究极的品质。"
   },
   "ShotgunBullet": {
     "localized_name": "霰弹枪子弹",
@@ -5788,20 +5812,20 @@
     "description": "经过改良的帕鲁金属盔甲。 具备傲人的耐热性能。"
   },
   "StealArmor_2": {
-    "localized_name": "zh-hans text",
-    "description": "zh-hans text"
+    "localized_name": "帕鲁金属盔甲",
+    "description": "以帕鲁金属锭制成的盔甲。 有着惊人的防御力，但是十分沉重。"
   },
   "StealArmor_3": {
-    "localized_name": "zh-hans text",
-    "description": "zh-hans text"
+    "localized_name": "帕鲁金属盔甲",
+    "description": "以帕鲁金属锭制成的盔甲。 有着惊人的防御力，但是十分沉重。"
   },
   "StealArmor_4": {
-    "localized_name": "zh-hans text",
-    "description": "zh-hans text"
+    "localized_name": "帕鲁金属盔甲",
+    "description": "以帕鲁金属锭制成的盔甲。 有着惊人的防御力，但是十分沉重。"
   },
   "StealArmor_5": {
-    "localized_name": "zh-hans text",
-    "description": "zh-hans text"
+    "localized_name": "帕鲁金属盔甲",
+    "description": "以帕鲁金属锭制成的盔甲。 有着惊人的防御力，但是十分沉重。"
   },
   "StealHelmet": {
     "localized_name": "帕鲁金属头盔",
@@ -5948,20 +5972,20 @@
     "description": "原始的远距离攻击武器。 因为是东拼西凑而成的，威力较弱。"
   },
   "WeakerBow_2": {
-    "localized_name": "zh-hans text",
-    "description": "zh-hans text"
+    "localized_name": "陈旧的弓",
+    "description": "原始的远距离攻击武器。 因为是东拼西凑而成的，威力较弱。"
   },
   "WeakerBow_3": {
-    "localized_name": "zh-hans text",
-    "description": "zh-hans text"
+    "localized_name": "陈旧的弓",
+    "description": "原始的远距离攻击武器。 因为是东拼西凑而成的，威力较弱。"
   },
   "WeakerBow_4": {
-    "localized_name": "zh-hans text",
-    "description": "zh-hans text"
+    "localized_name": "陈旧的弓",
+    "description": "原始的远距离攻击武器。 因为是东拼西凑而成的，威力较弱。"
   },
   "WeakerBow_5": {
-    "localized_name": "zh-hans text",
-    "description": "zh-hans text"
+    "localized_name": "陈旧的弓",
+    "description": "原始的远距离攻击武器。 因为是东拼西凑而成的，威力较弱。"
   },
   "Wheat": {
     "localized_name": "小麦",

@@ -200,7 +200,7 @@
     "description": "Permet de planer une fois déplié. Sa qualité supérieure permet d'atteindre une vitesse considérable. Une Chaîne de production est requise pour en fabriquer."
   },
   "Battle_Glider_Grade_04": {
-    "localized_name": "Glider_Tera",
+    "localized_name": "Téra planeur",
     "description": "Permet de planer une fois déplié. Sa qualité encore supérieure décuple sa vitesse et sa portance. Une Chaîne de production II est requise pour en fabriquer."
   },
   "Battle_GunPowder_Grade_02": {
@@ -684,19 +684,19 @@
     "description": null
   },
   "GrapplingGun": {
-    "localized_name": "GrapplingGun",
+    "localized_name": "Pistolet-grappin",
     "description": null
   },
   "GrapplingGun2": {
-    "localized_name": "GrapplingGun2",
+    "localized_name": "Méga pistolet-grappin",
     "description": null
   },
   "GrapplingGun3": {
-    "localized_name": "GrapplingGun3",
+    "localized_name": "Giga pistolet-grappin",
     "description": null
   },
   "GrapplingGun4": {
-    "localized_name": "GrapplingGun4",
+    "localized_name": "Téra pistolet-grappin",
     "description": null
   },
   "GrenadeBullet": {
@@ -774,6 +774,10 @@
   "Infra_PlayerBed_Grade_02": {
     "localized_name": "Lit de qualité",
     "description": "Son confort entraîne une meilleure récupération. Doit impérativement être installé sous un toit pour être utilisable."
+  },
+  "ItemBooth": {
+    "localized_name": "Marché aux puces (Objets)",
+    "description": null
   },
   "ItemChest_04": {
     "localized_name": "Coffre d'une civilisation avancée",
@@ -1152,7 +1156,7 @@
     "description": "Un étrange bouclier issu de la technologie du paldium. Des expériences répétées ont permis de révéler toutes ses qualités. Une Chaîne de production II est requise pour en fabriquer."
   },
   "Shield_05": {
-    "localized_name": "Shield_Ultra",
+    "localized_name": "Ultra bouclier",
     "description": "Un étrange bouclier issu de la technologie du paldium. Des expériences supplémentaires ont permis d'en faire la pièce parfaite. Une Chaîne de production II est requise pour en fabriquer."
   },
   "Shield_SF": {
@@ -1757,6 +1761,10 @@
   },
   "Unlock_Picking_Tier3": {
     "localized_name": "Outil de crochetage professionnel",
+    "description": null
+  },
+  "WallSignboard": {
+    "localized_name": "WallSignBoard",
     "description": null
   },
   "WallTorch": {

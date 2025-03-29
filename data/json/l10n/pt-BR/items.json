@@ -312,20 +312,20 @@
     "description": "AssaultRifle Default1 que domina os inimigos com uma cadência de tiro esmagadora. Ideal para batalhas contra adversários poderosos."
   },
   "AssaultRifle_Default2": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Fuzil de Assalto",
+    "description": "AssaultRifle Default1 que domina os inimigos com uma cadência de tiro esmagadora. Ideal para batalhas contra adversários poderosos."
   },
   "AssaultRifle_Default3": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Fuzil de Assalto",
+    "description": "AssaultRifle Default1 que domina os inimigos com uma cadência de tiro esmagadora. Ideal para batalhas contra adversários poderosos."
   },
   "AssaultRifle_Default4": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Fuzil de Assalto",
+    "description": "AssaultRifle Default1 que domina os inimigos com uma cadência de tiro esmagadora. Ideal para batalhas contra adversários poderosos."
   },
   "AssaultRifle_Default5": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Fuzil de Assalto",
+    "description": "AssaultRifle Default1 que domina os inimigos com uma cadência de tiro esmagadora. Ideal para batalhas contra adversários poderosos."
   },
   "AutoMealPouch_Tier1": {
     "localized_name": "Saco de Ração Pequeno",
@@ -685,19 +685,19 @@
   },
   "Blueprint_FlameThrower_2": {
     "localized_name": "Esquema de Lança-Chamas 1",
-    "description": "Com isto em mãos, a receita de [Lança-chamas (Uncommon)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 03]."
+    "description": "Com isto em mãos, a receita de [FlameThrower (Uncommon)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 03]."
   },
   "Blueprint_FlameThrower_3": {
     "localized_name": "Esquema de Lança-Chamas 2",
-    "description": "Com isto em mãos, a receita de [Lança-chamas (Rare)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 03]."
+    "description": "Com isto em mãos, a receita de [FlameThrower (Rare)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 03]."
   },
   "Blueprint_FlameThrower_4": {
     "localized_name": "Esquema de Lança-Chamas 3",
-    "description": "Com isto em mãos, a receita de [Lança-chamas (Epic)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 03]."
+    "description": "Com isto em mãos, a receita de [FlameThrower (Epic)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 03]."
   },
   "Blueprint_FlameThrower_5": {
     "localized_name": "Esquema de Lança-Chamas 4",
-    "description": "Com isto em mãos, a receita de [Lança-chamas (Legendary)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 03]."
+    "description": "Com isto em mãos, a receita de [FlameThrower (Legendary)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 03]."
   },
   "Blueprint_FurArmorCold_2": {
     "localized_name": "Esquema de Armadura de Pele Resistente a Frio 1",
@@ -2112,20 +2112,20 @@
     "description": "Permite disparar [Flecha] sem esforço nenhum. Requer algum tempo para ser armado, mas garante um golpe potente."
   },
   "BowGun_2": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Besta",
+    "description": "Permite disparar [Flecha] sem esforço nenhum. Requer algum tempo para ser armado, mas garante um golpe potente."
   },
   "BowGun_3": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Besta",
+    "description": "Permite disparar [Flecha] sem esforço nenhum. Requer algum tempo para ser armado, mas garante um golpe potente."
   },
   "BowGun_4": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Besta",
+    "description": "Permite disparar [Flecha] sem esforço nenhum. Requer algum tempo para ser armado, mas garante um golpe potente."
   },
   "BowGun_5": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Besta",
+    "description": "Permite disparar [Flecha] sem esforço nenhum. Requer algum tempo para ser armado, mas garante um golpe potente."
   },
   "BowGun_Fire": {
     "localized_name": "Besta de Flechas de Fogo",
@@ -2300,20 +2300,20 @@
     "description": "Roupas de Pano produzida em regiões quentes. Proporciona elevada resistência ao calor."
   },
   "ClothArmor_2": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Roupas de Pano",
+    "description": "Roupa feita de Pano. Permite resistir ao frio noturno."
   },
   "ClothArmor_3": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Roupas de Pano",
+    "description": "Roupa feita de Pano. Permite resistir ao frio noturno."
   },
   "ClothArmor_4": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Roupas de Pano",
+    "description": "Roupa feita de Pano. Permite resistir ao frio noturno."
   },
   "ClothArmor_5": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Roupas de Pano",
+    "description": "Roupa feita de Pano. Permite resistir ao frio noturno."
   },
   "Coal": {
     "localized_name": "Carvão Mineral",
@@ -2388,20 +2388,20 @@
     "description": "Armadura de Metal melhorada. Proporciona elevada resistência ao calor."
   },
   "CopperArmor_2": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Armadura de Metal",
+    "description": "Armadura feita de metal. Possui poder de defesa e peso razoáveis."
   },
   "CopperArmor_3": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Armadura de Metal",
+    "description": "Armadura feita de metal. Possui poder de defesa e peso razoáveis."
   },
   "CopperArmor_4": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Armadura de Metal",
+    "description": "Armadura feita de metal. Possui poder de defesa e peso razoáveis."
   },
   "CopperArmor_5": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Armadura de Metal",
+    "description": "Armadura feita de metal. Possui poder de defesa e peso razoáveis."
   },
   "CopperHelmet": {
     "localized_name": "Elmo de Metal",
@@ -2644,23 +2644,23 @@
     "description": "pt-BR Text"
   },
   "FlameThrower": {
-    "localized_name": "Lança-chamas",
+    "localized_name": "FlameThrower",
     "description": "Flamethrower que dispara fogo a longa distância. Pode provocar queimaduras em seus alvos."
   },
   "FlameThrower_2": {
-    "localized_name": "Lança-chamas",
+    "localized_name": "FlameThrower",
     "description": "Flamethrower que dispara fogo a longa distância. Pode provocar queimaduras em seus alvos."
   },
   "FlameThrower_3": {
-    "localized_name": "Lança-chamas",
+    "localized_name": "FlameThrower",
     "description": "Flamethrower que dispara fogo a longa distância. Pode provocar queimaduras em seus alvos."
   },
   "FlameThrower_4": {
-    "localized_name": "Lança-chamas",
+    "localized_name": "FlameThrower",
     "description": "Flamethrower que dispara fogo a longa distância. Pode provocar queimaduras em seus alvos."
   },
   "FlameThrower_5": {
-    "localized_name": "Lança-chamas",
+    "localized_name": "FlameThrower",
     "description": "Flamethrower que dispara fogo a longa distância. Pode provocar queimaduras em seus alvos."
   },
   "FlamethrowerBullet": {
@@ -2725,7 +2725,7 @@
   },
   "FriedVegetables": {
     "localized_name": "Verduras Salteadas",
-    "description": "Alface e Carne Crua em um prato frito. Ao comer, por um tempo determinado, Ataque +10%."
+    "description": "Alface e Meat em um prato frito. Ao comer, por um tempo determinado, Ataque +10%."
   },
   "Fruit__defense_01": {
     "localized_name": "Fruto de Rigidez",
@@ -2784,20 +2784,20 @@
     "description": "Armadura de Pele produzida em regiões quentes. Proporciona elevada resistência ao calor."
   },
   "FurArmor_2": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Armadura de Pele",
+    "description": "Armadura feita de Couro. Possui durabilidade e defesa melhoradas."
   },
   "FurArmor_3": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Armadura de Pele",
+    "description": "Armadura feita de Couro. Possui durabilidade e defesa melhoradas."
   },
   "FurArmor_4": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Armadura de Pele",
+    "description": "Armadura feita de Couro. Possui durabilidade e defesa melhoradas."
   },
   "FurArmor_5": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Armadura de Pele",
+    "description": "Armadura feita de Couro. Possui durabilidade e defesa melhoradas."
   },
   "FurHelmet": {
     "localized_name": "Adorno de Plumas",
@@ -2895,9 +2895,29 @@
     "localized_name": "Planador Giga",
     "description": "Planador que pode ser estendido para planar pelo ar. De funcionalidade melhorada, é capaz de voar a uma velocidade considerável."
   },
+  "Glider_Tera": {
+    "localized_name": "Planador Tera",
+    "description": "Planador que pode ser estendido para planar pelo ar. De funcionalidade ainda melhor, tem velocidade e capacidade de sustentação superiores."
+  },
   "Grape": {
     "localized_name": "pt-BR Text",
     "description": "pt-BR Text"
+  },
+  "GrapplingGun": {
+    "localized_name": "Arpéu",
+    "description": "Arpéu que permite movimento em alta velocidade. Dispare o gancho na direção de destino para puxar seu corpo até lá. Com ele você pode deslocar-se facilmente inclusive entre alturas diferentes."
+  },
+  "GrapplingGun2": {
+    "localized_name": "Arpéu Mega",
+    "description": "Arpéu que permite movimento em alta velocidade. Dispare o gancho na direção de destino para puxar seu corpo até lá. Modelo melhorado, com maior alcance."
+  },
+  "GrapplingGun3": {
+    "localized_name": "Arpéu Giga",
+    "description": "Arpéu que permite movimento em alta velocidade. Dispare o gancho na direção de destino para puxar seu corpo até lá. Feito com base nos dados de protótipos, este modelo atingiu uma funcionalidade ainda melhor."
+  },
+  "GrapplingGun4": {
+    "localized_name": "Arpéu Tera",
+    "description": "Arpéu que permite movimento em alta velocidade. Dispare o gancho na direção de destino para puxar seu corpo até lá. Graças a muitas pesquisas, foi possível garantir uma mobilidade estarrecedora."
   },
   "Gratin": {
     "localized_name": "Gratinado",
@@ -2984,20 +3004,20 @@
     "description": "Uma pistola de capacidade de munição e cadência de tiros melhoradas. Tem dano por segundo maior que Pistola de Sucata."
   },
   "HandGun_Default_2": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Pistola",
+    "description": "Uma pistola de capacidade de munição e cadência de tiros melhoradas. Tem dano por segundo maior que Pistola de Sucata."
   },
   "HandGun_Default_3": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Pistola",
+    "description": "Uma pistola de capacidade de munição e cadência de tiros melhoradas. Tem dano por segundo maior que Pistola de Sucata."
   },
   "HandGun_Default_4": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Pistola",
+    "description": "Uma pistola de capacidade de munição e cadência de tiros melhoradas. Tem dano por segundo maior que Pistola de Sucata."
   },
   "HandGun_Default_5": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Pistola",
+    "description": "Uma pistola de capacidade de munição e cadência de tiros melhoradas. Tem dano por segundo maior que Pistola de Sucata."
   },
   "HandgunBullet": {
     "localized_name": "Bala de Pistola",
@@ -3005,343 +3025,343 @@
   },
   "Head001": {
     "localized_name": "Coroa Real",
-    "description": "Coroa que dizem ser conferida àqueles de status elevado. É bastante pesada, não sendo prática para o uso no dia a dia."
+    "description": null
   },
   "Head001_2": {
     "localized_name": "Coroa Real",
-    "description": "Coroa que dizem ser conferida àqueles de status elevado. É bastante pesada, não sendo prática para o uso no dia a dia."
+    "description": null
   },
   "Head001_3": {
     "localized_name": "Coroa Real",
-    "description": "Coroa que dizem ser conferida àqueles de status elevado. É bastante pesada, não sendo prática para o uso no dia a dia."
+    "description": null
   },
   "Head001_4": {
     "localized_name": "Coroa Real",
-    "description": "Coroa que dizem ser conferida àqueles de status elevado. É bastante pesada, não sendo prática para o uso no dia a dia."
+    "description": null
   },
   "Head001_5": {
     "localized_name": "Coroa Real",
-    "description": "Coroa que dizem ser conferida àqueles de status elevado. É bastante pesada, não sendo prática para o uso no dia a dia."
+    "description": null
   },
   "Head002": {
     "localized_name": "Coroa de Ouro",
-    "description": "Coroa de ouro que não se vê todo dia. Basta colocá-la para logo se sentir mais nobre."
+    "description": null
   },
   "Head002_2": {
     "localized_name": "Coroa de Ouro",
-    "description": "Coroa de ouro que não se vê todo dia. Basta colocá-la para logo se sentir mais nobre."
+    "description": null
   },
   "Head002_3": {
     "localized_name": "Coroa de Ouro",
-    "description": "Coroa de ouro que não se vê todo dia. Basta colocá-la para logo se sentir mais nobre."
+    "description": null
   },
   "Head002_4": {
     "localized_name": "Coroa de Ouro",
-    "description": "Coroa de ouro que não se vê todo dia. Basta colocá-la para logo se sentir mais nobre."
+    "description": null
   },
   "Head002_5": {
     "localized_name": "Coroa de Ouro",
-    "description": "Coroa de ouro que não se vê todo dia. Basta colocá-la para logo se sentir mais nobre."
+    "description": null
   },
   "Head003": {
     "localized_name": "Tiara de Orelhas Longas",
-    "description": "Tiara meiga que lembra orelhas de Ribbuny. Quanto a proteger a cabeça, não inspira muita confiança."
+    "description": null
   },
   "Head003_2": {
     "localized_name": "Tiara de Orelhas Longas",
-    "description": "Tiara meiga que lembra orelhas de Ribbuny. Quanto a proteger a cabeça, não inspira muita confiança."
+    "description": null
   },
   "Head003_3": {
     "localized_name": "Tiara de Orelhas Longas",
-    "description": "Tiara meiga que lembra orelhas de Ribbuny. Quanto a proteger a cabeça, não inspira muita confiança."
+    "description": null
   },
   "Head003_4": {
     "localized_name": "Tiara de Orelhas Longas",
-    "description": "Tiara meiga que lembra orelhas de Ribbuny. Quanto a proteger a cabeça, não inspira muita confiança."
+    "description": null
   },
   "Head003_5": {
     "localized_name": "Tiara de Orelhas Longas",
-    "description": "Tiara meiga que lembra orelhas de Ribbuny. Quanto a proteger a cabeça, não inspira muita confiança."
+    "description": null
   },
   "Head004": {
     "localized_name": "Chapéu de Bruxa",
-    "description": "Chapéu inspirado em Wixen e Katress. Dá a sensação de se conseguir usar habilidades assim como os Pals."
+    "description": null
   },
   "Head004_2": {
     "localized_name": "Chapéu de Bruxa",
-    "description": "Chapéu inspirado em Wixen e Katress. Dá a sensação de se conseguir usar habilidades assim como os Pals."
+    "description": null
   },
   "Head004_3": {
     "localized_name": "Chapéu de Bruxa",
-    "description": "Chapéu inspirado em Wixen e Katress. Dá a sensação de se conseguir usar habilidades assim como os Pals."
+    "description": null
   },
   "Head004_4": {
     "localized_name": "Chapéu de Bruxa",
-    "description": "Chapéu inspirado em Wixen e Katress. Dá a sensação de se conseguir usar habilidades assim como os Pals."
+    "description": null
   },
   "Head004_5": {
     "localized_name": "Chapéu de Bruxa",
-    "description": "Chapéu inspirado em Wixen e Katress. Dá a sensação de se conseguir usar habilidades assim como os Pals."
+    "description": null
   },
   "Head005": {
     "localized_name": "Chapéu de Feltro",
-    "description": "Chapéu leve e macio, destinado ao uso no dia a dia. Como também tem bastante estilo, já foi muito popular na ilha antigamente."
+    "description": null
   },
   "Head005_2": {
     "localized_name": "Chapéu de Feltro",
-    "description": "Chapéu leve e macio, destinado ao uso no dia a dia. Como também tem bastante estilo, já foi muito popular na ilha antigamente."
+    "description": null
   },
   "Head005_3": {
     "localized_name": "Chapéu de Feltro",
-    "description": "Chapéu leve e macio, destinado ao uso no dia a dia. Como também tem bastante estilo, já foi muito popular na ilha antigamente."
+    "description": null
   },
   "Head005_4": {
     "localized_name": "Chapéu de Feltro",
-    "description": "Chapéu leve e macio, destinado ao uso no dia a dia. Como também tem bastante estilo, já foi muito popular na ilha antigamente."
+    "description": null
   },
   "Head005_5": {
     "localized_name": "Chapéu de Feltro",
-    "description": "Chapéu leve e macio, destinado ao uso no dia a dia. Como também tem bastante estilo, já foi muito popular na ilha antigamente."
+    "description": null
   },
   "Head006": {
     "localized_name": "Capacete",
-    "description": "Elmo para proteger bem a cabeça. Dizem que foi criado por haver muitos casos de pessoas que caíram de cabeça de um Eikthyrdeer."
+    "description": null
   },
   "Head006_2": {
     "localized_name": "Capacete",
-    "description": "Elmo para proteger bem a cabeça. Dizem que foi criado por haver muitos casos de pessoas que caíram de cabeça de um Eikthyrdeer."
+    "description": null
   },
   "Head006_3": {
     "localized_name": "Capacete",
-    "description": "Elmo para proteger bem a cabeça. Dizem que foi criado por haver muitos casos de pessoas que caíram de cabeça de um Eikthyrdeer."
+    "description": null
   },
   "Head006_4": {
     "localized_name": "Capacete",
-    "description": "Elmo para proteger bem a cabeça. Dizem que foi criado por haver muitos casos de pessoas que caíram de cabeça de um Eikthyrdeer."
+    "description": null
   },
   "Head006_5": {
     "localized_name": "Capacete",
-    "description": "Elmo para proteger bem a cabeça. Dizem que foi criado por haver muitos casos de pessoas que caíram de cabeça de um Eikthyrdeer."
+    "description": null
   },
   "Head007": {
     "localized_name": "Cartola",
-    "description": "Um chapéu para cavalheiros. Aqueles feitos de material extraído de Sibelyx são considerados mais finos, mas existem muitos produtos inferiores feitos do material de Swee."
+    "description": null
   },
   "Head007_2": {
     "localized_name": "Cartola",
-    "description": "Um chapéu para cavalheiros. Aqueles feitos de material extraído de Sibelyx são considerados mais finos, mas existem muitos produtos inferiores feitos do material de Swee."
+    "description": null
   },
   "Head007_3": {
     "localized_name": "Cartola",
-    "description": "Um chapéu para cavalheiros. Aqueles feitos de material extraído de Sibelyx são considerados mais finos, mas existem muitos produtos inferiores feitos do material de Swee."
+    "description": null
   },
   "Head007_4": {
     "localized_name": "Cartola",
-    "description": "Um chapéu para cavalheiros. Aqueles feitos de material extraído de Sibelyx são considerados mais finos, mas existem muitos produtos inferiores feitos do material de Swee."
+    "description": null
   },
   "Head007_5": {
     "localized_name": "Cartola",
-    "description": "Um chapéu para cavalheiros. Aqueles feitos de material extraído de Sibelyx são considerados mais finos, mas existem muitos produtos inferiores feitos do material de Swee."
+    "description": null
   },
   "Head008": {
     "localized_name": "Tricórnio",
-    "description": "Chapéu adorado por guerreiros. Dizem que um antigo usuário deste tipo de chapéu capturou um grande número de Azurobe."
+    "description": null
   },
   "Head008_2": {
     "localized_name": "Tricórnio",
-    "description": "Chapéu adorado por guerreiros. Dizem que um antigo usuário deste tipo de chapéu capturou um grande número de Azurobe."
+    "description": null
   },
   "Head008_3": {
     "localized_name": "Tricórnio",
-    "description": "Chapéu adorado por guerreiros. Dizem que um antigo usuário deste tipo de chapéu capturou um grande número de Azurobe."
+    "description": null
   },
   "Head008_4": {
     "localized_name": "Tricórnio",
-    "description": "Chapéu adorado por guerreiros. Dizem que um antigo usuário deste tipo de chapéu capturou um grande número de Azurobe."
+    "description": null
   },
   "Head008_5": {
     "localized_name": "Tricórnio",
-    "description": "Chapéu adorado por guerreiros. Dizem que um antigo usuário deste tipo de chapéu capturou um grande número de Azurobe."
+    "description": null
   },
   "Head009": {
     "localized_name": "Chapéu de Explorador",
-    "description": "Chapéu usado por aventureiros. Tem o efeito de proteger contra o calor intenso do sol."
+    "description": null
   },
   "Head009_2": {
     "localized_name": "Chapéu de Explorador",
-    "description": "Chapéu usado por aventureiros. Tem o efeito de proteger contra o calor intenso do sol."
+    "description": null
   },
   "Head009_3": {
     "localized_name": "Chapéu de Explorador",
-    "description": "Chapéu usado por aventureiros. Tem o efeito de proteger contra o calor intenso do sol."
+    "description": null
   },
   "Head009_4": {
     "localized_name": "Chapéu de Explorador",
-    "description": "Chapéu usado por aventureiros. Tem o efeito de proteger contra o calor intenso do sol."
+    "description": null
   },
   "Head009_5": {
     "localized_name": "Chapéu de Explorador",
-    "description": "Chapéu usado por aventureiros. Tem o efeito de proteger contra o calor intenso do sol."
+    "description": null
   },
   "Head010": {
     "localized_name": "Capelo Universitário",
-    "description": "Chapéu que confere um ar de sagacidade ao ser usado. É provável que antigamente também existissem escolas nesta ilha."
+    "description": null
   },
   "Head010_2": {
     "localized_name": "Capelo Universitário",
-    "description": "Chapéu que confere um ar de sagacidade ao ser usado. É provável que antigamente também existissem escolas nesta ilha."
+    "description": null
   },
   "Head010_3": {
     "localized_name": "Capelo Universitário",
-    "description": "Chapéu que confere um ar de sagacidade ao ser usado. É provável que antigamente também existissem escolas nesta ilha."
+    "description": null
   },
   "Head010_4": {
     "localized_name": "Capelo Universitário",
-    "description": "Chapéu que confere um ar de sagacidade ao ser usado. É provável que antigamente também existissem escolas nesta ilha."
+    "description": null
   },
   "Head010_5": {
     "localized_name": "Capelo Universitário",
-    "description": "Chapéu que confere um ar de sagacidade ao ser usado. É provável que antigamente também existissem escolas nesta ilha."
+    "description": null
   },
   "Head011": {
     "localized_name": "Chapéu de Fazendeiro",
-    "description": "Chapéu destinado ao trabalho na lavoura. Tem o efeito de proteger contra o calor intenso do sol."
+    "description": null
   },
   "Head011_2": {
     "localized_name": "Chapéu de Fazendeiro",
-    "description": "Chapéu destinado ao trabalho na lavoura. Tem o efeito de proteger contra o calor intenso do sol."
+    "description": null
   },
   "Head011_3": {
     "localized_name": "Chapéu de Fazendeiro",
-    "description": "Chapéu destinado ao trabalho na lavoura. Tem o efeito de proteger contra o calor intenso do sol."
+    "description": null
   },
   "Head011_4": {
     "localized_name": "Chapéu de Fazendeiro",
-    "description": "Chapéu destinado ao trabalho na lavoura. Tem o efeito de proteger contra o calor intenso do sol."
+    "description": null
   },
   "Head011_5": {
     "localized_name": "Chapéu de Fazendeiro",
-    "description": "Chapéu destinado ao trabalho na lavoura. Tem o efeito de proteger contra o calor intenso do sol."
+    "description": null
   },
   "Head012": {
     "localized_name": "Chapéu-coco",
-    "description": "Chapéu redondo e resistente. Costumava ser vendido como um chapéu que |não se estraga mesmo se pisado por um Mammorest|."
+    "description": null
   },
   "Head012_2": {
     "localized_name": "Chapéu-coco",
-    "description": "Chapéu redondo e resistente. Costumava ser vendido como um chapéu que |não se estraga mesmo se pisado por um Mammorest|."
+    "description": null
   },
   "Head012_3": {
     "localized_name": "Chapéu-coco",
-    "description": "Chapéu redondo e resistente. Costumava ser vendido como um chapéu que |não se estraga mesmo se pisado por um Mammorest|."
+    "description": null
   },
   "Head012_4": {
     "localized_name": "Chapéu-coco",
-    "description": "Chapéu redondo e resistente. Costumava ser vendido como um chapéu que |não se estraga mesmo se pisado por um Mammorest|."
+    "description": null
   },
   "Head012_5": {
     "localized_name": "Chapéu-coco",
-    "description": "Chapéu redondo e resistente. Costumava ser vendido como um chapéu que |não se estraga mesmo se pisado por um Mammorest|."
+    "description": null
   },
   "Head013": {
     "localized_name": "Chapéu de Tocotoco",
-    "description": "Chapéu inspirado em um Tocotoco. Um artigo extravagante que se nota mesmo à distância."
+    "description": null
   },
   "Head013_2": {
     "localized_name": "Chapéu de Tocotoco",
-    "description": "Chapéu inspirado em um Tocotoco. Um artigo extravagante que se nota mesmo à distância."
+    "description": null
   },
   "Head013_3": {
     "localized_name": "Chapéu de Tocotoco",
-    "description": "Chapéu inspirado em um Tocotoco. Um artigo extravagante que se nota mesmo à distância."
+    "description": null
   },
   "Head013_4": {
     "localized_name": "Chapéu de Tocotoco",
-    "description": "Chapéu inspirado em um Tocotoco. Um artigo extravagante que se nota mesmo à distância."
+    "description": null
   },
   "Head013_5": {
     "localized_name": "Chapéu de Tocotoco",
-    "description": "Chapéu inspirado em um Tocotoco. Um artigo extravagante que se nota mesmo à distância."
+    "description": null
   },
   "Head014": {
     "localized_name": "Chapéu de Tocotoco Sorridente",
-    "description": "Chapéu inspirado em um Tocotoco. Use-o e você correrá o risco de não conter o sorriso."
+    "description": null
   },
   "Head014_2": {
     "localized_name": "Chapéu de Tocotoco Sorridente",
-    "description": "Chapéu inspirado em um Tocotoco. Use-o e você correrá o risco de não conter o sorriso."
+    "description": null
   },
   "Head014_3": {
     "localized_name": "Chapéu de Tocotoco Sorridente",
-    "description": "Chapéu inspirado em um Tocotoco. Use-o e você correrá o risco de não conter o sorriso."
+    "description": null
   },
   "Head014_4": {
     "localized_name": "Chapéu de Tocotoco Sorridente",
-    "description": "Chapéu inspirado em um Tocotoco. Use-o e você correrá o risco de não conter o sorriso."
+    "description": null
   },
   "Head014_5": {
     "localized_name": "Chapéu de Tocotoco Sorridente",
-    "description": "Chapéu inspirado em um Tocotoco. Use-o e você correrá o risco de não conter o sorriso."
+    "description": null
   },
   "Head015": {
     "localized_name": "Chapéu de Gumoss",
-    "description": "Chapéu inspirado em um Gumoss."
+    "description": null
   },
   "Head015_2": {
     "localized_name": "Chapéu de Gumoss",
-    "description": "Chapéu inspirado em um Gumoss."
+    "description": null
   },
   "Head015_3": {
     "localized_name": "Chapéu de Gumoss",
-    "description": "Chapéu inspirado em um Gumoss."
+    "description": null
   },
   "Head015_4": {
     "localized_name": "Chapéu de Gumoss",
-    "description": "Chapéu inspirado em um Gumoss."
+    "description": null
   },
   "Head015_5": {
     "localized_name": "Chapéu de Gumoss",
-    "description": "Chapéu inspirado em um Gumoss."
+    "description": null
   },
   "Head016": {
     "localized_name": "Chapéu de Penking",
-    "description": "Chapéu inspirado em um Penking."
+    "description": null
   },
   "Head016_2": {
     "localized_name": "Chapéu de Penking",
-    "description": "Chapéu inspirado em um Penking."
+    "description": null
   },
   "Head016_3": {
     "localized_name": "Chapéu de Penking",
-    "description": "Chapéu inspirado em um Penking."
+    "description": null
   },
   "Head016_4": {
     "localized_name": "Chapéu de Penking",
-    "description": "Chapéu inspirado em um Penking."
+    "description": null
   },
   "Head016_5": {
     "localized_name": "Chapéu de Penking",
-    "description": "Chapéu inspirado em um Penking."
+    "description": null
   },
   "Head017": {
     "localized_name": "Chapéu de Katress",
-    "description": "Chapéu inspirado em um Katress."
+    "description": null
   },
   "Head017_2": {
     "localized_name": "Chapéu de Katress",
-    "description": "Chapéu inspirado em um Katress."
+    "description": null
   },
   "Head017_3": {
     "localized_name": "Chapéu de Katress",
-    "description": "Chapéu inspirado em um Katress."
+    "description": null
   },
   "Head017_4": {
     "localized_name": "Chapéu de Katress",
-    "description": "Chapéu inspirado em um Katress."
+    "description": null
   },
   "Head017_5": {
     "localized_name": "Chapéu de Katress",
-    "description": "Chapéu inspirado em um Katress."
+    "description": null
   },
   "HeadEquip001_purple": {
     "localized_name": "Coroa de Bruxa [Suprema]",
@@ -3568,20 +3588,20 @@
     "description": "Armadura de Metal Refinado melhorada. Proporciona elevada resistência ao calor."
   },
   "IronArmor_2": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Armadura de Metal Refinado",
+    "description": "Armadura feita de metal de qualidade. Conta com um poder de defesa elevado, mas é bastante pesada."
   },
   "IronArmor_3": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Armadura de Metal Refinado",
+    "description": "Armadura feita de metal de qualidade. Conta com um poder de defesa elevado, mas é bastante pesada."
   },
   "IronArmor_4": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Armadura de Metal Refinado",
+    "description": "Armadura feita de metal de qualidade. Conta com um poder de defesa elevado, mas é bastante pesada."
   },
   "IronArmor_5": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Armadura de Metal Refinado",
+    "description": "Armadura feita de metal de qualidade. Conta com um poder de defesa elevado, mas é bastante pesada."
   },
   "IronHelmet": {
     "localized_name": "Elmo de Metal Refinado",
@@ -3672,20 +3692,20 @@
     "description": "Launcher Default que permite ataques explosivos poderosos à longa distância."
   },
   "Launcher_Default_2": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Lança-Foguetes",
+    "description": "Launcher Default que permite ataques explosivos poderosos à longa distância."
   },
   "Launcher_Default_3": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Lança-Foguetes",
+    "description": "Launcher Default que permite ataques explosivos poderosos à longa distância."
   },
   "Launcher_Default_4": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Lança-Foguetes",
+    "description": "Launcher Default que permite ataques explosivos poderosos à longa distância."
   },
   "Launcher_Default_5": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Lança-Foguetes",
+    "description": "Launcher Default que permite ataques explosivos poderosos à longa distância."
   },
   "Launcher_Meteor": {
     "localized_name": "Lança-Meteoros",
@@ -3868,7 +3888,7 @@
     "description": "Tecido biológico inutilizável. Resíduo gerado ao cortar e desmontar um Pal restaurado geneticamente. Totalmente inútil, serve apenas para descarte ou venda."
   },
   "Meat": {
-    "localized_name": "Carne Crua",
+    "localized_name": "Meat",
     "description": "Carne de Pal. É tão fresca que pode até ser consumida crua pelos humanos."
   },
   "Meat2": {
@@ -4652,20 +4672,20 @@
     "description": "Espingarda mais poderosa, com maior capacidade de munição. Seu dano por segundo à curta distância é imbatível."
   },
   "PumpActionShotgun_2": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Espingarda de Bombeamento",
+    "description": "Espingarda mais poderosa, com maior capacidade de munição. Seu dano por segundo à curta distância é imbatível."
   },
   "PumpActionShotgun_3": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Espingarda de Bombeamento",
+    "description": "Espingarda mais poderosa, com maior capacidade de munição. Seu dano por segundo à curta distância é imbatível."
   },
   "PumpActionShotgun_4": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Espingarda de Bombeamento",
+    "description": "Espingarda mais poderosa, com maior capacidade de munição. Seu dano por segundo à curta distância é imbatível."
   },
   "PumpActionShotgun_5": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Espingarda de Bombeamento",
+    "description": "Espingarda mais poderosa, com maior capacidade de munição. Seu dano por segundo à curta distância é imbatível."
   },
   "Quartz": {
     "localized_name": "Quartzo Puro",
@@ -4919,13 +4939,13 @@
     "localized_name": "Escudo Tera",
     "description": "Escudo fantástico criado com a tecnologia do palúdio. Ele se conserta automaticamente após algum tempo sem sofrer ataques. Como resultado de várias experiências, atingiu-se a máxima qualidade possível."
   },
-  "Shield_05": {
-    "localized_name": "Escudo Ultra",
-    "description": "Escudo fantástico criado com a tecnologia do palúdio. Ele se conserta automaticamente após algum tempo sem sofrer ataques. Como resultado de ainda mais experiências, atingiu-se uma qualidade antes inimaginável."
-  },
   "Shield_SF": {
     "localized_name": "Escudo Avançado",
     "description": "Escudo fantástico criado com tecnologia extremamente avançada. Ele se conserta automaticamente após algum tempo sem sofrer ataques. É um artigo de qualidade indefectível."
+  },
+  "Shield_Ultra": {
+    "localized_name": "Escudo Ultra",
+    "description": "Escudo fantástico criado com a tecnologia do palúdio. Ele se conserta automaticamente após algum tempo sem sofrer ataques. Como resultado de ainda mais experiências, atingiu-se uma qualidade antes inimaginável."
   },
   "ShotgunBullet": {
     "localized_name": "Cartucho de Espingarda",
@@ -5788,20 +5808,20 @@
     "description": "Armadura de Metal Pal melhorada. Proporciona elevada resistência ao calor."
   },
   "StealArmor_2": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Armadura de Metal Pal",
+    "description": "Armadura feita de Lingote de Metal Pal. Possui uma defesa tremenda, mas é bastante pesada."
   },
   "StealArmor_3": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Armadura de Metal Pal",
+    "description": "Armadura feita de Lingote de Metal Pal. Possui uma defesa tremenda, mas é bastante pesada."
   },
   "StealArmor_4": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Armadura de Metal Pal",
+    "description": "Armadura feita de Lingote de Metal Pal. Possui uma defesa tremenda, mas é bastante pesada."
   },
   "StealArmor_5": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Armadura de Metal Pal",
+    "description": "Armadura feita de Lingote de Metal Pal. Possui uma defesa tremenda, mas é bastante pesada."
   },
   "StealHelmet": {
     "localized_name": "Elmo de Metal Pal",
@@ -5948,20 +5968,20 @@
     "description": "Arma primitiva de longo alcance. Como está toda remendada, tem baixa potência."
   },
   "WeakerBow_2": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Arco Deteriorado",
+    "description": "Arma primitiva de longo alcance. Como está toda remendada, tem baixa potência."
   },
   "WeakerBow_3": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Arco Deteriorado",
+    "description": "Arma primitiva de longo alcance. Como está toda remendada, tem baixa potência."
   },
   "WeakerBow_4": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Arco Deteriorado",
+    "description": "Arma primitiva de longo alcance. Como está toda remendada, tem baixa potência."
   },
   "WeakerBow_5": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Arco Deteriorado",
+    "description": "Arma primitiva de longo alcance. Como está toda remendada, tem baixa potência."
   },
   "Wheat": {
     "localized_name": "Trigo",
@@ -6034,5 +6054,13 @@
   "YakushimaBlade": {
     "localized_name": "Espada-Gato",
     "description": "[Colaboração com Terraria] Segundo as lendas, esta espada parece ter sido trazida de uma nação distante por um Croajiro. Ninguém faz ideia do motivo…"
+  },
+  "SniperRifle_Default": {
+    "localized_name": "Rifle de precisão",
+    "description": "Um rifle de longo alcance com precisão excepcional. É fácil de manusear e eficaz em combates de longa distância."
+  },
+  "LargeBullet": {
+    "localized_name": "Munição de precisão",
+    "description": "Uma bala grande para uso com rifle de precisão. Possui alta precisão e poder."
   }
 }

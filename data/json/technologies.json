@@ -3417,7 +3417,7 @@
       "Metal_pillars"
     ],
     "unlock_item_recipes": [],
-    "icon_name": "Metal_foundation",
+    "icon_name": "Metal_Foundation",
     "require_defeat_tower_boss": "EPalBossType::None",
     "require_technology": "None",
     "require_research_id": "None",
@@ -3425,7 +3425,7 @@
     "level_cap": 30,
     "tier": 0,
     "cost": 4,
-    "icon": null
+    "icon": "t_icon_buildobject_metal_foundation"
   },
   "MiningTool": {
     "unlock_build_objects": [
@@ -3927,7 +3927,7 @@
       "FarmBlockV2_tomato"
     ],
     "unlock_item_recipes": [],
-    "icon_name": "tomato",
+    "icon_name": "FarmBlockV2_tomato",
     "require_defeat_tower_boss": "EPalBossType::None",
     "require_technology": "None",
     "require_research_id": "None",
@@ -3935,7 +3935,7 @@
     "level_cap": 21,
     "tier": 0,
     "cost": 2,
-    "icon": null
+    "icon": "t_icon_buildobject_farmblockv2_tomato"
   },
   "Product_Farm_wheat": {
     "unlock_build_objects": [
@@ -4250,7 +4250,7 @@
     "level_cap": 3,
     "tier": 0,
     "cost": 1,
-    "icon": "Tex_tools_10"
+    "icon": "tex_tools_10"
   },
   "RifleBullet": {
     "unlock_build_objects": [],
@@ -4497,7 +4497,7 @@
     "unlock_item_recipes": [
       "ShotgunBullet"
     ],
-    "icon_name": "ShotGunBullet",
+    "icon_name": "ShotgunBullet",
     "require_defeat_tower_boss": "EPalBossType::None",
     "require_technology": "None",
     "require_research_id": "None",
@@ -4505,7 +4505,7 @@
     "level_cap": 39,
     "tier": 0,
     "cost": 2,
-    "icon": null
+    "icon": "t_itemicon_ammo_shotgunbullet"
   },
   "Signboard": {
     "unlock_build_objects": [
@@ -6530,7 +6530,7 @@
       "Stone_pillar"
     ],
     "unlock_item_recipes": [],
-    "icon_name": "Stone_foundation",
+    "icon_name": "Stone_Foundation",
     "require_defeat_tower_boss": "EPalBossType::None",
     "require_technology": "None",
     "require_research_id": "None",
@@ -6538,7 +6538,7 @@
     "level_cap": 18,
     "tier": 0,
     "cost": 3,
-    "icon": null
+    "icon": "t_icon_buildobject_stone_foundation"
   },
   "Stump": {
     "unlock_build_objects": [

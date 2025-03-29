@@ -805,15 +805,15 @@
   },
   "MoveSpeed_up_1": {
     "localized_name": "Vif",
-    "description": null
+    "description": "La vitesse de déplacement augmente de 10.0 %."
   },
   "MoveSpeed_up_2": {
     "localized_name": "Coursier",
-    "description": null
+    "description": "La vitesse de déplacement augmente de 20.0 %."
   },
   "MoveSpeed_up_3": {
     "localized_name": "Sprinteur",
-    "description": null
+    "description": "La vitesse de déplacement augmente de 30.0 %."
   },
   "Nocturnal": {
     "localized_name": "Nocturne",
