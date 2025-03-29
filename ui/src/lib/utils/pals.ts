@@ -1,4 +1,3 @@
-import { MAX_LEVEL } from '$lib/constants';
 import { expData, palsData } from '$lib/data';
 import { getStats } from '$lib/utils';
 import { getAppState } from '$states';
@@ -33,7 +32,7 @@ export function formatNickname(nickname: string, prefix: string | undefined) {
 
 export async function handleMaxOutPal(pal: Pal, player: Player): Promise<void> {
 	if (!pal || !player) return;
-	pal.level = MAX_LEVEL;
+	pal.level = appState.settings.cheat_mode ? 255 : 60;
 	const maxLevelData = expData.expData['61'];
 	pal.exp = maxLevelData.PalTotalEXP - maxLevelData.PalNextEXP;
 	const [_, valid] = canBeBoss(pal.character_id);
