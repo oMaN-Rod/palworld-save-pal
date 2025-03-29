@@ -1,7 +1,10 @@
 import { MAX_LEVEL } from '$lib/constants';
 import { expData, palsData } from '$lib/data';
 import { getStats } from '$lib/utils';
+import { getAppState } from '$states';
 import { EntryState, type Pal, type Player, type WorkSuitability } from '$types';
+
+const appState = getAppState();
 
 export function canBeBoss(character_id: string): [string, boolean] {
 	let valid = true;
@@ -36,14 +39,14 @@ export async function handleMaxOutPal(pal: Pal, player: Player): Promise<void> {
 	const [_, valid] = canBeBoss(pal.character_id);
 	pal.is_boss = valid;
 	pal.is_lucky = false;
-	pal.talent_hp = 100;
-	pal.talent_shot = 100;
-	pal.talent_defense = 100;
-	pal.rank = 5;
-	pal.rank_hp = 20;
-	pal.rank_defense = 20;
-	pal.rank_attack = 20;
-	pal.rank_craftspeed = 20;
+	pal.talent_hp = appState.settings.cheat_mode ? 255 : 100;
+	pal.talent_shot = appState.settings.cheat_mode ? 255 : 100;
+	pal.talent_defense = appState.settings.cheat_mode ? 255 : 100;
+	pal.rank = appState.settings.cheat_mode ? 255 : 5;
+	pal.rank_hp = appState.settings.cheat_mode ? 255 : 20;
+	pal.rank_defense = appState.settings.cheat_mode ? 255 : 20;
+	pal.rank_attack = appState.settings.cheat_mode ? 255 : 20;
+	pal.rank_craftspeed = appState.settings.cheat_mode ? 255 : 20;
 	getStats(pal, player);
 	pal.hp = pal.max_hp;
 	pal.state = EntryState.MODIFIED;
