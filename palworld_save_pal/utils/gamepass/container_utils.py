@@ -291,7 +291,8 @@ def save_modified_gamepass(
         if key == "Level":
             continue
         player_data = None
-        if "Player" in key:
+        if "Player" in key and "_dps" not in key:
+            logger.debug("Updating player data for container: %s", key)
             player_uuid = uuid.UUID(key.split("-")[1])
             player_data = player_sav_data.get(player_uuid)
 
