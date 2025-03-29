@@ -20,15 +20,287 @@
     "description": "Angriff +10.0 % Feuerschaden −15.0 % Blitzschaden −15.0 %"
   },
   "Attack_ACC_up1": {
-    "localized_name": "ANG-Erhöhung St. 1",
+    "localized_name": "ANG-Erhöhung Lv. 1",
     "description": null
   },
   "Attack_ACC_up2": {
-    "localized_name": "ANG-Erhöhung St. 2",
+    "localized_name": "ANG-Erhöhung Lv. 2",
     "description": null
   },
   "Attack_ACC_up3": {
-    "localized_name": "ANG-Erhöhung St. 3",
+    "localized_name": "ANG-Erhöhung Lv. 3",
+    "description": null
+  },
+  "BossDefeatReward_AmaterasuWolf_Dark": {
+    "localized_name": "Schattenschadenssteigerung (S)",
+    "description": null
+  },
+  "BossDefeatReward_Anubis": {
+    "localized_name": "Erdschadenssteigerung (S)",
+    "description": null
+  },
+  "BossDefeatReward_BadCatgirl": {
+    "localized_name": "Schattenschadenssteigerung (S)",
+    "description": null
+  },
+  "BossDefeatReward_BerryGoat_Dark": {
+    "localized_name": "Grasschadenssteigerung (M)",
+    "description": null
+  },
+  "BossDefeatReward_BlackMetalDragon": {
+    "localized_name": "Drachenschadenssteigerung (M)",
+    "description": null
+  },
+  "BossDefeatReward_BlackPuppy": {
+    "localized_name": "Schattenschadenssteigerung (S)",
+    "description": null
+  },
+  "BossDefeatReward_BlueDragon": {
+    "localized_name": "Wasserschadenssteigerung (S)",
+    "description": null
+  },
+  "BossDefeatReward_BlueThunderHorse": {
+    "localized_name": "Elektroschadenssteigerung (M)",
+    "description": null
+  },
+  "BossDefeatReward_BlueberryFairy": {
+    "localized_name": "Grasschadenssteigerung (M)",
+    "description": null
+  },
+  "BossDefeatReward_CaptainPenguin": {
+    "localized_name": "Wasserschadenssteigerung (S)",
+    "description": null
+  },
+  "BossDefeatReward_CatMage": {
+    "localized_name": "Schattenschadenssteigerung (S)",
+    "description": null
+  },
+  "BossDefeatReward_CatVampire": {
+    "localized_name": "Schattenschadenssteigerung (S)",
+    "description": null
+  },
+  "BossDefeatReward_DarkScorpion": {
+    "localized_name": "Schattenschadenssteigerung (S)",
+    "description": null
+  },
+  "BossDefeatReward_DarkScorpion_Ground": {
+    "localized_name": "Erdschadenssteigerung (S)",
+    "description": null
+  },
+  "BossDefeatReward_FairyDragon": {
+    "localized_name": "Drachenschadenssteigerung (S)",
+    "description": null
+  },
+  "BossDefeatReward_FengyunDeeper": {
+    "localized_name": "Neutralschadenssteigerung (S)",
+    "description": null
+  },
+  "BossDefeatReward_FengyunDeeper_Electric": {
+    "localized_name": "Elektroschadenssteigerung (M)",
+    "description": null
+  },
+  "BossDefeatReward_FlowerDinosaur_Electric": {
+    "localized_name": "Elektroschadenssteigerung (S)",
+    "description": null
+  },
+  "BossDefeatReward_FlowerDoll": {
+    "localized_name": "Grasschadenssteigerung (S)",
+    "description": null
+  },
+  "BossDefeatReward_GhostRabbit": {
+    "localized_name": "Schattenschadenssteigerung (S)",
+    "description": null
+  },
+  "BossDefeatReward_GoldenHorse": {
+    "localized_name": "Erdschadenssteigerung (M)",
+    "description": null
+  },
+  "BossDefeatReward_GrassMammoth": {
+    "localized_name": "Grasschadenssteigerung (M)",
+    "description": null
+  },
+  "BossDefeatReward_GrassPanda_Electric": {
+    "localized_name": "Elektroschadenssteigerung (S)",
+    "description": null
+  },
+  "BossDefeatReward_GrassRabbitMan": {
+    "localized_name": "Grasschadenssteigerung (S)",
+    "description": null
+  },
+  "BossDefeatReward_GrimGirl": {
+    "localized_name": "Schattenschadenssteigerung (S)",
+    "description": null
+  },
+  "BossDefeatReward_HawkBird": {
+    "localized_name": "Neutralschadenssteigerung (S)",
+    "description": null
+  },
+  "BossDefeatReward_HerculesBeetle": {
+    "localized_name": "Erdschadenssteigerung (S)",
+    "description": null
+  },
+  "BossDefeatReward_HerculesBeetle_Ground": {
+    "localized_name": "Erdschadenssteigerung (M)",
+    "description": null
+  },
+  "BossDefeatReward_Horus_Water": {
+    "localized_name": "Wasserschadenssteigerung (M)",
+    "description": null
+  },
+  "BossDefeatReward_IceHorse": {
+    "localized_name": "Eisschadenssteigerung (L)",
+    "description": null
+  },
+  "BossDefeatReward_IceHorse_Dark": {
+    "localized_name": "Schattenschadenssteigerung (S)",
+    "description": null
+  },
+  "BossDefeatReward_JetDragon": {
+    "localized_name": "Drachenschadenssteigerung (L)",
+    "description": null
+  },
+  "BossDefeatReward_KingAlpaca": {
+    "localized_name": "Neutralschadenssteigerung (S)",
+    "description": null
+  },
+  "BossDefeatReward_KingAlpaca_Ice": {
+    "localized_name": "Eisschadenssteigerung (M)",
+    "description": null
+  },
+  "BossDefeatReward_KingBahamut": {
+    "localized_name": "Feuerschadenssteigerung (L)",
+    "description": null
+  },
+  "BossDefeatReward_Kirin": {
+    "localized_name": "Elektroschadenssteigerung (S)",
+    "description": null
+  },
+  "BossDefeatReward_Kitsunebi_Ice": {
+    "localized_name": "Eisschadenssteigerung (L)",
+    "description": null
+  },
+  "BossDefeatReward_LazyCatfish": {
+    "localized_name": "Erdschadenssteigerung (S)",
+    "description": null
+  },
+  "BossDefeatReward_LazyDragon_Electric": {
+    "localized_name": "Drachenschadenssteigerung (S)",
+    "description": null
+  },
+  "BossDefeatReward_LilyQueen_Dark": {
+    "localized_name": "Schattenschadenssteigerung (S)",
+    "description": null
+  },
+  "BossDefeatReward_MopKing": {
+    "localized_name": "Eisschadenssteigerung (S)",
+    "description": null
+  },
+  "BossDefeatReward_Mutant": {
+    "localized_name": "Neutralschadenssteigerung (S)",
+    "description": null
+  },
+  "BossDefeatReward_MysteryMask": {
+    "localized_name": "Schattenschadenssteigerung (S)",
+    "description": null
+  },
+  "BossDefeatReward_NaughtyCat": {
+    "localized_name": "Neutralschadenssteigerung (S)",
+    "description": null
+  },
+  "BossDefeatReward_NightBlueHorse": {
+    "localized_name": "Schattenschadenssteigerung (S)",
+    "description": null
+  },
+  "BossDefeatReward_PinkRabbit_Grass": {
+    "localized_name": "Grasschadenssteigerung (M)",
+    "description": null
+  },
+  "BossDefeatReward_PlantSlime": {
+    "localized_name": "Erdschadenssteigerung (S)",
+    "description": null
+  },
+  "BossDefeatReward_PurpleSpider": {
+    "localized_name": "Schattenschadenssteigerung (S)",
+    "description": null
+  },
+  "BossDefeatReward_QueenBee": {
+    "localized_name": "Grasschadenssteigerung (S)",
+    "description": null
+  },
+  "BossDefeatReward_RaijinDaughter_Water": {
+    "localized_name": "Schattenschadenssteigerung (S)",
+    "description": null
+  },
+  "BossDefeatReward_Ronin": {
+    "localized_name": "Feuerschadenssteigerung (M)",
+    "description": null
+  },
+  "BossDefeatReward_SaintCentaur_1": {
+    "localized_name": "Neutralschadenssteigerung (L)",
+    "description": null
+  },
+  "BossDefeatReward_SaintCentaur_2": {
+    "localized_name": "Schattenschadenssteigerung (S)",
+    "description": null
+  },
+  "BossDefeatReward_SakuraSaurus": {
+    "localized_name": "Grasschadenssteigerung (S)",
+    "description": null
+  },
+  "BossDefeatReward_SakuraSaurus_Water": {
+    "localized_name": "Wasserschadenssteigerung (S)",
+    "description": null
+  },
+  "BossDefeatReward_SkyDragon": {
+    "localized_name": "Drachenschadenssteigerung (S)",
+    "description": null
+  },
+  "BossDefeatReward_Suzaku": {
+    "localized_name": "Feuerschadenssteigerung (L)",
+    "description": null
+  },
+  "BossDefeatReward_ThunderBird": {
+    "localized_name": "Elektroschadenssteigerung (S)",
+    "description": null
+  },
+  "BossDefeatReward_Umihebi": {
+    "localized_name": "Wasserschadenssteigerung (M)",
+    "description": null
+  },
+  "BossDefeatReward_VioletFairy": {
+    "localized_name": "Grasschadenssteigerung (M)",
+    "description": null
+  },
+  "BossDefeatReward_WeaselDragon": {
+    "localized_name": "Eisschadenssteigerung (S)",
+    "description": null
+  },
+  "BossDefeatReward_Werewolf_Ice": {
+    "localized_name": "Eisschadenssteigerung (L)",
+    "description": null
+  },
+  "BossDefeatReward_WhiteDeer": {
+    "localized_name": "Neutralschadenssteigerung (M)",
+    "description": null
+  },
+  "BossDefeatReward_WhiteMoth": {
+    "localized_name": "Eisschadenssteigerung (S)",
+    "description": null
+  },
+  "BossDefeatReward_WhiteShieldDragon": {
+    "localized_name": "Drachenschadenssteigerung (M)",
+    "description": null
+  },
+  "BossDefeatReward_WhiteTiger_Ground": {
+    "localized_name": "Erdschadenssteigerung (M)",
+    "description": null
+  },
+  "BossDefeatReward_WingGolem": {
+    "localized_name": "Erdschadenssteigerung (S)",
+    "description": null
+  },
+  "BossDefeatReward_Yeti_Grass": {
+    "localized_name": "Grasschadenssteigerung (S)",
     "description": null
   },
   "CaptureLevel_Up_1": {
@@ -324,7 +596,7 @@
     "description": null
   },
   "ElementResist_Aqua_1": {
-    "localized_name": "Wasserschadensminderung St. 1",
+    "localized_name": "Wasserschadensminderung Lv. 1",
     "description": null
   },
   "ElementResist_Aqua_1_PAL": {
@@ -332,15 +604,15 @@
     "description": "Wasserschaden −10.0 %"
   },
   "ElementResist_Aqua_2": {
-    "localized_name": "Wasserschadensminderung St. 2",
+    "localized_name": "Wasserschadensminderung Lv. 2",
     "description": null
   },
   "ElementResist_Aqua_3": {
-    "localized_name": "Wasserschadensminderung St. 3",
+    "localized_name": "Wasserschadensminderung Lv. 3",
     "description": null
   },
   "ElementResist_Dark_1": {
-    "localized_name": "Schattenschadensminderung St. 1",
+    "localized_name": "Schattenschadensminderung Lv. 1",
     "description": null
   },
   "ElementResist_Dark_1_PAL": {
@@ -348,15 +620,15 @@
     "description": "Schattenschaden −10.0 %"
   },
   "ElementResist_Dark_2": {
-    "localized_name": "Schattenschadensminderung St. 2",
+    "localized_name": "Schattenschadensminderung Lv. 2",
     "description": null
   },
   "ElementResist_Dark_3": {
-    "localized_name": "Schattenschadensminderung St. 3",
+    "localized_name": "Schattenschadensminderung Lv. 3",
     "description": null
   },
   "ElementResist_Dragon_1": {
-    "localized_name": "Drachenschadensminderung St. 1",
+    "localized_name": "Drachenschadensminderung Lv. 1",
     "description": null
   },
   "ElementResist_Dragon_1_PAL": {
@@ -364,15 +636,15 @@
     "description": "Drachenschaden −10.0 %"
   },
   "ElementResist_Dragon_2": {
-    "localized_name": "Drachenschadensminderung St. 2",
+    "localized_name": "Drachenschadensminderung Lv. 2",
     "description": null
   },
   "ElementResist_Dragon_3": {
-    "localized_name": "Drachenschadensminderung St. 3",
+    "localized_name": "Drachenschadensminderung Lv. 3",
     "description": null
   },
   "ElementResist_Earth_1": {
-    "localized_name": "Erdschadensminderung St. 1",
+    "localized_name": "Erdschadensminderung Lv. 1",
     "description": null
   },
   "ElementResist_Earth_1_PAL": {
@@ -380,15 +652,15 @@
     "description": "Erdschaden −10.0 %"
   },
   "ElementResist_Earth_2": {
-    "localized_name": "Erdschadensminderung St. 2",
+    "localized_name": "Erdschadensminderung Lv. 2",
     "description": null
   },
   "ElementResist_Earth_3": {
-    "localized_name": "Erdschadensminderung St. 3",
+    "localized_name": "Erdschadensminderung Lv. 3",
     "description": null
   },
   "ElementResist_Fire_1": {
-    "localized_name": "Feuerschadensminderung St. 1",
+    "localized_name": "Feuerschadensminderung Lv. 1",
     "description": null
   },
   "ElementResist_Fire_1_PAL": {
@@ -396,15 +668,15 @@
     "description": "Feuerschaden −10.0 %"
   },
   "ElementResist_Fire_2": {
-    "localized_name": "Feuerschadensminderung St. 2",
+    "localized_name": "Feuerschadensminderung Lv. 2",
     "description": null
   },
   "ElementResist_Fire_3": {
-    "localized_name": "Feuerschadensminderung St. 3",
+    "localized_name": "Feuerschadensminderung Lv. 3",
     "description": null
   },
   "ElementResist_Ice_1": {
-    "localized_name": "Eisschadensminderung St. 1",
+    "localized_name": "Eisschadensminderung Lv. 1",
     "description": null
   },
   "ElementResist_Ice_1_PAL": {
@@ -412,15 +684,15 @@
     "description": "Eisschaden −10.0 %"
   },
   "ElementResist_Ice_2": {
-    "localized_name": "Eisschadensminderung St. 2",
+    "localized_name": "Eisschadensminderung Lv. 2",
     "description": null
   },
   "ElementResist_Ice_3": {
-    "localized_name": "Eisschadensminderung St. 3",
+    "localized_name": "Eisschadensminderung Lv. 3",
     "description": null
   },
   "ElementResist_Leaf_1": {
-    "localized_name": "Grasschadensminderung St. 1",
+    "localized_name": "Grasschadensminderung Lv. 1",
     "description": null
   },
   "ElementResist_Leaf_1_PAL": {
@@ -428,15 +700,15 @@
     "description": "Grasschaden −10.0 %"
   },
   "ElementResist_Leaf_2": {
-    "localized_name": "Grasschadensminderung St. 2",
+    "localized_name": "Grasschadensminderung Lv. 2",
     "description": null
   },
   "ElementResist_Leaf_3": {
-    "localized_name": "Grasschadensminderung St. 3",
+    "localized_name": "Grasschadensminderung Lv. 3",
     "description": null
   },
   "ElementResist_Normal_1": {
-    "localized_name": "Neutralschadensminderung St. 1",
+    "localized_name": "Neutralschadensminderung Lv. 1",
     "description": null
   },
   "ElementResist_Normal_1_PAL": {
@@ -444,15 +716,15 @@
     "description": "Neutralschaden −10.0 %"
   },
   "ElementResist_Normal_2": {
-    "localized_name": "Neutralschadensminderung St. 2",
+    "localized_name": "Neutralschadensminderung Lv. 2",
     "description": null
   },
   "ElementResist_Normal_3": {
-    "localized_name": "Neutralschadensminderung St. 3",
+    "localized_name": "Neutralschadensminderung Lv. 3",
     "description": null
   },
   "ElementResist_Thunder_1": {
-    "localized_name": "Elektroschadensminderung St. 1",
+    "localized_name": "Elektroschadensminderung Lv. 1",
     "description": null
   },
   "ElementResist_Thunder_1_PAL": {
@@ -460,11 +732,11 @@
     "description": "Elektroschaden −10.0 %"
   },
   "ElementResist_Thunder_2": {
-    "localized_name": "Elektroschadensminderung St. 2",
+    "localized_name": "Elektroschadensminderung Lv. 2",
     "description": null
   },
   "ElementResist_Thunder_3": {
-    "localized_name": "Elektroschadensminderung St. 3",
+    "localized_name": "Elektroschadensminderung Lv. 3",
     "description": null
   },
   "EternalFlame": {
@@ -472,15 +744,15 @@
     "description": null
   },
   "HP_ACC_up1": {
-    "localized_name": "LP-Erhöhung St. 1",
+    "localized_name": "LP-Erhöhung Lv. 1",
     "description": null
   },
   "HP_ACC_up2": {
-    "localized_name": "LP-Erhöhung St. 2",
+    "localized_name": "LP-Erhöhung Lv. 2",
     "description": null
   },
   "HP_ACC_up3": {
-    "localized_name": "LP-Erhöhung St. 3",
+    "localized_name": "LP-Erhöhung Lv. 3",
     "description": null
   },
   "Invader": {
@@ -508,40 +780,40 @@
     "description": "Angriff +20.0 % Verteidigung +20.0 % Bewegungstempo +15.0 %"
   },
   "MaxInventoryWeight_up": {
-    "localized_name": "Maximallasterhöhung St. 1",
+    "localized_name": "Maximallasterhöhung Lv. 1",
     "description": null
   },
   "MaxInventoryWeight_up2": {
-    "localized_name": "Maximallasterhöhung St. 2",
+    "localized_name": "Maximallasterhöhung Lv. 2",
     "description": null
   },
   "MaxInventoryWeight_up3": {
-    "localized_name": "Maximallasterhöhung St. 3",
+    "localized_name": "Maximallasterhöhung Lv. 3",
     "description": null
   },
   "MaxInventoryWeight_up_Equip_1": {
-    "localized_name": "Maximallasterhöhung St. 1",
+    "localized_name": "Maximallasterhöhung Lv. 1",
     "description": null
   },
   "MaxInventoryWeight_up_Equip_2": {
-    "localized_name": "Maximallasterhöhung St. 2",
+    "localized_name": "Maximallasterhöhung Lv. 2",
     "description": null
   },
   "MaxInventoryWeight_up_Equip_3": {
-    "localized_name": "Maximallasterhöhung St. 3",
+    "localized_name": "Maximallasterhöhung Lv. 3",
     "description": null
   },
   "MoveSpeed_up_1": {
     "localized_name": "Flink",
-    "description": "Bewegungstempo +10.0 %"
+    "description": null
   },
   "MoveSpeed_up_2": {
     "localized_name": "Guter Läufer",
-    "description": "Bewegungstempo +20.0 %"
+    "description": null
   },
   "MoveSpeed_up_3": {
     "localized_name": "Blitzschnell",
-    "description": "Bewegungstempo +30.0 %"
+    "description": null
   },
   "Nocturnal": {
     "localized_name": "Nachtaktiv",
@@ -572,7 +844,7 @@
     "description": null
   },
   "PAL_ALLAttack_up3": {
-    "localized_name": "Unbändig",
+    "localized_name": "Schattenherrscher",
     "description": null
   },
   "PAL_CorporateSlave": {
@@ -696,43 +968,43 @@
     "description": "Maximale Ausdauer +25.0 % (Gilt nur für reitbare Pals.)"
   },
   "Stamina_Up_3": {
-    "localized_name": "Perpetuum mobile",
+    "localized_name": "Endloser Antrieb",
     "description": "Maximale Ausdauer +75.0 % (Gilt nur für reitbare Pals.)"
   },
   "TemperatureResist_Cold1": {
-    "localized_name": "Kälteresistenz St. 1",
+    "localized_name": "Kälteresistenz Lv. 1",
     "description": null
   },
   "TemperatureResist_Cold2": {
-    "localized_name": "Kälteresistenz St. 2",
+    "localized_name": "Kälteresistenz Lv. 2",
     "description": null
   },
   "TemperatureResist_Cold3": {
-    "localized_name": "Kälteresistenz St. 3",
+    "localized_name": "Kälteresistenz Lv. 3",
     "description": null
   },
   "TemperatureResist_Heat1": {
-    "localized_name": "Hitzeresistenz St. 1",
+    "localized_name": "Hitzeresistenz Lv. 1",
     "description": null
   },
   "TemperatureResist_Heat1Cold1": {
-    "localized_name": "Hitzeresistenz St. 1 / Kälteresistenz St. 1",
+    "localized_name": "Hitzeresistenz Lv. 1 / Kälteresistenz Lv. 1",
     "description": null
   },
   "TemperatureResist_Heat2": {
-    "localized_name": "Hitzeresistenz St. 2",
+    "localized_name": "Hitzeresistenz Lv. 2",
     "description": null
   },
   "TemperatureResist_Heat2Cold2": {
-    "localized_name": "Hitzeresistenz St. 2 / Kälteresistenz St. 2",
+    "localized_name": "Hitzeresistenz Lv. 2 / Kälteresistenz Lv. 2",
     "description": null
   },
   "TemperatureResist_Heat3": {
-    "localized_name": "Hitzeresistenz St. 3",
+    "localized_name": "Hitzeresistenz Lv. 3",
     "description": null
   },
   "TemperatureResist_Heat3Cold3": {
-    "localized_name": "Hitzeresistenz St. 3 / Kälteresistenz St. 3",
+    "localized_name": "Hitzeresistenz Lv. 3 / Kälteresistenz Lv. 3",
     "description": null
   },
   "Test_PalEgg_HatchingSpeed_Up": {
@@ -768,27 +1040,27 @@
     "description": null
   },
   "WorkSpeed_ACC_up1": {
-    "localized_name": "Schnellfertigung St. 1",
+    "localized_name": "Schnellfertigung Lv. 1",
     "description": null
   },
   "WorkSpeed_ACC_up2": {
-    "localized_name": "Schnellfertigung St. 2",
+    "localized_name": "Schnellfertigung Lv. 2",
     "description": null
   },
   "WorkSpeed_ACC_up3": {
-    "localized_name": "Schnellfertigung St. 3",
+    "localized_name": "Schnellfertigung Lv. 3",
     "description": null
   },
   "defense_ACC_up1": {
-    "localized_name": "VTD-Erhöhung St. 1",
+    "localized_name": "VTD-Erhöhung Lv. 1",
     "description": null
   },
   "defense_ACC_up2": {
-    "localized_name": "VTD-Erhöhung St. 2",
+    "localized_name": "VTD-Erhöhung Lv. 2",
     "description": null
   },
   "defense_ACC_up3": {
-    "localized_name": "VTD-Erhöhung St. 3",
+    "localized_name": "VTD-Erhöhung Lv. 3",
     "description": null
   }
 }

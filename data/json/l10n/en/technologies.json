@@ -181,7 +181,7 @@
   },
   "Battle_Defense_MachineGun": {
     "localized_name": "Mounted Machine Gun",
-    "description": "Assign Pal to use the machine gun to protect a base."
+    "description": "Assign a Pal with Handiwork suitability to use the machine gun to protect a base."
   },
   "Battle_Defense_Missile": {
     "localized_name": "Mounted Missile Launcher",
@@ -200,7 +200,7 @@
     "description": "A glider for soaring through the air. With its capabilities improved, it can soar at high speed. Can be made at Production Assembly Line"
   },
   "Battle_Glider_Grade_04": {
-    "localized_name": "Hyper Glider",
+    "localized_name": "Glider_Tera",
     "description": "A glider for soaring through the air. Its performance has been further improved, with increased speed and lift. Can be made at Production Assembly Line II."
   },
   "Battle_GunPowder_Grade_02": {
@@ -284,8 +284,8 @@
     "description": null
   },
   "Battle_RangeWeapon_FlameThrower": {
-    "localized_name": "FlameThrower",
-    "description": null
+    "localized_name": "Flamethrower",
+    "description": "Flamethrower that fires long-range flame. Can set the enemy on fire. Crafted at Weapon Assembly Line II."
   },
   "Battle_RangeWeapon_GatlingGun": {
     "localized_name": "Gatling Gun",
@@ -385,6 +385,10 @@
   },
   "Cloth2": {
     "localized_name": "High Quality Cloth",
+    "description": "Woven from large amounts of Wool. Required to create high quality armor. Can be made at High Quality Workbench."
+  },
+  "CompositeDesk": {
+    "localized_name": "Drafting Table",
     "description": null
   },
   "Cooler": {
@@ -426,6 +430,10 @@
   "DefenseWall_Wood": {
     "localized_name": "Wooden Defensive Wall",
     "description": "Massive defensive wall to prevent enemy intrusions. Made from wood, it breaks easily."
+  },
+  "DimensionPalStorage": {
+    "localized_name": "Dimensional Pal Storage",
+    "description": null
   },
   "DismantlingConveyor": {
     "localized_name": "Pal Disassembly Conveyor",
@@ -671,20 +679,24 @@
     "localized_name": "Glass Structure Set",
     "description": "Set for building bases using glass. Allows building of glass foundations, walls, ceilings, stairs and other things necessary for shelters."
   },
+  "GlobalPalStorage": {
+    "localized_name": "Global Palbox",
+    "description": null
+  },
   "GrapplingGun": {
-    "localized_name": "Grappling Gun",
+    "localized_name": "GrapplingGun",
     "description": null
   },
   "GrapplingGun2": {
-    "localized_name": "Mega Grappling Gun",
+    "localized_name": "GrapplingGun2",
     "description": null
   },
   "GrapplingGun3": {
-    "localized_name": "Giga Grappling Gun",
+    "localized_name": "GrapplingGun3",
     "description": null
   },
   "GrapplingGun4": {
-    "localized_name": "Hyper Grappling Gun",
+    "localized_name": "GrapplingGun4",
     "description": null
   },
   "GrenadeBullet": {
@@ -762,10 +774,6 @@
   "Infra_PlayerBed_Grade_02": {
     "localized_name": "Fine Bed",
     "description": "Soft bed with improved restorative capabilities. Cannot sleep unless built under a roof."
-  },
-  "ItemBooth": {
-    "localized_name": "Flea Market (Items)",
-    "description": null
   },
   "ItemChest_04": {
     "localized_name": "Advanced Chest",
@@ -877,7 +885,7 @@
   },
   "MonsterFarm": {
     "localized_name": "Ranch",
-    "description": "Farm for raising sheep-and fowl-like Pals. Assign a Pal with the appropriate traits to a farm to automatically produce items."
+    "description": "Ranch for raising sheep and fowl-like Pals. Assign Pals with the appropriate work suitability to the ranch to automatically produce items."
   },
   "MultiElectricHatchingPalEgg": {
     "localized_name": "Large-Scale Electric Egg Incubator",
@@ -1045,11 +1053,11 @@
   },
   "Product_StationDeforest": {
     "localized_name": "Logging Site",
-    "description": "Can produce wood at a base. Requires Pal with Lumbering trait."
+    "description": "Can produce wood at a base. Requires Pal with Lumbering suitability."
   },
   "Product_StonePit": {
     "localized_name": "Stone Pit",
-    "description": "Can produce stone at a base. Requires Pal with Mining trait."
+    "description": "Can produce stone at a base. Requires Pal with Mining suitability."
   },
   "Product_SulfurPit": {
     "localized_name": "Sulfur Mine",
@@ -1057,7 +1065,7 @@
   },
   "Product_WeaponFactory_Dirty_Grade_01": {
     "localized_name": "Weapon Workbench",
-    "description": "Produces simple mechanical weapons. Requires Pal with Handiwork Ability."
+    "description": "Produces simple mechanical weapons. Requires Pal with Handiwork suitability."
   },
   "Product_WeaponFactory_Dirty_Grade_02": {
     "localized_name": "Weapon Assembly Line",
@@ -1144,7 +1152,7 @@
     "description": "Strange shield made with Paldium technology. Through repeated testing, the highest quality has been achieved. Can be made at Production Assembly Line II."
   },
   "Shield_05": {
-    "localized_name": "Ultra Shield",
+    "localized_name": "Shield_Ultra",
     "description": "Strange shield made with Paldium technology. As a result of further experiments, ultimate quality has been achieved. Can be made at Production Assembly Line II."
   },
   "Shield_SF": {
@@ -1749,10 +1757,6 @@
   },
   "Unlock_Picking_Tier3": {
     "localized_name": "Lockpicking Tool v3",
-    "description": null
-  },
-  "WallSignboard": {
-    "localized_name": "WallSignBoard",
     "description": null
   },
   "WallTorch": {

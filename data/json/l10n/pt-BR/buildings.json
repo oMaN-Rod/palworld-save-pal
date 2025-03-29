@@ -99,6 +99,10 @@
     "localized_name": "Fogueira",
     "description": "Recurso necessário para preparar alimentos. Só permite assar ingredientes simples. Precisa ser aceso por um Pal de fogo."
   },
+  "CandleStand": {
+    "localized_name": "-",
+    "description": null
+  },
   "Cauldron": {
     "localized_name": "Caldeirão de Bruxa",
     "description": "Quando isto é colocado na base, aumenta a velocidade de trabalho de manipulação de remédios. Não há efeito adicional por se colocar mais de um."
@@ -146,6 +150,18 @@
   "CoalPit": {
     "localized_name": "Garimpo de Carvão",
     "description": "Recurso para produzir Carvão Mineral.Carvão MineralO trabalho de escavar é árduo e requer muita energia. Confie-o a um Pal com habilidade para o garimpo."
+  },
+  "CompositeDesk": {
+    "localized_name": "Mesa de Projetos",
+    "description": "Instalação que combina múltiplos projetos para criar projetos mais avançados."
+  },
+  "ConservationGroupBannerA": {
+    "localized_name": "-",
+    "description": null
+  },
+  "ConservationGroupBannerB": {
+    "localized_name": "-",
+    "description": null
   },
   "Container01_Iron": {
     "localized_name": "Contêiner Grande",
@@ -231,6 +247,10 @@
     "localized_name": "Escrivaninha Antiga",
     "description": "Escrivaninha antiga para decoração."
   },
+  "DimensionPalStorage": {
+    "localized_name": "Armazenamento Dimensional de Pals",
+    "description": "Instalação que armazena grandes quantidades de Pals capturados. Os membros da guilda têm livre acesso. Se configurado como privado, pode ser usado como um armazém pessoal."
+  },
   "DismantlingConveyor": {
     "localized_name": "Transportador para Talho de Pal",
     "description": "Parece até um sonho, mas este recurso é mesmo capaz de talhar Pals automaticamente."
@@ -269,7 +289,7 @@
   },
   "Expedition": {
     "localized_name": "Escritório de Expedição de Pals",
-    "description": "Instalações que permitem enviar Pals em expedições para dungeons e outros locais. Pals enviados coletam itens e realizam batalhas em diferentes regiões, trazendo recursos de volta para a base."
+    "description": "Instalações que permitem enviar Pals em expedições para dungeons e outros locais. Pals enviados realizam coleta e batalhas em diferentes regiões, trazendo recursos de volta para a base."
   },
   "Factory_Hard_01": {
     "localized_name": "Bancada de Alta Qualidade",
@@ -323,6 +343,10 @@
     "localized_name": "Estátua da Águia Gigante",
     "description": "Monumento com a imagem de um Chikipi. Permite viagem rápida ao ser colocado em algum local."
   },
+  "FireStand": {
+    "localized_name": "-",
+    "description": null
+  },
   "FlourMill": {
     "localized_name": "Moenda",
     "description": "Instalações para moer Trigo e produzir Farinha de Trigo. É preciso ter um Pal com aptidão para [rega] a fim de girar a roda d'água."
@@ -363,6 +387,10 @@
     "localized_name": "Fundação de Vidro",
     "description": "Fundação para erigir muros ou instalações. É bastante resistente, pois é feita de vidro reforçado."
   },
+  "Glass_pillars": {
+    "localized_name": "Pilar de Vidro",
+    "description": "Pilar para sustentar a construção. É bastante resistente, pois é feito de vidro reforçado."
+  },
   "Glass_roof": {
     "localized_name": "Telhado de Vidro",
     "description": "Telhado erguido sobre o muro para oferecer proteção contra vento e chuva. É bastante resistente, pois é feito de vidro reforçado."
@@ -374,6 +402,10 @@
   "Glass_wall": {
     "localized_name": "Parede de Vidro",
     "description": "Muro erguido sobre a fundação para impedir a entrada de invasores. É bastante resistente, pois é feito de vidro reforçado."
+  },
+  "GlobalPalStorage": {
+    "localized_name": "Caixa Global de Pals",
+    "description": "Instalação onde você pode salvar os dados genéticos de seu Pal e restaurá-lo a partir dos dados genéticos salvos. Esses dados podem ser transferidos para outros mundos."
   },
   "Globe01_Stone": {
     "localized_name": "Globo Terrestre Antigo",
@@ -403,6 +435,10 @@
     "localized_name": "Cozinha Grande",
     "description": "Recurso necessário para preparar alimentos. Devido ao seu grande porte, permite que vários Pals cooperem no trabalho. Precisa ser aceso por um Pal de fogo."
   },
+  "Hunter_GangFlag": {
+    "localized_name": "-",
+    "description": null
+  },
   "IceCrusher": {
     "localized_name": "Triturador de Gelo",
     "description": "Instalações para triturar Minério Metálico e convertê-lo em outros materiais. É preciso ter um Pal com aptidão para [Refrigeração] e alimentação de energia elétrica a fim de usá-las, mas permitem trabalhar com mais eficiência."
@@ -413,7 +449,7 @@
   },
   "ItemBooth": {
     "localized_name": "Mercado de Pulgas (Itens)",
-    "description": "Recurso para poder vender itens. Defina produtos para a lista de venda a fim de vender itens para outros jogadores."
+    "description": "Instalação para venda de itens. Aqui é possível vender itens a outros jogadores. Designar um Pal do tipo gelo para a instalação ajudará a preservar os alimentos por mais tempo sem que eles estraguem."
   },
   "ItemChest": {
     "localized_name": "Baú de Madeira",
@@ -444,7 +480,7 @@
     "description": "Trepadeira horizontal para decoração. Pode ser colocada na parede."
   },
   "JapaneseStyle_DoorWall_01": {
-    "localized_name": "Parede com Porta Japonesa",
+    "localized_name": "Parede com Porta Japonesa A",
     "description": "Porta erguida sobre a fundação para servir de entrada. Permite criar construções exuberantes em estilo japonês."
   },
   "JapaneseStyle_DoorWall_02": {
@@ -476,7 +512,7 @@
     "description": "Fundação para erigir muros ou instalações. Permite criar construções exuberantes em estilo japonês."
   },
   "JapaneseStyle_roof_01": {
-    "localized_name": "Telhado Japonês",
+    "localized_name": "Telhado Japonês A",
     "description": "Telhado erguido sobre o muro para oferecer proteção contra vento e chuva. A parte superior é coberta de tatamis. Permite criar construções exuberantes em estilo japonês."
   },
   "JapaneseStyle_roof_02": {
@@ -555,6 +591,10 @@
     "localized_name": "Poste de Luz Chique",
     "description": "Poste de luz chique que serve como fonte de luz. Requer eletricidade para ser aceso."
   },
+  "LilyQueenStatue": {
+    "localized_name": "-",
+    "description": null
+  },
   "MachineGame01_Iron": {
     "localized_name": "Máquina de Garra",
     "description": "Máquina de garra para decoração. Não serve para jogar, pois está quebrada."
@@ -619,6 +659,10 @@
     "localized_name": "Fundação de Metal",
     "description": "Fundação para erigir muros ou instalações. É bastante resistente, pois é feita de metal."
   },
+  "Metal_pillars": {
+    "localized_name": "Pilar de Metal",
+    "description": "Pilar para sustentar a construção. É bastante resistente pois é feito de metal."
+  },
   "Metal_roof": {
     "localized_name": "Telhado de Metal",
     "description": "Telhado erguido sobre o muro para oferecer proteção contra vento e chuva. É bastante resistente, pois é feito de metal."
@@ -669,11 +713,15 @@
   },
   "PalBooth": {
     "localized_name": "Mercado de Pulgas (Pals)",
-    "description": "Recurso para poder vender Pals. Defina produtos para a lista de venda a fim de vender Pals para outros jogadores."
+    "description": "Instalações para venda de Pals. Aqui é possível vender Pals a outros jogadores. Designar um Pal do tipo gelo para as instalações ajudará a preservar os alimentos à venda por mais tempo sem que eles estraguem."
   },
   "PalBoxV2": {
     "localized_name": "Caixa de Pal",
     "description": "Recurso para deixar guardados os Pals capturados. Os Pals dentro da caixa recuperam PV gradualmente. Estas instalações formam o núcleo da sua base."
+  },
+  "PalCage": {
+    "localized_name": "-",
+    "description": null
   },
   "PalFoodBox": {
     "localized_name": "Ração",
@@ -935,6 +983,10 @@
     "localized_name": "Fundação de Pedra",
     "description": "Fundação para erigir muros ou instalações. É um tanto resistente, pois é feita de pedra."
   },
+  "Stone_pillar": {
+    "localized_name": "Pilar de Pedra",
+    "description": "Pilar para sustentar a construção. É um tanto resistente pois é feito de pedra."
+  },
   "Stone_roof": {
     "localized_name": "Telhado de Pedra",
     "description": "Telhado erguido sobre o muro para oferecer proteção contra vento e chuva. É um tanto resistente, pois é feito de pedra."
@@ -1139,6 +1191,10 @@
     "localized_name": "Tocha de Parede",
     "description": "Fonte de luz que ilumina a base mesmo nas noites mais escuras. Pode ser afixada em uma parede. Precisa ser acesa por um Pal de fogo."
   },
+  "WallTorch02": {
+    "localized_name": "-",
+    "description": null
+  },
   "WeaponFactory_Dirty_01": {
     "localized_name": "Fábrica de Armas",
     "description": "Bancada para produzir armas e munição. Como o local de trabalho é pequeno, não é possível fabricar armas avançadas. Requer Pals capazes de realizar trabalho manual."
@@ -1150,6 +1206,10 @@
   "WeaponFactory_Dirty_03": {
     "localized_name": "Fábrica de Linha de Armas II",
     "description": "Fábrica para produzir armas e munição. Com a especialização de tarefas, permite criar armas avançadas rapidamente. Requer Pals capazes de realizar trabalho manual."
+  },
+  "Wire_Fence": {
+    "localized_name": "-",
+    "description": null
   },
   "Wood_Gate": {
     "localized_name": "Portão de Madeira",
@@ -1167,6 +1227,10 @@
     "localized_name": "Parede com Janela de Madeira",
     "description": "Parede com janela erguida sobre a fundação para impedir a entrada de invasores. É frágil por ser feita de madeira."
   },
+  "WoodenBarricade": {
+    "localized_name": "-",
+    "description": null
+  },
   "Wooden_DoorWall": {
     "localized_name": "Porta de Madeira",
     "description": "Porta erguida sobre a fundação para servir de entrada. É frágil por ser feita de madeira."
@@ -1178,6 +1242,10 @@
   "Wooden_ladder": {
     "localized_name": "Escada",
     "description": "Escada para subir em lugares um pouco altos."
+  },
+  "Wooden_pillar": {
+    "localized_name": "Pilar de Madeira",
+    "description": "Pilar para sustentar a construção. É frágil por ser feito de madeira."
   },
   "Wooden_roof": {
     "localized_name": "Telhado de Madeira",

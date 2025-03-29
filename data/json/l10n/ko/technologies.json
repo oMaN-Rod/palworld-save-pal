@@ -200,7 +200,7 @@
     "description": "펼쳐서 활공할 때 쓰는 글라이더. 성능을 끌어올려 꽤 빠른 속도로 날 수 있게 된다. '작업라인 공장'에서 만들 수 있다."
   },
   "Battle_Glider_Grade_04": {
-    "localized_name": "테라 글라이더",
+    "localized_name": "Glider_Tera",
     "description": "펼쳐서 활공할 때 쓰는 글라이더. 성능을 더욱 끌어올려 속도와 장력이 향상됐다. '작업라인 공장 II'에서 만들 수 있다."
   },
   "Battle_GunPowder_Grade_02": {
@@ -284,8 +284,8 @@
     "description": null
   },
   "Battle_RangeWeapon_FlameThrower": {
-    "localized_name": "FlameThrower",
-    "description": null
+    "localized_name": "화염방사기",
+    "description": "높은 사정거리의 불을 뿜는 Flamethrower. 적중한 상대를 화염에 휩싸이게 할 수 있다. 제작하려면 |무기라인 공장 II|이(가) 필요하다."
   },
   "Battle_RangeWeapon_GatlingGun": {
     "localized_name": "개틀링 건",
@@ -385,6 +385,10 @@
   },
   "Cloth2": {
     "localized_name": "상급 천",
+    "description": "많은 양의 '양털'을 짜서 만든 '상급 천'. 고급 방어구를 만들 때 필요하다. '상급 작업대'에서 만들 수 있게 된다."
+  },
+  "CompositeDesk": {
+    "localized_name": "제도대",
     "description": null
   },
   "Cooler": {
@@ -426,6 +430,10 @@
   "DefenseWall_Wood": {
     "localized_name": "나무 방벽",
     "description": "외적의 침입을 막는 용도의 거대한 방벽. 나무로 만들어서 약하다."
+  },
+  "DimensionPalStorage": {
+    "localized_name": "팰 복원 스토리지",
+    "description": null
   },
   "DismantlingConveyor": {
     "localized_name": "팰 해체 컨베이어",
@@ -671,20 +679,24 @@
     "localized_name": "유리 건축 세트",
     "description": "유리로 거점을 제작할 때 쓰는 세트. 유리 토대, 벽, 지붕, 계단 등 집을 지을 때 필요한 것들을 만들 수 있다."
   },
+  "GlobalPalStorage": {
+    "localized_name": "글로벌 팰 상자",
+    "description": null
+  },
   "GrapplingGun": {
-    "localized_name": "갈고리 총",
+    "localized_name": "GrapplingGun",
     "description": null
   },
   "GrapplingGun2": {
-    "localized_name": "메가 갈고리 총",
+    "localized_name": "GrapplingGun2",
     "description": null
   },
   "GrapplingGun3": {
-    "localized_name": "기가 갈고리 총",
+    "localized_name": "GrapplingGun3",
     "description": null
   },
   "GrapplingGun4": {
-    "localized_name": "테라 갈고리 총",
+    "localized_name": "GrapplingGun4",
     "description": null
   },
   "GrenadeBullet": {
@@ -762,10 +774,6 @@
   "Infra_PlayerBed_Grade_02": {
     "localized_name": "상급 침대",
     "description": "회복력이 상승한 푹신푹신한 침대. 지붕 아래에 설치해야만 잠들 수 있다."
-  },
-  "ItemBooth": {
-    "localized_name": "프리마켓 (아이템)",
-    "description": null
   },
   "ItemChest_04": {
     "localized_name": "고도 문명 상자",
@@ -1144,7 +1152,7 @@
     "description": "팰지움 기술로 탄생한 신비한 방패. 실험을 거듭한 결과 품질 면에서 최고봉에 도달했다. |작업라인 공장 II|에서 제작할 수 있다."
   },
   "Shield_05": {
-    "localized_name": "울트라 방패",
+    "localized_name": "Shield_Ultra",
     "description": "팰지움 기술로 탄생한 신비한 방패. 실험을 더욱 거듭한 결과 품질 면에서 궁극에 도달했다. |작업라인 공장 II|에서 제작할 수 있다."
   },
   "Shield_SF": {
@@ -1749,10 +1757,6 @@
   },
   "Unlock_Picking_Tier3": {
     "localized_name": "전문가용 락픽 도구",
-    "description": null
-  },
-  "WallSignboard": {
-    "localized_name": "WallSignBoard",
     "description": null
   },
   "WallTorch": {

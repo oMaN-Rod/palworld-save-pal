@@ -200,7 +200,7 @@
     "description": "Permet de planer une fois déplié. Sa qualité supérieure permet d'atteindre une vitesse considérable. Une Chaîne de production est requise pour en fabriquer."
   },
   "Battle_Glider_Grade_04": {
-    "localized_name": "Téra planeur",
+    "localized_name": "Glider_Tera",
     "description": "Permet de planer une fois déplié. Sa qualité encore supérieure décuple sa vitesse et sa portance. Une Chaîne de production II est requise pour en fabriquer."
   },
   "Battle_GunPowder_Grade_02": {
@@ -284,8 +284,8 @@
     "description": null
   },
   "Battle_RangeWeapon_FlameThrower": {
-    "localized_name": "FlameThrower",
-    "description": null
+    "localized_name": "Lance-flammes",
+    "description": "Un Flamethrower pour souffler du feu sur une longue distance. Permet d'enflammer les individus touchés. Une Chaîne de production d'armes II est requise pour en fabriquer."
   },
   "Battle_RangeWeapon_GatlingGun": {
     "localized_name": "Pistolet gatling",
@@ -385,6 +385,10 @@
   },
   "Cloth2": {
     "localized_name": "Tissu de qualité",
+    "description": "Du Tissu de qualité obtenu en tissant une grande quantité de Laine. Nécessaire à la fabrication des protections de qualité. Une Établi de qualité est requise pour en fabriquer."
+  },
+  "CompositeDesk": {
+    "localized_name": "Table de dessin",
     "description": null
   },
   "Cooler": {
@@ -426,6 +430,10 @@
   "DefenseWall_Wood": {
     "localized_name": "Rempart en bois",
     "description": "Un mur colossal pour contrer les invasions ennemies. Sa composition en bois le rend fragile."
+  },
+  "DimensionPalStorage": {
+    "localized_name": "Stockage de Pals dimensionnel",
+    "description": null
   },
   "DismantlingConveyor": {
     "localized_name": "Destructeur de Pals",
@@ -472,7 +480,7 @@
     "description": null
   },
   "Farm_SkillFruits": {
-    "localized_name": "Plantation de fruits de techniques",
+    "localized_name": "Plantation de Fruits de Maîtrise",
     "description": null
   },
   "FlamethrowerBullet": {
@@ -671,20 +679,24 @@
     "localized_name": "Structures en verre",
     "description": "Un assortiment pour construire un camp avec des matériaux en verre. Permet de fabriquer tout le nécessaire à la construction d'une maison en verre (base, murs, toit, escalier, etc.)"
   },
+  "GlobalPalStorage": {
+    "localized_name": "Boîte à Pals globale",
+    "description": null
+  },
   "GrapplingGun": {
-    "localized_name": "Pistolet-grappin",
+    "localized_name": "GrapplingGun",
     "description": null
   },
   "GrapplingGun2": {
-    "localized_name": "Méga pistolet-grappin",
+    "localized_name": "GrapplingGun2",
     "description": null
   },
   "GrapplingGun3": {
-    "localized_name": "Giga pistolet-grappin",
+    "localized_name": "GrapplingGun3",
     "description": null
   },
   "GrapplingGun4": {
-    "localized_name": "Téra pistolet-grappin",
+    "localized_name": "GrapplingGun4",
     "description": null
   },
   "GrenadeBullet": {
@@ -762,10 +774,6 @@
   "Infra_PlayerBed_Grade_02": {
     "localized_name": "Lit de qualité",
     "description": "Son confort entraîne une meilleure récupération. Doit impérativement être installé sous un toit pour être utilisable."
-  },
-  "ItemBooth": {
-    "localized_name": "Marché aux puces (Objets)",
-    "description": null
   },
   "ItemChest_04": {
     "localized_name": "Coffre d'une civilisation avancée",
@@ -949,7 +957,7 @@
   },
   "Product_Cooking_Grade_01": {
     "localized_name": "Feu de camp",
-    "description": "Permet de cuisiner des plats simples pour procurer un peu de chaleur et de lumière."
+    "description": "Permet de cuisiner des plats simples et d'apporter un peu de chaleur et de lumière."
   },
   "Product_Cooking_Grade_02": {
     "localized_name": "Marmite",
@@ -1088,7 +1096,7 @@
     "description": null
   },
   "RifleBullet": {
-    "localized_name": "Balles de fusil d'assaut",
+    "localized_name": "Balles de fusil",
     "description": "Des munitions compatibles notamment avec le fusil. Une Établi pour armes est requise pour en fabriquer."
   },
   "RoughBullet": {
@@ -1144,7 +1152,7 @@
     "description": "Un étrange bouclier issu de la technologie du paldium. Des expériences répétées ont permis de révéler toutes ses qualités. Une Chaîne de production II est requise pour en fabriquer."
   },
   "Shield_05": {
-    "localized_name": "Ultra bouclier",
+    "localized_name": "Shield_Ultra",
     "description": "Un étrange bouclier issu de la technologie du paldium. Des expériences supplémentaires ont permis d'en faire la pièce parfaite. Une Chaîne de production II est requise pour en fabriquer."
   },
   "Shield_SF": {
@@ -1532,7 +1540,7 @@
     "description": null
   },
   "SkillUnlock_VolcanicMonster_Ice": {
-    "localized_name": "Reptyro Cryst Reptyro",
+    "localized_name": "Selle pour Reptyro Cryst",
     "description": null
   },
   "SkillUnlock_WeaselDragon": {
@@ -1548,7 +1556,7 @@
     "description": null
   },
   "SkillUnlock_WhiteDeer": {
-    "localized_name": "Selle pour Silvegis",
+    "localized_name": "Selle pour Celesdir",
     "description": null
   },
   "SkillUnlock_WhiteShieldDragon": {
@@ -1749,10 +1757,6 @@
   },
   "Unlock_Picking_Tier3": {
     "localized_name": "Outil de crochetage professionnel",
-    "description": null
-  },
-  "WallSignboard": {
-    "localized_name": "WallSignBoard",
     "description": null
   },
   "WallTorch": {

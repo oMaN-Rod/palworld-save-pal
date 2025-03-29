@@ -47,6 +47,30 @@
     "deterioration_damage": 0.08,
     "icon": "t_icon_buildobject_andon"
   },
+  "Banyan_Big": {
+    "type_a": "Furniture",
+    "type_b": "Infra_Environment",
+    "rank": 1,
+    "required_build_work_amount": 2000.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Wood",
+        "count": 10
+      },
+      {
+        "id": "Fiber",
+        "count": 10
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::None",
+    "material_sub_type": "EPalMapObjectMaterialSubType::None",
+    "hp": 2000,
+    "defense": 2,
+    "deterioration_damage": 0.08,
+    "disabled": true
+  },
   "Barrel01_Iron": {
     "type_a": "Furniture",
     "type_b": "Infra_Environment",
@@ -623,6 +647,29 @@
     "deterioration_damage": 0.04,
     "icon": "t_icon_buildobject_campfire"
   },
+  "CandleStand": {
+    "type_a": "Light",
+    "type_b": "Infra_Environment",
+    "rank": 1,
+    "required_build_work_amount": 1000.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Wood",
+        "count": 5
+      },
+      {
+        "id": "Stone",
+        "count": 2
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::None",
+    "material_sub_type": "EPalMapObjectMaterialSubType::None",
+    "hp": 1000,
+    "defense": 2,
+    "deterioration_damage": 0.04
+  },
   "Cauldron": {
     "type_a": "Other",
     "type_b": "Infra_Environment",
@@ -918,6 +965,80 @@
     "defense": 4,
     "deterioration_damage": 0.2,
     "icon": "t_icon_buildobject_coalpit"
+  },
+  "CompositeDesk": {
+    "type_a": "Product",
+    "type_b": "Prod_Craft",
+    "rank": 1,
+    "required_build_work_amount": 20000.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "IronIngot",
+        "count": 20
+      },
+      {
+        "id": "Wood",
+        "count": 100
+      },
+      {
+        "id": "Charcoal",
+        "count": 30
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Wood",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Wood",
+    "hp": 1000,
+    "defense": 2,
+    "deterioration_damage": 0.08,
+    "icon": "t_icon_buildobject_compositedesk"
+  },
+  "ConservationGroupBannerA": {
+    "type_a": "Furniture",
+    "type_b": "Infra_Environment",
+    "rank": 1,
+    "required_build_work_amount": 2000.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Wood",
+        "count": 10
+      },
+      {
+        "id": "Fiber",
+        "count": 10
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Copper",
+    "hp": 2000,
+    "defense": 4,
+    "deterioration_damage": 0.02
+  },
+  "ConservationGroupBannerB": {
+    "type_a": "Furniture",
+    "type_b": "Infra_Environment",
+    "rank": 1,
+    "required_build_work_amount": 2000.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Wood",
+        "count": 10
+      },
+      {
+        "id": "Fiber",
+        "count": 10
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Copper",
+    "hp": 2000,
+    "defense": 4,
+    "deterioration_damage": 0.02
   },
   "Container01_Iron": {
     "type_a": "Storage",
@@ -1469,6 +1590,34 @@
     "defense": 2,
     "deterioration_damage": 0.08,
     "icon": "t_icon_buildobject_desk01_stone"
+  },
+  "DimensionPalStorage": {
+    "type_a": "Pal",
+    "type_b": "Other",
+    "rank": 1,
+    "required_build_work_amount": 20000.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "CopperIngot",
+        "count": 20
+      },
+      {
+        "id": "Pal_crystal_S",
+        "count": 40
+      },
+      {
+        "id": "PalCrystal_Ex",
+        "count": 5
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::None",
+    "material_sub_type": "EPalMapObjectMaterialSubType::None",
+    "hp": 20000,
+    "defense": 2,
+    "deterioration_damage": 0.4,
+    "icon": "t_icon_buildobject_dimensionpalstorage"
   },
   "DismantlingConveyor": {
     "type_a": "Pal",
@@ -2146,6 +2295,29 @@
     "deterioration_damage": 0.0,
     "icon": "t_icon_buildobject_fasttravelpoint"
   },
+  "FireStand": {
+    "type_a": "Light",
+    "type_b": "Infra_Environment",
+    "rank": 1,
+    "required_build_work_amount": 1000.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Wood",
+        "count": 5
+      },
+      {
+        "id": "Stone",
+        "count": 2
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::None",
+    "material_sub_type": "EPalMapObjectMaterialSubType::None",
+    "hp": 1000,
+    "defense": 2,
+    "deterioration_damage": 0.04
+  },
   "FlourMill": {
     "type_a": "Product",
     "type_b": "Prod_Craft",
@@ -2495,6 +2667,34 @@
     "deterioration_damage": 0.02,
     "icon": "t_icon_buildobject_glass_wall"
   },
+  "GlobalPalStorage": {
+    "type_a": "Pal",
+    "type_b": "Other",
+    "rank": 1,
+    "required_build_work_amount": 1000.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Pal_crystal_S",
+        "count": 3
+      },
+      {
+        "id": "Wood",
+        "count": 5
+      },
+      {
+        "id": "Stone",
+        "count": 15
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::None",
+    "material_sub_type": "EPalMapObjectMaterialSubType::None",
+    "hp": 20000,
+    "defense": 2,
+    "deterioration_damage": 0.4,
+    "icon": "t_icon_buildobject_globalpalstorage"
+  },
   "Globe01_Stone": {
     "type_a": "Furniture",
     "type_b": "Infra_Environment",
@@ -2682,6 +2882,29 @@
     "defense": 3,
     "deterioration_damage": 0.15,
     "icon": "t_icon_buildobject_hugekitchen"
+  },
+  "Hunter_GangFlag": {
+    "type_a": "Furniture",
+    "type_b": "Infra_Environment",
+    "rank": 1,
+    "required_build_work_amount": 2000.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Wood",
+        "count": 10
+      },
+      {
+        "id": "Fiber",
+        "count": 10
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Copper",
+    "hp": 2000,
+    "defense": 2,
+    "deterioration_damage": 0.08
   },
   "IceCrusher": {
     "type_a": "Product",
@@ -3611,6 +3834,29 @@
     "deterioration_damage": 0.08,
     "icon": "t_icon_buildobject_light_lightpole04"
   },
+  "LilyQueenStatue": {
+    "type_a": "Furniture",
+    "type_b": "Infra_Environment",
+    "rank": 1,
+    "required_build_work_amount": 2000.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Wood",
+        "count": 10
+      },
+      {
+        "id": "Fiber",
+        "count": 10
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Copper",
+    "hp": 2000,
+    "defense": 4,
+    "deterioration_damage": 0.02
+  },
   "MachineGame01_Iron": {
     "type_a": "Furniture",
     "type_b": "Infra_Environment",
@@ -4424,6 +4670,29 @@
     "deterioration_damage": 0.0,
     "icon": "t_icon_buildobject_palboxv2"
   },
+  "PalCage": {
+    "type_a": "Furniture",
+    "type_b": "Infra_Environment",
+    "rank": 1,
+    "required_build_work_amount": 2000.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Wood",
+        "count": 10
+      },
+      {
+        "id": "Fiber",
+        "count": 10
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Copper",
+    "hp": 2000,
+    "defense": 2,
+    "deterioration_damage": 0.08
+  },
   "PalFoodBox": {
     "type_a": "Food",
     "type_b": "Food_Basic",
@@ -4923,6 +5192,222 @@
     "defense": 2,
     "deterioration_damage": 0.08,
     "icon": "t_icon_buildobject_rug_wood"
+  },
+  "SF_DoorWall": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Stone",
+        "count": 1
+      },
+      {
+        "id": "Pal_crystal_S",
+        "count": 2
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Copper",
+    "hp": 2000,
+    "defense": 4,
+    "deterioration_damage": 0.02,
+    "disabled": true
+  },
+  "SF_SlantedRoof": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Stone",
+        "count": 1
+      },
+      {
+        "id": "Pal_crystal_S",
+        "count": 2
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Copper",
+    "hp": 2000,
+    "defense": 4,
+    "deterioration_damage": 0.02,
+    "disabled": true
+  },
+  "SF_TriangleWall": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Stone",
+        "count": 1
+      },
+      {
+        "id": "Pal_crystal_S",
+        "count": 2
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Copper",
+    "hp": 2000,
+    "defense": 4,
+    "deterioration_damage": 0.02,
+    "disabled": true
+  },
+  "SF_WindowWall": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Stone",
+        "count": 1
+      },
+      {
+        "id": "Pal_crystal_S",
+        "count": 2
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Copper",
+    "hp": 2000,
+    "defense": 4,
+    "deterioration_damage": 0.02,
+    "disabled": true
+  },
+  "SF_foundation": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Stone",
+        "count": 1
+      },
+      {
+        "id": "Pal_crystal_S",
+        "count": 2
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Copper",
+    "hp": 2000,
+    "defense": 4,
+    "deterioration_damage": 0.02,
+    "disabled": true
+  },
+  "SF_pillars": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Stone",
+        "count": 1
+      },
+      {
+        "id": "Pal_crystal_S",
+        "count": 2
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::None",
+    "material_sub_type": "EPalMapObjectMaterialSubType::None",
+    "hp": 0,
+    "defense": 0,
+    "deterioration_damage": 0.0,
+    "disabled": true
+  },
+  "SF_roof": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Stone",
+        "count": 1
+      },
+      {
+        "id": "Pal_crystal_S",
+        "count": 2
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Copper",
+    "hp": 2000,
+    "defense": 4,
+    "deterioration_damage": 0.02,
+    "disabled": true
+  },
+  "SF_stair": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Stone",
+        "count": 1
+      },
+      {
+        "id": "Pal_crystal_S",
+        "count": 2
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Copper",
+    "hp": 2000,
+    "defense": 4,
+    "deterioration_damage": 0.02,
+    "disabled": true
+  },
+  "SF_wall": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Stone",
+        "count": 1
+      },
+      {
+        "id": "Pal_crystal_S",
+        "count": 2
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Copper",
+    "hp": 2000,
+    "defense": 4,
+    "deterioration_damage": 0.02,
+    "disabled": true
   },
   "SanityDecrease1": {
     "type_a": "Infrastructure",
@@ -5537,7 +6022,7 @@
     "material_sub_type": "EPalMapObjectMaterialSubType::Stone",
     "hp": 2000,
     "defense": 1,
-    "deterioration_damage": 0.0,
+    "deterioration_damage": 0.04,
     "icon": "t_icon_buildobject_skinchange"
   },
   "Snowman": {
@@ -5945,7 +6430,7 @@
     "material_sub_type": "EPalMapObjectMaterialSubType::Stone",
     "hp": 10000,
     "defense": 4,
-    "deterioration_damage": 0.0,
+    "deterioration_damage": 0.2,
     "icon": "t_icon_buildobject_stonepit"
   },
   "Stone_DoorWall": {
@@ -7265,6 +7750,30 @@
     "deterioration_damage": 0.04,
     "icon": "t_icon_buildobject_torchhang"
   },
+  "WallTorch02": {
+    "type_a": "Light",
+    "type_b": "Infra_Environment",
+    "rank": 1,
+    "required_build_work_amount": 1000.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Wood",
+        "count": 5
+      },
+      {
+        "id": "Stone",
+        "count": 2
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::None",
+    "material_sub_type": "EPalMapObjectMaterialSubType::None",
+    "hp": 1000,
+    "defense": 2,
+    "deterioration_damage": 0.04,
+    "icon": "t_icon_buildobject_torchhang"
+  },
   "WeaponFactory_Dirty_01": {
     "type_a": "Product",
     "type_b": "Prod_Craft",
@@ -7353,6 +7862,29 @@
     "deterioration_damage": 0.08,
     "icon": "t_icon_buildobject_weaponfactory_dirty_03"
   },
+  "Wire_Fence": {
+    "type_a": "Furniture",
+    "type_b": "Infra_Environment",
+    "rank": 1,
+    "required_build_work_amount": 2000.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Wood",
+        "count": 10
+      },
+      {
+        "id": "Fiber",
+        "count": 10
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Copper",
+    "hp": 2000,
+    "defense": 2,
+    "deterioration_damage": 0.08
+  },
   "Wood_Gate": {
     "type_a": "Foundation",
     "type_b": "Other",
@@ -7432,6 +7964,29 @@
     "defense": 2,
     "deterioration_damage": 0.02,
     "icon": "t_icon_buildobject_wood_windowwall"
+  },
+  "WoodenBarricade": {
+    "type_a": "Furniture",
+    "type_b": "Infra_Environment",
+    "rank": 1,
+    "required_build_work_amount": 2000.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Wood",
+        "count": 10
+      },
+      {
+        "id": "Fiber",
+        "count": 10
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Wood",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Wood",
+    "hp": 2000,
+    "defense": 2,
+    "deterioration_damage": 0.08
   },
   "Wooden_DoorWall": {
     "type_a": "Foundation",

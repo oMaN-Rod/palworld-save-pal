@@ -99,6 +99,10 @@
     "localized_name": "모닥불",
     "description": "식재료를 조리할 때 필요한 시설. 간단한 재료를 익히는 정도만 가능하다. 화염 팰이 불을 붙여줘야 한다."
   },
+  "CandleStand": {
+    "localized_name": "-",
+    "description": null
+  },
   "Cauldron": {
     "localized_name": "마녀의 냄비",
     "description": "거점에 배치하면 제약 작업 속도가 상승한다. 2개 이상 배치해도 효과는 없다."
@@ -146,6 +150,18 @@
   "CoalPit": {
     "localized_name": "석탄 채굴장",
     "description": "석탄을(를) 생산하는 시설. 석탄을(를) 파내는 작업은 고되므로 체력이 필요하다. 채굴에 자신 있는 팰에게 맡기자."
+  },
+  "CompositeDesk": {
+    "localized_name": "제도대",
+    "description": "시설여러 설계도를 조합해 더욱 높은 단계의 설계도를 제도할 수 있는 시설."
+  },
+  "ConservationGroupBannerA": {
+    "localized_name": "-",
+    "description": null
+  },
+  "ConservationGroupBannerB": {
+    "localized_name": "-",
+    "description": null
   },
   "Container01_Iron": {
     "localized_name": "대형 컨테이너",
@@ -230,6 +246,10 @@
   "Desk01_Stone": {
     "localized_name": "앤티크 책상",
     "description": "장식용 앤티크 책상."
+  },
+  "DimensionPalStorage": {
+    "localized_name": "팰 복원 스토리지",
+    "description": "포획한 팰을 대량으로 보관하는 시설. 길드 멤버라면 누구든 팰을 넣거나 꺼낼 수 있다. 개인 설정을 통해 개인용 팰 보관고로 사용하는 것도 가능하다."
   },
   "DismantlingConveyor": {
     "localized_name": "팰 해체 컨베이어",
@@ -323,6 +343,10 @@
     "localized_name": "흰죽지참수리 상",
     "description": "꼬꼬닭을(를) 흉내 낸 비석. 세우면 첫 여행을 떠날 수 있다."
   },
+  "FireStand": {
+    "localized_name": "-",
+    "description": null
+  },
   "FlourMill": {
     "localized_name": "제분기",
     "description": "밀을(를) 빻아 밀가루을(를) 생산할 수 있는 시설. 물레방아를 돌리는 |관개| 적성의 팰이 필요하다."
@@ -363,6 +387,10 @@
     "localized_name": "유리 토대",
     "description": "위에 벽이나 시설을 지을 수 있는 토대. 견고한 유리로 만들어서 매우 튼튼하다."
   },
+  "Glass_pillars": {
+    "localized_name": "유리 기둥",
+    "description": "건물을 지탱하기 위해 세우는 기둥. 견고한 유리로 만들어서 매우 튼튼하다."
+  },
   "Glass_roof": {
     "localized_name": "유리 지붕",
     "description": "벽 위에 지어 비바람을 막는 지붕. 견고한 유리로 만들어서 매우 튼튼하다."
@@ -374,6 +402,10 @@
   "Glass_wall": {
     "localized_name": "유리 벽",
     "description": "토대 위에 지어 침입자를 막는 벽. 견고한 유리로 만들어서 매우 튼튼하다."
+  },
+  "GlobalPalStorage": {
+    "localized_name": "글로벌 팰 상자",
+    "description": "팰 유전자 데이터를 저장하거나 저장한 유전자 데이터를 통해 팰을 복원할 수 있는 시설. 저장된 유전자 데이터를 다른 월드에 인계하는 것도 가능하다."
   },
   "Globe01_Stone": {
     "localized_name": "앤티크 구체 지리 모형",
@@ -403,6 +435,10 @@
     "localized_name": "대형 부엌",
     "description": "식재료를 조리할 때 필요한 시설. 거대화를 거쳐 여러 팰이 힘을 합쳐 조리할 수 있게 되었다. 화염 팰이 불을 붙여줘야 한다."
   },
+  "Hunter_GangFlag": {
+    "localized_name": "-",
+    "description": null
+  },
   "IceCrusher": {
     "localized_name": "동결 분쇄기",
     "description": "금속 광석을(를) 분쇄하여 다른 소재로 변환할 수 있는 시설. 작업 효율이 높은 대신, 가동하려면 전력 공급 및 |냉각| 적성을 가진 팰이 필요하다."
@@ -413,7 +449,7 @@
   },
   "ItemBooth": {
     "localized_name": "프리마켓 (아이템)",
-    "description": "아이템을 판매할 때 사용하는 시설. 판매 목록에 아이템을 등록하면 다른 플레이어에게 판매할 수 있다."
+    "description": "아이템을 판매할 때 사용하는 시설. 다른 플레이어에게 아이템을 판매할 수 있다. 얼음 팰을 배치하면 보관한 식료품의 부패가 늦춰진다."
   },
   "ItemChest": {
     "localized_name": "나무 상자",
@@ -444,7 +480,7 @@
     "description": "장식용 가로형 담쟁이덩굴. 벽에 설치할 수 있다."
   },
   "JapaneseStyle_DoorWall_01": {
-    "localized_name": "문 딸린 일본식 벽",
+    "localized_name": "문 딸린 일본식 벽 A",
     "description": "토대 위에 지어 입구 역할을 하는 문. 세련된 일본식 건축물을 지을 때 활용하자."
   },
   "JapaneseStyle_DoorWall_02": {
@@ -476,7 +512,7 @@
     "description": "위에 벽이나 시설을 지을 수 있는 토대. 세련된 일본식 건축물을 지을 때 활용하자."
   },
   "JapaneseStyle_roof_01": {
-    "localized_name": "일본식 지붕",
+    "localized_name": "일본식 지붕 A",
     "description": "벽 위에 지어 비바람을 막는 지붕. 윗면이 다다미로 구성되어 있다. 세련된 일본식 건축물을 지을 때 활용하자."
   },
   "JapaneseStyle_roof_02": {
@@ -555,6 +591,10 @@
     "localized_name": "세련된 가로등",
     "description": "광원이 되는 세련된 가로등. 불을 켜려면 전기가 필요하다."
   },
+  "LilyQueenStatue": {
+    "localized_name": "-",
+    "description": null
+  },
   "MachineGame01_Iron": {
     "localized_name": "인형뽑기",
     "description": "장식용 인형뽑기. 망가져서 사용할 수 없다."
@@ -619,6 +659,10 @@
     "localized_name": "금속 토대",
     "description": "위에 벽이나 시설을 지을 수 있는 토대. 금속으로 만들어서 매우 튼튼하다."
   },
+  "Metal_pillars": {
+    "localized_name": "금속 기둥",
+    "description": "식물을 지탱하기 위해 세우는 기둥. 금속으로 만들어서 매우 튼튼하다."
+  },
   "Metal_roof": {
     "localized_name": "금속 지붕",
     "description": "벽 위에 지어 비바람을 막는 지붕. 금속으로 만들어서 매우 튼튼하다."
@@ -669,11 +713,15 @@
   },
   "PalBooth": {
     "localized_name": "프리마켓 (팰)",
-    "description": "팰을 판매할 때 사용하는 시설. 판매 목록에 팰을 등록하면 다른 플레이어에게 판매할 수 있다."
+    "description": "팰을 판매할 때 사용하는 시설. 다른 플레이어에게 팰을 판매할 수 있다. 얼음 팰을 배치하면 판매하는 식료품의 부패가 늦춰진다."
   },
   "PalBoxV2": {
     "localized_name": "팰 상자",
     "description": "포획한 팰을 보관해두는 시설. 박스 내 팰은 천천히 HP를 회복한다. 이 시설을 중심으로 한 범위가 거점이 된다."
+  },
+  "PalCage": {
+    "localized_name": "-",
+    "description": null
   },
   "PalFoodBox": {
     "localized_name": "먹이 상자",
@@ -935,6 +983,10 @@
     "localized_name": "돌 토대",
     "description": "위에 벽이나 시설을 지을 수 있는 토대. 돌로 만들어서 나름대로 튼튼하다."
   },
+  "Stone_pillar": {
+    "localized_name": "돌 기둥",
+    "description": "식물을 지탱하기 위해 세우는 기둥. 돌로 만들어서 나름대로 튼튼하다."
+  },
   "Stone_roof": {
     "localized_name": "돌 지붕",
     "description": "벽 위에 지어 비바람을 막는 지붕. 돌로 만들어서 나름대로 튼튼하다."
@@ -1139,6 +1191,10 @@
     "localized_name": "벽걸이 횃불",
     "description": "어두운 밤에도 거점을 밝혀주는 광원. 벽에 설치할 수 있다. 화염 팰이 불을 붙여줘야 한다."
   },
+  "WallTorch02": {
+    "localized_name": "-",
+    "description": null
+  },
   "WeaponFactory_Dirty_01": {
     "localized_name": "무기 제작대",
     "description": "무기나 탄약을 생산하는 작업대. 아직 작업장이 협소해 상위 무기 제작은 힘들다. 수작업이 가능한 팰이 필요하다."
@@ -1150,6 +1206,10 @@
   "WeaponFactory_Dirty_03": {
     "localized_name": "무기라인 공장 II",
     "description": "무기나 탄약을 생산하는 공장. 작업 세분화를 통해 상위 무기를 빠르게 생산할 수 있게 됐다. 수작업이 가능한 팰이 필요하다."
+  },
+  "Wire_Fence": {
+    "localized_name": "-",
+    "description": null
   },
   "Wood_Gate": {
     "localized_name": "나무 문",
@@ -1167,6 +1227,10 @@
     "localized_name": "창문 딸린 나무 벽",
     "description": "토대 위에 짓는 창문이 딸린 침입자 방지용 벽. 나무로 만들어서 약하다."
   },
+  "WoodenBarricade": {
+    "localized_name": "-",
+    "description": null
+  },
   "Wooden_DoorWall": {
     "localized_name": "나무 문",
     "description": "토대 위에 짓는 입구용 문. 나무로 만들어서 약하다."
@@ -1178,6 +1242,10 @@
   "Wooden_ladder": {
     "localized_name": "사다리",
     "description": "조금 높은 곳에 올라갈 때 활용하는 사다리."
+  },
+  "Wooden_pillar": {
+    "localized_name": "나무 기둥",
+    "description": "식물을 지탱하기 위해 세우는 기둥. 나무로 만들어서 약하다."
   },
   "Wooden_roof": {
     "localized_name": "나무 지붕",

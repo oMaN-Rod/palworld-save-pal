@@ -39,10 +39,6 @@
     "localized_name": "Poison Shower",
     "description": "Focuses energy into the body and scatters poison orbs in all directions."
   },
-  "EPalWazaID::ChaosLaser": {
-    "localized_name": "Chaos Laser",
-    "description": "Charge the power of chaos, Fires a beam of light and darkness at the enemy at the same time."
-  },
   "EPalWazaID::ChargeCanon": {
     "localized_name": "Charge Cannon",
     "description": "Fires an energy orb infused with draconic power at the enemy. The orb causes a wide-area explosion upon impact."
@@ -167,6 +163,10 @@
     "localized_name": "Grass Tornado",
     "description": "Generates two tornadoes on either side before launching them at an enemy."
   },
+  "EPalWazaID::GravityShot": {
+    "localized_name": "Dark Shot",
+    "description": "Fires a dark energy projectile that accelerates over time."
+  },
   "EPalWazaID::HolyBlast": {
     "localized_name": "Holy Burst",
     "description": "Creates a wide explosion of light at the enemy's location and around it."
@@ -268,7 +268,7 @@
     "description": "Shoots countless wind swords that fly straight towards the enemy."
   },
   "EPalWazaID::Railbolt": {
-    "localized_name": "Railbolt",
+    "localized_name": "Thunder Rail",
     "description": "Charge the power of lightning to the limit and fires multiple simultaneous electric shocks at the enemy."
   },
   "EPalWazaID::RangeThunder": {
@@ -371,6 +371,10 @@
     "localized_name": "Thunder Rain",
     "description": "Calls lightning that strikes an enemy after a set amount of time has passed."
   },
+  "EPalWazaID::ThunderSpear": {
+    "localized_name": "Thunder Spear",
+    "description": "Fires a high-speed lightning spear straight ahead towards the enemy."
+  },
   "EPalWazaID::ThunderStorm": {
     "localized_name": "Thunderstorm",
     "description": "Generates a huge tornado of lightning that moves slowly towards the enemy."
@@ -386,10 +390,6 @@
   "EPalWazaID::TriSpark": {
     "localized_name": "TriSpark",
     "description": "A high-speed lightning ball that flies in a straight line. Simultaneously fires slow lightning balls that track the enemy."
-  },
-  "EPalWazaID::TripleCannon": {
-    "localized_name": "Triple Cannon",
-    "description": "An energy bullet filled with the power of a dragon. Fires 3 shots in a row at the enemy."
   },
   "EPalWazaID::Unique_Alpaca_Tackle": {
     "localized_name": "Fluffy Tackle",

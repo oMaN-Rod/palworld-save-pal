@@ -1464,6 +1464,25 @@
     "damage": 560,
     "disabled": false
   },
+  "AssaultRifle_NPC": {
+    "group": "Weapon",
+    "type_a": "Weapon",
+    "type_b": "WeaponAssaultRifle",
+    "rank": 99,
+    "rarity": 0,
+    "max_stack_count": 1,
+    "weight": 99999.0,
+    "price": 10,
+    "sort_id": 9999,
+    "icon": "t_itemicon_weapon_assaultrifle_default1",
+    "dynamic": {
+      "type": "weapon",
+      "magazine_size": 15,
+      "passive_skills": []
+    },
+    "damage": 140,
+    "disabled": true
+  },
   "AutoMealPouch_Tier1": {
     "group": "KeyItem",
     "type_a": "Essential",
@@ -1939,6 +1958,24 @@
     "corruption_factor": 0.027777778,
     "disabled": false
   },
+  "BelieverFatCane": {
+    "group": "Weapon",
+    "type_a": "Weapon",
+    "type_b": "WeaponMelee",
+    "rank": 1,
+    "rarity": 0,
+    "max_stack_count": 1,
+    "weight": 99999.0,
+    "price": 10,
+    "sort_id": 9999,
+    "icon": "t_itemicon_weapon_bat",
+    "dynamic": {
+      "type": "weapon",
+      "passive_skills": []
+    },
+    "damage": 100,
+    "disabled": true
+  },
   "Berries": {
     "group": "Food",
     "type_a": "Food",
@@ -1979,6 +2016,19 @@
     "sort_id": 5300,
     "icon": "t_itemicon_material_berryseeds",
     "disabled": false
+  },
+  "BlueprintTest": {
+    "group": "Common",
+    "type_a": "Blueprint",
+    "type_b": "Blueprint",
+    "rank": 1,
+    "rarity": 0,
+    "max_stack_count": 9999,
+    "weight": 0.0,
+    "price": 10000,
+    "sort_id": 9999,
+    "icon": "t_itemicon_material_leather",
+    "disabled": true
   },
   "Blueprint_AssaultRifle_Default2": {
     "group": "Common",
@@ -7536,6 +7586,25 @@
     "damage": 490,
     "disabled": false
   },
+  "BowGun_NPC": {
+    "group": "Weapon",
+    "type_a": "Weapon",
+    "type_b": "WeaponCrossbow",
+    "rank": 99,
+    "rarity": 0,
+    "max_stack_count": 1,
+    "weight": 99999.0,
+    "price": 10,
+    "sort_id": 9999,
+    "icon": "t_itemicon_weapon_weakerbow",
+    "dynamic": {
+      "type": "weapon",
+      "magazine_size": 1,
+      "passive_skills": []
+    },
+    "damage": 200,
+    "disabled": true
+  },
   "BowGun_Poison": {
     "group": "Weapon",
     "type_a": "Weapon",
@@ -7776,7 +7845,7 @@
     "max_stack_count": 9999,
     "weight": 1.0,
     "price": 50,
-    "sort_id": 4078,
+    "sort_id": 4079,
     "icon": "t_itemicon_food_carrot",
     "corruption_factor": 0.037037037,
     "disabled": false
@@ -7834,6 +7903,26 @@
     "icon": "t_itemicon_material_charcoal",
     "disabled": false
   },
+  "ChargeLaserRifle": {
+    "group": "Weapon",
+    "type_a": "Weapon",
+    "type_b": "WeaponAssaultRifle",
+    "rank": 3,
+    "rarity": 1,
+    "max_stack_count": 1,
+    "weight": 20.0,
+    "price": 37600,
+    "sort_id": 511,
+    "icon": "t_itemicon_weapon_singleshotrifle",
+    "dynamic": {
+      "type": "weapon",
+      "durability": 2000,
+      "magazine_size": 8,
+      "passive_skills": []
+    },
+    "damage": 1650,
+    "disabled": false
+  },
   "CheeseBurger": {
     "group": "Food",
     "type_a": "Food",
@@ -7843,7 +7932,7 @@
     "max_stack_count": 9999,
     "weight": 0.3,
     "price": 3400,
-    "sort_id": 4002,
+    "sort_id": 9999,
     "icon": "t_itemicon_food_cheeseburger",
     "corruption_factor": 0.027777778,
     "disabled": false,
@@ -8967,6 +9056,215 @@
     "corruption_factor": 0.027777778,
     "disabled": false
   },
+  "Debug_Handgun_AttackUp": {
+    "group": "Weapon",
+    "type_a": "Weapon",
+    "type_b": "WeaponHandgun",
+    "rank": 999,
+    "rarity": 0,
+    "max_stack_count": 1,
+    "weight": 1.0,
+    "price": 10,
+    "sort_id": 9999,
+    "icon": "t_icon_assault_rifle_ui_debug_attackup",
+    "dynamic": {
+      "type": "weapon",
+      "magazine_size": 100,
+      "passive_skills": []
+    },
+    "damage": 1,
+    "disabled": true
+  },
+  "Debug_Handgun_Burn": {
+    "group": "Weapon",
+    "type_a": "Weapon",
+    "type_b": "WeaponHandgun",
+    "rank": 999,
+    "rarity": 0,
+    "max_stack_count": 1,
+    "weight": 1.0,
+    "price": 10,
+    "sort_id": 9999,
+    "icon": "t_icon_hund_gun_ui_debug_burn",
+    "dynamic": {
+      "type": "weapon",
+      "magazine_size": 100,
+      "passive_skills": []
+    },
+    "damage": 1,
+    "disabled": true
+  },
+  "Debug_Handgun_Darkness": {
+    "group": "Weapon",
+    "type_a": "Weapon",
+    "type_b": "WeaponHandgun",
+    "rank": 999,
+    "rarity": 0,
+    "max_stack_count": 1,
+    "weight": 1.0,
+    "price": 10,
+    "sort_id": 9999,
+    "icon": "t_icon_hund_gun_ui_debug_darkness",
+    "dynamic": {
+      "type": "weapon",
+      "magazine_size": 100,
+      "passive_skills": []
+    },
+    "damage": 1,
+    "disabled": true
+  },
+  "Debug_Handgun_DefenseUp": {
+    "group": "Weapon",
+    "type_a": "Weapon",
+    "type_b": "WeaponHandgun",
+    "rank": 999,
+    "rarity": 0,
+    "max_stack_count": 1,
+    "weight": 1.0,
+    "price": 10,
+    "sort_id": 9999,
+    "icon": "t_icon_assault_rifle_ui_debug_defenseup",
+    "dynamic": {
+      "type": "weapon",
+      "magazine_size": 100,
+      "passive_skills": []
+    },
+    "damage": 1,
+    "disabled": true
+  },
+  "Debug_Handgun_Electrical": {
+    "group": "Weapon",
+    "type_a": "Weapon",
+    "type_b": "WeaponHandgun",
+    "rank": 999,
+    "rarity": 0,
+    "max_stack_count": 1,
+    "weight": 1.0,
+    "price": 10,
+    "sort_id": 9999,
+    "icon": "t_icon_hund_gun_ui_debug_electrical",
+    "dynamic": {
+      "type": "weapon",
+      "magazine_size": 100,
+      "passive_skills": []
+    },
+    "damage": 1,
+    "disabled": true
+  },
+  "Debug_Handgun_Freeze": {
+    "group": "Weapon",
+    "type_a": "Weapon",
+    "type_b": "WeaponHandgun",
+    "rank": 999,
+    "rarity": 0,
+    "max_stack_count": 1,
+    "weight": 1.0,
+    "price": 10,
+    "sort_id": 9999,
+    "icon": "t_icon_hund_gun_ui_debug_freeze",
+    "dynamic": {
+      "type": "weapon",
+      "magazine_size": 100,
+      "passive_skills": []
+    },
+    "damage": 1,
+    "disabled": true
+  },
+  "Debug_Handgun_IvyCling": {
+    "group": "Weapon",
+    "type_a": "Weapon",
+    "type_b": "WeaponHandgun",
+    "rank": 999,
+    "rarity": 0,
+    "max_stack_count": 1,
+    "weight": 1.0,
+    "price": 10,
+    "sort_id": 9999,
+    "icon": "t_icon_hund_gun_ui_debug_ivycling",
+    "dynamic": {
+      "type": "weapon",
+      "magazine_size": 100,
+      "passive_skills": []
+    },
+    "damage": 1,
+    "disabled": true
+  },
+  "Debug_Handgun_Muddy": {
+    "group": "Weapon",
+    "type_a": "Weapon",
+    "type_b": "WeaponHandgun",
+    "rank": 999,
+    "rarity": 0,
+    "max_stack_count": 1,
+    "weight": 1.0,
+    "price": 10,
+    "sort_id": 9999,
+    "icon": "t_icon_hund_gun_ui_debug_muddy",
+    "dynamic": {
+      "type": "weapon",
+      "magazine_size": 100,
+      "passive_skills": []
+    },
+    "damage": 1,
+    "disabled": true
+  },
+  "Debug_Handgun_Poison": {
+    "group": "Weapon",
+    "type_a": "Weapon",
+    "type_b": "WeaponHandgun",
+    "rank": 999,
+    "rarity": 0,
+    "max_stack_count": 1,
+    "weight": 1.0,
+    "price": 10,
+    "sort_id": 9999,
+    "icon": "t_icon_hund_gun_ui_debug_poison",
+    "dynamic": {
+      "type": "weapon",
+      "magazine_size": 100,
+      "passive_skills": []
+    },
+    "damage": 1,
+    "disabled": true
+  },
+  "Debug_Handgun_Stun": {
+    "group": "Weapon",
+    "type_a": "Weapon",
+    "type_b": "WeaponHandgun",
+    "rank": 999,
+    "rarity": 0,
+    "max_stack_count": 1,
+    "weight": 1.0,
+    "price": 10,
+    "sort_id": 9999,
+    "icon": "t_icon_hund_gun_ui_debug_stun",
+    "dynamic": {
+      "type": "weapon",
+      "magazine_size": 100,
+      "passive_skills": []
+    },
+    "damage": 1,
+    "disabled": true
+  },
+  "Debug_Handgun_Wetness": {
+    "group": "Weapon",
+    "type_a": "Weapon",
+    "type_b": "WeaponHandgun",
+    "rank": 999,
+    "rarity": 0,
+    "max_stack_count": 1,
+    "weight": 1.0,
+    "price": 10,
+    "sort_id": 9999,
+    "icon": "t_icon_hund_gun_ui_debug_wetness",
+    "dynamic": {
+      "type": "weapon",
+      "magazine_size": 100,
+      "passive_skills": []
+    },
+    "damage": 1,
+    "disabled": true
+  },
   "DecalGun_1": {
     "group": "Weapon",
     "type_a": "Weapon",
@@ -9557,6 +9855,26 @@
     "damage": 13000,
     "disabled": false
   },
+  "EnergyShotgun": {
+    "group": "Weapon",
+    "type_a": "Weapon",
+    "type_b": "WeaponShotgun",
+    "rank": 3,
+    "rarity": 0,
+    "max_stack_count": 1,
+    "weight": 20.0,
+    "price": 153600,
+    "sort_id": 420,
+    "icon": "t_itemicon_weapon_pumpactionshotgun",
+    "dynamic": {
+      "type": "weapon",
+      "durability": 150,
+      "magazine_size": 8,
+      "passive_skills": []
+    },
+    "damage": 220,
+    "disabled": false
+  },
   "ExpBoost_01": {
     "group": "Common",
     "type_a": "Consume",
@@ -9742,6 +10060,25 @@
     },
     "disabled": false
   },
+  "FishingRod_Test": {
+    "group": "Weapon",
+    "type_a": "Weapon",
+    "type_b": "WeaponMelee",
+    "rank": 1,
+    "rarity": 0,
+    "max_stack_count": 1,
+    "weight": 5.0,
+    "price": 80,
+    "sort_id": 9999,
+    "icon": "t_itemicon_weapon_bat",
+    "dynamic": {
+      "type": "weapon",
+      "durability": 150,
+      "passive_skills": []
+    },
+    "damage": 25,
+    "disabled": true
+  },
   "FlameThrower": {
     "group": "Weapon",
     "type_a": "Weapon",
@@ -9759,7 +10096,7 @@
       "magazine_size": 100,
       "passive_skills": []
     },
-    "damage": 450,
+    "damage": 636,
     "disabled": false
   },
   "FlameThrower_2": {
@@ -9779,7 +10116,7 @@
       "magazine_size": 100,
       "passive_skills": []
     },
-    "damage": 517,
+    "damage": 731,
     "disabled": false
   },
   "FlameThrower_3": {
@@ -9799,7 +10136,7 @@
       "magazine_size": 100,
       "passive_skills": []
     },
-    "damage": 562,
+    "damage": 795,
     "disabled": false
   },
   "FlameThrower_4": {
@@ -9819,7 +10156,7 @@
       "magazine_size": 100,
       "passive_skills": []
     },
-    "damage": 607,
+    "damage": 858,
     "disabled": false
   },
   "FlameThrower_5": {
@@ -9839,8 +10176,27 @@
       "magazine_size": 100,
       "passive_skills": []
     },
-    "damage": 675,
+    "damage": 954,
     "disabled": false
+  },
+  "FlameThrower_NPC": {
+    "group": "Weapon",
+    "type_a": "Weapon",
+    "type_b": "WeaponFlameThrower",
+    "rank": 99,
+    "rarity": 0,
+    "max_stack_count": 1,
+    "weight": 99999.0,
+    "price": 10,
+    "sort_id": 9999,
+    "icon": "t_itemicon_weapon_flamethrower_default",
+    "dynamic": {
+      "type": "weapon",
+      "magazine_size": 3,
+      "passive_skills": []
+    },
+    "damage": 10,
+    "disabled": true
   },
   "FlamethrowerBullet": {
     "group": "Common",
@@ -9980,6 +10336,25 @@
     "icon": "t_itemicon_weapon_fraggrenade_leaf",
     "damage": 750,
     "disabled": false
+  },
+  "FragGrenade_NPC": {
+    "group": "Weapon",
+    "type_a": "Weapon",
+    "type_b": "WeaponThrowObject",
+    "rank": 99,
+    "rarity": 0,
+    "max_stack_count": 1,
+    "weight": 99999.0,
+    "price": 10,
+    "sort_id": 9999,
+    "icon": "t_itemicon_weapon_flamethrower_default",
+    "dynamic": {
+      "type": "weapon",
+      "magazine_size": 100,
+      "passive_skills": []
+    },
+    "damage": 300,
+    "disabled": true
   },
   "FragGrenade_Super": {
     "group": "Weapon",
@@ -10817,6 +11192,25 @@
     "damage": 562,
     "disabled": false
   },
+  "GatlingGun_NPC": {
+    "group": "Weapon",
+    "type_a": "Weapon",
+    "type_b": "WeaponGatlingGun",
+    "rank": 99,
+    "rarity": 0,
+    "max_stack_count": 1,
+    "weight": 99999.0,
+    "price": 10,
+    "sort_id": 9999,
+    "icon": "t_itemicon_weapon_flamethrower_default",
+    "dynamic": {
+      "type": "weapon",
+      "magazine_size": 100,
+      "passive_skills": []
+    },
+    "damage": 10,
+    "disabled": true
+  },
   "GenghisKhan": {
     "group": "Food",
     "type_a": "Food",
@@ -10872,7 +11266,7 @@
     "max_stack_count": 1,
     "weight": 25.0,
     "price": 45200,
-    "sort_id": 3003,
+    "sort_id": 9999,
     "icon": "t_itemicon_glider_glider_legendary",
     "dynamic": {
       "type": "armor",
@@ -10929,7 +11323,7 @@
       "type": "armor",
       "passive_skills": []
     },
-    "disabled": false
+    "disabled": true
   },
   "Grape": {
     "group": "Food",
@@ -10960,7 +11354,7 @@
       "type": "weapon",
       "passive_skills": []
     },
-    "disabled": false
+    "disabled": true
   },
   "GrapplingGun2": {
     "group": "Weapon",
@@ -10977,7 +11371,7 @@
       "type": "weapon",
       "passive_skills": []
     },
-    "disabled": false
+    "disabled": true
   },
   "GrapplingGun3": {
     "group": "Weapon",
@@ -10994,7 +11388,7 @@
       "type": "weapon",
       "passive_skills": []
     },
-    "disabled": false
+    "disabled": true
   },
   "GrapplingGun4": {
     "group": "Weapon",
@@ -11011,7 +11405,7 @@
       "type": "weapon",
       "passive_skills": []
     },
-    "disabled": false
+    "disabled": true
   },
   "Gratin": {
     "group": "Food",
@@ -11154,6 +11548,25 @@
     },
     "damage": 4500,
     "disabled": false
+  },
+  "GrenadeLauncher_NPC": {
+    "group": "Weapon",
+    "type_a": "Weapon",
+    "type_b": "WeaponRocketLauncher",
+    "rank": 99,
+    "rarity": 0,
+    "max_stack_count": 1,
+    "weight": 99999.0,
+    "price": 10,
+    "sort_id": 9999,
+    "icon": "t_itemicon_weapon_flamethrower_default",
+    "dynamic": {
+      "type": "weapon",
+      "magazine_size": 1,
+      "passive_skills": []
+    },
+    "damage": 3000,
+    "disabled": true
   },
   "GrilledFish": {
     "group": "Food",
@@ -11532,6 +11945,25 @@
     "sort_id": 21,
     "icon": "t_itemicon_ammo_handgunbullet",
     "disabled": false
+  },
+  "Handgun_NPC": {
+    "group": "Weapon",
+    "type_a": "Weapon",
+    "type_b": "WeaponHandgun",
+    "rank": 99,
+    "rarity": 0,
+    "max_stack_count": 1,
+    "weight": 99999.0,
+    "price": 10,
+    "sort_id": 9999,
+    "icon": "t_itemicon_weapon_handgun_default",
+    "dynamic": {
+      "type": "weapon",
+      "magazine_size": 7,
+      "passive_skills": []
+    },
+    "damage": 80,
+    "disabled": true
   },
   "Head001": {
     "group": "Head",
@@ -14084,7 +14516,7 @@
     "max_stack_count": 9999,
     "weight": 0.2,
     "price": 250,
-    "sort_id": 4077,
+    "sort_id": 4078,
     "icon": "t_itemicon_food_honey",
     "disabled": false
   },
@@ -14674,6 +15106,24 @@
     "damage": 525,
     "disabled": false
   },
+  "Katana_NPC": {
+    "group": "Weapon",
+    "type_a": "Weapon",
+    "type_b": "WeaponMelee",
+    "rank": 1,
+    "rarity": 0,
+    "max_stack_count": 1,
+    "weight": 99999.0,
+    "price": 10,
+    "sort_id": 9999,
+    "icon": "t_itemicon_weapon_bat",
+    "dynamic": {
+      "type": "weapon",
+      "passive_skills": []
+    },
+    "damage": 100,
+    "disabled": true
+  },
   "Lantern": {
     "group": "KeyItem",
     "type_a": "Essential",
@@ -14913,6 +15363,25 @@
     "damage": 1875,
     "disabled": false
   },
+  "LaserRifle_NPC": {
+    "group": "Weapon",
+    "type_a": "Weapon",
+    "type_b": "WeaponAssaultRifle",
+    "rank": 99,
+    "rarity": 0,
+    "max_stack_count": 1,
+    "weight": 99999.0,
+    "price": 10,
+    "sort_id": 9999,
+    "icon": "t_itemicon_weapon_handgun_default",
+    "dynamic": {
+      "type": "weapon",
+      "magazine_size": 7,
+      "passive_skills": []
+    },
+    "damage": 100,
+    "disabled": true
+  },
   "Launcher_Default": {
     "group": "Weapon",
     "type_a": "Weapon",
@@ -15068,7 +15537,7 @@
     "max_stack_count": 9999,
     "weight": 1.0,
     "price": 150,
-    "sort_id": 4073,
+    "sort_id": 4074,
     "icon": "t_itemicon_food_lettuce",
     "corruption_factor": 0.16666667,
     "disabled": false
@@ -15751,6 +16220,19 @@
       ]
     }
   },
+  "MeaninglessItem_ButcheringImportPal": {
+    "group": "Common",
+    "type_a": "Material",
+    "type_b": "MaterialMonster",
+    "rank": 0,
+    "rarity": 0,
+    "max_stack_count": 99999999,
+    "weight": 0.0,
+    "price": 10,
+    "sort_id": 2217,
+    "icon": "t_itemicon_material_butcheringimportpal",
+    "disabled": false
+  },
   "Meat": {
     "group": "Food",
     "type_a": "Food",
@@ -16085,7 +16567,7 @@
     "max_stack_count": 9999,
     "weight": 1.5,
     "price": 50,
-    "sort_id": 4075,
+    "sort_id": 4076,
     "icon": "t_itemicon_food_milk",
     "corruption_factor": 0.16666667,
     "disabled": false
@@ -16139,6 +16621,25 @@
     "sort_id": 30,
     "icon": "t_itemicon_ammo_missilebullet",
     "disabled": false
+  },
+  "MissileLauncher_NPC": {
+    "group": "Weapon",
+    "type_a": "Weapon",
+    "type_b": "WeaponRocketLauncher",
+    "rank": 99,
+    "rarity": 0,
+    "max_stack_count": 1,
+    "weight": 99999.0,
+    "price": 10,
+    "sort_id": 9999,
+    "icon": "t_itemicon_weapon_flamethrower_default",
+    "dynamic": {
+      "type": "weapon",
+      "magazine_size": 1,
+      "passive_skills": []
+    },
+    "damage": 1600,
+    "disabled": true
   },
   "Money": {
     "group": "Common",
@@ -16275,7 +16776,7 @@
     "max_stack_count": 9999,
     "weight": 1.0,
     "price": 50,
-    "sort_id": 4074,
+    "sort_id": 4075,
     "icon": "t_itemicon_food_mushroom",
     "corruption_factor": 0.11111111,
     "disabled": false
@@ -16652,7 +17153,7 @@
     "max_stack_count": 9999,
     "weight": 1.0,
     "price": 50,
-    "sort_id": 4079,
+    "sort_id": 4080,
     "icon": "t_itemicon_food_onion",
     "corruption_factor": 0.037037037,
     "disabled": false
@@ -16698,6 +17199,747 @@
       ]
     }
   },
+  "Otomo_Attack_up1": {
+    "group": "Accessory",
+    "type_a": "Accessory",
+    "type_b": "Accessory",
+    "rank": 8,
+    "rarity": 0,
+    "max_stack_count": 1,
+    "weight": 2.0,
+    "price": 1000,
+    "sort_id": 2207,
+    "icon": "Accessory_Otomo_Attack_up",
+    "dynamic": {
+      "type": "armor",
+      "passive_skills": [
+        "Attack_ACC_up1_Otomo_Only_Equip"
+      ]
+    },
+    "disabled": true
+  },
+  "Otomo_Attack_up2": {
+    "group": "Accessory",
+    "type_a": "Accessory",
+    "type_b": "Accessory",
+    "rank": 8,
+    "rarity": 1,
+    "max_stack_count": 1,
+    "weight": 2.0,
+    "price": 1000,
+    "sort_id": 2208,
+    "icon": "Accessory_Otomo_Attack_up",
+    "dynamic": {
+      "type": "armor",
+      "passive_skills": [
+        "Attack_ACC_up2_Otomo_Only_Equip"
+      ]
+    },
+    "disabled": true
+  },
+  "Otomo_Attack_up3": {
+    "group": "Accessory",
+    "type_a": "Accessory",
+    "type_b": "Accessory",
+    "rank": 8,
+    "rarity": 2,
+    "max_stack_count": 1,
+    "weight": 2.0,
+    "price": 1000,
+    "sort_id": 2209,
+    "icon": "Accessory_Otomo_Attack_up",
+    "dynamic": {
+      "type": "armor",
+      "passive_skills": [
+        "Attack_ACC_up3_Otomo_Only_Equip"
+      ]
+    },
+    "disabled": true
+  },
+  "Otomo_Defense_up1": {
+    "group": "Accessory",
+    "type_a": "Accessory",
+    "type_b": "Accessory",
+    "rank": 8,
+    "rarity": 0,
+    "max_stack_count": 1,
+    "weight": 2.0,
+    "price": 1000,
+    "sort_id": 2210,
+    "icon": "Accessory_Otomo_Defense_up",
+    "dynamic": {
+      "type": "armor",
+      "passive_skills": [
+        "Defense_ACC_up1_Otomo_Only_Equip"
+      ]
+    },
+    "disabled": true
+  },
+  "Otomo_Defense_up2": {
+    "group": "Accessory",
+    "type_a": "Accessory",
+    "type_b": "Accessory",
+    "rank": 8,
+    "rarity": 1,
+    "max_stack_count": 1,
+    "weight": 2.0,
+    "price": 1000,
+    "sort_id": 2211,
+    "icon": "Accessory_Otomo_Defense_up",
+    "dynamic": {
+      "type": "armor",
+      "passive_skills": [
+        "Defense_ACC_up2_Otomo_Only_Equip"
+      ]
+    },
+    "disabled": true
+  },
+  "Otomo_Defense_up3": {
+    "group": "Accessory",
+    "type_a": "Accessory",
+    "type_b": "Accessory",
+    "rank": 8,
+    "rarity": 2,
+    "max_stack_count": 1,
+    "weight": 2.0,
+    "price": 1000,
+    "sort_id": 2212,
+    "icon": "Accessory_Otomo_Defense_up",
+    "dynamic": {
+      "type": "armor",
+      "passive_skills": [
+        "Defense_ACC_up3_Otomo_Only_Equip"
+      ]
+    },
+    "disabled": true
+  },
+  "Otomo_ElementBoost_Dark_1": {
+    "group": "Accessory",
+    "type_a": "Accessory",
+    "type_b": "Accessory",
+    "rank": 8,
+    "rarity": 0,
+    "max_stack_count": 1,
+    "weight": 2.0,
+    "price": 1000,
+    "sort_id": 2187,
+    "icon": "Accessory_Otomo_ElementBoost_Dark",
+    "dynamic": {
+      "type": "armor",
+      "passive_skills": [
+        "ElementBoost_Dark_1_Otomo_Only_Equip"
+      ]
+    },
+    "disabled": true
+  },
+  "Otomo_ElementBoost_Dark_2": {
+    "group": "Accessory",
+    "type_a": "Accessory",
+    "type_b": "Accessory",
+    "rank": 8,
+    "rarity": 1,
+    "max_stack_count": 1,
+    "weight": 2.0,
+    "price": 1000,
+    "sort_id": 2196,
+    "icon": "Accessory_Otomo_ElementBoost_Dark",
+    "dynamic": {
+      "type": "armor",
+      "passive_skills": [
+        "ElementBoost_Dark_2_Otomo_Only_Equip"
+      ]
+    },
+    "disabled": true
+  },
+  "Otomo_ElementBoost_Dark_3": {
+    "group": "Accessory",
+    "type_a": "Accessory",
+    "type_b": "Accessory",
+    "rank": 8,
+    "rarity": 2,
+    "max_stack_count": 1,
+    "weight": 2.0,
+    "price": 1000,
+    "sort_id": 2205,
+    "icon": "Accessory_Otomo_ElementBoost_Dark",
+    "dynamic": {
+      "type": "armor",
+      "passive_skills": [
+        "ElementBoost_Dark_3_Otomo_Only_Equip"
+      ]
+    },
+    "disabled": true
+  },
+  "Otomo_ElementBoost_Dragon_1": {
+    "group": "Accessory",
+    "type_a": "Accessory",
+    "type_b": "Accessory",
+    "rank": 8,
+    "rarity": 0,
+    "max_stack_count": 1,
+    "weight": 2.0,
+    "price": 1000,
+    "sort_id": 2188,
+    "icon": "Accessory_Otomo_ElementBoost_Dragon",
+    "dynamic": {
+      "type": "armor",
+      "passive_skills": [
+        "ElementBoost_Dragon_1_Otomo_Only_Equip"
+      ]
+    },
+    "disabled": true
+  },
+  "Otomo_ElementBoost_Dragon_2": {
+    "group": "Accessory",
+    "type_a": "Accessory",
+    "type_b": "Accessory",
+    "rank": 8,
+    "rarity": 1,
+    "max_stack_count": 1,
+    "weight": 2.0,
+    "price": 1000,
+    "sort_id": 2197,
+    "icon": "Accessory_Otomo_ElementBoost_Dragon",
+    "dynamic": {
+      "type": "armor",
+      "passive_skills": [
+        "ElementBoost_Dragon_2_Otomo_Only_Equip"
+      ]
+    },
+    "disabled": true
+  },
+  "Otomo_ElementBoost_Dragon_3": {
+    "group": "Accessory",
+    "type_a": "Accessory",
+    "type_b": "Accessory",
+    "rank": 8,
+    "rarity": 2,
+    "max_stack_count": 1,
+    "weight": 2.0,
+    "price": 1000,
+    "sort_id": 2206,
+    "icon": "Accessory_Otomo_ElementBoost_Dragon",
+    "dynamic": {
+      "type": "armor",
+      "passive_skills": [
+        "ElementBoost_Dragon_3_Otomo_Only_Equip"
+      ]
+    },
+    "disabled": true
+  },
+  "Otomo_ElementBoost_Earth_1": {
+    "group": "Accessory",
+    "type_a": "Accessory",
+    "type_b": "Accessory",
+    "rank": 8,
+    "rarity": 0,
+    "max_stack_count": 1,
+    "weight": 2.0,
+    "price": 1000,
+    "sort_id": 2186,
+    "icon": "Accessory_Otomo_ElementBoost_Earth",
+    "dynamic": {
+      "type": "armor",
+      "passive_skills": [
+        "ElementBoost_Earth_1_Otomo_Only_Equip"
+      ]
+    },
+    "disabled": true
+  },
+  "Otomo_ElementBoost_Earth_2": {
+    "group": "Accessory",
+    "type_a": "Accessory",
+    "type_b": "Accessory",
+    "rank": 8,
+    "rarity": 1,
+    "max_stack_count": 1,
+    "weight": 2.0,
+    "price": 1000,
+    "sort_id": 2195,
+    "icon": "Accessory_Otomo_ElementBoost_Earth",
+    "dynamic": {
+      "type": "armor",
+      "passive_skills": [
+        "ElementBoost_Earth_2_Otomo_Only_Equip"
+      ]
+    },
+    "disabled": true
+  },
+  "Otomo_ElementBoost_Earth_3": {
+    "group": "Accessory",
+    "type_a": "Accessory",
+    "type_b": "Accessory",
+    "rank": 8,
+    "rarity": 2,
+    "max_stack_count": 1,
+    "weight": 2.0,
+    "price": 1000,
+    "sort_id": 2204,
+    "icon": "Accessory_Otomo_ElementBoost_Earth",
+    "dynamic": {
+      "type": "armor",
+      "passive_skills": [
+        "ElementBoost_Earth_3_Otomo_Only_Equip"
+      ]
+    },
+    "disabled": true
+  },
+  "Otomo_ElementBoost_Electricity_1": {
+    "group": "Accessory",
+    "type_a": "Accessory",
+    "type_b": "Accessory",
+    "rank": 8,
+    "rarity": 0,
+    "max_stack_count": 1,
+    "weight": 2.0,
+    "price": 1000,
+    "sort_id": 2183,
+    "icon": "Accessory_Otomo_ElementBoost_Electricity",
+    "dynamic": {
+      "type": "armor",
+      "passive_skills": [
+        "ElementBoost_Electricity_1_Otomo_Only_Equip"
+      ]
+    },
+    "disabled": true
+  },
+  "Otomo_ElementBoost_Electricity_2": {
+    "group": "Accessory",
+    "type_a": "Accessory",
+    "type_b": "Accessory",
+    "rank": 8,
+    "rarity": 1,
+    "max_stack_count": 1,
+    "weight": 2.0,
+    "price": 1000,
+    "sort_id": 2192,
+    "icon": "Accessory_Otomo_ElementBoost_Electricity",
+    "dynamic": {
+      "type": "armor",
+      "passive_skills": [
+        "ElementBoost_Electricity_2_Otomo_Only_Equip"
+      ]
+    },
+    "disabled": true
+  },
+  "Otomo_ElementBoost_Electricity_3": {
+    "group": "Accessory",
+    "type_a": "Accessory",
+    "type_b": "Accessory",
+    "rank": 8,
+    "rarity": 2,
+    "max_stack_count": 1,
+    "weight": 2.0,
+    "price": 1000,
+    "sort_id": 2201,
+    "icon": "Accessory_Otomo_ElementBoost_Electricity",
+    "dynamic": {
+      "type": "armor",
+      "passive_skills": [
+        "ElementBoost_Electricity_3_Otomo_Only_Equip"
+      ]
+    },
+    "disabled": true
+  },
+  "Otomo_ElementBoost_Fire_1": {
+    "group": "Accessory",
+    "type_a": "Accessory",
+    "type_b": "Accessory",
+    "rank": 8,
+    "rarity": 0,
+    "max_stack_count": 1,
+    "weight": 2.0,
+    "price": 1000,
+    "sort_id": 2181,
+    "icon": "Accessory_Otomo_ElementBoost_Fire",
+    "dynamic": {
+      "type": "armor",
+      "passive_skills": [
+        "ElementBoost_Fire_1_Otomo_Only_Equip"
+      ]
+    },
+    "disabled": true
+  },
+  "Otomo_ElementBoost_Fire_2": {
+    "group": "Accessory",
+    "type_a": "Accessory",
+    "type_b": "Accessory",
+    "rank": 8,
+    "rarity": 1,
+    "max_stack_count": 1,
+    "weight": 2.0,
+    "price": 1000,
+    "sort_id": 2190,
+    "icon": "Accessory_Otomo_ElementBoost_Fire",
+    "dynamic": {
+      "type": "armor",
+      "passive_skills": [
+        "ElementBoost_Fire_2_Otomo_Only_Equip"
+      ]
+    },
+    "disabled": true
+  },
+  "Otomo_ElementBoost_Fire_3": {
+    "group": "Accessory",
+    "type_a": "Accessory",
+    "type_b": "Accessory",
+    "rank": 8,
+    "rarity": 2,
+    "max_stack_count": 1,
+    "weight": 2.0,
+    "price": 1000,
+    "sort_id": 2199,
+    "icon": "Accessory_Otomo_ElementBoost_Fire",
+    "dynamic": {
+      "type": "armor",
+      "passive_skills": [
+        "ElementBoost_Fire_3_Otomo_Only_Equip"
+      ]
+    },
+    "disabled": true
+  },
+  "Otomo_ElementBoost_Ice_1": {
+    "group": "Accessory",
+    "type_a": "Accessory",
+    "type_b": "Accessory",
+    "rank": 8,
+    "rarity": 0,
+    "max_stack_count": 1,
+    "weight": 2.0,
+    "price": 1000,
+    "sort_id": 2185,
+    "icon": "Accessory_Otomo_ElementBoost_Ice",
+    "dynamic": {
+      "type": "armor",
+      "passive_skills": [
+        "ElementBoost_Ice_1_Otomo_Only_Equip"
+      ]
+    },
+    "disabled": true
+  },
+  "Otomo_ElementBoost_Ice_2": {
+    "group": "Accessory",
+    "type_a": "Accessory",
+    "type_b": "Accessory",
+    "rank": 8,
+    "rarity": 1,
+    "max_stack_count": 1,
+    "weight": 2.0,
+    "price": 1000,
+    "sort_id": 2194,
+    "icon": "Accessory_Otomo_ElementBoost_Ice",
+    "dynamic": {
+      "type": "armor",
+      "passive_skills": [
+        "ElementBoost_Ice_2_Otomo_Only_Equip"
+      ]
+    },
+    "disabled": true
+  },
+  "Otomo_ElementBoost_Ice_3": {
+    "group": "Accessory",
+    "type_a": "Accessory",
+    "type_b": "Accessory",
+    "rank": 8,
+    "rarity": 2,
+    "max_stack_count": 1,
+    "weight": 2.0,
+    "price": 1000,
+    "sort_id": 2203,
+    "icon": "Accessory_Otomo_ElementBoost_Ice",
+    "dynamic": {
+      "type": "armor",
+      "passive_skills": [
+        "ElementBoost_Ice_3_Otomo_Only_Equip"
+      ]
+    },
+    "disabled": true
+  },
+  "Otomo_ElementBoost_Leaf_1": {
+    "group": "Accessory",
+    "type_a": "Accessory",
+    "type_b": "Accessory",
+    "rank": 8,
+    "rarity": 0,
+    "max_stack_count": 1,
+    "weight": 2.0,
+    "price": 1000,
+    "sort_id": 2184,
+    "icon": "Accessory_Otomo_ElementBoost_Leaf",
+    "dynamic": {
+      "type": "armor",
+      "passive_skills": [
+        "ElementBoost_Leaf_1_Otomo_Only_Equip"
+      ]
+    },
+    "disabled": true
+  },
+  "Otomo_ElementBoost_Leaf_2": {
+    "group": "Accessory",
+    "type_a": "Accessory",
+    "type_b": "Accessory",
+    "rank": 8,
+    "rarity": 1,
+    "max_stack_count": 1,
+    "weight": 2.0,
+    "price": 1000,
+    "sort_id": 2193,
+    "icon": "Accessory_Otomo_ElementBoost_Leaf",
+    "dynamic": {
+      "type": "armor",
+      "passive_skills": [
+        "ElementBoost_Leaf_2_Otomo_Only_Equip"
+      ]
+    },
+    "disabled": true
+  },
+  "Otomo_ElementBoost_Leaf_3": {
+    "group": "Accessory",
+    "type_a": "Accessory",
+    "type_b": "Accessory",
+    "rank": 8,
+    "rarity": 2,
+    "max_stack_count": 1,
+    "weight": 2.0,
+    "price": 1000,
+    "sort_id": 2202,
+    "icon": "Accessory_Otomo_ElementBoost_Leaf",
+    "dynamic": {
+      "type": "armor",
+      "passive_skills": [
+        "ElementBoost_Leaf_3_Otomo_Only_Equip"
+      ]
+    },
+    "disabled": true
+  },
+  "Otomo_ElementBoost_Normal_1": {
+    "group": "Accessory",
+    "type_a": "Accessory",
+    "type_b": "Accessory",
+    "rank": 8,
+    "rarity": 0,
+    "max_stack_count": 1,
+    "weight": 2.0,
+    "price": 1000,
+    "sort_id": 2180,
+    "icon": "Accessory_Otomo_ElementBoost_Normal",
+    "dynamic": {
+      "type": "armor",
+      "passive_skills": [
+        "ElementBoost_Normal_1_Otomo_Only_Equip"
+      ]
+    },
+    "disabled": true
+  },
+  "Otomo_ElementBoost_Normal_2": {
+    "group": "Accessory",
+    "type_a": "Accessory",
+    "type_b": "Accessory",
+    "rank": 8,
+    "rarity": 1,
+    "max_stack_count": 1,
+    "weight": 2.0,
+    "price": 1000,
+    "sort_id": 2189,
+    "icon": "Accessory_Otomo_ElementBoost_Normal",
+    "dynamic": {
+      "type": "armor",
+      "passive_skills": [
+        "ElementBoost_Normal_2_Otomo_Only_Equip"
+      ]
+    },
+    "disabled": true
+  },
+  "Otomo_ElementBoost_Normal_3": {
+    "group": "Accessory",
+    "type_a": "Accessory",
+    "type_b": "Accessory",
+    "rank": 8,
+    "rarity": 2,
+    "max_stack_count": 1,
+    "weight": 2.0,
+    "price": 1000,
+    "sort_id": 2198,
+    "icon": "Accessory_Otomo_ElementBoost_Normal",
+    "dynamic": {
+      "type": "armor",
+      "passive_skills": [
+        "ElementBoost_Normal_3_Otomo_Only_Equip"
+      ]
+    },
+    "disabled": true
+  },
+  "Otomo_ElementBoost_Water_1": {
+    "group": "Accessory",
+    "type_a": "Accessory",
+    "type_b": "Accessory",
+    "rank": 8,
+    "rarity": 0,
+    "max_stack_count": 1,
+    "weight": 2.0,
+    "price": 1000,
+    "sort_id": 2182,
+    "icon": "Accessory_Otomo_ElementBoost_Water",
+    "dynamic": {
+      "type": "armor",
+      "passive_skills": [
+        "ElementBoost_Water_1_Otomo_Only_Equip"
+      ]
+    },
+    "disabled": true
+  },
+  "Otomo_ElementBoost_Water_2": {
+    "group": "Accessory",
+    "type_a": "Accessory",
+    "type_b": "Accessory",
+    "rank": 8,
+    "rarity": 1,
+    "max_stack_count": 1,
+    "weight": 2.0,
+    "price": 1000,
+    "sort_id": 2191,
+    "icon": "Accessory_Otomo_ElementBoost_Water",
+    "dynamic": {
+      "type": "armor",
+      "passive_skills": [
+        "ElementBoost_Water_2_Otomo_Only_Equip"
+      ]
+    },
+    "disabled": true
+  },
+  "Otomo_ElementBoost_Water_3": {
+    "group": "Accessory",
+    "type_a": "Accessory",
+    "type_b": "Accessory",
+    "rank": 8,
+    "rarity": 2,
+    "max_stack_count": 1,
+    "weight": 2.0,
+    "price": 1000,
+    "sort_id": 2200,
+    "icon": "Accessory_Otomo_ElementBoost_Water",
+    "dynamic": {
+      "type": "armor",
+      "passive_skills": [
+        "ElementBoost_Water_3_Otomo_Only_Equip"
+      ]
+    },
+    "disabled": true
+  },
+  "Otomo_MoveSpeed_up_1": {
+    "group": "Accessory",
+    "type_a": "Accessory",
+    "type_b": "Accessory",
+    "rank": 8,
+    "rarity": 0,
+    "max_stack_count": 1,
+    "weight": 2.0,
+    "price": 1000,
+    "sort_id": 2216,
+    "icon": "Accessory_Otomo_Exp_up",
+    "dynamic": {
+      "type": "armor",
+      "passive_skills": [
+        "MoveSpeed_up_1_Otomo_Only_Equip"
+      ]
+    },
+    "disabled": true
+  },
+  "Otomo_PalExp_Increase_1": {
+    "group": "Accessory",
+    "type_a": "Accessory",
+    "type_b": "Accessory",
+    "rank": 8,
+    "rarity": 0,
+    "max_stack_count": 1,
+    "weight": 2.0,
+    "price": 1000,
+    "sort_id": 2213,
+    "icon": "Accessory_Otomo_Exp_up",
+    "dynamic": {
+      "type": "armor",
+      "passive_skills": [
+        "PalExp_Increase_1_Otomo_Only_Equip"
+      ]
+    },
+    "disabled": true
+  },
+  "Otomo_PalExp_Increase_2": {
+    "group": "Accessory",
+    "type_a": "Accessory",
+    "type_b": "Accessory",
+    "rank": 8,
+    "rarity": 1,
+    "max_stack_count": 1,
+    "weight": 2.0,
+    "price": 1000,
+    "sort_id": 2214,
+    "icon": "Accessory_Otomo_Exp_up",
+    "dynamic": {
+      "type": "armor",
+      "passive_skills": [
+        "PalExp_Increase_2_Otomo_Only_Equip"
+      ]
+    },
+    "disabled": true
+  },
+  "Otomo_PalExp_Increase_3": {
+    "group": "Accessory",
+    "type_a": "Accessory",
+    "type_b": "Accessory",
+    "rank": 8,
+    "rarity": 2,
+    "max_stack_count": 1,
+    "weight": 2.0,
+    "price": 1000,
+    "sort_id": 2215,
+    "icon": "Accessory_Otomo_Exp_up",
+    "dynamic": {
+      "type": "armor",
+      "passive_skills": [
+        "PalExp_Increase_3_Otomo_Only_Equip"
+      ]
+    },
+    "disabled": true
+  },
+  "OverheatRifle": {
+    "group": "Weapon",
+    "type_a": "Weapon",
+    "type_b": "WeaponAssaultRifle",
+    "rank": 3,
+    "rarity": 0,
+    "max_stack_count": 1,
+    "weight": 15.0,
+    "price": 82400,
+    "sort_id": 540,
+    "icon": "t_itemicon_weapon_assaultrifle_default1",
+    "dynamic": {
+      "type": "weapon",
+      "durability": 3000,
+      "passive_skills": []
+    },
+    "damage": 320,
+    "disabled": false
+  },
+  "PV_AssaultRifle_Default1": {
+    "group": "Weapon",
+    "type_a": "Weapon",
+    "type_b": "WeaponAssaultRifle",
+    "rank": 999,
+    "rarity": 999,
+    "max_stack_count": 1,
+    "weight": 0.0,
+    "price": 10,
+    "sort_id": 9999,
+    "icon": "t_itemicon_weapon_assaultrifle_default1",
+    "dynamic": {
+      "type": "weapon",
+      "magazine_size": 20,
+      "passive_skills": []
+    },
+    "damage": 50,
+    "disabled": true
+  },
   "PV_Glider_Manta": {
     "group": "Glider",
     "type_a": "Glider",
@@ -16739,6 +17981,26 @@
     "price": 300,
     "sort_id": 5060,
     "icon": "t_itemicon_material_paldarkparts",
+    "disabled": false
+  },
+  "PalDopingShot": {
+    "group": "Weapon",
+    "type_a": "Weapon",
+    "type_b": "WeaponHandgun",
+    "rank": 2,
+    "rarity": 0,
+    "max_stack_count": 1,
+    "weight": 8.0,
+    "price": 33000,
+    "sort_id": 310,
+    "icon": "t_itemicon_weapon_handgun_default",
+    "dynamic": {
+      "type": "weapon",
+      "durability": 400,
+      "magazine_size": 8,
+      "passive_skills": []
+    },
+    "damage": 250,
     "disabled": false
   },
   "PalEgg_Dark_01": {
@@ -17519,6 +18781,33 @@
     "icon": "t_itemicon_material_palfluid",
     "disabled": false
   },
+  "PalGenderReverseTest": {
+    "group": "Common",
+    "type_a": "Consume",
+    "type_b": "ConsumeOther",
+    "rank": 5,
+    "rarity": 4,
+    "max_stack_count": 9999,
+    "weight": 0.0,
+    "price": 1,
+    "sort_id": 9999,
+    "icon": "t_itemicon_consume_technologybook_g4",
+    "disabled": true
+  },
+  "PalHealingGrenade": {
+    "group": "Weapon",
+    "type_a": "Weapon",
+    "type_b": "WeaponThrowObject",
+    "rank": 2,
+    "rarity": 0,
+    "max_stack_count": 9999,
+    "weight": 0.1,
+    "price": 10,
+    "sort_id": 800,
+    "icon": "t_itemicon_weapon_fraggrenade",
+    "damage": 750,
+    "disabled": false
+  },
   "PalItem_CaptainPenguin": {
     "group": "Common",
     "type_a": "Material",
@@ -17714,6 +19003,19 @@
     "icon": "t_itemicon_material_paloil",
     "disabled": false
   },
+  "PalPassiveSkillChangeTest": {
+    "group": "None",
+    "type_a": "Consume",
+    "type_b": "NONE",
+    "rank": 5,
+    "rarity": 4,
+    "max_stack_count": 9999,
+    "weight": 0.0,
+    "price": 1,
+    "sort_id": 9999,
+    "icon": "t_itemicon_consume_technologybook_g4",
+    "disabled": true
+  },
   "PalRevive": {
     "group": "None",
     "type_a": "Consume",
@@ -17814,7 +19116,7 @@
     "max_stack_count": 9999,
     "weight": 1.0,
     "price": 5500,
-    "sort_id": 7,
+    "sort_id": 9999,
     "icon": "t_itemicon_palsphere_robbery",
     "disabled": false
   },
@@ -18038,6 +19340,19 @@
     "sort_id": 8001,
     "icon": "t_itemicon_blueprint_palsummon_nightlady_parts",
     "disabled": false
+  },
+  "PalSummon_YakushimaBoss002": {
+    "group": "Common",
+    "type_a": "Consume",
+    "type_b": "ConsumeOther",
+    "rank": 1,
+    "rarity": 3,
+    "max_stack_count": 9999,
+    "weight": 1.0,
+    "price": 1,
+    "sort_id": 8103,
+    "icon": "PalSummon_YakushimaBoss002",
+    "disabled": true
   },
   "PalUpgradeStone": {
     "group": "Common",
@@ -18822,7 +20137,7 @@
     "max_stack_count": 9999,
     "weight": 1.0,
     "price": 50,
-    "sort_id": 4002,
+    "sort_id": 4072,
     "icon": "t_itemicon_food_poisonmushroom",
     "corruption_factor": 0.11111111,
     "disabled": false,
@@ -18886,7 +20201,7 @@
     "max_stack_count": 9999,
     "weight": 1.0,
     "price": 50,
-    "sort_id": 4076,
+    "sort_id": 4077,
     "icon": "t_itemicon_food_potato",
     "corruption_factor": 0.037037037,
     "disabled": false
@@ -19317,6 +20632,25 @@
     "sort_id": 23,
     "icon": "t_itemicon_ammo_riflebullet",
     "disabled": false
+  },
+  "RocketLauncher_NPC": {
+    "group": "Weapon",
+    "type_a": "Weapon",
+    "type_b": "WeaponRocketLauncher",
+    "rank": 99,
+    "rarity": 0,
+    "max_stack_count": 1,
+    "weight": 99999.0,
+    "price": 10,
+    "sort_id": 9999,
+    "icon": "t_itemicon_weapon_launcher_default",
+    "dynamic": {
+      "type": "weapon",
+      "magazine_size": 1,
+      "passive_skills": []
+    },
+    "damage": 5000,
+    "disabled": true
   },
   "RoughBullet": {
     "group": "Common",
@@ -20338,6 +21672,25 @@
     },
     "disabled": false
   },
+  "Shield_05": {
+    "group": "Shield",
+    "type_a": "Armor",
+    "type_b": "Shield",
+    "rank": 4,
+    "rarity": 4,
+    "max_stack_count": 1,
+    "weight": 5.0,
+    "price": 150000,
+    "sort_id": 1004,
+    "icon": "t_itemicon_armor_shield_05",
+    "dynamic": {
+      "type": "armor",
+      "durability": 5000,
+      "passive_skills": [],
+      "shield": 1520
+    },
+    "disabled": false
+  },
   "Shield_SF": {
     "group": "Shield",
     "type_a": "Armor",
@@ -20347,7 +21700,7 @@
     "max_stack_count": 1,
     "weight": 5.0,
     "price": 120000,
-    "sort_id": 1005,
+    "sort_id": 1007,
     "icon": "t_itemicon_armor_shield_06",
     "dynamic": {
       "type": "armor",
@@ -20366,7 +21719,7 @@
     "max_stack_count": 1,
     "weight": 5.0,
     "price": 100000,
-    "sort_id": 1004,
+    "sort_id": 1005,
     "icon": "t_itemicon_armor_shield_05",
     "dynamic": {
       "type": "armor",
@@ -20374,7 +21727,7 @@
       "passive_skills": [],
       "shield": 1520
     },
-    "disabled": false
+    "disabled": true
   },
   "ShotgunBullet": {
     "group": "Common",
@@ -20388,6 +21741,25 @@
     "sort_id": 24,
     "icon": "t_itemicon_ammo_shotgunbullet",
     "disabled": false
+  },
+  "Shotgun_NPC": {
+    "group": "Weapon",
+    "type_a": "Weapon",
+    "type_b": "WeaponShotgun",
+    "rank": 99,
+    "rarity": 0,
+    "max_stack_count": 1,
+    "weight": 99999.0,
+    "price": 10,
+    "sort_id": 9999,
+    "icon": "t_itemicon_weapon_pumpactionshotgun",
+    "dynamic": {
+      "type": "weapon",
+      "magazine_size": 3,
+      "passive_skills": []
+    },
+    "damage": 250,
+    "disabled": true
   },
   "SingleShotRifle": {
     "group": "Weapon",
@@ -20498,7 +21870,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 3000,
-    "sort_id": 6019,
+    "sort_id": 6017,
     "icon": "t_itemicon_consume_skillcard_water",
     "disabled": false
   },
@@ -20511,7 +21883,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 1000,
-    "sort_id": 6005,
+    "sort_id": 6002,
     "icon": "t_itemicon_consume_skillcard_neutral",
     "disabled": false
   },
@@ -20524,7 +21896,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 1500,
-    "sort_id": 6003,
+    "sort_id": 6001,
     "icon": "t_itemicon_consume_skillcard_neutral",
     "disabled": false
   },
@@ -20537,7 +21909,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 1000,
-    "sort_id": 6066,
+    "sort_id": 6068,
     "icon": "t_itemicon_consume_skillcard_dark",
     "disabled": false
   },
@@ -20550,7 +21922,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 1500,
-    "sort_id": 6017,
+    "sort_id": 6016,
     "icon": "t_itemicon_consume_skillcard_water",
     "disabled": false
   },
@@ -20563,7 +21935,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 4000,
-    "sort_id": 6071,
+    "sort_id": 6075,
     "icon": "t_itemicon_consume_skillcard_dragon",
     "disabled": false
   },
@@ -20589,7 +21961,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 3000,
-    "sort_id": 6051,
+    "sort_id": 6054,
     "icon": "t_itemicon_consume_skillcard_frost",
     "disabled": false
   },
@@ -20628,7 +22000,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 1000,
-    "sort_id": 6064,
+    "sort_id": 6065,
     "icon": "t_itemicon_consume_skillcard_dark",
     "disabled": false
   },
@@ -20641,7 +22013,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 1000,
-    "sort_id": 6063,
+    "sort_id": 6062,
     "icon": "t_itemicon_consume_skillcard_dark",
     "disabled": false
   },
@@ -20654,7 +22026,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 5000,
-    "sort_id": 6062,
+    "sort_id": 6067,
     "icon": "t_itemicon_consume_skillcard_dark",
     "disabled": false
   },
@@ -20667,7 +22039,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 1000,
-    "sort_id": 6065,
+    "sort_id": 6063,
     "icon": "t_itemicon_consume_skillcard_dark",
     "disabled": false
   },
@@ -20680,7 +22052,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 1000,
-    "sort_id": 6057,
+    "sort_id": 6059,
     "icon": "t_itemicon_consume_skillcard_dark",
     "disabled": false
   },
@@ -20693,7 +22065,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 1000,
-    "sort_id": 6056,
+    "sort_id": 6058,
     "icon": "t_itemicon_consume_skillcard_frost",
     "disabled": false
   },
@@ -20706,7 +22078,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 4000,
-    "sort_id": 6067,
+    "sort_id": 6069,
     "icon": "t_itemicon_consume_skillcard_dragon",
     "disabled": false
   },
@@ -20719,7 +22091,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 2000,
-    "sort_id": 6068,
+    "sort_id": 6070,
     "icon": "t_itemicon_consume_skillcard_dragon",
     "disabled": false
   },
@@ -20732,7 +22104,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 5000,
-    "sort_id": 6070,
+    "sort_id": 6074,
     "icon": "t_itemicon_consume_skillcard_dragon",
     "disabled": false
   },
@@ -20745,7 +22117,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 3000,
-    "sort_id": 6069,
+    "sort_id": 6071,
     "icon": "t_itemicon_consume_skillcard_dragon",
     "disabled": false
   },
@@ -20758,7 +22130,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 1000,
-    "sort_id": 6031,
+    "sort_id": 6033,
     "icon": "t_itemicon_consume_skillcard_electric",
     "disabled": false
   },
@@ -20771,7 +22143,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 1000,
-    "sort_id": 6030,
+    "sort_id": 6032,
     "icon": "t_itemicon_consume_skillcard_flame",
     "disabled": false
   },
@@ -20784,7 +22156,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 5000,
-    "sort_id": 6024,
+    "sort_id": 6030,
     "icon": "t_itemicon_consume_skillcard_flame",
     "disabled": false
   },
@@ -20797,7 +22169,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 1000,
-    "sort_id": 6022,
+    "sort_id": 6023,
     "icon": "t_itemicon_consume_skillcard_flame",
     "disabled": false
   },
@@ -20810,7 +22182,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 2000,
-    "sort_id": 6026,
+    "sort_id": 6025,
     "icon": "t_itemicon_consume_skillcard_flame",
     "disabled": false
   },
@@ -20823,7 +22195,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 1000,
-    "sort_id": 6058,
+    "sort_id": 6026,
     "icon": "t_itemicon_consume_skillcard_flame",
     "disabled": false
   },
@@ -20849,7 +22221,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 2500,
-    "sort_id": 6023,
+    "sort_id": 6027,
     "icon": "t_itemicon_consume_skillcard_flame",
     "disabled": false
   },
@@ -20862,7 +22234,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 1500,
-    "sort_id": 6025,
+    "sort_id": 6024,
     "icon": "t_itemicon_consume_skillcard_flame",
     "disabled": false
   },
@@ -20888,7 +22260,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 2500,
-    "sort_id": 6054,
+    "sort_id": 6055,
     "icon": "t_itemicon_consume_skillcard_frost",
     "disabled": false
   },
@@ -20914,7 +22286,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 2500,
-    "sort_id": 6007,
+    "sort_id": 6010,
     "icon": "t_itemicon_consume_skillcard_grass",
     "disabled": false
   },
@@ -20927,7 +22299,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 1000,
-    "sort_id": 6053,
+    "sort_id": 6003,
     "icon": "t_itemicon_consume_skillcard_neutral",
     "disabled": false
   },
@@ -20940,7 +22312,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 5000,
-    "sort_id": 6016,
+    "sort_id": 6021,
     "icon": "t_itemicon_consume_skillcard_water",
     "disabled": false
   },
@@ -20953,7 +22325,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 5000,
-    "sort_id": 6002,
+    "sort_id": 6005,
     "icon": "t_itemicon_consume_skillcard_neutral",
     "disabled": false
   },
@@ -20979,7 +22351,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 1000,
-    "sort_id": 6050,
+    "sort_id": 6052,
     "icon": "t_itemicon_consume_skillcard_frost",
     "disabled": false
   },
@@ -20992,7 +22364,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 1000,
-    "sort_id": 6055,
+    "sort_id": 6056,
     "icon": "t_itemicon_consume_skillcard_frost",
     "disabled": false
   },
@@ -21005,7 +22377,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 2500,
-    "sort_id": 6052,
+    "sort_id": 6057,
     "icon": "t_itemicon_consume_skillcard_frost",
     "disabled": false
   },
@@ -21018,7 +22390,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 4000,
-    "sort_id": 6027,
+    "sort_id": 6031,
     "icon": "t_itemicon_consume_skillcard_flame",
     "disabled": false
   },
@@ -21031,7 +22403,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 5000,
-    "sort_id": 6039,
+    "sort_id": 6042,
     "icon": "t_itemicon_consume_skillcard_electric",
     "disabled": false
   },
@@ -21044,7 +22416,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 1000,
-    "sort_id": 6020,
+    "sort_id": 6022,
     "icon": "t_itemicon_consume_skillcard_water",
     "disabled": false
   },
@@ -21057,7 +22429,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 2500,
-    "sort_id": 6033,
+    "sort_id": 6037,
     "icon": "t_itemicon_consume_skillcard_electric",
     "disabled": false
   },
@@ -21070,7 +22442,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 3000,
-    "sort_id": 6036,
+    "sort_id": 6038,
     "icon": "t_itemicon_consume_skillcard_electric",
     "disabled": false
   },
@@ -21109,7 +22481,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 2500,
-    "sort_id": 6001,
+    "sort_id": 6004,
     "icon": "t_itemicon_consume_skillcard_neutral",
     "disabled": false
   },
@@ -21135,7 +22507,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 3500,
-    "sort_id": 6059,
+    "sort_id": 6066,
     "icon": "t_itemicon_consume_skillcard_dark",
     "disabled": false
   },
@@ -21148,7 +22520,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 5000,
-    "sort_id": 6045,
+    "sort_id": 6050,
     "icon": "t_itemicon_consume_skillcard_earth",
     "disabled": false
   },
@@ -21161,7 +22533,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 3000,
-    "sort_id": 6010,
+    "sort_id": 6011,
     "icon": "t_itemicon_consume_skillcard_grass",
     "disabled": false
   },
@@ -21187,7 +22559,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 2500,
-    "sort_id": 6044,
+    "sort_id": 6048,
     "icon": "t_itemicon_consume_skillcard_earth",
     "disabled": false
   },
@@ -21213,7 +22585,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 1500,
-    "sort_id": 6009,
+    "sort_id": 6008,
     "icon": "t_itemicon_consume_skillcard_grass",
     "disabled": false
   },
@@ -21226,7 +22598,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 2000,
-    "sort_id": 6011,
+    "sort_id": 6009,
     "icon": "t_itemicon_consume_skillcard_grass",
     "disabled": false
   },
@@ -21239,7 +22611,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 5000,
-    "sort_id": 6004,
+    "sort_id": 6006,
     "icon": "t_itemicon_consume_skillcard_neutral",
     "disabled": false
   },
@@ -21252,7 +22624,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 2500,
-    "sort_id": 6058,
+    "sort_id": 6064,
     "icon": "t_itemicon_consume_skillcard_dark",
     "disabled": false
   },
@@ -21265,7 +22637,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 5000,
-    "sort_id": 6008,
+    "sort_id": 6013,
     "icon": "t_itemicon_consume_skillcard_grass",
     "disabled": false
   },
@@ -21278,7 +22650,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 1000,
-    "sort_id": 6013,
+    "sort_id": 6014,
     "icon": "t_itemicon_consume_skillcard_grass",
     "disabled": false
   },
@@ -21317,7 +22689,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 3500,
-    "sort_id": 6038,
+    "sort_id": 6039,
     "icon": "t_itemicon_consume_skillcard_electric",
     "disabled": false
   },
@@ -21330,7 +22702,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 1000,
-    "sort_id": 6043,
+    "sort_id": 6045,
     "icon": "t_itemicon_consume_skillcard_earth",
     "disabled": false
   },
@@ -21343,7 +22715,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 2500,
-    "sort_id": 6037,
+    "sort_id": 6036,
     "icon": "t_itemicon_consume_skillcard_electric",
     "disabled": false
   },
@@ -21369,7 +22741,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 1000,
-    "sort_id": 6041,
+    "sort_id": 6043,
     "icon": "t_itemicon_consume_skillcard_electric",
     "disabled": false
   },
@@ -21382,7 +22754,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 1000,
-    "sort_id": 6042,
+    "sort_id": 6044,
     "icon": "t_itemicon_consume_skillcard_electric",
     "disabled": false
   },
@@ -21395,7 +22767,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 5000,
-    "sort_id": 6032,
+    "sort_id": 6041,
     "icon": "t_itemicon_consume_skillcard_electric",
     "disabled": false
   },
@@ -21408,7 +22780,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 1000,
-    "sort_id": 6048,
+    "sort_id": 6051,
     "icon": "t_itemicon_consume_skillcard_earth",
     "disabled": false
   },
@@ -21434,7 +22806,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 1000,
-    "sort_id": 6021,
+    "sort_id": 6020,
     "icon": "t_itemicon_consume_skillcard_water",
     "disabled": false
   },
@@ -21447,7 +22819,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 2500,
-    "sort_id": 6015,
+    "sort_id": 6019,
     "icon": "t_itemicon_consume_skillcard_water",
     "disabled": false
   },
@@ -21460,7 +22832,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 1000,
-    "sort_id": 6014,
+    "sort_id": 6015,
     "icon": "t_itemicon_consume_skillcard_water",
     "disabled": false
   },
@@ -21473,7 +22845,7 @@
     "max_stack_count": 9999,
     "weight": 0.0,
     "price": 1000,
-    "sort_id": 6006,
+    "sort_id": 6007,
     "icon": "t_itemicon_consume_skillcard_grass",
     "disabled": false
   },
@@ -21617,7 +22989,7 @@
     "weight": 0.0,
     "price": 0,
     "sort_id": 10292,
-    "icon": "t_itemicon_essential_skillunlock_saddle",
+    "icon": "t_itemicon_essential_skillunlock_harness",
     "disabled": false
   },
   "SkillUnlock_BlueDragon": {
@@ -22293,7 +23665,7 @@
     "weight": 0.0,
     "price": 0,
     "sort_id": 10166,
-    "icon": "t_itemicon_essential_skillunlock_saddle",
+    "icon": "t_itemicon_essential_skillunlock_harness",
     "disabled": false
   },
   "SkillUnlock_LazyDragon": {
@@ -22501,7 +23873,7 @@
     "weight": 0.0,
     "price": 0,
     "sort_id": 10276,
-    "icon": "t_itemicon_essential_skillunlock_saddle",
+    "icon": "t_itemicon_essential_skillunlock_choker",
     "disabled": false
   },
   "SkillUnlock_RedArmorBird": {
@@ -22618,7 +23990,7 @@
     "weight": 0.0,
     "price": 0,
     "sort_id": 10300,
-    "icon": "t_itemicon_essential_skillunlock_saddle",
+    "icon": "t_itemicon_essential_skillunlock_hammer",
     "disabled": false
   },
   "SkillUnlock_Suzaku": {
@@ -23805,7 +25177,7 @@
     "max_stack_count": 9999,
     "weight": 0.2,
     "price": 250,
-    "sort_id": 4081,
+    "sort_id": 4082,
     "icon": "t_itemicon_food_sweet",
     "disabled": false
   },
@@ -23827,6 +25199,36 @@
     },
     "damage": 525,
     "disabled": false
+  },
+  "TEST_BossDefeatReward": {
+    "group": "KeyItem",
+    "type_a": "Essential",
+    "type_b": "NONE",
+    "rank": 1,
+    "rarity": 1,
+    "max_stack_count": 9999,
+    "weight": 0.0,
+    "price": 1,
+    "sort_id": 20000,
+    "icon": "t_itemicon_material_blueprint",
+    "disabled": true
+  },
+  "TEST_CaptureItemModifier": {
+    "group": "None",
+    "type_a": "None",
+    "type_b": "NONE",
+    "rank": 1,
+    "rarity": 1,
+    "max_stack_count": 1,
+    "weight": 1.0,
+    "price": 100,
+    "sort_id": 9999,
+    "icon": "TEST_CaptureItemModifier",
+    "dynamic": {
+      "type": "armor",
+      "passive_skills": []
+    },
+    "disabled": true
   },
   "TechnologyBook_G1": {
     "group": "Common",
@@ -23876,7 +25278,7 @@
     "max_stack_count": 9999,
     "weight": 0.5,
     "price": 150,
-    "sort_id": 4072,
+    "sort_id": 4073,
     "icon": "t_itemicon_food_tomato",
     "corruption_factor": 0.16666667,
     "disabled": false
@@ -24165,7 +25567,7 @@
     "max_stack_count": 9999,
     "weight": 0.2,
     "price": 100,
-    "sort_id": 4080,
+    "sort_id": 4081,
     "icon": "t_itemicon_food_wheat",
     "corruption_factor": 0.041666668,
     "disabled": false

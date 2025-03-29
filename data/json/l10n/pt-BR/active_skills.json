@@ -39,10 +39,6 @@
     "localized_name": "Chuva de Veneno",
     "description": "Concentra a própria força e faz voarem bolas de veneno em todas as direções."
   },
-  "EPalWazaID::ChaosLaser": {
-    "localized_name": "Laser do Caos",
-    "description": "pt-BR_Text"
-  },
   "EPalWazaID::ChargeCanon": {
     "localized_name": "Canhão Carregado",
     "description": "Dispara um projétil de energia com força dracônica acumulada na direção do inimigo. O projétil causa uma explosão em grande área ao fazer contato."
@@ -167,6 +163,10 @@
     "localized_name": "Tornado de Grama",
     "description": "Gera redemoinhos para os lados, lançando-os contra o inimigo."
   },
+  "EPalWazaID::GravityShot": {
+    "localized_name": "Tiro Sombrio",
+    "description": "Dispara um tiro de energia sombria que acelera até atingir o alvo."
+  },
   "EPalWazaID::HolyBlast": {
     "localized_name": "Estouro Sagrado",
     "description": "Causa explosões de luz em grande área no local do inimigo e seus arredores."
@@ -268,7 +268,7 @@
     "description": "Dispara inúmeras lâminas de vento que voam na direção do inimigo."
   },
   "EPalWazaID::Railbolt": {
-    "localized_name": "Railbolt",
+    "localized_name": "Trilho de Trovão",
     "description": "Carrega energia elétrica até o limite para disparar simultaneamente vários ataques de eletricidade poderosos contra o inimigo."
   },
   "EPalWazaID::RangeThunder": {
@@ -371,6 +371,10 @@
     "localized_name": "Chuva de Trovão",
     "description": "Invoca uma tormenta para fulminar o inimigo com vários raios após certo tempo."
   },
+  "EPalWazaID::ThunderSpear": {
+    "localized_name": "Lança do Trovão",
+    "description": "Dispara uma lança relâmpago em linha reta e alta velocidade na direção do inimigo."
+  },
   "EPalWazaID::ThunderStorm": {
     "localized_name": "Tempestade de Trovões",
     "description": "Gera um redemoinho elétrico gigantesco que se move lentamente rumo ao inimigo."
@@ -386,10 +390,6 @@
   "EPalWazaID::TriSpark": {
     "localized_name": "Faísca Tripla",
     "description": "Dispara projéteis de eletricidade velozes que voam em linha reta e, ao mesmo tempo, outros mais lentos que perseguem o inimigo."
-  },
-  "EPalWazaID::TripleCannon": {
-    "localized_name": "Canhão Triplo",
-    "description": "pt-BR_Text"
   },
   "EPalWazaID::Unique_Alpaca_Tackle": {
     "localized_name": "Empurrão Fofo",
@@ -613,7 +613,7 @@
   },
   "EPalWazaID::Unique_JetDragon_JumpBeam": {
     "localized_name": "Cometa de Raio",
-    "description": "Habilidade exclusiva de Jetragon. Fazendo suas asas brilharem, ele voa enquanto dispara incontáveis raios contra o inimigo , causando explosões ao fazerem contato."
+    "description": "Habilidade exclusiva de Jetragon. Fazendo suas asas brilharem, ele voa enquanto dispara incontáveis raios contra o inimigo, os quais causam explosões ao fazerem contato."
   },
   "EPalWazaID::Unique_KingAlpaca_BodyPress": {
     "localized_name": "Prensa Real",

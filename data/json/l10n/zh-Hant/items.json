@@ -297,11 +297,11 @@
   },
   "Arrow_Fire": {
     "localized_name": "火箭矢",
-    "description": "｢Bow Fire｣與｢BowGun Fire｣等用的箭矢。 可對目標造成火屬性傷害。"
+    "description": "「Bow Fire」與「BowGun Fire」等用的箭矢。 可對目標造成火屬性傷害。"
   },
   "Arrow_Poison": {
     "localized_name": "毒箭矢",
-    "description": "｢Bow Poison｣與｢BowGun Poison｣等用的箭矢。 可以讓被射中的目標中毒。"
+    "description": "「Bow Poison」與「BowGun Poison」等用的箭矢。 可以讓被射中的目標中毒。"
   },
   "AssaultRifleBullet": {
     "localized_name": "突擊步槍子彈",
@@ -312,20 +312,20 @@
     "description": "以壓倒性的連射能力鎮壓敵人的AssaultRifle Default1。 火力強大，是對付強敵時的理想選擇。"
   },
   "AssaultRifle_Default2": {
-    "localized_name": "突擊步槍",
-    "description": "以壓倒性的連射能力鎮壓敵人的AssaultRifle Default1。 火力強大，是對付強敵時的理想選擇。"
+    "localized_name": "zh-hant text",
+    "description": "zh-hant text"
   },
   "AssaultRifle_Default3": {
-    "localized_name": "突擊步槍",
-    "description": "以壓倒性的連射能力鎮壓敵人的AssaultRifle Default1。 火力強大，是對付強敵時的理想選擇。"
+    "localized_name": "zh-hant text",
+    "description": "zh-hant text"
   },
   "AssaultRifle_Default4": {
-    "localized_name": "突擊步槍",
-    "description": "以壓倒性的連射能力鎮壓敵人的AssaultRifle Default1。 火力強大，是對付強敵時的理想選擇。"
+    "localized_name": "zh-hant text",
+    "description": "zh-hant text"
   },
   "AssaultRifle_Default5": {
-    "localized_name": "突擊步槍",
-    "description": "以壓倒性的連射能力鎮壓敵人的AssaultRifle Default1。 火力強大，是對付強敵時的理想選擇。"
+    "localized_name": "zh-hant text",
+    "description": "zh-hant text"
   },
   "AutoMealPouch_Tier1": {
     "localized_name": "小型飼料袋",
@@ -373,7 +373,7 @@
   },
   "BaconEggs": {
     "localized_name": "草莽豬培根蛋",
-    "description": "培根的煙燻風味及雞蛋的柔和口感， 譜出了完美的和諧曲。 食用後的一段時間內攻擊+10%。"
+    "description": "培根的煙燻風味及雞蛋的柔和口感， 譜出了完美的和諧曲。 食用後的一段時間內，攻擊+10%。"
   },
   "BakedMeat_BerryGoat": {
     "localized_name": "香草烤灌木羊",
@@ -461,707 +461,707 @@
   },
   "Blueprint_AssaultRifle_Default2": {
     "localized_name": "突擊步槍設計圖1",
-    "description": "持有此物品， 即可解鎖「AssaultRifle Default1（Uncommon）」的配方。 可於「WeaponFactory Dirty 02」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「AssaultRifle Default1（Uncommon）」的配方。 可在「WeaponFactory Dirty 02」製作。"
   },
   "Blueprint_AssaultRifle_Default3": {
     "localized_name": "突擊步槍設計圖2",
-    "description": "持有此物品， 即可解鎖「AssaultRifle Default1（Rare）」的配方。 可於「WeaponFactory Dirty 02」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「AssaultRifle Default1（Rare）」的配方。 可在「WeaponFactory Dirty 02」製作。"
   },
   "Blueprint_AssaultRifle_Default4": {
     "localized_name": "突擊步槍設計圖3",
-    "description": "持有此物品， 即可解鎖「AssaultRifle Default1（Epic）」的配方。 可於「WeaponFactory Dirty 02」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「AssaultRifle Default1（Epic）」的配方。 可在「WeaponFactory Dirty 02」製作。"
   },
   "Blueprint_AssaultRifle_Default5": {
     "localized_name": "突擊步槍設計圖4",
-    "description": "持有此物品， 即可解鎖「AssaultRifle Default1（Legendary）」的配方。 可於「WeaponFactory Dirty 02」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「AssaultRifle Default1（Legendary）」的配方。 可在「WeaponFactory Dirty 02」製作。"
   },
   "Blueprint_BowGun_2": {
     "localized_name": "十字弓設計圖1",
-    "description": "持有此物品， 即可解鎖「十字弓（Uncommon）」的配方。 可於「Factory Hard 01」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「十字弓（Uncommon）」的配方。 可在「Factory Hard 01」製作。"
   },
   "Blueprint_BowGun_3": {
     "localized_name": "十字弓設計圖2",
-    "description": "持有此物品， 即可解鎖「十字弓（Rare）」的配方。 可於「Factory Hard 01」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「十字弓（Rare）」的配方。 可在「Factory Hard 01」製作。"
   },
   "Blueprint_BowGun_4": {
     "localized_name": "十字弓設計圖3",
-    "description": "持有此物品， 即可解鎖「十字弓（Epic）」的配方。 可於「Factory Hard 01」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「十字弓（Epic）」的配方。 可在「Factory Hard 01」製作。"
   },
   "Blueprint_BowGun_5": {
     "localized_name": "十字弓設計圖4",
-    "description": "持有此物品， 即可解鎖「十字弓（Legendary）」的配方。 可於「Factory Hard 01」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「十字弓（Legendary）」的配方。 可在「Factory Hard 01」製作。"
   },
   "Blueprint_BowGun_Fire_2": {
     "localized_name": "火箭十字弓設計圖1",
-    "description": "持有此物品， 即可解鎖「BowGun Fire （Uncommon）」的配方。 可於｢Factory Hard 01｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「BowGun Fire（Uncommon）」的配方。 可在「Factory Hard 01」製作。"
   },
   "Blueprint_BowGun_Fire_3": {
     "localized_name": "火箭十字弓設計圖2",
-    "description": "持有此物品， 即可解鎖「BowGun Fire （Rare）」的配方。 可於｢Factory Hard 01｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「BowGun Fire（Rare）」的配方。 可在「Factory Hard 01」製作。"
   },
   "Blueprint_BowGun_Fire_4": {
     "localized_name": "火箭十字弓設計圖3",
-    "description": "持有此物品， 即可解鎖「BowGun Fire （Epic）」的配方。 可於｢Factory Hard 01｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「BowGun Fire（Epic）」的配方。 可在「Factory Hard 01」製作。"
   },
   "Blueprint_BowGun_Fire_5": {
     "localized_name": "火箭十字弓設計圖4",
-    "description": "持有此物品， 即可解鎖「BowGun Fire （Legendary）」的配方。 可於｢Factory Hard 01｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「BowGun Fire（Legendary）」的配方。 可在「Factory Hard 01」製作。"
   },
   "Blueprint_BowGun_Poison_2": {
     "localized_name": "毒箭十字弓設計圖1",
-    "description": "持有此物品， 即可解鎖「BowGun Poison （Uncommon）」的配方。 可於｢Factory Hard 01｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「BowGun Poison（Uncommon）」的配方。 可在「Factory Hard 01」製作。"
   },
   "Blueprint_BowGun_Poison_3": {
     "localized_name": "毒箭十字弓設計圖2",
-    "description": "持有此物品， 即可解鎖「BowGun Poison （Rare）」的配方。 可於｢Factory Hard 01｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「BowGun Poison（Rare）」的配方。 可在「Factory Hard 01」製作。"
   },
   "Blueprint_BowGun_Poison_4": {
     "localized_name": "毒箭十字弓設計圖3",
-    "description": "持有此物品， 即可解鎖「BowGun Poison （Epic）」的配方。 可於｢Factory Hard 01｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「BowGun Poison（Epic）」的配方。 可在「Factory Hard 01」製作。"
   },
   "Blueprint_BowGun_Poison_5": {
     "localized_name": "毒箭十字弓設計圖4",
-    "description": "持有此物品， 即可解鎖「BowGun Poison （Legendary）」的配方。 可於｢Factory Hard 01｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「BowGun Poison（Legendary）」的配方。 可在「Factory Hard 01」製作。"
   },
   "Blueprint_ClothArmorCold_2": {
     "localized_name": "寒冷地區民族服裝設計圖1",
-    "description": "持有此物品， 即可解鎖「ClothArmorCold 2（Uncommon）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「ClothArmorCold 2（Uncommon）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_ClothArmorCold_3": {
     "localized_name": "寒冷地區民族服裝設計圖2",
-    "description": "持有此物品， 即可解鎖「ClothArmorCold 3（Rare）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「ClothArmorCold 3（Rare）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_ClothArmorCold_4": {
     "localized_name": "寒冷地區民族服裝設計圖3",
-    "description": "持有此物品， 即可解鎖「ClothArmorCold 4（Epic）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「ClothArmorCold 4（Epic）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_ClothArmorCold_5": {
     "localized_name": "寒冷地區民族服裝設計圖4",
-    "description": "持有此物品， 即可解鎖「ClothArmorCold 5（Legendary）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「ClothArmorCold 5（Legendary）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_ClothArmorHeat_2": {
     "localized_name": "熱帶地區民族服裝設計圖1",
-    "description": "持有此物品， 即可解鎖「ClothArmorHeat 2（Uncommon）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「ClothArmorHeat 2（Uncommon）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_ClothArmorHeat_3": {
     "localized_name": "熱帶地區民族服裝設計圖2",
-    "description": "持有此物品， 即可解鎖「ClothArmorHeat 3（Rare）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「ClothArmorHeat 3（Rare）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_ClothArmorHeat_4": {
     "localized_name": "熱帶地區民族服裝設計圖3",
-    "description": "持有此物品， 即可解鎖「ClothArmorHeat 4（Epic）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「ClothArmorHeat 4（Epic）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_ClothArmorHeat_5": {
     "localized_name": "熱帶地區民族服裝設計圖4",
-    "description": "持有此物品， 即可解鎖「ClothArmorHeat 5（Legendary）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「ClothArmorHeat 5（Legendary）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_ClothArmor_2": {
     "localized_name": "布衣設計圖1",
-    "description": "持有此物品， 即可解鎖「布衣（Uncommon）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「布衣（Uncommon）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_ClothArmor_3": {
     "localized_name": "布衣設計圖2",
-    "description": "持有此物品， 即可解鎖「布衣（Rare）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「布衣（Rare）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_ClothArmor_4": {
     "localized_name": "布衣設計圖3",
-    "description": "持有此物品， 即可解鎖「布衣（Epic）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「布衣（Epic）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_ClothArmor_5": {
     "localized_name": "布衣設計圖4",
-    "description": "持有此物品， 即可解鎖「布衣（Legendary）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「布衣（Legendary）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_CompoundBow_2": {
     "localized_name": "複合弓設計圖1",
-    "description": "持有此物品， 即可解鎖「複合弓 （Legendary）」的配方。 可於｢WeaponFactory Dirty 03｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「複合弓（Uncommon）」的配方。 可在「WeaponFactory Dirty 02」製作。"
   },
   "Blueprint_CompoundBow_3": {
     "localized_name": "複合弓設計圖2",
-    "description": "持有此物品， 即可解鎖「複合弓 （Legendary）」的配方。 可於｢WeaponFactory Dirty 03｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「複合弓（Rare）」的配方。 可在「WeaponFactory Dirty 02」製作。"
   },
   "Blueprint_CompoundBow_4": {
     "localized_name": "複合弓設計圖3",
-    "description": "持有此物品， 即可解鎖「複合弓 （Legendary）」的配方。 可於｢WeaponFactory Dirty 03｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「複合弓（Epic）」的配方。 可在「WeaponFactory Dirty 02」製作。"
   },
   "Blueprint_CompoundBow_5": {
     "localized_name": "複合弓設計圖4",
-    "description": "持有此物品， 即可解鎖「複合弓 （Legendary）」的配方。 可於｢WeaponFactory Dirty 03｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「複合弓（Legendary）」的配方。 可在「WeaponFactory Dirty 02」製作。"
   },
   "Blueprint_CopperArmorCold_2": {
     "localized_name": "耐寒金屬盔甲設計圖1",
-    "description": "持有此物品， 即可解鎖「CopperArmorCold 2（Uncommon）」的配方。 可於「Factory Hard 01」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「CopperArmorCold 2（Uncommon）」的配方。 可在「Factory Hard 01」製作。"
   },
   "Blueprint_CopperArmorCold_3": {
     "localized_name": "耐寒金屬盔甲設計圖2",
-    "description": "持有此物品， 即可解鎖「CopperArmorCold 3（Rare）」的配方。 可於「Factory Hard 01」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「CopperArmorCold 3（Rare）」的配方。 可在「Factory Hard 01」製作。"
   },
   "Blueprint_CopperArmorCold_4": {
     "localized_name": "耐寒金屬盔甲設計圖3",
-    "description": "持有此物品， 即可解鎖「CopperArmorCold 4（Epic）」的配方。 可於「Factory Hard 01」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「CopperArmorCold 4（Epic）」的配方。 可在「Factory Hard 01」製作。"
   },
   "Blueprint_CopperArmorCold_5": {
     "localized_name": "耐寒金屬盔甲設計圖4",
-    "description": "持有此物品， 即可解鎖「CopperArmorCold 5（Legendary）」的配方。 可於「Factory Hard 01」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「CopperArmorCold 5（Legendary）」的配方。 可在「Factory Hard 01」製作。"
   },
   "Blueprint_CopperArmorHeat_2": {
     "localized_name": "耐熱金屬盔甲設計圖1",
-    "description": "持有此物品， 即可解鎖「CopperArmorHeat 2（Uncommon）」的配方。 可於「Factory Hard 01」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「CopperArmorHeat 2（Uncommon）」的配方。 可在「Factory Hard 01」製作。"
   },
   "Blueprint_CopperArmorHeat_3": {
     "localized_name": "耐熱金屬盔甲設計圖2",
-    "description": "持有此物品， 即可解鎖「CopperArmorHeat 3（Rare）」的配方。 可於「Factory Hard 01」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「CopperArmorHeat 3（Rare）」的配方。 可在「Factory Hard 01」製作。"
   },
   "Blueprint_CopperArmorHeat_4": {
     "localized_name": "耐熱金屬盔甲設計圖3",
-    "description": "持有此物品， 即可解鎖「CopperArmorHeat 4（Epic）」的配方。 可於「Factory Hard 01」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「CopperArmorHeat 4（Epic）」的配方。 可在「Factory Hard 01」製作。"
   },
   "Blueprint_CopperArmorHeat_5": {
     "localized_name": "耐熱金屬盔甲設計圖4",
-    "description": "持有此物品， 即可解鎖「CopperArmorHeat 5（Legendary）」的配方。 可於「Factory Hard 01」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「CopperArmorHeat 5（Legendary）」的配方。 可在「Factory Hard 01」製作。"
   },
   "Blueprint_CopperArmor_2": {
     "localized_name": "金屬盔甲設計圖1",
-    "description": "持有此物品， 即可解鎖「金屬盔甲（Uncommon）」的配方。 可於「Factory Hard 01」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「金屬盔甲（Uncommon）」的配方。 可在「Factory Hard 01」製作。"
   },
   "Blueprint_CopperArmor_3": {
     "localized_name": "金屬盔甲設計圖2",
-    "description": "持有此物品， 即可解鎖「金屬盔甲（Rare）」的配方。 可於「Factory Hard 01」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「金屬盔甲（Rare）」的配方。 可在「Factory Hard 01」製作。"
   },
   "Blueprint_CopperArmor_4": {
     "localized_name": "金屬盔甲設計圖3",
-    "description": "持有此物品， 即可解鎖「金屬盔甲（Epic）」的配方。 可於「Factory Hard 01」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「金屬盔甲（Epic）」的配方。 可在「Factory Hard 01」製作。"
   },
   "Blueprint_CopperArmor_5": {
     "localized_name": "金屬盔甲設計圖4",
-    "description": "持有此物品， 即可解鎖「金屬盔甲（Legendary）」的配方。 可於「Factory Hard 01」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「金屬盔甲（Legendary）」的配方。 可在「Factory Hard 01」製作。"
   },
   "Blueprint_CopperHelmet_2": {
     "localized_name": "金屬頭盔設計圖1",
-    "description": "持有此物品， 即可解鎖「CopperHelmet 2（Uncommon）」的配方。 可於「Factory Hard 01」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「CopperHelmet 2（Uncommon）」的配方。 可在「Factory Hard 01」製作。"
   },
   "Blueprint_CopperHelmet_3": {
     "localized_name": "金屬頭盔設計圖2",
-    "description": "持有此物品， 即可解鎖「CopperHelmet 3（Rare）」的配方。 可於「Factory Hard 01」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「CopperHelmet 3（Rare）」的配方。 可在「Factory Hard 01」製作。"
   },
   "Blueprint_CopperHelmet_4": {
     "localized_name": "金屬頭盔設計圖3",
-    "description": "持有此物品， 即可解鎖「CopperHelmet 4（Epic）」的配方。 可於「Factory Hard 01」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「CopperHelmet 4（Epic）」的配方。 可在「Factory Hard 01」製作。"
   },
   "Blueprint_CopperHelmet_5": {
     "localized_name": "金屬頭盔設計圖4",
-    "description": "持有此物品， 即可解鎖「CopperHelmet 5（Legendary）」的配方。 可於「Factory Hard 01」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「CopperHelmet 5（Legendary）」的配方。 可在「Factory Hard 01」製作。"
   },
   "Blueprint_DoubleBarrelShotgun_2": {
     "localized_name": "雙管散彈槍設計圖1",
-    "description": "持有此物品， 即可解鎖「雙管散彈槍（Uncommon）」的配方。 可於「WeaponFactory Dirty 02」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「雙管散彈槍（Uncommon）」的配方。 可在「WeaponFactory Dirty 02」製作。"
   },
   "Blueprint_DoubleBarrelShotgun_3": {
     "localized_name": "雙管散彈槍設計圖2",
-    "description": "持有此物品， 即可解鎖「雙管散彈槍（Rare）」的配方。 可於「WeaponFactory Dirty 02」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「雙管散彈槍（Rare）」的配方。 可在「WeaponFactory Dirty 02」製作。"
   },
   "Blueprint_DoubleBarrelShotgun_4": {
     "localized_name": "雙管散彈槍設計圖3",
-    "description": "持有此物品， 即可解鎖「雙管散彈槍（Epic）」的配方。 可於「WeaponFactory Dirty 02」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「雙管散彈槍（Epic）」的配方。 可在「WeaponFactory Dirty 02」製作。"
   },
   "Blueprint_DoubleBarrelShotgun_5": {
     "localized_name": "雙管散彈槍設計圖4",
-    "description": "持有此物品， 即可解鎖「雙管散彈槍（Legendary）」的配方。 可於「WeaponFactory Dirty 02」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「雙管散彈槍（Legendary）」的配方。 可在「WeaponFactory Dirty 02」製作。"
   },
   "Blueprint_EnergyRocketLauncher_2": {
     "localized_name": "等離子砲設計圖1",
-    "description": "持有此物品， 即可解鎖「等離子砲 （Uncommon）」的配方。 可於｢WeaponFactory Dirty 03｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「等離子砲（Uncommon）」的配方。 可在「WeaponFactory Dirty 03」製作。"
   },
   "Blueprint_EnergyRocketLauncher_3": {
     "localized_name": "等離子砲設計圖2",
-    "description": "持有此物品， 即可解鎖「等離子砲 （Rare）」的配方。 可於｢WeaponFactory Dirty 03｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「等離子砲（Rare）」的配方。 可在「WeaponFactory Dirty 03」製作。"
   },
   "Blueprint_EnergyRocketLauncher_4": {
     "localized_name": "等離子砲設計圖3",
-    "description": "持有此物品， 即可解鎖「等離子砲 （Epic）」的配方。 可於｢WeaponFactory Dirty 03｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「等離子砲（Epic）」的配方。 可在「WeaponFactory Dirty 03」製作。"
   },
   "Blueprint_EnergyRocketLauncher_5": {
     "localized_name": "等離子砲設計圖4",
-    "description": "持有此物品， 即可解鎖「等離子砲 （Legendary）」的配方。 可於｢WeaponFactory Dirty 03｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「等離子砲（Legendary）」的配方。 可在「WeaponFactory Dirty 03」製作。"
   },
   "Blueprint_FlameThrower_2": {
     "localized_name": "火焰噴射器設計圖1",
-    "description": "持有此物品， 即可解鎖「FlameThrower （Uncommon）」的配方。 可於「WeaponFactory Dirty 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「火焰噴射器（Uncommon）」的配方。 可在「WeaponFactory Dirty 03」製作。"
   },
   "Blueprint_FlameThrower_3": {
     "localized_name": "火焰噴射器設計圖2",
-    "description": "持有此物品， 即可解鎖「FlameThrower （Rare）」的配方。 可於「WeaponFactory Dirty 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「火焰噴射器（Rare）」的配方。 可在「WeaponFactory Dirty 03」製作。"
   },
   "Blueprint_FlameThrower_4": {
     "localized_name": "火焰噴射器設計圖3",
-    "description": "持有此物品， 即可解鎖「FlameThrower （Epic）」的配方。 可於「WeaponFactory Dirty 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「火焰噴射器（Epic）」的配方。 可在「WeaponFactory Dirty 03」製作。"
   },
   "Blueprint_FlameThrower_5": {
     "localized_name": "火焰噴射器設計圖4",
-    "description": "持有此物品， 即可解鎖「FlameThrower （Legendary）」的配方。 可於「WeaponFactory Dirty 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「火焰噴射器（Legendary）」的配方。 可在「WeaponFactory Dirty 03」製作。"
   },
   "Blueprint_FurArmorCold_2": {
     "localized_name": "耐寒毛皮盔甲設計圖1",
-    "description": "持有此物品， 即可解鎖「FurArmorCold 2（Uncommon）」的配方。 可於「Factory Hard 01」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「FurArmorCold 2（Uncommon）」的配方。 可在「Factory Hard 01」製作。"
   },
   "Blueprint_FurArmorCold_3": {
     "localized_name": "耐寒毛皮盔甲設計圖2",
-    "description": "持有此物品， 即可解鎖「FurArmorCold 3（Rare）」的配方。 可於「Factory Hard 01」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「FurArmorCold 3（Rare）」的配方。 可在「Factory Hard 01」製作。"
   },
   "Blueprint_FurArmorCold_4": {
     "localized_name": "耐寒毛皮盔甲設計圖3",
-    "description": "持有此物品， 即可解鎖「FurArmorCold 4（Epic）」的配方。 可於「Factory Hard 01」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「FurArmorCold 4（Epic）」的配方。 可在「Factory Hard 01」製作。"
   },
   "Blueprint_FurArmorCold_5": {
     "localized_name": "耐寒毛皮盔甲設計圖4",
-    "description": "持有此物品， 即可解鎖「FurArmorCold 5（Legendary）」的配方。 可於「Factory Hard 01」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「FurArmorCold 5（Legendary）」的配方。 可在「Factory Hard 01」製作。"
   },
   "Blueprint_FurArmorHeat_2": {
     "localized_name": "耐熱毛皮盔甲設計圖1",
-    "description": "持有此物品， 即可解鎖「FurArmorHeat 2（Uncommon）」的配方。 可於「Factory Hard 01」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「FurArmorHeat 2（Uncommon）」的配方。 可在「Factory Hard 01」製作。"
   },
   "Blueprint_FurArmorHeat_3": {
     "localized_name": "耐熱毛皮盔甲設計圖2",
-    "description": "持有此物品， 即可解鎖「FurArmorHeat 3（Rare）」的配方。 可於「Factory Hard 01」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「FurArmorHeat 3（Rare）」的配方。 可在「Factory Hard 01」製作。"
   },
   "Blueprint_FurArmorHeat_4": {
     "localized_name": "耐熱毛皮盔甲設計圖3",
-    "description": "持有此物品， 即可解鎖「FurArmorHeat 4（Epic）」的配方。 可於「Factory Hard 01」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「FurArmorHeat 4（Epic）」的配方。 可在「Factory Hard 01」製作。"
   },
   "Blueprint_FurArmorHeat_5": {
     "localized_name": "耐熱毛皮盔甲設計圖4",
-    "description": "持有此物品， 即可解鎖「FurArmorHeat 5（Legendary）」的配方。 可於「Factory Hard 01」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「FurArmorHeat 5（Legendary）」的配方。 可在「Factory Hard 01」製作。"
   },
   "Blueprint_FurArmor_2": {
     "localized_name": "毛皮盔甲設計圖1",
-    "description": "持有此物品， 即可解鎖「毛皮盔甲（Uncommon）」的配方。 可於「Factory Hard 01」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「毛皮盔甲（Uncommon）」的配方。 可在「Factory Hard 01」製作。"
   },
   "Blueprint_FurArmor_3": {
     "localized_name": "毛皮盔甲設計圖2",
-    "description": "持有此物品， 即可解鎖「毛皮盔甲（Rare）」的配方。 可於「Factory Hard 01」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「毛皮盔甲（Rare）」的配方。 可在「Factory Hard 01」製作。"
   },
   "Blueprint_FurArmor_4": {
     "localized_name": "毛皮盔甲設計圖3",
-    "description": "持有此物品， 即可解鎖「毛皮盔甲（Epic）」的配方。 可於「Factory Hard 01」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「毛皮盔甲（Epic）」的配方。 可在「Factory Hard 01」製作。"
   },
   "Blueprint_FurArmor_5": {
     "localized_name": "毛皮盔甲設計圖4",
-    "description": "持有此物品， 即可解鎖「毛皮盔甲（Legendary）」的配方。 可於「Factory Hard 01」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「毛皮盔甲（Legendary）」的配方。 可在「Factory Hard 01」製作。"
   },
   "Blueprint_FurHelmet_2": {
     "localized_name": "羽毛髮飾設計圖1",
-    "description": "持有此物品， 即可解鎖「FurHelmet 2（Uncommon）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「FurHelmet 2（Uncommon）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_FurHelmet_3": {
     "localized_name": "羽毛髮飾設計圖2",
-    "description": "持有此物品， 即可解鎖「FurHelmet 3（Rare）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「FurHelmet 3（Rare）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_FurHelmet_4": {
     "localized_name": "羽毛髮飾設計圖3",
-    "description": "持有此物品， 即可解鎖「FurHelmet 4（Epic）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「FurHelmet 4（Epic）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_FurHelmet_5": {
     "localized_name": "羽毛髮飾設計圖4",
-    "description": "持有此物品， 即可解鎖「FurHelmet 5（Legendary）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「FurHelmet 5（Legendary）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_GatlingGun_2": {
     "localized_name": "加特林機槍設計圖1",
-    "description": "持有此物品， 即可解鎖「加特林機槍 （Uncommon）」的配方。 可於「WeaponFactory Dirty 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「加特林機槍（Uncommon）」的配方。 可在「WeaponFactory Dirty 03」製作。"
   },
   "Blueprint_GatlingGun_3": {
     "localized_name": "加特林機槍設計圖2",
-    "description": "持有此物品， 即可解鎖「加特林機槍 （Rare）」的配方。 可於「WeaponFactory Dirty 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「加特林機槍（Rare）」的配方。 可在「WeaponFactory Dirty 03」製作。"
   },
   "Blueprint_GatlingGun_4": {
     "localized_name": "加特林機槍設計圖3",
-    "description": "持有此物品， 即可解鎖「加特林機槍 （Epic）」的配方。 可於「WeaponFactory Dirty 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「加特林機槍（Epic）」的配方。 可在「WeaponFactory Dirty 03」製作。"
   },
   "Blueprint_GatlingGun_5": {
     "localized_name": "加特林機槍設計圖4",
-    "description": "持有此物品， 即可解鎖「加特林機槍 （Legendary）」的配方。 可於「WeaponFactory Dirty 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「加特林機槍（Legendary）」的配方。 可在「WeaponFactory Dirty 03」製作。"
   },
   "Blueprint_GrenadeLauncher_2": {
     "localized_name": "榴彈發射器設計圖1",
-    "description": "持有此物品， 即可解鎖「榴彈發射器 （Uncommon）」的配方。 可於「WeaponFactory Dirty 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「榴彈發射器（Uncommon）」的配方。 可在「WeaponFactory Dirty 03」製作。"
   },
   "Blueprint_GrenadeLauncher_3": {
     "localized_name": "榴彈發射器設計圖2",
-    "description": "持有此物品， 即可解鎖「榴彈發射器 （Rare）」的配方。 可於「WeaponFactory Dirty 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「榴彈發射器（Rare）」的配方。 可在「WeaponFactory Dirty 03」製作。"
   },
   "Blueprint_GrenadeLauncher_4": {
     "localized_name": "榴彈發射器設計圖3",
-    "description": "持有此物品， 即可解鎖「榴彈發射器 （Epic）」的配方。 可於「WeaponFactory Dirty 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「榴彈發射器（Epic）」的配方。 可在「WeaponFactory Dirty 03」製作。"
   },
   "Blueprint_GrenadeLauncher_5": {
     "localized_name": "榴彈發射器設計圖4",
-    "description": "持有此物品， 即可解鎖「榴彈發射器 （Legendary）」的配方。 可於「WeaponFactory Dirty 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「榴彈發射器（Legendary）」的配方。 可在「WeaponFactory Dirty 03」製作。"
   },
   "Blueprint_GuidedMissileLauncher_2": {
     "localized_name": "追蹤導彈發射器設計圖1",
-    "description": "持有此物品， 即可解鎖「追蹤導彈發射器 （Uncommon）」的配方。 可於「WeaponFactory Dirty 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「追蹤導彈發射器（Uncommon）」的配方。 可在「WeaponFactory Dirty 03」製作。"
   },
   "Blueprint_GuidedMissileLauncher_3": {
     "localized_name": "追蹤導彈發射器設計圖2",
-    "description": "持有此物品， 即可解鎖「追蹤導彈發射器 （Rare）」的配方。 可於「WeaponFactory Dirty 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「追蹤導彈發射器（Rare）」的配方。 可在「WeaponFactory Dirty 03」製作。"
   },
   "Blueprint_GuidedMissileLauncher_4": {
     "localized_name": "追蹤導彈發射器設計圖3",
-    "description": "持有此物品， 即可解鎖「追蹤導彈發射器 （Epic）」的配方。 可於「WeaponFactory Dirty 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「追蹤導彈發射器（Epic）」的配方。 可在「WeaponFactory Dirty 03」製作。"
   },
   "Blueprint_GuidedMissileLauncher_5": {
     "localized_name": "追蹤導彈發射器設計圖4",
-    "description": "持有此物品， 即可解鎖「追蹤導彈發射器 （Legendary）」的配方。 可於「WeaponFactory Dirty 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「追蹤導彈發射器（Legendary）」的配方。 可在「WeaponFactory Dirty 03」製作。"
   },
   "Blueprint_HandGun_Default_2": {
     "localized_name": "手槍設計圖1",
-    "description": "持有此物品， 即可解鎖「HandGun Default（Uncommon）」的配方。 可於「WeaponFactory Dirty 01」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「HandGun Default（Uncommon）」的配方。 可在「WeaponFactory Dirty 01」製作。"
   },
   "Blueprint_HandGun_Default_3": {
     "localized_name": "手槍設計圖2",
-    "description": "持有此物品， 即可解鎖「HandGun Default（Rare）」的配方。 可於「WeaponFactory Dirty 01」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「HandGun Default（Rare）」的配方。 可在「WeaponFactory Dirty 01」製作。"
   },
   "Blueprint_HandGun_Default_4": {
     "localized_name": "手槍設計圖3",
-    "description": "持有此物品， 即可解鎖「HandGun Default（Epic）」的配方。 可於「WeaponFactory Dirty 01」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「HandGun Default（Epic）」的配方。 可在「WeaponFactory Dirty 01」製作。"
   },
   "Blueprint_HandGun_Default_5": {
     "localized_name": "手槍設計圖4",
-    "description": "持有此物品， 即可解鎖「HandGun Default（Legendary）」的配方。 可於「WeaponFactory Dirty 01」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「HandGun Default（Legendary）」的配方。 可在「WeaponFactory Dirty 01」製作。"
   },
   "Blueprint_Head001_1": {
     "localized_name": "王冠設計圖1",
-    "description": "持有此物品， 即可解鎖「Head001 2（Common）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head001 2（Common）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head001_2": {
     "localized_name": "王冠設計圖2",
-    "description": "持有此物品， 即可解鎖「Head001 2（Uncommon）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head001 2（Uncommon）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head001_3": {
     "localized_name": "王冠設計圖3",
-    "description": "持有此物品， 即可解鎖「Head001 3（Rare）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head001 3（Rare）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head001_4": {
     "localized_name": "王冠設計圖4",
-    "description": "持有此物品， 即可解鎖「Head001 4（Epic）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head001 4（Epic）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head001_5": {
     "localized_name": "王的皇冠設計圖5",
-    "description": "擁有它後，「Head001 5 （Legendary）」的配方會解鎖。 可以在「初階工作臺」中製作。"
+    "description": "擁有它後，「Head001 5 （Legendary）」的配方會解鎖。 可以在「初階工作台」中製作。"
   },
   "Blueprint_Head002_1": {
     "localized_name": "金色王冠設計圖1",
-    "description": "持有此物品， 即可解鎖「Head002 2（Common）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head002 2（Common）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head002_2": {
     "localized_name": "金色王冠設計圖2",
-    "description": "持有此物品， 即可解鎖「Head002 2（Uncommon）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head002 2（Uncommon）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head002_3": {
     "localized_name": "金色王冠設計圖3",
-    "description": "持有此物品， 即可解鎖「Head002 3（Rare）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head002 3（Rare）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head002_4": {
     "localized_name": "金色王冠設計圖4",
-    "description": "持有此物品， 即可解鎖「Head002 4（Epic）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head002 4（Epic）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head002_5": {
     "localized_name": "金冠的設計圖5",
-    "description": "擁有後，「Head002 5（Legendary）」的配方將會解鎖。 可以在「初階工作臺」進行製作。"
+    "description": "擁有後，「Head002 5（Legendary）」的配方將會解鎖。 可以在「初階工作台」進行製作。"
   },
   "Blueprint_Head003_1": {
     "localized_name": "長耳髮箍設計圖1",
-    "description": "持有此物品， 即可解鎖「Head003 2（Common）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head003 2（Common）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head003_2": {
     "localized_name": "長耳髮箍設計圖2",
-    "description": "持有此物品， 即可解鎖「Head003 2（Uncommon）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head003 2（Uncommon）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head003_3": {
     "localized_name": "長耳髮箍設計圖3",
-    "description": "持有此物品， 即可解鎖「Head003 3（Rare）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head003 3（Rare）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head003_4": {
     "localized_name": "長耳髮箍設計圖4",
-    "description": "持有此物品， 即可解鎖「Head003 4（Epic）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head003 4（Epic）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head003_5": {
     "localized_name": "長耳髮箍的設計圖5",
-    "description": "持有它，將解鎖「Head003 5（Legendary）」的配方。「初階工作臺」可以進行製作。"
+    "description": "持有它，將解鎖「Head003 5（Legendary）」的配方。「初階工作台」可以進行製作。"
   },
   "Blueprint_Head004_1": {
     "localized_name": "女巫帽設計圖1",
-    "description": "持有此物品， 即可解鎖「Head004 2（Common）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head004 2（Common）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head004_2": {
     "localized_name": "女巫帽設計圖2",
-    "description": "持有此物品， 即可解鎖「Head004 2（Uncommon）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head004 2（Uncommon）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head004_3": {
     "localized_name": "女巫帽設計圖3",
-    "description": "持有此物品， 即可解鎖「Head004 3（Rare）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head004 3（Rare）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head004_4": {
     "localized_name": "女巫帽設計圖4",
-    "description": "持有此物品， 即可解鎖「Head004 4（Epic）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head004 4（Epic）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head004_5": {
     "localized_name": "魔女帽子的設計圖5",
-    "description": "所擁有的話，「Head004 5 （Legendary）」的配方就會被解鎖。 在「初階工作臺」可以製作。"
+    "description": "所擁有的話，「Head004 5 （Legendary）」的配方就會被解鎖。 在「初階工作台」可以製作。"
   },
   "Blueprint_Head005_1": {
     "localized_name": "費多拉帽設計圖1",
-    "description": "持有此物品， 即可解鎖「Head005 2（Common）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head005 2（Common）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head005_2": {
     "localized_name": "費多拉帽設計圖2",
-    "description": "持有此物品， 即可解鎖「Head005 2（Uncommon）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head005 2（Uncommon）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head005_3": {
     "localized_name": "費多拉帽設計圖3",
-    "description": "持有此物品， 即可解鎖「Head005 3（Rare）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head005 3（Rare）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head005_4": {
     "localized_name": "費多拉帽設計圖4",
-    "description": "持有此物品， 即可解鎖「Head005 4（Epic）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head005 4（Epic）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head005_5": {
     "localized_name": "軟帽子的設計圖5",
-    "description": "擁有後，將會解鎖「Head005 5 （Legendary）」的配方。 可以在「初階工作臺」裡製作。"
+    "description": "擁有後，將會解鎖「Head005 5 （Legendary）」的配方。 可以在「初階工作台」裡製作。"
   },
   "Blueprint_Head006_1": {
     "localized_name": "安全帽設計圖1",
-    "description": "持有此物品， 即可解鎖「Head006 2（Common）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head006 2（Common）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head006_2": {
     "localized_name": "安全帽設計圖2",
-    "description": "持有此物品， 即可解鎖「Head006 2（Uncommon）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head006 2（Uncommon）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head006_3": {
     "localized_name": "安全帽設計圖3",
-    "description": "持有此物品， 即可解鎖「Head006 3（Rare）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head006 3（Rare）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head006_4": {
     "localized_name": "安全帽設計圖4",
-    "description": "持有此物品， 即可解鎖「Head006 4（Epic）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head006 4（Epic）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head006_5": {
     "localized_name": "頭盔設計圖5",
-    "description": "只要擁有，就會解鎖「Head006 5 （Legendary）」的配方。 可以在「初階工作臺」中製作。"
+    "description": "只要擁有，就會解鎖「Head006 5 （Legendary）」的配方。 可以在「初階工作台」中製作。"
   },
   "Blueprint_Head007_1": {
     "localized_name": "大禮帽設計圖1",
-    "description": "持有此物品， 即可解鎖「Head007 2（Common）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head007 2（Common）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head007_2": {
     "localized_name": "大禮帽設計圖2",
-    "description": "持有此物品， 即可解鎖「Head007 2（Uncommon）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head007 2（Uncommon）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head007_3": {
     "localized_name": "大禮帽設計圖3",
-    "description": "持有此物品， 即可解鎖「Head007 3（Rare）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head007 3（Rare）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head007_4": {
     "localized_name": "大禮帽設計圖4",
-    "description": "持有此物品， 即可解鎖「Head007 4（Epic）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head007 4（Epic）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head007_5": {
     "localized_name": "絲帽的設計圖5",
-    "description": "擁有它，就會解鎖「Head007 5 （Legendary）」的配方。 可以在「初階工作臺」中製作。"
+    "description": "擁有它，就會解鎖「Head007 5 （Legendary）」的配方。 可以在「初階工作台」中製作。"
   },
   "Blueprint_Head008_1": {
     "localized_name": "三角帽設計圖1",
-    "description": "持有此物品， 即可解鎖「Head008 2（Common）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head008 2（Common）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head008_2": {
     "localized_name": "三角帽設計圖2",
-    "description": "持有此物品， 即可解鎖「Head008 2（Uncommon）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head008 2（Uncommon）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head008_3": {
     "localized_name": "三角帽設計圖3",
-    "description": "持有此物品， 即可解鎖「Head008 3（Rare）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head008 3（Rare）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head008_4": {
     "localized_name": "三角帽設計圖4",
-    "description": "持有此物品， 即可解鎖「Head008 4（Epic）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head008 4（Epic）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head008_5": {
     "localized_name": "三角帽子的設計圖5",
-    "description": "持有後，將解鎖「Head008 5（Legendary）」的配方。可以在「初階工作臺」中進行製作。"
+    "description": "持有後，將解鎖「Head008 5（Legendary）」的配方。可以在「初階工作台」中進行製作。"
   },
   "Blueprint_Head009_1": {
     "localized_name": "探險帽設計圖1",
-    "description": "持有此物品， 即可解鎖「Head009 2（Common）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head009 2（Common）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head009_2": {
     "localized_name": "探險帽設計圖2",
-    "description": "持有此物品， 即可解鎖「Head009 2（Uncommon）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head009 2（Uncommon）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head009_3": {
     "localized_name": "探險帽設計圖3",
-    "description": "持有此物品， 即可解鎖「Head009 3（Rare）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head009 3（Rare）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head009_4": {
     "localized_name": "探險帽設計圖4",
-    "description": "持有此物品， 即可解鎖「Head009 4（Epic）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head009 4（Epic）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head009_5": {
     "localized_name": "探險的帽子設計圖5",
-    "description": "擁有後，「Head009 5 （Legendary）」的配方將被解鎖。 可以在「初階工作臺」中進行製作。"
+    "description": "擁有後，「Head009 5 （Legendary）」的配方將被解鎖。 可以在「初階工作台」中進行製作。"
   },
   "Blueprint_Head010_1": {
     "localized_name": "學士帽設計圖1",
-    "description": "持有此物品， 即可解鎖「Head010 2（Common）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head010 2（Common）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head010_2": {
     "localized_name": "學士帽設計圖2",
-    "description": "持有此物品， 即可解鎖「Head010 2（Uncommon）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head010 2（Uncommon）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head010_3": {
     "localized_name": "學士帽設計圖3",
-    "description": "持有此物品， 即可解鎖「Head010 3（Rare）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head010 3（Rare）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head010_4": {
     "localized_name": "學士帽設計圖4",
-    "description": "持有此物品， 即可解鎖「Head010 4（Epic）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head010 4（Epic）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head010_5": {
     "localized_name": "大學的帽子設計圖5",
-    "description": "擁有它後，「Head010 5 （Legendary）」的配方就會解鎖。 可以在「初階工作臺」裡進行製作。"
+    "description": "擁有它後，「Head010 5 （Legendary）」的配方就會解鎖。 可以在「初階工作台」裡進行製作。"
   },
   "Blueprint_Head011_1": {
     "localized_name": "農夫帽設計圖1",
-    "description": "持有此物品， 即可解鎖「Head011 2（Common）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head011 2（Common）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head011_2": {
     "localized_name": "農夫帽設計圖2",
-    "description": "持有此物品， 即可解鎖「Head011 2（Uncommon）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head011 2（Uncommon）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head011_3": {
     "localized_name": "農夫帽設計圖3",
-    "description": "持有此物品， 即可解鎖「Head011 3（Rare）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head011 3（Rare）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head011_4": {
     "localized_name": "農夫帽設計圖4",
-    "description": "持有此物品， 即可解鎖「Head011 4（Epic）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head011 4（Epic）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head011_5": {
     "localized_name": "農業的帽子設計圖5",
-    "description": "擁有之後，「Head011 5 （Legendary）」的配方就會解鎖。 可以在「初階工作臺」中製作。"
+    "description": "擁有之後，「Head011 5 （Legendary）」的配方就會解鎖。 可以在「初階工作台」中製作。"
   },
   "Blueprint_Head012_1": {
     "localized_name": "博勒帽設計圖1",
-    "description": "持有此物品， 即可解鎖「Head012 2（Common）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head012 2（Common）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head012_2": {
     "localized_name": "博勒帽設計圖2",
-    "description": "持有此物品， 即可解鎖「Head012 2（Uncommon）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head012 2（Uncommon）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head012_3": {
     "localized_name": "博勒帽設計圖3",
-    "description": "持有此物品， 即可解鎖「Head012 3（Rare）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head012 3（Rare）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head012_4": {
     "localized_name": "博勒帽設計圖4",
-    "description": "持有此物品， 即可解鎖「Head012 4（Epic）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head012 4（Epic）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head012_5": {
     "localized_name": "波勒帽的設計圖5",
-    "description": "擁有它時，|Head012 5 （Legendary）|的配方將會解鎖。 可以在|初階工作臺|裡進行工藝製作。"
+    "description": "擁有它時，|Head012 5 （Legendary）|的配方將會解鎖。 可以在|初階工作台|裡進行工藝製作。"
   },
   "Blueprint_Head013_1": {
     "localized_name": "炸蛋鳥帽設計圖1",
-    "description": "持有此物品， 即可解鎖「Head013 2（Common）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head013 2（Common）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head013_2": {
     "localized_name": "炸蛋鳥帽設計圖2",
-    "description": "持有此物品， 即可解鎖「Head013 2（Uncommon）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head013 2（Uncommon）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head013_3": {
     "localized_name": "炸蛋鳥帽設計圖3",
-    "description": "持有此物品， 即可解鎖「Head013 3（Rare）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head013 3（Rare）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head013_4": {
     "localized_name": "炸蛋鳥帽設計圖4",
-    "description": "持有此物品， 即可解鎖「Head013 4（Epic）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head013 4（Epic）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head013_5": {
     "localized_name": "庫魯特里帽的設計圖5",
-    "description": "持有它，會解鎖| Head013 5 （Legendary）|的配方。 可以在| 初階工作臺 |上進行工藝製作。"
+    "description": "持有它，會解鎖| Head013 5 （Legendary）|的配方。 可以在| 初階工作台 |上進行工藝製作。"
   },
   "Blueprint_Head014_1": {
     "localized_name": "笑臉炸蛋鳥帽設計圖1",
-    "description": "持有此物品， 即可解鎖「Head014 2（Common）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head014 2（Common）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head014_2": {
     "localized_name": "笑臉炸蛋鳥帽設計圖2",
-    "description": "持有此物品， 即可解鎖「Head014 2（Uncommon）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head014 2（Uncommon）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head014_3": {
     "localized_name": "笑臉炸蛋鳥帽設計圖3",
-    "description": "持有此物品， 即可解鎖「Head014 3（Rare）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head014 3（Rare）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head014_4": {
     "localized_name": "笑臉炸蛋鳥帽設計圖4",
-    "description": "持有此物品， 即可解鎖「Head014 4（Epic）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head014 4（Epic）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head014_5": {
     "localized_name": "咧咧笑的萌萌帽設計圖5",
-    "description": "持有後，「Head014 5 （Legendary）」的配方就會被解鎖。 可以在「初階工作臺」上進行手工藝。"
+    "description": "持有後，「Head014 5 （Legendary）」的配方就會被解鎖。 可以在「初階工作台」上進行手工藝。"
   },
   "Blueprint_Head015_1": {
     "localized_name": "葉泥泥帽設計圖1",
-    "description": "持有此物品， 即可解鎖「Head015 2（Common）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head015 2（Common）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head015_2": {
     "localized_name": "葉泥泥帽設計圖2",
-    "description": "持有此物品， 即可解鎖「Head015 2（Uncommon）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head015 2（Uncommon）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head015_3": {
     "localized_name": "葉泥泥帽設計圖3",
-    "description": "持有此物品， 即可解鎖「Head015 3（Rare）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head015 3（Rare）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head015_4": {
     "localized_name": "葉泥泥帽設計圖4",
-    "description": "持有此物品， 即可解鎖「Head015 4（Epic）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head015 4（Epic）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head015_5": {
     "localized_name": "ナエモチ帽的設計圖5",
-    "description": "擁有之後，會解鎖「Head015 5（Legendary）」的配方。 在「初階工作臺」能夠進行製作。"
+    "description": "擁有之後，會解鎖「Head015 5（Legendary）」的配方。 在「初階工作台」能夠進行製作。"
   },
   "Blueprint_Head016_1": {
     "localized_name": "企丸王帽設計圖1",
-    "description": "持有此物品， 即可解鎖「Head016 2（Common）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head016 2（Common）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head016_2": {
     "localized_name": "企丸王帽設計圖2",
-    "description": "持有此物品， 即可解鎖「Head016 2（Uncommon）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head016 2（Uncommon）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head016_3": {
     "localized_name": "企丸王帽設計圖3",
-    "description": "持有此物品， 即可解鎖「Head016 3（Rare）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head016 3（Rare）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head016_4": {
     "localized_name": "企丸王帽設計圖4",
-    "description": "持有此物品， 即可解鎖「Head016 4（Epic）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head016 4（Epic）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head016_5": {
     "localized_name": "凱本帽的設計圖5",
-    "description": "擁有它,會解鎖「Head016 5（Legendary）」的配方. 在「初階工作臺」中可以製作."
+    "description": "擁有它,會解鎖「Head016 5（Legendary）」的配方. 在「初階工作台」中可以製作."
   },
   "Blueprint_Head017_1": {
     "localized_name": "闇巫貓帽設計圖1",
-    "description": "持有此物品， 即可解鎖「Head017 2（Common）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head017 2（Common）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head017_2": {
     "localized_name": "闇巫貓帽設計圖2",
-    "description": "持有此物品， 即可解鎖「Head017 2（Uncommon）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head017 2（Uncommon）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head017_3": {
     "localized_name": "闇巫貓帽設計圖3",
-    "description": "持有此物品， 即可解鎖「Head017 3（Rare）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head017 3（Rare）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head017_4": {
     "localized_name": "闇巫貓帽設計圖4",
-    "description": "持有此物品， 即可解鎖「Head017 4（Epic）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Head017 4（Epic）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_Head017_5": {
     "localized_name": "克雷梅奧帽的設計圖5",
@@ -1169,667 +1169,667 @@
   },
   "Blueprint_HeadEquip025_1": {
     "localized_name": "朋克蜥的兜帽設計圖1",
-    "description": "持有此物品， 即可解鎖「朋克蜥的兜帽 （Common）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「朋克蜥的兜帽（Common）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_HeadEquip025_2": {
     "localized_name": "朋克蜥的兜帽設計圖2",
-    "description": "持有此物品， 即可解鎖「朋克蜥的兜帽 （Uncommon）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「朋克蜥的兜帽（Uncommon）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_HeadEquip025_3": {
     "localized_name": "朋克蜥的兜帽設計圖3",
-    "description": "持有此物品， 即可解鎖「HeadEquip025 2 （Rare）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「HeadEquip025 2（Rare）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_HeadEquip025_4": {
     "localized_name": "朋克蜥的兜帽設計圖4",
-    "description": "持有此物品， 即可解鎖「HeadEquip025 3 （Epic）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「HeadEquip025 3（Epic）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_HeadEquip025_5": {
     "localized_name": "朋克蜥的兜帽設計圖1",
-    "description": "持有此物品， 即可解鎖「朋克蜥的兜帽 （Common）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「朋克蜥的兜帽（Common）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_HeadEquip026_1": {
     "localized_name": "勾魂魷帽子設計圖1",
-    "description": "持有此物品， 即可解鎖「勾魂魷帽子 （Common）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「勾魂魷帽子（Common）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_HeadEquip026_2": {
     "localized_name": "勾魂魷帽子設計圖2",
-    "description": "持有此物品， 即可解鎖「勾魂魷帽子 （Uncommon）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「勾魂魷帽子（Uncommon）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_HeadEquip026_3": {
     "localized_name": "勾魂魷帽子設計圖3",
-    "description": "持有此物品， 即可解鎖「HeadEquip026 2 （Rare）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「HeadEquip026 2（Rare）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_HeadEquip026_4": {
     "localized_name": "勾魂魷帽子設計圖4",
-    "description": "持有此物品， 即可解鎖「HeadEquip026 3 （Epic）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「HeadEquip026 3（Epic）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_HeadEquip026_5": {
     "localized_name": "勾魂魷帽子設計圖1",
-    "description": "持有此物品， 即可解鎖「勾魂魷帽子 （Common）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「勾魂魷帽子（Common）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_HeadEquip028_1": {
     "localized_name": "姬小兔的髮飾設計圖1",
-    "description": "持有此物品， 即可解鎖「姬小兔的髮飾 （Common）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「姬小兔的髮飾（Common）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_HeadEquip028_2": {
     "localized_name": "姬小兔的髮飾設計圖2",
-    "description": "持有此物品， 即可解鎖「姬小兔的髮飾 （Uncommon）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「姬小兔的髮飾（Uncommon）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_HeadEquip028_3": {
     "localized_name": "姬小兔的髮飾設計圖3",
-    "description": "持有此物品， 即可解鎖「HeadEquip028 2 （Rare）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「HeadEquip028 2（Rare）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_HeadEquip028_4": {
     "localized_name": "姬小兔的髮飾設計圖4",
-    "description": "持有此物品， 即可解鎖「HeadEquip028 3 （Epic）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「HeadEquip028 3（Epic）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_HeadEquip028_5": {
     "localized_name": "姬小兔的髮飾設計圖1",
-    "description": "持有此物品， 即可解鎖「姬小兔的髮飾 （Common）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「姬小兔的髮飾（Common）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_HeadEquip031_1": {
     "localized_name": "毛撣兒帽子設計圖1",
-    "description": "持有此物品， 即可解鎖「毛撣兒帽子 （Common）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「毛撣兒帽子（Common）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_HeadEquip031_2": {
     "localized_name": "毛撣兒帽子設計圖2",
-    "description": "持有此物品， 即可解鎖「毛撣兒帽子 （Uncommon）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「毛撣兒帽子（Uncommon）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_HeadEquip031_3": {
     "localized_name": "毛撣兒帽子設計圖3",
-    "description": "持有此物品， 即可解鎖「HeadEquip031 2 （Rare）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「HeadEquip031 2（Rare）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_HeadEquip031_4": {
     "localized_name": "毛撣兒帽子設計圖4",
-    "description": "持有此物品， 即可解鎖「HeadEquip031 3 （Epic）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「HeadEquip031 3（Epic）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_HeadEquip031_5": {
     "localized_name": "毛撣兒帽子設計圖1",
-    "description": "持有此物品， 即可解鎖「毛撣兒帽子 （Common）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「毛撣兒帽子（Common）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_HeadEquip032_1": {
     "localized_name": "雷鳴童子帽子設計圖1",
-    "description": "持有此物品， 即可解鎖「雷鳴童子帽子 （Common）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「雷鳴童子帽子（Common）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_HeadEquip032_2": {
     "localized_name": "雷鳴童子帽子設計圖2",
-    "description": "持有此物品， 即可解鎖「雷鳴童子帽子 （Uncommon）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「雷鳴童子帽子（Uncommon）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_HeadEquip032_3": {
     "localized_name": "雷鳴童子帽子設計圖3",
-    "description": "持有此物品， 即可解鎖「HeadEquip032 2 （Rare）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「HeadEquip032 2（Rare）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_HeadEquip032_4": {
     "localized_name": "雷鳴童子帽子設計圖4",
-    "description": "持有此物品， 即可解鎖「HeadEquip032 3 （Epic）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「HeadEquip032 3（Epic）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_HeadEquip032_5": {
     "localized_name": "雷鳴童子帽子設計圖1",
-    "description": "持有此物品， 即可解鎖「雷鳴童子帽子 （Common）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「雷鳴童子帽子（Common）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_IronArmorCold_2": {
     "localized_name": "耐寒精煉金屬盔甲設計圖1",
-    "description": "持有此物品， 即可解鎖「IronArmorCold 2（Uncommon）」的配方。 可於「Factory Hard 02」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「IronArmorCold 2（Uncommon）」的配方。 可在「Factory Hard 02」製作。"
   },
   "Blueprint_IronArmorCold_3": {
     "localized_name": "耐寒精煉金屬盔甲設計圖2",
-    "description": "持有此物品， 即可解鎖「IronArmorCold 3（Rare）」的配方。 可於「Factory Hard 02」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「IronArmorCold 3（Rare）」的配方。 可在「Factory Hard 02」製作。"
   },
   "Blueprint_IronArmorCold_4": {
     "localized_name": "耐寒精煉金屬盔甲設計圖3",
-    "description": "持有此物品， 即可解鎖「IronArmorCold 4（Epic）」的配方。 可於「Factory Hard 02」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「IronArmorCold 4（Epic）」的配方。 可在「Factory Hard 02」製作。"
   },
   "Blueprint_IronArmorCold_5": {
     "localized_name": "耐寒精煉金屬盔甲設計圖4",
-    "description": "持有此物品， 即可解鎖「IronArmorCold 5（Legendary）」的配方。 可於「Factory Hard 02」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「IronArmorCold 5（Legendary）」的配方。 可在「Factory Hard 02」製作。"
   },
   "Blueprint_IronArmorHeat_2": {
     "localized_name": "耐熱精煉金屬盔甲設計圖1",
-    "description": "持有此物品， 即可解鎖「IronArmorHeat 2（Uncommon）」的配方。 可於「Factory Hard 02」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「IronArmorHeat 2（Uncommon）」的配方。 可在「Factory Hard 02」製作。"
   },
   "Blueprint_IronArmorHeat_3": {
     "localized_name": "耐熱精煉金屬盔甲設計圖2",
-    "description": "持有此物品， 即可解鎖「IronArmorHeat 3（Rare）」的配方。 可於「Factory Hard 02」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「IronArmorHeat 3（Rare）」的配方。 可在「Factory Hard 02」製作。"
   },
   "Blueprint_IronArmorHeat_4": {
     "localized_name": "耐熱精煉金屬盔甲設計圖3",
-    "description": "持有此物品， 即可解鎖「IronArmorHeat 4（Epic）」的配方。 可於「Factory Hard 02」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「IronArmorHeat 4（Epic）」的配方。 可在「Factory Hard 02」製作。"
   },
   "Blueprint_IronArmorHeat_5": {
     "localized_name": "耐熱精煉金屬盔甲設計圖4",
-    "description": "持有此物品， 即可解鎖「IronArmorHeat 5（Legendary）」的配方。 可於「Factory Hard 02」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「IronArmorHeat 5（Legendary）」的配方。 可在「Factory Hard 02」製作。"
   },
   "Blueprint_IronArmor_2": {
     "localized_name": "精煉金屬盔甲設計圖1",
-    "description": "持有此物品， 即可解鎖「精煉金屬盔甲（Uncommon）」的配方。 可於「Factory Hard 02」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「精煉金屬盔甲（Uncommon）」的配方。 可在「Factory Hard 02」製作。"
   },
   "Blueprint_IronArmor_3": {
     "localized_name": "精煉金屬盔甲設計圖2",
-    "description": "持有此物品， 即可解鎖「精煉金屬盔甲（Rare）」的配方。 可於「Factory Hard 02」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「精煉金屬盔甲（Rare）」的配方。 可在「Factory Hard 02」製作。"
   },
   "Blueprint_IronArmor_4": {
     "localized_name": "精煉金屬盔甲設計圖3",
-    "description": "持有此物品， 即可解鎖「精煉金屬盔甲（Epic）」的配方。 可於「Factory Hard 02」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「精煉金屬盔甲（Epic）」的配方。 可在「Factory Hard 02」製作。"
   },
   "Blueprint_IronArmor_5": {
     "localized_name": "精煉金屬盔甲設計圖4",
-    "description": "持有此物品， 即可解鎖「精煉金屬盔甲（Legendary）」的配方。 可於「Factory Hard 02」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「精煉金屬盔甲（Legendary）」的配方。 可在「Factory Hard 02」製作。"
   },
   "Blueprint_IronHelmet_2": {
     "localized_name": "精煉金屬頭盔設計圖1",
-    "description": "持有此物品， 即可解鎖「IronHelmet 2（Uncommon）」的配方。 可於「Factory Hard 02」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「IronHelmet 2（Uncommon）」的配方。 可在「Factory Hard 02」製作。"
   },
   "Blueprint_IronHelmet_3": {
     "localized_name": "精煉金屬頭盔設計圖2",
-    "description": "持有此物品， 即可解鎖「IronHelmet 3（Rare）」的配方。 可於「Factory Hard 02」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「IronHelmet 3（Rare）」的配方。 可在「Factory Hard 02」製作。"
   },
   "Blueprint_IronHelmet_4": {
     "localized_name": "精煉金屬頭盔設計圖3",
-    "description": "持有此物品， 即可解鎖「IronHelmet 4（Epic）」的配方。 可於「Factory Hard 02」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「IronHelmet 4（Epic）」的配方。 可在「Factory Hard 02」製作。"
   },
   "Blueprint_IronHelmet_5": {
     "localized_name": "精煉金屬頭盔設計圖4",
-    "description": "持有此物品， 即可解鎖「IronHelmet 5（Legendary）」的配方。 可於「Factory Hard 02」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「IronHelmet 5（Legendary）」的配方。 可在「Factory Hard 02」製作。"
   },
   "Blueprint_LaserGatlingGun_2": {
     "localized_name": "雷射加特林設計圖1",
-    "description": "持有此物品， 即可解鎖「雷射加特林 （Uncommon）」的配方。 可於｢WeaponFactory Dirty 03｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「雷射加特林（Uncommon）」的配方。 可在「WeaponFactory Dirty 03」製作。"
   },
   "Blueprint_LaserGatlingGun_3": {
     "localized_name": "雷射加特林設計圖2",
-    "description": "持有此物品， 即可解鎖「雷射加特林 （Rare）」的配方。 可於｢WeaponFactory Dirty 03｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「雷射加特林（Rare）」的配方。 可在「WeaponFactory Dirty 03」製作。"
   },
   "Blueprint_LaserGatlingGun_4": {
     "localized_name": "雷射加特林設計圖3",
-    "description": "持有此物品， 即可解鎖「雷射加特林 （Epic）」的配方。 可於｢WeaponFactory Dirty 03｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「雷射加特林（Epic）」的配方。 可在「WeaponFactory Dirty 03」製作。"
   },
   "Blueprint_LaserGatlingGun_5": {
     "localized_name": "雷射加特林設計圖4",
-    "description": "持有此物品， 即可解鎖「雷射加特林 （Legendary）」的配方。 可於｢WeaponFactory Dirty 03｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「雷射加特林（Legendary）」的配方。 可在「WeaponFactory Dirty 03」製作。"
   },
   "Blueprint_LaserRifle_2": {
     "localized_name": "雷射步槍設計圖1",
-    "description": "持有此物品， 即可解鎖「雷射步槍 （Uncommon）」的配方。 可於「WeaponFactory Dirty 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「雷射步槍（Uncommon）」的配方。 可在「WeaponFactory Dirty 03」製作。"
   },
   "Blueprint_LaserRifle_3": {
     "localized_name": "雷射步槍設計圖2",
-    "description": "持有此物品， 即可解鎖「雷射步槍 （Rare）」的配方。 可於「WeaponFactory Dirty 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「雷射步槍（Rare）」的配方。 可在「WeaponFactory Dirty 03」製作。"
   },
   "Blueprint_LaserRifle_4": {
     "localized_name": "雷射步槍設計圖3",
-    "description": "持有此物品， 即可解鎖「雷射步槍 （Epic）」的配方。 可於「WeaponFactory Dirty 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「雷射步槍（Epic）」的配方。 可在「WeaponFactory Dirty 03」製作。"
   },
   "Blueprint_LaserRifle_5": {
     "localized_name": "雷射步槍設計圖4",
-    "description": "持有此物品， 即可解鎖「雷射步槍 （Legendary）」的配方。 可於「WeaponFactory Dirty 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「雷射步槍（Legendary）」的配方。 可在「WeaponFactory Dirty 03」製作。"
   },
   "Blueprint_Launcher_Default_2": {
     "localized_name": "火箭發射器設計圖1",
-    "description": "持有此物品， 即可解鎖「Launcher Default（Uncommon）」的配方。 可於「WeaponFactory Dirty 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Launcher Default（Uncommon）」的配方。 可在「WeaponFactory Dirty 03」製作。"
   },
   "Blueprint_Launcher_Default_3": {
     "localized_name": "火箭發射器設計圖2",
-    "description": "持有此物品， 即可解鎖「Launcher Default（Rare）」的配方。 可於「WeaponFactory Dirty 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Launcher Default（Rare）」的配方。 可在「WeaponFactory Dirty 03」製作。"
   },
   "Blueprint_Launcher_Default_4": {
     "localized_name": "火箭發射器設計圖3",
-    "description": "持有此物品， 即可解鎖「Launcher Default（Epic）」的配方。 可於「WeaponFactory Dirty 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Launcher Default（Epic）」的配方。 可在「WeaponFactory Dirty 03」製作。"
   },
   "Blueprint_Launcher_Default_5": {
     "localized_name": "火箭發射器設計圖4",
-    "description": "持有此物品， 即可解鎖「Launcher Default（Legendary）」的配方。 可於「WeaponFactory Dirty 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「Launcher Default（Legendary）」的配方。 可在「WeaponFactory Dirty 03」製作。"
   },
   "Blueprint_MakeshiftAssaultRifle_2": {
     "localized_name": "破舊的突擊步槍設計圖1",
-    "description": "持有此物品， 即可解鎖「破舊的突擊步槍 （Uncommon）」的配方。 可於｢WeaponFactory Dirty 01｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「破舊的突擊步槍（Uncommon）」的配方。 可在「WeaponFactory Dirty 01」製作。"
   },
   "Blueprint_MakeshiftAssaultRifle_3": {
     "localized_name": "破舊的突擊步槍設計圖2",
-    "description": "持有此物品， 即可解鎖「破舊的突擊步槍 （Rare）」的配方。 可於｢WeaponFactory Dirty 01｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「破舊的突擊步槍（Rare）」的配方。 可在「WeaponFactory Dirty 01」製作。"
   },
   "Blueprint_MakeshiftAssaultRifle_4": {
     "localized_name": "破舊的突擊步槍設計圖3",
-    "description": "持有此物品， 即可解鎖「破舊的突擊步槍 （Epic）」的配方。 可於｢WeaponFactory Dirty 01｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「破舊的突擊步槍（Epic）」的配方。 可在「WeaponFactory Dirty 01」製作。"
   },
   "Blueprint_MakeshiftAssaultRifle_5": {
     "localized_name": "破舊的突擊步槍設計圖4",
-    "description": "持有此物品， 即可解鎖「破舊的突擊步槍 （Legendary）」的配方。 可於｢WeaponFactory Dirty 01｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「破舊的突擊步槍（Legendary）」的配方。 可在「WeaponFactory Dirty 01」製作。"
   },
   "Blueprint_MakeshiftHandgun_2": {
     "localized_name": "劣質手槍設計圖1",
-    "description": "持有此物品， 即可解鎖「劣質手槍（Uncommon）」的配方。 可於「WeaponFactory Dirty 01」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「劣質手槍（Uncommon）」的配方。 可在「WeaponFactory Dirty 01」製作。"
   },
   "Blueprint_MakeshiftHandgun_3": {
     "localized_name": "劣質手槍設計圖2",
-    "description": "持有此物品， 即可解鎖「劣質手槍（Rare）」的配方。 可於「WeaponFactory Dirty 01」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「劣質手槍（Rare）」的配方。 可在「WeaponFactory Dirty 01」製作。"
   },
   "Blueprint_MakeshiftHandgun_4": {
     "localized_name": "劣質手槍設計圖3",
-    "description": "持有此物品， 即可解鎖「劣質手槍（Epic）」的配方。 可於「WeaponFactory Dirty 01」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「劣質手槍（Epic）」的配方。 可在「WeaponFactory Dirty 01」製作。"
   },
   "Blueprint_MakeshiftHandgun_5": {
     "localized_name": "劣質手槍設計圖4",
-    "description": "持有此物品， 即可解鎖「劣質手槍（Legendary）」的配方。 可於「WeaponFactory Dirty 01」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「劣質手槍（Legendary）」的配方。 可在「WeaponFactory Dirty 01」製作。"
   },
   "Blueprint_MakeshiftShotgun_2": {
     "localized_name": "破舊的散彈槍設計圖1",
-    "description": "持有此物品， 即可解鎖「破舊的散彈槍 （Uncommon）」的配方。 可於｢WeaponFactory Dirty 01｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「破舊的散彈槍（Uncommon）」的配方。 可在「WeaponFactory Dirty 01」製作。"
   },
   "Blueprint_MakeshiftShotgun_3": {
     "localized_name": "破舊的散彈槍設計圖2",
-    "description": "持有此物品， 即可解鎖「破舊的散彈槍 （Rare）」的配方。 可於｢WeaponFactory Dirty 01｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「破舊的散彈槍（Rare）」的配方。 可在「WeaponFactory Dirty 01」製作。"
   },
   "Blueprint_MakeshiftShotgun_4": {
     "localized_name": "破舊的散彈槍設計圖3",
-    "description": "持有此物品， 即可解鎖「破舊的散彈槍 （Epic）」的配方。 可於｢WeaponFactory Dirty 01｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「破舊的散彈槍（Epic）」的配方。 可在「WeaponFactory Dirty 01」製作。"
   },
   "Blueprint_MakeshiftShotgun_5": {
     "localized_name": "破舊的散彈槍設計圖4",
-    "description": "持有此物品， 即可解鎖「破舊的散彈槍 （Legendary）」的配方。 可於｢WeaponFactory Dirty 01｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「破舊的散彈槍（Legendary）」的配方。 可在「WeaponFactory Dirty 01」製作。"
   },
   "Blueprint_MakeshiftSubmachineGun_2": {
     "localized_name": "破舊的衝鋒槍設計圖1",
-    "description": "持有此物品， 即可解鎖「破舊的衝鋒槍 （Uncommon）」的配方。 可於｢WeaponFactory Dirty 01｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「破舊的衝鋒槍（Uncommon）」的配方。 可在「WeaponFactory Dirty 01」製作。"
   },
   "Blueprint_MakeshiftSubmachineGun_3": {
     "localized_name": "破舊的衝鋒槍設計圖2",
-    "description": "持有此物品， 即可解鎖「破舊的衝鋒槍 （Rare）」的配方。 可於｢WeaponFactory Dirty 01｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「破舊的衝鋒槍（Rare）」的配方。 可在「WeaponFactory Dirty 01」製作。"
   },
   "Blueprint_MakeshiftSubmachineGun_4": {
     "localized_name": "破舊的衝鋒槍設計圖3",
-    "description": "持有此物品， 即可解鎖「破舊的衝鋒槍 （Epic）」的配方。 可於｢WeaponFactory Dirty 01｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「破舊的衝鋒槍（Epic）」的配方。 可在「WeaponFactory Dirty 01」製作。"
   },
   "Blueprint_MakeshiftSubmachineGun_5": {
     "localized_name": "破舊的衝鋒槍設計圖4",
-    "description": "持有此物品， 即可解鎖「破舊的衝鋒槍 （Legendary）」的配方。 可於｢WeaponFactory Dirty 01｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「破舊的衝鋒槍（Legendary）」的配方。 可在「WeaponFactory Dirty 01」製作。"
   },
   "Blueprint_MultiGuidedMissileLauncher": {
     "localized_name": "多聯裝追蹤導彈發射器設計圖",
-    "description": "持有此物品， 即可解鎖「多聯裝追蹤導彈發射器 （Common）」的配方。 可於「WeaponFactory Dirty 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「多聯裝追蹤導彈發射器（Common）」的配方。 可在「WeaponFactory Dirty 03」製作。"
   },
   "Blueprint_MultiGuidedMissileLauncher_2": {
     "localized_name": "多聯裝追蹤導彈發射器設計圖1",
-    "description": "持有此物品， 即可解鎖「多聯裝追蹤導彈發射器 （Uncommon）」的配方。 可於「WeaponFactory Dirty 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「多聯裝追蹤導彈發射器（Uncommon）」的配方。 可在「WeaponFactory Dirty 03」製作。"
   },
   "Blueprint_MultiGuidedMissileLauncher_3": {
     "localized_name": "多聯裝追蹤導彈發射器設計圖2",
-    "description": "持有此物品， 即可解鎖「多聯裝追蹤導彈發射器 （Rare）」的配方。 可於「WeaponFactory Dirty 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「多聯裝追蹤導彈發射器（Rare）」的配方。 可在「WeaponFactory Dirty 03」製作。"
   },
   "Blueprint_MultiGuidedMissileLauncher_4": {
     "localized_name": "多聯裝追蹤導彈發射器設計圖3",
-    "description": "持有此物品， 即可解鎖「多聯裝追蹤導彈發射器 （Epic）」的配方。 可於「WeaponFactory Dirty 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「多聯裝追蹤導彈發射器（Epic）」的配方。 可在「WeaponFactory Dirty 03」製作。"
   },
   "Blueprint_MultiGuidedMissileLauncher_5": {
     "localized_name": "多聯裝追蹤導彈發射器設計圖4",
-    "description": "持有此物品， 即可解鎖「多聯裝追蹤導彈發射器 （Legendary）」的配方。 可於「WeaponFactory Dirty 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「多聯裝追蹤導彈發射器（Legendary）」的配方。 可在「WeaponFactory Dirty 03」製作。"
   },
   "Blueprint_Musket_2": {
     "localized_name": "鳥槍設計圖1",
-    "description": "持有此物品， 即可解鎖「鳥槍（Uncommon）」的配方。 可於「WeaponFactory Dirty 01」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「鳥槍（Uncommon）」的配方。 可在「WeaponFactory Dirty 01」製作。"
   },
   "Blueprint_Musket_3": {
     "localized_name": "鳥槍設計圖2",
-    "description": "持有此物品， 即可解鎖「鳥槍（Rare）」的配方。 可於「WeaponFactory Dirty 01」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「鳥槍（Rare）」的配方。 可在「WeaponFactory Dirty 01」製作。"
   },
   "Blueprint_Musket_4": {
     "localized_name": "鳥槍設計圖3",
-    "description": "持有此物品， 即可解鎖「鳥槍（Epic）」的配方。 可於「WeaponFactory Dirty 01」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「鳥槍（Epic）」的配方。 可在「WeaponFactory Dirty 01」製作。"
   },
   "Blueprint_Musket_5": {
     "localized_name": "鳥槍設計圖4",
-    "description": "持有此物品， 即可解鎖「鳥槍（Legendary）」的配方。 可於「WeaponFactory Dirty 01」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「鳥槍（Legendary）」的配方。 可在「WeaponFactory Dirty 01」製作。"
   },
   "Blueprint_OldRevolver_2": {
     "localized_name": "古舊左輪手槍設計圖1",
-    "description": "持有此物品， 即可解鎖「古舊左輪手槍 （Uncommon）」的配方。 可於｢WeaponFactory Dirty 02｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「古舊左輪手槍（Uncommon）」的配方。 可在「WeaponFactory Dirty 02」製作。"
   },
   "Blueprint_OldRevolver_3": {
     "localized_name": "古舊左輪手槍設計圖2",
-    "description": "持有此物品， 即可解鎖「古舊左輪手槍 （Rare）」的配方。 可於｢WeaponFactory Dirty 02｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「古舊左輪手槍（Rare）」的配方。 可在「WeaponFactory Dirty 02」製作。"
   },
   "Blueprint_OldRevolver_4": {
     "localized_name": "古舊左輪手槍設計圖3",
-    "description": "持有此物品， 即可解鎖「古舊左輪手槍 （Epic）」的配方。 可於｢WeaponFactory Dirty 02｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「古舊左輪手槍（Epic）」的配方。 可在「WeaponFactory Dirty 02」製作。"
   },
   "Blueprint_OldRevolver_5": {
     "localized_name": "古舊左輪手槍設計圖4",
-    "description": "持有此物品， 即可解鎖「古舊左輪手槍 （Legendary）」的配方。 可於｢WeaponFactory Dirty 02｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「古舊左輪手槍（Legendary）」的配方。 可在「WeaponFactory Dirty 02」製作。"
   },
   "Blueprint_PlasticArmorCold_2": {
     "localized_name": "耐寒塑鋼盔甲設計圖1",
-    "description": "持有此物品， 即可解鎖「耐寒塑鋼盔甲 （Uncommon）」的配方。 可於「Factory Hard 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「耐寒塑鋼盔甲（Uncommon）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_PlasticArmorCold_3": {
     "localized_name": "耐寒塑鋼盔甲設計圖2",
-    "description": "持有此物品， 即可解鎖「耐寒塑鋼盔甲 （Rare）」的配方。 可於「Factory Hard 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「耐寒塑鋼盔甲（Rare）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_PlasticArmorCold_4": {
     "localized_name": "耐寒塑鋼盔甲設計圖3",
-    "description": "持有此物品， 即可解鎖「耐寒塑鋼盔甲 （Epic）」的配方。 可於「Factory Hard 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「耐寒塑鋼盔甲（Epic）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_PlasticArmorCold_5": {
     "localized_name": "耐寒塑鋼盔甲設計圖4",
-    "description": "持有此物品， 即可解鎖「耐寒塑鋼盔甲 （Legendary）」的配方。 可於「Factory Hard 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「耐寒塑鋼盔甲（Legendary）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_PlasticArmorHeat_2": {
     "localized_name": "耐熱塑鋼盔甲設計圖1",
-    "description": "持有此物品， 即可解鎖「耐熱塑鋼盔甲 （Uncommon）」的配方。 可於「Factory Hard 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「耐熱塑鋼盔甲（Uncommon）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_PlasticArmorHeat_3": {
     "localized_name": "耐熱塑鋼盔甲設計圖2",
-    "description": "持有此物品， 即可解鎖「耐熱塑鋼盔甲 （Rare）」的配方。 可於「Factory Hard 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「耐熱塑鋼盔甲（Rare）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_PlasticArmorHeat_4": {
     "localized_name": "耐熱塑鋼盔甲設計圖3",
-    "description": "持有此物品， 即可解鎖「耐熱塑鋼盔甲 （Epic）」的配方。 可於「Factory Hard 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「耐熱塑鋼盔甲（Epic）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_PlasticArmorHeat_5": {
     "localized_name": "耐熱塑鋼盔甲設計圖4",
-    "description": "持有此物品， 即可解鎖「耐熱塑鋼盔甲 （Legendary）」的配方。 可於「Factory Hard 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「耐熱塑鋼盔甲（Legendary）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_PlasticArmorWeight_2": {
     "localized_name": "輕便塑鋼盔甲設計圖1",
-    "description": "持有此物品， 即可解鎖「輕便塑鋼盔甲 （Uncommon）」的配方。 可於「Factory Hard 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「輕便塑鋼盔甲（Uncommon）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_PlasticArmorWeight_3": {
     "localized_name": "輕便塑鋼盔甲設計圖2",
-    "description": "持有此物品， 即可解鎖「輕便塑鋼盔甲 （Rare）」的配方。 可於「Factory Hard 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「輕便塑鋼盔甲（Rare）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_PlasticArmorWeight_4": {
     "localized_name": "輕便塑鋼盔甲設計圖3",
-    "description": "持有此物品， 即可解鎖「輕便塑鋼盔甲 （Epic）」的配方。 可於「Factory Hard 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「輕便塑鋼盔甲（Epic）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_PlasticArmorWeight_5": {
     "localized_name": "輕便塑鋼盔甲設計圖4",
-    "description": "持有此物品， 即可解鎖「輕便塑鋼盔甲 （Legendary）」的配方。 可於「Factory Hard 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「輕便塑鋼盔甲（Legendary）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_PlasticArmor_2": {
     "localized_name": "塑鋼盔甲設計圖1",
-    "description": "持有此物品， 即可解鎖「塑鋼盔甲 （Uncommon）」的配方。 可於「Factory Hard 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「塑鋼盔甲（Uncommon）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_PlasticArmor_3": {
     "localized_name": "塑鋼盔甲設計圖2",
-    "description": "持有此物品， 即可解鎖「塑鋼盔甲 （Rare）」的配方。 可於「Factory Hard 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「塑鋼盔甲（Rare）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_PlasticArmor_4": {
     "localized_name": "塑鋼盔甲設計圖3",
-    "description": "持有此物品， 即可解鎖「塑鋼盔甲 （Epic）」的配方。 可於「Factory Hard 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「塑鋼盔甲（Epic）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_PlasticArmor_5": {
     "localized_name": "塑鋼盔甲設計圖4",
-    "description": "持有此物品， 即可解鎖「塑鋼盔甲 （Legendary）」的配方。 可於「Factory Hard 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「塑鋼盔甲（Legendary）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_PlasticHelmet_2": {
     "localized_name": "塑鋼頭盔設計圖1",
-    "description": "持有此物品， 即可解鎖「塑鋼頭盔 （Uncommon）」的配方。 可於「Factory Hard 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「塑鋼頭盔（Uncommon）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_PlasticHelmet_3": {
     "localized_name": "塑鋼頭盔設計圖2",
-    "description": "持有此物品， 即可解鎖「塑鋼頭盔 （Rare）」的配方。 可於「Factory Hard 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「塑鋼頭盔（Rare）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_PlasticHelmet_4": {
     "localized_name": "塑鋼頭盔設計圖3",
-    "description": "持有此物品， 即可解鎖「塑鋼頭盔 （Epic）」的配方。 可於「Factory Hard 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「塑鋼頭盔（Epic）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_PlasticHelmet_5": {
     "localized_name": "塑鋼頭盔設計圖4",
-    "description": "持有此物品， 即可解鎖「塑鋼頭盔 （Legendary）」的配方。 可於「Factory Hard 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「塑鋼頭盔（Legendary）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_PumpActionShotgun_2": {
     "localized_name": "泵動式散彈槍設計圖1",
-    "description": "持有此物品， 即可解鎖「泵動式散彈槍（Uncommon）」的配方。 可於「WeaponFactory Dirty 02」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「泵動式散彈槍（Uncommon）」的配方。 可在「WeaponFactory Dirty 02」製作。"
   },
   "Blueprint_PumpActionShotgun_3": {
     "localized_name": "泵動式散彈槍設計圖2",
-    "description": "持有此物品， 即可解鎖「泵動式散彈槍（Rare）」的配方。 可於「WeaponFactory Dirty 02」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「泵動式散彈槍（Rare）」的配方。 可在「WeaponFactory Dirty 02」製作。"
   },
   "Blueprint_PumpActionShotgun_4": {
     "localized_name": "泵動式散彈槍設計圖3",
-    "description": "持有此物品， 即可解鎖「泵動式散彈槍（Epic）」的配方。 可於「WeaponFactory Dirty 02」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「泵動式散彈槍（Epic）」的配方。 可在「WeaponFactory Dirty 02」製作。"
   },
   "Blueprint_PumpActionShotgun_5": {
     "localized_name": "泵動式散彈槍設計圖4",
-    "description": "持有此物品， 即可解鎖「泵動式散彈槍（Legendary）」的配方。 可於「WeaponFactory Dirty 02」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「泵動式散彈槍（Legendary）」的配方。 可在「WeaponFactory Dirty 02」製作。"
   },
   "Blueprint_SFArmorCold_2": {
     "localized_name": "耐寒六稜晶盔甲設計圖1",
-    "description": "持有此物品， 即可解鎖「耐寒六稜晶盔甲 （Uncommon）」的配方。 可於｢Factory Hard 03｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「耐寒六稜晶盔甲（Uncommon）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_SFArmorCold_3": {
     "localized_name": "耐寒六稜晶盔甲設計圖2",
-    "description": "持有此物品， 即可解鎖「耐寒六稜晶盔甲 （Rare）」的配方。 可於｢Factory Hard 03｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「耐寒六稜晶盔甲（Rare）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_SFArmorCold_4": {
     "localized_name": "耐寒六稜晶盔甲設計圖3",
-    "description": "持有此物品， 即可解鎖「耐寒六稜晶盔甲 （Epic）」的配方。 可於｢Factory Hard 03｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「耐寒六稜晶盔甲（Epic）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_SFArmorCold_5": {
     "localized_name": "耐寒六稜晶盔甲設計圖4",
-    "description": "持有此物品， 即可解鎖「耐寒六稜晶盔甲 （Legendary）」的配方。 可於｢Factory Hard 03｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「耐寒六稜晶盔甲（Legendary）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_SFArmorHeat_2": {
     "localized_name": "耐熱六稜晶盔甲設計圖1",
-    "description": "持有此物品， 即可解鎖「耐熱六稜晶盔甲 （Uncommon）」的配方。 可於｢Factory Hard 03｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「耐熱六稜晶盔甲（Uncommon）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_SFArmorHeat_3": {
     "localized_name": "耐熱六稜晶盔甲設計圖2",
-    "description": "持有此物品， 即可解鎖「耐熱六稜晶盔甲 （Rare）」的配方。 可於｢Factory Hard 03｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「耐熱六稜晶盔甲（Rare）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_SFArmorHeat_4": {
     "localized_name": "耐熱六稜晶盔甲設計圖3",
-    "description": "持有此物品， 即可解鎖「耐熱六稜晶盔甲 （Epic）」的配方。 可於｢Factory Hard 03｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「耐熱六稜晶盔甲（Epic）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_SFArmorHeat_5": {
     "localized_name": "耐熱六稜晶盔甲設計圖4",
-    "description": "持有此物品， 即可解鎖「耐熱六稜晶盔甲 （Legendary）」的配方。 可於｢Factory Hard 03｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「耐熱六稜晶盔甲（Legendary）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_SFArmorWeight_2": {
     "localized_name": "輕便六稜晶盔甲設計圖1",
-    "description": "持有此物品， 即可解鎖「輕便六稜晶盔甲 （Uncommon）」的配方。 可於｢Factory Hard 03｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「輕便六稜晶盔甲（Uncommon）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_SFArmorWeight_3": {
     "localized_name": "輕便六稜晶盔甲設計圖2",
-    "description": "持有此物品， 即可解鎖「輕便六稜晶盔甲 （Rare）」的配方。 可於｢Factory Hard 03｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「輕便六稜晶盔甲（Rare）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_SFArmorWeight_4": {
     "localized_name": "輕便六稜晶盔甲設計圖3",
-    "description": "持有此物品， 即可解鎖「輕便六稜晶盔甲 （Epic）」的配方。 可於｢Factory Hard 03｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「輕便六稜晶盔甲（Epic）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_SFArmorWeight_5": {
     "localized_name": "輕便六稜晶盔甲設計圖4",
-    "description": "持有此物品， 即可解鎖「輕便六稜晶盔甲 （Legendary）」的配方。 可於｢Factory Hard 03｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「輕便六稜晶盔甲（Legendary）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_SFArmor_2": {
     "localized_name": "六稜晶盔甲設計圖1",
-    "description": "持有此物品， 即可解鎖「六稜晶盔甲 （Uncommon）」的配方。 可於｢Factory Hard 03｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「六稜晶盔甲（Uncommon）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_SFArmor_3": {
     "localized_name": "六稜晶盔甲設計圖2",
-    "description": "持有此物品， 即可解鎖「六稜晶盔甲 （Rare）」的配方。 可於｢Factory Hard 03｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「六稜晶盔甲（Rare）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_SFArmor_4": {
     "localized_name": "六稜晶盔甲設計圖3",
-    "description": "持有此物品， 即可解鎖「六稜晶盔甲 （Epic）」的配方。 可於｢Factory Hard 03｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「六稜晶盔甲（Epic）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_SFArmor_5": {
     "localized_name": "六稜晶盔甲設計圖4",
-    "description": "持有此物品， 即可解鎖「六稜晶盔甲 （Legendary）」的配方。 可於｢Factory Hard 03｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「六稜晶盔甲（Legendary）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_SFBow_2": {
     "localized_name": "卓越弓設計圖1",
-    "description": "持有此物品， 即可解鎖「卓越弓 （Uncommon）」的配方。 可於｢WeaponFactory Dirty 03｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「卓越弓（Uncommon）」的配方。 可在「WeaponFactory Dirty 03」製作。"
   },
   "Blueprint_SFBow_3": {
     "localized_name": "卓越弓設計圖2",
-    "description": "持有此物品， 即可解鎖「卓越弓 （Rare）」的配方。 可於｢WeaponFactory Dirty 03｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「卓越弓（Rare）」的配方。 可在「WeaponFactory Dirty 03」製作。"
   },
   "Blueprint_SFBow_4": {
     "localized_name": "卓越弓設計圖3",
-    "description": "持有此物品， 即可解鎖「卓越弓 （Epic）」的配方。 可於｢WeaponFactory Dirty 03｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「卓越弓（Epic）」的配方。 可在「WeaponFactory Dirty 03」製作。"
   },
   "Blueprint_SFBow_5": {
     "localized_name": "卓越弓設計圖4",
-    "description": "持有此物品， 即可解鎖「卓越弓 （Legendary）」的配方。 可於｢WeaponFactory Dirty 03｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「卓越弓（Legendary）」的配方。 可在「WeaponFactory Dirty 03」製作。"
   },
   "Blueprint_SFHelmet_2": {
     "localized_name": "六稜晶頭盔設計圖1",
-    "description": "持有此物品， 即可解鎖「六稜晶頭盔 （Uncommon）」的配方。 可於｢Factory Hard 03｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「六稜晶頭盔（Uncommon）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_SFHelmet_3": {
     "localized_name": "六稜晶頭盔設計圖2",
-    "description": "持有此物品， 即可解鎖「六稜晶頭盔 （Rare）」的配方。 可於｢Factory Hard 03｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「六稜晶頭盔（Rare）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_SFHelmet_4": {
     "localized_name": "六稜晶頭盔設計圖3",
-    "description": "持有此物品， 即可解鎖「六稜晶頭盔 （Epic）」的配方。 可於｢Factory Hard 03｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「六稜晶頭盔（Epic）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_SFHelmet_5": {
     "localized_name": "六稜晶頭盔設計圖4",
-    "description": "持有此物品， 即可解鎖「六稜晶頭盔 （Legendary）」的配方。 可於｢Factory Hard 03｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「六稜晶頭盔（Legendary）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_SemiAutoRifle_2": {
     "localized_name": "半自動步槍設計圖1",
-    "description": "持有此物品， 即可解鎖「半自動步槍 （Uncommon）」的配方。 可於｢WeaponFactory Dirty 02｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「半自動步槍（Uncommon）」的配方。 可在「WeaponFactory Dirty 02」製作。"
   },
   "Blueprint_SemiAutoRifle_3": {
     "localized_name": "半自動步槍設計圖2",
-    "description": "持有此物品， 即可解鎖「半自動步槍 （Rare）」的配方。 可於｢WeaponFactory Dirty 02｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「半自動步槍（Rare）」的配方。 可在「WeaponFactory Dirty 02」製作。"
   },
   "Blueprint_SemiAutoRifle_4": {
     "localized_name": "半自動步槍設計圖3",
-    "description": "持有此物品， 即可解鎖「半自動步槍 （Epic）」的配方。 可於｢WeaponFactory Dirty 02｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「半自動步槍（Epic）」的配方。 可在「WeaponFactory Dirty 02」製作。"
   },
   "Blueprint_SemiAutoRifle_5": {
     "localized_name": "半自動步槍設計圖4",
-    "description": "持有此物品， 即可解鎖「半自動步槍 （Legendary）」的配方。 可於｢WeaponFactory Dirty 02｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「半自動步槍（Legendary）」的配方。 可在「WeaponFactory Dirty 02」製作。"
   },
   "Blueprint_SemiAutoShotgun_2": {
     "localized_name": "半自動散彈槍設計圖1",
-    "description": "持有此物品， 即可解鎖「半自動散彈槍 （Uncommon）」的配方。 可於｢WeaponFactory Dirty 03｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「半自動散彈槍（Uncommon）」的配方。 可在「WeaponFactory Dirty 03」製作。"
   },
   "Blueprint_SemiAutoShotgun_3": {
     "localized_name": "半自動散彈槍設計圖2",
-    "description": "持有此物品， 即可解鎖「半自動散彈槍 （Rare）」的配方。 可於｢WeaponFactory Dirty 03｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「半自動散彈槍（Rare）」的配方。 可在「WeaponFactory Dirty 03」製作。"
   },
   "Blueprint_SemiAutoShotgun_4": {
     "localized_name": "半自動散彈槍設計圖3",
-    "description": "持有此物品， 即可解鎖「半自動散彈槍 （Epic）」的配方。 可於｢WeaponFactory Dirty 03｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「半自動散彈槍（Epic）」的配方。 可在「WeaponFactory Dirty 03」製作。"
   },
   "Blueprint_SemiAutoShotgun_5": {
     "localized_name": "半自動散彈槍設計圖4",
-    "description": "持有此物品， 即可解鎖「半自動散彈槍 （Legendary）」的配方。 可於｢WeaponFactory Dirty 03｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「半自動散彈槍（Legendary）」的配方。 可在「WeaponFactory Dirty 03」製作。"
   },
   "Blueprint_SingleShotRifle_2": {
     "localized_name": "單發步槍設計圖1",
-    "description": "持有此物品， 即可解鎖「單發步槍（Uncommon）」的配方。 可於「WeaponFactory Dirty 02」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「單發步槍（Uncommon）」的配方。 可在「WeaponFactory Dirty 02」製作。"
   },
   "Blueprint_SingleShotRifle_3": {
     "localized_name": "單發步槍設計圖2",
-    "description": "持有此物品， 即可解鎖「單發步槍（Rare）」的配方。 可於「WeaponFactory Dirty 02」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「單發步槍（Rare）」的配方。 可在「WeaponFactory Dirty 02」製作。"
   },
   "Blueprint_SingleShotRifle_4": {
     "localized_name": "單發步槍設計圖3",
-    "description": "持有此物品， 即可解鎖「單發步槍（Epic）」的配方。 可於「WeaponFactory Dirty 02」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「單發步槍（Epic）」的配方。 可在「WeaponFactory Dirty 02」製作。"
   },
   "Blueprint_SingleShotRifle_5": {
     "localized_name": "單發步槍設計圖4",
-    "description": "持有此物品， 即可解鎖「單發步槍（Legendary）」的配方。 可於「WeaponFactory Dirty 02」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「單發步槍（Legendary）」的配方。 可在「WeaponFactory Dirty 02」製作。"
   },
   "Blueprint_StealArmorCold_2": {
     "localized_name": "耐寒帕魯金屬盔甲設計圖1",
-    "description": "持有此物品， 即可解鎖「StealArmorCold 2（Uncommon）」的配方。 可於「Factory Hard 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「StealArmorCold 2（Uncommon）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_StealArmorCold_3": {
     "localized_name": "耐寒帕魯金屬盔甲設計圖2",
-    "description": "持有此物品， 即可解鎖「StealArmorCold 3（Rare）」的配方。 可於「Factory Hard 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「StealArmorCold 3（Rare）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_StealArmorCold_4": {
     "localized_name": "耐寒帕魯金屬盔甲設計圖3",
-    "description": "持有此物品， 即可解鎖「StealArmorCold 4（Epic）」的配方。 可於「Factory Hard 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「StealArmorCold 4（Epic）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_StealArmorCold_5": {
     "localized_name": "耐寒帕魯金屬盔甲設計圖4",
-    "description": "持有此物品， 即可解鎖「StealArmorCold 5（Legendary）」的配方。 可於「Factory Hard 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「StealArmorCold 5（Legendary）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_StealArmorHeat_2": {
     "localized_name": "耐熱帕魯金屬盔甲設計圖1",
-    "description": "持有此物品， 即可解鎖「StealArmorHeat 2（Uncommon）」的配方。 可於「Factory Hard 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「StealArmorHeat 2（Uncommon）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_StealArmorHeat_3": {
     "localized_name": "耐熱帕魯金屬盔甲設計圖2",
-    "description": "持有此物品， 即可解鎖「StealArmorHeat 3（Rare）」的配方。 可於「Factory Hard 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「StealArmorHeat 3（Rare）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_StealArmorHeat_4": {
     "localized_name": "耐熱帕魯金屬盔甲設計圖3",
-    "description": "持有此物品， 即可解鎖「StealArmorHeat 4（Epic）」的配方。 可於「Factory Hard 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「StealArmorHeat 4（Epic）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_StealArmorHeat_5": {
     "localized_name": "耐熱帕魯金屬盔甲設計圖4",
-    "description": "持有此物品， 即可解鎖「StealArmorHeat 5（Legendary）」的配方。 可於「Factory Hard 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「StealArmorHeat 5（Legendary）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_StealArmor_2": {
     "localized_name": "帕魯金屬盔甲設計圖1",
-    "description": "持有此物品， 即可解鎖「帕魯金屬盔甲（Uncommon）」的配方。 可於「Factory Hard 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「帕魯金屬盔甲（Uncommon）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_StealArmor_3": {
     "localized_name": "帕魯金屬盔甲設計圖2",
-    "description": "持有此物品， 即可解鎖「帕魯金屬盔甲（Rare）」的配方。 可於「Factory Hard 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「帕魯金屬盔甲（Rare）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_StealArmor_4": {
     "localized_name": "帕魯金屬盔甲設計圖3",
-    "description": "持有此物品， 即可解鎖「帕魯金屬盔甲（Epic）」的配方。 可於「Factory Hard 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「帕魯金屬盔甲（Epic）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_StealArmor_5": {
     "localized_name": "帕魯金屬盔甲設計圖4",
-    "description": "持有此物品， 即可解鎖「帕魯金屬盔甲（Legendary）」的配方。 可於「Factory Hard 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「帕魯金屬盔甲（Legendary）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_StealHelmet_2": {
     "localized_name": "帕魯金屬頭盔設計圖1",
-    "description": "持有此物品， 即可解鎖「StealHelmet 2（Uncommon）」的配方。 可於「Factory Hard 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「StealHelmet 2（Uncommon）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_StealHelmet_3": {
     "localized_name": "帕魯金屬頭盔設計圖2",
-    "description": "持有此物品， 即可解鎖「StealHelmet 3（Rare）」的配方。 可於「Factory Hard 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「StealHelmet 3（Rare）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_StealHelmet_4": {
     "localized_name": "帕魯金屬頭盔設計圖3",
-    "description": "持有此物品， 即可解鎖「StealHelmet 4（Epic）」的配方。 可於「Factory Hard 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「StealHelmet 4（Epic）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_StealHelmet_5": {
     "localized_name": "帕魯金屬頭盔設計圖4",
-    "description": "持有此物品， 即可解鎖「StealHelmet 5（Legendary）」的配方。 可於「Factory Hard 03」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「StealHelmet 5（Legendary）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_SubmachineGun_2": {
     "localized_name": "衝鋒槍設計圖1",
-    "description": "持有此物品， 即可解鎖「衝鋒槍 （Uncommon）」的配方。 可於｢WeaponFactory Dirty 02｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「衝鋒槍（Uncommon）」的配方。 可在「WeaponFactory Dirty 02」製作。"
   },
   "Blueprint_SubmachineGun_3": {
     "localized_name": "衝鋒槍設計圖2",
-    "description": "持有此物品， 即可解鎖「衝鋒槍 （Rare）」的配方。 可於｢WeaponFactory Dirty 02｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「衝鋒槍（Rare）」的配方。 可在「WeaponFactory Dirty 02」製作。"
   },
   "Blueprint_SubmachineGun_4": {
     "localized_name": "衝鋒槍設計圖3",
-    "description": "持有此物品， 即可解鎖「衝鋒槍 （Epic）」的配方。 可於｢WeaponFactory Dirty 02｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「衝鋒槍（Epic）」的配方。 可在「WeaponFactory Dirty 02」製作。"
   },
   "Blueprint_SubmachineGun_5": {
     "localized_name": "衝鋒槍設計圖4",
-    "description": "持有此物品， 即可解鎖「衝鋒槍 （Legendary）」的配方。 可於｢WeaponFactory Dirty 02｣製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「衝鋒槍（Legendary）」的配方。 可在「WeaponFactory Dirty 02」製作。"
   },
   "Blueprint_WeakerBow_2": {
     "localized_name": "老舊的弓設計圖1",
-    "description": "持有此物品， 即可解鎖「老舊的弓（Uncommon）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「老舊的弓（Uncommon）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_WeakerBow_3": {
     "localized_name": "老舊的弓設計圖2",
-    "description": "持有此物品， 即可解鎖「老舊的弓（Rare）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「老舊的弓（Rare）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_WeakerBow_4": {
     "localized_name": "老舊的弓設計圖3",
-    "description": "持有此物品， 即可解鎖「老舊的弓（Epic）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「老舊的弓（Epic）」的配方。 可在「初階工作台」製作。"
   },
   "Blueprint_WeakerBow_5": {
     "localized_name": "老舊的弓設計圖4",
-    "description": "持有此物品， 即可解鎖「老舊的弓（Legendary）」的配方。 可於「初階工作臺」製作該道具。"
+    "description": "持有此設計圖，即可解鎖 「老舊的弓（Legendary）」的配方。 可在「初階工作台」製作。"
   },
   "Bone": {
     "localized_name": "骨頭",
@@ -2112,60 +2112,60 @@
     "description": "無需蓄力拉弓即可射出箭矢。 裝箭需要花些時間，但能造成強力一擊。"
   },
   "BowGun_2": {
-    "localized_name": "十字弓",
-    "description": "無需蓄力拉弓即可射出箭矢。 裝箭需要花些時間，但能造成強力一擊。"
+    "localized_name": "zh-hant text",
+    "description": "zh-hant text"
   },
   "BowGun_3": {
-    "localized_name": "十字弓",
-    "description": "無需蓄力拉弓即可射出箭矢。 裝箭需要花些時間，但能造成強力一擊。"
+    "localized_name": "zh-hant text",
+    "description": "zh-hant text"
   },
   "BowGun_4": {
-    "localized_name": "十字弓",
-    "description": "無需蓄力拉弓即可射出箭矢。 裝箭需要花些時間，但能造成強力一擊。"
+    "localized_name": "zh-hant text",
+    "description": "zh-hant text"
   },
   "BowGun_5": {
-    "localized_name": "十字弓",
-    "description": "無需蓄力拉弓即可射出箭矢。 裝箭需要花些時間，但能造成強力一擊。"
+    "localized_name": "zh-hant text",
+    "description": "zh-hant text"
   },
   "BowGun_Fire": {
     "localized_name": "火箭十字弓",
-    "description": "可造成火屬性傷害的十字弓。 利用火箭矢讓帕魯著火，變得更容易捕捉。 需要Arrow Fire才能使用。"
+    "description": "可造成火屬性傷害的十字弓。 利用火箭矢讓帕魯著火，變得更容易捕捉。 需要「Arrow Fire」才能使用。"
   },
   "BowGun_Fire_2": {
     "localized_name": "火箭十字弓",
-    "description": "可造成火屬性傷害的十字弓。 利用火箭矢讓帕魯著火，變得更容易捕捉。 需要Arrow Fire才能使用。"
+    "description": "可造成火屬性傷害的十字弓。 利用火箭矢讓帕魯著火，變得更容易捕捉。 需要「Arrow Fire」才能使用。"
   },
   "BowGun_Fire_3": {
     "localized_name": "火箭十字弓",
-    "description": "可造成火屬性傷害的十字弓。 利用火箭矢讓帕魯著火，變得更容易捕捉。 需要Arrow Fire才能使用。"
+    "description": "可造成火屬性傷害的十字弓。 利用火箭矢讓帕魯著火，變得更容易捕捉。 需要「Arrow Fire」才能使用。"
   },
   "BowGun_Fire_4": {
     "localized_name": "火箭十字弓",
-    "description": "可造成火屬性傷害的十字弓。 利用火箭矢讓帕魯著火，變得更容易捕捉。 需要Arrow Fire才能使用。"
+    "description": "可造成火屬性傷害的十字弓。 利用火箭矢讓帕魯著火，變得更容易捕捉。 需要「Arrow Fire」才能使用。"
   },
   "BowGun_Fire_5": {
     "localized_name": "火箭十字弓",
-    "description": "可造成火屬性傷害的十字弓。 利用火箭矢讓帕魯著火，變得更容易捕捉。 需要Arrow Fire才能使用。"
+    "description": "可造成火屬性傷害的十字弓。 利用火箭矢讓帕魯著火，變得更容易捕捉。 需要「Arrow Fire」才能使用。"
   },
   "BowGun_Poison": {
     "localized_name": "毒箭十字弓",
-    "description": "可讓攻擊目標中毒的可怕十字弓。 帕魯中毒以後，會變得更容易捕捉。 需要｢Arrow Poison｣才能使用。"
+    "description": "可讓攻擊目標中毒的可怕十字弓。 帕魯中毒以後，會變得更容易捕捉。 需要「Arrow Poison」才能使用。"
   },
   "BowGun_Poison_2": {
     "localized_name": "毒箭十字弓",
-    "description": "可讓攻擊目標中毒的可怕十字弓。 帕魯中毒以後，會變得更容易捕捉。 需要｢Arrow Poison｣才能使用。"
+    "description": "可讓攻擊目標中毒的可怕十字弓。 帕魯中毒以後，會變得更容易捕捉。 需要「Arrow Poison」才能使用。"
   },
   "BowGun_Poison_3": {
     "localized_name": "毒箭十字弓",
-    "description": "可讓攻擊目標中毒的可怕十字弓。 帕魯中毒以後，會變得更容易捕捉。 需要｢Arrow Poison｣才能使用。"
+    "description": "可讓攻擊目標中毒的可怕十字弓。 帕魯中毒以後，會變得更容易捕捉。 需要「Arrow Poison」才能使用。"
   },
   "BowGun_Poison_4": {
     "localized_name": "毒箭十字弓",
-    "description": "可讓攻擊目標中毒的可怕十字弓。 帕魯中毒以後，會變得更容易捕捉。 需要｢Arrow Poison｣才能使用。"
+    "description": "可讓攻擊目標中毒的可怕十字弓。 帕魯中毒以後，會變得更容易捕捉。 需要「Arrow Poison」才能使用。"
   },
   "BowGun_Poison_5": {
     "localized_name": "毒箭十字弓",
-    "description": "可讓攻擊目標中毒的可怕十字弓。 帕魯中毒以後，會變得更容易捕捉。 需要｢Arrow Poison｣才能使用。"
+    "description": "可讓攻擊目標中毒的可怕十字弓。 帕魯中毒以後，會變得更容易捕捉。 需要「Arrow Poison」才能使用。"
   },
   "Bow_Fifth": {
     "localized_name": "五連弓",
@@ -2173,11 +2173,11 @@
   },
   "Bow_Fire": {
     "localized_name": "火之弓",
-    "description": "可造成火屬性傷害的弓。 利用火箭矢讓帕魯著火，變得更容易捕捉。 需要Arrow Fire才能使用。"
+    "description": "可造成火屬性傷害的弓。 利用火箭矢讓帕魯著火，變得更容易捕捉。 需要「Arrow Fire」才能使用。"
   },
   "Bow_Poison": {
     "localized_name": "毒之弓",
-    "description": "可讓攻擊目標中毒的可怕毒弓。 帕魯中毒以後，會變得更容易捕捉。 需要｢Arrow Poison｣才能使用。"
+    "description": "可讓攻擊目標中毒的可怕毒弓。 帕魯中毒以後，會變得更容易捕捉。 需要「Arrow Poison」才能使用。"
   },
   "Bow_Triple": {
     "localized_name": "三連弓",
@@ -2193,7 +2193,7 @@
   },
   "Carbonara": {
     "localized_name": "義式培根蛋黃麵",
-    "description": "在義大利麵中加入蛋與牛奶後拌勻製成的料理。 食用後的一段時間內防禦+20%。"
+    "description": "在義大利麵中加入蛋與牛奶後拌勻製成的料理。 食用後的一段時間內，防禦+20%。"
   },
   "Carrot": {
     "localized_name": "胡蘿蔔",
@@ -2215,21 +2215,25 @@
     "localized_name": "木炭",
     "description": "燃燒木材製成的木炭。 搭配硫磺便能做出火藥。"
   },
+  "ChargeLaserRifle": {
+    "localized_name": "zh-hant text",
+    "description": "zh-hant text"
+  },
   "CheeseBurger": {
     "localized_name": "起司漢堡",
     "description": "在漢堡中夾入乾酪的菜餚。 食用後在一定時間內，能增加飽足感，防禦 +10%。"
   },
   "Cheeseburger_2": {
     "localized_name": "波霸牛起司漢堡",
-    "description": "這道料理中的起司讓它達到了至高無上的境界。 食用後的一段時間內攻擊+20%， 且會不容易感到飢餓。"
+    "description": "這道料理中的起司讓它達到了至高無上的境界。 食用後的一段時間內，攻擊+20%， 且不容易感到飢餓。"
   },
   "ChickenSaute": {
     "localized_name": "香煎皮皮雞",
-    "description": "以奶油煎炒厚實的雞胸肉而成。 清新的檸檬滋味相當突出。 食用後的一段時間內，會略微提高工作速度。"
+    "description": "以奶油煎炒厚實的雞胸肉而成。 清新的檸檬滋味相當突出。 食用後的一段時間內，略微提高工作速度。"
   },
   "Chowder": {
     "localized_name": "趴趴鯰巧達濃湯",
-    "description": "香濃滑順且風味獨特的湯品。 食用後的一段時間內，會提高工作速度， 且稍微不容易感到飢餓。"
+    "description": "香濃滑順且風味獨特的湯品。 食用後的一段時間內，提高工作速度， 且比較不容易感到飢餓。"
   },
   "Chromium": {
     "localized_name": "鉻鐵礦",
@@ -2296,20 +2300,20 @@
     "description": "在炎熱地區生產的布衣。 具備傲人的耐熱功能。"
   },
   "ClothArmor_2": {
-    "localized_name": "布衣",
-    "description": "以布製成的服裝。 可以抵禦夜間的寒意。"
+    "localized_name": "zh-hant text",
+    "description": "zh-hant text"
   },
   "ClothArmor_3": {
-    "localized_name": "布衣",
-    "description": "以布製成的服裝。 可以抵禦夜間的寒意。"
+    "localized_name": "zh-hant text",
+    "description": "zh-hant text"
   },
   "ClothArmor_4": {
-    "localized_name": "布衣",
-    "description": "以布製成的服裝。 可以抵禦夜間的寒意。"
+    "localized_name": "zh-hant text",
+    "description": "zh-hant text"
   },
   "ClothArmor_5": {
-    "localized_name": "布衣",
-    "description": "以布製成的服裝。 可以抵禦夜間的寒意。"
+    "localized_name": "zh-hant text",
+    "description": "zh-hant text"
   },
   "Coal": {
     "localized_name": "石炭",
@@ -2384,20 +2388,20 @@
     "description": "經過改良的金屬盔甲。 具備傲人的耐熱功能。"
   },
   "CopperArmor_2": {
-    "localized_name": "金屬盔甲",
-    "description": "以金屬製成的盔甲。 有一定的防禦力，也有一定的重量。"
+    "localized_name": "zh-hant text",
+    "description": "zh-hant text"
   },
   "CopperArmor_3": {
-    "localized_name": "金屬盔甲",
-    "description": "以金屬製成的盔甲。 有一定的防禦力，也有一定的重量。"
+    "localized_name": "zh-hant text",
+    "description": "zh-hant text"
   },
   "CopperArmor_4": {
-    "localized_name": "金屬盔甲",
-    "description": "以金屬製成的盔甲。 有一定的防禦力，也有一定的重量。"
+    "localized_name": "zh-hant text",
+    "description": "zh-hant text"
   },
   "CopperArmor_5": {
-    "localized_name": "金屬盔甲",
-    "description": "以金屬製成的盔甲。 有一定的防禦力，也有一定的重量。"
+    "localized_name": "zh-hant text",
+    "description": "zh-hant text"
   },
   "CopperHelmet": {
     "localized_name": "金屬頭盔",
@@ -2465,11 +2469,11 @@
   },
   "DeerLocoMoco": {
     "localized_name": "夏威夷紫霞鹿漢堡排飯",
-    "description": "厚實的漢堡排搭配軟嫩的半熟荷包蛋， 兩者的完美結合將在口中創造出滿滿幸福。 食用後的一段時間內攻擊+20%。"
+    "description": "厚實的漢堡排搭配軟嫩的半熟荷包蛋， 兩者的完美結合將在口中創造出滿滿幸福。 食用後的一段時間內，攻擊+20%。"
   },
   "DeerStew": {
     "localized_name": "紫霞鹿肉燉菜",
-    "description": "飽含愛情的燉煮鹿肉，肉質酥軟，入口即化。 蔬菜與肉的鮮味互相交織，帶出圓潤醇厚的口感。 食用後的一段時間內防禦+20%。"
+    "description": "飽含愛情的燉煮鹿肉，肉質酥軟，入口即化。 蔬菜與肉的鮮味互相交織，帶出圓潤醇厚的口感。 食用後的一段時間內，防禦+20%。"
   },
   "Diamond": {
     "localized_name": "鑽石",
@@ -2501,7 +2505,7 @@
   },
   "Eaglestew": {
     "localized_name": "燉煮天擒鳥肉",
-    "description": "以慢火燉煮，帶出了濃郁鮮味及野性十足的滋味。 食用後的一段時間內， SAN值下降的速度會略微變慢。"
+    "description": "以慢火燉煮，帶出了濃郁鮮味及野性十足的滋味。 食用後的一段時間內，稍微減緩SAN值的下降速度。"
   },
   "Eemerald": {
     "localized_name": "祖母綠寶石",
@@ -2583,6 +2587,10 @@
     "localized_name": "等離子砲",
     "description": "能夠發射能量彈。 命中時會引發能量爆炸。"
   },
+  "EnergyShotgun": {
+    "localized_name": "zh-hant text",
+    "description": "zh-hant text"
+  },
   "ExpBoost_01": {
     "localized_name": "修練之書（小）",
     "description": "將此書籍拿給帕魯閱讀， 便可讓該帕魯增加些許經驗。"
@@ -2636,23 +2644,23 @@
     "description": "zh-hant text"
   },
   "FlameThrower": {
-    "localized_name": "FlameThrower",
+    "localized_name": "火焰噴射器",
     "description": "能夠向遠處噴出火舌的Flamethrower。 可以使攻擊目標陷入點燃狀態。"
   },
   "FlameThrower_2": {
-    "localized_name": "FlameThrower",
+    "localized_name": "火焰噴射器",
     "description": "能夠向遠處噴出火舌的Flamethrower。 可以使攻擊目標陷入點燃狀態。"
   },
   "FlameThrower_3": {
-    "localized_name": "FlameThrower",
+    "localized_name": "火焰噴射器",
     "description": "能夠向遠處噴出火舌的Flamethrower。 可以使攻擊目標陷入點燃狀態。"
   },
   "FlameThrower_4": {
-    "localized_name": "FlameThrower",
+    "localized_name": "火焰噴射器",
     "description": "能夠向遠處噴出火舌的Flamethrower。 可以使攻擊目標陷入點燃狀態。"
   },
   "FlameThrower_5": {
-    "localized_name": "FlameThrower",
+    "localized_name": "火焰噴射器",
     "description": "能夠向遠處噴出火舌的Flamethrower。 可以使攻擊目標陷入點燃狀態。"
   },
   "FlamethrowerBullet": {
@@ -2705,7 +2713,7 @@
   },
   "FriedChicken": {
     "localized_name": "日式炸皮皮雞",
-    "description": "極為美味多汁的雞肉料理。 食用後的一段時間內，會略微提高工作速度， 且SAN值下降的速度會變慢。"
+    "description": "極為美味多汁的雞肉料理。 食用後的一段時間內，略微提高工作速度， 且減緩SAN值的下降速度。"
   },
   "FriedEggs": {
     "localized_name": "荷包蛋",
@@ -2713,11 +2721,11 @@
   },
   "FriedKelpie": {
     "localized_name": "炸水靈兒",
-    "description": "口感豐滿緊緻的魚肉與酥脆麵衣搭配得恰到好處。 食用後的一段時間內防禦+10%， 且SAN值下降的速度會變慢。"
+    "description": "口感豐滿緊緻的魚肉與酥脆麵衣搭配得恰到好處。 食用後的一段時間內，防禦+10%， 且減緩SAN值的下降速度。"
   },
   "FriedVegetables": {
     "localized_name": "清炒蔬菜",
-    "description": "炒萵苣和Meat的食物。 吃了之後一段時間，攻擊 +10%。"
+    "description": "炒萵苣和生肉的食物。 吃了之後一段時間，攻擊 +10%。"
   },
   "Fruit__defense_01": {
     "localized_name": "堅壁之果",
@@ -2776,20 +2784,20 @@
     "description": "在炎熱地區生產的毛皮盔甲。 具備傲人的耐熱功能。"
   },
   "FurArmor_2": {
-    "localized_name": "毛皮盔甲",
-    "description": "以皮革製成的盔甲。 耐久度及防禦力均有所提升。"
+    "localized_name": "zh-hant text",
+    "description": "zh-hant text"
   },
   "FurArmor_3": {
-    "localized_name": "毛皮盔甲",
-    "description": "以皮革製成的盔甲。 耐久度及防禦力均有所提升。"
+    "localized_name": "zh-hant text",
+    "description": "zh-hant text"
   },
   "FurArmor_4": {
-    "localized_name": "毛皮盔甲",
-    "description": "以皮革製成的盔甲。 耐久度及防禦力均有所提升。"
+    "localized_name": "zh-hant text",
+    "description": "zh-hant text"
   },
   "FurArmor_5": {
-    "localized_name": "毛皮盔甲",
-    "description": "以皮革製成的盔甲。 耐久度及防禦力均有所提升。"
+    "localized_name": "zh-hant text",
+    "description": "zh-hant text"
   },
   "FurHelmet": {
     "localized_name": "羽毛髮飾",
@@ -2869,7 +2877,7 @@
   },
   "GenghisKhan": {
     "localized_name": "棉悠悠成吉思汗烤肉",
-    "description": "將醃漬過的羊肉以炭火仔細燒烤而成的料理。 食用後的一段時間內，會略微提高工作速度， 且SAN值下降的速度會略微變慢。"
+    "description": "將醃漬過的羊肉以炭火仔細燒烤而成的料理。 食用後的一段時間內，略微提高工作速度， 且稍微減緩SAN值的下降速度。"
   },
   "Glider_Good": {
     "localized_name": "高級滑翔傘",
@@ -2887,33 +2895,13 @@
     "localized_name": "優質滑翔傘",
     "description": "展開滑翔傘，即可在空中滑翔。 此款式性能有所提升，能以相當快的速度飛行。"
   },
-  "Glider_Tera": {
-    "localized_name": "特級滑翔傘",
-    "description": "展開滑翔傘，即可在空中滑翔。 性能得到進一步提升，速度和升力都提高了。"
-  },
   "Grape": {
     "localized_name": "zh-hant text",
     "description": "zh-hant text"
   },
-  "GrapplingGun": {
-    "localized_name": "爪鉤槍",
-    "description": "用於快速移動的爪鉤槍。 它能將爪鉤射向目的地，再將使用者牽引過去。 有了它，在有高低落差的地方也能輕鬆移動。"
-  },
-  "GrapplingGun2": {
-    "localized_name": "高級爪鉤槍",
-    "description": "用於快速移動的爪鉤槍。 它能將爪鉤射向目的地，再將使用者牽引過去。 經過改良，射程變長了。"
-  },
-  "GrapplingGun3": {
-    "localized_name": "優質爪鉤槍",
-    "description": "用於快速移動的爪鉤槍。 它能將爪鉤射向目的地，再將使用者牽引過去。 以試驗品的數據爲基礎，進一步提昇了性能。"
-  },
-  "GrapplingGun4": {
-    "localized_name": "特級爪鉤槍",
-    "description": "用於快速移動的爪鉤槍。 它能將爪鉤射向目的地，再將使用者牽引過去。 此款式經過研究改良，靈活性可謂無與倫比。"
-  },
   "Gratin": {
     "localized_name": "焗烤馬鈴薯",
-    "description": "將醬料裹在馬鈴薯上烤製的料理。 熱騰騰地享用，最為美味。 食用後的一段時間內，防禦 +10%，會不容易感到飢餓。"
+    "description": "將醬料裹在馬鈴薯上烤製的料理。 熱騰騰地享用，最為美味。 食用後的一段時間內，防禦 +10%， 且不容易感到飢餓。"
   },
   "GrenadeBullet": {
     "localized_name": "榴彈",
@@ -2949,7 +2937,7 @@
   },
   "GrilledSheepHerbs": {
     "localized_name": "香草烤棉悠悠",
-    "description": "使用大量新鮮莓果增添香氣， 藉此帶出羊肉的獨特風味。 食用後的一段時間內防禦+10%。"
+    "description": "使用大量新鮮莓果增添香氣， 藉此帶出羊肉的獨特風味。 食用後的一段時間內，防禦+10%。"
   },
   "GuidedMissileLauncher": {
     "localized_name": "追蹤導彈發射器",
@@ -2981,7 +2969,7 @@
   },
   "Gyoza": {
     "localized_name": "草莽豬肉水餃",
-    "description": "蘑菇和肉餡包裹在麵皮裡煮成的料理。 有嚼勁的口感令人難以抗拒。 在食用後的一段時間內，攻擊 +10%，且會稍微不容易感到飢餓。"
+    "description": "蘑菇和肉餡包裹在麵皮裡煮成的料理。 有嚼勁的口感令人難以抗拒。 在食用後的一段時間內，攻擊 +10%， 且比較不容易感到飢餓。"
   },
   "Hamburger": {
     "localized_name": "漢堡",
@@ -2989,27 +2977,27 @@
   },
   "Hamburger_2": {
     "localized_name": "波霸牛漢堡",
-    "description": "將牛肉鮮味與麵包甜味融為一體的極品。 食用後的一段時間內，會提高工作速度， 且SAN值下降的速度會略微變慢。"
+    "description": "將牛肉鮮味與麵包甜味融為一體的極品。 食用後的一段時間內，提高工作速度， 且稍微減緩SAN值的下降速度。"
   },
   "HandGun_Default": {
     "localized_name": "手槍",
     "description": "子彈容納量及連射能力經過強化的手槍。 每秒火力比劣質手槍更強。"
   },
   "HandGun_Default_2": {
-    "localized_name": "手槍",
-    "description": "子彈容納量及連射能力經過強化的手槍。 每秒火力比劣質手槍更強。"
+    "localized_name": "zh-hant text",
+    "description": "zh-hant text"
   },
   "HandGun_Default_3": {
-    "localized_name": "手槍",
-    "description": "子彈容納量及連射能力經過強化的手槍。 每秒火力比劣質手槍更強。"
+    "localized_name": "zh-hant text",
+    "description": "zh-hant text"
   },
   "HandGun_Default_4": {
-    "localized_name": "手槍",
-    "description": "子彈容納量及連射能力經過強化的手槍。 每秒火力比劣質手槍更強。"
+    "localized_name": "zh-hant text",
+    "description": "zh-hant text"
   },
   "HandGun_Default_5": {
-    "localized_name": "手槍",
-    "description": "子彈容納量及連射能力經過強化的手槍。 每秒火力比劣質手槍更強。"
+    "localized_name": "zh-hant text",
+    "description": "zh-hant text"
   },
   "HandgunBullet": {
     "localized_name": "手槍子彈",
@@ -3017,343 +3005,343 @@
   },
   "Head001": {
     "localized_name": "王冠",
-    "description": null
+    "description": "地位崇高者才能擁有的冠冕。 它相當沉重，不太適合日常配戴。"
   },
   "Head001_2": {
     "localized_name": "王冠",
-    "description": null
+    "description": "地位崇高者才能擁有的冠冕。 它相當沉重，不太適合日常配戴。"
   },
   "Head001_3": {
     "localized_name": "王冠",
-    "description": null
+    "description": "地位崇高者才能擁有的冠冕。 它相當沉重，不太適合日常配戴。"
   },
   "Head001_4": {
     "localized_name": "王冠",
-    "description": null
+    "description": "地位崇高者才能擁有的冠冕。 它相當沉重，不太適合日常配戴。"
   },
   "Head001_5": {
     "localized_name": "王冠",
-    "description": null
+    "description": "地位崇高者才能擁有的冠冕。 它相當沉重，不太適合日常配戴。"
   },
   "Head002": {
     "localized_name": "金色王冠",
-    "description": null
+    "description": "不怎麼常見的金色冠冕。 只要戴上它，就會覺得自己的身分高貴多了。"
   },
   "Head002_2": {
     "localized_name": "金色王冠",
-    "description": null
+    "description": "不怎麼常見的金色冠冕。 只要戴上它，就會覺得自己的身分高貴多了。"
   },
   "Head002_3": {
     "localized_name": "金色王冠",
-    "description": null
+    "description": "不怎麼常見的金色冠冕。 只要戴上它，就會覺得自己的身分高貴多了。"
   },
   "Head002_4": {
     "localized_name": "金色王冠",
-    "description": null
+    "description": "不怎麼常見的金色冠冕。 只要戴上它，就會覺得自己的身分高貴多了。"
   },
   "Head002_5": {
     "localized_name": "金色王冠",
-    "description": null
+    "description": "不怎麼常見的金色冠冕。 只要戴上它，就會覺得自己的身分高貴多了。"
   },
   "Head003": {
     "localized_name": "長耳髮箍",
-    "description": null
+    "description": "相當可愛的髮箍，和姬小兔的耳朵很像。 對保護頭部沒什麼作用。"
   },
   "Head003_2": {
     "localized_name": "長耳髮箍",
-    "description": null
+    "description": "相當可愛的髮箍，和姬小兔的耳朵很像。 對保護頭部沒什麼作用。"
   },
   "Head003_3": {
     "localized_name": "長耳髮箍",
-    "description": null
+    "description": "相當可愛的髮箍，和姬小兔的耳朵很像。 對保護頭部沒什麼作用。"
   },
   "Head003_4": {
     "localized_name": "長耳髮箍",
-    "description": null
+    "description": "相當可愛的髮箍，和姬小兔的耳朵很像。 對保護頭部沒什麼作用。"
   },
   "Head003_5": {
     "localized_name": "長耳髮箍",
-    "description": null
+    "description": "相當可愛的髮箍，和姬小兔的耳朵很像。 對保護頭部沒什麼作用。"
   },
   "Head004": {
     "localized_name": "女巫帽",
-    "description": null
+    "description": "模仿焰巫狐或闇巫貓的帽子。 讓人有種自己也可以像帕魯一樣使用技能的錯覺。"
   },
   "Head004_2": {
     "localized_name": "女巫帽",
-    "description": null
+    "description": "模仿焰巫狐或闇巫貓的帽子。 讓人有種自己也可以像帕魯一樣使用技能的錯覺。"
   },
   "Head004_3": {
     "localized_name": "女巫帽",
-    "description": null
+    "description": "模仿焰巫狐或闇巫貓的帽子。 讓人有種自己也可以像帕魯一樣使用技能的錯覺。"
   },
   "Head004_4": {
     "localized_name": "女巫帽",
-    "description": null
+    "description": "模仿焰巫狐或闇巫貓的帽子。 讓人有種自己也可以像帕魯一樣使用技能的錯覺。"
   },
   "Head004_5": {
     "localized_name": "女巫帽",
-    "description": null
+    "description": "模仿焰巫狐或闇巫貓的帽子。 讓人有種自己也可以像帕魯一樣使用技能的錯覺。"
   },
   "Head005": {
     "localized_name": "費多拉帽",
-    "description": null
+    "description": "輕盈柔軟，適合日常佩戴的帽子。 十分時尚，曾經在島上流行過。"
   },
   "Head005_2": {
     "localized_name": "費多拉帽",
-    "description": null
+    "description": "輕盈柔軟，適合日常佩戴的帽子。 十分時尚，曾經在島上流行過。"
   },
   "Head005_3": {
     "localized_name": "費多拉帽",
-    "description": null
+    "description": "輕盈柔軟，適合日常佩戴的帽子。 十分時尚，曾經在島上流行過。"
   },
   "Head005_4": {
     "localized_name": "費多拉帽",
-    "description": null
+    "description": "輕盈柔軟，適合日常佩戴的帽子。 十分時尚，曾經在島上流行過。"
   },
   "Head005_5": {
     "localized_name": "費多拉帽",
-    "description": null
+    "description": "輕盈柔軟，適合日常佩戴的帽子。 十分時尚，曾經在島上流行過。"
   },
   "Head006": {
     "localized_name": "安全帽",
-    "description": null
+    "description": "十分牢固可保護頭部的頭盔。 因為有很多人從紫霞鹿背上掉下來後撞到頭 所以製作了該頭盔。"
   },
   "Head006_2": {
     "localized_name": "安全帽",
-    "description": null
+    "description": "十分牢固可保護頭部的頭盔。 因為有很多人從紫霞鹿背上掉下來後撞到頭 所以製作了該頭盔。"
   },
   "Head006_3": {
     "localized_name": "安全帽",
-    "description": null
+    "description": "十分牢固可保護頭部的頭盔。 因為有很多人從紫霞鹿背上掉下來後撞到頭 所以製作了該頭盔。"
   },
   "Head006_4": {
     "localized_name": "安全帽",
-    "description": null
+    "description": "十分牢固可保護頭部的頭盔。 因為有很多人從紫霞鹿背上掉下來後撞到頭 所以製作了該頭盔。"
   },
   "Head006_5": {
     "localized_name": "安全帽",
-    "description": null
+    "description": "十分牢固可保護頭部的頭盔。 因為有很多人從紫霞鹿背上掉下來後撞到頭 所以製作了該頭盔。"
   },
   "Head007": {
     "localized_name": "大禮帽",
-    "description": null
+    "description": "專為紳士打造的帽子。 以綢笠蛾毛製成的帽子被認為是高級品， 但市面上也充斥許多以毛撣兒毛製成的劣質品。"
   },
   "Head007_2": {
     "localized_name": "大禮帽",
-    "description": null
+    "description": "專為紳士打造的帽子。 以綢笠蛾毛製成的帽子被認為是高級品， 但市面上也充斥許多以毛撣兒毛製成的劣質品。"
   },
   "Head007_3": {
     "localized_name": "大禮帽",
-    "description": null
+    "description": "專為紳士打造的帽子。 以綢笠蛾毛製成的帽子被認為是高級品， 但市面上也充斥許多以毛撣兒毛製成的劣質品。"
   },
   "Head007_4": {
     "localized_name": "大禮帽",
-    "description": null
+    "description": "專為紳士打造的帽子。 以綢笠蛾毛製成的帽子被認為是高級品， 但市面上也充斥許多以毛撣兒毛製成的劣質品。"
   },
   "Head007_5": {
     "localized_name": "大禮帽",
-    "description": null
+    "description": "專為紳士打造的帽子。 以綢笠蛾毛製成的帽子被認為是高級品， 但市面上也充斥許多以毛撣兒毛製成的劣質品。"
   },
   "Head008": {
     "localized_name": "三角帽",
-    "description": null
+    "description": "深受海盜們喜愛的帽子。 過去戴著這種帽子的人， 往往都是濫捕碧海龍之輩。"
   },
   "Head008_2": {
     "localized_name": "三角帽",
-    "description": null
+    "description": "深受海盜們喜愛的帽子。 過去戴著這種帽子的人， 往往都是濫捕碧海龍之輩。"
   },
   "Head008_3": {
     "localized_name": "三角帽",
-    "description": null
+    "description": "深受海盜們喜愛的帽子。 過去戴著這種帽子的人， 往往都是濫捕碧海龍之輩。"
   },
   "Head008_4": {
     "localized_name": "三角帽",
-    "description": null
+    "description": "深受海盜們喜愛的帽子。 過去戴著這種帽子的人， 往往都是濫捕碧海龍之輩。"
   },
   "Head008_5": {
     "localized_name": "三角帽",
-    "description": null
+    "description": "深受海盜們喜愛的帽子。 過去戴著這種帽子的人， 往往都是濫捕碧海龍之輩。"
   },
   "Head009": {
     "localized_name": "探險帽",
-    "description": null
+    "description": "冒險家會戴的帽子。 可以抵擋強烈陽光帶來的燠熱感。"
   },
   "Head009_2": {
     "localized_name": "探險帽",
-    "description": null
+    "description": "冒險家會戴的帽子。 可以抵擋強烈陽光帶來的燠熱感。"
   },
   "Head009_3": {
     "localized_name": "探險帽",
-    "description": null
+    "description": "冒險家會戴的帽子。 可以抵擋強烈陽光帶來的燠熱感。"
   },
   "Head009_4": {
     "localized_name": "探險帽",
-    "description": null
+    "description": "冒險家會戴的帽子。 可以抵擋強烈陽光帶來的燠熱感。"
   },
   "Head009_5": {
     "localized_name": "探險帽",
-    "description": null
+    "description": "冒險家會戴的帽子。 可以抵擋強烈陽光帶來的燠熱感。"
   },
   "Head010": {
     "localized_name": "學士帽",
-    "description": null
+    "description": "戴上這頂帽子，看起來就會很有學問。 這座島上可能曾經有過學校吧。"
   },
   "Head010_2": {
     "localized_name": "學士帽",
-    "description": null
+    "description": "戴上這頂帽子，看起來就會很有學問。 這座島上可能曾經有過學校吧。"
   },
   "Head010_3": {
     "localized_name": "學士帽",
-    "description": null
+    "description": "戴上這頂帽子，看起來就會很有學問。 這座島上可能曾經有過學校吧。"
   },
   "Head010_4": {
     "localized_name": "學士帽",
-    "description": null
+    "description": "戴上這頂帽子，看起來就會很有學問。 這座島上可能曾經有過學校吧。"
   },
   "Head010_5": {
     "localized_name": "學士帽",
-    "description": null
+    "description": "戴上這頂帽子，看起來就會很有學問。 這座島上可能曾經有過學校吧。"
   },
   "Head011": {
     "localized_name": "農夫帽",
-    "description": null
+    "description": "適合從事農牧工作的帽子。 可以抵擋強烈陽光帶來的燠熱感。"
   },
   "Head011_2": {
     "localized_name": "農夫帽",
-    "description": null
+    "description": "適合從事農牧工作的帽子。 可以抵擋強烈陽光帶來的燠熱感。"
   },
   "Head011_3": {
     "localized_name": "農夫帽",
-    "description": null
+    "description": "適合從事農牧工作的帽子。 可以抵擋強烈陽光帶來的燠熱感。"
   },
   "Head011_4": {
     "localized_name": "農夫帽",
-    "description": null
+    "description": "適合從事農牧工作的帽子。 可以抵擋強烈陽光帶來的燠熱感。"
   },
   "Head011_5": {
     "localized_name": "農夫帽",
-    "description": null
+    "description": "適合從事農牧工作的帽子。 可以抵擋強烈陽光帶來的燠熱感。"
   },
   "Head012": {
     "localized_name": "博勒帽",
-    "description": null
+    "description": "相當堅固的圓帽。 「就算被森猛獁踩到也不會壞」 是它的行銷廣告詞。"
   },
   "Head012_2": {
     "localized_name": "博勒帽",
-    "description": null
+    "description": "相當堅固的圓帽。 「就算被森猛獁踩到也不會壞」 是它的行銷廣告詞。"
   },
   "Head012_3": {
     "localized_name": "博勒帽",
-    "description": null
+    "description": "相當堅固的圓帽。 「就算被森猛獁踩到也不會壞」 是它的行銷廣告詞。"
   },
   "Head012_4": {
     "localized_name": "博勒帽",
-    "description": null
+    "description": "相當堅固的圓帽。 「就算被森猛獁踩到也不會壞」 是它的行銷廣告詞。"
   },
   "Head012_5": {
     "localized_name": "博勒帽",
-    "description": null
+    "description": "相當堅固的圓帽。 「就算被森猛獁踩到也不會壞」 是它的行銷廣告詞。"
   },
   "Head013": {
     "localized_name": "炸蛋鳥帽",
-    "description": null
+    "description": "模仿炸蛋鳥外型製成的帽子。 極為花俏，遠遠看到一眼就能認出來。"
   },
   "Head013_2": {
     "localized_name": "炸蛋鳥帽",
-    "description": null
+    "description": "模仿炸蛋鳥外型製成的帽子。 極為花俏，遠遠看到一眼就能認出來。"
   },
   "Head013_3": {
     "localized_name": "炸蛋鳥帽",
-    "description": null
+    "description": "模仿炸蛋鳥外型製成的帽子。 極為花俏，遠遠看到一眼就能認出來。"
   },
   "Head013_4": {
     "localized_name": "炸蛋鳥帽",
-    "description": null
+    "description": "模仿炸蛋鳥外型製成的帽子。 極為花俏，遠遠看到一眼就能認出來。"
   },
   "Head013_5": {
     "localized_name": "炸蛋鳥帽",
-    "description": null
+    "description": "模仿炸蛋鳥外型製成的帽子。 極為花俏，遠遠看到一眼就能認出來。"
   },
   "Head014": {
     "localized_name": "笑臉炸蛋鳥帽",
-    "description": null
+    "description": "模仿炸蛋鳥外型製成的帽子。 戴上它似乎會讓人不自覺地展露笑容。"
   },
   "Head014_2": {
     "localized_name": "笑臉炸蛋鳥帽",
-    "description": null
+    "description": "模仿炸蛋鳥外型製成的帽子。 戴上它似乎會讓人不自覺地展露笑容。"
   },
   "Head014_3": {
     "localized_name": "笑臉炸蛋鳥帽",
-    "description": null
+    "description": "模仿炸蛋鳥外型製成的帽子。 戴上它似乎會讓人不自覺地展露笑容。"
   },
   "Head014_4": {
     "localized_name": "笑臉炸蛋鳥帽",
-    "description": null
+    "description": "模仿炸蛋鳥外型製成的帽子。 戴上它似乎會讓人不自覺地展露笑容。"
   },
   "Head014_5": {
     "localized_name": "笑臉炸蛋鳥帽",
-    "description": null
+    "description": "模仿炸蛋鳥外型製成的帽子。 戴上它似乎會讓人不自覺地展露笑容。"
   },
   "Head015": {
     "localized_name": "葉泥泥帽",
-    "description": null
+    "description": "模仿葉泥泥外型製成的帽子。"
   },
   "Head015_2": {
     "localized_name": "葉泥泥帽",
-    "description": null
+    "description": "模仿葉泥泥外型製成的帽子。"
   },
   "Head015_3": {
     "localized_name": "葉泥泥帽",
-    "description": null
+    "description": "模仿葉泥泥外型製成的帽子。"
   },
   "Head015_4": {
     "localized_name": "葉泥泥帽",
-    "description": null
+    "description": "模仿葉泥泥外型製成的帽子。"
   },
   "Head015_5": {
     "localized_name": "葉泥泥帽",
-    "description": null
+    "description": "模仿葉泥泥外型製成的帽子。"
   },
   "Head016": {
     "localized_name": "企丸王帽",
-    "description": null
+    "description": "模仿企丸王外型製成的帽子。"
   },
   "Head016_2": {
     "localized_name": "企丸王帽",
-    "description": null
+    "description": "模仿企丸王外型製成的帽子。"
   },
   "Head016_3": {
     "localized_name": "企丸王帽",
-    "description": null
+    "description": "模仿企丸王外型製成的帽子。"
   },
   "Head016_4": {
     "localized_name": "企丸王帽",
-    "description": null
+    "description": "模仿企丸王外型製成的帽子。"
   },
   "Head016_5": {
     "localized_name": "企丸王帽",
-    "description": null
+    "description": "模仿企丸王外型製成的帽子。"
   },
   "Head017": {
     "localized_name": "闇巫貓帽",
-    "description": null
+    "description": "模仿闇巫貓外型製成的帽子。"
   },
   "Head017_2": {
     "localized_name": "闇巫貓帽",
-    "description": null
+    "description": "模仿闇巫貓外型製成的帽子。"
   },
   "Head017_3": {
     "localized_name": "闇巫貓帽",
-    "description": null
+    "description": "模仿闇巫貓外型製成的帽子。"
   },
   "Head017_4": {
     "localized_name": "闇巫貓帽",
-    "description": null
+    "description": "模仿闇巫貓外型製成的帽子。"
   },
   "Head017_5": {
     "localized_name": "闇巫貓帽",
-    "description": null
+    "description": "模仿闇巫貓外型製成的帽子。"
   },
   "HeadEquip001_purple": {
     "localized_name": "魔女之冠【極】",
@@ -3493,7 +3481,7 @@
   },
   "Herbs": {
     "localized_name": "劣質藥品",
-    "description": "對感冒和扭傷有效的劣質藥品。 即使吃下也無法回復生命值。"
+    "description": "對感冒和扭傷、暴食症有效的劣質藥品。 服用後並不會回復生命值。"
   },
   "Homeward": {
     "localized_name": "歸途雷雲",
@@ -3505,7 +3493,7 @@
   },
   "Honey": {
     "localized_name": "蜂蜜",
-    "description": "可自騎士蜂身上取得的蜂蜜。 甘甜美味。"
+    "description": "可從騎士蜂身上取得的蜂蜜。 甘甜美味。"
   },
   "Hop": {
     "localized_name": "zh-hant text",
@@ -3521,7 +3509,7 @@
   },
   "HotDog_2": {
     "localized_name": "草莽豬熱狗",
-    "description": "在麵包中夾入厚實的香腸製成的料理。 烤得酥脆的外皮與辛香風味絕妙無比。 食用後的一段時間內防禦+20%。"
+    "description": "在麵包中夾入厚實的香腸製成的料理。 烤得酥脆的外皮與辛香風味絕妙無比。 食用後的一段時間內，防禦+20%。"
   },
   "HotMilk": {
     "localized_name": "熱牛奶",
@@ -3580,20 +3568,20 @@
     "description": "經過改良的精煉金屬盔甲。 具備傲人的耐熱功能。"
   },
   "IronArmor_2": {
-    "localized_name": "精煉金屬盔甲",
-    "description": "以優質金屬製成的盔甲。 防禦力極優，但也相當沉重。"
+    "localized_name": "zh-hant text",
+    "description": "zh-hant text"
   },
   "IronArmor_3": {
-    "localized_name": "精煉金屬盔甲",
-    "description": "以優質金屬製成的盔甲。 防禦力極優，但也相當沉重。"
+    "localized_name": "zh-hant text",
+    "description": "zh-hant text"
   },
   "IronArmor_4": {
-    "localized_name": "精煉金屬盔甲",
-    "description": "以優質金屬製成的盔甲。 防禦力極優，但也相當沉重。"
+    "localized_name": "zh-hant text",
+    "description": "zh-hant text"
   },
   "IronArmor_5": {
-    "localized_name": "精煉金屬盔甲",
-    "description": "以優質金屬製成的盔甲。 防禦力極優，但也相當沉重。"
+    "localized_name": "zh-hant text",
+    "description": "zh-hant text"
   },
   "IronHelmet": {
     "localized_name": "精煉金屬頭盔",
@@ -3629,7 +3617,7 @@
   },
   "Lantern": {
     "localized_name": "掛腰燈籠",
-    "description": "掛在腰上的提燈。 到了夜晚可自動照明。 帶1個在身上就夠用了。"
+    "description": "掛在腰上的提燈。 到了夜晚會自動照明。 帶1個在身上就夠用了。"
   },
   "LaserBullet": {
     "localized_name": "能量盒",
@@ -3641,23 +3629,23 @@
   },
   "LaserGatlingGun": {
     "localized_name": "雷射加特林",
-    "description": "能夠高速連射雷射彈。 猛烈的火力能瞬間壓制複數敵人。"
+    "description": "能夠高速連射雷射光束。 猛烈的火力能瞬間壓制複數敵人。"
   },
   "LaserGatlingGun_2": {
     "localized_name": "雷射加特林",
-    "description": "能夠高速連射雷射彈。 猛烈的火力能瞬間壓制複數敵人。"
+    "description": "能夠高速連射雷射光束。 猛烈的火力能瞬間壓制複數敵人。"
   },
   "LaserGatlingGun_3": {
     "localized_name": "雷射加特林",
-    "description": "能夠高速連射雷射彈。 猛烈的火力能瞬間壓制複數敵人。"
+    "description": "能夠高速連射雷射光束。 猛烈的火力能瞬間壓制複數敵人。"
   },
   "LaserGatlingGun_4": {
     "localized_name": "雷射加特林",
-    "description": "能夠高速連射雷射彈。 猛烈的火力能瞬間壓制複數敵人。"
+    "description": "能夠高速連射雷射光束。 猛烈的火力能瞬間壓制複數敵人。"
   },
   "LaserGatlingGun_5": {
     "localized_name": "雷射加特林",
-    "description": "能夠高速連射雷射彈。 猛烈的火力能瞬間壓制複數敵人。"
+    "description": "能夠高速連射雷射光束。 猛烈的火力能瞬間壓制複數敵人。"
   },
   "LaserRifle": {
     "localized_name": "雷射步槍",
@@ -3684,20 +3672,20 @@
     "description": "可從遠距離進行強力轟炸的Launcher Default。"
   },
   "Launcher_Default_2": {
-    "localized_name": "火箭發射器",
-    "description": "可從遠距離進行強力轟炸的Launcher Default。"
+    "localized_name": "zh-hant text",
+    "description": "zh-hant text"
   },
   "Launcher_Default_3": {
-    "localized_name": "火箭發射器",
-    "description": "可從遠距離進行強力轟炸的Launcher Default。"
+    "localized_name": "zh-hant text",
+    "description": "zh-hant text"
   },
   "Launcher_Default_4": {
-    "localized_name": "火箭發射器",
-    "description": "可從遠距離進行強力轟炸的Launcher Default。"
+    "localized_name": "zh-hant text",
+    "description": "zh-hant text"
   },
   "Launcher_Default_5": {
-    "localized_name": "火箭發射器",
-    "description": "可從遠距離進行強力轟炸的Launcher Default。"
+    "localized_name": "zh-hant text",
+    "description": "zh-hant text"
   },
   "Launcher_Meteor": {
     "localized_name": "隕石發射器",
@@ -3765,7 +3753,7 @@
   },
   "LuxuryMedicines": {
     "localized_name": "高品質藥品",
-    "description": "對衰弱和憂鬱有效的高品質藥品。 無法用來回復生命值。"
+    "description": "對虛弱和憂鬱有效的高品質藥品。 無法用來回復生命值。"
   },
   "LuxuryOmelette": {
     "localized_name": "zh-hant text",
@@ -3777,7 +3765,7 @@
   },
   "MachineParts": {
     "localized_name": "釘子",
-    "description": "製造許多設施時都會用到的零件。 可在初階工作臺製作。"
+    "description": "製造許多設施時都會用到的零件。 可在初階工作台製作。"
   },
   "MachineParts2": {
     "localized_name": "電路板",
@@ -3873,10 +3861,14 @@
   },
   "MarinatedMushrooms": {
     "localized_name": "醃蘑菇",
-    "description": "以醃漬液涼拌蘑菇製成的料理。 食用後的一段時間內防禦+10%。"
+    "description": "以醃漬液涼拌蘑菇製成的料理。 食用後的一段時間內，防禦+10%。"
+  },
+  "MeaninglessItem_ButcheringImportPal": {
+    "localized_name": "廢棄組織樣本",
+    "description": "被粉碎得破爛不堪的某種生物組織。 解體透過基因復原的帕魯時產生的殘留物， 沒有任何用途，只能賣掉或丟棄。"
   },
   "Meat": {
-    "localized_name": "Meat",
+    "localized_name": "生肉",
     "description": "帕魯的肉。 新鮮到人類都能生吃，不怕鬧肚子。"
   },
   "Meat2": {
@@ -3917,7 +3909,7 @@
   },
   "Meat_Eagle": {
     "localized_name": "天擒鳥肉",
-    "description": "天擒鳥的肉。 風味相當滋補且強勁。"
+    "description": "天擒鳥的肉。 富含營養且充滿強勁的風味。"
   },
   "Meat_GrassMammoth": {
     "localized_name": "森猛獁獸肉",
@@ -3929,7 +3921,7 @@
   },
   "Meat_Kelpie": {
     "localized_name": "水靈兒魚肉",
-    "description": "水靈兒的肉。 特徵為味甜，且口感紮實有彈性。 為魚肉的一種，因此不耐久放。"
+    "description": "水靈兒的肉。 紮實有彈性的口感與甜味為其特徵。 為魚肉的一種，因此不耐久放。"
   },
   "Meat_LazyCatfish": {
     "localized_name": "趴趴鯰肉",
@@ -3957,11 +3949,11 @@
   },
   "MeteorDrop": {
     "localized_name": "隕石碎片",
-    "description": "從天而降的石頭碎片。 內部含有豐富的Pal Crystal S， 在｢粉碎機｣處進行加工可以取出。"
+    "description": "從天而降的石頭碎片。 內部含有豐富的Pal Crystal S， 在「粉碎機」處進行加工可以取出。"
   },
   "Milk": {
     "localized_name": "牛奶",
-    "description": "可直接飲用，但也可用來製作料理。 取自波霸牛。"
+    "description": "可直接飲用，但也可用來製作料理。 可從波霸牛身上取得。"
   },
   "MindControlDrug": {
     "localized_name": "洗腦藥",
@@ -3969,7 +3961,7 @@
   },
   "Minestrone": {
     "localized_name": "義大利蔬菜湯",
-    "description": "用大量蔬菜熬煮的湯品。 喝下去全身會由內而外的暖和起來。 食用後的一段時間內，工作速度會提升。"
+    "description": "用大量蔬菜熬煮的湯品。 喝下去全身會由內而外的暖和起來。 食用後的一段時間內，提高工作速度。"
   },
   "MissileBullet": {
     "localized_name": "導彈",
@@ -4009,7 +4001,7 @@
   },
   "MushroomSoup": {
     "localized_name": "蘑菇湯",
-    "description": "加入蘑菇的奶油濃湯。 食用後的一段時間內，會稍微不容易感到飢餓。"
+    "description": "加入蘑菇的奶油濃湯。 食用後的一段時間內，比較不容易感到飢餓。"
   },
   "MushroomStew": {
     "localized_name": "蘑菇燉菜",
@@ -4069,7 +4061,7 @@
   },
   "Omelet": {
     "localized_name": "歐姆蛋",
-    "description": "將蛋煎熟後淋上番茄醬製成的料理。 食用後的一段時間內攻擊+10%。"
+    "description": "將蛋煎熟後淋上番茄醬製成的料理。 食用後的一段時間內，攻擊+10%。"
   },
   "Onion": {
     "localized_name": "洋蔥",
@@ -4083,6 +4075,10 @@
     "localized_name": "可疑果汁",
     "description": "飲用這種果汁能讓心情舒爽。 飲用後的一段時間內會略微提高工作速度， 但SAN值也會略微下降。"
   },
+  "OverheatRifle": {
+    "localized_name": "zh-hant text",
+    "description": "zh-hant text"
+  },
   "PalCrystal_Ex": {
     "localized_name": "古代文明部件",
     "description": "從古代遺跡裡挖出的廢品。 其中蘊藏了許多失傳技術的資訊。 此物品極具價值，相當炙手可熱。"
@@ -4090,6 +4086,10 @@
   "PalDarkParts": {
     "localized_name": "闇黑碎片",
     "description": "部分強大的暗屬性帕魯掉落的素材。 用於製作強力飾品的材料。"
+  },
+  "PalDopingShot": {
+    "localized_name": "zh-hant text",
+    "description": "zh-hant text"
   },
   "PalEgg_Dark_01": {
     "localized_name": "暗黑帕魯蛋",
@@ -4273,7 +4273,11 @@
   },
   "PalFluid": {
     "localized_name": "帕魯體液",
-    "description": "可自帕魯身上取得的體液。 黏度很高，相當有用。"
+    "description": "可從帕魯身上取得的體液。 黏度很高，相當有用。"
+  },
+  "PalHealingGrenade": {
+    "localized_name": "zh-hant text",
+    "description": "zh-hant text"
   },
   "PalItem_CaptainPenguin": {
     "localized_name": "企丸王的羽飾",
@@ -4313,27 +4317,27 @@
   },
   "PalItem_ToSell_01": {
     "localized_name": "貴重的龍珠",
-    "description": "像寶石一樣的珠子，可自帕魯身上取得。 商人會願意出高價買下。"
+    "description": "像寶石一樣的珠子，可從帕魯身上取得。 商人會願意出高價收購。"
   },
   "PalItem_ToSell_02": {
     "localized_name": "貴重的羽毛",
-    "description": "閃閃發亮的羽毛，可自帕魯身上取得。 商人會願意出高價買下。"
+    "description": "閃閃發亮的羽毛，可從帕魯身上取得。 商人會願意出高價收購。"
   },
   "PalItem_ToSell_03": {
     "localized_name": "貴重的內臟",
-    "description": "永不停止跳動的心臟，可自帕魯身上取得。 商人會願意出高價買下。"
+    "description": "永不停止跳動的心臟，可從帕魯身上取得。 商人會願意出高價收購。"
   },
   "PalItem_ToSell_04": {
     "localized_name": "貴重的利爪",
-    "description": "極為銳利的爪子，可自帕魯身上取得。 商人會願意出高價買下。"
+    "description": "極為銳利的爪子，可從帕魯身上取得。 商人會願意出高價收購。"
   },
   "PalItem_ToSell_05": {
     "localized_name": "貴重的獸毛",
-    "description": "飄然蓬鬆的絨毛，可自帕魯身上取得。 商人會願意出高價買下。"
+    "description": "飄然蓬鬆的絨毛，可從帕魯身上取得。 商人會願意出高價收購。"
   },
   "PalOil": {
     "localized_name": "優質帕魯油",
-    "description": "可自帕魯身上取得的優質油脂。 是製作聚合物時會用到的素材。"
+    "description": "可從帕魯身上取得的優質油脂。 是製作聚合物時會用到的素材。"
   },
   "PalRevive": {
     "localized_name": "復活藥",
@@ -4465,7 +4469,7 @@
   },
   "Pancake": {
     "localized_name": "鬆餅",
-    "description": "將麵粉與牛奶拌勻後煎製成的料理。 食用後的一段時間內，SAN值下降的速度會略微變慢。"
+    "description": "將麵粉與牛奶拌勻後煎製成的料理。 食用後的一段時間內，稍微減緩SAN值的下降速度。"
   },
   "Pickaxe_Steal": {
     "localized_name": "帕魯金屬十字鎬",
@@ -4485,7 +4489,7 @@
   },
   "Pizza": {
     "localized_name": "披薩",
-    "description": "在麵包上放上紅色莓果、蕃茄、起司製成的料理。 食用後的一段時間內，會略微提高工作速度， 且稍微不容易感到飢餓。"
+    "description": "在麵包上放上紅色莓果、蕃茄、起司製成的料理。 食用後的一段時間內，略微提高工作速度， 且比較不容易感到飢餓。"
   },
   "Plastic": {
     "localized_name": "塑鋼",
@@ -4601,7 +4605,7 @@
   },
   "Poppy": {
     "localized_name": "美麗花朵",
-    "description": "這種植物的花朵相當鮮豔。 可用來製作可疑果汁 及怪異果汁。"
+    "description": "這種植物的花朵相當鮮豔。 可用來製作可疑果汁及怪異果汁。"
   },
   "Potage": {
     "localized_name": "zh-hant text",
@@ -4613,7 +4617,7 @@
   },
   "PotatoChips": {
     "localized_name": "炸薯條",
-    "description": "用油炸製馬鈴薯的料理。 超級上癮，讓人欲罷不能。 在食用後的一段時間內，SAN值下降的速度會變得較慢。"
+    "description": "用油炸製馬鈴薯的料理。 超級上癮，讓人欲罷不能。 在食用後的一段時間內，稍微減緩SAN值的下降速度。"
   },
   "PotatoSeedPotatoes": {
     "localized_name": "zh-hant text",
@@ -4648,20 +4652,20 @@
     "description": "子彈容納量增加，威力更強的散彈槍。 近距離射擊時的DPS極佳。"
   },
   "PumpActionShotgun_2": {
-    "localized_name": "泵動式散彈槍",
-    "description": "子彈容納量增加，威力更強的散彈槍。 近距離射擊時的DPS極佳。"
+    "localized_name": "zh-hant text",
+    "description": "zh-hant text"
   },
   "PumpActionShotgun_3": {
-    "localized_name": "泵動式散彈槍",
-    "description": "子彈容納量增加，威力更強的散彈槍。 近距離射擊時的DPS極佳。"
+    "localized_name": "zh-hant text",
+    "description": "zh-hant text"
   },
   "PumpActionShotgun_4": {
-    "localized_name": "泵動式散彈槍",
-    "description": "子彈容納量增加，威力更強的散彈槍。 近距離射擊時的DPS極佳。"
+    "localized_name": "zh-hant text",
+    "description": "zh-hant text"
   },
   "PumpActionShotgun_5": {
-    "localized_name": "泵動式散彈槍",
-    "description": "子彈容納量增加，威力更強的散彈槍。 近距離射擊時的DPS極佳。"
+    "localized_name": "zh-hant text",
+    "description": "zh-hant text"
   },
   "Quartz": {
     "localized_name": "純水晶",
@@ -4669,7 +4673,7 @@
   },
   "Quiche": {
     "localized_name": "法式蘑菇鹹派",
-    "description": "將蛋、蔬菜、蘑菇和奶油加入派皮烘烤的料理。 就算涼了依然美味可口。 食用後的一段時間內，SAN值下降的速度會變慢，且會不容易感到飢餓。"
+    "description": "將蛋、蔬菜、蘑菇和奶油加入派皮烘烤的料理。 就算涼了依然美味可口。 食用後的一段時間內，減緩SAN值的下降速度， 且不容易感到飢餓。"
   },
   "RainbowCrystal": {
     "localized_name": "六稜晶礦",
@@ -4677,23 +4681,23 @@
   },
   "Rankup_1": {
     "localized_name": "萬能帕魯精華提取液☆1",
-    "description": "給帕魯注入就能使其才能開花結果的不可思議的精華。 可以使帕魯的階級從☆0升到☆1。 不知道為什麽好像能聽到充滿怨念的呻吟……"
+    "description": "對帕魯注入就能使其才能開花結果的不可思議的精華。 可以使帕魯的階級從☆0升到☆1。 不知道為什麽好像能聽到充滿怨念的呻吟……"
   },
   "Rankup_2": {
     "localized_name": "萬能帕魯精華提取液☆2",
-    "description": "給帕魯注入就能使其才能開花結果的不可思議的精華。 可以使帕魯的階級從☆1升到☆2。 不知道為什麽好像能聽到充滿怨念的呻吟……"
+    "description": "對帕魯注入就能使其才能開花結果的不可思議的精華。 可以使帕魯的階級從☆1升到☆2。 不知道為什麽好像能聽到充滿怨念的呻吟……"
   },
   "Rankup_3": {
     "localized_name": "萬能帕魯精華提取液☆3",
-    "description": "給帕魯注入就能使其才能開花結果的不可思議的精華。 可以使帕魯的階級從☆2升到☆3。 不知道為什麽好像能聽到充滿怨念的呻吟……"
+    "description": "對帕魯注入就能使其才能開花結果的不可思議的精華。 可以使帕魯的階級從☆2升到☆3。 不知道為什麽好像能聽到充滿怨念的呻吟……"
   },
   "Rankup_4": {
     "localized_name": "萬能帕魯精華提取液☆4",
-    "description": "給帕魯注入就能使其才能開花結果的不可思議的精華。 可以使帕魯的階級從☆3升到☆4。 不知道為什麽好像能聽到充滿怨念的呻吟……"
+    "description": "對帕魯注入就能使其才能開花結果的不可思議的精華。 可以使帕魯的階級從☆3升到☆4。 不知道為什麽好像能聽到充滿怨念的呻吟……"
   },
   "Rankup_Arbitrary": {
     "localized_name": "濃縮萬能帕魯精華",
-    "description": "給帕魯注入就能使其才能開花結果的不可思議的精華。 可以使帕魯的階級上升1階。 不知道為什麽好像能聽到充滿怨念的呻吟……"
+    "description": "對帕魯注入就能使其才能開花結果的不可思議的精華。 可以使帕魯的階級上升1階。 不知道為什麽好像能聽到充滿怨念的呻吟……"
   },
   "ReinforcedArrow": {
     "localized_name": "強化箭矢",
@@ -4845,7 +4849,7 @@
   },
   "Salad": {
     "localized_name": "沙拉",
-    "description": "將萵苣與蕃茄拌在一起製成的沙拉。 食用後的一段時間內，會略微提高工作速度。"
+    "description": "將萵苣與蕃茄拌在一起製成的沙拉。 食用後的一段時間內，略微提高工作速度。"
   },
   "Sandwich": {
     "localized_name": "zh-hant text",
@@ -4915,13 +4919,13 @@
     "localized_name": "特級護盾",
     "description": "以帕魯礦技術打造的神奇護盾。 只要一段時間沒受到攻擊，就會自我修復。 歷經無數試驗，達到最高峰的品質。"
   },
+  "Shield_05": {
+    "localized_name": "超級護盾",
+    "description": "以帕魯礦技術打造的神奇護盾。 只要一段時間沒受到攻擊，就會自我修復。 經過更進一步的無數試驗，實現了究極的品質。"
+  },
   "Shield_SF": {
     "localized_name": "卓越護盾",
     "description": "以超高科技打造的神奇護盾。 一定時間不受攻擊時可自動修復。 品質達到完美無缺的境界。"
-  },
-  "Shield_Ultra": {
-    "localized_name": "超級護盾",
-    "description": "以帕魯礦技術打造的神奇護盾。 只要一段時間沒受到攻擊，就會自我修復。 經過更進一步的無數試驗，實現了究極的品質。"
   },
   "ShotgunBullet": {
     "localized_name": "散彈槍子彈",
@@ -5729,7 +5733,7 @@
   },
   "SpringRolls": {
     "localized_name": "春卷",
-    "description": "將野菜和蘑菇包裹在皮中油炸的料理。 酥脆爽口，令人愉悅。 食用後的一段時間內，攻擊 +10%，且SAN值下降的速度會變慢。"
+    "description": "將野菜和蘑菇包裹在皮中油炸的料理。 酥脆爽口，令人愉悅。 食用後的一段時間內，攻擊 +10%， 且減緩SAN值的下降速度。"
   },
   "StainlessSteel": {
     "localized_name": "六稜晶錠",
@@ -5784,20 +5788,20 @@
     "description": "經過改良的帕魯金屬盔甲。 具備傲人的耐熱功能。"
   },
   "StealArmor_2": {
-    "localized_name": "帕魯金屬盔甲",
-    "description": "以帕魯金屬錠製成的盔甲。 防禦力極為卓越，但也極為沉重。"
+    "localized_name": "zh-hant text",
+    "description": "zh-hant text"
   },
   "StealArmor_3": {
-    "localized_name": "帕魯金屬盔甲",
-    "description": "以帕魯金屬錠製成的盔甲。 防禦力極為卓越，但也極為沉重。"
+    "localized_name": "zh-hant text",
+    "description": "zh-hant text"
   },
   "StealArmor_4": {
-    "localized_name": "帕魯金屬盔甲",
-    "description": "以帕魯金屬錠製成的盔甲。 防禦力極為卓越，但也極為沉重。"
+    "localized_name": "zh-hant text",
+    "description": "zh-hant text"
   },
   "StealArmor_5": {
-    "localized_name": "帕魯金屬盔甲",
-    "description": "以帕魯金屬錠製成的盔甲。 防禦力極為卓越，但也極為沉重。"
+    "localized_name": "zh-hant text",
+    "description": "zh-hant text"
   },
   "StealHelmet": {
     "localized_name": "帕魯金屬頭盔",
@@ -5829,11 +5833,11 @@
   },
   "StewedIceDeer": {
     "localized_name": "嚴冬鹿肉燉菜",
-    "description": "將來自涼爽地帶的鹿肉與蔬菜一同燉煮而成的燉菜。 肉質鮮嫩，與細膩的甜味完美交融。 食用後的一段時間內，會稍微不容易感到飢餓。"
+    "description": "將來自涼爽地帶的鹿肉與蔬菜一同燉煮而成的燉菜。 肉質鮮嫩，與細膩的甜味完美交融。 食用後的一段時間內，比較不容易感到飢餓。"
   },
   "StirFriedVegetables": {
     "localized_name": "炒青菜",
-    "description": "用胡蘿蔔和洋蔥炒製的料理。 輕鬆享用美味蔬菜的好方法。 食用後的一段時間內，防禦 +10%，工作速度會稍微提升。"
+    "description": "用胡蘿蔔和洋蔥炒製的料理。 輕鬆享用美味蔬菜的好方法。 食用後的一段時間內，防禦 +10%， 且略微提高工作速度。"
   },
   "Stone": {
     "localized_name": "石頭",
@@ -5865,7 +5869,7 @@
   },
   "Sweet": {
     "localized_name": "棉花糖",
-    "description": "可自棉花糖身上取得的棉花糖。 吃來輕盈甜美，且入口即化。"
+    "description": "可從棉花糖身上取得的棉花糖。 吃來輕盈甜美，且入口即化。"
   },
   "Sword": {
     "localized_name": "劍",
@@ -5944,20 +5948,20 @@
     "description": "原始的遠距離攻擊武器。 因為是東拼西湊而成的，威力較弱。"
   },
   "WeakerBow_2": {
-    "localized_name": "老舊的弓",
-    "description": "原始的遠距離攻擊武器。 因為是東拼西湊而成的，威力較弱。"
+    "localized_name": "zh-hant text",
+    "description": "zh-hant text"
   },
   "WeakerBow_3": {
-    "localized_name": "老舊的弓",
-    "description": "原始的遠距離攻擊武器。 因為是東拼西湊而成的，威力較弱。"
+    "localized_name": "zh-hant text",
+    "description": "zh-hant text"
   },
   "WeakerBow_4": {
-    "localized_name": "老舊的弓",
-    "description": "原始的遠距離攻擊武器。 因為是東拼西湊而成的，威力較弱。"
+    "localized_name": "zh-hant text",
+    "description": "zh-hant text"
   },
   "WeakerBow_5": {
-    "localized_name": "老舊的弓",
-    "description": "原始的遠距離攻擊武器。 因為是東拼西湊而成的，威力較弱。"
+    "localized_name": "zh-hant text",
+    "description": "zh-hant text"
   },
   "Wheat": {
     "localized_name": "小麥",
@@ -6025,18 +6029,10 @@
   },
   "Yakisoba": {
     "localized_name": "連理炒麵",
-    "description": "將麵條與蔬菜和肉一起翻炒的料理。 濃鬱的調味與厚實的肉塊完美搭配。 食用後的一段時間內，COMMON_STATUS_RANGE_Attack +20%。"
+    "description": "將麵條與蔬菜和肉一起翻炒的料理。 濃郁的調味與厚實的肉塊完美搭配。 食用後的一段時間內，COMMON_STATUS_RANGE_Attack +20%。"
   },
   "YakushimaBlade": {
     "localized_name": "彩虹貓之刃",
     "description": "【泰拉瑞亞合作】 傳說這把劍是武道蛙從遙遠的國度帶回來的。 至於原因嘛，我們完全不知道..."
-  },
-  "SniperRifle_Default": {
-    "localized_name": "狙擊步槍",
-    "description": "一款具有卓越精準度的遠程步槍。它易於操作，在遠距離戰鬥中十分有效。"
-  },
-  "LargeBullet": {
-    "localized_name": "狙擊彈藥",
-    "description": "一種用於狙擊步槍的大口徑子彈。具有高精度和強大威力。"
   }
 }

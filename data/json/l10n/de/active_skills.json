@@ -39,17 +39,13 @@
     "localized_name": "Giftdusche",
     "description": "Nimmt seine gesamte Kraft zusammen und lässt Giftkugeln in alle Richtungen fliegen."
   },
-  "EPalWazaID::ChaosLaser": {
-    "localized_name": "Chaoslaser",
-    "description": "de_Text"
-  },
   "EPalWazaID::ChargeCanon": {
     "localized_name": "Turbokanone",
     "description": "Feuert eine mit Drachenenergie versetzte Kugel auf den Gegner ab, die beim Einschlag eine weiträumige Explosion auslöst."
   },
   "EPalWazaID::Commet": {
     "localized_name": "Komet",
-    "description": "Lässt einen Meteoriten senkrecht vom Himmel fallen und eine Schockwelle auslösen."
+    "description": "Lässt einen Meteoriten senkrecht vom Himmel fallen, der beim Aufprall eine Schockwelle auslöst."
   },
   "EPalWazaID::CommetRain": {
     "localized_name": "Meteoregen",
@@ -167,6 +163,10 @@
     "localized_name": "Grastornado",
     "description": "Erzeugt rechts und links von sich je einen Tornado und hetzt sie auf den Gegner."
   },
+  "EPalWazaID::GravityShot": {
+    "localized_name": "Schattenschuss",
+    "description": "Erzeugt eine Kugel aus Schattenenergie, die im Flug beschleunigt."
+  },
   "EPalWazaID::HolyBlast": {
     "localized_name": "Heiliger Zorn",
     "description": "Erzeugt eine große Lichtexplosion, die den Gegner und seine Umgebung erfasst."
@@ -268,7 +268,7 @@
     "description": "Nimmt den Gegner ins Visier und erzeugt unzählige fliegende Luftklingen."
   },
   "EPalWazaID::Railbolt": {
-    "localized_name": "Railbolt",
+    "localized_name": "Donnerbahn",
     "description": "Tankt Gewitterenergie und feuert mehrere mächtige Elektroschocks auf den Gegner ab."
   },
   "EPalWazaID::RangeThunder": {
@@ -371,6 +371,10 @@
     "localized_name": "Blitzdusche",
     "description": "Ruft Blitze herbei, die nach einer bestimmten Zeit einschlagen."
   },
+  "EPalWazaID::ThunderSpear": {
+    "localized_name": "Donnerspeer",
+    "description": "Schleudert einen elektrischen Speer mit hoher Geschwindigkeit in Richtung des Gegners."
+  },
   "EPalWazaID::ThunderStorm": {
     "localized_name": "Donnerwetter",
     "description": "Erzeugt einen enormen Blitz-Tornado, der sich langsam auf den Gegner zubewegt."
@@ -387,16 +391,12 @@
     "localized_name": "Tri-Funken",
     "description": "Feuert mehrere Blitzkugeln, die entweder schnell geradeaus fliegen oder den Gegner langsam verfolgen."
   },
-  "EPalWazaID::TripleCannon": {
-    "localized_name": "Dreifachkanone",
-    "description": "de_Text"
-  },
   "EPalWazaID::Unique_Alpaca_Tackle": {
     "localized_name": "Flufftackling",
     "description": "Einzigartige Fähigkeit von Melpaca. Stürmt auf den Gegner zu und bleibt dabei extrem niedlich."
   },
   "EPalWazaID::Unique_AmaterasuWolf_Dark_DarkCharge": {
-    "localized_name": "Kainzanrai",
+    "localized_name": "Schattenfeuerblitz",
     "description": "Einzigartige Fähigkeit von Kitsun Noct. Hüllt seinen gesamten Körper in violette Flammen und stürmt voller Entschlossenheit auf den Gegner zu."
   },
   "EPalWazaID::Unique_AmaterasuWolf_FireCharge": {
@@ -469,7 +469,7 @@
   },
   "EPalWazaID::Unique_DarkCrow_TelePoke": {
     "localized_name": "Phantomschnabel",
-    "description": "Einzigartige Fähigkeit von Cawgnito. Teleportiert sich neben den Gegner und nutzt das Überraschungsmoment, um ihn mit dem Schnabel anzugreifen."
+    "description": "Einzigartige Fähigkeit von Cawgnito. Teleportiert sich neben den Gegner um ihn mit dem Schnabel anzugreifen."
   },
   "EPalWazaID::Unique_DarkMechaDragon_BeamSlash": {
     "localized_name": "Lichthieb",
@@ -613,7 +613,7 @@
   },
   "EPalWazaID::Unique_JetDragon_JumpBeam": {
     "localized_name": "Jet-Kometen",
-    "description": "Einzigartige Fähigkeit von Jetragon. Lässt unzählige gleißende Strahlen auf den Gegner niederregnen, die beim Aufprall Explosionen verursachen."
+    "description": "Einzigartige Fähigkeit von Jetragon. Lässt seine Flügel aufleuchten, fliegt auf den Gegner zu und lässt unzählige gleißende Strahlen niederregnen, die beim Aufprall Explosionen verursachen."
   },
   "EPalWazaID::Unique_KingAlpaca_BodyPress": {
     "localized_name": "King Press",
@@ -692,7 +692,7 @@
     "description": "Einzigartige Fähigkeit von Elizabee. Fokussiert Energie in ihrem Stab und setzt sie wieder frei, während sie ihn rotieren lässt."
   },
   "EPalWazaID::Unique_RedArmorBird_TriplePeck": {
-    "localized_name": "Schnabelsturm",
+    "localized_name": "Schnabelflammen",
     "description": "Einzigartige Fähigkeit von Ragnahawk. Fliegt vorwärts, stößt mit dem Schnabel nach vorne und zu den Seiten und erzeugt dadurch kleine Explosionen."
   },
   "EPalWazaID::Unique_RobinHood_BowSnipe": {

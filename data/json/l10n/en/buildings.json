@@ -99,6 +99,10 @@
     "localized_name": "Campfire",
     "description": "Needed for cooking food. It can only be used to grill simple ingredients. Requires a Fire Pal to light a flame."
   },
+  "CandleStand": {
+    "localized_name": "-",
+    "description": null
+  },
   "Cauldron": {
     "localized_name": "Witch Cauldron",
     "description": "Place in base to improve medicine manufacturing speed. Placing more than one has no additional effect."
@@ -146,6 +150,18 @@
   "CoalPit": {
     "localized_name": "Coal Mine",
     "description": "Facility for producing Coal. Digging Coal is grueling physical work. Leave it to a Pal that is good at mining."
+  },
+  "CompositeDesk": {
+    "localized_name": "Drafting Table",
+    "description": "A facility that lets you combine multiple schematics to create more advanced ones."
+  },
+  "ConservationGroupBannerA": {
+    "localized_name": "-",
+    "description": null
+  },
+  "ConservationGroupBannerB": {
+    "localized_name": "-",
+    "description": null
   },
   "Container01_Iron": {
     "localized_name": "Large Container",
@@ -230,6 +246,10 @@
   "Desk01_Stone": {
     "localized_name": "Antique Desk",
     "description": "Decorative antique desk."
+  },
+  "DimensionPalStorage": {
+    "localized_name": "Dimensional Pal Storage",
+    "description": "A facility for storing a large number of captured Pals. Any guild member can deposit or withdraw Pals. If you set it to private, it can serve as your personal Pal storage."
   },
   "DismantlingConveyor": {
     "localized_name": "Pal Disassembly Conveyor",
@@ -323,6 +343,10 @@
     "localized_name": "Great Eagle Statue",
     "description": "A stone monument in the shape of a Chikipi. Allows fast travel to the location where it is placed."
   },
+  "FireStand": {
+    "localized_name": "-",
+    "description": null
+  },
   "FlourMill": {
     "localized_name": "Mill",
     "description": "Facility for milling Wheat to produce Flour. Requires Pal with the Watering trait to spin the water turbine."
@@ -363,6 +387,10 @@
     "localized_name": "Glass Foundation",
     "description": "A foundation for building walls or facilities on. Made of industrial-strength glass, it's quite sturdy."
   },
+  "Glass_pillars": {
+    "localized_name": "Glass Pillar",
+    "description": "Column for structural support. Made of industrial-strength glass, it's quite sturdy."
+  },
   "Glass_roof": {
     "localized_name": "Glass Roof",
     "description": "A roof built on top of walls to keep out the rain and wind. Made of industrial-strength glass, it's quite sturdy."
@@ -374,6 +402,10 @@
   "Glass_wall": {
     "localized_name": "Glass Wall",
     "description": "Walls built on foundations for keeping out intruders. Made of industrial-strength glass, it's quite sturdy."
+  },
+  "GlobalPalStorage": {
+    "localized_name": "Global Palbox",
+    "description": "A facility that can store the genetic data of Pals and allows you to reconstruct them from this data. The stored genetic data can also be transferred to other worlds."
   },
   "Globe01_Stone": {
     "localized_name": "Antique Globe",
@@ -403,6 +435,10 @@
     "localized_name": "Large-Scale Stone Oven",
     "description": "Needed for cooking food. By becoming larger, multiple Pals can cooperate to cook together. Requires a Fire Pal to light a flame."
   },
+  "Hunter_GangFlag": {
+    "localized_name": "-",
+    "description": null
+  },
   "IceCrusher": {
     "localized_name": "Refrigerated Crusher",
     "description": "Facility that crushes Ore and converts it into other materials. Requires a power supply and a Pal with Cooling suitability, but it's very efficient."
@@ -413,7 +449,7 @@
   },
   "ItemBooth": {
     "localized_name": "Flea Market (Items)",
-    "description": "A facility for selling items. By setting products in the sales list, you can sell items to other players."
+    "description": "A facility for selling items. By setting products in the sales list, you can sell items to other players. Assign an Ice Pal to it and the food inside will be less likely to spoil."
   },
   "ItemChest": {
     "localized_name": "Wooden Chest",
@@ -555,6 +591,10 @@
     "localized_name": "Stylish Street Lamp",
     "description": "Stylish street lamp that provides illumination. Requires electricity to light."
   },
+  "LilyQueenStatue": {
+    "localized_name": "-",
+    "description": null
+  },
   "MachineGame01_Iron": {
     "localized_name": "Claw Crane",
     "description": "Decorative claw crane. Broken, it can't be played."
@@ -619,6 +659,10 @@
     "localized_name": "Metal Foundation",
     "description": "A foundation for building walls or facilities on. Made from metal, it is extremely durable."
   },
+  "Metal_pillars": {
+    "localized_name": "Metal Pillar",
+    "description": "Column for structural support. Made from metal, it is extremely durable."
+  },
   "Metal_roof": {
     "localized_name": "Metal Roof",
     "description": "A roof built on top of walls to keep out the rain and wind. Made from metal, it is extremely durable."
@@ -669,11 +713,15 @@
   },
   "PalBooth": {
     "localized_name": "Flea Market (Pals)",
-    "description": "A facility for selling Pals. By setting Pals in the sales list, you can sell them to other players."
+    "description": "A facility for selling Pals. By setting Pals in the sales list, you can sell them to other players. Assign an Ice Pal to it and the food inside will be less likely to spoil."
   },
   "PalBoxV2": {
     "localized_name": "Palbox",
     "description": "Facility for storing captured Pals. Pals inside gradually recover Health. Area around this facility becomes a base."
+  },
+  "PalCage": {
+    "localized_name": "-",
+    "description": null
   },
   "PalFoodBox": {
     "localized_name": "Feed Box",
@@ -681,7 +729,7 @@
   },
   "PalMedicineBox": {
     "localized_name": "Medicine Rack",
-    "description": "A shelf for storing medicine. Sick Pals will come here to take thier medicine. Be sure to keep the medicine stocked."
+    "description": "A shelf for storing medicine. Sick Pals will come here to take their medicine. Be sure to keep the medicine stocked."
   },
   "Partition_Stone": {
     "localized_name": "Antique Partition",
@@ -935,6 +983,10 @@
     "localized_name": "Stone Foundation",
     "description": "A foundation for building walls or facilities on. Made from stone, it is reasonably sturdy."
   },
+  "Stone_pillar": {
+    "localized_name": "Stone Pillar",
+    "description": "Column for structural support. Made from stone, it is reasonably sturdy."
+  },
   "Stone_roof": {
     "localized_name": "Stone Roof",
     "description": "A roof built on top of walls to keep out the rain and wind. Made from stone, it is reasonably sturdy."
@@ -1012,7 +1064,7 @@
     "description": "Decorative square table."
   },
   "Tansu": {
-    "localized_name": "Japanese Chest",
+    "localized_name": "Japanese-Style Chest",
     "description": "Stores items. Perfect for Japanese-style buildings."
   },
   "Television01_Iron": {
@@ -1139,6 +1191,10 @@
     "localized_name": "Wall Torch",
     "description": "A light source that provides illumination to a base even at night. It can be placed on walls. Requires a Fire Pal to light a flame."
   },
+  "WallTorch02": {
+    "localized_name": "-",
+    "description": null
+  },
   "WeaponFactory_Dirty_01": {
     "localized_name": "Weapon Workbench",
     "description": "A Primitive Workbench for producing weapons and ammunition. A small workspace prevents the production of high quality weapons. Requires Pals that can work with their hands."
@@ -1150,6 +1206,10 @@
   "WeaponFactory_Dirty_03": {
     "localized_name": "Weapon Assembly Line II",
     "description": "An Assembly Line for producing weapons and ammunition. Through clever management, production speeds have greatly increased. Requires Pals that can work with their hands."
+  },
+  "Wire_Fence": {
+    "localized_name": "-",
+    "description": null
   },
   "Wood_Gate": {
     "localized_name": "Wooden Gate",
@@ -1167,6 +1227,10 @@
     "localized_name": "Wooden Wall and Window",
     "description": "Wall built on a foundation for keeping out intruders. Includes a window. Made from wood, it breaks easily."
   },
+  "WoodenBarricade": {
+    "localized_name": "-",
+    "description": null
+  },
   "Wooden_DoorWall": {
     "localized_name": "Wooden Door",
     "description": "Door built on a foundation. Becomes an entrance. Made from wood, it breaks easily."
@@ -1178,6 +1242,10 @@
   "Wooden_ladder": {
     "localized_name": "Ladder",
     "description": "A ladder that allows you to climb to a slightly higher place."
+  },
+  "Wooden_pillar": {
+    "localized_name": "Wooden Pillar",
+    "description": "Column for structural support. Made from wood, it breaks easily."
   },
   "Wooden_roof": {
     "localized_name": "Wooden Roof",

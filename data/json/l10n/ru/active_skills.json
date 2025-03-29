@@ -39,10 +39,6 @@
     "localized_name": "Ядовитый дождь",
     "description": "Концентрирует силу и рассыпает во все стороны ядовитые сферы."
   },
-  "EPalWazaID::ChaosLaser": {
-    "localized_name": "Лазер хаоса",
-    "description": "ru_Text"
-  },
   "EPalWazaID::ChargeCanon": {
     "localized_name": "Заряженный выстрел",
     "description": "Выпускает во врага энергетический снаряд, наполненный силой дракона. Снаряд взрывается при попадании, вызывая обширный взрыв."
@@ -167,6 +163,10 @@
     "localized_name": "Травяной торнадо",
     "description": "Создает справа и слева от себя вихри, направляя их на врага."
   },
+  "EPalWazaID::GravityShot": {
+    "localized_name": "Темный выстрел",
+    "description": "Выпускает снаряд темной энергии, летящий с постепенным ускорением."
+  },
   "EPalWazaID::HolyBlast": {
     "localized_name": "Священный взрыв",
     "description": "Вызывает световой взрыв под ногами врага, накрывающий область вокруг."
@@ -188,7 +188,7 @@
     "description": "Из-под ног врага вырываются ледяные столпы, распространяющиеся на область вокруг."
   },
   "EPalWazaID::IceBlade": {
-    "localized_name": "Ветряной кинжал",
+    "localized_name": "Ледяной кинжал",
     "description": "Создает клинок в форме полумесяца и запускает его во врагов перед собой."
   },
   "EPalWazaID::IceMissile": {
@@ -268,7 +268,7 @@
     "description": "Выпускает бесчисленное множество ветряных клинков, летящих во врага."
   },
   "EPalWazaID::Railbolt": {
-    "localized_name": "Railbolt",
+    "localized_name": "Цепь молний",
     "description": "Накапливает до предела силу электричества и одновременно выпускает во врага множество мощных грозовых разрядов."
   },
   "EPalWazaID::RangeThunder": {
@@ -371,6 +371,10 @@
     "localized_name": "Грозовой дождь",
     "description": "Призывает грозу. Спустя некоторое время на врагов обрушиваются многочисленные удары молний."
   },
+  "EPalWazaID::ThunderSpear": {
+    "localized_name": "Грозовое копье",
+    "description": "С большой скоростью запускает во врага грозовое копье, летящее по прямой."
+  },
   "EPalWazaID::ThunderStorm": {
     "localized_name": "Грозовая буря",
     "description": "Создает гигантский грозовой смерч. Смерч медленно движется в сторону противника."
@@ -386,10 +390,6 @@
   "EPalWazaID::TriSpark": {
     "localized_name": "Тройной разряд",
     "description": "Одновременно выпускает летящие по прямой скоростные и преследующие противника более медленные грозовые сгустки."
-  },
-  "EPalWazaID::TripleCannon": {
-    "localized_name": "Тройной выстрел",
-    "description": "ru_Text"
   },
   "EPalWazaID::Unique_Alpaca_Tackle": {
     "localized_name": "Пушистая атака",

@@ -611,6 +611,21 @@
       }
     ]
   },
+  "EPalWazaID::GravityShot": {
+    "element": "Dark",
+    "type": "Shot",
+    "power": 40,
+    "min_range": 0,
+    "max_range": 4000,
+    "cool_time": 4.0,
+    "effects": [
+      {
+        "type": "Darkness",
+        "value": 35,
+        "value_ex": 0.0
+      }
+    ]
+  },
   "EPalWazaID::HolyBlast": {
     "element": "Normal",
     "type": "Shot",
@@ -1317,6 +1332,21 @@
       {
         "type": "Electrical",
         "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::ThunderSpear": {
+    "element": "Electricity",
+    "type": "Shot",
+    "power": 30,
+    "min_range": 0,
+    "max_range": 4000,
+    "cool_time": 2.0,
+    "effects": [
+      {
+        "type": "Electrical",
+        "value": 35,
         "value_ex": 0.0
       }
     ]

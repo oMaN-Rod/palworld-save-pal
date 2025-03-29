@@ -31,6 +31,278 @@
     "localized_name": "Aumento dell'attacco Liv. 3",
     "description": null
   },
+  "BossDefeatReward_AmaterasuWolf_Dark": {
+    "localized_name": "Potenziamento danno di attributo oscurità (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_Anubis": {
+    "localized_name": "Potenziamento danno di attributo terra (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_BadCatgirl": {
+    "localized_name": "Potenziamento danno di attributo oscurità (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_BerryGoat_Dark": {
+    "localized_name": "Potenziamento danno di attributo erba (medio)",
+    "description": null
+  },
+  "BossDefeatReward_BlackMetalDragon": {
+    "localized_name": "Potenziamento danno di attributo drago (medio)",
+    "description": null
+  },
+  "BossDefeatReward_BlackPuppy": {
+    "localized_name": "Potenziamento danno di attributo oscurità (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_BlueDragon": {
+    "localized_name": "Potenziamento danno di attributo acqua (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_BlueThunderHorse": {
+    "localized_name": "Potenziamento danno di attributo elettricità (medio)",
+    "description": null
+  },
+  "BossDefeatReward_BlueberryFairy": {
+    "localized_name": "Potenziamento danno di attributo erba (medio)",
+    "description": null
+  },
+  "BossDefeatReward_CaptainPenguin": {
+    "localized_name": "Potenziamento danno di attributo acqua (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_CatMage": {
+    "localized_name": "Potenziamento danno di attributo oscurità (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_CatVampire": {
+    "localized_name": "Potenziamento danno di attributo oscurità (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_DarkScorpion": {
+    "localized_name": "Potenziamento danno di attributo oscurità (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_DarkScorpion_Ground": {
+    "localized_name": "Potenziamento danno di attributo terra (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_FairyDragon": {
+    "localized_name": "Potenziamento danno di attributo drago (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_FengyunDeeper": {
+    "localized_name": "Potenziamento danno non elementale (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_FengyunDeeper_Electric": {
+    "localized_name": "Potenziamento danno di attributo elettricità (medio)",
+    "description": null
+  },
+  "BossDefeatReward_FlowerDinosaur_Electric": {
+    "localized_name": "Potenziamento danno di attributo elettricità (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_FlowerDoll": {
+    "localized_name": "Potenziamento danno di attributo erba (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_GhostRabbit": {
+    "localized_name": "Potenziamento danno di attributo oscurità (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_GoldenHorse": {
+    "localized_name": "Potenziamento danno di attributo terra (medio)",
+    "description": null
+  },
+  "BossDefeatReward_GrassMammoth": {
+    "localized_name": "Potenziamento danno di attributo erba (medio)",
+    "description": null
+  },
+  "BossDefeatReward_GrassPanda_Electric": {
+    "localized_name": "Potenziamento danno di attributo elettricità (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_GrassRabbitMan": {
+    "localized_name": "Potenziamento danno di attributo erba (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_GrimGirl": {
+    "localized_name": "Potenziamento danno di attributo oscurità (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_HawkBird": {
+    "localized_name": "Potenziamento danno non elementale (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_HerculesBeetle": {
+    "localized_name": "Potenziamento danno di attributo terra (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_HerculesBeetle_Ground": {
+    "localized_name": "Potenziamento danno di attributo terra (medio)",
+    "description": null
+  },
+  "BossDefeatReward_Horus_Water": {
+    "localized_name": "Potenziamento danno di attributo acqua (medio)",
+    "description": null
+  },
+  "BossDefeatReward_IceHorse": {
+    "localized_name": "Potenziamento danno di attributo ghiaccio (grande)",
+    "description": null
+  },
+  "BossDefeatReward_IceHorse_Dark": {
+    "localized_name": "Potenziamento danno di attributo oscurità (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_JetDragon": {
+    "localized_name": "Potenziamento danno di attributo drago (grande)",
+    "description": null
+  },
+  "BossDefeatReward_KingAlpaca": {
+    "localized_name": "Potenziamento danno non elementale (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_KingAlpaca_Ice": {
+    "localized_name": "Potenziamento danno di attributo ghiaccio (medio)",
+    "description": null
+  },
+  "BossDefeatReward_KingBahamut": {
+    "localized_name": "Potenziamento danno di attributo fuoco (grande)",
+    "description": null
+  },
+  "BossDefeatReward_Kirin": {
+    "localized_name": "Potenziamento danno di attributo elettricità (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_Kitsunebi_Ice": {
+    "localized_name": "Potenziamento danno di attributo ghiaccio (grande)",
+    "description": null
+  },
+  "BossDefeatReward_LazyCatfish": {
+    "localized_name": "Potenziamento danno di attributo terra (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_LazyDragon_Electric": {
+    "localized_name": "Potenziamento danno di attributo drago (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_LilyQueen_Dark": {
+    "localized_name": "Potenziamento danno di attributo oscurità (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_MopKing": {
+    "localized_name": "Potenziamento danno di attributo ghiaccio (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_Mutant": {
+    "localized_name": "Potenziamento danno non elementale (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_MysteryMask": {
+    "localized_name": "Potenziamento danno di attributo oscurità (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_NaughtyCat": {
+    "localized_name": "Potenziamento danno non elementale (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_NightBlueHorse": {
+    "localized_name": "Potenziamento danno di attributo oscurità (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_PinkRabbit_Grass": {
+    "localized_name": "Potenziamento danno di attributo erba (medio)",
+    "description": null
+  },
+  "BossDefeatReward_PlantSlime": {
+    "localized_name": "Potenziamento danno di attributo terra (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_PurpleSpider": {
+    "localized_name": "Potenziamento danno di attributo oscurità (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_QueenBee": {
+    "localized_name": "Potenziamento danno di attributo erba (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_RaijinDaughter_Water": {
+    "localized_name": "Potenziamento danno di attributo oscurità (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_Ronin": {
+    "localized_name": "Potenziamento danno di attributo fuoco (medio)",
+    "description": null
+  },
+  "BossDefeatReward_SaintCentaur_1": {
+    "localized_name": "Potenziamento danno non elementale (grande)",
+    "description": null
+  },
+  "BossDefeatReward_SaintCentaur_2": {
+    "localized_name": "Potenziamento danno di attributo oscurità (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_SakuraSaurus": {
+    "localized_name": "Potenziamento danno di attributo erba (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_SakuraSaurus_Water": {
+    "localized_name": "Potenziamento danno di attributo acqua (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_SkyDragon": {
+    "localized_name": "Potenziamento danno di attributo drago (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_Suzaku": {
+    "localized_name": "Potenziamento danno di attributo fuoco (grande)",
+    "description": null
+  },
+  "BossDefeatReward_ThunderBird": {
+    "localized_name": "Potenziamento danno di attributo elettricità (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_Umihebi": {
+    "localized_name": "Potenziamento danno di attributo acqua (medio)",
+    "description": null
+  },
+  "BossDefeatReward_VioletFairy": {
+    "localized_name": "Potenziamento danno di attributo erba (medio)",
+    "description": null
+  },
+  "BossDefeatReward_WeaselDragon": {
+    "localized_name": "Potenziamento danno di attributo ghiaccio (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_Werewolf_Ice": {
+    "localized_name": "Potenziamento danno di attributo ghiaccio (grande)",
+    "description": null
+  },
+  "BossDefeatReward_WhiteDeer": {
+    "localized_name": "Potenziamento danno non elementale (medio)",
+    "description": null
+  },
+  "BossDefeatReward_WhiteMoth": {
+    "localized_name": "Potenziamento danno di attributo ghiaccio (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_WhiteShieldDragon": {
+    "localized_name": "Potenziamento danno di attributo drago (medio)",
+    "description": null
+  },
+  "BossDefeatReward_WhiteTiger_Ground": {
+    "localized_name": "Potenziamento danno di attributo terra (medio)",
+    "description": null
+  },
+  "BossDefeatReward_WingGolem": {
+    "localized_name": "Potenziamento danno di attributo terra (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_Yeti_Grass": {
+    "localized_name": "Potenziamento danno di attributo erba (piccolo)",
+    "description": null
+  },
   "CaptureLevel_Up_1": {
     "localized_name": "Capacità di cattura +1",
     "description": null
@@ -533,15 +805,15 @@
   },
   "MoveSpeed_up_1": {
     "localized_name": "Rapidità",
-    "description": "Incremento della velocità di movimento: 10.0%"
+    "description": null
   },
   "MoveSpeed_up_2": {
     "localized_name": "Velocista",
-    "description": "Incremento della velocità di movimento: 20.0%"
+    "description": null
   },
   "MoveSpeed_up_3": {
     "localized_name": "Velocità divina",
-    "description": "Incremento della velocità di movimento: 30.0%"
+    "description": null
   },
   "Nocturnal": {
     "localized_name": "Notturno",

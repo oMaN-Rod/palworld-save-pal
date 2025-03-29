@@ -1,1906 +1,950 @@
 {
   "Alpaca": {
     "localized_name": "Мелпака",
-    "description": "Не дайте этой пушистой шубке вас обмануть. Молниеносный взмах длинных ног - и вы улетите на другой конец земного шара."
+    "description": null
   },
   "AmaterasuWolf": {
     "localized_name": "Кицун",
-    "description": "Обладает чувствительной натурой. Если ему что-то не нравится, уединяется в пещере. В древности люди верили, что если Кицун прячется, значит, жди беды."
+    "description": null
   },
   "AmaterasuWolf_Dark": {
     "localized_name": "Кицун Нокт",
-    "description": "Обладает чувствительной натурой. Если ему что-то не нравится, уединяется в пещере. Излишняя любовь к уединению сделала его мрачным."
-  },
-  "Ambassador01": {
-    "localized_name": "Эмиссар пустынного города",
     "description": null
   },
   "Anubis": {
     "localized_name": "Анубис",
-    "description": "Благодаря своему облику когда-то считался символом знати. Для тех, кто богатство и власть не жаловал, служил олицетворением оных. В какой-то момент превратился в символ смерти."
-  },
-  "Believer_CrossBow": {
-    "localized_name": "Эго",
-    "description": null
-  },
-  "Believer_Fat_GiantClub": {
-    "localized_name": "Кирпич",
-    "description": null
-  },
-  "DarkTrader": {
-    "localized_name": "Рам",
-    "description": null
-  },
-  "Female_DesertPeople": {
-    "localized_name": "Шепот",
-    "description": null
-  },
-  "Female_People": {
-    "localized_name": "Огонек",
-    "description": null
-  },
-  "Female_People02": {
-    "localized_name": "Сирена",
-    "description": null
-  },
-  "Female_People03": {
-    "localized_name": "Танко",
-    "description": null
-  },
-  "Female_Soldier": {
-    "localized_name": "Джейд",
-    "description": null
-  },
-  "Female_Soldier02": {
-    "localized_name": "Мишура",
-    "description": null
-  },
-  "Female_Soldier03": {
-    "localized_name": "Алоха",
-    "description": null
-  },
-  "Female_Soldier04": {
-    "localized_name": "Ловкач",
-    "description": null
-  },
-  "FireCult_FlameThrower": {
-    "localized_name": "Тень",
-    "description": null
-  },
-  "Hunter_Fat_GatlingGun": {
-    "localized_name": "Гриль",
-    "description": null
-  },
-  "Hunter_Rifle": {
-    "localized_name": "Ястреб",
-    "description": null
-  },
-  "Male_DesertPeople": {
-    "localized_name": "Фантом",
-    "description": null
-  },
-  "Male_NinjaElite": {
-    "localized_name": "Урчин",
-    "description": null
-  },
-  "Male_People": {
-    "localized_name": "Дина",
-    "description": null
-  },
-  "Male_People02": {
-    "localized_name": "Квилл",
-    "description": null
-  },
-  "Male_People03": {
-    "localized_name": "Скут",
-    "description": null
-  },
-  "Male_People2": {
-    "localized_name": "Мит",
-    "description": null
-  },
-  "Male_Soldier": {
-    "localized_name": "Краш",
-    "description": null
-  },
-  "Male_Soldier02": {
-    "localized_name": "Окурок",
-    "description": null
-  },
-  "Male_Soldier03": {
-    "localized_name": "Клинт",
-    "description": null
-  },
-  "Male_Soldier04": {
-    "localized_name": "Лассо",
-    "description": null
-  },
-  "Male_Trader01": {
-    "localized_name": "Ским",
-    "description": null
-  },
-  "Male_Trader02": {
-    "localized_name": "Мимик",
-    "description": null
-  },
-  "Male_Trader03": {
-    "localized_name": "Билли",
-    "description": null
-  },
-  "Ninja": {
-    "localized_name": "Мямля",
-    "description": null
-  },
-  "Police_Rifle": {
-    "localized_name": "Кнут",
-    "description": null
-  },
-  "Police_old": {
-    "localized_name": "Пинч",
-    "description": null
-  },
-  "Scientist_LaserRifle": {
-    "localized_name": "Виск",
-    "description": null
-  },
-  "Viking": {
-    "localized_name": "Глод",
-    "description": null
-  },
-  "VikingElite": {
-    "localized_name": "Схрон",
     "description": null
   },
   "BadCatgirl": {
     "localized_name": "Няфия",
-    "description": "Очень не любит, когда кто-то смотрит ему в глаза. Если уставиться на него, тут же расплачется и будет избегать общения еще пару недель."
+    "description": null
   },
   "Baphomet": {
     "localized_name": "Инсинерам",
-    "description": "Ночной охотник, утаскивающий добычу в свое логово. Нетрудно представить, какая судьба ждет пойманных Палов."
+    "description": null
   },
   "Baphomet_Dark": {
-    "localized_name": "Инсинерам Нокт",
-    "description": "Целенаправленно охотится на детенышей Палов, унося их в свое логово. Нетрудно представить, какое отчаяние испытывают родители малышей."
-  },
-  "Baphomet_Dark_Oilrig": {
     "localized_name": "Инсинерам Нокт",
     "description": null
   },
   "Bastet": {
     "localized_name": "Мау",
-    "description": "Обладатель прочного хвоста, сохраняющего свою структуру даже после отделения. Из-за суеверия, что он приносит денежную удачу, погибло немало этих Палов."
+    "description": null
   },
   "Bastet_Ice": {
     "localized_name": "Мау Крист",
-    "description": "Его кристальный хвост поражает своей красотой, однако после смерти Пала он разрушается. Этот Пал был популярным питомцем - считалось, что содержание нескольких особей приносит богатство."
-  },
-  "Believer_Bat": {
-    "localized_name": "Адепт Организации по защите Палов",
-    "description": null
-  },
-  "Believer_Bat_Invader": {
-    "localized_name": "Адепт Организации по защите Палов",
-    "description": null
-  },
-  "Believer_CrossBow": {
-    "localized_name": "Адепт Организации по защите Палов",
-    "description": null
-  },
-  "Believer_CrossBow_Invader": {
-    "localized_name": "Адепт Организации по защите Палов",
-    "description": null
-  },
-  "Believer_CrossBow_Tower": {
-    "localized_name": "Адепт Организации по защите Палов",
-    "description": null
-  },
-  "Believer_Fat_Cane": {
-    "localized_name": "Судья Организации по защите Палов",
-    "description": null
-  },
-  "Believer_Fat_GatlingGun": {
-    "localized_name": "Судья Организации по защите Палов",
     "description": null
   },
   "BerryGoat": {
     "localized_name": "Каприти",
-    "description": "Если не голодает, среди густой растительности на его спине созревают ягоды. Понравившиеся друг другу Палы угощают ими друг друга и формируют пары, если закуска придется по вкусу."
+    "description": null
   },
   "BerryGoat_Dark": {
     "localized_name": "Каприти Нокт",
-    "description": "Вкус растущих на его спине ягод меняется в зависимости от состояния его души. Чем суровее условия жизни, тем слаще они становятся, поэтому многие содержащиеся для разведения особи не знают любви."
+    "description": null
   },
   "BirdDragon": {
     "localized_name": "Ванвирм",
-    "description": "Говорят, что звук флейты, сделанной из его экзоскелета, слышен за пределами тысячи гор. В древности использовался в качестве сигнала для начала атаки во время сражений."
+    "description": null
   },
   "BirdDragon_Ice": {
     "localized_name": "Ванвирм Крист",
-    "description": "Говорят, что звук флейты, сделанной из его экзоскелета, слышен за пределами тысячи гор. В древности использовался в качестве сигнала, оповещающего о победе в сражениях."
+    "description": null
   },
   "BlackCentaur": {
     "localized_name": "Некромус",
-    "description": "Некогда этот Пал и Паладиус были едины. Считается воплощением отделившихся негативных эмоций, но в глубине его глаз теплятся едва заметные угольки сострадания."
+    "description": null
   },
   "BlackFurDragon": {
     "localized_name": "ru_Text",
-    "description": "Дитя бездны, само безмолвие. На спину этого зверя не смей взойти. К этому зверю не смей взывать."
+    "description": null
   },
   "BlackGriffon": {
     "localized_name": "Шэдоубик",
-    "description": "Порождение безумия, запретное существо. Генетическая связь с другими Палами утеряна, в каком-то смысле уже не является обычным Палом."
+    "description": null
   },
   "BlackMetalDragon": {
     "localized_name": "Астегон",
-    "description": "Дитя бездны, воплощение неистовства. Перед лицом этого зверя не смей стоять. Голосу этого зверя не смей внимать."
+    "description": null
   },
   "BlackPuppy": {
     "localized_name": "Смоки",
-    "description": "Черное пламя не обжигает при касании, но все, что касается его продолжительное время, начинает таять изнутри. Если поднести к нему сыр, получится настоящий деликатес."
-  },
-  "Blacksmith01": {
-    "localized_name": "Кузнец-подмастерье",
     "description": null
   },
   "BlueDragon": {
     "localized_name": "Азуроб",
-    "description": "Касание нечистой воды окрашивает его белый пояс в черный цвет. Эта особенность помогает выявлять яды, поэтому в прошлом был жертвой бездумной охоты. До сих пор плохо относится к людям."
+    "description": null
   },
   "BluePlatypus": {
     "localized_name": "Камоноске",
-    "description": "Этот Пал может производить воду и создавать волну там, где пожелает. Когда торопится, практикует бодисерфинг. На кураже частенько врезается в стены и погибает."
+    "description": null
   },
   "BlueThunderHorse": {
     "localized_name": "Азурмейн",
-    "description": "Считалось, что эти Палы, как и Юнивольт, имеют отношение к божеству грома. Когда Юнивольт утратил популярность в качестве объекта поклонения, именно Азурмейн стал считаться истинным посланником божества, однако со временем точно так же превратился в рабочую лошадку."
+    "description": null
   },
   "BlueberryFairy": {
     "localized_name": "Прунелия",
-    "description": "Умны и обладают изысканными манерами, поэтому одно время знатные жители острова держали их в качестве личных помощников. Однако если встретить такого посреди ночи, можно и испугаться, поэтому их популярность вскоре сошла на нет."
+    "description": null
   },
   "Boar": {
     "localized_name": "Рашоа",
-    "description": "Любитель подраться, нарывается на конфликт, не оценив силу противника. Габариты этого Пала невелики, но сила его натиска настолько невероятна, что даже скала может не устоять."
-  },
-  "BountyTrader": {
-    "localized_name": "Стражник",
     "description": null
   },
   "CandleGhost": {
     "localized_name": "Гостлайт",
-    "description": "Раньше бытовало мнение, что чем ближе гибель мира, тем слабее горит пламя. Всякий раз, когда пламя несколько раз угасало, сторонники теории конца света паниковали, но в итоге оказалось, что все это были проделки Пала Гостлайт. По крайней мере, пока что."
+    "description": null
   },
   "CaptainPenguin": {
     "localized_name": "Пенкинг",
-    "description": "Этот Пал и Пенгуллет - на самом деле совсем разные виды. Однако внимание к своей особе он оценил, и изо всех сил старается выглядеть важным."
-  },
-  "CaravanLeader01": {
-    "localized_name": "Глава каравана",
-    "description": null
-  },
-  "CaravanLeader02": {
-    "localized_name": "Глава каравана",
-    "description": null
-  },
-  "CaravanLeader03": {
-    "localized_name": "Глава каравана",
     "description": null
   },
   "Carbunclo": {
     "localized_name": "Лифманк",
-    "description": "Обладает интеллектом 5-7-летнего ребенка. Способен быть хорошим напарником, но зарегистрировано немало случаев убийства хозяина особями, освоившими оружие."
+    "description": null
   },
   "CatBat": {
     "localized_name": "Томбат",
-    "description": "Любит внезапно появиться перед другими Палами и красоваться, чванливо распахнув свои крылья. Считается, что это один из способов устрашения, но при этом в выражении его лица сквозит восторг."
+    "description": null
   },
   "CatMage": {
     "localized_name": "Катресс",
-    "description": "Демонстрирует удивительные способности благодаря своей темной силе. Любую еду предпочитает в сыром виде. Виксен - его заклятый враг."
+    "description": null
   },
   "CatMage_Fire": {
     "localized_name": "Катресс Игнис",
-    "description": "Родители научили его не придираться к еде: сырая она или нет, все сгодится. Предпочитает остренькое. Плохо ладит с Палом Виксен Нокт."
+    "description": null
   },
   "CatVampire": {
     "localized_name": "Фелбэт",
-    "description": "Нападает на добычу из сумрака, накрывая ее своими подобными плащу крыльями. Что происходит под ними и почему внутренняя сторона его крыльев красная - лучше и не знать."
+    "description": null
   },
   "ChickenPal": {
     "localized_name": "Чикипи",
-    "description": "Слишком слабый и слишком хороший на вкус. Как и SheepBall, относится к самой слабой когорте Палов. Сколько на них ни охоться, они появляются снова и снова."
+    "description": null
   },
   "ColorfulBird": {
     "localized_name": "Токотоко",
-    "description": "Грозный Пал, несущий взрывающиеся яйца. Обычно использует яйца как оружие, выстреливая ими из-под хвоста, но в безвыходной ситуации взрывается сам."
+    "description": null
   },
   "CowPal": {
     "localized_name": "Моззарина",
-    "description": "Молоко хлещет из этих Палов как из ведра, даже если оставить их без ухода. Мужские особи тоже дают молоко. Загадка природы, не иначе."
+    "description": null
   },
   "CuteButterfly": {
     "localized_name": "Синнамос",
-    "description": "Вдыхая чешуйки его крыльев, можно испытать высшее блаженство. Все попытки усилить контроль встречают сопротивление Организации по защите Палов."
+    "description": null
   },
   "CuteFox": {
     "localized_name": "Викси",
-    "description": "Звезда острова Палпагос. От того, кто обидит Викси, отвернется весь мир."
+    "description": null
   },
   "CuteMole": {
     "localized_name": "Фуддлер",
-    "description": "Острые когти этого Пала прочны, как алмаз, но на их заточку он тратит почти всю свою энергию. Иногда это все, что он делает за день."
+    "description": null
   },
   "DarkAlien": {
-    "localized_name": "Зеноведа",
-    "description": "Генерирует энергию, отправляя и забывая информацию. Похоже, регулярно отправляет кому-то сведения. - Ответь! Цель обнаружена, немедленно уничтожить!"
-  },
-  "DarkAlien_Oilrig": {
     "localized_name": "Зеноведа",
     "description": null
   },
   "DarkCrow": {
     "localized_name": "Когнито",
-    "description": "Когда-то эти Палы свободно бороздили небо, но их вытеснил соперник - Эрмург. Теперь, забыв о небе, они украдкой живут только по ночам."
+    "description": null
   },
   "DarkMechaDragon": {
     "localized_name": "Зенолорд",
-    "description": "- Прибыть на место. В приоритете поиск объекта: Метеоритный дракон. - Примечание: крайний срок порабощения — до <://Error_Code:126DC> года. - Добавлено: следов порабощения не обнаружено. Адаптация подтверждена. Начать ликвидацию. - Сообщение по задаче: не забывать и не есть важную информацию!"
+    "description": null
   },
   "DarkScorpion": {
     "localized_name": "Менастинг",
-    "description": "Его тело представляет собой чистый сгусток энергии, внутри которого - пустота. Заталкивает свою добычу живьем внутрь панциря и поглощает. Адские стоны оглашают округу."
+    "description": null
   },
   "DarkScorpion_Ground": {
     "localized_name": "Менастинг Терра",
-    "description": "Их тело это сгусток энергии, внутри которого — пустота. Набивая землей и камнями свой панцирь, они набирают внушительную массу. Удар этого Пала заставит любого истошно кричать от боли."
+    "description": null
   },
   "Deer": {
     "localized_name": "Иктирдир",
-    "description": "Обладающие самыми выдающимися рогами особи становятся лидерами. Если рога ломаются, впадает в апатию, после чего покидает стаю и гибнет вдалеке от чужих глаз."
+    "description": null
   },
   "Deer_Ground": {
     "localized_name": "Иктирдир Тэрра",
-    "description": "Стаю возглавляет обладатель самых крепких рогов. Лишившийся рогов вожак теряет свой статус и покидает стаю, провожаемый сородичами, после чего тихо умирает."
-  },
-  "Doctor": {
-    "localized_name": "Житель острова",
     "description": null
   },
   "DreamDemon": {
     "localized_name": "Даэдрим",
-    "description": "Погружает в сон тех, к кому испытывает симпатию, и бесконечно показывает им счастливые сны. Предмет обожания не просыпается до самой смерти."
+    "description": null
   },
   "DrillGame": {
     "localized_name": "Дигтос",
-    "description": "|Дигтос и бур| - поучительная история об обладателе мощнейшего панциря и бура, размышляющем о противоречиях."
+    "description": null
   },
   "Eagle": {
     "localized_name": "Эрмург",
-    "description": "Легко может взлететь, схватив даже человека. Но если выбьется из сил, без всякого сожаления отпускает хватку, поэтому случаи падения со смертельным исходом происходят постоянно."
+    "description": null
   },
   "ElecCat": {
     "localized_name": "Спаркит",
-    "description": "В сезон засухи становится раздражительным и все время на взводе. Если уж два таких Пала сцепятся между собой, быть большой драке."
+    "description": null
   },
   "ElecLion": {
     "localized_name": "ru_Text",
-    "description": "ru_Text"
+    "description": null
   },
   "ElecPanda": {
     "localized_name": "Гриззболт",
-    "description": "Этот обладатель открытой улыбки и крепкого телосложения будет верно служить тому, кто заслужит его признание. Но стоит дать ему в руки пулемет, как его облик резко меняется."
-  },
-  "Emote_location_A_01": {
-    "localized_name": "Житель острова",
-    "description": null
-  },
-  "Emote_location_A_02": {
-    "localized_name": "Житель острова",
-    "description": null
-  },
-  "Emote_location_B_01": {
-    "localized_name": "Житель острова",
-    "description": null
-  },
-  "Emote_location_B_02": {
-    "localized_name": "Житель острова",
-    "description": null
-  },
-  "Emote_location_C_01": {
-    "localized_name": "Житель острова",
-    "description": null
-  },
-  "Emote_location_C_02": {
-    "localized_name": "Житель острова",
-    "description": null
-  },
-  "Emote_location_D_01": {
-    "localized_name": "Житель острова",
-    "description": null
-  },
-  "Emote_location_D_02": {
-    "localized_name": "Житель острова",
-    "description": null
-  },
-  "Emote_location_E_01": {
-    "localized_name": "Житель острова",
-    "description": null
-  },
-  "Emote_location_E_02": {
-    "localized_name": "Житель острова",
-    "description": null
-  },
-  "Emote_location_F_01": {
-    "localized_name": "Житель острова",
-    "description": null
-  },
-  "Emote_location_F_02": {
-    "localized_name": "Житель острова",
-    "description": null
-  },
-  "Emote_location_G_01": {
-    "localized_name": "Житель острова",
-    "description": null
-  },
-  "Emote_location_G_02": {
-    "localized_name": "Житель острова",
-    "description": null
-  },
-  "Emote_location_H_01": {
-    "localized_name": "Житель острова",
-    "description": null
-  },
-  "Emote_location_H_02": {
-    "localized_name": "Житель острова",
-    "description": null
-  },
-  "Emote_location_I_01": {
-    "localized_name": "Житель острова",
-    "description": null
-  },
-  "Emote_location_I_02": {
-    "localized_name": "Житель острова",
-    "description": null
-  },
-  "Epicure01": {
-    "localized_name": "Охотница за деликатесами",
-    "description": null
-  },
-  "Escort_PalTamer01": {
-    "localized_name": "Тренер Палов из конвоя",
-    "description": null
-  },
-  "Escort_Warrior01": {
-    "localized_name": "Наемник из конвоя",
     "description": null
   },
   "FairyDragon": {
     "localized_name": "Элфидран",
-    "description": "Внешность этого Пала не обманчива - он сама наивность. Возможно, именно поэтому плохо отличает добро от зла и часто становится марионеткой в руках злодеев."
+    "description": null
   },
   "FairyDragon_Water": {
     "localized_name": "Элфидран Аква",
-    "description": "Внешность этого Пала не обманчива - он сама наивность. Возможно, именно поэтому убить кого-то для него - дело нехитрое, ведь в его действиях нет злого умысла."
+    "description": null
   },
   "FeatherOstrich": {
     "localized_name": "Дазему",
-    "description": "Один шаг вперед — и сомнения отступают. Два шага вперед — и отступает печаль. Три шага вперед — и они забывают о страхе, готовые противостоять любому врагу."
-  },
-  "Female_DesertPeople02": {
-    "localized_name": "Житель деревни",
-    "description": null
-  },
-  "Female_People02": {
-    "localized_name": "Житель деревни",
-    "description": null
-  },
-  "Female_People03": {
-    "localized_name": "Житель деревни",
-    "description": null
-  },
-  "Female_Soldier01": {
-    "localized_name": "Житель острова",
-    "description": null
-  },
-  "Female_Soldier02": {
-    "localized_name": "Житель острова",
-    "description": null
-  },
-  "Female_Soldier03": {
-    "localized_name": "Житель острова",
-    "description": null
-  },
-  "Female_Soldier03_Invader": {
-    "localized_name": "Близнецы-тренеры Палов",
-    "description": null
-  },
-  "Female_Soldier04": {
-    "localized_name": "Житель острова",
-    "description": null
-  },
-  "Female_Soldier04_Invader": {
-    "localized_name": "Близнецы-тренеры Палов",
     "description": null
   },
   "FengyunDeeper": {
     "localized_name": "Фенглоп",
-    "description": "В древности его прекрасный облик служил вдохновением для художников. Настали новые времена, и стала ценится его красивая шкура и рога в качестве материалов для предметов искусства."
+    "description": null
   },
   "FengyunDeeper_Electric": {
     "localized_name": "Фенглоп Лакс",
-    "description": "Давным-давно люди верили, что если изобразить Пала Фенглоп Лакс на картине, тебя убьет ударом молнии. Времена изменились, и изделия с изображением этого Пала стали повсеместно использоваться как талисман для защиты от грозы."
-  },
-  "FireCult_FlameThrower": {
-    "localized_name": "Мученик Братства Вечного пламени",
-    "description": null
-  },
-  "FireCult_FlameThrower_Invader": {
-    "localized_name": "Мученик Братства Вечного пламени",
-    "description": null
-  },
-  "FireCult_Rifle": {
-    "localized_name": "Мученик Братства Вечного пламени",
-    "description": null
-  },
-  "FireCult_Rifle_Invader": {
-    "localized_name": "Мученик Братства Вечного пламени",
     "description": null
   },
   "FireKirin": {
     "localized_name": "Пирин",
-    "description": "Все его тело представляет собой один мощный генератор тепла. Демонстрирует потрясающую выносливость. Когда кто-то садится на него верхом, старается, чтобы наездник не получил ожоги."
+    "description": null
   },
   "FireKirin_Dark": {
     "localized_name": "Пирин Нокт",
-    "description": "Сжигает таинственную темную материю, превращая ее в энергию. Остатки выделяет назад в атмосферу в виде темных частиц. Если кто-то садится на него верхом, старается защитить его от скверны."
+    "description": null
   },
   "FlameBambi": {
     "localized_name": "Руби",
-    "description": "Дикие особи обладают на удивление крепким здоровьем. Их секрет долголетия — съедать каждый день по горстке угля,Рубиполученной из сожженной веточки."
+    "description": null
   },
   "FlameBuffalo": {
     "localized_name": "Арсокс",
-    "description": "В древности на него постоянно охотились плотоядные Палы. Гнев взвывших от несправедливости жертв превратился в обжигающее пламя, передаваясь из поколения в поколения."
+    "description": null
   },
   "FlowerDinosaur": {
     "localized_name": "Диноссум",
-    "description": "Стоит этому Палу разозлиться, и он становится неуправляем, подобно бушующему пламени. Выражение |наступить на хвост Диноссум| означает сильно разозлить кого-то."
+    "description": null
   },
   "FlowerDinosaur_Electric": {
     "localized_name": "Диноссум Лакс",
-    "description": "В этого Пала ударила молния, но он выжил. Выражение |как в Диноссум Лакс молния| означает спастись чудесным образом."
+    "description": null
   },
   "FlowerDoll": {
     "localized_name": "Петаллия",
-    "description": "Когда срок жизни этого Пала истекает, он превращается в огромное растение. Раз в 10 лет на его стволе распускается прекрасный цветок, из которого рождается новая особь."
+    "description": null
   },
   "FlowerRabbit": {
     "localized_name": "Флопи",
-    "description": "Флопи любит богатые растительностью места. Однако, говорят, в последнее время среди этих Палов распространилась аллергия."
+    "description": null
   },
   "FlyingManta": {
     "localized_name": "Селарай",
-    "description": "Вольно странствует, распустив по ветру крылья. Путешествует до тех пор, пока не находит партнера."
+    "description": null
   },
   "FoxMage": {
     "localized_name": "Виксен",
-    "description": "Демонстрирует удивительные способности благодаря своей светлой силе. Любую еду предпочитает в хорошо прожаренном виде. Катресс - его заклятый враг."
+    "description": null
   },
   "FoxMage_Dark": {
     "localized_name": "Виксен Нокт",
-    "description": "Родители научили его не придираться к еде: прожарена она или нет, все сгодится. Предпочитает сладкое. Плохо ладит с Палом Катресс Игнис."
+    "description": null
   },
   "GYM_BlackGriffon": {
-    "localized_name": "Виктор и Шэдоубик",
-    "description": "Порождение безумия, запретное существо. Генетическая связь с другими Палами утеряна, в каком-то смысле уже не является обычным Палом."
+    "localized_name": "Шэдоубик",
+    "description": null
   },
   "GYM_BlackGriffon_2": {
-    "localized_name": "Виктор и Шэдоубик",
-    "description": "Порождение безумия, запретное существо. Генетическая связь с другими Палами утеряна, в каком-то смысле уже не является обычным Палом."
-  },
-  "GYM_BlackGriffon_2_Avatar": {
-    "localized_name": "Виктор и Шэдоубик",
+    "localized_name": "Шэдоубик",
     "description": null
   },
   "GYM_ElecPanda": {
-    "localized_name": "Зои и Гриззболт",
-    "description": "Этот обладатель открытой улыбки и крепкого телосложения будет верно служить тому, кто заслужит его признание. Но стоит дать ему в руки пулемет, как его облик резко меняется."
+    "localized_name": "Гриззболт",
+    "description": null
   },
   "GYM_ElecPanda_2": {
-    "localized_name": "Зои и Гриззболт",
-    "description": "Этот обладатель открытой улыбки и крепкого телосложения будет верно служить тому, кто заслужит его признание. Но стоит дать ему в руки пулемет, как его облик резко меняется."
+    "localized_name": "Гриззболт",
+    "description": null
   },
   "GYM_Horus": {
-    "localized_name": "Маркус и Фалерис",
-    "description": "Как только находит добычу, испепеляет все вокруг раскаленным вихрем. Там, где обитает Фалерис, всегда пахнет чем-то жареным."
+    "localized_name": "Фалерис",
+    "description": null
   },
   "GYM_Horus_2": {
-    "localized_name": "Маркус и Фалерис",
-    "description": "Как только находит добычу, испепеляет все вокруг раскаленным вихрем. Там, где обитает Фалерис, всегда пахнет чем-то жареным."
+    "localized_name": "Фалерис",
+    "description": null
   },
   "GYM_LilyQueen": {
-    "localized_name": "Лили и Лилин",
-    "description": "Полный сострадания, мирный Пал. Заботится о маленьких Палах, потерявших родителей. Метод воспитания у него такой - |SolarBeam| от всей души."
+    "localized_name": "Лилин",
+    "description": null
   },
   "GYM_LilyQueen_2": {
-    "localized_name": "Лили и Лилин",
-    "description": "Полный сострадания, мирный Пал. Заботится о маленьких Палах, потерявших родителей. Метод воспитания у него такой - |SolarBeam| от всей души."
+    "localized_name": "Лилин",
+    "description": null
   },
   "GYM_MoonQueen": {
-    "localized_name": "Сая и Селена",
-    "description": "Говорят, что похожий на луну объект, витающий позади этого Пала, с каждым поколением понемногу приближается к круглой форме. Никто не знает, что случится, когда луна станет полной."
+    "localized_name": "Селена",
+    "description": null
   },
   "GYM_MoonQueen_2": {
-    "localized_name": "Сая и Селена",
-    "description": "Говорят, что похожий на луну объект, витающий позади этого Пала, с каждым поколением понемногу приближается к круглой форме. Никто не знает, что случится, когда луна станет полной."
-  },
-  "GYM_MoonQueen_2_Servant": {
     "localized_name": "Селена",
     "description": null
   },
   "GYM_SnowTigerBeastman": {
-    "localized_name": "Бьорн и Бастигор",
-    "description": "При виде чего-то круглого SnowTigerBeastMan загорается беспричинным желанием это ударить. Самая трудная вещь для него после бытия — лепка снеговика."
+    "localized_name": "Бастигор",
+    "description": null
   },
   "GYM_SnowTigerBeastman_2": {
-    "localized_name": "Бьорн и Бастигор",
-    "description": "При виде чего-то круглого SnowTigerBeastMan загорается беспричинным желанием это ударить. Самая трудная вещь для него после бытия — лепка снеговика."
+    "localized_name": "Бастигор",
+    "description": null
   },
   "GYM_ThunderDragonMan": {
-    "localized_name": "Аксель и Орсерк",
-    "description": "Пускает электрический ток в раны противника, сжигая его тело. Стычки этих Палов между собой заканчиваются за считанные секунды."
+    "localized_name": "Орсерк",
+    "description": null
   },
   "GYM_ThunderDragonMan_2": {
-    "localized_name": "Аксель и Орсерк",
-    "description": "Пускает электрический ток в раны противника, сжигая его тело. Стычки этих Палов между собой заканчиваются за считанные секунды."
+    "localized_name": "Орсерк",
+    "description": null
   },
   "Ganesha": {
     "localized_name": "Тифант",
-    "description": "Некоторые утверждают, что большие объемы воды, выделяющиеся из его считающегося носом органа, это обыкновенные сопли. Среди ученых кипят нешуточные споры на этот счет."
+    "description": null
   },
   "Garm": {
     "localized_name": "Дайэхаул",
-    "description": "Уже давно эти Палы отдалились от людей, но стиль их охоты уходит корнями в ту пору, когда они охотились вместе с человеком."
+    "description": null
   },
   "GhostBeast": {
     "localized_name": "Мараит",
-    "description": "Любит специфический запах, который источают умирающие существа. Так что если за вами увяжется Мараит - вы знаете, что это значит."
+    "description": null
   },
   "GhostRabbit": {
     "localized_name": "Найтмери",
-    "description": "В руках этот Пал держит собственную душу. Когда кто-то полюбится ему очень сильно, он вырывает из него душу, чтобы слить ее со своей и стать с ним единым."
+    "description": null
   },
   "GoldenHorse": {
     "localized_name": "Гилдейн",
-    "description": "Во времена, когда на острове процветала алхимия, золотистый мех этих Палов был популярен как катализатор для получения золота. Через какое-то время было совершено удивительное открытие. Если нужен золотистый цвет, достаточно использовать гриву."
-  },
-  "GoodwillAmbassador": {
-    "localized_name": "Торговец Палами",
     "description": null
   },
   "Gorilla": {
     "localized_name": "Горират",
-    "description": "Общаются с сородичами с помощью выстукивания ритма по земле. В каждой стае значение этих сигналов свое, поэтому их классификация до сих пор не завершена."
+    "description": null
   },
   "Gorilla_Ground": {
     "localized_name": "Горират Терра",
-    "description": "Настраивается с союзниками на одну волну в ритме ударов по земле. По физической силе превосходит Пала Горират. Если Горират Терра все вместе ударят по земле, остров Палпагос уйдет под воду за секунду."
+    "description": null
   },
   "GrassMammoth": {
     "localized_name": "Мамморест",
-    "description": "Растительность на их спине уникальна для каждой особи. Когда-то она была популярным украшением, и даже существовали специалисты по стрижке этих Палов."
+    "description": null
   },
   "GrassMammoth_Ice": {
     "localized_name": "Мамморест Крист",
-    "description": "Каждая особь имеет уникальную растительность на спине. На спине этих Палов находили в заледеневшем виде считавшиеся исчезнувшими растения."
+    "description": null
   },
   "GrassPanda": {
     "localized_name": "Моссанда",
-    "description": "Обладает невероятной силой. В одном из экспериментов этому Палу удалось порвать стопку из 3000 листов бумаги. К большому счастью, эти существа не плотоядные."
+    "description": null
   },
   "GrassPanda_Electric": {
     "localized_name": "Моссанда Лакс",
-    "description": "Обладает невероятной силой за гранью физических возможностей, используя электричество для передачи нервных импульсов. Если речь заходит о том, кто на свете всех сильнее, он тут как тут."
+    "description": null
   },
   "GrassRabbitMan": {
     "localized_name": "Вердаш",
-    "description": "Почва, по которой пробегает Вердаш, становится невероятно плодородной и покрывается густой растительностью. Избегает обработанной гербицидами земли."
+    "description": null
   },
   "GrimGirl": {
     "localized_name": "Сплаттерина",
-    "description": "Инстинкты заставляют этого Пала рвать своих жертв на части. Каждая особь предпочитает свой порядок расчленения жертвы. Если тебя поймал Сплаттерина, остается только надеяться, что он начнет с головы."
-  },
-  "Guard_Rifle": {
-    "localized_name": "Стражник",
-    "description": null
-  },
-  "Guard_Shotgun": {
-    "localized_name": "Стражник",
     "description": null
   },
   "GuardianDog": {
     "localized_name": "Якумо",
-    "description": "Обладая способностью отталкивать зло, Якумо, казалось бы, должен был стать идеальным компаньоном для жителей острова. Ныне эти Палы отгораживаются от людей стеной зла."
+    "description": null
   },
   "HadesBird": {
     "localized_name": "Хэлзефир",
-    "description": "Призывает молнии из Преисподней. Души тех, кого испепелит Хэлзефир, попадают в Ад."
+    "description": null
   },
   "HadesBird_Electric": {
     "localized_name": "Хэлзефир Лакс",
-    "description": "Призывает молнии из преисподней. Считается подвидом Пала Хэлзефир, но есть и версия, что это скорее Хэлзефир Лакс превратился в Пала Хэлзефир после удара молнии."
-  },
-  "HadesBird_Oilrig": {
-    "localized_name": "Хэлзефир",
     "description": null
   },
   "HawkBird": {
     "localized_name": "Найтвинг",
-    "description": "Уносит в свое гнездо новорожденных Палов и выращивает их, заменяя родителей. Когда они готовы к употреблению, убивает их и съедает."
+    "description": null
   },
   "Hedgehog": {
     "localized_name": "Джолтхог",
-    "description": "В случае потрясения выпускает накопленное электричество. Сила этого заряда превышает 10 миллионов вольт. Это куда опаснее тяжелого оружия, обращаться с которым он не умеет."
+    "description": null
   },
   "Hedgehog_Ice": {
     "localized_name": "Джолтхог Крист",
-    "description": "В случае потрясения выпускает накопленный холодный воздух. Расходящиеся в разные стороны лучи холода замораживает атмосферу, и нападающий напарывается на лед."
+    "description": null
   },
   "HerculesBeetle": {
     "localized_name": "Ворсект",
-    "description": "Невероятно прочный панцирь, покрывающий все его тело, обладает несравненной мощью и прочностью. Даже напалм практически не оставляет на нем следов."
+    "description": null
   },
   "HerculesBeetle_Ground": {
     "localized_name": "Ворсект Терра",
-    "description": "Невероятно прочный панцирь, покрывающий все его тело, обладает несравненной мощью и прочностью. Даже Мамморест не сможет его раздавить."
+    "description": null
   },
   "Horus": {
-    "localized_name": "Фалерис",
-    "description": "Как только находит добычу, испепеляет все вокруг раскаленным вихрем. Там, где обитает Фалерис, всегда пахнет чем-то жареным."
-  },
-  "Horus_Oilrig": {
     "localized_name": "Фалерис",
     "description": null
   },
   "Horus_Water": {
     "localized_name": "Фалерис Аква",
-    "description": "Обнаружив группу жертв, окатывает всю область вокруг мощным потоком воды. Как правило, он теряет из виду добычу, если она ускользнет, поэтому очень большой вопрос, можно ли это назвать охотой."
-  },
-  "Hunter_Bat": {
-    "localized_name": "Браконьер-новичок",
-    "description": null
-  },
-  "Hunter_Bat_Invader": {
-    "localized_name": "Браконьер-новичок",
-    "description": null
-  },
-  "Hunter_BowGun_Oilrig": {
-    "localized_name": "Браконьер-арбалетчик",
-    "description": null
-  },
-  "Hunter_Fat_GatlingGun": {
-    "localized_name": "Браконьер-громила",
-    "description": null
-  },
-  "Hunter_Fat_GatlingGun_Invader": {
-    "localized_name": "Браконьер-громила",
-    "description": null
-  },
-  "Hunter_Fat_GatlingGun_LargeOilrig": {
-    "localized_name": "Браконьер-громила",
-    "description": null
-  },
-  "Hunter_Fat_GatlingGun_MiniOilrig": {
-    "localized_name": "Браконьер-громила",
-    "description": null
-  },
-  "Hunter_Fat_GatlingGun_Oilrig": {
-    "localized_name": "Браконьер-громила",
-    "description": null
-  },
-  "Hunter_Fat_GatlingGun_Tower": {
-    "localized_name": "Браконьер-громила",
-    "description": null
-  },
-  "Hunter_FlameThrower": {
-    "localized_name": "Браконьер-чистильщик",
-    "description": null
-  },
-  "Hunter_FlameThrower_Invader": {
-    "localized_name": "Браконьер-чистильщик",
-    "description": null
-  },
-  "Hunter_FlameThrower_LargeOilrig": {
-    "localized_name": "Браконьер-чистильщик",
-    "description": null
-  },
-  "Hunter_FlameThrower_MiiniOilrig": {
-    "localized_name": "Браконьер-чистильщик",
-    "description": null
-  },
-  "Hunter_FlameThrower_Oilrig": {
-    "localized_name": "Браконьер-чистильщик",
-    "description": null
-  },
-  "Hunter_Grenade": {
-    "localized_name": "Браконьер-гренадер",
-    "description": null
-  },
-  "Hunter_GrenadeLauncher": {
-    "localized_name": "Браконьер-ветеран",
-    "description": null
-  },
-  "Hunter_GrenadeLauncher_LargeOilrig": {
-    "localized_name": "Браконьер-ветеран",
-    "description": null
-  },
-  "Hunter_GrenadeLauncher_Oilrig": {
-    "localized_name": "Браконьер-ветеран",
-    "description": null
-  },
-  "Hunter_Grenade_Invader": {
-    "localized_name": "Браконьер-гренадер",
-    "description": null
-  },
-  "Hunter_Grenade_LargeOilrig": {
-    "localized_name": "Браконьер-гренадер",
-    "description": null
-  },
-  "Hunter_Grenade_MiniOilrig": {
-    "localized_name": "Браконьер-гренадер",
-    "description": null
-  },
-  "Hunter_Grenade_Oilrig": {
-    "localized_name": "Браконьер-гренадер",
-    "description": null
-  },
-  "Hunter_Handgun": {
-    "localized_name": "Браконьер-новичок",
-    "description": null
-  },
-  "Hunter_Handgun_Invader": {
-    "localized_name": "Браконьер-новичок",
-    "description": null
-  },
-  "Hunter_Handgun_MiniOilrig": {
-    "localized_name": "Браконьер-новичок",
-    "description": null
-  },
-  "Hunter_Katana_Oilrig": {
-    "localized_name": "Браконьер-мечник",
-    "description": null
-  },
-  "Hunter_LaserRifle_Oilrig": {
-    "localized_name": "Браконьер-технолог",
-    "description": null
-  },
-  "Hunter_MissileLauncher": {
-    "localized_name": "Браконьер-перехватчик",
-    "description": null
-  },
-  "Hunter_MissileLauncher_LargeOilrig": {
-    "localized_name": "Браконьер-перехватчик",
-    "description": null
-  },
-  "Hunter_MissileLauncher_Oilrig": {
-    "localized_name": "Браконьер-перехватчик",
-    "description": null
-  },
-  "Hunter_Rifle": {
-    "localized_name": "Браконьер-стрелок",
-    "description": null
-  },
-  "Hunter_Rifle_Invader": {
-    "localized_name": "Браконьер-стрелок",
-    "description": null
-  },
-  "Hunter_Rifle_LargeOilrig": {
-    "localized_name": "Браконьер-стрелок",
-    "description": null
-  },
-  "Hunter_Rifle_MiniOilrig": {
-    "localized_name": "Браконьер-стрелок",
-    "description": null
-  },
-  "Hunter_Rifle_Oilrig": {
-    "localized_name": "Браконьер-стрелок",
-    "description": null
-  },
-  "Hunter_RocketLauncher": {
-    "localized_name": "Элитный браконьер",
-    "description": null
-  },
-  "Hunter_RocketLauncher_Invader": {
-    "localized_name": "Элитный браконьер",
-    "description": null
-  },
-  "Hunter_RocketLauncher_LargeOilrig": {
-    "localized_name": "Элитный браконьер",
-    "description": null
-  },
-  "Hunter_RocketLauncher_MiniOilrig": {
-    "localized_name": "Элитный браконьер",
-    "description": null
-  },
-  "Hunter_RocketLauncher_Oilrig": {
-    "localized_name": "Элитный браконьер",
-    "description": null
-  },
-  "Hunter_RocketLauncher_Oilrig_LD": {
-    "localized_name": "Элитный браконьер",
-    "description": null
-  },
-  "Hunter_Shotgun": {
-    "localized_name": "Браконьер-охотник",
-    "description": null
-  },
-  "Hunter_Shotgun_Invader": {
-    "localized_name": "Браконьер-охотник",
-    "description": null
-  },
-  "Hunter_Shotgun_LargeOilrig": {
-    "localized_name": "Браконьер-охотник",
-    "description": null
-  },
-  "Hunter_Shotgun_MiniOilrig": {
-    "localized_name": "Браконьер-охотник",
-    "description": null
-  },
-  "Hunter_Shotgun_Oilrig": {
-    "localized_name": "Браконьер-охотник",
     "description": null
   },
   "IceDeer": {
     "localized_name": "Рейндрикс",
-    "description": "Его синий полупрозрачный рог испускает ледяное сияние. Если прикоснуться к нему голыми руками, все тело мгновенно обледенеет и вы погибните, рассыпавшись на мелкие осколки."
+    "description": null
   },
   "IceFox": {
     "localized_name": "Фоксайкл",
-    "description": "В те ночи, когда видно полярное сияние, эти Палы поднимают глаза к небу и начинают красиво петь. Только вот, на их беду, это пение привлекает врагов."
+    "description": null
   },
   "IceHorse": {
     "localized_name": "Фросталлион",
-    "description": "Призывающий зиму, хранитель острова Палпагос. В давние времена, когда на эти земли обрушивалось несчастье, он проносился по небу, принося с собой бесконечную зиму как спасение."
+    "description": null
   },
   "IceHorse_Dark": {
     "localized_name": "Фросталлион Нокт",
-    "description": "Призывающий ночь, хранитель острова Палпагос. В давние времена, когда на эти земли обрушивалось несчастье, он проносился по небу, принося с собой бесконечную ночь как спасение."
-  },
-  "Inspector": {
-    "localized_name": "Торговец Палами",
     "description": null
   },
   "JetDragon": {
     "localized_name": "Джетрагон",
-    "description": "Присматривает за островом Палпагос из горных чертогов. Когда вновь проснется беда, разверзнется земля и небеса охватит пламя, он положит этому конец всеуничтожающей вспышкой."
+    "description": null
   },
   "Kelpie": {
     "localized_name": "Келпси",
-    "description": "Характер этого Пала зависит от качества воды, в которой он появился на свет. Особи, родившиеся в грязном водоеме, как правило, обладают скверным характером."
+    "description": null
   },
   "Kelpie_Fire": {
     "localized_name": "Келпси Игнис",
-    "description": "Характер этого Пала зависит от температуры воды, в которой он появился на свет. Особи, родившиеся в теплом водоеме, как правило, обладают пылким нравом и полны энтузиазма."
+    "description": null
   },
   "KendoFrog": {
     "localized_name": "Кроадзиро",
-    "description": "Совершивший серьезный промах член стаи должен добровольно покинуть этот мир. Если воткнуть ветку в раздутое до предела горло этого Пала, он улетит за пределы земной атмосферы и умрет."
+    "description": null
   },
   "KendoFrog_Dark": {
     "localized_name": "-",
-    "description": "Лишенные чувства чести Кроадзиро объединились в отдельный вид. Какие бы трюки ни применяла жертва, - не даст ей уйти. Если в полночь вы наткнетесь на стаю этих Палов, на тот свет отправитесь именно вы."
+    "description": null
   },
   "KingAlpaca": {
     "localized_name": "Кингпака",
-    "description": "В поединках между Палами этого вида в качестве ставки выступает Мелпака. Оставшиеся без слуг особи - неудачники."
+    "description": null
   },
   "KingAlpaca_Ice": {
     "localized_name": "Кингпака Крист",
-    "description": "Обладатель черствого нрава, не умеющий выражать свои чувства. Судьба тех, кто не смог наладить отношения с сородичами, печальна. Они остаются в полном одиночестве."
+    "description": null
   },
   "KingBahamut": {
     "localized_name": "Блазамут",
-    "description": "По легенде, Блазамут рождается во время извержения вулкана. Была даже странная группа сторонников теории о том, что наша земля - это спина огромного Пала."
+    "description": null
   },
   "KingBahamut_Dragon": {
     "localized_name": "Блазамут Рю",
-    "description": "Появился из недр земли в далекой древности. Его бушующее пламя не знало пощады, оно не исчезло, пока весь остров не был выжжен дотла. Иными словами, то было |Вечное пламя|."
+    "description": null
   },
   "Kirin": {
     "localized_name": "Юнивольт",
-    "description": "В древности люди не охотились на них, считая посланниками бога грома. Однако свидетельства гибели этих Палов от попадания молнии положили конец этой вере. Теперь это в буквальном смысле рабочие лошадки."
+    "description": null
   },
   "Kitsunebi": {
     "localized_name": "Фокспаркс",
-    "description": "Недавно родившиеся Палы еще не умеют управляться с огнем. Они изрыгают пламя по любому поводу и начинают задыхаться. Их чихание становится причиной лесных пожаров."
+    "description": null
   },
   "Kitsunebi_Ice": {
     "localized_name": "Фокспаркс Крист",
-    "description": "Недавно родившиеся Палы еще не умеют управляться с холодом. Они изрыгают ледяное дыхание по любому поводу и начинают задыхаться. Если такой Пал схватит простуду, его сопли замерзают и мешают ему дышать, вызывая панику."
+    "description": null
   },
   "LavaGirl": {
     "localized_name": "Фламбелль",
-    "description": "Когда этот Пал плачет, вместе слез у него из глаз течет магма. Вытекшая магма снова впитывается в тело, нагреваясь все сильнее и сильнее. Чем больше слез проливает этот Пал, тем сильнее он становится."
+    "description": null
   },
   "LazyCatfish": {
     "localized_name": "Думад",
-    "description": "Когда этот Пал слишком расслабляется, его рефлексы притупляются. Даже 28 колотых ран не способны убить его мгновенно. Он заметит их лишь на следующее утро, и только тогда умрет."
+    "description": null
   },
   "LazyDragon": {
     "localized_name": "Релаксаурус",
-    "description": "Вопреки внешней беспечности обладает довольно свирепым нравом. Считает своей пищей все, что видит перед собой, и пытается сожрать все без разбора."
+    "description": null
   },
   "LazyDragon_Electric": {
     "localized_name": "Релаксаурус Лакс",
-    "description": "Подумал как-то этот Пал, а не пора ли мне изменить себя? И в ту же секунду его тело поразил электрический удар!"
+    "description": null
   },
   "LeafPrincess": {
     "localized_name": "Нежноцвет",
-    "description": "Ранней весной над островом летает пыльца, разносимая ветром. Флопи страдает аллергией на пыльцу из-за Пала Нежноцвет."
+    "description": null
   },
   "LilyQueen": {
     "localized_name": "Лилин",
-    "description": "Полный сострадания, мирный Пал. Заботится о маленьких Палах, потерявших родителей. Метод воспитания у него такой - |SolarBeam| от всей души."
+    "description": null
   },
   "LilyQueen_Dark": {
     "localized_name": "Лилин Нокт",
-    "description": "Полный достоинства, утонченный Пал. Осаждает грубиянов болезненной пощечиной. Некоторые Палы именно этого и добиваются."
+    "description": null
   },
   "LittleBriarRose": {
     "localized_name": "Бристла",
-    "description": "Укол шипов этого Пала опасен - они ядовиты. Выражение его лица становится приветливым лишь тогда, когда прилетает полакомиться нектаром его друг - Синнамос."
+    "description": null
   },
   "LizardMan": {
     "localized_name": "Лизпанк",
-    "description": "Этот Пал помешан на своем виде в полный рост. Постоянно ищет самую эффектную позу, а если дать ему зеркало - будет крутиться перед ним целый день."
+    "description": null
   },
   "LizardMan_Fire": {
     "localized_name": "Лизпанк Игнис",
-    "description": "Этот Пал помешан на своем виде со стороны. Постоянно ищет самую горячую позу, перед хозяином будет крутиться целый день напролет."
-  },
-  "LizardMan_Oilrig": {
-    "localized_name": "Лизпанк",
-    "description": null
-  },
-  "Male_DarkTrader01": {
-    "localized_name": "Подпольный торговец",
-    "description": null
-  },
-  "Male_DarkTrader02": {
-    "localized_name": "Торговец медалями",
-    "description": null
-  },
-  "Male_DesertPeople01": {
-    "localized_name": "Житель деревни",
-    "description": null
-  },
-  "Male_Ninja01": {
-    "localized_name": "Генин из общества Лунных цветов",
-    "description": null
-  },
-  "Male_NinjaElite01": {
-    "localized_name": "Дзёнин из общества Лунных цветов",
-    "description": null
-  },
-  "Male_NinjaElite01_Invader": {
-    "localized_name": "Дзёнин из общества Лунных цветов",
-    "description": null
-  },
-  "Male_People02": {
-    "localized_name": "Житель деревни",
-    "description": null
-  },
-  "Male_People03": {
-    "localized_name": "Житель деревни",
-    "description": null
-  },
-  "Male_Police_old": {
-    "localized_name": "Житель острова",
-    "description": null
-  },
-  "Male_Scientist01_LaserRifle": {
-    "localized_name": "Лаборант отряда генетических исследований",
-    "description": null
-  },
-  "Male_Scientist01_LaserRifle_Invader": {
-    "localized_name": "Лаборант отряда генетических исследований",
-    "description": null
-  },
-  "Male_Soldier01": {
-    "localized_name": "Житель острова",
-    "description": null
-  },
-  "Male_Soldier01_EnemyGroup": {
-    "localized_name": "Наемник-здоровяк",
-    "description": null
-  },
-  "Male_Soldier02": {
-    "localized_name": "Житель острова",
-    "description": null
-  },
-  "Male_Soldier02_EnemyGroup": {
-    "localized_name": "Наемник-здоровяк",
-    "description": null
-  },
-  "Male_Soldier02_Invader": {
-    "localized_name": "Разгоряченный тренер Палов",
-    "description": null
-  },
-  "Male_Soldier03": {
-    "localized_name": "Житель острова",
-    "description": null
-  },
-  "Male_Soldier04": {
-    "localized_name": "Житель острова",
-    "description": null
-  },
-  "Male_Trader01": {
-    "localized_name": "Житель деревни",
-    "description": null
-  },
-  "Male_Trader02": {
-    "localized_name": "Житель деревни",
-    "description": null
-  },
-  "Male_Trader03": {
-    "localized_name": "Житель деревни",
     "description": null
   },
   "Manticore": {
     "localized_name": "Блейзхаул",
-    "description": "Предпочитает сырое мясо, но всегда питается жареным. Он не осознает, что служащие ему оружием раскаленные когти прожаривают всю его добычу."
+    "description": null
   },
   "Manticore_Dark": {
     "localized_name": "Блейзхаул Нокт",
-    "description": "Предпочитает обычное мясо, но всегда питается проклятым. Он не осознает, что служащие ему оружием темные когти оскверняют всю его добычу."
+    "description": null
   },
   "MimicDog": {
     "localized_name": "Мимидог",
-    "description": "В королевстве, некогда существовавшем на острове, была традиция каждый год давать награду за самую нелепую смерть. Первый в истории победитель отличился тем, что |открыл ящик, не заметив Пала Мимидог, и был загрызен насмерть|."
-  },
-  "MobuCitizen": {
-    "localized_name": "Житель острова",
-    "description": null
-  },
-  "MobuCitizen_Male": {
-    "localized_name": "Житель острова",
-    "description": null
-  },
-  "MobuVillager": {
-    "localized_name": "Житель деревни",
     "description": null
   },
   "Monkey": {
     "localized_name": "Танзи",
-    "description": "Некогда этот Пал использовал в качестве оружия продолговатые предметы вроде веток деревьев. Но с началом отношений с людьми нашлось кое-что поэффективнее - ружье."
+    "description": null
   },
   "MoonQueen": {
     "localized_name": "Селена",
-    "description": "Говорят, что похожий на луну объект, витающий позади этого Пала, с каждым поколением понемногу приближается к круглой форме. Никто не знает, что случится, когда луна станет полной."
+    "description": null
   },
   "MopBaby": {
     "localized_name": "Сви",
-    "description": "Ползает по земле, поедая микрочастицы органики. Все, что не усвоилось, через какое-то время выделяется наружу. Будет только рад поработать в качестве швабры."
+    "description": null
   },
   "MopKing": {
     "localized_name": "Свипа",
-    "description": "Сви любит прятаться под густой шерстью этого Пала во время его зимней спячки. Зафиксированный рекорд - целая 101 особь."
+    "description": null
   },
   "MushroomDragon": {
     "localized_name": "Грибодракон",
-    "description": "Вдохнув большое количество спор, входит в некое подобие транса. Иногда Грибодракон замирает на месте не потому, что притворяется грибом, а из-за воздействия спор."
+    "description": null
   },
   "MushroomDragon_Dark": {
     "localized_name": "Шрумер Нокт",
-    "description": "Большое скопление спор легко блокирует солнечные лучи. Иногда Шрумер Нокт замирает на месте не потому, что притворяется грибом, а из-за того, что ничего не видит из-за своих же спор."
+    "description": null
   },
   "Mutant": {
     "localized_name": "Лунарис",
-    "description": "Тот, кто неосторожно заглянет в глаза этого Пала, становится его марионеткой. Большинство владельцев этих Палов лишь думают, что подчинили их себе."
+    "description": null
   },
   "MysteryMask": {
     "localized_name": "Омаскул",
-    "description": "Говорят, что его похожее на маску лицо — на самом деле и не лицо вовсе. Кажется, что он перед вами, но на самом деле это не так. Будто бы он постоянно смотрит на вас откуда-то. Будто бы стоит обернуться, и он будет перед вами."
-  },
-  "NPC_FoodRequire_1": {
-    "localized_name": "Житель острова",
-    "description": null
-  },
-  "NPC_PalDisplay_1": {
-    "localized_name": "Житель острова",
     "description": null
   },
   "NaughtyCat": {
     "localized_name": "Гринтэйл",
-    "description": "Как только вы зайдете во владения этого Пала, за вами тут же начнут следить два огонька глаз. И это не метафора - они действительно светятся."
+    "description": null
   },
   "NegativeKoala": {
     "localized_name": "Депрессо",
-    "description": "Из-за своего угрюмого взгляда имеет мало друзей, но обладает добрым сердцем. Можно увидеть, как они делятся едой с отбившимися от стаи Палами. Викси не даст соврать."
+    "description": null
   },
   "NegativeOctopus": {
     "localized_name": "Килламари",
-    "description": "Килламари садится врагу на голову и высасывает содержимое его черепа. Мумии Палов, которые изредка находят люди, - это его жертвы."
+    "description": null
   },
   "NightBlueHorse": {
     "localized_name": "Старрион",
-    "description": "Безмерно гордится своей струящейся гривой. Обнаружив выбившийся волосок, от стыда не может сконцентрироваться на беге. Статическое электричество приводит шерсть в беспорядок, поэтому он старается во что бы то ни стало держаться подальше от Пала Азурмейн."
+    "description": null
   },
   "NightFox": {
     "localized_name": "Нокс",
-    "description": "Если на ночной дороге вы нашли волосок этого Пала - лучше его не трогать. Это билет в один конец в вечную ночь."
+    "description": null
   },
   "NightLady": {
     "localized_name": "Бэллануар",
-    "description": "Она не существовала, а просто незаметно наблюдала за миром. И в какой-то момент ей захотелось внимания. Сгусток полных ненависти к внешнему миру желаний породил безумную даму."
+    "description": null
   },
   "NightLady_Dark": {
     "localized_name": "Бэллануар Либеро",
-    "description": "Вырвавшаяся на свободу страсть не утихала. Мне нужна лишь взирающая на меня я сама. Мстительные сестры загнаны в угол и наконец закрыли глаза."
-  },
-  "Ninja01_Tower": {
-    "localized_name": "Генин из общества Лунных цветов",
-    "description": null
-  },
-  "NinjaElite01_Tower": {
-    "localized_name": "Дзёнин из общества Лунных цветов",
     "description": null
   },
   "PREDATOR_AmaterasuWolf": {
     "localized_name": "Кицун",
-    "description": "Обладает чувствительной натурой. Если ему что-то не нравится, уединяется в пещере. В древности люди верили, что если Кицун прячется, значит, жди беды."
+    "description": null
   },
   "PREDATOR_Baphomet_Dark": {
     "localized_name": "Инсинерам Нокт",
-    "description": "Целенаправленно охотится на детенышей Палов, унося их в свое логово. Нетрудно представить, какое отчаяние испытывают родители малышей."
+    "description": null
   },
   "PREDATOR_BirdDragon": {
     "localized_name": "Ванвирм",
-    "description": "Говорят, что звук флейты, сделанной из его экзоскелета, слышен за пределами тысячи гор. В древности использовался в качестве сигнала для начала атаки во время сражений."
+    "description": null
   },
   "PREDATOR_CandleGhost": {
     "localized_name": "Гостлайт",
-    "description": "Раньше бытовало мнение, что чем ближе гибель мира, тем слабее горит пламя. Всякий раз, когда пламя несколько раз угасало, сторонники теории конца света паниковали, но в итоге оказалось, что все это были проделки Пала Гостлайт. По крайней мере, пока что."
+    "description": null
   },
   "PREDATOR_DrillGame": {
     "localized_name": "Дигтос",
-    "description": "|Дигтос и бур| - поучительная история об обладателе мощнейшего панциря и бура, размышляющем о противоречиях."
+    "description": null
   },
   "PREDATOR_FairyDragon": {
     "localized_name": "Элфидран",
-    "description": "Внешность этого Пала не обманчива - он сама наивность. Возможно, именно поэтому плохо отличает добро от зла и часто становится марионеткой в руках злодеев."
+    "description": null
   },
   "PREDATOR_FeatherOstrich": {
     "localized_name": "Дазему",
-    "description": "Один шаг вперед — и сомнения отступают. Два шага вперед — и отступает печаль. Три шага вперед — и они забывают о страхе, готовые противостоять любому врагу."
+    "description": null
   },
   "PREDATOR_FlowerDinosaur": {
     "localized_name": "Диноссум",
-    "description": "Стоит этому Палу разозлиться, и он становится неуправляем, подобно бушующему пламени. Выражение |наступить на хвост Диноссум| означает сильно разозлить кого-то."
+    "description": null
   },
   "PREDATOR_Garm": {
     "localized_name": "Дайэхаул",
-    "description": "Уже давно эти Палы отдалились от людей, но стиль их охоты уходит корнями в ту пору, когда они охотились вместе с человеком."
+    "description": null
   },
   "PREDATOR_GhostBeast": {
     "localized_name": "Мараит",
-    "description": "Любит специфический запах, который источают умирающие существа. Так что если за вами увяжется Мараит - вы знаете, что это значит."
+    "description": null
   },
   "PREDATOR_GoldenHorse": {
     "localized_name": "Гилдейн",
-    "description": "Во времена, когда на острове процветала алхимия, золотистый мех этих Палов был популярен как катализатор для получения золота. Через какое-то время было совершено удивительное открытие. Если нужен золотистый цвет, достаточно использовать гриву."
+    "description": null
   },
   "PREDATOR_Gorilla": {
     "localized_name": "Горират",
-    "description": "Общаются с сородичами с помощью выстукивания ритма по земле. В каждой стае значение этих сигналов свое, поэтому их классификация до сих пор не завершена."
+    "description": null
   },
   "PREDATOR_GrassPanda": {
     "localized_name": "Моссанда",
-    "description": "Обладает невероятной силой. В одном из экспериментов этому Палу удалось порвать стопку из 3000 листов бумаги. К большому счастью, эти существа не плотоядные."
+    "description": null
   },
   "PREDATOR_GrimGirl": {
     "localized_name": "Сплаттерина",
-    "description": "Инстинкты заставляют этого Пала рвать своих жертв на части. Каждая особь предпочитает свой порядок расчленения жертвы. Если тебя поймал Сплаттерина, остается только надеяться, что он начнет с головы."
+    "description": null
   },
   "PREDATOR_HadesBird_Electric": {
     "localized_name": "Хэлзефир Лакс",
-    "description": "Призывает молнии из преисподней. Считается подвидом Пала Хэлзефир, но есть и версия, что это скорее Хэлзефир Лакс превратился в Пала Хэлзефир после удара молнии."
+    "description": null
   },
   "PREDATOR_Horus_Water": {
     "localized_name": "Фалерис Аква",
-    "description": "Обнаружив группу жертв, окатывает всю область вокруг мощным потоком воды. Как правило, он теряет из виду добычу, если она ускользнет, поэтому очень большой вопрос, можно ли это назвать охотой."
+    "description": null
   },
   "PREDATOR_LazyDragon": {
     "localized_name": "Релаксаурус",
-    "description": "Вопреки внешней беспечности обладает довольно свирепым нравом. Считает своей пищей все, что видит перед собой, и пытается сожрать все без разбора."
+    "description": null
   },
   "PREDATOR_Manticore_Dark": {
     "localized_name": "Блейзхаул Нокт",
-    "description": "Предпочитает обычное мясо, но всегда питается проклятым. Он не осознает, что служащие ему оружием темные когти оскверняют всю его добычу."
+    "description": null
   },
   "PREDATOR_MushroomDragon": {
     "localized_name": "Грибодракон",
-    "description": "Вдохнув большое количество спор, входит в некое подобие транса. Иногда Грибодракон замирает на месте не потому, что притворяется грибом, а из-за воздействия спор."
+    "description": null
   },
   "PREDATOR_MysteryMask": {
     "localized_name": "Омаскул",
-    "description": "Говорят, что его похожее на маску лицо — на самом деле и не лицо вовсе. Кажется, что он перед вами, но на самом деле это не так. Будто бы он постоянно смотрит на вас откуда-то. Будто бы стоит обернуться, и он будет перед вами."
+    "description": null
   },
   "PREDATOR_NightBlueHorse": {
     "localized_name": "Старрион",
-    "description": "Безмерно гордится своей струящейся гривой. Обнаружив выбившийся волосок, от стыда не может сконцентрироваться на беге. Статическое электричество приводит шерсть в беспорядок, поэтому он старается во что бы то ни стало держаться подальше от Пала Азурмейн."
+    "description": null
   },
   "PREDATOR_PinkLizard": {
     "localized_name": "Ловандер",
-    "description": "Постоянно преследует кого-то в поисках любви на одну ночь. По началу проявлял интерес только к Палам, но в последние годы стал тянуть свои нечистые лапы и к людям."
+    "description": null
   },
   "PREDATOR_PurpleSpider": {
     "localized_name": "Тарантрисс",
-    "description": "Обладает чрезвычайно прилипчивой натурой. Чем больше он неспокоен, тем сильнее прицепляется. Таков его характер."
+    "description": null
   },
   "PREDATOR_RedArmorBird": {
     "localized_name": "Рагнахавк",
-    "description": "Можно подумать, что Райберд - его близкий сородич, но на самом деле это не так. Основа рациона этого Пала - камни, и со временем не только его клюв, но и вся голова стала твердой."
+    "description": null
   },
   "PREDATOR_Ronin_Dark": {
     "localized_name": "Буси Нокт",
-    "description": "После смерти он превращается в меч, передающийся потомкам. Если этот меч возьмет в руки Буси со слабым духом, таящиеся внутри голоса мертвых сведут его с ума. Он превратится в Пала Буси Нокт и будет скитаться по свету."
+    "description": null
   },
   "PREDATOR_ScorpionMan": {
     "localized_name": "Скорпио",
-    "description": "Имеет около 5000 видов ядов. Среди них есть грозные яды, способные вызвать мгновенную смерть, но смысла в этом нет: их концентрация слишком мала."
+    "description": null
   },
   "PREDATOR_SifuDog": {
     "localized_name": "Ванфу",
-    "description": "Они проводят дни в медитации, пытаясь достигнуть состояния небытия. Встреча с мирскими соблазнами приносит им облегчение, они набрасываются на еду, после чего их посещает мысль: |Сегодня я опять переел|."
+    "description": null
   },
   "PREDATOR_ThunderDog": {
     "localized_name": "Райхаунд",
-    "description": "На полной скорости этот Пал в буквальном смысле подобен молнии. Когда два таких Пала сталкиваются между собой, раздается напоминающий раскаты грома грохот."
+    "description": null
   },
   "PREDATOR_Umihebi_Fire": {
     "localized_name": "Йормунтайд Игнис",
-    "description": "Есть легенда, что Йормунтайд Игнис — это реинкарнация воина, сброшенного за несуществующие грехи в жерло вулкана. Предание гласит, что он переродился в облике этого Пала и испепелил страну дотла."
+    "description": null
   },
   "PREDATOR_VolcanicMonster_Ice": {
     "localized_name": "Рептиро Крист",
-    "description": "По всему телу этого Пала струится ледяная кровь. При моментальном нагревании кровь превращается в пар, вызывая чудовищный фреатический взрыв."
+    "description": null
   },
   "PREDATOR_Werewolf_Ice": {
     "localized_name": "Лупмун Крист",
-    "description": "Ледяные рога на его голове удивительным образом не тают. Приготовленный из сломанных рогов сорбет восхитителен на вкус, но потом и тот, кто им полакомился, и Лупмун Крист получают головную боль."
+    "description": null
   },
   "PREDATOR_WhiteTiger_Ground": {
     "localized_name": "Криолинкс Терра",
-    "description": "С легкостью переносит своими большими руками горы вещей. Однако короткие ноги мешают ему быстро передвигаться, и нередко ночь застает его в пути."
+    "description": null
   },
   "PREDATOR_Yeti": {
     "localized_name": "Вумпо",
-    "description": "Чтобы выяснить истинную природу этого Пала, ученые его подстригли, но осталась лишь кучка шерсти - как будто бы изначально внутри ничего и не было."
-  },
-  "PalDealer": {
-    "localized_name": "Торговец Палами",
-    "description": null
-  },
-  "PalDealer_Desert": {
-    "localized_name": "Торговец Палами",
-    "description": null
-  },
-  "PalDealer_Volcano": {
-    "localized_name": "Торговец Палами",
-    "description": null
-  },
-  "PalPassive_Doctor": {
-    "localized_name": "Житель острова",
-    "description": null
-  },
-  "PalTrader": {
-    "localized_name": "Торговец Палами",
     "description": null
   },
   "Penguin": {
     "localized_name": "Пенгуллет",
-    "description": "Крылья этого Пала полностью атрофировались, и он не может летать. Однако тоска по небу живет в его генах, и он пытается найти способ снова взлететь."
+    "description": null
   },
   "PinkCat": {
     "localized_name": "Каттива",
-    "description": "Внушительный на первый взгляд, этот Пал на самом деле труслив и слаб. Если Каттива вас презирает - это, в каком-то смысле, унижение высшего порядка."
+    "description": null
   },
   "PinkLizard": {
     "localized_name": "Ловандер",
-    "description": "Постоянно преследует кого-то в поисках любви на одну ночь. По началу проявлял интерес только к Палам, но в последние годы стал тянуть свои нечистые лапы и к людям."
+    "description": null
   },
   "PinkRabbit": {
     "localized_name": "Риббани",
-    "description": "Лучезарная улыбка не сходит с уст этого Пала. Иногда Каттива завязывает ему щупальца узлом ради шутки. Только в такие моменты его лицо искажает разъяренная гримаса."
+    "description": null
   },
   "PinkRabbit_Grass": {
     "localized_name": "Риббани Ботан",
-    "description": "Лучезарная улыбка не сходит с уст этого Пала. Иногда Каттива завязывает ему щупальца узлом ради шутки. В такие моменты он бросается на обидчика — все с той же улыбкой на лице."
+    "description": null
   },
   "PlantSlime": {
     "localized_name": "Гумосс",
-    "description": "Удивительный Пал, чье тело состоит из похожей на смолу субстанции. Потеряв свою шапочку, начинает увядать, пока не сгниет окончательно."
-  },
-  "PlantSlime_Flower": {
-    "localized_name": "Гумосс",
-    "description": null
-  },
-  "Police_Handgun": {
-    "localized_name": "Охранник вигилантов",
-    "description": null
-  },
-  "Police_Rifle": {
-    "localized_name": "Стрелок вигилантов",
-    "description": null
-  },
-  "Police_Rifle_Tower": {
-    "localized_name": "Стрелок вигилантов",
-    "description": null
-  },
-  "Police_Shotgun": {
-    "localized_name": "Элитный вигилант",
-    "description": null
-  },
-  "Police_Shotgun_Tower": {
-    "localized_name": "Элитный вигилант",
     "description": null
   },
   "PurpleSpider": {
     "localized_name": "Тарантрисс",
-    "description": "Обладает чрезвычайно прилипчивой натурой. Чем больше он неспокоен, тем сильнее прицепляется. Таков его характер."
+    "description": null
   },
   "QueenBee": {
     "localized_name": "Элизаби",
-    "description": "Избранная королева своего народа. Ее слуги считают за счастье работать на свою королеву и нередко погибают от усталости, изматывая себя непосильным трудом."
-  },
-  "QuestMan": {
-    "localized_name": "ru_Text",
-    "description": null
-  },
-  "RAID_DarkMechaDragon": {
-    "localized_name": "Зенолорд",
-    "description": null
-  },
-  "RAID_DarkMechaDragon_2": {
-    "localized_name": "Зенолорд",
-    "description": null
-  },
-  "RAID_KingBahamut_Dragon": {
-    "localized_name": "Блазамут Рю",
-    "description": null
-  },
-  "RAID_KingBahamut_Dragon_2": {
-    "localized_name": "Блазамут Рю",
-    "description": null
-  },
-  "RAID_NightLady": {
-    "localized_name": "Бэллануар",
-    "description": null
-  },
-  "RAID_NightLady_Dark": {
-    "localized_name": "Бэллануар Либеро",
-    "description": null
-  },
-  "RAID_NightLady_Dark_2": {
-    "localized_name": "Бэллануар Либеро",
     "description": null
   },
   "RaijinDaughter": {
     "localized_name": "Даззи",
-    "description": "Часто проявляет доброту к одиноким Палам. Но стоит такому бедолаге увлечься и прикипеть к нему душой, тут же убивает его ударом молнии."
+    "description": null
   },
   "RaijinDaughter_Water": {
     "localized_name": "Даззи Нокт",
-    "description": "Окружает вниманием одиноких Палов, и когда они теряют бдительность, убивает их ударом молнии. Таков изначальный план, но поймать удачный момент не удается, и в итоге они становятся друзьями."
-  },
-  "RandomEventShop": {
-    "localized_name": "Торговец Палами",
     "description": null
   },
   "RedArmorBird": {
     "localized_name": "Рагнахавк",
-    "description": "Можно подумать, что Райберд - его близкий сородич, но на самом деле это не так. Основа рациона этого Пала - камни, и со временем не только его клюв, но и вся голова стала твердой."
-  },
-  "Reward_BossDefeat": {
-    "localized_name": "Стражник",
-    "description": null
-  },
-  "Reward_Emote_A_01": {
-    "localized_name": "Житель острова",
-    "description": null
-  },
-  "Reward_Emote_B_01": {
-    "localized_name": "Житель острова",
-    "description": null
-  },
-  "Reward_Emote_C_01": {
-    "localized_name": "Житель острова",
-    "description": null
-  },
-  "Reward_Emote_D_01": {
-    "localized_name": "Житель острова",
-    "description": null
-  },
-  "Reward_Emote_E_01": {
-    "localized_name": "Житель острова",
-    "description": null
-  },
-  "Reward_Emote_F_01": {
-    "localized_name": "Житель острова",
-    "description": null
-  },
-  "Reward_Emote_G_01": {
-    "localized_name": "Житель острова",
-    "description": null
-  },
-  "Reward_Emote_H_01": {
-    "localized_name": "Житель острова",
-    "description": null
-  },
-  "Reward_Emote_I_01": {
-    "localized_name": "Житель острова",
-    "description": null
-  },
-  "Reward_Food": {
-    "localized_name": "Житель острова",
-    "description": null
-  },
-  "Reward_PalCaptureCount": {
-    "localized_name": "Стражник",
-    "description": null
-  },
-  "Reward_PalDisplay_A_01": {
-    "localized_name": "Стражник",
-    "description": null
-  },
-  "Reward_PalDisplay_B_01": {
-    "localized_name": "Стражник",
-    "description": null
-  },
-  "Reward_PalDisplay_C_01": {
-    "localized_name": "Стражник",
-    "description": null
-  },
-  "Reward_PalDisplay_D_01": {
-    "localized_name": "Стражник",
-    "description": null
-  },
-  "Reward_PalDisplay_E_01": {
-    "localized_name": "Стражник",
-    "description": null
-  },
-  "Reward_PalDisplay_F_01": {
-    "localized_name": "Стражник",
-    "description": null
-  },
-  "Reward_PalDisplay_G_01": {
-    "localized_name": "Стражник",
-    "description": null
-  },
-  "Reward_PalDisplay_H_01": {
-    "localized_name": "Стражник",
-    "description": null
-  },
-  "Reward_PalDisplay_I_01": {
-    "localized_name": "Стражник",
-    "description": null
-  },
-  "Reward_Paldex": {
-    "localized_name": "Стражник",
-    "description": null
-  },
-  "Robbery_Leader": {
-    "localized_name": "Торговец Палами",
-    "description": null
-  },
-  "Robbery_Minion": {
-    "localized_name": "Торговец Палами",
     "description": null
   },
   "RobinHood": {
     "localized_name": "Робинквилл",
-    "description": "Лесной охотник, по своей натуре очень близкий к человеку. Считается, что в древности этот Пал отделился от людей в самостоятельный вид. Возможно, это ключ к разгадке тайны о природе Палов."
+    "description": null
   },
   "RobinHood_Ground": {
     "localized_name": "Робинквилл Терра",
-    "description": "Эти скальные охотники очень близки по своему характеру к людям. Когда среди руин находят кости этих Палов, рядом обязательно будут лежать человеческие."
+    "description": null
   },
   "Ronin": {
     "localized_name": "Буси",
-    "description": "После смерти Буси превращается в меч, который передается следующим поколениям. Если этот меч возьмет в руки кто-то другой, обитающие внутри голоса мертвых сведут его с ума."
+    "description": null
   },
   "Ronin_Dark": {
     "localized_name": "Буси Нокт",
-    "description": "После смерти он превращается в меч, передающийся потомкам. Если этот меч возьмет в руки Буси со слабым духом, таящиеся внутри голоса мертвых сведут его с ума. Он превратится в Пала Буси Нокт и будет скитаться по свету."
-  },
-  "SUMMON_DarkAlien": {
-    "localized_name": "Зеноведа",
-    "description": null
-  },
-  "SUMMON_DarkAlien_MAX": {
-    "localized_name": "Зеноведа",
-    "description": null
-  },
-  "SUMMON_WhiteAlienDragon": {
-    "localized_name": "Зеногард",
-    "description": null
-  },
-  "SUMMON_WhiteAlienDragon_MAX": {
-    "localized_name": "Зеногард",
     "description": null
   },
   "SaintCentaur": {
     "localized_name": "Паладиус",
-    "description": "Некогда этот Пал и Некромус были едины. Считается, что это существо лишено негативных эмоций, однако в глубине его глаз теплятся едва заметные угольки ненависти."
+    "description": null
   },
   "SakuraSaurus": {
     "localized_name": "Брончерри",
-    "description": "Запах этого Пала сильно меняется перед спариванием и после. Запах после нахождения партнера считается приятным, его называют |ароматом первой любви|."
+    "description": null
   },
   "SakuraSaurus_Water": {
     "localized_name": "Брончерри Аква",
-    "description": "Запах этого Пала сильно меняется перед спариванием и после. Запах перед нахождением партнера считается приятным, его называют |ароматом невинности|."
-  },
-  "SalesPerson": {
-    "localized_name": "Бродячий торговец",
-    "description": null
-  },
-  "SalesPerson_Desert": {
-    "localized_name": "Бродячий торговец",
-    "description": null
-  },
-  "SalesPerson_Desert2": {
-    "localized_name": "Бродячий торговец",
-    "description": null
-  },
-  "SalesPerson_Volcano": {
-    "localized_name": "Бродячий торговец",
-    "description": null
-  },
-  "SalesPerson_Volcano2": {
-    "localized_name": "Бродячий торговец",
-    "description": null
-  },
-  "SalesPerson_Wander": {
-    "localized_name": "Бродячий торговец",
-    "description": null
-  },
-  "Scientist_FlameThrower": {
-    "localized_name": "Лаборант отряда генетических исследований",
-    "description": null
-  },
-  "Scientist_FlameThrower_Invader": {
-    "localized_name": "Лаборант отряда генетических исследований",
     "description": null
   },
   "ScorpionMan": {
     "localized_name": "Скорпио",
-    "description": "Имеет около 5000 видов ядов. Среди них есть грозные яды, способные вызвать мгновенную смерть, но смысла в этом нет: их концентрация слишком мала."
-  },
-  "SecurityDrone": {
-    "localized_name": "Боевой вертолет",
     "description": null
   },
   "Serpent": {
     "localized_name": "Серфент",
-    "description": "Обтекаемая форма этого Пала приспособлена для жизни в воде. Браконьеры часто вылавливают этих Палов и используют вместо доски для серфинга."
+    "description": null
   },
   "Serpent_Ground": {
     "localized_name": "Серфент Терра",
-    "description": "Обтекаемая форма этого Пала приспособлена для жизни на песке. Браконьеры часто вылавливают этих Палов и используют вместо доски для серфинга."
+    "description": null
   },
   "SharkKid": {
     "localized_name": "Гобфин",
-    "description": "Огромный и сильный в древности, этот Пал был вынужден перебраться на сушу из-за недостатка пищи. Ходьба требовала много энергии, поэтому со временем он стал таким маленьким и слабым."
+    "description": null
   },
   "SharkKid_Fire": {
     "localized_name": "Гобфин Игнис",
-    "description": "Огромный и сильный в древности, этот Пал был вынужден перебраться на сушу из-за недостатка пищи. Ходьба требовала много энергии. Сжигая калории, он вдруг открыл в себе силу огня!"
+    "description": null
   },
   "Sheepball": {
     "localized_name": "Ламболл",
-    "description": "Если дорога ведет под горку, этот Пал начинает катиться вниз. Головокружение лишает его способности двигаться, превращая в легкую добычу. Принадлежит к низшему звену пищевой цепи."
+    "description": null
   },
   "SifuDog": {
     "localized_name": "Ванфу",
-    "description": "Они проводят дни в медитации, пытаясь достигнуть состояния небытия. Встреча с мирскими соблазнами приносит им облегчение, они набрасываются на еду, после чего их посещает мысль: |Сегодня я опять переел|."
+    "description": null
   },
   "SkyDragon": {
     "localized_name": "Фэски",
-    "description": "Засыпать в обнимку с этим Палом - райское наслаждение. Но если он ворочается во сне, то может вас раздавить, и вы отправитесь в рай в прямом смысле."
+    "description": null
   },
   "SkyDragon_Grass": {
     "localized_name": "Фэски Ботан",
-    "description": "Если вы прижмете к себе Пала Фэски Ботан и почувствуете запах солнца и равнин, завтра будет погожий день. Если же в нос вам ударит запах сырости, завтра будет ливень."
+    "description": null
   },
   "SmallArmadillo": {
     "localized_name": "Бронебол",
-    "description": "Когда-то был популярен футбол, где Бронебол выступал в роли мяча. Это мода быстро сошла на нет благодаря усилиям Организации по защите Палов, но сами Палы были отнюдь не против — ведь так они могли избавиться от ороговевшей кожи."
+    "description": null
   },
   "SnowTigerBeastman": {
     "localized_name": "Бастигор",
-    "description": "При виде чего-то круглого SnowTigerBeastMan загорается беспричинным желанием это ударить. Самая трудная вещь для него после бытия — лепка снеговика."
+    "description": null
   },
   "SoldierBee": {
     "localized_name": "Бигард",
-    "description": "Верный слуга своей королевы. Тому, кто причинит вред его госпоже, грозит неминуемая смерть. Защитит королеву любой ценой, даже если для этого ему придется взорвать себя."
+    "description": null
   },
   "Suzaku": {
     "localized_name": "Судзаку",
-    "description": "В древности считалось, что этот Пал приносит засуху. Если прошлый год был засушливым, люди упорно их истребляли, молясь о следующем урожае."
+    "description": null
   },
   "Suzaku_Water": {
     "localized_name": "Судзаку Аква",
-    "description": "В древности считалось, что этот Пал приносит дожди. Если прошлый год был богат на наводнения, люди упорно их истребляли, молясь об избавлении от бед."
+    "description": null
   },
   "SweetsSheep": {
     "localized_name": "Вулипоп",
-    "description": "Тело этого Пала в 18 000 раз слаще сахара. Плотоядные Палы, привлеченные его запахом, с первым же укусом падают в обморок от такой сладости."
+    "description": null
   },
   "ThunderBird": {
     "localized_name": "Райберд",
-    "description": "Можно подумать, что Рагнахавк - его близкий сородич, но на самом деле это не так. Пикирует вниз и убивает врага своим острым клювом. Со стороны это выглядит как удар молнии."
+    "description": null
   },
   "ThunderDog": {
     "localized_name": "Райхаунд",
-    "description": "На полной скорости этот Пал в буквальном смысле подобен молнии. Когда два таких Пала сталкиваются между собой, раздается напоминающий раскаты грома грохот."
+    "description": null
   },
   "ThunderDragonMan": {
     "localized_name": "Орсерк",
-    "description": "Пускает электрический ток в раны противника, сжигая его тело. Стычки этих Палов между собой заканчиваются за считанные секунды."
+    "description": null
   },
   "Umihebi": {
     "localized_name": "Йормунтайд",
-    "description": "Есть легенда, что Йормунтайд - это реинкарнация мудреца, сброшенного за несуществующие грехи в морской водоворот. Предание гласит, что он переродился в облике этого Пала и уничтожил страну."
+    "description": null
   },
   "Umihebi_Fire": {
     "localized_name": "Йормунтайд Игнис",
-    "description": "Есть легенда, что Йормунтайд Игнис — это реинкарнация воина, сброшенного за несуществующие грехи в жерло вулкана. Предание гласит, что он переродился в облике этого Пала и испепелил страну дотла."
-  },
-  "Viking": {
-    "localized_name": "Тэнраку",
-    "description": null
-  },
-  "VikingElite_Tower": {
-    "localized_name": "Элитный тэнраку",
-    "description": null
-  },
-  "Viking_Elite": {
-    "localized_name": "Элитный тэнраку",
-    "description": null
-  },
-  "Viking_Elite_Invader": {
-    "localized_name": "Элитный тэнраку",
-    "description": null
-  },
-  "Viking_Tower": {
-    "localized_name": "Тэнраку",
     "description": null
   },
   "VioletFairy": {
     "localized_name": "Ваэлет",
-    "description": "Вокруг замка росло много любимых цветов короля. Разгорелась большая битва, и к замку подобралось пламя. И тогда из одного цветка появилась фея. — Из детской сказки |Цветы короля|"
-  },
-  "VisitingMerchant": {
-    "localized_name": "ru_Text",
-    "description": null
-  },
-  "Visitor_Hunter_Rifle": {
-    "localized_name": "Браконьер-новичок",
-    "description": null
-  },
-  "Visitor_Present": {
-    "localized_name": "Бродячий торговец",
-    "description": null
-  },
-  "Visitor_Recruiter": {
-    "localized_name": "ru_Text",
     "description": null
   },
   "VolcanicMonster": {
     "localized_name": "Рептиро",
-    "description": "По всему телу этого Пала струится подобная магме кровь. Если вылить на него большое количество воды, она мигом нагреется, и произойдет чудовищный фреатический взрыв."
+    "description": null
   },
   "VolcanicMonster_Ice": {
     "localized_name": "Рептиро Крист",
-    "description": "По всему телу этого Пала струится ледяная кровь. При моментальном нагревании кровь превращается в пар, вызывая чудовищный фреатический взрыв."
-  },
-  "WeaponsDealer": {
-    "localized_name": "ru_Text",
     "description": null
   },
   "WeaselDragon": {
     "localized_name": "Чиллет",
-    "description": "Может сворачиваться в клубок и перекатываться по земле с огромной скоростью. В древности люди изготавливали масло с помощью силы вращения этих Палов, привязывая к прирученным особям пакет с молоком."
+    "description": null
   },
   "WeaselDragon_Fire": {
     "localized_name": "Чиллет Игнис",
-    "description": "Может сворачиваться в клубок и перекатываться по земле, разбрасывая искры. Нервное возбуждение также приводит к выбросу искр. Воспламеняется, если слишком усердно его гладить."
+    "description": null
   },
   "Werewolf": {
     "localized_name": "Лупмун",
-    "description": "Рог на голове этого Пала растет под лунным светом. Солнца не боится, но под его лучами рог начинает зудеть."
+    "description": null
   },
   "Werewolf_Ice": {
     "localized_name": "Лупмун Крист",
-    "description": "Ледяные рога на его голове удивительным образом не тают. Приготовленный из сломанных рогов сорбет восхитителен на вкус, но потом и тот, кто им полакомился, и Лупмун Крист получают головную боль."
+    "description": null
   },
   "WhiteAlienDragon": {
     "localized_name": "Зеногард",
-    "description": "Генерирует энергию, поедая информацию. Похоже, регулярно отправляет кому-то сведения. - Прием! Я случайно проглотил предыдущее сообщение, не посмотрев. Что-что?"
+    "description": null
   },
   "WhiteDeer": {
     "localized_name": "Селесдир",
-    "description": "В старых книгах о нем пишут как о «Звере-спасителе». Потому что свет, который излучает Селесдир, очищает все сущее. И книги не врут — он исчезает из этого мира без следа."
+    "description": null
   },
   "WhiteMoth": {
     "localized_name": "Сибеликс",
-    "description": "Любит дождь, и когда он идет, часто стоит не двигаясь на одном месте. Фокспаркс часто пользуется этим, чтобы укрыться от дождя."
+    "description": null
   },
   "WhiteShieldDragon": {
     "localized_name": "Силвегис",
-    "description": "Металлический воротник на его шее имеет свойства магнита. Если он близко поднесет к нему лапу, то притянется сам к себе. Когда на шею налипает металлический мусор, он неохотно начинает его чистить, но безуспешно, и это приводит его в ярость."
+    "description": null
   },
   "WhiteTiger": {
     "localized_name": "Криолинкс",
-    "description": "С помощью своих прочных когтей может с легкостью забраться даже на крутую гору. Правда, из-за коротких ног испытывает трудности со спуском. Нередко впадает в ступор где-нибудь на высоте."
+    "description": null
   },
   "WhiteTiger_Ground": {
     "localized_name": "Криолинкс Терра",
-    "description": "С легкостью переносит своими большими руками горы вещей. Однако короткие ноги мешают ему быстро передвигаться, и нередко ночь застает его в пути."
+    "description": null
   },
   "WindChimes": {
     "localized_name": "Хангю",
-    "description": "Его огромные руки разрывают даже железо. Раньше существовала жестокая казнь, когда совершившего тяжкое преступление привязывали на городской площади и отдавали на растерзание этому Палу."
+    "description": null
   },
   "WindChimes_Ice": {
     "localized_name": "Хангю Крист",
-    "description": "Его огромные руки разрывают даже ледяные глыбы. Раньше существовало публичное наказание, когда совершившего тяжкое преступление привязывали на городской площади и Windchimes_Ice выдергивал ему волосы."
+    "description": null
   },
   "WingGolem": {
-    "localized_name": "Теранайт",
-    "description": "Этого удивительного Пала можно разобрать на 215 частей и собрать заново - и он оживет, как ни в чем не бывало. Если же примешать части от другой особи, его личность будет разрушена, и психика пострадает."
-  },
-  "WingGolem_Oilrig": {
     "localized_name": "Теранайт",
     "description": null
   },
   "WizardOwl": {
     "localized_name": "Хукрат",
-    "description": "Часто предается размышлениям и не может уснуть из-за своим дум. Cogito ergo sum."
+    "description": null
   },
   "WoolFox": {
     "localized_name": "Кремис",
-    "description": "Обладает более качественной шерстью, чем SheepBall, и более подходящим для домашнего разведения характером. Однако этого Пала всегда держали в качестве питомца.SheepBallГлавное — это очарование."
-  },
-  "Yamishima_guide1": {
-    "localized_name": "Житель острова",
-    "description": null
-  },
-  "Yamishima_guide2": {
-    "localized_name": "Житель острова",
-    "description": null
-  },
-  "Yamishima_guide3": {
-    "localized_name": "Житель острова",
-    "description": null
-  },
-  "Yamishima_guide4": {
-    "localized_name": "Житель острова",
-    "description": null
-  },
-  "Yamishima_guide5": {
-    "localized_name": "Наемник из конвоя",
     "description": null
   },
   "Yeti": {
     "localized_name": "Вумпо",
-    "description": "Чтобы выяснить истинную природу этого Пала, ученые его подстригли, но осталась лишь кучка шерсти - как будто бы изначально внутри ничего и не было."
+    "description": null
   },
   "Yeti_Grass": {
     "localized_name": "Вумпо Ботан",
-    "description": "Чтобы выяснить истинную природу этого Пала, ученые его подстригли, но осталась лишь кучка травы - как будто бы изначально внутри ничего и не было."
+    "description": null
   }
 }

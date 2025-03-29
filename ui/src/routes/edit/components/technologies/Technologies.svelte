@@ -55,7 +55,7 @@
 		if (!techIcon) {
 			return;
 		}
-		return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${techIcon}`);
+		return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${techIcon}.png`);
 	}
 
 	function resetAll() {
