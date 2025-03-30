@@ -67,7 +67,7 @@
 	let genderIcon = $derived(assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${pal.gender}.png`));
 	let palIcon = $derived.by(() => {
 		if (!pal) return '';
-		return assetLoader.loadMenuImage(pal.character_id, palData ? palData.is_pal : false);
+		return assetLoader.loadMenuImage(pal.character_key, palData ? palData.is_pal : false);
 	});
 
 	function handleClick(event: MouseEvent) {

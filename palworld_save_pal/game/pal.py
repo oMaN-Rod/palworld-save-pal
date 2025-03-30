@@ -145,6 +145,8 @@ class Pal(BaseModel):
             self._character_key = self.character_id[5:]
         elif self.character_id.lower().startswith("predator_"):
             self._character_key = self.character_id[9:]
+        elif self.character_id.lower().endswith("_avatar"):
+            self._character_key = self.character_id[:-7]
         else:
             self._character_key = self.character_id
 
