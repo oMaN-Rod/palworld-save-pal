@@ -20,12 +20,12 @@
     "description": "An accessory that allows the player to perform double dashes in mid-air when equipped."
   },
   "Accessory_AirDash3": {
-    "localized_name": "Air Dash Boots",
-    "description": "An accessory that allows the player to dash in mid-air when equipped."
+    "localized_name": "Triple Air Dash Boots",
+    "description": "An accessory that allows the player to perform triple dashes in mid-air when equipped."
   },
   "Accessory_AirDash4": {
-    "localized_name": "Air Dash Boots",
-    "description": "An accessory that allows the player to dash in mid-air when equipped."
+    "localized_name": "Quadruple Air Dash Boots",
+    "description": "An accessory that allows the player to perform quadruple dashes in mid-air when equipped."
   },
   "Accessory_AquaResist_1": {
     "localized_name": "Ring of Water Resistance",

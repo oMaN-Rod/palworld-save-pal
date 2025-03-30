@@ -1641,7 +1641,7 @@
       "passive_skills": []
     },
     "damage": 75,
-    "disabled": false
+    "disabled": true
   },
   "BLT": {
     "group": "Food",
