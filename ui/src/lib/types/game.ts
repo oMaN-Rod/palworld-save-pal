@@ -471,6 +471,7 @@ export interface PalData {
 	work_suitability: Record<WorkSuitability, number>;
 	passive_skills: string[];
 	skill_set?: Record<string, number>;
+	disabled: boolean;
 }
 
 export interface SkillEffect {

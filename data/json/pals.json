@@ -2328,7 +2328,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false
+    "disabled": true
   },
   "BlackGriffon": {
     "is_pal": true,
@@ -5019,7 +5019,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false
+    "disabled": true
   },
   "ElecPanda": {
     "is_pal": true,
