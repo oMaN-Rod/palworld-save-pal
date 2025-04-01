@@ -56,7 +56,7 @@
     "clsx": "^2.1.1",
     "cockatiel": "^3.2.1",
     "leaflet": "^1.9.4",
-    "lucide-svelte": "^0.469.0",
+    "lucide-svelte": "^0.486.0",
     "svelte-jsoneditor": "^3.0.0",
     "tailwind-merge": "^2.6.0",
     "uuid": "^11.1.0"
