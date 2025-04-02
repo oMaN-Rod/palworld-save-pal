@@ -1109,7 +1109,7 @@ class SaveFile(BaseModel):
                 )
                 host_fix_players[player_uuid] = uid
             dps = None
-            if sav_files["dps"] is not None:
+            if "dps" in sav_files and sav_files["dps"] is not None:
                 logger.debug("Loading player DPS save for %s", player_uuid)
                 raw_dps_gvas, _ = decompress_sav_to_gvas(sav_files["dps"])
                 dps_gvas_file = GvasFile.read(
