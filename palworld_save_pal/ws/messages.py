@@ -156,7 +156,7 @@ class DownloadSaveFileMessage(BaseMessage):
 
 class UpdateSaveFileData(BaseModel):
     modified_pals: Optional[Dict[UUID, PalDTO]] = None
-    modified_dsp_pals: Optional[Dict[int, PalDTO]] = None
+    modified_dps_pals: Optional[Dict[int, PalDTO]] = None
     modified_players: Optional[Dict[UUID, PlayerDTO]] = None
     modified_guilds: Optional[Dict[UUID, GuildDTO]] = None
 

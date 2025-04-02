@@ -31,7 +31,7 @@ async def update_save_file_handler(message: UpdateSaveFileMessage, ws: WebSocket
         message.data.modified_guilds if message.data.modified_guilds else None
     )
     modified_dps_pals = (
-        message.data.modified_dsp_pals if message.data.modified_dsp_pals else None
+        message.data.modified_dps_pals if message.data.modified_dps_pals else None
     )
     app_state = get_app_state()
     save_file = app_state.save_file
