@@ -615,36 +615,54 @@
 				character_key: palWithData?.pal.character_key
 			};
 		});
+		const otomoPalsData = selectedPals.map((id) => {
+			const palWithData = otomoContainer[id];
+			return {
+				character_id: palWithData?.character_id,
+				character_key: palWithData?.character_key
+			};
+		});
+		const allPals = [...selectedPalsData, ...otomoPalsData];
+
 		// @ts-ignore
 		const result = await modal.showModal<string>(PalPresetSelectModal, {
 			title: 'Select preset',
-			selectedPals: selectedPalsData
+			selectedPals: allPals
 		});
 		if (!result) return;
 
 		const presetProfile = presetsData.presetProfiles[result];
 
+		const applyPresetToPal = (pal: Record<string, any>) => {
+			for (const [key, value] of Object.entries(presetProfile.pal_preset!)) {
+				if (key === 'character_id') continue;
+				if (key === 'lock' && value) {
+					pal.character_id = presetProfile.pal_preset?.character_id as string;
+				}
+				if (key === 'is_boss' && value && pal.is_lucky) {
+					pal.is_boss = true
+					pal.is_lucky = false
+				}
+				if (key === 'is_lucky' && value && pal.is_boss) {
+					pal.is_boss = false
+					pal.is_lucky = true
+				}
+				else if (value != null) {
+					(pal as Record<string, any>)[key] = value;
+				}
+			}
+			pal.state = EntryState.MODIFIED;
+		};
+
 		selectedPals.forEach((id) => {
 			const palWithData = pals?.find((p) => p.id === id);
 			if (palWithData) {
-				for (const [key, value] of Object.entries(presetProfile.pal_preset!)) {
-					if (key === 'character_id') continue;
-					if (key === 'lock' && value) {
-						palWithData.pal.character_id = presetProfile.pal_preset?.character_id as string;
-					}
- 					if (key === 'is_boss' && value && palWithData.pal.is_lucky) {
- 						palWithData.pal.is_boss = true
- 						palWithData.pal.is_lucky = false
- 					}
- 					if (key === 'is_lucky' && value && palWithData.pal.is_boss) {
- 						palWithData.pal.is_boss = false
- 						palWithData.pal.is_lucky = true
- 					}
- 					else if (value != null) {
-						(palWithData.pal as Record<string, any>)[key] = value;
-					}
-				}
-				palWithData.pal.state = EntryState.MODIFIED;
+				applyPresetToPal(palWithData.pal)
+			}
+
+			const otomoPal = otomoContainer[id];
+			if (otomoPal) {
+				applyPresetToPal(otomoPal)
 			}
 		});
 	}

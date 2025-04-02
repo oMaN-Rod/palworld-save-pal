@@ -4564,6 +4564,41 @@
         "slot_index": 15,
         "count": 1,
         "static_id": "Glider_Tera"
+      },
+      {
+        "slot_index": 18,
+        "count": 1,
+        "static_id": "Accessory_AirDash1"
+      },
+      {
+        "slot_index": 19,
+        "count": 1,
+        "static_id": "Accessory_AirDash2"
+      },
+      {
+        "slot_index": 20,
+        "count": 1,
+        "static_id": "Accessory_AirDash3"
+      },
+      {
+        "slot_index": 21,
+        "count": 1,
+        "static_id": "Accessory_AirDash4"
+      },
+      {
+        "slot_index": 24,
+        "count": 1,
+        "static_id": "Accessory_JumpCount_Increase1"
+      },
+      {
+        "slot_index": 25,
+        "count": 1,
+        "static_id": "Accessory_JumpCount_Increase2"
+      },
+      {
+        "slot_index": 26,
+        "count": 1,
+        "static_id": "Accessory_JumpCount_Increase3"
       }
     ]
   },

@@ -4940,7 +4940,7 @@
     "level_cap": 52,
     "tier": 0,
     "cost": 3,
-    "icon": "t_fengyundeeper_electric_icon_norma"
+    "icon": "t_fengyundeeper_electric_icon_normal"
   },
   "SkillUnlock_FireKirin": {
     "unlock_build_objects": [],

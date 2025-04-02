@@ -16,7 +16,7 @@
 		return Object.entries(palsData.pals)
 			.filter(([_, pal]) => {
 				if (!pal.localized_name || pal.localized_name === '-') return false;
-				return true;
+				return !pal.disabled;
 			})
 			.map(([code_name, pal]) => ({
 				value: code_name,
