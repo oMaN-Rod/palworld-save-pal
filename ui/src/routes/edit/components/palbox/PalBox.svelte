@@ -24,6 +24,7 @@
 		ArrowDownAZ,
 		ArrowDownZA,
 		Plus,
+		CircleFadingPlus,
 		Copy,
 		Ambulance,
 		Trash,
@@ -39,6 +40,7 @@
 	import Card from '$components/ui/card/Card.svelte';
 	import { PalCard, PalBadge } from '$components';
 	import { send } from '$lib/utils/websocketUtils';
+	import { keyComboFromEvent } from 'svelte-jsoneditor';
 
 	const PALS_PER_PAGE = 30;
 	const TOTAL_SLOTS = 960;
@@ -666,6 +668,53 @@
 			}
 		});
 	}
+
+	async function addAllPalsToBox() {
+		if (!appState.selectedPlayer) return;
+
+		const containerId = appState.selectedPlayer.pal_box_id;
+		let idCounter = 0;
+
+		const exclude = ['PREDATOR_', 'RAID_', 'GYM_', 'SUMMON_', '_Oilrig'];
+
+		for (const [key, data] of Object.entries(palsData.pals)) {
+			if (exclude.some((substring) => key.includes(substring))) {
+				continue;
+			}
+
+			const nickname = formatNickname(data.localized_name || key, appState.settings.new_pal_prefix);
+
+			send(MessageType.ADD_PAL, {
+				player_id: appState.selectedPlayer.uid,
+				character_id: key,
+				nickname,
+				container_id: containerId,
+				storage_slot: idCounter++
+			});
+		}
+
+		setTimeout(() => {
+			if (!appState.selectedPlayer || !appState.selectedPlayer.pals) return;
+			Object.values(appState.selectedPlayer.pals).forEach((pal) => {
+				if (pal.storage_id === containerId) {
+					pal.hp = pal.max_hp;
+					pal.sanity = 100;
+					pal.is_sick = false;
+					const palData = palsData.pals[pal.character_key];
+					if (palData) {
+						pal.stomach = palData.max_full_stomach;
+						if (palData.is_boss) {
+							if (!pal.character_id.includes('BOSS_') && pal.character_id !== 'SecurityDrone') {
+								pal.is_boss = palData.is_boss;
+								pal.character_id = 'BOSS_' + pal.character_id
+							}
+						}
+					}
+					pal.state = EntryState.MODIFIED
+				}
+			});
+		}, 1000);
+	}
 </script>
 
 {#snippet party()}
@@ -694,6 +743,14 @@
 						onclick={() => handleAddPal('palbox')}
 					>
 						<Plus />
+					</button>
+				</Tooltip>
+				<Tooltip position="right" label="Add all pals to your Pal Box">
+					<button
+						class="btn hover:preset-tonal-secondary p-2"
+						onclick={() => addAllPalsToBox()}
+					>
+						<CircleFadingPlus />
 					</button>
 				</Tooltip>
 				<Tooltip>
