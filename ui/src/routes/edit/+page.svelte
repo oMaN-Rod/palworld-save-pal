@@ -1,6 +1,6 @@
 <script lang="ts">
-	import PalEdit from './components/pal/Edit.svelte';
-	import PlayerEdit from './components/PlayerEdit.svelte';
+	import PalEdit from './components/pal/PalEdit.svelte';
+	import PlayerEdit from './components/player/PlayerEdit.svelte';
 	import PalBox from './components/palbox/PalBox.svelte';
 	import { DebugButton, PlayerList } from '$components';
 	import {
@@ -15,10 +15,10 @@
 	import Guilds from './components/guilds/Guilds.svelte';
 	import Technologies from './components/technologies/Technologies.svelte';
 	import { MessageType, type Player } from '$types';
-	import { Trash } from 'lucide-svelte';
 	import { Tooltip } from '$components/ui';
 	import { send } from '$utils/websocketUtils';
 	import Nuke from '$components/ui/icons/Nuke.svelte';
+	import PalDimensionalStorage from './components/dps/PalDimensionalStorage.svelte';
 
 	const appState = getAppState();
 	const nav = getNavigationState();
@@ -105,6 +105,7 @@
 						<Tabs.Control value="player">Player</Tabs.Control>
 						<Tabs.Control value="technologies">Technologies</Tabs.Control>
 						<Tabs.Control value="pal-box">Pal Box</Tabs.Control>
+						<Tabs.Control value="dps">DPS</Tabs.Control>
 						<Tabs.Control value="guilds">Guild</Tabs.Control>
 						<Tabs.Control value="pal">Pal</Tabs.Control>
 					</div>
@@ -119,6 +120,9 @@
 						</Tabs.Panel>
 						<Tabs.Panel value="pal-box" classes="h-screen">
 							<PalBox />
+						</Tabs.Panel>
+						<Tabs.Panel value="dps" classes="h-screen">
+							<PalDimensionalStorage />
 						</Tabs.Panel>
 						<Tabs.Panel value="guilds" classes="h-screen">
 							<Guilds />

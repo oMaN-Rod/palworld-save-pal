@@ -95,6 +95,7 @@ export type Player = {
 	level: number;
 	hp: number;
 	pals?: Record<string, Pal>;
+	dps?: Record<number, Pal>;
 	pal_box_id: string;
 	pal_box: CharacterContainer;
 	otomo_container_id: string;

@@ -2,6 +2,7 @@ import copy
 import math
 from typing import Optional, Dict, Any, List
 from uuid import UUID
+import uuid
 from pydantic import BaseModel, PrivateAttr, computed_field
 
 
@@ -67,6 +68,7 @@ class Pal(BaseModel):
     _is_tower: bool = False
     _gender: Optional[PalGender] = None
     _nickname: Optional[str] = ""
+    _filtered_nickname: Optional[str] = None
     _stomach: float = 0
     _sanity: float = 0.0
     _hp: int = 0
@@ -90,12 +92,14 @@ class Pal(BaseModel):
     _work_suitability: Dict[WorkSuitability, int] = {}
     _is_sick: bool = False
 
+    _is_dps: bool = PrivateAttr(default=False)
     _character_save: Dict[str, Any] = PrivateAttr(default_factory=dict)
     _save_parameter: Dict[str, Any] = PrivateAttr(default_factory=dict)
 
-    def __init__(self, data=None, **kwargs):
-        if data is not None:
+    def __init__(self, data=None, dps=False, **kwargs):
+        if data is not None and not dps:
             super().__init__()
+            self._is_dps = dps
             self._character_save = data
             self._save_parameter = PalObjects.get_nested(
                 self._character_save,
@@ -106,22 +110,40 @@ class Pal(BaseModel):
                 "SaveParameter",
                 "value",
             )
+        elif data is not None and dps:
+            super().__init__()
+            self._is_dps = dps
+            self._character_save = data
+            self._save_parameter = PalObjects.get_value(
+                self._character_save["SaveParameter"]
+            )
         else:
             super().__init__(**kwargs)
 
     @computed_field
     def instance_id(self) -> UUID:
-        self._instance_id = PalObjects.get_guid(
-            self._character_save["key"]["InstanceId"]
-        )
+        if self._is_dps:
+            self._instance_id = PalObjects.get_guid(
+                self._character_save["InstanceId"]["value"]["InstanceId"]
+            )
+        else:
+            self._instance_id = PalObjects.get_guid(
+                self._character_save["key"]["InstanceId"]
+            )
         return self._instance_id
 
     @instance_id.setter
     def instance_id(self, value: UUID):
         self._instance_id = value
-        PalObjects.set_value(
-            self._character_save["key"]["InstanceId"], value=self._instance_id
-        )
+        if self._is_dps:
+            PalObjects.set_value(
+                self._character_save["InstanceId"]["value"]["InstanceId"],
+                value=self._instance_id,
+            )
+        else:
+            PalObjects.set_value(
+                self._character_save["key"]["InstanceId"], value=self._instance_id
+            )
 
     @computed_field
     def character_id(self) -> Optional[str]:
@@ -164,6 +186,8 @@ class Pal(BaseModel):
 
     @computed_field
     def owner_uid(self) -> Optional[UUID]:
+        if self._is_dps:
+            return None
         self._owner_uid = (
             PalObjects.get_guid(self._save_parameter["OwnerPlayerUId"])
             if "OwnerPlayerUId" in self._save_parameter
@@ -267,6 +291,31 @@ class Pal(BaseModel):
             PalObjects.set_value(self._save_parameter["NickName"], value=self._nickname)
         else:
             self._save_parameter["NickName"] = PalObjects.StrProperty(self._nickname)
+
+    @computed_field
+    def filtered_nickname(self) -> Optional[str]:
+        if not self._is_dps:
+            return
+        self._filtered_nickname = (
+            PalObjects.get_value(self._save_parameter["FilteredNickName"])
+            if "FilteredNickName" in self._save_parameter
+            else None
+        )
+        return self._nickname
+
+    @nickname.setter
+    def filtered_nickname(self, value: str):
+        if not self._is_dps:
+            return
+        self._filtered_nickname = value
+        if "FilteredNickName" in self._save_parameter:
+            PalObjects.set_value(
+                self._save_parameter["FilteredNickName"], value=self._nickname
+            )
+        else:
+            self._save_parameter["FilteredNickName"] = PalObjects.StrProperty(
+                self._nickname
+            )
 
     @computed_field
     def group_id(self) -> Optional[UUID]:
@@ -744,6 +793,8 @@ class Pal(BaseModel):
     @computed_field
     def is_sick(self) -> bool:
         self._is_sick = False
+        if self._is_dps:
+            return self._is_sick
         for sick_type in (
             t for t in PAL_SICK_TYPES if t not in ["HungerType", "SanityValue"]
         ):
@@ -818,8 +869,8 @@ class Pal(BaseModel):
                 except Exception as e:
                     logger.warning(f"Failed to update {key}: {str(e)}")
                     continue
-
-        self.heal()
+        if not self._is_dps:
+            self.heal()
 
     def heal(self):
         for sick_type in PAL_SICK_TYPES:
@@ -837,3 +888,15 @@ class Pal(BaseModel):
         else:
             if self.character_id.startswith("BOSS_"):
                 self.character_id = self.character_key
+
+    def populate_status_point_lists(self):
+        self._character_save["GotStatusPointList"] = PalObjects.GetStatusPointList(
+            "GotStatusPointList", PalObjects.StatusNames
+        )
+        self._character_save["GotExStatusPointList"] = PalObjects.GetStatusPointList(
+            "GotExStatusPointList", PalObjects.ExStatusNames
+        )
+
+    def remove_status_point_lists(self):
+        self._character_save["GotStatusPointList"]["value"]["values"] = []
+        self._character_save["GotExStatusPointList"]["value"]["values"] = []

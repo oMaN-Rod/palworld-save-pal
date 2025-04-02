@@ -30,6 +30,9 @@ async def update_save_file_handler(message: UpdateSaveFileMessage, ws: WebSocket
     modified_guilds = (
         message.data.modified_guilds if message.data.modified_guilds else None
     )
+    modified_dps_pals = (
+        message.data.modified_dsp_pals if message.data.modified_dsp_pals else None
+    )
     app_state = get_app_state()
     save_file = app_state.save_file
 
@@ -42,6 +45,8 @@ async def update_save_file_handler(message: UpdateSaveFileMessage, ws: WebSocket
         await save_file.update_players(modified_players, ws_callback)
     if modified_guilds:
         await save_file.update_guilds(modified_guilds, ws_callback)
+    if modified_dps_pals:
+        await save_file.update_dsp_pals(modified_dps_pals, ws_callback)
 
     app_state.players = save_file.get_players()
     response = build_response(MessageType.UPDATE_SAVE_FILE, "Changes saved")
@@ -63,10 +68,12 @@ async def download_save_file_handler(_: DownloadSaveFileMessage, ws: WebSocket):
     sav_file = save_file.sav()
     await ws_callback("Encoding sav file to base64 🤖, get ready here it comes...")
     encoded_data = base64.b64encode(sav_file).decode("utf-8")
-    data = [{
-        "name": "Level.sav",
-        "content": encoded_data,
-    }]
+    data = [
+        {
+            "name": "Level.sav",
+            "content": encoded_data,
+        }
+    ]
 
     # Prep player save files
     player_savs = save_file.player_savs()
@@ -78,7 +85,7 @@ async def download_save_file_handler(_: DownloadSaveFileMessage, ws: WebSocket):
             "content": encoded_data,
         }
         data.append(player_data)
-    
+
     response = build_response(MessageType.DOWNLOAD_SAVE_FILE, data)
     await ws.send_json(response)
 

@@ -18,8 +18,10 @@ class BaseMessage(BaseModel):
 class MessageType(str, Enum):
     # Pal Management
     ADD_PAL = "add_pal"
+    ADD_DPS_PAL = "add_dps_pal"
     CLONE_PAL = "clone_pal"
     DELETE_PALS = "delete_pals"
+    DELETE_DPS_PALS = "delete_dps_pals"
     GET_PAL_DETAILS = "get_pal_details"  # remove
     GET_PALS = "get_pals"
     HEAL_ALL_PALS = "heal_all_pals"
@@ -89,12 +91,17 @@ class AddPalData(BaseModel):
     base_id: Optional[UUID] = None
     character_id: str
     nickname: str
-    container_id: UUID
+    container_id: Optional[UUID] = None
     storage_slot: Union[int | None] = None
 
 
 class AddPalMessage(BaseMessage):
     type: str = MessageType.ADD_PAL.value
+    data: AddPalData
+
+
+class AddDpsPalMessage(BaseMessage):
+    type: str = MessageType.ADD_DPS_PAL.value
     data: AddPalData
 
 
@@ -121,7 +128,8 @@ class ClonePalMessage(BaseMessage):
 
 
 class DeletePalsData(BaseModel):
-    pal_ids: List[UUID]
+    pal_indexes: Optional[List[int]] = None
+    pal_ids: Optional[List[UUID]] = None
     player_id: Optional[UUID] = None
     guild_id: Optional[UUID] = None
     base_id: Optional[UUID] = None
@@ -129,6 +137,11 @@ class DeletePalsData(BaseModel):
 
 class DeletePalsMessage(BaseMessage):
     type: str = MessageType.DELETE_PALS.value
+    data: DeletePalsData
+
+
+class DeleteDpsPalsMessage(BaseMessage):
+    type: str = MessageType.DELETE_DPS_PALS.value
     data: DeletePalsData
 
 
@@ -143,6 +156,7 @@ class DownloadSaveFileMessage(BaseMessage):
 
 class UpdateSaveFileData(BaseModel):
     modified_pals: Optional[Dict[UUID, PalDTO]] = None
+    modified_dsp_pals: Optional[Dict[int, PalDTO]] = None
     modified_players: Optional[Dict[UUID, PlayerDTO]] = None
     modified_guilds: Optional[Dict[UUID, GuildDTO]] = None
 

@@ -24,7 +24,7 @@ from palworld_save_pal.game.guild import Guild, GuildDTO
 from palworld_save_pal.game.pal import Pal, PalDTO
 from palworld_save_pal.game.pal_objects import GroupType, PalObjects
 from palworld_save_pal.utils.logging_config import create_logger
-from palworld_save_pal.game.player import Player, PlayerDTO
+from palworld_save_pal.game.player import Player, PlayerDTO, PlayerGvasFiles
 from palworld_save_pal.utils.uuid import are_equal_uuids, is_empty_uuid
 
 logger = create_logger(__name__)
@@ -142,7 +142,7 @@ class SaveFile(BaseModel):
 
     _gvas_file: Optional[GvasFile] = PrivateAttr(default=None)
     _level_meta_gvas_file: Optional[GvasFile] = PrivateAttr(default=None)
-    _player_gvas_files: Dict[UUID, GvasFile] = PrivateAttr(default_factory=dict)
+    _player_gvas_files: Dict[UUID, PlayerGvasFiles] = PrivateAttr(default_factory=dict)
 
     _character_save_parameter_map: List[Dict[str, Any]] = PrivateAttr(
         default_factory=list
@@ -483,6 +483,22 @@ class SaveFile(BaseModel):
         self._pals[new_pal.instance_id] = new_pal
         return new_pal
 
+    def add_player_dps_pal(
+        self,
+        player_id: UUID,
+        character_id: str,
+        nickname: str,
+        storage_slot: Union[int | None] = None,
+    ) -> Optional[Pal]:
+        player = self._players.get(player_id)
+        if not player:
+            raise ValueError(f"Player {player_id} not found in the save file.")
+
+        new_pal = player.add_dps_pal(character_id, nickname, storage_slot)
+        if new_pal is None:
+            return
+        return new_pal
+
     def add_guild_pal(
         self,
         character_id: str,
@@ -541,6 +557,12 @@ class SaveFile(BaseModel):
         for pal_id in pal_ids:
             player.delete_pal(pal_id)
             self._delete_pal_by_id(pal_id)
+
+    def delete_player_dps_pals(self, player_id: UUID, pal_indexes: List[int]) -> None:
+        player = self._players.get(player_id)
+        if not player:
+            raise ValueError(f"Player {player_id} not found in the save file.")
+        player.delete_dps_pals(pal_indexes)
 
     def delete_guild_pals(
         self, guild_id: UUID, base_id: UUID, pal_ids: List[UUID]
@@ -657,7 +679,7 @@ class SaveFile(BaseModel):
     async def load_sav_files(
         self,
         level_sav: bytes,
-        player_sav_files: Dict[str, bytes],
+        player_sav_files: Dict[str, PlayerGvasFiles],
         level_meta: Optional[bytes] = None,
         ws_callback=None,
     ):
@@ -704,7 +726,7 @@ class SaveFile(BaseModel):
         logger.info("Converting player save files to SAV", len(self._player_gvas_files))
         return {
             uid: compress_gvas_to_sav(
-                self._player_gvas_files[uid].write(CUSTOM_PROPERTIES), 0x32
+                self._player_gvas_files[uid].sav.write(CUSTOM_PROPERTIES), 0x32
             )
             for uid in self._player_gvas_files
         }
@@ -746,11 +768,19 @@ class SaveFile(BaseModel):
 
     def to_player_sav_files(self, output_path):
         logger.info("Converting player save files to SAV, saving to %s", output_path)
-        for uid, gvas in self._player_gvas_files.items():
-            sav_file = compress_gvas_to_sav(gvas.write(CUSTOM_PROPERTIES), 0x32)
+        for uid, player_files in self._player_gvas_files.items():
+            sav_file = compress_gvas_to_sav(
+                player_files.sav.write(CUSTOM_PROPERTIES), 0x32
+            )
             uid = str(uid).replace("-", "")
             with open(os.path.join(output_path, f"{uid}.sav"), "wb") as f:
                 f.write(sav_file)
+            if player_files.dps:
+                dps_sav_file = compress_gvas_to_sav(
+                    player_files.dps.write(CUSTOM_PROPERTIES), 0x32
+                )
+                with open(os.path.join(output_path, f"{uid}_dps.sav"), "wb") as f_dps:
+                    f_dps.write(dps_sav_file)
 
     async def update_pals(self, modified_pals: Dict[UUID, PalDTO], ws_callback) -> None:
         if not self._gvas_file:
@@ -760,6 +790,22 @@ class SaveFile(BaseModel):
             pal_name = pal.nickname if pal.nickname else pal.character_id
             await ws_callback(f"Updating pal {pal_name}")
             self._update_pal(pal_id, pal)
+
+        logger.info("Updated %d pals in the save file.", len(modified_pals))
+
+        await ws_callback("Saving changes to file")
+
+    async def update_dsp_pals(
+        self, modified_pals: Dict[int, PalDTO], ws_callback
+    ) -> None:
+        if not self._gvas_file:
+            raise ValueError("No GvasFile has been loaded.")
+
+        for pal_idx, pal in modified_pals.items():
+            pal_name = pal.nickname if pal.nickname else pal.character_id
+            await ws_callback(f"Updating DPS pal {pal_name}")
+            player = self._players.get(pal.owner_uid)
+            player.update_dps_pal(pal_idx, pal)
 
         logger.info("Updated %d pals in the save file.", len(modified_pals))
 
@@ -1025,19 +1071,19 @@ class SaveFile(BaseModel):
         return
 
     async def _load_players(
-        self, player_sav_files: Dict[UUID, bytes] = None, ws_callback=None
+        self, player_sav_files: Dict[UUID, Dict[str, bytes]] = None, ws_callback=None
     ):
         if not self._character_save_parameter_map:
             return {}
         logger.info("Loading Players")
 
-        loaded_sav_files: Dict[UUID, GvasFile] = {}
+        loaded_sav_files: Dict[UUID, PlayerGvasFiles] = {}
         # This is a temp fix, need to look into fixing player uid
         # mismatches due to host fix
         host_fix_players = {}
 
-        for uid, player_sav_bytes in player_sav_files.items():
-            raw_gvas, _ = decompress_sav_to_gvas(player_sav_bytes)
+        for uid, sav_files in player_sav_files.items():
+            raw_gvas, _ = decompress_sav_to_gvas(sav_files["sav"])
             await ws_callback(f"Loading player {uid}...")
             gvas_file = GvasFile.read(
                 raw_gvas, PALWORLD_TYPE_HINTS, CUSTOM_PROPERTIES, allow_nan=True
@@ -1062,7 +1108,18 @@ class SaveFile(BaseModel):
                     f"Player UIDs do not match (host fix detected): {uid} != {player_uuid}"
                 )
                 host_fix_players[player_uuid] = uid
-            loaded_sav_files[player_uuid] = gvas_file
+            dps = None
+            if sav_files["dps"] is not None:
+                logger.debug("Loading player DPS save for %s", player_uuid)
+                raw_dps_gvas, _ = decompress_sav_to_gvas(sav_files["dps"])
+                dps_gvas_file = GvasFile.read(
+                    raw_dps_gvas,
+                    PALWORLD_TYPE_HINTS,
+                    CUSTOM_PROPERTIES,
+                    allow_nan=True,
+                )
+                dps = dps_gvas_file
+            loaded_sav_files[player_uuid] = PlayerGvasFiles(sav=gvas_file, dps=dps)
 
         players = {}
         for entry in self._character_save_parameter_map:
@@ -1086,7 +1143,9 @@ class SaveFile(BaseModel):
                 else:
                     nickname = f"🥷 ({str(uid).split("-")[0]})"
 
-                await ws_callback(f"Loading player {nickname} ({uid})...")
+                await ws_callback(
+                    f"Loading player {nickname} ({uid}) with {loaded_sav_files[uid]}..."
+                )
                 self._player_gvas_files[uid] = loaded_sav_files[uid]
                 player_pals = self._get_player_pals(uid)
                 if uid in host_fix_players:
@@ -1094,7 +1153,7 @@ class SaveFile(BaseModel):
                         host_fix_players[uid]
                     )
                 player = Player(
-                    gvas_file=self._player_gvas_files[uid],
+                    gvas_files=self._player_gvas_files[uid],
                     item_container_save_data=self._item_container_save_data,
                     dynamic_item_save_data=self._dynamic_item_save_data,
                     character_container_save_data=self._character_container_save_data,

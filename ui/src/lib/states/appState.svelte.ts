@@ -16,6 +16,7 @@ const modal = getModalState();
 
 interface ModifiedData {
 	modified_pals?: Record<string, Pal>;
+	modified_dps_pals?: Record<number, Pal>;
 	modified_players?: Record<string, Player>;
 	modified_guilds?: Record<string, GuildDTO>;
 }
@@ -50,6 +51,7 @@ class AppState {
 	async saveState() {
 		let modifiedData: ModifiedData = {};
 		let modifiedPals: [string, Pal][] = [];
+		let modifiedDspPals: [string, Pal][] = [];
 		let modifiedPlayers: [string, Player][] = [];
 		let modifiedGuilds: [string, GuildDTO][] = [];
 
@@ -68,6 +70,15 @@ class AppState {
 				for (const pal of Object.values(player.pals)) {
 					if (pal.state === EntryState.MODIFIED) {
 						modifiedPals = [...modifiedPals, [pal.instance_id, pal]];
+						pal.state = EntryState.NONE;
+					}
+				}
+			}
+			if (player.dps) {
+				for (const [index, pal] of Object.entries(player.dps)) {
+					if (pal && pal.state === EntryState.MODIFIED) {
+						pal.owner_uid = player.uid;
+						modifiedDspPals = [...modifiedDspPals, [index, pal]];
 						pal.state = EntryState.NONE;
 					}
 				}
@@ -115,7 +126,12 @@ class AppState {
 			}
 		}
 
-		if (modifiedPals.length === 0 && modifiedPlayers.length === 0 && modifiedGuilds.length === 0) {
+		if (
+			modifiedPals.length === 0 &&
+			modifiedPlayers.length === 0 &&
+			modifiedGuilds.length === 0 &&
+			modifiedDspPals.length === 0
+		) {
 			console.log('No modifications to save');
 			return;
 		}
@@ -132,7 +148,16 @@ class AppState {
 			modifiedData.modified_guilds = Object.fromEntries(modifiedGuilds);
 		}
 
-		if (modifiedPals.length > 0 || modifiedPlayers.length > 0 || modifiedGuilds.length > 0) {
+		if (modifiedDspPals.length > 0) {
+			modifiedData.modified_dps_pals = Object.fromEntries(modifiedDspPals);
+		}
+
+		if (
+			modifiedPals.length > 0 ||
+			modifiedPlayers.length > 0 ||
+			modifiedGuilds.length > 0 ||
+			modifiedDspPals.length > 0
+		) {
 			this.autoSave = true;
 		}
 		await sendAndWait(MessageType.UPDATE_SAVE_FILE, modifiedData);

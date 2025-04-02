@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 from typing import Any, Dict, List, Optional, Union
 from uuid import UUID
 import uuid
-from pydantic import BaseModel, Field, PrivateAttr, computed_field
+from pydantic import BaseModel, ConfigDict, Field, PrivateAttr, computed_field
 
 from palworld_save_tools.gvas import GvasFile
 
@@ -10,7 +10,7 @@ from palworld_save_pal.game.character_container import (
     CharacterContainer,
     CharacterContainerType,
 )
-from palworld_save_pal.game.guild import Guild, GuildDTO
+from palworld_save_pal.game.guild import Guild
 from palworld_save_pal.game.map import WorldMapPoint
 from palworld_save_pal.game.pal import Pal, PalDTO
 from palworld_save_pal.game.item_container import ItemContainer, ItemContainerType
@@ -20,6 +20,13 @@ from palworld_save_pal.utils.uuid import are_equal_uuids
 from palworld_save_pal.utils.logging_config import create_logger
 
 logger = create_logger(__name__)
+
+
+class PlayerGvasFiles(BaseModel):
+    sav: GvasFile
+    dps: Optional[GvasFile] = None
+
+    model_config = ConfigDict(arbitrary_types_allowed=True)
 
 
 class PlayerDTO(BaseModel):
@@ -75,16 +82,17 @@ class Player(BaseModel):
     pal_box: Optional[CharacterContainer] = Field(default=None)
     party: Optional[CharacterContainer] = Field(default=None)
 
-    _player_gvas_file: GvasFile
+    _player_gvas_files: PlayerGvasFiles
     _save_data: Dict[str, Any]
     _inventory_info: Dict[str, Any]
     _dynamic_item_save_data: Dict[str, Any]
     _character_save: Dict[str, Any]
     _save_parameter: Dict[str, Any]
+    _dps: Dict[int, Pal]
 
     def __init__(
         self,
-        gvas_file=None,
+        gvas_files: PlayerGvasFiles = None,
         item_container_save_data: Dict[str, Any] = None,
         dynamic_item_save_data: Dict[str, Any] = None,
         character_container_save_data: Dict[str, Any] = None,
@@ -94,7 +102,7 @@ class Player(BaseModel):
     ):
         super().__init__(**kwargs)
         if (
-            gvas_file is not None
+            gvas_files is not None
             and item_container_save_data is not None
             and dynamic_item_save_data is not None
             and character_container_save_data is not None
@@ -110,9 +118,9 @@ class Player(BaseModel):
                 "SaveParameter",
                 "value",
             )
-            self._player_gvas_file = gvas_file
+            self._player_gvas_files = gvas_files
             self._save_data = PalObjects.get_value(
-                self._player_gvas_file.properties["SaveData"]
+                self._player_gvas_files.sav.properties["SaveData"]
             )
             self._guild = guild
             self._load_inventory(item_container_save_data, dynamic_item_save_data)
@@ -351,7 +359,7 @@ class Player(BaseModel):
     def pal_box_id(self) -> Optional[UUID]:
         self._pal_box_id = PalObjects.get_guid(
             PalObjects.get_nested(
-                self._player_gvas_file.properties["SaveData"],
+                self._player_gvas_files.sav.properties["SaveData"],
                 "value",
                 "PalStorageContainerId",
                 "value",
@@ -364,7 +372,7 @@ class Player(BaseModel):
     def otomo_container_id(self) -> Optional[UUID]:
         self._otomo_container_id = PalObjects.get_guid(
             PalObjects.get_nested(
-                self._player_gvas_file.properties["SaveData"],
+                self._player_gvas_files.sav.properties["SaveData"],
                 "value",
                 "OtomoCharacterContainerId",
                 "value",
@@ -389,12 +397,29 @@ class Player(BaseModel):
 
     @computed_field
     def last_online_time(self) -> datetime:
-        ticks = PalObjects.get_value(self._player_gvas_file.properties["Timestamp"])
+        ticks = PalObjects.get_value(
+            self._player_gvas_files.sav.properties["Timestamp"]
+        )
         seconds = ticks / 10000000
         days = seconds // 86400
         seconds_remainder = seconds % 86400
         base_date = datetime(1, 1, 1)
         return base_date + timedelta(days=days, seconds=seconds_remainder)
+
+    @computed_field
+    def dps(self) -> Dict[int, Pal]:
+        self._dps = {}
+        if not self._player_gvas_files.dps:
+            return
+        for index, entry in enumerate(
+            PalObjects.get_array_property(
+                self._player_gvas_files.dps.properties["SaveParameterArray"]
+            )
+        ):
+            pal = Pal(data=entry, dps=True)
+            if pal.character_id != "None":
+                self._dps[index] = pal
+        return self._dps
 
     @property
     def character_save(self) -> Dict[str, Any]:
@@ -404,12 +429,12 @@ class Player(BaseModel):
     def save_data(self) -> Dict[str, Any]:
         return {
             "character_save": {**self._character_save},
-            "gvas_properties": {**self._player_gvas_file.properties},
+            "gvas_properties": {**self._player_gvas_files.sav.properties},
         }
 
     def add_pal(
         self,
-        pal_code_name: str,
+        character_id: str,
         nickname: str,
         container_id: UUID,
         storage_slot: Union[int | None] = None,
@@ -425,7 +450,7 @@ class Player(BaseModel):
             return
 
         new_pal_data = PalObjects.PalSaveParameter(
-            character_id=pal_code_name,
+            character_id=character_id,
             instance_id=new_pal_id,
             owner_uid=self.uid,
             container_id=container_id,
@@ -441,6 +466,30 @@ class Player(BaseModel):
         if isinstance(self._guild, Guild):
             self._guild.add_pal(new_pal_id)
         return new_pal
+
+    def add_dps_pal(
+        self,
+        character_id: str,
+        nickname: str,
+        storage_slot: int,
+    ) -> Optional[Pal]:
+        pal_data = PalObjects.get_array_property(
+            self._player_gvas_files.dps.properties["SaveParameterArray"]
+        )[storage_slot]
+
+        pal = Pal(data=pal_data, dps=True)
+        pal.instance_id = uuid.uuid4()
+        pal.character_id = character_id
+        pal.nickname = nickname
+        pal.filtered_nickname = nickname
+        pal.storage_id = self.pal_box_id
+        pal.storage_slot = 0
+        pal.populate_status_point_lists()
+        return pal
+
+    def update_dps_pal(self, index: int, pal_dto: PalDTO):
+        pal = self.dps[index]
+        pal.update_from(pal_dto)
 
     def move_pal(self, pal_id: UUID, container_id: UUID):
         pal = self.pals[pal_id]
@@ -482,6 +531,21 @@ class Player(BaseModel):
         self.party.remove_pal(pal_id)
         if isinstance(self._guild, Guild):
             self._guild.delete_character_handle(pal_id)
+
+    def delete_dps_pals(self, pal_indexes: List[int]) -> None:
+        if not self._player_gvas_files.dps:
+            logger.error("No dps gvas found for player %s", self.uid)
+            return
+        for index in sorted(pal_indexes, reverse=True):
+            if index in self._dps:
+                pal = self._dps[index]
+                pal.instance_id = PalObjects.EMPTY_UUID
+                pal.character_id = "None"
+                pal.nickname = ""
+                pal.filtered_nickname = ""
+                pal.storage_id = PalObjects.EMPTY_UUID
+                pal.storage_slot = -1
+                pal.remove_status_point_lists()
 
     def update_from(self, other_player: PlayerDTO):
         logger.debug(

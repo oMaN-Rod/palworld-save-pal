@@ -2,9 +2,11 @@ import type { Pal, Player } from './game';
 
 export enum MessageType {
 	ADD_PAL = 'add_pal',
+	ADD_DPS_PAL = 'add_dps_pal',
 	CLONE_PAL = 'clone_pal',
 	MOVE_PAL = 'move_pal',
 	DELETE_PALS = 'delete_pals',
+	DELETE_DPS_PALS = 'delete_dps_pals',
 	HEAL_PALS = 'heal_pals',
 	HEAL_ALL_PALS = 'heal_all_pals',
 	DOWNLOAD_SAVE_FILE = 'download_save_file',

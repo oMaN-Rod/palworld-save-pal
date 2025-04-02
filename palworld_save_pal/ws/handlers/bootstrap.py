@@ -24,10 +24,12 @@ from palworld_save_pal.ws.handlers import (
     work_suitability_handler,
 )
 from palworld_save_pal.ws.messages import (
+    AddDpsPalMessage,
     AddPalMessage,
     AddPresetMessage,
     BaseMessage,
     ClonePalMessage,
+    DeleteDpsPalsMessage,
     DeleteGuildMessage,
     DeletePlayerMessage,
     GetActiveSkillsMessage,
@@ -108,6 +110,14 @@ def bootstrap(dispatcher: "MessageDispatcher"):
     )
 
     dispatcher.register_handler(
+        MessageType.DELETE_DPS_PALS.value,
+        {
+            "message_class": DeleteDpsPalsMessage,
+            "handler_func": pal_handler.delete_dps_pals_handler,
+        },
+    )
+
+    dispatcher.register_handler(
         MessageType.HEAL_PALS.value,
         {
             "message_class": HealPalsMessage,
@@ -120,6 +130,14 @@ def bootstrap(dispatcher: "MessageDispatcher"):
         {
             "message_class": AddPalMessage,
             "handler_func": pal_handler.add_pal_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.ADD_DPS_PAL.value,
+        {
+            "message_class": AddDpsPalMessage,
+            "handler_func": pal_handler.add_dps_pal_handler,
         },
     )
 

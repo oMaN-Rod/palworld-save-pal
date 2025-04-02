@@ -7,6 +7,7 @@ import uuid
 from pydantic import BaseModel, ConfigDict
 import webview
 from palworld_save_pal.game.pal_objects import PalObjects
+from palworld_save_pal.game.player import PlayerGvasFiles
 from palworld_save_pal.game.save_file import SaveFile
 from palworld_save_pal.utils.gamepass.container_types import (
     Container,
@@ -136,19 +137,30 @@ class FileManager:
         return None
 
     @staticmethod
-    def get_player_saves(players_dir: str) -> Dict[str, bytes]:
-        player_saves = {}
+    def get_player_saves(players_dir: str) -> Dict[uuid.UUID, Dict[str, bytes]]:
+        player_saves: Dict[uuid.UUID, Dict[str, bytes]] = {}
         players_path = Path(players_dir)
 
         for save_file in players_path.glob("*.sav"):
+            dps = False
             try:
                 player_id = save_file.stem
                 if "_dps" in player_id:
-                    continue
+                    player_id = player_id.replace("_dps", "")
+                    dps = True
+
                 logger.debug("Reading player save: %s, uuid: %s", save_file, player_id)
                 player_uuid = uuid.UUID(player_id)
+
+                if player_uuid not in player_saves:
+                    player_saves[player_uuid] = {}
+
                 with open(save_file, "rb") as f:
-                    player_saves[player_uuid] = f.read()
+                    if dps:
+                        player_saves[player_uuid]["dps"] = f.read()
+                    else:
+                        player_saves[player_uuid]["sav"] = f.read()
+
             except:
                 logger.error("Failed to read player save: %s", save_file, exc_info=True)
                 continue

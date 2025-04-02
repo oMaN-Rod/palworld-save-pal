@@ -5,6 +5,8 @@ from palworld_save_pal.game.pal import Pal
 from palworld_save_pal.state import get_app_state
 from palworld_save_pal.utils.json_manager import JsonManager
 from palworld_save_pal.ws.messages import (
+    AddDpsPalMessage,
+    DeleteDpsPalsMessage,
     GetPalsMessage,
     AddPalMessage,
     HealAllPalsMessage,
@@ -81,6 +83,24 @@ async def add_pal_handler(message: AddPalMessage, ws: WebSocket):
     await ws.send_json(response)
 
 
+async def add_dps_pal_handler(message: AddDpsPalMessage, ws: WebSocket):
+    player_id = message.data.player_id
+    character_id = message.data.character_id
+    nickname = message.data.nickname
+    storage_slot = message.data.storage_slot
+
+    app_state = get_app_state()
+    save_file = app_state.save_file
+
+    if player_id:
+        new_pal = save_file.add_player_dps_pal(
+            player_id, character_id, nickname, storage_slot
+        )
+        data = {"player_id": player_id, "pal": new_pal, "index": storage_slot}
+    response = build_response(MessageType.ADD_DPS_PAL, data)
+    await ws.send_json(response)
+
+
 async def move_pal_handler(message: MovePalMessage, ws: WebSocket):
     player_id = message.data.player_id
     pal_id = message.data.pal_id
@@ -136,6 +156,14 @@ async def delete_pals_handler(message: DeletePalsMessage, _: WebSocket):
         save_file.delete_player_pals(player_id, pal_ids)
     if guild_id:
         save_file.delete_guild_pals(guild_id, base_id, pal_ids)
+
+
+async def delete_dps_pals_handler(message: DeleteDpsPalsMessage, _: WebSocket):
+    player_id = message.data.player_id
+    pal_indexes = message.data.pal_indexes
+    app_state = get_app_state()
+    save_file = app_state.save_file
+    save_file.delete_player_dps_pals(player_id, pal_indexes)
 
 
 async def heal_pals_handler(message: HealPalsMessage, _: WebSocket):

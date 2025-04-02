@@ -34,6 +34,30 @@ export const addPalHandler: WSMessageHandler = {
 	}
 };
 
+export const addDpsPalHandler: WSMessageHandler = {
+	type: MessageType.ADD_DPS_PAL,
+	async handle(data) {
+		const { player_id, pal, index } = data;
+		const nav = getNavigationState();
+
+		if (!pal) {
+			return;
+		}
+
+		if (player_id && appState.players) {
+			const palData = palsData.pals[pal.character_key];
+			pal.name = palData?.localized_name || pal.character_id;
+			pal.elements = palData?.element_types || [];
+			if (appState.players[player_id].dps) {
+				appState.players[player_id].dps[index] = pal;
+			}
+		}
+
+		appState.selectedPal = pal;
+		nav.activeTab = 'pal';
+	}
+};
+
 export const movePalHandler: WSMessageHandler = {
 	type: MessageType.MOVE_PAL,
 	async handle(data) {
@@ -54,4 +78,4 @@ export const movePalHandler: WSMessageHandler = {
 	}
 };
 
-export const palHandlers = [addPalHandler, movePalHandler];
+export const palHandlers = [addPalHandler, movePalHandler, addDpsPalHandler];

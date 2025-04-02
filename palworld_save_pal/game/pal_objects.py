@@ -91,7 +91,8 @@ class PalGender(str, PrefixedEnum):
             value = value.replace(PalGender._enum_prefix.value, "")
             return PalGender(value)
         except:
-            logger.warning("%s is not a valid gender", value)
+            logger.warning("%s is not a valid gender, defaulting to female", value)
+            return PalGender.FEMALE
 
 
 class PalRank(int, Enum):
@@ -533,6 +534,23 @@ class PalObjects:
     }
 
     @staticmethod
+    def GetStatusPointList(
+        prop_name: str, status_points: Dict[str, str]
+    ) -> Dict[str, Any]:
+        return PalObjects.ArrayProperty(
+            ArrayType.STRUCT_PROPERTY,
+            {
+                "prop_name": prop_name,
+                "prop_type": "StructProperty",
+                "values": [
+                    PalObjects.StatusPointStruct(name, 0) for name in status_points
+                ],
+                "type_name": "PalGotStatusPoint",
+                "id": PalObjects.EMPTY_UUID,
+            },
+        )
+
+    @staticmethod
     def PalSaveParameter(
         character_id: str,
         instance_id: UUID | str,
@@ -616,31 +634,11 @@ class PalObjects:
                                     "SlotID": PalObjects.PalCharacterSlotId(
                                         container_id, slot_idx
                                     ),
-                                    "GotStatusPointList": PalObjects.ArrayProperty(
-                                        ArrayType.STRUCT_PROPERTY,
-                                        {
-                                            "prop_name": "GotStatusPointList",
-                                            "prop_type": "StructProperty",
-                                            "values": [
-                                                PalObjects.StatusPointStruct(name, 0)
-                                                for name in PalObjects.StatusNames
-                                            ],
-                                            "type_name": "PalGotStatusPoint",
-                                            "id": PalObjects.EMPTY_UUID,
-                                        },
+                                    "GotStatusPointList": PalObjects.GetStatusPointList(
+                                        "GotStatusPointList", PalObjects.StatusNames
                                     ),
-                                    "GotExStatusPointList": PalObjects.ArrayProperty(
-                                        ArrayType.STRUCT_PROPERTY,
-                                        {
-                                            "prop_name": "GotExStatusPointList",
-                                            "prop_type": "StructProperty",
-                                            "values": [
-                                                PalObjects.StatusPointStruct(name, 0)
-                                                for name in PalObjects.ExStatusNames
-                                            ],
-                                            "type_name": "PalGotStatusPoint",
-                                            "id": PalObjects.EMPTY_UUID,
-                                        },
+                                    "GotExStatusPointList": PalObjects.GetStatusPointList(
+                                        "GotExStatusPointList", PalObjects.ExStatusNames
                                     ),
                                     "LastJumpedLocation": PalObjects.Vector(
                                         0, 0, 7088.5
