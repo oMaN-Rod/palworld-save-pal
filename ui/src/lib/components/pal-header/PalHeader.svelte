@@ -194,6 +194,7 @@
 	}
 
 	function formatBossCharacterId() {
+		pal.character_id = pal.character_id.replace('Boss_', 'BOSS_');
 		if (pal && (pal.is_boss || pal.is_lucky) && !pal.character_id.startsWith('BOSS_')) {
 			pal.character_id = `BOSS_${pal.character_id}`;
 		} else if (pal && !pal.is_boss && !pal.is_lucky && pal.character_id.startsWith('BOSS_')) {
