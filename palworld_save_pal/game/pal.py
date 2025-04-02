@@ -208,7 +208,7 @@ class Pal(BaseModel):
     @computed_field
     def is_boss(self) -> bool:
         self._is_boss = False
-        if self.character_id.startswith("BOSS_") and not self.is_lucky:
+        if self.character_id.upper().startswith("BOSS_") and not self.is_lucky:
             self._is_boss = True
         return self._is_boss
 
