@@ -17,6 +17,12 @@
 			label: player.nickname || `Player ${uid}`
 		}))
 	);
+
+	if (Object.keys(appState.players).length === 1) {
+        const singlePlayerId = Object.keys(appState.players)[0];
+        selected = singlePlayerId;
+        onselect(appState.players[singlePlayerId]);
+    }
 </script>
 
 <div class="w-full" {...additionalProps}>
