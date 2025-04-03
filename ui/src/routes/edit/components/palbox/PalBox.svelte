@@ -673,7 +673,6 @@
 		if (!appState.selectedPlayer) return;
 
 		const containerId = appState.selectedPlayer.pal_box_id;
-		let idCounter = 0;
 
 		const exclude = ['PREDATOR_', 'RAID_', 'GYM_', 'SUMMON_', '_Oilrig'];
 
@@ -689,7 +688,6 @@
 				character_id: key,
 				nickname,
 				container_id: containerId,
-				storage_slot: idCounter++
 			});
 		}
 
