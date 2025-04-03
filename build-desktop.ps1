@@ -96,6 +96,16 @@ Remove-Item -Path ".\ui_build\" -Recurse -Force
 # Create ZIP archive of the distribution files
 $zipPath = ".\dist\psp-windows-$version-standalone.zip"
 Write-Host "Creating ZIP archive at $zipPath..."
-Compress-Archive -Path "$distDir\*" -DestinationPath $zipPath -Force
+if (Test-Command '7za') {
+    & 7za a -tzip $zipPath "$distDir\*" -mx=9
+    if ($LASTEXITCODE -ne 0) {
+        Write-Error "7za failed to create the ZIP archive. Exiting."
+        exit 1
+    }
+    Write-Host "Created ZIP archive using 7za."
+}
+else {
+    Compress-Archive -Path "$distDir\*" -DestinationPath $zipPath -Force
+}
 
 Write-Host "Done building the desktop app."
