@@ -14674,7 +14674,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false
+    "disabled": true
   },
   "KingAlpaca": {
     "is_pal": true,
