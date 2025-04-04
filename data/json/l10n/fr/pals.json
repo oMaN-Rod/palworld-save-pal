@@ -19,60 +19,136 @@
     "localized_name": "Anubis",
     "description": "Son apparence faisait autrefois de lui un symbole de noblesse. Il est ainsi devenu un repère pour ceux qui méprisaient richesse et autorité. Puis un jour, Anubis est devenu symbole de mort."
   },
-  "Believer_Fat_GiantClub": {
-    "localized_name": "Brick",
+  "BOSS_Believer_CrossBow": {
+    "localized_name": "Recherché : Ego",
     "description": null
   },
-  "DarkTrader": {
-    "localized_name": "Ram",
+  "BOSS_Believer_Fat_GiantClub": {
+    "localized_name": "Recherché : Brick",
     "description": null
   },
-  "Female_DesertPeople": {
-    "localized_name": "Whisper",
+  "BOSS_DarkTrader": {
+    "localized_name": "Recherché : Ram",
     "description": null
   },
-  "Female_People": {
-    "localized_name": "Flare",
+  "BOSS_Female_DesertPeople": {
+    "localized_name": "Recherchée : Whisper",
     "description": null
   },
-  "Female_Soldier": {
-    "localized_name": "Jade",
+  "BOSS_Female_People": {
+    "localized_name": "Recherchée : Flare",
     "description": null
   },
-  "Male_DesertPeople": {
-    "localized_name": "Phantom",
+  "BOSS_Female_People02": {
+    "localized_name": "Recherchée : Siren",
     "description": null
   },
-  "Male_NinjaElite": {
-    "localized_name": "Urchin",
+  "BOSS_Female_People03": {
+    "localized_name": "Recherchée : Tanko",
     "description": null
   },
-  "Male_People": {
-    "localized_name": "Dyna",
+  "BOSS_Female_Soldier": {
+    "localized_name": "Recherchée : Jade",
     "description": null
   },
-  "Male_People2": {
-    "localized_name": "Mite",
+  "BOSS_Female_Soldier02": {
+    "localized_name": "Recherchée : Dazzle",
     "description": null
   },
-  "Male_Soldier": {
-    "localized_name": "Crash",
+  "BOSS_Female_Soldier03": {
+    "localized_name": "Recherchée : Aloha",
     "description": null
   },
-  "Ninja": {
-    "localized_name": "Fumble",
+  "BOSS_Female_Soldier04": {
+    "localized_name": "Recherchée : Nimble",
     "description": null
   },
-  "Police_old": {
-    "localized_name": "Pinch",
+  "BOSS_FireCult_FlameThrower": {
+    "localized_name": "Recherché : Shadow",
     "description": null
   },
-  "Scientist_LaserRifle": {
-    "localized_name": "Whisk",
+  "BOSS_Hunter_Fat_GatlingGun": {
+    "localized_name": "Recherché : Grill",
     "description": null
   },
-  "VikingElite": {
-    "localized_name": "Cache",
+  "BOSS_Hunter_Rifle": {
+    "localized_name": "Recherché : Hawk",
+    "description": null
+  },
+  "BOSS_Male_DesertPeople": {
+    "localized_name": "Recherché : Phantom",
+    "description": null
+  },
+  "BOSS_Male_NinjaElite": {
+    "localized_name": "Recherché : Urchin",
+    "description": null
+  },
+  "BOSS_Male_People": {
+    "localized_name": "Recherché : Dyna",
+    "description": null
+  },
+  "BOSS_Male_People02": {
+    "localized_name": "Recherché : Quill",
+    "description": null
+  },
+  "BOSS_Male_People03": {
+    "localized_name": "Recherché : Scoot",
+    "description": null
+  },
+  "BOSS_Male_People2": {
+    "localized_name": "Recherché : Mite",
+    "description": null
+  },
+  "BOSS_Male_Soldier": {
+    "localized_name": "Recherché : Crash",
+    "description": null
+  },
+  "BOSS_Male_Soldier02": {
+    "localized_name": "Recherché : Dart",
+    "description": null
+  },
+  "BOSS_Male_Soldier03": {
+    "localized_name": "Recherché : Clint",
+    "description": null
+  },
+  "BOSS_Male_Soldier04": {
+    "localized_name": "Recherché : Lasso",
+    "description": null
+  },
+  "BOSS_Male_Trader01": {
+    "localized_name": "Recherché : Skim",
+    "description": null
+  },
+  "BOSS_Male_Trader02": {
+    "localized_name": "Recherché : Mimic",
+    "description": null
+  },
+  "BOSS_Male_Trader03": {
+    "localized_name": "Recherché : Billy",
+    "description": null
+  },
+  "BOSS_Ninja": {
+    "localized_name": "Recherché : Fumble",
+    "description": null
+  },
+  "BOSS_Police_Rifle": {
+    "localized_name": "Recherché : Whip",
+    "description": null
+  },
+  "BOSS_Police_old": {
+    "localized_name": "Recherché : Pinch",
+    "description": null
+  },
+  "BOSS_Scientist_LaserRifle": {
+    "localized_name": "Recherché : Whisk",
+    "description": null
+  },
+  "BOSS_Viking": {
+    "localized_name": "Recherché : Gnaw",
+    "description": null
+  },
+  "BOSS_VikingElite": {
+    "localized_name": "Recherché : Cache",
     "description": null
   },
   "BadCatgirl": {

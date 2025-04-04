@@ -19,60 +19,136 @@
     "localized_name": "阿努比斯",
     "description": "它的外表曾被视作高贵的象征。 而在那些蔑视权贵的人眼里，它就成了醒目的标靶。 于是在不知不觉间，阿努比斯成为了死亡的象征。"
   },
-  "Believer_Fat_GiantClub": {
-    "localized_name": "布里克",
+  "BOSS_Believer_CrossBow": {
+    "localized_name": "通缉犯 埃戈",
     "description": null
   },
-  "DarkTrader": {
-    "localized_name": "拉姆",
+  "BOSS_Believer_Fat_GiantClub": {
+    "localized_name": "通缉犯 布里克",
     "description": null
   },
-  "Female_DesertPeople": {
-    "localized_name": "低语",
+  "BOSS_DarkTrader": {
+    "localized_name": "通缉犯 拉姆",
     "description": null
   },
-  "Female_People": {
-    "localized_name": "芙蕾雅",
+  "BOSS_Female_DesertPeople": {
+    "localized_name": "通缉犯 低语",
     "description": null
   },
-  "Female_Soldier": {
-    "localized_name": "姬蒂",
+  "BOSS_Female_People": {
+    "localized_name": "通缉犯 芙蕾雅",
     "description": null
   },
-  "Male_DesertPeople": {
-    "localized_name": "幻影",
+  "BOSS_Female_People02": {
+    "localized_name": "通缉犯 赛莲",
     "description": null
   },
-  "Male_NinjaElite": {
-    "localized_name": "厄棘",
+  "BOSS_Female_People03": {
+    "localized_name": "通缉犯 逆裳",
     "description": null
   },
-  "Male_People": {
-    "localized_name": "戴拿",
+  "BOSS_Female_Soldier": {
+    "localized_name": "通缉犯 姬蒂",
     "description": null
   },
-  "Male_People2": {
-    "localized_name": "麦特",
+  "BOSS_Female_Soldier02": {
+    "localized_name": "通缉犯 黛姿",
     "description": null
   },
-  "Male_Soldier": {
-    "localized_name": "克雷斯",
+  "BOSS_Female_Soldier03": {
+    "localized_name": "通缉犯 阿罗哈",
     "description": null
   },
-  "Ninja": {
-    "localized_name": "方博",
+  "BOSS_Female_Soldier04": {
+    "localized_name": "通缉犯 妮波",
     "description": null
   },
-  "Police_old": {
-    "localized_name": "狄奇",
+  "BOSS_FireCult_FlameThrower": {
+    "localized_name": "通缉犯 暗影",
     "description": null
   },
-  "Scientist_LaserRifle": {
-    "localized_name": "威斯克",
+  "BOSS_Hunter_Fat_GatlingGun": {
+    "localized_name": "通缉犯 格里尔",
     "description": null
   },
-  "VikingElite": {
-    "localized_name": "卡什",
+  "BOSS_Hunter_Rifle": {
+    "localized_name": "通缉犯 霍克",
+    "description": null
+  },
+  "BOSS_Male_DesertPeople": {
+    "localized_name": "通缉犯 幻影",
+    "description": null
+  },
+  "BOSS_Male_NinjaElite": {
+    "localized_name": "通缉犯 厄棘",
+    "description": null
+  },
+  "BOSS_Male_People": {
+    "localized_name": "通缉犯 戴拿",
+    "description": null
+  },
+  "BOSS_Male_People02": {
+    "localized_name": "通缉犯 柯伊尔",
+    "description": null
+  },
+  "BOSS_Male_People03": {
+    "localized_name": "通缉犯 斯科特",
+    "description": null
+  },
+  "BOSS_Male_People2": {
+    "localized_name": "通缉犯 麦特",
+    "description": null
+  },
+  "BOSS_Male_Soldier": {
+    "localized_name": "通缉犯 克雷斯",
+    "description": null
+  },
+  "BOSS_Male_Soldier02": {
+    "localized_name": "通缉犯 达特",
+    "description": null
+  },
+  "BOSS_Male_Soldier03": {
+    "localized_name": "通缉犯 克林特",
+    "description": null
+  },
+  "BOSS_Male_Soldier04": {
+    "localized_name": "通缉犯 拉索",
+    "description": null
+  },
+  "BOSS_Male_Trader01": {
+    "localized_name": "通缉犯 斯吉姆",
+    "description": null
+  },
+  "BOSS_Male_Trader02": {
+    "localized_name": "通缉犯 模仿者",
+    "description": null
+  },
+  "BOSS_Male_Trader03": {
+    "localized_name": "通缉犯 比利",
+    "description": null
+  },
+  "BOSS_Ninja": {
+    "localized_name": "通缉犯 方博",
+    "description": null
+  },
+  "BOSS_Police_Rifle": {
+    "localized_name": "通缉犯 威普",
+    "description": null
+  },
+  "BOSS_Police_old": {
+    "localized_name": "通缉犯 狄奇",
+    "description": null
+  },
+  "BOSS_Scientist_LaserRifle": {
+    "localized_name": "通缉犯 威斯克",
+    "description": null
+  },
+  "BOSS_Viking": {
+    "localized_name": "通缉犯 奈尔",
+    "description": null
+  },
+  "BOSS_VikingElite": {
+    "localized_name": "通缉犯 卡什",
     "description": null
   },
   "BadCatgirl": {

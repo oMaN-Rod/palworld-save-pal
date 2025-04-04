@@ -19,60 +19,136 @@
     "localized_name": "Анубис",
     "description": "Благодаря своему облику когда-то считался символом знати. Для тех, кто богатство и власть не жаловал, служил олицетворением оных. В какой-то момент превратился в символ смерти."
   },
-  "Believer_Fat_GiantClub": {
-    "localized_name": "Кирпич",
+  "BOSS_Believer_CrossBow": {
+    "localized_name": "Награда за голову: Эго",
     "description": null
   },
-  "DarkTrader": {
-    "localized_name": "Рам",
+  "BOSS_Believer_Fat_GiantClub": {
+    "localized_name": "Награда за голову: Кирпич",
     "description": null
   },
-  "Female_DesertPeople": {
-    "localized_name": "Шепот",
+  "BOSS_DarkTrader": {
+    "localized_name": "Награда за голову: Рам",
     "description": null
   },
-  "Female_People": {
-    "localized_name": "Огонек",
+  "BOSS_Female_DesertPeople": {
+    "localized_name": "Награда за голову: Шепот",
     "description": null
   },
-  "Female_Soldier": {
-    "localized_name": "Джейд",
+  "BOSS_Female_People": {
+    "localized_name": "Награда за голову: Огонек",
     "description": null
   },
-  "Male_DesertPeople": {
-    "localized_name": "Фантом",
+  "BOSS_Female_People02": {
+    "localized_name": "Награда за голову: Сирена",
     "description": null
   },
-  "Male_NinjaElite": {
-    "localized_name": "Урчин",
+  "BOSS_Female_People03": {
+    "localized_name": "Награда за голову: Танко",
     "description": null
   },
-  "Male_People": {
-    "localized_name": "Дина",
+  "BOSS_Female_Soldier": {
+    "localized_name": "Награда за голову: Джейд",
     "description": null
   },
-  "Male_People2": {
-    "localized_name": "Мит",
+  "BOSS_Female_Soldier02": {
+    "localized_name": "Награда за голову: Мишура",
     "description": null
   },
-  "Male_Soldier": {
-    "localized_name": "Краш",
+  "BOSS_Female_Soldier03": {
+    "localized_name": "Награда за голову: Алоха",
     "description": null
   },
-  "Ninja": {
-    "localized_name": "Мямля",
+  "BOSS_Female_Soldier04": {
+    "localized_name": "Награда за голову: Ловкач",
     "description": null
   },
-  "Police_old": {
-    "localized_name": "Пинч",
+  "BOSS_FireCult_FlameThrower": {
+    "localized_name": "Награда за голову: Тень",
     "description": null
   },
-  "Scientist_LaserRifle": {
-    "localized_name": "Виск",
+  "BOSS_Hunter_Fat_GatlingGun": {
+    "localized_name": "Награда за голову: Гриль",
     "description": null
   },
-  "VikingElite": {
-    "localized_name": "Схрон",
+  "BOSS_Hunter_Rifle": {
+    "localized_name": "Награда за голову: Ястреб",
+    "description": null
+  },
+  "BOSS_Male_DesertPeople": {
+    "localized_name": "Награда за голову: Фантом",
+    "description": null
+  },
+  "BOSS_Male_NinjaElite": {
+    "localized_name": "Награда за голову: Урчин",
+    "description": null
+  },
+  "BOSS_Male_People": {
+    "localized_name": "Награда за голову: Дина",
+    "description": null
+  },
+  "BOSS_Male_People02": {
+    "localized_name": "Награда за голову: Квилл",
+    "description": null
+  },
+  "BOSS_Male_People03": {
+    "localized_name": "Награда за голову: Скут",
+    "description": null
+  },
+  "BOSS_Male_People2": {
+    "localized_name": "Награда за голову: Мит",
+    "description": null
+  },
+  "BOSS_Male_Soldier": {
+    "localized_name": "Награда за голову: Краш",
+    "description": null
+  },
+  "BOSS_Male_Soldier02": {
+    "localized_name": "Награда за голову: Окурок",
+    "description": null
+  },
+  "BOSS_Male_Soldier03": {
+    "localized_name": "Награда за голову: Клинт",
+    "description": null
+  },
+  "BOSS_Male_Soldier04": {
+    "localized_name": "Награда за голову: Лассо",
+    "description": null
+  },
+  "BOSS_Male_Trader01": {
+    "localized_name": "Награда за голову: Ским",
+    "description": null
+  },
+  "BOSS_Male_Trader02": {
+    "localized_name": "Награда за голову: Мимик",
+    "description": null
+  },
+  "BOSS_Male_Trader03": {
+    "localized_name": "Награда за голову: Билли",
+    "description": null
+  },
+  "BOSS_Ninja": {
+    "localized_name": "Награда за голову: Мямля",
+    "description": null
+  },
+  "BOSS_Police_Rifle": {
+    "localized_name": "Награда за голову: Кнут",
+    "description": null
+  },
+  "BOSS_Police_old": {
+    "localized_name": "Награда за голову: Пинч",
+    "description": null
+  },
+  "BOSS_Scientist_LaserRifle": {
+    "localized_name": "Награда за голову: Виск",
+    "description": null
+  },
+  "BOSS_Viking": {
+    "localized_name": "Награда за голову: Глод",
+    "description": null
+  },
+  "BOSS_VikingElite": {
+    "localized_name": "Награда за голову: Схрон",
     "description": null
   },
   "BadCatgirl": {

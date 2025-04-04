@@ -19,60 +19,136 @@
     "localized_name": "Anubis",
     "description": "Devido ao seu aspecto, já foi considerado símbolo da nobreza. Para os mais distantes da fortuna e do poder, já serviu como ideal de aparência. Em algum momento, contudo, Anubis passou a ser símbolo da morte."
   },
-  "Believer_Fat_GiantClub": {
-    "localized_name": "Brick",
+  "BOSS_Believer_CrossBow": {
+    "localized_name": "Ego - Recompensa",
     "description": null
   },
-  "DarkTrader": {
-    "localized_name": "Ram",
+  "BOSS_Believer_Fat_GiantClub": {
+    "localized_name": "Brick - Recompensa",
     "description": null
   },
-  "Female_DesertPeople": {
-    "localized_name": "Whisper",
+  "BOSS_DarkTrader": {
+    "localized_name": "Ram - Recompensa",
     "description": null
   },
-  "Female_People": {
-    "localized_name": "Flare",
+  "BOSS_Female_DesertPeople": {
+    "localized_name": "Whisper - Recompensa",
     "description": null
   },
-  "Female_Soldier": {
-    "localized_name": "Jade",
+  "BOSS_Female_People": {
+    "localized_name": "Flare - Recompensa",
     "description": null
   },
-  "Male_DesertPeople": {
-    "localized_name": "Phantom",
+  "BOSS_Female_People02": {
+    "localized_name": "Siren - Recompensa",
     "description": null
   },
-  "Male_NinjaElite": {
-    "localized_name": "Urchin",
+  "BOSS_Female_People03": {
+    "localized_name": "Turncoat - Recompensa",
     "description": null
   },
-  "Male_People": {
-    "localized_name": "Dyna",
+  "BOSS_Female_Soldier": {
+    "localized_name": "Jade - Recompensa",
     "description": null
   },
-  "Male_People2": {
-    "localized_name": "Mite",
+  "BOSS_Female_Soldier02": {
+    "localized_name": "Dazzle - Recompensa",
     "description": null
   },
-  "Male_Soldier": {
-    "localized_name": "Crash",
+  "BOSS_Female_Soldier03": {
+    "localized_name": "Aloha - Recompensa",
     "description": null
   },
-  "Ninja": {
-    "localized_name": "Fumble",
+  "BOSS_Female_Soldier04": {
+    "localized_name": "Nimble - Recompensa",
     "description": null
   },
-  "Police_old": {
-    "localized_name": "Pinch",
+  "BOSS_FireCult_FlameThrower": {
+    "localized_name": "Shadow - Recompensa",
     "description": null
   },
-  "Scientist_LaserRifle": {
-    "localized_name": "Whisk",
+  "BOSS_Hunter_Fat_GatlingGun": {
+    "localized_name": "Grill - Recompensa",
     "description": null
   },
-  "VikingElite": {
-    "localized_name": "Cache",
+  "BOSS_Hunter_Rifle": {
+    "localized_name": "Hawk - Recompensa",
+    "description": null
+  },
+  "BOSS_Male_DesertPeople": {
+    "localized_name": "Phantom - Recompensa",
+    "description": null
+  },
+  "BOSS_Male_NinjaElite": {
+    "localized_name": "Urchin - Recompensa",
+    "description": null
+  },
+  "BOSS_Male_People": {
+    "localized_name": "Dyna - Recompensa",
+    "description": null
+  },
+  "BOSS_Male_People02": {
+    "localized_name": "Quill - Recompensa",
+    "description": null
+  },
+  "BOSS_Male_People03": {
+    "localized_name": "Scoot - Recompensa",
+    "description": null
+  },
+  "BOSS_Male_People2": {
+    "localized_name": "Mite - Recompensa",
+    "description": null
+  },
+  "BOSS_Male_Soldier": {
+    "localized_name": "Crash - Recompensa",
+    "description": null
+  },
+  "BOSS_Male_Soldier02": {
+    "localized_name": "Dart - Recompensa",
+    "description": null
+  },
+  "BOSS_Male_Soldier03": {
+    "localized_name": "Clint - Recompensa",
+    "description": null
+  },
+  "BOSS_Male_Soldier04": {
+    "localized_name": "Lasso - Recompensa",
+    "description": null
+  },
+  "BOSS_Male_Trader01": {
+    "localized_name": "Skim - Recompensa",
+    "description": null
+  },
+  "BOSS_Male_Trader02": {
+    "localized_name": "Mimic - Recompensa",
+    "description": null
+  },
+  "BOSS_Male_Trader03": {
+    "localized_name": "Billy - Recompensa",
+    "description": null
+  },
+  "BOSS_Ninja": {
+    "localized_name": "Fumble - Recompensa",
+    "description": null
+  },
+  "BOSS_Police_Rifle": {
+    "localized_name": "Whip - Recompensa",
+    "description": null
+  },
+  "BOSS_Police_old": {
+    "localized_name": "Pinch - Recompensa",
+    "description": null
+  },
+  "BOSS_Scientist_LaserRifle": {
+    "localized_name": "Whisk - Recompensa",
+    "description": null
+  },
+  "BOSS_Viking": {
+    "localized_name": "Gnaw - Recompensa",
+    "description": null
+  },
+  "BOSS_VikingElite": {
+    "localized_name": "Cache - Recompensa",
     "description": null
   },
   "BadCatgirl": {

@@ -19,59 +19,135 @@
     "localized_name": "Anubis",
     "description": "Once seen as a symbol of nobility, and an idol for those who shunned wealth and power. Yet over time, this Pal became a token of death."
   },
-  "Believer_Fat_GiantClub": {
+  "BOSS_Believer_CrossBow": {
+    "localized_name": "Ego",
+    "description": null
+  },
+  "BOSS_Believer_Fat_GiantClub": {
     "localized_name": "Brick",
     "description": null
   },
-  "DarkTrader": {
+  "BOSS_DarkTrader": {
     "localized_name": "Ram",
     "description": null
   },
-  "Female_DesertPeople": {
+  "BOSS_Female_DesertPeople": {
     "localized_name": "Whisper",
     "description": null
   },
-  "Female_People": {
+  "BOSS_Female_People": {
     "localized_name": "Flare",
     "description": null
   },
-  "Female_Soldier": {
+  "BOSS_Female_People02": {
+    "localized_name": "Siren",
+    "description": null
+  },
+  "BOSS_Female_People03": {
+    "localized_name": "Turncoat",
+    "description": null
+  },
+  "BOSS_Female_Soldier": {
     "localized_name": "Jade",
     "description": null
   },
-  "Male_DesertPeople": {
+  "BOSS_Female_Soldier02": {
+    "localized_name": "Dazzle",
+    "description": null
+  },
+  "BOSS_Female_Soldier03": {
+    "localized_name": "Aloha",
+    "description": null
+  },
+  "BOSS_Female_Soldier04": {
+    "localized_name": "Nimble",
+    "description": null
+  },
+  "BOSS_FireCult_FlameThrower": {
+    "localized_name": "Shadow",
+    "description": null
+  },
+  "BOSS_Hunter_Fat_GatlingGun": {
+    "localized_name": "Grill",
+    "description": null
+  },
+  "BOSS_Hunter_Rifle": {
+    "localized_name": "Hawk",
+    "description": null
+  },
+  "BOSS_Male_DesertPeople": {
     "localized_name": "Phantom",
     "description": null
   },
-  "Male_NinjaElite": {
+  "BOSS_Male_NinjaElite": {
     "localized_name": "Urchin",
     "description": null
   },
-  "Male_People": {
+  "BOSS_Male_People": {
     "localized_name": "Dyna",
     "description": null
   },
-  "Male_People2": {
+  "BOSS_Male_People02": {
+    "localized_name": "Quill",
+    "description": null
+  },
+  "BOSS_Male_People03": {
+    "localized_name": "Scoot",
+    "description": null
+  },
+  "BOSS_Male_People2": {
     "localized_name": "Mite",
     "description": null
   },
-  "Male_Soldier": {
+  "BOSS_Male_Soldier": {
     "localized_name": "Crash",
     "description": null
   },
-  "Ninja": {
+  "BOSS_Male_Soldier02": {
+    "localized_name": "Dart",
+    "description": null
+  },
+  "BOSS_Male_Soldier03": {
+    "localized_name": "Clint",
+    "description": null
+  },
+  "BOSS_Male_Soldier04": {
+    "localized_name": "Lasso",
+    "description": null
+  },
+  "BOSS_Male_Trader01": {
+    "localized_name": "Skim",
+    "description": null
+  },
+  "BOSS_Male_Trader02": {
+    "localized_name": "Mimic",
+    "description": null
+  },
+  "BOSS_Male_Trader03": {
+    "localized_name": "Billy",
+    "description": null
+  },
+  "BOSS_Ninja": {
     "localized_name": "Fumble",
     "description": null
   },
-  "Police_old": {
+  "BOSS_Police_Rifle": {
+    "localized_name": "Whip",
+    "description": null
+  },
+  "BOSS_Police_old": {
     "localized_name": "Pinch",
     "description": null
   },
-  "Scientist_LaserRifle": {
+  "BOSS_Scientist_LaserRifle": {
     "localized_name": "Whisk",
     "description": null
   },
-  "VikingElite": {
+  "BOSS_Viking": {
+    "localized_name": "Gnaw",
+    "description": null
+  },
+  "BOSS_VikingElite": {
     "localized_name": "Cache",
     "description": null
   },
