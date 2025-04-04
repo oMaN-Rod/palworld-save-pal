@@ -142,7 +142,9 @@
 
 	let pals = $derived.by(() => {
 		if (!appState.selectedPlayer || !appState.selectedPlayer.dps) return;
-		const playerPals = Object.entries(appState.selectedPlayer.dps);
+		const playerPals = Object.entries(appState.selectedPlayer.dps).filter(
+			([_, pal]) => pal && pal.character_id !== 'None'
+		);
 		return playerPals.map(([i, pal]) => {
 			const palData = palsData.pals[pal.character_key];
 			return { id: pal.instance_id, index: i as unknown as number, pal, palData };
