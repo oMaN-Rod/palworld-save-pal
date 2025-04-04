@@ -3,8 +3,8 @@
 	import { elementsData, palsData } from '$lib/data';
 	import { getAppState, getModalState, getToastState } from '$states';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
-	import { Input, Tooltip, TooltipButton } from '$components/ui';
-	import { PalSelectModal } from '$components/modals';
+	import { Card, Input, Tooltip, TooltipButton } from '$components/ui';
+	import { PalSelectModal, FillPalsModal } from '$components/modals';
 	import { type ElementType, type Pal, type PalData, MessageType } from '$types';
 	import { assetLoader, debounce, calculateFilters, formatNickname } from '$utils';
 	import { cn } from '$theme';
@@ -21,9 +21,11 @@
 		ArrowDownWideNarrow,
 		ArrowDownNarrowWide,
 		User,
-		ReplaceAll
+		ReplaceAll,
+		CircleFadingPlus,
+		Info
 	} from 'lucide-svelte';
-	import { PalBadge } from '$components';
+	import { PalBadge, PalContainerStats } from '$components';
 	import { send } from '$lib/utils/websocketUtils';
 
 	const PALS_PER_PAGE = 30;
@@ -363,16 +365,16 @@
 		});
 
 		if (appState.selectedPlayer && appState.selectedPlayer.dps && confirmed) {
-			const palIndexes = Object.keys(appState.selectedPlayer.dps).filter((id) =>
-				selectedPals.includes(id)
-			);
+			const palIndexes = Object.entries(appState.selectedPlayer.dps)
+				.filter(([_, pal]) => selectedPals.includes(pal.instance_id))
+				.map(([index]) => index);
 			send(MessageType.DELETE_DPS_PALS, {
 				player_id: appState.selectedPlayer.uid,
 				pal_indexes: palIndexes
 			});
 
 			appState.selectedPlayer.dps = Object.fromEntries(
-				Object.entries(appState.selectedPlayer.dps).filter(([id]) => !selectedPals.includes(id))
+				Object.entries(appState.selectedPlayer.dps).filter(([idx, _]) => !palIndexes.includes(idx))
 			);
 		}
 
@@ -449,12 +451,30 @@
 			debouncedFilterPals();
 		}
 	});
+
+	async function addAllPalsDps() {
+		if (!appState.selectedPlayer) return;
+		// @ts-ignore
+		await modal.showModal<string>(FillPalsModal, {
+			title: 'Fill Dimensional Pal Storage',
+			player: appState.selectedPlayer,
+			target: 'dps'
+		});
+	}
 </script>
 
 {#if appState.selectedPlayer}
-	<div class="grid h-full w-full grid-cols-[25%_1fr]" {...additionalProps}>
+	<div
+		class="grid h-full w-full grid-cols-[25%_1fr] 2xl:grid-cols-[25%_1fr_20%]"
+		{...additionalProps}
+	>
 		<div class="shrink-0 p-4">
 			<div class="btn-group bg-surface-900 mb-2 w-full items-center rounded-sm p-1">
+				<Tooltip position="right" label="Add all pals to your Pal Box">
+					<button class="btn hover:preset-tonal-secondary p-2" onclick={addAllPalsDps}>
+						<CircleFadingPlus />
+					</button>
+				</Tooltip>
 				<Tooltip>
 					<button class="btn hover:preset-tonal-secondary p-2" onclick={handleSelectAll}>
 						<ReplaceAll />
@@ -474,6 +494,7 @@
 						</div>
 					{/snippet}
 				</Tooltip>
+
 				{#if selectedPals.length >= 1}
 					<Tooltip label="Delete selected pal(s)">
 						<button class="btn hover:preset-tonal-secondary p-2" onclick={deleteSelectedPals}>
@@ -629,6 +650,23 @@
 						</div>
 					{/snippet}
 				</Accordion.Item>
+				<Accordion.Item
+					value="stats"
+					base="block 2xl:hidden rounded-sm bg-surface-900"
+					controlHover="hover:bg-secondary-500/25"
+				>
+					{#snippet lead()}<Info />{/snippet}
+					{#snippet control()}
+						<span class="font-bold">Stats</span>
+					{/snippet}
+					{#snippet panel()}
+						{#if pals && pals.length > 0}
+							<PalContainerStats {pals} {elementTypes} />
+						{:else}
+							<div>No pals data available</div>
+						{/if}
+					{/snippet}
+				</Accordion.Item>
 			</Accordion>
 		</div>
 
@@ -676,6 +714,16 @@
 				</div>
 			</div>
 		</div>
+
+		{#if pals && pals.length > 0}
+			<Card class="mr-2 hidden h-[430px] 2xl:block">
+				<PalContainerStats {pals} {elementTypes} />
+			</Card>
+		{:else}
+			<Card class="mr-2 hidden h-[430px] 2xl:block">
+				<div>No pals data available</div>
+			</Card>
+		{/if}
 	</div>
 {:else}
 	<div class="flex w-full items-center justify-center">

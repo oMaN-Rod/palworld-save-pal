@@ -15,6 +15,8 @@ class StorageContainerPreset(SQLModel):
 
 class PalPresetDTO(BaseModel):
     lock: bool
+    lock_element: bool
+    element: Optional[str]
     character_id: Optional[str]
     is_lucky: Optional[bool]
     is_boss: Optional[bool]
@@ -54,6 +56,8 @@ class PresetProfileDTO(BaseModel):
 class PalPreset(SQLModel, table=True):
     id: str = Field(default_factory=lambda: str(uuid4()), primary_key=True)
     lock: bool = Field(sa_column=Column(Boolean, nullable=False))
+    lock_element: bool = Field(sa_column=Column(Boolean, nullable=False), default=False)
+    element: Optional[str] = Field(default=None, sa_column=Column(String))
     character_id: Optional[str] = Field(default=None, sa_column=Column(String))
     is_lucky: Optional[bool] = Field(default=None, sa_column=Column(Boolean))
     is_boss: Optional[bool] = Field(default=None, sa_column=Column(Boolean))

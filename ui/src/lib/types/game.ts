@@ -286,11 +286,20 @@ export const palPresetNameDescriptionMap: Record<keyof PalPreset, PalPresetNameD
 		label: 'Lock Pal',
 		description: 'Lock specific Pal to preset, can only be used on this Pal'
 	},
+	lock_element: {
+		label: 'Lock Element',
+		description: `Lock the element type of the Pal in this preset. This will restrict the Pal to only being of the specified element types.`
+	},
+	element: {
+		label: 'Element Type',
+		description: `Specify the element type for the Pal in this preset. This will restrict the Pal to only being of the specified element types.`
+	},
 	character_id: { label: 'Pal', description: '' }
 };
 
 export const defaultPresetConfig: PalPresetConfig = {
 	lock: false,
+	lock_element: false,
 	character_id: false,
 	is_lucky: true,
 	is_boss: true,
@@ -314,6 +323,8 @@ export const defaultPresetConfig: PalPresetConfig = {
 
 export type PalPreset = {
 	lock: boolean;
+	lock_element?: boolean;
+	element?: ElementType;
 	character_id?: string;
 	is_lucky?: boolean;
 	is_boss?: boolean;

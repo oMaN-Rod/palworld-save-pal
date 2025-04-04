@@ -46,7 +46,7 @@ async def update_save_file_handler(message: UpdateSaveFileMessage, ws: WebSocket
     if modified_guilds:
         await save_file.update_guilds(modified_guilds, ws_callback)
     if modified_dps_pals:
-        await save_file.update_dsp_pals(modified_dps_pals, ws_callback)
+        await save_file.update_dps_pals(modified_dps_pals, ws_callback)
 
     app_state.players = save_file.get_players()
     response = build_response(MessageType.UPDATE_SAVE_FILE, "Changes saved")

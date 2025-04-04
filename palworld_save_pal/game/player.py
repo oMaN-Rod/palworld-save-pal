@@ -14,7 +14,7 @@ from palworld_save_pal.game.guild import Guild
 from palworld_save_pal.game.map import WorldMapPoint
 from palworld_save_pal.game.pal import Pal, PalDTO
 from palworld_save_pal.game.item_container import ItemContainer, ItemContainerType
-from palworld_save_pal.game.pal_objects import PalObjects
+from palworld_save_pal.game.pal_objects import PalGender, PalObjects
 from palworld_save_pal.utils.dict import safe_remove
 from palworld_save_pal.utils.uuid import are_equal_uuids
 from palworld_save_pal.utils.logging_config import create_logger
@@ -126,6 +126,8 @@ class Player(BaseModel):
             self._load_inventory(item_container_save_data, dynamic_item_save_data)
             self._load_pal_box(character_container_save_data)
             self._load_otomo_container(character_container_save_data)
+            if self._player_gvas_files.dps:
+                self._load_dps()
 
     @computed_field
     def guild_id(self) -> Optional[UUID]:
@@ -408,17 +410,6 @@ class Player(BaseModel):
 
     @computed_field
     def dps(self) -> Dict[int, Pal]:
-        self._dps = {}
-        if not self._player_gvas_files.dps:
-            return
-        for index, entry in enumerate(
-            PalObjects.get_array_property(
-                self._player_gvas_files.dps.properties["SaveParameterArray"]
-            )
-        ):
-            pal = Pal(data=entry, dps=True)
-            if pal.character_id != "None":
-                self._dps[index] = pal
         return self._dps
 
     @property
@@ -430,6 +421,11 @@ class Player(BaseModel):
         return {
             "character_save": {**self._character_save},
             "gvas_properties": {**self._player_gvas_files.sav.properties},
+            "dps_gvas_properties": (
+                {**self._player_gvas_files.dps.properties}
+                if self._player_gvas_files.dps
+                else {}
+            ),
         }
 
     def add_pal(
@@ -459,7 +455,7 @@ class Player(BaseModel):
             nickname=nickname,
         )
         new_pal = Pal(new_pal_data)
-
+        new_pal.hp = new_pal.max_hp
         if not self.pals:
             self.pals = {}
         self.pals[new_pal_id] = new_pal
@@ -471,11 +467,16 @@ class Player(BaseModel):
         self,
         character_id: str,
         nickname: str,
-        storage_slot: int,
+        storage_slot: Optional[int] = None,
     ) -> Optional[Pal]:
+        slot_idx = (
+            storage_slot
+            if storage_slot is not None
+            else self._find_first_empty_dps_slot()
+        )
         pal_data = PalObjects.get_array_property(
             self._player_gvas_files.dps.properties["SaveParameterArray"]
-        )[storage_slot]
+        )[slot_idx]
 
         pal = Pal(data=pal_data, dps=True)
         pal.instance_id = uuid.uuid4()
@@ -484,11 +485,14 @@ class Player(BaseModel):
         pal.filtered_nickname = nickname
         pal.storage_id = self.pal_box_id
         pal.storage_slot = 0
+        pal.gender = PalGender.FEMALE
         pal.populate_status_point_lists()
-        return pal
+        pal.hp = pal.max_hp
+        self._dps[slot_idx] = pal
+        return slot_idx, pal
 
     def update_dps_pal(self, index: int, pal_dto: PalDTO):
-        pal = self.dps[index]
+        pal = self._dps[index]
         pal.update_from(pal_dto)
 
     def move_pal(self, pal_id: UUID, container_id: UUID):
@@ -718,3 +722,40 @@ class Player(BaseModel):
         self._load_food_equip_container(
             inventory_info, item_container_save_data, dynamic_item_save_data
         )
+
+    def _find_first_empty_dps_slot(self) -> Optional[int]:
+        if not self._player_gvas_files.dps:
+            return None
+        for index, entry in enumerate(
+            PalObjects.get_array_property(
+                self._player_gvas_files.dps.properties["SaveParameterArray"]
+            )
+        ):
+            save_parameter = PalObjects.get_value(entry["SaveParameter"])
+            character_id = (
+                PalObjects.get_value(save_parameter["CharacterID"])
+                if "CharacterID" in save_parameter
+                else None
+            )
+            if character_id is None or character_id == "None":
+                logger.debug(
+                    "Found empty DPS slot at index %s for player %s (%s)",
+                    index,
+                    self.nickname,
+                    str(self.uid),
+                )
+                return index
+        return None
+
+    def _load_dps(self) -> None:
+        self._dps = {}
+        if not self._player_gvas_files.dps:
+            return
+        for index, entry in enumerate(
+            PalObjects.get_array_property(
+                self._player_gvas_files.dps.properties["SaveParameterArray"]
+            )
+        ):
+            pal = Pal(data=entry, dps=True)
+            if pal.character_id != "None":
+                self._dps[index] = pal

@@ -74,6 +74,8 @@
 				? activeSkillPresets.find((p) => p.id === selectedActiveSkillPreset)
 				: passiveSkillPresets.find((p) => p.id === selectedPassiveSkillPreset);
 		if (!preset) return;
+		selectedActiveSkillPreset = '';
+		selectedPassiveSkillPreset = '';
 		onSelect(type, deepCopy(preset.skills));
 	}
 

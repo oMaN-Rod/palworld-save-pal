@@ -1,32 +1,39 @@
 <script lang="ts">
 	import { Card, Input } from '$components/ui';
 	import Tooltip from '$components/ui/tooltip/Tooltip.svelte';
-	import { getToastState } from '$states';
+	import { elementsData } from '$lib/data';
 	import {
 		palPresetNameDescriptionMap,
 		type PalPresetConfig,
 		type PalPresetPropertyNames
 	} from '$types';
+	import { ASSET_DATA_PATH } from '$types/icons';
+	import { assetLoader } from '$utils';
 	import { Switch } from '@skeletonlabs/skeleton-svelte';
 	import { Save, X } from 'lucide-svelte';
 
-	const toast = getToastState();
+	const ignoreKeys = ['character_id', 'element'];
 
-	let {
-		config,
-		characterId = '',
-		closeModal
-	} = $props<{
+	let { config, palName, element, closeModal } = $props<{
 		config: PalPresetConfig;
-		characterId: string;
+		palName: string;
+		element: string;
 		closeModal: (value: any) => void;
 	}>();
 
 	let name: string = $state('');
 
+	const elementIcon = $derived.by(() => {
+		const elementData = elementsData.elements[element];
+		if (!elementData) {
+			return '';
+		}
+		return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${elementData.badge_icon}.png`);
+	});
+
 	function handleClose(value: any) {
 		if (value) {
-			closeModal({ name, config, characterId });
+			closeModal({ name, config });
 		} else {
 			closeModal(null);
 		}
@@ -38,15 +45,22 @@
 
 	<div class="mt-2 flex flex-col space-y-4">
 		<Input inputClass="grow" bind:value={name} label="Name" />
-		{#if config.lock}
-			<Input inputClass="grow" value={characterId} label="Pal" disabled />
-		{/if}
+
+		<div class="flex items-center space-x-2">
+			{#if config.lock}
+				<Input inputClass="grow" value={palName} label="Pal" disabled />
+			{/if}
+
+			{#if config.lock_element}
+				<img src={elementIcon} alt={element} class="h-8 w-8" />
+			{/if}
+		</div>
 
 		<div class="grid max-h-[60vh] grid-cols-3 gap-2 overflow-y-auto p-2">
 			{#each Object.entries(config) as [property, _]}
-				{#if !property.includes('character_id')}
+				{#if !ignoreKeys.includes(property as string)}
 					<div class="flex space-x-2">
-						<Tooltip position="right">
+						<Tooltip position="right" baseClass="flex items-center space-x-2">
 							<Switch
 								name={palPresetNameDescriptionMap[property as PalPresetPropertyNames].label}
 								checked={config[property]}
@@ -70,7 +84,11 @@
 		<div class="mt-2 flex justify-end space-x-2">
 			<Tooltip position="bottom">
 				{#snippet children()}
-					<button class="btn hover:bg-secondary-500 px-2" onclick={() => handleClose(true)}>
+					<button
+						class="btn hover:bg-secondary-500 px-2"
+						onclick={() => handleClose(true)}
+						disabled={!name}
+					>
 						<Save />
 					</button>
 				{/snippet}

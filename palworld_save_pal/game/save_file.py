@@ -494,10 +494,10 @@ class SaveFile(BaseModel):
         if not player:
             raise ValueError(f"Player {player_id} not found in the save file.")
 
-        new_pal = player.add_dps_pal(character_id, nickname, storage_slot)
+        slot_idx, new_pal = player.add_dps_pal(character_id, nickname, storage_slot)
         if new_pal is None:
             return
-        return new_pal
+        return slot_idx, new_pal
 
     def add_guild_pal(
         self,
@@ -795,7 +795,7 @@ class SaveFile(BaseModel):
 
         await ws_callback("Saving changes to file")
 
-    async def update_dsp_pals(
+    async def update_dps_pals(
         self, modified_pals: Dict[int, PalDTO], ws_callback
     ) -> None:
         if not self._gvas_file:

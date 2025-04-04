@@ -19,16 +19,20 @@ class NavigationStateManager implements NavigationState {
 		this.#activeTab = initialTab;
 	}
 
-	get activePage(): Page {
-		return this.#activePage;
+	navigateTo(page: Page): void {
+		this.#activePage = page;
 	}
 
-	set activePage(page: Page) {
+	navigateToAndSave(page: Page): void {
 		if (!this.#initialLoad && page !== 'save') {
 			this.#appState.saveState();
 		}
 		this.#activePage = page;
 		this.#initialLoad = false;
+	}
+
+	get activePage(): Page {
+		return this.#activePage;
 	}
 
 	get activeTab(): Tab {

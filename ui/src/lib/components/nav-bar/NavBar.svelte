@@ -14,7 +14,7 @@
 
 	$effect(() => {
 		const { id } = page.route;
-		navigationState.activePage = id?.replace('/', '') as Page;
+		navigationState.navigateTo(id?.replace('/', '') as Page);
 	});
 
 	async function handleLanguageSelect(): Promise<void> {
@@ -36,7 +36,7 @@
 <Navigation.Rail
 	width="48px"
 	value={navigationState.activePage}
-	onValueChange={(value) => (navigationState.activePage = value as Page)}
+	onValueChange={(value) => navigationState.navigateToAndSave(value as Page)}
 >
 	{#snippet header()}
 		{#if appState.saveFile}

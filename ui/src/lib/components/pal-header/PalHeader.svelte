@@ -19,6 +19,7 @@
 	import { assetLoader, handleMaxOutPal, canBeBoss } from '$utils';
 	import { goto } from '$app/navigation';
 	import { staticIcons } from '$types/icons';
+	import NumberFlow from '@number-flow/svelte';
 
 	let {
 		pal = $bindable(),
@@ -236,10 +237,12 @@
 	}
 
 	async function handleSavePreset() {
+		const element = palsData.pals[pal.character_key]?.element_types[0];
 		// @ts-ignore
 		const result = await modal.showModal(PresetConfigModal, {
 			config: defaultPresetConfig,
-			characterId: pal.name
+			palName: pal.name,
+			element
 		});
 		if (!result) return;
 
@@ -268,7 +271,9 @@
 				passive_skills: config.passive_skills ? pal.passive_skills : null,
 				work_suitability: config.work_suitability ? pal.work_suitability : null,
 				sanity: config.sanity ? pal.sanity : null,
-				exp: config.exp ? pal.exp : null
+				exp: config.exp ? pal.exp : null,
+				element: element,
+				lock_element: config.lock_element
 			}
 		} as PresetProfile;
 
@@ -352,7 +357,9 @@
 				<Tooltip>
 					<div class="flex flex-col items-center justify-center">
 						<span class={cn('text-surface-400 font-bold', palLevelClass)}>LEVEL</span>
-						<span class={cn('text-4xl font-bold', palLevelClass)}>{palLevel}</span>
+						<span class={cn('text-4xl font-bold', palLevelClass)}>
+							<NumberFlow value={palLevel} />
+						</span>
 					</div>
 					{#snippet popup()}
 						{palLevelMessage}

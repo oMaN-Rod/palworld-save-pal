@@ -18,7 +18,7 @@
 	import { Tooltip } from '$components/ui';
 	import { send } from '$utils/websocketUtils';
 	import Nuke from '$components/ui/icons/Nuke.svelte';
-	import PalDimensionalStorage from './components/dps/PalDimensionalStorage.svelte';
+	import DimensionalPalStorage from './components/dps/DimensionalPalStorage.svelte';
 
 	const appState = getAppState();
 	const nav = getNavigationState();
@@ -105,7 +105,9 @@
 						<Tabs.Control value="player">Player</Tabs.Control>
 						<Tabs.Control value="technologies">Technologies</Tabs.Control>
 						<Tabs.Control value="pal-box">Pal Box</Tabs.Control>
-						<Tabs.Control value="dps">DPS</Tabs.Control>
+						{#if appState.selectedPlayer?.dps}
+							<Tabs.Control value="dps">DPS</Tabs.Control>
+						{/if}
 						<Tabs.Control value="guilds">Guild</Tabs.Control>
 						<Tabs.Control value="pal">Pal</Tabs.Control>
 					</div>
@@ -121,9 +123,12 @@
 						<Tabs.Panel value="pal-box" classes="h-screen">
 							<PalBox />
 						</Tabs.Panel>
-						<Tabs.Panel value="dps" classes="h-screen">
-							<PalDimensionalStorage />
-						</Tabs.Panel>
+						{#if appState.selectedPlayer?.dps}
+							<Tabs.Panel value="dps" classes="h-screen">
+								<DimensionalPalStorage />
+							</Tabs.Panel>
+						{/if}
+
 						<Tabs.Panel value="guilds" classes="h-screen">
 							<Guilds />
 						</Tabs.Panel>

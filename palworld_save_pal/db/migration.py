@@ -10,25 +10,29 @@ def check_column_exists(cursor, table, column):
     return column in columns
 
 
-def migrate_add_cheat_mode(conn, cursor):
+def migrate_table_column(
+    conn, cursor, table_name, column_name, column_type, default_value
+):
     cursor.execute(
-        "SELECT name FROM sqlite_master WHERE type='table' AND name='settingsmodel'"
+        f"SELECT name FROM sqlite_master WHERE type='table' AND name='{table_name}'"
     )
     if not cursor.fetchone():
         logger.debug(
-            "settingsmodel table doesn't exist yet, skipping cheat_mode migration"
+            f"{table_name} table doesn't exist yet, skipping pal preset {column_name} migration"
         )
         return
 
-    if not check_column_exists(cursor, "settingsmodel", "cheat_mode"):
-        logger.info("Adding cheat_mode column to settingsmodel table")
+    if not check_column_exists(cursor, table_name, column_name):
+        logger.debug(f"Adding {column_name} column to {table_name} table")
         cursor.execute(
-            "ALTER TABLE settingsmodel ADD COLUMN cheat_mode BOOLEAN NOT NULL DEFAULT 0"
+            f"ALTER TABLE {table_name} ADD COLUMN {column_name} {column_type} NOT NULL DEFAULT {default_value}"
         )
         conn.commit()
-        logger.info("cheat_mode column added successfully")
+        logger.debug("element column added successfully")
     else:
-        logger.debug("cheat_mode column already exists, skipping migration")
+        logger.debug(
+            f"{column_name} column already exists in {table_name}, skipping migration"
+        )
 
 
 def run_migrations(db_path):
@@ -36,11 +40,13 @@ def run_migrations(db_path):
         conn = sqlite3.connect(db_path)
         cursor = conn.cursor()
 
-        migrate_add_cheat_mode(conn, cursor)
+        migrate_table_column(conn, cursor, "settingsmodel", "cheat_mode", "BOOLEAN", 0)
+        migrate_table_column(conn, cursor, "palpreset", "lock_element", "BOOLEAN", 0)
+        migrate_table_column(conn, cursor, "palpreset", "element", "TEXT", "''")
 
         cursor.close()
         conn.close()
-        logger.info("All migrations completed")
+        logger.debug("All migrations completed")
 
     except Exception as e:
         logger.error(f"Error during database migration: {str(e)}")

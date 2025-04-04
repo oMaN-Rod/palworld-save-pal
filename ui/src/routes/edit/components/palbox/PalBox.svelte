@@ -4,7 +4,12 @@
 	import { getAppState, getModalState, getToastState } from '$states';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import { Input, Tooltip, TooltipButton } from '$components/ui';
-	import { NumberInputModal, PalSelectModal, PalPresetSelectModal } from '$components/modals';
+	import {
+		NumberInputModal,
+		PalSelectModal,
+		PalPresetSelectModal,
+		FillPalsModal
+	} from '$components/modals';
 	import { type ElementType, type Pal, type PalData, EntryState, MessageType } from '$types';
 	import {
 		assetLoader,
@@ -35,12 +40,12 @@
 		ReplaceAll,
 		BicepsFlexed,
 		Bandage,
-		Play
+		Play,
+		Info
 	} from 'lucide-svelte';
-	import Card from '$components/ui/card/Card.svelte';
-	import { PalCard, PalBadge } from '$components';
+	import { Card } from '$components/ui';
+	import { PalCard, PalBadge, PalContainerStats } from '$components';
 	import { send } from '$lib/utils/websocketUtils';
-	import { keyComboFromEvent } from 'svelte-jsoneditor';
 
 	const PALS_PER_PAGE = 30;
 	const TOTAL_SLOTS = 960;
@@ -177,7 +182,7 @@
 	const elementClass = (element: string) =>
 		cn('btn', selectedFilter === element ? 'bg-secondary-500/25' : '');
 
-	let pals = $derived.by(() => {
+	const pals = $derived.by(() => {
 		if (!appState.selectedPlayer || !appState.selectedPlayer.pals) return;
 		const playerPals = Object.entries(appState.selectedPlayer.pals as Record<string, Pal>);
 		const palBoxId = appState.selectedPlayer.pal_box_id;
@@ -185,12 +190,12 @@
 			.filter(([_, pal]) => pal.storage_id === palBoxId)
 			.map(([id, pal]) => {
 				const palData = palsData.pals[pal.character_key];
-				return { id, pal, palData };
+				return { id, pal, palData } as PalWithData;
 			});
 	});
 
-	let elementTypes = $derived(Object.keys(elementsData.elements));
-	let elementIcons = $derived.by(() => {
+	const elementTypes = $derived(Object.keys(elementsData.elements));
+	const elementIcons = $derived.by(() => {
 		let elementIcons: Record<string, string> = {};
 		for (const element of elementTypes) {
 			const elementData = elementsData.elements[element];
@@ -203,7 +208,7 @@
 		return elementIcons;
 	});
 
-	let LevelSortIcon = $derived.by(() => {
+	const LevelSortIcon = $derived.by(() => {
 		if (sortBy !== 'level') {
 			return ArrowDown01;
 		} else {
@@ -211,7 +216,7 @@
 		}
 	});
 
-	let NameSortIcon = $derived.by(() => {
+	const NameSortIcon = $derived.by(() => {
 		if (sortBy !== 'name') {
 			return ArrowDownAZ;
 		} else {
@@ -219,7 +224,7 @@
 		}
 	});
 
-	let PaldeckSortIcon = $derived.by(() => {
+	const PaldeckSortIcon = $derived.by(() => {
 		if (sortBy !== 'paldeck-index') {
 			return ArrowDownWideNarrow;
 		} else {
@@ -636,20 +641,22 @@
 		const presetProfile = presetsData.presetProfiles[result];
 
 		const applyPresetToPal = (pal: Record<string, any>) => {
+			const palData = palsData.pals[pal.character_key];
 			for (const [key, value] of Object.entries(presetProfile.pal_preset!)) {
 				if (key === 'character_id') continue;
 				if (key === 'lock' && value) {
 					pal.character_id = presetProfile.pal_preset?.character_id as string;
 				}
-				if (key === 'is_boss' && value && pal.is_lucky) {
-					pal.is_boss = true
-					pal.is_lucky = false
+				if (key === 'is_boss') {
+					if (!palData.is_pal) continue;
+					pal.is_boss = value;
+					pal.is_lucky = value ? false : pal.is_lucky;
 				}
-				if (key === 'is_lucky' && value && pal.is_boss) {
-					pal.is_boss = false
-					pal.is_lucky = true
-				}
-				else if (value != null) {
+				if (key === 'is_lucky') {
+					if (!palData.is_pal) continue;
+					pal.is_boss = value ? false : pal.is_boss;
+					pal.is_lucky = value;
+				} else if (value != null) {
 					(pal as Record<string, any>)[key] = value;
 				}
 			}
@@ -659,59 +666,24 @@
 		selectedPals.forEach((id) => {
 			const palWithData = pals?.find((p) => p.id === id);
 			if (palWithData) {
-				applyPresetToPal(palWithData.pal)
+				applyPresetToPal(palWithData.pal);
 			}
 
 			const otomoPal = otomoContainer[id];
 			if (otomoPal) {
-				applyPresetToPal(otomoPal)
+				applyPresetToPal(otomoPal);
 			}
 		});
 	}
 
 	async function addAllPalsToBox() {
 		if (!appState.selectedPlayer) return;
-
-		const containerId = appState.selectedPlayer.pal_box_id;
-
-		const exclude = ['PREDATOR_', 'RAID_', 'GYM_', 'SUMMON_', '_Oilrig'];
-
-		for (const [key, data] of Object.entries(palsData.pals)) {
-			if (exclude.some((substring) => key.includes(substring))) {
-				continue;
-			}
-
-			const nickname = formatNickname(data.localized_name || key, appState.settings.new_pal_prefix);
-
-			send(MessageType.ADD_PAL, {
-				player_id: appState.selectedPlayer.uid,
-				character_id: key,
-				nickname,
-				container_id: containerId,
-			});
-		}
-
-		setTimeout(() => {
-			if (!appState.selectedPlayer || !appState.selectedPlayer.pals) return;
-			Object.values(appState.selectedPlayer.pals).forEach((pal) => {
-				if (pal.storage_id === containerId) {
-					pal.hp = pal.max_hp;
-					pal.sanity = 100;
-					pal.is_sick = false;
-					const palData = palsData.pals[pal.character_key];
-					if (palData) {
-						pal.stomach = palData.max_full_stomach;
-						if (palData.is_boss) {
-							if (!pal.character_id.includes('BOSS_') && pal.character_id !== 'SecurityDrone') {
-								pal.is_boss = palData.is_boss;
-								pal.character_id = 'BOSS_' + pal.character_id
-							}
-						}
-					}
-					pal.state = EntryState.MODIFIED
-				}
-			});
-		}, 1000);
+		// @ts-ignore
+		await modal.showModal<string>(FillPalsModal, {
+			title: 'Fill Pal Box',
+			player: appState.selectedPlayer,
+			target: 'pal-box'
+		});
 	}
 </script>
 
@@ -732,9 +704,12 @@
 {/snippet}
 
 {#if appState.selectedPlayer}
-	<div class="grid h-full w-full grid-cols-[25%_1fr]" {...additionalProps}>
+	<div
+		class="grid h-full w-full grid-cols-[25%_1fr] 2xl:grid-cols-[25%_1fr_20%]"
+		{...additionalProps}
+	>
 		<div class="shrink-0 p-4">
-			<div class="btn-group bg-surface-900 mb-2 w-full items-center rounded-sm p-1">
+			<div class="btn-group bg-surface-900 mb-2 w-full items-center overflow-x-auto rounded-sm p-1">
 				<Tooltip position="right" label="Add a new pal to your Pal Box">
 					<button
 						class="btn hover:preset-tonal-secondary p-2"
@@ -744,10 +719,7 @@
 					</button>
 				</Tooltip>
 				<Tooltip position="right" label="Add all pals to your Pal Box">
-					<button
-						class="btn hover:preset-tonal-secondary p-2"
-						onclick={() => addAllPalsToBox()}
-					>
+					<button class="btn hover:preset-tonal-secondary p-2" onclick={() => addAllPalsToBox()}>
 						<CircleFadingPlus />
 					</button>
 				</Tooltip>
@@ -956,6 +928,23 @@
 					{/snippet}
 				</Accordion.Item>
 				<Accordion.Item
+					value="stats"
+					base="block 2xl:hidden rounded-sm bg-surface-900"
+					controlHover="hover:bg-secondary-500/25"
+				>
+					{#snippet lead()}<Info />{/snippet}
+					{#snippet control()}
+						<span class="font-bold">Stats</span>
+					{/snippet}
+					{#snippet panel()}
+						{#if pals && pals.length > 0}
+							<PalContainerStats {pals} {elementTypes} />
+						{:else}
+							<div>No pals data available</div>
+						{/if}
+					{/snippet}
+				</Accordion.Item>
+				<Accordion.Item
 					value="party"
 					base="block 2xl:hidden rounded-sm bg-surface-900"
 					controlHover="hover:bg-secondary-500/25"
@@ -1020,6 +1009,15 @@
 				</div>
 			</div>
 		</div>
+		{#if pals && pals.length > 0}
+			<Card class="mr-2 hidden h-[430px] 2xl:block">
+				<PalContainerStats {pals} {elementTypes} />
+			</Card>
+		{:else}
+			<Card class="mr-2 hidden h-[430px] 2xl:block">
+				<div>No pals data available</div>
+			</Card>
+		{/if}
 	</div>
 {:else}
 	<div class="flex w-full items-center justify-center">

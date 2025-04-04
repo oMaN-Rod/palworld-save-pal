@@ -29,8 +29,14 @@
 	);
 </script>
 
-<div class="fixed z-50 flex flex-col gap-2 {positionClasses}">
+<div class="toast-content fixed flex flex-col gap-2 {positionClasses}">
 	{#each toastState.toasts as toast (toast.id)}
 		<ToastItem {toast} />
 	{/each}
 </div>
+
+<style>
+	.toast-content {
+		z-index: 2147483647;
+	}
+</style>

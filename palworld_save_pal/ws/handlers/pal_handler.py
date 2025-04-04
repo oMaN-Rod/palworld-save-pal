@@ -93,10 +93,10 @@ async def add_dps_pal_handler(message: AddDpsPalMessage, ws: WebSocket):
     save_file = app_state.save_file
 
     if player_id:
-        new_pal = save_file.add_player_dps_pal(
+        slot_idx, new_pal = save_file.add_player_dps_pal(
             player_id, character_id, nickname, storage_slot
         )
-        data = {"player_id": player_id, "pal": new_pal, "index": storage_slot}
+        data = {"player_id": player_id, "pal": new_pal, "index": slot_idx}
     response = build_response(MessageType.ADD_DPS_PAL, data)
     await ws.send_json(response)
 

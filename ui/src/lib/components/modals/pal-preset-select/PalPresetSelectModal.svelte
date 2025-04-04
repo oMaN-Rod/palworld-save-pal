@@ -24,6 +24,13 @@
 							pal.character_id === profile.pal_preset?.character_id
 					);
 				}
+				if (profile.pal_preset?.lock_element) {
+					return selectedPals.every((pal: { character_id: string; character_key: string }) => {
+						const palData = palsData.pals[pal.character_key];
+						if (!palData) return false;
+						return palData.element_types[0] === profile.pal_preset?.element;
+					});
+				}
 				return true;
 			})
 			.map(([id, preset]) => ({

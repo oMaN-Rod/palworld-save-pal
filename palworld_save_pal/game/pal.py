@@ -28,8 +28,8 @@ class PalDTO(BaseModel):
     instance_id: UUID
     owner_uid: Optional[UUID]
     character_id: str
-    is_lucky: bool
-    is_boss: bool
+    is_lucky: Optional[bool]
+    is_boss: Optional[bool]
     gender: PalGender
     rank_hp: int
     rank_attack: int
@@ -163,7 +163,10 @@ class Pal(BaseModel):
 
     @computed_field
     def character_key(self) -> Optional[str]:
-        if self.character_id.lower().startswith("boss_"):
+        if (
+            self.character_id.lower().startswith("boss_")
+            and self.character_id not in PAL_DATA
+        ):
             self._character_key = self.character_id[5:]
         elif self.character_id.lower().startswith("predator_"):
             self._character_key = self.character_id[9:]
@@ -871,6 +874,7 @@ class Pal(BaseModel):
                 except Exception as e:
                     logger.warning(f"Failed to update {key}: {str(e)}")
                     continue
+        self.hp = self.max_hp
         if not self._is_dps:
             self.heal()
 
@@ -892,13 +896,13 @@ class Pal(BaseModel):
                 self.character_id = self.character_key
 
     def populate_status_point_lists(self):
-        self._character_save["GotStatusPointList"] = PalObjects.GetStatusPointList(
+        self._save_parameter["GotStatusPointList"] = PalObjects.GetStatusPointList(
             "GotStatusPointList", PalObjects.StatusNames
         )
-        self._character_save["GotExStatusPointList"] = PalObjects.GetStatusPointList(
+        self._save_parameter["GotExStatusPointList"] = PalObjects.GetStatusPointList(
             "GotExStatusPointList", PalObjects.ExStatusNames
         )
 
     def remove_status_point_lists(self):
-        self._character_save["GotStatusPointList"]["value"]["values"] = []
-        self._character_save["GotExStatusPointList"]["value"]["values"] = []
+        self._save_parameter["GotStatusPointList"]["value"]["values"] = []
+        self._save_parameter["GotExStatusPointList"]["value"]["values"] = []

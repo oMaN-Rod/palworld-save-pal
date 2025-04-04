@@ -13,6 +13,7 @@ import Map from './map/Map.svelte';
 import Modal from './modal/Modal.svelte';
 import NavBar from './nav-bar/NavBar.svelte';
 import PalCard from './pal-card/PalCard.svelte';
+import PalContainerStats from './pal-container-stats/PalContainerStats.svelte';
 import PalHeader from './pal-header/PalHeader.svelte';
 import PalInfoPopup from './pal-info-popup/PalInfoPopup.svelte';
 import PlayerList from './player-list/PlayerList.svelte';
@@ -37,6 +38,7 @@ export {
 	NavBar,
 	PalBadge,
 	PalCard,
+	PalContainerStats,
 	PalHeader,
 	PalInfoPopup,
 	PassiveSkillBadge,

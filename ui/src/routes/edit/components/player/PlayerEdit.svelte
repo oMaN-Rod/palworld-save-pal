@@ -27,12 +27,13 @@
 	} from 'lucide-svelte';
 	import { assetLoader } from '$utils';
 	import { staticIcons } from '$types/icons';
+	import NumberFlow from '@number-flow/svelte';
 
 	const appState = getAppState();
 	const toast = getToastState();
 	const modal = getModalState();
 
-	const max_level = $derived(appState.settings.cheat_mode ? 99 : 60)
+	const max_level = $derived(appState.settings.cheat_mode ? 99 : 60);
 
 	const defaultItem = {
 		id: '',
@@ -388,13 +389,13 @@
 		if (!appState.selectedPlayer || !appState.selectedPlayer || !appState.selectedPlayer.pals)
 			return;
 
-		let newLevel = appState.selectedPlayer.level
+		let newLevel = appState.selectedPlayer.level;
 
 		if (event.ctrlKey) {
 			if (event.button === 0) {
 				newLevel = Math.min(appState.selectedPlayer.level + 5, max_level);
 			} else if (event.button === 1) {
-				newLevel = max_level
+				newLevel = max_level;
 			} else if (event.button === 2) {
 				newLevel = Math.min(appState.selectedPlayer.level + 10, max_level);
 			}
@@ -415,13 +416,13 @@
 		if (!appState.selectedPlayer || !appState.selectedPlayer || !appState.selectedPlayer.pals)
 			return;
 
-		let newLevel = appState.selectedPlayer.level
+		let newLevel = appState.selectedPlayer.level;
 
 		if (event.ctrlKey) {
 			if (event.button === 0) {
 				newLevel = Math.max(appState.selectedPlayer.level - 5, 1);
 			} else if (event.button === 1) {
-				newLevel = 1
+				newLevel = 1;
 			} else if (event.button === 2) {
 				newLevel = Math.max(appState.selectedPlayer.level - 10, 1);
 			}
@@ -720,10 +721,10 @@
 				>
 					<div class="mr-4 flex flex-col items-center justify-center rounded-none">
 						<div class="flex items-center">
-							<Tooltip position='bottom'>
-								<button 
+							<Tooltip position="bottom">
+								<button
 									oncontextmenu={(event) => event.preventDefault()}
-									class="mr-4 btn hover:bg-secondary-500/25 px-2"
+									class="btn hover:bg-secondary-500/25 mr-4 px-2"
 									onmousedown={(event) => handleLevelDecrement(event)}
 								>
 									<Minus class="text-primary-500" size={16} />
@@ -743,7 +744,11 @@
 											<img src={staticIcons.ctrlIcon} alt="Control" class="h-full w-full" />
 										</div>
 										<div class="h-6 w-6">
-											<img src={staticIcons.rightClickIcon} alt="Right Click" class="h-full w-full" />
+											<img
+												src={staticIcons.rightClickIcon}
+												alt="Right Click"
+												class="h-full w-full"
+											/>
 										</div>
 										<span class="text-xs font-bold">-10</span>
 									</div>
@@ -752,7 +757,11 @@
 											<img src={staticIcons.ctrlIcon} alt="Right Click" class="h-full w-full" />
 										</div>
 										<div class="h-6 w-6">
-											<img src={staticIcons.middleClickIcon} alt="Middle Click" class="h-full w-full" />
+											<img
+												src={staticIcons.middleClickIcon}
+												alt="Middle Click"
+												class="h-full w-full"
+											/>
 										</div>
 										<span class="text-xs font-bold">Level 1</span>
 									</div>
@@ -761,45 +770,55 @@
 
 							<div class="flex flex-col items-center justify-center">
 								<span class="text-surface-400 text-sm font-bold">LEVEL</span>
-								<span class="text-xl font-bold xl:text-2xl">{appState.selectedPlayer.level}</span>
+								<span class="text-xl font-bold xl:text-2xl">
+									<NumberFlow value={appState.selectedPlayer.level} />
+								</span>
 							</div>
 
-							<Tooltip position='bottom'>
-								<button 
+							<Tooltip position="bottom">
+								<button
 									oncontextmenu={(event) => event.preventDefault()}
-									class="ml-4 btn hover:bg-secondary-500/25 px-2"
+									class="btn hover:bg-secondary-500/25 ml-4 px-2"
 									onmousedown={(event) => handleLevelIncrement(event)}
 								>
 									<Plus class="text-primary-500" size={16} />
 								</button>
 								{#snippet popup()}
-								<div class="flex items-center space-x-2">
-									<div class="h-6 w-6">
-										<img src={staticIcons.ctrlIcon} alt="Control" class="h-full w-full" />
+									<div class="flex items-center space-x-2">
+										<div class="h-6 w-6">
+											<img src={staticIcons.ctrlIcon} alt="Control" class="h-full w-full" />
+										</div>
+										<div class="h-6 w-6">
+											<img src={staticIcons.leftClickIcon} alt="Left Click" class="h-full w-full" />
+										</div>
+										<span class="text-xs font-bold">+5</span>
 									</div>
-									<div class="h-6 w-6">
-										<img src={staticIcons.leftClickIcon} alt="Left Click" class="h-full w-full" />
+									<div class="flex items-center space-x-2">
+										<div class="h-6 w-6">
+											<img src={staticIcons.ctrlIcon} alt="Control" class="h-full w-full" />
+										</div>
+										<div class="h-6 w-6">
+											<img
+												src={staticIcons.rightClickIcon}
+												alt="Right Click"
+												class="h-full w-full"
+											/>
+										</div>
+										<span class="text-xs font-bold">+10</span>
 									</div>
-									<span class="text-xs font-bold">+5</span>
-								</div>
-								<div class="flex items-center space-x-2">
-									<div class="h-6 w-6">
-										<img src={staticIcons.ctrlIcon} alt="Control" class="h-full w-full" />
+									<div class="flex items-center space-x-2">
+										<div class="h-6 w-6">
+											<img src={staticIcons.ctrlIcon} alt="Right Click" class="h-full w-full" />
+										</div>
+										<div class="h-6 w-6">
+											<img
+												src={staticIcons.middleClickIcon}
+												alt="Middle Click"
+												class="h-full w-full"
+											/>
+										</div>
+										<span class="text-xs font-bold">Level {max_level}</span>
 									</div>
-									<div class="h-6 w-6">
-										<img src={staticIcons.rightClickIcon} alt="Right Click" class="h-full w-full" />
-									</div>
-									<span class="text-xs font-bold">+10</span>
-								</div>
-								<div class="flex items-center space-x-2">
-									<div class="h-6 w-6">
-										<img src={staticIcons.ctrlIcon} alt="Right Click" class="h-full w-full" />
-									</div>
-									<div class="h-6 w-6">
-										<img src={staticIcons.middleClickIcon} alt="Middle Click" class="h-full w-full" />
-									</div>
-									<span class="text-xs font-bold">Level {max_level}</span>
-								</div>
 								{/snippet}
 							</Tooltip>
 						</div>

@@ -7,7 +7,7 @@
 		max = $bindable(100),
 		height = 'h-2',
 		rounded = 'rounded-none',
-		color = '',
+		color = 'bg-[#34f1fd]',
 		dividend = 1,
 		showLabel = true,
 		...additionalProps
@@ -59,7 +59,7 @@
 				progressBg = 'bg-green-500';
 				break;
 			default:
-				progressBg = 'bg-[#34f1fd]';
+				progressBg = color;
 				break;
 		}
 	});
