@@ -19,60 +19,136 @@
     "localized_name": "아누비스",
     "description": "그 풍모 덕택에 일찍이 고귀한 자의 상징이었다. 부와 권력을 멀리하는 이에게도 귀감이었으나 언제부턴가 아누비스은(는) 죽음의 상징이 되었다."
   },
-  "Believer_Fat_GiantClub": {
-    "localized_name": "브릭",
+  "BOSS_Believer_CrossBow": {
+    "localized_name": "현상범 에고",
     "description": null
   },
-  "DarkTrader": {
-    "localized_name": "램",
+  "BOSS_Believer_Fat_GiantClub": {
+    "localized_name": "현상범 브릭",
     "description": null
   },
-  "Female_DesertPeople": {
-    "localized_name": "위스퍼",
+  "BOSS_DarkTrader": {
+    "localized_name": "현상범 램",
     "description": null
   },
-  "Female_People": {
-    "localized_name": "플레어",
+  "BOSS_Female_DesertPeople": {
+    "localized_name": "현상범 위스퍼",
     "description": null
   },
-  "Female_Soldier": {
-    "localized_name": "제이드",
+  "BOSS_Female_People": {
+    "localized_name": "현상범 플레어",
     "description": null
   },
-  "Male_DesertPeople": {
-    "localized_name": "팬텀",
+  "BOSS_Female_People02": {
+    "localized_name": "현상범 사이렌",
     "description": null
   },
-  "Male_NinjaElite": {
-    "localized_name": "어친",
+  "BOSS_Female_People03": {
+    "localized_name": "현상범 턴코트",
     "description": null
   },
-  "Male_People": {
-    "localized_name": "다이너",
+  "BOSS_Female_Soldier": {
+    "localized_name": "현상범 제이드",
     "description": null
   },
-  "Male_People2": {
-    "localized_name": "마이트",
+  "BOSS_Female_Soldier02": {
+    "localized_name": "현상범 대즐",
     "description": null
   },
-  "Male_Soldier": {
-    "localized_name": "크래시",
+  "BOSS_Female_Soldier03": {
+    "localized_name": "현상범 알로하",
     "description": null
   },
-  "Ninja": {
-    "localized_name": "펌블",
+  "BOSS_Female_Soldier04": {
+    "localized_name": "현상범 님블",
     "description": null
   },
-  "Police_old": {
-    "localized_name": "핀치",
+  "BOSS_FireCult_FlameThrower": {
+    "localized_name": "현상범 섀도",
     "description": null
   },
-  "Scientist_LaserRifle": {
-    "localized_name": "위스크",
+  "BOSS_Hunter_Fat_GatlingGun": {
+    "localized_name": "현상범 그릴",
     "description": null
   },
-  "VikingElite": {
-    "localized_name": "캐시",
+  "BOSS_Hunter_Rifle": {
+    "localized_name": "현상범 호크",
+    "description": null
+  },
+  "BOSS_Male_DesertPeople": {
+    "localized_name": "현상범 팬텀",
+    "description": null
+  },
+  "BOSS_Male_NinjaElite": {
+    "localized_name": "현상범 어친",
+    "description": null
+  },
+  "BOSS_Male_People": {
+    "localized_name": "현상범 다이너",
+    "description": null
+  },
+  "BOSS_Male_People02": {
+    "localized_name": "현상범 퀼",
+    "description": null
+  },
+  "BOSS_Male_People03": {
+    "localized_name": "현상범 스쿳",
+    "description": null
+  },
+  "BOSS_Male_People2": {
+    "localized_name": "현상범 마이트",
+    "description": null
+  },
+  "BOSS_Male_Soldier": {
+    "localized_name": "현상범 크래시",
+    "description": null
+  },
+  "BOSS_Male_Soldier02": {
+    "localized_name": "현상범 다트",
+    "description": null
+  },
+  "BOSS_Male_Soldier03": {
+    "localized_name": "현상범 클린트",
+    "description": null
+  },
+  "BOSS_Male_Soldier04": {
+    "localized_name": "현상범 라쏘",
+    "description": null
+  },
+  "BOSS_Male_Trader01": {
+    "localized_name": "현상범 스킴",
+    "description": null
+  },
+  "BOSS_Male_Trader02": {
+    "localized_name": "현상범 미믹",
+    "description": null
+  },
+  "BOSS_Male_Trader03": {
+    "localized_name": "현상범 빌리",
+    "description": null
+  },
+  "BOSS_Ninja": {
+    "localized_name": "현상범 펌블",
+    "description": null
+  },
+  "BOSS_Police_Rifle": {
+    "localized_name": "현상범 윕",
+    "description": null
+  },
+  "BOSS_Police_old": {
+    "localized_name": "현상범 핀치",
+    "description": null
+  },
+  "BOSS_Scientist_LaserRifle": {
+    "localized_name": "현상범 위스크",
+    "description": null
+  },
+  "BOSS_Viking": {
+    "localized_name": "현상범 노우",
+    "description": null
+  },
+  "BOSS_VikingElite": {
+    "localized_name": "현상범 캐시",
     "description": null
   },
   "BadCatgirl": {

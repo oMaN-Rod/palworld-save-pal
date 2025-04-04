@@ -19,60 +19,136 @@
     "localized_name": "Anubis",
     "description": "War für die Gegner der Reichen und Mächtigen einst ein verhasstes Symbol des Adels. Irgendwann wurde Anubis zum Sinnbild des Todes."
   },
-  "Believer_Fat_GiantClub": {
-    "localized_name": "Ziegelhardt",
+  "BOSS_Believer_CrossBow": {
+    "localized_name": "Kopfgeldziel – Ego",
     "description": null
   },
-  "DarkTrader": {
-    "localized_name": "Dietrich",
+  "BOSS_Believer_Fat_GiantClub": {
+    "localized_name": "Kopfgeldziel – Ziegelhardt",
     "description": null
   },
-  "Female_DesertPeople": {
-    "localized_name": "Tuschel",
+  "BOSS_DarkTrader": {
+    "localized_name": "Kopfgeldziel – Dietrich",
     "description": null
   },
-  "Female_People": {
-    "localized_name": "Zündaya",
+  "BOSS_Female_DesertPeople": {
+    "localized_name": "Kopfgeldziel – Tuschel",
     "description": null
   },
-  "Female_Soldier": {
-    "localized_name": "Trixi",
+  "BOSS_Female_People": {
+    "localized_name": "Kopfgeldziel – Zündaya",
     "description": null
   },
-  "Male_DesertPeople": {
-    "localized_name": "Phantom",
+  "BOSS_Female_People02": {
+    "localized_name": "Kopfgeldziel – Sirena",
     "description": null
   },
-  "Male_NinjaElite": {
-    "localized_name": "Rip",
+  "BOSS_Female_People03": {
+    "localized_name": "Kopfgeldziel – Wendy",
     "description": null
   },
-  "Male_People": {
-    "localized_name": "Dyna",
+  "BOSS_Female_Soldier": {
+    "localized_name": "Kopfgeldziel – Trixi",
     "description": null
   },
-  "Male_People2": {
-    "localized_name": "Mite",
+  "BOSS_Female_Soldier02": {
+    "localized_name": "Kopfgeldziel – Diva",
     "description": null
   },
-  "Male_Soldier": {
-    "localized_name": "Crash",
+  "BOSS_Female_Soldier03": {
+    "localized_name": "Kopfgeldziel – Aloha",
     "description": null
   },
-  "Ninja": {
-    "localized_name": "Patz",
+  "BOSS_Female_Soldier04": {
+    "localized_name": "Kopfgeldziel – Klaudia",
     "description": null
   },
-  "Police_old": {
-    "localized_name": "Borgio",
+  "BOSS_FireCult_FlameThrower": {
+    "localized_name": "Kopfgeldziel – Nekrolf",
     "description": null
   },
-  "Scientist_LaserRifle": {
-    "localized_name": "Nap",
+  "BOSS_Hunter_Fat_GatlingGun": {
+    "localized_name": "Kopfgeldziel – Grillbert",
     "description": null
   },
-  "VikingElite": {
-    "localized_name": "Horton",
+  "BOSS_Hunter_Rifle": {
+    "localized_name": "Kopfgeldziel – Falk",
+    "description": null
+  },
+  "BOSS_Male_DesertPeople": {
+    "localized_name": "Kopfgeldziel – Phantom",
+    "description": null
+  },
+  "BOSS_Male_NinjaElite": {
+    "localized_name": "Kopfgeldziel – Rip",
+    "description": null
+  },
+  "BOSS_Male_People": {
+    "localized_name": "Kopfgeldziel – Dyna",
+    "description": null
+  },
+  "BOSS_Male_People02": {
+    "localized_name": "Kopfgeldziel – Quentin",
+    "description": null
+  },
+  "BOSS_Male_People03": {
+    "localized_name": "Kopfgeldziel – Zisch",
+    "description": null
+  },
+  "BOSS_Male_People2": {
+    "localized_name": "Kopfgeldziel – Mite",
+    "description": null
+  },
+  "BOSS_Male_Soldier": {
+    "localized_name": "Kopfgeldziel – Crash",
+    "description": null
+  },
+  "BOSS_Male_Soldier02": {
+    "localized_name": "Kopfgeldziel – Schlotto",
+    "description": null
+  },
+  "BOSS_Male_Soldier03": {
+    "localized_name": "Kopfgeldziel – Clint",
+    "description": null
+  },
+  "BOSS_Male_Soldier04": {
+    "localized_name": "Kopfgeldziel – Lasso",
+    "description": null
+  },
+  "BOSS_Male_Trader01": {
+    "localized_name": "Kopfgeldziel – Raff",
+    "description": null
+  },
+  "BOSS_Male_Trader02": {
+    "localized_name": "Kopfgeldziel – Blütwig XIV.",
+    "description": null
+  },
+  "BOSS_Male_Trader03": {
+    "localized_name": "Kopfgeldziel – Pferdinand",
+    "description": null
+  },
+  "BOSS_Ninja": {
+    "localized_name": "Kopfgeldziel – Patz",
+    "description": null
+  },
+  "BOSS_Police_Rifle": {
+    "localized_name": "Kopfgeldziel – Knut",
+    "description": null
+  },
+  "BOSS_Police_old": {
+    "localized_name": "Kopfgeldziel – Borgio",
+    "description": null
+  },
+  "BOSS_Scientist_LaserRifle": {
+    "localized_name": "Kopfgeldziel – Nap",
+    "description": null
+  },
+  "BOSS_Viking": {
+    "localized_name": "Kopfgeldziel – Knurps",
+    "description": null
+  },
+  "BOSS_VikingElite": {
+    "localized_name": "Kopfgeldziel – Horton",
     "description": null
   },
   "BadCatgirl": {

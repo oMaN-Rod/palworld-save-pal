@@ -19,68 +19,136 @@
     "localized_name": "Anubis",
     "description": "Es tan imponente que en el pasado se consideraba un símbolo de la nobleza, pero aquellos que rechazaban el poder y las riquezas le tenían ojeriza. Pasado un tiempo, se empezó a vincular a los Anubis con la muerte."
   },
-  "Believer_Fat_GiantClub": {
-    "localized_name": "Brick",
+  "BOSS_Believer_CrossBow": {
+    "localized_name": "Objetivo: Ego",
     "description": null
   },
-  "DarkTrader": {
-    "localized_name": "Ram",
+  "BOSS_Believer_Fat_GiantClub": {
+    "localized_name": "Objetivo: Brick",
     "description": null
   },
-  "Female_DesertPeople": {
-    "localized_name": "Whisper",
+  "BOSS_DarkTrader": {
+    "localized_name": "Objetivo: Ram",
     "description": null
   },
-  "Female_People": {
-    "localized_name": "Flare",
+  "BOSS_Female_DesertPeople": {
+    "localized_name": "Objetivo: Whisper",
     "description": null
   },
-  "Female_Soldier": {
-    "localized_name": "Jade",
+  "BOSS_Female_People": {
+    "localized_name": "Objetivo: Flare",
     "description": null
   },
-  "Male_DesertPeople": {
-    "localized_name": "Phantom",
+  "BOSS_Female_People02": {
+    "localized_name": "Objetivo: Siren",
     "description": null
   },
-  "Male_NinjaElite": {
-    "localized_name": "Urchin",
+  "BOSS_Female_People03": {
+    "localized_name": "Objetivo: Turncoat",
     "description": null
   },
-  "Male_People": {
-    "localized_name": "Dina",
+  "BOSS_Female_Soldier": {
+    "localized_name": "Objetivo: Jade",
     "description": null
   },
-  "Male_People02": {
-    "localized_name": "Quill",
+  "BOSS_Female_Soldier02": {
+    "localized_name": "Objetivo: Dazzle",
     "description": null
   },
-  "Male_People03": {
-    "localized_name": "Scoot",
+  "BOSS_Female_Soldier03": {
+    "localized_name": "Objetivo: Aloha",
     "description": null
   },
-  "Male_People2": {
-    "localized_name": "Mita",
+  "BOSS_Female_Soldier04": {
+    "localized_name": "Objetivo: Nimble",
     "description": null
   },
-  "Male_Soldier": {
-    "localized_name": "Crash",
+  "BOSS_FireCult_FlameThrower": {
+    "localized_name": "Objetivo: Shadow",
     "description": null
   },
-  "Ninja": {
-    "localized_name": "Fumble",
+  "BOSS_Hunter_Fat_GatlingGun": {
+    "localized_name": "Objetivo: Grill",
     "description": null
   },
-  "Police_old": {
-    "localized_name": "Pinch",
+  "BOSS_Hunter_Rifle": {
+    "localized_name": "Objetivo: Hawk",
     "description": null
   },
-  "Scientist_LaserRifle": {
-    "localized_name": "Whisk",
+  "BOSS_Male_DesertPeople": {
+    "localized_name": "Objetivo: Phantom",
     "description": null
   },
-  "VikingElite": {
-    "localized_name": "Cache",
+  "BOSS_Male_NinjaElite": {
+    "localized_name": "Objetivo: Urchin",
+    "description": null
+  },
+  "BOSS_Male_People": {
+    "localized_name": "Objetivo: Dina",
+    "description": null
+  },
+  "BOSS_Male_People02": {
+    "localized_name": "Objetivo: Quill",
+    "description": null
+  },
+  "BOSS_Male_People03": {
+    "localized_name": "Objetivo: Scoot",
+    "description": null
+  },
+  "BOSS_Male_People2": {
+    "localized_name": "Objetivo: Mita",
+    "description": null
+  },
+  "BOSS_Male_Soldier": {
+    "localized_name": "Objetivo: Crash",
+    "description": null
+  },
+  "BOSS_Male_Soldier02": {
+    "localized_name": "Objetivo: Dirt",
+    "description": null
+  },
+  "BOSS_Male_Soldier03": {
+    "localized_name": "Objetivo: Clint",
+    "description": null
+  },
+  "BOSS_Male_Soldier04": {
+    "localized_name": "Objetivo: Rustler",
+    "description": null
+  },
+  "BOSS_Male_Trader01": {
+    "localized_name": "Objetivo: Skim",
+    "description": null
+  },
+  "BOSS_Male_Trader02": {
+    "localized_name": "Objetivo: Mimic",
+    "description": null
+  },
+  "BOSS_Male_Trader03": {
+    "localized_name": "Objetivo: Billy",
+    "description": null
+  },
+  "BOSS_Ninja": {
+    "localized_name": "Objetivo: Fumble",
+    "description": null
+  },
+  "BOSS_Police_Rifle": {
+    "localized_name": "Objetivo: Whip",
+    "description": null
+  },
+  "BOSS_Police_old": {
+    "localized_name": "Objetivo: Pinch",
+    "description": null
+  },
+  "BOSS_Scientist_LaserRifle": {
+    "localized_name": "Objetivo: Whisk",
+    "description": null
+  },
+  "BOSS_Viking": {
+    "localized_name": "Objetivo: Nah",
+    "description": null
+  },
+  "BOSS_VikingElite": {
+    "localized_name": "Objetivo: Cache",
     "description": null
   },
   "BadCatgirl": {
@@ -1041,6 +1109,14 @@
   },
   "Male_NinjaElite01_Invader": {
     "localized_name": "Ninja sénior de las Flores Lunares",
+    "description": null
+  },
+  "Male_People02": {
+    "localized_name": "Aldeano",
+    "description": null
+  },
+  "Male_People03": {
+    "localized_name": "Aldeano",
     "description": null
   },
   "Male_Police_old": {
