@@ -49,17 +49,14 @@
 	const appState = getAppState();
 	const toast = getToastState();
 
-	const presetSelectOptions: SelectOption[] = $derived.by(() => {
+	const palPresets: ExtendedPresetProfile[] = $derived.by(() => {
 		return Object.entries(presetsData.presetProfiles)
-			.filter(
-				([id, profile]) =>
-					profile.type === 'pal_preset' && !selectedPresets.some((p) => p.id === id)
-			)
+			.filter(([id, profile]) => profile.type === 'pal_preset')
 			.map(([id, preset]) => ({
-				value: id,
-				label: preset.name
+				id,
+				...preset
 			}))
-			.sort((a, b) => a.label.localeCompare(b.label));
+			.sort((a, b) => a.name.localeCompare(b.name));
 	});
 	const palBoxPals = $derived(
 		Object.values(appState.selectedPlayer!.pals || {}).filter(
@@ -561,31 +558,18 @@
 					Presets precedence is: pal lock ➡️ element lock ➡️ default. Only select one preset per
 					pal, element, or default.
 				</p>
-				<div class="flex items-center space-x-2">
-					<Combobox options={presetSelectOptions} bind:value={selectedPreset}>
-						{#snippet selectOption(option)}
-							<div class="grid grid-cols-[1fr_auto_auto] items-center gap-2">
-								<span>{option.label}</span>
-							</div>
-						{/snippet}
-					</Combobox>
-					<button class="btn bg-primary-500" onclick={() => handleAddPreset(selectedPreset)}>
-						<Plus size={20} />
-					</button>
-				</div>
-				{#if selectedPresets.length > 0}
+				{#if palPresets.length > 0}
 					<List
-						bind:items={selectedPresets}
+						items={palPresets}
+						bind:selectedItems={selectedPresets}
 						baseClass="bg-surface-900 rounded-md"
 						listClass="mt-2 max-h-60 overflow-y-auto bg-surface-900"
 						itemClass="border-y border-surface-800"
-						canSelect={false}
-						multiple={false}
 						idKey="id"
 					>
 						{#snippet listHeader()}
 							<div>
-								<span class="font-bold">Selected Presets</span>
+								<span class="font-bold">All</span>
 							</div>
 						{/snippet}
 						{#snippet listItem(preset)}
