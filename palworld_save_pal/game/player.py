@@ -88,7 +88,7 @@ class Player(BaseModel):
     _dynamic_item_save_data: Dict[str, Any]
     _character_save: Dict[str, Any]
     _save_parameter: Dict[str, Any]
-    _dps: Dict[int, Pal]
+    _dps: Optional[Dict[int, Pal]] = PrivateAttr(default=None)
 
     def __init__(
         self,
