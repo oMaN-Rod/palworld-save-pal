@@ -11,10 +11,8 @@ from palworld_save_pal.game.save_file import SaveFile, SaveType
 from palworld_save_pal.server_thread import ServerThread
 from palworld_save_pal.utils.file_manager import GamepassSaveData
 from palworld_save_pal.utils.logging_config import create_logger
-from palworld_save_pal.utils.json_manager import JsonManager
 
 logger = create_logger(__name__)
-settings_json = JsonManager("data/json/settings.json")
 
 
 class AppState(BaseModel):

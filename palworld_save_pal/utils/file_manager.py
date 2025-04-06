@@ -109,7 +109,7 @@ class FileManager:
 
     @staticmethod
     def open_file_dialog(
-        save_type: str, window: webview.Window, _: str
+        save_type: str, window: webview.Window, save_dir: str = None
     ) -> Optional[str]:
         if save_type == "steam":
             file_types = ("Sav Files (*.sav)", "All files (*.*)")
@@ -120,7 +120,7 @@ class FileManager:
 
         result = window.create_file_dialog(
             webview.OPEN_DIALOG,
-            directory=file_path,
+            directory=file_path if save_dir is None else save_dir,
             allow_multiple=False,
             file_types=file_types,
         )
