@@ -4,6 +4,7 @@ export enum MessageType {
 	ADD_PAL = 'add_pal',
 	ADD_DPS_PAL = 'add_dps_pal',
 	CLONE_PAL = 'clone_pal',
+	CLONE_DPS_PAL = 'clone_dps_pal',
 	MOVE_PAL = 'move_pal',
 	DELETE_PALS = 'delete_pals',
 	DELETE_DPS_PALS = 'delete_dps_pals',

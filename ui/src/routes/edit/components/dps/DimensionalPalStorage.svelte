@@ -4,9 +4,9 @@
 	import { getAppState, getModalState, getToastState } from '$states';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import { Card, Input, Tooltip, TooltipButton } from '$components/ui';
-	import { PalSelectModal, FillPalsModal } from '$components/modals';
+	import { PalSelectModal, FillPalsModal, NumberInputModal } from '$components/modals';
 	import { type ElementType, type Pal, type PalData, MessageType } from '$types';
-	import { assetLoader, debounce, calculateFilters, formatNickname } from '$utils';
+	import { assetLoader, debounce, calculateFilters, formatNickname, deepCopy } from '$utils';
 	import { cn } from '$theme';
 	import { staticIcons } from '$types/icons';
 	import {
@@ -307,6 +307,39 @@
 				formatNickname(palData?.localized_name || selectedPal, appState.settings.new_pal_prefix),
 			storage_slot: index
 		});
+	}
+
+	async function clonePal(pal: Pal) {
+		const maxClones = appState.selectedPlayer!.dps
+			? 9600 - Object.values(appState.selectedPlayer!.dps).length
+			: 0;
+		if (maxClones === 0) {
+			toast.add('There are no slots available in your Dimensional Pal Storage.', 'Error', 'error');
+			return;
+		}
+		// @ts-ignore
+		const result = await modal.showModal<number>(NumberInputModal, {
+			title: 'How many clones?',
+			message: `There are ${maxClones} slots available in your Dimensional Pal Storage.`,
+			value: 1,
+			min: 0,
+			max: maxClones
+		});
+		if (!result) return;
+		for (let i = 0; i < result; i++) {
+			const clonedPal = deepCopy(pal);
+			clonedPal.nickname = formatNickname(
+				clonedPal.nickname || clonedPal.name || clonedPal.character_id,
+				appState.settings.clone_prefix
+			);
+			send(MessageType.CLONE_DPS_PAL, {
+				pal: clonedPal
+			});
+		}
+	}
+
+	async function handleClonePal(pal: Pal) {
+		await clonePal(pal);
 	}
 
 	function sortByName() {
@@ -709,7 +742,7 @@
 								onMove={() => {}}
 								onDelete={() => handleDeletePal(item.pal)}
 								onAdd={() => handleAddPal(item.index)}
-								onClone={() => {}}
+								onClone={() => handleClonePal(item.pal)}
 							/>
 						{/if}
 					{/each}

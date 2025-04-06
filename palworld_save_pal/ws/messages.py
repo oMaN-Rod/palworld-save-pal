@@ -20,6 +20,7 @@ class MessageType(str, Enum):
     ADD_PAL = "add_pal"
     ADD_DPS_PAL = "add_dps_pal"
     CLONE_PAL = "clone_pal"
+    CLONE_DPS_PAL = "clone_dps_pal"
     DELETE_PALS = "delete_pals"
     DELETE_DPS_PALS = "delete_dps_pals"
     GET_PAL_DETAILS = "get_pal_details"  # remove
@@ -124,6 +125,11 @@ class ClonePalData(BaseModel):
 
 class ClonePalMessage(BaseMessage):
     type: str = MessageType.CLONE_PAL.value
+    data: ClonePalData
+
+
+class CloneDpsPalMessage(BaseMessage):
+    type: str = MessageType.CLONE_DPS_PAL.value
     data: ClonePalData
 
 

@@ -536,6 +536,16 @@ class SaveFile(BaseModel):
         self._pals[new_pal.instance_id] = new_pal
         return new_pal
 
+    def clone_dps_pal(self, pal: PalDTO) -> Optional[Pal]:
+        player = self._players.get(pal.owner_uid)
+        if not player:
+            raise ValueError(f"Player {pal.owner_uid} not found in the save file.")
+
+        slot_idx, new_pal = player.clone_dps_pal(pal)
+        if new_pal is None:
+            return
+        return slot_idx, new_pal
+
     def clone_guild_pal(
         self, guild_id: UUID, base_id: UUID, pal: PalDTO
     ) -> Optional[Pal]:

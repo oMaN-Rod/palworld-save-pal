@@ -529,6 +529,26 @@ class Player(BaseModel):
             self._guild.add_pal(new_pal_id)
         return new_pal
 
+    def clone_dps_pal(self, palDTO: PalDTO) -> Optional[Pal]:
+        if not self._player_gvas_files.dps:
+            logger.error("No dps gvas found for player %s", self.uid)
+            return None
+        slot_idx = self._find_first_empty_dps_slot()
+        if slot_idx is None:
+            logger.error("No empty DPS slots available for player %s", self.uid)
+            return None
+
+        pal_data = PalObjects.get_array_property(
+            self._player_gvas_files.dps.properties["SaveParameterArray"]
+        )[slot_idx]
+        pal = Pal(data=pal_data, dps=True)
+        pal.update_from(palDTO)
+        pal.instance_id = uuid.uuid4()
+        pal.populate_status_point_lists()
+        pal.hp = pal.max_hp
+        self._dps[slot_idx] = pal
+        return slot_idx, pal
+
     def delete_pal(self, pal_id: UUID):
         self.pals.pop(pal_id)
         self.pal_box.remove_pal(pal_id)

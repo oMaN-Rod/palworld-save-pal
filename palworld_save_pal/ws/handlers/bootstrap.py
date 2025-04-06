@@ -28,6 +28,7 @@ from palworld_save_pal.ws.messages import (
     AddPalMessage,
     AddPresetMessage,
     BaseMessage,
+    CloneDpsPalMessage,
     ClonePalMessage,
     DeleteDpsPalsMessage,
     DeleteGuildMessage,
@@ -146,6 +147,14 @@ def bootstrap(dispatcher: "MessageDispatcher"):
         {
             "message_class": ClonePalMessage,
             "handler_func": pal_handler.clone_pal_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.CLONE_DPS_PAL.value,
+        {
+            "message_class": CloneDpsPalMessage,
+            "handler_func": pal_handler.clone_dps_pal_handler,
         },
     )
 
