@@ -479,6 +479,7 @@ class Player(BaseModel):
         )[slot_idx]
 
         pal = Pal(data=pal_data, dps=True)
+        pal.reset()
         pal.instance_id = uuid.uuid4()
         pal.character_id = character_id
         pal.nickname = nickname
@@ -563,13 +564,7 @@ class Player(BaseModel):
         for index in sorted(pal_indexes, reverse=True):
             if index in self._dps:
                 pal = self._dps[index]
-                pal.instance_id = PalObjects.EMPTY_UUID
-                pal.character_id = "None"
-                pal.nickname = ""
-                pal.filtered_nickname = ""
-                pal.storage_id = PalObjects.EMPTY_UUID
-                pal.storage_slot = -1
-                pal.remove_status_point_lists()
+                pal.reset()
 
     def update_from(self, other_player: PlayerDTO):
         logger.debug(

@@ -906,3 +906,27 @@ class Pal(BaseModel):
     def remove_status_point_lists(self):
         self._save_parameter["GotStatusPointList"]["value"]["values"] = []
         self._save_parameter["GotExStatusPointList"]["value"]["values"] = []
+
+    def reset(self):
+        self.instance_id = PalObjects.EMPTY_UUID
+        self.character_id = "None"
+        self.nickname = ""
+        self.filtered_nickname = ""
+        self.storage_id = PalObjects.EMPTY_UUID
+        self.storage_slot = -1
+        self.learned_skills = []
+        self.active_skills = []
+        self.passive_skills = []
+        self.hp = 0
+        self.rank = 0
+        self.rank_hp = 0
+        self.rank_attack = 0
+        self.rank_defense = 0
+        self.rank_craftspeed = 0
+        self.talent_hp = 0
+        self.talent_shot = 0
+        self.talent_defense = 0
+        self.work_suitability = {}
+        self.level = 1
+        self.exp = 0
+        self.remove_status_point_lists()
