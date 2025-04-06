@@ -163,6 +163,13 @@ class Pal(BaseModel):
 
     @computed_field
     def character_key(self) -> Optional[str]:
+        typo_mapping = {
+            "boss_police_old": "BOSS_Police_old",
+            "police_handgun": "Police_Handgun",
+        }
+        if self.character_id.lower() in typo_mapping:
+            self.character_id = typo_mapping[self.character_id.lower()]
+
         if (
             self.character_id.lower().startswith("boss_")
             and self.character_id not in PAL_DATA
