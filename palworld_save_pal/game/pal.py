@@ -198,8 +198,6 @@ class Pal(BaseModel):
 
     @computed_field
     def owner_uid(self) -> Optional[UUID]:
-        if self._is_dps:
-            return None
         self._owner_uid = (
             PalObjects.get_guid(self._save_parameter["OwnerPlayerUId"])
             if "OwnerPlayerUId" in self._save_parameter
@@ -210,9 +208,12 @@ class Pal(BaseModel):
     @owner_uid.setter
     def owner_uid(self, value: UUID):
         self._owner_uid = value
-        PalObjects.set_value(
-            self._save_parameter["OwnerPlayerUId"], value=self._owner_uid
-        )
+        if "OwnerPlayerUId" in self._save_parameter:
+            PalObjects.set_value(
+                self._save_parameter["OwnerPlayerUId"], value=self._owner_uid
+            )
+        else:
+            self._save_parameter["OwnerPlayerUId"] = PalObjects.Guid(self._owner_uid)
 
     @computed_field
     def is_lucky(self) -> bool:
@@ -916,6 +917,7 @@ class Pal(BaseModel):
 
     def reset(self):
         self.instance_id = PalObjects.EMPTY_UUID
+        self.owner_uid = PalObjects.EMPTY_UUID
         self.character_id = "None"
         self.nickname = ""
         self.filtered_nickname = ""

@@ -480,6 +480,7 @@ class Player(BaseModel):
 
         pal = Pal(data=pal_data, dps=True)
         pal.reset()
+        pal.owner_uid = self.uid
         pal.instance_id = uuid.uuid4()
         pal.character_id = character_id
         pal.nickname = nickname

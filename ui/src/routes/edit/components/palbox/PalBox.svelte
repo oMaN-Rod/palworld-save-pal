@@ -17,7 +17,8 @@
 		calculateFilters,
 		deepCopy,
 		handleMaxOutPal,
-		formatNickname
+		formatNickname,
+		applyPresetToPal
 	} from '$utils';
 	import { cn } from '$theme';
 	import { staticIcons } from '$types/icons';
@@ -640,38 +641,15 @@
 
 		const presetProfile = presetsData.presetProfiles[result];
 
-		const applyPresetToPal = (pal: Record<string, any>) => {
-			const palData = palsData.pals[pal.character_key];
-			for (const [key, value] of Object.entries(presetProfile.pal_preset!)) {
-				if (key === 'character_id') continue;
-				if (key === 'lock' && value) {
-					pal.character_id = presetProfile.pal_preset?.character_id as string;
-				}
-				if (key === 'is_boss') {
-					if (!palData.is_pal) continue;
-					pal.is_boss = value;
-					pal.is_lucky = value ? false : pal.is_lucky;
-				}
-				if (key === 'is_lucky') {
-					if (!palData.is_pal) continue;
-					pal.is_boss = value ? false : pal.is_boss;
-					pal.is_lucky = value;
-				} else if (value != null) {
-					(pal as Record<string, any>)[key] = value;
-				}
-			}
-			pal.state = EntryState.MODIFIED;
-		};
-
 		selectedPals.forEach((id) => {
 			const palWithData = pals?.find((p) => p.id === id);
 			if (palWithData) {
-				applyPresetToPal(palWithData.pal);
+				applyPresetToPal(palWithData.pal, presetProfile);
 			}
 
 			const otomoPal = otomoContainer[id];
 			if (otomoPal) {
-				applyPresetToPal(otomoPal);
+				applyPresetToPal(otomoPal, presetProfile);
 			}
 		});
 	}

@@ -181,9 +181,7 @@ class Guild(BaseModel):
                 if are_equal_uuids(b.id, guildDTO.base.id)
             )
             base.update_from(guildDTO.base)
-        if guildDTO.guild_chest:
-            if self.guild_chest is None:
-                return
+        if guildDTO.guild_chest and self.guild_chest is not None:
             self.guild_chest.update_from(guildDTO.guild_chest.model_dump())
 
     def _load_guild_chest(self, item_container_save_data, dynamic_item_save_data):

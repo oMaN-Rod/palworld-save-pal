@@ -1,7 +1,13 @@
 import { expData, palsData } from '$lib/data';
 import { getStats } from '$lib/utils';
 import { getAppState } from '$states';
-import { EntryState, type Pal, type Player, type WorkSuitability } from '$types';
+import {
+	EntryState,
+	type Pal,
+	type Player,
+	type PresetProfile,
+	type WorkSuitability
+} from '$types';
 
 const appState = getAppState();
 
@@ -60,3 +66,27 @@ export async function handleMaxOutPal(pal: Pal, player: Player): Promise<void> {
 		pal.stomach = 150;
 	}
 }
+
+export const applyPresetToPal = (pal: Record<string, any>, presetProfile: PresetProfile) => {
+	const palData = palsData.pals[pal.character_key];
+	const skipKeys = ['character_id', 'lock', 'lock_element', 'element'];
+	for (const [key, value] of Object.entries(presetProfile.pal_preset!)) {
+		if (skipKeys.includes(key)) continue;
+		if (key === 'is_boss') {
+			if (!palData.is_pal) continue;
+			pal.is_boss = value;
+			pal.is_lucky = value ? false : pal.is_lucky;
+		}
+		if (key === 'is_lucky') {
+			if (!palData.is_pal) continue;
+			pal.is_boss = value ? false : pal.is_boss;
+			pal.is_lucky = value;
+		} else if (value != null) {
+			(pal as Record<string, any>)[key] = value;
+		}
+	}
+	getStats(pal as Pal, appState.selectedPlayer!);
+	pal.hp = pal.max_hp;
+	pal.stomach = palData.max_full_stomach;
+	pal.state = EntryState.MODIFIED;
+};

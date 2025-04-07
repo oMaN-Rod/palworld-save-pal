@@ -1,12 +1,24 @@
 <script lang="ts">
 	import { ASSET_DATA_PATH } from '$lib/constants';
-	import { elementsData, palsData } from '$lib/data';
+	import { elementsData, palsData, presetsData } from '$lib/data';
 	import { getAppState, getModalState, getToastState } from '$states';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import { Card, Input, Tooltip, TooltipButton } from '$components/ui';
-	import { PalSelectModal, FillPalsModal, NumberInputModal } from '$components/modals';
-	import { type ElementType, type Pal, type PalData, MessageType } from '$types';
-	import { assetLoader, debounce, calculateFilters, formatNickname, deepCopy } from '$utils';
+	import {
+		PalSelectModal,
+		FillPalsModal,
+		NumberInputModal,
+		PalPresetSelectModal
+	} from '$components/modals';
+	import { type ElementType, type Pal, type PalData, EntryState, MessageType } from '$types';
+	import {
+		assetLoader,
+		debounce,
+		calculateFilters,
+		formatNickname,
+		deepCopy,
+		applyPresetToPal
+	} from '$utils';
 	import { cn } from '$theme';
 	import { staticIcons } from '$types/icons';
 	import {
@@ -23,7 +35,8 @@
 		User,
 		ReplaceAll,
 		CircleFadingPlus,
-		Info
+		Info,
+		Play
 	} from 'lucide-svelte';
 	import { PalBadge, PalContainerStats } from '$components';
 	import { send } from '$lib/utils/websocketUtils';
@@ -255,6 +268,32 @@
 		});
 
 		sortPals();
+	}
+
+	async function handleSelectPreset() {
+		const selectedPalsData = selectedPals.map((id) => {
+			const palWithData = pals?.find((p) => p.id === id);
+			return {
+				character_id: palWithData?.pal.character_id,
+				character_key: palWithData?.pal.character_key
+			};
+		});
+
+		// @ts-ignore
+		const result = await modal.showModal<string>(PalPresetSelectModal, {
+			title: 'Select preset',
+			selectedPals: selectedPalsData
+		});
+		if (!result) return;
+
+		const presetProfile = presetsData.presetProfiles[result];
+
+		selectedPals.forEach((id) => {
+			const palWithData = pals?.find((p) => p.id === id);
+			if (palWithData) {
+				applyPresetToPal(palWithData.pal, presetProfile);
+			}
+		});
 	}
 
 	function toggleSort(newSortBy: SortBy) {
@@ -531,6 +570,11 @@
 				</Tooltip>
 
 				{#if selectedPals.length >= 1}
+					<Tooltip label="Apply preset to selected pal(s)">
+						<button class="btn hover:preset-tonal-secondary p-2" onclick={handleSelectPreset}>
+							<Play />
+						</button>
+					</Tooltip>
 					<Tooltip label="Delete selected pal(s)">
 						<button class="btn hover:preset-tonal-secondary p-2" onclick={deleteSelectedPals}>
 							<Trash />
