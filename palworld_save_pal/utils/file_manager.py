@@ -91,7 +91,6 @@ class FileManager:
         if not level_meta.exists():
             level_meta = None
 
-        # Check if Players directory contains any .sav files
         player_saves = list(players_dir.glob("*.sav"))
         if not player_saves:
             return FileValidationResult(
@@ -156,10 +155,8 @@ class FileManager:
                     player_saves[player_uuid] = {}
 
                 with open(save_file, "rb") as f:
-                    if dps:
-                        player_saves[player_uuid]["dps"] = f.read()
-                    else:
-                        player_saves[player_uuid]["sav"] = f.read()
+                    save_type = "dps" if dps else "sav"
+                    player_saves[player_uuid][save_type] = f.read()
 
             except:
                 logger.error("Failed to read player save: %s", save_file, exc_info=True)
@@ -222,7 +219,11 @@ class FileManager:
                 continue
 
             player_count = len(
-                [c for c in container.values() if "Player" in c.container_name]
+                [
+                    c
+                    for c in container.values()
+                    if "Player" in c.container_name and "_dps" not in c.container_name
+                ]
             )
             logger.debug(
                 "Found save: %s with world name: %s and %s players",

@@ -689,7 +689,7 @@ class SaveFile(BaseModel):
     async def load_sav_files(
         self,
         level_sav: bytes,
-        player_sav_files: Dict[str, PlayerGvasFiles],
+        player_sav_files: Dict[UUID, Dict[str, bytes]],
         level_meta: Optional[bytes] = None,
         ws_callback=None,
     ):
@@ -739,6 +739,20 @@ class SaveFile(BaseModel):
                 self._player_gvas_files[uid].sav.write(CUSTOM_PROPERTIES), 0x32
             )
             for uid in self._player_gvas_files
+        }
+
+    def player_gvas_files(self) -> Dict[UUID, Dict[str, bytes]]:
+        logger.info("Converting player save files to SAV", len(self._player_gvas_files))
+        return {
+            uid: {
+                "sav": compress_gvas_to_sav(files.sav.write(CUSTOM_PROPERTIES), 0x32),
+                "dps": (
+                    compress_gvas_to_sav(files.dps.write(CUSTOM_PROPERTIES), 0x32)
+                    if files.dps
+                    else None
+                ),
+            }
+            for uid, files in self._player_gvas_files.items()
         }
 
     def to_json_file(

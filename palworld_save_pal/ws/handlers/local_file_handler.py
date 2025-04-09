@@ -105,7 +105,7 @@ async def save_modded_gamepass_save(world_name: str, ws: WebSocket, ws_callback)
         logger.debug("New save id: %s => %s", gamepass_save.save_id, new_save_id)
         app_state.save_file.name = new_save_id
         save_data = app_state.save_file.sav()
-        player_save_data = app_state.save_file.player_savs()
+        player_save_data = app_state.save_file.player_gvas_files()
 
         # Save modified gamepass save with new containers
         await ws_callback("Creating new containers for modified save...")
@@ -275,18 +275,21 @@ async def select_gamepass_save_handler(
 
     player_containers = [c for k, c in containers.items() if "Player" in k]
     for player_container in player_containers:
-        if "_dps" in player_container.container_name:
-            logger.debug(
-                "Skipping DPS container (tmp fix until dps supported): %s",
-                player_container.container_name,
-            )
-            continue
+        player_id = player_container.container_name.split("-")[-1]
+        dps = False
+        if "_dps" in player_id:
+            player_id = player_id.replace("_dps", "")
+            dps = True
+
         player_dir = os.path.join(
             app_state.settings.save_dir,
             player_container.container_uuid.bytes_le.hex().upper(),
         )
         for filename in os.listdir(player_dir):
             if filename.startswith("container."):
+                player_uuid = uuid.UUID(player_id)
+                if player_uuid not in player_files:
+                    player_files[player_uuid] = {}
                 logger.debug(
                     "Reading container file: %s for player container %s",
                     filename,
@@ -294,9 +297,8 @@ async def select_gamepass_save_handler(
                 )
                 with open(os.path.join(player_dir, filename), "rb") as f:
                     file_list = ContainerFileList.from_stream(f)
-                    player_files[
-                        uuid.UUID(player_container.container_name.split("-")[-1])
-                    ] = file_list.files[0].data
+                    save_type = "dps" if dps else "sav"
+                    player_files[player_uuid][save_type] = file_list.files[0].data
 
     if not level_sav:
         raise ValueError("Level.sav not found in selected save")

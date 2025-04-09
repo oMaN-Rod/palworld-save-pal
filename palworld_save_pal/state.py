@@ -36,7 +36,7 @@ class AppState(BaseModel):
         sav_id: str,
         level_sav: bytes,
         level_meta: Optional[bytes],
-        player_savs: Dict[str, bytes],
+        player_savs: Dict[UUID, Dict[str, bytes]],
         ws_callback=None,
         local=False,
         save_type: SaveType = SaveType.STEAM,

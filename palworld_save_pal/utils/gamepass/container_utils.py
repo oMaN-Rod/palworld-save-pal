@@ -4,9 +4,8 @@ import shutil
 from datetime import datetime
 import uuid
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Optional
 
-from palworld_save_pal.game.pal_objects import PalObjects
 from palworld_save_pal.game.save_file import SaveFile
 from palworld_save_pal.utils.gamepass.container_types import (
     FILETIME,
@@ -274,7 +273,7 @@ def save_modified_gamepass(
     container_path: str,
     save_id: str,
     modified_level_data: bytes,
-    player_sav_data: Dict[uuid.UUID, bytes],
+    player_sav_data: Dict[uuid.UUID, Dict[str, bytes]],
     original_containers: Dict[str, Container],
     world_name: str,
 ) -> None:
@@ -294,7 +293,10 @@ def save_modified_gamepass(
         if "Player" in key and "_dps" not in key:
             logger.debug("Updating player data for container: %s", key)
             player_uuid = uuid.UUID(key.split("-")[1])
-            player_data = player_sav_data.get(player_uuid)
+            player_data = player_sav_data[player_uuid]["sav"]
+        elif "_dps" in key:
+            player_uuid = uuid.UUID(key.split("-")[1].replace("_dps", ""))
+            player_data = player_sav_data[player_uuid]["dps"]
 
         logger.debug("Copying container: %s", original_container.container_name)
         new_container = copy_container(
