@@ -19,11 +19,12 @@ Palworld Save Pal is a tool for managing and analyzing save files.
     - [Build Desktop App](#build-desktop-app)
       - [Using build script](#using-build-script)
       - [Manual build](#manual-build)
-  - [🗺️ Roadmap](#️-roadmap)
+  - [🔥 Features](#-features)
     - [General](#general)
     - [Pals](#pals)
     - [Players](#players)
-    - [What's cooking :man\_cook::pinched\_fingers:](#whats-cooking-man_cookpinched_fingers)
+    - [Guilds](#guilds)
+    - [Extras](#extras)
   - [📜 License](#-license)
   - [➡️ Related Projects](#️-related-projects)
   - [☕ Buy me a Coffee](#-buy-me-a-coffee)
@@ -104,22 +105,9 @@ For developers who want to contribute to Palworld Save Pal:
 2. Run the application in development mode:
 
    ```bash
-   python psp.py --dev
-   ```
-
-3. Set the environment variable for the svelte SPA `ui/.env`.
-
-   ```env
-   PUBLIC_WS_URL=127.0.0.1:5174/ws
-   PUBLIC_DESKTOP_MODE=false
-   ```
-
-4. Run the frontend in development mode:
-
-   ```bash
    cd ui
    bun install
-   bun run dev
+   bun run dev:web
    ```
 
 5. Open your browser and navigate to `http://127.0.0.1:5173`
@@ -133,15 +121,7 @@ For developers who want to contribute to Palworld Save Pal:
    PUBLIC_DESKTOP_MODE=true
    ```
 
-2. Run the frontend in development mode:
-
-   ```powershell
-   cd ui
-   bun install
-   bun run dev
-   ```
-
-3. Activate python environment
+2. Activate python environment
 
    ```powershell
    python -m venv .venv
@@ -149,10 +129,12 @@ For developers who want to contribute to Palworld Save Pal:
    pip install -r requirements.txt
    ```
 
-4. Run the desktop app:
+3. Run the desktop app:
 
    ```powershell
-   python .\desktop.py --dev --web-host localhost --web-port 5173 
+   cd ui
+   bun install
+   bun run dev:desktop
    ```
 
 ### Build Desktop App
@@ -180,34 +162,33 @@ pip install -r requirements.txt
    PUBLIC_DESKTOP_MODE=true
    ```
 
-2. Create EXE:
-
-   ```powershell
-   python -m nuitka --onefile .\desktop.py --output-filename=PSP.exe --windows-icon-from-ico=ui/static/favicon.ico --windows-console-mode=disable
-   ```
-
-3. Build the SPA (replace bun with your package manager of choice). This will create a build directory in the project root containing the static files for the SPA:
+2. Build the SPA (replace bun with your package manager of choice). This will create a build directory in the project root containing the static files for the SPA:
 
    ```powershell
    cd ui
-   rm .svelte-kit
+   bun install
    bun run build
+   cd ..
+   mkdir dist
    ```
 
-4. Copy build to the dist folder:
+3. Build standalone executable:
 
    ```powershell
-   mkdir .\dist\
-   cp -R .\build\ .\dist\
-   cp -R .\data\ .\dist\
-   cp PSP.exe .\dist\
+   python setup.py build
+   ```
+
+or
+
+3. Build installer:
+
+   ```powershell
+   python setup.py bdist_msi
    ```
 
 > **Note:** The `dist` folder will contain the executable and the SPA build files, the data folder contains json files with game data, all need to be distributed together.
 
-## 🗺️ Roadmap
-
-Here's what's planned for future releases of Palworld Save Pal:
+## 🔥 Features
 
 ### General
 
@@ -217,7 +198,7 @@ Here's what's planned for future releases of Palworld Save Pal:
 
 ### Pals
 
-- [X] Edit Pal box and Guild Pals
+- [X] Edit Pal box, Base, and Dimensional Pal Storage Pals
 - [X] Edit Nickname
 - [X] Edit Gender
 - [X] Edit Active Skills / Learned Skills
@@ -231,6 +212,7 @@ Here's what's planned for future releases of Palworld Save Pal:
 - [X] Edit Work Suitability
 - [X] Heal Pals - edit health and stomach (Modified pals are automatically healed)
 - [X] Create your own Active/Passive Skill presets, making it easy af to apply skills.
+- [x] Apply Pal preset on multiple Pals, e.g., max out all Dragon types with a specific profile.
 
 ### Players
 
@@ -240,14 +222,22 @@ Here's what's planned for future releases of Palworld Save Pal:
 - [X] Heal Player - edit health and stomach
 - [X] Edit Inventory
 - [X] Create your own inventory presets/loadouts and apply them across players and saves.
+- [X] Edit Technology Tree, Technology Points, and Ancient Technology points
+- [x] Delete Players (Deletes all map objects, items, and pals)
 
-### What's cooking :man_cook::pinched_fingers:
+### Guilds
 
-- [ ] Converting to/from gamepass/steam
-- [ ] Converting to/from solo/co-op/dedicated
-- [ ] Transferring Players and Pals across saves
-- [ ] Apply Pal preset on multiple Pals, e.g., max out all Dragon types with a specific profile.
-- [ ] Edit Storage items
+- [X] Edit Guild Name
+- [X] Edit Guild Chest
+- [X] Edit Base Pals
+- [X] Edit Base Inventory
+- [x] Delete Guilds (Deletes all players, map objects, items, and pals)
+
+### Extras
+
+- [X] Data Explorer / Debug Mode
+- [x] Map integration
+- [x] Preset management
 
 ## 📜 License
 
