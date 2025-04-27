@@ -2,14 +2,18 @@ import copy
 import math
 from typing import Optional, Dict, Any, List
 from uuid import UUID
-import uuid
 from pydantic import BaseModel, PrivateAttr, computed_field
 
 
 from palworld_save_pal.utils.dict import safe_remove
 from palworld_save_pal.utils.logging_config import create_logger
 from palworld_save_pal.utils.json_manager import JsonManager
-from palworld_save_pal.game.pal_objects import *
+from palworld_save_pal.game.pal_objects import (
+    PalObjects,
+    ArrayType,
+    WorkSuitability,
+    PalGender,
+)
 
 
 logger = create_logger(__name__)
@@ -316,7 +320,7 @@ class Pal(BaseModel):
         )
         return self._nickname
 
-    @nickname.setter
+    @filtered_nickname.setter
     def filtered_nickname(self, value: str):
         if not self._is_dps:
             return
@@ -858,6 +862,8 @@ class Pal(BaseModel):
             "active_skills": list,
             "passive_skills": list,
             "work_suitability": dict,
+            "nickname": str,
+            "filtered_nickname": str,
         }
 
         skip_properties = {
