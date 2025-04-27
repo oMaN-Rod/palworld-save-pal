@@ -20,7 +20,7 @@ fi
 echo "Using IP Address: $IP_ADDRESS"
 
 # Build and run docker compose
-docker compose build --build-arg PUBLIC_WS_URL=$IP_ADDRESS
+docker compose build --build-arg PUBLIC_WS_URL=${IP_ADDRESS}:5174/ws
 docker compose up -d
 
 echo "Build and deployment completed successfully."

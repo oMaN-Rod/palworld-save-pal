@@ -310,9 +310,10 @@ class SaveFile(BaseModel):
             )
             player_guild.delete_player(player_id)
 
-        container_ids_to_delete, character_container_ids_to_delete = (
-            await self._delete_player_and_pals(player_id, ws_callback)
-        )
+        (
+            container_ids_to_delete,
+            character_container_ids_to_delete,
+        ) = await self._delete_player_and_pals(player_id, ws_callback)
 
         # Delete all map objects owned by guild or player in guild
         await ws_callback(f"Deleting map objects of player {player.nickname}")
@@ -742,7 +743,9 @@ class SaveFile(BaseModel):
         }
 
     def player_gvas_files(self) -> Dict[UUID, Dict[str, bytes]]:
-        logger.info("Converting player save files to SAV", len(self._player_gvas_files))
+        logger.info(
+            "Converting player save files to SAV: %s", len(self._player_gvas_files)
+        )
         return {
             uid: {
                 "sav": compress_gvas_to_sav(files.sav.write(CUSTOM_PROPERTIES), 0x32),
@@ -781,7 +784,6 @@ class SaveFile(BaseModel):
         ):
             save_type = 0x32
         else:
-
             save_type = 0x31
 
         logger.info("Compressing GVAS to SAV with save type %s", save_type)
@@ -1165,7 +1167,7 @@ class SaveFile(BaseModel):
                 if "NickName" in save_parameter:
                     nickname = PalObjects.get_value(save_parameter["NickName"])
                 else:
-                    nickname = f"🥷 ({str(uid).split("-")[0]})"
+                    nickname = f"🥷 ({str(uid).split('-')[0]})"
 
                 await ws_callback(
                     f"Loading player {nickname} ({uid}) with {loaded_sav_files[uid]}..."

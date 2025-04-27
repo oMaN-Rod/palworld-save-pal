@@ -1,7 +1,18 @@
 <script lang="ts">
 	import { getNavigationState, getAppState, type Page, getModalState } from '$states';
 	import { Navigation } from '@skeletonlabs/skeleton-svelte';
-	import { File, Pencil, Info, Upload, Settings, Save, Bug, Map, FileHeart } from 'lucide-svelte';
+	import {
+		File,
+		Pencil,
+		Info,
+		Upload,
+		Settings,
+		Save,
+		Bug,
+		Map,
+		FileHeart,
+		Download
+	} from 'lucide-svelte';
 	import { page } from '$app/state';
 	import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
 	import { SettingsModal } from '$components/modals';
@@ -39,7 +50,7 @@
 	onValueChange={(value) => navigationState.navigateToAndSave(value as Page)}
 >
 	{#snippet header()}
-		{#if appState.saveFile}
+		{#if appState.saveFile && PUBLIC_DESKTOP_MODE === 'true'}
 			<Navigation.Tile
 				label="Save"
 				labelBase="text-xs"
@@ -64,7 +75,7 @@
 				<Pencil />
 			</Navigation.Tile>
 		{/if}
-		{#if PUBLIC_DESKTOP_MODE}
+		{#if PUBLIC_DESKTOP_MODE === 'true'}
 			<Navigation.Tile
 				label="Files"
 				labelBase="text-xs"
@@ -77,14 +88,18 @@
 			</Navigation.Tile>
 		{:else}
 			<Navigation.Tile
-				label="Upload"
+				label="Transfer"
 				labelBase="text-xs"
-				title="Upload"
+				title="Transfer"
 				id="upload"
 				href="/upload"
 				active="bg-secondary-500"
 			>
-				<Upload />
+				{#if appState.saveFile}
+					<Download />
+				{:else}
+					<Upload />
+				{/if}
 			</Navigation.Tile>
 		{/if}
 		<Navigation.Tile

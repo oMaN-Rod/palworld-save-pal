@@ -6,6 +6,7 @@ from urllib.parse import quote
 import uvicorn
 from fastapi import FastAPI, Request, WebSocket, WebSocketDisconnect
 from fastapi.responses import FileResponse, RedirectResponse
+from palworld_save_pal.db.bootstrap import create_db_and_tables
 from palworld_save_pal.ws.manager import ConnectionManager
 
 from palworld_save_pal.utils.logging_config import create_logger, setup_logging
@@ -70,6 +71,7 @@ def parse_arguments():
 if __name__ == "__main__":
     multiprocessing.freeze_support()
     args = parse_arguments()
+    create_db_and_tables()
     setup_logging(dev_mode=args.dev)
     logger = create_logger(__name__)
     DEV_MODE = args.dev

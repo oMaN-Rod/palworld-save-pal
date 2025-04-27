@@ -28,7 +28,7 @@ $IPAddress = Get-BestIPAddress
 Write-Host "Using IP Address: $IPAddress"
 
 # Build and run docker compose
-docker-compose build --build-arg PUBLIC_WS_URL=$IPAddress
+docker-compose build --build-arg PUBLIC_WS_URL="${IPAddress}:5174/ws"
 docker-compose up -d
 
 Write-Host "Build and deployment completed successfully."

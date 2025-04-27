@@ -6,9 +6,17 @@ export const ssr = false;
 export const prerender = true;
 
 function isValidPath(path: string) {
-	return ['edit', 'info', 'file', 'settings', 'loading', 'error', 'browser', 'about'].includes(
-		path
-	);
+	return [
+		'edit',
+		'info',
+		'file',
+		'settings',
+		'loading',
+		'error',
+		'browser',
+		'about',
+		'upload'
+	].includes(path);
 }
 
 export const load: LayoutLoad = ({ url }) => {
