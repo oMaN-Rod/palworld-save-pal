@@ -15,7 +15,7 @@ jobs:
             color: "2105893"
             username: "PSPBot"
             avatar_url: "https://raw.githubusercontent.com/oMaN-Rod/palworld-save-pal/refs/heads/main/ui/static/psp.png"
-            content: "@PSP Announcements\nGrab the latest release:\nNexus Mods: https://www.nexusmods.com/palworld/mods/1827\nGithub: ${{ github.event.release.html_url }}"
+            content: "||@PSP Announcements||\nGrab the latest release:\nNexus Mods: https://www.nexusmods.com/palworld/mods/1827\nGithub: ${{ github.event.release.html_url }}"
             footer_title: "Changelog"
             footer_icon_url: "https://raw.githubusercontent.com/oMaN-Rod/palworld-save-pal/refs/heads/main/ui/static/psp.png"
             footer_timestamp: true  
