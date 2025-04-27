@@ -110,29 +110,55 @@ class FileManager:
     def open_file_dialog(
         save_type: str, window: webview.Window, save_dir: str = None
     ) -> Optional[str]:
+        app_dir = Path(
+            __file__
+        ).parent.parent.parent.resolve()  # Get the app's root directory
+        logger.debug("Application directory: %s", app_dir)
+
         if save_type == "steam":
             file_types = ("Sav Files (*.sav)", "All files (*.*)")
-            file_path = STEAM_ROOT
+            initial_dir = STEAM_ROOT
         else:
             file_types = ("Container Index Files (*.index)", "All files (*.*)")
-            file_path = GAMEPASS_ROOT
+            initial_dir = GAMEPASS_ROOT
 
         result = window.create_file_dialog(
             webview.OPEN_DIALOG,
-            directory=file_path if save_dir is None else save_dir,
+            directory=initial_dir if save_dir is None else save_dir,
             allow_multiple=False,
             file_types=file_types,
         )
 
         if result and len(result) > 0:
-            file_path = result[0]
-            if (
-                os.path.basename(file_path) == "Level.sav" and save_type == "steam"
-            ) or (
-                os.path.basename(file_path) == "containers.index"
-                and save_type == "gamepass"
+            selected_path_str = result[0]
+            selected_path = Path(selected_path_str).resolve()
+            logger.debug("Selected path: %s", selected_path)
+
+            # Check if the selected path is within the application directory
+            if str(selected_path).startswith(str(app_dir)):
+                logger.warning(
+                    "Selected path %s is inside the application directory %s. Ignoring.",
+                    selected_path,
+                    app_dir,
+                )
+                raise ValueError(
+                    "Selected path is inside the PSP application directory. Please move your save files outside of the application directory."
+                )
+
+            file_name = os.path.basename(selected_path_str)
+            if (file_name == "Level.sav" and save_type == "steam") or (
+                file_name == "containers.index" and save_type == "gamepass"
             ):
-                return file_path
+                return selected_path_str
+            else:
+                logger.warning(
+                    "Selected file %s does not match expected type for %s save.",
+                    file_name,
+                    save_type,
+                )
+                raise ValueError(
+                    f"Selected file {file_name} does not match expected type for {save_type} save. Please select a valid save file."
+                )
         return None
 
     @staticmethod
