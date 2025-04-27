@@ -8,7 +8,7 @@ clr-loader==0.2.6
 colorama==0.4.6
 colorlog==6.9.0
 cx_Freeze==7.2.7
-deepdiff==8.0.1
+deepdiff==8.4.2
 fastapi==0.115.6
 h11==0.16.0
 idna==3.10
