@@ -15,7 +15,7 @@ idna==3.10
 lief==0.15.1
 ordered-set==4.1.0
 orderly-set==5.2.2
-packaging==24.2
+packaging==25.0
 git+https://github.com/oMaN-Rod/palworld-save-tools.git@v0.5#egg=palworld-save-tools
 pefile==2023.2.7
 proxy_tools==0.1.0
