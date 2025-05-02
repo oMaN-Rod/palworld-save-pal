@@ -26,7 +26,7 @@ class WorkSuitabilities {
 	});
 
 	private async ensureLoaded(): Promise<void> {
-		if (Object.keys(this.workSuitability).length === 0 && !this.loading) {
+		if (!this.loading) {
 			try {
 				this.loading = true;
 				this.workSuitability = await sendAndWait(MessageType.GET_WORK_SUITABILITY);

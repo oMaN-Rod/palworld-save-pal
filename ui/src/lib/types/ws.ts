@@ -49,7 +49,9 @@ export enum MessageType {
 	GET_MAP_OBJECTS = 'get_map_objects',
 	DELETE_GUILD = 'delete_guild',
 	DELETE_PLAYER = 'delete_player',
-	NUKE_PRESETS = 'nuke_presets'
+	NUKE_PRESETS = 'nuke_presets',
+	GET_LAB_RESEARCH = 'get_lab_research',
+	UPDATE_LAB_RESEARCH = 'update_lab_research'
 }
 
 interface UpdateSaveFileData {

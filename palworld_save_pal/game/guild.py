@@ -13,10 +13,16 @@ from palworld_save_pal.utils.logging_config import create_logger
 logger = create_logger(__name__)
 
 
+class GuildLabResearchInfo(BaseModel):
+    research_id: str
+    work_amount: float
+
+
 class GuildDTO(BaseModel):
     name: Optional[str] = None
     base: Optional[BaseDTO] = None
     guild_chest: Optional[ItemContainer] = None
+    lab_research: Optional[List[GuildLabResearchInfo]] = None
 
 
 class Guild(BaseModel):
@@ -28,12 +34,14 @@ class Guild(BaseModel):
     _group_save_data: Optional[Dict[str, Any]] = PrivateAttr(default_factory=dict)
     _guild_extra_data: Optional[Dict[str, Any]] = PrivateAttr(default_factory=dict)
     _raw_data: Optional[Dict[str, Any]] = PrivateAttr(default_factory=dict)
+    _lab_raw_data: Optional[Dict[str, Any]] = PrivateAttr(default_factory=dict)
     _character_handle_ids: Optional[List[Dict[str, Any]]] = PrivateAttr(
         default_factory=list
     )
 
     bases: Dict[UUID, Base] = Field(default_factory=dict)
     guild_chest: Optional[ItemContainer] = Field(default=None)
+    lab_research: List[GuildLabResearchInfo] = Field(default_factory=list)
 
     def __init__(
         self,
@@ -52,9 +60,11 @@ class Guild(BaseModel):
                 self._raw_data,
                 "individual_character_handle_ids",
             )
-        if guild_extra_data and item_container_save_data and dynamic_item_save_data:
+        if guild_extra_data:
             self._guild_extra_data = guild_extra_data
-            self._load_guild_chest(item_container_save_data, dynamic_item_save_data)
+            if item_container_save_data and dynamic_item_save_data:
+                self._load_guild_chest(item_container_save_data, dynamic_item_save_data)
+            self._load_lab_research()
 
     @computed_field
     def id(self) -> UUID:
@@ -105,6 +115,10 @@ class Guild(BaseModel):
                 "container_id",
             )
         )
+
+    @computed_field
+    def lab_research_data(self) -> List[GuildLabResearchInfo]:
+        return self.lab_research
 
     @property
     def save_data(self) -> Dict[str, Any]:
@@ -171,6 +185,51 @@ class Guild(BaseModel):
         self.bases[base.id] = base
         logger.debug("Added base %s to guild %s", base.id, self.id)
 
+    def _load_lab_research(self):  # Added method
+        if not self._guild_extra_data:
+            logger.warning("No guild extra data found for guild %s", self.id)
+            return
+
+        lab_data = PalObjects.get_nested(
+            self._guild_extra_data, "value", "Lab", "value", "RawData", "value"
+        )
+        if not lab_data:
+            logger.warning(
+                "No Lab data found in guild extra data for guild %s", self.id
+            )
+            return
+
+        self._lab_raw_data = lab_data  # Store the raw lab data dict for modification
+        research_info_list = PalObjects.get_nested(self._lab_raw_data, "research_info")
+
+        if not research_info_list:
+            logger.debug("No research info found for guild %s", self.id)
+            self.lab_research = []
+            return
+
+        self.lab_research = [
+            GuildLabResearchInfo(
+                research_id=info["research_id"], work_amount=info["work_amount"]
+            )
+            for info in research_info_list
+        ]
+
+    def update_lab_research(self, updated_research: List[GuildLabResearchInfo]):
+        if not self._lab_raw_data:
+            logger.error(
+                "Cannot update lab research, raw lab data not loaded for guild %s",
+                self.id,
+            )
+            return
+
+        new_research_info_list = [
+            {"research_id": item.research_id, "work_amount": item.work_amount}
+            for item in updated_research
+        ]
+
+        self._lab_raw_data["research_info"] = new_research_info_list
+        self.lab_research = updated_research
+
     def update_from(self, guildDTO: GuildDTO):
         if guildDTO.name:
             self.name = guildDTO.name
@@ -183,6 +242,8 @@ class Guild(BaseModel):
             base.update_from(guildDTO.base)
         if guildDTO.guild_chest and self.guild_chest is not None:
             self.guild_chest.update_from(guildDTO.guild_chest.model_dump())
+        if guildDTO.lab_research is not None:
+            self.update_lab_research(guildDTO.lab_research)
 
     def _load_guild_chest(self, item_container_save_data, dynamic_item_save_data):
         if self.container_id is None:

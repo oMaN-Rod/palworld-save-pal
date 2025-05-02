@@ -3,9 +3,9 @@ from typing import Any, Dict, List, Optional, Union
 from pydantic import BaseModel
 from uuid import UUID
 
-from palworld_save_pal.editor.preset_profile import PresetProfile, PresetProfileDTO
+from palworld_save_pal.editor.preset_profile import PresetProfileDTO
 from palworld_save_pal.editor.settings import SettingsDTO
-from palworld_save_pal.game.guild import GuildDTO
+from palworld_save_pal.game.guild import GuildDTO, GuildLabResearchInfo
 from palworld_save_pal.game.pal import PalDTO
 from palworld_save_pal.game.player import PlayerDTO
 
@@ -56,6 +56,8 @@ class MessageType(str, Enum):
 
     # Guild Management
     DELETE_GUILD = "delete_guild"
+    GET_LAB_RESEARCH = "get_lab_research"
+    UPDATE_LAB_RESEARCH = "update_lab_research"
 
     # Save File Management
     DOWNLOAD_SAVE_FILE = "download_save_file"
@@ -354,3 +356,17 @@ class DeletePlayerMessage(BaseModel):
 
 class NukePresetsMessage(BaseMessage):
     type: str = MessageType.NUKE_PRESETS.value
+
+
+class GetLabResearchMessage(BaseMessage):
+    type: str = MessageType.GET_LAB_RESEARCH.value
+
+
+class UpdateLabResearchData(BaseModel):
+    guild_id: UUID
+    research_updates: List[GuildLabResearchInfo]
+
+
+class UpdateLabResearchMessage(BaseMessage):
+    type: str = MessageType.UPDATE_LAB_RESEARCH.value
+    data: UpdateLabResearchData

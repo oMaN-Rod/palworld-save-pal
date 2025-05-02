@@ -13,15 +13,17 @@
 	} from '$types';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { Ambulance, X, ReplaceAll, Plus, Trash, Bandage, Play, RefreshCcw } from 'lucide-svelte';
-	import { DebugButton, ItemBadge, PalBadge, StoragePresets } from '$components';
+	import { DebugButton, ItemBadge, PalBadge, StoragePresets, LabResearch } from '$components';
 	import { PalSelectModal, NumberInputModal, PalPresetSelectModal } from '$components/modals';
 	import { assetLoader, debounce, deepCopy, formatNickname } from '$utils';
 	import { cn } from '$theme';
 	import { TextInputModal } from '$components/modals';
 	import { staticIcons } from '$types/icons';
-	import { send, sendAndWait } from '$lib/utils/websocketUtils';
+	import { send } from '$lib/utils/websocketUtils';
 	import { goto } from '$app/navigation';
 	import Nuke from '$components/ui/icons/Nuke.svelte';
+	import LabResearchControls from '$components/guilds/LabResearchControls.svelte';
+
 	interface PalWithBaseId {
 		pal: Pal;
 		baseId: string;
@@ -37,11 +39,12 @@
 	let palSearchQuery = $state('');
 	let currentPage = $state(1);
 	let filteredPals: PalWithBaseId[] = $state([]);
-	let activeTab: 'pals' | 'storage' | 'guildChest' = $state('pals');
+	let activeTab: 'pals' | 'storage' | 'guildChest' | 'lab' = $state('pals');
 	let currentStorageContainer: (ItemContainer & { slots: ItemContainerSlot[] }) | undefined =
 		$state(undefined);
 	let selectedInventoryItem: string = $state('');
 	let inventorySearchQuery: string = $state('');
+	let selectedCategory: string = $state('Handcraft');
 
 	const playerGuild = $derived.by(() => {
 		if (appState.selectedPlayer?.guild_id) {
@@ -92,40 +95,40 @@
 
 	const ignoreKeys = ['None', 'Empty', 'TreasureBox', 'PalEgg', 'CommonDropItem'];
 
-    const currentBaseStorageContainers = $derived.by(() => {
-        if (!currentBase) return null;
-        const [_, base] = currentBase;
-        return Object.values(base.storage_containers)
-            .filter(
-                (container) =>
-                    container.slot_num !== 0 && !ignoreKeys.some((key) => container.key.includes(key))
-            )
-            .filter(
-                (container) =>
-                    (container.slots.some((s) => {
-                        const itemData = itemsData.items[s.static_id];
-                        return (
-                            s.static_id.toLowerCase().includes(selectedInventoryItem.toLowerCase()) ||
-                            (itemData &&
-                                itemData.info.localized_name
-                                    .toLowerCase()
-                                    .includes(selectedInventoryItem.toLowerCase()))
-                        );
-                    }) &&
-                        container.slots.some((s) => {
-                            const itemData = itemsData.items[s.static_id];
-                            return (
-                                s.static_id.toLowerCase().includes(inventorySearchQuery.toLowerCase()) ||
-                                (itemData &&
-                                    itemData.info.localized_name
-                                        .toLowerCase()
-                                        .includes(inventorySearchQuery.toLowerCase()))
-                            );
-                        })) ||
-                    container.slots.every((s) => s.static_id === 'None')
-            )
-            .sort((a, b) => a.key.localeCompare(b.key));
-    });
+	const currentBaseStorageContainers = $derived.by(() => {
+		if (!currentBase) return null;
+		const [_, base] = currentBase;
+		return Object.values(base.storage_containers)
+			.filter(
+				(container) =>
+					container.slot_num !== 0 && !ignoreKeys.some((key) => container.key.includes(key))
+			)
+			.filter(
+				(container) =>
+					(container.slots.some((s) => {
+						const itemData = itemsData.items[s.static_id];
+						return (
+							s.static_id.toLowerCase().includes(selectedInventoryItem.toLowerCase()) ||
+							(itemData &&
+								itemData.info.localized_name
+									.toLowerCase()
+									.includes(selectedInventoryItem.toLowerCase()))
+						);
+					}) &&
+						container.slots.some((s) => {
+							const itemData = itemsData.items[s.static_id];
+							return (
+								s.static_id.toLowerCase().includes(inventorySearchQuery.toLowerCase()) ||
+								(itemData &&
+									itemData.info.localized_name
+										.toLowerCase()
+										.includes(inventorySearchQuery.toLowerCase()))
+							);
+						})) ||
+					container.slots.every((s) => s.static_id === 'None')
+			)
+			.sort((a, b) => a.key.localeCompare(b.key));
+	});
 
 	type InventoryInfo = {
 		containers: Record<string, number>;
@@ -689,7 +692,7 @@
 				>
 					<button
 						class={cn(
-							'btn hover:bg-secondary-500/50 w-1/3 rounded-sm',
+							'btn hover:bg-secondary-500/50 w-1/4 rounded-sm',
 							activeTab == 'pals' ? 'bg-secondary-800' : ''
 						)}
 						onclick={() => {
@@ -702,7 +705,7 @@
 					</button>
 					<button
 						class={cn(
-							'btn hover:bg-secondary-500/50 w-1/3 rounded-sm',
+							'btn hover:bg-secondary-500/50 w-1/4 rounded-sm',
 							activeTab == 'storage' ? 'bg-secondary-800' : ''
 						)}
 						onclick={() => {
@@ -715,7 +718,7 @@
 					</button>
 					<button
 						class={cn(
-							'btn hover:bg-secondary-500/50 w-1/3 rounded-sm',
+							'btn hover:bg-secondary-500/50 w-1/4 rounded-sm',
 							activeTab == 'guildChest' ? 'bg-secondary-800' : ''
 						)}
 						onclick={() => {
@@ -725,6 +728,19 @@
 						}}
 					>
 						<span>Guild Chest</span>
+					</button>
+					<button
+						class={cn(
+							'btn hover:bg-secondary-500/50 w-1/4 rounded-sm',
+							activeTab == 'lab' ? 'bg-secondary-800' : ''
+						)}
+						onclick={() => {
+							inventorySearchQuery = '';
+							selectedInventoryItem = '';
+							activeTab = 'lab';
+						}}
+					>
+						<span>Lab</span>
 					</button>
 				</nav>
 				{#if activeTab === 'pals'}
@@ -867,34 +883,39 @@
 						{/snippet}
 					</List>
 				{/if}
+				{#if activeTab === 'lab'}
+					<LabResearchControls bind:selectedCategory guild={playerGuild} />
+				{/if}
 			</div>
 
 			<!-- Right Content -->
 			<div>
 				<!-- Pager -->
-				<div class="mb-4 flex items-center justify-center space-x-4">
-					<button class="rounded-sm px-4 py-2 font-bold" onclick={decrementPage}>
-						<img src={staticIcons.qIcon} alt="Previous" class="h-10 w-10" />
-					</button>
+				{#if activeTab !== 'lab'}
+					<div class="mb-4 flex items-center justify-center space-x-4">
+						<button class="rounded-sm px-4 py-2 font-bold" onclick={decrementPage}>
+							<img src={staticIcons.qIcon} alt="Previous" class="h-10 w-10" />
+						</button>
 
-					<div class="flex space-x-2">
-						{#each visiblePages as page}
-							<TooltipButton
-								class="h-8 w-8 rounded-full {page === currentPage
-									? 'bg-primary-500 text-white'
-									: 'bg-surface-800 hover:bg-gray-300'}"
-								onclick={() => (currentPage = page)}
-								popupLabel={`Base ${Object.entries(guildBases!)[page - 1]?.[0]}`}
-							>
-								{page}
-							</TooltipButton>
-						{/each}
+						<div class="flex space-x-2">
+							{#each visiblePages as page}
+								<TooltipButton
+									class="h-8 w-8 rounded-full {page === currentPage
+										? 'bg-primary-500 text-white'
+										: 'bg-surface-800 hover:bg-gray-300'}"
+									onclick={() => (currentPage = page)}
+									popupLabel={`Base ${Object.entries(guildBases!)[page - 1]?.[0]}`}
+								>
+									{page}
+								</TooltipButton>
+							{/each}
+						</div>
+
+						<button class="rounded-sm px-4 py-2 font-bold" onclick={incrementPage}>
+							<img src={staticIcons.eIcon} alt="Next" class="h-10 w-10" />
+						</button>
 					</div>
-
-					<button class="rounded-sm px-4 py-2 font-bold" onclick={incrementPage}>
-						<img src={staticIcons.eIcon} alt="Next" class="h-10 w-10" />
-					</button>
-				</div>
+				{/if}
 				{#if activeTab == 'pals'}
 					<div class="overflow-hidden">
 						<div class="grid grid-cols-6 place-items-center gap-4 p-4">
@@ -1050,6 +1071,10 @@
 								</div>
 							{/if}
 						</div>
+					</div>
+				{:else if activeTab == 'lab'}
+					<div class="h-full w-full">
+						<LabResearch guild={playerGuild} bind:selectedCategory />
 					</div>
 				{/if}
 			</div>
