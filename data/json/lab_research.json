@@ -1,6 +1,7 @@
 {
   "Cool1": {
     "category": "Cool",
+    "icon": "t_icon_research_itemcorruptionspeed",
     "sub_category": "ItemCorruptionSpeedRate",
     "assign_id": "Lab_Cool_1",
     "require_research_id": null,
@@ -23,6 +24,7 @@
   },
   "Cool1_2": {
     "category": "Cool",
+    "icon": "t_icon_research_craftspeed_09",
     "sub_category": "CraftSpeed_Cool",
     "assign_id": "Lab_Cool_1",
     "require_research_id": "Cool1",
@@ -49,6 +51,7 @@
   },
   "Cool1_3": {
     "category": "Cool",
+    "icon": "t_icon_research_craftspeed_09",
     "sub_category": "CraftSpeed_Cool",
     "assign_id": "Lab_Cool_2",
     "require_research_id": "Cool5",
@@ -79,6 +82,7 @@
   },
   "Cool1_4": {
     "category": "Cool",
+    "icon": "t_icon_research_craftspeed_09",
     "sub_category": "CraftSpeed_Cool",
     "assign_id": "Lab_Cool_3",
     "require_research_id": "Cool1_3",
@@ -109,6 +113,7 @@
   },
   "Cool1_5": {
     "category": "Cool",
+    "icon": "t_icon_research_craftspeed_09",
     "sub_category": "CraftSpeed_Cool",
     "assign_id": "Lab_Cool_4",
     "require_research_id": "Cool1_4",
@@ -139,6 +144,7 @@
   },
   "Cool2": {
     "category": "Cool",
+    "icon": "t_icon_research_egghatchingspeed",
     "sub_category": "PalEggHatchingSpeed",
     "assign_id": "Lab_Cool_1",
     "require_research_id": "Cool1",
@@ -169,6 +175,7 @@
   },
   "Cool2_2": {
     "category": "Cool",
+    "icon": "t_icon_research_egghatchingspeed",
     "sub_category": "PalEggHatchingSpeed",
     "assign_id": "Lab_Cool_2",
     "require_research_id": "Cool2",
@@ -199,6 +206,7 @@
   },
   "Cool2_3": {
     "category": "Cool",
+    "icon": "t_icon_research_egghatchingspeed",
     "sub_category": "PalEggHatchingSpeed",
     "assign_id": "Lab_Cool_3",
     "require_research_id": "Cool2_2",
@@ -229,6 +237,7 @@
   },
   "Cool2_4": {
     "category": "Cool",
+    "icon": "t_icon_research_egghatchingspeed",
     "sub_category": "PalEggHatchingSpeed",
     "assign_id": "Lab_Cool_4",
     "require_research_id": "Cool2_3",
@@ -259,6 +268,7 @@
   },
   "Cool3": {
     "category": "Cool",
+    "icon": "t_icon_research_researchspeed",
     "sub_category": "LabResearchSpeed",
     "assign_id": "Lab_Cool_1",
     "require_research_id": "Cool1",
@@ -285,6 +295,7 @@
   },
   "Cool3_2": {
     "category": "Cool",
+    "icon": "t_icon_research_researchspeed",
     "sub_category": "LabResearchSpeed",
     "assign_id": "Lab_Cool_2",
     "require_research_id": "Cool3",
@@ -315,6 +326,7 @@
   },
   "Cool3_3": {
     "category": "Cool",
+    "icon": "t_icon_research_defense",
     "sub_category": "DefenseRateBaseCampWorker",
     "assign_id": "Lab_Cool_3",
     "require_research_id": "Cool3_2",
@@ -345,6 +357,7 @@
   },
   "Cool3_4": {
     "category": "Cool",
+    "icon": "t_icon_research_attack",
     "sub_category": "AttackRateBaseCampWorker",
     "assign_id": "Lab_Cool_4",
     "require_research_id": "Cool3_3",
@@ -375,6 +388,7 @@
   },
   "Cool4": {
     "category": "Cool",
+    "icon": "t_icon_research_itemcorruptionspeed",
     "sub_category": "ItemCorruptionSpeedRate",
     "assign_id": "Lab_Cool_1",
     "require_research_id": "Cool1_2",
@@ -401,6 +415,7 @@
   },
   "Cool4_2": {
     "category": "Cool",
+    "icon": "t_icon_research_itemcorruptionspeed",
     "sub_category": "ItemCorruptionSpeedRate",
     "assign_id": "Lab_Cool_2",
     "require_research_id": "Cool4",
@@ -431,6 +446,7 @@
   },
   "Cool4_3": {
     "category": "Cool",
+    "icon": "t_icon_research_itemcorruptionspeed",
     "sub_category": "ItemCorruptionSpeedRate",
     "assign_id": "Lab_Cool_3",
     "require_research_id": "Cool4_2",
@@ -461,6 +477,7 @@
   },
   "Cool5": {
     "category": "Cool",
+    "icon": "t_icon_research_technologyprerequisite",
     "sub_category": "TechnologyUnlock",
     "assign_id": "Lab_Cool_1",
     "require_research_id": "Cool1_2",
@@ -487,6 +504,7 @@
   },
   "Deforest1": {
     "category": "Deforest",
+    "icon": "t_icon_research_craftspeed_06",
     "sub_category": "CraftSpeed_Deforest",
     "assign_id": "Lab_Deforest_1",
     "require_research_id": null,
@@ -513,6 +531,7 @@
   },
   "Deforest1_2": {
     "category": "Deforest",
+    "icon": "t_icon_research_craftspeed_06",
     "sub_category": "CraftSpeed_Deforest",
     "assign_id": "Lab_Deforest_1",
     "require_research_id": "Deforest1",
@@ -539,6 +558,7 @@
   },
   "Deforest1_3": {
     "category": "Deforest",
+    "icon": "t_icon_research_craftspeed_06",
     "sub_category": "CraftSpeed_Deforest",
     "assign_id": "Lab_Deforest_2",
     "require_research_id": "Deforest4",
@@ -569,6 +589,7 @@
   },
   "Deforest1_4": {
     "category": "Deforest",
+    "icon": "t_icon_research_craftspeed_06",
     "sub_category": "CraftSpeed_Deforest",
     "assign_id": "Lab_Deforest_3",
     "require_research_id": "Deforest1_3",
@@ -599,6 +620,7 @@
   },
   "Deforest1_5": {
     "category": "Deforest",
+    "icon": "t_icon_research_craftspeed_06",
     "sub_category": "CraftSpeed_Deforest",
     "assign_id": "Lab_Deforest_4",
     "require_research_id": "Deforest1_4",
@@ -629,6 +651,7 @@
   },
   "Deforest2": {
     "category": "Deforest",
+    "icon": "t_icon_research_expeditiontime",
     "sub_category": "ExpeditionTimeCostRate",
     "assign_id": "Lab_Deforest_1",
     "require_research_id": "Deforest1",
@@ -655,6 +678,7 @@
   },
   "Deforest2_2": {
     "category": "Deforest",
+    "icon": "t_icon_research_expeditionreward",
     "sub_category": "ExpeditionRewardRate",
     "assign_id": "Lab_Deforest_2",
     "require_research_id": "Deforest2",
@@ -685,6 +709,7 @@
   },
   "Deforest2_3": {
     "category": "Deforest",
+    "icon": "t_icon_research_expeditiontime",
     "sub_category": "ExpeditionTimeCostRate",
     "assign_id": "Lab_Deforest_2",
     "require_research_id": "Deforest2",
@@ -715,6 +740,7 @@
   },
   "Deforest2_4": {
     "category": "Deforest",
+    "icon": "t_icon_research_expeditionreward",
     "sub_category": "ExpeditionRewardRate",
     "assign_id": "Lab_Deforest_3",
     "require_research_id": "Deforest2_2",
@@ -745,6 +771,7 @@
   },
   "Deforest2_5": {
     "category": "Deforest",
+    "icon": "t_icon_research_expeditiontime",
     "sub_category": "ExpeditionTimeCostRate",
     "assign_id": "Lab_Deforest_3",
     "require_research_id": "Deforest2_3",
@@ -775,6 +802,7 @@
   },
   "Deforest2_6": {
     "category": "Deforest",
+    "icon": "t_icon_research_expeditionreward",
     "sub_category": "ExpeditionRewardRate",
     "assign_id": "Lab_Deforest_4",
     "require_research_id": "Deforest2_4",
@@ -805,6 +833,7 @@
   },
   "Deforest3": {
     "category": "Deforest",
+    "icon": "t_icon_research_researchspeed",
     "sub_category": "LabResearchSpeed",
     "assign_id": "Lab_Deforest_1",
     "require_research_id": "Deforest1",
@@ -831,6 +860,7 @@
   },
   "Deforest3_2": {
     "category": "Deforest",
+    "icon": "t_icon_research_researchspeed",
     "sub_category": "LabResearchSpeed",
     "assign_id": "Lab_Deforest_2",
     "require_research_id": "Deforest3",
@@ -861,6 +891,7 @@
   },
   "Deforest3_3": {
     "category": "Deforest",
+    "icon": "t_icon_research_defense",
     "sub_category": "DefenseRateBaseCampWorker",
     "assign_id": "Lab_Deforest_3",
     "require_research_id": "Deforest3_2",
@@ -891,6 +922,7 @@
   },
   "Deforest3_4": {
     "category": "Deforest",
+    "icon": "t_icon_research_attack",
     "sub_category": "AttackRateBaseCampWorker",
     "assign_id": "Lab_Deforest_4",
     "require_research_id": "Deforest3_3",
@@ -921,6 +953,7 @@
   },
   "Deforest4": {
     "category": "Deforest",
+    "icon": "t_icon_research_technologyprerequisite",
     "sub_category": "TechnologyUnlock",
     "assign_id": "Lab_Deforest_2",
     "require_research_id": "Deforest1_2",
@@ -947,6 +980,7 @@
   },
   "EmitFlame1": {
     "category": "EmitFlame",
+    "icon": "t_icon_research_craftspeed_00",
     "sub_category": "CraftSpeed_EmitFlame",
     "assign_id": "Lab_Fire_1",
     "require_research_id": null,
@@ -969,6 +1003,7 @@
   },
   "EmitFlame1_2": {
     "category": "EmitFlame",
+    "icon": "t_icon_research_craftspeed_00",
     "sub_category": "CraftSpeed_EmitFlame",
     "assign_id": "Lab_Fire_1",
     "require_research_id": "EmitFlame1",
@@ -999,6 +1034,7 @@
   },
   "EmitFlame1_3": {
     "category": "EmitFlame",
+    "icon": "t_icon_research_craftspeed_00",
     "sub_category": "CraftSpeed_EmitFlame",
     "assign_id": "Lab_Fire_2",
     "require_research_id": "EmitFlame5",
@@ -1029,6 +1065,7 @@
   },
   "EmitFlame1_4": {
     "category": "EmitFlame",
+    "icon": "t_icon_research_craftspeed_00",
     "sub_category": "CraftSpeed_EmitFlame",
     "assign_id": "Lab_Fire_3",
     "require_research_id": "EmitFlame1_3",
@@ -1059,6 +1096,7 @@
   },
   "EmitFlame1_5": {
     "category": "EmitFlame",
+    "icon": "t_icon_research_craftspeed_00",
     "sub_category": "CraftSpeed_EmitFlame",
     "assign_id": "Lab_Fire_4",
     "require_research_id": "EmitFlame1_4",
@@ -1089,6 +1127,7 @@
   },
   "EmitFlame2": {
     "category": "EmitFlame",
+    "icon": "t_icon_research_egghatchingspeed",
     "sub_category": "PalEggHatchingSpeed",
     "assign_id": "Lab_Fire_1",
     "require_research_id": "EmitFlame1",
@@ -1119,6 +1158,7 @@
   },
   "EmitFlame2_2": {
     "category": "EmitFlame",
+    "icon": "t_icon_research_egghatchingspeed",
     "sub_category": "PalEggHatchingSpeed",
     "assign_id": "Lab_Fire_2",
     "require_research_id": "EmitFlame2",
@@ -1149,6 +1189,7 @@
   },
   "EmitFlame2_3": {
     "category": "EmitFlame",
+    "icon": "t_icon_research_egghatchingspeed",
     "sub_category": "PalEggHatchingSpeed",
     "assign_id": "Lab_Fire_3",
     "require_research_id": "EmitFlame2_2",
@@ -1179,6 +1220,7 @@
   },
   "EmitFlame2_4": {
     "category": "EmitFlame",
+    "icon": "t_icon_research_egghatchingspeed",
     "sub_category": "PalEggHatchingSpeed",
     "assign_id": "Lab_Fire_4",
     "require_research_id": "EmitFlame2_3",
@@ -1209,6 +1251,7 @@
   },
   "EmitFlame3": {
     "category": "EmitFlame",
+    "icon": "t_icon_research_researchspeed",
     "sub_category": "LabResearchSpeed",
     "assign_id": "Lab_Fire_1",
     "require_research_id": "EmitFlame1",
@@ -1239,6 +1282,7 @@
   },
   "EmitFlame3_2": {
     "category": "EmitFlame",
+    "icon": "t_icon_research_researchspeed",
     "sub_category": "LabResearchSpeed",
     "assign_id": "Lab_Fire_2",
     "require_research_id": "EmitFlame3",
@@ -1269,6 +1313,7 @@
   },
   "EmitFlame3_3": {
     "category": "EmitFlame",
+    "icon": "t_icon_research_defense",
     "sub_category": "DefenseRateBaseCampWorker",
     "assign_id": "Lab_Fire_3",
     "require_research_id": "EmitFlame3_2",
@@ -1299,6 +1344,7 @@
   },
   "EmitFlame3_4": {
     "category": "EmitFlame",
+    "icon": "t_icon_research_attack",
     "sub_category": "AttackRateBaseCampWorker",
     "assign_id": "Lab_Fire_4",
     "require_research_id": "EmitFlame3_3",
@@ -1329,6 +1375,7 @@
   },
   "EmitFlame4": {
     "category": "EmitFlame",
+    "icon": "t_icon_research_productextraitem_food",
     "sub_category": "ProductExtraItemProbability_Food",
     "assign_id": "Lab_Fire_1",
     "require_research_id": "EmitFlame1_2",
@@ -1359,6 +1406,7 @@
   },
   "EmitFlame4_2": {
     "category": "EmitFlame",
+    "icon": "t_icon_research_productextraitem_ingot",
     "sub_category": "ProductExtraItemProbability_Ingot",
     "assign_id": "Lab_Fire_2",
     "require_research_id": "EmitFlame4",
@@ -1389,6 +1437,7 @@
   },
   "EmitFlame4_3": {
     "category": "EmitFlame",
+    "icon": "t_icon_research_productextraitem_food",
     "sub_category": "ProductExtraItemProbability_Food",
     "assign_id": "Lab_Fire_3",
     "require_research_id": "EmitFlame4_2",
@@ -1419,6 +1468,7 @@
   },
   "EmitFlame4_4": {
     "category": "EmitFlame",
+    "icon": "t_icon_research_productextraitem_ingot",
     "sub_category": "ProductExtraItemProbability_Ingot",
     "assign_id": "Lab_Fire_4",
     "require_research_id": "EmitFlame4_3",
@@ -1449,6 +1499,7 @@
   },
   "EmitFlame5": {
     "category": "EmitFlame",
+    "icon": "t_icon_research_technologyprerequisite",
     "sub_category": "TechnologyUnlock",
     "assign_id": "Lab_Fire_1",
     "require_research_id": "EmitFlame1_2",
@@ -1479,6 +1530,7 @@
   },
   "GenerateEnergy1": {
     "category": "GenerateElectricity",
+    "icon": "t_icon_research_craftspeed_03",
     "sub_category": "CraftSpeed_GenerateElectricity",
     "assign_id": "Lab_Gen_Energy_1",
     "require_research_id": null,
@@ -1505,6 +1557,7 @@
   },
   "GenerateEnergy1_2": {
     "category": "GenerateElectricity",
+    "icon": "t_icon_research_craftspeed_03",
     "sub_category": "CraftSpeed_GenerateElectricity",
     "assign_id": "Lab_Gen_Energy_1",
     "require_research_id": "GenerateEnergy1",
@@ -1531,6 +1584,7 @@
   },
   "GenerateEnergy1_3": {
     "category": "GenerateElectricity",
+    "icon": "t_icon_research_craftspeed_03",
     "sub_category": "CraftSpeed_GenerateElectricity",
     "assign_id": "Lab_Gen_Energy_2",
     "require_research_id": "GenerateEnergy1_2",
@@ -1561,6 +1615,7 @@
   },
   "GenerateEnergy1_4": {
     "category": "GenerateElectricity",
+    "icon": "t_icon_research_craftspeed_03",
     "sub_category": "CraftSpeed_GenerateElectricity",
     "assign_id": "Lab_Gen_Energy_3",
     "require_research_id": "GenerateEnergy5",
@@ -1591,6 +1646,7 @@
   },
   "GenerateEnergy1_5": {
     "category": "GenerateElectricity",
+    "icon": "t_icon_research_craftspeed_03",
     "sub_category": "CraftSpeed_GenerateElectricity",
     "assign_id": "Lab_Gen_Energy_4",
     "require_research_id": "GenerateEnergy1_4",
@@ -1621,6 +1677,7 @@
   },
   "GenerateEnergy2": {
     "category": "GenerateElectricity",
+    "icon": "t_icon_research_energystorage",
     "sub_category": "EnergyStorageRate",
     "assign_id": "Lab_Gen_Energy_1",
     "require_research_id": "GenerateEnergy1",
@@ -1647,6 +1704,7 @@
   },
   "GenerateEnergy2_2": {
     "category": "GenerateElectricity",
+    "icon": "t_icon_research_energystorage",
     "sub_category": "EnergyStorageRate",
     "assign_id": "Lab_Gen_Energy_2",
     "require_research_id": "GenerateEnergy2",
@@ -1677,6 +1735,7 @@
   },
   "GenerateEnergy2_3": {
     "category": "GenerateElectricity",
+    "icon": "t_icon_research_energystorage",
     "sub_category": "EnergyStorageRate",
     "assign_id": "Lab_Gen_Energy_3",
     "require_research_id": "GenerateEnergy2_2",
@@ -1707,6 +1766,7 @@
   },
   "GenerateEnergy3": {
     "category": "GenerateElectricity",
+    "icon": "t_icon_research_craftspeed_03",
     "sub_category": "LabResearchSpeed",
     "assign_id": "Lab_Gen_Energy_1",
     "require_research_id": "GenerateEnergy1",
@@ -1733,6 +1793,7 @@
   },
   "GenerateEnergy3_2": {
     "category": "GenerateElectricity",
+    "icon": "t_icon_research_researchspeed",
     "sub_category": "LabResearchSpeed",
     "assign_id": "Lab_Gen_Energy_2",
     "require_research_id": "GenerateEnergy3",
@@ -1763,6 +1824,7 @@
   },
   "GenerateEnergy3_3": {
     "category": "GenerateElectricity",
+    "icon": "t_icon_research_defense",
     "sub_category": "DefenseRateBaseCampWorker",
     "assign_id": "Lab_Gen_Energy_3",
     "require_research_id": "GenerateEnergy3_2",
@@ -1793,6 +1855,7 @@
   },
   "GenerateEnergy3_4": {
     "category": "GenerateElectricity",
+    "icon": "t_icon_research_attack",
     "sub_category": "AttackRateBaseCampWorker",
     "assign_id": "Lab_Gen_Energy_4",
     "require_research_id": "GenerateEnergy3_3",
@@ -1823,6 +1886,7 @@
   },
   "GenerateEnergy4": {
     "category": "GenerateElectricity",
+    "icon": "t_icon_research_consumeenergy",
     "sub_category": "ConsumeEnergyRate",
     "assign_id": "Lab_Gen_Energy_2",
     "require_research_id": "GenerateEnergy1_2",
@@ -1853,6 +1917,7 @@
   },
   "GenerateEnergy4_2": {
     "category": "GenerateElectricity",
+    "icon": "t_icon_research_consumeenergy",
     "sub_category": "ConsumeEnergyRate",
     "assign_id": "Lab_Gen_Energy_3",
     "require_research_id": "GenerateEnergy4",
@@ -1883,6 +1948,7 @@
   },
   "GenerateEnergy4_3": {
     "category": "GenerateElectricity",
+    "icon": "t_icon_research_consumeenergy",
     "sub_category": "ConsumeEnergyRate",
     "assign_id": "Lab_Gen_Energy_4",
     "require_research_id": "GenerateEnergy4_2",
@@ -1913,6 +1979,7 @@
   },
   "GenerateEnergy5": {
     "category": "GenerateElectricity",
+    "icon": "t_icon_research_technologyprerequisite",
     "sub_category": "TechnologyUnlock",
     "assign_id": "Lab_Gen_Energy_3",
     "require_research_id": "GenerateEnergy1_3",
@@ -1939,6 +2006,7 @@
   },
   "Handcraft1": {
     "category": "Handcraft",
+    "icon": "t_icon_research_craftspeed_04",
     "sub_category": "CraftSpeed_Handcraft",
     "assign_id": "Lab_Handcraft_1",
     "require_research_id": null,
@@ -1965,6 +2033,7 @@
   },
   "Handcraft1_2": {
     "category": "Handcraft",
+    "icon": "t_icon_research_craftspeed_04",
     "sub_category": "CraftSpeed_Handcraft",
     "assign_id": "Lab_Handcraft_1",
     "require_research_id": "Handcraft1",
@@ -1995,6 +2064,7 @@
   },
   "Handcraft1_3": {
     "category": "Handcraft",
+    "icon": "t_icon_research_craftspeed_04",
     "sub_category": "CraftSpeed_Handcraft",
     "assign_id": "Lab_Handcraft_2",
     "require_research_id": "Handcraft5",
@@ -2021,6 +2091,7 @@
   },
   "Handcraft1_4": {
     "category": "Handcraft",
+    "icon": "t_icon_research_craftspeed_04",
     "sub_category": "CraftSpeed_Handcraft",
     "assign_id": "Lab_Handcraft_3",
     "require_research_id": "Handcraft1_3",
@@ -2051,6 +2122,7 @@
   },
   "Handcraft1_5": {
     "category": "Handcraft",
+    "icon": "t_icon_research_craftspeed_04",
     "sub_category": "CraftSpeed_Handcraft",
     "assign_id": "Lab_Handcraft_4",
     "require_research_id": "Handcraft1_4",
@@ -2081,6 +2153,7 @@
   },
   "Handcraft2": {
     "category": "Handcraft",
+    "icon": "t_icon_research_productcostdown",
     "sub_category": "ProductItemConsumeMaterialNumRate",
     "assign_id": "Lab_Handcraft_1",
     "require_research_id": "Handcraft1",
@@ -2111,6 +2184,7 @@
   },
   "Handcraft2_2": {
     "category": "Handcraft",
+    "icon": "t_icon_research_productcostdown",
     "sub_category": "ProductItemConsumeMaterialNumRate",
     "assign_id": "Lab_Handcraft_1",
     "require_research_id": "Handcraft2",
@@ -2141,6 +2215,7 @@
   },
   "Handcraft2_3": {
     "category": "Handcraft",
+    "icon": "t_icon_research_productcostdown",
     "sub_category": "ProductItemConsumeMaterialNumRate",
     "assign_id": "Lab_Handcraft_2",
     "require_research_id": "Handcraft2_2",
@@ -2171,6 +2246,7 @@
   },
   "Handcraft2_4": {
     "category": "Handcraft",
+    "icon": "t_icon_research_productcostdown",
     "sub_category": "ProductItemConsumeMaterialNumRate",
     "assign_id": "Lab_Handcraft_3",
     "require_research_id": "Handcraft2_3",
@@ -2201,6 +2277,7 @@
   },
   "Handcraft2_5": {
     "category": "Handcraft",
+    "icon": "t_icon_research_productcostdown",
     "sub_category": "ProductItemConsumeMaterialNumRate",
     "assign_id": "Lab_Handcraft_3",
     "require_research_id": "Handcraft2_4",
@@ -2231,6 +2308,7 @@
   },
   "Handcraft2_6": {
     "category": "Handcraft",
+    "icon": "t_icon_research_productcostdown",
     "sub_category": "ProductItemConsumeMaterialNumRate",
     "assign_id": "Lab_Handcraft_4",
     "require_research_id": "Handcraft2_5",
@@ -2261,6 +2339,7 @@
   },
   "Handcraft3": {
     "category": "Handcraft",
+    "icon": "t_icon_research_researchspeed",
     "sub_category": "LabResearchSpeed",
     "assign_id": "Lab_Handcraft_1",
     "require_research_id": "Handcraft1",
@@ -2291,6 +2370,7 @@
   },
   "Handcraft3_2": {
     "category": "Handcraft",
+    "icon": "t_icon_research_researchspeed",
     "sub_category": "LabResearchSpeed",
     "assign_id": "Lab_Handcraft_2",
     "require_research_id": "Handcraft3",
@@ -2321,6 +2401,7 @@
   },
   "Handcraft3_3": {
     "category": "Handcraft",
+    "icon": "t_icon_research_defense",
     "sub_category": "DefenseRateBaseCampWorker",
     "assign_id": "Lab_Handcraft_3",
     "require_research_id": "Handcraft3_2",
@@ -2351,6 +2432,7 @@
   },
   "Handcraft3_4": {
     "category": "Handcraft",
+    "icon": "t_icon_research_attack",
     "sub_category": "AttackRateBaseCampWorker",
     "assign_id": "Lab_Handcraft_4",
     "require_research_id": "Handcraft3_3",
@@ -2381,6 +2463,7 @@
   },
   "Handcraft4": {
     "category": "Handcraft",
+    "icon": "t_icon_research_productextraitem_sphere",
     "sub_category": "ProductExtraItemProbability_Sphere",
     "assign_id": "Lab_Handcraft_1",
     "require_research_id": "Handcraft1_2",
@@ -2411,6 +2494,7 @@
   },
   "Handcraft4_2": {
     "category": "Handcraft",
+    "icon": "t_icon_research_productextraitem_bullet",
     "sub_category": "ProductExtraItemProbability_Bullet",
     "assign_id": "Lab_Handcraft_2",
     "require_research_id": "Handcraft4",
@@ -2441,6 +2525,7 @@
   },
   "Handcraft4_3": {
     "category": "Handcraft",
+    "icon": "t_icon_research_productextraitem_sphere",
     "sub_category": "ProductExtraItemProbability_Sphere",
     "assign_id": "Lab_Handcraft_3",
     "require_research_id": "Handcraft4_2",
@@ -2471,6 +2556,7 @@
   },
   "Handcraft4_4": {
     "category": "Handcraft",
+    "icon": "t_icon_research_productextraitem_bullet",
     "sub_category": "ProductExtraItemProbability_Bullet",
     "assign_id": "Lab_Handcraft_4",
     "require_research_id": "Handcraft4_3",
@@ -2501,6 +2587,7 @@
   },
   "Handcraft5": {
     "category": "Handcraft",
+    "icon": "t_icon_research_technologyprerequisite",
     "sub_category": "TechnologyUnlock",
     "assign_id": "Lab_Handcraft_1",
     "require_research_id": "Handcraft1_2",
@@ -2527,6 +2614,7 @@
   },
   "Medicine1": {
     "category": "ProductMedicine",
+    "icon": "t_icon_research_craftspeed_08",
     "sub_category": "CraftSpeed_ProductMedicine",
     "assign_id": "Lab_Medicine_1",
     "require_research_id": null,
@@ -2553,6 +2641,7 @@
   },
   "Medicine1_2": {
     "category": "ProductMedicine",
+    "icon": "t_icon_research_craftspeed_08",
     "sub_category": "CraftSpeed_ProductMedicine",
     "assign_id": "Lab_Medicine_1",
     "require_research_id": "Medicine1",
@@ -2579,6 +2668,7 @@
   },
   "Medicine1_3": {
     "category": "ProductMedicine",
+    "icon": "t_icon_research_craftspeed_08",
     "sub_category": "CraftSpeed_ProductMedicine",
     "assign_id": "Lab_Medicine_2",
     "require_research_id": "Medicine4",
@@ -2609,6 +2699,7 @@
   },
   "Medicine1_4": {
     "category": "ProductMedicine",
+    "icon": "t_icon_research_craftspeed_08",
     "sub_category": "CraftSpeed_ProductMedicine",
     "assign_id": "Lab_Medicine_3",
     "require_research_id": "Medicine1_3",
@@ -2639,6 +2730,7 @@
   },
   "Medicine1_5": {
     "category": "ProductMedicine",
+    "icon": "t_icon_research_craftspeed_08",
     "sub_category": "CraftSpeed_ProductMedicine",
     "assign_id": "Lab_Medicine_4",
     "require_research_id": "Medicine1_4",
@@ -2669,6 +2761,7 @@
   },
   "Medicine2": {
     "category": "ProductMedicine",
+    "icon": "t_icon_research_researchspeed",
     "sub_category": "CraftSpeed_ProductMedicine",
     "assign_id": "Lab_Medicine_1",
     "require_research_id": "Medicine1",
@@ -2695,6 +2788,7 @@
   },
   "Medicine2_2": {
     "category": "ProductMedicine",
+    "icon": "t_icon_research_researchspeed",
     "sub_category": "CraftSpeed_ProductMedicine",
     "assign_id": "Lab_Medicine_2",
     "require_research_id": "Medicine2",
@@ -2725,6 +2819,7 @@
   },
   "Medicine2_3": {
     "category": "ProductMedicine",
+    "icon": "t_icon_research_defense",
     "sub_category": "DefenseRateBaseCampWorker",
     "assign_id": "Lab_Medicine_3",
     "require_research_id": "Medicine2_2",
@@ -2755,6 +2850,7 @@
   },
   "Medicine2_4": {
     "category": "ProductMedicine",
+    "icon": "t_icon_research_attack",
     "sub_category": "AttackRateBaseCampWorker",
     "assign_id": "Lab_Medicine_4",
     "require_research_id": "Medicine2_3",
@@ -2785,6 +2881,7 @@
   },
   "Medicine3": {
     "category": "ProductMedicine",
+    "icon": "t_icon_research_productcostdown",
     "sub_category": "ProductItemConsumeMaterialNumRate",
     "assign_id": "Lab_Medicine_2",
     "require_research_id": "Medicine1_2",
@@ -2815,6 +2912,7 @@
   },
   "Medicine3_2": {
     "category": "ProductMedicine",
+    "icon": "t_icon_research_productcostdown",
     "sub_category": "ProductItemConsumeMaterialNumRate",
     "assign_id": "Lab_Medicine_3",
     "require_research_id": "Medicine3",
@@ -2845,6 +2943,7 @@
   },
   "Medicine3_3": {
     "category": "ProductMedicine",
+    "icon": "t_icon_research_productcostdown",
     "sub_category": "ProductItemConsumeMaterialNumRate",
     "assign_id": "Lab_Medicine_4",
     "require_research_id": "Medicine3_2",
@@ -2875,6 +2974,7 @@
   },
   "Medicine4": {
     "category": "ProductMedicine",
+    "icon": "t_icon_research_technologyprerequisite",
     "sub_category": "TechnologyUnlock",
     "assign_id": "Lab_Medicine_2",
     "require_research_id": "Medicine1_2",
@@ -2901,6 +3001,7 @@
   },
   "Mining1": {
     "category": "Mining",
+    "icon": "t_icon_research_craftspeed_07",
     "sub_category": "CraftSpeed_Mining",
     "assign_id": "Lab_Mining_1",
     "require_research_id": null,
@@ -2923,6 +3024,7 @@
   },
   "Mining1_2": {
     "category": "Mining",
+    "icon": "t_icon_research_craftspeed_07",
     "sub_category": "CraftSpeed_Mining",
     "assign_id": "Lab_Mining_1",
     "require_research_id": "Mining1",
@@ -2953,6 +3055,7 @@
   },
   "Mining1_3": {
     "category": "Mining",
+    "icon": "t_icon_research_craftspeed_07",
     "sub_category": "CraftSpeed_Mining",
     "assign_id": "Lab_Mining_2",
     "require_research_id": "Mining5",
@@ -2983,6 +3086,7 @@
   },
   "Mining1_4": {
     "category": "Mining",
+    "icon": "t_icon_research_craftspeed_07",
     "sub_category": "CraftSpeed_Mining",
     "assign_id": "Lab_Mining_3",
     "require_research_id": "Mining1_3",
@@ -3013,6 +3117,7 @@
   },
   "Mining1_5": {
     "category": "Mining",
+    "icon": "t_icon_research_craftspeed_07",
     "sub_category": "CraftSpeed_Mining",
     "assign_id": "Lab_Mining_4",
     "require_research_id": "Mining1_4",
@@ -3043,6 +3148,7 @@
   },
   "Mining2": {
     "category": "Mining",
+    "icon": "t_icon_research_expeditiontime",
     "sub_category": "ExpeditionTimeCostRate",
     "assign_id": "Lab_Mining_1",
     "require_research_id": "Mining1",
@@ -3073,6 +3179,7 @@
   },
   "Mining2_2": {
     "category": "Mining",
+    "icon": "t_icon_research_expeditionreward",
     "sub_category": "ExpeditionRewardRate",
     "assign_id": "Lab_Mining_2",
     "require_research_id": "Mining2",
@@ -3103,6 +3210,7 @@
   },
   "Mining2_3": {
     "category": "Mining",
+    "icon": "t_icon_research_expeditiontime",
     "sub_category": "ExpeditionTimeCostRate",
     "assign_id": "Lab_Mining_3",
     "require_research_id": "Mining2_2",
@@ -3133,6 +3241,7 @@
   },
   "Mining2_4": {
     "category": "Mining",
+    "icon": "t_icon_research_expeditionreward",
     "sub_category": "ExpeditionRewardRate",
     "assign_id": "Lab_Mining_4",
     "require_research_id": "Mining2_3",
@@ -3163,6 +3272,7 @@
   },
   "Mining3": {
     "category": "Mining",
+    "icon": "t_icon_research_researchspeed",
     "sub_category": "LabResearchSpeed",
     "assign_id": "Lab_Mining_1",
     "require_research_id": "Mining1",
@@ -3189,6 +3299,7 @@
   },
   "Mining3_2": {
     "category": "Mining",
+    "icon": "t_icon_research_researchspeed",
     "sub_category": "LabResearchSpeed",
     "assign_id": "Lab_Mining_2",
     "require_research_id": "Mining3",
@@ -3219,6 +3330,7 @@
   },
   "Mining3_3": {
     "category": "Mining",
+    "icon": "t_icon_research_defense",
     "sub_category": "DefenseRateBaseCampWorker",
     "assign_id": "Lab_Mining_3",
     "require_research_id": "Mining3_2",
@@ -3249,6 +3361,7 @@
   },
   "Mining3_4": {
     "category": "Mining",
+    "icon": "t_icon_research_attack",
     "sub_category": "AttackRateBaseCampWorker",
     "assign_id": "Lab_Mining_4",
     "require_research_id": "Mining3_3",
@@ -3279,6 +3392,7 @@
   },
   "Mining4": {
     "category": "Mining",
+    "icon": "t_icon_research_oilspeed",
     "sub_category": "OilExtractionSpeedRate",
     "assign_id": "Lab_Mining_3",
     "require_research_id": "Mining1_3",
@@ -3309,6 +3423,7 @@
   },
   "Mining4_2": {
     "category": "Mining",
+    "icon": "t_icon_research_oilspeed",
     "sub_category": "OilExtractionSpeedRate",
     "assign_id": "Lab_Mining_3",
     "require_research_id": "Mining4",
@@ -3339,6 +3454,7 @@
   },
   "Mining4_3": {
     "category": "Mining",
+    "icon": "t_icon_research_oilspeed",
     "sub_category": "OilExtractionSpeedRate",
     "assign_id": "Lab_Mining_4",
     "require_research_id": "Mining4_2",
@@ -3369,6 +3485,7 @@
   },
   "Mining5": {
     "category": "Mining",
+    "icon": "t_icon_research_technologyprerequisite",
     "sub_category": "TechnologyUnlock",
     "assign_id": "Lab_Mining_2",
     "require_research_id": "Mining1_2",
@@ -3399,6 +3516,7 @@
   },
   "Seeding1": {
     "category": "Seeding",
+    "icon": "t_icon_research_craftspeed_02",
     "sub_category": "CraftSpeed_Seeding",
     "assign_id": "Lab_Seeding_1",
     "require_research_id": null,
@@ -3425,6 +3543,7 @@
   },
   "Seeding1_2": {
     "category": "Seeding",
+    "icon": "t_icon_research_craftspeed_02",
     "sub_category": "CraftSpeed_Seeding",
     "assign_id": "Lab_Seeding_1",
     "require_research_id": "Seeding1",
@@ -3451,6 +3570,7 @@
   },
   "Seeding1_3": {
     "category": "Seeding",
+    "icon": "t_icon_research_craftspeed_02",
     "sub_category": "CraftSpeed_Seeding",
     "assign_id": "Lab_Seeding_2",
     "require_research_id": "Seeding5",
@@ -3481,6 +3601,7 @@
   },
   "Seeding1_4": {
     "category": "Seeding",
+    "icon": "t_icon_research_craftspeed_02",
     "sub_category": "CraftSpeed_Seeding",
     "assign_id": "Lab_Seeding_3",
     "require_research_id": "Seeding1_3",
@@ -3511,6 +3632,7 @@
   },
   "Seeding1_5": {
     "category": "Seeding",
+    "icon": "t_icon_research_craftspeed_02",
     "sub_category": "CraftSpeed_Seeding",
     "assign_id": "Lab_Seeding_4",
     "require_research_id": "Seeding1_4",
@@ -3541,6 +3663,7 @@
   },
   "Seeding2": {
     "category": "Seeding",
+    "icon": "t_icon_research_farmgrowup",
     "sub_category": "FarmCropGrowupSpeed",
     "assign_id": "Lab_Seeding_1",
     "require_research_id": "Seeding1",
@@ -3567,6 +3690,7 @@
   },
   "Seeding2_2": {
     "category": "Seeding",
+    "icon": "t_icon_research_farmharvest",
     "sub_category": "FarmCropHarvestNumRate",
     "assign_id": "Lab_Seeding_2",
     "require_research_id": "Seeding2",
@@ -3593,6 +3717,7 @@
   },
   "Seeding2_3": {
     "category": "Seeding",
+    "icon": "t_icon_research_craftspeed_02",
     "sub_category": "FarmCropGrowupSpeed",
     "assign_id": "Lab_Seeding_3",
     "require_research_id": "Seeding2",
@@ -3619,6 +3744,7 @@
   },
   "Seeding2_4": {
     "category": "Seeding",
+    "icon": "t_icon_research_craftspeed_02",
     "sub_category": "FarmCropGrowupSpeed",
     "assign_id": "Lab_Seeding_4",
     "require_research_id": "Seeding2_3",
@@ -3649,6 +3775,7 @@
   },
   "Seeding2_5": {
     "category": "Seeding",
+    "icon": "t_icon_research_farmharvest",
     "sub_category": "FarmCropHarvestNumRate",
     "assign_id": "Lab_Seeding_3",
     "require_research_id": "Seeding2_2",
@@ -3679,6 +3806,7 @@
   },
   "Seeding2_6": {
     "category": "Seeding",
+    "icon": "t_icon_research_farmharvest",
     "sub_category": "FarmCropHarvestNumRate",
     "assign_id": "Lab_Seeding_4",
     "require_research_id": "Seeding2_5",
@@ -3709,6 +3837,7 @@
   },
   "Seeding3": {
     "category": "Seeding",
+    "icon": "t_icon_research_researchspeed",
     "sub_category": "LabResearchSpeed",
     "assign_id": "Lab_Seeding_1",
     "require_research_id": "Seeding1",
@@ -3735,6 +3864,7 @@
   },
   "Seeding3_2": {
     "category": "Seeding",
+    "icon": "t_icon_research_researchspeed",
     "sub_category": "LabResearchSpeed",
     "assign_id": "Lab_Seeding_2",
     "require_research_id": "Seeding3",
@@ -3761,6 +3891,7 @@
   },
   "Seeding3_3": {
     "category": "Seeding",
+    "icon": "t_icon_research_defense",
     "sub_category": "DefenseRateBaseCampWorker",
     "assign_id": "Lab_Seeding_3",
     "require_research_id": "Seeding3_2",
@@ -3791,6 +3922,7 @@
   },
   "Seeding3_4": {
     "category": "Seeding",
+    "icon": "t_icon_research_attack",
     "sub_category": "AttackRateBaseCampWorker",
     "assign_id": "Lab_Seeding_4",
     "require_research_id": "Seeding3_3",
@@ -3821,6 +3953,7 @@
   },
   "Seeding4": {
     "category": "Seeding",
+    "icon": "t_icon_research_technologyprerequisite",
     "sub_category": "TechnologyUnlock",
     "assign_id": "Lab_Seeding_1",
     "require_research_id": "Seeding1_2",
@@ -3851,6 +3984,7 @@
   },
   "Seeding5": {
     "category": "Seeding",
+    "icon": "t_icon_research_technologyprerequisite",
     "sub_category": "TechnologyUnlock",
     "assign_id": "Lab_Seeding_2",
     "require_research_id": "Seeding4",
@@ -3881,6 +4015,7 @@
   },
   "Watering1": {
     "category": "Watering",
+    "icon": "t_icon_research_craftspeed_01",
     "sub_category": "CraftSpeed_Watering",
     "assign_id": "Lab_Water_1",
     "require_research_id": null,
@@ -3903,6 +4038,7 @@
   },
   "Watering1_2": {
     "category": "Watering",
+    "icon": "t_icon_research_craftspeed_01",
     "sub_category": "CraftSpeed_Watering",
     "assign_id": "Lab_Water_1",
     "require_research_id": "Watering1",
@@ -3929,6 +4065,7 @@
   },
   "Watering1_3": {
     "category": "Watering",
+    "icon": "t_icon_research_craftspeed_01",
     "sub_category": "CraftSpeed_Watering",
     "assign_id": "Lab_Water_2",
     "require_research_id": "Watering5",
@@ -3959,6 +4096,7 @@
   },
   "Watering1_4": {
     "category": "Watering",
+    "icon": "t_icon_research_craftspeed_01",
     "sub_category": "CraftSpeed_Watering",
     "assign_id": "Lab_Water_3",
     "require_research_id": "Watering1_3",
@@ -3989,6 +4127,7 @@
   },
   "Watering1_5": {
     "category": "Watering",
+    "icon": "t_icon_research_craftspeed_01",
     "sub_category": "CraftSpeed_Watering",
     "assign_id": "Lab_Water_4",
     "require_research_id": "Watering1_4",
@@ -4019,6 +4158,7 @@
   },
   "Watering2": {
     "category": "Watering",
+    "icon": "t_icon_research_farmgrowup",
     "sub_category": "FarmCropGrowupSpeed",
     "assign_id": "Lab_Water_1",
     "require_research_id": "Watering1",
@@ -4045,6 +4185,7 @@
   },
   "Watering2_2": {
     "category": "Watering",
+    "icon": "t_icon_research_farmharvest",
     "sub_category": "FarmCropHarvestNumRate",
     "assign_id": "Lab_Water_2",
     "require_research_id": "Watering2",
@@ -4075,6 +4216,7 @@
   },
   "Watering2_3": {
     "category": "Watering",
+    "icon": "t_icon_research_farmgrowup",
     "sub_category": "FarmCropGrowupSpeed",
     "assign_id": "Lab_Water_3",
     "require_research_id": "Watering2_2",
@@ -4105,6 +4247,7 @@
   },
   "Watering2_4": {
     "category": "Watering",
+    "icon": "t_icon_research_farmharvest",
     "sub_category": "FarmCropHarvestNumRate",
     "assign_id": "Lab_Water_4",
     "require_research_id": "Watering2_3",
@@ -4135,6 +4278,7 @@
   },
   "Watering3": {
     "category": "Watering",
+    "icon": "t_icon_research_researchspeed",
     "sub_category": "LabResearchSpeed",
     "assign_id": "Lab_Water_1",
     "require_research_id": "Watering1",
@@ -4161,6 +4305,7 @@
   },
   "Watering3_2": {
     "category": "Watering",
+    "icon": "t_icon_research_researchspeed",
     "sub_category": "LabResearchSpeed",
     "assign_id": "Lab_Water_2",
     "require_research_id": "Watering3",
@@ -4191,6 +4336,7 @@
   },
   "Watering3_3": {
     "category": "Watering",
+    "icon": "t_icon_research_defense",
     "sub_category": "DefenseRateBaseCampWorker",
     "assign_id": "Lab_Water_3",
     "require_research_id": "Watering3_2",
@@ -4221,6 +4367,7 @@
   },
   "Watering3_4": {
     "category": "Watering",
+    "icon": "t_icon_research_attack",
     "sub_category": "AttackRateBaseCampWorker",
     "assign_id": "Lab_Water_4",
     "require_research_id": "Watering3_3",
@@ -4251,6 +4398,7 @@
   },
   "Watering4": {
     "category": "Watering",
+    "icon": "t_icon_research_productextraitem_ore",
     "sub_category": "ProductExtraItemProbability_Ore",
     "assign_id": "Lab_Water_2",
     "require_research_id": "Watering1_2",
@@ -4277,6 +4425,7 @@
   },
   "Watering4_2": {
     "category": "Watering",
+    "icon": "t_icon_research_productextraitem_ore",
     "sub_category": "ProductExtraItemProbability_Ore",
     "assign_id": "Lab_Water_4",
     "require_research_id": "Watering4",
@@ -4307,6 +4456,7 @@
   },
   "Watering5": {
     "category": "Watering",
+    "icon": "t_icon_research_craftspeed_01",
     "sub_category": "TechnologyUnlock",
     "assign_id": "Lab_Water_1",
     "require_research_id": "Watering1_2",
