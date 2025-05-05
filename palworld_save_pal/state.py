@@ -36,6 +36,7 @@ class AppState(BaseModel):
         sav_id: str,
         level_sav: bytes,
         level_meta: Optional[bytes],
+        local_data: Optional[bytes],
         player_savs: Dict[UUID, Dict[str, bytes]],
         ws_callback=None,
         local=False,
@@ -46,7 +47,7 @@ class AppState(BaseModel):
         self.save_type = save_type
         await ws_callback(f"Loading level.sav and {len(player_savs)} players...")
         self.save_file = await SaveFile(name=sav_id).load_sav_files(
-            level_sav, player_savs, level_meta, ws_callback
+            level_sav, player_savs, level_meta, local_data, ws_callback
         )
         await ws_callback("Files loaded, getting players...")
         self.players = self.save_file.get_players()

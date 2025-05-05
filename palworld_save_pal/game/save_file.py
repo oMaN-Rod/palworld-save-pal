@@ -142,6 +142,7 @@ class SaveFile(BaseModel):
 
     _gvas_file: Optional[GvasFile] = PrivateAttr(default=None)
     _level_meta_gvas_file: Optional[GvasFile] = PrivateAttr(default=None)
+    _local_data_gvas_file: Optional[GvasFile] = PrivateAttr(default=None)
     _player_gvas_files: Dict[UUID, PlayerGvasFiles] = PrivateAttr(default_factory=dict)
 
     _character_save_parameter_map: List[Dict[str, Any]] = PrivateAttr(
@@ -673,6 +674,20 @@ class SaveFile(BaseModel):
         self._level_meta_gvas_file = gvas_file
         return self._level_meta_gvas_file
 
+    def load_local_data(self, data: bytes):
+        logger.info("Loading %s LocalData.sav as GVAS", self.name)
+        raw_gvas, _ = decompress_sav_to_gvas(data)
+        custom_properties = {
+            k: v
+            for k, v in PALWORLD_CUSTOM_PROPERTIES.items()
+            if k not in DISABLED_PROPERTIES
+        }
+        gvas_file = GvasFile.read(
+            raw_gvas, PALWORLD_TYPE_HINTS, custom_properties, allow_nan=True
+        )
+        self._local_data_gvas_file = gvas_file
+        return self._local_data_gvas_file
+
     def load_level_sav(self, data: bytes):
         logger.info("Loading %s as GVAS", self.name)
         raw_gvas, _ = decompress_sav_to_gvas(data)
@@ -692,6 +707,7 @@ class SaveFile(BaseModel):
         level_sav: bytes,
         player_sav_files: Dict[UUID, Dict[str, bytes]],
         level_meta: Optional[bytes] = None,
+        local_data: Optional[bytes] = None,
         ws_callback=None,
     ):
         logger.info("Loading %s", self.name)
@@ -708,6 +724,12 @@ class SaveFile(BaseModel):
         else:
             await ws_callback("No LevelMeta.sav found, skipped.")
             self.world_name = "No LevelMeta.sav found"
+
+        if local_data:
+            await ws_callback("Loading local data...")
+            self.load_local_data(local_data)
+        else:
+            await ws_callback("No LocalData.sav found, might be multiplayer, skipped.")
 
         self._get_file_size(level_sav)
         self._set_data()

@@ -4,11 +4,12 @@
 	import { worldToLeaflet, worldToMap } from '$components/map/utils';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import { mapImg } from '$components/map/mapImages';
-	import { Target } from 'lucide-svelte';
+	import { MapPinned, Target } from 'lucide-svelte';
 	import { mapObjects } from '$lib/data';
 	import L from 'leaflet';
 	import type { Base, Player } from '$types';
 	import { assetLoader } from '$utils';
+	import FileDropzone from '$components/ui/file-dropzone/FileDropzone.svelte';
 
 	const appState = getAppState();
 
@@ -19,6 +20,7 @@
 	let showDungeons = $state(true);
 	let showAlphaPals = $state(true);
 	let showPredatorPals = $state(true);
+	let showCustomCoordinates = $state(true);
 	let section = $state(['players']);
 	let map: L.Map | undefined = $state();
 
@@ -56,8 +58,11 @@
 			Object.values(mapObjects.points).filter((point) => point.type === 'predator_pal').length || 0
 		);
 	});
+	const customCoordinatesCount = 10;
 	const anubisImg = $derived(assetLoader.loadMenuImage('anubis'));
 	const starryonImg = $derived(assetLoader.loadMenuImage('nightbluehorse'));
+
+	let files: FileList | undefined = $state();
 
 	function handlePlayerFocus(player: Player) {
 		const coords = worldToLeaflet(player.location.x, player.location.y);
@@ -139,6 +144,14 @@
 						<span>Predator Pals</span>
 						<span class="text-surface-500 text-xs">{predatorPalCount}</span>
 					</button>
+					<button
+						class="flex items-center space-x-2 {showCustomCoordinates ? '' : 'opacity-25'}"
+						onclick={() => (showCustomCoordinates = !showCustomCoordinates)}
+					>
+						<MapPinned />
+						<span>Custom Coordinates</span>
+						<span class="text-surface-500 text-xs">{customCoordinatesCount}</span>
+					</button>
 				</div>
 			</div>
 			{#if appState.saveFile}
@@ -207,6 +220,16 @@
 			<div class="mt-auto flex flex-col gap-2">
 				<p class="text-sm text-gray-500">Click on the map to see detailed coordinates.</p>
 			</div>
+
+			<hr />
+
+			<h2 class="text-lg font-bold">View/Import Coordinates</h2>
+			<FileDropzone baseClass="w-full hover:bg-surface-800" name="file" bind:files>
+				{#snippet message()}
+					<h3 class="h4">Click to upload your LocalData.sav</h3>
+					<span>or drag and drop your zip file here</span>
+				{/snippet}
+			</FileDropzone>
 		</div>
 	</div>
 	<Map

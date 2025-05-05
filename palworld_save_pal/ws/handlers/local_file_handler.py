@@ -180,12 +180,18 @@ async def process_steam_save(save_path: str, ws: WebSocket, local: bool):
         with open(validation_result.level_meta, "rb") as f:
             level_meta = f.read()
 
+    local_data = None
+    if validation_result.local_data:
+        with open(validation_result.local_data, "rb") as f:
+            local_data = f.read()
+
     player_files = FileManager.get_player_saves(validation_result.players_dir)
 
     await app_state.process_save_files(
         save_path,
         level_sav,
         level_meta,
+        local_data,
         player_files,
         ws_callback=lambda msg: ws.send_json(
             build_response(MessageType.PROGRESS_MESSAGE, msg)

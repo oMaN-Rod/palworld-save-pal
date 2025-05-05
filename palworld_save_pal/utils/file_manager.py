@@ -56,6 +56,7 @@ class FileValidationResult(BaseModel):
     valid: bool
     level_sav: Optional[str] = None
     level_meta: Optional[str] = None
+    local_data: Optional[str] = None
     players_dir: Optional[str] = None
     error: Optional[str] = None
     gamepass_saves: Optional[Dict[str, GamepassSaveData]] = None
@@ -72,6 +73,7 @@ class FileManager:
         level_sav = save_dir / "Level.sav"
         level_meta = save_dir / "LevelMeta.sav"
         players_dir = save_dir / "Players"
+        local_data = save_dir / "LocalData.sav"
 
         if not level_sav.exists():
             return FileValidationResult(
@@ -91,6 +93,9 @@ class FileManager:
         if not level_meta.exists():
             level_meta = None
 
+        if not local_data.exists():
+            local_data = None
+
         player_saves = list(players_dir.glob("*.sav"))
         if not player_saves:
             return FileValidationResult(
@@ -102,6 +107,7 @@ class FileManager:
             valid=True,
             level_sav=str(level_sav),
             level_meta=str(level_meta) if level_meta else None,
+            local_data=str(local_data) if local_data else None,
             players_dir=str(players_dir),
             error=None,
         )
