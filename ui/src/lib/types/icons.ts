@@ -24,6 +24,7 @@ export const staticIcons = {
 	predatorIcon: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/predator.png`),
 	oilrigIcon: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/oilrig.png`),
 	unknownIcon: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/unknown.png`),
+	unknownEggIcon: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/unknown_egg.png`),
 	altarIcon: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/altar.png`),
 	luckyIcon: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/lucky.png`),
 	pspWhite: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/app/psp_white.png`),

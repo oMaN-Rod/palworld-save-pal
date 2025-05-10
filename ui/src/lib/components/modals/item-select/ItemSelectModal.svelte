@@ -1,35 +1,92 @@
 <script lang="ts">
 	import { Card, Tooltip, Combobox, Input } from '$components/ui';
 	import { ItemTypeA, ItemTypeB, Rarity, type SelectOption } from '$types';
-	import { Apple, Cuboid, Delete, Gem, Save, Scroll, Shield, Sword, X } from 'lucide-svelte';
-	import { itemsData } from '$lib/data';
+	import {
+		Apple,
+		Cuboid,
+		Delete,
+		Gem,
+		Save,
+		Scroll,
+		Shield,
+		Sword,
+		Trash2,
+		X
+	} from 'lucide-svelte';
+	import { itemsData, palsData } from '$lib/data';
 	import type { Item, ItemGroup } from '$types';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { cn } from '$theme';
 	import { assetLoader } from '$utils';
+	import { staticIcons } from '$types/icons';
+	import { onMount } from 'svelte';
 
 	let {
 		title = '',
 		itemId = '',
 		count = 1,
+		palId,
 		group,
 		closeModal
 	} = $props<{
 		title: string;
 		itemId: string;
+		palId?: string;
 		count: number;
 		group: ItemGroup;
 		closeModal: (value: [string, number]) => void;
 	}>();
 
-	let items: Item[] = $derived.by(() => {
+	let selectedPalId: string = $state('');
+	const selectedPalKey = $derived(selectedPalId.replace('BOSS_', ''));
+	const palOptions: SelectOption[] = $derived.by(() => {
+		const item = itemsData.items[itemId];
+		if (!item || !item.details.dynamic?.character_ids) return [];
+
+		return item.details.dynamic.character_ids
+			.map((charId) => {
+				const palInfo = palsData.pals[charId.replace('BOSS_', '')];
+				const label = charId.includes('BOSS_')
+					? `${palInfo?.localized_name} (Alpha)`
+					: palInfo?.localized_name || charId.replace('BOSS_', '');
+				return {
+					label: label,
+					value: charId
+				};
+			})
+			.sort((a, b) => a.label.localeCompare(b.label));
+	});
+	const itemData = $derived.by(() => itemsData.items[itemId]);
+	const isEgg = $derived(itemData?.details.dynamic?.type === 'egg');
+
+	const eggIconSrc = $derived.by(() => {
+		if (!itemData || (itemData && itemData.details.dynamic?.type !== 'egg')) return;
+		if (itemData && !itemData.details.dynamic?.character_ids) return staticIcons.unknownEggIcon;
+		return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${itemData.details.icon}.png`);
+	});
+
+	const palIconSrc = $derived.by(() => {
+		if (!selectedPalKey) return staticIcons.unknownIcon;
+		const palData = palsData.pals[selectedPalKey];
+		return assetLoader.loadMenuImage(selectedPalKey, palData?.is_pal ?? true);
+	});
+
+	const items: Item[] = $derived.by(() => {
 		return Object.values(itemsData.items).filter((item) => {
 			if (
 				item.details.type_a == ItemTypeA.None ||
 				item.details.type_a == ItemTypeA.MonsterEquipWeapon ||
-				item.details.type_b == ItemTypeB.MaterialPalEgg ||
 				item.details.disabled
 			) {
+				return false;
+			}
+			if (
+				item.details.dynamic?.type === 'egg' &&
+				item.details.dynamic?.character_ids &&
+				item.details.dynamic?.character_ids?.length > 0
+			) {
+				return true;
+			} else if (item.details.dynamic?.type === 'egg') {
 				return false;
 			}
 			switch (group as ItemGroup) {
@@ -58,16 +115,16 @@
 			}
 		});
 	});
-	let selectOptions: SelectOption[] = $derived.by(() => {
+	const selectOptions: SelectOption[] = $derived.by(() => {
 		return items.map((item) => ({ label: item.info.localized_name, value: item.id }));
 	});
 
-	let selectedItemMaxStackCount = $derived(
+	const selectedItemMaxStackCount = $derived(
 		items.find((item) => item.id === itemId)?.details.max_stack_count
 	);
 
 	function handleClose(confirmed: boolean) {
-		closeModal(confirmed ? [itemId, count] : undefined);
+		closeModal(confirmed ? [itemId, count, selectedPalId] : undefined);
 	}
 
 	function handleClear() {
@@ -139,6 +196,18 @@
 				return '';
 		}
 	}
+
+	function getPalIcon(palId: string): string {
+		if (!palId) return staticIcons.unknownIcon;
+		const palData = palsData.pals[palId];
+		return assetLoader.loadMenuImage(palId, palData?.is_pal ?? true);
+	}
+
+	onMount(() => {
+		if (palId) {
+			selectedPalId = palId;
+		}
+	});
 </script>
 
 {#snippet noIcon(typeA: ItemTypeA, typeB: ItemTypeB)}
@@ -209,8 +278,61 @@
 				{/await}
 			{/snippet}
 		</Combobox>
-		<Input labelClass="w-1/4" type="number" bind:value={count} max={selectedItemMaxStackCount} />
+		{#if !isEgg && selectedItemMaxStackCount && selectedItemMaxStackCount > 1}
+			<Input labelClass="w-1/4" type="number" bind:value={count} max={selectedItemMaxStackCount} />
+		{/if}
 	</div>
+
+	{#if isEgg}
+		<div class="flex flex-col space-y-4">
+			<div class="flex items-end space-x-2">
+				<Combobox
+					label="Pal"
+					options={palOptions}
+					bind:value={selectedPalId}
+					placeholder="Choose a Pal..."
+				>
+					{#snippet selectOption(option)}
+						<div class="flex items-center space-x-2">
+							<img src={getPalIcon(option.value)} alt={option.label} class="h-8 w-8" />
+							<span>{option.label}</span>
+						</div>
+					{/snippet}
+				</Combobox>
+				<Tooltip label="Clear Pal Selection">
+					<button
+						class="btn hover:bg-error-500/25 p-2 disabled:cursor-not-allowed disabled:opacity-50"
+						onclick={() => {
+							selectedPalId = '';
+						}}
+						disabled={!selectedPalId}
+					>
+						<Trash2 size={20} />
+					</button>
+				</Tooltip>
+			</div>
+
+			<div class="mt-4 flex items-center justify-center space-x-4 p-4">
+				<div class="flex flex-col items-center">
+					<span class="text-surface-400 mb-1 text-sm">Egg</span>
+					<img
+						src={eggIconSrc}
+						alt={itemId || 'Unknown Egg'}
+						class="h-20 w-20 object-contain 2xl:h-24 2xl:w-24"
+					/>
+				</div>
+				<span class="text-surface-400 text-2xl font-bold">=</span>
+				<div class="flex flex-col items-center">
+					<span class="text-surface-400 mb-1 text-sm">Pal</span>
+					<img
+						src={palIconSrc}
+						alt={selectedPalId || 'Unknown Pal'}
+						class="h-20 w-20 rounded-full object-contain 2xl:h-24 2xl:w-24"
+					/>
+				</div>
+			</div>
+		</div>
+	{/if}
 
 	<div class="mt-2 flex flex-row items-center space-x-2">
 		<Tooltip position="bottom">

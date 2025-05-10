@@ -18049,7 +18049,24 @@
     "icon": "t_itemicon_material_palegg_dark_01",
     "dynamic": {
       "type": "egg",
-      "passive_skills": []
+      "passive_skills": [],
+      "character_ids": [
+        "WizardOwl",
+        "NegativeKoala",
+        "DreamDemon",
+        "NegativeOctopus",
+        "Bastet",
+        "BerryGoat_Dark",
+        "DarkCrow",
+        "LizardMan",
+        "Werewolf",
+        "RaijinDaughter_Water",
+        "BlackPuppy",
+        "MysteryMask",
+        "GrimGirl",
+        "PurpleSpider",
+        "BadCatgirl"
+      ]
     },
     "disabled": false
   },
@@ -18083,7 +18100,23 @@
     "icon": "t_itemicon_material_palegg_dark_01",
     "dynamic": {
       "type": "egg",
-      "passive_skills": []
+      "passive_skills": [],
+      "character_ids": [
+        "NightFox",
+        "Baphomet_Dark",
+        "AmaterasuWolf_Dark",
+        "GhostBeast",
+        "CatBat",
+        "CatMage",
+        "CatMage_Fire",
+        "CatVampire",
+        "HadesBird",
+        "CandleGhost",
+        "ScorpionMan",
+        "DarkAlien",
+        "GhostRabbit",
+        "NightBlueHorse"
+      ]
     },
     "disabled": false
   },
@@ -18117,7 +18150,19 @@
     "icon": "t_itemicon_material_palegg_dark_01",
     "dynamic": {
       "type": "egg",
-      "passive_skills": []
+      "passive_skills": [],
+      "character_ids": [
+        "HadesBird_Electric",
+        "DarkScorpion",
+        "LilyQueen_Dark",
+        "BlackGriffon",
+        "BlackCentaur",
+        "IceHorse_Dark",
+        "NightLady",
+        "NightLady_Dark",
+        "MoonQueen",
+        "DarkMechaDragon"
+      ]
     },
     "disabled": false
   },
@@ -18168,7 +18213,11 @@
     "icon": "t_itemicon_material_palegg_dragon_01",
     "dynamic": {
       "type": "egg",
-      "passive_skills": []
+      "passive_skills": [],
+      "character_ids": [
+        "FairyDragon",
+        "SkyDragon"
+      ]
     },
     "disabled": false
   },
@@ -18202,7 +18251,21 @@
     "icon": "t_itemicon_material_palegg_dragon_01",
     "dynamic": {
       "type": "egg",
-      "passive_skills": []
+      "passive_skills": [],
+      "character_ids": [
+        "FairyDragon_Water",
+        "LazyDragon",
+        "LazyDragon_Electric",
+        "SkyDragon_Grass",
+        "KingBahamut_Dragon",
+        "BlackMetalDragon",
+        "Umihebi",
+        "Umihebi_Fire",
+        "ThunderDragonMan",
+        "JetDragon",
+        "WhiteAlienDragon",
+        "WhiteShieldDragon"
+      ]
     },
     "disabled": false
   },
@@ -18219,7 +18282,14 @@
     "icon": "t_itemicon_material_palegg_earth_01",
     "dynamic": {
       "type": "egg",
-      "passive_skills": []
+      "passive_skills": [],
+      "character_ids": [
+        "Boar",
+        "CuteMole",
+        "WindChimes",
+        "LazyCatfish",
+        "SmallArmadillo"
+      ]
     },
     "disabled": false
   },
@@ -18253,7 +18323,15 @@
     "icon": "t_itemicon_material_palegg_earth_01",
     "dynamic": {
       "type": "egg",
-      "passive_skills": []
+      "passive_skills": [],
+      "character_ids": [
+        "Deer_Ground",
+        "Gorilla_Ground",
+        "Serpent_Ground",
+        "DrillGame",
+        "WhiteTiger_Ground",
+        "FeatherOstrich"
+      ]
     },
     "disabled": false
   },
@@ -18287,7 +18365,15 @@
     "icon": "t_itemicon_material_palegg_earth_01",
     "dynamic": {
       "type": "egg",
-      "passive_skills": []
+      "passive_skills": [],
+      "character_ids": [
+        "HerculesBeetle",
+        "HerculesBeetle_Ground",
+        "DarkScorpion_Ground",
+        "Anubis",
+        "WingGolem",
+        "GoldenHorse"
+      ]
     },
     "disabled": false
   },
@@ -18304,7 +18390,13 @@
     "icon": "t_itemicon_material_palegg_electricity_01",
     "dynamic": {
       "type": "egg",
-      "passive_skills": []
+      "passive_skills": [],
+      "character_ids": [
+        "ElecCat",
+        "Hedgehog",
+        "RaijinDaughter",
+        "FengyunDeeper_Electric"
+      ]
     },
     "disabled": false
   },
@@ -18338,7 +18430,15 @@
     "icon": "t_itemicon_material_palegg_electricity_01",
     "dynamic": {
       "type": "egg",
-      "passive_skills": []
+      "passive_skills": [],
+      "character_ids": [
+        "GrassPanda_Electric",
+        "Kirin",
+        "ThunderDog",
+        "FlowerDinosaur_Electric",
+        "ThunderBird",
+        "BlueThunderHorse"
+      ]
     },
     "disabled": false
   },
@@ -18372,7 +18472,10 @@
     "icon": "t_itemicon_material_palegg_electricity_01",
     "dynamic": {
       "type": "egg",
-      "passive_skills": []
+      "passive_skills": [],
+      "character_ids": [
+        "ElecPanda"
+      ]
     },
     "disabled": false
   },
@@ -18389,7 +18492,18 @@
     "icon": "t_itemicon_material_palegg_fire_01",
     "dynamic": {
       "type": "egg",
-      "passive_skills": []
+      "passive_skills": [],
+      "character_ids": [
+        "Kitsunebi",
+        "FlameBambi",
+        "SharkKid_Fire",
+        "Baphomet",
+        "FlameBuffalo",
+        "LizardMan_Fire",
+        "LavaGirl",
+        "BirdDragon",
+        "Kelpie_Fire"
+      ]
     },
     "disabled": false
   },
@@ -18406,7 +18520,10 @@
     "icon": "t_itemicon_material_palegg_fire_01",
     "dynamic": {
       "type": "egg",
-      "passive_skills": []
+      "passive_skills": [],
+      "character_ids": [
+        "FlameBuffalo"
+      ]
     },
     "disabled": false
   },
@@ -18423,7 +18540,20 @@
     "icon": "t_itemicon_material_palegg_fire_01",
     "dynamic": {
       "type": "egg",
-      "passive_skills": []
+      "passive_skills": [],
+      "character_ids": [
+        "WeaselDragon_Fire",
+        "FireKirin",
+        "FireKirin_Dark",
+        "AmaterasuWolf",
+        "Ronin",
+        "Ronin_Dark",
+        "RedArmorBird",
+        "FoxMage",
+        "FoxMage_Dark",
+        "Manticore",
+        "VolcanicMonster"
+      ]
     },
     "disabled": false
   },
@@ -18457,7 +18587,13 @@
     "icon": "t_itemicon_material_palegg_fire_01",
     "dynamic": {
       "type": "egg",
-      "passive_skills": []
+      "passive_skills": [],
+      "character_ids": [
+        "Manticore_Dark",
+        "KingBahamut",
+        "Suzaku",
+        "Horus"
+      ]
     },
     "disabled": false
   },
@@ -18474,7 +18610,17 @@
     "icon": "t_itemicon_material_palegg_ice_01",
     "dynamic": {
       "type": "egg",
-      "passive_skills": []
+      "passive_skills": [],
+      "character_ids": [
+        "Kitsunebi_Ice",
+        "Hedgehog_Ice",
+        "Bastet_Ice",
+        "WindChimes_Ice",
+        "Werewolf_Ice",
+        "MopBaby",
+        "WeaselDragon",
+        "IceDeer"
+      ]
     },
     "disabled": false
   },
@@ -18508,7 +18654,16 @@
     "icon": "t_itemicon_material_palegg_ice_01",
     "dynamic": {
       "type": "egg",
-      "passive_skills": []
+      "passive_skills": [],
+      "character_ids": [
+        "MopKing",
+        "IceFox",
+        "BirdDragon_Ice",
+        "WhiteMoth",
+        "WhiteTiger",
+        "VolcanicMonster_Ice",
+        "Yeti"
+      ]
     },
     "disabled": false
   },
@@ -18542,7 +18697,13 @@
     "icon": "t_itemicon_material_palegg_ice_01",
     "dynamic": {
       "type": "egg",
-      "passive_skills": []
+      "passive_skills": [],
+      "character_ids": [
+        "KingAlpaca_Ice",
+        "GrassMammoth_Ice",
+        "IceHorse",
+        "SnowTigerBeastman"
+      ]
     },
     "disabled": false
   },
@@ -18559,7 +18720,20 @@
     "icon": "t_itemicon_material_palegg_leaf_01",
     "dynamic": {
       "type": "egg",
-      "passive_skills": []
+      "passive_skills": [],
+      "character_ids": [
+        "Carbunclo",
+        "Monkey",
+        "PlantSlime",
+        "FlowerRabbit",
+        "LittleBriarRose",
+        "BerryGoat",
+        "PinkRabbit_Grass",
+        "CuteButterfly",
+        "SoldierBee",
+        "LeafPrincess",
+        "MushroomDragon"
+      ]
     },
     "disabled": false
   },
@@ -18593,7 +18767,16 @@
     "icon": "t_itemicon_material_palegg_leaf_01",
     "dynamic": {
       "type": "egg",
-      "passive_skills": []
+      "passive_skills": [],
+      "character_ids": [
+        "GrassPanda",
+        "RobinHood",
+        "RobinHood_Ground",
+        "FlowerDinosaur",
+        "SakuraSaurus",
+        "MushroomDragon_Dark",
+        "BlueberryFairy"
+      ]
     },
     "disabled": false
   },
@@ -18627,7 +18810,17 @@
     "icon": "t_itemicon_material_palegg_leaf_01",
     "dynamic": {
       "type": "egg",
-      "passive_skills": []
+      "passive_skills": [],
+      "character_ids": [
+        "QueenBee",
+        "GrassRabbitMan",
+        "VioletFairy",
+        "SakuraSaurus_Water",
+        "FlowerDoll",
+        "GrassMammoth",
+        "Yeti_Grass",
+        "LilyQueen"
+      ]
     },
     "disabled": false
   },
@@ -18644,7 +18837,25 @@
     "icon": "t_itemicon_material_palegg",
     "dynamic": {
       "type": "egg",
-      "passive_skills": []
+      "passive_skills": [],
+      "character_ids": [
+        "SheepBall",
+        "PinkCat",
+        "ChickenPal",
+        "CuteFox",
+        "WoolFox",
+        "Garm",
+        "ColorfulBird",
+        "CowPal",
+        "SweetsSheep",
+        "Alpaca",
+        "Deer",
+        "HawkBird",
+        "PinkRabbit",
+        "Eagle",
+        "FengyunDeeper",
+        "GuardianDog"
+      ]
     },
     "disabled": false
   },
@@ -18678,7 +18889,16 @@
     "icon": "t_itemicon_material_palegg",
     "dynamic": {
       "type": "egg",
-      "passive_skills": []
+      "passive_skills": [],
+      "character_ids": [
+        "Gorilla",
+        "NaughtyCat",
+        "Mutant",
+        "PinkLizard",
+        "SifuDog",
+        "MimicDog",
+        "WhiteDeer"
+      ]
     },
     "disabled": false
   },
@@ -18712,7 +18932,12 @@
     "icon": "t_itemicon_material_palegg",
     "dynamic": {
       "type": "egg",
-      "passive_skills": []
+      "passive_skills": [],
+      "character_ids": [
+        "KingAlpaca",
+        "SaintCentaur",
+        "BOSS_Mutant"
+      ]
     },
     "disabled": false
   },
@@ -18729,7 +18954,17 @@
     "icon": "t_itemicon_material_palegg_water_01",
     "dynamic": {
       "type": "egg",
-      "passive_skills": []
+      "passive_skills": [],
+      "character_ids": [
+        "BluePlatypus",
+        "Penguin",
+        "Ganesha",
+        "FlyingManta",
+        "SharkKid",
+        "Serpent",
+        "Kelpie",
+        "KendoFrog"
+      ]
     },
     "disabled": false
   },
@@ -18763,7 +18998,11 @@
     "icon": "t_itemicon_material_palegg_water_01",
     "dynamic": {
       "type": "egg",
-      "passive_skills": []
+      "passive_skills": [],
+      "character_ids": [
+        "CaptainPenguin",
+        "BlueDragon"
+      ]
     },
     "disabled": false
   },
@@ -18797,7 +19036,11 @@
     "icon": "t_itemicon_material_palegg_water_01",
     "dynamic": {
       "type": "egg",
-      "passive_skills": []
+      "passive_skills": [],
+      "character_ids": [
+        "Suzaku_Water",
+        "Horus_Water"
+      ]
     },
     "disabled": false
   },

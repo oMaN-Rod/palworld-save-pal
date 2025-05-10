@@ -172,6 +172,8 @@ export interface DynamicItem {
 	durability: number;
 	remaining_bullets?: number;
 	type: DynamicItemClass;
+	character_id?: string;
+	character_key?: string;
 }
 
 export enum ItemTypeA {
@@ -411,6 +413,7 @@ export interface DynamicItemDetails {
 	magazine_size?: number;
 	type: DynamicItemClass;
 	passive_skills?: string[];
+	character_ids?: string[];
 }
 export interface ItemDetails {
 	group: ItemGroup;

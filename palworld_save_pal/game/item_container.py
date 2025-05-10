@@ -118,11 +118,13 @@ class ItemContainer(BaseModel):
             item_type = PalObjects.get_nested(raw_data, "type")
             durability = PalObjects.get_nested(raw_data, "durability")
             remaining_bullets = PalObjects.get_nested(raw_data, "remaining_bullets")
+            character_id = PalObjects.get_nested(raw_data, "character_id")
             item = DynamicItem(
                 local_id=local_id,
                 durability=durability,
                 remaining_bullets=remaining_bullets,
                 type=item_type,
+                character_id=character_id,
             )
         return item
 
@@ -169,6 +171,7 @@ class ItemContainer(BaseModel):
             if are_equal_uuids(current_slot_index, slot_index):
                 logger.debug("Removing slot %s", slot_index)
                 self._container_slots_data.remove(slot)
+                break
 
     def _remove_dynamic_item(self, local_id: UUID) -> None:
         logger.debug("%s (%s) => %s", self.type, self.id, local_id)
@@ -181,6 +184,7 @@ class ItemContainer(BaseModel):
             if are_equal_uuids(current_local_id, local_id):
                 logger.debug("Removing dynamic item %s", local_id)
                 self._dynamic_item_save_data.remove(item)
+                break
 
     def _update_or_create_container_slot(
         self, slot: ItemContainerSlot
@@ -264,13 +268,23 @@ class ItemContainer(BaseModel):
         PalObjects.set_nested(raw_data, "id", "static_id", value=slot.static_id)
         PalObjects.set_nested(raw_data, "type", value=slot.dynamic_item.type)
 
-        if slot.dynamic_item.type == "armor":
+        if slot.dynamic_item.type == "egg" and slot.dynamic_item.character_id:
+            PalObjects.set_nested(raw_data, "type", value="egg")
+            PalObjects.set_nested(
+                raw_data, "character_id", value=slot.dynamic_item.character_id
+            )
+            safe_remove(raw_data, "durability")
+            safe_remove(raw_data, "remaining_bullets")
+            safe_remove(raw_data, "passive_skill_list")
+        elif slot.dynamic_item.type == "armor":
+            PalObjects.set_nested(raw_data, "type", value="armor")
             PalObjects.set_nested(
                 raw_data, "durability", value=slot.dynamic_item.durability
             )
             safe_remove(raw_data, "remaining_bullets")
             safe_remove(raw_data, "passive_skill_list")
         elif slot.dynamic_item.type == "weapon":
+            PalObjects.set_nested(raw_data, "type", value="weapon")
             PalObjects.set_nested(
                 raw_data, "durability", value=slot.dynamic_item.durability
             )

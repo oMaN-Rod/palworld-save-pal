@@ -5,6 +5,7 @@ from uuid import UUID
 from pydantic import BaseModel, PrivateAttr, computed_field
 
 
+from palworld_save_pal.game.utils import clean_character_id
 from palworld_save_pal.utils.dict import safe_remove
 from palworld_save_pal.utils.logging_config import create_logger
 from palworld_save_pal.utils.json_manager import JsonManager
@@ -167,37 +168,7 @@ class Pal(BaseModel):
 
     @computed_field
     def character_key(self) -> Optional[str]:
-        typo_mapping = {
-            "boss_police_old": "BOSS_Police_old",
-            "police_handgun": "Police_Handgun",
-        }
-        if self.character_id.lower() in typo_mapping:
-            self.character_id = typo_mapping[self.character_id.lower()]
-
-        if (
-            self.character_id.lower().startswith("boss_")
-            and self.character_id not in PAL_DATA
-        ):
-            self._character_key = self.character_id[5:]
-        elif self.character_id.lower().startswith("predator_"):
-            self._character_key = self.character_id[9:]
-        elif self.character_id.lower().endswith("_avatar"):
-            self._character_key = self.character_id[:-7]
-        else:
-            self._character_key = self.character_id
-
-        key_mapping = {
-            "sheepball": "Sheepball",
-            "lazycatfish": "LazyCatfish",
-            "icedeer": "IceDeer",
-            "blueplatypus": "BluePlatypus",
-            "mopking": "MopKing",
-        }
-
-        lowercase_key = self._character_key.lower()
-        if lowercase_key in key_mapping:
-            self._character_key = key_mapping[lowercase_key]
-
+        self.character_id, self._character_key = clean_character_id(self.character_id)
         return self._character_key
 
     @computed_field
