@@ -2,7 +2,7 @@ from enum import Enum
 from typing import Any, Dict, List, Optional
 from uuid import UUID
 import uuid
-from pydantic import BaseModel, Field, PrivateAttr, computed_field
+from pydantic import BaseModel, Field, PrivateAttr
 
 from palworld_save_pal.game.item_container_slot import ItemContainerSlot
 from palworld_save_pal.game.dynamic_item import DynamicItem
@@ -11,7 +11,7 @@ from palworld_save_pal.utils.uuid import (
     are_equal_uuids,
     is_empty_uuid,
 )
-from palworld_save_pal.utils.dict import safe_remove
+from palworld_save_pal.utils.dict import safe_remove_multiple
 from palworld_save_pal.utils.logging_config import create_logger
 
 logger = create_logger(__name__)
@@ -273,16 +273,31 @@ class ItemContainer(BaseModel):
             PalObjects.set_nested(
                 raw_data, "character_id", value=slot.dynamic_item.character_id
             )
-            safe_remove(raw_data, "durability")
-            safe_remove(raw_data, "remaining_bullets")
-            safe_remove(raw_data, "passive_skill_list")
+            # Tmp fix for egg, need to investigate if object is ever used, passed on traits?
+            # If object exists keep it, otherwise create empty object
+            if "object" not in raw_data:
+                PalObjects.set_nested(raw_data, "object", value={})
+            PalObjects.set_nested(raw_data, "unknown_bytes", value=[0, 0, 0, 0])
+            PalObjects.set_nested(raw_data, "unknown_id", value=PalObjects.EMPTY_UUID)
+            safe_remove_multiple(
+                raw_data,
+                "durability",
+                "remaining_bullets",
+                "passive_skill_list",
+            )
         elif slot.dynamic_item.type == "armor":
             PalObjects.set_nested(raw_data, "type", value="armor")
             PalObjects.set_nested(
                 raw_data, "durability", value=slot.dynamic_item.durability
             )
-            safe_remove(raw_data, "remaining_bullets")
-            safe_remove(raw_data, "passive_skill_list")
+            safe_remove_multiple(
+                raw_data,
+                "object",
+                "unknown_bytes",
+                "unknown_id",
+                "remaining_bullets",
+                "passive_skill_list",
+            )
         elif slot.dynamic_item.type == "weapon":
             PalObjects.set_nested(raw_data, "type", value="weapon")
             PalObjects.set_nested(
@@ -291,6 +306,7 @@ class ItemContainer(BaseModel):
             PalObjects.set_nested(
                 raw_data, "remaining_bullets", value=slot.dynamic_item.remaining_bullets
             )
+            safe_remove_multiple(raw_data, "object", "unknown_bytes", "unknown_id")
             if "passive_skill_list" not in raw_data:
                 raw_data["passive_skill_list"] = []
         logger.debug("%s (%s) => %s\n%s", self.type, self.id, slot, item)

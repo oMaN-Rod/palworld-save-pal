@@ -32,3 +32,8 @@ def safe_remove(d: dict, *keys: str) -> None:
     except (KeyError, TypeError):
         # Path doesn't exist, do nothing
         pass
+
+
+def safe_remove_multiple(d: dict, *keys: str) -> None:
+    for key in keys:
+        safe_remove(d, key)
