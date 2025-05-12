@@ -727,7 +727,7 @@
 							handleSelectGuildChest();
 						}}
 					>
-						<span>Guild Chest</span>
+						<span>Chest</span>
 					</button>
 					<button
 						class={cn(
@@ -1056,7 +1056,7 @@
 								{/each}
 							</div>
 							{#if guildChestIcon}
-								<div class="flex flex-col">
+								<div class="ml-4 flex flex-col">
 									<img
 										src={guildChestIcon}
 										alt="Storage Container Icon"
