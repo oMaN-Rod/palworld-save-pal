@@ -9,8 +9,6 @@ import {
 	type WorkSuitability
 } from '$types';
 
-const appState = getAppState();
-
 export function canBeBoss(character_id: string): [string, boolean] {
 	let valid = true;
 	let type = '';
@@ -38,6 +36,7 @@ export function formatNickname(nickname: string, prefix: string | undefined) {
 
 export async function handleMaxOutPal(pal: Pal, player: Player): Promise<void> {
 	if (!pal || !player) return;
+	const appState = getAppState();
 	pal.level = appState.settings.cheat_mode ? 255 : 60;
 	const maxLevelData = expData.expData['61'];
 	pal.exp = maxLevelData.PalTotalEXP - maxLevelData.PalNextEXP;
@@ -68,6 +67,7 @@ export async function handleMaxOutPal(pal: Pal, player: Player): Promise<void> {
 }
 
 export const applyPresetToPal = (pal: Record<string, any>, presetProfile: PresetProfile) => {
+	const appState = getAppState();
 	const palData = palsData.pals[pal.character_key];
 	const skipKeys = ['character_id', 'lock', 'lock_element', 'element'];
 	for (const [key, value] of Object.entries(presetProfile.pal_preset!)) {

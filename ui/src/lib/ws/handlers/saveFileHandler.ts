@@ -2,12 +2,10 @@ import { getAppState, getToastState } from '$states';
 import { MessageType } from '$types';
 import type { WSMessageHandler } from '../types';
 
-const appState = getAppState();
-const toast = getToastState();
-
 export const noFileSelectedHandler: WSMessageHandler = {
 	type: MessageType.NO_FILE_SELECTED,
 	async handle(_: string, { goto }) {
+		const toast = getToastState();
 		toast.add('No file was selected', 'Warning', 'warning');
 		await goto('/file');
 	}
@@ -16,6 +14,7 @@ export const noFileSelectedHandler: WSMessageHandler = {
 export const loadedSaveFilesHandler: WSMessageHandler = {
 	type: MessageType.LOADED_SAVE_FILES,
 	async handle(data) {
+		const appState = getAppState();
 		const { level, players, world_name, size, type } = data;
 		console.log('Loaded save files', level, players);
 		appState.resetState();
@@ -27,6 +26,7 @@ export const loadedSaveFilesHandler: WSMessageHandler = {
 export const saveModdedSaveHandler: WSMessageHandler = {
 	type: MessageType.SAVE_MODDED_SAVE,
 	async handle(data, { goto }) {
+		const toast = getToastState();
 		toast.add(data, 'Saved!', 'success');
 		await goto('/file');
 	}
@@ -53,7 +53,7 @@ export const downloadSaveFileHandler: WSMessageHandler = {
 			a.click();
 			URL.revokeObjectURL(url);
 		}
-		
+
 		await goto('/file');
 	}
 };
@@ -61,6 +61,7 @@ export const downloadSaveFileHandler: WSMessageHandler = {
 export const updateSaveFileHandler: WSMessageHandler = {
 	type: MessageType.UPDATE_SAVE_FILE,
 	async handle(data) {
+		const appState = getAppState();
 		console.log('Save file updated', data);
 		await new Promise((resolve) => setTimeout(resolve, 500));
 		appState.autoSave = false;
@@ -70,6 +71,7 @@ export const updateSaveFileHandler: WSMessageHandler = {
 export const selectGamepassSaveHandler: WSMessageHandler = {
 	type: MessageType.SELECT_GAMEPASS_SAVE,
 	async handle(data, { goto }) {
+		const appState = getAppState();
 		appState.resetState();
 		appState.gamepassSaves = data;
 		await goto('/file');
