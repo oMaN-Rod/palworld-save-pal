@@ -2,8 +2,7 @@ from sqlmodel import select
 
 from palworld_save_pal.db.ctx.utils import get_db_session
 from palworld_save_pal.utils.logging_config import create_logger
-from palworld_save_pal.utils.json_manager import JsonManager
-from palworld_save_pal.editor.settings import SettingsDTO
+from palworld_save_pal.dto.settings import SettingsDTO
 from palworld_save_pal.db.models.settings_model import SettingsModel
 
 logger = create_logger(__name__)

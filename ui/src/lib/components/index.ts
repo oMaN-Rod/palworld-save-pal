@@ -1,3 +1,4 @@
+import ActiveSkillOption from './active-skill-option/ActiveSkillOption.svelte';
 import ActiveSkillBadge from './badges/active-skill-badge/ActiveSkillBadge.svelte';
 import HealthBadge from './badges/health-badge/HealthBadge.svelte';
 import ItemBadge from './badges/item-badge/ItemBadge.svelte';
@@ -18,6 +19,7 @@ import PalCard from './pal-card/PalCard.svelte';
 import PalContainerStats from './pal-container-stats/PalContainerStats.svelte';
 import PalHeader from './pal-header/PalHeader.svelte';
 import PalInfoPopup from './pal-info-popup/PalInfoPopup.svelte';
+import PassiveSkillOption from './passive-skill-option/PassiveSkillOption.svelte';
 import PlayerList from './player-list/PlayerList.svelte';
 import PlayerPresets from './player-presets/PlayerPresets.svelte';
 import PlayerStats from './player-stats/PlayerStats.svelte';
@@ -30,6 +32,7 @@ import Toast from './toast/Toast.svelte';
 export * from './modals';
 export {
 	ActiveSkillBadge,
+	ActiveSkillOption,
 	DebugButton,
 	Drawer,
 	GamepassSaveList,
@@ -46,6 +49,7 @@ export {
 	PalHeader,
 	PalInfoPopup,
 	PassiveSkillBadge,
+	PassiveSkillOption,
 	PlayerHealthBadge,
 	PlayerList,
 	PlayerPresets,

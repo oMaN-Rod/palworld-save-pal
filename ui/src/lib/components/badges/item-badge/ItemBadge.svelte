@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Tooltip } from '$components/ui';
-	import { type ItemContainerSlot, type ItemGroup, Rarity } from '$types';
+	import { type EggConfig, type ItemContainerSlot, type ItemGroup, Rarity } from '$types';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { itemsData, palsData } from '$lib/data';
 	import { cn } from '$theme';
@@ -156,20 +156,16 @@
 	});
 
 	async function handleItemSelect() {
-		let palId: string | undefined = undefined;
-		if (slot.dynamic_item && slot.dynamic_item.type === 'egg') {
-			palId = slot.dynamic_item.character_id;
-		}
 		// @ts-ignore
-		const result = await modal.showModal<[string, number, string | undefined]>(ItemSelectModal, {
+		const result = await modal.showModal<[string, number, EggConfig]>(ItemSelectModal, {
 			group: itemGroup,
 			itemId: slot.static_id,
 			count: !slot.count || slot.count == 0 ? 1 : slot.count,
 			title: 'Select Item',
-			palId: palId
+			dynamicItem: slot.dynamic_item
 		});
 		if (!result) return;
-		const [static_id, count, selectedPalId] = result;
+		const [static_id, count, eggConfig] = result;
 		slot.static_id = !static_id ? 'None' : static_id;
 		if (slot.static_id == 'None') {
 			slot.count = 0;
@@ -183,17 +179,22 @@
 			if (itemData.details.dynamic) {
 				if (!slot.dynamic_item) {
 					slot.dynamic_item = {
-						local_id: '00000000-0000-0000-0000-000000000000',
-						durability: itemData.details.dynamic.durability || 0,
-						remaining_bullets: itemData.details.dynamic.magazine_size || 0,
-						type: itemData.details.dynamic.type,
-						character_id: selectedPalId
+						local_id: '00000000-0000-0000-0000-000000000000'
 					};
-				} else {
-					slot.dynamic_item.durability = itemData.details.dynamic.durability || 0;
-					slot.dynamic_item.remaining_bullets = itemData.details.dynamic.magazine_size || 0;
-					slot.dynamic_item.type = itemData.details.dynamic.type;
-					slot.dynamic_item.character_id = selectedPalId;
+				}
+				slot.dynamic_item.durability = itemData.details.dynamic.durability || 0;
+				slot.dynamic_item.remaining_bullets = itemData.details.dynamic.magazine_size || 0;
+				slot.dynamic_item.type = itemData.details.dynamic.type;
+				if (slot.dynamic_item.type === 'egg') {
+					slot.dynamic_item.character_id = eggConfig.character_id;
+					slot.dynamic_item.egg_character_id = eggConfig.character_id;
+					slot.dynamic_item.gender = eggConfig.gender;
+					slot.dynamic_item.talent_hp = eggConfig.talent_hp;
+					slot.dynamic_item.talent_shot = eggConfig.talent_shot;
+					slot.dynamic_item.talent_defense = eggConfig.talent_defense;
+					slot.dynamic_item.active_skills = eggConfig.active_skills;
+					slot.dynamic_item.learned_skills = eggConfig.learned_skills;
+					slot.dynamic_item.passive_skills = eggConfig.passive_skills;
 				}
 			} else {
 				slot.dynamic_item = undefined;

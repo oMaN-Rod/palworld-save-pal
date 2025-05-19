@@ -38,21 +38,6 @@ class PalPresetDTO(BaseModel):
     work_suitability: Optional[Dict[str, int]]
 
 
-class PresetProfileDTO(BaseModel):
-    name: str
-    type: str
-    skills: Optional[List[str]] = None
-
-    common_container: Optional[List[dict]] = None
-    essential_container: Optional[List[dict]] = None
-    weapon_load_out_container: Optional[List[dict]] = None
-    player_equipment_armor_container: Optional[List[dict]] = None
-    food_equip_container: Optional[List[dict]] = None
-    storage_container: Optional[StorageContainerPreset] = None
-
-    pal_preset: Optional[PalPresetDTO] = None
-
-
 class PalPreset(SQLModel, table=True):
     id: str = Field(default_factory=lambda: str(uuid4()), primary_key=True)
     lock: bool = Field(sa_column=Column(Boolean, nullable=False))

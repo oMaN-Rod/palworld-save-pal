@@ -3,34 +3,19 @@ from typing import Any, Dict, List, Optional
 from uuid import UUID
 from pydantic import BaseModel, Field, PrivateAttr, computed_field
 
-from palworld_save_pal.game.base import Base, BaseDTO
+from palworld_save_pal.dto.guild import GuildDTO
+from palworld_save_pal.dto.pal import PalDTO
+from palworld_save_pal.game.base import Base
+from palworld_save_pal.game.guild_lab_research_info import GuildLabResearchInfo
 from palworld_save_pal.game.item_container import ItemContainer, ItemContainerType
-from palworld_save_pal.game.pal import PalDTO
 from palworld_save_pal.game.pal_objects import PalObjects
-from palworld_save_pal.utils.uuid import are_equal_uuids, is_empty_uuid
+from palworld_save_pal.utils.uuid import are_equal_uuids
 from palworld_save_pal.utils.logging_config import create_logger
 
 logger = create_logger(__name__)
 
 
-class GuildLabResearchInfo(BaseModel):
-    research_id: str
-    work_amount: float
-
-
-class GuildDTO(BaseModel):
-    name: Optional[str] = None
-    base: Optional[BaseDTO] = None
-    guild_chest: Optional[ItemContainer] = None
-    lab_research: Optional[List[GuildLabResearchInfo]] = None
-
-
 class Guild(BaseModel):
-    _id: UUID
-    _admin_player_uid: UUID
-    _name: str
-    _players = List[UUID]
-
     _group_save_data: Optional[Dict[str, Any]] = PrivateAttr(default_factory=dict)
     _guild_extra_data: Optional[Dict[str, Any]] = PrivateAttr(default_factory=dict)
     _raw_data: Optional[Dict[str, Any]] = PrivateAttr(default_factory=dict)
@@ -68,37 +53,33 @@ class Guild(BaseModel):
 
     @computed_field
     def id(self) -> UUID:
-        self._id = PalObjects.as_uuid(self._group_save_data["key"])
-        return self._id
+        return PalObjects.as_uuid(self._group_save_data["key"])
 
     @computed_field
     def admin_player_uid(self) -> UUID:
-        self._admin_player_uid = PalObjects.as_uuid(
+        return PalObjects.as_uuid(
             PalObjects.get_nested(self._raw_data, "admin_player_uid")
         )
-        return self._admin_player_uid
 
     @computed_field
     def name(self) -> str:
-        self._name = PalObjects.get_nested(self._raw_data, "guild_name")
-        return self._name
+        return PalObjects.get_nested(self._raw_data, "guild_name")
 
     @name.setter
     def name(self, value: str):
-        self._name = value
-        PalObjects.set_nested(self._raw_data, "guild_name", value=self._name)
+        PalObjects.set_nested(self._raw_data, "guild_name", value=value)
 
     @computed_field
     def players(self) -> List[UUID]:
-        players = PalObjects.get_nested(self._raw_data, "players")
-        if players:
-            self._players = []
-            for player in players:
+        players_data = PalObjects.get_nested(self._raw_data, "players")
+        if players_data:
+            players = []
+            for player in players_data:
                 player_uid = PalObjects.as_uuid(
                     PalObjects.get_nested(player, "player_uid")
                 )
-                self._players.append(player_uid)
-        return self._players
+                players.append(player_uid)
+        return players
 
     @computed_field
     def container_id(self) -> Optional[UUID]:
@@ -170,9 +151,9 @@ class Guild(BaseModel):
 
     def delete_player(self, player_uid: UUID):
         logger.debug("%s (%s) => %s", self.name, self.id, player_uid)
-        for entry in self._players:
+        for entry in self.players:
             if are_equal_uuids(entry, player_uid):
-                self._players.remove(entry)
+                self.players.remove(entry)
                 self.delete_character_handle(player_uid)
                 self._raw_data["players"][:] = [
                     player
@@ -185,7 +166,7 @@ class Guild(BaseModel):
         self.bases[base.id] = base
         logger.debug("Added base %s to guild %s", base.id, self.id)
 
-    def _load_lab_research(self):  # Added method
+    def _load_lab_research(self):
         if not self._guild_extra_data:
             logger.warning("No guild extra data found for guild %s", self.id)
             return
@@ -199,7 +180,7 @@ class Guild(BaseModel):
             )
             return
 
-        self._lab_raw_data = lab_data  # Store the raw lab data dict for modification
+        self._lab_raw_data = lab_data
         research_info_list = PalObjects.get_nested(self._lab_raw_data, "research_info")
 
         if not research_info_list:

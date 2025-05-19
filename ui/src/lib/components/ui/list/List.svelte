@@ -1,4 +1,4 @@
-<script lang="ts" generics="T">
+<script lang="ts" generics="T extends Record<string, any> | string">
 	import { cn } from '$theme';
 	import type { Snippet } from 'svelte';
 	import { Checkbox, Tooltip } from '$components/ui';
@@ -38,7 +38,7 @@
 		listItemActions?: Snippet<[T]>;
 		listHeader?: Snippet;
 		listItemPopup?: Snippet<[T]>;
-		onselect?: (item: any) => void;
+		onselect?: (item: T) => void;
 		idKey?: string;
 		[key: string]: any;
 	}>();
@@ -54,28 +54,39 @@
 		cn('list-item p-2 flex items-center cursor-pointer hover:bg-secondary-500/25', _itemClass)
 	);
 	const headerClass = $derived(cn('grid w-full gap-2', _headerClass));
-	let selectedItemsSet: Set<any> = $state(new Set());
+
+	let selectedItemsSet: Set<string | number> = $state(new Set());
+
+	function getItemKey(item: T): string | number {
+		if (typeof item === 'string') {
+			return item;
+		}
+		const key = (item as Record<string, any>)[idKey];
+		return key as string | number;
+	}
 
 	$effect(() => {
-		selectedItemsSet = new Set(selectedItems.map((item: { [x: string]: any }) => item[idKey]));
+		selectedItemsSet = new Set(selectedItems.map(getItemKey));
 	});
 
-	function processItem(item: any) {
+	function processItem(item: T) {
 		selectedItem = item;
+		const key = getItemKey(item);
+
 		if (multiple) {
-			if (selectedItemsSet.has(item[idKey])) {
-				selectedItemsSet.delete(item[idKey]);
+			if (selectedItemsSet.has(key)) {
+				selectedItemsSet.delete(key);
 			} else {
-				selectedItemsSet.add(item[idKey]);
+				selectedItemsSet.add(key);
 			}
-			selectedItems = items.filter((i: { [x: string]: any }) => selectedItemsSet.has(i[idKey]));
+			selectedItems = items.filter((i: T) => selectedItemsSet.has(getItemKey(i)));
 		} else {
 			selectedItems = [item];
-			selectedItemsSet = new Set([item[idKey]]);
+			selectedItemsSet = new Set([key]);
 		}
 	}
 
-	function handleCheckboxChange(item: any) {
+	function handleCheckboxChange(item: T) {
 		processItem(item);
 	}
 
@@ -83,35 +94,39 @@
 		selectedItem = null;
 		if (selectAll) {
 			selectedItems = items;
-			selectedItemsSet = new Set(items.map((item: { [x: string]: any }) => item[idKey]));
+			selectedItemsSet = new Set(items.map(getItemKey));
 		} else {
 			selectedItems = [];
 			selectedItemsSet.clear();
 		}
 	}
 
-	function handleItemSelect(event: Event, item: any) {
+	function handleItemSelect(event: Event, item: T) {
 		event.preventDefault();
-		selectedItem = item;
 		processItem(item);
-		onselect(selectedItem);
+		onselect(item);
 	}
 
 	function handleKeyDown(
 		event: KeyboardEvent & { currentTarget: EventTarget & HTMLButtonElement },
-		item: any
-	): any {
+		item: T
+	) {
 		if (event.key === 'Enter' || event.key === ' ') {
 			handleItemSelect(event, item);
 		}
 	}
 
-	function isSelected(item: any) {
-		return (!onlyHighlightChecked && item === selectedItem) || selectedItemsSet.has(item[idKey]);
+	function isSelected(item: T) {
+		const key = getItemKey(item);
+		return (!onlyHighlightChecked && item === selectedItem) || selectedItemsSet.has(key);
 	}
 
 	$effect(() => {
-		selectAll = items.length > 0 && selectedItemsSet.size === items.length;
+		if (items.length > 0) {
+			selectAll = selectedItemsSet.size === items.length;
+		} else {
+			selectAll = false;
+		}
 	});
 </script>
 
@@ -125,11 +140,11 @@
 		</div>
 	</div>
 	<ul class={listClass}>
-		{#each items as item (item[idKey])}
+		{#each items as item (getItemKey(item))}
 			<li class={cn(itemClass, isSelected(item) ? 'bg-secondary-500/25' : '')}>
 				{#if canSelect}
 					<Checkbox
-						checked={selectedItemsSet.has(item[idKey])}
+						checked={selectedItemsSet.has(getItemKey(item))}
 						onchange={() => handleCheckboxChange(item)}
 						class="mr-2"
 					/>
@@ -144,6 +159,7 @@
 							class="flex w-full items-center text-left"
 							onclick={(event) => handleItemSelect(event, item)}
 							onkeydown={(event) => handleKeyDown(event, item)}
+							aria-label={`Select item ${typeof item === 'string' ? item : ((item as Record<string, any>)[idKey] ?? '')}`}
 						>
 							{@render listItem(item)}
 						</button>

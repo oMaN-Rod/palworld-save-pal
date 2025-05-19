@@ -1,6 +1,6 @@
 import { goto } from '$app/navigation';
 import UpdateAvailableModal from '$components/modals/update-available/UpdateAvailableModal.svelte';
-import { getAppState } from '$states';
+import { getAppState, getModalState } from '$states';
 import { MessageType } from '$types';
 import { isUpdateAvailableOnGitHub } from '$utils/appVersion';
 import type { WSMessageHandler } from '../types';
@@ -17,6 +17,7 @@ export const getVersionHandler: WSMessageHandler = {
 	type: MessageType.GET_VERSION,
 	async handle(data) {
 		const appState = getAppState();
+		const modal = getModalState();
 		appState.version = data;
 
 		// Check for updates

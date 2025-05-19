@@ -12,6 +12,17 @@ export interface GamepassSave {
 	containers: GamePassContainer[];
 }
 
+export type EggConfig = {
+	character_id: string;
+	gender: PalGender;
+	talent_hp: number;
+	talent_shot: number;
+	talent_defense: number;
+	learned_skills: string[];
+	active_skills: string[];
+	passive_skills: string[];
+};
+
 export type Pal = {
 	name: string;
 	instance_id: string;
@@ -174,6 +185,14 @@ export interface DynamicItem {
 	type: DynamicItemClass;
 	character_id?: string;
 	character_key?: string;
+	egg_character_id: string;
+	gender: string;
+	talent_hp: number;
+	talent_shot: number;
+	talent_defense: number;
+	learned_skills: string[];
+	active_skills: string[];
+	passive_skills: string[];
 }
 
 export enum ItemTypeA {

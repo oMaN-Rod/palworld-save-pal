@@ -3,11 +3,12 @@ from typing import Any, Dict, List, Optional, Union
 from pydantic import BaseModel
 from uuid import UUID
 
-from palworld_save_pal.editor.preset_profile import PresetProfileDTO
-from palworld_save_pal.editor.settings import SettingsDTO
-from palworld_save_pal.game.guild import GuildDTO, GuildLabResearchInfo
-from palworld_save_pal.game.pal import PalDTO
-from palworld_save_pal.game.player import PlayerDTO
+from palworld_save_pal.dto.preset_profile import PresetProfileDTO
+from palworld_save_pal.dto.settings import SettingsDTO
+from palworld_save_pal.dto.guild import GuildDTO
+from palworld_save_pal.dto.pal import PalDTO
+from palworld_save_pal.dto.player import PlayerDTO
+from palworld_save_pal.game.guild import GuildLabResearchInfo
 
 
 class BaseMessage(BaseModel):
@@ -307,6 +308,7 @@ class GetRawDataData(BaseModel):
     base_id: Optional[UUID] = None
     item_container_id: Optional[UUID] = None
     character_container_id: Optional[UUID] = None
+    level: Optional[bool] = False
 
 
 class GetRawDataMessage(BaseModel):

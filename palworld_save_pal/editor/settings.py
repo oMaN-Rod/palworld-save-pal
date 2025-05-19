@@ -1,6 +1,6 @@
 from pydantic import BaseModel, PrivateAttr, computed_field
 
-from palworld_save_pal.db.models.settings_model import SettingsDTO
+from palworld_save_pal.dto.settings import SettingsDTO
 from palworld_save_pal.utils.file_manager import STEAM_ROOT
 from palworld_save_pal.utils.logging_config import create_logger
 

@@ -19,10 +19,13 @@ from palworld_save_tools.paltypes import (
     PALWORLD_TYPE_HINTS,
 )
 
-from palworld_save_pal.game.base import Base, BaseDTO
-from palworld_save_pal.game.guild import Guild, GuildDTO
-from palworld_save_pal.game.pal import Pal, PalDTO
-from palworld_save_pal.game.pal_objects import GroupType, PalObjects
+from palworld_save_pal.dto.pal import PalDTO
+from palworld_save_pal.dto.guild import GuildDTO
+from palworld_save_pal.game.base import Base
+from palworld_save_pal.game.guild import Guild
+from palworld_save_pal.game.pal import Pal
+from palworld_save_pal.game.pal_objects import PalObjects
+from palworld_save_pal.game.enum import GroupType
 from palworld_save_pal.utils.logging_config import create_logger
 from palworld_save_pal.game.player import Player, PlayerDTO, PlayerGvasFiles
 from palworld_save_pal.utils.uuid import are_equal_uuids, is_empty_uuid
@@ -616,6 +619,10 @@ class SaveFile(BaseModel):
             cls=CustomEncoder,
             allow_nan=allow_nan,
         )
+
+    def get_dict(self):
+        logger.info("Converting %s to dict", self.name)
+        return self._gvas_file.dump()
 
     def get_pal(self, pal_id: UUID) -> Pal:
         return self._pals.get(pal_id)
