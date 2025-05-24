@@ -94,7 +94,7 @@ Write-Host "Cleaning up..."
 Remove-Item -Path ".\ui_build\" -Recurse -Force
 
 # Create ZIP archive of the distribution files
-$zipPath = ".\dist\psp-windows-$version-standalone.zip"
+$zipPath = ".\dist\PalworldSavePal-$version-win-standalone.zip"
 Write-Host "Creating ZIP archive at $zipPath..."
 if (Test-Command '7za') {
     & 7za a -tzip $zipPath "$distDir\*" -mx=9

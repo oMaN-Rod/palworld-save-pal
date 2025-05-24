@@ -185,7 +185,6 @@ export interface DynamicItem {
 	type: DynamicItemClass;
 	character_id?: string;
 	character_key?: string;
-	egg_character_id: string;
 	gender: string;
 	talent_hp: number;
 	talent_shot: number;
@@ -193,6 +192,7 @@ export interface DynamicItem {
 	learned_skills: string[];
 	active_skills: string[];
 	passive_skills: string[];
+	modified: boolean;
 }
 
 export enum ItemTypeA {

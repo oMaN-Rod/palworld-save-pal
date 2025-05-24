@@ -566,9 +566,9 @@ class PalObjects:
         active_skills: List[str] = [],
         learned_skills: List[str] = [],
         passive_skills: List[str] = [],
-        talent_hp: int = 100,
-        talent_shot: int = 100,
-        talent_defense: int = 100,
+        talent_hp: int = 0,
+        talent_shot: int = 0,
+        talent_defense: int = 0,
     ):
         return {
             "SaveParameter": {
@@ -578,21 +578,22 @@ class PalObjects:
                 "value": {
                     "CharacterID": PalObjects.NameProperty(character_id),
                     "Gender": PalObjects.EnumProperty(
-                        "EPalGenderType", gender.prefixed()
+                        "EPalGenderType",
+                        gender.prefixed() or PalGender.FEMALE.prefixed(),
                     ),
                     "EquipWaza": PalObjects.ArrayPropertyValues(
-                        ArrayType.ENUM_PROPERTY, active_skills
+                        ArrayType.ENUM_PROPERTY, active_skills or []
                     ),
                     "MasteredWaza": PalObjects.ArrayPropertyValues(
-                        ArrayType.ENUM_PROPERTY, learned_skills
+                        ArrayType.ENUM_PROPERTY, learned_skills or []
                     ),
                     "Hp": PalObjects.FixedPoint64(545000),
-                    "Talent_HP": PalObjects.ByteProperty(talent_hp),
-                    "Talent_Shot": PalObjects.ByteProperty(talent_shot),
-                    "Talent_Defense": PalObjects.ByteProperty(talent_defense),
+                    "Talent_HP": PalObjects.ByteProperty(talent_hp or 0),
+                    "Talent_Shot": PalObjects.ByteProperty(talent_shot or 0),
+                    "Talent_Defense": PalObjects.ByteProperty(talent_defense or 0),
                     "FullStomach": PalObjects.FloatProperty(400),
                     "PassiveSkillList": PalObjects.ArrayPropertyValues(
-                        ArrayType.NAME_PROPERTY, passive_skills
+                        ArrayType.NAME_PROPERTY, passive_skills or []
                     ),
                     "FoodRegeneEffectInfo": {
                         "struct_type": "PalFoodRegeneInfo",

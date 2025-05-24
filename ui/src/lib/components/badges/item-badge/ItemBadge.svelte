@@ -187,7 +187,6 @@
 				slot.dynamic_item.type = itemData.details.dynamic.type;
 				if (slot.dynamic_item.type === 'egg') {
 					slot.dynamic_item.character_id = eggConfig.character_id;
-					slot.dynamic_item.egg_character_id = eggConfig.character_id;
 					slot.dynamic_item.gender = eggConfig.gender;
 					slot.dynamic_item.talent_hp = eggConfig.talent_hp;
 					slot.dynamic_item.talent_shot = eggConfig.talent_shot;
@@ -195,6 +194,7 @@
 					slot.dynamic_item.active_skills = eggConfig.active_skills;
 					slot.dynamic_item.learned_skills = eggConfig.learned_skills;
 					slot.dynamic_item.passive_skills = eggConfig.passive_skills;
+					slot.dynamic_item.modified = true;
 				}
 			} else {
 				slot.dynamic_item = undefined;

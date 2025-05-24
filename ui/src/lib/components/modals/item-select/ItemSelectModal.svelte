@@ -64,7 +64,16 @@
 	const selectedPalKey = $derived(eggConfig.character_id.replace('BOSS_', ''));
 	const palOptions: SelectOption[] = $derived.by(() => {
 		const item = itemsData.items[itemId];
-		if (!item || !item.details.dynamic?.character_ids) return [];
+		if (!item || !item.details.dynamic?.character_ids) {
+			if (!selectedPalKey) return [];
+			const palInfo = palsData.pals[selectedPalKey];
+			return [
+				{
+					label: palInfo?.localized_name,
+					value: selectedPalKey
+				}
+			];
+		}
 
 		return item.details.dynamic.character_ids
 			.map((charId) => {
@@ -128,12 +137,11 @@
 				label: s.localized_name
 			}))
 	);
-	const itemData = $derived.by(() => itemsData.items[itemId]);
+	const itemData = $derived(itemsData.items[itemId]);
 	const isEgg = $derived(itemData?.details.dynamic?.type === 'egg');
 
 	const eggIconSrc = $derived.by(() => {
 		if (!itemData || (itemData && itemData.details.dynamic?.type !== 'egg')) return;
-		if (itemData && !itemData.details.dynamic?.character_ids) return staticIcons.unknownEggIcon;
 		return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${itemData.details.icon}.png`);
 	});
 
@@ -277,9 +285,9 @@
 	onMount(() => {
 		if (dynamicItem) {
 			eggConfig.character_id = dynamicItem.character_id;
-			eggConfig.active_skills = dynamicItem.active_skills;
-			eggConfig.learned_skills = dynamicItem.learned_skills;
-			eggConfig.passive_skills = dynamicItem.passive_skills;
+			eggConfig.active_skills = dynamicItem.active_skills || [];
+			eggConfig.learned_skills = dynamicItem.learned_skills || [];
+			eggConfig.passive_skills = dynamicItem.passive_skills || [];
 			eggConfig.talent_defense = dynamicItem.talent_defense;
 			eggConfig.talent_hp = dynamicItem.talent_hp;
 			eggConfig.talent_shot = dynamicItem.talent_shot;
@@ -313,8 +321,8 @@
 			<div class="flex flex-row items-center">
 				<Combobox options={selectOptions} bind:value={itemId}>
 					{#snippet selectOption(option)}
+						{@const item = itemsData.items[option.value]}
 						{#await getItemIcon(option.value) then icon}
-							{@const item = getItem(option.value)}
 							<div class="grid grid-cols-[auto_1fr_auto] items-center gap-2">
 								{#if icon}
 									<div
@@ -345,7 +353,6 @@
 								</div>
 							</div>
 						{:catch}
-							{@const item = getItem(option.value)}
 							<div class="grid grid-cols-[auto_1fr_auto]">
 								<div
 									class={cn(

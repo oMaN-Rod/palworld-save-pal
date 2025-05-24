@@ -94,16 +94,12 @@ class DynamicItem(BaseModel):
         self._raw_data["type"] = value
 
     @computed_field
-    def egg_character_id(self) -> Optional[str]:
-        if not self._save_parameter:
-            return None
-        return PalObjects.get_value(self._save_parameter["CharacterID"])
+    def static_id(self) -> Optional[str]:
+        return PalObjects.get_nested(self._raw_data, "id", "static_id")
 
-    @egg_character_id.setter
-    def egg_character_id(self, value: str) -> None:
-        if not self._save_parameter:
-            return
-        self._save_parameter["CharacterID"] = PalObjects.NameProperty(value)
+    @static_id.setter
+    def static_id(self, value: str) -> None:
+        self._raw_data["id"]["static_id"] = value
 
     @computed_field
     def gender(self) -> Optional[PalGender]:
@@ -247,36 +243,36 @@ class DynamicItem(BaseModel):
                     "passive_skill_list",
                 )
             case DynamicItemType.EGG.value:
-                if "object" not in self._raw_data or self._raw_data["object"] == {}:
+                if "object" not in self._raw_data:
+                    self._raw_data["object"] = {}
+                self.character_id = other["character_id"]
+                if "modified" in other and other["modified"]:
                     self._raw_data["object"] = PalObjects.SaveParameter(
                         character_id=other["character_id"],
-                        gender=PalGender.from_value(other["gender"])
-                        or PalGender.FEMALE,
-                        active_skills=other["active_skills"] or [],
-                        learned_skills=other["learned_skills"] or [],
-                        passive_skills=other["passive_skills"] or [],
-                        talent_hp=other["talent_hp"] or 0,
-                        talent_shot=other["talent_shot"] or 0,
-                        talent_defense=other["talent_defense"] or 0,
+                        gender=PalGender.from_value(other["gender"]),
+                        active_skills=other["active_skills"],
+                        learned_skills=other["learned_skills"],
+                        passive_skills=other["passive_skills"],
+                        talent_hp=other["talent_hp"],
+                        talent_shot=other["talent_shot"],
+                        talent_defense=other["talent_defense"],
                     )
-                PalObjects.set_nested(
-                    self._raw_data, "unknown_bytes", value=[0, 0, 0, 0]
-                )
-                PalObjects.set_nested(
-                    self._raw_data, "unknown_id", value=PalObjects.EMPTY_UUID
-                )
+                self._raw_data["unknown_bytes"] = [0, 0, 0, 0]
+                self._raw_data["unknown_id"] = PalObjects.EMPTY_UUID
                 safe_remove_multiple(
                     self._raw_data,
                     "durability",
                     "remaining_bullets",
                     "passive_skill_list",
                 )
+                return
             case DynamicItemType.WEAPON.value:
                 safe_remove_multiple(
                     self._raw_data, "object", "unknown_bytes", "unknown_id"
                 )
                 if "passive_skill_list" not in self._raw_data:
                     self.passive_skill_list = []
+
         type_converters = {
             "gender": lambda x: PalGender.from_value(x) if x else None,
             "hp": int,

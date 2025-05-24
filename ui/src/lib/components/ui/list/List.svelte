@@ -150,7 +150,7 @@
 					/>
 				{/if}
 				<Tooltip
-					background="bg-surface-700"
+					background="bg-surface-900"
 					baseClass="flex w-full items-center text-left"
 					position="right"
 				>
