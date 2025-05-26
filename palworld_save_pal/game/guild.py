@@ -223,8 +223,6 @@ class Guild(BaseModel):
             base.update_from(guildDTO.base)
         if guildDTO.guild_chest and self.guild_chest is not None:
             self.guild_chest.update_from(guildDTO.guild_chest.model_dump())
-        if guildDTO.lab_research is not None:
-            self.update_lab_research(guildDTO.lab_research)
 
     def _load_guild_chest(self, item_container_save_data, dynamic_item_save_data):
         if self.container_id is None:

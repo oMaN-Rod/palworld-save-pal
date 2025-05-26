@@ -6,10 +6,16 @@
 	import { staticIcons } from '$types/icons';
 	import type { Guild, GuildLabResearchInfo, WorkSuitability } from '$types';
 	import NumberFlow from '@number-flow/svelte';
+	import { Unlock } from 'lucide-svelte';
 
-	let { guild = $bindable(), selectedCategory = $bindable() } = $props<{
+	let {
+		guild = $bindable(),
+		selectedCategory = $bindable(),
+		unlockAllForCategory = $bindable()
+	} = $props<{
 		guild: Guild;
 		selectedCategory: string;
+		unlockAllForCategory: (category: string) => void;
 	}>();
 
 	const categories = $derived.by(() => {
@@ -74,22 +80,30 @@
 		{@const iconSrc = categoryIcons[category] || staticIcons.unknownIcon}
 		{@const workSuitability = workSuitabilityData.workSuitability[category as WorkSuitability]}
 		{@const categoryProgress = getCategoryProgress(category)}
-
-		<button
-			class={cn(
-				'btn border-surface-800 hover:ring-secondary-500 flex items-center justify-start space-x-2 rounded-none border p-2 text-start text-sm hover:ring-2 hover:ring-inset ',
-				selectedCategory === category ? 'bg-secondary-800/50' : ''
-			)}
-			onclick={() => (selectedCategory = category)}
-		>
-			<img src={iconSrc} alt={category} class="h-8 w-8" />
-			<span class="grow">
-				{workSuitability.localized_name || category}
-			</span>
-			<div class="flex gap-2">
-				<NumberFlow value={categoryProgress.completed} class="font-bold" />
-				<span class="text-sm"> / {categoryProgress.total}</span>
-			</div>
-		</button>
+		<div class="flex items-center gap-2">
+			<button
+				class={cn(
+					'btn border-surface-800 hover:ring-secondary-500 flex flex-1 items-center justify-start space-x-2 rounded-none border p-2 text-start text-sm hover:ring-2 hover:ring-inset',
+					selectedCategory === category ? 'bg-secondary-800/50' : ''
+				)}
+				onclick={() => (selectedCategory = category)}
+			>
+				<img src={iconSrc} alt={category} class="h-8 w-8" />
+				<span class="grow">
+					{workSuitability.localized_name || category}
+				</span>
+				<div class="flex gap-2">
+					<NumberFlow value={categoryProgress.completed} class="font-bold" />
+					<span class="text-sm"> / {categoryProgress.total}</span>
+				</div>
+			</button>
+			<button
+				class="btn hover:ring-secondary-500 border-surface-800 flex items-center justify-center border p-2 text-sm hover:ring-2 hover:ring-inset"
+				onclick={() => unlockAllForCategory(category)}
+				title="Unlock All {workSuitability.localized_name || category} Research"
+			>
+				<Unlock class="h-4 w-4" />
+			</button>
+		</div>
 	{/each}
 </div>

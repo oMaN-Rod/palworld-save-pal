@@ -45,6 +45,7 @@
 	let selectedInventoryItem: string = $state('');
 	let inventorySearchQuery: string = $state('');
 	let selectedCategory: string = $state('Handcraft');
+	let labResearchComponent: any = $state(null);
 
 	const playerGuild = $derived.by(() => {
 		if (appState.selectedPlayer?.guild_id) {
@@ -884,7 +885,11 @@
 					</List>
 				{/if}
 				{#if activeTab === 'lab'}
-					<LabResearchControls bind:selectedCategory guild={playerGuild} />
+					<LabResearchControls
+						bind:selectedCategory
+						guild={playerGuild}
+						unlockAllForCategory={labResearchComponent?.unlockAllForCategory}
+					/>
 				{/if}
 			</div>
 
@@ -1074,7 +1079,11 @@
 					</div>
 				{:else if activeTab == 'lab'}
 					<div class="h-full w-full">
-						<LabResearch guild={playerGuild} bind:selectedCategory />
+						<LabResearch
+							bind:this={labResearchComponent}
+							guild={playerGuild}
+							bind:selectedCategory
+						/>
 					</div>
 				{/if}
 			</div>

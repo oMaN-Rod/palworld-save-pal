@@ -8,7 +8,6 @@
 	import { send } from '$lib/utils/websocketUtils';
 	import ResearchNode from './ResearchNode.svelte';
 	import { onMount } from 'svelte';
-
 	let { guild = $bindable(), selectedCategory = $bindable('Handiwork') } = $props<{
 		guild: Guild;
 		selectedCategory: string;
@@ -94,6 +93,66 @@
 		}
 		return null;
 	}
+
+	async function unlockAllForCategory(category: string) {
+		if (!guild?.lab_research_data || !researchTree[category]) {
+			return;
+		}
+
+		const categoryResearch = Object.values(labResearchData.research).filter(
+			(r) => r.details.category === category
+		);
+
+		const updatedResearchList = deepCopy(guild.lab_research_data || []);
+		const itemsToUpdateSet = new Set<string>();
+
+		categoryResearch.forEach((research) => {
+			itemsToUpdateSet.add(research.id);
+		});
+
+		itemsToUpdateSet.forEach((researchId) => {
+			const requiredWork = getRequiredWork(researchId);
+			let existingEntry = updatedResearchList.find(
+				(r: { research_id: string }) => r.research_id === researchId
+			);
+			if (existingEntry) {
+				existingEntry.work_amount = requiredWork;
+			} else {
+				updatedResearchList.push({ research_id: researchId, work_amount: requiredWork });
+			}
+
+			const updatedNode = findNodeById(researchTree[category], researchId);
+			if (updatedNode) {
+				updatedNode.workAmount = requiredWork;
+				updatedNode.isCompleted = true;
+				updatedNode.isUnlocked = true;
+			}
+		});
+
+		const processNodeHierarchy = (node: TreeNode) => {
+			const prerequisiteId = node.research.details.require_research_id;
+			if (prerequisiteId && findNodeById(researchTree[category], prerequisiteId)) {
+				const prereqNode = findNodeById(researchTree[category], prerequisiteId);
+				node.isUnlocked = prereqNode ? prereqNode.isCompleted : true;
+			} else {
+				node.isUnlocked = true;
+			}
+			node.children.forEach(processNodeHierarchy);
+		};
+
+		researchTree[category].forEach(processNodeHierarchy);
+
+		researchTree = { ...researchTree };
+		guild.lab_research_data = updatedResearchList;
+		guild.state = EntryState.MODIFIED;
+
+		send(MessageType.UPDATE_LAB_RESEARCH, {
+			guild_id: guild.id,
+			research_updates: updatedResearchList
+		});
+	}
+
+	export { unlockAllForCategory };
 
 	async function unlockResearch(node: TreeNode) {
 		if (node.isCompleted) return;
