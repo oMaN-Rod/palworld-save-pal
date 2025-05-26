@@ -15,6 +15,7 @@ async def get_raw_data_handler(message: GetRawDataMessage, ws: WebSocket):
     base_id = message.data.base_id
     item_container_id = message.data.item_container_id
     character_container_id = message.data.character_container_id
+    level = message.data.level
     save_file = get_app_state().save_file
     data = {}
     if guild_id:
@@ -35,6 +36,9 @@ async def get_raw_data_handler(message: GetRawDataMessage, ws: WebSocket):
     elif character_container_id:
         container = save_file.get_character_container(character_container_id)
         data = container if container else {}
+    elif level:
+        level_data = save_file.get_dict()
+        data = level_data if level_data else {}
 
     response = build_response_custom(MessageType.GET_RAW_DATA, data)
     await ws.send_json(response)

@@ -1,4 +1,3 @@
-// Backend types
 export interface GamePassContainer {
 	path: string;
 	guid: string;
@@ -12,6 +11,17 @@ export interface GamepassSave {
 	player_count: number;
 	containers: GamePassContainer[];
 }
+
+export type EggConfig = {
+	character_id: string;
+	gender: PalGender;
+	talent_hp: number;
+	talent_shot: number;
+	talent_defense: number;
+	learned_skills: string[];
+	active_skills: string[];
+	passive_skills: string[];
+};
 
 export type Pal = {
 	name: string;
@@ -119,6 +129,11 @@ export type Player = {
 	last_online_time: string;
 };
 
+export type GuildLabResearchInfo = {
+	research_id: string;
+	work_amount: number;
+};
+
 export type Guild = {
 	admin_player_uid: string;
 	bases: Record<string, Base>;
@@ -127,6 +142,7 @@ export type Guild = {
 	players: string[];
 	container_id?: string;
 	guild_chest?: ItemContainer;
+	lab_research_data?: GuildLabResearchInfo[];
 	state: EntryState;
 };
 
@@ -152,7 +168,12 @@ export type MapObject = {
 
 export type BaseDTO = { id: string; storage_containers: Record<string, ItemContainer> };
 
-export type GuildDTO = { base?: BaseDTO; guild_chest?: ItemContainer };
+export type GuildDTO = {
+	name?: string;
+	base?: BaseDTO;
+	guild_chest?: ItemContainer;
+	lab_research?: GuildLabResearchInfo[];
+};
 
 export type SaveFileType = 'gamepass' | 'steam';
 
@@ -162,6 +183,16 @@ export interface DynamicItem {
 	durability: number;
 	remaining_bullets?: number;
 	type: DynamicItemClass;
+	character_id?: string;
+	character_key?: string;
+	gender: string;
+	talent_hp: number;
+	talent_shot: number;
+	talent_defense: number;
+	learned_skills: string[];
+	active_skills: string[];
+	passive_skills: string[];
+	modified: boolean;
 }
 
 export enum ItemTypeA {
@@ -359,8 +390,6 @@ export interface PresetProfile {
 	pal_preset?: PalPreset;
 }
 
-// Frontend types
-
 export enum Rarity {
 	Common,
 	Uncommon,
@@ -403,6 +432,7 @@ export interface DynamicItemDetails {
 	magazine_size?: number;
 	type: DynamicItemClass;
 	passive_skills?: string[];
+	character_ids?: string[];
 }
 export interface ItemDetails {
 	group: ItemGroup;
@@ -642,11 +672,23 @@ export interface PassiveSkill extends Skill {
 	details: PassiveSkillDetails;
 }
 
+export type LabResearch = Technology;
+
+export type TreeNode = {
+	id: string;
+	research: LabResearch;
+	children: TreeNode[];
+	isUnlocked: boolean;
+	isCompleted: boolean;
+	workAmount: number;
+	totalWorkAmount: number;
+};
+
 export interface TechnologyDetails {
+	category?: string;
+	sub_category?: string;
 	unlock_build_objects: string[];
 	unlock_item_recipes: string[];
-	__name_key__: string;
-	__description_key__: string;
 	icon_name: string;
 	require_defeat_tower_boss: string;
 	require_technology: string;
@@ -656,6 +698,12 @@ export interface TechnologyDetails {
 	tier: number;
 	cost: number;
 	icon: string;
+	materials?: { id: string; count: number }[];
+	effect_type?: string;
+	effect_value?: number;
+	effect_work_suitability?: string;
+	effect_item_type?: string;
+	work_amount?: number;
 }
 
 export interface Technology {

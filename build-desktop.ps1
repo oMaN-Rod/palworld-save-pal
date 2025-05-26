@@ -6,6 +6,7 @@ Write-Host "Building PALWorld Save Pal Desktop App version $version"
 
 $distDir = ".\dist\psp-windows-$version"
 if (Test-Path -Path $distDir) {
+    Write-Host "Removing existing distribution directory $distDir"
     Remove-Item -Path $distDir -Recurse -Force
 }
 New-Item -Path $distDir -ItemType Directory | Out-Null
@@ -14,10 +15,12 @@ Write-Host "Created $distDir"
 # Build Front end
 
 if (Test-Path -Path ".\build\") {
+    Write-Host "Removing existing build directory .\build\"
     Remove-Item -Path ".\build\" -Recurse -Force
 }
 
 if (Test-Path -Path ".\ui_build\") {
+    Write-Host "Removing existing ui_build directory .\ui_build\"
     Remove-Item -Path ".\ui_build\" -Recurse -Force
 }
 
@@ -76,10 +79,17 @@ if ($LASTEXITCODE -ne 0) {
 
 Set-Location -Path ".."
 
-Write-Host "Building exe..."
+Write-Host "Building standalone..."
 
 # Build standalone executable
 python setup.py build
+
+if ($LASTEXITCODE -ne 0) {
+    Write-Error "cx_Freeze build failed. Exiting."
+    exit 1
+}
+
+Write-Host "Building installer..."
 # Create MSI installer
 python setup.py bdist_msi
 
@@ -88,13 +98,14 @@ if ($LASTEXITCODE -ne 0) {
     exit 1
 }
 
+Write-Host "Copying files to distribution directory..."
 Copy-Item -Path ".\build\exe.win-amd64-*\*" -Destination $distDir -Recurse -Force
 
 Write-Host "Cleaning up..."
 Remove-Item -Path ".\ui_build\" -Recurse -Force
 
 # Create ZIP archive of the distribution files
-$zipPath = ".\dist\psp-windows-$version-standalone.zip"
+$zipPath = ".\dist\PalworldSavePal-$version-win-standalone.zip"
 Write-Host "Creating ZIP archive at $zipPath..."
 if (Test-Command '7za') {
     & 7za a -tzip $zipPath "$distDir\*" -mx=9

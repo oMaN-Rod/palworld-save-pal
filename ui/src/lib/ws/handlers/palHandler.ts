@@ -3,12 +3,11 @@ import { getAppState, getNavigationState } from '$states';
 import { MessageType } from '$types';
 import type { WSMessageHandler } from '../types';
 
-const appState = getAppState();
-
 export const addPalHandler: WSMessageHandler = {
 	type: MessageType.ADD_PAL,
 	async handle(data) {
 		const { player_id, guild_id, base_id, pal } = data;
+		const appState = getAppState();
 		const nav = getNavigationState();
 
 		if (!pal) {
@@ -38,6 +37,7 @@ export const addDpsPalHandler: WSMessageHandler = {
 	type: MessageType.ADD_DPS_PAL,
 	async handle(data) {
 		const { player_id, pal, index } = data;
+		const appState = getAppState();
 		const nav = getNavigationState();
 
 		if (!pal) {
@@ -61,6 +61,8 @@ export const addDpsPalHandler: WSMessageHandler = {
 export const movePalHandler: WSMessageHandler = {
 	type: MessageType.MOVE_PAL,
 	async handle(data) {
+		const appState = getAppState();
+
 		const move_data = data as {
 			player_id: string;
 			pal_id: string;

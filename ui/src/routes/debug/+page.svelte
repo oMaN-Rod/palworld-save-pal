@@ -23,7 +23,14 @@
 		content: { text: string };
 	};
 
-	type RawDataType = 'guild' | 'base' | 'player' | 'pal' | 'item_container' | 'character_container';
+	type RawDataType =
+		| 'guild'
+		| 'base'
+		| 'player'
+		| 'pal'
+		| 'item_container'
+		| 'character_container'
+		| 'level';
 	const appState = getAppState();
 	const modal = getModalState();
 
@@ -33,7 +40,8 @@
 		player: { content: { text: '' } },
 		pal: { content: { text: '' } },
 		item_container: { content: { text: '' } },
-		character_container: { content: { text: '' } }
+		character_container: { content: { text: '' } },
+		level: { content: { text: '' } }
 	});
 	let activePage: RawDataType = $state('guild');
 
@@ -60,6 +68,7 @@
 	let characterContainer: CharacterContainer | undefined = $state(undefined);
 	let selectedCharacterContainerId: string = $state('');
 	let characterContainerRawData: Record<string, any> | undefined = $state(undefined);
+	let levelSavRawData: Record<string, any> | undefined = $state(undefined);
 
 	const guildSelectOptions = $derived.by(() => {
 		return Object.values(appState.guilds).map((guild) => ({
@@ -312,6 +321,13 @@
 		setJson('character_container', characterContainerRawData);
 	}
 
+	async function fetchLevelSavRawData() {
+		const res = await sendAndWait(MessageType.GET_RAW_DATA, { level: true });
+		if (!res) return;
+		levelSavRawData = res;
+		setJson('level', levelSavRawData);
+	}
+
 	async function handleGetRawData(type: RawDataType) {
 		switch (type) {
 			case 'guild':
@@ -337,6 +353,9 @@
 			case 'character_container':
 				if (!characterContainer) return;
 				await fetchCharacterContainerRawData(characterContainer.id);
+				break;
+			case 'level':
+				await fetchLevelSavRawData();
 				break;
 		}
 	}
@@ -442,6 +461,13 @@
 				origin: 'debug'
 			});
 			goto('/loading');
+		}
+	}
+
+	function handleSwitchTab(e: { value: string }): void {
+		activePage = e.value as RawDataType;
+		if (activePage === 'level') {
+			handleGetRawData(activePage);
 		}
 	}
 </script>
@@ -651,7 +677,7 @@
 		{/if}
 	</div>
 
-	<Tabs value={activePage} onValueChange={(e) => (activePage = e.value as RawDataType)}>
+	<Tabs value={activePage} onValueChange={handleSwitchTab}>
 		{#snippet list()}
 			{#each Object.keys(jsons) as key}
 				<Tabs.Control

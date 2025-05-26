@@ -10,7 +10,8 @@ from palworld_save_pal.game.character_container import (
 )
 from palworld_save_pal.game.item_container import ItemContainer, ItemContainerType
 from palworld_save_pal.game.map import WorldMapPoint
-from palworld_save_pal.game.pal import Pal, PalDTO
+from palworld_save_pal.game.pal import Pal
+from palworld_save_pal.dto.pal import PalDTO
 from palworld_save_pal.game.pal_objects import PalObjects
 from palworld_save_pal.utils.dict import safe_remove
 from palworld_save_pal.utils.logging_config import create_logger
@@ -25,8 +26,6 @@ class BaseDTO(BaseModel):
 
 
 class Base(BaseModel):
-    _location: WorldMapPoint = None
-
     pals: Optional[Dict[UUID, Pal]] = Field(default_factory=dict)
     container_id: Optional[UUID] = None
     slot_count: Optional[int] = None
@@ -44,7 +43,7 @@ class Base(BaseModel):
         map_object_save_data: Dict[str, Any] = None,
         item_container_save_data: Dict[str, Any] = None,
         dynamic_item_save_data: Dict[str, Any] = None,
-        **kwargs
+        **kwargs,
     ):
         super().__init__(**kwargs)
         if data:
@@ -65,8 +64,7 @@ class Base(BaseModel):
 
     @computed_field
     def id(self) -> UUID:
-        self._id = PalObjects.as_uuid(self._base_save_data["key"])
-        return self._id
+        return PalObjects.as_uuid(self._base_save_data["key"])
 
     @computed_field
     def location(self) -> Optional[WorldMapPoint]:
@@ -78,7 +76,7 @@ class Base(BaseModel):
             "transform",
             "translation",
         )
-        self._location = (
+        return (
             WorldMapPoint(
                 x=last_location["x"],
                 y=last_location["y"],
@@ -87,7 +85,6 @@ class Base(BaseModel):
             if last_location
             else None
         )
-        return self._location
 
     @property
     def save_data(self) -> Dict[str, Any]:

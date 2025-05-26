@@ -9,6 +9,7 @@ from palworld_save_pal.ws.handlers import (
     exp_handler,
     guild_handler,
     items_handler,
+    lab_research_handler,
     map_objects_handler,
     open_in_browser_handler,
     passive_skills_handler,
@@ -37,6 +38,7 @@ from palworld_save_pal.ws.messages import (
     GetBuildingsMessage,
     GetElementsMessage,
     GetItemsMessage,
+    GetLabResearchMessage,
     GetMapObjectsMessage,
     GetPalsMessage,
     GetPassiveSkillsMessage,
@@ -53,6 +55,7 @@ from palworld_save_pal.ws.messages import (
     SelectGamepassSaveMessage,
     SetTechnologyDataMessage,
     SyncAppStateMessage,
+    UpdateLabResearchMessage,
     UpdateSaveFileMessage,
     DownloadSaveFileMessage,
     LoadZipFileMessage,
@@ -387,5 +390,21 @@ def bootstrap(dispatcher: "MessageDispatcher"):
         {
             "message_class": DeletePlayerMessage,
             "handler_func": player_handler.delete_player_handler,
+        },
+    )
+
+    dispatcher.register_handler(  # Added
+        MessageType.GET_LAB_RESEARCH.value,
+        {
+            "message_class": GetLabResearchMessage,
+            "handler_func": lab_research_handler.get_lab_research_handler,
+        },
+    )
+
+    dispatcher.register_handler(  # Added
+        MessageType.UPDATE_LAB_RESEARCH.value,
+        {
+            "message_class": UpdateLabResearchMessage,
+            "handler_func": lab_research_handler.update_lab_research_handler,
         },
     )

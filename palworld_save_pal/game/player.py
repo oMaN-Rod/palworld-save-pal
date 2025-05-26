@@ -12,9 +12,10 @@ from palworld_save_pal.game.character_container import (
 )
 from palworld_save_pal.game.guild import Guild
 from palworld_save_pal.game.map import WorldMapPoint
-from palworld_save_pal.game.pal import Pal, PalDTO
+from palworld_save_pal.game.pal import Pal
+from palworld_save_pal.dto.pal import PalDTO
 from palworld_save_pal.game.item_container import ItemContainer, ItemContainerType
-from palworld_save_pal.game.pal_objects import PalGender, PalObjects
+from palworld_save_pal.game.pal_objects import ArrayType, PalGender, PalObjects
 from palworld_save_pal.utils.dict import safe_remove
 from palworld_save_pal.utils.uuid import are_equal_uuids
 from palworld_save_pal.utils.logging_config import create_logger
@@ -54,24 +55,14 @@ class PlayerDTO(BaseModel):
 
 
 class Player(BaseModel):
-    _uid: UUID
-    _nickname: str
-    _level: int
-    _technologies: List[str]
-    _technology_points: int
-    _boss_technology_points: int
-    _exp: int
-    _hp: int
-    _stomach: float
-    _sanity: float
-    _status_point_list: Dict[str, int]
-    _ext_status_point_list: Dict[str, int]
-    _instance_id: UUID
-    _pal_box_id: UUID
-    _otomo_container_id: UUID
-    _location: WorldMapPoint = None
-
     _guild: Optional[Guild] = PrivateAttr(default=None)
+    _player_gvas_files: PlayerGvasFiles
+    _save_data: Dict[str, Any]
+    _inventory_info: Dict[str, Any]
+    _dynamic_item_save_data: Dict[str, Any]
+    _character_save: Dict[str, Any]
+    _save_parameter: Dict[str, Any]
+    _dps: Optional[Dict[int, Pal]] = PrivateAttr(default=None)
 
     pals: Optional[Dict[UUID, Pal]] = Field(default_factory=dict)
     common_container: Optional[ItemContainer] = Field(default=None)
@@ -81,14 +72,6 @@ class Player(BaseModel):
     food_equip_container: Optional[ItemContainer] = Field(default=None)
     pal_box: Optional[CharacterContainer] = Field(default=None)
     party: Optional[CharacterContainer] = Field(default=None)
-
-    _player_gvas_files: PlayerGvasFiles
-    _save_data: Dict[str, Any]
-    _inventory_info: Dict[str, Any]
-    _dynamic_item_save_data: Dict[str, Any]
-    _character_save: Dict[str, Any]
-    _save_parameter: Dict[str, Any]
-    _dps: Optional[Dict[int, Pal]] = PrivateAttr(default=None)
 
     def __init__(
         self,
@@ -135,195 +118,144 @@ class Player(BaseModel):
 
     @computed_field
     def uid(self) -> UUID:
-        self._uid = PalObjects.get_guid(self._character_save["key"]["PlayerUId"])
-        return self._uid
+        return PalObjects.get_guid(self._character_save["key"]["PlayerUId"])
 
     @computed_field
     def instance_id(self) -> Optional[UUID]:
-        self._instance_id = PalObjects.get_guid(
-            self._character_save["key"]["InstanceId"]
-        )
-        return self._instance_id
+        return PalObjects.get_guid(self._character_save["key"]["InstanceId"])
 
     @computed_field
     def nickname(self) -> str:
         if "NickName" not in self._save_parameter:
-            self._nickname = f"🥷 ({str(self.uid).split("-")[0]})"
+            return f"🥷 ({str(self.uid).split('-')[0]})"
         else:
-            self._nickname = PalObjects.get_value(self._save_parameter["NickName"])
-        return self._nickname
+            return PalObjects.get_value(self._save_parameter["NickName"])
 
     @nickname.setter
     def nickname(self, value: str):
-        default_pattern = f"🥷 ({str(self.uid).split("-")[0]})"
+        default_pattern = f"🥷 ({str(self.uid).split('-')[0]})"
         if value == default_pattern:
             safe_remove(self._save_parameter, "NickName")
             return
-
-        self._nickname = value
         PalObjects.set_value(self._save_parameter["NickName"], value=value)
 
     @computed_field
     def level(self) -> int:
-        self._level = (
+        return (
             PalObjects.get_byte_property(self._save_parameter["Level"])
             if "Level" in self._save_parameter
             else 1
         )
-        return self._level
 
     @level.setter
     def level(self, value: int):
-        self._level = value
-        if "Level" in self._save_parameter:
-            PalObjects.set_byte_property(self._save_parameter["Level"], value=value)
-        else:
-            self._save_parameter["Level"] = PalObjects.ByteProperty(value)
+        self._save_parameter["Level"] = PalObjects.ByteProperty(value)
 
     @computed_field
     def technologies(self) -> List[str]:
-        self._technologies = PalObjects.get_array_property(
+        return PalObjects.get_array_property(
             self._save_data["UnlockedRecipeTechnologyNames"]
         )
-        return self._technologies
 
     @technologies.setter
     def technologies(self, value: List[str]):
-        self._technologies = value
-        if "UnlockedRecipeTechnologyNames" in self._save_data:
-            PalObjects.set_array_property(
-                self._save_data["UnlockedRecipeTechnologyNames"],
-                values=value,
-            )
-        else:
-            self._save_data["UnlockedRecipeTechnologyNames"] = PalObjects.ArrayProperty(
-                value=value
-            )
+        self._save_data["UnlockedRecipeTechnologyNames"] = (
+            PalObjects.ArrayPropertyValues(ArrayType.NAME_PROPERTY, values=value)
+        )
 
     @computed_field
     def technology_points(self) -> int:
-        self._technology_points = (
+        return (
             PalObjects.get_value(self._save_data["TechnologyPoint"])
             if "TechnologyPoint" in self._save_data
             else 0
         )
-        return self._technology_points
 
     @technology_points.setter
     def technology_points(self, value: int):
-        self._technology_points = value
-        if "TechnologyPoint" in self._save_data:
-            PalObjects.set_value(self._save_data["TechnologyPoint"], value=value)
-        else:
-            self._save_data["TechnologyPoint"] = PalObjects.IntProperty(value)
+        self._save_data["TechnologyPoint"] = PalObjects.IntProperty(value)
 
     @computed_field
     def boss_technology_points(self) -> int:
-        self._boss_technology_points = (
+        return (
             PalObjects.get_value(self._save_data["bossTechnologyPoint"])
             if "bossTechnologyPoint" in self._save_data
             else 0
         )
-        return self._boss_technology_points
 
     @boss_technology_points.setter
     def boss_technology_points(self, value: int):
-        self._boss_technology_points = value
-        if "bossTechnologyPoint" in self._save_data:
-            PalObjects.set_value(self._save_data["bossTechnologyPoint"], value=value)
-        else:
-            self._save_data["bossTechnologyPoint"] = PalObjects.IntProperty(value)
+        self._save_data["bossTechnologyPoint"] = PalObjects.IntProperty(value)
 
     @computed_field
     def exp(self) -> int:
-        self._exp = (
+        return (
             PalObjects.get_value(self._save_parameter["Exp"])
             if "Exp" in self._save_parameter
             else 0
         )
-        return self._exp
 
     @exp.setter
     def exp(self, value: int):
-        self._exp = value
-        if "Exp" in self._save_parameter:
-            PalObjects.set_value(self._save_parameter["Exp"], value=value)
-        else:
-            self._save_parameter["Exp"] = PalObjects.Int64Property(value)
+        self._save_parameter["Exp"] = PalObjects.Int64Property(value)
 
     @computed_field
     def hp(self) -> int:
         if "HP" in self._save_parameter:
             self._save_parameter["Hp"] = self._save_parameter.pop("HP")
-        if "Hp" in self._save_parameter:
-            self._hp = PalObjects.get_fixed_point64(self._save_parameter["Hp"])
-        else:
-            self._hp = 0
-        return self._hp
+        return (
+            PalObjects.get_fixed_point64(self._save_parameter["Hp"])
+            if "Hp" in self._save_parameter
+            else 0
+        )
 
     @hp.setter
     def hp(self, value: int):
-        self._hp = value
-        if "Hp" in self._save_parameter:
-            PalObjects.set_fixed_point64(self._save_parameter["Hp"], value=value)
-        else:
-            self._save_parameter["Hp"] = PalObjects.FixedPoint64(value)
+        self._save_parameter["Hp"] = PalObjects.FixedPoint64(value)
 
     @computed_field
     def stomach(self) -> float:
-        self._stomach = (
+        return (
             PalObjects.get_value(self._save_parameter["FullStomach"])
             if "FullStomach" in self._save_parameter
             else 150.0
         )
-        return self._stomach
 
     @stomach.setter
     def stomach(self, value: float):
-        self._stomach = value
-        if "FullStomach" in self._save_parameter:
-            PalObjects.set_value(self._save_parameter["FullStomach"], value=value)
-        else:
-            self._save_parameter["FullStomach"] = PalObjects.FloatProperty(value)
+        self._save_parameter["FullStomach"] = PalObjects.FloatProperty(value)
 
     @computed_field
     def sanity(self) -> float:
-        self._sanity = (
+        return (
             PalObjects.get_value(self._save_parameter["SanityValue"], 100.0)
             if "SanityValue" in self._save_parameter
             else 100.0
         )
-        return self._sanity
 
     @sanity.setter
     def sanity(self, value: float):
-        self._sanity = value
-        if "SanityValue" in self._save_parameter:
-            PalObjects.set_value(self._save_parameter["SanityValue"], value=value)
-        else:
-            self._save_parameter["SanityValue"] = PalObjects.FloatProperty(value)
+        self._save_parameter["SanityValue"] = PalObjects.FloatProperty(value)
 
     @computed_field
     def status_point_list(self) -> Dict[str, int]:
         status_point_list = PalObjects.get_array_property(
             self._save_parameter["GotStatusPointList"]
         )
-        self._status_point_list = {
+        return {
             PalObjects.StatusNameMap[
                 PalObjects.get_value(item["StatusName"])
             ]: PalObjects.get_value(item["StatusPoint"])
             for item in status_point_list
         }
-        return self._status_point_list
 
     @status_point_list.setter
     def status_point_list(self, value: Dict[str, int]):
-        self._status_point_list = value
         status_point_list = PalObjects.get_array_property(
             self._save_parameter["GotStatusPointList"]
         )
         reverse_status_map = {v: k for k, v in PalObjects.StatusNameMap.items()}
-        for status_name, point_value in self._status_point_list.items():
+        for status_name, point_value in value.items():
             japanese_name = reverse_status_map[status_name]
             for item in status_point_list:
                 if PalObjects.get_value(item["StatusName"]) == japanese_name:
@@ -335,22 +267,20 @@ class Player(BaseModel):
         ext_status_point_list = PalObjects.get_array_property(
             self._save_parameter["GotExStatusPointList"]
         )
-        self._ext_status_point_list = {
+        return {
             PalObjects.ExStatusNameMap[
                 PalObjects.get_value(item["StatusName"])
             ]: PalObjects.get_value(item["StatusPoint"])
             for item in ext_status_point_list
         }
-        return self._ext_status_point_list
 
     @ext_status_point_list.setter
     def ext_status_point_list(self, value: Dict[str, int]):
-        self._ext_status_point_list = value
         ext_status_point_list = PalObjects.get_array_property(
             self._save_parameter["GotExStatusPointList"]
         )
         reverse_ex_status_map = {v: k for k, v in PalObjects.ExStatusNameMap.items()}
-        for status_name, point_value in self._ext_status_point_list.items():
+        for status_name, point_value in value.items():
             japanese_name = reverse_ex_status_map[status_name]
             for item in ext_status_point_list:
                 if PalObjects.get_value(item["StatusName"]) == japanese_name:
@@ -359,7 +289,7 @@ class Player(BaseModel):
 
     @computed_field
     def pal_box_id(self) -> Optional[UUID]:
-        self._pal_box_id = PalObjects.get_guid(
+        return PalObjects.get_guid(
             PalObjects.get_nested(
                 self._player_gvas_files.sav.properties["SaveData"],
                 "value",
@@ -368,11 +298,10 @@ class Player(BaseModel):
                 "ID",
             )
         )
-        return self._pal_box_id
 
     @computed_field
     def otomo_container_id(self) -> Optional[UUID]:
-        self._otomo_container_id = PalObjects.get_guid(
+        return PalObjects.get_guid(
             PalObjects.get_nested(
                 self._player_gvas_files.sav.properties["SaveData"],
                 "value",
@@ -381,12 +310,11 @@ class Player(BaseModel):
                 "ID",
             )
         )
-        return self._otomo_container_id
 
     @computed_field
     def location(self) -> Optional[WorldMapPoint]:
         last_location = PalObjects.get_value(self._save_parameter["LastJumpedLocation"])
-        self._location = (
+        return (
             WorldMapPoint(
                 x=last_location["x"],
                 y=last_location["y"],
@@ -395,7 +323,6 @@ class Player(BaseModel):
             if "LastJumpedLocation" in self._save_parameter
             else None
         )
-        return self._location
 
     @computed_field
     def last_online_time(self) -> datetime:

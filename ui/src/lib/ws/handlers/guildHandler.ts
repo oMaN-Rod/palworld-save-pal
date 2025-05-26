@@ -4,12 +4,11 @@ import type { Guild } from '$types';
 import { MessageType } from '$types';
 import type { WSMessageHandler } from '../types';
 
-const appState = getAppState();
-const toast = getToastState();
-
 export const getGuildsHandler: WSMessageHandler = {
 	type: MessageType.GET_GUILDS,
 	async handle(data: Record<string, Guild>, { goto }) {
+		const appState = getAppState();
+
 		const processedGuilds = await Promise.all(
 			Object.entries(data).map(async ([key, guild]) => {
 				try {
@@ -52,6 +51,9 @@ export const getGuildsHandler: WSMessageHandler = {
 export const deleteGuildHandler: WSMessageHandler = {
 	type: MessageType.DELETE_GUILD,
 	async handle(data: Record<string, any>, { goto }) {
+		const appState = getAppState();
+		const toast = getToastState();
+
 		console.log(`Deleting guild ${JSON.stringify(data)}`);
 		const { guild_id, origin } = data;
 		appState.selectedPlayer = undefined;

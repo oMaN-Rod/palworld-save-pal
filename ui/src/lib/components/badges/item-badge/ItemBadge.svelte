@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Tooltip } from '$components/ui';
-	import { type ItemContainerSlot, type ItemGroup, Rarity } from '$types';
+	import { type EggConfig, type ItemContainerSlot, type ItemGroup, Rarity } from '$types';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { itemsData, palsData } from '$lib/data';
 	import { cn } from '$theme';
@@ -34,7 +34,7 @@
 		bow_triple: 'Bow_Triple'
 	};
 
-	let item = $derived.by(() => {
+	const item = $derived.by(() => {
 		if (slot.static_id == 'None') return;
 		let key: string = slot.static_id;
 
@@ -44,13 +44,13 @@
 		return itemsData.items[key];
 	});
 
-	let dynamic = $derived.by(() => {
+	const dynamic = $derived.by(() => {
 		if (item) {
 			return item.details.dynamic;
 		}
 	});
 
-	let showDurability = $derived.by(() => {
+	const showDurability = $derived.by(() => {
 		if (
 			item?.details.type_a.toString() === 'Accessory' ||
 			item?.details.type_a.toString() === 'Glider' ||
@@ -69,7 +69,7 @@
 		return false;
 	});
 
-	let icon = $derived.by(() => {
+	const icon = $derived.by(() => {
 		if (!item || !item.details.icon) {
 			console.warn('Item icon not found:', item);
 			return staticIcons.unknownIcon;
@@ -81,7 +81,7 @@
 		}
 	});
 
-	let slotWeight = $derived.by(() => {
+	const slotWeight = $derived.by(() => {
 		if (item?.details) {
 			return (item.details.weight * slot.count).toFixed(1);
 		} else {
@@ -89,7 +89,7 @@
 		}
 	});
 
-	let itemClass = $derived.by(() => {
+	const itemClass = $derived.by(() => {
 		switch (item?.details.rarity) {
 			case Rarity.Uncommon:
 				return 'bg-linear-to-tl from-green-500/50';
@@ -103,7 +103,7 @@
 				return '';
 		}
 	});
-	let itemPopupHeaderClass = $derived.by(() => {
+	const itemPopupHeaderClass = $derived.by(() => {
 		switch (item?.details.rarity) {
 			case Rarity.Uncommon:
 				return 'bg-linear-to-tl from-green-500/50 to-green-800/50 text-green-300 border-green-500';
@@ -118,7 +118,7 @@
 		}
 	});
 
-	let itemPopupTierClass = $derived.by(() => {
+	const itemPopupTierClass = $derived.by(() => {
 		switch (item?.details.rarity) {
 			case Rarity.Uncommon:
 				return 'bg-green-800 text-green-300 border-green-500';
@@ -133,7 +133,7 @@
 		}
 	});
 
-	let palIcon = $derived.by(() => {
+	const palIcon = $derived.by(() => {
 		if (slot.static_id && slot.static_id.includes('SkillUnlock_')) {
 			const palCharacterId = slot.static_id.replace('SkillUnlock_', '');
 			const palData = palsData.pals[palCharacterId];
@@ -146,16 +146,26 @@
 		}
 	});
 
+	const isEgg = $derived.by(() => {
+		return item?.details.dynamic?.type === 'egg';
+	});
+	const palIconSrc = $derived.by(() => {
+		if (!isEgg) return;
+		const palData = palsData.pals[slot?.dynamic_item?.character_id ?? ''];
+		return assetLoader.loadMenuImage(slot?.dynamic_item?.character_id, palData?.is_pal ?? true);
+	});
+
 	async function handleItemSelect() {
 		// @ts-ignore
-		const result = await modal.showModal<[string, number]>(ItemSelectModal, {
+		const result = await modal.showModal<[string, number, EggConfig]>(ItemSelectModal, {
 			group: itemGroup,
 			itemId: slot.static_id,
 			count: !slot.count || slot.count == 0 ? 1 : slot.count,
-			title: 'Select Item'
+			title: 'Select Item',
+			dynamicItem: slot.dynamic_item
 		});
 		if (!result) return;
-		const [static_id, count] = result;
+		const [static_id, count, eggConfig] = result;
 		slot.static_id = !static_id ? 'None' : static_id;
 		if (slot.static_id == 'None') {
 			slot.count = 0;
@@ -169,15 +179,22 @@
 			if (itemData.details.dynamic) {
 				if (!slot.dynamic_item) {
 					slot.dynamic_item = {
-						local_id: '00000000-0000-0000-0000-000000000000',
-						durability: itemData.details.dynamic.durability || 0,
-						remaining_bullets: itemData.details.dynamic.magazine_size || 0,
-						type: itemData.details.dynamic.type
+						local_id: '00000000-0000-0000-0000-000000000000'
 					};
-				} else {
-					slot.dynamic_item.durability = itemData.details.dynamic.durability || 0;
-					slot.dynamic_item.remaining_bullets = itemData.details.dynamic.magazine_size || 0;
-					slot.dynamic_item.type = itemData.details.dynamic.type;
+				}
+				slot.dynamic_item.durability = itemData.details.dynamic.durability || 0;
+				slot.dynamic_item.remaining_bullets = itemData.details.dynamic.magazine_size || 0;
+				slot.dynamic_item.type = itemData.details.dynamic.type;
+				if (slot.dynamic_item.type === 'egg') {
+					slot.dynamic_item.character_id = eggConfig.character_id;
+					slot.dynamic_item.gender = eggConfig.gender;
+					slot.dynamic_item.talent_hp = eggConfig.talent_hp;
+					slot.dynamic_item.talent_shot = eggConfig.talent_shot;
+					slot.dynamic_item.talent_defense = eggConfig.talent_defense;
+					slot.dynamic_item.active_skills = eggConfig.active_skills;
+					slot.dynamic_item.learned_skills = eggConfig.learned_skills;
+					slot.dynamic_item.passive_skills = eggConfig.passive_skills;
+					slot.dynamic_item.modified = true;
 				}
 			} else {
 				slot.dynamic_item = undefined;
@@ -185,13 +202,19 @@
 		}
 		if (onUpdate) onUpdate(slot);
 	}
+
+	function handleMouseEvent(
+		event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }
+	) {
+		onCopyPaste(event);
+	}
 </script>
 
 <button
 	class="hover:ring-secondary-500 w-12 hover:ring xl:w-16"
 	onclick={handleItemSelect}
 	oncontextmenu={(event) => event.preventDefault()}
-	onmousedown={(event) => onCopyPaste(event)}
+	onmousedown={(event) => handleMouseEvent(event)}
 >
 	{#if item}
 		<Tooltip
@@ -233,7 +256,16 @@
 			{#snippet popup()}
 				<div class="flex w-96 flex-col">
 					<div class={cn('flex flex-col space-y-2 border-b p-2', itemPopupHeaderClass)}>
-						<h4 class="h4 text-left">{item?.info.localized_name}</h4>
+						<div class="flex items-center space-x-2">
+							<h4 class="h4 text-left">{item?.info.localized_name}</h4>
+							{#if isEgg}
+								<img
+									src={palIconSrc}
+									alt="Pal Icon"
+									class="ml-2 h-10 w-10 rounded-full object-cover"
+								/>
+							{/if}
+						</div>
 						<div class="grid grid-cols-[1fr_auto] gap-2">
 							<span class="grow text-left text-gray-300">
 								{item?.details.type_a}

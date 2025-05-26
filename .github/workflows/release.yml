@@ -153,7 +153,8 @@ jobs:
           path: dist/*.dmg
 
   create-release:
-    needs: [build-windows, build-macos]
+    # needs: [build-windows, build-macos]
+    needs: [build-windows]
     runs-on: ubuntu-latest
     steps:
       - name: Download all artifacts
@@ -172,6 +173,9 @@ jobs:
           files: |
             artifacts/windows-zip/*.zip
             artifacts/windows-msi/*.msi
-            artifacts/macos-dmg/*.dmg
+          # files: |
+          #   artifacts/windows-zip/*.zip
+          #   artifacts/windows-msi/*.msi
+          #   artifacts/macos-dmg/*.dmg
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -4,7 +4,8 @@ from typing import Optional, Dict, Any, List
 from uuid import UUID
 from pydantic import BaseModel, PrivateAttr, computed_field
 
-
+from palworld_save_pal.dto.pal import PalDTO
+from palworld_save_pal.game.utils import clean_character_id
 from palworld_save_pal.utils.dict import safe_remove
 from palworld_save_pal.utils.logging_config import create_logger
 from palworld_save_pal.utils.json_manager import JsonManager
@@ -28,74 +29,7 @@ PAL_SICK_TYPES = [
 ]
 
 
-class PalDTO(BaseModel):
-    instance_id: UUID
-    owner_uid: Optional[UUID]
-    character_id: str
-    is_lucky: Optional[bool]
-    is_boss: Optional[bool]
-    gender: PalGender
-    rank_hp: int
-    rank_attack: int
-    rank_defense: int
-    rank_craftspeed: int
-    talent_hp: int
-    talent_shot: int
-    talent_defense: int
-    rank: int
-    level: int
-    exp: int
-    nickname: Optional[str]
-    is_tower: bool
-    storage_id: UUID
-    stomach: float
-    storage_slot: int
-    learned_skills: List[str]
-    active_skills: List[str]
-    passive_skills: List[str]
-    hp: int
-    max_hp: int
-    group_id: Optional[UUID]
-    sanity: float
-    work_suitability: Dict[WorkSuitability, int]
-    is_sick: bool
-
-
 class Pal(BaseModel):
-    _instance_id: Optional[UUID] = None
-    _character_id: Optional[str] = None
-    _character_key: Optional[str] = None
-    _owner_uid: Optional[UUID] = None
-    _is_lucky: bool = False
-    _is_predator: bool = False
-    _is_boss: bool = False
-    _is_tower: bool = False
-    _gender: Optional[PalGender] = None
-    _nickname: Optional[str] = ""
-    _filtered_nickname: Optional[str] = None
-    _stomach: float = 0
-    _sanity: float = 0.0
-    _hp: int = 0
-    _max_hp: int = 0
-    _level: int = 1
-    _exp: int = 0
-    _group_id: Optional[UUID] = None
-    _rank: int = 0
-    _rank_hp: int = 0
-    _rank_attack: int = 0
-    _rank_defense: int = 0
-    _rank_craftspeed: int = 0
-    _talent_hp: int = 0
-    _talent_shot: int = 0
-    _talent_defense: int = 0
-    _storage_slot: int = 0
-    _storage_id: Optional[UUID] = None
-    _learned_skills: List[str] = []
-    _active_skills: List[str] = []
-    _passive_skills: List[str] = []
-    _work_suitability: Dict[WorkSuitability, int] = {}
-    _is_sick: bool = False
-
     _is_dps: bool = PrivateAttr(default=False)
     _character_save: Dict[str, Any] = PrivateAttr(default_factory=dict)
     _save_parameter: Dict[str, Any] = PrivateAttr(default_factory=dict)
@@ -126,149 +60,81 @@ class Pal(BaseModel):
 
     @computed_field
     def instance_id(self) -> UUID:
-        if self._is_dps:
-            self._instance_id = PalObjects.get_guid(
-                self._character_save["InstanceId"]["value"]["InstanceId"]
-            )
-        else:
-            self._instance_id = PalObjects.get_guid(
-                self._character_save["key"]["InstanceId"]
-            )
-        return self._instance_id
+        return PalObjects.get_guid(
+            self._character_save["InstanceId"]["value"]["InstanceId"]
+            if self._is_dps
+            else self._character_save["key"]["InstanceId"]
+        )
 
     @instance_id.setter
     def instance_id(self, value: UUID):
-        self._instance_id = value
-        if self._is_dps:
-            PalObjects.set_value(
-                self._character_save["InstanceId"]["value"]["InstanceId"],
-                value=self._instance_id,
-            )
-        else:
-            PalObjects.set_value(
-                self._character_save["key"]["InstanceId"], value=self._instance_id
-            )
+        PalObjects.set_value(
+            self._character_save["InstanceId"]["value"]["InstanceId"]
+            if self._is_dps
+            else self._character_save["key"]["InstanceId"],
+            value=value,
+        )
 
     @computed_field
     def character_id(self) -> Optional[str]:
-        self._character_id = (
+        return (
             PalObjects.get_value(self._save_parameter["CharacterID"])
             if "CharacterID" in self._save_parameter
             else None
         )
-        return self._character_id
 
     @character_id.setter
     def character_id(self, value: str):
-        self._character_id = value
-        PalObjects.set_value(
-            self._save_parameter["CharacterID"], value=self._character_id
-        )
+        PalObjects.set_value(self._save_parameter["CharacterID"], value=value)
 
     @computed_field
     def character_key(self) -> Optional[str]:
-        typo_mapping = {
-            "boss_police_old": "BOSS_Police_old",
-            "police_handgun": "Police_Handgun",
-        }
-        if self.character_id.lower() in typo_mapping:
-            self.character_id = typo_mapping[self.character_id.lower()]
-
-        if (
-            self.character_id.lower().startswith("boss_")
-            and self.character_id not in PAL_DATA
-        ):
-            self._character_key = self.character_id[5:]
-        elif self.character_id.lower().startswith("predator_"):
-            self._character_key = self.character_id[9:]
-        elif self.character_id.lower().endswith("_avatar"):
-            self._character_key = self.character_id[:-7]
-        else:
-            self._character_key = self.character_id
-
-        key_mapping = {
-            "sheepball": "Sheepball",
-            "lazycatfish": "LazyCatfish",
-            "icedeer": "IceDeer",
-            "blueplatypus": "BluePlatypus",
-            "mopking": "MopKing",
-        }
-
-        lowercase_key = self._character_key.lower()
-        if lowercase_key in key_mapping:
-            self._character_key = key_mapping[lowercase_key]
-
-        return self._character_key
+        self.character_id, character_key = clean_character_id(self.character_id)
+        return character_key
 
     @computed_field
     def owner_uid(self) -> Optional[UUID]:
-        self._owner_uid = (
+        return (
             PalObjects.get_guid(self._save_parameter["OwnerPlayerUId"])
             if "OwnerPlayerUId" in self._save_parameter
             else None
         )
-        return self._owner_uid
 
     @owner_uid.setter
     def owner_uid(self, value: UUID):
-        self._owner_uid = value
-        if "OwnerPlayerUId" in self._save_parameter:
-            PalObjects.set_value(
-                self._save_parameter["OwnerPlayerUId"], value=self._owner_uid
-            )
-        else:
-            self._save_parameter["OwnerPlayerUId"] = PalObjects.Guid(self._owner_uid)
+        self._save_parameter["OwnerPlayerUId"] = PalObjects.Guid(value)
 
     @computed_field
     def is_lucky(self) -> bool:
-        self._is_lucky = (
+        return (
             PalObjects.get_value(self._save_parameter["IsRarePal"])
             if "IsRarePal" in self._save_parameter
             else False
         )
-        return self._is_lucky
 
     @is_lucky.setter
     def is_lucky(self, value: bool):
-        self._is_lucky = value
-        if self._is_lucky:
-            if "IsRarePal" in self._save_parameter:
-                PalObjects.set_value(
-                    self._save_parameter["IsRarePal"], value=self._is_lucky
-                )
-            else:
-                self._save_parameter["IsRarePal"] = PalObjects.BoolProperty(
-                    self._is_lucky
-                )
-            self._format_boss_character_id()
+        if value:
+            self._save_parameter["IsRarePal"] = PalObjects.BoolProperty(value)
         else:
             safe_remove(self._save_parameter, "IsRarePal")
+        self._format_boss_character_id(value)
 
     @computed_field
     def is_boss(self) -> bool:
-        self._is_boss = False
-        if self.character_id.upper().startswith("BOSS_") and not self.is_lucky:
-            self._is_boss = True
-        return self._is_boss
+        return self.character_id.upper().startswith("BOSS_") and not self.is_lucky
 
     @is_boss.setter
     def is_boss(self, value: bool):
-        self._is_boss = value
-        self._format_boss_character_id()
+        self._format_boss_character_id(value)
 
     @computed_field
     def is_predator(self) -> bool:
-        self._is_predator = (
-            self.character_id.startswith("PREDATOR_") if self.character_id else False
-        )
-        return self._is_predator
+        return self.character_id.startswith("PREDATOR_") if self.character_id else False
 
     @computed_field
     def is_tower(self) -> bool:
-        self._is_tower = (
-            self.character_id.startswith("GYM_") if self.character_id else False
-        )
-        return self._is_tower
+        return self.character_id.startswith("GYM_") if self.character_id else False
 
     @computed_field
     def gender(self) -> Optional[PalGender]:
@@ -277,75 +143,49 @@ class Pal(BaseModel):
             if "Gender" in self._save_parameter
             else PalGender.FEMALE.prefixed()
         )
-        self._gender = PalGender.from_value(g)
-        return self._gender
+        return PalGender.from_value(g)
 
     @gender.setter
     def gender(self, value: PalGender):
-        self._gender = value
-        if "Gender" in self._save_parameter:
-            PalObjects.set_enum_property(
-                self._save_parameter["Gender"], value=self._gender.prefixed()
-            )
-        else:
-            self._save_parameter["Gender"] = PalObjects.EnumProperty(
-                "EPalGenderType", self._gender.prefixed()
-            )
+        self._save_parameter["Gender"] = PalObjects.EnumProperty(
+            "EPalGenderType", value.prefixed()
+        )
 
     @computed_field
     def nickname(self) -> Optional[str]:
-        self._nickname = (
+        return (
             PalObjects.get_value(self._save_parameter["NickName"])
             if "NickName" in self._save_parameter
             else None
         )
-        return self._nickname
 
     @nickname.setter
     def nickname(self, value: str):
-        self._nickname = value
-        if "NickName" in self._save_parameter:
-            PalObjects.set_value(self._save_parameter["NickName"], value=self._nickname)
-        else:
-            self._save_parameter["NickName"] = PalObjects.StrProperty(self._nickname)
+        self._save_parameter["NickName"] = PalObjects.StrProperty(value)
 
     @computed_field
     def filtered_nickname(self) -> Optional[str]:
-        if not self._is_dps:
-            return
-        self._filtered_nickname = (
+        return (
             PalObjects.get_value(self._save_parameter["FilteredNickName"])
-            if "FilteredNickName" in self._save_parameter
+            if self._is_dps and "FilteredNickName" in self._save_parameter
             else None
         )
-        return self._nickname
 
     @filtered_nickname.setter
     def filtered_nickname(self, value: str):
-        if not self._is_dps:
-            return
-        self._filtered_nickname = value
-        if "FilteredNickName" in self._save_parameter:
-            PalObjects.set_value(
-                self._save_parameter["FilteredNickName"], value=self._nickname
-            )
-        else:
-            self._save_parameter["FilteredNickName"] = PalObjects.StrProperty(
-                self._nickname
-            )
+        if self._is_dps:
+            self._save_parameter["FilteredNickName"] = PalObjects.StrProperty(value)
 
     @computed_field
     def group_id(self) -> Optional[UUID]:
-        self._group_id = PalObjects.as_uuid(
+        return PalObjects.as_uuid(
             PalObjects.get_nested(
                 self._character_save, "value", "RawData", "value", "group_id"
             )
         )
-        return self._group_id
 
     @group_id.setter
     def group_id(self, value: UUID):
-        self._group_id = value
         if "group_id" in self._character_save["value"]["RawData"]["value"]:
             PalObjects.set_nested(
                 self._character_save,
@@ -353,289 +193,188 @@ class Pal(BaseModel):
                 "RawData",
                 "value",
                 "group_id",
-                value=self.group_id,
+                value=value,
             )
 
     @computed_field
     def stomach(self) -> float:
-        self._stomach = (
+        return (
             PalObjects.get_value(self._save_parameter["FullStomach"], 150)
             if "FullStomach" in self._save_parameter
             else 150
         )
-        return self._stomach
 
     @stomach.setter
     def stomach(self, value: float):
-        self._stomach = value
-        if "FullStomach" in self._save_parameter:
-            PalObjects.set_value(
-                self._save_parameter["FullStomach"], value=self._stomach
-            )
-        else:
-            self._save_parameter["FullStomach"] = PalObjects.FloatProperty(
-                self._stomach
-            )
+        self._save_parameter["FullStomach"] = PalObjects.FloatProperty(value)
 
     @computed_field
     def sanity(self) -> float:
-        self._sanity = (
+        return (
             PalObjects.get_value(self._save_parameter["SanityValue"], 100.0)
             if "SanityValue" in self._save_parameter
             else 100.0
         )
-        return self._sanity
 
     @sanity.setter
     def sanity(self, value: float):
-        self._sanity = value
-        if "SanityValue" in self._save_parameter:
-            PalObjects.set_value(
-                self._save_parameter["SanityValue"], value=self._sanity
-            )
-        else:
-            self._save_parameter["SanityValue"] = PalObjects.FloatProperty(self._sanity)
+        self._save_parameter["SanityValue"] = PalObjects.FloatProperty(value)
 
     @computed_field
     def hp(self) -> int:
         if "HP" in self._save_parameter:
             self._save_parameter["Hp"] = self._save_parameter.pop("HP")
-        self._hp = (
+        return (
             PalObjects.get_fixed_point64(self._save_parameter["Hp"])
             if "Hp" in self._save_parameter
             else 0
         )
-        return self._hp
 
     @hp.setter
     def hp(self, value: int):
-        self._hp = value
-        if "Hp" in self._save_parameter:
-            PalObjects.set_fixed_point64(self._save_parameter["Hp"], value=self._hp)
-        else:
-            self._save_parameter["Hp"] = PalObjects.FixedPoint64(self._hp)
+        self._save_parameter["Hp"] = PalObjects.FixedPoint64(value)
 
     @computed_field
     def level(self) -> int:
-        self._level = (
+        return (
             PalObjects.get_byte_property(self._save_parameter["Level"])
             if "Level" in self._save_parameter
             else 1
         )
-        return self._level
 
     @level.setter
     def level(self, value: int):
-        self._level = value
-        if self._level <= 1:
+        if value <= 1:
             safe_remove(self._save_parameter, "Level")
             return
-        if "Level" in self._save_parameter:
-            PalObjects.set_byte_property(
-                self._save_parameter["Level"], value=self._level
-            )
-        else:
-            self._save_parameter["Level"] = PalObjects.ByteProperty(self._level)
+        self._save_parameter["Level"] = PalObjects.ByteProperty(value)
 
     @computed_field
     def exp(self) -> int:
-        self._exp = (
+        return (
             PalObjects.get_value(self._save_parameter["Exp"])
             if "Exp" in self._save_parameter
             else 0
         )
-        return self._exp
 
     @exp.setter
     def exp(self, value: int):
-        self._exp = value
-        if self._exp == 0:
+        if value == 0:
             safe_remove(self._save_parameter, "Exp")
             return
-        if "Exp" in self._save_parameter:
-            PalObjects.set_value(self._save_parameter["Exp"], value=self._exp)
-        else:
-            self._save_parameter["Exp"] = PalObjects.Int64Property(self._exp)
+        self._save_parameter["Exp"] = PalObjects.Int64Property(value)
 
     @computed_field
     def rank(self) -> int:
-        self._rank = (
+        return (
             int(PalObjects.get_byte_property(self._save_parameter["Rank"]))
             if "Rank" in self._save_parameter
             else 0
         )
-        return self._rank
 
     @rank.setter
     def rank(self, value: int):
-        self._rank = min(value, 255)
-        if self._rank == 0:
+        value = min(value, 255)
+        if value == 0:
             safe_remove(self._save_parameter, "Rank")
             return
-
-        if "Rank" in self._save_parameter:
-            PalObjects.set_byte_property(self._save_parameter["Rank"], value=self._rank)
-        else:
-            self._save_parameter["Rank"] = PalObjects.ByteProperty(self._rank)
+        self._save_parameter["Rank"] = PalObjects.ByteProperty(value)
 
     @computed_field
     def rank_hp(self) -> int:
-        self._rank_hp = (
+        return (
             PalObjects.get_byte_property(self._save_parameter["Rank_HP"])
             if "Rank_HP" in self._save_parameter
             else 0
         )
-        return self._rank_hp
 
     @rank_hp.setter
     def rank_hp(self, value: int):
-        self._rank_hp = value
-        if self._rank_hp == 0:
+        if value == 0:
             safe_remove(self._save_parameter, "Rank_HP")
             return
-
-        if "Rank_HP" in self._save_parameter:
-            PalObjects.set_byte_property(
-                self._save_parameter["Rank_HP"], value=self._rank_hp
-            )
-        else:
-            self._save_parameter["Rank_HP"] = PalObjects.ByteProperty(self._rank_hp)
+        self._save_parameter["Rank_HP"] = PalObjects.ByteProperty(value)
 
     @computed_field
     def rank_attack(self) -> int:
-        self._rank_attack = (
+        return (
             PalObjects.get_byte_property(self._save_parameter["Rank_Attack"])
             if "Rank_Attack" in self._save_parameter
             else 0
         )
-        return self._rank_attack
 
     @rank_attack.setter
     def rank_attack(self, value: int):
-        self._rank_attack = value
-        if self._rank_attack == 0:
+        if value == 0:
             safe_remove(self._save_parameter, "Rank_Attack")
             return
-
-        if "Rank_Attack" in self._save_parameter:
-            PalObjects.set_byte_property(
-                self._save_parameter["Rank_Attack"], value=self._rank_attack
-            )
-        else:
-            self._save_parameter["Rank_Attack"] = PalObjects.ByteProperty(
-                self._rank_attack
-            )
+        self._save_parameter["Rank_Attack"] = PalObjects.ByteProperty(value)
 
     @computed_field
     def rank_defense(self) -> int:
-        self._rank_defense = (
+        return (
             PalObjects.get_byte_property(self._save_parameter["Rank_Defence"])
             if "Rank_Defence" in self._save_parameter
             else 0
         )
-        return self._rank_defense
 
     @rank_defense.setter
     def rank_defense(self, value: int):
-        self._rank_defense = value
-        if self._rank_defense == 0:
+        if value == 0:
             safe_remove(self._save_parameter, "Rank_Defence")
             return
-
-        if "Rank_Defence" in self._save_parameter:
-            PalObjects.set_byte_property(
-                self._save_parameter["Rank_Defence"], value=self._rank_defense
-            )
-        else:
-            self._save_parameter["Rank_Defence"] = PalObjects.ByteProperty(
-                self._rank_defense
-            )
+        self._save_parameter["Rank_Defence"] = PalObjects.ByteProperty(value)
 
     @computed_field
     def rank_craftspeed(self) -> int:
-        self._rank_craftspeed = (
+        return (
             PalObjects.get_byte_property(self._save_parameter["Rank_CraftSpeed"])
             if "Rank_CraftSpeed" in self._save_parameter
             else 0
         )
-        return self._rank_craftspeed
 
     @rank_craftspeed.setter
     def rank_craftspeed(self, value: int):
-        self._rank_craftspeed = value
-        if self._rank_craftspeed == 0:
+        if value == 0:
             safe_remove(self._save_parameter, "Rank_CraftSpeed")
             return
-
-        if "Rank_CraftSpeed" in self._save_parameter:
-            PalObjects.set_byte_property(
-                self._save_parameter["Rank_CraftSpeed"], value=self._rank_craftspeed
-            )
-        else:
-            self._save_parameter["Rank_CraftSpeed"] = PalObjects.ByteProperty(
-                self._rank_craftspeed
-            )
+        self._save_parameter["Rank_CraftSpeed"] = PalObjects.ByteProperty(value)
 
     @computed_field
     def talent_hp(self) -> int:
-        self._talent_hp = (
+        return (
             PalObjects.get_byte_property(self._save_parameter["Talent_HP"])
             if "Talent_HP" in self._save_parameter
             else 0
         )
-        return self._talent_hp
 
     @talent_hp.setter
     def talent_hp(self, value: int):
-        self._talent_hp = value
-        if "Talent_HP" in self._save_parameter:
-            PalObjects.set_byte_property(
-                self._save_parameter["Talent_HP"], value=self._talent_hp
-            )
-        else:
-            self._save_parameter["Talent_HP"] = PalObjects.ByteProperty(self._talent_hp)
+        self._save_parameter["Talent_HP"] = PalObjects.ByteProperty(value)
 
     @computed_field
     def talent_shot(self) -> int:
-        self._talent_shot = (
+        return (
             PalObjects.get_byte_property(self._save_parameter["Talent_Shot"])
             if "Talent_Shot" in self._save_parameter
             else 0
         )
-        return self._talent_shot
 
     @talent_shot.setter
     def talent_shot(self, value: int):
-        self._talent_shot = value
-        if "Talent_Shot" in self._save_parameter:
-            PalObjects.set_byte_property(
-                self._save_parameter["Talent_Shot"], value=self._talent_shot
-            )
-        else:
-            self._save_parameter["Talent_Shot"] = PalObjects.ByteProperty(
-                self._talent_shot
-            )
+        self._save_parameter["Talent_Shot"] = PalObjects.ByteProperty(value)
 
     @computed_field
     def talent_defense(self) -> int:
-        self._talent_defense = (
+        return (
             PalObjects.get_byte_property(self._save_parameter["Talent_Defense"])
             if "Talent_Defense" in self._save_parameter
             else 0
         )
-        return self._talent_defense
 
     @talent_defense.setter
     def talent_defense(self, value: int):
-        self._talent_defense = value
-        if "Talent_Defense" in self._save_parameter:
-            PalObjects.set_byte_property(
-                self._save_parameter["Talent_Defense"], value=self._talent_defense
-            )
-        else:
-            self._save_parameter["Talent_Defense"] = PalObjects.ByteProperty(
-                self._talent_defense
-            )
+        self._save_parameter["Talent_Defense"] = PalObjects.ByteProperty(value)
 
     @computed_field
     def max_hp(self) -> int:
@@ -658,122 +397,83 @@ class Pal(BaseModel):
     @computed_field
     def storage_slot(self) -> int:
         slot_id_key = "SlotID" if "SlotID" in self._save_parameter else "SlotId"
-        self._storage_slot = (
+        return (
             PalObjects.get_value(
                 self._save_parameter[slot_id_key]["value"]["SlotIndex"], 0
             )
             if slot_id_key in self._save_parameter
             else 0
         )
-        return self._storage_slot
 
     @storage_slot.setter
     def storage_slot(self, value: int):
-        self._storage_slot = value
         slot_id_key = "SlotID" if "SlotID" in self._save_parameter else "SlotId"
-        if slot_id_key in self._save_parameter:
-            PalObjects.set_value(
-                self._save_parameter[slot_id_key]["value"]["SlotIndex"],
-                value=self._storage_slot,
-            )
-        else:
-            self._save_parameter[slot_id_key] = PalObjects.PalCharacterSlotId(
-                self._storage_id, self._storage_slot
-            )
+        self._save_parameter[slot_id_key] = PalObjects.PalCharacterSlotId(
+            self.storage_id, value
+        )
 
     @computed_field
     def storage_id(self) -> Optional[UUID]:
         slot_id_key = "SlotID" if "SlotID" in self._save_parameter else "SlotId"
-        self._storage_id = (
+        return (
             PalObjects.get_guid(
                 self._save_parameter[slot_id_key]["value"]["ContainerId"]["value"]["ID"]
             )
             if slot_id_key in self._save_parameter
             else None
         )
-        return self._storage_id
 
     @storage_id.setter
     def storage_id(self, value: UUID):
-        self._storage_id = value
         slot_id_key = "SlotID" if "SlotID" in self._save_parameter else "SlotId"
-        if slot_id_key in self._save_parameter:
-            PalObjects.set_value(
-                self._save_parameter[slot_id_key]["value"]["ContainerId"]["value"][
-                    "ID"
-                ],
-                value=self._storage_id,
-            )
-        else:
-            self._save_parameter[slot_id_key] = PalObjects.PalCharacterSlotId(
-                self._storage_id, self._storage_slot
-            )
+        self._save_parameter[slot_id_key] = PalObjects.PalCharacterSlotId(
+            self.storage_id, value
+        )
 
     @computed_field
     def learned_skills(self) -> List[str]:
-        self._learned_skills = (
+        return (
             PalObjects.get_array_property(self._save_parameter["MasteredWaza"])
             if "MasteredWaza" in self._save_parameter
             else []
         )
-        return self._learned_skills
 
     @learned_skills.setter
     def learned_skills(self, value: List[str]):
-        self._learned_skills = value
         if not value or len(value) == 0:
             safe_remove(self._save_parameter, "MasteredWaza")
             return
-        if "MasteredWaza" in self._save_parameter:
-            PalObjects.set_array_property(
-                self._save_parameter["MasteredWaza"], values=self._learned_skills
-            )
-        else:
-            self._save_parameter["MasteredWaza"] = PalObjects.ArrayPropertyValues(
-                ArrayType.ENUM_PROPERTY, self._learned_skills
-            )
+        self._save_parameter["MasteredWaza"] = PalObjects.ArrayPropertyValues(
+            ArrayType.ENUM_PROPERTY, value
+        )
 
     @computed_field
     def active_skills(self) -> List[str]:
-        self._active_skills = (
+        return (
             PalObjects.get_array_property(self._save_parameter["EquipWaza"])
             if "EquipWaza" in self._save_parameter
             else []
         )
-        return self._active_skills
 
     @active_skills.setter
     def active_skills(self, value: List[str]):
-        self._active_skills = value
-        if "EquipWaza" in self._save_parameter:
-            PalObjects.set_array_property(
-                self._save_parameter["EquipWaza"], values=self._active_skills
-            )
-        else:
-            self._save_parameter["EquipWaza"] = PalObjects.ArrayPropertyValues(
-                ArrayType.ENUM_PROPERTY, self._active_skills
-            )
+        self._save_parameter["EquipWaza"] = PalObjects.ArrayPropertyValues(
+            ArrayType.ENUM_PROPERTY, value
+        )
 
     @computed_field
     def passive_skills(self) -> List[str]:
-        self._passive_skills = (
+        return (
             PalObjects.get_array_property(self._save_parameter["PassiveSkillList"])
             if "PassiveSkillList" in self._save_parameter
             else []
         )
-        return self._passive_skills
 
     @passive_skills.setter
     def passive_skills(self, value: List[str]):
-        self._passive_skills = value
-        if "PassiveSkillList" in self._save_parameter:
-            PalObjects.set_array_property(
-                self._save_parameter["PassiveSkillList"], values=self._passive_skills
-            )
-        else:
-            self._save_parameter["PassiveSkillList"] = PalObjects.ArrayPropertyValues(
-                ArrayType.NAME_PROPERTY, self._passive_skills
-            )
+        self._save_parameter["PassiveSkillList"] = PalObjects.ArrayPropertyValues(
+            ArrayType.NAME_PROPERTY, value
+        )
 
     @property
     def character_save(self) -> Dict[str, Any]:
@@ -787,38 +487,35 @@ class Pal(BaseModel):
         work_suitability_rank_list = PalObjects.get_array_property(
             self._save_parameter["GotWorkSuitabilityAddRankList"]
         )
-        self._work_suitability = {}
+        work_suitability = {}
 
         for work_suitability_rank in work_suitability_rank_list:
-            work_suitability = WorkSuitability.from_value(
+            work_suit = WorkSuitability.from_value(
                 PalObjects.get_enum_property(work_suitability_rank["WorkSuitability"])
             )
             rank = PalObjects.get_value(work_suitability_rank["Rank"])
-            self._work_suitability[work_suitability] = rank
-        return self._work_suitability
+            work_suitability[work_suit] = rank
+        return work_suitability
 
     @work_suitability.setter
     def work_suitability(self, value: Dict[WorkSuitability, int]):
-        self._work_suitability = {k: v for k, v in value.items() if v != 0}
+        work_suitability = {k: v for k, v in value.items() if v != 0}
         safe_remove(self._save_parameter, "GotWorkSuitabilityAddRankList")
-        if not self._work_suitability or len(self._work_suitability.values()) == 0:
+        if not work_suitability or len(work_suitability.values()) == 0:
             return
         self._save_parameter["GotWorkSuitabilityAddRankList"] = (
-            PalObjects.GotWorkSuitabilityRankList(self._work_suitability)
+            PalObjects.GotWorkSuitabilityRankList(work_suitability)
         )
 
     @computed_field
     def is_sick(self) -> bool:
-        self._is_sick = False
         if self._is_dps:
-            return self._is_sick
-        for sick_type in (
-            t for t in PAL_SICK_TYPES if t not in ["HungerType", "SanityValue"]
-        ):
-            if sick_type in self._save_parameter:
-                self._is_sick = True
-                break
-        return self._is_sick
+            return False
+        return any(
+            t in self._save_parameter
+            for t in PAL_SICK_TYPES
+            if t not in ["HungerType", "SanityValue"]
+        )
 
     def clone(
         self, instance_id: UUID, storage_id: UUID, storage_slot: int, nickname: str
@@ -897,17 +594,16 @@ class Pal(BaseModel):
             safe_remove(self._save_parameter, sick_type)
 
         self.stomach = PalObjects.get_nested(
-            PAL_DATA, self._character_key, "max_full_stomach"
+            PAL_DATA, self.character_key, "max_full_stomach"
         )
         self.sanity = 100.0
 
-    def _format_boss_character_id(self):
-        if self._is_boss or self._is_lucky:
-            if not self.character_id.startswith("BOSS_"):
-                self.character_id = f"BOSS_{self.character_key}"
-        else:
-            if self.character_id.startswith("BOSS_"):
-                self.character_id = self.character_key
+    def _format_boss_character_id(self, is_boss: bool = False):
+        has_boss_prefix = self.character_id.startswith("BOSS_")
+        if has_boss_prefix != is_boss:
+            self.character_id = (
+                f"BOSS_{self.character_key}" if is_boss else self.character_key
+            )
 
     def populate_status_point_lists(self):
         self._save_parameter["GotStatusPointList"] = PalObjects.GetStatusPointList(

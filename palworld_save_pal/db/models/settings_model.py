@@ -1,14 +1,5 @@
-from pydantic import BaseModel
 from sqlmodel import Field, SQLModel
 from palworld_save_pal.utils.file_manager import STEAM_ROOT
-
-
-class SettingsDTO(BaseModel):
-    language: str
-    clone_prefix: str
-    new_pal_prefix: str
-    debug_mode: bool
-    cheat_mode: bool
 
 
 class SettingsModel(SQLModel, table=True):

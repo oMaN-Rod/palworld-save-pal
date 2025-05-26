@@ -1,0 +1,602 @@
+{
+  "Cool1": {
+    "localized_name": "Armazenamento Refrigerado Nv. 1",
+    "description": null
+  },
+  "Cool1_2": {
+    "localized_name": "Trabalho de Refrigeração Nv. 1",
+    "description": null
+  },
+  "Cool1_3": {
+    "localized_name": "Trabalho de Refrigeração Nv. 2",
+    "description": null
+  },
+  "Cool1_4": {
+    "localized_name": "Trabalho de Refrigeração Nv. 3",
+    "description": null
+  },
+  "Cool1_5": {
+    "localized_name": "Trabalho de Refrigeração Nv. 4",
+    "description": null
+  },
+  "Cool2": {
+    "localized_name": "Aceleração de Incubação Nv. 1",
+    "description": null
+  },
+  "Cool2_2": {
+    "localized_name": "Aceleração de Incubação Nv. 2",
+    "description": null
+  },
+  "Cool2_3": {
+    "localized_name": "Aceleração de Incubação Nv. 3",
+    "description": null
+  },
+  "Cool2_4": {
+    "localized_name": "Aceleração de Incubação Nv. 4",
+    "description": null
+  },
+  "Cool3": {
+    "localized_name": "Pesquisa sobre Refrigeração Nv. 1",
+    "description": null
+  },
+  "Cool3_2": {
+    "localized_name": "Pesquisa sobre Refrigeração Nv. 2",
+    "description": null
+  },
+  "Cool3_3": {
+    "localized_name": "Fortalecimento de Pals na Base Nv. 1",
+    "description": null
+  },
+  "Cool3_4": {
+    "localized_name": "Fortalecimento de Pals na Base Nv. 2",
+    "description": null
+  },
+  "Cool4": {
+    "localized_name": "Armazenamento Refrigerado Nv. 2",
+    "description": null
+  },
+  "Cool4_2": {
+    "localized_name": "Armazenamento Refrigerado Nv. 3",
+    "description": null
+  },
+  "Cool4_3": {
+    "localized_name": "Armazenamento Refrigerado Nv. 4",
+    "description": null
+  },
+  "Cool5": {
+    "localized_name": "Desenvolvimento de Boneco de Neve",
+    "description": null
+  },
+  "Deforest1": {
+    "localized_name": "Trabalho de Corte de Árvores Nv. 1",
+    "description": null
+  },
+  "Deforest1_2": {
+    "localized_name": "Trabalho de Corte de Árvores Nv. 2",
+    "description": null
+  },
+  "Deforest1_3": {
+    "localized_name": "Trabalho de Corte de Árvores Nv. 3",
+    "description": null
+  },
+  "Deforest1_4": {
+    "localized_name": "Trabalho de Corte de Árvores Nv. 4",
+    "description": null
+  },
+  "Deforest1_5": {
+    "localized_name": "Trabalho de Corte de Árvores Nv. 5",
+    "description": null
+  },
+  "Deforest2": {
+    "localized_name": "Encurtamento de Expedições Nv. 1",
+    "description": null
+  },
+  "Deforest2_2": {
+    "localized_name": "Mistérios das Expedições Nv. 1",
+    "description": null
+  },
+  "Deforest2_3": {
+    "localized_name": "Encurtamento de Expedições Nv. 2",
+    "description": null
+  },
+  "Deforest2_4": {
+    "localized_name": "Mistérios das Expedições Nv. 2",
+    "description": null
+  },
+  "Deforest2_5": {
+    "localized_name": "Encurtamento de Expedições Nv. 3",
+    "description": null
+  },
+  "Deforest2_6": {
+    "localized_name": "Mistérios das Expedições Nv. 3",
+    "description": null
+  },
+  "Deforest3": {
+    "localized_name": "Segredos de Pesquisa Madeireira Nv. 1",
+    "description": null
+  },
+  "Deforest3_2": {
+    "localized_name": "Segredos de Pesquisa Madeireira Nv. 2",
+    "description": null
+  },
+  "Deforest3_3": {
+    "localized_name": "Fortalecimento de Pals na Base Nv. 1",
+    "description": null
+  },
+  "Deforest3_4": {
+    "localized_name": "Fortalecimento de Pals na Base Nv. 2",
+    "description": null
+  },
+  "Deforest4": {
+    "localized_name": "Desenvolvimento de Toco e Machado",
+    "description": null
+  },
+  "EmitFlame1": {
+    "localized_name": "Trabalho de Acender Fogo Nv. 1",
+    "description": null
+  },
+  "EmitFlame1_2": {
+    "localized_name": "Trabalho de Acender Fogo Nv. 2",
+    "description": null
+  },
+  "EmitFlame1_3": {
+    "localized_name": "Trabalho de Acender Fogo Nv. 3",
+    "description": null
+  },
+  "EmitFlame1_4": {
+    "localized_name": "Trabalho de Acender Fogo Nv. 4",
+    "description": null
+  },
+  "EmitFlame1_5": {
+    "localized_name": "Trabalho de Acender Fogo Nv. 5",
+    "description": null
+  },
+  "EmitFlame2": {
+    "localized_name": "Aceleração de Incubação Nv. 1",
+    "description": null
+  },
+  "EmitFlame2_2": {
+    "localized_name": "Aceleração de Incubação Nv. 2",
+    "description": null
+  },
+  "EmitFlame2_3": {
+    "localized_name": "Aceleração de Incubação Nv. 3",
+    "description": null
+  },
+  "EmitFlame2_4": {
+    "localized_name": "Aceleração de Incubação Nv. 4",
+    "description": null
+  },
+  "EmitFlame3": {
+    "localized_name": "Segredos de Pesquisa sobre Fogo Nv. 1",
+    "description": null
+  },
+  "EmitFlame3_2": {
+    "localized_name": "Segredos de Pesquisa sobre Fogo Nv. 2",
+    "description": null
+  },
+  "EmitFlame3_3": {
+    "localized_name": "Fortalecimento de Pals na Base Nv. 1",
+    "description": null
+  },
+  "EmitFlame3_4": {
+    "localized_name": "Fortalecimento de Pals na Base Nv. 2",
+    "description": null
+  },
+  "EmitFlame4": {
+    "localized_name": "Técnicas para Cozinhar em Quantidade Nv. 1",
+    "description": null
+  },
+  "EmitFlame4_2": {
+    "localized_name": "Métodos de Refinação Nv. 1",
+    "description": null
+  },
+  "EmitFlame4_3": {
+    "localized_name": "Técnicas para Cozinhar em Quantidade Nv. 2",
+    "description": null
+  },
+  "EmitFlame4_4": {
+    "localized_name": "Métodos de Refinação Nv. 2",
+    "description": null
+  },
+  "EmitFlame5": {
+    "localized_name": "Desenvolvimento de Pira da Chama Sagrada",
+    "description": null
+  },
+  "GenerateEnergy1": {
+    "localized_name": "Trabalho de Geração de Energia Nv. 1",
+    "description": null
+  },
+  "GenerateEnergy1_2": {
+    "localized_name": "Trabalho de Geração de Energia Nv. 2",
+    "description": null
+  },
+  "GenerateEnergy1_3": {
+    "localized_name": "Trabalho de Geração de Energia Nv. 3",
+    "description": null
+  },
+  "GenerateEnergy1_4": {
+    "localized_name": "Trabalho de Geração de Energia Nv. 4",
+    "description": null
+  },
+  "GenerateEnergy1_5": {
+    "localized_name": "Trabalho de Geração de Energia Nv. 5",
+    "description": null
+  },
+  "GenerateEnergy2": {
+    "localized_name": "Métodos de Armazenamento de Energia Nv. 1",
+    "description": null
+  },
+  "GenerateEnergy2_2": {
+    "localized_name": "Métodos de Armazenamento de Energia Nv. 2",
+    "description": null
+  },
+  "GenerateEnergy2_3": {
+    "localized_name": "Métodos de Armazenamento de Energia Nv. 3",
+    "description": null
+  },
+  "GenerateEnergy3": {
+    "localized_name": "Segredos de Pesquisa sobre Geração de Energia Nv. 1",
+    "description": null
+  },
+  "GenerateEnergy3_2": {
+    "localized_name": "Segredos de Pesquisa sobre Geração de Energia Nv. 2",
+    "description": null
+  },
+  "GenerateEnergy3_3": {
+    "localized_name": "Fortalecimento de Pals na Base Nv. 1",
+    "description": null
+  },
+  "GenerateEnergy3_4": {
+    "localized_name": "Fortalecimento de Pals na Base Nv. 2",
+    "description": null
+  },
+  "GenerateEnergy4": {
+    "localized_name": "Mistérios da Economia de Energia Nv. 1",
+    "description": null
+  },
+  "GenerateEnergy4_2": {
+    "localized_name": "Mistérios da Economia de Energia Nv. 2",
+    "description": null
+  },
+  "GenerateEnergy4_3": {
+    "localized_name": "Mistérios da Economia de Energia Nv. 3",
+    "description": null
+  },
+  "GenerateEnergy5": {
+    "localized_name": "Desenvolvimento de Torre de Transmissão",
+    "description": null
+  },
+  "Handcraft1": {
+    "localized_name": "Velocidade de Trabalho Manual Nv. 1",
+    "description": null
+  },
+  "Handcraft1_2": {
+    "localized_name": "Velocidade de Trabalho Manual Nv. 2",
+    "description": null
+  },
+  "Handcraft1_3": {
+    "localized_name": "Velocidade de Trabalho Manual Nv. 3",
+    "description": null
+  },
+  "Handcraft1_4": {
+    "localized_name": "Velocidade de Trabalho Manual Nv. 4",
+    "description": null
+  },
+  "Handcraft1_5": {
+    "localized_name": "Velocidade de Trabalho Manual Nv. 5",
+    "description": null
+  },
+  "Handcraft2": {
+    "localized_name": "Economia na Produção de Armaduras Nv. 1",
+    "description": null
+  },
+  "Handcraft2_2": {
+    "localized_name": "Economia na Produção de Engrenagens Pal Nv. 1",
+    "description": null
+  },
+  "Handcraft2_3": {
+    "localized_name": "Economia na Produção de Armas Nv. 1",
+    "description": null
+  },
+  "Handcraft2_4": {
+    "localized_name": "Economia na Produção de Armaduras Nv. 2",
+    "description": null
+  },
+  "Handcraft2_5": {
+    "localized_name": "Economia na Produção de Engrenagens Pal Nv. 2",
+    "description": null
+  },
+  "Handcraft2_6": {
+    "localized_name": "Economia na Produção de Armas Nv. 2",
+    "description": null
+  },
+  "Handcraft3": {
+    "localized_name": "Segredos de Pesquisa sobre Trabalho Manual Nv. 1",
+    "description": null
+  },
+  "Handcraft3_2": {
+    "localized_name": "Segredos de Pesquisa sobre Trabalho Manual Nv. 2",
+    "description": null
+  },
+  "Handcraft3_3": {
+    "localized_name": "Fortalecimento de Pals na Base Nv. 1",
+    "description": null
+  },
+  "Handcraft3_4": {
+    "localized_name": "Fortalecimento de Pals na Base Nv. 2",
+    "description": null
+  },
+  "Handcraft4": {
+    "localized_name": "Técnica de Replicação de Esferas Nv. 1",
+    "description": null
+  },
+  "Handcraft4_2": {
+    "localized_name": "Técnica de Replicação de Munição Nv. 1",
+    "description": null
+  },
+  "Handcraft4_3": {
+    "localized_name": "Técnica de Replicação de Esferas Nv. 2",
+    "description": null
+  },
+  "Handcraft4_4": {
+    "localized_name": "Técnica de Replicação de Munição Nv. 2",
+    "description": null
+  },
+  "Handcraft5": {
+    "localized_name": "Desenvolvimento de Caixa de Ferramentas Grande",
+    "description": null
+  },
+  "Medicine1": {
+    "localized_name": "Trabalho de Manipulação de Remédios Nv. 1",
+    "description": null
+  },
+  "Medicine1_2": {
+    "localized_name": "Trabalho de Manipulação de Remédios Nv. 2",
+    "description": null
+  },
+  "Medicine1_3": {
+    "localized_name": "Trabalho de Manipulação de Remédios Nv. 3",
+    "description": null
+  },
+  "Medicine1_4": {
+    "localized_name": "Trabalho de Manipulação de Remédios Nv. 4",
+    "description": null
+  },
+  "Medicine1_5": {
+    "localized_name": "Trabalho de Manipulação de Remédios Nv. 5",
+    "description": null
+  },
+  "Medicine2": {
+    "localized_name": "Pesquisa sobre Manipulação de Remédios Nv. 1",
+    "description": null
+  },
+  "Medicine2_2": {
+    "localized_name": "Pesquisa sobre Manipulação de Remédios Nv. 2",
+    "description": null
+  },
+  "Medicine2_3": {
+    "localized_name": "Fortalecimento de Pals na Base Nv. 1",
+    "description": null
+  },
+  "Medicine2_4": {
+    "localized_name": "Fortalecimento de Pals na Base Nv. 2",
+    "description": null
+  },
+  "Medicine3": {
+    "localized_name": "Economia na Manipulação de Remédios Nv. 1",
+    "description": null
+  },
+  "Medicine3_2": {
+    "localized_name": "Economia na Manipulação de Remédios Nv. 2",
+    "description": null
+  },
+  "Medicine3_3": {
+    "localized_name": "Economia na Manipulação de Remédios Nv. 3",
+    "description": null
+  },
+  "Medicine4": {
+    "localized_name": "Desenvolvimento de Caldeirão de Bruxa",
+    "description": null
+  },
+  "Mining1": {
+    "localized_name": "Trabalho de Garimpo Nv. 1",
+    "description": null
+  },
+  "Mining1_2": {
+    "localized_name": "Trabalho de Garimpo Nv. 2",
+    "description": null
+  },
+  "Mining1_3": {
+    "localized_name": "Trabalho de Garimpo Nv. 3",
+    "description": null
+  },
+  "Mining1_4": {
+    "localized_name": "Trabalho de Garimpo Nv. 4",
+    "description": null
+  },
+  "Mining1_5": {
+    "localized_name": "Trabalho de Garimpo Nv. 5",
+    "description": null
+  },
+  "Mining2": {
+    "localized_name": "Encurtamento de Expedições Nv. 1",
+    "description": null
+  },
+  "Mining2_2": {
+    "localized_name": "Mistérios das Expedições Nv. 1",
+    "description": null
+  },
+  "Mining2_3": {
+    "localized_name": "Encurtamento de Expedições Nv. 2",
+    "description": null
+  },
+  "Mining2_4": {
+    "localized_name": "Mistérios das Expedições Nv. 2",
+    "description": null
+  },
+  "Mining3": {
+    "localized_name": "Segredos de Pesquisa sobre Garimpo Nv. 1",
+    "description": null
+  },
+  "Mining3_2": {
+    "localized_name": "Segredos de Pesquisa sobre Garimpo Nv. 2",
+    "description": null
+  },
+  "Mining3_3": {
+    "localized_name": "Fortalecimento de Pals na Base Nv. 1",
+    "description": null
+  },
+  "Mining3_4": {
+    "localized_name": "Fortalecimento de Pals na Base Nv. 2",
+    "description": null
+  },
+  "Mining4": {
+    "localized_name": "Otimização da Extração de Óleo Cru Nv. 1",
+    "description": null
+  },
+  "Mining4_2": {
+    "localized_name": "Otimização da Extração de Óleo Cru Nv. 2",
+    "description": null
+  },
+  "Mining4_3": {
+    "localized_name": "Otimização da Extração de Óleo Cru Nv. 3",
+    "description": null
+  },
+  "Mining5": {
+    "localized_name": "Desenvolvimento de Picareta e Capacete",
+    "description": null
+  },
+  "Seeding1": {
+    "localized_name": "Trabalho de Plantio Nv. 1",
+    "description": null
+  },
+  "Seeding1_2": {
+    "localized_name": "Trabalho de Plantio Nv. 2",
+    "description": null
+  },
+  "Seeding1_3": {
+    "localized_name": "Trabalho de Plantio Nv. 3",
+    "description": null
+  },
+  "Seeding1_4": {
+    "localized_name": "Trabalho de Plantio Nv. 4",
+    "description": null
+  },
+  "Seeding1_5": {
+    "localized_name": "Trabalho de Plantio Nv. 5",
+    "description": null
+  },
+  "Seeding2": {
+    "localized_name": "Conhecimentos Agrícolas Nv. 1",
+    "description": null
+  },
+  "Seeding2_2": {
+    "localized_name": "Conhecimentos sobre Colheita Nv. 1",
+    "description": null
+  },
+  "Seeding2_3": {
+    "localized_name": "Conhecimentos Agrícolas Nv. 2",
+    "description": null
+  },
+  "Seeding2_4": {
+    "localized_name": "Conhecimentos Agrícolas Nv. 3",
+    "description": null
+  },
+  "Seeding2_5": {
+    "localized_name": "Conhecimentos sobre Colheita Nv. 2",
+    "description": null
+  },
+  "Seeding2_6": {
+    "localized_name": "Conhecimentos sobre Colheita Nv. 3",
+    "description": null
+  },
+  "Seeding3": {
+    "localized_name": "Segredos de Pesquisa sobre Plantio Nv. 1",
+    "description": null
+  },
+  "Seeding3_2": {
+    "localized_name": "Segredos de Pesquisa sobre Plantio Nv. 2",
+    "description": null
+  },
+  "Seeding3_3": {
+    "localized_name": "Fortalecimento de Pals na Base Nv. 1",
+    "description": null
+  },
+  "Seeding3_4": {
+    "localized_name": "Fortalecimento de Pals na Base Nv. 2",
+    "description": null
+  },
+  "Seeding4": {
+    "localized_name": "Desenvolvimento de Canteiro de Flores",
+    "description": null
+  },
+  "Seeding5": {
+    "localized_name": "Desenvolvimento de Silo",
+    "description": null
+  },
+  "Watering1": {
+    "localized_name": "Trabalho de Rega Nv. 1",
+    "description": null
+  },
+  "Watering1_2": {
+    "localized_name": "Trabalho de Rega Nv. 2",
+    "description": null
+  },
+  "Watering1_3": {
+    "localized_name": "Trabalho de Rega Nv. 3",
+    "description": null
+  },
+  "Watering1_4": {
+    "localized_name": "Trabalho de Rega Nv. 4",
+    "description": null
+  },
+  "Watering1_5": {
+    "localized_name": "Trabalho de Rega Nv. 5",
+    "description": null
+  },
+  "Watering2": {
+    "localized_name": "Conhecimentos Agrícolas Nv. 1",
+    "description": null
+  },
+  "Watering2_2": {
+    "localized_name": "Conhecimentos sobre Colheita Nv. 1",
+    "description": null
+  },
+  "Watering2_3": {
+    "localized_name": "Conhecimentos Agrícolas Nv. 2",
+    "description": null
+  },
+  "Watering2_4": {
+    "localized_name": "Conhecimentos sobre Colheita Nv. 2",
+    "description": null
+  },
+  "Watering3": {
+    "localized_name": "Segredos de Pesquisa sobre Rega Nv. 1",
+    "description": null
+  },
+  "Watering3_2": {
+    "localized_name": "Segredos de Pesquisa sobre Rega Nv. 2",
+    "description": null
+  },
+  "Watering3_3": {
+    "localized_name": "Fortalecimento de Pals na Base Nv. 1",
+    "description": null
+  },
+  "Watering3_4": {
+    "localized_name": "Fortalecimento de Pals na Base Nv. 2",
+    "description": null
+  },
+  "Watering4": {
+    "localized_name": "Técnicas de Trituração de Palúdio Nv. 1",
+    "description": null
+  },
+  "Watering4_2": {
+    "localized_name": "Técnicas de Trituração de Palúdio Nv. 2",
+    "description": null
+  },
+  "Watering5": {
+    "localized_name": "Desenvolvimento de Chafariz",
+    "description": null
+  }
+}

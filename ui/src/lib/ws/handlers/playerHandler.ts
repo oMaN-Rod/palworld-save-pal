@@ -4,12 +4,11 @@ import type { Player } from '$types';
 import { MessageType } from '$types';
 import type { WSMessageHandler } from '../types';
 
-const appState = getAppState();
-const toast = getToastState();
-
 export const getPlayersHandler: WSMessageHandler = {
 	type: MessageType.GET_PLAYERS,
 	async handle(data: Record<string, Player>) {
+		const appState = getAppState();
+
 		const processedPlayers = await Promise.all(
 			Object.entries(data).map(async ([key, player]) => {
 				try {
@@ -39,7 +38,10 @@ export const getPlayersHandler: WSMessageHandler = {
 export const deletePlayerHandler: WSMessageHandler = {
 	type: MessageType.DELETE_PLAYER,
 	async handle(data: Record<string, any>, { goto }) {
+		const appState = getAppState();
+		const toast = getToastState();
 		const { player_id, origin } = data;
+
 		if (!data) {
 			toast.add(
 				'Cannot delete guild admin player, you must delete the entire guild or transfer admin to another player',
