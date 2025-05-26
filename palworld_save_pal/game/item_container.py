@@ -152,38 +152,33 @@ class ItemContainer(BaseModel):
     def _update_or_create_container_slot(
         self, slot_dto: ItemContainerSlotDTO
     ) -> Dict[str, Any]:
+        if not slot_dto or slot_dto.static_id == "None":
+            return
         logger.debug("%s (%s) => %s", self.type, self.id, slot_dto)
         slot = next(
             (s for s in self.slots if s.slot_index == slot_dto.slot_index), None
         )
 
         if not slot:
-            logger.debug("Creating new slot %s", slot_dto.slot_index)
             slot_data = PalObjects.ItemContainerSlot(slot_dto)
             slot = ItemContainerSlot(container_slot_data=slot_data)
             self._container_slots_data.append(slot.slot_data)
             self.slots.append(slot)
         else:
-            logger.debug("Updating existing slot %s", slot_dto.slot_index)
             slot.update_from(slot_dto.model_dump())
 
         if not slot_dto.dynamic_item:
-            logger.debug("No dynamic item for slot %s", slot_dto.slot_index)
             return
         if not slot_dto.dynamic_item.local_id or is_empty_uuid(
             slot_dto.dynamic_item.local_id
         ):
-            slot_dto.dynamic_item.local_id = uuid.uuid4()
+            slot_dto.dynamic_item.local_id = (
+                uuid.uuid4() if not slot.dynamic_item else slot.dynamic_item.local_id
+            )
 
         if slot.dynamic_item:
-            logger.debug("Updating existing dynamic item %s", slot_dto.dynamic_item)
             slot.dynamic_item.update_from(slot_dto.dynamic_item.model_dump())
         else:
-            logger.debug(
-                "Creating new dynamic item %s with UUID: %s",
-                slot_dto,
-                slot_dto.dynamic_item.local_id,
-            )
             new_item = PalObjects.DynamicItem(slot_dto)
             slot.dynamic_item = DynamicItem(
                 local_id=slot_dto.dynamic_item.local_id, dynamic_item_save_data=new_item
