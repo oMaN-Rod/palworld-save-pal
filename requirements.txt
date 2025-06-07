@@ -23,6 +23,7 @@ psutil==6.1.0
 pycparser==2.22
 pydantic==2.10.3
 pydantic_core==2.27.1
+PyGObject==3.52.3
 pythonnet==3.0.4
 pywebview==5.3.2
 pywin32-ctypes==0.2.3
