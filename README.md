@@ -97,9 +97,8 @@ For developers who want to contribute to Palworld Save Pal:
 1. Set up the development environment:
 
    ```bash
-   python -m venv .venv
+   uv sync
    source .venv/bin/activate
-   pip install -r requirements.txt
    ```
 
 2. Run the application in development mode:
@@ -124,9 +123,8 @@ For developers who want to contribute to Palworld Save Pal:
 2. Activate python environment
 
    ```powershell
-   python -m venv .venv
-   source .\.venv\Scripts\activate
-   pip install -r requirements.txt
+   uv sync
+   .venv\Scripts\activate
    ```
 
 3. Run the desktop app:
@@ -142,9 +140,8 @@ For developers who want to contribute to Palworld Save Pal:
 > Activate the environment
 
 ```powershell
-python -m venv .venv
-source .\.venv\Scripts\activate
-pip install -r requirements.txt
+uv sync
+.venv\Scripts\activate
 ```
 
 #### Using build script
