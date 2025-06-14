@@ -10,14 +10,14 @@
 		NumberInputModal,
 		PalPresetSelectModal
 	} from '$components/modals';
-	import { type ElementType, type Pal, type PalData, EntryState, MessageType } from '$types';
+	import { type ElementType, type Pal, type PalData, MessageType } from '$types';
 	import {
 		assetLoader,
 		debounce,
 		calculateFilters,
 		formatNickname,
 		deepCopy,
-		applyPresetToPal
+		applyPalPreset
 	} from '$utils';
 	import { cn } from '$theme';
 	import { staticIcons } from '$types/icons';
@@ -291,7 +291,7 @@
 		selectedPals.forEach((id) => {
 			const palWithData = pals?.find((p) => p.id === id);
 			if (palWithData) {
-				applyPresetToPal(palWithData.pal, presetProfile);
+				applyPalPreset(palWithData.pal, presetProfile, appState.selectedPlayer!);
 			}
 		});
 	}

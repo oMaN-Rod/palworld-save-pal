@@ -10,21 +10,21 @@ import {
 } from '$types';
 
 export function canBeBoss(character_id: string): [string, boolean] {
-	let valid = true;
-	let type = '';
-	if (character_id.toLowerCase().includes('predator_')) {
-		valid = false;
-		type = 'Predator';
+	const lowerCaseId = character_id.toLowerCase();
+	const prefixTypeMap = [
+		['predator_', 'Predator'],
+		['summon_', 'Summon'],
+		['raid_', 'Raid'],
+		['gym_', 'Tower Boss']
+	] as const;
+
+	for (const [prefix, type] of prefixTypeMap) {
+		if (lowerCaseId.includes(prefix)) {
+			return [type, false];
+		}
 	}
-	if (character_id.toLowerCase().includes('summon_')) {
-		valid = false;
-		type = 'Summon';
-	}
-	if (character_id.toLowerCase().includes('raid_')) {
-		valid = false;
-		type = 'Raid';
-	}
-	return [type, valid];
+
+	return ['', true];
 }
 
 export function formatNickname(nickname: string, prefix: string | undefined) {
@@ -66,27 +66,49 @@ export async function handleMaxOutPal(pal: Pal, player: Player): Promise<void> {
 	}
 }
 
-export const applyPresetToPal = (pal: Record<string, any>, presetProfile: PresetProfile) => {
-	const appState = getAppState();
+export const applyPalPreset = (pal: Pal, presetProfile: PresetProfile, player: Player): void => {
+	if (!presetProfile.pal_preset) return;
+
 	const palData = palsData.pals[pal.character_key];
-	const skipKeys = ['character_id', 'lock', 'lock_element', 'element'];
-	for (const [key, value] of Object.entries(presetProfile.pal_preset!)) {
-		if (skipKeys.includes(key)) continue;
-		if (key === 'is_boss') {
-			if (!palData.is_pal) continue;
-			pal.is_boss = value;
-			pal.is_lucky = value ? false : pal.is_lucky;
-		}
-		if (key === 'is_lucky') {
-			if (!palData.is_pal) continue;
-			pal.is_boss = value ? false : pal.is_boss;
-			pal.is_lucky = value;
-		} else if (value != null) {
+	if (!palData) return;
+
+	const skipKeys = new Set(['character_id', 'character_key', 'lock', 'lock_element', 'element']);
+	const [, canBeBossValue] = canBeBoss(pal.character_id);
+
+	for (const [key, value] of Object.entries(presetProfile.pal_preset)) {
+		if (skipKeys.has(key) || value == null) continue;
+
+		if (key === 'is_boss' || key === 'is_lucky') {
+			handleBossLuckyFlags(pal, palData, key, value as boolean, canBeBossValue);
+		} else {
 			(pal as Record<string, any>)[key] = value;
 		}
 	}
-	getStats(pal as Pal, appState.selectedPlayer!);
+
+	getStats(pal, player);
 	pal.hp = pal.max_hp;
 	pal.stomach = palData.max_full_stomach;
 	pal.state = EntryState.MODIFIED;
 };
+
+function handleBossLuckyFlags(
+	pal: Pal,
+	palData: any,
+	key: 'is_boss' | 'is_lucky',
+	value: boolean,
+	canBeBossValue: boolean
+): void {
+	if (!canBeBossValue || !palData.is_pal) {
+		pal.is_boss = false;
+		pal.is_lucky = false;
+		return;
+	}
+
+	if (key === 'is_boss') {
+		pal.is_boss = value;
+		if (value) pal.is_lucky = false;
+	} else {
+		pal.is_lucky = value;
+		if (value) pal.is_boss = false;
+	}
+}

@@ -10,7 +10,7 @@
 		PalPresetSelectModal,
 		FillPalsModal
 	} from '$components/modals';
-	import { type ElementType, type Pal, type PalData, EntryState, MessageType } from '$types';
+	import { type ElementType, type Pal, type PalData, MessageType } from '$types';
 	import {
 		assetLoader,
 		debounce,
@@ -18,7 +18,7 @@
 		deepCopy,
 		handleMaxOutPal,
 		formatNickname,
-		applyPresetToPal
+		applyPalPreset
 	} from '$utils';
 	import { cn } from '$theme';
 	import { staticIcons } from '$types/icons';
@@ -644,12 +644,12 @@
 		selectedPals.forEach((id) => {
 			const palWithData = pals?.find((p) => p.id === id);
 			if (palWithData) {
-				applyPresetToPal(palWithData.pal, presetProfile);
+				applyPalPreset(palWithData.pal, presetProfile, appState.selectedPlayer!);
 			}
 
 			const otomoPal = otomoContainer[id];
 			if (otomoPal) {
-				applyPresetToPal(otomoPal, presetProfile);
+				applyPalPreset(otomoPal, presetProfile, appState.selectedPlayer!);
 			}
 		});
 	}

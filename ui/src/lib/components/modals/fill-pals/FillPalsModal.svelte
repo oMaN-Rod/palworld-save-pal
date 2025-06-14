@@ -1,21 +1,14 @@
 <script lang="ts">
-	import { Card, Combobox, List, Tooltip } from '$components/ui';
+	import { Card, List, Tooltip } from '$components/ui';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { elementsData, palsData, presetsData } from '$lib/data';
 	import { getAppState, getToastState } from '$states';
-	import {
-		EntryState,
-		MessageType,
-		type Pal,
-		type PalData,
-		type PresetProfile,
-		type SelectOption
-	} from '$types';
-	import { assetLoader, formatNickname } from '$utils';
+	import { EntryState, MessageType, type Pal, type PalData, type PresetProfile } from '$types';
+	import { applyPalPreset, assetLoader, formatNickname } from '$utils';
 	import { sendAndWait } from '$utils/websocketUtils';
 	import NumberFlow from '@number-flow/svelte';
 	import { Switch } from '@skeletonlabs/skeleton-svelte';
-	import { X, Check, Trash, Plus, Lock } from 'lucide-svelte';
+	import { X, Check, Trash, Lock } from 'lucide-svelte';
 
 	let {
 		title,
@@ -178,7 +171,7 @@
 		}
 	});
 
-	const applyPresetToPal = (pal: Record<string, any>) => {
+	const handleApplyPalPreset = (pal: Record<string, any>) => {
 		if (!selectedPresets || selectedPresets.length === 0) {
 			return;
 		}
@@ -196,25 +189,7 @@
 			selectedPresets.filter((p) => !p.pal_preset?.lock && !p.pal_preset?.lock_element)[0] ||
 			undefined;
 		const profile = palProfile || elementProfile || defaultProfile;
-		const skipKeys = ['character_id', 'lock', 'lock_element', 'element'];
-		for (const [key, value] of Object.entries(profile.pal_preset!)) {
-			if (skipKeys.includes(key)) {
-				continue;
-			}
-			if (key === 'is_boss') {
-				if (!palData.is_pal) continue;
-				pal.is_boss = value;
-				pal.is_lucky = value ? false : pal.is_lucky;
-			}
-			if (key === 'is_lucky') {
-				if (!palData.is_pal) continue;
-				pal.is_boss = value ? false : pal.is_boss;
-				pal.is_lucky = value;
-			} else if (value != null) {
-				(pal as Record<string, any>)[key] = value;
-			}
-		}
-		pal.state = EntryState.MODIFIED;
+		applyPalPreset(pal as Pal, profile, appState.selectedPlayer!);
 	};
 
 	async function addPal(character_id: string, nickname: string, name: string) {
@@ -239,7 +214,7 @@
 			return;
 		}
 		res.pal.name = name;
-		applyPresetToPal(res.pal);
+		handleApplyPalPreset(res.pal);
 		if (target === 'pal-box') {
 			appState.selectedPlayer!.pals![res.pal.instance_id] = res.pal;
 		} else {

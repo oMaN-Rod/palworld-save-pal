@@ -183,15 +183,16 @@
 	function handleEditAlpha() {
 		const [type, valid] = canBeBoss(pal.character_id);
 		if (!valid) {
+			pal.is_boss = false;
+			pal.is_lucky = false;
+			pal.state = EntryState.MODIFIED;
 			toast.add(`${type} Pal cannot be Alpha`, undefined, 'warning');
 			return;
 		}
-		if (pal) {
-			pal.is_boss = !pal.is_boss;
-			pal.is_lucky = pal.is_boss ? false : pal.is_lucky;
-			formatBossCharacterId();
-			pal.state = EntryState.MODIFIED;
-		}
+		pal.is_boss = !pal.is_boss;
+		pal.is_lucky = pal.is_boss ? false : pal.is_lucky;
+		formatBossCharacterId();
+		pal.state = EntryState.MODIFIED;
 	}
 
 	function formatBossCharacterId() {
@@ -421,7 +422,7 @@
 						{pal.nickname || pal.name}
 					</h6>
 					<div class="flex space-x-2">
-						{#if appState.settings.debug_mode}
+						{#if appState.settings.debug_mode && showActions}
 							<Tooltip position="bottom" label="Debug">
 								<CornerDotButton
 									onClick={() => {
