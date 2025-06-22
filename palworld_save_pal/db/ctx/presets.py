@@ -1,9 +1,8 @@
-from typing import Dict, List
+from typing import Dict
 from uuid import UUID
 from sqlmodel import select
 from sqlalchemy.orm import selectinload
 
-from palworld_save_pal.db.models.settings_model import SettingsModel
 from palworld_save_pal.editor.preset_profile import PresetProfile, PalPreset
 from palworld_save_pal.utils.logging_config import create_logger
 from palworld_save_pal.utils.json_manager import JsonManager

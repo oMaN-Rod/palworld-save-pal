@@ -2,32 +2,32 @@ from typing import Dict, List, Optional
 from pydantic import BaseModel
 
 from palworld_save_pal.editor.preset_profile import StorageContainerPreset
-from palworld_save_pal.game.pal_objects import PalGender
+from palworld_save_pal.game.enum import PalGender
 
 
 class PalPresetDTO(BaseModel):
     lock: bool
     lock_element: bool
-    element: Optional[str]
-    character_id: Optional[str]
-    is_lucky: Optional[bool]
-    is_boss: Optional[bool]
-    gender: Optional[PalGender]
-    rank_hp: Optional[int]
-    rank_attack: Optional[int]
-    rank_defense: Optional[int]
-    rank_craftspeed: Optional[int]
-    talent_hp: Optional[int]
-    talent_shot: Optional[int]
-    talent_defense: Optional[int]
-    rank: Optional[int]
-    level: Optional[int]
-    exp: Optional[int]
-    learned_skills: Optional[List[str]]
-    active_skills: Optional[List[str]]
-    passive_skills: Optional[List[str]]
-    sanity: Optional[float]
-    work_suitability: Optional[Dict[str, int]]
+    element: Optional[str] = None
+    character_id: Optional[str] = None
+    is_lucky: Optional[bool] = None
+    is_boss: Optional[bool] = None
+    gender: Optional[PalGender] = None
+    rank_hp: Optional[int] = None
+    rank_attack: Optional[int] = None
+    rank_defense: Optional[int] = None
+    rank_craftspeed: Optional[int] = None
+    talent_hp: Optional[int] = None
+    talent_shot: Optional[int] = None
+    talent_defense: Optional[int] = None
+    rank: Optional[int] = None
+    level: Optional[int] = None
+    exp: Optional[int] = None
+    learned_skills: Optional[List[str]] = None
+    active_skills: Optional[List[str]] = None
+    passive_skills: Optional[List[str]] = None
+    sanity: Optional[float] = None
+    work_suitability: Optional[Dict[str, int]] = None
 
 
 class PresetProfileDTO(BaseModel):

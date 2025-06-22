@@ -1,41 +1,16 @@
 from typing import Dict, List, Optional
-from uuid import uuid4, UUID
-from pydantic import BaseModel, ConfigDict
+from uuid import uuid4
+from pydantic import ConfigDict
 from sqlmodel import SQLModel, Field, Relationship
 from sqlalchemy import Column, JSON, Enum, String, Boolean, Integer, Float
 
 from palworld_save_pal.game.item_container_slot import ItemContainerSlot
-from palworld_save_pal.game.pal_objects import PalGender, WorkSuitability
+from palworld_save_pal.game.pal_objects import PalGender
 
 
 class StorageContainerPreset(SQLModel):
     key: str
     slots: List[ItemContainerSlot]
-
-
-class PalPresetDTO(BaseModel):
-    lock: bool
-    lock_element: bool
-    element: Optional[str]
-    character_id: Optional[str]
-    is_lucky: Optional[bool]
-    is_boss: Optional[bool]
-    gender: Optional[PalGender]
-    rank_hp: Optional[int]
-    rank_attack: Optional[int]
-    rank_defense: Optional[int]
-    rank_craftspeed: Optional[int]
-    talent_hp: Optional[int]
-    talent_shot: Optional[int]
-    talent_defense: Optional[int]
-    rank: Optional[int]
-    level: Optional[int]
-    exp: Optional[int]
-    learned_skills: Optional[List[str]]
-    active_skills: Optional[List[str]]
-    passive_skills: Optional[List[str]]
-    sanity: Optional[float]
-    work_suitability: Optional[Dict[str, int]]
 
 
 class PalPreset(SQLModel, table=True):
