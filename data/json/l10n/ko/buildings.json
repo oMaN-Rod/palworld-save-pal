@@ -371,6 +371,10 @@
     "localized_name": "문 딸린 유리 벽",
     "description": "토대 위에 지어 입구 역할을 하는 문. 견고한 유리로 만들어서 매우 튼튼하다."
   },
+  "Glass_Fence": {
+    "localized_name": "-",
+    "description": null
+  },
   "Glass_SlantedRoof": {
     "localized_name": "유리 경사 지붕",
     "description": "벽 위에 지어 비바람을 막는 경사 지붕. 견고한 유리로 만들어서 매우 튼튼하다."
@@ -386,10 +390,6 @@
   "Glass_foundation": {
     "localized_name": "유리 토대",
     "description": "위에 벽이나 시설을 지을 수 있는 토대. 견고한 유리로 만들어서 매우 튼튼하다."
-  },
-  "Glass_pillars": {
-    "localized_name": "유리 기둥",
-    "description": "건물을 지탱하기 위해 세우는 기둥. 견고한 유리로 만들어서 매우 튼튼하다."
   },
   "Glass_roof": {
     "localized_name": "유리 지붕",
@@ -443,6 +443,10 @@
     "localized_name": "동결 분쇄기",
     "description": "금속 광석을(를) 분쇄하여 다른 소재로 변환할 수 있는 시설. 작업 효율이 높은 대신, 가동하려면 전력 공급 및 |냉각| 적성을 가진 팰이 필요하다."
   },
+  "Iron_Fence": {
+    "localized_name": "-",
+    "description": null
+  },
   "Irori": {
     "localized_name": "이로리",
     "description": "장식용 이로리. 일본식 거점을 만들 때 사용하자."
@@ -490,6 +494,10 @@
   "JapaneseStyle_DoorWall_03": {
     "localized_name": "문 딸린 일본식 벽 C",
     "description": "토대 위에 지어 입구 역할을 하는 실내용 후스마. 세련된 일본식 건축물을 지을 때 활용하자."
+  },
+  "JapaneseStyle_Fence": {
+    "localized_name": "-",
+    "description": null
   },
   "JapaneseStyle_Pillar": {
     "localized_name": "일본식 기둥",
@@ -659,10 +667,6 @@
     "localized_name": "금속 토대",
     "description": "위에 벽이나 시설을 지을 수 있는 토대. 금속으로 만들어서 매우 튼튼하다."
   },
-  "Metal_pillars": {
-    "localized_name": "금속 기둥",
-    "description": "식물을 지탱하기 위해 세우는 기둥. 금속으로 만들어서 매우 튼튼하다."
-  },
   "Metal_roof": {
     "localized_name": "금속 지붕",
     "description": "벽 위에 지어 비바람을 막는 지붕. 금속으로 만들어서 매우 튼튼하다."
@@ -803,6 +807,10 @@
     "localized_name": "ko_Text",
     "description": "ko_Text"
   },
+  "SF_Fence": {
+    "localized_name": "-",
+    "description": null
+  },
   "SanityDecrease1": {
     "localized_name": "α파 발생 장치",
     "description": "α파를 발생시켜 팰의 정신을 안정화하는 장치. 거점 내 팰의 SAN 수치 감소량을 경감한다. 2개 이상 배치해도 효과는 없다."
@@ -935,6 +943,10 @@
     "localized_name": "고급 온천",
     "description": "지친 거점 팰이 쉬러 가는 시설. 더 쾌적해진 덕분에 SAN 수치도 많이 회복할 수 있다."
   },
+  "Spa3": {
+    "localized_name": "온천",
+    "description": "지친 거점 팰이 쉬러 가는 시설. 일하면서 쌓인 피로를 풀고 SAN 수치를 회복한다."
+  },
   "SphereFactory_Black_01": {
     "localized_name": "스피어 제작대",
     "description": "팰 포획용 스피어 제작 작업대. 아직 작업장이 협소해 스피어를 빠르게 생산하기는 힘들다. 수작업이 가능한 팰이 필요하다."
@@ -963,6 +975,10 @@
     "localized_name": "돌 문",
     "description": "토대 위에 지어 입구 역할을 하는 문. 돌로 만들어서 나름대로 튼튼하다."
   },
+  "Stone_Fence": {
+    "localized_name": "-",
+    "description": null
+  },
   "Stone_Gate": {
     "localized_name": "돌 문",
     "description": "덩치가 큰 팰도 드나들 수 있는 문. 돌로 만들어서 나름대로 튼튼하다."
@@ -982,10 +998,6 @@
   "Stone_foundation": {
     "localized_name": "돌 토대",
     "description": "위에 벽이나 시설을 지을 수 있는 토대. 돌로 만들어서 나름대로 튼튼하다."
-  },
-  "Stone_pillar": {
-    "localized_name": "돌 기둥",
-    "description": "식물을 지탱하기 위해 세우는 기둥. 돌로 만들어서 나름대로 튼튼하다."
   },
   "Stone_roof": {
     "localized_name": "돌 지붕",
@@ -1211,6 +1223,10 @@
     "localized_name": "-",
     "description": null
   },
+  "Wood_Fence": {
+    "localized_name": "-",
+    "description": null
+  },
   "Wood_Gate": {
     "localized_name": "나무 문",
     "description": "덩치가 큰 팰도 드나들 수 있는 문. 나무로 만들어서 약하다."
@@ -1242,10 +1258,6 @@
   "Wooden_ladder": {
     "localized_name": "사다리",
     "description": "조금 높은 곳에 올라갈 때 활용하는 사다리."
-  },
-  "Wooden_pillar": {
-    "localized_name": "나무 기둥",
-    "description": "식물을 지탱하기 위해 세우는 기둥. 나무로 만들어서 약하다."
   },
   "Wooden_roof": {
     "localized_name": "나무 지붕",

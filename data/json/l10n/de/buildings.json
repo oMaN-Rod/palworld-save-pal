@@ -371,6 +371,10 @@
     "localized_name": "Glaswand mit Tür",
     "description": "Eine Eingangstür, die du auf einem Fundament errichten kannst. Ist aus Hartglas und dadurch sehr robust."
   },
+  "Glass_Fence": {
+    "localized_name": "-",
+    "description": null
+  },
   "Glass_SlantedRoof": {
     "localized_name": "Schräges Glasdach",
     "description": "Ein Schrägdach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist aus Hartglas und dadurch sehr robust."
@@ -386,10 +390,6 @@
   "Glass_foundation": {
     "localized_name": "Glasfundament",
     "description": "Ein Fundament, worauf du Wände oder Gebäude errichten kannst. Ist aus Hartglas und dadurch sehr robust."
-  },
-  "Glass_pillars": {
-    "localized_name": "Glassäule",
-    "description": "Eine Säule zum Abstützen von Gebäuden. Ist aus Hartglas und dadurch sehr robust."
   },
   "Glass_roof": {
     "localized_name": "Glasdach",
@@ -443,6 +443,10 @@
     "localized_name": "Gefrierzerkleinerer",
     "description": "Eine Anlage zum Zerkleinern und Umwandeln von Erz. Für den Betrieb benötigt man Strom sowie einen Pal, der „Kühlung“ beherrscht. Sehr effizient."
   },
+  "Iron_Fence": {
+    "localized_name": "-",
+    "description": null
+  },
   "Irori": {
     "localized_name": "Fernöstliche Feuerstelle",
     "description": "Eine dekorative fernöstliche Feuerstelle. Passt perfekt zu Gebäuden im fernöstlichen Stil."
@@ -490,6 +494,10 @@
   "JapaneseStyle_DoorWall_03": {
     "localized_name": "Fernöstliche Wand mit Tür C",
     "description": "Eine Schiebetür für drinnen, die du auf einem Fundament errichten kannst. Besticht mit fernöstlicher Eleganz."
+  },
+  "JapaneseStyle_Fence": {
+    "localized_name": "-",
+    "description": null
   },
   "JapaneseStyle_Pillar": {
     "localized_name": "Fernöstliche Säule",
@@ -659,10 +667,6 @@
     "localized_name": "Metallfundament",
     "description": "Ein Fundament, worauf du Wände oder Gebäude errichten kannst. Ist aus Metall und dadurch extrem solide."
   },
-  "Metal_pillars": {
-    "localized_name": "Metallsäule",
-    "description": "Eine Säule zum Abstützen von Gebäuden. Ist aus Metall und dadurch extrem solide."
-  },
   "Metal_roof": {
     "localized_name": "Metalldach",
     "description": "Ein Dach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist aus Metall und dadurch extrem solide."
@@ -803,6 +807,10 @@
     "localized_name": "de_Text",
     "description": "de_Text"
   },
+  "SF_Fence": {
+    "localized_name": "-",
+    "description": null
+  },
   "SanityDecrease1": {
     "localized_name": "Alphawellengenerator",
     "description": "Diese Maschine generiert Alphawellen, die auf Pals eine entspannende Wirkung haben. Die GEI von Pals im Lager sinkt dadurch langsamer. Mehrere aufzustellen, bringt keinen zusätzlichen Nutzen."
@@ -935,6 +943,10 @@
     "localized_name": "Luxuriöse heiße Quelle",
     "description": "Eine Anlage, in der müde Pals sich von ihrer Arbeit noch besser entspannen und ihre GEI schneller regenerieren können."
   },
+  "Spa3": {
+    "localized_name": "Heiße Quelle",
+    "description": "Eine Anlage, in der müde Pals sich von ihrer Arbeit ausruhen und ihre GEI regenerieren können."
+  },
   "SphereFactory_Black_01": {
     "localized_name": "Pal-Sphären-Werkbank",
     "description": "Eine Werkbank zur Fertigung von Pal-Sphären, mit denen sich Pals fangen lassen. Bietet noch wenig Platz und die Fertigung läuft nicht besonders schnell. Für die Arbeit benötigt man Pals, die Handwerk beherrschen."
@@ -963,6 +975,10 @@
     "localized_name": "Steintür",
     "description": "Eine Eingangstür, die du auf einem Fundament errichten kannst. Ist aus Stein und dadurch ziemlich robust."
   },
+  "Stone_Fence": {
+    "localized_name": "-",
+    "description": null
+  },
   "Stone_Gate": {
     "localized_name": "Steintor",
     "description": "Ein Tor, durch das auch größere Pals hindurchpassen. Ist aus Stein und dadurch ziemlich robust."
@@ -982,10 +998,6 @@
   "Stone_foundation": {
     "localized_name": "Steinfundament",
     "description": "Ein Fundament, worauf du Wände oder Gebäude errichten kannst. Ist aus Stein und dadurch ziemlich robust."
-  },
-  "Stone_pillar": {
-    "localized_name": "Steinsäule",
-    "description": "Eine Säule zum Abstützen von Gebäuden. Ist aus Stein und dadurch ziemlich robust."
   },
   "Stone_roof": {
     "localized_name": "Steindach",
@@ -1211,6 +1223,10 @@
     "localized_name": "-",
     "description": null
   },
+  "Wood_Fence": {
+    "localized_name": "-",
+    "description": null
+  },
   "Wood_Gate": {
     "localized_name": "Holztor",
     "description": "Ein Tor, durch das auch größere Pals hindurchpassen. Ist aus Holz und nicht sonderlich stabil."
@@ -1242,10 +1258,6 @@
   "Wooden_ladder": {
     "localized_name": "Leiter",
     "description": "Wenn du mal etwas höher hinaus willst."
-  },
-  "Wooden_pillar": {
-    "localized_name": "Holzsäule",
-    "description": "Eine Säule zum Abstützen von Gebäuden. Ist aus Holz und nicht sonderlich stabil."
   },
   "Wooden_roof": {
     "localized_name": "Holzdach",

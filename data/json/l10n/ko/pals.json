@@ -19,6 +19,58 @@
     "localized_name": "아누비스",
     "description": "그 풍모 덕택에 일찍이 고귀한 자의 상징이었다. 부와 권력을 멀리하는 이에게도 귀감이었으나 언제부턴가 아누비스은(는) 죽음의 상징이 되었다."
   },
+  "Arena_DarkTrader": {
+    "localized_name": "암시장 상인",
+    "description": null
+  },
+  "Arena_Female_Presenter": {
+    "localized_name": "친절한 팰 조련사",
+    "description": null
+  },
+  "Arena_Female_Soldier03": {
+    "localized_name": "베테랑 팰 조련사",
+    "description": null
+  },
+  "Arena_FireCult_FlameThrower": {
+    "localized_name": "영원한 불꽃의 동지 순교자",
+    "description": null
+  },
+  "Arena_Hunter_Fat_GatlingGun": {
+    "localized_name": "밀렵단 분쇄자",
+    "description": null
+  },
+  "Arena_Male_DarkTrader02": {
+    "localized_name": "메달 상인",
+    "description": null
+  },
+  "Arena_Male_Soldier02_Invader": {
+    "localized_name": "이글거리는 팰 조련사",
+    "description": null
+  },
+  "Arena_Ninja": {
+    "localized_name": "달꽃단 하급 닌자",
+    "description": null
+  },
+  "Arena_NinjaElite": {
+    "localized_name": "달꽃단 상급 닌자",
+    "description": null
+  },
+  "Arena_Scientist_LaserRifle": {
+    "localized_name": "유전자 연구 부대 실행반",
+    "description": null
+  },
+  "Arena_Soldier": {
+    "localized_name": "억센 용병",
+    "description": null
+  },
+  "Arena_Viking": {
+    "localized_name": "천락의 민족",
+    "description": null
+  },
+  "Arena_VikingElite": {
+    "localized_name": "천락의 민족 정예",
+    "description": null
+  },
   "BOSS_Believer_CrossBow": {
     "localized_name": "현상범 에고",
     "description": null
@@ -179,11 +231,19 @@
     "localized_name": "팰 애호 단체 신자",
     "description": null
   },
+  "Believer_Bat_Camp02": {
+    "localized_name": "팰 애호 단체 신자",
+    "description": null
+  },
   "Believer_Bat_Invader": {
     "localized_name": "팰 애호 단체 신자",
     "description": null
   },
   "Believer_CrossBow": {
+    "localized_name": "팰 애호 단체 신자",
+    "description": null
+  },
+  "Believer_CrossBow_Camp02": {
     "localized_name": "팰 애호 단체 신자",
     "description": null
   },
@@ -201,6 +261,14 @@
   },
   "Believer_Fat_GatlingGun": {
     "localized_name": "팰 애호 단체 심판자",
+    "description": null
+  },
+  "Believer_Fat_Prisoner": {
+    "localized_name": "팰 애호 단체 심판자",
+    "description": null
+  },
+  "Believer_Prisoner": {
+    "localized_name": "팰 애호 단체 신자",
     "description": null
   },
   "BerryGoat": {
@@ -247,9 +315,17 @@
     "localized_name": "아주리비",
     "description": "새하얀 띠는 불순한 물에 닿아 시커멓게 변색한다. 독성 확인에 유용하다고 남획된 터라 지금도 인간을 안 좋게 생각한다."
   },
+  "BlueDragon_Ice": {
+    "localized_name": "BlueDragon_Ice",
+    "description": "새하얀 띠는 주위의 열을 끊임없이 흡수한다. 신기하게도 띠 자체의 온도는 결코 변화하지 않는다. 이러한 특성을 눈여겨본 자들에게 남획된 터라 지금도 인간을 안 좋게 생각한다."
+  },
   "BluePlatypus": {
     "localized_name": "청부리",
     "description": "자신이 탄생한 물에선 어디든지 물결을 일으킨다. 급할 때는 몸으로 물살을 타고 이동한다. 기운이 넘쳐 종종 벽에 부딪혀 죽는다."
+  },
+  "BluePlatypus_Fire": {
+    "localized_name": "BluePlatypus_Fire",
+    "description": "배의 마찰력이 아주 강한 탓에 보디 서핑을 하면 불이 붙을 정도다. 너무 신나게 미끄러지다 간혹 불덩이가 되기도 한다."
   },
   "BlueThunderHorse": {
     "localized_name": "썬더호스",
@@ -274,6 +350,10 @@
   "CaptainPenguin": {
     "localized_name": "펭킹",
     "description": "사실 펭키와(과) 아무 연관도 없는 종. 멋대로 상전 대접을 받은 터라 일단 열심히 뻗대고 보고 있다."
+  },
+  "CaptainPenguin_Black": {
+    "localized_name": "CaptainPenguin_Black",
+    "description": "수중 사냥에 도움이 되도록 전기의 힘을 얻어 색이 변화했으며 그 결과 펭키의 충성을 잃고 말았다. 그러나 어째서인지는 몰라도 이번에는 Penguin_Electric의 충성을 얻게 되었다."
   },
   "CaravanLeader01": {
     "localized_name": "캐러밴 상단 대장",
@@ -495,6 +575,38 @@
     "localized_name": "마을 사람",
     "description": null
   },
+  "Female_Farmer01_v01": {
+    "localized_name": "섬 주민",
+    "description": null
+  },
+  "Female_Farmer01_v02": {
+    "localized_name": "섬 주민",
+    "description": null
+  },
+  "Female_Farmer01_v03": {
+    "localized_name": "섬 주민",
+    "description": null
+  },
+  "Female_Farmer01_v04": {
+    "localized_name": "섬 주민",
+    "description": null
+  },
+  "Female_Nomad01_v01": {
+    "localized_name": "섬 주민",
+    "description": null
+  },
+  "Female_Nomad01_v02": {
+    "localized_name": "섬 주민",
+    "description": null
+  },
+  "Female_Nomad01_v03": {
+    "localized_name": "섬 주민",
+    "description": null
+  },
+  "Female_Nomad01_v04": {
+    "localized_name": "섬 주민",
+    "description": null
+  },
   "Female_People02": {
     "localized_name": "마을 사람",
     "description": null
@@ -505,6 +617,22 @@
   },
   "Female_Presenter01": {
     "localized_name": "친절한 팰 조련사",
+    "description": null
+  },
+  "Female_Ranger01_v01": {
+    "localized_name": "섬 주민",
+    "description": null
+  },
+  "Female_Ranger01_v02": {
+    "localized_name": "섬 주민",
+    "description": null
+  },
+  "Female_Ranger01_v03": {
+    "localized_name": "섬 주민",
+    "description": null
+  },
+  "Female_Ranger01_v04": {
+    "localized_name": "섬 주민",
     "description": null
   },
   "Female_Soldier01": {
@@ -547,11 +675,23 @@
     "localized_name": "영원한 불꽃의 동지 순교자",
     "description": null
   },
+  "FireCult_FlameThrower_Relax": {
+    "localized_name": "영원한 불꽃의 동지 순교자",
+    "description": null
+  },
+  "FireCult_Prisoner": {
+    "localized_name": "영원한 불꽃의 동지 순교자",
+    "description": null
+  },
   "FireCult_Rifle": {
     "localized_name": "영원한 불꽃의 동지 순교자",
     "description": null
   },
   "FireCult_Rifle_Invader": {
+    "localized_name": "영원한 불꽃의 동지 순교자",
+    "description": null
+  },
+  "FireCult_Rifle_Relax": {
     "localized_name": "영원한 불꽃의 동지 순교자",
     "description": null
   },
@@ -591,6 +731,10 @@
     "localized_name": "루미카이트",
     "description": "바람을 타고 자유로이 여행한다. 도착한 곳에서 파트너를 발견하면 이들의 여행도 끝이 난다."
   },
+  "FlyingManta_Thunder": {
+    "localized_name": "FlyingManta_Thunder",
+    "description": "무늬가 화려할수록 파트너의 이목을 끌 수 있다고 한다. 역사적으로 FlyingManta_Thunder에게 감전된 사례는 끊이지 않으며 현재에 이르러 섬 내에서 노랑과 검은 줄무늬는 위험한 색으로 인식되고 있다."
+  },
   "FoxMage": {
     "localized_name": "마호",
     "description": "양기의 힘으로 기괴한 술수를 부린다. 뭐든지 노릇노릇하게 구워 먹는다. 캐티메이지하고는 사이가 나쁘다."
@@ -618,6 +762,10 @@
   "GYM_ElecPanda_2": {
     "localized_name": "조이&일렉판다",
     "description": "호쾌한 얼굴에 듬직한 체구를 가졌으며 친구로 인정한 상대에겐 순종적이다. 하지만 어쩐 일인지 미니건만 맡기면 돌변한다."
+  },
+  "GYM_ElecPanda_Otomo": {
+    "localized_name": "조이&일렉판다",
+    "description": null
   },
   "GYM_Horus": {
     "localized_name": "마커스&호루스",
@@ -670,6 +818,14 @@
   "Garm": {
     "localized_name": "다크울프",
     "description": "인간과 접촉이 뜸해진 지 오래지만 다크울프 무리의 수렵 체계는 일찍이 인간과 함께했던 사냥이 그 뿌리다."
+  },
+  "GhostAnglerfish": {
+    "localized_name": "GhostAnglerfish",
+    "description": "반짝이는 발광체로 주변의 어둠을 밝게 비춘다. 발광체의 빛에 혹해 이끌려 온 팰들은 GhostAnglerFish의 정처 없는 길 안내를 받게 된다. 그저 무사히 집에 돌아갈 때를 기다리면서."
+  },
+  "GhostAnglerfish_Fire": {
+    "localized_name": "GhostAnglerfish_Fire",
+    "description": "타오르는 발광체를 사냥감을 구울 때 쓰기도 한다. 맛있는 냄새에 혹해 이끌려 온 팰들은 GhostAnglerfish_Fire의 끝없는 식사 대접을 받게 된다. 그저 배가 빵빵해 질 때를 기다리면서."
   },
   "GhostBeast": {
     "localized_name": "고스호스",
@@ -799,6 +955,10 @@
     "localized_name": "밀렵단 초짜",
     "description": null
   },
+  "Hunter_BowGun": {
+    "localized_name": "밀렵단 쇠뇌 사수",
+    "description": null
+  },
   "Hunter_BowGun_Oilrig": {
     "localized_name": "밀렵단 쇠뇌 사수",
     "description": null
@@ -824,6 +984,10 @@
     "description": null
   },
   "Hunter_Fat_GatlingGun_Tower": {
+    "localized_name": "밀렵단 분쇄자",
+    "description": null
+  },
+  "Hunter_Fat_Prisoner": {
     "localized_name": "밀렵단 분쇄자",
     "description": null
   },
@@ -891,8 +1055,16 @@
     "localized_name": "밀렵단 초짜",
     "description": null
   },
+  "Hunter_Katana": {
+    "localized_name": "밀렵단 검사",
+    "description": null
+  },
   "Hunter_Katana_Oilrig": {
     "localized_name": "밀렵단 검사",
+    "description": null
+  },
+  "Hunter_LaserRifle": {
+    "localized_name": "밀렵단 하이테커",
     "description": null
   },
   "Hunter_LaserRifle_Oilrig": {
@@ -909,6 +1081,10 @@
   },
   "Hunter_MissileLauncher_Oilrig": {
     "localized_name": "밀렵단 방해꾼",
+    "description": null
+  },
+  "Hunter_Prisoner": {
+    "localized_name": "밀렵단 초짜",
     "description": null
   },
   "Hunter_Rifle": {
@@ -975,6 +1151,10 @@
     "localized_name": "밀렵단 사냥꾼",
     "description": null
   },
+  "IceCrocodile": {
+    "localized_name": "IceCrocodile",
+    "description": "입속이 무척 차가워 닫으면 냉장고 그 자체가 된다. 타액에 포함된 특수한 성분도 음식의 부패를 막아준다. 인간용 식재료 보관고로 쓰려면 쓸 수야 있지만 위생적으로는 애매하니 누가 물어보면 입을 닫는 편이 좋겠다."
+  },
   "IceDeer": {
     "localized_name": "얼음사슴",
     "description": "속이 비치는 투명한 뿔은 절대 영도에서 반짝인다. 맨손으로 만지면 전신이 얼어붙어 목숨마저 가루처럼 부서져 날아간다."
@@ -991,9 +1171,33 @@
     "localized_name": "그레이섀도우",
     "description": "밤을 불러오는 팰파고스섬의 수호신. 일찍이 재앙이 이 땅을 석권할 때 하늘을 가로지르며 끝나지 않는 어둠을 불러와 이를 봉인했다."
   },
+  "IceNarwhal": {
+    "localized_name": "IceNarwhal",
+    "description": "자는 동안 유빙으로 착각한 팰이 등에 올라타 쉬곤 한다. 개인 공간을 침범당해 속으로는 스트레스를 받지만 성격이 착해 잠에서 깨도 억지로 내리게 하진 않는다."
+  },
+  "IceNarwhal_Fire": {
+    "localized_name": "IceNarwhal_Fire",
+    "description": "유빙으로 착각하지 않도록 온 힘을 다해 몸을 붉게 바꾸었다. 하지만 빨간색을 인식하지 못하는 팰에겐 아무 효과가 없었다. 노력은 수포로 돌아간 채, 오늘도 개인 공간을 침범당한다."
+  },
+  "IceSeal": {
+    "localized_name": "IceSeal",
+    "description": "눈 위를 제일 빠르게 미끄러지는 개체가 가장 높은 취급을 받는다. 간혹 너무 신난 나머지 점프한 개체가 하늘에서 떨어지는 경우가 있으며, 우두머리 경쟁 시기에 더더욱 자주 볼 수 있다. 맑음 때때로 IceSeal."
+  },
+  "IceWitch": {
+    "localized_name": "IceWitch",
+    "description": "더위 속에서 몸이 녹아내리지만, 일광욕을 너무나도 좋아한다. 열탕 속에서 몸이 녹아내리지만, 온천을 너무나도 좋아한다. 죽을 날이 온다면 맑은 날의 노천온천에서 녹기를 바란다고 한다."
+  },
   "Inspector": {
     "localized_name": "팰 상인",
     "description": null
+  },
+  "JellyfishFairy": {
+    "localized_name": "JellyfishFairy",
+    "description": "JellyfishGhost와(과) 아주 많이 닮은 팰. 친구 관계가 넓으며 약속이 겹칠 때에는 사이좋은 JellyfishGhost에게 대역을 부탁하기도 한다. 답례는 데이트 1번."
+  },
+  "JellyfishGhost": {
+    "localized_name": "JellyfishGhost",
+    "description": "JellyfishFairy와(과) 아주 많이 닮은 팰. 약속이 엇물린 JellyfishFairy의 부탁을 받아 대신 약속 장소에 나타나는 경우가 있다. 절묘한 연기 실력 덕에 아무도 대역임을 눈치채지 못한다."
   },
   "JetDragon": {
     "localized_name": "제트래곤",
@@ -1051,6 +1255,10 @@
     "localized_name": "도도롱",
     "description": "한없이 늘어질 때는 모든 반응이 둔해진다. 28번의 자상을 입게 되더라도 다음 날이 되어서야 이를 깨닫고 목숨을 잃는다."
   },
+  "LazyCatfish_Gold": {
+    "localized_name": "LazyCatfish_Gold",
+    "description": "신체 표면의 반사율이 기하급수적으로 상승했다. 게다가 모든 반응 속도가 도도롱보다 훨씬 느려졌다!"
+  },
   "LazyDragon": {
     "localized_name": "헤로롱",
     "description": "어리바리한 겉모습과 달리 속은 사납다. 눈에 띄는 모든 걸 먹이로 인식하여 닥치는 대로 잡아먹으려고 든다."
@@ -1058,6 +1266,10 @@
   "LazyDragon_Electric": {
     "localized_name": "핑피롱",
     "description": "헤로롱은(는) 생각했다. 슬슬 자신을 바꿀 때라고. 그 순간 전신에 전기가 흘렀다!"
+  },
+  "LeafMomonga": {
+    "localized_name": "LeafMomonga",
+    "description": "고장난 건 뭐든 때리면 고쳐진다고 여긴다. LeafMomonga의 힘조절은 인간 입장에선 완벽하기에 때리기만 해도 멈췄던 심장이 다시 움직이는 경우도 있다."
   },
   "LeafPrincess": {
     "localized_name": "뷰티플라워",
@@ -1085,6 +1297,26 @@
   },
   "LizardMan_Oilrig": {
     "localized_name": "도마맨",
+    "description": null
+  },
+  "Male_Angler01_v01": {
+    "localized_name": "섬 주민",
+    "description": null
+  },
+  "Male_Breeder01_v01": {
+    "localized_name": "섬 주민",
+    "description": null
+  },
+  "Male_Breeder01_v02": {
+    "localized_name": "섬 주민",
+    "description": null
+  },
+  "Male_Breeder01_v03": {
+    "localized_name": "섬 주민",
+    "description": null
+  },
+  "Male_Breeder01_v04": {
+    "localized_name": "섬 주민",
     "description": null
   },
   "Male_DarkTrader01": {
@@ -1120,6 +1352,22 @@
     "description": null
   },
   "Male_Police_old": {
+    "localized_name": "섬 주민",
+    "description": null
+  },
+  "Male_Scholar01_v01": {
+    "localized_name": "섬 주민",
+    "description": null
+  },
+  "Male_Scholar01_v02": {
+    "localized_name": "섬 주민",
+    "description": null
+  },
+  "Male_Scholar01_v03": {
+    "localized_name": "섬 주민",
+    "description": null
+  },
+  "Male_Scholar01_v04": {
     "localized_name": "섬 주민",
     "description": null
   },
@@ -1247,6 +1495,10 @@
     "localized_name": "고스문",
     "description": "적에 머리에 달라붙어 내용물을 쪽쪽 빨아먹는다. 팰의 미라가 드물게 발견되는데 대개 고스문에게 희생된 팰이다."
   },
+  "NegativeOctopus_Neutral": {
+    "localized_name": "NegativeOctopus_Neutral",
+    "description": "적의 목을 물어 혈액을 모조리 빨아들인다. NegativeOctopus_Neutral끼리 물고 물렸을 경우에는 양쪽 모두 빨아들이는 것에만 집착하기 때문에 어느 한 쪽이 말라버릴 때까지 멈추지 않는다."
+  },
   "NightBlueHorse": {
     "localized_name": "나이트롯",
     "description": "물 흐르는 듯이 아름다운 갈기를 자랑으로 여긴다. 갈라진 털끝이 보이면 부끄러워 달리기에 집중을 못 한다. 정전기가 일어나면 갈기가 마구잡이로 뜨기에 썬더호스 근처에는 얼씬도 하지 않으려 한다."
@@ -1270,6 +1522,30 @@
   "NinjaElite01_Tower": {
     "localized_name": "달꽃단 상급 닌자",
     "description": null
+  },
+  "NinjaElite_Bowgun": {
+    "localized_name": "달꽃단 상급 닌자",
+    "description": null
+  },
+  "NinjaElite_NoEquip": {
+    "localized_name": "달꽃단 상급 닌자",
+    "description": null
+  },
+  "Ninja_Bowgun": {
+    "localized_name": "달꽃단 하급 닌자",
+    "description": null
+  },
+  "Ninja_NoEquip": {
+    "localized_name": "달꽃단 하급 닌자",
+    "description": null
+  },
+  "Ninja_Prisoner": {
+    "localized_name": "달꽃단 하급 닌자",
+    "description": null
+  },
+  "OctopusGirl": {
+    "localized_name": "OctopusGirl",
+    "description": "같이 잘 때는 미리 내일 스케줄을 확인하자. 빨판 자국이 키스 마크로 보일 수 있기에 잠꼬대로 빨려 자국이 남으면 온갖 오해를 사게 되기 때문이다."
   },
   "PREDATOR_AmaterasuWolf": {
     "localized_name": "불이리",
@@ -1416,7 +1692,7 @@
     "description": null
   },
   "PalPassive_Doctor": {
-    "localized_name": "Dr. Brawn",
+    "localized_name": "섬 주민",
     "description": null
   },
   "PalTrader": {
@@ -1426,6 +1702,10 @@
   "Penguin": {
     "localized_name": "펭키",
     "description": "날개가 완전히 퇴화해 날 수 없다. 대신 유전자에 새겨진 하늘을 향한 미련이 있어 어떻게든 다시 날아오르려고 한다."
+  },
+  "Penguin_Electric": {
+    "localized_name": "Penguin_Electric",
+    "description": "날개가 완전히 퇴화해 날 수 없다. 하늘을 향한 미련은 어느덧 질투로 변화하여 하늘을 나는 모든 것을 격추할 전기의 힘을 얻게 되었다!"
   },
   "PinkCat": {
     "localized_name": "까부냥",
@@ -1451,6 +1731,14 @@
     "localized_name": "초롱이",
     "description": null
   },
+  "Plesiosaur": {
+    "localized_name": "Plesiosaur",
+    "description": "날숨에 섞인 꽃가루 같은 물질은 모든 식물과도 수분할 수 있는 기적의 물질. 식물이 자라난 팰 입장에선 꽤나 복잡한 상대로 볼 수 있다."
+  },
+  "Police_BowGun": {
+    "localized_name": "자경단 소총수",
+    "description": null
+  },
   "Police_Handgun": {
     "localized_name": "자경단 경비원",
     "description": null
@@ -1471,6 +1759,18 @@
     "localized_name": "자경단 정예 대원",
     "description": null
   },
+  "Police_TreasureGuard_NarrowSite": {
+    "localized_name": "자경단 소총수",
+    "description": null
+  },
+  "Police_Vigilance": {
+    "localized_name": "자경단 소총수",
+    "description": null
+  },
+  "PoseidonOrca": {
+    "localized_name": "PoseidonOrca",
+    "description": "재앙을 봉인한 후, 천락의 맹자가 해후를 이뤘다. 그 이후, 근처 바다에서 강자들의 눈앞에 모습을 드러낸다. 이는 곧 필연적인 만남이었다."
+  },
   "PurpleSpider": {
     "localized_name": "스틱툴라",
     "description": "지극히 끈적거리며, 찐득찐득 달라붙는다. 몸부림치면 칠수록, 더욱 세게 들러붙는다. 그러한 |성격|을 지니고 있다."
@@ -1481,6 +1781,30 @@
   },
   "QuestMan": {
     "localized_name": "ko_Text",
+    "description": null
+  },
+  "Quest_Farmer03_PinkCat": {
+    "localized_name": "까부냥",
+    "description": null
+  },
+  "Quest_Farmer03_SheepBall": {
+    "localized_name": "도로롱",
+    "description": null
+  },
+  "Quest_Hunter_Fat_GatlingGun01": {
+    "localized_name": "밀렵단 분쇄자",
+    "description": null
+  },
+  "Quest_Hunter_FlameThrower": {
+    "localized_name": "밀렵단 청소부",
+    "description": null
+  },
+  "Quest_Hunter_Katana01": {
+    "localized_name": "밀렵단 검사",
+    "description": null
+  },
+  "Quest_Hunter_RocketLauncher01": {
+    "localized_name": "밀렵단 정예 대원",
     "description": null
   },
   "RAID_DarkMechaDragon": {
@@ -1703,6 +2027,10 @@
     "localized_name": "유전자 연구 부대 실행반",
     "description": null
   },
+  "Scientist_Prisoner": {
+    "localized_name": "유전자 연구 부대 실행반",
+    "description": null
+  },
   "ScorpionMan": {
     "localized_name": "스콜피어스",
     "description": "약 5,000종에 달하는 독을 함유하고 있다. 그중에는 즉사할 정도로 무시무시한 위력의 독도 있으나 정작 독의 농도가 하나같이 옅은 탓에 아무런 의미가 없다."
@@ -1747,6 +2075,10 @@
     "localized_name": "꼬마딜로",
     "description": "예전엔 꼬마딜로 축구가 유행했다. 팰 애호 단체의 강한 반발에 부딪쳐 곧 폐지되었지만 오래된 각질이 떨어지기 때문에, 꼬마딜로 무리도 크게 꺼리는 기색은 없었다고 한다."
   },
+  "SnowPeafowl": {
+    "localized_name": "SnowPeafowl",
+    "description": "시간에 민감해 매일 아침마다 무조건 정해진 시간에 깨어난다. 팰파고스섬에서 하루를 24개로 쪼개게 된 이유는 날개를 펼친 SnowPeafowl의 모습을 정면에서 바라보면 닫힌 공백이 딱 24개로 보이기 때문이라는 전설이 있다."
+  },
   "SnowTigerBeastman": {
     "localized_name": "빙호우거",
     "description": "둥근 물체를 볼 때마다 주먹이 근질거린다. SnowTigerBeastMan에게 생존 다음으로 힘겨운 일은 눈사람을 온전하게 완성하는 것이다."
@@ -1754,6 +2086,14 @@
   "SoldierBee": {
     "localized_name": "비나이트",
     "description": "퀸비나을(를) 충실히 따르는 하인. 여왕에게 해를 끼치는 자를 철저히 배제한다. 끝내 자폭을 해서라도 여왕을 지켜낸다."
+  },
+  "StuffedShark": {
+    "localized_name": "StuffedShark",
+    "description": "인형 속에서 무언가 이쪽을 들여다보는 듯하지만 정작 그 안에 손을 넣어보면 아무것도 없다. 오히려 손이 빨려 들어갈 듯 끝없이 들어간다. 어쩌면 우주는 이곳에 있을지도 모른다."
+  },
+  "StuffedShark_Fire": {
+    "localized_name": "StuffedShark_Fire",
+    "description": "입에 손을 넣어도 아무것도 없으며, 끝없이 들어간다. 어느 연구자는 이를 이차원 공간으로 예상하여 침낭 대신 쓰려고 온몸을 넣어보려 했지만 구역질을 하는 모습으로 보아 |몸속|인 것만큼은 확실한 듯하다."
   },
   "Suzaku": {
     "localized_name": "주작",
@@ -1767,6 +2107,10 @@
     "localized_name": "캔디쉽",
     "description": "전신이 설탕보다 18,000배나 달다. 향기에 이끌려 덥석 베어 문 육식 팰은 상상을 초월하는 단맛에 눈이 뒤집힌 채 졸도해 버린다."
   },
+  "TentacleTurtle_Ground": {
+    "localized_name": "TentacleTurtle_Ground",
+    "description": "물렁한 본체를 지키기 위해 단단한 갑각을 얻었다. 대부분의 촉각이 손과 갑각에 집중되어 있기에 본체만 살짝 만지더라도 눈치채지 못한다."
+  },
   "ThunderBird": {
     "localized_name": "라이버드",
     "description": "적토조의 근연종으로 보이나 관계는 없다. 급강하해 날카로운 주둥이로 적을 처치한다. 그 모습은 마치 낙뢰를 보는 듯하다."
@@ -1778,6 +2122,10 @@
   "ThunderDragonMan": {
     "localized_name": "전룡맨",
     "description": "상처로 전류를 흘려보내 상대의 몸을 불태운다. 전룡맨끼리 싸우면 순식간에 승부가 난다."
+  },
+  "TropicalOstrich": {
+    "localized_name": "TropicalOstrich",
+    "description": "특징적인 춤으로 적의 리듬을 무너뜨린다. 영역 싸움 중에는 먼저 상대의 리듬에 휘말리면 패배라고 한다. 구애 행위도, 심심풀이도, 전부 다 춤! 그렇다면, 인간을 향한 춤에는 과연 어떤 의미가 있을까."
   },
   "Umihebi": {
     "localized_name": "레비드라",
@@ -1801,6 +2149,10 @@
   },
   "Viking_Elite_Invader": {
     "localized_name": "천락의 민족 정예",
+    "description": null
+  },
+  "Viking_Prisoner": {
+    "localized_name": "천락의 민족",
     "description": null
   },
   "Viking_Tower": {
@@ -1902,6 +2254,50 @@
   "WoolFox": {
     "localized_name": "밀피",
     "description": "SheepBall보다 털의 품질이 좋고 SheepBall보다 가축으로 삼기 좋은 성격이다. 하지만 역사적으로는 항상 애완용 팰로 사육되어 왔다. 역시 귀여운 게 최고다."
+  },
+  "YakushimaBoss001": {
+    "localized_name": "YakushimaBoss001",
+    "description": "[테라리아 컬래버] 이세계에서 온 몬스터. 이곳에선 길들일 수 있는 모양이다."
+  },
+  "YakushimaBoss001_Small": {
+    "localized_name": "YakushimaBoss001_Small",
+    "description": "[테라리아 컬래버] 이세계에서 온 몬스터. 이곳에선 길들일 수 있는 모양이다."
+  },
+  "YakushimaMonster001": {
+    "localized_name": "YakushimaMonster001",
+    "description": "[테라리아 컬래버] 이세계에서 온 몬스터. 이곳에선 길들일 수 있는 모양이다."
+  },
+  "YakushimaMonster001_Blue": {
+    "localized_name": "YakushimaMonster001_Blue",
+    "description": "[테라리아 컬래버] 이세계에서 온 몬스터. 이곳에선 길들일 수 있는 모양이다."
+  },
+  "YakushimaMonster001_Pink": {
+    "localized_name": "YakushimaMonster001_Pink",
+    "description": "[테라리아 컬래버] 이세계에서 온 몬스터. 이곳에선 길들일 수 있는 모양이다."
+  },
+  "YakushimaMonster001_Purple": {
+    "localized_name": "YakushimaMonster001_Purple",
+    "description": "[테라리아 컬래버] 이세계에서 온 몬스터. 이곳에선 길들일 수 있는 모양이다."
+  },
+  "YakushimaMonster001_Rainbow": {
+    "localized_name": "YakushimaMonster001_Rainbow",
+    "description": "[테라리아 컬래버] 이세계에서 온 몬스터. 이곳에선 길들일 수 있는 모양이다."
+  },
+  "YakushimaMonster001_Red": {
+    "localized_name": "YakushimaMonster001_Red",
+    "description": "[테라리아 컬래버] 이세계에서 온 몬스터. 이곳에선 길들일 수 있는 모양이다."
+  },
+  "YakushimaMonster002": {
+    "localized_name": "YakushimaMonster002",
+    "description": "[테라리아 컬래버] 이세계에서 온 몬스터. 이곳에선 길들일 수 있는 모양이다."
+  },
+  "YakushimaMonster003": {
+    "localized_name": "YakushimaMonster003",
+    "description": "[테라리아 컬래버] 이세계에서 온 몬스터. 이곳에선 길들일 수 있는 모양이다."
+  },
+  "YakushimaMonster003_Purple": {
+    "localized_name": "YakushimaMonster003_Purple",
+    "description": "[테라리아 컬래버] 이세계에서 온 몬스터. 이곳에선 길들일 수 있는 모양이다."
   },
   "Yamishima_guide1": {
     "localized_name": "섬 주민",

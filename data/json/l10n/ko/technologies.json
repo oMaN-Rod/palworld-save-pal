@@ -7,6 +7,10 @@
     "localized_name": "더블 에어 대시 부츠",
     "description": null
   },
+  "Accessory_AirDash3": {
+    "localized_name": "ko Text",
+    "description": null
+  },
   "Accessory_JumpCount_Increase1": {
     "localized_name": "더블 점프 부츠",
     "description": null
@@ -95,6 +99,10 @@
     "localized_name": "감시대",
     "description": null
   },
+  "BaseCampWorkerExtraStation": {
+    "localized_name": "BaseCampWorkerExtraStation",
+    "description": null
+  },
   "Battle_Armor_Grade_01_Cloth": {
     "localized_name": "천 옷",
     "description": "천'(으)로 만든 옷. 밤의 한기를 막아준다. 제작하려면 '원시적인 작업대'이(가) 필요하다."
@@ -181,7 +189,7 @@
   },
   "Battle_Defense_MachineGun": {
     "localized_name": "설치형 기관총",
-    "description": "|수작업| 적성을 가진 팰을 배치하면 해당 방어 시설을 사용해 거점을 수호한다."
+    "description": "|수작업| 적성을 가진 팰을 배치하면 기관총을 사용해 거점을 수호한다."
   },
   "Battle_Defense_Missile": {
     "localized_name": "설치형 미사일 발사대",
@@ -284,8 +292,8 @@
     "description": null
   },
   "Battle_RangeWeapon_FlameThrower": {
-    "localized_name": "화염방사기",
-    "description": "높은 사정거리의 불을 뿜는 Flamethrower. 적중한 상대를 화염에 휩싸이게 할 수 있다. 제작하려면 |무기라인 공장 II|이(가) 필요하다."
+    "localized_name": "FlameThrower",
+    "description": null
   },
   "Battle_RangeWeapon_GatlingGun": {
     "localized_name": "개틀링 건",
@@ -355,6 +363,10 @@
     "localized_name": "빔 소드",
     "description": null
   },
+  "BelieverFlagSet": {
+    "localized_name": "팰 애호 단체 깃발 세트",
+    "description": "Believer_Flag, Believer_Banner아이템이 포함된 세트. 팰 애호 단체를 압도했음을 나타내는 증표이다."
+  },
   "BlastFurnace4": {
     "localized_name": "거대한 화로",
     "description": null
@@ -383,9 +395,17 @@
     "localized_name": "시멘트",
     "description": null
   },
+  "ChargeLaserRifle": {
+    "localized_name": "ko Text",
+    "description": null
+  },
+  "ChargeLaserRifleBullet": {
+    "localized_name": "ko Text",
+    "description": null
+  },
   "Cloth2": {
     "localized_name": "상급 천",
-    "description": "많은 양의 '양털'을 짜서 만든 '상급 천'. 고급 방어구를 만들 때 필요하다. '상급 작업대'에서 만들 수 있게 된다."
+    "description": null
   },
   "CompositeDesk": {
     "localized_name": "제도대",
@@ -406,6 +426,10 @@
   "Crusher": {
     "localized_name": "파쇄기",
     "description": "돌 혹은 목재을(를) 분쇄하여 다른 소재로 변환할 수 있는 시설. 물레방아를 돌리는 |관개| 적성의 팰이 필요하다."
+  },
+  "CrystalPit": {
+    "localized_name": "CrystalPit",
+    "description": null
   },
   "DamagedScarecrow": {
     "localized_name": "피해 측정 허수아비",
@@ -467,12 +491,24 @@
     "localized_name": "플라즈마 대포",
     "description": null
   },
+  "EnergyShotgun": {
+    "localized_name": "ko Text",
+    "description": null
+  },
+  "EnergyShotgunBullet": {
+    "localized_name": "ko Text",
+    "description": null
+  },
   "EnergyStorage_Electric": {
     "localized_name": "축전기",
     "description": null
   },
   "Expedition": {
     "localized_name": "팰 원정소",
+    "description": null
+  },
+  "Factory_Hard_04": {
+    "localized_name": "ko_Text",
     "description": null
   },
   "Factory_Money": {
@@ -482,6 +518,42 @@
   "Farm_SkillFruits": {
     "localized_name": "기술 열매 농원",
     "description": null
+  },
+  "FireCultFlagSet": {
+    "localized_name": "영원한 불꽃의 동지 깃발 세트",
+    "description": "FireCult_Flag, FireCult_Banner아이템이 포함된 세트. 영원한 불꽃의 동지를 압도했음을 나타내는 증표이다."
+  },
+  "FishingBait_2": {
+    "localized_name": "FishingBait_2",
+    "description": null
+  },
+  "FishingBait_3": {
+    "localized_name": "FishingBait_3",
+    "description": null
+  },
+  "FishingBait_3_A": {
+    "localized_name": "FishingBait_3_A",
+    "description": null
+  },
+  "FishingPond1": {
+    "localized_name": "FishingPond1",
+    "description": null
+  },
+  "FishingPond2": {
+    "localized_name": "FishingPond2",
+    "description": null
+  },
+  "FishingRod_02_1": {
+    "localized_name": "FishingRod_02_1",
+    "description": null
+  },
+  "FishingRod_03_1": {
+    "localized_name": "FishingRod_03_1",
+    "description": null
+  },
+  "FishingSet1": {
+    "localized_name": "초급 낚시 세트",
+    "description": "초보용 낚싯대와 낚시 미끼 세트. 낚싯대와 미끼를 만들면 물가에서 팰을 낚을 수 있다."
   },
   "FlamethrowerBullet": {
     "localized_name": "화염방사기 연료",
@@ -699,6 +771,10 @@
     "localized_name": "테라 갈고리 총",
     "description": null
   },
+  "GrapplingGun5": {
+    "localized_name": "GrapplingGun5",
+    "description": null
+  },
   "GrenadeBullet": {
     "localized_name": "유탄",
     "description": null
@@ -730,6 +806,10 @@
   "HugeKitchen": {
     "localized_name": "대형 부엌",
     "description": null
+  },
+  "HunterFlagSet": {
+    "localized_name": "밀렵단 깃발 세트",
+    "description": "Hunter_Flag, Hunter_Banner아이템이 포함된 세트. 밀렵단을 압도했음을 나타내는 증표이다."
   },
   "IceCrusher": {
     "localized_name": "동결 분쇄기",
@@ -803,6 +883,10 @@
     "localized_name": "허리 휴대형 랜턴",
     "description": null
   },
+  "Lantern_High": {
+    "localized_name": "Lantern_High",
+    "description": null
+  },
   "LargeCeilingLamp": {
     "localized_name": "대형 천장 램프",
     "description": "천장에 부착해 더 넓은 범위를 환하게 비춘다."
@@ -845,6 +929,10 @@
   },
   "MakeshiftSubmachineGun": {
     "localized_name": "낡은 기관단총",
+    "description": null
+  },
+  "ManganeseIngot": {
+    "localized_name": "ManganeseIngot",
     "description": null
   },
   "ManualElectricGenerator": {
@@ -895,9 +983,17 @@
     "localized_name": "대형 전동 알 부화기",
     "description": null
   },
+  "MultiHatchingPalEgg": {
+    "localized_name": "MultiHatchingPalEgg",
+    "description": null
+  },
   "Musket": {
     "localized_name": "머스킷",
     "description": "오래된 느낌의 간소한 총. 한 발의 위력은 강하지만, 재장전이 오래 걸린다. 제작하려면 |무기 제작대|이(가) 필요하다."
+  },
+  "NinjaFlagSet": {
+    "localized_name": "달꽃단 깃발 세트",
+    "description": "Ninja_Flag, Ninja_Banner아이템이 포함된 세트. 달꽃단을 압도했음을 나타내는 증표이다."
   },
   "OilPump": {
     "localized_name": "원유 추출기",
@@ -905,6 +1001,18 @@
   },
   "OlympicCauldron": {
     "localized_name": "성화대",
+    "description": null
+  },
+  "OperatingTable": {
+    "localized_name": "ko_Text",
+    "description": null
+  },
+  "OverheatRifle": {
+    "localized_name": "ko Text",
+    "description": null
+  },
+  "OverheatRifleBullet": {
+    "localized_name": "ko Text",
     "description": null
   },
   "PALBOX": {
@@ -915,9 +1023,25 @@
     "localized_name": "프리마켓 (팰)",
     "description": null
   },
+  "PalDopingShot": {
+    "localized_name": "ko Text",
+    "description": null
+  },
+  "PalDopingShotBullet": {
+    "localized_name": "ko Text",
+    "description": null
+  },
+  "PalDopingShot_2": {
+    "localized_name": "PalDopingShot_2",
+    "description": null
+  },
   "PalFoodBox": {
     "localized_name": "먹이 상자",
     "description": "음식을 넣어두면 거점의 팰 무리가 이곳에서 식사한다."
+  },
+  "PalHealingGrenade": {
+    "localized_name": "ko Text",
+    "description": null
   },
   "PalMedicineBox": {
     "localized_name": "약 선반",
@@ -934,6 +1058,10 @@
   "Plastic": {
     "localized_name": "플라스틸",
     "description": null
+  },
+  "PoliceFlagSet": {
+    "localized_name": "자경단 깃발 세트",
+    "description": "Police_Flag, Police_Banner아이템이 포함된 세트. 자경단을 압도했음을 나타내는 증표이다."
   },
   "Polymer": {
     "localized_name": "폴리머",
@@ -1017,11 +1145,11 @@
   },
   "Product_Farm_wheat": {
     "localized_name": "밀 농원",
-    "description": "|빵|의 원료. 작업하려면 |씨뿌리기|, |물 주기|, |채집| 적성을 가진 팰이 필요하다."
+    "description": "|빵|의 원료인 밀을 생산하는 농원. 작업하려면 |씨뿌리기|, |물 주기|, |채집| 적성을 가진 팰이 필요하다."
   },
   "Product_Ingot_Grade_01_Copper": {
     "localized_name": "원시적인 화로",
-    "description": "|원시적인 화로|을(를) 건축할 수 있게 된다. |금속 광석|을(를) 제련해 주괴를 만들 수 있게 된다."
+    "description": "|금속 광석|을(를) 제련해 주괴를 만들 수 있게 된다."
   },
   "Product_Ingot_Grade_02_Iron": {
     "localized_name": "개선된 화로",
@@ -1135,9 +1263,21 @@
     "localized_name": "헥소라이트 투구",
     "description": null
   },
+  "SF_houseset": {
+    "localized_name": "미래식 건축 세트",
+    "description": "미래식 건축물로 거점을 제작할 때 쓰는 세트. 토대, 벽, 지붕, 계단 등 집을 지을 때 필요한 것들을 만들 수 있다."
+  },
+  "Salvage_TreasureBoxKey02": {
+    "localized_name": "Salvage_TreasureBoxKey02",
+    "description": null
+  },
   "SanityDecrease1": {
     "localized_name": "α파 발생 장치",
     "description": null
+  },
+  "ScientistFlagSet": {
+    "localized_name": "유전자 연구 부대 깃발 세트",
+    "description": "Scientist_Flag, Scientist_Banner아이템이 포함된 세트. 유전자 연구 부대를 압도했음을 나타내는 증표이다."
   },
   "Shield_01": {
     "localized_name": "일반 방패",
@@ -1217,6 +1357,10 @@
   },
   "SkillUnlock_BlueDragon": {
     "localized_name": "아주리비의 안장",
+    "description": null
+  },
+  "SkillUnlock_BlueDragon_Ice": {
+    "localized_name": "SkillUnlock_BlueDragon_Ice",
     "description": null
   },
   "SkillUnlock_BlueThunderHorse": {
@@ -1311,8 +1455,20 @@
     "localized_name": "루미카이트의 장갑",
     "description": null
   },
+  "SkillUnlock_FlyingManta_Thunder": {
+    "localized_name": "SkillUnlock_FlyingManta_Thunder",
+    "description": null
+  },
   "SkillUnlock_Garm": {
     "localized_name": "다크울프의 안장 부착 마구",
+    "description": null
+  },
+  "SkillUnlock_GhostAnglerfish": {
+    "localized_name": "SkillUnlock_GhostAnglerfish",
+    "description": null
+  },
+  "SkillUnlock_GhostAnglerfish_Fire": {
+    "localized_name": "SkillUnlock_GhostAnglerfish_Fire",
     "description": null
   },
   "SkillUnlock_GhostBeast": {
@@ -1383,6 +1539,18 @@
     "localized_name": "그레이섀도우의 안장",
     "description": null
   },
+  "SkillUnlock_IceNarwhal": {
+    "localized_name": "SkillUnlock_IceNarwhal",
+    "description": null
+  },
+  "SkillUnlock_IceNarwhal_Fire": {
+    "localized_name": "SkillUnlock_IceNarwhal_Fire",
+    "description": null
+  },
+  "SkillUnlock_IceSeal": {
+    "localized_name": "SkillUnlock_IceSeal",
+    "description": null
+  },
   "SkillUnlock_JetDragon": {
     "localized_name": "제트래곤의 미사일 발사기",
     "description": null
@@ -1423,6 +1591,10 @@
     "localized_name": "핑피롱의 미사일 발사기",
     "description": null
   },
+  "SkillUnlock_LeafMomonga": {
+    "localized_name": "SkillUnlock_LeafMomonga",
+    "description": null
+  },
   "SkillUnlock_Manticore": {
     "localized_name": "만티파이어의 안장",
     "description": null
@@ -1459,12 +1631,28 @@
     "localized_name": "고스문의 장갑",
     "description": null
   },
+  "SkillUnlock_NegativeOctopus_Neutral": {
+    "localized_name": "SkillUnlock_NegativeOctopus_Neutral",
+    "description": null
+  },
   "SkillUnlock_NightBlueHorse": {
     "localized_name": "나이트롯의 안장",
     "description": null
   },
   "SkillUnlock_Penguin": {
     "localized_name": "펭키의 로켓 발사기",
+    "description": null
+  },
+  "SkillUnlock_Penguin_Electric": {
+    "localized_name": "SkillUnlock_Penguin_Electric",
+    "description": null
+  },
+  "SkillUnlock_Plesiosaur": {
+    "localized_name": "SkillUnlock_Plesiosaur",
+    "description": null
+  },
+  "SkillUnlock_PoseidonOrca": {
+    "localized_name": "SkillUnlock_PoseidonOrca",
     "description": null
   },
   "SkillUnlock_PurpleSpider": {
@@ -1529,6 +1717,10 @@
   },
   "SkillUnlock_ThunderDog": {
     "localized_name": "썬도그의 안장",
+    "description": null
+  },
+  "SkillUnlock_TropicalOstrich": {
+    "localized_name": "SkillUnlock_TropicalOstrich",
     "description": null
   },
   "SkillUnlock_Umihebi": {
@@ -1598,6 +1790,10 @@
   "Spa2": {
     "localized_name": "고급 온천",
     "description": "들어간 팰이 SAN 수치를 더 많이 회복한다."
+  },
+  "Spa3": {
+    "localized_name": "Spa3",
+    "description": null
   },
   "Spear": {
     "localized_name": "돌 창",
@@ -1770,6 +1966,10 @@
   "WallTorch": {
     "localized_name": "벽걸이 횃불",
     "description": "벽에 걸 수 있다."
+  },
+  "WeaponFactory_Dirty_04": {
+    "localized_name": "ko_Text",
+    "description": null
   },
   "Wood_Gate": {
     "localized_name": "나무 문",

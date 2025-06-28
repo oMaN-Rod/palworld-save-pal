@@ -268,7 +268,7 @@
     "description": "적을 향해 날아가는 바람의 칼날을 무수히 발사한다."
   },
   "EPalWazaID::Railbolt": {
-    "localized_name": "썬더 레일",
+    "localized_name": "Railbolt",
     "description": "천둥의 힘을 한계까지 끌어모아 적을 향해 강력한 다수의 전기 공격을 동시 발사한다."
   },
   "EPalWazaID::RangeThunder": {

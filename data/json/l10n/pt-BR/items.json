@@ -2219,6 +2219,22 @@
     "localized_name": "pt-BR Text",
     "description": "pt-BR Text"
   },
+  "ChargeLaserRifle_2": {
+    "localized_name": "pt-BR Text",
+    "description": "pt-BR Text"
+  },
+  "ChargeLaserRifle_3": {
+    "localized_name": "pt-BR Text",
+    "description": "pt-BR Text"
+  },
+  "ChargeLaserRifle_4": {
+    "localized_name": "pt-BR Text",
+    "description": "pt-BR Text"
+  },
+  "ChargeLaserRifle_5": {
+    "localized_name": "pt-BR Text",
+    "description": "pt-BR Text"
+  },
   "CheeseBurger": {
     "localized_name": "X-búrguer",
     "description": "Prato com queijo no Hambúrguer. Ao comer, a saciedade é garantida por um determinado tempo, Defesa +10%."
@@ -2591,6 +2607,22 @@
     "localized_name": "pt-BR Text",
     "description": "pt-BR Text"
   },
+  "EnergyShotgun_2": {
+    "localized_name": "pt-BR Text",
+    "description": "pt-BR Text"
+  },
+  "EnergyShotgun_3": {
+    "localized_name": "pt-BR Text",
+    "description": "pt-BR Text"
+  },
+  "EnergyShotgun_4": {
+    "localized_name": "pt-BR Text",
+    "description": "pt-BR Text"
+  },
+  "EnergyShotgun_5": {
+    "localized_name": "pt-BR Text",
+    "description": "pt-BR Text"
+  },
   "ExpBoost_01": {
     "localized_name": "Livro de Prática (P)",
     "description": "Livro que garante um mínimo de experiência quando lido por um Pal."
@@ -2918,6 +2950,10 @@
   "GrapplingGun4": {
     "localized_name": "Arpéu Tera",
     "description": "Arpéu que permite movimento em alta velocidade. Dispare o gancho na direção de destino para puxar seu corpo até lá. Graças a muitas pesquisas, foi possível garantir uma mobilidade estarrecedora."
+  },
+  "GrapplingGun5": {
+    "localized_name": "Arpéu",
+    "description": "Arpéu que permite movimento em alta velocidade. Dispare o gancho na direção de destino para puxar seu corpo até lá. Com ele você pode deslocar-se facilmente inclusive entre alturas diferentes."
   },
   "Gratin": {
     "localized_name": "Gratinado",
@@ -3711,6 +3747,10 @@
     "localized_name": "Lança-Meteoros",
     "description": "Arma absurda criada pelo processamento de meteoritos. Ao atingir o alvo, causa uma explosão semelhante à de um meteorito."
   },
+  "Launcher_Meteor_5": {
+    "localized_name": "Lança-Meteoros",
+    "description": "Arma absurda criada pelo processamento de meteoritos. Ao atingir o alvo, causa uma explosão semelhante à de um meteorito."
+  },
   "Leather": {
     "localized_name": "Couro",
     "description": "Couro de Pals que serve de material para armaduras . Pode ser obtido apenas de certos Pals."
@@ -4099,6 +4139,22 @@
     "localized_name": "pt-BR Text",
     "description": "pt-BR Text"
   },
+  "OverheatRifle_2": {
+    "localized_name": "pt-BR Text",
+    "description": "pt-BR Text"
+  },
+  "OverheatRifle_3": {
+    "localized_name": "pt-BR Text",
+    "description": "pt-BR Text"
+  },
+  "OverheatRifle_4": {
+    "localized_name": "pt-BR Text",
+    "description": "pt-BR Text"
+  },
+  "OverheatRifle_5": {
+    "localized_name": "pt-BR Text",
+    "description": "pt-BR Text"
+  },
   "PalCrystal_Ex": {
     "localized_name": "Peça da Civilização Antiga",
     "description": "Item defeituoso escavado de ruínas antigas. Contém muitas informações sobre tecnologias perdidas. De valor extremamente elevado, é procurado por todas as pessoas."
@@ -4108,6 +4164,14 @@
     "description": "Item deixado por certos Pals de Escuridão poderosos. Pode servir de material para certos acessórios igualmente poderosos."
   },
   "PalDopingShot": {
+    "localized_name": "pt-BR Text",
+    "description": "pt-BR Text"
+  },
+  "PalDopingShot_2": {
+    "localized_name": "pt-BR Text",
+    "description": "pt-BR Text"
+  },
+  "PalDopingShot_3": {
     "localized_name": "pt-BR Text",
     "description": "pt-BR Text"
   },
@@ -6055,12 +6119,68 @@
     "localized_name": "Espada-Gato",
     "description": "[Colaboração com Terraria] Segundo as lendas, esta espada parece ter sido trazida de uma nação distante por um Croajiro. Ninguém faz ideia do motivo…"
   },
-  "SniperRifle_Default": {
-    "localized_name": "Rifle de precisão",
-    "description": "Um rifle de longo alcance com precisão excepcional. É fácil de manusear e eficaz em combates de longa distância."
+  "YakushimaBlade002": {
+    "localized_name": "Espada-Gato",
+    "description": "[Colaboração com Terraria] Segundo as lendas, esta espada parece ter sido trazida de uma nação distante por um Croajiro. Ninguém faz ideia do motivo…"
   },
-  "LargeBullet": {
-    "localized_name": "Munição de precisão",
-    "description": "Uma bala grande para uso com rifle de precisão. Possui alta precisão e poder."
+  "YakushimaBlade002_2": {
+    "localized_name": "Espada-Gato",
+    "description": "[Colaboração com Terraria] Segundo as lendas, esta espada parece ter sido trazida de uma nação distante por um Croajiro. Ninguém faz ideia do motivo…"
+  },
+  "YakushimaBlade002_3": {
+    "localized_name": "Espada-Gato",
+    "description": "[Colaboração com Terraria] Segundo as lendas, esta espada parece ter sido trazida de uma nação distante por um Croajiro. Ninguém faz ideia do motivo…"
+  },
+  "YakushimaBlade002_4": {
+    "localized_name": "Espada-Gato",
+    "description": "[Colaboração com Terraria] Segundo as lendas, esta espada parece ter sido trazida de uma nação distante por um Croajiro. Ninguém faz ideia do motivo…"
+  },
+  "YakushimaBlade002_5": {
+    "localized_name": "Espada-Gato",
+    "description": "[Colaboração com Terraria] Segundo as lendas, esta espada parece ter sido trazida de uma nação distante por um Croajiro. Ninguém faz ideia do motivo…"
+  },
+  "YakushimaBlade003": {
+    "localized_name": "Espada-Gato",
+    "description": "[Colaboração com Terraria] Segundo as lendas, esta espada parece ter sido trazida de uma nação distante por um Croajiro. Ninguém faz ideia do motivo…"
+  },
+  "YakushimaBlade003_2": {
+    "localized_name": "Espada-Gato",
+    "description": "[Colaboração com Terraria] Segundo as lendas, esta espada parece ter sido trazida de uma nação distante por um Croajiro. Ninguém faz ideia do motivo…"
+  },
+  "YakushimaBlade003_3": {
+    "localized_name": "Espada-Gato",
+    "description": "[Colaboração com Terraria] Segundo as lendas, esta espada parece ter sido trazida de uma nação distante por um Croajiro. Ninguém faz ideia do motivo…"
+  },
+  "YakushimaBlade003_4": {
+    "localized_name": "Espada-Gato",
+    "description": "[Colaboração com Terraria] Segundo as lendas, esta espada parece ter sido trazida de uma nação distante por um Croajiro. Ninguém faz ideia do motivo…"
+  },
+  "YakushimaBlade003_5": {
+    "localized_name": "Espada-Gato",
+    "description": "[Colaboração com Terraria] Segundo as lendas, esta espada parece ter sido trazida de uma nação distante por um Croajiro. Ninguém faz ideia do motivo…"
+  },
+  "YakushimaBlade004": {
+    "localized_name": "Espada-Gato",
+    "description": "[Colaboração com Terraria] Segundo as lendas, esta espada parece ter sido trazida de uma nação distante por um Croajiro. Ninguém faz ideia do motivo…"
+  },
+  "YakushimaBlade004_2": {
+    "localized_name": "Espada-Gato",
+    "description": "[Colaboração com Terraria] Segundo as lendas, esta espada parece ter sido trazida de uma nação distante por um Croajiro. Ninguém faz ideia do motivo…"
+  },
+  "YakushimaBlade004_3": {
+    "localized_name": "Espada-Gato",
+    "description": "[Colaboração com Terraria] Segundo as lendas, esta espada parece ter sido trazida de uma nação distante por um Croajiro. Ninguém faz ideia do motivo…"
+  },
+  "YakushimaBlade004_4": {
+    "localized_name": "Espada-Gato",
+    "description": "[Colaboração com Terraria] Segundo as lendas, esta espada parece ter sido trazida de uma nação distante por um Croajiro. Ninguém faz ideia do motivo…"
+  },
+  "YakushimaBlade004_5": {
+    "localized_name": "Espada-Gato",
+    "description": "[Colaboração com Terraria] Segundo as lendas, esta espada parece ter sido trazida de uma nação distante por um Croajiro. Ninguém faz ideia do motivo…"
+  },
+  "YakushimaBlade005": {
+    "localized_name": "Espada-Gato",
+    "description": "[Colaboração com Terraria] Segundo as lendas, esta espada parece ter sido trazida de uma nação distante por um Croajiro. Ninguém faz ideia do motivo…"
   }
 }

@@ -371,6 +371,10 @@
     "localized_name": "玻璃门",
     "description": "建于地基上的门，可作为出入口。 以钢化玻璃制成，非常坚固。"
   },
+  "Glass_Fence": {
+    "localized_name": "-",
+    "description": null
+  },
   "Glass_SlantedRoof": {
     "localized_name": "玻璃斜屋顶",
     "description": "建在墙壁上，用于遮风避雨的斜屋顶。 以钢化玻璃制成，非常坚固。"
@@ -386,10 +390,6 @@
   "Glass_foundation": {
     "localized_name": "玻璃地基",
     "description": "用于在上面建造墙壁或设施的地基。 以钢化玻璃制成，非常坚固。"
-  },
-  "Glass_pillars": {
-    "localized_name": "玻璃立柱",
-    "description": "用来支撑建筑的立柱。 以钢化玻璃制成，非常坚固。"
   },
   "Glass_roof": {
     "localized_name": "玻璃屋顶",
@@ -443,6 +443,10 @@
     "localized_name": "冷冻粉碎机",
     "description": "可粉碎金属矿石以转换成其他材料的设施。 虽然要使其工作需要电力供应，以及有「冷却」适应性的帕鲁，但是效率极佳。"
   },
+  "Iron_Fence": {
+    "localized_name": "-",
+    "description": null
+  },
   "Irori": {
     "localized_name": "地炉",
     "description": "装饰用的地炉。 可在建造和风的建筑时配合使用。"
@@ -490,6 +494,10 @@
   "JapaneseStyle_DoorWall_03": {
     "localized_name": "和风门C",
     "description": "建于地基上的纸拉门，可作为出入口。 可以建造出时尚的日式建筑。"
+  },
+  "JapaneseStyle_Fence": {
+    "localized_name": "-",
+    "description": null
   },
   "JapaneseStyle_Pillar": {
     "localized_name": "和风立柱",
@@ -659,10 +667,6 @@
     "localized_name": "金属地基",
     "description": "用于在上面建造墙壁或设施的地基。 以金属制成，非常坚固。"
   },
-  "Metal_pillars": {
-    "localized_name": "金属立柱",
-    "description": "用来支撑建筑的立柱。 以金属制成，非常坚固。"
-  },
   "Metal_roof": {
     "localized_name": "金属屋顶",
     "description": "建在墙壁上，用于遮风避雨的屋顶。 以金属制成，非常坚固。"
@@ -803,6 +807,10 @@
     "localized_name": "毛皮地毯",
     "description": "毛皮地毯"
   },
+  "SF_Fence": {
+    "localized_name": "-",
+    "description": null
+  },
   "SanityDecrease1": {
     "localized_name": "α波发生器",
     "description": "发出α波让帕鲁放松的装置。 减缓据点内帕鲁的SAN值下降速度。 即使配置复数个，其效果也不会叠加。"
@@ -935,6 +943,10 @@
     "localized_name": "优质温泉",
     "description": "供疲惫的据点帕鲁休息的设施。 比一般设施更加舒适，所以SAN值的恢复效果也更加显著。"
   },
+  "Spa3": {
+    "localized_name": "温泉",
+    "description": "供疲惫的据点帕鲁休息的设施。 不仅可以消除劳动之后的疲劳感，也可以恢复SAN值。"
+  },
   "SphereFactory_Black_01": {
     "localized_name": "帕鲁球制作台",
     "description": "捕捉帕鲁用的帕鲁球的制作台。 作业场规模较小，无法迅速制作帕鲁球。 需有能进行手工作业的帕鲁。"
@@ -963,6 +975,10 @@
     "localized_name": "石门",
     "description": "建造在地基上作为入口的门。 以石头制成，还算坚固。"
   },
+  "Stone_Fence": {
+    "localized_name": "-",
+    "description": null
+  },
   "Stone_Gate": {
     "localized_name": "石制大门",
     "description": "稍大体型的帕鲁也能通过的大门。 以石头制成，还算坚固。"
@@ -982,10 +998,6 @@
   "Stone_foundation": {
     "localized_name": "石制地基",
     "description": "用于在上面建造墙壁或设施的地基。 以石头制成，还算坚固。"
-  },
-  "Stone_pillar": {
-    "localized_name": "石制立柱",
-    "description": "用来支撑建筑的立柱。 以石头制成，还算坚固。"
   },
   "Stone_roof": {
     "localized_name": "石制屋顶",
@@ -1211,6 +1223,10 @@
     "localized_name": "-",
     "description": null
   },
+  "Wood_Fence": {
+    "localized_name": "-",
+    "description": null
+  },
   "Wood_Gate": {
     "localized_name": "木制大门",
     "description": "稍大体型的帕鲁也能通过的大门。 以木头制成，相当脆弱。"
@@ -1242,10 +1258,6 @@
   "Wooden_ladder": {
     "localized_name": "梯子",
     "description": "可以用来爬上高处的梯子。"
-  },
-  "Wooden_pillar": {
-    "localized_name": "木制立柱",
-    "description": "用来支撑建筑的立柱。 以木头制成，相当脆弱。"
   },
   "Wooden_roof": {
     "localized_name": "木制屋顶",

@@ -371,6 +371,10 @@
     "localized_name": "Mur avec porte en verre",
     "description": "Une porte à construire sur une base pour servir d'entrée. Sa composition en verre la rend très robuste."
   },
+  "Glass_Fence": {
+    "localized_name": "-",
+    "description": null
+  },
   "Glass_SlantedRoof": {
     "localized_name": "Toit incliné en verre",
     "description": "Un toit incliné à construire sur des murs pour contrer les éléments. Sa composition en verre le rend très robuste."
@@ -386,10 +390,6 @@
   "Glass_foundation": {
     "localized_name": "Base en verre",
     "description": "Une base sur laquelle construire un mur ou une installation. Sa composition en verre la rend très robuste."
-  },
-  "Glass_pillars": {
-    "localized_name": "Pilier en verre",
-    "description": "Un pilier pour soutenir les bâtiments. Sa composition en verre le rend très robuste."
   },
   "Glass_roof": {
     "localized_name": "Toit en verre",
@@ -443,6 +443,10 @@
     "localized_name": "Broyeur à glace",
     "description": "Une installation permettant de broyer du Minerai de métal pour obtenir d'autres matériaux. Une alimentation en électricité ainsi qu'un Pal avec la capacité Réfrigération sont requis pour profiter de sa grande efficacité."
   },
+  "Iron_Fence": {
+    "localized_name": "-",
+    "description": null
+  },
   "Irori": {
     "localized_name": "Foyer japonais",
     "description": "Un foyer décoratif. À utiliser dans les constructions de style japonais."
@@ -490,6 +494,10 @@
   "JapaneseStyle_DoorWall_03": {
     "localized_name": "Mur coulissant japonais C",
     "description": "Un fusuma intérieur coulissant à construire sur une base. Son style japonais permet des constructions raffinées."
+  },
+  "JapaneseStyle_Fence": {
+    "localized_name": "-",
+    "description": null
   },
   "JapaneseStyle_Pillar": {
     "localized_name": "Pilier japonais",
@@ -659,10 +667,6 @@
     "localized_name": "Base en métal",
     "description": "Une base sur laquelle construire un mur ou une installation. Sa composition en métal la rend très solide."
   },
-  "Metal_pillars": {
-    "localized_name": "Pilier en métal",
-    "description": "Un pilier pour soutenir les bâtiments. Sa composition en métal le rend très robuste."
-  },
   "Metal_roof": {
     "localized_name": "Toit en métal",
     "description": "Un toit à construire sur des murs pour contrer les éléments. Sa composition en métal le rend très solide."
@@ -803,6 +807,10 @@
     "localized_name": "fr_Text",
     "description": "fr_Text"
   },
+  "SF_Fence": {
+    "localized_name": "-",
+    "description": null
+  },
   "SanityDecrease1": {
     "localized_name": "Dispositif de vague α",
     "description": "Un dispositif qui génère une vague α pour détendre les Pals. Ralentit la chute des points MEN des Pals sur le camp. En installer plusieurs ne décuple pas l'effet."
@@ -935,6 +943,10 @@
     "localized_name": "Source chaude réputée",
     "description": "Une installation où les Pals du camp fatigués peuvent se reposer. Son confort accru restaure encore plus de points MEN."
   },
+  "Spa3": {
+    "localized_name": "Source chaude",
+    "description": "Une installation où les Pals du camp fatigués peuvent se reposer. Annule les effets de la fatigue et restaure les points MEN."
+  },
   "SphereFactory_Black_01": {
     "localized_name": "Établi pour sphères",
     "description": "Un établi pour sphères permettant de capturer des Pals. L'espace encore restreint ne permet pas de fabriquer des sphères efficacement. Un Pal habile dans les travaux manuels est requis."
@@ -963,6 +975,10 @@
     "localized_name": "Porte en pierre",
     "description": "Une porte à construire sur une base pour servir d'entrée. Sa composition en pierre la rend assez robuste."
   },
+  "Stone_Fence": {
+    "localized_name": "-",
+    "description": null
+  },
   "Stone_Gate": {
     "localized_name": "Portail en pierre",
     "description": "Une porte que même les gros Pals peuvent franchir. Sa composition en pierre la rend assez robuste."
@@ -982,10 +998,6 @@
   "Stone_foundation": {
     "localized_name": "Base en pierre",
     "description": "Une base sur laquelle construire un mur ou une installation. Le fait qu'elle soit en pierre la rend plus solide."
-  },
-  "Stone_pillar": {
-    "localized_name": "Pilier en pierre",
-    "description": "Un pilier pour soutenir les bâtiments. Sa composition en pierre le rend assez robuste."
   },
   "Stone_roof": {
     "localized_name": "Toit en pierre",
@@ -1211,6 +1223,10 @@
     "localized_name": "-",
     "description": null
   },
+  "Wood_Fence": {
+    "localized_name": "-",
+    "description": null
+  },
   "Wood_Gate": {
     "localized_name": "Portail en bois",
     "description": "Une porte que même les gros Pals peuvent franchir. Sa composition en bois la rend fragile."
@@ -1242,10 +1258,6 @@
   "Wooden_ladder": {
     "localized_name": "Échelle",
     "description": "Une échelle qui permet de monter sur les lieux légèrement surélevés."
-  },
-  "Wooden_pillar": {
-    "localized_name": "Pilier en bois",
-    "description": "Un pilier pour soutenir les bâtiments. Sa composition en bois le rend fragile."
   },
   "Wooden_roof": {
     "localized_name": "Toit en bois",

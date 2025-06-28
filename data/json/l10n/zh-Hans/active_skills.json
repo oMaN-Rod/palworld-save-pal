@@ -268,7 +268,7 @@
     "description": "瞄准敌人射出无数风刃。"
   },
   "EPalWazaID::Railbolt": {
-    "localized_name": "并联雷光",
+    "localized_name": "Railbolt",
     "description": "积蓄雷电的力量到极限， 朝敌人同时发射多道强力雷击。"
   },
   "EPalWazaID::RangeThunder": {

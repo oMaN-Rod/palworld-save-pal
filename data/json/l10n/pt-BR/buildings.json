@@ -371,6 +371,10 @@
     "localized_name": "Parede com Porta de Vidro",
     "description": "Porta erguida sobre a fundação para servir de entrada. É bastante resistente, pois é feita de vidro reforçado."
   },
+  "Glass_Fence": {
+    "localized_name": "-",
+    "description": null
+  },
   "Glass_SlantedRoof": {
     "localized_name": "Telhado Inclinado de Vidro",
     "description": "Telhado inclinado erguido sobre o muro para oferecer proteção contra vento e chuva. É bastante resistente, pois é feito de vidro reforçado."
@@ -386,10 +390,6 @@
   "Glass_foundation": {
     "localized_name": "Fundação de Vidro",
     "description": "Fundação para erigir muros ou instalações. É bastante resistente, pois é feita de vidro reforçado."
-  },
-  "Glass_pillars": {
-    "localized_name": "Pilar de Vidro",
-    "description": "Pilar para sustentar a construção. É bastante resistente, pois é feito de vidro reforçado."
   },
   "Glass_roof": {
     "localized_name": "Telhado de Vidro",
@@ -443,6 +443,10 @@
     "localized_name": "Triturador de Gelo",
     "description": "Instalações para triturar Minério Metálico e convertê-lo em outros materiais. É preciso ter um Pal com aptidão para [Refrigeração] e alimentação de energia elétrica a fim de usá-las, mas permitem trabalhar com mais eficiência."
   },
+  "Iron_Fence": {
+    "localized_name": "-",
+    "description": null
+  },
   "Irori": {
     "localized_name": "Lareira de chão",
     "description": "Lareira de chão para decoração. Use isto para criar construções em estilo japonês."
@@ -490,6 +494,10 @@
   "JapaneseStyle_DoorWall_03": {
     "localized_name": "Parede com Porta Japonesa C",
     "description": "Porta corrediça de papel fosco erguida sobre a fundação para servir de entrada. Permite criar construções exuberantes em estilo japonês."
+  },
+  "JapaneseStyle_Fence": {
+    "localized_name": "-",
+    "description": null
   },
   "JapaneseStyle_Pillar": {
     "localized_name": "Pilar Japonês",
@@ -659,10 +667,6 @@
     "localized_name": "Fundação de Metal",
     "description": "Fundação para erigir muros ou instalações. É bastante resistente, pois é feita de metal."
   },
-  "Metal_pillars": {
-    "localized_name": "Pilar de Metal",
-    "description": "Pilar para sustentar a construção. É bastante resistente pois é feito de metal."
-  },
   "Metal_roof": {
     "localized_name": "Telhado de Metal",
     "description": "Telhado erguido sobre o muro para oferecer proteção contra vento e chuva. É bastante resistente, pois é feito de metal."
@@ -803,6 +807,10 @@
     "localized_name": "pt-BR_Text",
     "description": "pt-BR_Text"
   },
+  "SF_Fence": {
+    "localized_name": "-",
+    "description": null
+  },
   "SanityDecrease1": {
     "localized_name": "Emissor de Ondas Alfa",
     "description": "Dispositivo para emitir ondas alfa e fazer com que os Pal relaxem. Torna mais difícil diminuir a SAN de Pals na base. Ter mais de um deste dispositivo não surte nenhum efeito adicional."
@@ -935,6 +943,10 @@
     "localized_name": "Águas Termais de Luxo",
     "description": "Instalações aonde os Pals cansados vão para relaxar. O ambiente mais aconchegante restaura ainda mais a SAN."
   },
+  "Spa3": {
+    "localized_name": "Águas Termais",
+    "description": "Instalações aonde os Pals cansados vão para relaxar. Cura o cansaço acumulado no trabalho e restaura a SAN."
+  },
   "SphereFactory_Black_01": {
     "localized_name": "Oficina de Esferas",
     "description": "Bancada de esferas para capturar Pals. Como o local de trabalho é pequeno, a produção de esferas não é muito rápida. Requer Pals capazes de realizar trabalho manual."
@@ -963,6 +975,10 @@
     "localized_name": "Porta de Pedra",
     "description": "Porta erguida sobre a fundação para servir de entrada. É um tanto resistente, pois é feita de pedra."
   },
+  "Stone_Fence": {
+    "localized_name": "-",
+    "description": null
+  },
   "Stone_Gate": {
     "localized_name": "Portão de Pedra",
     "description": "Portão que permite a passagem de Pals maiores. É um tanto resistente, pois é feito de pedra."
@@ -982,10 +998,6 @@
   "Stone_foundation": {
     "localized_name": "Fundação de Pedra",
     "description": "Fundação para erigir muros ou instalações. É um tanto resistente, pois é feita de pedra."
-  },
-  "Stone_pillar": {
-    "localized_name": "Pilar de Pedra",
-    "description": "Pilar para sustentar a construção. É um tanto resistente pois é feito de pedra."
   },
   "Stone_roof": {
     "localized_name": "Telhado de Pedra",
@@ -1211,6 +1223,10 @@
     "localized_name": "-",
     "description": null
   },
+  "Wood_Fence": {
+    "localized_name": "-",
+    "description": null
+  },
   "Wood_Gate": {
     "localized_name": "Portão de Madeira",
     "description": "Portão que permite a passagem de Pals maiores. É frágil por ser feito de madeira."
@@ -1242,10 +1258,6 @@
   "Wooden_ladder": {
     "localized_name": "Escada",
     "description": "Escada para subir em lugares um pouco altos."
-  },
-  "Wooden_pillar": {
-    "localized_name": "Pilar de Madeira",
-    "description": "Pilar para sustentar a construção. É frágil por ser feito de madeira."
   },
   "Wooden_roof": {
     "localized_name": "Telhado de Madeira",

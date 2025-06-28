@@ -268,7 +268,7 @@
     "description": "Dispara innumerables espadas de viento que vuelan directas hacia el enemigo."
   },
   "EPalWazaID::Railbolt": {
-    "localized_name": "Riel eléctrico",
+    "localized_name": "Railbolt",
     "description": "Se carga de energía eléctrica hasta el límite y lanza montones de potentes rayos contra el rival."
   },
   "EPalWazaID::RangeThunder": {
