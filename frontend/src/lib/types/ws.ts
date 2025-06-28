@@ -1,4 +1,4 @@
-import type { Message, MessageType } from '../../../../shared/types';
+import type { Message } from '../../../../shared/types';
 
 import type { Pal, Player } from './game';
 

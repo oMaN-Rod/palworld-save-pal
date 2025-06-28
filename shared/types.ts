@@ -1,67 +1,254 @@
-// This file is auto-generated from shared/models.py using pydantic2ts or a similar tool.
-// Do not edit directly. Regenerate after changing Python models.
+/* tslint:disable */
+/* eslint-disable */
+/**
+/* This file was automatically generated from pydantic models by running pydantic2ts.
+/* Do not modify it by hand - just update the pydantic models and then re-run the script
+*/
 
-export enum MessageType {
-	ADD_PAL = 'add_pal',
-	ADD_DPS_PAL = 'add_dps_pal',
-	CLONE_PAL = 'clone_pal',
-	CLONE_DPS_PAL = 'clone_dps_pal',
-	DELETE_PALS = 'delete_pals',
-	DELETE_DPS_PALS = 'delete_dps_pals',
-	HEAL_PALS = 'heal_pals',
-	HEAL_ALL_PALS = 'heal_all_pals',
-	DOWNLOAD_SAVE_FILE = 'download_save_file',
-	ERROR = 'error',
-	WARNING = 'warning',
-	GET_GUILDS = 'get_guilds',
-	GET_PLAYERS = 'get_players',
-	GET_PAL_DETAILS = 'get_pal_details',
-	LOAD_ZIP_FILE = 'load_zip_file',
-	PROGRESS_MESSAGE = 'progress_message',
-	SYNC_APP_STATE = 'sync_app_state',
-	UPDATE_SAVE_FILE = 'update_save_file',
-	GET_PRESETS = 'get_presets',
-	ADD_PRESET = 'add_preset',
-	UPDATE_PRESET = 'update_preset',
-	DELETE_PRESET = 'delete_preset',
-	GET_ACTIVE_SKILLS = 'get_active_skills',
-	GET_PASSIVE_SKILLS = 'get_passive_skills',
-	GET_TECHNOLOGIES = 'get_technologies',
-	GET_ELEMENTS = 'get_elements',
-	GET_ITEMS = 'get_items',
-	GET_PALS = 'get_pals',
-	SET_TECHNOLOGY_DATA = 'set_technology_data',
-	OPEN_IN_BROWSER = 'open_in_browser',
-	GET_EXP_DATA = 'get_exp_data',
-	GET_VERSION = 'get_version',
-	SELECT_SAVE = 'select_save',
-	LOADED_SAVE_FILES = 'loaded_save_files',
-	SAVE_MODDED_SAVE = 'save_modded_save',
-	GET_SETTINGS = 'get_settings',
-	UPDATE_SETTINGS = 'update_settings',
-	GET_UI_COMMON = 'get_ui_common',
-	NO_FILE_SELECTED = 'no_file_selected',
-	SELECT_GAMEPASS_SAVE = 'select_gamepass_save',
-	GET_SAVE_TYPE = 'get_save_type',
-	GET_WORK_SUITABILITY = 'get_work_suitability',
-	GET_BUILDINGS = 'get_buildings',
-	GET_RAW_DATA = 'get_raw_data',
-	GET_MAP_OBJECTS = 'get_map_objects',
-	DELETE_GUILD = 'delete_guild',
-	DELETE_PLAYER = 'delete_player',
-	NUKE_PRESETS = 'nuke_presets',
-	GET_LAB_RESEARCH = 'get_lab_research',
-	UPDATE_LAB_RESEARCH = 'update_lab_research'
+export type PalGender = "Male" | "Female";
+export type ElementType = "Fire" | "Water" | "Ground" | "Ice" | "Neutral" | "Dark" | "Grass" | "Dragon" | "Electric";
+export type EntryState = "None" | "Modified" | "New" | "Deleted";
+export type CharacterContainerType = "PalBox" | "Party" | "Base";
+export type SaveFileType = "gamepass" | "steam";
+
+export interface Base {
+  id: string;
+  name?: string | null;
+  pals: {
+    [k: string]: Pal;
+  };
+  container_id: string;
+  pal_container: CharacterContainer;
+  slot_count: number;
+  storage_containers: {
+    [k: string]: ItemContainer;
+  };
+  state: EntryState;
+  location: WorldMapPoint;
 }
-
+export interface Pal {
+  name: string;
+  instance_id: string;
+  owner_uid: string;
+  character_id: string;
+  character_key: string;
+  is_lucky: boolean;
+  is_boss: boolean;
+  is_predator: boolean;
+  gender: PalGender;
+  rank_hp: number;
+  rank_attack: number;
+  rank_defense: number;
+  rank_craftspeed: number;
+  talent_hp: number;
+  talent_shot: number;
+  talent_defense: number;
+  rank: number;
+  level: number;
+  nickname?: string | null;
+  is_tower: boolean;
+  stomach: number;
+  storage_id?: string | null;
+  storage_slot: number;
+  learned_skills: string[];
+  active_skills: string[];
+  passive_skills: string[];
+  work_suitability: {
+    [k: string]: number;
+  };
+  hp: number;
+  max_hp: number;
+  elements: ElementType[];
+  state: EntryState;
+  sanity: number;
+  exp: number;
+  is_sick: boolean;
+}
+export interface CharacterContainer {
+  id: string;
+  player_uid: string;
+  type: CharacterContainerType;
+  size?: number | null;
+  slots?: CharacterContainerSlot[] | null;
+}
+export interface CharacterContainerSlot {
+  slot_index: number;
+  pal_id?: string | null;
+}
+export interface ItemContainer {
+  id: string;
+  type: string;
+  slots: ItemContainerSlot[];
+  key: string;
+  slot_num: number;
+  state?: EntryState | null;
+}
+export interface ItemContainerSlot {
+  slot_index: number;
+  static_id: string;
+  count: number;
+  dynamic_item?: DynamicItem | null;
+}
+export interface DynamicItem {
+  local_id: string;
+  durability: number;
+  remaining_bullets?: number | null;
+  type: string;
+  character_id?: string | null;
+  character_key?: string | null;
+  gender: string;
+  talent_hp: number;
+  talent_shot: number;
+  talent_defense: number;
+  learned_skills: string[];
+  active_skills: string[];
+  passive_skills: string[];
+  modified: boolean;
+}
+export interface WorldMapPoint {
+  x: number;
+  y: number;
+  z: number;
+}
+export interface BaseDTO {
+  id: string;
+  storage_containers: {
+    [k: string]: ItemContainer;
+  };
+}
 export interface BaseMessage {
-	type: MessageType;
-	data?: any;
+  type: string;
+  data?: {
+    [k: string]: unknown;
+  };
 }
-
-// Optionally, keep this if you need a more generic message type
-export interface Message extends BaseMessage {}
-
-// Add more DTOs here as needed, or ensure they are generated from shared/models.py
-
-// NOTE: This file is auto-generated. Run the codegen script after changing shared/models.py.
+export interface EggConfig {
+  character_id: string;
+  gender: PalGender;
+  talent_hp: number;
+  talent_shot: number;
+  talent_defense: number;
+  learned_skills: string[];
+  active_skills: string[];
+  passive_skills: string[];
+}
+export interface ExStatusPointList {
+  max_hp: number;
+  max_sp: number;
+  attack: number;
+  weight: number;
+  work_speed: number;
+}
+export interface GamePassContainer {
+  path: string;
+  guid: string;
+  num: number;
+  name: string;
+}
+export interface GamepassSave {
+  save_id: string;
+  world_name: string;
+  player_count: number;
+  containers: GamePassContainer[];
+}
+export interface GetWorkSuitabilityMessage {
+  type?: string;
+  data?: {
+    [k: string]: unknown;
+  };
+}
+export interface Guild {
+  admin_player_uid: string;
+  bases: {
+    [k: string]: Base;
+  };
+  id: string;
+  name: string;
+  players: string[];
+  container_id?: string | null;
+  guild_chest?: ItemContainer | null;
+  lab_research_data?: GuildLabResearchInfo[] | null;
+  state: EntryState;
+}
+export interface GuildLabResearchInfo {
+  research_id: string;
+  work_amount: number;
+}
+export interface GuildDTO {
+  name?: string | null;
+  base?: BaseDTO | null;
+  guild_chest?: ItemContainer | null;
+  lab_research?: GuildLabResearchInfo[] | null;
+}
+export interface MapObject {
+  x: number;
+  y: number;
+  z: number;
+  type: string;
+  localized_name: string;
+  pal: string;
+}
+export interface Message {
+  type: string;
+  data?: {
+    [k: string]: unknown;
+  };
+}
+export interface Player {
+  uid: string;
+  nickname: string;
+  level: number;
+  hp: number;
+  pals?: {
+    [k: string]: Pal;
+  } | null;
+  dps?: {
+    [k: string]: Pal;
+  } | null;
+  pal_box_id: string;
+  pal_box: CharacterContainer;
+  otomo_container_id: string;
+  party: CharacterContainer;
+  common_container: ItemContainer;
+  essential_container: ItemContainer;
+  weapon_load_out_container: ItemContainer;
+  player_equipment_armor_container: ItemContainer;
+  food_equip_container: ItemContainer;
+  state: EntryState;
+  exp: number;
+  stomach: number;
+  sanity: number;
+  status_point_list: StatusPointList;
+  ex_status_point_list: ExStatusPointList;
+  guild_id: string;
+  technologies: string[];
+  technology_points: number;
+  boss_technology_points: number;
+  location: WorldMapPoint;
+  last_online_time: string;
+}
+export interface StatusPointList {
+  max_hp: number;
+  max_sp: number;
+  attack: number;
+  weight: number;
+  capture_rate: number;
+  work_speed: number;
+}
+export interface SaveFile {
+  name: string;
+  type: SaveFileType;
+  world_name?: string | null;
+  size?: number | null;
+}
+export interface SettingsDTO {
+  language: string;
+  clone_prefix: string;
+  new_pal_prefix: string;
+  debug_mode: boolean;
+  cheat_mode: boolean;
+}
+export interface UpdateSettingsMessage {
+  type?: string;
+  data: SettingsDTO;
+}

@@ -249,7 +249,7 @@
 
 			{#each Object.entries(technologiesOrder) as [levelCap, levelData]}
 				{@const techIDs = levelData.regular}
-				{@const emptySlots = 7 - techIDs.length}
+				{@const emptySlots = Math.max(0, 7 - (techIDs?.length ?? 0))}
 				{@const ancientTechID = levelData.ancient}
 				<div class="mb-12 grid grid-cols-[auto_1fr] gap-4">
 					<div class="mb-4 flex items-center px-10">

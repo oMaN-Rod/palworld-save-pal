@@ -50,6 +50,10 @@ class SocketState {
 	}
 
 	async send(messageData: string) {
+		if (!this.#websocket) {
+			console.error('WebSocket is not initialized.');
+			return;
+		}
 		while (this.#websocket.readyState !== this.#websocket.OPEN) {
 			await new Promise((resolve) => setTimeout(resolve, 250));
 		}

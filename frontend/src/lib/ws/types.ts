@@ -1,5 +1,5 @@
 import type { goto } from '$app/navigation';
-import type { Message, MessageType } from '../../../../shared/types';
+import type { Message } from '../../../../shared/types';
 
 export interface WSHandlerContext {
 	goto: typeof goto;
@@ -7,7 +7,7 @@ export interface WSHandlerContext {
 }
 
 export interface WSMessageHandler {
-	type: MessageType;
+	type: string;
 	handle: (data: any, context: WSHandlerContext) => Promise<void>;
 }
 
