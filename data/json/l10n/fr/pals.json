@@ -19,6 +19,58 @@
     "localized_name": "Anubis",
     "description": "Son apparence faisait autrefois de lui un symbole de noblesse. Il est ainsi devenu un repère pour ceux qui méprisaient richesse et autorité. Puis un jour, Anubis est devenu symbole de mort."
   },
+  "Arena_DarkTrader": {
+    "localized_name": "Contrebandier",
+    "description": null
+  },
+  "Arena_Female_Presenter": {
+    "localized_name": "Dresseur amical",
+    "description": null
+  },
+  "Arena_Female_Soldier03": {
+    "localized_name": "Dresseuse aguerrie",
+    "description": null
+  },
+  "Arena_FireCult_FlameThrower": {
+    "localized_name": "Confrérie des Flammes éternelles - Martyre",
+    "description": null
+  },
+  "Arena_Hunter_Fat_GatlingGun": {
+    "localized_name": "Braconniers - Broyeur",
+    "description": null
+  },
+  "Arena_Male_DarkTrader02": {
+    "localized_name": "Marchand de médailles",
+    "description": null
+  },
+  "Arena_Male_Soldier02_Invader": {
+    "localized_name": "Dresseur bouillonnant",
+    "description": null
+  },
+  "Arena_Ninja": {
+    "localized_name": "Société des fleurs lunaires - Genin",
+    "description": null
+  },
+  "Arena_NinjaElite": {
+    "localized_name": "Société des fleurs lunaires - Jonin",
+    "description": null
+  },
+  "Arena_Scientist_LaserRifle": {
+    "localized_name": "Unité de recherche sur les gènes - Équipe d'exécution",
+    "description": null
+  },
+  "Arena_Soldier": {
+    "localized_name": "Mercenaire solide",
+    "description": null
+  },
+  "Arena_Viking": {
+    "localized_name": "Habitant du paradis déchu",
+    "description": null
+  },
+  "Arena_VikingElite": {
+    "localized_name": "Habitant du paradis déchu (élite)",
+    "description": null
+  },
   "BOSS_Believer_CrossBow": {
     "localized_name": "Recherché : Ego",
     "description": null
@@ -179,11 +231,19 @@
     "localized_name": "Ligue pour la Protection des Pals - Adhérent",
     "description": null
   },
+  "Believer_Bat_Camp02": {
+    "localized_name": "Ligue pour la Protection des Pals - Adhérent",
+    "description": null
+  },
   "Believer_Bat_Invader": {
     "localized_name": "Ligue pour la Protection des Pals - Adhérent",
     "description": null
   },
   "Believer_CrossBow": {
+    "localized_name": "Ligue pour la Protection des Pals - Adhérent",
+    "description": null
+  },
+  "Believer_CrossBow_Camp02": {
     "localized_name": "Ligue pour la Protection des Pals - Adhérent",
     "description": null
   },
@@ -203,13 +263,21 @@
     "localized_name": "Ligue pour la Protection des Pals - Juge",
     "description": null
   },
+  "Believer_Fat_Prisoner": {
+    "localized_name": "Ligue pour la Protection des Pals - Juge",
+    "description": null
+  },
+  "Believer_Prisoner": {
+    "localized_name": "Ligue pour la Protection des Pals - Adhérent",
+    "description": null
+  },
   "BerryGoat": {
     "localized_name": "Caprity",
     "description": "Le buisson sur son dos porte des baies lorsqu'il n'est pas affamé. Si le partenaire qui l'intéresse accepte de les manger, ils formeront un couple."
   },
   "BerryGoat_Dark": {
     "localized_name": "Caprity Noct",
-    "description": "Le goût des baies qui poussent sur son dos change en fonction de son état émotionnel. Plus il grandit dans un environnement rude, plus ses baies deviennent sucrées ; la plupart des Caprity Noct élevés en captivité ne développent jamais ces baies et ne connaissent pas l’amour."
+    "description": "Le goût des baies qui poussent sur son dos change en fonction de son état émotionnel. Plus il grandit dans un environnement rude, plus ses baies deviennent sucrées ; c’est pourquoi la plupart des Caprity Noct élevés en captivité ne développent jamais ces baies et ne connaissent donc jamais l’amour."
   },
   "BirdDragon": {
     "localized_name": "Vanwyrm",
@@ -247,9 +315,17 @@
     "localized_name": "Azurobe",
     "description": "Son ruban blanc noircit au contact d'une eau impure. Sa faculté à identifier les toxines a ainsi longtemps mené à son braconnage, le poussant à entretenir une certaine rancœur envers les humains."
   },
+  "BlueDragon_Ice": {
+    "localized_name": "BlueDragon_Ice",
+    "description": "Son ruban blanc absorbe sans fin la chaleur autour de lui… et pourtant, il reste froid, immuable. Cette propriété anormale a conduit jadis à sa traque. Depuis, il garde une rancune glaciale envers les humains."
+  },
   "BluePlatypus": {
     "localized_name": "Fuack",
     "description": "Peut créer des vagues à la demande grâce à l'eau qu'il produit. Il utilise son propre corps comme planche de surf pour aller plus vite, mais les collisions fatales sont monnaie courante."
+  },
+  "BluePlatypus_Fire": {
+    "localized_name": "BluePlatypus_Fire",
+    "description": "Son ventre à friction élevée lui permet de faire du body-surfing… au point de prendre feu. Il finit régulièrement en torche vivante, emporté par son propre élan."
   },
   "BlueThunderHorse": {
     "localized_name": "Azurmane",
@@ -274,6 +350,10 @@
   "CaptainPenguin": {
     "localized_name": "Penking",
     "description": "Cette espèce n'a absolument rien à voir avec Pengullet. Pourtant, il endure lorsqu'il est choyé contre son gré."
+  },
+  "CaptainPenguin_Black": {
+    "localized_name": "CaptainPenguin_Black",
+    "description": "Pour mieux chasser sous l’eau, il a acquis le pouvoir de l’électricité, ce qui a changé sa couleur. Depuis, les Pengullet le tiennent à distance. Mais allez savoir pourquoi… il s’est trouvé un nouveau disciple : Penguin_Electric."
   },
   "CaravanLeader01": {
     "localized_name": "Capitaine de caravane",
@@ -495,6 +575,38 @@
     "localized_name": "Villageois",
     "description": null
   },
+  "Female_Farmer01_v01": {
+    "localized_name": "Habitant de l'île",
+    "description": null
+  },
+  "Female_Farmer01_v02": {
+    "localized_name": "Habitant de l'île",
+    "description": null
+  },
+  "Female_Farmer01_v03": {
+    "localized_name": "Habitant de l'île",
+    "description": null
+  },
+  "Female_Farmer01_v04": {
+    "localized_name": "Habitant de l'île",
+    "description": null
+  },
+  "Female_Nomad01_v01": {
+    "localized_name": "Habitant de l'île",
+    "description": null
+  },
+  "Female_Nomad01_v02": {
+    "localized_name": "Habitant de l'île",
+    "description": null
+  },
+  "Female_Nomad01_v03": {
+    "localized_name": "Habitant de l'île",
+    "description": null
+  },
+  "Female_Nomad01_v04": {
+    "localized_name": "Habitant de l'île",
+    "description": null
+  },
   "Female_People02": {
     "localized_name": "Villageois",
     "description": null
@@ -505,6 +617,22 @@
   },
   "Female_Presenter01": {
     "localized_name": "Dresseur amical",
+    "description": null
+  },
+  "Female_Ranger01_v01": {
+    "localized_name": "Habitant de l'île",
+    "description": null
+  },
+  "Female_Ranger01_v02": {
+    "localized_name": "Habitant de l'île",
+    "description": null
+  },
+  "Female_Ranger01_v03": {
+    "localized_name": "Habitant de l'île",
+    "description": null
+  },
+  "Female_Ranger01_v04": {
+    "localized_name": "Habitant de l'île",
     "description": null
   },
   "Female_Soldier01": {
@@ -547,11 +675,23 @@
     "localized_name": "Confrérie des Flammes éternelles - Martyre",
     "description": null
   },
+  "FireCult_FlameThrower_Relax": {
+    "localized_name": "Confrérie des Flammes éternelles - Martyre",
+    "description": null
+  },
+  "FireCult_Prisoner": {
+    "localized_name": "Confrérie des Flammes éternelles - Martyre",
+    "description": null
+  },
   "FireCult_Rifle": {
     "localized_name": "Confrérie des Flammes éternelles - Martyre",
     "description": null
   },
   "FireCult_Rifle_Invader": {
+    "localized_name": "Confrérie des Flammes éternelles - Martyre",
+    "description": null
+  },
+  "FireCult_Rifle_Relax": {
     "localized_name": "Confrérie des Flammes éternelles - Martyre",
     "description": null
   },
@@ -591,6 +731,10 @@
     "localized_name": "Celaray",
     "description": "Chevauche le vent pour voyager à sa guise. Son itinéraire prend fin lorsqu'il trouve un partenaire."
   },
+  "FlyingManta_Thunder": {
+    "localized_name": "FlyingManta_Thunder",
+    "description": "Ses motifs tape-à-l'œil l'aident à trouver un partenaire. Mais les nombreux accidents causés par ses chocs électriques ont fini par faire du motif rayé jaune et noir un symbole de danger sur l'île."
+  },
   "FoxMage": {
     "localized_name": "Wixen",
     "description": "Manipule le pouvoir de la lumière pour lancer de mystérieux sorts. Il mange tout et n'importe quoi, pourvu que ce soit bien cuit. N'apprécie pas la compagnie de Katress."
@@ -618,6 +762,10 @@
   "GYM_ElecPanda_2": {
     "localized_name": "Zoe & Grizzbolt",
     "description": "Arborant un sourire franc et un physique puissant, il se montre docile envers ceux qu'il considère comme ses amis. Mais il change radicalement de comportement en possession d'un minigun."
+  },
+  "GYM_ElecPanda_Otomo": {
+    "localized_name": "Zoe & Grizzbolt",
+    "description": null
   },
   "GYM_Horus": {
     "localized_name": "Marcus & Faleris",
@@ -670,6 +818,14 @@
   "Garm": {
     "localized_name": "Direhowl",
     "description": "Le lien du Direhowl avec les humains n'existe plus depuis longtemps, mais ses techniques de chasse semblent puiser leurs racines dans celle qu'il pratiquait autrefois avec ses maîtres."
+  },
+  "GhostAnglerfish": {
+    "localized_name": "GhostAnglerfish",
+    "description": "Un leurre lumineux qui perce les ténèbres. Les Pals égarés, attirés par sa lueur, n’ont plus aucune chance de lui échapper… car GhostAnglerFish les guidera sans relâche, jusqu’à ce qu’ils retrouvent enfin le chemin de leur foyer."
+  },
+  "GhostAnglerfish_Fire": {
+    "localized_name": "GhostAnglerfish_Fire",
+    "description": "Son leurre incandescent ne sert pas qu’à attirer les proies, mais aussi à cuire de savoureux mets. Les Pals, attirés par l’odeur alléchante, ne peuvent plus s’échapper une fois repérés par GhostAnglerfish_Fire… car ils seront chaleureusement invités à partager un bon repas."
   },
   "GhostBeast": {
     "localized_name": "Maraith",
@@ -799,6 +955,10 @@
     "localized_name": "Braconniers - Nouvelle recrue",
     "description": null
   },
+  "Hunter_BowGun": {
+    "localized_name": "Braconniers - Arbalétrier",
+    "description": null
+  },
   "Hunter_BowGun_Oilrig": {
     "localized_name": "Braconniers - Arbalétrier",
     "description": null
@@ -824,6 +984,10 @@
     "description": null
   },
   "Hunter_Fat_GatlingGun_Tower": {
+    "localized_name": "Braconniers - Broyeur",
+    "description": null
+  },
+  "Hunter_Fat_Prisoner": {
     "localized_name": "Braconniers - Broyeur",
     "description": null
   },
@@ -891,8 +1055,16 @@
     "localized_name": "Braconniers - Nouvelle recrue",
     "description": null
   },
+  "Hunter_Katana": {
+    "localized_name": "Braconniers - Épéiste",
+    "description": null
+  },
   "Hunter_Katana_Oilrig": {
     "localized_name": "Braconniers - Épéiste",
+    "description": null
+  },
+  "Hunter_LaserRifle": {
+    "localized_name": "Braconniers - Technophile",
     "description": null
   },
   "Hunter_LaserRifle_Oilrig": {
@@ -909,6 +1081,10 @@
   },
   "Hunter_MissileLauncher_Oilrig": {
     "localized_name": "Braconniers - Intercepteur",
+    "description": null
+  },
+  "Hunter_Prisoner": {
+    "localized_name": "Braconniers - Nouvelle recrue",
     "description": null
   },
   "Hunter_Rifle": {
@@ -975,6 +1151,10 @@
     "localized_name": "Braconniers - Chasseur",
     "description": null
   },
+  "IceCrocodile": {
+    "localized_name": "IceCrocodile",
+    "description": "Sa bouche est un véritable réfrigérateur naturel. Lorsqu’elle se referme, l’intérieur devient si frais qu’il empêche la nourriture de pourrir, grâce à une salive aux propriétés conservatrices uniques. Elle pourrait servir de garde-manger pour humains… mais mieux vaut ne pas trop creuser la question côté hygiène."
+  },
   "IceDeer": {
     "localized_name": "Reindrix",
     "description": "Ses bois bleu transparent reflètent le zéro absolu. Quiconque les touche à mains nues verra son corps se figer instantanément avant que sa vie ne se brise en morceaux."
@@ -991,13 +1171,37 @@
     "localized_name": "Frostallion Noct",
     "description": "La divinité gardienne de Palpagos connue comme le Cri nocturne. Lorsque la calamité frappa la terre, il s'envola dans les cieux et contra la menace en plongeant l'île dans des ténèbres sans fin."
   },
+  "IceNarwhal": {
+    "localized_name": "IceNarwhal",
+    "description": "Les Pals le prennent pour un iceberg et viennent s'y reposer lorsqu'il dort. Sa nature posée fait qu'il les tolère même une fois réveillé, mais cela génère un certain stress en lui."
+  },
+  "IceNarwhal_Fire": {
+    "localized_name": "IceNarwhal_Fire",
+    "description": "Est devenu rouge pour ne plus être confondu avec un bloc de glace. Mais les Pals ne percevant pas la couleur rouge, ses efforts furent vains et son espace personnel continua d'être envahi."
+  },
+  "IceSeal": {
+    "localized_name": "IceSeal",
+    "description": "Le plus rapide à glisser sur la neige est aussi le plus respecté. Parfois, un excès d’élan envoie l’un d’eux bondir si haut… qu’il retombe du ciel. En période de rivalité pour devenir chef, les chutes se multiplient. Prévisions météo : ciel dégagé avec quelques chutes de IceSeal."
+  },
+  "IceWitch": {
+    "localized_name": "IceWitch",
+    "description": "La chaleur me fait fondre… mais j’adore les bains de soleil. L’eau brûlante me liquéfie… mais je raffole des sources chaudes. Si je devais choisir ma fin, ce serait par temps clair, dans un onsen à ciel ouvert."
+  },
   "Inspector": {
     "localized_name": "Marchand de Pals",
     "description": null
   },
+  "JellyfishFairy": {
+    "localized_name": "JellyfishFairy",
+    "description": "Ce Pal ressemble étrangement à JellyfishGhost. Très sociable, il arrive qu’il ait plusieurs rendez-vous en même temps. Dans ce cas, il demande à son ami JellyfishGhost de le remplacer. En échange ? Un petit rencard."
+  },
+  "JellyfishGhost": {
+    "localized_name": "JellyfishGhost",
+    "description": "Ce Pal ressemble comme deux gouttes d’eau à JellyfishFairy. Quand cette dernière est indisponible, il prend parfois sa place en douce. Son jeu d’acteur est si convaincant… que personne ne remarque jamais la supercherie."
+  },
   "JetDragon": {
     "localized_name": "Jetragon",
-    "description": "Surveille Palpagos d'en haut. Lorsque la calamité frappera à nouveau l'île, la terre s'ouvrira et le ciel s'embrasera. Il foudroiera alors le mal en un éclair de destruction totale."
+    "description": "Depuis les cieux, il veille sur l’île de Palpagos. Quand la calamité renaîtra, que la terre se fendra et que le ciel s’embrasera, Il est destiné à anéantir la calamité dans un éclair de destruction totale."
   },
   "Kelpie": {
     "localized_name": "Kelpsea",
@@ -1009,7 +1213,7 @@
   },
   "KendoFrog": {
     "localized_name": "Croajiro",
-    "description": "Quiconque commet une faute au sein du groupe sera contraint au suicide. Percer son sac vocal avec une branche l'enverra en orbite à tout jamais."
+    "description": "Quiconque commet une faute au sein du groupe sera sommé de se donner la mort. En perçant son sac vocal gonflé à l’extrême avec une branche, il est propulsé au-delà de l’atmosphère, vers l’au-delà."
   },
   "KendoFrog_Dark": {
     "localized_name": "-",
@@ -1051,6 +1255,10 @@
     "localized_name": "Dumud",
     "description": "Son temps de réaction chute lorsqu'il est trop détendu. Même découpé de la tête au pied, il ne réaliserait probablement sa propre mort que le lendemain matin."
   },
+  "LazyCatfish_Gold": {
+    "localized_name": "LazyCatfish_Gold",
+    "description": "Son corps possède une surface au pouvoir réfléchissant impressionnant. Et pourtant, sa vitesse de réaction est encore plus lente… que celle de Dumud !"
+  },
   "LazyDragon": {
     "localized_name": "Relaxaurus",
     "description": "Plutôt féroce en opposition à son apparence blasée. Il perçoit tout ce qui bouge comme une proie et ne reculera devant rien pour la dévorer."
@@ -1058,6 +1266,10 @@
   "LazyDragon_Electric": {
     "localized_name": "Relaxaurus Lux",
     "description": "Relaxaurus eut un éclair de génie. « L'heure du changement a sonné », pensa-t-il. C'est alors qu'un choc électrique vint parcourir tout son corps."
+  },
+  "LeafMomonga": {
+    "localized_name": "LeafMomonga",
+    "description": "Est convaincu que frapper un objet cassé peut suffire à le réparer. Heureusement, la force de LeafMomonga est parfaitement dosée pour les humains. Un simple coup peut même faire repartir un cœur arrêté… comme par miracle."
   },
   "LeafPrincess": {
     "localized_name": "Lullu",
@@ -1085,6 +1297,26 @@
   },
   "LizardMan_Oilrig": {
     "localized_name": "Leezpunk",
+    "description": null
+  },
+  "Male_Angler01_v01": {
+    "localized_name": "Habitant de l'île",
+    "description": null
+  },
+  "Male_Breeder01_v01": {
+    "localized_name": "Habitant de l'île",
+    "description": null
+  },
+  "Male_Breeder01_v02": {
+    "localized_name": "Habitant de l'île",
+    "description": null
+  },
+  "Male_Breeder01_v03": {
+    "localized_name": "Habitant de l'île",
+    "description": null
+  },
+  "Male_Breeder01_v04": {
+    "localized_name": "Habitant de l'île",
     "description": null
   },
   "Male_DarkTrader01": {
@@ -1120,6 +1352,22 @@
     "description": null
   },
   "Male_Police_old": {
+    "localized_name": "Habitant de l'île",
+    "description": null
+  },
+  "Male_Scholar01_v01": {
+    "localized_name": "Habitant de l'île",
+    "description": null
+  },
+  "Male_Scholar01_v02": {
+    "localized_name": "Habitant de l'île",
+    "description": null
+  },
+  "Male_Scholar01_v03": {
+    "localized_name": "Habitant de l'île",
+    "description": null
+  },
+  "Male_Scholar01_v04": {
     "localized_name": "Habitant de l'île",
     "description": null
   },
@@ -1213,11 +1461,11 @@
   },
   "MushroomDragon": {
     "localized_name": "Shroomer",
-    "description": "Inhaler une trop grosse quantité de ses spores provoque un état de transe.Shroomer reste parfois immobile, non pas pour imiter un champignon, mais bien parce qu'il est rempli de ses propres spores."
+    "description": "Inhaler une trop grosse quantité de ses spores provoque un état de transe. Shroomer reste parfois immobile, non pas pour imiter un champignon, mais bien parce qu'il est rempli de ses propres spores."
   },
   "MushroomDragon_Dark": {
     "localized_name": "Shroomer Noct",
-    "description": "Une grosse quantité de ses spores peut facilement bloquer les rayons du soleil.Shroomer Noct reste parfois immobile, non pas pour imiter un champignon, mais bien parce que ses spores l'empêchent de voir."
+    "description": "Une grosse quantité de ses spores peut facilement bloquer les rayons du soleil. Shroomer Noct reste parfois immobile, non pas pour imiter un champignon, mais bien parce que ses spores l'empêchent de voir."
   },
   "Mutant": {
     "localized_name": "Lunaris",
@@ -1247,6 +1495,10 @@
     "localized_name": "Killamari",
     "description": "Il mord le cou de ses ennemis pour en aspirer le contenu. Les momies de Pals sont rares, mais la plupart sont des victimes de Killamari."
   },
+  "NegativeOctopus_Neutral": {
+    "localized_name": "NegativeOctopus_Neutral",
+    "description": "Mord ses ennemis au cou pour les vider de leur sang. Lorsque deux NegativeOctopus_Neutral se mordent entre eux, ils tiennent bon jusqu'à ce que l'un s'assèche, et seule la décomposition de ce dernier permet de les séparer."
+  },
   "NightBlueHorse": {
     "localized_name": "Starryon",
     "description": "Sa crinière majestueuse fait sa plus grande fierté. Des pointes fourchues peuvent ainsi suffire à compromettre une course. Ne doit en aucun cas s'approcher de Azurmane, car l'électricité statique serait un désastre pour son crin."
@@ -1270,6 +1522,30 @@
   "NinjaElite01_Tower": {
     "localized_name": "Société des fleurs lunaires - Jonin",
     "description": null
+  },
+  "NinjaElite_Bowgun": {
+    "localized_name": "Société des fleurs lunaires - Jonin",
+    "description": null
+  },
+  "NinjaElite_NoEquip": {
+    "localized_name": "Société des fleurs lunaires - Jonin",
+    "description": null
+  },
+  "Ninja_Bowgun": {
+    "localized_name": "Société des fleurs lunaires - Genin",
+    "description": null
+  },
+  "Ninja_NoEquip": {
+    "localized_name": "Société des fleurs lunaires - Genin",
+    "description": null
+  },
+  "Ninja_Prisoner": {
+    "localized_name": "Société des fleurs lunaires - Genin",
+    "description": null
+  },
+  "OctopusGirl": {
+    "localized_name": "OctopusGirl",
+    "description": "Avant de dormir à ses côtés, mieux vaut faire le point sur vos plans le lendemain. Les marques de ses ventouses ressemblent à s’y méprendre à des suçons. Se faire aspirer en pleine nuit pourrait entraîner de fâcheux malentendus..."
   },
   "PREDATOR_AmaterasuWolf": {
     "localized_name": "Kitsun",
@@ -1345,7 +1621,7 @@
   },
   "PREDATOR_MushroomDragon": {
     "localized_name": "Shroomer",
-    "description": "Inhaler une trop grosse quantité de ses spores provoque un état de transe.Shroomer reste parfois immobile, non pas pour imiter un champignon, mais bien parce qu'il est rempli de ses propres spores."
+    "description": "Inhaler une trop grosse quantité de ses spores provoque un état de transe. Shroomer reste parfois immobile, non pas pour imiter un champignon, mais bien parce qu'il est rempli de ses propres spores."
   },
   "PREDATOR_MysteryMask": {
     "localized_name": "Omascul",
@@ -1416,7 +1692,7 @@
     "description": null
   },
   "PalPassive_Doctor": {
-    "localized_name": "Dr. Brawn",
+    "localized_name": "Habitant de l'île",
     "description": null
   },
   "PalTrader": {
@@ -1426,6 +1702,10 @@
   "Penguin": {
     "localized_name": "Pengullet",
     "description": "Ses plumes ont totalement disparu, l'empêchant de voler. Cependant, un désir profond de voler, inscrit dans ses gènes, le pousse à essayer de nouveau, de toutes les manières possibles."
+  },
+  "Penguin_Electric": {
+    "localized_name": "Penguin_Electric",
+    "description": "Ses ailes se sont atrophiées et ne lui permettent plus de voler. Sa nostalgie du ciel s'est transformée en jalousie, et ses pouvoirs électriques lui permettent désormais d'abattre tout ce qui vole !"
   },
   "PinkCat": {
     "localized_name": "Cattiva",
@@ -1451,6 +1731,14 @@
     "localized_name": "Gumoss",
     "description": null
   },
+  "Plesiosaur": {
+    "localized_name": "Plesiosaur",
+    "description": "Dans son haleine, se cache une substance miraculeuse semblable à du pollen, capable de polliniser n'importe quelle plante. Pour un Pal végétal, c'est un compagnon plutôt complexe à gérer."
+  },
+  "Police_BowGun": {
+    "localized_name": "Milice populaire - Fusilier",
+    "description": null
+  },
   "Police_Handgun": {
     "localized_name": "Milice populaire - Garde",
     "description": null
@@ -1471,6 +1759,18 @@
     "localized_name": "Milice populaire - Membre d'élite",
     "description": null
   },
+  "Police_TreasureGuard_NarrowSite": {
+    "localized_name": "Milice populaire - Fusilier",
+    "description": null
+  },
+  "Police_Vigilance": {
+    "localized_name": "Milice populaire - Fusilier",
+    "description": null
+  },
+  "PoseidonOrca": {
+    "localized_name": "PoseidonOrca",
+    "description": "Une fois le grand cataclysme scellé, un puissant monstre descendit des cieux. Depuis, il n’apparaît que dans les mers proches, aux yeux des seuls dignes de l’affronter. Le rencontrer n’est jamais un hasard... C’est une destinée."
+  },
   "PurpleSpider": {
     "localized_name": "Tarantriss",
     "description": "Très, voire trop collant. D'autant plus si la proie se débat. On vous aura prévenus."
@@ -1481,6 +1781,30 @@
   },
   "QuestMan": {
     "localized_name": "fr_Text",
+    "description": null
+  },
+  "Quest_Farmer03_PinkCat": {
+    "localized_name": "Cattiva",
+    "description": null
+  },
+  "Quest_Farmer03_SheepBall": {
+    "localized_name": "Lamball",
+    "description": null
+  },
+  "Quest_Hunter_Fat_GatlingGun01": {
+    "localized_name": "Braconniers - Broyeur",
+    "description": null
+  },
+  "Quest_Hunter_FlameThrower": {
+    "localized_name": "Braconniers - Nettoyeur",
+    "description": null
+  },
+  "Quest_Hunter_Katana01": {
+    "localized_name": "Braconniers - Épéiste",
+    "description": null
+  },
+  "Quest_Hunter_RocketLauncher01": {
+    "localized_name": "Braconniers - Membre d'élite",
     "description": null
   },
   "RAID_DarkMechaDragon": {
@@ -1703,6 +2027,10 @@
     "localized_name": "Unité de recherche sur les gènes - Équipe d'exécution",
     "description": null
   },
+  "Scientist_Prisoner": {
+    "localized_name": "Unité de recherche sur les gènes - Équipe d'exécution",
+    "description": null
+  },
   "ScorpionMan": {
     "localized_name": "Prixter",
     "description": "Renferme pas moins de 5 000 types de poison. Si certains peuvent tuer sur le coup, la plupart n'ont quasiment pas d'effet."
@@ -1747,6 +2075,10 @@
     "localized_name": "Kikit",
     "description": "Le foot de Kikit était populaire autrefois. Les actions de la LPP l'ont fait interdire depuis, malgré le fait que cela les aidait à se débarrasser de leur corne."
   },
+  "SnowPeafowl": {
+    "localized_name": "SnowPeafowl",
+    "description": "Extrêmement sensible au temps, il se réveille toujours à la même heure chaque matin. On raconte que la division du jour en 24 segments sur l’île de Palpagos s’inspire de l’étalement de ses ailes. En effet, lorsque l’on regarde SnowPeafowl de face, les espaces entre ses ailes repliées forment 24 sections distinctes."
+  },
   "SnowTigerBeastman": {
     "localized_name": "Bastigor",
     "description": "La vue d'un objet rond lui donne envie de cogner tout ce qui bouge. Son plus grand défi au-delà du fait de vivre serait de terminer un bonhomme de neige."
@@ -1754,6 +2086,14 @@
   "SoldierBee": {
     "localized_name": "Beegarde",
     "description": "Un serviteur qui jure allégeance à Elizabee. Il éliminera tous ceux susceptibles de nuire à sa reine, quitte à y laisser sa vie."
+  },
+  "StuffedShark": {
+    "localized_name": "StuffedShark",
+    "description": "On dirait qu'il y a quelque chose qui se cache dans son costume, mais lorsque l'on y plonge la main, il n'y a rien. Pire encore, on peut y enfoncer la main de plus en plus profondément. Peut-être que l'univers tout entier se cache ici."
+  },
+  "StuffedShark_Fire": {
+    "localized_name": "StuffedShark_Fire",
+    "description": "On peut plonger la main dans sa bouche sans jamais toucher le fond. Un chercheur, persuadé qu’il s’agissait d’un espace interdimensionnel, a tenté d’y glisser tout son corps, pensant en faire un sac de couchage. Mais comme la créature s’est mise à avoir des haut-le-cœur… il a fallu se rendre à l’évidence : c’est bien un organe interne."
   },
   "Suzaku": {
     "localized_name": "Suzaku",
@@ -1767,6 +2107,10 @@
     "localized_name": "Woolipop",
     "description": "Son corps tout entier est 18 000 fois plus sucré que le sucre. Les Pals carnivores bernés par son odeur qui le mordent souffrent rapidement d'hyperglycémie et perdent connaissance."
   },
+  "TentacleTurtle_Ground": {
+    "localized_name": "TentacleTurtle_Ground",
+    "description": "A acquis une carapace à toute épreuve pour protéger sa peau très fine. Ses points sensibles étant concentrés sur ses pattes et sa carapace, il est possible de toucher son corps sans qu'il ne s'en rende compte."
+  },
   "ThunderBird": {
     "localized_name": "Beakon",
     "description": "Semble être étroitement lié à Ragnahawk sans que ce ne soit le cas. Attaque ses ennemis en piqué à l'aide de son bec pointu, telle la foudre s'abattant sur sa cible."
@@ -1778,6 +2122,10 @@
   "ThunderDragonMan": {
     "localized_name": "Orserk",
     "description": "Lance un choc électrique via ses écailles pour carboniser son adversaire. Les combats de Orserk prennent fin en un éclair."
+  },
+  "TropicalOstrich": {
+    "localized_name": "TropicalOstrich",
+    "description": "Grâce à sa danse unique, il perturbe le rythme de ses ennemis. Lors des luttes pour le territoire, celui qui se laisse emporter par le rythme de l'autre perd. La séduction, l'ennui, tout se résume à une danse ! Mais qu’en est-il de la danse destinée aux humains… quel sens lui donner ?"
   },
   "Umihebi": {
     "localized_name": "Jormuntide",
@@ -1801,6 +2149,10 @@
   },
   "Viking_Elite_Invader": {
     "localized_name": "Habitant du paradis déchu (élite)",
+    "description": null
+  },
+  "Viking_Prisoner": {
+    "localized_name": "Habitant du paradis déchu",
     "description": null
   },
   "Viking_Tower": {
@@ -1902,6 +2254,50 @@
   "WoolFox": {
     "localized_name": "Cremis",
     "description": "En comparaison de SheepBall, sa laine est plus fine et son tempérament plus adapté à la domestication. Toutefois, il a toujours été considéré comme un animal de compagnie, car sa frimousse l'emporte sur tout le reste."
+  },
+  "YakushimaBoss001": {
+    "localized_name": "YakushimaBoss001",
+    "description": "[Collaboration Terraria] Un monstre originaire d'un autre monde. Il semble pouvoir être apprivoisé ici."
+  },
+  "YakushimaBoss001_Small": {
+    "localized_name": "YakushimaBoss001_Small",
+    "description": "[Collaboration Terraria] Un monstre originaire d'un autre monde. Il semble pouvoir être apprivoisé ici."
+  },
+  "YakushimaMonster001": {
+    "localized_name": "YakushimaMonster001",
+    "description": "[Collaboration Terraria] Un monstre originaire d'un autre monde. Il semble pouvoir être apprivoisé ici."
+  },
+  "YakushimaMonster001_Blue": {
+    "localized_name": "YakushimaMonster001_Blue",
+    "description": "[Collaboration Terraria] Un monstre originaire d'un autre monde. Il semble pouvoir être apprivoisé ici."
+  },
+  "YakushimaMonster001_Pink": {
+    "localized_name": "YakushimaMonster001_Pink",
+    "description": "[Collaboration Terraria] Un monstre originaire d'un autre monde. Il semble pouvoir être apprivoisé ici."
+  },
+  "YakushimaMonster001_Purple": {
+    "localized_name": "YakushimaMonster001_Purple",
+    "description": "[Collaboration Terraria] Un monstre originaire d'un autre monde. Il semble pouvoir être apprivoisé ici."
+  },
+  "YakushimaMonster001_Rainbow": {
+    "localized_name": "YakushimaMonster001_Rainbow",
+    "description": "[Collaboration Terraria] Un monstre originaire d'un autre monde. Il semble pouvoir être apprivoisé ici."
+  },
+  "YakushimaMonster001_Red": {
+    "localized_name": "YakushimaMonster001_Red",
+    "description": "[Collaboration Terraria] Un monstre originaire d'un autre monde. Il semble pouvoir être apprivoisé ici."
+  },
+  "YakushimaMonster002": {
+    "localized_name": "YakushimaMonster002",
+    "description": "[Collaboration Terraria] Un monstre originaire d'un autre monde. Il semble pouvoir être apprivoisé ici."
+  },
+  "YakushimaMonster003": {
+    "localized_name": "YakushimaMonster003",
+    "description": "[Collaboration Terraria] Un monstre originaire d'un autre monde. Il semble pouvoir être apprivoisé ici."
+  },
+  "YakushimaMonster003_Purple": {
+    "localized_name": "YakushimaMonster003_Purple",
+    "description": "[Collaboration Terraria] Un monstre originaire d'un autre monde. Il semble pouvoir être apprivoisé ici."
   },
   "Yamishima_guide1": {
     "localized_name": "Habitant de l'île",

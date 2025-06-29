@@ -19,6 +19,58 @@
     "localized_name": "阿努比斯",
     "description": "牠的外表曾讓牠被視為高貴的象徵。 而在厭惡財富與權力的人眼中，牠就成了明確的標靶。 因此不知不覺間阿努比斯就成為了死亡的象徵。"
   },
+  "Arena_DarkTrader": {
+    "localized_name": "黑市商人",
+    "description": null
+  },
+  "Arena_Female_Presenter": {
+    "localized_name": "親切的帕魯訓練家",
+    "description": null
+  },
+  "Arena_Female_Soldier03": {
+    "localized_name": "老手帕魯訓練家",
+    "description": null
+  },
+  "Arena_FireCult_FlameThrower": {
+    "localized_name": "永炎同心會 殉教者",
+    "description": null
+  },
+  "Arena_Hunter_Fat_GatlingGun": {
+    "localized_name": "盜獵集團 粉碎者",
+    "description": null
+  },
+  "Arena_Male_DarkTrader02": {
+    "localized_name": "獎章商人",
+    "description": null
+  },
+  "Arena_Male_Soldier02_Invader": {
+    "localized_name": "充滿鬥志的帕魯訓練家",
+    "description": null
+  },
+  "Arena_Ninja": {
+    "localized_name": "月花眾 下忍",
+    "description": null
+  },
+  "Arena_NinjaElite": {
+    "localized_name": "月花眾 上忍",
+    "description": null
+  },
+  "Arena_Scientist_LaserRifle": {
+    "localized_name": "基因研究部隊 執行小隊",
+    "description": null
+  },
+  "Arena_Soldier": {
+    "localized_name": "強壯的傭兵",
+    "description": null
+  },
+  "Arena_Viking": {
+    "localized_name": "天墜之民",
+    "description": null
+  },
+  "Arena_VikingElite": {
+    "localized_name": "天墜之民 精英",
+    "description": null
+  },
   "BOSS_Believer_CrossBow": {
     "localized_name": "通緝犯 埃戈",
     "description": null
@@ -179,11 +231,19 @@
     "localized_name": "帕魯保護團體 支持者",
     "description": null
   },
+  "Believer_Bat_Camp02": {
+    "localized_name": "帕魯保護團體 支持者",
+    "description": null
+  },
   "Believer_Bat_Invader": {
     "localized_name": "帕魯保護團體 支持者",
     "description": null
   },
   "Believer_CrossBow": {
+    "localized_name": "帕魯保護團體 支持者",
+    "description": null
+  },
+  "Believer_CrossBow_Camp02": {
     "localized_name": "帕魯保護團體 支持者",
     "description": null
   },
@@ -201,6 +261,14 @@
   },
   "Believer_Fat_GatlingGun": {
     "localized_name": "帕魯保護團體 審判官",
+    "description": null
+  },
+  "Believer_Fat_Prisoner": {
+    "localized_name": "帕魯保護團體 審判官",
+    "description": null
+  },
+  "Believer_Prisoner": {
+    "localized_name": "帕魯保護團體 支持者",
     "description": null
   },
   "BerryGoat": {
@@ -247,9 +315,17 @@
     "localized_name": "碧海龍",
     "description": "若牠接觸到不純淨的水，白色飄帶便會轉黑。 此性質有助於確認毒性，因此牠們過去曾遭濫捕， 至今仍對人類抱有戒心。"
   },
+  "BlueDragon_Ice": {
+    "localized_name": "BlueDragon_Ice",
+    "description": "牠的白色飄帶會一直吸收周圍的熱。 不可思議的是，飄帶的溫度不會有絲毫變化。 因為牠的這種性質，因此牠們過去曾遭濫捕， 至今仍對人類抱有戒心。"
+  },
   "BluePlatypus": {
     "localized_name": "衝浪鴨",
     "description": "牠產生的水可在任何地方掀起波浪。 匆忙時會以趴板衝浪的形式移動， 但常會煞不住衝勁而撞牆死亡。"
+  },
+  "BluePlatypus_Fire": {
+    "localized_name": "BluePlatypus_Fire",
+    "description": "腹部的摩擦係數很高， 趴板衝浪時會產生火花。 但常會煞不住衝勁而變成一團火球。"
   },
   "BlueThunderHorse": {
     "localized_name": "馭雷馬",
@@ -274,6 +350,10 @@
   "CaptainPenguin": {
     "localized_name": "企丸王",
     "description": "其實牠與企丸丸是毫無關係的物種。 但因為什麽都不做就能獲得大家的追捧， 所以就努力擺出一副高傲的態度。"
+  },
+  "CaptainPenguin_Black": {
+    "localized_name": "CaptainPenguin_Black",
+    "description": "為了能在水中狩獵，得到了雷電的力量因而改變了體色。 雖然因此失去了企丸丸們的追隨。 可誰曾想， 現在反倒是有了叫做Penguin_Electric的小弟。"
   },
   "CaravanLeader01": {
     "localized_name": "旅行商隊隊長",
@@ -495,6 +575,38 @@
     "localized_name": "村民",
     "description": null
   },
+  "Female_Farmer01_v01": {
+    "localized_name": "島民",
+    "description": null
+  },
+  "Female_Farmer01_v02": {
+    "localized_name": "島民",
+    "description": null
+  },
+  "Female_Farmer01_v03": {
+    "localized_name": "島民",
+    "description": null
+  },
+  "Female_Farmer01_v04": {
+    "localized_name": "島民",
+    "description": null
+  },
+  "Female_Nomad01_v01": {
+    "localized_name": "島民",
+    "description": null
+  },
+  "Female_Nomad01_v02": {
+    "localized_name": "島民",
+    "description": null
+  },
+  "Female_Nomad01_v03": {
+    "localized_name": "島民",
+    "description": null
+  },
+  "Female_Nomad01_v04": {
+    "localized_name": "島民",
+    "description": null
+  },
   "Female_People02": {
     "localized_name": "村民",
     "description": null
@@ -505,6 +617,22 @@
   },
   "Female_Presenter01": {
     "localized_name": "親切的帕魯訓練家",
+    "description": null
+  },
+  "Female_Ranger01_v01": {
+    "localized_name": "島民",
+    "description": null
+  },
+  "Female_Ranger01_v02": {
+    "localized_name": "島民",
+    "description": null
+  },
+  "Female_Ranger01_v03": {
+    "localized_name": "島民",
+    "description": null
+  },
+  "Female_Ranger01_v04": {
+    "localized_name": "島民",
     "description": null
   },
   "Female_Soldier01": {
@@ -547,11 +675,23 @@
     "localized_name": "永炎同心會 殉教者",
     "description": null
   },
+  "FireCult_FlameThrower_Relax": {
+    "localized_name": "永炎同心會 殉教者",
+    "description": null
+  },
+  "FireCult_Prisoner": {
+    "localized_name": "永炎同心會 殉教者",
+    "description": null
+  },
   "FireCult_Rifle": {
     "localized_name": "永炎同心會 殉教者",
     "description": null
   },
   "FireCult_Rifle_Invader": {
+    "localized_name": "永炎同心會 殉教者",
+    "description": null
+  },
+  "FireCult_Rifle_Relax": {
     "localized_name": "永炎同心會 殉教者",
     "description": null
   },
@@ -591,6 +731,10 @@
     "localized_name": "魯米兒",
     "description": "牠會乘著風任其帶牠翺翔四方。 只要在旅途中找到命中之人， 就會結束自己的旅程。"
   },
+  "FlyingManta_Thunder": {
+    "localized_name": "FlyingManta_Thunder",
+    "description": "鮮豔的外表能幫助牠找到命中之人。 自古以來，就有因為FlyingManta_Thunder而觸電的事故。 現今的島上，黃黑相間的條紋被視為危險的顏色。"
+  },
   "FoxMage": {
     "localized_name": "焰巫狐",
     "description": "這種帕魯能操控陽之力量，施展奇妙的法術。 不論任何食物都喜歡吃全熟。 和闇巫貓的關係相當不好。"
@@ -618,6 +762,10 @@
   "GYM_ElecPanda_2": {
     "localized_name": "佐伊 & 暴電熊",
     "description": "這種帕魯笑容豪邁且體格健壯， 對自己認定為搭檔的人很溫順。但不知為何， 牠一拿到機關槍就會性情大變。"
+  },
+  "GYM_ElecPanda_Otomo": {
+    "localized_name": "佐伊 & 暴電熊",
+    "description": null
   },
   "GYM_Horus": {
     "localized_name": "馬庫斯 & 荷魯斯",
@@ -670,6 +818,14 @@
   "Garm": {
     "localized_name": "獵狼",
     "description": "獵狼與人類之間的關係早已淡化， 但過往與人類共同狩獵的記憶， 構成了牠們如今的狩獵體系。"
+  },
+  "GhostAnglerfish": {
+    "localized_name": "GhostAnglerfish",
+    "description": "牠會以散發光芒的擬餌照亮黑暗。 被這光亮吸引來的帕魯如果被GhostAnglerFish發現的話，那可是插翅難逃了。 牠會一直作為其嚮導，直到該帕魯平安返回自己的家。"
+  },
+  "GhostAnglerfish_Fire": {
+    "localized_name": "GhostAnglerfish_Fire",
+    "description": "猛烈燃燒的擬餌，在燒烤獵物時也能用。 被烤肉香氣吸引來的帕魯如果被GhostAnglerFish_Fire發現的話，那可是插翅難逃了。 牠會一直熱情款待，直到被吸引的帕魯肚子吃到撐。"
   },
   "GhostBeast": {
     "localized_name": "噬魂獸",
@@ -799,6 +955,10 @@
     "localized_name": "盜獵集團 菜鳥",
     "description": null
   },
+  "Hunter_BowGun": {
+    "localized_name": "盜獵團員 十字弓手",
+    "description": null
+  },
   "Hunter_BowGun_Oilrig": {
     "localized_name": "盜獵團員 十字弓手",
     "description": null
@@ -824,6 +984,10 @@
     "description": null
   },
   "Hunter_Fat_GatlingGun_Tower": {
+    "localized_name": "盜獵集團 粉碎者",
+    "description": null
+  },
+  "Hunter_Fat_Prisoner": {
     "localized_name": "盜獵集團 粉碎者",
     "description": null
   },
@@ -891,8 +1055,16 @@
     "localized_name": "盜獵集團 菜鳥",
     "description": null
   },
+  "Hunter_Katana": {
+    "localized_name": "盜獵團員 劍士",
+    "description": null
+  },
   "Hunter_Katana_Oilrig": {
     "localized_name": "盜獵團員 劍士",
+    "description": null
+  },
+  "Hunter_LaserRifle": {
+    "localized_name": "盜獵團員 高科技部隊",
     "description": null
   },
   "Hunter_LaserRifle_Oilrig": {
@@ -909,6 +1081,10 @@
   },
   "Hunter_MissileLauncher_Oilrig": {
     "localized_name": "盜獵集團 攔截者",
+    "description": null
+  },
+  "Hunter_Prisoner": {
+    "localized_name": "盜獵集團 菜鳥",
     "description": null
   },
   "Hunter_Rifle": {
@@ -975,6 +1151,10 @@
     "localized_name": "盜獵集團 獵人",
     "description": null
   },
+  "IceCrocodile": {
+    "localized_name": "IceCrocodile",
+    "description": "牠的口腔內部十分冰涼，只要閉上嘴巴就是移動冰箱。 其唾液中所含的特殊成份也有食物保鮮的作用。 雖然也不是不能作為人類的食物冷藏庫來使用， 只是關於衛生方面，還是閉嘴比較好。"
+  },
   "IceDeer": {
     "localized_name": "嚴冬鹿",
     "description": "牠那湛藍通透的角，散發的是絕對零度下的光輝。 要是用手去摸，全身就會瞬間結凍， 連同性命一起碎成滿地冰晶。"
@@ -991,9 +1171,33 @@
     "localized_name": "喚夜獸",
     "description": "帕洛斯群島之守護神，擁有呼喚黑夜之力。 其曾於災厄席捲大地之際騰空而起， 喚來無盡暗夜，試圖封印災厄。"
   },
+  "IceNarwhal": {
+    "localized_name": "IceNarwhal",
+    "description": "只要睡著就會有帕鲁誤以為牠是浮冰，並在牠的背上休息。 由於個性溫和，所以就算醒了也不會把牠們趕走。 但其實個人空間被侵犯，讓牠內心壓力很大。"
+  },
+  "IceNarwhal_Fire": {
+    "localized_name": "IceNarwhal_Fire",
+    "description": "為了不再被錯認成浮冰，硬生生將身體變成了紅色。 但是對於那些紅色盲的帕魯來說毫無意義， 努力只換來了空虛，到頭來個人空間還是繼續被侵犯。"
+  },
+  "IceSeal": {
+    "localized_name": "IceSeal",
+    "description": "族群內能在雪上滑行最快的個體，就是最了不起的個體。 有時會有因為衝太快飛躍起來的個體突然從天而降， 在爭奪首領地位的時期這種情況尤其常見。 晴時多雲，偶「豹」雨。"
+  },
+  "IceWitch": {
+    "localized_name": "IceWitch",
+    "description": "就算身體會在酷暑時融化，牠還是迷戀日光浴。 就算身體會在高溫時融化，牠依然迷戀泡溫泉。 反正最後都是一死，那麼不如融化在艷陽高照的露天溫泉裡。"
+  },
   "Inspector": {
     "localized_name": "帕魯商人",
     "description": null
+  },
+  "JellyfishFairy": {
+    "localized_name": "JellyfishFairy",
+    "description": "和JellyfishGhost樣貌非常接近的帕魯。 和朋友的出遊行程過多，導致行程喬不攏時， 就會拜託關係好的JellyfishGhost當替身代為赴約。 回禮是會和JellyfishGhost約一次會。"
+  },
+  "JellyfishGhost": {
+    "localized_name": "JellyfishGhost",
+    "description": "和JellyfishFairy樣貌非常接近的帕魯。 有時會充當替身 代替行程喬不攏的JellyfishFairy赴約。 由於演技過於逼真，誰都沒有注意到是替身。"
   },
   "JetDragon": {
     "localized_name": "空渦龍",
@@ -1013,7 +1217,7 @@
   },
   "KendoFrog_Dark": {
     "localized_name": "-",
-    "description": "拋棄榮譽的武道蛙聚集在一起，衍生出的分支族群。 牠們會不管用什麼卑劣手段都要將盯上的獵物置於死地。 若是在深夜時不幸遇上一群-， 魂歸天國的，恐怕會是自己。"
+    "description": "拋棄榮譽的武道蛙聚集在一起，衍生出的分支族群。 不論用上多麼卑鄙的手段也要狩獵掉盯上的獵物。 如果在午夜遇到了一群-， 那魂歸天國的就是這邊了。"
   },
   "KingAlpaca": {
     "localized_name": "君王美露帕",
@@ -1051,6 +1255,10 @@
     "localized_name": "趴趴鯰",
     "description": "這種帕魯過於放鬆時，所有反應都會變得極為遲緩。 即使身中28刀，大概也要到隔天早上 牠才會發現自己早該死去。"
   },
+  "LazyCatfish_Gold": {
+    "localized_name": "LazyCatfish_Gold",
+    "description": "身體表面有著驚人的反射率。 不僅如此，牠各處神經的反射速度比趴趴鯰還要慢！"
+  },
   "LazyDragon": {
     "localized_name": "佩克龍",
     "description": "牠的眼神總是空洞無神，但性格卻相當兇猛。 牠會把映入眼簾的一切都認定為獵物， 並不惜一切代價捕食。"
@@ -1058,6 +1266,10 @@
   "LazyDragon_Electric": {
     "localized_name": "派克龍",
     "description": "佩克龍突然有了個想法。 是時候改變自己了呢。 那個瞬間，靈感就像雷電貫穿了牠的全身！"
+  },
+  "LeafMomonga": {
+    "localized_name": "LeafMomonga",
+    "description": "LeafMomonga認為，壞掉的東西只要捶一捶就好了。 而牠的力道掌控，對人類來說堪稱完美。 只要被牠捶一捶，停止的心臟就能順利恢復跳動。"
   },
   "LeafPrincess": {
     "localized_name": "春彩娘",
@@ -1085,6 +1297,26 @@
   },
   "LizardMan_Oilrig": {
     "localized_name": "龐克蜥",
+    "description": null
+  },
+  "Male_Angler01_v01": {
+    "localized_name": "島民",
+    "description": null
+  },
+  "Male_Breeder01_v01": {
+    "localized_name": "島民",
+    "description": null
+  },
+  "Male_Breeder01_v02": {
+    "localized_name": "島民",
+    "description": null
+  },
+  "Male_Breeder01_v03": {
+    "localized_name": "島民",
+    "description": null
+  },
+  "Male_Breeder01_v04": {
+    "localized_name": "島民",
     "description": null
   },
   "Male_DarkTrader01": {
@@ -1120,6 +1352,22 @@
     "description": null
   },
   "Male_Police_old": {
+    "localized_name": "島民",
+    "description": null
+  },
+  "Male_Scholar01_v01": {
+    "localized_name": "島民",
+    "description": null
+  },
+  "Male_Scholar01_v02": {
+    "localized_name": "島民",
+    "description": null
+  },
+  "Male_Scholar01_v03": {
+    "localized_name": "島民",
+    "description": null
+  },
+  "Male_Scholar01_v04": {
     "localized_name": "島民",
     "description": null
   },
@@ -1247,6 +1495,10 @@
     "localized_name": "勾魂魷",
     "description": "牠會咬住敵人脖子，將裡面的東西吸光。 在極少數情況下會發現木乃伊化的帕魯， 而其中大多都是犧牲於勾魂魷的嘴下。"
   },
+  "NegativeOctopus_Neutral": {
+    "localized_name": "NegativeOctopus_Neutral",
+    "description": "牠會咬住敵人脖子，將所有血液吸光。 NegativeOctopus_Neutral同族之間互相咬住的話， 因為雙方都想要把對方吸乾， 在其中一方被榨乾之前，彼此將無法分開。"
+  },
   "NightBlueHorse": {
     "localized_name": "夜冥駒",
     "description": "牠最自豪的就是自己如流動般的鬃毛。 如果發現了毛髮分叉，就會害羞的無法集中精神奔跑。 由於靜電會導致炸毛，所以牠絕對不會想靠近馭雷馬。"
@@ -1270,6 +1522,30 @@
   "NinjaElite01_Tower": {
     "localized_name": "月花眾 上忍",
     "description": null
+  },
+  "NinjaElite_Bowgun": {
+    "localized_name": "月花眾 上忍",
+    "description": null
+  },
+  "NinjaElite_NoEquip": {
+    "localized_name": "月花眾 上忍",
+    "description": null
+  },
+  "Ninja_Bowgun": {
+    "localized_name": "月花眾 下忍",
+    "description": null
+  },
+  "Ninja_NoEquip": {
+    "localized_name": "月花眾 下忍",
+    "description": null
+  },
+  "Ninja_Prisoner": {
+    "localized_name": "月花眾 下忍",
+    "description": null
+  },
+  "OctopusGirl": {
+    "localized_name": "OctopusGirl",
+    "description": "若要和牠一起睡覺，最好確認一下隔天的行程。 因為牠吸盤的痕跡看起來很像吻痕， 如果被睡迷糊的牠吸住，就會產生不必要的誤會。"
   },
   "PREDATOR_AmaterasuWolf": {
     "localized_name": "蒼焰狼",
@@ -1416,7 +1692,7 @@
     "description": null
   },
   "PalPassive_Doctor": {
-    "localized_name": "Dr. Brawn",
+    "localized_name": "島民",
     "description": null
   },
   "PalTrader": {
@@ -1426,6 +1702,10 @@
   "Penguin": {
     "localized_name": "企丸丸",
     "description": "牠的翅膀已完全退化，無法飛翔。 但牠的基因中仍留有對天空的渴望， 因此牠想盡辦法，想要再一次飛翔。"
+  },
+  "Penguin_Electric": {
+    "localized_name": "Penguin_Electric",
+    "description": "牠的翅膀已完全退化，無法飛翔。 對天空的渴望逐漸變成嫉妒 為了擊落天空中會飛的傢伙，得到了雷電的力量！"
   },
   "PinkCat": {
     "localized_name": "搗蛋貓",
@@ -1451,6 +1731,14 @@
     "localized_name": "葉泥泥",
     "description": null
   },
+  "Plesiosaur": {
+    "localized_name": "Plesiosaur",
+    "description": "吐息中混合著疑似花粉的顆粒， 那是種可以讓任何植物都完成授粉的神奇物質。 對於那些身上長有植物的帕魯來說，是個令獸心情複雜的傢伙。"
+  },
+  "Police_BowGun": {
+    "localized_name": "自衛隊 步槍兵",
+    "description": null
+  },
   "Police_Handgun": {
     "localized_name": "自衛隊 守衛",
     "description": null
@@ -1471,6 +1759,18 @@
     "localized_name": "自衛隊 菁英",
     "description": null
   },
+  "Police_TreasureGuard_NarrowSite": {
+    "localized_name": "自衛隊 步槍兵",
+    "description": null
+  },
+  "Police_Vigilance": {
+    "localized_name": "自衛隊 步槍兵",
+    "description": null
+  },
+  "PoseidonOrca": {
+    "localized_name": "PoseidonOrca",
+    "description": "自災厄被封印之後，來自天墜的強者與其邂逅。 自此，其便常於近海現身在強者眼前。 相逢乃是必然。"
+  },
   "PurpleSpider": {
     "localized_name": "桃蛛娘",
     "description": "非常的黏人，字面上的如膠似漆。 越是想要甩開牠，就會黏的越緊。 以上就是牠的「性格」特徵。"
@@ -1481,6 +1781,30 @@
   },
   "QuestMan": {
     "localized_name": "-",
+    "description": null
+  },
+  "Quest_Farmer03_PinkCat": {
+    "localized_name": "搗蛋貓",
+    "description": null
+  },
+  "Quest_Farmer03_SheepBall": {
+    "localized_name": "棉悠悠",
+    "description": null
+  },
+  "Quest_Hunter_Fat_GatlingGun01": {
+    "localized_name": "盜獵集團 粉碎者",
+    "description": null
+  },
+  "Quest_Hunter_FlameThrower": {
+    "localized_name": "盜獵集團 善後小組",
+    "description": null
+  },
+  "Quest_Hunter_Katana01": {
+    "localized_name": "盜獵團員 劍士",
+    "description": null
+  },
+  "Quest_Hunter_RocketLauncher01": {
+    "localized_name": "盜獵集團 菁英",
     "description": null
   },
   "RAID_DarkMechaDragon": {
@@ -1703,6 +2027,10 @@
     "localized_name": "基因研究部隊 執行小隊",
     "description": null
   },
+  "Scientist_Prisoner": {
+    "localized_name": "基因研究部隊 執行小隊",
+    "description": null
+  },
   "ScorpionMan": {
     "localized_name": "蠱刺妖",
     "description": "身懷5000多種毒素。 雖然其中甚至有能夠立刻致死的可怕劇毒， 但是由於劑量都太低了，所以沒有什麼用。"
@@ -1747,6 +2075,10 @@
     "localized_name": "球犰",
     "description": "曾經有一段時間流行過球犰足球這項運動。 雖然因為收到帕魯保護組織的強烈反對，很快就被廢除， 但其實被當球踢能夠清理死皮，球犰也並非不情不願。"
   },
+  "SnowPeafowl": {
+    "localized_name": "SnowPeafowl",
+    "description": "對時間很敏感，每天早晨必然在固定的時間醒來。 帕洛斯群島的一天之所以被分成24個片段， 據說是因為從正面看開屏的SnowPeafowl時， 尾羽上分割的空白區域有24個的緣故。"
+  },
   "SnowTigerBeastman": {
     "localized_name": "霜牙王",
     "description": "一旦看見了圓形的物體，就不自覺的想要來上一拳。 對於SnowTigerBeastMan來說，僅次於生存的難題 就是完成堆雪人。"
@@ -1754,6 +2086,14 @@
   "SoldierBee": {
     "localized_name": "騎士蜂",
     "description": "立誓效忠女皇蜂的僕人。 這種帕魯誓死消滅傷害女王的事物。 牠們甚至會用自爆的手段，守護女王到最後一刻。"
+  },
+  "StuffedShark": {
+    "localized_name": "StuffedShark",
+    "description": "雖然看起來就像是有什麼生物正從布偶中向外窺視著， 但試著把手伸進布偶裝中卻又什麼都摸不到。 不僅如此，手甚至可以無止盡地向深處伸去。 也許，宇宙就存在於這裡。"
+  },
+  "StuffedShark_Fire": {
+    "localized_name": "StuffedShark_Fire",
+    "description": "從嘴巴伸手進去也什麼都摸不到，甚至可以無止盡地探向深處。 認為這是某種異次元空間的研究者們，突發奇想將其當作睡袋 試圖將整個身體擠進去，但卻導致牠乾嘔了。 看來，還是有體內這個概念的。"
   },
   "Suzaku": {
     "localized_name": "朱雀",
@@ -1767,6 +2107,10 @@
     "localized_name": "棉花糖",
     "description": "牠全身上下都比砂糖甜18,000倍。 被牠的氣味吸引的肉食帕魯要是往牠身上大口一咬， 就會被甜到翻白眼昏迷。"
   },
+  "TentacleTurtle_Ground": {
+    "localized_name": "TentacleTurtle_Ground",
+    "description": "為保護脆弱的本體，獲得了堅硬的甲殼。 大半的觸覺神經都集中在了手部和甲殼上， 偷偷摸牠的本體也不會被發現。"
+  },
   "ThunderBird": {
     "localized_name": "迅雷鳥",
     "description": "此一物種外觀類似燧火鳥，但其實毫無關係。 牠會快速俯衝，用鋒利的鳥喙把敵人解決掉。 那身姿正有如落雷一般。"
@@ -1778,6 +2122,10 @@
   "ThunderDragonMan": {
     "localized_name": "波魯傑克斯",
     "description": "牠的電擊能從傷口進入，以此灼燒對手的全身。 波魯傑克斯同類之間發生的爭吵， 能在一瞬間決出勝負。"
+  },
+  "TropicalOstrich": {
+    "localized_name": "TropicalOstrich",
+    "description": "牠會以獨特的舞蹈打亂對手的節奏。 在爭奪地盤時，先被對方帶走節奏的那一方就是輸家。 求愛、消遣、萬事唯有舞蹈！ 話說，當牠對著人類跳舞時，又代表著什麼意思呢？"
   },
   "Umihebi": {
     "localized_name": "覆海龍",
@@ -1801,6 +2149,10 @@
   },
   "Viking_Elite_Invader": {
     "localized_name": "天墜之民 精英",
+    "description": null
+  },
+  "Viking_Prisoner": {
+    "localized_name": "天墜之民",
     "description": null
   },
   "Viking_Tower": {
@@ -1902,6 +2254,50 @@
   "WoolFox": {
     "localized_name": "米露菲",
     "description": "與SheepBall相較，這種帕魯的毛質更加優良， 個性也更適合作為家畜。 但歷史上這種帕魯總是被當成寵物。 畢竟可愛就是正義。"
+  },
+  "YakushimaBoss001": {
+    "localized_name": "YakushimaBoss001",
+    "description": "【泰拉瑞亞合作】 來自異世界的怪物。 在這裡似乎可以將其馴服。"
+  },
+  "YakushimaBoss001_Small": {
+    "localized_name": "YakushimaBoss001_Small",
+    "description": "【泰拉瑞亞合作】 來自異世界的怪物。 在這裡似乎可以將其馴服。"
+  },
+  "YakushimaMonster001": {
+    "localized_name": "YakushimaMonster001",
+    "description": "【泰拉瑞亞合作】 來自異世界的怪物。 在這裡似乎可以將其馴服。"
+  },
+  "YakushimaMonster001_Blue": {
+    "localized_name": "YakushimaMonster001_Blue",
+    "description": "【泰拉瑞亞合作】 來自異世界的怪物。 在這裡似乎可以將其馴服。"
+  },
+  "YakushimaMonster001_Pink": {
+    "localized_name": "YakushimaMonster001_Pink",
+    "description": "【泰拉瑞亞合作】 來自異世界的怪物。 在這裡似乎可以將其馴服。"
+  },
+  "YakushimaMonster001_Purple": {
+    "localized_name": "YakushimaMonster001_Purple",
+    "description": "【泰拉瑞亞合作】 來自異世界的怪物。 在這裡似乎可以將其馴服。"
+  },
+  "YakushimaMonster001_Rainbow": {
+    "localized_name": "YakushimaMonster001_Rainbow",
+    "description": "【泰拉瑞亞合作】 來自異世界的怪物。 在這裡似乎可以將其馴服。"
+  },
+  "YakushimaMonster001_Red": {
+    "localized_name": "YakushimaMonster001_Red",
+    "description": "【泰拉瑞亞合作】 來自異世界的怪物。 在這裡似乎可以將其馴服。"
+  },
+  "YakushimaMonster002": {
+    "localized_name": "YakushimaMonster002",
+    "description": "【泰拉瑞亞合作】 來自異世界的怪物。 在這裡似乎可以將其馴服。"
+  },
+  "YakushimaMonster003": {
+    "localized_name": "YakushimaMonster003",
+    "description": "【泰拉瑞亞合作】 來自異世界的怪物。 在這裡似乎可以將其馴服。"
+  },
+  "YakushimaMonster003_Purple": {
+    "localized_name": "YakushimaMonster003_Purple",
+    "description": "【泰拉瑞亞合作】 來自異世界的怪物。 在這裡似乎可以將其馴服。"
   },
   "Yamishima_guide1": {
     "localized_name": "島民",

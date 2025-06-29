@@ -7,6 +7,10 @@
     "localized_name": "Double Air Dash Boots",
     "description": null
   },
+  "Accessory_AirDash3": {
+    "localized_name": "en-Text",
+    "description": null
+  },
   "Accessory_JumpCount_Increase1": {
     "localized_name": "Double Jump Boots",
     "description": null
@@ -95,6 +99,10 @@
     "localized_name": "Monitoring Stand",
     "description": null
   },
+  "BaseCampWorkerExtraStation": {
+    "localized_name": "BaseCampWorkerExtraStation",
+    "description": null
+  },
   "Battle_Armor_Grade_01_Cloth": {
     "localized_name": "Cloth Outfit",
     "description": "Protects against cold nights. Requires Primitive Workbench to craft."
@@ -181,7 +189,7 @@
   },
   "Battle_Defense_MachineGun": {
     "localized_name": "Mounted Machine Gun",
-    "description": "Assign a Pal with Handiwork suitability to use the machine gun to protect a base."
+    "description": "Assign a Pal with Handiwork suitability and it will protect a base using the machine gun."
   },
   "Battle_Defense_Missile": {
     "localized_name": "Mounted Missile Launcher",
@@ -284,8 +292,8 @@
     "description": null
   },
   "Battle_RangeWeapon_FlameThrower": {
-    "localized_name": "Flamethrower",
-    "description": "Flamethrower that fires long-range flame. Can set the enemy on fire. Crafted at Weapon Assembly Line II."
+    "localized_name": "FlameThrower",
+    "description": null
   },
   "Battle_RangeWeapon_GatlingGun": {
     "localized_name": "Gatling Gun",
@@ -355,6 +363,10 @@
     "localized_name": "Beam Sword",
     "description": null
   },
+  "BelieverFlagSet": {
+    "localized_name": "Free Pal Alliance Flag Set",
+    "description": "Believer_Flag and Believer_Banner set. Proof of your victory over the Free Pal Alliance."
+  },
   "BlastFurnace4": {
     "localized_name": "Gigantic Furnace",
     "description": null
@@ -383,9 +395,17 @@
     "localized_name": "Cement",
     "description": null
   },
+  "ChargeLaserRifle": {
+    "localized_name": "ChargeLaserRifle",
+    "description": null
+  },
+  "ChargeLaserRifleBullet": {
+    "localized_name": "en text",
+    "description": null
+  },
   "Cloth2": {
     "localized_name": "High Quality Cloth",
-    "description": "Woven from large amounts of Wool. Required to create high quality armor. Can be made at High Quality Workbench."
+    "description": null
   },
   "CompositeDesk": {
     "localized_name": "Drafting Table",
@@ -406,6 +426,10 @@
   "Crusher": {
     "localized_name": "Crusher",
     "description": "Facility for breaking down Stone and Wood to exchange them for other materials. Requires Pal with the Watering suitability to spin the water turbine."
+  },
+  "CrystalPit": {
+    "localized_name": "CrystalPit",
+    "description": null
   },
   "DamagedScarecrow": {
     "localized_name": "Training Dummy",
@@ -467,12 +491,24 @@
     "localized_name": "Plasma Cannon",
     "description": null
   },
+  "EnergyShotgun": {
+    "localized_name": "EnergyShotgun",
+    "description": null
+  },
+  "EnergyShotgunBullet": {
+    "localized_name": "en text",
+    "description": null
+  },
   "EnergyStorage_Electric": {
     "localized_name": "Accumulator",
     "description": null
   },
   "Expedition": {
     "localized_name": "Pal Expedition Station",
+    "description": null
+  },
+  "Factory_Hard_04": {
+    "localized_name": "en Text",
     "description": null
   },
   "Factory_Money": {
@@ -482,6 +518,42 @@
   "Farm_SkillFruits": {
     "localized_name": "Skillfruit Orchard",
     "description": null
+  },
+  "FireCultFlagSet": {
+    "localized_name": "Brothers of the Eternal Pyre Flag Set",
+    "description": "FireCult_Flag and FireCult_Banner set. Proof of your victory over the Brothers of the Eternal Pyre."
+  },
+  "FishingBait_2": {
+    "localized_name": "FishingBait_2",
+    "description": null
+  },
+  "FishingBait_3": {
+    "localized_name": "FishingBait_3",
+    "description": null
+  },
+  "FishingBait_3_A": {
+    "localized_name": "FishingBait_3_A",
+    "description": null
+  },
+  "FishingPond1": {
+    "localized_name": "FishingPond1",
+    "description": null
+  },
+  "FishingPond2": {
+    "localized_name": "FishingPond2",
+    "description": null
+  },
+  "FishingRod_02_1": {
+    "localized_name": "FishingRod_02_1",
+    "description": null
+  },
+  "FishingRod_03_1": {
+    "localized_name": "FishingRod_03_1",
+    "description": null
+  },
+  "FishingSet1": {
+    "localized_name": "Beginner Fishing Set",
+    "description": "Beginner-friendly fishing rod and bait set. Once you craft both, you'll be able to fish for Pals near bodies of water."
   },
   "FlamethrowerBullet": {
     "localized_name": "Flamethrower Fuel",
@@ -699,6 +771,10 @@
     "localized_name": "Hyper Grappling Gun",
     "description": null
   },
+  "GrapplingGun5": {
+    "localized_name": "GrapplingGun5",
+    "description": null
+  },
   "GrenadeBullet": {
     "localized_name": "Grenade Ammo",
     "description": null
@@ -730,6 +806,10 @@
   "HugeKitchen": {
     "localized_name": "Large-Scale Stone Oven",
     "description": null
+  },
+  "HunterFlagSet": {
+    "localized_name": "Rayne Syndicate Flag Set",
+    "description": "Hunter_Flag and Hunter_Banner set. Proof of your victory over the Rayne Syndicate."
   },
   "IceCrusher": {
     "localized_name": "Refrigerated Crusher",
@@ -803,6 +883,10 @@
     "localized_name": "Hip Lantern",
     "description": null
   },
+  "Lantern_High": {
+    "localized_name": "Lantern_High",
+    "description": null
+  },
   "LargeCeilingLamp": {
     "localized_name": "Large Ceiling Lamp",
     "description": "Lights up large areas below at a base."
@@ -845,6 +929,10 @@
   },
   "MakeshiftSubmachineGun": {
     "localized_name": "Makeshift SMG",
+    "description": null
+  },
+  "ManganeseIngot": {
+    "localized_name": "ManganeseIngot",
     "description": null
   },
   "ManualElectricGenerator": {
@@ -895,9 +983,17 @@
     "localized_name": "Large-Scale Electric Egg Incubator",
     "description": null
   },
+  "MultiHatchingPalEgg": {
+    "localized_name": "MultiHatchingPalEgg",
+    "description": null
+  },
   "Musket": {
     "localized_name": "Musket",
     "description": "Simple, old fashioned gun. Fires a single, powerful shot at the expense of a long reload time. Requires Weapon Workbench to craft."
+  },
+  "NinjaFlagSet": {
+    "localized_name": "Moonflower Flag Set",
+    "description": "Ninja_Flag and Ninja_Bannerset. Proof of your victory over the Moonflowers."
   },
   "OilPump": {
     "localized_name": "Crude Oil Extractor",
@@ -905,6 +1001,18 @@
   },
   "OlympicCauldron": {
     "localized_name": "Flame Cauldron",
+    "description": null
+  },
+  "OperatingTable": {
+    "localized_name": "Pal Surgery Table",
+    "description": null
+  },
+  "OverheatRifle": {
+    "localized_name": "OverheatRifle",
+    "description": null
+  },
+  "OverheatRifleBullet": {
+    "localized_name": "en text",
     "description": null
   },
   "PALBOX": {
@@ -915,9 +1023,25 @@
     "localized_name": "Flea Market (Pals)",
     "description": null
   },
+  "PalDopingShot": {
+    "localized_name": "PalDopingShot",
+    "description": null
+  },
+  "PalDopingShotBullet": {
+    "localized_name": "en text",
+    "description": null
+  },
+  "PalDopingShot_2": {
+    "localized_name": "PalDopingShot_2",
+    "description": null
+  },
   "PalFoodBox": {
     "localized_name": "Feed Box",
     "description": "Place food here, and Pals at the base will eat from it."
+  },
+  "PalHealingGrenade": {
+    "localized_name": "PalHealingGrenade",
+    "description": null
   },
   "PalMedicineBox": {
     "localized_name": "Medicine Rack",
@@ -934,6 +1058,10 @@
   "Plastic": {
     "localized_name": "Plasteel",
     "description": null
+  },
+  "PoliceFlagSet": {
+    "localized_name": "PIDF Flag Set",
+    "description": "Police_Flag and Police_Banner set. Proof of your victory over the PIDF."
   },
   "Polymer": {
     "localized_name": "Polymer",
@@ -1135,9 +1263,21 @@
     "localized_name": "Hexolite Helmet",
     "description": null
   },
+  "SF_houseset": {
+    "localized_name": "Futuristic Structure Set",
+    "description": "Set for building bases using futuristic architecture. Allows building of futuristic foundations, walls, ceilings, stairs and other things necessary for shelters."
+  },
+  "Salvage_TreasureBoxKey02": {
+    "localized_name": "Salvage_TreasureBoxKey02",
+    "description": null
+  },
   "SanityDecrease1": {
     "localized_name": "Alpha Wave Generator",
     "description": null
+  },
+  "ScientistFlagSet": {
+    "localized_name": "PAL Genetic Research Unit Flag Set",
+    "description": "Scientist_Flag and Scientist_Banner set. Proof of your victory over the PAL Genetic Research Unit."
   },
   "Shield_01": {
     "localized_name": "Common Shield",
@@ -1217,6 +1357,10 @@
   },
   "SkillUnlock_BlueDragon": {
     "localized_name": "Azurobe Saddle",
+    "description": null
+  },
+  "SkillUnlock_BlueDragon_Ice": {
+    "localized_name": "SkillUnlock_BlueDragon_Ice",
     "description": null
   },
   "SkillUnlock_BlueThunderHorse": {
@@ -1311,8 +1455,20 @@
     "localized_name": "Celaray's Gloves",
     "description": null
   },
+  "SkillUnlock_FlyingManta_Thunder": {
+    "localized_name": "SkillUnlock_FlyingManta_Thunder",
+    "description": null
+  },
   "SkillUnlock_Garm": {
     "localized_name": "Direhowl's Saddled Harness",
+    "description": null
+  },
+  "SkillUnlock_GhostAnglerfish": {
+    "localized_name": "SkillUnlock_GhostAnglerfish",
+    "description": null
+  },
+  "SkillUnlock_GhostAnglerfish_Fire": {
+    "localized_name": "SkillUnlock_GhostAnglerfish_Fire",
     "description": null
   },
   "SkillUnlock_GhostBeast": {
@@ -1383,6 +1539,18 @@
     "localized_name": "Frostallion Noct Saddle",
     "description": null
   },
+  "SkillUnlock_IceNarwhal": {
+    "localized_name": "SkillUnlock_IceNarwhal",
+    "description": null
+  },
+  "SkillUnlock_IceNarwhal_Fire": {
+    "localized_name": "SkillUnlock_IceNarwhal_Fire",
+    "description": null
+  },
+  "SkillUnlock_IceSeal": {
+    "localized_name": "SkillUnlock_IceSeal",
+    "description": null
+  },
   "SkillUnlock_JetDragon": {
     "localized_name": "Jetragon's Missile Launcher",
     "description": null
@@ -1423,6 +1591,10 @@
     "localized_name": "Relaxaurus Lux's Missile Launcher",
     "description": null
   },
+  "SkillUnlock_LeafMomonga": {
+    "localized_name": "SkillUnlock_LeafMomonga",
+    "description": null
+  },
   "SkillUnlock_Manticore": {
     "localized_name": "Blazehowl Saddle",
     "description": null
@@ -1459,12 +1631,28 @@
     "localized_name": "Killamari's Gloves",
     "description": null
   },
+  "SkillUnlock_NegativeOctopus_Neutral": {
+    "localized_name": "SkillUnlock_NegativeOctopus_Neutral",
+    "description": null
+  },
   "SkillUnlock_NightBlueHorse": {
     "localized_name": "Starryon Saddle",
     "description": null
   },
   "SkillUnlock_Penguin": {
     "localized_name": "Pengullet Rocket Launcher",
+    "description": null
+  },
+  "SkillUnlock_Penguin_Electric": {
+    "localized_name": "SkillUnlock_Penguin_Electric",
+    "description": null
+  },
+  "SkillUnlock_Plesiosaur": {
+    "localized_name": "SkillUnlock_Plesiosaur",
+    "description": null
+  },
+  "SkillUnlock_PoseidonOrca": {
+    "localized_name": "SkillUnlock_PoseidonOrca",
     "description": null
   },
   "SkillUnlock_PurpleSpider": {
@@ -1529,6 +1717,10 @@
   },
   "SkillUnlock_ThunderDog": {
     "localized_name": "Rayhound Saddle",
+    "description": null
+  },
+  "SkillUnlock_TropicalOstrich": {
+    "localized_name": "SkillUnlock_TropicalOstrich",
     "description": null
   },
   "SkillUnlock_Umihebi": {
@@ -1598,6 +1790,10 @@
   "Spa2": {
     "localized_name": "High Quality Hot Spring",
     "description": "Pals recover plenty of SAN while in the hot spring."
+  },
+  "Spa3": {
+    "localized_name": "Spa3",
+    "description": null
   },
   "Spear": {
     "localized_name": "Stone Spear",
@@ -1770,6 +1966,10 @@
   "WallTorch": {
     "localized_name": "Wall Torch",
     "description": "Place it on a wall to light the surrounding area."
+  },
+  "WeaponFactory_Dirty_04": {
+    "localized_name": "en Text",
+    "description": null
   },
   "Wood_Gate": {
     "localized_name": "Wooden Gate",

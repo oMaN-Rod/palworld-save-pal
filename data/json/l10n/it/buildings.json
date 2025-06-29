@@ -371,6 +371,10 @@
     "localized_name": "Muro con porta in vetro",
     "description": "Una porta d'ingresso edificata su delle fondamenta. È in vetro incredibilmente resistente."
   },
+  "Glass_Fence": {
+    "localized_name": "-",
+    "description": null
+  },
   "Glass_SlantedRoof": {
     "localized_name": "Tetto spiovente in vetro",
     "description": "Un tetto spiovente edificato su dei muri per proteggersi dagli elementi. È in vetro incredibilmente resistente."
@@ -386,10 +390,6 @@
   "Glass_foundation": {
     "localized_name": "Fondamenta in vetro",
     "description": "Fondamenta su cui edificare muri e strutture. Sono in vetro incredibilmente resistente."
-  },
-  "Glass_pillars": {
-    "localized_name": "Pilastro in vetro",
-    "description": "Un pilastro per sostenere l'edificio. È in vetro incredibilmente resistente."
   },
   "Glass_roof": {
     "localized_name": "Tetto in vetro",
@@ -443,6 +443,10 @@
     "localized_name": "Macinatore criogenico",
     "description": "Una struttura per ridurre in polvere Minerale metallico e ottenere così altri tipi di risorse. Richiede Pal competenti nell'attività |Refrigerazione| e il collegamento all'alimentazione, ma è davvero efficiente."
   },
+  "Iron_Fence": {
+    "localized_name": "-",
+    "description": null
+  },
   "Irori": {
     "localized_name": "Focolare giapponese",
     "description": "Focolare in stile giapponese per l'arredo. Adatto ad arredare edifici in stile giapponese."
@@ -490,6 +494,10 @@
   "JapaneseStyle_DoorWall_03": {
     "localized_name": "Muro con porta in stile giapponese C",
     "description": "Una porta scorrevole per interni edificata su delle fondamenta. È in un raffinato stile giapponese."
+  },
+  "JapaneseStyle_Fence": {
+    "localized_name": "-",
+    "description": null
   },
   "JapaneseStyle_Pillar": {
     "localized_name": "Pilastro in stile giapponese",
@@ -659,10 +667,6 @@
     "localized_name": "Fondamenta in metallo",
     "description": "Fondamenta su cui edificare muri e strutture. Sono in metallo, quindi sono molto resistenti."
   },
-  "Metal_pillars": {
-    "localized_name": "Pilastro in metallo",
-    "description": "Un pilastro per sostenere un edificio. È in metallo, quindi è molto resistente."
-  },
   "Metal_roof": {
     "localized_name": "Tetto in metallo",
     "description": "Un tetto edificato su dei muri per proteggersi dagli elementi. È in metallo, quindi è molto resistente."
@@ -803,6 +807,10 @@
     "localized_name": "it_Text",
     "description": "it_Text"
   },
+  "SF_Fence": {
+    "localized_name": "-",
+    "description": null
+  },
   "SanityDecrease1": {
     "localized_name": "Generatore di onde α",
     "description": "Un generatore di onde α, capaci di far rilassare i Pal. Inibisce il calo dei punti SAN dei Pal della base. Equipaggiarne più di due non incrementa l'effetto."
@@ -935,6 +943,10 @@
     "localized_name": "Terme di lusso",
     "description": "Struttura dove far riposare i Pal della base stanchi. Permette di recuperare SAN in modo ancora più efficiente."
   },
+  "Spa3": {
+    "localized_name": "Terme",
+    "description": "Struttura dove far riposare i Pal della base stanchi. Riprendersi dalle fatiche permette di recuperare SAN."
+  },
   "SphereFactory_Black_01": {
     "localized_name": "Banco da lavoro per sfere",
     "description": "Un banco da lavoro dove realizzare sfere per catturare Pal. Lo spazio di lavoro è molto piccolo e la produzione di sfere è piuttosto lenta. Sono necessari Pal capaci di svolgere lavoro manuale."
@@ -963,6 +975,10 @@
     "localized_name": "Porta di pietra",
     "description": "Una porta d'ingresso edificata su delle fondamenta. È in pietra, quindi è abbastanza resistente."
   },
+  "Stone_Fence": {
+    "localized_name": "-",
+    "description": null
+  },
   "Stone_Gate": {
     "localized_name": "Cancello in pietra",
     "description": "Un cancello adatto anche ai Pal più grandi. È in pietra, quindi è abbastanza resistente."
@@ -982,10 +998,6 @@
   "Stone_foundation": {
     "localized_name": "Fondamenta in pietra",
     "description": "Fondamenta su cui edificare muri e strutture. Sono in pietra, quindi sono abbastanza resistenti."
-  },
-  "Stone_pillar": {
-    "localized_name": "Pilastro in pietra",
-    "description": "Un pilastro per sostenere un edificio. È in pietra, quindi è abbastanza resistente."
   },
   "Stone_roof": {
     "localized_name": "Tetto in pietra",
@@ -1211,6 +1223,10 @@
     "localized_name": "-",
     "description": null
   },
+  "Wood_Fence": {
+    "localized_name": "-",
+    "description": null
+  },
   "Wood_Gate": {
     "localized_name": "Cancello in legno",
     "description": "Un cancello adatto anche ai Pal più grandi. È in legno, quindi è piuttosto fragile."
@@ -1242,10 +1258,6 @@
   "Wooden_ladder": {
     "localized_name": "Scaletta",
     "description": "Una scaletta con cui raggiungere punti un po' più in alto."
-  },
-  "Wooden_pillar": {
-    "localized_name": "Pilastro in legno",
-    "description": "Un pilastro per sostenere un edificio. È in legno, quindi è piuttosto fragile."
   },
   "Wooden_roof": {
     "localized_name": "Tetto in legno",

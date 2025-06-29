@@ -1390,21 +1390,6 @@
       }
     ]
   },
-  "EPalWazaID::TripleCannon": {
-    "element": "Dragon",
-    "type": "Shot",
-    "power": 120,
-    "min_range": 500,
-    "max_range": 4000,
-    "cool_time": 40.0,
-    "effects": [
-      {
-        "type": "Burn",
-        "value": 100,
-        "value_ex": 0.0
-      }
-    ]
-  },
   "EPalWazaID::Unique_Alpaca_Tackle": {
     "element": "Normal",
     "type": "Melee",

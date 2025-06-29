@@ -268,7 +268,7 @@
     "description": "Nimmt den Gegner ins Visier und erzeugt unzählige fliegende Luftklingen."
   },
   "EPalWazaID::Railbolt": {
-    "localized_name": "Donnerbahn",
+    "localized_name": "Railbolt",
     "description": "Tankt Gewitterenergie und feuert mehrere mächtige Elektroschocks auf den Gegner ab."
   },
   "EPalWazaID::RangeThunder": {

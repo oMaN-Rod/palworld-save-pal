@@ -268,7 +268,7 @@
     "description": "Shoots countless wind swords that fly straight towards the enemy."
   },
   "EPalWazaID::Railbolt": {
-    "localized_name": "Thunder Rail",
+    "localized_name": "Railbolt",
     "description": "Charge the power of lightning to the limit and fires multiple simultaneous electric shocks at the enemy."
   },
   "EPalWazaID::RangeThunder": {

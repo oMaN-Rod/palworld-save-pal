@@ -268,7 +268,7 @@
     "description": "Tire d'innombrables lames de vent qui filent droit sur l'ennemi."
   },
   "EPalWazaID::Railbolt": {
-    "localized_name": "Canon Fulgurant",
+    "localized_name": "Railbolt",
     "description": "Accumule l'énergie orageuse au maximum pour frapper l'ennemi de plusieurs chocs électriques simultanés."
   },
   "EPalWazaID::RangeThunder": {

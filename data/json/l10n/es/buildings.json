@@ -371,6 +371,10 @@
     "localized_name": "Muro con puerta de cristal",
     "description": "Puerta que se construye sobre una base y sirve de entrada. Está hecha de cristal duro y es muy resistente."
   },
+  "Glass_Fence": {
+    "localized_name": "-",
+    "description": null
+  },
   "Glass_SlantedRoof": {
     "localized_name": "Tejado inclinado de cristal",
     "description": "Tejado inclinado que se construye sobre un muro para guarecerte de la lluvia y el viento. Está hecho de cristal duro y es muy resistente."
@@ -386,10 +390,6 @@
   "Glass_foundation": {
     "localized_name": "Base de cristal",
     "description": "Base sobre la que levantar muros o instalaciones. Está hecha de cristal duro y es muy resistente."
-  },
-  "Glass_pillars": {
-    "localized_name": "Columna de cristal",
-    "description": "Columna para sostener edificios. Está hecha de cristal duro y es muy resistente."
   },
   "Glass_roof": {
     "localized_name": "Tejado de cristal",
@@ -443,6 +443,10 @@
     "localized_name": "Trituradora de congelación",
     "description": "Instalación donde triturar Mineral metálico y obtener a cambio otros materiales. Para que funcione hace falta una fuente de energía y Pals con la aptitud «Enfriamiento», pero es muy eficiente."
   },
+  "Iron_Fence": {
+    "localized_name": "-",
+    "description": null
+  },
   "Irori": {
     "localized_name": "Fogón japonés",
     "description": "Fogón decorativo. Perfecto combinado con construcciones de estilo japonés."
@@ -490,6 +494,10 @@
   "JapaneseStyle_DoorWall_03": {
     "localized_name": "Muro japonés con puerta C",
     "description": "Fusuma que se construye sobre una base y sirve de entrada. Con una elegante estructura de estilo japonés."
+  },
+  "JapaneseStyle_Fence": {
+    "localized_name": "-",
+    "description": null
   },
   "JapaneseStyle_Pillar": {
     "localized_name": "Columna japonesa",
@@ -659,10 +667,6 @@
     "localized_name": "Base de metal",
     "description": "Base sobre la que levantar muros o instalaciones. Está hecha de metal y es muy resistente."
   },
-  "Metal_pillars": {
-    "localized_name": "Columna de metal",
-    "description": "Columna para sostener edificios. Está hecha de metal y es muy resistente."
-  },
   "Metal_roof": {
     "localized_name": "Tejado de metal",
     "description": "Tejado que se construye sobre un muro para guarecerte de la lluvia y el viento. Está hecho de metal y es muy resistente."
@@ -803,6 +807,10 @@
     "localized_name": "es_Text",
     "description": "es_Text"
   },
+  "SF_Fence": {
+    "localized_name": "-",
+    "description": null
+  },
   "SanityDecrease1": {
     "localized_name": "Generador de ondas α",
     "description": "Dispositivo que genera ondas alfa que relajan a los Pals. Con él se reduce la probabilidad de que disminuya la COR de los Pals de la base. Colocar más de dos no aumenta su eficacia."
@@ -935,6 +943,10 @@
     "localized_name": "Baños termales de calidad",
     "description": "Instalación donde los Pals de la base van a descansar. Se sentirán más a gusto y recuperarán aún más COR."
   },
+  "Spa3": {
+    "localized_name": "Baños termales",
+    "description": "Instalación donde los Pals de la base van a descansar. Cura la fatiga acumulada por el trabajo y recupera COR."
+  },
   "SphereFactory_Black_01": {
     "localized_name": "Mesa de elaboración de esferas",
     "description": "Mesa de trabajo de esferas para capturar a los Pals. Todavía no es muy grande y la producción de esferas es lenta. Se necesita un Pal experto en trabajos manuales."
@@ -963,6 +975,10 @@
     "localized_name": "Puerta de piedra",
     "description": "Puerta que se construye sobre una base y sirve de entrada. Está hecha de piedra y es bastante resistente."
   },
+  "Stone_Fence": {
+    "localized_name": "-",
+    "description": null
+  },
   "Stone_Gate": {
     "localized_name": "Portón de piedra",
     "description": "Portón que los Pals de gran tamaño pueden atravesar. Está hecho de piedra y es bastante resistente."
@@ -982,10 +998,6 @@
   "Stone_foundation": {
     "localized_name": "Base de piedra",
     "description": "Base sobre la que levantar muros o instalaciones. Está hecha de piedra y es bastante resistente."
-  },
-  "Stone_pillar": {
-    "localized_name": "Columna de piedra",
-    "description": "Columna para sostener edificios. Está hecha de piedra y es bastante resistente."
   },
   "Stone_roof": {
     "localized_name": "Tejado de piedra",
@@ -1211,6 +1223,10 @@
     "localized_name": "-",
     "description": null
   },
+  "Wood_Fence": {
+    "localized_name": "-",
+    "description": null
+  },
   "Wood_Gate": {
     "localized_name": "Portón de madera",
     "description": "Portón que los Pals de gran tamaño pueden atravesar. Está hecho de madera y es frágil."
@@ -1242,10 +1258,6 @@
   "Wooden_ladder": {
     "localized_name": "Escalera",
     "description": "Escalera que ter permite acceder a lugares un poco elevados."
-  },
-  "Wooden_pillar": {
-    "localized_name": "Columna de madera",
-    "description": "Columna para sostener edificios. Está hecha de madera y es frágil."
   },
   "Wooden_roof": {
     "localized_name": "Tejado de madera",

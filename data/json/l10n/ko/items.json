@@ -685,19 +685,19 @@
   },
   "Blueprint_FlameThrower_2": {
     "localized_name": "화염방사기 설계도 1",
-    "description": "가지고 있으면 |화염방사기 (Uncommon)| 레시피가 해제된다. |WeaponFactory Dirty 03|에서 제작할 수 있다."
+    "description": "가지고 있으면 |FlameThrower (Uncommon)| 레시피가 해제된다. |WeaponFactory Dirty 03|에서 제작할 수 있다."
   },
   "Blueprint_FlameThrower_3": {
     "localized_name": "화염방사기 설계도 2",
-    "description": "가지고 있으면 |화염방사기 (Rare)| 레시피가 해제된다. |WeaponFactory Dirty 03|에서 제작할 수 있다."
+    "description": "가지고 있으면 |FlameThrower (Rare)| 레시피가 해제된다. |WeaponFactory Dirty 03|에서 제작할 수 있다."
   },
   "Blueprint_FlameThrower_4": {
     "localized_name": "화염방사기 설계도 3",
-    "description": "가지고 있으면 |화염방사기 (Epic)| 레시피가 해제된다. |WeaponFactory Dirty 03|에서 제작할 수 있다."
+    "description": "가지고 있으면 |FlameThrower (Epic)| 레시피가 해제된다. |WeaponFactory Dirty 03|에서 제작할 수 있다."
   },
   "Blueprint_FlameThrower_5": {
     "localized_name": "화염방사기 설계도 4",
-    "description": "가지고 있으면 |화염방사기 (Legendary)| 레시피가 해제된다. |WeaponFactory Dirty 03|에서 제작할 수 있다."
+    "description": "가지고 있으면 |FlameThrower (Legendary)| 레시피가 해제된다. |WeaponFactory Dirty 03|에서 제작할 수 있다."
   },
   "Blueprint_FurArmorCold_2": {
     "localized_name": "내한 모피 갑옷 설계도 1",
@@ -2219,6 +2219,22 @@
     "localized_name": "ko Text",
     "description": "ko Text"
   },
+  "ChargeLaserRifle_2": {
+    "localized_name": "ko Text",
+    "description": "ko Text"
+  },
+  "ChargeLaserRifle_3": {
+    "localized_name": "ko Text",
+    "description": "ko Text"
+  },
+  "ChargeLaserRifle_4": {
+    "localized_name": "ko Text",
+    "description": "ko Text"
+  },
+  "ChargeLaserRifle_5": {
+    "localized_name": "ko Text",
+    "description": "ko Text"
+  },
   "CheeseBurger": {
     "localized_name": "치즈 버거",
     "description": "햄버거에 치즈를 넣은 요리입니다. 먹으면 일정 시간 동안 배가 부르고, 방어 +10%가 됩니다."
@@ -2591,6 +2607,22 @@
     "localized_name": "ko Text",
     "description": "ko Text"
   },
+  "EnergyShotgun_2": {
+    "localized_name": "ko Text",
+    "description": "ko Text"
+  },
+  "EnergyShotgun_3": {
+    "localized_name": "ko Text",
+    "description": "ko Text"
+  },
+  "EnergyShotgun_4": {
+    "localized_name": "ko Text",
+    "description": "ko Text"
+  },
+  "EnergyShotgun_5": {
+    "localized_name": "ko Text",
+    "description": "ko Text"
+  },
   "ExpBoost_01": {
     "localized_name": "수련의 서 (S)",
     "description": "팰이 읽도록 하여 아주 적은 경험을 쌓게 해주는 서적."
@@ -2644,23 +2676,23 @@
     "description": "ko Text"
   },
   "FlameThrower": {
-    "localized_name": "화염방사기",
+    "localized_name": "FlameThrower",
     "description": "높은 사정거리의 불을 뿜는 Flamethrower. 적중한 상대를 화염에 휩싸이게 할 수 있다."
   },
   "FlameThrower_2": {
-    "localized_name": "화염방사기",
+    "localized_name": "FlameThrower",
     "description": "높은 사정거리의 불을 뿜는 Flamethrower. 적중한 상대를 화염에 휩싸이게 할 수 있다."
   },
   "FlameThrower_3": {
-    "localized_name": "화염방사기",
+    "localized_name": "FlameThrower",
     "description": "높은 사정거리의 불을 뿜는 Flamethrower. 적중한 상대를 화염에 휩싸이게 할 수 있다."
   },
   "FlameThrower_4": {
-    "localized_name": "화염방사기",
+    "localized_name": "FlameThrower",
     "description": "높은 사정거리의 불을 뿜는 Flamethrower. 적중한 상대를 화염에 휩싸이게 할 수 있다."
   },
   "FlameThrower_5": {
-    "localized_name": "화염방사기",
+    "localized_name": "FlameThrower",
     "description": "높은 사정거리의 불을 뿜는 Flamethrower. 적중한 상대를 화염에 휩싸이게 할 수 있다."
   },
   "FlamethrowerBullet": {
@@ -2725,7 +2757,7 @@
   },
   "FriedVegetables": {
     "localized_name": "야채 볶음",
-    "description": "양상추과 날고기을 볶은 요리입니다. 먹으면 일정 시간 동안, 공격 +10%가 증가합니다."
+    "description": "양상추과 Meat을 볶은 요리입니다. 먹으면 일정 시간 동안, 공격 +10%가 증가합니다."
   },
   "Fruit__defense_01": {
     "localized_name": "견고의 열매",
@@ -2919,6 +2951,10 @@
     "localized_name": "테라 갈고리 총",
     "description": "고속으로 이동할 수 있도록 돕는 갈고리 총. 사격 지점에 갈고리를 날리면, 사격자의 몸을 끌고 간다. 연구 끝에 압도적인 기동성을 실현해냈다."
   },
+  "GrapplingGun5": {
+    "localized_name": "갈고리 총",
+    "description": "고속으로 이동하게 해주는 갈고리 총. 사격 지점에 갈고리를 날리면 사격자의 몸을 끌고 간다. 높이 차가 있는 지역에서도 편하게 이동할 수 있다."
+  },
   "Gratin": {
     "localized_name": "그라탱",
     "description": "감자에 소스를 버무려 구운 요리. 뜨끈뜨끈할 때 먹어야 제일 맛있다. 먹으면 일정 시간 동안 배가 든든해지며, 방어 +10%."
@@ -3025,343 +3061,343 @@
   },
   "Head001": {
     "localized_name": "왕관",
-    "description": "지위가 높은 자가 얻으려 할 법한 왕관. 일상생활에 쓰기엔 부적절하다."
+    "description": null
   },
   "Head001_2": {
     "localized_name": "왕관",
-    "description": "지위가 높은 자가 얻으려 할 법한 왕관. 일상생활에 쓰기엔 부적절하다."
+    "description": null
   },
   "Head001_3": {
     "localized_name": "왕관",
-    "description": "지위가 높은 자가 얻으려 할 법한 왕관. 일상생활에 쓰기엔 부적절하다."
+    "description": null
   },
   "Head001_4": {
     "localized_name": "왕관",
-    "description": "지위가 높은 자가 얻으려 할 법한 왕관. 일상생활에 쓰기엔 부적절하다."
+    "description": null
   },
   "Head001_5": {
     "localized_name": "왕관",
-    "description": "지위가 높은 자가 얻으려 할 법한 왕관. 일상생활에 쓰기엔 부적절하다."
+    "description": null
   },
   "Head002": {
     "localized_name": "황금 관",
-    "description": "좀처럼 보기 힘든 황금 왕관. 쓰기만 해도 고귀한 존재가 된 기분이 든다."
+    "description": null
   },
   "Head002_2": {
     "localized_name": "황금 관",
-    "description": "좀처럼 보기 힘든 황금 왕관. 쓰기만 해도 고귀한 존재가 된 기분이 든다."
+    "description": null
   },
   "Head002_3": {
     "localized_name": "황금 관",
-    "description": "좀처럼 보기 힘든 황금 왕관. 쓰기만 해도 고귀한 존재가 된 기분이 든다."
+    "description": null
   },
   "Head002_4": {
     "localized_name": "황금 관",
-    "description": "좀처럼 보기 힘든 황금 왕관. 쓰기만 해도 고귀한 존재가 된 기분이 든다."
+    "description": null
   },
   "Head002_5": {
     "localized_name": "황금 관",
-    "description": "좀처럼 보기 힘든 황금 왕관. 쓰기만 해도 고귀한 존재가 된 기분이 든다."
+    "description": null
   },
   "Head003": {
     "localized_name": "긴 귀 머리띠",
-    "description": "핑토 귀처럼 귀여운 머리띠. 머리를 보호하기엔 영 불안해 보인다."
+    "description": null
   },
   "Head003_2": {
     "localized_name": "긴 귀 머리띠",
-    "description": "핑토 귀처럼 귀여운 머리띠. 머리를 보호하기엔 영 불안해 보인다."
+    "description": null
   },
   "Head003_3": {
     "localized_name": "긴 귀 머리띠",
-    "description": "핑토 귀처럼 귀여운 머리띠. 머리를 보호하기엔 영 불안해 보인다."
+    "description": null
   },
   "Head003_4": {
     "localized_name": "긴 귀 머리띠",
-    "description": "핑토 귀처럼 귀여운 머리띠. 머리를 보호하기엔 영 불안해 보인다."
+    "description": null
   },
   "Head003_5": {
     "localized_name": "긴 귀 머리띠",
-    "description": "핑토 귀처럼 귀여운 머리띠. 머리를 보호하기엔 영 불안해 보인다."
+    "description": null
   },
   "Head004": {
     "localized_name": "마녀 모자",
-    "description": "마호 또는 캐티메이지을(를) 흉내 낸 모자. 팰처럼 스킬을 쓸 수 있을 것만 같다."
+    "description": null
   },
   "Head004_2": {
     "localized_name": "마녀 모자",
-    "description": "마호 또는 캐티메이지을(를) 흉내 낸 모자. 팰처럼 스킬을 쓸 수 있을 것만 같다."
+    "description": null
   },
   "Head004_3": {
     "localized_name": "마녀 모자",
-    "description": "마호 또는 캐티메이지을(를) 흉내 낸 모자. 팰처럼 스킬을 쓸 수 있을 것만 같다."
+    "description": null
   },
   "Head004_4": {
     "localized_name": "마녀 모자",
-    "description": "마호 또는 캐티메이지을(를) 흉내 낸 모자. 팰처럼 스킬을 쓸 수 있을 것만 같다."
+    "description": null
   },
   "Head004_5": {
     "localized_name": "마녀 모자",
-    "description": "마호 또는 캐티메이지을(를) 흉내 낸 모자. 팰처럼 스킬을 쓸 수 있을 것만 같다."
+    "description": null
   },
   "Head005": {
     "localized_name": "부드러운 모자",
-    "description": "가볍고 부드러워 일상 생활에 적당한 모자. 상당히 세련되어 섬에서도 과거 유행한 적이 있다."
+    "description": null
   },
   "Head005_2": {
     "localized_name": "부드러운 모자",
-    "description": "가볍고 부드러워 일상 생활에 적당한 모자. 상당히 세련되어 섬에서도 과거 유행한 적이 있다."
+    "description": null
   },
   "Head005_3": {
     "localized_name": "부드러운 모자",
-    "description": "가볍고 부드러워 일상 생활에 적당한 모자. 상당히 세련되어 섬에서도 과거 유행한 적이 있다."
+    "description": null
   },
   "Head005_4": {
     "localized_name": "부드러운 모자",
-    "description": "가볍고 부드러워 일상 생활에 적당한 모자. 상당히 세련되어 섬에서도 과거 유행한 적이 있다."
+    "description": null
   },
   "Head005_5": {
     "localized_name": "부드러운 모자",
-    "description": "가볍고 부드러워 일상 생활에 적당한 모자. 상당히 세련되어 섬에서도 과거 유행한 적이 있다."
+    "description": null
   },
   "Head006": {
     "localized_name": "헬멧",
-    "description": "머리를 튼튼하게 지켜주는 헬멧. 신령사슴에서 떨어져 머리를 부딪친 사람이 속출하는 탓에 만들어졌다고 한다."
+    "description": null
   },
   "Head006_2": {
     "localized_name": "헬멧",
-    "description": "머리를 튼튼하게 지켜주는 헬멧. 신령사슴에서 떨어져 머리를 부딪친 사람이 속출하는 탓에 만들어졌다고 한다."
+    "description": null
   },
   "Head006_3": {
     "localized_name": "헬멧",
-    "description": "머리를 튼튼하게 지켜주는 헬멧. 신령사슴에서 떨어져 머리를 부딪친 사람이 속출하는 탓에 만들어졌다고 한다."
+    "description": null
   },
   "Head006_4": {
     "localized_name": "헬멧",
-    "description": "머리를 튼튼하게 지켜주는 헬멧. 신령사슴에서 떨어져 머리를 부딪친 사람이 속출하는 탓에 만들어졌다고 한다."
+    "description": null
   },
   "Head006_5": {
     "localized_name": "헬멧",
-    "description": "머리를 튼튼하게 지켜주는 헬멧. 신령사슴에서 떨어져 머리를 부딪친 사람이 속출하는 탓에 만들어졌다고 한다."
+    "description": null
   },
   "Head007": {
     "localized_name": "비단 모자",
-    "description": "신사용 모자. 실키누 소재를 사용해야 고급으로 통하지만 모프링 소재의 조악한 제품도 많이 눈에 띄었다."
+    "description": null
   },
   "Head007_2": {
     "localized_name": "비단 모자",
-    "description": "신사용 모자. 실키누 소재를 사용해야 고급으로 통하지만 모프링 소재의 조악한 제품도 많이 눈에 띄었다."
+    "description": null
   },
   "Head007_3": {
     "localized_name": "비단 모자",
-    "description": "신사용 모자. 실키누 소재를 사용해야 고급으로 통하지만 모프링 소재의 조악한 제품도 많이 눈에 띄었다."
+    "description": null
   },
   "Head007_4": {
     "localized_name": "비단 모자",
-    "description": "신사용 모자. 실키누 소재를 사용해야 고급으로 통하지만 모프링 소재의 조악한 제품도 많이 눈에 띄었다."
+    "description": null
   },
   "Head007_5": {
     "localized_name": "비단 모자",
-    "description": "신사용 모자. 실키누 소재를 사용해야 고급으로 통하지만 모프링 소재의 조악한 제품도 많이 눈에 띄었다."
+    "description": null
   },
   "Head008": {
     "localized_name": "삼각 모자",
-    "description": "전투에 나서는 사람들에게 사랑받는 모자. 일찍이 이 모자를 착용했던 인물이 아주리비을(를) 남획한 적이 있다."
+    "description": null
   },
   "Head008_2": {
     "localized_name": "삼각 모자",
-    "description": "전투에 나서는 사람들에게 사랑받는 모자. 일찍이 이 모자를 착용했던 인물이 아주리비을(를) 남획한 적이 있다."
+    "description": null
   },
   "Head008_3": {
     "localized_name": "삼각 모자",
-    "description": "전투에 나서는 사람들에게 사랑받는 모자. 일찍이 이 모자를 착용했던 인물이 아주리비을(를) 남획한 적이 있다."
+    "description": null
   },
   "Head008_4": {
     "localized_name": "삼각 모자",
-    "description": "전투에 나서는 사람들에게 사랑받는 모자. 일찍이 이 모자를 착용했던 인물이 아주리비을(를) 남획한 적이 있다."
+    "description": null
   },
   "Head008_5": {
     "localized_name": "삼각 모자",
-    "description": "전투에 나서는 사람들에게 사랑받는 모자. 일찍이 이 모자를 착용했던 인물이 아주리비을(를) 남획한 적이 있다."
+    "description": null
   },
   "Head009": {
     "localized_name": "탐험 모자",
-    "description": "모험가들이 쓰는 모자. 뜨거운 햇빛이 유발하는 더위를 막는 효과가 있다."
+    "description": null
   },
   "Head009_2": {
     "localized_name": "탐험 모자",
-    "description": "모험가들이 쓰는 모자. 뜨거운 햇빛이 유발하는 더위를 막는 효과가 있다."
+    "description": null
   },
   "Head009_3": {
     "localized_name": "탐험 모자",
-    "description": "모험가들이 쓰는 모자. 뜨거운 햇빛이 유발하는 더위를 막는 효과가 있다."
+    "description": null
   },
   "Head009_4": {
     "localized_name": "탐험 모자",
-    "description": "모험가들이 쓰는 모자. 뜨거운 햇빛이 유발하는 더위를 막는 효과가 있다."
+    "description": null
   },
   "Head009_5": {
     "localized_name": "탐험 모자",
-    "description": "모험가들이 쓰는 모자. 뜨거운 햇빛이 유발하는 더위를 막는 효과가 있다."
+    "description": null
   },
   "Head010": {
     "localized_name": "대학 모자",
-    "description": "쓰면 똑똑해 보이는 모자. 예전엔 이 섬에도 학교가 있었을 것이다."
+    "description": null
   },
   "Head010_2": {
     "localized_name": "대학 모자",
-    "description": "쓰면 똑똑해 보이는 모자. 예전엔 이 섬에도 학교가 있었을 것이다."
+    "description": null
   },
   "Head010_3": {
     "localized_name": "대학 모자",
-    "description": "쓰면 똑똑해 보이는 모자. 예전엔 이 섬에도 학교가 있었을 것이다."
+    "description": null
   },
   "Head010_4": {
     "localized_name": "대학 모자",
-    "description": "쓰면 똑똑해 보이는 모자. 예전엔 이 섬에도 학교가 있었을 것이다."
+    "description": null
   },
   "Head010_5": {
     "localized_name": "대학 모자",
-    "description": "쓰면 똑똑해 보이는 모자. 예전엔 이 섬에도 학교가 있었을 것이다."
+    "description": null
   },
   "Head011": {
     "localized_name": "농업 모자",
-    "description": "밭일에 적합한 모자. 뜨거운 햇빛이 유발하는 더위를 막는 효과가 있다."
+    "description": null
   },
   "Head011_2": {
     "localized_name": "농업 모자",
-    "description": "밭일에 적합한 모자. 뜨거운 햇빛이 유발하는 더위를 막는 효과가 있다."
+    "description": null
   },
   "Head011_3": {
     "localized_name": "농업 모자",
-    "description": "밭일에 적합한 모자. 뜨거운 햇빛이 유발하는 더위를 막는 효과가 있다."
+    "description": null
   },
   "Head011_4": {
     "localized_name": "농업 모자",
-    "description": "밭일에 적합한 모자. 뜨거운 햇빛이 유발하는 더위를 막는 효과가 있다."
+    "description": null
   },
   "Head011_5": {
     "localized_name": "농업 모자",
-    "description": "밭일에 적합한 모자. 뜨거운 햇빛이 유발하는 더위를 막는 효과가 있다."
+    "description": null
   },
   "Head012": {
     "localized_name": "중산모",
-    "description": "튼튼하고 둥근 모자. '그린모스이(가) 밟아도 멀쩡하다' 라는 광고 문구와 함께 팔렸다."
+    "description": null
   },
   "Head012_2": {
     "localized_name": "중산모",
-    "description": "튼튼하고 둥근 모자. '그린모스이(가) 밟아도 멀쩡하다' 라는 광고 문구와 함께 팔렸다."
+    "description": null
   },
   "Head012_3": {
     "localized_name": "중산모",
-    "description": "튼튼하고 둥근 모자. '그린모스이(가) 밟아도 멀쩡하다' 라는 광고 문구와 함께 팔렸다."
+    "description": null
   },
   "Head012_4": {
     "localized_name": "중산모",
-    "description": "튼튼하고 둥근 모자. '그린모스이(가) 밟아도 멀쩡하다' 라는 광고 문구와 함께 팔렸다."
+    "description": null
   },
   "Head012_5": {
     "localized_name": "중산모",
-    "description": "튼튼하고 둥근 모자. '그린모스이(가) 밟아도 멀쩡하다' 라는 광고 문구와 함께 팔렸다."
+    "description": null
   },
   "Head013": {
     "localized_name": "알록새 모자",
-    "description": "알록새을(를) 본뜬 모자. 멀리서 봐도 알아볼 정도로 화려하다."
+    "description": null
   },
   "Head013_2": {
     "localized_name": "알록새 모자",
-    "description": "알록새을(를) 본뜬 모자. 멀리서 봐도 알아볼 정도로 화려하다."
+    "description": null
   },
   "Head013_3": {
     "localized_name": "알록새 모자",
-    "description": "알록새을(를) 본뜬 모자. 멀리서 봐도 알아볼 정도로 화려하다."
+    "description": null
   },
   "Head013_4": {
     "localized_name": "알록새 모자",
-    "description": "알록새을(를) 본뜬 모자. 멀리서 봐도 알아볼 정도로 화려하다."
+    "description": null
   },
   "Head013_5": {
     "localized_name": "알록새 모자",
-    "description": "알록새을(를) 본뜬 모자. 멀리서 봐도 알아볼 정도로 화려하다."
+    "description": null
   },
   "Head014": {
     "localized_name": "빙긋알록새 모자",
-    "description": "알록새을(를) 본뜬 모자. 쓰면 빙긋빙긋 웃는 얼굴이 될 것 같다."
+    "description": null
   },
   "Head014_2": {
     "localized_name": "빙긋알록새 모자",
-    "description": "알록새을(를) 본뜬 모자. 쓰면 빙긋빙긋 웃는 얼굴이 될 것 같다."
+    "description": null
   },
   "Head014_3": {
     "localized_name": "빙긋알록새 모자",
-    "description": "알록새을(를) 본뜬 모자. 쓰면 빙긋빙긋 웃는 얼굴이 될 것 같다."
+    "description": null
   },
   "Head014_4": {
     "localized_name": "빙긋알록새 모자",
-    "description": "알록새을(를) 본뜬 모자. 쓰면 빙긋빙긋 웃는 얼굴이 될 것 같다."
+    "description": null
   },
   "Head014_5": {
     "localized_name": "빙긋알록새 모자",
-    "description": "알록새을(를) 본뜬 모자. 쓰면 빙긋빙긋 웃는 얼굴이 될 것 같다."
+    "description": null
   },
   "Head015": {
     "localized_name": "초롱이 모자",
-    "description": "초롱이을(를) 본뜬 모자."
+    "description": null
   },
   "Head015_2": {
     "localized_name": "초롱이 모자",
-    "description": "초롱이을(를) 본뜬 모자."
+    "description": null
   },
   "Head015_3": {
     "localized_name": "초롱이 모자",
-    "description": "초롱이을(를) 본뜬 모자."
+    "description": null
   },
   "Head015_4": {
     "localized_name": "초롱이 모자",
-    "description": "초롱이을(를) 본뜬 모자."
+    "description": null
   },
   "Head015_5": {
     "localized_name": "초롱이 모자",
-    "description": "초롱이을(를) 본뜬 모자."
+    "description": null
   },
   "Head016": {
     "localized_name": "펭킹 모자",
-    "description": "펭킹을(를) 본뜬 모자."
+    "description": null
   },
   "Head016_2": {
     "localized_name": "펭킹 모자",
-    "description": "펭킹을(를) 본뜬 모자."
+    "description": null
   },
   "Head016_3": {
     "localized_name": "펭킹 모자",
-    "description": "펭킹을(를) 본뜬 모자."
+    "description": null
   },
   "Head016_4": {
     "localized_name": "펭킹 모자",
-    "description": "펭킹을(를) 본뜬 모자."
+    "description": null
   },
   "Head016_5": {
     "localized_name": "펭킹 모자",
-    "description": "펭킹을(를) 본뜬 모자."
+    "description": null
   },
   "Head017": {
     "localized_name": "캐티메이지 모자",
-    "description": "캐티메이지을(를) 본뜬 모자."
+    "description": null
   },
   "Head017_2": {
     "localized_name": "캐티메이지 모자",
-    "description": "캐티메이지을(를) 본뜬 모자."
+    "description": null
   },
   "Head017_3": {
     "localized_name": "캐티메이지 모자",
-    "description": "캐티메이지을(를) 본뜬 모자."
+    "description": null
   },
   "Head017_4": {
     "localized_name": "캐티메이지 모자",
-    "description": "캐티메이지을(를) 본뜬 모자."
+    "description": null
   },
   "Head017_5": {
     "localized_name": "캐티메이지 모자",
-    "description": "캐티메이지을(를) 본뜬 모자."
+    "description": null
   },
   "HeadEquip001_purple": {
     "localized_name": "마녀의 관[궁극]",
@@ -3711,6 +3747,10 @@
     "localized_name": "메테오 발사기",
     "description": "운석을 가공하여 만든 아주 유별난 무기. 착탄 시 운석과도 같은 폭발을 일으킨다."
   },
+  "Launcher_Meteor_5": {
+    "localized_name": "메테오 발사기",
+    "description": "운석을 가공하여 만든 아주 유별난 무기. 착탄 시 운석과도 같은 폭발을 일으킨다."
+  },
   "Leather": {
     "localized_name": "가죽",
     "description": "팰에게서 얻은 가죽으로, 방어구의 재료가 된다. 일부 팰에게서 얻을 수 있다."
@@ -3888,7 +3928,7 @@
     "description": "너덜너덜하게 분쇄된 어떤 생물의 생체 조직. 유전자를 복원시킨 팰을 해체하면 생기는 잔류물로 더 이상 쓸모가 없기에 팔거나 버릴 수밖에 없다."
   },
   "Meat": {
-    "localized_name": "날고기",
+    "localized_name": "Meat",
     "description": "팰 고기. 사람이 날것으로 먹어도 될 만큼 신선하다."
   },
   "Meat2": {
@@ -4099,6 +4139,22 @@
     "localized_name": "ko Text",
     "description": "ko Text"
   },
+  "OverheatRifle_2": {
+    "localized_name": "ko Text",
+    "description": "ko Text"
+  },
+  "OverheatRifle_3": {
+    "localized_name": "ko Text",
+    "description": "ko Text"
+  },
+  "OverheatRifle_4": {
+    "localized_name": "ko Text",
+    "description": "ko Text"
+  },
+  "OverheatRifle_5": {
+    "localized_name": "ko Text",
+    "description": "ko Text"
+  },
   "PalCrystal_Ex": {
     "localized_name": "고대 문명의 부품",
     "description": "고대 유적에서 발굴한 저급한 물건. 잃어버린 기술의 정보가 빼곡하게 차 있다. 엄청난 가치 덕분에 어지간한 인간이라면 전부 이것을 노리고 있다."
@@ -4108,6 +4164,14 @@
     "description": "일부 강력한 어둠 속성 팰이 떨어뜨리는 파편. 강력한 장신구를 제작할 때 쓰인다."
   },
   "PalDopingShot": {
+    "localized_name": "ko Text",
+    "description": "ko Text"
+  },
+  "PalDopingShot_2": {
+    "localized_name": "ko Text",
+    "description": "ko Text"
+  },
+  "PalDopingShot_3": {
     "localized_name": "ko Text",
     "description": "ko Text"
   },
@@ -4938,10 +5002,6 @@
   "Shield_04": {
     "localized_name": "테라 방패",
     "description": "팰지움 기술로 탄생한 신비한 방패. 한동안 공격받지 않으면 자동으로 수리된다. 실험을 거듭한 결과 품질 면에서 최고봉에 도달했다."
-  },
-  "Shield_05": {
-    "localized_name": "울트라 방패",
-    "description": "팰지움 기술로 탄생한 신비한 방패. 한동안 공격받지 않으면 자동으로 수리된다. 실험을 더욱 거듭한 결과 품질 면에서 궁극에 도달했다."
   },
   "Shield_SF": {
     "localized_name": "발전형 방패",
@@ -6059,12 +6119,68 @@
     "localized_name": "미야우미어",
     "description": "[Terraria 컬래버] 먼 나라에 다녀온 칼구리이(가) 들고 왔다는 전설이 붙은 검. 그러나 들고 온 이유에 대해선 알려진 바가 없다고 한다…"
   },
-  "SniperRifle_Default": {
-    "localized_name": "스나이퍼 라이플",
-    "description": "뛰어난 정확도를 자랑하는 장거리 소총입니다. 다루기 쉽고 장거리 전투에서 효과적입니다."
+  "YakushimaBlade002": {
+    "localized_name": "미야우미어",
+    "description": "[Terraria 컬래버] 먼 나라에 다녀온 칼구리이(가) 들고 왔다는 전설이 붙은 검. 그러나 들고 온 이유에 대해선 알려진 바가 없다고 한다…"
   },
-  "LargeBullet": {
-    "localized_name": "스나이퍼 탄약",
-    "description": "스나이퍼 라이플에 사용되는 대형 총알입니다. 높은 정확도와 파워를 지니고 있습니다."
+  "YakushimaBlade002_2": {
+    "localized_name": "미야우미어",
+    "description": "[Terraria 컬래버] 먼 나라에 다녀온 칼구리이(가) 들고 왔다는 전설이 붙은 검. 그러나 들고 온 이유에 대해선 알려진 바가 없다고 한다…"
+  },
+  "YakushimaBlade002_3": {
+    "localized_name": "미야우미어",
+    "description": "[Terraria 컬래버] 먼 나라에 다녀온 칼구리이(가) 들고 왔다는 전설이 붙은 검. 그러나 들고 온 이유에 대해선 알려진 바가 없다고 한다…"
+  },
+  "YakushimaBlade002_4": {
+    "localized_name": "미야우미어",
+    "description": "[Terraria 컬래버] 먼 나라에 다녀온 칼구리이(가) 들고 왔다는 전설이 붙은 검. 그러나 들고 온 이유에 대해선 알려진 바가 없다고 한다…"
+  },
+  "YakushimaBlade002_5": {
+    "localized_name": "미야우미어",
+    "description": "[Terraria 컬래버] 먼 나라에 다녀온 칼구리이(가) 들고 왔다는 전설이 붙은 검. 그러나 들고 온 이유에 대해선 알려진 바가 없다고 한다…"
+  },
+  "YakushimaBlade003": {
+    "localized_name": "미야우미어",
+    "description": "[Terraria 컬래버] 먼 나라에 다녀온 칼구리이(가) 들고 왔다는 전설이 붙은 검. 그러나 들고 온 이유에 대해선 알려진 바가 없다고 한다…"
+  },
+  "YakushimaBlade003_2": {
+    "localized_name": "미야우미어",
+    "description": "[Terraria 컬래버] 먼 나라에 다녀온 칼구리이(가) 들고 왔다는 전설이 붙은 검. 그러나 들고 온 이유에 대해선 알려진 바가 없다고 한다…"
+  },
+  "YakushimaBlade003_3": {
+    "localized_name": "미야우미어",
+    "description": "[Terraria 컬래버] 먼 나라에 다녀온 칼구리이(가) 들고 왔다는 전설이 붙은 검. 그러나 들고 온 이유에 대해선 알려진 바가 없다고 한다…"
+  },
+  "YakushimaBlade003_4": {
+    "localized_name": "미야우미어",
+    "description": "[Terraria 컬래버] 먼 나라에 다녀온 칼구리이(가) 들고 왔다는 전설이 붙은 검. 그러나 들고 온 이유에 대해선 알려진 바가 없다고 한다…"
+  },
+  "YakushimaBlade003_5": {
+    "localized_name": "미야우미어",
+    "description": "[Terraria 컬래버] 먼 나라에 다녀온 칼구리이(가) 들고 왔다는 전설이 붙은 검. 그러나 들고 온 이유에 대해선 알려진 바가 없다고 한다…"
+  },
+  "YakushimaBlade004": {
+    "localized_name": "미야우미어",
+    "description": "[Terraria 컬래버] 먼 나라에 다녀온 칼구리이(가) 들고 왔다는 전설이 붙은 검. 그러나 들고 온 이유에 대해선 알려진 바가 없다고 한다…"
+  },
+  "YakushimaBlade004_2": {
+    "localized_name": "미야우미어",
+    "description": "[Terraria 컬래버] 먼 나라에 다녀온 칼구리이(가) 들고 왔다는 전설이 붙은 검. 그러나 들고 온 이유에 대해선 알려진 바가 없다고 한다…"
+  },
+  "YakushimaBlade004_3": {
+    "localized_name": "미야우미어",
+    "description": "[Terraria 컬래버] 먼 나라에 다녀온 칼구리이(가) 들고 왔다는 전설이 붙은 검. 그러나 들고 온 이유에 대해선 알려진 바가 없다고 한다…"
+  },
+  "YakushimaBlade004_4": {
+    "localized_name": "미야우미어",
+    "description": "[Terraria 컬래버] 먼 나라에 다녀온 칼구리이(가) 들고 왔다는 전설이 붙은 검. 그러나 들고 온 이유에 대해선 알려진 바가 없다고 한다…"
+  },
+  "YakushimaBlade004_5": {
+    "localized_name": "미야우미어",
+    "description": "[Terraria 컬래버] 먼 나라에 다녀온 칼구리이(가) 들고 왔다는 전설이 붙은 검. 그러나 들고 온 이유에 대해선 알려진 바가 없다고 한다…"
+  },
+  "YakushimaBlade005": {
+    "localized_name": "미야우미어",
+    "description": "[Terraria 컬래버] 먼 나라에 다녀온 칼구리이(가) 들고 왔다는 전설이 붙은 검. 그러나 들고 온 이유에 대해선 알려진 바가 없다고 한다…"
   }
 }

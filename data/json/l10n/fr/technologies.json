@@ -7,6 +7,10 @@
     "localized_name": "Bottes de double ruée aérienne",
     "description": null
   },
+  "Accessory_AirDash3": {
+    "localized_name": "fr Text",
+    "description": null
+  },
   "Accessory_JumpCount_Increase1": {
     "localized_name": "Bottes de double saut",
     "description": null
@@ -95,6 +99,10 @@
     "localized_name": "Plateforme de surveillance",
     "description": null
   },
+  "BaseCampWorkerExtraStation": {
+    "localized_name": "BaseCampWorkerExtraStation",
+    "description": null
+  },
   "Battle_Armor_Grade_01_Cloth": {
     "localized_name": "Vêtement en tissu",
     "description": "Des habits en Tissu. Ils protègent contre le froid nocturne. Un Établi de fortune est requis pour en fabriquer."
@@ -181,7 +189,7 @@
   },
   "Battle_Defense_MachineGun": {
     "localized_name": "Mitrailleuse montée",
-    "description": "Les Pals qui y sont affectés avec la capacité Travaux manuels disposeront d'une installation de défense adaptée pour protéger le camp."
+    "description": "Les Pals assignés avec la capacité Travaux manuels disposeront d'une mitrailleuse pour protéger le camp."
   },
   "Battle_Defense_Missile": {
     "localized_name": "Lance-missiles monté",
@@ -284,8 +292,8 @@
     "description": null
   },
   "Battle_RangeWeapon_FlameThrower": {
-    "localized_name": "Lance-flammes",
-    "description": "Un Flamethrower pour souffler du feu sur une longue distance. Permet d'enflammer les individus touchés. Une Chaîne de production d'armes II est requise pour en fabriquer."
+    "localized_name": "FlameThrower",
+    "description": null
   },
   "Battle_RangeWeapon_GatlingGun": {
     "localized_name": "Pistolet gatling",
@@ -355,6 +363,10 @@
     "localized_name": "Épée rayonnante",
     "description": null
   },
+  "BelieverFlagSet": {
+    "localized_name": "Ensemble de Drapeaux de la LPP",
+    "description": "Un ensemble contenant un Believer_Flag et une Believer_Banner. Symbole de votre victoire sur la Ligue pour la Protection des Pals."
+  },
   "BlastFurnace4": {
     "localized_name": "Fournaise géante",
     "description": null
@@ -383,9 +395,17 @@
     "localized_name": "Ciment",
     "description": null
   },
+  "ChargeLaserRifle": {
+    "localized_name": "fr Text",
+    "description": null
+  },
+  "ChargeLaserRifleBullet": {
+    "localized_name": "fr Text",
+    "description": null
+  },
   "Cloth2": {
     "localized_name": "Tissu de qualité",
-    "description": "Du Tissu de qualité obtenu en tissant une grande quantité de Laine. Nécessaire à la fabrication des protections de qualité. Une Établi de qualité est requise pour en fabriquer."
+    "description": null
   },
   "CompositeDesk": {
     "localized_name": "Table de dessin",
@@ -406,6 +426,10 @@
   "Crusher": {
     "localized_name": "Concasseur",
     "description": "Une installation permettant de broyer Pierre et Bois de charpente pour obtenir d'autres matériaux. La capacité « arrosage » est requise pour utiliser le moulin à eau."
+  },
+  "CrystalPit": {
+    "localized_name": "CrystalPit",
+    "description": null
   },
   "DamagedScarecrow": {
     "localized_name": "Mannequin martyr",
@@ -467,12 +491,24 @@
     "localized_name": "Canon à plasma",
     "description": null
   },
+  "EnergyShotgun": {
+    "localized_name": "fr Text",
+    "description": null
+  },
+  "EnergyShotgunBullet": {
+    "localized_name": "fr Text",
+    "description": null
+  },
   "EnergyStorage_Electric": {
     "localized_name": "Condensateur",
     "description": null
   },
   "Expedition": {
     "localized_name": "Lieu d'expédition pour Pals",
+    "description": null
+  },
+  "Factory_Hard_04": {
+    "localized_name": "fr_Text",
     "description": null
   },
   "Factory_Money": {
@@ -482,6 +518,42 @@
   "Farm_SkillFruits": {
     "localized_name": "Plantation de Fruits de Maîtrise",
     "description": null
+  },
+  "FireCultFlagSet": {
+    "localized_name": "Ensemble de Drapeaux de la Confrérie",
+    "description": "Un ensemble contenant un FireCult_Flag et une FireCult_Banner. Symbole de votre victoire sur la Confrérie des Flammes Éternelles."
+  },
+  "FishingBait_2": {
+    "localized_name": "FishingBait_2",
+    "description": null
+  },
+  "FishingBait_3": {
+    "localized_name": "FishingBait_3",
+    "description": null
+  },
+  "FishingBait_3_A": {
+    "localized_name": "FishingBait_3_A",
+    "description": null
+  },
+  "FishingPond1": {
+    "localized_name": "FishingPond1",
+    "description": null
+  },
+  "FishingPond2": {
+    "localized_name": "FishingPond2",
+    "description": null
+  },
+  "FishingRod_02_1": {
+    "localized_name": "FishingRod_02_1",
+    "description": null
+  },
+  "FishingRod_03_1": {
+    "localized_name": "FishingRod_03_1",
+    "description": null
+  },
+  "FishingSet1": {
+    "localized_name": "Ensemble de Pêche Basique",
+    "description": "Un ensemble d'appâts de pêche pour néophytes. Vous pourrez pêcher des Pals aquatiques en fabriquant une canne et des appâts."
   },
   "FlamethrowerBullet": {
     "localized_name": "Combustible pour lance-flammes",
@@ -699,6 +771,10 @@
     "localized_name": "Téra pistolet-grappin",
     "description": null
   },
+  "GrapplingGun5": {
+    "localized_name": "GrapplingGun5",
+    "description": null
+  },
   "GrenadeBullet": {
     "localized_name": "Grenade",
     "description": null
@@ -730,6 +806,10 @@
   "HugeKitchen": {
     "localized_name": "Grande cuisine",
     "description": null
+  },
+  "HunterFlagSet": {
+    "localized_name": "Ensemble de Drapeaux des Syndicats",
+    "description": "Un ensemble contenant un Hunter_Flag et une Hunter_Banner. Symbole de votre victoire sur les Syndicats de Rayne."
   },
   "IceCrusher": {
     "localized_name": "Broyeur à glace",
@@ -803,6 +883,10 @@
     "localized_name": "Lanterne de taille",
     "description": null
   },
+  "Lantern_High": {
+    "localized_name": "Lantern_High",
+    "description": null
+  },
   "LargeCeilingLamp": {
     "localized_name": "Plafonnier (grand)",
     "description": "À accrocher au plafond pour éclairer une vaste zone."
@@ -845,6 +929,10 @@
   },
   "MakeshiftSubmachineGun": {
     "localized_name": "Pistolet-mitrailleur usé",
+    "description": null
+  },
+  "ManganeseIngot": {
+    "localized_name": "ManganeseIngot",
     "description": null
   },
   "ManualElectricGenerator": {
@@ -895,9 +983,17 @@
     "localized_name": "Grand incubateur électrique",
     "description": null
   },
+  "MultiHatchingPalEgg": {
+    "localized_name": "MultiHatchingPalEgg",
+    "description": null
+  },
   "Musket": {
     "localized_name": "Fusil à mousquet",
     "description": "Un pistolet modeste marqué par les années. Ses coups sont puissants mais le recharger prend du temps. Une Établi pour armes est requise pour en fabriquer."
+  },
+  "NinjaFlagSet": {
+    "localized_name": "Ensemble de Drapeaux des Fleurs Lunaires",
+    "description": "Un ensemble contenant un Ninja_Flag et une Ninja_Banner. Symbole de votre victoire sur le Clan des Fleurs Lunaires."
   },
   "OilPump": {
     "localized_name": "Pompe à pétrole brut",
@@ -905,6 +1001,18 @@
   },
   "OlympicCauldron": {
     "localized_name": "Marmite",
+    "description": null
+  },
+  "OperatingTable": {
+    "localized_name": "fr_Text",
+    "description": null
+  },
+  "OverheatRifle": {
+    "localized_name": "fr Text",
+    "description": null
+  },
+  "OverheatRifleBullet": {
+    "localized_name": "fr Text",
     "description": null
   },
   "PALBOX": {
@@ -915,9 +1023,25 @@
     "localized_name": "Marché aux puces (Pals)",
     "description": null
   },
+  "PalDopingShot": {
+    "localized_name": "fr Text",
+    "description": null
+  },
+  "PalDopingShotBullet": {
+    "localized_name": "fr Text",
+    "description": null
+  },
+  "PalDopingShot_2": {
+    "localized_name": "PalDopingShot_2",
+    "description": null
+  },
   "PalFoodBox": {
     "localized_name": "Boîte à nourriture",
     "description": "Y introduire de la nourriture permettra aux Pals du camp de l'utiliser pour se nourrir."
+  },
+  "PalHealingGrenade": {
+    "localized_name": "fr Text",
+    "description": null
   },
   "PalMedicineBox": {
     "localized_name": "Étagère à remèdes",
@@ -934,6 +1058,10 @@
   "Plastic": {
     "localized_name": "Plastacier",
     "description": null
+  },
+  "PoliceFlagSet": {
+    "localized_name": "Ensemble de Drapeaux de la Milice",
+    "description": "Un ensemble contenant un Police_Flag et une Police_Banner. Symbole de votre victoire sur la Milice Populaire."
   },
   "Polymer": {
     "localized_name": "Polymère",
@@ -1017,11 +1145,11 @@
   },
   "Product_Farm_wheat": {
     "localized_name": "Plantation de blé",
-    "description": "Matière première du Pain. Un Pal avec les capacités Semence, Arrosage et Collecte est requis pour l'exploiter."
+    "description": "Permet de cultiver du blé, ingrédient de base du Pain. Nécessite des Pals possédant les capacités Semence, Arrosage et Collecte."
   },
   "Product_Ingot_Grade_01_Copper": {
     "localized_name": "Fournaise de fortune",
-    "description": "Permet de construire une Fournaise de fortune et donc de raffiner le Minerai de métal pour produire des lingots."
+    "description": "Permet de raffiner le Minerai de métal pour produire des lingots."
   },
   "Product_Ingot_Grade_02_Iron": {
     "localized_name": "Fournaise améliorée",
@@ -1135,9 +1263,21 @@
     "localized_name": "Casque en hexolite",
     "description": null
   },
+  "SF_houseset": {
+    "localized_name": "Structures de Style Futuriste",
+    "description": "Un assortiment pour construire un camp de style Futuriste. Permet de fabriquer tout le nécessaire à la construction d'une maison (base, murs, toit, escalier, etc.)."
+  },
+  "Salvage_TreasureBoxKey02": {
+    "localized_name": "Salvage_TreasureBoxKey02",
+    "description": null
+  },
   "SanityDecrease1": {
     "localized_name": "Dispositif de vague α",
     "description": null
+  },
+  "ScientistFlagSet": {
+    "localized_name": "Ensemble de Drapeaux de l'Unité de Recherche",
+    "description": "Un ensemble contenant un Scientist_Flag et une Scientist_Banner. Symbole de votre victoire sur l’Unité de Recherche sur les Gènes."
   },
   "Shield_01": {
     "localized_name": "Bouclier normal",
@@ -1217,6 +1357,10 @@
   },
   "SkillUnlock_BlueDragon": {
     "localized_name": "Selle pour Azurobe",
+    "description": null
+  },
+  "SkillUnlock_BlueDragon_Ice": {
+    "localized_name": "SkillUnlock_BlueDragon_Ice",
     "description": null
   },
   "SkillUnlock_BlueThunderHorse": {
@@ -1311,8 +1455,20 @@
     "localized_name": "Gants pour Celaray",
     "description": null
   },
+  "SkillUnlock_FlyingManta_Thunder": {
+    "localized_name": "SkillUnlock_FlyingManta_Thunder",
+    "description": null
+  },
   "SkillUnlock_Garm": {
     "localized_name": "Harnais à selle pour Direhowl",
+    "description": null
+  },
+  "SkillUnlock_GhostAnglerfish": {
+    "localized_name": "SkillUnlock_GhostAnglerfish",
+    "description": null
+  },
+  "SkillUnlock_GhostAnglerfish_Fire": {
+    "localized_name": "SkillUnlock_GhostAnglerfish_Fire",
     "description": null
   },
   "SkillUnlock_GhostBeast": {
@@ -1383,6 +1539,18 @@
     "localized_name": "Selle pour Frostallion Noct",
     "description": null
   },
+  "SkillUnlock_IceNarwhal": {
+    "localized_name": "SkillUnlock_IceNarwhal",
+    "description": null
+  },
+  "SkillUnlock_IceNarwhal_Fire": {
+    "localized_name": "SkillUnlock_IceNarwhal_Fire",
+    "description": null
+  },
+  "SkillUnlock_IceSeal": {
+    "localized_name": "SkillUnlock_IceSeal",
+    "description": null
+  },
   "SkillUnlock_JetDragon": {
     "localized_name": "Lance-missiles pour Jetragon",
     "description": null
@@ -1423,6 +1591,10 @@
     "localized_name": "Lance-missiles pour Relaxaurus Lux",
     "description": null
   },
+  "SkillUnlock_LeafMomonga": {
+    "localized_name": "SkillUnlock_LeafMomonga",
+    "description": null
+  },
   "SkillUnlock_Manticore": {
     "localized_name": "Selle pour Blazehowl",
     "description": null
@@ -1459,12 +1631,28 @@
     "localized_name": "Gants pour Killamari",
     "description": null
   },
+  "SkillUnlock_NegativeOctopus_Neutral": {
+    "localized_name": "SkillUnlock_NegativeOctopus_Neutral",
+    "description": null
+  },
   "SkillUnlock_NightBlueHorse": {
     "localized_name": "Selle pour Starryon",
     "description": null
   },
   "SkillUnlock_Penguin": {
     "localized_name": "Lance-Roquettes pour Pengullet",
+    "description": null
+  },
+  "SkillUnlock_Penguin_Electric": {
+    "localized_name": "SkillUnlock_Penguin_Electric",
+    "description": null
+  },
+  "SkillUnlock_Plesiosaur": {
+    "localized_name": "SkillUnlock_Plesiosaur",
+    "description": null
+  },
+  "SkillUnlock_PoseidonOrca": {
+    "localized_name": "SkillUnlock_PoseidonOrca",
     "description": null
   },
   "SkillUnlock_PurpleSpider": {
@@ -1529,6 +1717,10 @@
   },
   "SkillUnlock_ThunderDog": {
     "localized_name": "Selle pour Rayhound",
+    "description": null
+  },
+  "SkillUnlock_TropicalOstrich": {
+    "localized_name": "SkillUnlock_TropicalOstrich",
     "description": null
   },
   "SkillUnlock_Umihebi": {
@@ -1598,6 +1790,10 @@
   "Spa2": {
     "localized_name": "Source chaude réputée",
     "description": "Les Pals qui l'utilisent récupèrent une plus grande quantité de points MEN."
+  },
+  "Spa3": {
+    "localized_name": "Spa3",
+    "description": null
   },
   "Spear": {
     "localized_name": "Lance en pierre",
@@ -1770,6 +1966,10 @@
   "WallTorch": {
     "localized_name": "Torche murale",
     "description": "À accrocher aux murs."
+  },
+  "WeaponFactory_Dirty_04": {
+    "localized_name": "fr_Text",
+    "description": null
   },
   "Wood_Gate": {
     "localized_name": "Portail en bois",

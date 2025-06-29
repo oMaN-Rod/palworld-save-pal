@@ -268,7 +268,7 @@
     "description": "Scaglia innumerevoli lame d'aria che volano verso il nemico."
   },
   "EPalWazaID::Railbolt": {
-    "localized_name": "Cannone elettrico",
+    "localized_name": "Railbolt",
     "description": "Si carica al massimo di elettricità per poi scagliare contemporaneamente numerose scariche elettriche contro il nemico."
   },
   "EPalWazaID::RangeThunder": {

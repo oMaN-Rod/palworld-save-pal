@@ -268,7 +268,7 @@
     "description": "Dispara inúmeras lâminas de vento que voam na direção do inimigo."
   },
   "EPalWazaID::Railbolt": {
-    "localized_name": "Trilho de Trovão",
+    "localized_name": "Railbolt",
     "description": "Carrega energia elétrica até o limite para disparar simultaneamente vários ataques de eletricidade poderosos contra o inimigo."
   },
   "EPalWazaID::RangeThunder": {

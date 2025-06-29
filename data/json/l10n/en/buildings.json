@@ -371,6 +371,10 @@
     "localized_name": "Glass Wall and Door",
     "description": "Door built on a foundation. Becomes an entrance. Made of industrial-strength glass, it's quite sturdy."
   },
+  "Glass_Fence": {
+    "localized_name": "-",
+    "description": null
+  },
   "Glass_SlantedRoof": {
     "localized_name": "Glass Slanted Roof",
     "description": "Slanted roof built on top of walls to keep out the rain and wind. Made of industrial-strength glass, it's quite sturdy."
@@ -386,10 +390,6 @@
   "Glass_foundation": {
     "localized_name": "Glass Foundation",
     "description": "A foundation for building walls or facilities on. Made of industrial-strength glass, it's quite sturdy."
-  },
-  "Glass_pillars": {
-    "localized_name": "Glass Pillar",
-    "description": "Column for structural support. Made of industrial-strength glass, it's quite sturdy."
   },
   "Glass_roof": {
     "localized_name": "Glass Roof",
@@ -443,6 +443,10 @@
     "localized_name": "Refrigerated Crusher",
     "description": "Facility that crushes Ore and converts it into other materials. Requires a power supply and a Pal with Cooling suitability, but it's very efficient."
   },
+  "Iron_Fence": {
+    "localized_name": "-",
+    "description": null
+  },
   "Irori": {
     "localized_name": "Japanese Hearth",
     "description": "Decorative Hearth. Perfect for Japanese-style buildings."
@@ -490,6 +494,10 @@
   "JapaneseStyle_DoorWall_03": {
     "localized_name": "Japanese-Style Door C",
     "description": "Japanese sliding door (fusuma) built on a foundation. Becomes an indoor entrance. You can create stylish Japanese-style architecture."
+  },
+  "JapaneseStyle_Fence": {
+    "localized_name": "-",
+    "description": null
   },
   "JapaneseStyle_Pillar": {
     "localized_name": "Japanese-Style Pillar",
@@ -659,10 +667,6 @@
     "localized_name": "Metal Foundation",
     "description": "A foundation for building walls or facilities on. Made from metal, it is extremely durable."
   },
-  "Metal_pillars": {
-    "localized_name": "Metal Pillar",
-    "description": "Column for structural support. Made from metal, it is extremely durable."
-  },
   "Metal_roof": {
     "localized_name": "Metal Roof",
     "description": "A roof built on top of walls to keep out the rain and wind. Made from metal, it is extremely durable."
@@ -803,6 +807,10 @@
     "localized_name": "Fur rug",
     "description": "en Text"
   },
+  "SF_Fence": {
+    "localized_name": "-",
+    "description": null
+  },
   "SanityDecrease1": {
     "localized_name": "Alpha Wave Generator",
     "description": "A device that generates alpha waves to relax Pals. It slows the rate at which the SAN value of allies at the base decreases. Placing more than two will not have any additional effect."
@@ -935,6 +943,10 @@
     "localized_name": "High Quality Hot Spring",
     "description": "Facility where Pals on base can rest. Now comfier and restores more SAN."
   },
+  "Spa3": {
+    "localized_name": "Hot Spring",
+    "description": "Facility where Pals on base can rest. Restores SAN after a long day of hard work."
+  },
   "SphereFactory_Black_01": {
     "localized_name": "Sphere Workbench",
     "description": "A Primitive Workbench for producing spheres used for capturing Pals. A small workspace keeps the production speed slow. Requires Pals that can work with their hands."
@@ -963,6 +975,10 @@
     "localized_name": "Stone Door",
     "description": "Door built on a foundation. Becomes an entrance. Made from stone, it is reasonably sturdy."
   },
+  "Stone_Fence": {
+    "localized_name": "-",
+    "description": null
+  },
   "Stone_Gate": {
     "localized_name": "Stone Gate",
     "description": "Gate large enough for big Pals to pass through. Made from stone, it is reasonably sturdy."
@@ -982,10 +998,6 @@
   "Stone_foundation": {
     "localized_name": "Stone Foundation",
     "description": "A foundation for building walls or facilities on. Made from stone, it is reasonably sturdy."
-  },
-  "Stone_pillar": {
-    "localized_name": "Stone Pillar",
-    "description": "Column for structural support. Made from stone, it is reasonably sturdy."
   },
   "Stone_roof": {
     "localized_name": "Stone Roof",
@@ -1211,6 +1223,10 @@
     "localized_name": "-",
     "description": null
   },
+  "Wood_Fence": {
+    "localized_name": "-",
+    "description": null
+  },
   "Wood_Gate": {
     "localized_name": "Wooden Gate",
     "description": "Gate large enough for big Pals to pass through. Made from wood, it breaks easily."
@@ -1242,10 +1258,6 @@
   "Wooden_ladder": {
     "localized_name": "Ladder",
     "description": "A ladder that allows you to climb to a slightly higher place."
-  },
-  "Wooden_pillar": {
-    "localized_name": "Wooden Pillar",
-    "description": "Column for structural support. Made from wood, it breaks easily."
   },
   "Wooden_roof": {
     "localized_name": "Wooden Roof",
