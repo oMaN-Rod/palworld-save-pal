@@ -537,7 +537,7 @@
   },
   "Blueprint_CandleStand": {
     "localized_name": "庄严烛台设计图",
-    "description": "持有或存放在据点中， 即可建造「<MapObjectName id=|CandleStand|/>」。"
+    "description": "持有或存放在据点中， 即可建造「庄严烛台」。"
   },
   "Blueprint_ChargeLaserRifle_2": {
     "localized_name": "充能步枪设计图1",
@@ -621,11 +621,11 @@
   },
   "Blueprint_ConservationGroupBannerA": {
     "localized_name": "帕鲁保护团体旗帜设计图",
-    "description": "持有或存放在据点中， 即可建造「<MapObjectName id=|ConservationGroupBannerA|/>」。"
+    "description": "持有或存放在据点中， 即可建造「帕鲁保护团体旗帜」。"
   },
   "Blueprint_ConservationGroupBannerB": {
     "localized_name": "帕鲁保护团体横幅设计图",
-    "description": "持有或存放在据点中， 即可建造「<MapObjectName id=|ConservationGroupBannerB|/>」。"
+    "description": "持有或存放在据点中， 即可建造「帕鲁保护团体横幅」。"
   },
   "Blueprint_CopperArmorCold_2": {
     "localized_name": "耐寒金属盔甲设计图1",
@@ -741,7 +741,7 @@
   },
   "Blueprint_FireStand": {
     "localized_name": "仪式用烛台设计图",
-    "description": "持有或存放在据点中， 即可建造「<MapObjectName id=|FireStand|/>」。"
+    "description": "持有或存放在据点中， 即可建造「仪式用烛台」。"
   },
   "Blueprint_FishingRod_01_2": {
     "localized_name": "初级钓竿（叶泥泥）设计图",
@@ -869,7 +869,7 @@
   },
   "Blueprint_GuardianDogStatue": {
     "localized_name": "八云犬雕像设计图",
-    "description": "持有或存放在据点中， 即可建造「<MapObjectName id=|GuardianDogStatue|/>」。"
+    "description": "持有或存放在据点中， 即可建造「八云犬雕像」。"
   },
   "Blueprint_GuidedMissileLauncher_2": {
     "localized_name": "追踪导弹发射器设计图1",
@@ -1345,7 +1345,7 @@
   },
   "Blueprint_Hunter_GangFlag": {
     "localized_name": "盗猎团旗帜设计图",
-    "description": "持有或存放在据点中， 即可建造「<MapObjectName id=|Hunter GangFlag|/>」。"
+    "description": "持有或存放在据点中， 即可建造「Hunter GangFlag」。"
   },
   "Blueprint_IronArmorCold_2": {
     "localized_name": "耐寒精炼金属盔甲设计图1",
@@ -1413,7 +1413,7 @@
   },
   "Blueprint_LanternTop": {
     "localized_name": "日式白灯笼设计图",
-    "description": "持有或存放在据点中， 即可建造「<MapObjectName id=|LanternTop|/>」。"
+    "description": "持有或存放在据点中， 即可建造「日式白灯笼」。"
   },
   "Blueprint_LaserGatlingGun_2": {
     "localized_name": "激光加特林设计图1",
@@ -1469,7 +1469,7 @@
   },
   "Blueprint_LilyQueenStatue": {
     "localized_name": "百合女王雕像设计图",
-    "description": "持有或存放在据点中， 即可建造「<MapObjectName id=|LilyQueenStatue|/>」。"
+    "description": "持有或存放在据点中， 即可建造「百合女王雕像」。"
   },
   "Blueprint_MakeshiftAssaultRifle_2": {
     "localized_name": "破旧的突击步枪设计图1",
@@ -1801,11 +1801,11 @@
   },
   "Blueprint_SF_Chair": {
     "localized_name": "研究室风格椅子设计图",
-    "description": "持有或存放在据点中， 即可建造「<MapObjectName id=|SF Chair|/>」。"
+    "description": "持有或存放在据点中， 即可建造「SF Chair」。"
   },
   "Blueprint_SF_Desk": {
     "localized_name": "研究室风格书桌设计图",
-    "description": "持有或存放在据点中， 即可建造「<MapObjectName id=|SF Desk|/>」。"
+    "description": "持有或存放在据点中， 即可建造「SF Desk」。"
   },
   "Blueprint_SemiAutoRifle_2": {
     "localized_name": "半自动步枪设计图1",
@@ -1841,7 +1841,7 @@
   },
   "Blueprint_Shrine_Lantern": {
     "localized_name": "神社赤灯笼设计图",
-    "description": "持有或存放在据点中， 即可建造「<MapObjectName id=|Shrine Lantern|/>」。"
+    "description": "持有或存放在据点中， 即可建造「Shrine Lantern」。"
   },
   "Blueprint_SingleShotRifle_2": {
     "localized_name": "单发步枪设计图1",
@@ -1941,7 +1941,7 @@
   },
   "Blueprint_WallTorch02": {
     "localized_name": "庄严壁挂火把设计图",
-    "description": "持有或存放在据点中， 即可建造「<MapObjectName id=|WallTorch02|/>」。"
+    "description": "持有或存放在据点中， 即可建造「庄严壁挂火把」。"
   },
   "Blueprint_WeakerBow_2": {
     "localized_name": "陈旧的弓设计图1",
@@ -1961,11 +1961,11 @@
   },
   "Blueprint_Wire_Fence": {
     "localized_name": "铁丝网围栏设计图",
-    "description": "持有或存放在据点中， 即可建造「<MapObjectName id=|Wire Fence|/>」。"
+    "description": "持有或存放在据点中， 即可建造「Wire Fence」。"
   },
   "Blueprint_WoodenBarricade": {
     "localized_name": "木制路障设计图",
-    "description": "持有或存放在据点中， 即可建造「<MapObjectName id=|WoodenBarricade|/>」。"
+    "description": "持有或存放在据点中， 即可建造「木制路障」。"
   },
   "Blueprint_YakushimaArmor001": {
     "localized_name": "神圣板甲设计图",

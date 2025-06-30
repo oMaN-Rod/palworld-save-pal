@@ -537,7 +537,7 @@
   },
   "Blueprint_CandleStand": {
     "localized_name": "Majestic Candlestick Schematic",
-    "description": "When in inventory or stored in a base, allows you to build <MapObjectName id=|CandleStand|/>."
+    "description": "When in inventory or stored in a base, allows you to build Majestic Candlestick."
   },
   "Blueprint_ChargeLaserRifle_2": {
     "localized_name": "Charge Rifle Schematic 1",
@@ -621,11 +621,11 @@
   },
   "Blueprint_ConservationGroupBannerA": {
     "localized_name": "Free Pal Alliance Flag Schematic",
-    "description": "When in inventory or stored in a base, allows you to build <MapObjectName id=|ConservationGroupBannerA|/>."
+    "description": "When in inventory or stored in a base, allows you to build Free Pal Alliance Flag."
   },
   "Blueprint_ConservationGroupBannerB": {
     "localized_name": "Free Pal Alliance Banner Schematic",
-    "description": "When in inventory or stored in a base, allows you to build <MapObjectName id=|ConservationGroupBannerB|/>."
+    "description": "When in inventory or stored in a base, allows you to build Free Pal Alliance Horizontal Banner."
   },
   "Blueprint_CopperArmorCold_2": {
     "localized_name": "Cold Resistant Metal Armor Schematic 1",
@@ -741,7 +741,7 @@
   },
   "Blueprint_FireStand": {
     "localized_name": "Ceremonial Candlestick Schematic",
-    "description": "When in inventory or stored in a base, allows you to build <MapObjectName id=|FireStand|/>."
+    "description": "When in inventory or stored in a base, allows you to build Ceremonial Candlestick."
   },
   "Blueprint_FishingRod_01_2": {
     "localized_name": "Beginner Fishing Rod (Gumoss) Schematic",
@@ -869,7 +869,7 @@
   },
   "Blueprint_GuardianDogStatue": {
     "localized_name": "Yakumo Statue Schematic",
-    "description": "When in inventory or stored in a base, allows you to build <MapObjectName id=|GuardianDogStatue|/>."
+    "description": "When in inventory or stored in a base, allows you to build Yakumo Statue."
   },
   "Blueprint_GuidedMissileLauncher_2": {
     "localized_name": "Guided Missile Launcher Schematic 1",
@@ -1345,7 +1345,7 @@
   },
   "Blueprint_Hunter_GangFlag": {
     "localized_name": "Rayne Syndicate Flag Schematic",
-    "description": "When in inventory or stored in a base, allows you to build <MapObjectName id=|Hunter GangFlag|/>."
+    "description": "When in inventory or stored in a base, allows you to build Hunter GangFlag."
   },
   "Blueprint_IronArmorCold_2": {
     "localized_name": "Cold Resistant Refined Metal Armor Schematic 1",
@@ -1413,7 +1413,7 @@
   },
   "Blueprint_LanternTop": {
     "localized_name": "Paper Lantern Schematic",
-    "description": "When in inventory or stored in a base, allows you to build <MapObjectName id=|LanternTop|/>."
+    "description": "When in inventory or stored in a base, allows you to build Paper Lantern."
   },
   "Blueprint_LaserGatlingGun_2": {
     "localized_name": "Laser Gatling Gun Schematic 1",
@@ -1469,7 +1469,7 @@
   },
   "Blueprint_LilyQueenStatue": {
     "localized_name": "Lyleen Statue Schematic",
-    "description": "When in inventory or stored in a base, allows you to build <MapObjectName id=|LilyQueenStatue|/>."
+    "description": "When in inventory or stored in a base, allows you to build Lyleen Statue."
   },
   "Blueprint_MakeshiftAssaultRifle_2": {
     "localized_name": "Makeshift Assault Rifle Schematic 1",
@@ -1801,11 +1801,11 @@
   },
   "Blueprint_SF_Chair": {
     "localized_name": "Laboratory Chair Schematic",
-    "description": "When in inventory or stored in a base, allows you to build <MapObjectName id=|SF Chair|/>."
+    "description": "When in inventory or stored in a base, allows you to build SF Chair."
   },
   "Blueprint_SF_Desk": {
     "localized_name": "Laboratory Desk Schematic",
-    "description": "When in inventory or stored in a base, allows you to build <MapObjectName id=|SF Desk|/>."
+    "description": "When in inventory or stored in a base, allows you to build SF Desk."
   },
   "Blueprint_SemiAutoRifle_2": {
     "localized_name": "Semi-Auto Rifle Schematic 1",
@@ -1841,7 +1841,7 @@
   },
   "Blueprint_Shrine_Lantern": {
     "localized_name": "Festival Lantern Schematic",
-    "description": "When in inventory or stored in a base, allows you to build <MapObjectName id=|Shrine Lantern|/>."
+    "description": "When in inventory or stored in a base, allows you to build Shrine Lantern."
   },
   "Blueprint_SingleShotRifle_2": {
     "localized_name": "Single-Shot Rifle Schematic 1",
@@ -1941,7 +1941,7 @@
   },
   "Blueprint_WallTorch02": {
     "localized_name": "Majestic Wall Torch Schematic",
-    "description": "When in inventory or stored in a base, allows you to build <MapObjectName id=|WallTorch02|/>."
+    "description": "When in inventory or stored in a base, allows you to build Majestic Wall Torch."
   },
   "Blueprint_WeakerBow_2": {
     "localized_name": "Old Bow Schematic 1",
@@ -1961,11 +1961,11 @@
   },
   "Blueprint_Wire_Fence": {
     "localized_name": "Wire Fence Schematic",
-    "description": "When in inventory or stored in a base, allows you to build <MapObjectName id=|Wire Fence|/>."
+    "description": "When in inventory or stored in a base, allows you to build Wire Fence."
   },
   "Blueprint_WoodenBarricade": {
     "localized_name": "Wooden Barricade Schematic",
-    "description": "When in inventory or stored in a base, allows you to build <MapObjectName id=|WoodenBarricade|/>."
+    "description": "When in inventory or stored in a base, allows you to build Wooden Barricade."
   },
   "Blueprint_YakushimaArmor001": {
     "localized_name": "Hallowed Plate Mail Schematic",

@@ -537,7 +537,7 @@
   },
   "Blueprint_CandleStand": {
     "localized_name": "장엄한 촛대 설계도",
-    "description": "가지고 있거나 거점에 수납하면 |<MapObjectName id=|CandleStand|/>|을(를) 건축할 수 있게 된다."
+    "description": "가지고 있거나 거점에 수납하면 |장엄한 촛대|을(를) 건축할 수 있게 된다."
   },
   "Blueprint_ChargeLaserRifle_2": {
     "localized_name": "충전식 소총 설계도 1",
@@ -621,11 +621,11 @@
   },
   "Blueprint_ConservationGroupBannerA": {
     "localized_name": "팰 애호 단체 깃발 설계도",
-    "description": "가지고 있거나 거점에 수납하면 |<MapObjectName id=|ConservationGroupBannerA|/>|을(를) 건축할 수 있게 된다."
+    "description": "가지고 있거나 거점에 수납하면 |팰 애호 단체 깃발|을(를) 건축할 수 있게 된다."
   },
   "Blueprint_ConservationGroupBannerB": {
     "localized_name": "팰 애호 단체 배너 설계도",
-    "description": "가지고 있거나 거점에 수납하면 |<MapObjectName id=|ConservationGroupBannerB|/>|을(를) 건축할 수 있게 된다."
+    "description": "가지고 있거나 거점에 수납하면 |팰 애호 단체 배너|을(를) 건축할 수 있게 된다."
   },
   "Blueprint_CopperArmorCold_2": {
     "localized_name": "내한 금속 갑옷 설계도 1",
@@ -741,7 +741,7 @@
   },
   "Blueprint_FireStand": {
     "localized_name": "의식용 촛대 설계도",
-    "description": "가지고 있거나 거점에 수납하면 |<MapObjectName id=|FireStand|/>|을(를) 건축할 수 있게 된다."
+    "description": "가지고 있거나 거점에 수납하면 |의식용 촛대|을(를) 건축할 수 있게 된다."
   },
   "Blueprint_FishingRod_01_2": {
     "localized_name": "초급 낚싯대 (초롱이) 설계도",
@@ -869,7 +869,7 @@
   },
   "Blueprint_GuardianDogStatue": {
     "localized_name": "둥실해치 상 설계도",
-    "description": "가지고 있거나 거점에 수납하면 |<MapObjectName id=|GuardianDogStatue|/>|을(를) 건축할 수 있게 된다."
+    "description": "가지고 있거나 거점에 수납하면 |둥실해치 상|을(를) 건축할 수 있게 된다."
   },
   "Blueprint_GuidedMissileLauncher_2": {
     "localized_name": "미사일 발사기 설계도 1",
@@ -1345,7 +1345,7 @@
   },
   "Blueprint_Hunter_GangFlag": {
     "localized_name": "밀렵단 깃발 설계도",
-    "description": "가지고 있거나 거점에 수납하면 |<MapObjectName id=|Hunter GangFlag|/>|을(를) 건축할 수 있게 된다."
+    "description": "가지고 있거나 거점에 수납하면 |Hunter GangFlag|을(를) 건축할 수 있게 된다."
   },
   "Blueprint_IronArmorCold_2": {
     "localized_name": "내한 제련 금속 갑옷 설계도 1",
@@ -1413,7 +1413,7 @@
   },
   "Blueprint_LanternTop": {
     "localized_name": "제등 설계도",
-    "description": "가지고 있거나 거점에 수납하면 |<MapObjectName id=|LanternTop|/>|을(를) 건축할 수 있게 된다."
+    "description": "가지고 있거나 거점에 수납하면 |제등|을(를) 건축할 수 있게 된다."
   },
   "Blueprint_LaserGatlingGun_2": {
     "localized_name": "레이저 개틀링 건 설계도 1",
@@ -1469,7 +1469,7 @@
   },
   "Blueprint_LilyQueenStatue": {
     "localized_name": "릴린 상 설계도",
-    "description": "가지고 있거나 거점에 수납하면 |<MapObjectName id=|LilyQueenStatue|/>|을(를) 건축할 수 있게 된다."
+    "description": "가지고 있거나 거점에 수납하면 |릴린 상|을(를) 건축할 수 있게 된다."
   },
   "Blueprint_MakeshiftAssaultRifle_2": {
     "localized_name": "낡은 돌격 소총 설계도 1",
@@ -1801,11 +1801,11 @@
   },
   "Blueprint_SF_Chair": {
     "localized_name": "연구실 의자 설계도",
-    "description": "가지고 있거나 거점에 수납하면 |<MapObjectName id=|SF Chair|/>|을(를) 건축할 수 있게 된다."
+    "description": "가지고 있거나 거점에 수납하면 |SF Chair|을(를) 건축할 수 있게 된다."
   },
   "Blueprint_SF_Desk": {
     "localized_name": "연구실 책상 설계도",
-    "description": "가지고 있거나 거점에 수납하면 |<MapObjectName id=|SF Desk|/>|을(를) 건축할 수 있게 된다."
+    "description": "가지고 있거나 거점에 수납하면 |SF Desk|을(를) 건축할 수 있게 된다."
   },
   "Blueprint_SemiAutoRifle_2": {
     "localized_name": "반자동 소총 설계도 1",
@@ -1841,7 +1841,7 @@
   },
   "Blueprint_Shrine_Lantern": {
     "localized_name": "등롱 설계도",
-    "description": "가지고 있거나 거점에 수납하면 |<MapObjectName id=|Shrine Lantern|/>|을(를) 건축할 수 있게 된다."
+    "description": "가지고 있거나 거점에 수납하면 |Shrine Lantern|을(를) 건축할 수 있게 된다."
   },
   "Blueprint_SingleShotRifle_2": {
     "localized_name": "단발식 소총 설계도 1",
@@ -1941,7 +1941,7 @@
   },
   "Blueprint_WallTorch02": {
     "localized_name": "장엄한 벽걸이 횃불 설계도",
-    "description": "가지고 있거나 거점에 수납하면 |<MapObjectName id=|WallTorch02|/>|을(를) 건축할 수 있게 된다."
+    "description": "가지고 있거나 거점에 수납하면 |장엄한 벽걸이 횃불|을(를) 건축할 수 있게 된다."
   },
   "Blueprint_WeakerBow_2": {
     "localized_name": "오래된 활 설계도 1",
@@ -1961,11 +1961,11 @@
   },
   "Blueprint_Wire_Fence": {
     "localized_name": "와이어 울타리 설계도",
-    "description": "가지고 있거나 거점에 수납하면 |<MapObjectName id=|Wire Fence|/>|을(를) 건축할 수 있게 된다."
+    "description": "가지고 있거나 거점에 수납하면 |Wire Fence|을(를) 건축할 수 있게 된다."
   },
   "Blueprint_WoodenBarricade": {
     "localized_name": "나무 바리케이드 설계도",
-    "description": "가지고 있거나 거점에 수납하면 |<MapObjectName id=|WoodenBarricade|/>|을(를) 건축할 수 있게 된다."
+    "description": "가지고 있거나 거점에 수납하면 |나무 바리케이드|을(를) 건축할 수 있게 된다."
   },
   "Blueprint_YakushimaArmor001": {
     "localized_name": "신성한 판금 갑옷 설계도",

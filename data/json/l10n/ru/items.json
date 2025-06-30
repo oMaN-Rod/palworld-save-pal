@@ -537,7 +537,7 @@
   },
   "Blueprint_CandleStand": {
     "localized_name": "Чертеж величественного подсвечника",
-    "description": "Если предмет находится в инвентаре или хранится на базе, становится доступна постройка: <MapObjectName id=|CandleStand|/>."
+    "description": "Если предмет находится в инвентаре или хранится на базе, становится доступна постройка: Величественный подсвечник."
   },
   "Blueprint_ChargeLaserRifle_2": {
     "localized_name": "Чертеж зарядной винтовки 1",
@@ -621,11 +621,11 @@
   },
   "Blueprint_ConservationGroupBannerA": {
     "localized_name": "Чертеж флага Организации по защите Палов",
-    "description": "Если предмет находится в инвентаре или хранится на базе, становится доступна постройка: <MapObjectName id=|ConservationGroupBannerA|/>."
+    "description": "Если предмет находится в инвентаре или хранится на базе, становится доступна постройка: Флаг Организации по защите Палов."
   },
   "Blueprint_ConservationGroupBannerB": {
     "localized_name": "Чертеж баннера Организации по защите Палов",
-    "description": "Если предмет находится в инвентаре или хранится на базе, становится доступна постройка: <MapObjectName id=|ConservationGroupBannerB|/>."
+    "description": "Если предмет находится в инвентаре или хранится на базе, становится доступна постройка: Знамя Организации по защите Палов."
   },
   "Blueprint_CopperArmorCold_2": {
     "localized_name": "Чертеж металлической брони защиты от холода 1",
@@ -741,7 +741,7 @@
   },
   "Blueprint_FireStand": {
     "localized_name": "Чертеж ритуального подсвечника",
-    "description": "Если предмет находится в инвентаре или хранится на базе, становится доступна постройка: <MapObjectName id=|FireStand|/>."
+    "description": "Если предмет находится в инвентаре или хранится на базе, становится доступна постройка: Ритуальный подсвечник."
   },
   "Blueprint_FishingRod_01_2": {
     "localized_name": "Чертеж базовой удочки (Гумосс)",
@@ -869,7 +869,7 @@
   },
   "Blueprint_GuardianDogStatue": {
     "localized_name": "Чертеж статуи Якумо",
-    "description": "Если предмет находится в инвентаре или хранится на базе, становится доступна постройка: <MapObjectName id=|GuardianDogStatue|/>."
+    "description": "Если предмет находится в инвентаре или хранится на базе, становится доступна постройка: Статуя Якумо."
   },
   "Blueprint_GuidedMissileLauncher_2": {
     "localized_name": "Чертеж ракетницы 1",
@@ -1345,7 +1345,7 @@
   },
   "Blueprint_Hunter_GangFlag": {
     "localized_name": "Чертеж флага браконьеров",
-    "description": "Если предмет находится в инвентаре или хранится на базе, становится доступна постройка: <MapObjectName id=|Hunter GangFlag|/>."
+    "description": "Если предмет находится в инвентаре или хранится на базе, становится доступна постройка: Hunter GangFlag."
   },
   "Blueprint_IronArmorCold_2": {
     "localized_name": "Чертеж брони из рафинированного металла с защитой от холода 1",
@@ -1413,7 +1413,7 @@
   },
   "Blueprint_LanternTop": {
     "localized_name": "Чертеж фонарика",
-    "description": "Если предмет находится в инвентаре или хранится на базе, становится доступна постройка: <MapObjectName id=|LanternTop|/>."
+    "description": "Если предмет находится в инвентаре или хранится на базе, становится доступна постройка: Бумажный фонарик."
   },
   "Blueprint_LaserGatlingGun_2": {
     "localized_name": "Чертеж лазерной картечницы Гатлинга 1",
@@ -1469,7 +1469,7 @@
   },
   "Blueprint_LilyQueenStatue": {
     "localized_name": "Чертеж статуи Лилин",
-    "description": "Если предмет находится в инвентаре или хранится на базе, становится доступна постройка: <MapObjectName id=|LilyQueenStatue|/>."
+    "description": "Если предмет находится в инвентаре или хранится на базе, становится доступна постройка: Статуя Лилин."
   },
   "Blueprint_MakeshiftAssaultRifle_2": {
     "localized_name": "Чертеж ветхой штурмовой винтовки 1",
@@ -1801,11 +1801,11 @@
   },
   "Blueprint_SF_Chair": {
     "localized_name": "Чертеж стула для комнаты в стиле кабинета",
-    "description": "При наличии в инвентаре или в сундуке на базе можно построить: <MapObjectName id=|SF Chair|/>."
+    "description": "При наличии в инвентаре или в сундуке на базе можно построить: SF Chair."
   },
   "Blueprint_SF_Desk": {
     "localized_name": "Чертеж стола для комнаты в стиле кабинета",
-    "description": "При наличии в инвентаре или в сундуке на базе можно построить: <MapObjectName id=|SF Desk|/>."
+    "description": "При наличии в инвентаре или в сундуке на базе можно построить: SF Desk."
   },
   "Blueprint_SemiAutoRifle_2": {
     "localized_name": "Чертеж полуавтоматической винтовки 1",
@@ -1841,7 +1841,7 @@
   },
   "Blueprint_Shrine_Lantern": {
     "localized_name": "Чертеж подвесного фонаря",
-    "description": "Если предмет находится в инвентаре или хранится на базе, становится доступна постройка: <MapObjectName id=|Shrine Lantern|/>."
+    "description": "Если предмет находится в инвентаре или хранится на базе, становится доступна постройка: Shrine Lantern."
   },
   "Blueprint_SingleShotRifle_2": {
     "localized_name": "Чертеж Однозарядная винтовка 1",
@@ -1941,7 +1941,7 @@
   },
   "Blueprint_WallTorch02": {
     "localized_name": "Чертеж величественного настенного факела",
-    "description": "Если предмет находится в инвентаре или хранится на базе, становится доступна постройка: <MapObjectName id=|WallTorch02|/>."
+    "description": "Если предмет находится в инвентаре или хранится на базе, становится доступна постройка: Величественный настенный факел."
   },
   "Blueprint_WeakerBow_2": {
     "localized_name": "Чертеж старого лука 1",
@@ -1961,11 +1961,11 @@
   },
   "Blueprint_Wire_Fence": {
     "localized_name": "Чертеж забора из колючей проволоки",
-    "description": "Если предмет находится в инвентаре или хранится на базе, становится доступна постройка: <MapObjectName id=|Wire Fence|/>."
+    "description": "Если предмет находится в инвентаре или хранится на базе, становится доступна постройка: Wire Fence."
   },
   "Blueprint_WoodenBarricade": {
     "localized_name": "Чертеж деревянного заграждения",
-    "description": "Если предмет находится в инвентаре или хранится на базе, становится доступна постройка: <MapObjectName id=|WoodenBarricade|/>."
+    "description": "Если предмет находится в инвентаре или хранится на базе, становится доступна постройка: Деревянное заграждение."
   },
   "Blueprint_YakushimaArmor001": {
     "localized_name": "Чертеж Освящённого нагрудника",

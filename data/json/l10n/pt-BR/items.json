@@ -537,7 +537,7 @@
   },
   "Blueprint_CandleStand": {
     "localized_name": "Esquema de Castiçal Solene",
-    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [<MapObjectName id=|CandleStand|/>]."
+    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [Castiçal Solene]."
   },
   "Blueprint_ChargeLaserRifle_2": {
     "localized_name": "Esquema de Fuzil de Carga 1",
@@ -621,11 +621,11 @@
   },
   "Blueprint_ConservationGroupBannerA": {
     "localized_name": "Esquema de Bandeira da Associação de Proteção aos Pals",
-    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [<MapObjectName id=|ConservationGroupBannerA|/>]."
+    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [Bandeira da Associação de Proteção aos Pals]."
   },
   "Blueprint_ConservationGroupBannerB": {
     "localized_name": "Esquema de Faixa Horizontal da Associação de Proteção aos Pals",
-    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [<MapObjectName id=|ConservationGroupBannerB|/>]."
+    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [Faixa da Associação de Proteção aos Pals]."
   },
   "Blueprint_CopperArmorCold_2": {
     "localized_name": "Esquema de Armadura de Metal Resistente a Frio 1",
@@ -741,7 +741,7 @@
   },
   "Blueprint_FireStand": {
     "localized_name": "Esquema de Castiçal para Cerimônias",
-    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [<MapObjectName id=|FireStand|/>]."
+    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [Castiçal para Cerimônias]."
   },
   "Blueprint_FishingRod_01_2": {
     "localized_name": "Esquema de Vara de Pesca Iniciante (Gumoss)",
@@ -869,7 +869,7 @@
   },
   "Blueprint_GuardianDogStatue": {
     "localized_name": "Esquema de Estátua de Yakumo",
-    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [<MapObjectName id=|GuardianDogStatue|/>]."
+    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [Estátua de Yakumo]."
   },
   "Blueprint_GuidedMissileLauncher_2": {
     "localized_name": "Esquema de Lança-Mísseis 1",
@@ -1345,7 +1345,7 @@
   },
   "Blueprint_Hunter_GangFlag": {
     "localized_name": "Esquema de Bandeira dos Caçadores Clandestinos",
-    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [<MapObjectName id=|Hunter GangFlag|/>]."
+    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [Hunter GangFlag]."
   },
   "Blueprint_IronArmorCold_2": {
     "localized_name": "Esquema de Armadura de Metal Refinado Resistente a Frio 1",
@@ -1413,7 +1413,7 @@
   },
   "Blueprint_LanternTop": {
     "localized_name": "Esquema de Lanterna de Papel Portátil",
-    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [<MapObjectName id=|LanternTop|/>]."
+    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [Lanterna de Papel Portátil]."
   },
   "Blueprint_LaserGatlingGun_2": {
     "localized_name": "Esquema de Gatling Gun Laser 1",
@@ -1469,7 +1469,7 @@
   },
   "Blueprint_LilyQueenStatue": {
     "localized_name": "Esquema de Estátua de Lyleen",
-    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [<MapObjectName id=|LilyQueenStatue|/>]."
+    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [Estátua de Lyleen]."
   },
   "Blueprint_MakeshiftAssaultRifle_2": {
     "localized_name": "Esquema de Fuzil de Assalto Desgastado 1",
@@ -1801,11 +1801,11 @@
   },
   "Blueprint_SF_Chair": {
     "localized_name": "Esquema de Cadeira de Laboratório",
-    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [<MapObjectName id=|SF Chair|/>]."
+    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [SF Chair]."
   },
   "Blueprint_SF_Desk": {
     "localized_name": "Esquema de Escrivaninha de Laboratório",
-    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [<MapObjectName id=|SF Desk|/>]."
+    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [SF Desk]."
   },
   "Blueprint_SemiAutoRifle_2": {
     "localized_name": "Esquema de Fuzil Semiautomático 1",
@@ -1841,7 +1841,7 @@
   },
   "Blueprint_Shrine_Lantern": {
     "localized_name": "Esquema de Lanterna de Santuário",
-    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [<MapObjectName id=|Shrine Lantern|/>]."
+    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [Shrine Lantern]."
   },
   "Blueprint_SingleShotRifle_2": {
     "localized_name": "Esquema de Fuzil de Tiro Único 1",
@@ -1941,7 +1941,7 @@
   },
   "Blueprint_WallTorch02": {
     "localized_name": "Esquema de Tocha de Parede Solene",
-    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [<MapObjectName id=|WallTorch02|/>]."
+    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [Tocha de Parede Solene]."
   },
   "Blueprint_WeakerBow_2": {
     "localized_name": "Esquema de Arco Deteriorado 1",
@@ -1961,11 +1961,11 @@
   },
   "Blueprint_Wire_Fence": {
     "localized_name": "Esquema de Cerca de Arame",
-    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [<MapObjectName id=|Wire Fence|/>]."
+    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [Wire Fence]."
   },
   "Blueprint_WoodenBarricade": {
     "localized_name": "Esquema de Barricada de Madeira",
-    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [<MapObjectName id=|WoodenBarricade|/>]."
+    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [Barricada de Madeira]."
   },
   "Blueprint_YakushimaArmor001": {
     "localized_name": "Esquema de Armadura Sagrada",

@@ -537,7 +537,7 @@
   },
   "Blueprint_CandleStand": {
     "localized_name": "Plan du Chandelier Solennel",
-    "description": "Le posséder sur soi ou sur le camp permet de construire : <MapObjectName id=|CandleStand|/>"
+    "description": "Le posséder sur soi ou sur le camp permet de construire : Chandelier Solennel"
   },
   "Blueprint_ChargeLaserRifle_2": {
     "localized_name": "Plan de Fusil Chargé 1",
@@ -621,11 +621,11 @@
   },
   "Blueprint_ConservationGroupBannerA": {
     "localized_name": "Plan du Drapeau de la Ligue pour la Protection des Pals",
-    "description": "Le posséder sur soi ou sur le camp permet de construire : <MapObjectName id=|ConservationGroupBannerA|/>"
+    "description": "Le posséder sur soi ou sur le camp permet de construire : Drapeau de la Ligue pour la Protection des Pals"
   },
   "Blueprint_ConservationGroupBannerB": {
     "localized_name": "Plan d'étendard de la LPP",
-    "description": "Le posséder sur soi ou sur le camp permet de construire : <MapObjectName id=|ConservationGroupBannerB|/>"
+    "description": "Le posséder sur soi ou sur le camp permet de construire : Bannière de la Ligue pour la Protection des Pals"
   },
   "Blueprint_CopperArmorCold_2": {
     "localized_name": "Plan d'armure en métal chauffante 1",
@@ -741,7 +741,7 @@
   },
   "Blueprint_FireStand": {
     "localized_name": "Plan du Chandelier Rituel",
-    "description": "Le posséder sur soi ou sur le camp permet de construire : <MapObjectName id=|FireStand|/>"
+    "description": "Le posséder sur soi ou sur le camp permet de construire : Chandelier Rituel"
   },
   "Blueprint_FishingRod_01_2": {
     "localized_name": "Plan de Canne à Pêche Basique (Gumoss)",
@@ -869,7 +869,7 @@
   },
   "Blueprint_GuardianDogStatue": {
     "localized_name": "Plan de Statue de Yakumo",
-    "description": "Le posséder sur soi ou sur le camp permet de construire : <MapObjectName id=|GuardianDogStatue|/>"
+    "description": "Le posséder sur soi ou sur le camp permet de construire : Statue de Yakumo"
   },
   "Blueprint_GuidedMissileLauncher_2": {
     "localized_name": "Plan de lance-missiles 1",
@@ -1345,7 +1345,7 @@
   },
   "Blueprint_Hunter_GangFlag": {
     "localized_name": "Plan du Drapeau du groupe des Syndicats",
-    "description": "Le posséder sur soi ou sur le camp permet de construire : <MapObjectName id=|Hunter GangFlag|/>"
+    "description": "Le posséder sur soi ou sur le camp permet de construire : Hunter GangFlag"
   },
   "Blueprint_IronArmorCold_2": {
     "localized_name": "Plan d'armure en métal raffiné chauffante 1",
@@ -1413,7 +1413,7 @@
   },
   "Blueprint_LanternTop": {
     "localized_name": "Plan de Lanterne suspendue",
-    "description": "Le posséder sur soi ou sur le camp permet de construire : <MapObjectName id=|LanternTop|/>"
+    "description": "Le posséder sur soi ou sur le camp permet de construire : Lanterne suspendue"
   },
   "Blueprint_LaserGatlingGun_2": {
     "localized_name": "Plan de pistolet gatling laser 1",
@@ -1469,7 +1469,7 @@
   },
   "Blueprint_LilyQueenStatue": {
     "localized_name": "Plan de Statue de Lyleen",
-    "description": "Le posséder sur soi ou sur le camp permet de construire : <MapObjectName id=|LilyQueenStatue|/>"
+    "description": "Le posséder sur soi ou sur le camp permet de construire : Statue de Lyleen"
   },
   "Blueprint_MakeshiftAssaultRifle_2": {
     "localized_name": "Plan de fusil d'assaut usé 1",
@@ -1801,11 +1801,11 @@
   },
   "Blueprint_SF_Chair": {
     "localized_name": "Plan de la Chaise de laboratoire",
-    "description": "Le posséder sur soi ou sur le camp permet de construire : <MapObjectName id=|SF Chair|/>"
+    "description": "Le posséder sur soi ou sur le camp permet de construire : SF Chair"
   },
   "Blueprint_SF_Desk": {
     "localized_name": "Plan du Bureau de laboratoire",
-    "description": "Le posséder sur soi ou sur le camp permet de construire : <MapObjectName id=|SF Desk|/>"
+    "description": "Le posséder sur soi ou sur le camp permet de construire : SF Desk"
   },
   "Blueprint_SemiAutoRifle_2": {
     "localized_name": "Plan de fusil semi-automatique 1",
@@ -1841,7 +1841,7 @@
   },
   "Blueprint_Shrine_Lantern": {
     "localized_name": "Plan de Lanterne en Pierre",
-    "description": "Le posséder sur soi ou sur le camp permet de construire : <MapObjectName id=|Shrine Lantern|/>"
+    "description": "Le posséder sur soi ou sur le camp permet de construire : Shrine Lantern"
   },
   "Blueprint_SingleShotRifle_2": {
     "localized_name": "Plan de fusil à un coup 1",
@@ -1941,7 +1941,7 @@
   },
   "Blueprint_WallTorch02": {
     "localized_name": "Plan de Torche murale Solennelle",
-    "description": "Le posséder sur soi ou sur le camp permet de construire : <MapObjectName id=|WallTorch02|/>"
+    "description": "Le posséder sur soi ou sur le camp permet de construire : Torche murale Solennelle"
   },
   "Blueprint_WeakerBow_2": {
     "localized_name": "Plan de vieil arc 1",
@@ -1961,11 +1961,11 @@
   },
   "Blueprint_Wire_Fence": {
     "localized_name": "Plan de Clôture Grillagée",
-    "description": "Le posséder sur soi ou sur le camp permet de construire : <MapObjectName id=|Wire Fence|/>"
+    "description": "Le posséder sur soi ou sur le camp permet de construire : Wire Fence"
   },
   "Blueprint_WoodenBarricade": {
     "localized_name": "Plan de Barricade en bois",
-    "description": "Le posséder sur soi ou sur le camp permet de construire : <MapObjectName id=|WoodenBarricade|/>"
+    "description": "Le posséder sur soi ou sur le camp permet de construire : Barricade en bois"
   },
   "Blueprint_YakushimaArmor001": {
     "localized_name": "Plan de Buste d’Armure Sacrée",
