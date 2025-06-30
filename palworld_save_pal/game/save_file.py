@@ -2,6 +2,7 @@ import copy
 from enum import Enum
 import json
 import os
+from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple, Union
 from uuid import UUID
 from pydantic import BaseModel, ConfigDict, PrivateAttr
@@ -31,6 +32,20 @@ from palworld_save_pal.game.player import Player, PlayerDTO, PlayerGvasFiles
 from palworld_save_pal.utils.uuid import are_equal_uuids, is_empty_uuid
 
 logger = create_logger(__name__)
+
+
+def _get_oodle_lib_path():
+    current_dir = Path(__file__).parent
+    deps_dir = current_dir.parent.parent / "oodle"
+
+    dll_path = deps_dir / "oo2core_9_win64.dll"
+    if dll_path.exists():
+        return str(dll_path)
+
+    raise FileNotFoundError(
+        f"Oodle DLL not found in {deps_dir}. "
+        f"Please ensure you have the Oodle DLL files (oo2core_9_win64.dll) in the deps directory. "
+    )
 
 
 def skip_decode(reader: FArchiveReader, type_name: str, size: int, path: str):
@@ -668,7 +683,7 @@ class SaveFile(BaseModel):
 
     def load_level_meta(self, data: bytes):
         logger.info("Loading %s as GVAS", self.name)
-        raw_gvas, _ = decompress_sav_to_gvas(data)
+        raw_gvas, _ = decompress_sav_to_gvas(data, oodle_path=_get_oodle_lib_path())
         custom_properties = {
             k: v
             for k, v in PALWORLD_CUSTOM_PROPERTIES.items()
@@ -682,7 +697,7 @@ class SaveFile(BaseModel):
 
     def load_level_sav(self, data: bytes):
         logger.info("Loading %s as GVAS", self.name)
-        raw_gvas, _ = decompress_sav_to_gvas(data)
+        raw_gvas, _ = decompress_sav_to_gvas(data, oodle_path=_get_oodle_lib_path())
         logger.debug("Reading GVAS file")
         gvas_file = GvasFile.read(
             raw_gvas, PALWORLD_TYPE_HINTS, CUSTOM_PROPERTIES, allow_nan=True
@@ -702,7 +717,9 @@ class SaveFile(BaseModel):
         ws_callback=None,
     ):
         logger.info("Loading %s", self.name)
-        raw_gvas, _ = decompress_sav_to_gvas(level_sav)
+        raw_gvas, _ = decompress_sav_to_gvas(
+            level_sav, oodle_path=_get_oodle_lib_path()
+        )
         gvas_file = GvasFile.read(
             raw_gvas, PALWORLD_TYPE_HINTS, CUSTOM_PROPERTIES, allow_nan=True
         )
@@ -1099,7 +1116,9 @@ class SaveFile(BaseModel):
         host_fix_players = {}
 
         for uid, sav_files in player_sav_files.items():
-            raw_gvas, _ = decompress_sav_to_gvas(sav_files["sav"])
+            raw_gvas, _ = decompress_sav_to_gvas(
+                sav_files["sav"], oodle_path=_get_oodle_lib_path()
+            )
             await ws_callback(f"Loading player {uid}...")
             gvas_file = GvasFile.read(
                 raw_gvas, PALWORLD_TYPE_HINTS, CUSTOM_PROPERTIES, allow_nan=True
@@ -1127,7 +1146,9 @@ class SaveFile(BaseModel):
             dps = None
             if "dps" in sav_files and sav_files["dps"] is not None:
                 logger.debug("Loading player DPS save for %s", player_uuid)
-                raw_dps_gvas, _ = decompress_sav_to_gvas(sav_files["dps"])
+                raw_dps_gvas, _ = decompress_sav_to_gvas(
+                    sav_files["dps"], oodle_path=_get_oodle_lib_path()
+                )
                 dps_gvas_file = GvasFile.read(
                     raw_dps_gvas,
                     PALWORLD_TYPE_HINTS,

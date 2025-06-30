@@ -9,9 +9,19 @@ build_exe_options = {
     "include_files": [
         ("ui_build", "ui"),
         ("data", "data"),
-        ("debug.bat", "debug.bat") if sys.platform == "win32" else ("debug.sh", "debug.sh"),
+        ("oodle", "lib/oodle"),
+        ("debug.bat", "debug.bat")
+        if sys.platform == "win32"
+        else ("debug.sh", "debug.sh"),
     ],
-    "packages": ["uvicorn", "fastapi", "webview", "palworld_save_tools", "websockets", "sqlalchemy.dialects.sqlite"],
+    "packages": [
+        "uvicorn",
+        "fastapi",
+        "webview",
+        "palworld_save_tools",
+        "websockets",
+        "sqlalchemy.dialects.sqlite",
+    ],
     "replace_paths": [("*", "")],
 }
 
