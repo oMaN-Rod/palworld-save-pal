@@ -191,6 +191,21 @@
     "cool_time": 7.0,
     "effects": []
   },
+  "EPalWazaID::CrossWind": {
+    "element": "Leaf",
+    "type": "Shot",
+    "power": 140,
+    "min_range": 0,
+    "max_range": 5000,
+    "cool_time": 45.0,
+    "effects": [
+      {
+        "type": "IvyCling",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
   "EPalWazaID::DarkArrow": {
     "element": "Dark",
     "type": "Shot",
@@ -306,6 +321,21 @@
     "effects": [
       {
         "type": "Freeze",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::DiversionLaser": {
+    "element": "Water",
+    "type": "Shot",
+    "power": 110,
+    "min_range": 500,
+    "max_range": 3000,
+    "cool_time": 35.0,
+    "effects": [
+      {
+        "type": "Wetness",
         "value": 100,
         "value_ex": 0.0
       }
@@ -644,6 +674,21 @@
       }
     ]
   },
+  "EPalWazaID::HydroSlicer": {
+    "element": "Water",
+    "type": "Shot",
+    "power": 130,
+    "min_range": 0,
+    "max_range": 4000,
+    "cool_time": 45.0,
+    "effects": [
+      {
+        "type": "Wetness",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
   "EPalWazaID::HyperBeam": {
     "element": "Normal",
     "type": "Shot",
@@ -694,6 +739,21 @@
       {
         "type": "Freeze",
         "value": 103,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::IceWall": {
+    "element": "Ice",
+    "type": "Shot",
+    "power": 100,
+    "min_range": 0,
+    "max_range": 5000,
+    "cool_time": 30.0,
+    "effects": [
+      {
+        "type": "Freeze",
+        "value": 100,
         "value_ex": 0.0
       }
     ]
@@ -962,6 +1022,36 @@
       }
     ]
   },
+  "EPalWazaID::ReflectiveShuriken": {
+    "element": "Leaf",
+    "type": "Shot",
+    "power": 130,
+    "min_range": 500,
+    "max_range": 4000,
+    "cool_time": 42.0,
+    "effects": [
+      {
+        "type": "IvyCling",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::RipTide": {
+    "element": "Water",
+    "type": "Shot",
+    "power": 160,
+    "min_range": 0,
+    "max_range": 5000,
+    "cool_time": 56.0,
+    "effects": [
+      {
+        "type": "Wetness",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
   "EPalWazaID::RockBeat": {
     "element": "Earth",
     "type": "Melee",
@@ -1047,6 +1137,21 @@
     "effects": [
       {
         "type": "Muddy",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::SeaGush": {
+    "element": "Water",
+    "type": "Melee",
+    "power": 180,
+    "min_range": 0,
+    "max_range": 5000,
+    "cool_time": 60.0,
+    "effects": [
+      {
+        "type": "Wetness",
         "value": 100,
         "value_ex": 0.0
       }
@@ -1588,6 +1693,21 @@
     "cool_time": 2.0,
     "effects": []
   },
+  "EPalWazaID::Unique_CaptainPenguin_Black_BodySlide_Electric": {
+    "element": "Electricity",
+    "type": "Shot",
+    "power": 145,
+    "min_range": 500,
+    "max_range": 3000,
+    "cool_time": 35.0,
+    "effects": [
+      {
+        "type": "Electrical",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
   "EPalWazaID::Unique_CaptainPenguin_BodySlide": {
     "element": "Ice",
     "type": "Shot",
@@ -1882,6 +2002,36 @@
     "cool_time": 2.0,
     "effects": []
   },
+  "EPalWazaID::Unique_GhostAnglerfish_Fire_SweepBait_Fire": {
+    "element": "Fire",
+    "type": "Shot",
+    "power": 95,
+    "min_range": 0,
+    "max_range": 1000,
+    "cool_time": 15.0,
+    "effects": [
+      {
+        "type": "Burn",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_GhostAnglerfish_SweepBait": {
+    "element": "Water",
+    "type": "Shot",
+    "power": 95,
+    "min_range": 0,
+    "max_range": 1000,
+    "cool_time": 15.0,
+    "effects": [
+      {
+        "type": "Wetness",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
   "EPalWazaID::Unique_GhostBeast_Tossin": {
     "element": "Dark",
     "type": "Melee",
@@ -2047,6 +2197,21 @@
       }
     ]
   },
+  "EPalWazaID::Unique_IceCrocodile_SpitAttack": {
+    "element": "Ice",
+    "type": "Shot",
+    "power": 95,
+    "min_range": 500,
+    "max_range": 2000,
+    "cool_time": 17.0,
+    "effects": [
+      {
+        "type": "Freeze",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
   "EPalWazaID::Unique_IceDeer_IceHorn": {
     "element": "Ice",
     "type": "Melee",
@@ -2069,6 +2234,21 @@
     "min_range": 0,
     "max_range": 2500,
     "cool_time": 24.0,
+    "effects": [
+      {
+        "type": "Freeze",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_IceNarwhal_JumpingHorn": {
+    "element": "Ice",
+    "type": "Shot",
+    "power": 165,
+    "min_range": 0,
+    "max_range": 4000,
+    "cool_time": 40.0,
     "effects": [
       {
         "type": "Freeze",
@@ -2141,6 +2321,21 @@
     "effects": [
       {
         "type": "Electrical",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_LeafMomonga_SomerSault": {
+    "element": "Leaf",
+    "type": "Shot",
+    "power": 105,
+    "min_range": 500,
+    "max_range": 1000,
+    "cool_time": 20.0,
+    "effects": [
+      {
+        "type": "IvyCling",
         "value": 100,
         "value_ex": 0.0
       }
@@ -2286,6 +2481,36 @@
     "max_range": 500,
     "cool_time": 1.0,
     "effects": []
+  },
+  "EPalWazaID::Unique_Plesiosaur_LongBreath": {
+    "element": "Leaf",
+    "type": "Shot",
+    "power": 135,
+    "min_range": 0,
+    "max_range": 3000,
+    "cool_time": 30.0,
+    "effects": [
+      {
+        "type": "IvyCling",
+        "value": 50,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_PoseidonOrca_TorrentLaser": {
+    "element": "Water",
+    "type": "Shot",
+    "power": 200,
+    "min_range": 0,
+    "max_range": 5000,
+    "cool_time": 60.0,
+    "effects": [
+      {
+        "type": "Wetness",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
   },
   "EPalWazaID::Unique_PurpleSpider_SpiderRaid": {
     "element": "Dark",
@@ -2458,6 +2683,36 @@
       }
     ]
   },
+  "EPalWazaID::Unique_StuffedShark_HiddenWeapon": {
+    "element": "Water",
+    "type": "Shot",
+    "power": 115,
+    "min_range": 0,
+    "max_range": 4000,
+    "cool_time": 24.0,
+    "effects": [
+      {
+        "type": "Wetness",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_TentacleTurtle_HydroSpin": {
+    "element": "Water",
+    "type": "Shot",
+    "power": 95,
+    "min_range": 1000,
+    "max_range": 2000,
+    "cool_time": 15.0,
+    "effects": [
+      {
+        "type": "Wetness",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
   "EPalWazaID::Unique_ThunderBird_ThunderStorm": {
     "element": "Electricity",
     "type": "Melee",
@@ -2507,6 +2762,21 @@
     "effects": [
       {
         "type": "Electrical",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_TropicalOstrich_DashKick": {
+    "element": "Leaf",
+    "type": "Melee",
+    "power": 125,
+    "min_range": 0,
+    "max_range": 3000,
+    "cool_time": 28.0,
+    "effects": [
+      {
+        "type": "IvyCling",
         "value": 100,
         "value_ex": 0.0
       }
@@ -2666,6 +2936,144 @@
     "min_range": 0,
     "max_range": 3500,
     "cool_time": 35.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_YakushimaBoss001_Small_DemonEyeCharge": {
+    "element": "Dark",
+    "type": "Melee",
+    "power": 60,
+    "min_range": 0,
+    "max_range": 600,
+    "cool_time": 1.0,
+    "effects": [
+      {
+        "type": "Darkness",
+        "value": 50,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Dark": {
+    "element": "Dark",
+    "type": "Melee",
+    "power": 50,
+    "min_range": 0,
+    "max_range": 600,
+    "cool_time": 1.0,
+    "effects": [
+      {
+        "type": "Darkness",
+        "value": 50,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Fire": {
+    "element": "Fire",
+    "type": "Melee",
+    "power": 50,
+    "min_range": 0,
+    "max_range": 600,
+    "cool_time": 1.0,
+    "effects": [
+      {
+        "type": "Burn",
+        "value": 50,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Leaf": {
+    "element": "Leaf",
+    "type": "Melee",
+    "power": 50,
+    "min_range": 0,
+    "max_range": 600,
+    "cool_time": 1.0,
+    "effects": [
+      {
+        "type": "IvyCling",
+        "value": 50,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Normal": {
+    "element": "Normal",
+    "type": "Melee",
+    "power": 50,
+    "min_range": 0,
+    "max_range": 600,
+    "cool_time": 1.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Rainbow": {
+    "element": "Normal",
+    "type": "Melee",
+    "power": 100,
+    "min_range": 0,
+    "max_range": 600,
+    "cool_time": 1.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Water": {
+    "element": "Water",
+    "type": "Melee",
+    "power": 50,
+    "min_range": 0,
+    "max_range": 600,
+    "cool_time": 1.0,
+    "effects": [
+      {
+        "type": "Wetness",
+        "value": 50,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_YakushimaMonster002_SwordCharge": {
+    "element": "Normal",
+    "type": "Melee",
+    "power": 80,
+    "min_range": 0,
+    "max_range": 1200,
+    "cool_time": 2.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_YakushimaMonster003_BatCharge": {
+    "element": "Normal",
+    "type": "Melee",
+    "power": 70,
+    "min_range": 0,
+    "max_range": 500,
+    "cool_time": 2.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_Yakushima_EyeTossin": {
+    "element": "Dark",
+    "type": "Melee",
+    "power": 100,
+    "min_range": 1500,
+    "max_range": 3000,
+    "cool_time": 15.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_Yakushima_MouthTossin": {
+    "element": "Dark",
+    "type": "Melee",
+    "power": 100,
+    "min_range": 1500,
+    "max_range": 3000,
+    "cool_time": 15.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_Yakushima_SummonServant": {
+    "element": "Dark",
+    "type": "Shot",
+    "power": 50,
+    "min_range": 0,
+    "max_range": 1000,
+    "cool_time": 10.0,
     "effects": []
   },
   "EPalWazaID::Unique_Yeti_Grass_GrassBall": {

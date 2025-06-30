@@ -1,7 +1,7 @@
 {
   "Cool1": {
+    "text_id": "NAME_COOL1",
     "category": "Cool",
-    "icon": "t_icon_research_itemcorruptionspeed",
     "sub_category": "ItemCorruptionSpeedRate",
     "assign_id": "Lab_Cool_1",
     "require_research_id": null,
@@ -20,11 +20,12 @@
     "effect_value": -10.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "Cool1_2": {
+    "text_id": "NAME_COOL2",
     "category": "Cool",
-    "icon": "t_icon_research_craftspeed_09",
     "sub_category": "CraftSpeed_Cool",
     "assign_id": "Lab_Cool_1",
     "require_research_id": "Cool1",
@@ -47,11 +48,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "Cool",
     "effect_item_type": "None",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "Cool1_3": {
+    "text_id": "NAME_COOL3",
     "category": "Cool",
-    "icon": "t_icon_research_craftspeed_09",
     "sub_category": "CraftSpeed_Cool",
     "assign_id": "Lab_Cool_2",
     "require_research_id": "Cool5",
@@ -78,11 +80,12 @@
     "effect_value": 5.0,
     "effect_work_suitability": "Cool",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Cool1_4": {
+    "text_id": "NAME_COOL4",
     "category": "Cool",
-    "icon": "t_icon_research_craftspeed_09",
     "sub_category": "CraftSpeed_Cool",
     "assign_id": "Lab_Cool_3",
     "require_research_id": "Cool1_3",
@@ -109,11 +112,12 @@
     "effect_value": 5.0,
     "effect_work_suitability": "Cool",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Cool1_5": {
+    "text_id": "NAME_COOL5",
     "category": "Cool",
-    "icon": "t_icon_research_craftspeed_09",
     "sub_category": "CraftSpeed_Cool",
     "assign_id": "Lab_Cool_4",
     "require_research_id": "Cool1_4",
@@ -140,11 +144,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "Cool",
     "effect_item_type": "None",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "Cool2": {
+    "text_id": "NAME_COOL6",
     "category": "Cool",
-    "icon": "t_icon_research_egghatchingspeed",
     "sub_category": "PalEggHatchingSpeed",
     "assign_id": "Lab_Cool_1",
     "require_research_id": "Cool1",
@@ -171,11 +176,12 @@
     "effect_value": 5.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Cool2_2": {
+    "text_id": "NAME_COOL7",
     "category": "Cool",
-    "icon": "t_icon_research_egghatchingspeed",
     "sub_category": "PalEggHatchingSpeed",
     "assign_id": "Lab_Cool_2",
     "require_research_id": "Cool2",
@@ -202,11 +208,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "Cool2_3": {
+    "text_id": "NAME_COOL8",
     "category": "Cool",
-    "icon": "t_icon_research_egghatchingspeed",
     "sub_category": "PalEggHatchingSpeed",
     "assign_id": "Lab_Cool_3",
     "require_research_id": "Cool2_2",
@@ -233,11 +240,12 @@
     "effect_value": 5.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Cool2_4": {
+    "text_id": "NAME_COOL9",
     "category": "Cool",
-    "icon": "t_icon_research_egghatchingspeed",
     "sub_category": "PalEggHatchingSpeed",
     "assign_id": "Lab_Cool_4",
     "require_research_id": "Cool2_3",
@@ -264,11 +272,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "Cool3": {
+    "text_id": "NAME_COOL10",
     "category": "Cool",
-    "icon": "t_icon_research_researchspeed",
     "sub_category": "LabResearchSpeed",
     "assign_id": "Lab_Cool_1",
     "require_research_id": "Cool1",
@@ -291,11 +300,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "Cool",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Cool3_2": {
+    "text_id": "NAME_COOL11",
     "category": "Cool",
-    "icon": "t_icon_research_researchspeed",
     "sub_category": "LabResearchSpeed",
     "assign_id": "Lab_Cool_2",
     "require_research_id": "Cool3",
@@ -322,11 +332,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "Cool",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Cool3_3": {
+    "text_id": "NAME_COOL12",
     "category": "Cool",
-    "icon": "t_icon_research_defense",
     "sub_category": "DefenseRateBaseCampWorker",
     "assign_id": "Lab_Cool_3",
     "require_research_id": "Cool3_2",
@@ -353,11 +364,12 @@
     "effect_value": 2.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Cool3_4": {
+    "text_id": "NAME_COOL13",
     "category": "Cool",
-    "icon": "t_icon_research_attack",
     "sub_category": "AttackRateBaseCampWorker",
     "assign_id": "Lab_Cool_4",
     "require_research_id": "Cool3_3",
@@ -384,11 +396,12 @@
     "effect_value": 2.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "Cool4": {
+    "text_id": "NAME_COOL14",
     "category": "Cool",
-    "icon": "t_icon_research_itemcorruptionspeed",
     "sub_category": "ItemCorruptionSpeedRate",
     "assign_id": "Lab_Cool_1",
     "require_research_id": "Cool1_2",
@@ -411,11 +424,12 @@
     "effect_value": -5.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Cool4_2": {
+    "text_id": "NAME_COOL15",
     "category": "Cool",
-    "icon": "t_icon_research_itemcorruptionspeed",
     "sub_category": "ItemCorruptionSpeedRate",
     "assign_id": "Lab_Cool_2",
     "require_research_id": "Cool4",
@@ -442,11 +456,12 @@
     "effect_value": -5.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Cool4_3": {
+    "text_id": "NAME_COOL16",
     "category": "Cool",
-    "icon": "t_icon_research_itemcorruptionspeed",
     "sub_category": "ItemCorruptionSpeedRate",
     "assign_id": "Lab_Cool_3",
     "require_research_id": "Cool4_2",
@@ -473,11 +488,12 @@
     "effect_value": -10.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "Cool5": {
+    "text_id": "NAME_COOL17",
     "category": "Cool",
-    "icon": "t_icon_research_technologyprerequisite",
     "sub_category": "TechnologyUnlock",
     "assign_id": "Lab_Cool_1",
     "require_research_id": "Cool1_2",
@@ -500,11 +516,12 @@
     "effect_value": 0.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": "DESC_COOL17"
   },
   "Deforest1": {
+    "text_id": "NAME_DEFOREST1",
     "category": "Deforest",
-    "icon": "t_icon_research_craftspeed_06",
     "sub_category": "CraftSpeed_Deforest",
     "assign_id": "Lab_Deforest_1",
     "require_research_id": null,
@@ -527,11 +544,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "Deforest",
     "effect_item_type": "None",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "Deforest1_2": {
+    "text_id": "NAME_DEFOREST2",
     "category": "Deforest",
-    "icon": "t_icon_research_craftspeed_06",
     "sub_category": "CraftSpeed_Deforest",
     "assign_id": "Lab_Deforest_1",
     "require_research_id": "Deforest1",
@@ -554,11 +572,12 @@
     "effect_value": 5.0,
     "effect_work_suitability": "Deforest",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Deforest1_3": {
+    "text_id": "NAME_DEFOREST3",
     "category": "Deforest",
-    "icon": "t_icon_research_craftspeed_06",
     "sub_category": "CraftSpeed_Deforest",
     "assign_id": "Lab_Deforest_2",
     "require_research_id": "Deforest4",
@@ -585,11 +604,12 @@
     "effect_value": 5.0,
     "effect_work_suitability": "Deforest",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Deforest1_4": {
+    "text_id": "NAME_DEFOREST4",
     "category": "Deforest",
-    "icon": "t_icon_research_craftspeed_06",
     "sub_category": "CraftSpeed_Deforest",
     "assign_id": "Lab_Deforest_3",
     "require_research_id": "Deforest1_3",
@@ -616,11 +636,12 @@
     "effect_value": 5.0,
     "effect_work_suitability": "Deforest",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Deforest1_5": {
+    "text_id": "NAME_DEFOREST5",
     "category": "Deforest",
-    "icon": "t_icon_research_craftspeed_06",
     "sub_category": "CraftSpeed_Deforest",
     "assign_id": "Lab_Deforest_4",
     "require_research_id": "Deforest1_4",
@@ -647,11 +668,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "Deforest",
     "effect_item_type": "None",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "Deforest2": {
+    "text_id": "NAME_DEFOREST6",
     "category": "Deforest",
-    "icon": "t_icon_research_expeditiontime",
     "sub_category": "ExpeditionTimeCostRate",
     "assign_id": "Lab_Deforest_1",
     "require_research_id": "Deforest1",
@@ -674,11 +696,12 @@
     "effect_value": -5.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Deforest2_2": {
+    "text_id": "NAME_DEFOREST7",
     "category": "Deforest",
-    "icon": "t_icon_research_expeditionreward",
     "sub_category": "ExpeditionRewardRate",
     "assign_id": "Lab_Deforest_2",
     "require_research_id": "Deforest2",
@@ -705,11 +728,12 @@
     "effect_value": 5.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Deforest2_3": {
+    "text_id": "NAME_DEFOREST8",
     "category": "Deforest",
-    "icon": "t_icon_research_expeditiontime",
     "sub_category": "ExpeditionTimeCostRate",
     "assign_id": "Lab_Deforest_2",
     "require_research_id": "Deforest2",
@@ -736,11 +760,12 @@
     "effect_value": -10.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "Deforest2_4": {
+    "text_id": "NAME_DEFOREST9",
     "category": "Deforest",
-    "icon": "t_icon_research_expeditionreward",
     "sub_category": "ExpeditionRewardRate",
     "assign_id": "Lab_Deforest_3",
     "require_research_id": "Deforest2_2",
@@ -767,11 +792,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "Deforest2_5": {
+    "text_id": "NAME_DEFOREST10",
     "category": "Deforest",
-    "icon": "t_icon_research_expeditiontime",
     "sub_category": "ExpeditionTimeCostRate",
     "assign_id": "Lab_Deforest_3",
     "require_research_id": "Deforest2_3",
@@ -798,11 +824,12 @@
     "effect_value": -5.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Deforest2_6": {
+    "text_id": "NAME_DEFOREST11",
     "category": "Deforest",
-    "icon": "t_icon_research_expeditionreward",
     "sub_category": "ExpeditionRewardRate",
     "assign_id": "Lab_Deforest_4",
     "require_research_id": "Deforest2_4",
@@ -829,11 +856,12 @@
     "effect_value": 5.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Deforest3": {
+    "text_id": "NAME_DEFOREST12",
     "category": "Deforest",
-    "icon": "t_icon_research_researchspeed",
     "sub_category": "LabResearchSpeed",
     "assign_id": "Lab_Deforest_1",
     "require_research_id": "Deforest1",
@@ -856,11 +884,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "Deforest",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Deforest3_2": {
+    "text_id": "NAME_DEFOREST13",
     "category": "Deforest",
-    "icon": "t_icon_research_researchspeed",
     "sub_category": "LabResearchSpeed",
     "assign_id": "Lab_Deforest_2",
     "require_research_id": "Deforest3",
@@ -887,11 +916,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "Deforest",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Deforest3_3": {
+    "text_id": "NAME_DEFOREST14",
     "category": "Deforest",
-    "icon": "t_icon_research_defense",
     "sub_category": "DefenseRateBaseCampWorker",
     "assign_id": "Lab_Deforest_3",
     "require_research_id": "Deforest3_2",
@@ -918,11 +948,12 @@
     "effect_value": 2.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Deforest3_4": {
+    "text_id": "NAME_DEFOREST15",
     "category": "Deforest",
-    "icon": "t_icon_research_attack",
     "sub_category": "AttackRateBaseCampWorker",
     "assign_id": "Lab_Deforest_4",
     "require_research_id": "Deforest3_3",
@@ -949,11 +980,12 @@
     "effect_value": 2.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "Deforest4": {
+    "text_id": "NAME_DEFOREST16",
     "category": "Deforest",
-    "icon": "t_icon_research_technologyprerequisite",
     "sub_category": "TechnologyUnlock",
     "assign_id": "Lab_Deforest_2",
     "require_research_id": "Deforest1_2",
@@ -976,11 +1008,12 @@
     "effect_value": 0.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": "DESC_DEFOREST16"
   },
   "EmitFlame1": {
+    "text_id": "NAME_EMITFIRE1",
     "category": "EmitFlame",
-    "icon": "t_icon_research_craftspeed_00",
     "sub_category": "CraftSpeed_EmitFlame",
     "assign_id": "Lab_Fire_1",
     "require_research_id": null,
@@ -999,11 +1032,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "EmitFlame",
     "effect_item_type": "None",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "EmitFlame1_2": {
+    "text_id": "NAME_EMITFIRE2",
     "category": "EmitFlame",
-    "icon": "t_icon_research_craftspeed_00",
     "sub_category": "CraftSpeed_EmitFlame",
     "assign_id": "Lab_Fire_1",
     "require_research_id": "EmitFlame1",
@@ -1030,11 +1064,12 @@
     "effect_value": 5.0,
     "effect_work_suitability": "EmitFlame",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "EmitFlame1_3": {
+    "text_id": "NAME_EMITFIRE3",
     "category": "EmitFlame",
-    "icon": "t_icon_research_craftspeed_00",
     "sub_category": "CraftSpeed_EmitFlame",
     "assign_id": "Lab_Fire_2",
     "require_research_id": "EmitFlame5",
@@ -1061,11 +1096,12 @@
     "effect_value": 5.0,
     "effect_work_suitability": "EmitFlame",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "EmitFlame1_4": {
+    "text_id": "NAME_EMITFIRE4",
     "category": "EmitFlame",
-    "icon": "t_icon_research_craftspeed_00",
     "sub_category": "CraftSpeed_EmitFlame",
     "assign_id": "Lab_Fire_3",
     "require_research_id": "EmitFlame1_3",
@@ -1092,11 +1128,12 @@
     "effect_value": 5.0,
     "effect_work_suitability": "EmitFlame",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "EmitFlame1_5": {
+    "text_id": "NAME_EMITFIRE5",
     "category": "EmitFlame",
-    "icon": "t_icon_research_craftspeed_00",
     "sub_category": "CraftSpeed_EmitFlame",
     "assign_id": "Lab_Fire_4",
     "require_research_id": "EmitFlame1_4",
@@ -1123,11 +1160,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "EmitFlame",
     "effect_item_type": "None",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "EmitFlame2": {
+    "text_id": "NAME_EMITFIRE6",
     "category": "EmitFlame",
-    "icon": "t_icon_research_egghatchingspeed",
     "sub_category": "PalEggHatchingSpeed",
     "assign_id": "Lab_Fire_1",
     "require_research_id": "EmitFlame1",
@@ -1154,11 +1192,12 @@
     "effect_value": 5.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "EmitFlame2_2": {
+    "text_id": "NAME_EMITFIRE7",
     "category": "EmitFlame",
-    "icon": "t_icon_research_egghatchingspeed",
     "sub_category": "PalEggHatchingSpeed",
     "assign_id": "Lab_Fire_2",
     "require_research_id": "EmitFlame2",
@@ -1185,11 +1224,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "EmitFlame2_3": {
+    "text_id": "NAME_EMITFIRE8",
     "category": "EmitFlame",
-    "icon": "t_icon_research_egghatchingspeed",
     "sub_category": "PalEggHatchingSpeed",
     "assign_id": "Lab_Fire_3",
     "require_research_id": "EmitFlame2_2",
@@ -1216,11 +1256,12 @@
     "effect_value": 5.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "EmitFlame2_4": {
+    "text_id": "NAME_EMITFIRE9",
     "category": "EmitFlame",
-    "icon": "t_icon_research_egghatchingspeed",
     "sub_category": "PalEggHatchingSpeed",
     "assign_id": "Lab_Fire_4",
     "require_research_id": "EmitFlame2_3",
@@ -1247,11 +1288,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "EmitFlame3": {
+    "text_id": "NAME_EMITFIRE10",
     "category": "EmitFlame",
-    "icon": "t_icon_research_researchspeed",
     "sub_category": "LabResearchSpeed",
     "assign_id": "Lab_Fire_1",
     "require_research_id": "EmitFlame1",
@@ -1278,11 +1320,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "EmitFlame",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "EmitFlame3_2": {
+    "text_id": "NAME_EMITFIRE11",
     "category": "EmitFlame",
-    "icon": "t_icon_research_researchspeed",
     "sub_category": "LabResearchSpeed",
     "assign_id": "Lab_Fire_2",
     "require_research_id": "EmitFlame3",
@@ -1309,11 +1352,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "EmitFlame",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "EmitFlame3_3": {
+    "text_id": "NAME_EMITFIRE12",
     "category": "EmitFlame",
-    "icon": "t_icon_research_defense",
     "sub_category": "DefenseRateBaseCampWorker",
     "assign_id": "Lab_Fire_3",
     "require_research_id": "EmitFlame3_2",
@@ -1340,11 +1384,12 @@
     "effect_value": 2.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "EmitFlame3_4": {
+    "text_id": "NAME_EMITFIRE13",
     "category": "EmitFlame",
-    "icon": "t_icon_research_attack",
     "sub_category": "AttackRateBaseCampWorker",
     "assign_id": "Lab_Fire_4",
     "require_research_id": "EmitFlame3_3",
@@ -1371,11 +1416,12 @@
     "effect_value": 2.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "EmitFlame4": {
+    "text_id": "NAME_EMITFIRE14",
     "category": "EmitFlame",
-    "icon": "t_icon_research_productextraitem_food",
     "sub_category": "ProductExtraItemProbability_Food",
     "assign_id": "Lab_Fire_1",
     "require_research_id": "EmitFlame1_2",
@@ -1402,11 +1448,12 @@
     "effect_value": 5.0,
     "effect_work_suitability": "None",
     "effect_item_type": "Dish",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "EmitFlame4_2": {
+    "text_id": "NAME_EMITFIRE15",
     "category": "EmitFlame",
-    "icon": "t_icon_research_productextraitem_ingot",
     "sub_category": "ProductExtraItemProbability_Ingot",
     "assign_id": "Lab_Fire_2",
     "require_research_id": "EmitFlame4",
@@ -1433,11 +1480,12 @@
     "effect_value": 5.0,
     "effect_work_suitability": "None",
     "effect_item_type": "Ingot",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "EmitFlame4_3": {
+    "text_id": "NAME_EMITFIRE16",
     "category": "EmitFlame",
-    "icon": "t_icon_research_productextraitem_food",
     "sub_category": "ProductExtraItemProbability_Food",
     "assign_id": "Lab_Fire_3",
     "require_research_id": "EmitFlame4_2",
@@ -1464,11 +1512,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "None",
     "effect_item_type": "Dish",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "EmitFlame4_4": {
+    "text_id": "NAME_EMITFIRE17",
     "category": "EmitFlame",
-    "icon": "t_icon_research_productextraitem_ingot",
     "sub_category": "ProductExtraItemProbability_Ingot",
     "assign_id": "Lab_Fire_4",
     "require_research_id": "EmitFlame4_3",
@@ -1495,11 +1544,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "None",
     "effect_item_type": "Ingot",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "EmitFlame5": {
+    "text_id": "NAME_EMITFIRE18",
     "category": "EmitFlame",
-    "icon": "t_icon_research_technologyprerequisite",
     "sub_category": "TechnologyUnlock",
     "assign_id": "Lab_Fire_1",
     "require_research_id": "EmitFlame1_2",
@@ -1526,11 +1576,12 @@
     "effect_value": 0.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": "DESC_EMITFIRE18"
   },
   "GenerateEnergy1": {
+    "text_id": "NAME_GEN_ENERGY1",
     "category": "GenerateElectricity",
-    "icon": "t_icon_research_craftspeed_03",
     "sub_category": "CraftSpeed_GenerateElectricity",
     "assign_id": "Lab_Gen_Energy_1",
     "require_research_id": null,
@@ -1553,11 +1604,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "GenerateElectricity",
     "effect_item_type": "None",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "GenerateEnergy1_2": {
+    "text_id": "NAME_GEN_ENERGY2",
     "category": "GenerateElectricity",
-    "icon": "t_icon_research_craftspeed_03",
     "sub_category": "CraftSpeed_GenerateElectricity",
     "assign_id": "Lab_Gen_Energy_1",
     "require_research_id": "GenerateEnergy1",
@@ -1580,11 +1632,12 @@
     "effect_value": 5.0,
     "effect_work_suitability": "GenerateElectricity",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "GenerateEnergy1_3": {
+    "text_id": "NAME_GEN_ENERGY3",
     "category": "GenerateElectricity",
-    "icon": "t_icon_research_craftspeed_03",
     "sub_category": "CraftSpeed_GenerateElectricity",
     "assign_id": "Lab_Gen_Energy_2",
     "require_research_id": "GenerateEnergy1_2",
@@ -1611,11 +1664,12 @@
     "effect_value": 5.0,
     "effect_work_suitability": "GenerateElectricity",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "GenerateEnergy1_4": {
+    "text_id": "NAME_GEN_ENERGY4",
     "category": "GenerateElectricity",
-    "icon": "t_icon_research_craftspeed_03",
     "sub_category": "CraftSpeed_GenerateElectricity",
     "assign_id": "Lab_Gen_Energy_3",
     "require_research_id": "GenerateEnergy5",
@@ -1642,11 +1696,12 @@
     "effect_value": 5.0,
     "effect_work_suitability": "GenerateElectricity",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "GenerateEnergy1_5": {
+    "text_id": "NAME_GEN_ENERGY5",
     "category": "GenerateElectricity",
-    "icon": "t_icon_research_craftspeed_03",
     "sub_category": "CraftSpeed_GenerateElectricity",
     "assign_id": "Lab_Gen_Energy_4",
     "require_research_id": "GenerateEnergy1_4",
@@ -1673,11 +1728,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "GenerateElectricity",
     "effect_item_type": "None",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "GenerateEnergy2": {
+    "text_id": "NAME_GEN_ENERGY6",
     "category": "GenerateElectricity",
-    "icon": "t_icon_research_energystorage",
     "sub_category": "EnergyStorageRate",
     "assign_id": "Lab_Gen_Energy_1",
     "require_research_id": "GenerateEnergy1",
@@ -1700,11 +1756,12 @@
     "effect_value": 20.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "GenerateEnergy2_2": {
+    "text_id": "NAME_GEN_ENERGY7",
     "category": "GenerateElectricity",
-    "icon": "t_icon_research_energystorage",
     "sub_category": "EnergyStorageRate",
     "assign_id": "Lab_Gen_Energy_2",
     "require_research_id": "GenerateEnergy2",
@@ -1731,11 +1788,12 @@
     "effect_value": 20.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "GenerateEnergy2_3": {
+    "text_id": "NAME_GEN_ENERGY8",
     "category": "GenerateElectricity",
-    "icon": "t_icon_research_energystorage",
     "sub_category": "EnergyStorageRate",
     "assign_id": "Lab_Gen_Energy_3",
     "require_research_id": "GenerateEnergy2_2",
@@ -1762,11 +1820,12 @@
     "effect_value": 30.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "GenerateEnergy3": {
+    "text_id": "NAME_GEN_ENERGY9",
     "category": "GenerateElectricity",
-    "icon": "t_icon_research_craftspeed_03",
     "sub_category": "LabResearchSpeed",
     "assign_id": "Lab_Gen_Energy_1",
     "require_research_id": "GenerateEnergy1",
@@ -1789,11 +1848,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "GenerateElectricity",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "GenerateEnergy3_2": {
+    "text_id": "NAME_GEN_ENERGY10",
     "category": "GenerateElectricity",
-    "icon": "t_icon_research_researchspeed",
     "sub_category": "LabResearchSpeed",
     "assign_id": "Lab_Gen_Energy_2",
     "require_research_id": "GenerateEnergy3",
@@ -1820,11 +1880,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "GenerateElectricity",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "GenerateEnergy3_3": {
+    "text_id": "NAME_GEN_ENERGY11",
     "category": "GenerateElectricity",
-    "icon": "t_icon_research_defense",
     "sub_category": "DefenseRateBaseCampWorker",
     "assign_id": "Lab_Gen_Energy_3",
     "require_research_id": "GenerateEnergy3_2",
@@ -1851,11 +1912,12 @@
     "effect_value": 2.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "GenerateEnergy3_4": {
+    "text_id": "NAME_GEN_ENERGY12",
     "category": "GenerateElectricity",
-    "icon": "t_icon_research_attack",
     "sub_category": "AttackRateBaseCampWorker",
     "assign_id": "Lab_Gen_Energy_4",
     "require_research_id": "GenerateEnergy3_3",
@@ -1882,11 +1944,12 @@
     "effect_value": 2.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "GenerateEnergy4": {
+    "text_id": "NAME_GEN_ENERGY13",
     "category": "GenerateElectricity",
-    "icon": "t_icon_research_consumeenergy",
     "sub_category": "ConsumeEnergyRate",
     "assign_id": "Lab_Gen_Energy_2",
     "require_research_id": "GenerateEnergy1_2",
@@ -1913,11 +1976,12 @@
     "effect_value": -5.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "GenerateEnergy4_2": {
+    "text_id": "NAME_GEN_ENERGY14",
     "category": "GenerateElectricity",
-    "icon": "t_icon_research_consumeenergy",
     "sub_category": "ConsumeEnergyRate",
     "assign_id": "Lab_Gen_Energy_3",
     "require_research_id": "GenerateEnergy4",
@@ -1944,11 +2008,12 @@
     "effect_value": -5.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "GenerateEnergy4_3": {
+    "text_id": "NAME_GEN_ENERGY15",
     "category": "GenerateElectricity",
-    "icon": "t_icon_research_consumeenergy",
     "sub_category": "ConsumeEnergyRate",
     "assign_id": "Lab_Gen_Energy_4",
     "require_research_id": "GenerateEnergy4_2",
@@ -1975,11 +2040,12 @@
     "effect_value": -10.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "GenerateEnergy5": {
+    "text_id": "NAME_GEN_ENERGY16",
     "category": "GenerateElectricity",
-    "icon": "t_icon_research_technologyprerequisite",
     "sub_category": "TechnologyUnlock",
     "assign_id": "Lab_Gen_Energy_3",
     "require_research_id": "GenerateEnergy1_3",
@@ -2002,11 +2068,12 @@
     "effect_value": 0.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": "DESC_GEN_ENERGY16"
   },
   "Handcraft1": {
+    "text_id": "NAME_HANDCRAFT1",
     "category": "Handcraft",
-    "icon": "t_icon_research_craftspeed_04",
     "sub_category": "CraftSpeed_Handcraft",
     "assign_id": "Lab_Handcraft_1",
     "require_research_id": null,
@@ -2029,11 +2096,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "Handcraft",
     "effect_item_type": "None",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "Handcraft1_2": {
+    "text_id": "NAME_HANDCRAFT2",
     "category": "Handcraft",
-    "icon": "t_icon_research_craftspeed_04",
     "sub_category": "CraftSpeed_Handcraft",
     "assign_id": "Lab_Handcraft_1",
     "require_research_id": "Handcraft1",
@@ -2060,11 +2128,12 @@
     "effect_value": 5.0,
     "effect_work_suitability": "Handcraft",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Handcraft1_3": {
+    "text_id": "NAME_HANDCRAFT3",
     "category": "Handcraft",
-    "icon": "t_icon_research_craftspeed_04",
     "sub_category": "CraftSpeed_Handcraft",
     "assign_id": "Lab_Handcraft_2",
     "require_research_id": "Handcraft5",
@@ -2087,11 +2156,12 @@
     "effect_value": 5.0,
     "effect_work_suitability": "Handcraft",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Handcraft1_4": {
+    "text_id": "NAME_HANDCRAFT4",
     "category": "Handcraft",
-    "icon": "t_icon_research_craftspeed_04",
     "sub_category": "CraftSpeed_Handcraft",
     "assign_id": "Lab_Handcraft_3",
     "require_research_id": "Handcraft1_3",
@@ -2118,11 +2188,12 @@
     "effect_value": 5.0,
     "effect_work_suitability": "Handcraft",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Handcraft1_5": {
+    "text_id": "NAME_HANDCRAFT5",
     "category": "Handcraft",
-    "icon": "t_icon_research_craftspeed_04",
     "sub_category": "CraftSpeed_Handcraft",
     "assign_id": "Lab_Handcraft_4",
     "require_research_id": "Handcraft1_4",
@@ -2149,11 +2220,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "Handcraft",
     "effect_item_type": "None",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "Handcraft2": {
+    "text_id": "NAME_HANDCRAFT6",
     "category": "Handcraft",
-    "icon": "t_icon_research_productcostdown",
     "sub_category": "ProductItemConsumeMaterialNumRate",
     "assign_id": "Lab_Handcraft_1",
     "require_research_id": "Handcraft1",
@@ -2180,11 +2252,12 @@
     "effect_value": -5.0,
     "effect_work_suitability": "None",
     "effect_item_type": "ArmorBody",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Handcraft2_2": {
+    "text_id": "NAME_HANDCRAFT7",
     "category": "Handcraft",
-    "icon": "t_icon_research_productcostdown",
     "sub_category": "ProductItemConsumeMaterialNumRate",
     "assign_id": "Lab_Handcraft_1",
     "require_research_id": "Handcraft2",
@@ -2211,11 +2284,12 @@
     "effect_value": -5.0,
     "effect_work_suitability": "None",
     "effect_item_type": "PalGear",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Handcraft2_3": {
+    "text_id": "NAME_HANDCRAFT8",
     "category": "Handcraft",
-    "icon": "t_icon_research_productcostdown",
     "sub_category": "ProductItemConsumeMaterialNumRate",
     "assign_id": "Lab_Handcraft_2",
     "require_research_id": "Handcraft2_2",
@@ -2242,11 +2316,12 @@
     "effect_value": -5.0,
     "effect_work_suitability": "None",
     "effect_item_type": "Weapon",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Handcraft2_4": {
+    "text_id": "NAME_HANDCRAFT9",
     "category": "Handcraft",
-    "icon": "t_icon_research_productcostdown",
     "sub_category": "ProductItemConsumeMaterialNumRate",
     "assign_id": "Lab_Handcraft_3",
     "require_research_id": "Handcraft2_3",
@@ -2273,11 +2348,12 @@
     "effect_value": -10.0,
     "effect_work_suitability": "None",
     "effect_item_type": "ArmorBody",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "Handcraft2_5": {
+    "text_id": "NAME_HANDCRAFT10",
     "category": "Handcraft",
-    "icon": "t_icon_research_productcostdown",
     "sub_category": "ProductItemConsumeMaterialNumRate",
     "assign_id": "Lab_Handcraft_3",
     "require_research_id": "Handcraft2_4",
@@ -2304,11 +2380,12 @@
     "effect_value": -10.0,
     "effect_work_suitability": "None",
     "effect_item_type": "PalGear",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "Handcraft2_6": {
+    "text_id": "NAME_HANDCRAFT11",
     "category": "Handcraft",
-    "icon": "t_icon_research_productcostdown",
     "sub_category": "ProductItemConsumeMaterialNumRate",
     "assign_id": "Lab_Handcraft_4",
     "require_research_id": "Handcraft2_5",
@@ -2335,11 +2412,12 @@
     "effect_value": -10.0,
     "effect_work_suitability": "None",
     "effect_item_type": "Weapon",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "Handcraft3": {
+    "text_id": "NAME_HANDCRAFT12",
     "category": "Handcraft",
-    "icon": "t_icon_research_researchspeed",
     "sub_category": "LabResearchSpeed",
     "assign_id": "Lab_Handcraft_1",
     "require_research_id": "Handcraft1",
@@ -2366,11 +2444,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "Handcraft",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Handcraft3_2": {
+    "text_id": "NAME_HANDCRAFT13",
     "category": "Handcraft",
-    "icon": "t_icon_research_researchspeed",
     "sub_category": "LabResearchSpeed",
     "assign_id": "Lab_Handcraft_2",
     "require_research_id": "Handcraft3",
@@ -2397,11 +2476,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "Handcraft",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Handcraft3_3": {
+    "text_id": "NAME_HANDCRAFT14",
     "category": "Handcraft",
-    "icon": "t_icon_research_defense",
     "sub_category": "DefenseRateBaseCampWorker",
     "assign_id": "Lab_Handcraft_3",
     "require_research_id": "Handcraft3_2",
@@ -2428,11 +2508,12 @@
     "effect_value": 2.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Handcraft3_4": {
+    "text_id": "NAME_HANDCRAFT15",
     "category": "Handcraft",
-    "icon": "t_icon_research_attack",
     "sub_category": "AttackRateBaseCampWorker",
     "assign_id": "Lab_Handcraft_4",
     "require_research_id": "Handcraft3_3",
@@ -2459,11 +2540,12 @@
     "effect_value": 2.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "Handcraft4": {
+    "text_id": "NAME_HANDCRAFT16",
     "category": "Handcraft",
-    "icon": "t_icon_research_productextraitem_sphere",
     "sub_category": "ProductExtraItemProbability_Sphere",
     "assign_id": "Lab_Handcraft_1",
     "require_research_id": "Handcraft1_2",
@@ -2490,11 +2572,12 @@
     "effect_value": 5.0,
     "effect_work_suitability": "None",
     "effect_item_type": "CaptureBall",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Handcraft4_2": {
+    "text_id": "NAME_HANDCRAFT17",
     "category": "Handcraft",
-    "icon": "t_icon_research_productextraitem_bullet",
     "sub_category": "ProductExtraItemProbability_Bullet",
     "assign_id": "Lab_Handcraft_2",
     "require_research_id": "Handcraft4",
@@ -2521,11 +2604,12 @@
     "effect_value": 5.0,
     "effect_work_suitability": "None",
     "effect_item_type": "Bullet",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Handcraft4_3": {
+    "text_id": "NAME_HANDCRAFT18",
     "category": "Handcraft",
-    "icon": "t_icon_research_productextraitem_sphere",
     "sub_category": "ProductExtraItemProbability_Sphere",
     "assign_id": "Lab_Handcraft_3",
     "require_research_id": "Handcraft4_2",
@@ -2552,11 +2636,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "None",
     "effect_item_type": "CaptureBall",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "Handcraft4_4": {
+    "text_id": "NAME_HANDCRAFT19",
     "category": "Handcraft",
-    "icon": "t_icon_research_productextraitem_bullet",
     "sub_category": "ProductExtraItemProbability_Bullet",
     "assign_id": "Lab_Handcraft_4",
     "require_research_id": "Handcraft4_3",
@@ -2583,11 +2668,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "None",
     "effect_item_type": "Bullet",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "Handcraft5": {
+    "text_id": "NAME_HANDCRAFT20",
     "category": "Handcraft",
-    "icon": "t_icon_research_technologyprerequisite",
     "sub_category": "TechnologyUnlock",
     "assign_id": "Lab_Handcraft_1",
     "require_research_id": "Handcraft1_2",
@@ -2610,11 +2696,12 @@
     "effect_value": 0.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": "DESC_HANDCRAFT20"
   },
   "Medicine1": {
+    "text_id": "NAME_MEDICINE1",
     "category": "ProductMedicine",
-    "icon": "t_icon_research_craftspeed_08",
     "sub_category": "CraftSpeed_ProductMedicine",
     "assign_id": "Lab_Medicine_1",
     "require_research_id": null,
@@ -2637,11 +2724,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "ProductMedicine",
     "effect_item_type": "None",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "Medicine1_2": {
+    "text_id": "NAME_MEDICINE2",
     "category": "ProductMedicine",
-    "icon": "t_icon_research_craftspeed_08",
     "sub_category": "CraftSpeed_ProductMedicine",
     "assign_id": "Lab_Medicine_1",
     "require_research_id": "Medicine1",
@@ -2664,11 +2752,12 @@
     "effect_value": 5.0,
     "effect_work_suitability": "ProductMedicine",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Medicine1_3": {
+    "text_id": "NAME_MEDICINE3",
     "category": "ProductMedicine",
-    "icon": "t_icon_research_craftspeed_08",
     "sub_category": "CraftSpeed_ProductMedicine",
     "assign_id": "Lab_Medicine_2",
     "require_research_id": "Medicine4",
@@ -2695,11 +2784,12 @@
     "effect_value": 5.0,
     "effect_work_suitability": "ProductMedicine",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Medicine1_4": {
+    "text_id": "NAME_MEDICINE4",
     "category": "ProductMedicine",
-    "icon": "t_icon_research_craftspeed_08",
     "sub_category": "CraftSpeed_ProductMedicine",
     "assign_id": "Lab_Medicine_3",
     "require_research_id": "Medicine1_3",
@@ -2726,11 +2816,12 @@
     "effect_value": 5.0,
     "effect_work_suitability": "ProductMedicine",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Medicine1_5": {
+    "text_id": "NAME_MEDICINE5",
     "category": "ProductMedicine",
-    "icon": "t_icon_research_craftspeed_08",
     "sub_category": "CraftSpeed_ProductMedicine",
     "assign_id": "Lab_Medicine_4",
     "require_research_id": "Medicine1_4",
@@ -2757,11 +2848,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "ProductMedicine",
     "effect_item_type": "None",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "Medicine2": {
+    "text_id": "NAME_MEDICINE6",
     "category": "ProductMedicine",
-    "icon": "t_icon_research_researchspeed",
     "sub_category": "CraftSpeed_ProductMedicine",
     "assign_id": "Lab_Medicine_1",
     "require_research_id": "Medicine1",
@@ -2784,11 +2876,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "ProductMedicine",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Medicine2_2": {
+    "text_id": "NAME_MEDICINE7",
     "category": "ProductMedicine",
-    "icon": "t_icon_research_researchspeed",
     "sub_category": "CraftSpeed_ProductMedicine",
     "assign_id": "Lab_Medicine_2",
     "require_research_id": "Medicine2",
@@ -2815,11 +2908,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "ProductMedicine",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Medicine2_3": {
+    "text_id": "NAME_MEDICINE8",
     "category": "ProductMedicine",
-    "icon": "t_icon_research_defense",
     "sub_category": "DefenseRateBaseCampWorker",
     "assign_id": "Lab_Medicine_3",
     "require_research_id": "Medicine2_2",
@@ -2846,11 +2940,12 @@
     "effect_value": 2.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Medicine2_4": {
+    "text_id": "NAME_MEDICINE9",
     "category": "ProductMedicine",
-    "icon": "t_icon_research_attack",
     "sub_category": "AttackRateBaseCampWorker",
     "assign_id": "Lab_Medicine_4",
     "require_research_id": "Medicine2_3",
@@ -2877,11 +2972,12 @@
     "effect_value": 2.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Medicine3": {
+    "text_id": "NAME_MEDICINE10",
     "category": "ProductMedicine",
-    "icon": "t_icon_research_productcostdown",
     "sub_category": "ProductItemConsumeMaterialNumRate",
     "assign_id": "Lab_Medicine_2",
     "require_research_id": "Medicine1_2",
@@ -2908,11 +3004,12 @@
     "effect_value": -5.0,
     "effect_work_suitability": "None",
     "effect_item_type": "Medicine",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Medicine3_2": {
+    "text_id": "NAME_MEDICINE11",
     "category": "ProductMedicine",
-    "icon": "t_icon_research_productcostdown",
     "sub_category": "ProductItemConsumeMaterialNumRate",
     "assign_id": "Lab_Medicine_3",
     "require_research_id": "Medicine3",
@@ -2939,11 +3036,12 @@
     "effect_value": -5.0,
     "effect_work_suitability": "None",
     "effect_item_type": "Medicine",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Medicine3_3": {
+    "text_id": "NAME_MEDICINE12",
     "category": "ProductMedicine",
-    "icon": "t_icon_research_productcostdown",
     "sub_category": "ProductItemConsumeMaterialNumRate",
     "assign_id": "Lab_Medicine_4",
     "require_research_id": "Medicine3_2",
@@ -2970,11 +3068,12 @@
     "effect_value": -10.0,
     "effect_work_suitability": "None",
     "effect_item_type": "Medicine",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "Medicine4": {
+    "text_id": "NAME_MEDICINE13",
     "category": "ProductMedicine",
-    "icon": "t_icon_research_technologyprerequisite",
     "sub_category": "TechnologyUnlock",
     "assign_id": "Lab_Medicine_2",
     "require_research_id": "Medicine1_2",
@@ -2997,11 +3096,12 @@
     "effect_value": 0.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": "DESC_MEDICINE13"
   },
   "Mining1": {
+    "text_id": "NAME_MINING1",
     "category": "Mining",
-    "icon": "t_icon_research_craftspeed_07",
     "sub_category": "CraftSpeed_Mining",
     "assign_id": "Lab_Mining_1",
     "require_research_id": null,
@@ -3020,11 +3120,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "Mining",
     "effect_item_type": "None",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "Mining1_2": {
+    "text_id": "NAME_MINING2",
     "category": "Mining",
-    "icon": "t_icon_research_craftspeed_07",
     "sub_category": "CraftSpeed_Mining",
     "assign_id": "Lab_Mining_1",
     "require_research_id": "Mining1",
@@ -3051,11 +3152,12 @@
     "effect_value": 5.0,
     "effect_work_suitability": "Mining",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Mining1_3": {
+    "text_id": "NAME_MINING3",
     "category": "Mining",
-    "icon": "t_icon_research_craftspeed_07",
     "sub_category": "CraftSpeed_Mining",
     "assign_id": "Lab_Mining_2",
     "require_research_id": "Mining5",
@@ -3082,11 +3184,12 @@
     "effect_value": 5.0,
     "effect_work_suitability": "Mining",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Mining1_4": {
+    "text_id": "NAME_MINING4",
     "category": "Mining",
-    "icon": "t_icon_research_craftspeed_07",
     "sub_category": "CraftSpeed_Mining",
     "assign_id": "Lab_Mining_3",
     "require_research_id": "Mining1_3",
@@ -3113,11 +3216,12 @@
     "effect_value": 5.0,
     "effect_work_suitability": "Mining",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Mining1_5": {
+    "text_id": "NAME_MINING5",
     "category": "Mining",
-    "icon": "t_icon_research_craftspeed_07",
     "sub_category": "CraftSpeed_Mining",
     "assign_id": "Lab_Mining_4",
     "require_research_id": "Mining1_4",
@@ -3144,11 +3248,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "Mining",
     "effect_item_type": "None",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "Mining2": {
+    "text_id": "NAME_MINING6",
     "category": "Mining",
-    "icon": "t_icon_research_expeditiontime",
     "sub_category": "ExpeditionTimeCostRate",
     "assign_id": "Lab_Mining_1",
     "require_research_id": "Mining1",
@@ -3175,11 +3280,12 @@
     "effect_value": -5.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Mining2_2": {
+    "text_id": "NAME_MINING7",
     "category": "Mining",
-    "icon": "t_icon_research_expeditionreward",
     "sub_category": "ExpeditionRewardRate",
     "assign_id": "Lab_Mining_2",
     "require_research_id": "Mining2",
@@ -3206,11 +3312,12 @@
     "effect_value": 5.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Mining2_3": {
+    "text_id": "NAME_MINING8",
     "category": "Mining",
-    "icon": "t_icon_research_expeditiontime",
     "sub_category": "ExpeditionTimeCostRate",
     "assign_id": "Lab_Mining_3",
     "require_research_id": "Mining2_2",
@@ -3237,11 +3344,12 @@
     "effect_value": -10.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "Mining2_4": {
+    "text_id": "NAME_MINING9",
     "category": "Mining",
-    "icon": "t_icon_research_expeditionreward",
     "sub_category": "ExpeditionRewardRate",
     "assign_id": "Lab_Mining_4",
     "require_research_id": "Mining2_3",
@@ -3268,11 +3376,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "Mining3": {
+    "text_id": "NAME_MINING10",
     "category": "Mining",
-    "icon": "t_icon_research_researchspeed",
     "sub_category": "LabResearchSpeed",
     "assign_id": "Lab_Mining_1",
     "require_research_id": "Mining1",
@@ -3295,11 +3404,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "Mining",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Mining3_2": {
+    "text_id": "NAME_MINING11",
     "category": "Mining",
-    "icon": "t_icon_research_researchspeed",
     "sub_category": "LabResearchSpeed",
     "assign_id": "Lab_Mining_2",
     "require_research_id": "Mining3",
@@ -3326,11 +3436,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "Mining",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Mining3_3": {
+    "text_id": "NAME_MINING12",
     "category": "Mining",
-    "icon": "t_icon_research_defense",
     "sub_category": "DefenseRateBaseCampWorker",
     "assign_id": "Lab_Mining_3",
     "require_research_id": "Mining3_2",
@@ -3357,11 +3468,12 @@
     "effect_value": 2.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Mining3_4": {
+    "text_id": "NAME_MINING13",
     "category": "Mining",
-    "icon": "t_icon_research_attack",
     "sub_category": "AttackRateBaseCampWorker",
     "assign_id": "Lab_Mining_4",
     "require_research_id": "Mining3_3",
@@ -3388,11 +3500,12 @@
     "effect_value": 2.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Mining4": {
+    "text_id": "NAME_MINING14",
     "category": "Mining",
-    "icon": "t_icon_research_oilspeed",
     "sub_category": "OilExtractionSpeedRate",
     "assign_id": "Lab_Mining_3",
     "require_research_id": "Mining1_3",
@@ -3419,11 +3532,12 @@
     "effect_value": 20.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Mining4_2": {
+    "text_id": "NAME_MINING15",
     "category": "Mining",
-    "icon": "t_icon_research_oilspeed",
     "sub_category": "OilExtractionSpeedRate",
     "assign_id": "Lab_Mining_3",
     "require_research_id": "Mining4",
@@ -3450,11 +3564,12 @@
     "effect_value": 30.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Mining4_3": {
+    "text_id": "NAME_MINING16",
     "category": "Mining",
-    "icon": "t_icon_research_oilspeed",
     "sub_category": "OilExtractionSpeedRate",
     "assign_id": "Lab_Mining_4",
     "require_research_id": "Mining4_2",
@@ -3481,11 +3596,12 @@
     "effect_value": 40.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "Mining5": {
+    "text_id": "NAME_MINING17",
     "category": "Mining",
-    "icon": "t_icon_research_technologyprerequisite",
     "sub_category": "TechnologyUnlock",
     "assign_id": "Lab_Mining_2",
     "require_research_id": "Mining1_2",
@@ -3512,11 +3628,12 @@
     "effect_value": 0.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": "DESC_MINING17"
   },
   "Seeding1": {
+    "text_id": "NAME_SEEDING1",
     "category": "Seeding",
-    "icon": "t_icon_research_craftspeed_02",
     "sub_category": "CraftSpeed_Seeding",
     "assign_id": "Lab_Seeding_1",
     "require_research_id": null,
@@ -3539,11 +3656,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "Seeding",
     "effect_item_type": "None",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "Seeding1_2": {
+    "text_id": "NAME_SEEDING2",
     "category": "Seeding",
-    "icon": "t_icon_research_craftspeed_02",
     "sub_category": "CraftSpeed_Seeding",
     "assign_id": "Lab_Seeding_1",
     "require_research_id": "Seeding1",
@@ -3566,11 +3684,12 @@
     "effect_value": 5.0,
     "effect_work_suitability": "Seeding",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Seeding1_3": {
+    "text_id": "NAME_SEEDING3",
     "category": "Seeding",
-    "icon": "t_icon_research_craftspeed_02",
     "sub_category": "CraftSpeed_Seeding",
     "assign_id": "Lab_Seeding_2",
     "require_research_id": "Seeding5",
@@ -3597,11 +3716,12 @@
     "effect_value": 5.0,
     "effect_work_suitability": "Seeding",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Seeding1_4": {
+    "text_id": "NAME_SEEDING4",
     "category": "Seeding",
-    "icon": "t_icon_research_craftspeed_02",
     "sub_category": "CraftSpeed_Seeding",
     "assign_id": "Lab_Seeding_3",
     "require_research_id": "Seeding1_3",
@@ -3628,11 +3748,12 @@
     "effect_value": 5.0,
     "effect_work_suitability": "Seeding",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Seeding1_5": {
+    "text_id": "NAME_SEEDING5",
     "category": "Seeding",
-    "icon": "t_icon_research_craftspeed_02",
     "sub_category": "CraftSpeed_Seeding",
     "assign_id": "Lab_Seeding_4",
     "require_research_id": "Seeding1_4",
@@ -3659,11 +3780,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "Seeding",
     "effect_item_type": "None",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "Seeding2": {
+    "text_id": "NAME_SEEDING6",
     "category": "Seeding",
-    "icon": "t_icon_research_farmgrowup",
     "sub_category": "FarmCropGrowupSpeed",
     "assign_id": "Lab_Seeding_1",
     "require_research_id": "Seeding1",
@@ -3686,11 +3808,12 @@
     "effect_value": 5.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Seeding2_2": {
+    "text_id": "NAME_SEEDING7",
     "category": "Seeding",
-    "icon": "t_icon_research_farmharvest",
     "sub_category": "FarmCropHarvestNumRate",
     "assign_id": "Lab_Seeding_2",
     "require_research_id": "Seeding2",
@@ -3713,11 +3836,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "Seeding2_3": {
+    "text_id": "NAME_SEEDING8",
     "category": "Seeding",
-    "icon": "t_icon_research_craftspeed_02",
     "sub_category": "FarmCropGrowupSpeed",
     "assign_id": "Lab_Seeding_3",
     "require_research_id": "Seeding2",
@@ -3740,11 +3864,12 @@
     "effect_value": 5.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Seeding2_4": {
+    "text_id": "NAME_SEEDING9",
     "category": "Seeding",
-    "icon": "t_icon_research_craftspeed_02",
     "sub_category": "FarmCropGrowupSpeed",
     "assign_id": "Lab_Seeding_4",
     "require_research_id": "Seeding2_3",
@@ -3771,11 +3896,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Seeding2_5": {
+    "text_id": "NAME_SEEDING10",
     "category": "Seeding",
-    "icon": "t_icon_research_farmharvest",
     "sub_category": "FarmCropHarvestNumRate",
     "assign_id": "Lab_Seeding_3",
     "require_research_id": "Seeding2_2",
@@ -3802,11 +3928,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Seeding2_6": {
+    "text_id": "NAME_SEEDING11",
     "category": "Seeding",
-    "icon": "t_icon_research_farmharvest",
     "sub_category": "FarmCropHarvestNumRate",
     "assign_id": "Lab_Seeding_4",
     "require_research_id": "Seeding2_5",
@@ -3833,11 +3960,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "Seeding3": {
+    "text_id": "NAME_SEEDING12",
     "category": "Seeding",
-    "icon": "t_icon_research_researchspeed",
     "sub_category": "LabResearchSpeed",
     "assign_id": "Lab_Seeding_1",
     "require_research_id": "Seeding1",
@@ -3860,11 +3988,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "Seeding",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Seeding3_2": {
+    "text_id": "NAME_SEEDING13",
     "category": "Seeding",
-    "icon": "t_icon_research_researchspeed",
     "sub_category": "LabResearchSpeed",
     "assign_id": "Lab_Seeding_2",
     "require_research_id": "Seeding3",
@@ -3887,11 +4016,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "Seeding",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Seeding3_3": {
+    "text_id": "NAME_SEEDING14",
     "category": "Seeding",
-    "icon": "t_icon_research_defense",
     "sub_category": "DefenseRateBaseCampWorker",
     "assign_id": "Lab_Seeding_3",
     "require_research_id": "Seeding3_2",
@@ -3918,11 +4048,12 @@
     "effect_value": 2.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Seeding3_4": {
+    "text_id": "NAME_SEEDING15",
     "category": "Seeding",
-    "icon": "t_icon_research_attack",
     "sub_category": "AttackRateBaseCampWorker",
     "assign_id": "Lab_Seeding_4",
     "require_research_id": "Seeding3_3",
@@ -3949,11 +4080,12 @@
     "effect_value": 2.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "Seeding4": {
+    "text_id": "NAME_SEEDING16",
     "category": "Seeding",
-    "icon": "t_icon_research_technologyprerequisite",
     "sub_category": "TechnologyUnlock",
     "assign_id": "Lab_Seeding_1",
     "require_research_id": "Seeding1_2",
@@ -3980,11 +4112,12 @@
     "effect_value": 0.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": "DESC_SEEDING16"
   },
   "Seeding5": {
+    "text_id": "NAME_SEEDING17",
     "category": "Seeding",
-    "icon": "t_icon_research_technologyprerequisite",
     "sub_category": "TechnologyUnlock",
     "assign_id": "Lab_Seeding_2",
     "require_research_id": "Seeding4",
@@ -4011,11 +4144,12 @@
     "effect_value": 0.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": "DESC_SEEDING17"
   },
   "Watering1": {
+    "text_id": "NAME_WATERING1",
     "category": "Watering",
-    "icon": "t_icon_research_craftspeed_01",
     "sub_category": "CraftSpeed_Watering",
     "assign_id": "Lab_Water_1",
     "require_research_id": null,
@@ -4034,11 +4168,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "Watering",
     "effect_item_type": "None",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "Watering1_2": {
+    "text_id": "NAME_WATERING2",
     "category": "Watering",
-    "icon": "t_icon_research_craftspeed_01",
     "sub_category": "CraftSpeed_Watering",
     "assign_id": "Lab_Water_1",
     "require_research_id": "Watering1",
@@ -4061,11 +4196,12 @@
     "effect_value": 5.0,
     "effect_work_suitability": "Watering",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Watering1_3": {
+    "text_id": "NAME_WATERING3",
     "category": "Watering",
-    "icon": "t_icon_research_craftspeed_01",
     "sub_category": "CraftSpeed_Watering",
     "assign_id": "Lab_Water_2",
     "require_research_id": "Watering5",
@@ -4092,11 +4228,12 @@
     "effect_value": 5.0,
     "effect_work_suitability": "Watering",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Watering1_4": {
+    "text_id": "NAME_WATERING4",
     "category": "Watering",
-    "icon": "t_icon_research_craftspeed_01",
     "sub_category": "CraftSpeed_Watering",
     "assign_id": "Lab_Water_3",
     "require_research_id": "Watering1_3",
@@ -4123,11 +4260,12 @@
     "effect_value": 5.0,
     "effect_work_suitability": "Watering",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Watering1_5": {
+    "text_id": "NAME_WATERING5",
     "category": "Watering",
-    "icon": "t_icon_research_craftspeed_01",
     "sub_category": "CraftSpeed_Watering",
     "assign_id": "Lab_Water_4",
     "require_research_id": "Watering1_4",
@@ -4154,11 +4292,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "Watering",
     "effect_item_type": "None",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "Watering2": {
+    "text_id": "NAME_WATERING6",
     "category": "Watering",
-    "icon": "t_icon_research_farmgrowup",
     "sub_category": "FarmCropGrowupSpeed",
     "assign_id": "Lab_Water_1",
     "require_research_id": "Watering1",
@@ -4181,11 +4320,12 @@
     "effect_value": 5.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Watering2_2": {
+    "text_id": "NAME_WATERING7",
     "category": "Watering",
-    "icon": "t_icon_research_farmharvest",
     "sub_category": "FarmCropHarvestNumRate",
     "assign_id": "Lab_Water_2",
     "require_research_id": "Watering2",
@@ -4212,11 +4352,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "Watering2_3": {
+    "text_id": "NAME_WATERING8",
     "category": "Watering",
-    "icon": "t_icon_research_farmgrowup",
     "sub_category": "FarmCropGrowupSpeed",
     "assign_id": "Lab_Water_3",
     "require_research_id": "Watering2_2",
@@ -4243,11 +4384,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Watering2_4": {
+    "text_id": "NAME_WATERING9",
     "category": "Watering",
-    "icon": "t_icon_research_farmharvest",
     "sub_category": "FarmCropHarvestNumRate",
     "assign_id": "Lab_Water_4",
     "require_research_id": "Watering2_3",
@@ -4274,11 +4416,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "Watering3": {
+    "text_id": "NAME_WATERING10",
     "category": "Watering",
-    "icon": "t_icon_research_researchspeed",
     "sub_category": "LabResearchSpeed",
     "assign_id": "Lab_Water_1",
     "require_research_id": "Watering1",
@@ -4301,11 +4444,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "Watering",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Watering3_2": {
+    "text_id": "NAME_WATERING11",
     "category": "Watering",
-    "icon": "t_icon_research_researchspeed",
     "sub_category": "LabResearchSpeed",
     "assign_id": "Lab_Water_2",
     "require_research_id": "Watering3",
@@ -4332,11 +4476,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "Watering",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Watering3_3": {
+    "text_id": "NAME_WATERING12",
     "category": "Watering",
-    "icon": "t_icon_research_defense",
     "sub_category": "DefenseRateBaseCampWorker",
     "assign_id": "Lab_Water_3",
     "require_research_id": "Watering3_2",
@@ -4363,11 +4508,12 @@
     "effect_value": 2.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Watering3_4": {
+    "text_id": "NAME_WATERING13",
     "category": "Watering",
-    "icon": "t_icon_research_attack",
     "sub_category": "AttackRateBaseCampWorker",
     "assign_id": "Lab_Water_4",
     "require_research_id": "Watering3_3",
@@ -4394,11 +4540,12 @@
     "effect_value": 2.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "Watering4": {
+    "text_id": "NAME_WATERING14",
     "category": "Watering",
-    "icon": "t_icon_research_productextraitem_ore",
     "sub_category": "ProductExtraItemProbability_Ore",
     "assign_id": "Lab_Water_2",
     "require_research_id": "Watering1_2",
@@ -4421,11 +4568,12 @@
     "effect_value": 5.0,
     "effect_work_suitability": "None",
     "effect_item_type": "Ore",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
   },
   "Watering4_2": {
+    "text_id": "NAME_WATERING15",
     "category": "Watering",
-    "icon": "t_icon_research_productextraitem_ore",
     "sub_category": "ProductExtraItemProbability_Ore",
     "assign_id": "Lab_Water_4",
     "require_research_id": "Watering4",
@@ -4452,11 +4600,12 @@
     "effect_value": 10.0,
     "effect_work_suitability": "None",
     "effect_item_type": "Ore",
-    "is_essential": true
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
   },
   "Watering5": {
+    "text_id": "NAME_WATERING16",
     "category": "Watering",
-    "icon": "t_icon_research_craftspeed_01",
     "sub_category": "TechnologyUnlock",
     "assign_id": "Lab_Water_1",
     "require_research_id": "Watering1_2",
@@ -4479,6 +4628,7 @@
     "effect_value": 0.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
-    "is_essential": false
+    "is_essential": false,
+    "effect_description_text_id_overwrite": "DESC_WATERING16"
   }
 }

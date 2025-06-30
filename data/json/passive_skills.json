@@ -153,6 +153,30 @@
     "add_accessory": false,
     "disabled": false
   },
+  "Attack_ACC_up1_Otomo_Only_Equip": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ShotAttack",
+        "value": 4.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
   "Attack_ACC_up2": {
     "rank": 2,
     "effects": [
@@ -177,6 +201,30 @@
     "add_accessory": false,
     "disabled": false
   },
+  "Attack_ACC_up2_Otomo_Only_Equip": {
+    "rank": 2,
+    "effects": [
+      {
+        "type": "ShotAttack",
+        "value": 8.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
   "Attack_ACC_up3": {
     "rank": 3,
     "effects": [
@@ -192,6 +240,30 @@
     "invoke_reserve": false,
     "invoke_in_party": false,
     "invoke_always": false,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "Attack_ACC_up3_Otomo_Only_Equip": {
+    "rank": 3,
+    "effects": [
+      {
+        "type": "ShotAttack",
+        "value": 12.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
     "invoke_in_base": false,
     "add_pal": false,
     "add_rare_pal": false,
@@ -945,6 +1017,54 @@
     "add_accessory": true,
     "disabled": false
   },
+  "BossDefeatReward_IceNarwhal": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Ice",
+        "value": 3.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_IceNarwhal_Fire": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Fire",
+        "value": 3.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
   "BossDefeatReward_JetDragon": {
     "rank": 1,
     "effects": [
@@ -1311,6 +1431,30 @@
       {
         "type": "ElementBoost_Earth",
         "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_PoseidonOrca": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Water",
+        "value": 3.0,
         "target": "None"
       }
     ],
@@ -2395,6 +2539,78 @@
     "add_accessory": false,
     "disabled": false
   },
+  "Defense_ACC_up1_Otomo_Only_Equip": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "Defense",
+        "value": 5.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "Defense_ACC_up2_Otomo_Only_Equip": {
+    "rank": 2,
+    "effects": [
+      {
+        "type": "Defense",
+        "value": 10.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "Defense_ACC_up3_Otomo_Only_Equip": {
+    "rank": 3,
+    "effects": [
+      {
+        "type": "Defense",
+        "value": 15.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
   "Deffence_down1": {
     "rank": -1,
     "effects": [
@@ -2587,6 +2803,30 @@
     "add_accessory": true,
     "disabled": false
   },
+  "ElementBoost_Dark_1_Otomo_Only_Equip": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Dark",
+        "value": 6.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
   "ElementBoost_Dark_1_PAL": {
     "rank": 1,
     "effects": [
@@ -2633,6 +2873,30 @@
     "add_melee_weapon": false,
     "add_armor": true,
     "add_accessory": true,
+    "disabled": false
+  },
+  "ElementBoost_Dark_2_Otomo_Only_Equip": {
+    "rank": 2,
+    "effects": [
+      {
+        "type": "ElementBoost_Dark",
+        "value": 12.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
     "disabled": false
   },
   "ElementBoost_Dark_2_PAL": {
@@ -2683,6 +2947,30 @@
     "add_accessory": true,
     "disabled": false
   },
+  "ElementBoost_Dark_3_Otomo_Only_Equip": {
+    "rank": 3,
+    "effects": [
+      {
+        "type": "ElementBoost_Dark",
+        "value": 18.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
   "ElementBoost_Dragon_1_BossDefeat": {
     "rank": 1,
     "effects": [
@@ -2705,6 +2993,30 @@
     "add_melee_weapon": false,
     "add_armor": true,
     "add_accessory": true,
+    "disabled": false
+  },
+  "ElementBoost_Dragon_1_Otomo_Only_Equip": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Dragon",
+        "value": 6.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
     "disabled": false
   },
   "ElementBoost_Dragon_1_PAL": {
@@ -2755,6 +3067,30 @@
     "add_accessory": true,
     "disabled": false
   },
+  "ElementBoost_Dragon_2_Otomo_Only_Equip": {
+    "rank": 2,
+    "effects": [
+      {
+        "type": "ElementBoost_Dragon",
+        "value": 12.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
   "ElementBoost_Dragon_2_PAL": {
     "rank": 3,
     "effects": [
@@ -2803,6 +3139,30 @@
     "add_accessory": true,
     "disabled": false
   },
+  "ElementBoost_Dragon_3_Otomo_Only_Equip": {
+    "rank": 3,
+    "effects": [
+      {
+        "type": "ElementBoost_Dragon",
+        "value": 18.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
   "ElementBoost_Earth_1_BossDefeat": {
     "rank": 1,
     "effects": [
@@ -2825,6 +3185,30 @@
     "add_melee_weapon": false,
     "add_armor": true,
     "add_accessory": true,
+    "disabled": false
+  },
+  "ElementBoost_Earth_1_Otomo_Only_Equip": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Earth",
+        "value": 6.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
     "disabled": false
   },
   "ElementBoost_Earth_1_PAL": {
@@ -2875,6 +3259,30 @@
     "add_accessory": true,
     "disabled": false
   },
+  "ElementBoost_Earth_2_Otomo_Only_Equip": {
+    "rank": 2,
+    "effects": [
+      {
+        "type": "ElementBoost_Earth",
+        "value": 12.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
   "ElementBoost_Earth_2_PAL": {
     "rank": 3,
     "effects": [
@@ -2923,6 +3331,30 @@
     "add_accessory": true,
     "disabled": false
   },
+  "ElementBoost_Earth_3_Otomo_Only_Equip": {
+    "rank": 3,
+    "effects": [
+      {
+        "type": "ElementBoost_Earth",
+        "value": 18.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
   "ElementBoost_Electricity_1_BossDefeat": {
     "rank": 1,
     "effects": [
@@ -2945,6 +3377,30 @@
     "add_melee_weapon": false,
     "add_armor": true,
     "add_accessory": true,
+    "disabled": false
+  },
+  "ElementBoost_Electricity_1_Otomo_Only_Equip": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Electricity",
+        "value": 6.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
     "disabled": false
   },
   "ElementBoost_Electricity_2_BossDefeat": {
@@ -2971,6 +3427,30 @@
     "add_accessory": true,
     "disabled": false
   },
+  "ElementBoost_Electricity_2_Otomo_Only_Equip": {
+    "rank": 2,
+    "effects": [
+      {
+        "type": "ElementBoost_Electricity",
+        "value": 12.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
   "ElementBoost_Electricity_3_BossDefeat": {
     "rank": 1,
     "effects": [
@@ -2995,6 +3475,30 @@
     "add_accessory": true,
     "disabled": false
   },
+  "ElementBoost_Electricity_3_Otomo_Only_Equip": {
+    "rank": 3,
+    "effects": [
+      {
+        "type": "ElementBoost_Electricity",
+        "value": 18.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
   "ElementBoost_Fire_1_BossDefeat": {
     "rank": 1,
     "effects": [
@@ -3017,6 +3521,30 @@
     "add_melee_weapon": false,
     "add_armor": true,
     "add_accessory": true,
+    "disabled": false
+  },
+  "ElementBoost_Fire_1_Otomo_Only_Equip": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Fire",
+        "value": 6.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
     "disabled": false
   },
   "ElementBoost_Fire_1_PAL": {
@@ -3067,6 +3595,30 @@
     "add_accessory": true,
     "disabled": false
   },
+  "ElementBoost_Fire_2_Otomo_Only_Equip": {
+    "rank": 2,
+    "effects": [
+      {
+        "type": "ElementBoost_Fire",
+        "value": 12.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
   "ElementBoost_Fire_2_PAL": {
     "rank": 3,
     "effects": [
@@ -3115,6 +3667,30 @@
     "add_accessory": true,
     "disabled": false
   },
+  "ElementBoost_Fire_3_Otomo_Only_Equip": {
+    "rank": 3,
+    "effects": [
+      {
+        "type": "ElementBoost_Fire",
+        "value": 18.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
   "ElementBoost_Ice_1_BossDefeat": {
     "rank": 1,
     "effects": [
@@ -3137,6 +3713,30 @@
     "add_melee_weapon": false,
     "add_armor": true,
     "add_accessory": true,
+    "disabled": false
+  },
+  "ElementBoost_Ice_1_Otomo_Only_Equip": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Ice",
+        "value": 6.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
     "disabled": false
   },
   "ElementBoost_Ice_1_PAL": {
@@ -3187,6 +3787,30 @@
     "add_accessory": true,
     "disabled": false
   },
+  "ElementBoost_Ice_2_Otomo_Only_Equip": {
+    "rank": 2,
+    "effects": [
+      {
+        "type": "ElementBoost_Ice",
+        "value": 12.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
   "ElementBoost_Ice_2_PAL": {
     "rank": 3,
     "effects": [
@@ -3235,6 +3859,30 @@
     "add_accessory": true,
     "disabled": false
   },
+  "ElementBoost_Ice_3_Otomo_Only_Equip": {
+    "rank": 3,
+    "effects": [
+      {
+        "type": "ElementBoost_Ice",
+        "value": 18.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
   "ElementBoost_Leaf_1_BossDefeat": {
     "rank": 1,
     "effects": [
@@ -3257,6 +3905,30 @@
     "add_melee_weapon": false,
     "add_armor": true,
     "add_accessory": true,
+    "disabled": false
+  },
+  "ElementBoost_Leaf_1_Otomo_Only_Equip": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Leaf",
+        "value": 6.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
     "disabled": false
   },
   "ElementBoost_Leaf_1_PAL": {
@@ -3307,6 +3979,30 @@
     "add_accessory": true,
     "disabled": false
   },
+  "ElementBoost_Leaf_2_Otomo_Only_Equip": {
+    "rank": 2,
+    "effects": [
+      {
+        "type": "ElementBoost_Leaf",
+        "value": 12.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
   "ElementBoost_Leaf_2_PAL": {
     "rank": 3,
     "effects": [
@@ -3355,6 +4051,30 @@
     "add_accessory": true,
     "disabled": false
   },
+  "ElementBoost_Leaf_3_Otomo_Only_Equip": {
+    "rank": 3,
+    "effects": [
+      {
+        "type": "ElementBoost_Leaf",
+        "value": 18.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
   "ElementBoost_Normal_1_BossDefeat": {
     "rank": 1,
     "effects": [
@@ -3377,6 +4097,30 @@
     "add_melee_weapon": false,
     "add_armor": true,
     "add_accessory": true,
+    "disabled": false
+  },
+  "ElementBoost_Normal_1_Otomo_Only_Equip": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Normal",
+        "value": 6.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
     "disabled": false
   },
   "ElementBoost_Normal_1_PAL": {
@@ -3427,6 +4171,30 @@
     "add_accessory": true,
     "disabled": false
   },
+  "ElementBoost_Normal_2_Otomo_Only_Equip": {
+    "rank": 2,
+    "effects": [
+      {
+        "type": "ElementBoost_Normal",
+        "value": 12.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
   "ElementBoost_Normal_2_PAL": {
     "rank": 3,
     "effects": [
@@ -3473,6 +4241,30 @@
     "add_melee_weapon": false,
     "add_armor": true,
     "add_accessory": true,
+    "disabled": false
+  },
+  "ElementBoost_Normal_3_Otomo_Only_Equip": {
+    "rank": 3,
+    "effects": [
+      {
+        "type": "ElementBoost_Normal",
+        "value": 18.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
     "disabled": false
   },
   "ElementBoost_Thunder_1_PAL": {
@@ -3547,6 +4339,30 @@
     "add_accessory": true,
     "disabled": false
   },
+  "ElementBoost_Water_1_Otomo_Only_Equip": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Water",
+        "value": 6.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
   "ElementBoost_Water_2_BossDefeat": {
     "rank": 1,
     "effects": [
@@ -3571,6 +4387,30 @@
     "add_accessory": true,
     "disabled": false
   },
+  "ElementBoost_Water_2_Otomo_Only_Equip": {
+    "rank": 2,
+    "effects": [
+      {
+        "type": "ElementBoost_Water",
+        "value": 12.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
   "ElementBoost_Water_3_BossDefeat": {
     "rank": 1,
     "effects": [
@@ -3593,6 +4433,30 @@
     "add_melee_weapon": false,
     "add_armor": true,
     "add_accessory": true,
+    "disabled": false
+  },
+  "ElementBoost_Water_3_Otomo_Only_Equip": {
+    "rank": 3,
+    "effects": [
+      {
+        "type": "ElementBoost_Water",
+        "value": 18.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
     "disabled": false
   },
   "ElementResist_Aqua_1": {
@@ -4488,6 +5352,209 @@
     "add_accessory": false,
     "disabled": false
   },
+  "GYM_NAME_Desert": {
+    "rank": 3,
+    "effects": [
+      {
+        "type": "ShotAttack",
+        "value": 20.0,
+        "target": "ToSelf"
+      },
+      {
+        "type": "MoveSpeed",
+        "value": 10.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "GYM_NAME_Forest": {
+    "rank": 3,
+    "effects": [
+      {
+        "type": "ShotAttack",
+        "value": 20.0,
+        "target": "ToSelf"
+      },
+      {
+        "type": "MoveSpeed",
+        "value": 10.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "GYM_NAME_Meadow": {
+    "rank": 3,
+    "effects": [
+      {
+        "type": "ShotAttack",
+        "value": 20.0,
+        "target": "ToSelf"
+      },
+      {
+        "type": "MoveSpeed",
+        "value": 10.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "GYM_NAME_Sakurajima": {
+    "rank": 3,
+    "effects": [
+      {
+        "type": "ShotAttack",
+        "value": 20.0,
+        "target": "ToSelf"
+      },
+      {
+        "type": "MoveSpeed",
+        "value": 10.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "GYM_NAME_Snow": {
+    "rank": 3,
+    "effects": [
+      {
+        "type": "ShotAttack",
+        "value": 20.0,
+        "target": "ToSelf"
+      },
+      {
+        "type": "MoveSpeed",
+        "value": 10.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "GYM_NAME_Viking": {
+    "rank": 3,
+    "effects": [
+      {
+        "type": "ShotAttack",
+        "value": 20.0,
+        "target": "ToSelf"
+      },
+      {
+        "type": "MoveSpeed",
+        "value": 10.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "GYM_NAME_Volcano": {
+    "rank": 3,
+    "effects": [
+      {
+        "type": "ShotAttack",
+        "value": 20.0,
+        "target": "ToSelf"
+      },
+      {
+        "type": "MoveSpeed",
+        "value": 10.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
   "HP_ACC_up1": {
     "rank": 1,
     "effects": [
@@ -5005,6 +6072,40 @@
     "invoke_always": true,
     "invoke_in_base": false,
     "add_pal": true,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "Nushi": {
+    "rank": 4,
+    "effects": [
+      {
+        "type": "ElementBoost_Water",
+        "value": 20.0,
+        "target": "ToSelf"
+      },
+      {
+        "type": "ElementBoost_Ice",
+        "value": 20.0,
+        "target": "ToSelf"
+      },
+      {
+        "type": "Defense",
+        "value": 20.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
     "add_rare_pal": false,
     "add_shot_weapon": false,
     "add_melee_weapon": false,
@@ -5580,6 +6681,78 @@
     "add_accessory": false,
     "disabled": false
   },
+  "PalExp_Increase_1_Otomo_Only_Equip": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "PalExp_Increase",
+        "value": 30.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "PalExp_Increase_2_Otomo_Only_Equip": {
+    "rank": 2,
+    "effects": [
+      {
+        "type": "PalExp_Increase",
+        "value": 40.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "PalExp_Increase_3_Otomo_Only_Equip": {
+    "rank": 3,
+    "effects": [
+      {
+        "type": "PalExp_Increase",
+        "value": 50.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
   "Rare": {
     "rank": 4,
     "effects": [
@@ -5927,6 +7100,78 @@
     "invoke_reserve": false,
     "invoke_in_party": false,
     "invoke_always": false,
+    "invoke_in_base": false,
+    "add_pal": true,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "SwimSpeed_up_1": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "None",
+        "value": 30.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": true,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "SwimSpeed_up_2": {
+    "rank": 3,
+    "effects": [
+      {
+        "type": "None",
+        "value": 40.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": true,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "SwimSpeed_up_3": {
+    "rank": 4,
+    "effects": [
+      {
+        "type": "None",
+        "value": 50.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
     "invoke_in_base": false,
     "add_pal": true,
     "add_rare_pal": false,
@@ -6432,6 +7677,126 @@
     "invoke_reserve": false,
     "invoke_in_party": false,
     "invoke_always": false,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "YakushimaDagameBoost_Magic_Equip": {
+    "rank": -1,
+    "effects": [
+      {
+        "type": "None",
+        "value": 20.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "YakushimaDagameBoost_Melee_Equip": {
+    "rank": -1,
+    "effects": [
+      {
+        "type": "None",
+        "value": 20.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "YakushimaDagameBoost_Ranged_Equip": {
+    "rank": -1,
+    "effects": [
+      {
+        "type": "None",
+        "value": 20.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "YakushimaDagameBoost_Summon_Equip": {
+    "rank": -1,
+    "effects": [
+      {
+        "type": "None",
+        "value": 20.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "YakushimaProtection_Equip": {
+    "rank": -1,
+    "effects": [
+      {
+        "type": "None",
+        "value": 30.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
     "invoke_in_base": false,
     "add_pal": false,
     "add_rare_pal": false,

@@ -261,8 +261,7 @@
     "hp": 20000,
     "defense": 50,
     "deterioration_damage": 0.0,
-    "icon": "t_icon_buildobject_basecampworkerextrastation",
-    "disabled": true
+    "icon": "t_icon_buildobject_basecampworkerextrastation"
   },
   "BathTub_Stone": {
     "type_a": "Furniture",
@@ -318,8 +317,7 @@
     "hp": 2000,
     "defense": 4,
     "deterioration_damage": 0.02,
-    "icon": "t_icon_buildobject_believer_banner",
-    "disabled": true
+    "icon": "t_icon_buildobject_believer_banner"
   },
   "Believer_Flag": {
     "type_a": "Furniture",
@@ -347,8 +345,7 @@
     "hp": 2000,
     "defense": 2,
     "deterioration_damage": 0.08,
-    "icon": "t_icon_buildobject_believer_flag",
-    "disabled": true
+    "icon": "t_icon_buildobject_believer_flag"
   },
   "Bench_Wood": {
     "type_a": "Furniture",
@@ -1392,8 +1389,7 @@
     "hp": 10000,
     "defense": 4,
     "deterioration_damage": 0.2,
-    "icon": "t_icon_buildobject_crystalpit",
-    "disabled": true
+    "icon": "t_icon_buildobject_crystalpit"
   },
   "Curtain01_Wall_Stone": {
     "type_a": "Furniture",
@@ -2110,6 +2106,38 @@
     "deterioration_damage": 0.06,
     "icon": "t_icon_buildobject_factory_hard_03"
   },
+  "Factory_Hard_04": {
+    "type_a": "Product",
+    "type_b": "Prod_Craft",
+    "rank": 1,
+    "required_build_work_amount": 500000.0,
+    "required_energy_type": "Electric",
+    "consume_energy_speed": 1000.0,
+    "materials": [
+      {
+        "id": "ManganeseIngot",
+        "count": 50
+      },
+      {
+        "id": "StainlessSteel",
+        "count": 50
+      },
+      {
+        "id": "MachineParts2",
+        "count": 30
+      },
+      {
+        "id": "MachineParts",
+        "count": 20
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Copper",
+    "hp": 8000,
+    "defense": 5,
+    "deterioration_damage": 0.08,
+    "icon": "t_icon_buildobject_factory_hard_04"
+  },
   "Factory_Money": {
     "type_a": "Product",
     "type_b": "Prod_Craft",
@@ -2436,8 +2464,7 @@
     "hp": 2000,
     "defense": 4,
     "deterioration_damage": 0.02,
-    "icon": "t_icon_buildobject_firecult_banner",
-    "disabled": true
+    "icon": "t_icon_buildobject_firecult_banner"
   },
   "FireCult_Flag": {
     "type_a": "Furniture",
@@ -2465,8 +2492,7 @@
     "hp": 2000,
     "defense": 2,
     "deterioration_damage": 0.08,
-    "icon": "t_icon_buildobject_firecult_flag",
-    "disabled": true
+    "icon": "t_icon_buildobject_firecult_flag"
   },
   "FireStand": {
     "type_a": "Blueprint",
@@ -2522,8 +2548,7 @@
     "hp": 4500,
     "defense": 5,
     "deterioration_damage": 0.18,
-    "icon": "t_icon_buildobject_fishingpond1",
-    "disabled": true
+    "icon": "t_icon_buildobject_fishingpond1"
   },
   "FishingPond2": {
     "type_a": "Product",
@@ -2555,8 +2580,7 @@
     "hp": 5500,
     "defense": 5,
     "deterioration_damage": 0.22,
-    "icon": "t_icon_buildobject_fishingpond2",
-    "disabled": true
+    "icon": "t_icon_buildobject_fishingpond2"
   },
   "FlourMill": {
     "type_a": "Product",
@@ -3025,8 +3049,7 @@
     "hp": 2000,
     "defense": 4,
     "deterioration_damage": 0.02,
-    "icon": "t_icon_buildobject_guardiandogstatue",
-    "disabled": true
+    "icon": "t_icon_buildobject_guardiandogstatue"
   },
   "GuildChest": {
     "type_a": "Storage",
@@ -3194,8 +3217,7 @@
     "hp": 2000,
     "defense": 4,
     "deterioration_damage": 0.02,
-    "icon": "t_icon_buildobject_hunter_banner",
-    "disabled": true
+    "icon": "t_icon_buildobject_hunter_banner"
   },
   "Hunter_Flag": {
     "type_a": "Furniture",
@@ -3223,8 +3245,7 @@
     "hp": 2000,
     "defense": 2,
     "deterioration_damage": 0.08,
-    "icon": "t_icon_buildobject_hunter_flag",
-    "disabled": true
+    "icon": "t_icon_buildobject_hunter_flag"
   },
   "Hunter_GangFlag": {
     "type_a": "Blueprint",
@@ -3904,8 +3925,7 @@
     "hp": 2000,
     "defense": 2,
     "deterioration_damage": 0.04,
-    "icon": "t_icon_buildobject_lanterntop",
-    "disabled": true
+    "icon": "t_icon_buildobject_lanterntop"
   },
   "LargeCeilingLamp": {
     "type_a": "Light",
@@ -4975,8 +4995,7 @@
     "hp": 2000,
     "defense": 3,
     "deterioration_damage": 0.04,
-    "icon": "t_icon_buildobject_multihatchingpalegg",
-    "disabled": true
+    "icon": "t_icon_buildobject_multihatchingpalegg"
   },
   "Ninja_Banner": {
     "type_a": "Furniture",
@@ -5004,8 +5023,7 @@
     "hp": 2000,
     "defense": 4,
     "deterioration_damage": 0.02,
-    "icon": "t_icon_buildobject_ninja_banner",
-    "disabled": true
+    "icon": "t_icon_buildobject_ninja_banner"
   },
   "Ninja_Flag": {
     "type_a": "Furniture",
@@ -5033,8 +5051,7 @@
     "hp": 2000,
     "defense": 2,
     "deterioration_damage": 0.08,
-    "icon": "t_icon_buildobject_ninja_flag",
-    "disabled": true
+    "icon": "t_icon_buildobject_ninja_flag"
   },
   "OilPump": {
     "type_a": "Product",
@@ -5518,8 +5535,7 @@
     "hp": 2000,
     "defense": 4,
     "deterioration_damage": 0.02,
-    "icon": "t_icon_buildobject_police_banner",
-    "disabled": true
+    "icon": "t_icon_buildobject_police_banner"
   },
   "Police_Flag": {
     "type_a": "Furniture",
@@ -5547,8 +5563,7 @@
     "hp": 2000,
     "defense": 2,
     "deterioration_damage": 0.08,
-    "icon": "t_icon_buildobject_police_flag",
-    "disabled": true
+    "icon": "t_icon_buildobject_police_flag"
   },
   "QuartzPit": {
     "type_a": "Product",
@@ -5768,8 +5783,7 @@
     "hp": 2000,
     "defense": 2,
     "deterioration_damage": 0.08,
-    "icon": "t_icon_buildobject_sf_chair",
-    "disabled": true
+    "icon": "t_icon_buildobject_sf_chair"
   },
   "SF_Desk": {
     "type_a": "Blueprint",
@@ -5789,8 +5803,7 @@
     "hp": 2000,
     "defense": 2,
     "deterioration_damage": 0.08,
-    "icon": "t_icon_buildobject_sf_desk",
-    "disabled": true
+    "icon": "t_icon_buildobject_sf_desk"
   },
   "SF_DoorWall": {
     "type_a": "Foundation",
@@ -5810,8 +5823,7 @@
     "hp": 2000,
     "defense": 4,
     "deterioration_damage": 0.02,
-    "icon": "t_icon_buildobject_sf_doorwall",
-    "disabled": true
+    "icon": "t_icon_buildobject_sf_doorwall"
   },
   "SF_Fence": {
     "type_a": "Foundation",
@@ -5851,8 +5863,7 @@
     "hp": 2000,
     "defense": 4,
     "deterioration_damage": 0.02,
-    "icon": "t_icon_buildobject_sf_slantedroof",
-    "disabled": true
+    "icon": "t_icon_buildobject_sf_slantedroof"
   },
   "SF_TriangleWall": {
     "type_a": "Foundation",
@@ -5872,8 +5883,7 @@
     "hp": 2000,
     "defense": 4,
     "deterioration_damage": 0.02,
-    "icon": "t_icon_buildobject_sf_trianglewall",
-    "disabled": true
+    "icon": "t_icon_buildobject_sf_trianglewall"
   },
   "SF_WindowWall": {
     "type_a": "Foundation",
@@ -5893,8 +5903,7 @@
     "hp": 2000,
     "defense": 4,
     "deterioration_damage": 0.02,
-    "icon": "t_icon_buildobject_sf_windowwall",
-    "disabled": true
+    "icon": "t_icon_buildobject_sf_windowwall"
   },
   "SF_foundation": {
     "type_a": "Foundation",
@@ -5914,8 +5923,7 @@
     "hp": 2000,
     "defense": 4,
     "deterioration_damage": 0.02,
-    "icon": "t_icon_buildobject_sf_foundation",
-    "disabled": true
+    "icon": "t_icon_buildobject_sf_foundation"
   },
   "SF_pillars": {
     "type_a": "Foundation",
@@ -5955,8 +5963,7 @@
     "hp": 2000,
     "defense": 4,
     "deterioration_damage": 0.02,
-    "icon": "t_icon_buildobject_sf_roof",
-    "disabled": true
+    "icon": "t_icon_buildobject_sf_roof"
   },
   "SF_stair": {
     "type_a": "Foundation",
@@ -5976,8 +5983,7 @@
     "hp": 2000,
     "defense": 4,
     "deterioration_damage": 0.02,
-    "icon": "t_icon_buildobject_sf_stair",
-    "disabled": true
+    "icon": "t_icon_buildobject_sf_stair"
   },
   "SF_wall": {
     "type_a": "Foundation",
@@ -5997,8 +6003,7 @@
     "hp": 2000,
     "defense": 4,
     "deterioration_damage": 0.02,
-    "icon": "t_icon_buildobject_sf_wall",
-    "disabled": true
+    "icon": "t_icon_buildobject_sf_wall"
   },
   "SanityDecrease1": {
     "type_a": "Infrastructure",
@@ -6058,8 +6063,7 @@
     "hp": 2000,
     "defense": 4,
     "deterioration_damage": 0.02,
-    "icon": "t_icon_buildobject_scientist_banner",
-    "disabled": true
+    "icon": "t_icon_buildobject_scientist_banner"
   },
   "Scientist_Flag": {
     "type_a": "Furniture",
@@ -6087,8 +6091,7 @@
     "hp": 2000,
     "defense": 2,
     "deterioration_damage": 0.08,
-    "icon": "t_icon_buildobject_scientist_flag",
-    "disabled": true
+    "icon": "t_icon_buildobject_scientist_flag"
   },
   "Seika": {
     "type_a": "Furniture",
@@ -6580,8 +6583,7 @@
     "hp": 2000,
     "defense": 2,
     "deterioration_damage": 0.04,
-    "icon": "t_icon_buildobject_shrine_lantern",
-    "disabled": true
+    "icon": "t_icon_buildobject_shrine_lantern"
   },
   "SignExit_Ceiling_Iron": {
     "type_a": "Furniture",
@@ -8595,6 +8597,38 @@
     "defense": 4,
     "deterioration_damage": 0.08,
     "icon": "t_icon_buildobject_weaponfactory_dirty_03"
+  },
+  "WeaponFactory_Dirty_04": {
+    "type_a": "Product",
+    "type_b": "Prod_Craft",
+    "rank": 1,
+    "required_build_work_amount": 600000.0,
+    "required_energy_type": "Electric",
+    "consume_energy_speed": 1000.0,
+    "materials": [
+      {
+        "id": "ManganeseIngot",
+        "count": 50
+      },
+      {
+        "id": "StainlessSteel",
+        "count": 50
+      },
+      {
+        "id": "MachineParts2",
+        "count": 30
+      },
+      {
+        "id": "MachineParts",
+        "count": 20
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Copper",
+    "hp": 10000,
+    "defense": 5,
+    "deterioration_damage": 0.1,
+    "icon": "t_icon_buildobject_weaponfactory_dirty_04"
   },
   "Wire_Fence": {
     "type_a": "Blueprint",
