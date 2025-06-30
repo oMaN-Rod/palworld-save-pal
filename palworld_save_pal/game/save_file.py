@@ -730,21 +730,14 @@ class SaveFile(BaseModel):
     def sav(self, gvas_file: GvasFile = None) -> bytes:
         logger.info("Converting %s to SAV", self.name)
         target_gvas = gvas_file if gvas_file else self._gvas_file
-        if (
-            "Pal.PalWorldSaveGame" in target_gvas.header.save_game_class_name
-            or "Pal.PalLocalWorldSaveGame" in target_gvas.header.save_game_class_name
-        ):
-            save_type = 0x32
-        else:
-            save_type = 0x31
         gvas = copy.deepcopy(target_gvas)
-        return compress_gvas_to_sav(gvas.write(CUSTOM_PROPERTIES), save_type)
+        return compress_gvas_to_sav(gvas.write(CUSTOM_PROPERTIES), 0x31)
 
     def player_savs(self) -> Dict[UUID, bytes]:
         logger.info("Converting player save files to SAV", len(self._player_gvas_files))
         return {
             uid: compress_gvas_to_sav(
-                self._player_gvas_files[uid].sav.write(CUSTOM_PROPERTIES), 0x32
+                self._player_gvas_files[uid].sav.write(CUSTOM_PROPERTIES), 0x31
             )
             for uid in self._player_gvas_files
         }
@@ -755,9 +748,9 @@ class SaveFile(BaseModel):
         )
         return {
             uid: {
-                "sav": compress_gvas_to_sav(files.sav.write(CUSTOM_PROPERTIES), 0x32),
+                "sav": compress_gvas_to_sav(files.sav.write(CUSTOM_PROPERTIES), 0x31),
                 "dps": (
-                    compress_gvas_to_sav(files.dps.write(CUSTOM_PROPERTIES), 0x32)
+                    compress_gvas_to_sav(files.dps.write(CUSTOM_PROPERTIES), 0x31)
                     if files.dps
                     else None
                 ),
@@ -784,18 +777,8 @@ class SaveFile(BaseModel):
 
     def to_sav_file(self, output_path):
         logger.info("Converting %s to SAV, saving to %s", self.name, output_path)
-        if (
-            "Pal.PalWorldSaveGame" in self._gvas_file.header.save_game_class_name
-            or "Pal.PalLocalWorldSaveGame"
-            in self._gvas_file.header.save_game_class_name
-        ):
-            save_type = 0x32
-        else:
-            save_type = 0x31
-
-        logger.info("Compressing GVAS to SAV with save type %s", save_type)
         gvas = copy.deepcopy(self._gvas_file)
-        sav_file = compress_gvas_to_sav(gvas.write(CUSTOM_PROPERTIES), save_type)
+        sav_file = compress_gvas_to_sav(gvas.write(CUSTOM_PROPERTIES), 0x31)
         with open(output_path, "wb") as f:
             f.write(sav_file)
 
@@ -803,14 +786,14 @@ class SaveFile(BaseModel):
         logger.info("Converting player save files to SAV, saving to %s", output_path)
         for uid, player_files in self._player_gvas_files.items():
             sav_file = compress_gvas_to_sav(
-                player_files.sav.write(CUSTOM_PROPERTIES), 0x32
+                player_files.sav.write(CUSTOM_PROPERTIES), 0x31
             )
             uid = str(uid).replace("-", "")
             with open(os.path.join(output_path, f"{uid}.sav"), "wb") as f:
                 f.write(sav_file)
             if player_files.dps:
                 dps_sav_file = compress_gvas_to_sav(
-                    player_files.dps.write(CUSTOM_PROPERTIES), 0x32
+                    player_files.dps.write(CUSTOM_PROPERTIES), 0x31
                 )
                 with open(os.path.join(output_path, f"{uid}_dps.sav"), "wb") as f_dps:
                     f_dps.write(dps_sav_file)
