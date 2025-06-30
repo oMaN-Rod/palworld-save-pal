@@ -19492,7 +19492,7 @@
     "sort_id": 5735,
     "icon": "t_itemicon_material_palegg_dark_01",
     "dynamic": {
-      "type": "PalEgg",
+      "type": "egg",
       "passive_skills": [],
       "character_ids": [
         "WizardOwl",
@@ -19526,7 +19526,7 @@
     "sort_id": 5736,
     "icon": "t_itemicon_material_palegg_dark_01",
     "dynamic": {
-      "type": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false
@@ -19543,7 +19543,7 @@
     "sort_id": 5737,
     "icon": "t_itemicon_material_palegg_dark_01",
     "dynamic": {
-      "type": "PalEgg",
+      "type": "egg",
       "passive_skills": [],
       "character_ids": [
         "NightFox",
@@ -19576,7 +19576,7 @@
     "sort_id": 5738,
     "icon": "t_itemicon_material_palegg_dark_01",
     "dynamic": {
-      "type": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false
@@ -19593,7 +19593,7 @@
     "sort_id": 5739,
     "icon": "t_itemicon_material_palegg_dark_01",
     "dynamic": {
-      "type": "PalEgg",
+      "type": "egg",
       "passive_skills": [],
       "character_ids": [
         "HadesBird_Electric",
@@ -19622,7 +19622,7 @@
     "sort_id": 5740,
     "icon": "t_itemicon_material_palegg_dragon_01",
     "dynamic": {
-      "type": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false
@@ -19639,7 +19639,7 @@
     "sort_id": 5741,
     "icon": "t_itemicon_material_palegg_dragon_01",
     "dynamic": {
-      "type": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false
@@ -19656,7 +19656,7 @@
     "sort_id": 5742,
     "icon": "t_itemicon_material_palegg_dragon_01",
     "dynamic": {
-      "type": "PalEgg",
+      "type": "egg",
       "passive_skills": [],
       "character_ids": [
         "FairyDragon",
@@ -19677,7 +19677,7 @@
     "sort_id": 5743,
     "icon": "t_itemicon_material_palegg_dragon_01",
     "dynamic": {
-      "type": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false
@@ -19694,7 +19694,7 @@
     "sort_id": 5744,
     "icon": "t_itemicon_material_palegg_dragon_01",
     "dynamic": {
-      "type": "PalEgg",
+      "type": "egg",
       "passive_skills": [],
       "character_ids": [
         "FairyDragon_Water",
@@ -19725,7 +19725,7 @@
     "sort_id": 5730,
     "icon": "t_itemicon_material_palegg_earth_01",
     "dynamic": {
-      "type": "PalEgg",
+      "type": "egg",
       "passive_skills": [],
       "character_ids": [
         "Boar",
@@ -19749,7 +19749,7 @@
     "sort_id": 5731,
     "icon": "t_itemicon_material_palegg_earth_01",
     "dynamic": {
-      "type": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false
@@ -19766,7 +19766,7 @@
     "sort_id": 5732,
     "icon": "t_itemicon_material_palegg_earth_01",
     "dynamic": {
-      "type": "PalEgg",
+      "type": "egg",
       "passive_skills": [],
       "character_ids": [
         "Deer_Ground",
@@ -19791,7 +19791,7 @@
     "sort_id": 5733,
     "icon": "t_itemicon_material_palegg_earth_01",
     "dynamic": {
-      "type": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false
@@ -19808,7 +19808,7 @@
     "sort_id": 5734,
     "icon": "t_itemicon_material_palegg_earth_01",
     "dynamic": {
-      "type": "PalEgg",
+      "type": "egg",
       "passive_skills": [],
       "character_ids": [
         "HerculesBeetle",
@@ -19833,7 +19833,7 @@
     "sort_id": 5720,
     "icon": "t_itemicon_material_palegg_electricity_01",
     "dynamic": {
-      "type": "PalEgg",
+      "type": "egg",
       "passive_skills": [],
       "character_ids": [
         "ElecCat",
@@ -19856,7 +19856,7 @@
     "sort_id": 5721,
     "icon": "t_itemicon_material_palegg_electricity_01",
     "dynamic": {
-      "type": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false
@@ -19873,7 +19873,7 @@
     "sort_id": 5722,
     "icon": "t_itemicon_material_palegg_electricity_01",
     "dynamic": {
-      "type": "PalEgg",
+      "type": "egg",
       "passive_skills": [],
       "character_ids": [
         "GrassPanda_Electric",
@@ -19898,7 +19898,7 @@
     "sort_id": 5723,
     "icon": "t_itemicon_material_palegg_electricity_01",
     "dynamic": {
-      "type": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false
@@ -19915,7 +19915,7 @@
     "sort_id": 5724,
     "icon": "t_itemicon_material_palegg_electricity_01",
     "dynamic": {
-      "type": "PalEgg",
+      "type": "egg",
       "passive_skills": [],
       "character_ids": [
         "ElecPanda"
@@ -19935,7 +19935,7 @@
     "sort_id": 5705,
     "icon": "t_itemicon_material_palegg_fire_01",
     "dynamic": {
-      "type": "PalEgg",
+      "type": "egg",
       "passive_skills": [],
       "character_ids": [
         "Kitsunebi",
@@ -19963,7 +19963,7 @@
     "sort_id": 5706,
     "icon": "t_itemicon_material_palegg_fire_01",
     "dynamic": {
-      "type": "PalEgg",
+      "type": "egg",
       "passive_skills": [],
       "character_ids": [
         "FlameBuffalo"
@@ -19983,7 +19983,7 @@
     "sort_id": 5707,
     "icon": "t_itemicon_material_palegg_fire_01",
     "dynamic": {
-      "type": "PalEgg",
+      "type": "egg",
       "passive_skills": [],
       "character_ids": [
         "WeaselDragon_Fire",
@@ -20013,7 +20013,7 @@
     "sort_id": 5708,
     "icon": "t_itemicon_material_palegg_fire_01",
     "dynamic": {
-      "type": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false
@@ -20030,7 +20030,7 @@
     "sort_id": 5709,
     "icon": "t_itemicon_material_palegg_fire_01",
     "dynamic": {
-      "type": "PalEgg",
+      "type": "egg",
       "passive_skills": [],
       "character_ids": [
         "Manticore_Dark",
@@ -20053,7 +20053,7 @@
     "sort_id": 5725,
     "icon": "t_itemicon_material_palegg_ice_01",
     "dynamic": {
-      "type": "PalEgg",
+      "type": "egg",
       "passive_skills": [],
       "character_ids": [
         "Kitsunebi_Ice",
@@ -20080,7 +20080,7 @@
     "sort_id": 5726,
     "icon": "t_itemicon_material_palegg_ice_01",
     "dynamic": {
-      "type": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false
@@ -20097,7 +20097,7 @@
     "sort_id": 5727,
     "icon": "t_itemicon_material_palegg_ice_01",
     "dynamic": {
-      "type": "PalEgg",
+      "type": "egg",
       "passive_skills": [],
       "character_ids": [
         "MopKing",
@@ -20123,7 +20123,7 @@
     "sort_id": 5728,
     "icon": "t_itemicon_material_palegg_ice_01",
     "dynamic": {
-      "type": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false
@@ -20140,7 +20140,7 @@
     "sort_id": 5729,
     "icon": "t_itemicon_material_palegg_ice_01",
     "dynamic": {
-      "type": "PalEgg",
+      "type": "egg",
       "passive_skills": [],
       "character_ids": [
         "KingAlpaca_Ice",
@@ -20163,7 +20163,7 @@
     "sort_id": 5715,
     "icon": "t_itemicon_material_palegg_leaf_01",
     "dynamic": {
-      "type": "PalEgg",
+      "type": "egg",
       "passive_skills": [],
       "character_ids": [
         "Carbunclo",
@@ -20193,7 +20193,7 @@
     "sort_id": 5716,
     "icon": "t_itemicon_material_palegg_leaf_01",
     "dynamic": {
-      "type": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false
@@ -20210,7 +20210,7 @@
     "sort_id": 5717,
     "icon": "t_itemicon_material_palegg_leaf_01",
     "dynamic": {
-      "type": "PalEgg",
+      "type": "egg",
       "passive_skills": [],
       "character_ids": [
         "GrassPanda",
@@ -20236,7 +20236,7 @@
     "sort_id": 5718,
     "icon": "t_itemicon_material_palegg_leaf_01",
     "dynamic": {
-      "type": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false
@@ -20253,7 +20253,7 @@
     "sort_id": 5719,
     "icon": "t_itemicon_material_palegg_leaf_01",
     "dynamic": {
-      "type": "PalEgg",
+      "type": "egg",
       "passive_skills": [],
       "character_ids": [
         "QueenBee",
@@ -20280,7 +20280,7 @@
     "sort_id": 5700,
     "icon": "t_itemicon_material_palegg",
     "dynamic": {
-      "type": "PalEgg",
+      "type": "egg",
       "passive_skills": [],
       "character_ids": [
         "SheepBall",
@@ -20315,7 +20315,7 @@
     "sort_id": 5701,
     "icon": "t_itemicon_material_palegg",
     "dynamic": {
-      "type": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false
@@ -20332,7 +20332,7 @@
     "sort_id": 5702,
     "icon": "t_itemicon_material_palegg",
     "dynamic": {
-      "type": "PalEgg",
+      "type": "egg",
       "passive_skills": [],
       "character_ids": [
         "Gorilla",
@@ -20358,7 +20358,7 @@
     "sort_id": 5703,
     "icon": "t_itemicon_material_palegg",
     "dynamic": {
-      "type": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false
@@ -20375,7 +20375,7 @@
     "sort_id": 5704,
     "icon": "t_itemicon_material_palegg",
     "dynamic": {
-      "type": "PalEgg",
+      "type": "egg",
       "passive_skills": [],
       "character_ids": [
         "KingAlpaca",
@@ -20397,7 +20397,7 @@
     "sort_id": 5710,
     "icon": "t_itemicon_material_palegg_water_01",
     "dynamic": {
-      "type": "PalEgg",
+      "type": "egg",
       "passive_skills": [],
       "character_ids": [
         "BluePlatypus",
@@ -20424,7 +20424,7 @@
     "sort_id": 5711,
     "icon": "t_itemicon_material_palegg_water_01",
     "dynamic": {
-      "type": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false
@@ -20441,7 +20441,7 @@
     "sort_id": 5712,
     "icon": "t_itemicon_material_palegg_water_01",
     "dynamic": {
-      "type": "PalEgg",
+      "type": "egg",
       "passive_skills": [],
       "character_ids": [
         "CaptainPenguin",
@@ -20462,7 +20462,7 @@
     "sort_id": 5713,
     "icon": "t_itemicon_material_palegg_water_01",
     "dynamic": {
-      "type": "PalEgg",
+      "type": "egg",
       "passive_skills": []
     },
     "disabled": false
@@ -20479,7 +20479,7 @@
     "sort_id": 5714,
     "icon": "t_itemicon_material_palegg_water_01",
     "dynamic": {
-      "type": "PalEgg",
+      "type": "egg",
       "passive_skills": [],
       "character_ids": [
         "Suzaku_Water",
