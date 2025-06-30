@@ -20,12 +20,12 @@
     "description": "An accessory that allows the player to perform double dashes in mid-air when equipped."
   },
   "Accessory_AirDash3": {
-    "localized_name": "Air Dash Boots",
-    "description": "An accessory that allows the player to dash in mid-air when equipped."
+    "localized_name": "Triple Air Dash Boots",
+    "description": "An accessory that allows the player to perform triple dashes in mid-air when equipped."
   },
   "Accessory_AirDash4": {
-    "localized_name": "Air Dash Boots",
-    "description": "An accessory that allows the player to dash in mid-air when equipped."
+    "localized_name": "Quadruple Air Dash Boots",
+    "description": "An accessory that allows the player to perform quadruple dashes in mid-air when equipped."
   },
   "Accessory_AquaResist_1": {
     "localized_name": "Ring of Water Resistance",
@@ -259,6 +259,10 @@
     "localized_name": "Giant Pouch",
     "description": "A massive pouch that allows you to carry additional items. Holding it increases your inventory slots."
   },
+  "AffectionFruit_01": {
+    "localized_name": "Kinship Peach",
+    "description": "A rarely seen magical fruit. It is said that a Pal who eats it will open its heart to humans. Choose carefully which Pal you give it to."
+  },
   "AncientParts2": {
     "localized_name": "Ancient Civilization Core",
     "description": "Core from technology that was lost long ago. Nearly impossible to find on the Palpagos Islands, it contains a wealth of forgotten knowledge."
@@ -403,6 +407,10 @@
     "localized_name": "Mammorest Steak",
     "description": "Boasts a rich and dignified flavor. Memories of glaciers and deep forests come rushing back with every bite."
   },
+  "BakedMeat_IceCrocodile": {
+    "localized_name": "Munchill Steak",
+    "description": "Charcoal-grilled to perfection, this steak offers a crispy exterior and melt-in-your-mouth juiciness. Unique compounds seal in flavor and enhance shelf life."
+  },
   "BakedMeat_IceDeer": {
     "localized_name": "Roast Reindrix",
     "description": "When taken from a flame, Reindrix meat rapidly drops in temperature. This allows it to retain freshness for long periods of time, making it a perfect emergency ration."
@@ -438,6 +446,10 @@
   "Bat2": {
     "localized_name": "Bat",
     "description": "Baseball bat for close-range combat. Might be tough to get a home run with a Pal."
+  },
+  "BattleTicket": {
+    "localized_name": "Battle Ticket",
+    "description": "Earned by winning solo matches in the arena. Collect enough and you can trade them for special rewards."
   },
   "BeamSword": {
     "localized_name": "Beam Sword",
@@ -523,6 +535,26 @@
     "localized_name": "Poison Arrow Crossbow Schematic 4",
     "description": "When in inventory, unlocks recipe for BowGun Poison (Legendary). Can be crafted at Factory Hard 01."
   },
+  "Blueprint_CandleStand": {
+    "localized_name": "Majestic Candlestick Schematic",
+    "description": "When in inventory or stored in a base, allows you to build <MapObjectName id=|CandleStand|/>."
+  },
+  "Blueprint_ChargeLaserRifle_2": {
+    "localized_name": "Charge Rifle Schematic 1",
+    "description": "When in inventory, unlocks recipe for Charge Rifle (Uncommon). Can be crafted at WeaponFactory Dirty 04."
+  },
+  "Blueprint_ChargeLaserRifle_3": {
+    "localized_name": "Charge Rifle Schematic 2",
+    "description": "When in inventory, unlocks recipe for Charge Rifle (Rare). Can be crafted at WeaponFactory Dirty 04."
+  },
+  "Blueprint_ChargeLaserRifle_4": {
+    "localized_name": "Charge Rifle Schematic 3",
+    "description": "When in inventory, unlocks recipe for Charge Rifle (Epic). Can be crafted at WeaponFactory Dirty 04."
+  },
+  "Blueprint_ChargeLaserRifle_5": {
+    "localized_name": "Charge Rifle Schematic 4",
+    "description": "When in inventory, unlocks recipe for Charge Rifle (Legendary). Can be crafted at WeaponFactory Dirty 04."
+  },
   "Blueprint_ClothArmorCold_2": {
     "localized_name": "Tundra Outfit Schematic 1",
     "description": "When in inventory, unlocks recipe for ClothArmorCold 2 (Uncommon). Can be crafted at Primitive Workbench."
@@ -586,6 +618,14 @@
   "Blueprint_CompoundBow_5": {
     "localized_name": "Compound Bow Schematic 4",
     "description": "When in inventory, unlocks recipe for Compound Bow (Legendary). Can be crafted at WeaponFactory Dirty 02."
+  },
+  "Blueprint_ConservationGroupBannerA": {
+    "localized_name": "Free Pal Alliance Flag Schematic",
+    "description": "When in inventory or stored in a base, allows you to build <MapObjectName id=|ConservationGroupBannerA|/>."
+  },
+  "Blueprint_ConservationGroupBannerB": {
+    "localized_name": "Free Pal Alliance Banner Schematic",
+    "description": "When in inventory or stored in a base, allows you to build <MapObjectName id=|ConservationGroupBannerB|/>."
   },
   "Blueprint_CopperArmorCold_2": {
     "localized_name": "Cold Resistant Metal Armor Schematic 1",
@@ -682,6 +722,38 @@
   "Blueprint_EnergyRocketLauncher_5": {
     "localized_name": "Plasma Cannon Schematic 4",
     "description": "When in inventory, unlocks recipe for Plasma Cannon (Legendary). Can be crafted at WeaponFactory Dirty 03."
+  },
+  "Blueprint_EnergyShotgun_2": {
+    "localized_name": "Energy Shotgun Schematic 1",
+    "description": "When in inventory, unlocks recipe for Energy Shotgun (Uncommon). Can be crafted at WeaponFactory Dirty 04."
+  },
+  "Blueprint_EnergyShotgun_3": {
+    "localized_name": "Energy Shotgun Schematic 2",
+    "description": "When in inventory, unlocks recipe for Energy Shotgun (Rare). Can be crafted at WeaponFactory Dirty 04."
+  },
+  "Blueprint_EnergyShotgun_4": {
+    "localized_name": "Energy Shotgun Schematic 3",
+    "description": "When in inventory, unlocks recipe for Energy Shotgun (Epic). Can be crafted at WeaponFactory Dirty 04."
+  },
+  "Blueprint_EnergyShotgun_5": {
+    "localized_name": "Energy Shotgun Schematic 4",
+    "description": "When in inventory, unlocks recipe for Energy Shotgun (Legendary). Can be crafted at WeaponFactory Dirty 04."
+  },
+  "Blueprint_FireStand": {
+    "localized_name": "Ceremonial Candlestick Schematic",
+    "description": "When in inventory or stored in a base, allows you to build <MapObjectName id=|FireStand|/>."
+  },
+  "Blueprint_FishingRod_01_2": {
+    "localized_name": "Beginner Fishing Rod (Gumoss) Schematic",
+    "description": "When in inventory, unlocks recipe for FishingRod 01 2 (Common). Can be crafted at Factory Hard 01."
+  },
+  "Blueprint_FishingRod_02_2": {
+    "localized_name": "Intermediate Fishing Rod (Croajiro) Schematic",
+    "description": "When in inventory, unlocks recipe for FishingRod 02 2 (Uncommon). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_FishingRod_03_2": {
+    "localized_name": "Advanced Fishing Rod (Depresso) Schematic",
+    "description": "When in inventory, unlocks recipe for FishingRod 03 2 (Rare). Can be crafted at Factory Hard 03."
   },
   "Blueprint_FlameThrower_2": {
     "localized_name": "Flamethrower Schematic 1",
@@ -795,6 +867,10 @@
     "localized_name": "Grenade Launcher Schematic 4",
     "description": "When in inventory, unlocks recipe for Grenade Launcher (Legendary). Can be crafted at WeaponFactory Dirty 03."
   },
+  "Blueprint_GuardianDogStatue": {
+    "localized_name": "Yakumo Statue Schematic",
+    "description": "When in inventory or stored in a base, allows you to build <MapObjectName id=|GuardianDogStatue|/>."
+  },
   "Blueprint_GuidedMissileLauncher_2": {
     "localized_name": "Guided Missile Launcher Schematic 1",
     "description": "When in inventory, unlocks recipe for Guided Missile Launcher (Uncommon). Can be crafted at WeaponFactory Dirty 03."
@@ -845,7 +921,7 @@
   },
   "Blueprint_Head001_5": {
     "localized_name": "Blueprint of the King's Crown 5",
-    "description": "When possessed, the recipe for |Head001 5 (Legendary)| is unlocked. It can be crafted at the |Primitive Workbench|."
+    "description": "When in inventory, unlocks recipe for Head001 5 (Legendary). Can be crafted at Primitive Workbench."
   },
   "Blueprint_Head002_1": {
     "localized_name": "Golden Crown Schematic 1",
@@ -1267,6 +1343,10 @@
     "localized_name": "Dazzi Hat Schematic 1",
     "description": "When in inventory, unlocks recipe for Dazzi Hat (Common). Can be crafted at Primitive Workbench."
   },
+  "Blueprint_Hunter_GangFlag": {
+    "localized_name": "Rayne Syndicate Flag Schematic",
+    "description": "When in inventory or stored in a base, allows you to build <MapObjectName id=|Hunter GangFlag|/>."
+  },
   "Blueprint_IronArmorCold_2": {
     "localized_name": "Cold Resistant Refined Metal Armor Schematic 1",
     "description": "When in inventory, unlocks recipe for IronArmorCold 2 (Uncommon). Can be crafted at Factory Hard 02."
@@ -1331,6 +1411,10 @@
     "localized_name": "Refined Metal Helm Schematic 4",
     "description": "When in inventory, unlocks recipe for IronHelmet 5 (Legendary). Can be crafted at Factory Hard 02."
   },
+  "Blueprint_LanternTop": {
+    "localized_name": "Paper Lantern Schematic",
+    "description": "When in inventory or stored in a base, allows you to build <MapObjectName id=|LanternTop|/>."
+  },
   "Blueprint_LaserGatlingGun_2": {
     "localized_name": "Laser Gatling Gun Schematic 1",
     "description": "When in inventory, unlocks recipe for Laser Gatling Gun (Uncommon). Can be crafted at WeaponFactory Dirty 03."
@@ -1378,6 +1462,14 @@
   "Blueprint_Launcher_Default_5": {
     "localized_name": "Rocket Launcher Schematic 4",
     "description": "When in inventory, unlocks recipe for Launcher Default (Legendary). Can be crafted at WeaponFactory Dirty 03."
+  },
+  "Blueprint_Launcher_Meteor_5": {
+    "localized_name": "Meteor Launcher Schematic 4",
+    "description": "When in inventory, unlocks recipe for Launcher Meteor (Legendary). Can be crafted at WeaponFactory Dirty 02."
+  },
+  "Blueprint_LilyQueenStatue": {
+    "localized_name": "Lyleen Statue Schematic",
+    "description": "When in inventory or stored in a base, allows you to build <MapObjectName id=|LilyQueenStatue|/>."
   },
   "Blueprint_MakeshiftAssaultRifle_2": {
     "localized_name": "Makeshift Assault Rifle Schematic 1",
@@ -1494,6 +1586,26 @@
   "Blueprint_OldRevolver_5": {
     "localized_name": "Old Revolver Schematic 4",
     "description": "When in inventory, unlocks recipe for Old Revolver (Legendary). Can be crafted at WeaponFactory Dirty 02."
+  },
+  "Blueprint_OverheatRifle_2": {
+    "localized_name": "Overheat Rifle Schematic 1",
+    "description": "When in inventory, unlocks recipe for Overheat Rifle (Uncommon). Can be crafted at WeaponFactory Dirty 04."
+  },
+  "Blueprint_OverheatRifle_3": {
+    "localized_name": "Overheat Rifle Schematic 2",
+    "description": "When in inventory, unlocks recipe for Overheat Rifle (Rare). Can be crafted at WeaponFactory Dirty 04."
+  },
+  "Blueprint_OverheatRifle_4": {
+    "localized_name": "Overheat Rifle Schematic 3",
+    "description": "When in inventory, unlocks recipe for Overheat Rifle (Epic). Can be crafted at WeaponFactory Dirty 04."
+  },
+  "Blueprint_OverheatRifle_5": {
+    "localized_name": "Overheat Rifle Schematic 4",
+    "description": "When in inventory, unlocks recipe for Overheat Rifle (Legendary). Can be crafted at WeaponFactory Dirty 04."
+  },
+  "Blueprint_PalSummon_YakushimaBoss002": {
+    "localized_name": "Celestial Sigil Schematic",
+    "description": "[Tides of Terraria] When in inventory, unlocks recipe for PalSummon YakushimaBoss002. Can be crafted at Primitive Workbench."
   },
   "Blueprint_PlasticArmorCold_2": {
     "localized_name": "Cold Resistant Plasteel Armor Schematic 1",
@@ -1687,6 +1799,14 @@
     "localized_name": "Hexolite Helmet Schematic 4",
     "description": "When in inventory, unlocks recipe for Hexolite Helmet (Legendary). Can be crafted at Factory Hard 03."
   },
+  "Blueprint_SF_Chair": {
+    "localized_name": "Laboratory Chair Schematic",
+    "description": "When in inventory or stored in a base, allows you to build <MapObjectName id=|SF Chair|/>."
+  },
+  "Blueprint_SF_Desk": {
+    "localized_name": "Laboratory Desk Schematic",
+    "description": "When in inventory or stored in a base, allows you to build <MapObjectName id=|SF Desk|/>."
+  },
   "Blueprint_SemiAutoRifle_2": {
     "localized_name": "Semi-Auto Rifle Schematic 1",
     "description": "When in inventory, unlocks recipe for Semi-Auto Rifle (Uncommon). Can be crafted at WeaponFactory Dirty 02."
@@ -1718,6 +1838,10 @@
   "Blueprint_SemiAutoShotgun_5": {
     "localized_name": "Semi-Auto Shotgun Schematic 4",
     "description": "When in inventory, unlocks recipe for Semi-Auto Shotgun (Legendary). Can be crafted at WeaponFactory Dirty 03."
+  },
+  "Blueprint_Shrine_Lantern": {
+    "localized_name": "Festival Lantern Schematic",
+    "description": "When in inventory or stored in a base, allows you to build <MapObjectName id=|Shrine Lantern|/>."
   },
   "Blueprint_SingleShotRifle_2": {
     "localized_name": "Single-Shot Rifle Schematic 1",
@@ -1815,6 +1939,10 @@
     "localized_name": "SMG Schematic 4",
     "description": "When in inventory, unlocks recipe for SMG (Legendary). Can be crafted at WeaponFactory Dirty 02."
   },
+  "Blueprint_WallTorch02": {
+    "localized_name": "Majestic Wall Torch Schematic",
+    "description": "When in inventory or stored in a base, allows you to build <MapObjectName id=|WallTorch02|/>."
+  },
   "Blueprint_WeakerBow_2": {
     "localized_name": "Old Bow Schematic 1",
     "description": "When in inventory, unlocks recipe for Old Bow (Uncommon). Can be crafted at Primitive Workbench."
@@ -1830,6 +1958,214 @@
   "Blueprint_WeakerBow_5": {
     "localized_name": "Old Bow Schematic 4",
     "description": "When in inventory, unlocks recipe for Old Bow (Legendary). Can be crafted at Primitive Workbench."
+  },
+  "Blueprint_Wire_Fence": {
+    "localized_name": "Wire Fence Schematic",
+    "description": "When in inventory or stored in a base, allows you to build <MapObjectName id=|Wire Fence|/>."
+  },
+  "Blueprint_WoodenBarricade": {
+    "localized_name": "Wooden Barricade Schematic",
+    "description": "When in inventory or stored in a base, allows you to build <MapObjectName id=|WoodenBarricade|/>."
+  },
+  "Blueprint_YakushimaArmor001": {
+    "localized_name": "Hallowed Plate Mail Schematic",
+    "description": "[Tides of Terraria] When in inventory, unlocks recipe for Hallowed Plate Mail. Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_YakushimaArmor001_2": {
+    "localized_name": "Hallowed Plate Mail Schematic 1",
+    "description": "[Tides of Terraria] When in inventory, unlocks recipe for Hallowed Plate Mail (Uncommon). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_YakushimaArmor001_3": {
+    "localized_name": "Hallowed Plate Mail Schematic 2",
+    "description": "[Tides of Terraria] When in inventory, unlocks recipe for Hallowed Plate Mail (Rare). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_YakushimaArmor001_4": {
+    "localized_name": "Hallowed Plate Mail Schematic 3",
+    "description": "[Tides of Terraria] When in inventory, unlocks recipe for Hallowed Plate Mail (Epic). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_YakushimaArmor001_5": {
+    "localized_name": "Hallowed Plate Mail Schematic 4",
+    "description": "[Tides of Terraria] When in inventory, unlocks recipe for Hallowed Plate Mail (Legendary). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_YakushimaBlade002": {
+    "localized_name": "Terra Blade Schematic",
+    "description": "[Tides of Terraria] When in inventory, unlocks recipe for Terra Blade. Can be crafted at WeaponFactory Dirty 02."
+  },
+  "Blueprint_YakushimaBlade002_2": {
+    "localized_name": "Terra Blade Schematic 1",
+    "description": "[Tides of Terraria] When in inventory, unlocks recipe for Terra Blade (Uncommon). Can be crafted at WeaponFactory Dirty 02."
+  },
+  "Blueprint_YakushimaBlade002_3": {
+    "localized_name": "Terra Blade Schematic 2",
+    "description": "[Tides of Terraria] When in inventory, unlocks recipe for Terra Blade (Rare). Can be crafted at WeaponFactory Dirty 02."
+  },
+  "Blueprint_YakushimaBlade002_4": {
+    "localized_name": "Terra Blade Schematic 3",
+    "description": "[Tides of Terraria] When in inventory, unlocks recipe for Terra Blade (Epic). Can be crafted at WeaponFactory Dirty 02."
+  },
+  "Blueprint_YakushimaBlade002_5": {
+    "localized_name": "Terra Blade Schematic 4",
+    "description": "[Tides of Terraria] When in inventory, unlocks recipe for Terra Blade (Legendary). Can be crafted at WeaponFactory Dirty 02."
+  },
+  "Blueprint_YakushimaBlade003": {
+    "localized_name": "Terraprisma Schematic",
+    "description": "[Tides of Terraria] When in inventory, unlocks recipe for Terraprisma. Can be crafted at WeaponFactory Dirty 02."
+  },
+  "Blueprint_YakushimaBlade003_2": {
+    "localized_name": "Terraprisma Schematic 1",
+    "description": "[Tides of Terraria] When in inventory, unlocks recipe for Terraprisma (Uncommon). Can be crafted at WeaponFactory Dirty 02."
+  },
+  "Blueprint_YakushimaBlade003_3": {
+    "localized_name": "Terraprisma Schematic 2",
+    "description": "[Tides of Terraria] When in inventory, unlocks recipe for Terraprisma (Rare). Can be crafted at WeaponFactory Dirty 02."
+  },
+  "Blueprint_YakushimaBlade003_4": {
+    "localized_name": "Terraprisma Schematic 3",
+    "description": "[Tides of Terraria] When in inventory, unlocks recipe for Terraprisma (Epic). Can be crafted at WeaponFactory Dirty 02."
+  },
+  "Blueprint_YakushimaBlade003_5": {
+    "localized_name": "Terraprisma Schematic 4",
+    "description": "[Tides of Terraria] When in inventory, unlocks recipe for Terraprisma (Legendary). Can be crafted at WeaponFactory Dirty 02."
+  },
+  "Blueprint_YakushimaBlade004": {
+    "localized_name": "Excalibur Schematic",
+    "description": "[Tides of Terraria] When in inventory, unlocks recipe for Excalibur. Can be crafted at WeaponFactory Dirty 02."
+  },
+  "Blueprint_YakushimaBlade004_2": {
+    "localized_name": "Excalibur Schematic 1",
+    "description": "[Tides of Terraria] When in inventory, unlocks recipe for Excalibur (Uncommon). Can be crafted at WeaponFactory Dirty 02."
+  },
+  "Blueprint_YakushimaBlade004_3": {
+    "localized_name": "Excalibur Schematic 2",
+    "description": "[Tides of Terraria] When in inventory, unlocks recipe for Excalibur (Rare). Can be crafted at WeaponFactory Dirty 02."
+  },
+  "Blueprint_YakushimaBlade004_4": {
+    "localized_name": "Excalibur Schematic 3",
+    "description": "[Tides of Terraria] When in inventory, unlocks recipe for Excalibur (Epic). Can be crafted at WeaponFactory Dirty 02."
+  },
+  "Blueprint_YakushimaBlade004_5": {
+    "localized_name": "Excalibur Schematic 4",
+    "description": "[Tides of Terraria] When in inventory, unlocks recipe for Excalibur (Legendary). Can be crafted at WeaponFactory Dirty 02."
+  },
+  "Blueprint_YakushimaGun001": {
+    "localized_name": "Vortex Beater Schematic",
+    "description": "[Tides of Terraria] When in inventory, unlocks recipe for Vortex Beater. Can be crafted at WeaponFactory Dirty 02."
+  },
+  "Blueprint_YakushimaGun001_2": {
+    "localized_name": "Vortex Beater Schematic 1",
+    "description": "[Tides of Terraria] When in inventory, unlocks recipe for Vortex Beater (Uncommon). Can be crafted at WeaponFactory Dirty 02."
+  },
+  "Blueprint_YakushimaGun001_3": {
+    "localized_name": "Vortex Beater Schematic 2",
+    "description": "[Tides of Terraria] When in inventory, unlocks recipe for Vortex Beater (Rare). Can be crafted at WeaponFactory Dirty 02."
+  },
+  "Blueprint_YakushimaGun001_4": {
+    "localized_name": "Vortex Beater Schematic 3",
+    "description": "[Tides of Terraria] When in inventory, unlocks recipe for Vortex Beater (Epic). Can be crafted at WeaponFactory Dirty 02."
+  },
+  "Blueprint_YakushimaGun001_5": {
+    "localized_name": "Vortex Beater Schematic 4",
+    "description": "[Tides of Terraria] When in inventory, unlocks recipe for Vortex Beater (Legendary). Can be crafted at WeaponFactory Dirty 02."
+  },
+  "Blueprint_YakushimaHeadEquip001": {
+    "localized_name": "Hallowed Mask Schematic",
+    "description": "[Tides of Terraria] When in inventory, unlocks recipe for Hallowed Mask. Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_YakushimaHeadEquip001_2": {
+    "localized_name": "Hallowed Mask Schematic 1",
+    "description": "[Tides of Terraria] When in inventory, unlocks recipe for Hallowed Mask (Uncommon). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_YakushimaHeadEquip001_3": {
+    "localized_name": "Hallowed Mask Schematic 2",
+    "description": "[Tides of Terraria] When in inventory, unlocks recipe for Hallowed Mask (Rare). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_YakushimaHeadEquip001_4": {
+    "localized_name": "Hallowed Mask Schematic 3",
+    "description": "[Tides of Terraria] When in inventory, unlocks recipe for Hallowed Mask (Epic). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_YakushimaHeadEquip001_5": {
+    "localized_name": "Hallowed Mask Schematic 4",
+    "description": "[Tides of Terraria] When in inventory, unlocks recipe for Hallowed Mask (Legendary). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_YakushimaHeadEquip002": {
+    "localized_name": "Hallowed Headgear Schematic",
+    "description": "[Tides of Terraria] When in inventory, unlocks recipe for Hallowed Headgear. Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_YakushimaHeadEquip002_2": {
+    "localized_name": "Hallowed Headgear Schematic 1",
+    "description": "[Tides of Terraria] When in inventory, unlocks recipe for Hallowed Headgear (Uncommon). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_YakushimaHeadEquip002_3": {
+    "localized_name": "Hallowed Headgear Schematic 2",
+    "description": "[Tides of Terraria] When in inventory, unlocks recipe for Hallowed Headgear (Rare). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_YakushimaHeadEquip002_4": {
+    "localized_name": "Hallowed Headgear Schematic 3",
+    "description": "[Tides of Terraria] When in inventory, unlocks recipe for Hallowed Headgear (Epic). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_YakushimaHeadEquip002_5": {
+    "localized_name": "Hallowed Headgear Schematic 4",
+    "description": "[Tides of Terraria] When in inventory, unlocks recipe for Hallowed Headgear (Legendary). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_YakushimaHeadEquip003": {
+    "localized_name": "Hallowed Helmet Schematic",
+    "description": "[Tides of Terraria] When in inventory, unlocks recipe for Hallowed Helmet. Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_YakushimaHeadEquip003_2": {
+    "localized_name": "Hallowed Helmet Schematic 1",
+    "description": "[Tides of Terraria] When in inventory, unlocks recipe for Hallowed Helmet (Uncommon). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_YakushimaHeadEquip003_3": {
+    "localized_name": "Hallowed Helmet Schematic 2",
+    "description": "[Tides of Terraria] When in inventory, unlocks recipe for Hallowed Helmet (Rare). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_YakushimaHeadEquip003_4": {
+    "localized_name": "Hallowed Helmet Schematic 3",
+    "description": "[Tides of Terraria] When in inventory, unlocks recipe for Hallowed Helmet (Epic). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_YakushimaHeadEquip003_5": {
+    "localized_name": "Hallowed Helmet Schematic 4",
+    "description": "[Tides of Terraria] When in inventory, unlocks recipe for Hallowed Helmet (Legendary). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_YakushimaHeadEquip004": {
+    "localized_name": "Hallowed Hood Schematic",
+    "description": "[Tides of Terraria] When in inventory, unlocks recipe for Hallowed Hood. Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_YakushimaHeadEquip004_2": {
+    "localized_name": "Hallowed Hood Schematic 1",
+    "description": "[Tides of Terraria] When in inventory, unlocks recipe for Hallowed Hood (Uncommon). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_YakushimaHeadEquip004_3": {
+    "localized_name": "Hallowed Hood Schematic 2",
+    "description": "[Tides of Terraria] When in inventory, unlocks recipe for Hallowed Hood (Rare). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_YakushimaHeadEquip004_4": {
+    "localized_name": "Hallowed Hood Schematic 3",
+    "description": "[Tides of Terraria] When in inventory, unlocks recipe for Hallowed Hood (Epic). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_YakushimaHeadEquip004_5": {
+    "localized_name": "Hallowed Hood Schematic 4",
+    "description": "[Tides of Terraria] When in inventory, unlocks recipe for Hallowed Hood (Legendary). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_YakushimaLantern001": {
+    "localized_name": "Nightglow Schematic",
+    "description": "[Tides of Terraria] When in inventory, unlocks recipe for Nightglow. Can be crafted at WeaponFactory Dirty 02."
+  },
+  "Blueprint_YakushimaLantern001_2": {
+    "localized_name": "Nightglow Schematic 1",
+    "description": "[Tides of Terraria] When in inventory, unlocks recipe for Nightglow (Uncommon). Can be crafted at WeaponFactory Dirty 02."
+  },
+  "Blueprint_YakushimaLantern001_3": {
+    "localized_name": "Nightglow Schematic 2",
+    "description": "[Tides of Terraria] When in inventory, unlocks recipe for Nightglow (Rare). Can be crafted at WeaponFactory Dirty 02."
+  },
+  "Blueprint_YakushimaLantern001_4": {
+    "localized_name": "Nightglow Schematic 3",
+    "description": "[Tides of Terraria] When in inventory, unlocks recipe for Nightglow (Epic). Can be crafted at WeaponFactory Dirty 02."
+  },
+  "Blueprint_YakushimaLantern001_5": {
+    "localized_name": "Nightglow Schematic 4",
+    "description": "[Tides of Terraria] When in inventory, unlocks recipe for Nightglow (Legendary). Can be crafted at WeaponFactory Dirty 02."
   },
   "Bone": {
     "localized_name": "Bone",
@@ -1959,6 +2295,14 @@
     "localized_name": "Frostallion Noct Bounty Token",
     "description": "Proof of defeating [Frostallion Noct, Legendary Steed of Darkness]. Simply possessing it permanently increases the stats of the Pals in your team."
   },
+  "BossDefeatReward_IceNarwhal": {
+    "localized_name": "Whalaska Bounty Token",
+    "description": "Proof of defeating [Whalaska, Nice Ice Lance]. Simply possessing it permanently increases the stats of the Pals in your team."
+  },
+  "BossDefeatReward_IceNarwhal_Fire": {
+    "localized_name": "Whalaska Ignis Bounty Token",
+    "description": "Proof of defeating [Whalaska Ignis, Nice Crimson Lance]. Simply possessing it permanently increases the stats of the Pals in your team."
+  },
   "BossDefeatReward_JetDragon": {
     "localized_name": "Jetragon Bounty Token",
     "description": "Proof of defeating [Jetragon, Legendary Celestial Dragon]. Simply possessing it permanently increases the stats of the Pals in your team."
@@ -2022,6 +2366,10 @@
   "BossDefeatReward_PlantSlime": {
     "localized_name": "Gumoss Bounty Token",
     "description": "Proof of defeating [Gumoss, Suddenly Transformed]. Simply possessing it permanently increases the stats of the Pals in your team."
+  },
+  "BossDefeatReward_PoseidonOrca": {
+    "localized_name": "Neptilius Bounty Token",
+    "description": "Proof of defeating [Neptilius, Legend of the Seas]. Simply possessing it permanently increases the stats of the Pals in your team."
   },
   "BossDefeatReward_PurpleSpider": {
     "localized_name": "Tarantris Bounty Token",
@@ -2216,24 +2564,28 @@
     "description": "Charcoal made from burning Wood. It can be combined with Sulfur to create Gunpowder."
   },
   "ChargeLaserRifle": {
-    "localized_name": "ChargeLaserRifle",
-    "description": "ChargeLaserRifle"
+    "localized_name": "Charge Rifle",
+    "description": "A beam rifle crafted with advanced technology. Charges energy to deliver one powerful shot."
+  },
+  "ChargeLaserRifleBullet": {
+    "localized_name": "Charge Rifle Ammo",
+    "description": "Ammo for the Charge Rifle and similar weapons."
   },
   "ChargeLaserRifle_2": {
-    "localized_name": "ChargeLaserRifle",
-    "description": "ChargeLaserRifle"
+    "localized_name": "Charge Rifle",
+    "description": "A beam rifle crafted with advanced technology. Charges energy to deliver one powerful shot."
   },
   "ChargeLaserRifle_3": {
-    "localized_name": "ChargeLaserRifle",
-    "description": "ChargeLaserRifle"
+    "localized_name": "Charge Rifle",
+    "description": "A beam rifle crafted with advanced technology. Charges energy to deliver one powerful shot."
   },
   "ChargeLaserRifle_4": {
-    "localized_name": "ChargeLaserRifle",
-    "description": "ChargeLaserRifle"
+    "localized_name": "Charge Rifle",
+    "description": "A beam rifle crafted with advanced technology. Charges energy to deliver one powerful shot."
   },
   "ChargeLaserRifle_5": {
-    "localized_name": "ChargeLaserRifle",
-    "description": "ChargeLaserRifle"
+    "localized_name": "Charge Rifle",
+    "description": "A beam rifle crafted with advanced technology. Charges energy to deliver one powerful shot."
   },
   "CheeseBurger": {
     "localized_name": "Cheeseburger",
@@ -2555,6 +2907,10 @@
     "localized_name": "Vital Elixir",
     "description": "Extremely valuable elixir that permanently raises Health when consumed. Ineffective when used by Pals."
   },
+  "Elixir_hp_Yakushima": {
+    "localized_name": "Life Crystal",
+    "description": "[Tides of Terraria] Grants a permanent HP boost upon use. No effect if HP is maxed or used on a Pal."
+  },
   "Elixir_stamina_01": {
     "localized_name": "Stamina Remedy",
     "description": "Extremely valuable potion that permanently raises Stamina by a slight amount when consumed. Ineffective when used by Pals."
@@ -2604,24 +2960,28 @@
     "description": "Fires high-output energy projectiles. Causes an energy explosion upon impact."
   },
   "EnergyShotgun": {
-    "localized_name": "EnergyShotgun",
-    "description": "EnergyShotgun"
+    "localized_name": "Energy Shotgun",
+    "description": "A shotgun that fires energy rounds. Excelling in rapid fire, its close-range firepower is truly otherworldly."
+  },
+  "EnergyShotgunBullet": {
+    "localized_name": "Energy Shotgun Ammo",
+    "description": "Ammo for the Energy Shotgun and similar weapons."
   },
   "EnergyShotgun_2": {
-    "localized_name": "EnergyShotgun",
-    "description": "EnergyShotgun"
+    "localized_name": "Energy Shotgun",
+    "description": "A shotgun that fires energy rounds. Excelling in rapid fire, its close-range firepower is truly otherworldly."
   },
   "EnergyShotgun_3": {
-    "localized_name": "EnergyShotgun",
-    "description": "EnergyShotgun"
+    "localized_name": "Energy Shotgun",
+    "description": "A shotgun that fires energy rounds. Excelling in rapid fire, its close-range firepower is truly otherworldly."
   },
   "EnergyShotgun_4": {
-    "localized_name": "EnergyShotgun",
-    "description": "EnergyShotgun"
+    "localized_name": "Energy Shotgun",
+    "description": "A shotgun that fires energy rounds. Excelling in rapid fire, its close-range firepower is truly otherworldly."
   },
   "EnergyShotgun_5": {
-    "localized_name": "EnergyShotgun",
-    "description": "EnergyShotgun"
+    "localized_name": "Energy Shotgun",
+    "description": "A shotgun that fires energy rounds. Excelling in rapid fire, its close-range firepower is truly otherworldly."
   },
   "ExpBoost_01": {
     "localized_name": "Training Manual (S)",
@@ -2658,6 +3018,66 @@
   "FireOrgan": {
     "localized_name": "Flame Organ",
     "description": "Material obtainable from Fire Pals. Can be used to make Arrow Fire and more."
+  },
+  "FishingBait_1": {
+    "localized_name": "Simple Bait",
+    "description": "Basic fishing bait used to lure in Pals. Required for fishing."
+  },
+  "FishingBait_1_A": {
+    "localized_name": "Beginner Bait",
+    "description": "Bait that lures in Pals. Improved from FishingBait 1 to reduce the rate at which the capture gauge drains in the fishing minigame."
+  },
+  "FishingBait_1_B": {
+    "localized_name": "Sweet Bait",
+    "description": "Bait that lures in Pals. Improved from FishingBait 1 to increase the chances of Pals biting the bait."
+  },
+  "FishingBait_2": {
+    "localized_name": "High Quality Bait",
+    "description": "Bait that lures in Pals. Improved to make them bite more readily."
+  },
+  "FishingBait_2_A": {
+    "localized_name": "Lucky Bait",
+    "description": "Bait that lures in Pals. Improved from FishingBait 2 to increase the number of items obtained from fishing."
+  },
+  "FishingBait_2_B": {
+    "localized_name": "Quick Bait",
+    "description": "Bait that lures in Pals. Improved from FishingBait 2 to increase the chances of Pals biting the bait."
+  },
+  "FishingBait_3": {
+    "localized_name": "Deluxe Bait",
+    "description": "Bait that lures in Pals. Improved to slightly enlarge the size of the bar in the fishing minigame."
+  },
+  "FishingBait_3_A": {
+    "localized_name": "Alluring Bait",
+    "description": "Bait that lures in Pals. Improved to enlarge the size of the bar in the fishing minigame and increase the number of items obtained from fishing."
+  },
+  "FishingBait_3_B": {
+    "localized_name": "Risky Bait",
+    "description": "Bait that lures in Pals. A modified version of FishingBait 3 designed for skilled anglers. The minigame bar is reduced in size, but the number of items obtained is greatly increased."
+  },
+  "FishingRod_01_1": {
+    "localized_name": "Beginner Fishing Rod (Chillet)",
+    "description": "A fishing rod designed for catching Pals. Use it with bait near water where shadows are visible to start fishing. Perfect for beginners and ideal for reeling in low level Pals."
+  },
+  "FishingRod_01_2": {
+    "localized_name": "Beginner Fishing Rod (Gumoss)",
+    "description": "A fishing rod designed for catching Pals. It's sturdier and offers slightly better performance than FishingRod 01 1. Perfect for beginners and ideal for reeling in low level Pals."
+  },
+  "FishingRod_02_1": {
+    "localized_name": "Intermediate Fishing Rod (Cattiva)",
+    "description": "A fishing rod designed for catching Pals. Use it with bait near water where shadows are visible to start fishing. It boasts improved performance, making catches a bit easier."
+  },
+  "FishingRod_02_2": {
+    "localized_name": "Intermediate Fishing Rod (Croajiro)",
+    "description": "A fishing rod designed for catching Pals. It's sturdier and offers slightly better performance than FishingRod 02 1."
+  },
+  "FishingRod_03_1": {
+    "localized_name": "Advanced Fishing Rod (Pengullet)",
+    "description": "A fishing rod designed for catching Pals. Use it with bait near water where shadows are visible to start fishing. It boasts improved performance, making catches vastly easier."
+  },
+  "FishingRod_03_2": {
+    "localized_name": "Advanced Fishing Rod (Depresso)",
+    "description": "A fishing rod designed for catching Pals. It's sturdier and offers slightly better performance than FishingRod 03 1."
   },
   "FishingRod_Good": {
     "localized_name": "Fishing Rod Good",
@@ -2952,8 +3372,8 @@
     "description": "It fires a hook that latches on to distant targets, pulling the user's body towards the target. As a result of research, it has achieved overwhelming mobility."
   },
   "GrapplingGun5": {
-    "localized_name": "Grappling Gun",
-    "description": "It fires a hook that latches on to distant targets, pulling the user's body towards the target. It allows for easy movement between places with varying elevation."
+    "localized_name": "Ultra Grappling Gun",
+    "description": "It fires a hook that latches on to distant targets, pulling the user's body towards the target. With new materials, cooldown time has been significantly reduced."
   },
   "Gratin": {
     "localized_name": "Gratin",
@@ -3667,13 +4087,25 @@
     "localized_name": "Jam-Filled Bun",
     "description": "Bread with jam spread on it. The sweetness of the berries complements it perfectly."
   },
+  "JellyfishFairy_jelly": {
+    "localized_name": "Jelliette's Jiggly Jelly",
+    "description": "An unusual treat crafted from Meat JellyfishFairy and Pal Fluids. Eating it will slightly increase EXP gain and increase Attack by +10% for a period of time."
+  },
+  "JellyfishGhost_jelly": {
+    "localized_name": "Jellroy's Jolly Jelly",
+    "description": "An unusual treat crafted from Meat JellyfishGhost and Red Berries. Eating it will slightly increase EXP gain and increase Defense by +10% for a period of time."
+  },
   "Katana": {
     "localized_name": "Katana",
     "description": "Katana for close-range combat. Slices through with razor-sharp precision, cutting cleanly in one strike."
   },
   "Lantern": {
     "localized_name": "Hip Lantern",
-    "description": "A lantern that can be attached to the hip. It lights up automatically at night. Just one is enough to find your way in the dark."
+    "description": "A lantern that can be attached to the hip. It lights up automatically at night. You can also switch its lighting mode to keep it on at all times. Just one is enough to find your way in the dark."
+  },
+  "Lantern_High": {
+    "localized_name": "Enhanced Hip Lantern",
+    "description": "A lantern that can be attached to the hip. It lights up automatically at night. You can also switch its lighting mode to keep it on at all times. Just one is enough to find your way in the dark."
   },
   "LaserBullet": {
     "localized_name": "Energy Cartridge",
@@ -3685,23 +4117,23 @@
   },
   "LaserGatlingGun": {
     "localized_name": "Laser Gatling Gun",
-    "description": "Fires beam-like energy blasts at high speed. Its overwhelming firepower can take down multple enemies at once."
+    "description": "Fires beam-like energy blasts at high speed. Its overwhelming firepower can take down multiple enemies at once."
   },
   "LaserGatlingGun_2": {
     "localized_name": "Laser Gatling Gun",
-    "description": "Fires beam-like energy blasts at high speed. Its overwhelming firepower can take down multple enemies at once."
+    "description": "Fires beam-like energy blasts at high speed. Its overwhelming firepower can take down multiple enemies at once."
   },
   "LaserGatlingGun_3": {
     "localized_name": "Laser Gatling Gun",
-    "description": "Fires beam-like energy blasts at high speed. Its overwhelming firepower can take down multple enemies at once."
+    "description": "Fires beam-like energy blasts at high speed. Its overwhelming firepower can take down multiple enemies at once."
   },
   "LaserGatlingGun_4": {
     "localized_name": "Laser Gatling Gun",
-    "description": "Fires beam-like energy blasts at high speed. Its overwhelming firepower can take down multple enemies at once."
+    "description": "Fires beam-like energy blasts at high speed. Its overwhelming firepower can take down multiple enemies at once."
   },
   "LaserGatlingGun_5": {
     "localized_name": "Laser Gatling Gun",
-    "description": "Fires beam-like energy blasts at high speed. Its overwhelming firepower can take down multple enemies at once."
+    "description": "Fires beam-like energy blasts at high speed. Its overwhelming firepower can take down multiple enemies at once."
   },
   "LaserRifle": {
     "localized_name": "Laser Rifle",
@@ -3919,6 +4351,14 @@
     "localized_name": "Makeshift SMG",
     "description": "A submachine gun handmade from scraps. It excels in rate of fire, but its single-shot power is low."
   },
+  "ManganeseIngot": {
+    "localized_name": "Coralum Ingot",
+    "description": "An alloy of Coralum Ore, Ingot, and Coal. Highly resistant to energy, making it ideal for crafting weapons."
+  },
+  "ManganeseOre": {
+    "localized_name": "Coralum Ore",
+    "description": "A rare ore formed over countless years in the deep sea. Can be retrieved from the depths with a magnet and fishing rod."
+  },
   "MarinatedMushrooms": {
     "localized_name": "Marinated Mushrooms",
     "description": "A dish made by marinating Mushrooms in a marinade. Eating it improves Defense by +10% for a period of time."
@@ -3975,9 +4415,21 @@
     "localized_name": "Mammorest Meat",
     "description": "Mammorest meat. With massive size comes massive flavor. Its overwhelming portions are sure to satisfy any glutton."
   },
+  "Meat_IceCrocodile": {
+    "localized_name": "Munchill Meat",
+    "description": "Munchill meat. Has a satisfying chew that brings out layers of umami as you eat."
+  },
   "Meat_IceDeer": {
     "localized_name": "Reindrix Venison",
     "description": "Reindrix meat. Strange venison capable of remaining at low temperatures. Takes a very long time to spoil."
+  },
+  "Meat_JellyfishFairy": {
+    "localized_name": "Jelliette Bell Flesh",
+    "description": "Jelliette's fleshy bell. Packed with ocean flavor and a delightfully chewy bite."
+  },
+  "Meat_JellyfishGhost": {
+    "localized_name": "Jellroy Bell Flesh",
+    "description": "Jellroy's fleshy bell. Packed with ocean flavor and a delightfully plump texture."
   },
   "Meat_Kelpie": {
     "localized_name": "Raw Kelpsea",
@@ -3986,6 +4438,10 @@
   "Meat_LazyCatfish": {
     "localized_name": "Raw Dumud",
     "description": "Dumud meat. Fatty with a rich taste. Has a mouthwatering plump texture."
+  },
+  "Meat_OctopusGirl": {
+    "localized_name": "Gloopie Tentacle",
+    "description": "Gloopie tentacle. Known for its springy texture and light, refined flavor."
   },
   "Meat_SakuraSaurus": {
     "localized_name": "Broncherry Meat",
@@ -4099,6 +4555,10 @@
     "localized_name": "Night Vision Goggles",
     "description": "Night Vision Goggles"
   },
+  "OctopusGirl_Takoyaki": {
+    "localized_name": "Fried Gloopie Balls",
+    "description": "Meat OctopusGirl encased in a Flour dough and grilled into round bites. Eating it will slightly increase EXP gain for a period of time."
+  },
   "OldRevolver": {
     "localized_name": "Old Revolver",
     "description": "A slightly outdated revolving handgun. Compared to Handgun default, it excels in single-shot power."
@@ -4135,25 +4595,173 @@
     "localized_name": "Suspicious Juice",
     "description": "Juice that improves mood when consumed. Drinking it increases work speed for a period of time, but lowers SAN."
   },
+  "Otomo_Attack_up1": {
+    "localized_name": "Attack Support Whistle",
+    "description": "An accessory that slightly raises the Attack of the Pal fighting alongside you."
+  },
+  "Otomo_Attack_up2": {
+    "localized_name": "Attack Support Whistle +1",
+    "description": "An accessory that raises the Attack of the Pal fighting alongside you."
+  },
+  "Otomo_Attack_up3": {
+    "localized_name": "Attack Support Whistle +2",
+    "description": "An accessory that greatly raises the Attack of the Pal fighting alongside you."
+  },
+  "Otomo_Defense_up1": {
+    "localized_name": "Defense Support Whistle",
+    "description": "An accessory that slightly raises the Defense of the Pal fighting alongside you."
+  },
+  "Otomo_Defense_up2": {
+    "localized_name": "Defense Support Whistle +1",
+    "description": "An accessory that raises the Defense of the Pal fighting alongside you."
+  },
+  "Otomo_Defense_up3": {
+    "localized_name": "Defense Support Whistle +2",
+    "description": "An accessory that greatly raises the Defense of the Pal fighting alongside you."
+  },
+  "Otomo_ElementBoost_Dark_1": {
+    "localized_name": "Dark Support Whistle",
+    "description": "An accessory that slightly raises the Dark damage of the Pal fighting alongside you."
+  },
+  "Otomo_ElementBoost_Dark_2": {
+    "localized_name": "Dark Support Whistle +1",
+    "description": "An accessory that raises the Dark damage of the Pal fighting alongside you."
+  },
+  "Otomo_ElementBoost_Dark_3": {
+    "localized_name": "Dark Support Whistle +2",
+    "description": "An accessory that greatly raises the Dark damage of the Pal fighting alongside you."
+  },
+  "Otomo_ElementBoost_Dragon_1": {
+    "localized_name": "Dragon Support Whistle",
+    "description": "An accessory that slightly raises the Dragon damage of the Pal fighting alongside you."
+  },
+  "Otomo_ElementBoost_Dragon_2": {
+    "localized_name": "Dragon Support Whistle +1",
+    "description": "An accessory that raises the Dragon damage of the Pal fighting alongside you."
+  },
+  "Otomo_ElementBoost_Dragon_3": {
+    "localized_name": "Dragon Support Whistle +2",
+    "description": "An accessory that greatly raises the Dragon damage of the Pal fighting alongside you."
+  },
+  "Otomo_ElementBoost_Earth_1": {
+    "localized_name": "Ground Support Whistle",
+    "description": "An accessory that slightly raises the Ground damage of the Pal fighting alongside you."
+  },
+  "Otomo_ElementBoost_Earth_2": {
+    "localized_name": "Ground Support Whistle +1",
+    "description": "An accessory that raises the Ground damage of the Pal fighting alongside you."
+  },
+  "Otomo_ElementBoost_Earth_3": {
+    "localized_name": "Ground Support Whistle +2",
+    "description": "An accessory that greatly raises the Ground damage of the Pal fighting alongside you."
+  },
+  "Otomo_ElementBoost_Electricity_1": {
+    "localized_name": "Electric Support Whistle",
+    "description": "An accessory that slightly raises the Electric damage of the Pal fighting alongside you."
+  },
+  "Otomo_ElementBoost_Electricity_2": {
+    "localized_name": "Electric Support Whistle +1",
+    "description": "An accessory that raises the Electric damage of the Pal fighting alongside you."
+  },
+  "Otomo_ElementBoost_Electricity_3": {
+    "localized_name": "Electric Support Whistle +2",
+    "description": "An accessory that greatly raises the Electric damage of the Pal fighting alongside you."
+  },
+  "Otomo_ElementBoost_Fire_1": {
+    "localized_name": "Fire Support Whistle",
+    "description": "An accessory that slightly raises the Fire damage of the Pal fighting alongside you."
+  },
+  "Otomo_ElementBoost_Fire_2": {
+    "localized_name": "Fire Support Whistle +1",
+    "description": "An accessory that raises the Fire damage of the Pal fighting alongside you."
+  },
+  "Otomo_ElementBoost_Fire_3": {
+    "localized_name": "Fire Support Whistle +2",
+    "description": "An accessory that greatly raises the Fire damage of the Pal fighting alongside you."
+  },
+  "Otomo_ElementBoost_Ice_1": {
+    "localized_name": "Ice Support Whistle",
+    "description": "An accessory that slightly raises the Ice damage of the Pal fighting alongside you."
+  },
+  "Otomo_ElementBoost_Ice_2": {
+    "localized_name": "Ice Support Whistle +1",
+    "description": "An accessory that raises the Ice damage of the Pal fighting alongside you."
+  },
+  "Otomo_ElementBoost_Ice_3": {
+    "localized_name": "Ice Support Whistle +2",
+    "description": "An accessory that greatly raises the Ice damage of the Pal fighting alongside you."
+  },
+  "Otomo_ElementBoost_Leaf_1": {
+    "localized_name": "Grass Support Whistle",
+    "description": "An accessory that slightly raises the Grass damage of the Pal fighting alongside you."
+  },
+  "Otomo_ElementBoost_Leaf_2": {
+    "localized_name": "Grass Support Whistle +1",
+    "description": "An accessory that raises the Grass damage of the Pal fighting alongside you."
+  },
+  "Otomo_ElementBoost_Leaf_3": {
+    "localized_name": "Grass Support Whistle +2",
+    "description": "An accessory that greatly raises the Grass damage of the Pal fighting alongside you."
+  },
+  "Otomo_ElementBoost_Normal_1": {
+    "localized_name": "Neutral Support Whistle",
+    "description": "An accessory that slightly raises the Neutral damage of the Pal fighting alongside you."
+  },
+  "Otomo_ElementBoost_Normal_2": {
+    "localized_name": "Neutral Support Whistle +1",
+    "description": "An accessory that raises the Neutral damage of the Pal fighting alongside you."
+  },
+  "Otomo_ElementBoost_Normal_3": {
+    "localized_name": "Neutral Support Whistle +2",
+    "description": "An accessory that greatly raises the Neutral damage of the Pal fighting alongside you."
+  },
+  "Otomo_ElementBoost_Water_1": {
+    "localized_name": "Water Support Whistle",
+    "description": "An accessory that slightly raises the Water damage of the Pal fighting alongside you."
+  },
+  "Otomo_ElementBoost_Water_2": {
+    "localized_name": "Water Support Whistle +1",
+    "description": "An accessory that raises the Water damage of the Pal fighting alongside you."
+  },
+  "Otomo_ElementBoost_Water_3": {
+    "localized_name": "Water Support Whistle +2",
+    "description": "An accessory that greatly raises the Water damage of the Pal fighting alongside you."
+  },
+  "Otomo_PalExp_Increase_1": {
+    "localized_name": "Growth Acceleration Bell",
+    "description": "An accessory that slightly raises Pal EXP."
+  },
+  "Otomo_PalExp_Increase_2": {
+    "localized_name": "Growth Acceleration Bell +1",
+    "description": "An accessory that raises Pal EXP."
+  },
+  "Otomo_PalExp_Increase_3": {
+    "localized_name": "Growth Acceleration Bell +2",
+    "description": "An accessory that greatly raises Pal EXP."
+  },
   "OverheatRifle": {
-    "localized_name": "OverheatRifle",
-    "description": "OverheatRifle"
+    "localized_name": "Overheat Rifle",
+    "description": "An assault rifle capable of firing endlessly without reloading. Prolonged bursts cause overheating, leaving you exposed. Use with caution."
+  },
+  "OverheatRifleBullet": {
+    "localized_name": "Overheat Rifle Ammo",
+    "description": "Ammo for the Overheat Rifle and similar weapons."
   },
   "OverheatRifle_2": {
-    "localized_name": "OverheatRifle",
-    "description": "OverheatRifle"
+    "localized_name": "Overheat Rifle",
+    "description": "An assault rifle capable of firing endlessly without reloading. Prolonged bursts cause overheating, leaving you exposed. Use with caution."
   },
   "OverheatRifle_3": {
-    "localized_name": "OverheatRifle",
-    "description": "OverheatRifle"
+    "localized_name": "Overheat Rifle",
+    "description": "An assault rifle capable of firing endlessly without reloading. Prolonged bursts cause overheating, leaving you exposed. Use with caution."
   },
   "OverheatRifle_4": {
-    "localized_name": "OverheatRifle",
-    "description": "OverheatRifle"
+    "localized_name": "Overheat Rifle",
+    "description": "An assault rifle capable of firing endlessly without reloading. Prolonged bursts cause overheating, leaving you exposed. Use with caution."
   },
   "OverheatRifle_5": {
-    "localized_name": "OverheatRifle",
-    "description": "OverheatRifle"
+    "localized_name": "Overheat Rifle",
+    "description": "An assault rifle capable of firing endlessly without reloading. Prolonged bursts cause overheating, leaving you exposed. Use with caution."
   },
   "PalCrystal_Ex": {
     "localized_name": "Ancient Civilization Parts",
@@ -4164,16 +4772,20 @@
     "description": "Dropped by some powerful Dark Pals. Used as a material for crafting powerful accessories and other items."
   },
   "PalDopingShot": {
-    "localized_name": "PalDopingShot",
-    "description": "PalDopingShot"
+    "localized_name": "Boost Gun",
+    "description": "Firing this at a Pal in your team temporarily boosts that Pal's attack and defense. Firing it at an enemy deals damage instead."
+  },
+  "PalDopingShotBullet": {
+    "localized_name": "Boost Gun Ammo",
+    "description": "Ammo for the Boost Gun and similar weapons."
   },
   "PalDopingShot_2": {
-    "localized_name": "PalDopingShot",
-    "description": "PalDopingShot"
+    "localized_name": "Megaboost Gun",
+    "description": "Firing it at an allied Pal boosts their attack and defense, while hitting an enemy deals damage. Thanks to improvements, the boost is stronger and lasts longer, and it deals more damage to enemies."
   },
   "PalDopingShot_3": {
-    "localized_name": "PalDopingShot",
-    "description": "PalDopingShot"
+    "localized_name": "Boost Gun",
+    "description": "Firing this at a Pal in your team temporarily boosts that Pal's attack and defense. Firing it at an enemy deals damage instead."
   },
   "PalEgg_Dark_01": {
     "localized_name": "Dark Egg",
@@ -4359,9 +4971,13 @@
     "localized_name": "Pal Fluids",
     "description": "Body fluids taken from a Pal. Useful for its high viscosity."
   },
+  "PalGenderReverse": {
+    "localized_name": "Pal Reverser",
+    "description": "A mysterious medicine that can change a Pal's gender. Can be used at the Pal Surgery Table."
+  },
   "PalHealingGrenade": {
-    "localized_name": "PalHealingGrenade",
-    "description": "PalHealingGrenade"
+    "localized_name": "Pal Recovery Grenade",
+    "description": "A Frag Grenade with healing effects. It bursts on impact, restoring HP to allied Pals."
   },
   "PalItem_CaptainPenguin": {
     "localized_name": "Penking Plume",
@@ -4422,6 +5038,114 @@
   "PalOil": {
     "localized_name": "High Quality Pal Oil",
     "description": "High-quality oil that can be extracted from Pal. Necessary for making Polymer."
+  },
+  "PalPassiveSkillChange_CoolTimeReduction_Up_1": {
+    "localized_name": "Implant: Serenity",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_CoolTimeReduction_Up_2": {
+    "localized_name": "Implant: Impatient",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_CraftSpeed_up1": {
+    "localized_name": "Implant: Serious",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_CraftSpeed_up2": {
+    "localized_name": "Implant: Artisan",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_CraftSpeed_up3": {
+    "localized_name": "Implant: Remarkable Craftsmanship",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_Deffence_up1": {
+    "localized_name": "Implant: Hard Skin",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_Deffence_up2": {
+    "localized_name": "Implant: Burly Body",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_Deffence_up3": {
+    "localized_name": "Implant: Diamond Body",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_HatchingSpeed_Up": {
+    "localized_name": "Implant: Philanthropist",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_MoveSpeed_up_1": {
+    "localized_name": "Implant: Nimble",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_MoveSpeed_up_2": {
+    "localized_name": "Implant: Runner",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_MoveSpeed_up_3": {
+    "localized_name": "Implant: Swift",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_Nocturnal": {
+    "localized_name": "Implant: Nocturnal",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_NonKilling": {
+    "localized_name": "Implant: Mercy Hit",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_Noukin": {
+    "localized_name": "Implant: Musclehead",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_PAL_ALLAttack_up1": {
+    "localized_name": "Implant: Brave",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_PAL_ALLAttack_up2": {
+    "localized_name": "Implant: Ferocious",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_PAL_ALLAttack_up3": {
+    "localized_name": "Implant: Demon God",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_PAL_FullStomach_Down_1": {
+    "localized_name": "Implant: Dainty Eater",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_PAL_FullStomach_Down_2": {
+    "localized_name": "Implant: Diet Lover",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_PAL_FullStomach_Down_3": {
+    "localized_name": "Implant: Mastery of Fasting",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_PAL_Sanity_Down_1": {
+    "localized_name": "Implant: Positive Thinker",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_PAL_Sanity_Down_2": {
+    "localized_name": "Implant: Workaholic",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_PAL_Sanity_Down_3": {
+    "localized_name": "Implant: Heart of the Immovable King",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_Stamina_Up_1": {
+    "localized_name": "Implant: Infinite Stamina",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_Stamina_Up_2": {
+    "localized_name": "Implant: Fit as a Fiddle",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_Stamina_Up_3": {
+    "localized_name": "Implant: Eternal Engine",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
   },
   "PalRevive": {
     "localized_name": "Revival Potion",
@@ -4522,6 +5246,10 @@
   "PalSummon_NightLady_Parts": {
     "localized_name": "Bellanoir's Slab Fragment",
     "description": "Fragment depicting Bellanoir. Combine all of them to create a Slab."
+  },
+  "PalSummon_YakushimaBoss002": {
+    "localized_name": "Celestial Sigil",
+    "description": "[Tides of Terraria] A seal inscribed with cryptic symbols. Offer to a Summoning Altar to summon a powerful entity."
   },
   "PalUpgradeStone": {
     "localized_name": "Small Pal Soul",
@@ -4755,6 +5483,18 @@
     "localized_name": "Pure Quartz",
     "description": "Pure Quartz often found in snowy fields and similar places. Required to create Circuit Board."
   },
+  "QuestItem_Breeder_1": {
+    "localized_name": "Breeder's Precious Pal",
+    "description": "A sphere containing a breeder's precious Pal. It should be reunited with its owner."
+  },
+  "QuestItem_Farmer_1": {
+    "localized_name": "Farmer's Special Dish",
+    "description": "A home-cooked meal from a doting farmer. It gives off an absolutely mouthwatering aroma."
+  },
+  "QuestItem_Zoe_1": {
+    "localized_name": "Zoe's Tattered Memento",
+    "description": "A worn scrap of fabric with a faint lingering scent. To Zoe, it's a treasured reminder of the past."
+  },
   "Quiche": {
     "localized_name": "Mushroom Quiche",
     "description": "A dish made by baking a pastry crust filled with eggs, vegetables, mushrooms, and cream. It’s delicious even when cooled. Eating it will help you stay fuller for a while and make it harder for your SAN value to decrease for a period of time."
@@ -4935,6 +5675,14 @@
     "localized_name": "Salad",
     "description": "A Salad made by mixing Lettuce and Tomato. Eating it slightly improves work speed for a period of time."
   },
+  "Salvage_TreasureBoxKey01": {
+    "localized_name": "Fishing Magnet",
+    "description": null
+  },
+  "Salvage_TreasureBoxKey02": {
+    "localized_name": "Powerful Fishing Magnet",
+    "description": "A high-powered magnet used in advanced salvage operations. Its strong magnetic pull can retrieve resources and supplies from the ocean floor."
+  },
   "Sandwich": {
     "localized_name": "Sandwich",
     "description": "Sandwich"
@@ -4946,6 +5694,10 @@
   "SeafoodSoup": {
     "localized_name": "Seafood Soup",
     "description": "Seafood Soup"
+  },
+  "Seafood_Salada": {
+    "localized_name": "Seafood Salad",
+    "description": "A healthy salad made with Meat OctopusGirl and Lettuce. Eating it will slightly increase EXP gain for a period of time."
   },
   "SemiAutoRifle": {
     "localized_name": "Semi-Auto Rifle",
@@ -4989,27 +5741,27 @@
   },
   "Shield_01": {
     "localized_name": "Common Shield",
-    "description": "Strange shield made with Paldium technology. It automatically repair itself after not taking damage for a while."
+    "description": "Strange shield made with Paldium technology. It automatically repairs itself after not taking damage for a while."
   },
   "Shield_02": {
     "localized_name": "Mega Shield",
-    "description": "Strange shield made with Paldium technology. It automatically repair itself after not taking damage for a while. The new model has been improved, enhancing its defense."
+    "description": "Strange shield made with Paldium technology. It automatically repairs itself after not taking damage for a while. The new model has been improved, enhancing its defense."
   },
   "Shield_03": {
     "localized_name": "Giga Shield",
-    "description": "Strange shield made with Paldium technology. It automatically repair itself after not taking damage for a while. Modifications have enhanced its effectiveness even further."
+    "description": "Strange shield made with Paldium technology. It automatically repairs itself after not taking damage for a while. Modifications have enhanced its effectiveness even further."
   },
   "Shield_04": {
     "localized_name": "Hyper Shield",
-    "description": "Strange shield made with Paldium technology. It automatically repair itself after not taking damage for a while. Through repeated testing, the highest quality has been achieved."
+    "description": "Strange shield made with Paldium technology. It automatically repairs itself after not taking damage for a while. Through repeated testing, the highest quality has been achieved."
   },
   "Shield_SF": {
     "localized_name": "Advanced Shield",
-    "description": "Strange shield made with advanced technology. It automatically repair itself after not taking damage for a while."
+    "description": "Strange shield made with advanced technology. It automatically repairs itself after not taking damage for a while."
   },
   "Shield_Ultra": {
     "localized_name": "Ultra Shield",
-    "description": "Strange shield made with Paldium technology. It automatically repair itself after not taking damage for a while. As a result of further experiments, ultimate quality has been achieved."
+    "description": "Strange shield made with Paldium technology. It automatically repairs itself after not taking damage for a while. As a result of further experiments, ultimate quality has been achieved."
   },
   "ShotgunBullet": {
     "localized_name": "Shotgun Shell",
@@ -5071,9 +5823,17 @@
     "localized_name": "Water Skill Fruit: Bubble Blast",
     "description": "Use on a Pal to teach BubbleShot."
   },
+  "SkillCard_ChargeCanon": {
+    "localized_name": "Dragon Skill Fruit: Charge Cannon",
+    "description": "Use on a Pal to teach ChargeCanon."
+  },
   "SkillCard_Commet": {
     "localized_name": "Dragon Skill Fruit: Comet",
     "description": "Use on a Pal to teach Commet."
+  },
+  "SkillCard_CrossWind": {
+    "localized_name": "Grass Skill Fruit: Crosswind",
+    "description": "Use on a Pal to teach CrossWind."
   },
   "SkillCard_DarkArrow": {
     "localized_name": "Dark Skill Fruit: Dark Arrow",
@@ -5087,6 +5847,10 @@
     "localized_name": "Dark Skill Fruit: Dark Laser",
     "description": "Use on a Pal to teach DarkLaser."
   },
+  "SkillCard_DarkLegion": {
+    "localized_name": "Dark Skill Fruit: Dark Wisp",
+    "description": "Use on a Pal to teach DarkLegion."
+  },
   "SkillCard_DarkPulse": {
     "localized_name": "Dark Skill Fruit: Umbral Surge",
     "description": "Use on a Pal to teach DarkPulse."
@@ -5098,6 +5862,10 @@
   "SkillCard_DiamondFall": {
     "localized_name": "Ice Skill Fruit: Diamond Rain",
     "description": "Use on a Pal to teach DiamondFall."
+  },
+  "SkillCard_DiversionLaser": {
+    "localized_name": "Water Skill Fruit: Torrential Blast",
+    "description": "Use on a Pal to teach DiversionLaser."
   },
   "SkillCard_DragonBreath": {
     "localized_name": "Dragon Skill Fruit: Draconic Breath",
@@ -5167,6 +5935,10 @@
     "localized_name": "Grass Skill Fruit: Grass Tornado",
     "description": "Use on a Pal to teach GrassTornado."
   },
+  "SkillCard_GravityShot": {
+    "localized_name": "Dark Skill Fruit: Dark Shot",
+    "description": "Use on a Pal to teach GravityShot."
+  },
   "SkillCard_HolyBlast": {
     "localized_name": "Skill Fruit: Holy Burst",
     "description": "Use on a Pal to teach HolyBlast."
@@ -5175,9 +5947,17 @@
     "localized_name": "Water Skill Fruit: Hydro Laser",
     "description": "Use on a Pal to teach HydroPump."
   },
+  "SkillCard_HydroSlicer": {
+    "localized_name": "Water Skill Fruit: Hydro Slicer",
+    "description": "Use on a Pal to teach HydroSlicer."
+  },
   "SkillCard_HyperBeam": {
     "localized_name": "Skill Fruit: Pal Blast",
     "description": "Use on a Pal to teach HyperBeam."
+  },
+  "SkillCard_IceAge": {
+    "localized_name": "Ice Skill Fruit: Absolute Frost",
+    "description": "Use on a Pal to teach IceAge."
   },
   "SkillCard_IceBlade": {
     "localized_name": "Ice Skill Fruit: Icicle Cutter",
@@ -5187,9 +5967,17 @@
     "localized_name": "Ice Skill Fruit: Ice Missile",
     "description": "Use on a Pal to teach IceMissile."
   },
+  "SkillCard_IceWall": {
+    "localized_name": "Ice Skill Fruit: Freeze Wall",
+    "description": "Use on a Pal to teach IceWall."
+  },
   "SkillCard_IcicleLine": {
     "localized_name": "Ice Skill Fruit: Icicle Line",
     "description": "Use on a Pal to teach IcicleLine."
+  },
+  "SkillCard_IciclePierce": {
+    "localized_name": "Ice Skill Fruit: Icicle Bullet",
+    "description": "Use on a Pal to teach IciclePierce."
   },
   "SkillCard_IcicleThrow": {
     "localized_name": "Ice Skill Fruit: Blizzard Spike",
@@ -5234,6 +6022,22 @@
   "SkillCard_Psychokinesis": {
     "localized_name": "Dark Skill Fruit: Psycho Gravity",
     "description": "Use on a Pal to teach Psychokinesis."
+  },
+  "SkillCard_RangeThunder": {
+    "localized_name": "Thunder Skill Fruit: All Range Thunder",
+    "description": "Use on a Pal to teach RangeThunder."
+  },
+  "SkillCard_ReflectiveShuriken": {
+    "localized_name": "Grass Skill Fruit: Reflect Leaf",
+    "description": "Use on a Pal to teach ReflectiveShuriken."
+  },
+  "SkillCard_RipTide": {
+    "localized_name": "Water Skill Fruit: Aqua Surge",
+    "description": "Use on a Pal to teach RipTide."
+  },
+  "SkillCard_RockBeat": {
+    "localized_name": "Earth Skill Fruit: Stone Beat",
+    "description": "Use on a Pal to teach RockBeat."
   },
   "SkillCard_RockLance": {
     "localized_name": "Earth Skill Fruit: Rock Lance",
@@ -5306,6 +6110,10 @@
   "SkillCard_ThunderRain": {
     "localized_name": "Electric Skill Fruit: Thunder Rain",
     "description": "Use on a Pal to teach ThunderRain."
+  },
+  "SkillCard_ThunderSpear": {
+    "localized_name": "Electric Skill Fruit: Thunder Spear",
+    "description": "Use on a Pal to teach ThunderSpear."
   },
   "SkillCard_ThunderStorm": {
     "localized_name": "Electric Skill Fruit: Thunderstorm",
@@ -5387,6 +6195,10 @@
     "localized_name": "Azurobe Saddle",
     "description": "Saddle for safely riding Azurobe."
   },
+  "SkillUnlock_BlueDragon_Ice": {
+    "localized_name": "Azurobe Cryst Saddle",
+    "description": "Saddle for safely riding BlueDragon Ice."
+  },
   "SkillUnlock_BlueThunderHorse": {
     "localized_name": "Azurmane Saddle",
     "description": "Saddle for safely riding Azurmane."
@@ -5429,7 +6241,7 @@
   },
   "SkillUnlock_Eagle": {
     "localized_name": "Galeclaw's Gloves",
-    "description": "Gloves for gently holding on to Galeclaw's legs. If Galeclaw is in your team, it can be used as a glider."
+    "description": "Gloves for modifying the performance of the equipped glider, if Galeclaw is in your team."
   },
   "SkillUnlock_ElecLion": {
     "localized_name": "Boltmane Saddle",
@@ -5485,11 +6297,23 @@
   },
   "SkillUnlock_FlyingManta": {
     "localized_name": "Celaray's Gloves",
-    "description": "Gloves for gently holding on to Celaray's fins. If Celaray is in your team, it can be used as a glider."
+    "description": "Gloves for modifying the performance of the equipped glider, if Celaray is in your team."
+  },
+  "SkillUnlock_FlyingManta_Thunder": {
+    "localized_name": "Celaray Lux's Gloves",
+    "description": "Gloves for modifying the performance of the equipped glider, if FlyingManta Thunder is in your team."
   },
   "SkillUnlock_Garm": {
     "localized_name": "Direhowl's Saddled Harness",
     "description": "Saddle for safely riding Direhowl."
+  },
+  "SkillUnlock_GhostAnglerfish": {
+    "localized_name": "Ghangler Saddle",
+    "description": "Saddle for safely riding Ghangler."
+  },
+  "SkillUnlock_GhostAnglerfish_Fire": {
+    "localized_name": "Ghangler Ignis Saddle",
+    "description": "Saddle for safely riding GhostAnglerfish Fire."
   },
   "SkillUnlock_GhostBeast": {
     "localized_name": "Maraith Saddle",
@@ -5559,6 +6383,18 @@
     "localized_name": "Frostallion Noct Saddle",
     "description": "Saddle for safely riding IceHorse Dark."
   },
+  "SkillUnlock_IceNarwhal": {
+    "localized_name": "Whalaska Saddle",
+    "description": "Saddle for safely riding Whalaska."
+  },
+  "SkillUnlock_IceNarwhal_Fire": {
+    "localized_name": "Whalaska Ignis Saddle",
+    "description": "Saddle for safely riding IceNarwhal Fire."
+  },
+  "SkillUnlock_IceSeal": {
+    "localized_name": "Polapup's Harness",
+    "description": "Saddle for safely riding Polapup."
+  },
   "SkillUnlock_JetDragon": {
     "localized_name": "Jetragon's Missile Launcher",
     "description": "Makes Jetragon fire missiles when ridden."
@@ -5599,6 +6435,10 @@
     "localized_name": "Relaxaurus Lux's Missile Launcher",
     "description": "Makes LazyDragon Electric fire a missile launcher when ridden."
   },
+  "SkillUnlock_LeafMomonga": {
+    "localized_name": "Herbil's Harness",
+    "description": "Harness for Herbil. Herbil can use its healing power to revive the player when incapacitated."
+  },
   "SkillUnlock_Manticore": {
     "localized_name": "Blazehowl Saddle",
     "description": "Saddle for safely riding Blazehowl."
@@ -5633,7 +6473,11 @@
   },
   "SkillUnlock_NegativeOctopus": {
     "localized_name": "Killamari's Gloves",
-    "description": "Gloves for gently holding on to Killamari's legs. If Killamari is in your team, it can be used as a glider."
+    "description": "Gloves for modifying the performance of the equipped glider, if Killamari is in your team."
+  },
+  "SkillUnlock_NegativeOctopus_Neutral": {
+    "localized_name": "Killamari Primo's Gloves",
+    "description": "Gloves for modifying the performance of the equipped glider, if NegativeOctopus Neutral is in your team."
   },
   "SkillUnlock_NightBlueHorse": {
     "localized_name": "Starryon Saddle",
@@ -5642,6 +6486,18 @@
   "SkillUnlock_Penguin": {
     "localized_name": "Pengullet Rocket Launcher",
     "description": "Rocket launcher for launching Pengullet. Activate its Partner Skill to fire Pengullet and damage enemies. After firing, Pengullet will become incapacitated."
+  },
+  "SkillUnlock_Penguin_Electric": {
+    "localized_name": "Pengullet Lux's Rocket Launcher",
+    "description": "Rocket launcher for launching Penguin Electric. Activate its Partner Skill to fire Penguin Electric and damage enemies. After firing, Penguin Electric will become incapacitated."
+  },
+  "SkillUnlock_Plesiosaur": {
+    "localized_name": "Braloha Saddle",
+    "description": "Saddle for safely riding Braloha."
+  },
+  "SkillUnlock_PoseidonOrca": {
+    "localized_name": "Neptilius Saddle",
+    "description": "Saddle for safely riding Neptilius."
   },
   "SkillUnlock_PurpleSpider": {
     "localized_name": "Tarantriss Saddle",
@@ -5707,6 +6563,10 @@
     "localized_name": "Rayhound Saddle",
     "description": "Saddle for safely riding Rayhound."
   },
+  "SkillUnlock_TropicalOstrich": {
+    "localized_name": "Palumba Saddle",
+    "description": "Saddle for safely riding Palumba."
+  },
   "SkillUnlock_Umihebi": {
     "localized_name": "Jormuntide Saddle",
     "description": "Saddle for safely riding Jormuntide."
@@ -5745,11 +6605,11 @@
   },
   "SkillUnlock_WindChimes": {
     "localized_name": "Hangyu's Gloves",
-    "description": "Gloves for gently holding on to Hangyu's arms. If Hangyu is in your team, it can be used as a glider."
+    "description": "Gloves for modifying the performance of the equipped glider, if Hangyu is in your team."
   },
   "SkillUnlock_WindChimes_Ice": {
     "localized_name": "Hangyu Cryst's Glove",
-    "description": "Gloves for gently holding on to WindChimes Ice's arms. If WindChimes Ice is in your team, it can be used as a glider."
+    "description": "Gloves for modifying the performance of the equipped glider, if WindChimes Ice is in your team."
   },
   "SkillUnlock_Yeti": {
     "localized_name": "Wumpo Saddle",
@@ -5951,6 +6811,10 @@
     "localized_name": "Sulfur",
     "description": "Sulfur that can be found in volcanoes and such. Necessary for making Gunpowder."
   },
+  "Supplement": {
+    "localized_name": "Nutrient Tonic",
+    "description": "A nutrient-rich Nutrient Tonic that prevents hunger for a period of time. A concentrated, flavorful blend of nutrients ideal for long journeys."
+  },
   "Sweet": {
     "localized_name": "Cotton Candy",
     "description": "Cotton candy collected from Woolipop. Its sweetness fluffily melts away in your mouth."
@@ -5994,6 +6858,26 @@
   "TreasureBoxKey03": {
     "localized_name": "Gold Key",
     "description": "A key that can be used to open locked treasure chests."
+  },
+  "TreasureMap01": {
+    "localized_name": "Treasure Map",
+    "description": "A weathered map showing where treasure lies. Using it places a marker on your map."
+  },
+  "TreasureMap02": {
+    "localized_name": "Treasure Map",
+    "description": "A weathered map showing where treasure lies. Using it places a marker on your map."
+  },
+  "TreasureMap03": {
+    "localized_name": "Treasure Map",
+    "description": "A weathered map showing where treasure lies. Using it places a marker on your map."
+  },
+  "TreasureMap04": {
+    "localized_name": "Treasure Map",
+    "description": "A weathered map showing where treasure lies. Using it places a marker on your map."
+  },
+  "TreasureMap05": {
+    "localized_name": "Treasure Map",
+    "description": "A weathered map showing where treasure lies. Using it places a marker on your map."
   },
   "Unko_L": {
     "localized_name": "Huge Dung",
@@ -6115,72 +6999,228 @@
     "localized_name": "Broncherry Fried Noodles",
     "description": "A dish made by stir-frying noodles with vegetables and meat. The rich seasoning pairs perfectly with the thick cuts of meat. Eating it will increase your COMMON_STATUS_RANGE_Attack by 20% for a period of time."
   },
+  "YakushimaArmor001": {
+    "localized_name": "Hallowed Plate Mail",
+    "description": "[Tides of Terraria] Armor forged from Hallowed Bar. Enveloped in divine power, it lessens damage from [Tides of Terraria] monsters."
+  },
+  "YakushimaArmor001_2": {
+    "localized_name": "Hallowed Plate Mail",
+    "description": "[Tides of Terraria] Armor forged from Hallowed Bar. Enveloped in divine power, it lessens damage from [Tides of Terraria] monsters."
+  },
+  "YakushimaArmor001_3": {
+    "localized_name": "Hallowed Plate Mail",
+    "description": "[Tides of Terraria] Armor forged from Hallowed Bar. Enveloped in divine power, it lessens damage from [Tides of Terraria] monsters."
+  },
+  "YakushimaArmor001_4": {
+    "localized_name": "Hallowed Plate Mail",
+    "description": "[Tides of Terraria] Armor forged from Hallowed Bar. Enveloped in divine power, it lessens damage from [Tides of Terraria] monsters."
+  },
+  "YakushimaArmor001_5": {
+    "localized_name": "Hallowed Plate Mail",
+    "description": "[Tides of Terraria] Armor forged from Hallowed Bar. Enveloped in divine power, it lessens damage from [Tides of Terraria] monsters."
+  },
   "YakushimaBlade": {
     "localized_name": "Meowmere",
-    "description": "[Terraria Collab] According to the legend, this sword was brought back from a distant land by Croajiro. Why? We have no idea..."
+    "description": "[Tides of Terraria] According to the legend, this sword was brought back from a distant land by Croajiro. Why? We have no idea... Fires a bouncing cat projectile with each swing to attack enemies."
   },
   "YakushimaBlade002": {
-    "localized_name": "Meowmere",
-    "description": "[Terraria Collab] According to the legend, this sword was brought back from a distant land by Croajiro. Why? We have no idea..."
+    "localized_name": "Terra Blade",
+    "description": "[Tides of Terraria] This curious sword releases vibrant green shockwaves with each strike, allowing you to hit enemies from afar despite being a melee weapon."
   },
   "YakushimaBlade002_2": {
-    "localized_name": "Meowmere",
-    "description": "[Terraria Collab] According to the legend, this sword was brought back from a distant land by Croajiro. Why? We have no idea..."
+    "localized_name": "Terra Blade",
+    "description": "[Tides of Terraria] This curious sword releases vibrant green shockwaves with each strike, allowing you to hit enemies from afar despite being a melee weapon."
   },
   "YakushimaBlade002_3": {
-    "localized_name": "Meowmere",
-    "description": "[Terraria Collab] According to the legend, this sword was brought back from a distant land by Croajiro. Why? We have no idea..."
+    "localized_name": "Terra Blade",
+    "description": "[Tides of Terraria] This curious sword releases vibrant green shockwaves with each strike, allowing you to hit enemies from afar despite being a melee weapon."
   },
   "YakushimaBlade002_4": {
-    "localized_name": "Meowmere",
-    "description": "[Terraria Collab] According to the legend, this sword was brought back from a distant land by Croajiro. Why? We have no idea..."
+    "localized_name": "Terra Blade",
+    "description": "[Tides of Terraria] This curious sword releases vibrant green shockwaves with each strike, allowing you to hit enemies from afar despite being a melee weapon."
   },
   "YakushimaBlade002_5": {
-    "localized_name": "Meowmere",
-    "description": "[Terraria Collab] According to the legend, this sword was brought back from a distant land by Croajiro. Why? We have no idea..."
+    "localized_name": "Terra Blade",
+    "description": "[Tides of Terraria] This curious sword releases vibrant green shockwaves with each strike, allowing you to hit enemies from afar despite being a melee weapon."
   },
   "YakushimaBlade003": {
-    "localized_name": "Meowmere",
-    "description": "[Terraria Collab] According to the legend, this sword was brought back from a distant land by Croajiro. Why? We have no idea..."
+    "localized_name": "Terraprisma",
+    "description": "[Tides of Terraria] A mystical sword with a rainbow-colored blade. Wielding it lets you summon up to nine blessed swords to fight alongside you."
   },
   "YakushimaBlade003_2": {
-    "localized_name": "Meowmere",
-    "description": "[Terraria Collab] According to the legend, this sword was brought back from a distant land by Croajiro. Why? We have no idea..."
+    "localized_name": "Terraprisma",
+    "description": "[Tides of Terraria] A mystical sword with a rainbow-colored blade. Wielding it lets you summon up to nine blessed swords to fight alongside you."
   },
   "YakushimaBlade003_3": {
-    "localized_name": "Meowmere",
-    "description": "[Terraria Collab] According to the legend, this sword was brought back from a distant land by Croajiro. Why? We have no idea..."
+    "localized_name": "Terraprisma",
+    "description": "[Tides of Terraria] A mystical sword with a rainbow-colored blade. Wielding it lets you summon up to nine blessed swords to fight alongside you."
   },
   "YakushimaBlade003_4": {
-    "localized_name": "Meowmere",
-    "description": "[Terraria Collab] According to the legend, this sword was brought back from a distant land by Croajiro. Why? We have no idea..."
+    "localized_name": "Terraprisma",
+    "description": "[Tides of Terraria] A mystical sword with a rainbow-colored blade. Wielding it lets you summon up to nine blessed swords to fight alongside you."
   },
   "YakushimaBlade003_5": {
-    "localized_name": "Meowmere",
-    "description": "[Terraria Collab] According to the legend, this sword was brought back from a distant land by Croajiro. Why? We have no idea..."
+    "localized_name": "Terraprisma",
+    "description": "[Tides of Terraria] A mystical sword with a rainbow-colored blade. Wielding it lets you summon up to nine blessed swords to fight alongside you."
   },
   "YakushimaBlade004": {
-    "localized_name": "Meowmere",
-    "description": "[Terraria Collab] According to the legend, this sword was brought back from a distant land by Croajiro. Why? We have no idea..."
+    "localized_name": "Excalibur",
+    "description": "[Tides of Terraria] A sacred sword that gleams with golden light. Swinging it unleashes shockwaves around you, striking a wide area."
   },
   "YakushimaBlade004_2": {
-    "localized_name": "Meowmere",
-    "description": "[Terraria Collab] According to the legend, this sword was brought back from a distant land by Croajiro. Why? We have no idea..."
+    "localized_name": "Excalibur",
+    "description": "[Tides of Terraria] A sacred sword that gleams with golden light. Swinging it unleashes shockwaves around you, striking a wide area."
   },
   "YakushimaBlade004_3": {
-    "localized_name": "Meowmere",
-    "description": "[Terraria Collab] According to the legend, this sword was brought back from a distant land by Croajiro. Why? We have no idea..."
+    "localized_name": "Excalibur",
+    "description": "[Tides of Terraria] A sacred sword that gleams with golden light. Swinging it unleashes shockwaves around you, striking a wide area."
   },
   "YakushimaBlade004_4": {
-    "localized_name": "Meowmere",
-    "description": "[Terraria Collab] According to the legend, this sword was brought back from a distant land by Croajiro. Why? We have no idea..."
+    "localized_name": "Excalibur",
+    "description": "[Tides of Terraria] A sacred sword that gleams with golden light. Swinging it unleashes shockwaves around you, striking a wide area."
   },
   "YakushimaBlade004_5": {
-    "localized_name": "Meowmere",
-    "description": "[Terraria Collab] According to the legend, this sword was brought back from a distant land by Croajiro. Why? We have no idea..."
+    "localized_name": "Excalibur",
+    "description": "[Tides of Terraria] A sacred sword that gleams with golden light. Swinging it unleashes shockwaves around you, striking a wide area."
   },
   "YakushimaBlade005": {
-    "localized_name": "Meowmere",
-    "description": "[Terraria Collab] According to the legend, this sword was brought back from a distant land by Croajiro. Why? We have no idea..."
+    "localized_name": "Legendary Meowmere",
+    "description": "[Tides of Terraria] A legendary Meowmere forged from Luminite Bar. Swinging it launches cat projectiles that ricochet and attack foes."
+  },
+  "YakushimaGun001": {
+    "localized_name": "Vortex Beater",
+    "description": "[Tides of Terraria] A powerful gun fueled by unknown energy. Fires homing missiles at regular intervals that track enemies and explode on impact. Has a 66% chance to not consume ammo when firing."
+  },
+  "YakushimaGun001_2": {
+    "localized_name": "Vortex Beater",
+    "description": "[Tides of Terraria] A powerful gun fueled by unknown energy. Fires homing missiles at regular intervals that track enemies and explode on impact. Has a 66% chance to not consume ammo when firing."
+  },
+  "YakushimaGun001_3": {
+    "localized_name": "Vortex Beater",
+    "description": "[Tides of Terraria] A powerful gun fueled by unknown energy. Fires homing missiles at regular intervals that track enemies and explode on impact. Has a 66% chance to not consume ammo when firing."
+  },
+  "YakushimaGun001_4": {
+    "localized_name": "Vortex Beater",
+    "description": "[Tides of Terraria] A powerful gun fueled by unknown energy. Fires homing missiles at regular intervals that track enemies and explode on impact. Has a 66% chance to not consume ammo when firing."
+  },
+  "YakushimaGun001_5": {
+    "localized_name": "Vortex Beater",
+    "description": "[Tides of Terraria] A powerful gun fueled by unknown energy. Fires homing missiles at regular intervals that track enemies and explode on impact. Has a 66% chance to not consume ammo when firing."
+  },
+  "YakushimaHeadEquip001": {
+    "localized_name": "Hallowed Mask",
+    "description": "[Tides of Terraria] Helmet forged from Hallowed Bar. Enveloped in divine power, it increases damage dealt by Meowmere, Excalibur, Terra Blade, and Legendary Meowmere."
+  },
+  "YakushimaHeadEquip001_2": {
+    "localized_name": "Hallowed Mask",
+    "description": "[Tides of Terraria] Helmet forged from Hallowed Bar. Enveloped in divine power, it increases damage dealt by Meowmere, Excalibur, Terra Blade, and Legendary Meowmere."
+  },
+  "YakushimaHeadEquip001_3": {
+    "localized_name": "Hallowed Mask",
+    "description": "[Tides of Terraria] Helmet forged from Hallowed Bar. Enveloped in divine power, it increases damage dealt by Meowmere, Excalibur, Terra Blade, and Legendary Meowmere."
+  },
+  "YakushimaHeadEquip001_4": {
+    "localized_name": "Hallowed Mask",
+    "description": "[Tides of Terraria] Helmet forged from Hallowed Bar. Enveloped in divine power, it increases damage dealt by Meowmere, Excalibur, Terra Blade, and Legendary Meowmere."
+  },
+  "YakushimaHeadEquip001_5": {
+    "localized_name": "Hallowed Mask",
+    "description": "[Tides of Terraria] Helmet forged from Hallowed Bar. Enveloped in divine power, it increases damage dealt by Meowmere, Excalibur, Terra Blade, and Legendary Meowmere."
+  },
+  "YakushimaHeadEquip002": {
+    "localized_name": "Hallowed Headgear",
+    "description": "[Tides of Terraria] Helmet forged from Hallowed Bar. Enveloped in divine power, it increases damage dealt by Nightglow."
+  },
+  "YakushimaHeadEquip002_2": {
+    "localized_name": "Hallowed Headgear",
+    "description": "[Tides of Terraria] Helmet forged from Hallowed Bar. Enveloped in divine power, it increases damage dealt by Nightglow."
+  },
+  "YakushimaHeadEquip002_3": {
+    "localized_name": "Hallowed Headgear",
+    "description": "[Tides of Terraria] Helmet forged from Hallowed Bar. Enveloped in divine power, it increases damage dealt by Nightglow."
+  },
+  "YakushimaHeadEquip002_4": {
+    "localized_name": "Hallowed Headgear",
+    "description": "[Tides of Terraria] Helmet forged from Hallowed Bar. Enveloped in divine power, it increases damage dealt by Nightglow."
+  },
+  "YakushimaHeadEquip002_5": {
+    "localized_name": "Hallowed Headgear",
+    "description": "[Tides of Terraria] Helmet forged from Hallowed Bar. Enveloped in divine power, it increases damage dealt by Nightglow."
+  },
+  "YakushimaHeadEquip003": {
+    "localized_name": "Hallowed Helmet",
+    "description": "[Tides of Terraria] Helmet forged from Hallowed Bar. Enveloped in divine power, it increases damage dealt by Vortex Beater."
+  },
+  "YakushimaHeadEquip003_2": {
+    "localized_name": "Hallowed Helmet",
+    "description": "[Tides of Terraria] Helmet forged from Hallowed Bar. Enveloped in divine power, it increases damage dealt by Vortex Beater."
+  },
+  "YakushimaHeadEquip003_3": {
+    "localized_name": "Hallowed Helmet",
+    "description": "[Tides of Terraria] Helmet forged from Hallowed Bar. Enveloped in divine power, it increases damage dealt by Vortex Beater."
+  },
+  "YakushimaHeadEquip003_4": {
+    "localized_name": "Hallowed Helmet",
+    "description": "[Tides of Terraria] Helmet forged from Hallowed Bar. Enveloped in divine power, it increases damage dealt by Vortex Beater."
+  },
+  "YakushimaHeadEquip003_5": {
+    "localized_name": "Hallowed Helmet",
+    "description": "[Tides of Terraria] Helmet forged from Hallowed Bar. Enveloped in divine power, it increases damage dealt by Vortex Beater."
+  },
+  "YakushimaHeadEquip004": {
+    "localized_name": "Hallowed Hood",
+    "description": "[Tides of Terraria] Helmet forged from Hallowed Bar. Enveloped in divine power, it increases damage dealt by Terraprisma."
+  },
+  "YakushimaHeadEquip004_2": {
+    "localized_name": "Hallowed Hood",
+    "description": "[Tides of Terraria] Helmet forged from Hallowed Bar. Enveloped in divine power, it increases damage dealt by Terraprisma."
+  },
+  "YakushimaHeadEquip004_3": {
+    "localized_name": "Hallowed Hood",
+    "description": "[Tides of Terraria] Helmet forged from Hallowed Bar. Enveloped in divine power, it increases damage dealt by Terraprisma."
+  },
+  "YakushimaHeadEquip004_4": {
+    "localized_name": "Hallowed Hood",
+    "description": "[Tides of Terraria] Helmet forged from Hallowed Bar. Enveloped in divine power, it increases damage dealt by Terraprisma."
+  },
+  "YakushimaHeadEquip004_5": {
+    "localized_name": "Hallowed Hood",
+    "description": "[Tides of Terraria] Helmet forged from Hallowed Bar. Enveloped in divine power, it increases damage dealt by Terraprisma."
+  },
+  "YakushimaHeadEquip005": {
+    "localized_name": "Moon Lord Mask",
+    "description": "[Tides of Terraria] Pulsing with RAID YakushimaBoss002's sinister energy. A rarity only the most fortunate may obtain."
+  },
+  "YakushimaHeadEquip006": {
+    "localized_name": "Eye of Cthulhu Mask",
+    "description": "[Tides of Terraria] Pulsing with Eye of Cthulhu's sinister energy. A rarity only the most fortunate may obtain."
+  },
+  "YakushimaIngot001": {
+    "localized_name": "Hallowed Bar",
+    "description": "[Tides of Terraria] A sacred material infused with divine energy. Can be used to create a variety of Terraria items."
+  },
+  "YakushimaIngot002": {
+    "localized_name": "Luminite Bar",
+    "description": "[Tides of Terraria] A material exuding immense power, dropped by YakushimaBoss002. Radiates a soft, moon-like glow."
+  },
+  "YakushimaLantern001": {
+    "localized_name": "Nightglow",
+    "description": "[Tides of Terraria] A lantern that radiates a rainbow-hued light. Holding it aloft releases homing light projectiles that strike enemies multiple times."
+  },
+  "YakushimaLantern001_2": {
+    "localized_name": "Nightglow",
+    "description": "[Tides of Terraria] A lantern that radiates a rainbow-hued light. Holding it aloft releases homing light projectiles that strike enemies multiple times."
+  },
+  "YakushimaLantern001_3": {
+    "localized_name": "Nightglow",
+    "description": "[Tides of Terraria] A lantern that radiates a rainbow-hued light. Holding it aloft releases homing light projectiles that strike enemies multiple times."
+  },
+  "YakushimaLantern001_4": {
+    "localized_name": "Nightglow",
+    "description": "[Tides of Terraria] A lantern that radiates a rainbow-hued light. Holding it aloft releases homing light projectiles that strike enemies multiple times."
+  },
+  "YakushimaLantern001_5": {
+    "localized_name": "Nightglow",
+    "description": "[Tides of Terraria] A lantern that radiates a rainbow-hued light. Holding it aloft releases homing light projectiles that strike enemies multiple times."
   }
 }

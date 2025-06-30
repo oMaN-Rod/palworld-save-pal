@@ -55,6 +55,10 @@
     "localized_name": "Fulmini incrociati",
     "description": "Scaglia una coppia di fulmini che si incrociano da due direzioni per non lasciare scampo."
   },
+  "EPalWazaID::CrossWind": {
+    "localized_name": "Croce di vento",
+    "description": "Materializza di fronte al nemico delle lame di vento, che scaglia in un attacco incrociato."
+  },
   "EPalWazaID::DarkArrow": {
     "localized_name": "Freccia oscura",
     "description": "Scaglia numerose frecce di tenebra, che inseguono velocemente il nemico."
@@ -86,6 +90,10 @@
   "EPalWazaID::DiamondFall": {
     "localized_name": "Caduta diamantina",
     "description": "Genera blocchi di ghiaccio sopra il nemico per poi farli precipitare a raffica."
+  },
+  "EPalWazaID::DiversionLaser": {
+    "localized_name": "Getto ad alta pressione",
+    "description": "Lancia un getto d'acqua ad alta pressione di fronte a sé. Dopo poco, il getto si dirama a destra e sinistra."
   },
   "EPalWazaID::DoubleIcicleThrow": {
     "localized_name": "Doppia lancia glaciale",
@@ -179,6 +187,10 @@
     "localized_name": "Flusso d'acqua",
     "description": "Scaglia un getto d'acqua dall'incredibile pressione, travolgendo tutto in una vasta area frontale."
   },
+  "EPalWazaID::HydroSlicer": {
+    "localized_name": "Falce d'acqua",
+    "description": "Falcia di fronte a sé con un getto d'acqua compressa. Dell'acqua sgorga dall'area colpita poco dopo il passaggio."
+  },
   "EPalWazaID::HyperBeam": {
     "localized_name": "Raggio Pal",
     "description": "Si carica di energia distruttiva per poi liberarla in un ampio raggio di fronte a sé."
@@ -194,6 +206,10 @@
   "EPalWazaID::IceMissile": {
     "localized_name": "Missile di ghiaccio",
     "description": "Materializza in aria pezzi di ghiaccio appuntiti e li scaglia sul nemico."
+  },
+  "EPalWazaID::IceWall": {
+    "localized_name": "Muro di ghiaccio",
+    "description": "Fa emergere un muro di ghiaccio dalla superficie. Il muro permane per un po' di tempo, e crolla dopo aver subito una certa quantità di danni."
   },
   "EPalWazaID::IcicleLine": {
     "localized_name": "Getto di ghiaccio",
@@ -275,6 +291,14 @@
     "localized_name": "Fulmine omnidirezionale",
     "description": "Scaglia fulmini in linea retta in ogni direzione."
   },
+  "EPalWazaID::ReflectiveShuriken": {
+    "localized_name": "Foglia riflettente",
+    "description": "Scaglia raffiche di lame di vento che rimbalzano colpendo alberi o nemici. Possono rimbalzare massimo quattro volte."
+  },
+  "EPalWazaID::RipTide": {
+    "localized_name": "Marea travolgente",
+    "description": "Genera onde che si abbattono sull'area intorno al nemico. Le onde convergono al centro ed esplodono in una colonna d'acqua."
+  },
   "EPalWazaID::RockBeat": {
     "localized_name": "Roccia contundente",
     "description": "Scuote il terreno, facendo emergere una roccia enorme."
@@ -298,6 +322,10 @@
   "EPalWazaID::SandTwister": {
     "localized_name": "Turbine di sabbia",
     "description": "Crea numerosi vortici di sabbia, che avanzano muovendosi in circolo."
+  },
+  "EPalWazaID::SeaGush": {
+    "localized_name": "Eruzione d'acqua",
+    "description": "Fa emergere enormi colonne d'acqua sotto al nemico e nell'area circostante."
   },
   "EPalWazaID::SeedMachinegun": {
     "localized_name": "Raffica di semi",
@@ -455,6 +483,10 @@
     "localized_name": "Carica a testa bassa",
     "description": "Abilità di Rushoar. Punta un nemico e lo carica con violenza."
   },
+  "EPalWazaID::Unique_CaptainPenguin_Black_BodySlide_Electric": {
+    "localized_name": "Scivolata fulminante",
+    "description": "Abilità del Pal Penking Lux. Scivolando pancia a terra genera elettricità da tutto il corpo e travolge il nemico."
+  },
   "EPalWazaID::Unique_CaptainPenguin_BodySlide": {
     "localized_name": "Scivolata del capitano",
     "description": "Abilità del Pal Penking. Si mente pancia a terra e genera aria gelata per scivolare meglio contro il nemico."
@@ -551,6 +583,14 @@
     "localized_name": "Zanne selvagge",
     "description": "Abilità di Direhowl. Si lancia verso un nemico ad alta velocità e lo attacca con un morso."
   },
+  "EPalWazaID::Unique_GhostAnglerfish_Fire_SweepBait_Fire": {
+    "localized_name": "Colpo di lanterna ardente",
+    "description": "Abilità del Pal Ghangler Ignis. Agita poderosamente di fronte a sé la lanterna infuocata che ha sulla testa."
+  },
+  "EPalWazaID::Unique_GhostAnglerfish_SweepBait": {
+    "localized_name": "Colpo di lanterna",
+    "description": "Abilità del Pal Ghangler. Agita poderosamente di fronte a sé la lunga lanterna che ha sulla testa."
+  },
   "EPalWazaID::Unique_GhostBeast_Tossin": {
     "localized_name": "Scatto ultraterreno",
     "description": "Abilità del Pal Maraith. Avanza senza fretta, scagliando fiamme spettrali contro il nemico."
@@ -603,6 +643,10 @@
     "localized_name": "Tuffo della fenice",
     "description": "Abilità del Pal Faleris Aqua. Dopo aver creato un tornado marino, si avvolge nelle acque e si lancia in volo sul nemico."
   },
+  "EPalWazaID::Unique_IceCrocodile_SpitAttack": {
+    "localized_name": "Sputo devastante",
+    "description": "Abilità del Pal Munchill. Attacca sputando tre granate che ha ingerito e tenuto in fresco, senza però digerirle. Sembra che a volte tiri fuori armi più pericolose...?"
+  },
   "EPalWazaID::Unique_IceDeer_IceHorn": {
     "localized_name": "Corno glaciale",
     "description": "Abilità del Pal Reindrix. Attacca in carica il nemico e lo colpisce con splendide corna di ghiaccio."
@@ -610,6 +654,10 @@
   "EPalWazaID::Unique_IceHorse_IceBladeAttack": {
     "localized_name": "Ali di cristallo",
     "description": "Abilità del Pal Frostallion. Condensa il freddo in ali di ghiaccio, che usa per attaccare il nemico."
+  },
+  "EPalWazaID::Unique_IceNarwhal_JumpingHorn": {
+    "localized_name": "Bucaonde",
+    "description": "Abilità del Pal Whalaska. Avanza immergendosi temporaneamente, per poi spiccare un grande salto fuori dall'acqua e attaccare. Quando emerge, causa un'esplosione di attributo ghiaccio."
   },
   "EPalWazaID::Unique_JetDragon_JumpBeam": {
     "localized_name": "Cometa raggiante",
@@ -631,9 +679,13 @@
     "localized_name": "Veloce come un lampo",
     "description": "Abilità del Pal Univolt. Fa cadere fulmini intorno a sé per poi caricare il nemico."
   },
+  "EPalWazaID::Unique_LeafMomonga_SomerSault": {
+    "localized_name": "Assalto della foglia",
+    "description": "Abilità del Pal Herbil. Raccoglie le forze per un attimo, e poi si lancia contro il nemico a gran velocità facendo una capriola."
+  },
   "EPalWazaID::Unique_LilyQueen_LilyHealing": {
     "localized_name": "Benedizione del raccolto",
-    "description": "Abilità del Pal Lyleen. Usa i suoi poteri curativi per recuperare PV. Non può curare il giocatore."
+    "description": "Abilità del Pal Lyleen. Usa i suoi poteri curativi per far recuperare PV a tutti i compagni vicini."
   },
   "EPalWazaID::Unique_LilyQueen_WindBarrier": {
     "localized_name": "Barriera di vento",
@@ -683,6 +735,14 @@
     "localized_name": "Pugni rotanti",
     "description": "Abilità di Cattiva. Si lancia contro un nemico ruotando le braccia, tempestandolo di pugni."
   },
+  "EPalWazaID::Unique_Plesiosaur_LongBreath": {
+    "localized_name": "Soffio lungo",
+    "description": "Abilità del Pal Braloha. Fa scorrere energie lungo il suo lungo collo, per poi espellerle in un soffio di attributo erba."
+  },
+  "EPalWazaID::Unique_PoseidonOrca_TorrentLaser": {
+    "localized_name": "Laser idrosonico",
+    "description": "Abilità del Pal Neptilius. Emerge e immagazzina acqua in bocca. Subito dopo, colpisce tre volte con getti d'acqua ad alta pressione nelle quattro direzioni. Sulle zone colpite si formano spaccature da cui sgorga altra acqua."
+  },
   "EPalWazaID::Unique_PurpleSpider_SpiderRaid": {
     "localized_name": "Aracnoraid",
     "description": "Abilità del Pal Tarantriss. Sputa globi di ragnatele che immobilizzano la preda. Quindi, si avventa sul malcapitato, lo graffia tre volte per poi infilzarlo col colpo di grazia."
@@ -701,7 +761,7 @@
   },
   "EPalWazaID::Unique_Ronin_Iai": {
     "localized_name": "Estrazione fulminante",
-    "description": "Abilità del Pal Bushi. Appare di colpo di fronte al nemico, ed estrae, colpisce e rinfodera la spada in un gesto fulmineo."
+    "description": "Abilità del Pal Bushi. Appare di fronte al nemico in un istante, ed estrae e colpisce in un singolo gesto fulmineo."
   },
   "EPalWazaID::Unique_SaintCentaur_OneSpearRushes": {
     "localized_name": "Lampo di lancia letale",
@@ -735,6 +795,14 @@
     "localized_name": "Pungiglione d'assalto",
     "description": "Abilità del Pal Beegarde. Si lancia sull'avversario ad alta velocità. Per il colpo finale, usa la lancia."
   },
+  "EPalWazaID::Unique_StuffedShark_HiddenWeapon": {
+    "localized_name": "Grilletto facile",
+    "description": "Abilità del Pal Finsider. Tira fuori due pistole ad acqua dalla bocca e spara sei colpi, alternando destra e sinistra. Alla fine, punta le due armi in un'unica direzione per il colpo finale, il più potente."
+  },
+  "EPalWazaID::Unique_TentacleTurtle_HydroSpin": {
+    "localized_name": "Giravolta d'acqua",
+    "description": "Abilità del Pal Turtacle. Usa la spinta propulsiva dei getti d'acqua per ruotare su se stesso a gran velocità e si lancia sul nemico."
+  },
   "EPalWazaID::Unique_ThunderBird_ThunderStorm": {
     "localized_name": "Tuffo folgorante",
     "description": "Abilità del Pal Beakon. Prima scaglia fulmini sul nemico, poi si plana in avanti su di esso, facendo piovere fulmini ai lati."
@@ -750,6 +818,10 @@
   "EPalWazaID::Unique_ThunderDragonMan_ThunderSwordAttack": {
     "localized_name": "Keraunos",
     "description": "Abilità del Pal Orserk. Si alza in volo per evocare una lancia di fulmini con cui colpisce il nemico."
+  },
+  "EPalWazaID::Unique_TropicalOstrich_DashKick": {
+    "localized_name": "Calcio con scatto",
+    "description": "Abilità del Pal Palumba. Scatta in avanti a gran velocità e cala sul nemico con un violento calcio volante."
   },
   "EPalWazaID::Unique_Umihebi_Fire_FireWindingTackle": {
     "localized_name": "Serpente di magma",
@@ -798,6 +870,54 @@
   "EPalWazaID::Unique_WingGolem_RoundCutter": {
     "localized_name": "Falce terrestre",
     "description": "Abilità del Pal Knocklem. Lancia con grande forza l'anello sulla sua schiena. L'anello colpisce seguendo una traiettoria circolare."
+  },
+  "EPalWazaID::Unique_YakushimaBoss001_Small_DemonEyeCharge": {
+    "localized_name": "Carica dell'occhio",
+    "description": "Abilità del Pal Occhio del Demone. Punta il nemico e si lancia alla carica. Si ferma se incontra ostacoli o pareti."
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Dark": {
+    "localized_name": "Schiacciamento melmoso (Oscurità)",
+    "description": "Abilità del Pal Slime viola. Salta contro il nemico per attaccarlo."
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Fire": {
+    "localized_name": "Schiacciamento melmoso (Fuoco)",
+    "description": "Abilità del Pal Slime rosso. Salta contro il nemico per attaccarlo."
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Leaf": {
+    "localized_name": "Schiacciamento melmoso (Erba)",
+    "description": "Abilità del Pal Slime verde. Salta contro il nemico per attaccarlo."
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Normal": {
+    "localized_name": "Schiacciamento melmoso (Non elementale)",
+    "description": "Abilità del Pal Slime illuminante. Salta contro il nemico per attaccarlo."
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Rainbow": {
+    "localized_name": "Schiacciamento melmoso (Arcobaleno)",
+    "description": "Abilità del Pal Slime arcobaleno. Salta contro il nemico per attaccarlo."
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Water": {
+    "localized_name": "Schiacciamento melmoso (Acqua)",
+    "description": "Abilità del Pal Slime blu. Salta contro il nemico per attaccarlo."
+  },
+  "EPalWazaID::Unique_YakushimaMonster002_SwordCharge": {
+    "localized_name": "Carica della spada",
+    "description": "Abilità del Pal Spada incantata. Punta il nemico e colpisce con un affondo."
+  },
+  "EPalWazaID::Unique_YakushimaMonster003_BatCharge": {
+    "localized_name": "Trappola del pipistrello",
+    "description": "Abilità del Pal Pipistrello della caverna. Attacca il nemico con tutto il suo corpo. Si ferma se incontra ostacoli o pareti."
+  },
+  "EPalWazaID::Unique_Yakushima_EyeTossin": {
+    "localized_name": "Assalto oculare",
+    "description": "Abilità del Pal Occhio di Cthulhu. Si lancia più volte contro il nemico."
+  },
+  "EPalWazaID::Unique_Yakushima_MouthTossin": {
+    "localized_name": "Carica ultraveloce",
+    "description": "Abilità del Pal Occhio di Cthulhu. Si lancia più volte contro il nemico a rotta di collo."
+  },
+  "EPalWazaID::Unique_Yakushima_SummonServant": {
+    "localized_name": "Evoca servitori",
+    "description": "Abilità del Pal Occhio di Cthulhu. Evoca quattro servitori, che si lanciano contro il nemico e lo danneggiano sbattendogli contro. Spariscono se colpiti o dopo un po' tempo."
   },
   "EPalWazaID::Unique_Yeti_Grass_GrassBall": {
     "localized_name": "Erba rotolante",

@@ -20,12 +20,12 @@
     "description": "Acessório que lhe confere a capacidade de correr duas vezes em pleno ar quando equipado."
   },
   "Accessory_AirDash3": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Botas de Corrida Aérea Tripla",
+    "description": "Acessório que lhe confere a capacidade de correr três vezes em pleno ar quando equipado."
   },
   "Accessory_AirDash4": {
     "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "description": "Acessório que lhe confere a capacidade de correr quatro vezes em pleno ar quando equipado."
   },
   "Accessory_AquaResist_1": {
     "localized_name": "Anel de Selo de Água",
@@ -259,6 +259,10 @@
     "localized_name": "Bolsa de Expansão Gigantesca",
     "description": "Bolsa gigantesca que permite carregar bagagem adicional. Com isto em mãos, são adicionados mais slots ao inventário."
   },
+  "AffectionFruit_01": {
+    "localized_name": "Fruta do Vínculo Precioso",
+    "description": "Fruto mágico que é raramente avistado. Dizem que, quando um Pal ingere esse fruto, ele passa a confiar mais nos humanos. Escolha bem para qual Pal vai oferecê-lo."
+  },
   "AncientParts2": {
     "localized_name": "Núcleo da Civilização Antiga",
     "description": "Núcleo da tecnologia perdida que existia na Antiguidade. Já quase não podem ser encontrados em Palpagos, mas contêm sabedoria esquecida."
@@ -403,6 +407,10 @@
     "localized_name": "Bife de Mammorest",
     "description": "Seu sabor nobre e encorpado reaviva memórias de bosques profundos e rios congelados a cada mordida."
   },
+  "BakedMeat_IceCrocodile": {
+    "localized_name": "Bife de Munchill",
+    "description": "Bife assado lentamente sobre a brasa. Possui um ótimo aroma e um interior suculento que parece se derreter sobre a língua. Esta iguaria se destaca também pela facilidade de armazenamento, pois contém propriedades especiais que evitam a perda do sabor."
+  },
   "BakedMeat_IceDeer": {
     "localized_name": "Assado de Reindrix",
     "description": "A carne de um veado de gelo se esfria subitamente ao ser retirada do fogo, preservando seu frescor. Iguaria excelente como alimento de emergência."
@@ -438,6 +446,10 @@
   "Bat2": {
     "localized_name": "Bastão",
     "description": "Bastão de beisebol que também pode ser usado para combate à curta distância. Os Pals são grandes demais para servirem de bola."
+  },
+  "BattleTicket": {
+    "localized_name": "Bilhete de Batalha",
+    "description": "Item obtido ao vencer o Coliseu sozinho. Junte vários para poder trocar por prêmios esplêndidos."
   },
   "BeamSword": {
     "localized_name": "Espada de Raio",
@@ -523,6 +535,26 @@
     "localized_name": "Esquema de Besta de Flechas de Veneno 4",
     "description": "Com isto em mãos, a receita de [BowGun Poison (Legendary)] é desbloqueada. Você pode fazê-la em [Factory Hard 01]."
   },
+  "Blueprint_CandleStand": {
+    "localized_name": "Esquema de Castiçal Solene",
+    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [<MapObjectName id=|CandleStand|/>]."
+  },
+  "Blueprint_ChargeLaserRifle_2": {
+    "localized_name": "Esquema de Fuzil de Carga 1",
+    "description": "Com isto em mãos, a receita de [Fuzil de Carga (Uncommon)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 04]."
+  },
+  "Blueprint_ChargeLaserRifle_3": {
+    "localized_name": "Esquema de Fuzil de Carga 2",
+    "description": "Com isto em mãos, a receita de [Fuzil de Carga (Rare)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 04]."
+  },
+  "Blueprint_ChargeLaserRifle_4": {
+    "localized_name": "Esquema de Fuzil de Carga 3",
+    "description": "Com isto em mãos, a receita de [Fuzil de Carga (Epic)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 04]."
+  },
+  "Blueprint_ChargeLaserRifle_5": {
+    "localized_name": "Esquema de Fuzil de Carga 4",
+    "description": "Com isto em mãos, a receita de [Fuzil de Carga (Legendary)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 04]."
+  },
   "Blueprint_ClothArmorCold_2": {
     "localized_name": "Esquema de Roupas de Povo Glacial 1",
     "description": "Com isto em mãos, é desbloqueada a receita de [ClothArmorCold 2 (Uncommon)], que você pode criar em [Bancada Primitiva]."
@@ -586,6 +618,14 @@
   "Blueprint_CompoundBow_5": {
     "localized_name": "Esquema de Arco Composto 4",
     "description": "Com isto em mãos, a receita de [Arco Composto (Legendary)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_ConservationGroupBannerA": {
+    "localized_name": "Esquema de Bandeira da Associação de Proteção aos Pals",
+    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [<MapObjectName id=|ConservationGroupBannerA|/>]."
+  },
+  "Blueprint_ConservationGroupBannerB": {
+    "localized_name": "Esquema de Faixa Horizontal da Associação de Proteção aos Pals",
+    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [<MapObjectName id=|ConservationGroupBannerB|/>]."
   },
   "Blueprint_CopperArmorCold_2": {
     "localized_name": "Esquema de Armadura de Metal Resistente a Frio 1",
@@ -682,6 +722,38 @@
   "Blueprint_EnergyRocketLauncher_5": {
     "localized_name": "Esquema de Canhão de Plasma 4",
     "description": "Com isto em mãos, a receita de [Canhão de Plasma (Legendary)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 03]."
+  },
+  "Blueprint_EnergyShotgun_2": {
+    "localized_name": "Esquema de Espingarda de Energia 1",
+    "description": "Com isto em mãos, a receita de [Espingarda de Energia (Uncommon)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 04]."
+  },
+  "Blueprint_EnergyShotgun_3": {
+    "localized_name": "Esquema de Espingarda de Energia 2",
+    "description": "Com isto em mãos, a receita de [Espingarda de Energia (Rare)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 04]."
+  },
+  "Blueprint_EnergyShotgun_4": {
+    "localized_name": "Esquema de Espingarda de Energia 3",
+    "description": "Com isto em mãos, a receita de [Espingarda de Energia (Epic)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 04]."
+  },
+  "Blueprint_EnergyShotgun_5": {
+    "localized_name": "Esquema de Espingarda de Energia 4",
+    "description": "Com isto em mãos, a receita de [Espingarda de Energia (Legendary)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 04]."
+  },
+  "Blueprint_FireStand": {
+    "localized_name": "Esquema de Castiçal para Cerimônias",
+    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [<MapObjectName id=|FireStand|/>]."
+  },
+  "Blueprint_FishingRod_01_2": {
+    "localized_name": "Esquema de Vara de Pesca Iniciante (Gumoss)",
+    "description": "Com isto em mãos, a receita de [FishingRod 01 2 (Common)] é desbloqueada. Você pode fazê-la em [Factory Hard 01]."
+  },
+  "Blueprint_FishingRod_02_2": {
+    "localized_name": "Esquema de Vara de Pesca Intermediária (Croajiro)",
+    "description": "Com isto em mãos, a receita de [FishingRod 02 2 (Uncommon)] é desbloqueada. Você pode fazê-la em [Factory Hard 02]."
+  },
+  "Blueprint_FishingRod_03_2": {
+    "localized_name": "Esquema de Vara de Pesca Avançada (Depresso)",
+    "description": "Com isto em mãos, a receita de [FishingRod 03 2 (Rare)] é desbloqueada. Você pode fazê-la em [Factory Hard 03]."
   },
   "Blueprint_FlameThrower_2": {
     "localized_name": "Esquema de Lança-Chamas 1",
@@ -794,6 +866,10 @@
   "Blueprint_GrenadeLauncher_5": {
     "localized_name": "Esquema de Lança-Granadas 4",
     "description": "Com isto em mãos, a receita de [Lança-Granadas (Legendary)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 03]."
+  },
+  "Blueprint_GuardianDogStatue": {
+    "localized_name": "Esquema de Estátua de Yakumo",
+    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [<MapObjectName id=|GuardianDogStatue|/>]."
   },
   "Blueprint_GuidedMissileLauncher_2": {
     "localized_name": "Esquema de Lança-Mísseis 1",
@@ -1267,6 +1343,10 @@
     "localized_name": "Esquema de Chapéu de Dazzi 1",
     "description": "Com isto em mãos, a receita de [Chapéu de Dazzi (Common)] é desbloqueada. Você pode fazê-la em [Bancada Primitiva]."
   },
+  "Blueprint_Hunter_GangFlag": {
+    "localized_name": "Esquema de Bandeira dos Caçadores Clandestinos",
+    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [<MapObjectName id=|Hunter GangFlag|/>]."
+  },
   "Blueprint_IronArmorCold_2": {
     "localized_name": "Esquema de Armadura de Metal Refinado Resistente a Frio 1",
     "description": "Com isto em mãos, é desbloqueada a receita de [IronArmorCold 2 (Uncommon)], que você pode criar em [Factory Hard 02]."
@@ -1331,6 +1411,10 @@
     "localized_name": "Esquema de Elmo de Metal Refinado 4",
     "description": "Com isto em mãos, é desbloqueada a receita de [IronHelmet 5 (Legendary)], que você pode criar em [Factory Hard 02]."
   },
+  "Blueprint_LanternTop": {
+    "localized_name": "Esquema de Lanterna de Papel Portátil",
+    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [<MapObjectName id=|LanternTop|/>]."
+  },
   "Blueprint_LaserGatlingGun_2": {
     "localized_name": "Esquema de Gatling Gun Laser 1",
     "description": "Com isto em mãos, a receita de [Gatling Gun Laser (Uncommon)] é desbloqueada. Você pode fazê-la em [Factory Hard 01]."
@@ -1378,6 +1462,14 @@
   "Blueprint_Launcher_Default_5": {
     "localized_name": "Esquema de Lança-Foguetes 4",
     "description": "Com isto em mãos, é desbloqueada a receita de [Launcher Default (Legendary)], que você pode criar em [WeaponFactory Dirty 03]."
+  },
+  "Blueprint_Launcher_Meteor_5": {
+    "localized_name": "Esquema de Lança-Meteoros 4",
+    "description": "Com isto em mãos, a receita de [Launcher Meteor (Legendary)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_LilyQueenStatue": {
+    "localized_name": "Esquema de Estátua de Lyleen",
+    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [<MapObjectName id=|LilyQueenStatue|/>]."
   },
   "Blueprint_MakeshiftAssaultRifle_2": {
     "localized_name": "Esquema de Fuzil de Assalto Desgastado 1",
@@ -1494,6 +1586,26 @@
   "Blueprint_OldRevolver_5": {
     "localized_name": "Esquema de Revólver Deteriorado 4",
     "description": "Com isto em mãos, a receita de [Revólver Deteriorado (Legendary)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_OverheatRifle_2": {
+    "localized_name": "Esquema de Fuzil de Superaquecimento 1",
+    "description": "Com isto em mãos, a receita de [Fuzil de Superaquecimento (Uncommon)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 04]."
+  },
+  "Blueprint_OverheatRifle_3": {
+    "localized_name": "Esquema de Fuzil de Superaquecimento 2",
+    "description": "Com isto em mãos, a receita de [Fuzil de Superaquecimento (Rare)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 04]."
+  },
+  "Blueprint_OverheatRifle_4": {
+    "localized_name": "Esquema de Fuzil de Superaquecimento 3",
+    "description": "Com isto em mãos, a receita de [Fuzil de Superaquecimento (Epic)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 04]."
+  },
+  "Blueprint_OverheatRifle_5": {
+    "localized_name": "Esquema de Fuzil de Superaquecimento 4",
+    "description": "Com isto em mãos, a receita de [Fuzil de Superaquecimento (Legendary)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 04]."
+  },
+  "Blueprint_PalSummon_YakushimaBoss002": {
+    "localized_name": "Esquema de Símbolo Sacro",
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [PalSummon YakushimaBoss002], que você pode criar em [Bancada Primitiva]."
   },
   "Blueprint_PlasticArmorCold_2": {
     "localized_name": "Esquema de Armadura de Plastiaço Resistente a Frio 1",
@@ -1687,6 +1799,14 @@
     "localized_name": "Esquema de Elmo de Exolita 4",
     "description": "Com isto em mãos, a receita de [Elmo de Exolita (Legendary)] é desbloqueada. Você pode fazê-la em [Factory Hard 03]."
   },
+  "Blueprint_SF_Chair": {
+    "localized_name": "Esquema de Cadeira de Laboratório",
+    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [<MapObjectName id=|SF Chair|/>]."
+  },
+  "Blueprint_SF_Desk": {
+    "localized_name": "Esquema de Escrivaninha de Laboratório",
+    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [<MapObjectName id=|SF Desk|/>]."
+  },
   "Blueprint_SemiAutoRifle_2": {
     "localized_name": "Esquema de Fuzil Semiautomático 1",
     "description": "Com isto em mãos, a receita de [Fuzil Semiautomático (Uncommon)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 02]."
@@ -1718,6 +1838,10 @@
   "Blueprint_SemiAutoShotgun_5": {
     "localized_name": "Esquema de Espingarda Semiautomática 4",
     "description": "Com isto em mãos, a receita de [Espingarda Semiautomática (Legendary)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 03]."
+  },
+  "Blueprint_Shrine_Lantern": {
+    "localized_name": "Esquema de Lanterna de Santuário",
+    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [<MapObjectName id=|Shrine Lantern|/>]."
   },
   "Blueprint_SingleShotRifle_2": {
     "localized_name": "Esquema de Fuzil de Tiro Único 1",
@@ -1815,6 +1939,10 @@
     "localized_name": "Esquema de Submetralhadora 4",
     "description": "Com isto em mãos, a receita de [Submetralhadora (Legendary)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 02]."
   },
+  "Blueprint_WallTorch02": {
+    "localized_name": "Esquema de Tocha de Parede Solene",
+    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [<MapObjectName id=|WallTorch02|/>]."
+  },
   "Blueprint_WeakerBow_2": {
     "localized_name": "Esquema de Arco Deteriorado 1",
     "description": "Com isto em mãos, é desbloqueada a receita de [Arco Deteriorado (Uncommon)], que você pode criar em [Bancada Primitiva]."
@@ -1830,6 +1958,214 @@
   "Blueprint_WeakerBow_5": {
     "localized_name": "Esquema de Arco Deteriorado 4",
     "description": "Com isto em mãos, é desbloqueada a receita de [Arco Deteriorado (Legendary)], que você pode criar em [Bancada Primitiva]."
+  },
+  "Blueprint_Wire_Fence": {
+    "localized_name": "Esquema de Cerca de Arame",
+    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [<MapObjectName id=|Wire Fence|/>]."
+  },
+  "Blueprint_WoodenBarricade": {
+    "localized_name": "Esquema de Barricada de Madeira",
+    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [<MapObjectName id=|WoodenBarricade|/>]."
+  },
+  "Blueprint_YakushimaArmor001": {
+    "localized_name": "Esquema de Armadura Sagrada",
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [PalSummon YakushimaArmor001], que você pode criar em [Factory Hard 02]."
+  },
+  "Blueprint_YakushimaArmor001_2": {
+    "localized_name": "Esquema de Armadura Sagrada 1",
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Armadura de Placas Consagradas (Uncommon)], que você pode criar em [Factory Hard 02]."
+  },
+  "Blueprint_YakushimaArmor001_3": {
+    "localized_name": "Esquema de Armadura Sagrada 2",
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Armadura de Placas Consagradas (Rare)], que você pode criar em [Factory Hard 02]."
+  },
+  "Blueprint_YakushimaArmor001_4": {
+    "localized_name": "Esquema de Armadura Sagrada 3",
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Armadura de Placas Consagradas (Epic)], que você pode criar em [Factory Hard 02]."
+  },
+  "Blueprint_YakushimaArmor001_5": {
+    "localized_name": "Esquema de Armadura Sagrada 4",
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Armadura de Placas Consagradas (Legendary)], que você pode criar em [Factory Hard 02]."
+  },
+  "Blueprint_YakushimaBlade002": {
+    "localized_name": "Esquema de Lâmina da Terra",
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Lâmina da Terra], que você pode criar em [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_YakushimaBlade002_2": {
+    "localized_name": "Esquema de Lâmina da Terra 1",
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Lâmina da Terra (Uncommon)], que você pode criar em [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_YakushimaBlade002_3": {
+    "localized_name": "Esquema de Lâmina da Terra 2",
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Lâmina da Terra (Rare)], que você pode criar em [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_YakushimaBlade002_4": {
+    "localized_name": "Esquema de Lâmina da Terra 3",
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Lâmina da Terra (Epic)], que você pode criar em [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_YakushimaBlade002_5": {
+    "localized_name": "Esquema de Lâmina da Terra 4",
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Lâmina da Terra (Legendary)], que você pode criar em [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_YakushimaBlade003": {
+    "localized_name": "Esquema de Terraprisma",
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Terraprisma], que você pode criar em [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_YakushimaBlade003_2": {
+    "localized_name": "Esquema de Terraprisma 1",
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Terraprisma (Uncommon)], que você pode criar em [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_YakushimaBlade003_3": {
+    "localized_name": "Esquema de Terraprisma 2",
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Terraprisma (Rare)], que você pode criar em [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_YakushimaBlade003_4": {
+    "localized_name": "Esquema de Terraprisma 3",
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Terraprisma (Epic)], que você pode criar em [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_YakushimaBlade003_5": {
+    "localized_name": "Esquema de Terraprisma 4",
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Terraprisma (Legendary)], que você pode criar em [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_YakushimaBlade004": {
+    "localized_name": "Esquema de Excalibur",
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Excalibur], que você pode criar em [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_YakushimaBlade004_2": {
+    "localized_name": "Esquema de Excalibur 1",
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Excalibur (Uncommon)], que você pode criar em [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_YakushimaBlade004_3": {
+    "localized_name": "Esquema de Excalibur 2",
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Excalibur (Rare)], que você pode criar em [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_YakushimaBlade004_4": {
+    "localized_name": "Esquema de Excalibur 3",
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Excalibur (Epic)], que você pode criar em [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_YakushimaBlade004_5": {
+    "localized_name": "Esquema de Excalibur 4",
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Excalibur (Legendary)], que você pode criar em [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_YakushimaGun001": {
+    "localized_name": "Esquema de Espingarda do Vórtice",
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Espingarda do Vórtice], que você pode criar em [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_YakushimaGun001_2": {
+    "localized_name": "Esquema de Espingarda do Vórtice 1",
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Espingarda do Vórtice (Uncommon)], que você pode criar em [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_YakushimaGun001_3": {
+    "localized_name": "Esquema de Espingarda do Vórtice 2",
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Espingarda do Vórtice (Rare)], que você pode criar em [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_YakushimaGun001_4": {
+    "localized_name": "Esquema de Espingarda do Vórtice 3",
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Espingarda do Vórtice (Epic)], que você pode criar em [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_YakushimaGun001_5": {
+    "localized_name": "Esquema de Espingarda do Vórtice 4",
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Espingarda do Vórtice (Legendary)], que você pode criar em [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_YakushimaHeadEquip001": {
+    "localized_name": "Esquema de Máscara Sagrada",
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [PalSummon YakushimaHeadEquip001], que você pode criar em [Factory Hard 02]."
+  },
+  "Blueprint_YakushimaHeadEquip001_2": {
+    "localized_name": "Esquema de Máscara Sagrada 1",
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Máscara Consagrada (Uncommon)], que você pode criar em [Factory Hard 02]."
+  },
+  "Blueprint_YakushimaHeadEquip001_3": {
+    "localized_name": "Esquema de Máscara Sagrada 2",
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Máscara Consagrada (Rare)], que você pode criar em [Factory Hard 02]."
+  },
+  "Blueprint_YakushimaHeadEquip001_4": {
+    "localized_name": "Esquema de Máscara Sagrada 3",
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Máscara Consagrada (Epic)], que você pode criar em [Factory Hard 02]."
+  },
+  "Blueprint_YakushimaHeadEquip001_5": {
+    "localized_name": "Esquema de Máscara Sagrada 4",
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Máscara Consagrada (Legendary)], que você pode criar em [Factory Hard 02]."
+  },
+  "Blueprint_YakushimaHeadEquip002": {
+    "localized_name": "Esquema de Acessório para Cabeça Sagrado",
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [PalSummon YakushimaHeadEquip002], que você pode criar em [Factory Hard 02]."
+  },
+  "Blueprint_YakushimaHeadEquip002_2": {
+    "localized_name": "Esquema de Acessório para Cabeça Sagrado 1",
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Capacete Consagrado (Uncommon)], que você pode criar em [Factory Hard 02]."
+  },
+  "Blueprint_YakushimaHeadEquip002_3": {
+    "localized_name": "Esquema de Acessório para Cabeça Sagrado 2",
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Capacete Consagrado (Rare)], que você pode criar em [Factory Hard 02]."
+  },
+  "Blueprint_YakushimaHeadEquip002_4": {
+    "localized_name": "Esquema de Acessório para Cabeça Sagrado 3",
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Capacete Consagrado (Epic)], que você pode criar em [Factory Hard 02]."
+  },
+  "Blueprint_YakushimaHeadEquip002_5": {
+    "localized_name": "Esquema de Acessório para Cabeça Sagrado 4",
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Capacete Consagrado (Legendary)], que você pode criar em [Factory Hard 02]."
+  },
+  "Blueprint_YakushimaHeadEquip003": {
+    "localized_name": "Esquema de Elmo Sagrado",
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [PalSummon YakushimaHeadEquip003], que você pode criar em [Factory Hard 02]."
+  },
+  "Blueprint_YakushimaHeadEquip003_2": {
+    "localized_name": "Esquema de Elmo Sagrado 1",
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Elmo Consagrado (Uncommon)], que você pode criar em [Factory Hard 02]."
+  },
+  "Blueprint_YakushimaHeadEquip003_3": {
+    "localized_name": "Esquema de Elmo Sagrado 2",
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Elmo Consagrado (Rare)], que você pode criar em [Factory Hard 02]."
+  },
+  "Blueprint_YakushimaHeadEquip003_4": {
+    "localized_name": "Esquema de Elmo Sagrado 3",
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Elmo Consagrado (Epic)], que você pode criar em [Factory Hard 02]."
+  },
+  "Blueprint_YakushimaHeadEquip003_5": {
+    "localized_name": "Esquema de Elmo Sagrado 4",
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Elmo Consagrado (Legendary)], que você pode criar em [Factory Hard 02]."
+  },
+  "Blueprint_YakushimaHeadEquip004": {
+    "localized_name": "Esquema de Capuz Sagrado",
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [PalSummon YakushimaHeadEquip004], que você pode criar em [Factory Hard 02]."
+  },
+  "Blueprint_YakushimaHeadEquip004_2": {
+    "localized_name": "Esquema de Capuz Sagrado 1",
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Capuz Consagrado (Uncommon)], que você pode criar em [Factory Hard 02]."
+  },
+  "Blueprint_YakushimaHeadEquip004_3": {
+    "localized_name": "Esquema de Capuz Sagrado 2",
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Capuz Consagrado (Rare)], que você pode criar em [Factory Hard 02]."
+  },
+  "Blueprint_YakushimaHeadEquip004_4": {
+    "localized_name": "Esquema de Capuz Sagrado 3",
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Capuz Consagrado (Epic)], que você pode criar em [Factory Hard 02]."
+  },
+  "Blueprint_YakushimaHeadEquip004_5": {
+    "localized_name": "Esquema de Capuz Sagrado 4",
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Capuz Consagrado (Legendary)], que você pode criar em [Factory Hard 02]."
+  },
+  "Blueprint_YakushimaLantern001": {
+    "localized_name": "Esquema de Brilho Noturno",
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Brilho Noturno], que você pode criar em [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_YakushimaLantern001_2": {
+    "localized_name": "Esquema de Brilho Noturno 1",
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Brilho Noturno (Uncommon)], que você pode criar em [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_YakushimaLantern001_3": {
+    "localized_name": "Esquema de Brilho Noturno 2",
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Brilho Noturno (Rare)], que você pode criar em [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_YakushimaLantern001_4": {
+    "localized_name": "Esquema de Brilho Noturno 3",
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Brilho Noturno (Epic)], que você pode criar em [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_YakushimaLantern001_5": {
+    "localized_name": "Esquema de Brilho Noturno 4",
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Brilho Noturno (Legendary)], que você pode criar em [WeaponFactory Dirty 02]."
   },
   "Bone": {
     "localized_name": "Osso",
@@ -1959,6 +2295,14 @@
     "localized_name": "Prova de Eliminação de Frostallion Noct",
     "description": "Prova de haver eliminado |Frostallion Noct: Lendário Cavalo do Céu Negro|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
+  "BossDefeatReward_IceNarwhal": {
+    "localized_name": "Prova de Eliminação de Whalaska",
+    "description": "Prova de haver eliminado |Whalaska: Amável Lança de Gelo|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+  },
+  "BossDefeatReward_IceNarwhal_Fire": {
+    "localized_name": "Prova de Eliminação de Whalaska Ignis",
+    "description": "Prova de haver eliminado |Whalaska Ignis: Amável Lança Carmesim|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+  },
   "BossDefeatReward_JetDragon": {
     "localized_name": "Prova de Eliminação de Jetragon",
     "description": "Prova de haver eliminado |Jetragon: Lendário Dragão do Meteoro|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
@@ -2022,6 +2366,10 @@
   "BossDefeatReward_PlantSlime": {
     "localized_name": "Prova de Eliminação de Gumoss",
     "description": "Prova de haver eliminado |Gumoss: Mutação Espontânea|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+  },
+  "BossDefeatReward_PoseidonOrca": {
+    "localized_name": "Prova de Eliminação de Neptilius",
+    "description": "Prova de haver eliminado |Neptilius: Lendária Besta Marinha|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_PurpleSpider": {
     "localized_name": "Prova de Eliminação de Tarantriss",
@@ -2216,24 +2564,28 @@
     "description": "Carvão Vegetal capaz de queimar Madeira. Pode ser combinado com Enxofre para produzir Pólvora."
   },
   "ChargeLaserRifle": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Fuzil de Carga",
+    "description": "Fuzil de raios elétricos carregados feito com tecnologia avançada. Carrega energia para disparar um tiro de alta potência."
+  },
+  "ChargeLaserRifleBullet": {
+    "localized_name": "Bala de Fuzil de Carga",
+    "description": "Projétil usado com Fuzil de Carga e armas similares."
   },
   "ChargeLaserRifle_2": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Fuzil de Carga",
+    "description": "Fuzil de raios elétricos carregados feito com tecnologia avançada. Carrega energia para disparar um tiro de alta potência."
   },
   "ChargeLaserRifle_3": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Fuzil de Carga",
+    "description": "Fuzil de raios elétricos carregados feito com tecnologia avançada. Carrega energia para disparar um tiro de alta potência."
   },
   "ChargeLaserRifle_4": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Fuzil de Carga",
+    "description": "Fuzil de raios elétricos carregados feito com tecnologia avançada. Carrega energia para disparar um tiro de alta potência."
   },
   "ChargeLaserRifle_5": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Fuzil de Carga",
+    "description": "Fuzil de raios elétricos carregados feito com tecnologia avançada. Carrega energia para disparar um tiro de alta potência."
   },
   "CheeseBurger": {
     "localized_name": "X-búrguer",
@@ -2555,6 +2907,10 @@
     "localized_name": "Panaceia de Viço",
     "description": "Remédio extremamente valioso que aumenta o atributo [PV] de forma permanente. Não surte efeito quando tomado por um Pal."
   },
+  "Elixir_hp_Yakushima": {
+    "localized_name": "Cristal da Vida",
+    "description": "[Colaboração com Terraria] Utilize para aumentar um pouco o PV de forma permanente. Não surte efeito quando usado num Pal ou se o atributo já estiver no valor máximo."
+  },
   "Elixir_stamina_01": {
     "localized_name": "Elixir de Vigor",
     "description": "Remédio extremamente valioso que aumenta um pouco o atributo [Fôlego] de forma permanente. Não surte efeito quando tomado por um Pal."
@@ -2604,24 +2960,28 @@
     "description": "Dispara um projétil de energia com potência elevada. Causa uma explosão de energia ao atingir o alvo."
   },
   "EnergyShotgun": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Espingarda de Energia",
+    "description": "Espingarda que dispara projéteis de energia. Com excelente cadência de tiro, seu poder de fogo à curta distância é de outro mundo."
+  },
+  "EnergyShotgunBullet": {
+    "localized_name": "Cartucho de Espingarda de Energia",
+    "description": "Projétil usado com Espingarda de Energia e armas similares."
   },
   "EnergyShotgun_2": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Espingarda de Energia",
+    "description": "Espingarda que dispara projéteis de energia. Com excelente cadência de tiro, seu poder de fogo à curta distância é de outro mundo."
   },
   "EnergyShotgun_3": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Espingarda de Energia",
+    "description": "Espingarda que dispara projéteis de energia. Com excelente cadência de tiro, seu poder de fogo à curta distância é de outro mundo."
   },
   "EnergyShotgun_4": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Espingarda de Energia",
+    "description": "Espingarda que dispara projéteis de energia. Com excelente cadência de tiro, seu poder de fogo à curta distância é de outro mundo."
   },
   "EnergyShotgun_5": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Espingarda de Energia",
+    "description": "Espingarda que dispara projéteis de energia. Com excelente cadência de tiro, seu poder de fogo à curta distância é de outro mundo."
   },
   "ExpBoost_01": {
     "localized_name": "Livro de Prática (P)",
@@ -2658,6 +3018,66 @@
   "FireOrgan": {
     "localized_name": "Órgão de Ignição",
     "description": "Material obtido de um Pal de Fogo. Pode ser usado para fazer Arrow Fire."
+  },
+  "FishingBait_1": {
+    "localized_name": "Isca Simples",
+    "description": "Isca simples para atrair Pals. É necessária para a pesca."
+  },
+  "FishingBait_1_A": {
+    "localized_name": "Isca para Iniciantes",
+    "description": "Isca para atrair Pals. Melhor que FishingBait 1, atenua a redução do medidor de captura do minijogo."
+  },
+  "FishingBait_1_B": {
+    "localized_name": "Isca Doce",
+    "description": "Isca para atrair Pals. Melhor que FishingBait 1, engana os Pals com mais facilidade."
+  },
+  "FishingBait_2": {
+    "localized_name": "Isca Requintada",
+    "description": "Isca para atrair Pals. Esta versão melhorada faz com que os Pals mordam a isca com mais frequência."
+  },
+  "FishingBait_2_A": {
+    "localized_name": "Isca Sortuda",
+    "description": "Isca para atrair Pals. Melhor que FishingBait 2, aumenta a quantidade de itens obtidos na pesca."
+  },
+  "FishingBait_2_B": {
+    "localized_name": "Isca Ligeira",
+    "description": "Isca para atrair Pals. Melhor que FishingBait 2, engana os Pals com mais facilidade."
+  },
+  "FishingBait_3": {
+    "localized_name": "Isca Extravagante",
+    "description": "Isca de luxo para atrair Pals. Esta versão melhorada aumenta um pouco a barra durante o minijogo."
+  },
+  "FishingBait_3_A": {
+    "localized_name": "Isca Sedutora",
+    "description": "Isca para atrair Pals. Esta versão melhorada aumenta a barra durante o minijogo e também a quantidade de itens obtidos da pesca."
+  },
+  "FishingBait_3_B": {
+    "localized_name": "Isca Arriscada",
+    "description": "Isca para atrair Pals. Remodelada a partir de FishingBait 3, foi feita para aqueles que gostam de um desafio. Embora diminua a barra durante o minijogo mais que FishingBait 3, aumenta bastante a quantidade de itens obtidos na pesca."
+  },
+  "FishingRod_01_1": {
+    "localized_name": "Vara Iniciante (Chillet)",
+    "description": "Vara de pesca para pegar Pals. Se tiver iscas, você pode pescar usando a vara em corpos d’água com silhuetas submersas. Feita para iniciantes, é adequada para a pesca de Pals de nível baixo."
+  },
+  "FishingRod_01_2": {
+    "localized_name": "Vara Iniciante (Gumoss)",
+    "description": "Vara de pesca para pegar Pals. É mais resistente e apresenta funcionalidade um pouco melhor que a FishingRod 01 1. Feita para iniciantes, é adequada para a pesca de Pals de nível baixo."
+  },
+  "FishingRod_02_1": {
+    "localized_name": "Vara Intermediária (Cattiva)",
+    "description": "Vara de pesca para pegar Pals. Se tiver iscas, você pode pescar usando a vara em corpos d’água com silhuetas submersas. Com funcionalidade ainda melhor, torna a pesca um pouco mais fácil."
+  },
+  "FishingRod_02_2": {
+    "localized_name": "Vara Intermediária (Croajiro)",
+    "description": "Vara de pesca para pegar Pals. É mais resistente e apresenta funcionalidade um pouco melhor que a FishingRod 02 1."
+  },
+  "FishingRod_03_1": {
+    "localized_name": "Vara Avançada (Pengullet)",
+    "description": "Vara de pesca para pegar Pals. Se tiver iscas, você pode pescar usando a vara em corpos d’água com silhuetas submersas. Com funcionalidade ainda melhor, torna a pesca bem mais fácil."
+  },
+  "FishingRod_03_2": {
+    "localized_name": "Vara Avançada (Depresso)",
+    "description": "Vara de pesca para pegar Pals. É mais resistente e apresenta funcionalidade um pouco melhor que a FishingRod 03 1."
   },
   "FishingRod_Good": {
     "localized_name": "pt-BR Text",
@@ -2952,8 +3372,8 @@
     "description": "Arpéu que permite movimento em alta velocidade. Dispare o gancho na direção de destino para puxar seu corpo até lá. Graças a muitas pesquisas, foi possível garantir uma mobilidade estarrecedora."
   },
   "GrapplingGun5": {
-    "localized_name": "Arpéu",
-    "description": "Arpéu que permite movimento em alta velocidade. Dispare o gancho na direção de destino para puxar seu corpo até lá. Com ele você pode deslocar-se facilmente inclusive entre alturas diferentes."
+    "localized_name": "Arpéu Ultra",
+    "description": "Arpéu que permite movimento em alta velocidade. Dispare o gancho na direção de destino para puxar seu corpo até lá. Utilizando novos materiais, foi possível reduzir o tempo para dissipação do calor."
   },
   "Gratin": {
     "localized_name": "Gratinado",
@@ -3537,7 +3957,7 @@
   },
   "Herbs": {
     "localized_name": "Remédio Inferior",
-    "description": "Remédio Inferior ótimas para resfriados e torções. Não recuperam PV ao serem ingeridas."
+    "description": "IndigestãoÓtimasRemédio Inferior para Gripe e Distensão. Não recuperam PV ao serem ingeridas."
   },
   "Homeward": {
     "localized_name": "Nuvens de Trovão do Regresso",
@@ -3667,13 +4087,25 @@
     "localized_name": "Pão com Geleia",
     "description": "Prato que consiste em Pão com geleia. A doçura das frutinhas combina muito bem com um pão."
   },
+  "JellyfishFairy_jelly": {
+    "localized_name": "Gelatina Atordoante de Jelliette",
+    "description": "Sobremesa fantástica que utiliza Meat JellyfishFairy e Fluido de Pal. Quando ingerida, aumenta um pouco a experiência obtida e confere Ataque +10% por tempo limitado."
+  },
+  "JellyfishGhost_jelly": {
+    "localized_name": "Gelatina Vacilante de Jellroy",
+    "description": "Sobremesa fantástica que utiliza Meat JellyfishGhost e Frutinha Vermelha. Quando ingerida, aumenta um pouco a experiência obtida e confere Defesa +10% por tempo limitado."
+  },
   "Katana": {
     "localized_name": "Katana",
     "description": "Katana para combate à curta distância. Seu gume afiado permite fatiar o alvo com um só golpe."
   },
   "Lantern": {
     "localized_name": "Lampião de Cintura",
-    "description": "Lampião preso à cintura. Acende sozinho ao anoitecer. Um só já basta para iluminar o ambiente."
+    "description": "Lampião preso à cintura. Acende sozinho ao anoitecer. É possível alterar o modo de iluminação para que permaneça sempre aceso. Um só já basta para iluminar o ambiente."
+  },
+  "Lantern_High": {
+    "localized_name": "Lampião de Cintura Melhorado",
+    "description": "Lampião preso à cintura para iluminar uma grande área. Acende sozinho ao anoitecer. É possível alterar o modo de iluminação para que permaneça sempre aceso. Um só já basta para iluminar o ambiente."
   },
   "LaserBullet": {
     "localized_name": "Cartucho de Energia",
@@ -3919,6 +4351,14 @@
     "localized_name": "Submetralhadora Desgastada",
     "description": "Submetralhadora feita artesanalmente usando sucata. Apesar de possuir cadência de tiro superior, a potência de cada disparo é reduzida."
   },
+  "ManganeseIngot": {
+    "localized_name": "Lingote de Marganês",
+    "description": "Liga feita de Minério de Marganês, Lingote de Metal e Carvão Mineral. Com elevada resistência a energia, serve de material para armas."
+  },
+  "ManganeseOre": {
+    "localized_name": "Minério de Marganês",
+    "description": "Minério raro que se forma após um longo tempo no fundo do mar. Pode ser içado das profundezas utilizando uma vara de pesca com um ímã."
+  },
   "MarinatedMushrooms": {
     "localized_name": "Cogumelos Marinados",
     "description": "Prato criado marinando um Cogumelo. Quando ingerido, confere Defesa +10% por tempo limitado."
@@ -3975,9 +4415,21 @@
     "localized_name": "Carne colossal de Mammorest",
     "description": "Carne de Mammorest. É caracterizada por sua presença imponente e sabor marcante. Seu volume impressionante consegue satisfazer até os mais comilões."
   },
+  "Meat_IceCrocodile": {
+    "localized_name": "Carne de Munchill",
+    "description": "Carne de Munchill. Com uma textura firme, seu sabor carregado vai se espalhando pela boca a cada mordida."
+  },
   "Meat_IceDeer": {
     "localized_name": "Carne de Reindrix",
     "description": "Carne de Reindrix. Carne de veado fantástica que mantém sempre uma baixa temperatura. É quase impossível de apodrecer."
+  },
+  "Meat_JellyfishFairy": {
+    "localized_name": "Corpo de Jelliette",
+    "description": "Corpo de Jelliette. Com uma textura crocante incomparável que é capaz de deixar qualquer um obcecado, este é um alimento repleto das dádivas do oceano."
+  },
+  "Meat_JellyfishGhost": {
+    "localized_name": "Corpo de Jellroy",
+    "description": "Corpo de Jellroy. Com uma textura flexível incomparável que é capaz de deixar qualquer um obcecado, este é um alimento repleto das dádivas do oceano."
   },
   "Meat_Kelpie": {
     "localized_name": "Carne de Kelpsea",
@@ -3986,6 +4438,10 @@
   "Meat_LazyCatfish": {
     "localized_name": "Carne de Dumud",
     "description": "Carne de Dumud. A gordura lhe confere um sabor rico e encorpado. Atraente por sua textura suave."
+  },
+  "Meat_OctopusGirl": {
+    "localized_name": "Tentáculo de Gloopie",
+    "description": "Tentáculo de Gloopie. É caracterizado por sua textura flexível e seu requintado sabor suave."
   },
   "Meat_SakuraSaurus": {
     "localized_name": "Carne dinossáurica de Broncherry",
@@ -4099,6 +4555,10 @@
     "localized_name": "pt-BR Text",
     "description": "pt-BR Text"
   },
+  "OctopusGirl_Takoyaki": {
+    "localized_name": "Takoyaki de Gloopie",
+    "description": "Prato preparado assando bolas de massa de Farinha de Trigo com recheio de Meat OctopusGirl. Quando ingerido, aumenta um pouco a experiência obtida por tempo limitado."
+  },
   "OldRevolver": {
     "localized_name": "Revólver Deteriorado",
     "description": "Pequena arma de fogo com tambor e um pouco deteriorada. Supera a Handgun default em potência com cada tiro."
@@ -4135,25 +4595,173 @@
     "localized_name": "Suco Suspeito",
     "description": "Suco que dá uma boa sensação. Quando bebido, aumenta um pouco a velocidade de trabalho por tempo limitado, embora também faça cair um pouco a SAN."
   },
+  "Otomo_Attack_up1": {
+    "localized_name": "Apito do Apoio de Ataque",
+    "description": "Acessório que aumenta apenas um pouco o poder de ataque de Pals lutando ao seu lado."
+  },
+  "Otomo_Attack_up2": {
+    "localized_name": "Apito do Apoio de Ataque +1",
+    "description": "Acessório que aumenta o poder de ataque de Pals lutando ao seu lado."
+  },
+  "Otomo_Attack_up3": {
+    "localized_name": "Apito do Apoio de Ataque +2",
+    "description": "Acessório que aumenta bastante o poder de ataque de Pals lutando ao seu lado."
+  },
+  "Otomo_Defense_up1": {
+    "localized_name": "Apito do Apoio de Defesa",
+    "description": "Acessório que aumenta apenas um pouco a defesa de Pals lutando ao seu lado."
+  },
+  "Otomo_Defense_up2": {
+    "localized_name": "Apito do Apoio de Defesa +1",
+    "description": "Acessório que aumenta a defesa de Pals lutando ao seu lado."
+  },
+  "Otomo_Defense_up3": {
+    "localized_name": "Apito do Apoio de Defesa +2",
+    "description": "Acessório que aumenta bastante a defesa de Pals lutando ao seu lado."
+  },
+  "Otomo_ElementBoost_Dark_1": {
+    "localized_name": "Apito do Apoio de Escuridão",
+    "description": "Acessório que fortalece ligeiramente o dano de escuridão de Pals lutando ao seu lado."
+  },
+  "Otomo_ElementBoost_Dark_2": {
+    "localized_name": "Apito do Apoio de Escuridão +1",
+    "description": "Acessório que fortalece o dano de escuridão de Pals lutando ao seu lado."
+  },
+  "Otomo_ElementBoost_Dark_3": {
+    "localized_name": "Apito do Apoio de Escuridão +2",
+    "description": "Acessório que fortalece bastante o dano de escuridão de Pals lutando ao seu lado."
+  },
+  "Otomo_ElementBoost_Dragon_1": {
+    "localized_name": "Apito do Apoio Dracônico",
+    "description": "Acessório que fortalece ligeiramente o dano dracônico de Pals lutando ao seu lado."
+  },
+  "Otomo_ElementBoost_Dragon_2": {
+    "localized_name": "Apito do Apoio Dracônico +1",
+    "description": "Acessório que fortalece o dano dracônico de Pals lutando ao seu lado."
+  },
+  "Otomo_ElementBoost_Dragon_3": {
+    "localized_name": "Apito do Apoio Dracônico +2",
+    "description": "Acessório que fortalece bastante o dano dracônico de Pals lutando ao seu lado."
+  },
+  "Otomo_ElementBoost_Earth_1": {
+    "localized_name": "Apito do Apoio de Terra",
+    "description": "Acessório que fortalece ligeiramente o dano de terra de Pals lutando ao seu lado."
+  },
+  "Otomo_ElementBoost_Earth_2": {
+    "localized_name": "Apito do Apoio de Terra +1",
+    "description": "Acessório que fortalece o dano de terra de Pals lutando ao seu lado."
+  },
+  "Otomo_ElementBoost_Earth_3": {
+    "localized_name": "Apito do Apoio de Terra +2",
+    "description": "Acessório que fortalece bastante o dano de terra de Pals lutando ao seu lado."
+  },
+  "Otomo_ElementBoost_Electricity_1": {
+    "localized_name": "Apito do Apoio Elétrico",
+    "description": "Acessório que fortalece ligeiramente o dano elétrico de Pals lutando ao seu lado."
+  },
+  "Otomo_ElementBoost_Electricity_2": {
+    "localized_name": "Apito do Apoio Elétrico +1",
+    "description": "Acessório que fortalece o dano elétrico de Pals lutando ao seu lado."
+  },
+  "Otomo_ElementBoost_Electricity_3": {
+    "localized_name": "Apito do Apoio Elétrico +2",
+    "description": "Acessório que fortalece bastante o dano elétrico de Pals lutando ao seu lado."
+  },
+  "Otomo_ElementBoost_Fire_1": {
+    "localized_name": "Apito do Apoio de Fogo",
+    "description": "Acessório que fortalece ligeiramente o dano de fogo de Pals lutando ao seu lado."
+  },
+  "Otomo_ElementBoost_Fire_2": {
+    "localized_name": "Apito do Apoio de Fogo +1",
+    "description": "Acessório que fortalece o dano de fogo de Pals lutando ao seu lado."
+  },
+  "Otomo_ElementBoost_Fire_3": {
+    "localized_name": "Apito do Apoio de Fogo +2",
+    "description": "Acessório que fortalece bastante o dano de fogo de Pals lutando ao seu lado."
+  },
+  "Otomo_ElementBoost_Ice_1": {
+    "localized_name": "Apito do Apoio de Gelo",
+    "description": "Acessório que fortalece ligeiramente o dano de gelo de Pals lutando ao seu lado."
+  },
+  "Otomo_ElementBoost_Ice_2": {
+    "localized_name": "Apito do Apoio de Gelo +1",
+    "description": "Acessório que fortalece o dano de gelo de Pals lutando ao seu lado."
+  },
+  "Otomo_ElementBoost_Ice_3": {
+    "localized_name": "Apito do Apoio de Gelo +2",
+    "description": "Acessório que fortalece bastante o dano de gelo de Pals lutando ao seu lado."
+  },
+  "Otomo_ElementBoost_Leaf_1": {
+    "localized_name": "Apito do Apoio de Grama",
+    "description": "Acessório que fortalece ligeiramente o dano de grama de Pals lutando ao seu lado."
+  },
+  "Otomo_ElementBoost_Leaf_2": {
+    "localized_name": "Apito do Apoio de Grama +1",
+    "description": "Acessório que fortalece o dano de grama de Pals lutando ao seu lado."
+  },
+  "Otomo_ElementBoost_Leaf_3": {
+    "localized_name": "Apito do Apoio de Grama +2",
+    "description": "Acessório que fortalece bastante o dano de grama de Pals lutando ao seu lado."
+  },
+  "Otomo_ElementBoost_Normal_1": {
+    "localized_name": "Apito do Apoio Não Elemental",
+    "description": "Acessório que fortalece ligeiramente o dano não elemental de Pals lutando ao seu lado."
+  },
+  "Otomo_ElementBoost_Normal_2": {
+    "localized_name": "Apito do Apoio Não Elemental +1",
+    "description": "Acessório que fortalece o dano não elemental de Pals lutando ao seu lado."
+  },
+  "Otomo_ElementBoost_Normal_3": {
+    "localized_name": "Apito do Apoio Não Elemental +2",
+    "description": "Acessório que fortalece bastante o dano não elemental de Pals lutando ao seu lado."
+  },
+  "Otomo_ElementBoost_Water_1": {
+    "localized_name": "Apito do Apoio de Água",
+    "description": "Acessório que fortalece ligeiramente o dano de água de Pals lutando ao seu lado."
+  },
+  "Otomo_ElementBoost_Water_2": {
+    "localized_name": "Apito do Apoio de Água +1",
+    "description": "Acessório que fortalece o dano de água de Pals lutando ao seu lado."
+  },
+  "Otomo_ElementBoost_Water_3": {
+    "localized_name": "Apito do Apoio de Água +2",
+    "description": "Acessório que fortalece bastante o dano de água de Pals lutando ao seu lado."
+  },
+  "Otomo_PalExp_Increase_1": {
+    "localized_name": "Sino de Promoção de Crescimento",
+    "description": "Acessório que aumenta ligeiramente a experiência obtida pelos Pals."
+  },
+  "Otomo_PalExp_Increase_2": {
+    "localized_name": "Sino de Promoção de Crescimento +1",
+    "description": "Acessório que aumenta a experiência obtida pelos Pals."
+  },
+  "Otomo_PalExp_Increase_3": {
+    "localized_name": "Sino de Promoção de Crescimento +2",
+    "description": "Acessório que aumenta bastante a experiência obtida pelos Pals."
+  },
   "OverheatRifle": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Fuzil de Superaquecimento",
+    "description": "Fuzil de assalto que pode disparar continuamente sem ser recarregado. Mas é preciso ter cuidado, pois ele acaba superaquecendo e assim cria uma brecha enorme para o adversário retaliar."
+  },
+  "OverheatRifleBullet": {
+    "localized_name": "Bala de Fuzil de Superaquecimento",
+    "description": "Projétil usado com Fuzil de Superaquecimento e armas similares."
   },
   "OverheatRifle_2": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Fuzil de Superaquecimento",
+    "description": "Fuzil de assalto que pode disparar continuamente sem ser recarregado. Mas é preciso ter cuidado, pois ele acaba superaquecendo e assim cria uma brecha enorme para o adversário retaliar."
   },
   "OverheatRifle_3": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Fuzil de Superaquecimento",
+    "description": "Fuzil de assalto que pode disparar continuamente sem ser recarregado. Mas é preciso ter cuidado, pois ele acaba superaquecendo e assim cria uma brecha enorme para o adversário retaliar."
   },
   "OverheatRifle_4": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Fuzil de Superaquecimento",
+    "description": "Fuzil de assalto que pode disparar continuamente sem ser recarregado. Mas é preciso ter cuidado, pois ele acaba superaquecendo e assim cria uma brecha enorme para o adversário retaliar."
   },
   "OverheatRifle_5": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Fuzil de Superaquecimento",
+    "description": "Fuzil de assalto que pode disparar continuamente sem ser recarregado. Mas é preciso ter cuidado, pois ele acaba superaquecendo e assim cria uma brecha enorme para o adversário retaliar."
   },
   "PalCrystal_Ex": {
     "localized_name": "Peça da Civilização Antiga",
@@ -4164,16 +4772,20 @@
     "description": "Item deixado por certos Pals de Escuridão poderosos. Pode servir de material para certos acessórios igualmente poderosos."
   },
   "PalDopingShot": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Arma Estimulante",
+    "description": "Dispare contra algum Pal amigo para fortalecer seu ataque e defesa por tempo limitado. Porém, causa dano se for disparada contra inimigos."
+  },
+  "PalDopingShotBullet": {
+    "localized_name": "Bala de Arma Estimulante",
+    "description": "Projétil usado com Arma Estimulante e armas similares."
   },
   "PalDopingShot_2": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Arma Estimulante Mega",
+    "description": "Fortalece ataque e defesa se disparada contra Pals amigos, mas causa dano se disparada contra inimigos. Graças a uma melhoria, apresenta maior intensidade e duração de fortalecimento, além de causar maior dano."
   },
   "PalDopingShot_3": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Arma Estimulante",
+    "description": "Dispare contra algum Pal amigo para fortalecer seu ataque e defesa por tempo limitado. Porém, causa dano se for disparada contra inimigos."
   },
   "PalEgg_Dark_01": {
     "localized_name": "Ovo Negro",
@@ -4359,9 +4971,13 @@
     "localized_name": "Fluido de Pal",
     "description": "Fluido extraído de Pals. De alta viscosidade, é bastante útil."
   },
+  "PalGenderReverse": {
+    "localized_name": "Inversor de Pal",
+    "description": "Remédio fantástico capaz de inverter o sexo de um Pal. Pode ser usado em [Mesa cirúrgica Pal]."
+  },
   "PalHealingGrenade": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Granada Curadora de Pals",
+    "description": "Granada de Fragmentação com efeito de cura. Detona no momento do impacto, recuperando o PV de Pals amigos."
   },
   "PalItem_CaptainPenguin": {
     "localized_name": "Adorno de Pluma de Penking",
@@ -4422,6 +5038,114 @@
   "PalOil": {
     "localized_name": "Óleo de Pal Requintado",
     "description": "Óleo de boa qualidade extraído de Pals. Necessário para produzir Polímero."
+  },
+  "PalPassiveSkillChange_CoolTimeReduction_Up_1": {
+    "localized_name": "Implante: Sossegado",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+  },
+  "PalPassiveSkillChange_CoolTimeReduction_Up_2": {
+    "localized_name": "Implante: Impaciente",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+  },
+  "PalPassiveSkillChange_CraftSpeed_up1": {
+    "localized_name": "Implante: Dedicado",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+  },
+  "PalPassiveSkillChange_CraftSpeed_up2": {
+    "localized_name": "Implante: Espírito Artesão",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+  },
+  "PalPassiveSkillChange_CraftSpeed_up3": {
+    "localized_name": "Implante: Artesão Transcendental",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+  },
+  "PalPassiveSkillChange_Deffence_up1": {
+    "localized_name": "Implante: Casca Grossa",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+  },
+  "PalPassiveSkillChange_Deffence_up2": {
+    "localized_name": "Implante: Corpo Fechado",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+  },
+  "PalPassiveSkillChange_Deffence_up3": {
+    "localized_name": "Implante: Corpo de Diamante",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+  },
+  "PalPassiveSkillChange_HatchingSpeed_Up": {
+    "localized_name": "Implante: Filantropo",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+  },
+  "PalPassiveSkillChange_MoveSpeed_up_1": {
+    "localized_name": "Implante: Ligeiro",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+  },
+  "PalPassiveSkillChange_MoveSpeed_up_2": {
+    "localized_name": "Implante: Bom Corredor",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+  },
+  "PalPassiveSkillChange_MoveSpeed_up_3": {
+    "localized_name": "Implante: Desenfreado",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+  },
+  "PalPassiveSkillChange_Nocturnal": {
+    "localized_name": "Implante: Noturno",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+  },
+  "PalPassiveSkillChange_NonKilling": {
+    "localized_name": "Implante: Clemência",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+  },
+  "PalPassiveSkillChange_Noukin": {
+    "localized_name": "Implante: Brutamontes",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+  },
+  "PalPassiveSkillChange_PAL_ALLAttack_up1": {
+    "localized_name": "Implante: Ousado",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+  },
+  "PalPassiveSkillChange_PAL_ALLAttack_up2": {
+    "localized_name": "Implante: Brutal",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+  },
+  "PalPassiveSkillChange_PAL_ALLAttack_up3": {
+    "localized_name": "Implante: Deus Inclemente",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+  },
+  "PalPassiveSkillChange_PAL_FullStomach_Down_1": {
+    "localized_name": "Implante: Comedido",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+  },
+  "PalPassiveSkillChange_PAL_FullStomach_Down_2": {
+    "localized_name": "Implante: Mestre da Dieta",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+  },
+  "PalPassiveSkillChange_PAL_FullStomach_Down_3": {
+    "localized_name": "Implante: Jejuador Supremo",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+  },
+  "PalPassiveSkillChange_PAL_Sanity_Down_1": {
+    "localized_name": "Implante: Pensamento Positivo",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+  },
+  "PalPassiveSkillChange_PAL_Sanity_Down_2": {
+    "localized_name": "Implante: Viciado em Trabalho",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+  },
+  "PalPassiveSkillChange_PAL_Sanity_Down_3": {
+    "localized_name": "Implante: Espírito Inabalável",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+  },
+  "PalPassiveSkillChange_Stamina_Up_1": {
+    "localized_name": "Implante: Fôlego Interminável",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+  },
+  "PalPassiveSkillChange_Stamina_Up_2": {
+    "localized_name": "Implante: Criança Serelepe",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+  },
+  "PalPassiveSkillChange_Stamina_Up_3": {
+    "localized_name": "Implante: Movimento Perpétuo",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
   },
   "PalRevive": {
     "localized_name": "Revivificante",
@@ -4522,6 +5246,10 @@
   "PalSummon_NightLady_Parts": {
     "localized_name": "Lasca de Bellanoir",
     "description": "Fragmento de tabuleta com uma gravura de Bellanoir. Combine os fragmentos para criar uma tabuleta."
+  },
+  "PalSummon_YakushimaBoss002": {
+    "localized_name": "Símbolo Celestial",
+    "description": "[Colaboração com Terraria] Selo com um padrão desconhecido. Ofereça a um Altar de Invocação para chamar uma entidade poderosa."
   },
   "PalUpgradeStone": {
     "localized_name": "Alma de Pal Pequena",
@@ -4755,6 +5483,18 @@
     "localized_name": "Quartzo Puro",
     "description": "Quartzo Puro encontrado em montanhas nevadas e outros lugares. Necessário para produzir Circuito Elétrico."
   },
+  "QuestItem_Breeder_1": {
+    "localized_name": "Pal Querido do Criador",
+    "description": "Esfera contendo o Pal querido de um criador. Devolva-a para seu dono."
+  },
+  "QuestItem_Farmer_1": {
+    "localized_name": "Comida Especial da Fazendeira",
+    "description": "Comida especial preparada pela fazendeira atenciosa. Tem um cheiro delicioso."
+  },
+  "QuestItem_Zoe_1": {
+    "localized_name": "Pano Saudoso da Zoe",
+    "description": "Pano velho que ainda contém uma leve fragrância. Para Zoe, é um artigo carregado de recordações preciosas."
+  },
   "Quiche": {
     "localized_name": "Quiche de Cogumelos",
     "description": "Prato preparado assando uma massa de torta recheada com ovos, verduras, cogumelos e creme. É delicioso comer até mesmo frio. Quando ingerido, reduz a fome e torna mais difícil perder SAN por tempo limitado."
@@ -4935,6 +5675,14 @@
     "localized_name": "Salada",
     "description": "Salada criada misturando Alface e Tomate. Quando ingerida, aumenta um pouco a velocidade de trabalho por tempo limitado."
   },
+  "Salvage_TreasureBoxKey01": {
+    "localized_name": "Ímã de Pesca",
+    "description": null
+  },
+  "Salvage_TreasureBoxKey02": {
+    "localized_name": "Ímã de Pesca Poderoso",
+    "description": "Ímã poderoso necessário para recuperar itens submersos com eficiência. Com sua grande força magnética, é possível içar recursos e matérias-primas abandonados no leito do mar."
+  },
   "Sandwich": {
     "localized_name": "pt-BR Text",
     "description": "pt-BR Text"
@@ -4946,6 +5694,10 @@
   "SeafoodSoup": {
     "localized_name": "pt-BR Text",
     "description": "pt-BR Text"
+  },
+  "Seafood_Salada": {
+    "localized_name": "Salada de Frutos do Mar",
+    "description": "Salada saudável de Meat OctopusGirl e Alface. Quando ingerida, aumenta a experiência obtida por tempo limitado."
   },
   "SemiAutoRifle": {
     "localized_name": "Fuzil Semiautomático",
@@ -5071,9 +5823,17 @@
     "localized_name": "Fruto de Técnica de Água: Tiro de Bolha",
     "description": "Use num Pal para ensinar a ele BubbleShot."
   },
+  "SkillCard_ChargeCanon": {
+    "localized_name": "Fruto de Técnica de Dragão: Canhão Carregado",
+    "description": "Use num Pal para ensinar a ele ChargeCanon."
+  },
   "SkillCard_Commet": {
     "localized_name": "Fruto de Técnica de Dragão: Cometa",
     "description": "Use num Pal para ensinar a ele Commet."
+  },
+  "SkillCard_CrossWind": {
+    "localized_name": "Fruto de Técnica de Grama: Vento Cruzado",
+    "description": "Use num Pal para ensinar a ele CrossWind."
   },
   "SkillCard_DarkArrow": {
     "localized_name": "Fruto de Técnica de Escuridão: Flecha Negra",
@@ -5087,6 +5847,10 @@
     "localized_name": "Fruto de Técnica de Escuridão: Laser Negro",
     "description": "Use num Pal para ensinar a ele DarkLaser."
   },
+  "SkillCard_DarkLegion": {
+    "localized_name": "Fruto de Técnica de Escuridão: Fogo-Fátuo Negro",
+    "description": "Use num Pal para ensinar a ele DarkLegion."
+  },
   "SkillCard_DarkPulse": {
     "localized_name": "Fruto de Técnica de Escuridão: Espalhamento de Escuridão",
     "description": "Use num Pal para ensinar a ele DarkPulse."
@@ -5098,6 +5862,10 @@
   "SkillCard_DiamondFall": {
     "localized_name": "Fruto de Técnica de Gelo: Queda de Diamantes",
     "description": "Use num Pal para ensinar a ele DiamondFall."
+  },
+  "SkillCard_DiversionLaser": {
+    "localized_name": "Fruto de Técnica de Água: Água Pressurizada",
+    "description": "Use num Pal para ensinar a ele DiversionLaser."
   },
   "SkillCard_DragonBreath": {
     "localized_name": "Fruto de Técnica de Dragão: Sopro de Dragão",
@@ -5167,6 +5935,10 @@
     "localized_name": "Fruto de Técnica de Grama: Tornado de Grama",
     "description": "Use num Pal para ensinar a ele GrassTornado."
   },
+  "SkillCard_GravityShot": {
+    "localized_name": "Fruto de Técnica de Escuridão: Tiro Sombrio",
+    "description": "Use num Pal para ensinar a ele GravityShot."
+  },
   "SkillCard_HolyBlast": {
     "localized_name": "Fruto de Técnica: Estouro Sagrado",
     "description": "Use num Pal para ensinar a ele HolyBlast."
@@ -5175,9 +5947,17 @@
     "localized_name": "Fruto de Técnica de Água: Corrente Hídrica",
     "description": "Use num Pal para ensinar a ele HydroPump."
   },
+  "SkillCard_HydroSlicer": {
+    "localized_name": "Fruto de Técnica de Água: Hidrofatiador",
+    "description": "Use num Pal para ensinar a ele HydroSlicer."
+  },
   "SkillCard_HyperBeam": {
     "localized_name": "Fruto de Técnica: Rajada Pal",
     "description": "Use num Pal para ensinar a ele HyperBeam."
+  },
+  "SkillCard_IceAge": {
+    "localized_name": "Fruto de Técnica de Gelo: Geada Absoluta",
+    "description": "Use num Pal para ensinar a ele IceAge."
   },
   "SkillCard_IceBlade": {
     "localized_name": "Fruto de Técnica de Gelo: Cortador de Gelo",
@@ -5187,9 +5967,17 @@
     "localized_name": "Fruto de Técnica de Gelo: Míssil de Gelo",
     "description": "Use num Pal para ensinar a ele IceMissile."
   },
+  "SkillCard_IceWall": {
+    "localized_name": "Fruto de Técnica de Gelo: Parede de Gelo",
+    "description": "Use num Pal para ensinar a ele IceWall."
+  },
   "SkillCard_IcicleLine": {
     "localized_name": "Fruto de Técnica de Gelo: Linha de Sincelos",
     "description": "Use num Pal para ensinar a ele IcicleLine."
+  },
+  "SkillCard_IciclePierce": {
+    "localized_name": "Fruto de Técnica de Gelo: Projétil de Sincelo",
+    "description": "Use num Pal para ensinar a ele IciclePierce."
   },
   "SkillCard_IcicleThrow": {
     "localized_name": "Fruto de Técnica de Gelo: Aguilhão de Nevasca",
@@ -5234,6 +6022,22 @@
   "SkillCard_Psychokinesis": {
     "localized_name": "Fruto de Técnica de Escuridão: Gravidade Psíquica",
     "description": "Use num Pal para ensinar a ele Psychokinesis."
+  },
+  "SkillCard_RangeThunder": {
+    "localized_name": "Fruto de Técnica de Raio: Trovão a Todo Alcance",
+    "description": "Use num Pal para ensinar a ele RangeThunder."
+  },
+  "SkillCard_ReflectiveShuriken": {
+    "localized_name": "Fruto de Técnica de Grama: Folha Refletora",
+    "description": "Use num Pal para ensinar a ele ReflectiveShuriken."
+  },
+  "SkillCard_RipTide": {
+    "localized_name": "Fruto de Técnica de Água: Pico Aquático",
+    "description": "Use num Pal para ensinar a ele RipTide."
+  },
+  "SkillCard_RockBeat": {
+    "localized_name": "Fruto de Técnica de Terra: Batida de Pedra",
+    "description": "Use num Pal para ensinar a ele RockBeat."
   },
   "SkillCard_RockLance": {
     "localized_name": "Fruto de Técnica de Terra: Lança de Rocha",
@@ -5306,6 +6110,10 @@
   "SkillCard_ThunderRain": {
     "localized_name": "Fruto de Técnica de Raio: Chuva de Trovão",
     "description": "Use num Pal para ensinar a ele ThunderRain."
+  },
+  "SkillCard_ThunderSpear": {
+    "localized_name": "Fruto de Técnica de Raio: Lança do Trovão",
+    "description": "Use num Pal para ensinar a ele ThunderSpear."
   },
   "SkillCard_ThunderStorm": {
     "localized_name": "Fruto de Técnica de Raio: Tempestade de Trovões",
@@ -5387,6 +6195,10 @@
     "localized_name": "Sela de Azurobe",
     "description": "Quando você tem isto, pode montar num Azurobe."
   },
+  "SkillUnlock_BlueDragon_Ice": {
+    "localized_name": "Sela de Azurobe Cryst",
+    "description": "Quando você tem isto, pode montar num BlueDragon Ice."
+  },
   "SkillUnlock_BlueThunderHorse": {
     "localized_name": "Sela de Azurmane",
     "description": "Quando você tem isto,Azurmanepode montar num ."
@@ -5429,7 +6241,7 @@
   },
   "SkillUnlock_Eagle": {
     "localized_name": "Luvas de Galeclaw",
-    "description": "Luvas para agarrar as patas de um Galeclaw com delicadeza. Quando você tem isto enquanto está com um Galeclaw, ele se transforma num planador."
+    "description": "Quando você tem isto enquanto está com um Galeclaw, modifica a funcionalidade do planador."
   },
   "SkillUnlock_ElecLion": {
     "localized_name": "pt-BR Text",
@@ -5485,11 +6297,23 @@
   },
   "SkillUnlock_FlyingManta": {
     "localized_name": "Luvas de Celaray",
-    "description": "Luvas para agarrar as nadadeiras de um Celaray com delicadeza. Quando você tem isto enquanto está com um Celaray, ele se transforma num planador."
+    "description": "Quando você tem isto enquanto está com um Celaray, modifica a funcionalidade do planador."
+  },
+  "SkillUnlock_FlyingManta_Thunder": {
+    "localized_name": "Luvas de Celaray Lux",
+    "description": "Quando você tem isto enquanto está com um FlyingManta Thunder, modifica a funcionalidade do planador."
   },
   "SkillUnlock_Garm": {
     "localized_name": "Arreios e sela de Direhowl",
     "description": "Quando você tem isto, pode montar num Direhowl."
+  },
+  "SkillUnlock_GhostAnglerfish": {
+    "localized_name": "Sela de Ghangler",
+    "description": "Quando você tem isto, pode montar num Ghangler."
+  },
+  "SkillUnlock_GhostAnglerfish_Fire": {
+    "localized_name": "Sela de Ghangler Ignis",
+    "description": "Quando você tem isto, pode montar num GhostAnglerfish Fire."
   },
   "SkillUnlock_GhostBeast": {
     "localized_name": "Sela de Maraith",
@@ -5559,6 +6383,18 @@
     "localized_name": "Sela de Frostallion Noct",
     "description": "Quando você tem isto, pode montar num IceHorse Dark."
   },
+  "SkillUnlock_IceNarwhal": {
+    "localized_name": "Sela de Whalaska",
+    "description": "Quando você tem isto, pode montar num Whalaska."
+  },
+  "SkillUnlock_IceNarwhal_Fire": {
+    "localized_name": "Sela de Whalaska Ignis",
+    "description": "Quando você tem isto, pode montar num IceNarwhal Fire."
+  },
+  "SkillUnlock_IceSeal": {
+    "localized_name": "Arreios de Polapup",
+    "description": "Quando você tem isto, pode montar num Polapup."
+  },
   "SkillUnlock_JetDragon": {
     "localized_name": "Lança-mísseis de Jetragon",
     "description": "Quando você tem isto, pode montar num Jetragon e disparar mísseis à vontade."
@@ -5599,6 +6435,10 @@
     "localized_name": "Lança-mísseis de Relaxaurus Lux",
     "description": "Quando você tem isto, pode montar num LazyDragon Electric e disparar um lança-mísseis à vontade."
   },
+  "SkillUnlock_LeafMomonga": {
+    "localized_name": "Arreios de Herbil",
+    "description": "Arreios de Herbil. Com isto em mãos, quando você for incapacitado, será revivido pelo poder curativo do Herbil."
+  },
   "SkillUnlock_Manticore": {
     "localized_name": "Sela de Blazehowl",
     "description": "Quando você tem isto, pode montar num Blazehowl."
@@ -5633,7 +6473,11 @@
   },
   "SkillUnlock_NegativeOctopus": {
     "localized_name": "Luvas de Killamari",
-    "description": "Luvas para agarrar os tentáculos de um Killamari com delicadeza. Quando você tem isto enquanto está com um Killamari, ele se transforma num planador."
+    "description": "Quando você tem isto enquanto está com um Killamari, modifica a funcionalidade do planador."
+  },
+  "SkillUnlock_NegativeOctopus_Neutral": {
+    "localized_name": "Luvas de Killamari Primo",
+    "description": "Quando você tem isto enquanto está com um NegativeOctopus Neutral, modifica a funcionalidade do planador."
   },
   "SkillUnlock_NightBlueHorse": {
     "localized_name": "Sela de Starryon",
@@ -5642,6 +6486,18 @@
   "SkillUnlock_Penguin": {
     "localized_name": "Lança-foguetes de Pengullet",
     "description": "Canhão para disparar um Pengullet. Quando a habilidade de companheiro é ativada, você pode disparar o Pengullet para atacar. (Ele ficará incapacitado.)"
+  },
+  "SkillUnlock_Penguin_Electric": {
+    "localized_name": "Lança-foguetes de Pengullet Lux",
+    "description": "Canhão para disparar um Penguin Electric. Quando a habilidade de companheiro é ativada, você pode disparar o Penguin Electric para atacar. Porém, ele ficará incapacitado."
+  },
+  "SkillUnlock_Plesiosaur": {
+    "localized_name": "Sela de Braloha",
+    "description": "Quando você tem isto, pode montar num Braloha."
+  },
+  "SkillUnlock_PoseidonOrca": {
+    "localized_name": "Sela de Neptilius",
+    "description": "Quando você tem isto, pode montar num Neptilius."
   },
   "SkillUnlock_PurpleSpider": {
     "localized_name": "Sela de Tarantriss",
@@ -5707,6 +6563,10 @@
     "localized_name": "Sela de Rayhound",
     "description": "Quando você tem isto, pode montar num Rayhound."
   },
+  "SkillUnlock_TropicalOstrich": {
+    "localized_name": "Sela de Palumba",
+    "description": "Quando você tem isto, pode montar num Palumba."
+  },
   "SkillUnlock_Umihebi": {
     "localized_name": "Sela de Jormuntide",
     "description": "Quando você tem isto, pode montar num Jormuntide."
@@ -5745,11 +6605,11 @@
   },
   "SkillUnlock_WindChimes": {
     "localized_name": "Luvas de Hangyu",
-    "description": "Luvas para agarrar os braços de um Hangyu com delicadeza. Quando você tem isto enquanto está com um Hangyu, ele se transforma num planador."
+    "description": "Quando você tem isto enquanto está com um Hangyu, modifica a funcionalidade do planador."
   },
   "SkillUnlock_WindChimes_Ice": {
     "localized_name": "Luvas de Hangyu Cryst",
-    "description": "Luvas para agarrar os braços de um WindChimes Ice com delicadeza. Quando você tem isto enquanto está com um WindChimes Ice, ele se transforma num planador."
+    "description": "Quando você tem isto enquanto está com um WindChimes Ice, modifica a funcionalidade do planador."
   },
   "SkillUnlock_Yeti": {
     "localized_name": "Sela de Wumpo",
@@ -5951,6 +6811,10 @@
     "localized_name": "Enxofre",
     "description": "Enxofre encontrado em vulcões e outros lugares. Necessário para produzir Pólvora."
   },
+  "Supplement": {
+    "localized_name": "Energético",
+    "description": "Energético que, quando bebido, mantém a barriga cheia por tempo limitado. Esta bebida encorpada contém diversos nutrientes condensados e protege contra a fome durante expedições."
+  },
   "Sweet": {
     "localized_name": "Algodão-Doce",
     "description": "Algodão-doce que pode ser extraído de Woolipop. Sua doçura se dissolve com suavidade na boca."
@@ -5994,6 +6858,26 @@
   "TreasureBoxKey03": {
     "localized_name": "Chave de Ouro",
     "description": "Chave para abrir baús trancados."
+  },
+  "TreasureMap01": {
+    "localized_name": "Mapa do Tesouro",
+    "description": "Mapa antigo que indica o local de um tesouro. Use-o para adicionar uma marca no seu próprio mapa."
+  },
+  "TreasureMap02": {
+    "localized_name": "Mapa do Tesouro",
+    "description": "Mapa antigo que indica o local de um tesouro. Use-o para adicionar uma marca no seu próprio mapa."
+  },
+  "TreasureMap03": {
+    "localized_name": "Mapa do Tesouro",
+    "description": "Mapa antigo que indica o local de um tesouro. Use-o para adicionar uma marca no seu próprio mapa."
+  },
+  "TreasureMap04": {
+    "localized_name": "Mapa do Tesouro",
+    "description": "Mapa antigo que indica o local de um tesouro. Use-o para adicionar uma marca no seu próprio mapa."
+  },
+  "TreasureMap05": {
+    "localized_name": "Mapa do Tesouro",
+    "description": "Mapa antigo que indica o local de um tesouro. Use-o para adicionar uma marca no seu próprio mapa."
   },
   "Unko_L": {
     "localized_name": "Esterco Gigante",
@@ -6115,72 +6999,228 @@
     "localized_name": "Yakissoba de Broncherry",
     "description": "Prato preparado salteando verduras e carne junto com um tipo de macarrão. Possui um sabor encorpado que combina bem com fatias grossas de carne. Quando ingerido, confere COMMON_STATUS_RANGE_Attack +20% por tempo limitado."
   },
+  "YakushimaArmor001": {
+    "localized_name": "Armadura de Placas Consagradas",
+    "description": "[Colaboração com Terraria] Armadura feita de Barra Consagrada. Dotada de uma força sagrada, diminui o dano causado por monstros da [Colaboração com Terraria]."
+  },
+  "YakushimaArmor001_2": {
+    "localized_name": "Armadura de Placas Consagradas",
+    "description": "[Colaboração com Terraria] Armadura feita de Barra Consagrada. Dotada de uma força sagrada, diminui o dano causado por monstros da [Colaboração com Terraria]."
+  },
+  "YakushimaArmor001_3": {
+    "localized_name": "Armadura de Placas Consagradas",
+    "description": "[Colaboração com Terraria] Armadura feita de Barra Consagrada. Dotada de uma força sagrada, diminui o dano causado por monstros da [Colaboração com Terraria]."
+  },
+  "YakushimaArmor001_4": {
+    "localized_name": "Armadura de Placas Consagradas",
+    "description": "[Colaboração com Terraria] Armadura feita de Barra Consagrada. Dotada de uma força sagrada, diminui o dano causado por monstros da [Colaboração com Terraria]."
+  },
+  "YakushimaArmor001_5": {
+    "localized_name": "Armadura de Placas Consagradas",
+    "description": "[Colaboração com Terraria] Armadura feita de Barra Consagrada. Dotada de uma força sagrada, diminui o dano causado por monstros da [Colaboração com Terraria]."
+  },
   "YakushimaBlade": {
     "localized_name": "Espada-Gato",
-    "description": "[Colaboração com Terraria] Segundo as lendas, esta espada parece ter sido trazida de uma nação distante por um Croajiro. Ninguém faz ideia do motivo…"
+    "description": "[Colaboração com Terraria] Segundo as lendas, esta espada foi trazida de uma nação distante por um Croajiro. Ninguém faz ideia do motivo… Cada vez que é agitada, ela ataca os inimigos disparando um projétil felino ricocheteante."
   },
   "YakushimaBlade002": {
-    "localized_name": "Espada-Gato",
-    "description": "[Colaboração com Terraria] Segundo as lendas, esta espada parece ter sido trazida de uma nação distante por um Croajiro. Ninguém faz ideia do motivo…"
+    "localized_name": "Lâmina da Terra",
+    "description": "[Colaboração com Terraria] Espada fantástica que emite uma onda de choque verdejante quando sua lâmina é agitada. Embora seja uma arma de curto alcance, também consegue atacar inimigos distantes."
   },
   "YakushimaBlade002_2": {
-    "localized_name": "Espada-Gato",
-    "description": "[Colaboração com Terraria] Segundo as lendas, esta espada parece ter sido trazida de uma nação distante por um Croajiro. Ninguém faz ideia do motivo…"
+    "localized_name": "Lâmina da Terra",
+    "description": "[Colaboração com Terraria] Espada fantástica que emite uma onda de choque verdejante quando sua lâmina é agitada. Embora seja uma arma de curto alcance, também consegue atacar inimigos distantes."
   },
   "YakushimaBlade002_3": {
-    "localized_name": "Espada-Gato",
-    "description": "[Colaboração com Terraria] Segundo as lendas, esta espada parece ter sido trazida de uma nação distante por um Croajiro. Ninguém faz ideia do motivo…"
+    "localized_name": "Lâmina da Terra",
+    "description": "[Colaboração com Terraria] Espada fantástica que emite uma onda de choque verdejante quando sua lâmina é agitada. Embora seja uma arma de curto alcance, também consegue atacar inimigos distantes."
   },
   "YakushimaBlade002_4": {
-    "localized_name": "Espada-Gato",
-    "description": "[Colaboração com Terraria] Segundo as lendas, esta espada parece ter sido trazida de uma nação distante por um Croajiro. Ninguém faz ideia do motivo…"
+    "localized_name": "Lâmina da Terra",
+    "description": "[Colaboração com Terraria] Espada fantástica que emite uma onda de choque verdejante quando sua lâmina é agitada. Embora seja uma arma de curto alcance, também consegue atacar inimigos distantes."
   },
   "YakushimaBlade002_5": {
-    "localized_name": "Espada-Gato",
-    "description": "[Colaboração com Terraria] Segundo as lendas, esta espada parece ter sido trazida de uma nação distante por um Croajiro. Ninguém faz ideia do motivo…"
+    "localized_name": "Lâmina da Terra",
+    "description": "[Colaboração com Terraria] Espada fantástica que emite uma onda de choque verdejante quando sua lâmina é agitada. Embora seja uma arma de curto alcance, também consegue atacar inimigos distantes."
   },
   "YakushimaBlade003": {
-    "localized_name": "Espada-Gato",
-    "description": "[Colaboração com Terraria] Segundo as lendas, esta espada parece ter sido trazida de uma nação distante por um Croajiro. Ninguém faz ideia do motivo…"
+    "localized_name": "Terraprisma",
+    "description": "[Colaboração com Terraria] Espada mística que possui uma lâmina iridescente. Ao ser agitada, ela é capaz de chamar mais espadas abençoadas para lutarem por ela. Pode chamar até nove espadas ao todo."
   },
   "YakushimaBlade003_2": {
-    "localized_name": "Espada-Gato",
-    "description": "[Colaboração com Terraria] Segundo as lendas, esta espada parece ter sido trazida de uma nação distante por um Croajiro. Ninguém faz ideia do motivo…"
+    "localized_name": "Terraprisma",
+    "description": "[Colaboração com Terraria] Espada mística que possui uma lâmina iridescente. Ao ser agitada, ela é capaz de chamar mais espadas abençoadas para lutarem por ela. Pode chamar até nove espadas ao todo."
   },
   "YakushimaBlade003_3": {
-    "localized_name": "Espada-Gato",
-    "description": "[Colaboração com Terraria] Segundo as lendas, esta espada parece ter sido trazida de uma nação distante por um Croajiro. Ninguém faz ideia do motivo…"
+    "localized_name": "Terraprisma",
+    "description": "[Colaboração com Terraria] Espada mística que possui uma lâmina iridescente. Ao ser agitada, ela é capaz de chamar mais espadas abençoadas para lutarem por ela. Pode chamar até nove espadas ao todo."
   },
   "YakushimaBlade003_4": {
-    "localized_name": "Espada-Gato",
-    "description": "[Colaboração com Terraria] Segundo as lendas, esta espada parece ter sido trazida de uma nação distante por um Croajiro. Ninguém faz ideia do motivo…"
+    "localized_name": "Terraprisma",
+    "description": "[Colaboração com Terraria] Espada mística que possui uma lâmina iridescente. Ao ser agitada, ela é capaz de chamar mais espadas abençoadas para lutarem por ela. Pode chamar até nove espadas ao todo."
   },
   "YakushimaBlade003_5": {
-    "localized_name": "Espada-Gato",
-    "description": "[Colaboração com Terraria] Segundo as lendas, esta espada parece ter sido trazida de uma nação distante por um Croajiro. Ninguém faz ideia do motivo…"
+    "localized_name": "Terraprisma",
+    "description": "[Colaboração com Terraria] Espada mística que possui uma lâmina iridescente. Ao ser agitada, ela é capaz de chamar mais espadas abençoadas para lutarem por ela. Pode chamar até nove espadas ao todo."
   },
   "YakushimaBlade004": {
-    "localized_name": "Espada-Gato",
-    "description": "[Colaboração com Terraria] Segundo as lendas, esta espada parece ter sido trazida de uma nação distante por um Croajiro. Ninguém faz ideia do motivo…"
+    "localized_name": "Excalibur",
+    "description": "[Colaboração com Terraria] Espada sagrada que brilha com a cor do ouro. Emite uma onda de choque ao seu redor quando agitada, possibilitando lançar um ataque em grande área."
   },
   "YakushimaBlade004_2": {
-    "localized_name": "Espada-Gato",
-    "description": "[Colaboração com Terraria] Segundo as lendas, esta espada parece ter sido trazida de uma nação distante por um Croajiro. Ninguém faz ideia do motivo…"
+    "localized_name": "Excalibur",
+    "description": "[Colaboração com Terraria] Espada sagrada que brilha com a cor do ouro. Emite uma onda de choque ao seu redor quando agitada, possibilitando lançar um ataque em grande área."
   },
   "YakushimaBlade004_3": {
-    "localized_name": "Espada-Gato",
-    "description": "[Colaboração com Terraria] Segundo as lendas, esta espada parece ter sido trazida de uma nação distante por um Croajiro. Ninguém faz ideia do motivo…"
+    "localized_name": "Excalibur",
+    "description": "[Colaboração com Terraria] Espada sagrada que brilha com a cor do ouro. Emite uma onda de choque ao seu redor quando agitada, possibilitando lançar um ataque em grande área."
   },
   "YakushimaBlade004_4": {
-    "localized_name": "Espada-Gato",
-    "description": "[Colaboração com Terraria] Segundo as lendas, esta espada parece ter sido trazida de uma nação distante por um Croajiro. Ninguém faz ideia do motivo…"
+    "localized_name": "Excalibur",
+    "description": "[Colaboração com Terraria] Espada sagrada que brilha com a cor do ouro. Emite uma onda de choque ao seu redor quando agitada, possibilitando lançar um ataque em grande área."
   },
   "YakushimaBlade004_5": {
-    "localized_name": "Espada-Gato",
-    "description": "[Colaboração com Terraria] Segundo as lendas, esta espada parece ter sido trazida de uma nação distante por um Croajiro. Ninguém faz ideia do motivo…"
+    "localized_name": "Excalibur",
+    "description": "[Colaboração com Terraria] Espada sagrada que brilha com a cor do ouro. Emite uma onda de choque ao seu redor quando agitada, possibilitando lançar um ataque em grande área."
   },
   "YakushimaBlade005": {
-    "localized_name": "Espada-Gato",
-    "description": "[Colaboração com Terraria] Segundo as lendas, esta espada parece ter sido trazida de uma nação distante por um Croajiro. Ninguém faz ideia do motivo…"
+    "localized_name": "Lendário Espada-Gato",
+    "description": "[Colaboração com Terraria] A lendária Espada-Gato, criada a partir de Barra de Luminita. Cada vez que ela é agitada, ataca os inimigos disparando um projétil felino ricocheteante."
+  },
+  "YakushimaGun001": {
+    "localized_name": "Espingarda do Vórtice",
+    "description": "[Colaboração com Terraria] Arma de grande porte que utiliza uma energia desconhecida. Possui 66% de chance de anular o consumo de munição, além de disparar mísseis que explodem depois de perseguirem o inimigo até certa distância."
+  },
+  "YakushimaGun001_2": {
+    "localized_name": "Espingarda do Vórtice",
+    "description": "[Colaboração com Terraria] Arma de grande porte que utiliza uma energia desconhecida. Possui 66% de chance de anular o consumo de munição, além de disparar mísseis que explodem depois de perseguirem o inimigo até certa distância."
+  },
+  "YakushimaGun001_3": {
+    "localized_name": "Espingarda do Vórtice",
+    "description": "[Colaboração com Terraria] Arma de grande porte que utiliza uma energia desconhecida. Possui 66% de chance de anular o consumo de munição, além de disparar mísseis que explodem depois de perseguirem o inimigo até certa distância."
+  },
+  "YakushimaGun001_4": {
+    "localized_name": "Espingarda do Vórtice",
+    "description": "[Colaboração com Terraria] Arma de grande porte que utiliza uma energia desconhecida. Possui 66% de chance de anular o consumo de munição, além de disparar mísseis que explodem depois de perseguirem o inimigo até certa distância."
+  },
+  "YakushimaGun001_5": {
+    "localized_name": "Espingarda do Vórtice",
+    "description": "[Colaboração com Terraria] Arma de grande porte que utiliza uma energia desconhecida. Possui 66% de chance de anular o consumo de munição, além de disparar mísseis que explodem depois de perseguirem o inimigo até certa distância."
+  },
+  "YakushimaHeadEquip001": {
+    "localized_name": "Máscara Consagrada",
+    "description": "[Colaboração com Terraria] Proteção para a cabeça feita de Barra Consagrada. Dotada de uma força sagrada, aumenta o dano causado por Espada-Gato, Excalibur, Lâmina da Terra e Lendário Espada-Gato."
+  },
+  "YakushimaHeadEquip001_2": {
+    "localized_name": "Máscara Consagrada",
+    "description": "[Colaboração com Terraria] Proteção para a cabeça feita de Barra Consagrada. Dotada de uma força sagrada, aumenta o dano causado por Espada-Gato, Excalibur, Lâmina da Terra e Lendário Espada-Gato."
+  },
+  "YakushimaHeadEquip001_3": {
+    "localized_name": "Máscara Consagrada",
+    "description": "[Colaboração com Terraria] Proteção para a cabeça feita de Barra Consagrada. Dotada de uma força sagrada, aumenta o dano causado por Espada-Gato, Excalibur, Lâmina da Terra e Lendário Espada-Gato."
+  },
+  "YakushimaHeadEquip001_4": {
+    "localized_name": "Máscara Consagrada",
+    "description": "[Colaboração com Terraria] Proteção para a cabeça feita de Barra Consagrada. Dotada de uma força sagrada, aumenta o dano causado por Espada-Gato, Excalibur, Lâmina da Terra e Lendário Espada-Gato."
+  },
+  "YakushimaHeadEquip001_5": {
+    "localized_name": "Máscara Consagrada",
+    "description": "[Colaboração com Terraria] Proteção para a cabeça feita de Barra Consagrada. Dotada de uma força sagrada, aumenta o dano causado por Espada-Gato, Excalibur, Lâmina da Terra e Lendário Espada-Gato."
+  },
+  "YakushimaHeadEquip002": {
+    "localized_name": "Capacete Consagrado",
+    "description": "[Colaboração com Terraria] Proteção para a cabeça feita de Barra Consagrada. Dotada de uma força sagrada, aumenta o dano causado por Brilho Noturno."
+  },
+  "YakushimaHeadEquip002_2": {
+    "localized_name": "Capacete Consagrado",
+    "description": "[Colaboração com Terraria] Proteção para a cabeça feita de Barra Consagrada. Dotada de uma força sagrada, aumenta o dano causado por Brilho Noturno."
+  },
+  "YakushimaHeadEquip002_3": {
+    "localized_name": "Capacete Consagrado",
+    "description": "[Colaboração com Terraria] Proteção para a cabeça feita de Barra Consagrada. Dotada de uma força sagrada, aumenta o dano causado por Brilho Noturno."
+  },
+  "YakushimaHeadEquip002_4": {
+    "localized_name": "Capacete Consagrado",
+    "description": "[Colaboração com Terraria] Proteção para a cabeça feita de Barra Consagrada. Dotada de uma força sagrada, aumenta o dano causado por Brilho Noturno."
+  },
+  "YakushimaHeadEquip002_5": {
+    "localized_name": "Capacete Consagrado",
+    "description": "[Colaboração com Terraria] Proteção para a cabeça feita de Barra Consagrada. Dotada de uma força sagrada, aumenta o dano causado por Brilho Noturno."
+  },
+  "YakushimaHeadEquip003": {
+    "localized_name": "Elmo Consagrado",
+    "description": "[Colaboração com Terraria] Proteção para a cabeça feita de Barra Consagrada. Dotada de uma força sagrada, aumenta o dano causado por Espingarda do Vórtice."
+  },
+  "YakushimaHeadEquip003_2": {
+    "localized_name": "Elmo Consagrado",
+    "description": "[Colaboração com Terraria] Proteção para a cabeça feita de Barra Consagrada. Dotada de uma força sagrada, aumenta o dano causado por Espingarda do Vórtice."
+  },
+  "YakushimaHeadEquip003_3": {
+    "localized_name": "Elmo Consagrado",
+    "description": "[Colaboração com Terraria] Proteção para a cabeça feita de Barra Consagrada. Dotada de uma força sagrada, aumenta o dano causado por Espingarda do Vórtice."
+  },
+  "YakushimaHeadEquip003_4": {
+    "localized_name": "Elmo Consagrado",
+    "description": "[Colaboração com Terraria] Proteção para a cabeça feita de Barra Consagrada. Dotada de uma força sagrada, aumenta o dano causado por Espingarda do Vórtice."
+  },
+  "YakushimaHeadEquip003_5": {
+    "localized_name": "Elmo Consagrado",
+    "description": "[Colaboração com Terraria] Proteção para a cabeça feita de Barra Consagrada. Dotada de uma força sagrada, aumenta o dano causado por Espingarda do Vórtice."
+  },
+  "YakushimaHeadEquip004": {
+    "localized_name": "Capuz Consagrado",
+    "description": "[Colaboração com Terraria] Proteção para a cabeça feita de Barra Consagrada. Dotada de uma força sagrada, aumenta o dano causado por Terraprisma."
+  },
+  "YakushimaHeadEquip004_2": {
+    "localized_name": "Capuz Consagrado",
+    "description": "[Colaboração com Terraria] Proteção para a cabeça feita de Barra Consagrada. Dotada de uma força sagrada, aumenta o dano causado por Terraprisma."
+  },
+  "YakushimaHeadEquip004_3": {
+    "localized_name": "Capuz Consagrado",
+    "description": "[Colaboração com Terraria] Proteção para a cabeça feita de Barra Consagrada. Dotada de uma força sagrada, aumenta o dano causado por Terraprisma."
+  },
+  "YakushimaHeadEquip004_4": {
+    "localized_name": "Capuz Consagrado",
+    "description": "[Colaboração com Terraria] Proteção para a cabeça feita de Barra Consagrada. Dotada de uma força sagrada, aumenta o dano causado por Terraprisma."
+  },
+  "YakushimaHeadEquip004_5": {
+    "localized_name": "Capuz Consagrado",
+    "description": "[Colaboração com Terraria] Proteção para a cabeça feita de Barra Consagrada. Dotada de uma força sagrada, aumenta o dano causado por Terraprisma."
+  },
+  "YakushimaHeadEquip005": {
+    "localized_name": "Máscara do Senhor da Lua",
+    "description": "[Colaboração com Terraria] Permite sentir a força sinistra do RAID YakushimaBoss002. São pouquíssimos os que conseguem obter isto."
+  },
+  "YakushimaHeadEquip006": {
+    "localized_name": "Máscara do Olho de Cthulhu",
+    "description": "[Colaboração com Terraria] Permite sentir a força sinistra do Olho de Cthulhu. São pouquíssimos os que conseguem obter isto."
+  },
+  "YakushimaIngot001": {
+    "localized_name": "Barra Consagrada",
+    "description": "[Colaboração com Terraria] Material que abriga um poder sagrado. Pode ser usado para criar diversos itens de Terraria."
+  },
+  "YakushimaIngot002": {
+    "localized_name": "Barra de Luminita",
+    "description": "[Colaboração com Terraria] Material deixado por YakushimaBoss002 e do qual se pode sentir uma força imensa. Emite um brilho semelhante ao do luar."
+  },
+  "YakushimaLantern001": {
+    "localized_name": "Brilho Noturno",
+    "description": "[Colaboração com Terraria] Lampião místico que emite um brilho iridescente. Quando erguido, este lampião solta projéteis de luz que perseguem e atacam os inimigos várias vezes."
+  },
+  "YakushimaLantern001_2": {
+    "localized_name": "Brilho Noturno",
+    "description": "[Colaboração com Terraria] Lampião místico que emite um brilho iridescente. Quando erguido, este lampião solta projéteis de luz que perseguem e atacam os inimigos várias vezes."
+  },
+  "YakushimaLantern001_3": {
+    "localized_name": "Brilho Noturno",
+    "description": "[Colaboração com Terraria] Lampião místico que emite um brilho iridescente. Quando erguido, este lampião solta projéteis de luz que perseguem e atacam os inimigos várias vezes."
+  },
+  "YakushimaLantern001_4": {
+    "localized_name": "Brilho Noturno",
+    "description": "[Colaboração com Terraria] Lampião místico que emite um brilho iridescente. Quando erguido, este lampião solta projéteis de luz que perseguem e atacam os inimigos várias vezes."
+  },
+  "YakushimaLantern001_5": {
+    "localized_name": "Brilho Noturno",
+    "description": "[Colaboração com Terraria] Lampião místico que emite um brilho iridescente. Quando erguido, este lampião solta projéteis de luz que perseguem e atacam os inimigos várias vezes."
   }
 }

@@ -23,12 +23,24 @@
     "localized_name": "Aumento de ataque, nv. 1",
     "description": null
   },
+  "Attack_ACC_up1_Otomo_Only_Equip": {
+    "localized_name": "Aumento de ataque de los Pals, nv. 1",
+    "description": null
+  },
   "Attack_ACC_up2": {
     "localized_name": "Aumento de ataque, nv. 2",
     "description": null
   },
+  "Attack_ACC_up2_Otomo_Only_Equip": {
+    "localized_name": "Aumento de ataque de los Pals, nv. 2",
+    "description": null
+  },
   "Attack_ACC_up3": {
     "localized_name": "Aumento de ataque, nv. 3",
+    "description": null
+  },
+  "Attack_ACC_up3_Otomo_Only_Equip": {
+    "localized_name": "Aumento de ataque de los Pals, nv. 3",
     "description": null
   },
   "BossDefeatReward_AmaterasuWolf_Dark": {
@@ -155,6 +167,14 @@
     "localized_name": "Aumenta un poco el daño de oscuridad",
     "description": null
   },
+  "BossDefeatReward_IceNarwhal": {
+    "localized_name": "Aumenta mucho el daño de hielo",
+    "description": null
+  },
+  "BossDefeatReward_IceNarwhal_Fire": {
+    "localized_name": "Aumenta mucho el daño de fuego",
+    "description": null
+  },
   "BossDefeatReward_JetDragon": {
     "localized_name": "Aumenta mucho el daño dragontino",
     "description": null
@@ -217,6 +237,10 @@
   },
   "BossDefeatReward_PlantSlime": {
     "localized_name": "Aumenta un poco el daño de tierra",
+    "description": null
+  },
+  "BossDefeatReward_PoseidonOrca": {
+    "localized_name": "Aumenta mucho el daño de agua",
     "description": null
   },
   "BossDefeatReward_PurpleSpider": {
@@ -395,6 +419,18 @@
     "localized_name": "Maestría trascendental",
     "description": null
   },
+  "Defense_ACC_up1_Otomo_Only_Equip": {
+    "localized_name": "Aumento de defensa de los Pals, nv. 1",
+    "description": null
+  },
+  "Defense_ACC_up2_Otomo_Only_Equip": {
+    "localized_name": "Aumento de defensa de los Pals, nv. 2",
+    "description": null
+  },
+  "Defense_ACC_up3_Otomo_Only_Equip": {
+    "localized_name": "Aumento de defensa de los Pals, nv. 3",
+    "description": null
+  },
   "Deffence_down1": {
     "localized_name": "Resistente",
     "description": null
@@ -427,12 +463,20 @@
     "localized_name": "Aumenta un poco el daño de oscuridad",
     "description": null
   },
+  "ElementBoost_Dark_1_Otomo_Only_Equip": {
+    "localized_name": "Aumenta el daño de oscuridad de los Pals, nv. 1",
+    "description": null
+  },
   "ElementBoost_Dark_1_PAL": {
     "localized_name": "Velo de la noche",
     "description": "Aumenta el daño de los ataques de oscuridad en un 10.0 %"
   },
   "ElementBoost_Dark_2_BossDefeat": {
     "localized_name": "Aumenta el daño de oscuridad",
+    "description": null
+  },
+  "ElementBoost_Dark_2_Otomo_Only_Equip": {
+    "localized_name": "Aumenta el daño de oscuridad de los Pals, nv. 2",
     "description": null
   },
   "ElementBoost_Dark_2_PAL": {
@@ -443,8 +487,16 @@
     "localized_name": "Aumenta mucho el daño de oscuridad",
     "description": null
   },
+  "ElementBoost_Dark_3_Otomo_Only_Equip": {
+    "localized_name": "Aumenta el daño de oscuridad de los Pals, nv. 3",
+    "description": null
+  },
   "ElementBoost_Dragon_1_BossDefeat": {
     "localized_name": "Aumenta un poco el daño dragontino",
+    "description": null
+  },
+  "ElementBoost_Dragon_1_Otomo_Only_Equip": {
+    "localized_name": "Aumenta el daño dragontino de los Pals, nv. 1",
     "description": null
   },
   "ElementBoost_Dragon_1_PAL": {
@@ -455,6 +507,10 @@
     "localized_name": "Aumenta el daño dragontino",
     "description": null
   },
+  "ElementBoost_Dragon_2_Otomo_Only_Equip": {
+    "localized_name": "Aumenta el daño dragontino de los Pals, nv. 2",
+    "description": null
+  },
   "ElementBoost_Dragon_2_PAL": {
     "localized_name": "Dracodivinidad",
     "description": null
@@ -463,8 +519,16 @@
     "localized_name": "Aumenta mucho el daño dragontino",
     "description": null
   },
+  "ElementBoost_Dragon_3_Otomo_Only_Equip": {
+    "localized_name": "Aumenta el daño dragontino de los Pals, nv. 3",
+    "description": null
+  },
   "ElementBoost_Earth_1_BossDefeat": {
     "localized_name": "Aumenta un poco el daño de tierra",
+    "description": null
+  },
+  "ElementBoost_Earth_1_Otomo_Only_Equip": {
+    "localized_name": "Aumenta el daño de tierra de los Pals, nv. 1",
     "description": null
   },
   "ElementBoost_Earth_1_PAL": {
@@ -475,6 +539,10 @@
     "localized_name": "Aumenta el daño de tierra",
     "description": null
   },
+  "ElementBoost_Earth_2_Otomo_Only_Equip": {
+    "localized_name": "Aumenta el daño de tierra de los Pals, nv. 2",
+    "description": null
+  },
   "ElementBoost_Earth_2_PAL": {
     "localized_name": "Imperatierra",
     "description": null
@@ -483,20 +551,40 @@
     "localized_name": "Aumenta mucho el daño de tierra",
     "description": null
   },
+  "ElementBoost_Earth_3_Otomo_Only_Equip": {
+    "localized_name": "Aumenta el daño de tierra de los Pals, nv. 3",
+    "description": null
+  },
   "ElementBoost_Electricity_1_BossDefeat": {
     "localized_name": "Aumenta un poco el daño de rayo",
+    "description": null
+  },
+  "ElementBoost_Electricity_1_Otomo_Only_Equip": {
+    "localized_name": "Aumenta el daño de rayo de los Pals, nv. 1",
     "description": null
   },
   "ElementBoost_Electricity_2_BossDefeat": {
     "localized_name": "Aumenta el daño de rayo",
     "description": null
   },
+  "ElementBoost_Electricity_2_Otomo_Only_Equip": {
+    "localized_name": "Aumenta el daño de rayo de los Pals, nv. 2",
+    "description": null
+  },
   "ElementBoost_Electricity_3_BossDefeat": {
     "localized_name": "Aumenta mucho el daño de rayo",
     "description": null
   },
+  "ElementBoost_Electricity_3_Otomo_Only_Equip": {
+    "localized_name": "Aumenta el daño de rayo de los Pals, nv. 3",
+    "description": null
+  },
   "ElementBoost_Fire_1_BossDefeat": {
     "localized_name": "Aumenta un poco el daño de fuego",
+    "description": null
+  },
+  "ElementBoost_Fire_1_Otomo_Only_Equip": {
+    "localized_name": "Aumenta el daño de fuego de los Pals, nv. 1",
     "description": null
   },
   "ElementBoost_Fire_1_PAL": {
@@ -507,6 +595,10 @@
     "localized_name": "Aumenta el daño de fuego",
     "description": null
   },
+  "ElementBoost_Fire_2_Otomo_Only_Equip": {
+    "localized_name": "Aumenta el daño de fuego de los Pals, nv. 2",
+    "description": null
+  },
   "ElementBoost_Fire_2_PAL": {
     "localized_name": "Dominallamas",
     "description": null
@@ -515,8 +607,16 @@
     "localized_name": "Aumenta mucho el daño de fuego",
     "description": null
   },
+  "ElementBoost_Fire_3_Otomo_Only_Equip": {
+    "localized_name": "Aumenta el daño de fuego de los Pals, nv. 3",
+    "description": null
+  },
   "ElementBoost_Ice_1_BossDefeat": {
     "localized_name": "Aumenta un poco el daño de hielo",
+    "description": null
+  },
+  "ElementBoost_Ice_1_Otomo_Only_Equip": {
+    "localized_name": "Aumenta el daño de hielo de los Pals, nv. 1",
     "description": null
   },
   "ElementBoost_Ice_1_PAL": {
@@ -527,6 +627,10 @@
     "localized_name": "Aumenta el daño de hielo",
     "description": null
   },
+  "ElementBoost_Ice_2_Otomo_Only_Equip": {
+    "localized_name": "Aumenta el daño de hielo de los Pals, nv. 2",
+    "description": null
+  },
   "ElementBoost_Ice_2_PAL": {
     "localized_name": "Imperahielo",
     "description": null
@@ -535,8 +639,16 @@
     "localized_name": "Aumenta mucho el daño de hielo",
     "description": null
   },
+  "ElementBoost_Ice_3_Otomo_Only_Equip": {
+    "localized_name": "Aumenta el daño de hielo de los Pals, nv. 3",
+    "description": null
+  },
   "ElementBoost_Leaf_1_BossDefeat": {
     "localized_name": "Aumenta un poco el daño de planta",
+    "description": null
+  },
+  "ElementBoost_Leaf_1_Otomo_Only_Equip": {
+    "localized_name": "Aumenta el daño de planta de los Pals, nv. 1",
     "description": null
   },
   "ElementBoost_Leaf_1_PAL": {
@@ -547,6 +659,10 @@
     "localized_name": "Aumenta el daño de planta",
     "description": null
   },
+  "ElementBoost_Leaf_2_Otomo_Only_Equip": {
+    "localized_name": "Aumenta el daño de planta de los Pals, nv. 2",
+    "description": null
+  },
   "ElementBoost_Leaf_2_PAL": {
     "localized_name": "Ninforregente",
     "description": null
@@ -555,8 +671,16 @@
     "localized_name": "Aumenta mucho el daño de planta",
     "description": null
   },
+  "ElementBoost_Leaf_3_Otomo_Only_Equip": {
+    "localized_name": "Aumenta el daño de planta de los Pals, nv. 3",
+    "description": null
+  },
   "ElementBoost_Normal_1_BossDefeat": {
     "localized_name": "Aumenta un poco el daño no elemental",
+    "description": null
+  },
+  "ElementBoost_Normal_1_Otomo_Only_Equip": {
+    "localized_name": "Aumenta el daño no elemental de los Pals, nv. 1",
     "description": null
   },
   "ElementBoost_Normal_1_PAL": {
@@ -567,12 +691,20 @@
     "localized_name": "Aumenta el daño no elemental",
     "description": null
   },
+  "ElementBoost_Normal_2_Otomo_Only_Equip": {
+    "localized_name": "Aumenta el daño no elemental de los Pals, nv. 2",
+    "description": null
+  },
   "ElementBoost_Normal_2_PAL": {
     "localized_name": "Virtuoso",
     "description": null
   },
   "ElementBoost_Normal_3_BossDefeat": {
     "localized_name": "Aumenta mucho el daño no elemental",
+    "description": null
+  },
+  "ElementBoost_Normal_3_Otomo_Only_Equip": {
+    "localized_name": "Aumenta el daño no elemental de los Pals, nv. 3",
     "description": null
   },
   "ElementBoost_Thunder_1_PAL": {
@@ -587,12 +719,24 @@
     "localized_name": "Aumenta un poco el daño de agua",
     "description": null
   },
+  "ElementBoost_Water_1_Otomo_Only_Equip": {
+    "localized_name": "Aumenta el daño de agua de los Pals, nv. 1",
+    "description": null
+  },
   "ElementBoost_Water_2_BossDefeat": {
     "localized_name": "Aumenta el daño de agua",
     "description": null
   },
+  "ElementBoost_Water_2_Otomo_Only_Equip": {
+    "localized_name": "Aumenta el daño de agua de los Pals, nv. 2",
+    "description": null
+  },
   "ElementBoost_Water_3_BossDefeat": {
     "localized_name": "Aumenta mucho el daño de agua",
+    "description": null
+  },
+  "ElementBoost_Water_3_Otomo_Only_Equip": {
+    "localized_name": "Aumenta el daño de agua de los Pals, nv. 3",
     "description": null
   },
   "ElementResist_Aqua_1": {
@@ -743,6 +887,34 @@
     "localized_name": "Llama eterna",
     "description": null
   },
+  "GYM_NAME_Desert": {
+    "localized_name": "Líder de los Vigilantes de la isla Palápagos",
+    "description": null
+  },
+  "GYM_NAME_Forest": {
+    "localized_name": "Miembro fundador de la Liga de defensa de los Pals",
+    "description": null
+  },
+  "GYM_NAME_Meadow": {
+    "localized_name": "Líder del Sindicato Rayne",
+    "description": "Aumenta el ataque en un 20.0 %, y la velocidad de movimiento en un 10.0 %."
+  },
+  "GYM_NAME_Sakurajima": {
+    "localized_name": "Líder de las Flores Lunares",
+    "description": null
+  },
+  "GYM_NAME_Snow": {
+    "localized_name": "Comandante del Equipo de investigación genética de los Pals",
+    "description": null
+  },
+  "GYM_NAME_Viking": {
+    "localized_name": "Ciudadano de Tenraku, jefe",
+    "description": null
+  },
+  "GYM_NAME_Volcano": {
+    "localized_name": "Líder espiritual de la Llama eterna",
+    "description": null
+  },
   "HP_ACC_up1": {
     "localized_name": "Aumento de vida, nv. 1",
     "description": null
@@ -826,6 +998,10 @@
   "Noukin": {
     "localized_name": "Impulsividad",
     "description": null
+  },
+  "Nushi": {
+    "localized_name": "Maestro",
+    "description": "Aumenta el daño de los ataques de agua en un 20.0 % Aumenta el daño de los ataques de hielo en un 20.0 % Aumenta la defensa en un 20.0 %"
   },
   "PAL_ALLAttack_down1": {
     "localized_name": "Cobardía",
@@ -915,6 +1091,18 @@
     "localized_name": "Sadismo",
     "description": null
   },
+  "PalExp_Increase_1_Otomo_Only_Equip": {
+    "localized_name": "Aumento de la cantidad de puntos de EXP de los Pals, nv. 1",
+    "description": null
+  },
+  "PalExp_Increase_2_Otomo_Only_Equip": {
+    "localized_name": "Aumento de la cantidad de puntos de EXP de los Pals, nv. 2",
+    "description": null
+  },
+  "PalExp_Increase_3_Otomo_Only_Equip": {
+    "localized_name": "Aumento de la cantidad de puntos de EXP de los Pals, nv. 3",
+    "description": null
+  },
   "Rare": {
     "localized_name": "Poco común",
     "description": null
@@ -970,6 +1158,18 @@
   "Stamina_Up_3": {
     "localized_name": "Máquina imparable",
     "description": "Energía máxima + 75.0% *Solo efectivo en Pals que se puedan montar"
+  },
+  "SwimSpeed_up_1": {
+    "localized_name": "Nado ágil",
+    "description": "Aumenta la velocidad de movimiento en el agua en un 30.0 %"
+  },
+  "SwimSpeed_up_2": {
+    "localized_name": "Maestría en natación",
+    "description": null
+  },
+  "SwimSpeed_up_3": {
+    "localized_name": "Rey de las olas",
+    "description": null
   },
   "TemperatureResist_Cold1": {
     "localized_name": "Resistencia al frío, nv. 1",
@@ -1049,6 +1249,26 @@
   },
   "WorkSpeed_ACC_up3": {
     "localized_name": "Velocidad de trabajo, nv. 3",
+    "description": null
+  },
+  "YakushimaDagameBoost_Magic_Equip": {
+    "localized_name": "Poder sagrado (magia)",
+    "description": null
+  },
+  "YakushimaDagameBoost_Melee_Equip": {
+    "localized_name": "Poder sagrado (corta distancia)",
+    "description": null
+  },
+  "YakushimaDagameBoost_Ranged_Equip": {
+    "localized_name": "Poder sagrado (larga distancia)",
+    "description": null
+  },
+  "YakushimaDagameBoost_Summon_Equip": {
+    "localized_name": "Poder sagrado (invocación)",
+    "description": null
+  },
+  "YakushimaProtection_Equip": {
+    "localized_name": "Protección sagrada",
     "description": null
   },
   "defense_ACC_up1": {

@@ -8,7 +8,7 @@
     "description": null
   },
   "Accessory_AirDash3": {
-    "localized_name": "it Text",
+    "localized_name": "Stivali del triplo scatto aereo",
     "description": null
   },
   "Accessory_JumpCount_Increase1": {
@@ -100,7 +100,7 @@
     "description": null
   },
   "BaseCampWorkerExtraStation": {
-    "localized_name": "BaseCampWorkerExtraStation",
+    "localized_name": "Dispositivo di controllo del box per Pal",
     "description": null
   },
   "Battle_Armor_Grade_01_Cloth": {
@@ -365,7 +365,7 @@
   },
   "BelieverFlagSet": {
     "localized_name": "Set con bandiera dell'Ente per la tutela dei Pal",
-    "description": "Un set con Believer_Flag e Believer_Banner. La prova della vittoria sull'Ente per la tutela dei Pal."
+    "description": "Un set con Vessillo dell'Ente per la tutela dei Pal e Striscione dell'Ente per la tutela dei Pal. La prova della vittoria sull'Ente per la tutela dei Pal."
   },
   "BlastFurnace4": {
     "localized_name": "Fornace gigante",
@@ -396,11 +396,11 @@
     "description": null
   },
   "ChargeLaserRifle": {
-    "localized_name": "it Text",
+    "localized_name": "Fucile a carica",
     "description": null
   },
   "ChargeLaserRifleBullet": {
-    "localized_name": "it Text",
+    "localized_name": "Proiettili per fucile a carica",
     "description": null
   },
   "Cloth2": {
@@ -428,7 +428,7 @@
     "description": "Una struttura per ridurre in polvere Pietra o Legno e ottenere così altri tipi di risorse. Sono necessari Pal competenti nell'attività |Irrigazione| per usare la ruota idraulica."
   },
   "CrystalPit": {
-    "localized_name": "CrystalPit",
+    "localized_name": "Cava di exoquarzo",
     "description": null
   },
   "DamagedScarecrow": {
@@ -492,11 +492,11 @@
     "description": null
   },
   "EnergyShotgun": {
-    "localized_name": "it Text",
+    "localized_name": "Fucile a canna liscia energetico",
     "description": null
   },
   "EnergyShotgunBullet": {
-    "localized_name": "it Text",
+    "localized_name": "Proiettili per fucile a canna liscia energetico",
     "description": null
   },
   "EnergyStorage_Electric": {
@@ -508,7 +508,7 @@
     "description": null
   },
   "Factory_Hard_04": {
-    "localized_name": "it_Text",
+    "localized_name": "Fabbrica per le attività avanzata",
     "description": null
   },
   "Factory_Money": {
@@ -521,34 +521,34 @@
   },
   "FireCultFlagSet": {
     "localized_name": "Set con bandiera della Congrega del fuoco perenne",
-    "description": "Un set con FireCult_Flag e FireCult_Banner. La prova della vittoria sulla Congrega del fuoco perenne."
+    "description": "Un set con Vessillo della Congrega del fuoco perenne e Striscione della Congrega del fuoco perenne. La prova della vittoria sulla Congrega del fuoco perenne."
   },
   "FishingBait_2": {
-    "localized_name": "FishingBait_2",
+    "localized_name": "Esca di qualità",
     "description": null
   },
   "FishingBait_3": {
-    "localized_name": "FishingBait_3",
+    "localized_name": "Esca di prima scelta",
     "description": null
   },
   "FishingBait_3_A": {
-    "localized_name": "FishingBait_3_A",
+    "localized_name": "Esca seducente",
     "description": null
   },
   "FishingPond1": {
-    "localized_name": "FishingPond1",
+    "localized_name": "Lago da pesca",
     "description": null
   },
   "FishingPond2": {
-    "localized_name": "FishingPond2",
+    "localized_name": "Lago da pesca enorme",
     "description": null
   },
   "FishingRod_02_1": {
-    "localized_name": "FishingRod_02_1",
+    "localized_name": "Canna da pesca intermedia (Cattiva)",
     "description": null
   },
   "FishingRod_03_1": {
-    "localized_name": "FishingRod_03_1",
+    "localized_name": "Canna da pesca avanzata (Pengullet)",
     "description": null
   },
   "FishingSet1": {
@@ -772,7 +772,7 @@
     "description": null
   },
   "GrapplingGun5": {
-    "localized_name": "GrapplingGun5",
+    "localized_name": "Pistola con rampino ultra",
     "description": null
   },
   "GrenadeBullet": {
@@ -809,7 +809,7 @@
   },
   "HunterFlagSet": {
     "localized_name": "Set con bandiera dei bracconieri",
-    "description": "Un set con Hunter_Flag e Hunter_Banner. La prova della vittoria sui bracconieri."
+    "description": "Un set con Vessillo dei bracconieri e Striscione dei bracconieri. La prova della vittoria sui bracconieri."
   },
   "IceCrusher": {
     "localized_name": "Macinatore criogenico",
@@ -884,7 +884,7 @@
     "description": null
   },
   "Lantern_High": {
-    "localized_name": "Lantern_High",
+    "localized_name": "Lanterna portatile potenziata",
     "description": null
   },
   "LargeCeilingLamp": {
@@ -932,7 +932,7 @@
     "description": null
   },
   "ManganeseIngot": {
-    "localized_name": "ManganeseIngot",
+    "localized_name": "Lingotto di corallite",
     "description": null
   },
   "ManualElectricGenerator": {
@@ -984,7 +984,7 @@
     "description": null
   },
   "MultiHatchingPalEgg": {
-    "localized_name": "MultiHatchingPalEgg",
+    "localized_name": "Incubatrice per uova grande",
     "description": null
   },
   "Musket": {
@@ -993,7 +993,7 @@
   },
   "NinjaFlagSet": {
     "localized_name": "Set con bandiera del clan dei fiori di luna",
-    "description": "Un set con Ninja_Flag e Ninja_Banner. La prova della vittoria sul clan dei fiori di luna."
+    "description": "Un set con Vessillo del clan dei fiori di luna e Striscione del clan dei fiori di luna. La prova della vittoria sul clan dei fiori di luna."
   },
   "OilPump": {
     "localized_name": "Pompa petrolifera",
@@ -1004,15 +1004,15 @@
     "description": null
   },
   "OperatingTable": {
-    "localized_name": "it_Text",
+    "localized_name": "Tavolo operatorio Pal",
     "description": null
   },
   "OverheatRifle": {
-    "localized_name": "it Text",
+    "localized_name": "Fucile a sovraccarico",
     "description": null
   },
   "OverheatRifleBullet": {
-    "localized_name": "it Text",
+    "localized_name": "Proiettili per fucile a sovraccarico",
     "description": null
   },
   "PALBOX": {
@@ -1024,15 +1024,15 @@
     "description": null
   },
   "PalDopingShot": {
-    "localized_name": "it Text",
+    "localized_name": "Pistola potenziante",
     "description": null
   },
   "PalDopingShotBullet": {
-    "localized_name": "it Text",
+    "localized_name": "Proiettili per pistola potenziante",
     "description": null
   },
   "PalDopingShot_2": {
-    "localized_name": "PalDopingShot_2",
+    "localized_name": "Mega pistola potenziante",
     "description": null
   },
   "PalFoodBox": {
@@ -1040,7 +1040,7 @@
     "description": "Lasciandoci del cibo, i Pal della base potranno sfamarsi qui."
   },
   "PalHealingGrenade": {
-    "localized_name": "it Text",
+    "localized_name": "Granata cura-Pal",
     "description": null
   },
   "PalMedicineBox": {
@@ -1061,7 +1061,7 @@
   },
   "PoliceFlagSet": {
     "localized_name": "Set con bandiera della Milizia volontaria",
-    "description": "Un set con Police_Flag e Police_Banner. La prova della vittoria sulla Milizia volontaria."
+    "description": "Un set con Vessillo della Milizia volontaria e Striscione della Milizia volontaria. La prova della vittoria sulla Milizia volontaria."
   },
   "Polymer": {
     "localized_name": "Polimero",
@@ -1268,7 +1268,7 @@
     "description": "Set per realizzare una base in stile futuristico. Include fondamenta, mura, tetto, scale e tutto il necessario per metter su casa."
   },
   "Salvage_TreasureBoxKey02": {
-    "localized_name": "Salvage_TreasureBoxKey02",
+    "localized_name": "Magnete da pesca potente",
     "description": null
   },
   "SanityDecrease1": {
@@ -1277,7 +1277,7 @@
   },
   "ScientistFlagSet": {
     "localized_name": "Set con bandiera della Squadra per la ricerca genetica",
-    "description": "Un set con Scientist_Flag e Scientist_Banner. La prova della vittoria sulla Squadra per la ricerca genetica."
+    "description": "Un set con Vessillo della Squadra per la ricerca genetica e Striscione della Squadra per la ricerca genetica. La prova della vittoria sulla Squadra per la ricerca genetica."
   },
   "Shield_01": {
     "localized_name": "Scudo normale",
@@ -1360,7 +1360,7 @@
     "description": null
   },
   "SkillUnlock_BlueDragon_Ice": {
-    "localized_name": "SkillUnlock_BlueDragon_Ice",
+    "localized_name": "Sella di Azurobe Cryst",
     "description": null
   },
   "SkillUnlock_BlueThunderHorse": {
@@ -1456,7 +1456,7 @@
     "description": null
   },
   "SkillUnlock_FlyingManta_Thunder": {
-    "localized_name": "SkillUnlock_FlyingManta_Thunder",
+    "localized_name": "Guantoni di Celeray Lux",
     "description": null
   },
   "SkillUnlock_Garm": {
@@ -1464,11 +1464,11 @@
     "description": null
   },
   "SkillUnlock_GhostAnglerfish": {
-    "localized_name": "SkillUnlock_GhostAnglerfish",
+    "localized_name": "Sella di Ghangler",
     "description": null
   },
   "SkillUnlock_GhostAnglerfish_Fire": {
-    "localized_name": "SkillUnlock_GhostAnglerfish_Fire",
+    "localized_name": "Sella di Ghangler Ignis",
     "description": null
   },
   "SkillUnlock_GhostBeast": {
@@ -1540,15 +1540,15 @@
     "description": null
   },
   "SkillUnlock_IceNarwhal": {
-    "localized_name": "SkillUnlock_IceNarwhal",
+    "localized_name": "Sella di Whalaska",
     "description": null
   },
   "SkillUnlock_IceNarwhal_Fire": {
-    "localized_name": "SkillUnlock_IceNarwhal_Fire",
+    "localized_name": "Sella di Whalaska Ignis",
     "description": null
   },
   "SkillUnlock_IceSeal": {
-    "localized_name": "SkillUnlock_IceSeal",
+    "localized_name": "Bardatura di Polapup",
     "description": null
   },
   "SkillUnlock_JetDragon": {
@@ -1592,7 +1592,7 @@
     "description": null
   },
   "SkillUnlock_LeafMomonga": {
-    "localized_name": "SkillUnlock_LeafMomonga",
+    "localized_name": "Bardatura di Herbil",
     "description": null
   },
   "SkillUnlock_Manticore": {
@@ -1632,7 +1632,7 @@
     "description": null
   },
   "SkillUnlock_NegativeOctopus_Neutral": {
-    "localized_name": "SkillUnlock_NegativeOctopus_Neutral",
+    "localized_name": "Guantoni di Killamari Primo",
     "description": null
   },
   "SkillUnlock_NightBlueHorse": {
@@ -1644,15 +1644,15 @@
     "description": null
   },
   "SkillUnlock_Penguin_Electric": {
-    "localized_name": "SkillUnlock_Penguin_Electric",
+    "localized_name": "Lanciarazzi di Pengullet Lux",
     "description": null
   },
   "SkillUnlock_Plesiosaur": {
-    "localized_name": "SkillUnlock_Plesiosaur",
+    "localized_name": "Sella di Braloha",
     "description": null
   },
   "SkillUnlock_PoseidonOrca": {
-    "localized_name": "SkillUnlock_PoseidonOrca",
+    "localized_name": "Sella di Neptilius",
     "description": null
   },
   "SkillUnlock_PurpleSpider": {
@@ -1720,7 +1720,7 @@
     "description": null
   },
   "SkillUnlock_TropicalOstrich": {
-    "localized_name": "SkillUnlock_TropicalOstrich",
+    "localized_name": "Sella di Palumba",
     "description": null
   },
   "SkillUnlock_Umihebi": {
@@ -1792,7 +1792,7 @@
     "description": "Qui i Pal possono recuperare ancora più punti SAN."
   },
   "Spa3": {
-    "localized_name": "Spa3",
+    "localized_name": "Terme in stile giapponese",
     "description": null
   },
   "Spear": {
@@ -1968,7 +1968,7 @@
     "description": "Si può fissare a un muro."
   },
   "WeaponFactory_Dirty_04": {
-    "localized_name": "it_Text",
+    "localized_name": "Fabbrica di armi avanzata",
     "description": null
   },
   "Wood_Gate": {

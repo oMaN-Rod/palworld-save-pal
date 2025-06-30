@@ -12,63 +12,111 @@
     "description": "De nature sensible, il se retire dans sa grotte quand quelque chose le dérange. Sa solitude a fini par noircir son âme."
   },
   "Ambassador01": {
-    "localized_name": "Ambassadeur de la ville du désert",
+    "localized_name": "Ambassadeur de la Ville du Désert",
     "description": null
   },
   "Anubis": {
     "localized_name": "Anubis",
     "description": "Son apparence faisait autrefois de lui un symbole de noblesse. Il est ainsi devenu un repère pour ceux qui méprisaient richesse et autorité. Puis un jour, Anubis est devenu symbole de mort."
   },
+  "Arena_BossDefeat": {
+    "localized_name": "Chasseur de Pals vétéran",
+    "description": null
+  },
   "Arena_DarkTrader": {
     "localized_name": "Contrebandier",
     "description": null
   },
   "Arena_Female_Presenter": {
-    "localized_name": "Dresseur amical",
+    "localized_name": "Paldresseur Amical",
+    "description": null
+  },
+  "Arena_Female_Soldier02": {
+    "localized_name": "Paldresseuse à Potentiel",
     "description": null
   },
   "Arena_Female_Soldier03": {
-    "localized_name": "Dresseuse aguerrie",
+    "localized_name": "Paldresseuse Aguerrie",
+    "description": null
+  },
+  "Arena_Female_Soldier04": {
+    "localized_name": "Paldresseuse au Sommet",
     "description": null
   },
   "Arena_FireCult_FlameThrower": {
-    "localized_name": "Confrérie des Flammes éternelles - Martyre",
+    "localized_name": "Confrérie des Flammes Éternelles - Martyre",
     "description": null
   },
   "Arena_Hunter_Fat_GatlingGun": {
-    "localized_name": "Braconniers - Broyeur",
+    "localized_name": "Braconniers — Broyeur",
     "description": null
   },
   "Arena_Male_DarkTrader02": {
     "localized_name": "Marchand de médailles",
     "description": null
   },
+  "Arena_Male_Police_old": {
+    "localized_name": "Réincarné",
+    "description": null
+  },
+  "Arena_Male_Soldier02": {
+    "localized_name": "Paldresseur Novice",
+    "description": null
+  },
   "Arena_Male_Soldier02_Invader": {
-    "localized_name": "Dresseur bouillonnant",
+    "localized_name": "Paldresseur Bouillonnant",
+    "description": null
+  },
+  "Arena_Male_Soldier03": {
+    "localized_name": "Paldresseur sans Pitié",
+    "description": null
+  },
+  "Arena_Male_Soldier04": {
+    "localized_name": "Paldresseur Combatif",
     "description": null
   },
   "Arena_Ninja": {
-    "localized_name": "Société des fleurs lunaires - Genin",
+    "localized_name": "Clan des Fleurs Lunaires — Genin",
     "description": null
   },
   "Arena_NinjaElite": {
-    "localized_name": "Société des fleurs lunaires - Jonin",
+    "localized_name": "Clan des Fleurs Lunaires — Jonin",
+    "description": null
+  },
+  "Arena_PalPassive_Doctor": {
+    "localized_name": "Docteur Brawn",
+    "description": null
+  },
+  "Arena_Ranger04": {
+    "localized_name": "La Chasseuse au Parfum envoûtant",
+    "description": null
+  },
+  "Arena_Reward_Emote": {
+    "localized_name": "Évangéliste de l'amour",
+    "description": null
+  },
+  "Arena_Reward_Paldex": {
+    "localized_name": "Chercheur en écologie de Pal",
+    "description": null
+  },
+  "Arena_Scholar01": {
+    "localized_name": "Le Chercheur en quête de Légendes",
     "description": null
   },
   "Arena_Scientist_LaserRifle": {
-    "localized_name": "Unité de recherche sur les gènes - Équipe d'exécution",
+    "localized_name": "Unité de Recherche sur les Gènes - Équipe d'Exécution",
     "description": null
   },
   "Arena_Soldier": {
-    "localized_name": "Mercenaire solide",
+    "localized_name": "Mercenaire Solide",
     "description": null
   },
   "Arena_Viking": {
-    "localized_name": "Habitant du paradis déchu",
+    "localized_name": "Habitant du Paradis Déchu",
     "description": null
   },
   "Arena_VikingElite": {
-    "localized_name": "Habitant du paradis déchu (élite)",
+    "localized_name": "Habitant du Paradis Déchu (Élite)",
     "description": null
   },
   "BOSS_Believer_CrossBow": {
@@ -308,7 +356,7 @@
     "description": "Sa flamme noire ne brûle pas au toucher, mais les objets exposés en continu fondent lentement de l'intérieur. Particulièrement efficace sur le fromage : un régal."
   },
   "Blacksmith01": {
-    "localized_name": "Forgeron en activité",
+    "localized_name": "Forgeron en Activité",
     "description": null
   },
   "BlueDragon": {
@@ -316,7 +364,7 @@
     "description": "Son ruban blanc noircit au contact d'une eau impure. Sa faculté à identifier les toxines a ainsi longtemps mené à son braconnage, le poussant à entretenir une certaine rancœur envers les humains."
   },
   "BlueDragon_Ice": {
-    "localized_name": "BlueDragon_Ice",
+    "localized_name": "Azurobe Cryst",
     "description": "Son ruban blanc absorbe sans fin la chaleur autour de lui… et pourtant, il reste froid, immuable. Cette propriété anormale a conduit jadis à sa traque. Depuis, il garde une rancune glaciale envers les humains."
   },
   "BluePlatypus": {
@@ -324,7 +372,7 @@
     "description": "Peut créer des vagues à la demande grâce à l'eau qu'il produit. Il utilise son propre corps comme planche de surf pour aller plus vite, mais les collisions fatales sont monnaie courante."
   },
   "BluePlatypus_Fire": {
-    "localized_name": "BluePlatypus_Fire",
+    "localized_name": "Fuack Ignis",
     "description": "Son ventre à friction élevée lui permet de faire du body-surfing… au point de prendre feu. Il finit régulièrement en torche vivante, emporté par son propre élan."
   },
   "BlueThunderHorse": {
@@ -352,19 +400,19 @@
     "description": "Cette espèce n'a absolument rien à voir avec Pengullet. Pourtant, il endure lorsqu'il est choyé contre son gré."
   },
   "CaptainPenguin_Black": {
-    "localized_name": "CaptainPenguin_Black",
-    "description": "Pour mieux chasser sous l’eau, il a acquis le pouvoir de l’électricité, ce qui a changé sa couleur. Depuis, les Pengullet le tiennent à distance. Mais allez savoir pourquoi… il s’est trouvé un nouveau disciple : Penguin_Electric."
+    "localized_name": "Penking Lux",
+    "description": "Pour mieux chasser sous l’eau, il a acquis le pouvoir de l’électricité, ce qui a changé sa couleur. Depuis, les Pengullet le tiennent à distance. Mais allez savoir pourquoi… il s’est trouvé un nouveau disciple : Pengullet Lux."
   },
   "CaravanLeader01": {
-    "localized_name": "Capitaine de caravane",
+    "localized_name": "Capitaine de Caravane",
     "description": null
   },
   "CaravanLeader02": {
-    "localized_name": "Capitaine de caravane",
+    "localized_name": "Capitaine de Caravane",
     "description": null
   },
   "CaravanLeader03": {
-    "localized_name": "Capitaine de caravane",
+    "localized_name": "Capitaine de Caravane",
     "description": null
   },
   "Carbunclo": {
@@ -436,7 +484,7 @@
     "description": "Son corps composé d'énergie est une coquille vide remplie de sédiments pour une masse impressionnante. Les êtres touchés ne peuvent que gémir à la mort."
   },
   "DeathPenalty_guide": {
-    "localized_name": "Dresseuse aguerrie",
+    "localized_name": "Paldresseuse Aguerrie",
     "description": null
   },
   "Deer": {
@@ -448,7 +496,7 @@
     "description": "L'individu aux bois les plus durs devient le chef. Mais il perd ce statut quand ces derniers tombent. Il doit alors quitter le troupeau pour retourner à la terre."
   },
   "Doctor": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "DreamDemon": {
@@ -476,83 +524,83 @@
     "description": "Arborant un sourire franc et un physique puissant, il se montre docile envers ceux qu'il considère comme ses amis. Mais il change radicalement de comportement en possession d'un minigun."
   },
   "Emote_location_A_01": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Emote_location_A_02": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Emote_location_B_01": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Emote_location_B_02": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Emote_location_C_01": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Emote_location_C_02": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Emote_location_D_01": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Emote_location_D_02": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Emote_location_E_01": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Emote_location_E_02": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Emote_location_F_01": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Emote_location_F_02": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Emote_location_G_01": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Emote_location_G_02": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Emote_location_H_01": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Emote_location_H_02": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Emote_location_I_01": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Emote_location_I_02": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Epicure01": {
-    "localized_name": "Chasseur de cuisine raffinée",
+    "localized_name": "Chasseur de Cuisine Raffinée",
     "description": null
   },
   "Escort_PalTamer01": {
-    "localized_name": "Dresseur Protecteur",
+    "localized_name": "Paldresseur Protecteur",
     "description": null
   },
   "Escort_Warrior01": {
@@ -576,35 +624,35 @@
     "description": null
   },
   "Female_Farmer01_v01": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Female_Farmer01_v02": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Female_Farmer01_v03": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Female_Farmer01_v04": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Female_Nomad01_v01": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Female_Nomad01_v02": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Female_Nomad01_v03": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Female_Nomad01_v04": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Female_People02": {
@@ -616,47 +664,47 @@
     "description": null
   },
   "Female_Presenter01": {
-    "localized_name": "Dresseur amical",
+    "localized_name": "Paldresseur Amical",
     "description": null
   },
   "Female_Ranger01_v01": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Female_Ranger01_v02": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Female_Ranger01_v03": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Female_Ranger01_v04": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Female_Soldier01": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Female_Soldier02": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Female_Soldier03": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Female_Soldier03_Invader": {
-    "localized_name": "Dresseuses jumelles",
+    "localized_name": "Paldresseuses Jumelles",
     "description": null
   },
   "Female_Soldier04": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Female_Soldier04_Invader": {
-    "localized_name": "Dresseuses jumelles",
+    "localized_name": "Paldresseuses Jumelles",
     "description": null
   },
   "FengyunDeeper": {
@@ -668,31 +716,31 @@
     "description": "Il y a bien longtemps, on pensait que dessiner un Fenglope Lux ferait s'abattre la foudre sur soi. Mais au fil des années, les représentations de Fenglope Lux devinrent des sortes d'amulettes pour se prémunir contre cette même foudre."
   },
   "FireCult_FlameThrower": {
-    "localized_name": "Confrérie des Flammes éternelles - Martyre",
+    "localized_name": "Confrérie des Flammes Éternelles - Martyre",
     "description": null
   },
   "FireCult_FlameThrower_Invader": {
-    "localized_name": "Confrérie des Flammes éternelles - Martyre",
+    "localized_name": "Confrérie des Flammes Éternelles - Martyre",
     "description": null
   },
   "FireCult_FlameThrower_Relax": {
-    "localized_name": "Confrérie des Flammes éternelles - Martyre",
+    "localized_name": "Confrérie des Flammes Éternelles - Martyre",
     "description": null
   },
   "FireCult_Prisoner": {
-    "localized_name": "Confrérie des Flammes éternelles - Martyre",
+    "localized_name": "Confrérie des Flammes Éternelles - Martyre",
     "description": null
   },
   "FireCult_Rifle": {
-    "localized_name": "Confrérie des Flammes éternelles - Martyre",
+    "localized_name": "Confrérie des Flammes Éternelles - Martyre",
     "description": null
   },
   "FireCult_Rifle_Invader": {
-    "localized_name": "Confrérie des Flammes éternelles - Martyre",
+    "localized_name": "Confrérie des Flammes Éternelles - Martyre",
     "description": null
   },
   "FireCult_Rifle_Relax": {
-    "localized_name": "Confrérie des Flammes éternelles - Martyre",
+    "localized_name": "Confrérie des Flammes Éternelles - Martyre",
     "description": null
   },
   "FireKirin": {
@@ -732,7 +780,7 @@
     "description": "Chevauche le vent pour voyager à sa guise. Son itinéraire prend fin lorsqu'il trouve un partenaire."
   },
   "FlyingManta_Thunder": {
-    "localized_name": "FlyingManta_Thunder",
+    "localized_name": "Celaray Lux",
     "description": "Ses motifs tape-à-l'œil l'aident à trouver un partenaire. Mais les nombreux accidents causés par ses chocs électriques ont fini par faire du motif rayé jaune et noir un symbole de danger sur l'île."
   },
   "FoxMage": {
@@ -820,12 +868,12 @@
     "description": "Le lien du Direhowl avec les humains n'existe plus depuis longtemps, mais ses techniques de chasse semblent puiser leurs racines dans celle qu'il pratiquait autrefois avec ses maîtres."
   },
   "GhostAnglerfish": {
-    "localized_name": "GhostAnglerfish",
+    "localized_name": "Ghangler",
     "description": "Un leurre lumineux qui perce les ténèbres. Les Pals égarés, attirés par sa lueur, n’ont plus aucune chance de lui échapper… car GhostAnglerFish les guidera sans relâche, jusqu’à ce qu’ils retrouvent enfin le chemin de leur foyer."
   },
   "GhostAnglerfish_Fire": {
-    "localized_name": "GhostAnglerfish_Fire",
-    "description": "Son leurre incandescent ne sert pas qu’à attirer les proies, mais aussi à cuire de savoureux mets. Les Pals, attirés par l’odeur alléchante, ne peuvent plus s’échapper une fois repérés par GhostAnglerfish_Fire… car ils seront chaleureusement invités à partager un bon repas."
+    "localized_name": "Ghangler Ignis",
+    "description": "Son leurre incandescent ne sert pas qu’à attirer les proies, mais aussi à cuire de savoureux mets. Les Pals, attirés par l’odeur alléchante, ne peuvent plus s’échapper une fois repérés par Ghangler Ignis… car ils seront chaleureusement invités à partager un bon repas."
   },
   "GhostBeast": {
     "localized_name": "Maraith",
@@ -850,6 +898,10 @@
   "Gorilla_Ground": {
     "localized_name": "Gorirat Terra",
     "description": "Communique avec ses congénères au rythme de ses coups au sol. Sa puissance supérieure à celle des Gorirat fait que si tous les Gorirat Terra frappaient le sol à l'unisson, Palpagos sombrerait sous les eaux en une seconde."
+  },
+  "GrassBoss": {
+    "localized_name": "Zoe",
+    "description": null
   },
   "GrassMammoth": {
     "localized_name": "Mammorest",
@@ -912,19 +964,19 @@
     "description": "Libère l'air froid accumulé à chaque impact subi. Le souffle émis radialement gèle l'atmosphère. Le froid transperce l'assaillant sur tout le corps."
   },
   "Help01": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Help02": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Help03": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Help04": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "HerculesBeetle": {
@@ -948,211 +1000,211 @@
     "description": "Lorsqu'il trouve un groupe de proies, son premier réflexe est d'utiliser un puissant jet d'eau pour tout emporter. Mais le fait que sa cible première finisse souvent par disparaître rend cette technique de chasse quelque peu discutable."
   },
   "Hunter_Bat": {
-    "localized_name": "Braconniers - Nouvelle recrue",
+    "localized_name": "Braconniers — Nouvelle recrue",
     "description": null
   },
   "Hunter_Bat_Invader": {
-    "localized_name": "Braconniers - Nouvelle recrue",
+    "localized_name": "Braconniers — Nouvelle recrue",
     "description": null
   },
   "Hunter_BowGun": {
-    "localized_name": "Braconniers - Arbalétrier",
+    "localized_name": "Braconniers — Arbalétrier",
     "description": null
   },
   "Hunter_BowGun_Oilrig": {
-    "localized_name": "Braconniers - Arbalétrier",
+    "localized_name": "Braconniers — Arbalétrier",
     "description": null
   },
   "Hunter_Fat_GatlingGun": {
-    "localized_name": "Braconniers - Broyeur",
+    "localized_name": "Braconniers — Broyeur",
     "description": null
   },
   "Hunter_Fat_GatlingGun_Invader": {
-    "localized_name": "Braconniers - Broyeur",
+    "localized_name": "Braconniers — Broyeur",
     "description": null
   },
   "Hunter_Fat_GatlingGun_LargeOilrig": {
-    "localized_name": "Braconniers - Broyeur",
+    "localized_name": "Braconniers — Broyeur",
     "description": null
   },
   "Hunter_Fat_GatlingGun_MiniOilrig": {
-    "localized_name": "Braconniers - Broyeur",
+    "localized_name": "Braconniers — Broyeur",
     "description": null
   },
   "Hunter_Fat_GatlingGun_Oilrig": {
-    "localized_name": "Braconniers - Broyeur",
+    "localized_name": "Braconniers — Broyeur",
     "description": null
   },
   "Hunter_Fat_GatlingGun_Tower": {
-    "localized_name": "Braconniers - Broyeur",
+    "localized_name": "Braconniers — Broyeur",
     "description": null
   },
   "Hunter_Fat_Prisoner": {
-    "localized_name": "Braconniers - Broyeur",
+    "localized_name": "Braconniers — Broyeur",
     "description": null
   },
   "Hunter_FlameThrower": {
-    "localized_name": "Braconniers - Nettoyeur",
+    "localized_name": "Braconniers — Nettoyeur",
     "description": null
   },
   "Hunter_FlameThrower_Invader": {
-    "localized_name": "Braconniers - Nettoyeur",
+    "localized_name": "Braconniers — Nettoyeur",
     "description": null
   },
   "Hunter_FlameThrower_LargeOilrig": {
-    "localized_name": "Braconniers - Nettoyeur",
+    "localized_name": "Braconniers — Nettoyeur",
     "description": null
   },
   "Hunter_FlameThrower_MiiniOilrig": {
-    "localized_name": "Braconniers - Nettoyeur",
+    "localized_name": "Braconniers — Nettoyeur",
     "description": null
   },
   "Hunter_FlameThrower_Oilrig": {
-    "localized_name": "Braconniers - Nettoyeur",
+    "localized_name": "Braconniers — Nettoyeur",
     "description": null
   },
   "Hunter_Grenade": {
-    "localized_name": "Braconniers - Grenadier",
+    "localized_name": "Braconniers — Grenadier",
     "description": null
   },
   "Hunter_GrenadeLauncher": {
-    "localized_name": "Braconniers - Vétéran",
+    "localized_name": "Braconniers — Vétéran",
     "description": null
   },
   "Hunter_GrenadeLauncher_LargeOilrig": {
-    "localized_name": "Braconniers - Vétéran",
+    "localized_name": "Braconniers — Vétéran",
     "description": null
   },
   "Hunter_GrenadeLauncher_Oilrig": {
-    "localized_name": "Braconniers - Vétéran",
+    "localized_name": "Braconniers — Vétéran",
     "description": null
   },
   "Hunter_Grenade_Invader": {
-    "localized_name": "Braconniers - Grenadier",
+    "localized_name": "Braconniers — Grenadier",
     "description": null
   },
   "Hunter_Grenade_LargeOilrig": {
-    "localized_name": "Braconniers - Grenadier",
+    "localized_name": "Braconniers — Grenadier",
     "description": null
   },
   "Hunter_Grenade_MiniOilrig": {
-    "localized_name": "Braconniers - Grenadier",
+    "localized_name": "Braconniers — Grenadier",
     "description": null
   },
   "Hunter_Grenade_Oilrig": {
-    "localized_name": "Braconniers - Grenadier",
+    "localized_name": "Braconniers — Grenadier",
     "description": null
   },
   "Hunter_Handgun": {
-    "localized_name": "Braconniers - Nouvelle recrue",
+    "localized_name": "Braconniers — Nouvelle recrue",
     "description": null
   },
   "Hunter_Handgun_Invader": {
-    "localized_name": "Braconniers - Nouvelle recrue",
+    "localized_name": "Braconniers — Nouvelle recrue",
     "description": null
   },
   "Hunter_Handgun_MiniOilrig": {
-    "localized_name": "Braconniers - Nouvelle recrue",
+    "localized_name": "Braconniers — Nouvelle recrue",
     "description": null
   },
   "Hunter_Katana": {
-    "localized_name": "Braconniers - Épéiste",
+    "localized_name": "Braconniers — Épéiste",
     "description": null
   },
   "Hunter_Katana_Oilrig": {
-    "localized_name": "Braconniers - Épéiste",
+    "localized_name": "Braconniers — Épéiste",
     "description": null
   },
   "Hunter_LaserRifle": {
-    "localized_name": "Braconniers - Technophile",
+    "localized_name": "Braconniers — Technophile",
     "description": null
   },
   "Hunter_LaserRifle_Oilrig": {
-    "localized_name": "Braconniers - Technophile",
+    "localized_name": "Braconniers — Technophile",
     "description": null
   },
   "Hunter_MissileLauncher": {
-    "localized_name": "Braconniers - Intercepteur",
+    "localized_name": "Braconniers — Intercepteur",
     "description": null
   },
   "Hunter_MissileLauncher_LargeOilrig": {
-    "localized_name": "Braconniers - Intercepteur",
+    "localized_name": "Braconniers — Intercepteur",
     "description": null
   },
   "Hunter_MissileLauncher_Oilrig": {
-    "localized_name": "Braconniers - Intercepteur",
+    "localized_name": "Braconniers — Intercepteur",
     "description": null
   },
   "Hunter_Prisoner": {
-    "localized_name": "Braconniers - Nouvelle recrue",
+    "localized_name": "Braconniers — Nouvelle recrue",
     "description": null
   },
   "Hunter_Rifle": {
-    "localized_name": "Braconniers - Tireur",
+    "localized_name": "Braconniers — Tireur",
     "description": null
   },
   "Hunter_Rifle_Invader": {
-    "localized_name": "Braconniers - Tireur",
+    "localized_name": "Braconniers — Tireur",
     "description": null
   },
   "Hunter_Rifle_LargeOilrig": {
-    "localized_name": "Braconniers - Tireur",
+    "localized_name": "Braconniers — Tireur",
     "description": null
   },
   "Hunter_Rifle_MiniOilrig": {
-    "localized_name": "Braconniers - Tireur",
+    "localized_name": "Braconniers — Tireur",
     "description": null
   },
   "Hunter_Rifle_Oilrig": {
-    "localized_name": "Braconniers - Tireur",
+    "localized_name": "Braconniers — Tireur",
     "description": null
   },
   "Hunter_RocketLauncher": {
-    "localized_name": "Braconniers - Membre d'élite",
+    "localized_name": "Braconniers – Élite",
     "description": null
   },
   "Hunter_RocketLauncher_Invader": {
-    "localized_name": "Braconniers - Membre d'élite",
+    "localized_name": "Braconniers – Élite",
     "description": null
   },
   "Hunter_RocketLauncher_LargeOilrig": {
-    "localized_name": "Braconniers - Membre d'élite",
+    "localized_name": "Braconniers – Élite",
     "description": null
   },
   "Hunter_RocketLauncher_MiniOilrig": {
-    "localized_name": "Braconniers - Membre d'élite",
+    "localized_name": "Braconniers – Élite",
     "description": null
   },
   "Hunter_RocketLauncher_Oilrig": {
-    "localized_name": "Braconniers - Membre d'élite",
+    "localized_name": "Braconniers – Élite",
     "description": null
   },
   "Hunter_RocketLauncher_Oilrig_LD": {
-    "localized_name": "Braconniers - Membre d'élite",
+    "localized_name": "Braconniers – Élite",
     "description": null
   },
   "Hunter_Shotgun": {
-    "localized_name": "Braconniers - Chasseur",
+    "localized_name": "Braconniers — Chasseur",
     "description": null
   },
   "Hunter_Shotgun_Invader": {
-    "localized_name": "Braconniers - Chasseur",
+    "localized_name": "Braconniers — Chasseur",
     "description": null
   },
   "Hunter_Shotgun_LargeOilrig": {
-    "localized_name": "Braconniers - Chasseur",
+    "localized_name": "Braconniers — Chasseur",
     "description": null
   },
   "Hunter_Shotgun_MiniOilrig": {
-    "localized_name": "Braconniers - Chasseur",
+    "localized_name": "Braconniers — Chasseur",
     "description": null
   },
   "Hunter_Shotgun_Oilrig": {
-    "localized_name": "Braconniers - Chasseur",
+    "localized_name": "Braconniers — Chasseur",
     "description": null
   },
   "IceCrocodile": {
-    "localized_name": "IceCrocodile",
+    "localized_name": "Munchill",
     "description": "Sa bouche est un véritable réfrigérateur naturel. Lorsqu’elle se referme, l’intérieur devient si frais qu’il empêche la nourriture de pourrir, grâce à une salive aux propriétés conservatrices uniques. Elle pourrait servir de garde-manger pour humains… mais mieux vaut ne pas trop creuser la question côté hygiène."
   },
   "IceDeer": {
@@ -1172,19 +1224,19 @@
     "description": "La divinité gardienne de Palpagos connue comme le Cri nocturne. Lorsque la calamité frappa la terre, il s'envola dans les cieux et contra la menace en plongeant l'île dans des ténèbres sans fin."
   },
   "IceNarwhal": {
-    "localized_name": "IceNarwhal",
+    "localized_name": "Whalaska",
     "description": "Les Pals le prennent pour un iceberg et viennent s'y reposer lorsqu'il dort. Sa nature posée fait qu'il les tolère même une fois réveillé, mais cela génère un certain stress en lui."
   },
   "IceNarwhal_Fire": {
-    "localized_name": "IceNarwhal_Fire",
+    "localized_name": "Whalaska Ignis",
     "description": "Est devenu rouge pour ne plus être confondu avec un bloc de glace. Mais les Pals ne percevant pas la couleur rouge, ses efforts furent vains et son espace personnel continua d'être envahi."
   },
   "IceSeal": {
-    "localized_name": "IceSeal",
-    "description": "Le plus rapide à glisser sur la neige est aussi le plus respecté. Parfois, un excès d’élan envoie l’un d’eux bondir si haut… qu’il retombe du ciel. En période de rivalité pour devenir chef, les chutes se multiplient. Prévisions météo : ciel dégagé avec quelques chutes de IceSeal."
+    "localized_name": "Polapup",
+    "description": "Le plus rapide à glisser sur la neige est aussi le plus respecté. Parfois, un excès d’élan envoie l’un d’eux bondir si haut… qu’il retombe du ciel. En période de rivalité pour devenir chef, les chutes se multiplient. Prévisions météo : ciel dégagé avec quelques chutes de Polapup."
   },
   "IceWitch": {
-    "localized_name": "IceWitch",
+    "localized_name": "Icelyn",
     "description": "La chaleur me fait fondre… mais j’adore les bains de soleil. L’eau brûlante me liquéfie… mais je raffole des sources chaudes. Si je devais choisir ma fin, ce serait par temps clair, dans un onsen à ciel ouvert."
   },
   "Inspector": {
@@ -1192,12 +1244,12 @@
     "description": null
   },
   "JellyfishFairy": {
-    "localized_name": "JellyfishFairy",
-    "description": "Ce Pal ressemble étrangement à JellyfishGhost. Très sociable, il arrive qu’il ait plusieurs rendez-vous en même temps. Dans ce cas, il demande à son ami JellyfishGhost de le remplacer. En échange ? Un petit rencard."
+    "localized_name": "Jelliette",
+    "description": "Ce Pal ressemble étrangement à Jellroy. Très sociable, il arrive qu’il ait plusieurs rendez-vous en même temps. Dans ce cas, il demande à son ami Jellroy de le remplacer. En échange ? Un petit rencard."
   },
   "JellyfishGhost": {
-    "localized_name": "JellyfishGhost",
-    "description": "Ce Pal ressemble comme deux gouttes d’eau à JellyfishFairy. Quand cette dernière est indisponible, il prend parfois sa place en douce. Son jeu d’acteur est si convaincant… que personne ne remarque jamais la supercherie."
+    "localized_name": "Jellroy",
+    "description": "Ce Pal ressemble comme deux gouttes d’eau à Jelliette. Quand cette dernière est indisponible, il prend parfois sa place en douce. Son jeu d’acteur est si convaincant… que personne ne remarque jamais la supercherie."
   },
   "JetDragon": {
     "localized_name": "Jetragon",
@@ -1216,8 +1268,8 @@
     "description": "Quiconque commet une faute au sein du groupe sera sommé de se donner la mort. En perçant son sac vocal gonflé à l’extrême avec une branche, il est propulsé au-delà de l’atmosphère, vers l’au-delà."
   },
   "KendoFrog_Dark": {
-    "localized_name": "-",
-    "description": "Des individus ayant perdu tout sens de l'honneur. Croajiro utilisera tous les moyens existants pour tuer sa proie. Mais tomber sur un groupe de - à la nuit tombée inversera les rôles."
+    "localized_name": "Croajiro Noct",
+    "description": "Des individus ayant perdu tout sens de l'honneur. Croajiro utilisera tous les moyens existants pour tuer sa proie. Mais tomber sur un groupe de Croajiro Noct à la nuit tombée inversera les rôles."
   },
   "KingAlpaca": {
     "localized_name": "Kingpaca",
@@ -1256,7 +1308,7 @@
     "description": "Son temps de réaction chute lorsqu'il est trop détendu. Même découpé de la tête au pied, il ne réaliserait probablement sa propre mort que le lendemain matin."
   },
   "LazyCatfish_Gold": {
-    "localized_name": "LazyCatfish_Gold",
+    "localized_name": "Dumud Gild",
     "description": "Son corps possède une surface au pouvoir réfléchissant impressionnant. Et pourtant, sa vitesse de réaction est encore plus lente… que celle de Dumud !"
   },
   "LazyDragon": {
@@ -1268,8 +1320,8 @@
     "description": "Relaxaurus eut un éclair de génie. « L'heure du changement a sonné », pensa-t-il. C'est alors qu'un choc électrique vint parcourir tout son corps."
   },
   "LeafMomonga": {
-    "localized_name": "LeafMomonga",
-    "description": "Est convaincu que frapper un objet cassé peut suffire à le réparer. Heureusement, la force de LeafMomonga est parfaitement dosée pour les humains. Un simple coup peut même faire repartir un cœur arrêté… comme par miracle."
+    "localized_name": "Herbil",
+    "description": "Est convaincu que frapper un objet cassé peut suffire à le réparer. Heureusement, la force de Herbil est parfaitement dosée pour les humains. Un simple coup peut même faire repartir un cœur arrêté… comme par miracle."
   },
   "LeafPrincess": {
     "localized_name": "Lullu",
@@ -1300,23 +1352,23 @@
     "description": null
   },
   "Male_Angler01_v01": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Male_Breeder01_v01": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Male_Breeder01_v02": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Male_Breeder01_v03": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Male_Breeder01_v04": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Male_DarkTrader01": {
@@ -1332,15 +1384,15 @@
     "description": null
   },
   "Male_Ninja01": {
-    "localized_name": "Société des fleurs lunaires - Genin",
+    "localized_name": "Clan des Fleurs Lunaires — Genin",
     "description": null
   },
   "Male_NinjaElite01": {
-    "localized_name": "Société des fleurs lunaires - Jonin",
+    "localized_name": "Clan des Fleurs Lunaires — Jonin",
     "description": null
   },
   "Male_NinjaElite01_Invader": {
-    "localized_name": "Société des fleurs lunaires - Jonin",
+    "localized_name": "Clan des Fleurs Lunaires — Jonin",
     "description": null
   },
   "Male_People02": {
@@ -1352,59 +1404,59 @@
     "description": null
   },
   "Male_Police_old": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Male_Scholar01_v01": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Male_Scholar01_v02": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Male_Scholar01_v03": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Male_Scholar01_v04": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Male_Scientist01_LaserRifle": {
-    "localized_name": "Unité de recherche sur les gènes - Équipe d'exécution",
+    "localized_name": "Unité de Recherche sur les Gènes - Équipe d'Exécution",
     "description": null
   },
   "Male_Scientist01_LaserRifle_Invader": {
-    "localized_name": "Unité de recherche sur les gènes - Équipe d'exécution",
+    "localized_name": "Unité de Recherche sur les Gènes - Équipe d'Exécution",
     "description": null
   },
   "Male_Soldier01": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Male_Soldier01_EnemyGroup": {
-    "localized_name": "Mercenaire solide",
+    "localized_name": "Mercenaire Solide",
     "description": null
   },
   "Male_Soldier02": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Male_Soldier02_EnemyGroup": {
-    "localized_name": "Mercenaire solide",
+    "localized_name": "Mercenaire Solide",
     "description": null
   },
   "Male_Soldier02_Invader": {
-    "localized_name": "Dresseur bouillonnant",
+    "localized_name": "Paldresseur Bouillonnant",
     "description": null
   },
   "Male_Soldier03": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Male_Soldier04": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Male_Trader01": {
@@ -1432,11 +1484,11 @@
     "description": "Dans l'ancien royaume, une tradition consistait à remettre chaque année un prix pour la mort la plus stupide. La toute première n'était autre que : « N'a pas remarqué Mimog et s'est fait mordre en ouvrant un coffre. »"
   },
   "MobuCitizen": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "MobuCitizen_Male": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "MobuVillager": {
@@ -1476,11 +1528,11 @@
     "description": "Il semble que le masque qu'il porte ne soit pas son vrai visage. Il donne l'impression d'être présent sans l'être. Comme s'il nous observait jour et nuit. Comme s'il nous suivait à la trace."
   },
   "NPC_FoodRequire_1": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "NPC_PalDisplay_1": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "NaughtyCat": {
@@ -1496,8 +1548,8 @@
     "description": "Il mord le cou de ses ennemis pour en aspirer le contenu. Les momies de Pals sont rares, mais la plupart sont des victimes de Killamari."
   },
   "NegativeOctopus_Neutral": {
-    "localized_name": "NegativeOctopus_Neutral",
-    "description": "Mord ses ennemis au cou pour les vider de leur sang. Lorsque deux NegativeOctopus_Neutral se mordent entre eux, ils tiennent bon jusqu'à ce que l'un s'assèche, et seule la décomposition de ce dernier permet de les séparer."
+    "localized_name": "Killamari Primo",
+    "description": "Mord ses ennemis au cou pour les vider de leur sang. Lorsque deux Killamari Primo se mordent entre eux, ils tiennent bon jusqu'à ce que l'un s'assèche, et seule la décomposition de ce dernier permet de les séparer."
   },
   "NightBlueHorse": {
     "localized_name": "Starryon",
@@ -1516,35 +1568,35 @@
     "description": "Son désir libéré ne put jamais être apaisé. « Je veux être regardée par moi-même. » Les sœurs qui contemplaient, nourrissant leur rancœur envers le monde, furent finalement chassées dans l’entre-deux et, enfin, fermèrent les yeux."
   },
   "Ninja01_Tower": {
-    "localized_name": "Société des fleurs lunaires - Genin",
+    "localized_name": "Clan des Fleurs Lunaires — Genin",
     "description": null
   },
   "NinjaElite01_Tower": {
-    "localized_name": "Société des fleurs lunaires - Jonin",
+    "localized_name": "Clan des Fleurs Lunaires — Jonin",
     "description": null
   },
   "NinjaElite_Bowgun": {
-    "localized_name": "Société des fleurs lunaires - Jonin",
+    "localized_name": "Clan des Fleurs Lunaires — Jonin",
     "description": null
   },
   "NinjaElite_NoEquip": {
-    "localized_name": "Société des fleurs lunaires - Jonin",
+    "localized_name": "Clan des Fleurs Lunaires — Jonin",
     "description": null
   },
   "Ninja_Bowgun": {
-    "localized_name": "Société des fleurs lunaires - Genin",
+    "localized_name": "Clan des Fleurs Lunaires — Genin",
     "description": null
   },
   "Ninja_NoEquip": {
-    "localized_name": "Société des fleurs lunaires - Genin",
+    "localized_name": "Clan des Fleurs Lunaires — Genin",
     "description": null
   },
   "Ninja_Prisoner": {
-    "localized_name": "Société des fleurs lunaires - Genin",
+    "localized_name": "Clan des Fleurs Lunaires — Genin",
     "description": null
   },
   "OctopusGirl": {
-    "localized_name": "OctopusGirl",
+    "localized_name": "Gloopie",
     "description": "Avant de dormir à ses côtés, mieux vaut faire le point sur vos plans le lendemain. Les marques de ses ventouses ressemblent à s’y méprendre à des suçons. Se faire aspirer en pleine nuit pourrait entraîner de fâcheux malentendus..."
   },
   "PREDATOR_AmaterasuWolf": {
@@ -1692,7 +1744,7 @@
     "description": null
   },
   "PalPassive_Doctor": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "PalTrader": {
@@ -1704,7 +1756,7 @@
     "description": "Ses plumes ont totalement disparu, l'empêchant de voler. Cependant, un désir profond de voler, inscrit dans ses gènes, le pousse à essayer de nouveau, de toutes les manières possibles."
   },
   "Penguin_Electric": {
-    "localized_name": "Penguin_Electric",
+    "localized_name": "Pengullet Lux",
     "description": "Ses ailes se sont atrophiées et ne lui permettent plus de voler. Sa nostalgie du ciel s'est transformée en jalousie, et ses pouvoirs électriques lui permettent désormais d'abattre tout ce qui vole !"
   },
   "PinkCat": {
@@ -1732,43 +1784,51 @@
     "description": null
   },
   "Plesiosaur": {
-    "localized_name": "Plesiosaur",
+    "localized_name": "Braloha",
     "description": "Dans son haleine, se cache une substance miraculeuse semblable à du pollen, capable de polliniser n'importe quelle plante. Pour un Pal végétal, c'est un compagnon plutôt complexe à gérer."
   },
   "Police_BowGun": {
-    "localized_name": "Milice populaire - Fusilier",
+    "localized_name": "Milice Populaire — Fusilier",
+    "description": null
+  },
+  "Police_Chief": {
+    "localized_name": "Chef de la Milice Populaire Blasé",
     "description": null
   },
   "Police_Handgun": {
-    "localized_name": "Milice populaire - Garde",
+    "localized_name": "Milice Populaire — Garde",
     "description": null
   },
   "Police_Rifle": {
-    "localized_name": "Milice populaire - Fusilier",
+    "localized_name": "Milice Populaire — Fusilier",
     "description": null
   },
   "Police_Rifle_Tower": {
-    "localized_name": "Milice populaire - Fusilier",
+    "localized_name": "Milice Populaire — Fusilier",
     "description": null
   },
   "Police_Shotgun": {
-    "localized_name": "Milice populaire - Membre d'élite",
+    "localized_name": "Milice Populaire – Élite",
     "description": null
   },
   "Police_Shotgun_Tower": {
-    "localized_name": "Milice populaire - Membre d'élite",
+    "localized_name": "Milice Populaire – Élite",
     "description": null
   },
   "Police_TreasureGuard_NarrowSite": {
-    "localized_name": "Milice populaire - Fusilier",
+    "localized_name": "Milice Populaire — Fusilier",
     "description": null
   },
   "Police_Vigilance": {
-    "localized_name": "Milice populaire - Fusilier",
+    "localized_name": "Milice Populaire — Fusilier",
+    "description": null
+  },
+  "Police_old_Prisoner": {
+    "localized_name": "Ancien Chef de la Milice Populaire Incarcéré",
     "description": null
   },
   "PoseidonOrca": {
-    "localized_name": "PoseidonOrca",
+    "localized_name": "Neptilius",
     "description": "Une fois le grand cataclysme scellé, un puissant monstre descendit des cieux. Depuis, il n’apparaît que dans les mers proches, aux yeux des seuls dignes de l’affronter. Le rencontrer n’est jamais un hasard... C’est une destinée."
   },
   "PurpleSpider": {
@@ -1792,19 +1852,19 @@
     "description": null
   },
   "Quest_Hunter_Fat_GatlingGun01": {
-    "localized_name": "Braconniers - Broyeur",
+    "localized_name": "Braconniers — Broyeur",
     "description": null
   },
   "Quest_Hunter_FlameThrower": {
-    "localized_name": "Braconniers - Nettoyeur",
+    "localized_name": "Braconniers — Nettoyeur",
     "description": null
   },
   "Quest_Hunter_Katana01": {
-    "localized_name": "Braconniers - Épéiste",
+    "localized_name": "Braconniers — Épéiste",
     "description": null
   },
   "Quest_Hunter_RocketLauncher01": {
-    "localized_name": "Braconniers - Membre d'élite",
+    "localized_name": "Braconniers – Élite",
     "description": null
   },
   "RAID_DarkMechaDragon": {
@@ -1835,6 +1895,26 @@
     "localized_name": "Bellanoir Libero",
     "description": null
   },
+  "RAID_YakushimaBoss001_Green": {
+    "localized_name": "Véritable Œil de Cthulhu",
+    "description": null
+  },
+  "RAID_YakushimaBoss002": {
+    "localized_name": "Seigneur de la lune",
+    "description": null
+  },
+  "RAID_YakushimaBoss002_Hand_Left": {
+    "localized_name": "Seigneur de la lune",
+    "description": null
+  },
+  "RAID_YakushimaBoss002_Hand_Right": {
+    "localized_name": "Seigneur de la lune",
+    "description": null
+  },
+  "RAID_YakushimaBoss002_Head": {
+    "localized_name": "Seigneur de la lune",
+    "description": null
+  },
   "RaijinDaughter": {
     "localized_name": "Dazzi",
     "description": "Souvent attentionné envers les Pals isolés. Ce n'est qu'une fois que ces derniers prennent ce comportement comme une marque d'amitié qu'il les frappe d'un éclair."
@@ -1852,7 +1932,7 @@
     "description": "Cette espèce semble être étroitement apparentée à Beakon, alors que pas du tout. Se nourrit principalement de rochers, si bien que son bec comme sa tête durcissent au fil des années."
   },
   "Respawn_guide": {
-    "localized_name": "Dresseur amical",
+    "localized_name": "Paldresseur Amical",
     "description": null
   },
   "Reward_BossDefeat": {
@@ -1860,43 +1940,43 @@
     "description": null
   },
   "Reward_Emote_A_01": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Reward_Emote_B_01": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Reward_Emote_C_01": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Reward_Emote_D_01": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Reward_Emote_E_01": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Reward_Emote_F_01": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Reward_Emote_G_01": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Reward_Emote_H_01": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Reward_Emote_I_01": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Reward_Food": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Reward_PalCaptureCount": {
@@ -2020,15 +2100,15 @@
     "description": null
   },
   "Scientist_FlameThrower": {
-    "localized_name": "Unité de recherche sur les gènes - Équipe d'exécution",
+    "localized_name": "Unité de Recherche sur les Gènes - Équipe d'Exécution",
     "description": null
   },
   "Scientist_FlameThrower_Invader": {
-    "localized_name": "Unité de recherche sur les gènes - Équipe d'exécution",
+    "localized_name": "Unité de Recherche sur les Gènes - Équipe d'Exécution",
     "description": null
   },
   "Scientist_Prisoner": {
-    "localized_name": "Unité de recherche sur les gènes - Équipe d'exécution",
+    "localized_name": "Unité de Recherche sur les Gènes - Équipe d'Exécution",
     "description": null
   },
   "ScorpionMan": {
@@ -2036,7 +2116,7 @@
     "description": "Renferme pas moins de 5 000 types de poison. Si certains peuvent tuer sur le coup, la plupart n'ont quasiment pas d'effet."
   },
   "SecurityDrone": {
-    "localized_name": "Drone armé",
+    "localized_name": "Hélicoptère de Combat",
     "description": null
   },
   "Serpent": {
@@ -2076,8 +2156,8 @@
     "description": "Le foot de Kikit était populaire autrefois. Les actions de la LPP l'ont fait interdire depuis, malgré le fait que cela les aidait à se débarrasser de leur corne."
   },
   "SnowPeafowl": {
-    "localized_name": "SnowPeafowl",
-    "description": "Extrêmement sensible au temps, il se réveille toujours à la même heure chaque matin. On raconte que la division du jour en 24 segments sur l’île de Palpagos s’inspire de l’étalement de ses ailes. En effet, lorsque l’on regarde SnowPeafowl de face, les espaces entre ses ailes repliées forment 24 sections distinctes."
+    "localized_name": "Frostplume",
+    "description": "Extrêmement sensible au temps, il se réveille toujours à la même heure chaque matin. On raconte que la division du jour en 24 segments sur l’île de Palpagos s’inspire de l’étalement de ses ailes. En effet, lorsque l’on regarde Frostplume de face, les espaces entre ses ailes repliées forment 24 sections distinctes."
   },
   "SnowTigerBeastman": {
     "localized_name": "Bastigor",
@@ -2088,11 +2168,11 @@
     "description": "Un serviteur qui jure allégeance à Elizabee. Il éliminera tous ceux susceptibles de nuire à sa reine, quitte à y laisser sa vie."
   },
   "StuffedShark": {
-    "localized_name": "StuffedShark",
+    "localized_name": "Finsider",
     "description": "On dirait qu'il y a quelque chose qui se cache dans son costume, mais lorsque l'on y plonge la main, il n'y a rien. Pire encore, on peut y enfoncer la main de plus en plus profondément. Peut-être que l'univers tout entier se cache ici."
   },
   "StuffedShark_Fire": {
-    "localized_name": "StuffedShark_Fire",
+    "localized_name": "Finsider Ignis",
     "description": "On peut plonger la main dans sa bouche sans jamais toucher le fond. Un chercheur, persuadé qu’il s’agissait d’un espace interdimensionnel, a tenté d’y glisser tout son corps, pensant en faire un sac de couchage. Mais comme la créature s’est mise à avoir des haut-le-cœur… il a fallu se rendre à l’évidence : c’est bien un organe interne."
   },
   "Suzaku": {
@@ -2107,8 +2187,12 @@
     "localized_name": "Woolipop",
     "description": "Son corps tout entier est 18 000 fois plus sucré que le sucre. Les Pals carnivores bernés par son odeur qui le mordent souffrent rapidement d'hyperglycémie et perdent connaissance."
   },
+  "TentacleTurtle": {
+    "localized_name": "Turtacle",
+    "description": "Pour protéger son fragile corps, il s'est doté d'une solide carapace. Cependant, en échange, il a perdu presque toute résistance, et une simple chatouille peut le faire s'évanouir."
+  },
   "TentacleTurtle_Ground": {
-    "localized_name": "TentacleTurtle_Ground",
+    "localized_name": "Turtacle Terra",
     "description": "A acquis une carapace à toute épreuve pour protéger sa peau très fine. Ses points sensibles étant concentrés sur ses pattes et sa carapace, il est possible de toucher son corps sans qu'il ne s'en rende compte."
   },
   "ThunderBird": {
@@ -2124,7 +2208,7 @@
     "description": "Lance un choc électrique via ses écailles pour carboniser son adversaire. Les combats de Orserk prennent fin en un éclair."
   },
   "TropicalOstrich": {
-    "localized_name": "TropicalOstrich",
+    "localized_name": "Palumba",
     "description": "Grâce à sa danse unique, il perturbe le rythme de ses ennemis. Lors des luttes pour le territoire, celui qui se laisse emporter par le rythme de l'autre perd. La séduction, l'ennui, tout se résume à une danse ! Mais qu’en est-il de la danse destinée aux humains… quel sens lui donner ?"
   },
   "Umihebi": {
@@ -2136,27 +2220,27 @@
     "description": "La légende raconte qu'un combattant injustement jeté dans un volcan se serait réincarné en Jormuntide Ignis pour réduire le pays tout entier en cendres."
   },
   "Viking": {
-    "localized_name": "Habitant du paradis déchu",
+    "localized_name": "Habitant du Paradis Déchu",
     "description": null
   },
   "VikingElite_Tower": {
-    "localized_name": "Habitant du paradis déchu (élite)",
+    "localized_name": "Habitant du Paradis Déchu (Élite)",
     "description": null
   },
   "Viking_Elite": {
-    "localized_name": "Habitant du paradis déchu (élite)",
+    "localized_name": "Habitant du Paradis Déchu (Élite)",
     "description": null
   },
   "Viking_Elite_Invader": {
-    "localized_name": "Habitant du paradis déchu (élite)",
+    "localized_name": "Habitant du Paradis Déchu (Élite)",
     "description": null
   },
   "Viking_Prisoner": {
-    "localized_name": "Habitant du paradis déchu",
+    "localized_name": "Habitant du Paradis Déchu",
     "description": null
   },
   "Viking_Tower": {
-    "localized_name": "Habitant du paradis déchu",
+    "localized_name": "Habitant du Paradis Déchu",
     "description": null
   },
   "VioletFairy": {
@@ -2168,7 +2252,7 @@
     "description": null
   },
   "Visitor_Hunter_Rifle": {
-    "localized_name": "Braconniers - Nouvelle recrue",
+    "localized_name": "Braconniers — Nouvelle recrue",
     "description": null
   },
   "Visitor_Present": {
@@ -2176,7 +2260,7 @@
     "description": null
   },
   "Visitor_Recruiter": {
-    "localized_name": "fr_Text",
+    "localized_name": "Recruteur de Pals",
     "description": null
   },
   "VolcanicMonster": {
@@ -2256,63 +2340,63 @@
     "description": "En comparaison de SheepBall, sa laine est plus fine et son tempérament plus adapté à la domestication. Toutefois, il a toujours été considéré comme un animal de compagnie, car sa frimousse l'emporte sur tout le reste."
   },
   "YakushimaBoss001": {
-    "localized_name": "YakushimaBoss001",
+    "localized_name": "Œil de Cthulhu",
     "description": "[Collaboration Terraria] Un monstre originaire d'un autre monde. Il semble pouvoir être apprivoisé ici."
   },
   "YakushimaBoss001_Small": {
-    "localized_name": "YakushimaBoss001_Small",
+    "localized_name": "Œil de démon",
     "description": "[Collaboration Terraria] Un monstre originaire d'un autre monde. Il semble pouvoir être apprivoisé ici."
   },
   "YakushimaMonster001": {
-    "localized_name": "YakushimaMonster001",
+    "localized_name": "Gelée verte",
     "description": "[Collaboration Terraria] Un monstre originaire d'un autre monde. Il semble pouvoir être apprivoisé ici."
   },
   "YakushimaMonster001_Blue": {
-    "localized_name": "YakushimaMonster001_Blue",
+    "localized_name": "Gelée bleue",
     "description": "[Collaboration Terraria] Un monstre originaire d'un autre monde. Il semble pouvoir être apprivoisé ici."
   },
   "YakushimaMonster001_Pink": {
-    "localized_name": "YakushimaMonster001_Pink",
+    "localized_name": "Gelée lumineuse",
     "description": "[Collaboration Terraria] Un monstre originaire d'un autre monde. Il semble pouvoir être apprivoisé ici."
   },
   "YakushimaMonster001_Purple": {
-    "localized_name": "YakushimaMonster001_Purple",
+    "localized_name": "Gelée violette",
     "description": "[Collaboration Terraria] Un monstre originaire d'un autre monde. Il semble pouvoir être apprivoisé ici."
   },
   "YakushimaMonster001_Rainbow": {
-    "localized_name": "YakushimaMonster001_Rainbow",
+    "localized_name": "Gelée arc-en-ciel",
     "description": "[Collaboration Terraria] Un monstre originaire d'un autre monde. Il semble pouvoir être apprivoisé ici."
   },
   "YakushimaMonster001_Red": {
-    "localized_name": "YakushimaMonster001_Red",
+    "localized_name": "Gelée rouge",
     "description": "[Collaboration Terraria] Un monstre originaire d'un autre monde. Il semble pouvoir être apprivoisé ici."
   },
   "YakushimaMonster002": {
-    "localized_name": "YakushimaMonster002",
+    "localized_name": "Épée envoûtée",
     "description": "[Collaboration Terraria] Un monstre originaire d'un autre monde. Il semble pouvoir être apprivoisé ici."
   },
   "YakushimaMonster003": {
-    "localized_name": "YakushimaMonster003",
+    "localized_name": "Chauve-souris des grottes",
     "description": "[Collaboration Terraria] Un monstre originaire d'un autre monde. Il semble pouvoir être apprivoisé ici."
   },
   "YakushimaMonster003_Purple": {
-    "localized_name": "YakushimaMonster003_Purple",
+    "localized_name": "Chauve-souris lumineuse",
     "description": "[Collaboration Terraria] Un monstre originaire d'un autre monde. Il semble pouvoir être apprivoisé ici."
   },
   "Yamishima_guide1": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Yamishima_guide2": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Yamishima_guide3": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Yamishima_guide4": {
-    "localized_name": "Habitant de l'île",
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Yamishima_guide5": {

@@ -35,9 +35,21 @@
     "localized_name": "Plateforme de surveillance",
     "description": "La façon de travailler des Pals du camp ainsi que les autorisations / interdictions vis-à-vis de chaque tâche peuvent être définies."
   },
+  "BaseCampWorkerExtraStation": {
+    "localized_name": "Terminal de Gestion de Boîte à Pals",
+    "description": "Un terminal permettant de contrôler les Boîtes à Pals à distance. Place-le à l'endroit souhaité pour faire apparaître des Pals et construire librement ta base."
+  },
   "BathTub_Stone": {
     "localized_name": "Baignoire ancienne",
     "description": "Une baignoire ancienne décorative."
+  },
+  "Believer_Banner": {
+    "localized_name": "Bannière de la Ligue pour la Protection des Pals",
+    "description": "Bannière de la Ligue pour la Protection des Pals, destinée à la décoration."
+  },
+  "Believer_Flag": {
+    "localized_name": "Drapeau de la Ligue pour la Protection des Pals",
+    "description": "Drapeau de la Ligue pour la Protection des Pals, destiné à la décoration."
   },
   "Bench_Wood": {
     "localized_name": "Banc en bois",
@@ -53,7 +65,7 @@
   },
   "BlastFurnace3": {
     "localized_name": "Fournaise électrique",
-    "description": "Permet de raffiner les Lingot de paluminium. Nécessite de l'électricité, mais permet un raffinage plus rapide. Un Pal de feu est requis pour allumer le feu."
+    "description": "Permet de raffiner les Lingot de Paluminium. Nécessite de l'électricité, mais permet un raffinage plus rapide. Un Pal de feu est requis pour allumer le feu."
   },
   "BlastFurnace4": {
     "localized_name": "Fournaise géante",
@@ -100,8 +112,8 @@
     "description": "Une installation nécessaire pour cuisiner. Elle ne permet que de cuire des ingrédients simples. Un Pal de feu est requis pour allumer le feu."
   },
   "CandleStand": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Chandelier Solennel",
+    "description": "Candélabre de cérémonie allumé et vénéré par les adeptes de la confrérie de la Flamme Éternelle. Source lumineuse pouvant être placée au sol. Un Pal de feu est requis pour allumer le feu."
   },
   "Cauldron": {
     "localized_name": "Chaudron de sorcière",
@@ -156,12 +168,12 @@
     "description": "Une installation qui permet d'associer plusieurs plans pour en obtenir un de qualité supérieure."
   },
   "ConservationGroupBannerA": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Drapeau de la Ligue pour la Protection des Pals",
+    "description": "Drapeau décoratif de la Ligue pour la Protection des Pals."
   },
   "ConservationGroupBannerB": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Bannière de la Ligue pour la Protection des Pals",
+    "description": "Un étendard de la LPP décoratif."
   },
   "Container01_Iron": {
     "localized_name": "Grosse boîte",
@@ -198,6 +210,10 @@
   "Crusher": {
     "localized_name": "Concasseur",
     "description": "Une installation permettant de broyer de la Pierre et du Bois de charpente pour obtenir d'autres matériaux. La capacité Arrosage est requise pour utiliser le moulin à eau."
+  },
+  "CrystalPit": {
+    "localized_name": "Mine d’Hexoquartz",
+    "description": "Une installation pour produire de l'Hexoquartz. Son extraction demande une grande force physique pour extraire l'Hexoquartz. Laisse faire les Pals doué dans l'extraction."
   },
   "Curtain01_Wall_Stone": {
     "localized_name": "Rideau ancien",
@@ -303,6 +319,10 @@
     "localized_name": "Chaîne de production II",
     "description": "Une usine pour créer objets et protections. La délégation des tâches permet de travailler encore plus rapidement. Un Pal habile dans les travaux manuels est requis."
   },
+  "Factory_Hard_04": {
+    "localized_name": "Usine d'une Civilisation Avancée",
+    "description": "Une usine pour fabriquer objets et protections. L'ajout de machines performantes a permis d'accélérer la production. Un Pal habile dans les travaux manuels est requis."
+  },
   "Factory_Money": {
     "localized_name": "Usine de fabrication de pièces d'or",
     "description": "Une usine pour fabriquer de l'Pièce d'or. La charge mentale fait chuter les points MEN des travailleurs. Un Pal habile dans les travaux manuels est requis."
@@ -343,9 +363,25 @@
     "localized_name": "Statue du Grand Aigle",
     "description": "Un monument à l'effigie de Chikipi. L'installer rend possible le voyage instantané."
   },
+  "FireCult_Banner": {
+    "localized_name": "Bannière de la Confrérie des Flammes Éternelles",
+    "description": "Bannière de la Confrérie des Flammes Éternelles, destinée à la décoration."
+  },
+  "FireCult_Flag": {
+    "localized_name": "Drapeau de la Confrérie des Flammes Éternelles",
+    "description": "Drapeau de la Confrérie des Flammes Éternelles, destiné à la décoration."
+  },
   "FireStand": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Chandelier Rituel",
+    "description": "Candélabre Solennel allumé et vénéré par les adeptes de la confrérie de la Flamme Éternelle. Source lumineuse pouvant être placée au sol. Un Pal de feu est requis pour allumer le feu."
+  },
+  "FishingPond1": {
+    "localized_name": "Bassin de pêche",
+    "description": "Un point de pêche comportant tous les outils nécessaires. Y attribuer un Pal lui permettra de pêcher tranquillement. Un Pal habile dans les travaux manuels est requis."
+  },
+  "FishingPond2": {
+    "localized_name": "Grand Bassin de pêche",
+    "description": "Un grand point de pêche comportant tous les outils nécessaires. Sa taille permet d'y pêcher des Pals plus volumineux. Un Pal habile dans les travaux manuels est requis."
   },
   "FlourMill": {
     "localized_name": "Broyeur",
@@ -372,8 +408,8 @@
     "description": "Une porte à construire sur une base pour servir d'entrée. Sa composition en verre la rend très robuste."
   },
   "Glass_Fence": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Clôture en Verre",
+    "description": "Une clôture à installer sur une base ou un toit pour éviter les chutes. Le fait qu'elle soit en verre dur la rend très solide."
   },
   "Glass_SlantedRoof": {
     "localized_name": "Toit incliné en verre",
@@ -415,6 +451,10 @@
     "localized_name": "Cage de foot",
     "description": "Une cage de foot décorative. Y introduire un SheepBall n'accorde aucun but."
   },
+  "GuardianDogStatue": {
+    "localized_name": "Statue de Yakumo",
+    "description": "Une statue de Yakumo décorative."
+  },
   "GuildChest": {
     "localized_name": "Coffre de guilde",
     "description": "Un coffre qui peut envoyer et recevoir instantanément son contenu via l'hyperespace. Ces coffres partagent leur contenu avec toutes les bases dans lesquelles ils sont installés."
@@ -435,17 +475,25 @@
     "localized_name": "Grande cuisine",
     "description": "Une installation requise pour cuisiner. Sa taille gigantesque permet à plusieurs Pals de cuisiner ensemble. Un Pal de feu est requis pour allumer le feu."
   },
+  "Hunter_Banner": {
+    "localized_name": "Bannière du Syndicats de Rayne",
+    "description": "Bannière du groupe des Syndicats de Rayne, destinée à la décoration."
+  },
+  "Hunter_Flag": {
+    "localized_name": "Drapeau du Syndicats de Rayne",
+    "description": "Drapeau du groupe des Syndicats de Rayne, destiné à la décoration."
+  },
   "Hunter_GangFlag": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Drapeau du Syndicats de Rayne",
+    "description": "Drapeau décoratif du Syndicat de Rayne."
   },
   "IceCrusher": {
     "localized_name": "Broyeur à glace",
     "description": "Une installation permettant de broyer du Minerai de métal pour obtenir d'autres matériaux. Une alimentation en électricité ainsi qu'un Pal avec la capacité Réfrigération sont requis pour profiter de sa grande efficacité."
   },
   "Iron_Fence": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Clôture en Métal",
+    "description": "Une clôture à installer sur une base ou un toit pour éviter les chutes. Le fait qu'elle soit en métal la rend très solide."
   },
   "Irori": {
     "localized_name": "Foyer japonais",
@@ -496,8 +544,8 @@
     "description": "Un fusuma intérieur coulissant à construire sur une base. Son style japonais permet des constructions raffinées."
   },
   "JapaneseStyle_Fence": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Clôture de style Japonais",
+    "description": "Une clôture à installer sur une base ou un toit pour éviter les chutes. Son style japonais permet des constructions exotiques."
   },
   "JapaneseStyle_Pillar": {
     "localized_name": "Pilier japonais",
@@ -551,6 +599,10 @@
     "localized_name": "Lampadaire",
     "description": "Une source de lumière pour éclairer le camp, même dans l'obscurité de la nuit. De l'électricité est nécessaire, mais la zone éclairée est plus grande."
   },
+  "LanternTop": {
+    "localized_name": "Lanterne suspendue",
+    "description": "Une lanterne suspendue décorative."
+  },
   "LargeCeilingLamp": {
     "localized_name": "Plafonnier (grand)",
     "description": "Une source de lumière pour éclairer le camp, même dans l'obscurité de la nuit. Peut être installée au plafond. Une plus grande quantité d'électricité est nécessaire, mais la zone éclairée est bien plus grande."
@@ -600,8 +652,8 @@
     "description": "Un réverbère chic, source de lumière. De l'électricité est requise pour l'allumer."
   },
   "LilyQueenStatue": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Statue de Lyleen",
+    "description": "Statue décorative représentant Lyleen."
   },
   "MachineGame01_Iron": {
     "localized_name": "Machine à pince",
@@ -703,6 +755,18 @@
     "localized_name": "Grand incubateur électrique",
     "description": "Une installation pour faire éclore les œufs de Pals. Doit être alimentée en électricité, mais profite d'une température optimale et permet d'y faire éclore plusieurs œufs à la fois."
   },
+  "MultiHatchingPalEgg": {
+    "localized_name": "Incubateur Géant",
+    "description": "Une installation pour faire éclore les œufs des Pals. Le fait qu'elle produise d'elle-même une température idéale permet d'y faire éclore plusieurs œufs à la fois."
+  },
+  "Ninja_Banner": {
+    "localized_name": "Bannière du Clan des Fleurs Lunaires",
+    "description": "Bannière du Clan des Fleurs Lunaires, destinée à la décoration."
+  },
+  "Ninja_Flag": {
+    "localized_name": "Drapeau du Clan des Fleurs Lunaires",
+    "description": "Drapeau du Clan des Fleurs Lunaires, destiné à la décoration."
+  },
   "OilPump": {
     "localized_name": "Pompe à pétrole brut",
     "description": "Une installation requise pour extraire le Pétrole brut des champs pétrolifères. Doit être grandement alimentée en électricité pour fonctionner."
@@ -712,8 +776,8 @@
     "description": "À installer sur le camp pour accroître la vitesse d'allumage. En installer 2 ou plus n'octroie aucun effet supplémentaire."
   },
   "OperatingTable": {
-    "localized_name": "fr_Text",
-    "description": "fr_text"
+    "localized_name": "Table d'opération de Pal",
+    "description": "Permet d'opérer les Pals pour modifier leur sexe ou leur compétence passive."
   },
   "PalBooth": {
     "localized_name": "Marché aux puces (Pals)",
@@ -724,8 +788,8 @@
     "description": "Une installation pour stocker les Pals capturés. Les Pals à l'intérieur des boîtes récupèrent progressivement leurs PV. Le camp est défini par un rayon autour de cette installation."
   },
   "PalCage": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Cage vide",
+    "description": "Une cage vide décorative."
   },
   "PalFoodBox": {
     "localized_name": "Boîte à nourriture",
@@ -775,6 +839,14 @@
     "localized_name": "Lit de qualité",
     "description": "Un lit moelleux et confortable pour humain. Il permet de dormir la nuit ou en cas de blessure. Il est cependant impossible s'y reposer en l'absence de toit."
   },
+  "Police_Banner": {
+    "localized_name": "Bannière de la Milice Populaire",
+    "description": "Bannière de la Milice Populaire, destinée à la décoration."
+  },
+  "Police_Flag": {
+    "localized_name": "Drapeau de la Milice Populaire",
+    "description": "Drapeau de la Milice Populaire, destiné à la décoration."
+  },
   "QuartzPit": {
     "localized_name": "Carrière de quartz pur",
     "description": "Une installation pour produire du Quartz pur. Il faut une bonne condition physique pour extraire le Quartz pur. Laisse faire les Pals doué dans l'extraction."
@@ -807,13 +879,61 @@
     "localized_name": "fr_Text",
     "description": "fr_Text"
   },
+  "SF_Chair": {
+    "localized_name": "Chaise de laboratoire",
+    "description": "Chaise style Laboratoire, destinée à la décoration."
+  },
+  "SF_Desk": {
+    "localized_name": "Bureau de laboratoire",
+    "description": "Bureau style Laboratoire, destiné à la décoration."
+  },
+  "SF_DoorWall": {
+    "localized_name": "Porte Futuriste",
+    "description": "Une porte à construire sur une base pour servir d’entrée. Permet de bâtir dans un style moderne et futuriste."
+  },
   "SF_Fence": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Clôture Futuriste",
+    "description": "Une clôture à installer sur une base ou un toit pour éviter les chutes. Son style futuriste permet des constructions modernes."
+  },
+  "SF_SlantedRoof": {
+    "localized_name": "Toit incliné Futuriste",
+    "description": "Un toit incliné à placer sur des murs pour contrer les éléments. Permet de bâtir dans un style moderne et futuriste."
+  },
+  "SF_TriangleWall": {
+    "localized_name": "Mur triangulaire Futuriste",
+    "description": "Un mur triangulaire à construire sur une base. Permet de bâtir dans un style moderne et futuriste."
+  },
+  "SF_WindowWall": {
+    "localized_name": "Mur avec fenêtre Futuriste",
+    "description": "Un mur avec fenêtre à construire sur une base pour repousser les intrus. Permet de bâtir dans un style moderne et futuriste."
+  },
+  "SF_foundation": {
+    "localized_name": "Base Futuriste",
+    "description": "Une base sur laquelle construire un mur ou une installation. Permet de bâtir dans un style moderne et futuriste."
+  },
+  "SF_roof": {
+    "localized_name": "Toit Futuriste",
+    "description": "Un toit à placer sur des murs pour contrer les éléments. Permet de bâtir dans un style moderne et futuriste."
+  },
+  "SF_stair": {
+    "localized_name": "Escalier Futuriste",
+    "description": "Un escalier à placer sur une base ou sous un toit. Permet de bâtir dans un style moderne et futuriste."
+  },
+  "SF_wall": {
+    "localized_name": "Mur Futuriste",
+    "description": "Un mur à construire sur une base pour repousser les intrus. Permet de bâtir dans un style moderne et futuriste."
   },
   "SanityDecrease1": {
     "localized_name": "Dispositif de vague α",
     "description": "Un dispositif qui génère une vague α pour détendre les Pals. Ralentit la chute des points MEN des Pals sur le camp. En installer plusieurs ne décuple pas l'effet."
+  },
+  "Scientist_Banner": {
+    "localized_name": "Bannière de l’Unité de Recherche Génétique",
+    "description": "Bannière de l’Unité de Recherche Génétique, destinée à la décoration."
+  },
+  "Scientist_Flag": {
+    "localized_name": "Drapeau de l’Unité de Recherche Génétique",
+    "description": "Drapeau de l’Unité de Recherche Génétique, destiné à la décoration."
   },
   "Seika": {
     "localized_name": "Arrangement floral",
@@ -891,6 +1011,10 @@
     "localized_name": "Shishi-odoshi",
     "description": "Un shishi-odoshi décoratif. À utiliser dans les constructions de style japonais."
   },
+  "Shrine_Lantern": {
+    "localized_name": "Lanterne sur pied",
+    "description": "Une lanterne sur pied décorative."
+  },
   "SignExit_Ceiling_Iron": {
     "localized_name": "Panneau Sortie de secours pour plafond",
     "description": "Un panneau Sortie de secours décoratif. Peut être installé au plafond."
@@ -944,8 +1068,8 @@
     "description": "Une installation où les Pals du camp fatigués peuvent se reposer. Son confort accru restaure encore plus de points MEN."
   },
   "Spa3": {
-    "localized_name": "Source chaude",
-    "description": "Une installation où les Pals du camp fatigués peuvent se reposer. Annule les effets de la fatigue et restaure les points MEN."
+    "localized_name": "Onsen",
+    "description": "Une installation où les Pals du camp fatigués peuvent se reposer. Son atmosphère japonaise apaisante restaure encore plus de points MEN."
   },
   "SphereFactory_Black_01": {
     "localized_name": "Établi pour sphères",
@@ -976,8 +1100,8 @@
     "description": "Une porte à construire sur une base pour servir d'entrée. Sa composition en pierre la rend assez robuste."
   },
   "Stone_Fence": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Clôture en Pierre",
+    "description": "Une clôture à installer sur une base ou un toit pour éviter les chutes. Le fait qu'elle soit en pierre la rend assez solide."
   },
   "Stone_Gate": {
     "localized_name": "Portail en pierre",
@@ -1204,8 +1328,8 @@
     "description": "Une source de lumière pour éclairer le camp, même dans l'obscurité de la nuit. Peut être installée sur les murs. Un Pal de feu est requis pour allumer le feu."
   },
   "WallTorch02": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Torche murale Solennelle",
+    "description": "Torche allumée vénérée par les adeptes de la de la confrérie de la Flamme Éternelle. Source lumineuse pouvant être placée sur un mur. Un Pal de feu est requis pour allumer le feu."
   },
   "WeaponFactory_Dirty_01": {
     "localized_name": "Établi pour armes",
@@ -1219,13 +1343,17 @@
     "localized_name": "Chaîne de production d'armes II",
     "description": "Une usine pour produire armes et munitions. La délégation des tâches permet de produire les meilleures armes possibles. Un Pal habile dans les travaux manuels est requis."
   },
+  "WeaponFactory_Dirty_04": {
+    "localized_name": "Usine d'armes d'une Civilisation Avancée",
+    "description": "Une usine pour fabriquer armes et munitions. L'ajout de machines performantes a permis d'accélérer la production des armes. Un Pal habile dans les travaux manuels est requis."
+  },
   "Wire_Fence": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Clôture Grillagée",
+    "description": "Une clôture avec barbelés décorative."
   },
   "Wood_Fence": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Clôture en Bois",
+    "description": "Une barrière à installer sur les fondations ou les toits pour éviter les chutes. Sa matière en bois le rend fragile."
   },
   "Wood_Gate": {
     "localized_name": "Portail en bois",
@@ -1244,8 +1372,8 @@
     "description": "Un mur avec fenêtres à construire sur une base pour repousser les intrus. Sa composition en bois le rend fragile."
   },
   "WoodenBarricade": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Barricade en bois",
+    "description": "Une barricade en bois décorative."
   },
   "Wooden_DoorWall": {
     "localized_name": "Porte en bois",

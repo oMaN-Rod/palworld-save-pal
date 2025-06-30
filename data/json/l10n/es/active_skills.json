@@ -55,6 +55,10 @@
     "localized_name": "Rayo cruzado",
     "description": "Lanza un ataque eléctrico en 2 direcciones para bloquear el movimiento del rival por ambos flancos."
   },
+  "EPalWazaID::CrossWind": {
+    "localized_name": "Viento cruzado",
+    "description": "Ataca con filos de viento cruzados que genera frente al enemigo."
+  },
   "EPalWazaID::DarkArrow": {
     "localized_name": "Flecha oscura",
     "description": "Dispara incontables saetas de energía oscura que persiguen sin tregua al rival."
@@ -86,6 +90,10 @@
   "EPalWazaID::DiamondFall": {
     "localized_name": "Lluvia de diamantes",
     "description": "Hace aparecer bloques de hielo sobre las cabezas de sus enemigos y los lanza sobre ellos uno tras otro."
+  },
+  "EPalWazaID::DiversionLaser": {
+    "localized_name": "Cañonazo de agua",
+    "description": "Dispara un potente chorro de agua hacia adelante. Tras un rato, el chorro se ramifica a derecha e izquierda."
   },
   "EPalWazaID::DoubleIcicleThrow": {
     "localized_name": "Lanza ventisca doble",
@@ -179,6 +187,10 @@
     "localized_name": "Torrente de agua",
     "description": "Libera un torrente de agua delante de él que arrasa con todo."
   },
+  "EPalWazaID::HydroSlicer": {
+    "localized_name": "Hidrorrebanador",
+    "description": "Lo arrasa todo con un torrente de agua a presión. En las zonas despejadas aparecerán al cabo de un rato grietas de las que saldrá agua a borbotones."
+  },
   "EPalWazaID::HyperBeam": {
     "localized_name": "Estallido Pal",
     "description": "Concentra energía destructiva y dispara un potente rayo que arrasa con todo lo que se le pone por delante."
@@ -194,6 +206,10 @@
   "EPalWazaID::IceMissile": {
     "localized_name": "Misil de hielo",
     "description": "Crea un témpano de hielo afilado sobre su cabeza y lo lanza contra el rival."
+  },
+  "EPalWazaID::IceWall": {
+    "localized_name": "Muro gélido",
+    "description": "Forma una pared de hielo que nace de la tierra. La pared de hielo permanecerá por un tiempo y y se romperá cuando sobrepase cierta cantidad de daño."
   },
   "EPalWazaID::IcicleLine": {
     "localized_name": "Cadena de témpanos",
@@ -275,6 +291,14 @@
     "localized_name": "Impacto eléctrico",
     "description": "Lanza un ataque eléctrico en todas direcciones."
   },
+  "EPalWazaID::ReflectiveShuriken": {
+    "localized_name": "Hoja reflejo",
+    "description": "Lanza un filo de viento que rebota contra el enemigo, un árbol u otro obstáculo, generando ataques en cadena. Puede rebotar hasta 4 veces."
+  },
+  "EPalWazaID::RipTide": {
+    "localized_name": "Oleada",
+    "description": "Genera una ola que rodea al enemigo y que, finalmente, explota en el centro, levantando una gigantesca columna de agua."
+  },
   "EPalWazaID::RockBeat": {
     "localized_name": "Impacto roca",
     "description": "Provoca un fuerte temblor que hace emerger una roca gigantesca."
@@ -298,6 +322,10 @@
   "EPalWazaID::SandTwister": {
     "localized_name": "Arena huracanada",
     "description": "Genera múltiples remolinos de arena que giran en círculos incesantemente."
+  },
+  "EPalWazaID::SeaGush": {
+    "localized_name": "Pilar de agua",
+    "description": "Un enorme pilar de agua rompe en el lugar en que se encuentra el enemigo."
   },
   "EPalWazaID::SeedMachinegun": {
     "localized_name": "Ametralladora de semillas",
@@ -455,6 +483,10 @@
     "localized_name": "Embestida temeraria",
     "description": "Técnica especial de Rushoar. Apunta al rival y carga ferozmente contra él."
   },
+  "EPalWazaID::Unique_CaptainPenguin_Black_BodySlide_Electric": {
+    "localized_name": "Desliz eléctrico",
+    "description": "Técnica exclusiva de Penking Lux. Coloca la barriga en el suelo, y se desliza hacia el enemigo al tiempo que genera electricidad con su cuerpo."
+  },
   "EPalWazaID::Unique_CaptainPenguin_BodySlide": {
     "localized_name": "Capitán desliz",
     "description": "Técnica exclusiva de Penking. Se echa boca abajo en el suelo y emite aire frío a través del cuerpo para deslizarse y chocar contra los enemigos."
@@ -551,6 +583,14 @@
     "localized_name": "Dentellada salvaje",
     "description": "Técnica especial de Direhowl. Se lanza a toda velocidad hacia el rival y le muerde con sus fauces."
   },
+  "EPalWazaID::Unique_GhostAnglerfish_Fire_SweepBait_Fire": {
+    "localized_name": "Cebo ígneo",
+    "description": "Técnica exclusiva de Ghangler Ignis. Utiliza la linterna envuelta en llamas de su cabeza para barrer todo lo que tiene delante."
+  },
+  "EPalWazaID::Unique_GhostAnglerfish_SweepBait": {
+    "localized_name": "Cebo luminoso",
+    "description": "Técnica exclusiva de Ghangler. Utiliza la larga linterna de su cabeza para barrer todo lo que tiene delante."
+  },
   "EPalWazaID::Unique_GhostBeast_Tossin": {
     "localized_name": "Acelerón espiritual",
     "description": "Técnica exclusiva de Maraith. Corre lentamente mientras lanza bolas de fuego brillantes en cadena contra el enemigo."
@@ -603,6 +643,10 @@
     "localized_name": "Ola del fénix",
     "description": "Técnica especial de Faleris Aqua. Tras crear un enorme remolino, cubre su cuerpo de agua y carga contra el rival planeando hasta él."
   },
+  "EPalWazaID::Unique_IceCrocodile_SpitAttack": {
+    "localized_name": "Espetón",
+    "description": "Técnica exclusiva de Munchill. Ataca escupiendo tres granadas frías que su cuerpo no había digerido. A veces escupe cosas más peligrosas incluso..."
+  },
   "EPalWazaID::Unique_IceDeer_IceHorn": {
     "localized_name": "Cornada gélida",
     "description": "Técnica exclusiva de Reindrix. Corre hacia adelante y acomete contra el enemigo con su magnífica cornamenta de hielo."
@@ -610,6 +654,10 @@
   "EPalWazaID::Unique_IceHorse_IceBladeAttack": {
     "localized_name": "Ala de cristal",
     "description": "Técnica exclusiva de Frostallion. Condensa el aire que rodea sus alas y las cubre de hielo para cortar con ellas a sus enemigos mientras corre a toda velocidad."
+  },
+  "EPalWazaID::Unique_IceNarwhal_JumpingHorn": {
+    "localized_name": "Cuerno afilado",
+    "description": "Técnica exclusiva de la clase Whalaska. Se inclina hacia adelante y se lanza en picado, luego salta alto hacia el cielo y ataca. Al saltar, se produce una explosión de hielo."
   },
   "EPalWazaID::Unique_JetDragon_JumpBeam": {
     "localized_name": "Cometa de luz",
@@ -631,9 +679,13 @@
     "localized_name": "Vendaval relámpago",
     "description": "Técnica exclusiva de Univolt. Embiste al enemigo mientras se generan rayos a su alrededor."
   },
+  "EPalWazaID::Unique_LeafMomonga_SomerSault": {
+    "localized_name": "Salto mortal",
+    "description": "Técnica exclusiva de Herbil. Tras una breve preparación, hace una voltereta y se lanza contra el enemigo a toda velocidad."
+  },
   "EPalWazaID::Unique_LilyQueen_LilyHealing": {
     "localized_name": "Protección fecunda",
-    "description": "Técnica exclusiva de Lyleen. Recupera PV propios gracias a un misterioso poder. No cura al jugador."
+    "description": "Técnica exclusiva de Lyleen. Recupera PV de todos los aliados a su alcance gracias a un misterioso poder."
   },
   "EPalWazaID::Unique_LilyQueen_WindBarrier": {
     "localized_name": "Barrera eólica",
@@ -683,6 +735,14 @@
     "localized_name": "Puñetazo doble",
     "description": "Técnica especial de Anubis. Persigue al rival girando con fiereza los brazos y le propina puñetazos en cadena."
   },
+  "EPalWazaID::Unique_Plesiosaur_LongBreath": {
+    "localized_name": "Aliento eterno",
+    "description": "Técnica exclusiva de Braloha. Va exhalando poco a poco desde la base de su cuello hasta su boca, un terrible aliento de atributo planta."
+  },
+  "EPalWazaID::Unique_PoseidonOrca_TorrentLaser": {
+    "localized_name": "Torrente láser",
+    "description": "Técnica exclusiva de Neptilius. Se eleva un momento para recoger con la boca. Luego, el agua a presión se extiende vertical y horizontalmente tres veces y arrasa con todo. En las zonas despejadas aparecen grietas de las que sale agua a borbotones."
+  },
   "EPalWazaID::Unique_PurpleSpider_SpiderRaid": {
     "localized_name": "Asalto arácnido",
     "description": "Técnica exclusiva de Tarantriss. Escupe una madeja de hilo, enredando con ella a su presa. Luego, corre a toda velocidad hacia ella y, tras darle 3 vueltas, le asesta el golpe de gracia."
@@ -701,7 +761,7 @@
   },
   "EPalWazaID::Unique_Ronin_Iai": {
     "localized_name": "Iaigiri",
-    "description": "Técnica exclusiva de Bushi. Tras ponerse en guardia, se aparece de repente ante el enemigo y le asesta un espadazo a la velocidad del rayo."
+    "description": "Técnica exclusiva de la clase Bushi. Tras ponerse en guardia, se aparece de repente ante el enemigo y le asesta un espadazo a la velocidad del rayo."
   },
   "EPalWazaID::Unique_SaintCentaur_OneSpearRushes": {
     "localized_name": "Lanza deslumbrante",
@@ -735,6 +795,14 @@
     "localized_name": "Aguijón lacerante",
     "description": "Técnica exclusiva de Beegarde. Embiste al enemigo a toda velocidad y, para rematarlo, le clava la lanza."
   },
+  "EPalWazaID::Unique_StuffedShark_HiddenWeapon": {
+    "localized_name": "Gatillo fácil",
+    "description": "Técnica exclusiva de la clase Finsider. Se saca dos pistolas de agua de la boca y dispara seis balas de agua, a izquierda y derecha. Por último, combina las dos armas para disparar un tiro fulminante."
+  },
+  "EPalWazaID::Unique_TentacleTurtle_HydroSpin": {
+    "localized_name": "Fuerza centrífuga",
+    "description": "Técnica exclusiva de la claseTurtacle. La propulsión lo impulsa hacia el enemigo mientras gira a toda velocidad."
+  },
   "EPalWazaID::Unique_ThunderBird_ThunderStorm": {
     "localized_name": "Inmersión relámpago",
     "description": "Técnica exclusiva de Beakon. Primero lanza un rayo donde se encuentra el enemigo. A continuación se lanza en picado mientras caen rayos por ambos flancos."
@@ -750,6 +818,10 @@
   "EPalWazaID::Unique_ThunderDragonMan_ThunderSwordAttack": {
     "localized_name": "Keraunos",
     "description": "Técnica exclusiva de Orserk. Salta e invoca una lanza de trueno que lanza al enemigo."
+  },
+  "EPalWazaID::Unique_TropicalOstrich_DashKick": {
+    "localized_name": "Coz imperiosa",
+    "description": "Técnica exclusiva de Palumba. Coge impulso con una carrera y ataca al enemigo con una poderosa patada."
   },
   "EPalWazaID::Unique_Umihebi_Fire_FireWindingTackle": {
     "localized_name": "Sierpe magma",
@@ -798,6 +870,54 @@
   "EPalWazaID::Unique_WingGolem_RoundCutter": {
     "localized_name": "Rajasuelos",
     "description": "Técnica exclusiva de Knocklem. Da un enorme giro para lanzar el anillo que hay sobre su lomo y este vuela en círculos."
+  },
+  "EPalWazaID::Unique_YakushimaBoss001_Small_DemonEyeCharge": {
+    "localized_name": "Embestida ocular",
+    "description": "Técnica exclusiva de Ojo demoníaco. Embiste contra el enemigo. Rebota al chocar contra el suelo o las paredes."
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Dark": {
+    "localized_name": "Aplastamiento slime (oscuridad)",
+    "description": "Técnica exclusiva de Slime morado. Salta hacia el enemigo para atacarlo."
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Fire": {
+    "localized_name": "Aplastamiento slime (fuego)",
+    "description": "Técnica exclusiva de Slime rojo. Salta hacia el enemigo para atacarlo."
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Leaf": {
+    "localized_name": "Aplastamiento slime (planta)",
+    "description": "Técnica exclusiva de Slime verde. Salta hacia el enemigo para atacarlo."
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Normal": {
+    "localized_name": "Aplastamiento slime (no elemental)",
+    "description": "Técnica exclusiva de Slime luminoso. Salta hacia el enemigo para atacarlo."
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Rainbow": {
+    "localized_name": "Aplastamiento slime (arcoíris)",
+    "description": "Técnica exclusiva de Slime arcoíris. Salta hacia el enemigo para atacarlo."
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Water": {
+    "localized_name": "Aplastamiento slime (agua)",
+    "description": "Técnica exclusiva de Slime azul. Salta hacia el enemigo para atacarlo."
+  },
+  "EPalWazaID::Unique_YakushimaMonster002_SwordCharge": {
+    "localized_name": "Carga con espada",
+    "description": "Técnica exclusiva de Espada encantada. Lanza un ataque punzante contra el enemigo."
+  },
+  "EPalWazaID::Unique_YakushimaMonster003_BatCharge": {
+    "localized_name": "Asalto de murciélagos",
+    "description": "Técnica exclusiva de Murciélago de cueva. Ataca al enemigo con todo su cuerpo. Rebota al chocar contra el suelo o las paredes."
+  },
+  "EPalWazaID::Unique_Yakushima_EyeTossin": {
+    "localized_name": "Embestida hipnótica",
+    "description": "Técnica exclusiva de Ojo de Cthulhu. Carga varias veces contra el enemigo."
+  },
+  "EPalWazaID::Unique_Yakushima_MouthTossin": {
+    "localized_name": "Embestida veloz",
+    "description": "Técnica exclusiva de Ojo de Cthulhu. Carga varias veces contra el enemigo a toda velocidad."
+  },
+  "EPalWazaID::Unique_Yakushima_SummonServant": {
+    "localized_name": "Invocación de esbirros",
+    "description": "Técnica exclusiva de Ojo de Cthulhu. Invoca a cuatro esbirros. Estos se lanzan contra el enemigo y causan daño al impactar. Desaparecen tras recibir un ataque o tras cierto tiempo."
   },
   "EPalWazaID::Unique_Yeti_Grass_GrassBall": {
     "localized_name": "Derribo vegetal",

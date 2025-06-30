@@ -55,6 +55,10 @@
     "localized_name": "十字雷击",
     "description": "堵住敌人的左右两侧 生成可向两个方向前进的雷击。"
   },
+  "EPalWazaID::CrossWind": {
+    "localized_name": "十字风切",
+    "description": "在敌人前方生成风刃， 并对其发动十字斩击。"
+  },
   "EPalWazaID::DarkArrow": {
     "localized_name": "黑暗箭",
     "description": "使用暗之力连续发射数支高速箭追击敌人。"
@@ -86,6 +90,10 @@
   "EPalWazaID::DiamondFall": {
     "localized_name": "晶钻之雨",
     "description": "在敌人头顶生无数个冰块， 随后接连落下攻击目标。"
+  },
+  "EPalWazaID::DiversionLaser": {
+    "localized_name": "分流水炮",
+    "description": "向前方发射高压水流。 片刻后，水流会向左右分岔。"
   },
   "EPalWazaID::DoubleIcicleThrow": {
     "localized_name": "极寒双星",
@@ -179,6 +187,10 @@
     "localized_name": "高压水炮",
     "description": "猛烈地释放出水流 并向前方大范围横扫。"
   },
+  "EPalWazaID::HydroSlicer": {
+    "localized_name": "水刀切割",
+    "description": "用压缩水流一扫前方。 被扫过的区域会在片刻后喷出水柱。"
+  },
   "EPalWazaID::HyperBeam": {
     "localized_name": "帕鲁光束",
     "description": "积蓄破坏性的能量， 朝前方大范围射出威力惊人的光束。"
@@ -194,6 +206,10 @@
   "EPalWazaID::IceMissile": {
     "localized_name": "冰雪飞弹",
     "description": "在上空生成尖锐的冰柱 瞄准敌人后发射冰柱。"
+  },
+  "EPalWazaID::IceWall": {
+    "localized_name": "寒冰之壁",
+    "description": "从地面召唤出冰墙。 冰墙会持续一段时间， 并在承受一定伤害后碎裂。"
   },
   "EPalWazaID::IcicleLine": {
     "localized_name": "冰锋之路",
@@ -275,6 +291,14 @@
     "localized_name": "雷动八方",
     "description": "向八个方向召唤直线推进的雷击。"
   },
+  "EPalWazaID::ReflectiveShuriken": {
+    "localized_name": "连锁叶刃",
+    "description": "发射风刃， 在击中敌人或树木时反弹并连续造成攻击， 最多可反弹4次。"
+  },
+  "EPalWazaID::RipTide": {
+    "localized_name": "漩涡新星",
+    "description": "在敌人四周掀起波浪并涌向敌人， 最后在中心点爆炸，喷出高高的水柱。"
+  },
   "EPalWazaID::RockBeat": {
     "localized_name": "震岩",
     "description": "震动地面， 并令巨大的岩石飞起。"
@@ -298,6 +322,10 @@
   "EPalWazaID::SandTwister": {
     "localized_name": "沙尘暴",
     "description": "生成复数个砂龙卷。 龙卷风们将一边自旋一边绕中心旋转。"
+  },
+  "EPalWazaID::SeaGush": {
+    "localized_name": "潮涌迸发",
+    "description": "在敌人所在位置及其周围区域 喷出大量水柱。"
   },
   "EPalWazaID::SeedMachinegun": {
     "localized_name": "种子机关枪",
@@ -455,6 +483,10 @@
     "localized_name": "猪突猛进",
     "description": "草莽猪的专用技能。 瞄准敌人后，猛烈地冲向敌人。"
   },
+  "EPalWazaID::Unique_CaptainPenguin_Black_BodySlide_Electric": {
+    "localized_name": "王者闪击",
+    "description": "闪丸王的专用技能。 全身电流涌动，腹部着地滑行 并用力撞向敌人。"
+  },
   "EPalWazaID::Unique_CaptainPenguin_BodySlide": {
     "localized_name": "王者滑击",
     "description": "企丸王的专用技能。 全身散发寒气，并采用腹部着地之姿滑行， 往敌人的方向用力撞去。"
@@ -551,6 +583,14 @@
     "localized_name": "狂野獠牙",
     "description": "猎狼的专用技能。 快速地向敌人飞扑，咬住敌人进行攻击。"
   },
+  "EPalWazaID::Unique_GhostAnglerfish_Fire_SweepBait_Fire": {
+    "localized_name": "炽灯横扫",
+    "description": "炙灯鱼的专用技能。 使用头部附着火焰的提灯横扫前方大范围目标。"
+  },
+  "EPalWazaID::Unique_GhostAnglerfish_SweepBait": {
+    "localized_name": "提灯横扫",
+    "description": "冥灯鱼的专用技能。 使用头部长长的提灯横扫前方大范围目标。"
+  },
   "EPalWazaID::Unique_GhostBeast_Tossin": {
     "localized_name": "心灵冲刺",
     "description": "噬魂兽的专用技能。 缓慢奔跑的同时，不断召唤摇曳的火球飞向敌人。"
@@ -603,6 +643,10 @@
     "localized_name": "凤凰浪涛",
     "description": "伊西斯的专用技能。 扇起漩涡龙卷风后， 化身为波涛，一边滑翔一边突袭敌人。"
   },
+  "EPalWazaID::Unique_IceCrocodile_SpitAttack": {
+    "localized_name": "妙玉连珠",
+    "description": "肚肚鳄的专用技能。 连续喷吐3颗体内尚未消化 但已经冷却的手榴弹进行攻击。 有时还会喷出更危险的东西……？"
+  },
   "EPalWazaID::Unique_IceDeer_IceHorn": {
     "localized_name": "霜角猛攻",
     "description": "严冬鹿的专用技能。 向前冲刺并以雄伟的冰角刺穿敌人。"
@@ -610,6 +654,10 @@
   "EPalWazaID::Unique_IceHorse_IceBladeAttack": {
     "localized_name": "冰晶之翼",
     "description": "唤冬兽及亚种的专用技能。 凝结冷空气，让翅膀覆上冰晶， 并在全力奔跑的同时以冰翼撕裂敌人。"
+  },
+  "EPalWazaID::Unique_IceNarwhal_JumpingHorn": {
+    "localized_name": "冰鲸跃",
+    "description": "凉晶鲸及亚种的专用技能。 笔直突进后短暂潜伏， 接着高高跃起进行攻击。 跃起时会引发冰属性爆炸。"
   },
   "EPalWazaID::Unique_JetDragon_JumpBeam": {
     "localized_name": "光束彗星",
@@ -631,9 +679,13 @@
     "localized_name": "疾风雷击",
     "description": "雷角马的专用技能。 在自己的周围降下落雷， 同时猛力冲向敌人。"
   },
+  "EPalWazaID::Unique_LeafMomonga_SomerSault": {
+    "localized_name": "叶返",
+    "description": "达鼠泥的专用技能。 短暂蓄力后高速撞击敌人， 同时做出后空翻动作。"
+  },
   "EPalWazaID::Unique_LilyQueen_LilyHealing": {
     "localized_name": "丰饶加护",
-    "description": "百合女王的专用技能。 使用治愈的力量恢复自身的HP。 并不会帮玩家恢复生命值。"
+    "description": "百合女王的专用技能。 使用治愈的力量恢复范围内同伴的HP。"
   },
   "EPalWazaID::Unique_LilyQueen_WindBarrier": {
     "localized_name": "风之结界",
@@ -683,6 +735,14 @@
     "localized_name": "喵喵拳",
     "description": "捣蛋猫的专用技能。 挥舞双臂追击敌人， 连续挥出利拳。"
   },
+  "EPalWazaID::Unique_Plesiosaur_LongBreath": {
+    "localized_name": "花粉吐息",
+    "description": "梁叶龙的专用技能。 从修长的颈部缓缓释放出草属性的气息， 逐渐向四周扩散。"
+  },
+  "EPalWazaID::Unique_PoseidonOrca_TorrentLaser": {
+    "localized_name": "风暴潮",
+    "description": "海皇鲸的专用技能。 身体略微上浮并在口中凝聚水流。 随后纵横挥扫出三股高压水流。 被扫过的区域会出现裂缝并喷出水柱。"
+  },
   "EPalWazaID::Unique_PurpleSpider_SpiderRaid": {
     "localized_name": "蜘蛛猛袭",
     "description": "桃蛛娘的专用技能。 吐出丝线缠绕住猎物。 之后全速冲向猎物所在位置， 打出三段攻击以使其毙命。"
@@ -701,7 +761,7 @@
   },
   "EPalWazaID::Unique_Ronin_Iai": {
     "localized_name": "居合斩",
-    "description": "浪刃武士的专用技能。 摆出迎战姿势后瞬间移动至敌人面前， 并使出超高速的拔刀攻击。"
+    "description": "浪刃武士及亚种的专用技能。 摆出迎战姿势后瞬间移动至敌人面前， 并使出超高速的拔刀攻击。"
   },
   "EPalWazaID::Unique_SaintCentaur_OneSpearRushes": {
     "localized_name": "闪枪冲锋",
@@ -735,6 +795,14 @@
     "localized_name": "针刺长矛",
     "description": "骑士蜂的专用技能。 朝向敌人高速突刺。 最后使出致命一击贯穿敌人。"
   },
+  "EPalWazaID::Unique_StuffedShark_HiddenWeapon": {
+    "localized_name": "午时已到",
+    "description": "布偶鲨及亚种的专用技能。 从口中取出两把水枪， 左右轮流射出6发水弹。 最后双枪合并，射出一发强力水弹。"
+  },
+  "EPalWazaID::Unique_TentacleTurtle_HydroSpin": {
+    "localized_name": "漩涡回旋",
+    "description": "盔盔仔及亚种的专用技能。 利用水流喷射推进力， 一边高速旋转一边向敌人飞旋而去。"
+  },
   "EPalWazaID::Unique_ThunderBird_ThunderStorm": {
     "localized_name": "闪电俯冲",
     "description": "迅雷鸟的专用技能。 先在敌人所在位置降下落雷。 然后在空中突进的同时，于左右两侧召唤落雷。"
@@ -750,6 +818,10 @@
   "EPalWazaID::Unique_ThunderDragonMan_ThunderSwordAttack": {
     "localized_name": "雷神之枪",
     "description": "波鲁杰克斯的专用技能。 向上跳起后召唤雷枪， 将之丢向敌人。"
+  },
+  "EPalWazaID::Unique_TropicalOstrich_DashKick": {
+    "localized_name": "冲锋踢",
+    "description": "咕咕桑葩的专用技能。 冲刺助跑后向敌人发动猛烈踢击。"
   },
   "EPalWazaID::Unique_Umihebi_Fire_FireWindingTackle": {
     "localized_name": "腾龙奔炎",
@@ -798,6 +870,54 @@
   "EPalWazaID::Unique_WingGolem_RoundCutter": {
     "localized_name": "回旋岩锯",
     "description": "泰锋的专用技能。 大幅回旋身体投掷出背后的岩盘。 岩盘将会以圆弧轨道状飞行。"
+  },
+  "EPalWazaID::Unique_YakushimaBoss001_Small_DemonEyeCharge": {
+    "localized_name": "眼球突击",
+    "description": "恶魔眼的专用技能。 朝敌人发起冲锋。撞到地面或墙壁时会反弹。"
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Dark": {
+    "localized_name": "史莱姆重压（暗）",
+    "description": "紫史莱姆的专用技能。 跳向敌人发动攻击。"
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Fire": {
+    "localized_name": "史莱姆重压（火）",
+    "description": "红史莱姆的专用技能。 跳向敌人发动攻击。"
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Leaf": {
+    "localized_name": "史莱姆重压（草）",
+    "description": "绿史莱姆的专用技能。 跳向敌人发动攻击。"
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Normal": {
+    "localized_name": "史莱姆重压（无）",
+    "description": "夜明史莱姆的专用技能。 跳向敌人发动攻击。"
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Rainbow": {
+    "localized_name": "史莱姆重压（彩虹）",
+    "description": "彩虹史莱姆的专用技能。 跳向敌人发动攻击。"
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Water": {
+    "localized_name": "史莱姆重压（水）",
+    "description": "蓝史莱姆的专用技能。 跳向敌人发动攻击。"
+  },
+  "EPalWazaID::Unique_YakushimaMonster002_SwordCharge": {
+    "localized_name": "剑舞冲锋",
+    "description": "附魔剑的专用技能。 朝敌人发动突刺攻击。"
+  },
+  "EPalWazaID::Unique_YakushimaMonster003_BatCharge": {
+    "localized_name": "蝙蝠袭击",
+    "description": "洞穴蝙蝠的专用技能。 利用全身扑向敌人发起进攻。撞到地面或墙壁时会反弹。"
+  },
+  "EPalWazaID::Unique_Yakushima_EyeTossin": {
+    "localized_name": "凝视突击",
+    "description": "克苏鲁之眼的专用技能。 多次朝敌人发起冲锋。"
+  },
+  "EPalWazaID::Unique_Yakushima_MouthTossin": {
+    "localized_name": "高速突击",
+    "description": "克苏鲁之眼的专用技能。 以极高速度多次朝敌人发起冲锋。"
+  },
+  "EPalWazaID::Unique_Yakushima_SummonServant": {
+    "localized_name": "召唤仆从",
+    "description": "克苏鲁之眼的专用技能。 召唤4个仆从撞向敌人并造成伤害。仆从会在受到攻击或经过一定时间后消失。"
   },
   "EPalWazaID::Unique_Yeti_Grass_GrassBall": {
     "localized_name": "滚草球",

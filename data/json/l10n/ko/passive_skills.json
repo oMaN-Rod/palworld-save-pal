@@ -23,12 +23,24 @@
     "localized_name": "공격 증가 Lv1",
     "description": null
   },
+  "Attack_ACC_up1_Otomo_Only_Equip": {
+    "localized_name": "팰 공격 증가 Lv1",
+    "description": null
+  },
   "Attack_ACC_up2": {
     "localized_name": "공격 증가 Lv2",
     "description": null
   },
+  "Attack_ACC_up2_Otomo_Only_Equip": {
+    "localized_name": "팰 공격 증가 Lv2",
+    "description": null
+  },
   "Attack_ACC_up3": {
     "localized_name": "공격 증가 Lv3",
+    "description": null
+  },
+  "Attack_ACC_up3_Otomo_Only_Equip": {
+    "localized_name": "팰 공격 증가 Lv3",
     "description": null
   },
   "BossDefeatReward_AmaterasuWolf_Dark": {
@@ -155,6 +167,14 @@
     "localized_name": "어둠 속성 피해 강화 (소)",
     "description": null
   },
+  "BossDefeatReward_IceNarwhal": {
+    "localized_name": "얼음 속성 피해 강화 (대)",
+    "description": null
+  },
+  "BossDefeatReward_IceNarwhal_Fire": {
+    "localized_name": "화염 속성 피해 강화 (대)",
+    "description": null
+  },
   "BossDefeatReward_JetDragon": {
     "localized_name": "용 속성 피해 강화 (대)",
     "description": null
@@ -217,6 +237,10 @@
   },
   "BossDefeatReward_PlantSlime": {
     "localized_name": "땅 속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_PoseidonOrca": {
+    "localized_name": "물 속성 피해 강화 (대)",
     "description": null
   },
   "BossDefeatReward_PurpleSpider": {
@@ -395,6 +419,18 @@
     "localized_name": "초절기교",
     "description": null
   },
+  "Defense_ACC_up1_Otomo_Only_Equip": {
+    "localized_name": "팰 방어 증가 Lv1",
+    "description": null
+  },
+  "Defense_ACC_up2_Otomo_Only_Equip": {
+    "localized_name": "팰 방어 증가 Lv2",
+    "description": null
+  },
+  "Defense_ACC_up3_Otomo_Only_Equip": {
+    "localized_name": "팰 방어 증가 Lv3",
+    "description": null
+  },
   "Deffence_down1": {
     "localized_name": "약한 맷집",
     "description": null
@@ -427,12 +463,20 @@
     "localized_name": "어둠 속성 피해 강화 (소)",
     "description": null
   },
+  "ElementBoost_Dark_1_Otomo_Only_Equip": {
+    "localized_name": "팰 어둠 속성 피해 강화 Lv1",
+    "description": null
+  },
   "ElementBoost_Dark_1_PAL": {
     "localized_name": "밤의 장막",
     "description": "어둠 속성 공격 피해 증가 10.0%"
   },
   "ElementBoost_Dark_2_BossDefeat": {
     "localized_name": "어둠 속성 피해 강화 (중)",
+    "description": null
+  },
+  "ElementBoost_Dark_2_Otomo_Only_Equip": {
+    "localized_name": "팰 어둠 속성 피해 강화 Lv2",
     "description": null
   },
   "ElementBoost_Dark_2_PAL": {
@@ -443,8 +487,16 @@
     "localized_name": "어둠 속성 피해 강화 (대)",
     "description": null
   },
+  "ElementBoost_Dark_3_Otomo_Only_Equip": {
+    "localized_name": "팰 어둠 속성 피해 강화 Lv3",
+    "description": null
+  },
   "ElementBoost_Dragon_1_BossDefeat": {
     "localized_name": "용 속성 피해 강화 (소)",
+    "description": null
+  },
+  "ElementBoost_Dragon_1_Otomo_Only_Equip": {
+    "localized_name": "팰 용 속성 피해 강화 Lv1",
     "description": null
   },
   "ElementBoost_Dragon_1_PAL": {
@@ -455,6 +507,10 @@
     "localized_name": "용 속성 피해 강화 (중)",
     "description": null
   },
+  "ElementBoost_Dragon_2_Otomo_Only_Equip": {
+    "localized_name": "팰 용 속성 피해 강화 Lv2",
+    "description": null
+  },
   "ElementBoost_Dragon_2_PAL": {
     "localized_name": "신룡",
     "description": null
@@ -463,8 +519,16 @@
     "localized_name": "용 속성 피해 강화 (대)",
     "description": null
   },
+  "ElementBoost_Dragon_3_Otomo_Only_Equip": {
+    "localized_name": "팰 용 속성 피해 강화 Lv3",
+    "description": null
+  },
   "ElementBoost_Earth_1_BossDefeat": {
     "localized_name": "땅 속성 피해 강화 (소)",
+    "description": null
+  },
+  "ElementBoost_Earth_1_Otomo_Only_Equip": {
+    "localized_name": "팰 땅 속성 피해 강화 Lv1",
     "description": null
   },
   "ElementBoost_Earth_1_PAL": {
@@ -475,6 +539,10 @@
     "localized_name": "땅 속성 피해 강화 (중)",
     "description": null
   },
+  "ElementBoost_Earth_2_Otomo_Only_Equip": {
+    "localized_name": "팰 땅 속성 피해 강화 Lv2",
+    "description": null
+  },
   "ElementBoost_Earth_2_PAL": {
     "localized_name": "지제",
     "description": null
@@ -483,20 +551,40 @@
     "localized_name": "땅 속성 피해 강화 (대)",
     "description": null
   },
+  "ElementBoost_Earth_3_Otomo_Only_Equip": {
+    "localized_name": "팰 땅 속성 피해 강화 Lv3",
+    "description": null
+  },
   "ElementBoost_Electricity_1_BossDefeat": {
     "localized_name": "번개 속성 피해 강화 (소)",
+    "description": null
+  },
+  "ElementBoost_Electricity_1_Otomo_Only_Equip": {
+    "localized_name": "팰 번개 속성 피해 강화 Lv1",
     "description": null
   },
   "ElementBoost_Electricity_2_BossDefeat": {
     "localized_name": "번개 속성 피해 강화 (중)",
     "description": null
   },
+  "ElementBoost_Electricity_2_Otomo_Only_Equip": {
+    "localized_name": "팰 번개 속성 피해 강화 Lv2",
+    "description": null
+  },
   "ElementBoost_Electricity_3_BossDefeat": {
     "localized_name": "번개 속성 피해 강화 (대)",
     "description": null
   },
+  "ElementBoost_Electricity_3_Otomo_Only_Equip": {
+    "localized_name": "팰 번개 속성 피해 강화 Lv3",
+    "description": null
+  },
   "ElementBoost_Fire_1_BossDefeat": {
     "localized_name": "화염 속성 피해 강화 (소)",
+    "description": null
+  },
+  "ElementBoost_Fire_1_Otomo_Only_Equip": {
+    "localized_name": "팰 화염 속성 피해 강화 Lv1",
     "description": null
   },
   "ElementBoost_Fire_1_PAL": {
@@ -507,6 +595,10 @@
     "localized_name": "화염 속성 피해 강화 (중)",
     "description": null
   },
+  "ElementBoost_Fire_2_Otomo_Only_Equip": {
+    "localized_name": "팰 화염 속성 피해 강화 Lv2",
+    "description": null
+  },
   "ElementBoost_Fire_2_PAL": {
     "localized_name": "염제",
     "description": null
@@ -515,8 +607,16 @@
     "localized_name": "화염 속성 피해 강화 (대)",
     "description": null
   },
+  "ElementBoost_Fire_3_Otomo_Only_Equip": {
+    "localized_name": "팰 화염 속성 피해 강화 Lv3",
+    "description": null
+  },
   "ElementBoost_Ice_1_BossDefeat": {
     "localized_name": "얼음 속성 피해 강화 (소)",
+    "description": null
+  },
+  "ElementBoost_Ice_1_Otomo_Only_Equip": {
+    "localized_name": "팰 얼음 속성 피해 강화 Lv1",
     "description": null
   },
   "ElementBoost_Ice_1_PAL": {
@@ -527,6 +627,10 @@
     "localized_name": "얼음 속성 피해 강화 (중)",
     "description": null
   },
+  "ElementBoost_Ice_2_Otomo_Only_Equip": {
+    "localized_name": "팰 얼음 속성 피해 강화 Lv2",
+    "description": null
+  },
   "ElementBoost_Ice_2_PAL": {
     "localized_name": "빙제",
     "description": null
@@ -535,8 +639,16 @@
     "localized_name": "얼음 속성 피해 강화 (대)",
     "description": null
   },
+  "ElementBoost_Ice_3_Otomo_Only_Equip": {
+    "localized_name": "팰 얼음 속성 피해 강화 Lv3",
+    "description": null
+  },
   "ElementBoost_Leaf_1_BossDefeat": {
     "localized_name": "풀 속성 피해 강화 (소)",
+    "description": null
+  },
+  "ElementBoost_Leaf_1_Otomo_Only_Equip": {
+    "localized_name": "팰 풀 속성 피해 강화 Lv1",
     "description": null
   },
   "ElementBoost_Leaf_1_PAL": {
@@ -547,6 +659,10 @@
     "localized_name": "풀 속성 피해 강화 (중)",
     "description": null
   },
+  "ElementBoost_Leaf_2_Otomo_Only_Equip": {
+    "localized_name": "팰 풀 속성 피해 강화 Lv2",
+    "description": null
+  },
   "ElementBoost_Leaf_2_PAL": {
     "localized_name": "정령왕",
     "description": null
@@ -555,8 +671,16 @@
     "localized_name": "풀 속성 피해 강화 (대)",
     "description": null
   },
+  "ElementBoost_Leaf_3_Otomo_Only_Equip": {
+    "localized_name": "팰 풀 속성 피해 강화 Lv3",
+    "description": null
+  },
   "ElementBoost_Normal_1_BossDefeat": {
     "localized_name": "무속성 피해 강화 (소)",
+    "description": null
+  },
+  "ElementBoost_Normal_1_Otomo_Only_Equip": {
+    "localized_name": "팰 무속성 피해 강화 Lv1",
     "description": null
   },
   "ElementBoost_Normal_1_PAL": {
@@ -567,12 +691,20 @@
     "localized_name": "무속성 피해 강화 (중)",
     "description": null
   },
+  "ElementBoost_Normal_2_Otomo_Only_Equip": {
+    "localized_name": "팰 무속성 피해 강화 Lv2",
+    "description": null
+  },
   "ElementBoost_Normal_2_PAL": {
     "localized_name": "성천",
     "description": null
   },
   "ElementBoost_Normal_3_BossDefeat": {
     "localized_name": "무속성 피해 강화 (대)",
+    "description": null
+  },
+  "ElementBoost_Normal_3_Otomo_Only_Equip": {
+    "localized_name": "팰 무속성 피해 강화 Lv3",
     "description": null
   },
   "ElementBoost_Thunder_1_PAL": {
@@ -587,12 +719,24 @@
     "localized_name": "물 속성 피해 강화 (소)",
     "description": null
   },
+  "ElementBoost_Water_1_Otomo_Only_Equip": {
+    "localized_name": "팰 물 속성 피해 강화 Lv1",
+    "description": null
+  },
   "ElementBoost_Water_2_BossDefeat": {
     "localized_name": "물 속성 피해 강화 (중)",
     "description": null
   },
+  "ElementBoost_Water_2_Otomo_Only_Equip": {
+    "localized_name": "팰 물 속성 피해 강화 Lv2",
+    "description": null
+  },
   "ElementBoost_Water_3_BossDefeat": {
     "localized_name": "물 속성 피해 강화 (대)",
+    "description": null
+  },
+  "ElementBoost_Water_3_Otomo_Only_Equip": {
+    "localized_name": "팰 물 속성 피해 강화 Lv3",
     "description": null
   },
   "ElementResist_Aqua_1": {
@@ -743,6 +887,34 @@
     "localized_name": "영원한 불꽃",
     "description": null
   },
+  "GYM_NAME_Desert": {
+    "localized_name": "팰파고스섬 자경단 간부",
+    "description": null
+  },
+  "GYM_NAME_Forest": {
+    "localized_name": "팰 애호 단체 창시자",
+    "description": null
+  },
+  "GYM_NAME_Meadow": {
+    "localized_name": "레인 밀렵단 간부",
+    "description": "공격+20.0% 이동 속도 상승 10.0%"
+  },
+  "GYM_NAME_Sakurajima": {
+    "localized_name": "달꽃단 대장",
+    "description": null
+  },
+  "GYM_NAME_Snow": {
+    "localized_name": "팰 유전자 연구 부대 대장",
+    "description": null
+  },
+  "GYM_NAME_Viking": {
+    "localized_name": "천락의 민족 수령",
+    "description": null
+  },
+  "GYM_NAME_Volcano": {
+    "localized_name": "영원한 불꽃의 동지의 영혼 지도자",
+    "description": null
+  },
   "HP_ACC_up1": {
     "localized_name": "체력 증가 Lv1",
     "description": null
@@ -826,6 +998,10 @@
   "Noukin": {
     "localized_name": "운동 바보",
     "description": null
+  },
+  "Nushi": {
+    "localized_name": "터주",
+    "description": "물 속성 공격 피해 증가 20.0% 얼음 속성 공격 피해 증가 20.0% 방어 +20.0%"
   },
   "PAL_ALLAttack_down1": {
     "localized_name": "겁쟁이",
@@ -915,6 +1091,18 @@
     "localized_name": "사디스트",
     "description": null
   },
+  "PalExp_Increase_1_Otomo_Only_Equip": {
+    "localized_name": "팰 경험치 획득량 증가 Lv1",
+    "description": null
+  },
+  "PalExp_Increase_2_Otomo_Only_Equip": {
+    "localized_name": "팰 경험치 획득량 증가 Lv2",
+    "description": null
+  },
+  "PalExp_Increase_3_Otomo_Only_Equip": {
+    "localized_name": "팰 경험치 획득량 증가 Lv3",
+    "description": null
+  },
   "Rare": {
     "localized_name": "희귀",
     "description": null
@@ -970,6 +1158,18 @@
   "Stamina_Up_3": {
     "localized_name": "영구기관",
     "description": "최대 기력 +75.0% ※탑승 가능한 팰에게만 적용"
+  },
+  "SwimSpeed_up_1": {
+    "localized_name": "유연한 헤엄",
+    "description": "물 위 이동 속도 상승 30.0%"
+  },
+  "SwimSpeed_up_2": {
+    "localized_name": "수영의 달인",
+    "description": null
+  },
+  "SwimSpeed_up_3": {
+    "localized_name": "파도타기 왕",
+    "description": null
   },
   "TemperatureResist_Cold1": {
     "localized_name": "내한 Lv1",
@@ -1049,6 +1249,26 @@
   },
   "WorkSpeed_ACC_up3": {
     "localized_name": "고속 작업 Lv3",
+    "description": null
+  },
+  "YakushimaDagameBoost_Magic_Equip": {
+    "localized_name": "신성한 힘 (마법)",
+    "description": null
+  },
+  "YakushimaDagameBoost_Melee_Equip": {
+    "localized_name": "신성한 힘 (근거리)",
+    "description": null
+  },
+  "YakushimaDagameBoost_Ranged_Equip": {
+    "localized_name": "신성한 힘 (원거리)",
+    "description": null
+  },
+  "YakushimaDagameBoost_Summon_Equip": {
+    "localized_name": "신성한 힘 (소환)",
+    "description": null
+  },
+  "YakushimaProtection_Equip": {
+    "localized_name": "신성한 수호",
     "description": null
   },
   "defense_ACC_up1": {

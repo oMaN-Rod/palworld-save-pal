@@ -8,7 +8,7 @@
     "description": null
   },
   "Accessory_AirDash3": {
-    "localized_name": "zh-hant text",
+    "localized_name": "空中三段衝刺靴",
     "description": null
   },
   "Accessory_JumpCount_Increase1": {
@@ -100,7 +100,7 @@
     "description": null
   },
   "BaseCampWorkerExtraStation": {
-    "localized_name": "BaseCampWorkerExtraStation",
+    "localized_name": "帕魯終端控制台",
     "description": null
   },
   "Battle_Armor_Grade_01_Cloth": {
@@ -365,7 +365,7 @@
   },
   "BelieverFlagSet": {
     "localized_name": "帕魯保護團體旗幟套組",
-    "description": "Believer_Flag與 Believer_Banner的套組。 是擊敗帕魯保護團體的證明。"
+    "description": "帕魯保護團體團旗與 帕魯保護團體掛旗的套組。 是擊敗帕魯保護團體的證明。"
   },
   "BlastFurnace4": {
     "localized_name": "巨大熔爐",
@@ -396,11 +396,11 @@
     "description": null
   },
   "ChargeLaserRifle": {
-    "localized_name": "zh-hant text",
+    "localized_name": "充能步槍",
     "description": null
   },
   "ChargeLaserRifleBullet": {
-    "localized_name": "zh-hant text",
+    "localized_name": "充能步槍子彈",
     "description": null
   },
   "Cloth2": {
@@ -428,7 +428,7 @@
     "description": "可粉碎石頭或木材， 將之轉換為其他素材的設施。 需有具備「澆水」適應性的帕魯負責使水車轉動。"
   },
   "CrystalPit": {
-    "localized_name": "CrystalPit",
+    "localized_name": "六稜晶礦採礦場",
     "description": null
   },
   "DamagedScarecrow": {
@@ -492,11 +492,11 @@
     "description": null
   },
   "EnergyShotgun": {
-    "localized_name": "zh-hant text",
+    "localized_name": "能量散彈槍",
     "description": null
   },
   "EnergyShotgunBullet": {
-    "localized_name": "zh-hant text",
+    "localized_name": "能量散彈槍子彈",
     "description": null
   },
   "EnergyStorage_Electric": {
@@ -508,7 +508,7 @@
     "description": null
   },
   "Factory_Hard_04": {
-    "localized_name": "zh-hant text",
+    "localized_name": "高等文明作業工廠",
     "description": null
   },
   "Factory_Money": {
@@ -521,34 +521,34 @@
   },
   "FireCultFlagSet": {
     "localized_name": "永炎同心會旗幟套組",
-    "description": "FireCult_Flag與 FireCult_Banner的套組。 是擊敗永炎同心會的證明。"
+    "description": "永炎同心會會旗與 永炎同心會掛旗的套組。 是擊敗永炎同心會的證明。"
   },
   "FishingBait_2": {
-    "localized_name": "FishingBait_2",
+    "localized_name": "優質釣餌",
     "description": null
   },
   "FishingBait_3": {
-    "localized_name": "FishingBait_3",
+    "localized_name": "奢華釣餌",
     "description": null
   },
   "FishingBait_3_A": {
-    "localized_name": "FishingBait_3_A",
+    "localized_name": "魅惑釣餌",
     "description": null
   },
   "FishingPond1": {
-    "localized_name": "FishingPond1",
+    "localized_name": "釣魚池",
     "description": null
   },
   "FishingPond2": {
-    "localized_name": "FishingPond2",
+    "localized_name": "大型釣魚池",
     "description": null
   },
   "FishingRod_02_1": {
-    "localized_name": "FishingRod_02_1",
+    "localized_name": "中級釣竿（搗蛋貓）",
     "description": null
   },
   "FishingRod_03_1": {
-    "localized_name": "FishingRod_03_1",
+    "localized_name": "高級釣竿（企丸丸）",
     "description": null
   },
   "FishingSet1": {
@@ -772,7 +772,7 @@
     "description": null
   },
   "GrapplingGun5": {
-    "localized_name": "GrapplingGun5",
+    "localized_name": "超級爪鉤槍",
     "description": null
   },
   "GrenadeBullet": {
@@ -809,7 +809,7 @@
   },
   "HunterFlagSet": {
     "localized_name": "盜獵團旗幟套組",
-    "description": "Hunter_Flag與 Hunter_Banner的套組。 是擊敗盜獵團的證明。"
+    "description": "盜獵團團旗與 盜獵團掛旗的套組。 是擊敗盜獵團的證明。"
   },
   "IceCrusher": {
     "localized_name": "冷凍粉碎機",
@@ -880,11 +880,11 @@
     "description": "使用電力讓據點更加明亮。"
   },
   "Lantern": {
-    "localized_name": "掛腰燈籠",
+    "localized_name": "掛腰提燈",
     "description": null
   },
   "Lantern_High": {
-    "localized_name": "Lantern_High",
+    "localized_name": "強化掛腰提燈",
     "description": null
   },
   "LargeCeilingLamp": {
@@ -932,7 +932,7 @@
     "description": null
   },
   "ManganeseIngot": {
-    "localized_name": "ManganeseIngot",
+    "localized_name": "珊瑚錠",
     "description": null
   },
   "ManualElectricGenerator": {
@@ -984,7 +984,7 @@
     "description": null
   },
   "MultiHatchingPalEgg": {
-    "localized_name": "MultiHatchingPalEgg",
+    "localized_name": "大型帕魯蛋孵化器",
     "description": null
   },
   "Musket": {
@@ -993,7 +993,7 @@
   },
   "NinjaFlagSet": {
     "localized_name": "月花眾旗幟套組",
-    "description": "Ninja_Flag與 Ninja_Banner的套組。 是擊敗月花眾的證明。"
+    "description": "月花眾團旗與 月花眾掛旗的套組。 是擊敗月花眾的證明。"
   },
   "OilPump": {
     "localized_name": "原油提煉機",
@@ -1008,11 +1008,11 @@
     "description": null
   },
   "OverheatRifle": {
-    "localized_name": "zh-hant text",
+    "localized_name": "過熱步槍",
     "description": null
   },
   "OverheatRifleBullet": {
-    "localized_name": "zh-hant text",
+    "localized_name": "過熱步槍子彈",
     "description": null
   },
   "PALBOX": {
@@ -1024,15 +1024,15 @@
     "description": null
   },
   "PalDopingShot": {
-    "localized_name": "zh-hant text",
+    "localized_name": "強化槍",
     "description": null
   },
   "PalDopingShotBullet": {
-    "localized_name": "zh-hant text",
+    "localized_name": "強化槍子彈",
     "description": null
   },
   "PalDopingShot_2": {
-    "localized_name": "PalDopingShot_2",
+    "localized_name": "高級強化槍",
     "description": null
   },
   "PalFoodBox": {
@@ -1040,7 +1040,7 @@
     "description": "將食物放進來， 據點的帕魯們就會來這裡進食。"
   },
   "PalHealingGrenade": {
-    "localized_name": "zh-hant text",
+    "localized_name": "帕魯恢復手榴彈",
     "description": null
   },
   "PalMedicineBox": {
@@ -1061,7 +1061,7 @@
   },
   "PoliceFlagSet": {
     "localized_name": "自衛隊旗幟套組",
-    "description": "Police_Flag與 Police_Banner的套組。 是擊敗自衛隊的證明。"
+    "description": "自衛隊隊旗與 自衛隊掛旗的套組。 是擊敗自衛隊的證明。"
   },
   "Polymer": {
     "localized_name": "聚合物",
@@ -1268,7 +1268,7 @@
     "description": "解鎖此套組即可用未來風建築建造據點。 可建造簡約地基、牆壁、屋頂和樓梯等 建造房屋時所需的構造。"
   },
   "Salvage_TreasureBoxKey02": {
-    "localized_name": "Salvage_TreasureBoxKey02",
+    "localized_name": "強力打撈用磁鐵",
     "description": null
   },
   "SanityDecrease1": {
@@ -1277,7 +1277,7 @@
   },
   "ScientistFlagSet": {
     "localized_name": "基因研究部隊旗幟套組",
-    "description": "Scientist_Flag與 Scientist_Banner的套組。 是擊敗基因研究部隊的證明。"
+    "description": "基因研究部隊隊旗與 基因研究部隊掛旗的套組。 是擊敗基因研究部隊的證明。"
   },
   "Shield_01": {
     "localized_name": "普通護盾",
@@ -1360,7 +1360,7 @@
     "description": null
   },
   "SkillUnlock_BlueDragon_Ice": {
-    "localized_name": "SkillUnlock_BlueDragon_Ice",
+    "localized_name": "碧月龍的鞍具",
     "description": null
   },
   "SkillUnlock_BlueThunderHorse": {
@@ -1456,7 +1456,7 @@
     "description": null
   },
   "SkillUnlock_FlyingManta_Thunder": {
-    "localized_name": "SkillUnlock_FlyingManta_Thunder",
+    "localized_name": "雷米兒的手套",
     "description": null
   },
   "SkillUnlock_Garm": {
@@ -1464,11 +1464,11 @@
     "description": null
   },
   "SkillUnlock_GhostAnglerfish": {
-    "localized_name": "SkillUnlock_GhostAnglerfish",
+    "localized_name": "冥燈魚的鞍具",
     "description": null
   },
   "SkillUnlock_GhostAnglerfish_Fire": {
-    "localized_name": "SkillUnlock_GhostAnglerfish_Fire",
+    "localized_name": "炙燈魚的鞍具",
     "description": null
   },
   "SkillUnlock_GhostBeast": {
@@ -1540,15 +1540,15 @@
     "description": null
   },
   "SkillUnlock_IceNarwhal": {
-    "localized_name": "SkillUnlock_IceNarwhal",
+    "localized_name": "涼晶鯨的鞍具",
     "description": null
   },
   "SkillUnlock_IceNarwhal_Fire": {
-    "localized_name": "SkillUnlock_IceNarwhal_Fire",
+    "localized_name": "桃晶鯨的鞍具",
     "description": null
   },
   "SkillUnlock_IceSeal": {
-    "localized_name": "SkillUnlock_IceSeal",
+    "localized_name": "香草豹冰的背帶",
     "description": null
   },
   "SkillUnlock_JetDragon": {
@@ -1592,7 +1592,7 @@
     "description": null
   },
   "SkillUnlock_LeafMomonga": {
-    "localized_name": "SkillUnlock_LeafMomonga",
+    "localized_name": "達鼠泥的背帶",
     "description": null
   },
   "SkillUnlock_Manticore": {
@@ -1632,7 +1632,7 @@
     "description": null
   },
   "SkillUnlock_NegativeOctopus_Neutral": {
-    "localized_name": "SkillUnlock_NegativeOctopus_Neutral",
+    "localized_name": "蝕魂魷的手套",
     "description": null
   },
   "SkillUnlock_NightBlueHorse": {
@@ -1644,15 +1644,15 @@
     "description": null
   },
   "SkillUnlock_Penguin_Electric": {
-    "localized_name": "SkillUnlock_Penguin_Electric",
+    "localized_name": "閃丸丸的火箭發射器",
     "description": null
   },
   "SkillUnlock_Plesiosaur": {
-    "localized_name": "SkillUnlock_Plesiosaur",
+    "localized_name": "梁葉龍的鞍具",
     "description": null
   },
   "SkillUnlock_PoseidonOrca": {
-    "localized_name": "SkillUnlock_PoseidonOrca",
+    "localized_name": "海皇鯨的鞍具",
     "description": null
   },
   "SkillUnlock_PurpleSpider": {
@@ -1720,7 +1720,7 @@
     "description": null
   },
   "SkillUnlock_TropicalOstrich": {
-    "localized_name": "SkillUnlock_TropicalOstrich",
+    "localized_name": "咕咕桑葩的鞍具",
     "description": null
   },
   "SkillUnlock_Umihebi": {
@@ -1792,7 +1792,7 @@
     "description": "進入此設施的帕魯能夠回復更多SAN值。"
   },
   "Spa3": {
-    "localized_name": "Spa3",
+    "localized_name": "和風溫泉",
     "description": null
   },
   "Spear": {
@@ -1968,7 +1968,7 @@
     "description": "可安裝在牆壁上。"
   },
   "WeaponFactory_Dirty_04": {
-    "localized_name": "zh-hant text",
+    "localized_name": "高等文明武器工廠",
     "description": null
   },
   "Wood_Gate": {

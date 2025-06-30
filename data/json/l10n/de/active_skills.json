@@ -55,6 +55,10 @@
     "localized_name": "X-Blitz",
     "description": "Erzeugt zwei Blitze, die den Gegner in die Zange nehmen."
   },
+  "EPalWazaID::CrossWind": {
+    "localized_name": "Kreuzwind",
+    "description": "Erzeugt vor dem Gegner zwei Windklingen, die sich kreuzen und angreifen."
+  },
   "EPalWazaID::DarkArrow": {
     "localized_name": "Schattenpfeil",
     "description": "Verschießt schnell nacheinander mehrere Schattenpfeile, die den Gegner verfolgen."
@@ -86,6 +90,10 @@
   "EPalWazaID::DiamondFall": {
     "localized_name": "Diamantsturz",
     "description": "Erschafft Eisbrocken über dem Gegner und lässt sie einen nach dem anderen hinabsausen."
+  },
+  "EPalWazaID::DiversionLaser": {
+    "localized_name": "Hochdruck-Jet",
+    "description": "Schießt einen Hochdruck-Wasserstrahl nach vorne ab, der sich nach einiger Zeit waagerecht in zwei Strahlen aufspaltet."
   },
   "EPalWazaID::DoubleIcicleThrow": {
     "localized_name": "Doppeleishagel",
@@ -179,6 +187,10 @@
     "localized_name": "Hydrostrahl",
     "description": "Erzeugt einen kräftigen Wasserstrahl, der alles, was sich vor ihm befindet, fortspült."
   },
+  "EPalWazaID::HydroSlicer": {
+    "localized_name": "Hydropeitsche",
+    "description": "Mäht mit einem Hochdruck-Wasserstrahl alles vor sich nieder. An der vom Strahl getroffenen Stelle schießt mit kurzer Zeitverzögerung eine Wasserfontäne hervor."
+  },
   "EPalWazaID::HyperBeam": {
     "localized_name": "Palstrahl",
     "description": "Fokussiert Vernichtungsenergie und feuert einen zerstörerischen Strahl ab, der alles, was sich vor ihm befindet, dem Boden gleichmacht."
@@ -194,6 +206,10 @@
   "EPalWazaID::IceMissile": {
     "localized_name": "Eisrakete",
     "description": "Erzeugt in der Luft spitze Eiszapfen und schleudert sie in Richtung des Gegners."
+  },
+  "EPalWazaID::IceWall": {
+    "localized_name": "Eiswall",
+    "description": "Lässt eine Eiswand aus dem Boden emporsteigen. Die Eiswand bleibt eine Weile bestehen und zerbricht, wenn sie eine bestimmte Menge an Schaden nimmt."
   },
   "EPalWazaID::IcicleLine": {
     "localized_name": "Eisschneise",
@@ -275,6 +291,14 @@
     "localized_name": "Zorndonner",
     "description": "Erzeugt Blitze, die geradeaus in alle Richtungen fliegen."
   },
+  "EPalWazaID::ReflectiveShuriken": {
+    "localized_name": "Reflexblatt",
+    "description": "Erzeugt eine Windklinge, die bei Treffern auf Gegner oder Bäume bis zu vier Mal abprallt und Mehrfachangriffe ermöglicht."
+  },
+  "EPalWazaID::RipTide": {
+    "localized_name": "Springflut",
+    "description": "Erzeugt Wellen, die von allen Seiten auf den Gegner zurollen. Die Wellen explodieren im Zentrum und lassen eine Wassersäule aufsteigen."
+  },
   "EPalWazaID::RockBeat": {
     "localized_name": "Felshammer",
     "description": "Lässt die Erde erbeben und hebt einen riesigen Felsklumpen in die Luft."
@@ -298,6 +322,10 @@
   "EPalWazaID::SandTwister": {
     "localized_name": "Sandwirbel",
     "description": "Erzeugt mehrere Sandtornados, die sich auf einer kreisförmigen Bahn bewegen."
+  },
+  "EPalWazaID::SeaGush": {
+    "localized_name": "Wassersäulen",
+    "description": "Lässt unzählige Wassersäulen aus dem Boden um den Gegner herum emporschießen."
   },
   "EPalWazaID::SeedMachinegun": {
     "localized_name": "Samen-MG",
@@ -455,6 +483,10 @@
     "localized_name": "Schweinsgalopp",
     "description": "Einzigartige Fähigkeit von Rushoar. Nimmt einen Gegner ins Visier und stürmt wild drauflos."
   },
+  "EPalWazaID::Unique_CaptainPenguin_Black_BodySlide_Electric": {
+    "localized_name": "Donner-Schlittern",
+    "description": "Einzigartige Fähigkeit von Penking Lux. Legt sich auf den Bauch, hüllt seinen Körper in Elektrizität und schlittert auf den Gegner zu."
+  },
   "EPalWazaID::Unique_CaptainPenguin_BodySlide": {
     "localized_name": "Schlitten Royale",
     "description": "Einzigartige Fähigkeit von Penking. Legt sich auf den Bauch, hüllt seinen Körper in eisigen Dunst und schlittert auf den Gegner zu."
@@ -551,6 +583,14 @@
     "localized_name": "Alphazahn",
     "description": "Einzigartige Fähigkeit von Direhowl. Springt den Gegner blitzschnell an und beißt zu."
   },
+  "EPalWazaID::Unique_GhostAnglerfish_Fire_SweepBait_Fire": {
+    "localized_name": "Glutheiße Laternenpeitsche",
+    "description": "Einzigartige Fähigkeit von Ghangler Ignis. Schwingt die flammende Laterne an seinem Kopf in einem weiten Bogen nach vorne."
+  },
+  "EPalWazaID::Unique_GhostAnglerfish_SweepBait": {
+    "localized_name": "Laternenpeitsche",
+    "description": "Einzigartige Fähigkeit von Ghangler. Schwingt die lange Laterne an seinem Kopf in einem weiten Bogen nach vorne."
+  },
   "EPalWazaID::Unique_GhostBeast_Tossin": {
     "localized_name": "Seelensturm",
     "description": "Einzigartige Fähigkeit von Maraith. Trabt langsam los und lässt dabei flackernde Feuerbälle auf den Gegner zufliegen."
@@ -603,6 +643,10 @@
     "localized_name": "Phönixflut",
     "description": "Einzigartige Fähigkeit von Faleris Aqua. Erzeugt einen gewaltigen Tornado, hüllt daraufhin seinen Körper in Wasser und greift den Gegner im Gleitflug an."
   },
+  "EPalWazaID::Unique_IceCrocodile_SpitAttack": {
+    "localized_name": "Sprengspucker",
+    "description": "Einzigartige Fähigkeit von Munchill. Spuckt nacheinander drei unverdaute, eisgekühlte Granaten aus. Manchmal ist auch eine gefährlichere Überraschung dabei ..."
+  },
   "EPalWazaID::Unique_IceDeer_IceHorn": {
     "localized_name": "Eiskronentackling",
     "description": "Einzigartige Fähigkeit von Reindrix. Prescht vor und nimmt unglückselige Gegner auf sein majestätisches Eisgeweih."
@@ -610,6 +654,10 @@
   "EPalWazaID::Unique_IceHorse_IceBladeAttack": {
     "localized_name": "Kristallflügel",
     "description": "Einzigartige Fähigkeit der Frostallion-Spezies. Kühlt die Luft ab und hüllt so seine Flügel in Eis. Stürmt dann auf den Gegner zu und schlitzt ihn mit seinen vereisten Flügeln auf."
+  },
+  "EPalWazaID::Unique_IceNarwhal_JumpingHorn": {
+    "localized_name": "Frostsprung",
+    "description": "Einzigartige Fähigkeit der Whalaska-Spezies. Schnellt geradeaus, taucht kurz unter und schießt dann in den Himmel empor, um anzugreifen. Erzeugt beim Auftauchen eine Eis-Explosion."
   },
   "EPalWazaID::Unique_JetDragon_JumpBeam": {
     "localized_name": "Jet-Kometen",
@@ -631,9 +679,13 @@
     "localized_name": "Blitzsturm",
     "description": "Einzigartige Fähigkeit von Univolt. Erzeugt um sich herum Blitze und stürmt auf den Gegner zu."
   },
+  "EPalWazaID::Unique_LeafMomonga_SomerSault": {
+    "localized_name": "Wendeblatt",
+    "description": "Einzigartige Fähigkeit von Herbil. Nimmt kurz eine Kampfhaltung ein und wirft sich dann in rasantem Tempo Purzelbäume schlagend auf den Gegner."
+  },
   "EPalWazaID::Unique_LilyQueen_LilyHealing": {
     "localized_name": "Segen der Fülle",
-    "description": "Einzigartige Fähigkeit der Lyleen-Spezies. Benutzt Heilkräfte, um seine LP aufzufüllen. Hat keine Auswirkung auf deine LP."
+    "description": "Einzigartige Fähigkeit von Lyleen. Benutzt seine Heilkräfte, um die LP aller Verbündeten in einem Umfeld wiederherzustellen."
   },
   "EPalWazaID::Unique_LilyQueen_WindBarrier": {
     "localized_name": "Windbarriere",
@@ -683,6 +735,14 @@
     "localized_name": "Samtpfoten",
     "description": "Einzigartige Fähigkeit von Cattiva. Fuchtelt mit den Armen, setzt seinem Gegner nach und versetzt diesem mehrere Schläge."
   },
+  "EPalWazaID::Unique_Plesiosaur_LongBreath": {
+    "localized_name": "Dauerhauch",
+    "description": "Einzigartige Fähigkeit von Braloha. Holt tief Luft und stößt einen langen Gras-Hauch aus."
+  },
+  "EPalWazaID::Unique_PoseidonOrca_TorrentLaser": {
+    "localized_name": "Thalasso-Laser",
+    "description": "Einzigartige Fähigkeit von Neptilius. Steigt leicht auf und sammelt Wasser im Maul. Entfesselt darauf drei Mal einen Hochdruckwasserstrahl. An den vom Strahl getroffenen Stellen entstehen Risse, aus denen Wasserfontänen hervorschießen."
+  },
   "EPalWazaID::Unique_PurpleSpider_SpiderRaid": {
     "localized_name": "Spinnenfalle",
     "description": "Einzigartige Fähigkeit von Tarantriss. Spuckt einen Fadenknäuel, in dem sich das Ziel verfängt. Stürzt dann in vollem Tempo auf seine Beute zu und kratzt sie 3-mal, bevor es ihr einen Gnadenstich versetzt."
@@ -701,7 +761,7 @@
   },
   "EPalWazaID::Unique_Ronin_Iai": {
     "localized_name": "Iaido",
-    "description": "Einzigartige Fähigkeit von Bushi. Bringt sich mit gezogenem Schwert in Stellung, taucht plötzlich direkt vor dem Gegner auf und führt einen windschnellen Iai-Hieb aus."
+    "description": "Einzigartige Fähigkeit der Bushi-Spezies. Zieht das Schwert, taucht plötzlich vor dem Gegner auf und führt einen blitzschnellen Angriff aus."
   },
   "EPalWazaID::Unique_SaintCentaur_OneSpearRushes": {
     "localized_name": "Heiliger Speer",
@@ -735,6 +795,14 @@
     "localized_name": "Stachellanze",
     "description": "Einzigartige Fähigkeit von Beegarde. Stürmt mit hohem Tempo auf den Gegner zu und versetzt ihm zum Abschluss einen Speerstoß."
   },
+  "EPalWazaID::Unique_StuffedShark_HiddenWeapon": {
+    "localized_name": "Trigger Happy",
+    "description": "Einzigartige Fähigkeit der Finsider-Spezies. Zieht zwei Wasserpistolen aus dem Maul, feuert damit abwechselnd sechs Wasserkugeln und entlädt zum Schluss einen mächtigen Doppelschuss."
+  },
+  "EPalWazaID::Unique_TentacleTurtle_HydroSpin": {
+    "localized_name": "Hydrospin",
+    "description": "Einzigartige Fähigkeit der Turtacle-Spezies. Erzeugt Schub mit Wasserdüsen und fliegt rotierend auf den Gegner zu."
+  },
   "EPalWazaID::Unique_ThunderBird_ThunderStorm": {
     "localized_name": "Donnersturzflug",
     "description": "Einzigartige Fähigkeit von Beakon. Lässt einen Blitz auf die gegnerische Position einschlagen. Geht dann zum Sturzangriff über und lässt rechts und links weitere Blitze herabregnen."
@@ -750,6 +818,10 @@
   "EPalWazaID::Unique_ThunderDragonMan_ThunderSwordAttack": {
     "localized_name": "Keraunos",
     "description": "Einzigartige Fähigkeit von Orserk. Springt hoch in die Luft, beschwört einen Blitzspeer und schleudert ihn in Richtung des Gegners."
+  },
+  "EPalWazaID::Unique_TropicalOstrich_DashKick": {
+    "localized_name": "Sprintkick",
+    "description": "Einzigartige Fähigkeit von Palumba. Nimmt Anlauf und verpasst dem Gegner einen wuchtigen Dropkick."
   },
   "EPalWazaID::Unique_Umihebi_Fire_FireWindingTackle": {
     "localized_name": "Magmaschlängler",
@@ -798,6 +870,54 @@
   "EPalWazaID::Unique_WingGolem_RoundCutter": {
     "localized_name": "Erdschneider",
     "description": "Einzigartige Fähigkeit der Knocklem-Spezies. Schleudert den Ring auf seinem Rücken, der eine kreisförmige Flugbahn beschreibt."
+  },
+  "EPalWazaID::Unique_YakushimaBoss001_Small_DemonEyeCharge": {
+    "localized_name": "Augapfel-Ansturm",
+    "description": "Einzigartige Fähigkeit von Dämonenauge. Stürmt auf den Gegner zu und prallt dabei vom Boden und von Wänden ab."
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Dark": {
+    "localized_name": "Schleimpresse (Schatten)",
+    "description": "Einzigartige Fähigkeit von Lila Schleim. Springt auf den Gegner zu und greift diesen an."
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Fire": {
+    "localized_name": "Schleimpresse (Feuer)",
+    "description": "Einzigartige Fähigkeit von Roter Schleim. Springt auf den Gegner zu und greift diesen an."
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Leaf": {
+    "localized_name": "Schleimpresse (Gras)",
+    "description": "Einzigartige Fähigkeit von Grüner Schleim. Springt auf den Gegner zu und greift diesen an."
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Normal": {
+    "localized_name": "Schleimpresse (Neutral)",
+    "description": "Einzigartige Fähigkeit von Leuchtschleim. Springt auf den Gegner zu und greift diesen an."
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Rainbow": {
+    "localized_name": "Schleimpresse (Regenbogen)",
+    "description": "Einzigartige Fähigkeit von Regenbogenschleim. Springt auf den Gegner zu und greift diesen an."
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Water": {
+    "localized_name": "Schleimpresse (Wasser)",
+    "description": "Einzigartige Fähigkeit von Blauer Schleim. Springt auf den Gegner zu und greift diesen an."
+  },
+  "EPalWazaID::Unique_YakushimaMonster002_SwordCharge": {
+    "localized_name": "Schwertsturm",
+    "description": "Einzigartige Fähigkeit von Verzaubertes Schwert. Nimmt den Gegner ins Visier und stößt zu."
+  },
+  "EPalWazaID::Unique_YakushimaMonster003_BatCharge": {
+    "localized_name": "Fledermaus-Attacke",
+    "description": "Einzigartige Fähigkeit von Höhlenfledermaus. Stürzt sich auf den Gegner und greift diesen mit allen Mitteln an. Prallt vom Boden und von Wänden ab."
+  },
+  "EPalWazaID::Unique_Yakushima_EyeTossin": {
+    "localized_name": "Blickstoß",
+    "description": "Einzigartige Fähigkeit von Auge von Cthulhu. Stürmt mehrmals auf den Gegner zu."
+  },
+  "EPalWazaID::Unique_Yakushima_MouthTossin": {
+    "localized_name": "Schnellstoß",
+    "description": "Einzigartige Fähigkeit von Auge von Cthulhu. Stürmt mehrmals rasend schnell auf den Gegner zu."
+  },
+  "EPalWazaID::Unique_Yakushima_SummonServant": {
+    "localized_name": "Dienerbeschwörung",
+    "description": "Einzigartige Fähigkeit von Auge von Cthulhu. Beschwört 4 Diener, die sich auf den Gegner zubewegen und beim Zusammenstoß Schaden zufügen. Die Diener verschwinden nach einer bestimmten Zeit von selbst oder wenn sie angegriffen werden."
   },
   "EPalWazaID::Unique_Yeti_Grass_GrassBall": {
     "localized_name": "Grasball",

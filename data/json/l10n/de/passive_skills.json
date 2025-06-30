@@ -23,284 +23,308 @@
     "localized_name": "ANG-Erhöhung Lv. 1",
     "description": null
   },
+  "Attack_ACC_up1_Otomo_Only_Equip": {
+    "localized_name": "ANG-Erhöhung Lv. 1 (Pals)",
+    "description": null
+  },
   "Attack_ACC_up2": {
     "localized_name": "ANG-Erhöhung Lv. 2",
+    "description": null
+  },
+  "Attack_ACC_up2_Otomo_Only_Equip": {
+    "localized_name": "ANG-Erhöhung Lv. 2 (Pals)",
     "description": null
   },
   "Attack_ACC_up3": {
     "localized_name": "ANG-Erhöhung Lv. 3",
     "description": null
   },
+  "Attack_ACC_up3_Otomo_Only_Equip": {
+    "localized_name": "ANG-Erhöhung Lv. 3 (Pals)",
+    "description": null
+  },
   "BossDefeatReward_AmaterasuWolf_Dark": {
-    "localized_name": "Schattenschadenssteigerung (S)",
+    "localized_name": "Schattenschadensverstärkung (S)",
     "description": null
   },
   "BossDefeatReward_Anubis": {
-    "localized_name": "Erdschadenssteigerung (S)",
+    "localized_name": "Erdschadensverstärkung (S)",
     "description": null
   },
   "BossDefeatReward_BadCatgirl": {
-    "localized_name": "Schattenschadenssteigerung (S)",
+    "localized_name": "Schattenschadensverstärkung (S)",
     "description": null
   },
   "BossDefeatReward_BerryGoat_Dark": {
-    "localized_name": "Grasschadenssteigerung (M)",
+    "localized_name": "Grasschadensverstärkung (M)",
     "description": null
   },
   "BossDefeatReward_BlackMetalDragon": {
-    "localized_name": "Drachenschadenssteigerung (M)",
+    "localized_name": "Drachenschadensverstärkung (M)",
     "description": null
   },
   "BossDefeatReward_BlackPuppy": {
-    "localized_name": "Schattenschadenssteigerung (S)",
+    "localized_name": "Schattenschadensverstärkung (S)",
     "description": null
   },
   "BossDefeatReward_BlueDragon": {
-    "localized_name": "Wasserschadenssteigerung (S)",
+    "localized_name": "Wasserschadensverstärkung (S)",
     "description": null
   },
   "BossDefeatReward_BlueThunderHorse": {
-    "localized_name": "Elektroschadenssteigerung (M)",
+    "localized_name": "Elektroschadensverstärkung (M)",
     "description": null
   },
   "BossDefeatReward_BlueberryFairy": {
-    "localized_name": "Grasschadenssteigerung (M)",
+    "localized_name": "Grasschadensverstärkung (M)",
     "description": null
   },
   "BossDefeatReward_CaptainPenguin": {
-    "localized_name": "Wasserschadenssteigerung (S)",
+    "localized_name": "Wasserschadensverstärkung (S)",
     "description": null
   },
   "BossDefeatReward_CatMage": {
-    "localized_name": "Schattenschadenssteigerung (S)",
+    "localized_name": "Schattenschadensverstärkung (S)",
     "description": null
   },
   "BossDefeatReward_CatVampire": {
-    "localized_name": "Schattenschadenssteigerung (S)",
+    "localized_name": "Schattenschadensverstärkung (S)",
     "description": null
   },
   "BossDefeatReward_DarkScorpion": {
-    "localized_name": "Schattenschadenssteigerung (S)",
+    "localized_name": "Schattenschadensverstärkung (S)",
     "description": null
   },
   "BossDefeatReward_DarkScorpion_Ground": {
-    "localized_name": "Erdschadenssteigerung (S)",
+    "localized_name": "Erdschadensverstärkung (S)",
     "description": null
   },
   "BossDefeatReward_FairyDragon": {
-    "localized_name": "Drachenschadenssteigerung (S)",
+    "localized_name": "Drachenschadensverstärkung (S)",
     "description": null
   },
   "BossDefeatReward_FengyunDeeper": {
-    "localized_name": "Neutralschadenssteigerung (S)",
+    "localized_name": "Neutralschadensverstärkung (S)",
     "description": null
   },
   "BossDefeatReward_FengyunDeeper_Electric": {
-    "localized_name": "Elektroschadenssteigerung (M)",
+    "localized_name": "Elektroschadensverstärkung (M)",
     "description": null
   },
   "BossDefeatReward_FlowerDinosaur_Electric": {
-    "localized_name": "Elektroschadenssteigerung (S)",
+    "localized_name": "Elektroschadensverstärkung (S)",
     "description": null
   },
   "BossDefeatReward_FlowerDoll": {
-    "localized_name": "Grasschadenssteigerung (S)",
+    "localized_name": "Grasschadensverstärkung (S)",
     "description": null
   },
   "BossDefeatReward_GhostRabbit": {
-    "localized_name": "Schattenschadenssteigerung (S)",
+    "localized_name": "Schattenschadensverstärkung (S)",
     "description": null
   },
   "BossDefeatReward_GoldenHorse": {
-    "localized_name": "Erdschadenssteigerung (M)",
+    "localized_name": "Erdschadensverstärkung (M)",
     "description": null
   },
   "BossDefeatReward_GrassMammoth": {
-    "localized_name": "Grasschadenssteigerung (M)",
+    "localized_name": "Grasschadensverstärkung (M)",
     "description": null
   },
   "BossDefeatReward_GrassPanda_Electric": {
-    "localized_name": "Elektroschadenssteigerung (S)",
+    "localized_name": "Elektroschadensverstärkung (S)",
     "description": null
   },
   "BossDefeatReward_GrassRabbitMan": {
-    "localized_name": "Grasschadenssteigerung (S)",
+    "localized_name": "Grasschadensverstärkung (S)",
     "description": null
   },
   "BossDefeatReward_GrimGirl": {
-    "localized_name": "Schattenschadenssteigerung (S)",
+    "localized_name": "Schattenschadensverstärkung (S)",
     "description": null
   },
   "BossDefeatReward_HawkBird": {
-    "localized_name": "Neutralschadenssteigerung (S)",
+    "localized_name": "Neutralschadensverstärkung (S)",
     "description": null
   },
   "BossDefeatReward_HerculesBeetle": {
-    "localized_name": "Erdschadenssteigerung (S)",
+    "localized_name": "Erdschadensverstärkung (S)",
     "description": null
   },
   "BossDefeatReward_HerculesBeetle_Ground": {
-    "localized_name": "Erdschadenssteigerung (M)",
+    "localized_name": "Erdschadensverstärkung (M)",
     "description": null
   },
   "BossDefeatReward_Horus_Water": {
-    "localized_name": "Wasserschadenssteigerung (M)",
+    "localized_name": "Wasserschadensverstärkung (M)",
     "description": null
   },
   "BossDefeatReward_IceHorse": {
-    "localized_name": "Eisschadenssteigerung (L)",
+    "localized_name": "Eisschadensverstärkung (L)",
     "description": null
   },
   "BossDefeatReward_IceHorse_Dark": {
-    "localized_name": "Schattenschadenssteigerung (S)",
+    "localized_name": "Schattenschadensverstärkung (S)",
+    "description": null
+  },
+  "BossDefeatReward_IceNarwhal": {
+    "localized_name": "Eisschadensverstärkung (L)",
+    "description": null
+  },
+  "BossDefeatReward_IceNarwhal_Fire": {
+    "localized_name": "Feuerschadenssteigerung (L)",
     "description": null
   },
   "BossDefeatReward_JetDragon": {
-    "localized_name": "Drachenschadenssteigerung (L)",
+    "localized_name": "Drachenschadensverstärkung (L)",
     "description": null
   },
   "BossDefeatReward_KingAlpaca": {
-    "localized_name": "Neutralschadenssteigerung (S)",
+    "localized_name": "Neutralschadensverstärkung (S)",
     "description": null
   },
   "BossDefeatReward_KingAlpaca_Ice": {
-    "localized_name": "Eisschadenssteigerung (M)",
+    "localized_name": "Eisschadensverstärkung (M)",
     "description": null
   },
   "BossDefeatReward_KingBahamut": {
-    "localized_name": "Feuerschadenssteigerung (L)",
+    "localized_name": "Feuerschadensverstärkung (L)",
     "description": null
   },
   "BossDefeatReward_Kirin": {
-    "localized_name": "Elektroschadenssteigerung (S)",
+    "localized_name": "Elektroschadensverstärkung (S)",
     "description": null
   },
   "BossDefeatReward_Kitsunebi_Ice": {
-    "localized_name": "Eisschadenssteigerung (L)",
+    "localized_name": "Eisschadensverstärkung (L)",
     "description": null
   },
   "BossDefeatReward_LazyCatfish": {
-    "localized_name": "Erdschadenssteigerung (S)",
+    "localized_name": "Erdschadensverstärkung (S)",
     "description": null
   },
   "BossDefeatReward_LazyDragon_Electric": {
-    "localized_name": "Drachenschadenssteigerung (S)",
+    "localized_name": "Drachenschadensverstärkung (S)",
     "description": null
   },
   "BossDefeatReward_LilyQueen_Dark": {
-    "localized_name": "Schattenschadenssteigerung (S)",
+    "localized_name": "Schattenschadensverstärkung (S)",
     "description": null
   },
   "BossDefeatReward_MopKing": {
-    "localized_name": "Eisschadenssteigerung (S)",
+    "localized_name": "Eisschadensverstärkung (S)",
     "description": null
   },
   "BossDefeatReward_Mutant": {
-    "localized_name": "Neutralschadenssteigerung (S)",
+    "localized_name": "Neutralschadensverstärkung (S)",
     "description": null
   },
   "BossDefeatReward_MysteryMask": {
-    "localized_name": "Schattenschadenssteigerung (S)",
+    "localized_name": "Schattenschadensverstärkung (S)",
     "description": null
   },
   "BossDefeatReward_NaughtyCat": {
-    "localized_name": "Neutralschadenssteigerung (S)",
+    "localized_name": "Neutralschadensverstärkung (S)",
     "description": null
   },
   "BossDefeatReward_NightBlueHorse": {
-    "localized_name": "Schattenschadenssteigerung (S)",
+    "localized_name": "Schattenschadensverstärkung (S)",
     "description": null
   },
   "BossDefeatReward_PinkRabbit_Grass": {
-    "localized_name": "Grasschadenssteigerung (M)",
+    "localized_name": "Grasschadensverstärkung (M)",
     "description": null
   },
   "BossDefeatReward_PlantSlime": {
-    "localized_name": "Erdschadenssteigerung (S)",
+    "localized_name": "Erdschadensverstärkung (S)",
+    "description": null
+  },
+  "BossDefeatReward_PoseidonOrca": {
+    "localized_name": "Wasserschadenssteigerung (L)",
     "description": null
   },
   "BossDefeatReward_PurpleSpider": {
-    "localized_name": "Schattenschadenssteigerung (S)",
+    "localized_name": "Schattenschadensverstärkung (S)",
     "description": null
   },
   "BossDefeatReward_QueenBee": {
-    "localized_name": "Grasschadenssteigerung (S)",
+    "localized_name": "Grasschadensverstärkung (S)",
     "description": null
   },
   "BossDefeatReward_RaijinDaughter_Water": {
-    "localized_name": "Schattenschadenssteigerung (S)",
+    "localized_name": "Schattenschadensverstärkung (S)",
     "description": null
   },
   "BossDefeatReward_Ronin": {
-    "localized_name": "Feuerschadenssteigerung (M)",
+    "localized_name": "Feuerschadensverstärkung (M)",
     "description": null
   },
   "BossDefeatReward_SaintCentaur_1": {
-    "localized_name": "Neutralschadenssteigerung (L)",
+    "localized_name": "Neutralschadensverstärkung (L)",
     "description": null
   },
   "BossDefeatReward_SaintCentaur_2": {
-    "localized_name": "Schattenschadenssteigerung (S)",
+    "localized_name": "Schattenschadensverstärkung (S)",
     "description": null
   },
   "BossDefeatReward_SakuraSaurus": {
-    "localized_name": "Grasschadenssteigerung (S)",
+    "localized_name": "Grasschadensverstärkung (S)",
     "description": null
   },
   "BossDefeatReward_SakuraSaurus_Water": {
-    "localized_name": "Wasserschadenssteigerung (S)",
+    "localized_name": "Wasserschadensverstärkung (S)",
     "description": null
   },
   "BossDefeatReward_SkyDragon": {
-    "localized_name": "Drachenschadenssteigerung (S)",
+    "localized_name": "Drachenschadensverstärkung (S)",
     "description": null
   },
   "BossDefeatReward_Suzaku": {
-    "localized_name": "Feuerschadenssteigerung (L)",
+    "localized_name": "Feuerschadensverstärkung (L)",
     "description": null
   },
   "BossDefeatReward_ThunderBird": {
-    "localized_name": "Elektroschadenssteigerung (S)",
+    "localized_name": "Elektroschadensverstärkung (S)",
     "description": null
   },
   "BossDefeatReward_Umihebi": {
-    "localized_name": "Wasserschadenssteigerung (M)",
+    "localized_name": "Wasserschadensverstärkung (M)",
     "description": null
   },
   "BossDefeatReward_VioletFairy": {
-    "localized_name": "Grasschadenssteigerung (M)",
+    "localized_name": "Grasschadensverstärkung (M)",
     "description": null
   },
   "BossDefeatReward_WeaselDragon": {
-    "localized_name": "Eisschadenssteigerung (S)",
+    "localized_name": "Eisschadensverstärkung (S)",
     "description": null
   },
   "BossDefeatReward_Werewolf_Ice": {
-    "localized_name": "Eisschadenssteigerung (L)",
+    "localized_name": "Eisschadensverstärkung (L)",
     "description": null
   },
   "BossDefeatReward_WhiteDeer": {
-    "localized_name": "Neutralschadenssteigerung (M)",
+    "localized_name": "Neutralschadensverstärkung (M)",
     "description": null
   },
   "BossDefeatReward_WhiteMoth": {
-    "localized_name": "Eisschadenssteigerung (S)",
+    "localized_name": "Eisschadensverstärkung (S)",
     "description": null
   },
   "BossDefeatReward_WhiteShieldDragon": {
-    "localized_name": "Drachenschadenssteigerung (M)",
+    "localized_name": "Drachenschadensverstärkung (M)",
     "description": null
   },
   "BossDefeatReward_WhiteTiger_Ground": {
-    "localized_name": "Erdschadenssteigerung (M)",
+    "localized_name": "Erdschadensverstärkung (M)",
     "description": null
   },
   "BossDefeatReward_WingGolem": {
-    "localized_name": "Erdschadenssteigerung (S)",
+    "localized_name": "Erdschadensverstärkung (S)",
     "description": null
   },
   "BossDefeatReward_Yeti_Grass": {
-    "localized_name": "Grasschadenssteigerung (S)",
+    "localized_name": "Grasschadensverstärkung (S)",
     "description": null
   },
   "CaptureLevel_Up_1": {
@@ -395,6 +419,18 @@
     "localized_name": "Goldenes Händchen",
     "description": null
   },
+  "Defense_ACC_up1_Otomo_Only_Equip": {
+    "localized_name": "VTD-Erhöhung Lv. 1 (Pals)",
+    "description": null
+  },
+  "Defense_ACC_up2_Otomo_Only_Equip": {
+    "localized_name": "VTD-Erhöhung Lv. 2 (Pals)",
+    "description": null
+  },
+  "Defense_ACC_up3_Otomo_Only_Equip": {
+    "localized_name": "VTD-Erhöhung Lv. 3 (Pals)",
+    "description": null
+  },
   "Deffence_down1": {
     "localized_name": "Unbelastbar",
     "description": null
@@ -427,12 +463,20 @@
     "localized_name": "Schattenschadenssteigerung (S)",
     "description": null
   },
+  "ElementBoost_Dark_1_Otomo_Only_Equip": {
+    "localized_name": "Schattenschadenssteigerung Lv. 1 (Pals)",
+    "description": null
+  },
   "ElementBoost_Dark_1_PAL": {
     "localized_name": "Grufti",
     "description": "Schattenangriffsschaden +10.0 %"
   },
   "ElementBoost_Dark_2_BossDefeat": {
     "localized_name": "Schattenschadenssteigerung (M)",
+    "description": null
+  },
+  "ElementBoost_Dark_2_Otomo_Only_Equip": {
+    "localized_name": "Schattenschadenssteigerung Lv. 2 (Pals)",
     "description": null
   },
   "ElementBoost_Dark_2_PAL": {
@@ -443,8 +487,16 @@
     "localized_name": "Schattenschadenssteigerung (L)",
     "description": null
   },
+  "ElementBoost_Dark_3_Otomo_Only_Equip": {
+    "localized_name": "Schattenschadenssteigerung Lv. 3 (Pals)",
+    "description": null
+  },
   "ElementBoost_Dragon_1_BossDefeat": {
     "localized_name": "Drachenschadenssteigerung (S)",
+    "description": null
+  },
+  "ElementBoost_Dragon_1_Otomo_Only_Equip": {
+    "localized_name": "Drachenschadenssteigerung Lv. 1 (Pals)",
     "description": null
   },
   "ElementBoost_Dragon_1_PAL": {
@@ -455,6 +507,10 @@
     "localized_name": "Drachenschadenssteigerung (M)",
     "description": null
   },
+  "ElementBoost_Dragon_2_Otomo_Only_Equip": {
+    "localized_name": "Drachenschadenssteigerung Lv. 2 (Pals)",
+    "description": null
+  },
   "ElementBoost_Dragon_2_PAL": {
     "localized_name": "Drachengott",
     "description": null
@@ -463,8 +519,16 @@
     "localized_name": "Drachenschadenssteigerung (L)",
     "description": null
   },
+  "ElementBoost_Dragon_3_Otomo_Only_Equip": {
+    "localized_name": "Drachenschadenssteigerung Lv. 3 (Pals)",
+    "description": null
+  },
   "ElementBoost_Earth_1_BossDefeat": {
     "localized_name": "Erdschadenssteigerung (S)",
+    "description": null
+  },
+  "ElementBoost_Earth_1_Otomo_Only_Equip": {
+    "localized_name": "Erdschadenssteigerung Lv. 1 (Pals)",
     "description": null
   },
   "ElementBoost_Earth_1_PAL": {
@@ -475,6 +539,10 @@
     "localized_name": "Erdschadenssteigerung (M)",
     "description": null
   },
+  "ElementBoost_Earth_2_Otomo_Only_Equip": {
+    "localized_name": "Erdschadenssteigerung Lv. 2 (Pals)",
+    "description": null
+  },
   "ElementBoost_Earth_2_PAL": {
     "localized_name": "Zar des Erdreichs",
     "description": null
@@ -483,20 +551,40 @@
     "localized_name": "Erdschadenssteigerung (L)",
     "description": null
   },
+  "ElementBoost_Earth_3_Otomo_Only_Equip": {
+    "localized_name": "Erdschadenssteigerung Lv. 3 (Pals)",
+    "description": null
+  },
   "ElementBoost_Electricity_1_BossDefeat": {
     "localized_name": "Elektroschadenssteigerung (S)",
+    "description": null
+  },
+  "ElementBoost_Electricity_1_Otomo_Only_Equip": {
+    "localized_name": "Elektroschadenssteigerung Lv. 1 (Pals)",
     "description": null
   },
   "ElementBoost_Electricity_2_BossDefeat": {
     "localized_name": "Elektroschadenssteigerung (M)",
     "description": null
   },
+  "ElementBoost_Electricity_2_Otomo_Only_Equip": {
+    "localized_name": "Elektroschadenssteigerung Lv. 2 (Pals)",
+    "description": null
+  },
   "ElementBoost_Electricity_3_BossDefeat": {
     "localized_name": "Elektroschadenssteigerung (L)",
     "description": null
   },
+  "ElementBoost_Electricity_3_Otomo_Only_Equip": {
+    "localized_name": "Elektroschadenssteigerung Lv. 3 (Pals)",
+    "description": null
+  },
   "ElementBoost_Fire_1_BossDefeat": {
     "localized_name": "Feuerschadenssteigerung (S)",
+    "description": null
+  },
+  "ElementBoost_Fire_1_Otomo_Only_Equip": {
+    "localized_name": "Feuerschadenssteigerung Lv. 1 (Pals)",
     "description": null
   },
   "ElementBoost_Fire_1_PAL": {
@@ -507,6 +595,10 @@
     "localized_name": "Feuerschadenssteigerung (M)",
     "description": null
   },
+  "ElementBoost_Fire_2_Otomo_Only_Equip": {
+    "localized_name": "Feuerschadenssteigerung Lv. 2 (Pals)",
+    "description": null
+  },
   "ElementBoost_Fire_2_PAL": {
     "localized_name": "Flammenkaiser",
     "description": null
@@ -515,8 +607,16 @@
     "localized_name": "Feuerschadenssteigerung (L)",
     "description": null
   },
+  "ElementBoost_Fire_3_Otomo_Only_Equip": {
+    "localized_name": "Feuerschadenssteigerung Lv. 3 (Pals)",
+    "description": null
+  },
   "ElementBoost_Ice_1_BossDefeat": {
     "localized_name": "Eisschadenssteigerung (S)",
+    "description": null
+  },
+  "ElementBoost_Ice_1_Otomo_Only_Equip": {
+    "localized_name": "Eisschadenssteigerung Lv. 1 (Pals)",
     "description": null
   },
   "ElementBoost_Ice_1_PAL": {
@@ -527,6 +627,10 @@
     "localized_name": "Eisschadenssteigerung (M)",
     "description": null
   },
+  "ElementBoost_Ice_2_Otomo_Only_Equip": {
+    "localized_name": "Eisschadenssteigerung Lv. 2 (Pals)",
+    "description": null
+  },
   "ElementBoost_Ice_2_PAL": {
     "localized_name": "Imperator des Eises",
     "description": null
@@ -535,8 +639,16 @@
     "localized_name": "Eisschadenssteigerung (L)",
     "description": null
   },
+  "ElementBoost_Ice_3_Otomo_Only_Equip": {
+    "localized_name": "Eisschadenssteigerung Lv. 3 (Pals)",
+    "description": null
+  },
   "ElementBoost_Leaf_1_BossDefeat": {
     "localized_name": "Grasschadenssteigerung (S)",
+    "description": null
+  },
+  "ElementBoost_Leaf_1_Otomo_Only_Equip": {
+    "localized_name": "Grasschadenssteigerung Lv. 1 (Pals)",
     "description": null
   },
   "ElementBoost_Leaf_1_PAL": {
@@ -547,6 +659,10 @@
     "localized_name": "Grasschadenssteigerung (M)",
     "description": null
   },
+  "ElementBoost_Leaf_2_Otomo_Only_Equip": {
+    "localized_name": "Grasschadenssteigerung Lv. 2 (Pals)",
+    "description": null
+  },
   "ElementBoost_Leaf_2_PAL": {
     "localized_name": "Feenkönig",
     "description": null
@@ -555,8 +671,16 @@
     "localized_name": "Grasschadenssteigerung (L)",
     "description": null
   },
+  "ElementBoost_Leaf_3_Otomo_Only_Equip": {
+    "localized_name": "Grasschadenssteigerung Lv. 3 (Pals)",
+    "description": null
+  },
   "ElementBoost_Normal_1_BossDefeat": {
     "localized_name": "Neutralschadenssteigerung (S)",
+    "description": null
+  },
+  "ElementBoost_Normal_1_Otomo_Only_Equip": {
+    "localized_name": "Neutralschadenssteigerung Lv. 1 (Pals)",
     "description": null
   },
   "ElementBoost_Normal_1_PAL": {
@@ -567,12 +691,20 @@
     "localized_name": "Neutralschadenssteigerung (M)",
     "description": null
   },
+  "ElementBoost_Normal_2_Otomo_Only_Equip": {
+    "localized_name": "Neutralschadenssteigerung Lv. 2 (Pals)",
+    "description": null
+  },
   "ElementBoost_Normal_2_PAL": {
     "localized_name": "Erleuchteter",
     "description": null
   },
   "ElementBoost_Normal_3_BossDefeat": {
     "localized_name": "Neutralschadenssteigerung (L)",
+    "description": null
+  },
+  "ElementBoost_Normal_3_Otomo_Only_Equip": {
+    "localized_name": "Neutralschadenssteigerung Lv. 3 (Pals)",
     "description": null
   },
   "ElementBoost_Thunder_1_PAL": {
@@ -587,12 +719,24 @@
     "localized_name": "Wasserschadenssteigerung (S)",
     "description": null
   },
+  "ElementBoost_Water_1_Otomo_Only_Equip": {
+    "localized_name": "Wasserschadenssteigerung Lv. 1 (Pals)",
+    "description": null
+  },
   "ElementBoost_Water_2_BossDefeat": {
     "localized_name": "Wasserschadenssteigerung (M)",
     "description": null
   },
+  "ElementBoost_Water_2_Otomo_Only_Equip": {
+    "localized_name": "Wasserschadenssteigerung Lv. 2 (Pals)",
+    "description": null
+  },
   "ElementBoost_Water_3_BossDefeat": {
     "localized_name": "Wasserschadenssteigerung (L)",
+    "description": null
+  },
+  "ElementBoost_Water_3_Otomo_Only_Equip": {
+    "localized_name": "Wasserschadenssteigerung Lv. 3 (Pals)",
     "description": null
   },
   "ElementResist_Aqua_1": {
@@ -743,6 +887,34 @@
     "localized_name": "Ewige Lohe",
     "description": null
   },
+  "GYM_NAME_Desert": {
+    "localized_name": "Chef der Miliz",
+    "description": null
+  },
+  "GYM_NAME_Forest": {
+    "localized_name": "Gründerin der Liga der Palfreunde",
+    "description": null
+  },
+  "GYM_NAME_Meadow": {
+    "localized_name": "Chefin des Rayne-Syndikats",
+    "description": "Angriff +20.0 % Bewegungstempo +10.0 %"
+  },
+  "GYM_NAME_Sakurajima": {
+    "localized_name": "Oberhaupt der Gesellschaft des Blumenmondes",
+    "description": null
+  },
+  "GYM_NAME_Snow": {
+    "localized_name": "Leiter des Instituts für Genforschung",
+    "description": null
+  },
+  "GYM_NAME_Viking": {
+    "localized_name": "Jarl der Feybreak",
+    "description": null
+  },
+  "GYM_NAME_Volcano": {
+    "localized_name": "Guru der Bruderschaft der ewigen Lohe",
+    "description": null
+  },
   "HP_ACC_up1": {
     "localized_name": "LP-Erhöhung Lv. 1",
     "description": null
@@ -826,6 +998,10 @@
   "Noukin": {
     "localized_name": "Mehr Kraft als Verstand",
     "description": null
+  },
+  "Nushi": {
+    "localized_name": "Teichfürst",
+    "description": "Wasserangriffsschaden +20.0 % Eisangriffsschaden +20.0 % Verteidigung +20.0 %"
   },
   "PAL_ALLAttack_down1": {
     "localized_name": "Angsthase",
@@ -915,6 +1091,18 @@
     "localized_name": "Sadist",
     "description": null
   },
+  "PalExp_Increase_1_Otomo_Only_Equip": {
+    "localized_name": "EP-Bonus Lv. 1 (Pals)",
+    "description": null
+  },
+  "PalExp_Increase_2_Otomo_Only_Equip": {
+    "localized_name": "EP-Bonus Lv. 2 (Pals)",
+    "description": null
+  },
+  "PalExp_Increase_3_Otomo_Only_Equip": {
+    "localized_name": "EP-Bonus Lv. 3 (Pals)",
+    "description": null
+  },
   "Rare": {
     "localized_name": "Außergewöhnlich",
     "description": null
@@ -970,6 +1158,18 @@
   "Stamina_Up_3": {
     "localized_name": "Endloser Antrieb",
     "description": "Maximale Ausdauer +75.0 % (Gilt nur für reitbare Pals.)"
+  },
+  "SwimSpeed_up_1": {
+    "localized_name": "Stromlinienform",
+    "description": "Bewegungstempo im Wasser +30.0 %"
+  },
+  "SwimSpeed_up_2": {
+    "localized_name": "Guter Schwimmer",
+    "description": null
+  },
+  "SwimSpeed_up_3": {
+    "localized_name": "Wellenkönig",
+    "description": null
   },
   "TemperatureResist_Cold1": {
     "localized_name": "Kälteresistenz Lv. 1",
@@ -1049,6 +1249,26 @@
   },
   "WorkSpeed_ACC_up3": {
     "localized_name": "Schnellfertigung Lv. 3",
+    "description": null
+  },
+  "YakushimaDagameBoost_Magic_Equip": {
+    "localized_name": "Heilige Macht: Magie",
+    "description": null
+  },
+  "YakushimaDagameBoost_Melee_Equip": {
+    "localized_name": "Heilige Macht: Nahkampf",
+    "description": null
+  },
+  "YakushimaDagameBoost_Ranged_Equip": {
+    "localized_name": "Heilige Macht: Fernkampf",
+    "description": null
+  },
+  "YakushimaDagameBoost_Summon_Equip": {
+    "localized_name": "Heilige Macht: Beschwörung",
+    "description": null
+  },
+  "YakushimaProtection_Equip": {
+    "localized_name": "Heiliger Schutz",
     "description": null
   },
   "defense_ACC_up1": {

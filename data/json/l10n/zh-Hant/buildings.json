@@ -35,9 +35,21 @@
     "localized_name": "監控台",
     "description": "可對據點內的帕魯下達工作指示。 請注意不要讓牠們勞動過度了。"
   },
+  "BaseCampWorkerExtraStation": {
+    "localized_name": "帕魯終端控制台",
+    "description": "可遠端操作帕魯終端的設備。 將它配置在你想要部署帕魯的位置，自由地打造據點吧。"
+  },
   "BathTub_Stone": {
     "localized_name": "古典浴缸",
     "description": "裝飾用的古典浴缸。"
+  },
+  "Believer_Banner": {
+    "localized_name": "帕魯保護團體掛旗",
+    "description": "裝飾用的帕魯保護團體掛旗。"
+  },
+  "Believer_Flag": {
+    "localized_name": "帕魯保護團體團旗",
+    "description": "裝飾用的帕魯保護團體團旗。"
   },
   "Bench_Wood": {
     "localized_name": "木製長椅",
@@ -100,8 +112,8 @@
     "description": "烹調食物時會用到的設施。 只能用來燒烤簡單的食材。 需由火系帕魯提供火源。"
   },
   "CandleStand": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "莊嚴燭台",
+    "description": "燃燒著永炎同心會所信奉之火的莊嚴燭台。 此照明設施可設置在地板上。 需由火系帕魯提供火源。"
   },
   "Cauldron": {
     "localized_name": "魔女之釜",
@@ -156,12 +168,12 @@
     "description": "可以透過組合多個設計圖， 製作出更高級的設計圖的設施。"
   },
   "ConservationGroupBannerA": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "帕魯保護團體旗幟",
+    "description": "裝飾用的帕魯保護團體旗幟。"
   },
   "ConservationGroupBannerB": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "帕魯保護團體橫幅",
+    "description": "裝飾用的帕魯保護團體橫幅。"
   },
   "Container01_Iron": {
     "localized_name": "大型貨櫃",
@@ -198,6 +210,10 @@
   "Crusher": {
     "localized_name": "粉碎機",
     "description": "可粉碎石頭或木材， 將之轉換為其他素材的設施。 需有具備「澆水」適應性的帕魯負責使水車轉動。"
+  },
+  "CrystalPit": {
+    "localized_name": "六稜晶礦採礦場",
+    "description": "生產六稜晶礦的設施。 挖掘六稜晶礦的工作需要大量體力，相當嚴苛。 把這些工作交給擅長挖掘的帕魯吧。"
   },
   "Curtain01_Wall_Stone": {
     "localized_name": "古典窗簾",
@@ -303,6 +319,10 @@
     "localized_name": "作業流水線工廠 II",
     "description": "生產道具及防具的工廠。 工作流程更進一步細分，製作速度變得相當迅速。 需有能進行手工作業的帕魯。"
   },
+  "Factory_Hard_04": {
+    "localized_name": "高等文明作業工廠",
+    "description": "生產道具及防具的工廠。 引進了高性能機器，可以快速製作。 需要有能進行手工作業的帕魯。"
+  },
   "Factory_Money": {
     "localized_name": "金幣製造工廠",
     "description": "生產金幣的工廠。 因為精神負擔大，工作時SAN值會降低。 需有能進行手工作業的帕魯。"
@@ -343,9 +363,25 @@
     "localized_name": "巨鷲之像",
     "description": "皮皮雞形狀的石碑。 放置此石碑後，便可進行快速傳送。"
   },
+  "FireCult_Banner": {
+    "localized_name": "永炎同心會掛旗",
+    "description": "裝飾用的永炎同心會掛旗。"
+  },
+  "FireCult_Flag": {
+    "localized_name": "永炎同心會會旗",
+    "description": "裝飾用的永炎同心會旗。"
+  },
   "FireStand": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "儀式用燭台",
+    "description": "燃燒著永炎同心會所信奉之火的儀式用燭台。 此照明設施可設置在地板上。 需由火系帕魯提供火源。"
+  },
+  "FishingPond1": {
+    "localized_name": "釣魚池",
+    "description": "配備釣魚工具的釣魚池。 分派帕魯後，牠會悠閒地幫你釣魚。 需要有能進行手工作業的帕魯。"
+  },
+  "FishingPond2": {
+    "localized_name": "大型釣魚池",
+    "description": "配備釣魚工具的大型釣魚池。 水域更加廣闊，能釣上更大型的帕魯。 需要有能進行手工作業的帕魯。"
   },
   "FlourMill": {
     "localized_name": "磨粉機",
@@ -372,8 +408,8 @@
     "description": "建於地基上的門，可作為出入口。 以鋼化玻璃製成，非常堅固。"
   },
   "Glass_Fence": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "玻璃柵欄",
+    "description": "建在地基或屋頂上，用於防止墜落的柵欄。 以鋼化玻璃製成，非常堅固。"
   },
   "Glass_SlantedRoof": {
     "localized_name": "玻璃斜屋頂",
@@ -415,6 +451,10 @@
     "localized_name": "足球球門",
     "description": "裝飾用的足球球門。 把SheepBall踢進球門也無法得分。"
   },
+  "GuardianDogStatue": {
+    "localized_name": "八雲犬雕像",
+    "description": "裝飾用的八雲犬雕像。"
+  },
   "GuildChest": {
     "localized_name": "公會箱子",
     "description": "可以瞬間透過亞空間傳送箱子內容的箱子。 這個箱子內的道具會在各據點之間共享。"
@@ -435,17 +475,25 @@
     "localized_name": "大型廚房",
     "description": "烹調食物時會用到的設施。 擴大了佔地面積讓複數帕魯可以同時進行烹調。 需由火系帕魯提供火源。"
   },
+  "Hunter_Banner": {
+    "localized_name": "盜獵團掛旗",
+    "description": "裝飾用的盜獵團掛旗。"
+  },
+  "Hunter_Flag": {
+    "localized_name": "盜獵團團旗",
+    "description": "裝飾用的盜獵團團旗。"
+  },
   "Hunter_GangFlag": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "盜獵團旗幟",
+    "description": "裝飾用的盜獵團旗幟。"
   },
   "IceCrusher": {
     "localized_name": "冷凍粉碎機",
     "description": "可粉碎金屬礦石以轉換成其他材料的設施。 雖然要使其工作需要電力供應，以及有「冷卻」適應性的帕魯，但是效率極佳。"
   },
   "Iron_Fence": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "金屬柵欄",
+    "description": "建在地基或屋頂上，用於防止墜落的柵欄。 金屬製成，非常堅固。"
   },
   "Irori": {
     "localized_name": "地爐",
@@ -496,8 +544,8 @@
     "description": "建於地基上的紙拉門，可作為出入口。 可以建造出時尚的日式建築。"
   },
   "JapaneseStyle_Fence": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "和風柵欄",
+    "description": "建在地基或屋頂上，用於防止墜落的柵欄。 可以建造出時尚的日式建築。"
   },
   "JapaneseStyle_Pillar": {
     "localized_name": "和風立柱",
@@ -551,6 +599,10 @@
     "localized_name": "固定式燈具",
     "description": "能在黑夜為據點帶來光明的光源。 雖需使用電力，但照明範圍較為寬廣。"
   },
+  "LanternTop": {
+    "localized_name": "日式白燈籠",
+    "description": "裝飾用的日式白燈籠。"
+  },
   "LargeCeilingLamp": {
     "localized_name": "大型天花板吊燈",
     "description": "能在黑夜為據點帶來光明的光源。 可以裝在天花板上。 雖需使用更多電力，但照明範圍也更加寬廣。"
@@ -600,8 +652,8 @@
     "description": "可作為光源的時尚路燈。 需有電力才能點亮。"
   },
   "LilyQueenStatue": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "百合女王雕像",
+    "description": "裝飾用的百合女王雕像。"
   },
   "MachineGame01_Iron": {
     "localized_name": "夾娃娃機",
@@ -703,6 +755,18 @@
     "localized_name": "大型電能帕魯蛋孵化器",
     "description": "用於孵化帕魯蛋的裝置。 需有電力供應才能使用， 但可以保持在最佳溫度，並同時孵化多個蛋。"
   },
+  "MultiHatchingPalEgg": {
+    "localized_name": "大型帕魯蛋孵化器",
+    "description": "用於孵化帕魯蛋的裝置。 可自動維持大致適當的溫度， 並同時孵化多個蛋。"
+  },
+  "Ninja_Banner": {
+    "localized_name": "月花眾掛旗",
+    "description": "裝飾用的月花眾掛旗。"
+  },
+  "Ninja_Flag": {
+    "localized_name": "月花眾團旗",
+    "description": "裝飾用的月花眾團旗。"
+  },
   "OilPump": {
     "localized_name": "原油提煉機",
     "description": "從油田提取原油所需的設備。 它需要大量電力供應才能運行。"
@@ -713,7 +777,7 @@
   },
   "OperatingTable": {
     "localized_name": "帕魯手術台",
-    "description": "zh_Hant_Text"
+    "description": "可以對帕魯進行手術， 改變帕魯的性別和被動技能的設施。"
   },
   "PalBooth": {
     "localized_name": "跳蚤市場（帕魯）",
@@ -724,8 +788,8 @@
     "description": "用來存放抓到的帕魯的設施。 終端裡的帕魯會逐漸回復生命值。 此設施周圍的區域即為據點。"
   },
   "PalCage": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "空籠子",
+    "description": "裝飾用的空籠子。"
   },
   "PalFoodBox": {
     "localized_name": "飼料箱",
@@ -775,6 +839,14 @@
     "localized_name": "優質床鋪",
     "description": "人類用的床鋪，柔軟蓬鬆，能夠睡個好覺。 晚上或受傷時就在這裡睡覺吧。 但如果沒有屋頂，就沒辦法睡個安穩的好覺了。"
   },
+  "Police_Banner": {
+    "localized_name": "自衛隊掛旗",
+    "description": "裝飾用的自衛隊掛旗。"
+  },
+  "Police_Flag": {
+    "localized_name": "自衛隊隊旗",
+    "description": "裝飾用的自衛隊隊旗。"
+  },
   "QuartzPit": {
     "localized_name": "純水晶採礦場",
     "description": "生產純水晶的設施。 挖掘純水晶的工作需要大量體力，相當嚴苛。 把這些工作交給擅長挖掘的帕魯吧。"
@@ -807,13 +879,61 @@
     "localized_name": "zh-hant text",
     "description": "毛皮地毯"
   },
+  "SF_Chair": {
+    "localized_name": "研究室風格椅子",
+    "description": "裝飾用的研究室風格椅子。"
+  },
+  "SF_Desk": {
+    "localized_name": "研究室風格書桌",
+    "description": "裝飾用的研究室風格書桌。"
+  },
+  "SF_DoorWall": {
+    "localized_name": "簡約門",
+    "description": "建於地基上的門，可作為出入口。 可以建造出近未來風格的簡約建築。"
+  },
   "SF_Fence": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "簡約柵欄",
+    "description": "建在地基或屋頂上，用於防止墜落的柵欄。 可以建造出近未來風格的簡約建築。"
+  },
+  "SF_SlantedRoof": {
+    "localized_name": "簡約斜屋頂",
+    "description": "建於牆壁上方的斜屋頂，用於遮擋風雨。 可以建造出近未來風格的簡約建築。"
+  },
+  "SF_TriangleWall": {
+    "localized_name": "簡約三角牆",
+    "description": "建於地基上的三角牆。 可以建造出近未來風格的簡約建築。"
+  },
+  "SF_WindowWall": {
+    "localized_name": "附窗簡約牆",
+    "description": "建於地基上的附窗牆壁，用於防止入侵者。 可以建造出近未來風格的簡約建築。"
+  },
+  "SF_foundation": {
+    "localized_name": "簡約地基",
+    "description": "建築地基，可在上面建造牆壁或設施。 可以建造出近未來風格的簡約建築。"
+  },
+  "SF_roof": {
+    "localized_name": "簡約屋頂",
+    "description": "建於牆壁上方的屋頂，用於遮擋風雨。 可以建造出近未來風格的簡約建築。"
+  },
+  "SF_stair": {
+    "localized_name": "簡約樓梯",
+    "description": "置於地基或屋頂下方，使之易於攀登的樓梯。 可以建造出近未來風格的簡約建築。"
+  },
+  "SF_wall": {
+    "localized_name": "簡約牆壁",
+    "description": "建於地基上的牆壁，用於防止入侵者。 可以建造出近未來風格的簡約建築。"
   },
   "SanityDecrease1": {
     "localized_name": "α波發生器",
     "description": "發出α波讓帕魯放鬆的裝置。 減緩據點內帕魯的SAN值下降速度。 即使設置複數個，其效果也不會疊加。"
+  },
+  "Scientist_Banner": {
+    "localized_name": "基因研究部隊掛旗",
+    "description": "裝飾用的基因研究部隊掛旗。"
+  },
+  "Scientist_Flag": {
+    "localized_name": "基因研究部隊隊旗",
+    "description": "裝飾用的基因研究部隊隊旗。"
   },
   "Seika": {
     "localized_name": "日式插花",
@@ -891,6 +1011,10 @@
     "localized_name": "鹿威",
     "description": "裝飾用的鹿威。 可在建造和風的建築時配合使用。"
   },
+  "Shrine_Lantern": {
+    "localized_name": "神社赤燈籠",
+    "description": "裝飾用的神社赤燈籠。"
+  },
   "SignExit_Ceiling_Iron": {
     "localized_name": "天花板緊急出口標誌",
     "description": "裝飾用的緊急出口標誌。 可安裝在天花板上。"
@@ -944,8 +1068,8 @@
     "description": "讓疲憊的據點帕魯休息的設施。 設備更加舒適，可回復更多SAN值。"
   },
   "Spa3": {
-    "localized_name": "溫泉",
-    "description": "讓疲憊的據點帕魯休息的設施。 能夠消除因勞動累積的疲勞，並回復SAN值。"
+    "localized_name": "和風溫泉",
+    "description": "讓疲憊的據點帕魯休息的設施。 洋溢著濃濃和風的療癒空間，所以SAN值的恢復效果也更加顯著。"
   },
   "SphereFactory_Black_01": {
     "localized_name": "帕魯球工作台",
@@ -976,8 +1100,8 @@
     "description": "建於地基上的門，可作為出入口。 以石頭製成，還算堅固。"
   },
   "Stone_Fence": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "石製柵欄",
+    "description": "建在地基或屋頂上，用於防止墜落的柵欄。 以石頭製成，還算堅固。"
   },
   "Stone_Gate": {
     "localized_name": "石砌大門",
@@ -1204,8 +1328,8 @@
     "description": "能在黑夜為據點帶來光明的光源。 可以裝在牆壁上。 需由火系帕魯提供火源。"
   },
   "WallTorch02": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "莊嚴壁掛火把",
+    "description": "燃燒著永炎同心會所信奉之火的莊嚴壁掛火把。 此照明設施可設置在牆壁上。 需由火系帕魯提供火源。"
   },
   "WeaponFactory_Dirty_01": {
     "localized_name": "武器工作台",
@@ -1219,13 +1343,17 @@
     "localized_name": "武器流水線工廠II",
     "description": "生產武器及彈藥的工廠。 生產流程更進一步細分，製作高級武器的速度迅速多了。 需有能進行手工作業的帕魯。"
   },
+  "WeaponFactory_Dirty_04": {
+    "localized_name": "高等文明武器工廠",
+    "description": "生產武器及彈藥的工廠。 引進了高性能機器，可以快速製作武器。 需要有能進行手工作業的帕魯。"
+  },
   "Wire_Fence": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "鐵絲網圍籬",
+    "description": "裝飾用的鐵絲網圍籬。"
   },
   "Wood_Fence": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "木製柵欄",
+    "description": "建在地基或屋頂上，用於防止墜落的柵欄。 以木頭製成，相當脆弱。"
   },
   "Wood_Gate": {
     "localized_name": "木造大門",
@@ -1244,8 +1372,8 @@
     "description": "建於地基上的附窗牆壁，用於防止入侵者。 以木頭製成，相當脆弱。"
   },
   "WoodenBarricade": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "木製路障",
+    "description": "裝飾用的木製路障。"
   },
   "Wooden_DoorWall": {
     "localized_name": "木門",

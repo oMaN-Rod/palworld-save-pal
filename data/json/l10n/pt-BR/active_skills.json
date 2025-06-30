@@ -55,6 +55,10 @@
     "localized_name": "Trovão Cruzado",
     "description": "Gera um ataque elétrico que avança em duas direções para bloquear o movimento do inimigo pelos flancos."
   },
+  "EPalWazaID::CrossWind": {
+    "localized_name": "Vento Cruzado",
+    "description": "Ataca cruzando as lâminas de vento que cria na frente do inimigo."
+  },
   "EPalWazaID::DarkArrow": {
     "localized_name": "Flecha Negra",
     "description": "Dispara de forma contínua e em alta velocidade várias flechas que perseguem o inimigo com a força da escuridão."
@@ -86,6 +90,10 @@
   "EPalWazaID::DiamondFall": {
     "localized_name": "Queda de Diamantes",
     "description": "Cria aglomerados de gelo sobre a cabeça do inimigo e faz com que caiam sobre este um após o outro."
+  },
+  "EPalWazaID::DiversionLaser": {
+    "localized_name": "Jato Pressurizado",
+    "description": "Dispara um jato d’água em alta pressão para a frente. Após algum tempo, o jato também se divide para os lados."
   },
   "EPalWazaID::DoubleIcicleThrow": {
     "localized_name": "Duplo Aguilhão de Nevasca",
@@ -179,6 +187,10 @@
     "localized_name": "Corrente Hídrica",
     "description": "Lança água com um ímpeto incrível, devastando uma grande área à sua frente."
   },
+  "EPalWazaID::HydroSlicer": {
+    "localized_name": "Hidrofatiador",
+    "description": "Devasta a área em frente com uma corrente de água pressurizada. Após algum tempo, mais água começa a jorrar do local atingido."
+  },
   "EPalWazaID::HyperBeam": {
     "localized_name": "Rajada Pal",
     "description": "Carrega uma energia destruidora para disparar um raio superpoderoso contra uma grande área à sua frente."
@@ -194,6 +206,10 @@
   "EPalWazaID::IceMissile": {
     "localized_name": "Míssil de Gelo",
     "description": "Produz um volume afiado de gelo em pleno ar e o dispara contra o inimigo."
+  },
+  "EPalWazaID::IceWall": {
+    "localized_name": "Parede de Gelo",
+    "description": "Faz surgir uma muralha de gelo do solo. A muralha permanece por algum tempo, mas se rompe depois de sofrer certo dano."
   },
   "EPalWazaID::IcicleLine": {
     "localized_name": "Linha de Sincelos",
@@ -275,6 +291,14 @@
     "localized_name": "Trovão a Todo Alcance",
     "description": "Gera um ataque elétrico que avança em linha reta em todas as direções."
   },
+  "EPalWazaID::ReflectiveShuriken": {
+    "localized_name": "Folha Refletora",
+    "description": "Lança uma lâmina de vento capaz de criar uma série de ataques ao ricochetear em inimigos ou árvores. A lâmina pode ricochetear um máximo de quatro vezes."
+  },
+  "EPalWazaID::RipTide": {
+    "localized_name": "Pico Aquático",
+    "description": "Gera ondas esmagadoras nos arredores do inimigo. No final, as ondas explodem ao centro e fazem com que se erga uma coluna de água."
+  },
   "EPalWazaID::RockBeat": {
     "localized_name": "Batida de Pedra",
     "description": "Estremece o solo e faz levitar uma rocha gigantesca."
@@ -298,6 +322,10 @@
   "EPalWazaID::SandTwister": {
     "localized_name": "Furacão de Areia",
     "description": "Gera vários redemoinhos de areia que rodopiam continuamente como que traçando um círculo no ar."
+  },
+  "EPalWazaID::SeaGush": {
+    "localized_name": "Erupção de Colunas de Água",
+    "description": "Faz jorrar uma grande quantidade de colunas de água no local do inimigo e seus arredores."
   },
   "EPalWazaID::SeedMachinegun": {
     "localized_name": "Metralhadora de Sementes",
@@ -455,6 +483,10 @@
     "localized_name": "Investida Javali",
     "description": "Habilidade exclusiva de Rushoar. Ele fixa os olhos no inimigo e se lança contra ele com um ímpeto ensandecido."
   },
+  "EPalWazaID::Unique_CaptainPenguin_Black_BodySlide_Electric": {
+    "localized_name": "Deslizada do Trovão",
+    "description": "Habilidade exclusiva de Penking Lux. Ele se deita de barriga no chão e sai deslizando contra o inimigo enquanto libera eletricidade de todo o seu corpo."
+  },
   "EPalWazaID::Unique_CaptainPenguin_BodySlide": {
     "localized_name": "Deslizada do Capitão",
     "description": "Habilidade exclusiva de Penking. Ele se deita de barriga no chão e sai deslizando contra o inimigo enquanto emana um ar gelado do corpo inteiro."
@@ -551,6 +583,14 @@
     "localized_name": "Presa Selvagem",
     "description": "Habilidade exclusiva de Direhowl. Ele salta rapidamente contra o inimigo, atacando com uma mordida."
   },
+  "EPalWazaID::Unique_GhostAnglerfish_Fire_SweepBait_Fire": {
+    "localized_name": "Lanterna Varredora Incandescente",
+    "description": "Habilidade exclusiva de Ghangler Ignis. Varre a área à sua frente com um grande movimento da lanterna flamejante em sua cabeça."
+  },
+  "EPalWazaID::Unique_GhostAnglerfish_SweepBait": {
+    "localized_name": "Lanterna Varredora",
+    "description": "Habilidade exclusiva de Ghangler. Varre a área à sua frente com um grande movimento da longa lanterna em sua cabeça."
+  },
   "EPalWazaID::Unique_GhostBeast_Tossin": {
     "localized_name": "Corrida de Espíritos",
     "description": "Habilidade exclusiva de Maraith. Corre sem pressa enquanto vai fazendo voarem bolas de fogo tremulantes contra o inimigo."
@@ -603,6 +643,10 @@
     "localized_name": "Onda Marinha da Fênix",
     "description": "Habilidade exclusiva de Faleris Aqua. Depois de gerar um redemoinho turbulento, ele envolve seu corpo em água e se arremete em uma rasante."
   },
+  "EPalWazaID::Unique_IceCrocodile_SpitAttack": {
+    "localized_name": "Cuspida Indiscriminada",
+    "description": "Habilidade exclusiva de Munchill. Ataca cuspindo em sequência três granadas que mantinha resfriadas dentro do corpo, sem digerir. Parece que, às vezes, também cospe algo ainda mais perigoso..."
+  },
   "EPalWazaID::Unique_IceDeer_IceHorn": {
     "localized_name": "Arranque de Chifres Gélidos",
     "description": "Habilidade exclusiva de Reindrix. Ele dá uma investida e manda o inimigo para o alto com sua majestosa galhada de gelo."
@@ -610,6 +654,10 @@
   "EPalWazaID::Unique_IceHorse_IceBladeAttack": {
     "localized_name": "Asas de Cristal",
     "description": "Habilidade exclusiva de Frostallion. Ele condensa o ar frio para cobrir as asas de gelo e então as usa para dilacerar o inimigo enquanto passa por ele a galope."
+  },
+  "EPalWazaID::Unique_IceNarwhal_JumpingHorn": {
+    "localized_name": "Salto Alto",
+    "description": "Habilidade exclusiva de espécies de Whalaska. Depois de avançar e mergulhar por um instante, salta até as alturas para atacar. Cria uma explosão de gelo assim que inicia o salto."
   },
   "EPalWazaID::Unique_JetDragon_JumpBeam": {
     "localized_name": "Cometa de Raio",
@@ -631,9 +679,13 @@
     "localized_name": "Choque Vendaval",
     "description": "Habilidade exclusiva de Univolt. Ela investe contra o inimigo enquanto faz cair raios ao redor de si mesma."
   },
+  "EPalWazaID::Unique_LeafMomonga_SomerSault": {
+    "localized_name": "Pirueta de Folha",
+    "description": "Habilidade exclusiva de Herbil. Depois de se preparar na pose adequada, realiza um salto mortal enquanto vai se chocando em alta velocidade contra o inimigo."
+  },
   "EPalWazaID::Unique_LilyQueen_LilyHealing": {
     "localized_name": "Proteção da Fertilidade",
-    "description": "Habilidade exclusiva de Lyleen. Ela restaura o próprio PV graças aos seus poderes terapêuticos. Você, no entanto, ela não cura."
+    "description": "Habilidade exclusiva de Lyleen. Ela restaura o PV de todos os companheiros ao redor graças aos seus poderes terapêuticos."
   },
   "EPalWazaID::Unique_LilyQueen_WindBarrier": {
     "localized_name": "Barreira de Vento",
@@ -683,6 +735,14 @@
     "localized_name": "Soco Incessante",
     "description": "Habilidade exclusiva de Cattiva. Ele persegue o inimigo enquanto gira ambos os braços, executando socos consecutivos."
   },
+  "EPalWazaID::Unique_Plesiosaur_LongBreath": {
+    "localized_name": "Sopro Longo",
+    "description": "Habilidade exclusiva de Braloha. Faz um sopro de grama ir se expandindo gradualmente desde a base até o alto do seu comprido pescoço."
+  },
+  "EPalWazaID::Unique_PoseidonOrca_TorrentLaser": {
+    "localized_name": "Laser Ultrassônico",
+    "description": "Habilidade exclusiva de Neptilius. Coleta água na boca enquanto boia levemente. Em seguida, devasta os arredores com três jatos d’água pressurizados, criando rachaduras que começam a jorrar água nos pontos atingidos."
+  },
   "EPalWazaID::Unique_PurpleSpider_SpiderRaid": {
     "localized_name": "Assalto Aranha",
     "description": "Habilidade exclusiva de Tarantriss. Cospe uma bola de teia que captura sua presa. Em seguida corre a toda velocidade para cima da vítima e a rasga três vezes para acabar com seu sofrimento."
@@ -701,7 +761,7 @@
   },
   "EPalWazaID::Unique_Ronin_Iai": {
     "localized_name": "Iai-kiri",
-    "description": "Habilidade exclusiva de Bushi. Levando a mão à espada, ele surge na frente do inimigo num piscar de olhos e desfere um único golpe de velocidade impressionante."
+    "description": "Habilidade exclusiva de espécies de Bushi. Levando a mão à espada, ele surge na frente do inimigo num piscar de olhos e desfere um único golpe de velocidade impressionante."
   },
   "EPalWazaID::Unique_SaintCentaur_OneSpearRushes": {
     "localized_name": "Lampejo da Lança Única",
@@ -735,6 +795,14 @@
     "localized_name": "Lança de Agulha",
     "description": "Habilidade exclusiva de Beegarde. Avança em grande velocidade contra o inimigo e termina por espetá-lo com uma lança, só por garantia."
   },
+  "EPalWazaID::Unique_StuffedShark_HiddenWeapon": {
+    "localized_name": "Nervoso no Gatilho",
+    "description": "Habilidade exclusiva de espécies de Finsider. Revela os dois hidrocanhões que possui dentro da boca e dispara seis projéteis de água alternadamente de cada lado. Por último, une os dois canhões para executar um poderoso tiro final."
+  },
+  "EPalWazaID::Unique_TentacleTurtle_HydroSpin": {
+    "localized_name": "Giro Hídrico",
+    "description": "Habilidade exclusiva de espécies de Turtacle. Utiliza a força de propulsão do jato emitido para voar contra o inimigo enquanto gira em alta velocidade."
+  },
   "EPalWazaID::Unique_ThunderBird_ThunderStorm": {
     "localized_name": "Mergulho Relâmpago",
     "description": "Habilidade exclusiva de Beakon. Primeiro faz cair um raio no local onde o inimigo se encontra, para então realizar uma investida aérea e continuar soltando raios para os lados."
@@ -750,6 +818,10 @@
   "EPalWazaID::Unique_ThunderDragonMan_ThunderSwordAttack": {
     "localized_name": "Keravnos",
     "description": "Habilidade exclusiva de Orserk. Ele salta e invoca uma lança de trovão, arremessando-a contra o inimigo."
+  },
+  "EPalWazaID::Unique_TropicalOstrich_DashKick": {
+    "localized_name": "Chute Rápido",
+    "description": "Habilidade exclusiva de Palumba. Ganha impulso com uma corrida e então castiga o inimigo com um chute voador violento."
   },
   "EPalWazaID::Unique_Umihebi_Fire_FireWindingTackle": {
     "localized_name": "Serpente Magmática",
@@ -798,6 +870,54 @@
   "EPalWazaID::Unique_WingGolem_RoundCutter": {
     "localized_name": "Cortador de Chão",
     "description": "Habilidade exclusiva de Knocklem. Ele ergue a roda em suas costas bastante alto para então arremessá-la, fazendo com que trace um círculo nos ares."
+  },
+  "EPalWazaID::Unique_YakushimaBoss001_Small_DemonEyeCharge": {
+    "localized_name": "Acometida Ocular",
+    "description": "Habilidade exclusiva de Olho Demoníaco. Avança na direção do inimigo. Ricocheteia quando atinge o solo ou uma parede."
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Dark": {
+    "localized_name": "Prensa de Geleia (Escuridão)",
+    "description": "Habilidade exclusiva de Geleia roxa. Salta contra o inimigo para atacá-lo."
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Fire": {
+    "localized_name": "Prensa de Geleia (Fogo)",
+    "description": "Habilidade exclusiva de Geleia vermelha. Salta contra o inimigo para atacá-lo."
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Leaf": {
+    "localized_name": "Prensa de Geleia (Grama)",
+    "description": "Habilidade exclusiva de Geleia verde. Salta contra o inimigo para atacá-lo."
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Normal": {
+    "localized_name": "Prensa de Geleia (Não Elemental)",
+    "description": "Habilidade exclusiva de Geleia Luminosa. Salta contra o inimigo para atacá-lo."
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Rainbow": {
+    "localized_name": "Prensa de Geleia (Arco-Íris)",
+    "description": "Habilidade exclusiva de Geleia do Arco-íris. Salta contra o inimigo para atacá-lo."
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Water": {
+    "localized_name": "Prensa de Geleia (Água)",
+    "description": "Habilidade exclusiva de Geleia Azul. Salta contra o inimigo para atacá-lo."
+  },
+  "EPalWazaID::Unique_YakushimaMonster002_SwordCharge": {
+    "localized_name": "Investida com Espada",
+    "description": "Habilidade exclusiva de Espada Encantada. Realiza um ataque perfurante direcionado ao inimigo."
+  },
+  "EPalWazaID::Unique_YakushimaMonster003_BatCharge": {
+    "localized_name": "Invasão de Morcegos",
+    "description": "Habilidade exclusiva de Morcego de Caverna. Joga-se em um ataque de corpo inteiro contra o inimigo. Ricocheteia quando atinge o solo ou uma parede."
+  },
+  "EPalWazaID::Unique_Yakushima_EyeTossin": {
+    "localized_name": "Acometida de Olhar Fixo",
+    "description": "Habilidade exclusiva de Olho de Cthulhu. Avança várias vezes contra o inimigo."
+  },
+  "EPalWazaID::Unique_Yakushima_MouthTossin": {
+    "localized_name": "Acometida Veloz",
+    "description": "Habilidade exclusiva de Olho de Cthulhu. Avança várias vezes contra o inimigo a uma velocidade alucinante."
+  },
+  "EPalWazaID::Unique_Yakushima_SummonServant": {
+    "localized_name": "Chamar Servos",
+    "description": "Habilidade exclusiva de Olho de Cthulhu. Chama quatro servos que seguem na direção do inimigo e se chocam contra ele para causar dano. Os servos desaparecem ao serem atacados ou após um certo tempo."
   },
   "EPalWazaID::Unique_Yeti_Grass_GrassBall": {
     "localized_name": "Boliche de Grama",

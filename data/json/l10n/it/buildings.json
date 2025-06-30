@@ -35,9 +35,21 @@
     "localized_name": "Torre di sorveglianza",
     "description": "Permette di gestire il lavoro dei Pal nella base, definendo quali attività individuali consentire e proibire."
   },
+  "BaseCampWorkerExtraStation": {
+    "localized_name": "Dispositivo di controllo del box per Pal",
+    "description": "Un dispositivo con cui controllare il box per Pal a distanza. Scegli dove far apparire i Pal e sviluppa liberamente la tua base."
+  },
   "BathTub_Stone": {
     "localized_name": "Vasca da bagno d'antiquariato",
     "description": "Vasca da bagno d'antiquariato per l'arredo."
+  },
+  "Believer_Banner": {
+    "localized_name": "Striscione dell'Ente per la tutela dei Pal",
+    "description": "Striscione dell'Ente per la tutela dei Pal per l'arredo."
+  },
+  "Believer_Flag": {
+    "localized_name": "Vessillo dell'Ente per la tutela dei Pal",
+    "description": "Vessillo dell'Ente per la tutela dei Pal per l'arredo."
   },
   "Bench_Wood": {
     "localized_name": "Panca in legno",
@@ -100,8 +112,8 @@
     "description": "Una struttura necessaria per preparare gli ingredienti. Non ci si può fare molto, a parte cuocere alcuni semplici ingredienti. È necessario che un Pal del fuoco accenda la fiamma."
   },
   "CandleStand": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Candelabro solenne",
+    "description": "Un candelabro che ispira riverenza, su cui arde la fiamma venerata alla Congrega del fuoco perenne. Una sorgente di luce che può essere collocata sul pavimento. È necessario che un Pal del fuoco accenda la fiamma."
   },
   "Cauldron": {
     "localized_name": "Calderone da strega",
@@ -156,12 +168,12 @@
     "description": "Una struttura dove combinare più progetti per ottenere progetti di qualità maggiore."
   },
   "ConservationGroupBannerA": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Bandiera dell'Ente per la tutela dei Pal",
+    "description": "Bandiera dell'Ente per la tutela dei Pal per l'arredo."
   },
   "ConservationGroupBannerB": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Stendardo dell'Ente per la tutela dei Pal",
+    "description": "Striscione orizzontale dell'Ente per la tutela dei Pal per l'arredo."
   },
   "Container01_Iron": {
     "localized_name": "Contenitore grande",
@@ -198,6 +210,10 @@
   "Crusher": {
     "localized_name": "Pressa",
     "description": "Una struttura per ridurre in polvere Pietra o Legno e ottenere così altri tipi di risorse. Sono necessari Pal competenti nell'attività |Irrigazione| per usare la ruota idraulica."
+  },
+  "CrystalPit": {
+    "localized_name": "Cava di exoquarzo",
+    "description": "Una struttura dove produrre Exoquarzo. Estrarre Exoquarzo è un lavoro estremamente faticoso. Sono necessari Pal capaci di svolgere attività minerarie."
   },
   "Curtain01_Wall_Stone": {
     "localized_name": "Tende d'antiquariato",
@@ -303,6 +319,10 @@
     "localized_name": "Fabbrica per la produzione in serie II",
     "description": "Fabbrica dove realizzare oggetti e protezioni. Le fasi di lavoro sono state perfezionate, permettendo una produzione piuttosto veloce. Sono necessari Pal capaci di svolgere lavoro manuale."
   },
+  "Factory_Hard_04": {
+    "localized_name": "Fabbrica per le attività avanzata",
+    "description": "Una fabbrica dove realizzare oggetti e protezioni. Usa tecnologie avanzate per velocizzare la produzione. Sono necessari Pal capaci di svolgere lavoro manuale."
+  },
   "Factory_Money": {
     "localized_name": "Zecca per il denaro",
     "description": "Una fabbrica dove coniare Denaro. È un luogo che logora lo spirito: chi ci lavora perde punti SAN. Sono necessari Pal capaci di svolgere lavoro manuale."
@@ -343,9 +363,25 @@
     "localized_name": "Statua del grande volatile",
     "description": "Un monumento in pietra che ritrae un Chikipi. Interagire con esso permette lo Spostamento Rapido."
   },
+  "FireCult_Banner": {
+    "localized_name": "Striscione della Congrega del fuoco perenne",
+    "description": "Striscione della Congrega del fuoco perenne per l'arredo."
+  },
+  "FireCult_Flag": {
+    "localized_name": "Vessillo della Congrega del fuoco perenne",
+    "description": "Vessillo della Congrega del fuoco perenne per l'arredo."
+  },
   "FireStand": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Candelabro da cerimonia",
+    "description": "Un candelabro cerimoniale su cui arde la fiamma venerata alla Congrega del fuoco perenne. Una sorgente di luce che può essere collocata sul pavimento. È necessario che un Pal del fuoco accenda la fiamma."
+  },
+  "FishingPond1": {
+    "localized_name": "Lago da pesca",
+    "description": "Un lago pensato per le attività di pesca. Assegnaci un Pal per lasciarlo lì a pescare. Sono necessari Pal capaci di svolgere lavoro manuale."
+  },
+  "FishingPond2": {
+    "localized_name": "Lago da pesca enorme",
+    "description": "Un grande lago pensato per le attività di pesca. È molto vasto, e permette di catturare Pal di dimensioni impressionanti. Sono necessari Pal capaci di svolgere lavoro manuale."
   },
   "FlourMill": {
     "localized_name": "Mulino",
@@ -372,8 +408,8 @@
     "description": "Una porta d'ingresso edificata su delle fondamenta. È in vetro incredibilmente resistente."
   },
   "Glass_Fence": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Recinto in vetro",
+    "description": "Un recinto da mettere su fondamenta e tetti per evitare le cadute. È in vetro incredibilmente resistente."
   },
   "Glass_SlantedRoof": {
     "localized_name": "Tetto spiovente in vetro",
@@ -415,6 +451,10 @@
     "localized_name": "Porta da calcio",
     "description": "Una porta da calcio per l'arredo. Non si fanno punti, neanche lanciandoci dentro SheepBall."
   },
+  "GuardianDogStatue": {
+    "localized_name": "Statua di Yakumo",
+    "description": "Statua di Yakumo per l'arredo."
+  },
   "GuildChest": {
     "localized_name": "Forziere della gilda",
     "description": "Un forziere che permette di teletrasportare istantaneamente il suo contenuto, rendendolo accessibile dai contenitori di questo tipo in ogni base."
@@ -435,17 +475,25 @@
     "localized_name": "Cucina grande",
     "description": "Una struttura necessaria per cucinare gli ingredienti. È ancora più grande, più Pal possono cucinarci insieme. È necessario che un Pal del fuoco accenda la fiamma."
   },
+  "Hunter_Banner": {
+    "localized_name": "Striscione dei bracconieri",
+    "description": "Striscione dei bracconieri per l'arredo."
+  },
+  "Hunter_Flag": {
+    "localized_name": "Vessillo dei bracconieri",
+    "description": "Vessillo dei bracconieri per l'arredo."
+  },
   "Hunter_GangFlag": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Bandiera dei bracconieri",
+    "description": "Bandiera dei bracconieri per l'arredo."
   },
   "IceCrusher": {
     "localized_name": "Macinatore criogenico",
     "description": "Una struttura per ridurre in polvere Minerale metallico e ottenere così altri tipi di risorse. Richiede Pal competenti nell'attività |Refrigerazione| e il collegamento all'alimentazione, ma è davvero efficiente."
   },
   "Iron_Fence": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Recinto in metallo",
+    "description": "Un recinto da mettere su fondamenta e tetti per evitare le cadute. È in metallo, quindi è molto resistente."
   },
   "Irori": {
     "localized_name": "Focolare giapponese",
@@ -496,8 +544,8 @@
     "description": "Una porta scorrevole per interni edificata su delle fondamenta. È in un raffinato stile giapponese."
   },
   "JapaneseStyle_Fence": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Recinto in stile giapponese",
+    "description": "Un recinto da mettere su fondamenta e tetti per evitare le cadute. È in un raffinato stile giapponese."
   },
   "JapaneseStyle_Pillar": {
     "localized_name": "Pilastro in stile giapponese",
@@ -551,6 +599,10 @@
     "localized_name": "Lampada fissa",
     "description": "Una fonte di luce per illuminare la base di notte. È necessaria l'elettricità, ma può illuminare una zona più grande."
   },
+  "LanternTop": {
+    "localized_name": "Lanterna orientale",
+    "description": "Lanterna orientale per l'arredo."
+  },
   "LargeCeilingLamp": {
     "localized_name": "Lampada da soffitto grande",
     "description": "Una fonte di luce per illuminare la base di notte. Può essere fissata a un soffitto. È necessaria una quantità maggiore di elettricità, ma può illuminare una zona ancora più grande."
@@ -600,8 +652,8 @@
     "description": "Un lampione alla moda per l'illuminazione stradale. Per accenderlo è necessaria l'elettricità."
   },
   "LilyQueenStatue": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Statua di Lyleen",
+    "description": "Statua di Lyleen per l'arredo."
   },
   "MachineGame01_Iron": {
     "localized_name": "Gioco a premi con gru",
@@ -703,6 +755,18 @@
     "localized_name": "Incubatrice elettrica per uova grande",
     "description": "Un dispositivo per far schiudere le uova di Pal. Ha bisogno di essere collegato all'elettricità, ma mantiene la temperatura ideale per far schiudere più uova."
   },
+  "MultiHatchingPalEgg": {
+    "localized_name": "Incubatrice per uova grande",
+    "description": "Un dispositivo per far schiudere le uova di Pal. Mantiene automaticamente la temperatura ideale, e permette di far schiudere più uova."
+  },
+  "Ninja_Banner": {
+    "localized_name": "Striscione del clan dei fiori di luna",
+    "description": "Striscione del clan dei fiori di luna per l'arredo."
+  },
+  "Ninja_Flag": {
+    "localized_name": "Vessillo del clan dei fiori di luna",
+    "description": "Vessillo del clan dei fiori di luna per l'arredo."
+  },
   "OilPump": {
     "localized_name": "Pompa petrolifera",
     "description": "Dispositivo per estrarre Petrolio greggio dai campi petroliferi. Deve essere collegato a un alimentatore molto potente per funzionare."
@@ -712,8 +776,8 @@
     "description": "Accelera la velocità di ogni attività relativa all'accensione del fuoco nella base. Anche mettendone due o più, il boost rimane uguale."
   },
   "OperatingTable": {
-    "localized_name": "it_Text",
-    "description": "it_text"
+    "localized_name": "Tavolo operatorio Pal",
+    "description": "Una struttura dove operare i Pal per cambiarne il sesso o l'abilità passiva."
   },
   "PalBooth": {
     "localized_name": "Mercatino (Pal)",
@@ -724,8 +788,8 @@
     "description": "Una struttura dove tenere sotto custodia i Pal catturati. Un Pal nel box recupera lentamente PV. La tua base si svilupperà intorno a questa struttura."
   },
   "PalCage": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Gabbia vuota",
+    "description": "Gabbia vuota per l'arredo."
   },
   "PalFoodBox": {
     "localized_name": "Mangiatoia",
@@ -775,6 +839,14 @@
     "localized_name": "Letto comodo",
     "description": "Un morbido letto per esseri umani. Da usare per dormire la notte o per riposare quando si è feriti. Non si riesce davvero a riposare senza un tetto sopra la testa."
   },
+  "Police_Banner": {
+    "localized_name": "Striscione della Milizia volontaria",
+    "description": "Striscione della Milizia volontaria per l'arredo."
+  },
+  "Police_Flag": {
+    "localized_name": "Vessillo della Milizia volontaria",
+    "description": "Vessillo della Milizia volontaria per l'arredo."
+  },
   "QuartzPit": {
     "localized_name": "Cava di quarzo puro",
     "description": "Una struttura dove produrre Quarzo puro. Estrarre Quarzo puro è un lavoro estremamente faticoso. Sono necessari Pal capaci di svolgere attività minerarie."
@@ -807,13 +879,61 @@
     "localized_name": "it_Text",
     "description": "it_Text"
   },
+  "SF_Chair": {
+    "localized_name": "Sedia da laboratorio",
+    "description": "Sedia da laboratorio per l'arredo."
+  },
+  "SF_Desk": {
+    "localized_name": "Scrivania da laboratorio",
+    "description": "Scrivania da laboratorio per l'arredo."
+  },
+  "SF_DoorWall": {
+    "localized_name": "Muro con porta lucido",
+    "description": "Una porta d'ingresso edificata su delle fondamenta. Lucida, dallo stile futuristico."
+  },
   "SF_Fence": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Recinto lucido",
+    "description": "Un recinto da mettere su fondamenta e tetti per evitare le cadute. Lucido, dallo stile futuristico."
+  },
+  "SF_SlantedRoof": {
+    "localized_name": "Tetto spiovente lucido",
+    "description": "Un tetto spiovente edificato su dei muri per proteggersi dagli elementi. Lucido, dallo stile futuristico."
+  },
+  "SF_TriangleWall": {
+    "localized_name": "Muro triangolare lucido",
+    "description": "Un muro triangolare edificato su delle fondamenta. Lucido, dallo stile futuristico."
+  },
+  "SF_WindowWall": {
+    "localized_name": "Muro con finestra lucido",
+    "description": "Un muro con finestre, edificato su delle fondamenta per difendersi dagli invasori. Lucido, dallo stile futuristico."
+  },
+  "SF_foundation": {
+    "localized_name": "Fondamenta lucide",
+    "description": "Fondamenta su cui edificare muri e strutture. Sono lucide e hanno uno stile futuristico."
+  },
+  "SF_roof": {
+    "localized_name": "Tetto lucido",
+    "description": "Un tetto edificato su dei muri per proteggersi dagli elementi. Lucido, dallo stile futuristico."
+  },
+  "SF_stair": {
+    "localized_name": "Scala lucida",
+    "description": "Una scala per salire e scendere tra fondamenta e tetti. Lucida, dallo stile futuristico."
+  },
+  "SF_wall": {
+    "localized_name": "Muro lucido",
+    "description": "Un muro edificato su delle fondamenta per difendersi dagli invasori. Lucido, dallo stile futuristico."
   },
   "SanityDecrease1": {
     "localized_name": "Generatore di onde α",
     "description": "Un generatore di onde α, capaci di far rilassare i Pal. Inibisce il calo dei punti SAN dei Pal della base. Equipaggiarne più di due non incrementa l'effetto."
+  },
+  "Scientist_Banner": {
+    "localized_name": "Striscione della Squadra per la ricerca genetica",
+    "description": "Striscione della Squadra per la ricerca genetica per l'arredo."
+  },
+  "Scientist_Flag": {
+    "localized_name": "Vessillo della Squadra per la ricerca genetica",
+    "description": "Vessillo della Squadra per la ricerca genetica per l'arredo."
   },
   "Seika": {
     "localized_name": "Ikebana",
@@ -891,6 +1011,10 @@
     "localized_name": "Shishi-odoshi",
     "description": "Dispositivo di bambù |shishi-odoshi| per l'arredo. Adatto ad arredare edifici in stile giapponese."
   },
+  "Shrine_Lantern": {
+    "localized_name": "Lanterna da giardino",
+    "description": "Lanterna da giardino per l'arredo."
+  },
   "SignExit_Ceiling_Iron": {
     "localized_name": "Cartello di uscita d'emergenza per il soffitto",
     "description": "Un segnale d'uscita d'emergenza per l'arredo. Si può fissare al soffitto."
@@ -944,8 +1068,8 @@
     "description": "Struttura dove far riposare i Pal della base stanchi. Permette di recuperare SAN in modo ancora più efficiente."
   },
   "Spa3": {
-    "localized_name": "Terme",
-    "description": "Struttura dove far riposare i Pal della base stanchi. Riprendersi dalle fatiche permette di recuperare SAN."
+    "localized_name": "Terme in stile giapponese",
+    "description": "Struttura dove far riposare i Pal della base stanchi. Permette di recuperare SAN grazie al piacevole arredo in stile giapponese."
   },
   "SphereFactory_Black_01": {
     "localized_name": "Banco da lavoro per sfere",
@@ -976,8 +1100,8 @@
     "description": "Una porta d'ingresso edificata su delle fondamenta. È in pietra, quindi è abbastanza resistente."
   },
   "Stone_Fence": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Recinto in pietra",
+    "description": "Un recinto da mettere su fondamenta e tetti per evitare le cadute. È in pietra, quindi è abbastanza resistente."
   },
   "Stone_Gate": {
     "localized_name": "Cancello in pietra",
@@ -1204,8 +1328,8 @@
     "description": "Una fonte di luce per illuminare la base di notte. Può essere fissata a un muro. È necessario che un Pal del fuoco accenda la fiamma."
   },
   "WallTorch02": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Torcia a muro solenne",
+    "description": "Una torcia che ispira riverenza, su cui arde la fiamma venerata alla Congrega del fuoco perenne. Una sorgente di luce che si può fissare a un muro. È necessario che un Pal del fuoco accenda la fiamma."
   },
   "WeaponFactory_Dirty_01": {
     "localized_name": "Banco da lavoro per armi",
@@ -1219,13 +1343,17 @@
     "localized_name": "Fabbrica per la produzione in serie di armi II",
     "description": "Una fabbrica dove realizzare armi e munizioni. Le fasi di lavoro sono state perfezionate, permettendo di produrre armi di qualità. Sono necessari Pal capaci di svolgere lavoro manuale."
   },
+  "WeaponFactory_Dirty_04": {
+    "localized_name": "Fabbrica di armi avanzata",
+    "description": "Una fabbrica dove realizzare armi e proiettili. Usa tecnologie avanzate per velocizzare la produzione. Sono necessari Pal capaci di svolgere lavoro manuale."
+  },
   "Wire_Fence": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Recinto con filo spinato",
+    "description": "Recinto con filo spinato per l'arredo."
   },
   "Wood_Fence": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Recinto in legno",
+    "description": "Un recinto edificato su delle fondamenta o su un tetto per scongiurare il rischio di cadute. È in legno, quindi è piuttosto fragile."
   },
   "Wood_Gate": {
     "localized_name": "Cancello in legno",
@@ -1244,8 +1372,8 @@
     "description": "Un muro con finestre, edificato su delle fondamenta per difendersi dagli invasori. È in legno, quindi è piuttosto fragile."
   },
   "WoodenBarricade": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Transenna in legno",
+    "description": "Transenna in legno per l'arredo."
   },
   "Wooden_DoorWall": {
     "localized_name": "Porta di legno",

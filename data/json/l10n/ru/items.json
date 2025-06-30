@@ -13,19 +13,19 @@
   },
   "Accessory_AirDash1": {
     "localized_name": "Ботинки воздушного рывка",
-    "description": "Аксессуар, дающий игроку возможность совершать рывок в воздухе."
+    "description": "Аксессуар, при экипировке которого игрок может совершать рывок в воздухе."
   },
   "Accessory_AirDash2": {
     "localized_name": "Ботинки двойного воздушного рывка",
-    "description": "Аксессуар, дающий игроку возможность совершать двойной рывок в воздухе."
+    "description": "Аксессуар, при экипировке которого игрок может совершать двойной рывок в воздухе."
   },
   "Accessory_AirDash3": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Ботинки тройного воздушного рывка",
+    "description": "Аксессуар, при экипировке которого игрок может трижды сделать рывок в воздухе."
   },
   "Accessory_AirDash4": {
     "localized_name": "ru Text",
-    "description": "ru Text"
+    "description": "Предмет, который позволяет поймать Палов при броске. Обладает выдающимися характеристиками и способен ловить даже необычных Палов."
   },
   "Accessory_AquaResist_1": {
     "localized_name": "Кольцо защиты от воды",
@@ -149,15 +149,15 @@
   },
   "Accessory_JumpCount_Increase1": {
     "localized_name": "Ботинки двойного прыжка",
-    "description": "Аксессуар, дающий игроку возможность совершать прыжок в воздухе."
+    "description": "Аксессуар, при экипировке которого игрок может совершать прыжок в воздухе."
   },
   "Accessory_JumpCount_Increase2": {
     "localized_name": "Ботинки тройного прыжка",
-    "description": "Аксессуар, дающий игроку возможность совершать двойной прыжок в воздухе."
+    "description": "Аксессуар, при экипировке которого игрок может совершать двойной прыжок в воздухе."
   },
   "Accessory_JumpCount_Increase3": {
     "localized_name": "Ботинки четверного прыжка",
-    "description": "Аксессуар, дающий игроку возможность совершать тройной прыжок в воздухе."
+    "description": "Аксессуар, при экипировке которого игрок может совершать тройной прыжок в воздухе."
   },
   "Accessory_JumpPower_Increase": {
     "localized_name": "Антигравитационный пояс",
@@ -189,7 +189,7 @@
   },
   "Accessory_Nonkilling": {
     "localized_name": "Кольцо сдерживания",
-    "description": "Кольцо миротворца. Носитель кольца не может снизить здоровье противника до 0."
+    "description": "Кольцо миротворца. Носитель кольца не может снизить здоровье противника ниже 1."
   },
   "Accessory_NormalResist_1": {
     "localized_name": "Кольцо сопротивления",
@@ -258,6 +258,10 @@
   "AdditionalInventory_004": {
     "localized_name": "Огромная добавочная сумка",
     "description": "Огромная сумка, позволяющая носить больше вещей. При ношении с собой добавляет ячейки инвентаря."
+  },
+  "AffectionFruit_01": {
+    "localized_name": "Драгоценный плод близости",
+    "description": "Редкий волшебный плод. Бытует поверье, что съевший такой плод Пал откроет сердце человеку. Выбирайте с умом, какого Пала им угостить."
   },
   "AncientParts2": {
     "localized_name": "Ядро древней цивилизации",
@@ -403,6 +407,10 @@
     "localized_name": "Стейк из Маммореста",
     "description": "Насыщенный, благородный вкус. С каждым укусом сознание рисует образы густых лесов и ледников."
   },
+  "BakedMeat_IceCrocodile": {
+    "localized_name": "Стейк из Манчилла",
+    "description": "Хорошо прожаренный на углях стейк. Снаружи он ароматно поджарен, а внутри — сочный и тающий во рту. Особые ингредиенты сохраняют его насыщенный вкус и обеспечивают отличную сохранность."
+  },
   "BakedMeat_IceDeer": {
     "localized_name": "Рейндрикс с хрустящей корочкой",
     "description": "Мясо ледяного оленя мгновенно остывает после доставания из печи и сохраняет свежесть. Это блюдо идеально подходит для запаса на черный день."
@@ -438,6 +446,10 @@
   "Bat2": {
     "localized_name": "Бита",
     "description": "Бейсбольная бита, пригодная для боя на ближней дистанции. Сыграть не получится -Палы великоваты для роли мяча."
+  },
+  "BattleTicket": {
+    "localized_name": "Боевой билет",
+    "description": "Можно получить за победу в одиночном бою на арене. Можно обменять на премиальные награды."
   },
   "BeamSword": {
     "localized_name": "Световой меч",
@@ -523,6 +535,26 @@
     "localized_name": "Чертеж ядовитого арбалета 4",
     "description": "Открывает доступ к рецепту предмета [BowGun Poison (Legendary)]. Для создания требуется [Factory Hard 01]."
   },
+  "Blueprint_CandleStand": {
+    "localized_name": "Чертеж величественного подсвечника",
+    "description": "Если предмет находится в инвентаре или хранится на базе, становится доступна постройка: <MapObjectName id=|CandleStand|/>."
+  },
+  "Blueprint_ChargeLaserRifle_2": {
+    "localized_name": "Чертеж зарядной винтовки 1",
+    "description": "Открывает доступ к рецепту предмета [Зарядная винтовка (Uncommon)]. Для создания требуется [WeaponFactory Dirty 04]."
+  },
+  "Blueprint_ChargeLaserRifle_3": {
+    "localized_name": "Чертеж зарядной винтовки 2",
+    "description": "Открывает доступ к рецепту предмета [Зарядная винтовка (Rare)]. Для создания требуется [WeaponFactory Dirty 04]."
+  },
+  "Blueprint_ChargeLaserRifle_4": {
+    "localized_name": "Чертеж зарядной винтовки 3",
+    "description": "Открывает доступ к рецепту предмета [Зарядная винтовка (Epic)]. Для создания требуется [WeaponFactory Dirty 04]."
+  },
+  "Blueprint_ChargeLaserRifle_5": {
+    "localized_name": "Чертеж зарядной винтовки 4",
+    "description": "Открывает доступ к рецепту предмета [Зарядная винтовка (Legendary)]. Для создания требуется [WeaponFactory Dirty 04]."
+  },
   "Blueprint_ClothArmorCold_2": {
     "localized_name": "Чертеж национального костюма холодных регионов 1",
     "description": "Открывает доступ к рецепту предмета [ClothArmorCold 2 (Uncommon)]. Для создания требуется [Примитивный верстак]."
@@ -586,6 +618,14 @@
   "Blueprint_CompoundBow_5": {
     "localized_name": "Чертеж композитного лука 4",
     "description": "Открывает доступ к рецепту предмета [Композитный лук (Legendary)]. Для создания требуется [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_ConservationGroupBannerA": {
+    "localized_name": "Чертеж флага Организации по защите Палов",
+    "description": "Если предмет находится в инвентаре или хранится на базе, становится доступна постройка: <MapObjectName id=|ConservationGroupBannerA|/>."
+  },
+  "Blueprint_ConservationGroupBannerB": {
+    "localized_name": "Чертеж баннера Организации по защите Палов",
+    "description": "Если предмет находится в инвентаре или хранится на базе, становится доступна постройка: <MapObjectName id=|ConservationGroupBannerB|/>."
   },
   "Blueprint_CopperArmorCold_2": {
     "localized_name": "Чертеж металлической брони защиты от холода 1",
@@ -682,6 +722,38 @@
   "Blueprint_EnergyRocketLauncher_5": {
     "localized_name": "Чертеж плазменной пушки 4",
     "description": "Открывает доступ к рецепту предмета [Плазменная пушка (Legendary)]. Для создания требуется [WeaponFactory Dirty 03]."
+  },
+  "Blueprint_EnergyShotgun_2": {
+    "localized_name": "Чертеж энергетического ружья 1",
+    "description": "Открывает доступ к рецепту предмета [Энергетическое ружье (Uncommon)]. Для создания требуется [WeaponFactory Dirty 04]."
+  },
+  "Blueprint_EnergyShotgun_3": {
+    "localized_name": "Чертеж энергетического ружья 2",
+    "description": "Открывает доступ к рецепту предмета [Энергетическое ружье (Rare)]. Для создания требуется [WeaponFactory Dirty 04]."
+  },
+  "Blueprint_EnergyShotgun_4": {
+    "localized_name": "Чертеж энергетического ружья 3",
+    "description": "Открывает доступ к рецепту предмета [Энергетическое ружье (Epic)]. Для создания требуется [WeaponFactory Dirty 04]."
+  },
+  "Blueprint_EnergyShotgun_5": {
+    "localized_name": "Чертеж энергетического ружья 4",
+    "description": "Открывает доступ к рецепту предмета [Энергетическое ружье (Legendary)]. Для создания требуется [WeaponFactory Dirty 04]."
+  },
+  "Blueprint_FireStand": {
+    "localized_name": "Чертеж ритуального подсвечника",
+    "description": "Если предмет находится в инвентаре или хранится на базе, становится доступна постройка: <MapObjectName id=|FireStand|/>."
+  },
+  "Blueprint_FishingRod_01_2": {
+    "localized_name": "Чертеж базовой удочки (Гумосс)",
+    "description": "Открывает доступ к рецепту предмета [FishingRod 01 2 (Common)]. Для создания требуется [Factory Hard 01]."
+  },
+  "Blueprint_FishingRod_02_2": {
+    "localized_name": "Чертеж продвинутой удочки (Кроадзиро)",
+    "description": "Открывает доступ к рецепту предмета [FishingRod 02 2 (Uncommon)]. Для создания требуется [Factory Hard 02]."
+  },
+  "Blueprint_FishingRod_03_2": {
+    "localized_name": "Чертеж профессиональной удочки (Депрессо)",
+    "description": "Открывает доступ к рецепту предмета [FishingRod 03 2 (Rare)]. Для создания требуется [Factory Hard 03]."
   },
   "Blueprint_FlameThrower_2": {
     "localized_name": "Чертеж огнемета 1",
@@ -795,6 +867,10 @@
     "localized_name": "Чертеж гранатомета 4",
     "description": "Открывает доступ к рецепту предмета [Гранатомет (Legendary)]. Для создания требуется [WeaponFactory Dirty 03]."
   },
+  "Blueprint_GuardianDogStatue": {
+    "localized_name": "Чертеж статуи Якумо",
+    "description": "Если предмет находится в инвентаре или хранится на базе, становится доступна постройка: <MapObjectName id=|GuardianDogStatue|/>."
+  },
   "Blueprint_GuidedMissileLauncher_2": {
     "localized_name": "Чертеж ракетницы 1",
     "description": "Открывает доступ к рецепту предмета [Ракетница (Uncommon)]. Для создания требуется [WeaponFactory Dirty 03]."
@@ -845,7 +921,7 @@
   },
   "Blueprint_Head001_5": {
     "localized_name": "Чертеж королевской короны 5",
-    "description": "При владении открывается рецепт для |Head001 5 ( Legendary )|. Это можно сделать на |Примитивный верстак|."
+    "description": "При наличии предмета открывается рецепт для |Head001 5 (Legendary)|. Его можно создать на |Примитивный верстак|."
   },
   "Blueprint_Head002_1": {
     "localized_name": "Чертеж золотой короны 1",
@@ -1267,6 +1343,10 @@
     "localized_name": "Чертеж шляпы в виде Даззи 1",
     "description": "Открывает доступ к рецепту предмета [Шляпа виде Даззи (Common)]. Для создания требуется [Примитивный верстак]."
   },
+  "Blueprint_Hunter_GangFlag": {
+    "localized_name": "Чертеж флага браконьеров",
+    "description": "Если предмет находится в инвентаре или хранится на базе, становится доступна постройка: <MapObjectName id=|Hunter GangFlag|/>."
+  },
   "Blueprint_IronArmorCold_2": {
     "localized_name": "Чертеж брони из рафинированного металла с защитой от холода 1",
     "description": "Открывает доступ к рецепту предмета [IronArmorCold 2 (Uncommon)]. Для создания требуется [Factory Hard 02]."
@@ -1331,6 +1411,10 @@
     "localized_name": "Чертеж шлема из рафинированного металла 4",
     "description": "Открывает доступ к рецепту предмета [IronHelmet 5 (Legendary)]. Для создания требуется [Factory Hard 02]."
   },
+  "Blueprint_LanternTop": {
+    "localized_name": "Чертеж фонарика",
+    "description": "Если предмет находится в инвентаре или хранится на базе, становится доступна постройка: <MapObjectName id=|LanternTop|/>."
+  },
   "Blueprint_LaserGatlingGun_2": {
     "localized_name": "Чертеж лазерной картечницы Гатлинга 1",
     "description": "Открывает доступ к рецепту предмета [Лазерная картечница Гатлинга (Uncommon)]. Для создания требуется [Factory Hard 01]."
@@ -1378,6 +1462,14 @@
   "Blueprint_Launcher_Default_5": {
     "localized_name": "Чертеж ракетницы 4",
     "description": "Открывает доступ к рецепту предмета [Launcher Default (Legendary)]. Для создания требуется [WeaponFactory Dirty 03]."
+  },
+  "Blueprint_Launcher_Meteor_5": {
+    "localized_name": "Чертеж метеоромета 4",
+    "description": "Открывает доступ к рецепту предмета [Launcher Meteor (Legendary)]. Для создания требуется [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_LilyQueenStatue": {
+    "localized_name": "Чертеж статуи Лилин",
+    "description": "Если предмет находится в инвентаре или хранится на базе, становится доступна постройка: <MapObjectName id=|LilyQueenStatue|/>."
   },
   "Blueprint_MakeshiftAssaultRifle_2": {
     "localized_name": "Чертеж ветхой штурмовой винтовки 1",
@@ -1494,6 +1586,26 @@
   "Blueprint_OldRevolver_5": {
     "localized_name": "Чертеж старого револьвера 4",
     "description": "Открывает доступ к рецепту предмета [Старый револьвер (Legendary)]. Для создания требуется [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_OverheatRifle_2": {
+    "localized_name": "Чертеж перегревающейся винтовки 1",
+    "description": "Открывает доступ к рецепту предмета [Перегревающаяся винтовка (Uncommon)]. Для создания требуется [WeaponFactory Dirty 04]."
+  },
+  "Blueprint_OverheatRifle_3": {
+    "localized_name": "Чертеж перегревающейся винтовки 2",
+    "description": "Открывает доступ к рецепту предмета [Перегревающаяся винтовка (Rare)]. Для создания требуется [WeaponFactory Dirty 04]."
+  },
+  "Blueprint_OverheatRifle_4": {
+    "localized_name": "Чертеж перегревающейся винтовки 3",
+    "description": "Открывает доступ к рецепту предмета [Перегревающаяся винтовка (Epic)]. Для создания требуется [WeaponFactory Dirty 04]."
+  },
+  "Blueprint_OverheatRifle_5": {
+    "localized_name": "Чертеж перегревающейся винтовки 4",
+    "description": "Открывает доступ к рецепту предмета [Перегревающаяся винтовка (Legendary)]. Для создания требуется [WeaponFactory Dirty 04]."
+  },
+  "Blueprint_PalSummon_YakushimaBoss002": {
+    "localized_name": "Чертеж Небесной печати",
+    "description": "[Коллаборация с Terraria] Открывает доступ к рецепту предмета [PalSummon YakushimaBoss002]. Для создания требуется [Примитивный верстак]."
   },
   "Blueprint_PlasticArmorCold_2": {
     "localized_name": "Чертеж сталепластиковой брони защиты от холода 1",
@@ -1687,6 +1799,14 @@
     "localized_name": "Чертеж гексолитового шлема 4",
     "description": "Открывает доступ к рецепту предмета [Гексолитовый шлем (Legendary)]. Для создания требуется [Factory Hard 03]."
   },
+  "Blueprint_SF_Chair": {
+    "localized_name": "Чертеж стула для комнаты в стиле кабинета",
+    "description": "При наличии в инвентаре или в сундуке на базе можно построить: <MapObjectName id=|SF Chair|/>."
+  },
+  "Blueprint_SF_Desk": {
+    "localized_name": "Чертеж стола для комнаты в стиле кабинета",
+    "description": "При наличии в инвентаре или в сундуке на базе можно построить: <MapObjectName id=|SF Desk|/>."
+  },
   "Blueprint_SemiAutoRifle_2": {
     "localized_name": "Чертеж полуавтоматической винтовки 1",
     "description": "Открывает доступ к рецепту предмета [Полуавтоматическая винтовка (Uncommon)]. Для создания требуется [WeaponFactory Dirty 02]."
@@ -1718,6 +1838,10 @@
   "Blueprint_SemiAutoShotgun_5": {
     "localized_name": "Чертеж полуавтоматического ружья 4",
     "description": "Открывает доступ к рецепту предмета [Полуавтоматическое ружье (Legendary)]. Для создания требуется [WeaponFactory Dirty 03]."
+  },
+  "Blueprint_Shrine_Lantern": {
+    "localized_name": "Чертеж подвесного фонаря",
+    "description": "Если предмет находится в инвентаре или хранится на базе, становится доступна постройка: <MapObjectName id=|Shrine Lantern|/>."
   },
   "Blueprint_SingleShotRifle_2": {
     "localized_name": "Чертеж Однозарядная винтовка 1",
@@ -1815,6 +1939,10 @@
     "localized_name": "Чертеж пистолета-пулемета 4",
     "description": "Открывает доступ к рецепту предмета [Пистолет-пулемет (Legendary)]. Для создания требуется [WeaponFactory Dirty 02]."
   },
+  "Blueprint_WallTorch02": {
+    "localized_name": "Чертеж величественного настенного факела",
+    "description": "Если предмет находится в инвентаре или хранится на базе, становится доступна постройка: <MapObjectName id=|WallTorch02|/>."
+  },
   "Blueprint_WeakerBow_2": {
     "localized_name": "Чертеж старого лука 1",
     "description": "Открывает доступ к рецепту предмета [Старый лук (Uncommon)]. Для создания требуется [Примитивный верстак]."
@@ -1831,280 +1959,500 @@
     "localized_name": "Чертеж старого лука 4",
     "description": "Открывает доступ к рецепту предмета [Старый лук (Legendary)]. Для создания требуется [Примитивный верстак]."
   },
+  "Blueprint_Wire_Fence": {
+    "localized_name": "Чертеж забора из колючей проволоки",
+    "description": "Если предмет находится в инвентаре или хранится на базе, становится доступна постройка: <MapObjectName id=|Wire Fence|/>."
+  },
+  "Blueprint_WoodenBarricade": {
+    "localized_name": "Чертеж деревянного заграждения",
+    "description": "Если предмет находится в инвентаре или хранится на базе, становится доступна постройка: <MapObjectName id=|WoodenBarricade|/>."
+  },
+  "Blueprint_YakushimaArmor001": {
+    "localized_name": "Чертеж Освящённого нагрудника",
+    "description": "[Коллаборация с Terraria] Открывает доступ к рецепту предмета [PalSummon YakushimaArmor001]. Для создания требуется [Factory Hard 02]."
+  },
+  "Blueprint_YakushimaArmor001_2": {
+    "localized_name": "Чертеж Освящённого нагрудника 1",
+    "description": "[Коллаборация с Terraria] Открывает доступ к рецепту предмета [Освящённый нагрудник (Uncommon)]. Для создания требуется [Factory Hard 02]."
+  },
+  "Blueprint_YakushimaArmor001_3": {
+    "localized_name": "Чертеж Освящённого нагрудника 2",
+    "description": "[Коллаборация с Terraria] Открывает доступ к рецепту предмета [Освящённый нагрудник (Rare)]. Для создания требуется [Factory Hard 02]."
+  },
+  "Blueprint_YakushimaArmor001_4": {
+    "localized_name": "Чертеж Освящённого нагрудника 3",
+    "description": "[Коллаборация с Terraria] Открывает доступ к рецепту предмета [Освящённый нагрудник (Epic)]. Для создания требуется [Factory Hard 02]."
+  },
+  "Blueprint_YakushimaArmor001_5": {
+    "localized_name": "Чертеж Освящённого нагрудника 4",
+    "description": "[Коллаборация с Terraria] Открывает доступ к рецепту предмета [Освящённый нагрудник (Legendary)]. Для создания требуется [Factory Hard 02]."
+  },
+  "Blueprint_YakushimaBlade002": {
+    "localized_name": "Чертеж Терра-клинка",
+    "description": "[Коллаборация с Terraria] Открывает доступ к рецепту предмета [Терра-клинок]. Для создания требуется [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_YakushimaBlade002_2": {
+    "localized_name": "Чертеж Терра-клинка 1",
+    "description": "[Коллаборация с Terraria] Открывает доступ к рецепту предмета [Терра-клинок (Uncommon)]. Для создания требуется [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_YakushimaBlade002_3": {
+    "localized_name": "Чертеж Терра-клинка 2",
+    "description": "[Коллаборация с Terraria] Открывает доступ к рецепту предмета [Терра-клинок (Rare)]. Для создания требуется [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_YakushimaBlade002_4": {
+    "localized_name": "Чертеж Терра-клинка 3",
+    "description": "[Коллаборация с Terraria] Открывает доступ к рецепту предмета [Терра-клинок (Epic)]. Для создания требуется [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_YakushimaBlade002_5": {
+    "localized_name": "Чертеж Терра-клинка 4",
+    "description": "[Коллаборация с Terraria] Открывает доступ к рецепту предмета [Терра-клинок (Legendary)]. Для создания требуется [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_YakushimaBlade003": {
+    "localized_name": "Чертеж Террапризмы",
+    "description": "[Коллаборация с Terraria] Открывает доступ к рецепту предмета [Террапризма]. Для создания требуется [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_YakushimaBlade003_2": {
+    "localized_name": "Чертеж Террапризмы 1",
+    "description": "[Коллаборация с Terraria] Открывает доступ к рецепту предмета [Террапризма (Uncommon)]. Для создания требуется [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_YakushimaBlade003_3": {
+    "localized_name": "Чертеж Террапризмы 2",
+    "description": "[Коллаборация с Terraria] Открывает доступ к рецепту предмета [Террапризма (Rare)]. Для создания требуется [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_YakushimaBlade003_4": {
+    "localized_name": "Чертеж Террапризмы 3",
+    "description": "[Коллаборация с Terraria] Открывает доступ к рецепту предмета [Террапризма (Epic)]. Для создания требуется [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_YakushimaBlade003_5": {
+    "localized_name": "Чертеж Террапризмы 4",
+    "description": "[Коллаборация с Terraria] Открывает доступ к рецепту предмета [Террапризма (Legendary)]. Для создания требуется [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_YakushimaBlade004": {
+    "localized_name": "Чертеж Экскалибура",
+    "description": "[Коллаборация с Terraria] Открывает доступ к рецепту предмета [Экскалибур]. Для создания требуется [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_YakushimaBlade004_2": {
+    "localized_name": "Чертеж Экскалибура 1",
+    "description": "[Коллаборация с Terraria] Открывает доступ к рецепту предмета [Экскалибур (Uncommon)]. Для создания требуется [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_YakushimaBlade004_3": {
+    "localized_name": "Чертеж Экскалибура 2",
+    "description": "[Коллаборация с Terraria] Открывает доступ к рецепту предмета [Экскалибур (Rare)]. Для создания требуется [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_YakushimaBlade004_4": {
+    "localized_name": "Чертеж Экскалибура 3",
+    "description": "[Коллаборация с Terraria] Открывает доступ к рецепту предмета [Экскалибур (Epic)]. Для создания требуется [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_YakushimaBlade004_5": {
+    "localized_name": "Чертеж Экскалибура 4",
+    "description": "[Коллаборация с Terraria] Открывает доступ к рецепту предмета [Экскалибур (Legendary)]. Для создания требуется [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_YakushimaGun001": {
+    "localized_name": "Чертеж Вихревой загонщик",
+    "description": "[Коллаборация с Terraria] Открывает доступ к рецепту предмета [Вихревой загонщик]. Для создания требуется [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_YakushimaGun001_2": {
+    "localized_name": "Чертеж Вихревой загонщик 1",
+    "description": "[Коллаборация с Terraria] Открывает доступ к рецепту предмета [Вихревой загонщик (Uncommon)]. Для создания требуется [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_YakushimaGun001_3": {
+    "localized_name": "Чертеж Вихревой загонщик 2",
+    "description": "[Коллаборация с Terraria] Открывает доступ к рецепту предмета [Вихревой загонщик (Rare)]. Для создания требуется [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_YakushimaGun001_4": {
+    "localized_name": "Чертеж Вихревой загонщик 3",
+    "description": "[Коллаборация с Terraria] Открывает доступ к рецепту предмета [Вихревой загонщик (Epic)]. Для создания требуется [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_YakushimaGun001_5": {
+    "localized_name": "Чертеж Вихревой загонщик 4",
+    "description": "[Коллаборация с Terraria] Открывает доступ к рецепту предмета [Вихревой загонщик (Legendary)]. Для создания требуется [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_YakushimaHeadEquip001": {
+    "localized_name": "Чертеж Освещённой маски",
+    "description": "[Коллаборация с Terraria] Открывает доступ к рецепту предмета [PalSummon YakushimaHeadEquip001]. Для создания требуется [Factory Hard 02]."
+  },
+  "Blueprint_YakushimaHeadEquip001_2": {
+    "localized_name": "Чертеж Освещённой маски 1",
+    "description": "[Коллаборация с Terraria] Открывает доступ к рецепту предмета [Освещённая маска (Uncommon)]. Для создания требуется [Factory Hard 02]."
+  },
+  "Blueprint_YakushimaHeadEquip001_3": {
+    "localized_name": "Чертеж Освещённой маски 2",
+    "description": "[Коллаборация с Terraria] Открывает доступ к рецепту предмета [Освещённая маска (Rare)]. Для создания требуется [Factory Hard 02]."
+  },
+  "Blueprint_YakushimaHeadEquip001_4": {
+    "localized_name": "Чертеж Освещённой маски 3",
+    "description": "[Коллаборация с Terraria] Открывает доступ к рецепту предмета [Освещённая маска (Epic)]. Для создания требуется [Factory Hard 02]."
+  },
+  "Blueprint_YakushimaHeadEquip001_5": {
+    "localized_name": "Чертеж Освещённой маски 4",
+    "description": "[Коллаборация с Terraria] Открывает доступ к рецепту предмета [Освещённая маска (Legendary)]. Для создания требуется [Factory Hard 02]."
+  },
+  "Blueprint_YakushimaHeadEquip002": {
+    "localized_name": "Чертеж Освящённого наголовника",
+    "description": "[Коллаборация с Terraria] Открывает доступ к рецепту предмета [PalSummon YakushimaHeadEquip002]. Для создания требуется [Factory Hard 02]."
+  },
+  "Blueprint_YakushimaHeadEquip002_2": {
+    "localized_name": "Чертеж Освящённого наголовника 1",
+    "description": "[Коллаборация с Terraria] Открывает доступ к рецепту предмета [Освящённый наголовник (Uncommon)]. Для создания требуется [Factory Hard 02]."
+  },
+  "Blueprint_YakushimaHeadEquip002_3": {
+    "localized_name": "Чертеж Освящённого наголовника 2",
+    "description": "[Коллаборация с Terraria] Открывает доступ к рецепту предмета [Освящённый наголовник (Rare)]. Для создания требуется [Factory Hard 02]."
+  },
+  "Blueprint_YakushimaHeadEquip002_4": {
+    "localized_name": "Чертеж Освящённого наголовника 3",
+    "description": "[Коллаборация с Terraria] Открывает доступ к рецепту предмета [Освящённый наголовник (Epic)]. Для создания требуется [Factory Hard 02]."
+  },
+  "Blueprint_YakushimaHeadEquip002_5": {
+    "localized_name": "Чертеж Освящённого наголовника 4",
+    "description": "[Коллаборация с Terraria] Открывает доступ к рецепту предмета [Освящённый наголовник (Legendary)]. Для создания требуется [Factory Hard 02]."
+  },
+  "Blueprint_YakushimaHeadEquip003": {
+    "localized_name": "Чертеж Освящённого шлема",
+    "description": "[Коллаборация с Terraria] Открывает доступ к рецепту предмета [PalSummon YakushimaHeadEquip003]. Для создания требуется [Factory Hard 02]."
+  },
+  "Blueprint_YakushimaHeadEquip003_2": {
+    "localized_name": "Чертеж Освящённого шлема 1",
+    "description": "[Коллаборация с Terraria] Открывает доступ к рецепту предмета [Освящённый шлем (Uncommon)]. Для создания требуется [Factory Hard 02]."
+  },
+  "Blueprint_YakushimaHeadEquip003_3": {
+    "localized_name": "Чертеж Освящённого шлема 2",
+    "description": "[Коллаборация с Terraria] Открывает доступ к рецепту предмета [Освящённый шлем (Rare)]. Для создания требуется [Factory Hard 02]."
+  },
+  "Blueprint_YakushimaHeadEquip003_4": {
+    "localized_name": "Чертеж Освящённого шлема 3",
+    "description": "[Коллаборация с Terraria] Открывает доступ к рецепту предмета [Освящённый шлем (Epic)]. Для создания требуется [Factory Hard 02]."
+  },
+  "Blueprint_YakushimaHeadEquip003_5": {
+    "localized_name": "Чертеж Освящённого шлема 4",
+    "description": "[Коллаборация с Terraria] Открывает доступ к рецепту предмета [Освящённый шлем (Legendary)]. Для создания требуется [Factory Hard 02]."
+  },
+  "Blueprint_YakushimaHeadEquip004": {
+    "localized_name": "Чертеж Освящённого капюшона",
+    "description": "[Коллаборация с Terraria] Открывает доступ к рецепту предмета [PalSummon YakushimaHeadEquip004]. Для создания требуется [Factory Hard 02]."
+  },
+  "Blueprint_YakushimaHeadEquip004_2": {
+    "localized_name": "Чертеж Освящённого капюшона 1",
+    "description": "[Коллаборация с Terraria] Открывает доступ к рецепту предмета [Освящённый капюшон (Uncommon)]. Для создания требуется [Factory Hard 02]."
+  },
+  "Blueprint_YakushimaHeadEquip004_3": {
+    "localized_name": "Чертеж Освящённого капюшона 2",
+    "description": "[Коллаборация с Terraria] Открывает доступ к рецепту предмета [Освящённый капюшон (Rare)]. Для создания требуется [Factory Hard 02]."
+  },
+  "Blueprint_YakushimaHeadEquip004_4": {
+    "localized_name": "Чертеж Освящённого капюшона 3",
+    "description": "[Коллаборация с Terraria] Открывает доступ к рецепту предмета [Освящённый капюшон (Epic)]. Для создания требуется [Factory Hard 02]."
+  },
+  "Blueprint_YakushimaHeadEquip004_5": {
+    "localized_name": "Чертеж Освящённого капюшона 4",
+    "description": "[Коллаборация с Terraria] Открывает доступ к рецепту предмета [Освящённый капюшон (Legendary)]. Для создания требуется [Factory Hard 02]."
+  },
+  "Blueprint_YakushimaLantern001": {
+    "localized_name": "Чертеж Ночного сияния",
+    "description": "[Коллаборация с Terraria] Открывает доступ к рецепту предмета [Ночное сияние]. Для создания требуется [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_YakushimaLantern001_2": {
+    "localized_name": "Чертеж Ночного сияния 1",
+    "description": "[Коллаборация с Terraria] Открывает доступ к рецепту предмета [Ночное сияние (Uncommon)]. Для создания требуется [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_YakushimaLantern001_3": {
+    "localized_name": "Чертеж Ночного сияния 2",
+    "description": "[Коллаборация с Terraria] Открывает доступ к рецепту предмета [Ночное сияние (Rare)]. Для создания требуется [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_YakushimaLantern001_4": {
+    "localized_name": "Чертеж Ночного сияния 3",
+    "description": "[Коллаборация с Terraria] Открывает доступ к рецепту предмета [Ночное сияние (Epic)]. Для создания требуется [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_YakushimaLantern001_5": {
+    "localized_name": "Чертеж Ночного сияния 4",
+    "description": "[Коллаборация с Terraria] Открывает доступ к рецепту предмета [Ночное сияние (Legendary)]. Для создания требуется [WeaponFactory Dirty 02]."
+  },
   "Bone": {
     "localized_name": "Кость",
     "description": "Кость Пала. Хороший источник кальция."
   },
   "BossDefeatReward_AmaterasuWolf_Dark": {
-    "localized_name": "Доказательство убийства: Кицун Нокт",
-    "description": "Доказательство убийства Кицуна Нокт по прозвищу Дух-хранитель черного пламени. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Кицун Нокт",
+    "description": "Медаль за победу над Кицуна Нокт, прозванной Дух-хранитель черного пламени. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_Anubis": {
-    "localized_name": "Доказательство убийства: Анубис",
-    "description": "Доказательство убийства Анубиса по прозвищу Хранитель темного солнца. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Анубис",
+    "description": "Медаль за победу над Анубиса, прозванной Хранитель темного солнца . Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_BadCatgirl": {
-    "localized_name": "Доказательство убийства: Няфия",
-    "description": "Доказательство убийства Няфии по прозвищу Охотник ночных теней. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Няфия",
+    "description": "Медаль за победу над Няфии, прозванной Охотник ночных теней. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_BerryGoat_Dark": {
-    "localized_name": "Доказательство убийства: Каприти Нокт",
-    "description": "Доказательство убийства Каприти Нокта по прозвищу Темный сад. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Каприти Нокт",
+    "description": "Медаль за победу над Каприти Нокта, прозванной Тёмный сад. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_BlackMetalDragon": {
-    "localized_name": "Доказательство убийства: Астегон",
-    "description": "Доказательство убийства Астегона по прозвищу Хранитель темного солнца. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Астегон",
+    "description": "Медаль за победу над Астегона, прозванной Хранитель темного солнца. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_BlackPuppy": {
-    "localized_name": "Доказательство убийства: Смоки",
-    "description": "Доказательство убийства Смоки по прозвищу Маленький черный храбрец. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Смоки",
+    "description": "Медаль за победу над Смоки, прозванной Маленький черный храбрец. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_BlueDragon": {
-    "localized_name": "Доказательство убийства: Азуроб",
-    "description": "Доказательство убийства Азуроба по прозвищу Озерная королева. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Азуроб",
+    "description": "Медаль за победу над Азуроба, прозванной Озерная королева. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_BlueThunderHorse": {
-    "localized_name": "Доказательство убийства: Азурмейн",
-    "description": "Доказательство убийства Азурмейна по прозвищу Быстроногий скакун небесного грома. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Азурмейн",
+    "description": "Медаль за победу над Азурмейна, прозванной Быстроногий скакун небесного грома. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_BlueberryFairy": {
-    "localized_name": "Доказательство убийства: Прунелия",
-    "description": "Доказательство убийства Прунелии по прозвищу Прислужница цвета индиго. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Прунелия",
+    "description": "Медаль за победу над Прунелии, прозванной Прислужница цвета индиго. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_CaptainPenguin": {
-    "localized_name": "Доказательство убийства: Пенкинг",
-    "description": "Доказательство убийства Пенкинга по прозвищу Покоритель льдов. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Пенкинг",
+    "description": "Медаль за победу над Пенкинга, прозванной Покоритель льдов. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_CatMage": {
-    "localized_name": "Доказательство убийства: Катресс",
-    "description": "Доказательство убийства Катресса по прозвищу Темный кот-маг. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Катресс",
+    "description": "Медаль за победу над Катресса, прозванной Темный кот-маг. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_CatVampire": {
-    "localized_name": "Доказательство убийства: Фелбэт",
-    "description": "Доказательство убийства Фелбэта по прозвищу Сумеречный вампир. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Фелбэт",
+    "description": "Медаль за победу над Фелбэта, прозванной Сумеречный вампир. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_DarkScorpion": {
-    "localized_name": "Доказательство убийства: Менастинг",
-    "description": "Доказательство убийства Менастинга по прозвищу Всепронзающее копье. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Менастинг",
+    "description": "Медаль за победу над Менастинга, прозванной Всепронзающее копье. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_DarkScorpion_Ground": {
-    "localized_name": "Доказательство убийства: Менастинг Терра",
-    "description": "Доказательство убийства Менастинга Терра по прозвищу Копье, пронзающее золото. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Менастинг Терра",
+    "description": "Медаль за победу над Менастинга Терра, прозванной Копье, пронзающее золото. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_FairyDragon": {
-    "localized_name": "Доказательство убийства: Элфидран",
-    "description": "Доказательство убийства Элфидрана по прозвищу Добродушный небесный дракон. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Элфидран",
+    "description": "Медаль за победу над Элфидрана, прозванной Добродушный небесный дракон. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_FengyunDeeper": {
-    "localized_name": "Доказательство убийства: Фенглоп",
-    "description": "Доказательство убийства Фенглопа по прозвищу Дрейфующее облако. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Фенглоп",
+    "description": "Медаль за победу над Фенглопа, прозванной Дрейфующее облако. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_FengyunDeeper_Electric": {
-    "localized_name": "Доказательство убийства: Фенглоп Лакс",
-    "description": "Доказательство убийства Фенглопа Лакс по прозвищу Шальная молния. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Фенглоп Лакс",
+    "description": "Медаль за победу над Фенглопа Лакс, прозванной Шальная молния. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_FlowerDinosaur_Electric": {
-    "localized_name": "Доказательство убийства: Диноссум Лакс",
-    "description": "Доказательство убийства Диноссума Лакс по прозвищу Дракон-хранитель молнии. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Диноссум Лакс",
+    "description": "Медаль за победу над Диноссума Лакс, прозванной Дракон-хранитель молнии. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_FlowerDoll": {
-    "localized_name": "Доказательство убийства: Петаллия",
-    "description": "Доказательство убийства Петаллии по прозвищу Леди цветочного сада. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Петаллия",
+    "description": "Медаль за победу над Петаллии, прозванной Леди цветочного сада. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_GhostRabbit": {
-    "localized_name": "Доказательство убийства: Найтмери",
-    "description": "Доказательство убийства Найтмери по прозвищу Темный заяц душ. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Найтмери",
+    "description": "Медаль за победу над Найтмери, прозванной Тёмный заяц душ. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_GoldenHorse": {
-    "localized_name": "Доказательство убийства: Гилдейн",
-    "description": "Доказательство убийства Гилдейна по прозвищу Предзакатный зверь-хранитель. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Гилдейн",
+    "description": "Медаль за победу над Гилдейна, прозванной Предзакатный зверь-хранитель. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_GrassMammoth": {
-    "localized_name": "Доказательство убийства: Мамморест",
-    "description": "Доказательство убийства Маммореста по прозвищу Неистовые бивни. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Мамморест",
+    "description": "Медаль за победу над Маммореста, прозванной Неистовые бивни. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_GrassPanda_Electric": {
-    "localized_name": "Доказательство убийства: Моссанда Лакс",
-    "description": "Доказательство убийства Моссанды Лакс по прозвищу Ушибленный молнией безумец. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Моссанда Лакс",
+    "description": "Медаль за победу над Моссанды Лакс, прозванной Ушибленный молнией безумец. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_GrassRabbitMan": {
-    "localized_name": "Доказательство убийства: Вердаш",
-    "description": "Доказательство убийства Вердаша по прозвищу Вихрь, несущийся по лесу. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Вердаш",
+    "description": "Медаль за победу над Вердаша, прозванной Вихрь, несущийся по лесу. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_GrimGirl": {
-    "localized_name": "Доказательство убийства: Сплаттерина",
-    "description": "Доказательство убийства Сплаттерины по прозвищу Кровавый расчленитель. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Сплаттерина",
+    "description": "Медаль за победу над Сплаттерины, прозванной Кровавый расчленитель. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_HawkBird": {
-    "localized_name": "Доказательство убийства: Найтвинг",
-    "description": "Доказательство убийства Найтвинга по прозвищу Крылья, рассекающие небо. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Найтвинг",
+    "description": "Медаль за победу над Найтвинга, прозванной Крылья, рассекающие небо. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_HerculesBeetle": {
-    "localized_name": "Доказательство убийства: Ворсект",
-    "description": "Доказательство убийства Ворсекта по прозвищу Боец-броненосец. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Ворсект",
+    "description": "Медаль за победу над Ворсекта, прозванной Боец-броненосец. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_HerculesBeetle_Ground": {
-    "localized_name": "Доказательство убийства: Ворсект Терра",
-    "description": "Доказательство убийства Ворсекта Терра по прозвищу Боец в золотых доспехах. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Ворсект Терра",
+    "description": "Медаль за победу над Ворсекта Терра, прозванной Боец в золотых доспехах. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_Horus_Water": {
-    "localized_name": "Доказательство убийства: Фалерис Аква",
-    "description": "Доказательство убийства Фалериса Аква по прозвищу Властелин небес и морей. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Фалерис Аква",
+    "description": "Медаль за победу над Фалериса Аква, прозванной Властелин небес и морей. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_IceHorse": {
-    "localized_name": "Доказательство убийства: Фросталлион",
-    "description": "Доказательство убийства Фросталлиона по прозвищу Легендарный ледяной Пегас. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Фросталлион",
+    "description": "Медаль за победу над Фросталлиона, прозванной Легендарный ледяной Пегас. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_IceHorse_Dark": {
-    "localized_name": "Доказательство убийства: Фросталлион Нокт",
-    "description": "Доказательство убийства Фросталлиона Нокт по прозвищу Легендарный темный Пегас. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Фросталлион Нокт",
+    "description": "Медаль за победу над Фросталлиона Нокт, прозванной Легендарный темный Пегас. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
+  },
+  "BossDefeatReward_IceNarwhal": {
+    "localized_name": "Медаль за победу над Валаской",
+    "description": "Медаль за победу над Валаской, прозванной Добродушное ледяное копьё. При наличии навсегда повышает характеристики находящихся с вами Палов."
+  },
+  "BossDefeatReward_IceNarwhal_Fire": {
+    "localized_name": "Медаль за победу над Валаска Игнис",
+    "description": "Медаль за победу над Валаской Игнис, прозванной Добродушное красное копьё. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_JetDragon": {
-    "localized_name": "Доказательство убийства: Джетрагон",
-    "description": "Доказательство убийства Джетрагона по прозвищу Легендарный метеоритный дракон. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Джетрагон",
+    "description": "Медаль за победу над Джетрагона, прозванной Легендарный метеоритный дракон. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_KingAlpaca": {
-    "localized_name": "Доказательство убийства: Кингпака",
-    "description": "Доказательство убийства Кингпаки по прозвищу Вожак Мохнатая шуба. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Кингпака",
+    "description": "Медаль за победу над Кингпаки, прозванной Вожак Мохнатая шуба. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_KingAlpaca_Ice": {
-    "localized_name": "Доказательство убийства: Кингпака Крист",
-    "description": "Доказательство убийства Кингпаки Крист по прозвищу Вожак Синяя шуба. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Кингпака Крист",
+    "description": "Медаль за победу над Кингпаки Крист, прозванной Вожак Синяя шуба. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_KingBahamut": {
-    "localized_name": "Доказательство убийства: Блазамут",
-    "description": "Доказательство убийства Блазамута по прозвищу Деспот Чистилища. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Блазамут",
+    "description": "Медаль за победу над Блазамута, прозванной Деспот Чистилища. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_Kirin": {
-    "localized_name": "Доказательство убийства: Юнивольт",
-    "description": "Доказательство убийства Юнивольта по прозвищу Стремительный вихрь. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Юнивольт",
+    "description": "Медаль за победу над Юнивольта, прозванной Стремительный вихрь. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_Kitsunebi_Ice": {
-    "localized_name": "Доказательство убийства: Фокспаркс Крист",
-    "description": "Доказательство убийства Фокспаркса Крист по прозвищу Ледяной цветок. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Фокспаркс Крист",
+    "description": "Медаль за победу над Фокспаркса Крист, прозванной Ледяной цветок. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_LazyCatfish": {
-    "localized_name": "Доказательство убийства: Думад",
-    "description": "Доказательство убийства Думада по прозвищу Начну с понедельника. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Думад",
+    "description": "Медаль за победу над Думада, прозванной Начну с понедельника. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_LazyDragon_Electric": {
-    "localized_name": "Доказательство убийства: Релаксаурус Лакс",
-    "description": "Доказательство убийства Релаксауруса Лакс по прозвищу Громовой дракон-обжора. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Релаксаурус Лакс",
+    "description": "Медаль за победу над Релаксауруса Лакс, прозванной Громовой дракон-обжора. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_LilyQueen_Dark": {
-    "localized_name": "Доказательство убийства: Лилин Нокт",
-    "description": "Доказательство убийства Лилин Нокт по прозвищу Императрица Бездны. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Лилин Нокт",
+    "description": "Медаль за победу над Лилин Нокт, прозванной Императрица Бездны. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_MopKing": {
-    "localized_name": "Доказательство убийства: Свипа",
-    "description": "Доказательство убийства Свипа по прозвищу Король загадочных лохматиков. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Свипа",
+    "description": "Медаль за победу над Свипа, прозванной Король загадочных лохматиков. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_Mutant": {
-    "localized_name": "Доказательство убийства: Лунарис",
-    "description": "Доказательство убийства Лунариса по прозвищу Пришелец из космоса. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Лунарис",
+    "description": "Медаль за победу над Лунариса , прозванной Пришелец из космоса. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_MysteryMask": {
-    "localized_name": "Доказательство убийства: Омаскул",
-    "description": "Доказательство убийства Омаскула по прозвищу Столикий апостол. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Омаскул",
+    "description": "Медаль за победу над Омаскула, прозванной Столикий апостол. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_NaughtyCat": {
-    "localized_name": "Доказательство убийства: Гринтэйл",
-    "description": "Доказательство убийства Гринтэйла по прозвищу Пончик. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Гринтэйл",
+    "description": "Медаль за победу над Гринтэйла, прозванной Пончик. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_NightBlueHorse": {
-    "localized_name": "Доказательство убийства: Старрион",
-    "description": "Доказательство убийства Старриона по прозвищу Лазурная грива. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Старрион",
+    "description": "Медаль за победу над Старриона, прозванной Лазурная грива. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_PinkRabbit_Grass": {
-    "localized_name": "Доказательство убийства: Риббани Ботан",
-    "description": "Доказательство убийства Риббани Ботана по прозвищу Сияющая улыбка. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Риббани Ботан",
+    "description": "Медаль за победу над Риббани Ботана, прозванной Сияющая улыбка. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_PlantSlime": {
-    "localized_name": "Доказательство убийства: Гумосс",
-    "description": "Доказательство убийства Гумосса по прозвищу Неожиданная мутация. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Гумосс",
+    "description": "Медаль за победу над Гумосса, прозванной Неожиданная мутация. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
+  },
+  "BossDefeatReward_PoseidonOrca": {
+    "localized_name": "Медаль за победу над Нептилус",
+    "description": "Медаль за победу над легендарным морским чудовищем Нептиосом. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_PurpleSpider": {
-    "localized_name": "Доказательство убийства: Тарантрисс",
-    "description": "Доказательство убийства Тарантрисса по прозвищу Хитроумный прядильщик. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Тарантрисс",
+    "description": "Медаль за победу над Тарантрисса, прозванной Хитроумный прядильщик. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_QueenBee": {
-    "localized_name": "Доказательство убийства: Элизаби",
-    "description": "Доказательство убийства Элизаби по прозвищу Королева улья. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Элизаби",
+    "description": "Медаль за победу над Элизаби, прозванной Королева улья. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_RaijinDaughter_Water": {
-    "localized_name": "Доказательство убийства: Даззи Нокт",
-    "description": "Доказательство убийства Даззи Нокта по прозвищу Дитя черного облака. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Даззи Нокт",
+    "description": "Медаль за победу над Даззи Нокта, прозванной Дитя черного облака. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_Ronin": {
-    "localized_name": "Доказательство убийства: Буси",
-    "description": "Доказательство убийства Буси по прозвищу Странствующий воин. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Буси",
+    "description": "Медаль за победу над Буси, прозванной Странствующий воин. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_SaintCentaur": {
-    "localized_name": "Доказательство убийства: Паладиус",
-    "description": "Доказательство убийства Двух рыцарей. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Паладиус",
+    "description": "Медаль за победу над Двух рыцарей. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_SakuraSaurus": {
-    "localized_name": "Доказательство убийства: Брончерри",
-    "description": "Доказательство убийства Брончерри по прозвищу Ветер, вестник весны. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Брончерри",
+    "description": "Медаль за победу над Брончерри, прозванной Ветер, вестник весны. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_SakuraSaurus_Water": {
-    "localized_name": "Доказательство убийства: Брончерри Аква",
-    "description": "Доказательство убийства Брончерри Аква по прозвищу Прибой, вестник лета. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Брончерри Аква",
+    "description": "Медаль за победу над Брончерри Аква, прозванной Прибой, вестник лета. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_SkyDragon": {
-    "localized_name": "Доказательство убийства: Фэски",
-    "description": "Доказательство убийства Фэски по прозвищу Белоснежный странник небес. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Фэски",
+    "description": "Медаль за победу над Фэски, прозванной Белоснежный странник небес. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_Suzaku": {
-    "localized_name": "Доказательство убийства: Судзаку",
-    "description": "Доказательство убийства Судзаку по прозвищу Хозяин небес. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Судзаку",
+    "description": "Медаль за победу над Судзаку, прозванной Хозяин небес. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_ThunderBird": {
-    "localized_name": "Доказательство убийства: Райберд",
-    "description": "Доказательство убийства Райберда по прозвищу Грозовые крылья. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Райберд",
+    "description": "Медаль за победу над Райберда, прозванной Грозовые крылья. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_Umihebi": {
-    "localized_name": "Доказательство убийства: Йормунтайд",
-    "description": "Доказательство убийства Йормунтайда по прозвищу Властелин морей. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Йормунтайд",
+    "description": "Медаль за победу над Йормунтайда, прозванной Властелин морей. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_VioletFairy": {
-    "localized_name": "Доказательство убийства: Ваэлет",
-    "description": "Доказательство убийства Ваэлета по прозвищу Фиалковый морок. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Ваэлет",
+    "description": "Медаль за победу над Ваэлета, прозванной Фиалковый морок. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_WeaselDragon": {
-    "localized_name": "Доказательство убийства: Чиллет",
-    "description": "Доказательство убийства Чиллета по прозвищу Танцор равнин. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Чиллет",
+    "description": "Медаль за победу над Чиллета, прозванной Танцор равнин.. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_Werewolf_Ice": {
-    "localized_name": "Доказательство убийства: Лупмун Крист",
-    "description": "Доказательство убийства Лупмуна Крист по прозвищу Сияние ледяной Луны. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Лупмун Крист",
+    "description": "Медаль за победу над Лупмуна Крист, прозванной Сияние ледяной Луны. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_WhiteDeer": {
-    "localized_name": "Доказательство убийства: Селесдир",
-    "description": "Доказательство убийства Селесдира по прозвищу Зверь-спаситель. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Селесдир",
+    "description": "Медаль за победу над Селесдира, прозванной Зверь-спаситель. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_WhiteMoth": {
-    "localized_name": "Доказательство убийства: Сибеликс",
-    "description": "Доказательство убийства Сибеликса по прозвищу Белоснежная леди. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Сибеликс",
+    "description": "Медаль за победу над Сибеликса, прозванной Белоснежная леди. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_WhiteShieldDragon": {
-    "localized_name": "Доказательство убийства: Силвегис",
-    "description": "Доказательство убийства Силвегиса по прозвищу Стальной дракон-хранитель. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Силвегис",
+    "description": "Медаль за победу над Силвегиса, прозванной Стальной дракон-хранитель. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_WhiteTiger_Ground": {
-    "localized_name": "Доказательство убийства: Криолинкс Терра",
-    "description": "Доказательство убийства Криолинкса Терра по прозвищу Хищник земли. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Криолинкс Терра",
+    "description": "Медаль за победу над Криолинкса Терра, прозванной Хищник земли. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_WingGolem": {
-    "localized_name": "Доказательство убийства: Теранайт",
-    "description": "Доказательство убийства Теранайта по прозвищу Огромный ходячий доспех. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Теранайт",
+    "description": "Медаль за победу над Теранайта, прозванной Огромный ходячий доспех. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_Yeti_Grass": {
-    "localized_name": "Доказательство убийства: Вумпо Ботан",
-    "description": "Доказательство убийства Вумпо Ботана по прозвищу Гигант из южных краев. При наличии перманентно увеличивает характеристики текущих Палов."
+    "localized_name": "Медаль за победу над Вумпо Ботан",
+    "description": "Медаль за победу над Вумпо Ботана, прозванной Гигант из южных краев. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BountyProof_1": {
-    "localized_name": "Доказательство убийства цели охоты",
+    "localized_name": "Доказательство ликвидации",
     "description": "Доказательство убийства разыскиваемой цели. Отдайте его вигилантам в городах и поселениях, чтобы получить награду."
   },
   "BowGun": {
@@ -2184,8 +2532,8 @@
     "description": "Улучшенный лук, способный выпускать одновременно 3 стрелы. Благодаря его чудесным свойствам для выстрела требуется всего одна Стрела."
   },
   "Cake": {
-    "localized_name": "Пирожное",
-    "description": "Праздничное блюдо. Поместите его в сундук на пастбище, и полакомившийся им Пал получит заряд бодрости и отложит яйцо."
+    "localized_name": "Торт",
+    "description": "Праздничное угощение. Когда его кладут в сундук на племенной ферме, Пал восстанавливает силы и готовится к размножению, откладывая яйцо."
   },
   "CarbonFiber": {
     "localized_name": "Углеродное волокно",
@@ -2216,24 +2564,28 @@
     "description": "Образуется при сжигании древесины. Соединив Древесный уголь и Сера, можно получить Порох."
   },
   "ChargeLaserRifle": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Зарядная винтовка",
+    "description": "Высокотехнологичная зарядная лучевая винтовка. Накопив энергию, выпускает мощный выстрел."
+  },
+  "ChargeLaserRifleBullet": {
+    "localized_name": "Патрон для зарядной винтовки",
+    "description": "Снаряд для оружия: Зарядная винтовка."
   },
   "ChargeLaserRifle_2": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Зарядная винтовка",
+    "description": "Высокотехнологичная зарядная лучевая винтовка. Накопив энергию, выпускает мощный выстрел."
   },
   "ChargeLaserRifle_3": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Зарядная винтовка",
+    "description": "Высокотехнологичная зарядная лучевая винтовка. Накопив энергию, выпускает мощный выстрел."
   },
   "ChargeLaserRifle_4": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Зарядная винтовка",
+    "description": "Высокотехнологичная зарядная лучевая винтовка. Накопив энергию, выпускает мощный выстрел."
   },
   "ChargeLaserRifle_5": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Зарядная винтовка",
+    "description": "Высокотехнологичная зарядная лучевая винтовка. Накопив энергию, выпускает мощный выстрел."
   },
   "CheeseBurger": {
     "localized_name": "Чизбургер",
@@ -2536,7 +2888,7 @@
     "description": "Оружие ближнего боя, бьющее электрическим током при ударе. Пораженных током Палов становится проще поймать."
   },
   "ElectricOrgan": {
-    "localized_name": "Электротворный орган",
+    "localized_name": "Электрический орган",
     "description": "Материал, добываемый из Палов (Молния). Заряжен электричеством, требует осторожности в обращении."
   },
   "Elixir_attack_01": {
@@ -2554,6 +2906,10 @@
   "Elixir_hp_02": {
     "localized_name": "Чудесное снадобье жизненной силы",
     "description": "Ценное снадобье, навсегда увеличивающее характеристику [Здоровье]. Не действует на Палов."
+  },
+  "Elixir_hp_Yakushima": {
+    "localized_name": "Кристалл жизни",
+    "description": "[Коллаборация с Terraria] При использовании навсегда немного увеличивает характеристику «Здоровье». Не действует на Палов и если значение характеристики уже достигло максимума."
   },
   "Elixir_stamina_01": {
     "localized_name": "Тайное снадобье энергии",
@@ -2604,24 +2960,28 @@
     "description": "Выпускает мощные энергетические снаряды. При попадании снаряды вызывают взрыв энергии."
   },
   "EnergyShotgun": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Энергетическое ружье",
+    "description": "Стреляющее энергетическими патронами ружье. Способно долго вести непрерывную стрельбу, на близкой дистанции обладает огромной убойной силой."
+  },
+  "EnergyShotgunBullet": {
+    "localized_name": "Патрон для энергетического ружья",
+    "description": "Снаряд для оружия: Энергетическое ружье."
   },
   "EnergyShotgun_2": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Энергетическое ружье",
+    "description": "Стреляющее энергетическими патронами ружье. Способно долго вести непрерывную стрельбу, на близкой дистанции обладает огромной убойной силой."
   },
   "EnergyShotgun_3": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Энергетическое ружье",
+    "description": "Стреляющее энергетическими патронами ружье. Способно долго вести непрерывную стрельбу, на близкой дистанции обладает огромной убойной силой."
   },
   "EnergyShotgun_4": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Энергетическое ружье",
+    "description": "Стреляющее энергетическими патронами ружье. Способно долго вести непрерывную стрельбу, на близкой дистанции обладает огромной убойной силой."
   },
   "EnergyShotgun_5": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Энергетическое ружье",
+    "description": "Стреляющее энергетическими патронами ружье. Способно долго вести непрерывную стрельбу, на близкой дистанции обладает огромной убойной силой."
   },
   "ExpBoost_01": {
     "localized_name": "Том обучения (малый)",
@@ -2656,8 +3016,68 @@
     "description": "Древесное волокно. Используется как материал для изготовления луков."
   },
   "FireOrgan": {
-    "localized_name": "Пламетворный орган",
+    "localized_name": "Огненный орган",
     "description": "Материал, добываемый из Палов (Огонь). Из него изготавливаются такие предметы, как Arrow Fire."
+  },
+  "FishingBait_1": {
+    "localized_name": "Простая приманка",
+    "description": "Простая рыболовная приманка для привлечения Палов. Требуется для рыбалки."
+  },
+  "FishingBait_1_A": {
+    "localized_name": "Приманка для начинающих",
+    "description": "Приманка для привлечения Палов. Усовершенствована по сравнению с FishingBait 1 и замедляет снижение шкалы поимки в мини-игре."
+  },
+  "FishingBait_1_B": {
+    "localized_name": "Сладкая приманка",
+    "description": "Приманка для привлечения Палов. Усовершенствована по сравнению с FishingBait 1. Палы клюют на неё охотнее."
+  },
+  "FishingBait_2": {
+    "localized_name": "Качественная приманка",
+    "description": "Рыболовная приманка для привлечения Палов. С этой улучшенной приманкой Палы лучше клюют на наживку."
+  },
+  "FishingBait_2_A": {
+    "localized_name": "Удачливая приманка",
+    "description": "Приманка для привлечения Палов. Усовершенствована по сравнению с FishingBait 2. Позволяет получать больше предметов во время рыбалки."
+  },
+  "FishingBait_2_B": {
+    "localized_name": "Быстрая приманка",
+    "description": "Приманка для привлечения Палов. Усовершенствована по сравнению с FishingBait 2. Палы клюют на неё охотнее."
+  },
+  "FishingBait_3": {
+    "localized_name": "Роскошная приманка",
+    "description": "Рыболовная приманка для привлечения Палов. С этой улучшенной приманкой индикатор в мини-игре становится немного больше."
+  },
+  "FishingBait_3_A": {
+    "localized_name": "Заманчивая приманка",
+    "description": "Приманка для привлечения Палов. С этой улучшенной приманкой в мини-игре индикатор становится больше, а количество получаемых трофеев увеличивается."
+  },
+  "FishingBait_3_B": {
+    "localized_name": "Рискованная приманка",
+    "description": "Приманка для привлечения Палов. Улучшенная версия FishingBait 3 для искателей острых ощущений. Во время мини-игры шкала поимки становится меньше, но награда за рыбалку значительно увеличивается."
+  },
+  "FishingRod_01_1": {
+    "localized_name": "Базовая удочка (Чиллет)",
+    "description": "Удочка для ловли Палов. Чтобы начать рыбалку, возьмите приманку и используйте удочку у воды, где виднеется рыба. Предназначена для начинающих, с ее помощью можно поймать Палов низкого уровня."
+  },
+  "FishingRod_01_2": {
+    "localized_name": "Базовая удочка (Гумосс)",
+    "description": "Удочка для ловли Палов. Более прочная, чем FishingRod 01 1, и немного лучше по характеристикам. Предназначена для начинающих, с ее помощью можно поймать Палов низкого уровня."
+  },
+  "FishingRod_02_1": {
+    "localized_name": "Средняя удочка (Каттива)",
+    "description": "Удочка для ловли Палов. Чтобы начать рыбалку, возьмите приманку и используйте удочку у воды, где виднеется рыба. Обладает улучшенными характеристиками, с ее помощью рыбачить несколько проще."
+  },
+  "FishingRod_02_2": {
+    "localized_name": "Средняя удочка (Кроадзиро)",
+    "description": "Удочка для ловли Палов. Более прочная, чем FishingRod 02 1, и немного лучше по характеристикам."
+  },
+  "FishingRod_03_1": {
+    "localized_name": "Продвинутая удочка (Пенгуллет)",
+    "description": "Удочка для ловли Палов. Чтобы начать рыбалку, возьмите приманку и используйте удочку у воды, где виднеется рыба. Обладает улучшенными характеристиками, с ее помощью рыбачить намного проще."
+  },
+  "FishingRod_03_2": {
+    "localized_name": "Продвинутая удочка (Депрессо)",
+    "description": "Удочка для ловли Палов. Более прочная, чем FishingRod 03 1, и немного лучше по характеристикам."
   },
   "FishingRod_Good": {
     "localized_name": "ru Text",
@@ -2761,15 +3181,15 @@
   },
   "Fruit__defense_01": {
     "localized_name": "Плод стойкости",
-    "description": "Ценный и невероятно редкий плод. Немного повышает [Защиту] Пала."
+    "description": "Ценный и невероятно редкий плод. Немного повышает Защиту Пала."
   },
   "Fruit_attack_01": {
     "localized_name": "Плод силы",
-    "description": "Ценный и невероятно редкий плод. Немного повышает [Атаку] Пала."
+    "description": "Ценный и невероятно редкий плод. Немного повышает Атаку Пала."
   },
   "Fruit_hp_01": {
     "localized_name": "Плод жизни",
-    "description": "Ценный и невероятно редкий плод. Немного повышает [ОЗ] Пала."
+    "description": "Ценный и невероятно редкий плод. Немного повышает ОЗ Пала."
   },
   "FurArmor": {
     "localized_name": "Меховая броня",
@@ -2952,8 +3372,8 @@
     "description": "Пистолет-гарпун для быстрого перемещения. Выпускает крюк и подтягивает к нему владельца. Эта модель обладает потрясающей маневренностью."
   },
   "GrapplingGun5": {
-    "localized_name": "Пистолет-гарпун",
-    "description": "Пистолет-гарпун для быстрого перемещения. Выпускает крюк и подтягивает к нему владельца. Помогает передвигаться в зонах с крутым рельефом."
+    "localized_name": "Ультрапистолет-гарпун",
+    "description": "Пистолет-гарпун для быстрого перемещения. Выпускает крюк и подтягивает к нему владельца. Использование новых материалов позволило сократить время теплоизлучения."
   },
   "Gratin": {
     "localized_name": "Гратен",
@@ -3537,7 +3957,7 @@
   },
   "Herbs": {
     "localized_name": "Медикаменты низкого качества",
-    "description": "Медикаменты низкого качества для лечения простуды и суставов. Не восстанавливает здоровье даже при поедании."
+    "description": "Медикаменты низкого качества для лечения следующих состояний: Простуда, Вывих, Обжора. Не восстанавливает здоровье даже при поедании."
   },
   "Homeward": {
     "localized_name": "Грозовое облако возврата",
@@ -3548,7 +3968,7 @@
     "description": "Пусковая установка для стрельбы сферами. Выпущенные сферы преследуют Палов."
   },
   "Honey": {
-    "localized_name": "Мед",
+    "localized_name": "Мёд",
     "description": "Мед, добываемый из Пала Бигард. Сладкий и вкусный."
   },
   "Hop": {
@@ -3572,7 +3992,7 @@
     "description": "Стало еще вкуснее в подогретом виде. На удивление часто вызывает вздутие живота."
   },
   "IceOrgan": {
-    "localized_name": "Морозотворный орган",
+    "localized_name": "Ледяной орган",
     "description": "Материал, добываемый из Палов (Лед). Из него изготавливаются такие предметы, как Trap MineFreeze."
   },
   "InkBullet": {
@@ -3667,13 +4087,25 @@
     "localized_name": "Хлеб с вареньем",
     "description": "Хлеб с вареньем. Сладость ягод отлично дополняет вкус хлеба."
   },
+  "JellyfishFairy_jelly": {
+    "localized_name": "Студенистое желе Джелиэтты",
+    "description": "Причудливый десерт, для приготовления которого используется Meat JellyfishFairy и Телесная жидкость Пала. На некоторое время немного увеличивает количество получаемого опыта. Атака +10%"
+  },
+  "JellyfishGhost_jelly": {
+    "localized_name": "Качающееся желе Джелроя",
+    "description": "Причудливый десерт, для приготовления которого используется Meat JellyfishGhost и Красная ягода. На некоторое время немного увеличивает количество получаемого опыта. Защита +10%"
+  },
   "Katana": {
     "localized_name": "Катана",
     "description": "Катана для боя на ближней дистанции. Острое лезвие рассекает цели пополам."
   },
   "Lantern": {
     "localized_name": "Поясной фонарь",
-    "description": "Фонарь для ношения на поясе. Автоматически включается, когда наступает ночь. Одного такого фонаря вполне достаточно."
+    "description": "Фонарь для ношения на поясе. Автоматически включается, когда наступает ночь. Можно изменить режим, чтобы он светил постоянно. Одного такого фонаря вполне достаточно."
+  },
+  "Lantern_High": {
+    "localized_name": "Улучшенный поясной фонарь",
+    "description": "Фонарь для ношения на поясе, освещающий широкую область. Автоматически включается, когда наступает ночь. Можно изменить режим, чтобы он светил постоянно. Одного такого фонаря вполне достаточно."
   },
   "LaserBullet": {
     "localized_name": "Энергетический картридж",
@@ -3919,6 +4351,14 @@
     "localized_name": "Ветхий пистолет-пулемет",
     "description": "Самодельный пистолет-пулемет, собранный из подручного хлама. Обладает хорошей скорострельностью, но мощность выстрела невысока."
   },
+  "ManganeseIngot": {
+    "localized_name": "Кораллиновый слиток",
+    "description": "Сплав, в состав которого входят: Кораллиновая руда, Металлический слиток, Уголь. Обладает высокой энергопрочностью, используется для изготовления оружия и других изделий."
+  },
+  "ManganeseOre": {
+    "localized_name": "Кораллиновая руда",
+    "description": "Редкая руда, долго формировавшаяся в морских глубинах. Можно выловить в глубоком море с помощью магнита и удочки."
+  },
   "MarinatedMushrooms": {
     "localized_name": "Маринованные грибы",
     "description": "Пропитанные маринадом Гриб. В течение некоторого времени после еды Защита +10%."
@@ -3975,9 +4415,21 @@
     "localized_name": "Мясо Маммореста",
     "description": "Мясо Пала Мамморест. Отличается мощным, ни с чем не сравнимым вкусом. Куски громадного размера удовлетворят даже самого жадного едока."
   },
+  "Meat_IceCrocodile": {
+    "localized_name": "Крокодилье мясо Манчилла",
+    "description": "Мясо Манчилл. Плотное, с приятной жёсткостью, с каждым укусом раскрывается глубокий и насыщенный вкус."
+  },
   "Meat_IceDeer": {
     "localized_name": "Мясо Рейндрикса",
     "description": "Мясо Пала Рейндрикс. Удивительное оленье мясо, всегда сохраняющее низкую температуру. Хранится невероятно долго."
+  },
+  "Meat_JellyfishFairy": {
+    "localized_name": "Зонтик медузы Джелиэтты",
+    "description": "Зонтик Джелиэтта. Уникальная хрустящая текстура, от которой невозможно отказаться — настоящий морской деликатес."
+  },
+  "Meat_JellyfishGhost": {
+    "localized_name": "Зонтик медузы Джелроя",
+    "description": "Зонтик Джелрой. Уникальная плотная и упругая текстура, от которой невозможно отказаться — настоящий морской деликатес."
   },
   "Meat_Kelpie": {
     "localized_name": "Мясо Келпси",
@@ -3986,6 +4438,10 @@
   "Meat_LazyCatfish": {
     "localized_name": "Мясо Думада",
     "description": "Мясо Пала Думад. Покрыто слоем жира, обладает насыщенным вкусом. Одно из его достоинств — характерная воздушная текстура."
+  },
+  "Meat_OctopusGirl": {
+    "localized_name": "Щупальце Глуппи",
+    "description": "Щупальце Пала Глуппи. Отличается упругой текстурой и легким утонченным вкусом."
   },
   "Meat_SakuraSaurus": {
     "localized_name": "Мясо Брончерри",
@@ -4099,6 +4555,10 @@
     "localized_name": "ru Text",
     "description": "ru Text"
   },
+  "OctopusGirl_Takoyaki": {
+    "localized_name": "Такояки из Глуппи",
+    "description": "Жареные шарики из теста на основе Пшеничная мука, с начинкой из Meat OctopusGirl. После употребления на некоторое время немного увеличивает получаемый опыт."
+  },
   "OldRevolver": {
     "localized_name": "Старый револьвер",
     "description": "Немного потрепанная винтовка с вращающимся барабаном. При сравнении Handgun default проигрывает ей в мощности выстрела."
@@ -4135,25 +4595,173 @@
     "localized_name": "Подозрительный сок",
     "description": "Улучшающий настроение сок. На некоторое время после употребления немного повышает скорость работы, но незначительно снижает показатель рассудка."
   },
+  "Otomo_Attack_up1": {
+    "localized_name": "Свисток наступательной поддержки",
+    "description": "Аксессуар, немного усиливающий силу атаки Палов, сражающихся вместе с вами."
+  },
+  "Otomo_Attack_up2": {
+    "localized_name": "Свисток наступательной поддержки +1",
+    "description": "Аксессуар, усиливающий силу атаки Палов, сражающихся вместе с вами."
+  },
+  "Otomo_Attack_up3": {
+    "localized_name": "Свисток наступательной поддержки +2",
+    "description": "Аксессуар, заметно усиливающий силу атаки Палов, сражающихся вместе с вами."
+  },
+  "Otomo_Defense_up1": {
+    "localized_name": "Свисток защитной поддержки",
+    "description": "Аксессуар, немного усиливающий защиту Палов, сражающихся вместе с вами."
+  },
+  "Otomo_Defense_up2": {
+    "localized_name": "Свисток защитной поддержки +1",
+    "description": "Аксессуар, усиливающий защиту Палов, сражающихся вместе с вами."
+  },
+  "Otomo_Defense_up3": {
+    "localized_name": "Свисток защитной поддержки +2",
+    "description": "Аксессуар, заметно усиливающий защиту Палов, сражающихся вместе с вами."
+  },
+  "Otomo_ElementBoost_Dark_1": {
+    "localized_name": "Свисток тёмной поддержки",
+    "description": "Аксессуар, немного усиливающий тёмный урон Палов, сражающихся вместе с вами."
+  },
+  "Otomo_ElementBoost_Dark_2": {
+    "localized_name": "Свисток тёмной поддержки +1",
+    "description": "Аксессуар, усиливающий тёмный урон Палов, сражающихся вместе с вами."
+  },
+  "Otomo_ElementBoost_Dark_3": {
+    "localized_name": "Свисток тёмной поддержки +2",
+    "description": "Аксессуар, заметно усиливающий тёмный урон Палов, сражающихся вместе с вами."
+  },
+  "Otomo_ElementBoost_Dragon_1": {
+    "localized_name": "Свисток драконической поддержки",
+    "description": "Аксессуар, немного усиливающий драконический урон Палов, сражающихся вместе с вами."
+  },
+  "Otomo_ElementBoost_Dragon_2": {
+    "localized_name": "Свисток драконической поддержки +1",
+    "description": "Аксессуар, усиливающий драконический урон Палов, сражающихся вместе с вами."
+  },
+  "Otomo_ElementBoost_Dragon_3": {
+    "localized_name": "Свисток драконической поддержки +2",
+    "description": "Аксессуар, заметно усиливающий драконический урон Палов, сражающихся вместе с вами."
+  },
+  "Otomo_ElementBoost_Earth_1": {
+    "localized_name": "Свисток земной поддержки",
+    "description": "Аксессуар, немного усиливающий земной урон Палов, сражающихся вместе с вами."
+  },
+  "Otomo_ElementBoost_Earth_2": {
+    "localized_name": "Свисток земной поддержки +1",
+    "description": "Аксессуар, усиливающий земной урон Палов, сражающихся вместе с вами."
+  },
+  "Otomo_ElementBoost_Earth_3": {
+    "localized_name": "Свисток земной поддержки +2",
+    "description": "Аксессуар, заметно усиливающий земной урон Палов, сражающихся вместе с вами."
+  },
+  "Otomo_ElementBoost_Electricity_1": {
+    "localized_name": "Свисток грозовой поддержки",
+    "description": "Аксессуар, немного усиливающий грозовой урон Палов, сражающихся вместе с вами."
+  },
+  "Otomo_ElementBoost_Electricity_2": {
+    "localized_name": "Свисток грозовой поддержки +1",
+    "description": "Аксессуар, усиливающий грозовой урон Палов, сражающихся вместе с вами."
+  },
+  "Otomo_ElementBoost_Electricity_3": {
+    "localized_name": "Свисток грозовой поддержки +2",
+    "description": "Аксессуар, заметно усиливающий грозовой урон Палов, сражающихся вместе с вами."
+  },
+  "Otomo_ElementBoost_Fire_1": {
+    "localized_name": "Свисток огненной поддержки",
+    "description": "Аксессуар, немного усиливающий огненный урон Палов, сражающихся вместе с вами."
+  },
+  "Otomo_ElementBoost_Fire_2": {
+    "localized_name": "Свисток огненной поддержки +1",
+    "description": "Аксессуар, усиливающий огненный урон Палов, сражающихся вместе с вами."
+  },
+  "Otomo_ElementBoost_Fire_3": {
+    "localized_name": "Свисток огненной поддержки +2",
+    "description": "Аксессуар, заметно усиливающий огненный урон Палов, сражающихся вместе с вами."
+  },
+  "Otomo_ElementBoost_Ice_1": {
+    "localized_name": "Свисток ледяной поддержки",
+    "description": "Аксессуар, немного усиливающий ледяной урон Палов, сражающихся вместе с вами."
+  },
+  "Otomo_ElementBoost_Ice_2": {
+    "localized_name": "Свисток ледяной поддержки +1",
+    "description": "Аксессуар, усиливающий ледяной урон Палов, сражающихся вместе с вами."
+  },
+  "Otomo_ElementBoost_Ice_3": {
+    "localized_name": "Свисток ледяной поддержки +2",
+    "description": "Аксессуар, заметно усиливающий ледяной урон Палов, сражающихся вместе с вами."
+  },
+  "Otomo_ElementBoost_Leaf_1": {
+    "localized_name": "Свисток природной поддержки",
+    "description": "Аксессуар, немного усиливающий травяной урон Палов, сражающихся вместе с вами."
+  },
+  "Otomo_ElementBoost_Leaf_2": {
+    "localized_name": "Свисток природной поддержки +1",
+    "description": "Аксессуар, усиливающий травяной урон Палов, сражающихся вместе с вами."
+  },
+  "Otomo_ElementBoost_Leaf_3": {
+    "localized_name": "Свисток природной поддержки +2",
+    "description": "Аксессуар, заметно усиливающий травяной урон Палов, сражающихся вместе с вами."
+  },
+  "Otomo_ElementBoost_Normal_1": {
+    "localized_name": "Свисток нейтральной поддержки",
+    "description": "Аксессуар, немного усиливающий нейтральный урон Палов, сражающихся вместе с вами."
+  },
+  "Otomo_ElementBoost_Normal_2": {
+    "localized_name": "Свисток нейтральной поддержки +1",
+    "description": "Аксессуар, усиливающий нейтральный урон Палов, сражающихся вместе с вами."
+  },
+  "Otomo_ElementBoost_Normal_3": {
+    "localized_name": "Свисток нейтральной поддержки +2",
+    "description": "Аксессуар, заметно усиливающий нейтральный урон Палов, сражающихся вместе с вами."
+  },
+  "Otomo_ElementBoost_Water_1": {
+    "localized_name": "Свисток водной поддержки",
+    "description": "Аксессуар, немного усиливающий водный урон Палов, сражающихся вместе с вами."
+  },
+  "Otomo_ElementBoost_Water_2": {
+    "localized_name": "Свисток водной поддержки +1",
+    "description": "Аксессуар, усиливающий водный урон Палов, сражающихся вместе с вами."
+  },
+  "Otomo_ElementBoost_Water_3": {
+    "localized_name": "Свисток водной поддержки +2",
+    "description": "Аксессуар, заметно усиливающий водный урон Палов, сражающихся вместе с вами."
+  },
+  "Otomo_PalExp_Increase_1": {
+    "localized_name": "Колокольчик ускорения роста",
+    "description": "Аксессуар, немного увеличивающий опыт, получаемый сражающимися вместе с вами Палами."
+  },
+  "Otomo_PalExp_Increase_2": {
+    "localized_name": "Колокольчик ускорения роста +1",
+    "description": "Аксессуар, увеличивающий опыт, получаемый сражающимися вместе с вами Палами."
+  },
+  "Otomo_PalExp_Increase_3": {
+    "localized_name": "Колокольчик ускорения роста +2",
+    "description": "Аксессуар, заметно увеличивающий опыт, получаемый сражающимися вместе с вами Палами."
+  },
   "OverheatRifle": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Перегревающаяся винтовка",
+    "description": "Штурмовая винтовка, способная стрелять без перезарядки. Однако при непрерывной стрельбе происходит перегрев, из-за чего появляется большая пауза — будьте осторожны."
+  },
+  "OverheatRifleBullet": {
+    "localized_name": "Патрон для перегревающейся винтовки",
+    "description": "Снаряд для оружия: Перегревающаяся винтовка."
   },
   "OverheatRifle_2": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Перегревающаяся винтовка",
+    "description": "Штурмовая винтовка, способная стрелять без перезарядки. Однако при непрерывной стрельбе происходит перегрев, из-за чего появляется большая пауза — будьте осторожны."
   },
   "OverheatRifle_3": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Перегревающаяся винтовка",
+    "description": "Штурмовая винтовка, способная стрелять без перезарядки. Однако при непрерывной стрельбе происходит перегрев, из-за чего появляется большая пауза — будьте осторожны."
   },
   "OverheatRifle_4": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Перегревающаяся винтовка",
+    "description": "Штурмовая винтовка, способная стрелять без перезарядки. Однако при непрерывной стрельбе происходит перегрев, из-за чего появляется большая пауза — будьте осторожны."
   },
   "OverheatRifle_5": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Перегревающаяся винтовка",
+    "description": "Штурмовая винтовка, способная стрелять без перезарядки. Однако при непрерывной стрельбе происходит перегрев, из-за чего появляется большая пауза — будьте осторожны."
   },
   "PalCrystal_Ex": {
     "localized_name": "Деталь древней цивилизации",
@@ -4164,16 +4772,20 @@
     "description": "Можно получить с некоторых сильных Палов с атрибутом Тьма. Используется для изготовления мощных аксессуаров и других предметов."
   },
   "PalDopingShot": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Бустерная пушка",
+    "description": "Если выстрелить в союзного Пала, его атака и защита временно усилятся. Если выстрелить во врага — он получит урон."
+  },
+  "PalDopingShotBullet": {
+    "localized_name": "Патрон для бустерной пушки",
+    "description": "Снаряд для оружия: Бустерная пушка."
   },
   "PalDopingShot_2": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Мегабустерная пушка",
+    "description": "При выстреле в союзного Пала усиливаются его атака и защита, при выстреле во врага наносится урон. Благодаря улучшениям увеличена сила и продолжительность усиления, а также урон по врагам."
   },
   "PalDopingShot_3": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Бустерная пушка",
+    "description": "Если выстрелить в союзного Пала, его атака и защита временно усилятся. Если выстрелить во врага — он получит урон."
   },
   "PalEgg_Dark_01": {
     "localized_name": "Яйцо тьмы",
@@ -4216,23 +4828,23 @@
     "description": "PalEgg Dragon 05. Внутри чувствуется энергичное движение величественной души. Кажется, на свет появится удивительное существо. Для вылупления детеныша поместите яйцо в Инкубатор."
   },
   "PalEgg_Earth_01": {
-    "localized_name": "Грубое яйцо",
+    "localized_name": "Яйцо земли",
     "description": "PalEgg Earth 01. Внутри чувствуется спокойное шевеление. Для вылупления детеныша поместите яйцо в Инкубатор."
   },
   "PalEgg_Earth_02": {
-    "localized_name": "Грубое яйцо",
+    "localized_name": "Яйцо земли",
     "description": "PalEgg Earth 02. Внутри чувствуется спокойное шевеление. Для вылупления детеныша поместите яйцо в Инкубатор."
   },
   "PalEgg_Earth_03": {
-    "localized_name": "Большое грубое яйцо",
+    "localized_name": "Большое яйцо земли",
     "description": "PalEgg Earth 03. Внутри чувствуется пронизанная невозмутимостью пульсация. Для вылупления детеныша поместите яйцо в Инкубатор."
   },
   "PalEgg_Earth_04": {
-    "localized_name": "Большое грубое яйцо",
+    "localized_name": "Большое яйцо земли",
     "description": "PalEgg Earth 04. Внутри чувствуется пронизанная невозмутимостью пульсация. Для вылупления детеныша поместите яйцо в Инкубатор."
   },
   "PalEgg_Earth_05": {
-    "localized_name": "Огромное грубое яйцо",
+    "localized_name": "Огромное яйцо земли",
     "description": "PalEgg Earth 05. Внутри чувствуется энергичное движение души земли. Кажется, на свет появится удивительное существо. Для вылупления детеныша поместите яйцо в Инкубатор."
   },
   "PalEgg_Electricity_01": {
@@ -4276,23 +4888,23 @@
     "description": "PalEgg Fire 05. Внутри чувствуется энергичное движение пылающей души. Кажется, на свет появится удивительное существо. Для вылупления детеныша поместите яйцо в Инкубатор."
   },
   "PalEgg_Ice_01": {
-    "localized_name": "Заледеневшее яйцо",
+    "localized_name": "Яйцо льда",
     "description": "PalEgg Ice 01. Внутри чувствуется отдающее холодом шевеление. Для вылупления детеныша поместите яйцо в Инкубатор."
   },
   "PalEgg_Ice_02": {
-    "localized_name": "Заледеневшее яйцо",
+    "localized_name": "Яйцо льда",
     "description": "PalEgg Ice 02. Внутри чувствуется отдающее холодом шевеление. Для вылупления детеныша поместите яйцо в Инкубатор."
   },
   "PalEgg_Ice_03": {
-    "localized_name": "Большое заледеневшее яйцо",
+    "localized_name": "Большое яйцо льда",
     "description": "PalEgg Ice 03. Внутри чувствуется веющая холодным бесстрастием пульсация. Для вылупления детеныша поместите яйцо в Инкубатор."
   },
   "PalEgg_Ice_04": {
-    "localized_name": "Большое заледеневшее яйцо",
+    "localized_name": "Большое яйцо льда",
     "description": "PalEgg Ice 04. Внутри чувствуется веющая холодным бесстрастием пульсация. Для вылупления детеныша поместите яйцо в Инкубатор."
   },
   "PalEgg_Ice_05": {
-    "localized_name": "Огромное заледеневшее яйцо",
+    "localized_name": "Огромное яйцо льда",
     "description": "PalEgg Ice 05. Внутри чувствуется энергичное движение ледяной души. Кажется, на свет появится удивительное существо. Для вылупления детеныша поместите яйцо в Инкубатор."
   },
   "PalEgg_Leaf_01": {
@@ -4336,32 +4948,36 @@
     "description": "PalEgg Normal 05. Внутри чувствуется энергичное движение милосердной души. Кажется, на свет появится удивительное существо. Для вылупления детеныша поместите яйцо в Инкубатор."
   },
   "PalEgg_Water_01": {
-    "localized_name": "Влажное яйцо",
+    "localized_name": "Яйцо воды",
     "description": "PalEgg Water 01. Внутри чувствуется пронизанное чистотой шевеление. Для вылупления детеныша поместите яйцо в Инкубатор."
   },
   "PalEgg_Water_02": {
-    "localized_name": "Влажное яйцо",
+    "localized_name": "Яйцо воды",
     "description": "PalEgg Water 02. Внутри чувствуется пронизанное чистотой шевеление. Для вылупления детеныша поместите яйцо в Инкубатор."
   },
   "PalEgg_Water_03": {
-    "localized_name": "Большое влажное яйцо",
+    "localized_name": "Большое яйцо воды",
     "description": "PalEgg Water 03. Внутри чувствуется веющая бескорыстием пульсация. Для вылупления детеныша поместите яйцо в Инкубатор."
   },
   "PalEgg_Water_04": {
-    "localized_name": "Большое влажное яйцо",
+    "localized_name": "Большое яйцо воды",
     "description": "PalEgg Water 04. Внутри чувствуется веющая бескорыстием пульсация. Для вылупления детеныша поместите яйцо в Инкубатор."
   },
   "PalEgg_Water_05": {
-    "localized_name": "Огромное влажное яйцо",
+    "localized_name": "Огромное яйцо воды",
     "description": "PalEgg Water 05. Внутри чувствуется энергичное движение чистой души. Кажется, на свет появится удивительное существо. Для вылупления детеныша поместите яйцо в Инкубатор."
   },
   "PalFluid": {
     "localized_name": "Телесная жидкость Пала",
     "description": "Жидкость, добываемая из Палов. Ценится за свою вязкую текстуру."
   },
+  "PalGenderReverse": {
+    "localized_name": "Реверсер Палов",
+    "description": "Удивительное снадобье, способное изменить пол Пала. Используется на Операционный стол для Палов."
+  },
   "PalHealingGrenade": {
-    "localized_name": "ru Text",
-    "description": "ru Text"
+    "localized_name": "Исцеляющая граната для Палов",
+    "description": "Осколочная граната с эффектом исцеления. Взрывается при попадании, восстанавливая HP союзных Палов."
   },
   "PalItem_CaptainPenguin": {
     "localized_name": "Хохолок Пенкинга",
@@ -4422,6 +5038,114 @@
   "PalOil": {
     "localized_name": "Качественное масло Пала",
     "description": "Качественное масло, получаемое из Палов. Используется для создания: Полимер."
+  },
+  "PalPassiveSkillChange_CoolTimeReduction_Up_1": {
+    "localized_name": "Имплант: Спокойствие",
+    "description": "Имплант, вживляемый в тело Палов. Изменяет пассивный навык. Используйте Операционный стол для Палов, чтобы выбрать соответствующий навык."
+  },
+  "PalPassiveSkillChange_CoolTimeReduction_Up_2": {
+    "localized_name": "Имплант: Импульсивный",
+    "description": "Имплант, вживляемый в тело Палов. Изменяет пассивный навык. Используйте Операционный стол для Палов, чтобы выбрать соответствующий навык."
+  },
+  "PalPassiveSkillChange_CraftSpeed_up1": {
+    "localized_name": "Имплант: Старательный",
+    "description": "Имплант, вживляемый в тело Палов. Изменяет пассивный навык. Используйте Операционный стол для Палов, чтобы выбрать соответствующий навык."
+  },
+  "PalPassiveSkillChange_CraftSpeed_up2": {
+    "localized_name": "Имплант: Мастеровитый",
+    "description": "Имплант, вживляемый в тело Палов. Изменяет пассивный навык. Используйте Операционный стол для Палов, чтобы выбрать соответствующий навык."
+  },
+  "PalPassiveSkillChange_CraftSpeed_up3": {
+    "localized_name": "Имплант: Мастер на все руки",
+    "description": "Имплант, вживляемый в тело Палов. Изменяет пассивный навык. Используйте Операционный стол для Палов, чтобы выбрать соответствующий навык."
+  },
+  "PalPassiveSkillChange_Deffence_up1": {
+    "localized_name": "Имплант: Толстокожий",
+    "description": "Имплант, вживляемый в тело Палов. Изменяет пассивный навык. Используйте Операционный стол для Палов, чтобы выбрать соответствующий навык."
+  },
+  "PalPassiveSkillChange_Deffence_up2": {
+    "localized_name": "Имплант: Здоровяк",
+    "description": "Имплант, вживляемый в тело Палов. Изменяет пассивный навык. Используйте Операционный стол для Палов, чтобы выбрать соответствующий навык."
+  },
+  "PalPassiveSkillChange_Deffence_up3": {
+    "localized_name": "Имплант: Алмазное тело",
+    "description": "Имплант, вживляемый в тело Палов. Изменяет пассивный навык. Используйте Операционный стол для Палов, чтобы выбрать соответствующий навык."
+  },
+  "PalPassiveSkillChange_HatchingSpeed_Up": {
+    "localized_name": "Имплант: Филантроп",
+    "description": "Имплант, вживляемый в тело Палов. Изменяет пассивный навык. Используйте Операционный стол для Палов, чтобы выбрать соответствующий навык."
+  },
+  "PalPassiveSkillChange_MoveSpeed_up_1": {
+    "localized_name": "Имплант: Бойкий",
+    "description": "Имплант, вживляемый в тело Палов. Изменяет пассивный навык. Используйте Операционный стол для Палов, чтобы выбрать соответствующий навык."
+  },
+  "PalPassiveSkillChange_MoveSpeed_up_2": {
+    "localized_name": "Имплант: Умелый бегун",
+    "description": "Имплант, вживляемый в тело Палов. Изменяет пассивный навык. Используйте Операционный стол для Палов, чтобы выбрать соответствующий навык."
+  },
+  "PalPassiveSkillChange_MoveSpeed_up_3": {
+    "localized_name": "Имплант: Спринтер",
+    "description": "Имплант, вживляемый в тело Палов. Изменяет пассивный навык. Используйте Операционный стол для Палов, чтобы выбрать соответствующий навык."
+  },
+  "PalPassiveSkillChange_Nocturnal": {
+    "localized_name": "Имплант: Ночной образ жизни",
+    "description": "Имплант, вживляемый в тело Палов. Изменяет пассивный навык. Используйте Операционный стол для Палов, чтобы выбрать соответствующий навык."
+  },
+  "PalPassiveSkillChange_NonKilling": {
+    "localized_name": "Имплант: Сдерживание силы",
+    "description": "Имплант, вживляемый в тело Палов. Изменяет пассивный навык. Используйте Операционный стол для Палов, чтобы выбрать соответствующий навык."
+  },
+  "PalPassiveSkillChange_Noukin": {
+    "localized_name": "Имплант: Мистер мускул",
+    "description": "Имплант, вживляемый в тело Палов. Изменяет пассивный навык. Используйте Операционный стол для Палов, чтобы выбрать соответствующий навык."
+  },
+  "PalPassiveSkillChange_PAL_ALLAttack_up1": {
+    "localized_name": "Имплант: Отважный",
+    "description": "Имплант, вживляемый в тело Палов. Изменяет пассивный навык. Используйте Операционный стол для Палов, чтобы выбрать соответствующий навык."
+  },
+  "PalPassiveSkillChange_PAL_ALLAttack_up2": {
+    "localized_name": "Имплант: Свирепый",
+    "description": "Имплант, вживляемый в тело Палов. Изменяет пассивный навык. Используйте Операционный стол для Палов, чтобы выбрать соответствующий навык."
+  },
+  "PalPassiveSkillChange_PAL_ALLAttack_up3": {
+    "localized_name": "Имплант: Чудовище",
+    "description": "Имплант, вживляемый в тело Палов. Изменяет пассивный навык. Используйте Операционный стол для Палов, чтобы выбрать соответствующий навык."
+  },
+  "PalPassiveSkillChange_PAL_FullStomach_Down_1": {
+    "localized_name": "Имплант: Малоежка",
+    "description": "Имплант, вживляемый в тело Палов. Изменяет пассивный навык. Используйте Операционный стол для Палов, чтобы выбрать соответствующий навык."
+  },
+  "PalPassiveSkillChange_PAL_FullStomach_Down_2": {
+    "localized_name": "Имплант: Гуру диет",
+    "description": "Имплант, вживляемый в тело Палов. Изменяет пассивный навык. Используйте Операционный стол для Палов, чтобы выбрать соответствующий навык."
+  },
+  "PalPassiveSkillChange_PAL_FullStomach_Down_3": {
+    "localized_name": "Имплант: Аскет",
+    "description": "Имплант, вживляемый в тело Палов. Изменяет пассивный навык. Используйте Операционный стол для Палов, чтобы выбрать соответствующий навык."
+  },
+  "PalPassiveSkillChange_PAL_Sanity_Down_1": {
+    "localized_name": "Имплант: Оптимист",
+    "description": "Имплант, вживляемый в тело Палов. Изменяет пассивный навык. Используйте Операционный стол для Палов, чтобы выбрать соответствующий навык."
+  },
+  "PalPassiveSkillChange_PAL_Sanity_Down_2": {
+    "localized_name": "Имплант: Трудоголик",
+    "description": "Имплант, вживляемый в тело Палов. Изменяет пассивный навык. Используйте Операционный стол для Палов, чтобы выбрать соответствующий навык."
+  },
+  "PalPassiveSkillChange_PAL_Sanity_Down_3": {
+    "localized_name": "Имплант: Непреклонный дух",
+    "description": "Имплант, вживляемый в тело Палов. Изменяет пассивный навык. Используйте Операционный стол для Палов, чтобы выбрать соответствующий навык."
+  },
+  "PalPassiveSkillChange_Stamina_Up_1": {
+    "localized_name": "Имплант: Бесконечная выносливость",
+    "description": "Имплант, вживляемый в тело Палов. Изменяет пассивный навык. Используйте Операционный стол для Палов, чтобы выбрать соответствующий навык."
+  },
+  "PalPassiveSkillChange_Stamina_Up_2": {
+    "localized_name": "Имплант: Крепыш",
+    "description": "Имплант, вживляемый в тело Палов. Изменяет пассивный навык. Используйте Операционный стол для Палов, чтобы выбрать соответствующий навык."
+  },
+  "PalPassiveSkillChange_Stamina_Up_3": {
+    "localized_name": "Имплант: Вечный двигатель",
+    "description": "Имплант, вживляемый в тело Палов. Изменяет пассивный навык. Используйте Операционный стол для Палов, чтобы выбрать соответствующий навык."
   },
   "PalRevive": {
     "localized_name": "Снадобье возрождения",
@@ -4523,6 +5247,10 @@
     "localized_name": "Обломок таблички Пала Бэллануар",
     "description": "Обломок таблички с изображением Пала Бэллануар. Соедините части, чтобы создать целую табличку."
   },
+  "PalSummon_YakushimaBoss002": {
+    "localized_name": "Небесная печать",
+    "description": "[Коллаборация с Terraria] Печать с таинственными узорами. Поднесите её к Алтарь для призыва, чтобы призвать могущественное существо."
+  },
   "PalUpgradeStone": {
     "localized_name": "Маленькая душа Пала",
     "description": "Маленькая душа, оставшаяся после Пала. Есть особое место, где можно принести ее в дар - Монумент Силы. После подношения открывает скрытые способности."
@@ -4540,11 +5268,11 @@
     "description": "Душа, оставшаяся после хорошо натренированного Пала. Есть особое место, где можно принести ее в дар — Монумент Силы. После подношения открывает скрытые способности."
   },
   "Pal_crystal_L": {
-    "localized_name": "Кусок палзиума",
+    "localized_name": "Кусок палдиума",
     "description": "ru Text"
   },
   "Pal_crystal_S": {
-    "localized_name": "Осколок палзиума",
+    "localized_name": "Осколок палдиума",
     "description": "Кристаллизованная энергия Мирового Древа. Используется для создания сверхъестественных предметов и для строительства."
   },
   "Pan": {
@@ -4700,7 +5428,7 @@
     "description": "Сытная и неприхотливая к почве чудо-культура. Не подходит для употребления в пищу в сыром виде."
   },
   "PotatoChips": {
-    "localized_name": "Жареный картофель",
+    "localized_name": "Картофель фри",
     "description": "Картофель, обжаренный в масле. Стоит попробовать — и остановиться невозможно. Немного замедляет снижение рассудка на некоторое время."
   },
   "PotatoSeedPotatoes": {
@@ -4754,6 +5482,18 @@
   "Quartz": {
     "localized_name": "Чистый кварц",
     "description": "Встречающийся на Снежной горе минерал. Чистый кварц используется для создания: Электрическая плата."
+  },
+  "QuestItem_Breeder_1": {
+    "localized_name": "Любимый Пал заводчика",
+    "description": "Сфера с дорогим для заводчика Палом. Верните ее хозяину."
+  },
+  "QuestItem_Farmer_1": {
+    "localized_name": "Фирменное блюдо фермерши",
+    "description": "Фирменное блюдо, приготовленное вручную хлопотливой фермершей. Источает аппетитный аромат."
+  },
+  "QuestItem_Zoe_1": {
+    "localized_name": "Памятный лоскут ткани Зои",
+    "description": "Старая ткань с едва уловимым ароматом. Эта вещь хранит для Зои дорогие воспоминания."
   },
   "Quiche": {
     "localized_name": "Киш с грибами",
@@ -4935,6 +5675,14 @@
     "localized_name": "Салат",
     "description": "Салат, в состав которого входят Латук и Помидор. На некоторое время после еды скорость работы немного повышается."
   },
+  "Salvage_TreasureBoxKey01": {
+    "localized_name": "Рыболовный магнит",
+    "description": null
+  },
+  "Salvage_TreasureBoxKey02": {
+    "localized_name": "Мощный рыболовный магнит",
+    "description": "Мощный магнит, требующийся для сложной добычи. Его мощная сила притяжения позволяет доставать ресурсы и вещи со дна моря."
+  },
   "Sandwich": {
     "localized_name": "ru Text",
     "description": "ru Text"
@@ -4946,6 +5694,10 @@
   "SeafoodSoup": {
     "localized_name": "ru Text",
     "description": "ru Text"
+  },
+  "Seafood_Salada": {
+    "localized_name": "Салат из морепродуктов",
+    "description": "Полезный салат, для приготовления которого используются Meat OctopusGirl и Латук. На некоторое время увеличивает количество получаемого опыта."
   },
   "SemiAutoRifle": {
     "localized_name": "Полуавтоматическая винтовка",
@@ -5071,9 +5823,17 @@
     "localized_name": "Плод мастерства (вода): Пузыри",
     "description": "Используйте на Пале, чтобы он изучил навык |BubbleShot|."
   },
+  "SkillCard_ChargeCanon": {
+    "localized_name": "Плод мастерства (драконы): Заряженный выстрел",
+    "description": "Используйте на Пале, чтобы он изучил навык |ChargeCanon|."
+  },
   "SkillCard_Commet": {
     "localized_name": "Плод мастерства (дракон): Комета",
     "description": "Используйте на Пале, чтобы он изучил навык |Commet|."
+  },
+  "SkillCard_CrossWind": {
+    "localized_name": "Плод мастерства (трава): Перекрестие ветра",
+    "description": "Используйте на Пале, чтобы он изучил навык |CrossWind|."
   },
   "SkillCard_DarkArrow": {
     "localized_name": "Плод мастерства (тьма): Стрелы тьмы",
@@ -5087,6 +5847,10 @@
     "localized_name": "Плод мастерства (тьма): Темный лазер",
     "description": "Используйте на Пале, чтобы он изучил навык |DarkLaser|."
   },
+  "SkillCard_DarkLegion": {
+    "localized_name": "Плод мастерства (тьма): Темные огни",
+    "description": "Используйте на Пале, чтобы он изучил навык |DarkLegion|."
+  },
   "SkillCard_DarkPulse": {
     "localized_name": "Плод мастерства (тьма): Аура тьмы",
     "description": "Используйте на Пале, чтобы он изучил навык |DarkPulse|."
@@ -5098,6 +5862,10 @@
   "SkillCard_DiamondFall": {
     "localized_name": "Плод мастерства (лед): Алмазный водопад",
     "description": "Используйте на Пале, чтобы он изучил навык |DiamondFall|."
+  },
+  "SkillCard_DiversionLaser": {
+    "localized_name": "Плод мастерства (вода): Гидроатака под давлением",
+    "description": "Используйте на Пале, чтобы он изучил навык |DiversionLaser|."
   },
   "SkillCard_DragonBreath": {
     "localized_name": "Плод мастерства (драконы): Дыхание дракона",
@@ -5167,6 +5935,10 @@
     "localized_name": "Плод мастерства (трава): Травяной торнадо",
     "description": "Используйте на Пале, чтобы он изучил навык |GrassTornado|."
   },
+  "SkillCard_GravityShot": {
+    "localized_name": "Плод мастерства (тьма): Темный выстрел",
+    "description": "Используйте на Пале, чтобы он изучил навык |GravityShot|."
+  },
   "SkillCard_HolyBlast": {
     "localized_name": "Плод мастерства: Священный взрыв",
     "description": "Используйте на Пале, чтобы он изучил навык |HolyBlast|."
@@ -5175,9 +5947,17 @@
     "localized_name": "Плод мастерства (вода): Гидроструя",
     "description": "Используйте на Пале, чтобы он изучил навык |HydroPump|."
   },
+  "SkillCard_HydroSlicer": {
+    "localized_name": "Плод мастерства (вода): Водяной нож",
+    "description": "Используйте на Пале, чтобы он изучил навык |HydroSlicer|."
+  },
   "SkillCard_HyperBeam": {
     "localized_name": "Плод мастерства: Палобласт",
     "description": "Используйте на Пале, чтобы он изучил навык |HyperBeam|."
+  },
+  "SkillCard_IceAge": {
+    "localized_name": "Плод мастерства (лед): Морозные шипы",
+    "description": "Используйте на Пале, чтобы он изучил навык |IceAge|."
   },
   "SkillCard_IceBlade": {
     "localized_name": "Плод мастерства (лед): Ледяной кинжал",
@@ -5187,9 +5967,17 @@
     "localized_name": "Плод мастерства (лед): Ледяная ракета",
     "description": "Используйте на Пале, чтобы он изучил навык |IceMissile|."
   },
+  "SkillCard_IceWall": {
+    "localized_name": "Плод мастерства (лед): Ледяная стена",
+    "description": "Используйте на Пале, чтобы он изучил навык |IceWall|."
+  },
   "SkillCard_IcicleLine": {
     "localized_name": "Плод мастерства (лед): Полоса сосулек",
     "description": "Используйте на Пале, чтобы он изучил навык |IcicleLine|."
+  },
+  "SkillCard_IciclePierce": {
+    "localized_name": "Плод мастерства (лед): Ледяные пули",
+    "description": "Используйте на Пале, чтобы он изучил навык |IciclePierce|."
   },
   "SkillCard_IcicleThrow": {
     "localized_name": "Плод мастерства (лед): Шип бури",
@@ -5234,6 +6022,22 @@
   "SkillCard_Psychokinesis": {
     "localized_name": "Плод мастерства (тьма): Психогравитация",
     "description": "Используйте на Пале, чтобы он изучил навык |Psychokinesis|."
+  },
+  "SkillCard_RangeThunder": {
+    "localized_name": "Плод мастерства (электричество): Вездесущая гроза",
+    "description": "Используйте на Пале, чтобы он изучил навык |RangeThunder|."
+  },
+  "SkillCard_ReflectiveShuriken": {
+    "localized_name": "Плод мастерства (природа): Отражающийся лист",
+    "description": "Используйте на Пале, чтобы он изучил навык |ReflectiveShuriken|."
+  },
+  "SkillCard_RipTide": {
+    "localized_name": "Плод мастерства (вода): Наступление воды",
+    "description": "Используйте на Пале, чтобы он изучил навык |RipTide|."
+  },
+  "SkillCard_RockBeat": {
+    "localized_name": "Плод мастерства (земля): Каменный пульс",
+    "description": "Используйте на Пале, чтобы он изучил навык |RockBeat|."
   },
   "SkillCard_RockLance": {
     "localized_name": "Плод мастерства (земля): Каменные копья",
@@ -5307,6 +6111,10 @@
     "localized_name": "Плод мастерства (электричество): Грозовой дождь",
     "description": "Используйте на Пале, чтобы он изучил навык |ThunderRain|."
   },
+  "SkillCard_ThunderSpear": {
+    "localized_name": "Плод мастерства (электричество): Грозовое копье",
+    "description": "Используйте на Пале, чтобы он изучил навык |ThunderSpear|."
+  },
   "SkillCard_ThunderStorm": {
     "localized_name": "Плод мастерства (электричество): Грозовая буря",
     "description": "Используйте на Пале, чтобы он изучил навык |ThunderStorm|."
@@ -5352,8 +6160,8 @@
     "description": "Дает возможность оседлатьAmaterasuWolf DarkПала ."
   },
   "SkillUnlock_BadCatgirl": {
-    "localized_name": "Ружье для Пала Недотрога",
-    "description": "Ружье для Пала Няфия. После активации навыка спутника Няфия обстреливает врагов поблизости из ружья."
+    "localized_name": "Дробовик для Пала Няфия",
+    "description": "Дробовик для Пала Няфия. При активации навыка спутника Няфия обстреливает ближайших врагов из дробовика."
   },
   "SkillUnlock_BirdDragon": {
     "localized_name": "Седло для Пала Ванвирм",
@@ -5380,12 +6188,16 @@
     "description": "Дает возможность оседлать Пала Астегон."
   },
   "SkillUnlock_BlackPuppy": {
-    "localized_name": "Сбруя для Пала Смоки",
-    "description": "Сбруя для Пала Смоки. После активации навыка спутника Смоки использует свой острых нюх, обнаруживая Хромаит неподалеку."
+    "localized_name": "Шлейка для Пала Смоки",
+    "description": "Шлейка для Пала Смоки. При активации навыка спутника Смокииспользует своё острое чутьё, чтобы обнаружить поблизости Хромаит."
   },
   "SkillUnlock_BlueDragon": {
     "localized_name": "Седло для Пала Азуроб",
     "description": "Дает возможность оседлать Пала Азуроб."
+  },
+  "SkillUnlock_BlueDragon_Ice": {
+    "localized_name": "Седло для Пала Азуроб Крист",
+    "description": "Дает возможность оседлать Пала BlueDragon Ice."
   },
   "SkillUnlock_BlueThunderHorse": {
     "localized_name": "Седло для Пала Азурмейн",
@@ -5429,7 +6241,7 @@
   },
   "SkillUnlock_Eagle": {
     "localized_name": "Рукавицы для Пала Эрмург",
-    "description": "Перчатки, позволяющие аккуратно держать за лапы Пала Эрмург. Когда Эрмург находится под рукой, позволяет использовать его в качестве глайдера."
+    "description": "Если у вас есть этот предмет и Эрмург в команде, изменяет свойства глайдера."
   },
   "SkillUnlock_ElecLion": {
     "localized_name": "ru Text",
@@ -5485,11 +6297,23 @@
   },
   "SkillUnlock_FlyingManta": {
     "localized_name": "Рукавицы для Пала Селарай",
-    "description": "Перчатки, позволяющие аккуратно держать за лапы Пала Селарай. Когда Селарай находится под рукой, позволяет использовать его в качестве глайдера."
+    "description": "Если у вас есть этот предмет и Селарай в команде, изменяет свойства глайдера."
+  },
+  "SkillUnlock_FlyingManta_Thunder": {
+    "localized_name": "Рукавицы для Пала Селарай Лакс",
+    "description": "Если у вас есть этот предмет и FlyingManta Thunder в команде, изменяет свойства глайдера."
   },
   "SkillUnlock_Garm": {
     "localized_name": "Сбруя с седлом для Пала Дайэхаул",
     "description": "Дает возможность оседлать Пала Дайэхаул."
+  },
+  "SkillUnlock_GhostAnglerfish": {
+    "localized_name": "Седло для Пала Ганглер",
+    "description": "Дает возможность оседлать Пала Ганглер."
+  },
+  "SkillUnlock_GhostAnglerfish_Fire": {
+    "localized_name": "Седло для Пала Ганглер Игнис",
+    "description": "Дает возможность оседлать Пала GhostAnglerfish Fire."
   },
   "SkillUnlock_GhostBeast": {
     "localized_name": "Седло для Пала Мараит",
@@ -5559,6 +6383,18 @@
     "localized_name": "Седло для Пала Фросталлион Нокт",
     "description": "Дает возможность оседлать Пала IceHorse Dark."
   },
+  "SkillUnlock_IceNarwhal": {
+    "localized_name": "Седло для Пала Валаска",
+    "description": "Дает возможность оседлать Пала Валаска."
+  },
+  "SkillUnlock_IceNarwhal_Fire": {
+    "localized_name": "Седло для Пала Валаска Игнис",
+    "description": "Дает возможность оседлать Пала IceNarwhal Fire."
+  },
+  "SkillUnlock_IceSeal": {
+    "localized_name": "Сбруя для Пала Полапап",
+    "description": "Дает возможность оседлать Пала Полапап."
+  },
   "SkillUnlock_JetDragon": {
     "localized_name": "Ракетница для Пала Джетрагон",
     "description": "Дает возможность оседлать Пала Джетрагон. Пал обстреливает врагов ракетами."
@@ -5584,8 +6420,8 @@
     "description": "Дает возможность оседлать Пала Юнивольт."
   },
   "SkillUnlock_Kitsunebi": {
-    "localized_name": "Сбруя для Пала Фокспаркс",
-    "description": "Сбруя, позволяющая взять на руки Пала Фокспаркс. После активации навыка спутника Фокспаркс превращается в огнемет в руках игрока."
+    "localized_name": "Шлейка для Пала Фокспаркс",
+    "description": "Шлейка, позволяющая взять на руки Пала Фокспаркс. При активации навыка спутника Фокспаркс можно взять его на руки и атаковать как огнемётом."
   },
   "SkillUnlock_Kitsunebi_Ice": {
     "localized_name": "Сбруя для Пала Фокспаркс Крист",
@@ -5598,6 +6434,10 @@
   "SkillUnlock_LazyDragon_Electric": {
     "localized_name": "Ракетница для Пала Релаксаурус Лакс",
     "description": "Дает возможность оседлать Пала LazyDragon Electric. Пал обстреливает врагов из ракетницы."
+  },
+  "SkillUnlock_LeafMomonga": {
+    "localized_name": "Сбруя для Пала Хербил",
+    "description": "Сбруя для Пала Хербил. При наличии этого предмета Хербил использует свою целительную силу, чтобы вернуть игрока к жизни, когда тот находится при смерти."
   },
   "SkillUnlock_Manticore": {
     "localized_name": "Седло для Пала Блейзхаул",
@@ -5633,7 +6473,11 @@
   },
   "SkillUnlock_NegativeOctopus": {
     "localized_name": "Рукавицы для Пала Килламари",
-    "description": "Перчатки, позволяющие аккуратно держать за ноги Пала Килламари. Когда Килламари находится под рукой, позволяет использовать его в качестве глайдера."
+    "description": "Если у вас есть этот предмет и Килламари в команде, изменяет свойства глайдера."
+  },
+  "SkillUnlock_NegativeOctopus_Neutral": {
+    "localized_name": "Рукавицы для Пала Килламари Примо",
+    "description": "Если у вас есть этот предмет и NegativeOctopus Neutral в команде, изменяет свойства глайдера."
   },
   "SkillUnlock_NightBlueHorse": {
     "localized_name": "Седло для Пала Старрион",
@@ -5642,6 +6486,18 @@
   "SkillUnlock_Penguin": {
     "localized_name": "Ракетная установка для Пала Пенгуллет",
     "description": "Пусковая установка для стрельбы Палами Пенгуллет. После активации навыка спутника позволяет выстрелить во врага Пенгуллет-снарядом. Пенгуллет при этом погибает."
+  },
+  "SkillUnlock_Penguin_Electric": {
+    "localized_name": "Ракетная установка для Пала Пенгуллет Лакс",
+    "description": "Пусковая установка для стрельбы Палами Penguin Electric. После активации навыка спутника позволяет выстрелить во врага Penguin Electric-снарядом. Penguin Electric при этом погибает."
+  },
+  "SkillUnlock_Plesiosaur": {
+    "localized_name": "Седло для Пала Бралоха",
+    "description": "Дает возможность оседлать Пала Бралоха."
+  },
+  "SkillUnlock_PoseidonOrca": {
+    "localized_name": "Седло для Пала Нептилус",
+    "description": "Дает возможность оседлать Пала Нептилус."
   },
   "SkillUnlock_PurpleSpider": {
     "localized_name": "Седло для Пала Тарантрисс",
@@ -5707,6 +6563,10 @@
     "localized_name": "Седло для Пала Райхаунд",
     "description": "Дает возможность оседлать Пала Райхаунд."
   },
+  "SkillUnlock_TropicalOstrich": {
+    "localized_name": "Седло для Пала Палумба",
+    "description": "Дает возможность оседлать Пала Палумба."
+  },
   "SkillUnlock_Umihebi": {
     "localized_name": "Седло для Пала Йормунтайд",
     "description": "Дает возможность оседлать Пала Йормунтайд."
@@ -5745,11 +6605,11 @@
   },
   "SkillUnlock_WindChimes": {
     "localized_name": "Рукавицы для Пала Хангю",
-    "description": "Перчатки, позволяющие аккуратно держать за лапы Пала Хангю. Когда Хангю находится под рукой, позволяет использовать его в качестве глайдера."
+    "description": "Если у вас есть этот предмет и Хангю в команде, изменяет свойства глайдера."
   },
   "SkillUnlock_WindChimes_Ice": {
     "localized_name": "Рукавицы для Пала Хангю Крист",
-    "description": "Перчатки, позволяющие аккуратно держать за лапы Пала WindChimes Ice. Когда WindChimes Ice находится под рукой, позволяет использовать его в качестве глайдера."
+    "description": "Если у вас есть этот предмет и WindChimes Ice в команде, изменяет свойства глайдера."
   },
   "SkillUnlock_Yeti": {
     "localized_name": "Седло для Пала Вумпо",
@@ -5832,43 +6692,43 @@
     "description": "Для изготовления этого доспеха используется Слиток палания. Обладает превосходной защитой, но весит очень много."
   },
   "StealArmorCold": {
-    "localized_name": "Металлическая броня защиты от холода для Палов",
+    "localized_name": "Металлическая броня защиты от холода",
     "description": "Паланиумная броня с улучшенными характеристиками. Помогает легче переносить морозы."
   },
   "StealArmorCold_2": {
-    "localized_name": "Металлическая броня защиты от холода для Палов",
+    "localized_name": "Металлическая броня защиты от холода",
     "description": "Паланиумная броня с улучшенными характеристиками. Помогает легче переносить морозы."
   },
   "StealArmorCold_3": {
-    "localized_name": "Металлическая броня защиты от холода для Палов",
+    "localized_name": "Металлическая броня защиты от холода",
     "description": "Паланиумная броня с улучшенными характеристиками. Помогает легче переносить морозы."
   },
   "StealArmorCold_4": {
-    "localized_name": "Металлическая броня защиты от холода для Палов",
+    "localized_name": "Металлическая броня защиты от холода",
     "description": "Паланиумная броня с улучшенными характеристиками. Помогает легче переносить морозы."
   },
   "StealArmorCold_5": {
-    "localized_name": "Металлическая броня защиты от холода для Палов",
+    "localized_name": "Металлическая броня защиты от холода",
     "description": "Паланиумная броня с улучшенными характеристиками. Помогает легче переносить морозы."
   },
   "StealArmorHeat": {
-    "localized_name": "Металлическая броня защиты от жара для Палов",
+    "localized_name": "Металлическая броня защиты от жары",
     "description": "Паланиумная броня с улучшенными характеристиками. Отлично защищает от высоких температур."
   },
   "StealArmorHeat_2": {
-    "localized_name": "Металлическая броня защиты от жара для Палов",
+    "localized_name": "Металлическая броня защиты от жары",
     "description": "Паланиумная броня с улучшенными характеристиками. Отлично защищает от высоких температур."
   },
   "StealArmorHeat_3": {
-    "localized_name": "Металлическая броня защиты от жара для Палов",
+    "localized_name": "Металлическая броня защиты от жары",
     "description": "Паланиумная броня с улучшенными характеристиками. Отлично защищает от высоких температур."
   },
   "StealArmorHeat_4": {
-    "localized_name": "Металлическая броня защиты от жара для Палов",
+    "localized_name": "Металлическая броня защиты от жары",
     "description": "Паланиумная броня с улучшенными характеристиками. Отлично защищает от высоких температур."
   },
   "StealArmorHeat_5": {
-    "localized_name": "Металлическая броня защиты от жара для Палов",
+    "localized_name": "Металлическая броня защиты от жары",
     "description": "Паланиумная броня с улучшенными характеристиками. Отлично защищает от высоких температур."
   },
   "StealArmor_2": {
@@ -5951,8 +6811,12 @@
     "localized_name": "Сера",
     "description": "Встречающийся на склонах вулканов минерал. Сера используется для создания: Порох."
   },
+  "Supplement": {
+    "localized_name": "Питательный препарат",
+    "description": "Питательный препарат, на некоторое время дающий сытость. Насыщенный напиток, содержащий концентрат из различных нутриентов. Уберегает от голода во время экспедиций."
+  },
   "Sweet": {
-    "localized_name": "Сладкая вата",
+    "localized_name": "Сахарная вата",
     "description": "Сахарная вата, добываемая из Пала Вулипоп. Нежная сладость, тающая во рту."
   },
   "Sword": {
@@ -5995,6 +6859,26 @@
     "localized_name": "Золотой ключ",
     "description": "Позволяет отрывать запертые на ключ сундуки."
   },
+  "TreasureMap01": {
+    "localized_name": "Карта сокровищ",
+    "description": "Ветхая карта, на которой отмечено место, где закопано сокровище. Используйте ее, и на карте появится отметка."
+  },
+  "TreasureMap02": {
+    "localized_name": "Карта сокровищ",
+    "description": "Ветхая карта, на которой отмечено место, где закопано сокровище. Используйте ее, и на карте появится отметка."
+  },
+  "TreasureMap03": {
+    "localized_name": "Карта сокровищ",
+    "description": "Ветхая карта, на которой отмечено место, где закопано сокровище. Используйте ее, и на карте появится отметка."
+  },
+  "TreasureMap04": {
+    "localized_name": "Карта сокровищ",
+    "description": "Ветхая карта, на которой отмечено место, где закопано сокровище. Используйте ее, и на карте появится отметка."
+  },
+  "TreasureMap05": {
+    "localized_name": "Карта сокровищ",
+    "description": "Ветхая карта, на которой отмечено место, где закопано сокровище. Используйте ее, и на карте появится отметка."
+  },
   "Unko_L": {
     "localized_name": "Большая куча навоза",
     "description": "Производит внушительное впечатление. И запах, и внешний вид указывают на крупного зверя."
@@ -6004,12 +6888,12 @@
     "description": "Помет животного. Незаменимый элемент для экосистемы, можно использовать в качестве удобрения. Обладает резким неприятным запахом."
   },
   "UnlockEquipmentSlot_Accessory_01": {
-    "localized_name": "Дивная шкатулка для аксессуаров",
-    "description": "Удивительная шкатулка, внутренняя часть которой синхронизируется с телом владельца. Добавляет 1 ячейку для аксессуаров."
+    "localized_name": "Мистическая шкатулка для аксессуаров",
+    "description": "Мистическая шкатулка, внутреннее содержимое которой синхронизируется с телом владельца. Добавляет один слот для аксессуаров."
   },
   "UnlockEquipmentSlot_Accessory_02": {
     "localized_name": "Таинственная шкатулка для аксессуаров",
-    "description": "Удивительная шкатулка, внутренняя часть которой синхронизируется с телом владельца. Добавляет еще 1 ячейку для аксессуаров."
+    "description": "Мистическая шкатулка, внутреннее содержимое которой синхронизируется с телом владельца. Добавляет один дополнительный слот для аксессуаров."
   },
   "Unlock_Picking_Tier1": {
     "localized_name": "Простая отмычка",
@@ -6115,72 +6999,228 @@
     "localized_name": "Якисоба с мясом Брончерри",
     "description": "Лапша, обжаренная с овощами и мясом. Насыщенный соус хорошо подчеркивает вкус крупных кусков мяса. На некоторое время после еды COMMON_STATUS_RANGE_Attack +20%."
   },
+  "YakushimaArmor001": {
+    "localized_name": "Освящённый нагрудник",
+    "description": "[Совместный проект с Terraria] Доспех, для изготовления которого используется Освящённый слиток. Окутан священной силой, снижает урон от монстров из коллаборации с Terraria."
+  },
+  "YakushimaArmor001_2": {
+    "localized_name": "Освящённый нагрудник",
+    "description": "[Совместный проект с Terraria] Доспех, для изготовления которого используется Освящённый слиток. Окутан священной силой, снижает урон от монстров из коллаборации с Terraria."
+  },
+  "YakushimaArmor001_3": {
+    "localized_name": "Освящённый нагрудник",
+    "description": "[Совместный проект с Terraria] Доспех, для изготовления которого используется Освящённый слиток. Окутан священной силой, снижает урон от монстров из коллаборации с Terraria."
+  },
+  "YakushimaArmor001_4": {
+    "localized_name": "Освящённый нагрудник",
+    "description": "[Совместный проект с Terraria] Доспех, для изготовления которого используется Освящённый слиток. Окутан священной силой, снижает урон от монстров из коллаборации с Terraria."
+  },
+  "YakushimaArmor001_5": {
+    "localized_name": "Освящённый нагрудник",
+    "description": "[Совместный проект с Terraria] Доспех, для изготовления которого используется Освящённый слиток. Окутан священной силой, снижает урон от монстров из коллаборации с Terraria."
+  },
   "YakushimaBlade": {
     "localized_name": "Мяумур",
-    "description": "[Совместный проект с Terraria] Согласно легенде Кроадзиро привез этот меч из далекой страны. Только совершенно непонятно зачем..."
+    "description": "[Коллаборация с Terraria] Согласно легенде Кроадзиро привез этот меч из далекой страны. Только совершенно непонятно зачем... При каждом взмахе выпускает отскакивающие кошачьи снаряды, которые атакуют врага."
   },
   "YakushimaBlade002": {
-    "localized_name": "Мяумур",
-    "description": "[Совместный проект с Terraria] Согласно легенде Кроадзиро привез этот меч из далекой страны. Только совершенно непонятно зачем..."
+    "localized_name": "Терра-клинок",
+    "description": "[Коллаборация с Terraria] При взмахе этот удивительный клинок испускает изумрудную ударную волну. Несмотря на то, что это оружие ближнего боя, оно может атаковать врагов вдалеке."
   },
   "YakushimaBlade002_2": {
-    "localized_name": "Мяумур",
-    "description": "[Совместный проект с Terraria] Согласно легенде Кроадзиро привез этот меч из далекой страны. Только совершенно непонятно зачем..."
+    "localized_name": "Терра-клинок",
+    "description": "[Коллаборация с Terraria] При взмахе этот удивительный клинок испускает изумрудную ударную волну. Несмотря на то, что это оружие ближнего боя, оно может атаковать врагов вдалеке."
   },
   "YakushimaBlade002_3": {
-    "localized_name": "Мяумур",
-    "description": "[Совместный проект с Terraria] Согласно легенде Кроадзиро привез этот меч из далекой страны. Только совершенно непонятно зачем..."
+    "localized_name": "Терра-клинок",
+    "description": "[Коллаборация с Terraria] При взмахе этот удивительный клинок испускает изумрудную ударную волну. Несмотря на то, что это оружие ближнего боя, оно может атаковать врагов вдалеке."
   },
   "YakushimaBlade002_4": {
-    "localized_name": "Мяумур",
-    "description": "[Совместный проект с Terraria] Согласно легенде Кроадзиро привез этот меч из далекой страны. Только совершенно непонятно зачем..."
+    "localized_name": "Терра-клинок",
+    "description": "[Коллаборация с Terraria] При взмахе этот удивительный клинок испускает изумрудную ударную волну. Несмотря на то, что это оружие ближнего боя, оно может атаковать врагов вдалеке."
   },
   "YakushimaBlade002_5": {
-    "localized_name": "Мяумур",
-    "description": "[Совместный проект с Terraria] Согласно легенде Кроадзиро привез этот меч из далекой страны. Только совершенно непонятно зачем..."
+    "localized_name": "Терра-клинок",
+    "description": "[Коллаборация с Terraria] При взмахе этот удивительный клинок испускает изумрудную ударную волну. Несмотря на то, что это оружие ближнего боя, оно может атаковать врагов вдалеке."
   },
   "YakushimaBlade003": {
-    "localized_name": "Мяумур",
-    "description": "[Совместный проект с Terraria] Согласно легенде Кроадзиро привез этот меч из далекой страны. Только совершенно непонятно зачем..."
+    "localized_name": "Террапризма",
+    "description": "[Коллаборация с Terraria] Таинственный клинок с радужным лезвием. При взмахе призывает благословленный меч, который вступает в бой. Можно призвать одновременно до 9 мечей."
   },
   "YakushimaBlade003_2": {
-    "localized_name": "Мяумур",
-    "description": "[Совместный проект с Terraria] Согласно легенде Кроадзиро привез этот меч из далекой страны. Только совершенно непонятно зачем..."
+    "localized_name": "Террапризма",
+    "description": "[Коллаборация с Terraria] Таинственный клинок с радужным лезвием. При взмахе призывает благословленный меч, который вступает в бой. Можно призвать одновременно до 9 мечей."
   },
   "YakushimaBlade003_3": {
-    "localized_name": "Мяумур",
-    "description": "[Совместный проект с Terraria] Согласно легенде Кроадзиро привез этот меч из далекой страны. Только совершенно непонятно зачем..."
+    "localized_name": "Террапризма",
+    "description": "[Коллаборация с Terraria] Таинственный клинок с радужным лезвием. При взмахе призывает благословленный меч, который вступает в бой. Можно призвать одновременно до 9 мечей."
   },
   "YakushimaBlade003_4": {
-    "localized_name": "Мяумур",
-    "description": "[Совместный проект с Terraria] Согласно легенде Кроадзиро привез этот меч из далекой страны. Только совершенно непонятно зачем..."
+    "localized_name": "Террапризма",
+    "description": "[Коллаборация с Terraria] Таинственный клинок с радужным лезвием. При взмахе призывает благословленный меч, который вступает в бой. Можно призвать одновременно до 9 мечей."
   },
   "YakushimaBlade003_5": {
-    "localized_name": "Мяумур",
-    "description": "[Совместный проект с Terraria] Согласно легенде Кроадзиро привез этот меч из далекой страны. Только совершенно непонятно зачем..."
+    "localized_name": "Террапризма",
+    "description": "[Коллаборация с Terraria] Таинственный клинок с радужным лезвием. При взмахе призывает благословленный меч, который вступает в бой. Можно призвать одновременно до 9 мечей."
   },
   "YakushimaBlade004": {
-    "localized_name": "Мяумур",
-    "description": "[Совместный проект с Terraria] Согласно легенде Кроадзиро привез этот меч из далекой страны. Только совершенно непонятно зачем..."
+    "localized_name": "Экскалибур",
+    "description": "[Коллаборация с Terraria] Священный меч с золотым сиянием. При взмахе выпускает расходящуюся от клинка ударную волну, поражающую большую область."
   },
   "YakushimaBlade004_2": {
-    "localized_name": "Мяумур",
-    "description": "[Совместный проект с Terraria] Согласно легенде Кроадзиро привез этот меч из далекой страны. Только совершенно непонятно зачем..."
+    "localized_name": "Экскалибур",
+    "description": "[Коллаборация с Terraria] Священный меч с золотым сиянием. При взмахе выпускает расходящуюся от клинка ударную волну, поражающую большую область."
   },
   "YakushimaBlade004_3": {
-    "localized_name": "Мяумур",
-    "description": "[Совместный проект с Terraria] Согласно легенде Кроадзиро привез этот меч из далекой страны. Только совершенно непонятно зачем..."
+    "localized_name": "Экскалибур",
+    "description": "[Коллаборация с Terraria] Священный меч с золотым сиянием. При взмахе выпускает расходящуюся от клинка ударную волну, поражающую большую область."
   },
   "YakushimaBlade004_4": {
-    "localized_name": "Мяумур",
-    "description": "[Совместный проект с Terraria] Согласно легенде Кроадзиро привез этот меч из далекой страны. Только совершенно непонятно зачем..."
+    "localized_name": "Экскалибур",
+    "description": "[Коллаборация с Terraria] Священный меч с золотым сиянием. При взмахе выпускает расходящуюся от клинка ударную волну, поражающую большую область."
   },
   "YakushimaBlade004_5": {
-    "localized_name": "Мяумур",
-    "description": "[Совместный проект с Terraria] Согласно легенде Кроадзиро привез этот меч из далекой страны. Только совершенно непонятно зачем..."
+    "localized_name": "Экскалибур",
+    "description": "[Коллаборация с Terraria] Священный меч с золотым сиянием. При взмахе выпускает расходящуюся от клинка ударную волну, поражающую большую область."
   },
   "YakushimaBlade005": {
-    "localized_name": "Мяумур",
-    "description": "[Совместный проект с Terraria] Согласно легенде Кроадзиро привез этот меч из далекой страны. Только совершенно непонятно зачем..."
+    "localized_name": "Легендарный Мяумур",
+    "description": "[Коллаборация с Terraria] Легендарный Мяумур, материалом для которого послужил Люминитовый слиток. При каждом взмахе выпускает отскакивающие кошачьи снаряды, которые атакуют врага."
+  },
+  "YakushimaGun001": {
+    "localized_name": "Вихревой загонщик",
+    "description": "[Коллаборация с Terraria] Большое ружье, использующее неизвестной природы энергию. С шансом 66% не расходует снаряды. Через определенные промежутки времени выпускает преследующие врага взрывающиеся ракеты."
+  },
+  "YakushimaGun001_2": {
+    "localized_name": "Вихревой загонщик",
+    "description": "[Коллаборация с Terraria] Большое ружье, использующее неизвестной природы энергию. С шансом 66% не расходует снаряды. Через определенные промежутки времени выпускает преследующие врага взрывающиеся ракеты."
+  },
+  "YakushimaGun001_3": {
+    "localized_name": "Вихревой загонщик",
+    "description": "[Коллаборация с Terraria] Большое ружье, использующее неизвестной природы энергию. С шансом 66% не расходует снаряды. Через определенные промежутки времени выпускает преследующие врага взрывающиеся ракеты."
+  },
+  "YakushimaGun001_4": {
+    "localized_name": "Вихревой загонщик",
+    "description": "[Коллаборация с Terraria] Большое ружье, использующее неизвестной природы энергию. С шансом 66% не расходует снаряды. Через определенные промежутки времени выпускает преследующие врага взрывающиеся ракеты."
+  },
+  "YakushimaGun001_5": {
+    "localized_name": "Вихревой загонщик",
+    "description": "[Коллаборация с Terraria] Большое ружье, использующее неизвестной природы энергию. С шансом 66% не расходует снаряды. Через определенные промежутки времени выпускает преследующие врага взрывающиеся ракеты."
+  },
+  "YakushimaHeadEquip001": {
+    "localized_name": "Освещённая маска",
+    "description": "[Совместный проект с Terraria] Броня для головы, для изготовления которой используется Освящённый слиток. Окутана священной силой, увеличивает наносимый следующим оружием урон: Мяумур, Экскалибур, Терра-клинок, Легендарный Мяумур."
+  },
+  "YakushimaHeadEquip001_2": {
+    "localized_name": "Освещённая маска",
+    "description": "[Совместный проект с Terraria] Броня для головы, для изготовления которой используется Освящённый слиток. Окутана священной силой, увеличивает наносимый следующим оружием урон: Мяумур, Экскалибур, Терра-клинок, Легендарный Мяумур."
+  },
+  "YakushimaHeadEquip001_3": {
+    "localized_name": "Освещённая маска",
+    "description": "[Совместный проект с Terraria] Броня для головы, для изготовления которой используется Освящённый слиток. Окутана священной силой, увеличивает наносимый следующим оружием урон: Мяумур, Экскалибур, Терра-клинок, Легендарный Мяумур."
+  },
+  "YakushimaHeadEquip001_4": {
+    "localized_name": "Освещённая маска",
+    "description": "[Совместный проект с Terraria] Броня для головы, для изготовления которой используется Освящённый слиток. Окутана священной силой, увеличивает наносимый следующим оружием урон: Мяумур, Экскалибур, Терра-клинок, Легендарный Мяумур."
+  },
+  "YakushimaHeadEquip001_5": {
+    "localized_name": "Освещённая маска",
+    "description": "[Совместный проект с Terraria] Броня для головы, для изготовления которой используется Освящённый слиток. Окутана священной силой, увеличивает наносимый следующим оружием урон: Мяумур, Экскалибур, Терра-клинок, Легендарный Мяумур."
+  },
+  "YakushimaHeadEquip002": {
+    "localized_name": "Освящённый наголовник",
+    "description": "[Совместный проект с Terraria] Броня для головы, для изготовления которой используется Освящённый слиток. Окутана священной силой, увеличивает наносимый следующим оружием урон: Ночное сияние."
+  },
+  "YakushimaHeadEquip002_2": {
+    "localized_name": "Освящённый наголовник",
+    "description": "[Совместный проект с Terraria] Броня для головы, для изготовления которой используется Освящённый слиток. Окутана священной силой, увеличивает наносимый следующим оружием урон: Ночное сияние."
+  },
+  "YakushimaHeadEquip002_3": {
+    "localized_name": "Освящённый наголовник",
+    "description": "[Совместный проект с Terraria] Броня для головы, для изготовления которой используется Освящённый слиток. Окутана священной силой, увеличивает наносимый следующим оружием урон: Ночное сияние."
+  },
+  "YakushimaHeadEquip002_4": {
+    "localized_name": "Освящённый наголовник",
+    "description": "[Совместный проект с Terraria] Броня для головы, для изготовления которой используется Освящённый слиток. Окутана священной силой, увеличивает наносимый следующим оружием урон: Ночное сияние."
+  },
+  "YakushimaHeadEquip002_5": {
+    "localized_name": "Освящённый наголовник",
+    "description": "[Совместный проект с Terraria] Броня для головы, для изготовления которой используется Освящённый слиток. Окутана священной силой, увеличивает наносимый следующим оружием урон: Ночное сияние."
+  },
+  "YakushimaHeadEquip003": {
+    "localized_name": "Освящённый шлем",
+    "description": "[Совместный проект с Terraria] Броня для головы, для изготовления которой используется Освящённый слиток. Окутана священной силой, увеличивает наносимый следующим оружием урон: Вихревой загонщик."
+  },
+  "YakushimaHeadEquip003_2": {
+    "localized_name": "Освящённый шлем",
+    "description": "[Совместный проект с Terraria] Броня для головы, для изготовления которой используется Освящённый слиток. Окутана священной силой, увеличивает наносимый следующим оружием урон: Вихревой загонщик."
+  },
+  "YakushimaHeadEquip003_3": {
+    "localized_name": "Освящённый шлем",
+    "description": "[Совместный проект с Terraria] Броня для головы, для изготовления которой используется Освящённый слиток. Окутана священной силой, увеличивает наносимый следующим оружием урон: Вихревой загонщик."
+  },
+  "YakushimaHeadEquip003_4": {
+    "localized_name": "Освящённый шлем",
+    "description": "[Совместный проект с Terraria] Броня для головы, для изготовления которой используется Освящённый слиток. Окутана священной силой, увеличивает наносимый следующим оружием урон: Вихревой загонщик."
+  },
+  "YakushimaHeadEquip003_5": {
+    "localized_name": "Освящённый шлем",
+    "description": "[Совместный проект с Terraria] Броня для головы, для изготовления которой используется Освящённый слиток. Окутана священной силой, увеличивает наносимый следующим оружием урон: Вихревой загонщик."
+  },
+  "YakushimaHeadEquip004": {
+    "localized_name": "Освящённый капюшон",
+    "description": "[Совместный проект с Terraria] Броня для головы, для изготовления которой используется Освящённый слиток. Окутана священной силой, увеличивает наносимый следующим оружием урон: Террапризма."
+  },
+  "YakushimaHeadEquip004_2": {
+    "localized_name": "Освящённый капюшон",
+    "description": "[Совместный проект с Terraria] Броня для головы, для изготовления которой используется Освящённый слиток. Окутана священной силой, увеличивает наносимый следующим оружием урон: Террапризма."
+  },
+  "YakushimaHeadEquip004_3": {
+    "localized_name": "Освящённый капюшон",
+    "description": "[Совместный проект с Terraria] Броня для головы, для изготовления которой используется Освящённый слиток. Окутана священной силой, увеличивает наносимый следующим оружием урон: Террапризма."
+  },
+  "YakushimaHeadEquip004_4": {
+    "localized_name": "Освящённый капюшон",
+    "description": "[Совместный проект с Terraria] Броня для головы, для изготовления которой используется Освящённый слиток. Окутана священной силой, увеличивает наносимый следующим оружием урон: Террапризма."
+  },
+  "YakushimaHeadEquip004_5": {
+    "localized_name": "Освящённый капюшон",
+    "description": "[Совместный проект с Terraria] Броня для головы, для изготовления которой используется Освящённый слиток. Окутана священной силой, увеличивает наносимый следующим оружием урон: Террапризма."
+  },
+  "YakushimaHeadEquip005": {
+    "localized_name": "Маска лунного повелителя",
+    "description": "[Коллаборация с Terraria] От этого предмета веет зловещей силой монстра RAID YakushimaBoss002. Лишь единицы могут заполучить эту вещицу."
+  },
+  "YakushimaHeadEquip006": {
+    "localized_name": "Маска Глаза Ктулху",
+    "description": "[Коллаборация с Terraria] От этого предмета веет зловещей силой монстра Глаз Ктулху. Лишь единицы могут заполучить эту вещицу."
+  },
+  "YakushimaIngot001": {
+    "localized_name": "Освящённый слиток",
+    "description": "[Коллаборация с Terraria] Наполненный священной силой материал. Используется для создания различных предметов из Terraria."
+  },
+  "YakushimaIngot002": {
+    "localized_name": "Люминитовый слиток",
+    "description": "[Коллаборация с Terraria] Материал, от которого веет огромной силой. Трофей с монстра YakushimaBoss002. Излучает похожее на лунный свет сияние."
+  },
+  "YakushimaLantern001": {
+    "localized_name": "Ночное сияние",
+    "description": "[Коллаборация с Terraria] Таинственный фонарь, излучающий радужное свечение. При поднятии фонарь выпускает световой снаряд, преследующий и многократно атакующий врага."
+  },
+  "YakushimaLantern001_2": {
+    "localized_name": "Ночное сияние",
+    "description": "[Коллаборация с Terraria] Таинственный фонарь, излучающий радужное свечение. При поднятии фонарь выпускает световой снаряд, преследующий и многократно атакующий врага."
+  },
+  "YakushimaLantern001_3": {
+    "localized_name": "Ночное сияние",
+    "description": "[Коллаборация с Terraria] Таинственный фонарь, излучающий радужное свечение. При поднятии фонарь выпускает световой снаряд, преследующий и многократно атакующий врага."
+  },
+  "YakushimaLantern001_4": {
+    "localized_name": "Ночное сияние",
+    "description": "[Коллаборация с Terraria] Таинственный фонарь, излучающий радужное свечение. При поднятии фонарь выпускает световой снаряд, преследующий и многократно атакующий врага."
+  },
+  "YakushimaLantern001_5": {
+    "localized_name": "Ночное сияние",
+    "description": "[Коллаборация с Terraria] Таинственный фонарь, излучающий радужное свечение. При поднятии фонарь выпускает световой снаряд, преследующий и многократно атакующий врага."
   }
 }

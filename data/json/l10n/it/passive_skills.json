@@ -23,12 +23,24 @@
     "localized_name": "Aumento dell'attacco Liv. 1",
     "description": null
   },
+  "Attack_ACC_up1_Otomo_Only_Equip": {
+    "localized_name": "Aumento dell'attacco dei Pal Liv. 1",
+    "description": null
+  },
   "Attack_ACC_up2": {
     "localized_name": "Aumento dell'attacco Liv. 2",
     "description": null
   },
+  "Attack_ACC_up2_Otomo_Only_Equip": {
+    "localized_name": "Aumento dell'attacco dei Pal Liv. 2",
+    "description": null
+  },
   "Attack_ACC_up3": {
     "localized_name": "Aumento dell'attacco Liv. 3",
+    "description": null
+  },
+  "Attack_ACC_up3_Otomo_Only_Equip": {
+    "localized_name": "Aumento dell'attacco dei Pal Liv. 3",
     "description": null
   },
   "BossDefeatReward_AmaterasuWolf_Dark": {
@@ -155,6 +167,14 @@
     "localized_name": "Potenziamento danno di attributo oscurità (piccolo)",
     "description": null
   },
+  "BossDefeatReward_IceNarwhal": {
+    "localized_name": "Potenziamento danno di attributo ghiaccio (grande)",
+    "description": null
+  },
+  "BossDefeatReward_IceNarwhal_Fire": {
+    "localized_name": "Potenziamento danno di attributo fuoco (grande)",
+    "description": null
+  },
   "BossDefeatReward_JetDragon": {
     "localized_name": "Potenziamento danno di attributo drago (grande)",
     "description": null
@@ -217,6 +237,10 @@
   },
   "BossDefeatReward_PlantSlime": {
     "localized_name": "Potenziamento danno di attributo terra (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_PoseidonOrca": {
+    "localized_name": "Potenziamento danno di attributo acqua (grande)",
     "description": null
   },
   "BossDefeatReward_PurpleSpider": {
@@ -395,6 +419,18 @@
     "localized_name": "Tecnica sopraffina",
     "description": null
   },
+  "Defense_ACC_up1_Otomo_Only_Equip": {
+    "localized_name": "Aumento della difesa dei Pal Liv. 1",
+    "description": null
+  },
+  "Defense_ACC_up2_Otomo_Only_Equip": {
+    "localized_name": "Aumento della difesa dei Pal Liv. 2",
+    "description": null
+  },
+  "Defense_ACC_up3_Otomo_Only_Equip": {
+    "localized_name": "Aumento della difesa dei Pal Liv. 3",
+    "description": null
+  },
   "Deffence_down1": {
     "localized_name": "Debolezza",
     "description": null
@@ -427,12 +463,20 @@
     "localized_name": "Potenziamento danno di attributo oscurità (piccolo)",
     "description": null
   },
+  "ElementBoost_Dark_1_Otomo_Only_Equip": {
+    "localized_name": "Potenziamento danno di attributo oscurità dei Pal Liv. 1",
+    "description": null
+  },
   "ElementBoost_Dark_1_PAL": {
     "localized_name": "Coltre oscura",
     "description": "Incremento del danno di attributo oscurità: 10.0%"
   },
   "ElementBoost_Dark_2_BossDefeat": {
     "localized_name": "Potenziamento danno di attributo oscurità (medio)",
+    "description": null
+  },
+  "ElementBoost_Dark_2_Otomo_Only_Equip": {
+    "localized_name": "Potenziamento danno di attributo oscurità dei Pal Liv. 2",
     "description": null
   },
   "ElementBoost_Dark_2_PAL": {
@@ -443,8 +487,16 @@
     "localized_name": "Potenziamento danno di attributo oscurità (grande)",
     "description": null
   },
+  "ElementBoost_Dark_3_Otomo_Only_Equip": {
+    "localized_name": "Potenziamento danno di attributo oscurità dei Pal Liv. 3",
+    "description": null
+  },
   "ElementBoost_Dragon_1_BossDefeat": {
     "localized_name": "Potenziamento danno di attributo drago (piccolo)",
+    "description": null
+  },
+  "ElementBoost_Dragon_1_Otomo_Only_Equip": {
+    "localized_name": "Potenziamento danno di attributo drago dei Pal Liv. 1",
     "description": null
   },
   "ElementBoost_Dragon_1_PAL": {
@@ -455,6 +507,10 @@
     "localized_name": "Potenziamento danno di attributo drago (medio)",
     "description": null
   },
+  "ElementBoost_Dragon_2_Otomo_Only_Equip": {
+    "localized_name": "Potenziamento danno di attributo drago dei Pal Liv. 2",
+    "description": null
+  },
   "ElementBoost_Dragon_2_PAL": {
     "localized_name": "Drago divino",
     "description": null
@@ -463,8 +519,16 @@
     "localized_name": "Potenziamento danno di attributo drago (grande)",
     "description": null
   },
+  "ElementBoost_Dragon_3_Otomo_Only_Equip": {
+    "localized_name": "Potenziamento danno di attributo drago dei Pal Liv. 3",
+    "description": null
+  },
   "ElementBoost_Earth_1_BossDefeat": {
     "localized_name": "Potenziamento danno di attributo terra (piccolo)",
+    "description": null
+  },
+  "ElementBoost_Earth_1_Otomo_Only_Equip": {
+    "localized_name": "Potenziamento danno di attributo terra dei Pal Liv. 1",
     "description": null
   },
   "ElementBoost_Earth_1_PAL": {
@@ -475,6 +539,10 @@
     "localized_name": "Potenziamento danno di attributo terra (medio)",
     "description": null
   },
+  "ElementBoost_Earth_2_Otomo_Only_Equip": {
+    "localized_name": "Potenziamento danno di attributo terra dei Pal Liv. 2",
+    "description": null
+  },
   "ElementBoost_Earth_2_PAL": {
     "localized_name": "Supremazia terrestre",
     "description": null
@@ -483,20 +551,40 @@
     "localized_name": "Potenziamento danno di attributo terra (grande)",
     "description": null
   },
+  "ElementBoost_Earth_3_Otomo_Only_Equip": {
+    "localized_name": "Potenziamento danno di attributo terra dei Pal Liv. 3",
+    "description": null
+  },
   "ElementBoost_Electricity_1_BossDefeat": {
     "localized_name": "Potenziamento danno di attributo elettricità (piccolo)",
+    "description": null
+  },
+  "ElementBoost_Electricity_1_Otomo_Only_Equip": {
+    "localized_name": "Potenziamento danno di attributo elettricità dei Pal Liv. 1",
     "description": null
   },
   "ElementBoost_Electricity_2_BossDefeat": {
     "localized_name": "Potenziamento danno di attributo elettricità (medio)",
     "description": null
   },
+  "ElementBoost_Electricity_2_Otomo_Only_Equip": {
+    "localized_name": "Potenziamento danno di attributo elettricità dei Pal Liv. 2",
+    "description": null
+  },
   "ElementBoost_Electricity_3_BossDefeat": {
     "localized_name": "Potenziamento danno di attributo elettricità (grande)",
     "description": null
   },
+  "ElementBoost_Electricity_3_Otomo_Only_Equip": {
+    "localized_name": "Potenziamento danno di attributo elettricità dei Pal Liv. 3",
+    "description": null
+  },
   "ElementBoost_Fire_1_BossDefeat": {
     "localized_name": "Potenziamento danno di attributo fuoco (piccolo)",
+    "description": null
+  },
+  "ElementBoost_Fire_1_Otomo_Only_Equip": {
+    "localized_name": "Potenziamento danno di attributo fuoco dei Pal Liv. 1",
     "description": null
   },
   "ElementBoost_Fire_1_PAL": {
@@ -507,6 +595,10 @@
     "localized_name": "Potenziamento danno di attributo fuoco (medio)",
     "description": null
   },
+  "ElementBoost_Fire_2_Otomo_Only_Equip": {
+    "localized_name": "Potenziamento danno di attributo fuoco dei Pal Liv. 2",
+    "description": null
+  },
   "ElementBoost_Fire_2_PAL": {
     "localized_name": "Supremazia ardente",
     "description": null
@@ -515,8 +607,16 @@
     "localized_name": "Potenziamento danno di attributo fuoco (grande)",
     "description": null
   },
+  "ElementBoost_Fire_3_Otomo_Only_Equip": {
+    "localized_name": "Potenziamento danno di attributo fuoco dei Pal Liv. 3",
+    "description": null
+  },
   "ElementBoost_Ice_1_BossDefeat": {
     "localized_name": "Potenziamento danno di attributo ghiaccio (piccolo)",
+    "description": null
+  },
+  "ElementBoost_Ice_1_Otomo_Only_Equip": {
+    "localized_name": "Potenziamento danno di attributo ghiaccio dei Pal Liv. 1",
     "description": null
   },
   "ElementBoost_Ice_1_PAL": {
@@ -527,6 +627,10 @@
     "localized_name": "Potenziamento danno di attributo ghiaccio (medio)",
     "description": null
   },
+  "ElementBoost_Ice_2_Otomo_Only_Equip": {
+    "localized_name": "Potenziamento danno di attributo ghiaccio dei Pal Liv. 2",
+    "description": null
+  },
   "ElementBoost_Ice_2_PAL": {
     "localized_name": "Supremazia glaciale",
     "description": null
@@ -535,8 +639,16 @@
     "localized_name": "Potenziamento danno di attributo ghiaccio (grande)",
     "description": null
   },
+  "ElementBoost_Ice_3_Otomo_Only_Equip": {
+    "localized_name": "Potenziamento danno di attributo ghiaccio dei Pal Liv. 3",
+    "description": null
+  },
   "ElementBoost_Leaf_1_BossDefeat": {
     "localized_name": "Potenziamento danno di attributo erba (piccolo)",
+    "description": null
+  },
+  "ElementBoost_Leaf_1_Otomo_Only_Equip": {
+    "localized_name": "Potenziamento danno di attributo erba dei Pal Liv. 1",
     "description": null
   },
   "ElementBoost_Leaf_1_PAL": {
@@ -547,6 +659,10 @@
     "localized_name": "Potenziamento danno di attributo erba (medio)",
     "description": null
   },
+  "ElementBoost_Leaf_2_Otomo_Only_Equip": {
+    "localized_name": "Potenziamento danno di attributo erba dei Pal Liv. 2",
+    "description": null
+  },
   "ElementBoost_Leaf_2_PAL": {
     "localized_name": "Dominio sulla natura",
     "description": null
@@ -555,8 +671,16 @@
     "localized_name": "Potenziamento danno di attributo erba (grande)",
     "description": null
   },
+  "ElementBoost_Leaf_3_Otomo_Only_Equip": {
+    "localized_name": "Potenziamento danno di attributo erba dei Pal Liv. 3",
+    "description": null
+  },
   "ElementBoost_Normal_1_BossDefeat": {
     "localized_name": "Potenziamento danno non elementale (piccolo)",
+    "description": null
+  },
+  "ElementBoost_Normal_1_Otomo_Only_Equip": {
+    "localized_name": "Potenziamento danno non elementale dei Pal Liv. 1",
     "description": null
   },
   "ElementBoost_Normal_1_PAL": {
@@ -567,12 +691,20 @@
     "localized_name": "Potenziamento danno non elementale (medio)",
     "description": null
   },
+  "ElementBoost_Normal_2_Otomo_Only_Equip": {
+    "localized_name": "Potenziamento danno non elementale dei Pal Liv. 2",
+    "description": null
+  },
   "ElementBoost_Normal_2_PAL": {
     "localized_name": "Supremazia sacra",
     "description": null
   },
   "ElementBoost_Normal_3_BossDefeat": {
     "localized_name": "Potenziamento danno non elementale (grande)",
+    "description": null
+  },
+  "ElementBoost_Normal_3_Otomo_Only_Equip": {
+    "localized_name": "Potenziamento danno non elementale dei Pal Liv. 3",
     "description": null
   },
   "ElementBoost_Thunder_1_PAL": {
@@ -587,12 +719,24 @@
     "localized_name": "Potenziamento danno di attributo acqua (piccolo)",
     "description": null
   },
+  "ElementBoost_Water_1_Otomo_Only_Equip": {
+    "localized_name": "Potenziamento danno di attributo acqua dei Pal Liv. 1",
+    "description": null
+  },
   "ElementBoost_Water_2_BossDefeat": {
     "localized_name": "Potenziamento danno di attributo acqua (medio)",
     "description": null
   },
+  "ElementBoost_Water_2_Otomo_Only_Equip": {
+    "localized_name": "Potenziamento danno di attributo acqua dei Pal Liv. 2",
+    "description": null
+  },
   "ElementBoost_Water_3_BossDefeat": {
     "localized_name": "Potenziamento danno di attributo acqua (grande)",
+    "description": null
+  },
+  "ElementBoost_Water_3_Otomo_Only_Equip": {
+    "localized_name": "Potenziamento danno di attributo acqua dei Pal Liv. 3",
     "description": null
   },
   "ElementResist_Aqua_1": {
@@ -743,6 +887,34 @@
     "localized_name": "Calamità delle fiamme",
     "description": null
   },
+  "GYM_NAME_Desert": {
+    "localized_name": "Leader della Milizia volontaria di Palpagos",
+    "description": null
+  },
+  "GYM_NAME_Forest": {
+    "localized_name": "Fondatrice dell'Ente per la tutela dei Pal",
+    "description": null
+  },
+  "GYM_NAME_Meadow": {
+    "localized_name": "Leader del Sindacato di Rayne",
+    "description": "Incremento dell'attacco: 20.0% Incremento della velocità di movimento: 10.0%"
+  },
+  "GYM_NAME_Sakurajima": {
+    "localized_name": "Leader del clan dei fiori di luna",
+    "description": null
+  },
+  "GYM_NAME_Snow": {
+    "localized_name": "Comandante della Squadra per la ricerca genetica",
+    "description": null
+  },
+  "GYM_NAME_Viking": {
+    "localized_name": "Capo del popolo della rovina",
+    "description": null
+  },
+  "GYM_NAME_Volcano": {
+    "localized_name": "Capo spirituale della Congrega del fuoco perenne",
+    "description": null
+  },
   "HP_ACC_up1": {
     "localized_name": "Aumento PV Liv. 1",
     "description": null
@@ -826,6 +998,10 @@
   "Noukin": {
     "localized_name": "Tutto muscoli",
     "description": null
+  },
+  "Nushi": {
+    "localized_name": "Dominatore",
+    "description": "Incremento del danno di attributo acqua: 20.0% Incremento del danno di attributo ghiaccio: 20.0% Difesa: +20.0%"
   },
   "PAL_ALLAttack_down1": {
     "localized_name": "Codardia",
@@ -915,6 +1091,18 @@
     "localized_name": "Sadismo",
     "description": null
   },
+  "PalExp_Increase_1_Otomo_Only_Equip": {
+    "localized_name": "Aumento dell'esperienza dei Pal Liv. 1",
+    "description": null
+  },
+  "PalExp_Increase_2_Otomo_Only_Equip": {
+    "localized_name": "Aumento dell'esperienza dei Pal Liv. 2",
+    "description": null
+  },
+  "PalExp_Increase_3_Otomo_Only_Equip": {
+    "localized_name": "Aumento dell'esperienza dei Pal Liv. 3",
+    "description": null
+  },
   "Rare": {
     "localized_name": "Fortunato",
     "description": null
@@ -970,6 +1158,18 @@
   "Stamina_Up_3": {
     "localized_name": "Moto perpetuo",
     "description": "Resistenza massima: +75.0% *Solo per i Pal che puoi cavalcare."
+  },
+  "SwimSpeed_up_1": {
+    "localized_name": "Nuoto aggraziato",
+    "description": "Incremento della velocità di movimento sull'acqua: 30.0%"
+  },
+  "SwimSpeed_up_2": {
+    "localized_name": "Gran nuotatore",
+    "description": null
+  },
+  "SwimSpeed_up_3": {
+    "localized_name": "Dio delle onde",
+    "description": null
   },
   "TemperatureResist_Cold1": {
     "localized_name": "Resistenza al freddo Liv. 1",
@@ -1049,6 +1249,26 @@
   },
   "WorkSpeed_ACC_up3": {
     "localized_name": "Velocità attività Liv. 3",
+    "description": null
+  },
+  "YakushimaDagameBoost_Magic_Equip": {
+    "localized_name": "Potere sacro - Magia",
+    "description": null
+  },
+  "YakushimaDagameBoost_Melee_Equip": {
+    "localized_name": "Potere sacro - Mischia",
+    "description": null
+  },
+  "YakushimaDagameBoost_Ranged_Equip": {
+    "localized_name": "Potere sacro - A distanza",
+    "description": null
+  },
+  "YakushimaDagameBoost_Summon_Equip": {
+    "localized_name": "Potere sacro - Evocazione",
+    "description": null
+  },
+  "YakushimaProtection_Equip": {
+    "localized_name": "Protezione sacra",
     "description": null
   },
   "defense_ACC_up1": {

@@ -21,7 +21,7 @@
   },
   "EPalWazaID::BeamSlicer": {
     "localized_name": "Beam Slicer",
-    "description": "Mows down the frontal area with a beam imbued with dragon power. The area touched by the beam will also explode after a few moments."
+    "description": "Mows down the frontal area with a beam imbued with dragon power. The area strucked by the beam will also explode after short delay."
   },
   "EPalWazaID::BlastCanon": {
     "localized_name": "Blast Cannon",
@@ -55,6 +55,10 @@
     "localized_name": "Cross Lightning",
     "description": "Generates two lightning bolts that advance left and right, blocking either direction."
   },
+  "EPalWazaID::CrossWind": {
+    "localized_name": "Crosswind",
+    "description": "Conjures blades of wind in front of the enemy, converging to deliver a cutting cross attack."
+  },
   "EPalWazaID::DarkArrow": {
     "localized_name": "Dark Arrow",
     "description": "Fires off dark energy that homes in on an enemy."
@@ -86,6 +90,10 @@
   "EPalWazaID::DiamondFall": {
     "localized_name": "Diamond Rain",
     "description": "Creates numerous lumps of ice that are consecutively dropped on a foe's head."
+  },
+  "EPalWazaID::DiversionLaser": {
+    "localized_name": "Torrential Blast",
+    "description": "Fires a high-pressure stream of water forward. After a short delay, the stream branches off to the left and right."
   },
   "EPalWazaID::DoubleIcicleThrow": {
     "localized_name": "Double Blizzard Spike",
@@ -179,6 +187,10 @@
     "localized_name": "Hydro Laser",
     "description": "Shoots pressurized water at extreme velocities, sweeping over a wide area in front of it."
   },
+  "EPalWazaID::HydroSlicer": {
+    "localized_name": "Hydro Slicer",
+    "description": "Mows down the frontal area with a blast of compressed water. The area struck by the blast erupts with water after a short delay."
+  },
   "EPalWazaID::HyperBeam": {
     "localized_name": "Pal Blast",
     "description": "Charges destructive energy before firing a high-powered beam forward across a wide area."
@@ -194,6 +206,10 @@
   "EPalWazaID::IceMissile": {
     "localized_name": "Ice Missile",
     "description": "Creates ice lances in the air that fly towards enemies."
+  },
+  "EPalWazaID::IceWall": {
+    "localized_name": "Freeze Wall",
+    "description": "Creates a wall of ice that rises from the ground. The ice wall remains standing for a while, and breaks after taking enough damage."
   },
   "EPalWazaID::IcicleLine": {
     "localized_name": "Icicle Line",
@@ -275,6 +291,14 @@
     "localized_name": "All Range Thunder",
     "description": "Generates lightning strikes that travel in a straight line in all directions."
   },
+  "EPalWazaID::ReflectiveShuriken": {
+    "localized_name": "Reflect Leaf",
+    "description": "Launches a blade of wind that rebounds off enemies or trees, striking repeatedly. Can ricochet up to four times."
+  },
+  "EPalWazaID::RipTide": {
+    "localized_name": "Aqua Surge",
+    "description": "Generates waves that surge around the enemy from all sides. They converge and explode at the center, erupting into a column of water."
+  },
   "EPalWazaID::RockBeat": {
     "localized_name": "Stone Beat",
     "description": "Shakes the ground and lifts a massive boulder into the air."
@@ -298,6 +322,10 @@
   "EPalWazaID::SandTwister": {
     "localized_name": "Sand Twister",
     "description": "Creates multiple sand tornadoes. The tornadoes continuously spin in circles."
+  },
+  "EPalWazaID::SeaGush": {
+    "localized_name": "Geyser Gush",
+    "description": "Erupts massive pillars of water beneath and around the enemy."
   },
   "EPalWazaID::SeedMachinegun": {
     "localized_name": "Seed Machine Gun",
@@ -455,6 +483,10 @@
     "localized_name": "Reckless Charge",
     "description": "Rushoar's exclusive skill. Takes aim at a foe and rushes at them with a fierce charge."
   },
+  "EPalWazaID::Unique_CaptainPenguin_Black_BodySlide_Electric": {
+    "localized_name": "Thunderslide",
+    "description": "Penking Lux's exclusive skill. Lies on its belly while generating electric charge all around it before sliding at enemies at high speed."
+  },
   "EPalWazaID::Unique_CaptainPenguin_BodySlide": {
     "localized_name": "Emperor Slide",
     "description": "Penking's exclusive skill. Lies on its belly while generating frozen air all around it before sliding at enemies at high speed."
@@ -551,6 +583,14 @@
     "localized_name": "Fierce Fang",
     "description": "Direhowl's exclusive skill. Swiftly leaps at an enemy and bites into them."
   },
+  "EPalWazaID::Unique_GhostAnglerfish_Fire_SweepBait_Fire": {
+    "localized_name": "Scorching Lantern Sweep",
+    "description": "Ghangler Ignis's exclusive skill. Lashes forward with the flaming lantern atop its head, sweeping broadly ahead."
+  },
+  "EPalWazaID::Unique_GhostAnglerfish_SweepBait": {
+    "localized_name": "Lantern Sweep",
+    "description": "Ghangler's exclusive skill. Lashes forward with the lantern atop its head, sweeping broadly ahead."
+  },
   "EPalWazaID::Unique_GhostBeast_Tossin": {
     "localized_name": "Spirit Dash",
     "description": "Maraith's exclusive skill. While running slowly, it continuously launches flickering fireballs toward the enemy."
@@ -603,6 +643,10 @@
     "localized_name": "Phoenix Tide",
     "description": "Faleris Aqua's exclusive skill. After summoning a massive tornado, it envelops its body in water and charges forward."
   },
+  "EPalWazaID::Unique_IceCrocodile_SpitAttack": {
+    "localized_name": "Chaotic Spray",
+    "description": "Munchill's exclusive skill. Coughs up three cold grenades kept undigested inside its body and lobs them at enemies. May occasionally spit out something more dangerous...?"
+  },
   "EPalWazaID::Unique_IceDeer_IceHorn": {
     "localized_name": "Freezing Charge",
     "description": "Reindrix's exclusive skill. Charges at an enemy with antlers adorned in ice."
@@ -610,6 +654,10 @@
   "EPalWazaID::Unique_IceHorse_IceBladeAttack": {
     "localized_name": "Crystal Wing",
     "description": "Frostallion's exclusive skill. Dashes forward while concentrating frigid air around its wings, using them to slash enemies with icy blade."
+  },
+  "EPalWazaID::Unique_IceNarwhal_JumpingHorn": {
+    "localized_name": "High Breach",
+    "description": "Whalaska's exclusive skill. Charges straight ahead and briefly submerges, then bursts high into the air to launch an attack. An ice-element explosion occurs upon emerging."
   },
   "EPalWazaID::Unique_JetDragon_JumpBeam": {
     "localized_name": "Beam Comet",
@@ -631,9 +679,13 @@
     "localized_name": "Lightning Gale",
     "description": "Univolt's exclusive skill. Generates bolts of lightning all around while charging at its target."
   },
+  "EPalWazaID::Unique_LeafMomonga_SomerSault": {
+    "localized_name": "Konoha Flip",
+    "description": "Herbil's exclusive skill. After a brief moment of preparation, charges at the enemy at high speed, finishing with a flip."
+  },
   "EPalWazaID::Unique_LilyQueen_LilyHealing": {
     "localized_name": "Bountiful Protection",
-    "description": "Lyleen's exclusive skill. Uses her healing power to recover her health. Doesn't heal anyone else."
+    "description": "Lyleen's exclusive skill. Restores health to all allies within range using the power of healing."
   },
   "EPalWazaID::Unique_LilyQueen_WindBarrier": {
     "localized_name": "Wind Barrier",
@@ -682,6 +734,14 @@
   "EPalWazaID::Unique_PinkCat_CatPunch": {
     "localized_name": "Punch Flurry",
     "description": "Cattiva's exclusive skill. Chases after enemies, swinging both arms and delivering a flurry of punches."
+  },
+  "EPalWazaID::Unique_Plesiosaur_LongBreath": {
+    "localized_name": "Deep Breath",
+    "description": "Braloha's exclusive skill. From the base of its long neck to the tip of its snout, it gradually spreads the breath of grass element."
+  },
+  "EPalWazaID::Unique_PoseidonOrca_TorrentLaser": {
+    "localized_name": "Thalassonic Laser",
+    "description": "Neptilius's exclusive skill. Rising slightly, it gathers water at its mouth, then sweeps a high-pressure stream vertically and horizontally three times. Fissures form at the swept locations, erupting with water."
   },
   "EPalWazaID::Unique_PurpleSpider_SpiderRaid": {
     "localized_name": "Webstrike Impact",
@@ -735,6 +795,14 @@
     "localized_name": "Needle Spear",
     "description": "Beegarde's exclusive skill. Charges at the enemy at high speed, delivering a final thrust with a spear."
   },
+  "EPalWazaID::Unique_StuffedShark_HiddenWeapon": {
+    "localized_name": "Trigger Happy",
+    "description": "Finsider's exclusive skill. Draws twin water blasters from its mouth, firing six shots alternately left and right, then finishes by combining both blasters to unleash one powerful shot."
+  },
+  "EPalWazaID::Unique_TentacleTurtle_HydroSpin": {
+    "localized_name": "Hydro Spin",
+    "description": "Turtacle's exclusive skill. Uses jet-powered propulsion to spin rapidly and launch itself at the enemy."
+  },
   "EPalWazaID::Unique_ThunderBird_ThunderStorm": {
     "localized_name": "Lightning Dive",
     "description": "Beakon's exclusive skill. First, it strikes the enemy's location with lightning. Then, while gliding forward, it drops lightning to the left and right."
@@ -750,6 +818,10 @@
   "EPalWazaID::Unique_ThunderDragonMan_ThunderSwordAttack": {
     "localized_name": "Kerauno",
     "description": "Orserk's exclusive skill. Summons a spear of lightning while leaping into the air before throwing it at an enemy."
+  },
+  "EPalWazaID::Unique_TropicalOstrich_DashKick": {
+    "localized_name": "Dash Kick",
+    "description": "Palumba's exclusive skill. Dashes to build up speed, then launches a devastating airborne kick at its target."
   },
   "EPalWazaID::Unique_Umihebi_Fire_FireWindingTackle": {
     "localized_name": "Magma Serpent",
@@ -798,6 +870,54 @@
   "EPalWazaID::Unique_WingGolem_RoundCutter": {
     "localized_name": "Ground Cutter",
     "description": "Knocklem's exclusive skill. Takes a big swing and throws the ring from its back. The ring flies in a circular trajectory."
+  },
+  "EPalWazaID::Unique_YakushimaBoss001_Small_DemonEyeCharge": {
+    "localized_name": "Ocular Rush",
+    "description": "Demon Eye's exclusive skill. Charges at the enemy, bouncing off the ground or walls on impact."
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Dark": {
+    "localized_name": "Slime Press (Dark)",
+    "description": "Purple Slime's exclusive skill. Leaps toward the enemy and delivers an attack."
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Fire": {
+    "localized_name": "Slime Press (Fire)",
+    "description": "Red Slime's exclusive skill. Leaps toward the enemy and delivers an attack."
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Leaf": {
+    "localized_name": "Slime Press (Grass)",
+    "description": "Green Slime's exclusive skill. Leaps toward the enemy and delivers an attack."
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Normal": {
+    "localized_name": "Slime Press (Neutral)",
+    "description": "Illuminant Slime's exclusive skill. Leaps toward the enemy and delivers an attack."
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Rainbow": {
+    "localized_name": "Slime Press (Rainbow)",
+    "description": "Rainbow Slime's exclusive skill. Leaps toward the enemy and delivers an attack."
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Water": {
+    "localized_name": "Slime Press (Water)",
+    "description": "Blue Slime's exclusive skill. Leaps toward the enemy and delivers an attack."
+  },
+  "EPalWazaID::Unique_YakushimaMonster002_SwordCharge": {
+    "localized_name": "Sword Charge",
+    "description": "Enchanted Sword's exclusive skill. Lunges forward to deliver a sharp thrust."
+  },
+  "EPalWazaID::Unique_YakushimaMonster003_BatCharge": {
+    "localized_name": "Winged Assault",
+    "description": "Cave Bat's exclusive skill. Using its whole body, it lunges at the enemy, bouncing off the ground or walls on impact."
+  },
+  "EPalWazaID::Unique_Yakushima_EyeTossin": {
+    "localized_name": "Lock-On Lunge",
+    "description": "Eye of Cthulhu's exclusive skill. Repeatedly charges at the enemy."
+  },
+  "EPalWazaID::Unique_Yakushima_MouthTossin": {
+    "localized_name": "Frenzied Charge",
+    "description": "Eye of Cthulhu's exclusive skill. Repeatedly charges at the enemy at high speed."
+  },
+  "EPalWazaID::Unique_Yakushima_SummonServant": {
+    "localized_name": "Servant Call",
+    "description": "Eye of Cthulhu's exclusive skill. Summons four Servants that charge at enemies to deal damage. Servants disappear after taking damage or after a short time."
   },
   "EPalWazaID::Unique_Yeti_Grass_GrassBall": {
     "localized_name": "Lawn Bowling",

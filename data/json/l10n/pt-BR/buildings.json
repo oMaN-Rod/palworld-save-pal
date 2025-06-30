@@ -35,9 +35,21 @@
     "localized_name": "Plataforma de Monitoramento",
     "description": "Permite instruir os Pals na base sobre como trabalhar e autorizar ou proibir trabalhos específicos."
   },
+  "BaseCampWorkerExtraStation": {
+    "localized_name": "Terminal para Operar Caixa de Pals",
+    "description": "Terminal para operar uma Caixa de Pals à distância. Coloque-o num local onde deseja soltar Pals para criar uma base a seu gosto."
+  },
   "BathTub_Stone": {
     "localized_name": "Banheira Antiga",
     "description": "Banheira antiga para decoração."
+  },
+  "Believer_Banner": {
+    "localized_name": "Faixa Vertical da Associação de Proteção aos Pals",
+    "description": "Faixa vertical da Associação de Proteção aos Pals para decoração."
+  },
+  "Believer_Flag": {
+    "localized_name": "Estandarte da Associação de Proteção aos Pals",
+    "description": "Estandarte da Associação de Proteção aos Pals para decoração."
   },
   "Bench_Wood": {
     "localized_name": "Banco de Madeira",
@@ -100,8 +112,8 @@
     "description": "Recurso necessário para preparar alimentos. Só permite assar ingredientes simples. Precisa ser aceso por um Pal de fogo."
   },
   "CandleStand": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Castiçal Solene",
+    "description": "Castiçal imponente que arde com a chama venerada pelos Amigos da Chama Eterna. Fonte de luz que pode ser afixada no chão. Precisa ser acesa por um Pal de fogo."
   },
   "Cauldron": {
     "localized_name": "Caldeirão de Bruxa",
@@ -156,12 +168,12 @@
     "description": "Instalação que combina múltiplos projetos para criar projetos mais avançados."
   },
   "ConservationGroupBannerA": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Bandeira da Associação de Proteção aos Pals",
+    "description": "Bandeira da Associação de Proteção aos Pals para decoração."
   },
   "ConservationGroupBannerB": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Faixa da Associação de Proteção aos Pals",
+    "description": "Faixa horizontal da Associação de Proteção aos Pals para decoração."
   },
   "Container01_Iron": {
     "localized_name": "Contêiner Grande",
@@ -198,6 +210,10 @@
   "Crusher": {
     "localized_name": "Triturador",
     "description": "Instalações para triturar Pedra e Madeira e convertê-las em outros materiais. É preciso ter um Pal com aptidão para [rega] a fim de girar a roda d'água."
+  },
+  "CrystalPit": {
+    "localized_name": "Garimpo de Exoquartzo",
+    "description": "Recurso para produzir Exoquartzo. O trabalho de escavar Exoquartzo é árduo e requer muita energia. Confie-o a um Pal com habilidade para o garimpo."
   },
   "Curtain01_Wall_Stone": {
     "localized_name": "Cortina Antiga",
@@ -303,6 +319,10 @@
     "localized_name": "Fábrica de Linha II",
     "description": "Fábrica para produzir itens e armaduras. Com a especialização de tarefas, garante uma produção muito mais rápida. Requer Pals capazes de realizar trabalho manual."
   },
+  "Factory_Hard_04": {
+    "localized_name": "Fábrica de Civilização Avançada",
+    "description": "Fábrica para produzir itens e armaduras. Com a introdução de maquinário eficiente, garante uma produção em alta velocidade. Requer Pals capazes de realizar trabalho manual."
+  },
   "Factory_Money": {
     "localized_name": "Fábrica de Dinheiro",
     "description": "Fábrica para produzir Moeda de Ouro. Como gera pressão psicológica, diminui a SAN dos trabalhadores. Requer Pals capazes de realizar trabalho manual."
@@ -343,9 +363,25 @@
     "localized_name": "Estátua da Águia Gigante",
     "description": "Monumento com a imagem de um Chikipi. Permite viagem rápida ao ser colocado em algum local."
   },
+  "FireCult_Banner": {
+    "localized_name": "Faixa Vertical dos Amigos da Chama Eterna",
+    "description": "Faixa vertical dos Amigos da Chama Eterna para decoração."
+  },
+  "FireCult_Flag": {
+    "localized_name": "Estandarte dos Amigos da Chama Eterna",
+    "description": "Estandarte dos Amigos da Chama Eterna para decoração."
+  },
   "FireStand": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Castiçal para Cerimônias",
+    "description": "Castiçal para cerimônias que arde com a chama venerada pelos Amigos da Chama Eterna. Fonte de luz que pode ser afixada no chão. Precisa ser acesa por um Pal de fogo."
+  },
+  "FishingPond1": {
+    "localized_name": "Tanque de Pesca",
+    "description": "Tanque guarnecido com utensílios de pesca. Coloque um Pal aqui para que ele curta uma pescaria relaxante. Requer Pals capazes de realizar trabalho manual."
+  },
+  "FishingPond2": {
+    "localized_name": "Grande Tanque de Pesca",
+    "description": "Grande tanque guarnecido com utensílios de pesca. Graças à sua ampla extensão, é possível pescar Pals maiores. Requer Pals capazes de realizar trabalho manual."
   },
   "FlourMill": {
     "localized_name": "Moenda",
@@ -372,8 +408,8 @@
     "description": "Porta erguida sobre a fundação para servir de entrada. É bastante resistente, pois é feita de vidro reforçado."
   },
   "Glass_Fence": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Cerca de Vidro",
+    "description": "Cerca erguida sobre a fundação ou telhado para evitar quedas. É bastante resistente, pois é feita de vidro reforçado."
   },
   "Glass_SlantedRoof": {
     "localized_name": "Telhado Inclinado de Vidro",
@@ -415,6 +451,10 @@
     "localized_name": "Rede de Futebol",
     "description": "Rede de futebol para decoração. O placar não aumenta mesmo que chute um SheepBall para dentro."
   },
+  "GuardianDogStatue": {
+    "localized_name": "Estátua de Yakumo",
+    "description": "Estátua de Yakumo para decoração."
+  },
   "GuildChest": {
     "localized_name": "Baú de Guilda",
     "description": "Baú capaz de receber e transmitir itens de forma instantânea através do hiperespaço. Baús deste tipo colocados em bases diferentes compartilham o mesmo conteúdo."
@@ -435,17 +475,25 @@
     "localized_name": "Cozinha Grande",
     "description": "Recurso necessário para preparar alimentos. Devido ao seu grande porte, permite que vários Pals cooperem no trabalho. Precisa ser aceso por um Pal de fogo."
   },
+  "Hunter_Banner": {
+    "localized_name": "Faixa Vertical dos Caçadores Clandestinos",
+    "description": "Faixa vertical dos Caçadores Clandestinos para decoração."
+  },
+  "Hunter_Flag": {
+    "localized_name": "Estandarte dos Caçadores Clandestinos",
+    "description": "Estandarte dos Caçadores Clandestinos para decoração."
+  },
   "Hunter_GangFlag": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Bandeira dos Caçadores Clandestinos",
+    "description": "Bandeira dos Caçadores Clandestinos para decoração."
   },
   "IceCrusher": {
     "localized_name": "Triturador de Gelo",
     "description": "Instalações para triturar Minério Metálico e convertê-lo em outros materiais. É preciso ter um Pal com aptidão para [Refrigeração] e alimentação de energia elétrica a fim de usá-las, mas permitem trabalhar com mais eficiência."
   },
   "Iron_Fence": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Cerca de Metal",
+    "description": "Cerca erguida sobre a fundação ou telhado para evitar quedas. É bastante resistente, pois é feita de metal."
   },
   "Irori": {
     "localized_name": "Lareira de chão",
@@ -496,8 +544,8 @@
     "description": "Porta corrediça de papel fosco erguida sobre a fundação para servir de entrada. Permite criar construções exuberantes em estilo japonês."
   },
   "JapaneseStyle_Fence": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Cerca Japonesa",
+    "description": "Cerca erguida sobre a fundação ou telhado para evitar quedas. Permite criar construções exuberantes em estilo japonês."
   },
   "JapaneseStyle_Pillar": {
     "localized_name": "Pilar Japonês",
@@ -551,6 +599,10 @@
     "localized_name": "Lâmpada Fixa",
     "description": "Fonte de luz que ilumina a base mesmo nas noites mais escuras. Exige eletricidade, mas clareia uma área ainda maior."
   },
+  "LanternTop": {
+    "localized_name": "Lanterna de Papel Portátil",
+    "description": "Lanterna de papel portátil para decoração."
+  },
   "LargeCeilingLamp": {
     "localized_name": "Lâmpada Grande de Teto",
     "description": "Fonte de luz que ilumina a base mesmo nas noites mais escuras. Pode ser afixada no teto. Exige mais eletricidade, mas clareia uma área muito maior."
@@ -600,8 +652,8 @@
     "description": "Poste de luz chique que serve como fonte de luz. Requer eletricidade para ser aceso."
   },
   "LilyQueenStatue": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Estátua de Lyleen",
+    "description": "Estátua de Lyleen para decoração."
   },
   "MachineGame01_Iron": {
     "localized_name": "Máquina de Garra",
@@ -703,6 +755,18 @@
     "localized_name": "Incubadora de Ovos Elétrica Grande",
     "description": "Dispositivo para incubar Ovo de Pal. Embora exija energia elétrica, mantém a temperatura ideal para permitir incubar vários ovos ao mesmo tempo."
   },
+  "MultiHatchingPalEgg": {
+    "localized_name": "Máquina Incubadora de Ovos Grande",
+    "description": "Dispositivo para incubar Ovo de Pal. Mantém a temperatura ideal de forma automática até certo ponto e permite incubar vários ovos ao mesmo tempo."
+  },
+  "Ninja_Banner": {
+    "localized_name": "Faixa Vertical do Bando das Flores e da Lua",
+    "description": "Faixa vertical do Bando das Flores e da Lua para decoração."
+  },
+  "Ninja_Flag": {
+    "localized_name": "Estandarte do Bando das Flores e da Lua",
+    "description": "Estandarte do Bando das Flores e da Lua para decoração."
+  },
   "OilPump": {
     "localized_name": "Extrator de Petróleo",
     "description": "Equipamento necessário para extrair Óleo cru de campos de petróleo. Requer alimentação de energia elétrica em grande quantidade para funcionar."
@@ -712,8 +776,8 @@
     "description": "Quando isto é colocado na base, aumenta a velocidade de trabalho de geração de fogo. Não há efeito adicional por se colocar mais de um."
   },
   "OperatingTable": {
-    "localized_name": "pt-BR_Text",
-    "description": "pt-BR_text"
+    "localized_name": "Mesa cirúrgica Pal",
+    "description": "Recurso que possibilita realizar cirurgias nos Pals para alterar seu sexo ou habilidades passivas."
   },
   "PalBooth": {
     "localized_name": "Mercado de Pulgas (Pals)",
@@ -724,8 +788,8 @@
     "description": "Recurso para deixar guardados os Pals capturados. Os Pals dentro da caixa recuperam PV gradualmente. Estas instalações formam o núcleo da sua base."
   },
   "PalCage": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Jaula Vazia",
+    "description": "Jaula vazia para decoração."
   },
   "PalFoodBox": {
     "localized_name": "Ração",
@@ -775,6 +839,14 @@
     "localized_name": "Cama de Luxo",
     "description": "Leito macio para pessoas poderem ter um bom sono. Use quando estiver ferido ou precisar dormir à noite. Não se pode dormir direito a céu aberto, pois dá muito medo."
   },
+  "Police_Banner": {
+    "localized_name": "Faixa Vertical da Milícia Popular",
+    "description": "Faixa vertical da Milícia Popular para decoração."
+  },
+  "Police_Flag": {
+    "localized_name": "Estandarte da Milícia Popular",
+    "description": "Estandarte da Milícia Popular para decoração."
+  },
   "QuartzPit": {
     "localized_name": "Garimpo de Quartzo Puro",
     "description": "Recurso para produzir Quartzo Puro. O trabalho de escavar Quartzo Puro é árduo e requer muita energia. Confie-o a um Pal com habilidade para o garimpo."
@@ -807,13 +879,61 @@
     "localized_name": "pt-BR_Text",
     "description": "pt-BR_Text"
   },
+  "SF_Chair": {
+    "localized_name": "Cadeira de Laboratório",
+    "description": "Cadeira ao estilo de móveis de laboratório para decoração."
+  },
+  "SF_Desk": {
+    "localized_name": "Escrivaninha de Laboratório",
+    "description": "Escrivaninha ao estilo de móveis de laboratório para decoração."
+  },
+  "SF_DoorWall": {
+    "localized_name": "Parede com Porta Despojada",
+    "description": "Porta erguida sobre a fundação para servir de entrada. Permite criar construções neofuturistas e despojadas."
+  },
   "SF_Fence": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Cerca Despojada",
+    "description": "Cerca erguida sobre a fundação ou telhado para evitar quedas. Permite criar construções neofuturistas e despojadas."
+  },
+  "SF_SlantedRoof": {
+    "localized_name": "Telhado Inclinado Despojado",
+    "description": "Telhado inclinado erguido sobre o muro para oferecer proteção contra vento e chuva. Permite criar construções neofuturistas e despojadas."
+  },
+  "SF_TriangleWall": {
+    "localized_name": "Parede Triangular Despojada",
+    "description": "Parede triangular erguida sobre a fundação. Permite criar construções neofuturistas e despojadas."
+  },
+  "SF_WindowWall": {
+    "localized_name": "Parede com Janela Despojada",
+    "description": "Parede com janela erguida sobre a fundação para impedir a entrada de invasores. Permite criar construções neofuturistas e despojadas."
+  },
+  "SF_foundation": {
+    "localized_name": "Fundação Despojada",
+    "description": "Fundação para erigir muros ou instalações. Permite criar construções neofuturistas e despojadas."
+  },
+  "SF_roof": {
+    "localized_name": "Telhado Despojado",
+    "description": "Telhado erguido sobre o muro para oferecer proteção contra vento e chuva. Permite criar construções neofuturistas e despojadas."
+  },
+  "SF_stair": {
+    "localized_name": "Escada Despojada",
+    "description": "Escada colocada abaixo da fundação ou do telhado para permitir a subida. Permite criar construções neofuturistas e despojadas."
+  },
+  "SF_wall": {
+    "localized_name": "Parede Despojada",
+    "description": "Muro erguido sobre a fundação para impedir a entrada de invasores. Permite criar construções neofuturistas e despojadas."
   },
   "SanityDecrease1": {
     "localized_name": "Emissor de Ondas Alfa",
     "description": "Dispositivo para emitir ondas alfa e fazer com que os Pal relaxem. Torna mais difícil diminuir a SAN de Pals na base. Ter mais de um deste dispositivo não surte nenhum efeito adicional."
+  },
+  "Scientist_Banner": {
+    "localized_name": "Faixa Vertical da Unidade de Pesquisas Genéticas",
+    "description": "Faixa vertical da Unidade de Pesquisas Genéticas para decoração."
+  },
+  "Scientist_Flag": {
+    "localized_name": "Estandarte da Unidade de Pesquisas Genéticas",
+    "description": "Estandarte da Unidade de Pesquisas Genéticas para decoração."
   },
   "Seika": {
     "localized_name": "Arranjo floral",
@@ -891,6 +1011,10 @@
     "localized_name": "Fonte de água de bambu",
     "description": "Fonte de água de bambu para decoração. Use isto para criar construções em estilo japonês."
   },
+  "Shrine_Lantern": {
+    "localized_name": "Lanterna de Santuário",
+    "description": "Lanterna de santuário para decoração."
+  },
   "SignExit_Ceiling_Iron": {
     "localized_name": "Placa de Saída de Emergência para Teto",
     "description": "Placa de saída de emergência para decoração. Pode ser colocada no teto."
@@ -944,8 +1068,8 @@
     "description": "Instalações aonde os Pals cansados vão para relaxar. O ambiente mais aconchegante restaura ainda mais a SAN."
   },
   "Spa3": {
-    "localized_name": "Águas Termais",
-    "description": "Instalações aonde os Pals cansados vão para relaxar. Cura o cansaço acumulado no trabalho e restaura a SAN."
+    "localized_name": "Águas Termais Japonesas",
+    "description": "Instalações aonde os Pals cansados vão para relaxar. O ambiente terapêutico ao estilo japonês restaura ainda mais a SAN."
   },
   "SphereFactory_Black_01": {
     "localized_name": "Oficina de Esferas",
@@ -976,8 +1100,8 @@
     "description": "Porta erguida sobre a fundação para servir de entrada. É um tanto resistente, pois é feita de pedra."
   },
   "Stone_Fence": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Cerca de Pedra",
+    "description": "Cerca erguida sobre a fundação ou telhado para evitar quedas. É um tanto resistente, pois é feita de pedra."
   },
   "Stone_Gate": {
     "localized_name": "Portão de Pedra",
@@ -1204,8 +1328,8 @@
     "description": "Fonte de luz que ilumina a base mesmo nas noites mais escuras. Pode ser afixada em uma parede. Precisa ser acesa por um Pal de fogo."
   },
   "WallTorch02": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Tocha de Parede Solene",
+    "description": "Tocha imponente que arde com a chama venerada pelos Amigos da Chama Eterna. Fonte de luz que pode ser afixada numa parede. Precisa ser acesa por um Pal de fogo."
   },
   "WeaponFactory_Dirty_01": {
     "localized_name": "Fábrica de Armas",
@@ -1219,13 +1343,17 @@
     "localized_name": "Fábrica de Linha de Armas II",
     "description": "Fábrica para produzir armas e munição. Com a especialização de tarefas, permite criar armas avançadas rapidamente. Requer Pals capazes de realizar trabalho manual."
   },
+  "WeaponFactory_Dirty_04": {
+    "localized_name": "Fábrica de Armas de Civilização Avançada",
+    "description": "Fábrica para produzir armas e munição. Com a introdução de maquinário eficiente, garante uma produção de armas em alta velocidade. Requer Pals capazes de realizar trabalho manual."
+  },
   "Wire_Fence": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Cerca de Arame",
+    "description": "Cerca de arame para decoração."
   },
   "Wood_Fence": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Cerca de Madeira",
+    "description": "Cerca erguida sobre a fundação ou telhado para proteger contra quedas. É frágil, pois é feita de madeira."
   },
   "Wood_Gate": {
     "localized_name": "Portão de Madeira",
@@ -1244,8 +1372,8 @@
     "description": "Parede com janela erguida sobre a fundação para impedir a entrada de invasores. É frágil por ser feita de madeira."
   },
   "WoodenBarricade": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Barricada de Madeira",
+    "description": "Barricada de madeira para decoração."
   },
   "Wooden_DoorWall": {
     "localized_name": "Porta de Madeira",

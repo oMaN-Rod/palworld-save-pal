@@ -35,9 +35,21 @@
     "localized_name": "Aufsichtskanzel",
     "description": "Von hier aus kannst du anordnen, wie deine Arbeitspals arbeiten sollen und ihnen bestimmte Arbeiten erlauben oder verbieten."
   },
+  "BaseCampWorkerExtraStation": {
+    "localized_name": "Pal-Box-Bedienterminal",
+    "description": "Ein Gerät, mit dem du die Pal-Box aus der Entfernung bedienen kannst. Platziere es an einer Stelle, wo du deine Pals erscheinen lassen möchtest und gestalte dein Lager flexibel."
+  },
   "BathTub_Stone": {
     "localized_name": "Antike Badewanne",
     "description": "Eine dekorative antike Badewanne."
+  },
+  "Believer_Banner": {
+    "localized_name": "Liga der Palfreunde-Hochbanner",
+    "description": "Ein dekoratives Hochbanner der Liga der Palfreunde."
+  },
+  "Believer_Flag": {
+    "localized_name": "Liga der Palfreunde-Standarte",
+    "description": "Eine dekorative Standarte der Liga der Palfreunde."
   },
   "Bench_Wood": {
     "localized_name": "Holzbank",
@@ -81,7 +93,7 @@
   },
   "BreedFarm": {
     "localized_name": "Zuchtfarm",
-    "description": "Hier kannst du zwei Pals (♂ und ♀) hinschicken, um sie Eier legen zu lassen. Als Motivation zum Eierlegen wird „Torte“ benötigt."
+    "description": "Hier kannst du zwei Pals (♂ und ♀) hinschicken, um sie Eier legen zu lassen. Als Motivation zum Eierlegen wird „Torte| benötigt."
   },
   "BuildableGoddessStatue": {
     "localized_name": "Statue der Kraft",
@@ -100,8 +112,8 @@
     "description": "Eine Anlage zur Zubereitung von Speisen. Mehr als ein simples Anbraten ist allerdings nicht drin. Muss von einem Feuer-Pal angefacht werden."
   },
   "CandleStand": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Feierlicher Leuchter",
+    "description": "Ein pompöser Leuchter, dessen Flamme von der Bruderschaft der ewigen Lohe verehrt wird. Dient als Lichtquelle und kann auf dem Boden aufgestellt werden. Muss von einem Feuer-Pal angefacht werden."
   },
   "Cauldron": {
     "localized_name": "Hexenkessel",
@@ -156,12 +168,12 @@
     "description": "Eine Einrichtung, mit der du mehrere Baupläne zu einem höherwertigen Bauplan verbinden kannst."
   },
   "ConservationGroupBannerA": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Liga der Palfreunde-Flagge",
+    "description": "Eine dekorative Flagge der Liga der Palfreunde."
   },
   "ConservationGroupBannerB": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Liga der Palfreunde-Banner",
+    "description": "Ein dekoratives Querbanner der Liga der Palfreunde."
   },
   "Container01_Iron": {
     "localized_name": "Große Kiste",
@@ -197,7 +209,11 @@
   },
   "Crusher": {
     "localized_name": "Zerkleinerer",
-    "description": "Eine Anlage zum Zerkleinern und Umwandeln von Stein und Holz. Um das Wasserrad zu drehen, benötigt man einen Pal, der „Gießen“ beherrscht."
+    "description": "Eine Anlage zum Zerkleinern und Umwandeln von Stein und Holz. Um das Wasserrad zu drehen, benötigt man einen Pal, der „Gießen| beherrscht."
+  },
+  "CrystalPit": {
+    "localized_name": "Hexoquarzmine",
+    "description": "Eine Anlage zur Gewinnung von Hexoquarz. Der Hexoquarz-Abbau ist körperlich anstrengend. Überlasse die Arbeit Pals, die sich mit Bergbau auskennen."
   },
   "Curtain01_Wall_Stone": {
     "localized_name": "Antiker Vorhang",
@@ -213,7 +229,7 @@
   },
   "DefenseBowGun": {
     "localized_name": "Stationäre Armbrust",
-    "description": "Eine Verteidigungsanlage, die mit einem Pal besetzt werden kann, um gegen Angriffe gewappnet zu sein. Für den Betrieb wird Munition vom Typ „Pfeil“ benötigt. Lege Munition in einer Truhe bereit, und der stationierte Pal wird automatisch nachladen."
+    "description": "Eine Verteidigungsanlage, die mit einem Pal besetzt werden kann, um gegen Angriffe gewappnet zu sein. Für den Betrieb wird Munition vom Typ „Pfeil| benötigt. Lege Munition in einer Truhe bereit, und der stationierte Pal wird automatisch nachladen."
   },
   "DefenseMachinegun": {
     "localized_name": "Stationäres Maschinengewehr",
@@ -221,7 +237,7 @@
   },
   "DefenseMissile": {
     "localized_name": "Stationärer Raketenwerfer",
-    "description": "Eine Verteidigungsanlage, die mit einem Pal besetzt werden kann, um gegen Angriffe gewappnet zu sein. Für den Betrieb wird Munition vom Typ „Panzerfaustmunition“ benötigt. Lege Munition in einer Truhe bereit, und der stationierte Pal wird automatisch nachladen."
+    "description": "Eine Verteidigungsanlage, die mit einem Pal besetzt werden kann, um gegen Angriffe gewappnet zu sein. Für den Betrieb wird Munition vom Typ „Panzerfaustmunition| benötigt. Lege Munition in einer Truhe bereit, und der stationierte Pal wird automatisch nachladen."
   },
   "DefenseWait": {
     "localized_name": "Sandsack",
@@ -303,6 +319,10 @@
     "localized_name": "Fließbandwerk II",
     "description": "Eine Werkstatt zur Fertigung von Gegenständen und Rüstungen. Durch Spezialisierung läuft die Fertigung jetzt wirklich flott. Für die Arbeit benötigt man Pals, die Handwerk beherrschen."
   },
+  "Factory_Hard_04": {
+    "localized_name": "Hightech-Fließbandwerk",
+    "description": "Eine Werkstatt zur Fertigung von Gegenständen und Rüstungen. Mithilfe modernster Maschinen läuft die Fertigung jetzt blitzschnell. Für die Arbeit benötigt man Pals, die Handwerk beherrschen."
+  },
   "Factory_Money": {
     "localized_name": "Goldmünzen-Prägewerk",
     "description": "Eine Werkstatt zur Prägung von Goldmünze. Die Arbeit verlangt einiges ab, weshalb die GEI der hier beschäftigten Pals sinkt. Für die Arbeit benötigt man Pals, die Handwerk beherrschen."
@@ -343,13 +363,29 @@
     "localized_name": "Adlerstatue",
     "description": "Ein Steinmonument in Gestalt eines Chikipi. Errichte es, um Schnellreisen zu ermöglichen."
   },
+  "FireCult_Banner": {
+    "localized_name": "Bruderschaft der ewigen Lohe-Hochbanner",
+    "description": "Ein dekoratives Hochbanner der Bruderschaft der ewigen Lohe."
+  },
+  "FireCult_Flag": {
+    "localized_name": "Bruderschaft der ewigen Lohe-Standarte",
+    "description": "Eine dekorative Standarte der Bruderschaft der ewigen Lohe."
+  },
   "FireStand": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Zeremonieller Leuchter",
+    "description": "Ein zeremonieller Leuchter, dessen Flamme von der Bruderschaft der ewigen Lohe verehrt wird. Dient als Lichtquelle und kann auf dem Boden aufgestellt werden. Muss von einem Feuer-Pal angefacht werden."
+  },
+  "FishingPond1": {
+    "localized_name": "Fischteich",
+    "description": "Ein Fischteich mit dazugehöriger Angelausrüstung. Weise einen Pal zu, um hier gemächlich zu angeln. Zum Angeln benötigt man Pals, die Handwerk beherrschen."
+  },
+  "FishingPond2": {
+    "localized_name": "Großer Fischteich",
+    "description": "Ein großer Fischteich mit dazugehöriger Angelausrüstung. Die größere Wasserfläche ermöglicht auch das Fangen größerer Pals. Zum Angeln benötigt man Pals, die Handwerk beherrschen."
   },
   "FlourMill": {
     "localized_name": "Mühle",
-    "description": "Eine Anlage, um aus Weizen Mehl zu mahlen. Um das Wasserrad zu drehen, benötigt man einen Pal, der „Gießen“ beherrscht."
+    "description": "Eine Anlage, um aus Weizen Mehl zu mahlen. Um das Wasserrad zu drehen, benötigt man einen Pal, der „Gießen| beherrscht."
   },
   "FlowerBed": {
     "localized_name": "Blumenbeet",
@@ -372,8 +408,8 @@
     "description": "Eine Eingangstür, die du auf einem Fundament errichten kannst. Ist aus Hartglas und dadurch sehr robust."
   },
   "Glass_Fence": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Glasgeländer",
+    "description": "Ein Geländer, das du auf einem Fundament oder einem Dach errichten kannst, um Absturzunfällen vorzubeugen. Ist aus Hartglas und dadurch sehr robust."
   },
   "Glass_SlantedRoof": {
     "localized_name": "Schräges Glasdach",
@@ -415,6 +451,10 @@
     "localized_name": "Fußballtor",
     "description": "Ein dekoratives Fußballtor. Auch wenn du ein SheepBall reinbolzt, kriegst du keine EP."
   },
+  "GuardianDogStatue": {
+    "localized_name": "Yakumo-Statue",
+    "description": "Eine dekorative Yakumo-Statue."
+  },
   "GuildChest": {
     "localized_name": "Gildentruhe",
     "description": "Eine Truhe, die ihre Daten via Subraum in Echtzeit kommuniziert. Du kannst von jedem Lager aus, wo eine platziert ist, auf ihren Inhalt zugreifen."
@@ -435,17 +475,25 @@
     "localized_name": "Großküche",
     "description": "Eine Anlage zur Zubereitung von Speisen. Dank ihrer Größe können hier mehrere Pals gemeinsam kochen. Muss von einem Feuer-Pal angefacht werden."
   },
+  "Hunter_Banner": {
+    "localized_name": "Wilderer-Hochbanner",
+    "description": "Ein dekoratives Hochbanner der Wilderer."
+  },
+  "Hunter_Flag": {
+    "localized_name": "Wilderer-Standarte",
+    "description": "Eine dekorative Standarte der Wilderer."
+  },
   "Hunter_GangFlag": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Wilderer-Flagge",
+    "description": "Eine dekorative Flagge der Wilderer."
   },
   "IceCrusher": {
     "localized_name": "Gefrierzerkleinerer",
-    "description": "Eine Anlage zum Zerkleinern und Umwandeln von Erz. Für den Betrieb benötigt man Strom sowie einen Pal, der „Kühlung“ beherrscht. Sehr effizient."
+    "description": "Eine Anlage zum Zerkleinern und Umwandeln von Erz. Für den Betrieb benötigt man Strom sowie einen Pal, der „Kühlung| beherrscht. Sehr effizient."
   },
   "Iron_Fence": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Metallgeländer",
+    "description": "Ein Geländer, das du auf einem Fundament oder einem Dach errichten kannst, um Absturzunfällen vorzubeugen. Ist aus Metall und dadurch extrem solide."
   },
   "Irori": {
     "localized_name": "Fernöstliche Feuerstelle",
@@ -496,8 +544,8 @@
     "description": "Eine Schiebetür für drinnen, die du auf einem Fundament errichten kannst. Besticht mit fernöstlicher Eleganz."
   },
   "JapaneseStyle_Fence": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Fernöstliches Geländer",
+    "description": "Ein Geländer, das du auf einem Fundament oder einem Dach errichten kannst, um Absturzunfällen vorzubeugen. Besticht mit fernöstlicher Eleganz."
   },
   "JapaneseStyle_Pillar": {
     "localized_name": "Fernöstliche Säule",
@@ -551,6 +599,10 @@
     "localized_name": "Stehlampe",
     "description": "Eine Lichtquelle, die dein Lager auch in dunklen Nächten erhellt. Benötigt Strom, erhellt dafür aber einen größeren Bereich."
   },
+  "LanternTop": {
+    "localized_name": "Lampion",
+    "description": "Ein dekorativer Lampion."
+  },
   "LargeCeilingLamp": {
     "localized_name": "Große Deckenlampe",
     "description": "Eine Lichtquelle, die dein Lager auch in dunklen Nächten erhellt. Kann an Decken angebracht werden. Benötigt mehr Strom, erhellt dafür aber einen noch größeren Bereich."
@@ -600,8 +652,8 @@
     "description": "Eine elegante Straßenlaterne. Benötigt zum Leuchten Strom."
   },
   "LilyQueenStatue": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Lyleen-Statue",
+    "description": "Eine dekorative Lyleen-Statue."
   },
   "MachineGame01_Iron": {
     "localized_name": "Greifautomat",
@@ -703,6 +755,18 @@
     "localized_name": "Großer elektrischer Brutkasten",
     "description": "Ein Gerät zum Ausbrüten von Pal-Eiern. Benötigt Strom, kann aber mehrere Eier gleichzeitig bei optimaler Temperatur ausbrüten."
   },
+  "MultiHatchingPalEgg": {
+    "localized_name": "Große Brutmaschine",
+    "description": "Ein Gerät zum Ausbrüten von Pal-Eiern. Die Temperatur wird automatisch eingestellt, sodass mehrere Eier gleichzeitig bei optimaler Temperatur ausgebrütet werden können."
+  },
+  "Ninja_Banner": {
+    "localized_name": "Gesellschaft des Blumenmondes-Hochbanner",
+    "description": "Ein dekoratives Hochbanner der Gesellschaft des Blumenmondes."
+  },
+  "Ninja_Flag": {
+    "localized_name": "Gesellschaft des Blumenmondes-Standarte",
+    "description": "Eine dekorative Standarte der Gesellschaft des Blumenmondes."
+  },
   "OilPump": {
     "localized_name": "Ölförderpumpe",
     "description": "Eine Anlage, die zur Förderung von Rohöl aus Ölfeldern benötigt wird. Der Betrieb erfordert viel Strom."
@@ -712,8 +776,8 @@
     "description": "Kann im Lager aufgestellt werden und erhöht das Arbeitstempo beim Arbeiten mit Feuer. Mehrere aufzustellen, bringt keinen zusätzlichen Nutzen."
   },
   "OperatingTable": {
-    "localized_name": "de_Text",
-    "description": "de_text"
+    "localized_name": "Pal-Operationstisch",
+    "description": "Eine Anlage, in der Pals operiert werden können, um ihr Geschlecht oder ihre passiven Fähigkeiten zu verändern."
   },
   "PalBooth": {
     "localized_name": "Flohmarkt (Pals)",
@@ -724,8 +788,8 @@
     "description": "Eine Anlage zur Aufbewahrung gefangener Pals. Den Pals in der Box werden nach und nach LP wiederhergestellt. Der Bereich ringsum ist dein Lager."
   },
   "PalCage": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Leerer Käfig",
+    "description": "Ein dekorativer leerer Käfig."
   },
   "PalFoodBox": {
     "localized_name": "Futtertrog",
@@ -775,6 +839,14 @@
     "localized_name": "Komfortables Bett",
     "description": "Ein gemütliches Bett für Menschen. Wird als nächtliche Schlafstätte oder zum Ausruhen bei Verletzungen verwendet. Um ruhig darauf schlafen zu können, muss es an einem überdachten Ort aufgestellt sein."
   },
+  "Police_Banner": {
+    "localized_name": "Miliz-Hochbanner",
+    "description": "Ein dekoratives Hochbanner der Miliz."
+  },
+  "Police_Flag": {
+    "localized_name": "Miliz-Standarte",
+    "description": "Eine dekorative Standarte der Miliz."
+  },
   "QuartzPit": {
     "localized_name": "Reinquarzmine",
     "description": "Eine Anlage zur Gewinnung von Reinquarz. Der Reinquarz-Abbau ist körperlich anstrengend. Überlasse die Arbeit Pals, die sich mit Bergbau auskennen."
@@ -807,13 +879,61 @@
     "localized_name": "de_Text",
     "description": "de_Text"
   },
+  "SF_Chair": {
+    "localized_name": "Stuhl im Laborstil",
+    "description": "Ein dekorativer Schreibtischstuhl im Laborstil."
+  },
+  "SF_Desk": {
+    "localized_name": "Tisch im Laborstil",
+    "description": "Ein dekorativer Schreibtisch im Laborstil."
+  },
+  "SF_DoorWall": {
+    "localized_name": "Futuristische Wand mit Tür",
+    "description": "Eine Eingangstür, die du auf einem Fundament errichten kannst. Für Liebhaber steriler Futuristik."
+  },
   "SF_Fence": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Futuristisches Geländer",
+    "description": "Ein Geländer, das du auf einem Fundament oder einem Dach errichten kannst, um Absturzunfällen vorzubeugen. Für Liebhaber steriler Futuristik."
+  },
+  "SF_SlantedRoof": {
+    "localized_name": "Futuristisches Schrägdach",
+    "description": "Ein Schrägdach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Für Liebhaber steriler Futuristik."
+  },
+  "SF_TriangleWall": {
+    "localized_name": "Futuristische dreieckige Wand",
+    "description": "Eine dreieckige Wand, die du auf einem Fundament errichten kannst. Für Liebhaber steriler Futuristik."
+  },
+  "SF_WindowWall": {
+    "localized_name": "Futuristische Wand mit Fenster",
+    "description": "Eine Wand mit Fenster, die du auf einem Fundament errichten kannst, um Eindringlinge fernzuhalten. Für Liebhaber steriler Futuristik."
+  },
+  "SF_foundation": {
+    "localized_name": "Futuristisches Fundament",
+    "description": "Ein Fundament, worauf du Wände oder Gebäude errichten kannst. Für Liebhaber steriler Futuristik."
+  },
+  "SF_roof": {
+    "localized_name": "Futuristisches Dach",
+    "description": "Ein Dach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Für Liebhaber steriler Futuristik."
+  },
+  "SF_stair": {
+    "localized_name": "Futuristische Treppe",
+    "description": "Eine Treppe, mit der du auf Fundamente oder Dächer steigen kannst. Für Liebhaber steriler Futuristik."
+  },
+  "SF_wall": {
+    "localized_name": "Futuristische Wand",
+    "description": "Eine Wand, die du auf einem Fundament errichten kannst, um Eindringlinge fernzuhalten. Für Liebhaber steriler Futuristik."
   },
   "SanityDecrease1": {
     "localized_name": "Alphawellengenerator",
     "description": "Diese Maschine generiert Alphawellen, die auf Pals eine entspannende Wirkung haben. Die GEI von Pals im Lager sinkt dadurch langsamer. Mehrere aufzustellen, bringt keinen zusätzlichen Nutzen."
+  },
+  "Scientist_Banner": {
+    "localized_name": "Institut für Genforschung-Hochbanner",
+    "description": "Ein dekoratives Hochbanner des Instituts für Genforschung."
+  },
+  "Scientist_Flag": {
+    "localized_name": "Institut für Genforschung-Standarte",
+    "description": "Eine dekorative Standarte des Instituts für Genforschung."
   },
   "Seika": {
     "localized_name": "Ikebana",
@@ -891,6 +1011,10 @@
     "localized_name": "Rehscheuche",
     "description": "Eine dekorative Rehscheuche. Passt perfekt zu Gebäuden im fernöstlichen Stil."
   },
+  "Shrine_Lantern": {
+    "localized_name": "Tempellaterne",
+    "description": "Eine dekorative Tempellaterne."
+  },
   "SignExit_Ceiling_Iron": {
     "localized_name": "Fluchtwegschild (Decke)",
     "description": "Ein dekoratives Fluchtwegschild. Muss an der Decke angebracht werden."
@@ -944,8 +1068,8 @@
     "description": "Eine Anlage, in der müde Pals sich von ihrer Arbeit noch besser entspannen und ihre GEI schneller regenerieren können."
   },
   "Spa3": {
-    "localized_name": "Heiße Quelle",
-    "description": "Eine Anlage, in der müde Pals sich von ihrer Arbeit ausruhen und ihre GEI regenerieren können."
+    "localized_name": "Fernöstliche heiße Quelle",
+    "description": "Eine Anlage, in der müde Pals sich von ihrer Arbeit ausruhen können. Das fernöstliche Ambiente trägt zu einer noch besseren GEI-Regeneration bei."
   },
   "SphereFactory_Black_01": {
     "localized_name": "Pal-Sphären-Werkbank",
@@ -976,8 +1100,8 @@
     "description": "Eine Eingangstür, die du auf einem Fundament errichten kannst. Ist aus Stein und dadurch ziemlich robust."
   },
   "Stone_Fence": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Steingeländer",
+    "description": "Ein Geländer, das du auf einem Fundament oder einem Dach errichten kannst, um Absturzunfällen vorzubeugen. Ist aus Stein und dadurch ziemlich robust."
   },
   "Stone_Gate": {
     "localized_name": "Steintor",
@@ -1149,19 +1273,19 @@
   },
   "TrafficSign01_Iron": {
     "localized_name": "Verkehrsschild „Keine Pals“",
-    "description": "Ein dekoratives Verkehrsschild „Keine Pals“. Heutzutage hält sich keiner mehr dran."
+    "description": "Ein dekoratives Verkehrsschild „Keine Pals|. Heutzutage hält sich keiner mehr dran."
   },
   "TrafficSign02_Iron": {
     "localized_name": "Verkehrsschild „Vorfahrt gewähren“",
-    "description": "Ein dekoratives Verkehrsschild „Vorfahrt gewähren“. Heutzutage hält sich keiner mehr dran."
+    "description": "Ein dekoratives Verkehrsschild „Vorfahrt gewähren|. Heutzutage hält sich keiner mehr dran."
   },
   "TrafficSign03_Iron": {
     "localized_name": "Verkehrsschild „Vorsicht, Eikthyrdeer“",
-    "description": "Ein dekoratives Verkehrsschild „Vorsicht, Eikthyrdeer“. Zu Zeiten der antiken Zivilisation soll es öfters zu Wildunfällen zwischen Eikthyrdeer und anderen Pals gekommen sein."
+    "description": "Ein dekoratives Verkehrsschild „Vorsicht, Eikthyrdeer|. Zu Zeiten der antiken Zivilisation soll es öfters zu Wildunfällen zwischen Eikthyrdeer und anderen Pals gekommen sein."
   },
   "TrafficSign04_Iron": {
     "localized_name": "Verkehrsschild „Vorsicht, Mammorest“",
-    "description": "Ein dekoratives Verkehrsschild „Vorsicht, Mammorest“. Zu Zeiten der antiken Zivilisation soll es öfters tödliche Unfälle mit wütenden Mammorest gegeben haben."
+    "description": "Ein dekoratives Verkehrsschild „Vorsicht, Mammorest|. Zu Zeiten der antiken Zivilisation soll es öfters tödliche Unfälle mit wütenden Mammorest gegeben haben."
   },
   "TransmissionTower": {
     "localized_name": "Strommast",
@@ -1204,8 +1328,8 @@
     "description": "Eine Lichtquelle, die dein Lager auch in dunklen Nächten erhellt. Kann an Wänden angebracht werden. Muss von einem Feuer-Pal angefacht werden."
   },
   "WallTorch02": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Feierliche Wandfackel",
+    "description": "Eine pompöse Fackel, deren Flamme von der Bruderschaft der ewigen Lohe verehrt wird. Dient als Lichtquelle und kann an Wänden angebracht werden. Muss von einem Feuer-Pal angefacht werden."
   },
   "WeaponFactory_Dirty_01": {
     "localized_name": "Waffen-Werkbank",
@@ -1219,13 +1343,17 @@
     "localized_name": "Waffen-Fließbandwerk II",
     "description": "Eine Werkstatt zur Fertigung von Waffen und Munition. Durch Spezialisierung können nun modernste Waffen gebaut werden. Für die Arbeit benötigt man Pals, die Handwerk beherrschen."
   },
+  "WeaponFactory_Dirty_04": {
+    "localized_name": "Hightech-Waffenfabrik",
+    "description": "Eine Werkstatt zur Fertigung von Waffen und Munition. Mithilfe modernster Maschinen läuft die Waffenfertigung jetzt blitzschnell. Für die Arbeit benötigt man Pals, die Handwerk beherrschen."
+  },
   "Wire_Fence": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Maschendrahtzaun",
+    "description": "Ein dekorativer Maschendrahtzaun."
   },
   "Wood_Fence": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Holzgeländer",
+    "description": "Ein Geländer, das du auf einem Fundament oder einem Dach errichten kannst, um Absturzunfällen vorzubeugen. Ist aus Holz und nicht sonderlich stabil."
   },
   "Wood_Gate": {
     "localized_name": "Holztor",
@@ -1244,8 +1372,8 @@
     "description": "Eine Wand mit Fenster, die du auf einem Fundament errichten kannst, um Eindringlinge fernzuhalten. Ist aus Holz und nicht sonderlich stabil."
   },
   "WoodenBarricade": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Holzbarrikade",
+    "description": "Eine dekorative Holzbarrikade."
   },
   "Wooden_DoorWall": {
     "localized_name": "Holztür",

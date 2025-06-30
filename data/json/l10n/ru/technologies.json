@@ -8,7 +8,7 @@
     "description": null
   },
   "Accessory_AirDash3": {
-    "localized_name": "ru Text",
+    "localized_name": "Ботинки тройного воздушного рывка",
     "description": null
   },
   "Accessory_JumpCount_Increase1": {
@@ -100,7 +100,7 @@
     "description": null
   },
   "BaseCampWorkerExtraStation": {
-    "localized_name": "BaseCampWorkerExtraStation",
+    "localized_name": "Терминал управления Палбоксом",
     "description": null
   },
   "Battle_Armor_Grade_01_Cloth": {
@@ -156,11 +156,11 @@
     "description": "Для изготовления этого доспеха используется Слиток палания. Обладает превосходной защитой, но весит очень много. Для изготовления требуется [Конвейерная фабрика II]."
   },
   "Battle_Armor_Grade_04_Steal_Cold": {
-    "localized_name": "Металлическая броня защиты от холода для Палов",
+    "localized_name": "Металлическая броня защиты от холода",
     "description": "[Паланиумная броня] с улучшенными характеристиками. Незаменимая вещь в холодных регионах. Для изготовления требуется [Конвейерная фабрика II]."
   },
   "Battle_Armor_Grade_04_Steal_Heat": {
-    "localized_name": "Металлическая броня защиты от жара для Палов",
+    "localized_name": "Металлическая броня защиты от жары",
     "description": "[Паланиумная броня] с улучшенными характеристиками. Отлично защищает от высоких температур. Для изготовления требуется [Конвейерная фабрика II]."
   },
   "Battle_Armor_Grade_05_Plastic": {
@@ -365,15 +365,15 @@
   },
   "BelieverFlagSet": {
     "localized_name": "Набор флагов Организации по защите Палов",
-    "description": "Набор, в который входят: Believer_Flag, Believer_Banner. Доказательство победы над Организацией по защите Палов."
+    "description": "Набор, в который входят: Флаг Организации по защите Палов, Вертикальное знамя Организации по защите Палов. Доказательство победы над Организацией по защите Палов."
   },
   "BlastFurnace4": {
     "localized_name": "Огромная печь",
     "description": null
   },
   "BreedFarm": {
-    "localized_name": "Пастбище свиданий",
-    "description": "Поместите сюда по одному ♂ и ♀ Палу, чтобы получить яйцо. Чтобы процесс прошел успешно, требуется ｢Пирожное｣."
+    "localized_name": "Племенная ферма",
+    "description": "Поместите сюда по одному ♂ и ♀ Палу, чтобы получить яйцо. Чтобы процесс прошел успешно, требуется ｢Торт｣."
   },
   "BuildableGoddessStatue": {
     "localized_name": "Монумент Силы",
@@ -396,11 +396,11 @@
     "description": null
   },
   "ChargeLaserRifle": {
-    "localized_name": "ru Text",
+    "localized_name": "Зарядная винтовка",
     "description": null
   },
   "ChargeLaserRifleBullet": {
-    "localized_name": "ru Text",
+    "localized_name": "Патрон для зарядной винтовки",
     "description": null
   },
   "Cloth2": {
@@ -412,7 +412,7 @@
     "description": null
   },
   "Cooler": {
-    "localized_name": "Кулер",
+    "localized_name": "Ледяной охладитель",
     "description": "Помогает справиться с жарой, охлаждая воздух вокруг."
   },
   "CoolerBox": {
@@ -428,7 +428,7 @@
     "description": "Постройка, позволяющая измельчать Камень и Древесина и превращать их в другие материалы. Требуется Пал с умением ｢Полив｣ для вращения водяной мельницы."
   },
   "CrystalPit": {
-    "localized_name": "CrystalPit",
+    "localized_name": "Карьер для добычи гексокварца",
     "description": null
   },
   "DamagedScarecrow": {
@@ -472,7 +472,7 @@
     "description": "Оружие ближнего боя, бьющее электрическим током при ударе. Пораженных током Палов становится проще поймать. Для изготовления требуется ｢Качественный верстак｣."
   },
   "ElectricCooler": {
-    "localized_name": "Электрический кулер",
+    "localized_name": "Кондиционер",
     "description": "Мощный и эффективный охладительный прибор, потребляющий электроэнергию."
   },
   "ElectricGenerator_Large": {
@@ -492,11 +492,11 @@
     "description": null
   },
   "EnergyShotgun": {
-    "localized_name": "ru Text",
+    "localized_name": "Энергетическое ружье",
     "description": null
   },
   "EnergyShotgunBullet": {
-    "localized_name": "ru Text",
+    "localized_name": "Патрон для энергетического ружья",
     "description": null
   },
   "EnergyStorage_Electric": {
@@ -508,7 +508,7 @@
     "description": null
   },
   "Factory_Hard_04": {
-    "localized_name": "ru_Text",
+    "localized_name": "Фабрика развитой цивилизации",
     "description": null
   },
   "Factory_Money": {
@@ -521,34 +521,34 @@
   },
   "FireCultFlagSet": {
     "localized_name": "Набор флагов Братства Вечного пламени",
-    "description": "Набор, в который входят: FireCult_Flag, FireCult_Banner. Доказательство победы над Братством Вечного пламени."
+    "description": "Набор, в который входят: Флаг Братства Вечного пламени, Вертикальное знамя Братства Вечного пламени. Доказательство победы над Братством Вечного пламени."
   },
   "FishingBait_2": {
-    "localized_name": "FishingBait_2",
+    "localized_name": "Качественная приманка",
     "description": null
   },
   "FishingBait_3": {
-    "localized_name": "FishingBait_3",
+    "localized_name": "Роскошная приманка",
     "description": null
   },
   "FishingBait_3_A": {
-    "localized_name": "FishingBait_3_A",
+    "localized_name": "Заманчивая приманка",
     "description": null
   },
   "FishingPond1": {
-    "localized_name": "FishingPond1",
+    "localized_name": "Рыболовный пруд",
     "description": null
   },
   "FishingPond2": {
-    "localized_name": "FishingPond2",
+    "localized_name": "Большой рыболовный пруд",
     "description": null
   },
   "FishingRod_02_1": {
-    "localized_name": "FishingRod_02_1",
+    "localized_name": "Средняя удочка (Каттива)",
     "description": null
   },
   "FishingRod_03_1": {
-    "localized_name": "FishingRod_03_1",
+    "localized_name": "Продвинутая удочка (Пенгуллет)",
     "description": null
   },
   "FishingSet1": {
@@ -752,7 +752,7 @@
     "description": "Набор для строительства базы из стекла. Все необходимое для строительства дома: стеклянный фундамент, стены, крыша, лестница."
   },
   "GlobalPalStorage": {
-    "localized_name": "Глобальный контейнер для Палов",
+    "localized_name": "Глобальный Палбокс",
     "description": null
   },
   "GrapplingGun": {
@@ -772,7 +772,7 @@
     "description": null
   },
   "GrapplingGun5": {
-    "localized_name": "GrapplingGun5",
+    "localized_name": "Ультрапистолет-гарпун",
     "description": null
   },
   "GrenadeBullet": {
@@ -809,7 +809,7 @@
   },
   "HunterFlagSet": {
     "localized_name": "Набор флагов браконьеров",
-    "description": "Набор, в который входят: Hunter_Flag, Hunter_Banner. Доказательство победы над браконьерами."
+    "description": "Набор, в который входят: Флаг браконьеров, Вертикальное знамя браконьеров. Доказательство победы над браконьерами."
   },
   "IceCrusher": {
     "localized_name": "Замораживающий измельчитель",
@@ -884,7 +884,7 @@
     "description": null
   },
   "Lantern_High": {
-    "localized_name": "Lantern_High",
+    "localized_name": "Улучшенный поясной фонарь",
     "description": null
   },
   "LargeCeilingLamp": {
@@ -932,7 +932,7 @@
     "description": null
   },
   "ManganeseIngot": {
-    "localized_name": "ManganeseIngot",
+    "localized_name": "Кораллиновый слиток",
     "description": null
   },
   "ManualElectricGenerator": {
@@ -984,7 +984,7 @@
     "description": null
   },
   "MultiHatchingPalEgg": {
-    "localized_name": "MultiHatchingPalEgg",
+    "localized_name": "Большой инкубатор",
     "description": null
   },
   "Musket": {
@@ -993,7 +993,7 @@
   },
   "NinjaFlagSet": {
     "localized_name": "Набор флагов общества Лунных цветов",
-    "description": "Набор, в который входят: Ninja_Flag, Ninja_Banner. Доказательство победы над обществом Лунных цветов."
+    "description": "Набор, в который входят: Флаг общества Лунных цветов, Вертикальное знамя общества Лунных цветов. Доказательство победы над обществом Лунных цветов."
   },
   "OilPump": {
     "localized_name": "Нефтяная вышка",
@@ -1004,19 +1004,19 @@
     "description": null
   },
   "OperatingTable": {
-    "localized_name": "ru_Text",
+    "localized_name": "Операционный стол для Палов",
     "description": null
   },
   "OverheatRifle": {
-    "localized_name": "ru Text",
+    "localized_name": "Перегревающаяся винтовка",
     "description": null
   },
   "OverheatRifleBullet": {
-    "localized_name": "ru Text",
+    "localized_name": "Патрон для перегревающейся винтовки",
     "description": null
   },
   "PALBOX": {
-    "localized_name": "Контейнер для Палов",
+    "localized_name": "Палбокс",
     "description": "Сооружение для содержания пойманных Палов. Находящиеся внутри Палы постепенно восстанавливают здоровье. Область вокруг этой постройки становится базой."
   },
   "PalBooth": {
@@ -1024,15 +1024,15 @@
     "description": null
   },
   "PalDopingShot": {
-    "localized_name": "ru Text",
+    "localized_name": "Бустерная пушка",
     "description": null
   },
   "PalDopingShotBullet": {
-    "localized_name": "ru Text",
+    "localized_name": "Патрон для бустерной пушки",
     "description": null
   },
   "PalDopingShot_2": {
-    "localized_name": "PalDopingShot_2",
+    "localized_name": "Мегабустерная пушка",
     "description": null
   },
   "PalFoodBox": {
@@ -1040,7 +1040,7 @@
     "description": "Наполните едой, чтобы Палы на базе могли принимать здесь пищу."
   },
   "PalHealingGrenade": {
-    "localized_name": "ru Text",
+    "localized_name": "Исцеляющая граната для Палов",
     "description": null
   },
   "PalMedicineBox": {
@@ -1061,7 +1061,7 @@
   },
   "PoliceFlagSet": {
     "localized_name": "Набор флагов вигилантов",
-    "description": "Набор, в который входят: Police_Flag, Police_Banner. Доказательство победы над вигилантами."
+    "description": "Набор, в который входят: Флаг вигилантов, Вертикальное знамя вигилантов. Доказательство победы над вигилантами."
   },
   "Polymer": {
     "localized_name": "Полимер",
@@ -1268,7 +1268,7 @@
     "description": "Набор для строительства базы в футуристическом стиле. Все необходимое для строительства дома: фундамент, стены, крыша, лестница."
   },
   "Salvage_TreasureBoxKey02": {
-    "localized_name": "Salvage_TreasureBoxKey02",
+    "localized_name": "Мощный рыболовный магнит",
     "description": null
   },
   "SanityDecrease1": {
@@ -1277,7 +1277,7 @@
   },
   "ScientistFlagSet": {
     "localized_name": "Набор флагов отряда генетических исследований",
-    "description": "Набор, в который входят: Scientist_Flag, Scientist_Banner. Доказательство победы над отрядом генетических исследований."
+    "description": "Набор, в который входят: Флаг отряда генетических исследований, Вертикальное знамя отряда генетических исследований. Доказательство победы над отрядом генетических исследований."
   },
   "Shield_01": {
     "localized_name": "Обыкновенный щит",
@@ -1328,7 +1328,7 @@
     "description": null
   },
   "SkillUnlock_BadCatgirl": {
-    "localized_name": "Ружье для Пала Недотрога",
+    "localized_name": "Дробовик для Пала Няфия",
     "description": null
   },
   "SkillUnlock_BirdDragon": {
@@ -1352,7 +1352,7 @@
     "description": null
   },
   "SkillUnlock_BlackPuppy": {
-    "localized_name": "Сбруя для Пала Смоки",
+    "localized_name": "Шлейка для Пала Смоки",
     "description": null
   },
   "SkillUnlock_BlueDragon": {
@@ -1360,7 +1360,7 @@
     "description": null
   },
   "SkillUnlock_BlueDragon_Ice": {
-    "localized_name": "SkillUnlock_BlueDragon_Ice",
+    "localized_name": "Седло для Пала Азуроб Крист",
     "description": null
   },
   "SkillUnlock_BlueThunderHorse": {
@@ -1456,7 +1456,7 @@
     "description": null
   },
   "SkillUnlock_FlyingManta_Thunder": {
-    "localized_name": "SkillUnlock_FlyingManta_Thunder",
+    "localized_name": "Рукавицы для Пала Селарай Лакс",
     "description": null
   },
   "SkillUnlock_Garm": {
@@ -1464,11 +1464,11 @@
     "description": null
   },
   "SkillUnlock_GhostAnglerfish": {
-    "localized_name": "SkillUnlock_GhostAnglerfish",
+    "localized_name": "Седло для Пала Ганглер",
     "description": null
   },
   "SkillUnlock_GhostAnglerfish_Fire": {
-    "localized_name": "SkillUnlock_GhostAnglerfish_Fire",
+    "localized_name": "Седло для Пала Ганглер Игнис",
     "description": null
   },
   "SkillUnlock_GhostBeast": {
@@ -1540,15 +1540,15 @@
     "description": null
   },
   "SkillUnlock_IceNarwhal": {
-    "localized_name": "SkillUnlock_IceNarwhal",
+    "localized_name": "Седло для Пала Валаска",
     "description": null
   },
   "SkillUnlock_IceNarwhal_Fire": {
-    "localized_name": "SkillUnlock_IceNarwhal_Fire",
+    "localized_name": "Седло для Пала Валаска Игнис",
     "description": null
   },
   "SkillUnlock_IceSeal": {
-    "localized_name": "SkillUnlock_IceSeal",
+    "localized_name": "Сбруя для Пала Полапап",
     "description": null
   },
   "SkillUnlock_JetDragon": {
@@ -1576,7 +1576,7 @@
     "description": null
   },
   "SkillUnlock_Kitsunebi": {
-    "localized_name": "Сбруя для Пала Фокспаркс",
+    "localized_name": "Шлейка для Пала Фокспаркс",
     "description": null
   },
   "SkillUnlock_Kitsunebi_Ice": {
@@ -1592,7 +1592,7 @@
     "description": null
   },
   "SkillUnlock_LeafMomonga": {
-    "localized_name": "SkillUnlock_LeafMomonga",
+    "localized_name": "Сбруя для Пала Хербил",
     "description": null
   },
   "SkillUnlock_Manticore": {
@@ -1632,7 +1632,7 @@
     "description": null
   },
   "SkillUnlock_NegativeOctopus_Neutral": {
-    "localized_name": "SkillUnlock_NegativeOctopus_Neutral",
+    "localized_name": "Рукавицы для Пала Килламари Примо",
     "description": null
   },
   "SkillUnlock_NightBlueHorse": {
@@ -1644,15 +1644,15 @@
     "description": null
   },
   "SkillUnlock_Penguin_Electric": {
-    "localized_name": "SkillUnlock_Penguin_Electric",
+    "localized_name": "Ракетная установка для Пала Пенгуллет Лакс",
     "description": null
   },
   "SkillUnlock_Plesiosaur": {
-    "localized_name": "SkillUnlock_Plesiosaur",
+    "localized_name": "Седло для Пала Бралоха",
     "description": null
   },
   "SkillUnlock_PoseidonOrca": {
-    "localized_name": "SkillUnlock_PoseidonOrca",
+    "localized_name": "Седло для Пала Нептилус",
     "description": null
   },
   "SkillUnlock_PurpleSpider": {
@@ -1720,7 +1720,7 @@
     "description": null
   },
   "SkillUnlock_TropicalOstrich": {
-    "localized_name": "SkillUnlock_TropicalOstrich",
+    "localized_name": "Седло для Пала Палумба",
     "description": null
   },
   "SkillUnlock_Umihebi": {
@@ -1792,7 +1792,7 @@
     "description": "Находясь здесь, Палы еще эффективнее восстанавливают рассудок."
   },
   "Spa3": {
-    "localized_name": "Spa3",
+    "localized_name": "Горячий источник в японском стиле",
     "description": null
   },
   "Spear": {
@@ -1968,7 +1968,7 @@
     "description": "Можно прикрепить к стене."
   },
   "WeaponFactory_Dirty_04": {
-    "localized_name": "ru_Text",
+    "localized_name": "Оружейная фабрика развитой цивилизации",
     "description": null
   },
   "Wood_Gate": {

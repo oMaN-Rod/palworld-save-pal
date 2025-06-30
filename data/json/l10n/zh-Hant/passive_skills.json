@@ -23,12 +23,24 @@
     "localized_name": "提升攻擊Lv1",
     "description": null
   },
+  "Attack_ACC_up1_Otomo_Only_Equip": {
+    "localized_name": "帕魯攻擊力增加Lv1",
+    "description": null
+  },
   "Attack_ACC_up2": {
     "localized_name": "提升攻擊Lv2",
     "description": null
   },
+  "Attack_ACC_up2_Otomo_Only_Equip": {
+    "localized_name": "帕魯攻擊力增加Lv2",
+    "description": null
+  },
   "Attack_ACC_up3": {
     "localized_name": "提升攻擊Lv3",
+    "description": null
+  },
+  "Attack_ACC_up3_Otomo_Only_Equip": {
+    "localized_name": "帕魯攻擊力增加Lv3",
     "description": null
   },
   "BossDefeatReward_AmaterasuWolf_Dark": {
@@ -155,6 +167,14 @@
     "localized_name": "增強暗屬性傷害 小",
     "description": null
   },
+  "BossDefeatReward_IceNarwhal": {
+    "localized_name": "增強冰屬性傷害 大",
+    "description": null
+  },
+  "BossDefeatReward_IceNarwhal_Fire": {
+    "localized_name": "增強火屬性傷害 大",
+    "description": null
+  },
   "BossDefeatReward_JetDragon": {
     "localized_name": "增強龍屬性傷害 大",
     "description": null
@@ -217,6 +237,10 @@
   },
   "BossDefeatReward_PlantSlime": {
     "localized_name": "增強地屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_PoseidonOrca": {
+    "localized_name": "增強水屬性傷害 大",
     "description": null
   },
   "BossDefeatReward_PurpleSpider": {
@@ -395,6 +419,18 @@
     "localized_name": "卓絕技藝",
     "description": null
   },
+  "Defense_ACC_up1_Otomo_Only_Equip": {
+    "localized_name": "帕魯防禦力增加Lv1",
+    "description": null
+  },
+  "Defense_ACC_up2_Otomo_Only_Equip": {
+    "localized_name": "帕魯防禦力增加Lv2",
+    "description": null
+  },
+  "Defense_ACC_up3_Otomo_Only_Equip": {
+    "localized_name": "帕魯防禦力增加Lv3",
+    "description": null
+  },
   "Deffence_down1": {
     "localized_name": "弱不禁風",
     "description": null
@@ -427,12 +463,20 @@
     "localized_name": "增強暗屬性傷害 小",
     "description": null
   },
+  "ElementBoost_Dark_1_Otomo_Only_Equip": {
+    "localized_name": "增強帕魯暗屬性傷害 Lv1",
+    "description": null
+  },
   "ElementBoost_Dark_1_PAL": {
     "localized_name": "夜幕",
     "description": "提升暗屬性攻擊傷害10.0%"
   },
   "ElementBoost_Dark_2_BossDefeat": {
     "localized_name": "增強暗屬性傷害 中",
+    "description": null
+  },
+  "ElementBoost_Dark_2_Otomo_Only_Equip": {
+    "localized_name": "增強帕魯暗屬性傷害 Lv2",
     "description": null
   },
   "ElementBoost_Dark_2_PAL": {
@@ -443,8 +487,16 @@
     "localized_name": "增強暗屬性傷害 大",
     "description": null
   },
+  "ElementBoost_Dark_3_Otomo_Only_Equip": {
+    "localized_name": "增強帕魯暗屬性傷害 Lv3",
+    "description": null
+  },
   "ElementBoost_Dragon_1_BossDefeat": {
     "localized_name": "增強龍屬性傷害 小",
+    "description": null
+  },
+  "ElementBoost_Dragon_1_Otomo_Only_Equip": {
+    "localized_name": "增強帕魯龍屬性傷害 Lv1",
     "description": null
   },
   "ElementBoost_Dragon_1_PAL": {
@@ -455,6 +507,10 @@
     "localized_name": "增強龍屬性傷害 中",
     "description": null
   },
+  "ElementBoost_Dragon_2_Otomo_Only_Equip": {
+    "localized_name": "增強帕魯龍屬性傷害 Lv2",
+    "description": null
+  },
   "ElementBoost_Dragon_2_PAL": {
     "localized_name": "神龍",
     "description": null
@@ -463,8 +519,16 @@
     "localized_name": "增強龍屬性傷害 大",
     "description": null
   },
+  "ElementBoost_Dragon_3_Otomo_Only_Equip": {
+    "localized_name": "增強帕魯龍屬性傷害 Lv3",
+    "description": null
+  },
   "ElementBoost_Earth_1_BossDefeat": {
     "localized_name": "增強地屬性傷害 小",
+    "description": null
+  },
+  "ElementBoost_Earth_1_Otomo_Only_Equip": {
+    "localized_name": "增強帕魯地屬性傷害 Lv1",
     "description": null
   },
   "ElementBoost_Earth_1_PAL": {
@@ -475,6 +539,10 @@
     "localized_name": "增強地屬性傷害 中",
     "description": null
   },
+  "ElementBoost_Earth_2_Otomo_Only_Equip": {
+    "localized_name": "增強帕魯地屬性傷害 Lv2",
+    "description": null
+  },
   "ElementBoost_Earth_2_PAL": {
     "localized_name": "岩帝",
     "description": null
@@ -483,20 +551,40 @@
     "localized_name": "增強地屬性傷害 大",
     "description": null
   },
+  "ElementBoost_Earth_3_Otomo_Only_Equip": {
+    "localized_name": "增強帕魯地屬性傷害 Lv3",
+    "description": null
+  },
   "ElementBoost_Electricity_1_BossDefeat": {
     "localized_name": "增強雷屬性傷害 小",
+    "description": null
+  },
+  "ElementBoost_Electricity_1_Otomo_Only_Equip": {
+    "localized_name": "增強帕魯雷屬性傷害 Lv1",
     "description": null
   },
   "ElementBoost_Electricity_2_BossDefeat": {
     "localized_name": "增強雷屬性傷害 中",
     "description": null
   },
+  "ElementBoost_Electricity_2_Otomo_Only_Equip": {
+    "localized_name": "增強帕魯雷屬性傷害 Lv2",
+    "description": null
+  },
   "ElementBoost_Electricity_3_BossDefeat": {
     "localized_name": "增強雷屬性傷害 大",
     "description": null
   },
+  "ElementBoost_Electricity_3_Otomo_Only_Equip": {
+    "localized_name": "增強帕魯雷屬性傷害 Lv3",
+    "description": null
+  },
   "ElementBoost_Fire_1_BossDefeat": {
     "localized_name": "增強火屬性傷害 小",
+    "description": null
+  },
+  "ElementBoost_Fire_1_Otomo_Only_Equip": {
+    "localized_name": "增強帕魯火屬性傷害 Lv1",
     "description": null
   },
   "ElementBoost_Fire_1_PAL": {
@@ -507,6 +595,10 @@
     "localized_name": "增強火屬性傷害 中",
     "description": null
   },
+  "ElementBoost_Fire_2_Otomo_Only_Equip": {
+    "localized_name": "增強帕魯火屬性傷害 Lv2",
+    "description": null
+  },
   "ElementBoost_Fire_2_PAL": {
     "localized_name": "炎帝",
     "description": null
@@ -515,8 +607,16 @@
     "localized_name": "增強火屬性傷害 大",
     "description": null
   },
+  "ElementBoost_Fire_3_Otomo_Only_Equip": {
+    "localized_name": "增強帕魯火屬性傷害 Lv3",
+    "description": null
+  },
   "ElementBoost_Ice_1_BossDefeat": {
     "localized_name": "增強冰屬性傷害 小",
+    "description": null
+  },
+  "ElementBoost_Ice_1_Otomo_Only_Equip": {
+    "localized_name": "增強帕魯冰屬性傷害 Lv1",
     "description": null
   },
   "ElementBoost_Ice_1_PAL": {
@@ -527,6 +627,10 @@
     "localized_name": "增強冰屬性傷害 中",
     "description": null
   },
+  "ElementBoost_Ice_2_Otomo_Only_Equip": {
+    "localized_name": "增強帕魯冰屬性傷害 Lv2",
+    "description": null
+  },
   "ElementBoost_Ice_2_PAL": {
     "localized_name": "冰帝",
     "description": null
@@ -535,8 +639,16 @@
     "localized_name": "增強冰屬性傷害 大",
     "description": null
   },
+  "ElementBoost_Ice_3_Otomo_Only_Equip": {
+    "localized_name": "增強帕魯冰屬性傷害 Lv3",
+    "description": null
+  },
   "ElementBoost_Leaf_1_BossDefeat": {
     "localized_name": "增強草屬性傷害 小",
+    "description": null
+  },
+  "ElementBoost_Leaf_1_Otomo_Only_Equip": {
+    "localized_name": "增強帕魯草屬性傷害 Lv1",
     "description": null
   },
   "ElementBoost_Leaf_1_PAL": {
@@ -547,6 +659,10 @@
     "localized_name": "增強草屬性傷害 中",
     "description": null
   },
+  "ElementBoost_Leaf_2_Otomo_Only_Equip": {
+    "localized_name": "增強帕魯草屬性傷害 Lv2",
+    "description": null
+  },
   "ElementBoost_Leaf_2_PAL": {
     "localized_name": "精靈王",
     "description": null
@@ -555,8 +671,16 @@
     "localized_name": "增強草屬性傷害 大",
     "description": null
   },
+  "ElementBoost_Leaf_3_Otomo_Only_Equip": {
+    "localized_name": "增強帕魯草屬性傷害 Lv3",
+    "description": null
+  },
   "ElementBoost_Normal_1_BossDefeat": {
     "localized_name": "增強無屬性傷害 小",
+    "description": null
+  },
+  "ElementBoost_Normal_1_Otomo_Only_Equip": {
+    "localized_name": "增強帕魯無屬性傷害 Lv1",
     "description": null
   },
   "ElementBoost_Normal_1_PAL": {
@@ -567,12 +691,20 @@
     "localized_name": "增強無屬性傷害 中",
     "description": null
   },
+  "ElementBoost_Normal_2_Otomo_Only_Equip": {
+    "localized_name": "增強帕魯無屬性傷害 Lv2",
+    "description": null
+  },
   "ElementBoost_Normal_2_PAL": {
     "localized_name": "聖天",
     "description": null
   },
   "ElementBoost_Normal_3_BossDefeat": {
     "localized_name": "增強無屬性傷害 大",
+    "description": null
+  },
+  "ElementBoost_Normal_3_Otomo_Only_Equip": {
+    "localized_name": "增強帕魯無屬性傷害 Lv3",
     "description": null
   },
   "ElementBoost_Thunder_1_PAL": {
@@ -587,12 +719,24 @@
     "localized_name": "增強水屬性傷害 小",
     "description": null
   },
+  "ElementBoost_Water_1_Otomo_Only_Equip": {
+    "localized_name": "增強帕魯水屬性傷害 Lv1",
+    "description": null
+  },
   "ElementBoost_Water_2_BossDefeat": {
     "localized_name": "增強水屬性傷害 中",
     "description": null
   },
+  "ElementBoost_Water_2_Otomo_Only_Equip": {
+    "localized_name": "增強帕魯水屬性傷害 Lv2",
+    "description": null
+  },
   "ElementBoost_Water_3_BossDefeat": {
     "localized_name": "增強水屬性傷害 大",
+    "description": null
+  },
+  "ElementBoost_Water_3_Otomo_Only_Equip": {
+    "localized_name": "增強帕魯水屬性傷害 Lv3",
     "description": null
   },
   "ElementResist_Aqua_1": {
@@ -743,6 +887,34 @@
     "localized_name": "永炎",
     "description": null
   },
+  "GYM_NAME_Desert": {
+    "localized_name": "帕洛斯群島自衛隊幹部",
+    "description": null
+  },
+  "GYM_NAME_Forest": {
+    "localized_name": "帕魯保護團體-創立者",
+    "description": null
+  },
+  "GYM_NAME_Meadow": {
+    "localized_name": "雷恩盜獵團的幹部",
+    "description": "攻擊+20.0% 提升移動速度10.0%"
+  },
+  "GYM_NAME_Sakurajima": {
+    "localized_name": "月花眾的首領",
+    "description": null
+  },
+  "GYM_NAME_Snow": {
+    "localized_name": "帕魯基因研究部隊-隊長",
+    "description": null
+  },
+  "GYM_NAME_Viking": {
+    "localized_name": "天墜之民 首領",
+    "description": null
+  },
+  "GYM_NAME_Volcano": {
+    "localized_name": "永炎同心會-靈魂領袖",
+    "description": null
+  },
   "HP_ACC_up1": {
     "localized_name": "提升體力Lv1",
     "description": null
@@ -826,6 +998,10 @@
   "Noukin": {
     "localized_name": "腦筋",
     "description": null
+  },
+  "Nushi": {
+    "localized_name": "湖之主",
+    "description": "提升水屬性攻擊傷害20.0% 提升冰屬性攻擊傷害20.0% 防禦+20.0%"
   },
   "PAL_ALLAttack_down1": {
     "localized_name": "膽小",
@@ -915,6 +1091,18 @@
     "localized_name": "虐待狂",
     "description": null
   },
+  "PalExp_Increase_1_Otomo_Only_Equip": {
+    "localized_name": "帕魯經驗獲取增加Lv1",
+    "description": null
+  },
+  "PalExp_Increase_2_Otomo_Only_Equip": {
+    "localized_name": "帕魯經驗獲取增加Lv2",
+    "description": null
+  },
+  "PalExp_Increase_3_Otomo_Only_Equip": {
+    "localized_name": "帕魯經驗獲取增加Lv3",
+    "description": null
+  },
   "Rare": {
     "localized_name": "稀有",
     "description": null
@@ -970,6 +1158,18 @@
   "Stamina_Up_3": {
     "localized_name": "永動機",
     "description": "最大耐力+75.0% ※此效果僅對可騎乘的帕魯有效。"
+  },
+  "SwimSpeed_up_1": {
+    "localized_name": "悠然泳姿",
+    "description": "水上移動速度提升30.0%"
+  },
+  "SwimSpeed_up_2": {
+    "localized_name": "游泳健將",
+    "description": null
+  },
+  "SwimSpeed_up_3": {
+    "localized_name": "破浪王者",
+    "description": null
   },
   "TemperatureResist_Cold1": {
     "localized_name": "耐寒Lv1",
@@ -1049,6 +1249,26 @@
   },
   "WorkSpeed_ACC_up3": {
     "localized_name": "高速作業Lv3",
+    "description": null
+  },
+  "YakushimaDagameBoost_Magic_Equip": {
+    "localized_name": "神聖之力 魔法",
+    "description": null
+  },
+  "YakushimaDagameBoost_Melee_Equip": {
+    "localized_name": "神聖之力 近戰",
+    "description": null
+  },
+  "YakushimaDagameBoost_Ranged_Equip": {
+    "localized_name": "神聖之力 遠程",
+    "description": null
+  },
+  "YakushimaDagameBoost_Summon_Equip": {
+    "localized_name": "神聖之力 召喚",
+    "description": null
+  },
+  "YakushimaProtection_Equip": {
+    "localized_name": "神聖守護",
     "description": null
   },
   "defense_ACC_up1": {

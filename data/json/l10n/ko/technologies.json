@@ -8,7 +8,7 @@
     "description": null
   },
   "Accessory_AirDash3": {
-    "localized_name": "ko Text",
+    "localized_name": "트리플 에어 대시 부츠",
     "description": null
   },
   "Accessory_JumpCount_Increase1": {
@@ -100,7 +100,7 @@
     "description": null
   },
   "BaseCampWorkerExtraStation": {
-    "localized_name": "BaseCampWorkerExtraStation",
+    "localized_name": "팰 상자 조작 단말기",
     "description": null
   },
   "Battle_Armor_Grade_01_Cloth": {
@@ -365,7 +365,7 @@
   },
   "BelieverFlagSet": {
     "localized_name": "팰 애호 단체 깃발 세트",
-    "description": "Believer_Flag, Believer_Banner아이템이 포함된 세트. 팰 애호 단체를 압도했음을 나타내는 증표이다."
+    "description": "팰 애호 단체 깃발, 팰 애호 단체 휘장아이템이 포함된 세트. 팰 애호 단체를 압도했음을 나타내는 증표이다."
   },
   "BlastFurnace4": {
     "localized_name": "거대한 화로",
@@ -396,11 +396,11 @@
     "description": null
   },
   "ChargeLaserRifle": {
-    "localized_name": "ko Text",
+    "localized_name": "충전식 소총",
     "description": null
   },
   "ChargeLaserRifleBullet": {
-    "localized_name": "ko Text",
+    "localized_name": "충전식 소총 탄약",
     "description": null
   },
   "Cloth2": {
@@ -428,7 +428,7 @@
     "description": "돌 혹은 목재을(를) 분쇄하여 다른 소재로 변환할 수 있는 시설. 물레방아를 돌리는 |관개| 적성의 팰이 필요하다."
   },
   "CrystalPit": {
-    "localized_name": "CrystalPit",
+    "localized_name": "헥소 석영 채굴장",
     "description": null
   },
   "DamagedScarecrow": {
@@ -492,11 +492,11 @@
     "description": null
   },
   "EnergyShotgun": {
-    "localized_name": "ko Text",
+    "localized_name": "에너지 산탄총",
     "description": null
   },
   "EnergyShotgunBullet": {
-    "localized_name": "ko Text",
+    "localized_name": "에너지 산탄총 탄약",
     "description": null
   },
   "EnergyStorage_Electric": {
@@ -508,7 +508,7 @@
     "description": null
   },
   "Factory_Hard_04": {
-    "localized_name": "ko_Text",
+    "localized_name": "고도 문명 작업 공장",
     "description": null
   },
   "Factory_Money": {
@@ -521,34 +521,34 @@
   },
   "FireCultFlagSet": {
     "localized_name": "영원한 불꽃의 동지 깃발 세트",
-    "description": "FireCult_Flag, FireCult_Banner아이템이 포함된 세트. 영원한 불꽃의 동지를 압도했음을 나타내는 증표이다."
+    "description": "영원한 불꽃의 동지 깃발, 영원한 불꽃의 동지 휘장아이템이 포함된 세트. 영원한 불꽃의 동지를 압도했음을 나타내는 증표이다."
   },
   "FishingBait_2": {
-    "localized_name": "FishingBait_2",
+    "localized_name": "질 좋은 낚시 미끼",
     "description": null
   },
   "FishingBait_3": {
-    "localized_name": "FishingBait_3",
+    "localized_name": "호화로운 낚시 미끼",
     "description": null
   },
   "FishingBait_3_A": {
-    "localized_name": "FishingBait_3_A",
+    "localized_name": "매혹적인 낚시 미끼",
     "description": null
   },
   "FishingPond1": {
-    "localized_name": "FishingPond1",
+    "localized_name": "낚시터",
     "description": null
   },
   "FishingPond2": {
-    "localized_name": "FishingPond2",
+    "localized_name": "커다란 낚시터",
     "description": null
   },
   "FishingRod_02_1": {
-    "localized_name": "FishingRod_02_1",
+    "localized_name": "중급 낚싯대 (까부냥)",
     "description": null
   },
   "FishingRod_03_1": {
-    "localized_name": "FishingRod_03_1",
+    "localized_name": "고급 낚싯대 (펭키)",
     "description": null
   },
   "FishingSet1": {
@@ -772,7 +772,7 @@
     "description": null
   },
   "GrapplingGun5": {
-    "localized_name": "GrapplingGun5",
+    "localized_name": "울트라 갈고리 총",
     "description": null
   },
   "GrenadeBullet": {
@@ -809,7 +809,7 @@
   },
   "HunterFlagSet": {
     "localized_name": "밀렵단 깃발 세트",
-    "description": "Hunter_Flag, Hunter_Banner아이템이 포함된 세트. 밀렵단을 압도했음을 나타내는 증표이다."
+    "description": "밀렵단 깃발, 밀렵단 휘장아이템이 포함된 세트. 밀렵단을 압도했음을 나타내는 증표이다."
   },
   "IceCrusher": {
     "localized_name": "동결 분쇄기",
@@ -884,7 +884,7 @@
     "description": null
   },
   "Lantern_High": {
-    "localized_name": "Lantern_High",
+    "localized_name": "허리 휴대형 강화 랜턴",
     "description": null
   },
   "LargeCeilingLamp": {
@@ -932,7 +932,7 @@
     "description": null
   },
   "ManganeseIngot": {
-    "localized_name": "ManganeseIngot",
+    "localized_name": "코랄리움 주괴",
     "description": null
   },
   "ManualElectricGenerator": {
@@ -984,7 +984,7 @@
     "description": null
   },
   "MultiHatchingPalEgg": {
-    "localized_name": "MultiHatchingPalEgg",
+    "localized_name": "대형 알 부화기",
     "description": null
   },
   "Musket": {
@@ -993,7 +993,7 @@
   },
   "NinjaFlagSet": {
     "localized_name": "달꽃단 깃발 세트",
-    "description": "Ninja_Flag, Ninja_Banner아이템이 포함된 세트. 달꽃단을 압도했음을 나타내는 증표이다."
+    "description": "달꽃단 깃발, 달꽃단 휘장아이템이 포함된 세트. 달꽃단을 압도했음을 나타내는 증표이다."
   },
   "OilPump": {
     "localized_name": "원유 추출기",
@@ -1004,15 +1004,15 @@
     "description": null
   },
   "OperatingTable": {
-    "localized_name": "ko_Text",
+    "localized_name": "팔 수술대",
     "description": null
   },
   "OverheatRifle": {
-    "localized_name": "ko Text",
+    "localized_name": "전자동 소총",
     "description": null
   },
   "OverheatRifleBullet": {
-    "localized_name": "ko Text",
+    "localized_name": "전자동 소총 탄약",
     "description": null
   },
   "PALBOX": {
@@ -1024,15 +1024,15 @@
     "description": null
   },
   "PalDopingShot": {
-    "localized_name": "ko Text",
+    "localized_name": "부스트 건",
     "description": null
   },
   "PalDopingShotBullet": {
-    "localized_name": "ko Text",
+    "localized_name": "부스트 건 탄약",
     "description": null
   },
   "PalDopingShot_2": {
-    "localized_name": "PalDopingShot_2",
+    "localized_name": "메가 부스트 건",
     "description": null
   },
   "PalFoodBox": {
@@ -1040,7 +1040,7 @@
     "description": "음식을 넣어두면 거점의 팰 무리가 이곳에서 식사한다."
   },
   "PalHealingGrenade": {
-    "localized_name": "ko Text",
+    "localized_name": "팰 회복 수류탄",
     "description": null
   },
   "PalMedicineBox": {
@@ -1061,7 +1061,7 @@
   },
   "PoliceFlagSet": {
     "localized_name": "자경단 깃발 세트",
-    "description": "Police_Flag, Police_Banner아이템이 포함된 세트. 자경단을 압도했음을 나타내는 증표이다."
+    "description": "자경단 깃발, 자경단 휘장아이템이 포함된 세트. 자경단을 압도했음을 나타내는 증표이다."
   },
   "Polymer": {
     "localized_name": "폴리머",
@@ -1268,7 +1268,7 @@
     "description": "미래식 건축물로 거점을 제작할 때 쓰는 세트. 토대, 벽, 지붕, 계단 등 집을 지을 때 필요한 것들을 만들 수 있다."
   },
   "Salvage_TreasureBoxKey02": {
-    "localized_name": "Salvage_TreasureBoxKey02",
+    "localized_name": "강력 낚시 마그넷",
     "description": null
   },
   "SanityDecrease1": {
@@ -1277,7 +1277,7 @@
   },
   "ScientistFlagSet": {
     "localized_name": "유전자 연구 부대 깃발 세트",
-    "description": "Scientist_Flag, Scientist_Banner아이템이 포함된 세트. 유전자 연구 부대를 압도했음을 나타내는 증표이다."
+    "description": "유전자 연구 부대 깃발, 유전자 연구 부대 휘장아이템이 포함된 세트. 유전자 연구 부대를 압도했음을 나타내는 증표이다."
   },
   "Shield_01": {
     "localized_name": "일반 방패",
@@ -1360,7 +1360,7 @@
     "description": null
   },
   "SkillUnlock_BlueDragon_Ice": {
-    "localized_name": "SkillUnlock_BlueDragon_Ice",
+    "localized_name": "아주리나의 안장",
     "description": null
   },
   "SkillUnlock_BlueThunderHorse": {
@@ -1456,7 +1456,7 @@
     "description": null
   },
   "SkillUnlock_FlyingManta_Thunder": {
-    "localized_name": "SkillUnlock_FlyingManta_Thunder",
+    "localized_name": "일레카이트의 장갑",
     "description": null
   },
   "SkillUnlock_Garm": {
@@ -1464,11 +1464,11 @@
     "description": null
   },
   "SkillUnlock_GhostAnglerfish": {
-    "localized_name": "SkillUnlock_GhostAnglerfish",
+    "localized_name": "빛초롱의 안장",
     "description": null
   },
   "SkillUnlock_GhostAnglerfish_Fire": {
-    "localized_name": "SkillUnlock_GhostAnglerfish_Fire",
+    "localized_name": "불초롱의 안장",
     "description": null
   },
   "SkillUnlock_GhostBeast": {
@@ -1540,15 +1540,15 @@
     "description": null
   },
   "SkillUnlock_IceNarwhal": {
-    "localized_name": "SkillUnlock_IceNarwhal",
+    "localized_name": "빙등고래의 안장",
     "description": null
   },
   "SkillUnlock_IceNarwhal_Fire": {
-    "localized_name": "SkillUnlock_IceNarwhal_Fire",
+    "localized_name": "홍등고래의 안장",
     "description": null
   },
   "SkillUnlock_IceSeal": {
-    "localized_name": "SkillUnlock_IceSeal",
+    "localized_name": "크리범의 하네스",
     "description": null
   },
   "SkillUnlock_JetDragon": {
@@ -1592,7 +1592,7 @@
     "description": null
   },
   "SkillUnlock_LeafMomonga": {
-    "localized_name": "SkillUnlock_LeafMomonga",
+    "localized_name": "모몽파의 하네스",
     "description": null
   },
   "SkillUnlock_Manticore": {
@@ -1632,7 +1632,7 @@
     "description": null
   },
   "SkillUnlock_NegativeOctopus_Neutral": {
-    "localized_name": "SkillUnlock_NegativeOctopus_Neutral",
+    "localized_name": "드리문의 장갑",
     "description": null
   },
   "SkillUnlock_NightBlueHorse": {
@@ -1644,15 +1644,15 @@
     "description": null
   },
   "SkillUnlock_Penguin_Electric": {
-    "localized_name": "SkillUnlock_Penguin_Electric",
+    "localized_name": "뎅키의 로켓 발사기",
     "description": null
   },
   "SkillUnlock_Plesiosaur": {
-    "localized_name": "SkillUnlock_Plesiosaur",
+    "localized_name": "풀레시오의 안장",
     "description": null
   },
   "SkillUnlock_PoseidonOrca": {
-    "localized_name": "SkillUnlock_PoseidonOrca",
+    "localized_name": "넵티오스의 안장",
     "description": null
   },
   "SkillUnlock_PurpleSpider": {
@@ -1720,7 +1720,7 @@
     "description": null
   },
   "SkillUnlock_TropicalOstrich": {
-    "localized_name": "SkillUnlock_TropicalOstrich",
+    "localized_name": "트로조크의 안장",
     "description": null
   },
   "SkillUnlock_Umihebi": {
@@ -1792,7 +1792,7 @@
     "description": "들어간 팰이 SAN 수치를 더 많이 회복한다."
   },
   "Spa3": {
-    "localized_name": "Spa3",
+    "localized_name": "일본식 온천",
     "description": null
   },
   "Spear": {
@@ -1968,7 +1968,7 @@
     "description": "벽에 걸 수 있다."
   },
   "WeaponFactory_Dirty_04": {
-    "localized_name": "ko_Text",
+    "localized_name": "고도 문명 무기 공장",
     "description": null
   },
   "Wood_Gate": {

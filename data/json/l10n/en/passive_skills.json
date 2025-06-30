@@ -23,12 +23,24 @@
     "localized_name": "Attack Up Lv. 1",
     "description": null
   },
+  "Attack_ACC_up1_Otomo_Only_Equip": {
+    "localized_name": "Pal Attack Up Lv. 1",
+    "description": null
+  },
   "Attack_ACC_up2": {
     "localized_name": "Attack Up Lv. 2",
     "description": null
   },
+  "Attack_ACC_up2_Otomo_Only_Equip": {
+    "localized_name": "Pal Attack Up Lv. 2",
+    "description": null
+  },
   "Attack_ACC_up3": {
     "localized_name": "Attack Up Lv. 3",
+    "description": null
+  },
+  "Attack_ACC_up3_Otomo_Only_Equip": {
+    "localized_name": "Pal Attack Up Lv. 3",
     "description": null
   },
   "BossDefeatReward_AmaterasuWolf_Dark": {
@@ -155,6 +167,14 @@
     "localized_name": "Dark Damage Enhancement (Small)",
     "description": null
   },
+  "BossDefeatReward_IceNarwhal": {
+    "localized_name": "Ice Damage Enhancement (Large)",
+    "description": null
+  },
+  "BossDefeatReward_IceNarwhal_Fire": {
+    "localized_name": "Fire Damage Enhancement (Large)",
+    "description": null
+  },
   "BossDefeatReward_JetDragon": {
     "localized_name": "Dragon Damage Enhancement (Large)",
     "description": null
@@ -217,6 +237,10 @@
   },
   "BossDefeatReward_PlantSlime": {
     "localized_name": "Ground Damage Enhancement (Small)",
+    "description": null
+  },
+  "BossDefeatReward_PoseidonOrca": {
+    "localized_name": "Water Damage Enhancement (Large)",
     "description": null
   },
   "BossDefeatReward_PurpleSpider": {
@@ -395,6 +419,18 @@
     "localized_name": "Remarkable Craftsmanship",
     "description": null
   },
+  "Defense_ACC_up1_Otomo_Only_Equip": {
+    "localized_name": "Pal Defense Up Lv. 1",
+    "description": null
+  },
+  "Defense_ACC_up2_Otomo_Only_Equip": {
+    "localized_name": "Pal Defense Up Lv. 2",
+    "description": null
+  },
+  "Defense_ACC_up3_Otomo_Only_Equip": {
+    "localized_name": "Pal Defense Up Lv. 3",
+    "description": null
+  },
   "Deffence_down1": {
     "localized_name": "Downtrodden",
     "description": null
@@ -427,12 +463,20 @@
     "localized_name": "Dark Damage Enhancement (Small)",
     "description": null
   },
+  "ElementBoost_Dark_1_Otomo_Only_Equip": {
+    "localized_name": "Pal Dark Damage Enhancement Lv. 1",
+    "description": null
+  },
   "ElementBoost_Dark_1_PAL": {
     "localized_name": "Veil of Darkness",
     "description": "10.0% increase in Dark attack damage."
   },
   "ElementBoost_Dark_2_BossDefeat": {
     "localized_name": "Dark Damage Enhancement (Medium)",
+    "description": null
+  },
+  "ElementBoost_Dark_2_Otomo_Only_Equip": {
+    "localized_name": "Pal Dark Damage Enhancement Lv. 2",
     "description": null
   },
   "ElementBoost_Dark_2_PAL": {
@@ -443,8 +487,16 @@
     "localized_name": "Dark Damage Enhancement (Large)",
     "description": null
   },
+  "ElementBoost_Dark_3_Otomo_Only_Equip": {
+    "localized_name": "Pal Dark Damage Enhancement Lv. 3",
+    "description": null
+  },
   "ElementBoost_Dragon_1_BossDefeat": {
     "localized_name": "Dragon Damage Enhancement (Small)",
+    "description": null
+  },
+  "ElementBoost_Dragon_1_Otomo_Only_Equip": {
+    "localized_name": "Pal Dragon Damage Enhancement Lv. 1",
     "description": null
   },
   "ElementBoost_Dragon_1_PAL": {
@@ -455,6 +507,10 @@
     "localized_name": "Dragon Damage Enhancement (Medium)",
     "description": null
   },
+  "ElementBoost_Dragon_2_Otomo_Only_Equip": {
+    "localized_name": "Pal Dragon Damage Enhancement Lv. 2",
+    "description": null
+  },
   "ElementBoost_Dragon_2_PAL": {
     "localized_name": "Divine Dragon",
     "description": null
@@ -463,8 +519,16 @@
     "localized_name": "Dragon Damage Enhancement (Large)",
     "description": null
   },
+  "ElementBoost_Dragon_3_Otomo_Only_Equip": {
+    "localized_name": "Pal Dragon Damage Enhancement Lv. 3",
+    "description": null
+  },
   "ElementBoost_Earth_1_BossDefeat": {
     "localized_name": "Ground Damage Enhancement (Small)",
+    "description": null
+  },
+  "ElementBoost_Earth_1_Otomo_Only_Equip": {
+    "localized_name": "Pal Ground Damage Enhancement Lv. 1",
     "description": null
   },
   "ElementBoost_Earth_1_PAL": {
@@ -475,6 +539,10 @@
     "localized_name": "Ground Damage Enhancement (Medium)",
     "description": null
   },
+  "ElementBoost_Earth_2_Otomo_Only_Equip": {
+    "localized_name": "Pal Ground Damage Enhancement Lv. 2",
+    "description": null
+  },
   "ElementBoost_Earth_2_PAL": {
     "localized_name": "Earth Emperor",
     "description": null
@@ -483,20 +551,40 @@
     "localized_name": "Ground Damage Enhancement (Large)",
     "description": null
   },
+  "ElementBoost_Earth_3_Otomo_Only_Equip": {
+    "localized_name": "Pal Ground Damage Enhancement Lv. 3",
+    "description": null
+  },
   "ElementBoost_Electricity_1_BossDefeat": {
     "localized_name": "Electric Damage Enhancement (Small)",
+    "description": null
+  },
+  "ElementBoost_Electricity_1_Otomo_Only_Equip": {
+    "localized_name": "Pal Electric Damage Enhancement Lv. 1",
     "description": null
   },
   "ElementBoost_Electricity_2_BossDefeat": {
     "localized_name": "Electric Damage Enhancement (Medium)",
     "description": null
   },
+  "ElementBoost_Electricity_2_Otomo_Only_Equip": {
+    "localized_name": "Pal Electric Damage Enhancement Lv. 2",
+    "description": null
+  },
   "ElementBoost_Electricity_3_BossDefeat": {
     "localized_name": "Electric Damage Enhancement (Large)",
     "description": null
   },
+  "ElementBoost_Electricity_3_Otomo_Only_Equip": {
+    "localized_name": "Pal Electric Damage Enhancement Lv. 3",
+    "description": null
+  },
   "ElementBoost_Fire_1_BossDefeat": {
     "localized_name": "Fire Damage Enhancement (Small)",
+    "description": null
+  },
+  "ElementBoost_Fire_1_Otomo_Only_Equip": {
+    "localized_name": "Pal Fire Damage Enhancement Lv. 1",
     "description": null
   },
   "ElementBoost_Fire_1_PAL": {
@@ -507,6 +595,10 @@
     "localized_name": "Fire Damage Enhancement (Medium)",
     "description": null
   },
+  "ElementBoost_Fire_2_Otomo_Only_Equip": {
+    "localized_name": "Pal Fire Damage Enhancement Lv. 2",
+    "description": null
+  },
   "ElementBoost_Fire_2_PAL": {
     "localized_name": "Flame Emperor",
     "description": null
@@ -515,8 +607,16 @@
     "localized_name": "Fire Damage Enhancement (Large)",
     "description": null
   },
+  "ElementBoost_Fire_3_Otomo_Only_Equip": {
+    "localized_name": "Pal Fire Damage Enhancement Lv. 3",
+    "description": null
+  },
   "ElementBoost_Ice_1_BossDefeat": {
     "localized_name": "Ice Damage Enhancement (Small)",
+    "description": null
+  },
+  "ElementBoost_Ice_1_Otomo_Only_Equip": {
+    "localized_name": "Pal Ice Damage Enhancement Lv. 1",
     "description": null
   },
   "ElementBoost_Ice_1_PAL": {
@@ -527,6 +627,10 @@
     "localized_name": "Ice Damage Enhancement (Medium)",
     "description": null
   },
+  "ElementBoost_Ice_2_Otomo_Only_Equip": {
+    "localized_name": "Pal Ice Damage Enhancement Lv. 2",
+    "description": null
+  },
   "ElementBoost_Ice_2_PAL": {
     "localized_name": "Ice Emperor",
     "description": null
@@ -535,8 +639,16 @@
     "localized_name": "Ice Damage Enhancement (Large)",
     "description": null
   },
+  "ElementBoost_Ice_3_Otomo_Only_Equip": {
+    "localized_name": "Pal Ice Damage Enhancement Lv. 3",
+    "description": null
+  },
   "ElementBoost_Leaf_1_BossDefeat": {
     "localized_name": "Grass Damage Enhancement (Small)",
+    "description": null
+  },
+  "ElementBoost_Leaf_1_Otomo_Only_Equip": {
+    "localized_name": "Pal Grass Damage Enhancement Lv. 1",
     "description": null
   },
   "ElementBoost_Leaf_1_PAL": {
@@ -547,6 +659,10 @@
     "localized_name": "Grass Damage Enhancement (Medium)",
     "description": null
   },
+  "ElementBoost_Leaf_2_Otomo_Only_Equip": {
+    "localized_name": "Pal Grass Damage Enhancement Lv. 2",
+    "description": null
+  },
   "ElementBoost_Leaf_2_PAL": {
     "localized_name": "Spirit Emperor",
     "description": null
@@ -555,8 +671,16 @@
     "localized_name": "Grass Damage Enhancement (Large)",
     "description": null
   },
+  "ElementBoost_Leaf_3_Otomo_Only_Equip": {
+    "localized_name": "Pal Grass Damage Enhancement Lv. 3",
+    "description": null
+  },
   "ElementBoost_Normal_1_BossDefeat": {
     "localized_name": "Neutral Damage Enhancement (Small)",
+    "description": null
+  },
+  "ElementBoost_Normal_1_Otomo_Only_Equip": {
+    "localized_name": "Pal Neutral Damage Enhancement Lv. 1",
     "description": null
   },
   "ElementBoost_Normal_1_PAL": {
@@ -567,12 +691,20 @@
     "localized_name": "Neutral Damage Enhancement (Medium)",
     "description": null
   },
+  "ElementBoost_Normal_2_Otomo_Only_Equip": {
+    "localized_name": "Pal Neutral Damage Enhancement Lv. 2",
+    "description": null
+  },
   "ElementBoost_Normal_2_PAL": {
     "localized_name": "Celestial Emperor",
     "description": null
   },
   "ElementBoost_Normal_3_BossDefeat": {
     "localized_name": "Neutral Damage Enhancement (Large)",
+    "description": null
+  },
+  "ElementBoost_Normal_3_Otomo_Only_Equip": {
+    "localized_name": "Pal Neutral Damage Enhancement Lv. 3",
     "description": null
   },
   "ElementBoost_Thunder_1_PAL": {
@@ -587,12 +719,24 @@
     "localized_name": "Water Damage Enhancement (Small)",
     "description": null
   },
+  "ElementBoost_Water_1_Otomo_Only_Equip": {
+    "localized_name": "Pal Water Damage Enhancement Lv. 1",
+    "description": null
+  },
   "ElementBoost_Water_2_BossDefeat": {
     "localized_name": "Water Damage Enhancement (Medium)",
     "description": null
   },
+  "ElementBoost_Water_2_Otomo_Only_Equip": {
+    "localized_name": "Pal Water Damage Enhancement Lv. 2",
+    "description": null
+  },
   "ElementBoost_Water_3_BossDefeat": {
     "localized_name": "Water Damage Enhancement (Large)",
+    "description": null
+  },
+  "ElementBoost_Water_3_Otomo_Only_Equip": {
+    "localized_name": "Pal Water Damage Enhancement Lv. 3",
     "description": null
   },
   "ElementResist_Aqua_1": {
@@ -743,6 +887,34 @@
     "localized_name": "Eternal Flame",
     "description": null
   },
+  "GYM_NAME_Desert": {
+    "localized_name": "PIDF Officer",
+    "description": null
+  },
+  "GYM_NAME_Forest": {
+    "localized_name": "Free Pal Alliance Founder",
+    "description": null
+  },
+  "GYM_NAME_Meadow": {
+    "localized_name": "Rayne Syndicate Officer",
+    "description": "Attack +20.0% Movement Speed increases 10.0%"
+  },
+  "GYM_NAME_Sakurajima": {
+    "localized_name": "Leader of the Moonflowers",
+    "description": null
+  },
+  "GYM_NAME_Snow": {
+    "localized_name": "PAL Genetic Research Unit Commander",
+    "description": null
+  },
+  "GYM_NAME_Viking": {
+    "localized_name": "Jarl of Feybreak",
+    "description": null
+  },
+  "GYM_NAME_Volcano": {
+    "localized_name": "Brothers of the Eternal Pyre Soul Leader",
+    "description": null
+  },
   "HP_ACC_up1": {
     "localized_name": "Health Up Lv. 1",
     "description": null
@@ -826,6 +998,10 @@
   "Noukin": {
     "localized_name": "Musclehead",
     "description": null
+  },
+  "Nushi": {
+    "localized_name": "Lunker",
+    "description": "20.0% increase to Water attack damage 20.0% increase to Ice attack damage 20.0% increase to defense."
   },
   "PAL_ALLAttack_down1": {
     "localized_name": "Coward",
@@ -915,6 +1091,18 @@
     "localized_name": "Sadist",
     "description": null
   },
+  "PalExp_Increase_1_Otomo_Only_Equip": {
+    "localized_name": "Pal EXP Up Lv. 1",
+    "description": null
+  },
+  "PalExp_Increase_2_Otomo_Only_Equip": {
+    "localized_name": "Pal EXP Up Lv. 2",
+    "description": null
+  },
+  "PalExp_Increase_3_Otomo_Only_Equip": {
+    "localized_name": "Pal EXP Up Lv. 3",
+    "description": null
+  },
   "Rare": {
     "localized_name": "Lucky",
     "description": null
@@ -970,6 +1158,18 @@
   "Stamina_Up_3": {
     "localized_name": "Eternal Engine",
     "description": "Max stamina +75.0% *This effect is only valid for rideable pals."
+  },
+  "SwimSpeed_up_1": {
+    "localized_name": "Sleek Stroke",
+    "description": "30.0% increase movement speed on water."
+  },
+  "SwimSpeed_up_2": {
+    "localized_name": "Ace Swimmer",
+    "description": null
+  },
+  "SwimSpeed_up_3": {
+    "localized_name": "King of the Waves",
+    "description": null
   },
   "TemperatureResist_Cold1": {
     "localized_name": "Cold Resistant Lv. 1",
@@ -1049,6 +1249,26 @@
   },
   "WorkSpeed_ACC_up3": {
     "localized_name": "Speedy Worker Lv. 3",
+    "description": null
+  },
+  "YakushimaDagameBoost_Magic_Equip": {
+    "localized_name": "Hallowed Power: Magic",
+    "description": null
+  },
+  "YakushimaDagameBoost_Melee_Equip": {
+    "localized_name": "Hallowed Power: Close Range",
+    "description": null
+  },
+  "YakushimaDagameBoost_Ranged_Equip": {
+    "localized_name": "Hallowed Power: Ranged",
+    "description": null
+  },
+  "YakushimaDagameBoost_Summon_Equip": {
+    "localized_name": "Hallowed Power: Summon",
+    "description": null
+  },
+  "YakushimaProtection_Equip": {
+    "localized_name": "Hallowed Guard",
     "description": null
   },
   "defense_ACC_up1": {

@@ -8,7 +8,7 @@
     "description": null
   },
   "Accessory_AirDash3": {
-    "localized_name": "fr Text",
+    "localized_name": "Bottes de triple ruée aérienne",
     "description": null
   },
   "Accessory_JumpCount_Increase1": {
@@ -100,7 +100,7 @@
     "description": null
   },
   "BaseCampWorkerExtraStation": {
-    "localized_name": "BaseCampWorkerExtraStation",
+    "localized_name": "Terminal de Gestion de Boîte à Pals",
     "description": null
   },
   "Battle_Armor_Grade_01_Cloth": {
@@ -152,16 +152,16 @@
     "description": "Une Armure en métal raffiné améliorée. Ses propriétés réfrigérantes ne sont plus à prouver. Une Chaîne de production est requise pour en fabriquer."
   },
   "Battle_Armor_Grade_04_Steal": {
-    "localized_name": "Armure en paluminium",
-    "description": "Une armure en Lingot de paluminium. Ses propriétés défensives sont aussi exceptionnelles et élevées que son poids. Une Chaîne de production II est requise pour en fabriquer."
+    "localized_name": "Armure en Paluminium",
+    "description": "Une armure en Lingot de Paluminium. Ses propriétés défensives sont aussi exceptionnelles et élevées que son poids. Une Chaîne de production II est requise pour en fabriquer."
   },
   "Battle_Armor_Grade_04_Steal_Cold": {
-    "localized_name": "Armure en paluminium chauffante",
-    "description": "Une Armure en paluminium améliorée. Elle protège contre le gel. Une Chaîne de production II est requise pour en fabriquer."
+    "localized_name": "Armure en Paluminium Chauffante",
+    "description": "Une Armure en Paluminium améliorée. Elle protège contre le gel. Une Chaîne de production II est requise pour en fabriquer."
   },
   "Battle_Armor_Grade_04_Steal_Heat": {
-    "localized_name": "Armure en paluminium réfrigérante",
-    "description": "Une Armure en paluminium améliorée. Ses propriétés réfrigérantes ne sont plus à prouver. Une Chaîne de production II est requise pour en fabriquer."
+    "localized_name": "Armure en Paluminium Réfrigérante",
+    "description": "Une Armure en Paluminium améliorée. Ses propriétés réfrigérantes ne sont plus à prouver. Une Chaîne de production II est requise pour en fabriquer."
   },
   "Battle_Armor_Grade_05_Plastic": {
     "localized_name": "Armure en plastacier",
@@ -228,8 +228,8 @@
     "description": "Un casque fait de métal noble. L'éclat du métal poli accroît sa valeur. Une Chaîne de production est requise pour en fabriquer."
   },
   "Battle_Helm_Grade_05_Steal": {
-    "localized_name": "Heaume en paluminium",
-    "description": "Un casque en Lingot de paluminium. L'héritage d'un guerrier qui choisit son porteur parmi tous ses aspirants. Une Chaîne de production II est requise pour en fabriquer."
+    "localized_name": "Heaume en Paluminium",
+    "description": "Un casque en Lingot de Paluminium. L'héritage d'un guerrier qui choisit son porteur parmi tous ses aspirants. Une Chaîne de production II est requise pour en fabriquer."
   },
   "Battle_Helm_Grade_06_Plastic": {
     "localized_name": "Casque en plastacier",
@@ -365,7 +365,7 @@
   },
   "BelieverFlagSet": {
     "localized_name": "Ensemble de Drapeaux de la LPP",
-    "description": "Un ensemble contenant un Believer_Flag et une Believer_Banner. Symbole de votre victoire sur la Ligue pour la Protection des Pals."
+    "description": "Un ensemble contenant un Drapeau de la Ligue pour la Protection des Pals et une Bannière de la Ligue pour la Protection des Pals. Symbole de votre victoire sur la Ligue pour la Protection des Pals."
   },
   "BlastFurnace4": {
     "localized_name": "Fournaise géante",
@@ -396,11 +396,11 @@
     "description": null
   },
   "ChargeLaserRifle": {
-    "localized_name": "fr Text",
+    "localized_name": "Fusil Chargé",
     "description": null
   },
   "ChargeLaserRifleBullet": {
-    "localized_name": "fr Text",
+    "localized_name": "Balles de Fusil Chargé",
     "description": null
   },
   "Cloth2": {
@@ -428,7 +428,7 @@
     "description": "Une installation permettant de broyer Pierre et Bois de charpente pour obtenir d'autres matériaux. La capacité « arrosage » est requise pour utiliser le moulin à eau."
   },
   "CrystalPit": {
-    "localized_name": "CrystalPit",
+    "localized_name": "Mine d’Hexoquartz",
     "description": null
   },
   "DamagedScarecrow": {
@@ -492,11 +492,11 @@
     "description": null
   },
   "EnergyShotgun": {
-    "localized_name": "fr Text",
+    "localized_name": "Fusil à pompe Énergétique",
     "description": null
   },
   "EnergyShotgunBullet": {
-    "localized_name": "fr Text",
+    "localized_name": "Balles de Fusil à pompe Énergétique",
     "description": null
   },
   "EnergyStorage_Electric": {
@@ -508,7 +508,7 @@
     "description": null
   },
   "Factory_Hard_04": {
-    "localized_name": "fr_Text",
+    "localized_name": "Usine d'une Civilisation Avancée",
     "description": null
   },
   "Factory_Money": {
@@ -521,34 +521,34 @@
   },
   "FireCultFlagSet": {
     "localized_name": "Ensemble de Drapeaux de la Confrérie",
-    "description": "Un ensemble contenant un FireCult_Flag et une FireCult_Banner. Symbole de votre victoire sur la Confrérie des Flammes Éternelles."
+    "description": "Un ensemble contenant un Drapeau de la Confrérie des Flammes Éternelles et une Bannière de la Confrérie des Flammes Éternelles. Symbole de votre victoire sur la Confrérie des Flammes Éternelles."
   },
   "FishingBait_2": {
-    "localized_name": "FishingBait_2",
+    "localized_name": "Appât Haut de Gamme",
     "description": null
   },
   "FishingBait_3": {
-    "localized_name": "FishingBait_3",
+    "localized_name": "Appât de Luxe",
     "description": null
   },
   "FishingBait_3_A": {
-    "localized_name": "FishingBait_3_A",
+    "localized_name": "Appât Séduisant",
     "description": null
   },
   "FishingPond1": {
-    "localized_name": "FishingPond1",
+    "localized_name": "Bassin de pêche",
     "description": null
   },
   "FishingPond2": {
-    "localized_name": "FishingPond2",
+    "localized_name": "Grand Bassin de pêche",
     "description": null
   },
   "FishingRod_02_1": {
-    "localized_name": "FishingRod_02_1",
+    "localized_name": "Canne à Pêche Standard (Cattiva)",
     "description": null
   },
   "FishingRod_03_1": {
-    "localized_name": "FishingRod_03_1",
+    "localized_name": "Canne à Pêche Avancée (Pengullet)",
     "description": null
   },
   "FishingSet1": {
@@ -772,7 +772,7 @@
     "description": null
   },
   "GrapplingGun5": {
-    "localized_name": "GrapplingGun5",
+    "localized_name": "Ultra pistolet-grappin",
     "description": null
   },
   "GrenadeBullet": {
@@ -809,7 +809,7 @@
   },
   "HunterFlagSet": {
     "localized_name": "Ensemble de Drapeaux des Syndicats",
-    "description": "Un ensemble contenant un Hunter_Flag et une Hunter_Banner. Symbole de votre victoire sur les Syndicats de Rayne."
+    "description": "Un ensemble contenant un Drapeau du Syndicats de Rayne et une Bannière du Syndicats de Rayne. Symbole de votre victoire sur les Syndicats de Rayne."
   },
   "IceCrusher": {
     "localized_name": "Broyeur à glace",
@@ -884,7 +884,7 @@
     "description": null
   },
   "Lantern_High": {
-    "localized_name": "Lantern_High",
+    "localized_name": "Lanterne de taille",
     "description": null
   },
   "LargeCeilingLamp": {
@@ -932,7 +932,7 @@
     "description": null
   },
   "ManganeseIngot": {
-    "localized_name": "ManganeseIngot",
+    "localized_name": "Lingot de Korallium",
     "description": null
   },
   "ManualElectricGenerator": {
@@ -984,7 +984,7 @@
     "description": null
   },
   "MultiHatchingPalEgg": {
-    "localized_name": "MultiHatchingPalEgg",
+    "localized_name": "Incubateur Géant",
     "description": null
   },
   "Musket": {
@@ -993,7 +993,7 @@
   },
   "NinjaFlagSet": {
     "localized_name": "Ensemble de Drapeaux des Fleurs Lunaires",
-    "description": "Un ensemble contenant un Ninja_Flag et une Ninja_Banner. Symbole de votre victoire sur le Clan des Fleurs Lunaires."
+    "description": "Un ensemble contenant un Drapeau du Clan des Fleurs Lunaires et une Bannière du Clan des Fleurs Lunaires. Symbole de votre victoire sur le Clan des Fleurs Lunaires."
   },
   "OilPump": {
     "localized_name": "Pompe à pétrole brut",
@@ -1004,15 +1004,15 @@
     "description": null
   },
   "OperatingTable": {
-    "localized_name": "fr_Text",
+    "localized_name": "Table d'opération de Pal",
     "description": null
   },
   "OverheatRifle": {
-    "localized_name": "fr Text",
+    "localized_name": "Fusil à Surchauffe",
     "description": null
   },
   "OverheatRifleBullet": {
-    "localized_name": "fr Text",
+    "localized_name": "Balles de Fusil à Surchauffe",
     "description": null
   },
   "PALBOX": {
@@ -1024,15 +1024,15 @@
     "description": null
   },
   "PalDopingShot": {
-    "localized_name": "fr Text",
+    "localized_name": "Pistolet Dopant",
     "description": null
   },
   "PalDopingShotBullet": {
-    "localized_name": "fr Text",
+    "localized_name": "Balles de Pistolet Dopant",
     "description": null
   },
   "PalDopingShot_2": {
-    "localized_name": "PalDopingShot_2",
+    "localized_name": "Méga Pistolet Dopant",
     "description": null
   },
   "PalFoodBox": {
@@ -1040,7 +1040,7 @@
     "description": "Y introduire de la nourriture permettra aux Pals du camp de l'utiliser pour se nourrir."
   },
   "PalHealingGrenade": {
-    "localized_name": "fr Text",
+    "localized_name": "Grenade à Régénération de Pal",
     "description": null
   },
   "PalMedicineBox": {
@@ -1061,7 +1061,7 @@
   },
   "PoliceFlagSet": {
     "localized_name": "Ensemble de Drapeaux de la Milice",
-    "description": "Un ensemble contenant un Police_Flag et une Police_Banner. Symbole de votre victoire sur la Milice Populaire."
+    "description": "Un ensemble contenant un Drapeau de la Milice Populaire et une Bannière de la Milice Populaire. Symbole de votre victoire sur la Milice Populaire."
   },
   "Polymer": {
     "localized_name": "Polymère",
@@ -1157,7 +1157,7 @@
   },
   "Product_Ingot_Grade_03_Steal": {
     "localized_name": "Fournaise électrique",
-    "description": "Permet de raffiner : Lingot de paluminium."
+    "description": "Permet de raffiner : Lingot de Paluminium."
   },
   "Product_Medicine_Grade_01": {
     "localized_name": "Table pharmaceutique archaïque",
@@ -1236,19 +1236,19 @@
     "description": "Des munitions compatibles notamment avec le Fusil à mousquet et le Pistolet rouillé. Une Établi pour armes est requise pour en fabriquer."
   },
   "SFArmor": {
-    "localized_name": "Armure en hexolite",
+    "localized_name": "Armure en Hexolite",
     "description": null
   },
   "SFArmorCold": {
-    "localized_name": "Armure en hexolite chauffante",
+    "localized_name": "Armure en Hexolite chauffante",
     "description": null
   },
   "SFArmorHeat": {
-    "localized_name": "Armure en hexolite réfrigérante",
+    "localized_name": "Armure en Hexolite réfrigérante",
     "description": null
   },
   "SFArmorWeight": {
-    "localized_name": "Armure en hexolite légère",
+    "localized_name": "Armure en Hexolite légère",
     "description": null
   },
   "SFArrow": {
@@ -1260,7 +1260,7 @@
     "description": null
   },
   "SFHelmet": {
-    "localized_name": "Casque en hexolite",
+    "localized_name": "Casque en Hexolite",
     "description": null
   },
   "SF_houseset": {
@@ -1268,7 +1268,7 @@
     "description": "Un assortiment pour construire un camp de style Futuriste. Permet de fabriquer tout le nécessaire à la construction d'une maison (base, murs, toit, escalier, etc.)."
   },
   "Salvage_TreasureBoxKey02": {
-    "localized_name": "Salvage_TreasureBoxKey02",
+    "localized_name": "Aimant de Pêche Puissant",
     "description": null
   },
   "SanityDecrease1": {
@@ -1277,7 +1277,7 @@
   },
   "ScientistFlagSet": {
     "localized_name": "Ensemble de Drapeaux de l'Unité de Recherche",
-    "description": "Un ensemble contenant un Scientist_Flag et une Scientist_Banner. Symbole de votre victoire sur l’Unité de Recherche sur les Gènes."
+    "description": "Un ensemble contenant un Drapeau de l’Unité de Recherche Génétique et une Bannière de l’Unité de Recherche Génétique. Symbole de votre victoire sur l’Unité de Recherche sur les Gènes."
   },
   "Shield_01": {
     "localized_name": "Bouclier normal",
@@ -1360,7 +1360,7 @@
     "description": null
   },
   "SkillUnlock_BlueDragon_Ice": {
-    "localized_name": "SkillUnlock_BlueDragon_Ice",
+    "localized_name": "Selle pour Azurobe Cryst",
     "description": null
   },
   "SkillUnlock_BlueThunderHorse": {
@@ -1456,7 +1456,7 @@
     "description": null
   },
   "SkillUnlock_FlyingManta_Thunder": {
-    "localized_name": "SkillUnlock_FlyingManta_Thunder",
+    "localized_name": "Gants pour Celaray Lux",
     "description": null
   },
   "SkillUnlock_Garm": {
@@ -1464,11 +1464,11 @@
     "description": null
   },
   "SkillUnlock_GhostAnglerfish": {
-    "localized_name": "SkillUnlock_GhostAnglerfish",
+    "localized_name": "Selle pour Ghangler",
     "description": null
   },
   "SkillUnlock_GhostAnglerfish_Fire": {
-    "localized_name": "SkillUnlock_GhostAnglerfish_Fire",
+    "localized_name": "Selle pour Ghangler Ignis",
     "description": null
   },
   "SkillUnlock_GhostBeast": {
@@ -1540,15 +1540,15 @@
     "description": null
   },
   "SkillUnlock_IceNarwhal": {
-    "localized_name": "SkillUnlock_IceNarwhal",
+    "localized_name": "Selle pour Whalaska",
     "description": null
   },
   "SkillUnlock_IceNarwhal_Fire": {
-    "localized_name": "SkillUnlock_IceNarwhal_Fire",
+    "localized_name": "Selle pour Whalaska Ignis",
     "description": null
   },
   "SkillUnlock_IceSeal": {
-    "localized_name": "SkillUnlock_IceSeal",
+    "localized_name": "Harnais pour Polapup",
     "description": null
   },
   "SkillUnlock_JetDragon": {
@@ -1592,7 +1592,7 @@
     "description": null
   },
   "SkillUnlock_LeafMomonga": {
-    "localized_name": "SkillUnlock_LeafMomonga",
+    "localized_name": "Harnais pour Herbil",
     "description": null
   },
   "SkillUnlock_Manticore": {
@@ -1632,7 +1632,7 @@
     "description": null
   },
   "SkillUnlock_NegativeOctopus_Neutral": {
-    "localized_name": "SkillUnlock_NegativeOctopus_Neutral",
+    "localized_name": "Gants pour Killamari Primo",
     "description": null
   },
   "SkillUnlock_NightBlueHorse": {
@@ -1644,15 +1644,15 @@
     "description": null
   },
   "SkillUnlock_Penguin_Electric": {
-    "localized_name": "SkillUnlock_Penguin_Electric",
+    "localized_name": "Lance-fusées pour Pengullet Lux",
     "description": null
   },
   "SkillUnlock_Plesiosaur": {
-    "localized_name": "SkillUnlock_Plesiosaur",
+    "localized_name": "Selle pour Braloha",
     "description": null
   },
   "SkillUnlock_PoseidonOrca": {
-    "localized_name": "SkillUnlock_PoseidonOrca",
+    "localized_name": "Selle pour Neptilius",
     "description": null
   },
   "SkillUnlock_PurpleSpider": {
@@ -1720,7 +1720,7 @@
     "description": null
   },
   "SkillUnlock_TropicalOstrich": {
-    "localized_name": "SkillUnlock_TropicalOstrich",
+    "localized_name": "Selle pour Palumba",
     "description": null
   },
   "SkillUnlock_Umihebi": {
@@ -1792,7 +1792,7 @@
     "description": "Les Pals qui l'utilisent récupèrent une plus grande quantité de points MEN."
   },
   "Spa3": {
-    "localized_name": "Spa3",
+    "localized_name": "Onsen",
     "description": null
   },
   "Spear": {
@@ -1828,23 +1828,23 @@
     "description": "Des dispositifs à lancer pour capturer les Pals. Produites en masse, elles ne sont efficaces que sur les Pals de bas niveau."
   },
   "Special_PalSphere_Grade_02": {
-    "localized_name": "Méga sphère",
+    "localized_name": "Méga Sphère",
     "description": "Des dispositifs à lancer pour capturer les Pals. Leurs performances améliorées permettent de capturer une plus grande variété de Pals. Une Établi pour sphères est requise pour en fabriquer."
   },
   "Special_PalSphere_Grade_03": {
-    "localized_name": "Giga sphère",
+    "localized_name": "Giga Sphère",
     "description": "Des dispositifs à lancer pour capturer les Pals. Elles permettent de capturer des Pals à la puissance limitée. Une Établi pour sphères est requise pour en fabriquer."
   },
   "Special_PalSphere_Grade_04": {
-    "localized_name": "Téra sphère",
+    "localized_name": "Téra Sphère",
     "description": "Des dispositifs à lancer pour capturer les Pals. Elles permettent de capturer des Pals plus puissants. Une Chaîne de production de sphères est requise pour en fabriquer."
   },
   "Special_PalSphere_Grade_05": {
-    "localized_name": "Ultra sphère",
+    "localized_name": "Ultra Sphère",
     "description": "Des dispositifs à lancer pour capturer les Pals. Leur qualité remarquable empêche la plupart des Pals de s'en échapper. Une Chaîne de production de sphères II est requise pour en fabriquer."
   },
   "Special_PalSphere_Grade_06": {
-    "localized_name": "Sphère légendaire",
+    "localized_name": "Sphère Légendaire",
     "description": "Des dispositifs à lancer pour capturer les Pals. Presque aucun Pal n'est capable de s'échapper de ce modèle. Une Chaîne de production de sphères II est requise pour en fabriquer."
   },
   "Special_PalSphere_Grade_07": {
@@ -1968,7 +1968,7 @@
     "description": "À accrocher aux murs."
   },
   "WeaponFactory_Dirty_04": {
-    "localized_name": "fr_Text",
+    "localized_name": "Usine d'armes d'une Civilisation Avancée",
     "description": null
   },
   "Wood_Gate": {

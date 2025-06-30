@@ -35,9 +35,21 @@
     "localized_name": "Monitoring Stand",
     "description": "Command your Pals to work on various things inside a base. You can allow or prohibit individual kinds of work."
   },
+  "BaseCampWorkerExtraStation": {
+    "localized_name": "Palbox Control Device",
+    "description": "A remote-access terminal for the Palbox. Set it up wherever you'd like and build a base of your own design."
+  },
   "BathTub_Stone": {
     "localized_name": "Antique Bathtub",
     "description": "Decorative antique bathtub."
+  },
+  "Believer_Banner": {
+    "localized_name": "Free Pal Alliance Vertical Banner",
+    "description": "Decorative Free Pal Alliance banner."
+  },
+  "Believer_Flag": {
+    "localized_name": "Free Pal Alliance Standard",
+    "description": "Decorative Free Pal Alliance flag."
   },
   "Bench_Wood": {
     "localized_name": "Wooden Bench",
@@ -100,8 +112,8 @@
     "description": "Needed for cooking food. It can only be used to grill simple ingredients. Requires a Fire Pal to light a flame."
   },
   "CandleStand": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Majestic Candlestick",
+    "description": "An imposing candlestick lit by the Brothers of the Eternal Pyre and revered as sacred. It can be placed on the ground. Requires a Fire Pal to light a flame."
   },
   "Cauldron": {
     "localized_name": "Witch Cauldron",
@@ -156,12 +168,12 @@
     "description": "A facility that lets you combine multiple schematics to create more advanced ones."
   },
   "ConservationGroupBannerA": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Free Pal Alliance Flag",
+    "description": "Decorative Free Pal Alliance flag."
   },
   "ConservationGroupBannerB": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Free Pal Alliance Horizontal Banner",
+    "description": "Decorative Free Pal Alliance banner."
   },
   "Container01_Iron": {
     "localized_name": "Large Container",
@@ -198,6 +210,10 @@
   "Crusher": {
     "localized_name": "Crusher",
     "description": "Facility for breaking down Stone and Wood to exchange them for other materials. Requires Pal with the Watering trait to spin the water turbine."
+  },
+  "CrystalPit": {
+    "localized_name": "Hexolite Quartz Mine",
+    "description": "Facility for producing Hexolite Quartzs. Digging Hexolite Quartzs is grueling physical work. Leave it to a Pal that is good at mining."
   },
   "Curtain01_Wall_Stone": {
     "localized_name": "Antique Curtain",
@@ -303,6 +319,10 @@
     "localized_name": "Production Assembly Line II",
     "description": "An Assembly Line for producing items and gear. Through clever management, production speeds have greatly increased. Requires Pals that can work with their hands."
   },
+  "Factory_Hard_04": {
+    "localized_name": "Advanced Civilization Workshop",
+    "description": "An Assembly Line for producing items and gear. Advanced machinery has been introduced, enabling high-speed production. Requires Pals that can work with their hands."
+  },
   "Factory_Money": {
     "localized_name": "Gold Coin Assembly Line",
     "description": "An Assemby Line that manufactures Money. The work puts a strain on the mind, causing a decrease in Pal's SAN value. Requires Pals that can work with their hands."
@@ -343,9 +363,25 @@
     "localized_name": "Great Eagle Statue",
     "description": "A stone monument in the shape of a Chikipi. Allows fast travel to the location where it is placed."
   },
+  "FireCult_Banner": {
+    "localized_name": "Brothers of the Eternal Pyre Vertical Banner",
+    "description": "Decorative Brothers of the Eternal Pyre banner."
+  },
+  "FireCult_Flag": {
+    "localized_name": "Brothers of the Eternal Pyre Standard",
+    "description": "Decorative Brothers of the Eternal Pyre flag."
+  },
   "FireStand": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Ceremonial Candlestick",
+    "description": "An imposing ceremonial candlestick lit by the Brothers of the Eternal Pyre and revered as sacred. It can be placed on the ground. Requires a Fire Pal to light a flame."
+  },
+  "FishingPond1": {
+    "localized_name": "Fishing Pond",
+    "description": "A ready-to-use fishing pond. Assign a Pal to fish here at their own leisure. Requires Pals that can work with their hands."
+  },
+  "FishingPond2": {
+    "localized_name": "Large Fishing Pond",
+    "description": "A ready-to-use large fishing pond. The expanded body of water makes it possible to catch even larger Pals. Requires Pals that can work with their hands."
   },
   "FlourMill": {
     "localized_name": "Mill",
@@ -372,8 +408,8 @@
     "description": "Door built on a foundation. Becomes an entrance. Made of industrial-strength glass, it's quite sturdy."
   },
   "Glass_Fence": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Glass Fence",
+    "description": "Fence built on foundations or roofs to prevent falls. Made of industrial-strength glass, it's quite sturdy."
   },
   "Glass_SlantedRoof": {
     "localized_name": "Glass Slanted Roof",
@@ -415,6 +451,10 @@
     "localized_name": "Soccer Goal",
     "description": "Decorative soccer goal. Kicking a SheepBall into it will get you no points."
   },
+  "GuardianDogStatue": {
+    "localized_name": "Yakumo Statue",
+    "description": "Decorative Yakumo statue."
+  },
   "GuildChest": {
     "localized_name": "Guild Chest",
     "description": "A chest that can instantly send and receive items through subspace. The items inside are shared across all bases where it is placed."
@@ -435,17 +475,25 @@
     "localized_name": "Large-Scale Stone Oven",
     "description": "Needed for cooking food. By becoming larger, multiple Pals can cooperate to cook together. Requires a Fire Pal to light a flame."
   },
+  "Hunter_Banner": {
+    "localized_name": "Rayne Syndicate Vertical Banner",
+    "description": "Decorative Rayne Syndicate banner."
+  },
+  "Hunter_Flag": {
+    "localized_name": "Rayne Syndicate Standard",
+    "description": "Decorative Rayne Syndicate flag."
+  },
   "Hunter_GangFlag": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Rayne Syndicate Flag",
+    "description": "Decorative Rayne Syndicate flag."
   },
   "IceCrusher": {
     "localized_name": "Refrigerated Crusher",
     "description": "Facility that crushes Ore and converts it into other materials. Requires a power supply and a Pal with Cooling suitability, but it's very efficient."
   },
   "Iron_Fence": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Metal Fence",
+    "description": "Fence built on foundations or roofs to prevent falls. Made from metal, it is extremely durable."
   },
   "Irori": {
     "localized_name": "Japanese Hearth",
@@ -496,8 +544,8 @@
     "description": "Japanese sliding door (fusuma) built on a foundation. Becomes an indoor entrance. You can create stylish Japanese-style architecture."
   },
   "JapaneseStyle_Fence": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Japanese-Style Fence",
+    "description": "Fence built on foundations or roofs to prevent falls. Can be used to create stylish Japanese-style architecture."
   },
   "JapaneseStyle_Pillar": {
     "localized_name": "Japanese-Style Pillar",
@@ -551,6 +599,10 @@
     "localized_name": "Lamp",
     "description": "A light source that provides illumination to a base even at night. Requires electricity, but lights up a larger area."
   },
+  "LanternTop": {
+    "localized_name": "Paper Lantern",
+    "description": "Decorative paper lantern."
+  },
   "LargeCeilingLamp": {
     "localized_name": "Large Ceiling Lamp",
     "description": "A light source that provides illumination to a base even at night. It can be placed on a ceiling. Requires a significant amount of electricity, but lights up an even larger area."
@@ -600,8 +652,8 @@
     "description": "Stylish street lamp that provides illumination. Requires electricity to light."
   },
   "LilyQueenStatue": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Lyleen Statue",
+    "description": "Decorative Lyleen statue."
   },
   "MachineGame01_Iron": {
     "localized_name": "Claw Crane",
@@ -703,6 +755,18 @@
     "localized_name": "Large-Scale Electric Egg Incubator",
     "description": "Device for incubating Pal eggs. While power supply is required, it allows multiple eggs to be incubated simultaneously at the optimal temperature."
   },
+  "MultiHatchingPalEgg": {
+    "localized_name": "Large Incubator",
+    "description": "Device for incubating Pal eggs. It automatically maintains a suitable temperature and can hatch multiple eggs at once."
+  },
+  "Ninja_Banner": {
+    "localized_name": "Moonflower Vertical Banner",
+    "description": "Decorative Moonflower banner."
+  },
+  "Ninja_Flag": {
+    "localized_name": "Moonflower Standard",
+    "description": "Decorative Moonflower flag."
+  },
   "OilPump": {
     "localized_name": "Crude Oil Extractor",
     "description": "Equipment required to extract Crude Oil from oil fields. Requires a power supply to operate."
@@ -724,8 +788,8 @@
     "description": "Facility for storing captured Pals. Pals inside gradually recover Health. Area around this facility becomes a base."
   },
   "PalCage": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Aerial Cage",
+    "description": "Decorative aerial cage."
   },
   "PalFoodBox": {
     "localized_name": "Feed Box",
@@ -775,9 +839,17 @@
     "localized_name": "Fine Bed",
     "description": "A fluffy bed for humans. Use it when injured or to sleep at night. You won't be able to sleep soundly without a roof over your head."
   },
+  "Police_Banner": {
+    "localized_name": "PIDF Vertical Banner",
+    "description": "Decorative PIDF banner."
+  },
+  "Police_Flag": {
+    "localized_name": "PIDF Standard",
+    "description": "Decorative PIDF flag."
+  },
   "QuartzPit": {
     "localized_name": "Pure Quartz Mine",
-    "description": "A facility for producing Pure Quartz. Mining Pure Quartz is hard work that requires physical endurance. Leave it to Pals skilled at mining."
+    "description": "A facility for producing Pure Quartz. Mining Pure Quartz is grueling physical work. Leave it to Pals skilled at mining."
   },
   "Refrigerator": {
     "localized_name": "Refrigerator",
@@ -807,13 +879,61 @@
     "localized_name": "Fur rug",
     "description": "en Text"
   },
+  "SF_Chair": {
+    "localized_name": "Laboratory Chair",
+    "description": "Decorative laboratory chair."
+  },
+  "SF_Desk": {
+    "localized_name": "Laboratory Desk",
+    "description": "Decorative laboratory desk."
+  },
+  "SF_DoorWall": {
+    "localized_name": "Clean Wall and Door",
+    "description": "Door built on a foundation. Becomes an entrance. Can be used to create clean, futuristic architecture."
+  },
   "SF_Fence": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Clean Fence",
+    "description": "Fence built on foundations or roofs to prevent falls. Can be used to create clean, futuristic architecture."
+  },
+  "SF_SlantedRoof": {
+    "localized_name": "Clean Slanted Roof",
+    "description": "Slanted roof built on top of walls to keep out the rain and wind. Can be used to create clean, futuristic architecture."
+  },
+  "SF_TriangleWall": {
+    "localized_name": "Clean Triangular Wall",
+    "description": "Triangular wall built on a foundation to keep out intruders. Can be used to create create clean, futuristic architecture."
+  },
+  "SF_WindowWall": {
+    "localized_name": "Clean Wall and Window",
+    "description": "Wall with windows, built on a foundation to keep out intruders. Can be used to create clean, futuristic architecture."
+  },
+  "SF_foundation": {
+    "localized_name": "Clean Foundation",
+    "description": "A foundation for building walls or facilities. Can be used to create clean, futuristic architecture."
+  },
+  "SF_roof": {
+    "localized_name": "Clean Roof",
+    "description": "A roof built on top of walls to keep out the rain and wind. Can be used to create clean, futuristic architecture."
+  },
+  "SF_stair": {
+    "localized_name": "Clean Stairs",
+    "description": "Stairs placed below a foundation or roof to climb up. Can be used to create clean, futuristic architecture."
+  },
+  "SF_wall": {
+    "localized_name": "Clean Wall",
+    "description": "Walls built on foundations to keep out intruders. Can be used to create clean, futuristic architecture."
   },
   "SanityDecrease1": {
     "localized_name": "Alpha Wave Generator",
-    "description": "A device that generates alpha waves to relax Pals. It slows the rate at which the SAN value of allies at the base decreases. Placing more than two will not have any additional effect."
+    "description": "A device that emits alpha waves to relax Pals. It slows the rate at which the SAN value of Pals at the base decreases. Placing more than one will not have any additional effect."
+  },
+  "Scientist_Banner": {
+    "localized_name": "PAL Genetic Research Unit Vertical Banner",
+    "description": "Decorative PAL Genetic Research Unit banner."
+  },
+  "Scientist_Flag": {
+    "localized_name": "PAL Genetic Research Unit Standard",
+    "description": "Decorative PAL Genetic Research Unit flag."
   },
   "Seika": {
     "localized_name": "Flower Arrangement",
@@ -891,6 +1011,10 @@
     "localized_name": "Deer Scare",
     "description": "Decorative Deer Scare. Perfect for Japanese-style buildings."
   },
+  "Shrine_Lantern": {
+    "localized_name": "Red Wooden Lantern",
+    "description": "Decorative festival lantern."
+  },
   "SignExit_Ceiling_Iron": {
     "localized_name": "Emergency Exit Ceiling Sign",
     "description": "Decorative emergency exit sign. Can be placed on ceilings."
@@ -944,8 +1068,8 @@
     "description": "Facility where Pals on base can rest. Now comfier and restores more SAN."
   },
   "Spa3": {
-    "localized_name": "Hot Spring",
-    "description": "Facility where Pals on base can rest. Restores SAN after a long day of hard work."
+    "localized_name": "Japanese-Style Hot Spring",
+    "description": "Facility where Pals on base can rest. Its calming, traditional Japanese design offers an extra boost to SAN recovery."
   },
   "SphereFactory_Black_01": {
     "localized_name": "Sphere Workbench",
@@ -976,8 +1100,8 @@
     "description": "Door built on a foundation. Becomes an entrance. Made from stone, it is reasonably sturdy."
   },
   "Stone_Fence": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Stone Fence",
+    "description": "Fence built on foundations or roofs to prevent falls. Made from stone, it is reasonably sturdy."
   },
   "Stone_Gate": {
     "localized_name": "Stone Gate",
@@ -1204,8 +1328,8 @@
     "description": "A light source that provides illumination to a base even at night. It can be placed on walls. Requires a Fire Pal to light a flame."
   },
   "WallTorch02": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Majestic Wall Torch",
+    "description": "An imposing torch lit by the Brothers of the Eternal Pyre and revered as sacred. It can be placed on walls. Requires a Fire Pal to light a flame."
   },
   "WeaponFactory_Dirty_01": {
     "localized_name": "Weapon Workbench",
@@ -1219,13 +1343,17 @@
     "localized_name": "Weapon Assembly Line II",
     "description": "An Assembly Line for producing weapons and ammunition. Through clever management, production speeds have greatly increased. Requires Pals that can work with their hands."
   },
+  "WeaponFactory_Dirty_04": {
+    "localized_name": "Advanced Civilization Weapon Assembly Line",
+    "description": "An Assembly Line for producing weapons and ammunition. Advanced machinery has been introduced, enabling high-speed weapon production. Requires Pals that can work with their hands."
+  },
   "Wire_Fence": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Wire Fence",
+    "description": "Decorative wired fence."
   },
   "Wood_Fence": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Wooden Fence",
+    "description": "Fence built on foundations or roofs to prevent falls. Made from wood, it breaks easily."
   },
   "Wood_Gate": {
     "localized_name": "Wooden Gate",
@@ -1244,8 +1372,8 @@
     "description": "Wall built on a foundation for keeping out intruders. Includes a window. Made from wood, it breaks easily."
   },
   "WoodenBarricade": {
-    "localized_name": "-",
-    "description": null
+    "localized_name": "Wooden Barricade",
+    "description": "Decorative wooden barricade."
   },
   "Wooden_DoorWall": {
     "localized_name": "Wooden Door",
