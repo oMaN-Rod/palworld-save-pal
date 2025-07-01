@@ -44,16 +44,6 @@ class ItemContainerSlot(BaseModel):
         PalObjects.set_nested(self._raw_data, "item", "static_id", value=value)
 
     @computed_field
-    def dynamic_static_id(self) -> Optional[str]:
-        return PalObjects.get_nested(self._raw_data, "item", "dynamic_id", "static_id")
-
-    @dynamic_static_id.setter
-    def dynamic_static_id(self, value: Optional[str]) -> None:
-        PalObjects.set_nested(
-            self._raw_data, "item", "dynamic_id", "static_id", value=value
-        )
-
-    @computed_field
     def local_id(self) -> Optional[UUID]:
         return PalObjects.as_uuid(
             PalObjects.get_nested(

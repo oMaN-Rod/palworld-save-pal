@@ -186,4 +186,3 @@ class ItemContainer(BaseModel):
             slot.dynamic_item.update_from(slot_dto.dynamic_item.model_dump())
             self._dynamic_item_save_data.append(slot.dynamic_item.save_data)
         slot.local_id = slot_dto.dynamic_item.local_id
-        slot.dynamic_static_id = slot_dto.static_id

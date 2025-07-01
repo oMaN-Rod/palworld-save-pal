@@ -20,11 +20,11 @@ def toUUID(guid: Any) -> Optional[UUID]:
 
 
 class PalObjects:
-    EMPTY_UUID = toUUID("00000000-0000-0000-0000-000000000000")
+    EMPTY_UUID = UUID("00000000-0000-0000-0000-000000000000")
     TIME = 638486453957560000
 
     @staticmethod
-    def StrProperty(value: str):
+    def StrProperty(value: str) -> Dict[str, Any]:
         return {
             "id": None,
             "type": "StrProperty",
@@ -32,7 +32,7 @@ class PalObjects:
         }
 
     @staticmethod
-    def NameProperty(value: str):
+    def NameProperty(value: str) -> Dict[str, Any]:
         return {
             "id": None,
             "value": value,
@@ -40,7 +40,7 @@ class PalObjects:
         }
 
     @staticmethod
-    def BoolProperty(value: bool):
+    def BoolProperty(value: bool) -> Dict[str, Any]:
         return {
             "id": None,
             "type": "BoolProperty",
@@ -48,7 +48,7 @@ class PalObjects:
         }
 
     @staticmethod
-    def IntProperty(value: int):
+    def IntProperty(value: int) -> Dict[str, Any]:
         return {
             "id": None,
             "type": "IntProperty",
@@ -56,7 +56,7 @@ class PalObjects:
         }
 
     @staticmethod
-    def Int64Property(value: int):
+    def Int64Property(value: int) -> Dict[str, Any]:
         return {
             "id": None,
             "type": "Int64Property",
@@ -64,7 +64,7 @@ class PalObjects:
         }
 
     @staticmethod
-    def FloatProperty(value: float):
+    def FloatProperty(value: float) -> Dict[str, Any]:
         return {
             "id": None,
             "type": "FloatProperty",
@@ -72,7 +72,7 @@ class PalObjects:
         }
 
     @staticmethod
-    def Guid(value: str | UUID):
+    def Guid(value: str | UUID) -> Dict[str, Any]:
         return {
             "struct_type": "Guid",
             "struct_id": PalObjects.EMPTY_UUID,
@@ -99,8 +99,16 @@ class PalObjects:
         return PalObjects.get_nested(d, "value", default=default)
 
     @staticmethod
-    def get_nested(d: Dict[str, Any], *keys: str, default: Any = None) -> Any:
+    def get_nested(
+        d: Dict[str, Any], *keys: str, default: Any = None, log: bool = True
+    ) -> Any:
         try:
+            if len(keys) == 1:
+                return d[keys[0]]
+            else:
+                if log:
+                    logger.debug("Getting nested key: %s", keys)
+                return PalObjects.get_nested(d[keys[0]], *keys[1:], default=default)
             return (
                 d[keys[0]]
                 if len(keys) == 1
@@ -111,7 +119,7 @@ class PalObjects:
             return default
 
     @staticmethod
-    def set_nested(d: dict, *keys: str, value: Any) -> None:
+    def set_nested(d: Dict[str, Any], *keys: str, value: Any):
         for key in keys[:-1]:
             if key not in d:
                 raise KeyError(f"Key not found: {key}, {keys}, {d.keys()}")
@@ -119,7 +127,7 @@ class PalObjects:
         d[keys[-1]] = value
 
     @staticmethod
-    def EnumProperty(type: str, value: str):
+    def EnumProperty(type: str, value: str) -> Dict[str, Any]:
         return {
             "id": None,
             "type": "EnumProperty",
@@ -127,7 +135,7 @@ class PalObjects:
         }
 
     @staticmethod
-    def ByteProperty(value: int):
+    def ByteProperty(value: int) -> Dict[str, Any]:
         return {
             "id": None,
             "value": {
@@ -156,8 +164,8 @@ class PalObjects:
     @staticmethod
     def ArrayPropertyValues(
         array_type: ArrayType, values: List[Any], custom_type: Optional[str] = None
-    ):
-        struct = {
+    ) -> Dict[str, Any]:
+        struct: Dict[str, Any] = {
             "array_type": array_type.value,
             "id": None,
             "value": {"values": values},
@@ -173,8 +181,8 @@ class PalObjects:
         array_type: ArrayType,
         value: Optional[Dict[str, Any]] = None,
         custom_type: Optional[str] = None,
-    ):
-        struct = {
+    ) -> Dict[str, Any]:
+        struct: Dict[str, Any] = {
             "array_type": array_type.value,
             "id": None,
             "value": value,
@@ -187,7 +195,7 @@ class PalObjects:
         return struct
 
     @staticmethod
-    def get_array_property(d: Dict[str, Any]) -> Optional[List[Any]]:
+    def get_array_property(d: Dict[str, Any]) -> List[Any]:
         return PalObjects.get_nested(d, "value", "values", default=[])
 
     @staticmethod
@@ -203,7 +211,7 @@ class PalObjects:
         PalObjects.set_nested(d, "value", "values", value=values)
 
     @staticmethod
-    def FixedPoint64(value: int):
+    def FixedPoint64(value: int) -> Dict[str, Any]:
         return {
             "struct_type": "FixedPoint64",
             "struct_id": PalObjects.EMPTY_UUID,
@@ -221,7 +229,7 @@ class PalObjects:
         PalObjects.set_value(d["value"]["Value"], value)
 
     @staticmethod
-    def PalContainerId(id: UUID | str):
+    def PalContainerId(id: UUID | str) -> Dict[str, Any]:
         return {
             "struct_type": "PalContainerId",
             "struct_id": PalObjects.EMPTY_UUID,
@@ -236,11 +244,13 @@ class PalObjects:
 
     @staticmethod
     def set_pal_container_id(d: Dict[str, Any], container_id: str | UUID):
-        container_id = toUUID(container_id)
-        PalObjects.set_value(d["value"]["ID"], container_id)
+        converted_id = toUUID(container_id)
+        if converted_id is None:
+            raise ValueError(f"Invalid container_id: {container_id}")
+        PalObjects.set_value(d["value"]["ID"], converted_id)
 
     @staticmethod
-    def PalCharacterSlotId(container_id: UUID | str, slot_idx: int):
+    def PalCharacterSlotId(container_id: UUID | str, slot_idx: int) -> Dict[str, Any]:
         return {
             "struct_type": "PalCharacterSlotId",
             "struct_id": PalObjects.EMPTY_UUID,
@@ -269,7 +279,9 @@ class PalObjects:
         PalObjects.set_value(d["value"]["SlotIndex"], slot_idx)
 
     @staticmethod
-    def individual_character_handle_ids(instance_id: UUID, guid: UUID | None = None):
+    def individual_character_handle_ids(
+        instance_id: UUID, guid: UUID | None = None
+    ) -> Dict[str, Any]:
         if not guid:
             guid = PalObjects.EMPTY_UUID
         return {
@@ -278,7 +290,7 @@ class PalObjects:
         }
 
     @staticmethod
-    def FloatContainer(d: Dict[str, Any] = None):
+    def FloatContainer(d: Dict[str, Any]) -> Dict[str, Any]:
         return {
             "struct_type": "FloatContainer",
             "struct_id": PalObjects.EMPTY_UUID,
@@ -288,7 +300,7 @@ class PalObjects:
         }
 
     @staticmethod
-    def ContainerSlotData(slot_idx: int, instance_id: UUID):
+    def ContainerSlotData(slot_idx: int, instance_id: UUID) -> Dict[str, Any]:
         return {
             "SlotIndex": PalObjects.IntProperty(slot_idx),
             "RawData": PalObjects.ArrayProperty(
@@ -303,7 +315,7 @@ class PalObjects:
         }
 
     @staticmethod
-    def DateTime(time):
+    def DateTime(time: int) -> Dict[str, Any]:
         return {
             "struct_type": "DateTime",
             "struct_id": PalObjects.EMPTY_UUID,
@@ -313,7 +325,7 @@ class PalObjects:
         }
 
     @staticmethod
-    def Vector(x, y, z):
+    def Vector(x: float, y: float, z: float) -> Dict[str, Any]:
         return {
             "struct_type": "Vector",
             "struct_id": PalObjects.EMPTY_UUID,
@@ -327,7 +339,7 @@ class PalObjects:
         }
 
     @staticmethod
-    def PalLoggedinPlayerSaveDataRecordData(d: Dict[str, Any] = None):
+    def PalLoggedinPlayerSaveDataRecordData(d: Dict[str, Any]) -> Dict[str, Any]:
         return {
             "struct_type": "PalLoggedinPlayerSaveDataRecordData",
             "struct_id": PalObjects.EMPTY_UUID,
@@ -338,8 +350,11 @@ class PalObjects:
 
     @staticmethod
     def MapProperty(
-        key_type: str, value_type: str, key_struct_type=None, value_struct_type=None
-    ):
+        key_type: str,
+        value_type: str,
+        key_struct_type: Optional[str] = None,
+        value_struct_type: Optional[str] = None,
+    ) -> Dict[str, Any]:
         return {
             "key_type": key_type,
             "value_type": value_type,
@@ -351,7 +366,7 @@ class PalObjects:
         }
 
     @staticmethod
-    def get_map_property(d: dict) -> Optional[list[dict]]:
+    def get_map_property(d: Dict[str, Any]) -> Optional[List[Dict[str, Any]]]:
         return PalObjects.get_value(d)
 
     @staticmethod
@@ -405,9 +420,7 @@ class PalObjects:
     }
 
     @staticmethod
-    def GetStatusPointList(
-        prop_name: str, status_points: Dict[str, str]
-    ) -> Dict[str, Any]:
+    def GetStatusPointList(prop_name: str, status_points: List[str]) -> Dict[str, Any]:
         return PalObjects.ArrayProperty(
             ArrayType.STRUCT_PROPERTY,
             {
@@ -430,21 +443,24 @@ class PalObjects:
         slot_idx: int,
         group_id: UUID | str,
         nickname: Optional[str] = None,
-        active_skills: List[str] = None,
-        passive_skills: List[str] = None,
-        work_suitability_data: Dict[str, int] = None,
-    ):
+        active_skills: Optional[List[str]] = None,
+        passive_skills: Optional[List[str]] = None,
+        work_suitability_data: Optional[Dict[str, int]] = None,
+    ) -> Dict[str, Any]:
         nickname = nickname or character_id
         active_skills = active_skills or []
         passive_skills = passive_skills or []
 
-        work_suitability = []
+        work_suitability: List[Dict[str, Any]] = []
         if work_suitability_data:
             for work, value in work_suitability_data.items():
                 suitability = WorkSuitability.from_value(work)
-                work_suitability.append(
-                    PalObjects.WorkSuitabilityStruct(suitability.prefixed(), value)
-                )
+                if suitability is not None:
+                    work_suitability.append(
+                        PalObjects.WorkSuitabilityStruct(suitability.prefixed(), value)
+                    )
+                else:
+                    raise ValueError(f"Invalid work suitability: {work}")
         else:
             work_suitability = [
                 PalObjects.WorkSuitabilityStruct(work.prefixed(), 0)
@@ -569,7 +585,7 @@ class PalObjects:
         talent_hp: int = 0,
         talent_shot: int = 0,
         talent_defense: int = 0,
-    ):
+    ) -> Dict[str, Any]:
         return {
             "SaveParameter": {
                 "struct_type": "PalIndividualCharacterSaveParameter",
@@ -614,8 +630,8 @@ class PalObjects:
         }
 
     @staticmethod
-    def DynamicItem(container_slot: ItemContainerSlotDTO):
-        return {
+    def DynamicItem(container_slot: ItemContainerSlotDTO) -> Dict[str, Any]:
+        dynamic_item = {
             "RawData": PalObjects.ArrayProperty(
                 ArrayType.BYTE_PROPERTY,
                 {
@@ -633,6 +649,16 @@ class PalObjects:
                 ArrayType.BYTE_PROPERTY, [0, 0, 0, 0]
             ),
         }
+        match container_slot.dynamic_item.type:
+            case "weapon":
+                dynamic_item["RawData"]["value"]["leading_bytes"] = [0] * 4
+                dynamic_item["RawData"]["value"]["trailing_bytes"] = [0] * 8
+            case "armor":
+                dynamic_item["RawData"]["value"]["trailing_bytes"] = [0] * 4
+            case "egg":
+                dynamic_item["RawData"]["value"]["leading_bytes"] = [0] * 4
+                dynamic_item["RawData"]["value"]["trailing_bytes"] = [0] * 28
+        return dynamic_item
 
     @staticmethod
     def ItemContainerSlot(container_slot: ItemContainerSlotDTO) -> Dict[str, Any]:
@@ -694,7 +720,9 @@ class PalObjects:
         }
 
     @staticmethod
-    def GotWorkSuitabilityRankList(work_suitabilities: Dict[WorkSuitability, int]):
+    def GotWorkSuitabilityRankList(
+        work_suitabilities: Dict[WorkSuitability, int],
+    ) -> Dict[str, Any]:
         return PalObjects.ArrayProperty(
             ArrayType.STRUCT_PROPERTY,
             {

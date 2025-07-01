@@ -57,9 +57,7 @@ class Guild(BaseModel):
 
     @computed_field
     def admin_player_uid(self) -> UUID:
-        return PalObjects.as_uuid(
-            PalObjects.get_nested(self._raw_data, "admin_player_uid")
-        )
+        return PalObjects.as_uuid(PalObjects.get_nested(self._raw_data, "group_name"))
 
     @computed_field
     def name(self) -> str:
