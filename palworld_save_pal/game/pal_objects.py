@@ -103,12 +103,6 @@ class PalObjects:
         d: Dict[str, Any], *keys: str, default: Any = None, log: bool = True
     ) -> Any:
         try:
-            if len(keys) == 1:
-                return d[keys[0]]
-            else:
-                if log:
-                    logger.debug("Getting nested key: %s", keys)
-                return PalObjects.get_nested(d[keys[0]], *keys[1:], default=default)
             return (
                 d[keys[0]]
                 if len(keys) == 1
