@@ -39,7 +39,7 @@ dependencies = [
     "uvicorn==0.32.1",
     "websockets==15.0.1",
     "zstandard==0.23.0",
-    "palworld-save-tools @ git+https://github.com/oMaN-Rod/palworld-save-tools.git@v0.5",
+    "palworld-save-tools @ git+https://github.com/oMaN-Rod/palworld-save-tools.git@0.6",
     "PyGObject==3.52.3; sys_platform == 'linux'",
 ]
 
