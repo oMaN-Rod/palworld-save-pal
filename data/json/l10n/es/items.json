@@ -537,7 +537,7 @@
   },
   "Blueprint_CandleStand": {
     "localized_name": "Plano de candelabro majestuoso",
-    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir un «<MapObjectName id=|CandleStand|/>»."
+    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir un «Candelabro majestuoso»."
   },
   "Blueprint_ChargeLaserRifle_2": {
     "localized_name": "Plano de rifle de carga 1",
@@ -621,11 +621,11 @@
   },
   "Blueprint_ConservationGroupBannerA": {
     "localized_name": "Plano de bandera de la Liga de defensa de los Pals",
-    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir un «<MapObjectName id=|ConservationGroupBannerA|/>»."
+    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir un «Bandera de la Liga de defensa de los Pals»."
   },
   "Blueprint_ConservationGroupBannerB": {
     "localized_name": "Plano de estandarte de la Liga de defensa de los Pals",
-    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir un «<MapObjectName id=|ConservationGroupBannerB|/>»."
+    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir un «Estandarte de la Liga de defensa de los Pals»."
   },
   "Blueprint_CopperArmorCold_2": {
     "localized_name": "Plano de armadura de metal resistente al frío 1",
@@ -741,7 +741,7 @@
   },
   "Blueprint_FireStand": {
     "localized_name": "Plano de candelabro ceremonial",
-    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir una «<MapObjectName id=|FireStand|/>»."
+    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir una «Candelabro ceremonial»."
   },
   "Blueprint_FishingRod_01_2": {
     "localized_name": "Plano de Caña de pescar inicial (Gumoss)",
@@ -869,7 +869,7 @@
   },
   "Blueprint_GuardianDogStatue": {
     "localized_name": "Plano de estatua de Yakumo",
-    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir una «<MapObjectName id=|GuardianDogStatue|/>»."
+    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir una «Estatua de Yakumo»."
   },
   "Blueprint_GuidedMissileLauncher_2": {
     "localized_name": "Plano de lanzamisiles 1",
@@ -1345,7 +1345,7 @@
   },
   "Blueprint_Hunter_GangFlag": {
     "localized_name": "Plano de bandera de los Furtivos",
-    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir una «<MapObjectName id=|Hunter GangFlag|/>»."
+    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir una «Hunter GangFlag»."
   },
   "Blueprint_IronArmorCold_2": {
     "localized_name": "Plano de armadura de metal refinado resistente al frío 1",
@@ -1413,7 +1413,7 @@
   },
   "Blueprint_LanternTop": {
     "localized_name": "Plano de linterna",
-    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir una «<MapObjectName id=|LanternTop|/>»."
+    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir una «Linterna»."
   },
   "Blueprint_LaserGatlingGun_2": {
     "localized_name": "Plano de ametralladora Gatling láser 1",
@@ -1469,7 +1469,7 @@
   },
   "Blueprint_LilyQueenStatue": {
     "localized_name": "Plano de estatua de Lyleen",
-    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir una «<MapObjectName id=|LilyQueenStatue|/>»."
+    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir una «Estatua de Lyleen»."
   },
   "Blueprint_MakeshiftAssaultRifle_2": {
     "localized_name": "Plano de rifle de asalto ruinoso 1",
@@ -1801,11 +1801,11 @@
   },
   "Blueprint_SF_Chair": {
     "localized_name": "Plano de silla estilo laboratorio",
-    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir una «<MapObjectName id=|SF Chair|/>»."
+    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir una «SF Chair»."
   },
   "Blueprint_SF_Desk": {
     "localized_name": "Plano de escritorio estilo laboratorio",
-    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir una «<MapObjectName id=|SF Desk|/>»."
+    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir una «SF Desk»."
   },
   "Blueprint_SemiAutoRifle_2": {
     "localized_name": "Plano de rifle semiautomático 1",
@@ -1841,7 +1841,7 @@
   },
   "Blueprint_Shrine_Lantern": {
     "localized_name": "Plano de linterna ceremonial",
-    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir una «<MapObjectName id=|Shrine Lantern|/>»."
+    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir una «Shrine Lantern»."
   },
   "Blueprint_SingleShotRifle_2": {
     "localized_name": "Plano de Rifle de un solo tiro 1",
@@ -1941,7 +1941,7 @@
   },
   "Blueprint_WallTorch02": {
     "localized_name": "Plano de antorcha majestuosa de pared",
-    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir una «<MapObjectName id=|WallTorch02|/>»."
+    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir una «Antorcha majestuosa de pared»."
   },
   "Blueprint_WeakerBow_2": {
     "localized_name": "Plano de arco anticuado 1",
@@ -1961,11 +1961,11 @@
   },
   "Blueprint_Wire_Fence": {
     "localized_name": "Plano de valla de alambre",
-    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir una «<MapObjectName id=|Wire Fence|/>»."
+    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir una «Wire Fence»."
   },
   "Blueprint_WoodenBarricade": {
     "localized_name": "Plano de barricada de madera",
-    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir una «<MapObjectName id=|WoodenBarricade|/>»."
+    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir una «Barricada de madera»."
   },
   "Blueprint_YakushimaArmor001": {
     "localized_name": "Plano de Cota de placas sagrada",

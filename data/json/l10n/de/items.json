@@ -537,7 +537,7 @@
   },
   "Blueprint_CandleStand": {
     "localized_name": "Feierlicher Leuchter: Bauplan",
-    "description": "Dieser Bauplan ermöglicht den Bau von „<MapObjectName id=|Hunter GangFlag|/>“, solange er mitgeführt oder im Lager aufbewahrt wird."
+    "description": "Dieser Bauplan ermöglicht den Bau von „Hunter GangFlag“, solange er mitgeführt oder im Lager aufbewahrt wird."
   },
   "Blueprint_ChargeLaserRifle_2": {
     "localized_name": "Teslagewehr: Bauplan 1",
@@ -621,11 +621,11 @@
   },
   "Blueprint_ConservationGroupBannerA": {
     "localized_name": "Liga der Palfreunde-Flagge: Bauplan",
-    "description": "Dieser Bauplan ermöglicht den Bau von „<MapObjectName id=|Hunter GangFlag|/>“, solange er mitgeführt oder im Lager aufbewahrt wird."
+    "description": "Dieser Bauplan ermöglicht den Bau von „Hunter GangFlag“, solange er mitgeführt oder im Lager aufbewahrt wird."
   },
   "Blueprint_ConservationGroupBannerB": {
     "localized_name": "Liga der Palfreunde-Querbanner: Bauplan",
-    "description": "Dieser Bauplan ermöglicht den Bau von „<MapObjectName id=|Hunter GangFlag|/>“, solange er mitgeführt oder im Lager aufbewahrt wird."
+    "description": "Dieser Bauplan ermöglicht den Bau von „Hunter GangFlag“, solange er mitgeführt oder im Lager aufbewahrt wird."
   },
   "Blueprint_CopperArmorCold_2": {
     "localized_name": "Kälteresistente Metallrüstung: Bauplan 1",
@@ -741,7 +741,7 @@
   },
   "Blueprint_FireStand": {
     "localized_name": "Zeremonieller Leuchter: Bauplan",
-    "description": "Dieser Bauplan ermöglicht den Bau von „<MapObjectName id=|Hunter GangFlag|/>“, solange er mitgeführt oder im Lager aufbewahrt wird."
+    "description": "Dieser Bauplan ermöglicht den Bau von „Hunter GangFlag“, solange er mitgeführt oder im Lager aufbewahrt wird."
   },
   "Blueprint_FishingRod_01_2": {
     "localized_name": "Anfänger-Angelrute (Gumoss): Bauplan",
@@ -869,7 +869,7 @@
   },
   "Blueprint_GuardianDogStatue": {
     "localized_name": "Yakumo-Statue: Bauplan",
-    "description": "Dieser Bauplan ermöglicht den Bau von „<MapObjectName id=|Hunter GangFlag|/>“, solange er mitgeführt oder im Lager aufbewahrt wird."
+    "description": "Dieser Bauplan ermöglicht den Bau von „Hunter GangFlag“, solange er mitgeführt oder im Lager aufbewahrt wird."
   },
   "Blueprint_GuidedMissileLauncher_2": {
     "localized_name": "Raketenwerfer: Bauplan 1",
@@ -1345,7 +1345,7 @@
   },
   "Blueprint_Hunter_GangFlag": {
     "localized_name": "Wilderer-Flagge: Bauplan",
-    "description": "Dieser Bauplan ermöglicht den Bau von „<MapObjectName id=|Hunter GangFlag|/>“, solange er mitgeführt oder im Lager aufbewahrt wird."
+    "description": "Dieser Bauplan ermöglicht den Bau von „Hunter GangFlag“, solange er mitgeführt oder im Lager aufbewahrt wird."
   },
   "Blueprint_IronArmorCold_2": {
     "localized_name": "Kälteresistente hochwertige Metallrüstung: Bauplan 1",
@@ -1413,7 +1413,7 @@
   },
   "Blueprint_LanternTop": {
     "localized_name": "Lampion: Bauplan",
-    "description": "Dieser Bauplan ermöglicht den Bau von „<MapObjectName id=|Hunter GangFlag|/>“, solange er mitgeführt oder im Lager aufbewahrt wird."
+    "description": "Dieser Bauplan ermöglicht den Bau von „Hunter GangFlag“, solange er mitgeführt oder im Lager aufbewahrt wird."
   },
   "Blueprint_LaserGatlingGun_2": {
     "localized_name": "Laser-Gatlinggewehr: Bauplan 1",
@@ -1469,7 +1469,7 @@
   },
   "Blueprint_LilyQueenStatue": {
     "localized_name": "Lyleen-Statue: Bauplan",
-    "description": "Dieser Bauplan ermöglicht den Bau von „<MapObjectName id=|Hunter GangFlag|/>“, solange er mitgeführt oder im Lager aufbewahrt wird."
+    "description": "Dieser Bauplan ermöglicht den Bau von „Hunter GangFlag“, solange er mitgeführt oder im Lager aufbewahrt wird."
   },
   "Blueprint_MakeshiftAssaultRifle_2": {
     "localized_name": "Schrottreifes Sturmgewehr: Bauplan 1",
@@ -1801,11 +1801,11 @@
   },
   "Blueprint_SF_Chair": {
     "localized_name": "Stuhl im Laborstil: Bauplan",
-    "description": "Dieser Bauplan ermöglicht den Bau von „<MapObjectName id=|SF Chair|/>“, solange er mitgeführt oder im Lager aufbewahrt wird."
+    "description": "Dieser Bauplan ermöglicht den Bau von „SF Chair“, solange er mitgeführt oder im Lager aufbewahrt wird."
   },
   "Blueprint_SF_Desk": {
     "localized_name": "Tisch im Laborstil: Bauplan",
-    "description": "Dieser Bauplan ermöglicht den Bau von „<MapObjectName id=|SF Desk|/>“, solange er mitgeführt oder im Lager aufbewahrt wird."
+    "description": "Dieser Bauplan ermöglicht den Bau von „SF Desk“, solange er mitgeführt oder im Lager aufbewahrt wird."
   },
   "Blueprint_SemiAutoRifle_2": {
     "localized_name": "Halbautomatisches Gewehr: Bauplan 1",
@@ -1841,7 +1841,7 @@
   },
   "Blueprint_Shrine_Lantern": {
     "localized_name": "Bauplan: Tempellaterne",
-    "description": "Dieser Bauplan ermöglicht den Bau von „<MapObjectName id=|Hunter GangFlag|/>“, solange er mitgeführt oder im Lager aufbewahrt wird."
+    "description": "Dieser Bauplan ermöglicht den Bau von „Hunter GangFlag“, solange er mitgeführt oder im Lager aufbewahrt wird."
   },
   "Blueprint_SingleShotRifle_2": {
     "localized_name": "Einzelschuss-Gewehr: Bauplan 1",
@@ -1941,7 +1941,7 @@
   },
   "Blueprint_WallTorch02": {
     "localized_name": "Feierliche Wandfackel: Bauplan",
-    "description": "Dieser Bauplan ermöglicht den Bau von „<MapObjectName id=|Hunter GangFlag|/>“, solange er mitgeführt oder im Lager aufbewahrt wird."
+    "description": "Dieser Bauplan ermöglicht den Bau von „Hunter GangFlag“, solange er mitgeführt oder im Lager aufbewahrt wird."
   },
   "Blueprint_WeakerBow_2": {
     "localized_name": "Alter Bogen: Bauplan 1",
@@ -1961,11 +1961,11 @@
   },
   "Blueprint_Wire_Fence": {
     "localized_name": "Maschendrahtzaun: Bauplan",
-    "description": "Dieser Bauplan ermöglicht den Bau von „<MapObjectName id=|Hunter GangFlag|/>“, solange er mitgeführt oder im Lager aufbewahrt wird."
+    "description": "Dieser Bauplan ermöglicht den Bau von „Hunter GangFlag“, solange er mitgeführt oder im Lager aufbewahrt wird."
   },
   "Blueprint_WoodenBarricade": {
     "localized_name": "Holzbarrikade: Bauplan",
-    "description": "Dieser Bauplan ermöglicht den Bau von „<MapObjectName id=|Hunter GangFlag|/>“, solange er mitgeführt oder im Lager aufbewahrt wird."
+    "description": "Dieser Bauplan ermöglicht den Bau von „Hunter GangFlag“, solange er mitgeführt oder im Lager aufbewahrt wird."
   },
   "Blueprint_YakushimaArmor001": {
     "localized_name": "Heiliger Plattenpanzer: Bauplan",

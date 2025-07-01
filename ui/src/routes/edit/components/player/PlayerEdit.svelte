@@ -33,7 +33,7 @@
 	const toast = getToastState();
 	const modal = getModalState();
 
-	const max_level = $derived(appState.settings.cheat_mode ? 99 : 60);
+	const max_level = $derived(appState.settings.cheat_mode ? 99 : 65);
 
 	const defaultItem = {
 		id: '',

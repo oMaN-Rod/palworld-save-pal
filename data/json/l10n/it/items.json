@@ -537,7 +537,7 @@
   },
   "Blueprint_CandleStand": {
     "localized_name": "Progetto per candelabro solenne",
-    "description": "Se è nell'inventario o alla base, diventa possibile costruire |<MapObjectName id=|CandleStand|/>|."
+    "description": "Se è nell'inventario o alla base, diventa possibile costruire |Candelabro solenne|."
   },
   "Blueprint_ChargeLaserRifle_2": {
     "localized_name": "Progetto per fucile a carica 1",
@@ -621,11 +621,11 @@
   },
   "Blueprint_ConservationGroupBannerA": {
     "localized_name": "Progetto per bandiera dell'Ente per la tutela dei Pal",
-    "description": "Se è nell'inventario o alla base, diventa possibile costruire |<MapObjectName id=|ConservationGroupBannerA|/>|."
+    "description": "Se è nell'inventario o alla base, diventa possibile costruire |Bandiera dell'Ente per la tutela dei Pal|."
   },
   "Blueprint_ConservationGroupBannerB": {
     "localized_name": "Progetto per striscione orizzontale dell'Ente per la tutela dei Pal",
-    "description": "Se è nell'inventario o alla base, diventa possibile costruire |<MapObjectName id=|ConservationGroupBannerB|/>|."
+    "description": "Se è nell'inventario o alla base, diventa possibile costruire |Stendardo dell'Ente per la tutela dei Pal|."
   },
   "Blueprint_CopperArmorCold_2": {
     "localized_name": "Progetto per armatura di metallo per il gelo 1",
@@ -741,7 +741,7 @@
   },
   "Blueprint_FireStand": {
     "localized_name": "Progetto per candelabro da cerimonia",
-    "description": "Se è nell'inventario o alla base, diventa possibile costruire |<MapObjectName id=|FireStand|/>|."
+    "description": "Se è nell'inventario o alla base, diventa possibile costruire |Candelabro da cerimonia|."
   },
   "Blueprint_FishingRod_01_2": {
     "localized_name": "Progetto per canna da pesca da principiante (Gumoss)",
@@ -869,7 +869,7 @@
   },
   "Blueprint_GuardianDogStatue": {
     "localized_name": "Progetto per statua di Yakumo",
-    "description": "Se è nell'inventario o alla base, diventa possibile costruire |<MapObjectName id=|GuardianDogStatue|/>|."
+    "description": "Se è nell'inventario o alla base, diventa possibile costruire |Statua di Yakumo|."
   },
   "Blueprint_GuidedMissileLauncher_2": {
     "localized_name": "Progetto per lanciarazzi 1",
@@ -1345,7 +1345,7 @@
   },
   "Blueprint_Hunter_GangFlag": {
     "localized_name": "Progetto per bandiera dei bracconieri",
-    "description": "Se è nell'inventario o alla base, diventa possibile costruire |<MapObjectName id=|Hunter GangFlag|/>|."
+    "description": "Se è nell'inventario o alla base, diventa possibile costruire |Hunter GangFlag|."
   },
   "Blueprint_IronArmorCold_2": {
     "localized_name": "Progetto per armatura di metallo raffinato per il gelo 1",
@@ -1413,7 +1413,7 @@
   },
   "Blueprint_LanternTop": {
     "localized_name": "Progetto per lanterna orientale",
-    "description": "Se è nell'inventario o alla base, diventa possibile costruire |<MapObjectName id=|LanternTop|/>|."
+    "description": "Se è nell'inventario o alla base, diventa possibile costruire |Lanterna orientale|."
   },
   "Blueprint_LaserGatlingGun_2": {
     "localized_name": "Progetto per gatling laser 1",
@@ -1469,7 +1469,7 @@
   },
   "Blueprint_LilyQueenStatue": {
     "localized_name": "Progetto per statua di Lyleen",
-    "description": "Se è nell'inventario o alla base, diventa possibile costruire |<MapObjectName id=|LilyQueenStatue|/>|."
+    "description": "Se è nell'inventario o alla base, diventa possibile costruire |Statua di Lyleen|."
   },
   "Blueprint_MakeshiftAssaultRifle_2": {
     "localized_name": "Progetto per fucile d'assalto vetusto 1",
@@ -1801,11 +1801,11 @@
   },
   "Blueprint_SF_Chair": {
     "localized_name": "Progetto per sedia da laboratorio",
-    "description": "Se è nell'inventario o alla base, diventa possibile costruire |<MapObjectName id=|SF Chair|/>|."
+    "description": "Se è nell'inventario o alla base, diventa possibile costruire |SF Chair|."
   },
   "Blueprint_SF_Desk": {
     "localized_name": "Progetto per scrivania da laboratorio",
-    "description": "Se è nell'inventario o alla base, diventa possibile costruire |<MapObjectName id=|SF Desk|/>|."
+    "description": "Se è nell'inventario o alla base, diventa possibile costruire |SF Desk|."
   },
   "Blueprint_SemiAutoRifle_2": {
     "localized_name": "Progetto per fucile semiautomatico 1",
@@ -1841,7 +1841,7 @@
   },
   "Blueprint_Shrine_Lantern": {
     "localized_name": "Progetto per lanterna da giardino",
-    "description": "Se è nell'inventario o alla base, diventa possibile costruire |<MapObjectName id=|Shrine Lantern|/>|."
+    "description": "Se è nell'inventario o alla base, diventa possibile costruire |Shrine Lantern|."
   },
   "Blueprint_SingleShotRifle_2": {
     "localized_name": "Progetto per fucile a colpo singolo 1",
@@ -1941,7 +1941,7 @@
   },
   "Blueprint_WallTorch02": {
     "localized_name": "Progetto per torcia a muro solenne",
-    "description": "Se è nell'inventario o alla base, diventa possibile costruire |<MapObjectName id=|WallTorch02|/>|."
+    "description": "Se è nell'inventario o alla base, diventa possibile costruire |Torcia a muro solenne|."
   },
   "Blueprint_WeakerBow_2": {
     "localized_name": "Progetto per arco antiquato 1",
@@ -1961,11 +1961,11 @@
   },
   "Blueprint_Wire_Fence": {
     "localized_name": "Progetto per recinto con filo spinato",
-    "description": "Se è nell'inventario o alla base, diventa possibile costruire |<MapObjectName id=|Wire Fence|/>|."
+    "description": "Se è nell'inventario o alla base, diventa possibile costruire |Wire Fence|."
   },
   "Blueprint_WoodenBarricade": {
     "localized_name": "Progetto per transenna in legno",
-    "description": "Se è nell'inventario o alla base, diventa possibile costruire |<MapObjectName id=|WoodenBarricade|/>|."
+    "description": "Se è nell'inventario o alla base, diventa possibile costruire |Transenna in legno|."
   },
   "Blueprint_YakushimaArmor001": {
     "localized_name": "Progetto per armatura sacra",
