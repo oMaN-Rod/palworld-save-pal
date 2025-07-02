@@ -530,6 +530,7 @@ class PalObjects:
                         },
                         "unknown_bytes": [0, 0, 0, 0],
                         "group_id": group_id,
+                        "trailing_bytes": [0, 0, 0, 0],
                     },
                     custom_type=".worldSaveData.CharacterSaveParameterMap.Value.RawData",
                 )
