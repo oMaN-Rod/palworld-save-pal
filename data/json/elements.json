@@ -2,73 +2,73 @@
   "Dark": {
     "color": "#ad0035",
     "icon": "dark",
-    "badge_icon": "dark/Dark_icon",
-    "egg_icon": "dark/Dark_Egg_icon",
-    "fruit_icon": "dark/Dark_Skill_Fruit_icon",
-    "white_icon": "dark/Dark_white"
+    "badge_icon": "Dark_icon",
+    "egg_icon": "Dark_Egg_icon",
+    "fruit_icon": "Dark_Skill_Fruit_icon",
+    "white_icon": "Dark_white"
   },
   "Dragon": {
     "color": "#c22df9",
     "icon": "dragon",
-    "badge_icon": "dragon/Dragon_icon",
-    "egg_icon": "dragon/Dragon_Egg_icon",
-    "fruit_icon": "dragon/Dragon_Skill_Fruit_icon",
-    "white_icon": "dragon/Dragon_white"
+    "badge_icon": "Dragon_icon",
+    "egg_icon": "Dragon_Egg_icon",
+    "fruit_icon": "Dragon_Skill_Fruit_icon",
+    "white_icon": "Dragon_white"
   },
   "Earth": {
     "color": "#ba5608",
     "icon": "ground",
-    "badge_icon": "ground/Ground_icon",
-    "egg_icon": "ground/Rocky_Egg_icon",
-    "fruit_icon": "ground/Ground_Skill_Fruit_icon",
-    "white_icon": "ground/Ground_white"
+    "badge_icon": "Ground_icon",
+    "egg_icon": "Rocky_Egg_icon",
+    "fruit_icon": "Ground_Skill_Fruit_icon",
+    "white_icon": "Ground_white"
   },
   "Electricity": {
     "color": "#feed01",
     "icon": "electric",
-    "badge_icon": "electric/Electric_icon",
-    "egg_icon": "electric/Electric_Egg_icon",
-    "fruit_icon": "electric/Electric_Skill_Fruit_icon",
-    "white_icon": "electric/Electric_white"
+    "badge_icon": "Electric_icon",
+    "egg_icon": "Electric_Egg_icon",
+    "fruit_icon": "Electric_Skill_Fruit_icon",
+    "white_icon": "Electric_white"
   },
   "Fire": {
     "color": "#ff4208",
     "icon": "fire",
-    "badge_icon": "fire/Fire_icon",
-    "egg_icon": "fire/Scorching_Egg_icon",
-    "fruit_icon": "fire/Fire_Skill_Fruit_icon",
-    "white_icon": "fire/Fire_white"
+    "badge_icon": "Fire_icon",
+    "egg_icon": "Scorching_Egg_icon",
+    "fruit_icon": "Fire_Skill_Fruit_icon",
+    "white_icon": "Fire_white"
   },
   "Ice": {
     "color": "#00f2ff",
     "icon": "ice",
-    "badge_icon": "ice/Ice_icon",
-    "egg_icon": "ice/Frozen_Egg_icon",
-    "fruit_icon": "ice/Ice_Skill_Fruit_icon",
-    "white_icon": "ice/Ice_white"
+    "badge_icon": "Ice_icon",
+    "egg_icon": "Frozen_Egg_icon",
+    "fruit_icon": "Ice_Skill_Fruit_icon",
+    "white_icon": "Ice_white"
   },
   "Leaf": {
     "color": "#83f001",
     "icon": "grass",
-    "badge_icon": "grass/Grass_icon",
-    "egg_icon": "grass/Verdant_Egg_icon",
-    "fruit_icon": "grass/Grass_Skill_Fruit_icon",
-    "white_icon": "grass/Grass_white"
+    "badge_icon": "Grass_icon",
+    "egg_icon": "Verdant_Egg_icon",
+    "fruit_icon": "Grass_Skill_Fruit_icon",
+    "white_icon": "Grass_white"
   },
   "Normal": {
     "color": "#d8a796",
     "icon": "neutral",
-    "badge_icon": "neutral/Neutral_icon",
-    "egg_icon": "neutral/Common_Egg_icon",
-    "fruit_icon": "neutral/Neutral_Skill_Fruit_icon",
-    "white_icon": "neutral/Neutral_white"
+    "badge_icon": "Neutral_icon",
+    "egg_icon": "Common_Egg_icon",
+    "fruit_icon": "Neutral_Skill_Fruit_icon",
+    "white_icon": "Neutral_white"
   },
   "Water": {
     "color": "#0074ff",
     "icon": "water",
-    "badge_icon": "water/Water_icon",
-    "egg_icon": "water/Damp_Egg_icon",
-    "fruit_icon": "water/Water_Skill_Fruit_icon",
-    "white_icon": "water/Water_white"
+    "badge_icon": "Water_icon",
+    "egg_icon": "Damp_Egg_icon",
+    "fruit_icon": "Water_Skill_Fruit_icon",
+    "white_icon": "Water_white"
   }
 }
