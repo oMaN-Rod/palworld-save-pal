@@ -57,7 +57,10 @@ def _get_oodle_lib_path():
             f"Please ensure you have the Oodle DLL file (oo2core_9_win64.dll) in the deps directory. "
         )
     else:
-        raise RuntimeError("Oodle decompression is only supported on macOS (liboo2coremac64.2.9.10.dylib) or Windows (oo2core_9_win64.dll). Unsupported platform: " + system)
+        raise RuntimeError(
+            "Oodle decompression is only supported on macOS (liboo2coremac64.2.9.10.dylib) or Windows (oo2core_9_win64.dll). Unsupported platform: "
+            + system
+        )
 
 
 def skip_decode(reader: FArchiveReader, type_name: str, size: int, path: str):
@@ -152,6 +155,10 @@ CUSTOM_PROPERTIES[".worldSaveData.DungeonPointMarkerSaveData"] = (
 CUSTOM_PROPERTIES[".worldSaveData.GameTimeSaveData"] = (skip_decode, skip_encode)
 CUSTOM_PROPERTIES[".worldSaveData.OilrigSaveData"] = (skip_decode, skip_encode)
 CUSTOM_PROPERTIES[".worldSaveData.SupplySaveData"] = (skip_decode, skip_encode)
+CUSTOM_PROPERTIES[".worldSaveData.BaseCampSaveData.Value.ModuleMap"] = (
+    skip_decode,
+    skip_encode,
+)
 
 
 class SaveType(int, Enum):
