@@ -959,7 +959,7 @@
 							onclick={() => (currentPage = page)}
 							popupLabel={`Box ${page}`}
 						>
-							{page}
+							{Math.floor(page)}
 						</TooltipButton>
 					{/each}
 				</div>
