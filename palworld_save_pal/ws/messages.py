@@ -48,6 +48,7 @@ class MessageType(str, Enum):
     GET_UI_COMMON = "get_ui_common"
     GET_VERSION = "get_version"
     GET_WORK_SUITABILITY = "get_work_suitability"
+    GET_FRIENDSHIP_DATA = "get_friendship_data"
 
     # Preset Operations
     ADD_PRESET = "add_preset"

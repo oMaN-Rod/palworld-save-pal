@@ -69,7 +69,7 @@
 	<div class={cn('bg-surface-800', height, rounded)} {...additionalProps}>
 		<div
 			class={cn(
-				'h-full overflow-visible whitespace-nowrap pl-1 text-start align-middle text-sm font-bold transition-all',
+				'flex h-full items-center overflow-visible whitespace-nowrap pl-1 text-start align-middle text-sm font-bold transition-all',
 				progressBg,
 				rounded
 			)}

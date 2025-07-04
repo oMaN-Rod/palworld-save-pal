@@ -169,7 +169,8 @@ def start_server(host, port, dev_mode):
 def start_webview(url):
     logger.info("Starting webview with URL: %s", url)
     webview.settings["ALLOW_DOWNLOADS"] = True
-    webview.settings["OPEN_DEVTOOLS_IN_DEBUG"] = False
+    # Set true on Mac, False on other platforms
+    webview.settings["OPEN_DEVTOOLS_IN_DEBUG"] = platform.system() == "Darwin"
     app_state.webview_window = webview.create_window(
         f"Palworld Save Pal v{__version__}",
         url,

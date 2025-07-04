@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { HealthBadge, PalHeader } from '$components';
+	import { PalHeader } from '$components';
+	import StatusBadge from '$components/badges/status-badge/StatusBadge.svelte';
 	import {
 		ActiveSkillBadge,
 		PassiveSkillBadge,
@@ -21,6 +22,7 @@
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 
 	const appState = getAppState();
+
 	const modal = getModalState();
 
 	let palLevelProgressToNext: number = $state(0);
@@ -433,7 +435,7 @@
 		</div>
 		<div class="w-1/3 overflow-auto p-2">
 			<div class="hidden flex-col space-y-2 2xl:flex">
-				<HealthBadge bind:pal={appState.selectedPal} />
+				<StatusBadge bind:pal={appState.selectedPal} />
 				<SectionHeader text="Stats" />
 				<StatsBadges bind:pal={appState.selectedPal} bind:player={appState.selectedPlayer} />
 				{@render talentsHeader()}
@@ -442,7 +444,7 @@
 				<Souls bind:pal={appState.selectedPal} />
 			</div>
 			<div class="flex flex-col space-y-2 2xl:hidden">
-				<HealthBadge bind:pal={appState.selectedPal} />
+				<StatusBadge bind:pal={appState.selectedPal} />
 				<Accordion
 					classes="min-w-96"
 					value={rightAccordionValue}

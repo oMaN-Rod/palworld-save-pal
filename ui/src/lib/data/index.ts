@@ -2,6 +2,7 @@ import { activeSkillsData } from './activeSkills.svelte';
 import { buildingsData } from './buildings.svelte';
 import { elementsData } from './elements.svelte';
 import { expData } from './exp.svelte';
+import { friendshipData } from './friendship.svelte';
 import { itemsData } from './items.svelte';
 import { labResearchData } from './labResearch.svelte';
 import { mapObjects } from './mapObjects.svelte';
@@ -17,6 +18,7 @@ export {
 	buildingsData,
 	elementsData,
 	expData,
+	friendshipData,
 	itemsData,
 	labResearchData,
 	mapObjects,

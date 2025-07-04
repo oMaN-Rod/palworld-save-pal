@@ -2,7 +2,7 @@
 	import { SectionHeader } from '$components/ui';
 	import { type Pal } from '$types';
 	import { getAppState } from '$states';
-	import { ActiveSkillBadge, HealthBadge, PalHeader, PassiveSkillBadge } from '$components';
+	import { ActiveSkillBadge, StatusBadge, PalHeader, PassiveSkillBadge } from '$components';
 	import { palsData } from '$lib/data';
 	import { staticIcons } from '$types/icons';
 	import { onMount } from 'svelte';
@@ -132,7 +132,7 @@
 
 <div class="flex w-[450px] flex-col space-y-2">
 	<PalHeader bind:pal showActions={false} popup />
-	<HealthBadge bind:pal />
+	<StatusBadge bind:pal />
 	<div class="flex justify-center space-x-2">
 		<span class="text-surface-300 mr-1 text-xs">IVs</span>
 		<div class="chip bg-green-700">

@@ -1,11 +1,11 @@
 import ActiveSkillOption from './active-skill-option/ActiveSkillOption.svelte';
 import ActiveSkillBadge from './badges/active-skill-badge/ActiveSkillBadge.svelte';
-import HealthBadge from './badges/health-badge/HealthBadge.svelte';
 import ItemBadge from './badges/item-badge/ItemBadge.svelte';
 import PalBadge from './badges/pal-badge/PalBadge.svelte';
 import PassiveSkillBadge from './badges/passive-skill-badge/PassiveSkillBadge.svelte';
 import PlayerHealthBadge from './badges/player-health-badge/PlayerHealthBadge.svelte';
 import StatsBadges from './badges/stats-badges/StatsBadges.svelte';
+import StatusBadge from './badges/status-badge/StatusBadge.svelte';
 import WorkSuitabilities from './badges/work-suitabilities/WorkSuitabilities.svelte';
 import DebugButton from './debug-button/DebugButton.svelte';
 import Drawer from './drawer/Drawer.svelte';
@@ -36,7 +36,6 @@ export {
 	DebugButton,
 	Drawer,
 	GamepassSaveList,
-	HealthBadge,
 	ItemBadge,
 	LabResearch,
 	LabResearchControls,
@@ -57,6 +56,7 @@ export {
 	Souls,
 	Spinner,
 	StatsBadges,
+	StatusBadge,
 	StoragePresets,
 	Talents,
 	Toast,

@@ -4,6 +4,7 @@ import { activeSkillsData } from './activeSkills.svelte';
 import { buildingsData } from './buildings.svelte';
 import { elementsData } from './elements.svelte';
 import { expData } from './exp.svelte';
+import { friendshipData } from './friendship.svelte';
 import { itemsData } from './items.svelte';
 import { labResearchData } from './labResearch.svelte';
 import { mapObjects } from './mapObjects.svelte';
@@ -21,6 +22,7 @@ export const bootstrap = async () => {
 	await technologiesData.reset();
 	await elementsData.reset();
 	await expData.reset();
+	await friendshipData.reset();
 	await itemsData.reset();
 	await workSuitabilityData.reset();
 	await buildingsData.reset();

@@ -3,6 +3,7 @@
 	import { EntryState, type Pal, type Player } from '$types';
 	import { Tooltip, Progress } from '$components/ui';
 	import { palsData } from '$lib/data';
+	import { friendshipData } from '$lib/data/friendship.svelte';
 
 	let {
 		pal = $bindable(),
@@ -12,7 +13,6 @@
 		stomachHeight = 'h-6'
 	}: {
 		pal: Pal | undefined;
-		width?: string;
 		showActions?: boolean;
 		showStomachLabel?: boolean;
 		healthHeight?: string;
@@ -31,6 +31,36 @@
 		return 150;
 	});
 
+	// Friendship data: use synchronously if loaded, otherwise trigger load
+	let trustLevel = $state(0);
+	let trustCurrent = $state(0);
+	let trustMax = $state(0);
+
+	const friendship = friendshipData.friendshipData;
+	if (pal) {
+		const palTrust = pal.friendship_point ?? 0;
+		let currentLevel = 0;
+		let currentMax = 0;
+		let prevRequired = 0;
+		// If not loaded, trigger load (async, will update on next render)
+		if (Object.keys(friendship).length === 0) {
+			friendshipData.getFriendshipData();
+		} else {
+			for (const [levelStr, { rank, required_point }] of Object.entries(friendship)) {
+				if (palTrust >= required_point) {
+					currentLevel = rank;
+					prevRequired = required_point;
+				} else {
+					currentMax = required_point - prevRequired;
+					break;
+				}
+			}
+			trustLevel = currentLevel;
+			trustCurrent = pal.friendship_point - prevRequired;
+			trustMax = currentMax;
+		}
+	}
+
 	function handleHeal() {
 		if (!pal) return;
 		pal.hp = pal.max_hp;
@@ -47,13 +77,19 @@
 </script>
 
 {#if pal}
+	<div class="mb-2 flex items-center">
+		<img src={staticIcons.hpIcon} alt="Trust" class="mr-2 h-6 w-6" />
+		<Progress value={trustCurrent} max={trustMax} height={healthHeight} color="bg-[#db7c90]" />
+		<div class="absolute right-8 flex items-center">
+			<span class="text-xs font-bold text-white">Lv.{trustLevel}</span>
+		</div>
+	</div>
 	<div class="flex items-center">
 		{#if showActions}
 			<Tooltip>
 				<button onclick={handleHeal} aria-label="Health">
 					<img src={staticIcons.hpIcon} alt="Health" class="mr-2 h-6 w-6" />
 				</button>
-
 				{#snippet popup()}
 					<span>HP</span>
 					{Math.round(pal.hp / 1000)}/{palMaxHp / 1000}
@@ -80,7 +116,6 @@
 				{/snippet}
 			</Tooltip>
 		{/if}
-
 		<Progress
 			bind:value={pal.stomach}
 			max={maxStomach}

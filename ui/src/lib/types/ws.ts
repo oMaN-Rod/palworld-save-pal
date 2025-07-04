@@ -25,6 +25,7 @@ export enum MessageType {
 	UPDATE_PRESET = 'update_preset',
 	DELETE_PRESET = 'delete_preset',
 	GET_ACTIVE_SKILLS = 'get_active_skills',
+	GET_FRIENDSHIP_DATA = 'get_friendship_data',
 	GET_PASSIVE_SKILLS = 'get_passive_skills',
 	GET_TECHNOLOGIES = 'get_technologies',
 	GET_ELEMENTS = 'get_elements',

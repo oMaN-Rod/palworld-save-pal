@@ -516,6 +516,18 @@ class Pal(BaseModel):
             for t in PAL_SICK_TYPES
             if t not in ["HungerType", "SanityValue"]
         )
+    
+    @computed_field
+    def friendship_point(self) -> int:
+        return (
+            PalObjects.get_value(self._save_parameter["FriendshipPoint"])
+            if "FriendshipPoint" in self._save_parameter
+            else 0
+        )
+
+    @friendship_point.setter
+    def friendship_point(self, value: int):
+        self._save_parameter["FriendshipPoint"] = PalObjects.IntProperty(value)
 
     def clone(
         self, instance_id: UUID, storage_id: UUID, storage_slot: int, nickname: str

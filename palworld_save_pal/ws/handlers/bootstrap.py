@@ -7,6 +7,7 @@ from palworld_save_pal.ws.handlers import (
     debug_handler,
     elements_handler,
     exp_handler,
+    friendship_handler,
     guild_handler,
     items_handler,
     lab_research_handler,
@@ -278,6 +279,14 @@ def bootstrap(dispatcher: "MessageDispatcher"):
         {
             "message_class": BaseMessage,
             "handler_func": exp_handler.get_exp_data_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.GET_FRIENDSHIP_DATA.value,
+        {
+            "message_class": BaseMessage,
+            "handler_func": friendship_handler.get_friendship_data_handler,
         },
     )
 

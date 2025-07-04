@@ -4,7 +4,8 @@
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { cn } from '$theme';
 	import { getAppState, getNavigationState } from '$states';
-	import { HealthBadge, PalInfoPopup } from '$components';
+	import { PalInfoPopup } from '$components';
+	import StatusBadge from '$components/badges/status-badge/StatusBadge.svelte';
 	import { palsData } from '$lib/data';
 	import ContextMenu from '$components/ui/context-menu/ContextMenu.svelte';
 	import { Plus, ArchiveRestore, Trash, Copy } from 'lucide-svelte';
@@ -129,9 +130,8 @@
 								<div class="h-4 w-4 2xl:h-6 2xl:w-6">✨</div>
 							{/if}
 						</div>
-						<HealthBadge
+						<StatusBadge
 							bind:pal
-							width="w-64"
 							showActions={false}
 							healthHeight="h-4 2xl:h-6"
 							stomachHeight="h-2"
