@@ -45,9 +45,9 @@
 		pal && pal.is_sick ? 'animate-pulse ring-4 ring-red-500 rounded-full' : ''
 	);
 
-	let palData = $derived(palsData.pals[pal.character_key]);
+	const palData = $derived(palsData.pals[pal.character_key]);
 
-	let menuItems = $derived.by(() => {
+	const menuItems = $derived.by(() => {
 		if (!pal || pal.character_id === 'None') {
 			return [
 				{
@@ -64,11 +64,17 @@
 		];
 	});
 
-	let genderIcon = $derived(assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${pal.gender}.png`));
-	let palIcon = $derived.by(() => {
+	const genderIcon = $derived(assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${pal.gender}.png`));
+	const palIcon = $derived.by(() => {
 		if (!pal) return '';
 		return assetLoader.loadMenuImage(pal.character_key, palData ? palData.is_pal : false);
 	});
+	const palLevel = $derived(
+		appState.selectedPlayer?.level! < pal.level ? appState.selectedPlayer?.level : pal.level
+	);
+	const levelSyncClass = $derived(
+		appState.selectedPlayer?.level! < pal.level ? 'text-red-500' : ''
+	);
 
 	function handleClick(event: MouseEvent) {
 		if (!pal || pal.character_id === 'None') {
@@ -134,7 +140,7 @@
 							<img src={genderIcon} alt={pal.gender} />
 						</div>
 						<div class="absolute -bottom-4 -left-3 h-6 w-6 xl:h-8 xl:w-8">
-							<span class="text-xs">lvl {pal.level}</span>
+							<span class="text-xs {levelSyncClass} font-bold">lvl {palLevel}</span>
 						</div>
 					</div>
 				</div>
