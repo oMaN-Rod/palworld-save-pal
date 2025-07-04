@@ -4,13 +4,13 @@ from pydantic import ConfigDict
 from sqlmodel import SQLModel, Field, Relationship
 from sqlalchemy import Column, JSON, Enum, String, Boolean, Integer, Float
 
-from palworld_save_pal.game.item_container_slot import ItemContainerSlot
+from palworld_save_pal.dto.item_container_slot import ItemContainerSlotDTO
 from palworld_save_pal.game.pal_objects import PalGender
 
 
 class StorageContainerPreset(SQLModel):
     key: str
-    slots: List[ItemContainerSlot]
+    slots: List[ItemContainerSlotDTO]
 
 
 class PalPreset(SQLModel, table=True):
