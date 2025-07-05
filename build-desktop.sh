@@ -3,10 +3,78 @@
 # Build and Run Script for PALWorld Save Pal Desktop (Linux)
 set -e
 
+# Function to show help
+show_help() {
+    cat << EOF
+Usage: ./build-desktop.sh [OPTIONS]
+
+OPTIONS:
+    -v, --version <version>    Set the version number (e.g., '1.0.0')
+    -h, --help                 Show this help message
+
+If no version is specified, the current version from __version__.py will be used.
+EOF
+    exit 0
+}
+
+# Function to update version in a file
+update_version() {
+    local file_path="$1"
+    local new_version="$2"
+    local pattern="$3"
+    local replacement="$4"
+    
+    if [ -f "$file_path" ]; then
+        sed -i.bak "$pattern" "$file_path"
+        rm -f "$file_path.bak"
+        echo "Updated version to $new_version in $file_path"
+    else
+        echo "Warning: File not found: $file_path" >&2
+    fi
+}
+
+# Parse command line arguments
+VERSION=""
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        -v|--version)
+            VERSION="$2"
+            shift 2
+            ;;
+        -h|--help)
+            show_help
+            ;;
+        *)
+            echo "Unknown option: $1" >&2
+            echo "Use -h or --help for usage information." >&2
+            exit 1
+            ;;
+    esac
+done
+
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
 
-VERSION=$(grep '__version__' ./palworld_save_pal/__version__.py | cut -d'"' -f2)
+# Get or set version
+if [ -n "$VERSION" ]; then
+    # Validate version format (basic semver check)
+    if ! echo "$VERSION" | grep -qE '^[0-9]+\.[0-9]+\.[0-9]+(-[a-zA-Z0-9\-\.]+)?(\+[a-zA-Z0-9\-\.]+)?$'; then
+        echo "Error: Invalid version format. Please use semantic versioning (e.g., '1.0.0', '1.0.0-beta', '1.0.0+build.1')" >&2
+        exit 1
+    fi
+    
+    echo "Updating version to $VERSION..."
+    
+    # Update __version__.py
+    update_version "./palworld_save_pal/__version__.py" "$VERSION" "s/__version__ = \"[^\"]*\"/__version__ = \"$VERSION\"/" ""
+    
+    # Update pyproject.toml
+    update_version "./pyproject.toml" "$VERSION" "s/version = \"[^\"]*\"/version = \"$VERSION\"/" ""
+else
+    # Read current version
+    VERSION=$(grep '__version__' ./palworld_save_pal/__version__.py | cut -d'"' -f2)
+fi
+
 echo "Building PALWorld Save Pal Desktop App version $VERSION"
 
 DIST_DIR="./dist/psp-linux-$VERSION"
