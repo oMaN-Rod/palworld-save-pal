@@ -9,7 +9,6 @@ build_exe_options = {
     "include_files": [
         ("ui_build", "ui"),
         ("data", "data"),
-        ("oodle", "lib/oodle"),
         ("debug.bat", "debug.bat")
         if sys.platform == "win32"
         else ("debug.sh", "debug.sh"),

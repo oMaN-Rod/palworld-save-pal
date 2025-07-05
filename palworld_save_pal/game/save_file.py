@@ -35,34 +35,6 @@ from palworld_save_pal.utils.uuid import are_equal_uuids, is_empty_uuid
 logger = create_logger(__name__)
 
 
-def _get_oodle_lib_path():
-    current_dir = Path(__file__).parent
-    deps_dir = current_dir.parent.parent / "oodle"
-
-    system = platform.system()
-    if system == "Darwin":
-        lib_path = deps_dir / "liboo2coremac64.2.9.10.dylib"
-        if lib_path.exists():
-            return str(lib_path)
-        raise FileNotFoundError(
-            f"Oodle dylib not found in {deps_dir}. "
-            f"Please ensure you have the Oodle dylib file (liboo2coremac64.2.9.10.dylib) in the deps directory. "
-        )
-    elif system == "Windows":
-        lib_path = deps_dir / "oo2core_9_win64.dll"
-        if lib_path.exists():
-            return str(lib_path)
-        raise FileNotFoundError(
-            f"Oodle DLL not found in {deps_dir}. "
-            f"Please ensure you have the Oodle DLL file (oo2core_9_win64.dll) in the deps directory. "
-        )
-    else:
-        raise RuntimeError(
-            "Oodle decompression is only supported on macOS (liboo2coremac64.2.9.10.dylib) or Windows (oo2core_9_win64.dll). Unsupported platform: "
-            + system
-        )
-
-
 def skip_decode(reader: FArchiveReader, type_name: str, size: int, path: str):
     if type_name == "ArrayProperty":
         array_type = reader.fstring()
