@@ -702,7 +702,7 @@ class SaveFile(BaseModel):
 
     def load_level_meta(self, data: bytes):
         logger.info("Loading %s as GVAS", self.name)
-        raw_gvas, _ = decompress_sav_to_gvas(data, oodle_path=_get_oodle_lib_path())
+        raw_gvas, _ = decompress_sav_to_gvas(data)
         custom_properties = {
             k: v
             for k, v in PALWORLD_CUSTOM_PROPERTIES.items()
@@ -716,7 +716,7 @@ class SaveFile(BaseModel):
 
     def load_level_sav(self, data: bytes):
         logger.info("Loading %s as GVAS", self.name)
-        raw_gvas, _ = decompress_sav_to_gvas(data, oodle_path=_get_oodle_lib_path())
+        raw_gvas, _ = decompress_sav_to_gvas(data)
         logger.debug("Reading GVAS file")
         gvas_file = GvasFile.read(
             raw_gvas, PALWORLD_TYPE_HINTS, CUSTOM_PROPERTIES, allow_nan=True
@@ -736,9 +736,7 @@ class SaveFile(BaseModel):
         ws_callback=None,
     ):
         logger.info("Loading %s", self.name)
-        raw_gvas, _ = decompress_sav_to_gvas(
-            level_sav, oodle_path=_get_oodle_lib_path()
-        )
+        raw_gvas, _ = decompress_sav_to_gvas(level_sav)
         gvas_file = GvasFile.read(
             raw_gvas, PALWORLD_TYPE_HINTS, CUSTOM_PROPERTIES, allow_nan=True
         )
@@ -767,9 +765,7 @@ class SaveFile(BaseModel):
         logger.info("Converting %s to SAV", self.name)
         target_gvas = gvas_file if gvas_file else self._gvas_file
         gvas = copy.deepcopy(target_gvas)
-        return compress_gvas_to_sav(
-            gvas.write(CUSTOM_PROPERTIES), 0x31, oodle_path=_get_oodle_lib_path()
-        )
+        return compress_gvas_to_sav(gvas.write(CUSTOM_PROPERTIES), 0x31)
 
     def player_savs(self) -> Dict[UUID, bytes]:
         logger.info("Converting player save files to SAV", len(self._player_gvas_files))
@@ -777,7 +773,6 @@ class SaveFile(BaseModel):
             uid: compress_gvas_to_sav(
                 self._player_gvas_files[uid].sav.write(CUSTOM_PROPERTIES),
                 0x31,
-                oodle_path=_get_oodle_lib_path(),
             )
             for uid in self._player_gvas_files
         }
@@ -791,13 +786,11 @@ class SaveFile(BaseModel):
                 "sav": compress_gvas_to_sav(
                     files.sav.write(CUSTOM_PROPERTIES),
                     0x31,
-                    oodle_path=_get_oodle_lib_path(),
                 ),
                 "dps": (
                     compress_gvas_to_sav(
                         files.dps.write(CUSTOM_PROPERTIES),
                         0x31,
-                        oodle_path=_get_oodle_lib_path(),
                     )
                     if files.dps
                     else None
@@ -826,9 +819,7 @@ class SaveFile(BaseModel):
     def to_sav_file(self, output_path):
         logger.info("Converting %s to SAV, saving to %s", self.name, output_path)
         gvas = copy.deepcopy(self._gvas_file)
-        sav_file = compress_gvas_to_sav(
-            gvas.write(CUSTOM_PROPERTIES), 0x31, oodle_path=_get_oodle_lib_path()
-        )
+        sav_file = compress_gvas_to_sav(gvas.write(CUSTOM_PROPERTIES), 0x31)
         with open(output_path, "wb") as f:
             f.write(sav_file)
 
@@ -838,7 +829,6 @@ class SaveFile(BaseModel):
             sav_file = compress_gvas_to_sav(
                 player_files.sav.write(CUSTOM_PROPERTIES),
                 0x31,
-                oodle_path=_get_oodle_lib_path(),
             )
             uid = str(uid).replace("-", "")
             with open(os.path.join(output_path, f"{uid}.sav"), "wb") as f:
@@ -847,7 +837,6 @@ class SaveFile(BaseModel):
                 dps_sav_file = compress_gvas_to_sav(
                     player_files.dps.write(CUSTOM_PROPERTIES),
                     0x31,
-                    oodle_path=_get_oodle_lib_path(),
                 )
                 with open(os.path.join(output_path, f"{uid}_dps.sav"), "wb") as f_dps:
                     f_dps.write(dps_sav_file)
@@ -1153,9 +1142,7 @@ class SaveFile(BaseModel):
         host_fix_players = {}
 
         for uid, sav_files in player_sav_files.items():
-            raw_gvas, _ = decompress_sav_to_gvas(
-                sav_files["sav"], oodle_path=_get_oodle_lib_path()
-            )
+            raw_gvas, _ = decompress_sav_to_gvas(sav_files["sav"])
             await ws_callback(f"Loading player {uid}...")
             gvas_file = GvasFile.read(
                 raw_gvas, PALWORLD_TYPE_HINTS, CUSTOM_PROPERTIES, allow_nan=True
@@ -1183,9 +1170,7 @@ class SaveFile(BaseModel):
             dps = None
             if "dps" in sav_files and sav_files["dps"] is not None:
                 logger.debug("Loading player DPS save for %s", player_uuid)
-                raw_dps_gvas, _ = decompress_sav_to_gvas(
-                    sav_files["dps"], oodle_path=_get_oodle_lib_path()
-                )
+                raw_dps_gvas, _ = decompress_sav_to_gvas(sav_files["dps"])
                 dps_gvas_file = GvasFile.read(
                     raw_dps_gvas,
                     PALWORLD_TYPE_HINTS,
