@@ -9,17 +9,35 @@ import {
 	type WorkSuitability
 } from '$types';
 
-export function canBeBoss(character_id: string): [string, boolean] {
-	const lowerCaseId = character_id.toLowerCase();
-	const prefixTypeMap = [
-		['predator_', 'Predator'],
-		['summon_', 'Summon'],
-		['raid_', 'Raid'],
-		['gym_', 'Tower Boss']
-	] as const;
+const prefixTypeMap = [
+	['predator_', 'Predator'],
+	['summon_', 'Summon'],
+	['raid_', 'Raid'],
+	['gym_', 'Tower Boss']
+] as const;
 
+export function canBeLucky(character_id: string): [string, boolean] {
+	const lowerCaseId = character_id.toLowerCase();
 	for (const [prefix, type] of prefixTypeMap) {
 		if (lowerCaseId.includes(prefix)) {
+			return [type, false];
+		}
+	}
+
+	return ['', true];
+}
+
+export function canBeAlpha(character_id: string): [string, boolean] {
+	const lowerCaseId = character_id.toLowerCase();
+	const excludedPrefixes = [
+		...prefixTypeMap,
+		['yakushimamonster', 'This'],
+		['yakushimaboss001_small', 'This'],
+		['quest_farmer03_', 'This']
+	];
+
+	for (const [prefix, type] of excludedPrefixes) {
+		if (lowerCaseId.startsWith(prefix)) {
 			return [type, false];
 		}
 	}
@@ -40,7 +58,7 @@ export async function handleMaxOutPal(pal: Pal, player: Player): Promise<void> {
 	pal.level = appState.settings.cheat_mode ? 255 : 60;
 	const maxLevelData = expData.expData['61'];
 	pal.exp = maxLevelData.PalTotalEXP - maxLevelData.PalNextEXP;
-	const [_, valid] = canBeBoss(pal.character_id);
+	const [_, valid] = canBeLucky(pal.character_id);
 	pal.is_boss = valid;
 	pal.is_lucky = false;
 	pal.talent_hp = appState.settings.cheat_mode ? 255 : 100;
@@ -73,7 +91,7 @@ export const applyPalPreset = (pal: Pal, presetProfile: PresetProfile, player: P
 	if (!palData) return;
 
 	const skipKeys = new Set(['character_id', 'character_key', 'lock', 'lock_element', 'element']);
-	const [, canBeBossValue] = canBeBoss(pal.character_id);
+	const [, canBeBossValue] = canBeLucky(pal.character_id);
 
 	for (const [key, value] of Object.entries(presetProfile.pal_preset)) {
 		if (skipKeys.has(key) || value == null) continue;

@@ -33,4 +33,13 @@ def clean_character_id(character_id: str) -> str:
     if character_key.lower() in key_mapping:
         character_key = key_mapping[character_key.lower()]
 
+    prefix_mapping = {
+        "quest_farmer03_": "Quest_Farmer03_",
+        "icenarwhal": "IceNarwhal",
+    }
+
+    for prefix, replacement in prefix_mapping.items():
+        if character_key.lower().startswith(prefix):
+            character_key = replacement + character_key[len(prefix) :]
+
     return character_id, character_key

@@ -60,7 +60,8 @@ class AssetLoader {
 			.replace('summon_', '')
 			.replace('_max', '')
 			.replace(/_\d+$/, '')
-			.replace('boss_', '');
+			.replace('boss_', '')
+			.replace('quest_farmer03_', '');
 	}
 
 	loadPalImage(character_id: string, is_pal: boolean = true): string {

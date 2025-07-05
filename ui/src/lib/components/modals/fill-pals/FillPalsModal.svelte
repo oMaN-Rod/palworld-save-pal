@@ -2,9 +2,9 @@
 	import { Card, List, Tooltip } from '$components/ui';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { elementsData, palsData, presetsData } from '$lib/data';
-	import { getAppState, getToastState } from '$states';
+	import { getAppState } from '$states';
 	import { EntryState, MessageType, type Pal, type PalData, type PresetProfile } from '$types';
-	import { applyPalPreset, assetLoader, formatNickname } from '$utils';
+	import { applyPalPreset, assetLoader, canBeAlpha, canBeLucky, formatNickname } from '$utils';
 	import { sendAndWait } from '$utils/websocketUtils';
 	import NumberFlow from '@number-flow/svelte';
 	import { Switch } from '@skeletonlabs/skeleton-svelte';
@@ -35,16 +35,14 @@
 	let addHumanPals = $state(true);
 	let isBusy = $state(false);
 	let count = $state(0);
-	let selectedPreset: string = $state('');
 	let selectedPresets: ExtendedPresetProfile[] = $state([]);
 
 	const specialCases = ['PREDATOR_', 'RAID_', 'GYM_', 'SUMMON_', '_OILRIG'];
 	const appState = getAppState();
-	const toast = getToastState();
 
 	const palPresets: ExtendedPresetProfile[] = $derived.by(() => {
 		return Object.entries(presetsData.presetProfiles)
-			.filter(([id, profile]) => profile.type === 'pal_preset')
+			.filter(([_, profile]) => profile.type === 'pal_preset')
 			.map(([id, preset]) => ({
 				id,
 				...preset
@@ -143,8 +141,8 @@
 	const totalRequiredSlots = $derived.by(() => {
 		let count = 0;
 		if (addNormalPals) count += normalPals.length;
-		if (addLuckyPals) count += normalPals.length;
-		if (addAlphaPals) count += normalPals.length;
+		if (addLuckyPals) count += normalPals.filter((p) => canBeLucky(p[0])[1]).length;
+		if (addAlphaPals) count += normalPals.filter((p) => canBeAlpha(p[0])[1]).length;
 		if (addBossPals) count += bossPals.length;
 		if (addPredatorPals) count += predatorPals.length;
 		if (addRaidPals) count += raidPals.length;
@@ -239,6 +237,9 @@
 				await addPal(character_id, nickname, palData.localized_name || character_id);
 			}
 			if (addLuckyPals) {
+				if (!canBeLucky(character_id)[1]) {
+					continue;
+				}
 				const pal = await addPal(character_id, nickname, palData.localized_name || character_id);
 				if (!pal) {
 					console.error(`Failed to add lucky pal for ${character_id}`);
@@ -248,6 +249,9 @@
 				pal.state = EntryState.MODIFIED;
 			}
 			if (addAlphaPals) {
+				if (!canBeAlpha(character_id)[1]) {
+					continue;
+				}
 				const pal = await addPal(character_id, nickname, palData.localized_name || character_id);
 				if (!pal) {
 					console.error(`Failed to add alpha pal for ${character_id}`);
@@ -351,41 +355,6 @@
 
 	function handleCancel() {
 		closeModal(false);
-	}
-
-	function handleAddPreset(preset_id: string) {
-		if (!preset_id) {
-			return;
-		}
-		const presetProfile = presetsData.presetProfiles[preset_id];
-		if (!presetProfile) {
-			console.error(`Preset profile not found for ${preset_id}`);
-			return;
-		}
-		if (
-			selectedPresets.some(
-				(p) =>
-					p.pal_preset?.lock_element &&
-					presetProfile.pal_preset?.lock_element &&
-					p.pal_preset?.element === presetProfile.pal_preset?.element
-			)
-		) {
-			toast.add('Element profile already added', 'Oops!', 'warning');
-			return;
-		}
-		if (
-			selectedPresets.some(
-				(p) =>
-					p.pal_preset?.lock &&
-					presetProfile.pal_preset?.lock &&
-					p.pal_preset?.character_id === presetProfile.pal_preset?.character_id
-			)
-		) {
-			toast.add('Pal profile already added', 'Oops!', 'warning');
-			return;
-		}
-		selectedPresets = [...selectedPresets, { id: preset_id, ...presetProfile }];
-		selectedPreset = '';
 	}
 </script>
 

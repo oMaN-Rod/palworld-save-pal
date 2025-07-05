@@ -141,6 +141,9 @@
 				console.error(`Pal data not found for static id: ${slot.static_id}`);
 				return;
 			}
+			if (palData.disabled) {
+				return staticIcons.unknownIcon;
+			}
 			const palImgName = palCharacterId.toLowerCase().replaceAll(' ', '_');
 			return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_${palImgName}_icon_normal.png`);
 		}

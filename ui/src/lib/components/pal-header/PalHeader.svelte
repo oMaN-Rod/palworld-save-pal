@@ -16,7 +16,7 @@
 	import { getAppState, getModalState, getToastState } from '$states';
 	import { Rating } from '@skeletonlabs/skeleton-svelte';
 	import { BicepsFlexed, Bug, Edit, Minus, Play, Plus, Save } from 'lucide-svelte';
-	import { assetLoader, handleMaxOutPal, canBeBoss } from '$utils';
+	import { assetLoader, handleMaxOutPal, canBeLucky, canBeAlpha } from '$utils';
 	import { goto } from '$app/navigation';
 	import { staticIcons } from '$types/icons';
 	import NumberFlow from '@number-flow/svelte';
@@ -167,7 +167,7 @@
 	}
 
 	function handleEditLucky() {
-		const [type, valid] = canBeBoss(pal.character_id);
+		const [type, valid] = canBeLucky(pal.character_id);
 		if (!valid) {
 			toast.add(`${type} Pal cannot be Lucky`, undefined, 'warning');
 			return;
@@ -181,7 +181,7 @@
 	}
 
 	function handleEditAlpha() {
-		const [type, valid] = canBeBoss(pal.character_id);
+		const [type, valid] = canBeAlpha(pal.character_id);
 		if (!valid) {
 			pal.is_boss = false;
 			pal.is_lucky = false;
