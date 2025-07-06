@@ -639,20 +639,99 @@ class PalObjects:
                     "durability": container_slot.dynamic_item.durability,
                 },
                 custom_type=".worldSaveData.DynamicItemSaveData.DynamicItemSaveData.RawData",
-            ),
-            "CustomVersionData": PalObjects.ArrayPropertyValues(
-                ArrayType.BYTE_PROPERTY, [0, 0, 0, 0]
-            ),
+            )
         }
         match container_slot.dynamic_item.type:
             case "weapon":
                 dynamic_item["RawData"]["value"]["leading_bytes"] = [0] * 4
-                dynamic_item["RawData"]["value"]["trailing_bytes"] = [0] * 8
+                dynamic_item["RawData"]["value"]["trailing_bytes"] = [0] * 4
+                dynamic_item["CustomVersionData"] = PalObjects.ArrayPropertyValues(
+                    ArrayType.BYTE_PROPERTY,
+                    [
+                        1,
+                        0,
+                        0,
+                        0,
+                        56,
+                        11,
+                        0,
+                        222,
+                        73,
+                        73,
+                        215,
+                        206,
+                        151,
+                        223,
+                        45,
+                        153,
+                        192,
+                        193,
+                        195,
+                        105,
+                        1,
+                        0,
+                        0,
+                        0,
+                    ],
+                )
             case "armor":
                 dynamic_item["RawData"]["value"]["trailing_bytes"] = [0] * 4
+                dynamic_item["CustomVersionData"] = PalObjects.ArrayPropertyValues(
+                    ArrayType.BYTE_PROPERTY,
+                    [0] * 4,
+                )
             case "egg":
                 dynamic_item["RawData"]["value"]["leading_bytes"] = [0] * 4
                 dynamic_item["RawData"]["value"]["trailing_bytes"] = [0] * 28
+                dynamic_item["CustomVersionData"] = PalObjects.ArrayPropertyValues(
+                    ArrayType.BYTE_PROPERTY,
+                    [
+                        2,
+                        0,
+                        0,
+                        0,
+                        56,
+                        11,
+                        0,
+                        222,
+                        73,
+                        73,
+                        215,
+                        206,
+                        151,
+                        223,
+                        45,
+                        153,
+                        192,
+                        193,
+                        195,
+                        105,
+                        1,
+                        0,
+                        0,
+                        0,
+                        108,
+                        246,
+                        252,
+                        15,
+                        153,
+                        72,
+                        144,
+                        17,
+                        248,
+                        156,
+                        96,
+                        177,
+                        94,
+                        71,
+                        70,
+                        74,
+                        1,
+                        0,
+                        0,
+                        0,
+                    ],
+                )
         return dynamic_item
 
     @staticmethod

@@ -185,9 +185,12 @@
 						local_id: '00000000-0000-0000-0000-000000000000'
 					};
 				}
+
 				slot.dynamic_item.durability = itemData.details.dynamic.durability || 0;
 				slot.dynamic_item.remaining_bullets = itemData.details.dynamic.magazine_size || 0;
 				slot.dynamic_item.type = itemData.details.dynamic.type;
+				slot.dynamic_item.static_id = static_id;
+
 				if (slot.dynamic_item.type === 'egg') {
 					slot.dynamic_item.character_id = eggConfig.character_id;
 					slot.dynamic_item.gender = eggConfig.gender;

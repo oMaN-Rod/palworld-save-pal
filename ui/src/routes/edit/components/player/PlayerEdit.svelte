@@ -113,59 +113,36 @@
 		return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${itemData.details.icon}.webp`);
 	}
 
-	function clearCommonContainer() {
-		Object.values(commonContainer.slots).forEach((slot) => {
+	function clearContainer(container: ItemContainer) {
+		Object.values(container.slots).forEach((slot) => {
 			slot.dynamic_item = undefined;
 			slot.static_id = 'None';
 			slot.count = 0;
+			slot.local_id = '00000000-0000-0000-0000-000000000000';
 		});
 		if (appState.selectedPlayer) {
 			appState.selectedPlayer.state = EntryState.MODIFIED;
 		}
+	}
+
+	function clearCommonContainer() {
+		clearContainer(commonContainer);
 	}
 
 	function clearEssentialContainer() {
-		Object.values(essentialContainer.slots).forEach((slot) => {
-			slot.dynamic_item = undefined;
-			slot.static_id = 'None';
-			slot.count = 0;
-		});
-		if (appState.selectedPlayer) {
-			appState.selectedPlayer.state = EntryState.MODIFIED;
-		}
+		clearContainer(essentialContainer);
 	}
 
 	function clearWeaponLoadOutContainer() {
-		Object.values(weaponLoadOutContainer.slots).forEach((slot) => {
-			slot.dynamic_item = undefined;
-			slot.static_id = 'None';
-			slot.count = 0;
-		});
-		if (appState.selectedPlayer) {
-			appState.selectedPlayer.state = EntryState.MODIFIED;
-		}
+		clearContainer(weaponLoadOutContainer);
 	}
 
 	function clearEquipmentArmorContainer() {
-		Object.values(playerEquipmentArmorContainer.slots).forEach((slot) => {
-			slot.dynamic_item = undefined;
-			slot.static_id = 'None';
-			slot.count = 0;
-		});
-		if (appState.selectedPlayer) {
-			appState.selectedPlayer.state = EntryState.MODIFIED;
-		}
+		clearContainer(playerEquipmentArmorContainer);
 	}
 
 	function clearFoodEquipContainer() {
-		Object.values(foodEquipContainer.slots).forEach((slot) => {
-			slot.dynamic_item = undefined;
-			slot.static_id = 'None';
-			slot.count = 0;
-		});
-		if (appState.selectedPlayer) {
-			appState.selectedPlayer.state = EntryState.MODIFIED;
-		}
+		clearContainer(foodEquipContainer);
 	}
 
 	function clearAll() {

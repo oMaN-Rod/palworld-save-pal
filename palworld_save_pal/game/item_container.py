@@ -151,7 +151,7 @@ class ItemContainer(BaseModel):
 
     def _update_or_create_container_slot(
         self, slot_dto: ItemContainerSlotDTO
-    ) -> Dict[str, Any]:
+    ) -> Optional[Dict[str, Any]]:
         if not slot_dto or slot_dto.static_id == "None":
             return
         logger.debug("%s (%s) => %s", self.type, self.id, slot_dto)
