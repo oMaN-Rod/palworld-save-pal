@@ -39,15 +39,15 @@
 	});
 
 	const categoryIcons: Record<string, string> = {
-		Handcraft: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/handiwork.png`),
-		EmitFlame: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/fire.png`),
-		Watering: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/watering.png`),
-		Seeding: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/planting.png`),
-		GenerateElectricity: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/generating.png`),
-		Deforest: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/deforesting.png`),
-		Mining: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/mining.png`),
-		Cool: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/ice.png`),
-		ProductMedicine: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/production.png`)
+		Handcraft: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/handiwork.webp`),
+		EmitFlame: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/fire.webp`),
+		Watering: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/watering.webp`),
+		Seeding: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/planting.webp`),
+		GenerateElectricity: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/generating.webp`),
+		Deforest: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/deforesting.webp`),
+		Mining: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/mining.webp`),
+		Cool: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/ice.webp`),
+		ProductMedicine: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/production.webp`)
 	};
 
 	function getCategoryProgress(category: string) {

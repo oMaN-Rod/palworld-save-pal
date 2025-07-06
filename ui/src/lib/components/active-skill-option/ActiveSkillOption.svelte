@@ -13,7 +13,7 @@
 	const icon = $derived.by(() => {
 		const element = elementsData.elements[activeSkill.details.element];
 		if (!element) return undefined;
-		return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${element.icon}.png`);
+		return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${element.icon}.webp`);
 	});
 </script>
 

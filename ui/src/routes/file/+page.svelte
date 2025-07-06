@@ -18,7 +18,7 @@
 
 	const steamIcon = assetLoader.loadSvg(`${ASSET_DATA_PATH}/img/app/steam.svg`);
 	const xboxIcon = assetLoader.loadSvg(`${ASSET_DATA_PATH}/img/app/xbox.svg`);
-	const morpheus = assetLoader.loadImage(`${ASSET_DATA_PATH}/img/app/morpheus.png`);
+	const morpheus = assetLoader.loadImage(`${ASSET_DATA_PATH}/img/app/morpheus.webp`, 'image');
 
 	const totalPals = $derived.by(() => {
 		return Object.values(appState.players).reduce(

@@ -41,7 +41,7 @@
 		{@const itemData = itemsData.items[fixStupidTypos(item.static_id)]}
 		{#if itemData}
 			{@const itemIcon = assetLoader.loadImage(
-				`${ASSET_DATA_PATH}/img/${itemData.details.icon}.png`
+				`${ASSET_DATA_PATH}/img/${itemData.details.icon}.webp`
 			)}
 			<Tooltip label={`Slot ${item.slot_index + 1}`}>
 				<div class="grid w-full grid-cols-[auto_1fr_auto] items-center gap-2">

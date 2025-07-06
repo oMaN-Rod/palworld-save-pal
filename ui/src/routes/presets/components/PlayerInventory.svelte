@@ -16,7 +16,7 @@
 			const elementObj = elementsData.elements[elementType];
 			if (elementObj) {
 				icons[elementType] = assetLoader.loadImage(
-					`${ASSET_DATA_PATH}/img/${elementObj.badge_icon}.png`
+					`${ASSET_DATA_PATH}/img/${elementObj.badge_icon}.webp`
 				) as string;
 			}
 		}

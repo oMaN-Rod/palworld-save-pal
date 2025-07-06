@@ -81,7 +81,7 @@
 				{#each palData.element_types as elementType}
 					{@const elementObj = elementsData.elements[elementType.toString()]}
 					{@const elementIcon = assetLoader.loadImage(
-						`${ASSET_DATA_PATH}/img/${elementObj.icon}.png`
+						`${ASSET_DATA_PATH}/img/${elementObj.icon}.webp`
 					)}
 					<img src={elementIcon} alt={elementType} class="h-6 w-6" />
 				{/each}

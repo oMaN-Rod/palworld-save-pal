@@ -13,7 +13,7 @@
 		for (const skill of Object.values(passiveSkillsData.passiveSkills)) {
 			if (icons[skill.details.rank]) continue;
 			icons[skill.details.rank] = assetLoader.loadImage(
-				`${ASSET_DATA_PATH}/img/rank_${skill.details.rank}.png`
+				`${ASSET_DATA_PATH}/img/rank_${skill.details.rank}.webp`
 			) as string;
 		}
 		return icons;

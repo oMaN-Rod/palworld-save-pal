@@ -10,7 +10,7 @@
 
 	const passiveSkill = passiveSkillsData.passiveSkills[option.value];
 	const icon = $derived(
-		assetLoader.loadImage(`${ASSET_DATA_PATH}/img/rank_${passiveSkill.details.rank}.png`)
+		assetLoader.loadImage(`${ASSET_DATA_PATH}/img/rank_${passiveSkill.details.rank}.webp`)
 	);
 	const filter = $derived.by(() => {
 		switch (passiveSkill.details.rank) {

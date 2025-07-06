@@ -39,7 +39,7 @@
 			const elementObj = elementsData.elements[elementType];
 			if (elementObj) {
 				icons[elementType] = assetLoader.loadImage(
-					`${ASSET_DATA_PATH}/img/${elementObj.badge_icon}.png`
+					`${ASSET_DATA_PATH}/img/${elementObj.badge_icon}.webp`
 				) as string;
 			}
 		}
@@ -51,7 +51,7 @@
 		for (const skill of Object.values(passiveSkillsData.passiveSkills)) {
 			if (icons[skill.details.rank]) continue;
 			icons[skill.details.rank] = assetLoader.loadImage(
-				`${ASSET_DATA_PATH}/img/rank_${skill.details.rank}.png`
+				`${ASSET_DATA_PATH}/img/rank_${skill.details.rank}.webp`
 			) as string;
 		}
 		return icons;
@@ -114,7 +114,7 @@
 								>
 									<img
 										src={assetLoader.loadImage(
-											`${ASSET_DATA_PATH}/img/${preset.pal_preset.gender}.png`
+											`${ASSET_DATA_PATH}/img/${preset.pal_preset.gender}.webp`
 										)}
 										alt={preset.pal_preset.gender}
 									/>
@@ -294,7 +294,7 @@
 			{#each Object.entries(preset.pal_preset.work_suitability) as [ws, value]}
 				{@const suitability: WorkSuitability = ws as WorkSuitability}
 				{@const iconPath = assetLoader.loadImage(
-					`${ASSET_DATA_PATH}/img/${suitabilityImageMap[suitability]}.png`
+					`${ASSET_DATA_PATH}/img/${suitabilityImageMap[suitability]}.webp`
 				)}
 				<Tooltip>
 					<div

@@ -12,9 +12,9 @@
 	const appState = getAppState();
 	const modal = getModalState();
 
-	const techPointIcon = assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_icon_tech_point.png`);
+	const techPointIcon = assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_icon_tech_point.webp`);
 	const ancientTechPointIcon = assetLoader.loadImage(
-		`${ASSET_DATA_PATH}/img/t_icon_ancient_tech_point.png`
+		`${ASSET_DATA_PATH}/img/t_icon_ancient_tech_point.webp`
 	);
 
 	// Order technologies by level cap
@@ -55,7 +55,7 @@
 		if (!techIcon) {
 			return;
 		}
-		return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${techIcon}.png`);
+		return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${techIcon}.webp`);
 	}
 
 	function resetAll() {
@@ -167,7 +167,7 @@
 								{@const buildingData = buildingsData.buildings[buildObject]}
 								{#if buildingData}
 									{@const icon = assetLoader.loadImage(
-										`${ASSET_DATA_PATH}/img/${buildingData.icon}.png`
+										`${ASSET_DATA_PATH}/img/${buildingData.icon}.webp`
 									)}
 									<li class="flex items-center gap-2 text-start">
 										<img

@@ -60,7 +60,7 @@
 		];
 	});
 
-	const genderIcon = $derived(assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${pal.gender}.png`));
+	const genderIcon = $derived(assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${pal.gender}.webp`));
 	const palIcon = $derived.by(() => {
 		if (!pal) return '';
 		return assetLoader.loadMenuImage(pal.character_id, palData?.is_pal || false);

@@ -26,7 +26,7 @@
 	function getNodeIcon(research: LabResearch): string {
 		if (research.details.icon) {
 			return (
-				assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${research.details.icon}.png`) ||
+				assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${research.details.icon}.webp`) ||
 				staticIcons.unknownIcon
 			);
 		}
@@ -54,7 +54,7 @@
 			statePart = 'off';
 		}
 
-		const fileName = `t_prt_research_iconbase_${essentialBit}_${statePart}.png`;
+		const fileName = `t_prt_research_iconbase_${essentialBit}_${statePart}.webp`;
 		return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${fileName}`);
 	});
 

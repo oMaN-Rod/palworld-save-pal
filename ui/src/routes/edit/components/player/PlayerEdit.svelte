@@ -110,7 +110,7 @@
 			console.error(`Item data not found for static id: ${staticId}`);
 			return;
 		}
-		return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${itemData.details.icon}.png`);
+		return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${itemData.details.icon}.webp`);
 	}
 
 	function clearCommonContainer() {

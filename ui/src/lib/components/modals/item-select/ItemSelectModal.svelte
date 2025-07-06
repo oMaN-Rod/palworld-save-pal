@@ -142,7 +142,7 @@
 
 	const eggIconSrc = $derived.by(() => {
 		if (!itemData || (itemData && itemData.details.dynamic?.type !== 'egg')) return;
-		return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${itemData.details.icon}.png`);
+		return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${itemData.details.icon}.webp`);
 	});
 
 	const palIconSrc = $derived.by(() => {
@@ -224,9 +224,9 @@
 		}
 		try {
 			if (staticId.includes('SkillCard')) {
-				return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${itemData.details.icon}.png`);
+				return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${itemData.details.icon}.webp`);
 			} else {
-				return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${itemData.details.icon}.png`);
+				return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${itemData.details.icon}.webp`);
 			}
 		} catch (error) {
 			console.error(`Failed to load image for static id: ${staticId}`);
@@ -407,7 +407,7 @@
 									)}
 								>
 									<img
-										src={assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${eggConfig.gender}.png`)}
+										src={assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${eggConfig.gender}.webp`)}
 										alt={eggConfig.gender}
 									/>
 								</div>
@@ -454,7 +454,7 @@
 								class="h-8 w-8 p-1"
 							>
 								<img
-									src={assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${eggConfig.gender}.png`)}
+									src={assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${eggConfig.gender}.webp`)}
 									alt={eggConfig.gender}
 								/>
 							</CornerDotButton>

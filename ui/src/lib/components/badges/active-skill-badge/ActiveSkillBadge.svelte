@@ -25,9 +25,9 @@
 		}
 		const element = elementsData.elements[activeSkill.details.element];
 		const elementIconWhite = assetLoader.loadImage(
-			`${ASSET_DATA_PATH}/img/${element.white_icon}.png`
+			`${ASSET_DATA_PATH}/img/${element.white_icon}.webp`
 		);
-		const elementIcon = assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${element.icon}.png`);
+		const elementIcon = assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${element.icon}.webp`);
 		return { activeSkill, element, elementIconWhite, elementIcon };
 	});
 

@@ -57,7 +57,7 @@
 		if (!playerGuild?.guild_chest) return null;
 		const building = buildingsData.buildings['GuildChest'];
 		if (building) {
-			return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${building.icon}.png`);
+			return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${building.icon}.webp`);
 		}
 		return staticIcons.unknownIcon;
 	});
@@ -186,7 +186,7 @@
 		if (!currentStorageContainer) return null;
 		const building = buildingsData.buildings[currentStorageContainer.key];
 		if (building) {
-			return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${building.icon}.png`);
+			return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${building.icon}.webp`);
 		}
 		return staticIcons.unknownIcon;
 	});
@@ -826,7 +826,7 @@
 							{@const itemData = itemsData.items[fixStupidTypos(item.static_id)]}
 							{#if itemData}
 								{@const itemIcon = assetLoader.loadImage(
-									`${ASSET_DATA_PATH}/img/${itemData.details.icon}.png`
+									`${ASSET_DATA_PATH}/img/${itemData.details.icon}.webp`
 								)}
 								<div class="grid w-full grid-cols-[auto_1fr_auto] gap-2">
 									<div class={getItemBackground(itemData.details.rarity)}>
@@ -859,7 +859,7 @@
 										{@const building = buildingsData.buildings[fixStupidTypos(containerId)]}
 										{#if building}
 											{@const buildingIcon = assetLoader.loadImage(
-												`${ASSET_DATA_PATH}/img/${building.icon}.png`
+												`${ASSET_DATA_PATH}/img/${building.icon}.webp`
 											)}
 											<div class="grid w-full grid-cols-[auto_1fr_auto] gap-2">
 												<img
@@ -954,7 +954,7 @@
 									{@const building = buildingsData.buildings[fixStupidTypos(item.key)]}
 									{#if building}
 										{@const buildingIcon = assetLoader.loadImage(
-											`${ASSET_DATA_PATH}/img/${building.icon}.png`
+											`${ASSET_DATA_PATH}/img/${building.icon}.webp`
 										)}
 										<div class="grid grid-cols-[auto_1fr] gap-2">
 											<img

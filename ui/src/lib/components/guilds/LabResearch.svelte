@@ -393,7 +393,7 @@
 							<div class="flex items-center space-x-2 text-sm">
 								{#if itemData}
 									{@const icon = assetLoader.loadImage(
-										`${ASSET_DATA_PATH}/img/${itemData.details.icon}.png`
+										`${ASSET_DATA_PATH}/img/${itemData.details.icon}.webp`
 									)}
 									<img
 										src={icon || staticIcons.unknownIcon}

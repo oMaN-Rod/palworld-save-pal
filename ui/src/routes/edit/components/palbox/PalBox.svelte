@@ -202,7 +202,7 @@
 			const elementData = elementsData.elements[element];
 			if (elementData) {
 				elementIcons[element] = assetLoader.loadImage(
-					`${ASSET_DATA_PATH}/img/${elementData.icon}.png`
+					`${ASSET_DATA_PATH}/img/${elementData.icon}.webp`
 				) as string;
 			}
 		}

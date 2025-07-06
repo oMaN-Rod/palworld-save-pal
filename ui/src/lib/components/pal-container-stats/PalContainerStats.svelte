@@ -35,7 +35,7 @@
 			const elementData = elements.elements[element];
 			if (elementData) {
 				icons[element] = assetLoader.loadImage(
-					`${ASSET_DATA_PATH}/img/${elementData.icon}.png`
+					`${ASSET_DATA_PATH}/img/${elementData.icon}.webp`
 				) as string;
 			}
 		}

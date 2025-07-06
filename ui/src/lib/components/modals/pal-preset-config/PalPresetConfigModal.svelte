@@ -28,7 +28,7 @@
 		if (!elementData) {
 			return '';
 		}
-		return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${elementData.badge_icon}.png`);
+		return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${elementData.badge_icon}.webp`);
 	});
 
 	function handleClose(value: any) {

@@ -15,7 +15,7 @@
 <div class="">
 	<div class="border-b-surface-600 mb-2 flex items-center border-b-2">
 		<img
-			src={assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${buildingData?.icon}.png`)}
+			src={assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${buildingData?.icon}.webp`)}
 			alt={buildingData?.localized_name}
 			class="mb-2 h-12 w-12"
 		/>
