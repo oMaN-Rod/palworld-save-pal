@@ -55,7 +55,7 @@ def cleanup_container_path(
 ) -> None:
     for root, dirs, files in os.walk(container_path, topdown=False):
         directory_name = os.path.basename(root)
-        if "_" in directory_name:
+        if root == container_path:
             continue
         should_remove = False
 
@@ -88,18 +88,23 @@ def cleanup_container_path(
         )
 
         # If no matching container found, remove directory
-        if not matching_container:
+        if not matching_container and not should_remove:
             logger.debug(
                 "No matching container found for directory: %s",
                 directory_name,
             )
-            shutil.rmtree(root)
-            continue
+            should_remove = True
 
         # Remove marked directories and their container index entries
         if should_remove:
-            logger.debug("Purging container: %s", matching_container.container_name)
-            container_index.containers.remove(matching_container)
+            logger.debug(
+                "Purging container: %s",
+                matching_container.container_name
+                if matching_container
+                else directory_name,
+            )
+            if matching_container:
+                container_index.containers.remove(matching_container)
             shutil.rmtree(root)
 
 
@@ -218,9 +223,9 @@ def copy_container(
         new_file_uuid = uuid.uuid4()
         if key == "LevelMeta":
             level_meta = SaveFile().load_level_meta(file.data)
-            level_meta.properties["SaveData"]["value"]["WorldName"][
-                "value"
-            ] = world_name
+            level_meta.properties["SaveData"]["value"]["WorldName"]["value"] = (
+                world_name
+            )
             file.data = SaveFile().sav(level_meta)
             logger.debug("Updated world name in LevelMeta: %s", world_name)
         elif "Player" in key and player_data:

@@ -192,6 +192,19 @@ class Container:
         self.mtime = mtime
         self.size = size
 
+    def __repr__(self):
+        return str(
+            {
+                "name": self.container_name,
+                "cloud_id": self.cloud_id,
+                "seq": self.seq,
+                "flag": self.flag,
+                "uuid": str(self.container_uuid),
+                "mtime": self.mtime.to_timestamp(),
+                "size": self.size,
+            }
+        )
+
     @classmethod
     def from_stream(cls, stream: BinaryIO) -> "Container":
         """Read Container from binary stream"""

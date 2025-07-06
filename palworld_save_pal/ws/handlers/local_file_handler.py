@@ -254,8 +254,9 @@ async def select_gamepass_save_handler(
     for filename in os.listdir(level_sav_dir):
         if filename.startswith("container."):
             seq = int(filename.split(".")[1])
-            logger.debug("Reading container file: %s", filename)
-            with open(os.path.join(level_sav_dir, filename), "rb") as f:
+            file_path = os.path.join(level_sav_dir, filename)
+            logger.debug("Reading level container file: %s", file_path)
+            with open(file_path, "rb") as f:
                 file_list = ContainerFileList.from_stream(f)
                 level_sav = file_list.files[0].data
 
@@ -268,8 +269,9 @@ async def select_gamepass_save_handler(
     )
     for filename in os.listdir(level_meta_dir):
         if filename.startswith("container."):
-            logger.debug("Reading container file: %s", filename)
-            with open(os.path.join(level_meta_dir, filename), "rb") as f:
+            file_path = os.path.join(level_meta_dir, filename)
+            logger.debug("Reading container file: %s", file_path)
+            with open(file_path, "rb") as f:
                 file_list = ContainerFileList.from_stream(f)
                 level_meta = file_list.files[0].data
 
@@ -287,15 +289,16 @@ async def select_gamepass_save_handler(
         )
         for filename in os.listdir(player_dir):
             if filename.startswith("container."):
+                file_path = os.path.join(player_dir, filename)
                 player_uuid = uuid.UUID(player_id)
                 if player_uuid not in player_files:
                     player_files[player_uuid] = {}
                 logger.debug(
                     "Reading container file: %s for player container %s",
-                    filename,
+                    file_path,
                     player_container.container_name,
                 )
-                with open(os.path.join(player_dir, filename), "rb") as f:
+                with open(file_path, "rb") as f:
                     file_list = ContainerFileList.from_stream(f)
                     save_type = "dps" if dps else "sav"
                     player_files[player_uuid][save_type] = file_list.files[0].data
