@@ -625,6 +625,19 @@ class PalObjects:
         }
 
     @staticmethod
+    def _set_leading_trailing_bytes(
+        dynamic_item: Dict[str, Any],
+        leading_bytes_len: int,
+        trailing_bytes_len: int,
+    ):
+        if leading_bytes_len > 0:
+            dynamic_item["RawData"]["value"]["leading_bytes"] = [0] * leading_bytes_len
+        if trailing_bytes_len > 0:
+            dynamic_item["RawData"]["value"]["trailing_bytes"] = [
+                0
+            ] * trailing_bytes_len
+
+    @staticmethod
     def DynamicItem(container_slot: ItemContainerSlotDTO) -> Dict[str, Any]:
         dynamic_item = {
             "RawData": PalObjects.ArrayProperty(
@@ -642,9 +655,8 @@ class PalObjects:
             )
         }
         match container_slot.dynamic_item.type:
-            case "weapon":
-                dynamic_item["RawData"]["value"]["leading_bytes"] = [0] * 4
-                dynamic_item["RawData"]["value"]["trailing_bytes"] = [0] * 4
+            case "weapon" | "armor":
+                PalObjects._set_leading_trailing_bytes(dynamic_item, 4, 4)
                 dynamic_item["CustomVersionData"] = PalObjects.ArrayPropertyValues(
                     ArrayType.BYTE_PROPERTY,
                     [
@@ -674,15 +686,8 @@ class PalObjects:
                         0,
                     ],
                 )
-            case "armor":
-                dynamic_item["RawData"]["value"]["trailing_bytes"] = [0] * 4
-                dynamic_item["CustomVersionData"] = PalObjects.ArrayPropertyValues(
-                    ArrayType.BYTE_PROPERTY,
-                    [0] * 4,
-                )
             case "egg":
-                dynamic_item["RawData"]["value"]["leading_bytes"] = [0] * 4
-                dynamic_item["RawData"]["value"]["trailing_bytes"] = [0] * 28
+                PalObjects._set_leading_trailing_bytes(dynamic_item, 4, 28)
                 dynamic_item["CustomVersionData"] = PalObjects.ArrayPropertyValues(
                     ArrayType.BYTE_PROPERTY,
                     [
