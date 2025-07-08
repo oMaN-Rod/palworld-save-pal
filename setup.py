@@ -51,6 +51,41 @@ if sys.platform == "win32":
     target_name = "PSP.exe"
     icon = "ui/static/favicon.ico"
     
+elif sys.platform == "darwin":
+    bdist_mac_options = {
+        "bundle_name": "Palworld Save Pal",
+        "iconfile": "ui/static/favicon.icns",
+        "plist_items": [
+            ("CFBundleShortVersionString", __version__),
+            ("CFBundleIdentifier", "com.palworldsavepal"),
+            ("NSHighResolutionCapable", True),
+        ],
+        "include_resources": [
+            ("ui_build", "ui"),
+            ("data", "data"),
+        ],
+    }
+
+    # DMG specific options
+    bdist_dmg_options = {
+        "volume_label": f"PalworldSavePal-{__version__}-macOS",
+        "format": "UDZO",
+        "filesystem": "HFS+",
+        "size": None,
+        "background": "builtin-arrow",
+        "show_status_bar": False,
+        "show_tab_view": False,
+        "show_path_bar": False,
+        "show_sidebar": False,
+        "sidebar_width": None,
+        "show_icon_preview": False,
+        "applications_shortcut": True,
+    }
+
+    base = None
+    target_name = "psp"
+    icon = "ui/static/favicon.icns"
+
 elif sys.platform.startswith("linux"):
     # Linux-specific settings
     build_exe_options["include_files"].append(("linux_scripts/debug.sh", "debug.sh"))
@@ -108,6 +143,9 @@ else:
 installer_options = {}
 if sys.platform == "win32":
     installer_options["bdist_msi"] = bdist_msi_options
+elif sys.platform == "darwin":
+    installer_options["bdist_mac"] = bdist_mac_options
+    installer_options["bdist_dmg"] = bdist_dmg_options
 elif sys.platform.startswith("linux"):
     # For Ubuntu, prioritize DEB packages but support RPM too
     try:

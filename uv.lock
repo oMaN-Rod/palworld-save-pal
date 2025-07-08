@@ -348,12 +348,15 @@ wheels = [
 
 [[package]]
 name = "palworld-save-tools"
-version = "0.23.2.dev29+gb5ccfa5"
-source = { git = "https://github.com/oMaN-Rod/palworld-save-tools.git?rev=0.6#b5ccfa527b0f8ac12db4d9a7ab444230ee30ca3c" }
+version = "0.23.2.dev42+g104fb43"
+source = { git = "https://github.com/oMaN-Rod/palworld-save-tools.git?rev=main#104fb43e79e73d4475aa428f996686cdf0e6423e" }
+dependencies = [
+    { name = "pyooz" },
+]
 
 [[package]]
 name = "palworldsavepal"
-version = "0.13.0"
+version = "0.14.0"
 source = { virtual = "." }
 dependencies = [
     { name = "altgraph" },
@@ -416,7 +419,7 @@ requires-dist = [
     { name = "ordered-set", specifier = "==4.1.0" },
     { name = "orderly-set", specifier = "==5.2.2" },
     { name = "packaging", specifier = "==25.0" },
-    { name = "palworld-save-tools", git = "https://github.com/oMaN-Rod/palworld-save-tools.git?rev=0.6" },
+    { name = "palworld-save-tools", git = "https://github.com/oMaN-Rod/palworld-save-tools.git?rev=main" },
     { name = "pefile", specifier = "==2023.2.7" },
     { name = "proxy-tools", specifier = "==0.1.0" },
     { name = "psutil", specifier = "==6.1.0" },
@@ -642,6 +645,11 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/d7/4f/194e3e7c01861a5e46dfe9e1fa28ad01fd07190cb514e41a7dcf1f0b7031/pyobjc_framework_webkit-11.1-cp314-cp314-macosx_11_0_universal2.whl", hash = "sha256:13b774d4244734cb77bf3c3648149c163f62acaa105243d7c48bb3fd856b5628", size = 52248, upload-time = "2025-06-14T20:56:30.158Z" },
     { url = "https://files.pythonhosted.org/packages/31/09/28884e7c10d3a76a76c2c8f55369dd96a90f0283800c68f5c764e1fb8e2e/pyobjc_framework_webkit-11.1-cp314-cp314t-macosx_11_0_universal2.whl", hash = "sha256:c1c00d549ab1d50e3d7e8f5f71352b999d2c32dc2365c299f317525eb9bff916", size = 52725, upload-time = "2025-06-14T20:56:30.993Z" },
 ]
+
+[[package]]
+name = "pyooz"
+version = "0.1.0"
+source = { git = "https://github.com/MRHRTZ/pyooz.git#2973bcf022269206ffd9f7741ec889013a48acbc" }
 
 [[package]]
 name = "pythonnet"
