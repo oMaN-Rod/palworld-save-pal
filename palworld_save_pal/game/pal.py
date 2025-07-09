@@ -573,6 +573,7 @@ class Pal(BaseModel):
             "work_suitability": dict,
             "nickname": str,
             "filtered_nickname": str,
+            "friendship_point": int,
         }
 
         skip_properties = {

@@ -1,9 +1,11 @@
 <script lang="ts">
-	import { staticIcons } from '$types/icons';
-	import { EntryState, type Pal, type Player } from '$types';
+	import { EntryState, type Pal } from '$types';
 	import { Tooltip, Progress } from '$components/ui';
+	import { staticIcons } from '$types/icons';
 	import { palsData } from '$lib/data';
-	import { friendshipData } from '$lib/data/friendship.svelte';
+	import { friendshipData } from '$lib/data';
+	import { getModalState, getAppState } from '$states';
+	import TrustEditModal from './TrustEditModal.svelte';
 
 	let {
 		pal = $bindable(),
@@ -31,35 +33,25 @@
 		return 150;
 	});
 
-	// Friendship data: use synchronously if loaded, otherwise trigger load
-	let trustLevel = $state(0);
-	let trustCurrent = $state(0);
-	let trustMax = $state(0);
+	const modal = getModalState();
 
-	const friendship = friendshipData.friendshipData;
-	if (pal) {
+	const levels = Object.values(friendshipData.friendshipData).sort((a, b) => b.rank - a.rank);
+	const currentLevel = $derived.by(() => {
+		if (!pal) return 0;
 		const palTrust = pal.friendship_point ?? 0;
-		let currentLevel = 0;
-		let currentMax = 0;
-		let prevRequired = 0;
-		// If not loaded, trigger load (async, will update on next render)
-		if (Object.keys(friendship).length === 0) {
-			friendshipData.getFriendshipData();
-		} else {
-			for (const [levelStr, { rank, required_point }] of Object.entries(friendship)) {
-				if (palTrust >= required_point) {
-					currentLevel = rank;
-					prevRequired = required_point;
-				} else {
-					currentMax = required_point - prevRequired;
-					break;
-				}
-			}
-			trustLevel = currentLevel;
-			trustCurrent = pal.friendship_point - prevRequired;
-			trustMax = currentMax;
-		}
-	}
+		const level = levels.find((l) => palTrust >= l.required_point)?.rank ?? 0;
+		return level;
+	});
+	const trustCurrent = $derived.by(() => {
+		if (!pal) return 0;
+		return pal.friendship_point ?? 0;
+	});
+	const nextRequired = $derived.by(() => {
+		if (!pal) return 0;
+		const palTrust = pal.friendship_point ?? 0;
+		const next = levels.find((l) => palTrust < l.required_point) || levels[levels.length - 1];
+		return next?.required_point;
+	});
 
 	function handleHeal() {
 		if (!pal) return;
@@ -74,14 +66,32 @@
 		pal.stomach = palData.max_full_stomach;
 		pal.state = EntryState.MODIFIED;
 	}
+
+	async function showTrustEditModal() {
+		if (!pal) return;
+
+		// @ts-ignore
+		const updatedFriendshipPoint = await modal.showModal<number>(TrustEditModal, {
+			pal
+		});
+
+		if (updatedFriendshipPoint) {
+			pal.friendship_point = updatedFriendshipPoint;
+			pal.state = EntryState.MODIFIED;
+		}
+	}
 </script>
 
 {#if pal}
 	<div class="mb-2 flex items-center">
-		<img src={staticIcons.hpIcon} alt="Trust" class="mr-2 h-6 w-6" />
-		<Progress value={trustCurrent} max={trustMax} height={healthHeight} color="bg-[#db7c90]" />
+		<Tooltip label="Edit Trust Level">
+			<button type="button" class="mr-2" onclick={showTrustEditModal} aria-label="Edit Trust">
+				<img src={staticIcons.hpIcon} alt="Trust" class="h-6 w-6" />
+			</button>
+		</Tooltip>
+		<Progress value={trustCurrent} max={nextRequired} height={healthHeight} color="bg-[#db7c90]" />
 		<div class="absolute right-8 flex items-center">
-			<span class="text-xs font-bold text-white">Lv.{trustLevel}</span>
+			<span class="text-xs font-bold text-white">Lv.{currentLevel}</span>
 		</div>
 	</div>
 	<div class="flex items-center">

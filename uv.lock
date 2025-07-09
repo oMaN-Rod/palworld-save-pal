@@ -348,8 +348,8 @@ wheels = [
 
 [[package]]
 name = "palworld-save-tools"
-version = "0.23.2.dev42+g104fb43"
-source = { git = "https://github.com/oMaN-Rod/palworld-save-tools.git?rev=main#104fb43e79e73d4475aa428f996686cdf0e6423e" }
+version = "0.23.2.dev43+gf9409aa"
+source = { git = "https://github.com/oMaN-Rod/palworld-save-tools.git?rev=main#f9409aa5653720fd03c48e9aa9a54dcd14f7e368" }
 dependencies = [
     { name = "pyooz" },
 ]

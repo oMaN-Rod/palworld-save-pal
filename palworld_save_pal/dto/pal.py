@@ -36,3 +36,4 @@ class PalDTO(BaseModel):
     sanity: float
     work_suitability: Dict[WorkSuitability, int]
     is_sick: bool
+    friendship_point: int
