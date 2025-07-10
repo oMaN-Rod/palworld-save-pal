@@ -1,6 +1,7 @@
 import json
 import os
 import platform
+import signal
 import traceback
 from urllib.parse import quote
 import sys
@@ -12,6 +13,7 @@ from fastapi import FastAPI, Request, WebSocket, WebSocketDisconnect
 from fastapi.responses import FileResponse, RedirectResponse
 import psutil
 import argparse
+from typing import Any
 
 from palworld_save_pal.db.bootstrap import create_db_and_tables
 from palworld_save_pal.server_thread import ServerThread
@@ -188,6 +190,7 @@ def on_closed():
     if app_state.server_instance:
         app_state.server_instance.stop()
     cleanup_processes()
+    remove_lock_file()
     logger.info("Shutdown process completed")
     sys.exit(0)
 
@@ -212,6 +215,129 @@ def set_mac_working_directory():
         os.chdir(os.path.dirname(sys.executable))
 
 
+def get_lock_file_path():
+    """Get the path for the lock file in the system temp directory."""
+    import tempfile
+
+    return Path(tempfile.gettempdir()) / "palworld_save_pal.lock"
+
+
+def is_instance_running():
+    """Check if another instance is already running."""
+    lock_file = get_lock_file_path()
+
+    # Check if lock file exists
+    if not lock_file.exists():
+        return False
+
+    try:
+        # Read PID from lock file
+        with open(lock_file, "r") as f:
+            pid = int(f.read().strip())
+
+        # Check if process with this PID is still running
+        if psutil.pid_exists(pid):
+            try:
+                process = psutil.Process(pid)
+                # Additional check: verify it's our application by checking the command line
+                cmdline = " ".join(process.cmdline())
+                if "desktop.py" in cmdline or "palworld-save-pal" in cmdline.lower():
+                    return True
+            except (psutil.NoSuchProcess, psutil.AccessDenied):
+                pass
+
+        # If we get here, the PID doesn't exist or isn't our app
+        # Remove stale lock file
+        lock_file.unlink(missing_ok=True)
+        return False
+    except (ValueError, FileNotFoundError, PermissionError):
+        # Invalid or inaccessible lock file, consider it stale
+        lock_file.unlink(missing_ok=True)
+        return False
+
+
+def create_lock_file():
+    """Create a lock file with the current process PID."""
+    lock_file = get_lock_file_path()
+    try:
+        with open(lock_file, "w") as f:
+            f.write(str(os.getpid()))
+        logger.debug("Created lock file: %s with PID: %s", lock_file, os.getpid())
+    except Exception as e:
+        logger.warning("Failed to create lock file: %s", str(e))
+
+
+def remove_lock_file():
+    """Remove the lock file."""
+    lock_file = get_lock_file_path()
+    try:
+        lock_file.unlink(missing_ok=True)
+        logger.debug("Removed lock file: %s", lock_file)
+    except Exception as e:
+        logger.warning("Failed to remove lock file: %s", str(e))
+
+
+def bring_existing_instance_to_front():
+    """Attempt to bring the existing instance to the front."""
+    try:
+        # Try to find the existing Palworld Save Pal window and bring it to front
+        for proc in psutil.process_iter(["pid", "name", "cmdline"]):
+            try:
+                cmdline = " ".join(proc.info["cmdline"] or [])
+                if (
+                    "desktop.py" in cmdline or "palworld-save-pal" in cmdline.lower()
+                ) and proc.info["pid"] != os.getpid():
+                    logger.info(
+                        "Found existing instance with PID: %s", proc.info["pid"]
+                    )
+
+                    # On Windows, try to bring window to foreground
+                    if platform.system() == "Windows":
+                        try:
+                            import win32gui
+                            import win32con
+
+                            def enum_windows_callback(hwnd, results):
+                                if win32gui.IsWindowVisible(hwnd):
+                                    window_text = win32gui.GetWindowText(hwnd)
+                                    if "Palworld Save Pal" in window_text:
+                                        results.append(hwnd)
+
+                            windows = []
+                            win32gui.EnumWindows(enum_windows_callback, windows)
+
+                            for hwnd in windows:
+                                win32gui.ShowWindow(hwnd, win32con.SW_RESTORE)
+                                win32gui.SetForegroundWindow(hwnd)
+                                logger.info("Brought existing window to foreground")
+                                break
+
+                        except ImportError:
+                            logger.debug(
+                                "win32gui not available, cannot bring window to front"
+                            )
+
+                    return True
+            except (psutil.NoSuchProcess, psutil.AccessDenied, IndexError):
+                continue
+    except Exception as e:
+        logger.warning("Error trying to bring existing instance to front: %s", str(e))
+
+    return False
+
+
+def signal_handler(signum, frame):
+    """Handle termination signals to ensure proper cleanup."""
+    logger.info("Received signal %s, initiating graceful shutdown...", signum)
+    app_state.terminate_flag.set()
+    if app_state.server_instance:
+        app_state.server_instance.stop()
+    cleanup_processes()
+    remove_lock_file()
+    logger.info("Signal handler cleanup completed")
+    sys.exit(0)
+
+
 def main():
     set_mac_working_directory()
 
@@ -229,22 +355,49 @@ def main():
         args.port,
     )
 
-    start_server(args.host, args.port, args.dev)
+    # Check for single instance
+    if is_instance_running():
+        print("Another instance of Palworld Save Pal is already running.")
 
-    time.sleep(2)
-    host = args.web_host or args.host
-    port = args.web_port or args.port
-    url = f"http://{host}:{port}"
-    start_webview(url)
+        # Try to bring the existing instance to the front
+        if bring_existing_instance_to_front():
+            print("Brought existing instance to the foreground.")
+        else:
+            print("Could not bring existing instance to the foreground.")
 
-    logger.debug("Main thread waiting for termination signal")
-    app_state.terminate_flag.wait()
+        # Exit gracefully
+        sys.exit(0)
 
-    logger.debug("Termination signal received, initiating shutdown")
-    if app_state.server_instance:
-        app_state.server_instance.stop()
-    cleanup_processes()
-    logger.info("Application shutdown complete, goodbye!")
+    # Create lock file to indicate this instance is running
+    create_lock_file()
+
+    # Register signal handlers for graceful shutdown
+    signal.signal(signal.SIGINT, signal_handler)
+    signal.signal(signal.SIGTERM, signal_handler)
+
+    # Register signal handlers for graceful shutdown
+    signal.signal(signal.SIGINT, signal_handler)
+    signal.signal(signal.SIGTERM, signal_handler)
+
+    try:
+        start_server(args.host, args.port, args.dev)
+
+        time.sleep(2)
+        host = args.web_host or args.host
+        port = args.web_port or args.port
+        url = f"http://{host}:{port}"
+        start_webview(url)
+
+        logger.debug("Main thread waiting for termination signal")
+        app_state.terminate_flag.wait()
+
+        logger.debug("Termination signal received, initiating shutdown")
+        if app_state.server_instance:
+            app_state.server_instance.stop()
+
+        logger.info("Application shutdown complete, goodbye!")
+    finally:
+        remove_lock_file()
 
 
 if __name__ == "__main__":
