@@ -488,6 +488,10 @@ export interface PalData {
 	weapon: string;
 	weapon_equip: boolean;
 	scaling: Scaling;
+	friendship_hp: number;
+	friendship_shotattack: number;
+	friendship_defense: number;
+	friendship_craftspeed: number;
 	enemy_max_hp_rate: number;
 	enemy_receive_damage_rate: number;
 	enemy_inflict_damage_rate: number;

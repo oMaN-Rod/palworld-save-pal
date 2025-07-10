@@ -1,4 +1,4 @@
-import { friendshipData, palsData, passiveSkillsData } from '$lib/data';
+import { palsData, passiveSkillsData } from '$lib/data';
 import type { Pal, Player } from '$types';
 import { EffectType, TargetType } from '$types';
 
@@ -72,66 +72,48 @@ export function getStats(pal: Pal, player: Player): PalStats | undefined {
 	}
 
 	const palData = palsData.pals[pal.character_key];
-	if (!palData || !palData.is_pal || palData.is_tower_boss || palData.is_raid_boss) {
+	if (!palData) {
+		console.log(`No pal data found for ${pal.character_key}`);
+		return;
+	}
+	if (!palData.is_pal || palData.is_tower_boss || palData.is_raid_boss) {
 		return;
 	}
 
 	const level = Math.min(player.level, pal.level);
 
-	// --- Multiplicative Bonuses ---
+	// Calculate bonuses from passive skills
 	const { attackBonus, defenseBonus, workSpeedBonus } = calculateSkillEffects(pal.passive_skills);
+
+	// Soul and condenser bonuses
 	const condenserBonus = (pal.rank - 1) * 0.05;
-	const hpIvPercent = (pal.talent_hp * 0.3) / 100;
-	const attackIvPercent = (pal.talent_shot * 0.3) / 100;
-	const defenseIvPercent = (pal.talent_defense * 0.3) / 100;
+	const hpIv = (pal.talent_hp * 0.3) / 100;
 	const hpSoulBonus = pal.rank_hp * 0.03;
-	const attackSoulBonus = pal.rank_attack * 0.03;
-	const defenseSoulBonus = pal.rank_defense * 0.03;
-
-	// --- Additive Trust Bonus ---
-	const trustLevels = Object.values(friendshipData.friendshipData).sort((a, b) => b.rank - a.rank);
-	const trustLevel =
-		trustLevels.find((l) => (pal.friendship_point ?? 0) >= l.required_point)?.rank ?? 0;
-
-	const fAtkScale = palData.scaling.attack;
-	const fHpScale = palData.scaling.hp;
-	const fDefScale = palData.scaling.defense;
-
-	// Scale IV from 0-100 to 0-1 for the trust formula
-	const ivAtk = pal.talent_shot / 100.0;
-	const ivHP = pal.talent_hp / 100.0;
-	const ivDef = pal.talent_defense / 100.0;
-
-	const trustAtk = fAtkScale * level * trustLevel * 0.1 * (0.75 + 0.25 * ivAtk);
-	const trustHP = fHpScale * level * trustLevel * 0.65 * (0.75 + 0.25 * ivHP);
-	const trustDef = fDefScale * level * trustLevel * 0.1 * (0.75 + 0.25 * ivDef);
-
-	// --- Final Stat Calculations ---
+	const hpScale = palData.scaling.hp;
 
 	// HP calculation
 	const alphaScaling = pal.is_boss || pal.is_lucky ? 1.2 : 1;
-	const baseHp = Math.floor(
-		500 + 5 * level + fHpScale * 0.5 * level * (1 + hpIvPercent) * alphaScaling
-	);
-	const multipliedHp = Math.floor(baseHp * (1 + condenserBonus) * (1 + hpSoulBonus));
-	pal.max_hp = Math.floor(multipliedHp + trustHP) * 1000;
+	const hp = Math.floor(500 + 5 * level + (hpScale * 0.5 * level * (1 + hpIv) * alphaScaling));
+	pal.max_hp = Math.floor(hp * (1 + condenserBonus) * (1 + hpSoulBonus)) * 1000;
 
 	// Attack calculation
-	const baseAttack = Math.floor(fAtkScale * 0.075 * level * (1 + attackIvPercent));
-	const multipliedAttack = Math.floor(
-		baseAttack * (1 + condenserBonus) * (1 + attackSoulBonus) * (1 + attackBonus)
-	);
-	const attack = Math.floor(multipliedAttack + trustAtk);
+	const attackIv = (pal.talent_shot * 0.3) / 100;
+	const attackSoulBonus = pal.rank_attack * 0.03;
+	const attackScale = palData.scaling.attack;
+	let attack = Math.floor(attackScale * 0.075 * level * (1 + attackIv));
+	attack = Math.floor(attack * (1 + condenserBonus) * (1 + attackSoulBonus) * (1 + attackBonus));
 
 	// Defense calculation
-	const baseDefense = Math.floor(50 + fDefScale * 0.075 * level * (1 + defenseIvPercent));
-	const multipliedDefense = Math.floor(
-		baseDefense * (1 + condenserBonus) * (1 + defenseSoulBonus) * (1 + defenseBonus)
+	const defenseIv = (pal.talent_defense * 0.3) / 100;
+	const defenseSoulBonus = pal.rank_defense * 0.03;
+	const defenseScale = palData.scaling.defense;
+	let defense = Math.floor(50 + defenseScale * 0.075 * level * (1 + defenseIv));
+	defense = Math.floor(
+		defense * (1 + condenserBonus) * (1 + defenseSoulBonus) * (1 + defenseBonus)
 	);
-	const defense = Math.floor(multipliedDefense + trustDef);
 
-	// Work speed calculation (Trust doesn't affect this)
-	const workSpeed = 70 * (1 + workSpeedBonus);
+	// Work speed calculation with base value of 70
+	let workSpeed = 70 * (1 + workSpeedBonus);
 
 	return {
 		attack,
