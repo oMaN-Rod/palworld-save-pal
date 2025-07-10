@@ -32,6 +32,7 @@
 	import { onMount } from 'svelte';
 	import { ActiveSkillOption, PassiveSkillOption, Talents } from '$components';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
+	import { getAppState } from '$states';
 
 	let {
 		title = '',
@@ -48,6 +49,8 @@
 		group: ItemGroup;
 		closeModal: (value: [string, number]) => void;
 	}>();
+
+	const appState = getAppState();
 
 	let eggConfig: EggConfig = $state({
 		character_id: '',
@@ -201,6 +204,12 @@
 
 	const cardClass = $derived(isEgg ? 'w-[1200px]' : 'w-[600px]');
 	const controlsClass = $derived(isEgg ? 'grid grid-cols-[570px_1fr] gap-2' : 'flex w-full');
+	const activeSkillAddDisabled = $derived(
+		!appState.settings.cheat_mode && eggConfig.active_skills.length >= 3
+	);
+	const passiveSkillAddDisabled = $derived(
+		!appState.settings.cheat_mode && eggConfig.passive_skills.length >= 4
+	);
 
 	function handleClose(confirmed: boolean) {
 		closeModal(confirmed ? [itemId, count, eggConfig] : undefined);
@@ -476,7 +485,7 @@
 							onChange={(value) => {
 								eggConfig.active_skills.push(value as string);
 							}}
-							disabled={eggConfig.active_skills.length >= 3}
+							disabled={activeSkillAddDisabled}
 						>
 							{#snippet selectOption(option)}
 								<ActiveSkillOption {option} />
@@ -598,7 +607,7 @@
 							options={passiveSkillOptions}
 							placeholder="Choose Passive Skills..."
 							onChange={(value) => eggConfig.passive_skills.push(value as string)}
-							disabled={eggConfig.passive_skills.length >= 4}
+							disabled={passiveSkillAddDisabled}
 						>
 							{#snippet selectOption(option)}
 								<PassiveSkillOption {option} />

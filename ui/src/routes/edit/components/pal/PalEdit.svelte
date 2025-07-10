@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { PalHeader } from '$components';
+	import { PalHeader, SkillSelectModal } from '$components';
 	import StatusBadge from '$components/badges/status-badge/StatusBadge.svelte';
 	import {
 		ActiveSkillBadge,
@@ -15,11 +15,12 @@
 	import { staticIcons } from '$types/icons';
 	import { palsData, expData, presetsData } from '$lib/data';
 	import { getAppState, getModalState } from '$states';
-	import { BicepsFlexed, Brain, Save } from 'lucide-svelte';
+	import { BicepsFlexed, Brain, Plus, Save } from 'lucide-svelte';
 	import { Souls } from '$components';
 	import SkillPresets from './SkillPresets.svelte';
 	import { assetLoader, calculateFilters } from '$utils';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
+	import MultiSkillSelectModal from '$components/modals/multi-skill-select/MultiSkillSelectModal.svelte';
 
 	const appState = getAppState();
 
@@ -170,10 +171,6 @@
 		await presetsData.addPresetProfile(newPreset);
 	}
 
-	$effect(() => {
-		calcPalLevelProgress();
-	});
-
 	function handleMaxIVs() {
 		if (appState.selectedPal) {
 			appState.selectedPal.talent_hp = max_talent;
@@ -203,6 +200,25 @@
 		}
 		appState.selectedPal.state = EntryState.MODIFIED;
 	}
+
+	async function handleAddSkill(type: 'active' | 'passive') {
+		// @ts-ignore
+		const result = await modal.showModal<string[]>(MultiSkillSelectModal, {
+			type: type === 'active' ? 'Active' : 'Passive',
+			title: `Select ${type === 'active' ? 'Active' : 'Passive'} Skill`,
+			pal: appState.selectedPal
+		});
+		if (!result) return;
+		if (type === 'active') {
+			appState.selectedPal!.active_skills.push(...result);
+		} else {
+			appState.selectedPal!.passive_skills.push(...result);
+		}
+	}
+
+	$effect(() => {
+		calcPalLevelProgress();
+	});
 </script>
 
 {#snippet activeSkillsHeader()}
@@ -231,6 +247,17 @@
 						<Save size={20} />
 					</button>
 				</Tooltip>
+				<Tooltip label="Add Active Skills">
+					<button
+						class="btn hover:bg-secondary-500/25 ml-2 p-2"
+						onclick={(event) => {
+							event.stopPropagation();
+							handleAddSkill('active');
+						}}
+					>
+						<Plus size={20} />
+					</button>
+				</Tooltip>
 			</div>
 		{/snippet}
 	</SectionHeader>
@@ -257,6 +284,17 @@
 						}}
 					>
 						<Save size={20} />
+					</button>
+				</Tooltip>
+				<Tooltip label="Add Passive Skill">
+					<button
+						class="btn hover:bg-secondary-500/25 ml-2 p-2"
+						onclick={(event) => {
+							event.stopPropagation();
+							handleAddSkill('passive');
+						}}
+					>
+						<Plus size={20} />
 					</button>
 				</Tooltip>
 			</div>

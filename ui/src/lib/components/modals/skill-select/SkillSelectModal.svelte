@@ -1,16 +1,8 @@
 <script lang="ts">
 	import { Card, Tooltip, Combobox } from '$components/ui';
-	import {
-		type ActiveSkill,
-		type Pal,
-		type PassiveSkill,
-		type SelectOption,
-		type SkillType
-	} from '$types';
-	import { Save, TimerReset, X, Delete } from 'lucide-svelte';
-	import { activeSkillsData, passiveSkillsData, elementsData } from '$lib/data';
-	import { ASSET_DATA_PATH } from '$lib/constants';
-	import { assetLoader, calculateFilters } from '$utils';
+	import { type Pal, type SelectOption, type SkillType } from '$types';
+	import { Save, X, Delete } from 'lucide-svelte';
+	import { activeSkillsData, passiveSkillsData } from '$lib/data';
 	import { ActiveSkillOption, PassiveSkillOption } from '$components';
 
 	let {
