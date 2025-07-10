@@ -1114,6 +1114,9 @@ class SaveFile(BaseModel):
         host_fix_players = {}
 
         for uid, sav_files in player_sav_files.items():
+            if "sav" not in sav_files or sav_files["sav"] is None:
+                logger.warning("No save file found for player %s", uid)
+                continue
             raw_gvas, _ = decompress_sav_to_gvas(sav_files["sav"])
             await ws_callback(f"Loading player {uid}...")
             gvas_file = GvasFile.read(
