@@ -55,6 +55,8 @@ class MessageType(str, Enum):
     DELETE_PRESET = "delete_preset"
     GET_PRESETS = "get_presets"
     UPDATE_PRESET = "update_preset"
+    EXPORT_PRESET = "export_preset"
+    IMPORT_PRESET = "import_preset"
 
     # Guild Management
     DELETE_GUILD = "delete_guild"
@@ -373,3 +375,18 @@ class UpdateLabResearchData(BaseModel):
 class UpdateLabResearchMessage(BaseMessage):
     type: str = MessageType.UPDATE_LAB_RESEARCH.value
     data: UpdateLabResearchData
+
+
+class ExportPresetData(BaseModel):
+    preset_id: str
+    preset_type: str
+    preset_name: str
+
+
+class ExportPresetMessage(BaseMessage):
+    type: str = MessageType.EXPORT_PRESET.value
+    data: ExportPresetData
+
+
+class ImportPresetMessage(BaseMessage):
+    type: str = MessageType.IMPORT_PRESET.value

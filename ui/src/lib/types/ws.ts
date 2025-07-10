@@ -51,6 +51,8 @@ export enum MessageType {
 	DELETE_GUILD = 'delete_guild',
 	DELETE_PLAYER = 'delete_player',
 	NUKE_PRESETS = 'nuke_presets',
+	EXPORT_PRESET = 'export_preset',
+	IMPORT_PRESET = 'import_preset',
 	GET_LAB_RESEARCH = 'get_lab_research',
 	UPDATE_LAB_RESEARCH = 'update_lab_research'
 }

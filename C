@@ -1,0 +1,47 @@
+{
+  "common_container": null,
+  "weapon_load_out_container": null,
+  "player_equipment_armor_container": null,
+  "storage_container": null,
+  "skills": null,
+  "id": "a5a112cb-6c6c-4f36-8532-1f6f033302a2",
+  "type": "pal_preset",
+  "name": "Fire",
+  "essential_container": null,
+  "food_equip_container": null,
+  "pal_preset_id": "3501d1de-bbf0-40c6-860f-c4d80ac764d9",
+  "pal_preset": {
+    "rank_defense": 20,
+    "learned_skills": [],
+    "character_id": "Kitsunebi",
+    "rank_craftspeed": 20,
+    "active_skills": [
+      "EPalWazaID::FireBall",
+      "EPalWazaID::FlareTwister",
+      "EPalWazaID::Eruption"
+    ],
+    "lock_element": false,
+    "lock": false,
+    "is_lucky": false,
+    "talent_hp": 100,
+    "passive_skills": [
+      "Noukin",
+      "PAL_ALLAttack_up2",
+      "Rare",
+      "Legend"
+    ],
+    "is_boss": true,
+    "talent_shot": 100,
+    "gender": "Female",
+    "talent_defense": 100,
+    "sanity": 100.0,
+    "rank": 5,
+    "element": "Fire",
+    "id": "3501d1de-bbf0-40c6-860f-c4d80ac764d9",
+    "rank_hp": 20,
+    "level": 60,
+    "work_suitability": null,
+    "rank_attack": 20,
+    "exp": 16625481
+  }
+}

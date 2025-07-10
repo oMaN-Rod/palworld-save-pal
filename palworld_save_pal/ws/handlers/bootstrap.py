@@ -35,6 +35,7 @@ from palworld_save_pal.ws.messages import (
     DeleteDpsPalsMessage,
     DeleteGuildMessage,
     DeletePlayerMessage,
+    ExportPresetMessage,
     GetActiveSkillsMessage,
     GetBuildingsMessage,
     GetElementsMessage,
@@ -49,6 +50,7 @@ from palworld_save_pal.ws.messages import (
     GetWorkSuitabilityMessage,
     HealAllPalsMessage,
     HealPalsMessage,
+    ImportPresetMessage,
     MessageType,
     MovePalMessage,
     NukePresetsMessage,
@@ -199,6 +201,22 @@ def bootstrap(dispatcher: "MessageDispatcher"):
         {
             "message_class": NukePresetsMessage,
             "handler_func": preset_handler.nuke_presets_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.EXPORT_PRESET.value,
+        {
+            "message_class": ExportPresetMessage,
+            "handler_func": preset_handler.export_preset_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.IMPORT_PRESET.value,
+        {
+            "message_class": ImportPresetMessage,
+            "handler_func": preset_handler.import_preset_handler,
         },
     )
 

@@ -15,7 +15,8 @@ function isValidPath(path: string) {
 		'error',
 		'browser',
 		'about',
-		'upload'
+		'upload',
+		'presets'
 	].includes(path);
 }
 

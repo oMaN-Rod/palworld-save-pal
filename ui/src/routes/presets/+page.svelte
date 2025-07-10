@@ -3,7 +3,7 @@
 	import { Card, List, TooltipButton, Input, Tooltip } from '$components/ui';
 	import { getModalState, getToastState } from '$states';
 	import { debounce } from '$utils';
-	import { Trash, RefreshCcw } from 'lucide-svelte';
+	import { Trash, RefreshCcw, Download, Upload } from 'lucide-svelte';
 	import { cn } from '$theme';
 	import { MessageType, type PresetProfile } from '$types';
 	import { staticIcons } from '$types/icons';
@@ -168,6 +168,14 @@
 		await sendAndWait(MessageType.NUKE_PRESETS);
 		presetsData.reset();
 	}
+
+	async function handleExportPreset(preset: ExtendedPresetProfile) {
+		await presetsData.exportPreset(preset.id, activeTab, preset.name);
+	}
+
+	async function handleImportPreset() {
+		await presetsData.importPreset();
+	}
 </script>
 
 {#snippet tabButton(tab: PresetType)}
@@ -238,6 +246,14 @@
 
 			<div class="btn-group bg-surface-900 w-full items-center rounded-sm p-1">
 				<TooltipButton
+					popupLabel="Import preset from file"
+					onclick={handleImportPreset}
+					buttonClass="hover:bg-success-500/50"
+				>
+					<Upload size={20} />
+				</TooltipButton>
+
+				<TooltipButton
 					popupLabel="Delete selected preset(s)"
 					onclick={handleDeletePresets}
 					buttonClass="hover:bg-error-500/50"
@@ -262,6 +278,13 @@
 					<span class="grow">{preset.name}</span>
 				{/snippet}
 				{#snippet listItemActions(preset)}
+					<TooltipButton
+						popupLabel="Export preset to file"
+						onclick={() => handleExportPreset(preset)}
+						buttonClass="hover:bg-primary-500/25 p-2"
+					>
+						<Download size={16} />
+					</TooltipButton>
 					<button class="btn hover:bg-error-500/25 p-2" onclick={() => handleDeletePreset(preset)}>
 						<Trash size={16} />
 					</button>

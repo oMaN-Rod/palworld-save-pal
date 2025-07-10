@@ -87,6 +87,18 @@ class Presets {
 		this.presetProfiles = {};
 		return this.getPresetProfiles();
 	}
+
+	async exportPreset(presetId: string, presetType: string, presetName: string): Promise<void> {
+		await send(MessageType.EXPORT_PRESET, {
+			preset_id: presetId,
+			preset_type: presetType,
+			preset_name: presetName
+		});
+	}
+
+	async importPreset(): Promise<void> {
+		await send(MessageType.IMPORT_PRESET, {});
+	}
 }
 
 export const presetsData = new Presets();
