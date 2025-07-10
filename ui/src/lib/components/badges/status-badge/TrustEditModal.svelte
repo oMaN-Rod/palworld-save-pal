@@ -51,7 +51,7 @@
 	initializeTrust();
 </script>
 
-<Card class="bg-surface-800 min-w-[min(100vw,24rem)] rounded-xl p-6 text-white shadow-lg">
+<Card class="min-w-[min(100vw,24rem)] rounded-xl p-6 text-white shadow-lg">
 	<h3 class="mb-6 text-lg font-semibold">Edit Trust</h3>
 
 	<div class="space-y-6">

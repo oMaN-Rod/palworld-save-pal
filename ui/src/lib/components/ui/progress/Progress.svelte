@@ -10,6 +10,7 @@
 		color = 'bg-[#34f1fd]',
 		dividend = 1,
 		showLabel = true,
+		trailingLabel,
 		...additionalProps
 	} = $props<{
 		value: number;
@@ -20,6 +21,7 @@
 		color?: string;
 		dividend?: number;
 		showLabel?: boolean;
+		trailingLabel?: string;
 		[key: string]: any;
 	}>();
 
@@ -66,7 +68,7 @@
 </script>
 
 <Tooltip baseClass="w-full">
-	<div class={cn('bg-surface-800', height, rounded)} {...additionalProps}>
+	<div class={cn('bg-surface-800 flex', height, rounded)} {...additionalProps}>
 		<div
 			class={cn(
 				'flex h-full items-center overflow-visible whitespace-nowrap pl-1 text-start align-middle text-sm font-bold transition-all',
@@ -76,9 +78,14 @@
 			style={`width: ${progressPercentage}%`}
 		>
 			{#if showLabel}
-				{value.toFixed(0) / dividend} / {max / dividend}
+				<span class="grow">{value.toFixed(0) / dividend} / {max / dividend}</span>
 			{/if}
 		</div>
+		{#if trailingLabel}
+			<span class="ml-auto flex items-center pr-2 text-end text-xs font-bold text-white"
+				>{trailingLabel}</span
+			>
+		{/if}
 	</div>
 	{#snippet popup()}
 		<span>{value.toFixed(0) / dividend} / {max / dividend} ({progressPercentage.toFixed(1)}%)</span>

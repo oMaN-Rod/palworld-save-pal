@@ -4,7 +4,7 @@
 	import { staticIcons } from '$types/icons';
 	import { palsData } from '$lib/data';
 	import { friendshipData } from '$lib/data';
-	import { getModalState, getAppState } from '$states';
+	import { getModalState } from '$states';
 	import TrustEditModal from './TrustEditModal.svelte';
 
 	let {
@@ -36,21 +36,17 @@
 	const modal = getModalState();
 
 	const levels = Object.values(friendshipData.friendshipData).sort((a, b) => b.rank - a.rank);
+	const levelsAsc = Object.values(friendshipData.friendshipData).sort((a, b) => a.rank - b.rank);
+	const trustCurrent = $derived(pal?.friendship_point ?? 0);
 	const currentLevel = $derived.by(() => {
 		if (!pal) return 0;
-		const palTrust = pal.friendship_point ?? 0;
-		const level = levels.find((l) => palTrust >= l.required_point)?.rank ?? 0;
+		const level = levels.find((l) => trustCurrent >= l.required_point)?.rank ?? 0;
 		return level;
-	});
-	const trustCurrent = $derived.by(() => {
-		if (!pal) return 0;
-		return pal.friendship_point ?? 0;
 	});
 	const nextRequired = $derived.by(() => {
 		if (!pal) return 0;
-		const palTrust = pal.friendship_point ?? 0;
-		const next = levels.find((l) => palTrust < l.required_point) || levels[levels.length - 1];
-		return next?.required_point;
+		const next = levelsAsc.find((l) => trustCurrent < l.required_point);
+		return next?.required_point ?? 200000; // Max level reached
 	});
 
 	function handleHeal() {
@@ -84,15 +80,20 @@
 
 {#if pal}
 	<div class="mb-2 flex items-center">
-		<Tooltip label="Edit Trust Level">
-			<button type="button" class="mr-2" onclick={showTrustEditModal} aria-label="Edit Trust">
-				<img src={staticIcons.hpIcon} alt="Trust" class="h-6 w-6" />
-			</button>
-		</Tooltip>
-		<Progress value={trustCurrent} max={nextRequired} height={healthHeight} color="bg-[#db7c90]" />
-		<div class="absolute right-8 flex items-center">
-			<span class="text-xs font-bold text-white">Lv.{currentLevel}</span>
-		</div>
+		{#if showActions}
+			<Tooltip label="Edit Trust Level">
+				<button type="button" class="mr-2" onclick={showTrustEditModal} aria-label="Edit Trust">
+					<img src={staticIcons.trustIcon} alt="Trust" class="h-6 w-6" />
+				</button>
+			</Tooltip>
+		{/if}
+		<Progress
+			value={trustCurrent}
+			max={nextRequired}
+			height={healthHeight}
+			trailingLabel={`Lv.${currentLevel}`}
+			color="bg-[#db7c90]"
+		/>
 	</div>
 	<div class="flex items-center">
 		{#if showActions}

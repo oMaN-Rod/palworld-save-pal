@@ -56,7 +56,9 @@
 	});
 	const palLevelMessage = $derived.by(() => {
 		if (appState.selectedPlayer && pal) {
-			return appState.selectedPlayer.level < pal.level ? 'Level sync' : 'No Level Sync';
+			return appState.selectedPlayer.level < pal.level
+				? `Level sync ${pal.level} 🡆 ${appState.selectedPlayer.level}`
+				: 'No Level Sync';
 		}
 	});
 	const palRank = $derived(pal ? pal.rank - 1 : 0);
@@ -294,7 +296,7 @@
 		<div class="mr-4 flex flex-col items-center justify-center rounded-none">
 			{#if appState.settings.cheat_mode}
 				<Input
-					value={pal.rank}
+					value={palRank}
 					placeholder="Rank"
 					type="number"
 					itemClasses="text-gray"
@@ -324,6 +326,10 @@
 							<Minus class="text-primary-500" />
 						</button>
 						{#snippet popup()}
+							<div class="flex gap-2">
+								<span>Lvl</span>
+								<NumberFlow value={pal.level} />
+							</div>
 							<div class="flex items-center space-x-2">
 								<div class="h-6 w-6">
 									<img src={staticIcons.ctrlIcon} alt="Control" class="h-full w-full" />
@@ -377,6 +383,10 @@
 							<Plus class="text-primary-500" />
 						</button>
 						{#snippet popup()}
+							<div class="flex gap-2">
+								<span>Lvl</span>
+								<NumberFlow value={pal.level} />
+							</div>
 							<div class="flex items-center space-x-2">
 								<div class="h-6 w-6">
 									<img src={staticIcons.ctrlIcon} alt="Control" class="h-full w-full" />

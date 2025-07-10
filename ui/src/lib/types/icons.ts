@@ -28,5 +28,7 @@ export const staticIcons = {
 	altarIcon: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/altar.webp`),
 	luckyIcon: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/lucky.webp`),
 	pspWhite: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/app/psp_white.webp`),
-	lamball: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/sheepball.webp`)
+	lamball: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/sheepball.webp`),
+	trustIcon: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_icon_palfriendship.webp`),
+	trustIconColor: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_icon_palfriendship_color.webp`)
 };

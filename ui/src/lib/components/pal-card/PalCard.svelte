@@ -43,6 +43,11 @@
 	);
 	const sickClass = $derived(pal && pal.is_sick ? 'animate-pulse ring-4 ring-red-500' : '');
 	const palData = $derived(palsData.pals[pal.character_key]);
+	const levelSyncTxt = $derived(
+		appState.selectedPlayer!.level < pal.level
+			? `Level sync ${pal.level} 🡆 ${appState.selectedPlayer!.level}`
+			: 'No Level Sync'
+	);
 
 	const menuItems = $derived.by(() => {
 		if (!pal || pal.character_id === 'None') {
@@ -103,10 +108,16 @@
 				<div class={cn('grid grid-cols-[1fr_auto] overflow-hidden', sickClass)}>
 					<div class="ml-4 flex flex-col">
 						<div class="flex space-x-2">
-							<div class="flex items-end space-x-0.5">
-								<span class="text-xs"> LV </span>
-								<span class="text-lg font-bold">{pal.level}</span>
-							</div>
+							<Tooltip label={levelSyncTxt}>
+								<div class="flex items-end space-x-0.5">
+									<span class="text-xs"> LV </span>
+									<span class="text-lg font-bold">
+										{pal.level < appState.selectedPlayer!.level
+											? pal.level
+											: appState.selectedPlayer!.level}
+									</span>
+								</div>
+							</Tooltip>
 							<span class="text-lg font-bold">{pal.name}</span>
 							<div class="h-4 w-4 2xl:h-6 2xl:w-6">
 								<img src={genderIcon} alt={pal.gender} />
@@ -140,7 +151,7 @@
 					</div>
 					<div class="flex flex-col">
 						<div class={cn('relative flex items-center justify-center ')}>
-							<img src={palIcon} alt={pal.name} class="2xl:h-18 2xl:w-18 h-16 w-16" />
+							<img src={palIcon} alt={pal.name} class="h-20 w-20 2xl:h-24 2xl:w-24" />
 						</div>
 					</div>
 				</div>
