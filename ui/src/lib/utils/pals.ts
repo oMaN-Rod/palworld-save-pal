@@ -82,6 +82,7 @@ export async function handleMaxOutPal(pal: Pal, player: Player): Promise<void> {
 	} else {
 		pal.stomach = 150;
 	}
+	pal.friendship_point = 200000
 }
 
 export const applyPalPreset = (pal: Pal, presetProfile: PresetProfile, player: Player): void => {

@@ -6,8 +6,8 @@
 	import { getModalState } from '$states';
 	import { EntryState } from '$types';
 	import { deepCopy } from '$utils';
-	import { Edit, PaintBucket, Play, Plus, Trash, X } from 'lucide-svelte';
-	import { ItemSelectModal } from '$components/modals';
+	import { Edit, PaintBucket, Play, Plus, Trash, X, Hash, ChevronsLeftRight, PackagePlus } from 'lucide-svelte';
+	import { ItemSelectModal, NumberInputModal } from '$components/modals';
 
 	let { container, onUpdate } = $props<{
 		container: ItemContainer & { slots: ItemContainerSlot[] };
@@ -128,6 +128,7 @@
 			slot.static_id = static_id;
 			slot.count = count;
 			if (itemData.details.dynamic) {
+				// @ts-ignore
 				slot.dynamic_item = {
 					local_id: '00000000-0000-0000-0000-000000000000',
 					durability: itemData.details.dynamic.durability || 0,
@@ -140,6 +141,34 @@
 		});
 		container.state = EntryState.MODIFIED;
 	}
+
+	async function handleSetContainerCount() {
+		// @ts-ignore
+		const result = await modal.showModal<number>(NumberInputModal, {
+			title: 'Enter Item Count',
+			value: '',
+			min: 0,
+			max: 9999
+		});
+		if (!result) return;
+
+		container.slots.forEach((slot: ItemContainerSlot) => {
+			if (slot.static_id === 'None') return;
+			slot.count = result;
+		});
+		container.state = EntryState.MODIFIED;
+	}
+
+	function handleClearContainer() {
+		container.slots.forEach((slot: ItemContainerSlot) => {
+			slot.dynamic_item = undefined;
+			slot.static_id = 'None';
+			slot.count = 0;
+			// @ts-ignore
+			slot.local_id = '00000000-0000-0000-0000-000000000000';
+		});
+		container.state = EntryState.MODIFIED;
+	}
 </script>
 
 <div class="flex min-w-64 max-w-96 flex-col space-y-2">
@@ -149,6 +178,12 @@
 		</TooltipButton>
 		<TooltipButton onclick={handleFillContainer} popupLabel="Fill current container">
 			<PaintBucket />
+		</TooltipButton>
+		<TooltipButton onclick={handleSetContainerCount} popupLabel="Set container item count">
+			<Hash />
+		</TooltipButton>
+		<TooltipButton onclick={handleClearContainer} popupLabel="Clear container">
+			<ChevronsLeftRight />
 		</TooltipButton>
 		{#if selectedPresets.length === 1}
 			<TooltipButton onclick={handleApplyPreset} popupLabel="Apply selected preset">
