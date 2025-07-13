@@ -112,31 +112,37 @@
 	});
 
 	const gearToAdd = $derived.by(() => {
-			return Object.values(itemsData.items)
-				.filter((item) => {
-					// @ts-ignore
-					return item.details.type_b === 'Essential_PalGear' && item.details.rarity !== 99;
-				})
-				.sort((a, b) => (a.details.sort_id || Infinity) - (b.details.sort_id || Infinity));
-		});
+		return Object.values(itemsData.items)
+			.filter((item) => {
+				// @ts-ignore
+				return item.details.type_b === 'Essential_PalGear' && !item.details.disabled;
+			})
+			.sort((a, b) => (a.details.sort_id || Infinity) - (b.details.sort_id || Infinity));
+	});
 
 	const implantsToAdd = $derived.by(() => {
-			return Object.values(itemsData.items)
-				.filter((item) => {
-					// @ts-ignore
-					return item.id.includes('PalPassiveSkillChange');
-				})
-				.sort((a, b) => (a.details.sort_id || Infinity) - (b.details.sort_id || Infinity));
-		});
+		return Object.values(itemsData.items)
+			.filter((item) => {
+				// @ts-ignore
+				return item.id.includes('PalPassiveSkillChange');
+			})
+			.sort((a, b) => (a.details.sort_id || Infinity) - (b.details.sort_id || Infinity));
+	});
 
 	const miscKeysToAdd = $derived.by(() => {
-			return Object.values(itemsData.items)
-				.filter((item) => {
-					// @ts-ignore
-					return !item.id.includes('PalPassiveSkillChange') && item.details.type_b !== 'Essential_PalGear' && item.details.type_a === 'Essential' && !item.id.includes('BossDefeatReward') && item.id !== ('Relic');
-				})
-				.sort((a, b) => (a.details.sort_id || Infinity) - (b.details.sort_id || Infinity));
-		});
+		return Object.values(itemsData.items)
+			.filter((item) => {
+				// @ts-ignore
+				return (
+					!item.id.includes('PalPassiveSkillChange') &&
+					item.details.type_b !== 'Essential_PalGear' &&
+					item.details.type_a === 'Essential' &&
+					!item.id.includes('BossDefeatReward') &&
+					item.id !== 'Relic'
+				);
+			})
+			.sort((a, b) => (a.details.sort_id || Infinity) - (b.details.sort_id || Infinity));
+	});
 
 	async function getItemIcon(staticId: string) {
 		if (!staticId || staticId === 'None') return;
@@ -256,7 +262,6 @@
 	}
 
 	function fillEssentialContainer(itemList: any[]) {
-
 		const existingKeyItems = new Set(
 			Object.values(essentialContainer.slots)
 				.filter((slot: ItemContainerSlot) => slot.static_id !== 'None')
@@ -267,10 +272,7 @@
 		for (const slot of Object.values(essentialContainer.slots) as ItemContainerSlot[]) {
 			if (slot.static_id !== 'None') continue;
 
-			while (
-				itemIndex < itemList.length &&
-				existingKeyItems.has(itemList[itemIndex].id)
-			) {
+			while (itemIndex < itemList.length && existingKeyItems.has(itemList[itemIndex].id)) {
 				itemIndex++;
 			}
 			if (itemIndex >= itemList.length) break;
@@ -593,11 +595,10 @@
 			<div class="grid w-full grid-cols-[auto_1fr] gap-4 pr-[420px]">
 				<!-- Inventory -->
 				<div class="flex flex-col space-y-2">
-					
-						<nav
-							class="btn-group preset-outlined-surface-200-800 w-full flex-col rounded-sm p-2 md:flex-row justify-center items-center"
-						>
-						{#if group === "inventory"}
+					<nav
+						class="btn-group preset-outlined-surface-200-800 w-full flex-col items-center justify-center rounded-sm p-2 md:flex-row"
+					>
+						{#if group === 'inventory'}
 							<Tooltip label="Sort Inventory">
 								<button
 									class="hover:bg-secondary-500/50 btn rounded-sm"
@@ -635,7 +636,7 @@
 							<Tooltip label="Add All Pal Gear">
 								<button
 									class="hover:bg-secondary-500/50 btn rounded-sm"
-									onclick={event => setEssentialList('gear')}
+									onclick={() => setEssentialList('gear')}
 								>
 									<PawPrint class="h-4 w-4 xl:h-6 xl:w-11" />
 								</button>
@@ -643,7 +644,7 @@
 							<Tooltip label="Add All Implants">
 								<button
 									class="hover:bg-secondary-500/50 btn rounded-sm"
-									onclick={event => setEssentialList('implants')}
+									onclick={() => setEssentialList('implants')}
 								>
 									<Activity class="h-4 w-4 xl:h-6 xl:w-11" />
 								</button>
@@ -651,7 +652,7 @@
 							<Tooltip label="Add Other Key Items">
 								<button
 									class="hover:bg-secondary-500/50 btn rounded-sm"
-									onclick={event => setEssentialList('misc')}
+									onclick={() => setEssentialList('misc')}
 								>
 									<Key class="h-4 w-4 xl:h-6 xl:w-11" />
 								</button>
@@ -737,7 +738,7 @@
 				<div class="flex h-[600px] flex-col 2xl:grid 2xl:grid-cols-[auto_1fr_auto]">
 					<div class="flex flex-col space-y-2">
 						<nav
-							class="btn-group preset-outlined-surface-200-800 w-full flex-col rounded-sm p-2 md:flex-row justify-center items-center"
+							class="btn-group preset-outlined-surface-200-800 w-full flex-col items-center justify-center rounded-sm p-2 md:flex-row"
 						>
 							<Tooltip label="Clear Weapons">
 								<button
