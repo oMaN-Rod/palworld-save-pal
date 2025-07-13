@@ -1,156 +1,154 @@
 <script lang="ts">
   import { invoke } from "@tauri-apps/api/core";
+  import { listen } from "@tauri-apps/api/event";
+  import { onMount } from "svelte";
+  import { Button } from "$lib/components/ui/button";
 
-  let name = $state("");
-  let greetMsg = $state("");
+  type Pal = {
+    instance_id: string;
+    character_id: string;
+    nickname: string | null;
+    level: number;
+  };
 
-  async function greet(event: Event) {
-    event.preventDefault();
-    // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
-    greetMsg = await invoke("greet", { name });
+  type Player = {
+    uid: string;
+    nickname: string;
+    level: number;
+    pals: Pal[];
+  };
+
+  let players = $state<Player[]>([]);
+  let statusMessage = $state(
+    "No save file loaded. Click the button to load mock data."
+  );
+  let isLoading = $state(false);
+
+  async function selectAndLoadFile() {
+    isLoading = true;
+    statusMessage = "Loading save file...";
+    try {
+      // NOTE: For testing, we pass a dummy path. The backend uses mock data anyway.
+      await invoke("load_save_file", { path: "C:/dummy/path/Level.sav" });
+    } catch (e) {
+      statusMessage = `Error: ${e}`;
+      isLoading = false;
+    }
   }
+
+  async function fetchPlayers() {
+    try {
+      const response = await invoke("graphql", {
+        query:
+          "{ players { uid nickname level pals { instanceId characterId nickname level } } }",
+        operationName: null,
+        variables: null,
+      });
+
+      // The graphql response nests the data, so we extract it.
+      if (response.data && response.data.players) {
+        players = response.data.players;
+        statusMessage = `Successfully loaded ${players.length} players.`;
+      } else {
+        throw new Error("Invalid GraphQL response structure");
+      }
+    } catch (e) {
+      statusMessage = `GraphQL Error: ${e}`;
+    } finally {
+      isLoading = false;
+    }
+  }
+
+  onMount(() => {
+    // Listen for the "save-loaded" event from the Rust backend
+    const unlisten = listen("save-loaded", (event) => {
+      console.log("Received 'save-loaded' event:", event);
+      statusMessage = "Save loaded in backend! Fetching data from GraphQL...";
+      fetchPlayers();
+    });
+
+    // Cleanup listener when component is destroyed
+    return () => {
+      unlisten.then((f) => f());
+    };
+  });
 </script>
 
-<main class="container">
-  <h1>Welcome to Tauri + Svelte</h1>
+<div class="container mx-auto">
+  <header class="mb-8">
+    <h1 class="text-3xl font-bold text-lightest-slate">Save File Dashboard</h1>
+    <p class="text-slate">{statusMessage}</p>
+  </header>
 
-  <div class="row">
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo vite" alt="Vite Logo" />
-    </a>
-    <a href="https://tauri.app" target="_blank">
-      <img src="/tauri.svg" class="logo tauri" alt="Tauri Logo" />
-    </a>
-    <a href="https://kit.svelte.dev" target="_blank">
-      <img src="/svelte.svg" class="logo svelte-kit" alt="SvelteKit Logo" />
-    </a>
+  <div class="mb-8">
+    <Button onclick={selectAndLoadFile} disabled={isLoading}>
+      {#if isLoading}
+        <svg
+          class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <circle
+            class="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            stroke-width="4"
+          ></circle>
+          <path
+            class="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+          ></path>
+        </svg>
+        Loading...
+      {:else}
+        Load Mock Save File
+      {/if}
+    </Button>
   </div>
-  <p>Click on the Tauri, Vite, and SvelteKit logos to learn more.</p>
 
-  <form class="row" onsubmit={greet}>
-    <input id="greet-input" placeholder="Enter a name..." bind:value={name} />
-    <button type="submit">Greet</button>
-  </form>
-  <p>{greetMsg}</p>
-</main>
+  {#if players.length > 0}
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+      {#each players as player (player.uid)}
+        <div class="bg-light-navy border p-6 rounded-lg shadow-lg">
+          <div class="flex justify-between items-start">
+            <div>
+              <h2 class="text-xl font-semibold text-green">
+                {player.nickname}
+              </h2>
+              <p class="text-xs text-slate font-mono mb-4">UID: {player.uid}</p>
+            </div>
+            <span
+              class="text-lightest-slate font-bold bg-lightest-navy px-3 py-1 rounded-full text-sm"
+            >
+              Lvl {player.level}
+            </span>
+          </div>
 
-<style>
-.logo.vite:hover {
-  filter: drop-shadow(0 0 2em #747bff);
-}
-
-.logo.svelte-kit:hover {
-  filter: drop-shadow(0 0 2em #ff3e00);
-}
-
-:root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 400;
-
-  color: #0f0f0f;
-  background-color: #f6f6f6;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-}
-
-.container {
-  margin: 0;
-  padding-top: 10vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: 0.75s;
-}
-
-.logo.tauri:hover {
-  filter: drop-shadow(0 0 2em #24c8db);
-}
-
-.row {
-  display: flex;
-  justify-content: center;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-
-a:hover {
-  color: #535bf2;
-}
-
-h1 {
-  text-align: center;
-}
-
-input,
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  color: #0f0f0f;
-  background-color: #ffffff;
-  transition: border-color 0.25s;
-  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
-}
-
-button {
-  cursor: pointer;
-}
-
-button:hover {
-  border-color: #396cd8;
-}
-button:active {
-  border-color: #396cd8;
-  background-color: #e8e8e8;
-}
-
-input,
-button {
-  outline: none;
-}
-
-#greet-input {
-  margin-right: 5px;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    color: #f6f6f6;
-    background-color: #2f2f2f;
-  }
-
-  a:hover {
-    color: #24c8db;
-  }
-
-  input,
-  button {
-    color: #ffffff;
-    background-color: #0f0f0f98;
-  }
-  button:active {
-    background-color: #0f0f0f69;
-  }
-}
-
-</style>
+          <h3 class="font-bold text-light-slate mt-4 mb-2 pt-4">Pals:</h3>
+          {#if player.pals.length > 0}
+            <ul class="space-y-2">
+              {#each player.pals as pal (pal.instance_id)}
+                <li
+                  class="flex items-center justify-between p-2 rounded-md hover:bg-lightest-navy/50 transition-colors"
+                >
+                  <span class="font-semibold text-light-slate">
+                    {pal.nickname
+                      ? `${pal.nickname} (${pal.character_id})`
+                      : pal.character_id}
+                  </span>
+                  <span class="text-slate">Lvl {pal.level}</span>
+                </li>
+              {/each}
+            </ul>
+          {:else}
+            <p class="text-slate italic">No pals found for this player.</p>
+          {/if}
+        </div>
+      {/each}
+    </div>
+  {/if}
+</div>
