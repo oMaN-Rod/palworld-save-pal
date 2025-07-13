@@ -687,6 +687,16 @@
 					{formatTabTitle(key as RawDataType)}
 				</Tabs.Control>
 			{/each}
+			<Tooltip baseClass="text-end m-auto flex items-center">
+				<span class=" text-red-500">READ ONLY ⚠️</span>
+				{#snippet popup()}
+					<div class="flex flex-col">
+						<span>This data is read-only for the moment.</span>
+						<span>To modify data, use the appropriate in-app features.</span>
+						<span>Writing is in the roadmap, stay tuned!</span>
+					</div>
+				{/snippet}
+			</Tooltip>
 		{/snippet}
 		{#snippet content()}
 			{#each Object.keys(jsons) as key}
