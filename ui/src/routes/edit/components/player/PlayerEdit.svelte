@@ -90,12 +90,12 @@
 
 	let { levelProgressToNext, levelProgressValue, levelProgressMax } = $derived.by(() => {
 		if (appState.selectedPlayer) {
-			if (appState.selectedPlayer.level === max_level) {
+			if (appState.selectedPlayer.level >= max_level) {
 				return { levelProgressToNext: 0, levelProgressValue: 0, levelProgressMax: 1 };
 			}
 			const nextExp = expData.expData[appState.selectedPlayer.level + 1];
 			return {
-				levelProgressToNext: nextExp.TotalEXP - appState.selectedPlayer.exp,
+				levelProgressToNext: nextExp.TotalEXP - appState.selectedPlayer.exp || 0,
 				levelProgressValue: nextExp.NextEXP - (nextExp.TotalEXP - appState.selectedPlayer.exp),
 				levelProgressMax: nextExp.NextEXP
 			};
