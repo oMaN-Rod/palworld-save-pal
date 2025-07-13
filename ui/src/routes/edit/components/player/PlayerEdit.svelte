@@ -11,7 +11,9 @@
 		PlayerPresets,
 		PlayerStats,
 		PlayerHealthBadge,
-		TextInputModal
+		TextInputModal,
+		NumberInputModal,
+		ItemSelectModal
 	} from '$components';
 	import {
 		Bomb,
@@ -23,7 +25,13 @@
 		ArrowUp01,
 		Minus,
 		Plus,
-		Edit
+		Edit,
+		Hash,
+		PackagePlus,
+		PaintBucket,
+		PawPrint,
+		Activity,
+		Coins
 	} from 'lucide-svelte';
 	import { assetLoader } from '$utils';
 	import { staticIcons } from '$types/icons';
@@ -103,6 +111,33 @@
 		return { levelProgressToNext: 0, levelProgressValue: 0, levelProgressMax: 1 };
 	});
 
+	const gearToAdd = $derived.by(() => {
+			return Object.values(itemsData.items)
+				.filter((item) => {
+					// @ts-ignore
+					return item.details.type_b === 'Essential_PalGear' && item.details.rarity !== 99;
+				})
+				.sort((a, b) => (a.details.sort_id || Infinity) - (b.details.sort_id || Infinity));
+		});
+
+	const implantsToAdd = $derived.by(() => {
+			return Object.values(itemsData.items)
+				.filter((item) => {
+					// @ts-ignore
+					return item.id.includes('PalPassiveSkillChange');
+				})
+				.sort((a, b) => (a.details.sort_id || Infinity) - (b.details.sort_id || Infinity));
+		});
+
+	const miscKeysToAdd = $derived.by(() => {
+			return Object.values(itemsData.items)
+				.filter((item) => {
+					// @ts-ignore
+					return !item.id.includes('PalPassiveSkillChange') && item.details.type_b !== 'Essential_PalGear' && item.details.type_a === 'Essential' && !item.id.includes('BossDefeatReward') && item.id !== ('Relic');
+				})
+				.sort((a, b) => (a.details.sort_id || Infinity) - (b.details.sort_id || Infinity));
+		});
+
 	async function getItemIcon(staticId: string) {
 		if (!staticId || staticId === 'None') return;
 		const itemData = itemsData.items[staticId] || undefined;
@@ -118,6 +153,7 @@
 			slot.dynamic_item = undefined;
 			slot.static_id = 'None';
 			slot.count = 0;
+			// @ts-ignore
 			slot.local_id = '00000000-0000-0000-0000-000000000000';
 		});
 		if (appState.selectedPlayer) {
@@ -151,6 +187,115 @@
 		clearWeaponLoadOutContainer();
 		clearEquipmentArmorContainer();
 		clearFoodEquipContainer();
+	}
+
+	async function setCommonContainerCount() {
+		if (!appState.selectedPlayer) return;
+		// @ts-ignore
+		const result = await modal.showModal<number>(NumberInputModal, {
+			title: 'Enter Item Count',
+			value: '',
+			min: 0,
+			max: 9999
+		});
+
+		if (!result) return;
+
+		Object.values(commonContainer.slots).forEach((slot) => {
+			if (slot.static_id === 'None') return;
+			else slot.count = result;
+		});
+		if (appState.selectedPlayer) {
+			appState.selectedPlayer.state = EntryState.MODIFIED;
+		}
+	}
+
+	async function fillCommonContainer() {
+		// @ts-ignore
+		const result = await modal.showModal<[string, number]>(ItemSelectModal, {
+			group: 'Common',
+			itemId: '',
+			title: 'Select Item'
+		});
+		if (!result) return;
+		let [static_id, count] = result;
+		const itemData = itemsData.items[static_id];
+		if (!itemData) return;
+		count = count > itemData.details.max_stack_count ? itemData.details.max_stack_count : count;
+
+		Object.values(commonContainer.slots).forEach((slot: ItemContainerSlot) => {
+			slot.static_id = static_id;
+			slot.count = count;
+			if (itemData.details.dynamic) {
+				// @ts-ignore
+				slot.dynamic_item = {
+					local_id: '00000000-0000-0000-0000-000000000000',
+					durability: itemData.details.dynamic.durability || 0,
+					remaining_bullets: itemData.details.dynamic.magazine_size || 0,
+					type: itemData.details.dynamic.type
+				};
+			} else {
+				slot.dynamic_item = undefined;
+			}
+		});
+		if (appState.selectedPlayer) {
+			appState.selectedPlayer.state = EntryState.MODIFIED;
+		}
+	}
+
+	function setEssentialList(option: string) {
+		if (option === 'gear') {
+			fillEssentialContainer(gearToAdd);
+		} else if (option === 'implants') {
+			fillEssentialContainer(implantsToAdd);
+		} else if (option === 'misc') {
+			fillEssentialContainer(miscKeysToAdd);
+		} else {
+			toast.add('Invalid option selected', undefined, 'error');
+		}
+	}
+
+	function fillEssentialContainer(itemList: any[]) {
+
+		const existingKeyItems = new Set(
+			Object.values(essentialContainer.slots)
+				.filter((slot: ItemContainerSlot) => slot.static_id !== 'None')
+				.map((slot: ItemContainerSlot) => slot.static_id)
+		);
+
+		let itemIndex = 0;
+		for (const slot of Object.values(essentialContainer.slots) as ItemContainerSlot[]) {
+			if (slot.static_id !== 'None') continue;
+
+			while (
+				itemIndex < itemList.length &&
+				existingKeyItems.has(itemList[itemIndex].id)
+			) {
+				itemIndex++;
+			}
+			if (itemIndex >= itemList.length) break;
+
+			const item = itemList[itemIndex];
+			slot.static_id = item.id;
+			slot.count = 1;
+			const itemData = itemsData.items[slot.static_id];
+			if (itemData && itemData.details.dynamic) {
+				// @ts-ignore
+				slot.dynamic_item = {
+					local_id: '00000000-0000-0000-0000-000000000000',
+					durability: itemData.details.dynamic.durability || 0,
+					remaining_bullets: itemData.details.dynamic.magazine_size || 0,
+					type: itemData.details.dynamic.type
+				};
+			} else {
+				slot.dynamic_item = undefined;
+			}
+			existingKeyItems.add(slot.static_id);
+			itemIndex++;
+		}
+		if (appState.selectedPlayer) {
+			appState.selectedPlayer.state = EntryState.MODIFIED;
+		}
 	}
 
 	async function copyItem(slot: ItemContainerSlot) {
@@ -448,60 +593,81 @@
 			<div class="grid w-full grid-cols-[auto_1fr] gap-4 pr-[420px]">
 				<!-- Inventory -->
 				<div class="flex flex-col space-y-2">
-					<nav
-						class="btn-group preset-outlined-surface-200-800 w-full flex-col rounded-sm p-2 md:flex-row"
-					>
-						<Tooltip label="Clear Inventory">
-							<button
-								class="hover:bg-secondary-500/50 btn rounded-sm"
-								onclick={clearCommonContainer}
-							>
-								<ChevronsLeftRight class="h-4 w-4 xl:h-6 xl:w-6" />
-							</button>
-						</Tooltip>
-						<Tooltip label="Sort Inventory">
-							<button
-								class="hover:bg-secondary-500/50 btn rounded-sm"
-								onclick={sortCommonContainer}
-							>
-								<ArrowUp01 class="h-4 w-4 xl:h-6 xl:w-6" />
-							</button>
-						</Tooltip>
-						<Tooltip label="Clear Key Items">
-							<button
-								class="hover:bg-secondary-500/50 btn rounded-sm"
-								onclick={clearEssentialContainer}
-							>
-								<Key class="h-4 w-4 xl:h-6 xl:w-6" />
-							</button>
-						</Tooltip>
-						<Tooltip label="Clear Weapons">
-							<button
-								class="hover:bg-secondary-500/50 btn rounded-sm"
-								onclick={clearWeaponLoadOutContainer}
-							>
-								<Swords class="h-4 w-4 xl:h-6 xl:w-6" />
-							</button>
-						</Tooltip>
-						<Tooltip label="Clear Armor">
-							<button
-								class="hover:bg-secondary-500/50 btn rounded-sm"
-								onclick={clearEquipmentArmorContainer}
-							>
-								<Shield class="h-4 w-4 xl:h-6 xl:w-6" />
-							</button>
-						</Tooltip>
-						<Tooltip label="Clear Food">
-							<button
-								class="hover:bg-secondary-500/50 btn rounded-sm"
-								onclick={clearFoodEquipContainer}
-							>
-								<Pizza class="h-4 w-4 xl:h-6 xl:w-6" />
-							</button>
-						</Tooltip>
+					
+						<nav
+							class="btn-group preset-outlined-surface-200-800 w-full flex-col rounded-sm p-2 md:flex-row justify-center items-center"
+						>
+						{#if group === "inventory"}
+							<Tooltip label="Sort Inventory">
+								<button
+									class="hover:bg-secondary-500/50 btn rounded-sm"
+									onclick={sortCommonContainer}
+								>
+									<ArrowUp01 class="h-4 w-4 xl:h-6 xl:w-11" />
+								</button>
+							</Tooltip>
+							<Tooltip label="Fill Inventory">
+								<button
+									class="hover:bg-secondary-500/50 btn rounded-sm"
+									onclick={fillCommonContainer}
+								>
+									<PaintBucket class="h-4 w-4 xl:h-6 xl:w-11" />
+								</button>
+							</Tooltip>
+							<Tooltip label="Set Inventory Count">
+								<button
+									class="hover:bg-secondary-500/50 btn rounded-sm"
+									onclick={setCommonContainerCount}
+								>
+									<Hash class="h-4 w-4 xl:h-6 xl:w-11" />
+								</button>
+							</Tooltip>
+							<Tooltip label="Clear Inventory">
+								<button
+									class="hover:bg-secondary-500/50 btn rounded-sm"
+									onclick={clearCommonContainer}
+								>
+									<ChevronsLeftRight class="h-4 w-4 xl:h-6 xl:w-11" />
+								</button>
+							</Tooltip>
+						{/if}
+						{#if group === 'key_items'}
+							<Tooltip label="Add All Pal Gear">
+								<button
+									class="hover:bg-secondary-500/50 btn rounded-sm"
+									onclick={event => setEssentialList('gear')}
+								>
+									<PawPrint class="h-4 w-4 xl:h-6 xl:w-11" />
+								</button>
+							</Tooltip>
+							<Tooltip label="Add All Implants">
+								<button
+									class="hover:bg-secondary-500/50 btn rounded-sm"
+									onclick={event => setEssentialList('implants')}
+								>
+									<Activity class="h-4 w-4 xl:h-6 xl:w-11" />
+								</button>
+							</Tooltip>
+							<Tooltip label="Add Other Key Items">
+								<button
+									class="hover:bg-secondary-500/50 btn rounded-sm"
+									onclick={event => setEssentialList('misc')}
+								>
+									<Key class="h-4 w-4 xl:h-6 xl:w-11" />
+								</button>
+							</Tooltip>
+							<Tooltip label="Clear Key Items">
+								<button
+									class="hover:bg-secondary-500/50 btn rounded-sm"
+									onclick={clearEssentialContainer}
+								>
+									<ChevronsLeftRight class="h-4 w-4 xl:h-6 xl:w-11" />
+								</button>
+							</Tooltip>
+						{/if}
 						<Tooltip label="Clear All">
 							<button class="hover:bg-secondary-500/50 btn rounded-sm" onclick={clearAll}>
-								<Bomb class="h-4 w-4 xl:h-6 xl:w-6" />
+								<Bomb class="h-4 w-4 xl:h-6 xl:w-11" />
 							</button>
 						</Tooltip>
 					</nav>
@@ -570,6 +736,34 @@
 				<!-- Player Equip -->
 				<div class="flex h-[600px] flex-col 2xl:grid 2xl:grid-cols-[auto_1fr_auto]">
 					<div class="flex flex-col space-y-2">
+						<nav
+							class="btn-group preset-outlined-surface-200-800 w-full flex-col rounded-sm p-2 md:flex-row justify-center items-center"
+						>
+							<Tooltip label="Clear Weapons">
+								<button
+									class="hover:bg-secondary-500/50 btn rounded-sm"
+									onclick={clearWeaponLoadOutContainer}
+								>
+									<Swords class="h-4 w-4 xl:h-6 xl:w-12" />
+								</button>
+							</Tooltip>
+							<Tooltip label="Clear Armor">
+								<button
+									class="hover:bg-secondary-500/50 btn rounded-sm"
+									onclick={clearEquipmentArmorContainer}
+								>
+									<Shield class="h-4 w-4 xl:h-6 xl:w-12" />
+								</button>
+							</Tooltip>
+							<Tooltip label="Clear Food">
+								<button
+									class="hover:bg-secondary-500/50 btn rounded-sm"
+									onclick={clearFoodEquipContainer}
+								>
+									<Pizza class="h-4 w-4 xl:h-6 xl:w-12" />
+								</button>
+							</Tooltip>
+						</nav>
 						<div class="flex flex-col space-y-2">
 							<ItemHeader text="Weapon" />
 							<div class="flex space-x-2 2xl:flex-col 2xl:space-y-2">
