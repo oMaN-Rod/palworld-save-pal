@@ -58,8 +58,8 @@ jobs:
 
       - name: Build Windows ZIP and MSI
         run: |
-          python setup.py build
-          python setup.py bdist_msi
+          uv run -- python setup.py build
+          uv run -- python setup.py bdist_msi
 
       - name: Prepare dist directory
         run: |
@@ -136,7 +136,7 @@ jobs:
 
       - name: Build macOS DMG
         run: |
-          python setup.py bdist_dmg
+          uv run -- python setup.py bdist_dmg
 
       - name: Rename macOS DMG
         run: |
@@ -175,3 +175,4 @@ jobs:
             artifacts/macos-dmg/*.dmg
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
