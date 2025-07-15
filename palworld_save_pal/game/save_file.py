@@ -1177,9 +1177,7 @@ class SaveFile(BaseModel):
                 else:
                     nickname = f"🥷 ({str(uid).split('-')[0]})"
 
-                await ws_callback(
-                    f"Loading player {nickname} ({uid}) with {loaded_sav_files[uid]}..."
-                )
+                await ws_callback(f"Loading player {nickname}...")
                 self._player_gvas_files[uid] = loaded_sav_files[uid]
                 player_pals = self._get_player_pals(uid)
                 if uid in host_fix_players:

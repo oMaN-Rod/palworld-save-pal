@@ -135,7 +135,7 @@
 	}
 
 	async function getPalElementTypes(character_id: string): Promise<ElementType[] | undefined> {
-		const palData = palsData.pals[character_id];
+		const palData = palsData.getPalData(character_id);
 		if (!palData) return undefined;
 		return palData.element_types.length > 0 ? palData.element_types : undefined;
 	}
@@ -240,7 +240,7 @@
 	}
 
 	async function handleSavePreset() {
-		const element = palsData.pals[pal.character_key]?.element_types[0];
+		const element = palsData.getPalData(pal.character_key)?.element_types[0];
 		// @ts-ignore
 		const result = await modal.showModal(PresetConfigModal, {
 			config: defaultPresetConfig,

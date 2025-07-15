@@ -69,10 +69,10 @@
 		const item = itemsData.items[itemId];
 		if (!item || !item.details.dynamic?.character_ids) {
 			if (!selectedPalKey) return [];
-			const palInfo = palsData.pals[selectedPalKey];
+			const palData = palsData.getPalData(selectedPalKey);
 			return [
 				{
-					label: palInfo?.localized_name,
+					label: palData?.localized_name || selectedPalKey,
 					value: selectedPalKey
 				}
 			];
@@ -80,7 +80,7 @@
 
 		return item.details.dynamic.character_ids
 			.map((charId) => {
-				const palInfo = palsData.pals[charId.replace('BOSS_', '')];
+				const palInfo = palsData.getPalData(charId.replace('BOSS_', ''));
 				const label = charId.includes('BOSS_')
 					? `${palInfo?.localized_name} (Alpha)`
 					: palInfo?.localized_name || charId.replace('BOSS_', '');
@@ -150,7 +150,7 @@
 
 	const palIconSrc = $derived.by(() => {
 		if (!selectedPalKey) return staticIcons.unknownIcon;
-		const palData = palsData.pals[selectedPalKey];
+		const palData = palsData.getPalData(selectedPalKey);
 		return assetLoader.loadMenuImage(selectedPalKey, palData?.is_pal ?? true);
 	});
 
@@ -287,7 +287,7 @@
 
 	function getPalIcon(palId: string): string {
 		if (!palId) return staticIcons.unknownIcon;
-		const palData = palsData.pals[palId];
+		const palData = palsData.getPalData(palId);
 		return assetLoader.loadMenuImage(palId, palData?.is_pal ?? true);
 	}
 
