@@ -159,7 +159,7 @@
 			([_, pal]) => pal && pal.character_id !== 'None'
 		);
 		return playerPals.map(([i, pal]) => {
-			const palData = palsData.pals[pal.character_key];
+			const palData = palsData.getPalData(pal.character_key);
 			return { id: pal.instance_id, index: i as unknown as number, pal, palData };
 		});
 	});
@@ -336,7 +336,7 @@
 		});
 		if (!result) return;
 		const [selectedPal, nickname] = result;
-		const palData = palsData.pals[selectedPal];
+		const palData = palsData.getPalData(selectedPal);
 
 		send(MessageType.ADD_DPS_PAL, {
 			player_id: appState.selectedPlayer.uid,
@@ -546,12 +546,12 @@
 			<div class="btn-group bg-surface-900 mb-2 w-full items-center rounded-sm p-1">
 				<Tooltip position="right" label="Add all pals to your Pal Box">
 					<button class="btn hover:preset-tonal-secondary p-2" onclick={addAllPalsDps}>
-						<CircleFadingPlus />
+						<CircleFadingPlus class="h-4 w-4" />
 					</button>
 				</Tooltip>
 				<Tooltip>
 					<button class="btn hover:preset-tonal-secondary p-2" onclick={handleSelectAll}>
-						<ReplaceAll />
+						<ReplaceAll class="h-4 w-4" />
 					</button>
 					{#snippet popup()}
 						<div class="flex flex-col">
@@ -572,12 +572,12 @@
 				{#if selectedPals.length >= 1}
 					<Tooltip label="Apply preset to selected pal(s)">
 						<button class="btn hover:preset-tonal-secondary p-2" onclick={handleSelectPreset}>
-							<Play />
+							<Play class="h-4 w-4" />
 						</button>
 					</Tooltip>
 					<Tooltip label="Delete selected pal(s)">
 						<button class="btn hover:preset-tonal-secondary p-2" onclick={deleteSelectedPals}>
-							<Trash />
+							<Trash class="h-4 w-4" />
 						</button>
 					</Tooltip>
 					<Tooltip label="Clear selected pal(s)">
@@ -585,7 +585,7 @@
 							class="btn hover:preset-tonal-secondary p-2"
 							onclick={() => (selectedPals = [])}
 						>
-							<X />
+							<X class="h-4 w-4" />
 						</button>
 					</Tooltip>
 				{/if}

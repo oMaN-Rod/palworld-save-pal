@@ -198,10 +198,13 @@ class Pal(BaseModel):
 
     @computed_field
     def stomach(self) -> float:
-        return (
-            PalObjects.get_value(self._save_parameter["FullStomach"], 150)
+        stomach = (
+            PalObjects.get_value(self._save_parameter["FullStomach"], 150.0)
             if "FullStomach" in self._save_parameter
-            else 150
+            else 150.0
+        )
+        return (
+            stomach if isinstance(stomach, float) and not math.isnan(stomach) else 150.0
         )
 
     @stomach.setter
@@ -516,7 +519,7 @@ class Pal(BaseModel):
             for t in PAL_SICK_TYPES
             if t not in ["HungerType", "SanityValue"]
         )
-    
+
     @computed_field
     def friendship_point(self) -> int:
         return (
