@@ -26,7 +26,7 @@
 				}
 				if (profile.pal_preset?.lock_element) {
 					return selectedPals.every((pal: { character_id: string; character_key: string }) => {
-						const palData = palsData.pals[pal.character_key];
+						const palData = palsData.getPalData(pal.character_key);
 						if (!palData) return false;
 						return palData.element_types[0] === profile.pal_preset?.element;
 					});

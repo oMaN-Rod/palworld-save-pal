@@ -283,7 +283,7 @@
 				// Convert point world coordinates to Leaflet coordinates
 				const latlng = worldToLeaflet(point.x, point.y);
 				const palImage = assetLoader.loadMenuImage(point.pal);
-				const palData = palsData.pals[point.pal];
+				const palData = palsData.getPalData(point.pal);
 				const icon = L.icon({
 					iconUrl: palImage,
 					iconSize: [40, 40],
@@ -320,7 +320,7 @@
 				// Convert point world coordinates to Leaflet coordinates
 				const latlng = worldToLeaflet(point.x, point.y);
 				const palImage = assetLoader.loadMenuImage(point.pal);
-				const palData = palsData.pals[point.pal];
+				const palData = palsData.getPalData(point.pal);
 				const icon = L.icon({
 					iconUrl: palImage,
 					iconSize: [40, 40],

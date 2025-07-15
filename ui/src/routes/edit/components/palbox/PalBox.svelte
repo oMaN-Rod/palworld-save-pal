@@ -190,7 +190,7 @@
 		return playerPals
 			.filter(([_, pal]) => pal.storage_id === palBoxId)
 			.map(([id, pal]) => {
-				const palData = palsData.pals[pal.character_key];
+				const palData = palsData.getPalData(pal.character_key);
 				return { id, pal, palData } as PalWithData;
 			});
 	});
@@ -361,7 +361,7 @@
 		});
 		if (!result) return;
 		const [selectedPal, nickname] = result;
-		const palData = palsData.pals[selectedPal];
+		const palData = palsData.getPalData(selectedPal);
 		const containerId =
 			target === 'party'
 				? appState.selectedPlayer.otomo_container_id
@@ -476,7 +476,7 @@
 			if (selectedPals.includes(pal.instance_id)) {
 				pal.hp = pal.max_hp;
 				pal.sanity = 100;
-				const palData = palsData.pals[pal.character_key];
+				const palData = palsData.getPalData(pal.character_key);
 				if (palData) {
 					pal.stomach = palData.max_full_stomach;
 				}
@@ -608,7 +608,7 @@
 			pal.hp = pal.max_hp;
 			pal.sanity = 100;
 			pal.is_sick = false;
-			const palData = palsData.pals[pal.character_key];
+			const palData = palsData.getPalData(pal.character_key);
 			if (palData) {
 				pal.stomach = palData.max_full_stomach;
 			}
@@ -687,18 +687,18 @@
 		{...additionalProps}
 	>
 		<div class="shrink-0 p-4">
-			<div class="btn-group bg-surface-900 mb-2 w-full items-center overflow-x-auto rounded-sm p-1">
+			<nav class="btn-group bg-surface-900 mb-2 w-full items-center overflow-x-auto rounded-sm p-1">
 				<Tooltip position="right" label="Add a new pal to your Pal Box">
 					<button
 						class="btn hover:preset-tonal-secondary p-2"
 						onclick={() => handleAddPal('palbox')}
 					>
-						<Plus />
+						<Plus class="h-4 w-4" />
 					</button>
 				</Tooltip>
 				<Tooltip position="right" label="Add all pals to your Pal Box">
 					<button class="btn hover:preset-tonal-secondary p-2" onclick={() => addAllPalsToBox()}>
-						<CircleFadingPlus />
+						<CircleFadingPlus class="h-4 w-4" />
 					</button>
 				</Tooltip>
 				<Tooltip>
@@ -706,7 +706,7 @@
 						class="btn hover:preset-tonal-secondary p-2"
 						onclick={(event) => handleSelectAll(event)}
 					>
-						<ReplaceAll />
+						<ReplaceAll class="h-4 w-4" />
 					</button>
 					{#snippet popup()}
 						<div class="flex flex-col">
@@ -725,35 +725,35 @@
 				</Tooltip>
 				<Tooltip label="Heal all in pal box">
 					<button class="btn hover:preset-tonal-secondary p-2" onclick={handleHealAll}>
-						<Bandage />
+						<Bandage class="h-4 w-4" />
 					</button>
 				</Tooltip>
 				{#if selectedPals.length === 1}
 					<Tooltip label="Clone selected pal">
 						<button class="btn hover:preset-tonal-secondary p-2" onclick={cloneSelectedPal}>
-							<Copy />
+							<Copy class="h-4 w-4" />
 						</button>
 					</Tooltip>
 				{/if}
 				{#if selectedPals.length >= 1}
 					<Tooltip label="Apply preset to selected pal(s)">
 						<button class="btn hover:preset-tonal-secondary p-2" onclick={handleSelectPreset}>
-							<Play />
+							<Play class="h-4 w-4" />
 						</button>
 					</Tooltip>
 					<Tooltip label="Heal selected pal(s)">
 						<button class="btn hover:preset-tonal-secondary p-2" onclick={healSelectedPals}>
-							<Ambulance />
+							<Ambulance class="h-4 w-4" />
 						</button>
 					</Tooltip>
 					<Tooltip label="Max out selected pal(s)">
 						<button class="btn hover:preset-tonal-secondary p-2" onclick={maxSelectedPals}>
-							<BicepsFlexed />
+							<BicepsFlexed class="h-4 w-4" />
 						</button>
 					</Tooltip>
 					<Tooltip label="Delete selected pal(s)">
 						<button class="btn hover:preset-tonal-secondary p-2" onclick={deleteSelectedPals}>
-							<Trash />
+							<Trash class="h-4 w-4" />
 						</button>
 					</Tooltip>
 					<Tooltip label="Clear selected pal(s)">
@@ -761,11 +761,11 @@
 							class="btn hover:preset-tonal-secondary p-2"
 							onclick={() => (selectedPals = [])}
 						>
-							<X />
+							<X class="h-4 w-4" />
 						</button>
 					</Tooltip>
 				{/if}
-			</div>
+			</nav>
 			<Accordion value={filterExpand} onValueChange={(e) => (filterExpand = e.value)} collapsible>
 				<Accordion.Item
 					value="filter"

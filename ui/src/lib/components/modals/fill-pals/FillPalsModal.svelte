@@ -173,7 +173,7 @@
 		if (!selectedPresets || selectedPresets.length === 0) {
 			return;
 		}
-		const palData = palsData.pals[pal.character_key];
+		const palData = palsData.getPalData(pal.character_key);
 		const palProfile =
 			selectedPresets.filter(
 				(p) => p.pal_preset?.lock && p.pal_preset?.character_id === pal.character_id

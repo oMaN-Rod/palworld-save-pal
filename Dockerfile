@@ -1,7 +1,7 @@
 FROM python:3.12 AS builder
 
 # Clone the temp palworld-save-tools repo until it gets updated
-RUN git clone https://github.com/oMaN-Rod/palworld-save-tools.git -b v0.4.11
+RUN git clone https://github.com/oMaN-Rod/palworld-save-tools.git
 
 FROM oven/bun AS ui_builder
 
@@ -19,8 +19,8 @@ FROM python:3.12
 WORKDIR /app
 
 # Copy requirements and install dependencies
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+COPY pyproject.toml .
+RUN pip install --no-cache-dir .
 
 # Copy necessary files and directories
 COPY psp.py .

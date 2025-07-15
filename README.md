@@ -48,6 +48,7 @@ To run Palworld Save Pal using Docker:
    ```
 
 2. Run the build script based on your environment, these scripts capture the system IP address and set the environment variable for the svelte SPA:
+
    > Linux
 
    ```bash
@@ -61,25 +62,26 @@ To run Palworld Save Pal using Docker:
    ```
 
 3. Or you can follow these steps:
+
    1. Modify the `docker-compose.yml` file to set the IP/URL address of your docker host:
 
       ```yaml
       services:
-         backend:
-            build:
-               context: .
-               dockerfile: Dockerfile
-               args:
-               # Change this to the URL of your public server
-               - PUBLIC_WS_URL=127.0.0.1:5174/ws
-            ports:
-               - "5174:5174"
-            volumes:
-               - ./data:/app/data
-               - ./palworld_save_pal:/app/palworld_save_pal
-            environment:
-               - PORT=5174
-            command: python psp.py
+        backend:
+          build:
+            context: .
+            dockerfile: Dockerfile
+            args:
+              # Change this to the URL of your public server
+              - PUBLIC_WS_URL=127.0.0.1:5174/ws
+          ports:
+            - "5174:5174"
+          volumes:
+            - ./data:/app/data
+            - ./palworld_save_pal:/app/palworld_save_pal
+          environment:
+            - PORT=5174
+          command: python psp.py
       ```
 
    2. Build the docker container:
@@ -109,7 +111,7 @@ For developers who want to contribute to Palworld Save Pal:
    bun run dev:web
    ```
 
-5. Open your browser and navigate to `http://127.0.0.1:5173`
+3. Open your browser and navigate to `http://127.0.0.1:5173`
 
 ### Desktop App
 
@@ -189,50 +191,53 @@ or
 
 ### General
 
-- [X] Filter/Sort Pals by name, nickname, character ID, Boss, Lucky, Human, Level, Paldeck #,  Predator, Oil Rig, Summon, or Element type
-- [X] Gamepass & Steam support (solo/coop/dedicated)
-- [X] Localization; supports Deutsch, English, Español, Français, Italiano, 한국어, Português, Русский, 简体中文, and 繁體中文
+- [x] Filter/Sort Pals by name, nickname, character ID, Boss, Lucky, Human, Level, Paldeck #, Predator, Oil Rig, Summon, or Element type
+- [x] Gamepass & Steam support (solo/coop/dedicated)
+- [x] Localization; supports Deutsch, English, Español, Français, Italiano, 한국어, Português, Русский, 简体中文, and 繁體中文
 
 ### Pals
 
-- [X] Edit Pal box, Base, and Dimensional Pal Storage Pals
-- [X] Edit Nickname
-- [X] Edit Gender
-- [X] Edit Active Skills / Learned Skills
-- [X] Edit Passive Skills
-- [X] Edit Level
-- [X] Edit Rank
-- [X] Edit Souls
-- [X] Set/Unset Lucky
-- [X] Set/Unset Boss
-- [X] Add/Remove/Clone Pals
-- [X] Edit Work Suitability
-- [X] Heal Pals - edit health and stomach (Modified pals are automatically healed)
-- [X] Create your own Active/Passive Skill presets, making it easy af to apply skills.
+- [x] Edit Pal box, Base, and Dimensional Pal Storage Pals
+- [x] Edit Nickname
+- [x] Edit Gender
+- [x] Edit Active Skills / Learned Skills
+- [x] Edit Passive Skills
+- [x] Edit Level
+- [x] Edit Rank
+- [x] Edit Souls
+- [x] Edit Trust
+- [x] Set/Unset Lucky
+- [x] Set/Unset Boss
+- [x] Add/Remove/Clone Pals
+- [x] Edit Work Suitability
+- [x] Heal Pals - edit health and stomach (Modified pals are automatically healed)
+- [x] Create your own Active/Passive Skill presets, making it easy af to apply skills.
 - [x] Apply Pal preset on multiple Pals, e.g., max out all Dragon types with a specific profile.
 
 ### Players
 
-- [X] Edit Name
-- [X] Edit Level
-- [X] Edit Stats (Health, Stamina, Attack, Work Speed, and Weight)
-- [X] Heal Player - edit health and stomach
-- [X] Edit Inventory
-- [X] Create your own inventory presets/loadouts and apply them across players and saves.
-- [X] Edit Technology Tree, Technology Points, and Ancient Technology points
+- [x] Edit Name
+- [x] Edit Level
+- [x] Edit Stats (Health, Stamina, Attack, Work Speed, and Weight)
+- [x] Heal Player - edit health and stomach
+- [x] Edit Inventory
+- [x] Edit Technologies
+- [x] Create your own inventory presets/load outs and apply them across players and saves.
+- [x] Edit Technology Tree, Technology Points, and Ancient Technology points
 - [x] Delete Players (Deletes all map objects, items, and pals)
 
 ### Guilds
 
-- [X] Edit Guild Name
-- [X] Edit Guild Chest
-- [X] Edit Base Pals
-- [X] Edit Base Inventory
+- [x] Edit Guild Name
+- [x] Edit Guild Chest
+- [x] Edit Base Pals
+- [x] Edit Base Inventory
+- [x] Edit Lab Research
 - [x] Delete Guilds (Deletes all players, map objects, items, and pals)
 
 ### Extras
 
-- [X] Data Explorer / Debug Mode
+- [x] Data Explorer / Debug Mode (Read Only)
 - [x] Map integration
 - [x] Preset management
 

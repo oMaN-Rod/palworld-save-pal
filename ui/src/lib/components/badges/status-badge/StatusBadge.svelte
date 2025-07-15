@@ -25,7 +25,7 @@
 
 	const maxStomach = $derived.by(() => {
 		if (pal) {
-			const palData = palsData.pals[pal.character_key] || undefined;
+			const palData = palsData.getPalData(pal.character_key);
 			if (palData) {
 				return palData.max_full_stomach;
 			}
@@ -57,7 +57,7 @@
 
 	async function handleEat() {
 		if (!pal) return;
-		const palData = palsData.pals[pal.character_key] || undefined;
+		const palData = palsData.getPalData(pal.character_key);
 		if (!palData) return;
 		pal.stomach = palData.max_full_stomach;
 		pal.state = EntryState.MODIFIED;

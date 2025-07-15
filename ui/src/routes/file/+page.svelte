@@ -2,7 +2,7 @@
 	import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
 	import { goto } from '$app/navigation';
 	import { getAppState } from '$states';
-	import { Card, Tooltip } from '$components/ui';
+	import { Card } from '$components/ui';
 	import { send } from '$lib/utils/websocketUtils';
 	import { MessageType } from '$types';
 	import { ASSET_DATA_PATH } from '$lib/constants';
@@ -10,15 +10,11 @@
 	import { cn } from '$theme';
 	import { GamepassSaveList } from '$components';
 
-	type SaveType = 'steam' | 'gamepass';
-
 	const appState = getAppState();
-
 	const isDesktopMode = PUBLIC_DESKTOP_MODE === 'true';
 
 	const steamIcon = assetLoader.loadSvg(`${ASSET_DATA_PATH}/img/app/steam.svg`);
 	const xboxIcon = assetLoader.loadSvg(`${ASSET_DATA_PATH}/img/app/xbox.svg`);
-	const morpheus = assetLoader.loadImage(`${ASSET_DATA_PATH}/img/app/morpheus.webp`, 'image');
 
 	const totalPals = $derived.by(() => {
 		return Object.values(appState.players).reduce(
@@ -34,30 +30,7 @@
 		);
 	});
 
-	function splitPath(path: string) {
-		if (!path) {
-			return {
-				directory: '',
-				filename: ''
-			};
-		}
-		const normalizedPath = path.replace(/\\/g, '/');
-		const lastSlashIndex = normalizedPath.lastIndexOf('/');
-
-		if (lastSlashIndex === -1) {
-			return {
-				directory: '',
-				filename: normalizedPath
-			};
-		}
-
-		return {
-			directory: normalizedPath.slice(0, lastSlashIndex),
-			filename: normalizedPath.slice(lastSlashIndex + 1)
-		};
-	}
-
-	async function handleSelectSave(saveType: SaveType) {
+	async function handleSelectSave(saveType: string) {
 		await goto('/loading');
 		send(MessageType.SELECT_SAVE, {
 			type: saveType,
@@ -66,99 +39,77 @@
 	}
 
 	$effect(() => {
-		if (!isDesktopMode) {
-			goto('/upload');
-		}
+		if (!isDesktopMode) goto('/upload');
 	});
+
+	const saveOptions = [
+		{
+			type: 'steam',
+			title: 'Steam',
+			icon: steamIcon,
+			description: 'Steam/Mac: Level.sav save file',
+			disabled: false
+		},
+		{
+			type: 'gamepass',
+			title: 'Xbox Game Pass',
+			icon: xboxIcon,
+			description: 'Xbox Game Pass: container.index file',
+			disabled: false
+		}
+	];
 </script>
 
-{#snippet pickYourPoison(size: 'sm' | 'lg' = 'lg')}
-	{@const morpheusSize = size === 'lg' ? 'h-[600px]' : 'h-[400px]'}
-	{@const inset = size === 'lg' ? 'inset-8' : 'inset-4'}
-	{@const offset = size === 'lg' ? 'top-[420px]' : 'top-[280px]'}
-	{@const pillSize = size === 'lg' ? 'h-24 w-24' : 'h-16 w-16'}
-	<div class="relative flex flex-col">
-		<div class="relative">
-			<img src={morpheus} alt="Choice" class={cn('w-auto', morpheusSize)} />
-			<div class={cn('absolute flex items-center justify-between px-12', inset, offset)}>
-				<Tooltip
-					popupClass="p-0 bg-surface-600 max-w-96"
-					rounded="rounded-none"
-					position="left"
-					useArrow={false}
-				>
+<div class="bg-surface-900 flex min-h-screen w-full flex-col items-center justify-center py-12">
+	<div class="flex w-full max-w-3xl flex-col gap-12">
+		<section class="w-full">
+			<h1 class="text-primary-400 mb-6 text-center text-4xl font-extrabold tracking-tight">
+				Select Save Platform
+			</h1>
+			<div class="grid w-full grid-cols-1 justify-center gap-8 sm:grid-cols-2">
+				{#each saveOptions as option}
 					<button
-						class={cn('rounded-full bg-transparent transition-transform hover:scale-110', pillSize)}
-						onclick={() => handleSelectSave('steam')}
-					>
-						{#if steamIcon}
-							{@html steamIcon}
-						{:else}
-							Steam
-						{/if}
-					</button>
-					{#snippet popup()}
-						<div class="flex flex-col p-4">
-							<h4 class="h4">Steam</h4>
-							<p>Find and select your Level.sav file.</p>
-						</div>
-					{/snippet}
-				</Tooltip>
-
-				<Tooltip
-					popupClass="p-0 bg-surface-600 max-w-96"
-					rounded="rounded-none"
-					position="right"
-					useArrow={false}
-				>
-					<button
+						type="button"
 						class={cn(
-							'-rotate-90 rounded-full bg-transparent transition-transform hover:scale-110',
-							pillSize
+							'bg-surface-800 flex flex-col items-center justify-between rounded-xl border-2 p-8 shadow-md transition-all',
+							option.disabled
+								? 'border-surface-700 cursor-not-allowed opacity-50'
+								: 'hover:border-primary-500 border-surface-700 cursor-pointer'
 						)}
-						onclick={() => handleSelectSave('gamepass')}
+						onclick={() => !option.disabled && handleSelectSave(option.type)}
+						disabled={option.disabled}
 					>
-						{#if xboxIcon}
-							{@html xboxIcon}
-						{:else}
-							Xbox
-						{/if}
-					</button>
-					{#snippet popup()}
-						<div class="flex flex-col p-4">
-							<h4 class="h4">XBOX Game Pass</h4>
-							<p>Find and select your container.index file</p>
+						<div class="flex flex-col items-center gap-2">
+							<div
+								class="bg-surface-900 mb-2 flex h-24 w-24 items-center justify-center rounded-full p-4 shadow"
+							>
+								{@html option.icon}
+							</div>
+							<span class="text-xl font-semibold text-white">{option.title}</span>
+							<p class="text-surface-300 text-center text-base">{option.description}</p>
 						</div>
-					{/snippet}
-				</Tooltip>
+					</button>
+				{/each}
 			</div>
-		</div>
-	</div>
-{/snippet}
+		</section>
 
-<div class="flex h-full w-full flex-col items-center justify-center space-y-4">
-	{#if appState.saveFile && appState.playerSaveFiles}
-		{@const { directory, filename } = splitPath(appState.saveFile.name)}
-		{@render pickYourPoison('sm')}
-		<Card class="min-w-96">
-			<div class="grid grid-cols-[auto_1fr]">
-				<span class="font-bold">World Name:</span>
-				<span class="text-end"> {appState.saveFile.world_name}</span>
-				<span class="font-bold">Players:</span>
-				<span class="text-end"> {appState.playerSaveFiles.length}</span>
-				<span class="font-bold">Pals:</span>
-				<span class="text-end"> {totalPals}</span>
-				<span class="font-bold">Guilds:</span>
-				<span class="text-end"> {Object.values(appState.guilds).length}</span>
-				<span class="font-bold">Bases:</span>
-				<span class="text-end"> {totalBases}</span>
-			</div>
-		</Card>
-	{:else if appState.gamepassSaves && Object.keys(appState.gamepassSaves).length > 0}
-		<GamepassSaveList bind:saves={appState.gamepassSaves} />
-	{:else}
-		<div class="relative flex h-full w-full items-center justify-center">
-			{@render pickYourPoison()}
-		</div>
-	{/if}
+		{#if appState.saveFile && appState.playerSaveFiles}
+			<Card class="min-w-96">
+				<div class="grid grid-cols-[auto_1fr] gap-2">
+					<span class="font-bold">World Name:</span>
+					<span class="text-end">{appState.saveFile.world_name}</span>
+					<span class="font-bold">Players:</span>
+					<span class="text-end">{appState.playerSaveFiles.length}</span>
+					<span class="font-bold">Pals:</span>
+					<span class="text-end">{totalPals}</span>
+					<span class="font-bold">Guilds:</span>
+					<span class="text-end">{Object.values(appState.guilds).length}</span>
+					<span class="font-bold">Bases:</span>
+					<span class="text-end">{totalBases}</span>
+				</div>
+			</Card>
+		{:else if appState.gamepassSaves && Object.keys(appState.gamepassSaves).length > 0}
+			<GamepassSaveList bind:saves={appState.gamepassSaves} />
+		{/if}
+	</div>
 </div>

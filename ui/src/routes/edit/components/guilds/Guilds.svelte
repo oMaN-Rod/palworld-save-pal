@@ -290,14 +290,15 @@
 		if (!result) return;
 
 		const [selectedPal, nickname] = result;
-		const palData = palsData.pals[selectedPal];
+		const palData = palsData.getPalData(selectedPal);
 
 		send(MessageType.ADD_PAL, {
 			guild_id: playerGuild?.id,
 			base_id: baseId,
 			character_id: selectedPal,
 			nickname:
-				nickname || formatNickname(palData?.localized_name, appState.settings.new_pal_prefix),
+				nickname ||
+				formatNickname(palData?.localized_name ?? selectedPal, appState.settings.new_pal_prefix),
 			container_id: base.container_id,
 			storage_slot: index
 		});
@@ -429,7 +430,7 @@
 				if (selectedPals.includes(pal.instance_id)) {
 					pal.hp = pal.max_hp;
 					pal.sanity = 100;
-					const palData = palsData.pals[pal.character_key];
+					const palData = palsData.getPalData(pal.character_key);
 					if (palData) {
 						pal.stomach = palData.max_full_stomach;
 					}
@@ -476,7 +477,7 @@
 				pal.hp = pal.max_hp;
 				pal.sanity = 100;
 				pal.is_sick = false;
-				const palData = palsData.pals[pal.character_key];
+				const palData = palsData.getPalData(pal.character_key);
 				if (palData) {
 					pal.stomach = palData.max_full_stomach;
 				}
@@ -751,33 +752,33 @@
 								class="btn hover:bg-secondary-500/50 p-2"
 								onclick={() => currentBase && handleAddPal(currentBase[0])}
 							>
-								<Plus />
+								<Plus class="h-4 w-4" />
 							</button>
 						</Tooltip>
 						<Tooltip label="Select all in current base">
 							<button class="btn hover:bg-secondary-500/50 p-2" onclick={handleSelectAll}>
-								<ReplaceAll />
+								<ReplaceAll class="h-4 w-4" />
 							</button>
 						</Tooltip>
 						<Tooltip label="Heal all in current base">
 							<button class="btn hover:bg-secondary-500/50 p-2" onclick={handleHealAll}>
-								<Bandage />
+								<Bandage class="h-4 w-4" />
 							</button>
 						</Tooltip>
 						{#if selectedPals.length > 0}
 							<Tooltip label="Apply preset to selected pal(s)">
 								<button class="btn hover:bg-secondary-500/50 p-2" onclick={handleSelectPreset}>
-									<Play />
+									<Play class="h-4 w-4" />
 								</button>
 							</Tooltip>
 							<Tooltip label="Heal selected pal(s)">
 								<button class="btn hover:bg-secondary-500/50 p-2" onclick={healSelectedPals}>
-									<Ambulance />
+									<Ambulance class="h-4 w-4" />
 								</button>
 							</Tooltip>
 							<Tooltip label="Delete selected pal(s)">
 								<button class="btn hover:bg-secondary-500/50 p-2" onclick={deleteSelectedPals}>
-									<Trash />
+									<Trash class="h-4 w-4" />
 								</button>
 							</Tooltip>
 							<Tooltip label="Clear selected">
@@ -785,7 +786,7 @@
 									class="btn hover:bg-secondary-500/50 p-2"
 									onclick={() => (selectedPals = [])}
 								>
-									<X />
+									<X class="h-4 w-4" />
 								</button>
 							</Tooltip>
 						{/if}

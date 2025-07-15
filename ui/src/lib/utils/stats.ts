@@ -71,7 +71,7 @@ export function getStats(pal: Pal, player: Player): PalStats | undefined {
 		return;
 	}
 
-	const palData = palsData.pals[pal.character_key];
+	const palData = palsData.getPalData(pal.character_key);
 	if (!palData) {
 		console.log(`No pal data found for ${pal.character_key}`);
 		return;
@@ -93,7 +93,7 @@ export function getStats(pal: Pal, player: Player): PalStats | undefined {
 
 	// HP calculation
 	const alphaScaling = pal.is_boss || pal.is_lucky ? 1.2 : 1;
-	const hp = Math.floor(500 + 5 * level + (hpScale * 0.5 * level * (1 + hpIv) * alphaScaling));
+	const hp = Math.floor(500 + 5 * level + hpScale * 0.5 * level * (1 + hpIv) * alphaScaling);
 	pal.max_hp = Math.floor(hp * (1 + condenserBonus) * (1 + hpSoulBonus)) * 1000;
 
 	// Attack calculation

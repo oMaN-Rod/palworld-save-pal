@@ -56,7 +56,7 @@
 	}
 
 	function getIconPath(option: SelectOption) {
-		const palData = palsData.pals[option.value];
+		const palData = palsData.getPalData(option.value);
 		if (palData && palData.is_pal) {
 			return assetLoader.loadMenuImage(option.value);
 		} else if (palData && !palData.is_pal) {
@@ -71,20 +71,22 @@
 	<h3 class="h3">{title}</h3>
 	<Combobox options={selectOptions} bind:value={selectedPal}>
 		{#snippet selectOption(option)}
-			{@const palData = palsData.pals[option.value]}
+			{@const palData = palsData.getPalData(option.value)}
 			<div class="flex items-center space-x-2">
 				<img src={getIconPath(option)} alt={option.label} class="h-8 w-8" />
 				<div class="grow">
 					<span>{option.label}</span>
 					<!-- <span class="text-xs">{option.value}</span> -->
 				</div>
-				{#each palData.element_types as elementType}
-					{@const elementObj = elementsData.elements[elementType.toString()]}
-					{@const elementIcon = assetLoader.loadImage(
-						`${ASSET_DATA_PATH}/img/${elementObj.icon}.webp`
-					)}
-					<img src={elementIcon} alt={elementType} class="h-6 w-6" />
-				{/each}
+				{#if palData}
+					{#each palData.element_types as elementType}
+						{@const elementObj = elementsData.elements[elementType.toString()]}
+						{@const elementIcon = assetLoader.loadImage(
+							`${ASSET_DATA_PATH}/img/${elementObj.icon}.webp`
+						)}
+						<img src={elementIcon} alt={elementType} class="h-6 w-6" />
+					{/each}
+				{/if}
 			</div>
 		{/snippet}
 	</Combobox>

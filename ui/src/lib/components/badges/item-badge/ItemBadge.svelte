@@ -136,7 +136,7 @@
 	const palIcon = $derived.by(() => {
 		if (slot.static_id && slot.static_id.includes('SkillUnlock_')) {
 			const palCharacterId = slot.static_id.replace('SkillUnlock_', '');
-			const palData = palsData.pals[palCharacterId];
+			const palData = palsData.getPalData(palCharacterId);
 			if (!palData) {
 				console.error(`Pal data not found for static id: ${slot.static_id}`);
 				return;
@@ -154,7 +154,7 @@
 	});
 	const palIconSrc = $derived.by(() => {
 		if (!isEgg) return;
-		const palData = palsData.pals[slot?.dynamic_item?.character_id ?? ''];
+		const palData = palsData.getPalData(slot?.dynamic_item?.character_id ?? '');
 		return assetLoader.loadMenuImage(slot?.dynamic_item?.character_id, palData?.is_pal ?? true);
 	});
 

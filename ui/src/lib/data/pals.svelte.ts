@@ -5,12 +5,16 @@ class Pals {
 	private loading = false;
 
 	pals: Record<string, PalData> = $state({});
+	keyMap: Record<string, string> = $state({});
 
 	private async ensurePalsLoaded(): Promise<void> {
 		if (Object.keys(this.pals).length === 0 && !this.loading) {
 			try {
 				this.loading = true;
 				this.pals = await sendAndWait(MessageType.GET_PALS);
+				for (const key of Object.keys(this.pals)) {
+					this.keyMap[key.toLowerCase()] = key;
+				}
 				this.loading = false;
 			} catch (error) {
 				this.loading = false;
@@ -24,9 +28,12 @@ class Pals {
 		}
 	}
 
-	async getPalInfo(key: string): Promise<PalData | undefined> {
-		await this.ensurePalsLoaded();
-		return this.pals[key];
+	getPalData(key: string): PalData | undefined {
+		try {
+			return this.pals[this.keyMap[key.toLowerCase()]];
+		} catch (error) {
+			console.error('Error getting pal data:', error);
+		}
 	}
 
 	async searchByLocalizedName(localizedName: string): Promise<PalData | undefined> {

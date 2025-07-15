@@ -38,7 +38,7 @@
 	const palImage = $derived.by(() => {
 		if (appState.selectedPal) {
 			const { character_key } = appState.selectedPal;
-			const palData = palsData.pals[character_key];
+			const palData = palsData.getPalData(character_key);
 			return assetLoader.loadPalImage(character_key, palData?.is_pal || false);
 		}
 	});
@@ -83,7 +83,7 @@
 	}
 
 	async function getPalDescription(character_id: string): Promise<string | undefined> {
-		const palData = palsData.pals[character_id];
+		const palData = palsData.getPalData(character_id);
 		if (!palData) return undefined;
 		return palData.description;
 	}
@@ -192,7 +192,7 @@
 
 	function handleMaxWorkSuitability() {
 		if (!appState.selectedPal) return;
-		const palData = palsData.pals[appState.selectedPal.character_key] ?? null;
+		const palData = palsData.getPalData(appState.selectedPal.character_key);
 		if (!palData) return;
 		for (const [key, value] of Object.entries(palData.work_suitability)) {
 			if (value === 0) continue;
