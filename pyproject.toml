@@ -1,6 +1,6 @@
 [project]
 name = "PalworldSavePal"
-version = "0.14.1"
+version = "0.14.2"
 requires-python = ">=3.12"
 dependencies = [
     "altgraph==0.17.4",
@@ -12,7 +12,7 @@ dependencies = [
     "clr-loader==0.2.6",
     "colorama==0.4.6",
     "colorlog==6.9.0",
-    "cx-freeze==7.2.7",
+    "cx-freeze==8.3.0",
     "deepdiff==8.0.1",
     "fastapi==0.115.6",
     "h11==0.16.0",
