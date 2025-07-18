@@ -928,7 +928,7 @@
 							{#each currentPageItems as item (item.pal.instance_id)}
 								{#if item.pal.character_id !== 'None' || !palSearchQuery}
 									<PalBadge
-										bind:pal={item.pal}
+										pal={item.pal}
 										bind:selected={selectedPals}
 										onSelect={handlePalSelect}
 										onDelete={() => handleDeletePal(currentBase![0], item.pal)}

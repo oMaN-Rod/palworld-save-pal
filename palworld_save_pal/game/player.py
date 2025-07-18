@@ -381,7 +381,7 @@ class Player(BaseModel):
             group_id=self._guild.id if isinstance(self._guild, Guild) else None,
             nickname=nickname,
         )
-        new_pal = Pal(new_pal_data)
+        new_pal = Pal(new_pal_data, new_pal=True)
         new_pal.hp = new_pal.max_hp
         if not self.pals:
             self.pals = {}
@@ -405,7 +405,7 @@ class Player(BaseModel):
             self._player_gvas_files.dps.properties["SaveParameterArray"]
         )[slot_idx]
 
-        pal = Pal(data=pal_data, dps=True)
+        pal = Pal(data=pal_data, dps=True, new_pal=True)
         pal.reset()
         pal.owner_uid = self.uid
         pal.instance_id = uuid.uuid4()

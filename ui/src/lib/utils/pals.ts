@@ -56,7 +56,7 @@ export async function handleMaxOutPal(pal: Pal, player: Player): Promise<void> {
 	if (!pal || !player) return;
 	const appState = getAppState();
 	pal.level = appState.settings.cheat_mode ? 255 : 65;
-	const maxLevelData = expData.expData['66'];
+	const maxLevelData = expData.expData[appState.settings.cheat_mode ? '100' : '66'];
 	pal.exp = maxLevelData.PalTotalEXP - maxLevelData.PalNextEXP;
 	const [_, valid] = canBeLucky(pal.character_id);
 	pal.is_boss = valid;

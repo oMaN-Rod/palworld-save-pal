@@ -496,7 +496,7 @@ class PalObjects:
                                     "Talent_HP": PalObjects.ByteProperty(50),
                                     "Talent_Shot": PalObjects.ByteProperty(50),
                                     "Talent_Defense": PalObjects.ByteProperty(50),
-                                    "FullStomach": PalObjects.FloatProperty(300),
+                                    "FullStomach": PalObjects.FloatProperty(300.0),
                                     "PassiveSkillList": PalObjects.ArrayPropertyValues(
                                         ArrayType.NAME_PROPERTY, passive_skills
                                     ),

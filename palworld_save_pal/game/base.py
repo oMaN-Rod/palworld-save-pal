@@ -120,7 +120,7 @@ class Base(BaseModel):
             group_id=group_id,
             nickname=nickname,
         )
-        new_pal = Pal(new_pal_data)
+        new_pal = Pal(new_pal_data, new_pal=True)
         self.pals[new_pal.instance_id] = new_pal
         safe_remove(new_pal.character_save, "OwnerPlayerUId")
         return new_pal
