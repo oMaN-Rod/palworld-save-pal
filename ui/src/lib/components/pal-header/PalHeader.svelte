@@ -65,7 +65,7 @@
 
 	async function calcPalLevelProgress() {
 		if (pal) {
-			if (pal.level === 60) {
+			if (pal.level === max_level) {
 				palLevelProgressToNext = 0;
 				palLevelProgressValue = 0;
 				palLevelProgressMax = 1;

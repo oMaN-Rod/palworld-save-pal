@@ -2,13 +2,12 @@ import copy
 import math
 from typing import Optional, Dict, Any, List
 from uuid import UUID
-from pydantic import BaseModel, PrivateAttr, computed_field
+from pydantic import BaseModel, computed_field
 
 from palworld_save_pal.dto.pal import PalDTO
-from palworld_save_pal.game.utils import clean_character_id
+from palworld_save_pal.game.utils import format_character_key, get_pal_data
 from palworld_save_pal.utils.dict import safe_remove
 from palworld_save_pal.utils.logging_config import create_logger
-from palworld_save_pal.utils.json_manager import JsonManager
 from palworld_save_pal.game.pal_objects import (
     PalObjects,
     ArrayType,
@@ -18,7 +17,6 @@ from palworld_save_pal.game.pal_objects import (
 
 
 logger = create_logger(__name__)
-PAL_DATA = JsonManager("data/json/pals.json").read()
 
 PAL_SICK_TYPES = [
     "PalReviveTimer",
@@ -30,11 +28,11 @@ PAL_SICK_TYPES = [
 
 
 class Pal(BaseModel):
-    _is_dps: bool = PrivateAttr(default=False)
-    _character_save: Dict[str, Any] = PrivateAttr(default_factory=dict)
-    _save_parameter: Dict[str, Any] = PrivateAttr(default_factory=dict)
+    _is_dps: bool = False
+    _character_save: Dict[str, Any] = {}
+    _save_parameter: Dict[str, Any] = {}
 
-    def __init__(self, data=None, dps=False, **kwargs):
+    def __init__(self, data=None, dps=False, new_pal=False, **kwargs):
         if data is not None and not dps:
             super().__init__()
             self._is_dps = dps
@@ -57,6 +55,8 @@ class Pal(BaseModel):
             )
         else:
             super().__init__(**kwargs)
+        if new_pal:
+            self._set_max_stomach()
 
     @computed_field
     def instance_id(self) -> UUID:
@@ -89,8 +89,7 @@ class Pal(BaseModel):
 
     @computed_field
     def character_key(self) -> Optional[str]:
-        self.character_id, character_key = clean_character_id(self.character_id)
-        return character_key
+        return format_character_key(self.character_id)
 
     @computed_field
     def owner_uid(self) -> Optional[UUID]:
@@ -118,15 +117,10 @@ class Pal(BaseModel):
             self._save_parameter["IsRarePal"] = PalObjects.BoolProperty(value)
         else:
             safe_remove(self._save_parameter, "IsRarePal")
-        self._format_boss_character_id(value)
 
     @computed_field
     def is_boss(self) -> bool:
         return self.character_id.upper().startswith("BOSS_") and not self.is_lucky
-
-    @is_boss.setter
-    def is_boss(self, value: bool):
-        self._format_boss_character_id(value)
 
     @computed_field
     def is_predator(self) -> bool:
@@ -203,9 +197,10 @@ class Pal(BaseModel):
             if "FullStomach" in self._save_parameter
             else 150.0
         )
-        return (
-            stomach if isinstance(stomach, float) and not math.isnan(stomach) else 150.0
-        )
+        # artifact bug fix: sometimes stomach is NaN or not a float
+        if not isinstance(stomach, float) or math.isnan(stomach):
+            return self._set_max_stomach()
+        return stomach
 
     @stomach.setter
     def stomach(self, value: float):
@@ -381,9 +376,9 @@ class Pal(BaseModel):
 
     @computed_field
     def max_hp(self) -> int:
-        hp_scaling = PalObjects.get_nested(
-            PAL_DATA, self.character_key, "scaling", "hp"
-        )
+        if not self.character_key or not self.pal_data:
+            return self.hp
+        hp_scaling = PalObjects.get_nested(self.pal_data, "scaling", "hp")
         if not hp_scaling:
             return self.hp
         condenser_bonus = (self.rank - 1) * 0.05
@@ -482,6 +477,10 @@ class Pal(BaseModel):
     def character_save(self) -> Dict[str, Any]:
         return self._character_save
 
+    @property
+    def pal_data(self) -> Optional[Dict[str, Any]]:
+        return get_pal_data(self.character_key)
+
     @computed_field
     def work_suitability(self) -> Dict[WorkSuitability, int]:
         if "GotWorkSuitabilityAddRankList" not in self._save_parameter:
@@ -569,7 +568,6 @@ class Pal(BaseModel):
             "talent_defense": int,
             "storage_slot": int,
             "is_lucky": bool,
-            "is_boss": bool,
             "learned_skills": list,
             "active_skills": list,
             "passive_skills": list,
@@ -586,6 +584,7 @@ class Pal(BaseModel):
             "name",
             "max_hp",
             "character_key",
+            "is_boss",
         }
 
         for key, value in other_pal.model_dump().items():
@@ -604,22 +603,21 @@ class Pal(BaseModel):
         self.hp = self.max_hp
         if not self._is_dps:
             self.heal()
+        self._format_boss_character_id(self.is_boss or self.is_lucky)
 
     def heal(self):
         for sick_type in PAL_SICK_TYPES:
             safe_remove(self._save_parameter, sick_type)
 
-        self.stomach = PalObjects.get_nested(
-            PAL_DATA, self.character_key, "max_full_stomach"
-        )
         self.sanity = 100.0
+        self._set_max_stomach()
 
     def _format_boss_character_id(self, is_boss: bool = False):
         has_boss_prefix = self.character_id.startswith("BOSS_")
-        if has_boss_prefix != is_boss:
-            self.character_id = (
-                f"BOSS_{self.character_key}" if is_boss else self.character_key
-            )
+        if not has_boss_prefix and is_boss:
+            self.character_id = f"BOSS_{self.character_id}"
+        elif has_boss_prefix and not is_boss:
+            self.character_id = self.character_id[5:]
 
     def populate_status_point_lists(self):
         self._save_parameter["GotStatusPointList"] = PalObjects.GetStatusPointList(
@@ -657,3 +655,12 @@ class Pal(BaseModel):
         self.level = 1
         self.exp = 0
         self.remove_status_point_lists()
+
+    def _set_max_stomach(self):
+        max_stomach = 300.0
+        if self.pal_data and "max_full_stomach" in self.pal_data:
+            max_stomach = PalObjects.get_nested(self.pal_data, "max_full_stomach")
+            self.stomach = float(max_stomach)
+        else:
+            self.stomach = max_stomach
+        return max_stomach

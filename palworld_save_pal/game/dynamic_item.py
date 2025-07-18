@@ -5,7 +5,7 @@ from uuid import UUID
 from pydantic import BaseModel, PrivateAttr, computed_field
 
 from palworld_save_pal.game.pal_objects import ArrayType, PalGender, PalObjects
-from palworld_save_pal.game.utils import clean_character_id
+from palworld_save_pal.game.utils import format_character_key
 from palworld_save_pal.utils.dict import safe_remove, safe_remove_multiple
 from palworld_save_pal.utils.logging_config import create_logger
 
@@ -49,8 +49,7 @@ class DynamicItem(BaseModel):
     def character_key(self) -> Optional[str]:
         if self.character_id is None:
             return None
-        _, character_key = clean_character_id(self.character_id)
-        return character_key
+        return format_character_key(self.character_id)
 
     @computed_field
     def durability(self) -> Optional[float]:

@@ -59,7 +59,8 @@
 							p.character_id === presetProfile.pal_preset?.character_id
 					).character_key}
 					<span class="text-sm">
-						{palsData.pals[palCharacterKey].localized_name}
+						{palsData.getPalData(palCharacterKey)?.localized_name ||
+							presetProfile.pal_preset?.character_id}
 					</span>
 					<Lock class="h-4 w-4" />
 				{/if}

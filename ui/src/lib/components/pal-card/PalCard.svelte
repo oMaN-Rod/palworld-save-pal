@@ -42,7 +42,7 @@
 		)
 	);
 	const sickClass = $derived(pal && pal.is_sick ? 'animate-pulse ring-4 ring-red-500' : '');
-	const palData = $derived(palsData.pals[pal.character_key]);
+	const palData = $derived(palsData.getPalData(pal.character_key));
 	const levelSyncTxt = $derived(
 		appState.selectedPlayer!.level < pal.level
 			? `Level sync ${pal.level} 🡆 ${appState.selectedPlayer!.level}`
@@ -69,7 +69,7 @@
 	const genderIcon = $derived(assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${pal.gender}.webp`));
 	const palIcon = $derived.by(() => {
 		if (!pal) return '';
-		return assetLoader.loadMenuImage(pal.character_id, palData?.is_pal || false);
+		return assetLoader.loadMenuImage(pal.character_key, palData?.is_pal || false);
 	});
 
 	function handleClick(event: MouseEvent) {

@@ -404,7 +404,7 @@
 	}
 
 	async function sortByPaldeckIndex() {
-		const palInfos = filteredPals.map((p) => palsData.pals[p.pal.character_key]);
+		const palInfos = filteredPals.map((p) => palsData.getPalData(p.pal.character_key));
 		const palsWithInfo = filteredPals.map((pal, index) => [pal, palInfos[index]]);
 
 		palsWithInfo.sort((a, b) => {
@@ -780,7 +780,7 @@
 					{#each currentPageItems as item (item.pal.instance_id)}
 						{#if item.pal.character_id !== 'None' || (!searchQuery && selectedFilter === 'All' && sortBy === 'slot-index')}
 							<PalBadge
-								bind:pal={item.pal}
+								pal={item.pal}
 								bind:selected={selectedPals}
 								onSelect={handlePalSelect}
 								onMove={() => {}}

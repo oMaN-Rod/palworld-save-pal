@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { SectionHeader } from '$components/ui';
 	import { type Pal } from '$types';
-	import { getAppState } from '$states';
 	import { ActiveSkillBadge, StatusBadge, PalHeader, PassiveSkillBadge } from '$components';
 	import { palsData } from '$lib/data';
 	import { staticIcons } from '$types/icons';
@@ -12,8 +11,6 @@
 	let { pal = $bindable() } = $props<{
 		pal: Pal;
 	}>();
-
-	const appState = getAppState();
 
 	let originalActiveSkills = $derived(pal ? [...pal.active_skills] : []);
 	let originalPassiveSkills = $derived(pal ? [...pal.passive_skills] : []);
@@ -31,7 +28,7 @@
 	const activeProgress = new Tween(1, { duration: 500, easing: cubicOut });
 	const passiveProgress = new Tween(1, { duration: 500, easing: cubicOut });
 
-	const palData = $derived(palsData.pals[pal.character_key]);
+	const palData = $derived(palsData.getPalData(pal.character_key));
 
 	function getInitialActiveSkills() {
 		if (!pal || !pal.active_skills || pal.active_skills.length === 0) {
