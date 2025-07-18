@@ -35,18 +35,49 @@
 
 	const modal = getModalState();
 
-	const levels = Object.values(friendshipData.friendshipData).sort((a, b) => b.rank - a.rank);
-	const levelsAsc = Object.values(friendshipData.friendshipData).sort((a, b) => a.rank - b.rank);
+	const levels = Object.values(friendshipData.friendshipData).sort((a, b) => a.rank - b.rank);
 	const trustCurrent = $derived(pal?.friendship_point ?? 0);
+
 	const currentLevel = $derived.by(() => {
 		if (!pal) return 0;
-		const level = levels.find((l) => trustCurrent >= l.required_point)?.rank ?? 0;
-		return level;
+		for (let i = levels.length - 1; i >= 0; i--) {
+			if (trustCurrent >= levels[i].required_point) {
+				return levels[i].rank;
+			}
+		}
+		return levels[0].rank;
 	});
-	const nextRequired = $derived.by(() => {
-		if (!pal) return 0;
-		const next = levelsAsc.find((l) => trustCurrent < l.required_point);
-		return next?.required_point ?? 200000; // Max level reached
+
+	const levelProgress = $derived.by(() => {
+		if (!pal) return { current: 0, max: 100, currentLevelMin: 0, nextLevelMin: 100 };
+
+		const currentLevelData = levels.find((l) => l.rank === currentLevel);
+		const nextLevelData = levels.find((l) => l.rank === currentLevel + 1);
+
+		if (!currentLevelData) {
+			return { current: 0, max: 100, currentLevelMin: 0, nextLevelMin: 100 };
+		}
+
+		const currentLevelMin = currentLevelData.required_point;
+		if (currentLevel === 10 || !nextLevelData) {
+			return {
+				current: trustCurrent,
+				max: currentLevelMin,
+				currentLevelMin,
+				nextLevelMin: currentLevelMin + 1
+			};
+		}
+
+		const nextLevelMin = nextLevelData.required_point;
+		const progressInCurrentLevel = trustCurrent - currentLevelMin;
+		const totalProgressNeeded = nextLevelMin - currentLevelMin;
+
+		return {
+			current: progressInCurrentLevel,
+			max: totalProgressNeeded,
+			currentLevelMin,
+			nextLevelMin
+		};
 	});
 
 	function handleHeal() {
@@ -87,13 +118,25 @@
 				</button>
 			</Tooltip>
 		{/if}
-		<Progress
-			value={trustCurrent}
-			max={nextRequired}
-			height={healthHeight}
-			trailingLabel={`Lv.${currentLevel}`}
-			color="bg-[#db7c90]"
-		/>
+		<Tooltip baseClass="w-full">
+			<Progress
+				value={levelProgress.current}
+				max={levelProgress.max}
+				height={healthHeight}
+				trailingLabel={`Lv.${currentLevel}`}
+				color="bg-[#db7c90]"
+			/>
+			{#snippet popup()}
+				<span>Trust: {trustCurrent.toLocaleString()}</span>
+				{#if currentLevel < 10}
+					<span> / {levelProgress.nextLevelMin.toLocaleString()}</span>
+				{:else}
+					<span> (Max Level)</span>
+				{/if}
+				<br />
+				<span>Progress: {((levelProgress.current / levelProgress.max) * 100).toFixed(1)}%</span>
+			{/snippet}
+		</Tooltip>
 	</div>
 	<div class="flex items-center">
 		{#if showActions}

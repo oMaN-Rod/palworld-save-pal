@@ -68,7 +68,7 @@
 </script>
 
 <Tooltip baseClass="w-full">
-	<div class={cn('bg-surface-800 flex', height, rounded)} {...additionalProps}>
+	<div class={cn('bg-surface-800 relative flex', height, rounded)} {...additionalProps}>
 		<div
 			class={cn(
 				'flex h-full items-center overflow-visible whitespace-nowrap pl-1 text-start align-middle text-sm font-bold transition-all',
@@ -78,13 +78,11 @@
 			style={`width: ${progressPercentage}%`}
 		>
 			{#if showLabel}
-				<span class="grow">{value.toFixed(0) / dividend} / {max / dividend}</span>
+				<span>{value.toFixed(0) / dividend} / {max / dividend}</span>
 			{/if}
 		</div>
 		{#if trailingLabel}
-			<span class="ml-auto flex items-center pr-2 text-end text-xs font-bold text-white"
-				>{trailingLabel}</span
-			>
+			<span class="absolute right-2 top-1 text-xs font-bold text-white">{trailingLabel}</span>
 		{/if}
 	</div>
 	{#snippet popup()}
