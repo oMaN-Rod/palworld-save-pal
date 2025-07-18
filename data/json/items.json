@@ -25418,7 +25418,7 @@
     "price": 0,
     "sort_id": 10317,
     "icon": "t_darkmutant_icon_normal",
-    "disabled": false
+    "disabled": true
   },
   "SkillUnlock_Deer": {
     "group": "KeyItem",
@@ -25496,7 +25496,7 @@
     "price": 0,
     "sort_id": 10316,
     "icon": "t_itemicon_essential_skillunlock_saddle",
-    "disabled": false
+    "disabled": true
   },
   "SkillUnlock_ElecPanda": {
     "group": "KeyItem",
