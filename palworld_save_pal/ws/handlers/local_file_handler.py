@@ -290,7 +290,11 @@ async def select_gamepass_save_handler(
         for filename in os.listdir(player_dir):
             if filename.startswith("container."):
                 file_path = os.path.join(player_dir, filename)
-                player_uuid = uuid.UUID(player_id)
+                try:
+                    player_uuid = uuid.UUID(player_id)
+                except ValueError:
+                    logger.warning("Invalid player UUID: %s", player_id)
+                    continue
                 if player_uuid not in player_files:
                     player_files[player_uuid] = {}
                 logger.debug(
