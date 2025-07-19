@@ -210,15 +210,22 @@ class Guild(BaseModel):
         self.lab_research = updated_research
 
     def update_from(self, guildDTO: GuildDTO):
+        logger.debug("%s <= %s", self.id, guildDTO.name or "Unnamed GuildDTO")
         if guildDTO.name:
             self.name = guildDTO.name
-        if guildDTO.base:
-            base = next(
-                b
-                for b in self.bases.values()
-                if are_equal_uuids(b.id, guildDTO.base.id)
-            )
-            base.update_from(guildDTO.base)
+        if guildDTO.bases:
+            for base_id, base_dto in guildDTO.bases.items():
+                if base_id in self.bases:
+                    self.bases[base_id].update_from(base_dto)
+                else:
+                    logger.warning(
+                        "Base %s not found in guild %s, adding new base",
+                        base_id,
+                        self.id,
+                    )
+        else:
+            logger.warning("No bases found in GuildDTO for guild %s", self.id)
+
         if guildDTO.guild_chest and self.guild_chest is not None:
             self.guild_chest.update_from(guildDTO.guild_chest.model_dump())
 

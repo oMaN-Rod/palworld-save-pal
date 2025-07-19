@@ -10,6 +10,7 @@ import type {
 	ItemContainerSlot
 } from '$types';
 import { EntryState, MessageType, type Pal, type Player, type SaveFile } from '$types';
+import { deepCopy } from '$utils';
 import { getModalState } from './modalState.svelte';
 
 const modal = getModalState();
@@ -86,6 +87,7 @@ class AppState {
 		}
 
 		for (const guild of Object.values(this.guilds)) {
+			const guildClone = deepCopy(guild);
 			if (guild.bases) {
 				for (const base of Object.values(guild.bases)) {
 					if (base.pals) {
@@ -104,24 +106,18 @@ class AppState {
 						}
 					}
 					if (modifiedContainers.length > 0) {
-						modifiedGuilds = [
-							...modifiedGuilds,
-							[
-								guild.id,
-								{
-									base: { id: base.id, storage_containers: Object.fromEntries(modifiedContainers) }
-								}
-							]
-						];
+						guildClone.bases[base.id].storage_containers = Object.fromEntries(modifiedContainers);
+						guild.state = EntryState.MODIFIED;
 					}
 				}
 			}
 			if (guild.guild_chest && guild.guild_chest.state === EntryState.MODIFIED) {
-				modifiedGuilds = [...modifiedGuilds, [guild.id, { guild_chest: guild.guild_chest }]];
 				guild.guild_chest.state = EntryState.NONE;
+			} else if (guildClone.guild_chest) {
+				guildClone.guild_chest = undefined;
 			}
 			if (guild.state === EntryState.MODIFIED) {
-				modifiedGuilds = [...modifiedGuilds, [guild.id, guild]];
+				modifiedGuilds = [...modifiedGuilds, [guildClone.id, guildClone]];
 				guild.state = EntryState.NONE;
 			}
 		}

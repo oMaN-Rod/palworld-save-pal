@@ -886,6 +886,7 @@ class SaveFile(BaseModel):
             raise ValueError("No GvasFile has been loaded.")
 
         for id, dto in modified_guilds.items():
+            logger.debug("Updating guild %s", id)
             await ws_callback(f"Updating guild {id}")
             guild = self._guilds.get(id)
             guild.update_from(dto)

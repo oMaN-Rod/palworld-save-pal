@@ -22,6 +22,7 @@ logger = create_logger(__name__)
 
 class BaseDTO(BaseModel):
     id: UUID
+    name: Optional[str] = None
     storage_containers: Dict[UUID, ItemContainer]
 
 
@@ -65,6 +66,21 @@ class Base(BaseModel):
     @computed_field
     def id(self) -> UUID:
         return PalObjects.as_uuid(self._base_save_data["key"])
+
+    @computed_field
+    def name(self) -> str:
+        return PalObjects.get_nested(
+            self._base_save_data, "value", "RawData", "value", "name"
+        )
+
+    @name.setter
+    def name(self, value: str):
+        if not self._base_save_data:
+            return
+        logger.debug("%s => %s", self.id, value)
+        PalObjects.set_nested(
+            self._base_save_data, "value", "RawData", "value", "name", value=value
+        )
 
     @computed_field
     def location(self) -> Optional[WorldMapPoint]:
@@ -144,8 +160,13 @@ class Base(BaseModel):
         self.pal_container.remove_pal(pal_id)
 
     def update_from(self, other: BaseDTO):
+        logger.debug("%s <= %s", self.id, other.id)
         for id, container in other.storage_containers.items():
             self.storage_containers[id].update_from(container.model_dump())
+        if other.name:
+            self.name = other.name
+        else:
+            logger.warning("Base name is empty")
 
     def _load_storage_containers(
         self, map_object_save_data, item_container_save_data, dynamic_item_save_data

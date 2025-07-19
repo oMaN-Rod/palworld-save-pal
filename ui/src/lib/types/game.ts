@@ -171,7 +171,7 @@ export type BaseDTO = { id: string; storage_containers: Record<string, ItemConta
 
 export type GuildDTO = {
 	name?: string;
-	base?: BaseDTO;
+	bases?: Record<string, BaseDTO>;
 	guild_chest?: ItemContainer;
 	lab_research?: GuildLabResearchInfo[];
 };
