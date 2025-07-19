@@ -85,7 +85,7 @@ export async function handleMaxOutPal(pal: Pal, player: Player): Promise<void> {
 	pal.friendship_point = 200000;
 }
 
-export const applyPalPreset = (pal: Pal, presetProfile: PresetProfile, player: Player): void => {
+export const applyPalPreset = (pal: Pal, presetProfile: PresetProfile, player?: Player): void => {
 	if (!presetProfile.pal_preset) return;
 
 	const palData = palsData.getPalData(pal.character_key);

@@ -34,6 +34,9 @@ async def update_save_file_handler(message: UpdateSaveFileMessage, ws: WebSocket
     modified_dps_pals = (
         message.data.modified_dps_pals if message.data.modified_dps_pals else None
     )
+    modified_gps_pals = (
+        message.data.modified_gps_pals if message.data.modified_gps_pals else None
+    )
     app_state = get_app_state()
     save_file = app_state.save_file
 
@@ -48,6 +51,8 @@ async def update_save_file_handler(message: UpdateSaveFileMessage, ws: WebSocket
         await save_file.update_guilds(modified_guilds, ws_callback)
     if modified_dps_pals:
         await save_file.update_dps_pals(modified_dps_pals, ws_callback)
+    if modified_gps_pals:
+        await save_file.update_gps_pals(modified_gps_pals, ws_callback)
 
     app_state.players = save_file.get_players()
     response = build_response(MessageType.UPDATE_SAVE_FILE, "Changes saved")

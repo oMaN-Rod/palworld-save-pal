@@ -19,10 +19,10 @@
 	import { send } from '$utils/websocketUtils';
 	import Nuke from '$components/ui/icons/Nuke.svelte';
 	import DimensionalPalStorage from './components/dps/DimensionalPalStorage.svelte';
+	import GlobalPalStorage from './components/gps/GlobalPalStorage.svelte';
 
 	const appState = getAppState();
 	const nav = getNavigationState();
-	const ws = getSocketState();
 	const modal = getModalState();
 
 	$effect(() => {
@@ -108,6 +108,9 @@
 						{#if appState.selectedPlayer?.dps}
 							<Tabs.Control value="dps">DPS</Tabs.Control>
 						{/if}
+						{#if appState.gps}
+							<Tabs.Control value="gps">GPS</Tabs.Control>
+						{/if}
 						<Tabs.Control value="guilds">Guild</Tabs.Control>
 						<Tabs.Control value="pal">Pal</Tabs.Control>
 					</div>
@@ -128,7 +131,11 @@
 								<DimensionalPalStorage />
 							</Tabs.Panel>
 						{/if}
-
+						{#if appState.gps}
+							<Tabs.Panel value="gps" classes="h-screen">
+								<GlobalPalStorage />
+							</Tabs.Panel>
+						{/if}
 						<Tabs.Panel value="guilds" classes="h-screen">
 							<Guilds />
 						</Tabs.Panel>

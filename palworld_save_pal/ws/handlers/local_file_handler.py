@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 import time
 import shutil
 from typing import Dict
@@ -142,8 +143,14 @@ async def save_modded_steam_save(ws: WebSocket, ws_callback, save_file: SaveFile
     await ws_callback("Writing player files")
     player_save_dir = os.path.join(app_state.settings.save_dir, "Players")
     save_file.to_player_sav_files(player_save_dir)
+    if save_file.get_gps():
+        await ws_callback("Writing GPS file")
+        save_dir_parent = Path(app_state.settings.save_dir).parent
+        save_file.to_gps_save_file(
+            os.path.join(save_dir_parent, "GlobalPalStorage.sav")
+        )
     response = build_response(
-        MessageType.SAVE_MODDED_SAVE, f"Modded save file saved successfully"
+        MessageType.SAVE_MODDED_SAVE, "Modded save file saved successfully"
     )
     await ws.send_json(response)
 
@@ -168,7 +175,11 @@ async def process_steam_save(save_path: str, ws: WebSocket, local: bool):
         raise ValueError(validation_result.error)
 
     logger.debug("Level.sav path: %s", validation_result.level_sav)
+    logger.debug("LevelMeta.sav path: %s", validation_result.level_meta)
     logger.debug("Players directory path: %s", validation_result.players_dir)
+    logger.debug(
+        "GlobalPalStorage.sav path: %s", validation_result.global_pal_storage_sav
+    )
 
     app_state = get_app_state()
 
@@ -182,6 +193,11 @@ async def process_steam_save(save_path: str, ws: WebSocket, local: bool):
 
     player_files = FileManager.get_player_saves(validation_result.players_dir)
 
+    global_pal_storage_sav = None
+    if validation_result.global_pal_storage_sav:
+        with open(validation_result.global_pal_storage_sav, "rb") as f:
+            global_pal_storage_sav = f.read()
+
     await app_state.process_save_files(
         save_path,
         level_sav,
@@ -191,6 +207,7 @@ async def process_steam_save(save_path: str, ws: WebSocket, local: bool):
             build_response(MessageType.PROGRESS_MESSAGE, msg)
         ),
         local=local,
+        global_pal_storage_sav=global_pal_storage_sav,
     )
 
     data = {
@@ -209,6 +226,10 @@ async def process_steam_save(save_path: str, ws: WebSocket, local: bool):
 
     response = build_response(MessageType.GET_GUILDS, app_state.guilds)
     await ws.send_json(response)
+
+    if global_pal_storage_sav:
+        response = build_response(MessageType.GET_GPS_PALS, app_state.gps)
+        await ws.send_json(response)
 
 
 async def get_gamepass_saves(file_path: str, ws: WebSocket):

@@ -59,6 +59,7 @@ class FileValidationResult(BaseModel):
     players_dir: Optional[str] = None
     error: Optional[str] = None
     gamepass_saves: Optional[Dict[str, GamepassSaveData]] = None
+    global_pal_storage_sav: Optional[str] = None
 
     model_config = ConfigDict(arbitrary_types_allowed=True)
 
@@ -72,6 +73,8 @@ class FileManager:
         level_sav = save_dir / "Level.sav"
         level_meta = save_dir / "LevelMeta.sav"
         players_dir = save_dir / "Players"
+        parent_dir = save_dir.parent
+        global_pal_storage_sav = parent_dir / "GlobalPalStorage.sav"
 
         if not level_sav.exists():
             return FileValidationResult(
@@ -98,12 +101,18 @@ class FileManager:
                 error="No player save files found in the Players directory.",
             )
 
+        if not global_pal_storage_sav.exists():
+            global_pal_storage_sav = None
+
         return FileValidationResult(
             valid=True,
             level_sav=str(level_sav),
             level_meta=str(level_meta) if level_meta else None,
             players_dir=str(players_dir),
             error=None,
+            global_pal_storage_sav=str(global_pal_storage_sav)
+            if global_pal_storage_sav
+            else None,
         )
 
     @staticmethod

@@ -1,11 +1,12 @@
 import threading
-from typing import Dict, Optional
+from typing import Dict, List, Optional
 from uuid import UUID
 from pydantic import BaseModel, ConfigDict, Field
 from webview import Window
 
 from palworld_save_pal.editor.settings import Settings
 from palworld_save_pal.game.guild import Guild
+from palworld_save_pal.game.pal import Pal
 from palworld_save_pal.game.player import Player
 from palworld_save_pal.game.save_file import SaveFile, SaveType
 from palworld_save_pal.server_thread import ServerThread
@@ -28,6 +29,7 @@ class AppState(BaseModel):
     gamepass_index_path: Optional[str] = None
     gamepass_saves: Dict[str, GamepassSaveData] = {}
     selected_gamepass_save: Optional[GamepassSaveData] = None
+    gps: Optional[Dict[int, Pal]] = Field(default_factory=dict)
 
     model_config = ConfigDict(arbitrary_types_allowed=True)
 
@@ -40,6 +42,7 @@ class AppState(BaseModel):
         ws_callback=None,
         local=False,
         save_type: SaveType = SaveType.STEAM,
+        global_pal_storage_sav: Optional[bytes] = None,
     ):
         logger.info("Processing save files for %s=>%s %s", sav_id, save_type, local)
         self.local = local
@@ -51,6 +54,9 @@ class AppState(BaseModel):
         await ws_callback("Files loaded, getting players...")
         self.players = self.save_file.get_players()
         self.guilds = self.save_file.get_guilds()
+        if global_pal_storage_sav:
+            await ws_callback("Loading global pal storage...")
+            self.gps = self.save_file.load_gps(global_pal_storage_sav)
 
     def select_gamepass_save(self, save_id: str) -> Optional[GamepassSaveData]:
         gamepass_save = self.gamepass_saves.get(save_id)

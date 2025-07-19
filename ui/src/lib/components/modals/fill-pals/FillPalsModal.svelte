@@ -16,7 +16,7 @@
 		closeModal
 	} = $props<{
 		title: string;
-		target?: 'pal-box' | 'dps';
+		target?: 'pal-box' | 'dps' | 'gps';
 		closeModal: (value: boolean | null) => void;
 	}>();
 
@@ -60,9 +60,17 @@
 		).length
 	);
 	const totalDpsPals = $derived(Object.values(appState.selectedPlayer!.dps || {}).length);
-	const availablePalBoxSlots = $derived(
-		target === 'pal-box' ? 960 - totalPalBoxPals : 9600 - totalDpsPals
-	);
+	const totalGpsPals = $derived(Object.values(appState.gps || {}).length);
+	const availablePalBoxSlots = $derived.by(() => {
+		switch (target) {
+			case 'dps':
+				return 9600 - totalDpsPals;
+			case 'gps':
+				return 960 - totalGpsPals;
+			default:
+				return 960 - totalPalBoxPals;
+		}
+	});
 
 	const humanPals = $derived(
 		Object.entries(palsData.pals)
@@ -181,46 +189,73 @@
 		const elementProfile =
 			selectedPresets.filter(
 				(p) =>
-					p.pal_preset?.lock_element && palData.element_types.includes(p.pal_preset?.element as any)
+					p.pal_preset?.lock_element &&
+					palData?.element_types.includes(p.pal_preset?.element as any)
 			)[0] || undefined;
 		const defaultProfile =
 			selectedPresets.filter((p) => !p.pal_preset?.lock && !p.pal_preset?.lock_element)[0] ||
 			undefined;
 		const profile = palProfile || elementProfile || defaultProfile;
-		applyPalPreset(pal as Pal, profile, appState.selectedPlayer!);
+		applyPalPreset(pal as Pal, profile, target === 'gps' ? undefined : appState.selectedPlayer!);
 	};
 
 	async function addPal(character_id: string, nickname: string, name: string) {
 		let res: { player_uid: string; pal: Pal; index: number } | undefined = undefined;
-		if (target === 'pal-box') {
-			res = await sendAndWait(MessageType.ADD_PAL, {
-				player_id: appState.selectedPlayer!.uid,
-				character_id,
-				nickname,
-				container_id: appState.selectedPlayer!.pal_box_id
-			});
-		} else {
-			res = await sendAndWait(MessageType.ADD_DPS_PAL, {
-				player_id: appState.selectedPlayer!.uid,
-				character_id,
-				nickname
-			});
+		switch (target) {
+			case 'pal-box':
+				res = await sendAndWait(MessageType.ADD_PAL, {
+					player_id: appState.selectedPlayer!.uid,
+					character_id,
+					nickname,
+					container_id: appState.selectedPlayer!.pal_box_id
+				});
+				break;
+			case 'dps':
+				res = await sendAndWait(MessageType.ADD_DPS_PAL, {
+					player_id: appState.selectedPlayer!.uid,
+					character_id,
+					nickname
+				});
+			case 'gps':
+				res = await sendAndWait(MessageType.ADD_GPS_PAL, {
+					character_id,
+					nickname
+				});
+				break;
 		}
 
 		if (!res) {
-			console.error(`Failed to add pal ${character_id} for player ${appState.selectedPlayer!.uid}`);
+			let message = `Failed to add pal ${character_id}`;
+			if (target === 'pal-box') {
+				message += ` to pal box for player ${appState.selectedPlayer!.uid}`;
+			} else if (target === 'dps') {
+				message += ` to dps for player ${appState.selectedPlayer!.uid}`;
+			} else if (target === 'gps') {
+				message += ` to GPS`;
+			}
+			console.error(message);
 			return;
 		}
 		res.pal.name = name;
 		handleApplyPalPreset(res.pal);
-		if (target === 'pal-box') {
-			appState.selectedPlayer!.pals![res.pal.instance_id] = res.pal;
-		} else {
-			if (appState.selectedPlayer!.dps) {
-				appState.selectedPlayer!.dps[res.index] = res.pal;
-			} else {
-				appState.selectedPlayer!.dps = { [res.index]: res.pal };
-			}
+		switch (target) {
+			case 'pal-box':
+				appState.selectedPlayer!.pals![res.pal.instance_id] = res.pal;
+				break;
+			case 'dps':
+				if (appState.selectedPlayer!.dps) {
+					appState.selectedPlayer!.dps[res.index] = res.pal;
+				} else {
+					appState.selectedPlayer!.dps = { [res.index]: res.pal };
+				}
+				break;
+			case 'gps':
+				if (appState.gps) {
+					appState.gps[res.index] = res.pal;
+				} else {
+					appState.gps = { [res.index]: res.pal };
+				}
+				break;
 		}
 
 		count++;
@@ -263,82 +298,56 @@
 		}
 	}
 
-	async function createTowerBosses() {
-		if (!addBossPals) {
-			return;
-		}
-		for (const [character_id, palData] of bossPals) {
+	async function createSpecialPalVariants(pals: [string, PalData][]) {
+		for (const [character_id, palData] of pals) {
 			const nickname = formatNickname(
 				palData.localized_name || character_id,
 				appState.settings.new_pal_prefix
 			);
 			await addPal(character_id, nickname, palData.localized_name || character_id);
 		}
+	}
+
+	async function createTowerBosses() {
+		if (!addBossPals) {
+			return;
+		}
+		await createSpecialPalVariants(bossPals);
 	}
 
 	async function createPredatorPals() {
 		if (!addPredatorPals) {
 			return;
 		}
-		for (const [character_id, palData] of predatorPals) {
-			const nickname = formatNickname(
-				palData.localized_name || character_id,
-				appState.settings.new_pal_prefix
-			);
-			await addPal(character_id, nickname, palData.localized_name || character_id);
-		}
+		await createSpecialPalVariants(predatorPals);
 	}
 
 	async function createRaidPals() {
 		if (!addRaidPals) {
 			return;
 		}
-		for (const [character_id, palData] of raidPals) {
-			const nickname = formatNickname(
-				palData.localized_name || character_id,
-				appState.settings.new_pal_prefix
-			);
-			await addPal(character_id, nickname, palData.localized_name || character_id);
-		}
+		await createSpecialPalVariants(raidPals);
 	}
 
 	async function createSummonPals() {
 		if (!addSummonPals) {
 			return;
 		}
-		for (const [character_id, palData] of summonPals) {
-			const nickname = formatNickname(
-				palData.localized_name || character_id,
-				appState.settings.new_pal_prefix
-			);
-			await addPal(character_id, nickname, palData.localized_name || character_id);
-		}
+		await createSpecialPalVariants(summonPals);
 	}
 
 	async function createOilRigPals() {
 		if (!addOilRigPals) {
 			return;
 		}
-		for (const [character_id, palData] of oilRigPals) {
-			const nickname = formatNickname(
-				palData.localized_name || character_id,
-				appState.settings.new_pal_prefix
-			);
-			await addPal(character_id, nickname, palData.localized_name || character_id);
-		}
+		await createSpecialPalVariants(oilRigPals);
 	}
 
 	async function createHumanPals() {
 		if (!addHumanPals) {
 			return;
 		}
-		for (const [character_id, palData] of humanPals) {
-			const nickname = formatNickname(
-				palData.localized_name || character_id,
-				appState.settings.new_pal_prefix
-			);
-			await addPal(character_id, nickname, palData.localized_name || character_id);
-		}
+		await createSpecialPalVariants(humanPals);
 	}
 
 	async function handleConfirm() {

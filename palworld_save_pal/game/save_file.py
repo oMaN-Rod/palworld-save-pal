@@ -2,10 +2,9 @@ import copy
 from enum import Enum
 import json
 import os
-import platform
-from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple, Union
 from uuid import UUID
+import uuid
 from pydantic import BaseModel, ConfigDict, PrivateAttr
 
 from palworld_save_tools.archive import (
@@ -27,7 +26,7 @@ from palworld_save_pal.game.base import Base
 from palworld_save_pal.game.guild import Guild
 from palworld_save_pal.game.pal import Pal
 from palworld_save_pal.game.pal_objects import PalObjects
-from palworld_save_pal.game.enum import GroupType
+from palworld_save_pal.game.enum import GroupType, PalGender
 from palworld_save_pal.utils.logging_config import create_logger
 from palworld_save_pal.game.player import Player, PlayerDTO, PlayerGvasFiles
 from palworld_save_pal.utils.uuid import are_equal_uuids, is_empty_uuid
@@ -148,10 +147,12 @@ class SaveFile(BaseModel):
     _players: Dict[UUID, Player] = PrivateAttr(default_factory=dict)
     _pals: Dict[UUID, Pal] = PrivateAttr(default_factory=dict)
     _guilds: Dict[UUID, Guild] = PrivateAttr(default_factory=dict)
+    _gps_pals: Optional[Dict[int, Pal]] = PrivateAttr(default_factory=dict)
 
     _gvas_file: Optional[GvasFile] = PrivateAttr(default=None)
     _level_meta_gvas_file: Optional[GvasFile] = PrivateAttr(default=None)
     _player_gvas_files: Dict[UUID, PlayerGvasFiles] = PrivateAttr(default_factory=dict)
+    _gps_gvas_file: Optional[GvasFile] = PrivateAttr(default=None)
 
     _character_save_parameter_map: List[Dict[str, Any]] = PrivateAttr(
         default_factory=list
@@ -498,7 +499,7 @@ class SaveFile(BaseModel):
         player_id: UUID,
         character_id: str,
         nickname: str,
-        storage_slot: Union[int | None] = None,
+        storage_slot: Optional[int] = None,
     ) -> Optional[Pal]:
         player = self._players.get(player_id)
         if not player:
@@ -509,13 +510,73 @@ class SaveFile(BaseModel):
             return
         return slot_idx, new_pal
 
+    def _find_first_empty_gps_slot(self) -> Optional[int]:
+        if not self._gps_gvas_file:
+            raise ValueError("GPS Gvas file is not initialized.")
+
+        save_parameter_array = PalObjects.get_array_property(
+            self._gps_gvas_file.properties["SaveParameterArray"]
+        )
+        for index, entry in enumerate(save_parameter_array):
+            save_parameter = PalObjects.get_value(entry["SaveParameter"])
+            character_id = (
+                PalObjects.get_value(save_parameter["CharacterID"])
+                if save_parameter and "CharacterID" in save_parameter
+                else None
+            )
+            if character_id is None or character_id == "None":
+                logger.debug(
+                    "Found empty GPS slot at index %s",
+                    index,
+                )
+                return index
+        return None
+
+    def add_gps_pal(
+        self,
+        character_id: str,
+        nickname: str,
+        storage_slot: Optional[int] = None,
+    ) -> Optional[Tuple[Pal, int]]:
+        if not self._gps_gvas_file:
+            raise ValueError("GPS Gvas file is not initialized.")
+
+        slot_idx = (
+            storage_slot
+            if storage_slot is not None
+            else self._find_first_empty_gps_slot()
+        )
+        if slot_idx is None:
+            logger.error("No empty GPS slot found.")
+            return None
+        pal_data = PalObjects.get_array_property(
+            self._gps_gvas_file.properties["SaveParameterArray"]
+        )[slot_idx]
+
+        pal = Pal(data=pal_data, dps=True)
+        pal.reset()
+        pal.owner_uid = PalObjects.EMPTY_UUID
+        pal.instance_id = uuid.uuid4()
+        pal.character_id = character_id
+        pal.nickname = nickname
+        pal.filtered_nickname = nickname
+        pal.storage_id = PalObjects.EMPTY_UUID
+        pal.storage_slot = 0
+        pal.gender = PalGender.FEMALE
+        pal.populate_status_point_lists()
+        pal.hp = pal.max_hp
+        if not self._gps_pals:
+            self._gps_pals = {}
+        self._gps_pals[slot_idx] = pal
+        return pal, slot_idx
+
     def add_guild_pal(
         self,
         character_id: str,
         nickname: str,
         guild_id: UUID,
         base_id: UUID,
-        storage_slot: Union[int | None] = None,
+        storage_slot: Optional[int] = None,
     ):
         guild = self._guilds.get(guild_id)
         if not guild:
@@ -642,11 +703,24 @@ class SaveFile(BaseModel):
     def get_player(self, player_id: UUID) -> Player:
         return self._players.get(player_id)
 
-    def get_guild(self, guild_id: UUID) -> Guild:
-        return self._guilds.get(guild_id)
+    def get_guild(self, guild_id: UUID) -> Optional[Guild]:
+        return self._guilds.get(guild_id, None)
 
     def get_guilds(self):
         return self._guilds
+
+    def get_gps(self) -> Optional[Dict[int, Pal]]:
+        return self._gps_pals
+
+    def load_gps(self, global_pal_storage_sav: bytes):
+        logger.info("Loading global pal storage")
+        raw_gvas, _ = decompress_sav_to_gvas(global_pal_storage_sav)
+        gvas_file = GvasFile.read(
+            raw_gvas, PALWORLD_TYPE_HINTS, CUSTOM_PROPERTIES, allow_nan=True
+        )
+        self._gps_gvas_file = gvas_file
+        self._load_gps_pals()
+        return self._gps_pals
 
     def get_base(self, base_id: UUID) -> Base:
         for guild in self._guilds.values():
@@ -788,14 +862,26 @@ class SaveFile(BaseModel):
                 allow_nan=allow_nan,
             )
 
-    def to_sav_file(self, output_path):
+    def to_sav_file(self, output_path: str) -> None:
         logger.info("Converting %s to SAV, saving to %s", self.name, output_path)
         gvas = copy.deepcopy(self._gvas_file)
         sav_file = compress_gvas_to_sav(gvas.write(CUSTOM_PROPERTIES), 0x31)
         with open(output_path, "wb") as f:
             f.write(sav_file)
 
-    def to_player_sav_files(self, output_path):
+    def to_gps_save_file(self, output_path: str) -> None:
+        if not self._gps_gvas_file:
+            raise ValueError("No GPS GvasFile has been loaded.")
+        logger.info("Converting GPS save file to SAV, saving to %s", output_path)
+        gvas = copy.deepcopy(self._gps_gvas_file)
+        sav_file = compress_gvas_to_sav(
+            gvas.write(CUSTOM_PROPERTIES),
+            0x31,
+        )
+        with open(output_path, "wb") as f:
+            f.write(sav_file)
+
+    def to_player_sav_files(self, output_path: str) -> None:
         logger.info("Converting player save files to SAV, saving to %s", output_path)
         for uid, player_files in self._player_gvas_files.items():
             sav_file = compress_gvas_to_sav(
@@ -829,9 +915,6 @@ class SaveFile(BaseModel):
     async def update_dps_pals(
         self, modified_pals: Dict[int, PalDTO], ws_callback
     ) -> None:
-        if not self._gvas_file:
-            raise ValueError("No GvasFile has been loaded.")
-
         for pal_idx, pal in modified_pals.items():
             pal_name = pal.nickname if pal.nickname else pal.character_id
             await ws_callback(f"Updating DPS pal {pal_name}")
@@ -842,8 +925,34 @@ class SaveFile(BaseModel):
 
         await ws_callback("Saving changes to file")
 
+    async def update_gps_pals(
+        self, modified_pals: Dict[int, PalDTO], ws_callback
+    ) -> None:
+        if not self._gps_pals:
+            raise ValueError("No GPS pals to update.")
+
+        for pal_idx, pal in modified_pals.items():
+            pal_name = pal.nickname if pal.nickname else pal.character_id
+            await ws_callback(f"Updating GPS pal {pal_name}")
+            if pal_idx not in self._gps_pals:
+                logger.error("GPS pal index %d not found in the save file.", pal_idx)
+                continue
+            existing_pal = self._gps_pals[pal_idx]
+            existing_pal.update_from(pal)
+
+    def delete_gps_pals(self, pal_indexes: List[int]) -> None:
+        if not self._gps_pals:
+            logger.warning("No GPS pals to delete.")
+            return
+        for pal_idx in sorted(pal_indexes, reverse=True):
+            if pal_idx in self._gps_pals:
+                logger.debug("Deleting GPS pal at index %d", pal_idx)
+                pal = self._gps_pals[pal_idx]
+                pal.reset()
+                del self._gps_pals[pal_idx]
+
     async def update_players(
-        self, modified_players: Dict[UUID, Player], ws_callback
+        self, modified_players: Dict[UUID, PlayerDTO], ws_callback
     ) -> None:
         if not self._gvas_file:
             raise ValueError("No GvasFile has been loaded.")
@@ -909,7 +1018,7 @@ class SaveFile(BaseModel):
         else:
             self.size = data.__sizeof__()
 
-    def _get_player_pals(self, uid):
+    def _get_player_pals(self, uid: UUID) -> Dict[UUID, Pal]:
         logger.info("Loading Pals for player %s", uid)
         pals = {}
         pals = {
@@ -917,16 +1026,16 @@ class SaveFile(BaseModel):
         }
         return pals
 
-    def _get_player_save_data(self, player_gvas: Dict[str, Any]):
+    def _get_player_save_data(self, player_gvas: GvasFile) -> Optional[Dict[str, Any]]:
         player_save_data = PalObjects.get_value(player_gvas.properties["SaveData"])
         return player_save_data
 
-    def _is_player(self, entry):
+    def _is_player(self, entry: Dict[str, Any]) -> bool:
         save_parameter_path = PalObjects.get_nested(
             entry, "value", "RawData", "value", "object", "SaveParameter", "value"
         )
         return (
-            PalObjects.get_value(save_parameter_path["IsPlayer"])
+            bool(PalObjects.get_value(save_parameter_path["IsPlayer"]))
             if "IsPlayer" in save_parameter_path
             else False
         )
@@ -943,6 +1052,9 @@ class SaveFile(BaseModel):
             if group_type != GroupType.GUILD:
                 continue
             guild_id = PalObjects.as_uuid(PalObjects.get_nested(entry, "key"))
+            if not guild_id or is_empty_uuid(guild_id):
+                logger.warning("Guild with empty or invalid ID found, skipping.")
+                continue
             guild_extra_save_data = next(
                 (
                     g
@@ -951,6 +1063,12 @@ class SaveFile(BaseModel):
                 ),
                 None,
             )
+            if not guild_extra_save_data:
+                logger.warning(
+                    "Guild extra save data not found for guild %s, skipping.",
+                    guild_id,
+                )
+                continue
             self._guilds[guild_id] = Guild(
                 group_save_data=entry,
                 guild_extra_data=guild_extra_save_data,
@@ -1046,6 +1164,19 @@ class SaveFile(BaseModel):
                 logger.debug("Loaded Pal %s", pal)
             else:
                 logger.warning("Failed to create PalEntity summary")
+
+    def _load_gps_pals(self):
+        if not self._gps_gvas_file:
+            raise ValueError("No Global Pal Storage GvasFile has been loaded.")
+        self._gps_pals = {}
+        logger.info("Loading Global Pal Storage Pals")
+        save_parameter_array = PalObjects.get_array_property(
+            self._gps_gvas_file.properties["SaveParameterArray"]
+        )
+        for index, entry in enumerate(save_parameter_array):
+            pal = Pal(data=entry, dps=True)
+            if pal.character_id != "None":
+                self._gps_pals[index] = pal
 
     def _load_world_name(self):
         world_name = PalObjects.get_nested(

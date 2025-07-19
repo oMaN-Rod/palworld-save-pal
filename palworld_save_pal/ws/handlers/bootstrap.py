@@ -24,6 +24,7 @@ from palworld_save_pal.ws.handlers import (
     version_handler,
     local_file_handler,
     work_suitability_handler,
+    gps_handler,
 )
 from palworld_save_pal.ws.messages import (
     AddDpsPalMessage,
@@ -33,6 +34,7 @@ from palworld_save_pal.ws.messages import (
     CloneDpsPalMessage,
     ClonePalMessage,
     DeleteDpsPalsMessage,
+    DeleteGpsPalsMessage,
     DeleteGuildMessage,
     DeletePlayerMessage,
     ExportPresetMessage,
@@ -69,6 +71,7 @@ from palworld_save_pal.ws.messages import (
     GetVersionMessage,
     SelectSaveMessage,
     UpdateSettingsMessage,
+    AddGpsPalMessage,
 )
 
 if TYPE_CHECKING:
@@ -428,10 +431,26 @@ def bootstrap(dispatcher: "MessageDispatcher"):
         },
     )
 
-    dispatcher.register_handler(  # Added
+    dispatcher.register_handler(
         MessageType.UPDATE_LAB_RESEARCH.value,
         {
             "message_class": UpdateLabResearchMessage,
             "handler_func": lab_research_handler.update_lab_research_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.ADD_GPS_PAL.value,
+        {
+            "message_class": AddGpsPalMessage,
+            "handler_func": gps_handler.add_gps_pal_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.DELETE_GPS_PALS.value,
+        {
+            "message_class": DeleteGpsPalsMessage,
+            "handler_func": gps_handler.delete_gps_pals_handler,
         },
     )

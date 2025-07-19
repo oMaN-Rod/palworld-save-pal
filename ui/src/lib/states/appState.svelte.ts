@@ -20,6 +20,7 @@ interface ModifiedData {
 	modified_dps_pals?: Record<number, Pal>;
 	modified_players?: Record<string, Player>;
 	modified_guilds?: Record<string, GuildDTO>;
+	modified_gps_pals?: Record<number, Pal>;
 }
 
 class AppState {
@@ -36,6 +37,7 @@ class AppState {
 	settings: AppSettings = $state({ language: 'en' });
 	gamepassSaves: Record<string, GamepassSave> = $state({});
 	autoSave: boolean = $state(false);
+	gps: Record<number, Pal> = $state({});
 
 	resetState() {
 		this.players = {};
@@ -53,6 +55,7 @@ class AppState {
 		let modifiedData: ModifiedData = {};
 		let modifiedPals: [string, Pal][] = [];
 		let modifiedDspPals: [string, Pal][] = [];
+		let modifiedGspPals: [string, Pal][] = [];
 		let modifiedPlayers: [string, Player][] = [];
 		let modifiedGuilds: [string, GuildDTO][] = [];
 
@@ -122,11 +125,21 @@ class AppState {
 			}
 		}
 
+		if (this.gps && Object.values(this.gps).some((p) => p.state === EntryState.MODIFIED)) {
+			for (const [id, pal] of Object.entries(this.gps)) {
+				if (pal && pal.state === EntryState.MODIFIED) {
+					modifiedGspPals = [...modifiedGspPals, [id, pal]];
+					pal.state = EntryState.NONE;
+				}
+			}
+		}
+
 		if (
 			modifiedPals.length === 0 &&
 			modifiedPlayers.length === 0 &&
 			modifiedGuilds.length === 0 &&
-			modifiedDspPals.length === 0
+			modifiedDspPals.length === 0 &&
+			modifiedGspPals.length === 0
 		) {
 			console.log('No modifications to save');
 			return;
@@ -146,6 +159,10 @@ class AppState {
 
 		if (modifiedDspPals.length > 0) {
 			modifiedData.modified_dps_pals = Object.fromEntries(modifiedDspPals);
+		}
+
+		if (modifiedGspPals.length > 0) {
+			modifiedData.modified_gps_pals = Object.fromEntries(modifiedGspPals);
 		}
 
 		if (

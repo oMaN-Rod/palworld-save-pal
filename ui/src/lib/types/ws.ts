@@ -54,7 +54,11 @@ export enum MessageType {
 	EXPORT_PRESET = 'export_preset',
 	IMPORT_PRESET = 'import_preset',
 	GET_LAB_RESEARCH = 'get_lab_research',
-	UPDATE_LAB_RESEARCH = 'update_lab_research'
+	UPDATE_LAB_RESEARCH = 'update_lab_research',
+	ADD_GPS_PAL = 'add_gps_pal',
+	DELETE_GPS_PALS = 'delete_gps_pals',
+	UPDATE_GPS_PAL = 'update_gps_pal',
+	GET_GPS_PALS = 'get_gps_pals'
 }
 
 interface UpdateSaveFileData {

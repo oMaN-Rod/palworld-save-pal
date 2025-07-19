@@ -20,12 +20,16 @@ class MessageType(str, Enum):
     # Pal Management
     ADD_PAL = "add_pal"
     ADD_DPS_PAL = "add_dps_pal"
+    ADD_GPS_PAL = "add_gps_pal"
     CLONE_PAL = "clone_pal"
     CLONE_DPS_PAL = "clone_dps_pal"
+    CLONE_GPS_PAL = "clone_gps_pal"
     DELETE_PALS = "delete_pals"
     DELETE_DPS_PALS = "delete_dps_pals"
+    DELETE_GPS_PALS = "delete_gps_pals"
     GET_PAL_DETAILS = "get_pal_details"  # remove
     GET_PALS = "get_pals"
+    GET_GPS_PALS = "get_gps_pals"
     HEAL_ALL_PALS = "heal_all_pals"
     HEAL_PALS = "heal_pals"
     MOVE_PAL = "move_pal"
@@ -99,7 +103,7 @@ class AddPalData(BaseModel):
     character_id: str
     nickname: str
     container_id: Optional[UUID] = None
-    storage_slot: Union[int | None] = None
+    storage_slot: Optional[int] = None
 
 
 class AddPalMessage(BaseMessage):
@@ -171,6 +175,7 @@ class UpdateSaveFileData(BaseModel):
     modified_dps_pals: Optional[Dict[int, PalDTO]] = None
     modified_players: Optional[Dict[UUID, PlayerDTO]] = None
     modified_guilds: Optional[Dict[UUID, GuildDTO]] = None
+    modified_gps_pals: Optional[Dict[int, PalDTO]] = None
 
 
 class UpdateSaveFileMessage(BaseMessage):
@@ -390,3 +395,17 @@ class ExportPresetMessage(BaseMessage):
 
 class ImportPresetMessage(BaseMessage):
     type: str = MessageType.IMPORT_PRESET.value
+
+
+class GetGpsMessage(BaseModel):
+    type: str = MessageType.GET_GPS_PALS.value
+
+
+class AddGpsPalMessage(BaseMessage):
+    type: str = MessageType.ADD_DPS_PAL.value
+    data: AddPalData
+
+
+class DeleteGpsPalsMessage(BaseMessage):
+    type: str = MessageType.DELETE_DPS_PALS.value
+    data: DeletePalsData

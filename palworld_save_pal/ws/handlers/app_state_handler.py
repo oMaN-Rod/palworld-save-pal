@@ -35,3 +35,8 @@ async def sync_app_state_handler(_: SyncAppStateMessage, ws: WebSocket):
 
     response = build_response(MessageType.GET_GUILDS, save_file.get_guilds())
     await ws.send_json(response)
+
+    gps = save_file.get_gps()
+    if gps:
+        response = build_response(MessageType.GET_GPS_PALS, gps)
+        await ws.send_json(response)

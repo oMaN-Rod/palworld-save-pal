@@ -61,13 +61,9 @@ function calculateSkillEffects(skills: string[]): {
 	};
 }
 
-export function getStats(pal: Pal, player: Player): PalStats | undefined {
+export function getStats(pal: Pal, player?: Player): PalStats | undefined {
 	if (!pal) {
 		console.log('No pal provided');
-		return;
-	}
-	if (!player) {
-		console.log('No player provided');
 		return;
 	}
 
@@ -80,7 +76,7 @@ export function getStats(pal: Pal, player: Player): PalStats | undefined {
 		return;
 	}
 
-	const level = Math.min(player.level, pal.level);
+	const level = player ? Math.min(player.level, pal.level) : pal.level;
 
 	// Calculate bonuses from passive skills
 	const { attackBonus, defenseBonus, workSpeedBonus } = calculateSkillEffects(pal.passive_skills);
