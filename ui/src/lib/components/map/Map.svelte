@@ -29,7 +29,8 @@
 		showFastTravel = true,
 		showDungeons = true,
 		showAlphaPals = true,
-		showPredatorPals = true
+		showPredatorPals = true,
+		onEditBaseName
 	} = $props();
 
 	const appState = getAppState();
@@ -162,11 +163,22 @@
 
 			baseMarker.bindPopup(`
             <div>
-                <h3 class="text-lg font-bold">${base.id}</h3>
-                <p class="text-xs mt-2">World Coords: ${base.location.x.toFixed(2)}, ${base.location.y.toFixed(2)}</p>
-                <p class="text-xs">Map Coords: ${worldToMap(base.location.x, base.location.y).x}, ${worldToMap(base.location.x, base.location.y).y * -1}</p>
+				<h3 class="text-lg font-bold">${base.name}</h3>
+                <h4 class="text-xs font-light">ID: ${base.id}</h4>
+                <div>
+					<span class="text-xs">World Coords: ${base.location.x.toFixed(2)}, ${base.location.y.toFixed(2)}</span>
+                	<span class="text-xs">Map Coords: ${worldToMap(base.location.x, base.location.y).x}, ${worldToMap(base.location.x, base.location.y).y * -1}</span>
+				</div>
             </div>
         `);
+
+			// Add right-click context menu for editing base name
+			if (onEditBaseName) {
+				baseMarker.on('contextmenu', (e) => {
+					e.originalEvent.preventDefault();
+					onEditBaseName(base);
+				});
+			}
 
 			// Add the marker to the baseMarkers array so we can remove it later
 			baseMarkers.push(baseMarker);

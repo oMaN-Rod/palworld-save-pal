@@ -623,6 +623,18 @@
 		}
 	}
 
+	async function handleEditBaseName() {
+		if (!currentBase) return;
+		// @ts-ignore
+		const result = await modal.showModal<string>(TextInputModal, {
+			title: 'Edit Base Name',
+			value: currentBase[1].name || ''
+		});
+		if (!result) return;
+		currentBase[1].name = result;
+		playerGuild!.state = EntryState.MODIFIED;
+	}
+
 	async function handleEditGuildName() {
 		// @ts-ignore
 		const result = await modal.showModal<string>(TextInputModal, {
@@ -679,14 +691,23 @@
 					</Tooltip>
 				</div>
 
-				<div class="flex">
-					<h5 class="h5 font-light">Base {currentPage}</h5>
-					{#if playerGuild && currentBase && appState.settings.debug_mode}
-						<DebugButton
-							iconClass="h-4 w-4"
-							href={`/debug?guildId=${playerGuild.id}&baseId=${currentBase[1].id}`}
-						/>
-					{/if}
+				<div class="flex flex-col">
+					<div class="flex">
+						<h5 class="h5 font-light">Base {currentPage}</h5>
+						{#if playerGuild && currentBase && appState.settings.debug_mode}
+							<DebugButton
+								iconClass="h-4 w-4"
+								href={`/debug?guildId=${playerGuild.id}&baseId=${currentBase[1].id}`}
+							/>
+						{/if}
+					</div>
+					<div class="flex">
+						<button class="btn px-0" onclick={handleEditBaseName}>
+							<h5 class="h5 hover:text-secondary-500 font-light">
+								{currentBase?.[1]?.name || ''}
+							</h5>
+						</button>
+					</div>
 				</div>
 
 				<nav

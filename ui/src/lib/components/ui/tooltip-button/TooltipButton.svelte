@@ -7,17 +7,19 @@
 		buttonClass,
 		popupLabel,
 		position = 'bottom',
+		baseClass = '',
 		...additionalProps
 	} = $props<{
 		children: any;
 		buttonClass?: string;
 		popupLabel: string;
+		baseClass?: string;
 		position?: 'top' | 'bottom' | 'left' | 'right';
 		[key: string]: any;
 	}>();
 </script>
 
-<Tooltip {position}>
+<Tooltip {position} {baseClass}>
 	<button class="btn p-2 {buttonClass}" {...additionalProps}>
 		{@render children()}
 	</button>

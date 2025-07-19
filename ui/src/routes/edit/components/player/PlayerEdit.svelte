@@ -589,111 +589,100 @@
 {#if appState.selectedPlayer}
 	<div class="flex h-full flex-col overflow-auto">
 		<div class="ml-2 flex">
+			<nav class="btn-group preset-outlined-surface-200-800 mr-2 flex-col items-center rounded-sm">
+				{#if group === 'inventory'}
+					<Tooltip label="Sort Inventory">
+						<button class="hover:bg-secondary-500/50 btn rounded-sm" onclick={sortCommonContainer}>
+							<ArrowUp01 class="h-6 w-6" />
+						</button>
+					</Tooltip>
+					<Tooltip label="Fill Inventory">
+						<button class="hover:bg-secondary-500/50 btn rounded-sm" onclick={fillCommonContainer}>
+							<PaintBucket class="h-6 w-6" />
+						</button>
+					</Tooltip>
+					<Tooltip label="Set Inventory Count">
+						<button
+							class="hover:bg-secondary-500/50 btn rounded-sm"
+							onclick={setCommonContainerCount}
+						>
+							<Hash class="h-6 w-6" />
+						</button>
+					</Tooltip>
+					<Tooltip label="Clear Inventory">
+						<button class="hover:bg-secondary-500/50 btn rounded-sm" onclick={clearCommonContainer}>
+							<ChevronsLeftRight class="h-6 w-6" />
+						</button>
+					</Tooltip>
+				{/if}
+				{#if group === 'key_items'}
+					<Tooltip label="Add All Pal Gear">
+						<button
+							class="hover:bg-secondary-500/50 btn rounded-sm"
+							onclick={() => setEssentialList('gear')}
+						>
+							<PawPrint class="h-6 w-6" />
+						</button>
+					</Tooltip>
+					<Tooltip label="Add All Implants">
+						<button
+							class="hover:bg-secondary-500/50 btn rounded-sm"
+							onclick={() => setEssentialList('implants')}
+						>
+							<Activity class="h-6 w-6" />
+						</button>
+					</Tooltip>
+					<Tooltip label="Add Other Key Items">
+						<button
+							class="hover:bg-secondary-500/50 btn rounded-sm"
+							onclick={() => setEssentialList('misc')}
+						>
+							<Key class="h-6 w-6" />
+						</button>
+					</Tooltip>
+					<Tooltip label="Clear Key Items">
+						<button
+							class="hover:bg-secondary-500/50 btn rounded-sm"
+							onclick={clearEssentialContainer}
+						>
+							<ChevronsLeftRight class="h-6 w-6" />
+						</button>
+					</Tooltip>
+				{/if}
+				<Tooltip label="Clear Weapons">
+					<button
+						class="hover:bg-secondary-500/50 btn rounded-sm"
+						onclick={clearWeaponLoadOutContainer}
+					>
+						<Swords class="h-6 w-6" />
+					</button>
+				</Tooltip>
+				<Tooltip label="Clear Armor">
+					<button
+						class="hover:bg-secondary-500/50 btn rounded-sm"
+						onclick={clearEquipmentArmorContainer}
+					>
+						<Shield class="h-6 w-6" />
+					</button>
+				</Tooltip>
+				<Tooltip label="Clear Food">
+					<button
+						class="hover:bg-secondary-500/50 btn rounded-sm"
+						onclick={clearFoodEquipContainer}
+					>
+						<Pizza class="h-6 w-6" />
+					</button>
+				</Tooltip>
+				<Tooltip label="Clear All">
+					<button class="hover:bg-secondary-500/50 btn rounded-sm" onclick={clearAll}>
+						<Bomb class="h-6 w-6" />
+					</button>
+				</Tooltip>
+			</nav>
 			<!-- Main content wrapper -->
 			<div class="grid w-full grid-cols-[auto_1fr] gap-4 pr-[420px]">
 				<!-- Inventory -->
 				<div class="flex flex-col space-y-2">
-					<nav
-						class="btn-group preset-outlined-surface-200-800 w-full flex-col items-center rounded-sm p-2 md:flex-row"
-					>
-						{#if group === 'inventory'}
-							<Tooltip label="Sort Inventory">
-								<button
-									class="hover:bg-secondary-500/50 btn rounded-sm"
-									onclick={sortCommonContainer}
-								>
-									<ArrowUp01 class="h-4 w-4" />
-								</button>
-							</Tooltip>
-							<Tooltip label="Fill Inventory">
-								<button
-									class="hover:bg-secondary-500/50 btn rounded-sm"
-									onclick={fillCommonContainer}
-								>
-									<PaintBucket class="h-4 w-4" />
-								</button>
-							</Tooltip>
-							<Tooltip label="Set Inventory Count">
-								<button
-									class="hover:bg-secondary-500/50 btn rounded-sm"
-									onclick={setCommonContainerCount}
-								>
-									<Hash class="h-4 w-4" />
-								</button>
-							</Tooltip>
-							<Tooltip label="Clear Inventory">
-								<button
-									class="hover:bg-secondary-500/50 btn rounded-sm"
-									onclick={clearCommonContainer}
-								>
-									<ChevronsLeftRight class="h-4 w-4" />
-								</button>
-							</Tooltip>
-						{/if}
-						{#if group === 'key_items'}
-							<Tooltip label="Add All Pal Gear">
-								<button
-									class="hover:bg-secondary-500/50 btn rounded-sm"
-									onclick={() => setEssentialList('gear')}
-								>
-									<PawPrint class="h-4 w-4" />
-								</button>
-							</Tooltip>
-							<Tooltip label="Add All Implants">
-								<button
-									class="hover:bg-secondary-500/50 btn rounded-sm"
-									onclick={() => setEssentialList('implants')}
-								>
-									<Activity class="h-4 w-4" />
-								</button>
-							</Tooltip>
-							<Tooltip label="Add Other Key Items">
-								<button
-									class="hover:bg-secondary-500/50 btn rounded-sm"
-									onclick={() => setEssentialList('misc')}
-								>
-									<Key class="h-4 w-4" />
-								</button>
-							</Tooltip>
-							<Tooltip label="Clear Key Items">
-								<button
-									class="hover:bg-secondary-500/50 btn rounded-sm"
-									onclick={clearEssentialContainer}
-								>
-									<ChevronsLeftRight class="h-4 w-4" />
-								</button>
-							</Tooltip>
-						{/if}
-						<Tooltip label="Clear Weapons">
-							<button
-								class="hover:bg-secondary-500/50 btn rounded-sm"
-								onclick={clearWeaponLoadOutContainer}
-							>
-								<Swords class="h-4 w-4" />
-							</button>
-						</Tooltip>
-						<Tooltip label="Clear Armor">
-							<button
-								class="hover:bg-secondary-500/50 btn rounded-sm"
-								onclick={clearEquipmentArmorContainer}
-							>
-								<Shield class="h-4 w-4" />
-							</button>
-						</Tooltip>
-						<Tooltip label="Clear Food">
-							<button
-								class="hover:bg-secondary-500/50 btn rounded-sm"
-								onclick={clearFoodEquipContainer}
-							>
-								<Pizza class="h-4 w-4" />
-							</button>
-						</Tooltip>
-						<Tooltip label="Clear All">
-							<button class="hover:bg-secondary-500/50 btn rounded-sm" onclick={clearAll}>
-								<Bomb class="h-4 w-4" />
-							</button>
-						</Tooltip>
-					</nav>
 					<Tabs
 						listBorder="preset-outlined-surface-200-800"
 						listClasses="btn-group preset-outlined-surface-200-800 w-full flex-col md:flex-row rounded-sm"
