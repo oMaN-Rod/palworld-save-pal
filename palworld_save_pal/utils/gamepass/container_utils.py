@@ -297,10 +297,18 @@ def save_modified_gamepass(
         player_data = None
         if "Player" in key and "_dps" not in key:
             logger.debug("Updating player data for container: %s", key)
-            player_uuid = uuid.UUID(key.split("-")[1])
+            try:
+                player_uuid = uuid.UUID(key.split("-")[1])
+            except ValueError:
+                logger.error("Invalid player UUID in key: %s", key)
+                continue
             player_data = player_sav_data[player_uuid]["sav"]
         elif "_dps" in key:
-            player_uuid = uuid.UUID(key.split("-")[1].replace("_dps", ""))
+            try:
+                player_uuid = uuid.UUID(key.split("-")[1].replace("_dps", ""))
+            except ValueError:
+                logger.error("Invalid player UUID in key: %s", key)
+                continue
             player_data = player_sav_data[player_uuid]["dps"]
 
         logger.debug("Copying container: %s", original_container.container_name)
