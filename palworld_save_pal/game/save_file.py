@@ -2,8 +2,7 @@ import copy
 from enum import Enum
 import json
 import os
-import platform
-from pathlib import Path
+import time
 from typing import Any, Dict, List, Optional, Tuple, Union
 from uuid import UUID
 from pydantic import BaseModel, ConfigDict, PrivateAttr
@@ -688,10 +687,15 @@ class SaveFile(BaseModel):
 
     def load_level_sav(self, data: bytes):
         logger.info("Loading %s as GVAS", self.name)
+        start_time = time.perf_counter()
         raw_gvas, _ = decompress_sav_to_gvas(data)
-        logger.debug("Reading GVAS file")
+        logger.info(f"Decompressed in {time.perf_counter() - start_time} seconds")
+        gvas_start_time = time.perf_counter()
         gvas_file = GvasFile.read(
             raw_gvas, PALWORLD_TYPE_HINTS, CUSTOM_PROPERTIES, allow_nan=True
+        )
+        logger.info(
+            f"GvasFile read in {time.perf_counter() - gvas_start_time:.2f} seconds"
         )
         self._gvas_file = gvas_file
         self._get_file_size(data)
