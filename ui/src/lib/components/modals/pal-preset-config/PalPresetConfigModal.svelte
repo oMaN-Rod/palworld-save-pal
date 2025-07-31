@@ -25,7 +25,7 @@
 	let name: string = $state('');
 
 	const elementIcon = $derived.by(() => {
-		const elementData = elementsData.elements[element];
+		const elementData = elementsData.getByKey(element);
 		if (!elementData) {
 			return '';
 		}

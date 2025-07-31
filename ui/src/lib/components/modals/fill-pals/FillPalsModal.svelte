@@ -529,11 +529,11 @@
 									<Lock class="ml-2 h-4 w-4 text-red-500" />
 								{/if}
 								{#if preset.pal_preset?.lock_element}
-									{@const elementData = elementsData.elements[preset.pal_preset.element as string]}
+									{@const elementData = elementsData.getByKey(preset.pal_preset.element as string)}
 									{@const elementIcon = assetLoader.loadImage(
-										`${ASSET_DATA_PATH}/img/${elementData.badge_icon}.webp`
+										`${ASSET_DATA_PATH}/img/${elementData?.badge_icon}.webp`
 									)}
-									<img src={elementIcon} alt={elementData.name} class="ml-2 h-6 w-6" />
+									<img src={elementIcon} alt={elementData?.name} class="ml-2 h-6 w-6" />
 								{/if}
 							</div>
 						{/snippet}
@@ -553,11 +553,11 @@
 									<Lock class="ml-2 h-4 w-4 text-red-500" />
 								{/if}
 								{#if preset.pal_preset?.lock_element}
-									{@const elementData = elementsData.elements[preset.pal_preset.element as string]}
+									{@const elementData = elementsData.getByKey(preset.pal_preset.element as string)}
 									{@const elementIcon = assetLoader.loadImage(
-										`${ASSET_DATA_PATH}/img/${elementData.badge_icon}.webp`
+										`${ASSET_DATA_PATH}/img/${elementData?.badge_icon}.webp`
 									)}
-									<img src={elementIcon} alt={elementData.name} class="ml-2 h-4 w-4" />
+									<img src={elementIcon} alt={elementData?.name} class="ml-2 h-4 w-4" />
 								{/if}
 							</div>
 						{/snippet}

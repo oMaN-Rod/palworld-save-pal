@@ -12,7 +12,7 @@
 	const activeSkill = activeSkillsData.getByKey(option.value);
 	const icon = $derived.by(() => {
 		if (!activeSkill) return staticIcons.unknownIcon;
-		const element = elementsData.elements[activeSkill.details.element];
+		const element = elementsData.getByKey(activeSkill.details.element);
 		if (!element) return undefined;
 		return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${element.icon}.webp`);
 	});

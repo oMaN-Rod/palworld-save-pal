@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { buildingsData, elementsData } from '$lib/data';
+	import { buildingsData } from '$lib/data';
 	import type { PresetProfile } from '$types';
 	import { ASSET_DATA_PATH } from '$types/icons';
 	import { assetLoader } from '$utils';

@@ -1,8 +1,10 @@
 import { sendAndWait } from '$lib/utils/websocketUtils';
 import { MessageType, type Element } from '$types';
+import { normalizeKeys } from '$utils';
 
 class Elements {
 	private loading = false;
+	private keyMap: Record<string, string> = $state({});
 
 	elements: Record<string, Element> = $state({});
 
@@ -11,6 +13,7 @@ class Elements {
 			try {
 				this.loading = true;
 				this.elements = await sendAndWait(MessageType.GET_ELEMENTS);
+				this.keyMap = normalizeKeys(Object.keys(this.elements));
 				this.loading = false;
 			} catch (error) {
 				this.loading = false;
@@ -24,24 +27,12 @@ class Elements {
 		}
 	}
 
-	async searchElement(key: string): Promise<Element | undefined> {
-		await this.ensureElementsLoaded();
-		return this.elements[key];
-	}
-
-	async getField(key: string, field: keyof Element): Promise<string | undefined> {
-		const element = await this.searchElement(key);
-		return element ? element[field] : undefined;
-	}
-
-	async getAllElementTypes(): Promise<string[]> {
-		await this.ensureElementsLoaded();
-		return Object.keys(this.elements);
-	}
-
-	async getAllElements(): Promise<Element[]> {
-		await this.ensureElementsLoaded();
-		return Object.values(this.elements);
+	getByKey(key: string): Element | undefined {
+		try {
+			return this.elements[this.keyMap[key.toLowerCase()]];
+		} catch (error) {
+			console.error('Error getting element data:', error);
+		}
 	}
 
 	async reset(): Promise<void> {

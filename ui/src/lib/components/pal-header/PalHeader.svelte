@@ -142,7 +142,7 @@
 	}
 
 	async function getPalElementBadge(elementType: string): Promise<string | undefined> {
-		const elementObj = await elementsData.searchElement(elementType);
+		const elementObj = await elementsData.getByKey(elementType);
 		if (!elementObj) return undefined;
 		return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${elementObj.badge_icon}.webp`);
 	}

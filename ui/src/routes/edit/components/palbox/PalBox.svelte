@@ -832,7 +832,7 @@
 									{#snippet popup()}All pals{/snippet}
 								</Tooltip>
 								{#each [...elementTypes] as element}
-									{@const localizedName = elementsData.elements[element].localized_name}
+									{@const localizedName = elementsData.getByKey(element)?.localized_name}
 									<Tooltip label={localizedName}>
 										<button
 											class={elementClass(element)}

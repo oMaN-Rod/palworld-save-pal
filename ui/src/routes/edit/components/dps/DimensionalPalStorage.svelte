@@ -169,7 +169,7 @@
 	let elementIcons = $derived.by(() => {
 		let elementIcons: Record<string, string> = {};
 		for (const element of elementTypes) {
-			const elementData = elementsData.elements[element];
+			const elementData = elementsData.getByKey(element);
 			if (elementData) {
 				elementIcons[element] = assetLoader.loadImage(
 					`${ASSET_DATA_PATH}/img/${elementData.icon}.webp`
@@ -656,7 +656,7 @@
 									{#snippet popup()}All pals{/snippet}
 								</Tooltip>
 								{#each [...elementTypes] as element}
-									{@const localizedName = elementsData.elements[element].localized_name}
+									{@const localizedName = elementsData.getByKey(element)?.localized_name}
 									<Tooltip label={localizedName}>
 										<button
 											class={elementClass(element)}

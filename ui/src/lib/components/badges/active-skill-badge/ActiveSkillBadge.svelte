@@ -23,11 +23,11 @@
 			console.error(`Active skill ${skill} not found`);
 			return {};
 		}
-		const element = elementsData.elements[activeSkill.details.element];
+		const element = elementsData.getByKey(activeSkill.details.element);
 		const elementIconWhite = assetLoader.loadImage(
-			`${ASSET_DATA_PATH}/img/${element.white_icon}.webp`
+			`${ASSET_DATA_PATH}/img/${element?.white_icon}.webp`
 		);
-		const elementIcon = assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${element.icon}.webp`);
+		const elementIcon = assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${element?.icon}.webp`);
 		return { activeSkill, element, elementIconWhite, elementIcon };
 	});
 
