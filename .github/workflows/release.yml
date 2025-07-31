@@ -40,10 +40,10 @@ jobs:
           pip install uv
           uv sync
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
         with:
-          node-version: "20"
+          bun-version: latest
 
       - name: Create ui/.env file
         run: |
@@ -52,8 +52,8 @@ jobs:
       - name: Install and build the Svelte frontend
         run: |
           cd ui
-          npm install
-          npm run build
+          bun install
+          bun run build
           cd ..
 
       - name: Build Windows ZIP and MSI
@@ -118,10 +118,10 @@ jobs:
           export CXXFLAGS="-std=c++11"
           uv sync
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
         with:
-          node-version: "20"
+          bun-version: latest
 
       - name: Create ui/.env file
         run: |
@@ -130,8 +130,8 @@ jobs:
       - name: Install and build the Svelte frontend
         run: |
           cd ui
-          npm install
-          npm run build
+          bun install
+          bun run build
           cd ..
 
       - name: Build macOS DMG
@@ -175,10 +175,10 @@ jobs:
           pip install uv
           uv sync
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
         with:
-          node-version: "20"
+          bun-version: latest
 
       - name: Create ui/.env file
         run: |
@@ -187,8 +187,8 @@ jobs:
       - name: Install and build the Svelte frontend
         run: |
           cd ui
-          npm install
-          npm run build
+          bun install
+          bun run build
           cd ..
 
       - name: Build Linux executable
