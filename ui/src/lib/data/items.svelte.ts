@@ -1,8 +1,10 @@
 import { sendAndWait } from '$lib/utils/websocketUtils';
-import { MessageType, type Item, type ItemDetails, type ItemInfo } from '$types';
+import { MessageType, type Item } from '$types';
+import { normalizeKeys } from '$utils';
 
 class Items {
 	private loading = false;
+	private keyMap: Record<string, string> = $state({});
 
 	items: Record<string, Item> = $state({});
 
@@ -11,6 +13,7 @@ class Items {
 			try {
 				this.loading = true;
 				this.items = await sendAndWait(MessageType.GET_ITEMS);
+				this.keyMap = normalizeKeys(Object.keys(this.items));
 				this.loading = false;
 			} catch (error) {
 				this.loading = false;
@@ -24,47 +27,12 @@ class Items {
 		}
 	}
 
-	async searchItems(search: string): Promise<Item | undefined> {
-		await this.ensureItemsLoaded();
-		return this.getByKey(search) || this.getByName(search) || undefined;
-	}
-
-	private getByKey(key: string): Item | undefined {
-		return this.items[key];
-	}
-
-	private getByName(name: string): Item | undefined {
-		return Object.values(this.items).find(
-			(item) => item.info.localized_name.toLowerCase() === name.toLowerCase()
-		);
-	}
-
-	async getField(
-		key: string,
-		field: keyof Item | keyof ItemDetails | keyof ItemInfo
-	): Promise<any> {
-		await this.ensureItemsLoaded();
-		const item = await this.searchItems(key);
-		if (item) {
-			if (field in item) {
-				return item[field as keyof Item];
-			} else if (field in item.details) {
-				return item.details[field as keyof ItemDetails];
-			} else if (field in item.info) {
-				return item.info[field as keyof ItemInfo];
-			}
+	getByKey(key: string): Item | undefined {
+		try {
+			return this.items[this.keyMap[key.toLowerCase()]];
+		} catch (error) {
+			console.error('Error getting item data:', error);
 		}
-		return undefined;
-	}
-
-	async getAllItems(): Promise<Item[]> {
-		await this.ensureItemsLoaded();
-		return Object.values(this.items);
-	}
-
-	async getItemCount(): Promise<number> {
-		await this.ensureItemsLoaded();
-		return Object.keys(this.items).length;
 	}
 
 	async reset(): Promise<void> {

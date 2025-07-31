@@ -67,7 +67,7 @@
 
 	const selectedPalKey = $derived(eggConfig.character_id.replace('BOSS_', ''));
 	const palOptions: SelectOption[] = $derived.by(() => {
-		const item = itemsData.items[itemId];
+		const item = itemsData.getByKey(itemId);
 		if (!item || !item.details.dynamic?.character_ids) {
 			if (!selectedPalKey) return [];
 			const palData = palsData.getByKey(selectedPalKey);
@@ -141,7 +141,7 @@
 				label: s.localized_name
 			}))
 	);
-	const itemData = $derived(itemsData.items[itemId]);
+	const itemData = $derived(itemsData.getByKey(itemId));
 	const isEgg = $derived(itemData?.details.dynamic?.type === 'egg');
 
 	const eggIconSrc = $derived.by(() => {
@@ -223,7 +223,7 @@
 
 	function getItemIcon(staticId: string) {
 		if (!staticId) return;
-		const itemData = itemsData.items[staticId];
+		const itemData = itemsData.getByKey(staticId);
 		if (!itemData) {
 			console.error(`Item data not found for static id: ${staticId}`);
 			return;
@@ -331,7 +331,7 @@
 			<div class="flex flex-row items-center">
 				<Combobox options={selectOptions} bind:value={itemId}>
 					{#snippet selectOption(option)}
-						{@const item = itemsData.items[option.value]}
+						{@const item = itemsData.getByKey(option.value)}
 						{#await getItemIcon(option.value) then icon}
 							<div class="grid grid-cols-[auto_1fr_auto] items-center gap-2">
 								{#if icon}

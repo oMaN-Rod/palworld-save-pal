@@ -389,7 +389,7 @@
 					<h6 class="h6 mb-1">Research Cost</h6>
 					<div class="space-y-1">
 						{#each research.details.materials as material}
-							{@const itemData = itemsData.items[material.id]}
+							{@const itemData = itemsData.getByKey(material.id)}
 							<div class="flex items-center space-x-2 text-sm">
 								{#if itemData}
 									{@const icon = assetLoader.loadImage(

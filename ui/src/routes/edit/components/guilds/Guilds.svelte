@@ -107,7 +107,7 @@
 			.filter(
 				(container) =>
 					(container.slots.some((s) => {
-						const itemData = itemsData.items[s.static_id];
+						const itemData = itemsData.getByKey(s.static_id);
 						return (
 							s.static_id.toLowerCase().includes(selectedInventoryItem.toLowerCase()) ||
 							(itemData &&
@@ -117,7 +117,7 @@
 						);
 					}) &&
 						container.slots.some((s) => {
-							const itemData = itemsData.items[s.static_id];
+							const itemData = itemsData.getByKey(s.static_id);
 							return (
 								s.static_id.toLowerCase().includes(inventorySearchQuery.toLowerCase()) ||
 								(itemData &&
@@ -157,7 +157,7 @@
 		}
 		const items = Object.entries(inventoryItems)
 			.filter(([static_id, _]) => {
-				const itemData = itemsData.items[static_id];
+				const itemData = itemsData.getByKey(static_id);
 				return (
 					static_id.toLowerCase().includes(inventorySearchQuery.toLowerCase()) ||
 					(itemData &&
@@ -170,8 +170,8 @@
 				total_count: info.total_count
 			}))
 			.sort((a, b) => {
-				const itemA = itemsData.items[a.static_id];
-				const itemB = itemsData.items[b.static_id];
+				const itemA = itemsData.getByKey(a.static_id);
+				const itemB = itemsData.getByKey(b.static_id);
 				if (itemA && itemB) {
 					return itemA.info.localized_name.localeCompare(itemB.info.localized_name);
 				}
@@ -509,7 +509,7 @@
 		if (slot.static_id !== 'None') {
 			appState.clipboardItem = slot;
 			let itemName = slot.static_id;
-			const itemData = itemsData.items[slot.static_id];
+			const itemData = itemsData.getByKey(slot.static_id);
 			if (itemData) {
 				itemName = itemData.info.localized_name;
 			}
@@ -824,7 +824,7 @@
 							<span class="font-bold">Total</span>
 						{/snippet}
 						{#snippet listItem(item)}
-							{@const itemData = itemsData.items[fixStupidTypos(item.static_id)]}
+							{@const itemData = itemsData.getByKey(item.static_id)}
 							{#if itemData}
 								{@const itemIcon = assetLoader.loadImage(
 									`${ASSET_DATA_PATH}/img/${itemData.details.icon}.webp`
@@ -849,7 +849,7 @@
 							{/if}
 						{/snippet}
 						{#snippet listItemPopup(item)}
-							{@const itemData = itemsData.items[item.static_id]}
+							{@const itemData = itemsData.getByKey(item.static_id)}
 							{#if itemData}
 								<div class="flex flex-col">
 									<span class="font-bold">{itemData.info.localized_name}</span>

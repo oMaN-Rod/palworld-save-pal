@@ -6,7 +6,17 @@
 	import { getModalState } from '$states';
 	import { EntryState } from '$types';
 	import { deepCopy } from '$utils';
-	import { Edit, PaintBucket, Play, Plus, Trash, X, Hash, ChevronsLeftRight, PackagePlus } from 'lucide-svelte';
+	import {
+		Edit,
+		PaintBucket,
+		Play,
+		Plus,
+		Trash,
+		X,
+		Hash,
+		ChevronsLeftRight,
+		PackagePlus
+	} from 'lucide-svelte';
 	import { ItemSelectModal, NumberInputModal } from '$components/modals';
 
 	let { container, onUpdate } = $props<{
@@ -120,7 +130,7 @@
 		});
 		if (!result) return;
 		let [static_id, count] = result;
-		const itemData = itemsData.items[static_id];
+		const itemData = itemsData.getByKey(static_id);
 		if (!itemData) return;
 		count = count > itemData.details.max_stack_count ? itemData.details.max_stack_count : count;
 

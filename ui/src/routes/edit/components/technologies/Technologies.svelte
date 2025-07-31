@@ -188,7 +188,7 @@
 						<span class="font-bold">Unlocks:</span>
 						<ul class="ml-4 list-disc">
 							{#each technologyItem.details.unlock_item_recipes as itemRecipe}
-								{@const itemData = itemsData.items[itemRecipe]}
+								{@const itemData = itemsData.getByKey(itemRecipe)}
 								{#if itemData}
 									<li>{itemData.info.localized_name}</li>
 								{:else}

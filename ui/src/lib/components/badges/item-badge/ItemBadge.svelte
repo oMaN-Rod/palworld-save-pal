@@ -41,7 +41,7 @@
 		if (key.toLowerCase() in stupidTypoMap) {
 			key = stupidTypoMap[key.toLowerCase()];
 		}
-		return itemsData.items[key];
+		return itemsData.getByKey(key);
 	});
 
 	const dynamic = $derived.by(() => {
@@ -175,7 +175,7 @@
 			slot.dynamic_item = undefined;
 			return;
 		}
-		const itemData = itemsData.items[slot.static_id];
+		const itemData = itemsData.getByKey(slot.static_id);
 		if (itemData) {
 			slot.count =
 				count > itemData.details.max_stack_count ? itemData.details.max_stack_count : count;

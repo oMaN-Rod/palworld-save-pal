@@ -23,22 +23,11 @@
 				return '';
 		}
 	}
-
-	function fixStupidTypos(key: string) {
-		switch (key) {
-			case 'Stonepit':
-				return 'StonePit';
-			case 'bone':
-				return 'Bone';
-			default:
-				return key;
-		}
-	}
 </script>
 
 <div class="grid grid-cols-3 gap-2 space-y-2 2xl:grid-cols-4">
 	{#each items as item}
-		{@const itemData = itemsData.items[fixStupidTypos(item.static_id)]}
+		{@const itemData = itemsData.getByKey(item.static_id)}
 		{#if itemData}
 			{@const itemIcon = assetLoader.loadImage(
 				`${ASSET_DATA_PATH}/img/${itemData.details.icon}.webp`

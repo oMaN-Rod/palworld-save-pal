@@ -146,7 +146,7 @@
 
 	async function getItemIcon(staticId: string) {
 		if (!staticId || staticId === 'None') return;
-		const itemData = itemsData.items[staticId] || undefined;
+		const itemData = itemsData.getByKey(staticId);
 		if (!itemData) {
 			console.error(`Item data not found for static id: ${staticId}`);
 			return;
@@ -225,7 +225,7 @@
 		});
 		if (!result) return;
 		let [static_id, count] = result;
-		const itemData = itemsData.items[static_id];
+		const itemData = itemsData.getByKey(static_id);
 		if (!itemData) return;
 		count = count > itemData.details.max_stack_count ? itemData.details.max_stack_count : count;
 
@@ -280,7 +280,7 @@
 			const item = itemList[itemIndex];
 			slot.static_id = item.id;
 			slot.count = 1;
-			const itemData = itemsData.items[slot.static_id];
+			const itemData = itemsData.getByKey(slot.static_id);
 			if (itemData && itemData.details.dynamic) {
 				// @ts-ignore
 				slot.dynamic_item = {
@@ -304,7 +304,7 @@
 		if (slot.static_id !== 'None') {
 			appState.clipboardItem = slot;
 			let itemName = slot.static_id;
-			const itemData = itemsData.items[slot.static_id];
+			const itemData = itemsData.getByKey(slot.static_id);
 			if (itemData) {
 				itemName = itemData.info.localized_name;
 			}
@@ -491,7 +491,7 @@
 		if (appState.selectedPlayer) {
 			const sortedSlots = commonContainer.slots.map((slot) => {
 				if (slot.static_id !== 'None') {
-					const itemData = itemsData.items[slot.static_id];
+					const itemData = itemsData.getByKey(slot.static_id);
 					return { ...slot, sort_id: itemData?.details.sort_id ?? Infinity };
 				}
 				return { ...slot, sort_id: Infinity };
