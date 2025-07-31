@@ -9,6 +9,7 @@
 	import NumberFlow from '@number-flow/svelte';
 	import { Switch } from '@skeletonlabs/skeleton-svelte';
 	import { X, Check, Trash, Lock } from 'lucide-svelte';
+	import type { CheckedChangeDetails } from '@zag-js/switch';
 
 	let {
 		title,
@@ -173,7 +174,7 @@
 		if (!selectedPresets || selectedPresets.length === 0) {
 			return;
 		}
-		const palData = palsData.getPalData(pal.character_key);
+		const palData = palsData.getByKey(pal.character_key);
 		const palProfile =
 			selectedPresets.filter(
 				(p) => p.pal_preset?.lock && p.pal_preset?.character_id === pal.character_id
@@ -181,7 +182,8 @@
 		const elementProfile =
 			selectedPresets.filter(
 				(p) =>
-					p.pal_preset?.lock_element && palData.element_types.includes(p.pal_preset?.element as any)
+					p.pal_preset?.lock_element &&
+					palData?.element_types.includes(p.pal_preset?.element as any)
 			)[0] || undefined;
 		const defaultProfile =
 			selectedPresets.filter((p) => !p.pal_preset?.lock && !p.pal_preset?.lock_element)[0] ||
@@ -384,7 +386,7 @@
 						<Switch
 							name="Normal"
 							checked={addNormalPals}
-							onCheckedChange={(mode) => {
+							onCheckedChange={(mode: CheckedChangeDetails) => {
 								addNormalPals = mode.checked;
 							}}
 						/>
@@ -397,7 +399,7 @@
 						<Switch
 							name="Normal"
 							checked={addLuckyPals}
-							onCheckedChange={(mode) => {
+							onCheckedChange={(mode: CheckedChangeDetails) => {
 								addLuckyPals = mode.checked;
 							}}
 						/>
@@ -410,7 +412,7 @@
 						<Switch
 							name="Alpha"
 							checked={addAlphaPals}
-							onCheckedChange={(mode) => {
+							onCheckedChange={(mode: CheckedChangeDetails) => {
 								addAlphaPals = mode.checked;
 							}}
 						/>
@@ -423,7 +425,7 @@
 						<Switch
 							name="Boss"
 							checked={addBossPals}
-							onCheckedChange={(mode) => {
+							onCheckedChange={(mode: CheckedChangeDetails) => {
 								addBossPals = mode.checked;
 							}}
 						/>
@@ -436,7 +438,7 @@
 						<Switch
 							name="Predator"
 							checked={addPredatorPals}
-							onCheckedChange={(mode) => {
+							onCheckedChange={(mode: CheckedChangeDetails) => {
 								addPredatorPals = mode.checked;
 							}}
 						/>
@@ -449,7 +451,7 @@
 						<Switch
 							name="Raid"
 							checked={addRaidPals}
-							onCheckedChange={(mode) => {
+							onCheckedChange={(mode: CheckedChangeDetails) => {
 								addRaidPals = mode.checked;
 							}}
 						/>
@@ -462,7 +464,7 @@
 						<Switch
 							name="Summon"
 							checked={addSummonPals}
-							onCheckedChange={(mode) => {
+							onCheckedChange={(mode: CheckedChangeDetails) => {
 								addSummonPals = mode.checked;
 							}}
 						/>
@@ -475,7 +477,7 @@
 						<Switch
 							name="Oil Rig"
 							checked={addOilRigPals}
-							onCheckedChange={(mode) => {
+							onCheckedChange={(mode: CheckedChangeDetails) => {
 								addOilRigPals = mode.checked;
 							}}
 						/>
@@ -488,7 +490,7 @@
 						<Switch
 							name="Human"
 							checked={addHumanPals}
-							onCheckedChange={(mode) => {
+							onCheckedChange={(mode: CheckedChangeDetails) => {
 								addHumanPals = mode.checked;
 							}}
 						/>

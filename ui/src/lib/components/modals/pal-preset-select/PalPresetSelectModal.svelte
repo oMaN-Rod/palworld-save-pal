@@ -26,7 +26,7 @@
 				}
 				if (profile.pal_preset?.lock_element) {
 					return selectedPals.every((pal: { character_id: string; character_key: string }) => {
-						const palData = palsData.getPalData(pal.character_key);
+						const palData = palsData.getByKey(pal.character_key);
 						if (!palData) return false;
 						return palData.element_types[0] === profile.pal_preset?.element;
 					});
@@ -59,7 +59,7 @@
 							p.character_id === presetProfile.pal_preset?.character_id
 					).character_key}
 					<span class="text-sm">
-						{palsData.getPalData(palCharacterKey)?.localized_name ||
+						{palsData.getByKey(palCharacterKey)?.localized_name ||
 							presetProfile.pal_preset?.character_id}
 					</span>
 					<Lock class="h-4 w-4" />

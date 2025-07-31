@@ -40,6 +40,7 @@
 	} from 'lucide-svelte';
 	import { PalBadge, PalContainerStats } from '$components';
 	import { send } from '$lib/utils/websocketUtils';
+	import type { ValueChangeDetails } from '@zag-js/accordion';
 
 	const PALS_PER_PAGE = 30;
 	const TOTAL_SLOTS = 9600;
@@ -159,7 +160,7 @@
 			([_, pal]) => pal && pal.character_id !== 'None'
 		);
 		return playerPals.map(([i, pal]) => {
-			const palData = palsData.getPalData(pal.character_key);
+			const palData = palsData.getByKey(pal.character_key);
 			return { id: pal.instance_id, index: i as unknown as number, pal, palData };
 		});
 	});
@@ -336,7 +337,7 @@
 		});
 		if (!result) return;
 		const [selectedPal, nickname] = result;
-		const palData = palsData.getPalData(selectedPal);
+		const palData = palsData.getByKey(selectedPal);
 
 		send(MessageType.ADD_DPS_PAL, {
 			player_id: appState.selectedPlayer.uid,
@@ -404,7 +405,7 @@
 	}
 
 	async function sortByPaldeckIndex() {
-		const palInfos = filteredPals.map((p) => palsData.getPalData(p.pal.character_key));
+		const palInfos = filteredPals.map((p) => palsData.getByKey(p.pal.character_key));
 		const palsWithInfo = filteredPals.map((pal, index) => [pal, palInfos[index]]);
 
 		palsWithInfo.sort((a, b) => {
@@ -590,7 +591,11 @@
 					</Tooltip>
 				{/if}
 			</div>
-			<Accordion value={filterExpand} onValueChange={(e) => (filterExpand = e.value)} collapsible>
+			<Accordion
+				value={filterExpand}
+				onValueChange={(e: ValueChangeDetails) => (filterExpand = e.value)}
+				collapsible
+			>
 				<Accordion.Item
 					value="filter"
 					base="rounded-sm bg-surface-900"

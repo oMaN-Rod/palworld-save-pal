@@ -18,7 +18,7 @@
 
 	let { activeSkill, element, elementIconWhite, elementIcon } = $derived.by(() => {
 		if (skill === 'Empty') return {};
-		const activeSkill = activeSkillsData.activeSkills[skill] || undefined;
+		const activeSkill = activeSkillsData.getByKey(skill) || undefined;
 		if (!activeSkill) {
 			console.error(`Active skill ${skill} not found`);
 			return {};

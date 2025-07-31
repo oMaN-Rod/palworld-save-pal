@@ -26,7 +26,7 @@
 	<span class="border-r-surface-600 border-r pr-2 text-lg font-bold">{preset.name}</span>
 	<div class="ml-4 mt-1 space-y-4">
 		{#each preset.skills as skillId}
-			{@const skill = activeSkillsData.activeSkills[skillId]}
+			{@const skill = activeSkillsData.getByKey(skillId)}
 			{#if skill}
 				<div class="flex items-center space-x-2">
 					{#if skill.details.element && elementIcons[skill.details.element]}

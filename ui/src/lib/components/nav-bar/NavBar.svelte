@@ -47,7 +47,7 @@
 <Navigation.Rail
 	width="48px"
 	value={navigationState.activePage}
-	onValueChange={(value) => navigationState.navigateToAndSave(value as Page)}
+	onValueChange={(value: string) => navigationState.navigateToAndSave(value as Page)}
 >
 	{#snippet header()}
 		{#if appState.saveFile && PUBLIC_DESKTOP_MODE === 'true'}

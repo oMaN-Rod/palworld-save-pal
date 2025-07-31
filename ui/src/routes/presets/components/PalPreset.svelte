@@ -226,7 +226,7 @@
 						</span>
 						<div class="ml-4 mt-1">
 							{#each preset.pal_preset.active_skills as skillId}
-								{@const skill = activeSkillsData.activeSkills[skillId]}
+								{@const skill = activeSkillsData.getByKey(skillId)}
 								{#if skill}
 									<div class="flex items-center space-x-2">
 										{#if skill.details.element && elementIcons[skill.details.element]}

@@ -46,7 +46,7 @@
 	}
 
 	function handleLearnType() {
-		const palData = palsData.getPalData(pal.character_key);
+		const palData = palsData.getByKey(pal.character_key);
 		if (!palData) return;
 
 		const elementSkills = activeSkills

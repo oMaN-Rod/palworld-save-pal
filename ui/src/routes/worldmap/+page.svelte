@@ -9,6 +9,7 @@
 	import L from 'leaflet';
 	import type { Base, Player } from '$types';
 	import { assetLoader } from '$utils';
+	import type { ValueChangeDetails } from '@zag-js/accordion';
 
 	const appState = getAppState();
 
@@ -142,7 +143,11 @@
 				</div>
 			</div>
 			{#if appState.saveFile}
-				<Accordion value={section} onValueChange={(e) => (section = e.value)} collapsible>
+				<Accordion
+					value={section}
+					onValueChange={(e: ValueChangeDetails) => (section = e.value)}
+					collapsible
+				>
 					<Accordion.Item value="players" controlHover="hover:bg-secondary-500/25">
 						{#snippet control()}
 							<h2 class="text-lg font-bold">Players</h2>

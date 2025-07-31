@@ -18,6 +18,7 @@
 	import { onMount } from 'svelte';
 	import { JSONEditor, type ContextMenuItem } from 'svelte-jsoneditor';
 	import { send, sendAndWait } from '$lib/utils/websocketUtils';
+	import type { CheckedChangeDetails } from '@zag-js/switch';
 
 	type JsonContent = {
 		content: { text: string };
@@ -491,7 +492,7 @@
 			<Tooltip label="Toggle Raw">
 				<Switch
 					defaultChecked={false}
-					onCheckedChange={(e) => {
+					onCheckedChange={(e: CheckedChangeDetails) => {
 						e.checked ? handleGetRawData('guild') : setJson('guild', guild!);
 					}}
 					disabled={!guild}
@@ -527,7 +528,7 @@
 				<Tooltip label="Toggle Raw">
 					<Switch
 						defaultChecked={false}
-						onCheckedChange={(e) => {
+						onCheckedChange={(e: CheckedChangeDetails) => {
 							e.checked ? handleGetRawData('base') : setJson('base', base!);
 						}}
 						disabled={!base}
@@ -556,7 +557,7 @@
 			<Tooltip label="Toggle Raw">
 				<Switch
 					defaultChecked={false}
-					onCheckedChange={(e) => {
+					onCheckedChange={(e: CheckedChangeDetails) => {
 						e.checked ? handleGetRawData('player') : setJson('player', player!);
 					}}
 					disabled={!player}
@@ -593,7 +594,7 @@
 				<Tooltip label="Toggle Raw">
 					<Switch
 						defaultChecked={false}
-						onCheckedChange={(e) => {
+						onCheckedChange={(e: CheckedChangeDetails) => {
 							e.checked ? handleGetRawData('pal') : setJson('pal', pal!);
 						}}
 						disabled={!pal}
@@ -625,7 +626,7 @@
 				<Tooltip label="Toggle Raw">
 					<Switch
 						defaultChecked={false}
-						onCheckedChange={(e) => {
+						onCheckedChange={(e: CheckedChangeDetails) => {
 							e.checked
 								? handleGetRawData('character_container')
 								: setJson('character_container', characterContainer!);
@@ -657,7 +658,7 @@
 				<Tooltip label="Toggle Raw">
 					<Switch
 						defaultChecked={false}
-						onCheckedChange={(e) => {
+						onCheckedChange={(e: CheckedChangeDetails) => {
 							e.checked
 								? handleGetRawData('item_container')
 								: setJson('item_container', itemContainer!);

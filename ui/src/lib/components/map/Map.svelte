@@ -30,6 +30,15 @@
 		showDungeons = true,
 		showAlphaPals = true,
 		showPredatorPals = true
+	}: {
+		map?: L.Map | undefined;
+		showOrigin?: boolean;
+		showPlayers?: boolean;
+		showBases?: boolean;
+		showFastTravel?: boolean;
+		showDungeons?: boolean;
+		showAlphaPals?: boolean;
+		showPredatorPals?: boolean;
 	} = $props();
 
 	const appState = getAppState();
@@ -283,7 +292,7 @@
 				// Convert point world coordinates to Leaflet coordinates
 				const latlng = worldToLeaflet(point.x, point.y);
 				const palImage = assetLoader.loadMenuImage(point.pal);
-				const palData = palsData.getPalData(point.pal);
+				const palData = palsData.getByKey(point.pal);
 				const icon = L.icon({
 					iconUrl: palImage,
 					iconSize: [40, 40],
@@ -320,7 +329,7 @@
 				// Convert point world coordinates to Leaflet coordinates
 				const latlng = worldToLeaflet(point.x, point.y);
 				const palImage = assetLoader.loadMenuImage(point.pal);
-				const palData = palsData.getPalData(point.pal);
+				const palData = palsData.getByKey(point.pal);
 				const icon = L.icon({
 					iconUrl: palImage,
 					iconSize: [40, 40],

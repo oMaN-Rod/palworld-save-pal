@@ -290,7 +290,7 @@
 		if (!result) return;
 
 		const [selectedPal, nickname] = result;
-		const palData = palsData.getPalData(selectedPal);
+		const palData = palsData.getByKey(selectedPal);
 
 		send(MessageType.ADD_PAL, {
 			guild_id: playerGuild?.id,
@@ -430,7 +430,7 @@
 				if (selectedPals.includes(pal.instance_id)) {
 					pal.hp = pal.max_hp;
 					pal.sanity = 100;
-					const palData = palsData.getPalData(pal.character_key);
+					const palData = palsData.getByKey(pal.character_key);
 					if (palData) {
 						pal.stomach = palData.max_full_stomach;
 					}
@@ -477,7 +477,7 @@
 				pal.hp = pal.max_hp;
 				pal.sanity = 100;
 				pal.is_sick = false;
-				const palData = palsData.getPalData(pal.character_key);
+				const palData = palsData.getByKey(pal.character_key);
 				if (palData) {
 					pal.stomach = palData.max_full_stomach;
 				}

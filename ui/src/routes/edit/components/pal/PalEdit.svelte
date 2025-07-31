@@ -21,6 +21,7 @@
 	import { assetLoader, calculateFilters } from '$utils';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import MultiSkillSelectModal from '$components/modals/multi-skill-select/MultiSkillSelectModal.svelte';
+	import type { ValueChangeDetails } from '@zag-js/accordion';
 
 	const appState = getAppState();
 
@@ -38,7 +39,7 @@
 	const palImage = $derived.by(() => {
 		if (appState.selectedPal) {
 			const { character_key } = appState.selectedPal;
-			const palData = palsData.getPalData(character_key);
+			const palData = palsData.getByKey(character_key);
 			return assetLoader.loadPalImage(character_key, palData?.is_pal || false);
 		}
 	});
@@ -83,7 +84,7 @@
 	}
 
 	async function getPalDescription(character_id: string): Promise<string | undefined> {
-		const palData = palsData.getPalData(character_id);
+		const palData = palsData.getByKey(character_id);
 		if (!palData) return undefined;
 		return palData.description;
 	}
@@ -192,7 +193,7 @@
 
 	function handleMaxWorkSuitability() {
 		if (!appState.selectedPal) return;
-		const palData = palsData.getPalData(appState.selectedPal.character_key);
+		const palData = palsData.getByKey(appState.selectedPal.character_key);
 		if (!palData) return;
 		for (const [key, value] of Object.entries(palData.work_suitability)) {
 			if (value === 0) continue;
@@ -394,7 +395,7 @@
 					<Accordion
 						classes="min-w-96 max-w-96"
 						value={leftAccordionValue}
-						onValueChange={(e) => (leftAccordionValue = e.value)}
+						onValueChange={(e: ValueChangeDetails) => (leftAccordionValue = e.value)}
 						collapsible
 					>
 						<Accordion.Item value="active_skills" controlHover="hover:bg-secondary-500/25">
@@ -486,7 +487,7 @@
 				<Accordion
 					classes="min-w-96"
 					value={rightAccordionValue}
-					onValueChange={(e) => (rightAccordionValue = e.value)}
+					onValueChange={(e: ValueChangeDetails) => (rightAccordionValue = e.value)}
 					collapsible
 				>
 					<Accordion.Item value="stats" controlHover="hover:bg-secondary-500/25">

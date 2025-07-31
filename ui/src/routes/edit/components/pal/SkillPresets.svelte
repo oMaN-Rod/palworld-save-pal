@@ -8,6 +8,7 @@
 	import { assetLoader, calculateFilters, deepCopy } from '$utils';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import { Play, Trash } from 'lucide-svelte';
+	import type { ValueChangeDetails } from '@zag-js/accordion';
 
 	let { onSelect } = $props<{
 		onSelect: (type: 'active' | 'passive', value: string[]) => void;
@@ -126,7 +127,11 @@
 	}
 </script>
 
-<Accordion value={selected} onValueChange={(e) => (selected = e.value)} collapsible>
+<Accordion
+	value={selected}
+	onValueChange={(e: ValueChangeDetails) => (selected = e.value)}
+	collapsible
+>
 	<Accordion.Item value="active" controlHover="hover:bg-secondary-500/25">
 		{#snippet control()}
 			Active Skills
@@ -145,9 +150,7 @@
 								<span>{option.label}</span>
 								<div class="grid grid-cols-3 gap-2">
 									{#each preset.skills as skill}
-										{@const skillObj = Object.values(activeSkillsData.activeSkills).find(
-											(s) => s.id === skill
-										)}
+										{@const skillObj = activeSkillsData.getByKey(skill)}
 										{#if skillObj}
 											{@const icon = elementIcons[skillObj.details.element]}
 											<div

@@ -33,6 +33,7 @@
 	import { ActiveSkillOption, PassiveSkillOption, Talents } from '$components';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import { getAppState } from '$states';
+	import type { ValueChangeDetails } from '@zag-js/accordion';
 
 	let {
 		title = '',
@@ -69,7 +70,7 @@
 		const item = itemsData.items[itemId];
 		if (!item || !item.details.dynamic?.character_ids) {
 			if (!selectedPalKey) return [];
-			const palData = palsData.getPalData(selectedPalKey);
+			const palData = palsData.getByKey(selectedPalKey);
 			return [
 				{
 					label: palData?.localized_name || selectedPalKey,
@@ -80,7 +81,7 @@
 
 		return item.details.dynamic.character_ids
 			.map((charId) => {
-				const palInfo = palsData.getPalData(charId.replace('BOSS_', ''));
+				const palInfo = palsData.getByKey(charId.replace('BOSS_', ''));
 				const label = charId.includes('BOSS_')
 					? `${palInfo?.localized_name} (Alpha)`
 					: palInfo?.localized_name || charId.replace('BOSS_', '');
@@ -150,7 +151,7 @@
 
 	const palIconSrc = $derived.by(() => {
 		if (!selectedPalKey) return staticIcons.unknownIcon;
-		const palData = palsData.getPalData(selectedPalKey);
+		const palData = palsData.getByKey(selectedPalKey);
 		return assetLoader.loadMenuImage(selectedPalKey, palData?.is_pal ?? true);
 	});
 
@@ -287,7 +288,7 @@
 
 	function getPalIcon(palId: string): string {
 		if (!palId) return staticIcons.unknownIcon;
-		const palData = palsData.getPalData(palId);
+		const palData = palsData.getByKey(palId);
 		return assetLoader.loadMenuImage(palId, palData?.is_pal ?? true);
 	}
 
@@ -430,7 +431,7 @@
 			<Accordion
 				classes="w-full"
 				value={accordionValue}
-				onValueChange={(e) => (accordionValue = e.value)}
+				onValueChange={(e: ValueChangeDetails) => (accordionValue = e.value)}
 				collapsible
 			>
 				<Accordion.Item
@@ -505,8 +506,10 @@
 									</div>
 								{/snippet}
 								{#snippet listItem(skill)}
-									{@const activeSkill = activeSkillsData.activeSkills[skill]}
-									<ActiveSkillOption option={{ label: activeSkill.localized_name, value: skill }} />
+									{@const activeSkill = activeSkillsData.getByKey(skill)}
+									<ActiveSkillOption
+										option={{ label: activeSkill?.localized_name || skill, value: skill }}
+									/>
 								{/snippet}
 								{#snippet listItemActions(skill)}
 									<button
@@ -520,7 +523,7 @@
 									</button>
 								{/snippet}
 								{#snippet listItemPopup(skill)}
-									{@const activeSkill = activeSkillsData.activeSkills[skill]}
+									{@const activeSkill = activeSkillsData.getByKey(skill)}
 									<div class="flex items-center space-x-1 justify-self-start">
 										<TimerReset class="h-4 w-4" />
 										<span class="font-bold">{activeSkill?.details.cool_time}</span>
@@ -566,8 +569,10 @@
 									</div>
 								{/snippet}
 								{#snippet listItem(skill)}
-									{@const activeSkill = activeSkillsData.activeSkills[skill]}
-									<ActiveSkillOption option={{ label: activeSkill.localized_name, value: skill }} />
+									{@const activeSkill = activeSkillsData.getByKey(skill)}
+									<ActiveSkillOption
+										option={{ label: activeSkill?.localized_name || skill, value: skill }}
+									/>
 								{/snippet}
 								{#snippet listItemActions(skill)}
 									<button
@@ -581,7 +586,7 @@
 									</button>
 								{/snippet}
 								{#snippet listItemPopup(skill)}
-									{@const activeSkill = activeSkillsData.activeSkills[skill]}
+									{@const activeSkill = activeSkillsData.getByKey(skill)}
 									<div class="flex items-center space-x-1 justify-self-start">
 										<TimerReset class="h-4 w-4" />
 										<span class="font-bold">{activeSkill?.details.cool_time}</span>

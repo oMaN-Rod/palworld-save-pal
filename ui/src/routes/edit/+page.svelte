@@ -19,6 +19,7 @@
 	import { send } from '$utils/websocketUtils';
 	import Nuke from '$components/ui/icons/Nuke.svelte';
 	import DimensionalPalStorage from './components/dps/DimensionalPalStorage.svelte';
+	import type { ValueChangeDetails } from '@zag-js/tabs';
 
 	const appState = getAppState();
 	const nav = getNavigationState();
@@ -96,7 +97,7 @@
 				listJustify="justify-center"
 				value={nav.activeTab}
 				classes="flex h-full flex-col mt-4"
-				onValueChange={(e) => {
+				onValueChange={(e: ValueChangeDetails) => {
 					nav.activeTab = e.value as Tab;
 				}}
 			>

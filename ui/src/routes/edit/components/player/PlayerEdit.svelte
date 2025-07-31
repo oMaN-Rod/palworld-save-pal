@@ -34,6 +34,8 @@
 	import { assetLoader } from '$utils';
 	import { staticIcons } from '$types/icons';
 	import NumberFlow from '@number-flow/svelte';
+	import type { ValueChangeDetails } from '@zag-js/tabs';
+	import type { ValueChangeDetails as AccordionValueChangeDetails } from '@zag-js/accordion';
 
 	const appState = getAppState();
 	const toast = getToastState();
@@ -698,7 +700,7 @@
 						listBorder="preset-outlined-surface-200-800"
 						listClasses="btn-group preset-outlined-surface-200-800 w-full flex-col md:flex-row rounded-sm"
 						value={group}
-						onValueChange={(e) => (group = e.value)}
+						onValueChange={(e: ValueChangeDetails) => (group = e.value)}
 					>
 						{#snippet list()}
 							<Tabs.Control
@@ -1025,7 +1027,7 @@
 				<PlayerHealthBadge bind:player={appState.selectedPlayer} bind:maxHp={health} />
 				<Accordion
 					value={sideBarExpanded}
-					onValueChange={(e) => (sideBarExpanded = e.value)}
+					onValueChange={(e: AccordionValueChangeDetails) => (sideBarExpanded = e.value)}
 					collapsible
 				>
 					<Accordion.Item value="stats" controlHover="hover:bg-secondary-500/25">

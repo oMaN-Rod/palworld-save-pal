@@ -56,7 +56,7 @@
 	}
 
 	function getIconPath(option: SelectOption) {
-		const palData = palsData.getPalData(option.value);
+		const palData = palsData.getByKey(option.value);
 		if (palData && palData.is_pal) {
 			return assetLoader.loadMenuImage(option.value);
 		} else if (palData && !palData.is_pal) {
@@ -71,7 +71,7 @@
 	<h3 class="h3">{title}</h3>
 	<Combobox options={selectOptions} bind:value={selectedPal}>
 		{#snippet selectOption(option)}
-			{@const palData = palsData.getPalData(option.value)}
+			{@const palData = palsData.getByKey(option.value)}
 			<div class="flex items-center space-x-2">
 				<img src={getIconPath(option)} alt={option.label} class="h-8 w-8" />
 				<div class="grow">

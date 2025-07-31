@@ -11,6 +11,7 @@
 	import { assetLoader } from '$utils';
 	import { Switch } from '@skeletonlabs/skeleton-svelte';
 	import { Save, X } from 'lucide-svelte';
+	import type { CheckedChangeDetails } from '@zag-js/switch';
 
 	const ignoreKeys = ['character_id', 'element'];
 
@@ -64,7 +65,7 @@
 							<Switch
 								name={palPresetNameDescriptionMap[property as PalPresetPropertyNames].label}
 								checked={config[property]}
-								onCheckedChange={(mode) => {
+								onCheckedChange={(mode: CheckedChangeDetails) => {
 									config[property] = mode.checked;
 								}}
 							/>

@@ -4,6 +4,7 @@
 	import { staticIcons } from '$types/icons';
 	import { Copy } from 'lucide-svelte';
 	import { getToastState } from '$states';
+	import type { ValueChangeDetails } from '@zag-js/accordion';
 
 	const toast = getToastState();
 
@@ -38,7 +39,7 @@
 
 		<Accordion
 			value={errorExpand}
-			onValueChange={(e) => (errorExpand = e.value)}
+			onValueChange={(e: ValueChangeDetails) => (errorExpand = e.value)}
 			classes="mt-4 bg-surface-800"
 			collapsible
 		>
