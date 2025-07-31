@@ -632,9 +632,9 @@
 									</div>
 								{/snippet}
 								{#snippet listItem(skill)}
-									{@const passiveSkill = passiveSkillsData.passiveSkills[skill]}
+									{@const passiveSkill = passiveSkillsData.getByKey(skill)}
 									<PassiveSkillOption
-										option={{ label: passiveSkill.localized_name, value: skill }}
+										option={{ label: passiveSkill?.localized_name || skill, value: skill }}
 									/>
 								{/snippet}
 								{#snippet listItemActions(skill)}
@@ -649,9 +649,9 @@
 									</button>
 								{/snippet}
 								{#snippet listItemPopup(skill)}
-									{@const passiveSkill = passiveSkillsData.passiveSkills[skill]}
+									{@const passiveSkill = passiveSkillsData.getByKey(skill)}
 									<div class="flex grow flex-col">
-										<span class="grow truncate">{passiveSkill.localized_name}</span>
+										<span class="grow truncate">{passiveSkill?.localized_name || skill}</span>
 										<span class="text-xs">{passiveSkill?.description}</span>
 									</div>
 								{/snippet}

@@ -17,15 +17,7 @@
 	const appState = getAppState();
 	const modal = getModalState();
 
-	let skillData = $derived.by(() => {
-		if (skill) {
-			const passiveSkill = passiveSkillsData.passiveSkills[skill];
-			if (!passiveSkill) {
-				return null;
-			}
-			return passiveSkillsData.passiveSkills[skill];
-		}
-	});
+	let skillData = $derived(passiveSkillsData.getByKey(skill));
 
 	let tierIcon = $derived.by(() => {
 		if (skillData) {

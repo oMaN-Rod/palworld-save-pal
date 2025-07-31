@@ -94,7 +94,7 @@
 	}
 
 	function getPassiveSkillIconFilter(skillId: string): string {
-		const skill = passiveSkillsData.passiveSkills[skillId];
+		const skill = passiveSkillsData.getByKey(skillId);
 		if (!skill || skill.localized_name === 'None') return '';
 		const passiveSkill = skill as PassiveSkill;
 		switch (passiveSkill.details.rank) {
@@ -111,7 +111,7 @@
 	}
 
 	function getPassiveSkillBorderClass(skillId: string): string {
-		const skill = passiveSkillsData.passiveSkills[skillId];
+		const skill = passiveSkillsData.getByKey(skillId);
 		if (!skill) return '';
 		switch (skill.details.rank) {
 			case 1:
@@ -204,9 +204,7 @@
 								<span>{option.label}</span>
 								<div class="grid grid-cols-4 gap-2">
 									{#each preset.skills as skill}
-										{@const skillObj = Object.values(passiveSkillsData.passiveSkills).find(
-											(s) => s.id === skill
-										)}
+										{@const skillObj = passiveSkillsData.getByKey(skill)}
 										{#if skillObj}
 											{@const icon = passiveSkillIcons[skillObj.details.rank]}
 											<div

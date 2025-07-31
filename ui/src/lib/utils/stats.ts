@@ -34,7 +34,7 @@ function calculateSkillEffects(skills: string[]): {
 	let workSpeedBonus = 0;
 
 	for (const skillId of skills) {
-		const skillData = passiveSkillsData.passiveSkills[skillId];
+		const skillData = passiveSkillsData.getByKey(skillId);
 		if (!skillData) continue;
 
 		for (const effect of skillData.details.effects) {
