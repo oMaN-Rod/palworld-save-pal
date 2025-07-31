@@ -505,13 +505,13 @@
 										<span class="font-bold">Active Skills</span>
 									</div>
 								{/snippet}
-								{#snippet listItem(skill)}
+								{#snippet listItem(skill: string)}
 									{@const activeSkill = activeSkillsData.getByKey(skill)}
 									<ActiveSkillOption
 										option={{ label: activeSkill?.localized_name || skill, value: skill }}
 									/>
 								{/snippet}
-								{#snippet listItemActions(skill)}
+								{#snippet listItemActions(skill: string)}
 									<button
 										class="btn hover:bg-error-500/25 p-2"
 										onclick={() =>
@@ -522,7 +522,7 @@
 										<Trash size={16} />
 									</button>
 								{/snippet}
-								{#snippet listItemPopup(skill)}
+								{#snippet listItemPopup(skill: string)}
 									{@const activeSkill = activeSkillsData.getByKey(skill)}
 									<div class="flex items-center space-x-1 justify-self-start">
 										<TimerReset class="h-4 w-4" />
@@ -568,13 +568,13 @@
 										<span class="font-bold">Learned Skills</span>
 									</div>
 								{/snippet}
-								{#snippet listItem(skill)}
+								{#snippet listItem(skill: string)}
 									{@const activeSkill = activeSkillsData.getByKey(skill)}
 									<ActiveSkillOption
 										option={{ label: activeSkill?.localized_name || skill, value: skill }}
 									/>
 								{/snippet}
-								{#snippet listItemActions(skill)}
+								{#snippet listItemActions(skill: string)}
 									<button
 										class="btn hover:bg-error-500/25 p-2"
 										onclick={() =>
@@ -585,7 +585,7 @@
 										<Trash size={16} />
 									</button>
 								{/snippet}
-								{#snippet listItemPopup(skill)}
+								{#snippet listItemPopup(skill: string)}
 									{@const activeSkill = activeSkillsData.getByKey(skill)}
 									<div class="flex items-center space-x-1 justify-self-start">
 										<TimerReset class="h-4 w-4" />
@@ -631,13 +631,13 @@
 										<span class="font-bold">Passive Skills</span>
 									</div>
 								{/snippet}
-								{#snippet listItem(skill)}
+								{#snippet listItem(skill: string)}
 									{@const passiveSkill = passiveSkillsData.getByKey(skill)}
 									<PassiveSkillOption
 										option={{ label: passiveSkill?.localized_name || skill, value: skill }}
 									/>
 								{/snippet}
-								{#snippet listItemActions(skill)}
+								{#snippet listItemActions(skill: string)}
 									<button
 										class="btn hover:bg-error-500/25 p-2"
 										onclick={() =>
@@ -648,7 +648,7 @@
 										<Trash size={16} />
 									</button>
 								{/snippet}
-								{#snippet listItemPopup(skill)}
+								{#snippet listItemPopup(skill: string)}
 									{@const passiveSkill = passiveSkillsData.getByKey(skill)}
 									<div class="flex grow flex-col">
 										<span class="grow truncate">{passiveSkill?.localized_name || skill}</span>
