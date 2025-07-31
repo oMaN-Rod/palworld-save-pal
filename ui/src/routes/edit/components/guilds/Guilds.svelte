@@ -55,7 +55,7 @@
 
 	const guildChestIcon = $derived.by(() => {
 		if (!playerGuild?.guild_chest) return null;
-		const building = buildingsData.buildings['GuildChest'];
+		const building = buildingsData.getByKey('GuildChest');
 		if (building) {
 			return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${building.icon}.webp`);
 		}
@@ -184,7 +184,7 @@
 
 	const currentStorageContainerIcon = $derived.by(() => {
 		if (!currentStorageContainer) return null;
-		const building = buildingsData.buildings[currentStorageContainer.key];
+		const building = buildingsData.getByKey(currentStorageContainer.key);
 		if (building) {
 			return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${building.icon}.webp`);
 		}
@@ -857,7 +857,7 @@
 									<hr class="border-surface-500 my-2" />
 									<span class="font-bold">Total Count: {item.total_count}</span>
 									{#each Object.entries(item.containers) as [containerId, count]}
-										{@const building = buildingsData.buildings[fixStupidTypos(containerId)]}
+										{@const building = buildingsData.getByKey(containerId)}
 										{#if building}
 											{@const buildingIcon = assetLoader.loadImage(
 												`${ASSET_DATA_PATH}/img/${building.icon}.webp`
@@ -952,7 +952,7 @@
 								multiple={false}
 							>
 								{#snippet listItem(item)}
-									{@const building = buildingsData.buildings[fixStupidTypos(item.key)]}
+									{@const building = buildingsData.getByKey(item.key)}
 									{#if building}
 										{@const buildingIcon = assetLoader.loadImage(
 											`${ASSET_DATA_PATH}/img/${building.icon}.webp`
@@ -973,7 +973,7 @@
 									{/if}
 								{/snippet}
 								{#snippet listItemPopup(item)}
-									{@const building = buildingsData.buildings[fixStupidTypos(item.key)]}
+									{@const building = buildingsData.getByKey(item.key)}
 									{#if building}
 										<div class="flex flex-col">
 											<h4 class="h4">{building.localized_name}</h4>
@@ -995,7 +995,7 @@
 							</List>
 							<div class="max-h-[550px] overflow-y-auto 2xl:max-h-[800px]">
 								{#if currentStorageContainer}
-									{@const building = buildingsData.buildings[currentStorageContainer.key]}
+									{@const building = buildingsData.getByKey(currentStorageContainer.key)}
 									{@const itemGroup = building?.type_a == BuildingTypeA.Food ? 'Food' : 'Common'}
 									<div class="flex items-start space-x-4">
 										<div class="m-1 grid grid-cols-6 gap-2">
@@ -1042,7 +1042,7 @@
 						</div>
 					{/if}
 				{:else if activeTab == 'guildChest' && playerGuild?.guild_chest}
-					{@const building = buildingsData.buildings['GuildChest']}
+					{@const building = buildingsData.getByKey('GuildChest')}
 					{@const itemGroup = building?.type_a == BuildingTypeA.Food ? 'Food' : 'Common'}
 					<div class="max-h-[550px] overflow-y-auto 2xl:max-h-[800px]">
 						<div class="flex items-start space-x-4">

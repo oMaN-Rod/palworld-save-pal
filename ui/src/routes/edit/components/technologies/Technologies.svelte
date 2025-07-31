@@ -164,7 +164,7 @@
 						<span class="font-bold">Unlocks:</span>
 						<ul class="ml-4 list-disc">
 							{#each technologyItem.details.unlock_build_objects as buildObject}
-								{@const buildingData = buildingsData.buildings[buildObject]}
+								{@const buildingData = buildingsData.getByKey(buildObject)}
 								{#if buildingData}
 									{@const icon = assetLoader.loadImage(
 										`${ASSET_DATA_PATH}/img/${buildingData.icon}.webp`

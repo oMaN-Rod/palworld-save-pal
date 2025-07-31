@@ -167,7 +167,7 @@
 		if (base) {
 			for (const [id, container] of Object.entries(base.storage_containers!)) {
 				if (container) {
-					const buildingData = buildingsData.buildings[container.key];
+					const buildingData = buildingsData.getByKey(container.key);
 					options[id] = buildingData?.localized_name || container.key;
 				}
 			}

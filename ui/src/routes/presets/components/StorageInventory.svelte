@@ -9,7 +9,7 @@
 		preset: PresetProfile;
 	}>();
 
-	const buildingData = buildingsData.buildings[preset.storage_container.key];
+	const buildingData = buildingsData.getByKey(preset.storage_container.key);
 </script>
 
 <div class="">
@@ -20,7 +20,7 @@
 			class="mb-2 h-12 w-12"
 		/>
 		<h5 class="h5 py-4">
-			{buildingData.localized_name}
+			{buildingData?.localized_name}
 		</h5>
 	</div>
 	<InventoryItems bind:items={preset.storage_container.slots} />
