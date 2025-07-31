@@ -1,8 +1,10 @@
 import { sendAndWait } from '$lib/utils/websocketUtils';
 import { MessageType, type Technology } from '$types';
+import { normalizeKeys } from '$utils';
 
 class Technologies {
 	private loading = false;
+	private keyMap: Record<string, string> = $state({});
 
 	technologies: Record<string, Technology> = $state({});
 
@@ -11,6 +13,7 @@ class Technologies {
 			try {
 				this.loading = true;
 				this.technologies = await sendAndWait(MessageType.GET_TECHNOLOGIES);
+				this.keyMap = normalizeKeys(Object.keys(this.technologies));
 				this.loading = false;
 			} catch (error) {
 				this.loading = false;
@@ -24,24 +27,12 @@ class Technologies {
 		}
 	}
 
-	async searchTechnologies(search: string): Promise<Technology | undefined> {
-		await this.ensureTechnologiesLoaded();
-		return this.getByKey(search) || this.getByName(search) || undefined;
-	}
-
-	private getByKey(key: string): Technology | undefined {
-		return this.technologies[key];
-	}
-
-	private getByName(name: string): Technology | undefined {
-		return Object.values(this.technologies).find(
-			(skill) => skill.localized_name.toLowerCase() === name.toLowerCase()
-		);
-	}
-
-	async getTechnologies(): Promise<Technology[]> {
-		await this.ensureTechnologiesLoaded();
-		return Object.values(this.technologies);
+	getByKey(key: string): Technology | undefined {
+		try {
+			return this.technologies[this.keyMap[key.toLowerCase()]];
+		} catch (error) {
+			console.error('Error getting technology data:', error);
+		}
 	}
 
 	async reset(): Promise<void> {

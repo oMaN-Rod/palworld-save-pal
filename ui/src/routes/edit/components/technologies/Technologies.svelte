@@ -51,9 +51,9 @@
 	}
 
 	async function getImageForTechnology(techID: string): Promise<string | undefined> {
-		let techIcon = technologiesData.technologies[techID].details.icon;
+		let techIcon = technologiesData.getByKey(techID)?.details.icon;
 		if (!techIcon) {
-			return;
+			return staticIcons.unknownIcon;
 		}
 		return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${techIcon}.webp`);
 	}
@@ -129,7 +129,7 @@
 				{#await getImageForTechnology(techID) then icon}
 					<img
 						src={icon || staticIcons.unknownIcon}
-						alt={technologiesData.technologies[techID].localized_name}
+						alt={technologiesData.getByKey(techID)?.localized_name}
 						class="mb-2 h-16 w-16 2xl:h-24 2xl:w-24"
 					/>
 				{/await}
@@ -264,12 +264,12 @@
 					<div class="flex gap-4">
 						<div class="flex gap-4">
 							{#each techIDs as techID}
-								{@const technologyItem = technologiesData.technologies[techID]}
+								{@const technologyItem = technologiesData.getByKey(techID)}
 								{@const isSelected =
 									Number(levelCap) === 1
 										? true
 										: appState.selectedPlayer.technologies.includes(techID)}
-								{#if !technologyItem.details.is_boss_technology}
+								{#if technologyItem && !technologyItem?.details.is_boss_technology}
 									{@render technologyButton(techID, isSelected, technologyItem, 'tech')}
 								{/if}
 							{/each}
@@ -281,7 +281,7 @@
 						<div class="bg-ancient-tech-500 w-px"></div>
 
 						{#if ancientTechID}
-							{@const ancientTechItem = technologiesData.technologies[ancientTechID]}
+							{@const ancientTechItem = technologiesData.getByKey(ancientTechID) as Technology}
 							{@const isSelected = appState.selectedPlayer.technologies.includes(ancientTechID)}
 							{@render technologyButton(ancientTechID, isSelected, ancientTechItem, 'ancient')}
 						{:else}
