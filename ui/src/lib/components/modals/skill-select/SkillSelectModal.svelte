@@ -42,7 +42,8 @@
 			yakushimamonster001_red: 'unique_yakushimamonster001_slimepress_fire',
 			yakushimamonster002: 'unique_yakushimamonster002_swordcharge',
 			yakushimamonster003: 'unique_yakushimamonster003_batcharge',
-			yakushimamonster003_purple: 'unique_yakushimamonster003_batcharge'
+			yakushimamonster003_purple: 'unique_yakushimamonster003_batcharge',
+			yakushimaboss001: 'unique_yakushima_'
 		};
 
 		if (yakushimaCorrelations[characterKey]) {
