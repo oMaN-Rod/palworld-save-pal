@@ -284,7 +284,7 @@
     "description": "Shoots countless wind swords that fly straight towards the enemy."
   },
   "EPalWazaID::Railbolt": {
-    "localized_name": "Railbolt",
+    "localized_name": "Thunder Rail",
     "description": "Charge the power of lightning to the limit and fires multiple simultaneous electric shocks at the enemy."
   },
   "EPalWazaID::RangeThunder": {
@@ -730,6 +730,10 @@
   "EPalWazaID::Unique_NightLady_WarpBeam_Straight": {
     "localized_name": "Nightmare Ray",
     "description": "Bellanoir's exclusive skill. Disappears suddenly, then reappears while firing a barrage of beams."
+  },
+  "EPalWazaID::Unique_OctopursGirl_InkJet": {
+    "localized_name": "Smoke Jet",
+    "description": "Gloopie's exclusive skill. Releases smoke to conceal itself, then launches a surprise headbutt from the shadows."
   },
   "EPalWazaID::Unique_PinkCat_CatPunch": {
     "localized_name": "Punch Flurry",

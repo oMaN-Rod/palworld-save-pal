@@ -284,7 +284,7 @@
     "description": "Nimmt den Gegner ins Visier und erzeugt unzählige fliegende Luftklingen."
   },
   "EPalWazaID::Railbolt": {
-    "localized_name": "Railbolt",
+    "localized_name": "Donnerbahn",
     "description": "Tankt Gewitterenergie und feuert mehrere mächtige Elektroschocks auf den Gegner ab."
   },
   "EPalWazaID::RangeThunder": {
@@ -730,6 +730,10 @@
   "EPalWazaID::Unique_NightLady_WarpBeam_Straight": {
     "localized_name": "Albtraumstrahl",
     "description": "Einzigartige Fähigkeit von Bellanoir. Verschwindet unvermittelt und feuert beim Wiederauftauchen eine Salve aus Lichtstrahlen ab."
+  },
+  "EPalWazaID::Unique_OctopursGirl_InkJet": {
+    "localized_name": "Rauchmantel",
+    "description": "Einzigartige Fähigkeit von Gloopie. Hüllt sich in eine Rauchwolke und greift den Gegner daraufhin mit einem Überraschungs-Kopfstoß an."
   },
   "EPalWazaID::Unique_PinkCat_CatPunch": {
     "localized_name": "Samtpfoten",

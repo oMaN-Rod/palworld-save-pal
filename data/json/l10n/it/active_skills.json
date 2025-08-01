@@ -284,7 +284,7 @@
     "description": "Scaglia innumerevoli lame d'aria che volano verso il nemico."
   },
   "EPalWazaID::Railbolt": {
-    "localized_name": "Railbolt",
+    "localized_name": "Cannone elettrico",
     "description": "Si carica al massimo di elettricità per poi scagliare contemporaneamente numerose scariche elettriche contro il nemico."
   },
   "EPalWazaID::RangeThunder": {
@@ -730,6 +730,10 @@
   "EPalWazaID::Unique_NightLady_WarpBeam_Straight": {
     "localized_name": "Raggio d'incubo",
     "description": "Abilità di Bellanoir. Sparisce all'improvviso, e quando riappare scaglia una pioggia di raggi."
+  },
+  "EPalWazaID::Unique_OctopursGirl_InkJet": {
+    "localized_name": "Cortina d'inchiostro",
+    "description": "Abilità del Pal Gloopie. Genera davanti a sé una cortina d'inchiostro per mimetizzarsi e ne approfitta per assestare una potente testata."
   },
   "EPalWazaID::Unique_PinkCat_CatPunch": {
     "localized_name": "Pugni rotanti",

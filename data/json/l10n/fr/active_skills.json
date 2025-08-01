@@ -141,7 +141,7 @@
   },
   "EPalWazaID::FlameWall": {
     "localized_name": "Mur de Flammes",
-    "description": "Crée un mur de flammes sur la position de l'ennemi. Celui-ci demeure quelque temps et inflige des dégâts aux ennemis qui le touchent."
+    "description": "Crée un mur de flammes sur la position de l'ennemi. Celui-ci perdure quelque temps et inflige des dégâts aux ennemis qui le touchent."
   },
   "EPalWazaID::Flamethrower": {
     "localized_name": "Souffle Enflammé",
@@ -181,7 +181,7 @@
   },
   "EPalWazaID::Human_Punch": {
     "localized_name": "Coup de Poing",
-    "description": "Frappe avec conviction ; croyez en la puissance de votre poing."
+    "description": "Frappez avec conviction et croyez en la puissance de votre poing."
   },
   "EPalWazaID::HydroPump": {
     "localized_name": "Hydro-Laser",
@@ -284,7 +284,7 @@
     "description": "Tire d'innombrables lames de vent qui filent droit sur l'ennemi."
   },
   "EPalWazaID::Railbolt": {
-    "localized_name": "Railbolt",
+    "localized_name": "Canon Fulgurant",
     "description": "Accumule l'énergie orageuse au maximum pour frapper l'ennemi de plusieurs chocs électriques simultanés."
   },
   "EPalWazaID::RangeThunder": {
@@ -409,7 +409,7 @@
   },
   "EPalWazaID::Thunderbolt": {
     "localized_name": "Éclair Fulgurant",
-    "description": "Accumule l'énergie orageuse pour libérer un puissant choc électrique sur l'ennemi."
+    "description": "Accumule l'énergie orageuse pour libérer une puissante décharge électrique sur l'ennemi."
   },
   "EPalWazaID::Tremor": {
     "localized_name": "Tremblement",
@@ -661,7 +661,7 @@
   },
   "EPalWazaID::Unique_JetDragon_JumpBeam": {
     "localized_name": "Faisceau Stellaire",
-    "description": "Compétence exclusive à Jetragon. Fait briller ses ailes pour tirer d'innombrables rayons sur l'ennemi qui provoquent une explosion à l'impact."
+    "description": "Compétence exclusive à Jetragon. Fait briller ses ailes pour tirer d'innombrables rayons qui explosent à l'impact sur l'ennemi."
   },
   "EPalWazaID::Unique_KingAlpaca_BodyPress": {
     "localized_name": "Presse Royale",
@@ -709,7 +709,7 @@
   },
   "EPalWazaID::Unique_MysteryMask_LifeSteal": {
     "localized_name": "Vol d'Âme",
-    "description": "Compétence exclusive à Omascul. Apparaît d'un coup près de l'ennemi pour l'immobiliser avec ses deux bras et absorber ses PV."
+    "description": "Compétence exclusive à Omascul. Apparaît tout à coup près de l'ennemi pour l'immobiliser avec ses deux bras et absorber ses PV."
   },
   "EPalWazaID::Unique_NaughtyCat_CatPress": {
     "localized_name": "Presse Féline",
@@ -730,6 +730,10 @@
   "EPalWazaID::Unique_NightLady_WarpBeam_Straight": {
     "localized_name": "Rayons Cauchemardesques",
     "description": "Compétence exclusive à Bellanoir. Disparaît et réapparaît avec des rayons lumineux."
+  },
+  "EPalWazaID::Unique_OctopursGirl_InkJet": {
+    "localized_name": "Fumée de Jais",
+    "description": "Compétence exclusive à Gloopie. Projette un écran de fumée devant elle pour masquer sa présence, puis lance une attaque surprise avec un violent coup de tête depuis sa cachette."
   },
   "EPalWazaID::Unique_PinkCat_CatPunch": {
     "localized_name": "Enchaînement de Poings",
@@ -781,7 +785,7 @@
   },
   "EPalWazaID::Unique_SifuDog_Counter": {
     "localized_name": "Posture Résolue",
-    "description": "Compétence exclusive à Dogen. Se met en posture aiki afin d'annuler toute attaque subie et se téléporter sur l'ennemi en lui assénant un coup dévastateur."
+    "description": "Compétence exclusive à Dogen. Se met en posture d'aïkido afin de parer toute attaque subie et se téléporter sur l'ennemi en lui assénant un coup dévastateur."
   },
   "EPalWazaID::Unique_SnowTigerBeastman_SnowImpact": {
     "localized_name": "Impact Glacial",

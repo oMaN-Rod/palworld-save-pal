@@ -284,7 +284,7 @@
     "description": "瞄准敌人射出无数风刃。"
   },
   "EPalWazaID::Railbolt": {
-    "localized_name": "Railbolt",
+    "localized_name": "并联雷光",
     "description": "积蓄雷电的力量到极限， 朝敌人同时发射多道强力雷击。"
   },
   "EPalWazaID::RangeThunder": {
@@ -730,6 +730,10 @@
   "EPalWazaID::Unique_NightLady_WarpBeam_Straight": {
     "localized_name": "噩梦射线",
     "description": "贝菈诺娃的专用技能。 趁敌人不注意时隐去身影，并在再次现身的瞬间射出无数光线。"
+  },
+  "EPalWazaID::Unique_OctopursGirl_InkJet": {
+    "localized_name": "墨沫头槌",
+    "description": "墨沫姬的专用技能。 向前方释放烟雾遮蔽自身， 从隐蔽状态中突然发动头槌，猛击敌人。"
   },
   "EPalWazaID::Unique_PinkCat_CatPunch": {
     "localized_name": "喵喵拳",

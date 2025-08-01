@@ -284,7 +284,7 @@
     "description": "적을 향해 날아가는 바람의 칼날을 무수히 발사한다."
   },
   "EPalWazaID::Railbolt": {
-    "localized_name": "Railbolt",
+    "localized_name": "썬더 레일",
     "description": "천둥의 힘을 한계까지 끌어모아 적을 향해 강력한 다수의 전기 공격을 동시 발사한다."
   },
   "EPalWazaID::RangeThunder": {
@@ -730,6 +730,10 @@
   "EPalWazaID::Unique_NightLady_WarpBeam_Straight": {
     "localized_name": "악몽의 빛",
     "description": "벨라누아르의 전용 스킬. 돌연히 모습을 감춘 후, 나타난 순간에 무수한 광선을 발사한다."
+  },
+  "EPalWazaID::Unique_OctopursGirl_InkJet": {
+    "localized_name": "제트 스모크",
+    "description": "옥토비아 종의 전용 스킬. 전방에 연막을 깔아 모습을 감춘 후 은신 중에 박치기로 기습한다."
   },
   "EPalWazaID::Unique_PinkCat_CatPunch": {
     "localized_name": "냥냥 펀치",

@@ -2473,6 +2473,21 @@
     "cool_time": 50.0,
     "effects": []
   },
+  "EPalWazaID::Unique_OctopursGirl_InkJet": {
+    "element": "Water",
+    "type": "Shot",
+    "power": 85,
+    "min_range": 0,
+    "max_range": 4000,
+    "cool_time": 12.0,
+    "effects": [
+      {
+        "type": "Wetness",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
   "EPalWazaID::Unique_PinkCat_CatPunch": {
     "element": "Normal",
     "type": "Melee",
@@ -2601,7 +2616,7 @@
     "type": "Melee",
     "power": 80,
     "min_range": 0,
-    "max_range": 400,
+    "max_range": 300,
     "cool_time": 12.0,
     "effects": []
   },
