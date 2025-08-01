@@ -14,7 +14,7 @@ dependencies = [
     "colorlog==6.9.0",
     "cx-freeze==8.3.0",
     "deepdiff==8.0.1",
-    "fastapi==0.115.6",
+    "fastapi==0.116.1",
     "h11==0.16.0",
     "idna==3.10",
     "lief==0.15.1",
