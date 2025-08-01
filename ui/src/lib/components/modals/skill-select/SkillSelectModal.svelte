@@ -26,16 +26,40 @@
 		closeModal: (value: any) => void;
 	}>();
 
+	function processCharacterKey(id: string) {
+		if (id.includes('nightlady')) return id.replace('_dark', '');
+		if (id.includes('kingbahamut')) return id.replace('_dragon', '');
+		return id;
+	}
+
+	function processUniqueSkillId(characterKey: string) {
+		const yakushimaCorrelations: Record<string, string> = {
+			yakushimamonster001: 'unique_yakushimamonster001_slimepress_leaf',
+			yakushimamonster001_blue: 'unique_yakushimamonster001_slimepress_water',
+			yakushimamonster001_pink: 'unique_yakushimamonster001_slimepress_normal',
+			yakushimamonster001_purple: 'unique_yakushimamonster001_slimepress_dark',
+			yakushimamonster001_rainbow: 'unique_yakushimamonster001_slimepress_rainbow',
+			yakushimamonster001_red: 'unique_yakushimamonster001_slimepress_fire',
+			yakushimamonster002: 'unique_yakushimamonster002_swordcharge',
+			yakushimamonster003: 'unique_yakushimamonster003_batcharge',
+			yakushimamonster003_purple: 'unique_yakushimamonster003_batcharge'
+		};
+
+		if (yakushimaCorrelations[characterKey]) {
+			return yakushimaCorrelations[characterKey];
+		}
+
+		return `unique_${characterKey}`;
+	}
+
 	const selectOptions: SelectOption[] = $derived.by(() => {
 		let skills = [];
 		if (type === 'Active') {
 			skills = Object.values(activeSkillsData.activeSkills)
 				.filter((skill) => {
-					const characterKey = pal.character_key
-						.toLowerCase()
-						.replace('_dragon', '')
-						.replace('_dark', '');
-					const subString = `unique_${characterKey}`;
+					const characterKey = processCharacterKey(pal.character_key.toLowerCase());
+					const subString = processUniqueSkillId(characterKey);
+
 					if (skill.id.toLowerCase().includes(subString)) {
 						return true;
 					}
