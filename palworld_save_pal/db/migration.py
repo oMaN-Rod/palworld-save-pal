@@ -43,6 +43,16 @@ def run_migrations(db_path):
         migrate_table_column(conn, cursor, "settingsmodel", "cheat_mode", "BOOLEAN", 0)
         migrate_table_column(conn, cursor, "palpreset", "lock_element", "BOOLEAN", 0)
         migrate_table_column(conn, cursor, "palpreset", "element", "TEXT", "''")
+        # Added in v0.15.0
+        migrate_table_column(conn, cursor, "palpreset", "nickname", "TEXT", "''")
+        migrate_table_column(
+            conn, cursor, "palpreset", "filtered_nickname", "TEXT", "''"
+        )
+        migrate_table_column(conn, cursor, "palpreset", "stomach", "REAL", 0.0)
+        migrate_table_column(conn, cursor, "palpreset", "hp", "INTEGER", 0)
+        migrate_table_column(
+            conn, cursor, "palpreset", "friendship_point", "INTEGER", 0
+        )
 
         cursor.close()
         conn.close()

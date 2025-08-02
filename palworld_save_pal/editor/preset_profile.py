@@ -39,6 +39,12 @@ class PalPreset(SQLModel, table=True):
     work_suitability: Optional[Dict[str, int]] = Field(
         default=None, sa_column=Column(JSON)
     )
+    # Added in v0.15.0
+    nickname: Optional[str] = Field(default=None, sa_column=Column(String))
+    filtered_nickname: Optional[str] = Field(default=None, sa_column=Column(String))
+    stomach: Optional[float] = Field(default=None, sa_column=Column(Float))
+    hp: Optional[int] = Field(default=None, sa_column=Column(Integer))
+    friendship_point: Optional[int] = Field(default=None, sa_column=Column(Integer))
 
     model_config = ConfigDict(arbitrary_types_allowed=True)
 
