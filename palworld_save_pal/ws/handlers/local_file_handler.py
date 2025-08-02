@@ -14,6 +14,7 @@ from palworld_save_pal.utils.gamepass.container_types import (
 )
 from palworld_save_pal.ws.messages import (
     MessageType,
+    RenameWorldMessage,
     SaveModdedSaveMessage,
     SelectGamepassSaveMessage,
     SelectSaveMessage,
@@ -104,7 +105,7 @@ async def save_modded_gamepass_save(world_name: str, ws: WebSocket, ws_callback)
         # create a new save_name which consist of a uuid4 all uppercase with no dashes
         new_save_id = uuid.uuid4().hex.upper()
         logger.debug("New save id: %s => %s", gamepass_save.save_id, new_save_id)
-        app_state.save_file.name = new_save_id
+        app_state.save_file.level_sav_path = new_save_id
         save_data = app_state.save_file.sav()
         player_save_data = app_state.save_file.player_gvas_files()
 
@@ -139,7 +140,10 @@ async def save_modded_gamepass_save(world_name: str, ws: WebSocket, ws_callback)
 async def save_modded_steam_save(ws: WebSocket, ws_callback, save_file: SaveFile):
     await backup_dir(app_state.settings.save_dir, "steam", ws_callback)
     await ws_callback("Writing new save file... 🚀")
-    save_file.to_sav_file(save_file.name)
+    save_file.to_level_sav_file(save_file.level_sav_path)
+    await ws_callback("Writing Level Meta file")
+    level_meta_path = os.path.join(app_state.settings.save_dir, "LevelMeta.sav")
+    save_file.to_level_meta_sav_file(level_meta_path)
     await ws_callback("Writing player files")
     player_save_dir = os.path.join(app_state.settings.save_dir, "Players")
     save_file.to_player_sav_files(player_save_dir)
@@ -359,4 +363,21 @@ async def select_gamepass_save_handler(
     await ws.send_json(response)
 
     response = build_response(MessageType.GET_GUILDS, app_state.guilds)
+    await ws.send_json(response)
+
+
+async def rename_world_handler(message: RenameWorldMessage, ws: WebSocket):
+    new_world_name = message.data
+    app_state = get_app_state()
+    old_world_name = (
+        app_state.save_file.world_name if app_state.save_file else "Unknown"
+    )
+    logger.debug("Renaming world from %s to %s", old_world_name, new_world_name)
+    if not app_state.save_file:
+        raise ValueError("No save file loaded")
+    app_state.save_file.set_world_name(new_world_name)
+    response = build_response(
+        MessageType.RENAME_WORLD,
+        f"World renamed from '{old_world_name}' to '{new_world_name}'",
+    )
     await ws.send_json(response)

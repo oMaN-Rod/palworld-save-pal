@@ -57,6 +57,7 @@ from palworld_save_pal.ws.messages import (
     MovePalMessage,
     NukePresetsMessage,
     OpenInBrowserMessage,
+    RenameWorldMessage,
     SelectGamepassSaveMessage,
     SetTechnologyDataMessage,
     SyncAppStateMessage,
@@ -423,7 +424,7 @@ def bootstrap(dispatcher: "MessageDispatcher"):
         },
     )
 
-    dispatcher.register_handler(  # Added
+    dispatcher.register_handler(
         MessageType.GET_LAB_RESEARCH.value,
         {
             "message_class": GetLabResearchMessage,
@@ -452,5 +453,13 @@ def bootstrap(dispatcher: "MessageDispatcher"):
         {
             "message_class": DeleteGpsPalsMessage,
             "handler_func": gps_handler.delete_gps_pals_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.RENAME_WORLD.value,
+        {
+            "message_class": RenameWorldMessage,
+            "handler_func": local_file_handler.rename_world_handler,
         },
     )

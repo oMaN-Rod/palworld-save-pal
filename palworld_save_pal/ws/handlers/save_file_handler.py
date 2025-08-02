@@ -192,7 +192,7 @@ async def load_zip_file_handler(message: LoadZipFileMessage, ws: WebSocket):
     data = {
         "level": app_state.save_file.world_name,
         "players": [str(p) for p in app_state.players.keys()],
-        "name": app_state.save_file.name,
+        "name": app_state.save_file.level_sav_path,
         "size": app_state.save_file.size,
         "type": app_state.save_type.name.lower(),
     }

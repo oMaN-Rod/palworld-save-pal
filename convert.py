@@ -269,7 +269,7 @@ def process_save_file(
     filename: str, output_path: str, minify: bool = False, convert_nan: bool = False
 ) -> Dict:
     save = SaveFile()
-    save.name = filename
+    save.level_sav_path = filename
 
     with open(filename, "rb") as f:
         data = f.read()
@@ -465,7 +465,7 @@ def main():
             data = f.read()
             save_file.load_json(data)
         logger.info("Writing SAV to %s", output_path)
-        save_file.to_sav_file(output_path)
+        save_file.to_level_sav_file(output_path)
 
 
 if __name__ == "__main__":

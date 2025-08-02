@@ -55,6 +55,7 @@ export enum MessageType {
 	IMPORT_PRESET = 'import_preset',
 	GET_LAB_RESEARCH = 'get_lab_research',
 	UPDATE_LAB_RESEARCH = 'update_lab_research',
+	RENAME_WORLD = 'rename_world',
 	ADD_GPS_PAL = 'add_gps_pal',
 	DELETE_GPS_PALS = 'delete_gps_pals',
 	UPDATE_GPS_PAL = 'update_gps_pal',

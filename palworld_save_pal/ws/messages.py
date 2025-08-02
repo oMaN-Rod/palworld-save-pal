@@ -76,6 +76,7 @@ class MessageType(str, Enum):
     SELECT_GAMEPASS_SAVE = "select_gamepass_save"
     SELECT_SAVE = "select_save"
     UPDATE_SAVE_FILE = "update_save_file"
+    RENAME_WORLD = "rename_world"
 
     # Settings Management
     GET_SETTINGS = "get_settings"
@@ -409,3 +410,8 @@ class AddGpsPalMessage(BaseMessage):
 class DeleteGpsPalsMessage(BaseMessage):
     type: str = MessageType.DELETE_DPS_PALS.value
     data: DeletePalsData
+
+
+class RenameWorldMessage(BaseMessage):
+    type: str = MessageType.RENAME_WORLD.value
+    data: str

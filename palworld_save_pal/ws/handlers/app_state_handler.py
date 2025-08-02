@@ -19,7 +19,7 @@ async def sync_app_state_handler(_: SyncAppStateMessage, ws: WebSocket):
         return
 
     data = {
-        "level": save_file.name,
+        "level": save_file.level_sav_path,
         "players": [str(p) for p in (save_file.get_players()).keys()],
         "guilds": [str(g) for g in (save_file.get_guilds()).keys()],
         "world_name": save_file.world_name,

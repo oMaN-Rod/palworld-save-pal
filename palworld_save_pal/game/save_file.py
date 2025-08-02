@@ -139,7 +139,7 @@ class SaveType(int, Enum):
 
 
 class SaveFile(BaseModel):
-    name: str = ""
+    level_sav_path: str = ""
     size: int = 0
     world_name: str = ""
 
@@ -680,7 +680,7 @@ class SaveFile(BaseModel):
             pal.heal()
 
     def get_json(self, minify=False, allow_nan=True):
-        logger.info("Converting %s to JSON", self.name)
+        logger.info("Converting %s to JSON", self.level_sav_path)
         return json.dumps(
             self._gvas_file.dump(),
             indent=None if minify else "\t",
@@ -689,7 +689,7 @@ class SaveFile(BaseModel):
         )
 
     def get_dict(self):
-        logger.info("Converting %s to dict", self.name)
+        logger.info("Converting %s to dict", self.level_sav_path)
         return self._gvas_file.dump()
 
     def get_pal(self, pal_id: UUID) -> Pal:
@@ -743,12 +743,12 @@ class SaveFile(BaseModel):
         return None
 
     def load_json(self, data: bytes):
-        logger.info("Loading %s as JSON", self.name)
+        logger.info("Loading %s as JSON", self.level_sav_path)
         self._gvas_file = GvasFile.load(json.loads(data))
         return self
 
     def load_level_meta(self, data: bytes):
-        logger.info("Loading %s as GVAS", self.name)
+        logger.info("Loading %s as GVAS", self.level_sav_path)
         raw_gvas, _ = decompress_sav_to_gvas(data)
         custom_properties = {
             k: v
@@ -762,7 +762,7 @@ class SaveFile(BaseModel):
         return self._level_meta_gvas_file
 
     def load_level_sav(self, data: bytes):
-        logger.info("Loading %s as GVAS", self.name)
+        logger.info("Loading %s as GVAS", self.level_sav_path)
         start_time = time.perf_counter()
         raw_gvas, _ = decompress_sav_to_gvas(data)
         logger.info(f"Decompressed in {time.perf_counter() - start_time} seconds")
@@ -787,7 +787,7 @@ class SaveFile(BaseModel):
         level_meta: Optional[bytes] = None,
         ws_callback=None,
     ):
-        logger.info("Loading %s", self.name)
+        logger.info("Loading %s", self.level_sav_path)
         raw_gvas, _ = decompress_sav_to_gvas(level_sav)
         gvas_file = GvasFile.read(
             raw_gvas, PALWORLD_TYPE_HINTS, CUSTOM_PROPERTIES, allow_nan=True
@@ -814,7 +814,7 @@ class SaveFile(BaseModel):
         return self
 
     def sav(self, gvas_file: GvasFile = None) -> bytes:
-        logger.info("Converting %s to SAV", self.name)
+        logger.info("Converting %s to SAV", self.level_sav_path)
         target_gvas = gvas_file if gvas_file else self._gvas_file
         gvas = copy.deepcopy(target_gvas)
         return compress_gvas_to_sav(gvas.write(CUSTOM_PROPERTIES), 0x31)
@@ -857,7 +857,9 @@ class SaveFile(BaseModel):
         minify=False,
         allow_nan=True,
     ):
-        logger.info("Converting %s to JSON, saving to %s", self.name, output_path)
+        logger.info(
+            "Converting %s to JSON, saving to %s", self.level_sav_path, output_path
+        )
         with open(output_path, "w", encoding="utf8") as f:
             indent = None if minify else "\t"
             json.dump(
@@ -868,10 +870,22 @@ class SaveFile(BaseModel):
                 allow_nan=allow_nan,
             )
 
-    def to_sav_file(self, output_path: str) -> None:
-        logger.info("Converting %s to SAV, saving to %s", self.name, output_path)
+    def to_level_sav_file(self, output_path):
+        logger.info(
+            "Converting %s to SAV, saving to %s", self.level_sav_path, output_path
+        )
         gvas = copy.deepcopy(self._gvas_file)
         sav_file = compress_gvas_to_sav(gvas.write(CUSTOM_PROPERTIES), 0x31)
+        with open(output_path, "wb") as f:
+            f.write(sav_file)
+
+    def to_level_meta_sav_file(self, output_path):
+        if not self._level_meta_gvas_file:
+            raise ValueError("No LevelMeta GvasFile has been loaded.")
+        logger.info("Converting LevelMeta to SAV, saving to %s", output_path)
+        sav_file = compress_gvas_to_sav(
+            self._level_meta_gvas_file.write(CUSTOM_PROPERTIES), 0x31
+        )
         with open(output_path, "wb") as f:
             f.write(sav_file)
 
@@ -1193,6 +1207,21 @@ class SaveFile(BaseModel):
             "value",
         )
         self.world_name = world_name if world_name else "Unknown"
+
+    def set_world_name(self, name: str) -> None:
+        if not self._level_meta_gvas_file:
+            raise ValueError("No LevelMeta GvasFile has been loaded.")
+        old_world_name = self.world_name
+        self.world_name = name
+        PalObjects.set_nested(
+            self._level_meta_gvas_file.properties,
+            "SaveData",
+            "value",
+            "WorldName",
+            "value",
+            value=name,
+        )
+        logger.info("Changed world name from %s to %s", old_world_name, name)
 
     def _set_data(self) -> None:
         logger.debug("Properties keys: %s", self._gvas_file.properties.keys())
