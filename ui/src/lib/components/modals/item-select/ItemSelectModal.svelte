@@ -380,7 +380,7 @@
 				</Combobox>
 				{#if !isEgg && selectedItemMaxStackCount && selectedItemMaxStackCount > 1}
 					<Input
-						labelClass="w-1/4"
+						labelClass="w-1/4 ml-1"
 						type="number"
 						bind:value={count}
 						max={selectedItemMaxStackCount}

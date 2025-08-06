@@ -69,7 +69,6 @@
 					}
 					return false;
 				})
-				.filter((aSkill) => !Object.values(pal.active_skills).some((skill) => skill === aSkill.id))
 				.sort((a, b) => a.details.element.localeCompare(b.details.element))
 				.map((s) => ({
 					value: s.id,
@@ -77,7 +76,6 @@
 				}));
 		} else {
 			skills = Object.values(passiveSkillsData.passiveSkills)
-				.filter((pSkill) => !Object.values(pal.passive_skills).some((p) => p === pSkill.id))
 				.sort((a, b) => b.details.rank - a.details.rank)
 				.map((s) => ({
 					value: s.id,

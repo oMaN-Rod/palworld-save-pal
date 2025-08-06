@@ -13,7 +13,6 @@
 		skill: string | undefined;
 		onSkillUpdate?: (newSkill: string, oldSkill: string) => void;
 	}>();
-
 	const appState = getAppState();
 	const modal = getModalState();
 

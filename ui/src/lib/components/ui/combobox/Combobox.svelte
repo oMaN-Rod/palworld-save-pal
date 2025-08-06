@@ -130,7 +130,6 @@
 			debounceSearch();
 		} else {
 			filteredOptions = options;
-			value = '';
 		}
 	});
 
