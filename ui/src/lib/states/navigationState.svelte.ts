@@ -1,7 +1,7 @@
 import { getAppState } from './appState.svelte';
 
 export type Page = 'edit' | 'info' | 'file' | 'settings' | 'loading' | 'error' | 'browser' | 'save';
-export type Tab = 'player' | 'pal' | 'pal-box' | 'dps' | 'guilds' | 'gps';
+export type Tab = 'player' | 'pal' | 'pal-box' | 'dps' | 'guilds' | 'gps' | 'technologies';
 
 export interface NavigationState {
 	activePage: Page;

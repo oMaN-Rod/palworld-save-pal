@@ -6,6 +6,7 @@ import CornerDotButton from './corner-dot-button/CornerDotButton.svelte';
 import FileDropzone from './file-dropzone/FileDropzone.svelte';
 import Input from './input/Input.svelte';
 import ItemHeader from './item-header/ItemHeader.svelte';
+import KeyboardShortcut from './keyboard-shortcut/KeyboardShortcut.svelte';
 import List from './list/List.svelte';
 import Progress from './progress/Progress.svelte';
 import SectionHeader from './section-header/SectionHeader.svelte';
@@ -22,6 +23,7 @@ export {
 	FileDropzone,
 	Input,
 	ItemHeader,
+	KeyboardShortcut,
 	List,
 	Progress,
 	SectionHeader,

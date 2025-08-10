@@ -15,7 +15,7 @@
 	import Guilds from './components/guilds/Guilds.svelte';
 	import Technologies from './components/technologies/Technologies.svelte';
 	import { MessageType, type Player } from '$types';
-	import { Tooltip } from '$components/ui';
+	import { KeyboardShortcut, Tooltip } from '$components/ui';
 	import { send } from '$utils/websocketUtils';
 	import Nuke from '$components/ui/icons/Nuke.svelte';
 	import DimensionalPalStorage from './components/dps/DimensionalPalStorage.svelte';
@@ -25,10 +25,58 @@
 	const nav = getNavigationState();
 	const modal = getModalState();
 
+	const keyboardShortcuts: Record<string, Tab> = {
+		KeyC: 'player',
+		KeyT: 'technologies',
+		KeyB: 'pal-box',
+		KeyD: 'dps',
+		KeyG: 'guilds',
+		KeyP: 'pal',
+		KeyS: 'gps'
+	};
+
+	function isTabAvailable(tab: Tab): boolean {
+		switch (tab) {
+			case 'dps':
+				return !!appState.selectedPlayer?.dps;
+			case 'gps':
+				return !!appState.gps;
+			default:
+				return true;
+		}
+	}
+
+	function handleKeydown(event: KeyboardEvent) {
+		if (
+			event.target instanceof HTMLInputElement ||
+			event.target instanceof HTMLTextAreaElement ||
+			event.ctrlKey ||
+			event.altKey ||
+			event.metaKey ||
+			event.shiftKey
+		) {
+			return;
+		}
+
+		const shortcutTab = keyboardShortcuts[event.code];
+		if (shortcutTab && isTabAvailable(shortcutTab)) {
+			event.preventDefault();
+			nav.activeTab = shortcutTab;
+		}
+	}
+
 	$effect(() => {
 		if (!appState.saveFile) {
 			goto('/file');
 		}
+	});
+
+	// Add keyboard event listener when component mounts
+	$effect(() => {
+		document.addEventListener('keydown', handleKeydown);
+		return () => {
+			document.removeEventListener('keydown', handleKeydown);
+		};
 	});
 
 	async function handleDeletePlayer() {
@@ -101,19 +149,31 @@
 				}}
 			>
 				{#snippet list()}
-					<div class="shrink-0">
-						<Tabs.Control value="player">Player</Tabs.Control>
-						<Tabs.Control value="technologies">Technologies</Tabs.Control>
-						<Tabs.Control value="pal-box">Pal Box</Tabs.Control>
-						{#if appState.selectedPlayer?.dps}
-							<Tabs.Control value="dps">DPS</Tabs.Control>
-						{/if}
-						{#if appState.gps}
-							<Tabs.Control value="gps">GPS</Tabs.Control>
-						{/if}
-						<Tabs.Control value="guilds">Guild</Tabs.Control>
-						<Tabs.Control value="pal">Pal</Tabs.Control>
-					</div>
+					<Tabs.Control value="player">
+						<KeyboardShortcut text="Player" key="C" />
+					</Tabs.Control>
+					<Tabs.Control value="technologies">
+						<KeyboardShortcut text="Technologies" key="T" />
+					</Tabs.Control>
+					<Tabs.Control value="pal-box">
+						<KeyboardShortcut text="Pal Box" key="B" />
+					</Tabs.Control>
+					{#if appState.selectedPlayer?.dps}
+						<Tabs.Control value="dps">
+							<KeyboardShortcut text="DPS" key="D" />
+						</Tabs.Control>
+					{/if}
+					{#if appState.gps}
+						<Tabs.Control value="gps">
+							<KeyboardShortcut text="GPS" key="S" />
+						</Tabs.Control>
+					{/if}
+					<Tabs.Control value="guilds">
+						<KeyboardShortcut text="Guild" key="G" />
+					</Tabs.Control>
+					<Tabs.Control value="pal">
+						<KeyboardShortcut text="Pal" key="P" />
+					</Tabs.Control>
 				{/snippet}
 				{#snippet content()}
 					<div class="grow overflow-hidden">
