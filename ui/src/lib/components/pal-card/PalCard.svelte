@@ -42,7 +42,7 @@
 		)
 	);
 	const sickClass = $derived(pal && pal.is_sick ? 'animate-pulse ring-4 ring-red-500' : '');
-	const palData = $derived(palsData.getPalData(pal.character_key));
+	const palData = $derived(palsData.getByKey(pal.character_key));
 	const levelSyncTxt = $derived(
 		appState.selectedPlayer!.level < pal.level
 			? `Level sync ${pal.level} 🡆 ${appState.selectedPlayer!.level}`

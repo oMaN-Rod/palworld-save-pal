@@ -1,13 +1,13 @@
-<script lang="ts" generics="T">
+<script lang="ts">
 	import type { SelectOption } from '$types';
 	import { nanoid } from 'nanoid';
 	import { cn } from '$theme';
-	import type { Snippet } from 'svelte';
+	import { onMount, type Snippet } from 'svelte';
 	import { ChevronDown } from 'lucide-svelte';
 	import { debounce } from '$utils';
 
 	let {
-		options = $bindable<SelectOption[]>([]),
+		options = [],
 		selectClass: _selectClass = 'bg-surface-900',
 		labelClass: _labelClass = '',
 		labelTextClass: _labelTextClass = '',
@@ -20,7 +20,7 @@
 		selectOption,
 		onChange = () => {},
 		...additionalProps
-	} = $props<{
+	}: {
 		options: SelectOption[];
 		selectClass?: string;
 		labelClass?: string;
@@ -34,9 +34,8 @@
 		selectOption?: Snippet<[SelectOption]>;
 		onChange?: (value: string | number) => void;
 		[key: string]: any;
-	}>();
+	} = $props();
 
-	let selected = $state(typeof value === 'string' ? value : value.toString());
 	let isOpen = $state(false);
 	let containerRef: HTMLDivElement;
 	let listboxId = nanoid();
@@ -49,26 +48,7 @@
 		);
 	}
 
-	const debounceSearch = debounce(searchOptions, 300);
-
-	$effect(() => {
-		if (value === 'None') {
-			selected = '';
-			searchTerm = '';
-		} else {
-			searchTerm = options.find((opt: SelectOption) => opt.value === value)?.label || '';
-		}
-		filteredOptions = options;
-	});
-
-	$effect(() => {
-		if (searchTerm) {
-			debounceSearch();
-		} else {
-			filteredOptions = options;
-			value = '';
-		}
-	});
+	const debounceSearch = debounce(searchOptions, 200);
 
 	const selectClass = $derived(
 		cn(
@@ -89,10 +69,10 @@
 
 	function handleOptionClick(option: SelectOption) {
 		if (!disabled) {
-			value = selected = option.value.toString();
+			value = option.value.toString();
 			searchTerm = option.label;
 			isOpen = false;
-			onChange(selected);
+			onChange(value);
 		}
 	}
 
@@ -104,7 +84,7 @@
 				event.preventDefault();
 				if (isOpen) {
 					const selectedOption = filteredOptions.find(
-						(opt: SelectOption) => opt.value.toString() === selected
+						(opt: SelectOption) => opt.value.toString() === value
 					);
 					if (selectedOption) {
 						handleOptionClick(selectedOption);
@@ -123,10 +103,10 @@
 				} else {
 					// Move to next option
 					const currentIndex = filteredOptions.findIndex(
-						(opt: SelectOption) => opt.value.toString() === selected
+						(opt: SelectOption) => opt.value.toString() === value
 					);
 					if (currentIndex < filteredOptions.length - 1) {
-						selected = filteredOptions[currentIndex + 1].value.toString();
+						value = filteredOptions[currentIndex + 1].value.toString();
 					}
 				}
 				break;
@@ -135,10 +115,10 @@
 				if (isOpen) {
 					// Move to previous option
 					const currentIndex = filteredOptions.findIndex(
-						(opt: SelectOption) => opt.value.toString() === selected
+						(opt: SelectOption) => opt.value.toString() === value
 					);
 					if (currentIndex > 0) {
-						selected = filteredOptions[currentIndex - 1].value.toString();
+						value = filteredOptions[currentIndex - 1].value.toString();
 					}
 				}
 				break;
@@ -146,6 +126,14 @@
 	}
 
 	$effect(() => {
+		if (searchTerm) {
+			debounceSearch();
+		} else {
+			filteredOptions = options;
+		}
+	});
+
+	onMount(() => {
 		const handleClickOutside = (event: MouseEvent) => {
 			if (containerRef && !containerRef.contains(event.target as Node)) {
 				isOpen = false;
@@ -153,6 +141,11 @@
 		};
 
 		document.addEventListener('click', handleClickOutside);
+
+		if (value !== 'None') {
+			searchTerm = options.find((opt: SelectOption) => opt.value === value)?.label || '';
+		}
+		filteredOptions = options;
 
 		return () => {
 			document.removeEventListener('click', handleClickOutside);
@@ -194,18 +187,18 @@
 		{#if isOpen}
 			<div
 				id={listboxId}
-				class="bg-surface-900 border-surface-600 select-popup rounded-xs absolute left-0 right-0 mt-1 max-h-60 overflow-auto border shadow-lg"
+				class="bg-surface-900 border-surface-600 select-popup rounded-xs absolute left-0 right-0 mt-3 max-h-60 overflow-auto border shadow-lg"
 				role="listbox"
 			>
 				{#each filteredOptions as option}
 					<div
 						class={cn(
 							'hover:bg-surface-700 cursor-pointer p-2',
-							option.value.toString() === selected && 'bg-primary-500'
+							option.value.toString() === value && 'bg-primary-500'
 						)}
 						role="option"
 						tabindex={0}
-						aria-selected={option.value.toString() === selected}
+						aria-selected={option.value.toString() === value}
 						onclick={() => handleOptionClick(option)}
 						onkeydown={(e) => {
 							if (e.key === 'Enter' || e.key === ' ') {

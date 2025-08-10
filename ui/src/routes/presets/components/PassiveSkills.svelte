@@ -20,7 +20,7 @@
 	});
 
 	function getPassiveSkillIconFilter(skillId: string): string {
-		const skill = passiveSkillsData.passiveSkills[skillId];
+		const skill = passiveSkillsData.getByKey(skillId);
 		if (!skill || skill.localized_name === 'None') return '';
 		switch (skill.details.rank) {
 			case 1:
@@ -40,7 +40,7 @@
 	<span class="border-r-surface-600 border-r pr-2 font-bold">{preset.name}</span>
 	<div class="ml-4 mt-1 grid grid-cols-2 gap-2">
 		{#each preset.skills as skillId}
-			{@const skill = passiveSkillsData.passiveSkills[skillId]}
+			{@const skill = passiveSkillsData.getByKey(skillId)}
 			{#if skill}
 				<div class="flex items-center space-x-2">
 					{#if passiveSkillIcons[skill.details.rank]}

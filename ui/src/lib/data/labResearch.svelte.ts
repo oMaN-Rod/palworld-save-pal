@@ -1,8 +1,10 @@
 import { sendAndWait } from '$lib/utils/websocketUtils';
 import { MessageType, type Technology as LabResearch } from '$types';
+import { normalizeKeys } from '$utils';
 
 class LabResearchData {
 	private loading = false;
+	private keyMap: Record<string, string> = $state({});
 
 	research: Record<string, LabResearch> = $state({});
 
@@ -11,6 +13,7 @@ class LabResearchData {
 			try {
 				this.loading = true;
 				this.research = await sendAndWait(MessageType.GET_LAB_RESEARCH);
+				this.keyMap = normalizeKeys(Object.keys(this.research));
 				this.loading = false;
 			} catch (error) {
 				this.loading = false;
@@ -24,31 +27,12 @@ class LabResearchData {
 		}
 	}
 
-	async searchResearch(search: string): Promise<LabResearch | undefined> {
-		await this.ensureLoaded();
-		return this.getByKey(search) || this.getByName(search) || undefined;
-	}
-
-	private getByKey(key: string): LabResearch | undefined {
-		return this.research[key];
-	}
-
-	private getByName(name: string): LabResearch | undefined {
-		return Object.values(this.research).find(
-			(r) => r.localized_name.toLowerCase() === name.toLowerCase()
-		);
-	}
-
-	async getAllResearch(): Promise<LabResearch[]> {
-		await this.ensureLoaded();
-		return Object.values(this.research);
-	}
-
-	async getResearchByCategory(category: string): Promise<Record<string, LabResearch>> {
-		await this.ensureLoaded();
-		return Object.fromEntries(
-			Object.entries(this.research).filter(([, r]) => r.details.category === category)
-		);
+	getByKey(key: string): LabResearch | undefined {
+		try {
+			return this.research[this.keyMap[key.toLowerCase()]];
+		} catch (error) {
+			console.error('Error getting lab research data:', error);
+		}
 	}
 
 	async reset(): Promise<void> {

@@ -8,12 +8,12 @@
 		option: SelectOption;
 	}>();
 
-	const passiveSkill = passiveSkillsData.passiveSkills[option.value];
+	const passiveSkill = passiveSkillsData.getByKey(option.value);
 	const icon = $derived(
-		assetLoader.loadImage(`${ASSET_DATA_PATH}/img/rank_${passiveSkill.details.rank}.webp`)
+		assetLoader.loadImage(`${ASSET_DATA_PATH}/img/rank_${passiveSkill?.details.rank}.webp`)
 	);
 	const filter = $derived.by(() => {
-		switch (passiveSkill.details.rank) {
+		switch (passiveSkill?.details.rank) {
 			case 1:
 				return '';
 			case 2:

@@ -72,7 +72,7 @@ export async function handleMaxOutPal(pal: Pal, player: Player): Promise<void> {
 	getStats(pal, player);
 	pal.hp = pal.max_hp;
 	pal.state = EntryState.MODIFIED;
-	const palData = palsData.getPalData(pal.character_key);
+	const palData = palsData.getByKey(pal.character_key);
 	if (palData) {
 		pal.stomach = palData.max_full_stomach;
 		for (const [key, value] of Object.entries(palData.work_suitability)) {
@@ -88,7 +88,7 @@ export async function handleMaxOutPal(pal: Pal, player: Player): Promise<void> {
 export const applyPalPreset = (pal: Pal, presetProfile: PresetProfile, player?: Player): void => {
 	if (!presetProfile.pal_preset) return;
 
-	const palData = palsData.getPalData(pal.character_key);
+	const palData = palsData.getByKey(pal.character_key);
 	if (!palData) return;
 
 	const skipKeys = new Set(['character_id', 'character_key', 'lock', 'lock_element', 'element']);

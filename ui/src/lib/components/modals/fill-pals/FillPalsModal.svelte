@@ -9,6 +9,7 @@
 	import NumberFlow from '@number-flow/svelte';
 	import { Switch } from '@skeletonlabs/skeleton-svelte';
 	import { X, Check, Trash, Lock } from 'lucide-svelte';
+	import type { CheckedChangeDetails } from '@zag-js/switch';
 
 	let {
 		title,
@@ -181,7 +182,7 @@
 		if (!selectedPresets || selectedPresets.length === 0) {
 			return;
 		}
-		const palData = palsData.getPalData(pal.character_key);
+		const palData = palsData.getByKey(pal.character_key);
 		const palProfile =
 			selectedPresets.filter(
 				(p) => p.pal_preset?.lock && p.pal_preset?.character_id === pal.character_id
@@ -393,7 +394,7 @@
 						<Switch
 							name="Normal"
 							checked={addNormalPals}
-							onCheckedChange={(mode) => {
+							onCheckedChange={(mode: CheckedChangeDetails) => {
 								addNormalPals = mode.checked;
 							}}
 						/>
@@ -406,7 +407,7 @@
 						<Switch
 							name="Normal"
 							checked={addLuckyPals}
-							onCheckedChange={(mode) => {
+							onCheckedChange={(mode: CheckedChangeDetails) => {
 								addLuckyPals = mode.checked;
 							}}
 						/>
@@ -419,7 +420,7 @@
 						<Switch
 							name="Alpha"
 							checked={addAlphaPals}
-							onCheckedChange={(mode) => {
+							onCheckedChange={(mode: CheckedChangeDetails) => {
 								addAlphaPals = mode.checked;
 							}}
 						/>
@@ -432,7 +433,7 @@
 						<Switch
 							name="Boss"
 							checked={addBossPals}
-							onCheckedChange={(mode) => {
+							onCheckedChange={(mode: CheckedChangeDetails) => {
 								addBossPals = mode.checked;
 							}}
 						/>
@@ -445,7 +446,7 @@
 						<Switch
 							name="Predator"
 							checked={addPredatorPals}
-							onCheckedChange={(mode) => {
+							onCheckedChange={(mode: CheckedChangeDetails) => {
 								addPredatorPals = mode.checked;
 							}}
 						/>
@@ -458,7 +459,7 @@
 						<Switch
 							name="Raid"
 							checked={addRaidPals}
-							onCheckedChange={(mode) => {
+							onCheckedChange={(mode: CheckedChangeDetails) => {
 								addRaidPals = mode.checked;
 							}}
 						/>
@@ -471,7 +472,7 @@
 						<Switch
 							name="Summon"
 							checked={addSummonPals}
-							onCheckedChange={(mode) => {
+							onCheckedChange={(mode: CheckedChangeDetails) => {
 								addSummonPals = mode.checked;
 							}}
 						/>
@@ -484,7 +485,7 @@
 						<Switch
 							name="Oil Rig"
 							checked={addOilRigPals}
-							onCheckedChange={(mode) => {
+							onCheckedChange={(mode: CheckedChangeDetails) => {
 								addOilRigPals = mode.checked;
 							}}
 						/>
@@ -497,7 +498,7 @@
 						<Switch
 							name="Human"
 							checked={addHumanPals}
-							onCheckedChange={(mode) => {
+							onCheckedChange={(mode: CheckedChangeDetails) => {
 								addHumanPals = mode.checked;
 							}}
 						/>
@@ -536,11 +537,11 @@
 									<Lock class="ml-2 h-4 w-4 text-red-500" />
 								{/if}
 								{#if preset.pal_preset?.lock_element}
-									{@const elementData = elementsData.elements[preset.pal_preset.element as string]}
+									{@const elementData = elementsData.getByKey(preset.pal_preset.element as string)}
 									{@const elementIcon = assetLoader.loadImage(
-										`${ASSET_DATA_PATH}/img/${elementData.badge_icon}.webp`
+										`${ASSET_DATA_PATH}/img/${elementData?.badge_icon}.webp`
 									)}
-									<img src={elementIcon} alt={elementData.name} class="ml-2 h-6 w-6" />
+									<img src={elementIcon} alt={elementData?.name} class="ml-2 h-6 w-6" />
 								{/if}
 							</div>
 						{/snippet}
@@ -560,11 +561,11 @@
 									<Lock class="ml-2 h-4 w-4 text-red-500" />
 								{/if}
 								{#if preset.pal_preset?.lock_element}
-									{@const elementData = elementsData.elements[preset.pal_preset.element as string]}
+									{@const elementData = elementsData.getByKey(preset.pal_preset.element as string)}
 									{@const elementIcon = assetLoader.loadImage(
-										`${ASSET_DATA_PATH}/img/${elementData.badge_icon}.webp`
+										`${ASSET_DATA_PATH}/img/${elementData?.badge_icon}.webp`
 									)}
-									<img src={elementIcon} alt={elementData.name} class="ml-2 h-4 w-4" />
+									<img src={elementIcon} alt={elementData?.name} class="ml-2 h-4 w-4" />
 								{/if}
 							</div>
 						{/snippet}

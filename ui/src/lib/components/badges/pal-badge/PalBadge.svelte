@@ -45,7 +45,7 @@
 		pal && pal.is_sick ? 'animate-pulse ring-4 ring-red-500 rounded-full' : ''
 	);
 
-	const palData = $derived(palsData.getPalData(pal.character_key));
+	const palData = $derived(palsData.getByKey(pal.character_key));
 
 	const menuItems = $derived.by(() => {
 		if (!pal || pal.character_id === 'None') {

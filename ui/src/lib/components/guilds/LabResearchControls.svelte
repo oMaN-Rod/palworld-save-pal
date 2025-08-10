@@ -60,7 +60,8 @@
 		const totalItems = researchItemsData.length;
 		let completedItems = 0;
 		for (const item of researchItems) {
-			const labItem = labResearchData.research[item.research_id];
+			const labItem = labResearchData.getByKey(item.research_id);
+			if (!labItem) continue;
 			const totalWorkAmount = labItem.details.work_amount || 0;
 			const isCompleted = item.work_amount >= totalWorkAmount && totalWorkAmount > 0;
 			if (isCompleted) {

@@ -47,6 +47,7 @@
 	import { Card } from '$components/ui';
 	import { PalCard, PalBadge, PalContainerStats } from '$components';
 	import { send } from '$lib/utils/websocketUtils';
+	import type { ValueChangeDetails } from '@zag-js/accordion';
 
 	const PALS_PER_PAGE = 30;
 	const TOTAL_SLOTS = 960;
@@ -190,7 +191,7 @@
 		return playerPals
 			.filter(([_, pal]) => pal.storage_id === palBoxId)
 			.map(([id, pal]) => {
-				const palData = palsData.getPalData(pal.character_key);
+				const palData = palsData.getByKey(pal.character_key);
 				return { id, pal, palData } as PalWithData;
 			});
 	});
@@ -361,7 +362,7 @@
 		});
 		if (!result) return;
 		const [selectedPal, nickname] = result;
-		const palData = palsData.getPalData(selectedPal);
+		const palData = palsData.getByKey(selectedPal);
 		const containerId =
 			target === 'party'
 				? appState.selectedPlayer.otomo_container_id
@@ -401,7 +402,7 @@
 	}
 
 	async function sortByPaldeckIndex() {
-		const palInfos = filteredPals.map((p) => palsData.getPalData(p.pal.character_key));
+		const palInfos = filteredPals.map((p) => palsData.getByKey(p.pal.character_key));
 		const palsWithInfo = filteredPals.map((pal, index) => [pal, palInfos[index]]);
 
 		palsWithInfo.sort((a, b) => {
@@ -476,7 +477,7 @@
 			if (selectedPals.includes(pal.instance_id)) {
 				pal.hp = pal.max_hp;
 				pal.sanity = 100;
-				const palData = palsData.getPalData(pal.character_key);
+				const palData = palsData.getByKey(pal.character_key);
 				if (palData) {
 					pal.stomach = palData.max_full_stomach;
 				}
@@ -608,7 +609,7 @@
 			pal.hp = pal.max_hp;
 			pal.sanity = 100;
 			pal.is_sick = false;
-			const palData = palsData.getPalData(pal.character_key);
+			const palData = palsData.getByKey(pal.character_key);
 			if (palData) {
 				pal.stomach = palData.max_full_stomach;
 			}
@@ -766,7 +767,11 @@
 					</Tooltip>
 				{/if}
 			</nav>
-			<Accordion value={filterExpand} onValueChange={(e) => (filterExpand = e.value)} collapsible>
+			<Accordion
+				value={filterExpand}
+				onValueChange={(e: ValueChangeDetails) => (filterExpand = e.value)}
+				collapsible
+			>
 				<Accordion.Item
 					value="filter"
 					base="rounded-sm bg-surface-900"
@@ -827,7 +832,7 @@
 									{#snippet popup()}All pals{/snippet}
 								</Tooltip>
 								{#each [...elementTypes] as element}
-									{@const localizedName = elementsData.elements[element].localized_name}
+									{@const localizedName = elementsData.getByKey(element)?.localized_name}
 									<Tooltip label={localizedName}>
 										<button
 											class={elementClass(element)}

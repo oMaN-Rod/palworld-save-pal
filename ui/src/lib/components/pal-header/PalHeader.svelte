@@ -20,6 +20,7 @@
 	import { goto } from '$app/navigation';
 	import { staticIcons } from '$types/icons';
 	import NumberFlow from '@number-flow/svelte';
+	import type { ValueChangeDetails } from '@zag-js/rating-group';
 
 	let {
 		pal = $bindable(),
@@ -135,13 +136,13 @@
 	}
 
 	async function getPalElementTypes(character_id: string): Promise<ElementType[] | undefined> {
-		const palData = palsData.getPalData(character_id);
+		const palData = palsData.getByKey(character_id);
 		if (!palData) return undefined;
 		return palData.element_types.length > 0 ? palData.element_types : undefined;
 	}
 
 	async function getPalElementBadge(elementType: string): Promise<string | undefined> {
-		const elementObj = await elementsData.searchElement(elementType);
+		const elementObj = await elementsData.getByKey(elementType);
 		if (!elementObj) return undefined;
 		return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${elementObj.badge_icon}.webp`);
 	}
@@ -240,7 +241,7 @@
 	}
 
 	async function handleSavePreset() {
-		const element = palsData.getPalData(pal.character_key)?.element_types[0];
+		const element = palsData.getByKey(pal.character_key)?.element_types[0];
 		// @ts-ignore
 		const result = await modal.showModal(PresetConfigModal, {
 			config: defaultPresetConfig,
@@ -309,7 +310,7 @@
 					value={palRank}
 					count={4}
 					itemClasses="text-gray"
-					onValueChange={(e) => {
+					onValueChange={(e: ValueChangeDetails) => {
 						pal.rank = e.value + 1;
 						pal.state = EntryState.MODIFIED;
 					}}

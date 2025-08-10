@@ -81,7 +81,7 @@
 	}
 
 	function getRequiredWork(researchId: string): number {
-		return labResearchData.research[researchId]?.details.work_amount ?? 0;
+		return labResearchData.getByKey(researchId)?.details.work_amount ?? 0;
 	}
 
 	function findNodeById(nodes: TreeNode[] | undefined, id: string): TreeNode | null {
@@ -158,7 +158,7 @@
 		if (node.isCompleted) return;
 		if (!node.isUnlocked) {
 			toast.add(
-				`Unlock prerequisite first: ${labResearchData.research[node.research.details.require_research_id || '']?.localized_name || 'Unknown'}`,
+				`Unlock prerequisite first: ${labResearchData.getByKey(node.research.details.require_research_id)?.localized_name || 'Unknown'}`,
 				'Locked',
 				'warning'
 			);
@@ -169,7 +169,7 @@
 		const prerequisitesToUnlock: string[] = [];
 
 		const findAndUnlockPrerequisites = (researchId: string) => {
-			const researchDef = labResearchData.research[researchId];
+			const researchDef = labResearchData.getByKey(researchId);
 			if (!researchDef) return;
 			const prerequisiteId = researchDef.details.require_research_id;
 			if (prerequisiteId) {
@@ -389,7 +389,7 @@
 					<h6 class="h6 mb-1">Research Cost</h6>
 					<div class="space-y-1">
 						{#each research.details.materials as material}
-							{@const itemData = itemsData.items[material.id]}
+							{@const itemData = itemsData.getByKey(material.id)}
 							<div class="flex items-center space-x-2 text-sm">
 								{#if itemData}
 									{@const icon = assetLoader.loadImage(

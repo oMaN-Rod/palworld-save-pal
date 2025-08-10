@@ -14,7 +14,7 @@ export const getPlayersHandler: WSMessageHandler = {
 				try {
 					if (player.pals) {
 						Object.values(player.pals).map((pal) => {
-							const palInfo = palsData.getPalData(pal.character_key);
+							const palInfo = palsData.getByKey(pal.character_key);
 							if (!palInfo) {
 								console.error(`Failed to find pal info for`, JSON.parse(JSON.stringify(pal)));
 							}

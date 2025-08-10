@@ -4,6 +4,7 @@
 	import { languages } from '$types';
 	import type { AppSettings, SelectOption } from '$types';
 	import { Switch } from '@skeletonlabs/skeleton-svelte';
+	import type { CheckedChangeDetails } from '@zag-js/switch';
 
 	let {
 		title = 'Select Language',
@@ -31,7 +32,7 @@
 		<div class="flex space-x-2">
 			<Switch
 				checked={settings.debug_mode}
-				onCheckedChange={(mode) => {
+				onCheckedChange={(mode: CheckedChangeDetails) => {
 					settings.debug_mode = mode.checked;
 				}}
 				name="debug_mode"
@@ -39,17 +40,17 @@
 			/>
 			<span>Debug Mode</span>
 		</div>
-			<div class="flex space-x-2">
-				<Switch
-					checked={settings.cheat_mode}
-					onCheckedChange={(mode) => {
-						settings.cheat_mode = mode.checked;
-					}}
-					name="cheat_mode"
-					label="Cheat Mode"
-				/>
-				<span>Cheat Mode</span>
-			</div>
+		<div class="flex space-x-2">
+			<Switch
+				checked={settings.cheat_mode}
+				onCheckedChange={(mode: CheckedChangeDetails) => {
+					settings.cheat_mode = mode.checked;
+				}}
+				name="cheat_mode"
+				label="Cheat Mode"
+			/>
+			<span>Cheat Mode</span>
+		</div>
 	</div>
 
 	<div class="mt-2 flex justify-end space-x-2">

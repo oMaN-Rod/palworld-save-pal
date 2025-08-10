@@ -2,6 +2,7 @@
 	import { Card, Input, Tooltip } from '$components/ui';
 	import { Save, X } from 'lucide-svelte';
 	import { Slider } from '@skeletonlabs/skeleton-svelte';
+	import type { ValueChangeDetails } from '@zag-js/slider';
 
 	let {
 		title = '',
@@ -43,7 +44,7 @@
 				height="h-2"
 				meterBg="bg-secondary-500"
 				thumbRingColor="ring-secondary-500"
-				onValueChange={(e) => (sliderValue[0] = e.value[0])}
+				onValueChange={(e: ValueChangeDetails) => (sliderValue[0] = e.value[0])}
 			/>
 			<Input labelClass="w-2/12" type="number" bind:value={sliderValue[0]} {min} {max} />
 		</div>

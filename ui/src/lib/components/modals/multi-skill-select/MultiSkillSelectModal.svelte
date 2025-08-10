@@ -93,11 +93,15 @@
 			{/snippet}
 			{#snippet listItem(skill)}
 				{#if type === 'Passive'}
-					{@const passiveSkill = passiveSkillsData.passiveSkills[skill]}
-					<PassiveSkillOption option={{ label: passiveSkill.localized_name, value: skill }} />
+					{@const passiveSkill = passiveSkillsData.getByKey(skill)}
+					<PassiveSkillOption
+						option={{ label: passiveSkill?.localized_name || skill, value: skill }}
+					/>
 				{:else if type === 'Active'}
-					{@const activeSkill = activeSkillsData.activeSkills[skill]}
-					<ActiveSkillOption option={{ label: activeSkill.localized_name, value: skill }} />
+					{@const activeSkill = activeSkillsData.getByKey(skill)}
+					<ActiveSkillOption
+						option={{ label: activeSkill?.localized_name || skill, value: skill }}
+					/>
 				{/if}
 			{/snippet}
 			{#snippet listItemActions(skill)}
@@ -110,15 +114,15 @@
 			{/snippet}
 			{#snippet listItemPopup(skill)}
 				{#if type === 'Passive'}
-					{@const passiveSkill = passiveSkillsData.passiveSkills[skill]}
+					{@const passiveSkill = passiveSkillsData.getByKey(skill)}
 					<div class="flex grow flex-col">
-						<span class="grow truncate">{passiveSkill.localized_name}</span>
+						<span class="grow truncate">{passiveSkill?.localized_name || skill}</span>
 						<span class="text-xs">{passiveSkill?.description}</span>
 					</div>
 				{:else if type === 'Active'}
-					{@const activeSkill = activeSkillsData.activeSkills[skill]}
+					{@const activeSkill = activeSkillsData.getByKey(skill)}
 					<div class="flex grow flex-col">
-						<span class="grow truncate">{activeSkill.localized_name}</span>
+						<span class="grow truncate">{activeSkill?.localized_name || skill}</span>
 						<span class="text-xs">{activeSkill?.description}</span>
 					</div>
 				{/if}

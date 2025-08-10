@@ -9,19 +9,6 @@
 	let { preset = $bindable() } = $props<{
 		preset: PresetProfile;
 	}>();
-
-	let elementIcons = $derived.by(() => {
-		const icons: Record<string, string> = {};
-		for (const elementType of Object.keys(elementsData.elements)) {
-			const elementObj = elementsData.elements[elementType];
-			if (elementObj) {
-				icons[elementType] = assetLoader.loadImage(
-					`${ASSET_DATA_PATH}/img/${elementObj.badge_icon}.webp`
-				) as string;
-			}
-		}
-		return icons;
-	});
 </script>
 
 <div class="space-y-4">

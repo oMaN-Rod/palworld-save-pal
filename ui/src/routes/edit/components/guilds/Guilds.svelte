@@ -55,7 +55,7 @@
 
 	const guildChestIcon = $derived.by(() => {
 		if (!playerGuild?.guild_chest) return null;
-		const building = buildingsData.buildings['GuildChest'];
+		const building = buildingsData.getByKey('GuildChest');
 		if (building) {
 			return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${building.icon}.webp`);
 		}
@@ -107,7 +107,7 @@
 			.filter(
 				(container) =>
 					(container.slots.some((s) => {
-						const itemData = itemsData.items[s.static_id];
+						const itemData = itemsData.getByKey(s.static_id);
 						return (
 							s.static_id.toLowerCase().includes(selectedInventoryItem.toLowerCase()) ||
 							(itemData &&
@@ -117,7 +117,7 @@
 						);
 					}) &&
 						container.slots.some((s) => {
-							const itemData = itemsData.items[s.static_id];
+							const itemData = itemsData.getByKey(s.static_id);
 							return (
 								s.static_id.toLowerCase().includes(inventorySearchQuery.toLowerCase()) ||
 								(itemData &&
@@ -157,7 +157,7 @@
 		}
 		const items = Object.entries(inventoryItems)
 			.filter(([static_id, _]) => {
-				const itemData = itemsData.items[static_id];
+				const itemData = itemsData.getByKey(static_id);
 				return (
 					static_id.toLowerCase().includes(inventorySearchQuery.toLowerCase()) ||
 					(itemData &&
@@ -170,8 +170,8 @@
 				total_count: info.total_count
 			}))
 			.sort((a, b) => {
-				const itemA = itemsData.items[a.static_id];
-				const itemB = itemsData.items[b.static_id];
+				const itemA = itemsData.getByKey(a.static_id);
+				const itemB = itemsData.getByKey(b.static_id);
 				if (itemA && itemB) {
 					return itemA.info.localized_name.localeCompare(itemB.info.localized_name);
 				}
@@ -184,7 +184,7 @@
 
 	const currentStorageContainerIcon = $derived.by(() => {
 		if (!currentStorageContainer) return null;
-		const building = buildingsData.buildings[currentStorageContainer.key];
+		const building = buildingsData.getByKey(currentStorageContainer.key);
 		if (building) {
 			return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${building.icon}.webp`);
 		}
@@ -290,7 +290,7 @@
 		if (!result) return;
 
 		const [selectedPal, nickname] = result;
-		const palData = palsData.getPalData(selectedPal);
+		const palData = palsData.getByKey(selectedPal);
 
 		send(MessageType.ADD_PAL, {
 			guild_id: playerGuild?.id,
@@ -430,7 +430,7 @@
 				if (selectedPals.includes(pal.instance_id)) {
 					pal.hp = pal.max_hp;
 					pal.sanity = 100;
-					const palData = palsData.getPalData(pal.character_key);
+					const palData = palsData.getByKey(pal.character_key);
 					if (palData) {
 						pal.stomach = palData.max_full_stomach;
 					}
@@ -477,7 +477,7 @@
 				pal.hp = pal.max_hp;
 				pal.sanity = 100;
 				pal.is_sick = false;
-				const palData = palsData.getPalData(pal.character_key);
+				const palData = palsData.getByKey(pal.character_key);
 				if (palData) {
 					pal.stomach = palData.max_full_stomach;
 				}
@@ -509,7 +509,7 @@
 		if (slot.static_id !== 'None') {
 			appState.clipboardItem = slot;
 			let itemName = slot.static_id;
-			const itemData = itemsData.items[slot.static_id];
+			const itemData = itemsData.getByKey(slot.static_id);
 			if (itemData) {
 				itemName = itemData.info.localized_name;
 			}
@@ -845,7 +845,7 @@
 							<span class="font-bold">Total</span>
 						{/snippet}
 						{#snippet listItem(item)}
-							{@const itemData = itemsData.items[fixStupidTypos(item.static_id)]}
+							{@const itemData = itemsData.getByKey(item.static_id)}
 							{#if itemData}
 								{@const itemIcon = assetLoader.loadImage(
 									`${ASSET_DATA_PATH}/img/${itemData.details.icon}.webp`
@@ -870,7 +870,7 @@
 							{/if}
 						{/snippet}
 						{#snippet listItemPopup(item)}
-							{@const itemData = itemsData.items[item.static_id]}
+							{@const itemData = itemsData.getByKey(item.static_id)}
 							{#if itemData}
 								<div class="flex flex-col">
 									<span class="font-bold">{itemData.info.localized_name}</span>
@@ -878,7 +878,7 @@
 									<hr class="border-surface-500 my-2" />
 									<span class="font-bold">Total Count: {item.total_count}</span>
 									{#each Object.entries(item.containers) as [containerId, count]}
-										{@const building = buildingsData.buildings[fixStupidTypos(containerId)]}
+										{@const building = buildingsData.getByKey(containerId)}
 										{#if building}
 											{@const buildingIcon = assetLoader.loadImage(
 												`${ASSET_DATA_PATH}/img/${building.icon}.webp`
@@ -973,7 +973,7 @@
 								multiple={false}
 							>
 								{#snippet listItem(item)}
-									{@const building = buildingsData.buildings[fixStupidTypos(item.key)]}
+									{@const building = buildingsData.getByKey(item.key)}
 									{#if building}
 										{@const buildingIcon = assetLoader.loadImage(
 											`${ASSET_DATA_PATH}/img/${building.icon}.webp`
@@ -994,7 +994,7 @@
 									{/if}
 								{/snippet}
 								{#snippet listItemPopup(item)}
-									{@const building = buildingsData.buildings[fixStupidTypos(item.key)]}
+									{@const building = buildingsData.getByKey(item.key)}
 									{#if building}
 										<div class="flex flex-col">
 											<h4 class="h4">{building.localized_name}</h4>
@@ -1016,7 +1016,7 @@
 							</List>
 							<div class="max-h-[550px] overflow-y-auto 2xl:max-h-[800px]">
 								{#if currentStorageContainer}
-									{@const building = buildingsData.buildings[currentStorageContainer.key]}
+									{@const building = buildingsData.getByKey(currentStorageContainer.key)}
 									{@const itemGroup = building?.type_a == BuildingTypeA.Food ? 'Food' : 'Common'}
 									<div class="flex items-start space-x-4">
 										<div class="m-1 grid grid-cols-6 gap-2">
@@ -1063,7 +1063,7 @@
 						</div>
 					{/if}
 				{:else if activeTab == 'guildChest' && playerGuild?.guild_chest}
-					{@const building = buildingsData.buildings['GuildChest']}
+					{@const building = buildingsData.getByKey('GuildChest')}
 					{@const itemGroup = building?.type_a == BuildingTypeA.Food ? 'Food' : 'Common'}
 					<div class="max-h-[550px] overflow-y-auto 2xl:max-h-[800px]">
 						<div class="flex items-start space-x-4">

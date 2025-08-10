@@ -18,7 +18,7 @@ export const getGuildsHandler: WSMessageHandler = {
 								if (base.pals) {
 									await Promise.all(
 										Object.values(base.pals).map(async (pal) => {
-											const palInfo = palsData.getPalData(pal.character_key);
+											const palInfo = palsData.getByKey(pal.character_key);
 											if (!palInfo) {
 												console.error(
 													`Failed to find pal info for`,

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import { page } from '$app/stores';
+	import type { ValueChangeDetails } from '@zag-js/accordion';
 
 	let error = $state(['']);
 </script>
@@ -10,7 +11,7 @@
 		<h1 class="text-4xl font-bold">😵‍💫 Oops... Something went wrong</h1>
 		<Accordion
 			value={error}
-			onValueChange={(e) => (error = e.value)}
+			onValueChange={(e: ValueChangeDetails) => (error = e.value)}
 			classes="mt-4 bg-surface-800"
 			collapsible
 		>

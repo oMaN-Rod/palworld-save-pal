@@ -33,6 +33,7 @@
 	import { ActiveSkillOption, PassiveSkillOption, Talents } from '$components';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import { getAppState } from '$states';
+	import type { ValueChangeDetails } from '@zag-js/accordion';
 
 	let {
 		title = '',
@@ -66,10 +67,10 @@
 
 	const selectedPalKey = $derived(eggConfig.character_id.replace('BOSS_', ''));
 	const palOptions: SelectOption[] = $derived.by(() => {
-		const item = itemsData.items[itemId];
+		const item = itemsData.getByKey(itemId);
 		if (!item || !item.details.dynamic?.character_ids) {
 			if (!selectedPalKey) return [];
-			const palData = palsData.getPalData(selectedPalKey);
+			const palData = palsData.getByKey(selectedPalKey);
 			return [
 				{
 					label: palData?.localized_name || selectedPalKey,
@@ -80,7 +81,7 @@
 
 		return item.details.dynamic.character_ids
 			.map((charId) => {
-				const palInfo = palsData.getPalData(charId.replace('BOSS_', ''));
+				const palInfo = palsData.getByKey(charId.replace('BOSS_', ''));
 				const label = charId.includes('BOSS_')
 					? `${palInfo?.localized_name} (Alpha)`
 					: palInfo?.localized_name || charId.replace('BOSS_', '');
@@ -140,7 +141,7 @@
 				label: s.localized_name
 			}))
 	);
-	const itemData = $derived(itemsData.items[itemId]);
+	const itemData = $derived(itemsData.getByKey(itemId));
 	const isEgg = $derived(itemData?.details.dynamic?.type === 'egg');
 
 	const eggIconSrc = $derived.by(() => {
@@ -150,7 +151,7 @@
 
 	const palIconSrc = $derived.by(() => {
 		if (!selectedPalKey) return staticIcons.unknownIcon;
-		const palData = palsData.getPalData(selectedPalKey);
+		const palData = palsData.getByKey(selectedPalKey);
 		return assetLoader.loadMenuImage(selectedPalKey, palData?.is_pal ?? true);
 	});
 
@@ -222,7 +223,7 @@
 
 	function getItemIcon(staticId: string) {
 		if (!staticId) return;
-		const itemData = itemsData.items[staticId];
+		const itemData = itemsData.getByKey(staticId);
 		if (!itemData) {
 			console.error(`Item data not found for static id: ${staticId}`);
 			return;
@@ -287,7 +288,7 @@
 
 	function getPalIcon(palId: string): string {
 		if (!palId) return staticIcons.unknownIcon;
-		const palData = palsData.getPalData(palId);
+		const palData = palsData.getByKey(palId);
 		return assetLoader.loadMenuImage(palId, palData?.is_pal ?? true);
 	}
 
@@ -330,7 +331,7 @@
 			<div class="flex flex-row items-center">
 				<Combobox options={selectOptions} bind:value={itemId}>
 					{#snippet selectOption(option)}
-						{@const item = itemsData.items[option.value]}
+						{@const item = itemsData.getByKey(option.value)}
 						{#await getItemIcon(option.value) then icon}
 							<div class="grid grid-cols-[auto_1fr_auto] items-center gap-2">
 								{#if icon}
@@ -379,7 +380,7 @@
 				</Combobox>
 				{#if !isEgg && selectedItemMaxStackCount && selectedItemMaxStackCount > 1}
 					<Input
-						labelClass="w-1/4"
+						labelClass="w-1/4 ml-1"
 						type="number"
 						bind:value={count}
 						max={selectedItemMaxStackCount}
@@ -430,7 +431,7 @@
 			<Accordion
 				classes="w-full"
 				value={accordionValue}
-				onValueChange={(e) => (accordionValue = e.value)}
+				onValueChange={(e: ValueChangeDetails) => (accordionValue = e.value)}
 				collapsible
 			>
 				<Accordion.Item
@@ -504,11 +505,13 @@
 										<span class="font-bold">Active Skills</span>
 									</div>
 								{/snippet}
-								{#snippet listItem(skill)}
-									{@const activeSkill = activeSkillsData.activeSkills[skill]}
-									<ActiveSkillOption option={{ label: activeSkill.localized_name, value: skill }} />
+								{#snippet listItem(skill: string)}
+									{@const activeSkill = activeSkillsData.getByKey(skill)}
+									<ActiveSkillOption
+										option={{ label: activeSkill?.localized_name || skill, value: skill }}
+									/>
 								{/snippet}
-								{#snippet listItemActions(skill)}
+								{#snippet listItemActions(skill: string)}
 									<button
 										class="btn hover:bg-error-500/25 p-2"
 										onclick={() =>
@@ -519,8 +522,8 @@
 										<Trash size={16} />
 									</button>
 								{/snippet}
-								{#snippet listItemPopup(skill)}
-									{@const activeSkill = activeSkillsData.activeSkills[skill]}
+								{#snippet listItemPopup(skill: string)}
+									{@const activeSkill = activeSkillsData.getByKey(skill)}
 									<div class="flex items-center space-x-1 justify-self-start">
 										<TimerReset class="h-4 w-4" />
 										<span class="font-bold">{activeSkill?.details.cool_time}</span>
@@ -565,11 +568,13 @@
 										<span class="font-bold">Learned Skills</span>
 									</div>
 								{/snippet}
-								{#snippet listItem(skill)}
-									{@const activeSkill = activeSkillsData.activeSkills[skill]}
-									<ActiveSkillOption option={{ label: activeSkill.localized_name, value: skill }} />
+								{#snippet listItem(skill: string)}
+									{@const activeSkill = activeSkillsData.getByKey(skill)}
+									<ActiveSkillOption
+										option={{ label: activeSkill?.localized_name || skill, value: skill }}
+									/>
 								{/snippet}
-								{#snippet listItemActions(skill)}
+								{#snippet listItemActions(skill: string)}
 									<button
 										class="btn hover:bg-error-500/25 p-2"
 										onclick={() =>
@@ -580,8 +585,8 @@
 										<Trash size={16} />
 									</button>
 								{/snippet}
-								{#snippet listItemPopup(skill)}
-									{@const activeSkill = activeSkillsData.activeSkills[skill]}
+								{#snippet listItemPopup(skill: string)}
+									{@const activeSkill = activeSkillsData.getByKey(skill)}
 									<div class="flex items-center space-x-1 justify-self-start">
 										<TimerReset class="h-4 w-4" />
 										<span class="font-bold">{activeSkill?.details.cool_time}</span>
@@ -626,13 +631,13 @@
 										<span class="font-bold">Passive Skills</span>
 									</div>
 								{/snippet}
-								{#snippet listItem(skill)}
-									{@const passiveSkill = passiveSkillsData.passiveSkills[skill]}
+								{#snippet listItem(skill: string)}
+									{@const passiveSkill = passiveSkillsData.getByKey(skill)}
 									<PassiveSkillOption
-										option={{ label: passiveSkill.localized_name, value: skill }}
+										option={{ label: passiveSkill?.localized_name || skill, value: skill }}
 									/>
 								{/snippet}
-								{#snippet listItemActions(skill)}
+								{#snippet listItemActions(skill: string)}
 									<button
 										class="btn hover:bg-error-500/25 p-2"
 										onclick={() =>
@@ -643,10 +648,10 @@
 										<Trash size={16} />
 									</button>
 								{/snippet}
-								{#snippet listItemPopup(skill)}
-									{@const passiveSkill = passiveSkillsData.passiveSkills[skill]}
+								{#snippet listItemPopup(skill: string)}
+									{@const passiveSkill = passiveSkillsData.getByKey(skill)}
 									<div class="flex grow flex-col">
-										<span class="grow truncate">{passiveSkill.localized_name}</span>
+										<span class="grow truncate">{passiveSkill?.localized_name || skill}</span>
 										<span class="text-xs">{passiveSkill?.description}</span>
 									</div>
 								{/snippet}

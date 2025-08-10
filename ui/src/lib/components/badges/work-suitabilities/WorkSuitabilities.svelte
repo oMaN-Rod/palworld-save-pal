@@ -44,7 +44,7 @@
 				Transport: 0,
 				MonsterFarm: 0
 			};
-			const palData = palsData.getPalData(pal.character_key);
+			const palData = palsData.getByKey(pal.character_key);
 			if (palData) {
 				for (const [key, value] of Object.entries(palData.work_suitability)) {
 					const palScaledSuitability = pal.work_suitability[key as WorkSuitability] ?? 0;
@@ -81,7 +81,7 @@
 		if (!pal!.work_suitability) {
 			pal!.work_suitability = {} as Record<WorkSuitability, number>;
 		}
-		const palData = palsData.getPalData(pal!.character_key);
+		const palData = palsData.getByKey(pal!.character_key);
 		pal!.work_suitability = {
 			...pal!.work_suitability,
 			[workSuitability]: Math.min(

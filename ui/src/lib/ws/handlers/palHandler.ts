@@ -15,14 +15,14 @@ export const addPalHandler: WSMessageHandler = {
 		}
 
 		if (player_id && appState.players) {
-			const palData = palsData.getPalData(pal.character_key);
+			const palData = palsData.getByKey(pal.character_key);
 			pal.name = palData?.localized_name || pal.character_id;
 			pal.elements = palData?.element_types || [];
 			appState.players[player_id].pals![pal.instance_id] = pal;
 		}
 
 		if (guild_id && appState.guilds) {
-			const palData = palsData.getPalData(pal.character_key);
+			const palData = palsData.getByKey(pal.character_key);
 			pal.name = palData?.localized_name || pal.character_id;
 			pal.elements = palData?.element_types || [];
 			appState.guilds[guild_id].bases[base_id].pals[pal.instance_id] = pal;
@@ -45,7 +45,7 @@ export const addDpsPalHandler: WSMessageHandler = {
 		}
 
 		if (player_id && appState.players) {
-			const palData = palsData.getPalData(pal.character_key);
+			const palData = palsData.getByKey(pal.character_key);
 			pal.name = palData?.localized_name || pal.character_id;
 			pal.elements = palData?.element_types || [];
 			if (appState.players[player_id].dps) {

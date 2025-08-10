@@ -13,6 +13,7 @@
 	import { EntryState } from '$types';
 	import { staticIcons } from '$types/icons';
 	import { persistedState } from 'svelte-persisted-state';
+	import type { ValueChangeDetails } from '@zag-js/accordion';
 
 	const appState = getAppState();
 	const modal = getModalState();
@@ -184,7 +185,11 @@
 				</div>
 			</div>
 			{#if appState.saveFile}
-				<Accordion value={section} onValueChange={(e) => (section = e.value)} collapsible>
+				<Accordion
+					value={section}
+					onValueChange={(e: ValueChangeDetails) => (section = e.value)}
+					collapsible
+				>
 					<Accordion.Item value="players" controlHover="hover:bg-secondary-500/25">
 						{#snippet control()}
 							<h2 class="text-lg font-bold">Players</h2>

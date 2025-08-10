@@ -34,7 +34,7 @@ function calculateSkillEffects(skills: string[]): {
 	let workSpeedBonus = 0;
 
 	for (const skillId of skills) {
-		const skillData = passiveSkillsData.passiveSkills[skillId];
+		const skillData = passiveSkillsData.getByKey(skillId);
 		if (!skillData) continue;
 
 		for (const effect of skillData.details.effects) {
@@ -67,7 +67,7 @@ export function getStats(pal: Pal, player?: Player): PalStats | undefined {
 		return;
 	}
 
-	const palData = palsData.getPalData(pal.character_key);
+	const palData = palsData.getByKey(pal.character_key);
 	if (!palData) {
 		console.log(`No pal data found for ${pal.character_key}`);
 		return;

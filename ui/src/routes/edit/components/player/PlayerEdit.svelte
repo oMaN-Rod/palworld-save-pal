@@ -34,6 +34,8 @@
 	import { assetLoader } from '$utils';
 	import { staticIcons } from '$types/icons';
 	import NumberFlow from '@number-flow/svelte';
+	import type { ValueChangeDetails } from '@zag-js/tabs';
+	import type { ValueChangeDetails as AccordionValueChangeDetails } from '@zag-js/accordion';
 
 	const appState = getAppState();
 	const toast = getToastState();
@@ -144,7 +146,7 @@
 
 	async function getItemIcon(staticId: string) {
 		if (!staticId || staticId === 'None') return;
-		const itemData = itemsData.items[staticId] || undefined;
+		const itemData = itemsData.getByKey(staticId);
 		if (!itemData) {
 			console.error(`Item data not found for static id: ${staticId}`);
 			return;
@@ -223,7 +225,7 @@
 		});
 		if (!result) return;
 		let [static_id, count] = result;
-		const itemData = itemsData.items[static_id];
+		const itemData = itemsData.getByKey(static_id);
 		if (!itemData) return;
 		count = count > itemData.details.max_stack_count ? itemData.details.max_stack_count : count;
 
@@ -278,7 +280,7 @@
 			const item = itemList[itemIndex];
 			slot.static_id = item.id;
 			slot.count = 1;
-			const itemData = itemsData.items[slot.static_id];
+			const itemData = itemsData.getByKey(slot.static_id);
 			if (itemData && itemData.details.dynamic) {
 				// @ts-ignore
 				slot.dynamic_item = {
@@ -302,7 +304,7 @@
 		if (slot.static_id !== 'None') {
 			appState.clipboardItem = slot;
 			let itemName = slot.static_id;
-			const itemData = itemsData.items[slot.static_id];
+			const itemData = itemsData.getByKey(slot.static_id);
 			if (itemData) {
 				itemName = itemData.info.localized_name;
 			}
@@ -489,7 +491,7 @@
 		if (appState.selectedPlayer) {
 			const sortedSlots = commonContainer.slots.map((slot) => {
 				if (slot.static_id !== 'None') {
-					const itemData = itemsData.items[slot.static_id];
+					const itemData = itemsData.getByKey(slot.static_id);
 					return { ...slot, sort_id: itemData?.details.sort_id ?? Infinity };
 				}
 				return { ...slot, sort_id: Infinity };
@@ -687,7 +689,7 @@
 						listBorder="preset-outlined-surface-200-800"
 						listClasses="btn-group preset-outlined-surface-200-800 w-full flex-col md:flex-row rounded-sm"
 						value={group}
-						onValueChange={(e) => (group = e.value)}
+						onValueChange={(e: ValueChangeDetails) => (group = e.value)}
 					>
 						{#snippet list()}
 							<Tabs.Control
@@ -1014,7 +1016,7 @@
 				<PlayerHealthBadge bind:player={appState.selectedPlayer} bind:maxHp={health} />
 				<Accordion
 					value={sideBarExpanded}
-					onValueChange={(e) => (sideBarExpanded = e.value)}
+					onValueChange={(e: AccordionValueChangeDetails) => (sideBarExpanded = e.value)}
 					collapsible
 				>
 					<Accordion.Item value="stats" controlHover="hover:bg-secondary-500/25">

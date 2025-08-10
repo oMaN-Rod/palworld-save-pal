@@ -75,7 +75,7 @@
 
 			for (const slot of container.slots) {
 				if (slot.static_id !== 'None') {
-					const itemData = itemsData.items[slot.static_id];
+					const itemData = itemsData.getByKey(slot.static_id);
 					if (
 						itemData &&
 						(itemData.details.type_a === ItemTypeA.Accessory || !itemData.details.dynamic)

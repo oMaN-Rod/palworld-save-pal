@@ -1,20 +1,19 @@
 import { sendAndWait } from '$lib/utils/websocketUtils';
 import { type PalData, MessageType } from '$types';
+import { normalizeKeys } from '$utils';
 
 class Pals {
 	private loading = false;
+	private keyMap: Record<string, string> = $state({});
 
 	pals: Record<string, PalData> = $state({});
-	keyMap: Record<string, string> = $state({});
 
 	private async ensurePalsLoaded(): Promise<void> {
 		if (Object.keys(this.pals).length === 0 && !this.loading) {
 			try {
 				this.loading = true;
 				this.pals = await sendAndWait(MessageType.GET_PALS);
-				for (const key of Object.keys(this.pals)) {
-					this.keyMap[key.toLowerCase()] = key;
-				}
+				this.keyMap = normalizeKeys(Object.keys(this.pals));
 				this.loading = false;
 			} catch (error) {
 				this.loading = false;
@@ -28,7 +27,7 @@ class Pals {
 		}
 	}
 
-	getPalData(key: string): PalData | undefined {
+	getByKey(key: string): PalData | undefined {
 		try {
 			return this.pals[this.keyMap[key.toLowerCase()]];
 		} catch (error) {

@@ -1,8 +1,10 @@
 import { sendAndWait } from '$lib/utils/websocketUtils';
-import { MessageType, type ActiveSkill, type ActiveSkillDetails } from '$types';
+import { MessageType, type ActiveSkill } from '$types';
+import { normalizeKeys } from '$utils';
 
 class ActiveSkills {
 	private loading = false;
+	private keyMap: Record<string, string> = $state({});
 
 	activeSkills: Record<string, ActiveSkill> = $state({});
 
@@ -11,6 +13,7 @@ class ActiveSkills {
 			try {
 				this.loading = true;
 				this.activeSkills = await sendAndWait(MessageType.GET_ACTIVE_SKILLS);
+				this.keyMap = normalizeKeys(Object.keys(this.activeSkills));
 				this.loading = false;
 			} catch (error) {
 				this.loading = false;
@@ -24,47 +27,12 @@ class ActiveSkills {
 		}
 	}
 
-	async searchActiveSkills(search: string): Promise<ActiveSkill | undefined> {
-		await this.ensureActiveSkillsLoaded();
-		return this.getByKey(search) || this.getByName(search) || undefined;
-	}
-
-	private getByKey(key: string): ActiveSkill | undefined {
-		return this.activeSkills[key];
-	}
-
-	private getByName(name: string): ActiveSkill | undefined {
-		return Object.values(this.activeSkills).find(
-			(skill) => skill.localized_name.toLowerCase() === name.toLowerCase()
-		);
-	}
-
-	async getField(
-		key: string,
-		field: string
-	): Promise<string | ActiveSkillDetails | number | string[] | undefined> {
-		await this.ensureActiveSkillsLoaded();
-		const activeSkill = await this.searchActiveSkills(key);
-		if (activeSkill) {
-			if (field in activeSkill) {
-				return activeSkill[field as keyof ActiveSkill];
-			} else if (field in activeSkill.details) {
-				return activeSkill.details[field as keyof ActiveSkillDetails];
-			}
+	getByKey(key: string): ActiveSkill | undefined {
+		try {
+			return this.activeSkills[this.keyMap[key.toLowerCase()]];
+		} catch (error) {
+			console.error('Error getting active skill by key:', error);
 		}
-		return undefined;
-	}
-
-	async searchActiveSkillsByType(type: string): Promise<ActiveSkill[]> {
-		await this.ensureActiveSkillsLoaded();
-		return Object.values(this.activeSkills).filter(
-			(skill) => skill.details.type.toLowerCase() === type.toLowerCase()
-		);
-	}
-
-	async getActiveSkills(): Promise<ActiveSkill[]> {
-		await this.ensureActiveSkillsLoaded();
-		return Object.values(this.activeSkills);
 	}
 
 	async reset(): Promise<void> {

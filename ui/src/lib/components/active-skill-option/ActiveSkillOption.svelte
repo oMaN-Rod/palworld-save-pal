@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { activeSkillsData, elementsData } from '$lib/data';
 	import { type SelectOption } from '$types';
-	import { ASSET_DATA_PATH } from '$types/icons';
+	import { ASSET_DATA_PATH, staticIcons } from '$types/icons';
 	import { assetLoader } from '$utils';
 	import { TimerReset } from 'lucide-svelte';
 
@@ -9,9 +9,10 @@
 		option: SelectOption;
 	}>();
 
-	const activeSkill = activeSkillsData.activeSkills[option.value];
+	const activeSkill = activeSkillsData.getByKey(option.value);
 	const icon = $derived.by(() => {
-		const element = elementsData.elements[activeSkill.details.element];
+		if (!activeSkill) return staticIcons.unknownIcon;
+		const element = elementsData.getByKey(activeSkill.details.element);
 		if (!element) return undefined;
 		return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${element.icon}.webp`);
 	});

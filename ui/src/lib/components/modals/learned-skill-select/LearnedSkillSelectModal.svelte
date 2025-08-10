@@ -33,7 +33,7 @@
 		const skill = activeSkills.find((s) => s.id === skillId);
 		if (!skill || skill.localized_name === 'None') return undefined;
 		const activeSkill = skill as ActiveSkill;
-		const element = elementsData.elements[activeSkill.details.element];
+		const element = elementsData.getByKey(activeSkill.details.element);
 		if (!element) return undefined;
 		return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${element.icon}.webp`);
 	}
@@ -46,7 +46,7 @@
 	}
 
 	function handleLearnType() {
-		const palData = palsData.getPalData(pal.character_key);
+		const palData = palsData.getByKey(pal.character_key);
 		if (!palData) return;
 
 		const elementSkills = activeSkills

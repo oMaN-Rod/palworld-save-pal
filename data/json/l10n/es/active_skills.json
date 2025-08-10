@@ -284,7 +284,7 @@
     "description": "Dispara innumerables espadas de viento que vuelan directas hacia el enemigo."
   },
   "EPalWazaID::Railbolt": {
-    "localized_name": "Railbolt",
+    "localized_name": "Riel eléctrico",
     "description": "Se carga de energía eléctrica hasta el límite y lanza montones de potentes rayos contra el rival."
   },
   "EPalWazaID::RangeThunder": {
@@ -730,6 +730,10 @@
   "EPalWazaID::Unique_NightLady_WarpBeam_Straight": {
     "localized_name": "Rayo onírico",
     "description": "Técnica especial de Bellanoir. Se desvanece de repente para lanzar incontables rayos de luz en cuanto vuelve a aparecer."
+  },
+  "EPalWazaID::Unique_OctopursGirl_InkJet": {
+    "localized_name": "Tintación",
+    "description": "Técnica exclusiva de Gloopie. Genera una cortina de humo para ocultar su presencia, y luego se lanza de cabeza contra el enemigo desde su ángulo muerto."
   },
   "EPalWazaID::Unique_PinkCat_CatPunch": {
     "localized_name": "Puñetazo doble",

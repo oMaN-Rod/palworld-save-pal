@@ -321,6 +321,8 @@ class Player(BaseModel):
 
     @computed_field
     def location(self) -> Optional[WorldMapPoint]:
+        if "LastJumpedLocation" not in self._save_parameter:
+            return None
         last_location = PalObjects.get_value(self._save_parameter["LastJumpedLocation"])
         return (
             WorldMapPoint(
@@ -328,7 +330,7 @@ class Player(BaseModel):
                 y=last_location["y"],
                 z=last_location["z"],
             )
-            if "LastJumpedLocation" in self._save_parameter
+            if "x" in last_location and "y" in last_location and "z" in last_location
             else None
         )
 
