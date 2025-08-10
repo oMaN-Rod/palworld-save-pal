@@ -20,7 +20,6 @@
 		Sword,
 		TimerReset,
 		Trash,
-		Trash2,
 		X
 	} from 'lucide-svelte';
 	import { activeSkillsData, itemsData, palsData, passiveSkillsData } from '$lib/data';
@@ -34,6 +33,7 @@
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import { getAppState } from '$states';
 	import type { ValueChangeDetails } from '@zag-js/accordion';
+	import { focusModal } from '$utils/modalUtils';
 
 	let {
 		title = '',
@@ -50,6 +50,8 @@
 		group: ItemGroup;
 		closeModal: (value: [string, number]) => void;
 	}>();
+
+	let modalContainer: HTMLDivElement;
 
 	const appState = getAppState();
 
@@ -303,6 +305,7 @@
 			eggConfig.talent_shot = dynamicItem.talent_shot;
 			eggConfig.gender = dynamicItem.gender;
 		}
+		focusModal(modalContainer);
 	});
 </script>
 
@@ -324,26 +327,47 @@
 	{/if}
 {/snippet}
 
-<Card class={cardClass}>
-	<h3 class="h3">{title}</h3>
-	<div class={controlsClass}>
-		<div class="w-full">
-			<div class="flex flex-row items-center">
-				<Combobox options={selectOptions} bind:value={itemId}>
-					{#snippet selectOption(option)}
-						{@const item = itemsData.getByKey(option.value)}
-						{#await getItemIcon(option.value) then icon}
-							<div class="grid grid-cols-[auto_1fr_auto] items-center gap-2">
-								{#if icon}
-									<div
-										class={cn(
-											'mr-2 flex items-center justify-center',
-											getBackgroundColor(option.value)
-										)}
-									>
-										<img src={icon} alt={option.label} class="h-8 w-8" />
+<div bind:this={modalContainer}>
+	<Card class={cardClass}>
+		<h3 class="h3">{title}</h3>
+		<div class={controlsClass}>
+			<div class="w-full">
+				<div class="flex flex-row items-center">
+					<Combobox options={selectOptions} bind:value={itemId}>
+						{#snippet selectOption(option)}
+							{@const item = itemsData.getByKey(option.value)}
+							{#await getItemIcon(option.value) then icon}
+								<div class="grid grid-cols-[auto_1fr_auto] items-center gap-2">
+									{#if icon}
+										<div
+											class={cn(
+												'mr-2 flex items-center justify-center',
+												getBackgroundColor(option.value)
+											)}
+										>
+											<img src={icon} alt={option.label} class="h-8 w-8" />
+										</div>
+									{:else}
+										<div
+											class={cn(
+												'mr-2 flex items-center justify-center',
+												getBackgroundColor(option.value)
+											)}
+										>
+											{@render noIcon(item!.details.type_a, item!.details.type_b)}
+										</div>
+									{/if}
+									<div class="flex flex-col">
+										<div class="flex space-x-4">
+											<span class="grow items-center">{option.label}</span>
+											<span class="text-xs">{getItemTier(option.value)}</span>
+										</div>
+
+										<span class="text-xs">{item?.info.description}</span>
 									</div>
-								{:else}
+								</div>
+							{:catch}
+								<div class="grid grid-cols-[auto_1fr_auto]">
 									<div
 										class={cn(
 											'mr-2 flex items-center justify-center',
@@ -352,353 +376,338 @@
 									>
 										{@render noIcon(item!.details.type_a, item!.details.type_b)}
 									</div>
-								{/if}
-								<div class="flex flex-col">
-									<div class="flex space-x-4">
-										<span class="grow items-center">{option.label}</span>
-										<span class="text-xs">{getItemTier(option.value)}</span>
-									</div>
+									<span class="h-6">{option.label}</span>
+									<span>{getItemTier(option.value)}</span>
+								</div>
+							{/await}
+						{/snippet}
+					</Combobox>
+					{#if !isEgg && selectedItemMaxStackCount && selectedItemMaxStackCount > 1}
+						<Input
+							labelClass="w-1/4 ml-1"
+							type="number"
+							bind:value={count}
+							max={selectedItemMaxStackCount}
+						/>
+					{/if}
+				</div>
 
-									<span class="text-xs">{item?.info.description}</span>
+				{#if isEgg}
+					<div class="flex flex-col space-y-4">
+						<div class="flex items-end space-x-2"></div>
+
+						<div class="mt-4 flex items-center justify-center space-x-4 p-4">
+							<div class="flex flex-col items-center">
+								<span class="text-surface-400 mb-1 text-sm">Egg</span>
+								<img
+									src={eggIconSrc}
+									alt={itemId || 'Unknown Egg'}
+									class="h-20 w-20 object-contain 2xl:h-24 2xl:w-24"
+								/>
+							</div>
+							<span class="text-surface-400 text-2xl font-bold">=</span>
+							<div class="flex flex-col items-center">
+								<span class="text-surface-400 mb-1 text-sm">Pal</span>
+								<div class="relative flex">
+									<img
+										src={palIconSrc}
+										alt={eggConfig.character_id || 'Unknown Pal'}
+										class="h-20 w-20 rounded-full object-contain 2xl:h-24 2xl:w-24"
+									/>
+									<div
+										class={cn(
+											'absolute -right-4 -top-1 h-6 w-6 xl:h-8 xl:w-8',
+											eggConfig.gender == PalGender.MALE ? 'text-primary-300' : 'text-tertiary-300'
+										)}
+									>
+										<img
+											src={assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${eggConfig.gender}.webp`)}
+											alt={eggConfig.gender}
+										/>
+									</div>
 								</div>
 							</div>
-						{:catch}
-							<div class="grid grid-cols-[auto_1fr_auto]">
-								<div
-									class={cn(
-										'mr-2 flex items-center justify-center',
-										getBackgroundColor(option.value)
-									)}
-								>
-									{@render noIcon(item!.details.type_a, item!.details.type_b)}
-								</div>
-								<span class="h-6">{option.label}</span>
-								<span>{getItemTier(option.value)}</span>
-							</div>
-						{/await}
-					{/snippet}
-				</Combobox>
-				{#if !isEgg && selectedItemMaxStackCount && selectedItemMaxStackCount > 1}
-					<Input
-						labelClass="w-1/4 ml-1"
-						type="number"
-						bind:value={count}
-						max={selectedItemMaxStackCount}
-					/>
+						</div>
+					</div>
 				{/if}
 			</div>
-
 			{#if isEgg}
-				<div class="flex flex-col space-y-4">
-					<div class="flex items-end space-x-2"></div>
-
-					<div class="mt-4 flex items-center justify-center space-x-4 p-4">
-						<div class="flex flex-col items-center">
-							<span class="text-surface-400 mb-1 text-sm">Egg</span>
-							<img
-								src={eggIconSrc}
-								alt={itemId || 'Unknown Egg'}
-								class="h-20 w-20 object-contain 2xl:h-24 2xl:w-24"
-							/>
-						</div>
-						<span class="text-surface-400 text-2xl font-bold">=</span>
-						<div class="flex flex-col items-center">
-							<span class="text-surface-400 mb-1 text-sm">Pal</span>
-							<div class="relative flex">
-								<img
-									src={palIconSrc}
-									alt={eggConfig.character_id || 'Unknown Pal'}
-									class="h-20 w-20 rounded-full object-contain 2xl:h-24 2xl:w-24"
-								/>
-								<div
-									class={cn(
-										'absolute -right-4 -top-1 h-6 w-6 xl:h-8 xl:w-8',
-										eggConfig.gender == PalGender.MALE ? 'text-primary-300' : 'text-tertiary-300'
-									)}
+				<Accordion
+					classes="w-full"
+					value={accordionValue}
+					onValueChange={(e: ValueChangeDetails) => (accordionValue = e.value)}
+					collapsible
+				>
+					<Accordion.Item
+						controlBase="flex text-start items-center space-x-4 w-full bg-surface-800"
+						value="pal"
+						controlHover="hover:bg-secondary-500/25"
+					>
+						{#snippet control()}
+							Pal
+						{/snippet}
+						{#snippet panel()}
+							<div class="flex w-full items-center space-x-2">
+								<Combobox
+									options={palOptions}
+									bind:value={eggConfig.character_id}
+									placeholder="Choose a Pal..."
+								>
+									{#snippet selectOption(option)}
+										<div class="flex items-center space-x-2">
+											<img src={getPalIcon(option.value)} alt={option.label} class="h-8 w-8" />
+											<span>{option.label}</span>
+										</div>
+									{/snippet}
+								</Combobox>
+								<CornerDotButton
+									onClick={() => {
+										eggConfig.gender =
+											eggConfig.gender === PalGender.FEMALE ? PalGender.MALE : PalGender.FEMALE;
+									}}
+									class="h-8 w-8 p-1"
 								>
 									<img
 										src={assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${eggConfig.gender}.webp`)}
 										alt={eggConfig.gender}
 									/>
-								</div>
+								</CornerDotButton>
 							</div>
-						</div>
-					</div>
-				</div>
-			{/if}
-		</div>
-		{#if isEgg}
-			<Accordion
-				classes="w-full"
-				value={accordionValue}
-				onValueChange={(e: ValueChangeDetails) => (accordionValue = e.value)}
-				collapsible
-			>
-				<Accordion.Item
-					controlBase="flex text-start items-center space-x-4 w-full bg-surface-800"
-					value="pal"
-					controlHover="hover:bg-secondary-500/25"
-				>
-					{#snippet control()}
-						Pal
-					{/snippet}
-					{#snippet panel()}
-						<div class="flex w-full items-center space-x-2">
+						{/snippet}
+					</Accordion.Item>
+					<Accordion.Item
+						controlBase="flex text-start items-center space-x-4 w-full bg-surface-800"
+						value="active_skills"
+						controlHover="hover:bg-secondary-500/25"
+					>
+						{#snippet control()}
+							Active Skills
+						{/snippet}
+						{#snippet panel()}
 							<Combobox
-								options={palOptions}
-								bind:value={eggConfig.character_id}
-								placeholder="Choose a Pal..."
+								options={activeSkillOptions}
+								placeholder="Choose Active Skills..."
+								onChange={(value) => {
+									eggConfig.active_skills.push(value as string);
+								}}
+								disabled={activeSkillAddDisabled}
 							>
 								{#snippet selectOption(option)}
-									<div class="flex items-center space-x-2">
-										<img src={getPalIcon(option.value)} alt={option.label} class="h-8 w-8" />
-										<span>{option.label}</span>
-									</div>
+									<ActiveSkillOption {option} />
 								{/snippet}
 							</Combobox>
-							<CornerDotButton
-								onClick={() => {
-									eggConfig.gender =
-										eggConfig.gender === PalGender.FEMALE ? PalGender.MALE : PalGender.FEMALE;
+
+							{#if eggConfig.active_skills.length > 0}
+								<List
+									items={eggConfig.active_skills}
+									listClass="max-h-60 overflow-y-auto"
+									canSelect={false}
+									multiple={false}
+								>
+									{#snippet listHeader()}
+										<div>
+											<span class="font-bold">Active Skills</span>
+										</div>
+									{/snippet}
+									{#snippet listItem(skill: string)}
+										{@const activeSkill = activeSkillsData.getByKey(skill)}
+										<ActiveSkillOption
+											option={{ label: activeSkill?.localized_name || skill, value: skill }}
+										/>
+									{/snippet}
+									{#snippet listItemActions(skill: string)}
+										<button
+											class="btn hover:bg-error-500/25 p-2"
+											onclick={() =>
+												(eggConfig.active_skills = eggConfig.active_skills.filter(
+													(s) => s !== skill
+												))}
+										>
+											<Trash size={16} />
+										</button>
+									{/snippet}
+									{#snippet listItemPopup(skill: string)}
+										{@const activeSkill = activeSkillsData.getByKey(skill)}
+										<div class="flex items-center space-x-1 justify-self-start">
+											<TimerReset class="h-4 w-4" />
+											<span class="font-bold">{activeSkill?.details.cool_time}</span>
+											<span class="text-xs">Pwr</span>
+											<span class="font-bold">{activeSkill?.details.power}</span>
+										</div>
+									{/snippet}
+								</List>
+							{/if}
+						{/snippet}
+					</Accordion.Item>
+					<Accordion.Item
+						controlBase="flex text-start items-center space-x-4 w-full bg-surface-800"
+						value="learned_skills"
+						controlHover="hover:bg-secondary-500/25"
+					>
+						{#snippet control()}
+							Learned Skills
+						{/snippet}
+						{#snippet panel()}
+							<Combobox
+								options={learnedSkillsOptions}
+								placeholder="Choose Learned Skills..."
+								onChange={(value) => {
+									eggConfig.learned_skills.push(value as string);
 								}}
-								class="h-8 w-8 p-1"
 							>
-								<img
-									src={assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${eggConfig.gender}.webp`)}
-									alt={eggConfig.gender}
-								/>
-							</CornerDotButton>
-						</div>
-					{/snippet}
-				</Accordion.Item>
-				<Accordion.Item
-					controlBase="flex text-start items-center space-x-4 w-full bg-surface-800"
-					value="active_skills"
-					controlHover="hover:bg-secondary-500/25"
-				>
-					{#snippet control()}
-						Active Skills
-					{/snippet}
-					{#snippet panel()}
-						<Combobox
-							options={activeSkillOptions}
-							placeholder="Choose Active Skills..."
-							onChange={(value) => {
-								eggConfig.active_skills.push(value as string);
-							}}
-							disabled={activeSkillAddDisabled}
-						>
-							{#snippet selectOption(option)}
-								<ActiveSkillOption {option} />
-							{/snippet}
-						</Combobox>
+								{#snippet selectOption(option)}
+									<ActiveSkillOption {option} />
+								{/snippet}
+							</Combobox>
 
-						{#if eggConfig.active_skills.length > 0}
-							<List
-								items={eggConfig.active_skills}
-								listClass="max-h-60 overflow-y-auto"
-								canSelect={false}
-								multiple={false}
+							{#if eggConfig.learned_skills.length > 0}
+								<List
+									items={eggConfig.learned_skills}
+									listClass="max-h-60 overflow-y-auto"
+									canSelect={false}
+									multiple={false}
+								>
+									{#snippet listHeader()}
+										<div>
+											<span class="font-bold">Learned Skills</span>
+										</div>
+									{/snippet}
+									{#snippet listItem(skill: string)}
+										{@const activeSkill = activeSkillsData.getByKey(skill)}
+										<ActiveSkillOption
+											option={{ label: activeSkill?.localized_name || skill, value: skill }}
+										/>
+									{/snippet}
+									{#snippet listItemActions(skill: string)}
+										<button
+											class="btn hover:bg-error-500/25 p-2"
+											onclick={() =>
+												(eggConfig.learned_skills = eggConfig.learned_skills.filter(
+													(s) => s !== skill
+												))}
+										>
+											<Trash size={16} />
+										</button>
+									{/snippet}
+									{#snippet listItemPopup(skill: string)}
+										{@const activeSkill = activeSkillsData.getByKey(skill)}
+										<div class="flex items-center space-x-1 justify-self-start">
+											<TimerReset class="h-4 w-4" />
+											<span class="font-bold">{activeSkill?.details.cool_time}</span>
+											<span class="text-xs">Pwr</span>
+											<span class="font-bold">{activeSkill?.details.power}</span>
+										</div>
+									{/snippet}
+								</List>
+							{/if}
+						{/snippet}
+					</Accordion.Item>
+					<Accordion.Item
+						controlBase="flex text-start items-center space-x-4 w-full bg-surface-800"
+						value="passive_skills"
+						controlHover="hover:bg-secondary-500/25"
+					>
+						{#snippet control()}
+							Passive Skills
+						{/snippet}
+						{#snippet panel()}
+							<Combobox
+								label="Passive Skills"
+								options={passiveSkillOptions}
+								placeholder="Choose Passive Skills..."
+								onChange={(value) => eggConfig.passive_skills.push(value as string)}
+								disabled={passiveSkillAddDisabled}
 							>
-								{#snippet listHeader()}
-									<div>
-										<span class="font-bold">Active Skills</span>
-									</div>
+								{#snippet selectOption(option)}
+									<PassiveSkillOption {option} />
 								{/snippet}
-								{#snippet listItem(skill: string)}
-									{@const activeSkill = activeSkillsData.getByKey(skill)}
-									<ActiveSkillOption
-										option={{ label: activeSkill?.localized_name || skill, value: skill }}
-									/>
-								{/snippet}
-								{#snippet listItemActions(skill: string)}
-									<button
-										class="btn hover:bg-error-500/25 p-2"
-										onclick={() =>
-											(eggConfig.active_skills = eggConfig.active_skills.filter(
-												(s) => s !== skill
-											))}
-									>
-										<Trash size={16} />
-									</button>
-								{/snippet}
-								{#snippet listItemPopup(skill: string)}
-									{@const activeSkill = activeSkillsData.getByKey(skill)}
-									<div class="flex items-center space-x-1 justify-self-start">
-										<TimerReset class="h-4 w-4" />
-										<span class="font-bold">{activeSkill?.details.cool_time}</span>
-										<span class="text-xs">Pwr</span>
-										<span class="font-bold">{activeSkill?.details.power}</span>
-									</div>
-								{/snippet}
-							</List>
-						{/if}
-					{/snippet}
-				</Accordion.Item>
-				<Accordion.Item
-					controlBase="flex text-start items-center space-x-4 w-full bg-surface-800"
-					value="learned_skills"
-					controlHover="hover:bg-secondary-500/25"
-				>
-					{#snippet control()}
-						Learned Skills
-					{/snippet}
-					{#snippet panel()}
-						<Combobox
-							options={learnedSkillsOptions}
-							placeholder="Choose Learned Skills..."
-							onChange={(value) => {
-								eggConfig.learned_skills.push(value as string);
-							}}
-						>
-							{#snippet selectOption(option)}
-								<ActiveSkillOption {option} />
-							{/snippet}
-						</Combobox>
+							</Combobox>
 
-						{#if eggConfig.learned_skills.length > 0}
-							<List
-								items={eggConfig.learned_skills}
-								listClass="max-h-60 overflow-y-auto"
-								canSelect={false}
-								multiple={false}
-							>
-								{#snippet listHeader()}
-									<div>
-										<span class="font-bold">Learned Skills</span>
-									</div>
-								{/snippet}
-								{#snippet listItem(skill: string)}
-									{@const activeSkill = activeSkillsData.getByKey(skill)}
-									<ActiveSkillOption
-										option={{ label: activeSkill?.localized_name || skill, value: skill }}
-									/>
-								{/snippet}
-								{#snippet listItemActions(skill: string)}
-									<button
-										class="btn hover:bg-error-500/25 p-2"
-										onclick={() =>
-											(eggConfig.learned_skills = eggConfig.learned_skills.filter(
-												(s) => s !== skill
-											))}
-									>
-										<Trash size={16} />
-									</button>
-								{/snippet}
-								{#snippet listItemPopup(skill: string)}
-									{@const activeSkill = activeSkillsData.getByKey(skill)}
-									<div class="flex items-center space-x-1 justify-self-start">
-										<TimerReset class="h-4 w-4" />
-										<span class="font-bold">{activeSkill?.details.cool_time}</span>
-										<span class="text-xs">Pwr</span>
-										<span class="font-bold">{activeSkill?.details.power}</span>
-									</div>
-								{/snippet}
-							</List>
-						{/if}
-					{/snippet}
-				</Accordion.Item>
-				<Accordion.Item
-					controlBase="flex text-start items-center space-x-4 w-full bg-surface-800"
-					value="passive_skills"
-					controlHover="hover:bg-secondary-500/25"
-				>
-					{#snippet control()}
-						Passive Skills
-					{/snippet}
-					{#snippet panel()}
-						<Combobox
-							label="Passive Skills"
-							options={passiveSkillOptions}
-							placeholder="Choose Passive Skills..."
-							onChange={(value) => eggConfig.passive_skills.push(value as string)}
-							disabled={passiveSkillAddDisabled}
-						>
-							{#snippet selectOption(option)}
-								<PassiveSkillOption {option} />
-							{/snippet}
-						</Combobox>
+							{#if eggConfig.passive_skills.length > 0}
+								<List
+									items={eggConfig.passive_skills}
+									listClass="max-h-60 overflow-y-auto"
+									canSelect={false}
+									multiple={false}
+								>
+									{#snippet listHeader()}
+										<div>
+											<span class="font-bold">Passive Skills</span>
+										</div>
+									{/snippet}
+									{#snippet listItem(skill: string)}
+										{@const passiveSkill = passiveSkillsData.getByKey(skill)}
+										<PassiveSkillOption
+											option={{ label: passiveSkill?.localized_name || skill, value: skill }}
+										/>
+									{/snippet}
+									{#snippet listItemActions(skill: string)}
+										<button
+											class="btn hover:bg-error-500/25 p-2"
+											onclick={() =>
+												(eggConfig.passive_skills = eggConfig.passive_skills.filter(
+													(s) => s !== skill
+												))}
+										>
+											<Trash size={16} />
+										</button>
+									{/snippet}
+									{#snippet listItemPopup(skill: string)}
+										{@const passiveSkill = passiveSkillsData.getByKey(skill)}
+										<div class="flex grow flex-col">
+											<span class="grow truncate">{passiveSkill?.localized_name || skill}</span>
+											<span class="text-xs">{passiveSkill?.description}</span>
+										</div>
+									{/snippet}
+								</List>
+							{/if}
+						{/snippet}
+					</Accordion.Item>
+					<Accordion.Item
+						controlBase="flex text-start items-center space-x-4 w-full bg-surface-800"
+						value="talents"
+						controlHover="hover:bg-secondary-500/25"
+					>
+						{#snippet control()}
+							IVs
+						{/snippet}
+						{#snippet panel()}
+							<Talents bind:pal={eggConfig as Pal} />
+						{/snippet}
+					</Accordion.Item>
+				</Accordion>
+			{/if}
+		</div>
 
-						{#if eggConfig.passive_skills.length > 0}
-							<List
-								items={eggConfig.passive_skills}
-								listClass="max-h-60 overflow-y-auto"
-								canSelect={false}
-								multiple={false}
-							>
-								{#snippet listHeader()}
-									<div>
-										<span class="font-bold">Passive Skills</span>
-									</div>
-								{/snippet}
-								{#snippet listItem(skill: string)}
-									{@const passiveSkill = passiveSkillsData.getByKey(skill)}
-									<PassiveSkillOption
-										option={{ label: passiveSkill?.localized_name || skill, value: skill }}
-									/>
-								{/snippet}
-								{#snippet listItemActions(skill: string)}
-									<button
-										class="btn hover:bg-error-500/25 p-2"
-										onclick={() =>
-											(eggConfig.passive_skills = eggConfig.passive_skills.filter(
-												(s) => s !== skill
-											))}
-									>
-										<Trash size={16} />
-									</button>
-								{/snippet}
-								{#snippet listItemPopup(skill: string)}
-									{@const passiveSkill = passiveSkillsData.getByKey(skill)}
-									<div class="flex grow flex-col">
-										<span class="grow truncate">{passiveSkill?.localized_name || skill}</span>
-										<span class="text-xs">{passiveSkill?.description}</span>
-									</div>
-								{/snippet}
-							</List>
-						{/if}
-					{/snippet}
-				</Accordion.Item>
-				<Accordion.Item
-					controlBase="flex text-start items-center space-x-4 w-full bg-surface-800"
-					value="talents"
-					controlHover="hover:bg-secondary-500/25"
+		<div class="mt-2 flex flex-row items-center space-x-2">
+			<Tooltip position="bottom">
+				<button class="btn hover:bg-secondary-500 px-2" onclick={handleClear}>
+					<Delete />
+				</button>
+				{#snippet popup()}
+					<span>Clear</span>
+				{/snippet}
+			</Tooltip>
+			<Tooltip position="bottom">
+				<button
+					class="btn hover:bg-secondary-500 px-2"
+					onclick={() => handleClose(true)}
+					data-modal-primary
 				>
-					{#snippet control()}
-						IVs
-					{/snippet}
-					{#snippet panel()}
-						<Talents bind:pal={eggConfig as Pal} />
-					{/snippet}
-				</Accordion.Item>
-			</Accordion>
-		{/if}
-	</div>
-
-	<div class="mt-2 flex flex-row items-center space-x-2">
-		<Tooltip position="bottom">
-			<button class="btn hover:bg-secondary-500 px-2" onclick={handleClear}>
-				<Delete />
-			</button>
-			{#snippet popup()}
-				<span>Clear</span>
-			{/snippet}
-		</Tooltip>
-		<Tooltip position="bottom">
-			<button class="btn hover:bg-secondary-500 px-2" onclick={() => handleClose(true)}>
-				<Save />
-			</button>
-			{#snippet popup()}
-				<span>Save</span>
-			{/snippet}
-		</Tooltip>
-		<Tooltip position="bottom">
-			<button class="btn hover:bg-secondary-500 px-2" onclick={() => handleClose(false)}>
-				<X />
-			</button>
-			{#snippet popup()}
-				<span>Cancel</span>
-			{/snippet}
-		</Tooltip>
-	</div>
-</Card>
+					<Save />
+				</button>
+				{#snippet popup()}
+					<span>Save</span>
+				{/snippet}
+			</Tooltip>
+			<Tooltip position="bottom">
+				<button class="btn hover:bg-secondary-500 px-2" onclick={() => handleClose(false)}>
+					<X />
+				</button>
+				{#snippet popup()}
+					<span>Cancel</span>
+				{/snippet}
+			</Tooltip>
+		</div>
+	</Card>
+</div>

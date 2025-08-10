@@ -28,8 +28,26 @@
 
 	// Function to handle key presses
 	function handleKeydown(event: KeyboardEvent) {
-		if (event.key === 'Escape' && modal.isOpen) {
+		if (!modal.isOpen) return;
+
+		if (event.key === 'Escape') {
+			event.preventDefault();
+			event.stopPropagation();
 			modal.closeModal();
+			return;
+		}
+
+		if (event.key === 'Enter') {
+			event.preventDefault();
+			event.stopPropagation();
+
+			const modalElement = event.currentTarget as HTMLElement;
+			const primaryButton = modalElement?.querySelector(
+				'[data-modal-primary]'
+			) as HTMLButtonElement;
+			if (primaryButton && !primaryButton.disabled) {
+				primaryButton.click();
+			}
 		}
 	}
 
@@ -57,6 +75,7 @@
 		onkeydown={handleKeydown}
 		role="dialog"
 		aria-modal="true"
+		tabindex="-1"
 	>
 		<div class={cn('relative', contentClass, rounded)}>
 			<button

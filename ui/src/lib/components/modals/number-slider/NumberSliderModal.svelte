@@ -3,6 +3,8 @@
 	import { Save, X } from 'lucide-svelte';
 	import { Slider } from '@skeletonlabs/skeleton-svelte';
 	import type { ValueChangeDetails } from '@zag-js/slider';
+	import { onMount } from 'svelte';
+	import { focusModal } from '$utils/modalUtils';
 
 	let {
 		title = '',
@@ -23,48 +25,59 @@
 	}>();
 
 	let sliderValue: number[] = $state([value]);
+	let modalContainer: HTMLDivElement;
 
 	function handleClose(confirmed: boolean) {
 		closeModal(confirmed ? sliderValue[0] : null);
 	}
+
+	onMount(() => {
+		focusModal(modalContainer);
+	});
 </script>
 
-<Card class="min-w-[calc(100vw/3)]">
-	<h3 class="h3">{title}</h3>
+<div bind:this={modalContainer}>
+	<Card class="min-w-[calc(100vw/3)]">
+		<h3 class="h3">{title}</h3>
 
-	<div class="mt-2 flex flex-col items-center space-x-2">
-		<div class="flex w-full items-center">
-			<Slider
-				classes="w-10/12 mr-2"
-				value={sliderValue}
-				{min}
-				{max}
-				{markers}
-				{step}
-				height="h-2"
-				meterBg="bg-secondary-500"
-				thumbRingColor="ring-secondary-500"
-				onValueChange={(e: ValueChangeDetails) => (sliderValue[0] = e.value[0])}
-			/>
-			<Input labelClass="w-2/12" type="number" bind:value={sliderValue[0]} {min} {max} />
+		<div class="mt-2 flex flex-col items-center space-x-2">
+			<div class="flex w-full items-center">
+				<Slider
+					classes="w-10/12 mr-2"
+					value={sliderValue}
+					{min}
+					{max}
+					{markers}
+					{step}
+					height="h-2"
+					meterBg="bg-secondary-500"
+					thumbRingColor="ring-secondary-500"
+					onValueChange={(e: ValueChangeDetails) => (sliderValue[0] = e.value[0])}
+				/>
+				<Input labelClass="w-2/12" type="number" bind:value={sliderValue[0]} {min} {max} />
+			</div>
+			<div class="flex w-full justify-end">
+				<Tooltip position="bottom">
+					<button
+						class="btn hover:bg-secondary-500 px-2"
+						onclick={() => handleClose(true)}
+						data-modal-primary
+					>
+						<Save />
+					</button>
+					{#snippet popup()}
+						<span>Save</span>
+					{/snippet}
+				</Tooltip>
+				<Tooltip position="bottom">
+					<button class="btn hover:bg-secondary-500 px-2" onclick={() => handleClose(false)}>
+						<X />
+					</button>
+					{#snippet popup()}
+						<span>Cancel</span>
+					{/snippet}
+				</Tooltip>
+			</div>
 		</div>
-		<div class="flex w-full justify-end">
-			<Tooltip position="bottom">
-				<button class="btn hover:bg-secondary-500 px-2" onclick={() => handleClose(true)}>
-					<Save />
-				</button>
-				{#snippet popup()}
-					<span>Save</span>
-				{/snippet}
-			</Tooltip>
-			<Tooltip position="bottom">
-				<button class="btn hover:bg-secondary-500 px-2" onclick={() => handleClose(false)}>
-					<X />
-				</button>
-				{#snippet popup()}
-					<span>Cancel</span>
-				{/snippet}
-			</Tooltip>
-		</div>
-	</div>
-</Card>
+	</Card>
+</div>

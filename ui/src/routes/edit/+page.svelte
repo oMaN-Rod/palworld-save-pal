@@ -54,7 +54,8 @@
 			event.ctrlKey ||
 			event.altKey ||
 			event.metaKey ||
-			event.shiftKey
+			event.shiftKey ||
+			modal.isOpen
 		) {
 			return;
 		}

@@ -6,6 +6,8 @@
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { assetLoader } from '$utils';
 	import { staticIcons } from '$types/icons';
+	import { onMount } from 'svelte';
+	import { focusModal } from '$utils/modalUtils';
 
 	let { title = 'Select a Pal', closeModal } = $props<{
 		title?: string;
@@ -26,6 +28,7 @@
 	});
 	let selectedPal: string = $state('');
 	let nickname: string = $state('');
+	let modalContainer: HTMLDivElement;
 
 	function formatLabel(palId: string, palName: string) {
 		if (palId.toLowerCase().includes('predator_')) {
@@ -65,49 +68,59 @@
 			return staticIcons.sadIcon;
 		}
 	}
+
+	onMount(() => {
+		focusModal(modalContainer);
+	});
 </script>
 
-<Card class="min-w-[calc(100vw/3)]">
-	<h3 class="h3">{title}</h3>
-	<Combobox options={selectOptions} bind:value={selectedPal}>
-		{#snippet selectOption(option)}
-			{@const palData = palsData.getByKey(option.value)}
-			<div class="flex items-center space-x-2">
-				<img src={getIconPath(option)} alt={option.label} class="h-8 w-8" />
-				<div class="grow">
-					<span>{option.label}</span>
-					<!-- <span class="text-xs">{option.value}</span> -->
+<div bind:this={modalContainer}>
+	<Card class="min-w-[calc(100vw/3)]">
+		<h3 class="h3">{title}</h3>
+		<Combobox options={selectOptions} bind:value={selectedPal}>
+			{#snippet selectOption(option)}
+				{@const palData = palsData.getByKey(option.value)}
+				<div class="flex items-center space-x-2">
+					<img src={getIconPath(option)} alt={option.label} class="h-8 w-8" />
+					<div class="grow">
+						<span>{option.label}</span>
+						<!-- <span class="text-xs">{option.value}</span> -->
+					</div>
+					{#if palData}
+						{#each palData.element_types as elementType}
+							{@const elementObj = elementsData.getByKey(elementType.toString())}
+							{@const elementIcon = assetLoader.loadImage(
+								`${ASSET_DATA_PATH}/img/${elementObj?.icon}.webp`
+							)}
+							<img src={elementIcon} alt={elementType} class="h-6 w-6" />
+						{/each}
+					{/if}
 				</div>
-				{#if palData}
-					{#each palData.element_types as elementType}
-						{@const elementObj = elementsData.getByKey(elementType.toString())}
-						{@const elementIcon = assetLoader.loadImage(
-							`${ASSET_DATA_PATH}/img/${elementObj?.icon}.webp`
-						)}
-						<img src={elementIcon} alt={elementType} class="h-6 w-6" />
-					{/each}
-				{/if}
-			</div>
-		{/snippet}
-	</Combobox>
-	<Input label="Nickname" inputClass="grow" bind:value={nickname} />
+			{/snippet}
+		</Combobox>
+		<Input label="Nickname" inputClass="grow" bind:value={nickname} />
 
-	<div class="mt-2 flex flex-row items-center space-x-2">
-		<Tooltip position="bottom">
-			<button class="btn hover:bg-secondary-500 px-2" onclick={() => handleClose(true)}>
-				<Save />
-			</button>
-			{#snippet popup()}
-				<span>Save</span>
-			{/snippet}
-		</Tooltip>
-		<Tooltip position="bottom">
-			<button class="btn hover:bg-secondary-500 px-2" onclick={() => handleClose(false)}>
-				<X />
-			</button>
-			{#snippet popup()}
-				<span>Cancel</span>
-			{/snippet}
-		</Tooltip>
-	</div>
-</Card>
+		<div class="mt-2 flex flex-row items-center space-x-2">
+			<Tooltip position="bottom">
+				<button
+					class="btn hover:bg-secondary-500 px-2"
+					onclick={() => handleClose(true)}
+					data-modal-primary
+				>
+					<Save />
+				</button>
+				{#snippet popup()}
+					<span>Save</span>
+				{/snippet}
+			</Tooltip>
+			<Tooltip position="bottom">
+				<button class="btn hover:bg-secondary-500 px-2" onclick={() => handleClose(false)}>
+					<X />
+				</button>
+				{#snippet popup()}
+					<span>Cancel</span>
+				{/snippet}
+			</Tooltip>
+		</div>
+	</Card>
+</div>
