@@ -24,7 +24,7 @@
 	<h2 class="h2">Available Saves</h2>
 	{#if saves && Object.keys(saves).length > 0}
 		<List
-			baseClass="bg-surface-800"
+			baseClass="bg-surface-800 max-h-64 2xl:max-h-[500px]"
 			bind:items={gamepassSaves}
 			idKey="save_id"
 			canSelect={false}
