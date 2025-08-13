@@ -280,10 +280,8 @@
 								bind:value={selectedCollectionId}
 								options={upsState.filteredCollections.map((c) => ({
 									label: c.name,
-									value: `${c.id}`
+									value: c.id
 								}))}
-								optionValue="id"
-								optionLabel="name"
 								placeholder="No Collection"
 								inputClass="flex-1"
 							/>
