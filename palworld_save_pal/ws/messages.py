@@ -49,6 +49,8 @@ class MessageType(str, Enum):
     DELETE_UPS_COLLECTION = "delete_ups_collection"
     GET_UPS_TAGS = "get_ups_tags"
     CREATE_UPS_TAG = "create_ups_tag"
+    UPDATE_UPS_TAG = "update_ups_tag"
+    DELETE_UPS_TAG = "delete_ups_tag"
     GET_UPS_STATS = "get_ups_stats"
     NUKE_UPS_PALS = "nuke_ups_pals"
 
@@ -586,6 +588,25 @@ class CreateUpsTagData(BaseModel):
 class CreateUpsTagMessage(BaseMessage):
     type: str = MessageType.CREATE_UPS_TAG.value
     data: CreateUpsTagData
+
+
+class UpdateUpsTagData(BaseModel):
+    tag_id: int
+    updates: Dict[str, Union[str, Optional[str]]]
+
+
+class UpdateUpsTagMessage(BaseMessage):
+    type: str = MessageType.UPDATE_UPS_TAG.value
+    data: UpdateUpsTagData
+
+
+class DeleteUpsTagData(BaseModel):
+    tag_id: int
+
+
+class DeleteUpsTagMessage(BaseMessage):
+    type: str = MessageType.DELETE_UPS_TAG.value
+    data: DeleteUpsTagData
 
 
 class GetUpsStatsMessage(BaseMessage):

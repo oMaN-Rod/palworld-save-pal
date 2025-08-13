@@ -89,6 +89,8 @@ from palworld_save_pal.ws.messages import (
     DeleteUpsCollectionMessage,
     GetUpsTagsMessage,
     CreateUpsTagMessage,
+    UpdateUpsTagMessage,
+    DeleteUpsTagMessage,
     GetUpsStatsMessage,
     NukeUpsPalsMessage,
 )
@@ -592,6 +594,22 @@ def bootstrap(dispatcher: "MessageDispatcher"):
         {
             "message_class": CreateUpsTagMessage,
             "handler_func": ups_handler.create_ups_tag_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.UPDATE_UPS_TAG.value,
+        {
+            "message_class": UpdateUpsTagMessage,
+            "handler_func": ups_handler.update_ups_tag_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.DELETE_UPS_TAG.value,
+        {
+            "message_class": DeleteUpsTagMessage,
+            "handler_func": ups_handler.delete_ups_tag_handler,
         },
     )
 

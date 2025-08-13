@@ -76,6 +76,8 @@ export enum MessageType {
 	DELETE_UPS_COLLECTION = 'delete_ups_collection',
 	GET_UPS_TAGS = 'get_ups_tags',
 	CREATE_UPS_TAG = 'create_ups_tag',
+	UPDATE_UPS_TAG = 'update_ups_tag',
+	DELETE_UPS_TAG = 'delete_ups_tag',
 	GET_UPS_STATS = 'get_ups_stats',
 	NUKE_UPS_PALS = 'nuke_ups_pals'
 }

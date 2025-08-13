@@ -263,6 +263,41 @@ export const createUpsTagHandler: WSMessageHandler = {
 	}
 };
 
+export const updateUpsTagHandler: WSMessageHandler = {
+	type: MessageType.UPDATE_UPS_TAG,
+	async handle(data: { tag: UPSTag }) {
+		const upsState = getUpsState();
+		const toastState = getToastState();
+
+		if (data.tag) {
+			// Update tag in the list
+			const index = upsState.tags.findIndex((t) => t.id === data.tag.id);
+			if (index >= 0) {
+				upsState.tags[index] = data.tag;
+			}
+			toastState.add(`Updated tag "${data.tag.name}"`, 'Success', 'success');
+		}
+	}
+};
+
+export const deleteUpsTagHandler: WSMessageHandler = {
+	type: MessageType.DELETE_UPS_TAG,
+	async handle(data: { success: boolean; tag_id: number }) {
+		const upsState = getUpsState();
+		const toastState = getToastState();
+
+		if (data.success) {
+			// Remove tag from the list
+			const deletedTag = upsState.tags.find((t) => t.id === data.tag_id);
+			upsState.tags = upsState.tags.filter((t) => t.id !== data.tag_id);
+			
+			if (deletedTag) {
+				toastState.add(`Deleted tag "${deletedTag.name}"`, 'Success', 'success');
+			}
+		}
+	}
+};
+
 export const getUpsStatsHandler: WSMessageHandler = {
 	type: MessageType.GET_UPS_STATS,
 	async handle(data: { stats: UPSStats }) {
@@ -286,5 +321,7 @@ export const upsHandlers = [
 	deleteUpsCollectionHandler,
 	getUpsTagsHandler,
 	createUpsTagHandler,
+	updateUpsTagHandler,
+	deleteUpsTagHandler,
 	getUpsStatsHandler
 ];

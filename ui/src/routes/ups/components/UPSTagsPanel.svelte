@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Plus, Tag, X } from 'lucide-svelte';
+	import { Plus, Tag, X, Edit, Trash2 } from 'lucide-svelte';
 	import { getUpsState, getModalState } from '$states';
 	import { TooltipButton } from '$components/ui';
 	import { TextInputModal } from '$components';
@@ -26,6 +26,32 @@
 
 		if (result) {
 			await upsState.createTag(result);
+		}
+	}
+
+	async function editTag(tag: UPSTag) {
+		// @ts-ignore
+		const result = await modal.showModal<string>(TextInputModal, {
+			title: 'Edit Tag',
+			value: tag.name,
+			inputLabel: 'Enter new name for the tag:'
+		});
+
+		if (result && result !== tag.name) {
+			await upsState.updateTag(tag.id, { name: result });
+		}
+	}
+
+	async function deleteTag(tag: UPSTag) {
+		const confirmed = await modal.showConfirmModal({
+			title: 'Delete Tag',
+			message: `Are you sure you want to delete "${tag.name}"? This tag will be removed from all Pals that have it.`,
+			confirmText: 'Delete',
+			cancelText: 'Cancel'
+		});
+
+		if (confirmed) {
+			await upsState.deleteTag(tag.id);
 		}
 	}
 
@@ -113,30 +139,60 @@
 			<div class="space-y-1">
 				{#each filteredTags as tag (tag.id)}
 					{@const isSelected = isTagSelected(tag.name)}
-					<button
-						onclick={() => toggleTagFilter(tag.name)}
-						class="hover:bg-surface-200 dark:hover:bg-surface-700 flex w-full items-center gap-3 rounded-md p-2 text-left transition-colors {isSelected
-							? 'bg-primary-500 text-white'
-							: ''}"
-					>
-						<!-- Tag Color Indicator -->
-						<div
-							class="h-3 w-3 flex-shrink-0 rounded-full"
-							style="background-color: {tag.color || '#6366f1'}"
-						></div>
-
-						<!-- Tag Name -->
-						<span class="flex-1 truncate font-medium">
-							{tag.name}
-						</span>
-
-						<!-- Usage Count -->
-						<span
-							class="flex-shrink-0 text-xs {isSelected ? 'text-primary-100' : 'text-surface-500'}"
+					<div class="group relative">
+						<button
+							onclick={() => toggleTagFilter(tag.name)}
+							class="hover:bg-surface-200 dark:hover:bg-surface-700 flex w-full items-center gap-3 rounded-md p-2 text-left transition-colors {isSelected
+								? 'bg-primary-500 text-white'
+								: ''}"
 						>
-							{tag.usage_count}
-						</span>
-					</button>
+							<!-- Tag Color Indicator -->
+							<div
+								class="h-3 w-3 flex-shrink-0 rounded-full"
+								style="background-color: {tag.color || '#6366f1'}"
+							></div>
+
+							<!-- Tag Name -->
+							<span class="flex-1 truncate font-medium">
+								{tag.name}
+							</span>
+
+							<!-- Usage Count -->
+							<span
+								class="flex-shrink-0 text-xs {isSelected ? 'text-primary-100' : 'text-surface-500'}"
+							>
+								{tag.usage_count}
+							</span>
+						</button>
+
+						<!-- Action buttons (show on hover) -->
+						<div
+							class="absolute right-1 top-1 flex items-center gap-1 opacity-0 transition-opacity group-hover:opacity-100"
+						>
+							<TooltipButton
+								onclick={(e: MouseEvent) => {
+									e.stopPropagation();
+									editTag(tag);
+								}}
+								class="rounded bg-black/20 p-1 text-white hover:bg-black/40"
+								popupLabel="Edit tag"
+								size="sm"
+							>
+								<Edit class="h-3 w-3" />
+							</TooltipButton>
+							<TooltipButton
+								onclick={(e: MouseEvent) => {
+									e.stopPropagation();
+									deleteTag(tag);
+								}}
+								class="rounded bg-red-500/80 p-1 text-white hover:bg-red-600/80"
+								popupLabel="Delete tag"
+								size="sm"
+							>
+								<Trash2 class="h-3 w-3" />
+							</TooltipButton>
+						</div>
+					</div>
 				{/each}
 			</div>
 		{:else if searchTags}

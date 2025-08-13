@@ -199,6 +199,41 @@ class UPSStateClass {
 		}
 	}
 
+	async updateTag(
+		tagId: number,
+		updates: Partial<Pick<UPSTag, 'name' | 'description' | 'color'>>
+	): Promise<void> {
+		try {
+			await send(MessageType.UPDATE_UPS_TAG, {
+				tag_id: tagId,
+				updates
+			});
+
+			const index = this.tags.findIndex((t) => t.id === tagId);
+			if (index >= 0) {
+				Object.assign(this.tags[index], updates);
+			}
+		} catch (error) {
+			console.error('Error updating tag:', error);
+		}
+	}
+
+	async deleteTag(tagId: number): Promise<void> {
+		try {
+			await send(MessageType.DELETE_UPS_TAG, {
+				tag_id: tagId
+			});
+
+			this.tags = this.tags.filter((t) => t.id !== tagId);
+
+			// Refresh pals and stats after deletion
+			await this.loadPals(true);
+			await this.loadStats();
+		} catch (error) {
+			console.error('Error deleting tag:', error);
+		}
+	}
+
 	async updatePal(
 		palId: number,
 		updates: Partial<Pick<UPSPal, 'nickname' | 'collection_id' | 'tags' | 'notes'>>

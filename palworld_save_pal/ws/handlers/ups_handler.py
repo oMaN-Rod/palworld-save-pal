@@ -23,6 +23,8 @@ from palworld_save_pal.ws.messages import (
     DeleteUpsCollectionMessage,
     GetUpsTagsMessage,
     CreateUpsTagMessage,
+    UpdateUpsTagMessage,
+    DeleteUpsTagMessage,
     GetUpsStatsMessage,
     NukeUpsPalsMessage,
     MessageType,
@@ -936,5 +938,62 @@ async def nuke_ups_pals_handler(message: NukeUpsPalsMessage, ws: WebSocket):
         logger.exception("Error nuking UPS pals: %s", str(e))
         error_response = build_response(
             MessageType.ERROR, {"message": f"Failed to nuke UPS pals: {str(e)}"}
+        )
+        await ws.send_json(error_response)
+
+
+async def update_ups_tag_handler(message: UpdateUpsTagMessage, ws: WebSocket):
+    try:
+        data = message.data
+        tag = UPSService.update_tag(data.tag_id, data.updates)
+
+        if not tag:
+            error_response = build_response(
+                MessageType.ERROR,
+                {"message": f"Tag with ID {data.tag_id} not found"},
+            )
+            await ws.send_json(error_response)
+            return
+
+        response_data = {
+            "tag": {
+                "id": tag.id,
+                "name": tag.name,
+                "description": tag.description,
+                "color": tag.color,
+                "usage_count": tag.usage_count,
+                "created_at": tag.created_at.isoformat(),
+                "updated_at": tag.updated_at.isoformat(),
+            }
+        }
+
+        response = build_response(MessageType.UPDATE_UPS_TAG, response_data)
+        await ws.send_json(response)
+
+    except Exception as e:
+        logger.exception("Error updating UPS tag: %s", str(e))
+        error_response = build_response(
+            MessageType.ERROR, {"message": f"Failed to update UPS tag: {str(e)}"}
+        )
+        await ws.send_json(error_response)
+
+
+async def delete_ups_tag_handler(message: DeleteUpsTagMessage, ws: WebSocket):
+    try:
+        data = message.data
+        success = UPSService.delete_tag(data.tag_id)
+
+        response_data = {
+            "success": success,
+            "tag_id": data.tag_id,
+        }
+
+        response = build_response(MessageType.DELETE_UPS_TAG, response_data)
+        await ws.send_json(response)
+
+    except Exception as e:
+        logger.exception("Error deleting UPS tag: %s", str(e))
+        error_response = build_response(
+            MessageType.ERROR, {"message": f"Failed to delete UPS tag: {str(e)}"}
         )
         await ws.send_json(error_response)

@@ -322,6 +322,59 @@ class UPSService:
                 return tag
 
     @staticmethod
+    def update_tag(
+        tag_id: int, updates: Dict[str, Any]
+    ) -> Optional[UPSTagModel]:
+        with Session(engine) as session:
+            tag = session.get(UPSTagModel, tag_id)
+            if not tag:
+                return None
+
+            old_name = tag.name
+            
+            for key, value in updates.items():
+                if hasattr(tag, key):
+                    setattr(tag, key, value)
+
+            tag.updated_at = datetime.now(dt.timezone.utc)
+            session.commit()
+            session.refresh(tag)
+            
+            # If name was changed, update all pal tags that reference the old name
+            if "name" in updates and old_name != tag.name:
+                UPSService._update_pal_tags_on_rename(session, old_name, tag.name)
+            
+            # Ensure all attributes are loaded before expunging
+            # Access all the attributes that will be needed after expunging
+            _ = tag.id
+            _ = tag.name
+            _ = tag.description
+            _ = tag.color
+            _ = tag.usage_count
+            _ = tag.created_at
+            _ = tag.updated_at
+            
+            # Create a detached copy with all necessary attributes
+            session.expunge(tag)
+            return tag
+
+    @staticmethod
+    def delete_tag(tag_id: int) -> bool:
+        with Session(engine) as session:
+            tag = session.get(UPSTagModel, tag_id)
+            if not tag:
+                return False
+
+            tag_name = tag.name
+            
+            # Remove this tag from all pals that have it
+            UPSService._remove_tag_from_all_pals(session, tag_name)
+            
+            session.delete(tag)
+            session.commit()
+            return True
+
+    @staticmethod
     def get_stats() -> UPSStatsModel:
         with Session(engine) as session:
             stats = session.get(UPSStatsModel, 1)
@@ -571,6 +624,36 @@ class UPSService:
                 f"NUKE OPERATION COMPLETED: Deleted {deleted_count} pals from UPS storage"
             )
             return deleted_count
+
+    @staticmethod
+    def _update_pal_tags_on_rename(session: Session, old_name: str, new_name: str):
+        """Update all pal tags when a tag is renamed."""
+        pals_with_tag = session.exec(
+            select(UPSPalModel).where(UPSPalModel.tags.like(f'%{json.dumps(old_name)}%'))
+        ).all()
+        
+        for pal in pals_with_tag:
+            if old_name in pal.tags:
+                # Replace old tag name with new tag name
+                pal.tags = [new_name if tag == old_name else tag for tag in pal.tags]
+                pal.updated_at = datetime.now(dt.timezone.utc)
+        
+        session.commit()
+
+    @staticmethod
+    def _remove_tag_from_all_pals(session: Session, tag_name: str):
+        """Remove a specific tag from all pals that have it."""
+        pals_with_tag = session.exec(
+            select(UPSPalModel).where(UPSPalModel.tags.like(f'%{json.dumps(tag_name)}%'))
+        ).all()
+        
+        for pal in pals_with_tag:
+            if tag_name in pal.tags:
+                # Remove the tag from the list
+                pal.tags = [tag for tag in pal.tags if tag != tag_name]
+                pal.updated_at = datetime.now(dt.timezone.utc)
+        
+        session.commit()
 
     @staticmethod
     def _update_collection_counts(session: Session):
