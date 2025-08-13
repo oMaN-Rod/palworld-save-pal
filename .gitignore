@@ -77,3 +77,4 @@ ENV/
 
 backups/
 data/json/settings.json
+.claude/

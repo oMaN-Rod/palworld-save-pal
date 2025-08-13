@@ -73,6 +73,8 @@ class UPSService:
                 success=True,
             )
 
+            # Create a detached copy with all necessary attributes
+            session.expunge(ups_pal)
             return ups_pal
 
     @staticmethod
@@ -130,12 +132,21 @@ class UPSService:
             query = query.offset(offset).limit(limit)
 
             pals = session.exec(query).all()
+            
+            # Create detached copies with all necessary attributes
+            for pal in pals:
+                session.expunge(pal)
+            
             return pals, total_count
 
     @staticmethod
     def get_pal_by_id(pal_id: int) -> Optional[UPSPalModel]:
         with Session(engine) as session:
-            return session.get(UPSPalModel, pal_id)
+            pal = session.get(UPSPalModel, pal_id)
+            if pal:
+                # Create a detached copy with all necessary attributes
+                session.expunge(pal)
+            return pal
 
     @staticmethod
     def update_pal(pal_id: int, updates: Dict[str, Any]) -> Optional[UPSPalModel]:
@@ -156,6 +167,20 @@ class UPSService:
             if "collection_id" in updates:
                 UPSService._update_collection_counts(session)
 
+            # Ensure all attributes are loaded before expunging
+            # Access all the attributes that will be needed after expunging
+            _ = pal.id
+            _ = pal.instance_id
+            _ = pal.character_id
+            _ = pal.nickname
+            _ = pal.level
+            _ = pal.collection_id
+            _ = pal.tags
+            _ = pal.notes
+            _ = pal.updated_at
+
+            # Create a detached copy with all necessary attributes
+            session.expunge(pal)
             return pal
 
     @staticmethod
@@ -197,14 +222,23 @@ class UPSService:
             session.add(collection)
             session.commit()
             session.refresh(collection)
+            
+            # Create a detached copy with all necessary attributes
+            session.expunge(collection)
             return collection
 
     @staticmethod
     def get_collections() -> List[UPSCollectionModel]:
         with Session(engine) as session:
-            return session.exec(
+            collections = session.exec(
                 select(UPSCollectionModel).order_by(UPSCollectionModel.name)
             ).all()
+            
+            # Create detached copies with all necessary attributes
+            for collection in collections:
+                session.expunge(collection)
+            
+            return collections
 
     @staticmethod
     def update_collection(
@@ -222,6 +256,9 @@ class UPSService:
             collection.updated_at = datetime.now(dt.timezone.utc)
             session.commit()
             session.refresh(collection)
+            
+            # Create a detached copy with all necessary attributes
+            session.expunge(collection)
             return collection
 
     @staticmethod
@@ -245,7 +282,13 @@ class UPSService:
     @staticmethod
     def get_available_tags() -> List[UPSTagModel]:
         with Session(engine) as session:
-            return session.exec(select(UPSTagModel).order_by(UPSTagModel.name)).all()
+            tags = session.exec(select(UPSTagModel).order_by(UPSTagModel.name)).all()
+            
+            # Create detached copies with all necessary attributes
+            for tag in tags:
+                session.expunge(tag)
+            
+            return tags
 
     @staticmethod
     def create_or_update_tag(
@@ -264,6 +307,9 @@ class UPSService:
                 existing_tag.updated_at = datetime.now(dt.timezone.utc)
                 session.commit()
                 session.refresh(existing_tag)
+                
+                # Create a detached copy with all necessary attributes
+                session.expunge(existing_tag)
                 return existing_tag
             else:
                 # Create new
@@ -271,6 +317,9 @@ class UPSService:
                 session.add(tag)
                 session.commit()
                 session.refresh(tag)
+                
+                # Create a detached copy with all necessary attributes
+                session.expunge(tag)
                 return tag
 
     @staticmethod
@@ -286,6 +335,9 @@ class UPSService:
 
             UPSService._update_stats(session)
             session.refresh(stats)
+            
+            # Create a detached copy with all necessary attributes
+            session.expunge(stats)
             return stats
 
     @staticmethod
@@ -358,6 +410,8 @@ class UPSService:
                 success=True,
             )
 
+            # Create a detached copy with all necessary attributes
+            session.expunge(clone_pal)
             return clone_pal
 
     @staticmethod

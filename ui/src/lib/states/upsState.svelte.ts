@@ -37,7 +37,7 @@ const DEFAULT_FILTERS: UPSFilters = {
 
 const DEFAULT_PAGINATION: UPSPagination = {
 	page: 1,
-	limit: 30,
+	limit: 56,
 	totalCount: 0,
 	totalPages: 0
 };
