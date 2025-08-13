@@ -179,6 +179,13 @@
 		selectedPalId = undefined;
 	}
 
+	function handleUpdateCollection(collectionId: number) {
+		result = result.map((r) => ({
+			...r,
+			collectionId
+		}));
+	}
+
 	function removePal(palId: string) {
 		result = result.filter((r) => r.palId !== palId);
 		selectedPals = selectedPals.filter((id) => id !== palId);
@@ -229,7 +236,6 @@
 						}))}
 						placeholder="Select Player"
 						inputClass="w-full"
-						onChange={() => (selectedPals = [])}
 					/>
 					{#if selectedPlayerId}
 						<span class="mb-2 block text-sm font-medium">Import From</span>
@@ -284,6 +290,7 @@
 								}))}
 								placeholder="No Collection"
 								inputClass="flex-1"
+								onChange={(id) => handleUpdateCollection(id as number)}
 							/>
 						</div>
 					{:else}

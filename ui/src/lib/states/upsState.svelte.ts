@@ -334,7 +334,7 @@ class UPSStateClass {
 		notes?: string
 	): Promise<void> {
 		try {
-			await send(MessageType.IMPORT_TO_UPS, {
+			const data = {
 				source_type: sourceType,
 				source_pal_id: sourcePalId,
 				source_slot: sourceSlot,
@@ -342,7 +342,9 @@ class UPSStateClass {
 				collection_id: collectionId,
 				tags: tags,
 				notes: notes
-			});
+			};
+
+			await send(MessageType.IMPORT_TO_UPS, data);
 
 			await this.loadPals(true);
 			await this.loadCollections(); // Update collections to refresh pal_count
