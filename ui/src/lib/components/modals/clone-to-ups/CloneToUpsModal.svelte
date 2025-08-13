@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { Card, Input } from '$components/ui';
+	import { Card, Combobox, Input } from '$components/ui';
 	import { X, Folder, Tag, Plus, Copy } from 'lucide-svelte';
 	import { onMount } from 'svelte';
 	import { focusModal } from '$utils/modalUtils';
 	import { getUpsState } from '$states';
-	import type { Pal } from '$types';
+	import type { Pal, SelectOption } from '$types';
 
 	let {
 		title = 'Clone to UPS',
@@ -123,19 +123,19 @@
 				</label>
 				{#if !isCreatingCollection}
 					<div class="flex gap-2">
-						<select
+						<Combobox
 							bind:value={selectedCollectionId}
-							class="dark:bg-surface-800 flex-1 rounded-md border bg-white p-2"
-						>
-							<option value={undefined}>No Collection</option>
-							{#each upsState.filteredCollections as collection}
-								<option value={collection.id}>{collection.name}</option>
-							{/each}
-						</select>
+							options={upsState.filteredCollections.map((c) => ({
+								value: c.id,
+								label: c.name
+							})) as SelectOption[]}
+							placeholder="Select a collection"
+						/>
+
 						<button
 							type="button"
 							onclick={() => (isCreatingCollection = true)}
-							class="bg-primary-500 hover:bg-primary-600 flex items-center gap-1 rounded-md px-3 py-2 text-white"
+							class="bg-primary-500 hover:bg-primary-600 flex w-10 items-center justify-center gap-1 rounded-md p-2 text-white"
 						>
 							<Plus class="h-4 w-4" />
 						</button>
@@ -146,13 +146,13 @@
 							type="text"
 							bind:value={newCollectionName}
 							placeholder="Collection name"
-							class="w-full"
+							inputClass="w-full"
 						/>
 						<Input
 							type="text"
 							bind:value={newCollectionDescription}
 							placeholder="Description (optional)"
-							class="w-full"
+							inputClass="w-full"
 						/>
 						<div class="flex gap-2">
 							<button
@@ -192,7 +192,7 @@
 							<button
 								type="button"
 								onclick={() => toggleTag(tag.name)}
-								class="rounded border px-2 py-1 text-xs transition-colors"
+								class="border-surface-800 rounded border px-2 py-1 text-xs transition-colors"
 								class:bg-primary-500={selectedTags.includes(tag.name)}
 								class:text-white={selectedTags.includes(tag.name)}
 								class:border-primary-500={selectedTags.includes(tag.name)}
@@ -211,13 +211,12 @@
 						type="text"
 						bind:value={newTagInput}
 						placeholder="Add new tag"
-						class="flex-1"
 						onkeydown={(e: KeyboardEvent) => e.key === 'Enter' && addNewTag()}
 					/>
 					<button
 						type="button"
 						onclick={addNewTag}
-						class="bg-secondary-500 hover:bg-secondary-600 flex items-center gap-1 rounded-md px-3 py-2 text-white"
+						class="bg-primary-500 hover:bg-secondary-600 focus:outline-hidden ring-surface-200-800 focus-within:ring-secondary-500 flex w-10 items-center justify-center gap-1 rounded-md px-3 py-2 text-white ring"
 					>
 						<Plus class="h-4 w-4" />
 					</button>
@@ -251,7 +250,7 @@
 					bind:value={notes}
 					placeholder="Add notes about these cloned Pals..."
 					rows="3"
-					class="dark:bg-surface-800 resize-vertical w-full rounded-md border bg-white p-2"
+					class="bg-surface-900 resize-vertical border-surface-800 focus:outline-hidden ring-surface-200-800 focus-within:ring-secondary-500 w-full rounded-md border p-2 ring"
 				></textarea>
 			</div>
 		</div>
