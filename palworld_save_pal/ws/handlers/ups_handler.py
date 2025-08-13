@@ -1,4 +1,5 @@
 from typing import Optional
+from uuid import UUID
 from fastapi import WebSocket
 
 from palworld_save_pal.game.pal import Pal
@@ -6,6 +7,7 @@ from palworld_save_pal.game.utils import format_character_key
 from palworld_save_pal.state import get_app_state
 from palworld_save_pal.db.ctx.ups import UPSService
 from palworld_save_pal.dto.pal import PalDTO
+from palworld_save_pal.utils.uuid import are_equal_uuids
 from palworld_save_pal.ws.messages import (
     GetUpsPalsMessage,
     AddUpsPalMessage,
@@ -395,19 +397,24 @@ async def clone_to_ups_handler(message: CloneToUpsMessage, ws: WebSocket):
                             )
                             continue
 
-                        player = save_file.get_players().get(data.source_player_uid)
-                        if not player or not player.pals:
-                            errors.append(f"Player or pals not found for: {pal_id}")
+                        players = save_file.get_players()
+                        player = players.get(UUID(data.source_player_uid))
+                        if not player:
+                            errors.append(f"Player not found {data.source_player_uid}")
                             continue
 
-                        pal = player.pals.get(pal_id)
+                        if not player.pals:
+                            errors.append("Player has no pals")
+                            continue
+
+                        pal = player.pals.get(UUID(pal_id))
                         if not pal:
                             errors.append(
                                 f"Pal not found in player's pal box: {pal_id}"
                             )
                             continue
 
-                        pal_dto = PalDTO.from_pal(pal)
+                        pal_dto = PalDTO.from_dict(pal.model_dump())
                         source_info.update(
                             {
                                 "save_file_name": getattr(save_file, "name", "Unknown"),
@@ -424,7 +431,7 @@ async def clone_to_ups_handler(message: CloneToUpsMessage, ws: WebSocket):
 
                         pal = None
                         for slot_idx, gps_pal in gps_pals.items():
-                            if gps_pal.instance_id == pal_id:
+                            if are_equal_uuids(gps_pal.instance_id, pal_id):
                                 pal = gps_pal
                                 source_info["storage_slot"] = slot_idx
                                 break
@@ -433,7 +440,7 @@ async def clone_to_ups_handler(message: CloneToUpsMessage, ws: WebSocket):
                             errors.append(f"Pal not found in GPS: {pal_id}")
                             continue
 
-                        pal_dto = PalDTO.from_pal(pal)
+                        pal_dto = PalDTO.from_dict(pal.model_dump())
                         source_info.update(
                             {
                                 "save_file_name": getattr(save_file, "name", "Unknown"),
@@ -447,14 +454,16 @@ async def clone_to_ups_handler(message: CloneToUpsMessage, ws: WebSocket):
                             )
                             continue
 
-                        player = save_file.get_players().get(data.source_player_uid)
+                        player = save_file.get_players().get(
+                            UUID(data.source_player_uid)
+                        )
                         if not player or not player.dps:
                             errors.append(f"Player or DPS not found for: {pal_id}")
                             continue
 
                         pal: Optional[Pal] = None
                         for slot_idx, dps_pal in player.dps.items():
-                            if dps_pal.instance_id == pal_id:
+                            if are_equal_uuids(dps_pal.instance_id, pal_id):
                                 pal = dps_pal
                                 source_info["storage_slot"] = slot_idx
                                 break
@@ -474,10 +483,14 @@ async def clone_to_ups_handler(message: CloneToUpsMessage, ws: WebSocket):
                         )
 
                 if pal_dto:
+                    player_uid = source_info.get("player_uid")
+                    if player_uid and isinstance(player_uid, str):
+                        player_uid = UUID(player_uid)
+
                     UPSService.add_pal(
                         pal_dto=pal_dto,
                         source_save_file=source_info.get("save_file_name"),
-                        source_player_uid=source_info.get("player_uid"),
+                        source_player_uid=player_uid,
                         source_player_name=source_info.get("player_name"),
                         source_storage_type=source_info.get("storage_type"),
                         source_storage_slot=source_info.get("storage_slot"),
