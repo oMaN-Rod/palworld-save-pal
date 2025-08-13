@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import { Combobox, Input, TooltipButton } from '$components/ui';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import {
@@ -309,10 +308,6 @@
 
 	$effect(() => {
 		searchInput = upsState.filters.search;
-	});
-
-	onMount(async () => {
-		await upsState.loadAll();
 	});
 </script>
 

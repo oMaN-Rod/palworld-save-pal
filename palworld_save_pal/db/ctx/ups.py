@@ -461,6 +461,17 @@ class UPSService:
         if most_popular_char:
             stats.most_popular_character_id = most_popular_char
 
+        # Calculate storage size in MB
+        # Get all pal_data and calculate total size
+        all_pals = session.exec(select(UPSPalModel.pal_data)).all()
+        total_bytes = 0
+        for pal_data in all_pals:
+            # Convert pal_data dict to JSON string and get byte size
+            json_str = json.dumps(pal_data)
+            total_bytes += len(json_str.encode('utf-8'))
+        
+        stats.storage_size_mb = total_bytes / (1024 * 1024)  # Convert bytes to MB
+
         stats.last_updated = datetime.now(dt.timezone.utc)
         session.commit()
 

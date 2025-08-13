@@ -3,13 +3,7 @@
 	import PlayerEdit from './components/player/PlayerEdit.svelte';
 	import PalBox from './components/palbox/PalBox.svelte';
 	import { DebugButton, PlayerList } from '$components';
-	import {
-		getAppState,
-		getModalState,
-		getNavigationState,
-		getSocketState,
-		type Tab
-	} from '$states';
+	import { getAppState, getModalState, getNavigationState, type Tab } from '$states';
 	import { Tabs } from '@skeletonlabs/skeleton-svelte';
 	import { goto } from '$app/navigation';
 	import Guilds from './components/guilds/Guilds.svelte';

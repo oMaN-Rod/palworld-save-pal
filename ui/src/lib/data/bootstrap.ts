@@ -1,4 +1,5 @@
 import { send } from '$lib/utils/websocketUtils';
+import { getUpsState } from '$states/upsState.svelte';
 import { MessageType } from '$types';
 import { activeSkillsData } from './activeSkills.svelte';
 import { buildingsData } from './buildings.svelte';
@@ -28,6 +29,8 @@ export const bootstrap = async () => {
 	await buildingsData.reset();
 	await mapObjects.reset();
 	await labResearchData.reset();
+	const upsState = getUpsState();
+	await upsState.loadAll();
 
 	send(MessageType.GET_VERSION);
 	send(MessageType.SYNC_APP_STATE);
