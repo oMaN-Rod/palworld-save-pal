@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { Card, Combobox, Input, List, TooltipButton } from '$components/ui';
-	import { Save, X, Folder, Tag, FileText, Plus, Trash } from 'lucide-svelte';
+	import { Save, X, Folder, Tag, FileText, Plus, Trash, ReplaceAll } from 'lucide-svelte';
 	import { onMount } from 'svelte';
 	import { focusModal } from '$utils/modalUtils';
 	import { getAppState, getUpsState } from '$states';
 	import type { ImportToUpsModalResults, Pal, Player } from '$types';
 
 	let {
-		title = 'Import from Save File',
+		title = 'Save File 🡆 UPS',
 		message = '',
 		closeModal
 	}: {
@@ -145,6 +145,37 @@
 			sourceSlot: pal.storage_slot
 		});
 		selectedPals = [...selectedPals, palId];
+		selectedPalId = undefined;
+	}
+
+	function addAllPals() {
+		if (!selectedPlayerId) return;
+		let pals: Pal[] | undefined = undefined;
+		switch (sourceType) {
+			case 'pal_box':
+				pals = Object.values(appState.players[selectedPlayerId]?.pals || {});
+				break;
+			case 'gps':
+				pals = Object.values(appState.gps || {});
+				break;
+			case 'dps':
+				pals = Object.values(appState.players[selectedPlayerId]?.dps || {});
+				break;
+		}
+		if (!pals) return;
+		for (const pal of pals) {
+			if (selectedPals.includes(pal.instance_id)) continue;
+			result.push({
+				sourceType,
+				palId: pal.instance_id,
+				collectionId: selectedCollectionId,
+				tags: selectedTags,
+				notes,
+				playerId: selectedPlayerId,
+				sourceSlot: pal.storage_slot
+			});
+			selectedPals = [...selectedPals, pal.instance_id];
+		}
 		selectedPalId = undefined;
 	}
 
@@ -386,6 +417,13 @@
 							buttonClass="bg-primary-500 hover:bg-primary-800"
 						>
 							<Plus class="h-4 w-4" />
+						</TooltipButton>
+						<TooltipButton
+							popupLabel="Transfer all Pals"
+							onclick={() => addAllPals()}
+							buttonClass="bg-primary-500 hover:bg-primary-800"
+						>
+							<ReplaceAll class="h-4 w-4" />
 						</TooltipButton>
 					</div>
 					<List items={pals} idKey="instance_id">

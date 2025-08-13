@@ -15,17 +15,13 @@ export const addUpsPalHandler: WSMessageHandler = {
 	type: MessageType.ADD_UPS_PAL,
 	async handle(data: { pal: UPSPal }) {
 		const upsState = getUpsState();
-		const toastState = getToastState();
 
 		if (data.pal) {
 			upsState.pals = [data.pal, ...upsState.pals];
 			upsState.pagination.totalCount++;
 
-			toastState.add(
-				`Added ${data.pal.nickname || data.pal.character_id} to UPS`,
-				'Success',
-				'success'
-			);
+			// Refresh collections to update pal_count
+			await upsState.loadCollections();
 		}
 	}
 };
@@ -34,17 +30,22 @@ export const updateUpsPalHandler: WSMessageHandler = {
 	type: MessageType.UPDATE_UPS_PAL,
 	async handle(data: { pal: Partial<UPSPal> }) {
 		const upsState = getUpsState();
-		const toastState = getToastState();
 
 		if (data.pal && data.pal.id) {
 			const index = upsState.pals.findIndex((p) => p.id === data.pal.id);
 			if (index >= 0) {
+				// Check if collection_id was changed
+				const collectionChanged =
+					'collection_id' in data.pal &&
+					data.pal.collection_id !== upsState.pals[index].collection_id;
+
+				// Update the pal in place
 				Object.assign(upsState.pals[index], data.pal);
-				toastState.add(
-					`Updated ${data.pal.nickname || data.pal.character_id}`,
-					'Success',
-					'success'
-				);
+
+				// Refresh collections if collection assignment changed
+				if (collectionChanged) {
+					await upsState.loadCollections();
+				}
 			}
 		}
 	}
@@ -57,7 +58,9 @@ export const deleteUpsPalsHandler: WSMessageHandler = {
 		const toastState = getToastState();
 
 		if (data.deleted_count > 0) {
+			// Refresh the pals list and collections
 			await upsState.loadPals(true);
+			await upsState.loadCollections();
 
 			if (data.deleted_count === data.requested_count) {
 				toastState.add(
@@ -82,17 +85,13 @@ export const cloneUpsPalHandler: WSMessageHandler = {
 	type: MessageType.CLONE_UPS_PAL,
 	async handle(data: { original_pal_id: number; cloned_pal: UPSPal }) {
 		const upsState = getUpsState();
-		const toastState = getToastState();
 
 		if (data.cloned_pal) {
 			upsState.pals = [data.cloned_pal, ...upsState.pals];
 			upsState.pagination.totalCount++;
 
-			toastState.add(
-				`Cloned ${data.cloned_pal.nickname || data.cloned_pal.character_id}`,
-				'Success',
-				'success'
-			);
+			// Refresh collections to update pal_count
+			await upsState.loadCollections();
 		}
 	}
 };
@@ -106,16 +105,11 @@ export const exportUpsPalHandler: WSMessageHandler = {
 		destination_slot?: number;
 		error?: string;
 	}) {
-		const toastState = getToastState();
-
 		if (data.success) {
 			let message = `Exported pal to ${data.destination_type.toUpperCase()}`;
 			if (data.destination_slot !== undefined) {
 				message += ` slot ${data.destination_slot}`;
 			}
-			toastState.add(message, 'Success', 'success');
-		} else {
-			toastState.add(`Export failed: ${data.error || 'Unknown error'}`, 'Error', 'error');
 		}
 	}
 };
@@ -132,8 +126,10 @@ export const cloneToUpsHandler: WSMessageHandler = {
 		const toastState = getToastState();
 
 		if (data.success && data.cloned_count > 0) {
+			// Refresh the pals list to show new cloned pals and collections
 			await upsState.loadPals(true);
-			await upsState.loadStats();
+			await upsState.loadCollections();
+			await upsState.loadStats(); // Update stats after cloning
 
 			if (data.cloned_count === data.total_requested) {
 				toastState.add(
@@ -168,11 +164,8 @@ export const importToUpsHandler: WSMessageHandler = {
 			upsState.pals = [data.pal, ...upsState.pals];
 			upsState.pagination.totalCount++;
 
-			toastState.add(
-				`Imported ${data.pal.nickname || data.pal.character_id} to UPS`,
-				'Success',
-				'success'
-			);
+			// Refresh collections to update pal_count
+			await upsState.loadCollections();
 		} else {
 			toastState.add(`Import failed: ${data.error || 'Unknown error'}`, 'Error', 'error');
 		}
@@ -223,9 +216,11 @@ export const deleteUpsCollectionHandler: WSMessageHandler = {
 		const toastState = getToastState();
 
 		if (data.success) {
+			// Remove collection from list
 			const collection = upsState.collections.find((c) => c.id === data.collection_id);
 			upsState.collections = upsState.collections.filter((c) => c.id !== data.collection_id);
 
+			// Clear filter if it was set to this collection
 			if (upsState.filters.collectionId === data.collection_id) {
 				upsState.filters.collectionId = undefined;
 			}
@@ -256,6 +251,7 @@ export const createUpsTagHandler: WSMessageHandler = {
 		const toastState = getToastState();
 
 		if (data.tag) {
+			// Add or update tag in the list
 			const index = upsState.tags.findIndex((t) => t.id === data.tag.id);
 			if (index >= 0) {
 				upsState.tags[index] = data.tag;

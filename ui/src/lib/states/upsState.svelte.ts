@@ -213,6 +213,11 @@ class UPSStateClass {
 			if (index >= 0) {
 				Object.assign(this.pals[index], updates);
 			}
+
+			// Refresh collections if collection assignment changed
+			if ('collection_id' in updates) {
+				await this.loadCollections();
+			}
 		} catch (error) {
 			console.error('Error updating pal:', error);
 		}
@@ -223,8 +228,9 @@ class UPSStateClass {
 			await send(MessageType.CLONE_UPS_PAL, {
 				pal_id: palId
 			});
-
+			// Refresh pals list and collections after cloning
 			await this.loadPals(true);
+			await this.loadCollections();
 		} catch (error) {
 			console.error('Error cloning pal:', error);
 		}
@@ -240,7 +246,8 @@ class UPSStateClass {
 
 			this.selectedPals.clear();
 			await this.loadPals(true);
-			await this.loadStats();
+			await this.loadCollections(); // Update collections to refresh pal_count
+			await this.loadStats(); // Update stats after deletion
 		} catch (error) {
 			console.error('Error deleting pals:', error);
 		}
@@ -255,7 +262,8 @@ class UPSStateClass {
 			palIds.forEach((id) => this.selectedPals.delete(id));
 
 			await this.loadPals(true);
-			await this.loadStats();
+			await this.loadCollections(); // Update collections to refresh pal_count
+			await this.loadStats(); // Update stats after deletion
 		} catch (error) {
 			console.error('Error deleting pals:', error);
 		}
@@ -302,6 +310,7 @@ class UPSStateClass {
 			});
 
 			await this.loadPals(true);
+			await this.loadCollections(); // Update collections to refresh pal_count
 			await this.loadStats();
 		} catch (error) {
 			console.error('Error importing pal:', error);
@@ -327,6 +336,7 @@ class UPSStateClass {
 			});
 
 			await this.loadPals(true);
+			await this.loadCollections(); // Update collections to refresh pal_count
 			await this.loadStats();
 		} catch (error) {
 			console.error('Error cloning pals to UPS:', error);
@@ -344,6 +354,7 @@ class UPSStateClass {
 
 	selectAllPals(): void {
 		this.pals.forEach((pal) => this.selectedPals.add(pal.id));
+		this.selectedPals = new Set(this.selectedPals);
 	}
 
 	clearSelection(): void {

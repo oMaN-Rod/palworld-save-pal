@@ -56,7 +56,11 @@ class UPSService:
             session.commit()
             session.refresh(ups_pal)
 
+            # Update statistics and collection counts
             UPSService._update_stats(session)
+            UPSService._update_collection_counts(session)
+
+            # Log transfer
             UPSService._log_transfer(
                 session=session,
                 pal_id=ups_pal.id,
@@ -174,7 +178,9 @@ class UPSService:
 
             session.commit()
 
+            # Update statistics and collection counts
             UPSService._update_stats(session)
+            UPSService._update_collection_counts(session)
 
             return deleted_count
 
@@ -341,9 +347,7 @@ class UPSService:
 
             # Update statistics and collection counts
             UPSService._update_stats(session)
-
-            # Update statistics and collection counts
-            UPSService._update_stats(session)
+            UPSService._update_collection_counts(session)
 
             UPSService._log_transfer(
                 session=session,
@@ -405,9 +409,6 @@ class UPSService:
 
         stats.last_updated = datetime.now(dt.timezone.utc)
         session.commit()
-
-        # Update collection counts
-        UPSService._update_collection_counts(session)
 
     @staticmethod
     def _log_transfer(

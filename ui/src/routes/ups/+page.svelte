@@ -146,7 +146,7 @@
 
 		// @ts-ignore
 		const result = await modal.showModal<ImportToUpsModalResults[]>(ImportToUpsModal, {
-			title: 'Import from Save File',
+			title: 'Save File 🡆 UPS',
 			message: 'Select the source and options for importing Pals to UPS.'
 		});
 
@@ -167,12 +167,6 @@
 				);
 
 				await upsState.loadAll();
-
-				toast.add(
-					`Successfully started import from ${sourceType.toUpperCase()}`,
-					'Success',
-					'success'
-				);
 			} catch (error) {
 				console.error('Import failed:', error);
 				toast.add('Import failed. Please try again.', 'Error', 'error');
@@ -414,7 +408,7 @@
 			<!-- Filters and Search -->
 			<div class="border-surface-700 space-y-3 border-b p-4">
 				<!-- Search Bar -->
-				<div class="flex gap-2">
+				<div class="flex items-center gap-2">
 					<div class="relative flex-1">
 						<Search
 							class="text-surface-500 absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 focus:border-none"
