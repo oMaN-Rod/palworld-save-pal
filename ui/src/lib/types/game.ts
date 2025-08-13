@@ -806,3 +806,19 @@ export enum EntryState {
 	NEW = 'New',
 	DELETED = 'Deleted'
 }
+
+export interface CloneToUpsModalProps {
+	collectionId?: number;
+	tags: string[];
+	notes: string;
+}
+
+export interface ImportToUpsModalResults {
+	sourceType: 'pal_box' | 'gps' | 'dps';
+	sourceSlot?: number;
+	collectionId?: number;
+	tags: string[];
+	notes: string;
+	palId: string;
+	playerId?: string;
+}

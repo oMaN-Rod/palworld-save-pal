@@ -11,7 +11,8 @@
 		Bug,
 		Map,
 		FileHeart,
-		Download
+		Download,
+		Database
 	} from 'lucide-svelte';
 	import { page } from '$app/state';
 	import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
@@ -131,6 +132,16 @@
 			active="bg-secondary-500"
 		>
 			<FileHeart />
+		</Navigation.Tile>
+		<Navigation.Tile
+			label="UPS"
+			labelBase="text-xs"
+			title="Universal Pal Storage"
+			id="ups"
+			href="/ups"
+			active="bg-secondary-500"
+		>
+			<Database />
 		</Navigation.Tile>
 		{#if appState.settings.debug_mode}
 			<Navigation.Tile

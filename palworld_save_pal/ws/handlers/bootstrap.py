@@ -25,6 +25,7 @@ from palworld_save_pal.ws.handlers import (
     local_file_handler,
     work_suitability_handler,
     gps_handler,
+    ups_handler,
 )
 from palworld_save_pal.ws.messages import (
     AddDpsPalMessage,
@@ -73,6 +74,22 @@ from palworld_save_pal.ws.messages import (
     SelectSaveMessage,
     UpdateSettingsMessage,
     AddGpsPalMessage,
+    # UPS Messages
+    GetUpsPalsMessage,
+    AddUpsPalMessage,
+    UpdateUpsPalMessage,
+    DeleteUpsPalsMessage,
+    CloneUpsPalMessage,
+    CloneToUpsMessage,
+    ExportUpsPalMessage,
+    ImportToUpsMessage,
+    GetUpsCollectionsMessage,
+    CreateUpsCollectionMessage,
+    UpdateUpsCollectionMessage,
+    DeleteUpsCollectionMessage,
+    GetUpsTagsMessage,
+    CreateUpsTagMessage,
+    GetUpsStatsMessage,
 )
 
 if TYPE_CHECKING:
@@ -461,5 +478,126 @@ def bootstrap(dispatcher: "MessageDispatcher"):
         {
             "message_class": RenameWorldMessage,
             "handler_func": local_file_handler.rename_world_handler,
+        },
+    )
+
+    # UPS (Universal Pal Storage) Handlers
+    dispatcher.register_handler(
+        MessageType.GET_UPS_PALS.value,
+        {
+            "message_class": GetUpsPalsMessage,
+            "handler_func": ups_handler.get_ups_pals_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.ADD_UPS_PAL.value,
+        {
+            "message_class": AddUpsPalMessage,
+            "handler_func": ups_handler.add_ups_pal_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.UPDATE_UPS_PAL.value,
+        {
+            "message_class": UpdateUpsPalMessage,
+            "handler_func": ups_handler.update_ups_pal_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.DELETE_UPS_PALS.value,
+        {
+            "message_class": DeleteUpsPalsMessage,
+            "handler_func": ups_handler.delete_ups_pals_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.CLONE_UPS_PAL.value,
+        {
+            "message_class": CloneUpsPalMessage,
+            "handler_func": ups_handler.clone_ups_pal_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.CLONE_TO_UPS.value,
+        {
+            "message_class": CloneToUpsMessage,
+            "handler_func": ups_handler.clone_to_ups_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.EXPORT_UPS_PAL.value,
+        {
+            "message_class": ExportUpsPalMessage,
+            "handler_func": ups_handler.export_ups_pal_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.IMPORT_TO_UPS.value,
+        {
+            "message_class": ImportToUpsMessage,
+            "handler_func": ups_handler.import_to_ups_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.GET_UPS_COLLECTIONS.value,
+        {
+            "message_class": GetUpsCollectionsMessage,
+            "handler_func": ups_handler.get_ups_collections_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.CREATE_UPS_COLLECTION.value,
+        {
+            "message_class": CreateUpsCollectionMessage,
+            "handler_func": ups_handler.create_ups_collection_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.UPDATE_UPS_COLLECTION.value,
+        {
+            "message_class": UpdateUpsCollectionMessage,
+            "handler_func": ups_handler.update_ups_collection_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.DELETE_UPS_COLLECTION.value,
+        {
+            "message_class": DeleteUpsCollectionMessage,
+            "handler_func": ups_handler.delete_ups_collection_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.GET_UPS_TAGS.value,
+        {
+            "message_class": GetUpsTagsMessage,
+            "handler_func": ups_handler.get_ups_tags_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.CREATE_UPS_TAG.value,
+        {
+            "message_class": CreateUpsTagMessage,
+            "handler_func": ups_handler.create_ups_tag_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.GET_UPS_STATS.value,
+        {
+            "message_class": GetUpsStatsMessage,
+            "handler_func": ups_handler.get_ups_stats_handler,
         },
     )

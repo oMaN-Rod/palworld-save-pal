@@ -13,7 +13,7 @@
 		labelTextClass: _labelTextClass = '',
 		label = '',
 		name = nanoid(),
-		value = $bindable(''),
+		value = $bindable(),
 		disabled = false,
 		error = false,
 		placeholder = 'Search...',
@@ -27,7 +27,7 @@
 		labelTextClass?: string;
 		label?: string;
 		name?: string;
-		value?: string | number;
+		value?: string | number | undefined;
 		disabled?: boolean;
 		error?: boolean;
 		placeholder?: string;
@@ -130,6 +130,17 @@
 			debounceSearch();
 		} else {
 			filteredOptions = options;
+		}
+	});
+
+	$effect(() => {
+		if (value === 'None' || value === '' || value === undefined) {
+			searchTerm = '';
+		} else {
+			const selectedOption = options.find((opt: SelectOption) => opt.value.toString() === value);
+			if (selectedOption) {
+				searchTerm = selectedOption.label;
+			}
 		}
 	});
 

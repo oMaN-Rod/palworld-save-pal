@@ -1,16 +1,23 @@
 <script lang="ts">
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { elementsData, palsData, presetsData } from '$lib/data';
-	import { getAppState, getModalState, getToastState } from '$states';
+	import { getAppState, getModalState, getToastState, getUpsState } from '$states';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import { Input, Tooltip, TooltipButton } from '$components/ui';
 	import {
 		NumberInputModal,
 		PalSelectModal,
 		PalPresetSelectModal,
-		FillPalsModal
+		FillPalsModal,
+		CloneToUpsModal
 	} from '$components/modals';
-	import { type ElementType, type Pal, type PalData, MessageType } from '$types';
+	import {
+		type ElementType,
+		type Pal,
+		type PalData,
+		MessageType,
+		type CloneToUpsModalProps
+	} from '$types';
 	import {
 		assetLoader,
 		debounce,
@@ -42,7 +49,8 @@
 		BicepsFlexed,
 		Bandage,
 		Play,
-		Info
+		Info,
+		Upload
 	} from 'lucide-svelte';
 	import { Card } from '$components/ui';
 	import { PalCard, PalBadge, PalContainerStats } from '$components';
@@ -59,6 +67,7 @@
 	const appState = getAppState();
 	const modal = getModalState();
 	const toast = getToastState();
+	const upsState = getUpsState();
 
 	let { ...additionalProps } = $props<{
 		[key: string]: any;
@@ -455,6 +464,74 @@
 		await clonePal(pal);
 	}
 
+	async function handleCloneToUps(pal: Pal) {
+		// @ts-ignore
+		const result = await modal.showModal<CloneToUpsModalProps>(CloneToUpsModal, {
+			title: 'Clone to UPS',
+			message: 'Clone this Pal to your Universal Pal Storage.',
+			pals: [pal]
+		});
+
+		if (!result) return;
+
+		const { collectionId, tags, notes } = result;
+
+		try {
+			await upsState.cloneToUps(
+				[pal.instance_id],
+				'pal_box',
+				appState.selectedPlayer?.uid,
+				collectionId,
+				tags.length > 0 ? tags : undefined,
+				notes || undefined
+			);
+
+			toast.add(`Successfully cloned ${pal.nickname || pal.name} to UPS`, 'Success', 'success');
+		} catch (error) {
+			console.error('Clone to UPS failed:', error);
+			toast.add('Clone to UPS failed. Please try again.', 'Error', 'error');
+		}
+	}
+
+	async function handleBulkCloneToUps() {
+		if (selectedPals.length === 0) return;
+
+		const palsToClone = selectedPals
+			.map((id) => appState.selectedPlayer?.pals?.[id])
+			.filter(Boolean) as Pal[];
+
+		if (palsToClone.length === 0) return;
+
+		// @ts-ignore
+		const result = await modal.showModal<CloneToUpsModalProps>(CloneToUpsModal, {
+			title: 'Clone to UPS',
+			message: `Clone ${palsToClone.length} selected Pals to your Universal Pal Storage.`,
+			pals: palsToClone
+		});
+
+		if (!result) return;
+
+		const { collectionId, tags, notes } = result;
+
+		try {
+			await upsState.cloneToUps(
+				selectedPals,
+				'pal_box',
+				appState.selectedPlayer?.uid,
+				collectionId,
+				tags.length > 0 ? tags : undefined,
+				notes || undefined
+			);
+
+			toast.add(`Successfully cloned ${palsToClone.length} Pals to UPS`, 'Success', 'success');
+
+			selectedPals = [];
+		} catch (error) {
+			console.error('Bulk clone to UPS failed:', error);
+			toast.add('Bulk clone to UPS failed. Please try again.', 'Error', 'error');
+		}
+	}
+
 	function handlePalSelect(pal: Pal, event: MouseEvent) {
 		if (!pal || pal.character_id === 'None') return;
 		if (event.ctrlKey || event.metaKey) {
@@ -677,6 +754,8 @@
 				onDelete={() => handleDeletePal(pal)}
 				onAdd={() => handleAddPal('party', index)}
 				onClone={() => handleClonePal(pal)}
+				onCloneToUps={() => handleCloneToUps(pal)}
+				showCloneToUps={true}
 			/>
 		{/each}
 	</div>
@@ -740,6 +819,11 @@
 					<Tooltip label="Apply preset to selected pal(s)">
 						<button class="btn hover:preset-tonal-secondary p-2" onclick={handleSelectPreset}>
 							<Play class="h-4 w-4" />
+						</button>
+					</Tooltip>
+					<Tooltip label="Clone selected pal(s) to UPS">
+						<button class="btn hover:preset-tonal-secondary p-2" onclick={handleBulkCloneToUps}>
+							<Upload class="h-4 w-4" />
 						</button>
 					</Tooltip>
 					<Tooltip label="Heal selected pal(s)">
@@ -986,6 +1070,7 @@
 								onDelete={() => handleDeletePal(item.pal)}
 								onAdd={() => handleAddPal('palbox', item.pal.storage_slot)}
 								onClone={() => handleClonePal(item.pal)}
+								onCloneToUps={() => handleCloneToUps(item.pal)}
 							/>
 						{/if}
 					{/each}

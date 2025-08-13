@@ -7,7 +7,7 @@
 	import { getAppState, getNavigationState } from '$states';
 	import { palsData } from '$lib/data';
 	import ContextMenu from '$components/ui/context-menu/ContextMenu.svelte';
-	import { Plus, ArchiveRestore, Trash, Copy } from 'lucide-svelte';
+	import { Plus, ArchiveRestore, Trash, Copy, Upload } from 'lucide-svelte';
 	import { assetLoader, calculateFilters } from '$utils';
 	import { staticIcons } from '$types/icons';
 
@@ -16,17 +16,21 @@
 		onMove: onMove,
 		onAdd,
 		onClone,
+		onCloneToUps,
 		onDelete,
-		selected = $bindable(new Set()),
-		onSelect
+		selected = $bindable([]),
+		onSelect,
+		showCloneToUps = true
 	} = $props<{
 		pal: Pal;
 		onMove: () => void;
 		onAdd: () => void;
 		onClone: () => void;
+		onCloneToUps?: () => void;
 		onDelete: () => void;
 		selected?: string[];
 		onSelect?: (pal: Pal, event: MouseEvent) => void;
+		showCloneToUps?: boolean;
 	}>();
 
 	const appState = getAppState();
@@ -57,11 +61,19 @@
 				}
 			];
 		}
-		return [
+
+		const items = [
 			{ label: 'Move to Party', onClick: onMove, icon: ArchiveRestore },
-			{ label: 'Clone Pal', onClick: onClone, icon: Copy },
-			{ label: 'Delete Pal', onClick: onDelete, icon: Trash }
+			{ label: 'Clone Pal', onClick: onClone, icon: Copy }
 		];
+
+		if (onCloneToUps && showCloneToUps) {
+			items.push({ label: 'Clone to UPS', onClick: onCloneToUps, icon: Upload });
+		}
+
+		items.push({ label: 'Delete Pal', onClick: onDelete, icon: Trash });
+
+		return items;
 	});
 
 	const genderIcon = $derived(assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${pal.gender}.webp`));

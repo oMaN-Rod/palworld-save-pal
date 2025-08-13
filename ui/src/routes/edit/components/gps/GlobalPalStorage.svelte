@@ -1,16 +1,23 @@
 <script lang="ts">
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { elementsData, palsData, presetsData } from '$lib/data';
-	import { getAppState, getModalState, getToastState } from '$states';
+	import { getAppState, getModalState, getToastState, getUpsState } from '$states';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import { Card, Input, Tooltip, TooltipButton } from '$components/ui';
 	import {
 		PalSelectModal,
 		FillPalsModal,
 		NumberInputModal,
-		PalPresetSelectModal
+		PalPresetSelectModal,
+		CloneToUpsModal
 	} from '$components/modals';
-	import { type ElementType, type Pal, type PalData, MessageType } from '$types';
+	import {
+		type ElementType,
+		type Pal,
+		type PalData,
+		type CloneToUpsModalProps,
+		MessageType
+	} from '$types';
 	import {
 		assetLoader,
 		debounce,
@@ -36,10 +43,12 @@
 		ReplaceAll,
 		CircleFadingPlus,
 		Info,
-		Play
+		Play,
+		Upload
 	} from 'lucide-svelte';
 	import { PalBadge, PalContainerStats } from '$components';
 	import { send } from '$lib/utils/websocketUtils';
+	import type { ValueChangeDetails } from '@zag-js/accordion';
 
 	const PALS_PER_PAGE = 30;
 	const TOTAL_SLOTS = 960;
@@ -51,6 +60,7 @@
 	const appState = getAppState();
 	const modal = getModalState();
 	const toast = getToastState();
+	const upsState = getUpsState();
 
 	let { ...additionalProps } = $props<{
 		[key: string]: any;
@@ -159,7 +169,7 @@
 			([_, pal]) => pal && pal.character_id !== 'None'
 		);
 		return gpsPals.map(([i, pal]) => {
-			const palData = palsData.getPalData(pal.character_key);
+			const palData = palsData.getByKey(pal.character_key);
 			return { id: pal.instance_id, index: i as unknown as number, pal, palData };
 		});
 	});
@@ -510,6 +520,74 @@
 		}
 	});
 
+	async function handleCloneToUps(pal: Pal) {
+		// @ts-ignore
+		const result = await modal.showModal<CloneToUpsModalProps>(CloneToUpsModal, {
+			title: 'Clone to UPS',
+			message: 'Clone this Pal to your Universal Pal Storage.',
+			pals: [pal]
+		});
+
+		if (!result) return;
+
+		const { collectionId, tags, notes } = result;
+
+		try {
+			await upsState.cloneToUps(
+				[pal.instance_id],
+				'gps',
+				undefined,
+				collectionId,
+				tags.length > 0 ? tags : undefined,
+				notes || undefined
+			);
+
+			toast.add(`Successfully cloned ${pal.nickname || pal.name} to UPS`, 'Success', 'success');
+		} catch (error) {
+			console.error('Clone to UPS failed:', error);
+			toast.add('Clone to UPS failed. Please try again.', 'Error', 'error');
+		}
+	}
+
+	async function handleBulkCloneToUps() {
+		if (selectedPals.length === 0) return;
+
+		const palsToClone = selectedPals
+			.map((id) => pals?.find((p) => p.id === id)?.pal)
+			.filter(Boolean) as Pal[];
+
+		if (palsToClone.length === 0) return;
+
+		// @ts-ignore
+		const result = await modal.showModal<CloneToUpsModalProps>(CloneToUpsModal, {
+			title: 'Clone to UPS',
+			message: `Clone ${palsToClone.length} selected Pals to your Universal Pal Storage.`,
+			pals: palsToClone
+		});
+
+		if (!result) return;
+
+		const { collectionId, tags, notes } = result;
+
+		try {
+			await upsState.cloneToUps(
+				selectedPals,
+				'gps',
+				undefined,
+				collectionId,
+				tags.length > 0 ? tags : undefined,
+				notes || undefined
+			);
+
+			toast.add(`Successfully cloned ${palsToClone.length} Pals to UPS`, 'Success', 'success');
+
+			selectedPals = [];
+		} catch (error) {
+			console.error('Bulk clone to UPS failed:', error);
+			toast.add('Bulk clone to UPS failed. Please try again.', 'Error', 'error');
+		}
+	}
+
 	async function addAllPalsGps() {
 		if (!appState.gps) return;
 		// @ts-ignore
@@ -559,6 +637,11 @@
 							<Play />
 						</button>
 					</Tooltip>
+					<Tooltip label="Clone selected pal(s) to UPS">
+						<button class="btn hover:preset-tonal-secondary p-2" onclick={handleBulkCloneToUps}>
+							<Upload />
+						</button>
+					</Tooltip>
 					<Tooltip label="Delete selected pal(s)">
 						<button class="btn hover:preset-tonal-secondary p-2" onclick={deleteSelectedPals}>
 							<Trash />
@@ -574,7 +657,11 @@
 					</Tooltip>
 				{/if}
 			</div>
-			<Accordion value={filterExpand} onValueChange={(e) => (filterExpand = e.value)} collapsible>
+			<Accordion
+				value={filterExpand}
+				onValueChange={(e: ValueChangeDetails) => (filterExpand = e.value)}
+				collapsible
+			>
 				<Accordion.Item
 					value="filter"
 					base="rounded-sm bg-surface-900"
@@ -771,6 +858,7 @@
 								onDelete={() => handleDeletePal(item.pal)}
 								onAdd={() => handleAddPal(item.index)}
 								onClone={() => handleClonePal(item.pal)}
+								onCloneToUps={() => handleCloneToUps(item.pal)}
 							/>
 						{/if}
 					{/each}

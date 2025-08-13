@@ -59,7 +59,24 @@ export enum MessageType {
 	ADD_GPS_PAL = 'add_gps_pal',
 	DELETE_GPS_PALS = 'delete_gps_pals',
 	UPDATE_GPS_PAL = 'update_gps_pal',
-	GET_GPS_PALS = 'get_gps_pals'
+	GET_GPS_PALS = 'get_gps_pals',
+
+	// UPS (Universal Pal Storage) Messages
+	GET_UPS_PALS = 'get_ups_pals',
+	ADD_UPS_PAL = 'add_ups_pal',
+	UPDATE_UPS_PAL = 'update_ups_pal',
+	DELETE_UPS_PALS = 'delete_ups_pals',
+	CLONE_UPS_PAL = 'clone_ups_pal',
+	CLONE_TO_UPS = 'clone_to_ups',
+	EXPORT_UPS_PAL = 'export_ups_pal',
+	IMPORT_TO_UPS = 'import_to_ups',
+	GET_UPS_COLLECTIONS = 'get_ups_collections',
+	CREATE_UPS_COLLECTION = 'create_ups_collection',
+	UPDATE_UPS_COLLECTION = 'update_ups_collection',
+	DELETE_UPS_COLLECTION = 'delete_ups_collection',
+	GET_UPS_TAGS = 'get_ups_tags',
+	CREATE_UPS_TAG = 'create_ups_tag',
+	GET_UPS_STATS = 'get_ups_stats'
 }
 
 interface UpdateSaveFileData {

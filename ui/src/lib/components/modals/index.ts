@@ -1,5 +1,7 @@
+import CloneToUpsModal from './clone-to-ups/CloneToUpsModal.svelte';
 import ConfirmModal from './confirm/ConfirmModal.svelte';
 import FillPalsModal from './fill-pals/FillPalsModal.svelte';
+import ImportToUpsModal from './import-to-ups/ImportToUpsModal.svelte';
 import ItemSelectModal from './item-select/ItemSelectModal.svelte';
 import LearnedSkillSelectModal from './learned-skill-select/LearnedSkillSelectModal.svelte';
 import MultiSkillSelectModal from './multi-skill-select/MultiSkillSelectModal.svelte';
@@ -13,8 +15,10 @@ import SkillSelectModal from './skill-select/SkillSelectModal.svelte';
 import TextInputModal from './text-input/TextInputModal.svelte';
 
 export {
+	CloneToUpsModal,
 	ConfirmModal,
 	FillPalsModal,
+	ImportToUpsModal,
 	ItemSelectModal,
 	LearnedSkillSelectModal,
 	MultiSkillSelectModal,

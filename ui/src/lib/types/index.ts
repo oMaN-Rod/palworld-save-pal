@@ -3,4 +3,5 @@ export * from './select';
 export * from './settings';
 export * from './toast';
 export * from './ui';
+export * from './ups';
 export * from './ws';

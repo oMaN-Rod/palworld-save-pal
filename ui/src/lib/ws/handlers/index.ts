@@ -5,6 +5,7 @@ import { palHandlers } from './palHandler';
 import { playerHandlers } from './playerHandler';
 import { presetHandlers } from './presetHandler';
 import { saveFileHandlers } from './saveFileHandler';
+import { upsHandlers } from './upsHandler';
 
 export const handlers = [
 	...appStateHandlers,
@@ -13,5 +14,6 @@ export const handlers = [
 	...playerHandlers,
 	...guildHandlers,
 	...presetHandlers,
-	...gpsHandlers
+	...gpsHandlers,
+	...upsHandlers
 ];

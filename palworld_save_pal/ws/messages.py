@@ -34,6 +34,23 @@ class MessageType(str, Enum):
     HEAL_PALS = "heal_pals"
     MOVE_PAL = "move_pal"
 
+    # UPS (Universal Pal Storage) Management
+    GET_UPS_PALS = "get_ups_pals"
+    ADD_UPS_PAL = "add_ups_pal"
+    UPDATE_UPS_PAL = "update_ups_pal"
+    DELETE_UPS_PALS = "delete_ups_pals"
+    CLONE_UPS_PAL = "clone_ups_pal"
+    CLONE_TO_UPS = "clone_to_ups"
+    EXPORT_UPS_PAL = "export_ups_pal"
+    IMPORT_TO_UPS = "import_to_ups"
+    GET_UPS_COLLECTIONS = "get_ups_collections"
+    CREATE_UPS_COLLECTION = "create_ups_collection"
+    UPDATE_UPS_COLLECTION = "update_ups_collection"
+    DELETE_UPS_COLLECTION = "delete_ups_collection"
+    GET_UPS_TAGS = "get_ups_tags"
+    CREATE_UPS_TAG = "create_ups_tag"
+    GET_UPS_STATS = "get_ups_stats"
+
     # Player Management
     DELETE_PLAYER = "delete_player"
     SET_TECHNOLOGY_DATA = "set_technology_data"
@@ -415,3 +432,160 @@ class DeleteGpsPalsMessage(BaseMessage):
 class RenameWorldMessage(BaseMessage):
     type: str = MessageType.RENAME_WORLD.value
     data: str
+
+
+# UPS (Universal Pal Storage) Message Classes
+
+class GetUpsPalsData(BaseModel):
+    offset: int = 0
+    limit: int = 30
+    search_query: Optional[str] = None
+    character_id_filter: Optional[str] = None
+    collection_id: Optional[int] = None
+    tags: Optional[List[str]] = None
+    sort_by: str = "created_at"
+    sort_order: str = "desc"
+
+
+class GetUpsPalsMessage(BaseMessage):
+    type: str = MessageType.GET_UPS_PALS.value
+    data: GetUpsPalsData
+
+
+class AddUpsPalData(BaseModel):
+    pal_dto: PalDTO
+    source_save_file: Optional[str] = None
+    source_player_uid: Optional[UUID] = None
+    source_player_name: Optional[str] = None
+    source_storage_type: Optional[str] = None
+    source_storage_slot: Optional[int] = None
+    collection_id: Optional[int] = None
+    tags: Optional[List[str]] = None
+    notes: Optional[str] = None
+
+
+class AddUpsPalMessage(BaseMessage):
+    type: str = MessageType.ADD_UPS_PAL.value
+    data: AddUpsPalData
+
+
+class UpdateUpsPalData(BaseModel):
+    pal_id: int
+    updates: Dict[str, Any]
+
+
+class UpdateUpsPalMessage(BaseMessage):
+    type: str = MessageType.UPDATE_UPS_PAL.value
+    data: UpdateUpsPalData
+
+
+class DeleteUpsPalsData(BaseModel):
+    pal_ids: List[int]
+
+
+class DeleteUpsPalsMessage(BaseMessage):
+    type: str = MessageType.DELETE_UPS_PALS.value
+    data: DeleteUpsPalsData
+
+
+class CloneUpsPalData(BaseModel):
+    pal_id: int
+
+
+class CloneUpsPalMessage(BaseMessage):
+    type: str = MessageType.CLONE_UPS_PAL.value
+    data: CloneUpsPalData
+
+
+class ExportUpsPalData(BaseModel):
+    pal_id: int
+    destination_type: str  # "pal_box", "gps", "dps"
+    destination_player_uid: Optional[UUID] = None
+    destination_slot: Optional[int] = None
+
+
+class ExportUpsPalMessage(BaseMessage):
+    type: str = MessageType.EXPORT_UPS_PAL.value
+    data: ExportUpsPalData
+
+
+class CloneToUpsData(BaseModel):
+    pal_ids: List[str]  # Instance IDs of Pals to clone
+    source_type: str  # "pal_box", "gps", "dps"
+    source_player_uid: Optional[str] = None  # Required for pal_box and dps
+    collection_id: Optional[int] = None
+    tags: Optional[List[str]] = None
+    notes: Optional[str] = None
+
+
+class CloneToUpsMessage(BaseMessage):
+    type: str = MessageType.CLONE_TO_UPS.value
+    data: CloneToUpsData
+
+
+class ImportToUpsData(BaseModel):
+    source_type: str  # "pal_box", "gps", "dps"
+    source_pal_id: Optional[UUID] = None  # For pal_box
+    source_slot: Optional[int] = None     # For gps/dps
+    source_player_uid: Optional[UUID] = None
+    collection_id: Optional[int] = None
+    tags: Optional[List[str]] = None
+    notes: Optional[str] = None
+
+
+class ImportToUpsMessage(BaseMessage):
+    type: str = MessageType.IMPORT_TO_UPS.value
+    data: ImportToUpsData
+
+
+class GetUpsCollectionsMessage(BaseMessage):
+    type: str = MessageType.GET_UPS_COLLECTIONS.value
+
+
+class CreateUpsCollectionData(BaseModel):
+    name: str
+    description: Optional[str] = None
+    color: Optional[str] = None
+
+
+class CreateUpsCollectionMessage(BaseMessage):
+    type: str = MessageType.CREATE_UPS_COLLECTION.value
+    data: CreateUpsCollectionData
+
+
+class UpdateUpsCollectionData(BaseModel):
+    collection_id: int
+    updates: Dict[str, Any]
+
+
+class UpdateUpsCollectionMessage(BaseMessage):
+    type: str = MessageType.UPDATE_UPS_COLLECTION.value
+    data: UpdateUpsCollectionData
+
+
+class DeleteUpsCollectionData(BaseModel):
+    collection_id: int
+
+
+class DeleteUpsCollectionMessage(BaseMessage):
+    type: str = MessageType.DELETE_UPS_COLLECTION.value
+    data: DeleteUpsCollectionData
+
+
+class GetUpsTagsMessage(BaseMessage):
+    type: str = MessageType.GET_UPS_TAGS.value
+
+
+class CreateUpsTagData(BaseModel):
+    name: str
+    description: Optional[str] = None
+    color: Optional[str] = None
+
+
+class CreateUpsTagMessage(BaseMessage):
+    type: str = MessageType.CREATE_UPS_TAG.value
+    data: CreateUpsTagData
+
+
+class GetUpsStatsMessage(BaseMessage):
+    type: str = MessageType.GET_UPS_STATS.value
