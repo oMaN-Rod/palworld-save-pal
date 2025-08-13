@@ -26,7 +26,8 @@
 		ImportToUpsModal,
 		EditTagsModal,
 		AddToCollectionModal,
-		ExportPalModal
+		ExportPalModal,
+		NukeUpsConfirmModal
 	} from '$components/modals';
 	import { cn } from '$theme';
 	import { getUpsState, getModalState, getAppState, getToastState } from '$states';
@@ -42,6 +43,7 @@
 	import UPSTagsPanel from './components/UPSTagsPanel.svelte';
 	import UPSStatsPanel from './components/UPSStatsPanel.svelte';
 	import UPSPalList from './components/UPSPalList.svelte';
+	import Nuke from '$components/ui/icons/Nuke.svelte';
 
 	const VISIBLE_PAGE_BUBBLES = 16;
 
@@ -272,6 +274,39 @@
 		}
 	}
 
+	async function handleNukeUps() {
+		try {
+			// @ts-ignore
+			const confirmed = await modal.showModal<boolean>(NukeUpsConfirmModal, {
+				totalPals: upsState.pagination.totalCount
+			});
+
+			if (!confirmed) {
+				return;
+			}
+
+			// Perform the nuke operation
+			const result = await upsState.nukeAllPals();
+
+			if (result.success) {
+				if (result.deletedCount > 0) {
+					toast.add(
+						`Successfully deleted ${result.deletedCount.toLocaleString()} pals from UPS`,
+						'Success',
+						'success'
+					);
+				} else {
+					toast.add('UPS was already empty', 'Info', 'info');
+				}
+			} else {
+				toast.add('Failed to nuke UPS. Please try again.', 'Error', 'error');
+			}
+		} catch (error) {
+			console.error('Error during nuke operation:', error);
+			toast.add('An error occurred during the nuke operation. Please try again.', 'Error', 'error');
+		}
+	}
+
 	$effect(() => {
 		searchInput = upsState.filters.search;
 	});
@@ -420,6 +455,17 @@
 							inputClass="pl-10"
 						/>
 					</div>
+					{#if upsState.pagination.totalCount > 0}
+						<TooltipButton popupLabel="Nuke UPS - Delete ALL pals">
+							<button
+								class="text-error-500 hover:bg-error-500/20 hover:text-error-600 h-8 w-8 rounded-md p-2 transition-colors"
+								onclick={handleNukeUps}
+								disabled={upsState.loading}
+							>
+								<Nuke size={16} />
+							</button>
+						</TooltipButton>
+					{/if}
 					{#if upsState.hasSelectedPals}
 						<TooltipButton
 							onclick={handleBulkEditTags}

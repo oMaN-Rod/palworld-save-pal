@@ -8,6 +8,7 @@ import ImportToUpsModal from './import-to-ups/ImportToUpsModal.svelte';
 import ItemSelectModal from './item-select/ItemSelectModal.svelte';
 import LearnedSkillSelectModal from './learned-skill-select/LearnedSkillSelectModal.svelte';
 import MultiSkillSelectModal from './multi-skill-select/MultiSkillSelectModal.svelte';
+import NukeUpsConfirmModal from './nuke-ups-confirm/NukeUpsConfirmModal.svelte';
 import NumberInputModal from './number-input/NumberInputModal.svelte';
 import NumberSliderModal from './number-slider/NumberSliderModal.svelte';
 import PresetConfigModal from './pal-preset-config/PalPresetConfigModal.svelte';
@@ -28,6 +29,7 @@ export {
 	ItemSelectModal,
 	LearnedSkillSelectModal,
 	MultiSkillSelectModal,
+	NukeUpsConfirmModal,
 	NumberInputModal,
 	NumberSliderModal,
 	PalPresetSelectModal,

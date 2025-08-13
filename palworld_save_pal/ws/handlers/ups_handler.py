@@ -22,6 +22,7 @@ from palworld_save_pal.ws.messages import (
     GetUpsTagsMessage,
     CreateUpsTagMessage,
     GetUpsStatsMessage,
+    NukeUpsPalsMessage,
     MessageType,
 )
 from palworld_save_pal.ws.utils import build_response
@@ -889,5 +890,38 @@ async def get_ups_stats_handler(_: GetUpsStatsMessage, ws: WebSocket):
         logger.exception("Error getting UPS stats: %s", str(e))
         error_response = build_response(
             MessageType.ERROR, {"message": f"Failed to get UPS stats: {str(e)}"}
+        )
+        await ws.send_json(error_response)
+
+
+async def nuke_ups_pals_handler(message: NukeUpsPalsMessage, ws: WebSocket):
+    """Nuke (delete) ALL pals from UPS storage."""
+    try:
+        # Get current count before deletion for response
+        _, total_count = UPSService.get_pals(limit=1)
+
+        if total_count == 0:
+            response_data = {
+                "success": True,
+                "deleted_count": 0,
+                "message": "UPS is already empty",
+            }
+        else:
+            # Perform the nuke operation
+            deleted_count = UPSService.nuke_all_pals()
+
+            response_data = {
+                "success": True,
+                "deleted_count": deleted_count,
+                "message": f"Successfully deleted {deleted_count} pals from UPS",
+            }
+
+        response = build_response(MessageType.NUKE_UPS_PALS, response_data)
+        await ws.send_json(response)
+
+    except Exception as e:
+        logger.exception("Error nuking UPS pals: %s", str(e))
+        error_response = build_response(
+            MessageType.ERROR, {"message": f"Failed to nuke UPS pals: {str(e)}"}
         )
         await ws.send_json(error_response)

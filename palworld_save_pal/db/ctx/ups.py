@@ -441,6 +441,70 @@ class UPSService:
         session.add(log_entry)
 
     @staticmethod
+    def nuke_all_pals() -> int:
+        """Delete ALL pals from UPS storage.
+        
+        Returns:
+            int: Number of pals deleted
+        """
+        with Session(engine) as session:
+            # Get count before deletion for logging
+            total_count = session.exec(select(func.count(UPSPalModel.id))).one()
+            
+            if total_count == 0:
+                return 0
+            
+            # Log the nuke operation before deletion
+            logger.warning(f"NUKE OPERATION: Deleting ALL {total_count} pals from UPS storage")
+            
+            # Get all pal IDs for logging individual deletions
+            all_pal_ids = session.exec(select(UPSPalModel.id)).all()
+            
+            # Log individual deletions
+            for pal_id in all_pal_ids:
+                UPSService._log_transfer(
+                    session=session,
+                    pal_id=pal_id,
+                    operation_type="nuke_delete",
+                    source_type="ups",
+                    success=True,
+                )
+            
+            # Delete all pals in batches for better performance
+            deleted_count = 0
+            batch_size = 100
+            
+            while True:
+                # Get a batch of pals to delete
+                batch_query = select(UPSPalModel).limit(batch_size)
+                batch_pals = session.exec(batch_query).all()
+                
+                if not batch_pals:
+                    break
+                
+                # Delete this batch
+                for pal in batch_pals:
+                    session.delete(pal)
+                    deleted_count += 1
+                
+                # Commit this batch
+                session.commit()
+            
+            # Reset all collection pal_counts to 0
+            collections = session.exec(select(UPSCollectionModel)).all()
+            for collection in collections:
+                collection.pal_count = 0
+                collection.updated_at = datetime.utcnow()
+            
+            # Update global statistics
+            UPSService._update_stats(session)
+            
+            session.commit()
+            
+            logger.warning(f"NUKE OPERATION COMPLETED: Deleted {deleted_count} pals from UPS storage")
+            return deleted_count
+
+    @staticmethod
     def _update_collection_counts(session: Session):
         """Update pal_count for all collections."""
         collections = session.exec(select(UPSCollectionModel)).all()

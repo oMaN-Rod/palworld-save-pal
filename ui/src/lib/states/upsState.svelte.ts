@@ -9,7 +9,7 @@ import {
 	type UPSTag,
 	MessageType
 } from '$lib/types';
-import { isReady, send } from '$lib/utils/websocketUtils';
+import { isReady, send, sendAndWait } from '$lib/utils/websocketUtils';
 
 export interface UPSState {
 	pals: UPSPal[];
@@ -340,6 +340,38 @@ class UPSStateClass {
 			await this.loadStats();
 		} catch (error) {
 			console.error('Error cloning pals to UPS:', error);
+		}
+	}
+
+	async nukeAllPals(): Promise<{ success: boolean; deletedCount: number; message: string }> {
+		try {
+			this.loading = true;
+
+			const response: {
+				success: boolean;
+				deleted_count: number;
+				message: string;
+			} = await sendAndWait(MessageType.NUKE_UPS_PALS, {});
+
+			// Clear all local state after successful nuke
+			this.pals = [];
+			this.selectedPals.clear();
+			this.pagination = { ...DEFAULT_PAGINATION };
+			this.filters = { ...DEFAULT_FILTERS };
+
+			// Refresh all data to ensure consistency
+			await this.loadAll();
+
+			return {
+				success: response.success || false,
+				deletedCount: response.deleted_count || 0,
+				message: response.message || 'Operation completed'
+			};
+		} catch (error) {
+			console.error('Error nuking UPS pals:', error);
+			throw error;
+		} finally {
+			this.loading = false;
 		}
 	}
 

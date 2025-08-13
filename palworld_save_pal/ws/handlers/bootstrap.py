@@ -90,6 +90,7 @@ from palworld_save_pal.ws.messages import (
     GetUpsTagsMessage,
     CreateUpsTagMessage,
     GetUpsStatsMessage,
+    NukeUpsPalsMessage,
 )
 
 if TYPE_CHECKING:
@@ -599,5 +600,13 @@ def bootstrap(dispatcher: "MessageDispatcher"):
         {
             "message_class": GetUpsStatsMessage,
             "handler_func": ups_handler.get_ups_stats_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.NUKE_UPS_PALS.value,
+        {
+            "message_class": NukeUpsPalsMessage,
+            "handler_func": ups_handler.nuke_ups_pals_handler,
         },
     )

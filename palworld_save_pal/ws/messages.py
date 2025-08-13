@@ -50,6 +50,7 @@ class MessageType(str, Enum):
     GET_UPS_TAGS = "get_ups_tags"
     CREATE_UPS_TAG = "create_ups_tag"
     GET_UPS_STATS = "get_ups_stats"
+    NUKE_UPS_PALS = "nuke_ups_pals"
 
     # Player Management
     DELETE_PLAYER = "delete_player"
@@ -589,3 +590,7 @@ class CreateUpsTagMessage(BaseMessage):
 
 class GetUpsStatsMessage(BaseMessage):
     type: str = MessageType.GET_UPS_STATS.value
+
+
+class NukeUpsPalsMessage(BaseMessage):
+    type: str = MessageType.NUKE_UPS_PALS.value

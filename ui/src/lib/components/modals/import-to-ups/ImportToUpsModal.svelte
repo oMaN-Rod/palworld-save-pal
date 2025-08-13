@@ -426,7 +426,7 @@
 							<ReplaceAll class="h-4 w-4" />
 						</TooltipButton>
 					</div>
-					<List items={pals} idKey="instance_id">
+					<List items={pals} idKey="instance_id" baseClass="max-h-[435px]">
 						{#snippet listItem(pal)}
 							{pal.nickname || pal.character_key || pal.character_id}
 						{/snippet}
