@@ -110,9 +110,8 @@ class UPSService:
 
             if tags:
                 for tag in tags:
-                    conditions.append(
-                        UPSPalModel.tags.op("JSON_CONTAINS")(json.dumps([tag]))
-                    )
+                    tag_json = json.dumps(tag)
+                    conditions.append(UPSPalModel.tags.like(f"%{tag_json}%"))
 
             if conditions:
                 query = query.where(and_(*conditions))
@@ -132,11 +131,11 @@ class UPSService:
             query = query.offset(offset).limit(limit)
 
             pals = session.exec(query).all()
-            
+
             # Create detached copies with all necessary attributes
             for pal in pals:
                 session.expunge(pal)
-            
+
             return pals, total_count
 
     @staticmethod
@@ -222,7 +221,7 @@ class UPSService:
             session.add(collection)
             session.commit()
             session.refresh(collection)
-            
+
             # Create a detached copy with all necessary attributes
             session.expunge(collection)
             return collection
@@ -233,11 +232,11 @@ class UPSService:
             collections = session.exec(
                 select(UPSCollectionModel).order_by(UPSCollectionModel.name)
             ).all()
-            
+
             # Create detached copies with all necessary attributes
             for collection in collections:
                 session.expunge(collection)
-            
+
             return collections
 
     @staticmethod
@@ -256,7 +255,7 @@ class UPSService:
             collection.updated_at = datetime.now(dt.timezone.utc)
             session.commit()
             session.refresh(collection)
-            
+
             # Create a detached copy with all necessary attributes
             session.expunge(collection)
             return collection
@@ -283,11 +282,11 @@ class UPSService:
     def get_available_tags() -> List[UPSTagModel]:
         with Session(engine) as session:
             tags = session.exec(select(UPSTagModel).order_by(UPSTagModel.name)).all()
-            
+
             # Create detached copies with all necessary attributes
             for tag in tags:
                 session.expunge(tag)
-            
+
             return tags
 
     @staticmethod
@@ -307,7 +306,7 @@ class UPSService:
                 existing_tag.updated_at = datetime.now(dt.timezone.utc)
                 session.commit()
                 session.refresh(existing_tag)
-                
+
                 # Create a detached copy with all necessary attributes
                 session.expunge(existing_tag)
                 return existing_tag
@@ -317,7 +316,7 @@ class UPSService:
                 session.add(tag)
                 session.commit()
                 session.refresh(tag)
-                
+
                 # Create a detached copy with all necessary attributes
                 session.expunge(tag)
                 return tag
@@ -335,7 +334,7 @@ class UPSService:
 
             UPSService._update_stats(session)
             session.refresh(stats)
-            
+
             # Create a detached copy with all necessary attributes
             session.expunge(stats)
             return stats
@@ -468,8 +467,8 @@ class UPSService:
         for pal_data in all_pals:
             # Convert pal_data dict to JSON string and get byte size
             json_str = json.dumps(pal_data)
-            total_bytes += len(json_str.encode('utf-8'))
-        
+            total_bytes += len(json_str.encode("utf-8"))
+
         stats.storage_size_mb = total_bytes / (1024 * 1024)  # Convert bytes to MB
 
         stats.last_updated = datetime.now(dt.timezone.utc)
@@ -508,23 +507,25 @@ class UPSService:
     @staticmethod
     def nuke_all_pals() -> int:
         """Delete ALL pals from UPS storage.
-        
+
         Returns:
             int: Number of pals deleted
         """
         with Session(engine) as session:
             # Get count before deletion for logging
             total_count = session.exec(select(func.count(UPSPalModel.id))).one()
-            
+
             if total_count == 0:
                 return 0
-            
+
             # Log the nuke operation before deletion
-            logger.warning(f"NUKE OPERATION: Deleting ALL {total_count} pals from UPS storage")
-            
+            logger.warning(
+                f"NUKE OPERATION: Deleting ALL {total_count} pals from UPS storage"
+            )
+
             # Get all pal IDs for logging individual deletions
             all_pal_ids = session.exec(select(UPSPalModel.id)).all()
-            
+
             # Log individual deletions
             for pal_id in all_pal_ids:
                 UPSService._log_transfer(
@@ -534,39 +535,41 @@ class UPSService:
                     source_type="ups",
                     success=True,
                 )
-            
+
             # Delete all pals in batches for better performance
             deleted_count = 0
             batch_size = 100
-            
+
             while True:
                 # Get a batch of pals to delete
                 batch_query = select(UPSPalModel).limit(batch_size)
                 batch_pals = session.exec(batch_query).all()
-                
+
                 if not batch_pals:
                     break
-                
+
                 # Delete this batch
                 for pal in batch_pals:
                     session.delete(pal)
                     deleted_count += 1
-                
+
                 # Commit this batch
                 session.commit()
-            
+
             # Reset all collection pal_counts to 0
             collections = session.exec(select(UPSCollectionModel)).all()
             for collection in collections:
                 collection.pal_count = 0
                 collection.updated_at = datetime.utcnow()
-            
+
             # Update global statistics
             UPSService._update_stats(session)
-            
+
             session.commit()
-            
-            logger.warning(f"NUKE OPERATION COMPLETED: Deleted {deleted_count} pals from UPS storage")
+
+            logger.warning(
+                f"NUKE OPERATION COMPLETED: Deleted {deleted_count} pals from UPS storage"
+            )
             return deleted_count
 
     @staticmethod
