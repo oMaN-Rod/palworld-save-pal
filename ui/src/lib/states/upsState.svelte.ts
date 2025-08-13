@@ -390,7 +390,7 @@ class UPSStateClass {
 	}
 
 	clearSelection(): void {
-		this.selectedPals.clear();
+		this.selectedPals = new Set();
 	}
 
 	updateSearch(search: string): void {

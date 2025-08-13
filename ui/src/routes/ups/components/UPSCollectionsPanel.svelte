@@ -99,8 +99,8 @@
 		>
 			<Folder class="h-4 w-4" />
 			<span class="flex-1">All Pals</span>
-			<span class="text-surface-500 text-xs">
-				{upsState.pagination.totalCount}
+			<span class="text-surface-200 text-xs">
+				{upsState.stats?.total_pals || 0}
 			</span>
 		</button>
 	</div>
@@ -131,7 +131,7 @@
 									style="background-color: {collection.color || '#6366f1'}"
 								></div>
 								<span class="flex-1 truncate">{collection.name}</span>
-								<span class="text-surface-500 text-xs">
+								<span class="text-surface-200 text-xs">
 									{collection.pal_count}
 								</span>
 							</button>
@@ -195,7 +195,7 @@
 									style="background-color: {collection.color || '#6366f1'}"
 								></div>
 								<span class="flex-1 truncate">{collection.name}</span>
-								<span class="text-surface-500 text-xs">
+								<span class="text-surface-200 text-xs">
 									{collection.pal_count}
 								</span>
 							</button>
