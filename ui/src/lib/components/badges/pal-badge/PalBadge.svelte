@@ -39,7 +39,7 @@
 	const buttonClass = $derived(
 		cn(
 			'outline-surface-600 xl:h-18 xl:w-18 h-16 w-16 rounded-full outline outline-2 outline-offset-2',
-			selected.includes(pal.instance_id)
+			selected.includes(pal.instance_id) || selected.includes(pal.id?.toString() || '')
 				? 'ring-4 ring-secondary-500'
 				: 'hover:ring-4 hover:ring-secondary-500'
 		)

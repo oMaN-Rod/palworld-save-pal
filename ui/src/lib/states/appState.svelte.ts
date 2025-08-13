@@ -51,6 +51,53 @@ class AppState {
 
 	initData() {}
 
+	async saveUpspalChanges(pal: Pal) {
+		if (!pal.__ups_id) {
+			throw new Error('UPS pal ID not found');
+		}
+
+		// Create the updates object from pal data
+		const updates = {
+			nickname: pal.nickname,
+			level: pal.level,
+			pal_data: {
+				instance_id: pal.instance_id,
+				character_id: pal.character_id,
+				nickname: pal.nickname,
+				level: pal.level,
+				exp: pal.exp,
+				rank: pal.rank,
+				rank_hp: pal.rank_hp,
+				rank_attack: pal.rank_attack,
+				rank_defense: pal.rank_defense,
+				rank_craftspeed: pal.rank_craftspeed,
+				talent_hp: pal.talent_hp,
+				talent_shot: pal.talent_shot,
+				talent_defense: pal.talent_defense,
+				hp: pal.hp,
+				max_hp: pal.max_hp,
+				sanity: pal.sanity,
+				stomach: pal.stomach,
+				is_lucky: pal.is_lucky,
+				is_boss: pal.is_boss,
+				gender: pal.gender,
+				is_tower: pal.is_tower,
+				learned_skills: pal.learned_skills,
+				active_skills: pal.active_skills,
+				passive_skills: pal.passive_skills,
+				work_suitability: pal.work_suitability,
+				is_sick: pal.is_sick,
+				friendship_point: pal.friendship_point,
+			}
+		};
+
+		// Send UPDATE_UPS_PAL message
+		await sendAndWait(MessageType.UPDATE_UPS_PAL, {
+			pal_id: pal.__ups_id,
+			updates: updates
+		});
+	}
+
 	async saveState() {
 		let modifiedData: ModifiedData = {};
 		let modifiedPals: [string, Pal][] = [];
@@ -58,6 +105,17 @@ class AppState {
 		let modifiedGspPals: [string, Pal][] = [];
 		let modifiedPlayers: [string, Player][] = [];
 		let modifiedGuilds: [string, GuildDTO][] = [];
+
+		// Handle UPS pal modifications
+		if (this.selectedPal && this.selectedPal.state === EntryState.MODIFIED && this.selectedPal.__ups_source) {
+			try {
+				// Save UPS pal changes back to UPS
+				await this.saveUpspalChanges(this.selectedPal);
+				this.selectedPal.state = EntryState.NONE;
+			} catch (error) {
+				console.error('Failed to save UPS pal changes:', error);
+			}
+		}
 
 		for (const player of Object.values(this.players)) {
 			if (player.state === EntryState.MODIFIED) {
@@ -73,7 +131,10 @@ class AppState {
 			if (player.pals) {
 				for (const pal of Object.values(player.pals)) {
 					if (pal.state === EntryState.MODIFIED) {
-						modifiedPals = [...modifiedPals, [pal.instance_id, pal]];
+						// Skip UPS pals - they're handled separately
+						if (!pal.__ups_source) {
+							modifiedPals = [...modifiedPals, [pal.instance_id, pal]];
+						}
 						pal.state = EntryState.NONE;
 					}
 				}
@@ -82,7 +143,10 @@ class AppState {
 				for (const [index, pal] of Object.entries(player.dps)) {
 					if (pal && pal.state === EntryState.MODIFIED) {
 						pal.owner_uid = player.uid;
-						modifiedDspPals = [...modifiedDspPals, [index, pal]];
+						// Skip UPS pals - they're handled separately
+						if (!pal.__ups_source) {
+							modifiedDspPals = [...modifiedDspPals, [index, pal]];
+						}
 						pal.state = EntryState.NONE;
 					}
 				}

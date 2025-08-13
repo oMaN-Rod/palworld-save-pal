@@ -400,6 +400,44 @@ class Player(BaseModel):
             self._guild.add_pal(new_pal_id)
         return new_pal
 
+    def add_pal_from_dto(
+        self,
+        pal_dto: PalDTO,
+        container_id: UUID,
+        storage_slot: Union[int | None] = None,
+    ) -> Optional[Pal]:
+        """Add a pal with complete data from PalDTO (preserves all attributes)."""
+        new_pal_id = uuid.uuid4()
+        pal_dto.instance_id = new_pal_id
+        container = (
+            self.pal_box
+            if are_equal_uuids(container_id, self.pal_box_id)
+            else self.party
+        )
+        slot_idx = container.add_pal(new_pal_id, storage_slot)
+        if slot_idx is None:
+            return
+        pal_dto.storage_id = container_id
+        pal_dto.storage_slot = slot_idx
+        # Create pal data from DTO, preserving all attributes
+        new_pal_data = PalObjects.PalSaveParameter(
+            character_id=pal_dto.character_id,
+            instance_id=new_pal_id,
+            owner_uid=self.uid,
+            container_id=container_id,
+            slot_idx=slot_idx,
+            group_id=self._guild.id if isinstance(self._guild, Guild) else None,
+            nickname=pal_dto.nickname,
+        )
+        new_pal = Pal(new_pal_data, new_pal=True)
+        new_pal.update_from(pal_dto)
+        if not self.pals:
+            self.pals = {}
+        self.pals[new_pal_id] = new_pal
+        if isinstance(self._guild, Guild):
+            self._guild.add_pal(new_pal_id)
+        return new_pal
+
     def add_dps_pal(
         self,
         character_id: str,
@@ -427,6 +465,32 @@ class Player(BaseModel):
         pal.gender = PalGender.FEMALE
         pal.populate_status_point_lists()
         pal.hp = pal.max_hp
+        self._dps[slot_idx] = pal
+        return slot_idx, pal
+
+    def add_dps_pal_from_dto(
+        self,
+        pal_dto: PalDTO,
+        storage_slot: Optional[int] = None,
+    ) -> Optional[Pal]:
+        """Add a DPS pal with complete data from PalDTO (preserves all attributes)."""
+        slot_idx = (
+            storage_slot
+            if storage_slot is not None
+            else self._find_first_empty_dps_slot()
+        )
+        pal_data = PalObjects.get_array_property(
+            self._player_gvas_files.dps.properties["SaveParameterArray"]
+        )[slot_idx]
+
+        pal = Pal(data=pal_data, dps=True, new_pal=True)
+        new_pal_id = uuid.uuid4()
+        pal_dto.owner_uid = self.uid
+        pal_dto.instance_id = new_pal_id
+        pal_dto.storage_id = self.pal_box_id
+        pal_dto.storage_slot = 0
+        pal.update_from(pal_dto)
+        pal.populate_status_point_lists()
         self._dps[slot_idx] = pal
         return slot_idx, pal
 

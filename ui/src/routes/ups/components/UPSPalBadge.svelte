@@ -1,18 +1,28 @@
 <script lang="ts">
-	import { PalBadge, TextInputModal } from '$components';
+	import { PalBadge } from '$components';
+	import { EditTagsModal, AddToCollectionModal, ExportPalModal } from '$components/modals';
 	import ContextMenu from '$components/ui/context-menu/ContextMenu.svelte';
-	import { Copy, Trash, Edit, Eye, Upload, Download, FolderPlus, Tag, Share } from 'lucide-svelte';
-	import { getUpsState, getModalState, getAppState } from '$states';
-	import type { UPSPal, Pal } from '$types';
+	import { Copy, Trash, Upload, FolderPlus, Tag } from 'lucide-svelte';
+	import {
+		getUpsState,
+		getModalState,
+		getAppState,
+		getNavigationState,
+		getToastState
+	} from '$states';
+	import { goto } from '$app/navigation';
+	import type { UPSPal, Pal, AddToCollectionResult } from '$types';
 
 	let { upsPal, onSelect } = $props<{
 		upsPal: UPSPal;
-		onSelect?: (upsPal: UPSPal) => void;
+		onSelect?: (upsPal: UPSPal, event: MouseEvent) => void;
 	}>();
 
 	const upsState = getUpsState();
 	const modal = getModalState();
 	const appState = getAppState();
+	const nav = getNavigationState();
+	const toast = getToastState();
 
 	const pal = $derived<Pal>({
 		...upsPal.pal_data,
@@ -26,34 +36,14 @@
 
 	const menuItems = $derived([
 		{
-			label: 'View Details',
-			onClick: () => handleViewDetails(),
-			icon: Eye
-		},
-		{
-			label: 'Edit Pal',
-			onClick: () => handleEditPal(),
-			icon: Edit
-		},
-		{
 			label: 'Clone Pal',
 			onClick: () => handleClonePal(),
 			icon: Copy
 		},
 		{
-			label: 'Export to Pal Box',
-			onClick: () => handleExportToPalBox(),
+			label: 'Export',
+			onClick: () => handleExport(),
 			icon: Upload
-		},
-		{
-			label: 'Export to GPS',
-			onClick: () => handleExportToGPS(),
-			icon: Share
-		},
-		{
-			label: 'Export to DPS',
-			onClick: () => handleExportToDPS(),
-			icon: Download
 		},
 		{
 			label: 'Add to Collection',
@@ -72,33 +62,44 @@
 		}
 	]);
 
-	function handleClick() {
-		if (onSelect) {
-			onSelect(upsPal);
+	const selected: string[] = $derived.by(() => {
+		if (upsState.selectedPals.size > 0) {
+			return Array.from(upsState.selectedPals).map((id) => id.toString());
 		}
+		return [];
+	});
+
+	function handleClick(event: MouseEvent) {
+		if (event.ctrlKey || event.metaKey) {
+			// Ctrl+click for selection (following other storage systems pattern)
+			if (onSelect) {
+				onSelect(upsPal, event);
+			}
+		} else {
+			// Regular click - navigate to edit page with Pal tab
+			handlePalEdit();
+		}
+	}
+
+	function handlePalEdit() {
+		// Set the selected pal in app state and navigate to edit page
+		const palWithMetadata = {
+			...pal,
+			// Add metadata to track that this pal comes from UPS
+			__ups_source: true,
+			__ups_id: upsPal.id
+		};
+		appState.selectedPal = palWithMetadata;
+		nav.activeTab = 'pal';
+		// Navigate to edit page
+		goto('/edit');
 	}
 
 	function handleKeydown(event: KeyboardEvent) {
 		if (event.key === 'Enter' || event.key === ' ') {
 			event.preventDefault();
-			handleClick();
-		}
-	}
-
-	async function handleViewDetails() {
-		console.log('View details for UPS pal:', upsPal);
-	}
-
-	async function handleEditPal() {
-		// @ts-ignore
-		const result = await modal.showModal<string>(TextInputModal, {
-			title: 'Edit Pal',
-			value: upsPal.nickname || '',
-			inputLabel: 'Enter new nickname:'
-		});
-
-		if (result !== null && result !== upsPal.nickname) {
-			await upsState.updatePal(upsPal.id, { nickname: result || undefined });
+			// For keyboard navigation, treat as regular click (open edit)
+			handlePalEdit();
 		}
 	}
 
@@ -115,102 +116,71 @@
 		}
 	}
 
-	async function handleExportToPalBox() {
-		if (!appState.saveFile || !appState.selectedPlayer) {
-			await modal.showConfirmModal({
-				title: 'Export Failed',
-				message: 'Please select a player first.',
-				confirmText: 'OK',
-				cancelText: ''
-			});
-			return;
-		}
-
-		const confirmed = await modal.showConfirmModal({
-			title: 'Export to Pal Box',
-			message: `Export ${upsPal.nickname || upsPal.character_id} to ${appState.selectedPlayer.nickname}'s Pal Box?`,
-			confirmText: 'Export',
-			cancelText: 'Cancel'
+	async function handleExport() {
+		// @ts-ignore
+		const result = await modal.showModal<{ target: string; playerId?: string }>(ExportPalModal, {
+			title: 'Export Pal',
+			pals: [upsPal]
 		});
 
-		if (confirmed) {
-			await upsState.exportPal(upsPal.id, 'pal_box', appState.selectedPlayer.uid);
-		}
-	}
-
-	async function handleExportToGPS() {
-		if (!appState.saveFile || !appState.gps) {
-			await modal.showConfirmModal({
-				title: 'Export Failed',
-				message: 'GPS is not available in this save file.',
-				confirmText: 'OK',
-				cancelText: ''
-			});
-			return;
-		}
-
-		const confirmed = await modal.showConfirmModal({
-			title: 'Export to GPS',
-			message: `Export ${upsPal.nickname || upsPal.character_id} to Global Pal Storage?`,
-			confirmText: 'Export',
-			cancelText: 'Cancel'
-		});
-
-		if (confirmed) {
-			await upsState.exportPal(upsPal.id, 'gps');
-		}
-	}
-
-	async function handleExportToDPS() {
-		if (!appState.saveFile || !appState.selectedPlayer?.dps) {
-			await modal.showConfirmModal({
-				title: 'Export Failed',
-				message: 'Please select a player with DPS access.',
-				confirmText: 'OK',
-				cancelText: ''
-			});
-			return;
-		}
-
-		const confirmed = await modal.showConfirmModal({
-			title: 'Export to DPS',
-			message: `Export ${upsPal.nickname || upsPal.character_id} to ${appState.selectedPlayer.nickname}'s DPS?`,
-			confirmText: 'Export',
-			cancelText: 'Cancel'
-		});
-
-		if (confirmed) {
-			await upsState.exportPal(upsPal.id, 'dps', appState.selectedPlayer.uid);
+		if (result) {
+			const target = result.target as 'pal_box' | 'dps' | 'gps';
+			try {
+				await upsState.exportPal(upsPal.id, target, result.playerId);
+				toast.add(
+					`Successfully exported ${upsPal.nickname || upsPal.character_id} to ${result.target.toUpperCase()}`,
+					'Success',
+					'success'
+				);
+			} catch (error) {
+				console.error('Export failed:', error);
+				toast.add('Export failed. Please try again.', 'Error', 'error');
+			}
 		}
 	}
 
 	async function handleAddToCollection() {
-		const collections = upsState.filteredCollections;
-		if (collections.length === 0) {
-			await modal.showConfirmModal({
-				title: 'No Collections',
-				message: 'Create a collection first to organize your Pals.',
-				confirmText: 'OK',
-				cancelText: ''
-			});
-			return;
-		}
-
-		await modal.showConfirmModal({
+		// @ts-ignore
+		const result = await modal.showModal<AddToCollectionResult>(AddToCollectionModal, {
 			title: 'Add to Collection',
-			message: 'Collection functionality coming soon!',
-			confirmText: 'OK',
-			cancelText: ''
+			pals: [upsPal]
 		});
+
+		if (result) {
+			const collectionId = result.removeFromCollection ? undefined : result.collectionId;
+			try {
+				await upsState.updatePal(upsPal.id, { collection_id: collectionId });
+				await upsState.loadAll(); // Refresh to update collection counts
+
+				if (result.removeFromCollection) {
+					toast.add('Removed pal from collection', 'Success', 'success');
+				} else {
+					toast.add('Added pal to collection', 'Success', 'success');
+				}
+			} catch (error) {
+				console.error('Collection update failed:', error);
+				toast.add('Failed to update collection. Please try again.', 'Error', 'error');
+			}
+		}
 	}
 
 	async function handleManageTags() {
-		await modal.showConfirmModal({
+		// @ts-ignore
+		const result = await modal.showModal<string[]>(EditTagsModal, {
 			title: 'Manage Tags',
-			message: 'Tag management functionality coming soon!',
-			confirmText: 'OK',
-			cancelText: ''
+			pals: [upsPal]
 		});
+
+		if (result) {
+			try {
+				await upsState.updatePal(upsPal.id, { tags: result });
+				await upsState.loadAll(); // Refresh to update available tags
+				toast.add('Updated pal tags', 'Success', 'success');
+			} catch (error) {
+				console.error('Tag update failed:', error);
+				toast.add('Failed to update tags. Please try again.', 'Error', 'error');
+			}
+		}
 	}
 
 	async function handleDeleteFromUPS() {
@@ -235,6 +205,12 @@
 	<div onclick={handleClick} onkeydown={handleKeydown} role="button" tabindex="0">
 		<PalBadge
 			{pal}
+			{selected}
+			onSelect={(p, e) => {
+				if (onSelect) {
+					onSelect(p, e);
+				}
+			}}
 			onMove={dummyHandler}
 			onAdd={dummyHandler}
 			onClone={dummyHandler}

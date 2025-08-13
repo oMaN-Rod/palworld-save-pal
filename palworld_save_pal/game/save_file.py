@@ -495,18 +495,53 @@ class SaveFile(BaseModel):
         self._pals[new_pal.instance_id] = new_pal
         return new_pal
 
+    def add_player_pal_from_dto(
+        self,
+        player_id: UUID,
+        pal_dto: PalDTO,
+        container_id: UUID,
+        storage_slot: Union[int | None] = None,
+    ) -> Optional[Pal]:
+        """Add a pal to player with complete data preservation."""
+        player = self._players.get(player_id)
+        if not player:
+            raise ValueError(f"Player {player_id} not found in the save file.")
+
+        new_pal = player.add_pal_from_dto(pal_dto, container_id, storage_slot)
+        if new_pal is None:
+            return
+        self._character_save_parameter_map.append(new_pal.character_save)
+        self._pals[new_pal.instance_id] = new_pal
+        return new_pal
+
     def add_player_dps_pal(
         self,
         player_id: UUID,
         character_id: str,
         nickname: str,
         storage_slot: Optional[int] = None,
-    ) -> Optional[Pal]:
+    ) -> Optional[Tuple[int, Pal]]:
         player = self._players.get(player_id)
         if not player:
             raise ValueError(f"Player {player_id} not found in the save file.")
 
         slot_idx, new_pal = player.add_dps_pal(character_id, nickname, storage_slot)
+        if new_pal is None:
+            return
+        return slot_idx, new_pal
+
+    def add_player_dps_pal_from_dto(
+        self,
+        player_id: UUID,
+        pal_dto: PalDTO,
+        storage_slot: Optional[int] = None,
+    ) -> Optional[Tuple[int, Pal]]:
+        """Add a DPS pal to player with complete data preservation."""
+        player = self._players.get(player_id)
+        if not player:
+            raise ValueError(f"Player {player_id} not found in the save file.")
+
+        slot_idx, new_pal = player.add_dps_pal_from_dto(pal_dto, storage_slot)
         if new_pal is None:
             return
         return slot_idx, new_pal
@@ -570,6 +605,40 @@ class SaveFile(BaseModel):
             self._gps_pals = {}
         self._gps_pals[slot_idx] = pal
         return pal, slot_idx
+
+    def add_gps_pal_from_dto(
+        self,
+        pal_dto: PalDTO,
+        storage_slot: Optional[int] = None,
+    ) -> Optional[Tuple[int, Pal]]:
+        """Add a GPS pal with complete data preservation."""
+        if not self._gps_gvas_file:
+            raise ValueError("GPS Gvas file is not initialized.")
+
+        slot_idx = (
+            storage_slot
+            if storage_slot is not None
+            else self._find_first_empty_gps_slot()
+        )
+        if slot_idx is None:
+            logger.error("No empty GPS slot found.")
+            return None
+        pal_data = PalObjects.get_array_property(
+            self._gps_gvas_file.properties["SaveParameterArray"]
+        )[slot_idx]
+
+        pal = Pal(data=pal_data, dps=True)
+        new_pal_id = uuid.uuid4()
+        pal_dto.owner_uid = PalObjects.EMPTY_UUID
+        pal_dto.instance_id = new_pal_id
+        pal_dto.storage_id = PalObjects.EMPTY_UUID
+        pal_dto.storage_slot = 0
+        pal.update_from(pal_dto)
+        pal.populate_status_point_lists()
+        if not self._gps_pals:
+            self._gps_pals = {}
+        self._gps_pals[slot_idx] = pal
+        return slot_idx, pal
 
     def add_guild_pal(
         self,

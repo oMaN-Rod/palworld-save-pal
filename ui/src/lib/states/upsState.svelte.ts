@@ -9,7 +9,7 @@ import {
 	type UPSTag,
 	MessageType
 } from '$lib/types';
-import { send } from '$lib/utils/websocketUtils';
+import { isReady, send } from '$lib/utils/websocketUtils';
 
 export interface UPSState {
 	pals: UPSPal[];
@@ -127,6 +127,10 @@ class UPSStateClass {
 	}
 
 	async loadAll(): Promise<void> {
+		if (!isReady()) {
+			console.warn('WebSocket not ready, cannot load UPS data.');
+			return;
+		}
 		await Promise.all([this.loadPals(), this.loadCollections(), this.loadTags(), this.loadStats()]);
 	}
 
@@ -335,6 +339,7 @@ class UPSStateClass {
 		} else {
 			this.selectedPals.add(palId);
 		}
+		this.selectedPals = new Set(this.selectedPals);
 	}
 
 	selectAllPals(): void {

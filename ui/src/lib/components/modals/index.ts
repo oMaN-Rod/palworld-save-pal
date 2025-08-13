@@ -1,5 +1,8 @@
+import AddToCollectionModal from './add-to-collection/AddToCollectionModal.svelte';
 import CloneToUpsModal from './clone-to-ups/CloneToUpsModal.svelte';
 import ConfirmModal from './confirm/ConfirmModal.svelte';
+import EditTagsModal from './edit-tags/EditTagsModal.svelte';
+import ExportPalModal from './export-pal/ExportPalModal.svelte';
 import FillPalsModal from './fill-pals/FillPalsModal.svelte';
 import ImportToUpsModal from './import-to-ups/ImportToUpsModal.svelte';
 import ItemSelectModal from './item-select/ItemSelectModal.svelte';
@@ -15,8 +18,11 @@ import SkillSelectModal from './skill-select/SkillSelectModal.svelte';
 import TextInputModal from './text-input/TextInputModal.svelte';
 
 export {
+	AddToCollectionModal,
 	CloneToUpsModal,
 	ConfirmModal,
+	EditTagsModal,
+	ExportPalModal,
 	FillPalsModal,
 	ImportToUpsModal,
 	ItemSelectModal,

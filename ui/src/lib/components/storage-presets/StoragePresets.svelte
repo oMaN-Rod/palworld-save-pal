@@ -40,7 +40,6 @@
 			)
 			.map(([id, preset]) => ({ ...preset, id }));
 	});
-	$inspect(filteredPresets);
 
 	async function handleApplyPreset() {
 		if (!selectedPresets.length || !container) return;

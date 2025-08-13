@@ -147,6 +147,11 @@ class UPSService:
             pal.updated_at = datetime.now(dt.timezone.utc)
             session.commit()
             session.refresh(pal)
+
+            # Update collection counts if collection_id was changed
+            if "collection_id" in updates:
+                UPSService._update_collection_counts(session)
+
             return pal
 
     @staticmethod
@@ -334,6 +339,12 @@ class UPSService:
             session.commit()
             session.refresh(clone_pal)
 
+            # Update statistics and collection counts
+            UPSService._update_stats(session)
+
+            # Update statistics and collection counts
+            UPSService._update_stats(session)
+
             UPSService._log_transfer(
                 session=session,
                 pal_id=clone_pal.id,
@@ -395,6 +406,9 @@ class UPSService:
         stats.last_updated = datetime.now(dt.timezone.utc)
         session.commit()
 
+        # Update collection counts
+        UPSService._update_collection_counts(session)
+
     @staticmethod
     def _log_transfer(
         session: Session,
@@ -424,3 +438,22 @@ class UPSService:
             error_message=error_message,
         )
         session.add(log_entry)
+
+    @staticmethod
+    def _update_collection_counts(session: Session):
+        """Update pal_count for all collections."""
+        collections = session.exec(select(UPSCollectionModel)).all()
+
+        for collection in collections:
+            # Count pals in this collection
+            pal_count = session.exec(
+                select(func.count(UPSPalModel.id)).where(
+                    UPSPalModel.collection_id == collection.id
+                )
+            ).one()
+
+            # Update the collection's pal_count
+            collection.pal_count = pal_count
+            collection.updated_at = datetime.utcnow()
+
+        session.commit()

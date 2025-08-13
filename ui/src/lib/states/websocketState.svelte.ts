@@ -49,6 +49,10 @@ class SocketState {
 		};
 	}
 
+	isConnected(): boolean {
+		return this.#websocket.readyState === this.#websocket.OPEN;
+	}
+
 	async send(messageData: string) {
 		while (this.#websocket.readyState !== this.#websocket.OPEN) {
 			await new Promise((resolve) => setTimeout(resolve, 250));

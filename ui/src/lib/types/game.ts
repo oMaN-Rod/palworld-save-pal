@@ -59,6 +59,9 @@ export type Pal = {
 	sanity: number;
 	exp: number;
 	is_sick: boolean;
+	// UPS metadata fields (optional)
+	__ups_source?: boolean;
+	__ups_id?: number;
 };
 
 export type StatusPointList = {
@@ -821,4 +824,9 @@ export interface ImportToUpsModalResults {
 	notes: string;
 	palId: string;
 	playerId?: string;
+}
+
+export interface AddToCollectionResult {
+	collectionId?: number;
+	removeFromCollection: boolean;
 }

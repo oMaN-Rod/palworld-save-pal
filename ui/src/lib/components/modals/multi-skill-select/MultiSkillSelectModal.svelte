@@ -56,7 +56,6 @@
 	function handleClose(values: string[] | null) {
 		closeModal(values);
 	}
-	$inspect(values);
 </script>
 
 <Card class="min-w-[calc(100vw/3)]">

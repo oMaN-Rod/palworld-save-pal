@@ -5,8 +5,11 @@
 
 	const upsState = getUpsState();
 
-	function handlePalClick(upsPal: UPSPal) {
-		upsState.togglePalSelection(upsPal.id);
+	function handlePalSelect(upsPal: UPSPal, event: MouseEvent) {
+		// Only handle selection when Ctrl+click (following other storage systems pattern)
+		if (event.ctrlKey || event.metaKey) {
+			upsState.togglePalSelection(upsPal.id);
+		}
 	}
 
 	function isPalSelected(palId: number): boolean {
@@ -24,32 +27,13 @@
 			class="border-surface-300 dark:border-surface-700 hover:border-primary-500 dark:hover:border-primary-400 flex cursor-pointer items-center gap-4 rounded-lg border p-3 transition-colors {isPalSelected(
 				upsPal.id
 			)
-				? 'bg-primary-50 dark:bg-primary-900/20 border-primary-500'
+				? 'bg-primary-50 dark:bg-primary-900/20 border-primary-500 ring-secondary-500 ring-4'
 				: 'dark:bg-surface-800 bg-white'}"
-			role="button"
-			tabindex="0"
-			onclick={() => handlePalClick(upsPal)}
-			onkeydown={(e) => {
-				if (e.key === 'Enter' || e.key === ' ') {
-					e.preventDefault();
-					handlePalClick(upsPal);
-				}
-			}}
 		>
-			<!-- Selection Checkbox -->
-			<div class="flex-shrink-0">
-				<input
-					type="checkbox"
-					checked={isPalSelected(upsPal.id)}
-					onchange={() => handlePalClick(upsPal)}
-					class="border-surface-300 text-primary-600 focus:ring-primary-500 h-4 w-4 rounded"
-				/>
-			</div>
-
 			<!-- Pal Badge (smaller for list view) -->
 			<div class="flex-shrink-0">
 				<div class="h-16 w-16">
-					<UPSPalBadge {upsPal} onSelect={handlePalClick} />
+					<UPSPalBadge {upsPal} onSelect={handlePalSelect} />
 				</div>
 			</div>
 

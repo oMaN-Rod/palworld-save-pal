@@ -19,12 +19,23 @@
 		BarChart3,
 		Plus,
 		Filter,
-		Database
+		Database,
+		Upload
 	} from 'lucide-svelte';
-	import { ImportToUpsModal } from '$components/modals';
+	import {
+		ImportToUpsModal,
+		EditTagsModal,
+		AddToCollectionModal,
+		ExportPalModal
+	} from '$components/modals';
 	import { cn } from '$theme';
 	import { getUpsState, getModalState, getAppState, getToastState } from '$states';
-	import type { UPSSortBy, UPSSortOrder, ImportToUpsModalResults } from '$types';
+	import type {
+		UPSSortBy,
+		UPSSortOrder,
+		ImportToUpsModalResults,
+		AddToCollectionResult
+	} from '$types';
 
 	import UPSPalGrid from './components/UPSPalGrid.svelte';
 	import UPSCollectionsPanel from './components/UPSCollectionsPanel.svelte';
@@ -169,6 +180,104 @@
 		}
 	}
 
+	// Bulk Actions
+	async function handleBulkEditTags() {
+		if (upsState.selectedPals.size === 0) return;
+
+		const selectedPalIds = Array.from(upsState.selectedPals);
+		const selectedUpsPals = upsState.pals.filter((pal) => selectedPalIds.includes(pal.id));
+
+		// @ts-ignore
+		const result = await modal.showModal<string[]>(EditTagsModal, {
+			title: `Edit Tags for ${selectedUpsPals.length} Pals`,
+			pals: selectedUpsPals
+		});
+
+		if (result) {
+			// Update tags for all selected pals
+			for (const palId of selectedPalIds) {
+				await upsState.updatePal(palId, { tags: result });
+			}
+
+			// Refresh data
+			await upsState.loadPals();
+			toast.add(`Updated tags for ${selectedPalIds.length} pals`, 'Success', 'success');
+		}
+	}
+
+	async function handleBulkAddToCollection() {
+		if (upsState.selectedPals.size === 0) return;
+
+		const selectedPalIds = Array.from(upsState.selectedPals);
+		const selectedUpsPals = upsState.pals.filter((pal) => selectedPalIds.includes(pal.id));
+
+		// @ts-ignore
+		const result = await modal.showModal<AddToCollectionResult>(AddToCollectionModal, {
+			title: `Manage Collection for ${selectedUpsPals.length} Pals`,
+			pals: selectedUpsPals
+		});
+
+		if (result) {
+			// Update collection for all selected pals
+			const collectionId = result.removeFromCollection ? undefined : result.collectionId;
+
+			for (const palId of selectedPalIds) {
+				await upsState.updatePal(palId, { collection_id: collectionId });
+			}
+
+			// Refresh data
+			await upsState.loadAll();
+
+			if (result.removeFromCollection) {
+				toast.add(`Removed ${selectedPalIds.length} pals from collections`, 'Success', 'success');
+			} else {
+				toast.add(`Moved ${selectedPalIds.length} pals to collection`, 'Success', 'success');
+			}
+		}
+	}
+
+	async function handleBulkExport() {
+		if (upsState.selectedPals.size === 0) return;
+
+		const selectedPalIds = Array.from(upsState.selectedPals);
+		const selectedUpsPals = upsState.pals.filter((pal) => selectedPalIds.includes(pal.id));
+
+		// @ts-ignore
+		const result = await modal.showModal<{ target: string; playerId?: string }>(ExportPalModal, {
+			title: `Export ${selectedUpsPals.length} Pals`,
+			pals: selectedUpsPals
+		});
+
+		if (result) {
+			let successCount = 0;
+			const errors = [];
+
+			for (const palId of selectedPalIds) {
+				const target = result.target as 'pal_box' | 'dps' | 'gps';
+				try {
+					await upsState.exportPal(palId, target, result.playerId);
+					successCount++;
+				} catch (error) {
+					console.error(`Failed to export pal ${palId}:`, error);
+					errors.push(`Pal ${palId}: ${error}`);
+				}
+			}
+
+			if (successCount > 0) {
+				toast.add(
+					`Successfully exported ${successCount} of ${selectedPalIds.length} pals`,
+					'Success',
+					'success'
+				);
+			}
+
+			if (errors.length > 0) {
+				console.error('Export errors:', errors);
+				toast.add(`Failed to export ${errors.length} pals`, 'Warning', 'warning');
+			}
+		}
+	}
+
 	$effect(() => {
 		searchInput = upsState.filters.search;
 	});
@@ -197,6 +306,19 @@
 
 		<!-- View Controls -->
 		<div class="flex items-center gap-2">
+			<!-- Import Button (when Pals exist) -->
+			{#if upsState.pagination.totalCount > 0 && appState.saveFile}
+				<TooltipButton
+					onclick={handleImportFromSave}
+					class="rounded-md bg-blue-500 p-2 text-white hover:bg-blue-600"
+					popupLabel="Import from Save"
+				>
+					<Plus class="h-4 w-4" />
+				</TooltipButton>
+
+				<div class="bg-surface-300 dark:bg-surface-700 h-6 w-px"></div>
+			{/if}
+
 			<!-- Panel Toggles -->
 			<TooltipButton
 				onclick={() => upsState.toggleCollectionsPanel()}
@@ -306,6 +428,27 @@
 					</div>
 					{#if upsState.hasSelectedPals}
 						<TooltipButton
+							onclick={handleBulkEditTags}
+							class="rounded-md bg-blue-500 p-2 text-white hover:bg-blue-600"
+							popupLabel="Edit Tags"
+						>
+							<Tag class="h-4 w-4" />
+						</TooltipButton>
+						<TooltipButton
+							onclick={handleBulkAddToCollection}
+							class="rounded-md bg-green-500 p-2 text-white hover:bg-green-600"
+							popupLabel="Add to Collection"
+						>
+							<Folder class="h-4 w-4" />
+						</TooltipButton>
+						<TooltipButton
+							onclick={handleBulkExport}
+							class="rounded-md bg-purple-500 p-2 text-white hover:bg-purple-600"
+							popupLabel="Export Selected"
+						>
+							<Upload class="h-4 w-4" />
+						</TooltipButton>
+						<TooltipButton
 							onclick={deleteSelected}
 							class="rounded-md bg-red-500 p-2 text-white hover:bg-red-600"
 							popupLabel="Delete Selected"
@@ -341,7 +484,7 @@
 											label: o
 										}))}
 										value={upsState.filters.characterId}
-										onchange={(e) => handleCharacterFilter(e.detail.value)}
+										onchange={(e: any) => handleCharacterFilter(e.detail.value)}
 									/>
 									<div>
 										<span class="mb-2 block text-sm font-medium">Sort By</span>

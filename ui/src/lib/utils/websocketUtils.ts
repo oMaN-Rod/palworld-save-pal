@@ -25,6 +25,11 @@ export function send(type: MessageType, data?: any): void {
 	);
 }
 
+export function isReady(): boolean {
+	const ws = getSocketState();
+	return ws.isConnected();
+}
+
 export function pushProgressMessage(data: any): void {
 	const ws = getSocketState();
 	ws.message = { type: MessageType.PROGRESS_MESSAGE, data };

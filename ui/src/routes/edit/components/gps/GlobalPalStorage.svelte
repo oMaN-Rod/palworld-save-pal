@@ -346,7 +346,7 @@
 		});
 		if (!result) return;
 		const [selectedPal, nickname] = result;
-		const palData = palsData.pals[selectedPal];
+		const palData = palsData.getByKey(selectedPal);
 
 		send(MessageType.ADD_GPS_PAL, {
 			character_id: selectedPal,

@@ -253,62 +253,92 @@ async def export_ups_pal_handler(message: ExportUpsPalMessage, ws: WebSocket):
 
         save_file = app_state.save_file
         result = None
+        player_name = None
+        if data.destination_type == "pal_box":
+            # Add to player's pal box with complete data preservation
+            if not data.destination_player_uid:
+                error_response = build_response(
+                    MessageType.ERROR,
+                    {"message": "Player UID required for pal box export"},
+                )
+                await ws.send_json(error_response)
+                return
+            player = save_file.get_players().get(data.destination_player_uid)
+            if not player:
+                error_response = build_response(
+                    MessageType.ERROR, {"message": "Player not found"}
+                )
+                await ws.send_json(error_response)
+                return
+            result = save_file.add_player_pal_from_dto(
+                player_id=data.destination_player_uid,
+                pal_dto=pal_dto,
+                container_id=player.pal_box_id,
+            )
+            player_name = player.nickname
 
-        match data.destination_type:
-            case "pal_box":
-                if not data.destination_player_uid:
-                    error_response = build_response(
-                        MessageType.ERROR,
-                        {"message": "Player UID required for pal box export"},
-                    )
-                    await ws.send_json(error_response)
-                    return
-                player = save_file.get_players().get(data.destination_player_uid)
-                if not player:
-                    error_response = build_response(
-                        MessageType.ERROR, {"message": "Player not found"}
-                    )
-                    await ws.send_json(error_response)
-                    return
-                result = player.add_pal(
-                    player_id=data.destination_player_uid,
-                    character_id=pal_dto.character_id,
-                    container_id=player.pal_box_id,
-                    nickname=pal_dto.nickname,
-                )
-            case "gps":
-                result = save_file.add_gps_pal(
-                    character_id=pal_dto.character_id,
-                    nickname=pal_dto.nickname,
-                    storage_slot=data.destination_slot,
-                )
-            case "dps":
-                if not data.destination_player_uid:
-                    error_response = build_response(
-                        MessageType.ERROR,
-                        {"message": "Player UID required for DPS export"},
-                    )
-                    await ws.send_json(error_response)
-                    return
+        elif data.destination_type == "gps":
+            # Add to global pal storage with complete data preservation
+            result = save_file.add_gps_pal_from_dto(
+                pal_dto=pal_dto,
+                storage_slot=data.destination_slot,
+            )
 
-                result = save_file.add_player_dps_pal(
-                    player_id=data.destination_player_uid,
-                    character_id=pal_dto.character_id,
-                    nickname=pal_dto.nickname,
-                    storage_slot=data.destination_slot,
+        elif data.destination_type == "dps":
+            # Add to player's DPS with complete data preservation
+            if not data.destination_player_uid:
+                error_response = build_response(
+                    MessageType.ERROR, {"message": "Player UID required for DPS export"}
                 )
+                await ws.send_json(error_response)
+                return
+
+            result = save_file.add_player_dps_pal_from_dto(
+                player_id=data.destination_player_uid,
+                pal_dto=pal_dto,
+                storage_slot=data.destination_slot,
+            )
 
         if result:
             destination_info = {
                 "save_file_name": getattr(app_state.save_file, "name", "Unknown"),
                 "player_uid": data.destination_player_uid,
-                "player_name": getattr(app_state.selected_player, "nickname", "Unknown")
-                if data.destination_player_uid
-                else None,
+                "player_name": player_name,
             }
             UPSService.export_pal_to_save(
                 data.pal_id, data.destination_type, destination_info
             )
+
+            # Send state refresh messages for immediate visibility
+            if data.destination_type == "pal_box":
+                # Send ADD_PAL message to update frontend state
+                pal_data = result.model_dump()
+                add_pal_data = {
+                    "player_id": str(data.destination_player_uid),
+                    "pal": pal_data,
+                }
+                add_pal_response = build_response(MessageType.ADD_PAL, add_pal_data)
+                await ws.send_json(add_pal_response)
+
+            elif data.destination_type == "dps":
+                # Send ADD_DPS_PAL message to update frontend state
+                slot_idx, pal = result
+                add_dps_data = {
+                    "player_id": str(data.destination_player_uid),
+                    "pal": pal.model_dump(),
+                    "index": slot_idx,
+                }
+                add_dps_response = build_response(MessageType.ADD_DPS_PAL, add_dps_data)
+                await ws.send_json(add_dps_response)
+
+            elif data.destination_type == "gps":
+                slot_idx, pal = result
+                add_gps_data = {
+                    "pal": pal.model_dump(),
+                    "index": slot_idx,
+                }
+                add_gps_response = build_response(MessageType.ADD_GPS_PAL, add_gps_data)
+                await ws.send_json(add_gps_response)
 
             response_data = {
                 "success": True,
