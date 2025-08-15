@@ -438,7 +438,6 @@ class RenameWorldMessage(BaseMessage):
 
 
 # UPS (Universal Pal Storage) Message Classes
-
 class GetUpsPalsData(BaseModel):
     offset: int = 0
     limit: int = 30
@@ -446,6 +445,8 @@ class GetUpsPalsData(BaseModel):
     character_id_filter: Optional[str] = None
     collection_id: Optional[int] = None
     tags: Optional[List[str]] = None
+    element_types: Optional[List[str]] = None
+    pal_types: Optional[List[str]] = None
     sort_by: str = "created_at"
     sort_order: str = "desc"
 
@@ -529,7 +530,7 @@ class CloneToUpsMessage(BaseMessage):
 class ImportToUpsData(BaseModel):
     source_type: str  # "pal_box", "gps", "dps"
     source_pal_id: Optional[UUID] = None  # For pal_box
-    source_slot: Optional[int] = None     # For gps/dps
+    source_slot: Optional[int] = None  # For gps/dps
     source_player_uid: Optional[UUID] = None
     collection_id: Optional[int] = None
     tags: Optional[List[str]] = None

@@ -17,6 +17,7 @@ from palworld_save_pal.db.models.ups_models import (
 )
 from palworld_save_pal.dto.pal import PalDTO
 from palworld_save_pal.utils.logging_config import create_logger
+from palworld_save_pal.utils.json_manager import JsonManager
 
 logger = create_logger(__name__)
 
@@ -85,6 +86,8 @@ class UPSService:
         character_id_filter: Optional[str] = None,
         collection_id: Optional[int] = None,
         tags: Optional[List[str]] = None,
+        element_types: Optional[List[str]] = None,
+        pal_types: Optional[List[str]] = None,
         sort_by: str = "created_at",
         sort_order: str = "desc",
     ) -> Tuple[List[UPSPalModel], int]:
@@ -112,6 +115,75 @@ class UPSService:
                 for tag in tags:
                     tag_json = json.dumps(tag)
                     conditions.append(UPSPalModel.tags.like(f"%{tag_json}%"))
+
+            # Filter by element types (need to look up from pals.json data)
+            if element_types:
+                # Load pals data to get element types for each character
+                pals_json = JsonManager("data/json/pals.json")
+                pals_data = pals_json.read()
+
+                # Find all character_ids that have the requested element types
+                matching_character_ids = []
+                for code_name, pal_info in pals_data.items():
+                    pal_element_types = pal_info.get("element_types", [])
+                    # Check if any of the requested element types match this pal
+                    if any(element in pal_element_types for element in element_types):
+                        matching_character_ids.append(code_name)
+
+                # Add condition to filter by these character_ids
+                if matching_character_ids:
+                    character_conditions = []
+                    for char_id in matching_character_ids:
+                        character_conditions.append(UPSPalModel.character_id == char_id)
+                    conditions.append(or_(*character_conditions))
+
+            # Filter by pal types (alpha, lucky, human, predator, oilrig, summon)
+            if pal_types:
+                type_conditions = []
+                for pal_type in pal_types:
+                    if pal_type == "alpha":
+                        # Check for is_boss: true in pal_data
+                        type_conditions.append(
+                            UPSPalModel.pal_data.like('%"is_boss": true%')
+                        )
+                    elif pal_type == "lucky":
+                        # Check for is_lucky: true in pal_data
+                        type_conditions.append(
+                            UPSPalModel.pal_data.like('%"is_lucky": true%')
+                        )
+                    elif pal_type == "human":
+                        # Humans are identified by is_pal: false in pals.json
+                        pals_json = JsonManager("data/json/pals.json")
+                        pals_data = pals_json.read()
+                        human_character_ids = [
+                            code_name
+                            for code_name, pal_info in pals_data.items()
+                            if not pal_info.get("is_pal", True)
+                        ]
+                        if human_character_ids:
+                            human_conditions = []
+                            for char_id in human_character_ids:
+                                human_conditions.append(
+                                    UPSPalModel.character_id == char_id
+                                )
+                            type_conditions.append(or_(*human_conditions))
+                    elif pal_type == "predator":
+                        # Check character_id contains "predator_"
+                        type_conditions.append(
+                            UPSPalModel.character_id.like("%predator_%")
+                        )
+                    elif pal_type == "oilrig":
+                        # Check character_id contains "_oilrig"
+                        type_conditions.append(
+                            UPSPalModel.character_id.like("%_oilrig%")
+                        )
+                    elif pal_type == "summon":
+                        # Check character_id contains "summon_"
+                        type_conditions.append(
+                            UPSPalModel.character_id.like("%summon_%")
+                        )
+                if type_conditions:
+                    conditions.append(or_(*type_conditions))
 
             if conditions:
                 query = query.where(and_(*conditions))
@@ -322,16 +394,14 @@ class UPSService:
                 return tag
 
     @staticmethod
-    def update_tag(
-        tag_id: int, updates: Dict[str, Any]
-    ) -> Optional[UPSTagModel]:
+    def update_tag(tag_id: int, updates: Dict[str, Any]) -> Optional[UPSTagModel]:
         with Session(engine) as session:
             tag = session.get(UPSTagModel, tag_id)
             if not tag:
                 return None
 
             old_name = tag.name
-            
+
             for key, value in updates.items():
                 if hasattr(tag, key):
                     setattr(tag, key, value)
@@ -339,11 +409,11 @@ class UPSService:
             tag.updated_at = datetime.now(dt.timezone.utc)
             session.commit()
             session.refresh(tag)
-            
+
             # If name was changed, update all pal tags that reference the old name
             if "name" in updates and old_name != tag.name:
                 UPSService._update_pal_tags_on_rename(session, old_name, tag.name)
-            
+
             # Ensure all attributes are loaded before expunging
             # Access all the attributes that will be needed after expunging
             _ = tag.id
@@ -353,7 +423,7 @@ class UPSService:
             _ = tag.usage_count
             _ = tag.created_at
             _ = tag.updated_at
-            
+
             # Create a detached copy with all necessary attributes
             session.expunge(tag)
             return tag
@@ -366,10 +436,10 @@ class UPSService:
                 return False
 
             tag_name = tag.name
-            
+
             # Remove this tag from all pals that have it
             UPSService._remove_tag_from_all_pals(session, tag_name)
-            
+
             session.delete(tag)
             session.commit()
             return True
@@ -629,30 +699,34 @@ class UPSService:
     def _update_pal_tags_on_rename(session: Session, old_name: str, new_name: str):
         """Update all pal tags when a tag is renamed."""
         pals_with_tag = session.exec(
-            select(UPSPalModel).where(UPSPalModel.tags.like(f'%{json.dumps(old_name)}%'))
+            select(UPSPalModel).where(
+                UPSPalModel.tags.like(f"%{json.dumps(old_name)}%")
+            )
         ).all()
-        
+
         for pal in pals_with_tag:
             if old_name in pal.tags:
                 # Replace old tag name with new tag name
                 pal.tags = [new_name if tag == old_name else tag for tag in pal.tags]
                 pal.updated_at = datetime.now(dt.timezone.utc)
-        
+
         session.commit()
 
     @staticmethod
     def _remove_tag_from_all_pals(session: Session, tag_name: str):
         """Remove a specific tag from all pals that have it."""
         pals_with_tag = session.exec(
-            select(UPSPalModel).where(UPSPalModel.tags.like(f'%{json.dumps(tag_name)}%'))
+            select(UPSPalModel).where(
+                UPSPalModel.tags.like(f"%{json.dumps(tag_name)}%")
+            )
         ).all()
-        
+
         for pal in pals_with_tag:
             if tag_name in pal.tags:
                 # Remove the tag from the list
                 pal.tags = [tag for tag in pal.tags if tag != tag_name]
                 pal.updated_at = datetime.now(dt.timezone.utc)
-        
+
         session.commit()
 
     @staticmethod

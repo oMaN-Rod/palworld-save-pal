@@ -71,6 +71,8 @@ export interface UPSGetPalsRequest {
 	character_id_filter?: string;
 	collection_id?: number;
 	tags?: string[];
+	element_types?: string[];
+	pal_types?: string[];
 	sort_by?: UPSSortBy;
 	sort_order?: UPSSortOrder;
 }
@@ -156,6 +158,8 @@ export interface UPSFilters {
 	characterId: string;
 	collectionId?: number;
 	tags: string[];
+	elementTypes: string[];
+	palTypes: string[];
 	sortBy: UPSSortBy;
 	sortOrder: UPSSortOrder;
 }

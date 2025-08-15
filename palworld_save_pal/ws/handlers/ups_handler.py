@@ -45,6 +45,8 @@ async def get_ups_pals_handler(message: GetUpsPalsMessage, ws: WebSocket):
             character_id_filter=data.character_id_filter,
             collection_id=data.collection_id,
             tags=data.tags,
+            element_types=data.element_types,
+            pal_types=data.pal_types,
             sort_by=data.sort_by,
             sort_order=data.sort_order,
         )

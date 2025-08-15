@@ -31,6 +31,8 @@ const DEFAULT_FILTERS: UPSFilters = {
 	characterId: 'All',
 	collectionId: undefined,
 	tags: [],
+	elementTypes: [],
+	palTypes: [],
 	sortBy: 'created_at',
 	sortOrder: 'desc'
 };
@@ -92,6 +94,8 @@ class UPSStateClass {
 					this.filters.characterId !== 'All' ? this.filters.characterId : undefined,
 				collection_id: this.filters.collectionId,
 				tags: this.filters.tags.length > 0 ? this.filters.tags : undefined,
+				element_types: this.filters.elementTypes.length > 0 ? this.filters.elementTypes : undefined,
+				pal_types: this.filters.palTypes.length > 0 ? this.filters.palTypes : undefined,
 				sort_by: this.filters.sortBy,
 				sort_order: this.filters.sortOrder
 			});
@@ -447,6 +451,16 @@ class UPSStateClass {
 
 	updateTagFilter(tags: string[]): void {
 		this.filters.tags = tags;
+		this.pagination.page = 1;
+	}
+
+	updateElementTypesFilter(elementTypes: string[]): void {
+		this.filters.elementTypes = elementTypes;
+		this.pagination.page = 1;
+	}
+
+	updatePalTypesFilter(palTypes: string[]): void {
+		this.filters.palTypes = palTypes;
 		this.pagination.page = 1;
 	}
 

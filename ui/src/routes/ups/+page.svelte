@@ -30,6 +30,10 @@
 	} from '$components/modals';
 	import { cn } from '$theme';
 	import { getUpsState, getModalState, getAppState, getToastState } from '$states';
+	import { elementsData } from '$lib/data';
+	import { ASSET_DATA_PATH } from '$lib/constants';
+	import { assetLoader } from '$utils';
+	import { staticIcons } from '$types/icons';
 	import type {
 		UPSSortBy,
 		UPSSortOrder,
@@ -81,7 +85,23 @@
 	const visiblePages = $derived(
 		Array.from({ length: visiblePageEnd - visiblePageStart + 1 }, (_, i) => visiblePageStart + i)
 	);
-	const characterOptions = $derived(['All', ...upsState.availableCharacterIds]);
+
+	// Element and Type filtering
+	const elementTypes = $derived(Object.keys(elementsData.elements));
+	const elementIcons = $derived.by(() => {
+		let elementIcons: Record<string, string> = {};
+		for (const element of elementTypes) {
+			const elementData = elementsData.elements[element];
+			if (elementData) {
+				elementIcons[element] = assetLoader.loadImage(
+					`${ASSET_DATA_PATH}/img/${elementData.icon}.webp`
+				) as string;
+			}
+		}
+		return elementIcons;
+	});
+
+	const palTypes = ['alpha', 'lucky', 'human', 'predator', 'oilrig', 'summon'];
 
 	function handleSort(sortBy: UPSSortBy) {
 		const newOrder: UPSSortOrder =
@@ -111,9 +131,51 @@
 		upsState.loadPals(true);
 	}
 
-	function handleCharacterFilter(characterId: string) {
-		upsState.updateCharacterFilter(characterId);
+	function handleElementTypeFilter(elementType: string) {
+		const currentTypes = [...upsState.filters.elementTypes];
+		if (currentTypes.includes(elementType)) {
+			// Remove if already selected
+			const newTypes = currentTypes.filter((t) => t !== elementType);
+			upsState.updateElementTypesFilter(newTypes);
+		} else {
+			// Add if not selected
+			currentTypes.push(elementType);
+			upsState.updateElementTypesFilter(currentTypes);
+		}
 		upsState.loadPals(true);
+	}
+
+	function handlePalTypeFilter(palType: string) {
+		const currentTypes = [...upsState.filters.palTypes];
+		if (currentTypes.includes(palType)) {
+			// Remove if already selected
+			const newTypes = currentTypes.filter((t) => t !== palType);
+			upsState.updatePalTypesFilter(newTypes);
+		} else {
+			// Add if not selected
+			currentTypes.push(palType);
+			upsState.updatePalTypesFilter(currentTypes);
+		}
+		upsState.loadPals(true);
+	}
+
+	function clearElementTypeFilters() {
+		upsState.updateElementTypesFilter([]);
+		upsState.loadPals(true);
+	}
+
+	function clearPalTypeFilters() {
+		upsState.updatePalTypesFilter([]);
+		upsState.loadPals(true);
+	}
+
+	// Helper functions for styling
+	function getElementButtonClass(element: string) {
+		return cn('btn', upsState.filters.elementTypes.includes(element) ? 'bg-secondary-500/25' : '');
+	}
+
+	function getPalTypeButtonClass(palType: string) {
+		return cn('btn', upsState.filters.palTypes.includes(palType) ? 'bg-secondary-500/25' : '');
 	}
 
 	function selectAll() {
@@ -500,7 +562,7 @@
 							<div class="flex items-center gap-2">
 								<Filter class="h-4 w-4" />
 								<span>Filters & Sorting</span>
-								{#if upsState.filters.search || upsState.filters.characterId !== 'All' || upsState.filters.collectionId || upsState.filters.tags.length > 0}
+								{#if upsState.filters.search || upsState.filters.collectionId || upsState.filters.tags.length > 0 || upsState.filters.elementTypes.length > 0 || upsState.filters.palTypes.length > 0}
 									<span class="bg-primary-500 rounded-full px-2 py-0.5 text-xs text-white"
 										>Active</span
 									>
@@ -508,46 +570,141 @@
 							</div>
 						{/snippet}
 						{#snippet panel()}
-							<div class="space-y-4 p-4">
-								<!-- Character Filter -->
-								<div class="grid grid-cols-[auto_1fr] items-center gap-2">
-									<Combobox
-										label="Character Type"
-										placeholder="Select Character Type"
-										options={characterOptions.map((o) => ({
-											value: o,
-											label: o
-										}))}
-										value={upsState.filters.characterId}
-										onchange={(e: any) => handleCharacterFilter(e.detail.value)}
-									/>
-									<div>
-										<span class="mb-2 block text-sm font-medium">Sort By</span>
-										<div class="flex flex-wrap gap-2">
-											{#each [{ key: 'created_at', label: 'Created' }, { key: 'updated_at', label: 'Modified' }, { key: 'character_id', label: 'Character' }, { key: 'nickname', label: 'Name' }, { key: 'level', label: 'Level' }, { key: 'transfer_count', label: 'Transfers' }, { key: 'clone_count', label: 'Clones' }] as sortOption}
-												{@const IconComponent = getSortIcon(sortOption.key as UPSSortBy)}
-												<button
-													class={cn(
-														'flex items-center gap-1 rounded-md border px-3 py-1 text-sm',
-														upsState.filters.sortBy === sortOption.key
-															? 'bg-primary-500 border-primary-500 text-white'
-															: 'dark:bg-surface-800 border-surface-300 dark:border-surface-700 bg-white'
-													)}
-													onclick={() => handleSort(sortOption.key as UPSSortBy)}
+							<div class="grid grid-cols-2 gap-4 p-4">
+								<!-- Left Column: Elements & Types Filter -->
+								<div class="space-y-4">
+									<span class="block text-sm font-medium">Elements & Types</span>
+									<div class="space-y-3">
+										<!-- Element Types -->
+										<div>
+											<div class="mb-1 flex items-center justify-between">
+												<span class="text-surface-600 dark:text-surface-400 text-xs font-medium"
+													>Element Types</span
 												>
-													{sortOption.label}
-													<IconComponent class="h-3 w-3" />
-												</button>
-											{/each}
+												{#if upsState.filters.elementTypes.length > 0}
+													<button
+														class="text-primary-600 hover:text-primary-700 text-xs"
+														onclick={clearElementTypeFilters}
+													>
+														Clear ({upsState.filters.elementTypes.length})
+													</button>
+												{/if}
+											</div>
+											<div class="grid grid-cols-6 gap-1">
+												{#each elementTypes as element}
+													{@const elementData = elementsData.getByKey(element)}
+													{@const localizedName = elementData?.localized_name || element}
+													<TooltipButton popupLabel={localizedName}>
+														<button
+															class={getElementButtonClass(element)}
+															onclick={() => handleElementTypeFilter(element)}
+															aria-label={localizedName}
+														>
+															<img
+																src={elementIcons[element]}
+																alt={localizedName}
+																class="h-6 w-6"
+															/>
+														</button>
+													</TooltipButton>
+												{/each}
+											</div>
+										</div>
+
+										<!-- Pal Types -->
+										<div>
+											<div class="mb-1 flex items-center justify-between">
+												<span class="text-surface-600 dark:text-surface-400 text-xs font-medium"
+													>Pal Types</span
+												>
+												{#if upsState.filters.palTypes.length > 0}
+													<button
+														class="text-primary-600 hover:text-primary-700 text-xs"
+														onclick={clearPalTypeFilters}
+													>
+														Clear ({upsState.filters.palTypes.length})
+													</button>
+												{/if}
+											</div>
+											<div class="grid grid-cols-6 gap-1">
+												<TooltipButton popupLabel="Alpha Pals">
+													<button
+														class={getPalTypeButtonClass('alpha')}
+														onclick={() => handlePalTypeFilter('alpha')}
+													>
+														<img src={staticIcons.alphaIcon} alt="Alpha" class="h-6 w-6" />
+													</button>
+												</TooltipButton>
+												<TooltipButton popupLabel="Lucky Pals">
+													<button
+														class={getPalTypeButtonClass('lucky')}
+														onclick={() => handlePalTypeFilter('lucky')}
+													>
+														<img src={staticIcons.luckyIcon} alt="Lucky" class="h-6 w-6" />
+													</button>
+												</TooltipButton>
+												<TooltipButton popupLabel="Humans">
+													<button
+														class={getPalTypeButtonClass('human')}
+														onclick={() => handlePalTypeFilter('human')}
+													>
+														<User class="h-6 w-6" />
+													</button>
+												</TooltipButton>
+												<TooltipButton popupLabel="Predator Pals">
+													<button
+														class={getPalTypeButtonClass('predator')}
+														onclick={() => handlePalTypeFilter('predator')}
+													>
+														<img src={staticIcons.predatorIcon} alt="Predator" class="h-6 w-6" />
+													</button>
+												</TooltipButton>
+												<TooltipButton popupLabel="Oil Rig Pals">
+													<button
+														class={getPalTypeButtonClass('oilrig')}
+														onclick={() => handlePalTypeFilter('oilrig')}
+													>
+														<img src={staticIcons.oilrigIcon} alt="Oil Rig" class="h-6 w-6" />
+													</button>
+												</TooltipButton>
+												<TooltipButton popupLabel="Summoned Pals">
+													<button
+														class={getPalTypeButtonClass('summon')}
+														onclick={() => handlePalTypeFilter('summon')}
+													>
+														<img src={staticIcons.altarIcon} alt="Summoned" class="h-6 w-6" />
+													</button>
+												</TooltipButton>
+											</div>
 										</div>
 									</div>
 								</div>
 
-								<!-- Sort Controls -->
+								<!-- Right Column: Sort By -->
+								<div>
+									<span class="mb-2 block text-sm font-medium">Sort By</span>
+									<div class="flex flex-wrap gap-2">
+										{#each [{ key: 'created_at', label: 'Created' }, { key: 'updated_at', label: 'Modified' }, { key: 'character_id', label: 'Character' }, { key: 'nickname', label: 'Name' }, { key: 'level', label: 'Level' }, { key: 'transfer_count', label: 'Transfers' }, { key: 'clone_count', label: 'Clones' }] as sortOption}
+											{@const IconComponent = getSortIcon(sortOption.key as UPSSortBy)}
+											<button
+												class={cn(
+													'flex items-center gap-1 rounded-md border px-3 py-1 text-sm',
+													upsState.filters.sortBy === sortOption.key
+														? 'bg-primary-500 border-primary-500 text-white'
+														: 'dark:bg-surface-800 border-surface-300 dark:border-surface-700 bg-white'
+												)}
+												onclick={() => handleSort(sortOption.key as UPSSortBy)}
+											>
+												{sortOption.label}
+												<IconComponent class="h-3 w-3" />
+											</button>
+										{/each}
+									</div>
+								</div>
 
-								<!-- Clear Filters -->
-								{#if upsState.filters.search || upsState.filters.characterId !== 'All' || upsState.filters.collectionId || upsState.filters.tags.length > 0}
-									<div class="border-surface-300 dark:border-surface-700 border-t pt-2">
+								<!-- Clear Filters (spans both columns) -->
+								{#if upsState.filters.search || upsState.filters.collectionId || upsState.filters.tags.length > 0 || upsState.filters.elementTypes.length > 0 || upsState.filters.palTypes.length > 0}
+									<div class="border-surface-300 dark:border-surface-700 col-span-2 border-t pt-2">
 										<button
 											onclick={clearFilters}
 											class="text-primary-600 hover:text-primary-700 flex items-center gap-1 text-sm"
