@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Combobox, Input, TooltipButton } from '$components/ui';
+	import { Input, TooltipButton } from '$components/ui';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import {
 		Search,
@@ -182,8 +182,23 @@
 		upsState.selectAllPals();
 	}
 
+	async function selectAllFiltered() {
+		await upsState.selectAllFilteredPals();
+	}
+
 	function clearSelection() {
 		upsState.clearSelection();
+	}
+
+	// Helper to determine if filters are active
+	function hasActiveFilters(): boolean {
+		return (
+			!!upsState.filters.search ||
+			!!upsState.filters.collectionId ||
+			upsState.filters.tags.length > 0 ||
+			upsState.filters.elementTypes.length > 0 ||
+			upsState.filters.palTypes.length > 0
+		);
 	}
 
 	async function deleteSelected() {
@@ -723,16 +738,53 @@
 			<!-- Selection Controls -->
 			{#if upsState.pals.length > 0}
 				<div
-					class="bg-surface-100 dark:bg-surface-800 flex items-center justify-between px-4 py-2 text-sm"
+					class="bg-surface-100 dark:bg-surface-800 flex items-center justify-between px-4 text-sm"
 				>
 					<div class="flex items-center gap-4">
 						<span>
-							{upsState.selectedPals.size} of {upsState.pals.length} selected
+							{upsState.selectedPals.size} of {upsState.selectedPals.size <= upsState.pals.length
+								? upsState.pals.length
+								: upsState.pagination.totalCount} selected
 						</span>
-						<div class="flex items-center gap-2">
-							<button onclick={selectAll} class="text-primary-600 hover:text-primary-700">
-								Select All
-							</button>
+						<div class="flex items-center">
+							<nav class="btn-group flex-row p-0">
+								<TooltipButton
+									popupLabel="Select all pals on current page ({upsState.pals.length})"
+								>
+									<button
+										type="button"
+										class="btn hover:preset-tonal px-2 text-xs"
+										onclick={selectAll}
+									>
+										Page
+									</button>
+								</TooltipButton>
+								{#if hasActiveFilters()}
+									<TooltipButton
+										popupLabel="Select all filtered pals ({upsState.pagination.totalCount})"
+									>
+										<button
+											type="button"
+											class="btn hover:preset-tonal px-2 text-xs"
+											onclick={selectAllFiltered}
+										>
+											Filtered
+										</button>
+									</TooltipButton>
+								{:else}
+									<TooltipButton
+										popupLabel="Select all pals in UPS ({upsState.pagination.totalCount})"
+									>
+										<button
+											type="button"
+											class="btn hover:preset-tonal px-2 text-xs"
+											onclick={selectAllFiltered}
+										>
+											All UPS
+										</button>
+									</TooltipButton>
+								{/if}
+							</nav>
 							{#if upsState.hasSelectedPals}
 								<span class="text-surface-400">•</span>
 								<button onclick={clearSelection} class="text-primary-600 hover:text-primary-700">

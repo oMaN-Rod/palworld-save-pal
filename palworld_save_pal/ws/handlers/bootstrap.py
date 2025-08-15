@@ -76,6 +76,7 @@ from palworld_save_pal.ws.messages import (
     AddGpsPalMessage,
     # UPS Messages
     GetUpsPalsMessage,
+    GetUpsAllFilteredIdsMessage,
     AddUpsPalMessage,
     UpdateUpsPalMessage,
     DeleteUpsPalsMessage,
@@ -490,6 +491,14 @@ def bootstrap(dispatcher: "MessageDispatcher"):
         {
             "message_class": GetUpsPalsMessage,
             "handler_func": ups_handler.get_ups_pals_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.GET_UPS_ALL_FILTERED_IDS.value,
+        {
+            "message_class": GetUpsAllFilteredIdsMessage,
+            "handler_func": ups_handler.get_ups_all_filtered_ids_handler,
         },
     )
 

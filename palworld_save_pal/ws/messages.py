@@ -36,6 +36,7 @@ class MessageType(str, Enum):
 
     # UPS (Universal Pal Storage) Management
     GET_UPS_PALS = "get_ups_pals"
+    GET_UPS_ALL_FILTERED_IDS = "get_ups_all_filtered_ids"
     ADD_UPS_PAL = "add_ups_pal"
     UPDATE_UPS_PAL = "update_ups_pal"
     DELETE_UPS_PALS = "delete_ups_pals"
@@ -454,6 +455,20 @@ class GetUpsPalsData(BaseModel):
 class GetUpsPalsMessage(BaseMessage):
     type: str = MessageType.GET_UPS_PALS.value
     data: GetUpsPalsData
+
+
+class GetUpsAllFilteredIdsData(BaseModel):
+    search_query: Optional[str] = None
+    character_id_filter: Optional[str] = None
+    collection_id: Optional[int] = None
+    tags: Optional[List[str]] = None
+    element_types: Optional[List[str]] = None
+    pal_types: Optional[List[str]] = None
+
+
+class GetUpsAllFilteredIdsMessage(BaseMessage):
+    type: str = MessageType.GET_UPS_ALL_FILTERED_IDS.value
+    data: GetUpsAllFilteredIdsData
 
 
 class AddUpsPalData(BaseModel):

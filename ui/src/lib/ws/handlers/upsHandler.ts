@@ -11,6 +11,16 @@ export const getUpsPalsHandler: WSMessageHandler = {
 	}
 };
 
+export const getUpsAllFilteredIdsHandler: WSMessageHandler = {
+	type: MessageType.GET_UPS_ALL_FILTERED_IDS,
+	async handle(data: { pal_ids: number[]; total_count: number }) {
+		const upsState = getUpsState();
+		// Select all the returned pal IDs
+		data.pal_ids.forEach((id) => upsState.selectedPals.add(id));
+		upsState.selectedPals = new Set(upsState.selectedPals);
+	}
+};
+
 export const addUpsPalHandler: WSMessageHandler = {
 	type: MessageType.ADD_UPS_PAL,
 	async handle(data: { pal: UPSPal }) {
@@ -308,6 +318,7 @@ export const getUpsStatsHandler: WSMessageHandler = {
 
 export const upsHandlers = [
 	getUpsPalsHandler,
+	getUpsAllFilteredIdsHandler,
 	addUpsPalHandler,
 	updateUpsPalHandler,
 	deleteUpsPalsHandler,

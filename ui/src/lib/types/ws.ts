@@ -63,6 +63,7 @@ export enum MessageType {
 
 	// UPS (Universal Pal Storage) Messages
 	GET_UPS_PALS = 'get_ups_pals',
+	GET_UPS_ALL_FILTERED_IDS = 'get_ups_all_filtered_ids',
 	ADD_UPS_PAL = 'add_ups_pal',
 	UPDATE_UPS_PAL = 'update_ups_pal',
 	DELETE_UPS_PALS = 'delete_ups_pals',

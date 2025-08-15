@@ -10,6 +10,7 @@ from palworld_save_pal.dto.pal import PalDTO
 from palworld_save_pal.utils.uuid import are_equal_uuids
 from palworld_save_pal.ws.messages import (
     GetUpsPalsMessage,
+    GetUpsAllFilteredIdsMessage,
     AddUpsPalMessage,
     UpdateUpsPalMessage,
     DeleteUpsPalsMessage,
@@ -33,6 +34,37 @@ from palworld_save_pal.ws.utils import build_response
 from palworld_save_pal.utils.logging_config import create_logger
 
 logger = create_logger(__name__)
+
+
+async def get_ups_all_filtered_ids_handler(
+    message: GetUpsAllFilteredIdsMessage, ws: WebSocket
+):
+    try:
+        data = message.data
+        pal_ids = UPSService.get_all_filtered_pal_ids(
+            search_query=data.search_query,
+            character_id_filter=data.character_id_filter,
+            collection_id=data.collection_id,
+            tags=data.tags,
+            element_types=data.element_types,
+            pal_types=data.pal_types,
+        )
+
+        response_data = {
+            "pal_ids": pal_ids,
+            "total_count": len(pal_ids),
+        }
+
+        response = build_response(MessageType.GET_UPS_ALL_FILTERED_IDS, response_data)
+        await ws.send_json(response)
+
+    except Exception as e:
+        logger.exception("Error getting all filtered UPS pal IDs: %s", str(e))
+        error_response = build_response(
+            MessageType.ERROR,
+            {"message": f"Failed to get filtered UPS pal IDs: {str(e)}"},
+        )
+        await ws.send_json(error_response)
 
 
 async def get_ups_pals_handler(message: GetUpsPalsMessage, ws: WebSocket):

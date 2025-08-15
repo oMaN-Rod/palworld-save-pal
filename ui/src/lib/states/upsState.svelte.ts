@@ -430,6 +430,22 @@ class UPSStateClass {
 		this.selectedPals = new Set(this.selectedPals);
 	}
 
+	async selectAllFilteredPals(): Promise<void> {
+		try {
+			await send(MessageType.GET_UPS_ALL_FILTERED_IDS, {
+				search_query: this.filters.search || undefined,
+				character_id_filter:
+					this.filters.characterId !== 'All' ? this.filters.characterId : undefined,
+				collection_id: this.filters.collectionId,
+				tags: this.filters.tags.length > 0 ? this.filters.tags : undefined,
+				element_types: this.filters.elementTypes.length > 0 ? this.filters.elementTypes : undefined,
+				pal_types: this.filters.palTypes.length > 0 ? this.filters.palTypes : undefined
+			});
+		} catch (error) {
+			console.error('Error selecting all filtered pals:', error);
+		}
+	}
+
 	clearSelection(): void {
 		this.selectedPals = new Set();
 	}

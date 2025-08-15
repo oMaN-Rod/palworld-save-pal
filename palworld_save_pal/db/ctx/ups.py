@@ -79,6 +79,117 @@ class UPSService:
             return ups_pal
 
     @staticmethod
+    def get_all_filtered_pal_ids(
+        search_query: Optional[str] = None,
+        character_id_filter: Optional[str] = None,
+        collection_id: Optional[int] = None,
+        tags: Optional[List[str]] = None,
+        element_types: Optional[List[str]] = None,
+        pal_types: Optional[List[str]] = None,
+    ) -> List[int]:
+        """Get all pal IDs matching the current filters without pagination."""
+        with Session(engine) as session:
+            query = select(UPSPalModel.id)
+            
+            # Apply the same filters as get_pals
+            conditions = []
+            
+            if search_query:
+                search_condition = or_(
+                    UPSPalModel.character_id.ilike(f"%{search_query}%"),
+                    UPSPalModel.nickname.ilike(f"%{search_query}%"),
+                    UPSPalModel.notes.ilike(f"%{search_query}%"),
+                )
+                conditions.append(search_condition)
+            
+            if character_id_filter and character_id_filter != "All":
+                conditions.append(UPSPalModel.character_id == character_id_filter)
+            
+            if collection_id is not None:
+                conditions.append(UPSPalModel.collection_id == collection_id)
+            
+            if tags:
+                for tag in tags:
+                    tag_json = json.dumps(tag)
+                    conditions.append(UPSPalModel.tags.like(f"%{tag_json}%"))
+            
+            # Filter by element types (need to look up from pals.json data)
+            if element_types:
+                # Load pals data to get element types for each character
+                pals_json = JsonManager("data/json/pals.json")
+                pals_data = pals_json.read()
+                
+                # Find all character_ids that have the requested element types
+                matching_character_ids = []
+                for code_name, pal_info in pals_data.items():
+                    pal_element_types = pal_info.get("element_types", [])
+                    # Check if any of the requested element types match this pal
+                    if any(element in pal_element_types for element in element_types):
+                        matching_character_ids.append(code_name)
+                
+                # Add condition to filter by these character_ids
+                if matching_character_ids:
+                    character_conditions = []
+                    for char_id in matching_character_ids:
+                        character_conditions.append(UPSPalModel.character_id == char_id)
+                    conditions.append(or_(*character_conditions))
+            
+            # Filter by pal types (alpha, lucky, human, predator, oilrig, summon)
+            if pal_types:
+                type_conditions = []
+                for pal_type in pal_types:
+                    if pal_type == "alpha":
+                        # Check for is_boss: true in pal_data
+                        type_conditions.append(
+                            UPSPalModel.pal_data.like('%"is_boss": true%')
+                        )
+                    elif pal_type == "lucky":
+                        # Check for is_lucky: true in pal_data
+                        type_conditions.append(
+                            UPSPalModel.pal_data.like('%"is_lucky": true%')
+                        )
+                    elif pal_type == "human":
+                        # Humans are identified by is_pal: false in pals.json
+                        pals_json = JsonManager("data/json/pals.json")
+                        pals_data = pals_json.read()
+                        human_character_ids = [
+                            code_name
+                            for code_name, pal_info in pals_data.items()
+                            if not pal_info.get("is_pal", True)
+                        ]
+                        if human_character_ids:
+                            human_conditions = []
+                            for char_id in human_character_ids:
+                                human_conditions.append(
+                                    UPSPalModel.character_id == char_id
+                                )
+                            type_conditions.append(or_(*human_conditions))
+                    elif pal_type == "predator":
+                        # Check character_id contains "predator_"
+                        type_conditions.append(
+                            UPSPalModel.character_id.like("%predator_%")
+                        )
+                    elif pal_type == "oilrig":
+                        # Check character_id contains "_oilrig"
+                        type_conditions.append(
+                            UPSPalModel.character_id.like("%_oilrig%")
+                        )
+                    elif pal_type == "summon":
+                        # Check character_id contains "summon_"
+                        type_conditions.append(
+                            UPSPalModel.character_id.like("%summon_%")
+                        )
+                if type_conditions:
+                    conditions.append(or_(*type_conditions))
+            
+            if conditions:
+                query = query.where(and_(*conditions))
+            
+            # Get all IDs
+            pal_ids = session.exec(query).all()
+            return list(pal_ids)
+
+    @staticmethod
     def get_pals(
         offset: int = 0,
         limit: int = 30,
