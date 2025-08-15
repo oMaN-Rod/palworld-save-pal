@@ -928,6 +928,13 @@ async def get_ups_stats_handler(_: GetUpsStatsMessage, ws: WebSocket):
                 "most_transferred_pal_id": stats.most_transferred_pal_id,
                 "most_cloned_pal_id": stats.most_cloned_pal_id,
                 "most_popular_character_id": stats.most_popular_character_id,
+                "element_distribution": stats.element_distribution,
+                "alpha_count": stats.alpha_count,
+                "lucky_count": stats.lucky_count,
+                "human_count": stats.human_count,
+                "predator_count": stats.predator_count,
+                "oilrig_count": stats.oilrig_count,
+                "summon_count": stats.summon_count,
                 "last_updated": stats.last_updated.isoformat(),
             }
         }

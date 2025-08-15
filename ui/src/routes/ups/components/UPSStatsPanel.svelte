@@ -1,6 +1,10 @@
 <script lang="ts">
-	import { BarChart3, TrendingUp, Database, Calendar } from 'lucide-svelte';
+	import { BarChart3, TrendingUp, Database, Calendar, User } from 'lucide-svelte';
 	import { getUpsState } from '$states';
+	import { elementsData } from '$lib/data';
+	import { ASSET_DATA_PATH } from '$lib/constants';
+	import { assetLoader } from '$utils';
+	import { staticIcons } from '$types/icons';
 
 	const upsState = getUpsState();
 
@@ -24,6 +28,41 @@
 	const totalClones = $derived(stats?.total_clones || 0);
 	const storageSize = $derived(stats?.storage_size_mb || 0);
 	const lastUpdated = $derived(stats?.last_updated);
+
+	const elementDistribution = $derived.by(() => {
+		if (!stats?.element_distribution) {
+			console.warn('No element distribution data available', stats);
+			return {};
+		}
+		try {
+			return JSON.parse(stats.element_distribution);
+		} catch {
+			return {};
+		}
+	});
+
+	const specialStats = $derived({
+		alpha: stats?.alpha_count || 0,
+		lucky: stats?.lucky_count || 0,
+		human: stats?.human_count || 0,
+		predator: stats?.predator_count || 0,
+		oilrig: stats?.oilrig_count || 0,
+		summon: stats?.summon_count || 0
+	});
+
+	const elementTypes = $derived(Object.keys(elementsData.elements));
+	const elementIcons = $derived.by(() => {
+		let icons: Record<string, string> = {};
+		for (const element of elementTypes) {
+			const elementData = elementsData.elements[element];
+			if (elementData) {
+				icons[element] = assetLoader.loadImage(
+					`${ASSET_DATA_PATH}/img/${elementData.icon}.webp`
+				) as string;
+			}
+		}
+		return icons;
+	});
 </script>
 
 <div class="flex h-full flex-col">
@@ -162,6 +201,86 @@
 								<span class="font-medium">{(totalPals / totalCollections).toFixed(1)}</span>
 							</div>
 						{/if}
+					</div>
+				</div>
+			{/if}
+
+			<!-- Elemental Distribution -->
+			{#if Object.keys(elementDistribution).length > 0}
+				<div
+					class="dark:bg-surface-800 border-surface-300 dark:border-surface-700 rounded-lg border bg-white p-4"
+				>
+					<h3 class="text-surface-900 dark:text-surface-100 mb-3 text-sm font-medium">
+						Elemental Distribution
+					</h3>
+					<div class="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
+						{#each elementTypes as element}
+							{@const count = elementDistribution[element] || 0}
+							{@const elementData = elementsData.getByKey(element)}
+							{@const localizedName = elementData?.localized_name || element}
+							<div class="flex items-center">
+								<img src={elementIcons[element]} alt={element} class="mr-2 h-5 w-5" />
+								<div class="grow">
+									<span class="text-xs">{localizedName}</span>
+								</div>
+								<span class="font-medium">{count}</span>
+							</div>
+						{/each}
+					</div>
+				</div>
+			{/if}
+
+			<!-- Special Categories -->
+			{#if totalPals > 0}
+				<div
+					class="dark:bg-surface-800 border-surface-300 dark:border-surface-700 rounded-lg border bg-white p-4"
+				>
+					<h3 class="text-surface-900 dark:text-surface-100 mb-3 text-sm font-medium">
+						Special Categories
+					</h3>
+					<div class="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
+						<div class="flex items-center">
+							<img src={staticIcons.alphaIcon} alt="Alpha" class="mr-2 h-5 w-5" />
+							<div class="grow">
+								<span class="text-xs">Alpha</span>
+							</div>
+							<span class="font-medium">{specialStats.alpha}</span>
+						</div>
+						<div class="flex items-center">
+							<img src={staticIcons.luckyIcon} alt="Lucky" class="mr-2 h-5 w-5" />
+							<div class="grow">
+								<span class="text-xs">Lucky</span>
+							</div>
+							<span class="font-medium">{specialStats.lucky}</span>
+						</div>
+						<div class="flex items-center">
+							<User class="mr-2 h-5 w-5" />
+							<div class="grow">
+								<span class="text-xs">Human</span>
+							</div>
+							<span class="font-medium">{specialStats.human}</span>
+						</div>
+						<div class="flex items-center">
+							<img src={staticIcons.predatorIcon} alt="Predator" class="mr-2 h-5 w-5" />
+							<div class="grow">
+								<span class="text-xs">Predator</span>
+							</div>
+							<span class="font-medium">{specialStats.predator}</span>
+						</div>
+						<div class="flex items-center">
+							<img src={staticIcons.oilrigIcon} alt="Oil Rig" class="mr-2 h-5 w-5" />
+							<div class="grow">
+								<span class="text-xs">Oil Rig</span>
+							</div>
+							<span class="font-medium">{specialStats.oilrig}</span>
+						</div>
+						<div class="flex items-center">
+							<img src={staticIcons.altarIcon} alt="Summoned" class="mr-2 h-5 w-5" />
+							<div class="grow">
+								<span class="text-xs">Summoned</span>
+							</div>
+							<span class="font-medium">{specialStats.summon}</span>
+						</div>
 					</div>
 				</div>
 			{/if}

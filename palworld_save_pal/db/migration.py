@@ -18,7 +18,7 @@ def migrate_table_column(
     )
     if not cursor.fetchone():
         logger.debug(
-            f"{table_name} table doesn't exist yet, skipping pal preset {column_name} migration"
+            f"{table_name} table doesn't exist yet, skipping {column_name} migration"
         )
         return
 
@@ -53,6 +53,16 @@ def run_migrations(db_path):
         migrate_table_column(
             conn, cursor, "palpreset", "friendship_point", "INTEGER", 0
         )
+
+        migrate_table_column(
+            conn, cursor, "ups_stats", "element_distribution", "TEXT", "'{}'"
+        )
+        migrate_table_column(conn, cursor, "ups_stats", "alpha_count", "INTEGER", 0)
+        migrate_table_column(conn, cursor, "ups_stats", "lucky_count", "INTEGER", 0)
+        migrate_table_column(conn, cursor, "ups_stats", "human_count", "INTEGER", 0)
+        migrate_table_column(conn, cursor, "ups_stats", "predator_count", "INTEGER", 0)
+        migrate_table_column(conn, cursor, "ups_stats", "oilrig_count", "INTEGER", 0)
+        migrate_table_column(conn, cursor, "ups_stats", "summon_count", "INTEGER", 0)
 
         cursor.close()
         conn.close()

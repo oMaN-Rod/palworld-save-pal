@@ -88,6 +88,14 @@ class UPSStatsModel(SQLModel, table=True):
     most_cloned_pal_id: Optional[int] = Field(default=None)
     most_popular_character_id: Optional[str] = Field(default=None)
 
+    element_distribution: str = Field(default="{}")
+    alpha_count: int = Field(default=0)
+    lucky_count: int = Field(default=0)
+    human_count: int = Field(default=0)
+    predator_count: int = Field(default=0)
+    oilrig_count: int = Field(default=0)
+    summon_count: int = Field(default=0)
+
     last_updated: datetime = Field(default_factory=datetime.utcnow)
 
 

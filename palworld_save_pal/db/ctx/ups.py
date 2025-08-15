@@ -90,10 +90,10 @@ class UPSService:
         """Get all pal IDs matching the current filters without pagination."""
         with Session(engine) as session:
             query = select(UPSPalModel.id)
-            
+
             # Apply the same filters as get_pals
             conditions = []
-            
+
             if search_query:
                 search_condition = or_(
                     UPSPalModel.character_id.ilike(f"%{search_query}%"),
@@ -101,24 +101,24 @@ class UPSService:
                     UPSPalModel.notes.ilike(f"%{search_query}%"),
                 )
                 conditions.append(search_condition)
-            
+
             if character_id_filter and character_id_filter != "All":
                 conditions.append(UPSPalModel.character_id == character_id_filter)
-            
+
             if collection_id is not None:
                 conditions.append(UPSPalModel.collection_id == collection_id)
-            
+
             if tags:
                 for tag in tags:
                     tag_json = json.dumps(tag)
                     conditions.append(UPSPalModel.tags.like(f"%{tag_json}%"))
-            
+
             # Filter by element types (need to look up from pals.json data)
             if element_types:
                 # Load pals data to get element types for each character
                 pals_json = JsonManager("data/json/pals.json")
                 pals_data = pals_json.read()
-                
+
                 # Find all character_ids that have the requested element types
                 matching_character_ids = []
                 for code_name, pal_info in pals_data.items():
@@ -126,14 +126,14 @@ class UPSService:
                     # Check if any of the requested element types match this pal
                     if any(element in pal_element_types for element in element_types):
                         matching_character_ids.append(code_name)
-                
+
                 # Add condition to filter by these character_ids
                 if matching_character_ids:
                     character_conditions = []
                     for char_id in matching_character_ids:
                         character_conditions.append(UPSPalModel.character_id == char_id)
                     conditions.append(or_(*character_conditions))
-            
+
             # Filter by pal types (alpha, lucky, human, predator, oilrig, summon)
             if pal_types:
                 type_conditions = []
@@ -181,10 +181,10 @@ class UPSService:
                         )
                 if type_conditions:
                     conditions.append(or_(*type_conditions))
-            
+
             if conditions:
                 query = query.where(and_(*conditions))
-            
+
             # Get all IDs
             pal_ids = session.exec(query).all()
             return list(pal_ids)
@@ -705,8 +705,68 @@ class UPSService:
 
         stats.storage_size_mb = total_bytes / (1024 * 1024)  # Convert bytes to MB
 
+        # Calculate elemental distribution and special categories
+        UPSService._calculate_elemental_and_special_stats(session, stats)
+
         stats.last_updated = datetime.now(dt.timezone.utc)
         session.commit()
+
+    @staticmethod
+    def _calculate_elemental_and_special_stats(session: Session, stats: UPSStatsModel):
+        pals_json = JsonManager("data/json/pals.json")
+        pals_data = pals_json.read()
+
+        all_pals = session.exec(select(UPSPalModel)).all()
+        logger.debug(f"Processing {len(all_pals)} pals for elemental and special stats")
+
+        element_counts = {}
+        alpha_count = 0
+        lucky_count = 0
+        human_count = 0
+        predator_count = 0
+        oilrig_count = 0
+        summon_count = 0
+
+        for pal in all_pals:
+            char_id = pal.character_id
+            pal_data_dict = pal.pal_data
+
+            # Count element types
+            if char_id in pals_data:
+                character_data = pals_data[char_id]
+                element_types = character_data.get("element_types", [])
+
+                for element_type in element_types:
+                    element_counts[element_type] = (
+                        element_counts.get(element_type, 0) + 1
+                    )
+
+                if not character_data.get("is_pal", True):
+                    human_count += 1
+
+            # Count special categories from pal_data
+            if pal_data_dict:
+                if pal_data_dict.get("is_boss", False):
+                    alpha_count += 1
+
+                if pal_data_dict.get("is_lucky", False):
+                    lucky_count += 1
+
+            char_id_lower = char_id.lower()
+            if "predator_" in char_id_lower:
+                predator_count += 1
+            elif "_oilrig" in char_id_lower:
+                oilrig_count += 1
+            elif "summon_" in char_id_lower:
+                summon_count += 1
+
+        stats.element_distribution = json.dumps(element_counts)
+        stats.alpha_count = alpha_count
+        stats.lucky_count = lucky_count
+        stats.human_count = human_count
+        stats.predator_count = predator_count
+        stats.oilrig_count = oilrig_count
+        stats.summon_count = summon_count
 
     @staticmethod
     def _log_transfer(

@@ -54,6 +54,13 @@ export interface UPSStats {
 	most_transferred_pal_id?: number;
 	most_cloned_pal_id?: number;
 	most_popular_character_id?: string;
+	element_distribution: string;
+	alpha_count: number;
+	lucky_count: number;
+	human_count: number;
+	predator_count: number;
+	oilrig_count: number;
+	summon_count: number;
 	last_updated: string;
 }
 
