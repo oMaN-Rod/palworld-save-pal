@@ -1,6 +1,6 @@
 [project]
 name = "PalworldSavePal"
-version = "0.14.6"
+version = "0.15.0-rc1"
 requires-python = ">=3.12"
 dependencies = [
     "altgraph==0.17.4",
