@@ -300,7 +300,7 @@ export const deleteUpsTagHandler: WSMessageHandler = {
 			// Remove tag from the list
 			const deletedTag = upsState.tags.find((t) => t.id === data.tag_id);
 			upsState.tags = upsState.tags.filter((t) => t.id !== data.tag_id);
-			
+
 			if (deletedTag) {
 				toastState.add(`Deleted tag "${deletedTag.name}"`, 'Success', 'success');
 			}

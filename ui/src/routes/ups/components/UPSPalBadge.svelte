@@ -24,15 +24,16 @@
 	const nav = getNavigationState();
 	const toast = getToastState();
 
-	const pal = $derived<Pal>({
-		...upsPal.pal_data,
-		id: upsPal.id,
-		instance_id: upsPal.instance_id,
-		character_id: upsPal.character_id,
-		nickname: upsPal.nickname,
-		level: upsPal.level,
-		character_key: upsPal.character_key
-	} as Pal);
+	const pal = $derived.by<Pal>(() => {
+		let pal = {
+			...upsPal.pal_data,
+			id: upsPal.id
+		} as Pal;
+		if (!pal.character_key && upsPal.character_key) {
+			pal.character_key = upsPal.character_key;
+		}
+		return pal;
+	});
 
 	const menuItems = $derived([
 		{

@@ -243,14 +243,14 @@ class UPSStateClass {
 		updates: Partial<Pick<UPSPal, 'nickname' | 'collection_id' | 'tags' | 'notes'>>
 	): Promise<void> {
 		try {
-			await send(MessageType.UPDATE_UPS_PAL, {
+			const upsPal = await sendAndWait(MessageType.UPDATE_UPS_PAL, {
 				pal_id: palId,
 				updates
 			});
 
 			const index = this.pals.findIndex((p) => p.id === palId);
 			if (index >= 0) {
-				Object.assign(this.pals[index], updates);
+				this.pals[index] = { ...this.pals[index], ...updates };
 			}
 
 			// Refresh collections if collection assignment changed

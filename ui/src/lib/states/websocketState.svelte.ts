@@ -28,9 +28,6 @@ class SocketState {
 			this.#message = data;
 			if (!this.#message) return;
 
-			const messageSnapshot = $state.snapshot(this.#message);
-			console.log(`Received message: ${this.#message.type}`, messageSnapshot);
-
 			if (this.#message.type && this.#messageQueue.has(this.#message.type)) {
 				const resolve = this.#messageQueue.get(this.#message.type);
 				if (resolve) {
@@ -39,6 +36,9 @@ class SocketState {
 					return;
 				}
 			}
+
+			const messageSnapshot = $state.snapshot(this.#message);
+			console.log(`Received message: ${this.#message.type}`, messageSnapshot);
 
 			await this.#dispatcher.dispatch(this.#message, context);
 		};

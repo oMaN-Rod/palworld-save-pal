@@ -62,6 +62,7 @@ export type Pal = {
 	// UPS metadata fields (optional)
 	__ups_source?: boolean;
 	__ups_id?: number;
+	__ups_new?: boolean;
 };
 
 export type StatusPointList = {

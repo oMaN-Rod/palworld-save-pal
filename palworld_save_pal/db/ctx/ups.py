@@ -74,6 +74,31 @@ class UPSService:
                 success=True,
             )
 
+            # Ensure all attributes are loaded before expunging
+            # Access all the attributes that will be needed after expunging
+            _ = ups_pal.id
+            _ = ups_pal.instance_id
+            _ = ups_pal.character_id
+            _ = ups_pal.nickname
+            _ = ups_pal.level
+            _ = ups_pal.collection_id
+            _ = ups_pal.tags
+            _ = ups_pal.notes
+            _ = ups_pal.created_at
+            _ = ups_pal.updated_at
+            _ = ups_pal.last_accessed_at
+            _ = ups_pal.transfer_count
+            _ = ups_pal.clone_count
+            _ = ups_pal.pal_data
+            _ = ups_pal.source_save_file
+            _ = ups_pal.source_player_uid
+            _ = ups_pal.source_player_name
+            _ = ups_pal.source_storage_type
+            _ = ups_pal.source_storage_slot
+            _ = ups_pal.collection
+            _ = ups_pal.tags
+            _ = ups_pal.notes
+
             # Create a detached copy with all necessary attributes
             session.expunge(ups_pal)
             return ups_pal

@@ -48,6 +48,8 @@
 			return appState.selectedPlayer.level < pal.level
 				? appState.selectedPlayer.level.toString()
 				: pal.level.toString();
+		} else if (pal) {
+			return pal.level.toString();
 		}
 	});
 	const palLevelClass = $derived.by(() => {
@@ -80,7 +82,7 @@
 	}
 
 	async function handleLevelIncrement(event: MouseEvent) {
-		if (!pal || !appState.selectedPlayer || !appState.selectedPlayer.pals) return;
+		if (!pal) return;
 
 		let newLevel = pal.level;
 
@@ -108,7 +110,7 @@
 	}
 
 	async function handleLevelDecrement(event: MouseEvent) {
-		if (!pal || !appState.selectedPlayer || !appState.selectedPlayer.pals) return;
+		if (!pal) return;
 
 		let newLevel = pal.level;
 

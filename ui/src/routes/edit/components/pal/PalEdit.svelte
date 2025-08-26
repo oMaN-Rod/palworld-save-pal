@@ -519,7 +519,11 @@
 		</div>
 	</div>
 {:else}
-	<div class="flex w-full items-center justify-center">
-		<h2 class="h2">Select a Player ➡️ Pal to edit 🚀</h2>
+	<div class="flex w-full flex-col items-center justify-center">
+		<h2 class="h2">Select a Pal to edit 🚀</h2>
+		<p>
+			Pals can be selected in a Players Pal Box, Guild Bases, Global Pal Storage, Dimensional Pal
+			Storage, or Universal Pal Storage
+		</p>
 	</div>
 {/if}

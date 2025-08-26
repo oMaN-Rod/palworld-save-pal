@@ -146,20 +146,7 @@ async def add_ups_pal_handler(message: AddUpsPalMessage, ws: WebSocket):
             notes=data.notes,
         )
 
-        response_data = {
-            "pal": {
-                "id": ups_pal.id,
-                "instance_id": str(ups_pal.instance_id),
-                "character_id": ups_pal.character_id,
-                "nickname": ups_pal.nickname,
-                "level": ups_pal.level,
-                "collection_id": ups_pal.collection_id,
-                "tags": ups_pal.tags,
-                "notes": ups_pal.notes,
-            }
-        }
-
-        response = build_response(MessageType.ADD_UPS_PAL, response_data)
+        response = build_response(MessageType.ADD_UPS_PAL, ups_pal)
         await ws.send_json(response)
 
     except Exception as e:

@@ -1,20 +1,19 @@
 import { goto } from '$app/navigation';
 import { TextInputModal } from '$components';
 import { send, sendAndWait } from '$lib/utils/websocketUtils';
+import { getNavigationState, upsState } from '$states';
 import type {
 	AppSettings,
 	GamepassSave,
 	Guild,
 	GuildDTO,
 	ItemContainer,
-	ItemContainerSlot
+	ItemContainerSlot,
+	UPSPal
 } from '$types';
 import { EntryState, MessageType, type Pal, type Player, type SaveFile } from '$types';
 import { deepCopy } from '$utils';
 import { getModalState } from './modalState.svelte';
-
-const modal = getModalState();
-
 interface ModifiedData {
 	modified_pals?: Record<string, Pal>;
 	modified_dps_pals?: Record<number, Pal>;
@@ -51,6 +50,72 @@ class AppState {
 
 	initData() {}
 
+	async addNewUpspal(pal: Pal) {
+		const nav = getNavigationState();
+		// Create the pal_dto from pal data for adding new pal
+		const palDto = {
+			instance_id: '00000000-0000-0000-0000-000000000000',
+			owner_uid: null,
+			character_id: pal.character_id,
+			nickname: pal.nickname,
+			level: pal.level,
+			exp: pal.exp,
+			rank: pal.rank,
+			rank_hp: pal.rank_hp,
+			rank_attack: pal.rank_attack,
+			rank_defense: pal.rank_defense,
+			rank_craftspeed: pal.rank_craftspeed,
+			talent_hp: pal.talent_hp,
+			talent_shot: pal.talent_shot,
+			talent_defense: pal.talent_defense,
+			hp: pal.hp,
+			max_hp: pal.max_hp,
+			sanity: pal.sanity,
+			stomach: pal.stomach,
+			is_lucky: pal.is_lucky,
+			is_boss: pal.is_boss,
+			gender: pal.gender,
+			is_tower: pal.is_tower,
+			storage_id: '00000000-0000-0000-0000-000000000000',
+			storage_slot: 0,
+			group_id: null,
+			learned_skills: pal.learned_skills,
+			active_skills: pal.active_skills,
+			passive_skills: pal.passive_skills,
+			work_suitability: pal.work_suitability,
+			is_sick: pal.is_sick,
+			friendship_point: pal.friendship_point
+		};
+
+		// Send ADD_UPS_PAL message
+		const upsPal: UPSPal = await sendAndWait(MessageType.ADD_UPS_PAL, {
+			pal_dto: palDto,
+			source_save_file: undefined,
+			source_player_uid: undefined,
+			source_player_name: undefined,
+			source_storage_type: 'manual_add',
+			source_storage_slot: undefined,
+			collection_id: undefined,
+			tags: [],
+			notes: 'Created via Add Pal feature'
+		});
+
+		const palWithMetadata = {
+			...(upsPal.pal_data as Pal),
+			// Add metadata to track that this pal comes from UPS
+			__ups_source: true,
+			__ups_id: upsPal.id,
+			__ups_new: false
+		};
+
+		appState.selectedPal = palWithMetadata;
+		upsState.pals = [...upsState.pals, upsPal];
+		upsState.pagination.totalCount++;
+		nav.activeTab = 'pal';
+		// Navigate to edit page
+		goto('/edit');
+	}
+
 	async saveUpspalChanges(pal: Pal) {
 		if (!pal.__ups_id) {
 			throw new Error('UPS pal ID not found');
@@ -61,41 +126,10 @@ class AppState {
 			nickname: pal.nickname,
 			level: pal.level,
 			pal_data: {
-				instance_id: pal.instance_id,
-				character_id: pal.character_id,
-				nickname: pal.nickname,
-				level: pal.level,
-				exp: pal.exp,
-				rank: pal.rank,
-				rank_hp: pal.rank_hp,
-				rank_attack: pal.rank_attack,
-				rank_defense: pal.rank_defense,
-				rank_craftspeed: pal.rank_craftspeed,
-				talent_hp: pal.talent_hp,
-				talent_shot: pal.talent_shot,
-				talent_defense: pal.talent_defense,
-				hp: pal.hp,
-				max_hp: pal.max_hp,
-				sanity: pal.sanity,
-				stomach: pal.stomach,
-				is_lucky: pal.is_lucky,
-				is_boss: pal.is_boss,
-				gender: pal.gender,
-				is_tower: pal.is_tower,
-				learned_skills: pal.learned_skills,
-				active_skills: pal.active_skills,
-				passive_skills: pal.passive_skills,
-				work_suitability: pal.work_suitability,
-				is_sick: pal.is_sick,
-				friendship_point: pal.friendship_point,
+				...pal
 			}
 		};
-
-		// Send UPDATE_UPS_PAL message
-		await sendAndWait(MessageType.UPDATE_UPS_PAL, {
-			pal_id: pal.__ups_id,
-			updates: updates
-		});
+		upsState.updatePal(pal.__ups_id, updates);
 	}
 
 	async saveState() {
@@ -106,11 +140,20 @@ class AppState {
 		let modifiedPlayers: [string, Player][] = [];
 		let modifiedGuilds: [string, GuildDTO][] = [];
 
-		// Handle UPS pal modifications
-		if (this.selectedPal && this.selectedPal.state === EntryState.MODIFIED && this.selectedPal.__ups_source) {
+		// Handle UPS pal modifications and new UPS pals
+		if (
+			this.selectedPal &&
+			this.selectedPal.state === EntryState.MODIFIED &&
+			this.selectedPal.__ups_source
+		) {
 			try {
-				// Save UPS pal changes back to UPS
-				await this.saveUpspalChanges(this.selectedPal);
+				if (this.selectedPal.__ups_new) {
+					// Add new pal to UPS
+					await this.addNewUpspal(this.selectedPal);
+				} else {
+					// Save UPS pal changes back to UPS
+					await this.saveUpspalChanges(this.selectedPal);
+				}
 				this.selectedPal.state = EntryState.NONE;
 			} catch (error) {
 				console.error('Failed to save UPS pal changes:', error);
@@ -243,6 +286,7 @@ class AppState {
 	}
 
 	async writeSave() {
+		const modal = getModalState();
 		if (!this.saveFile) return;
 		await this.saveState();
 		if (this.saveFile.type === 'gamepass') {

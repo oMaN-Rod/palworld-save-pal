@@ -64,18 +64,16 @@
 		{/if}
 	{/snippet}
 	{#snippet tiles()}
-		{#if appState.saveFile}
-			<Navigation.Tile
-				label="Edit"
-				labelBase="text-xs"
-				title="Edit"
-				id="edit"
-				href="/edit"
-				active="bg-secondary-500"
-			>
-				<Pencil />
-			</Navigation.Tile>
-		{/if}
+		<Navigation.Tile
+			label="Edit"
+			labelBase="text-xs"
+			title="Edit"
+			id="edit"
+			href="/edit"
+			active="bg-secondary-500"
+		>
+			<Pencil />
+		</Navigation.Tile>
 		{#if PUBLIC_DESKTOP_MODE === 'true'}
 			<Navigation.Tile
 				label="Files"

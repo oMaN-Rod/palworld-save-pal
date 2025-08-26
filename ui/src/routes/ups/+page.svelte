@@ -26,19 +26,30 @@
 		EditTagsModal,
 		AddToCollectionModal,
 		ExportPalModal,
-		NukeUpsConfirmModal
+		NukeUpsConfirmModal,
+		PalSelectModal
 	} from '$components/modals';
 	import { cn } from '$theme';
-	import { getUpsState, getModalState, getAppState, getToastState } from '$states';
-	import { elementsData } from '$lib/data';
+	import {
+		getUpsState,
+		getModalState,
+		getAppState,
+		getToastState,
+		getNavigationState
+	} from '$states';
+	import { elementsData, palsData } from '$lib/data';
+	import { goto } from '$app/navigation';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { assetLoader } from '$utils';
 	import { staticIcons } from '$types/icons';
-	import type {
-		UPSSortBy,
-		UPSSortOrder,
-		ImportToUpsModalResults,
-		AddToCollectionResult
+	import {
+		type UPSSortBy,
+		type UPSSortOrder,
+		type ImportToUpsModalResults,
+		type AddToCollectionResult,
+		EntryState,
+		PalGender,
+		type WorkSuitability
 	} from '$types';
 
 	import UPSPalGrid from './components/UPSPalGrid.svelte';
@@ -47,6 +58,7 @@
 	import UPSStatsPanel from './components/UPSStatsPanel.svelte';
 	import UPSPalList from './components/UPSPalList.svelte';
 	import Nuke from '$components/ui/icons/Nuke.svelte';
+	import WorkSuitabilities from '$components/badges/work-suitabilities/WorkSuitabilities.svelte';
 
 	const VISIBLE_PAGE_BUBBLES = 16;
 
@@ -54,6 +66,7 @@
 	const modal = getModalState();
 	const appState = getAppState();
 	const toast = getToastState();
+	const nav = getNavigationState();
 
 	let searchInput = $state('');
 	let searchTimeout: ReturnType<typeof setTimeout> | undefined = undefined;
@@ -383,6 +396,82 @@
 		}
 	}
 
+	async function handleAddPal() {
+		// @ts-ignore
+		const result = await modal.showModal<[string, string] | undefined>(PalSelectModal, {
+			title: 'Add a new Pal to UPS'
+		});
+
+		if (!result) return;
+
+		const [selectedPal, nickname] = result;
+		const palData = palsData.getByKey(selectedPal);
+
+		if (!palData) {
+			toast.add('Failed to get pal data', 'Error', 'error');
+			return;
+		}
+
+		try {
+			// Create character_key using the same logic as backend
+			let character_key = selectedPal.toLowerCase();
+			if (character_key.startsWith('boss_')) {
+				character_key = character_key.slice(5);
+			} else if (character_key.startsWith('predator_')) {
+				character_key = character_key.slice(9);
+			} else if (character_key.endsWith('_avatar')) {
+				character_key = character_key.slice(0, -7);
+			}
+
+			// Create a new pal instance with proper default values
+			const newPal = {
+				instance_id: '00000000-0000-0000-0000-000000000000',
+				character_id: selectedPal,
+				character_key: character_key,
+				nickname: nickname || palData.localized_name,
+				name: palData.localized_name,
+				level: 1,
+				exp: 0,
+				rank: 1,
+				rank_hp: 0,
+				rank_attack: 0,
+				rank_defense: 0,
+				rank_craftspeed: 0,
+				talent_hp: 50,
+				talent_shot: 50,
+				talent_defense: 50,
+				hp: 100,
+				max_hp: 100,
+				sanity: 100,
+				stomach: 100,
+				is_lucky: false,
+				is_boss: false,
+				is_predator: false,
+				is_tower: false,
+				is_sick: false,
+				gender: PalGender.MALE,
+				friendship_point: 0,
+				owner_uid: '',
+				storage_id: '00000000-0000-0000-0000-000000000000', // Required UUID field
+				storage_slot: 0,
+				group_id: null, // Optional UUID field
+				learned_skills: [],
+				active_skills: [],
+				passive_skills: [],
+				work_suitability: {} as Record<WorkSuitability, number>,
+				elements: palData.element_types || [],
+				state: EntryState.MODIFIED,
+				__ups_source: true,
+				__ups_new: true
+			};
+
+			appState.addNewUpspal(newPal);
+		} catch (error) {
+			console.error('Failed to create new pal:', error);
+			toast.add('Failed to create new pal. Please try again.', 'Error', 'error');
+		}
+	}
+
 	$effect(() => {
 		searchInput = upsState.filters.search;
 	});
@@ -407,16 +496,27 @@
 
 		<!-- View Controls -->
 		<div class="flex items-center gap-2">
-			<!-- Import Button (when Pals exist) -->
-			{#if upsState.pagination.totalCount > 0 && appState.saveFile}
+			<!-- Add Pal Button -->
+			<TooltipButton
+				onclick={handleAddPal}
+				class="rounded-md bg-green-500 p-2 text-white hover:bg-green-600"
+				popupLabel="Add New Pal"
+			>
+				<Plus class="h-4 w-4" />
+			</TooltipButton>
+
+			<!-- Import Button (when Pals exist and save file is loaded) -->
+			{#if appState.saveFile}
 				<TooltipButton
 					onclick={handleImportFromSave}
 					class="rounded-md bg-blue-500 p-2 text-white hover:bg-blue-600"
 					popupLabel="Import from Save"
 				>
-					<Plus class="h-4 w-4" />
+					<Upload class="h-4 w-4" />
 				</TooltipButton>
+			{/if}
 
+			{#if upsState.pagination.totalCount > 0 || appState.saveFile}
 				<div class="bg-surface-300 dark:bg-surface-700 h-6 w-px"></div>
 			{/if}
 
@@ -812,17 +912,26 @@
 							No Pals in Storage
 						</h3>
 						<p class="text-surface-500 mb-4 max-w-md">
-							Import Pals from your save files or receive them from other players to get started.
+							Create new Pals or import them from your save files to get started.
 						</p>
-						{#if appState.saveFile}
+						<div class="flex gap-3">
 							<button
-								class="bg-primary-500 hover:bg-primary-600 flex items-center gap-2 rounded-md px-4 py-2 text-white"
-								onclick={handleImportFromSave}
+								class="flex items-center gap-2 rounded-md bg-green-500 px-4 py-2 text-white hover:bg-green-600"
+								onclick={handleAddPal}
 							>
 								<Plus class="h-4 w-4" />
-								Import from Save
+								Add New Pal
 							</button>
-						{/if}
+							{#if appState.saveFile}
+								<button
+									class="flex items-center gap-2 rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+									onclick={handleImportFromSave}
+								>
+									<Upload class="h-4 w-4" />
+									Import from Save
+								</button>
+							{/if}
+						</div>
 					</div>
 				{:else}
 					<!-- Pal Grid/List -->

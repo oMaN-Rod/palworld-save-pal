@@ -599,288 +599,279 @@
 	}
 </script>
 
-{#if appState.selectedPlayer}
-	<div
-		class="grid h-full w-full grid-cols-[25%_1fr] 2xl:grid-cols-[25%_1fr_20%]"
-		{...additionalProps}
-	>
-		<div class="shrink-0 p-4">
-			<div class="btn-group bg-surface-900 mb-2 w-full items-center rounded-sm p-1">
-				<Tooltip position="right" label="Add all pals to your Pal Box">
-					<button class="btn hover:preset-tonal-secondary p-2" onclick={addAllPalsGps}>
-						<CircleFadingPlus />
-					</button>
-				</Tooltip>
-				<Tooltip>
-					<button class="btn hover:preset-tonal-secondary p-2" onclick={handleSelectAll}>
-						<ReplaceAll />
-					</button>
-					{#snippet popup()}
-						<div class="flex flex-col">
-							<span>Select all in</span>
-							<div class="grid grid-cols-[auto_1fr] gap-1">
+<div
+	class="grid h-full w-full grid-cols-[25%_1fr] 2xl:grid-cols-[25%_1fr_20%]"
+	{...additionalProps}
+>
+	<div class="shrink-0 p-4">
+		<div class="btn-group bg-surface-900 mb-2 w-full items-center rounded-sm p-1">
+			<Tooltip position="right" label="Add all pals to your Pal Box">
+				<button class="btn hover:preset-tonal-secondary p-2" onclick={addAllPalsGps}>
+					<CircleFadingPlus />
+				</button>
+			</Tooltip>
+			<Tooltip>
+				<button class="btn hover:preset-tonal-secondary p-2" onclick={handleSelectAll}>
+					<ReplaceAll />
+				</button>
+				{#snippet popup()}
+					<div class="flex flex-col">
+						<span>Select all in</span>
+						<div class="grid grid-cols-[auto_1fr] gap-1">
+							<img src={staticIcons.leftClickIcon} alt="Left Click" class="h-6 w-6" />
+							<span class="text-sm">pal box</span>
+							<div class="flex">
+								<img src={staticIcons.ctrlIcon} alt="Ctrl" class="h-6 w-6" />
 								<img src={staticIcons.leftClickIcon} alt="Left Click" class="h-6 w-6" />
-								<span class="text-sm">pal box</span>
-								<div class="flex">
-									<img src={staticIcons.ctrlIcon} alt="Ctrl" class="h-6 w-6" />
-									<img src={staticIcons.leftClickIcon} alt="Left Click" class="h-6 w-6" />
-								</div>
-								<span class="text-sm">pal box + party</span>
 							</div>
+							<span class="text-sm">pal box + party</span>
 						</div>
-					{/snippet}
-				</Tooltip>
+					</div>
+				{/snippet}
+			</Tooltip>
 
-				{#if selectedPals.length >= 1}
-					<Tooltip label="Apply preset to selected pal(s)">
-						<button class="btn hover:preset-tonal-secondary p-2" onclick={handleSelectPreset}>
-							<Play />
-						</button>
-					</Tooltip>
-					<Tooltip label="Clone selected pal(s) to UPS">
-						<button class="btn hover:preset-tonal-secondary p-2" onclick={handleBulkCloneToUps}>
-							<Upload />
-						</button>
-					</Tooltip>
-					<Tooltip label="Delete selected pal(s)">
-						<button class="btn hover:preset-tonal-secondary p-2" onclick={deleteSelectedPals}>
-							<Trash />
-						</button>
-					</Tooltip>
-					<Tooltip label="Clear selected pal(s)">
-						<button
-							class="btn hover:preset-tonal-secondary p-2"
-							onclick={() => (selectedPals = [])}
-						>
-							<X />
-						</button>
-					</Tooltip>
-				{/if}
-			</div>
-			<Accordion
-				value={filterExpand}
-				onValueChange={(e: ValueChangeDetails) => (filterExpand = e.value)}
-				collapsible
+			{#if selectedPals.length >= 1}
+				<Tooltip label="Apply preset to selected pal(s)">
+					<button class="btn hover:preset-tonal-secondary p-2" onclick={handleSelectPreset}>
+						<Play />
+					</button>
+				</Tooltip>
+				<Tooltip label="Clone selected pal(s) to UPS">
+					<button class="btn hover:preset-tonal-secondary p-2" onclick={handleBulkCloneToUps}>
+						<Upload />
+					</button>
+				</Tooltip>
+				<Tooltip label="Delete selected pal(s)">
+					<button class="btn hover:preset-tonal-secondary p-2" onclick={deleteSelectedPals}>
+						<Trash />
+					</button>
+				</Tooltip>
+				<Tooltip label="Clear selected pal(s)">
+					<button class="btn hover:preset-tonal-secondary p-2" onclick={() => (selectedPals = [])}>
+						<X />
+					</button>
+				</Tooltip>
+			{/if}
+		</div>
+		<Accordion
+			value={filterExpand}
+			onValueChange={(e: ValueChangeDetails) => (filterExpand = e.value)}
+			collapsible
+		>
+			<Accordion.Item
+				value="filter"
+				base="rounded-sm bg-surface-900"
+				controlHover="hover:bg-secondary-500/25"
 			>
-				<Accordion.Item
-					value="filter"
-					base="rounded-sm bg-surface-900"
-					controlHover="hover:bg-secondary-500/25"
-				>
-					{#snippet lead()}<Search />{/snippet}
-					{#snippet control()}
-						<span class="font-bold">Filter & Sort</span>
-					{/snippet}
-					{#snippet panel()}
-						<Input
-							type="text"
-							inputClass="w-full"
-							placeholder="Search by name or nickname"
-							bind:value={searchQuery}
-						/>
-						<div>
-							<legend class="font-bold">Sort</legend>
-							<hr />
-							<div class="grid grid-cols-6">
-								<Tooltip label="Sort by level">
-									<button
-										type="button"
-										class={sortButtonClass('level')}
-										onclick={() => toggleSort('level')}
-									>
-										<LevelSortIcon />
-									</button>
-								</Tooltip>
-								<Tooltip label="Sort by name">
-									<button
-										type="button"
-										class={sortButtonClass('name')}
-										onclick={() => toggleSort('name')}
-									>
-										<NameSortIcon />
-									</button>
-								</Tooltip>
-								<Tooltip label="Sort by Paldeck #">
-									<button
-										type="button"
-										class={sortButtonClass('paldeck-index')}
-										onclick={() => toggleSort('paldeck-index')}
-									>
-										<PaldeckSortIcon />
-									</button>
-								</Tooltip>
-							</div>
+				{#snippet lead()}<Search />{/snippet}
+				{#snippet control()}
+					<span class="font-bold">Filter & Sort</span>
+				{/snippet}
+				{#snippet panel()}
+					<Input
+						type="text"
+						inputClass="w-full"
+						placeholder="Search by name or nickname"
+						bind:value={searchQuery}
+					/>
+					<div>
+						<legend class="font-bold">Sort</legend>
+						<hr />
+						<div class="grid grid-cols-6">
+							<Tooltip label="Sort by level">
+								<button
+									type="button"
+									class={sortButtonClass('level')}
+									onclick={() => toggleSort('level')}
+								>
+									<LevelSortIcon />
+								</button>
+							</Tooltip>
+							<Tooltip label="Sort by name">
+								<button
+									type="button"
+									class={sortButtonClass('name')}
+									onclick={() => toggleSort('name')}
+								>
+									<NameSortIcon />
+								</button>
+							</Tooltip>
+							<Tooltip label="Sort by Paldeck #">
+								<button
+									type="button"
+									class={sortButtonClass('paldeck-index')}
+									onclick={() => toggleSort('paldeck-index')}
+								>
+									<PaldeckSortIcon />
+								</button>
+							</Tooltip>
 						</div>
-						<div>
-							<legend class="font-bold">Element & Type</legend>
-							<hr />
-							<div class="mt-2 grid grid-cols-4 2xl:grid-cols-6">
-								<Tooltip>
-									<button class={elementClass('All')} onclick={() => (selectedFilter = 'All')}>
-										<GalleryVerticalEnd />
-									</button>
-									{#snippet popup()}All pals{/snippet}
-								</Tooltip>
-								{#each [...elementTypes] as element}
-									{@const localizedName = elementsData.elements[element].localized_name}
-									<Tooltip label={localizedName}>
-										<button
-											class={elementClass(element)}
-											onclick={() => (selectedFilter = element)}
-											aria-label={localizedName}
-										>
-											<img
-												src={elementIcons[element]}
-												alt={localizedName}
-												class="pal-element-badge"
-											/>
-										</button>
-									</Tooltip>
-								{/each}
-								<Tooltip label="Alpha Pals">
+					</div>
+					<div>
+						<legend class="font-bold">Element & Type</legend>
+						<hr />
+						<div class="mt-2 grid grid-cols-4 2xl:grid-cols-6">
+							<Tooltip>
+								<button class={elementClass('All')} onclick={() => (selectedFilter = 'All')}>
+									<GalleryVerticalEnd />
+								</button>
+								{#snippet popup()}All pals{/snippet}
+							</Tooltip>
+							{#each [...elementTypes] as element}
+								{@const localizedName = elementsData.elements[element].localized_name}
+								<Tooltip label={localizedName}>
 									<button
-										type="button"
-										class={sortAlphaClass}
-										onclick={() => (selectedFilter = 'alpha')}
-									>
-										<img src={staticIcons.alphaIcon} alt="Alpha" class="pal-element-badge" />
-									</button>
-								</Tooltip>
-								<Tooltip label="Lucky Pals">
-									<button
-										type="button"
-										class={sortLuckyClass}
-										onclick={() => (selectedFilter = 'lucky')}
-									>
-										<img src={staticIcons.luckyIcon} alt="Alpha" class="pal-element-badge" />
-									</button>
-								</Tooltip>
-								<Tooltip label="Humans">
-									<button
-										type="button"
-										class={sortHumanClass}
-										onclick={() => (selectedFilter = 'human')}
-									>
-										<User />
-									</button>
-								</Tooltip>
-								<Tooltip label="Predator Pals">
-									<button
-										type="button"
-										class={sortPredatorClass}
-										onclick={() => (selectedFilter = 'predator')}
+										class={elementClass(element)}
+										onclick={() => (selectedFilter = element)}
+										aria-label={localizedName}
 									>
 										<img
-											src={staticIcons.predatorIcon}
-											alt="Predator"
+											src={elementIcons[element]}
+											alt={localizedName}
 											class="pal-element-badge"
-											style="filter: {calculateFilters('#FF0000')};"
 										/>
 									</button>
 								</Tooltip>
-								<Tooltip label="Oil Rig Pals">
-									<button
-										type="button"
-										class={sortOilrigClass}
-										onclick={() => (selectedFilter = 'oilrig')}
-									>
-										<img src={staticIcons.oilrigIcon} alt="Oil Rig" class="pal-element-badge" />
-									</button>
-								</Tooltip>
-								<Tooltip label="Summoned Pals">
-									<button
-										type="button"
-										class={sortSummonClass}
-										onclick={() => (selectedFilter = 'summon')}
-									>
-										<img src={staticIcons.altarIcon} alt="Summoned" class="pal-element-badge" />
-									</button>
-								</Tooltip>
-							</div>
+							{/each}
+							<Tooltip label="Alpha Pals">
+								<button
+									type="button"
+									class={sortAlphaClass}
+									onclick={() => (selectedFilter = 'alpha')}
+								>
+									<img src={staticIcons.alphaIcon} alt="Alpha" class="pal-element-badge" />
+								</button>
+							</Tooltip>
+							<Tooltip label="Lucky Pals">
+								<button
+									type="button"
+									class={sortLuckyClass}
+									onclick={() => (selectedFilter = 'lucky')}
+								>
+									<img src={staticIcons.luckyIcon} alt="Alpha" class="pal-element-badge" />
+								</button>
+							</Tooltip>
+							<Tooltip label="Humans">
+								<button
+									type="button"
+									class={sortHumanClass}
+									onclick={() => (selectedFilter = 'human')}
+								>
+									<User />
+								</button>
+							</Tooltip>
+							<Tooltip label="Predator Pals">
+								<button
+									type="button"
+									class={sortPredatorClass}
+									onclick={() => (selectedFilter = 'predator')}
+								>
+									<img
+										src={staticIcons.predatorIcon}
+										alt="Predator"
+										class="pal-element-badge"
+										style="filter: {calculateFilters('#FF0000')};"
+									/>
+								</button>
+							</Tooltip>
+							<Tooltip label="Oil Rig Pals">
+								<button
+									type="button"
+									class={sortOilrigClass}
+									onclick={() => (selectedFilter = 'oilrig')}
+								>
+									<img src={staticIcons.oilrigIcon} alt="Oil Rig" class="pal-element-badge" />
+								</button>
+							</Tooltip>
+							<Tooltip label="Summoned Pals">
+								<button
+									type="button"
+									class={sortSummonClass}
+									onclick={() => (selectedFilter = 'summon')}
+								>
+									<img src={staticIcons.altarIcon} alt="Summoned" class="pal-element-badge" />
+								</button>
+							</Tooltip>
 						</div>
-					{/snippet}
-				</Accordion.Item>
-				<Accordion.Item
-					value="stats"
-					base="block 2xl:hidden rounded-sm bg-surface-900"
-					controlHover="hover:bg-secondary-500/25"
-				>
-					{#snippet lead()}<Info />{/snippet}
-					{#snippet control()}
-						<span class="font-bold">Stats</span>
-					{/snippet}
-					{#snippet panel()}
-						{#if pals && pals.length > 0}
-							<PalContainerStats {pals} {elementTypes} />
-						{:else}
-							<div>No pals data available</div>
-						{/if}
-					{/snippet}
-				</Accordion.Item>
-			</Accordion>
-		</div>
+					</div>
+				{/snippet}
+			</Accordion.Item>
+			<Accordion.Item
+				value="stats"
+				base="block 2xl:hidden rounded-sm bg-surface-900"
+				controlHover="hover:bg-secondary-500/25"
+			>
+				{#snippet lead()}<Info />{/snippet}
+				{#snippet control()}
+					<span class="font-bold">Stats</span>
+				{/snippet}
+				{#snippet panel()}
+					{#if pals && pals.length > 0}
+						<PalContainerStats {pals} {elementTypes} />
+					{:else}
+						<div>No pals data available</div>
+					{/if}
+				{/snippet}
+			</Accordion.Item>
+		</Accordion>
+	</div>
 
-		<div>
-			<!-- Pager -->
-			<div class="mb-4 flex items-center justify-center space-x-4">
-				<button class="rounded-sm px-4 py-2 font-bold" onclick={decrementPage}>
-					<img src={staticIcons.qIcon} alt="Previous" class="h-10 w-10" />
-				</button>
+	<div>
+		<!-- Pager -->
+		<div class="mb-4 flex items-center justify-center space-x-4">
+			<button class="rounded-sm px-4 py-2 font-bold" onclick={decrementPage}>
+				<img src={staticIcons.qIcon} alt="Previous" class="h-10 w-10" />
+			</button>
 
-				<div class="flex space-x-2">
-					{#each visiblePages as page}
-						<TooltipButton
-							class="h-8 w-8 rounded-full {page === currentPage
-								? 'bg-primary-500 text-white'
-								: 'bg-surface-800 hover:bg-gray-300'}"
-							onclick={() => (currentPage = page)}
-							popupLabel={`Box ${page}`}
-						>
-							{Math.floor(page)}
-						</TooltipButton>
-					{/each}
-				</div>
-
-				<button class="rounded-sm px-4 py-2 font-bold" onclick={incrementPage}>
-					<img src={staticIcons.eIcon} alt="Next" class="h-10 w-10" />
-				</button>
+			<div class="flex space-x-2">
+				{#each visiblePages as page}
+					<TooltipButton
+						class="h-8 w-8 rounded-full {page === currentPage
+							? 'bg-primary-500 text-white'
+							: 'bg-surface-800 hover:bg-gray-300'}"
+						onclick={() => (currentPage = page)}
+						popupLabel={`Box ${page}`}
+					>
+						{Math.floor(page)}
+					</TooltipButton>
+				{/each}
 			</div>
 
-			<div class="overflow-hidden">
-				<div class="grid grid-cols-6 place-items-center gap-4 p-4">
-					{#each currentPageItems as item (item.pal.instance_id)}
-						{#if item.pal.character_id !== 'None' || (!searchQuery && selectedFilter === 'All' && sortBy === 'slot-index')}
-							<PalBadge
-								pal={item.pal}
-								bind:selected={selectedPals}
-								onSelect={handlePalSelect}
-								onMove={() => {}}
-								onDelete={() => handleDeletePal(item.pal)}
-								onAdd={() => handleAddPal(item.index)}
-								onClone={() => handleClonePal(item.pal)}
-								onCloneToUps={() => handleCloneToUps(item.pal)}
-							/>
-						{/if}
-					{/each}
-				</div>
-			</div>
+			<button class="rounded-sm px-4 py-2 font-bold" onclick={incrementPage}>
+				<img src={staticIcons.eIcon} alt="Next" class="h-10 w-10" />
+			</button>
 		</div>
 
-		{#if pals && pals.length > 0}
-			<Card class="mr-2 hidden h-[430px] 2xl:block">
-				<PalContainerStats {pals} {elementTypes} />
-			</Card>
-		{:else}
-			<Card class="mr-2 hidden h-[430px] 2xl:block">
-				<div>No pals data available</div>
-			</Card>
-		{/if}
+		<div class="overflow-hidden">
+			<div class="grid grid-cols-6 place-items-center gap-4 p-4">
+				{#each currentPageItems as item (item.pal.instance_id)}
+					{#if item.pal.character_id !== 'None' || (!searchQuery && selectedFilter === 'All' && sortBy === 'slot-index')}
+						<PalBadge
+							pal={item.pal}
+							bind:selected={selectedPals}
+							onSelect={handlePalSelect}
+							onMove={() => {}}
+							onDelete={() => handleDeletePal(item.pal)}
+							onAdd={() => handleAddPal(item.index)}
+							onClone={() => handleClonePal(item.pal)}
+							onCloneToUps={() => handleCloneToUps(item.pal)}
+						/>
+					{/if}
+				{/each}
+			</div>
+		</div>
 	</div>
-{:else}
-	<div class="flex w-full items-center justify-center">
-		<h2 class="h2">Select a Player to view Pal Box</h2>
-	</div>
-{/if}
+
+	{#if pals && pals.length > 0}
+		<Card class="mr-2 hidden h-[430px] 2xl:block">
+			<PalContainerStats {pals} {elementTypes} />
+		</Card>
+	{:else}
+		<Card class="mr-2 hidden h-[430px] 2xl:block">
+			<div>No pals data available</div>
+		</Card>
+	{/if}
+</div>
 
 <style>
 	.pal-element-badge {

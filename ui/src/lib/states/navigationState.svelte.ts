@@ -1,6 +1,15 @@
 import { getAppState } from './appState.svelte';
 
-export type Page = 'edit' | 'info' | 'file' | 'settings' | 'loading' | 'error' | 'browser' | 'save' | 'ups';
+export type Page =
+	| 'edit'
+	| 'info'
+	| 'file'
+	| 'settings'
+	| 'loading'
+	| 'error'
+	| 'browser'
+	| 'save'
+	| 'ups';
 export type Tab = 'player' | 'pal' | 'pal-box' | 'dps' | 'guilds' | 'gps' | 'technologies';
 
 export interface NavigationState {
@@ -10,11 +19,11 @@ export interface NavigationState {
 
 class NavigationStateManager implements NavigationState {
 	#activePage = $state<Page>('file');
-	#activeTab = $state<Tab>('player');
+	#activeTab = $state<Tab>('pal');
 	#initialLoad = true;
 	#appState = getAppState();
 
-	constructor(initialPage: Page = 'file', initialTab: Tab = 'player') {
+	constructor(initialPage: Page = 'file', initialTab: Tab = 'pal') {
 		this.#activePage = initialPage;
 		this.#activeTab = initialTab;
 	}

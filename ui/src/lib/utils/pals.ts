@@ -53,7 +53,7 @@ export function formatNickname(nickname: string, prefix: string | undefined) {
 }
 
 export async function handleMaxOutPal(pal: Pal, player: Player): Promise<void> {
-	if (!pal || !player) return;
+	if (!pal) return;
 	const appState = getAppState();
 	pal.level = appState.settings.cheat_mode ? 255 : 65;
 	const maxLevelData = expData.expData[appState.settings.cheat_mode ? '100' : '66'];
