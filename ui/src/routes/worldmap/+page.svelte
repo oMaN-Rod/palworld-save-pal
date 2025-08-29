@@ -1,19 +1,21 @@
 <script lang="ts">
 	import { Map } from '$components';
-	import { getAppState, getModalState } from '$states';
+	import { getAppState, getModalState, getToastState } from '$states';
 	import { worldToLeaflet, worldToMap } from '$components/map/utils';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import { mapImg } from '$components/map/mapImages';
-	import { Target } from 'lucide-svelte';
+	import { Target, Unlock } from 'lucide-svelte';
 	import { mapObjects } from '$lib/data';
 	import L from 'leaflet';
 	import type { Base, Player } from '$types';
 	import { assetLoader } from '$utils';
 	import { TextInputModal } from '$components/modals';
-	import { EntryState } from '$types';
+	import { EntryState, MessageType } from '$types';
 	import { staticIcons } from '$types/icons';
 	import { persistedState } from 'svelte-persisted-state';
 	import type { ValueChangeDetails } from '@zag-js/accordion';
+	import { sendAndWait } from '$utils/websocketUtils';
+	import { SectionHeader } from '$components/ui';
 
 	const appState = getAppState();
 	const modal = getModalState();
@@ -38,13 +40,7 @@
 		showPredatorPals: true
 	});
 	const mapOptions = $derived(mapOptionsState.current);
-	// let showOrigin = persistedState('showOrigin', false);
-	// let showPlayers = persistedState('showPlayers', true);
-	// let showBases = persistedState('showBases', true);
-	// let showFastTravel = persistedState('showFastTravel', true);
-	// let showDungeons = persistedState('showDungeons', true);
-	// let showAlphaPals = persistedState('showAlphaPals', true);
-	// let showPredatorPals = persistedState('showPredatorPals', true);
+	const toast = getToastState();
 	let section = $state(['players']);
 	let map: L.Map | undefined = $state();
 
@@ -116,13 +112,44 @@
 			}
 		}
 	}
+
+	async function handleUnlockMap() {
+		// @ts-ignore
+		const confirmed = await modal.showConfirmModal({
+			title: 'Unlock Full Map',
+			message:
+				'This will unlock the entire map by modifying your LocalData.sav file. You will need to select your LocalData.sav file. Continue?',
+			confirmText: 'Select File',
+			cancelText: 'Cancel'
+		});
+
+		if (confirmed) {
+			const response: { success: boolean; message: string } = await sendAndWait(
+				MessageType.UNLOCK_MAP,
+				{}
+			);
+			const { success, message } = response;
+			if (success) {
+				toast.add(message, 'Success!', 'success');
+			}
+		}
+	}
 </script>
 
-<div class="grid h-full grid-cols-[25%_1fr] gap-2">
+<div class="grid h-full grid-cols-[20%_1fr] gap-2">
 	<div class="flex flex-col gap-4 p-4">
 		<div class="flex flex-col gap-4">
 			<div class="flex flex-col gap-2">
-				<h2 class="text-lg font-bold">Map Controls</h2>
+				<div class="flex items-center">
+					<SectionHeader text="Map Options">
+						{#snippet action()}
+							<button class="btn btn-sm flex items-center gap-2" onclick={handleUnlockMap}>
+								<Unlock class="h-4 w-4" />
+								<span>Unlock Map</span>
+							</button>
+						{/snippet}
+					</SectionHeader>
+				</div>
 				<div class="grid grid-cols-2 gap-2">
 					<button
 						class="flex items-center space-x-2 {mapOptions.showOrigin ? '' : 'opacity-25'}"

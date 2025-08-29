@@ -127,6 +127,9 @@ class FileManager:
         if save_type == "steam":
             file_types = ("Sav Files (*.sav)", "All files (*.*)")
             initial_dir = STEAM_ROOT
+        elif save_type == "local_data":
+            file_types = ("Sav Files (*.sav)", "All files (*.*)")
+            initial_dir = STEAM_ROOT
         else:
             file_types = ("Container Index Files (*.index)", "All files (*.*)")
             initial_dir = GAMEPASS_ROOT
@@ -155,8 +158,10 @@ class FileManager:
                 )
 
             file_name = os.path.basename(selected_path_str)
-            if (file_name == "Level.sav" and save_type == "steam") or (
-                file_name == "containers.index" and save_type == "gamepass"
+            if (
+                (file_name == "Level.sav" and save_type == "steam")
+                or (file_name == "containers.index" and save_type == "gamepass")
+                or (file_name == "LocalData.sav" and save_type == "local_data")
             ):
                 return selected_path_str
             else:

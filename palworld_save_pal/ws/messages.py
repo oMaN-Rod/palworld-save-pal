@@ -98,6 +98,7 @@ class MessageType(str, Enum):
     SELECT_SAVE = "select_save"
     UPDATE_SAVE_FILE = "update_save_file"
     RENAME_WORLD = "rename_world"
+    UNLOCK_MAP = "unlock_map"
 
     # Settings Management
     GET_SETTINGS = "get_settings"
@@ -631,3 +632,12 @@ class GetUpsStatsMessage(BaseMessage):
 
 class NukeUpsPalsMessage(BaseMessage):
     type: str = MessageType.NUKE_UPS_PALS.value
+
+
+class UnlockMapData(BaseModel):
+    path: Optional[str] = None
+
+
+class UnlockMapMessage(BaseMessage):
+    type: str = MessageType.UNLOCK_MAP.value
+    data: UnlockMapData

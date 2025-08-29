@@ -12,6 +12,7 @@ from palworld_save_pal.ws.handlers import (
     items_handler,
     lab_research_handler,
     map_objects_handler,
+    map_unlock_handler,
     open_in_browser_handler,
     passive_skills_handler,
     player_handler,
@@ -94,6 +95,7 @@ from palworld_save_pal.ws.messages import (
     DeleteUpsTagMessage,
     GetUpsStatsMessage,
     NukeUpsPalsMessage,
+    UnlockMapMessage,
 )
 
 if TYPE_CHECKING:
@@ -635,5 +637,13 @@ def bootstrap(dispatcher: "MessageDispatcher"):
         {
             "message_class": NukeUpsPalsMessage,
             "handler_func": ups_handler.nuke_ups_pals_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.UNLOCK_MAP.value,
+        {
+            "message_class": UnlockMapMessage,
+            "handler_func": map_unlock_handler.unlock_map_handler,
         },
     )

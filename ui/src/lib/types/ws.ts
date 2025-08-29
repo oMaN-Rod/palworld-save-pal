@@ -80,7 +80,10 @@ export enum MessageType {
 	UPDATE_UPS_TAG = 'update_ups_tag',
 	DELETE_UPS_TAG = 'delete_ups_tag',
 	GET_UPS_STATS = 'get_ups_stats',
-	NUKE_UPS_PALS = 'nuke_ups_pals'
+	NUKE_UPS_PALS = 'nuke_ups_pals',
+
+	// Map
+	UNLOCK_MAP = 'unlock_map'
 }
 
 interface UpdateSaveFileData {

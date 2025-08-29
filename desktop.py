@@ -91,16 +91,25 @@ async def websocket_endpoint(websocket: WebSocket, client_id: int):
         while not app_state.terminate_flag.is_set():
             data = await websocket.receive_text()
             json_data = json.loads(data)
-            if json_data["type"] == "select_save":
-                save_type = json_data["data"]["type"]
-                save_dir, file_path = await handle_file_selection(
-                    save_type, app_state.webview_window, websocket
-                )
-                if not save_dir or not file_path:
-                    continue
-                app_state.settings.save_dir = save_dir
-                json_data["data"]["path"] = file_path
-                data = json.dumps(json_data)
+            match json_data.get("type"):
+                case "select_save":
+                    save_type = json_data["data"]["type"]
+                    save_dir, file_path = await handle_file_selection(
+                        save_type, app_state.webview_window, websocket
+                    )
+                    if not save_dir or not file_path:
+                        continue
+                    app_state.settings.save_dir = save_dir
+                    json_data["data"]["path"] = file_path
+                    data = json.dumps(json_data)
+                case "unlock_map":
+                    save_dir, file_path = await handle_file_selection(
+                        "local_data", app_state.webview_window, websocket
+                    )
+                    if not save_dir or not file_path:
+                        continue
+                    json_data["data"]["path"] = file_path
+                    data = json.dumps(json_data)
             await manager.process_message(data, websocket)
     except WebSocketDisconnect:
         logger.warning("Client %s disconnected", client_id)
