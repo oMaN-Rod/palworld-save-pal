@@ -35,7 +35,7 @@ dependencies = [
     "starlette==0.41.3",
     "sqlalchemy==2.0.38",
     "sqlmodel==0.0.23",
-    "typing-extensions==4.12.2",
+    "typing-extensions==4.15.0",
     "uvicorn==0.32.1",
     "websockets==15.0.1",
     "zstandard==0.23.0",
