@@ -19,8 +19,8 @@ FROM python:3.12
 WORKDIR /app
 
 # Copy requirements and install dependencies
-COPY pyproject.toml .
-RUN pip install --no-cache-dir .
+COPY requirements-docker.txt .
+RUN pip install --no-cache-dir -r requirements-docker.txt
 
 # Copy necessary files and directories
 COPY psp.py .
