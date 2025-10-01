@@ -26,7 +26,7 @@ dependencies = [
     "psutil==6.1.0",
     "pycparser==2.22",
     "pydantic==2.11.5",
-    "pydantic-core==2.33.2",
+    "pydantic-core==2.40.0",
     "pythonnet==3.0.4",
     "pywebview==5.4",
     "pywin32-ctypes==0.2.3",
