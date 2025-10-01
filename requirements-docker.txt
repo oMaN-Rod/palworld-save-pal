@@ -9,7 +9,7 @@ colorama==0.4.6
 colorlog==6.9.0
 cx-freeze==8.3.0
 deepdiff==8.0.1
-fastapi==0.115.6
+fastapi==0.118.0
 h11==0.16.0
 idna==3.10
 lief==0.15.1
