@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Player } from '$types';
-	import { Combobox } from '$components/ui';
+	import { Select } from '$components/ui';
 	import { getAppState } from '$states';
 
 	let appState = getAppState();
@@ -26,7 +26,7 @@
 </script>
 
 <div class="w-full" {...additionalProps}>
-	<Combobox
+	<Select
 		value={selected}
 		options={selectOptions}
 		placeholder="Select Player"
