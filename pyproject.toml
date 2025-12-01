@@ -7,7 +7,7 @@ dependencies = [
     "annotated-types==0.7.0",
     "anyio==4.7.0",
     "bottle==0.13.2",
-    "cffi==1.17.1",
+    "cffi==2.0.0",
     "click==8.1.7",
     "clr-loader==0.2.6",
     "colorama==0.4.6",
