@@ -24,7 +24,7 @@ dependencies = [
     "pefile==2023.2.7",
     "proxy-tools==0.1.0",
     "psutil==6.1.0",
-    "pycparser==2.22",
+    "pycparser==2.23",
     "pydantic==2.11.5",
     "pydantic-core==2.33.2",
     "pythonnet==3.0.4",
