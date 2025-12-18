@@ -1,55 +1,55 @@
 {
   "Accessory_AirDash1": {
     "localized_name": "空中冲刺靴",
-    "description": null
+    "description": "装备后可使玩家获得空中冲刺能力的饰品。"
   },
   "Accessory_AirDash2": {
     "localized_name": "空中二段冲刺靴",
-    "description": null
+    "description": "装备后可使玩家获得空中二段冲刺能力的饰品。"
   },
   "Accessory_AirDash3": {
     "localized_name": "空中三段冲刺靴",
-    "description": null
+    "description": "zh-hans text"
   },
   "Accessory_JumpCount_Increase1": {
     "localized_name": "二段跳靴",
-    "description": null
+    "description": "装备后可使玩家获得二段跳跃能力的饰品。"
   },
   "Accessory_JumpCount_Increase2": {
     "localized_name": "三段跳靴",
-    "description": null
+    "description": "装备后可使玩家获得三段跳跃能力的饰品。"
   },
   "Accessory_JumpPower_Increase": {
     "localized_name": "反重力腰带",
-    "description": null
+    "description": "装备后可提升玩家跳跃力的饰品。"
   },
   "Accessory_Nonkilling": {
     "localized_name": "慈悲戒指",
-    "description": null
+    "description": "和平主义者的戒指。 装备该戒指者无法将攻击对象的生命值降低到1以下。"
   },
   "Accessory_TalentChecker": {
     "localized_name": "伯乐眼镜",
-    "description": null
+    "description": "能够确认帕鲁隐藏才能的眼镜。 生命值，攻击力和防御力的潜力会以满分100分显示出来。"
   },
   "AdditionalInventory_001": {
     "localized_name": "小型扩展背包",
-    "description": null
+    "description": "能夠额外携带物品的小型背包。 持有此道具时，可增加背包栏位。"
   },
   "AdditionalInventory_002": {
     "localized_name": "中型扩展背包",
-    "description": null
+    "description": "能夠额外携带物品的普通背包。 持有此道具时，可增加背包栏位。"
   },
   "AdditionalInventory_003": {
     "localized_name": "大型扩展背包",
-    "description": null
+    "description": "能夠额外携带物品的大背包。 持有此道具时，可增加背包栏位。"
   },
   "AdditionalInventory_004": {
     "localized_name": "巨大扩展背包",
-    "description": null
+    "description": "能夠额外携带物品的巨大背包。 持有此道具时，可增加背包栏位。"
   },
   "Altar": {
     "localized_name": "召唤的祭坛",
-    "description": null
+    "description": "通过献上画着帕鲁的石板， 就能在据点召唤强大的帕鲁。 做好充分的战斗准备吧。"
   },
   "Arrow": {
     "localized_name": "箭",
@@ -69,23 +69,23 @@
   },
   "AutoMealPouch_Tier1": {
     "localized_name": "小饲料袋",
-    "description": null
+    "description": "装食物的小口袋。 可开放1个自动进食装备槽。 饥饿时可自动消耗槽内的食物。"
   },
   "AutoMealPouch_Tier2": {
     "localized_name": "普通饲料袋",
-    "description": null
+    "description": "装食物的中型口袋。 可开放2个自动进食装备槽。 饥饿时可自动消耗槽内的食物。"
   },
   "AutoMealPouch_Tier3": {
     "localized_name": "大饲料袋",
-    "description": null
+    "description": "装食物的大口袋。 可开放3个自动进食装备槽。 饥饿时可自动消耗槽内的食物。"
   },
   "AutoMealPouch_Tier4": {
     "localized_name": "巨大饲料袋",
-    "description": null
+    "description": "装食物的特大口袋。 可开放4个自动进食装备槽。 饥饿时可自动消耗槽内的食物。"
   },
   "AutoMealPouch_Tier5": {
     "localized_name": "特大饲料袋",
-    "description": null
+    "description": "用来装食物的最大号袋子。 可解锁5个自动进食专用的装备栏位。 帕鲁肚子饿了就会自动吃掉该栏位内的食物。"
   },
   "BaseCampBattleDirector": {
     "localized_name": "警钟",
@@ -93,11 +93,11 @@
   },
   "BaseCampItemDispenser": {
     "localized_name": "道具存取机",
-    "description": null
+    "description": "可以自由取出设置的据点内 所有箱子中道具的装置。"
   },
   "BaseCampWorkHard": {
     "localized_name": "监控台",
-    "description": null
+    "description": "可对据点内的帕鲁下达工作指示。 请注意不要让它们劳动过度了。"
   },
   "BaseCampWorkerExtraStation": {
     "localized_name": "帕鲁终端控制台",
@@ -181,7 +181,7 @@
   },
   "Battle_Cloth": {
     "localized_name": "布",
-    "description": null
+    "description": "编织羊毛制成的布。 是制作防具时必不可少的。"
   },
   "Battle_Defense_BowGun": {
     "localized_name": "固定式十字弓",
@@ -237,7 +237,7 @@
   },
   "Battle_MeleeWeapon_Axe_Steal": {
     "localized_name": "帕鲁金属斧",
-    "description": null
+    "description": "砍树用的斧子。 以帕鲁金属制造使其獲得惊人的锋利度。"
   },
   "Battle_MeleeWeapon_Bat": {
     "localized_name": "木棒",
@@ -245,11 +245,11 @@
   },
   "Battle_MeleeWeapon_Bat2": {
     "localized_name": "棒球棒",
-    "description": null
+    "description": "这根棒球棒也能用于近距离战斗。 但拿帕鲁当球可能有点太大了。"
   },
   "Battle_MeleeWeapon_Pickaxe_Steal": {
     "localized_name": "帕鲁金属十字镐",
-    "description": null
+    "description": "采矿用的十字镐。 以帕鲁金属制造使其獲得惊人的效率。"
   },
   "Battle_MeleeWeapon_Sword": {
     "localized_name": "剑",
@@ -289,11 +289,11 @@
   },
   "Battle_RangeWeapon_CompoundBow": {
     "localized_name": "复合弓",
-    "description": null
+    "description": "经过现代化改良的弓。 能够射出威力更强大的箭矢。"
   },
   "Battle_RangeWeapon_FlameThrower": {
     "localized_name": "FlameThrower",
-    "description": null
+    "description": "能够向远处喷出火舌的Flamethrower。 可以使攻击目标陷入点燃状态。 可在「武器流水线工厂II」制作。"
   },
   "Battle_RangeWeapon_GatlingGun": {
     "localized_name": "加特林机枪",
@@ -321,7 +321,7 @@
   },
   "Battle_RangeWeapon_OldRevolver": {
     "localized_name": "古旧左轮手枪",
-    "description": null
+    "description": "略显陈旧的左轮手枪。 单发威力优于Handgun_default。"
   },
   "Battle_RangeWeapon_Rifle": {
     "localized_name": "单发步枪",
@@ -333,11 +333,11 @@
   },
   "Battle_RangeWeapon_SemiAutoRifle": {
     "localized_name": "半自动步枪",
-    "description": null
+    "description": "具备一定连射能力的步枪。 易于瞄准且火力强大，适合中距离战斗。"
   },
   "Battle_RangeWeapon_SemiAutoShotgun": {
     "localized_name": "半自动霰弹枪",
-    "description": null
+    "description": "连射能力优异的霰弹枪。 拥有首屈一指的近距离DPS能力。"
   },
   "Battle_RangeWeapon_ShotGun": {
     "localized_name": "双管霰弹枪",
@@ -357,11 +357,11 @@
   },
   "Battle_RangeWeapon_SubmachineGun": {
     "localized_name": "冲锋枪",
-    "description": null
+    "description": "连射能力优异的冲锋枪。 轻巧灵活，适合近距离战斗。"
   },
   "BeamSword": {
     "localized_name": "光剑",
-    "description": null
+    "description": "近战用的光剑。 高能激光可瞬间融断敌人。"
   },
   "BelieverFlagSet": {
     "localized_name": "帕鲁保护团体旗帜套组",
@@ -369,7 +369,7 @@
   },
   "BlastFurnace4": {
     "localized_name": "巨大熔炉",
-    "description": null
+    "description": "可用来冶炼六棱晶锭。 扩大了建筑面积让复数帕鲁可以同时进行冶炼。 需要火系帕鲁点火。"
   },
   "BreedFarm": {
     "localized_name": "配种牧场",
@@ -381,11 +381,11 @@
   },
   "CarbonFiber": {
     "localized_name": "碳纤维",
-    "description": null
+    "description": "轻盈坚硬的优质素材。 可用于制作防具等。"
   },
   "Cauldron": {
     "localized_name": "魔女之釜",
-    "description": null
+    "description": "如配置在据点， 可以提升「制药」的工作速度。 即使配置复数个，其效果也不会叠加。"
   },
   "CeilingLamp": {
     "localized_name": "天花板吊灯",
@@ -393,23 +393,23 @@
   },
   "Cement": {
     "localized_name": "水泥",
-    "description": null
+    "description": "可成为建筑物素材的水泥。 可在优质作业台制作。"
   },
   "ChargeLaserRifle": {
     "localized_name": "充能步枪",
-    "description": null
+    "description": "zh-hans text"
   },
   "ChargeLaserRifleBullet": {
     "localized_name": "充能步枪子弹",
-    "description": null
+    "description": "zh-hans text"
   },
   "Cloth2": {
     "localized_name": "优质的布",
-    "description": null
+    "description": "编织大量「羊毛」制成的「优质的布」。 是制作优质防具时必不可少的素材。 可在「优质作业台」制作。"
   },
   "CompositeDesk": {
     "localized_name": "制图桌",
-    "description": null
+    "description": "通过组合复数设计图， 可以制成更高等级设计图的设施。"
   },
   "Cooler": {
     "localized_name": "降温器",
@@ -417,11 +417,11 @@
   },
   "CoolerBox": {
     "localized_name": "保冷箱",
-    "description": null
+    "description": "小型食物储存库。 将冰系帕鲁指派到这里工作时， 可以使里面的食物不会轻易腐败。"
   },
   "CoolerPalFoodBox": {
     "localized_name": "低温保鲜饲料箱",
-    "description": null
+    "description": "可以冷冻的饲料箱。 将冰系帕鲁指派到这里工作时， 可以使里面的食物不会轻易腐败。"
   },
   "Crusher": {
     "localized_name": "粉碎机",
@@ -457,11 +457,11 @@
   },
   "DimensionPalStorage": {
     "localized_name": "帕鲁次元仓库",
-    "description": null
+    "description": "可以大量存放捕获帕鲁的设施。 只要是公会成员，谁都可以进行帕鲁的存取。 改为私密锁定时，则只能存放自己的帕鲁。"
   },
   "DismantlingConveyor": {
     "localized_name": "帕鲁解体传送带",
-    "description": null
+    "description": "能够将放入的帕鲁自动解体的，梦幻般的设备。"
   },
   "DisplayCharacter": {
     "localized_name": "观赏笼",
@@ -477,7 +477,7 @@
   },
   "ElectricGenerator_Large": {
     "localized_name": "大型发电机",
-    "description": null
+    "description": "储存雷系帕鲁生产的电的设施。 更加大型，发电效率也更高。"
   },
   "ElectricHeater": {
     "localized_name": "电气取暖器",
@@ -485,39 +485,39 @@
   },
   "EnergyLauncherBullet": {
     "localized_name": "电浆能量盒",
-    "description": null
+    "description": "等离子炮等使用的弹药。"
   },
   "EnergyRocketLauncher": {
     "localized_name": "等离子炮",
-    "description": null
+    "description": "能够发射能量弹。 着弹后会引发能量爆炸。"
   },
   "EnergyShotgun": {
     "localized_name": "能量霰弹枪",
-    "description": null
+    "description": "zh-hans text"
   },
   "EnergyShotgunBullet": {
     "localized_name": "能量霰弹枪子弹",
-    "description": null
+    "description": "zh-hans text"
   },
   "EnergyStorage_Electric": {
     "localized_name": "蓄电器",
-    "description": null
+    "description": "可以储存发电机发电的多余电力的设施。"
   },
   "Expedition": {
     "localized_name": "帕鲁远征所",
-    "description": null
+    "description": "可以派遣帕鲁到地下城等地方远征的设施。 被派遣的帕鲁会在各地寻找物品或进行战斗， 并将资源带回据点。"
   },
   "Factory_Hard_04": {
     "localized_name": "高等文明作业工厂",
-    "description": null
+    "description": "用于制作物品及护甲的工厂。 引入了高性能机器，可以快速制作。 需有能进行手工作业的帕鲁。"
   },
   "Factory_Money": {
     "localized_name": "金币制造工厂",
-    "description": null
+    "description": "生产金币的工厂。 因为精神负担大，工作时SAN值会降低。 需有能进行手工作业的帕鲁。"
   },
   "Farm_SkillFruits": {
     "localized_name": "技能果树园",
-    "description": null
+    "description": "可以种植技能果实的农园。 将果实作为原种植入地面， 就可以收获多个相同种类的果实。"
   },
   "FireCultFlagSet": {
     "localized_name": "永炎同心会旗帜套组",
@@ -557,7 +557,7 @@
   },
   "FlamethrowerBullet": {
     "localized_name": "火焰喷射器燃料",
-    "description": null
+    "description": "Flamethrower使用的燃料。"
   },
   "FlourMill": {
     "localized_name": "磨粉机",
@@ -565,51 +565,51 @@
   },
   "FlowerBed": {
     "localized_name": "花坛",
-    "description": null
+    "description": "如配置在据点， 可以提升「采集」的工作速度。 即使配置复数个，其效果也不会叠加。"
   },
   "Fountain": {
     "localized_name": "喷泉",
-    "description": null
+    "description": "如配置在据点， 可以提升「浇水」的工作速度。 即使配置复数个，其效果也不会叠加。"
   },
   "FragGrenade": {
     "localized_name": "破片手榴弹",
-    "description": null
+    "description": "可在中距离战斗时发挥作用的破片手榴弹。 投掷数秒后引爆，给敌人造成伤害。"
   },
   "FragGrenade_Dark": {
     "localized_name": "暗黑手榴弹",
-    "description": null
+    "description": "利于中等距离战斗的暗黑手榴弹。 投掷数秒后引爆，给敌人造成暗属性伤害。"
   },
   "FragGrenade_Dragon": {
     "localized_name": "龙击手榴弹",
-    "description": null
+    "description": "利于中等距离战斗的龙击手榴弹。 投掷数秒后引爆，给敌人造成龙属性伤害。"
   },
   "FragGrenade_Elec": {
     "localized_name": "电击手榴弹",
-    "description": null
+    "description": "利于中等距离战斗的电击手榴弹。 投掷数秒后引爆，对附近放出电击。"
   },
   "FragGrenade_Fire": {
     "localized_name": "烧夷手榴弹",
-    "description": null
+    "description": "利于中等距离战斗的烧夷手榴弹。 投掷数秒后引爆，在周围燃起烈火。"
   },
   "FragGrenade_Ground": {
     "localized_name": "大地手榴弹",
-    "description": null
+    "description": "利于中等距离战斗的大地手榴弹。 投掷数秒后引爆，给敌人造成COMMON_ELEMENT_NAME_Ground伤害。"
   },
   "FragGrenade_Ice": {
     "localized_name": "冷冻手榴弹",
-    "description": null
+    "description": "利于中等距离战斗的冷冻手榴弹。 投掷数秒后引爆，冻结周围一切。"
   },
   "FragGrenade_Leaf": {
     "localized_name": "草木手榴弹",
-    "description": null
+    "description": "利于中等距离战斗的草木手榴弹。 投掷数秒后引爆，给敌人造成草属性伤害。"
   },
   "FragGrenade_Super": {
     "localized_name": "破片手榴弹Mk2",
-    "description": null
+    "description": "改良后的破片手榴弹。 投掷数秒后引爆，给大范围的敌人造成伤害。"
   },
   "FragGrenade_Water": {
     "localized_name": "水流手榴弹",
-    "description": null
+    "description": "利于中等距离战斗的水流手榴弹。 投掷数秒后引爆，给敌人造成水属性伤害。"
   },
   "FurnitureSet_1": {
     "localized_name": "木制客厅家具套装",
@@ -745,7 +745,7 @@
   },
   "GatlingBullet": {
     "localized_name": "加特林子弹",
-    "description": null
+    "description": "加特林机枪使用的弹药。"
   },
   "Glass_houseset": {
     "localized_name": "玻璃建筑套组",
@@ -753,23 +753,23 @@
   },
   "GlobalPalStorage": {
     "localized_name": "跨界帕鲁终端",
-    "description": null
+    "description": "具有保存帕鲁的基因序列， 以及通过基因序列复原帕鲁的功能的设施。 保存的基因序列能够带到其他世界使用。"
   },
   "GrapplingGun": {
     "localized_name": "爪钩枪",
-    "description": null
+    "description": "可进行高速移动的爪钩枪。 可向射击地点射出爪钩，牽引射击者的身体。 可在有高低差的地方轻松移动。"
   },
   "GrapplingGun2": {
     "localized_name": "高级爪钩枪",
-    "description": null
+    "description": "可进行高速移动的爪钩枪。 可向射击地点射出爪钩，牽引射击者的身体。 此款式经过改良，射程变得更远。"
   },
   "GrapplingGun3": {
     "localized_name": "优质爪钩枪",
-    "description": null
+    "description": "可进行高速移动的爪钩枪。 可向射击地点射出爪钩，牽引射击者的身体。 此款式在试验品数据的基础上进行了改良，性能得到进一步提升。"
   },
   "GrapplingGun4": {
     "localized_name": "特级爪钩枪",
-    "description": null
+    "description": "用于快速移动的爪钩枪。 它能将爪钩射向目的地，再将使用者牵引过去。 此款式经过研究改良，灵活性可谓无与伦比。"
   },
   "GrapplingGun5": {
     "localized_name": "超级爪钩枪",
@@ -777,11 +777,11 @@
   },
   "GrenadeBullet": {
     "localized_name": "榴弹",
-    "description": null
+    "description": "榴弹发射器使用的弹药。"
   },
   "GuildChest": {
     "localized_name": "公会箱子",
-    "description": null
+    "description": "可以瞬间透过亚空间传送箱子内容的箱子。 这个箱子内的道具会在各据点之间共享。"
   },
   "HandTorch": {
     "localized_name": "携带火把",
@@ -793,7 +793,7 @@
   },
   "Headstone": {
     "localized_name": "墓碑",
-    "description": null
+    "description": "可以书写文字的墓碑。 用作留下记录。"
   },
   "Heater": {
     "localized_name": "取暖器",
@@ -801,11 +801,11 @@
   },
   "Homeward": {
     "localized_name": "归途雷云",
-    "description": null
+    "description": "使用后可以移动至最近的据点。 无法在地下城里使用。"
   },
   "HugeKitchen": {
     "localized_name": "大型厨房",
-    "description": null
+    "description": "烹制食材时的必要设施。 扩大了占地面积让复数帕鲁可以同时进行烹调。 需要火系帕鲁点火。"
   },
   "HunterFlagSet": {
     "localized_name": "盗猎团旗帜套组",
@@ -813,7 +813,7 @@
   },
   "IceCrusher": {
     "localized_name": "冷冻粉碎机",
-    "description": null
+    "description": "可粉碎金属矿石以转换成其他材料的设施。 虽然要使其工作需要电力供应，以及有「冷却」适应性的帕鲁，但是效率极佳。"
   },
   "Infra_ElectricGenerator_Grade_01": {
     "localized_name": "发电机",
@@ -837,7 +837,7 @@
   },
   "Infra_MachineParts": {
     "localized_name": "钉子",
-    "description": null
+    "description": "建造大量设施时必不可少的部件。 可在原始的作业台制作。"
   },
   "Infra_PalBed_Grade_01": {
     "localized_name": "稻草帕鲁床",
@@ -857,11 +857,11 @@
   },
   "ItemBooth": {
     "localized_name": "跳蚤市场（道具）",
-    "description": null
+    "description": "出售物品的设施。 可以将物品出售给其他玩家。 将冰系帕鲁指派到这里工作时， 可以使里面的食物不会轻易腐败。"
   },
   "ItemChest_04": {
     "localized_name": "高等文明箱子",
-    "description": null
+    "description": "可用于收纳道具。 非常坚固，存放空间也很大。 可以当作巨大且安全的仓库使用。"
   },
   "JapaneseStyle_houseset": {
     "localized_name": "和风建筑套组",
@@ -869,11 +869,11 @@
   },
   "Katana": {
     "localized_name": "太刀",
-    "description": null
+    "description": "近战用的太刀。 刀锋凌厉，斩断一切。"
   },
   "Lab": {
     "localized_name": "帕鲁工作研究所",
-    "description": null
+    "description": "对帕鲁的各种工作进行研究的设施。 在这个设施中让帕鲁工作， 可以进行研究，获得各种效果。"
   },
   "Lamp": {
     "localized_name": "固定式电灯",
@@ -881,7 +881,7 @@
   },
   "Lantern": {
     "localized_name": "腰挂提灯",
-    "description": null
+    "description": "挂在腰上的提灯。 到了夜晚可自动照明。 带1个在身上就够用了。"
   },
   "Lantern_High": {
     "localized_name": "强化腰挂提灯",
@@ -897,15 +897,15 @@
   },
   "LaserBullet": {
     "localized_name": "能量盒",
-    "description": null
+    "description": "激光步枪使用的弹药。"
   },
   "LaserGatlingBullet": {
     "localized_name": "加特林激光能量盒",
-    "description": null
+    "description": "激光加特林等使用的弹药。"
   },
   "LaserGatlingGun": {
     "localized_name": "激光加特林",
-    "description": null
+    "description": "能够高速连射激光束。 猛烈的火力能瞬间压制复数敌人。"
   },
   "LauncherBullet": {
     "localized_name": "火箭弹",
@@ -917,7 +917,7 @@
   },
   "MakeshiftAssaultRifle": {
     "localized_name": "破旧的突击步枪",
-    "description": null
+    "description": "用废料手工制作的突击步枪。 连射能力优秀且射程远，但单发威力较低。"
   },
   "MakeshiftHandgun": {
     "localized_name": "劣质手枪",
@@ -925,11 +925,11 @@
   },
   "MakeshiftShotgun": {
     "localized_name": "破旧的霰弹枪",
-    "description": null
+    "description": "用废料手工制作的霰弹枪。 射程短，但近距离战斗能力强。"
   },
   "MakeshiftSubmachineGun": {
     "localized_name": "破旧的冲锋枪",
-    "description": null
+    "description": "用废料手工制作的冲锋枪。 连射能力佳，但单发威力较低。"
   },
   "ManganeseIngot": {
     "localized_name": "珊瑚锭",
@@ -937,7 +937,7 @@
   },
   "ManualElectricGenerator": {
     "localized_name": "人力发电机",
-    "description": null
+    "description": "利用旋转动能转换为电能的设施。 效率不佳，而且工作的帕鲁会降低SAN值， 但可以获得经验值。"
   },
   "MeatCutterKnife": {
     "localized_name": "切肉刀",
@@ -945,19 +945,19 @@
   },
   "MedicalPalBed_04": {
     "localized_name": "大型帕鲁床",
-    "description": null
+    "description": "帕鲁用的大床，可睡一个好觉。 可供帕鲁在受伤时或夜晚睡觉。 即使是大型帕鲁也能在这张大床上睡个好觉。"
   },
   "MedicalPalBed_05": {
     "localized_name": "高等文明帕鲁胶囊",
-    "description": null
+    "description": "帕鲁用的回复胶囊。 帕鲁在晚上或受伤时可以睡在这里。 因为技术革新，恢复量提高了。"
   },
   "MedicineFacility_03": {
     "localized_name": "高等文明制药台",
-    "description": null
+    "description": "用于制作帕鲁治疗药的设备。 透过未来技术，可制作未知的药物。 交给可制药的帕鲁来操作吧。"
   },
   "MetalDetector": {
     "localized_name": "金属探测器",
-    "description": null
+    "description": "拿在手上即可探测附近隐藏的矿石。 靠近矿石时，即会标记金属位置。 一旦远离标记就会消失。"
   },
   "Metal_Gate": {
     "localized_name": "金属大门",
@@ -968,12 +968,12 @@
     "description": "解锁此套组即可用金属建筑建造据点。 可以建造金属制的地基、墙壁、屋顶和楼梯等 建造房屋时所需的构造。"
   },
   "MiningTool": {
-    "localized_name": "十字镐和安全帽",
-    "description": null
+    "localized_name": "矿车",
+    "description": "如配置在据点， 可以提升「挖掘」的工作速度。 即使配置复数个，其效果也不会叠加。"
   },
   "MissileBullet": {
     "localized_name": "导弹",
-    "description": null
+    "description": "追踪导弹发射器使用的弹药。"
   },
   "MonsterFarm": {
     "localized_name": "家畜牧场",
@@ -981,7 +981,7 @@
   },
   "MultiElectricHatchingPalEgg": {
     "localized_name": "大型电能帕鲁蛋孵化器",
-    "description": null
+    "description": "用于孵化帕鲁蛋的装置。 需要电力供应才能运作， 但可自动保持内部在最佳温度，并同时孵化多个蛋。"
   },
   "MultiHatchingPalEgg": {
     "localized_name": "大型帕鲁蛋孵化器",
@@ -995,25 +995,33 @@
     "localized_name": "月花众旗帜套组",
     "description": "月花众团旗与 月花众挂旗的套组。 是击败月花众的证明。"
   },
+  "OctaviaSet01": {
+    "localized_name": "ULTRAKILL 联动套组1",
+    "description": "【ULTRAKILL 联动】 V1盔甲与神射左轮手枪的套组。"
+  },
+  "OctaviaSet02": {
+    "localized_name": "ULTRAKILL 联动套组2",
+    "description": "【ULTRAKILL 联动】 V2盔甲与核心喷射霰弹枪的套组。"
+  },
   "OilPump": {
     "localized_name": "原油提炼机",
-    "description": null
+    "description": "从油田提取原油所需的设备。 它需要大量电能供给才能运行。"
   },
   "OlympicCauldron": {
     "localized_name": "圣火台",
-    "description": null
+    "description": "如配置在据点， 可以提升「生火」的工作速度。 即使配置复数个，其效果也不会叠加。"
   },
   "OperatingTable": {
     "localized_name": "帕鲁手术台",
-    "description": null
+    "description": "zh_Hans_Text"
   },
   "OverheatRifle": {
     "localized_name": "过热步枪",
-    "description": null
+    "description": "zh-hans text"
   },
   "OverheatRifleBullet": {
     "localized_name": "过热步枪子弹",
-    "description": null
+    "description": "zh-hans text"
   },
   "PALBOX": {
     "localized_name": "帕鲁终端",
@@ -1021,15 +1029,15 @@
   },
   "PalBooth": {
     "localized_name": "跳蚤市场（帕鲁）",
-    "description": null
+    "description": "出售帕鲁的设施。 可以将帕鲁出售给其他玩家。 将冰系帕鲁指派到这里工作时， 可以使里面的食物不会轻易腐败。"
   },
   "PalDopingShot": {
     "localized_name": "强化枪",
-    "description": null
+    "description": "zh-hans text"
   },
   "PalDopingShotBullet": {
     "localized_name": "强化枪子弹",
-    "description": null
+    "description": "zh-hans text"
   },
   "PalDopingShot_2": {
     "localized_name": "高级强化枪",
@@ -1041,23 +1049,23 @@
   },
   "PalHealingGrenade": {
     "localized_name": "帕鲁恢复手榴弹",
-    "description": null
+    "description": "zh-hans text"
   },
   "PalMedicineBox": {
     "localized_name": "药品柜",
-    "description": null
+    "description": "用来存放帕鲁的药物的柜子。 生病的帕鲁会来这里吃药。 记得随时补充药物，别让柜子空了。"
   },
   "PalRevive": {
     "localized_name": "复活药",
-    "description": null
+    "description": "使受伤而无法动弹的帕鲁复活的药品。"
   },
   "PalSphere_Exotic": {
     "localized_name": "超限帕鲁球",
-    "description": null
+    "description": "可扔出并捕捉帕鲁的道具。 拥有超凡绝伦的性能，连超规格的帕鲁也能捕获。"
   },
   "Plastic": {
     "localized_name": "塑钢",
-    "description": null
+    "description": "由原油和金属加工制成的素材。 可在电气炉制作。"
   },
   "PoliceFlagSet": {
     "localized_name": "自卫队旗帜套组",
@@ -1065,11 +1073,11 @@
   },
   "Polymer": {
     "localized_name": "聚合物",
-    "description": null
+    "description": "加工油脂后制成的聚合物。 是制作枪支时必须用到的素材。"
   },
   "Potion_Extreme": {
     "localized_name": "至高恢复药",
-    "description": null
+    "description": "需要时间才能治疗身体伤口的药水。 品质卓越，能够显著地恢复生命值。"
   },
   "Product_Axe_Grade_01": {
     "localized_name": "石头斧",
@@ -1085,7 +1093,7 @@
   },
   "Product_CoalPit": {
     "localized_name": "石炭采矿场",
-    "description": null
+    "description": "生产石炭的设施。 挖掘石炭的工作需要大量体力，相当严苛。 把这些工作交给擅长挖掘的帕鲁吧。"
   },
   "Product_Cooking_Grade_01": {
     "localized_name": "篝火",
@@ -1101,11 +1109,11 @@
   },
   "Product_CopperPit": {
     "localized_name": "金属采矿场",
-    "description": null
+    "description": "生产金属矿石的设施。 挖掘金属矿石的工作需要大量体力，相当严苛。 把这些工作交给擅长挖掘的帕鲁吧。"
   },
   "Product_CopperPit_2": {
     "localized_name": "金属采矿场Ⅱ",
-    "description": null
+    "description": "可大量生产金属矿石的设施。 挖掘金属矿石的工作需要大量体力，相当严苛。 把这些工作交给擅长挖掘的帕鲁吧。"
   },
   "Product_Factory_Hard_Grade_01": {
     "localized_name": "优质作业台",
@@ -1125,7 +1133,7 @@
   },
   "Product_Farm_Carrot": {
     "localized_name": "胡萝卜园",
-    "description": null
+    "description": "可培育胡萝卜的农园。 此作物播种至收成所需时间较长，但可让料理更加丰富多元。 需有数名帕鲁负责播种、灌溉及收获。"
   },
   "Product_Farm_Lettuce": {
     "localized_name": "生菜园",
@@ -1133,11 +1141,11 @@
   },
   "Product_Farm_Onion": {
     "localized_name": "洋葱园",
-    "description": null
+    "description": "可培育洋葱的农园。 此作物播种至收成所需时间较长，但可让料理更加丰富多元。 需有数名帕鲁负责播种、灌溉及收获。"
   },
   "Product_Farm_Potato": {
     "localized_name": "土豆园",
-    "description": null
+    "description": "可培育土豆的农园。 此作物播种至收成所需时间较长，但可让料理更加丰富多元。 需有数名帕鲁负责播种、灌溉及收获。"
   },
   "Product_Farm_tomato": {
     "localized_name": "番茄园",
@@ -1181,7 +1189,7 @@
   },
   "Product_QuartzPit": {
     "localized_name": "纯水晶采矿场",
-    "description": null
+    "description": "生产纯水晶的设施。 挖掘纯水晶的工作需要大量体力，相当严苛。 把这些工作交给擅长挖掘的帕鲁吧。"
   },
   "Product_StationDeforest": {
     "localized_name": "伐木场",
@@ -1193,7 +1201,7 @@
   },
   "Product_SulfurPit": {
     "localized_name": "硫磺采矿场",
-    "description": null
+    "description": "生产硫磺的设施。 挖掘硫磺的工作需要大量体力，相当严苛。 把这些工作交给擅长挖掘的帕鲁吧。"
   },
   "Product_WeaponFactory_Dirty_Grade_01": {
     "localized_name": "武器制作台",
@@ -1213,11 +1221,11 @@
   },
   "Refrigerator": {
     "localized_name": "冰箱",
-    "description": null
+    "description": "大型食物储存库。 将冰系帕鲁指派到这里工作时， 可以使里面的食物不会轻易腐败。"
   },
   "ReinforcedArrow": {
     "localized_name": "强化箭矢",
-    "description": null
+    "description": "复合弓专用的强化箭矢。"
   },
   "RepairBench": {
     "localized_name": "修理台",
@@ -1225,7 +1233,7 @@
   },
   "RepairKit": {
     "localized_name": "修理套装",
-    "description": null
+    "description": "用于修理建筑物的道具。 可用于修补损坏的建筑物。"
   },
   "RifleBullet": {
     "localized_name": "步枪子弹",
@@ -1237,31 +1245,31 @@
   },
   "SFArmor": {
     "localized_name": "六棱晶盔甲",
-    "description": null
+    "description": "以六棱晶制成的盔甲。 具有压倒性的耐久度和防御力。"
   },
   "SFArmorCold": {
     "localized_name": "耐寒六棱晶盔甲",
-    "description": null
+    "description": "经过改良的六棱晶盔甲。 能够抵御使身体冻僵的寒意。"
   },
   "SFArmorHeat": {
     "localized_name": "耐热六棱晶盔甲",
-    "description": null
+    "description": "经过改良的六棱晶盔甲。 具备傲人的耐热性能。"
   },
   "SFArmorWeight": {
     "localized_name": "轻便六棱晶盔甲",
-    "description": null
+    "description": "经过改良的六棱晶盔甲。 能增加玩家的负重上限。"
   },
   "SFArrow": {
     "localized_name": "卓越箭矢",
-    "description": null
+    "description": "卓越弓专用的六棱晶素材箭矢。"
   },
   "SFBow": {
     "localized_name": "卓越弓",
-    "description": null
+    "description": "以超高科技重新打造的弓。 能够射出威力极强的箭矢。"
   },
   "SFHelmet": {
     "localized_name": "六棱晶头盔",
-    "description": null
+    "description": "以六棱晶制成的头盔。 具有难以置信的强度和轻便性。"
   },
   "SF_houseset": {
     "localized_name": "未来风建筑套组",
@@ -1273,7 +1281,7 @@
   },
   "SanityDecrease1": {
     "localized_name": "α波发生器",
-    "description": null
+    "description": "发出α波让帕鲁放松的装置。 减缓据点内帕鲁的SAN值下降速度。 即使配置复数个，其效果也不会叠加。"
   },
   "ScientistFlagSet": {
     "localized_name": "基因研究部队旗帜套组",
@@ -1301,7 +1309,7 @@
   },
   "Shield_SF": {
     "localized_name": "卓越护盾",
-    "description": null
+    "description": "以超高科技打造的神奇护盾。 一定时间不受攻击时可自动修复。 品质达到完美无缺的境界。"
   },
   "ShotGunBullet": {
     "localized_name": "霰弹枪子弹",
@@ -1313,51 +1321,51 @@
   },
   "Silo": {
     "localized_name": "筒仓",
-    "description": null
+    "description": "如配置在据点， 可以提升「播种」的工作速度。 即使配置复数个，其效果也不会叠加。"
   },
   "SkillUnlock_Alpaca": {
     "localized_name": "美露帕的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘美露帕。"
   },
   "SkillUnlock_AmaterasuWolf": {
     "localized_name": "苍焰狼的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘苍焰狼。"
   },
   "SkillUnlock_AmaterasuWolf_Dark": {
     "localized_name": "幽焰狼的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘幽焰狼。"
   },
   "SkillUnlock_BadCatgirl": {
     "localized_name": "妮瞅莎的霰弹枪",
-    "description": null
+    "description": "妮瞅莎专用的霰弹枪。 发动伙伴技能后，妮瞅莎会进入射击模式， 猛烈攻击周围的敌人。"
   },
   "SkillUnlock_BirdDragon": {
     "localized_name": "烽歌龙的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘烽歌龙。"
   },
   "SkillUnlock_BirdDragon_Ice": {
     "localized_name": "霜歌龙的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘霜歌龙。"
   },
   "SkillUnlock_BlackCentaur": {
     "localized_name": "混沌骑士的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘混沌骑士。"
   },
   "SkillUnlock_BlackGriffon": {
     "localized_name": "异构格里芬的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘异构格里芬。"
   },
   "SkillUnlock_BlackMetalDragon": {
     "localized_name": "魔渊龙的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘魔渊龙。"
   },
   "SkillUnlock_BlackPuppy": {
     "localized_name": "墨丸的背带",
-    "description": null
+    "description": "墨丸的背带。 发动伙伴技能后，它会探测附近的铬铁矿位置。"
   },
   "SkillUnlock_BlueDragon": {
     "localized_name": "碧海龙的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘碧海龙。"
   },
   "SkillUnlock_BlueDragon_Ice": {
     "localized_name": "碧月龙的鞍具",
@@ -1365,95 +1373,95 @@
   },
   "SkillUnlock_BlueThunderHorse": {
     "localized_name": "驭雷马的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘驭雷马。"
   },
   "SkillUnlock_Boar": {
     "localized_name": "草莽猪的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘草莽猪。"
   },
   "SkillUnlock_Carbunclo": {
     "localized_name": "翠叶鼠的冲锋枪",
-    "description": null
+    "description": "翠叶鼠专用的小型冲锋枪。 发动伙伴技能后，它会坐在玩家的头上， 配合玩家的攻击进行额外射击。"
   },
   "SkillUnlock_ColorfulBird": {
     "localized_name": "炸蛋鸟的手套",
-    "description": null
+    "description": "用来轻轻抓住炸蛋鸟的手套。 发动伙伴技能后，即可抱着炸蛋鸟， 发射爆炸蛋来进行攻击。"
   },
   "SkillUnlock_DarkMechaDragon": {
     "localized_name": "杰诺多兰的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘杰诺多兰。"
   },
   "SkillUnlock_Deer": {
     "localized_name": "紫霞鹿的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘紫霞鹿。"
   },
   "SkillUnlock_Deer_Ground": {
     "localized_name": "祇岳鹿的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘祇岳鹿。"
   },
   "SkillUnlock_DreamDemon": {
     "localized_name": "寐魔的项圈",
-    "description": null
+    "description": "寐魔的项圈。 持有此道具时，队伍中的寐魔会 一直待在场上，并配合玩家的攻击发动额外攻击。"
   },
   "SkillUnlock_DrillGame": {
     "localized_name": "碎岩龟的头巾",
-    "description": null
+    "description": "碎岩龟的决胜头带。 发动伙伴技能后，碎岩龟会进入高速旋转状态， 能够高效率钻凿岩石。"
   },
   "SkillUnlock_Eagle": {
     "localized_name": "天擒鸟的手套",
-    "description": null
+    "description": "用来轻轻抓住天擒鸟的脚的手套。 持有此道具且天擒鸟在队伍中时， 即可将天擒鸟当作滑翔伞来使用。"
   },
   "SkillUnlock_ElecPanda": {
     "localized_name": "暴电熊的机关枪",
-    "description": null
+    "description": "持有此道具时，即可骑乘暴电熊， 并用机关枪进行猛烈射击。"
   },
   "SkillUnlock_FairyDragon": {
     "localized_name": "精灵龙的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘精灵龙。"
   },
   "SkillUnlock_FairyDragon_Water": {
     "localized_name": "水灵龙的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘水灵龙。"
   },
   "SkillUnlock_FeatherOstrich": {
     "localized_name": "战冠雀的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘战冠雀。"
   },
   "SkillUnlock_FengyunDeeper": {
     "localized_name": "云海鹿的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘云海鹿。"
   },
   "SkillUnlock_FengyunDeeper_Electric": {
     "localized_name": "雷隐鹿的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘雷隐鹿。"
   },
   "SkillUnlock_FireKirin": {
     "localized_name": "火麒麟的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘火麒麟。"
   },
   "SkillUnlock_FireKirin_Dark": {
     "localized_name": "邪麒麟的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘邪麒麟。"
   },
   "SkillUnlock_FlameBuffalo": {
     "localized_name": "炽焰牛的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘炽焰牛。"
   },
   "SkillUnlock_FlowerDinosaur": {
     "localized_name": "花冠龙的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘花冠龙。"
   },
   "SkillUnlock_FlowerDinosaur_Electric": {
     "localized_name": "雷冠龙的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘雷冠龙。"
   },
   "SkillUnlock_FlowerRabbit": {
     "localized_name": "波娜兔的项圈",
-    "description": null
+    "description": "波娜兔的项圈。 持有此道具时，队伍中的波娜兔会 一直待在场上，并自动拾取附近的道具。"
   },
   "SkillUnlock_FlyingManta": {
     "localized_name": "鲁米儿的手套",
-    "description": null
+    "description": "用来轻轻抓住鲁米儿的小手的手套。 持有此道具且鲁米儿在队伍中时， 即可将鲁米儿当作滑翔伞来使用。"
   },
   "SkillUnlock_FlyingManta_Thunder": {
     "localized_name": "雷米儿的手套",
@@ -1461,7 +1469,7 @@
   },
   "SkillUnlock_Garm": {
     "localized_name": "猎狼的挽具鞍具组合",
-    "description": null
+    "description": "持有此道具时， 即可骑乘猎狼。"
   },
   "SkillUnlock_GhostAnglerfish": {
     "localized_name": "冥灯鱼的鞍具",
@@ -1473,71 +1481,71 @@
   },
   "SkillUnlock_GhostBeast": {
     "localized_name": "噬魂兽的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘噬魂兽。"
   },
   "SkillUnlock_GoldenHorse": {
     "localized_name": "金驰兽的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘金驰兽。"
   },
   "SkillUnlock_GrassMammoth": {
     "localized_name": "森猛犸的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘森猛犸。"
   },
   "SkillUnlock_GrassMammoth_Ice": {
     "localized_name": "雪猛犸的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘雪猛犸。"
   },
   "SkillUnlock_GrassPanda": {
     "localized_name": "叶胖达的榴弹发射器",
-    "description": null
+    "description": "持有此道具时， 即可骑乘叶胖达，并用榴弹发射器进行猛烈射击。"
   },
   "SkillUnlock_GrassPanda_Electric": {
     "localized_name": "雷胖达的榴弹发射器",
-    "description": null
+    "description": "持有此道具时， 即可骑乘雷胖达，并用榴弹发射器进行猛烈轰炸。"
   },
   "SkillUnlock_GuardianDog": {
     "localized_name": "八云犬的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘八云犬。"
   },
   "SkillUnlock_HadesBird": {
     "localized_name": "雷冥鸟的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘雷冥鸟。"
   },
   "SkillUnlock_HadesBird_Electric": {
     "localized_name": "雷鸣鸟的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘雷鸣鸟。"
   },
   "SkillUnlock_HawkBird": {
     "localized_name": "疾风隼的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘疾风隼。"
   },
   "SkillUnlock_Hedgehog": {
     "localized_name": "電棘鼠的手套",
-    "description": null
+    "description": "用来抓住電棘鼠的橡胶手套。 发动伙伴技能后，即可将電棘鼠 当作电击型手榴弹投掷出去。"
   },
   "SkillUnlock_Hedgehog_Ice": {
     "localized_name": "冰刺鼠的手套",
-    "description": null
+    "description": "用来抓住冰刺鼠的隔热手套。 发动伙伴技能后，即可将冰刺鼠 当作冷冻型手榴弹投掷出去。"
   },
   "SkillUnlock_Horus": {
     "localized_name": "荷鲁斯的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘荷鲁斯。"
   },
   "SkillUnlock_Horus_Water": {
     "localized_name": "伊西斯的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘伊西斯。"
   },
   "SkillUnlock_IceDeer": {
     "localized_name": "严冬鹿的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘严冬鹿。"
   },
   "SkillUnlock_IceHorse": {
     "localized_name": "唤冬兽的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘唤冬兽。"
   },
   "SkillUnlock_IceHorse_Dark": {
     "localized_name": "唤夜兽的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘唤夜兽。"
   },
   "SkillUnlock_IceNarwhal": {
     "localized_name": "凉晶鲸的鞍具",
@@ -1548,88 +1556,92 @@
     "description": null
   },
   "SkillUnlock_IceSeal": {
-    "localized_name": "香草豹冰的背带",
+    "localized_name": "香草豹冰的鞍具",
     "description": null
   },
   "SkillUnlock_JetDragon": {
     "localized_name": "空涡龙的导弹发射器",
-    "description": null
+    "description": "持有此道具时， 即可骑乘空涡龙，并用导弹进行猛烈轰炸。"
   },
   "SkillUnlock_KingAlpaca": {
     "localized_name": "君王美露帕的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘君王美露帕。"
   },
   "SkillUnlock_KingAlpaca_Ice": {
     "localized_name": "冰帝美露帕的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘冰帝美露帕。"
   },
   "SkillUnlock_KingBahamut": {
     "localized_name": "焰煌的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘焰煌。"
   },
   "SkillUnlock_KingBahamut_Dragon": {
     "localized_name": "殁殃的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘殁殃。"
   },
   "SkillUnlock_Kirin": {
     "localized_name": "雷角马的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘雷角马。"
   },
   "SkillUnlock_Kitsunebi": {
     "localized_name": "火绒狐的背带",
-    "description": null
+    "description": "用来抱住火绒狐的背带。 发动伙伴技能后，即可将火绒狐 抱在身上当作火焰喷射器进行攻击。"
   },
   "SkillUnlock_Kitsunebi_Ice": {
     "localized_name": "雪绒狐的背带",
-    "description": null
+    "description": "用来抱住雪绒狐的背带。 发动伙伴技能后，即可将雪绒狐 抱在身上当作冷冻喷射器进行攻击。"
   },
   "SkillUnlock_LazyDragon": {
     "localized_name": "佩克龙的导弹发射器",
-    "description": null
+    "description": "持有此道具时，即可骑乘佩克龙， 并用导弹发射器进行猛烈射击。"
   },
   "SkillUnlock_LazyDragon_Electric": {
     "localized_name": "派克龙的导弹发射器",
-    "description": null
+    "description": "持有此道具时， 即可骑乘派克龙，并用导弹发射器进行猛烈轰炸。"
   },
   "SkillUnlock_LeafMomonga": {
     "localized_name": "达鼠泥的背带",
     "description": null
   },
+  "SkillUnlock_LegendDeer": {
+    "localized_name": "默世鹿的鞍具",
+    "description": null
+  },
   "SkillUnlock_Manticore": {
     "localized_name": "狱焰王的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘狱焰王。"
   },
   "SkillUnlock_Manticore_Dark": {
     "localized_name": "狱阎王的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘狱阎王。"
   },
   "SkillUnlock_Monkey": {
     "localized_name": "新叶猿的突击步枪",
-    "description": null
+    "description": "新叶猿专用的小型突击步枪。 发动伙伴技能后，新叶猿会进入射击模式， 猛烈扫射周围的敌人。"
   },
   "SkillUnlock_MoonQueen": {
     "localized_name": "辉月伊的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘辉月伊。"
   },
   "SkillUnlock_MopKing": {
     "localized_name": "毛老爹的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘毛老爹。"
   },
   "SkillUnlock_MushroomDragon": {
     "localized_name": "菇咚的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘菇咚。"
   },
   "SkillUnlock_MushroomDragon_Dark": {
     "localized_name": "菇波的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘菇波。"
   },
   "SkillUnlock_NaughtyCat": {
     "localized_name": "笑魇猫的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘笑魇猫。"
   },
   "SkillUnlock_NegativeOctopus": {
     "localized_name": "勾魂鱿的手套",
-    "description": null
+    "description": "用来轻轻抓住勾魂鱿的脚的手套。 持有此道具时并且勾魂鱿在队伍中时， 即可将勾魂鱿当作滑翔伞。"
   },
   "SkillUnlock_NegativeOctopus_Neutral": {
     "localized_name": "蚀魂鱿的手套",
@@ -1637,11 +1649,11 @@
   },
   "SkillUnlock_NightBlueHorse": {
     "localized_name": "夜冥驹的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘夜冥驹。"
   },
   "SkillUnlock_Penguin": {
     "localized_name": "企丸丸的火箭发射器",
-    "description": null
+    "description": "用来发射企丸丸的炮筒。 发动伙伴技能后，即可将企丸丸射出 对敌人进行攻击。随后，企丸丸会进入濒死状态。"
   },
   "SkillUnlock_Penguin_Electric": {
     "localized_name": "闪丸丸的火箭发射器",
@@ -1657,67 +1669,67 @@
   },
   "SkillUnlock_PurpleSpider": {
     "localized_name": "桃蛛娘的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘桃蛛娘。"
   },
   "SkillUnlock_RaijinDaughter": {
     "localized_name": "雷鸣童子的项圈",
-    "description": null
+    "description": "雷鸣童子的项圈。 持有此道具时，队伍中的雷鸣童子会 一直待在场上，并配合玩家的攻击发动额外攻击。"
   },
   "SkillUnlock_RaijinDaughter_Water": {
     "localized_name": "天阴童子的项圈",
-    "description": null
+    "description": "天阴童子的项圈。 持有此道具时，队伍中的天阴童子会 一直待在场上，并配合玩家的攻击发动额外攻击。"
   },
   "SkillUnlock_RedArmorBird": {
     "localized_name": "燧火鸟的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘燧火鸟。"
   },
   "SkillUnlock_SaintCentaur": {
     "localized_name": "圣光骑士的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘圣光骑士。"
   },
   "SkillUnlock_SakuraSaurus": {
     "localized_name": "连理龙的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘连理龙。"
   },
   "SkillUnlock_SakuraSaurus_Water": {
     "localized_name": "海誓龙的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘海誓龙。"
   },
   "SkillUnlock_Serpent": {
     "localized_name": "滑水蛇的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘滑水蛇。"
   },
   "SkillUnlock_Serpent_Ground": {
     "localized_name": "流沙蛇的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘流沙蛇。"
   },
   "SkillUnlock_SkyDragon": {
     "localized_name": "天羽龙的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘天羽龙。"
   },
   "SkillUnlock_SkyDragon_Grass": {
     "localized_name": "翠羽龙的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘翠羽龙。"
   },
   "SkillUnlock_SnowTigerBeastman": {
     "localized_name": "霜牙王的巨锤",
-    "description": null
+    "description": "持有此道具时， 即可骑乘霜牙王。"
   },
   "SkillUnlock_Suzaku": {
     "localized_name": "朱雀的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘朱雀。"
   },
   "SkillUnlock_Suzaku_Water": {
     "localized_name": "清雀的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘清雀。"
   },
   "SkillUnlock_ThunderBird": {
     "localized_name": "迅雷鸟的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘迅雷鸟。"
   },
   "SkillUnlock_ThunderDog": {
     "localized_name": "霹雳犬的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘霹雳犬。"
   },
   "SkillUnlock_TropicalOstrich": {
     "localized_name": "咕咕桑葩的鞍具",
@@ -1725,63 +1737,63 @@
   },
   "SkillUnlock_Umihebi": {
     "localized_name": "覆海龙的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘覆海龙。"
   },
   "SkillUnlock_Umihebi_Fire": {
     "localized_name": "腾炎龙的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘腾炎龙。"
   },
   "SkillUnlock_VolcanicMonster": {
     "localized_name": "熔岩兽的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘熔岩兽。"
   },
   "SkillUnlock_VolcanicMonster_Ice": {
     "localized_name": "寒霜兽的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘寒霜兽。"
   },
   "SkillUnlock_WeaselDragon": {
     "localized_name": "疾旋鼬的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘疾旋鼬。"
   },
   "SkillUnlock_WeaselDragon_Fire": {
     "localized_name": "桃旋鼬的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘桃旋鼬。"
   },
   "SkillUnlock_WhiteAlienDragon": {
     "localized_name": "杰诺路达的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘杰诺路达。"
   },
   "SkillUnlock_WhiteDeer": {
     "localized_name": "净世鹿的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘净世鹿。"
   },
   "SkillUnlock_WhiteShieldDragon": {
     "localized_name": "艾基鲁迦的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘艾基鲁迦。"
   },
   "SkillUnlock_WindChimes": {
     "localized_name": "吊缚灵的手套",
-    "description": null
+    "description": "用来轻轻抓住吊缚灵的手臂的手套。 持有此道具且吊缚灵在队伍中时， 即可将吊缚灵当作滑翔伞来使用。"
   },
   "SkillUnlock_WindChimes_Ice": {
     "localized_name": "冰缚灵的手套",
-    "description": null
+    "description": "用来轻轻抓住冰缚灵的手臂的手套。 持有此道具且冰缚灵在队伍中时， 即可将冰缚灵当作滑翔伞来使用。"
   },
   "SkillUnlock_Yeti": {
     "localized_name": "白绒雪怪的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘白绒雪怪。"
   },
   "SkillUnlock_Yeti_Grass": {
     "localized_name": "绿苔绒怪的鞍具",
-    "description": null
+    "description": "持有此道具时， 即可骑乘绿苔绒怪。"
   },
   "SkinChange": {
     "localized_name": "帕鲁装扮机",
-    "description": null
+    "description": "用于改变外观的设施。 可以为帕鲁更换特别的外观。 通过游戏外的其他方式获得的外观也能使用。"
   },
   "Snowman": {
     "localized_name": "雪人",
-    "description": null
+    "description": "如配置在据点， 可以提升「冷却」的工作速度。 即使配置复数个，其效果也不会叠加。"
   },
   "Spa": {
     "localized_name": "温泉",
@@ -1797,7 +1809,7 @@
   },
   "Spear": {
     "localized_name": "石头长矛",
-    "description": null
+    "description": "可在近战时发挥作用的石头长矛。 射程很长，可在战斗时保持一定距离。"
   },
   "Spear_2": {
     "localized_name": "金属长矛",
@@ -1809,11 +1821,11 @@
   },
   "Spear_ForestBoss": {
     "localized_name": "莉莉之矛",
-    "description": null
+    "description": "莉莉爱用的长矛。 她会用它来制裁蔑视帕鲁的人。"
   },
   "Special_ElectricHatchingPalEgg": {
     "localized_name": "电能帕鲁蛋孵化器",
-    "description": null
+    "description": "用于孵化帕鲁蛋的装置。 需要电力供应才能运作， 但可自动将该孵化器的内部保持在最佳温度。"
   },
   "Special_HatchingPalEgg": {
     "localized_name": "帕鲁蛋孵化器",
@@ -1865,35 +1877,35 @@
   },
   "SphereFactory_Black_04": {
     "localized_name": "高等文明帕鲁球工厂",
-    "description": null
+    "description": "捕捉帕鲁用的帕鲁球的工厂。 引入了高性能机器，可以快速制作帕鲁球。 需有能进行手工作业的帕鲁。"
   },
   "SphereModule_Curve": {
     "localized_name": "曲线模块",
-    "description": null
+    "description": "装备后能在帕鲁球上增添曲线旋转。 容易从死角命中帕鲁，并提高捕获力。"
   },
   "SphereModule_Curve2": {
     "localized_name": "滑球模块",
-    "description": null
+    "description": "装备后能在帕鲁球上增添滑球旋转。 帕鲁球能以较大角度急剧弯曲， 更容易出其不意，并提高捕获力。"
   },
   "SphereModule_Heavy": {
     "localized_name": "重量模块",
-    "description": null
+    "description": "装备后会增加帕鲁球的重量， 虽然投掷距离会缩短，但能提高捕获力。"
   },
   "SphereModule_Homing": {
     "localized_name": "追踪模块",
-    "description": null
+    "description": "装备后帕鲁球会自动追踪帕鲁， 并且提高捕获力。"
   },
   "SphereModule_Sniper": {
     "localized_name": "狙击模块",
-    "description": null
+    "description": "装备后会帕鲁球的投掷距离会增加， 能够精准锁定帕鲁，并提高捕获力。"
   },
   "SphereModule_Sniper2": {
     "localized_name": "狙击模块Ⅱ",
-    "description": null
+    "description": "装备后会帕鲁球的投掷距离会大幅增加， 能够精准锁定帕鲁，并提高捕获力。"
   },
   "StainlessSteel": {
     "localized_name": "六棱晶锭",
-    "description": null
+    "description": "由铬铁矿和金属锭、 六棱晶矿加工制成的合金。 用于制作先进装备或建筑的材料。"
   },
   "Stone_Gate": {
     "localized_name": "石制大门",
@@ -1905,15 +1917,15 @@
   },
   "Stump": {
     "localized_name": "树桩和斧头",
-    "description": null
+    "description": "如配置在据点， 可以提升「采伐」的工作速度。 即使配置复数个，其效果也不会叠加。"
   },
   "TableDresser01_Stone": {
     "localized_name": "古典式化妆台",
-    "description": null
+    "description": "装饰用的古典式化妆台。"
   },
   "ToolBoxV1": {
     "localized_name": "大型工具箱",
-    "description": null
+    "description": "如配置在据点， 可以提升「手工作业」的工作速度。 即使配置复数个，其效果也不会叠加。"
   },
   "Torch": {
     "localized_name": "固定式火把",
@@ -1921,7 +1933,7 @@
   },
   "TransmissionTower": {
     "localized_name": "输电塔",
-    "description": null
+    "description": "如配置在据点， 可以提升「发电」的工作速度。 即使配置复数个，其效果也不会叠加。"
   },
   "Trap_LegHold": {
     "localized_name": "捕兽夹（小）",
@@ -1949,19 +1961,19 @@
   },
   "Unlock_Picking_Tier1": {
     "localized_name": "简易开锁工具",
-    "description": null
+    "description": "持有此道具时，能够通过撬锁打开 需要铜钥匙才能打开的宝箱。 即使多次使用也不会坏。"
   },
   "Unlock_Picking_Tier2": {
     "localized_name": "高级开锁工具",
-    "description": null
+    "description": "持有此道具时，能够通过撬锁打开 需要银钥匙才能打开的宝箱。 即使多次使用也不会坏。"
   },
   "Unlock_Picking_Tier3": {
     "localized_name": "专家开锁工具",
-    "description": null
+    "description": "持有此道具时，能够通过撬锁打开 需要金钥匙才能打开的宝箱。 即使多次使用也不会坏。"
   },
   "WallSignboard": {
     "localized_name": "WallSignBoard",
-    "description": null
+    "description": "可以输入文字的告示牌。 可以悬挂在墙壁上。"
   },
   "WallTorch": {
     "localized_name": "壁挂火把",
@@ -1969,7 +1981,7 @@
   },
   "WeaponFactory_Dirty_04": {
     "localized_name": "高等文明武器工厂",
-    "description": null
+    "description": "用于生产武器及弹药的工厂。 引入了高性能机器，可以快速制作武器。 需有能进行手工作业的帕鲁。"
   },
   "Wood_Gate": {
     "localized_name": "木制大门",
@@ -1981,11 +1993,11 @@
   },
   "Wooden_ladder": {
     "localized_name": "梯子",
-    "description": null
+    "description": "可以用来爬上高处的梯子。"
   },
   "WorkSpeedIncrease1": {
     "localized_name": "β波发生器",
-    "description": null
+    "description": "发出β波让帕鲁活动更活跃的装置。 提升据点内帕鲁的工作速度。 即使配置复数个，其效果也不会叠加。"
   },
   "Workbench": {
     "localized_name": "原始的作业台",
@@ -1993,6 +2005,6 @@
   },
   "YakushimaBlade": {
     "localized_name": "彩虹猫之刃",
-    "description": null
+    "description": "【泰拉瑞亚联动】 传说这把剑是武道蛙从遥远的国度带回来的。 至于原因嘛，我们完全不知道……"
   }
 }

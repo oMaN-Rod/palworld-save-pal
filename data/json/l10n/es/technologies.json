@@ -1,55 +1,55 @@
 {
   "Accessory_AirDash1": {
     "localized_name": "Botas de propulsión aérea",
-    "description": null
+    "description": "Accesorio que permite al personaje jugador propulsarse en el aire al llevarlo equipado."
   },
   "Accessory_AirDash2": {
     "localized_name": "Botas de propulsión aérea doble",
-    "description": null
+    "description": "Accesorio que permite al personaje jugador propulsarse en el aire 2 veces al llevarlo equipado."
   },
   "Accessory_AirDash3": {
     "localized_name": "Botas de propulsión aérea triple",
-    "description": null
+    "description": "es_Text"
   },
   "Accessory_JumpCount_Increase1": {
     "localized_name": "Botas de salto doble",
-    "description": null
+    "description": "Accesorio que permite al personaje jugador saltar en el aire al llevarlo equipado."
   },
   "Accessory_JumpCount_Increase2": {
     "localized_name": "Botas de salto triple",
-    "description": null
+    "description": "Accesorio que permite al personaje jugador saltar en el aire 2 veces al llevarlo equipado."
   },
   "Accessory_JumpPower_Increase": {
     "localized_name": "Cinto antigravedad",
-    "description": null
+    "description": "Accesorio que aumenta la fuerza de salto del personaje jugador al llevarlo equipado."
   },
   "Accessory_Nonkilling": {
     "localized_name": "Anillo de relax",
-    "description": null
+    "description": "Anillo del pacifista. El usuario no puede reducir la salud del objetivo por debajo de 1."
   },
   "Accessory_TalentChecker": {
     "localized_name": "Talentolentes",
-    "description": null
+    "description": "Gafas con las que ver los talentos ocultos de los Pals. Los valores PV, ataque y defensa se muestran en una escala de 100."
   },
   "AdditionalInventory_001": {
     "localized_name": "Neceser expansivo pequeño",
-    "description": null
+    "description": "Pequeño neceser para llevar equipaje adicional. Con él, tendrás más espacio en tu inventario."
   },
   "AdditionalInventory_002": {
     "localized_name": "Neceser expansivo mediano",
-    "description": null
+    "description": "Neceser de tamaño normal para llevar equipaje adicional. Con él, tendrás más espacio en tu inventario."
   },
   "AdditionalInventory_003": {
     "localized_name": "Neceser expansivo grande",
-    "description": null
+    "description": "Neceser grandote para llevar equipaje adicional. Con él, tendrás más espacio en tu inventario."
   },
   "AdditionalInventory_004": {
     "localized_name": "Neceser expansivo gigantesco",
-    "description": null
+    "description": "Neceser giganteso para llevar equipaje adicional. Con él, tendrás más espacio en tu inventario."
   },
   "Altar": {
     "localized_name": "Altar de invocación",
-    "description": null
+    "description": "Si ofreces la tabla con el dibujo de un Pal, podrás invocar a un poderoso Pal en la base. Eso sí, prepárate muy bien para el combate."
   },
   "Arrow": {
     "localized_name": "Flecha",
@@ -69,23 +69,23 @@
   },
   "AutoMealPouch_Tier1": {
     "localized_name": "Bolsa de comida pequeña",
-    "description": null
+    "description": "Bolsa pequeña llena de comida. Desbloquea 1 espacio de comida automática. Cuando tengas hambre, la comida del espacio se consumirá automáticamente."
   },
   "AutoMealPouch_Tier2": {
     "localized_name": "Bolsa de comida mediana",
-    "description": null
+    "description": "Bolsa de tamaño normal llena de comida. Desbloquea hasta 2 espacios de comida automática. Cuando tengas hambre, la comida del espacio se consumirá automáticamente."
   },
   "AutoMealPouch_Tier3": {
     "localized_name": "Bolsa de comida grande",
-    "description": null
+    "description": "Bolsa grande llena de comida. Desbloquea hasta 3 espacios de comida automática. Cuando tengas hambre, la comida del espacio se consumirá automáticamente."
   },
   "AutoMealPouch_Tier4": {
     "localized_name": "Bolsa de comida gigantesca",
-    "description": null
+    "description": "Bolsa enorme llena de comida. Desbloquea hasta 4 espacios de comida automática. Cuando tengas hambre, la comida del espacio se consumirá automáticamente."
   },
   "AutoMealPouch_Tier5": {
     "localized_name": "Bolsa de comida colosal",
-    "description": null
+    "description": "Bolsa enorme llena de comida. Desbloquea hasta 5 espacios de comida automática. Cuando tengas hambre, la comida del espacio se consumirá automáticamente."
   },
   "BaseCampBattleDirector": {
     "localized_name": "Campana de alarma",
@@ -93,11 +93,11 @@
   },
   "BaseCampItemDispenser": {
     "localized_name": "Dispensador de objetos",
-    "description": null
+    "description": "Dispositivo que permite sacar libremente objetos de todos los cofres de la base en que está colocado."
   },
   "BaseCampWorkHard": {
     "localized_name": "Puesto de vigilancia",
-    "description": null
+    "description": "Podrás controlar la forma de trabajar de los Pals de la base y prohibir o dar permiso para realizar tareas individuales."
   },
   "BaseCampWorkerExtraStation": {
     "localized_name": "Terminal de operaciones Caja Pal",
@@ -181,7 +181,7 @@
   },
   "Battle_Cloth": {
     "localized_name": "Tela",
-    "description": null
+    "description": "Tela que se obtiene al tejer Lana. Útil para elaborar equipo defensivo."
   },
   "Battle_Defense_BowGun": {
     "localized_name": "Ballesta estacionaria",
@@ -237,7 +237,7 @@
   },
   "Battle_MeleeWeapon_Axe_Steal": {
     "localized_name": "Hacha de Paluminium",
-    "description": null
+    "description": "Hacha para cortar la madera. El Paluminium le otorga una eficacia asombrosa a su filo."
   },
   "Battle_MeleeWeapon_Bat": {
     "localized_name": "Garrote de madera",
@@ -245,11 +245,11 @@
   },
   "Battle_MeleeWeapon_Bat2": {
     "localized_name": "Bate",
-    "description": null
+    "description": "Bate de béisbol para combates cuerpo a cuerpo. Los Pals son demasiado grandes y no sirven como bola."
   },
   "Battle_MeleeWeapon_Pickaxe_Steal": {
     "localized_name": "Pico de Paluminium",
-    "description": null
+    "description": "Pico de minero. El Paluminium le otorga una eficacia asombrosa a su filo."
   },
   "Battle_MeleeWeapon_Sword": {
     "localized_name": "Espada",
@@ -289,11 +289,11 @@
   },
   "Battle_RangeWeapon_CompoundBow": {
     "localized_name": "Arco de poleas",
-    "description": null
+    "description": "Arco moderno. Puede disparar flechas más potentes."
   },
   "Battle_RangeWeapon_FlameThrower": {
     "localized_name": "FlameThrower",
-    "description": null
+    "description": "Flamethrower que dispara llamas de largo alcance. Puede prender fuego al rival. Para su elaboración necesitarás una «Fábrica de producción en cadena de armas II»."
   },
   "Battle_RangeWeapon_GatlingGun": {
     "localized_name": "Gatling Gun",
@@ -321,7 +321,7 @@
   },
   "Battle_RangeWeapon_OldRevolver": {
     "localized_name": "Revólver viejo",
-    "description": null
+    "description": "Un revólver algo viejo. La potencia de disparo es superior a la del Handgun_default."
   },
   "Battle_RangeWeapon_Rifle": {
     "localized_name": "Rifle de un solo tiro",
@@ -333,11 +333,11 @@
   },
   "Battle_RangeWeapon_SemiAutoRifle": {
     "localized_name": "Rifle semiautomático",
-    "description": null
+    "description": "Un rifle efectivo hasta cierto punto en disparos en cadena. Es fácil apuntar con él y tiene potencia de tiro, lo que facilita su uso en combates a media distancia."
   },
   "Battle_RangeWeapon_SemiAutoShotgun": {
     "localized_name": "Escopeta semiautomática",
-    "description": null
+    "description": "Escopeta apta para disparar varios tiros en cadena. Su potencia a corta distancia es excelente."
   },
   "Battle_RangeWeapon_ShotGun": {
     "localized_name": "Escopeta de doble cañón",
@@ -357,11 +357,11 @@
   },
   "Battle_RangeWeapon_SubmachineGun": {
     "localized_name": "Subfusil",
-    "description": null
+    "description": "Subfusil con una potencia de disparo en cadena sublime. Fácil de manejar y de usar en combate a corta distancia."
   },
   "BeamSword": {
     "localized_name": "Espada de haz",
-    "description": null
+    "description": "Espada de haz para combates a corta distancia. Su láser de alta potencia fríe al enemigo."
   },
   "BelieverFlagSet": {
     "localized_name": "Set de banderas de la Liga de defensa de los Pals",
@@ -369,7 +369,7 @@
   },
   "BlastFurnace4": {
     "localized_name": "Horno colosal",
-    "description": null
+    "description": "Utensilio para fundir Hexolita. Al ser más grande, podrán trabajar varios Pals a la vez. Es necesario que un Pal de fuego lo encienda."
   },
   "BreedFarm": {
     "localized_name": "Criadero",
@@ -381,11 +381,11 @@
   },
   "CarbonFiber": {
     "localized_name": "Fibra de carbono",
-    "description": null
+    "description": "Material duro y ligero de calidad. Sirve para elaborar equipo defensivo."
   },
   "Cauldron": {
     "localized_name": "Caldero de bruja",
-    "description": null
+    "description": "Cuando se coloca en la base, aumenta la velocidad de trabajo para la acción «Fabricación de medicinas». Instalar más de uno no produce un mayor efecto."
   },
   "CeilingLamp": {
     "localized_name": "Lámpara de techo",
@@ -393,23 +393,23 @@
   },
   "Cement": {
     "localized_name": "Cemento",
-    "description": null
+    "description": "Cemento para construcciones. Puede elaborarse en una Mesa de trabajo de calidad."
   },
   "ChargeLaserRifle": {
     "localized_name": "Rifle de carga",
-    "description": null
+    "description": "es_Text"
   },
   "ChargeLaserRifleBullet": {
     "localized_name": "Balas de rifle de carga",
-    "description": null
+    "description": "es_Text"
   },
   "Cloth2": {
     "localized_name": "Tela de calidad",
-    "description": null
+    "description": "Tela de calidad que se obtiene al tejer mucha Lana. Útil para elaborar equipo defensivo de calidad. Puede elaborarse en una «Mesa de trabajo de calidad»."
   },
   "CompositeDesk": {
     "localized_name": "Mesa de dibujo",
-    "description": null
+    "description": "Utensilio en el que se pueden combinar varios planos para crear planos de mejor calidad."
   },
   "Cooler": {
     "localized_name": "Refrigerador rústico",
@@ -417,11 +417,11 @@
   },
   "CoolerBox": {
     "localized_name": "Nevera portátil",
-    "description": null
+    "description": "Pequeño depósito para alimentos. Si asignas a Pals de hielo, será menos probable que se estropee la comida que contenga."
   },
   "CoolerPalFoodBox": {
     "localized_name": "Caja de cebo fría",
-    "description": null
+    "description": "Una caja de cebo que se puede mantener fría. Si se la asignas a un Pal de hielo, el cebo no se echará a perder."
   },
   "Crusher": {
     "localized_name": "Trituradora",
@@ -457,11 +457,11 @@
   },
   "DimensionPalStorage": {
     "localized_name": "Almacén DimensioPal",
-    "description": null
+    "description": "Instalación en la que guardar a un gran número de Pals capturados. Cualquier miembro del gremio podrá guardarlos ahí dentro. Si haces que el almacenamiento sea privado, solo podrás guardar a tus propios Pals."
   },
   "DismantlingConveyor": {
     "localized_name": "Transportador de demolición Pal",
-    "description": null
+    "description": "Una máquina maravillosa que desmantela automáticamente a todos los Pals que metas."
   },
   "DisplayCharacter": {
     "localized_name": "Jaula de observación",
@@ -477,7 +477,7 @@
   },
   "ElectricGenerator_Large": {
     "localized_name": "Dinamo grande",
-    "description": null
+    "description": "Utensilio para almacenar la electricidad generada por Pals eléctricos. Ahora es más grande y posee una mayor eficiencia energética."
   },
   "ElectricHeater": {
     "localized_name": "Calefactor eléctrico",
@@ -485,39 +485,39 @@
   },
   "EnergyLauncherBullet": {
     "localized_name": "Cartucho de plasma",
-    "description": null
+    "description": "Munición para armas como la Cañón de plasma."
   },
   "EnergyRocketLauncher": {
     "localized_name": "Cañón de plasma",
-    "description": null
+    "description": "Lanza una potente bola de energía que explota al impactar."
   },
   "EnergyShotgun": {
     "localized_name": "Escopeta de energía",
-    "description": null
+    "description": "es_Text"
   },
   "EnergyShotgunBullet": {
     "localized_name": "Balas de escopeta de energía",
-    "description": null
+    "description": "es_Text"
   },
   "EnergyStorage_Electric": {
     "localized_name": "Condensador eléctrico",
-    "description": null
+    "description": "Utensilio para almacenar el excedente de electricidad generado por un Dinamo."
   },
   "Expedition": {
     "localized_name": "Estación de expedición Pal",
-    "description": null
+    "description": "Instalación desde la que se puede enviar a Pals de expedición a mazmorras y demás lugares. Los Pals enviados se reunirán y combatirán en sus respectivos destinos y volverán con recursos para su base."
   },
   "Factory_Hard_04": {
     "localized_name": "Fábrica de trabajo de una civilización avanzada",
-    "description": null
+    "description": "Fábrica para elaborar objetos y piezas de equipo. Gracias a la maquinaria de alto rendimiento, la velocidad de producción ha aumentado. Se necesita un Pal experto en trabajos manuales."
   },
   "Factory_Money": {
     "localized_name": "Fábrica de monedas de oro",
-    "description": null
+    "description": "Fábrica de Moneda de oro. El valor COR de los Pals disminuirá por la presión mental a la que están sometidos. Se necesita un Pal experto en trabajos manuales."
   },
   "Farm_SkillFruits": {
     "localized_name": "Plantación de frutas técnicas",
-    "description": null
+    "description": "Plantación donde podrás cultivas frutas técnicas. Al plantar una fruta podrás cosechar muchas más del mismo tipo."
   },
   "FireCultFlagSet": {
     "localized_name": "Set de banderas de la Llama eterna",
@@ -557,7 +557,7 @@
   },
   "FlamethrowerBullet": {
     "localized_name": "Munición de lanzallamas",
-    "description": null
+    "description": "Munición para el lanzallamas. Puedes usarla en armas como la Flamethrower."
   },
   "FlourMill": {
     "localized_name": "Molino harinero",
@@ -565,51 +565,51 @@
   },
   "FlowerBed": {
     "localized_name": "Parterre de flores",
-    "description": null
+    "description": "Cuando se coloca en la base, aumenta la velocidad de trabajo para la acción «Recolección». Instalar más de uno no produce un mayor efecto."
   },
   "Fountain": {
     "localized_name": "Fuente",
-    "description": null
+    "description": "Cuando se coloca en la base, aumenta la velocidad de trabajo para la acción «Riego». Instalar más de una no produce un mayor efecto."
   },
   "FragGrenade": {
     "localized_name": "Granada de fragmentación",
-    "description": null
+    "description": "Granada de fragmentación muy útil para combates a media distancia. Explota unos segundos después de lanzarla y daña al enemigo."
   },
   "FragGrenade_Dark": {
     "localized_name": "Granada oscura",
-    "description": null
+    "description": "Granada oscura muy útil para combates a media distancia. Explota unos segundos después de lanzarla y daña a Oscuridad."
   },
   "FragGrenade_Dragon": {
     "localized_name": "Granada dragontina",
-    "description": null
+    "description": "Granada dragontina muy útil para combates a media distancia. Explota unos segundos después de lanzarla y daña a Dragón."
   },
   "FragGrenade_Elec": {
     "localized_name": "Granada voltaica",
-    "description": null
+    "description": "Granada voltaica muy útil para combates a media distancia. Explota unos segundos después de lanzarla y electrifica el área circundante."
   },
   "FragGrenade_Fire": {
     "localized_name": "Granada incendiaria",
-    "description": null
+    "description": "Granada incendiaria muy útil para combates a media distancia. Explota unos segundos después de lanzarla e incendia el área circundante."
   },
   "FragGrenade_Ground": {
     "localized_name": "Granada sísmica",
-    "description": null
+    "description": "Granada sísmica muy útil para combates a media distancia. Explota unos segundos después de lanzarla y daña a Tierra."
   },
   "FragGrenade_Ice": {
     "localized_name": "Granada glacial",
-    "description": null
+    "description": "Granada glacial muy útil para combates a media distancia. Explota unos segundos después de lanzarla y congela el área circundante."
   },
   "FragGrenade_Leaf": {
     "localized_name": "Granada vegetal",
-    "description": null
+    "description": "Granada vegetal muy útil para combates a media distancia. Explota unos segundos después de lanzarla y daña a Planta."
   },
   "FragGrenade_Super": {
     "localized_name": "Supergranada de fragmentación",
-    "description": null
+    "description": "Granada fragmentada mejorada. Explota unos segundos después de lanzarla e inflige mucho daño al enemigo."
   },
   "FragGrenade_Water": {
     "localized_name": "Granada acuática",
-    "description": null
+    "description": "Granada acuática muy útil para combates a media distancia. Explota unos segundos después de lanzarla y daña a Agua."
   },
   "FurnitureSet_1": {
     "localized_name": "Set de muebles de salón de madera",
@@ -745,7 +745,7 @@
   },
   "GatlingBullet": {
     "localized_name": "Munición de Gatling Gun",
-    "description": null
+    "description": "Munición para armas como la Gatling Gun."
   },
   "Glass_houseset": {
     "localized_name": "Set de construcción de cristal",
@@ -753,23 +753,23 @@
   },
   "GlobalPalStorage": {
     "localized_name": "Caja Pal global",
-    "description": null
+    "description": "Instalación que te permite guardar la información genética de tus Pals y también recrear a un Pal a partir de dicha información. La información genética guardada puede transferirse a otros mundos."
   },
   "GrapplingGun": {
     "localized_name": "Pistola de agarre",
-    "description": null
+    "description": "Una pistola de agarre con la que desplazarse a toda velocidad. Dispara el gancho hacia un punto fijo y estira del tirador. Te permitirá llegar fácilmente a zonas de más altura."
   },
   "GrapplingGun2": {
     "localized_name": "Megapistola de agarre",
-    "description": null
+    "description": "Una pistola de agarre con la que desplazarse a toda velocidad. Dispara el gancho hacia un punto fijo y estira del tirador. Ha sido mejorado y ahora tiene mayor alcance."
   },
   "GrapplingGun3": {
     "localized_name": "Gigapistola de agarre",
-    "description": null
+    "description": "Una pistola de agarre con la que desplazarse a toda velocidad. Dispara el gancho hacia un punto fijo y estira del tirador. Su rendimiento ha mejorado enormemente con el estudio del prototipo."
   },
   "GrapplingGun4": {
     "localized_name": "Terapistola de agarre",
-    "description": null
+    "description": "Una pistola de agarre con la que desplazarse a toda velocidad. Dispara el gancho hacia un punto fijo y estira del tirador. Gracias a recientes investigaciones, cuenta con una maniobrabilidad abrumadora."
   },
   "GrapplingGun5": {
     "localized_name": "Pistola de ultragarre",
@@ -777,11 +777,11 @@
   },
   "GrenadeBullet": {
     "localized_name": "Munición de granada",
-    "description": null
+    "description": "Munición para armas como la Lanzagranadas."
   },
   "GuildChest": {
     "localized_name": "Cofre de gremio",
-    "description": null
+    "description": "Cofre cuyo contenido puede enviarse y recibirse al instante a través del hiperespacio. Se compartirá el contenido de los cofres de cada base."
   },
   "HandTorch": {
     "localized_name": "Antorcha portátil",
@@ -793,7 +793,7 @@
   },
   "Headstone": {
     "localized_name": "Lápida",
-    "description": null
+    "description": "Lápida en la que puedes escribir. Úsala para dejar notas."
   },
   "Heater": {
     "localized_name": "Calefactor rústico",
@@ -801,11 +801,11 @@
   },
   "Homeward": {
     "localized_name": "Nubarrón del retorno",
-    "description": null
+    "description": "Te permite trasladarte a la base más cercana. No puede usarse en mazmorras."
   },
   "HugeKitchen": {
     "localized_name": "Cocina grande",
-    "description": null
+    "description": "Instalación necesaria para cocinar. Al ser más grande, podrán trabajar varios Pals a la vez. Es necesario que un Pal de fuego lo encienda."
   },
   "HunterFlagSet": {
     "localized_name": "Set de banderas de los Furtivos",
@@ -813,7 +813,7 @@
   },
   "IceCrusher": {
     "localized_name": "Trituradora de congelación",
-    "description": null
+    "description": "Instalación donde triturar Mineral metálico y obtener a cambio otros materiales. Para que funcione hace falta una fuente de energía y Pals con la aptitud «Enfriamiento», pero es muy eficiente."
   },
   "Infra_ElectricGenerator_Grade_01": {
     "localized_name": "Dinamo",
@@ -837,7 +837,7 @@
   },
   "Infra_MachineParts": {
     "localized_name": "Clavo",
-    "description": null
+    "description": "Componente necesario para fabricar la mayoría de instalaciones. Puede elaborarse en un Mesa de trabajo primitiva."
   },
   "Infra_PalBed_Grade_01": {
     "localized_name": "Cama Pal de paja",
@@ -857,11 +857,11 @@
   },
   "ItemBooth": {
     "localized_name": "Mercadillo (objeto)",
-    "description": null
+    "description": "Pequeña instalación para vender objetos. Podrás vender objetos a otros personajes jugadores. Si asignas a Pals de hielo, será menos probable que se estropee la comida que contiene."
   },
   "ItemChest_04": {
     "localized_name": "Cofre de una civilización avanzada",
-    "description": null
+    "description": "Permite almacenar objetos. Es bastante resistente y caben muchas cosas. Es enorme y podrás guardar de todo sin peligro."
   },
   "JapaneseStyle_houseset": {
     "localized_name": "Set de construcción japonés",
@@ -869,11 +869,11 @@
   },
   "Katana": {
     "localized_name": "Katana",
-    "description": null
+    "description": "Katana para combates a corta distancia. Está tan afilada que puede partir en dos al objetivo."
   },
   "Lab": {
     "localized_name": "Laboratorio Pal",
-    "description": null
+    "description": "Instalación donde se llevan a cabo investigaciones relacionadas con los trabajos Pal. Si tienes Pals trabajando aquí la investigación progresará y obtendrás beneficios varios."
   },
   "Lamp": {
     "localized_name": "Lámpara fija",
@@ -881,7 +881,7 @@
   },
   "Lantern": {
     "localized_name": "Linterna de cintura",
-    "description": null
+    "description": "Linterna que se lleva a la cintura. Se enciende automáticamente cuando se hace de noche. Basta con llevar una."
   },
   "Lantern_High": {
     "localized_name": "Linterna de cintura mejorada",
@@ -897,15 +897,15 @@
   },
   "LaserBullet": {
     "localized_name": "Cartucho de energía",
-    "description": null
+    "description": "Munición para armas como la Rifle láser."
   },
   "LaserGatlingBullet": {
     "localized_name": "Cartucho láser Gatling",
-    "description": null
+    "description": "Munición para armas como la Ametralladora Gatling láser."
   },
   "LaserGatlingGun": {
     "localized_name": "Ametralladora Gatling láser",
-    "description": null
+    "description": "Puede disparar haces de luz a gran velocidad. Tiene una potencia de fuego abrumadora con la que se podrá eliminar a varios enemigos a la vez."
   },
   "LauncherBullet": {
     "localized_name": "Balas cohete",
@@ -917,7 +917,7 @@
   },
   "MakeshiftAssaultRifle": {
     "localized_name": "Rifle de asalto ruinoso",
-    "description": null
+    "description": "Un rifle de asalto hecho a mano con chatarra. Los disparos en cadena son potentes y de largo alcance, pero la potencia de tiro individual es baja."
   },
   "MakeshiftHandgun": {
     "localized_name": "Revólver baratillo",
@@ -925,11 +925,11 @@
   },
   "MakeshiftShotgun": {
     "localized_name": "Escopeta ruinosa",
-    "description": null
+    "description": "Escopeta hecha a mano con chatarra. De corto alcance, pero perfecta para combates a corta distancia."
   },
   "MakeshiftSubmachineGun": {
     "localized_name": "Subfusil ruinoso",
-    "description": null
+    "description": "Subfusil hecho a mano con chatarra. Con un excelente disparo en cadena, pero potencia de tiro individual baja."
   },
   "ManganeseIngot": {
     "localized_name": "Lingote de Coralum",
@@ -937,7 +937,7 @@
   },
   "ManualElectricGenerator": {
     "localized_name": "Dinamo manual",
-    "description": null
+    "description": "Dispositivo que transforma el movimiento de rotación en energía eléctrica. Aunque no es muy eficiente y reduce la COR de los Pals, te permite obtener puntos de EXP."
   },
   "MeatCutterKnife": {
     "localized_name": "Cuchillo de carnicero",
@@ -945,19 +945,19 @@
   },
   "MedicalPalBed_04": {
     "localized_name": "Cama grande para Pal",
-    "description": null
+    "description": "Cama grande donde los Pals descansarán de maravilla. Pueden usarla cuando están heridos y para reposar por las noches. Los Pals de gran tamaño dormirán a pata suelta en ella."
   },
   "MedicalPalBed_05": {
     "localized_name": "Cápsula Pal de una civilización avanzada",
-    "description": null
+    "description": "Cápsula de recuperación para Pals. Pueden usarla cuando están heridos y para dormir por las noches. Gracias a su tecnología avanzada, recuperan más PV."
   },
   "MedicineFacility_03": {
     "localized_name": "Mesa de curandero de una civilización avanzada",
-    "description": null
+    "description": "Utensilio para fabricar medicinas para los Pals. Gracias a su tecnología futurista, se pueden fabricar medicamentos aún desconocidos. Deja que lo use un Pal que sepa fabricar medicinas."
   },
   "MetalDetector": {
     "localized_name": "Detector de metales",
-    "description": null
+    "description": "Al sostenerlo en la mano te permite detectar los minerales ocultos que haya por la zona. Al detectar uno, aparecerá una marca. Si te alejas, la marca desaparecerá."
   },
   "Metal_Gate": {
     "localized_name": "Portón de metal",
@@ -968,12 +968,12 @@
     "description": "Set para montarte una base metálica. Incluye todo lo necesario para poder construir un edificio de metal, como la base, muros, tejado, escaleras, etc."
   },
   "MiningTool": {
-    "localized_name": "Pico y casco",
-    "description": null
+    "localized_name": "Vagoneta minera",
+    "description": "Cuando se coloca en la base, aumenta la velocidad de trabajo para la acción «Minería». Instalar más de uno no produce un mayor efecto."
   },
   "MissileBullet": {
     "localized_name": "Munición de misil",
-    "description": null
+    "description": "Munición para armas como la Lanzamisiles."
   },
   "MonsterFarm": {
     "localized_name": "Corral para ganado",
@@ -981,7 +981,7 @@
   },
   "MultiElectricHatchingPalEgg": {
     "localized_name": "Incubadora eléctrica grande",
-    "description": null
+    "description": "Dispositivo para incubar huevos de Pal. Requiere una fuente de alimentación, pero podrás incubar varios huevos a la vez a la temperatura óptima."
   },
   "MultiHatchingPalEgg": {
     "localized_name": "Incubadora grande",
@@ -995,25 +995,33 @@
     "localized_name": "Set de banderas de las Flores Lunares",
     "description": "Set con Bandera de las Flores Lunares y Estandarte de las Flores Lunares. Prueba de haber superado a las Flores Lunares."
   },
+  "OctaviaSet01": {
+    "localized_name": "Set de colaboración con ULTRAKILL 1",
+    "description": "[Colaboración con ULTRAKILL] Set que consta de una Armadura V1 y un Revólver Marksman."
+  },
+  "OctaviaSet02": {
+    "localized_name": "Set de colaboración con ULTRAKILL 2",
+    "description": "[Colaboración con ULTRAKILL] Set que consta de una Armadura V2 y una Escopeta Core Eject."
+  },
   "OilPump": {
     "localized_name": "Máquina extractora de petróleo",
-    "description": null
+    "description": "Equipo necesario para extraer Petróleo crudo de los campos petrolíferos. Necesitarás una enorme fuente de energía para moverlo."
   },
   "OlympicCauldron": {
     "localized_name": "Llama olímpica",
-    "description": null
+    "description": "Cuando se coloca en la base, aumenta la velocidad de trabajo para la acción «Encender fuego». Instalar más de una no produce un mayor efecto."
   },
   "OperatingTable": {
     "localized_name": "Mesa de operaciones Pal",
-    "description": null
+    "description": "es_text"
   },
   "OverheatRifle": {
     "localized_name": "Rifle sobrecalentado",
-    "description": null
+    "description": "es_Text"
   },
   "OverheatRifleBullet": {
     "localized_name": "Balas de rifle sobrecalentado",
-    "description": null
+    "description": "es_Text"
   },
   "PALBOX": {
     "localized_name": "Caja Pal",
@@ -1021,15 +1029,15 @@
   },
   "PalBooth": {
     "localized_name": "Mercadillo (Pal)",
-    "description": null
+    "description": "Pequeña instalación para vender Pals. Podrás vender Pals a otros personajes jugadores. Si asignas a Pals de hielo, será menos probable que se estropee la comida a la venta."
   },
   "PalDopingShot": {
     "localized_name": "Pistola propulsora",
-    "description": null
+    "description": "es_Text"
   },
   "PalDopingShotBullet": {
     "localized_name": "Balas de pistola propulsora",
-    "description": null
+    "description": "es_Text"
   },
   "PalDopingShot_2": {
     "localized_name": "Pistola megapropulsora",
@@ -1041,23 +1049,23 @@
   },
   "PalHealingGrenade": {
     "localized_name": "Granada curapals",
-    "description": null
+    "description": "es_Text"
   },
   "PalMedicineBox": {
     "localized_name": "Botiquín",
-    "description": null
+    "description": "Estante para guardar medicinas Pals. Si un Pal se enferma, podrá tomar medicinas de aquí. ¡Que no se quede vacío!"
   },
   "PalRevive": {
     "localized_name": "Revitalizador",
-    "description": null
+    "description": "Revive a los Pals heridos que no pueden moverse."
   },
   "PalSphere_Exotic": {
     "localized_name": "Esfera infinita",
-    "description": null
+    "description": "Utensilio para atrapar Pals. De asombroso rendimiento, puede atrapar también a Pals insólitos."
   },
   "Plastic": {
     "localized_name": "Plastiacero",
-    "description": null
+    "description": "Material especial que se fabrica con Petróleo crudo y metal. Puede elaborarse en Horno eléctrico."
   },
   "PoliceFlagSet": {
     "localized_name": "Set de banderas de los Vigilantes",
@@ -1065,11 +1073,11 @@
   },
   "Polymer": {
     "localized_name": "Polímero",
-    "description": null
+    "description": "Polímero elaborado con aceite de Pal procesado. Útil para elaborar armas de fuego, entre otras cosas."
   },
   "Potion_Extreme": {
     "localized_name": "Remedio curativo sublime",
-    "description": null
+    "description": "Un remedio para curar heridas físicas que tarda un tiempo en hacer efecto. Es de excelente calidad y te permite recuperar PV rápidamente."
   },
   "Product_Axe_Grade_01": {
     "localized_name": "Hacha de piedra",
@@ -1085,7 +1093,7 @@
   },
   "Product_CoalPit": {
     "localized_name": "Mina de carbón",
-    "description": null
+    "description": "Instalación para producir Carbón. Extraer Carbón es agotador y requiere fuerza física. Déjalo en manos de un Pal experto en minería."
   },
   "Product_Cooking_Grade_01": {
     "localized_name": "Fogata",
@@ -1101,11 +1109,11 @@
   },
   "Product_CopperPit": {
     "localized_name": "Cantera de metal",
-    "description": null
+    "description": "Instalación para producir Mineral metálico. Extraer Mineral metálico es duro y se precisa fuerza. Deja que se encargue un Pal experto en minería."
   },
   "Product_CopperPit_2": {
     "localized_name": "Cantera de metal II",
-    "description": null
+    "description": "Instalación para producir grandes cantidades de Mineral metálico. Extraer Mineral metálico es duro y se precisa fuerza. Deja que se encargue un Pal experto en minería."
   },
   "Product_Factory_Hard_Grade_01": {
     "localized_name": "Mesa de trabajo de calidad",
@@ -1125,7 +1133,7 @@
   },
   "Product_Farm_Carrot": {
     "localized_name": "Plantación de zanahorias",
-    "description": null
+    "description": "Plantación donde cultivar Zanahoria. Tendrás que esperar bastante hasta la cosecha, pero podrás cocinar muchas más cosas. Se necesitan varios Pals para sembrar, regar y recolectar."
   },
   "Product_Farm_Lettuce": {
     "localized_name": "Plantación de lechugas",
@@ -1133,11 +1141,11 @@
   },
   "Product_Farm_Onion": {
     "localized_name": "Plantación de cebollas",
-    "description": null
+    "description": "Plantación donde cultivar Cebolla. Tendrás que esperar bastante hasta la cosecha, pero podrás cocinar muchas más cosas. Se necesitan varios Pals para sembrar, regar y recolectar."
   },
   "Product_Farm_Potato": {
     "localized_name": "Plantación de patatas",
-    "description": null
+    "description": "Plantación donde cultivar Patata. Tendrás que esperar bastante hasta la cosecha, pero podrás cocinar muchas más cosas. Se necesitan varios Pals para sembrar, regar y recolectar."
   },
   "Product_Farm_tomato": {
     "localized_name": "Plantación de tomates",
@@ -1181,7 +1189,7 @@
   },
   "Product_QuartzPit": {
     "localized_name": "Cantera de cuarzo puro",
-    "description": null
+    "description": "Instalación para producir Cuarzo puro. Extraer Cuarzo puro es duro y se precisa fuerza. Deja que se encargue un Pal experto en minería."
   },
   "Product_StationDeforest": {
     "localized_name": "Zona de tala",
@@ -1193,7 +1201,7 @@
   },
   "Product_SulfurPit": {
     "localized_name": "Mina de azufre",
-    "description": null
+    "description": "Instalación para producir Azufre. Extraer Azufre es agotador y requiere fuerza física. Déjalo en manos de un Pal experto en minería."
   },
   "Product_WeaponFactory_Dirty_Grade_01": {
     "localized_name": "Mesa de elaboración de armas",
@@ -1213,11 +1221,11 @@
   },
   "Refrigerator": {
     "localized_name": "Frigorífico",
-    "description": null
+    "description": "Depósito de alimentos de gran capacidad. Si asignas a Pals de hielo, será menos probable que se estropee la comida que contenga."
   },
   "ReinforcedArrow": {
     "localized_name": "Flecha mejorada",
-    "description": null
+    "description": "Flechas reforzadas para disparar con un Arco de poleas."
   },
   "RepairBench": {
     "localized_name": "Mesa de reparación",
@@ -1225,7 +1233,7 @@
   },
   "RepairKit": {
     "localized_name": "Kit de reparación",
-    "description": null
+    "description": "Herramientas para reparar edificios. Úsalo para reparar construcciones rotas."
   },
   "RifleBullet": {
     "localized_name": "Balas de rifle",
@@ -1237,31 +1245,31 @@
   },
   "SFArmor": {
     "localized_name": "Armadura de hexolita",
-    "description": null
+    "description": "Armadura hecha de hexolita. De una durabilidad y poder defensivo abrumadores."
   },
   "SFArmorCold": {
     "localized_name": "Armadura de hexolita resistente al frío",
-    "description": null
+    "description": "Armadura de hexolita mejorada. Te permite sobrevivir al frío glacial."
   },
   "SFArmorHeat": {
     "localized_name": "Armadura de hexolita ignífuga",
-    "description": null
+    "description": "Armadura de hexolita mejorada. Es muy resistente al calor."
   },
   "SFArmorWeight": {
     "localized_name": "Armadura de hexolita ligera",
-    "description": null
+    "description": "Armadura de hexolita mejorada. Aumenta el peso máximo que puedes llevar encima."
   },
   "SFArrow": {
     "localized_name": "Flecha superior",
-    "description": null
+    "description": "Flechas de hexolita para disparar con un Arco superior."
   },
   "SFBow": {
     "localized_name": "Arco superior",
-    "description": null
+    "description": "Arco reconstruido con tecnología de vanguardia. Puede disparar flechas de una potencia apabullante."
   },
   "SFHelmet": {
     "localized_name": "Casco de hexolita",
-    "description": null
+    "description": "Casco hecho de hexolita. Es increíblemente robusto y ligero."
   },
   "SF_houseset": {
     "localized_name": "Set de construcción futurista",
@@ -1273,7 +1281,7 @@
   },
   "SanityDecrease1": {
     "localized_name": "Generador de ondas α",
-    "description": null
+    "description": "Dispositivo que genera ondas alfa que relajan a los Pals. Con él se reduce la probabilidad de que disminuya la COR de los Pals de la base. Colocar más de dos no aumenta su eficacia."
   },
   "ScientistFlagSet": {
     "localized_name": "Set de banderas del Equipo de investigación genética",
@@ -1301,7 +1309,7 @@
   },
   "Shield_SF": {
     "localized_name": "Escudo superior",
-    "description": null
+    "description": "Escudo misterioso creado con tecnología de última generación. Si no recibe ataques en un tiempo, se repara solo. Es de una calidad intachable."
   },
   "ShotGunBullet": {
     "localized_name": "Balas de escopeta",
@@ -1313,51 +1321,51 @@
   },
   "Silo": {
     "localized_name": "Silo",
-    "description": null
+    "description": "Cuando se coloca en la base, aumenta la velocidad de trabajo para la acción «Siembra». Instalar más de uno no produce un mayor efecto."
   },
   "SkillUnlock_Alpaca": {
     "localized_name": "Sillín de Melpaca",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Melpaca."
   },
   "SkillUnlock_AmaterasuWolf": {
     "localized_name": "Sillín de Kitsun",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Kitsun."
   },
   "SkillUnlock_AmaterasuWolf_Dark": {
     "localized_name": "Sillín de Kitsun Noct",
-    "description": null
+    "description": "Si lo llevas encima, podrás montarKitsun Nocta lomos de ."
   },
   "SkillUnlock_BadCatgirl": {
     "localized_name": "Escopeta de Nyanimite",
-    "description": null
+    "description": "La escopeta de Nyafia. Al activar la técnica de compañero,Nyafia disparará a todo trapo su escopeta contra los enemigos cercanos."
   },
   "SkillUnlock_BirdDragon": {
     "localized_name": "Sillín de Vanwyrm",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Vanwyrm."
   },
   "SkillUnlock_BirdDragon_Ice": {
     "localized_name": "Sillín de Vanwyrm Cryst",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Vanwyrm Cryst."
   },
   "SkillUnlock_BlackCentaur": {
     "localized_name": "Sillín de Necromus",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Necromus."
   },
   "SkillUnlock_BlackGriffon": {
     "localized_name": "Sillín de Shadowbeak",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Shadowbeak."
   },
   "SkillUnlock_BlackMetalDragon": {
     "localized_name": "Sillín de Astegon",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Astegon."
   },
   "SkillUnlock_BlackPuppy": {
     "localized_name": "Arnés de Smokie",
-    "description": null
+    "description": "El arnés de Smokie. Al activar la técnica de compañero, puede localizar Cromita en los alrededores."
   },
   "SkillUnlock_BlueDragon": {
     "localized_name": "Sillín de Azurobe",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Azurobe."
   },
   "SkillUnlock_BlueDragon_Ice": {
     "localized_name": "Sillín de Azurobe Cryst",
@@ -1365,95 +1373,95 @@
   },
   "SkillUnlock_BlueThunderHorse": {
     "localized_name": "Sillín de Azurmane",
-    "description": null
+    "description": "Si lo llevas encima, podrás montarAzurmanea lomos de ."
   },
   "SkillUnlock_Boar": {
     "localized_name": "Sillín de Rushoar",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Rushoar."
   },
   "SkillUnlock_Carbunclo": {
     "localized_name": "Subfusil de Lifmunk",
-    "description": null
+    "description": "Subfusil pequeño exclusivo de Lifmunk. Al activar la técnica de compañero, se sube a la cabeza del personaje jugador y se suma al ataque brindando apoyo de fuego."
   },
   "SkillUnlock_ColorfulBird": {
     "localized_name": "Guantes de Tocotoco",
-    "description": null
+    "description": "Guantes para agarrar suavemente a Tocotoco. Al activar la técnica de compañero, podrás sostener a Tocotoco y lanzar ataques con huevos bomba."
   },
   "SkillUnlock_DarkMechaDragon": {
     "localized_name": "Sillín de Xenolord",
-    "description": null
+    "description": "Si lo llevas encima, podrás montarXenolorda lomos de ."
   },
   "SkillUnlock_Deer": {
     "localized_name": "Sillín de Eikthyrdeer",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Eikthyrdeer."
   },
   "SkillUnlock_Deer_Ground": {
     "localized_name": "Sillín de Eikthyrdeer",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Eikthyrdeer Terra."
   },
   "SkillUnlock_DreamDemon": {
     "localized_name": "Collar de Daedream",
-    "description": null
+    "description": "Collar para Daedream. Si lo llevas encima y tienes a Daedream en el grupo, estará presente todo el tiempo y se sumará a los ataques del personaje jugador."
   },
   "SkillUnlock_DrillGame": {
     "localized_name": "Banda de Digtoise",
-    "description": null
+    "description": "Cinta para la cabeza de Digtoise. Al activar la técnica de compañero, Digtoise girará a alta velocidad y podrás perforar roca de forma muy eficiente."
   },
   "SkillUnlock_Eagle": {
     "localized_name": "Guantes de Galeclaw",
-    "description": null
+    "description": "Guantes para agarrar suavemente las patas de Galeclaw. Si los llevas encima y tienes a Galeclaw en el grupo, se convertirá en un planeador."
   },
   "SkillUnlock_ElecPanda": {
     "localized_name": "Ametralladora de Grizzbolt",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Grizzbolt y disparar la ametralladora."
   },
   "SkillUnlock_FairyDragon": {
     "localized_name": "Sillín de Elphidran",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Elphidran."
   },
   "SkillUnlock_FairyDragon_Water": {
     "localized_name": "Sillín de Elphidran Aqua",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Elphidran Aqua."
   },
   "SkillUnlock_FeatherOstrich": {
     "localized_name": "Sillín de Dazemu",
-    "description": null
+    "description": "Si lo llevas encima, podrás montarDazemua lomos de ."
   },
   "SkillUnlock_FengyunDeeper": {
     "localized_name": "Sillín de Fenglope",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Fenglope."
   },
   "SkillUnlock_FengyunDeeper_Electric": {
     "localized_name": "Sillín de Fenglope Lux",
-    "description": null
+    "description": "Si lo llevas encima, podrás montarFenglope Luxa lomos de ."
   },
   "SkillUnlock_FireKirin": {
     "localized_name": "Sillín de Pyrin",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Pyrin."
   },
   "SkillUnlock_FireKirin_Dark": {
     "localized_name": "Sillín de Pyrin Noct",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Pyrin Noct."
   },
   "SkillUnlock_FlameBuffalo": {
     "localized_name": "Sillín de Arsox",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Arsox."
   },
   "SkillUnlock_FlowerDinosaur": {
     "localized_name": "Sillín de Dinossom",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Dinossom."
   },
   "SkillUnlock_FlowerDinosaur_Electric": {
     "localized_name": "Sillín de Dinossom Lux",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Dinossom Lux."
   },
   "SkillUnlock_FlowerRabbit": {
     "localized_name": "Collar de Flopie",
-    "description": null
+    "description": "Collar para Flopie. Si lo llevas encima y tienes a Flopie en el grupo, estará presente todo el tiempo y recogerá automáticamente los objetos cercanos."
   },
   "SkillUnlock_FlyingManta": {
     "localized_name": "Guantes de Celaray",
-    "description": null
+    "description": "Guantes para agarrar suavemente las manitas de Celaray. Si los llevas encima y tienes a Celaray en el grupo, se convertirá en un planeador."
   },
   "SkillUnlock_FlyingManta_Thunder": {
     "localized_name": "Guantes de Celaray Lux",
@@ -1461,7 +1469,7 @@
   },
   "SkillUnlock_Garm": {
     "localized_name": "Arnés con sillín de Direhowl",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Direhowl."
   },
   "SkillUnlock_GhostAnglerfish": {
     "localized_name": "Sillín de Ghangler",
@@ -1473,71 +1481,71 @@
   },
   "SkillUnlock_GhostBeast": {
     "localized_name": "Sillín de Maraith",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Maraith."
   },
   "SkillUnlock_GoldenHorse": {
     "localized_name": "Sillín de Kingazel",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Gildane."
   },
   "SkillUnlock_GrassMammoth": {
     "localized_name": "Sillín de Mammorest",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Mammorest."
   },
   "SkillUnlock_GrassMammoth_Ice": {
     "localized_name": "Sillín de Mammorest Cryst",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Mammorest Cryst."
   },
   "SkillUnlock_GrassPanda": {
     "localized_name": "Lanzagranadas de Mossanda",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Mossanda y disparar el lanzagranadas."
   },
   "SkillUnlock_GrassPanda_Electric": {
     "localized_name": "Lanzagranadas de Mossanda Lux",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Mossanda Lux y disparar el lanzagranadas."
   },
   "SkillUnlock_GuardianDog": {
     "localized_name": "Sillín de Yakumo",
-    "description": null
+    "description": "Si lo llevas encima, podrás montarYakumoa lomos de ."
   },
   "SkillUnlock_HadesBird": {
     "localized_name": "Sillín de Helzephyr",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Helzephyr."
   },
   "SkillUnlock_HadesBird_Electric": {
     "localized_name": "Sillín de Helzephyr Lux",
-    "description": null
+    "description": "Si lo llevas encima, podrás montarHelzephyr Luxa lomos de ."
   },
   "SkillUnlock_HawkBird": {
     "localized_name": "Sillín de Nitewing",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Nitewing."
   },
   "SkillUnlock_Hedgehog": {
     "localized_name": "Guantes de Jolthog",
-    "description": null
+    "description": "Guante de goma para agarrar a Jolthog. Al activar la técnica de compañero, lanza a Jolthog como si de una granada de electroshock se tratase."
   },
   "SkillUnlock_Hedgehog_Ice": {
     "localized_name": "Guantes de Jolthog Cryst",
-    "description": null
+    "description": "Guante aislantes para agarrar a Jolthog Cryst. Al activar la técnica de compañero, lanza a Jolthog Cryst como si de una granada de hielo se tratase."
   },
   "SkillUnlock_Horus": {
     "localized_name": "Sillín de Faleris",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Faleris."
   },
   "SkillUnlock_Horus_Water": {
     "localized_name": "Sillín de Faleris Aqua",
-    "description": null
+    "description": "Si lo llevas encima, podrás montarFaleris Aquaa lomos de ."
   },
   "SkillUnlock_IceDeer": {
     "localized_name": "Sillín de Reindrix",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Reindrix."
   },
   "SkillUnlock_IceHorse": {
     "localized_name": "Sillín de Frostallion",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Frostallion."
   },
   "SkillUnlock_IceHorse_Dark": {
     "localized_name": "Sillín de Frostallion Noct",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Frostallion Noct."
   },
   "SkillUnlock_IceNarwhal": {
     "localized_name": "Sillín de Whalaska",
@@ -1548,88 +1556,92 @@
     "description": null
   },
   "SkillUnlock_IceSeal": {
-    "localized_name": "Arnés de Polapup",
+    "localized_name": "Sillín de Polapup",
     "description": null
   },
   "SkillUnlock_JetDragon": {
     "localized_name": "Lanzamisiles de Jetragon",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Jetragon y disparar misiles."
   },
   "SkillUnlock_KingAlpaca": {
     "localized_name": "Sillín de Kingpaca",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Kingpaca."
   },
   "SkillUnlock_KingAlpaca_Ice": {
     "localized_name": "Sillín de Kingpaca Cryst",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Kingpaca Cryst."
   },
   "SkillUnlock_KingBahamut": {
     "localized_name": "Sillín de Blazamut",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Blazamut."
   },
   "SkillUnlock_KingBahamut_Dragon": {
     "localized_name": "Sillín de Blazamut Ryu",
-    "description": null
+    "description": "Si lo llevas encima, podrás montarBlazamut Ryua lomos de ."
   },
   "SkillUnlock_Kirin": {
     "localized_name": "Sillín de Univolt",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Univolt."
   },
   "SkillUnlock_Kitsunebi": {
     "localized_name": "Arnés de Foxparks",
-    "description": null
+    "description": "Arnés para cargar con Foxparks. Al activar la técnica de compañero, te echarás a Foxparks al hombro para poder usarlo como lanzallamas."
   },
   "SkillUnlock_Kitsunebi_Ice": {
     "localized_name": "Arnés de Foxparks Cryst",
-    "description": null
+    "description": "Arnés para cargar con Foxparks Cryst. Al activar la técnica de compañero, te echarás a Foxparks Cryst al hombro para poder lanzar energía helada."
   },
   "SkillUnlock_LazyDragon": {
     "localized_name": "Lanzamisiles de Relaxaurus",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Relaxaurus y disparar el lanzamisiles."
   },
   "SkillUnlock_LazyDragon_Electric": {
     "localized_name": "Lanzamisiles de Relaxaurus Lux",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Relaxaurus Lux y disparar el lanzamisiles."
   },
   "SkillUnlock_LeafMomonga": {
     "localized_name": "Arnés de Herbil",
     "description": null
   },
+  "SkillUnlock_LegendDeer": {
+    "localized_name": "Sillín de Hartalis",
+    "description": null
+  },
   "SkillUnlock_Manticore": {
     "localized_name": "Sillín de Blazehowl",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Blazehowl."
   },
   "SkillUnlock_Manticore_Dark": {
     "localized_name": "Sillín de Blazehowl Noct",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Blazehowl Noct."
   },
   "SkillUnlock_Monkey": {
     "localized_name": "Rifle de asalto de Tanzee",
-    "description": null
+    "description": "Rifle de asalto pequeño exclusivo de Tanzee. Al activar la técnica de compañero, Tanzee entrará en modo pistolero y tiroteará a los enemigos cercanos."
   },
   "SkillUnlock_MoonQueen": {
-    "localized_name": "Sillín de Selemoon",
-    "description": null
+    "localized_name": "Sillín de Selyne",
+    "description": "Si lo llevas encima, podrás montarSelynea lomos de ."
   },
   "SkillUnlock_MopKing": {
     "localized_name": "Sillín de Sweepa",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Sweepa."
   },
   "SkillUnlock_MushroomDragon": {
     "localized_name": "Sillín de Shroomer",
-    "description": null
+    "description": "Si lo llevas encima, podrás montarShroomera lomos de ."
   },
   "SkillUnlock_MushroomDragon_Dark": {
     "localized_name": "Sillín de Shroomer Noct",
-    "description": null
+    "description": "Si lo llevas encima, podrás montarShroomer Nocta lomos de ."
   },
   "SkillUnlock_NaughtyCat": {
     "localized_name": "Sillín de Grintale",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Grintale."
   },
   "SkillUnlock_NegativeOctopus": {
     "localized_name": "Guantes de Killamari",
-    "description": null
+    "description": "Guantes para agarrar suavemente los tentáculos de Killamari. Si los llevas encima y tienes a Killamari en el grupo, se convertirá en un planeador."
   },
   "SkillUnlock_NegativeOctopus_Neutral": {
     "localized_name": "Guantes de Killamari Primo",
@@ -1637,11 +1649,11 @@
   },
   "SkillUnlock_NightBlueHorse": {
     "localized_name": "Sillín de Starryon",
-    "description": null
+    "description": "Si lo llevas encima, podrás montarStarryona lomos de ."
   },
   "SkillUnlock_Penguin": {
     "localized_name": "Lanzacohetes de Pengullet",
-    "description": null
+    "description": "Cañón para disparar a Pengullet. Al activar la técnica de compañero, puedes atacar al enemigo disparándole un Pengullet, pero este se quedará fuera de combate."
   },
   "SkillUnlock_Penguin_Electric": {
     "localized_name": "Lanzacohetes de Pengullet Lux",
@@ -1657,67 +1669,67 @@
   },
   "SkillUnlock_PurpleSpider": {
     "localized_name": "Sillín de Tarantriss",
-    "description": null
+    "description": "Si lo llevas encima, podrás montarTarantrissa lomos de ."
   },
   "SkillUnlock_RaijinDaughter": {
     "localized_name": "Collar de Dazzi",
-    "description": null
+    "description": "Collar para Dazzi. Si lo llevas encima y tienes a Dazzi en el grupo, estará presente todo el tiempo y se sumará a los ataques del personaje jugador."
   },
   "SkillUnlock_RaijinDaughter_Water": {
     "localized_name": "Collar de Dazzi Noct",
-    "description": null
+    "description": "Collar para Dazzi Noct. Si lo llevas encima y tienes a Dazzi Noct en el grupo, estará presente todo el tiempo y se sumará a los ataques del personaje jugador."
   },
   "SkillUnlock_RedArmorBird": {
     "localized_name": "Sillín de Ragnahawk",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Ragnahawk."
   },
   "SkillUnlock_SaintCentaur": {
     "localized_name": "Sillín de Paladius",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Paladius."
   },
   "SkillUnlock_SakuraSaurus": {
     "localized_name": "Sillín de Broncherry",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Broncherry."
   },
   "SkillUnlock_SakuraSaurus_Water": {
     "localized_name": "Sillín de Broncherry Aqua",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Broncherry Aqua."
   },
   "SkillUnlock_Serpent": {
     "localized_name": "Sillín de Surfent",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Surfent."
   },
   "SkillUnlock_Serpent_Ground": {
     "localized_name": "Sillín de Surfent Terra",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Surfent Terra."
   },
   "SkillUnlock_SkyDragon": {
     "localized_name": "Sillín de Quivern",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Quivern."
   },
   "SkillUnlock_SkyDragon_Grass": {
     "localized_name": "Sillín de Quivern Botan",
-    "description": null
+    "description": "Si lo llevas encima, podrás montarQuivern Botana lomos de ."
   },
   "SkillUnlock_SnowTigerBeastman": {
     "localized_name": "Martillo de Bastigor",
-    "description": null
+    "description": "Si lo llevas encima, podrás montarBastigora lomos de ."
   },
   "SkillUnlock_Suzaku": {
     "localized_name": "Sillín de Suzaku",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Suzaku."
   },
   "SkillUnlock_Suzaku_Water": {
     "localized_name": "Sillín de Suzaku Aqua",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Suzaku Aqua."
   },
   "SkillUnlock_ThunderBird": {
     "localized_name": "Sillín de Beakon",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Beakon."
   },
   "SkillUnlock_ThunderDog": {
     "localized_name": "Sillín de Rayhound",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Rayhound."
   },
   "SkillUnlock_TropicalOstrich": {
     "localized_name": "Sillín de Palumba",
@@ -1725,63 +1737,63 @@
   },
   "SkillUnlock_Umihebi": {
     "localized_name": "Sillín de Jormuntide",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Jormuntide."
   },
   "SkillUnlock_Umihebi_Fire": {
     "localized_name": "Sillín de Jormuntide Ignis",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Jormuntide Ignis."
   },
   "SkillUnlock_VolcanicMonster": {
     "localized_name": "Sillín de Reptyro",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Reptyro."
   },
   "SkillUnlock_VolcanicMonster_Ice": {
     "localized_name": "Sillín de Reptyro Cryst",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Reptyro Cryst."
   },
   "SkillUnlock_WeaselDragon": {
     "localized_name": "Sillín de Chillet",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Chillet."
   },
   "SkillUnlock_WeaselDragon_Fire": {
     "localized_name": "Sillín de Chillet Ignis",
-    "description": null
+    "description": "Si lo llevas encima, podrás montarChillet Ignisa lomos de ."
   },
   "SkillUnlock_WhiteAlienDragon": {
     "localized_name": "Sillín de Xenovader",
-    "description": null
+    "description": "Si lo llevas encima, podrás montarXenogarda lomos de ."
   },
   "SkillUnlock_WhiteDeer": {
     "localized_name": "Sillín de Celesdir",
-    "description": null
+    "description": "Si lo llevas encima, podrás montarCelesdira lomos de ."
   },
   "SkillUnlock_WhiteShieldDragon": {
     "localized_name": "Sillín de Silvegis",
-    "description": null
+    "description": "Si lo llevas encima, podrás montarSilvegisa lomos de ."
   },
   "SkillUnlock_WindChimes": {
     "localized_name": "Guantes de Hangyu",
-    "description": null
+    "description": "Guantes para agarrar suavemente los brazos de Hangyu. Si los llevas encima y tienes a Hangyu en el grupo, se convertirá en un planeador."
   },
   "SkillUnlock_WindChimes_Ice": {
     "localized_name": "Guantes de Hangyu Cryst",
-    "description": null
+    "description": "Guantes para agarrar suavemente los brazos de Hangyu Cryst. Si los llevas encima y tienes a Hangyu Cryst en el grupo, se convertirá en un planeador."
   },
   "SkillUnlock_Yeti": {
     "localized_name": "Sillín de Wumpo",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Wumpo."
   },
   "SkillUnlock_Yeti_Grass": {
     "localized_name": "Sillín de Wumpo Botan",
-    "description": null
+    "description": "Si lo llevas encima, podrás montar a lomos de Wumpo Botan."
   },
   "SkinChange": {
     "localized_name": "Dispositivo de cambio de look Pal",
-    "description": null
+    "description": "Un dispositivo para cambiar de aspecto. Aquí, podrás cambiar la apariencia de los Pals. También podrás usar looks obtenidos fuera del juego."
   },
   "Snowman": {
     "localized_name": "Muñeco de nieve",
-    "description": null
+    "description": "Cuando se coloca en la base, aumenta la velocidad de trabajo para la acción «Enfriamiento». Instalar más de uno no produce un mayor efecto."
   },
   "Spa": {
     "localized_name": "Baños termales",
@@ -1797,7 +1809,7 @@
   },
   "Spear": {
     "localized_name": "Lanza de piedra",
-    "description": null
+    "description": "Lanza útil en los combates cuerpo a cuerpo. Al ser larga, permite atacar desde una distancia prudencial."
   },
   "Spear_2": {
     "localized_name": "Lanza de metal",
@@ -1809,11 +1821,11 @@
   },
   "Spear_ForestBoss": {
     "localized_name": "Lanza de Lily",
-    "description": null
+    "description": "La lanza favorita de Lily. Con ella, todos los detractores de los Pals serán juzgados."
   },
   "Special_ElectricHatchingPalEgg": {
     "localized_name": "Incubadora eléctrica",
-    "description": null
+    "description": "Dispositivo para incubar huevos de Pal. Requiere una fuente de alimentación, pero podrás mantener la temperatura óptima dentro de la incubadora automáticamente."
   },
   "Special_HatchingPalEgg": {
     "localized_name": "Incubadora",
@@ -1825,31 +1837,31 @@
   },
   "Special_PalSphere_Grade_01": {
     "localized_name": "Esfera Pal",
-    "description": "Utensilio para atrapar Pals. Al producirse en masa, solo funcionan con los Pals de nivel bajo."
+    "description": "Sirven para atrapar a los Pals al lanzarlas hacia ellos. Al producirse en masa, solo funcionan con los Pals de nivel bajo."
   },
   "Special_PalSphere_Grade_02": {
     "localized_name": "Megaesfera",
-    "description": "Utensilio para atrapar Pals. Son de buena calidad y permiten atrapar a más variedad de Pals. Para su elaboración necesitarás una «Mesa de elaboración de esferas»."
+    "description": "Sirven para atrapar a los Pals al lanzarlas hacia ellos. Son de buena calidad y permiten atrapar a más variedad de Pals. Para su elaboración necesitarás una «Mesa de elaboración de esferas»."
   },
   "Special_PalSphere_Grade_03": {
     "localized_name": "Gigaesfera",
-    "description": "Utensilio para atrapar Pals. Permite capturar Pals relativamente fuertes. Para su elaboración necesitarás una «Mesa de elaboración de esferas»."
+    "description": "Sirven para atrapar a los Pals al lanzarlas hacia ellos. Permite capturar Pals relativamente fuertes. Para su elaboración necesitarás una «Mesa de elaboración de esferas»."
   },
   "Special_PalSphere_Grade_04": {
     "localized_name": "Teraesfera",
-    "description": "Utensilio para atrapar Pals. Permite capturar Pals bastante fuertes. Para su elaboración necesitarás una «Fábrica de producción en cadena de esferas»."
+    "description": "Sirven para atrapar a los Pals al lanzarlas hacia ellos. Permite capturar Pals bastante fuertes. Para su elaboración necesitarás una «Fábrica de producción en cadena de esferas»."
   },
   "Special_PalSphere_Grade_05": {
     "localized_name": "Ultraesfera",
-    "description": "Utensilio para atrapar Pals. Es bastante efectiva y no hay muchos Pals que logren escapar de ella. Para su elaboración necesitarás una «Fábrica de producción en cadena de esferas II»."
+    "description": "Sirven para atrapar a los Pals al lanzarlas hacia ellos. Es bastante efectiva y no hay muchos Pals que logren escapar de ella. Para su elaboración necesitarás una «Fábrica de producción en cadena de esferas II»."
   },
   "Special_PalSphere_Grade_06": {
     "localized_name": "Mitoesfera",
-    "description": "Utensilio para atrapar Pals. Apenas hay Pals que logren escapar de esta esfera. Para su elaboración necesitarás una «Fábrica de producción en cadena de esferas II»."
+    "description": "Sirven para atrapar a los Pals al lanzarlas hacia ellos. Apenas hay Pals que logren escapar de esta esfera. Para su elaboración necesitarás una «Fábrica de producción en cadena de esferas II»."
   },
   "Special_PalSphere_Grade_07": {
     "localized_name": "Esfera definitiva",
-    "description": "Utensilio para atrapar Pals. De rendimiento impecable, no hay Pal que pueda escapar de ella. Para su elaboración necesitarás una «Fábrica de producción en cadena de esferas II»."
+    "description": "Sirven para atrapar a los Pals al lanzarlas hacia ellos. De rendimiento impecable, no hay Pal que pueda escapar de ella. Para su elaboración necesitarás una «Fábrica de producción en cadena de esferas II»."
   },
   "Special_SphereFactory_Black_Grade_01": {
     "localized_name": "Mesa de elaboración de esferas",
@@ -1865,35 +1877,35 @@
   },
   "SphereFactory_Black_04": {
     "localized_name": "Fábrica de esferas de una civilización avanzada",
-    "description": null
+    "description": "Fábrica de esferas para capturar a los Pals. Gracias a la maquinaria de alto rendimiento, la velocidad de producción ha aumentado. Se necesita un Pal experto en trabajos manuales."
   },
   "SphereModule_Curve": {
     "localized_name": "Módulo curva",
-    "description": null
+    "description": "Al llevarlo equipado, las esferas girarán dibujando una curva. Facilita pillar a un Pal por sorpresa y su poder de captura aumenta."
   },
   "SphereModule_Curve2": {
     "localized_name": "Módulo deslizante",
-    "description": null
+    "description": "Al llevarlo equipado, las esferas girarán deslizándose, dibujando un ángulo complejo. Facilita pillar a un Pal por sorpresa y su poder de captura aumenta."
   },
   "SphereModule_Heavy": {
     "localized_name": "Módulo pesado",
-    "description": null
+    "description": "Al llevarlo equipado, las esferas se vuelven más pesadas y su distancia de tiro disminuye, pero su poder de captura aumenta."
   },
   "SphereModule_Homing": {
     "localized_name": "Módulo rastreador",
-    "description": null
+    "description": "Al llevarlo equipado, las esferas rastrearán al Pal y aumentará su poder de captura."
   },
   "SphereModule_Sniper": {
     "localized_name": "Módulo francotirador",
-    "description": null
+    "description": "Al llevarlo equipado, aumenta la distancia de tiro de las esferas y su poder de captura."
   },
   "SphereModule_Sniper2": {
     "localized_name": "Módulo francotirador II",
-    "description": null
+    "description": "Al llevarlo equipado, aumenta bastante la distancia de tiro de las esferas y su poder de captura."
   },
   "StainlessSteel": {
     "localized_name": "Hexolita",
-    "description": null
+    "description": "Aleación de Hexocuarzo, Cromita y Lingote de metal. Un material para piezas de equipo y construcciones de alto nivel."
   },
   "Stone_Gate": {
     "localized_name": "Portón de piedra",
@@ -1905,15 +1917,15 @@
   },
   "Stump": {
     "localized_name": "Tocón con hacha",
-    "description": null
+    "description": "Cuando se coloca en la base, aumenta la velocidad de trabajo para la acción «Tala». Instalar más de uno no produce un mayor efecto."
   },
   "TableDresser01_Stone": {
     "localized_name": "Tocador antiguo",
-    "description": null
+    "description": "Un tocador para revaluar tu apariencia. Te permite cambiar el aspecto de tu personaje."
   },
   "ToolBoxV1": {
     "localized_name": "Caja de herramientas grande",
-    "description": null
+    "description": "Cuando se coloca en la base, aumenta la velocidad de trabajo manual. Instalar más de una no produce un mayor efecto."
   },
   "Torch": {
     "localized_name": "Antorcha fija",
@@ -1921,7 +1933,7 @@
   },
   "TransmissionTower": {
     "localized_name": "Torre eléctrica",
-    "description": null
+    "description": "Cuando se coloca en la base, aumenta la velocidad de trabajo para la acción «Producción eléctrica». Instalar más de una no produce un mayor efecto."
   },
   "Trap_LegHold": {
     "localized_name": "Trampa (S)",
@@ -1949,19 +1961,19 @@
   },
   "Unlock_Picking_Tier1": {
     "localized_name": "Herramienta de recolecta sencilla",
-    "description": null
+    "description": "Con esto podrás forzar la cerradura de cofres que requieran Llave de cobre. No se romperá por más que lo uses."
   },
   "Unlock_Picking_Tier2": {
     "localized_name": "Herramienta de recolecta superior",
-    "description": null
+    "description": "Con esto podrás forzar la cerradura de cofres que requieran Llave de plata. No se romperá por más que lo uses."
   },
   "Unlock_Picking_Tier3": {
     "localized_name": "Herramienta de recolecta profesional",
-    "description": null
+    "description": "Con esto podrás forzar la cerradura de cofres que requieran Llave de oro. No se romperá por más que lo uses."
   },
   "WallSignboard": {
     "localized_name": "WallSignBoard",
-    "description": null
+    "description": "Letrero en el que puedes escribir. Puedes colgarlo en la pared."
   },
   "WallTorch": {
     "localized_name": "Antorcha de pared",
@@ -1969,7 +1981,7 @@
   },
   "WeaponFactory_Dirty_04": {
     "localized_name": "Fábrica de armas de una civilización avanzada",
-    "description": null
+    "description": "Fábrica para elaborar armas y munición. Gracias a la maquinaria de alto rendimiento, la velocidad de producción ha aumentado. Se necesita un Pal experto en trabajos manuales."
   },
   "Wood_Gate": {
     "localized_name": "Portón de madera",
@@ -1981,11 +1993,11 @@
   },
   "Wooden_ladder": {
     "localized_name": "Escalera",
-    "description": null
+    "description": "Escalera que ter permite acceder a lugares un poco elevados."
   },
   "WorkSpeedIncrease1": {
     "localized_name": "Generador de ondas β",
-    "description": null
+    "description": "Dispositivo que genera ondas beta que aumenta la productividad de los Pals. Aumenta la velocidad de trabajo de los Pals de la base. Colocar más de dos no aumenta su eficacia."
   },
   "Workbench": {
     "localized_name": "Mesa de trabajo primitiva",
@@ -1993,6 +2005,6 @@
   },
   "YakushimaBlade": {
     "localized_name": "Filomiau",
-    "description": null
+    "description": "[Colaboración con Terraria] Según la leyenda, Croajiro trajo esta espada de tierras lejanas. Se desconoce el motivo..."
   }
 }

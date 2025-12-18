@@ -1,55 +1,55 @@
 {
   "Accessory_AirDash1": {
     "localized_name": "Luftsprintstiefel",
-    "description": null
+    "description": "Ein Accessoire, mit dem du 1-mal in der Luft sprinten kannst."
   },
   "Accessory_AirDash2": {
     "localized_name": "Doppelluftsprintstiefel",
-    "description": null
+    "description": "Ein Accessoire, mit dem du 2-mal in der Luft sprinten kannst."
   },
   "Accessory_AirDash3": {
     "localized_name": "Dreifachluftsprintstiefel",
-    "description": null
+    "description": "de_Text"
   },
   "Accessory_JumpCount_Increase1": {
     "localized_name": "Doppelsprungstiefel",
-    "description": null
+    "description": "Ein Accessoire, mit dem du 1-mal in der Luft springen kannst."
   },
   "Accessory_JumpCount_Increase2": {
     "localized_name": "Dreifachsprungstiefel",
-    "description": null
+    "description": "Ein Accessoire, mit dem du 2-mal in der Luft springen kannst."
   },
   "Accessory_JumpPower_Increase": {
     "localized_name": "Antigravitationsgürtel",
-    "description": null
+    "description": "Ein Accessoire, das deine Sprungkraft erhöht."
   },
   "Accessory_Nonkilling": {
     "localized_name": "Ring der Rücksichtnahme",
-    "description": null
+    "description": "Ein Ring für Pazifisten. Hast du ihn ausgerüstet, kannst du die LP deines Angriffsziels nicht unter 1 LP senken."
   },
   "Accessory_TalentChecker": {
     "localized_name": "Brille der Begabung",
-    "description": null
+    "description": "Eine Brille, mit der das verborgene Potenzial von Pals sichtbar wird. Das Potenzial für LP, Angriff und Verteidigung wird jeweils als Wert zwischen 0 und 100 angezeigt."
   },
   "AdditionalInventory_001": {
     "localized_name": "Kleiner Erweiterungsbeutel",
-    "description": null
+    "description": "Ein kleiner Beutel, in dem du Gepäck verstauen kannst. Rüste ihn aus, um zusätzliche Inventar-Slots zu erhalten."
   },
   "AdditionalInventory_002": {
     "localized_name": "Mittelgroßer Erweiterungsbeutel",
-    "description": null
+    "description": "Ein mittelgroßer Beutel, in dem du Gepäck verstauen kannst. Rüste ihn aus, um zusätzliche Inventar-Slots zu erhalten."
   },
   "AdditionalInventory_003": {
     "localized_name": "Großer Erweiterungsbeutel",
-    "description": null
+    "description": "Ein großer Beutel, in dem du Gepäck verstauen kannst. Rüste ihn aus, um zusätzliche Inventar-Slots zu erhalten."
   },
   "AdditionalInventory_004": {
     "localized_name": "Riesiger Erweiterungsbeutel",
-    "description": null
+    "description": "Ein riesengroßer Beutel, in dem du Gepäck verstauen kannst. Rüste ihn aus, um zusätzliche Inventar-Slots zu erhalten."
   },
   "Altar": {
     "localized_name": "Beschwörungsaltar",
-    "description": null
+    "description": "Opfere hier Steintafeln, auf denen Pals abgebildet sind, um mächtige Pals zu beschwören. Bereite dich zuvor gut auf den Kampf vor!"
   },
   "Arrow": {
     "localized_name": "Pfeil",
@@ -69,23 +69,23 @@
   },
   "AutoMealPouch_Tier1": {
     "localized_name": "Kleiner Futterbeutel",
-    "description": null
+    "description": "Ein kleiner Beutel, in dem man Futter mitnehmen kann. Schaltet bis zu 1 Autofütterungsslot frei. Bei Hunger wird das im Slot ausgerüstete Essen automatisch verbraucht."
   },
   "AutoMealPouch_Tier2": {
     "localized_name": "Normaler Futterbeutel",
-    "description": null
+    "description": "Ein mittelgroßer Beutel, in dem man Futter mitnehmen kann. Schaltet bis zu 2 Autofütterungsslots frei. Bei Hunger wird das im Slot ausgerüstete Essen automatisch verbraucht."
   },
   "AutoMealPouch_Tier3": {
     "localized_name": "Großer Futterbeutel",
-    "description": null
+    "description": "Ein großer Beutel, in dem man Futter mitnehmen kann. Schaltet bis zu 3 Autofütterungsslots frei. Bei Hunger wird das im Slot ausgerüstete Essen automatisch verbraucht."
   },
   "AutoMealPouch_Tier4": {
     "localized_name": "Riesiger Futterbeutel",
-    "description": null
+    "description": "Ein extragroßer Beutel, in dem man Futter mitnehmen kann. Schaltet bis zu 4 Autofütterungsslots frei. Bei Hunger wird das im Slot ausgerüstete Essen automatisch verbraucht."
   },
   "AutoMealPouch_Tier5": {
     "localized_name": "Gigantischer Futterbeutel",
-    "description": null
+    "description": "Ein riesengroßer Beutel, in dem man Futter mitnehmen kann. Schaltet bis zu 5 Autofütterungsslots frei. Bei Hunger wird das im Slot ausgerüstete Essen automatisch verbraucht."
   },
   "BaseCampBattleDirector": {
     "localized_name": "Alarmglocke",
@@ -93,11 +93,11 @@
   },
   "BaseCampItemDispenser": {
     "localized_name": "Gegenstandsdispenser",
-    "description": null
+    "description": "Ein Apparat, mit dessen Hilfe Gegenstände aus allen Truhen im Lager entnommen werden können."
   },
   "BaseCampWorkHard": {
     "localized_name": "Aufsichtskanzel",
-    "description": null
+    "description": "Von hier aus kannst du anordnen, wie deine Arbeitspals arbeiten sollen und ihnen bestimmte Arbeiten erlauben oder verbieten."
   },
   "BaseCampWorkerExtraStation": {
     "localized_name": "Pal-Box-Bedienterminal",
@@ -181,7 +181,7 @@
   },
   "Battle_Cloth": {
     "localized_name": "Stoff",
-    "description": null
+    "description": "Dieser Stoff lässt sich durch Verarbeitung von Wolle herstellen. Wird für die Herstellung von Rüstungen benötigt."
   },
   "Battle_Defense_BowGun": {
     "localized_name": "Stationäre Armbrust",
@@ -237,7 +237,7 @@
   },
   "Battle_MeleeWeapon_Axe_Steal": {
     "localized_name": "Paluminium-Axt",
-    "description": null
+    "description": "Eine Axt zum Holzfällen. Besitzt durch die Verwendung von Paluminium eine unglaubliche Schärfe."
   },
   "Battle_MeleeWeapon_Bat": {
     "localized_name": "Holzkeule",
@@ -245,11 +245,11 @@
   },
   "Battle_MeleeWeapon_Bat2": {
     "localized_name": "Baseballschläger",
-    "description": null
+    "description": "Ein Baseballschläger für den Nahkampf. Pals bitte nicht als Ball benutzen."
   },
   "Battle_MeleeWeapon_Pickaxe_Steal": {
     "localized_name": "Paluminium-Spitzhacke",
-    "description": null
+    "description": "Eine Spitzhacke für den Bergbau. Besitzt durch die Verwendung von Paluminium eine unglaubliche Effizienz."
   },
   "Battle_MeleeWeapon_Sword": {
     "localized_name": "Schwert",
@@ -289,11 +289,11 @@
   },
   "Battle_RangeWeapon_CompoundBow": {
     "localized_name": "Compoundbogen",
-    "description": null
+    "description": "Ein modernisierter Bogen. Ist in der Lage, stärkere Pfeile zu verschießen."
   },
   "Battle_RangeWeapon_FlameThrower": {
     "localized_name": "FlameThrower",
-    "description": null
+    "description": "Ein Flamethrower mit hoher Reichweite. Kann getroffene Gegner in Brand setzen. Für die Herstellung wird „Waffen-Fließbandwerk II“ benötigt."
   },
   "Battle_RangeWeapon_GatlingGun": {
     "localized_name": "Gatlinggewehr",
@@ -321,7 +321,7 @@
   },
   "Battle_RangeWeapon_OldRevolver": {
     "localized_name": "Alter Revolver",
-    "description": null
+    "description": "Eine etwas aus der Mode gekommene Handfeuerwaffe mit Trommelmechanismus. Hat im Vergleich zur Handgun_default eine höhere Durchschlagskraft."
   },
   "Battle_RangeWeapon_Rifle": {
     "localized_name": "Einzelschuss-Gewehr",
@@ -333,11 +333,11 @@
   },
   "Battle_RangeWeapon_SemiAutoRifle": {
     "localized_name": "Halbautomatisches Gewehr",
-    "description": null
+    "description": "Ein Gewehr mit begrenzten Dauerfeuereigenschaften. Das Zielen fällt leicht und auch die Feuerkraft ist hoch, was es zu einem guten Partner auf mittlere Distanz macht."
   },
   "Battle_RangeWeapon_SemiAutoShotgun": {
     "localized_name": "Halbautomatische Flinte",
-    "description": null
+    "description": "Eine Flinte mit hoher Feuerrate. Liefert auf kurze Distanz unschlagbaren Schadensoutput."
   },
   "Battle_RangeWeapon_ShotGun": {
     "localized_name": "Doppelflinte",
@@ -357,11 +357,11 @@
   },
   "Battle_RangeWeapon_SubmachineGun": {
     "localized_name": "Maschinenpistole",
-    "description": null
+    "description": "Eine Maschinenpistole mit vortrefflichen Dauerfeuereigenschaften. Einfach in der Handhabung und ein guter Partner auf kurze Distanz."
   },
   "BeamSword": {
-    "localized_name": "Lichtschwert",
-    "description": null
+    "localized_name": "Strahlenschwert",
+    "description": "Strahlenschwert für den Nahkampf. Der leistungsstarke Laser fügt dem Gegner fiese Verbrennungen zu."
   },
   "BelieverFlagSet": {
     "localized_name": "Liga der Palfreunde-Flaggenset",
@@ -369,7 +369,7 @@
   },
   "BlastFurnace4": {
     "localized_name": "Industrieller Hochofen",
-    "description": null
+    "description": "Eine Anlage, in der Hexolit raffiniert werden kann. Dank ihrer Größe können hier mehrere Pals gemeinsam arbeiten. Muss von einem Feuer-Pal angefacht werden."
   },
   "BreedFarm": {
     "localized_name": "Zuchtfarm",
@@ -381,11 +381,11 @@
   },
   "CarbonFiber": {
     "localized_name": "Karbonfaser",
-    "description": null
+    "description": "Ein leichtes Material mit hoher Festigkeit. Wird unter anderem zur Herstellung von Rüstungen verwendet."
   },
   "Cauldron": {
     "localized_name": "Hexenkessel",
-    "description": null
+    "description": "Kann im Lager aufgestellt werden und erhöht das Arbeitstempo bei der Arzneimittelherstellung. Mehrere aufzustellen, bringt keinen zusätzlichen Nutzen."
   },
   "CeilingLamp": {
     "localized_name": "Deckenlampe",
@@ -393,23 +393,23 @@
   },
   "Cement": {
     "localized_name": "Zement",
-    "description": null
+    "description": "Wird für den Bau bestimmter Gebäude als Material benötigt. Kann mit einer Hochwertige Werkbank hergestellt werden."
   },
   "ChargeLaserRifle": {
     "localized_name": "Teslagewehr",
-    "description": null
+    "description": "de_Text"
   },
   "ChargeLaserRifleBullet": {
     "localized_name": "Teslagewehrmunition",
-    "description": null
+    "description": "de_Text"
   },
   "Cloth2": {
     "localized_name": "Hochwertiger Stoff",
-    "description": null
+    "description": "Hochwertiger Stoff, hergestellt aus großen Mengen an Wolle. Wird für die Herstellung von hochwertigen Rüstungen benötigt. Für die Herstellung wird „Hochwertige Werkbank“ benötigt."
   },
   "CompositeDesk": {
     "localized_name": "Zeichentisch",
-    "description": null
+    "description": "Eine Einrichtung, mit der du mehrere Baupläne zu einem höherwertigen Bauplan verbinden kannst."
   },
   "Cooler": {
     "localized_name": "Eiskühler",
@@ -417,11 +417,11 @@
   },
   "CoolerBox": {
     "localized_name": "Kühlbox",
-    "description": null
+    "description": "Ein kleiner Vorratsbehälter für Lebensmittel. Weise einen Eis-Pal zu, um den Inhalt länger frisch zu halten."
   },
   "CoolerPalFoodBox": {
     "localized_name": "Gekühlter Futtertrog",
-    "description": null
+    "description": "Ein Futtertrog, der gekühlt werden kann. Weise einen Eis-Pal zu, um den Inhalt länger frisch zu halten."
   },
   "Crusher": {
     "localized_name": "Zerkleinerer",
@@ -457,11 +457,11 @@
   },
   "DimensionPalStorage": {
     "localized_name": "Dimensionaler Pal-Speicher",
-    "description": null
+    "description": "Eine Einrichtung zur Massenlagerung gefangener Pals. Standardmäßig können alle Gildenmitglieder darauf zugreifen, du kannst sie aber auch auf privat stellen."
   },
   "DismantlingConveyor": {
     "localized_name": "Pal-Schlachtfließband",
-    "description": null
+    "description": "Ein Träumchen von einer Maschine, mit der sich Pals automatisch schlachten lassen."
   },
   "DisplayCharacter": {
     "localized_name": "Schaukäfig",
@@ -477,7 +477,7 @@
   },
   "ElectricGenerator_Large": {
     "localized_name": "Großer Generator",
-    "description": null
+    "description": "Eine Anlage zum Speichern von Strom, der von Elektro-Pals erzeugt wird. Ist größer und effizienter."
   },
   "ElectricHeater": {
     "localized_name": "Elektroheizung",
@@ -485,39 +485,39 @@
   },
   "EnergyLauncherBullet": {
     "localized_name": "Plasmakartusche",
-    "description": null
+    "description": "Munition für Waffen vom Typ Plasmakanone."
   },
   "EnergyRocketLauncher": {
     "localized_name": "Plasmakanone",
-    "description": null
+    "description": "Feuert eine energiegeladene Kugel ab, die beim Einschlag explodiert."
   },
   "EnergyShotgun": {
     "localized_name": "Plasmaflinte",
-    "description": null
+    "description": "de_Text"
   },
   "EnergyShotgunBullet": {
     "localized_name": "Plasmaflintenmunition",
-    "description": null
+    "description": "de_Text"
   },
   "EnergyStorage_Electric": {
     "localized_name": "Speicherbatterie",
-    "description": null
+    "description": "Eine Anlage zum Speichern von überproduziertem Strom, der mit einem Generator erzeugt wird."
   },
   "Expedition": {
     "localized_name": "Expeditionszentrale",
-    "description": null
+    "description": "Eine Einrichtung, von wo aus du Pals auf Expeditionen entsenden kannst. Die entsandten Pals führen am jeweiligen Zielort Kämpfe durch, sammeln Ressourcen und bringen ihre Beute ins Lager zurück."
   },
   "Factory_Hard_04": {
     "localized_name": "Hightech-Fließbandwerk",
-    "description": null
+    "description": "Eine Werkstatt zur Fertigung von Gegenständen und Rüstungen. Mithilfe modernster Maschinen läuft die Fertigung jetzt blitzschnell. Für die Arbeit benötigt man Pals, die Handwerk beherrschen."
   },
   "Factory_Money": {
     "localized_name": "Goldmünzen-Prägewerk",
-    "description": null
+    "description": "Eine Werkstatt zur Prägung von Goldmünze. Die Arbeit verlangt einiges ab, weshalb die GEI der hier beschäftigten Pals sinkt. Für die Arbeit benötigt man Pals, die Handwerk beherrschen."
   },
   "Farm_SkillFruits": {
     "localized_name": "Technikfruchtgarten",
-    "description": null
+    "description": "Ein Garten, in dem du Technikfrüchte kultivieren kannst. Pflanze hier eine Technikfrucht ein, um später mehrere Früchte der gleichen Sorte zu ernten."
   },
   "FireCultFlagSet": {
     "localized_name": "Bruderschaft der ewigen Lohe-Flaggenset",
@@ -557,59 +557,59 @@
   },
   "FlamethrowerBullet": {
     "localized_name": "Flammöl",
-    "description": null
+    "description": "Flammenwerferbrennstoff. Munition für Waffen vom Typ Flamethrower."
   },
   "FlourMill": {
     "localized_name": "Mühle",
-    "description": "Eine Anlage, um aus Weizen Mehl zu mahlen. Um das Wasserrad zu drehen, benötigt man einen Pal, der „Gießen“ beherrscht."
+    "description": "Eine Anlage, um aus Weizen Mehl zu mahlen. Um das Wasserrad zu drehen, benötigt man einen Pal, der „Bewässern“ beherrscht."
   },
   "FlowerBed": {
     "localized_name": "Blumenbeet",
-    "description": null
+    "description": "Kann im Lager aufgestellt werden und erhöht das Arbeitstempo beim Sammeln. Mehrere aufzustellen, bringt keinen zusätzlichen Nutzen."
   },
   "Fountain": {
     "localized_name": "Springbrunnen",
-    "description": null
+    "description": "Kann im Lager aufgestellt werden und erhöht das Arbeitstempo beim Gießen. Mehrere aufzustellen, bringt keinen zusätzlichen Nutzen."
   },
   "FragGrenade": {
     "localized_name": "Splittergranate",
-    "description": null
+    "description": "Splittergranate für den Kampf auf mittlere Distanz. Explodiert einige Sekunden nachdem sie geworfen wird und fügt Gegnern Schaden zu."
   },
   "FragGrenade_Dark": {
     "localized_name": "Schattengranate",
-    "description": null
+    "description": "Schattengranate für den Kampf auf mittlere Distanz. Explodiert einige Sekunden nachdem sie geworfen wird und fügt Gegnern Schaden des Typs „Schatten“ zu."
   },
   "FragGrenade_Dragon": {
     "localized_name": "Drachengranate",
-    "description": null
+    "description": "Drachengranate für den Kampf auf mittlere Distanz. Explodiert einige Sekunden nachdem sie geworfen wird und fügt Gegnern Schaden des Typs „Drache“ zu."
   },
   "FragGrenade_Elec": {
     "localized_name": "Elektroschockgranate",
-    "description": null
+    "description": "Elektroschockgranate für den Kampf auf mittlere Distanz. Explodiert einige Sekunden nachdem sie geworfen wird und setzt die Umgebung unter Strom."
   },
   "FragGrenade_Fire": {
     "localized_name": "Brandgranate",
-    "description": null
+    "description": "Brandgranate für den Kampf auf mittlere Distanz. Explodiert einige Sekunden nachdem sie geworfen wird und setzt die Umgebung in Brand."
   },
   "FragGrenade_Ground": {
     "localized_name": "Erdgranate",
-    "description": null
+    "description": "Erdgranate für den Kampf auf mittlere Distanz. Explodiert einige Sekunden nachdem sie geworfen wird und fügt Gegnern Schaden des Typs „Erde“ zu."
   },
   "FragGrenade_Ice": {
     "localized_name": "Gefriergranate",
-    "description": null
+    "description": "Gefriergranate für den Kampf auf mittlere Distanz. Explodiert einige Sekunden nachdem sie geworfen wird und lässt die Umgebung gefrieren."
   },
   "FragGrenade_Leaf": {
     "localized_name": "Floragranate",
-    "description": null
+    "description": "Floragranate für den Kampf auf mittlere Distanz. Explodiert einige Sekunden nachdem sie geworfen wird und fügt Gegnern Schaden des Typs „Gras“ zu."
   },
   "FragGrenade_Super": {
     "localized_name": "Modifizierte Splittergranate",
-    "description": null
+    "description": "Eine verbesserte Splittergranate. Explodiert einige Sekunden nachdem sie geworfen wird und fügt Gegnern großen Schaden zu."
   },
   "FragGrenade_Water": {
     "localized_name": "Aquagranate",
-    "description": null
+    "description": "Aquagranate für den Kampf auf mittlere Distanz. Explodiert einige Sekunden nachdem sie geworfen wird und fügt Gegnern Schaden des Typs „Wasser“ zu."
   },
   "FurnitureSet_1": {
     "localized_name": "Hölzernes Wohnzimmermöbelset",
@@ -745,7 +745,7 @@
   },
   "GatlingBullet": {
     "localized_name": "Gatlinggewehrmunition",
-    "description": null
+    "description": "Munition für Waffen vom Typ Gatlinggewehr."
   },
   "Glass_houseset": {
     "localized_name": "Glasbauset",
@@ -753,23 +753,23 @@
   },
   "GlobalPalStorage": {
     "localized_name": "Globale Pal-Box",
-    "description": null
+    "description": "Hier kannst du die genetischen Daten von Pals speichern und Pals aus ihren gespeicherten genetischen Daten wiederherstellen. Außerdem kannst du gespeicherte Daten in andere Welten übertragen."
   },
   "GrapplingGun": {
     "localized_name": "Enterhakenpistole",
-    "description": null
+    "description": "Eine Enterhakenpistole zur schnellen Fortbewegung. Hakt sich am anvisierten Ziel ein und zieht den Anwender nach. Erleichtert die Mobilität auf Terrain mit großen Höhenunterschieden."
   },
   "GrapplingGun2": {
     "localized_name": "Mega-Enterhakenpistole",
-    "description": null
+    "description": "Eine Enterhakenpistole zur schnellen Fortbewegung. Hakt sich am anvisierten Ziel ein und zieht den Anwender nach. Verbessertes Modell mit höherer Reichweite."
   },
   "GrapplingGun3": {
     "localized_name": "Giga-Enterhakenpistole",
-    "description": null
+    "description": "Eine Enterhakenpistole zur schnellen Fortbewegung. Hakt sich am anvisierten Ziel ein und zieht den Anwender nach. Die innovative Bauweise basiert auf den Daten eines Versuchsmodells."
   },
   "GrapplingGun4": {
     "localized_name": "Tera-Enterhakenpistole",
-    "description": null
+    "description": "Eine Enterhakenpistole zur schnellen Fortbewegung. Hakt sich am anvisierten Ziel ein und zieht den Anwender nach. Ihre überragende Mobilität ist das Resultat jahrelanger Forschung."
   },
   "GrapplingGun5": {
     "localized_name": "Ultra-Enterhakenpistole",
@@ -777,11 +777,11 @@
   },
   "GrenadeBullet": {
     "localized_name": "Granatwerfermunition",
-    "description": null
+    "description": "Munition für Waffen vom Typ Granatwerfer."
   },
   "GuildChest": {
     "localized_name": "Gildentruhe",
-    "description": null
+    "description": "Eine Truhe, die ihre Daten via Subraum in Echtzeit kommuniziert. Du kannst von jedem Lager aus, wo eine platziert ist, auf ihren Inhalt zugreifen."
   },
   "HandTorch": {
     "localized_name": "Handfackel",
@@ -793,7 +793,7 @@
   },
   "Headstone": {
     "localized_name": "Grabstein",
-    "description": null
+    "description": "Zum Draufschreiben. Für Memos oder als Memento."
   },
   "Heater": {
     "localized_name": "Feuerheizung",
@@ -801,11 +801,11 @@
   },
   "Homeward": {
     "localized_name": "Donnernde Heimkehr",
-    "description": null
+    "description": "Kann verwendet werden, um zum nächsten Lager zurückzukehren. Funktioniert nicht aus Dungeons oder ähnlichen Orten heraus."
   },
   "HugeKitchen": {
     "localized_name": "Großküche",
-    "description": null
+    "description": "Eine Anlage zur Zubereitung von Speisen. Dank ihrer Größe können hier mehrere Pals gemeinsam kochen. Muss von einem Feuer-Pal angefacht werden."
   },
   "HunterFlagSet": {
     "localized_name": "Wilderer-Flaggenset",
@@ -813,7 +813,7 @@
   },
   "IceCrusher": {
     "localized_name": "Gefrierzerkleinerer",
-    "description": null
+    "description": "Eine Anlage zum Zerkleinern und Umwandeln von Erz. Für den Betrieb benötigt man Strom sowie einen Pal, der „Kühlung“ beherrscht. Sehr effizient."
   },
   "Infra_ElectricGenerator_Grade_01": {
     "localized_name": "Generator",
@@ -837,7 +837,7 @@
   },
   "Infra_MachineParts": {
     "localized_name": "Nagel",
-    "description": null
+    "description": "Komponente, die zur Errichtung von allerlei Bauten benötigt wird. Kann mithilfe einer Primitive Werkbank gefertigt werden."
   },
   "Infra_PalBed_Grade_01": {
     "localized_name": "Pal-Strohbett",
@@ -857,11 +857,11 @@
   },
   "ItemBooth": {
     "localized_name": "Flohmarkt (Gegenstände)",
-    "description": null
+    "description": "Eine Einrichtung zum Verkauf von Gegenständen an andere Spieler. Weise einen Eis-Pal zu, um den Inhalt länger frisch zu halten."
   },
   "ItemChest_04": {
     "localized_name": "Hightech-Truhe",
-    "description": null
+    "description": "Zur Aufbewahrung von Gegenständen. Ist extrem solide und bietet massig Stauraum. Perfekt geeignet zur sicheren Lagerung all deiner Habseligkeiten."
   },
   "JapaneseStyle_houseset": {
     "localized_name": "Fernöstliches Bauset",
@@ -869,11 +869,11 @@
   },
   "Katana": {
     "localized_name": "Katana",
-    "description": null
+    "description": "Katana für den Nahkampf. Hervorragend geschärft und perfekt, um Feinde entzweizuschneiden."
   },
   "Lab": {
     "localized_name": "Pal-Arbeitsinstitut",
-    "description": null
+    "description": "Eine Einrichtung, in der Pals arbeitsbezogene Forschung betreiben können. Lasse Pals im Institut arbeiten, um Forschungsprojekte voranzutreiben und allerlei Vorteile zu erzielen."
   },
   "Lamp": {
     "localized_name": "Stehlampe",
@@ -881,7 +881,7 @@
   },
   "Lantern": {
     "localized_name": "Tragbare Laterne",
-    "description": null
+    "description": "Eine Laterne, die man sich an die Hüfte hängen kann. Geht bei Anbruch der Dunkelheit automatisch an. Eine reicht normalerweise völlig aus."
   },
   "Lantern_High": {
     "localized_name": "Verbesserte tragbare Laterne",
@@ -897,15 +897,15 @@
   },
   "LaserBullet": {
     "localized_name": "Energiekartusche",
-    "description": null
+    "description": "Munition für Waffen vom Typ Lasergewehr."
   },
   "LaserGatlingBullet": {
     "localized_name": "Laser-Gatlingkartusche",
-    "description": null
+    "description": "Munition für Waffen vom Typ Laser-Gatlinggewehr."
   },
   "LaserGatlingGun": {
     "localized_name": "Laser-Gatlinggewehr",
-    "description": null
+    "description": "Verschießt Strahlen mit hoher Feuerrate. Dank der enormen Feuerkraft können damit mehrere Gegner auf einen Schlag „befriedet“ werden."
   },
   "LauncherBullet": {
     "localized_name": "Panzerfaustmunition",
@@ -917,7 +917,7 @@
   },
   "MakeshiftAssaultRifle": {
     "localized_name": "Schrottreifes Sturmgewehr",
-    "description": null
+    "description": "Ein aus Schrott zusammengeschustertes Sturmgewehr. Hat eine vortreffliche Dauerfeuerrate und Reichweite, die Durchschlagskraft eines einzelnen Schusses ist allerdings gering."
   },
   "MakeshiftHandgun": {
     "localized_name": "Alte Pistole",
@@ -925,11 +925,11 @@
   },
   "MakeshiftShotgun": {
     "localized_name": "Schrottreife Flinte",
-    "description": null
+    "description": "Eine aus Schrott zusammengeschusterte Flinte. Hat eine geringe Reichweite, ist auf kurze Distanz aber wirkungsvoll."
   },
   "MakeshiftSubmachineGun": {
     "localized_name": "Schrottreife Maschinenpistole",
-    "description": null
+    "description": "Eine aus Schrott zusammengeschusterte Maschinenpistole. Hat eine vortreffliche Dauerfeuerrate, die Durchschlagskraft eines einzelnen Schusses ist allerdings gering."
   },
   "ManganeseIngot": {
     "localized_name": "Koralliumbarren",
@@ -937,7 +937,7 @@
   },
   "ManualElectricGenerator": {
     "localized_name": "Manueller Stromgenerator",
-    "description": null
+    "description": "Eine Anlage, die Drehbewegung in elektrische Energie umsetzt. Ist ineffizient und senkt die GEI der hier beschäftigten Pals, bringt jedoch EP ein."
   },
   "MeatCutterKnife": {
     "localized_name": "Fleischerbeil",
@@ -945,19 +945,19 @@
   },
   "MedicalPalBed_04": {
     "localized_name": "Großes Palbett",
-    "description": null
+    "description": "Ein bequemes, großes Bett für Pals. Wird als nächtliche Schlafstätte oder zum Ausruhen für verletzte Pals verwendet. Darauf können auch große Pals gemütlich schlafen."
   },
   "MedicalPalBed_05": {
     "localized_name": "Hightech-Medipod",
-    "description": null
+    "description": "Ein Heilpod für Pals. Kann als nächtliche Schlafstätte oder zum Ausruhen für verletzte Pals verwendet werden. Dank innovativer Technik verbessert sich die Regeneration."
   },
   "MedicineFacility_03": {
     "localized_name": "Hightech-Pharmaziewerkbank",
-    "description": null
+    "description": "Eine Anlage zur Herstellung von Pal-Medizin. Mit futuristischer Technologie können hier auch neuartige Pharmaka hergestellt werden. Überlasse die Arbeit Pals, die Pharmazie beherrschen."
   },
   "MetalDetector": {
     "localized_name": "Metalldetektor",
-    "description": null
+    "description": "Mit diesem Gerät in der Hand kannst du im Boden verborgene Erze aufspüren. Suchst du in der Nähe eines Erzvorkommens, wird es für dich markiert. Die Markierung verschwindet, wenn du dich entfernst."
   },
   "Metal_Gate": {
     "localized_name": "Metalltor",
@@ -968,12 +968,12 @@
     "description": "Ein Set, mit dem du ein Lager aus Metall errichten kannst. Ermöglicht den Bau von Fundamenten, Wänden, Dächern, Treppen und anderen Elementen aus Metall, die du zum Hausbau benötigst."
   },
   "MiningTool": {
-    "localized_name": "Spitzhacke und Helm",
-    "description": null
+    "localized_name": "Bergbauwagen",
+    "description": "Kann im Lager aufgestellt werden und erhöht das Arbeitstempo beim Bergbau. Mehrere aufzustellen, bringt keinen zusätzlichen Nutzen."
   },
   "MissileBullet": {
     "localized_name": "Raketenwerfermunition",
-    "description": null
+    "description": "Munition für Waffen vom Typ Raketenwerfer."
   },
   "MonsterFarm": {
     "localized_name": "Viehfarm",
@@ -981,7 +981,7 @@
   },
   "MultiElectricHatchingPalEgg": {
     "localized_name": "Großer elektrischer Brutkasten",
-    "description": null
+    "description": "Ein Gerät zum Ausbrüten von Pal-Eiern. Benötigt Strom, kann aber mehrere Eier gleichzeitig bei optimaler Temperatur ausbrüten."
   },
   "MultiHatchingPalEgg": {
     "localized_name": "Große Brutmaschine",
@@ -995,25 +995,33 @@
     "localized_name": "Gesellschaft des Blumenmondes-Flaggenset",
     "description": "Ein Set bestehend aus einer Gesellschaft des Blumenmondes-Standarte und einem Gesellschaft des Blumenmondes-Hochbanner. Ein Beweis für deinen Sieg über die Gesellschaft des Blumenmondes."
   },
+  "OctaviaSet01": {
+    "localized_name": "ULTRAKILL-Collab-Set 1",
+    "description": "[ULTRAKILL-Collab] Ein Set bestehend aus „V1-Rüstung“ und „Marksman-Revolver“."
+  },
+  "OctaviaSet02": {
+    "localized_name": "ULTRAKILL-Collab-Set 2",
+    "description": "[ULTRAKILL-Collab] Ein Set bestehend aus „V2-Rüstung“ und „Core-Eject-Flinte“."
+  },
   "OilPump": {
     "localized_name": "Ölförderpumpe",
-    "description": null
+    "description": "Eine Anlage, die zur Förderung von Rohöl aus Ölfeldern benötigt wird. Der Betrieb erfordert viel Strom."
   },
   "OlympicCauldron": {
     "localized_name": "Olympisches Feuer",
-    "description": null
+    "description": "Kann im Lager aufgestellt werden und erhöht das Arbeitstempo beim Arbeiten mit Feuer. Mehrere aufzustellen, bringt keinen zusätzlichen Nutzen."
   },
   "OperatingTable": {
-    "localized_name": "Pal-Operationstisch",
-    "description": null
+    "localized_name": "Pal-OP-Tisch",
+    "description": "de_text"
   },
   "OverheatRifle": {
     "localized_name": "Überhitzungsgewehr",
-    "description": null
+    "description": "de_Text"
   },
   "OverheatRifleBullet": {
     "localized_name": "Überhitzungsgewehrmunition",
-    "description": null
+    "description": "de_Text"
   },
   "PALBOX": {
     "localized_name": "Pal-Box",
@@ -1021,15 +1029,15 @@
   },
   "PalBooth": {
     "localized_name": "Flohmarkt (Pals)",
-    "description": null
+    "description": "Eine Einrichtung zum Verkauf von Pals an andere Spieler. Weise einen Eis-Pal zu, um erhaltene Lebensmittel länger frisch zu halten."
   },
   "PalDopingShot": {
     "localized_name": "Boosterpistole",
-    "description": null
+    "description": "de_Text"
   },
   "PalDopingShotBullet": {
     "localized_name": "Boosterpistolenmunition",
-    "description": null
+    "description": "de_Text"
   },
   "PalDopingShot_2": {
     "localized_name": "Mega-Boosterpistole",
@@ -1041,23 +1049,23 @@
   },
   "PalHealingGrenade": {
     "localized_name": "Pal-Heilgranate",
-    "description": null
+    "description": "de_Text"
   },
   "PalMedicineBox": {
     "localized_name": "Medizinregal",
-    "description": null
+    "description": "Ein Erste-Hilfe-Regal für Pal-Medizin. Kranke Pals können sich hier Medizin holen. Achte darauf, dass immer genügend Medizin da ist."
   },
   "PalRevive": {
     "localized_name": "Wiederbelebungsmedizin",
-    "description": null
+    "description": "Eine Medizin, die verletzte, kampfunfähige Pals wieder auf die Beine bringt."
   },
   "PalSphere_Exotic": {
     "localized_name": "Infinitum-Sphäre",
-    "description": null
+    "description": "Ein Hilfsmittel, mit dem sich Pals fangen lassen. Dank der wundersamen Wirksamkeit lassen sich damit auch abnorme Pals fangen."
   },
   "Plastic": {
     "localized_name": "Plaststahl",
-    "description": null
+    "description": "Spezialmaterial, das durch Verarbeitung von Rohöl mit Metall gewonnen wird. Kann mithilfe von „Elektrischer Hochofen“ hergestellt werden."
   },
   "PoliceFlagSet": {
     "localized_name": "Miliz-Flaggenset",
@@ -1065,11 +1073,11 @@
   },
   "Polymer": {
     "localized_name": "Polymerplatte",
-    "description": null
+    "description": "Polymerplatte aus verarbeitetem Öl. Wird unter anderem für die Herstellung von Schusswaffen benötigt."
   },
   "Potion_Extreme": {
     "localized_name": "Extrem-Heiltrank",
-    "description": null
+    "description": "Eine Medizin, die mit der Zeit Wunden heilt. Hat eine extrem hohe Qualität und stellt die LP im Handumdrehen wieder her."
   },
   "Product_Axe_Grade_01": {
     "localized_name": "Steinaxt",
@@ -1085,7 +1093,7 @@
   },
   "Product_CoalPit": {
     "localized_name": "Steinkohlemine",
-    "description": null
+    "description": "Eine Anlage zur Gewinnung von Steinkohle. Der Steinkohle-Abbau ist körperlich anstrengend. Überlasse die Arbeit Pals, die sich mit Bergbau auskennen."
   },
   "Product_Cooking_Grade_01": {
     "localized_name": "Lagerfeuer",
@@ -1101,11 +1109,11 @@
   },
   "Product_CopperPit": {
     "localized_name": "Erzbruch",
-    "description": null
+    "description": "Eine Anlage zur Gewinnung von Erz. Der Erz-Abbau ist körperlich anstrengend. Überlasse die Arbeit Pals, die sich mit Bergbau auskennen."
   },
   "Product_CopperPit_2": {
     "localized_name": "Erzbruch Ⅱ",
-    "description": null
+    "description": "Eine Anlage zur Gewinnung von Erz in großem Stil. Der Erz-Abbau ist körperlich anstrengend. Überlasse die Arbeit Pals, die sich mit Bergbau auskennen."
   },
   "Product_Factory_Hard_Grade_01": {
     "localized_name": "Hochwertige Werkbank",
@@ -1125,7 +1133,7 @@
   },
   "Product_Farm_Carrot": {
     "localized_name": "Karottenbeet",
-    "description": null
+    "description": "Ein Feld zum Anbau von Karotte. Bis zur Ernte dauert es etwas, dafür steigt die Vielfalt der Gerichte, die sich zubereiten lassen. Zum Säen, Gießen und Ernten werden mehrere Pals benötigt."
   },
   "Product_Farm_Lettuce": {
     "localized_name": "Salatacker",
@@ -1133,11 +1141,11 @@
   },
   "Product_Farm_Onion": {
     "localized_name": "Zwiebelbeet",
-    "description": null
+    "description": "Ein Feld zum Anbau von Zwiebel. Bis zur Ernte dauert es etwas, dafür steigt die Vielfalt der Gerichte, die sich zubereiten lassen. Zum Säen, Gießen und Ernten werden mehrere Pals benötigt."
   },
   "Product_Farm_Potato": {
     "localized_name": "Kartoffelacker",
-    "description": null
+    "description": "Ein Feld zum Anbau von Kartoffel. Bis zur Ernte dauert es etwas, dafür steigt die Vielfalt der Gerichte, die sich zubereiten lassen. Zum Säen, Gießen und Ernten werden mehrere Pals benötigt."
   },
   "Product_Farm_tomato": {
     "localized_name": "Tomatenacker",
@@ -1181,7 +1189,7 @@
   },
   "Product_QuartzPit": {
     "localized_name": "Reinquarzmine",
-    "description": null
+    "description": "Eine Anlage zur Gewinnung von Reinquarz. Der Reinquarz-Abbau ist körperlich anstrengend. Überlasse die Arbeit Pals, die sich mit Bergbau auskennen."
   },
   "Product_StationDeforest": {
     "localized_name": "Holzfällerlager",
@@ -1193,7 +1201,7 @@
   },
   "Product_SulfurPit": {
     "localized_name": "Schwefelmine",
-    "description": null
+    "description": "Eine Anlage zur Gewinnung von Schwefel. Der Schwefel-Abbau ist körperlich anstrengend. Überlasse die Arbeit Pals, die sich mit Bergbau auskennen."
   },
   "Product_WeaponFactory_Dirty_Grade_01": {
     "localized_name": "Waffen-Werkbank",
@@ -1213,11 +1221,11 @@
   },
   "Refrigerator": {
     "localized_name": "Kühlschrank",
-    "description": null
+    "description": "Ein Vorratsschrank für Lebensmittel mit großem Fassungsvermögen. Weise einen Eis-Pal zu, um den Inhalt länger frisch zu halten."
   },
   "ReinforcedArrow": {
     "localized_name": "Verstärkter Pfeil",
-    "description": null
+    "description": "Ein verstärkter Pfeil, der mit einem Compoundbogen verschossen werden kann."
   },
   "RepairBench": {
     "localized_name": "Reparaturbank",
@@ -1225,7 +1233,7 @@
   },
   "RepairKit": {
     "localized_name": "Reparaturset",
-    "description": null
+    "description": "Werkzeug für die Reparatur von Konstruktionen. Kaputte Konstruktionen können damit wieder instand gesetzt werden."
   },
   "RifleBullet": {
     "localized_name": "Gewehrmunition",
@@ -1237,31 +1245,31 @@
   },
   "SFArmor": {
     "localized_name": "Hexolitrüstung",
-    "description": null
+    "description": "Eine Rüstung aus Hexolit. Besticht durch überragende Haltbarkeit und Schutzwirkung."
   },
   "SFArmorCold": {
     "localized_name": "Kälteresistente Hexolitrüstung",
-    "description": null
+    "description": "Hexolitrüstung mit verbesserter Qualität. Schützt zuverlässig vor Kälte."
   },
   "SFArmorHeat": {
     "localized_name": "Hitzeresistente Hexolitrüstung",
-    "description": null
+    "description": "Hexolitrüstung mit verbesserter Qualität. Schützt extrem gut gegen Hitze."
   },
   "SFArmorWeight": {
     "localized_name": "Leichte Hexolitrüstung",
-    "description": null
+    "description": "Hexolitrüstung mit verbesserter Qualität. Erhöht deine Maximallast."
   },
   "SFArrow": {
     "localized_name": "Hightech-Pfeil",
-    "description": null
+    "description": "Ein Pfeil aus Hexolit, der mit einem Hightech-Bogen verschossen werden kann."
   },
   "SFBow": {
     "localized_name": "Hightech-Bogen",
-    "description": null
+    "description": "Ein mit modernster Technologie verbesserter Bogen. Ist in der Lage, extrem starke Pfeile zu verschießen."
   },
   "SFHelmet": {
     "localized_name": "Hexolithelm",
-    "description": null
+    "description": "Ein Helm aus Hexolit. Besticht durch unglaubliche Robustheit und Leichtigkeit."
   },
   "SF_houseset": {
     "localized_name": "Futuristisches Bauset",
@@ -1273,7 +1281,7 @@
   },
   "SanityDecrease1": {
     "localized_name": "Alphawellengenerator",
-    "description": null
+    "description": "Diese Maschine generiert Alphawellen, die auf Pals eine entspannende Wirkung haben. Die GEI von Pals im Lager sinkt dadurch langsamer. Mehrere aufzustellen, bringt keinen zusätzlichen Nutzen."
   },
   "ScientistFlagSet": {
     "localized_name": "Instituts für Genforschung-Flaggenset",
@@ -1301,7 +1309,7 @@
   },
   "Shield_SF": {
     "localized_name": "Sci-Fi-Schild",
-    "description": null
+    "description": "Ein mithilfe von ultramoderner Technologie entwickelter, mysteriöser Schild. Regeneriert sich automatisch, nachdem er einige Zeit lang keinen Schaden nimmt. Der Inbegriff von Perfektion."
   },
   "ShotGunBullet": {
     "localized_name": "Flintenmunition",
@@ -1313,51 +1321,51 @@
   },
   "Silo": {
     "localized_name": "Silo",
-    "description": null
+    "description": "Kann im Lager aufgestellt werden und erhöht das Arbeitstempo beim Säen. Mehrere aufzustellen, bringt keinen zusätzlichen Nutzen."
   },
   "SkillUnlock_Alpaca": {
     "localized_name": "Melpaca-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Melpaca zu reiten."
   },
   "SkillUnlock_AmaterasuWolf": {
     "localized_name": "Kitsun-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Kitsun zu reiten."
   },
   "SkillUnlock_AmaterasuWolf_Dark": {
     "localized_name": "Kitsun-Noct-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Kitsun Noct zu reiten."
   },
   "SkillUnlock_BadCatgirl": {
     "localized_name": "Nyafia-Flinte",
-    "description": null
+    "description": "Flinte für Nyafia. Ermöglicht es Nyafia bei Aktivierung der Partnerfähigkeit, Gegnern in der Nähe damit einzuheizen."
   },
   "SkillUnlock_BirdDragon": {
     "localized_name": "Vanwyrm-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Vanwyrm zu reiten."
   },
   "SkillUnlock_BirdDragon_Ice": {
     "localized_name": "Vanwyrm-Cryst-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Vanwyrm Cryst zu reiten."
   },
   "SkillUnlock_BlackCentaur": {
     "localized_name": "Necromus-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Necromus zu reiten."
   },
   "SkillUnlock_BlackGriffon": {
     "localized_name": "Shadowbeak-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Shadowbeak zu reiten."
   },
   "SkillUnlock_BlackMetalDragon": {
     "localized_name": "Astegon-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Astegon zu reiten."
   },
   "SkillUnlock_BlackPuppy": {
     "localized_name": "Smokie-Geschirr",
-    "description": null
+    "description": "Geschirr zur Handhabung von Smokie. Ermöglicht es dir, bei Aktivierung der Partnerfähigkeit Chromit in der Nähe aufspüren."
   },
   "SkillUnlock_BlueDragon": {
     "localized_name": "Azurobe-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Azurobe zu reiten."
   },
   "SkillUnlock_BlueDragon_Ice": {
     "localized_name": "Azurobe-Cryst-Sattel",
@@ -1365,95 +1373,95 @@
   },
   "SkillUnlock_BlueThunderHorse": {
     "localized_name": "Azurmane-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Azurmane zu reiten."
   },
   "SkillUnlock_Boar": {
     "localized_name": "Rushoar-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Rushoar zu reiten."
   },
   "SkillUnlock_Carbunclo": {
     "localized_name": "Lifmunk-Maschinenpistole",
-    "description": null
+    "description": "Kleine Maschinenpistole für Lifmunk. Ermöglicht es ihm, sich bei Aktivierung der Partnerfähigkeit auf deinen Kopf zu setzen und dir damit Schützenhilfe zu geben."
   },
   "SkillUnlock_ColorfulBird": {
     "localized_name": "Tocotoco-Handschuhe",
-    "description": null
+    "description": "Handschuh zum vorsichtigen Greifen von Tocotoco. Ermöglicht es dir, Tocotoco bei Aktivierung der Partnerfähigkeit auszurüsten und explosive Eier zu verschießen."
   },
   "SkillUnlock_DarkMechaDragon": {
     "localized_name": "Xenolord-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Xenolord zu reiten."
   },
   "SkillUnlock_Deer": {
     "localized_name": "Eikthyrdeer-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Eikthyrdeer zu reiten."
   },
   "SkillUnlock_Deer_Ground": {
     "localized_name": "Eikthyrdeer-Terra-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Eikthyrdeer Terra zu reiten."
   },
   "SkillUnlock_DreamDemon": {
     "localized_name": "Daedream-Halsband",
-    "description": null
+    "description": "Halsband für Daedream. Ermöglicht es Daedream, wenn es im Team ist, durchgehend draußen zu bleiben und dir Schützenhilfe zu geben."
   },
   "SkillUnlock_DrillGame": {
     "localized_name": "Digtoise-Stirnband",
-    "description": null
+    "description": "Motivierendes Stirnband für Digtoise. Ermöglicht es Digtoise bei Aktivierung der Partnerfähigkeit, sich schnell zu drehen und Steine effizienter zu zertrümmern."
   },
   "SkillUnlock_Eagle": {
     "localized_name": "Galeclaw-Handschuhe",
-    "description": null
+    "description": "Handschuh zum vorsichtigen Greifen der Beine von Galeclaw. Ermöglicht es dir, wenn Galeclaw im Team ist, es als Gleiter zu benutzen."
   },
   "SkillUnlock_ElecPanda": {
     "localized_name": "Grizzbolt-Minigun",
-    "description": null
+    "description": "Ermöglicht es dir, auf Grizzbolt zu reiten, während es mit einer Minigun um sich schießt."
   },
   "SkillUnlock_FairyDragon": {
     "localized_name": "Elphidran-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Elphidran zu reiten."
   },
   "SkillUnlock_FairyDragon_Water": {
     "localized_name": "Elphidran-Aqua-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Elphidran Aqua zu reiten."
   },
   "SkillUnlock_FeatherOstrich": {
     "localized_name": "Dazemu-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Dazemu zu reiten."
   },
   "SkillUnlock_FengyunDeeper": {
     "localized_name": "Fenglope-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Fenglope zu reiten."
   },
   "SkillUnlock_FengyunDeeper_Electric": {
     "localized_name": "Fenglope-Lux-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Fenglope Lux zu reiten."
   },
   "SkillUnlock_FireKirin": {
     "localized_name": "Pyrin-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Pyrin zu reiten."
   },
   "SkillUnlock_FireKirin_Dark": {
     "localized_name": "Pyrin-Noct-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Pyrin Noct zu reiten."
   },
   "SkillUnlock_FlameBuffalo": {
     "localized_name": "Arsox-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Arsox zu reiten."
   },
   "SkillUnlock_FlowerDinosaur": {
     "localized_name": "Dinossom-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Dinossom zu reiten."
   },
   "SkillUnlock_FlowerDinosaur_Electric": {
     "localized_name": "Dinossom-Lux-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Dinossom Lux zu reiten."
   },
   "SkillUnlock_FlowerRabbit": {
     "localized_name": "Flopie-Halsband",
-    "description": null
+    "description": "Halsband für Flopie. Ermöglicht es Flopie, wenn es im Team ist, durchgehend draußen zu bleiben und Gegenstände in der Nähe einzusammeln."
   },
   "SkillUnlock_FlyingManta": {
     "localized_name": "Celaray-Handschuhe",
-    "description": null
+    "description": "Handschuh zum vorsichtigen Greifen von Celaray. Ermöglicht es dir, wenn Celaray im Team ist, es als Gleiter zu benutzen."
   },
   "SkillUnlock_FlyingManta_Thunder": {
     "localized_name": "Celaray-Lux-Handschuhe",
@@ -1461,7 +1469,7 @@
   },
   "SkillUnlock_Garm": {
     "localized_name": "Direhowl-Sattelgeschirr",
-    "description": null
+    "description": "Ermöglicht es dir, auf Direhowl zu reiten."
   },
   "SkillUnlock_GhostAnglerfish": {
     "localized_name": "Ghangler-Sattel",
@@ -1473,71 +1481,71 @@
   },
   "SkillUnlock_GhostBeast": {
     "localized_name": "Maraith-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Maraith zu reiten."
   },
   "SkillUnlock_GoldenHorse": {
     "localized_name": "Gildane-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Gildane zu reiten."
   },
   "SkillUnlock_GrassMammoth": {
     "localized_name": "Mammorest-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Mammorest zu reiten."
   },
   "SkillUnlock_GrassMammoth_Ice": {
     "localized_name": "Mammorest-Cryst-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Mammorest Cryst zu reiten."
   },
   "SkillUnlock_GrassPanda": {
     "localized_name": "Mossanda-Granatwerfer",
-    "description": null
+    "description": "Ermöglicht es dir, auf Mossanda zu reiten, während es mit einem Granatwerfer um sich schießt."
   },
   "SkillUnlock_GrassPanda_Electric": {
     "localized_name": "Mossanda-Lux-Granatwerfer",
-    "description": null
+    "description": "Ermöglicht es dir, auf Mossanda Lux zu reiten, während es mit einem Granatwerfer um sich schießt."
   },
   "SkillUnlock_GuardianDog": {
     "localized_name": "Yakumo-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Yakumo zu reiten."
   },
   "SkillUnlock_HadesBird": {
     "localized_name": "Helzephyr-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Helzephyr zu reiten."
   },
   "SkillUnlock_HadesBird_Electric": {
     "localized_name": "Helzephyr-Lux-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Helzephyr Lux zu reiten."
   },
   "SkillUnlock_HawkBird": {
     "localized_name": "Nitewing-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Nitewing zu reiten."
   },
   "SkillUnlock_Hedgehog": {
     "localized_name": "Jolthog-Handschuhe",
-    "description": null
+    "description": "Gummihandschuh zum Greifen von Jolthog. Ermöglicht es dir, Jolthog damit bei Aktivierung der Partnerfähigkeit als Elektroschockgranate zu verwenden."
   },
   "SkillUnlock_Hedgehog_Ice": {
     "localized_name": "Jolthog-Cryst-Handschuhe",
-    "description": null
+    "description": "Thermohandschuh zum Greifen von Jolthog Cryst. Ermöglicht es dir, Jolthog Cryst damit bei Aktivierung der Partnerfähigkeit als Eisgranate zu verwenden."
   },
   "SkillUnlock_Horus": {
     "localized_name": "Faleris-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Faleris zu reiten."
   },
   "SkillUnlock_Horus_Water": {
     "localized_name": "Faleris-Aqua-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Faleris Aqua zu reiten."
   },
   "SkillUnlock_IceDeer": {
     "localized_name": "Reindrix-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Reindrix zu reiten."
   },
   "SkillUnlock_IceHorse": {
     "localized_name": "Frostallion-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Frostallion zu reiten."
   },
   "SkillUnlock_IceHorse_Dark": {
     "localized_name": "Frostallion-Noct-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Frostallion Noct zu reiten."
   },
   "SkillUnlock_IceNarwhal": {
     "localized_name": "Whalaska-Sattel",
@@ -1548,88 +1556,92 @@
     "description": null
   },
   "SkillUnlock_IceSeal": {
-    "localized_name": "Polapup-Geschirr",
+    "localized_name": "Polapup-Sattel",
     "description": null
   },
   "SkillUnlock_JetDragon": {
     "localized_name": "Jetragon-Raketenwerfer",
-    "description": null
+    "description": "Ermöglicht es dir, auf Jetragon zu reiten, während es mit Raketen um sich schießt."
   },
   "SkillUnlock_KingAlpaca": {
     "localized_name": "Kingpaca-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Kingpaca zu reiten."
   },
   "SkillUnlock_KingAlpaca_Ice": {
     "localized_name": "Kingpaca-Cryst-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Kingpaca Cryst zu reiten."
   },
   "SkillUnlock_KingBahamut": {
     "localized_name": "Blazamut-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Blazamut zu reiten."
   },
   "SkillUnlock_KingBahamut_Dragon": {
     "localized_name": "Blazamut-Ryu-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Blazamut Ryu zu reiten."
   },
   "SkillUnlock_Kirin": {
     "localized_name": "Univolt-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Univolt zu reiten."
   },
   "SkillUnlock_Kitsunebi": {
     "localized_name": "Foxparks-Geschirr",
-    "description": null
+    "description": "Geschirr zur Handhabung von Foxparks. Ermöglicht es dir, Foxparks damit bei Aktivierung der Partnerfähigkeit als Flammenwerfer auszurüsten."
   },
   "SkillUnlock_Kitsunebi_Ice": {
     "localized_name": "Foxparks-Cryst-Geschirr",
-    "description": null
+    "description": "Geschirr zur Handhabung von Foxparks Cryst. Ermöglicht es dir, Foxparks Cryst damit bei Aktivierung der Partnerfähigkeit als Waffe auszurüsten und mit einem eisigen Strahl anzugreifen."
   },
   "SkillUnlock_LazyDragon": {
     "localized_name": "Relaxaurus-Raketenwerfer",
-    "description": null
+    "description": "Ermöglicht es dir, auf Relaxaurus zu reiten, während es mit einem Raketenwerfer um sich schießt."
   },
   "SkillUnlock_LazyDragon_Electric": {
     "localized_name": "Relaxaurus-Lux-Raketenwerfer",
-    "description": null
+    "description": "Ermöglicht es dir, auf Relaxaurus Lux zu reiten, während es mit einem Raketenwerfer um sich schießt."
   },
   "SkillUnlock_LeafMomonga": {
     "localized_name": "Herbil-Geschirr",
     "description": null
   },
+  "SkillUnlock_LegendDeer": {
+    "localized_name": "Hartalis-Sattel",
+    "description": null
+  },
   "SkillUnlock_Manticore": {
     "localized_name": "Blazehowl-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Blazehowl zu reiten."
   },
   "SkillUnlock_Manticore_Dark": {
     "localized_name": "Blazehowl-Noct-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Blazehowl Noct zu reiten."
   },
   "SkillUnlock_Monkey": {
     "localized_name": "Tanzee-Sturmgewehr",
-    "description": null
+    "description": "Kleines Sturmgewehr für Tanzee. Ermöglicht es Tanzee bei Aktivierung der Partnerfähigkeit, Gegnern in der Nähe damit einzuheizen."
   },
   "SkillUnlock_MoonQueen": {
     "localized_name": "Selyne-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Selyne zu reiten."
   },
   "SkillUnlock_MopKing": {
     "localized_name": "Sweepa-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Sweepa zu reiten."
   },
   "SkillUnlock_MushroomDragon": {
     "localized_name": "Shroomer-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Shroomer zu reiten."
   },
   "SkillUnlock_MushroomDragon_Dark": {
     "localized_name": "Shroomer-Noct-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Shroomer Noct zu reiten."
   },
   "SkillUnlock_NaughtyCat": {
     "localized_name": "Grintale-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Grintale zu reiten."
   },
   "SkillUnlock_NegativeOctopus": {
     "localized_name": "Killamari-Handschuhe",
-    "description": null
+    "description": "Handschuh zum vorsichtigen Greifen der Tentakel von Killamari. Ermöglicht es dir, wenn Killamari im Team ist, es als Gleiter zu benutzen."
   },
   "SkillUnlock_NegativeOctopus_Neutral": {
     "localized_name": "Killamari-Primo-Handschuhe",
@@ -1637,11 +1649,11 @@
   },
   "SkillUnlock_NightBlueHorse": {
     "localized_name": "Starryon-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Starryon zu reiten."
   },
   "SkillUnlock_Penguin": {
     "localized_name": "Pengullet-Panzerfaust",
-    "description": null
+    "description": "Abschussrohr für Pengullet. Ermöglicht es dir, Pengullet bei Aktivierung der Partnerfähigkeit zu verschießen. Beim Aufschlag wird Pengullet kampfunfähig."
   },
   "SkillUnlock_Penguin_Electric": {
     "localized_name": "Pengullet-Lux-Panzerfaust",
@@ -1657,67 +1669,67 @@
   },
   "SkillUnlock_PurpleSpider": {
     "localized_name": "Tarantriss-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Tarantriss zu reiten."
   },
   "SkillUnlock_RaijinDaughter": {
     "localized_name": "Dazzi-Halsband",
-    "description": null
+    "description": "Halsband für Dazzi. Ermöglicht es Dazzi, wenn es im Team ist, durchgehend draußen zu bleiben und dir Schützenhilfe zu geben."
   },
   "SkillUnlock_RaijinDaughter_Water": {
     "localized_name": "Dazzi-Noct-Halsband",
-    "description": null
+    "description": "Halsband für Dazzi Noct. Ermöglicht es Dazzi Noct, wenn es im Team ist, durchgehend draußen zu bleiben und dir Schützenhilfe zu geben."
   },
   "SkillUnlock_RedArmorBird": {
     "localized_name": "Ragnahawk-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Ragnahawk zu reiten."
   },
   "SkillUnlock_SaintCentaur": {
     "localized_name": "Paladius-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Paladius zu reiten."
   },
   "SkillUnlock_SakuraSaurus": {
     "localized_name": "Broncherry-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Broncherry zu reiten."
   },
   "SkillUnlock_SakuraSaurus_Water": {
     "localized_name": "Broncherry-Aqua-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Broncherry Aqua zu reiten."
   },
   "SkillUnlock_Serpent": {
     "localized_name": "Surfent-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Surfent zu reiten."
   },
   "SkillUnlock_Serpent_Ground": {
     "localized_name": "Surfent-Terra-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Surfent Terra zu reiten."
   },
   "SkillUnlock_SkyDragon": {
     "localized_name": "Quivern-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Quivern zu reiten."
   },
   "SkillUnlock_SkyDragon_Grass": {
     "localized_name": "Quivern-Botan-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Quivern Botan zu reiten."
   },
   "SkillUnlock_SnowTigerBeastman": {
     "localized_name": "Bastigor-Hammer",
-    "description": null
+    "description": "Ermöglicht es dir, auf Bastigor zu reiten."
   },
   "SkillUnlock_Suzaku": {
     "localized_name": "Suzaku-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Suzaku zu reiten."
   },
   "SkillUnlock_Suzaku_Water": {
     "localized_name": "Suzaku-Aqua-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Suzaku Aqua zu reiten."
   },
   "SkillUnlock_ThunderBird": {
     "localized_name": "Beakon-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Beakon zu reiten."
   },
   "SkillUnlock_ThunderDog": {
     "localized_name": "Rayhound-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Rayhound zu reiten."
   },
   "SkillUnlock_TropicalOstrich": {
     "localized_name": "Palumba-Sattel",
@@ -1725,63 +1737,63 @@
   },
   "SkillUnlock_Umihebi": {
     "localized_name": "Jormuntide-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Jormuntide zu reiten."
   },
   "SkillUnlock_Umihebi_Fire": {
     "localized_name": "Jormuntide-Ignis-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Jormuntide Ignis zu reiten."
   },
   "SkillUnlock_VolcanicMonster": {
     "localized_name": "Reptyro-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Reptyro zu reiten."
   },
   "SkillUnlock_VolcanicMonster_Ice": {
     "localized_name": "Reptyro-Cryst-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Reptyro Cryst zu reiten."
   },
   "SkillUnlock_WeaselDragon": {
     "localized_name": "Chillet-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Chillet zu reiten."
   },
   "SkillUnlock_WeaselDragon_Fire": {
     "localized_name": "Chillet-Ignis-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Chillet Ignis zu reiten."
   },
   "SkillUnlock_WhiteAlienDragon": {
     "localized_name": "Xenogard-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Xenogard zu reiten."
   },
   "SkillUnlock_WhiteDeer": {
     "localized_name": "Celesdir-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Celesdir zu reiten."
   },
   "SkillUnlock_WhiteShieldDragon": {
     "localized_name": "Silvegis-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Silvegis zu reiten."
   },
   "SkillUnlock_WindChimes": {
     "localized_name": "Hangyu-Handschuhe",
-    "description": null
+    "description": "Handschuh zum vorsichtigen Greifen der Arme von Hangyu. Ermöglicht es dir, wenn Hangyu im Team ist, es als Gleiter zu benutzen."
   },
   "SkillUnlock_WindChimes_Ice": {
     "localized_name": "Hangyu-Cryst-Handschuhe",
-    "description": null
+    "description": "Handschuh zum vorsichtigen Greifen der Arme von Hangyu Cryst. Ermöglicht es dir, wenn Hangyu Cryst im Team ist, es als Gleiter zu benutzen."
   },
   "SkillUnlock_Yeti": {
     "localized_name": "Wumpo-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Wumpo zu reiten."
   },
   "SkillUnlock_Yeti_Grass": {
     "localized_name": "Wumpo-Botan-Sattel",
-    "description": null
+    "description": "Ermöglicht es dir, auf Wumpo Botan zu reiten."
   },
   "SkinChange": {
     "localized_name": "Pal-Aufhübscher",
-    "description": null
+    "description": "Eine Anlage, in der du Pals ein besonderes Aussehen verpassen kannst. Für Skins, die du außerhalb des Spiels bekommen hast."
   },
   "Snowman": {
     "localized_name": "Schneemann",
-    "description": null
+    "description": "Kann im Lager aufgestellt werden und erhöht das Arbeitstempo beim Kühlen. Mehrere aufzustellen, bringt keinen zusätzlichen Nutzen."
   },
   "Spa": {
     "localized_name": "Heiße Quelle",
@@ -1797,7 +1809,7 @@
   },
   "Spear": {
     "localized_name": "Steinspeer",
-    "description": null
+    "description": "Ein Speer für den Nahkampf. Eine gute Wahl, um Gegner etwas auf Abstand zu halten."
   },
   "Spear_2": {
     "localized_name": "Metallspeer",
@@ -1809,11 +1821,11 @@
   },
   "Spear_ForestBoss": {
     "localized_name": "Lilys Speer",
-    "description": null
+    "description": "Lilys treuer Speer. Richtet all jene, die Pals schlecht behandeln."
   },
   "Special_ElectricHatchingPalEgg": {
     "localized_name": "Elektrischer Brutkasten",
-    "description": null
+    "description": "Ein Gerät zum Ausbrüten von Pal-Eiern. Benötigt Strom, hält aber jedes Ei automatisch bei optimaler Temperatur."
   },
   "Special_HatchingPalEgg": {
     "localized_name": "Brutkasten",
@@ -1865,35 +1877,35 @@
   },
   "SphereFactory_Black_04": {
     "localized_name": "Hightech-Sphärenfabrik",
-    "description": null
+    "description": "Eine Werkstatt zur Fertigung von Pal-Sphären, mit denen sich Pals fangen lassen. Mithilfe modernster Maschinen läuft die Sphärenfertigung jetzt blitzschnell. Für die Arbeit benötigt man Pals, die Handwerk beherrschen."
   },
   "SphereModule_Curve": {
     "localized_name": "Kurvenmodul",
-    "description": null
+    "description": "Damit ausgerüstete Sphären beschreiben beim Flug eine Kurve. Dadurch kannst du Pals überraschen und leichter fangen."
   },
   "SphereModule_Curve2": {
     "localized_name": "Drallmodul",
-    "description": null
+    "description": "Damit ausgerüstete Sphären fliegen zunächst gerade und brechen dann aus. Durch den plötzlichen Richtungswechsel kannst du Pals überraschen und leichter fangen."
   },
   "SphereModule_Heavy": {
     "localized_name": "Gewichtsmodul",
-    "description": null
+    "description": "Damit ausgerüstete Sphären werden schwerer. Dadurch sinkt zwar ihre Reichweite, die Fangkraft wird jedoch erhöht."
   },
   "SphereModule_Homing": {
     "localized_name": "Zielsuchmodul",
-    "description": null
+    "description": "Damit ausgerüstete Sphären verfolgen ihr Ziel und die Fangkraft wird zusätzlich erhöht."
   },
   "SphereModule_Sniper": {
     "localized_name": "Scharfschussmodul",
-    "description": null
+    "description": "Damit ausgerüstete Sphären haben eine höhere Reichweite. Dadurch kannst du genauer zielen und Pals leichter fangen."
   },
   "SphereModule_Sniper2": {
     "localized_name": "Scharfschussmodul Ⅱ",
-    "description": null
+    "description": "Damit ausgerüstete Sphären haben eine deutlich höhere Reichweite. Dadurch kannst du genauer zielen und Pals leichter fangen."
   },
   "StainlessSteel": {
     "localized_name": "Hexolit",
-    "description": null
+    "description": "Eine Legierung aus Chromit, Metallbarren und Hexoquarz. Wird als Material zur Herstellung fortschrittlicher Ausrüstung oder Gebäude verwendet."
   },
   "Stone_Gate": {
     "localized_name": "Steintor",
@@ -1905,15 +1917,15 @@
   },
   "Stump": {
     "localized_name": "Hackklotz und Beil",
-    "description": null
+    "description": "Kann im Lager aufgestellt werden und erhöht das Arbeitstempo beim Holzfällen. Mehrere aufzustellen, bringt keinen zusätzlichen Nutzen."
   },
   "TableDresser01_Stone": {
     "localized_name": "Antike Frisierkommode",
-    "description": null
+    "description": "Eine Frisierkommode zum Hübschmachen. Damit kannst du das Aussehen deines Charakters ändern."
   },
   "ToolBoxV1": {
     "localized_name": "Große Werkzeugkiste",
-    "description": null
+    "description": "Kann im Lager aufgestellt werden und erhöht das Arbeitstempo beim Handwerk. Mehrere aufzustellen, bringt keinen zusätzlichen Nutzen."
   },
   "Torch": {
     "localized_name": "Standfackel",
@@ -1921,7 +1933,7 @@
   },
   "TransmissionTower": {
     "localized_name": "Strommast",
-    "description": null
+    "description": "Kann im Lager aufgestellt werden und erhöht das Arbeitstempo bei der Stromerzeugung. Mehrere aufzustellen, bringt keinen zusätzlichen Nutzen."
   },
   "Trap_LegHold": {
     "localized_name": "Kleines Fangeisen",
@@ -1949,19 +1961,19 @@
   },
   "Unlock_Picking_Tier1": {
     "localized_name": "Simpler Schlossknacker",
-    "description": null
+    "description": "Ermöglicht es, Schatztruhen, die einen Stahlschlüssel erfordern, einfach aufzubrechen. Kann beliebig oft benutzt werden."
   },
   "Unlock_Picking_Tier2": {
     "localized_name": "Hochwertiger Schlossknacker",
-    "description": null
+    "description": "Ermöglicht es, Schatztruhen, die einen Silberschlüssel erfordern, einfach aufzubrechen. Kann beliebig oft benutzt werden."
   },
   "Unlock_Picking_Tier3": {
     "localized_name": "Profi-Schlossknacker",
-    "description": null
+    "description": "Ermöglicht es, Schatztruhen, die einen Goldschlüssel erfordern, einfach aufzubrechen. Kann beliebig oft benutzt werden."
   },
   "WallSignboard": {
     "localized_name": "WallSignBoard",
-    "description": null
+    "description": "Ein Schild zum Draufschreiben. Kann an Wänden aufgehängt werden."
   },
   "WallTorch": {
     "localized_name": "Wandfackel",
@@ -1969,7 +1981,7 @@
   },
   "WeaponFactory_Dirty_04": {
     "localized_name": "Hightech-Waffenfabrik",
-    "description": null
+    "description": "Eine Werkstatt zur Fertigung von Waffen und Munition. Mithilfe modernster Maschinen läuft die Waffenfertigung jetzt blitzschnell. Für die Arbeit benötigt man Pals, die Handwerk beherrschen."
   },
   "Wood_Gate": {
     "localized_name": "Holztor",
@@ -1981,11 +1993,11 @@
   },
   "Wooden_ladder": {
     "localized_name": "Leiter",
-    "description": null
+    "description": "Wenn du mal etwas höher hinaus willst."
   },
   "WorkSpeedIncrease1": {
     "localized_name": "Betawellengenerator",
-    "description": null
+    "description": "Diese Maschine generiert Betawellen, die auf Pals eine anregende Wirkung haben. Das Arbeitstempo von Pals im Lager wird dadurch erhöht. Mehrere aufzustellen, bringt keinen zusätzlichen Nutzen."
   },
   "Workbench": {
     "localized_name": "Primitive Werkbank",
@@ -1993,6 +2005,6 @@
   },
   "YakushimaBlade": {
     "localized_name": "Meowmere",
-    "description": null
+    "description": "[Terraria-Collab] Der Legende nach wurde dieses Schwert einst von einem Croajiro aus einem fernen Land hierhergebracht Der Grund dafür ist aber nicht überliefert."
   }
 }

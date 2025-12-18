@@ -9,7 +9,7 @@
     "require_technology": "None",
     "require_research_id": "None",
     "is_boss_technology": true,
-    "level_cap": 34,
+    "level_cap": 35,
     "tier": 0,
     "cost": 2,
     "icon": "t_itemicon_accessory_airdash"
@@ -54,7 +54,7 @@
     "require_technology": "None",
     "require_research_id": "None",
     "is_boss_technology": true,
-    "level_cap": 39,
+    "level_cap": 40,
     "tier": 0,
     "cost": 2,
     "icon": "t_itemicon_accessory_jumpcount_increase"
@@ -114,7 +114,7 @@
     "require_technology": "None",
     "require_research_id": "None",
     "is_boss_technology": true,
-    "level_cap": 33,
+    "level_cap": 34,
     "tier": 0,
     "cost": 4,
     "icon": "t_itemicon_accessory_talentchecker"
@@ -144,7 +144,7 @@
     "require_technology": "AdditionalInventory_001",
     "require_research_id": "None",
     "is_boss_technology": true,
-    "level_cap": 42,
+    "level_cap": 43,
     "tier": 0,
     "cost": 2,
     "icon": "t_itemicon_essential_additionalinventory_002"
@@ -159,7 +159,7 @@
     "require_technology": "AdditionalInventory_002",
     "require_research_id": "None",
     "is_boss_technology": true,
-    "level_cap": 52,
+    "level_cap": 53,
     "tier": 0,
     "cost": 3,
     "icon": "t_itemicon_essential_additionalinventory_003"
@@ -189,7 +189,7 @@
     "require_technology": "None",
     "require_research_id": "None",
     "is_boss_technology": true,
-    "level_cap": 32,
+    "level_cap": 33,
     "tier": 0,
     "cost": 3,
     "icon": "t_icon_buildobject_altar"
@@ -309,7 +309,7 @@
     "require_technology": "AutoMealPouch_Tier3",
     "require_research_id": "None",
     "is_boss_technology": true,
-    "level_cap": 35,
+    "level_cap": 36,
     "tier": 0,
     "cost": 4,
     "icon": "t_itemicon_essential_automealpouch_tier4"
@@ -324,7 +324,7 @@
     "require_technology": "AutoMealPouch_Tier4",
     "require_research_id": "None",
     "is_boss_technology": true,
-    "level_cap": 46,
+    "level_cap": 47,
     "tier": 0,
     "cost": 5,
     "icon": "t_itemicon_essential_automealpouch_tier5"
@@ -954,9 +954,9 @@
     "require_technology": "None",
     "require_research_id": "None",
     "is_boss_technology": false,
-    "level_cap": 44,
+    "level_cap": 29,
     "tier": 0,
-    "cost": 3,
+    "cost": 2,
     "icon": "t_itemicon_weapon_sword"
   },
   "Battle_RangeWeapon_AssaultRifle": {
@@ -1315,7 +1315,7 @@
     "require_technology": "None",
     "require_research_id": "None",
     "is_boss_technology": true,
-    "level_cap": 37,
+    "level_cap": 38,
     "tier": 0,
     "cost": 5,
     "icon": "t_itemicon_weapon_spherelauncher"
@@ -1652,7 +1652,7 @@
     "require_technology": "None",
     "require_research_id": "None",
     "is_boss_technology": true,
-    "level_cap": 44,
+    "level_cap": 45,
     "tier": 0,
     "cost": 1,
     "icon": "t_itemicon_ammo_inkbullet"
@@ -1802,7 +1802,7 @@
     "require_technology": "None",
     "require_research_id": "None",
     "is_boss_technology": true,
-    "level_cap": 49,
+    "level_cap": 50,
     "tier": 0,
     "cost": 4,
     "icon": "t_icon_buildobject_electricgenerator_large"
@@ -2917,7 +2917,15 @@
       "Glass_SlantedRoof",
       "Glass_DoorWall",
       "Glass_pillars",
-      "Glass_Fence"
+      "Glass_Fence",
+      "Glass_TriangleFoundation",
+      "Glass_DiagonalWall",
+      "Glass_TriangleRoof",
+      "Glass_TriangleStairsCorner",
+      "Glass_TriangleWallReverse",
+      "Glass_WallGate",
+      "Glass_SlopedRoofCorner",
+      "Glass_PyramidRoof"
     ],
     "unlock_item_recipes": [],
     "icon_name": "Glass_foundation",
@@ -3000,7 +3008,7 @@
     "require_technology": "GrapplingGun3",
     "require_research_id": "None",
     "is_boss_technology": true,
-    "level_cap": 48,
+    "level_cap": 49,
     "tier": 0,
     "cost": 4,
     "icon": "t_itemicon_weapon_grapplinggun"
@@ -3045,7 +3053,7 @@
     "require_technology": "None",
     "require_research_id": "None",
     "is_boss_technology": true,
-    "level_cap": 40,
+    "level_cap": 41,
     "tier": 0,
     "cost": 4,
     "icon": "t_icon_buildobject_guildchest"
@@ -3365,7 +3373,16 @@
       "JapaneseStyle_stair",
       "JapaneseStyle_Pillar",
       "JapaneseStyle_DoorWall_03",
-      "JapaneseStyle_Fence"
+      "JapaneseStyle_Fence",
+      "JapaneseStyle_TriangleFoundation",
+      "JapaneseStyle_DiagonalWall",
+      "JapaneseStyle_TriangleRoof_01",
+      "JapaneseStyle_TriangleRoof_02",
+      "JapaneseStyle_TriangleStairsCorner_01",
+      "JapaneseStyle_TriangleWallReverse",
+      "JapaneseStyle_WallGate",
+      "JapaneseStyle_SlopedRoofCorner",
+      "JapaneseStyle_PyramidRoof"
     ],
     "unlock_item_recipes": [],
     "icon_name": "JapaneseStyle_foundation",
@@ -3388,7 +3405,7 @@
     "require_technology": "None",
     "require_research_id": "None",
     "is_boss_technology": false,
-    "level_cap": 29,
+    "level_cap": 44,
     "tier": 0,
     "cost": 2,
     "icon": "t_itemicon_weapon_katana"
@@ -3750,10 +3767,18 @@
       "Metal_SlantedRoof",
       "Metal_DoorWall",
       "Metal_pillars",
-      "Iron_Fence"
+      "Iron_Fence",
+      "Iron_TriangleFoundation",
+      "Iron_DiagonalWall",
+      "Iron_TriangleRoof",
+      "Iron_TriangleStairsCorner",
+      "Iron_TriangleWallReverse",
+      "Iron_WallGate",
+      "Iron_SlopedRoofCorner",
+      "Iron_PyramidRoof"
     ],
     "unlock_item_recipes": [],
-    "icon_name": "Metal_Foundation",
+    "icon_name": "Metal_foundation",
     "require_defeat_tower_boss": "EPalBossType::None",
     "require_technology": "None",
     "require_research_id": "None",
@@ -3833,7 +3858,7 @@
     "require_technology": "None",
     "require_research_id": "None",
     "is_boss_technology": true,
-    "level_cap": 47,
+    "level_cap": 48,
     "tier": 0,
     "cost": 5,
     "icon": "t_icon_buildobject_multihatchingpalegg"
@@ -3868,6 +3893,38 @@
     "tier": 0,
     "cost": 3,
     "icon": "t_icon_buildobject_ninja_flag"
+  },
+  "OctaviaSet01": {
+    "unlock_build_objects": [],
+    "unlock_item_recipes": [
+      "Octavia001_Armor",
+      "OctaviaRevolver"
+    ],
+    "icon_name": "Octavia001_Armor",
+    "require_defeat_tower_boss": "EPalBossType::None",
+    "require_technology": "None",
+    "require_research_id": "None",
+    "is_boss_technology": true,
+    "level_cap": 32,
+    "tier": 0,
+    "cost": 3,
+    "icon": "t_itemicon_armor_octavia001_armor"
+  },
+  "OctaviaSet02": {
+    "unlock_build_objects": [],
+    "unlock_item_recipes": [
+      "Octavia002_Armor",
+      "OctaviaShotgun"
+    ],
+    "icon_name": "Octavia002_Armor",
+    "require_defeat_tower_boss": "EPalBossType::None",
+    "require_technology": "None",
+    "require_research_id": "None",
+    "is_boss_technology": true,
+    "level_cap": 56,
+    "tier": 0,
+    "cost": 5,
+    "icon": "t_itemicon_armor_octavia002_armor"
   },
   "OilPump": {
     "unlock_build_objects": [
@@ -4210,7 +4267,7 @@
     "require_technology": "None",
     "require_research_id": "None",
     "is_boss_technology": true,
-    "level_cap": 41,
+    "level_cap": 42,
     "tier": 0,
     "cost": 5,
     "icon": "t_icon_buildobject_coalpit"
@@ -4285,7 +4342,7 @@
     "require_technology": "Product_CopperPit",
     "require_research_id": "None",
     "is_boss_technology": true,
-    "level_cap": 38,
+    "level_cap": 39,
     "tier": 0,
     "cost": 3,
     "icon": "t_icon_buildobject_copperpit_2"
@@ -4570,7 +4627,7 @@
     "require_technology": "None",
     "require_research_id": "None",
     "is_boss_technology": true,
-    "level_cap": 50,
+    "level_cap": 51,
     "tier": 0,
     "cost": 5,
     "icon": "t_icon_buildobject_quartzpit"
@@ -4615,7 +4672,7 @@
     "require_technology": "None",
     "require_research_id": "None",
     "is_boss_technology": true,
-    "level_cap": 45,
+    "level_cap": 46,
     "tier": 0,
     "cost": 5,
     "icon": "t_icon_buildobject_sulfurpit"
@@ -4738,7 +4795,7 @@
     "level_cap": 3,
     "tier": 0,
     "cost": 1,
-    "icon": "Tex_tools_10"
+    "icon": "tex_tools_10"
   },
   "RifleBullet": {
     "unlock_build_objects": [],
@@ -4886,7 +4943,16 @@
       "SF_SlantedRoof",
       "SF_DoorWall",
       "SF_pillars",
-      "SF_Fence"
+      "SF_Fence",
+      "SF_TriangleFoundation",
+      "SF_TriangleFoundation",
+      "SF_DiagonalWall",
+      "SF_TriangleRoof",
+      "SF_TriangleStairsCorner",
+      "SF_TriangleWallReverse",
+      "SF_WallGate",
+      "SF_SlopedRoofCorner",
+      "SF_PyramidRoof"
     ],
     "unlock_item_recipes": [],
     "icon_name": "SF_foundation",
@@ -5040,7 +5106,7 @@
     "unlock_item_recipes": [
       "ShotgunBullet"
     ],
-    "icon_name": "ShotgunBullet",
+    "icon_name": "ShotGunBullet",
     "require_defeat_tower_boss": "EPalBossType::None",
     "require_technology": "None",
     "require_research_id": "None",
@@ -6130,6 +6196,21 @@
     "cost": 3,
     "icon": "t_leafmomonga_icon_normal"
   },
+  "SkillUnlock_LegendDeer": {
+    "unlock_build_objects": [],
+    "unlock_item_recipes": [
+      "SkillUnlock_LegendDeer"
+    ],
+    "icon_name": "LegendDeer",
+    "require_defeat_tower_boss": "EPalBossType::None",
+    "require_technology": "None",
+    "require_research_id": "None",
+    "is_boss_technology": false,
+    "level_cap": 65,
+    "tier": 0,
+    "cost": 5,
+    "icon": "t_legenddeer_icon_normal"
+  },
   "SkillUnlock_Manticore": {
     "unlock_build_objects": [],
     "unlock_item_recipes": [
@@ -6935,7 +7016,7 @@
     "require_technology": "None",
     "require_research_id": "None",
     "is_boss_technology": true,
-    "level_cap": 43,
+    "level_cap": 44,
     "tier": 0,
     "cost": 3,
     "icon": "t_itemicon_weapon_spear_forestboss"
@@ -6950,7 +7031,7 @@
     "require_technology": "Special_HatchingPalEgg",
     "require_research_id": "None",
     "is_boss_technology": true,
-    "level_cap": 36,
+    "level_cap": 37,
     "tier": 0,
     "cost": 5,
     "icon": "t_icon_buildobject_electrichatchingpalegg"
@@ -7281,10 +7362,18 @@
       "Stone_SlantedRoof",
       "Stone_DoorWall",
       "Stone_pillar",
-      "Stone_Fence"
+      "Stone_Fence",
+      "Stone_TriangleFoundation",
+      "Stone_DiagonalWall",
+      "Stone_TriangleRoof",
+      "Stone_TriangleStairsCorner",
+      "Stone_TriangleWallReverse",
+      "Stone_WallGate",
+      "Stone_SlopedRoofCorner",
+      "Stone_PyramidRoof"
     ],
     "unlock_item_recipes": [],
-    "icon_name": "Stone_Foundation",
+    "icon_name": "Stone_foundation",
     "require_defeat_tower_boss": "EPalBossType::None",
     "require_technology": "None",
     "require_research_id": "None",
@@ -7499,7 +7588,7 @@
     "require_technology": "Unlock_Picking_Tier2",
     "require_research_id": "None",
     "is_boss_technology": true,
-    "level_cap": 51,
+    "level_cap": 52,
     "tier": 0,
     "cost": 3,
     "icon": "t_itemicon_essential_unlock_picking_tier3"
@@ -7575,7 +7664,15 @@
       "Wood_SlantedRoof",
       "Wooden_DoorWall",
       "Wooden_pillar",
-      "Wood_Fence"
+      "Wood_Fence",
+      "Wooden_TriangleFoundation",
+      "Wooden_DiagonalWall",
+      "Wooden_TriangleRoof",
+      "Wooden_TriangleStairsCorner",
+      "Wood_TriangleWallReverse",
+      "Wooden_WallGate",
+      "Wooden_SlopedRoofCorner",
+      "Wooden_PyramidRoof"
     ],
     "unlock_item_recipes": [],
     "icon_name": "Wooden_foundation",
