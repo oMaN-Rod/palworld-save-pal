@@ -403,6 +403,10 @@
     "localized_name": "Pattumiera",
     "description": "Pattumiera per l'arredo."
   },
+  "Glass_DiagonalWall": {
+    "localized_name": "Muro diagonale in vetro",
+    "description": "Un muro diagonale edificato su fondamenta triangolari per difendersi dagli invasori. È in vetro incredibilmente resistente."
+  },
   "Glass_DoorWall": {
     "localized_name": "Muro con porta in vetro",
     "description": "Una porta d'ingresso edificata su delle fondamenta. È in vetro incredibilmente resistente."
@@ -411,13 +415,41 @@
     "localized_name": "Recinto in vetro",
     "description": "Un recinto da mettere su fondamenta e tetti per evitare le cadute. È in vetro incredibilmente resistente."
   },
+  "Glass_PyramidRoof": {
+    "localized_name": "Tetto piramidale in vetro",
+    "description": "Un tetto piramidale edificato su dei muri per proteggersi dagli elementi. È in vetro incredibilmente resistente."
+  },
   "Glass_SlantedRoof": {
     "localized_name": "Tetto spiovente in vetro",
     "description": "Un tetto spiovente edificato su dei muri per proteggersi dagli elementi. È in vetro incredibilmente resistente."
   },
+  "Glass_SlopedRoofCorner": {
+    "localized_name": "Tetto triangolare spiovente in vetro",
+    "description": "Un tetto spiovente angolare edificato su dei muri per proteggersi dagli elementi. È in vetro incredibilmente resistente."
+  },
+  "Glass_TriangleFoundation": {
+    "localized_name": "Fondamenta triangolari in vetro",
+    "description": "Fondamenta triangolari su cui edificare muri e strutture. Sono in vetro incredibilmente resistente."
+  },
+  "Glass_TriangleRoof": {
+    "localized_name": "Tetto triangolare in vetro",
+    "description": "Un tetto triangolare edificato su dei muri per proteggersi dagli elementi. È in vetro incredibilmente resistente."
+  },
+  "Glass_TriangleStairsCorner": {
+    "localized_name": "Tetto angolare in vetro",
+    "description": "Un tetto angolare edificato su dei muri per proteggersi dagli elementi. È in vetro incredibilmente resistente."
+  },
   "Glass_TriangleWall": {
     "localized_name": "Muro triangolare in vetro",
     "description": "Un muro triangolare edificato su delle fondamenta. È in vetro incredibilmente resistente."
+  },
+  "Glass_TriangleWallReverse": {
+    "localized_name": "Muro triangolare in vetro (invertito)",
+    "description": "Un muro triangolare (invertito) edificato su fondamenta. È in vetro incredibilmente resistente."
+  },
+  "Glass_WallGate": {
+    "localized_name": "Passaggio per Pal in vetro",
+    "description": "Un passaggio edificato su fondamenta, che consente ai Pal di entrare e uscire. È in vetro incredibilmente resistente."
   },
   "Glass_WindowWall": {
     "localized_name": "Muro con finestra in vetro",
@@ -491,9 +523,41 @@
     "localized_name": "Macinatore criogenico",
     "description": "Una struttura per ridurre in polvere Minerale metallico e ottenere così altri tipi di risorse. Richiede Pal competenti nell'attività |Refrigerazione| e il collegamento all'alimentazione, ma è davvero efficiente."
   },
+  "Iron_DiagonalWall": {
+    "localized_name": "Muro diagonale in metallo",
+    "description": "Un muro diagonale edificato su delle fondamenta triangolari per difendersi dagli invasori. È in metallo, quindi è molto resistente."
+  },
   "Iron_Fence": {
     "localized_name": "Recinto in metallo",
     "description": "Un recinto da mettere su fondamenta e tetti per evitare le cadute. È in metallo, quindi è molto resistente."
+  },
+  "Iron_PyramidRoof": {
+    "localized_name": "Tetto piramidale in metallo",
+    "description": "Un tetto piramidale edificato su dei muri per proteggersi dagli elementi. È in metallo, quindi è molto resistente."
+  },
+  "Iron_SlopedRoofCorner": {
+    "localized_name": "Tetto triangolare spiovente in metallo",
+    "description": "Un tetto spiovente angolare edificato su dei muri per proteggersi dagli elementi. È in metallo, quindi è molto resistente."
+  },
+  "Iron_TriangleFoundation": {
+    "localized_name": "Fondamenta triangolari in metallo",
+    "description": "Fondamenta triangolari su cui edificare muri e strutture. Sono in metallo, quindi sono molto resistenti."
+  },
+  "Iron_TriangleRoof": {
+    "localized_name": "Tetto triangolare in metallo",
+    "description": "Un tetto triangolare edificato su dei muri per proteggersi dagli elementi. È in metallo, quindi è molto resistente."
+  },
+  "Iron_TriangleStairsCorner": {
+    "localized_name": "Tetto angolare in metallo",
+    "description": "Un tetto angolare edificato su dei muri per proteggersi dagli elementi. È in metallo, quindi è molto resistente."
+  },
+  "Iron_TriangleWallReverse": {
+    "localized_name": "Muro triangolare in metallo (invertito)",
+    "description": "Un muro triangolare (invertito) edificato su fondamenta. È in metallo, quindi è molto resistente."
+  },
+  "Iron_WallGate": {
+    "localized_name": "Passaggio per Pal in metallo",
+    "description": "Un passaggio edificato su fondamenta, che consente ai Pal di entrare e uscire. È in metallo, quindi è molto resistente."
   },
   "Irori": {
     "localized_name": "Focolare giapponese",
@@ -531,6 +595,10 @@
     "localized_name": "Edera a muro lunga",
     "description": "Edera lunga per l'arredo. Si può fissare a un muro."
   },
+  "JapaneseStyle_DiagonalWall": {
+    "localized_name": "Muro diagonale in stile giapponese",
+    "description": "Un muro diagonale edificato su fondamenta triangolari per difendersi dagli invasori. È in un raffinato stile giapponese."
+  },
   "JapaneseStyle_DoorWall_01": {
     "localized_name": "Muro con porta in stile giapponese A",
     "description": "Una porta d'ingresso edificata su delle fondamenta. È in un raffinato stile giapponese."
@@ -551,13 +619,45 @@
     "localized_name": "Pilastro in stile giapponese",
     "description": "Un pilastro per sostenere un edificio. È in un raffinato stile giapponese."
   },
+  "JapaneseStyle_PyramidRoof": {
+    "localized_name": "Tetto piramidale in stile giapponese",
+    "description": "Un tetto piramidale edificato su dei muri per proteggersi dagli elementi. È in un raffinato stile giapponese."
+  },
   "JapaneseStyle_SlantedRoof": {
     "localized_name": "Tetto spiovente in stile giapponese",
     "description": "Un tetto spiovente edificato su dei muri per proteggersi dagli elementi. È in un raffinato stile giapponese."
   },
+  "JapaneseStyle_SlopedRoofCorner": {
+    "localized_name": "Tetto triangolare spiovente in stile giapponese",
+    "description": "Un tetto spiovente angolare edificato su dei muri per proteggersi dagli elementi. È in un raffinato stile giapponese."
+  },
+  "JapaneseStyle_TriangleFoundation": {
+    "localized_name": "Fondamenta triangolari in stile giapponese",
+    "description": "Fondamenta triangolari su cui edificare muri e strutture. Sono in un raffinato stile giapponese."
+  },
+  "JapaneseStyle_TriangleRoof_01": {
+    "localized_name": "Tetto triangolare in stile giapponese A",
+    "description": "Un tetto triangolare edificato su dei muri per proteggersi dagli elementi. Ha un esterno in tatami. È in un raffinato stile giapponese."
+  },
+  "JapaneseStyle_TriangleRoof_02": {
+    "localized_name": "Tetto triangolare in stile giapponese B",
+    "description": "Un tetto triangolare edificato su dei muri per proteggersi dagli elementi. Ha un esterno in tegole. È in un raffinato stile giapponese."
+  },
+  "JapaneseStyle_TriangleStairsCorner_01": {
+    "localized_name": "Tetto angolare in stile giapponese",
+    "description": "Un tetto angolare edificato su dei muri per proteggersi dagli elementi. È in un raffinato stile giapponese."
+  },
   "JapaneseStyle_TriangleWall": {
     "localized_name": "Muro triangolare in stile giapponese",
     "description": "Un muro triangolare edificato su delle fondamenta. È in un raffinato stile giapponese."
+  },
+  "JapaneseStyle_TriangleWallReverse": {
+    "localized_name": "Muro triangolare in stile giapponese (invertito)",
+    "description": "Un muro triangolare (invertito) edificato su fondamenta. È in un raffinato stile giapponese."
+  },
+  "JapaneseStyle_WallGate": {
+    "localized_name": "Passaggio per Pal in stile giapponese",
+    "description": "Un passaggio edificato su fondamenta, che consente ai Pal di entrare e uscire. È in un raffinato stile giapponese."
   },
   "JapaneseStyle_WindowWall": {
     "localized_name": "Muro con finestra in stile giapponese",
@@ -732,7 +832,7 @@
     "description": "Un muro edificato su delle fondamenta per difendersi dagli invasori. È in metallo, quindi è molto resistente."
   },
   "MiningTool": {
-    "localized_name": "Casco e piccone",
+    "localized_name": "Vagone minerario",
     "description": "Accelera la velocità di ogni attività relativa all'estrazione nella base. Anche mettendone due o più, il boost rimane uguale."
   },
   "Mirror01_Stone": {
@@ -776,7 +876,7 @@
     "description": "Accelera la velocità di ogni attività relativa all'accensione del fuoco nella base. Anche mettendone due o più, il boost rimane uguale."
   },
   "OperatingTable": {
-    "localized_name": "Tavolo operatorio Pal",
+    "localized_name": "Tavolo operatorio per Pal",
     "description": "Una struttura dove operare i Pal per cambiarne il sesso o l'abilità passiva."
   },
   "PalBooth": {
@@ -887,6 +987,10 @@
     "localized_name": "Scrivania da laboratorio",
     "description": "Scrivania da laboratorio per l'arredo."
   },
+  "SF_DiagonalWall": {
+    "localized_name": "Muro diagonale lucido",
+    "description": "Un muro diagonale edificato su fondamenta triangolari per difendersi dagli invasori. Design pulito, futuristico."
+  },
   "SF_DoorWall": {
     "localized_name": "Muro con porta lucido",
     "description": "Una porta d'ingresso edificata su delle fondamenta. Lucida, dallo stile futuristico."
@@ -895,13 +999,41 @@
     "localized_name": "Recinto lucido",
     "description": "Un recinto da mettere su fondamenta e tetti per evitare le cadute. Lucido, dallo stile futuristico."
   },
+  "SF_PyramidRoof": {
+    "localized_name": "Tetto piramidale lucido",
+    "description": "Un tetto piramidale edificato su dei muri per proteggersi dagli elementi. Design pulito, futuristico."
+  },
   "SF_SlantedRoof": {
     "localized_name": "Tetto spiovente lucido",
     "description": "Un tetto spiovente edificato su dei muri per proteggersi dagli elementi. Lucido, dallo stile futuristico."
   },
+  "SF_SlopedRoofCorner": {
+    "localized_name": "Tetto triangolare spiovente lucido",
+    "description": "Un tetto spiovente angolare edificato su dei muri per proteggersi dagli elementi. Design pulito, futuristico."
+  },
+  "SF_TriangleFoundation": {
+    "localized_name": "Fondamenta triangolari lucide",
+    "description": "Fondamenta triangolari su cui edificare muri e strutture. Design pulito, futuristico."
+  },
+  "SF_TriangleRoof": {
+    "localized_name": "Tetto triangolare lucido",
+    "description": "Un tetto triangolare edificato su dei muri per proteggersi dagli elementi. Design pulito, futuristico."
+  },
+  "SF_TriangleStairsCorner": {
+    "localized_name": "Tetto angolare lucido",
+    "description": "Un tetto angolare edificato su dei muri per proteggersi dagli elementi. Design pulito, futuristico."
+  },
   "SF_TriangleWall": {
     "localized_name": "Muro triangolare lucido",
     "description": "Un muro triangolare edificato su delle fondamenta. Lucido, dallo stile futuristico."
+  },
+  "SF_TriangleWallReverse": {
+    "localized_name": "Muro triangolare lucido (invertito)",
+    "description": "Un muro triangolare (invertito) edificato su fondamenta. Design pulito, futuristico."
+  },
+  "SF_WallGate": {
+    "localized_name": "Passaggio per Pal lucido",
+    "description": "Un passaggio edificato su fondamenta, che consente ai Pal di entrare e uscire. Design pulito, futuristico."
   },
   "SF_WindowWall": {
     "localized_name": "Muro con finestra lucido",
@@ -1095,6 +1227,10 @@
     "localized_name": "Cava di pietra",
     "description": "Una struttura dove produrre Pietra. Estrarre Pietra è un lavoro estremamente faticoso. Sono necessari Pal capaci di svolgere attività minerarie."
   },
+  "Stone_DiagonalWall": {
+    "localized_name": "Muro diagonale in pietra",
+    "description": "Un muro diagonale edificato su fondamenta triangolari per difendersi dagli invasori. È in pietra, quindi è abbastanza resistente."
+  },
   "Stone_DoorWall": {
     "localized_name": "Porta di pietra",
     "description": "Una porta d'ingresso edificata su delle fondamenta. È in pietra, quindi è abbastanza resistente."
@@ -1107,13 +1243,41 @@
     "localized_name": "Cancello in pietra",
     "description": "Un cancello adatto anche ai Pal più grandi. È in pietra, quindi è abbastanza resistente."
   },
+  "Stone_PyramidRoof": {
+    "localized_name": "Tetto piramidale in pietra",
+    "description": "Un tetto piramidale edificato su dei muri per proteggersi dagli elementi. È in pietra, quindi è abbastanza resistente."
+  },
   "Stone_SlantedRoof": {
     "localized_name": "Tetto spiovente in pietra",
     "description": "Un tetto spiovente edificato su dei muri per proteggersi dagli elementi. È in pietra, quindi è abbastanza resistente."
   },
+  "Stone_SlopedRoofCorner": {
+    "localized_name": "Tetto triangolare spiovente in pietra",
+    "description": "Un tetto spiovente angolare edificato su dei muri per proteggersi dagli elementi. È in pietra, quindi è abbastanza resistente."
+  },
+  "Stone_TriangleFoundation": {
+    "localized_name": "Fondamenta triangolari in pietra",
+    "description": "Fondamenta triangolari su cui edificare muri e strutture. Sono in pietra, quindi sono abbastanza resistenti."
+  },
+  "Stone_TriangleRoof": {
+    "localized_name": "Tetto triangolare in pietra",
+    "description": "Un tetto triangolare edificato su dei muri per proteggersi dagli elementi. È in pietra, quindi è abbastanza resistente."
+  },
+  "Stone_TriangleStairsCorner": {
+    "localized_name": "Tetto angolare in pietra",
+    "description": "Un tetto angolare edificato su dei muri per proteggersi dagli elementi. È in pietra, quindi è abbastanza resistente."
+  },
   "Stone_TriangleWall": {
     "localized_name": "Muro triangolare in pietra",
     "description": "Un muro triangolare edificato su delle fondamenta. È in pietra, quindi è abbastanza resistente."
+  },
+  "Stone_TriangleWallReverse": {
+    "localized_name": "Muro triangolare in pietra (invertito)",
+    "description": "Un muro triangolare (invertito) edificato su fondamenta. È in pietra, quindi è abbastanza resistente."
+  },
+  "Stone_WallGate": {
+    "localized_name": "Passaggio per Pal in pietra",
+    "description": "Un passaggio edificato su fondamenta, che consente ai Pal di entrare e uscire. È in pietra, quindi è abbastanza resistente."
   },
   "Stone_WindowWall": {
     "localized_name": "Muro con finestra in pietra",
@@ -1367,6 +1531,10 @@
     "localized_name": "Muro triangolare in legno",
     "description": "Un muro triangolare edificato su delle fondamenta. È in legno, quindi è piuttosto fragile."
   },
+  "Wood_TriangleWallReverse": {
+    "localized_name": "Muro triangolare in legno (invertito)",
+    "description": "Un muro triangolare (invertito) edificato su fondamenta. È in legno, quindi è piuttosto fragile."
+  },
   "Wood_WindowWall": {
     "localized_name": "Muro con finestra in legno",
     "description": "Un muro con finestre, edificato su delle fondamenta per difendersi dagli invasori. È in legno, quindi è piuttosto fragile."
@@ -1375,9 +1543,37 @@
     "localized_name": "Transenna in legno",
     "description": "Transenna in legno per l'arredo."
   },
+  "Wooden_DiagonalWall": {
+    "localized_name": "Muro diagonale in legno",
+    "description": "Un muro diagonale edificato su fondamenta triangolari per difendersi dagli invasori. È in legno, quindi è piuttosto fragile."
+  },
   "Wooden_DoorWall": {
     "localized_name": "Porta di legno",
     "description": "Una porta d'ingresso edificata su delle fondamenta. È in legno, quindi è piuttosto fragile."
+  },
+  "Wooden_PyramidRoof": {
+    "localized_name": "Tetto piramidale in legno",
+    "description": "Un tetto piramidale edificato su dei muri per proteggersi dagli elementi. È in legno, quindi è piuttosto fragile."
+  },
+  "Wooden_SlopedRoofCorner": {
+    "localized_name": "Tetto triangolare spiovente in legno",
+    "description": "Un tetto spiovente angolare edificato su dei muri per proteggersi dagli elementi. È in legno, quindi è piuttosto fragile."
+  },
+  "Wooden_TriangleFoundation": {
+    "localized_name": "Fondamenta triangolari in legno",
+    "description": "Fondamenta triangolari su cui edificare muri e strutture. Sono in legno, quindi sono piuttosto fragili."
+  },
+  "Wooden_TriangleRoof": {
+    "localized_name": "Tetto triangolare in legno",
+    "description": "Un tetto triangolare edificato su dei muri per proteggersi dagli elementi. È in legno, quindi è piuttosto fragile."
+  },
+  "Wooden_TriangleStairsCorner": {
+    "localized_name": "Tetto angolare in legno",
+    "description": "Un tetto angolare edificato su dei muri per proteggersi dagli elementi. È in legno, quindi è piuttosto fragile."
+  },
+  "Wooden_WallGate": {
+    "localized_name": "Passaggio per Pal in legno",
+    "description": "Un passaggio edificato su fondamenta, che consente ai Pal di entrare e uscire. È in legno, quindi è piuttosto fragile."
   },
   "Wooden_foundation": {
     "localized_name": "Fondamenta in legno",
@@ -1410,6 +1606,10 @@
   "WorkSpeedIncrease1": {
     "localized_name": "Generatore di onde β",
     "description": "Un generatore di onde β, capaci di stimolare l'attività dei Pal. Accelera la velocità delle attività dei Pal della base. Equipaggiarne più di due non incrementa l'effetto."
+  },
+  "YakushimaBoss002_Relic": {
+    "localized_name": "Statua del Signore della Luna",
+    "description": "Collaborazione con Terraria Statua di Signore della Luna in oro splendente. Una testimonianza della forza di chi ha superato una battaglia inconcepibile."
   },
   "Zabuton": {
     "localized_name": "Zabuton",

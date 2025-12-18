@@ -403,6 +403,10 @@
     "localized_name": "Bolsa de basura",
     "description": "Bolsa de basura decorativa."
   },
+  "Glass_DiagonalWall": {
+    "localized_name": "Muro diagonal de cristal",
+    "description": "Muro diagonal que se construye sobre una base triangular para defenderse de los intrusos. Está hecho de cristal duro y es muy resistente."
+  },
   "Glass_DoorWall": {
     "localized_name": "Muro con puerta de cristal",
     "description": "Puerta que se construye sobre una base y sirve de entrada. Está hecha de cristal duro y es muy resistente."
@@ -411,13 +415,41 @@
     "localized_name": "Valla de cristal",
     "description": "Valla que se construye sobre una base o tejado para evitar que se te caigan cosas encima. Está hecha de cristal duro y es muy resistente."
   },
+  "Glass_PyramidRoof": {
+    "localized_name": "Tejado piramidal de cristal",
+    "description": "Tejado cónico que se construye sobre un muro para guarecerte de la lluvia y el viento. Está hecho de cristal duro y es muy resistente."
+  },
   "Glass_SlantedRoof": {
     "localized_name": "Tejado inclinado de cristal",
     "description": "Tejado inclinado que se construye sobre un muro para guarecerte de la lluvia y el viento. Está hecho de cristal duro y es muy resistente."
   },
+  "Glass_SlopedRoofCorner": {
+    "localized_name": "Tejado triangular e inclinado de cristal",
+    "description": "Tejado inclinado que se construye sobre un muro para guarecerte de la lluvia y el viento. Está hecho de cristal duro y es muy resistente."
+  },
+  "Glass_TriangleFoundation": {
+    "localized_name": "Base triangular de cristal",
+    "description": "Base triangular sobre la que levantar muros o instalaciones. Está hecha de cristal duro y es muy resistente."
+  },
+  "Glass_TriangleRoof": {
+    "localized_name": "Tejado triangular de cristal",
+    "description": "Tejado triangular que se construye sobre un muro para guarecerte de la lluvia y el viento. Está hecho de cristal duro y es muy resistente."
+  },
+  "Glass_TriangleStairsCorner": {
+    "localized_name": "Tejado esquinero de cristal",
+    "description": "Tejado esquinero que se construye sobre un muro para guarecerte de la lluvia y el viento. Está hecho de cristal duro y es muy resistente."
+  },
   "Glass_TriangleWall": {
     "localized_name": "Muro esquinero de cristal",
     "description": "Muro triangular que se construye sobre una base. Está hecho de cristal duro y es muy resistente."
+  },
+  "Glass_TriangleWallReverse": {
+    "localized_name": "Muro triangular de cristal (reverso)",
+    "description": "Muro triangular (reverso) que se construye sobre una base. Está hecho de cristal duro y es muy resistente."
+  },
+  "Glass_WallGate": {
+    "localized_name": "Pasillo de cristal para Pals",
+    "description": "Pasillo para Pals que se construye sobre una base y sirve de entrada y salida. Está hecha de cristal duro y es muy resistente."
   },
   "Glass_WindowWall": {
     "localized_name": "Muro con ventana de cristal",
@@ -491,9 +523,41 @@
     "localized_name": "Trituradora de congelación",
     "description": "Instalación donde triturar Mineral metálico y obtener a cambio otros materiales. Para que funcione hace falta una fuente de energía y Pals con la aptitud «Enfriamiento», pero es muy eficiente."
   },
+  "Iron_DiagonalWall": {
+    "localized_name": "Muro diagonal de metal",
+    "description": "Muro diagonal que se construye sobre una base triangular para defenderse de los intrusos. Está hecho de metal y es muy resistente."
+  },
   "Iron_Fence": {
     "localized_name": "Valla de metal",
     "description": "Valla que se construye sobre una base o tejado para evitar que se te caigan cosas encima. Está hecha de metal y es muy resistente."
+  },
+  "Iron_PyramidRoof": {
+    "localized_name": "Tejado piramidal de metal",
+    "description": "Tejado cónico que se construye sobre un muro para guarecerte de la lluvia y el viento. Está hecho de metal y es muy resistente."
+  },
+  "Iron_SlopedRoofCorner": {
+    "localized_name": "Tejado triangular e inclinado de metal",
+    "description": "Tejado inclinado que se construye sobre un muro para guarecerte de la lluvia y el viento. Está hecho de metal y es muy resistente."
+  },
+  "Iron_TriangleFoundation": {
+    "localized_name": "Base triangular de metal",
+    "description": "Base triangular sobre la que levantar muros o instalaciones. Está hecha de metal y es muy resistente."
+  },
+  "Iron_TriangleRoof": {
+    "localized_name": "Tejado triangular de metal",
+    "description": "Tejado triangular que se construye sobre un muro para guarecerte de la lluvia y el viento. Está hecho de metal y es muy resistente."
+  },
+  "Iron_TriangleStairsCorner": {
+    "localized_name": "Tejado esquinero de metal",
+    "description": "Tejado esquinero que se construye sobre un muro para guarecerte de la lluvia y el viento. Está hecho de metal y es muy resistente."
+  },
+  "Iron_TriangleWallReverse": {
+    "localized_name": "Muro triangular de metal (reverso)",
+    "description": "Muro triangular (reverso) que se construye sobre una base. Está hecho de metal y es muy resistente."
+  },
+  "Iron_WallGate": {
+    "localized_name": "Pasillo de metal para Pals",
+    "description": "Pasillo para Pals que se construye sobre una base y sirve de entrada y salida. Está hecho de metal y es muy resistente."
   },
   "Irori": {
     "localized_name": "Fogón japonés",
@@ -531,6 +595,10 @@
     "localized_name": "Hiedra horizontal de pared",
     "description": "Hiedra horizontal decorativa. Puedes colocarla en un muro."
   },
+  "JapaneseStyle_DiagonalWall": {
+    "localized_name": "Muro diagonal japonés",
+    "description": "Muro diagonal que se construye sobre una base triangular para defenderse de los intrusos. Con una elegante estructura de estilo japonés."
+  },
   "JapaneseStyle_DoorWall_01": {
     "localized_name": "Muro japonés con puerta A",
     "description": "Puerta que se construye sobre una base y sirve de entrada. Con una elegante estructura de estilo japonés."
@@ -551,13 +619,45 @@
     "localized_name": "Columna japonesa",
     "description": "Columna para sostener edificios. Con una elegante estructura de estilo japonés."
   },
+  "JapaneseStyle_PyramidRoof": {
+    "localized_name": "Tejado piramidal japonés",
+    "description": "Tejado cónico que se construye sobre un muro para guarecerte de la lluvia y el viento. Con una elegante estructura de estilo japonés."
+  },
   "JapaneseStyle_SlantedRoof": {
     "localized_name": "Tejado inclinado japonés",
+    "description": "Tejado inclinado que se construye sobre un muro para guarecerte de la lluvia y el viento. Con una elegante estructura de estilo japonés."
+  },
+  "JapaneseStyle_SlopedRoofCorner": {
+    "localized_name": "Tejado triangular e inclinado japonés",
+    "description": "Tejado inclinado que se construye sobre un muro para guarecerte de la lluvia y el viento. Con una elegante estructura de estilo japonés."
+  },
+  "JapaneseStyle_TriangleFoundation": {
+    "localized_name": "Base triangular japonesa",
+    "description": "Base triangular sobre la que levantar muros o instalaciones. Con una elegante estructura de estilo japonés."
+  },
+  "JapaneseStyle_TriangleRoof_01": {
+    "localized_name": "Tejado triangular japonés A",
+    "description": "Tejado triangular que se construye sobre un muro para guarecerte de la lluvia y el viento. La superficie superior está cubierta de tatami. Con una elegante estructura de estilo japonés."
+  },
+  "JapaneseStyle_TriangleRoof_02": {
+    "localized_name": "Tejado triangular japonés B",
+    "description": "Tejado triangular que se construye sobre un muro para guarecerte de la lluvia y el viento. La superficie superior está alicatada. Con una elegante estructura de estilo japonés."
+  },
+  "JapaneseStyle_TriangleStairsCorner_01": {
+    "localized_name": "Tejado esquinero japonés",
     "description": "Tejado inclinado que se construye sobre un muro para guarecerte de la lluvia y el viento. Con una elegante estructura de estilo japonés."
   },
   "JapaneseStyle_TriangleWall": {
     "localized_name": "Muro triangular japonés",
     "description": "Muro triangular que se construye sobre una base. Con una elegante estructura de estilo japonés."
+  },
+  "JapaneseStyle_TriangleWallReverse": {
+    "localized_name": "Muro triangular japonés (reverso)",
+    "description": "Muro triangular (reverso) que se construye sobre una base. Con una elegante estructura de estilo japonés."
+  },
+  "JapaneseStyle_WallGate": {
+    "localized_name": "Pasillo japonés para Pals",
+    "description": "Pasillo para Pals que se construye sobre una base y sirve de entrada y salida. Con una elegante estructura de estilo japonés."
   },
   "JapaneseStyle_WindowWall": {
     "localized_name": "Muro japonés con ventana",
@@ -732,7 +832,7 @@
     "description": "Muro que se construye sobre una base para defenderse de los intrusos. Está hecho de metal y es muy resistente."
   },
   "MiningTool": {
-    "localized_name": "Pico y casco",
+    "localized_name": "Vagoneta minera",
     "description": "Cuando se coloca en la base, aumenta la velocidad de trabajo para la acción «Minería». Instalar más de uno no produce un mayor efecto."
   },
   "Mirror01_Stone": {
@@ -887,6 +987,10 @@
     "localized_name": "Escritorio estilo laboratorio",
     "description": "Mesa estilo laboratorio decorativa."
   },
+  "SF_DiagonalWall": {
+    "localized_name": "Muro diagonal futurista",
+    "description": "Muro diagonal que se construye sobre una base triangular para defenderse de los intrusos. De estructura limpia y futurista."
+  },
   "SF_DoorWall": {
     "localized_name": "Muro futurista con puerta",
     "description": "Puerta que se construye sobre una base y sirve de entrada. De estructura limpia y futurista."
@@ -895,13 +999,41 @@
     "localized_name": "Valla limpia",
     "description": "Valla que se construye sobre una base o un tejado para evitar caídas. De estructura limpia y futurista."
   },
+  "SF_PyramidRoof": {
+    "localized_name": "Tejado piramidal futurista",
+    "description": "Tejado cónico que se construye sobre un muro para guarecerte de la lluvia y el viento. De estructura limpia y futurista."
+  },
   "SF_SlantedRoof": {
     "localized_name": "Tejado inclinado futurista",
     "description": "Tejado inclinado que se construye sobre un muro para guarecerte de la lluvia y el viento. De estructura limpia y futurista."
   },
+  "SF_SlopedRoofCorner": {
+    "localized_name": "Tejado triangular e inclinado futurista",
+    "description": "Tejado inclinado que se construye sobre un muro para guarecerte de la lluvia y el viento. De estructura limpia y futurista."
+  },
+  "SF_TriangleFoundation": {
+    "localized_name": "Base triangular futurista",
+    "description": "Base triangular sobre la que levantar muros o instalaciones. De estructura limpia y futurista."
+  },
+  "SF_TriangleRoof": {
+    "localized_name": "Tejado triangular futurista",
+    "description": "Tejado triangular que se construye sobre un muro para guarecerte de la lluvia y el viento. De estructura limpia y futurista."
+  },
+  "SF_TriangleStairsCorner": {
+    "localized_name": "Tejado esquinero futurista",
+    "description": "Tejado esquinero que se construye sobre un muro para guarecerte de la lluvia y el viento. De estructura limpia y futurista."
+  },
   "SF_TriangleWall": {
     "localized_name": "Muro triangular futurista",
     "description": "Muro triangular que se construye sobre una base. De estructura limpia y futurista."
+  },
+  "SF_TriangleWallReverse": {
+    "localized_name": "Muro triangular futurista (reverso)",
+    "description": "Muro triangular (reverso) que se construye sobre una base. De estructura limpia y futurista."
+  },
+  "SF_WallGate": {
+    "localized_name": "Pasillo futurista para Pals",
+    "description": "Pasillo para Pals que se construye sobre una base y sirve de entrada y salida. De estructura limpia y futurista."
   },
   "SF_WindowWall": {
     "localized_name": "Muro futurista con ventana",
@@ -1095,6 +1227,10 @@
     "localized_name": "Cantera",
     "description": "Instalación para producir Piedra. Extraer Piedra es duro y se precisa fuerza. Deja que se encargue un Pal experto en minería."
   },
+  "Stone_DiagonalWall": {
+    "localized_name": "Muro diagonal de piedra",
+    "description": "Muro diagonal que se construye sobre una base triangular para defenderse de los intrusos. Está hecho de piedra y es bastante resistente."
+  },
   "Stone_DoorWall": {
     "localized_name": "Puerta de piedra",
     "description": "Puerta que se construye sobre una base y sirve de entrada. Está hecha de piedra y es bastante resistente."
@@ -1107,13 +1243,41 @@
     "localized_name": "Portón de piedra",
     "description": "Portón que los Pals de gran tamaño pueden atravesar. Está hecho de piedra y es bastante resistente."
   },
+  "Stone_PyramidRoof": {
+    "localized_name": "Tejado piramidal de piedra",
+    "description": "Tejado cónico que se construye sobre un muro para guarecerte de la lluvia y el viento. Está hecho de piedra y es bastante resistente."
+  },
   "Stone_SlantedRoof": {
     "localized_name": "Tejado inclinado de piedra",
     "description": "Tejado inclinado que se construye sobre un muro para guarecerte de la lluvia y el viento. Está hecho de piedra y es bastante resistente."
   },
+  "Stone_SlopedRoofCorner": {
+    "localized_name": "Tejado triangular e inclinado de piedra",
+    "description": "Tejado inclinado que se construye sobre un muro para guarecerte de la lluvia y el viento. Está hecho de piedra y es bastante resistente."
+  },
+  "Stone_TriangleFoundation": {
+    "localized_name": "Base triangular de piedra",
+    "description": "Base triangular sobre la que levantar muros o instalaciones. Está hecha de piedra y es bastante resistente."
+  },
+  "Stone_TriangleRoof": {
+    "localized_name": "Tejado triangular de piedra",
+    "description": "Tejado triangular que se construye sobre un muro para guarecerte de la lluvia y el viento. Está hecho de piedra y es bastante resistente."
+  },
+  "Stone_TriangleStairsCorner": {
+    "localized_name": "Tejado esquinero de piedra",
+    "description": "Tejado esquinero que se construye sobre un muro para guarecerte de la lluvia y el viento. Está hecho de piedra y es bastante resistente."
+  },
   "Stone_TriangleWall": {
     "localized_name": "Muro triangular de piedra",
     "description": "Muro triangular que se construye sobre una base. Está hecho de piedra y es bastante resistente."
+  },
+  "Stone_TriangleWallReverse": {
+    "localized_name": "Muro triangular de piedra (reverso)",
+    "description": "Muro triangular (reverso) que se construye sobre una base. Está hecho de piedra y es bastante resistente."
+  },
+  "Stone_WallGate": {
+    "localized_name": "Pasillo de piedra para Pals",
+    "description": "Pasillo para Pals que se construye sobre una base y sirve de entrada y salida. Está hecho de piedra y es bastante resistente."
   },
   "Stone_WindowWall": {
     "localized_name": "Muro de piedra con ventana",
@@ -1367,6 +1531,10 @@
     "localized_name": "Muro triangular de madera",
     "description": "Muro triangular que se construye sobre una base. Está hecho de madera y es frágil."
   },
+  "Wood_TriangleWallReverse": {
+    "localized_name": "Muro triangular de madera (reverso)",
+    "description": "Muro triangular (reverso) que se construye sobre una base. Está hecho de madera y es frágil."
+  },
   "Wood_WindowWall": {
     "localized_name": "Muro de madera con ventana",
     "description": "Muro con ventana que se construye sobre una base para defenderse de los intrusos. Está hecho de madera y es frágil."
@@ -1375,9 +1543,37 @@
     "localized_name": "Barricada de madera",
     "description": "Barricada de madera decorativa."
   },
+  "Wooden_DiagonalWall": {
+    "localized_name": "Muro diagonal de madera",
+    "description": "Muro en diagonal que se construye sobre una base triangular para defenderse de los intrusos. Está hecho de madera y es frágil."
+  },
   "Wooden_DoorWall": {
     "localized_name": "Puerta de madera",
     "description": "Puerta que se construye sobre una base y sirve de entrada. Está hecha de madera y es frágil."
+  },
+  "Wooden_PyramidRoof": {
+    "localized_name": "Tejado piramidal de madera",
+    "description": "Tejado cónico que se construye sobre un muro para guarecerte de la lluvia y el viento. Está hecho de madera y es frágil."
+  },
+  "Wooden_SlopedRoofCorner": {
+    "localized_name": "Tejado triangular e inclinado de madera",
+    "description": "Tejado inclinado que se construye sobre un muro para guarecerte de la lluvia y el viento. Está hecho de madera y es frágil."
+  },
+  "Wooden_TriangleFoundation": {
+    "localized_name": "Base triangular de madera",
+    "description": "Base triangular sobre la que levantar muros o instalaciones. Está hecha de madera y es frágil."
+  },
+  "Wooden_TriangleRoof": {
+    "localized_name": "Tejado triangular de madera",
+    "description": "Tejado triangular que se construye sobre un muro para guarecerte de la lluvia y el viento. Está hecho de madera y es frágil."
+  },
+  "Wooden_TriangleStairsCorner": {
+    "localized_name": "Tejado esquinero de madera",
+    "description": "Tejado esquinero que se construye sobre un muro para guarecerte de la lluvia y el viento. Está hecho de madera y es frágil."
+  },
+  "Wooden_WallGate": {
+    "localized_name": "Pasillo de madera para Pals",
+    "description": "Pasillo para Pals que se construye sobre una base y sirve de entrada y salida. Está hecho de madera y es frágil."
   },
   "Wooden_foundation": {
     "localized_name": "Base de madera",
@@ -1410,6 +1606,10 @@
   "WorkSpeedIncrease1": {
     "localized_name": "Generador de ondas β",
     "description": "Dispositivo que genera ondas beta que aumenta la productividad de los Pals. Aumenta la velocidad de trabajo de los Pals de la base. Colocar más de dos no aumenta su eficacia."
+  },
+  "YakushimaBoss002_Relic": {
+    "localized_name": "Estatua del Señor de la Luna",
+    "description": "[Colaboración con Terraria] Una estatua de Señor de la Luna que brilla con un destello dorado. Es la prueba de que alguien poderoso ha logrado superar una dura batalla."
   },
   "Zabuton": {
     "localized_name": "Cojín de suelo japonés",

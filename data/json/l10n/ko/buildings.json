@@ -316,7 +316,7 @@
     "description": "아이템 및 방어구를 제작하는 데 필요한 공장. 분업 덕분에 꽤 속도를 낼 수 있게 됐다. 수작업이 가능한 팰이 필요하다."
   },
   "Factory_Hard_03": {
-    "localized_name": "작업라인 공장 II",
+    "localized_name": "작업라인 공장 Ⅱ",
     "description": "아이템 및 방어구를 제작하는 데 필요한 공장. 작업 세분화를 통해 빠른 제작이 가능해졌다. 수작업이 가능한 팰이 필요하다."
   },
   "Factory_Hard_04": {
@@ -403,6 +403,10 @@
     "localized_name": "쓰레기봉투",
     "description": "장식용 쓰레기봉투."
   },
+  "Glass_DiagonalWall": {
+    "localized_name": "유리 대각 벽",
+    "description": "삼각 토대 위에 지어 침입자를 막는 대각 벽. 견고한 유리로 만들어서 매우 튼튼하다."
+  },
   "Glass_DoorWall": {
     "localized_name": "문 딸린 유리 벽",
     "description": "토대 위에 지어 입구 역할을 하는 문. 견고한 유리로 만들어서 매우 튼튼하다."
@@ -411,13 +415,41 @@
     "localized_name": "유리 울타리",
     "description": "토대나 지붕 위에 짓는 낙하 방지용 울타리. 견고한 유리로 만들어서 튼튼하다."
   },
+  "Glass_PyramidRoof": {
+    "localized_name": "유리 피라미드 지붕",
+    "description": "벽 위에 지어 비바람을 막는 송곳 모양 지붕. 견고한 유리로 만들어서 매우 튼튼하다."
+  },
   "Glass_SlantedRoof": {
     "localized_name": "유리 경사 지붕",
     "description": "벽 위에 지어 비바람을 막는 경사 지붕. 견고한 유리로 만들어서 매우 튼튼하다."
   },
+  "Glass_SlopedRoofCorner": {
+    "localized_name": "유리 삼각 경사 지붕",
+    "description": "벽 위에 지어 비바람을 막는 경사 모서리 지붕. 견고한 유리로 만들어서 매우 튼튼하다."
+  },
+  "Glass_TriangleFoundation": {
+    "localized_name": "유리 삼각 토대",
+    "description": "위에 벽이나 시설을 지을 수 있는 삼각 토대. 견고한 유리로 만들어서 매우 튼튼하다."
+  },
+  "Glass_TriangleRoof": {
+    "localized_name": "유리 삼각 지붕",
+    "description": "벽 위에 지어 비바람을 막는 삼각 지붕. 견고한 유리로 만들어서 매우 튼튼하다."
+  },
+  "Glass_TriangleStairsCorner": {
+    "localized_name": "유리 모서리 지붕",
+    "description": "벽 위에 지어 비바람을 막는 모서리 지붕. 견고한 유리로 만들어서 매우 튼튼하다."
+  },
   "Glass_TriangleWall": {
     "localized_name": "유리 삼각 벽",
     "description": "토대 위에 지어 침입자를 막는 삼각 벽. 견고한 유리로 만들어서 매우 튼튼하다."
+  },
+  "Glass_TriangleWallReverse": {
+    "localized_name": "유리 삼각 벽(반전)",
+    "description": "토대 위에 짓는 삼각 벽(반전). 견고한 유리로 만들어서 매우 튼튼하다."
+  },
+  "Glass_WallGate": {
+    "localized_name": "유리 팰 전용 출입구",
+    "description": "토대 위에 짓는 팰 전용 출입구. 돌로 만들어서 나름대로 튼튼하다."
   },
   "Glass_WindowWall": {
     "localized_name": "창문 딸린 유리 벽",
@@ -491,9 +523,41 @@
     "localized_name": "동결 분쇄기",
     "description": "금속 광석을(를) 분쇄하여 다른 소재로 변환할 수 있는 시설. 작업 효율이 높은 대신, 가동하려면 전력 공급 및 |냉각| 적성을 가진 팰이 필요하다."
   },
+  "Iron_DiagonalWall": {
+    "localized_name": "금속 대각 벽",
+    "description": "삼각 토대 위에 지어 침입자를 막는 대각 벽. 금속으로 만들어서 매우 튼튼하다."
+  },
   "Iron_Fence": {
     "localized_name": "금속 울타리",
     "description": "토대나 지붕 위에 짓는 낙하 방지용 울타리. 금속으로 만들어서 매우 튼튼하다."
+  },
+  "Iron_PyramidRoof": {
+    "localized_name": "금속 피라미드 지붕",
+    "description": "벽 위에 지어 비바람을 막는 송곳 모양 지붕. 금속으로 만들어서 매우 튼튼하다."
+  },
+  "Iron_SlopedRoofCorner": {
+    "localized_name": "금속 삼각 경사 지붕",
+    "description": "벽 위에 지어 비바람을 막는 경사 모서리 지붕. 금속으로 만들어서 매우 튼튼하다."
+  },
+  "Iron_TriangleFoundation": {
+    "localized_name": "금속 삼각 토대",
+    "description": "위에 벽이나 시설을 지을 수 있는 삼각 토대. 금속으로 만들어서 매우 튼튼하다."
+  },
+  "Iron_TriangleRoof": {
+    "localized_name": "금속 삼각 지붕",
+    "description": "벽 위에 지어 비바람을 막는 삼각 지붕. 금속으로 만들어서 매우 튼튼하다."
+  },
+  "Iron_TriangleStairsCorner": {
+    "localized_name": "금속 모서리 지붕",
+    "description": "벽 위에 지어 비바람을 막는 모서리 지붕. 금속으로 만들어서 매우 튼튼하다."
+  },
+  "Iron_TriangleWallReverse": {
+    "localized_name": "금속 삼각 벽(반전)",
+    "description": "토대 위에 짓는 삼각 벽(반전). 금속으로 만들어서 매우 튼튼하다."
+  },
+  "Iron_WallGate": {
+    "localized_name": "금속 팰 전용 출입구",
+    "description": "토대 위에 짓는 팰 전용 출입구. 돌로 만들어서 나름대로 튼튼하다."
   },
   "Irori": {
     "localized_name": "이로리",
@@ -531,6 +595,10 @@
     "localized_name": "벽걸이 가로형 담쟁이덩굴",
     "description": "장식용 가로형 담쟁이덩굴. 벽에 설치할 수 있다."
   },
+  "JapaneseStyle_DiagonalWall": {
+    "localized_name": "일본식 대각 벽",
+    "description": "삼각 토대 위에 지어 침입자를 막는 대각 벽. 세련된 일본식 건축물을 지을 때 활용하자."
+  },
   "JapaneseStyle_DoorWall_01": {
     "localized_name": "문 딸린 일본식 벽 A",
     "description": "토대 위에 지어 입구 역할을 하는 문. 세련된 일본식 건축물을 지을 때 활용하자."
@@ -551,13 +619,45 @@
     "localized_name": "일본식 기둥",
     "description": "건물을 지탱하기 위해 세우는 기둥. 세련된 일본식 건축물을 지을 때 활용하자."
   },
+  "JapaneseStyle_PyramidRoof": {
+    "localized_name": "일본식 피라미드 지붕",
+    "description": "벽 위에 지어 비바람을 막는 송곳 모양 지붕. 세련된 일본식 건축물을 지을 때 활용하자."
+  },
   "JapaneseStyle_SlantedRoof": {
     "localized_name": "일본식 경사 지붕",
     "description": "벽 위에 지어 비바람을 막는 경사 지붕. 세련된 일본식 건축물을 지을 때 활용하자."
   },
+  "JapaneseStyle_SlopedRoofCorner": {
+    "localized_name": "일본식 삼각 경사 지붕",
+    "description": "벽 위에 지어 비바람을 막는 경사 모서리 지붕. 세련된 일본식 건축물을 지을 때 활용하자."
+  },
+  "JapaneseStyle_TriangleFoundation": {
+    "localized_name": "일본식 삼각 토대",
+    "description": "위에 벽이나 시설을 지을 수 있는 삼각 토대. 세련된 일본식 건축물을 지을 때 활용하자."
+  },
+  "JapaneseStyle_TriangleRoof_01": {
+    "localized_name": "일본식 삼각 지붕 A",
+    "description": "벽 위에 지어 비바람을 막는 삼각 지붕. 윗면이 다다미로 구성되어 있다. 세련된 일본식 건축물을 지을 때 활용하자."
+  },
+  "JapaneseStyle_TriangleRoof_02": {
+    "localized_name": "일본식 삼각 지붕 B",
+    "description": "벽 위에 지어 비바람을 막는 삼각 지붕. 윗면이 기와로 구성되어 있다. 세련된 일본식 건축물을 지을 때 활용하자."
+  },
+  "JapaneseStyle_TriangleStairsCorner_01": {
+    "localized_name": "일본식 모서리 지붕",
+    "description": "벽 위에 지어 비바람을 막는 모서리 지붕. 세련된 일본식 건축물을 지을 때 활용하자."
+  },
   "JapaneseStyle_TriangleWall": {
     "localized_name": "일본식 삼각 벽",
     "description": "토대 위에 짓는 삼각 벽. 세련된 일본식 건축물을 지을 때 활용하자."
+  },
+  "JapaneseStyle_TriangleWallReverse": {
+    "localized_name": "일본식 삼각 벽(반전)",
+    "description": "토대 위에 짓는 삼각 벽(반전). 세련된 일본식 건축물을 지을 때 활용하자."
+  },
+  "JapaneseStyle_WallGate": {
+    "localized_name": "일본식 팰 전용 출입구",
+    "description": "토대 위에 짓는 팰 전용 출입구. 세련된 일본식 건축물을 지을 때 활용하자."
   },
   "JapaneseStyle_WindowWall": {
     "localized_name": "창문 딸린 일본식 벽",
@@ -732,7 +832,7 @@
     "description": "토대 위에 지어 침입자를 막는 벽. 금속으로 만들어서 매우 튼튼하다."
   },
   "MiningTool": {
-    "localized_name": "곡괭이와 헬멧",
+    "localized_name": "채굴 왜건",
     "description": "거점에 배치하면 채굴 작업 속도가 상승한다. 2개 이상 배치해도 효과는 없다."
   },
   "Mirror01_Stone": {
@@ -776,7 +876,7 @@
     "description": "거점에 배치하면 불 피우기 작업 속도가 상승한다. 2개 이상 배치해도 효과는 없다."
   },
   "OperatingTable": {
-    "localized_name": "팔 수술대",
+    "localized_name": "팰 수술대",
     "description": "팰에게 수술을 시행하여 팰의 성별이나 패시브 스킬을 변경할 수 있는 시설."
   },
   "PalBooth": {
@@ -887,6 +987,10 @@
     "localized_name": "연구실 책상",
     "description": "장식용 연구실 책상."
   },
+  "SF_DiagonalWall": {
+    "localized_name": "미래식 대각 벽",
+    "description": "삼각 토대 위에 지어 침입자를 막는 대각 벽. 클린한 느낌의 근미래적 건축물을 지을 때 활용하자."
+  },
   "SF_DoorWall": {
     "localized_name": "문 딸린 미래식 벽",
     "description": "토대 위에 지어 입구 역할을 하는 문. 클린한 느낌의 근미래적 건축물을 지을 때 활용하자."
@@ -895,13 +999,41 @@
     "localized_name": "미래식 울타리",
     "description": "토대나 지붕 위에 짓는 낙하 방지용 울타리. 클린한 느낌의 근미래적 건축물을 지을 때 활용하자."
   },
+  "SF_PyramidRoof": {
+    "localized_name": "미래식 피라미드 지붕",
+    "description": "벽 위에 지어 비바람을 막는 송곳 모양 지붕. 클린한 느낌의 근미래적 건축물을 지을 때 활용하자."
+  },
   "SF_SlantedRoof": {
     "localized_name": "미래식 경사 지붕",
     "description": "벽 위에 지어 비바람을 막는 경사 지붕. 클린한 느낌의 근미래적 건축물을 지을 때 활용하자."
   },
+  "SF_SlopedRoofCorner": {
+    "localized_name": "미래식 삼각 경사 지붕",
+    "description": "벽 위에 지어 비바람을 막는 경사 모서리 지붕. 클린한 느낌의 근미래적 건축물을 지을 때 활용하자."
+  },
+  "SF_TriangleFoundation": {
+    "localized_name": "미래식 삼각 토대",
+    "description": "위에 벽이나 시설을 지을 수 있는 삼각 토대. 클린한 느낌의 근미래적 건축물을 지을 때 활용하자."
+  },
+  "SF_TriangleRoof": {
+    "localized_name": "미래식 삼각 지붕",
+    "description": "벽 위에 지어 비바람을 막는 삼각 지붕. 클린한 느낌의 근미래적 건축물을 지을 때 활용하자."
+  },
+  "SF_TriangleStairsCorner": {
+    "localized_name": "미래식 모서리 지붕",
+    "description": "벽 위에 지어 비바람을 막는 모서리 지붕. 클린한 느낌의 근미래적 건축물을 지을 때 활용하자."
+  },
   "SF_TriangleWall": {
     "localized_name": "미래식 삼각 벽",
     "description": "토대 위에 짓는 삼각 벽. 클린한 느낌의 근미래적 건축물을 지을 때 활용하자."
+  },
+  "SF_TriangleWallReverse": {
+    "localized_name": "미래식 삼각 벽(반전)",
+    "description": "토대 위에 짓는 삼각 벽(반전). 클린한 느낌의 근미래적 건축물을 지을 때 활용하자."
+  },
+  "SF_WallGate": {
+    "localized_name": "미래식 팰 전용 출입구",
+    "description": "토대 위에 짓는 팰 전용 출입구. 클린한 느낌의 근미래적 건축물을 지을 때 활용하자."
   },
   "SF_WindowWall": {
     "localized_name": "창문 딸린 미래식 벽",
@@ -1080,7 +1212,7 @@
     "description": "팰 포획용 스피어 제작 공장. 분업 덕분에 꽤 속도를 낼 수 있게 됐다. 수작업이 가능한 팰이 필요하다."
   },
   "SphereFactory_Black_03": {
-    "localized_name": "스피어라인 공장 II",
+    "localized_name": "스피어라인 공장 Ⅱ",
     "description": "팰 포획용 스피어 제작 공장. 작업 세분화를 통해 빠른 스피어 제작이 가능해졌다. 수작업이 가능한 팰이 필요하다."
   },
   "SphereFactory_Black_04": {
@@ -1095,6 +1227,10 @@
     "localized_name": "채석장",
     "description": "돌을(를) 생산하는 시설. 돌을(를) 파내는 작업은 고되므로 체력이 필요하다. 채굴에 자신 있는 팰에게 맡기자."
   },
+  "Stone_DiagonalWall": {
+    "localized_name": "돌 대각 벽",
+    "description": "삼각 토대 위에 지어 침입자를 막는 대각 벽. 돌로 만들어서 나름대로 튼튼하다."
+  },
   "Stone_DoorWall": {
     "localized_name": "돌 문",
     "description": "토대 위에 지어 입구 역할을 하는 문. 돌로 만들어서 나름대로 튼튼하다."
@@ -1107,13 +1243,41 @@
     "localized_name": "돌 문",
     "description": "덩치가 큰 팰도 드나들 수 있는 문. 돌로 만들어서 나름대로 튼튼하다."
   },
+  "Stone_PyramidRoof": {
+    "localized_name": "돌 피라미드 지붕",
+    "description": "벽 위에 지어 비바람을 막는 송곳 모양 지붕. 돌로 만들어서 나름대로 튼튼하다."
+  },
   "Stone_SlantedRoof": {
     "localized_name": "돌 경사 지붕",
     "description": "벽 위에 지어 비바람을 막는 경사 지붕. 돌로 만들어서 나름대로 튼튼하다."
   },
+  "Stone_SlopedRoofCorner": {
+    "localized_name": "돌 삼각 경사 지붕",
+    "description": "벽 위에 지어 비바람을 막는 경사 모서리 지붕. 돌로 만들어서 나름대로 튼튼하다."
+  },
+  "Stone_TriangleFoundation": {
+    "localized_name": "돌 삼각 토대",
+    "description": "위에 벽이나 시설을 지을 수 있는 삼각 토대. 돌로 만들어서 나름대로 튼튼하다."
+  },
+  "Stone_TriangleRoof": {
+    "localized_name": "돌 삼각 지붕",
+    "description": "벽 위에 지어 비바람을 막는 삼각 지붕. 돌로 만들어서 나름대로 튼튼하다."
+  },
+  "Stone_TriangleStairsCorner": {
+    "localized_name": "돌 모서리 지붕",
+    "description": "벽 위에 지어 비바람을 막는 모서리 지붕. 돌로 만들어서 나름대로 튼튼하다."
+  },
   "Stone_TriangleWall": {
     "localized_name": "돌 삼각 벽",
     "description": "토대 위에 짓는 삼각 벽. 돌로 만들어서 나름대로 튼튼하다."
+  },
+  "Stone_TriangleWallReverse": {
+    "localized_name": "돌 삼각 벽(반전)",
+    "description": "토대 위에 짓는 삼각 벽(반전). 돌로 만들어서 나름대로 튼튼하다."
+  },
+  "Stone_WallGate": {
+    "localized_name": "돌 팰 전용 출입구",
+    "description": "토대 위에 짓는 팰 전용 출입구. 돌로 만들어서 나름대로 튼튼하다."
   },
   "Stone_WindowWall": {
     "localized_name": "창문 딸린 돌 벽",
@@ -1340,7 +1504,7 @@
     "description": "무기나 탄약을 생산하는 공장. 분업 덕분에 꽤 많은 무기를 생산할 수 있게 됐다. 수작업이 가능한 팰이 필요하다."
   },
   "WeaponFactory_Dirty_03": {
-    "localized_name": "무기라인 공장 II",
+    "localized_name": "무기라인 공장 Ⅱ",
     "description": "무기나 탄약을 생산하는 공장. 작업 세분화를 통해 상위 무기를 빠르게 생산할 수 있게 됐다. 수작업이 가능한 팰이 필요하다."
   },
   "WeaponFactory_Dirty_04": {
@@ -1367,6 +1531,10 @@
     "localized_name": "나무 삼각 벽",
     "description": "토대 위에 짓는 삼각 벽. 나무로 만들어서 약하다."
   },
+  "Wood_TriangleWallReverse": {
+    "localized_name": "나무 삼각 벽(반전)",
+    "description": "토대 위에 짓는 삼각 벽(반전). 나무로 만들어서 약하다."
+  },
   "Wood_WindowWall": {
     "localized_name": "창문 딸린 나무 벽",
     "description": "토대 위에 짓는 창문이 딸린 침입자 방지용 벽. 나무로 만들어서 약하다."
@@ -1375,9 +1543,37 @@
     "localized_name": "나무 바리케이드",
     "description": "장식용 나무 바리케이드."
   },
+  "Wooden_DiagonalWall": {
+    "localized_name": "나무 대각 벽",
+    "description": "삼각 토대 위에 지어 침입자를 막는 대각 벽. 나무로 만들어서 약하다."
+  },
   "Wooden_DoorWall": {
     "localized_name": "나무 문",
     "description": "토대 위에 짓는 입구용 문. 나무로 만들어서 약하다."
+  },
+  "Wooden_PyramidRoof": {
+    "localized_name": "나무 피라미드 지붕",
+    "description": "벽 위에 지어 비바람을 막는 송곳 모양 지붕. 나무로 만들어서 약하다."
+  },
+  "Wooden_SlopedRoofCorner": {
+    "localized_name": "나무 삼각 경사 지붕",
+    "description": "벽 위에 지어 비바람을 막는 경사 모서리 지붕. 나무로 만들어서 약하다."
+  },
+  "Wooden_TriangleFoundation": {
+    "localized_name": "나무 삼각 토대",
+    "description": "위에 벽이나 시설을 지을 수 있는 삼각 토대. 나무로 만들어서 약하다."
+  },
+  "Wooden_TriangleRoof": {
+    "localized_name": "나무 삼각 지붕",
+    "description": "벽 위에 지어 비바람을 막는 삼각 지붕. 나무로 만들어서 약하다."
+  },
+  "Wooden_TriangleStairsCorner": {
+    "localized_name": "나무 모서리 지붕",
+    "description": "벽 위에 지어 비바람을 막는 모서리 지붕. 나무로 만들어서 약하다."
+  },
+  "Wooden_WallGate": {
+    "localized_name": "나무 팰 전용 출입구",
+    "description": "토대 위에 짓는 팰 전용 출입구. 나무로 만들어서 약하다."
   },
   "Wooden_foundation": {
     "localized_name": "나무 토대",
@@ -1410,6 +1606,10 @@
   "WorkSpeedIncrease1": {
     "localized_name": "β파 발생 장치",
     "description": "β파를 발생시켜 팰의 활동을 활성화하는 장치. 거점 내 팰의 작업 속도가 상승한다. 2개 이상 배치해도 효과는 없다."
+  },
+  "YakushimaBoss002_Relic": {
+    "localized_name": "달의 군주 석상",
+    "description": "[테라리아 컬래버] 황금빛으로 번쩍이는 달의 군주 상. 절망적인 전투를 극복한 강자의 증표."
   },
   "Zabuton": {
     "localized_name": "방석",

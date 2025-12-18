@@ -403,6 +403,10 @@
     "localized_name": "垃圾袋",
     "description": "裝飾用的垃圾袋。"
   },
+  "Glass_DiagonalWall": {
+    "localized_name": "玻璃對角牆",
+    "description": "建於三角地基上的對角牆壁，用於防止入侵者。 以鋼化玻璃製成，非常堅固。"
+  },
   "Glass_DoorWall": {
     "localized_name": "玻璃門",
     "description": "建於地基上的門，可作為出入口。 以鋼化玻璃製成，非常堅固。"
@@ -411,13 +415,41 @@
     "localized_name": "玻璃柵欄",
     "description": "建在地基或屋頂上，用於防止墜落的柵欄。 以鋼化玻璃製成，非常堅固。"
   },
+  "Glass_PyramidRoof": {
+    "localized_name": "玻璃方錐屋頂",
+    "description": "建於牆壁上方的錐形屋頂，用於遮擋風雨。 以鋼化玻璃製成，非常堅固。"
+  },
   "Glass_SlantedRoof": {
     "localized_name": "玻璃斜屋頂",
     "description": "建於牆壁上方的斜屋頂，用於遮擋風雨。 以鋼化玻璃製成，非常堅固。"
   },
+  "Glass_SlopedRoofCorner": {
+    "localized_name": "玻璃三角斜屋頂",
+    "description": "建於對角牆上方的三角斜屋頂，用於遮擋風雨。 以鋼化玻璃製成，非常堅固。"
+  },
+  "Glass_TriangleFoundation": {
+    "localized_name": "玻璃三角地基",
+    "description": "三角地基，可在上面建造牆壁或設施。 以鋼化玻璃製成，非常堅固。"
+  },
+  "Glass_TriangleRoof": {
+    "localized_name": "玻璃三角屋頂",
+    "description": "建於牆壁上方的三角屋頂，用於遮擋風雨。 以鋼化玻璃製成，非常堅固。"
+  },
+  "Glass_TriangleStairsCorner": {
+    "localized_name": "玻璃轉角屋頂",
+    "description": "建於牆壁上方的轉角屋頂，用於遮擋風雨。 以鋼化玻璃製成，非常堅固。"
+  },
   "Glass_TriangleWall": {
     "localized_name": "玻璃三角牆",
     "description": "建於地基上的三角牆。 以鋼化玻璃製成，非常堅固。"
+  },
+  "Glass_TriangleWallReverse": {
+    "localized_name": "玻璃三角牆（反向）",
+    "description": "建於地基上的三角牆（反向）。 以鋼化玻璃製成，非常堅固。"
+  },
+  "Glass_WallGate": {
+    "localized_name": "玻璃帕魯用通道口",
+    "description": "建造在地基上的帕魯用通道口，可作為出入口。 以鋼化玻璃製成，非常堅固。"
   },
   "Glass_WindowWall": {
     "localized_name": "附窗玻璃牆",
@@ -491,9 +523,41 @@
     "localized_name": "冷凍粉碎機",
     "description": "可粉碎金屬礦石以轉換成其他材料的設施。 雖然要使其工作需要電力供應，以及有「冷卻」適應性的帕魯，但是效率極佳。"
   },
+  "Iron_DiagonalWall": {
+    "localized_name": "金屬對角牆",
+    "description": "建於三角地基上的對角牆壁，用於防止入侵者。 以金屬製成，非常堅固。"
+  },
   "Iron_Fence": {
     "localized_name": "金屬柵欄",
-    "description": "建在地基或屋頂上，用於防止墜落的柵欄。 金屬製成，非常堅固。"
+    "description": "建在地基或屋頂上，用於防止墜落的柵欄。 以金屬製成，非常堅固。"
+  },
+  "Iron_PyramidRoof": {
+    "localized_name": "金屬方錐屋頂",
+    "description": "建於牆壁上方的錐形屋頂，用於遮擋風雨。 以金屬製成，非常堅固。"
+  },
+  "Iron_SlopedRoofCorner": {
+    "localized_name": "金屬三角斜屋頂",
+    "description": "建於對角牆上方的三角斜屋頂，用於遮擋風雨。 以金屬製成，非常堅固。"
+  },
+  "Iron_TriangleFoundation": {
+    "localized_name": "金屬三角地基",
+    "description": "三角地基，可在上面建造牆壁或設施。 以金屬製成，非常堅固。"
+  },
+  "Iron_TriangleRoof": {
+    "localized_name": "金屬三角屋頂",
+    "description": "建於牆壁上方的三角屋頂，用於遮擋風雨。 以金屬製成，非常堅固。"
+  },
+  "Iron_TriangleStairsCorner": {
+    "localized_name": "金屬轉角屋頂",
+    "description": "建於牆壁上方的轉角屋頂，用於遮擋風雨。 以金屬製成，非常堅固。"
+  },
+  "Iron_TriangleWallReverse": {
+    "localized_name": "金屬三角牆（反向）",
+    "description": "建於地基上的三角牆（反向）。 以金屬製成，非常堅固。"
+  },
+  "Iron_WallGate": {
+    "localized_name": "金屬帕魯用通道口",
+    "description": "建造在地基上的帕魯用通道口，可作為出入口。 以金屬製成，非常堅固。"
   },
   "Irori": {
     "localized_name": "地爐",
@@ -531,6 +595,10 @@
     "localized_name": "懸掛式長型長春藤",
     "description": "裝飾用的長型常春藤。 可以裝在牆壁上。"
   },
+  "JapaneseStyle_DiagonalWall": {
+    "localized_name": "和風對角牆",
+    "description": "建於三角地基上的對角牆壁，用於防止入侵者。 可以建造出時尚的日式建築。"
+  },
   "JapaneseStyle_DoorWall_01": {
     "localized_name": "和風門A",
     "description": "建於地基上的門，可作為出入口。 可以建造出時尚的日式建築。"
@@ -551,13 +619,45 @@
     "localized_name": "和風立柱",
     "description": "用來支撐建築的立柱。 可以建造出時尚的日式建築。"
   },
+  "JapaneseStyle_PyramidRoof": {
+    "localized_name": "和風方錐屋頂",
+    "description": "建於牆壁上方的錐形屋頂，用於遮擋風雨。 可以建造出時尚的日式建築。"
+  },
   "JapaneseStyle_SlantedRoof": {
     "localized_name": "和風斜屋頂",
     "description": "建於牆壁上方的斜屋頂，用於遮擋風雨。 可以建造出時尚的日式建築。"
   },
+  "JapaneseStyle_SlopedRoofCorner": {
+    "localized_name": "和風三角斜屋頂",
+    "description": "建於對角牆上方的三角斜屋頂，用於遮擋風雨。 可以建造出時尚的日式建築。"
+  },
+  "JapaneseStyle_TriangleFoundation": {
+    "localized_name": "和風三角地基",
+    "description": "三角地基，可在上面建造牆壁或設施。 可以建造出時尚的日式建築。"
+  },
+  "JapaneseStyle_TriangleRoof_01": {
+    "localized_name": "和風三角屋頂A",
+    "description": "建於牆壁上方的三角屋頂，用於遮擋風雨。 上層由榻榻米組成。 可以建造出時尚的日式建築。"
+  },
+  "JapaneseStyle_TriangleRoof_02": {
+    "localized_name": "和風三角屋頂B",
+    "description": "建於牆壁上方的三角屋頂，用於遮擋風雨。 上層由瓦片組成。 可以建造出時尚的日式建築。"
+  },
+  "JapaneseStyle_TriangleStairsCorner_01": {
+    "localized_name": "和風轉角屋頂",
+    "description": "建於牆壁上方的轉角屋頂，用於遮擋風雨。 可以建造出時尚的日式建築。"
+  },
   "JapaneseStyle_TriangleWall": {
     "localized_name": "和風三角牆",
     "description": "建於地基上的三角牆。 可以建造出時尚的日式建築。"
+  },
+  "JapaneseStyle_TriangleWallReverse": {
+    "localized_name": "和風三角牆（反向）",
+    "description": "建於地基上的三角牆（反向）。 可以建造出時尚的日式建築。"
+  },
+  "JapaneseStyle_WallGate": {
+    "localized_name": "和風帕魯用通道口",
+    "description": "建於地基上的帕魯用通道口，可作為出入口。 可以建造出時尚的日式建築。"
   },
   "JapaneseStyle_WindowWall": {
     "localized_name": "附窗和風牆",
@@ -732,7 +832,7 @@
     "description": "建於地基上的牆壁，用於防止入侵者。 以金屬製成，非常堅固。"
   },
   "MiningTool": {
-    "localized_name": "十字鎬與安全帽",
+    "localized_name": "礦車",
     "description": "設置於據點時， 「挖掘」的工作速度將會提升。 即使設置複數個，其效果也不會疊加。"
   },
   "Mirror01_Stone": {
@@ -887,6 +987,10 @@
     "localized_name": "研究室風格書桌",
     "description": "裝飾用的研究室風格書桌。"
   },
+  "SF_DiagonalWall": {
+    "localized_name": "簡約對角牆",
+    "description": "建於三角地基上的對角牆壁，用於防止入侵者。 可以建造出近未來風格的簡約建築。"
+  },
   "SF_DoorWall": {
     "localized_name": "簡約門",
     "description": "建於地基上的門，可作為出入口。 可以建造出近未來風格的簡約建築。"
@@ -895,13 +999,41 @@
     "localized_name": "簡約柵欄",
     "description": "建在地基或屋頂上，用於防止墜落的柵欄。 可以建造出近未來風格的簡約建築。"
   },
+  "SF_PyramidRoof": {
+    "localized_name": "簡約方錐屋頂",
+    "description": "建於牆壁上方的錐形屋頂，用於遮擋風雨。 可以建造出近未來風格的簡約建築。"
+  },
   "SF_SlantedRoof": {
     "localized_name": "簡約斜屋頂",
     "description": "建於牆壁上方的斜屋頂，用於遮擋風雨。 可以建造出近未來風格的簡約建築。"
   },
+  "SF_SlopedRoofCorner": {
+    "localized_name": "簡約三角斜屋頂",
+    "description": "建於對角牆上方的三角斜屋頂，用於遮擋風雨。 可以建造出近未來風格的簡約建築。"
+  },
+  "SF_TriangleFoundation": {
+    "localized_name": "簡約三角地基",
+    "description": "三角地基，可在上面建造牆壁或設施。 可以建造出近未來風格的簡約建築。"
+  },
+  "SF_TriangleRoof": {
+    "localized_name": "簡約三角屋頂",
+    "description": "建於牆壁上方的三角屋頂，用於遮擋風雨。 可以建造出近未來風格的簡約建築。"
+  },
+  "SF_TriangleStairsCorner": {
+    "localized_name": "簡約轉角屋頂",
+    "description": "建於牆壁上方的轉角屋頂，用於遮擋風雨。 可以建造出近未來風格的簡約建築。"
+  },
   "SF_TriangleWall": {
     "localized_name": "簡約三角牆",
     "description": "建於地基上的三角牆。 可以建造出近未來風格的簡約建築。"
+  },
+  "SF_TriangleWallReverse": {
+    "localized_name": "簡約三角牆（反向）",
+    "description": "建於地基上的三角牆（反向）。 可以建造出近未來風格的簡約建築。"
+  },
+  "SF_WallGate": {
+    "localized_name": "簡約帕魯用通道口",
+    "description": "建於地基上的帕魯用通道口，可作為出入口。 可以建造出近未來風格的簡約建築。"
   },
   "SF_WindowWall": {
     "localized_name": "附窗簡約牆",
@@ -1095,25 +1227,57 @@
     "localized_name": "採石場",
     "description": "生產石頭的設施。 挖掘石頭的工作需要大量體力，相當嚴苛。 把這些工作交給擅長挖掘的帕魯吧。"
   },
+  "Stone_DiagonalWall": {
+    "localized_name": "石砌對角牆",
+    "description": "建於三角地基上的對角牆壁，用於防止入侵者。 以石頭製成，還算堅固。"
+  },
   "Stone_DoorWall": {
     "localized_name": "石門",
     "description": "建於地基上的門，可作為出入口。 以石頭製成，還算堅固。"
   },
   "Stone_Fence": {
-    "localized_name": "石製柵欄",
+    "localized_name": "石砌柵欄",
     "description": "建在地基或屋頂上，用於防止墜落的柵欄。 以石頭製成，還算堅固。"
   },
   "Stone_Gate": {
     "localized_name": "石砌大門",
     "description": "可讓稍大的帕魯通過的大門。 以石頭製成，還算堅固。"
   },
+  "Stone_PyramidRoof": {
+    "localized_name": "石砌方錐屋頂",
+    "description": "建於牆壁上方的錐形屋頂，用於遮擋風雨。 以石頭製成，還算堅固。"
+  },
   "Stone_SlantedRoof": {
     "localized_name": "石砌斜屋頂",
     "description": "建於牆壁上方的斜屋頂，用於遮擋風雨。 以石頭製成，還算堅固。"
   },
+  "Stone_SlopedRoofCorner": {
+    "localized_name": "石砌三角斜屋頂",
+    "description": "建於對角牆上方的三角斜屋頂，用於遮擋風雨。 以石頭製成，還算堅固。"
+  },
+  "Stone_TriangleFoundation": {
+    "localized_name": "石砌三角地基",
+    "description": "三角地基，可在上面建造牆壁或設施。 以石頭製成，還算堅固。"
+  },
+  "Stone_TriangleRoof": {
+    "localized_name": "石砌三角屋頂",
+    "description": "建於牆壁上方的三角屋頂，用於遮擋風雨。 以石頭製成，還算堅固。"
+  },
+  "Stone_TriangleStairsCorner": {
+    "localized_name": "石砌轉角屋頂",
+    "description": "建於牆壁上方的轉角屋頂，用於遮擋風雨。 以石頭製成，還算堅固。"
+  },
   "Stone_TriangleWall": {
     "localized_name": "石砌三角牆",
     "description": "建於地基上的三角牆。 以石頭製成，還算堅固。"
+  },
+  "Stone_TriangleWallReverse": {
+    "localized_name": "石砌三角牆（反向）",
+    "description": "建於地基上的三角牆（反向）。 以石頭製成，還算堅固。"
+  },
+  "Stone_WallGate": {
+    "localized_name": "石砌帕魯用通道口",
+    "description": "建造在地基上的帕魯用通道口，可作為出入口。 以石頭製成，還算堅固。"
   },
   "Stone_WindowWall": {
     "localized_name": "附窗石砌牆",
@@ -1352,7 +1516,7 @@
     "description": "裝飾用的鐵絲網圍籬。"
   },
   "Wood_Fence": {
-    "localized_name": "木製柵欄",
+    "localized_name": "木造柵欄",
     "description": "建在地基或屋頂上，用於防止墜落的柵欄。 以木頭製成，相當脆弱。"
   },
   "Wood_Gate": {
@@ -1367,6 +1531,10 @@
     "localized_name": "木造三角牆",
     "description": "建於地基上的三角牆。 以木頭製成，相當脆弱。"
   },
+  "Wood_TriangleWallReverse": {
+    "localized_name": "木造三角牆（反向）",
+    "description": "建於地基上的三角牆（反向）。 以木頭製成，相當脆弱。"
+  },
   "Wood_WindowWall": {
     "localized_name": "附窗木造牆",
     "description": "建於地基上的附窗牆壁，用於防止入侵者。 以木頭製成，相當脆弱。"
@@ -1375,9 +1543,37 @@
     "localized_name": "木製路障",
     "description": "裝飾用的木製路障。"
   },
+  "Wooden_DiagonalWall": {
+    "localized_name": "木造對角牆",
+    "description": "建於三角地基上的對角牆壁，用於防止入侵者。 以木頭製成，相當脆弱。"
+  },
   "Wooden_DoorWall": {
     "localized_name": "木門",
     "description": "建於地基上的門，可作為出入口。 以木頭製成，相當脆弱。"
+  },
+  "Wooden_PyramidRoof": {
+    "localized_name": "木造方錐屋頂",
+    "description": "建於牆壁上方的錐形屋頂，用於遮擋風雨。 以木頭製成，相當脆弱。"
+  },
+  "Wooden_SlopedRoofCorner": {
+    "localized_name": "木造三角斜屋頂",
+    "description": "建於對角牆上方的三角斜屋頂，用於遮擋風雨。 以木頭製成，相當脆弱。"
+  },
+  "Wooden_TriangleFoundation": {
+    "localized_name": "木造三角地基",
+    "description": "三角地基，可在上面建造牆壁或設施。 以木頭製成，相當脆弱。"
+  },
+  "Wooden_TriangleRoof": {
+    "localized_name": "木造三角屋頂",
+    "description": "建於牆壁上方的三角屋頂，用於遮擋風雨。 以木頭製成，相當脆弱。"
+  },
+  "Wooden_TriangleStairsCorner": {
+    "localized_name": "木造轉角屋頂",
+    "description": "建於牆壁上方的轉角屋頂，用於遮擋風雨。 以木頭製成，相當脆弱。"
+  },
+  "Wooden_WallGate": {
+    "localized_name": "木造帕魯用通道口",
+    "description": "建於地基上的帕魯用通道口，可作為出入口。 以木頭製成，相當脆弱。"
   },
   "Wooden_foundation": {
     "localized_name": "木造地基",
@@ -1410,6 +1606,10 @@
   "WorkSpeedIncrease1": {
     "localized_name": "β波發生器",
     "description": "發出β波讓帕魯活動更活躍的裝置。 提升據點內帕魯的工作速度。 即使設置複數個，其效果也不會疊加。"
+  },
+  "YakushimaBoss002_Relic": {
+    "localized_name": "月尊雕像",
+    "description": "【泰拉瑞亞合作】 散發著金色光芒的月尊雕像。 跨越絕望之戰後的強者證明。"
   },
   "Zabuton": {
     "localized_name": "坐墊",
