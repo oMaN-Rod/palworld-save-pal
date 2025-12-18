@@ -1327,6 +1327,10 @@
     "localized_name": "뷰티플라워",
     "description": "봄이 다가오면 바람을 타고 섬에 꽃가루가 휘날린다. 토푸리의 꽃가루 알레르기는 뷰티플라워 때문에 발생한다."
   },
+  "LegendDeer": {
+    "localized_name": "레젠디얼",
+    "description": "소름끼칠 정도로 조용하나, 신기할 정도로 침착했다. 이제 나 말고는 아무도 없다. 모두 구원받았다. 구원의 왕이시여, 저도 무한한 정적으로 데려가 주십시오. - 낡은 문헌의 내용은 여기서 끊겨 있다."
+  },
   "LilyQueen": {
     "localized_name": "릴린",
     "description": "자애심으로 가득한 온화한 팰. 부모를 잃은 어린 팰들을 돌봐주고 있다. 버릇은 전력으로 쏘는 SolarBeam."
@@ -1381,6 +1385,10 @@
   },
   "Male_DesertPeople01": {
     "localized_name": "마을 사람",
+    "description": null
+  },
+  "Male_Kigurumi01_v01": {
+    "localized_name": "섬 주민",
     "description": null
   },
   "Male_Ninja01": {
@@ -1807,6 +1815,10 @@
     "localized_name": "자경단 소총수",
     "description": null
   },
+  "Police_Shield_Tower": {
+    "localized_name": "자경단 소총수",
+    "description": null
+  },
   "Police_Shotgun": {
     "localized_name": "자경단 정예 대원",
     "description": null
@@ -1883,6 +1895,14 @@
     "localized_name": "마그마 드라고",
     "description": null
   },
+  "RAID_LegendDeer": {
+    "localized_name": "레젠디얼",
+    "description": null
+  },
+  "RAID_LegendDeer_2": {
+    "localized_name": "레젠디얼",
+    "description": null
+  },
   "RAID_NightLady": {
     "localized_name": "벨라누아르",
     "description": null
@@ -1899,7 +1919,15 @@
     "localized_name": "진정한 크툴루의 눈",
     "description": null
   },
+  "RAID_YakushimaBoss001_Green_2": {
+    "localized_name": "진정한 크툴루의 눈",
+    "description": null
+  },
   "RAID_YakushimaBoss002": {
+    "localized_name": "달의 군주",
+    "description": null
+  },
+  "RAID_YakushimaBoss002_2": {
     "localized_name": "달의 군주",
     "description": null
   },
@@ -1907,11 +1935,23 @@
     "localized_name": "달의 군주",
     "description": null
   },
+  "RAID_YakushimaBoss002_Hand_Left_2": {
+    "localized_name": "달의 군주",
+    "description": null
+  },
   "RAID_YakushimaBoss002_Hand_Right": {
     "localized_name": "달의 군주",
     "description": null
   },
+  "RAID_YakushimaBoss002_Hand_Right_2": {
+    "localized_name": "달의 군주",
+    "description": null
+  },
   "RAID_YakushimaBoss002_Head": {
+    "localized_name": "달의 군주",
+    "description": null
+  },
+  "RAID_YakushimaBoss002_Head_2": {
     "localized_name": "달의 군주",
     "description": null
   },

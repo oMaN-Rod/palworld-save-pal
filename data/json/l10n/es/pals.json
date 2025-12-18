@@ -1327,6 +1327,10 @@
     "localized_name": "Lullu",
     "description": "A principios de primavera, viaja con el viento esparciendo polen por toda la isla. Las alergias de Flopie las causa Lullu."
   },
+  "LegendDeer": {
+    "localized_name": "Hartalis",
+    "description": "«Un silencio inquietante y, a la vez, reconfortante. Aquí ya no queda nadie más. Los han salvado a todos. Por eso, condúceme a mí también, oh, rey salvador, a la calma infinita». El documento antiguo se interrumpe aquí."
+  },
   "LilyQueen": {
     "localized_name": "Lyleen",
     "description": "Un Pal muy tranquilón, con cariño para dar y tomar. Se ocupa de cuidar a otros Pals huerfanitos. La fuerza de un SolarBeam está en su disciplina."
@@ -1381,6 +1385,10 @@
   },
   "Male_DesertPeople01": {
     "localized_name": "Aldeano",
+    "description": null
+  },
+  "Male_Kigurumi01_v01": {
+    "localized_name": "Isleño",
     "description": null
   },
   "Male_Ninja01": {
@@ -1807,6 +1815,10 @@
     "localized_name": "Fusilero de Los Vigilantes",
     "description": null
   },
+  "Police_Shield_Tower": {
+    "localized_name": "Fusilero de Los Vigilantes",
+    "description": null
+  },
   "Police_Shotgun": {
     "localized_name": "Élite de Los Vigilantes",
     "description": null
@@ -1883,6 +1895,14 @@
     "localized_name": "Blazamut Ryu",
     "description": null
   },
+  "RAID_LegendDeer": {
+    "localized_name": "Hartalis",
+    "description": null
+  },
+  "RAID_LegendDeer_2": {
+    "localized_name": "Hartalis",
+    "description": null
+  },
   "RAID_NightLady": {
     "localized_name": "Bellanoir",
     "description": null
@@ -1899,7 +1919,15 @@
     "localized_name": "Auténtico ojo de Cthulhu",
     "description": null
   },
+  "RAID_YakushimaBoss001_Green_2": {
+    "localized_name": "Auténtico ojo de Cthulhu",
+    "description": null
+  },
   "RAID_YakushimaBoss002": {
+    "localized_name": "Señor de la Luna",
+    "description": null
+  },
+  "RAID_YakushimaBoss002_2": {
     "localized_name": "Señor de la Luna",
     "description": null
   },
@@ -1907,11 +1935,23 @@
     "localized_name": "Señor de la Luna",
     "description": null
   },
+  "RAID_YakushimaBoss002_Hand_Left_2": {
+    "localized_name": "Señor de la Luna",
+    "description": null
+  },
   "RAID_YakushimaBoss002_Hand_Right": {
     "localized_name": "Señor de la Luna",
     "description": null
   },
+  "RAID_YakushimaBoss002_Hand_Right_2": {
+    "localized_name": "Señor de la Luna",
+    "description": null
+  },
   "RAID_YakushimaBoss002_Head": {
+    "localized_name": "Señor de la Luna",
+    "description": null
+  },
+  "RAID_YakushimaBoss002_Head_2": {
     "localized_name": "Señor de la Luna",
     "description": null
   },
