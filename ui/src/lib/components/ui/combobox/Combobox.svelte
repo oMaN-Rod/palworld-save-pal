@@ -41,6 +41,7 @@
 	let listboxId = nanoid();
 	let searchTerm = $state('');
 	let filteredOptions = $state(options);
+	let isUserSearching = $state(false);
 
 	async function searchOptions() {
 		filteredOptions = options.filter((option: SelectOption) =>
@@ -72,8 +73,20 @@
 			value = option.value.toString();
 			searchTerm = option.label;
 			isOpen = false;
+			isUserSearching = false;
 			onChange(value);
 		}
+	}
+
+	function handleFocus() {
+		isUserSearching = false;
+		filteredOptions = options;
+		isOpen = true;
+	}
+
+	function handleInput() {
+		isUserSearching = true;
+		isOpen = true;
 	}
 
 	function handleKeyDown(event: KeyboardEvent) {
@@ -126,7 +139,7 @@
 	}
 
 	$effect(() => {
-		if (searchTerm) {
+		if (isUserSearching && searchTerm) {
 			debounceSearch();
 		} else {
 			filteredOptions = options;
@@ -187,12 +200,18 @@
 				class="focus:outline-hidden w-full bg-transparent"
 				{placeholder}
 				bind:value={searchTerm}
-				onfocus={() => (isOpen = true)}
-				oninput={() => (isOpen = true)}
+				onfocus={handleFocus}
+				oninput={handleInput}
 			/>
 			<ChevronDown
 				class={cn('cursor-pointer transition-transform', isOpen && 'rotate-180')}
-				onclick={() => (isOpen = !isOpen)}
+				onclick={() => {
+					if (!isOpen) {
+						isUserSearching = false;
+						filteredOptions = options;
+					}
+					isOpen = !isOpen;
+				}}
 			/>
 		</div>
 		{#if isOpen}
