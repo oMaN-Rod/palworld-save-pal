@@ -132,23 +132,23 @@
     "description": null
   },
   "EmitFlame1": {
-    "localized_name": "Разжигание огня, ур. 1",
+    "localized_name": "Разведение огня, ур. 1",
     "description": null
   },
   "EmitFlame1_2": {
-    "localized_name": "Разжигание огня, ур. 2",
+    "localized_name": "Разведение огня, ур. 2",
     "description": null
   },
   "EmitFlame1_3": {
-    "localized_name": "Разжигание огня, ур. 3",
+    "localized_name": "Разведение огня, ур. 3",
     "description": null
   },
   "EmitFlame1_4": {
-    "localized_name": "Разжигание огня, ур. 4",
+    "localized_name": "Разведение огня, ур. 4",
     "description": null
   },
   "EmitFlame1_5": {
-    "localized_name": "Разжигание огня, ур. 5",
+    "localized_name": "Разведение огня, ур. 5",
     "description": null
   },
   "EmitFlame2": {
@@ -464,7 +464,7 @@
     "description": null
   },
   "Mining5": {
-    "localized_name": "Разработка кирки и каски",
+    "localized_name": "Разработка вагонетки",
     "description": null
   },
   "Seeding1": {
