@@ -13,15 +13,15 @@
   },
   "Accessory_AirDash1": {
     "localized_name": "Botas de propulsión aérea",
-    "description": "Accesorio que permite al personaje jugador propulsarse en el aire al llevarlo equipado."
+    "description": "Accesorio que permite a tu personaje propulsarse en el aire al llevarlo equipado."
   },
   "Accessory_AirDash2": {
     "localized_name": "Botas de propulsión aérea doble",
-    "description": "Accesorio que permite al personaje jugador propulsarse en el aire 2 veces al llevarlo equipado."
+    "description": "Accesorio que permite a tu personaje propulsarse en el aire 2 veces al llevarlo equipado."
   },
   "Accessory_AirDash3": {
     "localized_name": "Botas de propulsión aérea triple",
-    "description": "Accesorio que permite al personaje jugador propulsarse en el aire 3 veces al llevarlo equipado."
+    "description": "Accesorio permite a tu personaje propulsarse en el aire 3 veces al llevarlo equipado."
   },
   "Accessory_AirDash4": {
     "localized_name": "es Text",
@@ -149,19 +149,19 @@
   },
   "Accessory_JumpCount_Increase1": {
     "localized_name": "Botas de salto doble",
-    "description": "Accesorio que permite al personaje jugador saltar en el aire al llevarlo equipado."
+    "description": "Accesorio que permite a tu personaje saltar en el aire al llevarlo equipado."
   },
   "Accessory_JumpCount_Increase2": {
     "localized_name": "Botas de salto triple",
-    "description": "Accesorio que permite al personaje jugador saltar en el aire 2 veces al llevarlo equipado."
+    "description": "Accesorio que permite a tu personaje saltar en el aire 2 veces al llevarlo equipado."
   },
   "Accessory_JumpCount_Increase3": {
     "localized_name": "Botas de salto cuádruple",
-    "description": "Accesorio que permite al personaje jugador saltar en el aire 3 veces al llevarlo equipado."
+    "description": "Accesorio que permite a tu personaje saltar en el aire 3 veces al llevarlo equipado."
   },
   "Accessory_JumpPower_Increase": {
     "localized_name": "Cinto antigravedad",
-    "description": "Accesorio que aumenta la fuerza de salto del personaje jugador al llevarlo equipado."
+    "description": "Accesorio que aumenta la fuerza de salto de tu personaje al llevarlo equipado."
   },
   "Accessory_LeafResist_1": {
     "localized_name": "Anillo sellahierba",
@@ -262,6 +262,10 @@
   "AffectionFruit_01": {
     "localized_name": "Melocotón preciado del vínculo",
     "description": "Fruta mágica muy rara. Se dice que si un Pal la come, abrirá su corazón a los humanos. Escoge cuidadosamente a quién dársela."
+  },
+  "AffectionFruit_02": {
+    "localized_name": "Melocotón pequeño del vínculo",
+    "description": "Pequeña fruta repleta de ternura. Se dice que si un Pal la come, abrirá su corazón a los humanos. Escoge cuidadosamente a quién dársela."
   },
   "AncientParts2": {
     "localized_name": "Núcleo de civilización antigua",
@@ -377,7 +381,7 @@
   },
   "BaconEggs": {
     "localized_name": "Huevos con panceta de Rushoar",
-    "description": "El sabor ahumado del tocino y la suave textura de los huevos casan en perfecta armonía. Concede Ataque +10% durante cierto tiempo tras comerlo."
+    "description": "El sabor ahumado del tocino y la suave textura de los huevos casan en perfecta armonía. Concede Ataque +10 % durante cierto tiempo tras comerlo."
   },
   "BakedMeat_BerryGoat": {
     "localized_name": "Caprity a las finas hierbas",
@@ -537,7 +541,7 @@
   },
   "Blueprint_CandleStand": {
     "localized_name": "Plano de candelabro majestuoso",
-    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir un «Candelabro majestuoso»."
+    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir un «<MapObjectName id=|CandleStand|/>»."
   },
   "Blueprint_ChargeLaserRifle_2": {
     "localized_name": "Plano de rifle de carga 1",
@@ -621,11 +625,11 @@
   },
   "Blueprint_ConservationGroupBannerA": {
     "localized_name": "Plano de bandera de la Liga de defensa de los Pals",
-    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir un «Bandera de la Liga de defensa de los Pals»."
+    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir un «<MapObjectName id=|ConservationGroupBannerA|/>»."
   },
   "Blueprint_ConservationGroupBannerB": {
     "localized_name": "Plano de estandarte de la Liga de defensa de los Pals",
-    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir un «Estandarte de la Liga de defensa de los Pals»."
+    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir un «<MapObjectName id=|ConservationGroupBannerB|/>»."
   },
   "Blueprint_CopperArmorCold_2": {
     "localized_name": "Plano de armadura de metal resistente al frío 1",
@@ -741,7 +745,7 @@
   },
   "Blueprint_FireStand": {
     "localized_name": "Plano de candelabro ceremonial",
-    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir una «Candelabro ceremonial»."
+    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir una «<MapObjectName id=|FireStand|/>»."
   },
   "Blueprint_FishingRod_01_2": {
     "localized_name": "Plano de Caña de pescar inicial (Gumoss)",
@@ -869,7 +873,7 @@
   },
   "Blueprint_GuardianDogStatue": {
     "localized_name": "Plano de estatua de Yakumo",
-    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir una «Estatua de Yakumo»."
+    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir una «<MapObjectName id=|GuardianDogStatue|/>»."
   },
   "Blueprint_GuidedMissileLauncher_2": {
     "localized_name": "Plano de lanzamisiles 1",
@@ -1293,7 +1297,7 @@
   },
   "Blueprint_HeadEquip028_3": {
     "localized_name": "Plano de diadema de Ribbuny 3",
-    "description": "Si está en tu poder, se desbloqueará la receta |HeadEquip028 2 (Rare)|. Se puede elaborar con |Mesa de trabajo primitiva|."
+    "description": "Si está en tu poder, se desbloqueará la receta «HeadEquip028 2 (Rare)». Se puede elaborar con «Mesa de trabajo primitiva»."
   },
   "Blueprint_HeadEquip028_4": {
     "localized_name": "Plano de diadema de Ribbuny 4",
@@ -1345,7 +1349,7 @@
   },
   "Blueprint_Hunter_GangFlag": {
     "localized_name": "Plano de bandera de los Furtivos",
-    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir una «Hunter GangFlag»."
+    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir una «<MapObjectName id=|Hunter GangFlag|/>»."
   },
   "Blueprint_IronArmorCold_2": {
     "localized_name": "Plano de armadura de metal refinado resistente al frío 1",
@@ -1413,7 +1417,7 @@
   },
   "Blueprint_LanternTop": {
     "localized_name": "Plano de linterna",
-    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir una «Linterna»."
+    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir una «<MapObjectName id=|LanternTop|/>»."
   },
   "Blueprint_LaserGatlingGun_2": {
     "localized_name": "Plano de ametralladora Gatling láser 1",
@@ -1469,7 +1473,7 @@
   },
   "Blueprint_LilyQueenStatue": {
     "localized_name": "Plano de estatua de Lyleen",
-    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir una «Estatua de Lyleen»."
+    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir una «<MapObjectName id=|LilyQueenStatue|/>»."
   },
   "Blueprint_MakeshiftAssaultRifle_2": {
     "localized_name": "Plano de rifle de asalto ruinoso 1",
@@ -1571,6 +1575,46 @@
     "localized_name": "Plano de Mosquete 4",
     "description": "Si lo llevas encima, desbloquearás la receta de «Mosquete (Legendary)». Podrás fabricarla en la «WeaponFactory Dirty 01»."
   },
+  "Blueprint_Octavia001_Armor_5": {
+    "localized_name": "Plano de armadura V1, 4",
+    "description": "[Colaboración con ULTRAKILL] Si está en tu poder, se desbloqueará la receta «Octavia001 Armor 5 (Legendary)». Se puede elaborar con «Factory Hard 02»."
+  },
+  "Blueprint_Octavia002_Armor_5": {
+    "localized_name": "Plano de armadura V2, 4",
+    "description": "[Colaboración con ULTRAKILL] Si está en tu poder, se desbloqueará la receta «Octavia002 Armor 5 (Legendary)». Se puede elaborar con «Factory Hard 03»."
+  },
+  "Blueprint_OctaviaRevolver_2": {
+    "localized_name": "Plano de revólver Marksman 1",
+    "description": "[Colaboración con ULTRAKILL] Si está en tu poder, se desbloqueará la receta « Revólver Marksman(Uncommon)». Se puede elaborar con «WeaponFactory Dirty 02»."
+  },
+  "Blueprint_OctaviaRevolver_3": {
+    "localized_name": "Plano de revólver Marksman 2",
+    "description": "[Colaboración con ULTRAKILL] Si está en tu poder, se desbloqueará la receta «Revólver Marksman (Rare)». Se puede elaborar con «WeaponFactory Dirty 02»."
+  },
+  "Blueprint_OctaviaRevolver_4": {
+    "localized_name": "Plano de revólver Marksman 3",
+    "description": "[Colaboración con ULTRAKILL] Si está en tu poder, se desbloqueará la receta «Revólver Marksman (Epic)». Se puede elaborar con «WeaponFactory Dirty 02»."
+  },
+  "Blueprint_OctaviaRevolver_5": {
+    "localized_name": "Plano de revólver Marksman 4",
+    "description": "[Colaboración con ULTRAKILL] Si está en tu poder, se desbloqueará la receta «Revólver Marksman (Legendary)». Se puede elaborar con «WeaponFactory Dirty 02»."
+  },
+  "Blueprint_OctaviaShotgun_2": {
+    "localized_name": "Plano de escopeta Core Eject 1",
+    "description": "[Colaboración con ULTRAKILL] Si está en tu poder, se desbloqueará la receta «Escopeta Core Eject (Uncommon)». Se puede elaborar con «WeaponFactory Dirty 03»."
+  },
+  "Blueprint_OctaviaShotgun_3": {
+    "localized_name": "Plano de escopeta Core Eject 2",
+    "description": "[Colaboración con ULTRAKILL] Si está en tu poder, se desbloqueará la receta «Escopeta Core Eject (Rare)». Se puede elaborar con «WeaponFactory Dirty 03»."
+  },
+  "Blueprint_OctaviaShotgun_4": {
+    "localized_name": "Plano de escopeta Core Eject 3",
+    "description": "[Colaboración con ULTRAKILL] Si está en tu poder, se desbloqueará la receta «Escopeta Core Eject (Epic)». Se puede elaborar con «WeaponFactory Dirty 03»."
+  },
+  "Blueprint_OctaviaShotgun_5": {
+    "localized_name": "Plano de escopeta Core Eject 4",
+    "description": "[Colaboración con ULTRAKILL] Si está en tu poder, se desbloqueará la receta «Escopeta Core Eject (Legendary)». Se puede elaborar con «WeaponFactory Dirty 03»."
+  },
   "Blueprint_OldRevolver_2": {
     "localized_name": "Plano de revólver viejo 1",
     "description": "Si está en tu poder, se desbloqueará la receta «Revólver viejo (Uncommon)». Se puede elaborar con «WeaponFactory Dirty 02»."
@@ -1609,83 +1653,83 @@
   },
   "Blueprint_PlasticArmorCold_2": {
     "localized_name": "Plano de armadura de plastiacero resistente al frío 1",
-    "description": "Si está en tu poder, se desbloqueará la receta |Armadura de plastiacero resistente al frío (Uncommon)|. Se puede elaborar con |Factory Hard 03|."
+    "description": "Si está en tu poder, se desbloqueará la receta «Armadura de plastiacero resistente al frío (Uncommon)». Se puede elaborar con «Factory Hard 03»."
   },
   "Blueprint_PlasticArmorCold_3": {
     "localized_name": "Plano de armadura de plastiacero resistente al frío 2",
-    "description": "Si está en tu poder, se desbloqueará la receta |Armadura de plastiacero resistente al frío (Rare)|. Se puede elaborar con |Factory Hard 03|."
+    "description": "Si está en tu poder, se desbloqueará la receta «Armadura de plastiacero resistente al frío (Rare)». Se puede elaborar con «Factory Hard 03»."
   },
   "Blueprint_PlasticArmorCold_4": {
     "localized_name": "Plano de armadura de plastiacero resistente al frío 3",
-    "description": "Si está en tu poder, se desbloqueará la receta |Armadura de plastiacero resistente al frío (Epic)|. Se puede elaborar con |Factory Hard 03|."
+    "description": "Si está en tu poder, se desbloqueará la receta «Armadura de plastiacero resistente al frío (Epic)». Se puede elaborar con «Factory Hard 03»."
   },
   "Blueprint_PlasticArmorCold_5": {
     "localized_name": "Plano de armadura de plastiacero resistente al frío 4",
-    "description": "Si está en tu poder, se desbloqueará la receta |Armadura de plastiacero resistente al frío (Legendary)|. Se puede elaborar con |Factory Hard 03|."
+    "description": "Si está en tu poder, se desbloqueará la receta «Armadura de plastiacero resistente al frío (Legendary)». Se puede elaborar con «Factory Hard 03»."
   },
   "Blueprint_PlasticArmorHeat_2": {
     "localized_name": "Plano de armadura de plastiacero ignífuga 1",
-    "description": "Si está en tu poder, se desbloqueará la receta |Armadura de plastiacero ignífuga (Uncommon)|. Se puede elaborar con |Factory Hard 03|."
+    "description": "Si está en tu poder, se desbloqueará la receta «Armadura de plastiacero ignífuga (Uncommon)». Se puede elaborar con «Factory Hard 03»."
   },
   "Blueprint_PlasticArmorHeat_3": {
     "localized_name": "Plano de armadura de plastiacero ignífuga 2",
-    "description": "Si está en tu poder, se desbloqueará la receta |Armadura de plastiacero ignífuga (Rare)|. Se puede elaborar con |Factory Hard 03|."
+    "description": "Si está en tu poder, se desbloqueará la receta «Armadura de plastiacero ignífuga (Rare)». Se puede elaborar con «Factory Hard 03»."
   },
   "Blueprint_PlasticArmorHeat_4": {
     "localized_name": "Plano de armadura de plastiacero ignífuga 3",
-    "description": "Si está en tu poder, se desbloqueará la receta |Armadura de plastiacero ignífuga (Epic)|. Se puede elaborar con |Factory Hard 03|."
+    "description": "Si está en tu poder, se desbloqueará la receta «Armadura de plastiacero ignífuga (Epic)». Se puede elaborar con «Factory Hard 03»."
   },
   "Blueprint_PlasticArmorHeat_5": {
     "localized_name": "Plano de armadura de plastiacero ignífuga 4",
-    "description": "Si está en tu poder, se desbloqueará la receta |Armadura de plastiacero ignífuga (Legendary)|. Se puede elaborar con |Factory Hard 03|."
+    "description": "Si está en tu poder, se desbloqueará la receta «Armadura de plastiacero ignífuga (Legendary)». Se puede elaborar con «Factory Hard 03»."
   },
   "Blueprint_PlasticArmorWeight_2": {
     "localized_name": "Plano de armadura de plastiacero ligera 1",
-    "description": "Si está en tu poder, se desbloqueará la receta |Armadura de plastiacero ligera (Uncommon)|. Se puede elaborar con |Factory Hard 03|."
+    "description": "Si está en tu poder, se desbloqueará la receta «Armadura de plastiacero ligera (Uncommon)». Se puede elaborar con «Factory Hard 03»."
   },
   "Blueprint_PlasticArmorWeight_3": {
     "localized_name": "Plano de armadura de plastiacero ligera 2",
-    "description": "Si está en tu poder, se desbloqueará la receta |Armadura de plastiacero ligera (Rare)|. Se puede elaborar con |Factory Hard 03|."
+    "description": "Si está en tu poder, se desbloqueará la receta «Armadura de plastiacero ligera (Rare)». Se puede elaborar con «Factory Hard 03»."
   },
   "Blueprint_PlasticArmorWeight_4": {
     "localized_name": "Plano de armadura de plastiacero ligera 3",
-    "description": "Si está en tu poder, se desbloqueará la receta |Armadura de plastiacero ligera (Epic)|. Se puede elaborar con |Factory Hard 03|."
+    "description": "Si está en tu poder, se desbloqueará la receta «Armadura de plastiacero ligera (Epic)». Se puede elaborar con «Factory Hard 03»."
   },
   "Blueprint_PlasticArmorWeight_5": {
     "localized_name": "Plano de armadura de plastiacero ligera 4",
-    "description": "Si está en tu poder, se desbloqueará la receta |Armadura de plastiacero ligera (Legendary)|. Se puede elaborar con |Factory Hard 03|."
+    "description": "Si está en tu poder, se desbloqueará la receta «Armadura de plastiacero ligera (Legendary)». Se puede elaborar con «Factory Hard 03»."
   },
   "Blueprint_PlasticArmor_2": {
     "localized_name": "Plano de armadura de plastiacero 1",
-    "description": "Si está en tu poder, se desbloqueará la receta |Armadura de plastiacero (Uncommon)|. Se puede elaborar con |Factory Hard 03|."
+    "description": "Si está en tu poder, se desbloqueará la receta «Armadura de plastiacero (Uncommon)». Se puede elaborar con «Factory Hard 03»."
   },
   "Blueprint_PlasticArmor_3": {
     "localized_name": "Plano de armadura de plastiacero 2",
-    "description": "Si está en tu poder, se desbloqueará la receta |Armadura de plastiacero (Rare)|. Se puede elaborar con |Factory Hard 03|."
+    "description": "Si está en tu poder, se desbloqueará la receta «Armadura de plastiacero (Rare)». Se puede elaborar con «Factory Hard 03»."
   },
   "Blueprint_PlasticArmor_4": {
     "localized_name": "Plano de armadura de plastiacero 3",
-    "description": "Si está en tu poder, se desbloqueará la receta |Armadura de plastiacero (Epic)|. Se puede elaborar con |Factory Hard 03|."
+    "description": "Si está en tu poder, se desbloqueará la receta «Armadura de plastiacero (Epic)». Se puede elaborar con «Factory Hard 03»."
   },
   "Blueprint_PlasticArmor_5": {
     "localized_name": "Plano de armadura de plastiacero 4",
-    "description": "Si está en tu poder, se desbloqueará la receta |Armadura de plastiacero (Legendary)|. Se puede elaborar con |Factory Hard 03|."
+    "description": "Si está en tu poder, se desbloqueará la receta «Armadura de plastiacero (Legendary)». Se puede elaborar con «Factory Hard 03»."
   },
   "Blueprint_PlasticHelmet_2": {
     "localized_name": "Plano de casco de plastiacero 1",
-    "description": "Si está en tu poder, se desbloqueará la receta |Casco de plastiacero (Uncommon)|. Se puede elaborar con |Factory Hard 03|."
+    "description": "Si está en tu poder, se desbloqueará la receta «Casco de plastiacero (Uncommon)». Se puede elaborar con «Factory Hard 03»."
   },
   "Blueprint_PlasticHelmet_3": {
     "localized_name": "Plano de casco de plastiacero 2",
-    "description": "Si está en tu poder, se desbloqueará la receta |Casco de plastiacero (Rare)|. Se puede elaborar con |Factory Hard 03|."
+    "description": "Si está en tu poder, se desbloqueará la receta «Casco de plastiacero (Rare)». Se puede elaborar con «Factory Hard 03»."
   },
   "Blueprint_PlasticHelmet_4": {
     "localized_name": "Plano de casco de plastiacero 3",
-    "description": "Si está en tu poder, se desbloqueará la receta |Casco de plastiacero (Epic)|. Se puede elaborar con |Factory Hard 03|."
+    "description": "Si está en tu poder, se desbloqueará la receta «Casco de plastiacero (Epic)». Se puede elaborar con «Factory Hard 03»."
   },
   "Blueprint_PlasticHelmet_5": {
     "localized_name": "Plano de casco de plastiacero 4",
-    "description": "Si está en tu poder, se desbloqueará la receta |Casco de plastiacero (Legendary)|. Se puede elaborar con |Factory Hard 03|."
+    "description": "Si está en tu poder, se desbloqueará la receta «Casco de plastiacero (Legendary)». Se puede elaborar con «Factory Hard 03»."
   },
   "Blueprint_PumpActionShotgun_2": {
     "localized_name": "Plano de escopeta de repetición 1",
@@ -1801,11 +1845,11 @@
   },
   "Blueprint_SF_Chair": {
     "localized_name": "Plano de silla estilo laboratorio",
-    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir una «SF Chair»."
+    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir una «<MapObjectName id=|SF Chair|/>»."
   },
   "Blueprint_SF_Desk": {
     "localized_name": "Plano de escritorio estilo laboratorio",
-    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir una «SF Desk»."
+    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir una «<MapObjectName id=|SF Desk|/>»."
   },
   "Blueprint_SemiAutoRifle_2": {
     "localized_name": "Plano de rifle semiautomático 1",
@@ -1841,7 +1885,7 @@
   },
   "Blueprint_Shrine_Lantern": {
     "localized_name": "Plano de linterna ceremonial",
-    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir una «Shrine Lantern»."
+    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir una «<MapObjectName id=|Shrine Lantern|/>»."
   },
   "Blueprint_SingleShotRifle_2": {
     "localized_name": "Plano de Rifle de un solo tiro 1",
@@ -1941,7 +1985,7 @@
   },
   "Blueprint_WallTorch02": {
     "localized_name": "Plano de antorcha majestuosa de pared",
-    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir una «Antorcha majestuosa de pared»."
+    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir una «<MapObjectName id=|WallTorch02|/>»."
   },
   "Blueprint_WeakerBow_2": {
     "localized_name": "Plano de arco anticuado 1",
@@ -1961,11 +2005,11 @@
   },
   "Blueprint_Wire_Fence": {
     "localized_name": "Plano de valla de alambre",
-    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir una «Wire Fence»."
+    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir una «<MapObjectName id=|Wire Fence|/>»."
   },
   "Blueprint_WoodenBarricade": {
     "localized_name": "Plano de barricada de madera",
-    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir una «Barricada de madera»."
+    "description": "Mientras se encuentre en tu poder o en tu base, podrás construir una «<MapObjectName id=|WoodenBarricade|/>»."
   },
   "Blueprint_YakushimaArmor001": {
     "localized_name": "Plano de Cota de placas sagrada",
@@ -2046,6 +2090,10 @@
   "Blueprint_YakushimaBlade004_5": {
     "localized_name": "Plano de Excalibur 4",
     "description": "[Colaboración con Terraria] Si está en tu poder, desbloquearás la receta de «Excalibur» (Legendary). Podrás fabricarlo en la «WeaponFactory Dirty 02»."
+  },
+  "Blueprint_YakushimaBoss002_Relic": {
+    "localized_name": "Plano de estatua del Señor de la Luna",
+    "description": "[Colaboración con Terraria] Mientras se encuentre en tu poder o en tu base, podrás construir una «<MapObjectName id=|YakushimaBoss002 Relic|/>»."
   },
   "Blueprint_YakushimaGun001": {
     "localized_name": "Plano de Golpeador del vórtice",
@@ -2166,6 +2214,10 @@
   "Blueprint_YakushimaLantern001_5": {
     "localized_name": "Plano de Brillo nocturno 4",
     "description": "[Colaboración con Terraria] Si está en tu poder, desbloquearás la receta de «Brillo nocturno» (Legendary). Podrás fabricarlo en la «WeaponFactory Dirty 02»."
+  },
+  "Blueprint_Zoe_Halloweenskin_1": {
+    "localized_name": "Plano de traje de Halloween de Zoe",
+    "description": "Notas tomadas tras escuchar a escondidas los soliloquios de Zoe. Elabora el producto en una mesa de trabajo y entrégaselo al finalizar."
   },
   "Bone": {
     "localized_name": "Hueso",
@@ -2541,7 +2593,7 @@
   },
   "Carbonara": {
     "localized_name": "Carbonara",
-    "description": "Pasta aliñada con Huevo y Leche. Concede Defensa +20% durante cierto tiempo tras comerla."
+    "description": "Pasta aliñada con Huevo y Leche. Concede Defensa +20 % durante cierto tiempo tras comerla."
   },
   "Carrot": {
     "localized_name": "Zanahoria",
@@ -2593,11 +2645,11 @@
   },
   "Cheeseburger_2": {
     "localized_name": "Hamburguesa de Mozzarina con queso",
-    "description": "Plato que alcanza cotas de delicia insospechadas al añadirle queso. Concede Ataque +20% y mejora un poco la sensación de saciedad durante cierto tiempo tras comerla."
+    "description": "Plato que alcanza cotas de delicia insospechadas al añadirle queso. Concede Ataque +20 % y mejora un poco la sensación de saciedad durante cierto tiempo tras comerla."
   },
   "ChickenSaute": {
     "localized_name": "Chikipi a la sartén",
-    "description": "Plato elaborado con una gruesa pechuga de pollo salteada en mantequilla. Tiene un refrescante toque de limón. Aumenta ligeramente la velocidad de trabajo durante cierto tiempo tras comerlo."
+    "description": "Plato elaborado con gruesos trozos de pollo salteados en mantequilla. Tiene un refrescante toque de limón. Aumenta ligeramente la velocidad de trabajo durante cierto tiempo tras comerlo."
   },
   "Chowder": {
     "localized_name": "Crema de Dumud",
@@ -2809,7 +2861,7 @@
   },
   "Curry": {
     "localized_name": "Curri de Mammorest",
-    "description": "Plato de verdura y carne guisadas con especias. La carne, cortada en trozos grandes, lo convierte en un manjar. Durante un tiempo, Ataque +25%."
+    "description": "Plato de verdura y carne guisadas con especias. La carne, cortada en trozos grandes, lo convierte en un manjar. Durante un tiempo, Ataque +25 %."
   },
   "Curry_old": {
     "localized_name": "es Text",
@@ -2837,11 +2889,11 @@
   },
   "DeerLocoMoco": {
     "localized_name": "Plato combinado de Eikthyrdeer",
-    "description": "Hamburguesa gruesa con un huevo frito en su punto. La sublime combinación de estos dos elementos crea una explosión de felicidad en tu boca. Concede Ataque +20% durante cierto tiempo tras comerlo."
+    "description": "Hamburguesa gruesa con un huevo frito en su punto. La sublime combinación de estos dos elementos crea una explosión de felicidad en tu boca. Concede Ataque +20 % durante cierto tiempo tras comerlo."
   },
   "DeerStew": {
     "localized_name": "Estofado de Eikthyrdeer",
-    "description": "Carne de ciervo guisada con cariño que se deshace en la boca. Los sabores de las verduras y la carne se ligan para resaltar su finura. Concede Defensa +20% durante cierto tiempo tras comerlo."
+    "description": "Carne de ciervo guisada con cariño que se deshace en la boca. Los sabores de las verduras y la carne se ligan para resaltar su finura. Concede Defensa +20 % durante cierto tiempo tras comerlo."
   },
   "Diamond": {
     "localized_name": "Diamante",
@@ -2853,23 +2905,23 @@
   },
   "DoubleBarrelShotgun": {
     "localized_name": "Escopeta de doble cañón",
-    "description": "Escopeta mortífera de corta distancia y doble tiro. El cargador es pequeño, pero tiene mucha potencia de disparo."
+    "description": "Escopeta mortífera de corta distancia y doble tiro. El cargador es pequeño, pero tiene mucha potencia de fuego."
   },
   "DoubleBarrelShotgun_2": {
     "localized_name": "Escopeta de doble cañón",
-    "description": "Escopeta mortífera de corta distancia y doble tiro. El cargador es pequeño, pero tiene mucha potencia de disparo."
+    "description": "Escopeta mortífera de corta distancia y doble tiro. El cargador es pequeño, pero tiene mucha potencia de fuego."
   },
   "DoubleBarrelShotgun_3": {
     "localized_name": "Escopeta de doble cañón",
-    "description": "Escopeta mortífera de corta distancia y doble tiro. El cargador es pequeño, pero tiene mucha potencia de disparo."
+    "description": "Escopeta mortífera de corta distancia y doble tiro. El cargador es pequeño, pero tiene mucha potencia de fuego."
   },
   "DoubleBarrelShotgun_4": {
     "localized_name": "Escopeta de doble cañón",
-    "description": "Escopeta mortífera de corta distancia y doble tiro. El cargador es pequeño, pero tiene mucha potencia de disparo."
+    "description": "Escopeta mortífera de corta distancia y doble tiro. El cargador es pequeño, pero tiene mucha potencia de fuego."
   },
   "DoubleBarrelShotgun_5": {
     "localized_name": "Escopeta de doble cañón",
-    "description": "Escopeta mortífera de corta distancia y doble tiro. El cargador es pequeño, pero tiene mucha potencia de disparo."
+    "description": "Escopeta mortífera de corta distancia y doble tiro. El cargador es pequeño, pero tiene mucha potencia de fuego."
   },
   "Eaglestew": {
     "localized_name": "Guiso de Galeclaw",
@@ -2937,7 +2989,7 @@
   },
   "EnergyLauncherBullet": {
     "localized_name": "Cartucho de plasma",
-    "description": "Munición para armas como la Cañón de plasma."
+    "description": "Munición para armas como el Cañón de plasma."
   },
   "EnergyRocketLauncher": {
     "localized_name": "Cañón de plasma",
@@ -3173,7 +3225,7 @@
   },
   "FriedKelpie": {
     "localized_name": "Fritos de Kelpsea",
-    "description": "La textura esponjosa del pescado complementa al rebozado crujiente. Concede Defensa +10% y la reducción de COR disminuirá durante cierto tiempo tras comerlo."
+    "description": "La textura esponjosa del pescado complementa al rebozado crujiente. Concede Defensa +10 % y la reducción de COR disminuirá durante cierto tiempo tras comerlo."
   },
   "FriedVegetables": {
     "localized_name": "Verduras salteadas",
@@ -3357,19 +3409,19 @@
   },
   "GrapplingGun": {
     "localized_name": "Pistola de agarre",
-    "description": "Una pistola de agarre con la que desplazarse a toda velocidad. Dispara el gancho hacia un punto fijo y estira del tirador. Te permitirá llegar fácilmente a zonas de más altura."
+    "description": "Un lanzagarfios con la que desplazarse a toda velocidad. Dispara el gancho hacia un punto fijo y tira del tirador. Te permitirá llegar fácilmente a zonas de más altura."
   },
   "GrapplingGun2": {
     "localized_name": "Megapistola de agarre",
-    "description": "Una pistola de agarre con la que desplazarse a toda velocidad. Dispara el gancho hacia un punto fijo y estira del tirador. Ha sido mejorado y ahora tiene mayor alcance."
+    "description": "Un lanzagarfios con la que desplazarse a toda velocidad. Dispara el gancho hacia un punto fijo y tira del tirador. Ha sido mejorado y ahora tiene mayor alcance."
   },
   "GrapplingGun3": {
     "localized_name": "Gigapistola de agarre",
-    "description": "Una pistola de agarre con la que desplazarse a toda velocidad. Dispara el gancho hacia un punto fijo y estira del tirador. Su rendimiento ha mejorado enormemente con el estudio del prototipo."
+    "description": "Un lanzagarfios con la que desplazarse a toda velocidad. Dispara el gancho hacia un punto fijo y tira del tirador. Su rendimiento ha mejorado enormemente con el estudio del prototipo."
   },
   "GrapplingGun4": {
     "localized_name": "Terapistola de agarre",
-    "description": "Una pistola de agarre con la que desplazarse a toda velocidad. Dispara el gancho hacia un punto fijo y estira del tirador. Gracias a recientes investigaciones, cuenta con una maniobrabilidad abrumadora."
+    "description": "Un lanzagarfios con la que desplazarse a toda velocidad. Dispara el gancho hacia un punto fijo y tira del tirador. Gracias a recientes investigaciones, cuenta con una maniobrabilidad abrumadora."
   },
   "GrapplingGun5": {
     "localized_name": "Pistola de ultragarre",
@@ -3377,11 +3429,11 @@
   },
   "Gratin": {
     "localized_name": "Gratinado",
-    "description": "Plato elaborado con Patata cubiertas de salsa y al al horno. Bien caliente está buenísimo. Mejora un poco la sensación de saciedad durante un tiempo, Defensa +10%."
+    "description": "Plato elaborado con Patata cubiertas de salsa y al horno. Bien caliente está buenísimo. Mejora un poco la sensación de saciedad durante un tiempo, Defensa +10 %."
   },
   "GrenadeBullet": {
     "localized_name": "Munición de granada",
-    "description": "Munición para armas como la Lanzagranadas."
+    "description": "Munición para armas como el Lanzagranadas."
   },
   "GrenadeLauncher": {
     "localized_name": "Lanzagranadas",
@@ -3413,7 +3465,7 @@
   },
   "GrilledSheepHerbs": {
     "localized_name": "Lamball a las finas hierbas",
-    "description": "Receta de cordero con fragancia producida mediante el uso de abundantes bayas frescas para resaltar su sabor único. Concede Defensa +10% durante cierto tiempo tras comerlo."
+    "description": "Receta de cordero con fragancia producida mediante el uso de abundantes bayas frescas para resaltar su sabor único. Concede Defensa +10 % durante cierto tiempo tras comerlo."
   },
   "GuidedMissileLauncher": {
     "localized_name": "Lanzamisiles",
@@ -3445,7 +3497,7 @@
   },
   "Gyoza": {
     "localized_name": "Gyozas hervidas de Rushoar",
-    "description": "Empanadillas hervidas rellenas de carne y setas. Su textura blandita es irresistible. Te saciarán durante un tiempo, Ataque +10%."
+    "description": "Empanadillas hervidas rellenas de carne y setas. Su textura blandita es irresistible. Te saciarán durante un tiempo, Ataque +10 %."
   },
   "Hamburger": {
     "localized_name": "Hamburguesa",
@@ -3478,6 +3530,10 @@
   "HandgunBullet": {
     "localized_name": "Balas de revólver",
     "description": "Munición para armas como el HandGun Default."
+  },
+  "HandgunShield": {
+    "localized_name": "Escudo balístico",
+    "description": "Escudo balístico"
   },
   "Head001": {
     "localized_name": "Corona",
@@ -3820,7 +3876,7 @@
     "description": null
   },
   "HeadEquip001_purple": {
-    "localized_name": "Tiara de bruja (Ultra)",
+    "localized_name": "Tiara de bruja",
     "description": "Notas el siniestro poder de Bellanoir Libero (Ultra). Es extremadamente insólito hacerse con ella."
   },
   "HeadEquip023": {
@@ -3955,6 +4011,14 @@
     "localized_name": "Casco de Xenolord",
     "description": "Equipo para la cabeza inspirado en Xenolord."
   },
+  "HeadEquip045": {
+    "localized_name": "Casco Depresso",
+    "description": "Cabeza de un disfraz inspirado en Depresso. Parece que reduce ligeramente el daño de tipo oscuridad."
+  },
+  "HeadEquip046": {
+    "localized_name": "Corona real salvadora",
+    "description": "Notas el siniestro poder de Legend Deer (Ultra). Es extremadamente insólito hacerse con ella."
+  },
   "Herbs": {
     "localized_name": "Medicina de mala calidad",
     "description": "Medicina de mala calidad parar curar Resfriado, Esguince y Atracón. Aunque te las comas no restaurarás PV."
@@ -3985,7 +4049,7 @@
   },
   "HotDog_2": {
     "localized_name": "Perrito caliente de Rushoar",
-    "description": "Plato consistente en una salchicha gruesa insertada en un panecillo. Su crujiente dorado y sabor picante son exquisitos. Concede Defensa +20% durante cierto tiempo tras comerlo."
+    "description": "Plato consistente en una salchicha gruesa insertada en un panecillo. Su crujiente dorado y sabor picante son exquisitos. Concede Defensa +20 % durante cierto tiempo tras comerlo."
   },
   "HotMilk": {
     "localized_name": "Leche calentita",
@@ -4089,11 +4153,11 @@
   },
   "JellyfishFairy_jelly": {
     "localized_name": "Gelatina temblorosa de Jelliette",
-    "description": "Postre misterioso hecho con Meat JellyfishFairy y Fluido de Pal. Aumenta ligeramente los puntos de EXP obtenidos durante cierto tiempo y el Ataque un +10%."
+    "description": "Postre misterioso hecho con Meat JellyfishFairy y Fluido de Pal. Aumenta ligeramente los puntos de EXP obtenidos durante cierto tiempo y el Ataque un +10 %."
   },
   "JellyfishGhost_jelly": {
     "localized_name": "Gelatina danzante de Jellroy",
-    "description": "Postre misterioso hecho con Meat JellyfishGhost y Bayas rojas. Aumenta ligeramente los puntos de EXP obtenidos durante cierto tiempo y el Defensa un +10%."
+    "description": "Postre misterioso hecho con Meat JellyfishGhost y Bayas rojas. Aumenta ligeramente los puntos de EXP obtenidos durante cierto tiempo y el Defensa un +10 %."
   },
   "Katana": {
     "localized_name": "Katana",
@@ -4137,23 +4201,23 @@
   },
   "LaserRifle": {
     "localized_name": "Rifle láser",
-    "description": "Arma láser. Con gran potencia de disparo y fácil de manejar."
+    "description": "Arma láser. Con gran potencia de fuego y fácil de manejar."
   },
   "LaserRifle_2": {
     "localized_name": "Rifle láser",
-    "description": "Arma láser. Con gran potencia de disparo y fácil de manejar."
+    "description": "Arma láser. Con gran potencia de fuego y fácil de manejar."
   },
   "LaserRifle_3": {
     "localized_name": "Rifle láser",
-    "description": "Arma láser. Con gran potencia de disparo y fácil de manejar."
+    "description": "Arma láser. Con gran potencia de fuego y fácil de manejar."
   },
   "LaserRifle_4": {
     "localized_name": "Rifle láser",
-    "description": "Arma láser. Con gran potencia de disparo y fácil de manejar."
+    "description": "Arma láser. Con gran potencia de fuego y fácil de manejar."
   },
   "LaserRifle_5": {
     "localized_name": "Rifle láser",
-    "description": "Arma láser. Con gran potencia de disparo y fácil de manejar."
+    "description": "Arma láser. Con gran potencia de fuego y fácil de manejar."
   },
   "Launcher_Default": {
     "localized_name": "Lanzacohetes",
@@ -4293,23 +4357,23 @@
   },
   "MakeshiftHandgun": {
     "localized_name": "Revólver baratillo",
-    "description": "Una pistola hecha a partir de chatarra. Útil en los combates a corta distancia, pero con cañón de un solo tiro."
+    "description": "Una pistola hecha a partir de chatarra. Útil en los combates a corta distancia, pero con cadencia de un solo tiro."
   },
   "MakeshiftHandgun_2": {
     "localized_name": "Revólver baratillo",
-    "description": "Una pistola hecha a partir de chatarra. Útil en los combates a corta distancia, pero con cañón de un solo tiro."
+    "description": "Una pistola hecha a partir de chatarra. Útil en los combates a corta distancia, pero con cadencia de un solo tiro."
   },
   "MakeshiftHandgun_3": {
     "localized_name": "Revólver baratillo",
-    "description": "Una pistola hecha a partir de chatarra. Útil en los combates a corta distancia, pero con cañón de un solo tiro."
+    "description": "Una pistola hecha a partir de chatarra. Útil en los combates a corta distancia, pero con cadencia de un solo tiro."
   },
   "MakeshiftHandgun_4": {
     "localized_name": "Revólver baratillo",
-    "description": "Una pistola hecha a partir de chatarra. Útil en los combates a corta distancia, pero con cañón de un solo tiro."
+    "description": "Una pistola hecha a partir de chatarra. Útil en los combates a corta distancia, pero con cadencia de un solo tiro."
   },
   "MakeshiftHandgun_5": {
     "localized_name": "Revólver baratillo",
-    "description": "Una pistola hecha a partir de chatarra. Útil en los combates a corta distancia, pero con cañón de un solo tiro."
+    "description": "Una pistola hecha a partir de chatarra. Útil en los combates a corta distancia, pero con cadencia de un solo tiro."
   },
   "MakeshiftShotgun": {
     "localized_name": "Escopeta ruinosa",
@@ -4361,7 +4425,7 @@
   },
   "MarinatedMushrooms": {
     "localized_name": "Setas marinadas",
-    "description": "Plato que se prepara sazonando Setas con adobo. Conceden Defensa +10% durante cierto tiempo tras comerlas."
+    "description": "Plato que se prepara sazonando Setas con adobo. Conceden Defensa +10 % durante cierto tiempo tras comerlas."
   },
   "MeaninglessItem_ButcheringImportPal": {
     "localized_name": "Muestra de tejido residual",
@@ -4377,7 +4441,7 @@
   },
   "MeatAndPotatoes": {
     "localized_name": "Estofado de Galeclaw",
-    "description": "Guiso dulce y picante de carne y patatas. El sabor evoca tiempos pasados. Durante un tiempo, Defensa +25%."
+    "description": "Guiso dulce y picante de carne y patatas. El sabor evoca tiempos pasados. Durante un tiempo, Defensa +25 %."
   },
   "MeatCutterKnife": {
     "localized_name": "Cuchillo de carnicero",
@@ -4465,7 +4529,7 @@
   },
   "MeteorDrop": {
     "localized_name": "Fragmento de meteorito",
-    "description": "Un fragmento de roca caído del cielo. En su interior hay mucho Pal Crystal S, extraíble con |Trituradora|."
+    "description": "Un fragmento de roca caído del cielo. En su interior hay mucho Pal Crystal S, extraíble con «Trituradora»."
   },
   "Milk": {
     "localized_name": "Leche",
@@ -4555,33 +4619,89 @@
     "localized_name": "es Text",
     "description": "es Text"
   },
+  "Octavia001_Armor": {
+    "localized_name": "Armadura V1",
+    "description": "[Colaboración con ULTRAKILL] Armadura que se ha fabricado siguiendo el modelo de robots de guerra de tierras lejanas. Cuenta con una función de autorreparación que se activa al sufrir daños."
+  },
+  "Octavia001_Armor_5": {
+    "localized_name": "Armadura V1",
+    "description": "[Colaboración con ULTRAKILL] Armadura que se ha fabricado siguiendo el modelo de robots de guerra de tierras lejanas. Cuenta con una función de autorreparación que se activa al sufrir daños."
+  },
+  "Octavia002_Armor": {
+    "localized_name": "Armadura V2",
+    "description": "[Colaboración con ULTRAKILL] Armadura que se ha fabricado siguiendo el modelo de robots destinados a mantener la paz en tierras lejanas. La función de autorreperación con la que contaba se ha sustituido por un sistema de autoblindado más resistente."
+  },
+  "Octavia002_Armor_5": {
+    "localized_name": "Armadura V2",
+    "description": "[Colaboración con ULTRAKILL] Armadura que se ha fabricado siguiendo el modelo de robots destinados a mantener la paz en tierras lejanas. La función de autorreperación con la que contaba se ha sustituido por un sistema de autoblindado más resistente."
+  },
+  "OctaviaRevolver": {
+    "localized_name": "Revólver Marksman",
+    "description": "[Colaboración con ULTRAKILL] Un revólver que se alimenta de electricidad y puede disparar ilimitadamente, sin recargas. Al llevarlo equipado, las esferas de captura se sustituirán por monedas que rebotarán contra el enemigo."
+  },
+  "OctaviaRevolver_2": {
+    "localized_name": "Revólver Marksman",
+    "description": "[Colaboración con ULTRAKILL] Un revólver que se alimenta de electricidad y puede disparar ilimitadamente, sin recargas. Al llevarlo equipado, las esferas de captura se sustituirán por monedas que rebotarán contra el enemigo."
+  },
+  "OctaviaRevolver_3": {
+    "localized_name": "Revólver Marksman",
+    "description": "[Colaboración con ULTRAKILL] Un revólver que se alimenta de electricidad y puede disparar ilimitadamente, sin recargas. Al llevarlo equipado, las esferas de captura se sustituirán por monedas que rebotarán contra el enemigo."
+  },
+  "OctaviaRevolver_4": {
+    "localized_name": "Revólver Marksman",
+    "description": "[Colaboración con ULTRAKILL] Un revólver que se alimenta de electricidad y puede disparar ilimitadamente, sin recargas. Al llevarlo equipado, las esferas de captura se sustituirán por monedas que rebotarán contra el enemigo."
+  },
+  "OctaviaRevolver_5": {
+    "localized_name": "Revólver Marksman",
+    "description": "[Colaboración con ULTRAKILL] Un revólver que se alimenta de electricidad y puede disparar ilimitadamente, sin recargas. Al llevarlo equipado, las esferas de captura se sustituirán por monedas que rebotarán contra el enemigo."
+  },
+  "OctaviaShotgun": {
+    "localized_name": "Escopeta Core Eject",
+    "description": "[Colaboración con ULTRAKILL] Una escopeta que se alimenta de energía calorífica y puede disparar ilimitadamente, sin recargas. Al llevarla equipada, las esferas de captura se sustituirán por núcleos de energía que harán explotar al enemigo."
+  },
+  "OctaviaShotgun_2": {
+    "localized_name": "Escopeta Core Eject",
+    "description": "[Colaboración con ULTRAKILL] Una escopeta que se alimenta de energía calorífica y puede disparar ilimitadamente, sin recargas. Al llevarla equipada, las esferas de captura se sustituirán por núcleos de energía que harán explotar al enemigo."
+  },
+  "OctaviaShotgun_3": {
+    "localized_name": "Escopeta Core Eject",
+    "description": "[Colaboración con ULTRAKILL] Una escopeta que se alimenta de energía calorífica y puede disparar ilimitadamente, sin recargas. Al llevarla equipada, las esferas de captura se sustituirán por núcleos de energía que harán explotar al enemigo."
+  },
+  "OctaviaShotgun_4": {
+    "localized_name": "Escopeta Core Eject",
+    "description": "[Colaboración con ULTRAKILL] Una escopeta que se alimenta de energía calorífica y puede disparar ilimitadamente, sin recargas. Al llevarla equipada, las esferas de captura se sustituirán por núcleos de energía que harán explotar al enemigo."
+  },
+  "OctaviaShotgun_5": {
+    "localized_name": "Escopeta Core Eject",
+    "description": "[Colaboración con ULTRAKILL] Una escopeta que se alimenta de energía calorífica y puede disparar ilimitadamente, sin recargas. Al llevarla equipada, las esferas de captura se sustituirán por núcleos de energía que harán explotar al enemigo."
+  },
   "OctopusGirl_Takoyaki": {
     "localized_name": "Takoyaki de Gloopie",
     "description": "Plato redondo preparado con Meat OctopusGirl y masa de Harina. Al consumirlo, aumenta ligeramente los puntos de EXP obtenidos durante cierto tiempo."
   },
   "OldRevolver": {
     "localized_name": "Revólver viejo",
-    "description": "Un revólver algo viejo. La potencia de disparo es superior a la del Handgun default."
+    "description": "Un revólver algo viejo. La potencia de fuego es superior a la de la Handgun default."
   },
   "OldRevolver_2": {
     "localized_name": "Revólver viejo",
-    "description": "Un revólver algo viejo. La potencia de disparo es superior a la del Handgun default."
+    "description": "Un revólver algo viejo. La potencia de fuego es superior a la de la Handgun default."
   },
   "OldRevolver_3": {
     "localized_name": "Revólver viejo",
-    "description": "Un revólver algo viejo. La potencia de disparo es superior a la del Handgun default."
+    "description": "Un revólver algo viejo. La potencia de fuego es superior a la de la Handgun default."
   },
   "OldRevolver_4": {
     "localized_name": "Revólver viejo",
-    "description": "Un revólver algo viejo. La potencia de disparo es superior a la del Handgun default."
+    "description": "Un revólver algo viejo. La potencia de fuego es superior a la de la Handgun default."
   },
   "OldRevolver_5": {
     "localized_name": "Revólver viejo",
-    "description": "Un revólver algo viejo. La potencia de disparo es superior a la del Handgun default."
+    "description": "Un revólver algo viejo. La potencia de fuego es superior a la de la Handgun default."
   },
   "Omelet": {
     "localized_name": "Tortilla",
-    "description": "Plato hecho con Huevo y rociado con kétchup. Concede Ataque +10% durante cierto tiempo tras comerla."
+    "description": "Plato hecho con Huevo y rociado con kétchup. Concede Ataque +10 % durante cierto tiempo tras comerla."
   },
   "Onion": {
     "localized_name": "Cebolla",
@@ -4769,7 +4889,7 @@
   },
   "PalDarkParts": {
     "localized_name": "Fragmento oscuro",
-    "description": "Lo dejan caer Pals de Oscuridad particularmente fuertes. Se utiliza como material para fabricar algunos poderosos accesorios."
+    "description": "Lo dejan caer Pals de Oscuridad particularmente fuertes. Se utiliza como material para fabricar algunos accesorios poderosos."
   },
   "PalDopingShot": {
     "localized_name": "Pistola propulsora",
@@ -4789,183 +4909,183 @@
   },
   "PalEgg_Dark_01": {
     "localized_name": "Huevo negro",
-    "description": "PalEgg Dark 01. Se oye un murmullo irregular en su interior. Usa una Incubadora para incubarlo."
+    "description": "PalEgg Dark 01. Se oye un murmullo irregular en su interior. Usa una Incubadora para que eclosione."
   },
   "PalEgg_Dark_02": {
     "localized_name": "Huevo negro",
-    "description": "PalEgg Dark 02. Se oye un murmullo irregular en su interior. Usa una Incubadora para incubarlo."
+    "description": "PalEgg Dark 02. Se oye un murmullo irregular en su interior. Usa una Incubadora para que eclosione."
   },
   "PalEgg_Dark_03": {
     "localized_name": "Huevo negro grande",
-    "description": "PalEgg Dark 03. Se oye un latido maligno en su interior. Usa una Incubadora para incubarlo."
+    "description": "PalEgg Dark 03. Se oye un latido maligno en su interior. Usa una Incubadora para que eclosione."
   },
   "PalEgg_Dark_04": {
     "localized_name": "Huevo negro grande",
-    "description": "PalEgg Dark 04. Se oye un latido maligno en su interior. Usa una Incubadora para incubarlo."
+    "description": "PalEgg Dark 04. Se oye un latido maligno en su interior. Usa una Incubadora para que eclosione."
   },
   "PalEgg_Dark_05": {
     "localized_name": "Huevo negro gigantesco",
-    "description": "PalEgg Dark 05. Se oyen los movimientos de una criatura del abismo a punto de nacer. Usa una Incubadora para incubarlo."
+    "description": "PalEgg Dark 05. Se oyen los movimientos de una criatura del abismo a punto de nacer. Usa una Incubadora para que eclosione."
   },
   "PalEgg_Dragon_01": {
     "localized_name": "Huevo de dragón",
-    "description": "PalEgg Dragon 01. Se oye un murmullo travieso en su interior. Usa una Incubadora para incubarlo."
+    "description": "PalEgg Dragon 01. Se oye un murmullo travieso en su interior. Usa una Incubadora para que eclosione."
   },
   "PalEgg_Dragon_02": {
     "localized_name": "Huevo de dragón",
-    "description": "PalEgg Dragon 02. Se oye un murmullo travieso en su interior. Usa una Incubadora para incubarlo."
+    "description": "PalEgg Dragon 02. Se oye un murmullo travieso en su interior. Usa una Incubadora para que eclosione."
   },
   "PalEgg_Dragon_03": {
     "localized_name": "Huevo de dragón grande",
-    "description": "PalEgg Dragon 03. Se oye un latido insólito en su interior. Usa una Incubadora para incubarlo."
+    "description": "PalEgg Dragon 03. Se oye un latido insólito en su interior. Usa una Incubadora para que eclosione."
   },
   "PalEgg_Dragon_04": {
     "localized_name": "Huevo de dragón grande",
-    "description": "PalEgg Dragon 04. Se oye un latido insólito en su interior. Usa una Incubadora para incubarlo."
+    "description": "PalEgg Dragon 04. Se oye un latido insólito en su interior. Usa una Incubadora para que eclosione."
   },
   "PalEgg_Dragon_05": {
     "localized_name": "Huevo de dragón gigantesco",
-    "description": "PalEgg Dragon 05. Se oyen los movimientos de una criatura de alma majestuosa a punto de nacer. Usa una Incubadora para incubarlo."
+    "description": "PalEgg Dragon 05. Se oyen los movimientos de una criatura de alma majestuosa a punto de nacer. Usa una Incubadora para que eclosione."
   },
   "PalEgg_Earth_01": {
     "localized_name": "Huevo rugoso",
-    "description": "PalEgg Earth 01. Se oye un plácido murmullo en su interior. Usa una Incubadora para incubarlo."
+    "description": "PalEgg Earth 01. Se oye un plácido murmullo en su interior. Usa una Incubadora para que eclosione."
   },
   "PalEgg_Earth_02": {
     "localized_name": "Huevo rugoso",
-    "description": "PalEgg Earth 02. Se oye un plácido murmullo en su interior. Usa una Incubadora para incubarlo."
+    "description": "PalEgg Earth 02. Se oye un plácido murmullo en su interior. Usa una Incubadora para que eclosione."
   },
   "PalEgg_Earth_03": {
     "localized_name": "Huevo rugoso grande",
-    "description": "PalEgg Earth 03. Se oye un solemne latido en su interior. Usa una Incubadora para incubarlo."
+    "description": "PalEgg Earth 03. Se oye un solemne latido en su interior. Usa una Incubadora para que eclosione."
   },
   "PalEgg_Earth_04": {
     "localized_name": "Huevo rugoso grande",
-    "description": "PalEgg Earth 04. Se oye un solemne latido en su interior. Usa una Incubadora para incubarlo."
+    "description": "PalEgg Earth 04. Se oye un solemne latido en su interior. Usa una Incubadora para que eclosione."
   },
   "PalEgg_Earth_05": {
     "localized_name": "Huevo rugoso gigantesco",
-    "description": "PalEgg Earth 05. Se oyen los movimientos de una criatura de alma terrestre a punto de nacer. Usa una Incubadora para incubarlo."
+    "description": "PalEgg Earth 05. Se oyen los movimientos de una criatura de alma terrestre a punto de nacer. Usa una Incubadora para que eclosione."
   },
   "PalEgg_Electricity_01": {
     "localized_name": "Huevo chispeante",
-    "description": "PalEgg Electricity 01. Se oyen débiles chispazos en su interior. Usa una Incubadora para incubarlo."
+    "description": "PalEgg Electricity 01. Se oyen débiles chispazos en su interior. Usa una Incubadora para que eclosione."
   },
   "PalEgg_Electricity_02": {
     "localized_name": "Huevo chispeante",
-    "description": "PalEgg Electricity 02. Se oyen débiles chispazos en su interior. Usa una Incubadora para incubarlo."
+    "description": "PalEgg Electricity 02. Se oyen débiles chispazos en su interior. Usa una Incubadora para que eclosione."
   },
   "PalEgg_Electricity_03": {
     "localized_name": "Huevo chispeante grande",
-    "description": "PalEgg Electricity 03. Se oye un latido enérgico. Usa una Incubadora para incubarlo."
+    "description": "PalEgg Electricity 03. Se oye un latido enérgico. Usa una Incubadora para que eclosione."
   },
   "PalEgg_Electricity_04": {
     "localized_name": "Huevo chispeante grande",
-    "description": "PalEgg Electricity 04. Se oye un latido enérgico. Usa una Incubadora para incubarlo."
+    "description": "PalEgg Electricity 04. Se oye un latido enérgico. Usa una Incubadora para que eclosione."
   },
   "PalEgg_Electricity_05": {
     "localized_name": "Huevo chispeante gigantesco",
-    "description": "PalEgg Electricity 05. Se oyen los movimientos de una criatura de alma feroz a punto de nacer. Usa una Incubadora para incubarlo."
+    "description": "PalEgg Electricity 05. Se oyen los movimientos de una criatura de alma feroz a punto de nacer. Usa una Incubadora para que eclosione."
   },
   "PalEgg_Fire_01": {
     "localized_name": "Huevo ardiente",
-    "description": "PalEgg Fire 01. Se oye un débil crepitar en su interior. Usa una Incubadora para incubarlo."
+    "description": "PalEgg Fire 01. Se oye un débil crepitar en su interior. Usa una Incubadora para que eclosione."
   },
   "PalEgg_Fire_02": {
     "localized_name": "Huevo ardiente",
-    "description": "PalEgg Fire 02. Se oye un débil crepitar en su interior. Usa una Incubadora para incubarlo."
+    "description": "PalEgg Fire 02. Se oye un débil crepitar en su interior. Usa una Incubadora para que eclosione."
   },
   "PalEgg_Fire_03": {
     "localized_name": "Huevo ardiente grande",
-    "description": "PalEgg Fire 03. Se oye un latido ardiente. Usa una Incubadora para incubarlo."
+    "description": "PalEgg Fire 03. Se oye un latido ardiente. Usa una Incubadora para que eclosione."
   },
   "PalEgg_Fire_04": {
     "localized_name": "Huevo ardiente grande",
-    "description": "PalEgg Fire 04. Se oye un latido ardoroso. Usa una Incubadora para incubarlo."
+    "description": "PalEgg Fire 04. Se oye un latido ardiente. Usa una Incubadora para que eclosione."
   },
   "PalEgg_Fire_05": {
     "localized_name": "Huevo ardiente gigantesco",
-    "description": "PalEgg Fire 05. Se oyen los movimientos de una criatura de alma ardiente a punto de nacer. Usa una Incubadora para incubarlo."
+    "description": "PalEgg Fire 05. Se oyen los movimientos de una criatura de alma ardiente a punto de nacer. Usa una Incubadora para que eclosione."
   },
   "PalEgg_Ice_01": {
     "localized_name": "Huevo escarchado",
-    "description": "PalEgg Ice 01. Se oye un débil murmullo escarchado en su interior. Usa una Incubadora para incubarlo."
+    "description": "PalEgg Ice 01. Se oye un débil murmullo escarchado en su interior. Usa una Incubadora para que eclosione."
   },
   "PalEgg_Ice_02": {
     "localized_name": "Huevo escarchado",
-    "description": "PalEgg Ice 02. Se oye un débil murmullo escarchado en su interior. Usa una Incubadora para incubarlo."
+    "description": "PalEgg Ice 02. Se oye un débil murmullo escarchado en su interior. Usa una Incubadora para que eclosione."
   },
   "PalEgg_Ice_03": {
     "localized_name": "Huevo escarchado grande",
-    "description": "PalEgg Ice 03. Se oye un latido helado en su interior. Usa una Incubadora para incubarlo."
+    "description": "PalEgg Ice 03. Se oye un latido helado en su interior. Usa una Incubadora para que eclosione."
   },
   "PalEgg_Ice_04": {
     "localized_name": "Huevo escarchado grande",
-    "description": "PalEgg Ice 04. Se oye un latido helado en su interior. Usa una Incubadora para incubarlo."
+    "description": "PalEgg Ice 04. Se oye un latido helado en su interior. Usa una Incubadora para que eclosione."
   },
   "PalEgg_Ice_05": {
     "localized_name": "Huevo escarchado gigantesco",
-    "description": "PalEgg Ice 05. Se oyen los movimientos de una criatura de alma a bajo cero a punto de nacer. Usa una Incubadora para incubarlo."
+    "description": "PalEgg Ice 05. Se oyen los movimientos de una criatura de alma a bajo cero a punto de nacer. Usa una Incubadora para que eclosione."
   },
   "PalEgg_Leaf_01": {
     "localized_name": "Huevo hierba",
-    "description": "PalEgg Leaf 01. Se oye un murmullo vigoroso en su interior. Usa una Incubadora para incubarlo."
+    "description": "PalEgg Leaf 01. Se oye un murmullo vigoroso en su interior. Usa una Incubadora para que eclosione."
   },
   "PalEgg_Leaf_02": {
     "localized_name": "Huevo hierba",
-    "description": "PalEgg Leaf 02. Se oye un murmullo vigoroso en su interior. Usa una Incubadora para incubarlo."
+    "description": "PalEgg Leaf 02. Se oye un murmullo vigoroso en su interior. Usa una Incubadora para que eclosione."
   },
   "PalEgg_Leaf_03": {
     "localized_name": "Huevo hierba grande",
-    "description": "PalEgg Leaf 03. Se oye un latido lleno de vida. Usa una Incubadora para incubarlo."
+    "description": "PalEgg Leaf 03. Se oye un latido lleno de vida. Usa una Incubadora para que eclosione."
   },
   "PalEgg_Leaf_04": {
     "localized_name": "Huevo hierba grande",
-    "description": "PalEgg Leaf 04. Se oye un latido lleno de vida. Usa una Incubadora para incubarlo."
+    "description": "PalEgg Leaf 04. Se oye un latido lleno de vida. Usa una Incubadora para que eclosione."
   },
   "PalEgg_Leaf_05": {
     "localized_name": "Huevo hierba gigantesco",
-    "description": "PalEgg Leaf 05. Se oyen los movimientos de una criatura de alma verde a punto de nacer. Usa una Incubadora para incubarlo."
+    "description": "PalEgg Leaf 05. Se oyen los movimientos de una criatura de alma verde a punto de nacer. Usa una Incubadora para que eclosione."
   },
   "PalEgg_Normal_01": {
     "localized_name": "Huevo común",
-    "description": "PalEgg Normal 01. Se oye un débil murmullo en su interior. Usa una Incubadora para incubarlo."
+    "description": "PalEgg Normal 01. Se oye un débil murmullo en su interior. Usa una Incubadora para que eclosione."
   },
   "PalEgg_Normal_02": {
     "localized_name": "Huevo común",
-    "description": "PalEgg Normal 02. Se oye un débil murmullo en su interior. Usa una Incubadora para incubarlo."
+    "description": "PalEgg Normal 02. Se oye un débil murmullo en su interior. Usa una Incubadora para que eclosione."
   },
   "PalEgg_Normal_03": {
     "localized_name": "Huevo común grande",
-    "description": "PalEgg Normal 03. Se oye un suave latido. Usa una Incubadora para incubarlo."
+    "description": "PalEgg Normal 03. Se oye un suave latido. Usa una Incubadora para que eclosione."
   },
   "PalEgg_Normal_04": {
     "localized_name": "Huevo común grande",
-    "description": "PalEgg Normal 04. Se oye un suave latido. Usa una Incubadora para incubarlo."
+    "description": "PalEgg Normal 04. Se oye un suave latido. Usa una Incubadora para que eclosione."
   },
   "PalEgg_Normal_05": {
     "localized_name": "Huevo común gigantesco",
-    "description": "PalEgg Normal 05. Se oyen los movimientos de una criatura de buen corazón a punto de nacer. Usa una Incubadora para incubarlo."
+    "description": "PalEgg Normal 05. Se oyen los movimientos de una criatura de buen corazón a punto de nacer. Usa una Incubadora para que eclosione."
   },
   "PalEgg_Water_01": {
     "localized_name": "Huevo empapado",
-    "description": "PalEgg Water 01. Se oye un murmullo cristalino en su interior. Usa una Incubadora para incubarlo."
+    "description": "PalEgg Water 01. Se oye un murmullo cristalino en su interior. Usa una Incubadora para que eclosione."
   },
   "PalEgg_Water_02": {
     "localized_name": "Huevo empapado",
-    "description": "PalEgg Water 02. Se oye un murmullo cristalino en su interior. Usa una Incubadora para incubarlo."
+    "description": "PalEgg Water 02. Se oye un murmullo cristalino en su interior. Usa una Incubadora para que eclosione."
   },
   "PalEgg_Water_03": {
     "localized_name": "Huevo empapado grande",
-    "description": "PalEgg Water 03. Se oye un latido puro en su interior. Usa una Incubadora para incubarlo."
+    "description": "PalEgg Water 03. Se oye un latido puro en su interior. Usa una Incubadora para que eclosione."
   },
   "PalEgg_Water_04": {
     "localized_name": "Huevo empapado grande",
-    "description": "PalEgg Water 04. Se oye un latido puro en su interior. Usa una Incubadora para incubarlo."
+    "description": "PalEgg Water 04. Se oye un latido puro en su interior. Usa una Incubadora para que eclosione."
   },
   "PalEgg_Water_05": {
     "localized_name": "Huevo empapado gigantesco",
-    "description": "PalEgg Water 05. Se oyen los movimientos de una criatura de alma traslúcida a punto de nacer. Usa una Incubadora para incubarlo."
+    "description": "PalEgg Water 05. Se oyen los movimientos de una criatura de alma traslúcida a punto de nacer. Usa una Incubadora para que eclosione."
   },
   "PalFluid": {
     "localized_name": "Fluido de Pal",
@@ -5111,6 +5231,10 @@
     "localized_name": "Implante: Dios demoníaco",
     "description": "Implante que se coloca en el cuerpo del Pal. Si lo llevas encima, podrás seleccionar la técnica pasiva correspondiente en una Mesa de operaciones Pal."
   },
+  "PalPassiveSkillChange_PAL_CorporateSlave": {
+    "localized_name": "Implante: Explotación",
+    "description": "Implante que se coloca en el cuerpo del Pal. Si lo llevas encima, podrás seleccionar la técnica pasiva correspondiente en una Mesa de operaciones Pal."
+  },
   "PalPassiveSkillChange_PAL_FullStomach_Down_1": {
     "localized_name": "Implante: Inapetencia",
     "description": "Implante que se coloca en el cuerpo del Pal. Si lo llevas encima, podrás seleccionar la técnica pasiva correspondiente en una Mesa de operaciones Pal."
@@ -5135,6 +5259,14 @@
     "localized_name": "Implante: Corazón de rey inmutable",
     "description": "Implante que se coloca en el cuerpo del Pal. Si lo llevas encima, podrás seleccionar la técnica pasiva correspondiente en una Mesa de operaciones Pal."
   },
+  "PalPassiveSkillChange_SalePrice_Up_1": {
+    "localized_name": "Implante: Nobleza",
+    "description": "Implante que se coloca en el cuerpo del Pal. Si lo llevas encima, podrás seleccionar la técnica pasiva correspondiente en una Mesa de operaciones Pal."
+  },
+  "PalPassiveSkillChange_SalePrice_Up_2": {
+    "localized_name": "Implante: Linaje superior",
+    "description": "Implante que se coloca en el cuerpo del Pal. Si lo llevas encima, podrás seleccionar la técnica pasiva correspondiente en una Mesa de operaciones Pal."
+  },
   "PalPassiveSkillChange_Stamina_Up_1": {
     "localized_name": "Implante: Energía inagotable",
     "description": "Implante que se coloca en el cuerpo del Pal. Si lo llevas encima, podrás seleccionar la técnica pasiva correspondiente en una Mesa de operaciones Pal."
@@ -5147,6 +5279,34 @@
     "localized_name": "Implante: Máquina imparable",
     "description": "Implante que se coloca en el cuerpo del Pal. Si lo llevas encima, podrás seleccionar la técnica pasiva correspondiente en una Mesa de operaciones Pal."
   },
+  "PalPassiveSkillChange_SwimSpeed_up_1": {
+    "localized_name": "Implante: Nado ágil",
+    "description": "Implante que se coloca en el cuerpo del Pal. Si lo llevas encima, podrás seleccionar la técnica pasiva correspondiente en una Mesa de operaciones Pal."
+  },
+  "PalPassiveSkillChange_SwimSpeed_up_2": {
+    "localized_name": "Implante: Maestría en natación",
+    "description": "Implante que se coloca en el cuerpo del Pal. Si lo llevas encima, podrás seleccionar la técnica pasiva correspondiente en una Mesa de operaciones Pal."
+  },
+  "PalPassiveSkillChange_TrainerATK_UP_1": {
+    "localized_name": "Implante: General de asalto",
+    "description": "Implante que se coloca en el cuerpo del Pal. Si lo llevas encima, podrás seleccionar la técnica pasiva correspondiente en una Mesa de operaciones Pal."
+  },
+  "PalPassiveSkillChange_TrainerDEF_UP_1": {
+    "localized_name": "Implante: Estrat. de la fortaleza",
+    "description": "Implante que se coloca en el cuerpo del Pal. Si lo llevas encima, podrás seleccionar la técnica pasiva correspondiente en una Mesa de operaciones Pal."
+  },
+  "PalPassiveSkillChange_TrainerLogging_up1": {
+    "localized_name": "Implante: Líder talador",
+    "description": "Implante que se coloca en el cuerpo del Pal. Si lo llevas encima, podrás seleccionar la técnica pasiva correspondiente en una Mesa de operaciones Pal."
+  },
+  "PalPassiveSkillChange_TrainerMining_up1": {
+    "localized_name": "Implante: Jefe minero",
+    "description": "Implante que se coloca en el cuerpo del Pal. Si lo llevas encima, podrás seleccionar la técnica pasiva correspondiente en una Mesa de operaciones Pal."
+  },
+  "PalPassiveSkillChange_TrainerWorkSpeed_UP_1": {
+    "localized_name": "Implante: Animador",
+    "description": "Implante que se coloca en el cuerpo del Pal. Si lo llevas encima, podrás seleccionar la técnica pasiva correspondiente en una Mesa de operaciones Pal."
+  },
   "PalRevive": {
     "localized_name": "Revitalizador",
     "description": "Revive a los Pals heridos que no pueden moverse."
@@ -5157,19 +5317,19 @@
   },
   "PalSphere_Exotic": {
     "localized_name": "Esfera infinita",
-    "description": "Utensilio para atrapar Pals. De asombroso rendimiento, puede atrapar también a Pals insólitos."
+    "description": "Sirven para atrapar a los Pals al lanzarlas hacia ellos. De asombroso rendimiento, puede atrapar también a Pals insólitos."
   },
   "PalSphere_Giga": {
     "localized_name": "Gigaesfera",
-    "description": "Utensilio para atrapar Pals. Permite capturar Pals relativamente fuertes."
+    "description": "Sirven para atrapar a los Pals al lanzarlas hacia ellos. Permite capturar Pals relativamente fuertes."
   },
   "PalSphere_Legend": {
     "localized_name": "Mitoesfera",
-    "description": "Utensilio para atrapar Pals. Es muy efectiva y apenas hay Pals que logren escapar de ella."
+    "description": "Sirven para atrapar a los Pals al lanzarlas hacia ellos. Es muy efectiva y apenas hay Pals que logren escapar de ella."
   },
   "PalSphere_Master": {
     "localized_name": "Ultraesfera",
-    "description": "Utensilio para atrapar Pals. Es bastante efectiva y no hay muchos Pals que logren escapar de ella."
+    "description": "Sirven para atrapar a los Pals al lanzarlas hacia ellos. Es bastante efectiva y no hay muchos Pals que logren escapar de ella."
   },
   "PalSphere_Mega": {
     "localized_name": "Megaesfera",
@@ -5177,15 +5337,15 @@
   },
   "PalSphere_Robbery": {
     "localized_name": "Roboesfera",
-    "description": "Utensilio para atrapar Pals. Tiene una probabilidad de captura baja, pero con ella puedes capturar a la fuerza a los Pals de otros."
+    "description": "Sirven para atrapar a los Pals al lanzarlas hacia ellos. Tiene una probabilidad de captura baja, pero con ella puedes capturar a la fuerza a los Pals de otros."
   },
   "PalSphere_Tera": {
     "localized_name": "Teraesfera",
-    "description": "Utensilio para atrapar Pals. Permite capturar Pals bastante fuertes."
+    "description": "Sirven para atrapar a los Pals al lanzarlas hacia ellos. Permite capturar Pals bastante fuertes."
   },
   "PalSphere_Ultimate": {
     "localized_name": "Esfera definitiva",
-    "description": "Utensilio para atrapar Pals. De rendimiento abrumador, puede atrapar a casi cualquier Pal."
+    "description": "Sirven para atrapar a los Pals al lanzarlas hacia ellos. De rendimiento abrumador, puede atrapar a casi cualquier Pal."
   },
   "PalSummon": {
     "localized_name": "Tabla de Bellanoir",
@@ -5209,11 +5369,11 @@
   },
   "PalSummon_KingBahamut_Dragon": {
     "localized_name": "Tabla de Blazamut Ryu",
-    "description": "Una tabla con el dibujo de un KingBahamut Dragon. Si se la ofreces a Altar de invocación, podrás invocar a un poderosoKingBahamut Dragon[Lv 55]."
+    "description": "Una tabla con el dibujo de un KingBahamut Dragon. Si se la ofreces a Altar de invocación, podrás invocar a un poderosoKingBahamut Dragon [nv. 55]."
   },
   "PalSummon_KingBahamut_Dragon_2": {
     "localized_name": "Tabla de Blazamut Ryu (Ultra)",
-    "description": "Una tabla rebosante del poder de un KingBahamut Dragon. Si se la ofreces a Altar de invocación, podrás invocar a un KingBahamut Dragon[Lv ??] de fuerza descomunal."
+    "description": "Una tabla rebosante del poder de un KingBahamut Dragon. Si se la ofreces a Altar de invocación, podrás invocar a un KingBahamut Dragon [nv. ??] de fuerza descomunal."
   },
   "PalSummon_KingBahamut_Dragon_Parts": {
     "localized_name": "Trozo de tabla de Blazamut Ryu",
@@ -5222,6 +5382,22 @@
   "PalSummon_KingBahamut_Dragon_Parts_2": {
     "localized_name": "Trozo de tabla de Blazamut Ryu (Ultra)",
     "description": "El fragmento de una tabla con el dibujo de un KingBahamut Dragon. Si reúnes todos los fragmentos, podrás recomponerla."
+  },
+  "PalSummon_LegendDeer": {
+    "localized_name": "Tabla de Legend Deer",
+    "description": "Una tabla con el dibujo de un Hartalis. Si se la ofreces a Altar de invocación, podrás invocar a un poderosoHartalis[Lv 65]."
+  },
+  "PalSummon_LegendDeer_2": {
+    "localized_name": "Tabla de Legend Deer (Ultra)",
+    "description": "Una tabla rebosante del poder de un Hartalis. Si se la ofreces a Altar de invocación, podrás invocar a un Hartalis[Lv ??] de fuerza descomunal."
+  },
+  "PalSummon_LegendDeer_Parts": {
+    "localized_name": "Trozo de tabla de Legend Deer",
+    "description": "El fragmento de una tabla con el dibujo de un Hartalis. Si reúnes todos los fragmentos, podrás recomponerla."
+  },
+  "PalSummon_LegendDeer_Parts_2": {
+    "localized_name": "Trozo de tabla de Legend Deer (Ultra)",
+    "description": "El fragmento de una tabla con el dibujo de un Hartalis. Si reúnes todos los fragmentos, podrás recomponerla."
   },
   "PalSummon_NightLady": {
     "localized_name": "Tabla de Bellanoir",
@@ -5250,6 +5426,10 @@
   "PalSummon_YakushimaBoss002": {
     "localized_name": "Sello celestial",
     "description": "[Colaboración con Terraria] Un sello con un patrón desconocido. Si se ofrece en un Altar de invocación, permite invocar a un ser colosal."
+  },
+  "PalSummon_YakushimaBoss002_2": {
+    "localized_name": "Sello celestial «Maestro»",
+    "description": "[Colaboración con Terraria] Un sello con un patrón desconocido. Si se ofrece en un Altar de invocación, permite invocar a un ser de extraordinario poder."
   },
   "PalUpgradeStone": {
     "localized_name": "Espíritu de Pal pequeño",
@@ -5407,6 +5587,14 @@
     "localized_name": "Casco de plastiacero",
     "description": "Yelmo hecho de Plastiacero. Además de mejorar la defensa, es mucho más ligero."
   },
+  "PlayerDropItem": {
+    "localized_name": "Prueba de la victoria",
+    "description": "La insignia de honor que se otorga solo a los vencedores. Quien la lleve demostrará su superioridad en el campo de batalla."
+  },
+  "Player_Outfit_Kigurumi001": {
+    "localized_name": "Armadura Depresso",
+    "description": "Parte del torso de un disfraz inspirado en Depresso."
+  },
   "PoisonMushroom": {
     "localized_name": "Seta misteriosa",
     "description": "Setas que no puedes comer crudas. Si te las comes, te entrará hambre más fácilmente."
@@ -5417,7 +5605,7 @@
   },
   "Poppy": {
     "localized_name": "Flores bonitas",
-    "description": ".Néctar sospechosoSi lo llevas, podrás fabricar un objeto más potenteNéctar sospechosode lo normal."
+    "description": "Una planta de la que florecen coloridos brotes. Con ella se pueden fabricar Néctar sospechoso y Néctar extraño."
   },
   "Potage": {
     "localized_name": "es Text",
@@ -5425,7 +5613,7 @@
   },
   "Potato": {
     "localized_name": "Patata",
-    "description": "Tubérculo de calidad que puede cultivarse en cualquier parte. No se puede comer cruda."
+    "description": "Tubérculo de calidad que puede cultivarse en cualquier parte. No se puede comer crudo."
   },
   "PotatoChips": {
     "localized_name": "Patatas fritas",
@@ -5495,6 +5683,10 @@
     "localized_name": "Trozo de tela con recuerdos de Zoe",
     "description": "Un trozo de tela envejecido con un leve aroma. Contiene recuerdos muy valiosos para Zoe."
   },
+  "QuestItem_Zoe_Halloweenskin_1": {
+    "localized_name": "Disfraz de Halloween de Zoe",
+    "description": "Traje de Halloween de Zoe. ¡Seguro que se alegra un montón de recibirlo! ¡Dáselo a Zoe!"
+  },
   "Quiche": {
     "localized_name": "Quiche de setas",
     "description": "Un plato que se prepara añadiendo huevo, verdura, setas y crema a la masa y horneándola a modo de tarta. Fría también está muy buena. Mejora un poco la sensación de saciedad durante un tiempo y la reducción de COR disminuirá."
@@ -5504,24 +5696,24 @@
     "description": "Un cristal muy valioso que solo se puede encontrar en Tenraku. Se forma a partir de Paldium condensado. Sus propiedades cambian y se vuelve iridiscente."
   },
   "Rankup_1": {
-    "localized_name": "Extracto de Pal multiusos 1☆",
-    "description": "Extracto misterioso que puedes inyectarle a un Pal para que su talento salga a relucir. Podrás elevar el rango del Pal de 0☆ a 1☆. En su interior, no obstante, se oye un murmullo de resentimiento..."
+    "localized_name": "Fruta del despertar 1☆",
+    "description": "Fruta mágica insólita. Aumenta el rango del Pal de 0☆ a 1☆."
   },
   "Rankup_2": {
-    "localized_name": "Extracto de Pal multiusos 2☆",
-    "description": "Extracto misterioso que puedes inyectarle a un Pal para que su talento salga a relucir. Podrás elevar el rango del Pal de 1☆ a 2☆. En su interior, no obstante, se oye un murmullo de resentimiento..."
+    "localized_name": "Fruta del despertar 2☆",
+    "description": "Fruta mágica insólita. Aumenta el rango del Pal de 1☆ a 2☆."
   },
   "Rankup_3": {
-    "localized_name": "Extracto de Pal multiusos 3☆",
-    "description": "Extracto misterioso que puedes inyectarle a un Pal para que su talento salga a relucir. Podrás elevar el rango del Pal de 2☆ a 3☆. En su interior, no obstante, se oye un murmullo de resentimiento..."
+    "localized_name": "Fruta del despertar 3☆",
+    "description": "Fruta mágica insólita. Aumenta el rango del Pal de 2☆ a 3☆."
   },
   "Rankup_4": {
-    "localized_name": "Extracto de Pal multiusos 4☆",
-    "description": "Extracto misterioso que puedes inyectarle a un Pal para que su talento salga a relucir. Podrás elevar el rango del Pal de 3☆ a 4☆. En su interior, no obstante, se oye un murmullo de resentimiento..."
+    "localized_name": "Fruta del despertar 4☆",
+    "description": "Fruta mágica insólita. Aumenta el rango del Pal de 3☆ a 4☆."
   },
   "Rankup_Arbitrary": {
-    "localized_name": "Extracto de Pal multiusos concentrado",
-    "description": "Extracto misterioso que puedes inyectarle a un Pal para que su talento salga a relucir. Podrás elevar el rango de un Pal en 1. En su interior, no obstante, se oye un murmullo de resentimiento..."
+    "localized_name": "Fruta del despertar madura",
+    "description": "Fruta mágica insólita. Aumenta un nivel el rango del Pal."
   },
   "ReinforcedArrow": {
     "localized_name": "Flecha mejorada",
@@ -6157,7 +6349,7 @@
   },
   "SkillUnlock_AmaterasuWolf_Dark": {
     "localized_name": "Sillín de Kitsun Noct",
-    "description": "Si lo llevas encima, podrás montarAmaterasuWolf Darka lomos de ."
+    "description": "Si lo llevas encima, podrás montar a lomos de AmaterasuWolf Dark."
   },
   "SkillUnlock_BadCatgirl": {
     "localized_name": "Escopeta de Nyanimite",
@@ -6201,7 +6393,7 @@
   },
   "SkillUnlock_BlueThunderHorse": {
     "localized_name": "Sillín de Azurmane",
-    "description": "Si lo llevas encima, podrás montarAzurmanea lomos de ."
+    "description": "Si lo llevas encima, podrás montar a lomos de Azurmane."
   },
   "SkillUnlock_Boar": {
     "localized_name": "Sillín de Rushoar",
@@ -6209,7 +6401,7 @@
   },
   "SkillUnlock_Carbunclo": {
     "localized_name": "Subfusil de Lifmunk",
-    "description": "Subfusil pequeño exclusivo de Lifmunk. Al activar la técnica de compañero, se sube a la cabeza del personaje jugador y se suma al ataque brindando apoyo de fuego."
+    "description": "Subfusil pequeño exclusivo de Lifmunk. Al activar la técnica de compañero, se sube a la cabeza del personaje jugador y se suma al ataque brindando fuego de apoyo."
   },
   "SkillUnlock_ColorfulBird": {
     "localized_name": "Guantes de Tocotoco",
@@ -6217,7 +6409,7 @@
   },
   "SkillUnlock_DarkMechaDragon": {
     "localized_name": "Sillín de Xenolord",
-    "description": "Si lo llevas encima, podrás montarXenolorda lomos de ."
+    "description": "Si lo llevas encima, podrás montar a lomos de Xenolord."
   },
   "SkillUnlock_DarkMutant": {
     "localized_name": "es Text",
@@ -6233,7 +6425,7 @@
   },
   "SkillUnlock_DreamDemon": {
     "localized_name": "Collar de Daedream",
-    "description": "Collar para Daedream. Si lo llevas encima y tienes a Daedream en el grupo, estará presente todo el tiempo y se sumará a los ataques del personaje jugador."
+    "description": "Collar para Daedream. Si lo llevas encima y tienes a Daedream en el grupo, estará presente todo el tiempo y se sumará a tus ataques."
   },
   "SkillUnlock_DrillGame": {
     "localized_name": "Banda de Digtoise",
@@ -6261,7 +6453,7 @@
   },
   "SkillUnlock_FeatherOstrich": {
     "localized_name": "Sillín de Dazemu",
-    "description": "Si lo llevas encima, podrás montarDazemua lomos de ."
+    "description": "Si lo llevas encima, podrás montar a lomos de Dazemu."
   },
   "SkillUnlock_FengyunDeeper": {
     "localized_name": "Sillín de Fenglope",
@@ -6269,7 +6461,7 @@
   },
   "SkillUnlock_FengyunDeeper_Electric": {
     "localized_name": "Sillín de Fenglope Lux",
-    "description": "Si lo llevas encima, podrás montarFengyunDeeper Electrica lomos de ."
+    "description": "Si lo llevas encima, podrás montar a lomos de FengyunDeeper Electric."
   },
   "SkillUnlock_FireKirin": {
     "localized_name": "Sillín de Pyrin",
@@ -6341,7 +6533,7 @@
   },
   "SkillUnlock_GuardianDog": {
     "localized_name": "Sillín de Yakumo",
-    "description": "Si lo llevas encima, podrás montarYakumoa lomos de ."
+    "description": "Si lo llevas encima, podrás montar a lomos de Yakumo."
   },
   "SkillUnlock_HadesBird": {
     "localized_name": "Sillín de Helzephyr",
@@ -6349,7 +6541,7 @@
   },
   "SkillUnlock_HadesBird_Electric": {
     "localized_name": "Sillín de Helzephyr Lux",
-    "description": "Si lo llevas encima, podrás montarHadesBird Electrica lomos de ."
+    "description": "Si lo llevas encima, podrás montar a lomos de HadesBird Electric."
   },
   "SkillUnlock_HawkBird": {
     "localized_name": "Sillín de Nitewing",
@@ -6369,7 +6561,7 @@
   },
   "SkillUnlock_Horus_Water": {
     "localized_name": "Sillín de Faleris Aqua",
-    "description": "Si lo llevas encima, podrás montarHorus Watera lomos de ."
+    "description": "Si lo llevas encima, podrás montar a lomos de Horus Water."
   },
   "SkillUnlock_IceDeer": {
     "localized_name": "Sillín de Reindrix",
@@ -6392,7 +6584,7 @@
     "description": "Si lo llevas encima, podrás montar a lomos de IceNarwhal Fire."
   },
   "SkillUnlock_IceSeal": {
-    "localized_name": "Arnés de Polapup",
+    "localized_name": "Sillín de Polapup",
     "description": "Si lo llevas encima, podrás montar a lomos de Polapup."
   },
   "SkillUnlock_JetDragon": {
@@ -6413,7 +6605,7 @@
   },
   "SkillUnlock_KingBahamut_Dragon": {
     "localized_name": "Sillín de Blazamut Ryu",
-    "description": "Si lo llevas encima, podrás montarKingBahamut Dragona lomos de ."
+    "description": "Si lo llevas encima, podrás montar a lomos de KingBahamut Dragon."
   },
   "SkillUnlock_Kirin": {
     "localized_name": "Sillín de Univolt",
@@ -6439,6 +6631,10 @@
     "localized_name": "Arnés de Herbil",
     "description": "Arnés de Herbil. Si está en tu poder, cuando el jugador se queda fuera de combate, Herbil podrá revivirlo con sus poderes curativos."
   },
+  "SkillUnlock_LegendDeer": {
+    "localized_name": "Sillín de Hartalis",
+    "description": "Si lo llevas encima, podrás montarHartalisa lomos de y tender una barrera para protegerte de los ataques."
+  },
   "SkillUnlock_Manticore": {
     "localized_name": "Sillín de Blazehowl",
     "description": "Si lo llevas encima, podrás montar a lomos de Blazehowl."
@@ -6452,8 +6648,8 @@
     "description": "Rifle de asalto pequeño exclusivo de Tanzee. Al activar la técnica de compañero, Tanzee entrará en modo pistolero y tiroteará a los enemigos cercanos."
   },
   "SkillUnlock_MoonQueen": {
-    "localized_name": "Sillín de Selemoon",
-    "description": "Si lo llevas encima, podrás montarSelynea lomos de ."
+    "localized_name": "Sillín de Selyne",
+    "description": "Si lo llevas encima, podrás montar a lomos de Selyne."
   },
   "SkillUnlock_MopKing": {
     "localized_name": "Sillín de Sweepa",
@@ -6461,11 +6657,11 @@
   },
   "SkillUnlock_MushroomDragon": {
     "localized_name": "Sillín de Shroomer",
-    "description": "Si lo llevas encima, podrás montarShroomera lomos de ."
+    "description": "Si lo llevas encima, podrás montar a lomos de Shroomer."
   },
   "SkillUnlock_MushroomDragon_Dark": {
     "localized_name": "Sillín de Shroomer Noct",
-    "description": "Si lo llevas encima, podrás montarMushroomDragon Darka lomos de ."
+    "description": "Si lo llevas encima, podrás montar a lomos de MushroomDragon Dark."
   },
   "SkillUnlock_NaughtyCat": {
     "localized_name": "Sillín de Grintale",
@@ -6481,7 +6677,7 @@
   },
   "SkillUnlock_NightBlueHorse": {
     "localized_name": "Sillín de Starryon",
-    "description": "Si lo llevas encima, podrás montarStarryona lomos de ."
+    "description": "Si lo llevas encima, podrás montar a lomos de Starryon."
   },
   "SkillUnlock_Penguin": {
     "localized_name": "Lanzacohetes de Pengullet",
@@ -6501,15 +6697,15 @@
   },
   "SkillUnlock_PurpleSpider": {
     "localized_name": "Sillín de Tarantriss",
-    "description": "Si lo llevas encima, podrás montarTarantrissa lomos de ."
+    "description": "Si lo llevas encima, podrás montar a lomos de Tarantriss."
   },
   "SkillUnlock_RaijinDaughter": {
     "localized_name": "Collar de Dazzi",
-    "description": "Collar para Dazzi. Si lo llevas encima y tienes a Dazzi en el grupo, estará presente todo el tiempo y se sumará a los ataques del personaje jugador."
+    "description": "Collar para Dazzi. Si lo llevas encima y tienes a Dazzi en el grupo, estará presente todo el tiempo y se sumará a tus ataques."
   },
   "SkillUnlock_RaijinDaughter_Water": {
     "localized_name": "Collar de Dazzi Noct",
-    "description": "Collar para RaijinDaughter Water. Si lo llevas encima y tienes a RaijinDaughter Water en el grupo, estará presente todo el tiempo y se sumará a los ataques del personaje jugador."
+    "description": "Collar para RaijinDaughter Water. Si lo llevas encima y tienes a RaijinDaughter Water en el grupo, estará presente todo el tiempo y se sumará a tus ataques."
   },
   "SkillUnlock_RedArmorBird": {
     "localized_name": "Sillín de Ragnahawk",
@@ -6541,11 +6737,11 @@
   },
   "SkillUnlock_SkyDragon_Grass": {
     "localized_name": "Sillín de Quivern Botan",
-    "description": "Si lo llevas encima, podrás montarSkyDragon Grassa lomos de ."
+    "description": "Si lo llevas encima, podrás montar a lomos de SkyDragon Grass."
   },
   "SkillUnlock_SnowTigerBeastman": {
     "localized_name": "Martillo de Bastigor",
-    "description": "Si lo llevas encima, podrás montarBastigora lomos de ."
+    "description": "Si lo llevas encima, podrás montar a lomos de Bastigor."
   },
   "SkillUnlock_Suzaku": {
     "localized_name": "Sillín de Suzaku",
@@ -6589,19 +6785,19 @@
   },
   "SkillUnlock_WeaselDragon_Fire": {
     "localized_name": "Sillín de Chillet Ignis",
-    "description": "Si lo llevas encima, podrás montarWeaselDragon Firea lomos de ."
+    "description": "Si lo llevas encima, podrás montar a lomos de WeaselDragon Fire."
   },
   "SkillUnlock_WhiteAlienDragon": {
     "localized_name": "Sillín de Xenovader",
-    "description": "Si lo llevas encima, podrás montarXenogarda lomos de ."
+    "description": "Si lo llevas encima, podrás montar a lomos de Xenogard."
   },
   "SkillUnlock_WhiteDeer": {
     "localized_name": "Sillín de Celesdir",
-    "description": "Si lo llevas encima, podrás montarCelesdira lomos de ."
+    "description": "Si lo llevas encima, podrás montar a lomos de Celesdir."
   },
   "SkillUnlock_WhiteShieldDragon": {
     "localized_name": "Sillín de Silvegis",
-    "description": "Si lo llevas encima, podrás montarSilvegisa lomos de ."
+    "description": "Si lo llevas encima, podrás montar a lomos de Silvegis."
   },
   "SkillUnlock_WindChimes": {
     "localized_name": "Guantes de Hangyu",
@@ -6677,7 +6873,7 @@
   },
   "SpringRolls": {
     "localized_name": "Rollitos de primavera",
-    "description": "Rollo de pasta frita relleno de verduras y setas. Su textura crujiente es irresistible. La reducción de COR disminuirá un poco durante un tiempo, Ataque +10%."
+    "description": "Rollo de pasta frita relleno de verduras y setas. Su textura crujiente es irresistible. La reducción de COR disminuirá un poco durante un tiempo, Ataque +10 %."
   },
   "StainlessSteel": {
     "localized_name": "Hexolita",
@@ -6685,7 +6881,7 @@
   },
   "StatusPointResetSan": {
     "localized_name": "Fármaco recordador",
-    "description": "Medicina que restablece los puntos de parámetros del personaje jugador. No tiene ningún efecto sobre los Pals."
+    "description": "Medicina que restablece los puntos de tus parámetros. No tiene ningún efecto sobre los Pals."
   },
   "StealArmor": {
     "localized_name": "Armadura de Paluminium",
@@ -6749,23 +6945,23 @@
   },
   "StealHelmet": {
     "localized_name": "Yelmo de Paluminium",
-    "description": "Yelmo hecho de Lingote de Paluminium. La envidia de todos por su calidad de primera categoría y la prueba de la beligerancia de quien elige que lo porte."
+    "description": "Yelmo hecho de Lingote de Paluminium. La envidia de todos por su calidad de primera categoría y la prueba de la beligerancia de quien elige portarlo."
   },
   "StealHelmet_2": {
     "localized_name": "Yelmo de Paluminium",
-    "description": "Yelmo hecho de Lingote de Paluminium. La envidia de todos por su calidad de primera categoría y la prueba de la beligerancia de quien elige que lo porte."
+    "description": "Yelmo hecho de Lingote de Paluminium. La envidia de todos por su calidad de primera categoría y la prueba de la beligerancia de quien elige portarlo."
   },
   "StealHelmet_3": {
     "localized_name": "Yelmo de Paluminium",
-    "description": "Yelmo hecho de Lingote de Paluminium. La envidia de todos por su calidad de primera categoría y la prueba de la beligerancia de quien elige que lo porte."
+    "description": "Yelmo hecho de Lingote de Paluminium. La envidia de todos por su calidad de primera categoría y la prueba de la beligerancia de quien elige portarlo."
   },
   "StealHelmet_4": {
     "localized_name": "Yelmo de Paluminium",
-    "description": "Yelmo hecho de Lingote de Paluminium. La envidia de todos por su calidad de primera categoría y la prueba de la beligerancia de quien elige que lo porte."
+    "description": "Yelmo hecho de Lingote de Paluminium. La envidia de todos por su calidad de primera categoría y la prueba de la beligerancia de quien elige portarlo."
   },
   "StealHelmet_5": {
     "localized_name": "Yelmo de Paluminium",
-    "description": "Yelmo hecho de Lingote de Paluminium. La envidia de todos por su calidad de primera categoría y la prueba de la beligerancia de quien elige que lo porte."
+    "description": "Yelmo hecho de Lingote de Paluminium. La envidia de todos por su calidad de primera categoría y la prueba de la beligerancia de quien elige portarlo."
   },
   "StealIngot": {
     "localized_name": "Lingote de Paluminium",
@@ -6781,7 +6977,7 @@
   },
   "StirFriedVegetables": {
     "localized_name": "Salteado de verduras",
-    "description": "Salteado de Zanahoria y Cebolla. Una forma fácil y deliciosa de comer verduras. Aumenta ligeramente la velocidad de trabajo durante un tiempo, Defensa +10%."
+    "description": "Salteado de Zanahoria y Cebolla. Una forma fácil y deliciosa de comer verduras. Aumenta ligeramente la velocidad de trabajo durante un tiempo, Defensa +10 %."
   },
   "Stone": {
     "localized_name": "Piedra",
@@ -6789,23 +6985,23 @@
   },
   "SubmachineGun": {
     "localized_name": "Subfusil",
-    "description": "Subfusil con una potencia de disparo en cadena sublime. Fácil de manejar y de usar en combate a corta distancia."
+    "description": "Subfusil con una potencia de fuego en cadena sublime. Fácil de manejar y de usar en combate a corta distancia."
   },
   "SubmachineGun_2": {
     "localized_name": "Subfusil",
-    "description": "Subfusil con una potencia de disparo en cadena sublime. Fácil de manejar y de usar en combate a corta distancia."
+    "description": "Subfusil con una potencia de fuego en cadena sublime. Fácil de manejar y de usar en combate a corta distancia."
   },
   "SubmachineGun_3": {
     "localized_name": "Subfusil",
-    "description": "Subfusil con una potencia de disparo en cadena sublime. Fácil de manejar y de usar en combate a corta distancia."
+    "description": "Subfusil con una potencia de fuego en cadena sublime. Fácil de manejar y de usar en combate a corta distancia."
   },
   "SubmachineGun_4": {
     "localized_name": "Subfusil",
-    "description": "Subfusil con una potencia de disparo en cadena sublime. Fácil de manejar y de usar en combate a corta distancia."
+    "description": "Subfusil con una potencia de fuego en cadena sublime. Fácil de manejar y de usar en combate a corta distancia."
   },
   "SubmachineGun_5": {
     "localized_name": "Subfusil",
-    "description": "Subfusil con una potencia de disparo en cadena sublime. Fácil de manejar y de usar en combate a corta distancia."
+    "description": "Subfusil con una potencia de fuego en cadena sublime. Fácil de manejar y de usar en combate a corta distancia."
   },
   "Sulfur": {
     "localized_name": "Azufre",
@@ -6965,7 +7161,7 @@
   },
   "WorkSuitability_AddTicket_EmitFlame": {
     "localized_name": "Ciencia ígnea aplicada I",
-    "description": "Un libro muy valioso que trata sobre los secretos de «Encender fuego». Al hacer que un Pal lo lea, aumentará permanentemente la aptitud de Encender fuego en +1."
+    "description": "Un libro muy valioso que trata sobre los secretos de Encender fuego. Al hacer que un Pal lo lea, aumentará permanentemente la aptitud de Encender fuego en +1."
   },
   "WorkSuitability_AddTicket_GenerateElectricity": {
     "localized_name": "Ciencia de producción eléctrica aplicada I",
@@ -6997,7 +7193,7 @@
   },
   "Yakisoba": {
     "localized_name": "Yakisoba de Broncherry",
-    "description": "Plato de fideos con carne y verduras salteadas. También está bueno con trozos de carne bien gordos. Durante un tiempo, COMMON_STATUS_RANGE_Attack +20%."
+    "description": "Plato de fideos con carne y verduras salteadas. También está bueno con trozos de carne bien gordos. Durante un tiempo, COMMON_STATUS_RANGE_Attack +20 %."
   },
   "YakushimaArmor001": {
     "localized_name": "Cota de placas sagrada",
@@ -7065,23 +7261,23 @@
   },
   "YakushimaBlade004": {
     "localized_name": "Excalibur",
-    "description": "[Colaboración con Terraria] Espada sagrada de brillo dorado. Al blandirla, libera ondas de choque a su alrededor y ataca en un área amplia."
+    "description": "[Colaboración con Terraria] Espada sagrada de brillo dorado. Al blandirla, libera ondas de choque a su alrededor."
   },
   "YakushimaBlade004_2": {
     "localized_name": "Excalibur",
-    "description": "[Colaboración con Terraria] Espada sagrada de brillo dorado. Al blandirla, libera ondas de choque a su alrededor y ataca en un área amplia."
+    "description": "[Colaboración con Terraria] Espada sagrada de brillo dorado. Al blandirla, libera ondas de choque a su alrededor."
   },
   "YakushimaBlade004_3": {
     "localized_name": "Excalibur",
-    "description": "[Colaboración con Terraria] Espada sagrada de brillo dorado. Al blandirla, libera ondas de choque a su alrededor y ataca en un área amplia."
+    "description": "[Colaboración con Terraria] Espada sagrada de brillo dorado. Al blandirla, libera ondas de choque a su alrededor."
   },
   "YakushimaBlade004_4": {
     "localized_name": "Excalibur",
-    "description": "[Colaboración con Terraria] Espada sagrada de brillo dorado. Al blandirla, libera ondas de choque a su alrededor y ataca en un área amplia."
+    "description": "[Colaboración con Terraria] Espada sagrada de brillo dorado. Al blandirla, libera ondas de choque a su alrededor."
   },
   "YakushimaBlade004_5": {
     "localized_name": "Excalibur",
-    "description": "[Colaboración con Terraria] Espada sagrada de brillo dorado. Al blandirla, libera ondas de choque a su alrededor y ataca en un área amplia."
+    "description": "[Colaboración con Terraria] Espada sagrada de brillo dorado. Al blandirla, libera ondas de choque a su alrededor."
   },
   "YakushimaBlade005": {
     "localized_name": "Legendario Filomiau",
@@ -7201,7 +7397,7 @@
   },
   "YakushimaIngot002": {
     "localized_name": "Lingote de luminita",
-    "description": "[Colaboración con Terraria] Material que emite una luz como la del claro de luna. Soltado por YakushimaBoss002, rebosa de un poder colosal."
+    "description": "[Colaboración con Terraria] Material que emite una luz como la del claro de luna. Soltado por RAID YakushimaBoss002, rebosa de un poder colosal."
   },
   "YakushimaLantern001": {
     "localized_name": "Brillo nocturno",

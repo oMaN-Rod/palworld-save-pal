@@ -21,7 +21,7 @@
   },
   "Accessory_AirDash3": {
     "localized_name": "Dreifachluftsprintstiefel",
-    "description": "Ein Accessoire, das, mit dem du 3-mal in der Luft sprinten kannst."
+    "description": "Ein Accessoire, mit dem du 3-mal in der Luft sprinten kannst."
   },
   "Accessory_AirDash4": {
     "localized_name": "de Text",
@@ -263,6 +263,10 @@
     "localized_name": "Freundschaftspfirsich",
     "description": "Eine seltene Zauberfrucht. Man sagt, dass ein Pal, der sie frisst, einem sein Herz öffnet. Wähle weise, welchem Pal du sie gibst."
   },
+  "AffectionFruit_02": {
+    "localized_name": "Kleiner Freundschaftspfirsich",
+    "description": "Eine kleine Frucht, die voller Zuneigung steckt. Man sagt, dass ein Pal, der sie frisst, einem sein Herz öffnet. Wähle weise, welchem Pal du sie gibst."
+  },
   "AncientParts2": {
     "localized_name": "Antiker Kern",
     "description": "Kern eines antiken Apparats. Ist auf Palapagos mittlerweile kaum noch auffindbar, enthält jedoch eine Fülle an verlorenem Know-How."
@@ -452,8 +456,8 @@
     "description": "Erhält man bei einem Solo-Sieg in der Arena. Sammle sie, um sie gegen tolle Prämien einzutauschen!"
   },
   "BeamSword": {
-    "localized_name": "Lichtschwert",
-    "description": "Lichtschwert für den Nahkampf. Der leistungsstarke Laser fügt dem Gegner fiese Verbrennungen zu."
+    "localized_name": "Strahlenschwert",
+    "description": "Strahlenschwert für den Nahkampf. Der leistungsstarke Laser fügt dem Gegner fiese Verbrennungen zu."
   },
   "Beer": {
     "localized_name": "de Text",
@@ -537,7 +541,7 @@
   },
   "Blueprint_CandleStand": {
     "localized_name": "Feierlicher Leuchter: Bauplan",
-    "description": "Dieser Bauplan ermöglicht den Bau von „Hunter GangFlag“, solange er mitgeführt oder im Lager aufbewahrt wird."
+    "description": "Dieser Bauplan ermöglicht den Bau von |<MapObjectName id=|CandleStand|/>|, solange er mitgeführt oder im Lager aufbewahrt wird."
   },
   "Blueprint_ChargeLaserRifle_2": {
     "localized_name": "Teslagewehr: Bauplan 1",
@@ -621,11 +625,11 @@
   },
   "Blueprint_ConservationGroupBannerA": {
     "localized_name": "Liga der Palfreunde-Flagge: Bauplan",
-    "description": "Dieser Bauplan ermöglicht den Bau von „Hunter GangFlag“, solange er mitgeführt oder im Lager aufbewahrt wird."
+    "description": "Dieser Bauplan ermöglicht den Bau von |<MapObjectName id=|ConservationGroupBannerA|/>|, solange er mitgeführt oder im Lager aufbewahrt wird."
   },
   "Blueprint_ConservationGroupBannerB": {
     "localized_name": "Liga der Palfreunde-Querbanner: Bauplan",
-    "description": "Dieser Bauplan ermöglicht den Bau von „Hunter GangFlag“, solange er mitgeführt oder im Lager aufbewahrt wird."
+    "description": "Dieser Bauplan ermöglicht den Bau von |<MapObjectName id=|ConservationGroupBannerB|/>|, solange er mitgeführt oder im Lager aufbewahrt wird."
   },
   "Blueprint_CopperArmorCold_2": {
     "localized_name": "Kälteresistente Metallrüstung: Bauplan 1",
@@ -741,7 +745,7 @@
   },
   "Blueprint_FireStand": {
     "localized_name": "Zeremonieller Leuchter: Bauplan",
-    "description": "Dieser Bauplan ermöglicht den Bau von „Hunter GangFlag“, solange er mitgeführt oder im Lager aufbewahrt wird."
+    "description": "Dieser Bauplan ermöglicht den Bau von |<MapObjectName id=|FireStand|/>|, solange er mitgeführt oder im Lager aufbewahrt wird."
   },
   "Blueprint_FishingRod_01_2": {
     "localized_name": "Anfänger-Angelrute (Gumoss): Bauplan",
@@ -869,7 +873,7 @@
   },
   "Blueprint_GuardianDogStatue": {
     "localized_name": "Yakumo-Statue: Bauplan",
-    "description": "Dieser Bauplan ermöglicht den Bau von „Hunter GangFlag“, solange er mitgeführt oder im Lager aufbewahrt wird."
+    "description": "Dieser Bauplan ermöglicht den Bau von |<MapObjectName id=|GuardianDogStatue|/>|, solange er mitgeführt oder im Lager aufbewahrt wird."
   },
   "Blueprint_GuidedMissileLauncher_2": {
     "localized_name": "Raketenwerfer: Bauplan 1",
@@ -1345,7 +1349,7 @@
   },
   "Blueprint_Hunter_GangFlag": {
     "localized_name": "Wilderer-Flagge: Bauplan",
-    "description": "Dieser Bauplan ermöglicht den Bau von „Hunter GangFlag“, solange er mitgeführt oder im Lager aufbewahrt wird."
+    "description": "Dieser Bauplan ermöglicht den Bau von „<MapObjectName id=|Hunter GangFlag|/>“, solange er mitgeführt oder im Lager aufbewahrt wird."
   },
   "Blueprint_IronArmorCold_2": {
     "localized_name": "Kälteresistente hochwertige Metallrüstung: Bauplan 1",
@@ -1413,7 +1417,7 @@
   },
   "Blueprint_LanternTop": {
     "localized_name": "Lampion: Bauplan",
-    "description": "Dieser Bauplan ermöglicht den Bau von „Hunter GangFlag“, solange er mitgeführt oder im Lager aufbewahrt wird."
+    "description": "Dieser Bauplan ermöglicht den Bau von |<MapObjectName id=|LanternTop|/>|, solange er mitgeführt oder im Lager aufbewahrt wird."
   },
   "Blueprint_LaserGatlingGun_2": {
     "localized_name": "Laser-Gatlinggewehr: Bauplan 1",
@@ -1469,7 +1473,7 @@
   },
   "Blueprint_LilyQueenStatue": {
     "localized_name": "Lyleen-Statue: Bauplan",
-    "description": "Dieser Bauplan ermöglicht den Bau von „Hunter GangFlag“, solange er mitgeführt oder im Lager aufbewahrt wird."
+    "description": "Dieser Bauplan ermöglicht den Bau von |<MapObjectName id=|LilyQueenStatue|/>|, solange er mitgeführt oder im Lager aufbewahrt wird."
   },
   "Blueprint_MakeshiftAssaultRifle_2": {
     "localized_name": "Schrottreifes Sturmgewehr: Bauplan 1",
@@ -1570,6 +1574,46 @@
   "Blueprint_Musket_5": {
     "localized_name": "Muskete: Bauplan 4",
     "description": "Schaltet beim Tragen die Anleitung für „Muskete (Legendary)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 01“ gefertigt werden."
+  },
+  "Blueprint_Octavia001_Armor_5": {
+    "localized_name": "V1-Rüstung: Bauplan 4",
+    "description": "[ULTRAKILL-Collab] Schaltet beim Tragen das Rezept für „Octavia001 Armor 5 (Legendary)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 02“ gefertigt werden."
+  },
+  "Blueprint_Octavia002_Armor_5": {
+    "localized_name": "V2-Rüstung: Bauplan 4",
+    "description": "[ULTRAKILL-Collab] Schaltet beim Tragen das Rezept für „Octavia002 Armor 5 (Legendary)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 03“ gefertigt werden."
+  },
+  "Blueprint_OctaviaRevolver_2": {
+    "localized_name": "Marksman-Revolver: Bauplan 1",
+    "description": "[ULTRAKILL-Collab] Schaltet beim Tragen das Rezept für „Marksman-Revolver (Uncommon)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 02“ gefertigt werden."
+  },
+  "Blueprint_OctaviaRevolver_3": {
+    "localized_name": "Marksman-Revolver: Bauplan 2",
+    "description": "[ULTRAKILL-Collab] Schaltet beim Tragen das Rezept für „Marksman-Revolver (Rare)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 02“ gefertigt werden."
+  },
+  "Blueprint_OctaviaRevolver_4": {
+    "localized_name": "Marksman-Revolver: Bauplan 3",
+    "description": "[ULTRAKILL-Collab] Schaltet beim Tragen das Rezept für „Marksman-Revolver (Epic)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 02“ gefertigt werden."
+  },
+  "Blueprint_OctaviaRevolver_5": {
+    "localized_name": "Marksman-Revolver: Bauplan 4",
+    "description": "[ULTRAKILL-Collab] Schaltet beim Tragen das Rezept für „Marksman-Revolver (Legendary)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 02“ gefertigt werden."
+  },
+  "Blueprint_OctaviaShotgun_2": {
+    "localized_name": "Core-Eject-Flinte: Bauplan 1",
+    "description": "[ULTRAKILL-Collab] Schaltet beim Tragen das Rezept für „Core-Eject-Flinte (Uncommon)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
+  },
+  "Blueprint_OctaviaShotgun_3": {
+    "localized_name": "Core-Eject-Flinte: Bauplan 2",
+    "description": "[ULTRAKILL-Collab] Schaltet beim Tragen das Rezept für „Core-Eject-Flinte (Rare)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
+  },
+  "Blueprint_OctaviaShotgun_4": {
+    "localized_name": "Core-Eject-Flinte: Bauplan 3",
+    "description": "[ULTRAKILL-Collab] Schaltet beim Tragen das Rezept für „Core-Eject-Flinte (Epic)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
+  },
+  "Blueprint_OctaviaShotgun_5": {
+    "localized_name": "Core-Eject-Flinte: Bauplan 4",
+    "description": "[ULTRAKILL-Collab] Schaltet beim Tragen das Rezept für „Core-Eject-Flinte (Legendary)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
   },
   "Blueprint_OldRevolver_2": {
     "localized_name": "Alter Revolver: Bauplan 1",
@@ -1801,11 +1845,11 @@
   },
   "Blueprint_SF_Chair": {
     "localized_name": "Stuhl im Laborstil: Bauplan",
-    "description": "Dieser Bauplan ermöglicht den Bau von „SF Chair“, solange er mitgeführt oder im Lager aufbewahrt wird."
+    "description": "Dieser Bauplan ermöglicht den Bau von „<MapObjectName id=|SF Chair|/>“, solange er mitgeführt oder im Lager aufbewahrt wird."
   },
   "Blueprint_SF_Desk": {
     "localized_name": "Tisch im Laborstil: Bauplan",
-    "description": "Dieser Bauplan ermöglicht den Bau von „SF Desk“, solange er mitgeführt oder im Lager aufbewahrt wird."
+    "description": "Dieser Bauplan ermöglicht den Bau von „<MapObjectName id=|SF Desk|/>“, solange er mitgeführt oder im Lager aufbewahrt wird."
   },
   "Blueprint_SemiAutoRifle_2": {
     "localized_name": "Halbautomatisches Gewehr: Bauplan 1",
@@ -1841,7 +1885,7 @@
   },
   "Blueprint_Shrine_Lantern": {
     "localized_name": "Bauplan: Tempellaterne",
-    "description": "Dieser Bauplan ermöglicht den Bau von „Hunter GangFlag“, solange er mitgeführt oder im Lager aufbewahrt wird."
+    "description": "Dieser Bauplan ermöglicht den Bau von |<MapObjectName id=|Shrine Lantern|/>|, solange er mitgeführt oder im Lager aufbewahrt wird."
   },
   "Blueprint_SingleShotRifle_2": {
     "localized_name": "Einzelschuss-Gewehr: Bauplan 1",
@@ -1941,7 +1985,7 @@
   },
   "Blueprint_WallTorch02": {
     "localized_name": "Feierliche Wandfackel: Bauplan",
-    "description": "Dieser Bauplan ermöglicht den Bau von „Hunter GangFlag“, solange er mitgeführt oder im Lager aufbewahrt wird."
+    "description": "Dieser Bauplan ermöglicht den Bau von |<MapObjectName id=|WallTorch02|/>|, solange er mitgeführt oder im Lager aufbewahrt wird."
   },
   "Blueprint_WeakerBow_2": {
     "localized_name": "Alter Bogen: Bauplan 1",
@@ -1961,11 +2005,11 @@
   },
   "Blueprint_Wire_Fence": {
     "localized_name": "Maschendrahtzaun: Bauplan",
-    "description": "Dieser Bauplan ermöglicht den Bau von „Hunter GangFlag“, solange er mitgeführt oder im Lager aufbewahrt wird."
+    "description": "Dieser Bauplan ermöglicht den Bau von |<MapObjectName id=|Wire Fence|/>|, solange er mitgeführt oder im Lager aufbewahrt wird."
   },
   "Blueprint_WoodenBarricade": {
     "localized_name": "Holzbarrikade: Bauplan",
-    "description": "Dieser Bauplan ermöglicht den Bau von „Hunter GangFlag“, solange er mitgeführt oder im Lager aufbewahrt wird."
+    "description": "Dieser Bauplan ermöglicht den Bau von |<MapObjectName id=|WoodenBarricade|/>|, solange er mitgeführt oder im Lager aufbewahrt wird."
   },
   "Blueprint_YakushimaArmor001": {
     "localized_name": "Heiliger Plattenpanzer: Bauplan",
@@ -2046,6 +2090,10 @@
   "Blueprint_YakushimaBlade004_5": {
     "localized_name": "Excalibur: Bauplan 4",
     "description": "[Terraria-Collab] Schaltet beim Tragen das Rezept für „Excalibur (Legendary)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 02“ gefertigt werden."
+  },
+  "Blueprint_YakushimaBoss002_Relic": {
+    "localized_name": "Mondherrenstatue: Bauplan",
+    "description": "[Terraria-Collab] Dieser Bauplan ermöglicht den Bau von „<MapObjectName id=|YakushimaBoss002 Relic|/>“, solange er mitgeführt oder im Lager aufbewahrt wird."
   },
   "Blueprint_YakushimaGun001": {
     "localized_name": "Vortex-Schläger: Bauplan",
@@ -2167,289 +2215,293 @@
     "localized_name": "Nachtglüh: Bauplan 4",
     "description": "[Terraria-Collab] Schaltet beim Tragen das Rezept für „Nachtglüh (Legendary)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 02“ gefertigt werden."
   },
+  "Blueprint_Zoe_Halloweenskin_1": {
+    "localized_name": "Zoes Halloweenkostüm: Bauplan",
+    "description": "Skizzen, die von einem mitgehörten Selbstgespräch Zoes inspiriert wurden. Fertige das Kostüm mithilfe der Werkbank und bringe es Zoe."
+  },
   "Bone": {
     "localized_name": "Knochen",
     "description": "Ein von Pals gewonnener Knochen. Ist eine gute Kalziumquelle."
   },
   "BossDefeatReward_AmaterasuWolf_Dark": {
     "localized_name": "Kitsun-Noct-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Hüter der finsteren Flammen“ Kitsun Noct erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Hüter der finsteren Flammen“ Kitsun Noct besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_Anubis": {
     "localized_name": "Anubis-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Wächter der schwarzen Sonne“ Anubis erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Wächter der schwarzen Sonne“ Anubis besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_BadCatgirl": {
     "localized_name": "Nyafia-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Jäger der Nachtschatten“ Nyafia erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Jäger der Nachtschatten“ Nyafia besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_BerryGoat_Dark": {
     "localized_name": "Caprity-Noct-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Finsterer Garten“ Caprity Noct erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Finsterer Garten“ Caprity Noct besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_BlackMetalDragon": {
     "localized_name": "Astegon-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Stählerner Suzerän“ Astegon erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Stählerner Suzerän“ Astegon besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_BlackPuppy": {
     "localized_name": "Smokie-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Kleiner Held der kohlschwarzen Flammen“ Smokie erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Kleiner Held der kohlschwarzen Flammen“ Smokie besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_BlueDragon": {
     "localized_name": "Azurobe-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Die Herrin des Sees“ Azurobe erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Die Herrin des Sees“ Azurobe besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_BlueThunderHorse": {
     "localized_name": "Azurmane-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Azurblaue Donnerhufe“ Azurmane erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Azurblaue Donnerhufe“ Azurmane besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_BlueberryFairy": {
     "localized_name": "Prunelia-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Indigogewandete Maid“ Prunelia erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Indigogewandete Maid“ Prunelia besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_CaptainPenguin": {
     "localized_name": "Penking-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Pionier der Eismeere“ Penking erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Pionier der Eismeere“ Penking besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_CatMage": {
     "localized_name": "Katress-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Dunkler Katzenmagier“ Katress erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Dunkler Katzenmagier“ Katress besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_CatVampire": {
     "localized_name": "Felbat-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Blutiger Nachtschatten“ Felbat erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Blutiger Nachtschatten“ Felbat besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_DarkScorpion": {
     "localized_name": "Menasting-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Unbarmherzige Lanze“ Menasting erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Unbarmherzige Lanze“ Menasting besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_DarkScorpion_Ground": {
     "localized_name": "Menasting-Terra-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Goldbohrende Lanze“ Menasting Terra erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Goldbohrende Lanze“ Menasting Terra besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_FairyDragon": {
     "localized_name": "Elphidran-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Sanfter Himmelsdrache“ Elphidran erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Sanfter Himmelsdrache“ Elphidran besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_FengyunDeeper": {
     "localized_name": "Fenglope-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Anmutige Wolkenhufe“ Fenglope erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Anmutige Wolkenhufe“ Fenglope besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_FengyunDeeper_Electric": {
     "localized_name": "Fenglope-Lux-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Anmutige Blitzhufe“ Fenglope Lux erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Anmutige Blitzhufe“ Fenglope Lux besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_FlowerDinosaur_Electric": {
     "localized_name": "Dinossom-Lux-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Hüter der Blitze“ Dinossom Lux erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Hüter der Blitze“ Dinossom Lux besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_FlowerDoll": {
     "localized_name": "Petallia-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Prinzessin des Blumengartens“ Petallia erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Prinzessin des Blumengartens“ Petallia besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_GhostRabbit": {
     "localized_name": "Nitemary-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Schwarzer Seelenhase“ Nitemary erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Schwarzer Seelenhase“ Nitemary besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_GoldenHorse": {
     "localized_name": "Gildane-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Wächter der Dämmerung“ Gildane erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Wächter der Dämmerung“ Gildane besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_GrassMammoth": {
     "localized_name": "Mammorest-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Unaufhaltsame Naturgewalt“ Mammorest erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Unaufhaltsame Naturgewalt“ Mammorest besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_GrassPanda_Electric": {
     "localized_name": "Mossanda-Lux-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Vom Blitz getroffener Kraftprotz“ Mossanda Lux erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Vom Blitz getroffener Kraftprotz“ Mossanda Lux besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_GrassRabbitMan": {
     "localized_name": "Verdash-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Windschneller Waldläufer“ Verdash erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Windschneller Waldläufer“ Verdash besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_GrimGirl": {
     "localized_name": "Splatterina-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Blutbefleckter Schlächter“ Splatterina erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Blutbefleckter Schlächter“ Splatterina besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_HawkBird": {
     "localized_name": "Nitewing-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Verhängnisvolle Schwingen“ Nitewing erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Verhängnisvolle Schwingen“ Nitewing besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_HerculesBeetle": {
     "localized_name": "Warsect-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Gepanzerter Titan“ Warsect erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Gepanzerter Titan“ Warsect besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_HerculesBeetle_Ground": {
     "localized_name": "Warsect-Terra-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Goldener Titan“ Warsect Terra erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Goldener Titan“ Warsect Terra besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_Horus_Water": {
     "localized_name": "Faleris-Aqua-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Gebieter der Himmelsfluten“ Faleris Aqua erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Gebieter der Himmelsfluten“ Faleris Aqua besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_IceHorse": {
     "localized_name": "Frostallion-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Legendäres Eisross“ Frostallion erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Legendäres Eisross“ Frostallion besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_IceHorse_Dark": {
     "localized_name": "Frostallion-Noct-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Legendäres Schattenross“ Frostallion Noct erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Legendäres Schattenross“ Frostallion Noct besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_IceNarwhal": {
     "localized_name": "Whalaska-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Sanfte Eislanze“ Whalaska erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Sanfte Eislanze“ Whalaska besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_IceNarwhal_Fire": {
     "localized_name": "Whalaska-Ignis-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Sanfte Karminlanze“ Whalaska Ignis erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Sanfte Karminlanze“ Whalaska Ignis besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_JetDragon": {
     "localized_name": "Jetragon-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Legendärer Meteordrache“ Jetragon erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Legendärer Meteordrache“ Jetragon besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_KingAlpaca": {
     "localized_name": "Kingpaca-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Ihre Flauschigkeit“ Kingpaca erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Ihre Flauschigkeit“ Kingpaca besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_KingAlpaca_Ice": {
     "localized_name": "Kingpaca-Cryst-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Ihre frostige Flauschigkeit“ Kingpaca Cryst erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Ihre frostige Flauschigkeit“ Kingpaca Cryst besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_KingBahamut": {
     "localized_name": "Blazamut-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Tyrannisches Fegefeuer“ Blazamut erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Tyrannisches Fegefeuer“ Blazamut besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_Kirin": {
     "localized_name": "Univolt-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Blitzschneller Mythos“ Univolt erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Blitzschneller Mythos“ Univolt besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_Kitsunebi_Ice": {
     "localized_name": "Foxparks-Cryst-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Wegzierende Eisblume“ Foxparks Cryst erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Wegzierende Eisblume“ Foxparks Cryst besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_LazyCatfish": {
     "localized_name": "Dumud-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Hat ab morgen sein Leben im Griff“ Dumud erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Hat ab morgen sein Leben im Griff“ Dumud besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_LazyDragon_Electric": {
     "localized_name": "Relaxaurus-Lux-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Verfressener Donnerdrache“ Relaxaurus Lux erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Verfressener Donnerdrache“ Relaxaurus Lux besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_LilyQueen_Dark": {
     "localized_name": "Lyleen-Noct-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Kaiserin des Abgrunds“ Lyleen Noct erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Kaiserin des Abgrunds“ Lyleen Noct besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_MopKing": {
     "localized_name": "Sweepa-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Flauschiger Kryptidpatriarch“ Sweepa erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Flauschiger Kryptidpatriarch“ Sweepa besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_Mutant": {
     "localized_name": "Lunaris-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Außerirdischer Eindringling“ Lunaris erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Außerirdischer Eindringling“ Lunaris besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_MysteryMask": {
     "localized_name": "Omascul-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Hundertgesichtiger Apostel“ Omascul erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Hundertgesichtiger Apostel“ Omascul besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_NaughtyCat": {
     "localized_name": "Grintale-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Marshmallowförmiges“ Grintale erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Marshmallowförmiges“ Grintale besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft.."
   },
   "BossDefeatReward_NightBlueHorse": {
     "localized_name": "Starryon-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Kobaltblaue Mähne“ Starryon erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Kobaltblaue Mähne“ Starryon besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_PinkRabbit_Grass": {
     "localized_name": "Ribbuny-Botan-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Über beide Ohren lächelndes“ Ribbuny Botan erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Über beide Ohren lächelndes“ Ribbuny Botan besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_PlantSlime": {
     "localized_name": "Gumoss-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Spontan mutiertes“ Gumoss erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Spontan mutiertes“ Gumoss besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_PoseidonOrca": {
     "localized_name": "Neptilius-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Legendärer Leviathan“ Neptilius erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Legendäres Seeungeheuer “ Neptilius besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_PurpleSpider": {
     "localized_name": "Tarantriss-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Spinnfaden-Stratege“ Tarantriss erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Spinnfaden-Stratege“ Tarantriss besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_QueenBee": {
     "localized_name": "Elizabee-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Ihre honigliche Majestät“ Elizabee erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Ihre honigliche Majestät“ Elizabee besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_RaijinDaughter_Water": {
     "localized_name": "Dazzi-Noct-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Schwarze Donnerwolke“ Dazzi Noct erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Schwarze Donnerwolke“ Dazzi Noct besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_Ronin": {
     "localized_name": "Bushi-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Einsamer Samurai“ Bushi erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Einsamer Samurai“ Bushi besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_SaintCentaur": {
     "localized_name": "Zwillingsritter-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du die Zwillingsritter erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du die Zwillingsritter besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_SakuraSaurus": {
     "localized_name": "Broncherry-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Bote des Frühlingswindes“ Broncherry erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Bote des Frühlingswindes“ Broncherry besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_SakuraSaurus_Water": {
     "localized_name": "Broncherry-Aqua-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Bote der Sommerfrische“ Broncherry Aqua erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Bote der Sommerfrische“ Broncherry Aqua besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_SkyDragon": {
     "localized_name": "Quivern-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Reinweiße Himmelsschwingen“ Quivern erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Reinweiße Himmelsschwingen“ Quivern besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_Suzaku": {
     "localized_name": "Suzaku-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Gebieter des sengenden Himmels“ Suzaku erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Gebieter des sengenden Himmels“ Suzaku besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_ThunderBird": {
     "localized_name": "Beakon-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Mächtige Donnerschwingen“ Beakon erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Mächtige Donnerschwingen“ Beakon besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_Umihebi": {
     "localized_name": "Jormuntide-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „König der Meere“ Jormuntide erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „König der Meere“ Jormuntide besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_VioletFairy": {
     "localized_name": "Vaelet-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Purpurne Phantomblume“ Vaelet erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Purpurne Phantomblume“ Vaelet besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_WeaselDragon": {
     "localized_name": "Chillet-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Wiesentänzer“ Chillet erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Wiesentänzer“ Chillet besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_Werewolf_Ice": {
     "localized_name": "Loupmoon-Cryst-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Eisschatten im Mondlicht“ Loupmoon Cryst erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Eisschatten im Mondlicht“ Loupmoon Cryst besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_WhiteDeer": {
     "localized_name": "Celesdir-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Bestie der Erlösung“ Celesdir erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Bestie der Erlösung“ Celesdir besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_WhiteMoth": {
     "localized_name": "Sibelyx-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Reinweiße Madame“ Sibelyx erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Reinweiße Madame“ Sibelyx besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_WhiteShieldDragon": {
     "localized_name": "Silvegis-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Eiserner Bollwerkdrache“ Silvegis erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Eiserner Bollwerkdrache“ Silvegis besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_WhiteTiger_Ground": {
     "localized_name": "Cryolinx-Terra-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Jäger der steinigen Weiten“ Cryolinx Terra erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Jäger der steinigen Weiten“ Cryolinx Terra besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_WingGolem": {
     "localized_name": "Knocklem-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Wandelndes Bollwerk“ Knocklem erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Wandelndes Bollwerk“ Knocklem besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BossDefeatReward_Yeti_Grass": {
     "localized_name": "Wumpo-Botan-Jagdtrophäe",
-    "description": "Ein Nachweis, dass du „Riese des Südens“ Wumpo Botan erlegt hast. Solange du sie bei dir trägst, werden die Statuswerte der Pals in deinem Team dauerhaft erhöht."
+    "description": "Ein Nachweis, dass du „Riese des Südens“ Wumpo Botan besiegt hast. Erhöht die Statuswerte der Pals in deinem Team dauerhaft."
   },
   "BountyProof_1": {
     "localized_name": "Kopfgeldnachweis",
@@ -2597,7 +2649,7 @@
   },
   "ChickenSaute": {
     "localized_name": "Chikipi-Filet",
-    "description": "In Butter angebratenes Hähnchenbrustfilet mit frischem Zitronenaroma. Steigert vorübergehend das Arbeitstempo leicht."
+    "description": "In Butter gebratenes Hähnchen mit frischem Zitronenaroma. Steigert vorübergehend das Arbeitstempo leicht."
   },
   "Chowder": {
     "localized_name": "Dumud-Chowder",
@@ -2685,7 +2737,7 @@
   },
   "Coal": {
     "localized_name": "Steinkohle",
-    "description": "Steinkohle lässt sich unter anderem in Höhlen ausfindig machen. Wird für die Herstellung hochwertiger Metalle benötigt."
+    "description": "Steinkohle lässt sich unter anderem in Höhlen finden. Wird für die Herstellung hochwertiger Metalle benötigt."
   },
   "CompoundBow": {
     "localized_name": "Compoundbogen",
@@ -2713,7 +2765,7 @@
   },
   "CopperArmor": {
     "localized_name": "Metallrüstung",
-    "description": "Eine Rüstung aus Metall. Bietet relativ guten Schutz und ist relativ schwer."
+    "description": "Eine Rüstung aus Metall. Bietet relativ guten Schutz und hat das passende Gewicht dazu."
   },
   "CopperArmorCold": {
     "localized_name": "Kälteresistente Metallrüstung",
@@ -2757,19 +2809,19 @@
   },
   "CopperArmor_2": {
     "localized_name": "Metallrüstung",
-    "description": "Eine Rüstung aus Metall. Bietet relativ guten Schutz und ist relativ schwer."
+    "description": "Eine Rüstung aus Metall. Bietet relativ guten Schutz und hat das passende Gewicht dazu."
   },
   "CopperArmor_3": {
     "localized_name": "Metallrüstung",
-    "description": "Eine Rüstung aus Metall. Bietet relativ guten Schutz und ist relativ schwer."
+    "description": "Eine Rüstung aus Metall. Bietet relativ guten Schutz und hat das passende Gewicht dazu."
   },
   "CopperArmor_4": {
     "localized_name": "Metallrüstung",
-    "description": "Eine Rüstung aus Metall. Bietet relativ guten Schutz und ist relativ schwer."
+    "description": "Eine Rüstung aus Metall. Bietet relativ guten Schutz und hat das passende Gewicht dazu."
   },
   "CopperArmor_5": {
     "localized_name": "Metallrüstung",
-    "description": "Eine Rüstung aus Metall. Bietet relativ guten Schutz und ist relativ schwer."
+    "description": "Eine Rüstung aus Metall. Bietet relativ guten Schutz und hat das passende Gewicht dazu."
   },
   "CopperHelmet": {
     "localized_name": "Metallhelm",
@@ -3457,27 +3509,31 @@
   },
   "HandGun_Default": {
     "localized_name": "Pistole",
-    "description": "Eine Handfeuerwaffe mit guter Feuerrate und ordentlich großem Magazin. Hat eine höhere Schadenswirkung als Alte Pistole."
+    "description": "Eine Handfeuerwaffe mit verbesserter Feuerrate und ordentlich großem Magazin. Hat eine höhere Schadenswirkung als Alte Pistole."
   },
   "HandGun_Default_2": {
     "localized_name": "Pistole",
-    "description": "Eine Handfeuerwaffe mit guter Feuerrate und ordentlich großem Magazin. Hat eine höhere Schadenswirkung als Alte Pistole."
+    "description": "Eine Handfeuerwaffe mit verbesserter Feuerrate und ordentlich großem Magazin. Hat eine höhere Schadenswirkung als Alte Pistole."
   },
   "HandGun_Default_3": {
     "localized_name": "Pistole",
-    "description": "Eine Handfeuerwaffe mit guter Feuerrate und ordentlich großem Magazin. Hat eine höhere Schadenswirkung als Alte Pistole."
+    "description": "Eine Handfeuerwaffe mit verbesserter Feuerrate und ordentlich großem Magazin. Hat eine höhere Schadenswirkung als Alte Pistole."
   },
   "HandGun_Default_4": {
     "localized_name": "Pistole",
-    "description": "Eine Handfeuerwaffe mit guter Feuerrate und ordentlich großem Magazin. Hat eine höhere Schadenswirkung als Alte Pistole."
+    "description": "Eine Handfeuerwaffe mit verbesserter Feuerrate und ordentlich großem Magazin. Hat eine höhere Schadenswirkung als Alte Pistole."
   },
   "HandGun_Default_5": {
     "localized_name": "Pistole",
-    "description": "Eine Handfeuerwaffe mit guter Feuerrate und ordentlich großem Magazin. Hat eine höhere Schadenswirkung als Alte Pistole."
+    "description": "Eine Handfeuerwaffe mit verbesserter Feuerrate und ordentlich großem Magazin. Hat eine höhere Schadenswirkung als Alte Pistole."
   },
   "HandgunBullet": {
     "localized_name": "Pistolenmunition",
     "description": "Munition für Waffen vom Typ HandGun Default."
+  },
+  "HandgunShield": {
+    "localized_name": "Taktischer Schild",
+    "description": "Taktischer Schild"
   },
   "Head001": {
     "localized_name": "Königskrone",
@@ -3820,7 +3876,7 @@
     "description": null
   },
   "HeadEquip001_purple": {
-    "localized_name": "Hexenkrone (Ultra)",
+    "localized_name": "Hexenkrone",
     "description": "Verströmt die unheilvolle Kraft von Bellanoir Libero (Ultra). Nur sehr wenige kommen je in ihren Besitz."
   },
   "HeadEquip023": {
@@ -3954,6 +4010,14 @@
   "HeadEquip044": {
     "localized_name": "Xenolord-Kopf",
     "description": "Kopfbedeckung im Stil eines Xenolord."
+  },
+  "HeadEquip045": {
+    "localized_name": "Depresso-Cosplayhelm",
+    "description": "Der Kopfteil eines Depresso-Kostüms. Soll Schattenschaden leicht vermindern können."
+  },
+  "HeadEquip046": {
+    "localized_name": "Krone der Erlösung",
+    "description": "Verströmt die unheilvolle Kraft von Hartalis (Ultra). Nur sehr wenige kommen je in ihren Besitz."
   },
   "Herbs": {
     "localized_name": "Schwache Medizin",
@@ -4365,18 +4429,18 @@
   },
   "MeaninglessItem_ButcheringImportPal": {
     "localized_name": "Gewebeabfall",
-    "description": "Ein völlig ruiniertes Stück biologisches Gewebe. Verbleibt als Rückstand, wenn ein genetisch rekonstruierter Pal geschlachtet wird. Es hat keinerlei Nutzen und kann nur verkauft oder entsorgt werden."
+    "description": "Ein völlig zerfleddertes Stück Biogewebe. Verbleibt als Rückstand, wenn ein genetisch rekonstruierter Pal geschlachtet wird. Es hat keinerlei Nutzen und kann nur verkauft oder entsorgt werden."
   },
   "Meat": {
     "localized_name": "Meat",
-    "description": "Palfleisch. Kann ohne Probleme auch roh verzehrt werden."
+    "description": "Palfleisch. Ist so frisch, dass es ohne Probleme auch roh verzehrt werden kann."
   },
   "Meat2": {
     "localized_name": "de Text",
     "description": "de Text"
   },
   "MeatAndPotatoes": {
-    "localized_name": "Galeclaw-Eintopf",
+    "localized_name": "Galeclaw-Nikujaga",
     "description": "Ein Gericht mit Fleisch und Kartoffeln, in würzig-süßer Sauce gekocht. Weckt Gefühle von Heimat und Geborgenheit. Verteidigung vorübergehend +25 %."
   },
   "MeatCutterKnife": {
@@ -4465,7 +4529,7 @@
   },
   "MeteorDrop": {
     "localized_name": "Meteoritenbruchstück",
-    "description": "Ein Gesteinsbrocken, der vom Himmel gefallen ist. Im Inneren befinden sich jede Menge Pal Crystal Se. Benutze „Zerkleinerer“, um dranzukommen."
+    "description": "Ein Gesteinsbrocken, der vom Himmel gefallen ist. Im Inneren befinden sich jede Menge Pal Crystal Se. Benutze „Zerkleinerer“, für die Extrahierung."
   },
   "Milk": {
     "localized_name": "Milch",
@@ -4554,6 +4618,62 @@
   "NightVisionGoggles": {
     "localized_name": "de Text",
     "description": "de Text"
+  },
+  "Octavia001_Armor": {
+    "localized_name": "V1-Rüstung",
+    "description": "[ULTRAKILL-Collab] Eine Rüstung, gefertigt nach dem Vorbild von Final-War-Robotern eines fernen Landes. Sie verfügt über ein Selbstreparatursystem, das bei Schaden aktiviert wird."
+  },
+  "Octavia001_Armor_5": {
+    "localized_name": "V1-Rüstung",
+    "description": "[ULTRAKILL-Collab] Eine Rüstung, gefertigt nach dem Vorbild von Final-War-Robotern eines fernen Landes. Sie verfügt über ein Selbstreparatursystem, das bei Schaden aktiviert wird."
+  },
+  "Octavia002_Armor": {
+    "localized_name": "V2-Rüstung",
+    "description": "[ULTRAKILL-Collab] Eine Rüstung, gefertigt nach dem Vorbild von New-Peace-Robotern eines fernen Landes. Sie verzichtet auf ein Selbstreparatursystem und setzt stattdessen auf eine noch robustere Panzerung."
+  },
+  "Octavia002_Armor_5": {
+    "localized_name": "V2-Rüstung",
+    "description": "[ULTRAKILL-Collab] Eine Rüstung, gefertigt nach dem Vorbild von New-Peace-Robotern eines fernen Landes. Sie verzichtet auf ein Selbstreparatursystem und setzt stattdessen auf eine noch robustere Panzerung."
+  },
+  "OctaviaRevolver": {
+    "localized_name": "Marksman-Revolver",
+    "description": "[ULTRAKILL-Collab] Ein elektrischer Revolver, der durch Wärmekraft kontinuierlich abgefeuert werden kann. Während er ausgerüstet ist, wird das Werfen von Sphären durch einen Münzwurf ersetzt. Mit dem Marksman-Revolver getroffene Münzen prallen dabei auf Gegner ab."
+  },
+  "OctaviaRevolver_2": {
+    "localized_name": "Marksman-Revolver",
+    "description": "[ULTRAKILL-Collab] Ein elektrischer Revolver, der durch Wärmekraft kontinuierlich abgefeuert werden kann. Während er ausgerüstet ist, wird das Werfen von Sphären durch einen Münzwurf ersetzt. Mit dem Marksman-Revolver getroffene Münzen prallen dabei auf Gegner ab."
+  },
+  "OctaviaRevolver_3": {
+    "localized_name": "Marksman-Revolver",
+    "description": "[ULTRAKILL-Collab] Ein elektrischer Revolver, der durch Wärmekraft kontinuierlich abgefeuert werden kann. Während er ausgerüstet ist, wird das Werfen von Sphären durch einen Münzwurf ersetzt. Mit dem Marksman-Revolver getroffene Münzen prallen dabei auf Gegner ab."
+  },
+  "OctaviaRevolver_4": {
+    "localized_name": "Marksman-Revolver",
+    "description": "[ULTRAKILL-Collab] Ein elektrischer Revolver, der durch Wärmekraft kontinuierlich abgefeuert werden kann. Während er ausgerüstet ist, wird das Werfen von Sphären durch einen Münzwurf ersetzt. Mit dem Marksman-Revolver getroffene Münzen prallen dabei auf Gegner ab."
+  },
+  "OctaviaRevolver_5": {
+    "localized_name": "Marksman-Revolver",
+    "description": "[ULTRAKILL-Collab] Ein elektrischer Revolver, der durch Wärmekraft kontinuierlich abgefeuert werden kann. Während er ausgerüstet ist, wird das Werfen von Sphären durch einen Münzwurf ersetzt. Mit dem Marksman-Revolver getroffene Münzen prallen dabei auf Gegner ab."
+  },
+  "OctaviaShotgun": {
+    "localized_name": "Core-Eject-Flinte",
+    "description": "[ULTRAKILL-Collab] Eine thermische Flinte, die durch Wärmekraft kontinuierlich abgefeuert werden kann. Während sie ausgerüstet ist, wird das Werfen von Sphären durch das Abfeuern von Kernen ersetzt. Mit der Marksman-Revolver getroffene Kerne explodieren."
+  },
+  "OctaviaShotgun_2": {
+    "localized_name": "Core-Eject-Flinte",
+    "description": "[ULTRAKILL-Collab] Eine thermische Flinte, die durch Wärmekraft kontinuierlich abgefeuert werden kann. Während sie ausgerüstet ist, wird das Werfen von Sphären durch das Abfeuern von Kernen ersetzt. Mit der Marksman-Revolver getroffene Kerne explodieren."
+  },
+  "OctaviaShotgun_3": {
+    "localized_name": "Core-Eject-Flinte",
+    "description": "[ULTRAKILL-Collab] Eine thermische Flinte, die durch Wärmekraft kontinuierlich abgefeuert werden kann. Während sie ausgerüstet ist, wird das Werfen von Sphären durch das Abfeuern von Kernen ersetzt. Mit der Marksman-Revolver getroffene Kerne explodieren."
+  },
+  "OctaviaShotgun_4": {
+    "localized_name": "Core-Eject-Flinte",
+    "description": "[ULTRAKILL-Collab] Eine thermische Flinte, die durch Wärmekraft kontinuierlich abgefeuert werden kann. Während sie ausgerüstet ist, wird das Werfen von Sphären durch das Abfeuern von Kernen ersetzt. Mit der Marksman-Revolver getroffene Kerne explodieren."
+  },
+  "OctaviaShotgun_5": {
+    "localized_name": "Core-Eject-Flinte",
+    "description": "[ULTRAKILL-Collab] Eine thermische Flinte, die durch Wärmekraft kontinuierlich abgefeuert werden kann. Während sie ausgerüstet ist, wird das Werfen von Sphären durch das Abfeuern von Kernen ersetzt. Mit der Marksman-Revolver getroffene Kerne explodieren."
   },
   "OctopusGirl_Takoyaki": {
     "localized_name": "Gloopie-Takoyaki",
@@ -4973,7 +5093,7 @@
   },
   "PalGenderReverse": {
     "localized_name": "Geschlechtsumwandler",
-    "description": "Eine wundersame Medizin, mit der sich das Geschlecht von Pals ändern lässt. Kann am Pal-Operationstisch verwendet werden."
+    "description": "Eine wundersame Medizin, mit der sich das Geschlecht von Pals ändern lässt. Kann am Pal-OP-Tisch verwendet werden."
   },
   "PalHealingGrenade": {
     "localized_name": "Pal-Heilgranate",
@@ -5041,111 +5161,151 @@
   },
   "PalPassiveSkillChange_CoolTimeReduction_Up_1": {
     "localized_name": "Implantat: Konzentration",
-    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-Operationstisch auswählen."
+    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-OP-Tisch auswählen."
   },
   "PalPassiveSkillChange_CoolTimeReduction_Up_2": {
     "localized_name": "Implantat: Ungeduld",
-    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-Operationstisch auswählen."
+    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-OP-Tisch auswählen."
   },
   "PalPassiveSkillChange_CraftSpeed_up1": {
     "localized_name": "Implantat: Fleißig",
-    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-Operationstisch auswählen."
+    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-OP-Tisch auswählen."
   },
   "PalPassiveSkillChange_CraftSpeed_up2": {
     "localized_name": "Implantat: Handwerksmeister",
-    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-Operationstisch auswählen."
+    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-OP-Tisch auswählen."
   },
   "PalPassiveSkillChange_CraftSpeed_up3": {
     "localized_name": "Implantat: Goldenes Händchen",
-    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-Operationstisch auswählen."
+    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-OP-Tisch auswählen."
   },
   "PalPassiveSkillChange_Deffence_up1": {
     "localized_name": "Implantat: Hart im Nehmen",
-    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-Operationstisch auswählen."
+    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-OP-Tisch auswählen."
   },
   "PalPassiveSkillChange_Deffence_up2": {
     "localized_name": "Implantat: Stämmiger Wuchs",
-    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-Operationstisch auswählen."
+    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-OP-Tisch auswählen."
   },
   "PalPassiveSkillChange_Deffence_up3": {
     "localized_name": "Implantat: Diamantkörper",
-    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-Operationstisch auswählen."
+    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-OP-Tisch auswählen."
   },
   "PalPassiveSkillChange_HatchingSpeed_Up": {
     "localized_name": "Implantat: Philanthrop",
-    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-Operationstisch auswählen."
+    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-OP-Tisch auswählen."
   },
   "PalPassiveSkillChange_MoveSpeed_up_1": {
     "localized_name": "Implantat: Flink",
-    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-Operationstisch auswählen."
+    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-OP-Tisch auswählen."
   },
   "PalPassiveSkillChange_MoveSpeed_up_2": {
     "localized_name": "Implantat: Guter Läufer",
-    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-Operationstisch auswählen."
+    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-OP-Tisch auswählen."
   },
   "PalPassiveSkillChange_MoveSpeed_up_3": {
     "localized_name": "Implantat: Blitzschnell",
-    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-Operationstisch auswählen."
+    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-OP-Tisch auswählen."
   },
   "PalPassiveSkillChange_Nocturnal": {
     "localized_name": "Implantat: Nachtaktiv",
-    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-Operationstisch auswählen."
+    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-OP-Tisch auswählen."
   },
   "PalPassiveSkillChange_NonKilling": {
     "localized_name": "Implantat: Rücksichtsvoll",
-    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-Operationstisch auswählen."
+    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-OP-Tisch auswählen."
   },
   "PalPassiveSkillChange_Noukin": {
     "localized_name": "Implantat: Mehr Kraft als Verstand",
-    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-Operationstisch auswählen."
+    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-OP-Tisch auswählen."
   },
   "PalPassiveSkillChange_PAL_ALLAttack_up1": {
     "localized_name": "Implantat: Mutig",
-    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-Operationstisch auswählen."
+    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-OP-Tisch auswählen."
   },
   "PalPassiveSkillChange_PAL_ALLAttack_up2": {
     "localized_name": "Implantat: Wild",
-    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-Operationstisch auswählen."
+    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-OP-Tisch auswählen."
   },
   "PalPassiveSkillChange_PAL_ALLAttack_up3": {
     "localized_name": "Implantat: Schattenherrscher",
-    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-Operationstisch auswählen."
+    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-OP-Tisch auswählen."
+  },
+  "PalPassiveSkillChange_PAL_CorporateSlave": {
+    "localized_name": "Implantat: Arbeitsvieh",
+    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-OP-Tisch auswählen."
   },
   "PalPassiveSkillChange_PAL_FullStomach_Down_1": {
     "localized_name": "Implantat: Genügsam",
-    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-Operationstisch auswählen."
+    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-OP-Tisch auswählen."
   },
   "PalPassiveSkillChange_PAL_FullStomach_Down_2": {
     "localized_name": "Implantat: Fastenprofi",
-    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-Operationstisch auswählen."
+    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-OP-Tisch auswählen."
   },
   "PalPassiveSkillChange_PAL_FullStomach_Down_3": {
     "localized_name": "Implantat: Asket",
-    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-Operationstisch auswählen."
+    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-OP-Tisch auswählen."
   },
   "PalPassiveSkillChange_PAL_Sanity_Down_1": {
     "localized_name": "Implantat: Positive Gedanken",
-    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-Operationstisch auswählen."
+    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-OP-Tisch auswählen."
   },
   "PalPassiveSkillChange_PAL_Sanity_Down_2": {
     "localized_name": "Implantat: Workaholic",
-    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-Operationstisch auswählen."
+    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-OP-Tisch auswählen."
   },
   "PalPassiveSkillChange_PAL_Sanity_Down_3": {
     "localized_name": "Implantat: Unerschütterlich",
-    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-Operationstisch auswählen."
+    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-OP-Tisch auswählen."
+  },
+  "PalPassiveSkillChange_SalePrice_Up_1": {
+    "localized_name": "Implantat: Kostbar",
+    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-OP-Tisch auswählen."
+  },
+  "PalPassiveSkillChange_SalePrice_Up_2": {
+    "localized_name": "Implantat: Edles Fell",
+    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-OP-Tisch auswählen."
   },
   "PalPassiveSkillChange_Stamina_Up_1": {
     "localized_name": "Implantat: Unermüdlich",
-    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-Operationstisch auswählen."
+    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-OP-Tisch auswählen."
   },
   "PalPassiveSkillChange_Stamina_Up_2": {
     "localized_name": "Implantat: Wildfang",
-    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-Operationstisch auswählen."
+    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-OP-Tisch auswählen."
   },
   "PalPassiveSkillChange_Stamina_Up_3": {
     "localized_name": "Implantat: Endloser Antrieb",
-    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-Operationstisch auswählen."
+    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-OP-Tisch auswählen."
+  },
+  "PalPassiveSkillChange_SwimSpeed_up_1": {
+    "localized_name": "Implantat: Stromlinienform",
+    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-OP-Tisch auswählen."
+  },
+  "PalPassiveSkillChange_SwimSpeed_up_2": {
+    "localized_name": "Implantat: Guter Schwimmer",
+    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-OP-Tisch auswählen."
+  },
+  "PalPassiveSkillChange_TrainerATK_UP_1": {
+    "localized_name": "Implantat: Angriffsstratege",
+    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-OP-Tisch auswählen."
+  },
+  "PalPassiveSkillChange_TrainerDEF_UP_1": {
+    "localized_name": "Implantat: Festungskommandant",
+    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-OP-Tisch auswählen."
+  },
+  "PalPassiveSkillChange_TrainerLogging_up1": {
+    "localized_name": "Implantat: Forstmeister",
+    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-OP-Tisch auswählen."
+  },
+  "PalPassiveSkillChange_TrainerMining_up1": {
+    "localized_name": "Implantat: Oberbergmann",
+    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-OP-Tisch auswählen."
+  },
+  "PalPassiveSkillChange_TrainerWorkSpeed_UP_1": {
+    "localized_name": "Implantat: Motivationscoach",
+    "description": "Implantat, das in den Körper eines Pals eingesetzt wird, um dessen Passivfähigkeiten zu verändern. Wenn du diesen Gegenstand im Inventar hast, kannst du die entsprechende Passivfähigkeit am Pal-OP-Tisch auswählen."
   },
   "PalRevive": {
     "localized_name": "Wiederbelebungsmedizin",
@@ -5223,6 +5383,22 @@
     "localized_name": "Blazamut-Ryu-(Ultra)-Steinscherbe",
     "description": "Die Energie von KingBahamut Dragon quillt nur so aus dieser Steinscherbe. Mehrere davon können zu einer Steintafel zusammengefügt werden."
   },
+  "PalSummon_LegendDeer": {
+    "localized_name": "Hartalis-Steintafel",
+    "description": "Eine Steintafel mit dem Bildnis von Hartalis. Opferst du sie am Beschwörungsaltar, erscheint ein extrem mächtiges Hartalis [Lv. 65]."
+  },
+  "PalSummon_LegendDeer_2": {
+    "localized_name": "Hartalis-(Ultra)-Steintafel",
+    "description": "Die Energie von Hartalis quillt nur so aus dieser Steintafel. Opferst du sie am Beschwörungsaltar, erscheint ein ultramächtiges Hartalis [Lv. ??]."
+  },
+  "PalSummon_LegendDeer_Parts": {
+    "localized_name": "Hartalis-Steinscherbe",
+    "description": "Scherbe einer Steintafel mit dem Bildnis von Hartalis. Mehrere davon können zu einer Steintafel zusammengefügt werden."
+  },
+  "PalSummon_LegendDeer_Parts_2": {
+    "localized_name": "Hartalis-(Ultra)-Steinscherbe",
+    "description": "Die Energie von Hartalis quillt nur so aus dieser Steinscherbe. Mehrere davon können zu einer Steintafel zusammengefügt werden."
+  },
   "PalSummon_NightLady": {
     "localized_name": "Bellanoir-Steintafel",
     "description": "Eine Steintafel mit dem Bildnis von Bellanoir. Opferst du sie am Beschwörungsaltar, erscheint ein mächtiges Bellanoir [St. 30]."
@@ -5250,6 +5426,10 @@
   "PalSummon_YakushimaBoss002": {
     "localized_name": "Himmlisches Siegel",
     "description": "[Terraria-Collab] Ein Siegel mit unbekanntem Muster. Opfere es am Beschwörungsaltar, um ein mächtiges Wesen zu beschwören."
+  },
+  "PalSummon_YakushimaBoss002_2": {
+    "localized_name": "Himmlisches Siegel [Meister]",
+    "description": "[Terraria-Collab] Ein Siegel mit kryptischem Muster. Opfere es am Beschwörungsaltar, um ein Wesen von überwältigender Stärke zu beschwören."
   },
   "PalUpgradeStone": {
     "localized_name": "Kleine Pal-Seele",
@@ -5309,7 +5489,7 @@
   },
   "PlasticArmor": {
     "localized_name": "Plaststahlrüstung",
-    "description": "Eine Rüstung aus Plaststahl. Bietet verbesserten Schutz und ist dabei auch noch leicht."
+    "description": "Eine Rüstung aus Plaststahl. Bietet verbesserten Schutz und ist gleichzeitig schön leicht."
   },
   "PlasticArmorCold": {
     "localized_name": "Kälteresistente Plaststahlrüstung",
@@ -5373,39 +5553,47 @@
   },
   "PlasticArmor_2": {
     "localized_name": "Plaststahlrüstung",
-    "description": "Eine Rüstung aus Plaststahl. Bietet verbesserten Schutz und ist dabei auch noch leicht."
+    "description": "Eine Rüstung aus Plaststahl. Bietet verbesserten Schutz und ist gleichzeitig schön leicht."
   },
   "PlasticArmor_3": {
     "localized_name": "Plaststahlrüstung",
-    "description": "Eine Rüstung aus Plaststahl. Bietet verbesserten Schutz und ist dabei auch noch leicht."
+    "description": "Eine Rüstung aus Plaststahl. Bietet verbesserten Schutz und ist gleichzeitig schön leicht."
   },
   "PlasticArmor_4": {
     "localized_name": "Plaststahlrüstung",
-    "description": "Eine Rüstung aus Plaststahl. Bietet verbesserten Schutz und ist dabei auch noch leicht."
+    "description": "Eine Rüstung aus Plaststahl. Bietet verbesserten Schutz und ist gleichzeitig schön leicht."
   },
   "PlasticArmor_5": {
     "localized_name": "Plaststahlrüstung",
-    "description": "Eine Rüstung aus Plaststahl. Bietet verbesserten Schutz und ist dabei auch noch leicht."
+    "description": "Eine Rüstung aus Plaststahl. Bietet verbesserten Schutz und ist gleichzeitig schön leicht."
   },
   "PlasticHelmet": {
     "localized_name": "Plaststahlhelm",
-    "description": "Ein Helm aus Plaststahl. Bietet verbesserten Schutz und ist dabei auch noch leicht."
+    "description": "Ein Helm aus Plaststahl. Bietet verbesserten Schutz und ist gleichzeitig schön leicht."
   },
   "PlasticHelmet_2": {
     "localized_name": "Plaststahlhelm",
-    "description": "Ein Helm aus Plaststahl. Bietet verbesserten Schutz und ist dabei auch noch leicht."
+    "description": "Ein Helm aus Plaststahl. Bietet verbesserten Schutz und ist gleichzeitig schön leicht."
   },
   "PlasticHelmet_3": {
     "localized_name": "Plaststahlhelm",
-    "description": "Ein Helm aus Plaststahl. Bietet verbesserten Schutz und ist dabei auch noch leicht."
+    "description": "Ein Helm aus Plaststahl. Bietet verbesserten Schutz und ist gleichzeitig schön leicht."
   },
   "PlasticHelmet_4": {
     "localized_name": "Plaststahlhelm",
-    "description": "Ein Helm aus Plaststahl. Bietet verbesserten Schutz und ist dabei auch noch leicht."
+    "description": "Ein Helm aus Plaststahl. Bietet verbesserten Schutz und ist gleichzeitig schön leicht."
   },
   "PlasticHelmet_5": {
     "localized_name": "Plaststahlhelm",
-    "description": "Ein Helm aus Plaststahl. Bietet verbesserten Schutz und ist dabei auch noch leicht."
+    "description": "Ein Helm aus Plaststahl. Bietet verbesserten Schutz und ist gleichzeitig schön leicht."
+  },
+  "PlayerDropItem": {
+    "localized_name": "Siegerabzeichen",
+    "description": "Ein Ehrenabzeichen, das nur den Siegreichen verliehen wird. Als dessen Träger stellst du deine Überlegenheit auf dem Schlachtfeld zur Schau."
+  },
+  "Player_Outfit_Kigurumi001": {
+    "localized_name": "Depresso-Cosplayrüstung",
+    "description": "Der Brustteil eines Depresso-Kostüms."
   },
   "PoisonMushroom": {
     "localized_name": "Sonderbarer Pilz",
@@ -5461,23 +5649,23 @@
   },
   "PumpActionShotgun": {
     "localized_name": "Pumpgun",
-    "description": "Eine Flinte mit größerem Magazin. Liefert auf kurze Distanz unschlagbaren Schadensoutput."
+    "description": "Eine Flinte mit größerem Magazin. Liefert auf kurze Distanz eine unschlagbare Feuerkraft."
   },
   "PumpActionShotgun_2": {
     "localized_name": "Pumpgun",
-    "description": "Eine Flinte mit größerem Magazin. Liefert auf kurze Distanz unschlagbaren Schadensoutput."
+    "description": "Eine Flinte mit größerem Magazin. Liefert auf kurze Distanz eine unschlagbare Feuerkraft."
   },
   "PumpActionShotgun_3": {
     "localized_name": "Pumpgun",
-    "description": "Eine Flinte mit größerem Magazin. Liefert auf kurze Distanz unschlagbaren Schadensoutput."
+    "description": "Eine Flinte mit größerem Magazin. Liefert auf kurze Distanz eine unschlagbare Feuerkraft."
   },
   "PumpActionShotgun_4": {
     "localized_name": "Pumpgun",
-    "description": "Eine Flinte mit größerem Magazin. Liefert auf kurze Distanz unschlagbaren Schadensoutput."
+    "description": "Eine Flinte mit größerem Magazin. Liefert auf kurze Distanz eine unschlagbare Feuerkraft."
   },
   "PumpActionShotgun_5": {
     "localized_name": "Pumpgun",
-    "description": "Eine Flinte mit größerem Magazin. Liefert auf kurze Distanz unschlagbaren Schadensoutput."
+    "description": "Eine Flinte mit größerem Magazin. Liefert auf kurze Distanz eine unschlagbare Feuerkraft."
   },
   "Quartz": {
     "localized_name": "Reinquarz",
@@ -5495,6 +5683,10 @@
     "localized_name": "Zoes zerlumptes Erinnerungsstück",
     "description": "Eine alte Decke, der noch ein kaum merklicher Geruch von Geborgenheit anhaftet. Ist für Zoe mit einer kostbaren Erinnerung verbunden."
   },
+  "QuestItem_Zoe_Halloweenskin_1": {
+    "localized_name": "Zoes Halloweenkostüm",
+    "description": "Ein Halloweenkostüm für Zoe. Sie wird sich bestimmt darüber freuen. Bringe es ihr!"
+  },
   "Quiche": {
     "localized_name": "Pilz-Quiche",
     "description": "Gebackenes Teiggericht mit einer Füllung aus Eiern, Gemüse, Pilzen und Sahne. Schmeckt auch kalt noch vortrefflich. Hält vorübergehend länger satt und die GEI sinkt vorübergehend langsamer."
@@ -5504,24 +5696,24 @@
     "description": "Ein seltener Kristall, der nur auf Feybreak zu finden ist. Hat sich über viele Jahre aus verdichtetem Paldium gebildet und schillert nun in allen Regenbogenfarben."
   },
   "Rankup_1": {
-    "localized_name": "Allzweck-Palextrakt 1☆",
-    "description": "Ein geheimnisvolles Extrakt, das Pals injiziert werden kann, um ihr Potenzial zu entfalten. Damit kannst du den Rang eines Pals von 0☆ auf 1☆ erhöhen. Aus irgendeinem Grund sind darin vergrämte Stimmen zu hören ..."
+    "localized_name": "Erweckungssternfrucht 1☆",
+    "description": "Eine seltene magische Frucht. Damit kannst du den Rang eines Pals von 0☆ auf 1☆ erhöhen."
   },
   "Rankup_2": {
-    "localized_name": "Allzweck-Palextrakt 2☆",
-    "description": "Ein geheimnisvolles Extrakt, das Pals injiziert werden kann, um ihr Potenzial zu entfalten. Damit kannst du den Rang eines Pals von 1☆ auf 2☆ erhöhen. Aus irgendeinem Grund sind darin vergrämte Stimmen zu hören ..."
+    "localized_name": "Erweckungssternfrucht 2☆",
+    "description": "Eine seltene magische Frucht. Damit kannst du den Rang eines Pals von 1☆ auf 2☆ erhöhen."
   },
   "Rankup_3": {
-    "localized_name": "Allzweck-Palextrakt 3☆",
-    "description": "Ein geheimnisvolles Extrakt, das Pals injiziert werden kann, um ihr Potenzial zu entfalten. Damit kannst du den Rang eines Pals von 2☆ auf 3☆ erhöhen. Aus irgendeinem Grund sind darin vergrämte Stimmen zu hören ..."
+    "localized_name": "Erweckungssternfrucht 3☆",
+    "description": "Eine seltene magische Frucht. Damit kannst du den Rang eines Pals von 2☆ auf 3☆ erhöhen."
   },
   "Rankup_4": {
-    "localized_name": "Allzweck-Palextrakt 4☆",
-    "description": "Ein geheimnisvolles Extrakt, das Pals injiziert werden kann, um ihr Potenzial zu entfalten. Damit kannst du den Rang eines Pals von 3☆ auf 4☆ erhöhen. Aus irgendeinem Grund sind darin vergrämte Stimmen zu hören ..."
+    "localized_name": "Erweckungssternfrucht 4☆",
+    "description": "Eine seltene magische Frucht. Damit kannst du den Rang eines Pals von 3☆ auf 4☆ erhöhen."
   },
   "Rankup_Arbitrary": {
-    "localized_name": "Konzentriertes Allzweck-Palextrakt",
-    "description": "Ein geheimnisvolles Extrakt, das Pals injiziert werden kann, um ihr Potenzial zu entfalten. Damit kannst du den Rang eines Pals um 1 erhöhen. Aus irgendeinem Grund sind darin vergrämte Stimmen zu hören ..."
+    "localized_name": "Reife Erweckungssternfrucht",
+    "description": "Eine seltene magische Frucht. Damit kannst du den Rang eines Pals um 1 erhöhen."
   },
   "ReinforcedArrow": {
     "localized_name": "Verstärkter Pfeil",
@@ -5721,23 +5913,23 @@
   },
   "SemiAutoShotgun": {
     "localized_name": "Halbautomatische Flinte",
-    "description": "Eine Flinte mit hoher Feuerrate. Liefert auf kurze Distanz unschlagbaren Schadensoutput."
+    "description": "Eine Flinte mit hoher Feuerrate. Liefert auf kurze Distanz eine unschlagbare Feuerkraft."
   },
   "SemiAutoShotgun_2": {
     "localized_name": "Halbautomatische Flinte",
-    "description": "Eine Flinte mit hoher Feuerrate. Liefert auf kurze Distanz unschlagbaren Schadensoutput."
+    "description": "Eine Flinte mit hoher Feuerrate. Liefert auf kurze Distanz eine unschlagbare Feuerkraft."
   },
   "SemiAutoShotgun_3": {
     "localized_name": "Halbautomatische Flinte",
-    "description": "Eine Flinte mit hoher Feuerrate. Liefert auf kurze Distanz unschlagbaren Schadensoutput."
+    "description": "Eine Flinte mit hoher Feuerrate. Liefert auf kurze Distanz eine unschlagbare Feuerkraft."
   },
   "SemiAutoShotgun_4": {
     "localized_name": "Halbautomatische Flinte",
-    "description": "Eine Flinte mit hoher Feuerrate. Liefert auf kurze Distanz unschlagbaren Schadensoutput."
+    "description": "Eine Flinte mit hoher Feuerrate. Liefert auf kurze Distanz eine unschlagbare Feuerkraft."
   },
   "SemiAutoShotgun_5": {
     "localized_name": "Halbautomatische Flinte",
-    "description": "Eine Flinte mit hoher Feuerrate. Liefert auf kurze Distanz unschlagbaren Schadensoutput."
+    "description": "Eine Flinte mit hoher Feuerrate. Liefert auf kurze Distanz eine unschlagbare Feuerkraft."
   },
   "Shield_01": {
     "localized_name": "Normaler Schild",
@@ -6392,7 +6584,7 @@
     "description": "Ermöglicht es dir, auf IceNarwhal Fire zu reiten."
   },
   "SkillUnlock_IceSeal": {
-    "localized_name": "Polapup-Geschirr",
+    "localized_name": "Polapup-Sattel",
     "description": "Ermöglicht es dir, auf Polapup zu reiten."
   },
   "SkillUnlock_JetDragon": {
@@ -6438,6 +6630,10 @@
   "SkillUnlock_LeafMomonga": {
     "localized_name": "Herbil-Geschirr",
     "description": "Geschirr zur Handhabung von Herbil. Ermöglicht es Herbil, dich mit seinen Erste-Hilfe-Kräften wiederzubeleben."
+  },
+  "SkillUnlock_LegendDeer": {
+    "localized_name": "Hartalis-Sattel",
+    "description": "Ermöglicht es dir, auf Hartalis zu reiten. Dabei kann es eine Barriere erzeugen, die vor Angriffen schützt."
   },
   "SkillUnlock_Manticore": {
     "localized_name": "Blazehowl-Sattel",
@@ -7065,23 +7261,23 @@
   },
   "YakushimaBlade004": {
     "localized_name": "Excalibur",
-    "description": "[Terraria-Collab] Ein golden glänzendes, heiliges Schwert. Verschießt bei Verwendung Schockwellen, die sich um dich herum ausbreiten und in einem weiten Radius Schaden zufügen können."
+    "description": "[Terraria-Collab] Ein golden glänzendes, heiliges Schwert. Verschießt bei Verwendung Schockwellen, die sich um dich herum ausbreiten."
   },
   "YakushimaBlade004_2": {
     "localized_name": "Excalibur",
-    "description": "[Terraria-Collab] Ein golden glänzendes, heiliges Schwert. Verschießt bei Verwendung Schockwellen, die sich um dich herum ausbreiten und in einem weiten Radius Schaden zufügen können."
+    "description": "[Terraria-Collab] Ein golden glänzendes, heiliges Schwert. Verschießt bei Verwendung Schockwellen, die sich um dich herum ausbreiten."
   },
   "YakushimaBlade004_3": {
     "localized_name": "Excalibur",
-    "description": "[Terraria-Collab] Ein golden glänzendes, heiliges Schwert. Verschießt bei Verwendung Schockwellen, die sich um dich herum ausbreiten und in einem weiten Radius Schaden zufügen können."
+    "description": "[Terraria-Collab] Ein golden glänzendes, heiliges Schwert. Verschießt bei Verwendung Schockwellen, die sich um dich herum ausbreiten."
   },
   "YakushimaBlade004_4": {
     "localized_name": "Excalibur",
-    "description": "[Terraria-Collab] Ein golden glänzendes, heiliges Schwert. Verschießt bei Verwendung Schockwellen, die sich um dich herum ausbreiten und in einem weiten Radius Schaden zufügen können."
+    "description": "[Terraria-Collab] Ein golden glänzendes, heiliges Schwert. Verschießt bei Verwendung Schockwellen, die sich um dich herum ausbreiten."
   },
   "YakushimaBlade004_5": {
     "localized_name": "Excalibur",
-    "description": "[Terraria-Collab] Ein golden glänzendes, heiliges Schwert. Verschießt bei Verwendung Schockwellen, die sich um dich herum ausbreiten und in einem weiten Radius Schaden zufügen können."
+    "description": "[Terraria-Collab] Ein golden glänzendes, heiliges Schwert. Verschießt bei Verwendung Schockwellen, die sich um dich herum ausbreiten."
   },
   "YakushimaBlade005": {
     "localized_name": "Legendär Meowmere",
@@ -7201,7 +7397,7 @@
   },
   "YakushimaIngot002": {
     "localized_name": "Luminitbarren",
-    "description": "[Terraria-Collab] Ein von YakushimaBoss002 als Beute erhältliches Material, dem eine gewaltige Kraft innewohnt. Sein Schimmer erinnert an reines Mondlicht."
+    "description": "[Terraria-Collab] Ein von RAID YakushimaBoss002 als Beute erhältliches Material, dem eine gewaltige Kraft innewohnt. Sein Schimmer erinnert an reines Mondlicht."
   },
   "YakushimaLantern001": {
     "localized_name": "Nachtglüh",

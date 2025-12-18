@@ -1,7 +1,7 @@
 {
   "Accessory_AT_1": {
     "localized_name": "攻擊吊墜",
-    "description": "能夠少量提升攻擊力的飾品。"
+    "description": "能夠稍微提升攻擊力的飾品。"
   },
   "Accessory_AT_2": {
     "localized_name": "攻擊吊墜+1",
@@ -9,7 +9,7 @@
   },
   "Accessory_AT_3": {
     "localized_name": "攻擊吊墜+2",
-    "description": "能夠大量提升攻擊力的飾品。"
+    "description": "能夠大幅提升攻擊力的飾品。"
   },
   "Accessory_AirDash1": {
     "localized_name": "空中衝刺靴",
@@ -101,7 +101,7 @@
   },
   "Accessory_HP_1": {
     "localized_name": "生命吊墜",
-    "description": "能夠少量提升生命值的飾品。"
+    "description": "能夠稍微提升生命值的飾品。"
   },
   "Accessory_HP_2": {
     "localized_name": "生命吊墜+1",
@@ -109,7 +109,7 @@
   },
   "Accessory_HP_3": {
     "localized_name": "生命吊墜+2",
-    "description": "能夠大量提升生命值的飾品。"
+    "description": "能夠大幅提升生命值的飾品。"
   },
   "Accessory_HeatColdResist_1": {
     "localized_name": "防暑防寒內衣",
@@ -221,7 +221,7 @@
   },
   "Accessory_WorkSpeed_1": {
     "localized_name": "勤奮吊墜",
-    "description": "能夠少量提升工作速度的飾品。"
+    "description": "能夠稍微提升工作速度的飾品。"
   },
   "Accessory_WorkSpeed_2": {
     "localized_name": "勤奮吊墜+1",
@@ -229,11 +229,11 @@
   },
   "Accessory_WorkSpeed_3": {
     "localized_name": "勤奮吊墜+2",
-    "description": "能夠大量提升工作速度的飾品。"
+    "description": "能夠大幅提升工作速度的飾品。"
   },
   "Accessory_defense_1": {
     "localized_name": "防禦吊墜",
-    "description": "能夠少量提升防禦力的飾品。"
+    "description": "能夠稍微提升防禦力的飾品。"
   },
   "Accessory_defense_2": {
     "localized_name": "防禦吊墜+1",
@@ -241,7 +241,7 @@
   },
   "Accessory_defense_3": {
     "localized_name": "防禦吊墜+2",
-    "description": "能夠大量提升防禦力的飾品。"
+    "description": "能夠大幅提升防禦力的飾品。"
   },
   "AdditionalInventory_001": {
     "localized_name": "小型擴展背包",
@@ -262,6 +262,10 @@
   "AffectionFruit_01": {
     "localized_name": "羈絆寶桃",
     "description": "極為罕見的魔法果實。 據說帕魯吃下後會對人類敞開心扉。 務必謹慎選擇贈送對象。"
+  },
+  "AffectionFruit_02": {
+    "localized_name": "羈絆小桃",
+    "description": "飽含溫情的小小果實。 據說帕魯吃下後會對人類敞開心扉。 務必謹慎選擇贈送對象。"
   },
   "AncientParts2": {
     "localized_name": "古代文明核心",
@@ -309,7 +313,7 @@
   },
   "AssaultRifleBullet": {
     "localized_name": "突擊步槍子彈",
-    "description": "用於AssaultRifle Default1等的子彈。"
+    "description": "用於AssaultRifle Default1等武器的子彈。"
   },
   "AssaultRifle_Default1": {
     "localized_name": "突擊步槍",
@@ -537,7 +541,7 @@
   },
   "Blueprint_CandleStand": {
     "localized_name": "莊嚴燭台設計圖",
-    "description": "持有或存放在據點中， 即可建造「莊嚴燭台」。"
+    "description": "持有或存放在據點中， 即可建造「<MapObjectName id=|CandleStand|/>」。"
   },
   "Blueprint_ChargeLaserRifle_2": {
     "localized_name": "充能步槍設計圖1",
@@ -621,11 +625,11 @@
   },
   "Blueprint_ConservationGroupBannerA": {
     "localized_name": "帕魯保護團體旗幟設計圖",
-    "description": "持有或存放在據點中， 即可建造「帕魯保護團體旗幟」。"
+    "description": "持有或存放在據點中， 即可建造「<MapObjectName id=|ConservationGroupBannerA|/>」。"
   },
   "Blueprint_ConservationGroupBannerB": {
     "localized_name": "帕魯保護團體橫幅設計圖",
-    "description": "持有或存放在據點中， 即可建造「帕魯保護團體橫幅」。"
+    "description": "持有或存放在據點中， 即可建造「<MapObjectName id=|ConservationGroupBannerB|/>」。"
   },
   "Blueprint_CopperArmorCold_2": {
     "localized_name": "耐寒金屬盔甲設計圖1",
@@ -741,7 +745,7 @@
   },
   "Blueprint_FireStand": {
     "localized_name": "儀式用燭台設計圖",
-    "description": "持有或存放在據點中， 即可建造「儀式用燭台」。"
+    "description": "持有或存放在據點中， 即可建造「<MapObjectName id=|FireStand|/>」。"
   },
   "Blueprint_FishingRod_01_2": {
     "localized_name": "初級釣竿（葉泥泥）設計圖",
@@ -869,7 +873,7 @@
   },
   "Blueprint_GuardianDogStatue": {
     "localized_name": "八雲犬雕像設計圖",
-    "description": "持有或存放在據點中， 即可建造「八雲犬雕像」。"
+    "description": "持有或存放在據點中， 即可建造「<MapObjectName id=|GuardianDogStatue|/>」。"
   },
   "Blueprint_GuidedMissileLauncher_2": {
     "localized_name": "追蹤導彈發射器設計圖1",
@@ -1345,7 +1349,7 @@
   },
   "Blueprint_Hunter_GangFlag": {
     "localized_name": "盜獵團旗幟設計圖",
-    "description": "持有或存放在據點中， 即可建造「Hunter GangFlag」。"
+    "description": "持有或存放在據點中， 即可建造「<MapObjectName id=|Hunter GangFlag|/>」。"
   },
   "Blueprint_IronArmorCold_2": {
     "localized_name": "耐寒精煉金屬盔甲設計圖1",
@@ -1413,7 +1417,7 @@
   },
   "Blueprint_LanternTop": {
     "localized_name": "日式白燈籠設計圖",
-    "description": "持有或存放在據點中， 即可建造「日式白燈籠」。"
+    "description": "持有或存放在據點中， 即可建造「<MapObjectName id=|LanternTop|/>」。"
   },
   "Blueprint_LaserGatlingGun_2": {
     "localized_name": "雷射加特林設計圖1",
@@ -1469,7 +1473,7 @@
   },
   "Blueprint_LilyQueenStatue": {
     "localized_name": "百合女王雕像設計圖",
-    "description": "持有或存放在據點中， 即可建造「百合女王雕像」。"
+    "description": "持有或存放在據點中， 即可建造「<MapObjectName id=|LilyQueenStatue|/>」。"
   },
   "Blueprint_MakeshiftAssaultRifle_2": {
     "localized_name": "破舊的突擊步槍設計圖1",
@@ -1570,6 +1574,46 @@
   "Blueprint_Musket_5": {
     "localized_name": "鳥槍設計圖4",
     "description": "持有此設計圖，即可解鎖 「鳥槍（Legendary）」的配方。 可在「WeaponFactory Dirty 01」製作。"
+  },
+  "Blueprint_Octavia001_Armor_5": {
+    "localized_name": "V1盔甲設計圖4",
+    "description": "【ULTRAKILL 合作】 持有此設計圖，即可解鎖 「Octavia001 Armor 5（Legendary）」的配方。 可在「Factory Hard 02」製作。"
+  },
+  "Blueprint_Octavia002_Armor_5": {
+    "localized_name": "V2盔甲設計圖4",
+    "description": "【ULTRAKILL 合作】 持有此設計圖，即可解鎖 「Octavia002 Armor 5（Legendary）」的配方。 可在「Factory Hard 03」製作。"
+  },
+  "Blueprint_OctaviaRevolver_2": {
+    "localized_name": "神射左輪手槍設計圖1",
+    "description": "【ULTRAKILL 合作】 持有此設計圖，即可解鎖 「神射左輪手槍（Uncommon）」的配方。 可在「WeaponFactory Dirty 02」製作。"
+  },
+  "Blueprint_OctaviaRevolver_3": {
+    "localized_name": "神射左輪手槍設計圖2",
+    "description": "【ULTRAKILL 合作】 持有此設計圖，即可解鎖 「神射左輪手槍（Rare）」的配方。 可在「WeaponFactory Dirty 02」製作。"
+  },
+  "Blueprint_OctaviaRevolver_4": {
+    "localized_name": "神射左輪手槍設計圖3",
+    "description": "【ULTRAKILL 合作】 持有此設計圖，即可解鎖 「神射左輪手槍（Epic）」的配方。 可在「WeaponFactory Dirty 02」製作。"
+  },
+  "Blueprint_OctaviaRevolver_5": {
+    "localized_name": "神射左輪手槍設計圖4",
+    "description": "【ULTRAKILL 合作】 持有此設計圖，即可解鎖 「神射左輪手槍（Legendary）」的配方。 可在「WeaponFactory Dirty 02」製作。"
+  },
+  "Blueprint_OctaviaShotgun_2": {
+    "localized_name": "核心噴射散彈槍設計圖1",
+    "description": "【ULTRAKILL 合作】 持有此設計圖，即可解鎖 「核心噴射散彈槍（Uncommon）」的配方。 可在「WeaponFactory Dirty 03」製作。"
+  },
+  "Blueprint_OctaviaShotgun_3": {
+    "localized_name": "核心噴射散彈槍設計圖2",
+    "description": "【ULTRAKILL 合作】 持有此設計圖，即可解鎖 「核心噴射散彈槍（Rare）」的配方。 可在「WeaponFactory Dirty 03」製作。"
+  },
+  "Blueprint_OctaviaShotgun_4": {
+    "localized_name": "核心噴射散彈槍設計圖3",
+    "description": "【ULTRAKILL 合作】 持有此設計圖，即可解鎖 「核心噴射散彈槍（Epic）」的配方。 可在「WeaponFactory Dirty 03」製作。"
+  },
+  "Blueprint_OctaviaShotgun_5": {
+    "localized_name": "核心噴射散彈槍設計圖4",
+    "description": "【ULTRAKILL 合作】 持有此設計圖，即可解鎖 「核心噴射散彈槍（Legendary）」的配方。 可在「WeaponFactory Dirty 03」製作。"
   },
   "Blueprint_OldRevolver_2": {
     "localized_name": "古舊左輪手槍設計圖1",
@@ -1801,11 +1845,11 @@
   },
   "Blueprint_SF_Chair": {
     "localized_name": "研究室風格椅子設計圖",
-    "description": "持有或存放在據點中， 即可建造「SF Chair」。"
+    "description": "持有或存放在據點中， 即可建造「<MapObjectName id=|SF Chair|/>」。"
   },
   "Blueprint_SF_Desk": {
     "localized_name": "研究室風格書桌設計圖",
-    "description": "持有或存放在據點中， 即可建造「SF Desk」。"
+    "description": "持有或存放在據點中， 即可建造「<MapObjectName id=|SF Desk|/>」。"
   },
   "Blueprint_SemiAutoRifle_2": {
     "localized_name": "半自動步槍設計圖1",
@@ -1841,7 +1885,7 @@
   },
   "Blueprint_Shrine_Lantern": {
     "localized_name": "神社赤燈籠設計圖",
-    "description": "持有或存放在據點中， 即可建造「Shrine Lantern」。"
+    "description": "持有或存放在據點中， 即可建造「<MapObjectName id=|Shrine Lantern|/>」。"
   },
   "Blueprint_SingleShotRifle_2": {
     "localized_name": "單發步槍設計圖1",
@@ -1941,7 +1985,7 @@
   },
   "Blueprint_WallTorch02": {
     "localized_name": "莊嚴壁掛火把設計圖",
-    "description": "持有或存放在據點中， 即可建造「莊嚴壁掛火把」。"
+    "description": "持有或存放在據點中， 即可建造「<MapObjectName id=|WallTorch02|/>」。"
   },
   "Blueprint_WeakerBow_2": {
     "localized_name": "老舊的弓設計圖1",
@@ -1961,11 +2005,11 @@
   },
   "Blueprint_Wire_Fence": {
     "localized_name": "鐵絲網圍籬設計圖",
-    "description": "持有或存放在據點中， 即可建造「Wire Fence」。"
+    "description": "持有或存放在據點中， 即可建造「<MapObjectName id=|Wire Fence|/>」。"
   },
   "Blueprint_WoodenBarricade": {
     "localized_name": "木製路障設計圖",
-    "description": "持有或存放在據點中， 即可建造「木製路障」。"
+    "description": "持有或存放在據點中， 即可建造「<MapObjectName id=|WoodenBarricade|/>」。"
   },
   "Blueprint_YakushimaArmor001": {
     "localized_name": "神聖板甲設計圖",
@@ -2046,6 +2090,10 @@
   "Blueprint_YakushimaBlade004_5": {
     "localized_name": "斷鋼劍設計圖4",
     "description": "【泰拉瑞亞合作】 持有此設計圖，即可解鎖 「斷鋼劍（Legendary）」的配方。 可在「WeaponFactory Dirty 02」製作。"
+  },
+  "Blueprint_YakushimaBoss002_Relic": {
+    "localized_name": "月尊雕像設計圖",
+    "description": "【泰拉瑞亞合作】 持有或存放在據點中， 即可建造「<MapObjectName id=|YakushimaBoss002 Relic|/>」。"
   },
   "Blueprint_YakushimaGun001": {
     "localized_name": "星旋機槍設計圖",
@@ -2166,6 +2214,10 @@
   "Blueprint_YakushimaLantern001_5": {
     "localized_name": "夜光設計圖4",
     "description": "【泰拉瑞亞合作】 持有此設計圖，即可解鎖 「夜光（Legendary）」的配方。 可在「WeaponFactory Dirty 02」製作。"
+  },
+  "Blueprint_Zoe_Halloweenskin_1": {
+    "localized_name": "佐伊的萬聖節服裝設計圖",
+    "description": "偷聽到佐伊自言自語後記下的筆記。 在工作台上製作，並把成品交給佐伊吧。"
   },
   "Bone": {
     "localized_name": "骨頭",
@@ -2569,7 +2621,7 @@
   },
   "ChargeLaserRifleBullet": {
     "localized_name": "充能步槍子彈",
-    "description": "用於充能步槍等的子彈。"
+    "description": "用於充能步槍等武器的彈藥。"
   },
   "ChargeLaserRifle_2": {
     "localized_name": "充能步槍",
@@ -2597,7 +2649,7 @@
   },
   "ChickenSaute": {
     "localized_name": "香煎皮皮雞",
-    "description": "以奶油煎炒厚實的雞胸肉而成。 清新的檸檬滋味相當突出。 食用後的一段時間內，略微提高工作速度。"
+    "description": "以奶油煎炒厚實的雞肉而成。 清新的檸檬滋味相當突出。 食用後的一段時間內，略微提高工作速度。"
   },
   "Chowder": {
     "localized_name": "趴趴鯰巧達濃湯",
@@ -2937,7 +2989,7 @@
   },
   "EnergyLauncherBullet": {
     "localized_name": "電漿能量盒",
-    "description": "等離子砲使用的彈藥。"
+    "description": "用於等離子砲等武器的彈藥。"
   },
   "EnergyRocketLauncher": {
     "localized_name": "等離子砲",
@@ -2965,7 +3017,7 @@
   },
   "EnergyShotgunBullet": {
     "localized_name": "能量散彈槍子彈",
-    "description": "用於能量散彈槍等的子彈。"
+    "description": "用於能量散彈槍等武器的彈藥。"
   },
   "EnergyShotgun_2": {
     "localized_name": "能量散彈槍",
@@ -3001,7 +3053,7 @@
   },
   "ExplosiveBullet": {
     "localized_name": "火箭彈",
-    "description": "Launcher Default等使用的彈藥。"
+    "description": "用於Launcher Default等武器的彈藥。"
   },
   "Fang": {
     "localized_name": "zh-hant text",
@@ -3117,7 +3169,7 @@
   },
   "FlamethrowerBullet": {
     "localized_name": "火焰噴射器燃料",
-    "description": "Flamethrower使用的燃料。"
+    "description": "用於Flamethrower等武器的燃料。"
   },
   "Flour": {
     "localized_name": "麵粉",
@@ -3129,11 +3181,11 @@
   },
   "FragGrenade_Dark": {
     "localized_name": "暗黑手榴彈",
-    "description": "利於中距離戰鬥的FragGrenade Dark。。 投擲數秒後引爆，對敵人造成暗屬性傷害。"
+    "description": "利於中距離戰鬥的FragGrenade Dark。 投擲數秒後引爆，對敵人造成暗屬性傷害。"
   },
   "FragGrenade_Dragon": {
     "localized_name": "龍擊手榴彈",
-    "description": "利於中距離戰鬥的FragGrenade Dragon。。 投擲數秒後引爆，對敵人造成龍屬性傷害。"
+    "description": "利於中距離戰鬥的FragGrenade Dragon。 投擲數秒後引爆，對敵人造成龍屬性傷害。"
   },
   "FragGrenade_Elec": {
     "localized_name": "電擊手榴彈",
@@ -3145,7 +3197,7 @@
   },
   "FragGrenade_Ground": {
     "localized_name": "大地手榴彈",
-    "description": "利於中距離戰鬥的FragGrenade Ground。。 投擲數秒後引爆，對敵人造成地屬性傷害。"
+    "description": "利於中距離戰鬥的FragGrenade Ground。 投擲數秒後引爆，對敵人造成地屬性傷害。"
   },
   "FragGrenade_Ice": {
     "localized_name": "冰凍手榴彈",
@@ -3153,7 +3205,7 @@
   },
   "FragGrenade_Leaf": {
     "localized_name": "草木手榴彈",
-    "description": "利於中距離戰鬥的FragGrenade Leaf。。 投擲數秒後引爆，對敵人造成草屬性傷害。"
+    "description": "利於中距離戰鬥的FragGrenade Leaf。 投擲數秒後引爆，對敵人造成草屬性傷害。"
   },
   "FragGrenade_Super": {
     "localized_name": "破片手榴彈Mk2",
@@ -3161,7 +3213,7 @@
   },
   "FragGrenade_Water": {
     "localized_name": "水流手榴彈",
-    "description": "利於中距離戰鬥的FragGrenade Water。。 投擲數秒後引爆，對敵人造成水屬性傷害。"
+    "description": "利於中距離戰鬥的FragGrenade Water。 投擲數秒後引爆，對敵人造成水屬性傷害。"
   },
   "FriedChicken": {
     "localized_name": "日式炸皮皮雞",
@@ -3305,7 +3357,7 @@
   },
   "GatlingBullet": {
     "localized_name": "加特林子彈",
-    "description": "加特林機槍使用的彈藥。"
+    "description": "用於加特林機槍等武器的彈藥。"
   },
   "GatlingGun": {
     "localized_name": "加特林機槍",
@@ -3357,23 +3409,23 @@
   },
   "GrapplingGun": {
     "localized_name": "爪鉤槍",
-    "description": "用於快速移動的爪鉤槍。 它能將爪鉤射向目的地，再將使用者牽引過去。 有了它，在有高低落差的地方也能輕鬆移動。"
+    "description": "用於快速移動的爪鉤槍。 能將鉤爪射向目標地點，再將使用者牽引過去。 有了它，在有高低落差的地方也能輕鬆移動。"
   },
   "GrapplingGun2": {
     "localized_name": "高級爪鉤槍",
-    "description": "用於快速移動的爪鉤槍。 它能將爪鉤射向目的地，再將使用者牽引過去。 經過改良，射程變長了。"
+    "description": "用於快速移動的爪鉤槍。 能將鉤爪射向目標地點，再將使用者牽引過去。 經過改良，射程變長了。"
   },
   "GrapplingGun3": {
     "localized_name": "優質爪鉤槍",
-    "description": "用於快速移動的爪鉤槍。 它能將爪鉤射向目的地，再將使用者牽引過去。 以試驗品的數據爲基礎，進一步提昇了性能。"
+    "description": "用於快速移動的爪鉤槍。 能將鉤爪射向目標地點，再將使用者牽引過去。 以試驗品的數據爲基礎，進一步提昇了性能。"
   },
   "GrapplingGun4": {
     "localized_name": "特級爪鉤槍",
-    "description": "用於快速移動的爪鉤槍。 它能將爪鉤射向目的地，再將使用者牽引過去。 此款式經過研究改良，靈活性可謂無與倫比。"
+    "description": "用於快速移動的爪鉤槍。 能將鉤爪射向目標地點，再將使用者牽引過去。 經過研究改良，靈活性可謂無與倫比。"
   },
   "GrapplingGun5": {
     "localized_name": "超級爪鉤槍",
-    "description": "可實現高速移動的爪鉤槍。 它能將爪鉤射向目的地，再將使用者牽引過去。 此款式採用了新型材料，大幅縮短了散熱時間。"
+    "description": "用於快速移動的爪鉤槍。 能將鉤爪射向目標地點，再將使用者牽引過去。 採用了新型材料，大幅縮短了散熱時間。"
   },
   "Gratin": {
     "localized_name": "焗烤馬鈴薯",
@@ -3381,7 +3433,7 @@
   },
   "GrenadeBullet": {
     "localized_name": "榴彈",
-    "description": "榴彈發射器使用的彈藥。"
+    "description": "用於榴彈發射器等武器的彈藥。"
   },
   "GrenadeLauncher": {
     "localized_name": "榴彈發射器",
@@ -3477,7 +3529,11 @@
   },
   "HandgunBullet": {
     "localized_name": "手槍子彈",
-    "description": "用於HandGun Default等的子彈。"
+    "description": "用於HandGun Default等武器的子彈。"
+  },
+  "HandgunShield": {
+    "localized_name": "防暴盾手槍",
+    "description": "防暴盾手槍"
   },
   "Head001": {
     "localized_name": "王冠",
@@ -3820,7 +3876,7 @@
     "description": null
   },
   "HeadEquip001_purple": {
-    "localized_name": "魔女之冠【極】",
+    "localized_name": "魔女之冠",
     "description": "能讓人感受到貝菈露潔【極】的不祥力量。 能取得這件道具的人極為少見。"
   },
   "HeadEquip023": {
@@ -3954,6 +4010,14 @@
   "HeadEquip044": {
     "localized_name": "傑諾多蘭頭套",
     "description": "模仿傑諾多蘭的頭套。"
+  },
+  "HeadEquip045": {
+    "localized_name": "瞅什魔頭套",
+    "description": "仿照瞅什魔的樣子製作的玩偶裝頭套。 似乎可以稍微減輕暗屬性傷害。"
+  },
+  "HeadEquip046": {
+    "localized_name": "救贖王冠",
+    "description": "可以感受到【極】默世鹿不祥的力量。 能取得這件道具的人極為少見。"
   },
   "Herbs": {
     "localized_name": "劣質藥品",
@@ -4109,11 +4173,11 @@
   },
   "LaserBullet": {
     "localized_name": "能量盒",
-    "description": "雷射步槍使用的彈藥。"
+    "description": "用於雷射步槍等武器的彈藥。"
   },
   "LaserGatlingBullet": {
     "localized_name": "加特林雷射能量盒",
-    "description": "雷射加特林使用的彈藥。"
+    "description": "用於雷射加特林等武器的彈藥。"
   },
   "LaserGatlingGun": {
     "localized_name": "雷射加特林",
@@ -4265,11 +4329,11 @@
   },
   "MachingunBullet": {
     "localized_name": "機關槍子彈",
-    "description": "用於Machingun等的子彈。"
+    "description": "用於Machingun等武器的子彈。"
   },
   "MagnumBullet": {
     "localized_name": "麥格農子彈",
-    "description": "用於Magnum等的子彈。"
+    "description": "用於Magnum等武器的子彈。"
   },
   "MakeshiftAssaultRifle": {
     "localized_name": "破舊的突擊步槍",
@@ -4461,7 +4525,7 @@
   },
   "MeteorBullet": {
     "localized_name": "隕石彈",
-    "description": "Launcher Meteor使用的彈藥。"
+    "description": "用於Launcher Meteor等武器的彈藥。"
   },
   "MeteorDrop": {
     "localized_name": "隕石碎片",
@@ -4481,7 +4545,7 @@
   },
   "MissileBullet": {
     "localized_name": "導彈",
-    "description": "追蹤導彈發射器使用的彈藥。"
+    "description": "用於追蹤導彈發射器等武器的彈藥。"
   },
   "Money": {
     "localized_name": "金幣",
@@ -4554,6 +4618,62 @@
   "NightVisionGoggles": {
     "localized_name": "zh-hant text",
     "description": "zh-hant text"
+  },
+  "Octavia001_Armor": {
+    "localized_name": "V1盔甲",
+    "description": "【ULTRAKILL 合作】 參考遙遠之地製造的戰爭機器人的結構所打造的盔甲。 具備在造成傷害時進行自我修復的功能。"
+  },
+  "Octavia001_Armor_5": {
+    "localized_name": "V1盔甲",
+    "description": "【ULTRAKILL 合作】 參考遙遠之地製造的戰爭機器人的結構所打造的盔甲。 具備在造成傷害時進行自我修復的功能。"
+  },
+  "Octavia002_Armor": {
+    "localized_name": "V2盔甲",
+    "description": "【ULTRAKILL 合作】 參考遙遠之地製造的維和機器人的結構所打造的盔甲。 捨棄自我修復功能，轉而更進一步強化了裝甲。"
+  },
+  "Octavia002_Armor_5": {
+    "localized_name": "V2盔甲",
+    "description": "【ULTRAKILL 合作】 參考遙遠之地製造的維和機器人的結構所打造的盔甲。 捨棄自我修復功能，轉而更進一步強化了裝甲。"
+  },
+  "OctaviaRevolver": {
+    "localized_name": "神射左輪手槍",
+    "description": "【ULTRAKILL 合作】 利用電能驅動可連續射擊的左輪手槍。 裝備期間，投擲捕獲用帕魯球的動作會變為擲硬幣， 神射左輪手槍的子彈擊中硬幣時將會彈向敵人。"
+  },
+  "OctaviaRevolver_2": {
+    "localized_name": "神射左輪手槍",
+    "description": "【ULTRAKILL 合作】 利用電能驅動可連續射擊的左輪手槍。 裝備期間，投擲捕獲用帕魯球的動作會變為擲硬幣， 神射左輪手槍的子彈擊中硬幣時將會彈向敵人。"
+  },
+  "OctaviaRevolver_3": {
+    "localized_name": "神射左輪手槍",
+    "description": "【ULTRAKILL 合作】 利用電能驅動可連續射擊的左輪手槍。 裝備期間，投擲捕獲用帕魯球的動作會變為擲硬幣， 神射左輪手槍的子彈擊中硬幣時將會彈向敵人。"
+  },
+  "OctaviaRevolver_4": {
+    "localized_name": "神射左輪手槍",
+    "description": "【ULTRAKILL 合作】 利用電能驅動可連續射擊的左輪手槍。 裝備期間，投擲捕獲用帕魯球的動作會變為擲硬幣， 神射左輪手槍的子彈擊中硬幣時將會彈向敵人。"
+  },
+  "OctaviaRevolver_5": {
+    "localized_name": "神射左輪手槍",
+    "description": "【ULTRAKILL 合作】 利用電能驅動可連續射擊的左輪手槍。 裝備期間，投擲捕獲用帕魯球的動作會變為擲硬幣， 神射左輪手槍的子彈擊中硬幣時將會彈向敵人。"
+  },
+  "OctaviaShotgun": {
+    "localized_name": "核心噴射散彈槍",
+    "description": "【ULTRAKILL 合作】 利用熱能驅動可連續射擊的散彈槍。 裝備期間，投擲捕獲用帕魯球的動作將變為發射核心，長按可充能並延長核心發射的射程。 被神射左輪手槍擊中的核心將會爆炸。"
+  },
+  "OctaviaShotgun_2": {
+    "localized_name": "核心噴射散彈槍",
+    "description": "【ULTRAKILL 合作】 利用熱能驅動可連續射擊的散彈槍。 裝備期間，投擲捕獲用帕魯球的動作將變為發射核心，長按可充能並延長核心發射的射程。 被神射左輪手槍擊中的核心將會爆炸。"
+  },
+  "OctaviaShotgun_3": {
+    "localized_name": "核心噴射散彈槍",
+    "description": "【ULTRAKILL 合作】 利用熱能驅動可連續射擊的散彈槍。 裝備期間，投擲捕獲用帕魯球的動作將變為發射核心，長按可充能並延長核心發射的射程。 被神射左輪手槍擊中的核心將會爆炸。"
+  },
+  "OctaviaShotgun_4": {
+    "localized_name": "核心噴射散彈槍",
+    "description": "【ULTRAKILL 合作】 利用熱能驅動可連續射擊的散彈槍。 裝備期間，投擲捕獲用帕魯球的動作將變為發射核心，長按可充能並延長核心發射的射程。 被神射左輪手槍擊中的核心將會爆炸。"
+  },
+  "OctaviaShotgun_5": {
+    "localized_name": "核心噴射散彈槍",
+    "description": "【ULTRAKILL 合作】 利用熱能驅動可連續射擊的散彈槍。 裝備期間，投擲捕獲用帕魯球的動作將變為發射核心，長按可充能並延長核心發射的射程。 被神射左輪手槍擊中的核心將會爆炸。"
   },
   "OctopusGirl_Takoyaki": {
     "localized_name": "墨沫姬的章魚燒",
@@ -4745,7 +4865,7 @@
   },
   "OverheatRifleBullet": {
     "localized_name": "過熱步槍子彈",
-    "description": "用於過熱步槍等的子彈。"
+    "description": "用於過熱步槍等武器的彈藥。"
   },
   "OverheatRifle_2": {
     "localized_name": "過熱步槍",
@@ -4777,7 +4897,7 @@
   },
   "PalDopingShotBullet": {
     "localized_name": "強化槍子彈",
-    "description": "用於強化槍等的子彈。"
+    "description": "用於強化槍等武器的彈藥。"
   },
   "PalDopingShot_2": {
     "localized_name": "高級強化槍",
@@ -5040,112 +5160,152 @@
     "description": "可從帕魯身上取得的優質油脂。 是製作聚合物時會用到的素材。"
   },
   "PalPassiveSkillChange_CoolTimeReduction_Up_1": {
-    "localized_name": "植入物：沉著冷靜",
-    "description": "植入帕魯體內、用來改變其被動技能的植入物。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+    "localized_name": "植入體：沉著冷靜",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
   },
   "PalPassiveSkillChange_CoolTimeReduction_Up_2": {
-    "localized_name": "植入物：急性子",
-    "description": "植入帕魯體內、用來改變其被動技能的植入物。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+    "localized_name": "植入體：急性子",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
   },
   "PalPassiveSkillChange_CraftSpeed_up1": {
-    "localized_name": "植入物：認真",
-    "description": "植入帕魯體內、用來改變其被動技能的植入物。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+    "localized_name": "植入體：認真",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
   },
   "PalPassiveSkillChange_CraftSpeed_up2": {
-    "localized_name": "植入物：工匠精神",
-    "description": "植入帕魯體內、用來改變其被動技能的植入物。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+    "localized_name": "植入體：工匠精神",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
   },
   "PalPassiveSkillChange_CraftSpeed_up3": {
-    "localized_name": "植入物：卓絕技藝",
-    "description": "植入帕魯體內、用來改變其被動技能的植入物。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+    "localized_name": "植入體：卓絕技藝",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
   },
   "PalPassiveSkillChange_Deffence_up1": {
-    "localized_name": "植入物：堅硬皮膚",
-    "description": "植入帕魯體內、用來改變其被動技能的植入物。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+    "localized_name": "植入體：堅硬皮膚",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
   },
   "PalPassiveSkillChange_Deffence_up2": {
-    "localized_name": "植入物：頑強肉體",
-    "description": "植入帕魯體內、用來改變其被動技能的植入物。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+    "localized_name": "植入體：頑強肉體",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
   },
   "PalPassiveSkillChange_Deffence_up3": {
-    "localized_name": "植入物：金剛之軀",
-    "description": "植入帕魯體內、用來改變其被動技能的植入物。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+    "localized_name": "植入體：金剛之軀",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
   },
   "PalPassiveSkillChange_HatchingSpeed_Up": {
-    "localized_name": "植入物：博愛主義者",
-    "description": "植入帕魯體內、用來改變其被動技能的植入物。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+    "localized_name": "植入體：博愛主義者",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
   },
   "PalPassiveSkillChange_MoveSpeed_up_1": {
-    "localized_name": "植入物：俐落",
-    "description": "植入帕魯體內、用來改變其被動技能的植入物。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+    "localized_name": "植入體：俐落",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
   },
   "PalPassiveSkillChange_MoveSpeed_up_2": {
-    "localized_name": "植入物：運動健將",
-    "description": "植入帕魯體內、用來改變其被動技能的植入物。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+    "localized_name": "植入體：運動健將",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
   },
   "PalPassiveSkillChange_MoveSpeed_up_3": {
-    "localized_name": "植入物：神速",
-    "description": "植入帕魯體內、用來改變其被動技能的植入物。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+    "localized_name": "植入體：神速",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
   },
   "PalPassiveSkillChange_Nocturnal": {
-    "localized_name": "植入物：夜行性",
-    "description": "植入帕魯體內、用來改變其被動技能的植入物。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+    "localized_name": "植入體：夜行性",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
   },
   "PalPassiveSkillChange_NonKilling": {
     "localized_name": "植入體：手下留情",
-    "description": "植入帕魯體內、用來改變其被動技能的植入物。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
   },
   "PalPassiveSkillChange_Noukin": {
-    "localized_name": "植入物：腦筋",
-    "description": "植入帕魯體內、用來改變其被動技能的植入物。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+    "localized_name": "植入體：腦筋",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
   },
   "PalPassiveSkillChange_PAL_ALLAttack_up1": {
-    "localized_name": "植入物：勇敢",
-    "description": "植入帕魯體內、用來改變其被動技能的植入物。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+    "localized_name": "植入體：勇敢",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
   },
   "PalPassiveSkillChange_PAL_ALLAttack_up2": {
-    "localized_name": "植入物：兇猛",
-    "description": "植入帕魯體內、用來改變其被動技能的植入物。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+    "localized_name": "植入體：兇猛",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
   },
   "PalPassiveSkillChange_PAL_ALLAttack_up3": {
-    "localized_name": "植入物：鬼神",
-    "description": "植入帕魯體內、用來改變其被動技能的植入物。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+    "localized_name": "植入體：鬼神",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+  },
+  "PalPassiveSkillChange_PAL_CorporateSlave": {
+    "localized_name": "植入體：社畜",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
   },
   "PalPassiveSkillChange_PAL_FullStomach_Down_1": {
-    "localized_name": "植入物：小鳥胃",
-    "description": "植入帕魯體內、用來改變其被動技能的植入物。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+    "localized_name": "植入體：小鳥胃",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
   },
   "PalPassiveSkillChange_PAL_FullStomach_Down_2": {
-    "localized_name": "植入物：節食大師",
-    "description": "植入帕魯體內、用來改變其被動技能的植入物。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+    "localized_name": "植入體：節食大師",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
   },
   "PalPassiveSkillChange_PAL_FullStomach_Down_3": {
-    "localized_name": "植入物：極限絕食",
-    "description": "植入帕魯體內、用來改變其被動技能的植入物。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+    "localized_name": "植入體：極限絕食",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
   },
   "PalPassiveSkillChange_PAL_Sanity_Down_1": {
-    "localized_name": "植入物：正向思考",
-    "description": "植入帕魯體內、用來改變其被動技能的植入物。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+    "localized_name": "植入體：正向思考",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
   },
   "PalPassiveSkillChange_PAL_Sanity_Down_2": {
-    "localized_name": "植入物：工作狂",
-    "description": "植入帕魯體內、用來改變其被動技能的植入物。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+    "localized_name": "植入體：工作狂",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
   },
   "PalPassiveSkillChange_PAL_Sanity_Down_3": {
-    "localized_name": "植入物：明鏡止水",
-    "description": "植入帕魯體內、用來改變其被動技能的植入物。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+    "localized_name": "植入體：明鏡止水",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+  },
+  "PalPassiveSkillChange_SalePrice_Up_1": {
+    "localized_name": "植入體：高貴",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+  },
+  "PalPassiveSkillChange_SalePrice_Up_2": {
+    "localized_name": "植入體：貴族",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
   },
   "PalPassiveSkillChange_Stamina_Up_1": {
-    "localized_name": "植入物：無限精力",
-    "description": "植入帕魯體內、用來改變其被動技能的植入物。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+    "localized_name": "植入體：無限精力",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
   },
   "PalPassiveSkillChange_Stamina_Up_2": {
-    "localized_name": "植入物：健康寶寶",
-    "description": "植入帕魯體內、用來改變其被動技能的植入物。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+    "localized_name": "植入體：健康寶寶",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
   },
   "PalPassiveSkillChange_Stamina_Up_3": {
-    "localized_name": "植入物：永動機",
-    "description": "植入帕魯體內、用來改變其被動技能的植入物。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+    "localized_name": "植入體：永動機",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+  },
+  "PalPassiveSkillChange_SwimSpeed_up_1": {
+    "localized_name": "植入體：悠然泳姿",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+  },
+  "PalPassiveSkillChange_SwimSpeed_up_2": {
+    "localized_name": "植入體：游泳健將",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+  },
+  "PalPassiveSkillChange_TrainerATK_UP_1": {
+    "localized_name": "植入體：突襲指揮官",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+  },
+  "PalPassiveSkillChange_TrainerDEF_UP_1": {
+    "localized_name": "植入體：鐵壁軍師",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+  },
+  "PalPassiveSkillChange_TrainerLogging_up1": {
+    "localized_name": "植入體：採伐領袖",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+  },
+  "PalPassiveSkillChange_TrainerMining_up1": {
+    "localized_name": "植入體：礦山首領",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+  },
+  "PalPassiveSkillChange_TrainerWorkSpeed_UP_1": {
+    "localized_name": "植入體：啦啦隊",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
   },
   "PalRevive": {
     "localized_name": "復活藥",
@@ -5223,6 +5383,22 @@
     "localized_name": "【極】歿殃的石板碎片",
     "description": "KingBahamut Dragon之力滿溢而出的石板碎片。 通過組合可將其拼成石板。"
   },
+  "PalSummon_LegendDeer": {
+    "localized_name": "默世鹿的石板",
+    "description": "畫著默世鹿的石板。 只要將其獻給召喚的祭壇， 就能召喚非常強大的默世鹿[Lv 65]。"
+  },
+  "PalSummon_LegendDeer_2": {
+    "localized_name": "【極】默世鹿的石板",
+    "description": "默世鹿之力滿溢而出的石板。 只要將其獻給召喚的祭壇， 就能召喚強大到令人絕望的默世鹿[Lv ??]。"
+  },
+  "PalSummon_LegendDeer_Parts": {
+    "localized_name": "默世鹿的石板碎片",
+    "description": "畫著默世鹿的石板碎片。 透過組合可將其拼成石板。"
+  },
+  "PalSummon_LegendDeer_Parts_2": {
+    "localized_name": "【極】默世鹿的石板碎片",
+    "description": "默世鹿之力滿溢而出的石板碎片。 透過組合可將其拼成石板。"
+  },
   "PalSummon_NightLady": {
     "localized_name": "貝菈諾娃的石板",
     "description": "畫著貝菈諾娃的石板。 只要將其獻給召喚的祭壇， 就能召喚強大的貝菈諾娃[Lv 30]。"
@@ -5250,6 +5426,10 @@
   "PalSummon_YakushimaBoss002": {
     "localized_name": "天界符",
     "description": "【泰拉瑞亞合作】 畫著未知圖案的印章。 只要獻給召喚的祭壇， 就能召喚強大的存在。"
+  },
+  "PalSummon_YakushimaBoss002_2": {
+    "localized_name": "天界符【大師】",
+    "description": "【泰拉瑞亞合作】 畫著未知圖案的印章。 只要獻給召喚的祭壇， 就能召喚強大到令人絕望的存在。"
   },
   "PalUpgradeStone": {
     "localized_name": "小型帕魯之魂",
@@ -5407,6 +5587,14 @@
     "localized_name": "塑鋼頭盔",
     "description": "以塑鋼製成的頭盔。 在增強防禦力的同時，實現了輕量化。"
   },
+  "PlayerDropItem": {
+    "localized_name": "勝者證明",
+    "description": "只有勝者才能獲得的榮譽之證。 象徵持有者在戰場上佔有優勢。"
+  },
+  "Player_Outfit_Kigurumi001": {
+    "localized_name": "瞅什魔玩偶裝",
+    "description": "仿照瞅什魔的樣子製作的玩偶裝衣服。"
+  },
   "PoisonMushroom": {
     "localized_name": "不可思議的蘑菇",
     "description": "不適合生吃的蘑菇。 吃了後肚子會更容易餓。"
@@ -5495,6 +5683,10 @@
     "localized_name": "佐伊記憶中的布條",
     "description": "依稀殘留香氣的舊布，承載著佐伊的珍貴回憶。"
   },
+  "QuestItem_Zoe_Halloweenskin_1": {
+    "localized_name": "佐伊的萬聖節服裝",
+    "description": "佐伊的萬聖節服裝。 她收到後一定會很開心的。 把它交給佐伊吧！"
+  },
   "Quiche": {
     "localized_name": "法式蘑菇鹹派",
     "description": "將蛋、蔬菜、蘑菇和奶油加入派皮烘烤的料理。 就算涼了依然美味可口。 食用後的一段時間內，減緩SAN值的下降速度， 且不容易感到飢餓。"
@@ -5504,24 +5696,24 @@
     "description": "只能在天墜之地發現的珍貴結晶。 帕魯礦歷經漫長歲月凝結變質而成， 呈現出彩虹般的光芒。"
   },
   "Rankup_1": {
-    "localized_name": "萬能帕魯精華提取液☆1",
-    "description": "對帕魯注入就能使其才能開花結果的不可思議的精華。 可以使帕魯的階級從☆0升到☆1。 不知道為什麽好像能聽到充滿怨念的呻吟……"
+    "localized_name": "覺醒星果☆1",
+    "description": "極為罕見的魔法果實。 可以使帕魯的階級從☆0升到☆1。"
   },
   "Rankup_2": {
-    "localized_name": "萬能帕魯精華提取液☆2",
-    "description": "對帕魯注入就能使其才能開花結果的不可思議的精華。 可以使帕魯的階級從☆1升到☆2。 不知道為什麽好像能聽到充滿怨念的呻吟……"
+    "localized_name": "覺醒星果☆2",
+    "description": "極為罕見的魔法果實。 可以使帕魯的階級從☆1升到☆2。"
   },
   "Rankup_3": {
-    "localized_name": "萬能帕魯精華提取液☆3",
-    "description": "對帕魯注入就能使其才能開花結果的不可思議的精華。 可以使帕魯的階級從☆2升到☆3。 不知道為什麽好像能聽到充滿怨念的呻吟……"
+    "localized_name": "覺醒星果☆3",
+    "description": "極為罕見的魔法果實。 可以使帕魯的階級從☆2升到☆3。"
   },
   "Rankup_4": {
-    "localized_name": "萬能帕魯精華提取液☆4",
-    "description": "對帕魯注入就能使其才能開花結果的不可思議的精華。 可以使帕魯的階級從☆3升到☆4。 不知道為什麽好像能聽到充滿怨念的呻吟……"
+    "localized_name": "覺醒星果☆4",
+    "description": "極為罕見的魔法果實。 可以使帕魯的階級從☆3升到☆4。"
   },
   "Rankup_Arbitrary": {
-    "localized_name": "濃縮萬能帕魯精華",
-    "description": "對帕魯注入就能使其才能開花結果的不可思議的精華。 可以使帕魯的階級上升1階。 不知道為什麽好像能聽到充滿怨念的呻吟……"
+    "localized_name": "成熟覺醒星果",
+    "description": "極為罕見的魔法果實。 可以使帕魯的階級提升1階。"
   },
   "ReinforcedArrow": {
     "localized_name": "強化箭矢",
@@ -5537,11 +5729,11 @@
   },
   "RifleBullet": {
     "localized_name": "步槍子彈",
-    "description": "用於步槍等的子彈。"
+    "description": "用於步槍等武器的子彈。"
   },
   "RoughBullet": {
     "localized_name": "劣質彈藥",
-    "description": "用於鳥槍及劣質手槍等的子彈。"
+    "description": "用於鳥槍及劣質手槍等武器的子彈。"
   },
   "Ruby": {
     "localized_name": "紅寶石",
@@ -5765,7 +5957,7 @@
   },
   "ShotgunBullet": {
     "localized_name": "散彈槍子彈",
-    "description": "用於散彈槍等的子彈。"
+    "description": "用於散彈槍等武器的子彈。"
   },
   "SingleShotRifle": {
     "localized_name": "單發步槍",
@@ -6392,7 +6584,7 @@
     "description": "持有此道具即可騎乘IceNarwhal Fire。"
   },
   "SkillUnlock_IceSeal": {
-    "localized_name": "香草豹冰的背帶",
+    "localized_name": "香草豹冰的鞍具",
     "description": "持有此道具即可騎乘香草豹冰。"
   },
   "SkillUnlock_JetDragon": {
@@ -6438,6 +6630,10 @@
   "SkillUnlock_LeafMomonga": {
     "localized_name": "達鼠泥的背帶",
     "description": "達鼠泥的背帶。 持有此道具時，達鼠泥會在玩家陷入瀕死狀態時 透過療癒能力讓玩家復活。"
+  },
+  "SkillUnlock_LegendDeer": {
+    "localized_name": "默世鹿的鞍具",
+    "description": "持有此道具即可騎乘默世鹿並產生護盾，抵禦攻擊。"
   },
   "SkillUnlock_Manticore": {
     "localized_name": "獄焰王專用鞍具",
@@ -7065,23 +7261,23 @@
   },
   "YakushimaBlade004": {
     "localized_name": "斷鋼劍",
-    "description": "【泰拉瑞亞合作】 閃耀著金色光輝的神聖之劍。 揮舞時會釋放衝擊波，攻擊自身周圍大範圍的目標。"
+    "description": "【泰拉瑞亞合作】 閃耀著金色光輝的神聖之劍。 揮舞時會釋放衝擊波，攻擊自身周圍的目標。"
   },
   "YakushimaBlade004_2": {
     "localized_name": "斷鋼劍",
-    "description": "【泰拉瑞亞合作】 閃耀著金色光輝的神聖之劍。 揮舞時會釋放衝擊波，攻擊自身周圍大範圍的目標。"
+    "description": "【泰拉瑞亞合作】 閃耀著金色光輝的神聖之劍。 揮舞時會釋放衝擊波，攻擊自身周圍的目標。"
   },
   "YakushimaBlade004_3": {
     "localized_name": "斷鋼劍",
-    "description": "【泰拉瑞亞合作】 閃耀著金色光輝的神聖之劍。 揮舞時會釋放衝擊波，攻擊自身周圍大範圍的目標。"
+    "description": "【泰拉瑞亞合作】 閃耀著金色光輝的神聖之劍。 揮舞時會釋放衝擊波，攻擊自身周圍的目標。"
   },
   "YakushimaBlade004_4": {
     "localized_name": "斷鋼劍",
-    "description": "【泰拉瑞亞合作】 閃耀著金色光輝的神聖之劍。 揮舞時會釋放衝擊波，攻擊自身周圍大範圍的目標。"
+    "description": "【泰拉瑞亞合作】 閃耀著金色光輝的神聖之劍。 揮舞時會釋放衝擊波，攻擊自身周圍的目標。"
   },
   "YakushimaBlade004_5": {
     "localized_name": "斷鋼劍",
-    "description": "【泰拉瑞亞合作】 閃耀著金色光輝的神聖之劍。 揮舞時會釋放衝擊波，攻擊自身周圍大範圍的目標。"
+    "description": "【泰拉瑞亞合作】 閃耀著金色光輝的神聖之劍。 揮舞時會釋放衝擊波，攻擊自身周圍的目標。"
   },
   "YakushimaBlade005": {
     "localized_name": "傳奇彩虹貓之刃",
@@ -7201,7 +7397,7 @@
   },
   "YakushimaIngot002": {
     "localized_name": "夜明錠",
-    "description": "【泰拉瑞亞合作】 YakushimaBoss002掉落的蘊含強大力量的材料。 散發著宛如月光的銀輝。"
+    "description": "【泰拉瑞亞合作】 RAID YakushimaBoss002掉落的蘊含強大力量的材料。 散發著宛如月光的銀輝。"
   },
   "YakushimaLantern001": {
     "localized_name": "夜光",

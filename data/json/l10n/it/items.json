@@ -263,6 +263,10 @@
     "localized_name": "Pesca del legame",
     "description": "Un frutto magico che non si vede spesso. Si dice che, offrendolo da mangiare a un Pal, si stabilisca un legame con esso. Scegli con attenzione a chi darlo."
   },
+  "AffectionFruit_02": {
+    "localized_name": "Piccola pesca del legame",
+    "description": "Un piccolo frutto colmo di gentilezza. Pare che, se lo offri a un Pal, esso ti aprirà il suo cuore. Scegli con attenzione a chi darlo."
+  },
   "AncientParts2": {
     "localized_name": "Nucleo dell'antica civiltà",
     "description": "Un frammento di tecnologia perduta, appartenente a un'antica civiltà. Oggi è difficilissimo trovarne a Palpagos, e contiene conoscenze oramai dimenticate."
@@ -273,7 +277,7 @@
   },
   "AncientTechnologyBook_G1": {
     "localized_name": "Manuale antico",
-    "description": "È un libro che parla di antiche tecnologie. Usandolo, otterrai dei punti tecnologia."
+    "description": "È un libro che parla di antiche tecnologie. Usandolo, otterrai dei punti tecnologia antica."
   },
   "AnimalSkin": {
     "localized_name": "it Text",
@@ -309,7 +313,7 @@
   },
   "AssaultRifleBullet": {
     "localized_name": "Proiettili per fucile d'assalto",
-    "description": "Munizioni per AssaultRifle Default1 e armi simili."
+    "description": "Proiettili per AssaultRifle Default1 e armi simili."
   },
   "AssaultRifle_Default1": {
     "localized_name": "Fucile d'assalto",
@@ -349,7 +353,7 @@
   },
   "AutoMealPouch_Tier5": {
     "localized_name": "Borsa di cibo titanica",
-    "description": "Una borsa enorme contenente del cibo. Mette a disposizione cinque slot per il nutrimento automatico. Il cibo di uno slot viene consumato non appena viene fame."
+    "description": "Una borsa titanica contenente del cibo. Mette a disposizione cinque slot per il nutrimento automatico. Il cibo di uno slot viene consumato non appena viene fame."
   },
   "Axe_Steal": {
     "localized_name": "Ascia di metallo Pal",
@@ -377,7 +381,7 @@
   },
   "BaconEggs": {
     "localized_name": "Bacon di Rushoar e uova",
-    "description": "Il sapore affumicato del bacon e la dolcezza delle uova si fondono in una perfetta armonia. Attacco: +10% per un po' di tempo"
+    "description": "Il sapore affumicato del bacon e la dolcezza delle uova si fondono in una perfetta armonia. Attacco: +10% per un po' di tempo."
   },
   "BakedMeat_BerryGoat": {
     "localized_name": "Arrosto con erbe di Caprity",
@@ -452,8 +456,8 @@
     "description": "Si ottengono combattendo da soli nell'arena. Puoi scambiarli con premi fantastici."
   },
   "BeamSword": {
-    "localized_name": "Spada laser",
-    "description": "Spada laser per il combattimento ravvicinato. La sua lama laser ustiona ciò che colpisce."
+    "localized_name": "Spada a energia",
+    "description": "Spada a energia per il combattimento ravvicinato. La sua lama laser ustiona ciò che colpisce."
   },
   "Beer": {
     "localized_name": "it Text",
@@ -537,7 +541,7 @@
   },
   "Blueprint_CandleStand": {
     "localized_name": "Progetto per candelabro solenne",
-    "description": "Se è nell'inventario o alla base, diventa possibile costruire |Candelabro solenne|."
+    "description": "Se è nell'inventario o alla base, diventa possibile costruire |<MapObjectName id=|CandleStand|/>|."
   },
   "Blueprint_ChargeLaserRifle_2": {
     "localized_name": "Progetto per fucile a carica 1",
@@ -621,11 +625,11 @@
   },
   "Blueprint_ConservationGroupBannerA": {
     "localized_name": "Progetto per bandiera dell'Ente per la tutela dei Pal",
-    "description": "Se è nell'inventario o alla base, diventa possibile costruire |Bandiera dell'Ente per la tutela dei Pal|."
+    "description": "Se è nell'inventario o alla base, diventa possibile costruire |<MapObjectName id=|ConservationGroupBannerA|/>|."
   },
   "Blueprint_ConservationGroupBannerB": {
     "localized_name": "Progetto per striscione orizzontale dell'Ente per la tutela dei Pal",
-    "description": "Se è nell'inventario o alla base, diventa possibile costruire |Stendardo dell'Ente per la tutela dei Pal|."
+    "description": "Se è nell'inventario o alla base, diventa possibile costruire |<MapObjectName id=|ConservationGroupBannerB|/>|."
   },
   "Blueprint_CopperArmorCold_2": {
     "localized_name": "Progetto per armatura di metallo per il gelo 1",
@@ -741,7 +745,7 @@
   },
   "Blueprint_FireStand": {
     "localized_name": "Progetto per candelabro da cerimonia",
-    "description": "Se è nell'inventario o alla base, diventa possibile costruire |Candelabro da cerimonia|."
+    "description": "Se è nell'inventario o alla base, diventa possibile costruire |<MapObjectName id=|FireStand|/>|."
   },
   "Blueprint_FishingRod_01_2": {
     "localized_name": "Progetto per canna da pesca da principiante (Gumoss)",
@@ -869,7 +873,7 @@
   },
   "Blueprint_GuardianDogStatue": {
     "localized_name": "Progetto per statua di Yakumo",
-    "description": "Se è nell'inventario o alla base, diventa possibile costruire |Statua di Yakumo|."
+    "description": "Se è nell'inventario o alla base, diventa possibile costruire |<MapObjectName id=|GuardianDogStatue|/>|."
   },
   "Blueprint_GuidedMissileLauncher_2": {
     "localized_name": "Progetto per lanciarazzi 1",
@@ -1345,7 +1349,7 @@
   },
   "Blueprint_Hunter_GangFlag": {
     "localized_name": "Progetto per bandiera dei bracconieri",
-    "description": "Se è nell'inventario o alla base, diventa possibile costruire |Hunter GangFlag|."
+    "description": "Se è nell'inventario o alla base, diventa possibile costruire |<MapObjectName id=|Hunter GangFlag|/>|."
   },
   "Blueprint_IronArmorCold_2": {
     "localized_name": "Progetto per armatura di metallo raffinato per il gelo 1",
@@ -1413,7 +1417,7 @@
   },
   "Blueprint_LanternTop": {
     "localized_name": "Progetto per lanterna orientale",
-    "description": "Se è nell'inventario o alla base, diventa possibile costruire |Lanterna orientale|."
+    "description": "Se è nell'inventario o alla base, diventa possibile costruire |<MapObjectName id=|LanternTop|/>|."
   },
   "Blueprint_LaserGatlingGun_2": {
     "localized_name": "Progetto per gatling laser 1",
@@ -1469,7 +1473,7 @@
   },
   "Blueprint_LilyQueenStatue": {
     "localized_name": "Progetto per statua di Lyleen",
-    "description": "Se è nell'inventario o alla base, diventa possibile costruire |Statua di Lyleen|."
+    "description": "Se è nell'inventario o alla base, diventa possibile costruire |<MapObjectName id=|LilyQueenStatue|/>|."
   },
   "Blueprint_MakeshiftAssaultRifle_2": {
     "localized_name": "Progetto per fucile d'assalto vetusto 1",
@@ -1570,6 +1574,46 @@
   "Blueprint_Musket_5": {
     "localized_name": "Progetto per moschetto 4",
     "description": "Con questo, è possibile realizzare: |Moschetto (Legendary)|. Per farlo, hai bisogno di: |WeaponFactory Dirty 01|."
+  },
+  "Blueprint_Octavia001_Armor_5": {
+    "localized_name": "Progetto per armatura di V1 4",
+    "description": "[Collaborazione con ULTRAKILL] Con questo, è possibile realizzare: Octavia001 Armor 5 (Legendary). Per farlo, hai bisogno di: Factory Hard 02."
+  },
+  "Blueprint_Octavia002_Armor_5": {
+    "localized_name": "Progetto per armatura di V2 4",
+    "description": "[Collaborazione con ULTRAKILL] Con questo, è possibile realizzare: Octavia002 Armor 5 (Legendary). Per farlo, hai bisogno di: Factory Hard 03."
+  },
+  "Blueprint_OctaviaRevolver_2": {
+    "localized_name": "Progetto per revolver del tiratore 1",
+    "description": "[Collaborazione con ULTRAKILL] Con questo, è possibile realizzare: Revolver del tiratore (Uncommon). Per farlo, hai bisogno di: WeaponFactory Dirty 02."
+  },
+  "Blueprint_OctaviaRevolver_3": {
+    "localized_name": "Progetto per revolver del tiratore 2",
+    "description": "[Collaborazione con ULTRAKILL] Con questo, è possibile realizzare: Revolver del tiratore (Rare). Per farlo, hai bisogno di: WeaponFactory Dirty 02."
+  },
+  "Blueprint_OctaviaRevolver_4": {
+    "localized_name": "Progetto per revolver del tiratore 3",
+    "description": "[Collaborazione con ULTRAKILL] Con questo, è possibile realizzare: Revolver del tiratore (Epic). Per farlo, hai bisogno di: WeaponFactory Dirty 02."
+  },
+  "Blueprint_OctaviaRevolver_5": {
+    "localized_name": "Progetto per revolver del tiratore 4",
+    "description": "[Collaborazione con ULTRAKILL] Con questo, è possibile realizzare: Revolver del tiratore (Legendary). Per farlo, hai bisogno di: WeaponFactory Dirty 02."
+  },
+  "Blueprint_OctaviaShotgun_2": {
+    "localized_name": "Progetto per fucile a canna liscia sparanuclei 1",
+    "description": "[Collaborazione con ULTRAKILL] Con questo, è possibile realizzare: Fucile a canna liscia sparanuclei (Uncommon). Per farlo, hai bisogno di: WeaponFactory Dirty 03."
+  },
+  "Blueprint_OctaviaShotgun_3": {
+    "localized_name": "Progetto per fucile a canna liscia sparanuclei 2",
+    "description": "[Collaborazione con ULTRAKILL] Con questo, è possibile realizzare: Fucile a canna liscia sparanuclei (Rare). Per farlo, hai bisogno di: WeaponFactory Dirty 03."
+  },
+  "Blueprint_OctaviaShotgun_4": {
+    "localized_name": "Progetto per fucile a canna liscia sparanuclei 3",
+    "description": "[Collaborazione con ULTRAKILL] Con questo, è possibile realizzare: Fucile a canna liscia sparanuclei (Epic). Per farlo, hai bisogno di: WeaponFactory Dirty 03."
+  },
+  "Blueprint_OctaviaShotgun_5": {
+    "localized_name": "Progetto per fucile a canna liscia sparanuclei 4",
+    "description": "[Collaborazione con ULTRAKILL] Con questo, è possibile realizzare: Fucile a canna liscia sparanuclei (Legendary). Per farlo, hai bisogno di: WeaponFactory Dirty 03."
   },
   "Blueprint_OldRevolver_2": {
     "localized_name": "Progetto per vecchio revolver 1",
@@ -1801,11 +1845,11 @@
   },
   "Blueprint_SF_Chair": {
     "localized_name": "Progetto per sedia da laboratorio",
-    "description": "Se è nell'inventario o alla base, diventa possibile costruire |SF Chair|."
+    "description": "Se è nell'inventario o alla base, diventa possibile costruire |<MapObjectName id=|SF Chair|/>|."
   },
   "Blueprint_SF_Desk": {
     "localized_name": "Progetto per scrivania da laboratorio",
-    "description": "Se è nell'inventario o alla base, diventa possibile costruire |SF Desk|."
+    "description": "Se è nell'inventario o alla base, diventa possibile costruire |<MapObjectName id=|SF Desk|/>|."
   },
   "Blueprint_SemiAutoRifle_2": {
     "localized_name": "Progetto per fucile semiautomatico 1",
@@ -1841,7 +1885,7 @@
   },
   "Blueprint_Shrine_Lantern": {
     "localized_name": "Progetto per lanterna da giardino",
-    "description": "Se è nell'inventario o alla base, diventa possibile costruire |Shrine Lantern|."
+    "description": "Se è nell'inventario o alla base, diventa possibile costruire |<MapObjectName id=|Shrine Lantern|/>|."
   },
   "Blueprint_SingleShotRifle_2": {
     "localized_name": "Progetto per fucile a colpo singolo 1",
@@ -1941,7 +1985,7 @@
   },
   "Blueprint_WallTorch02": {
     "localized_name": "Progetto per torcia a muro solenne",
-    "description": "Se è nell'inventario o alla base, diventa possibile costruire |Torcia a muro solenne|."
+    "description": "Se è nell'inventario o alla base, diventa possibile costruire |<MapObjectName id=|WallTorch02|/>|."
   },
   "Blueprint_WeakerBow_2": {
     "localized_name": "Progetto per arco antiquato 1",
@@ -1961,11 +2005,11 @@
   },
   "Blueprint_Wire_Fence": {
     "localized_name": "Progetto per recinto con filo spinato",
-    "description": "Se è nell'inventario o alla base, diventa possibile costruire |Wire Fence|."
+    "description": "Se è nell'inventario o alla base, diventa possibile costruire |<MapObjectName id=|Wire Fence|/>|."
   },
   "Blueprint_WoodenBarricade": {
     "localized_name": "Progetto per transenna in legno",
-    "description": "Se è nell'inventario o alla base, diventa possibile costruire |Transenna in legno|."
+    "description": "Se è nell'inventario o alla base, diventa possibile costruire |<MapObjectName id=|WoodenBarricade|/>|."
   },
   "Blueprint_YakushimaArmor001": {
     "localized_name": "Progetto per armatura sacra",
@@ -2046,6 +2090,10 @@
   "Blueprint_YakushimaBlade004_5": {
     "localized_name": "Progetto per Excalibur 4",
     "description": "[Collaborazione con Terraria] Con questo, è possibile realizzare: |Excalibur| (Legendary). Per farlo, hai bisogno di: |WeaponFactory Dirty 02|."
+  },
+  "Blueprint_YakushimaBoss002_Relic": {
+    "localized_name": "Progetto per |Statua del Signore della Luna|",
+    "description": "Collaborazione con Terraria Se è nell'inventario o alla base, diventa possibile costruire |<MapObjectName id=|YakushimaBoss002 Relic|/>|."
   },
   "Blueprint_YakushimaGun001": {
     "localized_name": "Progetto per battitore vorticoso",
@@ -2166,6 +2214,10 @@
   "Blueprint_YakushimaLantern001_5": {
     "localized_name": "Progetto per bagliore notturno 4",
     "description": "[Collaborazione con Terraria] Con questo, è possibile realizzare: |Bagliore notturno| (Legendary). Per farlo, hai bisogno di: |WeaponFactory Dirty 02|."
+  },
+  "Blueprint_Zoe_Halloweenskin_1": {
+    "localized_name": "Progetto per il costume di Halloween di Zoe",
+    "description": "Una nota con tutte le idee che Zoe borbottava tra sé e sé. Realizza il costume al banco da lavoro e portalo a Zoe."
   },
   "Bone": {
     "localized_name": "Ossa",
@@ -2477,43 +2529,43 @@
   },
   "BowGun_Fire": {
     "localized_name": "Balestra incendiaria",
-    "description": "Una Balestra che infligge danni di attributo fuoco. Dà alle fiamme i Pal, rendendo più semplice catturarli. Munizioni: Arrow Fire."
+    "description": "Una Balestra che infligge danni di attributo fuoco. Dà alle fiamme i Pal, rendendo più semplice catturarli. Proiettili: Arrow Fire."
   },
   "BowGun_Fire_2": {
     "localized_name": "Balestra incendiaria",
-    "description": "Una Balestra che infligge danni di attributo fuoco. Dà alle fiamme i Pal, rendendo più semplice catturarli. Munizioni: Arrow Fire."
+    "description": "Una Balestra che infligge danni di attributo fuoco. Dà alle fiamme i Pal, rendendo più semplice catturarli. Proiettili: Arrow Fire."
   },
   "BowGun_Fire_3": {
     "localized_name": "Balestra incendiaria",
-    "description": "Una Balestra che infligge danni di attributo fuoco. Dà alle fiamme i Pal, rendendo più semplice catturarli. Munizioni: Arrow Fire."
+    "description": "Una Balestra che infligge danni di attributo fuoco. Dà alle fiamme i Pal, rendendo più semplice catturarli. Proiettili: Arrow Fire."
   },
   "BowGun_Fire_4": {
     "localized_name": "Balestra incendiaria",
-    "description": "Una Balestra che infligge danni di attributo fuoco. Dà alle fiamme i Pal, rendendo più semplice catturarli. Munizioni: Arrow Fire."
+    "description": "Una Balestra che infligge danni di attributo fuoco. Dà alle fiamme i Pal, rendendo più semplice catturarli. Proiettili: Arrow Fire."
   },
   "BowGun_Fire_5": {
     "localized_name": "Balestra incendiaria",
-    "description": "Una Balestra che infligge danni di attributo fuoco. Dà alle fiamme i Pal, rendendo più semplice catturarli. Munizioni: Arrow Fire."
+    "description": "Una Balestra che infligge danni di attributo fuoco. Dà alle fiamme i Pal, rendendo più semplice catturarli. Proiettili: Arrow Fire."
   },
   "BowGun_Poison": {
     "localized_name": "Balestra avvelenatrice",
-    "description": "Una Balestra capace di avvelenare il bersaglio. I Pal avvelenati sono più facili da catturare. Munizioni: Arrow Poison."
+    "description": "Una Balestra capace di avvelenare il bersaglio. I Pal avvelenati sono più facili da catturare. Proiettili: Arrow Poison."
   },
   "BowGun_Poison_2": {
     "localized_name": "Balestra avvelenatrice",
-    "description": "Una Balestra capace di avvelenare il bersaglio. I Pal avvelenati sono più facili da catturare. Munizioni: Arrow Poison."
+    "description": "Una Balestra capace di avvelenare il bersaglio. I Pal avvelenati sono più facili da catturare. Proiettili: Arrow Poison."
   },
   "BowGun_Poison_3": {
     "localized_name": "Balestra avvelenatrice",
-    "description": "Una Balestra capace di avvelenare il bersaglio. I Pal avvelenati sono più facili da catturare. Munizioni: Arrow Poison."
+    "description": "Una Balestra capace di avvelenare il bersaglio. I Pal avvelenati sono più facili da catturare. Proiettili: Arrow Poison."
   },
   "BowGun_Poison_4": {
     "localized_name": "Balestra avvelenatrice",
-    "description": "Una Balestra capace di avvelenare il bersaglio. I Pal avvelenati sono più facili da catturare. Munizioni: Arrow Poison."
+    "description": "Una Balestra capace di avvelenare il bersaglio. I Pal avvelenati sono più facili da catturare. Proiettili: Arrow Poison."
   },
   "BowGun_Poison_5": {
     "localized_name": "Balestra avvelenatrice",
-    "description": "Una Balestra capace di avvelenare il bersaglio. I Pal avvelenati sono più facili da catturare. Munizioni: Arrow Poison."
+    "description": "Una Balestra capace di avvelenare il bersaglio. I Pal avvelenati sono più facili da catturare. Proiettili: Arrow Poison."
   },
   "Bow_Fifth": {
     "localized_name": "Arco quintuplo",
@@ -2521,11 +2573,11 @@
   },
   "Bow_Fire": {
     "localized_name": "Arco incendiario",
-    "description": "Un arco che infligge danni di attributo fuoco. Dà alle fiamme i Pal, rendendo più semplice catturarli. Munizioni: Arrow Fire."
+    "description": "Un arco che infligge danni di attributo fuoco. Dà alle fiamme i Pal, rendendo più semplice catturarli. Proiettili: Arrow Fire."
   },
   "Bow_Poison": {
     "localized_name": "Arco avvelenatore",
-    "description": "Un temibile arco capace di avvelenare il bersaglio. I Pal avvelenati sono più facili da catturare. Munizioni: Arrow Poison."
+    "description": "Un temibile arco capace di avvelenare il bersaglio. I Pal avvelenati sono più facili da catturare. Proiettili: Arrow Poison."
   },
   "Bow_Triple": {
     "localized_name": "Arco triplo",
@@ -2541,7 +2593,7 @@
   },
   "Carbonara": {
     "localized_name": "Carbonara",
-    "description": "Pasta con Uovo e Latte. Difesa: +20% per un po' di tempo"
+    "description": "Pasta con Uovo e Latte. Difesa: +20% per un po' di tempo."
   },
   "Carrot": {
     "localized_name": "Carota",
@@ -2569,7 +2621,7 @@
   },
   "ChargeLaserRifleBullet": {
     "localized_name": "Proiettili per fucile a carica",
-    "description": "Munizioni per Fucile a carica e armi simili."
+    "description": "Proiettili per Fucile a carica e armi simili."
   },
   "ChargeLaserRifle_2": {
     "localized_name": "Fucile a carica",
@@ -2597,7 +2649,7 @@
   },
   "ChickenSaute": {
     "localized_name": "Sauté di Chikipi",
-    "description": "Carne simile al pollo, rosolata nel burro. Il limone aggiunge un sapore fresco. Mangiarla aumenta leggermente la velocità delle attività per un po' di tempo."
+    "description": "Carne simile al pollo, rosolata nel burro. Il limone aggiunge una nota fresca. Mangiarla aumenta leggermente la velocità delle attività per un po' di tempo."
   },
   "Chowder": {
     "localized_name": "Zuppa di Dumud",
@@ -2649,23 +2701,23 @@
   },
   "ClothArmorHeat": {
     "localized_name": "Abito per regioni calde",
-    "description": "Abiti di stoffa per i territori più caldi. Estremamente resistente al calore."
+    "description": "Abiti di stoffa per i territori più caldi. Estremamente ignifughi."
   },
   "ClothArmorHeat_2": {
     "localized_name": "Abito per regioni calde",
-    "description": "Abiti di stoffa per i territori più caldi. Estremamente resistente al calore."
+    "description": "Abiti di stoffa per i territori più caldi. Estremamente ignifughi."
   },
   "ClothArmorHeat_3": {
     "localized_name": "Abito per regioni calde",
-    "description": "Abiti di stoffa per i territori più caldi. Estremamente resistente al calore."
+    "description": "Abiti di stoffa per i territori più caldi. Estremamente ignifughi."
   },
   "ClothArmorHeat_4": {
     "localized_name": "Abito per regioni calde",
-    "description": "Abiti di stoffa per i territori più caldi. Estremamente resistente al calore."
+    "description": "Abiti di stoffa per i territori più caldi. Estremamente ignifughi."
   },
   "ClothArmorHeat_5": {
     "localized_name": "Abito per regioni calde",
-    "description": "Abiti di stoffa per i territori più caldi. Estremamente resistente al calore."
+    "description": "Abiti di stoffa per i territori più caldi. Estremamente ignifughi."
   },
   "ClothArmor_2": {
     "localized_name": "Abiti di stoffa",
@@ -2817,31 +2869,31 @@
   },
   "DecalGun_1": {
     "localized_name": "Decalcopistola 1",
-    "description": "Misteriosa arma che spara decalcomanie di Cattiva. Divertiti a usarla su muri e soffitti."
+    "description": "Misteriosa arma che spara decalcomanie di Cattiva. Divertiti a usarla su muri e superfici."
   },
   "DecalGun_2": {
     "localized_name": "Decalcopistola 2",
-    "description": "Misteriosa arma che spara decalcomanie di SheepBall. Divertiti a usarla su muri e soffitti."
+    "description": "Misteriosa arma che spara decalcomanie di SheepBall. Divertiti a usarla su muri e superfici."
   },
   "DecalGun_3": {
     "localized_name": "Decalcopistola 3",
-    "description": "Misteriosa arma che spara decalcomanie di Melpaca. Divertiti a usarla su muri e soffitti."
+    "description": "Misteriosa arma che spara decalcomanie di Melpaca. Divertiti a usarla su muri e superfici."
   },
   "DecalGun_4": {
     "localized_name": "Decalcopistola 4",
-    "description": "Misteriosa arma che spara decalcomanie di Anubis. Divertiti a usarla su muri e soffitti."
+    "description": "Misteriosa arma che spara decalcomanie di Anubis. Divertiti a usarla su muri e superfici."
   },
   "DecalGun_5": {
     "localized_name": "Decalcopistola 5",
-    "description": "Misteriosa arma che spara decalcomanie di Relaxaurus. Divertiti a usarla su muri e soffitti."
+    "description": "Misteriosa arma che spara decalcomanie di Relaxaurus. Divertiti a usarla su muri e superfici."
   },
   "DeerLocoMoco": {
     "localized_name": "Loco moco di Eikthyrdeer",
-    "description": "Un grosso hamburger sormontato da un cremoso uovo al tegamino. Questo sublime abbinamento è una gioia per la bocca. Attacco: +20% per un po' di tempo"
+    "description": "Un grosso hamburger sormontato da un cremoso uovo al tegamino. Questo sublime abbinamento è una gioia per la bocca. Attacco: +20% per un po' di tempo."
   },
   "DeerStew": {
     "localized_name": "Stufato di Eikthyrdeer",
-    "description": "Uno stufato di carne simile al cervo, amorevolmente cotta fin quasi a squagliarsi. La combinazione di carne e verdure lo rende un pasto completo. Difesa: +20% per un po' di tempo"
+    "description": "Uno stufato di carne simile al cervo, amorevolmente cotta fin quasi a squagliarsi. La combinazione di carne e verdure lo rende un pasto completo. Difesa: +20% per un po' di tempo."
   },
   "Diamond": {
     "localized_name": "Diamante",
@@ -2937,7 +2989,7 @@
   },
   "EnergyLauncherBullet": {
     "localized_name": "Cartuccia al plasma",
-    "description": "Munizioni per Cannone al plasma e armi simili."
+    "description": "Proiettili per Cannone al plasma e armi simili."
   },
   "EnergyRocketLauncher": {
     "localized_name": "Cannone al plasma",
@@ -2965,7 +3017,7 @@
   },
   "EnergyShotgunBullet": {
     "localized_name": "Proiettili per fucile a canna liscia energetico",
-    "description": "Munizioni per Fucile a canna liscia energetico e armi simili."
+    "description": "Proiettili per Fucile a canna liscia energetico e armi simili."
   },
   "EnergyShotgun_2": {
     "localized_name": "Fucile a canna liscia energetico",
@@ -3001,7 +3053,7 @@
   },
   "ExplosiveBullet": {
     "localized_name": "Razzi",
-    "description": "Munizioni per Launcher Default e armi simili."
+    "description": "Proiettili per Launcher Default e armi simili."
   },
   "Fang": {
     "localized_name": "it Text",
@@ -3117,7 +3169,7 @@
   },
   "FlamethrowerBullet": {
     "localized_name": "Carburante per lanciafiamme",
-    "description": "Carburante per lanciafiamme. Munizioni per Flamethrower e armi simili."
+    "description": "Carburante per lanciafiamme. Proiettili per Flamethrower e armi simili."
   },
   "Flour": {
     "localized_name": "Farina di grano",
@@ -3193,7 +3245,7 @@
   },
   "FurArmor": {
     "localized_name": "Armatura di pelliccia",
-    "description": "Un'armatura di Cuoio. È affidabile e resistente agli attacchi."
+    "description": "Un'armatura di Cuoio. È durevole e offre una buona protezione."
   },
   "FurArmorCold": {
     "localized_name": "Armatura di pelliccia per il gelo",
@@ -3217,39 +3269,39 @@
   },
   "FurArmorHeat": {
     "localized_name": "Armatura di pelliccia per il calore",
-    "description": "Armatura di pelliccia per i territori più caldi. Estremamente resistente al calore."
+    "description": "Armatura di pelliccia per i territori più caldi. Estremamente ignifuga."
   },
   "FurArmorHeat_2": {
     "localized_name": "Armatura di pelliccia per il calore",
-    "description": "Armatura di pelliccia per i territori più caldi. Estremamente resistente al calore."
+    "description": "Armatura di pelliccia per i territori più caldi. Estremamente ignifuga."
   },
   "FurArmorHeat_3": {
     "localized_name": "Armatura di pelliccia per il calore",
-    "description": "Armatura di pelliccia per i territori più caldi. Estremamente resistente al calore."
+    "description": "Armatura di pelliccia per i territori più caldi. Estremamente ignifuga."
   },
   "FurArmorHeat_4": {
     "localized_name": "Armatura di pelliccia per il calore",
-    "description": "Armatura di pelliccia per i territori più caldi. Estremamente resistente al calore."
+    "description": "Armatura di pelliccia per i territori più caldi. Estremamente ignifuga."
   },
   "FurArmorHeat_5": {
     "localized_name": "Armatura di pelliccia per il calore",
-    "description": "Armatura di pelliccia per i territori più caldi. Estremamente resistente al calore."
+    "description": "Armatura di pelliccia per i territori più caldi. Estremamente ignifuga."
   },
   "FurArmor_2": {
     "localized_name": "Armatura di pelliccia",
-    "description": "Un'armatura di Cuoio. È affidabile e resistente agli attacchi."
+    "description": "Un'armatura di Cuoio. È durevole e offre una buona protezione."
   },
   "FurArmor_3": {
     "localized_name": "Armatura di pelliccia",
-    "description": "Un'armatura di Cuoio. È affidabile e resistente agli attacchi."
+    "description": "Un'armatura di Cuoio. È durevole e offre una buona protezione."
   },
   "FurArmor_4": {
     "localized_name": "Armatura di pelliccia",
-    "description": "Un'armatura di Cuoio. È affidabile e resistente agli attacchi."
+    "description": "Un'armatura di Cuoio. È durevole e offre una buona protezione."
   },
   "FurArmor_5": {
     "localized_name": "Armatura di pelliccia",
-    "description": "Un'armatura di Cuoio. È affidabile e resistente agli attacchi."
+    "description": "Un'armatura di Cuoio. È durevole e offre una buona protezione."
   },
   "FurHelmet": {
     "localized_name": "Piuma decorativa",
@@ -3305,7 +3357,7 @@
   },
   "GatlingBullet": {
     "localized_name": "Proiettili per gatling",
-    "description": "Munizioni per Mitragliatore gatling e armi simili."
+    "description": "Proiettili per Mitragliatore gatling e armi simili."
   },
   "GatlingGun": {
     "localized_name": "Mitragliatore gatling",
@@ -3381,7 +3433,7 @@
   },
   "GrenadeBullet": {
     "localized_name": "Granate",
-    "description": "Munizioni per Lanciagranate e armi simili."
+    "description": "Proiettili per Lanciagranate e armi simili."
   },
   "GrenadeLauncher": {
     "localized_name": "Lanciagranate",
@@ -3413,7 +3465,7 @@
   },
   "GrilledSheepHerbs": {
     "localized_name": "Arrosto con erbe di Lamball",
-    "description": "Per esaltare al massimo le caratteristiche di questa carne ovina, si aggiungono abbondanti bacche fresche. Difesa: +10% per un po' di tempo"
+    "description": "Per esaltare al massimo le caratteristiche di questa carne ovina, si aggiungono abbondanti bacche fresche. Difesa: +10% per un po' di tempo."
   },
   "GuidedMissileLauncher": {
     "localized_name": "Lanciarazzi",
@@ -3441,7 +3493,7 @@
   },
   "Gunpowder2": {
     "localized_name": "Polvere da sparo",
-    "description": "La Polvere da sparo usata per sparare proiettili. È necessaria per creare munizioni."
+    "description": "La Polvere da sparo usata per sparare proiettili. È necessaria per creare proiettili."
   },
   "Gyoza": {
     "localized_name": "Gyoza di Rushoar",
@@ -3477,7 +3529,11 @@
   },
   "HandgunBullet": {
     "localized_name": "Proiettili per pistola",
-    "description": "Munizioni per HandGun Default e armi simili."
+    "description": "Proiettili per HandGun Default e armi simili."
+  },
+  "HandgunShield": {
+    "localized_name": "Scudo balistico",
+    "description": "Scudo balistico"
   },
   "Head001": {
     "localized_name": "Corona reale",
@@ -3820,7 +3876,7 @@
     "description": null
   },
   "HeadEquip001_purple": {
-    "localized_name": "Diadema della strega [Apoteosi]",
+    "localized_name": "Diadema della strega",
     "description": "Si può avvertire il sinistro potere di Bellanoir Libero [Apoteosi]. È un oggetto dall'incredibile rarità."
   },
   "HeadEquip023": {
@@ -3877,23 +3933,23 @@
   },
   "HeadEquip028": {
     "localized_name": "Cerchietto di Ribbuny",
-    "description": "Cerchietto ispirato Ribbuny."
+    "description": "Cerchietto ispirato a Ribbuny."
   },
   "HeadEquip028_2": {
     "localized_name": "Cerchietto di Ribbuny",
-    "description": "Cerchietto ispirato Ribbuny."
+    "description": "Cerchietto ispirato a Ribbuny."
   },
   "HeadEquip028_3": {
     "localized_name": "Cerchietto di Ribbuny",
-    "description": "Cerchietto ispirato Ribbuny."
+    "description": "Cerchietto ispirato a Ribbuny."
   },
   "HeadEquip028_4": {
     "localized_name": "Cerchietto di Ribbuny",
-    "description": "Cerchietto ispirato Ribbuny."
+    "description": "Cerchietto ispirato a Ribbuny."
   },
   "HeadEquip028_5": {
     "localized_name": "Cerchietto di Ribbuny",
-    "description": "Cerchietto ispirato Ribbuny."
+    "description": "Cerchietto ispirato a Ribbuny."
   },
   "HeadEquip029": {
     "localized_name": "Elmo di Lamball",
@@ -3955,6 +4011,14 @@
     "localized_name": "Copricapo di Xenolord",
     "description": "Copricapo ispirato a Xenolord."
   },
+  "HeadEquip045": {
+    "localized_name": "Casco da aspirante Depresso",
+    "description": "La testa di un costume con le fattezze di Depresso. Riduce di poco i danni di attributo oscurità."
+  },
+  "HeadEquip046": {
+    "localized_name": "Corona della salvezza",
+    "description": "Si può avvertire il sinistro potere di Hartalis (apoteosi). È un oggetto dall'incredibile rarità."
+  },
   "Herbs": {
     "localized_name": "Medicine mediocri",
     "description": "Medicine mediocri utili per riprendersi da condizioni come Raffreddore, Storta e Fame eccessiva. Mangiarle non fa recuperare PV."
@@ -3985,7 +4049,7 @@
   },
   "HotDog_2": {
     "localized_name": "Hot dog di Rushoar",
-    "description": "Un panino imbottito con una succulenta salsiccia. La cottura della carne è perfetta, così come le spezie. Difesa: +20% per un po' di tempo"
+    "description": "Un panino imbottito con una succulenta salsiccia. La cottura della carne è perfetta, così come le spezie. Difesa: +20% per un po' di tempo."
   },
   "HotMilk": {
     "localized_name": "Latte caldo",
@@ -4081,7 +4145,7 @@
   },
   "IronIngot": {
     "localized_name": "Lingotto di metallo raffinato",
-    "description": "Una risorsa con cui creare armi e protezioni in metallo di alta qualità. Si realizza inserendo nella fornace Minerale metallico e Carbone."
+    "description": "Una risorsa con cui creare armi e protezioni in metallo di alta qualità. Si ottiene combinando Minerale metallico e Carbone nella fornace."
   },
   "JamBun": {
     "localized_name": "Pane e marmellata",
@@ -4089,11 +4153,11 @@
   },
   "JellyfishFairy_jelly": {
     "localized_name": "Gelatina di Jelliette",
-    "description": "Dessert misterioso ottenuto combinando Meat JellyfishFairy e Fluidi di Pal. Mangiarlo aumenta leggermente l'esperienza guadagnata per un po' di tempo. Attacco: +10% per un po' di tempo"
+    "description": "Dessert misterioso ottenuto combinando Meat JellyfishFairy e Fluidi di Pal. Mangiarlo aumenta leggermente l'esperienza guadagnata per un po' di tempo. Attacco: +10% per un po' di tempo."
   },
   "JellyfishGhost_jelly": {
     "localized_name": "Gelatina di Jellroy",
-    "description": "Dessert misterioso ottenuto combinando Meat JellyfishGhost e Bacche rosse. Mangiarlo aumenta leggermente l'esperienza guadagnata per un po' di tempo. Difesa: +10% per un po' di tempo"
+    "description": "Dessert misterioso ottenuto combinando Meat JellyfishGhost e Bacche rosse. Mangiarlo aumenta leggermente l'esperienza guadagnata per un po' di tempo. Difesa: +10% per un po' di tempo."
   },
   "Katana": {
     "localized_name": "Katana",
@@ -4109,11 +4173,11 @@
   },
   "LaserBullet": {
     "localized_name": "Cartuccia energetica",
-    "description": "Munizioni per Fucile laser e armi simili."
+    "description": "Proiettili per Fucile laser e armi simili."
   },
   "LaserGatlingBullet": {
     "localized_name": "Cartucce per gatling laser",
-    "description": "Munizioni per Gatling laser e armi simili."
+    "description": "Proiettili per Gatling laser e armi simili."
   },
   "LaserGatlingGun": {
     "localized_name": "Gatling laser",
@@ -4265,11 +4329,11 @@
   },
   "MachingunBullet": {
     "localized_name": "Proiettili per mitragliatrice",
-    "description": "Munizioni per Machingun e armi simili."
+    "description": "Proiettili per Machingun e armi simili."
   },
   "MagnumBullet": {
     "localized_name": "Proiettili per magnum",
-    "description": "Munizioni per Magnum e armi simili."
+    "description": "Proiettili per Magnum e armi simili."
   },
   "MakeshiftAssaultRifle": {
     "localized_name": "Fucile d'assalto vetusto",
@@ -4361,7 +4425,7 @@
   },
   "MarinatedMushrooms": {
     "localized_name": "Funghi marinati",
-    "description": "Ricetta per marinare i Fungo. Difesa: +10% per un po' di tempo"
+    "description": "Ricetta per marinare i Fungo. Difesa: +10% per un po' di tempo."
   },
   "MeaninglessItem_ButcheringImportPal": {
     "localized_name": "Campione di tessuto biologico",
@@ -4461,7 +4525,7 @@
   },
   "MeteorBullet": {
     "localized_name": "Meteorite da lancio",
-    "description": "Munizioni per Launcher Meteor e armi simili."
+    "description": "Proiettili per Launcher Meteor e armi simili."
   },
   "MeteorDrop": {
     "localized_name": "Frammento di meteorite",
@@ -4481,7 +4545,7 @@
   },
   "MissileBullet": {
     "localized_name": "Razzi",
-    "description": "Munizioni per Lanciarazzi e armi simili."
+    "description": "Proiettili per Lanciarazzi e armi simili."
   },
   "Money": {
     "localized_name": "Denaro",
@@ -4513,7 +4577,7 @@
   },
   "MushroomJuice": {
     "localized_name": "Estratto di fungo misterioso",
-    "description": "Un estratto di funghi che fa sentire incredibilmente bene. Accelera di molto la velocità delle attività per un po' di tempo, ma consuma altrettanto velocemente punti SAN."
+    "description": "Un estratto di funghi che fa sentire incredibilmente bene. Accelera di molto la velocità delle attività per un po' di tempo, ma riduce di molto i punti SAN."
   },
   "MushroomSoup": {
     "localized_name": "Zuppa di funghi",
@@ -4545,7 +4609,7 @@
   },
   "Narcotic": {
     "localized_name": "Succo di fiore strano",
-    "description": "Una sostanza che fa sentire molto bene. Accelera la velocità delle attività per un po' di tempo, ma consuma altrettanto velocemente punti SAN."
+    "description": "Una bevanda che fa sentire molto bene. Accelera la velocità delle attività per un po' di tempo, ma riduce i punti SAN."
   },
   "NightStone": {
     "localized_name": "Sabbia stellare",
@@ -4554,6 +4618,62 @@
   "NightVisionGoggles": {
     "localized_name": "it Text",
     "description": "it Text"
+  },
+  "Octavia001_Armor": {
+    "localized_name": "Armatura di V1",
+    "description": "[Collaborazione con ULTRAKILL] Un'armatura ispirata ai meccanismi di un robot che ha combattuto nella Final War di una terra lontana. Si auto-ripara quando infligge danni."
+  },
+  "Octavia001_Armor_5": {
+    "localized_name": "Armatura di V1",
+    "description": "[Collaborazione con ULTRAKILL] Un'armatura ispirata ai meccanismi di un robot che ha combattuto nella Final War di una terra lontana. Si auto-ripara quando infligge danni."
+  },
+  "Octavia002_Armor": {
+    "localized_name": "Armatura di V2",
+    "description": "[Collaborazione con ULTRAKILL] Un'armatura ispirata ai meccanismi di un robot che ha difeso la New Peace di una terra lontana. Compensa la mancanza della capacità di autoriparazione con una corazza più resistente."
+  },
+  "Octavia002_Armor_5": {
+    "localized_name": "Armatura di V2",
+    "description": "[Collaborazione con ULTRAKILL] Un'armatura ispirata ai meccanismi di un robot che ha difeso la New Peace di una terra lontana. Compensa la mancanza della capacità di autoriparazione con una corazza più resistente."
+  },
+  "OctaviaRevolver": {
+    "localized_name": "Revolver del tiratore",
+    "description": "[Collaborazione con ULTRAKILL] Un revolver che continua a fare fuoco senza bisogno di ricaricare, grazie al potere dell'elettricità. Mentre è equipaggiato, lancia una sfera per lanciare una moneta, poi colpiscila col Revolver del tiratore per far rimbalzare i proiettili verso i nemici."
+  },
+  "OctaviaRevolver_2": {
+    "localized_name": "Revolver del tiratore",
+    "description": "[Collaborazione con ULTRAKILL] Un revolver che continua a fare fuoco senza bisogno di ricaricare, grazie al potere dell'elettricità. Mentre è equipaggiato, lancia una sfera per lanciare una moneta, poi colpiscila col Revolver del tiratore per far rimbalzare i proiettili verso i nemici."
+  },
+  "OctaviaRevolver_3": {
+    "localized_name": "Revolver del tiratore",
+    "description": "[Collaborazione con ULTRAKILL] Un revolver che continua a fare fuoco senza bisogno di ricaricare, grazie al potere dell'elettricità. Mentre è equipaggiato, lancia una sfera per lanciare una moneta, poi colpiscila col Revolver del tiratore per far rimbalzare i proiettili verso i nemici."
+  },
+  "OctaviaRevolver_4": {
+    "localized_name": "Revolver del tiratore",
+    "description": "[Collaborazione con ULTRAKILL] Un revolver che continua a fare fuoco senza bisogno di ricaricare, grazie al potere dell'elettricità. Mentre è equipaggiato, lancia una sfera per lanciare una moneta, poi colpiscila col Revolver del tiratore per far rimbalzare i proiettili verso i nemici."
+  },
+  "OctaviaRevolver_5": {
+    "localized_name": "Revolver del tiratore",
+    "description": "[Collaborazione con ULTRAKILL] Un revolver che continua a fare fuoco senza bisogno di ricaricare, grazie al potere dell'elettricità. Mentre è equipaggiato, lancia una sfera per lanciare una moneta, poi colpiscila col Revolver del tiratore per far rimbalzare i proiettili verso i nemici."
+  },
+  "OctaviaShotgun": {
+    "localized_name": "Fucile a canna liscia sparanuclei",
+    "description": "[Collaborazione con ULTRAKILL] Un fucila a canna liscia che continua a fare fuoco senza bisogno di ricaricare, grazie all'energia termica. Lancia una sfera mentre è equipaggiato per lanciare un nucleo, poi colpiscilo col Revolver del tiratore per farlo esplodere."
+  },
+  "OctaviaShotgun_2": {
+    "localized_name": "Fucile a canna liscia sparanuclei",
+    "description": "[Collaborazione con ULTRAKILL] Un fucila a canna liscia che continua a fare fuoco senza bisogno di ricaricare, grazie all'energia termica. Lancia una sfera mentre è equipaggiato per lanciare un nucleo, poi colpiscilo col Revolver del tiratore per farlo esplodere."
+  },
+  "OctaviaShotgun_3": {
+    "localized_name": "Fucile a canna liscia sparanuclei",
+    "description": "[Collaborazione con ULTRAKILL] Un fucila a canna liscia che continua a fare fuoco senza bisogno di ricaricare, grazie all'energia termica. Lancia una sfera mentre è equipaggiato per lanciare un nucleo, poi colpiscilo col Revolver del tiratore per farlo esplodere."
+  },
+  "OctaviaShotgun_4": {
+    "localized_name": "Fucile a canna liscia sparanuclei",
+    "description": "[Collaborazione con ULTRAKILL] Un fucila a canna liscia che continua a fare fuoco senza bisogno di ricaricare, grazie all'energia termica. Lancia una sfera mentre è equipaggiato per lanciare un nucleo, poi colpiscilo col Revolver del tiratore per farlo esplodere."
+  },
+  "OctaviaShotgun_5": {
+    "localized_name": "Fucile a canna liscia sparanuclei",
+    "description": "[Collaborazione con ULTRAKILL] Un fucila a canna liscia che continua a fare fuoco senza bisogno di ricaricare, grazie all'energia termica. Lancia una sfera mentre è equipaggiato per lanciare un nucleo, poi colpiscilo col Revolver del tiratore per farlo esplodere."
   },
   "OctopusGirl_Takoyaki": {
     "localized_name": "Takoyaki di Gloopie",
@@ -4581,7 +4701,7 @@
   },
   "Omelet": {
     "localized_name": "Omelette",
-    "description": "Ricetta che combina Uovo e ketchup. Attacco: +10% per un po' di tempo"
+    "description": "Ricetta che combina Uovo e ketchup. Attacco: +10% per un po' di tempo."
   },
   "Onion": {
     "localized_name": "Cipolla",
@@ -4593,7 +4713,7 @@
   },
   "Opium": {
     "localized_name": "Succo di fiore sospetto",
-    "description": "Una sostanza che fa sentire meglio. Accelera leggermente la velocità delle attività per un po' di tempo, ma consuma altrettanto velocemente punti SAN."
+    "description": "Una bevanda che fa sentire meglio. Accelera leggermente la velocità delle attività per un po' di tempo, ma riduce leggermente i punti SAN."
   },
   "Otomo_Attack_up1": {
     "localized_name": "Fischietto dell'attacco",
@@ -4745,7 +4865,7 @@
   },
   "OverheatRifleBullet": {
     "localized_name": "Proiettili per fucile a sovraccarico",
-    "description": "Munizioni per Fucile a sovraccarico e armi simili."
+    "description": "Proiettili per Fucile a sovraccarico e armi simili."
   },
   "OverheatRifle_2": {
     "localized_name": "Fucile a sovraccarico",
@@ -4777,7 +4897,7 @@
   },
   "PalDopingShotBullet": {
     "localized_name": "Proiettili per pistola potenziante",
-    "description": "Munizioni per Pistola potenziante e armi simili."
+    "description": "Proiettili per Pistola potenziante e armi simili."
   },
   "PalDopingShot_2": {
     "localized_name": "Mega pistola potenziante",
@@ -4973,7 +5093,7 @@
   },
   "PalGenderReverse": {
     "localized_name": "Inverti-Pal",
-    "description": "Un farmaco misterioso capace di cambiare il sesso di un Pal. Si può usare al Tavolo operatorio Pal."
+    "description": "Un farmaco misterioso capace di cambiare il sesso di un Pal. Si può usare al Tavolo operatorio per Pal."
   },
   "PalHealingGrenade": {
     "localized_name": "Granata cura-Pal",
@@ -5025,7 +5145,7 @@
   },
   "PalItem_ToSell_03": {
     "localized_name": "Interiora preziose",
-    "description": "Una cuore che non cessa di battere ottenuto da un Pal. I mercanti offrono cifre notevoli per averlo."
+    "description": "Un cuore che non cessa di battere ottenuto da un Pal. I mercanti offrono cifre notevoli per averlo."
   },
   "PalItem_ToSell_04": {
     "localized_name": "Artiglio prezioso",
@@ -5041,111 +5161,151 @@
   },
   "PalPassiveSkillChange_CoolTimeReduction_Up_1": {
     "localized_name": "Impianto: Stato di quiete",
-    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio Pal."
+    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio per Pal."
   },
   "PalPassiveSkillChange_CoolTimeReduction_Up_2": {
     "localized_name": "Impianto: Impazienza",
-    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio Pal."
+    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio per Pal."
   },
   "PalPassiveSkillChange_CraftSpeed_up1": {
     "localized_name": "Impianto: Diligenza",
-    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio Pal."
+    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio per Pal."
   },
   "PalPassiveSkillChange_CraftSpeed_up2": {
     "localized_name": "Impianto: Spirito artigiano",
-    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio Pal."
+    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio per Pal."
   },
   "PalPassiveSkillChange_CraftSpeed_up3": {
     "localized_name": "Impianto: Tecnica sopraffina",
-    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio Pal."
+    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio per Pal."
   },
   "PalPassiveSkillChange_Deffence_up1": {
     "localized_name": "Impianto: Pelle dura",
-    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio Pal."
+    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio per Pal."
   },
   "PalPassiveSkillChange_Deffence_up2": {
     "localized_name": "Impianto: Corpo robusto",
-    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio Pal."
+    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio per Pal."
   },
   "PalPassiveSkillChange_Deffence_up3": {
     "localized_name": "Impianto: Corpo di diamante",
-    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio Pal."
+    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio per Pal."
   },
   "PalPassiveSkillChange_HatchingSpeed_Up": {
     "localized_name": "Impianto: Filantropo",
-    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio Pal."
+    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio per Pal."
   },
   "PalPassiveSkillChange_MoveSpeed_up_1": {
     "localized_name": "Impianto: Rapidità",
-    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio Pal."
+    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio per Pal."
   },
   "PalPassiveSkillChange_MoveSpeed_up_2": {
     "localized_name": "Impianto: Velocista",
-    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio Pal."
+    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio per Pal."
   },
   "PalPassiveSkillChange_MoveSpeed_up_3": {
     "localized_name": "Impianto: Velocità divina",
-    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio Pal."
+    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio per Pal."
   },
   "PalPassiveSkillChange_Nocturnal": {
     "localized_name": "Impianto: Notturno",
-    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio Pal."
+    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio per Pal."
   },
   "PalPassiveSkillChange_NonKilling": {
     "localized_name": "Impianto: Pietà",
-    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio Pal."
+    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio per Pal."
   },
   "PalPassiveSkillChange_Noukin": {
     "localized_name": "Impianto: Tutto muscoli",
-    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio Pal."
+    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio per Pal."
   },
   "PalPassiveSkillChange_PAL_ALLAttack_up1": {
     "localized_name": "Impianto: Animo prode",
-    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio Pal."
+    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio per Pal."
   },
   "PalPassiveSkillChange_PAL_ALLAttack_up2": {
     "localized_name": "Impianto: Animo feroce",
-    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio Pal."
+    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio per Pal."
   },
   "PalPassiveSkillChange_PAL_ALLAttack_up3": {
     "localized_name": "Impianto: Divinità feroce",
-    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio Pal."
+    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio per Pal."
+  },
+  "PalPassiveSkillChange_PAL_CorporateSlave": {
+    "localized_name": "Impianto: Crumiro",
+    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio per Pal."
   },
   "PalPassiveSkillChange_PAL_FullStomach_Down_1": {
     "localized_name": "Impianto: Frugalità",
-    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio Pal."
+    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio per Pal."
   },
   "PalPassiveSkillChange_PAL_FullStomach_Down_2": {
     "localized_name": "Impianto: Sempre a dieta",
-    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio Pal."
+    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio per Pal."
   },
   "PalPassiveSkillChange_PAL_FullStomach_Down_3": {
     "localized_name": "Impianto: Digiuno totale",
-    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio Pal."
+    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio per Pal."
   },
   "PalPassiveSkillChange_PAL_Sanity_Down_1": {
     "localized_name": "Impianto: Atteggiamento positivo",
-    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio Pal."
+    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio per Pal."
   },
   "PalPassiveSkillChange_PAL_Sanity_Down_2": {
     "localized_name": "Impianto: Stacanovismo",
-    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio Pal."
+    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio per Pal."
   },
   "PalPassiveSkillChange_PAL_Sanity_Down_3": {
     "localized_name": "Impianto: Spirito inamovibile",
-    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio Pal."
+    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio per Pal."
+  },
+  "PalPassiveSkillChange_SalePrice_Up_1": {
+    "localized_name": "Impianto: Nobile",
+    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio per Pal."
+  },
+  "PalPassiveSkillChange_SalePrice_Up_2": {
+    "localized_name": "Impianto: Ottimo pedigree",
+    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio per Pal."
   },
   "PalPassiveSkillChange_Stamina_Up_1": {
     "localized_name": "Impianto: Resistenza infinita",
-    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio Pal."
+    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio per Pal."
   },
   "PalPassiveSkillChange_Stamina_Up_2": {
     "localized_name": "Impianto: Energia della gioventù",
-    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio Pal."
+    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio per Pal."
   },
   "PalPassiveSkillChange_Stamina_Up_3": {
     "localized_name": "Impianto: Moto perpetuo",
-    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio Pal."
+    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio per Pal."
+  },
+  "PalPassiveSkillChange_SwimSpeed_up_1": {
+    "localized_name": "Impianto: Nuoto aggraziato",
+    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio per Pal."
+  },
+  "PalPassiveSkillChange_SwimSpeed_up_2": {
+    "localized_name": "Impianto: Gran nuotatore",
+    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio per Pal."
+  },
+  "PalPassiveSkillChange_TrainerATK_UP_1": {
+    "localized_name": "Impianto: Maestria negli assalti",
+    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio per Pal."
+  },
+  "PalPassiveSkillChange_TrainerDEF_UP_1": {
+    "localized_name": "Impianto: Padronanza della difesa",
+    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio per Pal."
+  },
+  "PalPassiveSkillChange_TrainerLogging_up1": {
+    "localized_name": "Impianto: Maestria falegnameria",
+    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio per Pal."
+  },
+  "PalPassiveSkillChange_TrainerMining_up1": {
+    "localized_name": "Impianto: Maestria estrazione",
+    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio per Pal."
+  },
+  "PalPassiveSkillChange_TrainerWorkSpeed_UP_1": {
+    "localized_name": "Impianto: Gran motivatore",
+    "description": "Un impianto che si innesta nel corpo del Pal e cambia la sua abilità passiva. Se lo possiedi, puoi scegliere l'abilità passiva corrispondente dal Tavolo operatorio per Pal."
   },
   "PalRevive": {
     "localized_name": "Farmaco di rinascita",
@@ -5153,7 +5313,7 @@
   },
   "PalSphere": {
     "localized_name": "Sfera Pal",
-    "description": "Uno strumento da lanciare per catturare i Pal. Prodotta in massa, funziona solo sui Pal di basso livello."
+    "description": "Una sfera con cui è possibile catturare i Pal. Prodotta in massa, funziona solo sui Pal di basso livello."
   },
   "PalSphere_Exotic": {
     "localized_name": "Sfera dell'infinito",
@@ -5173,7 +5333,7 @@
   },
   "PalSphere_Mega": {
     "localized_name": "Sfera mega",
-    "description": "Uno strumento da lanciare per catturare i Pal. Versione migliorata che può catturare più categorie di Pal."
+    "description": "Una sfera con cui è possibile catturare i Pal. Versione migliorata che può catturare più categorie di Pal."
   },
   "PalSphere_Robbery": {
     "localized_name": "Sfera d'assalto",
@@ -5189,7 +5349,7 @@
   },
   "PalSummon": {
     "localized_name": "Stele di Bellanoir",
-    "description": "Stele con una raffigurazione di Bellanoir. Offrendola all'Altare di evocazione è possibile evocare un Pal gigante."
+    "description": "Stele con una raffigurazione di Bellanoir. Offrendola all'Altare di evocazione è possibile evocare un potente Pal."
   },
   "PalSummon_DarkMechaDragon": {
     "localized_name": "Stele di Xenolord",
@@ -5201,11 +5361,11 @@
   },
   "PalSummon_DarkMechaDragon_Parts": {
     "localized_name": "Frammento di Xenolord",
-    "description": "Frammento di una stele raffigurante Xenolord. Combinandone diversi è possibile ricomporre la stele."
+    "description": "Frammento di una stele raffigurante Xenolord. Combinandone diversi, è possibile ricreare la stele."
   },
   "PalSummon_DarkMechaDragon_Parts_2": {
     "localized_name": "Frammento di Xenolord (apoteosi)",
-    "description": "Frammento di roccia colmo del potere di Xenolord. Combinandone diversi è possibile ricomporre una stele."
+    "description": "Frammento di una stele colmo del potere di Xenolord. Combinandone diversi, è possibile ricreare la stele."
   },
   "PalSummon_KingBahamut_Dragon": {
     "localized_name": "Stele di Blazamut Ryu",
@@ -5217,39 +5377,59 @@
   },
   "PalSummon_KingBahamut_Dragon_Parts": {
     "localized_name": "Frammento di Blazamut Ryu",
-    "description": "Frammento di una stele raffigurante KingBahamut Dragon. Combinandone diversi è possibile ricomporre la stele."
+    "description": "Frammento di una stele raffigurante KingBahamut Dragon. Combinandone diversi, è possibile ricreare la stele."
   },
   "PalSummon_KingBahamut_Dragon_Parts_2": {
     "localized_name": "Frammento di Blazamut Ryu (apoteosi)",
-    "description": "Frammento di roccia colmo del potere di KingBahamut Dragon. Combinandone diversi è possibile ricomporre una stele."
+    "description": "Frammento di una stele colmo del potere di KingBahamut Dragon. Combinandone diversi, è possibile ricreare la stele."
+  },
+  "PalSummon_LegendDeer": {
+    "localized_name": "Stele di Hartalis",
+    "description": "Stele con una raffigurazione di Hartalis. Offrendola all'Altare di evocazione è possibile evocare un Hartalis [Lv 65] gigante."
+  },
+  "PalSummon_LegendDeer_2": {
+    "localized_name": "Stele di Hartalis (apoteosi)",
+    "description": "Stele colma del potere di Hartalis. Offrendola all'Altare di evocazione è possibile evocare un Hartalis [Lv ??] dalla forza inimmaginabile."
+  },
+  "PalSummon_LegendDeer_Parts": {
+    "localized_name": "Frammento di Hartalis",
+    "description": "Frammento di una stele raffigurante Hartalis. Combinandone diversi, è possibile ricomporre la stele."
+  },
+  "PalSummon_LegendDeer_Parts_2": {
+    "localized_name": "Frammento di Hartalis (apoteosi)",
+    "description": "Frammento di roccia colmo del potere di Hartalis. Combinandone diversi è possibile ricomporre una stele."
   },
   "PalSummon_NightLady": {
     "localized_name": "Stele di Bellanoir",
-    "description": "Stele con una raffigurazione di Bellanoir. Offrendola all'Altare di evocazione è possibile evocare un Pal gigante [Liv. 30]."
+    "description": "Stele con una raffigurazione di Bellanoir. Offrendola all'Altare di evocazione è possibile evocare un potente Pal: Bellanoir [Liv. 30]."
   },
   "PalSummon_NightLady_Dark": {
     "localized_name": "Stele di Bellanoir Libero",
-    "description": "Stele con una raffigurazione di NightLady Dark. Offrendola all'Altare di evocazione è possibile evocare un Pal gigante [Liv. 50]."
+    "description": "Stele con una raffigurazione di NightLady Dark. Offrendola all'Altare di evocazione è possibile evocare un potentissimo Pal: NightLady Dark [Liv. 50]."
   },
   "PalSummon_NightLady_Dark_2": {
     "localized_name": "Stele di Bellanoir Libero [Apoteosi]",
-    "description": "Stele colma del potere di NightLady Dark. Offrendola all'Altare di evocazione è possibile evocare un NightLady Dark [Liv. ??] dalla forza inimmaginabile."
+    "description": "Stele colma del potere di NightLady Dark. Offrendola all'Altare di evocazione è possibile evocare un Pal dalla forza inimmaginabile: NightLady Dark [Liv. ??]."
   },
   "PalSummon_NightLady_Dark_Parts": {
     "localized_name": "Pietra di Bellanoir Libero",
-    "description": "Pietra con una raffigurazione di NightLady Dark. Combinandone diverse è possibile creare una stele."
+    "description": "Frammento di una stele raffigurante NightLady Dark. Combinandone diversi, è possibile ricreare la stele."
   },
   "PalSummon_NightLady_Dark_Parts_2": {
     "localized_name": "Pietra di Bellanoir Libero [Apoteosi]",
-    "description": "Pietra colma del potere di NightLady Dark. Combinandone diverse è possibile creare una stele."
+    "description": "Frammento di una stele colmo del potere di NightLady Dark. Combinandone diversi, è possibile ricreare la stele."
   },
   "PalSummon_NightLady_Parts": {
     "localized_name": "Pietra di Bellanoir",
-    "description": "Pietra con una raffigurazione di Bellanoir. Combinandone diverse è possibile creare una stele."
+    "description": "Frammento di una stele raffigurante Bellanoir. Combinandone diversi, è possibile ricreare la stele."
   },
   "PalSummon_YakushimaBoss002": {
     "localized_name": "Sigillo celestiale",
     "description": "[Collaborazione con Terraria] Un sigillo con un simbolo ignoto. Offrendolo all'Altare di evocazione, è possibile evocare una potente creatura."
+  },
+  "PalSummon_YakushimaBoss002_2": {
+    "localized_name": "Sigillo celestiale [Maestro]",
+    "description": "Collaborazione con Terraria Un sigillo con un simbolo ignoto. Offrendolo all'Altare di evocazione, è possibile evocare una creatura dalla forza inconcepibile."
   },
   "PalUpgradeStone": {
     "localized_name": "Anima di Pal piccola",
@@ -5407,6 +5587,14 @@
     "localized_name": "Casco in ferro-plastica",
     "description": "Un elmo realizzato in Ferro-plastica. Vanta sia leggerezza che grandi capacità difensive."
   },
+  "PlayerDropItem": {
+    "localized_name": "Prova della vittoria",
+    "description": "Il glorioso stemma di chi ha ottenuto la vittoria. Chi lo possiede, domina i campi di battaglia."
+  },
+  "Player_Outfit_Kigurumi001": {
+    "localized_name": "Armatura da aspirante Depresso",
+    "description": "Il corpo di un costume con le fattezze di Depresso."
+  },
   "PoisonMushroom": {
     "localized_name": "Fungo misterioso",
     "description": "Fungo che non va consumato crudo. Mangiarlo aumenta la sensazione di fame."
@@ -5461,27 +5649,27 @@
   },
   "PumpActionShotgun": {
     "localized_name": "Fucile a pompa",
-    "description": "Un potente fucile con molte munizioni. La sua capacità offensiva a distanza ravvicinata è eccezionale."
+    "description": "Un potente fucile con molti proiettili. La sua capacità offensiva a distanza ravvicinata è eccezionale."
   },
   "PumpActionShotgun_2": {
     "localized_name": "Fucile a pompa",
-    "description": "Un potente fucile con molte munizioni. La sua capacità offensiva a distanza ravvicinata è eccezionale."
+    "description": "Un potente fucile con molti proiettili. La sua capacità offensiva a distanza ravvicinata è eccezionale."
   },
   "PumpActionShotgun_3": {
     "localized_name": "Fucile a pompa",
-    "description": "Un potente fucile con molte munizioni. La sua capacità offensiva a distanza ravvicinata è eccezionale."
+    "description": "Un potente fucile con molti proiettili. La sua capacità offensiva a distanza ravvicinata è eccezionale."
   },
   "PumpActionShotgun_4": {
     "localized_name": "Fucile a pompa",
-    "description": "Un potente fucile con molte munizioni. La sua capacità offensiva a distanza ravvicinata è eccezionale."
+    "description": "Un potente fucile con molti proiettili. La sua capacità offensiva a distanza ravvicinata è eccezionale."
   },
   "PumpActionShotgun_5": {
     "localized_name": "Fucile a pompa",
-    "description": "Un potente fucile con molte munizioni. La sua capacità offensiva a distanza ravvicinata è eccezionale."
+    "description": "Un potente fucile con molti proiettili. La sua capacità offensiva a distanza ravvicinata è eccezionale."
   },
   "Quartz": {
     "localized_name": "Quarzo puro",
-    "description": "Quarzo puro che puoi trovare in luoghi come le montagne innevate. Si usa per produrre Circuito elettrico."
+    "description": "Quarzo puro che puoi trovare in luoghi come i monti innevati. Si usa per produrre Circuito elettrico."
   },
   "QuestItem_Breeder_1": {
     "localized_name": "Pal amato dall'allevatore",
@@ -5495,6 +5683,10 @@
     "localized_name": "Lenzuolo dei ricordi di Zoe",
     "description": "Vecchio lenzuolo che emana ancora una certa fragranza. È un ricordo importante per Zoe."
   },
+  "QuestItem_Zoe_Halloweenskin_1": {
+    "localized_name": "Costume di Halloween di Zoe",
+    "description": "Il costume di Halloween di Zoe. Ne sarà certamente contentissima. Vai a darglielo!"
+  },
   "Quiche": {
     "localized_name": "Quiche di funghi",
     "description": "Un tortino caldo farcito di uova, verdura, funghi e panna. Buonissima anche fredda. Mangiarla sazia e fa calare più lentamente i punti SAN per un po' di tempo."
@@ -5504,24 +5696,24 @@
     "description": "Prezioso cristallo che si trova solo nella terra della rovina. Col passare degli anni, il Paldium si trasforma e inizia a risplendere dei colori dell'arcobaleno."
   },
   "Rankup_1": {
-    "localized_name": "Essenza di Pal universale ☆1",
-    "description": "Una misteriosa essenza che fa sviluppare i talenti del Pal in cui viene iniettata. Può far crescere il suo rango da ☆0 a ☆1. Stranamente, da essa sembrano scaturire voci colme di rancore..."
+    "localized_name": "Frutto astrale del risveglio ☆1",
+    "description": "Un frutto magico estremamente raro. Può far crescere il rango di un Pal da ☆0 a ☆1."
   },
   "Rankup_2": {
-    "localized_name": "Essenza di Pal universale ☆2",
-    "description": "Una misteriosa essenza che fa sviluppare i talenti del Pal in cui viene iniettata. Può far crescere il suo rango da ☆1 a ☆2. Stranamente, da essa sembrano scaturire voci colme di rancore..."
+    "localized_name": "Frutto astrale del risveglio ☆2",
+    "description": "Un frutto magico estremamente raro. Può far crescere il rango di un Pal da ☆1 a ☆2."
   },
   "Rankup_3": {
-    "localized_name": "Essenza di Pal universale ☆3",
-    "description": "Una misteriosa essenza che fa sviluppare i talenti del Pal in cui viene iniettata. Può far crescere il suo rango da ☆2 a ☆3. Stranamente, da essa sembrano scaturire voci colme di rancore..."
+    "localized_name": "Frutto astrale del risveglio ☆3",
+    "description": "Un frutto magico estremamente raro. Può far crescere il rango di un Pal da ☆2 a ☆3."
   },
   "Rankup_4": {
-    "localized_name": "Essenza di Pal universale ☆4",
-    "description": "Una misteriosa essenza che fa sviluppare i talenti del Pal in cui viene iniettata. Può far crescere il suo rango da ☆3 a ☆4. Stranamente, da essa sembrano scaturire voci colme di rancore..."
+    "localized_name": "Frutto astrale del risveglio ☆4",
+    "description": "Un frutto magico estremamente raro. Può far crescere il rango di un Pal da ☆3 a ☆4."
   },
   "Rankup_Arbitrary": {
-    "localized_name": "Essenza di Pal universale concentrata",
-    "description": "Una misteriosa essenza che fa sviluppare i talenti del Pal in cui viene iniettata. Può far crescere il suo rango di un grado. Stranamente, da essa sembrano scaturire voci colme di rancore..."
+    "localized_name": "Frutto astrale del risveglio maturo",
+    "description": "Un frutto magico estremamente raro. Può far crescere il rango di un Pal di 1."
   },
   "ReinforcedArrow": {
     "localized_name": "Freccia potenziata",
@@ -5529,7 +5721,7 @@
   },
   "Relic": {
     "localized_name": "Statua di Lifmunk",
-    "description": "Una misteriosa statua ritraente un Pal, rinvenuta in diversi luoghi di Palpagos. Offrendogli certe statuette, è possibile potenziare il giocatore."
+    "description": "Una misteriosa statua ritraente un Pal, rinvenuta in diversi luoghi di Palpagos. Offrendola a una statua specifica, è possibile potenziare il giocatore."
   },
   "RepairKit": {
     "localized_name": "Kit di riparazione",
@@ -5541,7 +5733,7 @@
   },
   "RoughBullet": {
     "localized_name": "Proiettili mediocri",
-    "description": "Munizioni per Moschetto, Pistola artigianale e armi simili."
+    "description": "Proiettili per Moschetto, Pistola artigianale e armi simili."
   },
   "Ruby": {
     "localized_name": "Rubino",
@@ -6392,7 +6584,7 @@
     "description": "Questo oggetto permette di cavalcare IceNarwhal Fire."
   },
   "SkillUnlock_IceSeal": {
-    "localized_name": "Bardatura di Polapup",
+    "localized_name": "Sella di Polapup",
     "description": "Questo oggetto permette di cavalcare Polapup."
   },
   "SkillUnlock_JetDragon": {
@@ -6425,7 +6617,7 @@
   },
   "SkillUnlock_Kitsunebi_Ice": {
     "localized_name": "Bardatura di Foxparks Cryst",
-    "description": "Bardatura per stringere Kitsunebi Ice. Attivando l'abilità compagno, è possibile usare Kitsunebi Ice per sparare gelo."
+    "description": "Bardatura per maneggiare Kitsunebi Ice. Attivando l'abilità compagno, è possibile usare Kitsunebi Ice per sparare gelo."
   },
   "SkillUnlock_LazyDragon": {
     "localized_name": "Lanciarazzi di Relaxaurus",
@@ -6438,6 +6630,10 @@
   "SkillUnlock_LeafMomonga": {
     "localized_name": "Bardatura di Herbil",
     "description": "Bardatura di Herbil. Con questa, se il giocatore è in fin di vita, Herbil usa i suoi poteri curativi per farlo tornare in campo."
+  },
+  "SkillUnlock_LegendDeer": {
+    "localized_name": "Sella di Hartalis",
+    "description": "Con questo oggetto puoi cavalcare Hartalis e creare una barriera che difende dagli attacchi."
   },
   "SkillUnlock_Manticore": {
     "localized_name": "Sella di Blazehowl",
@@ -6661,7 +6857,7 @@
   },
   "SphereModule_Heavy": {
     "localized_name": "Modulo pesante",
-    "description": "Equipaggiarlo rende più pesanti le sfere, offrendo maggiora capacità di cattura a scapito di una gittata minore."
+    "description": "Equipaggiarlo rende più pesanti le sfere, offrendo maggiore capacità di cattura a scapito di una gittata minore."
   },
   "SphereModule_Homing": {
     "localized_name": "Modulo a ricerca",
@@ -7065,23 +7261,23 @@
   },
   "YakushimaBlade004": {
     "localized_name": "Excalibur",
-    "description": "[Collaborazione con Terraria] Una spada sacra che risplende di luce dorata. Quando colpisce, genera un'onda d'urto intorno a sé che propaga l'attacco per una vasta area."
+    "description": "[Collaborazione con Terraria] Una spada sacra che risplende di luce dorata. Quando colpisce, genera un'onda d'urto intorno a sé."
   },
   "YakushimaBlade004_2": {
     "localized_name": "Excalibur",
-    "description": "[Collaborazione con Terraria] Una spada sacra che risplende di luce dorata. Quando colpisce, genera un'onda d'urto intorno a sé che propaga l'attacco per una vasta area."
+    "description": "[Collaborazione con Terraria] Una spada sacra che risplende di luce dorata. Quando colpisce, genera un'onda d'urto intorno a sé."
   },
   "YakushimaBlade004_3": {
     "localized_name": "Excalibur",
-    "description": "[Collaborazione con Terraria] Una spada sacra che risplende di luce dorata. Quando colpisce, genera un'onda d'urto intorno a sé che propaga l'attacco per una vasta area."
+    "description": "[Collaborazione con Terraria] Una spada sacra che risplende di luce dorata. Quando colpisce, genera un'onda d'urto intorno a sé."
   },
   "YakushimaBlade004_4": {
     "localized_name": "Excalibur",
-    "description": "[Collaborazione con Terraria] Una spada sacra che risplende di luce dorata. Quando colpisce, genera un'onda d'urto intorno a sé che propaga l'attacco per una vasta area."
+    "description": "[Collaborazione con Terraria] Una spada sacra che risplende di luce dorata. Quando colpisce, genera un'onda d'urto intorno a sé."
   },
   "YakushimaBlade004_5": {
     "localized_name": "Excalibur",
-    "description": "[Collaborazione con Terraria] Una spada sacra che risplende di luce dorata. Quando colpisce, genera un'onda d'urto intorno a sé che propaga l'attacco per una vasta area."
+    "description": "[Collaborazione con Terraria] Una spada sacra che risplende di luce dorata. Quando colpisce, genera un'onda d'urto intorno a sé."
   },
   "YakushimaBlade005": {
     "localized_name": "Leggendario Miaospadone",
@@ -7201,7 +7397,7 @@
   },
   "YakushimaIngot002": {
     "localized_name": "Barra di luminite",
-    "description": "[Collaborazione con Terraria] Una risorsa persa da YakushimaBoss002. Emana una potente energia. Il suo bagliore ricorda il chiar di luna."
+    "description": "[Collaborazione con Terraria] Una risorsa persa da RAID YakushimaBoss002. Emana una potente energia. Il suo bagliore ricorda il chiar di luna."
   },
   "YakushimaLantern001": {
     "localized_name": "Bagliore notturno",
