@@ -1003,6 +1003,10 @@
     "localized_name": "터주",
     "description": "물 속성 공격 피해 증가 20.0% 얼음 속성 공격 피해 증가 20.0% 방어 +20.0%"
   },
+  "OctaviaArmorVampire": {
+    "localized_name": "블러드 퓨얼",
+    "description": null
+  },
   "PAL_ALLAttack_down1": {
     "localized_name": "겁쟁이",
     "description": null
@@ -1116,8 +1120,12 @@
     "description": "거래 가격 향상 +5.0%"
   },
   "SalePrice_Up_2": {
-    "localized_name": "윤기나는 털",
+    "localized_name": "좋은 혈통",
     "description": "거래 가격 향상 +3.0%"
+  },
+  "Salvation": {
+    "localized_name": "구세주",
+    "description": null
   },
   "SphereModule_Curve": {
     "localized_name": "스피어 커브 +1",

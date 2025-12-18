@@ -1003,6 +1003,10 @@
     "localized_name": "Lunker",
     "description": "20.0% increase to Water attack damage 20.0% increase to Ice attack damage 20.0% increase to defense."
   },
+  "OctaviaArmorVampire": {
+    "localized_name": "Blood Is Fuel",
+    "description": null
+  },
   "PAL_ALLAttack_down1": {
     "localized_name": "Coward",
     "description": null
@@ -1118,6 +1122,10 @@
   "SalePrice_Up_2": {
     "localized_name": "Fine Furs",
     "description": "Increases the value of items when sold by +3.0%"
+  },
+  "Salvation": {
+    "localized_name": "Savior",
+    "description": null
   },
   "SphereModule_Curve": {
     "localized_name": "Sphere Curve +1",

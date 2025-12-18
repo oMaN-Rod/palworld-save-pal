@@ -1,19 +1,19 @@
 {
   "AirDash_1": {
     "localized_name": "Corrida no ar +1.",
-    "description": "Corrida no ar +1."
+    "description": "Corrida no ar +1"
   },
   "AirDash_2": {
     "localized_name": "Corrida no ar +2.",
-    "description": "Corrida no ar +2."
+    "description": "Corrida no ar +2"
   },
   "AirDash_3": {
     "localized_name": "Corrida no ar +3.",
-    "description": "Corrida no ar +3."
+    "description": "Corrida no ar +3"
   },
   "AirDash_4": {
     "localized_name": "Corrida no ar +4.",
-    "description": "Corrida no ar +4."
+    "description": "Corrida no ar +4"
   },
   "Alien": {
     "localized_name": "Célula Viva Desconhecida",
@@ -385,19 +385,19 @@
   },
   "CoolTimeReduction_Down_1": {
     "localized_name": "Relaxado",
-    "description": "Resfriamento de habilidade ativa aumentado em -15.0%"
+    "description": "Tempo de recarga de habilidades ativas aumentado em -15.0%"
   },
   "CoolTimeReduction_Up_1": {
     "localized_name": "Sossegado",
-    "description": "Resfriamento de habilidade ativa reduzido em 30.0% Ataque +10.0%"
+    "description": "Tempo de recarga de habilidades ativas reduzido em 30.0% Ataque +10.0%"
   },
   "CoolTimeReduction_Up_2": {
     "localized_name": "Impaciente",
-    "description": "Resfriamento de habilidade ativa reduzido em 15.0%"
+    "description": "Tempo de recarga de habilidades ativas reduzido em 15.0%"
   },
   "CoolTimeReduction_Up_3": {
     "localized_name": "Tempestade e Ímpeto",
-    "description": "Resfriamento de habilidade ativa reduzido em 0.0% Ataque +0.0%"
+    "description": "Tempo de recarga de habilidades ativas reduzido em 0.0% Ataque +0.0%"
   },
   "CraftSpeed_down1": {
     "localized_name": "Desajeitado",
@@ -933,19 +933,19 @@
   },
   "JumpCount_Increase1": {
     "localized_name": "Número de pulos +1.",
-    "description": "Número de pulos +1."
+    "description": "Número de pulos +1"
   },
   "JumpCount_Increase2": {
     "localized_name": "Número de pulos +2.",
-    "description": "Número de pulos +2."
+    "description": "Número de pulos +2"
   },
   "JumpCount_Increase3": {
     "localized_name": "Número de pulos +3.",
-    "description": "Número de pulos +3."
+    "description": "Número de pulos +3"
   },
   "JumpPower_Increase": {
     "localized_name": "Fortalece o pulo.",
-    "description": "Fortalece o pulo."
+    "description": "Pulo melhorado"
   },
   "Legend": {
     "localized_name": "Lendário",
@@ -1002,6 +1002,10 @@
   "Nushi": {
     "localized_name": "Senhor das Águas",
     "description": "Aumenta o dano de ataques de água em 20.0%. Aumenta o dano de ataques de gelo em 20.0%. Aumenta a defesa em 20.0%."
+  },
+  "OctaviaArmorVampire": {
+    "localized_name": "Combustível Sangrento",
+    "description": null
   },
   "PAL_ALLAttack_down1": {
     "localized_name": "Medroso",
@@ -1119,6 +1123,10 @@
     "localized_name": "Linhagem Distinta",
     "description": "Preço de venda melhorado: +3.0%"
   },
+  "Salvation": {
+    "localized_name": "Salvação",
+    "description": null
+  },
   "SphereModule_Curve": {
     "localized_name": "Curva de Esfera +1",
     "description": null
@@ -1213,23 +1221,23 @@
   },
   "TrainerATK_UP_1": {
     "localized_name": "Comandante Intrépido",
-    "description": "Aumenta o ataque do jogador em 10.0%."
+    "description": "Aumenta seu ataque em 10.0%."
   },
   "TrainerDEF_UP_1": {
     "localized_name": "Estrategista Inabalável",
-    "description": "Aumenta a defesa do jogador em 10.0%."
+    "description": "Aumenta sua defesa em 10.0%."
   },
   "TrainerLogging_up1": {
     "localized_name": "Lenhador Líder",
-    "description": "Aumenta a eficiência do jogador ao cortar árvores em 25.0%."
+    "description": "Aumenta sua eficiência ao cortar árvores em 25.0%."
   },
   "TrainerMining_up1": {
     "localized_name": "Mineiro-Chefe",
-    "description": "Aumenta a eficiência de garimpo do jogador em 25.0%."
+    "description": "Aumenta sua eficiência de garimpo em 25.0%."
   },
   "TrainerWorkSpeed_UP_1": {
     "localized_name": "Motivador",
-    "description": "Aumenta a velocidade de trabalho do jogador em 25.0%."
+    "description": "Aumenta sua velocidade de trabalho em 25.0%."
   },
   "Vampire": {
     "localized_name": "Vampiro",

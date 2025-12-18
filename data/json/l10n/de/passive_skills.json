@@ -1003,6 +1003,10 @@
     "localized_name": "Teichfürst",
     "description": "Wasserangriffsschaden +20.0 % Eisangriffsschaden +20.0 % Verteidigung +20.0 %"
   },
+  "OctaviaArmorVampire": {
+    "localized_name": "Bluttreibstoff",
+    "description": null
+  },
   "PAL_ALLAttack_down1": {
     "localized_name": "Angsthase",
     "description": null
@@ -1118,6 +1122,10 @@
   "SalePrice_Up_2": {
     "localized_name": "Edles Fell",
     "description": "Verkaufspreis +3.0 %"
+  },
+  "Salvation": {
+    "localized_name": "Erlöser",
+    "description": null
   },
   "SphereModule_Curve": {
     "localized_name": "Sphärenkurve +1",
