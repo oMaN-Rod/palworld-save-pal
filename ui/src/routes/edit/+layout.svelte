@@ -145,7 +145,7 @@
 				Support
 			</a>
 		</div>
-		<div>
+		<div class="overflow-y-auto">
 			{@render children()}
 		</div>
 </div>
