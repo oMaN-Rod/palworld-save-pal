@@ -1,7 +1,7 @@
 {
   "Altar": {
-    "localized_name": "Autel d'appel",
-    "description": "Faire offrande d'une tablette à l'effigie d'un Pal permet d'appeler un puissant Pal sur le camp. Ces combats nécessitent une préparation minutieuse."
+    "localized_name": "Autel d'invocation",
+    "description": "Faire offrande d’une tablette à l’effigie d’un Pal sur l'autel permet d’invoquer un puissant Pal Il est essentiel de bien se préparer avant le combat."
   },
   "Andon": {
     "localized_name": "Lanterne en papier",
@@ -56,15 +56,15 @@
     "description": "Un banc en bois décoratif."
   },
   "BlastFurnace": {
-    "localized_name": "Fournaise de fortune",
+    "localized_name": "Fournaise de Fortune",
     "description": "Permet de raffiner les Lingot de métal. La qualité est médiocre et le processus est lent. Un Pal de feu est requis pour allumer le feu."
   },
   "BlastFurnace2": {
-    "localized_name": "Fournaise améliorée",
-    "description": "Permet de raffiner les Lingot de métal raffiné. La qualité s'est améliorée, mais la vitesse reste insuffisante. Un Pal de feu est requis pour allumer le feu."
+    "localized_name": "Fournaise Améliorée",
+    "description": "Permet de raffiner les Lingot de Métal Raffiné. La qualité s'est améliorée, mais la vitesse reste insuffisante. Un Pal de feu est requis pour allumer le feu."
   },
   "BlastFurnace3": {
-    "localized_name": "Fournaise électrique",
+    "localized_name": "Fournaise Électrique",
     "description": "Permet de raffiner les Lingot de Paluminium. Nécessite de l'électricité, mais permet un raffinage plus rapide. Un Pal de feu est requis pour allumer le feu."
   },
   "BlastFurnace4": {
@@ -72,7 +72,7 @@
     "description": "Permet de raffiner l'Hexolite. Sa taille gigantesque permet à plusieurs Pals de raffiner ensemble. Un Pal de feu est requis pour allumer le feu."
   },
   "Bonsai": {
-    "localized_name": "Arbre nain",
+    "localized_name": "Bonsai",
     "description": "Un arbre nain décoratif. À utiliser dans les constructions de style japonais."
   },
   "Box01_Iron": {
@@ -97,7 +97,7 @@
   },
   "BuildableGoddessStatue": {
     "localized_name": "Statue de puissance",
-    "description": "Une statue en pierre mentionnée dans les légendes de l'île de Palpagos. Offre un Statue de Lifmunk pour recevoir un pouvoir mystérieux."
+    "description": "Une statue en pierre mentionnée dans les légendes de l'île de Palpagos. Offre une Statue de Lifmunk pour recevoir un pouvoir mystérieux."
   },
   "Byobu": {
     "localized_name": "Paravent",
@@ -148,7 +148,7 @@
     "description": "Une chaise verte ancienne en bois décorative."
   },
   "CharacterRankUp": {
-    "localized_name": "Capsule d'enrichissement pour Pal",
+    "localized_name": "Capsule d’Essence de Pal",
     "description": "Une installation permettant d'augmenter le rang d’un Pal. Un extrait concentré obtenu d’un Pal de même type peut lui être injecté pour lui permettre de surpasser ses limites physiques."
   },
   "Clock01_Stone": {
@@ -173,7 +173,7 @@
   },
   "ConservationGroupBannerB": {
     "localized_name": "Bannière de la Ligue pour la Protection des Pals",
-    "description": "Un étendard de la LPP décoratif."
+    "description": "Bannière décorative de la Ligue pour la Protection des Pals."
   },
   "Container01_Iron": {
     "localized_name": "Grosse boîte",
@@ -184,7 +184,7 @@
     "description": "Une installation nécessaire pour cuisiner. L'utilisation d'une marmite permet de préparer une plus grande variété de plats. Un Pal de feu est requis pour allumer le feu."
   },
   "Cooler": {
-    "localized_name": "Climatiseur à glace",
+    "localized_name": "Climatiseur",
     "description": "Une installation pour faire baisser la température sur le camp en y envoyant de l'air froid. La différence n'est pas flagrante, mais suffisante pour contrer une chaleur modérée. Un Pal de Glace est requis pour s'occuper du refroidissement."
   },
   "CoolerBox": {
@@ -296,7 +296,7 @@
     "description": "Une installation pour faire monter la température sur le camp en y envoyant de l'air chaud. L'utilisation de l'électricité permet d'obtenir une température assez élevée. Un Pal de feu est requis pour allumer le feu."
   },
   "ElectricKitchen": {
-    "localized_name": "Cuisine électrique",
+    "localized_name": "Cuisine Électrique",
     "description": "Une installation nécessaire pour cuisiner. De l'électricité est requise, mais elle permet de préparer rapidement une grande quantité de plats différents. Un Pal de feu est requis pour allumer le feu."
   },
   "EnergyStorage_Electric": {
@@ -308,20 +308,20 @@
     "description": "Une structure pour envoyer les Pals en expédition dans des donjons. Les Pals dépêchés combattront et rapporteront diverses ressources sur le camp."
   },
   "Factory_Hard_01": {
-    "localized_name": "Établi de qualité",
-    "description": "Une Établi de qualité pour créer objets et protections. L'espace encore restreint ne permet pas de travailler efficacement. Un Pal habile dans les travaux manuels est requis."
+    "localized_name": "Établi de Qualité",
+    "description": "Un petit atelier destiné à la fabrication d’objets et d’équipements. L’espace limité rend la production peu efficace. Un Pal habile dans les travaux manuels est requis."
   },
   "Factory_Hard_02": {
-    "localized_name": "Chaîne de production",
-    "description": "Une usine pour créer objets et protections. La répartition des tâches permet de travailler plus efficacement. Un Pal habile dans les travaux manuels est requis."
+    "localized_name": "Chaîne de Production",
+    "description": "Une petite usine de fabrication d’objets et d’équipements. La répartition des tâches permet d’améliorer l’efficacité du travail. Un Pal habile dans les travaux manuels est requis."
   },
   "Factory_Hard_03": {
-    "localized_name": "Chaîne de production II",
-    "description": "Une usine pour créer objets et protections. La délégation des tâches permet de travailler encore plus rapidement. Un Pal habile dans les travaux manuels est requis."
+    "localized_name": "Chaîne de Production II",
+    "description": "Une usine perfectionnée pour la fabrication d’objets et d’équipements. La délégation des tâches permet une production rapide et soutenue. Un Pal habile dans les travaux manuels est requis."
   },
   "Factory_Hard_04": {
-    "localized_name": "Usine d'une Civilisation Avancée",
-    "description": "Une usine pour fabriquer objets et protections. L'ajout de machines performantes a permis d'accélérer la production. Un Pal habile dans les travaux manuels est requis."
+    "localized_name": "Chaîne de Production Avancée",
+    "description": "Une usine hautement mécanisée pour la fabrication d’objets et d’équipements. Ses machines de pointe permettent une production ultra-rapide. Un Pal habile dans les travaux manuels est requis."
   },
   "Factory_Money": {
     "localized_name": "Usine de fabrication de pièces d'or",
@@ -403,21 +403,53 @@
     "localized_name": "Sac poubelle",
     "description": "Un sac poubelle décoratif."
   },
+  "Glass_DiagonalWall": {
+    "localized_name": "Mur diagonal en verre",
+    "description": "Un mur diagonal à construire sur une base triangulaire pour repousser les intrus. Sa composition en verre le rend très robuste."
+  },
   "Glass_DoorWall": {
     "localized_name": "Mur avec porte en verre",
     "description": "Une porte à construire sur une base pour servir d'entrée. Sa composition en verre la rend très robuste."
   },
   "Glass_Fence": {
-    "localized_name": "Clôture en Verre",
+    "localized_name": "Clôture en verre",
     "description": "Une clôture à installer sur une base ou un toit pour éviter les chutes. Le fait qu'elle soit en verre dur la rend très solide."
+  },
+  "Glass_PyramidRoof": {
+    "localized_name": "Toit pyramide en verre",
+    "description": "Un toit conique à construire sur des murs pour contrer les éléments. Sa composition en verre le rend très robuste."
   },
   "Glass_SlantedRoof": {
     "localized_name": "Toit incliné en verre",
     "description": "Un toit incliné à construire sur des murs pour contrer les éléments. Sa composition en verre le rend très robuste."
   },
+  "Glass_SlopedRoofCorner": {
+    "localized_name": "Toit triangulaire incliné en verre",
+    "description": "Un toit triangulaire incliné à placer sur un mur diagonal pour se protéger des éléments. Sa composition en verre le rend étonnamment robuste."
+  },
+  "Glass_TriangleFoundation": {
+    "localized_name": "Base triangulaire en verre",
+    "description": "Une base triangulaire sur laquelle construire un mur ou une installation. Sa composition en verre la rend très robuste."
+  },
+  "Glass_TriangleRoof": {
+    "localized_name": "Toit triangulaire en verre",
+    "description": "Un toit triangulaire à construire sur des murs pour contrer les éléments. Sa composition en verre le rend très robuste."
+  },
+  "Glass_TriangleStairsCorner": {
+    "localized_name": "Toit d'angle en verre",
+    "description": "Un toit d'angle à construire sur des murs pour contrer les éléments. Sa composition en verre le rend très robuste."
+  },
   "Glass_TriangleWall": {
     "localized_name": "Mur triangulaire en verre",
     "description": "Un mur triangulaire à construire sur une base. Sa composition en verre le rend très robuste."
+  },
+  "Glass_TriangleWallReverse": {
+    "localized_name": "Mur triangulaire en verre (Inversé)",
+    "description": "Un mur triangulaire inversé à construire sur une base. Sa composition en verre le rend très robuste."
+  },
+  "Glass_WallGate": {
+    "localized_name": "Arche en verre",
+    "description": "Une arche destinée au passage des Pals, à construire sur une base. Sa composition en verre le rend très robuste."
   },
   "Glass_WindowWall": {
     "localized_name": "Mur avec fenêtres en verre",
@@ -468,7 +500,7 @@
     "description": "Une pierre tombale sur laquelle on peut écrire. À utiliser à des fins d'archivage."
   },
   "Heater": {
-    "localized_name": "Chauffage à flammes",
+    "localized_name": "Chauffage",
     "description": "Une installation pour faire monter la température sur le camp en y envoyant de l'air chaud. La différence n'est pas flagrante, mais suffisante pour contrer un froid modéré. Un Pal de feu est requis pour allumer le feu."
   },
   "HugeKitchen": {
@@ -491,9 +523,41 @@
     "localized_name": "Broyeur à glace",
     "description": "Une installation permettant de broyer du Minerai de métal pour obtenir d'autres matériaux. Une alimentation en électricité ainsi qu'un Pal avec la capacité Réfrigération sont requis pour profiter de sa grande efficacité."
   },
+  "Iron_DiagonalWall": {
+    "localized_name": "Mur diagonal en métal",
+    "description": "Un mur diagonal à construire sur une base triangulaire pour repousser les intrus. Sa composition en métal le rend très solide."
+  },
   "Iron_Fence": {
-    "localized_name": "Clôture en Métal",
+    "localized_name": "Clôture en métal",
     "description": "Une clôture à installer sur une base ou un toit pour éviter les chutes. Le fait qu'elle soit en métal la rend très solide."
+  },
+  "Iron_PyramidRoof": {
+    "localized_name": "Toit pyramide en métal",
+    "description": "Un toit conique à construire sur des murs pour contrer les éléments. Sa composition en métal le rend très solide."
+  },
+  "Iron_SlopedRoofCorner": {
+    "localized_name": "Toit triangulaire incliné en métal",
+    "description": "Un toit triangulaire incliné à placer sur un mur diagonal pour se protéger des éléments. Sa composition en métal le rend très solide."
+  },
+  "Iron_TriangleFoundation": {
+    "localized_name": "Base triangulaire en métal",
+    "description": "Une base triangulaire sur laquelle construire un mur ou une installation. Sa composition en métal la rend très solide."
+  },
+  "Iron_TriangleRoof": {
+    "localized_name": "Toit triangulaire en métal",
+    "description": "Un toit triangulaire à construire sur des murs pour contrer les éléments. Sa composition en métal le rend très solide."
+  },
+  "Iron_TriangleStairsCorner": {
+    "localized_name": "Toit d'angle en métal",
+    "description": "Un toit d'angle à construire sur des murs pour contrer les éléments. Sa composition en métal le rend très solide."
+  },
+  "Iron_TriangleWallReverse": {
+    "localized_name": "Mur triangulaire en métal (Inversé)",
+    "description": "Un mur triangulaire inversé à construire sur une base. Sa composition en métal le rend très solide."
+  },
+  "Iron_WallGate": {
+    "localized_name": "Arche en métal",
+    "description": "Une arche destinée au passage des Pals, à construire sur une base. Sa composition en métal le rend très solide."
   },
   "Irori": {
     "localized_name": "Foyer japonais",
@@ -516,7 +580,7 @@
     "description": "Permet de stocker des objets. Sa matière en métal raffiné le rend très robuste. L'idéal pour déposer ses biens l'esprit tranquille."
   },
   "ItemChest_04": {
-    "localized_name": "Coffre d'une civilisation avancée",
+    "localized_name": "Coffre Avancée",
     "description": "Permet de stocker des objets. Allie robustesse et espace de stockage. L'idéal pour déposer ses biens l'esprit tranquille."
   },
   "Ivy01": {
@@ -531,6 +595,10 @@
     "localized_name": "Lierre mural horizontal",
     "description": "Du lierre horizontal décoratif. Peut être installé sur un mur."
   },
+  "JapaneseStyle_DiagonalWall": {
+    "localized_name": "Mur diagonal japonais",
+    "description": "Un mur diagonal à construire sur une base triangulaire pour repousser les intrus. Son style japonais permet des constructions raffinées."
+  },
   "JapaneseStyle_DoorWall_01": {
     "localized_name": "Mur coulissant japonais A",
     "description": "Une porte d'entrée à construire sur une base. Son style japonais permet des constructions raffinées"
@@ -544,20 +612,52 @@
     "description": "Un fusuma intérieur coulissant à construire sur une base. Son style japonais permet des constructions raffinées."
   },
   "JapaneseStyle_Fence": {
-    "localized_name": "Clôture de style Japonais",
+    "localized_name": "Clôture de style japonais",
     "description": "Une clôture à installer sur une base ou un toit pour éviter les chutes. Son style japonais permet des constructions exotiques."
   },
   "JapaneseStyle_Pillar": {
     "localized_name": "Pilier japonais",
     "description": "Un pilier pour soutenir les bâtiments. Son style japonais permet des constructions raffinées."
   },
+  "JapaneseStyle_PyramidRoof": {
+    "localized_name": "Toit pyramide japonais",
+    "description": "Un toit conique à placer sur des murs pour contrer les éléments. Son style japonais permet des constructions raffinées."
+  },
   "JapaneseStyle_SlantedRoof": {
     "localized_name": "Toit incliné japonais",
     "description": "Un toit incliné à placer sur des murs pour contrer les éléments. Son style japonais permet des constructions raffinées."
   },
+  "JapaneseStyle_SlopedRoofCorner": {
+    "localized_name": "Toit triangulaire incliné japonais",
+    "description": "Un toit triangulaire incliné à placer sur un mur diagonal pour se protéger des éléments. Son style japonais permet des constructions élégantes."
+  },
+  "JapaneseStyle_TriangleFoundation": {
+    "localized_name": "Base triangulaire japonaise",
+    "description": "Une base triangulaire sur laquelle construire un mur ou une installation. Son style japonais permet des constructions raffinées."
+  },
+  "JapaneseStyle_TriangleRoof_01": {
+    "localized_name": "Toit triangulaire japonais A",
+    "description": "Un toit triangulaire à placer sur des murs pour contrer les éléments. Sa surface est en tatami. Son style japonais permet des constructions raffinées."
+  },
+  "JapaneseStyle_TriangleRoof_02": {
+    "localized_name": "Toit triangulaire japonais B",
+    "description": "Un toit triangulaire à placer sur des murs pour contrer les éléments. Sa surface est en tuiles. Son style japonais permet des constructions raffinées."
+  },
+  "JapaneseStyle_TriangleStairsCorner_01": {
+    "localized_name": "Toit d'angle japonais",
+    "description": "Un toit d'angle à placer sur des murs pour contrer les éléments. Son style japonais permet des constructions raffinées."
+  },
   "JapaneseStyle_TriangleWall": {
     "localized_name": "Mur d'angle japonais",
     "description": "Un mur triangulaire à construire sur une base. Son style japonais permet des constructions raffinées."
+  },
+  "JapaneseStyle_TriangleWallReverse": {
+    "localized_name": "Mur triangulaire japonais (Inversé)",
+    "description": "Un mur triangulaire inversé à construire sur une base. Son style japonais permet des constructions raffinées."
+  },
+  "JapaneseStyle_WallGate": {
+    "localized_name": "Arche japonaise",
+    "description": "Une arche destinée au passage des Pals, à construire sur une base. Son style japonais permet des constructions raffinées."
   },
   "JapaneseStyle_WindowWall": {
     "localized_name": "Mur avec fenêtre japonais",
@@ -680,19 +780,19 @@
     "description": "Un grand lit confortable pour Pal. Les Pals l'utilisent la nuit ou quand ils sont blessés. Même les grands Pals peuvent y dormir comme des bébés."
   },
   "MedicalPalBed_05": {
-    "localized_name": "Capsule pour Pal d'une civilisation avancée",
+    "localized_name": "Capsule pour Pal Avancée",
     "description": "Une capsule de rétablissement pour Pal. Les Pals l'utilisent la nuit ou quand ils sont blessés. Cette innovation technologique assure un meilleur rétablissement."
   },
   "MedicineFacility_01": {
-    "localized_name": "Table pharmaceutique archaïque",
+    "localized_name": "Table Pharmaceutique Archaïque",
     "description": "Une installation qui fabrique des médicaments pour soigner les maladies des Pals. Seuls les traitements de base sont disponibles pour le moment. Mieux vaut confier ces tâches aux Pals à vocation pharmaceutique."
   },
   "MedicineFacility_02": {
-    "localized_name": "Table pharmaceutique électrique",
+    "localized_name": "Table Pharmaceutique Électrique",
     "description": "Une installation qui fabrique des médicaments pour soigner les maladies des Pals. De l'électricité est nécessaire, mais des médicaments de meilleure qualité peuvent être produits. Mieux vaut confier ces tâches aux Pals à vocation pharmaceutique."
   },
   "MedicineFacility_03": {
-    "localized_name": "Table pharmaceutique d'une civilisation avancée",
+    "localized_name": "Table Pharmaceutique Avancée",
     "description": "Une installation qui fabrique des médicaments pour soigner les maladies des Pals. Une technologie futuriste permet de produire des médicaments inconnus. Mieux vaut confier ces tâches aux Pals à vocation pharmaceutique."
   },
   "Metal_DoorWall": {
@@ -732,7 +832,7 @@
     "description": "Un mur à construire sur une base pour repousser les intrus. Sa composition en métal le rend très solide."
   },
   "MiningTool": {
-    "localized_name": "Pioche et casque",
+    "localized_name": "Wagon minier",
     "description": "À installer sur le camp pour accroître la vitesse d'extraction. En installer 2 ou plus n'octroie aucun effet supplémentaire."
   },
   "Mirror01_Stone": {
@@ -772,11 +872,11 @@
     "description": "Une installation requise pour extraire le Pétrole brut des champs pétrolifères. Doit être grandement alimentée en électricité pour fonctionner."
   },
   "OlympicCauldron": {
-    "localized_name": "Marmite",
+    "localized_name": "Brasero",
     "description": "À installer sur le camp pour accroître la vitesse d'allumage. En installer 2 ou plus n'octroie aucun effet supplémentaire."
   },
   "OperatingTable": {
-    "localized_name": "Table d'opération de Pal",
+    "localized_name": "Table d'opération pour Pals",
     "description": "Permet d'opérer les Pals pour modifier leur sexe ou leur compétence passive."
   },
   "PalBooth": {
@@ -832,11 +932,11 @@
     "description": "Une plante décorative en pot."
   },
   "PlayerBed_02": {
-    "localized_name": "Lit de fortune",
+    "localized_name": "Lit de Fortune",
     "description": "Un lit usé pour humain. Il permet de dormir la nuit ou en cas de blessure. Il est cependant impossible de s'y reposer en l'absence de toit."
   },
   "PlayerBed_03": {
-    "localized_name": "Lit de qualité",
+    "localized_name": "Lit de Qualité",
     "description": "Un lit moelleux et confortable pour humain. Il permet de dormir la nuit ou en cas de blessure. Il est cependant impossible s'y reposer en l'absence de toit."
   },
   "Police_Banner": {
@@ -887,40 +987,72 @@
     "localized_name": "Bureau de laboratoire",
     "description": "Bureau style Laboratoire, destiné à la décoration."
   },
+  "SF_DiagonalWall": {
+    "localized_name": "Mur diagonal futuriste",
+    "description": "Un mur diagonal à construire sur une base pour repousser les intrus. Permet de bâtir dans un style moderne et futuriste."
+  },
   "SF_DoorWall": {
-    "localized_name": "Porte Futuriste",
+    "localized_name": "Porte futuriste",
     "description": "Une porte à construire sur une base pour servir d’entrée. Permet de bâtir dans un style moderne et futuriste."
   },
   "SF_Fence": {
-    "localized_name": "Clôture Futuriste",
+    "localized_name": "Clôture futuriste",
     "description": "Une clôture à installer sur une base ou un toit pour éviter les chutes. Son style futuriste permet des constructions modernes."
   },
+  "SF_PyramidRoof": {
+    "localized_name": "Toit pyramide futuriste",
+    "description": "Un toit conique à placer sur des murs pour contrer les éléments. Permet de bâtir dans un style moderne et futuriste."
+  },
   "SF_SlantedRoof": {
-    "localized_name": "Toit incliné Futuriste",
+    "localized_name": "Toit incliné futuriste",
     "description": "Un toit incliné à placer sur des murs pour contrer les éléments. Permet de bâtir dans un style moderne et futuriste."
   },
+  "SF_SlopedRoofCorner": {
+    "localized_name": "Toit triangulaire incliné futuriste",
+    "description": "Un toit triangulaire incliné à placer sur un mur diagonal pour se protéger des éléments. Idéal pour bâtir dans un style moderne et futuriste."
+  },
+  "SF_TriangleFoundation": {
+    "localized_name": "Base triangulaire futuriste",
+    "description": "Une base triangulaire sur laquelle construire un mur ou une installation. Permet de bâtir dans un style moderne et futuriste."
+  },
+  "SF_TriangleRoof": {
+    "localized_name": "Toit triangulaire futuriste",
+    "description": "Un toit triangulaire à placer sur des murs pour contrer les éléments. Permet de bâtir dans un style moderne et futuriste."
+  },
+  "SF_TriangleStairsCorner": {
+    "localized_name": "Toit d'angle futuriste",
+    "description": "Un toit d'angle à placer sur des murs pour contrer les éléments. Permet de bâtir dans un style moderne et futuriste."
+  },
   "SF_TriangleWall": {
-    "localized_name": "Mur triangulaire Futuriste",
+    "localized_name": "Mur triangulaire futuriste",
     "description": "Un mur triangulaire à construire sur une base. Permet de bâtir dans un style moderne et futuriste."
   },
+  "SF_TriangleWallReverse": {
+    "localized_name": "Mur triangulaire futuriste (Inversé)",
+    "description": "Un mur triangulaire inversé à construire sur une base. Permet de bâtir dans un style moderne et futuriste."
+  },
+  "SF_WallGate": {
+    "localized_name": "Arche futuriste",
+    "description": "Une arche destinée au passage des Pals, à construire sur une base. Permet de bâtir dans un style moderne et futuriste."
+  },
   "SF_WindowWall": {
-    "localized_name": "Mur avec fenêtre Futuriste",
+    "localized_name": "Mur avec fenêtre futuriste",
     "description": "Un mur avec fenêtre à construire sur une base pour repousser les intrus. Permet de bâtir dans un style moderne et futuriste."
   },
   "SF_foundation": {
-    "localized_name": "Base Futuriste",
+    "localized_name": "Base futuriste",
     "description": "Une base sur laquelle construire un mur ou une installation. Permet de bâtir dans un style moderne et futuriste."
   },
   "SF_roof": {
-    "localized_name": "Toit Futuriste",
+    "localized_name": "Toit futuriste",
     "description": "Un toit à placer sur des murs pour contrer les éléments. Permet de bâtir dans un style moderne et futuriste."
   },
   "SF_stair": {
-    "localized_name": "Escalier Futuriste",
+    "localized_name": "Escalier futuriste",
     "description": "Un escalier à placer sur une base ou sous un toit. Permet de bâtir dans un style moderne et futuriste."
   },
   "SF_wall": {
-    "localized_name": "Mur Futuriste",
+    "localized_name": "Mur futuriste",
     "description": "Un mur à construire sur une base pour repousser les intrus. Permet de bâtir dans un style moderne et futuriste."
   },
   "SanityDecrease1": {
@@ -1072,20 +1204,20 @@
     "description": "Une installation où les Pals du camp fatigués peuvent se reposer. Son atmosphère japonaise apaisante restaure encore plus de points MEN."
   },
   "SphereFactory_Black_01": {
-    "localized_name": "Établi pour sphères",
+    "localized_name": "Établi pour Sphères",
     "description": "Un établi pour sphères permettant de capturer des Pals. L'espace encore restreint ne permet pas de fabriquer des sphères efficacement. Un Pal habile dans les travaux manuels est requis."
   },
   "SphereFactory_Black_02": {
-    "localized_name": "Chaîne de production de sphères",
-    "description": "Une usine de sphères pour la capture des Pals. La répartition des tâches permet de travailler plus efficacement. Un Pal habile dans les travaux manuels est requis."
+    "localized_name": "Chaîne de Production de Sphères",
+    "description": "Une petite usine de sphères pour la capture des Pals. L’organisation du travail améliore nettement l’efficacité de production. Un Pal habile dans les travaux manuels est requis."
   },
   "SphereFactory_Black_03": {
-    "localized_name": "Chaîne de production de sphères II",
-    "description": "Une usine de sphères pour la capture des Pals. La délégation des tâches permet de fabriquer des sphères à la vitesse de l'éclair. Un Pal habile dans les travaux manuels est requis."
+    "localized_name": "Chaîne de Production de Sphères II",
+    "description": "Une usine perfectionnée pour la capture des Pals. La coordination des postes permet une fabrication à grande vitesse. Un Pal habile dans les travaux manuels est requis."
   },
   "SphereFactory_Black_04": {
-    "localized_name": "Usine de sphères d'une civilisation avancée",
-    "description": "Une usine de sphères pour la capture des Pals. L'automatisation avancée permet une fabrication ultra-rapide des sphères. Un Pal habile dans les travaux manuels est requis."
+    "localized_name": "Chaîne de Production de Sphères Avancée",
+    "description": "Une usine de sphères hautement automatisée pour la capture des Pals. Son système perfectionné permet une production ultra-rapide. Un Pal habile dans les travaux manuels est requis."
   },
   "StationDeforest2": {
     "localized_name": "Scierie",
@@ -1095,25 +1227,57 @@
     "localized_name": "Carrière",
     "description": "Une installation pour produire de la Pierre. Son extraction demande une grande force physique pour extraire la Pierre. Laisse faire les Pals doué dans l'extraction."
   },
+  "Stone_DiagonalWall": {
+    "localized_name": "Mur diagonal en pierre",
+    "description": "Un mur diagonal à construire sur une base triangulaire pour repousser les intrus. Sa composition en pierre le rend assez robuste."
+  },
   "Stone_DoorWall": {
     "localized_name": "Porte en pierre",
     "description": "Une porte à construire sur une base pour servir d'entrée. Sa composition en pierre la rend assez robuste."
   },
   "Stone_Fence": {
-    "localized_name": "Clôture en Pierre",
+    "localized_name": "Clôture en pierre",
     "description": "Une clôture à installer sur une base ou un toit pour éviter les chutes. Le fait qu'elle soit en pierre la rend assez solide."
   },
   "Stone_Gate": {
     "localized_name": "Portail en pierre",
     "description": "Une porte que même les gros Pals peuvent franchir. Sa composition en pierre la rend assez robuste."
   },
+  "Stone_PyramidRoof": {
+    "localized_name": "Toit pyramide en pierre",
+    "description": "Un toit conique à construire sur des murs pour contrer les éléments. Sa composition en pierre le rend assez robuste."
+  },
   "Stone_SlantedRoof": {
     "localized_name": "Toit incliné en pierre",
     "description": "Un toit incliné à placer sur des murs pour contrer les éléments. Sa composition en pierre le rend assez robuste."
   },
+  "Stone_SlopedRoofCorner": {
+    "localized_name": "Toit triangulaire incliné en pierre",
+    "description": "Un toit triangulaire incliné à placer sur un mur diagonal pour se protéger des éléments. Sa composition en pierre le rend assez robuste."
+  },
+  "Stone_TriangleFoundation": {
+    "localized_name": "Base triangulaire en pierre",
+    "description": "Une base triangulaire sur laquelle construire un mur ou une installation. Sa composition en pierre la rend assez robuste."
+  },
+  "Stone_TriangleRoof": {
+    "localized_name": "Toit triangulaire en pierre",
+    "description": "Un toit triangulaire à construire sur des murs pour contrer les éléments. Sa composition en pierre le rend assez robuste."
+  },
+  "Stone_TriangleStairsCorner": {
+    "localized_name": "Toit d'angle en pierre",
+    "description": "Un toit d'angle à construire sur des murs pour contrer les éléments. Sa composition en pierre le rend assez robuste."
+  },
   "Stone_TriangleWall": {
     "localized_name": "Mur triangulaire en pierre",
     "description": "Un mur triangulaire à construire sur une base. Sa composition en pierre le rend assez robuste."
+  },
+  "Stone_TriangleWallReverse": {
+    "localized_name": "Mur triangulaire en pierre (Inversé)",
+    "description": "Un mur triangulaire inversé à construire sur une base. Sa composition en pierre le rend assez robuste."
+  },
+  "Stone_WallGate": {
+    "localized_name": "Arche en pierre",
+    "description": "Une arche destinée au passage des Pals, à construire sur une base. Sa composition en pierre le rend assez robuste."
   },
   "Stone_WindowWall": {
     "localized_name": "Mur avec fenêtres en pierre",
@@ -1224,7 +1388,7 @@
     "description": "À installer sur le camp pour accroître la vitesse du travail manuel. En installer 2 ou plus n'octroie aucun effet supplémentaire."
   },
   "Torch": {
-    "localized_name": "Torche à poser",
+    "localized_name": "Torche sur pied",
     "description": "Une source de lumière pour éclairer le camp, même dans l'obscurité de la nuit. Un Pal de feu est requis pour allumer le feu."
   },
   "Toro": {
@@ -1332,27 +1496,27 @@
     "description": "Torche allumée vénérée par les adeptes de la de la confrérie de la Flamme Éternelle. Source lumineuse pouvant être placée sur un mur. Un Pal de feu est requis pour allumer le feu."
   },
   "WeaponFactory_Dirty_01": {
-    "localized_name": "Établi pour armes",
-    "description": "Un établi pour fabriquer armes et munitions. L'espace encore restreint ne permet pas la fabrication d'armes de qualité. Un Pal habile dans les travaux manuels est requis."
+    "localized_name": "Établi pour Armes",
+    "description": "Un petit établi destiné à la fabrication d’armes et de munitions. L’espace limité empêche de produire des armes de qualité. Un Pal habile dans les travaux manuels est requis."
   },
   "WeaponFactory_Dirty_02": {
-    "localized_name": "Chaîne de production d'armes",
-    "description": "Une usine pour produire armes et munitions. La répartition des tâches permet une production plus efficace. Un Pal habile dans les travaux manuels est requis."
+    "localized_name": "Chaîne de Production d'Armes",
+    "description": "Une petite usine de fabrication d’armes et de munitions. La répartition des tâches améliore nettement l’efficacité de la production. Un Pal habile dans les travaux manuels est requis."
   },
   "WeaponFactory_Dirty_03": {
-    "localized_name": "Chaîne de production d'armes II",
-    "description": "Une usine pour produire armes et munitions. La délégation des tâches permet de produire les meilleures armes possibles. Un Pal habile dans les travaux manuels est requis."
+    "localized_name": "Chaîne de Production d'Armes II",
+    "description": "Une usine perfectionnée pour la fabrication d’armes et de munitions. La délégation des tâches permet de concevoir des armes d’excellente qualité. Un Pal habile dans les travaux manuels est requis."
   },
   "WeaponFactory_Dirty_04": {
-    "localized_name": "Usine d'armes d'une Civilisation Avancée",
-    "description": "Une usine pour fabriquer armes et munitions. L'ajout de machines performantes a permis d'accélérer la production des armes. Un Pal habile dans les travaux manuels est requis."
+    "localized_name": "Chaîne de Production d'Armes Avancée",
+    "description": "Une usine hautement mécanisée pour la fabrication d’armes et de munitions. Ses machines de pointe permettent une production rapide et massive. Un Pal habile dans les travaux manuels est requis."
   },
   "Wire_Fence": {
     "localized_name": "Clôture Grillagée",
     "description": "Une clôture avec barbelés décorative."
   },
   "Wood_Fence": {
-    "localized_name": "Clôture en Bois",
+    "localized_name": "Clôture en bois",
     "description": "Une barrière à installer sur les fondations ou les toits pour éviter les chutes. Sa matière en bois le rend fragile."
   },
   "Wood_Gate": {
@@ -1367,6 +1531,10 @@
     "localized_name": "Mur triangulaire en bois",
     "description": "Un mur triangulaire à construire sur une base. Sa composition en bois le rend fragile."
   },
+  "Wood_TriangleWallReverse": {
+    "localized_name": "Mur triangulaire en bois (Inversé)",
+    "description": "Un mur triangulaire inversé à construire sur une base. Sa composition en bois le rend fragile."
+  },
   "Wood_WindowWall": {
     "localized_name": "Mur avec fenêtres en bois",
     "description": "Un mur avec fenêtres à construire sur une base pour repousser les intrus. Sa composition en bois le rend fragile."
@@ -1375,9 +1543,37 @@
     "localized_name": "Barricade en bois",
     "description": "Une barricade en bois décorative."
   },
+  "Wooden_DiagonalWall": {
+    "localized_name": "Mur diagonal en bois",
+    "description": "Un mur diagonal à construire sur une base triangulaire pour repousser les intrus. Sa composition en bois le rend fragile."
+  },
   "Wooden_DoorWall": {
     "localized_name": "Porte en bois",
     "description": "Une porte à construire sur une base pour servir d'entrée. Sa composition en bois la rend fragile."
+  },
+  "Wooden_PyramidRoof": {
+    "localized_name": "Toit pyramide en bois",
+    "description": "Un toit conique à placer sur des murs pour contrer les éléments. Sa composition en bois le rend fragile."
+  },
+  "Wooden_SlopedRoofCorner": {
+    "localized_name": "Toit triangulaire incliné en bois",
+    "description": "Un toit triangulaire incliné à placer sur un mur diagonal pour se protéger des éléments. Sa composition en bois le rend fragile."
+  },
+  "Wooden_TriangleFoundation": {
+    "localized_name": "Base triangulaire en bois",
+    "description": "Une base triangulaire sur laquelle construire un mur ou une installation. Sa composition en bois la rend fragile."
+  },
+  "Wooden_TriangleRoof": {
+    "localized_name": "Toit triangulaire en bois",
+    "description": "Un toit triangulaire à placer sur des murs pour contrer les éléments. Sa composition en bois le rend fragile."
+  },
+  "Wooden_TriangleStairsCorner": {
+    "localized_name": "Toit d'angle en bois",
+    "description": "Un toit d'angle à placer sur des murs pour contrer les éléments. Sa composition en bois le rend fragile."
+  },
+  "Wooden_WallGate": {
+    "localized_name": "Arche en bois",
+    "description": "Une arche destinée au passage des Pals, à construire sur une base. Sa composition en bois le rend fragile."
   },
   "Wooden_foundation": {
     "localized_name": "Base en bois",
@@ -1400,16 +1596,20 @@
     "description": "Un mur à construire sur une base pour repousser les intrus. Sa matière en bois le rend fragile."
   },
   "WorkBench": {
-    "localized_name": "Établi de fortune",
-    "description": "Un Établi de fortune pour créer des objets simples. Un Pal habile dans les travaux manuels est requis."
+    "localized_name": "Établi de Fortune",
+    "description": "Un Établi de Fortune pour créer des objets simples. Un Pal habile dans les travaux manuels est requis."
   },
   "WorkBench_SkillUnlock": {
     "localized_name": "Établi pour équipement de Pal",
-    "description": "Un Établi de fortune pour fabriquer des outils destinés aux Pals. Fabrique une selle pour monter tes Pals ou une arme pour les faire tirer avec."
+    "description": "Un Établi de Fortune pour fabriquer des outils destinés aux Pals. Fabrique une selle pour monter tes Pals ou une arme pour les faire tirer avec."
   },
   "WorkSpeedIncrease1": {
     "localized_name": "Dispositif de vague β",
     "description": "Un dispositif qui génère une vague β pour stimuler les Pals. Augmente la vitesse de travail des Pals sur le camp. En installer plusieurs ne décuple pas l'effet."
+  },
+  "YakushimaBoss002_Relic": {
+    "localized_name": "Statue du Seigneur de la Lune",
+    "description": "[Collaboration Terraria] Une statue du Seigneur de la lune aux reflets dorés. Héritage de la bravoure d’un héros ayant surmonté une bataille impossible."
   },
   "Zabuton": {
     "localized_name": "Coussin de sol",

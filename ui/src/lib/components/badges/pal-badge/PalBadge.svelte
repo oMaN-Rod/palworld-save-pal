@@ -4,12 +4,13 @@
 	import { type Pal, PalGender } from '$types';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { cn } from '$theme';
-	import { getAppState, getNavigationState } from '$states';
+	import { getAppState } from '$states';
 	import { palsData } from '$lib/data';
 	import ContextMenu from '$components/ui/context-menu/ContextMenu.svelte';
 	import { Plus, ArchiveRestore, Trash, Copy, Upload } from 'lucide-svelte';
 	import { assetLoader, calculateFilters } from '$utils';
 	import { staticIcons } from '$types/icons';
+	import { goto } from '$app/navigation';
 
 	let {
 		pal = $bindable(),
@@ -34,7 +35,6 @@
 	}>();
 
 	const appState = getAppState();
-	const nav = getNavigationState();
 
 	const buttonClass = $derived(
 		cn(
@@ -106,7 +106,7 @@
 	function handlePalSelect() {
 		if (!pal || pal.character_id === 'None') return;
 		appState.selectedPal = pal;
-		nav.activeTab = 'pal';
+		goto('/edit/pal');
 	}
 </script>
 

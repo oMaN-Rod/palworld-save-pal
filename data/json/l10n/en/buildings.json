@@ -45,11 +45,11 @@
   },
   "Believer_Banner": {
     "localized_name": "Free Pal Alliance Vertical Banner",
-    "description": "Decorative Free Pal Alliance banner."
+    "description": "Decorative Free Pal Alliance Vertical Banner."
   },
   "Believer_Flag": {
     "localized_name": "Free Pal Alliance Standard",
-    "description": "Decorative Free Pal Alliance flag."
+    "description": "Decorative Free Pal Alliance Standard."
   },
   "Bench_Wood": {
     "localized_name": "Wooden Bench",
@@ -173,7 +173,7 @@
   },
   "ConservationGroupBannerB": {
     "localized_name": "Free Pal Alliance Horizontal Banner",
-    "description": "Decorative Free Pal Alliance banner."
+    "description": "Decorative Free Pal Alliance horizontal banner."
   },
   "Container01_Iron": {
     "localized_name": "Large Container",
@@ -308,7 +308,7 @@
     "description": "A facility that allows Pals to be sent on expeditions to places like dungeons. The dispatched Pals engage in battles and gather items, bringing back resources to the base."
   },
   "Factory_Hard_01": {
-    "localized_name": "High Quality Workbench",
+    "localized_name": "High-Quality Workbench",
     "description": "An Assembly Line for producing items and gear. A small workspace limits production speeds. Requires Pals that can work with their hands."
   },
   "Factory_Hard_02": {
@@ -320,7 +320,7 @@
     "description": "An Assembly Line for producing items and gear. Through clever management, production speeds have greatly increased. Requires Pals that can work with their hands."
   },
   "Factory_Hard_04": {
-    "localized_name": "Advanced Civilization Workshop",
+    "localized_name": "Advanced Workshop",
     "description": "An Assembly Line for producing items and gear. Advanced machinery has been introduced, enabling high-speed production. Requires Pals that can work with their hands."
   },
   "Factory_Money": {
@@ -365,11 +365,11 @@
   },
   "FireCult_Banner": {
     "localized_name": "Brothers of the Eternal Pyre Vertical Banner",
-    "description": "Decorative Brothers of the Eternal Pyre banner."
+    "description": "Decorative Brothers of the Eternal Pyre Vertical Banner."
   },
   "FireCult_Flag": {
     "localized_name": "Brothers of the Eternal Pyre Standard",
-    "description": "Decorative Brothers of the Eternal Pyre flag."
+    "description": "Decorative Brothers of the Eternal Pyre Standard."
   },
   "FireStand": {
     "localized_name": "Ceremonial Candlestick",
@@ -403,6 +403,10 @@
     "localized_name": "Garbage Bag",
     "description": "Decorative garbage bag."
   },
+  "Glass_DiagonalWall": {
+    "localized_name": "Glass Diagonal Wall",
+    "description": "An angled wall built on triangular foundations for keeping out intruders. Made of industrial-strength glass, it's quite sturdy."
+  },
   "Glass_DoorWall": {
     "localized_name": "Glass Wall and Door",
     "description": "Door built on a foundation. Becomes an entrance. Made of industrial-strength glass, it's quite sturdy."
@@ -411,13 +415,41 @@
     "localized_name": "Glass Fence",
     "description": "Fence built on foundations or roofs to prevent falls. Made of industrial-strength glass, it's quite sturdy."
   },
+  "Glass_PyramidRoof": {
+    "localized_name": "Glass Pyramid Roof",
+    "description": "A pyramidal roof built on top of walls to keep out the rain and wind. Made of industrial-strength glass, it's quite sturdy."
+  },
   "Glass_SlantedRoof": {
     "localized_name": "Glass Slanted Roof",
     "description": "Slanted roof built on top of walls to keep out the rain and wind. Made of industrial-strength glass, it's quite sturdy."
   },
+  "Glass_SlopedRoofCorner": {
+    "localized_name": "Glass Slanted Triangular Roof",
+    "description": "A slanted triangular roof built on top of diagonal walls to keep out the rain and wind. Made of industrial-strength glass, it's quite sturdy."
+  },
+  "Glass_TriangleFoundation": {
+    "localized_name": "Glass Triangular Foundation",
+    "description": "A triangular foundation for building walls or facilities on. Made of industrial-strength glass, it's quite sturdy."
+  },
+  "Glass_TriangleRoof": {
+    "localized_name": "Glass Triangular Roof",
+    "description": "A triangular roof built on top of walls to keep out the rain and wind. Made of industrial-strength glass, it's quite sturdy."
+  },
+  "Glass_TriangleStairsCorner": {
+    "localized_name": "Glass Corner Roof",
+    "description": "A corner roof built on top of walls to keep out the rain and wind. Made of industrial-strength glass, it's quite sturdy."
+  },
   "Glass_TriangleWall": {
     "localized_name": "Glass Triangular Wall",
     "description": "Triangular wall built on a foundation for keeping out intruders. Made of industrial-strength glass, it's quite sturdy."
+  },
+  "Glass_TriangleWallReverse": {
+    "localized_name": "Glass Triangular Wall (Inverted)",
+    "description": "An inverted triangular wall built on a foundation for keeping out intruders. Made of industrial-strength glass, it's quite sturdy."
+  },
+  "Glass_WallGate": {
+    "localized_name": "Glass Pal Passage Entrance",
+    "description": "An entrance to a Pal passage built on a foundation. Made of industrial-strength glass, it's quite sturdy."
   },
   "Glass_WindowWall": {
     "localized_name": "Glass Wall and Window",
@@ -477,11 +509,11 @@
   },
   "Hunter_Banner": {
     "localized_name": "Rayne Syndicate Vertical Banner",
-    "description": "Decorative Rayne Syndicate banner."
+    "description": "Decorative Rayne Syndicate Vertical Banner."
   },
   "Hunter_Flag": {
     "localized_name": "Rayne Syndicate Standard",
-    "description": "Decorative Rayne Syndicate flag."
+    "description": "Decorative Rayne Syndicate Standard."
   },
   "Hunter_GangFlag": {
     "localized_name": "Rayne Syndicate Flag",
@@ -491,9 +523,41 @@
     "localized_name": "Refrigerated Crusher",
     "description": "Facility that crushes Ore and converts it into other materials. Requires a power supply and a Pal with Cooling suitability, but it's very efficient."
   },
+  "Iron_DiagonalWall": {
+    "localized_name": "Metal Diagonal Wall",
+    "description": "An angled wall built on triangular foundations for keeping out intruders. Made from metal, it is extremely durable."
+  },
   "Iron_Fence": {
     "localized_name": "Metal Fence",
     "description": "Fence built on foundations or roofs to prevent falls. Made from metal, it is extremely durable."
+  },
+  "Iron_PyramidRoof": {
+    "localized_name": "Metal Pyramid Roof",
+    "description": "A pyramidal roof built on top of walls to keep out the rain and wind. Made from metal, it is extremely durable."
+  },
+  "Iron_SlopedRoofCorner": {
+    "localized_name": "Metal Slanted Triangular Roof",
+    "description": "A slanted triangular roof built on top of diagonal walls to keep out the rain and wind. Made from metal, it is extremely durable."
+  },
+  "Iron_TriangleFoundation": {
+    "localized_name": "Metal Triangular Foundation",
+    "description": "A triangular foundation for building walls or facilities on. Made from metal, it is extremely durable."
+  },
+  "Iron_TriangleRoof": {
+    "localized_name": "Metal Triangular Roof",
+    "description": "A triangular roof built on top of walls to keep out the rain and wind. Made from metal, it is extremely durable."
+  },
+  "Iron_TriangleStairsCorner": {
+    "localized_name": "Metal Corner Roof",
+    "description": "A corner roof built on top of walls to keep out the rain and wind. Made from metal, it is extremely durable."
+  },
+  "Iron_TriangleWallReverse": {
+    "localized_name": "Metal Triangular Wall (Inverted)",
+    "description": "An inverted triangular wall built on a foundation for keeping out intruders. Made from metal, it is extremely durable."
+  },
+  "Iron_WallGate": {
+    "localized_name": "Metal Pal Passage Entrance",
+    "description": "An entrance to a Pal passage built on a foundation. Made from metal, it is extremely durable."
   },
   "Irori": {
     "localized_name": "Japanese Hearth",
@@ -531,6 +595,10 @@
     "localized_name": "Horizontal Wall Ivy",
     "description": "Decorative horizontal ivy. Can be placed on a wall."
   },
+  "JapaneseStyle_DiagonalWall": {
+    "localized_name": "Japanese-Style Diagonal Wall",
+    "description": "An angled wall built on triangular foundations for keeping out intruders. You can create stylish Japanese-style architecture."
+  },
   "JapaneseStyle_DoorWall_01": {
     "localized_name": "Japanese-Style Door A",
     "description": "Door built on a foundation. Becomes an entrance. You can create stylish Japanese-style architecture."
@@ -551,13 +619,45 @@
     "localized_name": "Japanese-Style Pillar",
     "description": "Column for structural support. You can create stylish Japanese-style architecture."
   },
+  "JapaneseStyle_PyramidRoof": {
+    "localized_name": "Japanese-Style Pyramid Roof",
+    "description": "A pyramidal roof built on top of walls to keep out the rain and wind. You can create stylish Japanese-style architecture."
+  },
   "JapaneseStyle_SlantedRoof": {
     "localized_name": "Japanese-Style Slanted Roof",
     "description": "Slanted roof built on top of walls to keep out the rain and wind. You can create stylish Japanese-style architecture."
   },
+  "JapaneseStyle_SlopedRoofCorner": {
+    "localized_name": "Japanese-Style Slanted Triangular Roof",
+    "description": "A slanted triangular roof built on top of diagonal walls to keep out the rain and wind. You can create stylish Japanese-style architecture."
+  },
+  "JapaneseStyle_TriangleFoundation": {
+    "localized_name": "Japanese-Style Triangular Foundation",
+    "description": "A triangular foundation for building walls or facilities on. You can create stylish Japanese-style architecture."
+  },
+  "JapaneseStyle_TriangleRoof_01": {
+    "localized_name": "Japanese-Style Triangular Roof A",
+    "description": "A triangular roof built on top of walls to keep out the rain and wind. The top is covered with tatami mats. You can create stylish Japanese-style architecture."
+  },
+  "JapaneseStyle_TriangleRoof_02": {
+    "localized_name": "Japanese-Style Triangular Roof B",
+    "description": "A triangular roof built on top of walls to keep out the rain and wind. The top is covered with tiles. You can create stylish Japanese-style architecture."
+  },
+  "JapaneseStyle_TriangleStairsCorner_01": {
+    "localized_name": "Japanese-Style Corner Roof",
+    "description": "A corner roof built on top of walls to keep out the rain and wind. You can create stylish Japanese-style architecture."
+  },
   "JapaneseStyle_TriangleWall": {
     "localized_name": "Japanese-Style Triangular Wall",
     "description": "Triangular wall built on a foundation for keeping out intruders. You can create stylish Japanese-style architecture."
+  },
+  "JapaneseStyle_TriangleWallReverse": {
+    "localized_name": "Japanese-Style Triangular Wall (Inverted)",
+    "description": "An inverted triangular wall built on a foundation for keeping out intruders. You can create stylish Japanese-style architecture."
+  },
+  "JapaneseStyle_WallGate": {
+    "localized_name": "Japanese-Style Pal Passage Entrance",
+    "description": "An entrance to a Pal passage built on a foundation. You can create stylish Japanese-style architecture."
   },
   "JapaneseStyle_WindowWall": {
     "localized_name": "Japanese-Style Wall and Window",
@@ -569,11 +669,11 @@
   },
   "JapaneseStyle_roof_01": {
     "localized_name": "Japanese-Style Roof A",
-    "description": "A roof built on top of walls to keep out the rain and wind. You can create stylish Japanese-style architecture."
+    "description": "A roof built on top of walls to keep out the rain and wind. The top is covered with tatami mats. You can create stylish Japanese-style architecture."
   },
   "JapaneseStyle_roof_02": {
     "localized_name": "Japanese-Style Roof B",
-    "description": "A roof built on top of walls to keep out the rain and wind. You can create stylish Japanese-style architecture."
+    "description": "A roof built on top of walls to keep out the rain and wind. The top is covered with tiles. You can create stylish Japanese-style architecture."
   },
   "JapaneseStyle_stair": {
     "localized_name": "Japanese-Style Stairs",
@@ -732,7 +832,7 @@
     "description": "Walls built on foundations for keeping out intruders. Made from metal, it is extremely durable."
   },
   "MiningTool": {
-    "localized_name": "Pickaxe and Helmet",
+    "localized_name": "Mining Cart",
     "description": "Place in base to improve mining speed. Placing more than one has no additional effect."
   },
   "Mirror01_Stone": {
@@ -761,11 +861,11 @@
   },
   "Ninja_Banner": {
     "localized_name": "Moonflower Vertical Banner",
-    "description": "Decorative Moonflower banner."
+    "description": "Decorative Moonflower Vertical Banner."
   },
   "Ninja_Flag": {
     "localized_name": "Moonflower Standard",
-    "description": "Decorative Moonflower flag."
+    "description": "Decorative Moonflower Standard."
   },
   "OilPump": {
     "localized_name": "Crude Oil Extractor",
@@ -841,11 +941,11 @@
   },
   "Police_Banner": {
     "localized_name": "PIDF Vertical Banner",
-    "description": "Decorative PIDF banner."
+    "description": "Decorative PIDF Vertical Banner."
   },
   "Police_Flag": {
     "localized_name": "PIDF Standard",
-    "description": "Decorative PIDF flag."
+    "description": "Decorative PIDF Standard."
   },
   "QuartzPit": {
     "localized_name": "Pure Quartz Mine",
@@ -887,6 +987,10 @@
     "localized_name": "Laboratory Desk",
     "description": "Decorative laboratory desk."
   },
+  "SF_DiagonalWall": {
+    "localized_name": "Clean Diagonal Wall",
+    "description": "An angled wall built on triangular foundations to keep out intruders. Can be used to create clean, futuristic architecture."
+  },
   "SF_DoorWall": {
     "localized_name": "Clean Wall and Door",
     "description": "Door built on a foundation. Becomes an entrance. Can be used to create clean, futuristic architecture."
@@ -895,13 +999,41 @@
     "localized_name": "Clean Fence",
     "description": "Fence built on foundations or roofs to prevent falls. Can be used to create clean, futuristic architecture."
   },
+  "SF_PyramidRoof": {
+    "localized_name": "Clean Pyramid Roof",
+    "description": "A pyramidal roof built on top of walls to keep out the rain and wind. Can be used to create clean, futuristic architecture."
+  },
   "SF_SlantedRoof": {
     "localized_name": "Clean Slanted Roof",
     "description": "Slanted roof built on top of walls to keep out the rain and wind. Can be used to create clean, futuristic architecture."
   },
+  "SF_SlopedRoofCorner": {
+    "localized_name": "Clean Slanted Triangular Roof",
+    "description": "A slanted triangular roof built on top of diagonal walls to keep out the rain and wind. Can be used to create clean, futuristic architecture."
+  },
+  "SF_TriangleFoundation": {
+    "localized_name": "Clean Triangular Foundation",
+    "description": "A triangular foundation for building walls or facilities. Can be used to create clean, futuristic architecture."
+  },
+  "SF_TriangleRoof": {
+    "localized_name": "Clean Triangular Roof",
+    "description": "A triangular roof built on top of walls to keep out the rain and wind. Can be used to create clean, futuristic architecture."
+  },
+  "SF_TriangleStairsCorner": {
+    "localized_name": "Clean Corner Roof",
+    "description": "A corner roof built on top of walls to keep out the rain and wind. Can be used to create clean, futuristic architecture."
+  },
   "SF_TriangleWall": {
     "localized_name": "Clean Triangular Wall",
     "description": "Triangular wall built on a foundation to keep out intruders. Can be used to create create clean, futuristic architecture."
+  },
+  "SF_TriangleWallReverse": {
+    "localized_name": "Clean Triangular Wall (Inverted)",
+    "description": "An inverted triangular wall built on a foundation to keep out intruders. Can be used to create clean, futuristic architecture."
+  },
+  "SF_WallGate": {
+    "localized_name": "Clean Pal Passage Entrance",
+    "description": "An entrance to a Pal passage built on a foundation. Can be used to create clean, futuristic architecture."
   },
   "SF_WindowWall": {
     "localized_name": "Clean Wall and Window",
@@ -925,15 +1057,15 @@
   },
   "SanityDecrease1": {
     "localized_name": "Alpha Wave Generator",
-    "description": "A device that emits alpha waves to relax Pals. It slows the rate at which the SAN value of Pals at the base decreases. Placing more than one will not have any additional effect."
+    "description": "A device that emits alpha waves to help Pals relax. Slows the rate at which the SAN value of Base Pals decreases. Placing more than one has no additional effect."
   },
   "Scientist_Banner": {
     "localized_name": "PAL Genetic Research Unit Vertical Banner",
-    "description": "Decorative PAL Genetic Research Unit banner."
+    "description": "Decorative PAL Genetic Research Unit Vertical Banner."
   },
   "Scientist_Flag": {
     "localized_name": "PAL Genetic Research Unit Standard",
-    "description": "Decorative PAL Genetic Research Unit flag."
+    "description": "Decorative PAL Genetic Research Unit Standard."
   },
   "Seika": {
     "localized_name": "Flower Arrangement",
@@ -1013,7 +1145,7 @@
   },
   "Shrine_Lantern": {
     "localized_name": "Red Wooden Lantern",
-    "description": "Decorative festival lantern."
+    "description": "Decorative red wooden lantern."
   },
   "SignExit_Ceiling_Iron": {
     "localized_name": "Emergency Exit Ceiling Sign",
@@ -1095,6 +1227,10 @@
     "localized_name": "Stone Pit",
     "description": "A facility for producing Stone. Mining Stone is hard work that requires much physical endurance. Leave it to Pals skilled at mining."
   },
+  "Stone_DiagonalWall": {
+    "localized_name": "Stone Diagonal Wall",
+    "description": "An angled wall built on triangular foundations for keeping out intruders. Made from stone, it is reasonably sturdy."
+  },
   "Stone_DoorWall": {
     "localized_name": "Stone Door",
     "description": "Door built on a foundation. Becomes an entrance. Made from stone, it is reasonably sturdy."
@@ -1107,13 +1243,41 @@
     "localized_name": "Stone Gate",
     "description": "Gate large enough for big Pals to pass through. Made from stone, it is reasonably sturdy."
   },
+  "Stone_PyramidRoof": {
+    "localized_name": "Stone Pyramid Roof",
+    "description": "A pyramidal roof built on top of walls to keep out the rain and wind. Made from stone, it is reasonably sturdy."
+  },
   "Stone_SlantedRoof": {
     "localized_name": "Stone Slanted Roof",
     "description": "Slanted roof built on top of walls to keep out the rain and wind. Made from stone, it is reasonably sturdy."
   },
+  "Stone_SlopedRoofCorner": {
+    "localized_name": "Stone Slanted Triangular Roof",
+    "description": "A slanted triangular roof built on top of diagonal walls to keep out the rain and wind. Made from stone, it is reasonably sturdy."
+  },
+  "Stone_TriangleFoundation": {
+    "localized_name": "Stone Triangular Foundation",
+    "description": "A triangular foundation for building walls or facilities on. Made from stone, it is reasonably sturdy."
+  },
+  "Stone_TriangleRoof": {
+    "localized_name": "Stone Triangular Roof",
+    "description": "A triangular roof built on top of walls to keep out the rain and wind. Made from stone, it is reasonably sturdy."
+  },
+  "Stone_TriangleStairsCorner": {
+    "localized_name": "Stone Corner Roof",
+    "description": "A corner roof built on top of walls to keep out the rain and wind. Made from stone, it is reasonably sturdy."
+  },
   "Stone_TriangleWall": {
     "localized_name": "Stone Triangular Wall",
     "description": "Triangular wall built on a foundation for keeping out intruders. Made from stone, it is reasonably sturdy."
+  },
+  "Stone_TriangleWallReverse": {
+    "localized_name": "Stone Triangular Wall (Inverted)",
+    "description": "An inverted triangular wall built on a foundation for keeping out intruders. Made from stone, it is reasonably sturdy."
+  },
+  "Stone_WallGate": {
+    "localized_name": "Stone Pal Passage Entrance",
+    "description": "An entrance to a Pal passage built on a foundation. Made from stone, it is reasonably sturdy."
   },
   "Stone_WindowWall": {
     "localized_name": "Stone Wall and Window",
@@ -1344,7 +1508,7 @@
     "description": "An Assembly Line for producing weapons and ammunition. Through clever management, production speeds have greatly increased. Requires Pals that can work with their hands."
   },
   "WeaponFactory_Dirty_04": {
-    "localized_name": "Advanced Civilization Weapon Assembly Line",
+    "localized_name": "Advanced Weapon Assembly Line",
     "description": "An Assembly Line for producing weapons and ammunition. Advanced machinery has been introduced, enabling high-speed weapon production. Requires Pals that can work with their hands."
   },
   "Wire_Fence": {
@@ -1367,6 +1531,10 @@
     "localized_name": "Wooden Triangular Wall",
     "description": "Triangular wall built on a foundation for keeping out intruders. Made from wood, it breaks easily."
   },
+  "Wood_TriangleWallReverse": {
+    "localized_name": "Wooden Triangular Wall (Inverted)",
+    "description": "An inverted triangular wall built on a foundation for keeping out intruders. Made from wood, it breaks easily."
+  },
   "Wood_WindowWall": {
     "localized_name": "Wooden Wall and Window",
     "description": "Wall built on a foundation for keeping out intruders. Includes a window. Made from wood, it breaks easily."
@@ -1375,9 +1543,37 @@
     "localized_name": "Wooden Barricade",
     "description": "Decorative wooden barricade."
   },
+  "Wooden_DiagonalWall": {
+    "localized_name": "Wooden Diagonal Wall",
+    "description": "An angled wall built on triangular foundations for keeping out intruders. Made from wood, it breaks easily."
+  },
   "Wooden_DoorWall": {
     "localized_name": "Wooden Door",
     "description": "Door built on a foundation. Becomes an entrance. Made from wood, it breaks easily."
+  },
+  "Wooden_PyramidRoof": {
+    "localized_name": "Wooden Pyramid Roof",
+    "description": "A pyramidal roof built on top of walls to keep out the rain and wind. Made from wood, it breaks easily."
+  },
+  "Wooden_SlopedRoofCorner": {
+    "localized_name": "Wooden Slanted Triangular Roof",
+    "description": "A slanted triangular roof built on top of diagonal walls to keep out the rain and wind. Made from wood, it breaks easily."
+  },
+  "Wooden_TriangleFoundation": {
+    "localized_name": "Wooden Triangular Foundation",
+    "description": "A triangular foundation for building walls or facilities on. Made from wood, it breaks easily."
+  },
+  "Wooden_TriangleRoof": {
+    "localized_name": "Wooden Triangular Roof",
+    "description": "A triangular roof built on top of walls to keep out the rain and wind. Made from wood, it breaks easily."
+  },
+  "Wooden_TriangleStairsCorner": {
+    "localized_name": "Wooden Corner Roof",
+    "description": "A corner roof built on top of walls to keep out the rain and wind. Made from wood, it breaks easily."
+  },
+  "Wooden_WallGate": {
+    "localized_name": "Wooden Pal Passage Entrance",
+    "description": "An entrance to a Pal passage built on a foundation. Made from wood, it breaks easily."
   },
   "Wooden_foundation": {
     "localized_name": "Wooden Foundation",
@@ -1409,7 +1605,11 @@
   },
   "WorkSpeedIncrease1": {
     "localized_name": "Beta Wave Generator",
-    "description": "A device that emits beta waves to energize Pals. It increases the work speed of Pals in the base. Placing more than one will not have additional effects."
+    "description": "A device that emits beta waves to energize Pals. Increases the work speed of Base Pals. Placing more than one has no additional effect."
+  },
+  "YakushimaBoss002_Relic": {
+    "localized_name": "Moon Lord Statue",
+    "description": "[Tides of Terraria] A gleaming golden statue of the Moon Lord. Proof of those strong enough to overcome a hopeless battle."
   },
   "Zabuton": {
     "localized_name": "Japanese Floor Cushion",

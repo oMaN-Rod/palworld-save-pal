@@ -112,11 +112,11 @@
     "description": null
   },
   "Arena_Viking": {
-    "localized_name": "Habitant du Paradis Déchu",
+    "localized_name": "Guerrier du Paradis Déchu",
     "description": null
   },
   "Arena_VikingElite": {
-    "localized_name": "Habitant du Paradis Déchu (Élite)",
+    "localized_name": "Berserker du Paradis Déchu",
     "description": null
   },
   "BOSS_Believer_CrossBow": {
@@ -172,7 +172,7 @@
     "description": null
   },
   "BOSS_Hunter_Rifle": {
-    "localized_name": "Recherché : Hawk",
+    "localized_name": "Recherché : Gwendou",
     "description": null
   },
   "BOSS_Male_DesertPeople": {
@@ -244,7 +244,7 @@
     "description": null
   },
   "BOSS_Viking": {
-    "localized_name": "Recherché : Gnaw",
+    "localized_name": "Recherché : Gabou",
     "description": null
   },
   "BOSS_VikingElite": {
@@ -1327,6 +1327,10 @@
     "localized_name": "Lullu",
     "description": "Son pollen est transporté d'un bout à l'autre de l'île à l'arrivée des beaux jours. L'allergie de Flopie est d'ailleurs causée par Lullu."
   },
+  "LegendDeer": {
+    "localized_name": "Hartalis",
+    "description": "Un silence inquiétant, et pourtant étrangement apaisant. Il ne reste plus personne. Tous ont été délivrés depuis longtemps. Ô Roi Sauveur, puisses-tu me guider moi aussi vers le silence infini... - Le vieux manuscrit s'arrête ici."
+  },
   "LilyQueen": {
     "localized_name": "Lyleen",
     "description": "Calme et bienveillant, un SolarBeam veille sur les petits Pals qui ont perdu leurs parents. Toute son énergie passe dans leur éducation."
@@ -1381,6 +1385,10 @@
   },
   "Male_DesertPeople01": {
     "localized_name": "Villageois",
+    "description": null
+  },
+  "Male_Kigurumi01_v01": {
+    "localized_name": "Habitant de l'Île",
     "description": null
   },
   "Male_Ninja01": {
@@ -1807,6 +1815,10 @@
     "localized_name": "Milice Populaire — Fusilier",
     "description": null
   },
+  "Police_Shield_Tower": {
+    "localized_name": "Milice Populaire — Fusilier",
+    "description": null
+  },
   "Police_Shotgun": {
     "localized_name": "Milice Populaire – Élite",
     "description": null
@@ -1883,6 +1895,14 @@
     "localized_name": "Blazamut Ryu",
     "description": null
   },
+  "RAID_LegendDeer": {
+    "localized_name": "Hartalis",
+    "description": null
+  },
+  "RAID_LegendDeer_2": {
+    "localized_name": "Hartalis",
+    "description": null
+  },
   "RAID_NightLady": {
     "localized_name": "Bellanoir",
     "description": null
@@ -1899,7 +1919,15 @@
     "localized_name": "Véritable Œil de Cthulhu",
     "description": null
   },
+  "RAID_YakushimaBoss001_Green_2": {
+    "localized_name": "Véritable Œil de Cthulhu",
+    "description": null
+  },
   "RAID_YakushimaBoss002": {
+    "localized_name": "Seigneur de la lune",
+    "description": null
+  },
+  "RAID_YakushimaBoss002_2": {
     "localized_name": "Seigneur de la lune",
     "description": null
   },
@@ -1907,11 +1935,23 @@
     "localized_name": "Seigneur de la lune",
     "description": null
   },
+  "RAID_YakushimaBoss002_Hand_Left_2": {
+    "localized_name": "Seigneur de la lune",
+    "description": null
+  },
   "RAID_YakushimaBoss002_Hand_Right": {
     "localized_name": "Seigneur de la lune",
     "description": null
   },
+  "RAID_YakushimaBoss002_Hand_Right_2": {
+    "localized_name": "Seigneur de la lune",
+    "description": null
+  },
   "RAID_YakushimaBoss002_Head": {
+    "localized_name": "Seigneur de la lune",
+    "description": null
+  },
+  "RAID_YakushimaBoss002_Head_2": {
     "localized_name": "Seigneur de la lune",
     "description": null
   },
@@ -2153,7 +2193,7 @@
   },
   "SmallArmadillo": {
     "localized_name": "Kikit",
-    "description": "Le foot de Kikit était populaire autrefois. Les actions de la LPP l'ont fait interdire depuis, malgré le fait que cela les aidait à se débarrasser de leur corne."
+    "description": "Le foot de Kikit était populaire autrefois. Les actions de la Ligue pour la Protection des Pals l'ont fait interdire depuis, malgré le fait que cela les aidait à se débarrasser de leur corne."
   },
   "SnowPeafowl": {
     "localized_name": "Frostplume",
@@ -2220,27 +2260,27 @@
     "description": "La légende raconte qu'un combattant injustement jeté dans un volcan se serait réincarné en Jormuntide Ignis pour réduire le pays tout entier en cendres."
   },
   "Viking": {
-    "localized_name": "Habitant du Paradis Déchu",
+    "localized_name": "Guerrier du Paradis Déchu",
     "description": null
   },
   "VikingElite_Tower": {
-    "localized_name": "Habitant du Paradis Déchu (Élite)",
+    "localized_name": "Berserker du Paradis Déchu",
     "description": null
   },
   "Viking_Elite": {
-    "localized_name": "Habitant du Paradis Déchu (Élite)",
+    "localized_name": "Berserker du Paradis Déchu",
     "description": null
   },
   "Viking_Elite_Invader": {
-    "localized_name": "Habitant du Paradis Déchu (Élite)",
+    "localized_name": "Berserker du Paradis Déchu",
     "description": null
   },
   "Viking_Prisoner": {
-    "localized_name": "Habitant du Paradis Déchu",
+    "localized_name": "Guerrier du Paradis Déchu",
     "description": null
   },
   "Viking_Tower": {
-    "localized_name": "Habitant du Paradis Déchu",
+    "localized_name": "Guerrier du Paradis Déchu",
     "description": null
   },
   "VioletFairy": {

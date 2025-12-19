@@ -1,55 +1,55 @@
 {
   "Accessory_AirDash1": {
     "localized_name": "에어 대시 부츠",
-    "description": null
+    "description": "장착하면 플레이어가 공중에서 대시를 1회 할 수 있도록 보조하는 장신구."
   },
   "Accessory_AirDash2": {
     "localized_name": "더블 에어 대시 부츠",
-    "description": null
+    "description": "장착하면 플레이어가 공중에서 대시를 2회 할 수 있도록 보조하는 장신구."
   },
   "Accessory_AirDash3": {
     "localized_name": "트리플 에어 대시 부츠",
-    "description": null
+    "description": "ko_Text"
   },
   "Accessory_JumpCount_Increase1": {
     "localized_name": "더블 점프 부츠",
-    "description": null
+    "description": "장착하면 플레이어가 공중에서 추가 점프를 1회 할 수 있도록 보조하는 장신구."
   },
   "Accessory_JumpCount_Increase2": {
     "localized_name": "트리플 점프 부츠",
-    "description": null
+    "description": "장착하면 플레이어가 공중에서 추가 점프를 2회 할 수 있도록 보조하는 장신구."
   },
   "Accessory_JumpPower_Increase": {
     "localized_name": "반중력 벨트",
-    "description": null
+    "description": "장착하면 플레이어의 도약력이 증가하는 장신구."
   },
   "Accessory_Nonkilling": {
     "localized_name": "힘 조절의 반지",
-    "description": null
+    "description": "평화주의자의 반지. 장착할 시 공격 대상의 HP를 1 미만으로 깎을 수 없게 된다."
   },
   "Accessory_TalentChecker": {
     "localized_name": "재능 안경",
-    "description": null
+    "description": "팰의 잠재된 재능을 확인할 수 있는 안경. 100점 만점을 기준으로 HP, 공격, 방어 재능치가 표시된다."
   },
   "AdditionalInventory_001": {
     "localized_name": "소형 확장 파우치",
-    "description": null
+    "description": "물건을 더 많이 휴대할 수 있도록 하는 소형 파우치. 가지고 있으면 인벤토리 슬롯이 추가된다."
   },
   "AdditionalInventory_002": {
     "localized_name": "중형 확장 파우치",
-    "description": null
+    "description": "물건을 더 많이 휴대할 수 있도록 하는 중형 파우치. 가지고 있으면 인벤토리 슬롯이 추가된다."
   },
   "AdditionalInventory_003": {
     "localized_name": "대형 확장 파우치",
-    "description": null
+    "description": "물건을 더 많이 휴대할 수 있도록 하는 대형 파우치. 가지고 있으면 인벤토리 슬롯이 추가된다."
   },
   "AdditionalInventory_004": {
     "localized_name": "거대 확장 파우치",
-    "description": null
+    "description": "물건을 더 많이 휴대할 수 있도록 하는 거대 파우치. 가지고 있으면 인벤토리 슬롯이 추가된다."
   },
   "Altar": {
     "localized_name": "소환의 제단",
-    "description": null
+    "description": "이곳에 팰이 그려진 석판을 바쳐 강대한 팰을 거점에 소환할 수 있다. 전투를 시작하기 전에 충분히 준비해 두자."
   },
   "Arrow": {
     "localized_name": "화살",
@@ -69,23 +69,23 @@
   },
   "AutoMealPouch_Tier1": {
     "localized_name": "소형 먹이 주머니",
-    "description": null
+    "description": "음식을 넣어두는 작은 주머니. 자동 식사용 장비 슬롯이 1개까지 해제된다. 배가 고프면 슬롯 내 음식을 자동으로 소비한다."
   },
   "AutoMealPouch_Tier2": {
     "localized_name": "중형 먹이 주머니",
-    "description": null
+    "description": "음식을 넣어두는 넉넉한 주머니. 자동 식사용 장비 슬롯이 2개까지 해제된다. 배가 고프면 슬롯 내 음식을 자동으로 소비한다."
   },
   "AutoMealPouch_Tier3": {
     "localized_name": "대형 먹이 주머니",
-    "description": null
+    "description": "음식을 넣어두는 대형 주머니. 자동 식사용 장비 슬롯이 3개까지 해제된다. 배가 고프면 슬롯 내 음식을 자동으로 소비한다."
   },
   "AutoMealPouch_Tier4": {
     "localized_name": "거대 먹이 주머니",
-    "description": null
+    "description": "음식을 넣어두는 특대형 주머니. 자동 식사용 장비 슬롯이 4개까지 해제된다. 배가 고프면 슬롯 내 음식을 자동으로 소비한다."
   },
   "AutoMealPouch_Tier5": {
     "localized_name": "초거대 먹이 주머니",
-    "description": null
+    "description": "음식을 넣어두는 특대형 주머니. 자동 식사용 장비 슬롯이 5개까지 해제된다. 배가 고프면 슬롯 내 음식을 자동으로 소비한다."
   },
   "BaseCampBattleDirector": {
     "localized_name": "경종",
@@ -93,11 +93,11 @@
   },
   "BaseCampItemDispenser": {
     "localized_name": "아이템 배출기",
-    "description": null
+    "description": "배치한 거점에 있는 모든 상자 내의 아이템을 자유롭게 꺼낼 수 있는 장치."
   },
   "BaseCampWorkHard": {
     "localized_name": "감시대",
-    "description": null
+    "description": "거점 내 팰의 작업 방침을 비롯하여 각 작업별로 허가/금지 여부를 지시할 수 있다."
   },
   "BaseCampWorkerExtraStation": {
     "localized_name": "팰 상자 조작 단말기",
@@ -129,7 +129,7 @@
   },
   "Battle_Armor_Grade_03_Copper": {
     "localized_name": "금속 갑옷",
-    "description": "금속으로 완성한 갑옷. 적당한 무게에 적당한 방어력을 자랑한다. 제작하려면 '상급 작업대'이(가) 필요하다."
+    "description": "금속으로 만든 갑옷. 적당한 무게에 적당한 방어력을 자랑한다. 제작하려면 '상급 작업대'이(가) 필요하다."
   },
   "Battle_Armor_Grade_03_Copper_Cold": {
     "localized_name": "내한 금속 갑옷",
@@ -141,7 +141,7 @@
   },
   "Battle_Armor_Grade_03_Iron": {
     "localized_name": "제련 금속 갑옷",
-    "description": "고급 금속으로 완성한 갑옷. 상당한 방어력을 자랑하는 만큼 무겁다. 제작하려면 '작업라인 공장'이(가) 필요하다."
+    "description": "고급 금속으로 만든 갑옷. 상당한 방어력을 자랑하는 만큼 무겁다. 제작하려면 '작업라인 공장'이(가) 필요하다."
   },
   "Battle_Armor_Grade_03_Iron_Cold": {
     "localized_name": "내한 제련 금속 갑옷",
@@ -153,35 +153,35 @@
   },
   "Battle_Armor_Grade_04_Steal": {
     "localized_name": "팰 금속 갑옷",
-    "description": "팰 금속 주괴(으)로 만든 갑옷. 터무니없는 방어력을 자랑하지만 매우 무겁다. 제작하려면 |작업라인 공장 II|이(가) 필요하다."
+    "description": "팰 금속 주괴(으)로 만든 갑옷. 터무니없는 방어력을 자랑하지만 매우 무겁다. 제작하려면 |작업라인 공장 Ⅱ|이(가) 필요하다."
   },
   "Battle_Armor_Grade_04_Steal_Cold": {
     "localized_name": "내한 팰 금속 갑옷",
-    "description": "개량형 |팰 금속 갑옷|. 몸이 얼 정도의 추위를 막아준다. 제작하려면 |작업라인 공장 II|이(가) 필요하다."
+    "description": "개량형 |팰 금속 갑옷|. 몸이 얼 정도의 추위를 막아준다. 제작하려면 |작업라인 공장 Ⅱ|이(가) 필요하다."
   },
   "Battle_Armor_Grade_04_Steal_Heat": {
     "localized_name": "내열 팰 금속 갑옷",
-    "description": "개량된 |팰 금속 갑옷|. 뛰어난 내열성을 자랑한다. 제작하려면 |작업라인 공장 II|이(가) 필요하다."
+    "description": "개량된 |팰 금속 갑옷|. 뛰어난 내열성을 자랑한다. 제작하려면 |작업라인 공장 Ⅱ|이(가) 필요하다."
   },
   "Battle_Armor_Grade_05_Plastic": {
     "localized_name": "플라스틸 갑옷",
-    "description": "플라스틸(으)로 만든 갑옷. 방어력 향상은 물론 경량화에도 성공했다. 제작하려면 |작업라인 공장 II|이(가) 필요하다."
+    "description": "플라스틸(으)로 만든 갑옷. 방어력 향상은 물론 경량화에도 성공했다. 제작하려면 |작업라인 공장 Ⅱ|이(가) 필요하다."
   },
   "Battle_Armor_Grade_05_Plastic_Cold": {
     "localized_name": "내한 플라스틸 갑옷",
-    "description": "개량형 |플라스틸 갑옷|. 몸이 얼 정도의 추위를 막아준다. 제작하려면 |작업라인 공장 II|이(가) 필요하다."
+    "description": "개량형 |플라스틸 갑옷|. 몸이 얼 정도의 추위를 막아준다. 제작하려면 |작업라인 공장 Ⅱ|이(가) 필요하다."
   },
   "Battle_Armor_Grade_05_Plastic_Heat": {
     "localized_name": "내열 플라스틸 갑옷",
-    "description": "개량형 |플라스틸 갑옷|. 뛰어난 내열성을 자랑한다. 제작하려면 |작업라인 공장 II|이(가) 필요하다."
+    "description": "개량형 |플라스틸 갑옷|. 뛰어난 내열성을 자랑한다. 제작하려면 |작업라인 공장 Ⅱ|이(가) 필요하다."
   },
   "Battle_Armor_Grade_05_Plastic_Weight": {
     "localized_name": "경량 플라스틸 갑옷",
-    "description": "개량형 |플라스틸 갑옷|. 플레이어의 소지 중량 제한이 증가한다. 제작하려면 |작업라인 공장 II|이(가) 필요하다."
+    "description": "개량형 |플라스틸 갑옷|. 플레이어의 소지 중량 제한이 증가한다. 제작하려면 |작업라인 공장 Ⅱ|이(가) 필요하다."
   },
   "Battle_Cloth": {
     "localized_name": "천",
-    "description": null
+    "description": "양털을 짜서 만든 천. 방어구를 만들 때 필요하다."
   },
   "Battle_Defense_BowGun": {
     "localized_name": "설치형 쇠뇌",
@@ -209,7 +209,7 @@
   },
   "Battle_Glider_Grade_04": {
     "localized_name": "테라 글라이더",
-    "description": "펼쳐서 활공할 때 쓰는 글라이더. 성능을 더욱 끌어올려 속도와 장력이 향상됐다. '작업라인 공장 II'에서 만들 수 있다."
+    "description": "펼쳐서 활공할 때 쓰는 글라이더. 성능을 더욱 끌어올려 속도와 장력이 향상됐다. '작업라인 공장 Ⅱ'에서 만들 수 있다."
   },
   "Battle_GunPowder_Grade_02": {
     "localized_name": "화약",
@@ -229,15 +229,15 @@
   },
   "Battle_Helm_Grade_05_Steal": {
     "localized_name": "팰 금속 투구",
-    "description": "팰 금속 주괴(으)로 만든 투구. 누구나 부러워할 최상의 품질로, 선택받은 전사임을 증명한다. 제작하려면 |작업라인 공장 II|이(가) 필요하다."
+    "description": "팰 금속 주괴(으)로 만든 투구. 누구나 부러워할 최상의 품질로, 선택받은 전사임을 증명한다. 제작하려면 |작업라인 공장 Ⅱ|이(가) 필요하다."
   },
   "Battle_Helm_Grade_06_Plastic": {
     "localized_name": "플라스틸 투구",
-    "description": "플라스틸(으)로 만든 투구. 방어력 향상은 물론 경량화에도 성공했다. 제작하려면 |작업라인 공장 II|이(가) 필요하다."
+    "description": "플라스틸(으)로 만든 투구. 방어력 향상은 물론 경량화에도 성공했다. 제작하려면 |작업라인 공장 Ⅱ|이(가) 필요하다."
   },
   "Battle_MeleeWeapon_Axe_Steal": {
     "localized_name": "팰 금속 도끼",
-    "description": null
+    "description": "벌목용 도끼. 팰 금속으로 만들어 경이로운 절삭력을 자랑한다."
   },
   "Battle_MeleeWeapon_Bat": {
     "localized_name": "나무 곤봉",
@@ -245,11 +245,11 @@
   },
   "Battle_MeleeWeapon_Bat2": {
     "localized_name": "야구 방망이",
-    "description": null
+    "description": "근접 전투도 가능한 야구 방망이. 팰은 공보다 훨씬 크다는 사실을 기억하자."
   },
   "Battle_MeleeWeapon_Pickaxe_Steal": {
     "localized_name": "팰 금속 곡괭이",
-    "description": null
+    "description": "채굴용 곡괭이. 팰 금속으로 만들어 경이로운 효율을 자랑한다."
   },
   "Battle_MeleeWeapon_Sword": {
     "localized_name": "검",
@@ -265,7 +265,7 @@
   },
   "Battle_RangeWeapon_Bow3": {
     "localized_name": "삼연궁",
-    "description": "3대의 화살을 동시에 발사하는 개량형 활. 신비한 힘 덕분에 1번 쏠 때 1대의 화살만 소비된다."
+    "description": "3발의 화살을 동시에 발사하는 개량형 활. 신비한 힘 덕분에 1번 쏠 때 1발의 화살만 소비된다."
   },
   "Battle_RangeWeapon_BowGun": {
     "localized_name": "쇠뇌",
@@ -289,23 +289,23 @@
   },
   "Battle_RangeWeapon_CompoundBow": {
     "localized_name": "기계식 활",
-    "description": null
+    "description": "근대화를 거친 활. 더욱 강력한 화살을 발사할 수 있다."
   },
   "Battle_RangeWeapon_FlameThrower": {
     "localized_name": "FlameThrower",
-    "description": null
+    "description": "높은 사정거리의 불을 뿜는 Flamethrower. 적중한 상대를 화염에 휩싸이게 할 수 있다. 제작하려면 |무기라인 공장 Ⅱ|이(가) 필요하다."
   },
   "Battle_RangeWeapon_GatlingGun": {
     "localized_name": "개틀링 건",
-    "description": "고속 연사로 제압 사격을 할 수 있는 개틀링 건. 사격 범위에 들어온 목표를 벌집으로 만들 수 있다. 제작하려면 |무기라인 공장 II|이(가) 필요하다."
+    "description": "고속 연사로 제압 사격을 할 수 있는 개틀링 건. 사격 범위에 들어온 목표를 벌집으로 만들 수 있다. 제작하려면 |무기라인 공장 Ⅱ|이(가) 필요하다."
   },
   "Battle_RangeWeapon_GrenadeLauncher": {
     "localized_name": "유탄 발사기",
-    "description": "광범위한 폭발을 일으키는 유탄을 발사한다. 많은 적을 상대할 때 유용하다. 제작하려면 |무기라인 공장 II|이(가) 필요하다."
+    "description": "광범위한 폭발을 일으키는 유탄을 발사한다. 많은 적을 상대할 때 유용하다. 제작하려면 |무기라인 공장 Ⅱ|이(가) 필요하다."
   },
   "Battle_RangeWeapon_GuidedMissileLauncher": {
     "localized_name": "미사일 발사기",
-    "description": "적을 자동으로 포착해 추적하는 마사일을 발사한다. 미사일은 적중 시 폭발하여 광범위한 피해를 준다. 제작하려면 |무기라인 공장 II|이(가) 필요하다."
+    "description": "적을 자동으로 포착해 추적하는 마사일을 발사한다. 미사일은 적중 시 폭발하여 광범위한 피해를 준다. 제작하려면 |무기라인 공장 Ⅱ|이(가) 필요하다."
   },
   "Battle_RangeWeapon_HandGun": {
     "localized_name": "핸드건",
@@ -313,15 +313,15 @@
   },
   "Battle_RangeWeapon_HomingSphereLauncher": {
     "localized_name": "귀환형 스피어 발사기",
-    "description": "스피어 발사용 발사기. 발사한 스피어는 팰을 추적한다. 제작하려면 '무기라인 공장 II'이(가) 필요하다."
+    "description": "스피어 발사용 발사기. 발사한 스피어는 팰을 추적한다. 제작하려면 '무기라인 공장 Ⅱ'이(가) 필요하다."
   },
   "Battle_RangeWeapon_LaserRifle": {
     "localized_name": "레이저 소총",
-    "description": "레이저를 발사하는 무기. 다루기 쉬우며 화력도 높다. 제작하려면 |무기라인 공장 II|이(가) 필요하다."
+    "description": "레이저를 발사하는 무기. 다루기 쉬우며 화력도 높다. 제작하려면 |무기라인 공장 Ⅱ|이(가) 필요하다."
   },
   "Battle_RangeWeapon_OldRevolver": {
     "localized_name": "낡은 리볼버",
-    "description": null
+    "description": "조금 낡은 회전식 리볼버. Handgun_default보다 한 발당 위력이 높다."
   },
   "Battle_RangeWeapon_Rifle": {
     "localized_name": "단발식 소총",
@@ -329,15 +329,15 @@
   },
   "Battle_RangeWeapon_RocketLauncher": {
     "localized_name": "로켓 발사기",
-    "description": "원거리에서 강력한 폭격을 할 수 있는 로켓 발사기. 제작하려면 |무기라인 공장 II|이(가) 필요하다."
+    "description": "원거리에서 강력한 폭격을 할 수 있는 로켓 발사기. 제작하려면 |무기라인 공장 Ⅱ|이(가) 필요하다."
   },
   "Battle_RangeWeapon_SemiAutoRifle": {
     "localized_name": "반자동 소총",
-    "description": null
+    "description": "연사력이 어느 정도 향상된 소총. 조준이 쉽고 화력도 높아 중거리 전투에서 빛을 발한다."
   },
   "Battle_RangeWeapon_SemiAutoShotgun": {
     "localized_name": "반자동 산탄총",
-    "description": null
+    "description": "높은 연사성을 갖춘 산탄총. 근거리 화력이 수준급이다."
   },
   "Battle_RangeWeapon_ShotGun": {
     "localized_name": "쌍발 산탄총",
@@ -357,11 +357,11 @@
   },
   "Battle_RangeWeapon_SubmachineGun": {
     "localized_name": "기관단총",
-    "description": null
+    "description": "우월한 연사력을 자랑하는 기관단총. 간편하게 다룰 수 있어 근거리 전투에서 빛을 발한다."
   },
   "BeamSword": {
     "localized_name": "빔 소드",
-    "description": null
+    "description": "근접 전투용 빔 소드. 고출력 레이저로 적을 바싹 태우며 베어버린다."
   },
   "BelieverFlagSet": {
     "localized_name": "팰 애호 단체 깃발 세트",
@@ -369,7 +369,7 @@
   },
   "BlastFurnace4": {
     "localized_name": "거대한 화로",
-    "description": null
+    "description": "헥소라이트을(를) 제련할 수 있다. 거대화를 거쳐 여러 팰이 힘을 합쳐 제련할 수 있게 되었다. 화염 팰이 불을 붙여줘야 한다."
   },
   "BreedFarm": {
     "localized_name": "배합 목장",
@@ -381,11 +381,11 @@
   },
   "CarbonFiber": {
     "localized_name": "카본 섬유",
-    "description": null
+    "description": "가볍고 단단한 양질의 소재. 방어구 등의 소재가 된다."
   },
   "Cauldron": {
     "localized_name": "마녀의 냄비",
-    "description": null
+    "description": "거점에 배치하면 제약 작업 속도가 상승한다. 2개 이상 배치해도 효과는 없다."
   },
   "CeilingLamp": {
     "localized_name": "천장 램프",
@@ -393,23 +393,23 @@
   },
   "Cement": {
     "localized_name": "시멘트",
-    "description": null
+    "description": "건축물의 소재가 되는 시멘트. 상급 작업대에서 만들 수 있다."
   },
   "ChargeLaserRifle": {
     "localized_name": "충전식 소총",
-    "description": null
+    "description": "ko_Text"
   },
   "ChargeLaserRifleBullet": {
     "localized_name": "충전식 소총 탄약",
-    "description": null
+    "description": "ko_Text"
   },
   "Cloth2": {
     "localized_name": "상급 천",
-    "description": null
+    "description": "많은 양의 '양털'을 짜서 만든 '상급 천'. 고급 방어구를 만들 때 필요하다. '상급 작업대'에서 만들 수 있게 된다."
   },
   "CompositeDesk": {
     "localized_name": "제도대",
-    "description": null
+    "description": "시설여러 설계도를 조합해 더욱 높은 단계의 설계도를 제도할 수 있는 시설."
   },
   "Cooler": {
     "localized_name": "얼음 냉방기",
@@ -417,11 +417,11 @@
   },
   "CoolerBox": {
     "localized_name": "아이스박스",
-    "description": null
+    "description": "작은 식료품 보관창고. 얼음 팰을 배치하면 보관한 식료품의 부패를 늦출 수 있다."
   },
   "CoolerPalFoodBox": {
     "localized_name": "보냉 먹이 상자",
-    "description": null
+    "description": "보냉 기능이 포함된 먹이 상자. 얼음 팰을 배치하면 보관한 식료품의 부패를 늦출 수 있다."
   },
   "Crusher": {
     "localized_name": "파쇄기",
@@ -457,11 +457,11 @@
   },
   "DimensionPalStorage": {
     "localized_name": "팰 복원 스토리지",
-    "description": null
+    "description": "포획한 팰을 대량으로 보관하는 시설. 길드 멤버라면 누구든 팰을 넣거나 꺼낼 수 있다. 개인 설정을 통해 개인용 팰 보관고로 사용하는 것도 가능하다."
   },
   "DismantlingConveyor": {
     "localized_name": "팰 해체 컨베이어",
-    "description": null
+    "description": "넣은 팰을 자동으로 해체해 주는 꿈만 같은 설비."
   },
   "DisplayCharacter": {
     "localized_name": "감상용 케이지",
@@ -477,7 +477,7 @@
   },
   "ElectricGenerator_Large": {
     "localized_name": "대형 발전기",
-    "description": null
+    "description": "번개 팰이 만들어 낸 전기를 저장하는 시설. 대형화를 거치며 발전 효율도 상승했다."
   },
   "ElectricHeater": {
     "localized_name": "전기 난방기",
@@ -485,39 +485,39 @@
   },
   "EnergyLauncherBullet": {
     "localized_name": "플라즈마 카트리지",
-    "description": null
+    "description": "플라즈마 대포 등에 사용하는 탄."
   },
   "EnergyRocketLauncher": {
     "localized_name": "플라즈마 대포",
-    "description": null
+    "description": "고출력 에너지탄을 발사하는 무기. 착탄 시 에너지 폭발을 일으킨다."
   },
   "EnergyShotgun": {
     "localized_name": "에너지 산탄총",
-    "description": null
+    "description": "ko_Text"
   },
   "EnergyShotgunBullet": {
     "localized_name": "에너지 산탄총 탄약",
-    "description": null
+    "description": "ko_Text"
   },
   "EnergyStorage_Electric": {
     "localized_name": "축전기",
-    "description": null
+    "description": "발전기(으)로 만들어 낸 잉여 전기를 저장하는 시설."
   },
   "Expedition": {
     "localized_name": "팰 원정소",
-    "description": null
+    "description": "팰을 던전 등의 장소로 원정을 보낼 수 있는 시설. 파견된 팰은 각지에서 아이템 수집과 전투를 수행한 후 거점으로 자원을 가지고 돌아온다."
   },
   "Factory_Hard_04": {
     "localized_name": "고도 문명 작업 공장",
-    "description": null
+    "description": "아이템 및 방어구를 제작하는 데 필요한 공장. 고성능 기계를 도입하여 고속 제작이 가능해졌다. 수작업이 가능한 팰이 필요하다."
   },
   "Factory_Money": {
     "localized_name": "금화 제조 공장",
-    "description": null
+    "description": "금화을(를) 제조하는 공장. 정신에 부담이 가는 작업이기에 SAN 수치가 감소한다. 수작업이 가능한 팰이 필요하다."
   },
   "Farm_SkillFruits": {
     "localized_name": "기술 열매 농원",
-    "description": null
+    "description": "기술 열매를 재배할 수 있는 농원. 재배하려는 기술 열매를 땅에 심으면 같은 종류의 열매를 여러 개 수확할 수 있다."
   },
   "FireCultFlagSet": {
     "localized_name": "영원한 불꽃의 동지 깃발 세트",
@@ -557,7 +557,7 @@
   },
   "FlamethrowerBullet": {
     "localized_name": "화염방사기 연료",
-    "description": null
+    "description": "화염방사기의 연료. Flamethrower 등에 사용할 수 있는 탄."
   },
   "FlourMill": {
     "localized_name": "제분기",
@@ -565,51 +565,51 @@
   },
   "FlowerBed": {
     "localized_name": "화단",
-    "description": null
+    "description": "거점에 배치하면 채집 작업 속도가 상승한다. 2개 이상 배치해도 효과는 없다."
   },
   "Fountain": {
     "localized_name": "분수",
-    "description": null
+    "description": "거점에 배치하면 관개 작업 속도가 상승한다. 2개 이상 배치해도 효과는 없다."
   },
   "FragGrenade": {
     "localized_name": "파편 수류탄",
-    "description": null
+    "description": "중거리 전투에서 유용한 파편 수류탄. 투척 시 몇 초 후에 폭발하여 적에게 피해를 준다."
   },
   "FragGrenade_Dark": {
     "localized_name": "암흑 수류탄",
-    "description": null
+    "description": "중거리 전투에서 유용한 암흑 수류탄. 투척 시 몇 초 후에 폭발하여 적에게 어둠 속성 피해를 준다."
   },
   "FragGrenade_Dragon": {
     "localized_name": "용격 수류탄",
-    "description": null
+    "description": "중거리 전투에서 유용한 용격 수류탄. 투척 시 몇 초 후에 폭발하여 적에게 용 속성 피해를 준다."
   },
   "FragGrenade_Elec": {
     "localized_name": "전격 수류탄",
-    "description": null
+    "description": "중거리 전투에서 유용한 전격 수류탄. 투척 시 몇 초 후에 폭발하여 주변이 감전된다."
   },
   "FragGrenade_Fire": {
     "localized_name": "소이 수류탄",
-    "description": null
+    "description": "중거리 전투에서 유용한 소이 수류탄. 투척 시 몇 초 후에 폭발하여 주변에 불길을 일으킨다."
   },
   "FragGrenade_Ground": {
     "localized_name": "대지 수류탄",
-    "description": null
+    "description": "중거리 전투에서 유용한 대지 수류탄. 투척 시 몇 초 후에 폭발하여 적에게 땅 속성 피해를 준다."
   },
   "FragGrenade_Ice": {
     "localized_name": "빙결 수류탄",
-    "description": null
+    "description": "중거리 전투에서 유용한 빙결 수류탄. 투척 시 몇 초 후에 폭발하여 주변이 얼어붙는다."
   },
   "FragGrenade_Leaf": {
     "localized_name": "초목 수류탄",
-    "description": null
+    "description": "중거리 전투에서 유용한 초목 수류탄. 투척 시 몇 초 후에 폭발하여 적에게 풀 속성 피해를 준다."
   },
   "FragGrenade_Super": {
     "localized_name": "파편 수류탄(개량)",
-    "description": null
+    "description": "개량형 파편 수류탄. 투척 시 몇 초 후에 폭발하여 적에게 큰 피해를 준다."
   },
   "FragGrenade_Water": {
     "localized_name": "유수 수류탄",
-    "description": null
+    "description": "중거리 전투에서 유용한 유수 수류탄. 투척 시 몇 초 후에 폭발하여 적에게 물 속성 피해를 준다."
   },
   "FurnitureSet_1": {
     "localized_name": "나무 거실 가구 세트",
@@ -745,7 +745,7 @@
   },
   "GatlingBullet": {
     "localized_name": "개틀링탄",
-    "description": null
+    "description": "개틀링 건 등에 사용하는 탄."
   },
   "Glass_houseset": {
     "localized_name": "유리 건축 세트",
@@ -753,23 +753,23 @@
   },
   "GlobalPalStorage": {
     "localized_name": "글로벌 팰 상자",
-    "description": null
+    "description": "팰 유전자 데이터를 저장하거나 저장한 유전자 데이터를 통해 팰을 복원할 수 있는 시설. 저장된 유전자 데이터를 다른 월드에 인계하는 것도 가능하다."
   },
   "GrapplingGun": {
     "localized_name": "갈고리 총",
-    "description": null
+    "description": "고속으로 이동하게 해주는 갈고리 총. 사격 지점에 갈고리를 날리면 사격자의 몸을 끌고 간다. 높이 차가 있는 지역에서도 편하게 이동할 수 있다."
   },
   "GrapplingGun2": {
     "localized_name": "메가 갈고리 총",
-    "description": null
+    "description": "고속으로 이동하게 해주는 갈고리 총. 사격 지점에 갈고리를 날리면 사격자의 몸을 끌고 간다. 개량해서 사거리가 길어졌다."
   },
   "GrapplingGun3": {
     "localized_name": "기가 갈고리 총",
-    "description": null
+    "description": "고속으로 이동하게 해주는 갈고리 총. 사격 지점에 갈고리를 날리면 사격자의 몸을 끌고 간다. 시제품의 데이터를 바탕으로 성능을 더욱 끌어올렸다."
   },
   "GrapplingGun4": {
     "localized_name": "테라 갈고리 총",
-    "description": null
+    "description": "고속으로 이동할 수 있도록 돕는 갈고리 총. 사격 지점에 갈고리를 날리면, 사격자의 몸을 끌고 간다. 연구 끝에 압도적인 기동성을 실현해냈다."
   },
   "GrapplingGun5": {
     "localized_name": "울트라 갈고리 총",
@@ -777,11 +777,11 @@
   },
   "GrenadeBullet": {
     "localized_name": "유탄",
-    "description": null
+    "description": "유탄 발사기 등에 사용하는 탄."
   },
   "GuildChest": {
     "localized_name": "길드 상자",
-    "description": null
+    "description": "아공간을 경유해 아이템을 순식간에 보내거나 받는 상자. 각 거점에 배치한 이 상자끼리 내용물을 공유할 수 있다."
   },
   "HandTorch": {
     "localized_name": "휴대형 횃불",
@@ -793,7 +793,7 @@
   },
   "Headstone": {
     "localized_name": "묘석",
-    "description": null
+    "description": "문자를 쓸 수 있는 묘석. 기록용으로 사용하자."
   },
   "Heater": {
     "localized_name": "불 난방기",
@@ -801,11 +801,11 @@
   },
   "Homeward": {
     "localized_name": "귀환의 뇌운",
-    "description": null
+    "description": "가장 가까운 거점으로 이동하는 기능이 있다. 던전 내부 등의 위치에선 사용할 수 없다."
   },
   "HugeKitchen": {
     "localized_name": "대형 부엌",
-    "description": null
+    "description": "식재료를 조리할 때 필요한 시설. 거대화를 거쳐 여러 팰이 힘을 합쳐 조리할 수 있게 되었다. 화염 팰이 불을 붙여줘야 한다."
   },
   "HunterFlagSet": {
     "localized_name": "밀렵단 깃발 세트",
@@ -813,7 +813,7 @@
   },
   "IceCrusher": {
     "localized_name": "동결 분쇄기",
-    "description": null
+    "description": "금속 광석을(를) 분쇄하여 다른 소재로 변환할 수 있는 시설. 작업 효율이 높은 대신, 가동하려면 전력 공급 및 |냉각| 적성을 가진 팰이 필요하다."
   },
   "Infra_ElectricGenerator_Grade_01": {
     "localized_name": "발전기",
@@ -837,7 +837,7 @@
   },
   "Infra_MachineParts": {
     "localized_name": "못",
-    "description": null
+    "description": "다양한 시설 건설에 필요한 부품. 원시적인 작업대에서 만들 수 있다."
   },
   "Infra_PalBed_Grade_01": {
     "localized_name": "짚 팰 침대",
@@ -857,11 +857,11 @@
   },
   "ItemBooth": {
     "localized_name": "프리마켓 (아이템)",
-    "description": null
+    "description": "아이템을 판매할 때 사용하는 시설. 다른 플레이어에게 아이템을 판매할 수 있다. 얼음 팰을 배치하면 보관한 식료품의 부패가 늦춰진다."
   },
   "ItemChest_04": {
     "localized_name": "고도 문명 상자",
-    "description": null
+    "description": "아이템을 수납할 수 있다. 무척 튼튼하며 수납 공간도 많다. 안전한 거대 창고로 사용하자."
   },
   "JapaneseStyle_houseset": {
     "localized_name": "일본식 건축 세트",
@@ -869,11 +869,11 @@
   },
   "Katana": {
     "localized_name": "카타나",
-    "description": null
+    "description": "근접 전투용 카타나. 예리한 날로 적을 일도양단한다."
   },
   "Lab": {
     "localized_name": "팰 작업 연구소",
-    "description": null
+    "description": "팰의 여러 작업과 관련된 연구를 진행하는 시설. 이 시설에서 팰에게 작업을 시키면 연구가 진행되며 다양한 효과를 얻을 수 있다."
   },
   "Lamp": {
     "localized_name": "설치 램프",
@@ -881,7 +881,7 @@
   },
   "Lantern": {
     "localized_name": "허리 휴대형 랜턴",
-    "description": null
+    "description": "허리에 차고 다니는 랜턴. 밤이 되면 자동으로 환해진다. 1개만으로도 충분하다."
   },
   "Lantern_High": {
     "localized_name": "허리 휴대형 강화 랜턴",
@@ -897,19 +897,19 @@
   },
   "LaserBullet": {
     "localized_name": "에너지 카트리지",
-    "description": null
+    "description": "레이저 소총 등에 사용하는 탄."
   },
   "LaserGatlingBullet": {
     "localized_name": "개틀링 레이저 카트리지",
-    "description": null
+    "description": "레이저 개틀링 건 등에 사용하는 탄."
   },
   "LaserGatlingGun": {
     "localized_name": "레이저 개틀링 건",
-    "description": null
+    "description": "고속으로 빔 형태의 광선을 연사하는 개틀링 건. 높은 화력으로 여러 적들을 한꺼번에 제압할 수 있다."
   },
   "LauncherBullet": {
     "localized_name": "로켓탄",
-    "description": "로켓 발사기' 등에 사용하는 탄. 제작하려면 '무기라인 공장 II'이(가) 필요하다."
+    "description": "로켓 발사기' 등에 사용하는 탄. 제작하려면 '무기라인 공장 Ⅱ'이(가) 필요하다."
   },
   "Launcher_Meteor": {
     "localized_name": "메테오 발사기",
@@ -917,7 +917,7 @@
   },
   "MakeshiftAssaultRifle": {
     "localized_name": "낡은 돌격 소총",
-    "description": null
+    "description": "잡다한 재료로 직접 만든 돌격 소총. 연사력과 사거리는 그럴 듯하나, 한 발당 위력은 낮은 편이다."
   },
   "MakeshiftHandgun": {
     "localized_name": "즉석 핸드건",
@@ -925,11 +925,11 @@
   },
   "MakeshiftShotgun": {
     "localized_name": "낡은 산탄총",
-    "description": null
+    "description": "잡다한 재료로 직접 만든 산탄총. 사거리가 짧기에 근거리 전투에서 빛을 발한다."
   },
   "MakeshiftSubmachineGun": {
     "localized_name": "낡은 기관단총",
-    "description": null
+    "description": "잡다한 재료로 직접 만든 기관단총. 연사력은 좋으나, 한 발당 위력은 낮은 편이다."
   },
   "ManganeseIngot": {
     "localized_name": "코랄리움 주괴",
@@ -937,7 +937,7 @@
   },
   "ManualElectricGenerator": {
     "localized_name": "인력 발전기",
-    "description": null
+    "description": "회전 운동을 전기 에너지로 변환하는 시설. 저효율에 작업하는 팰의 SAN 수치도 감소하지만 그 대신 경험치를 획득할 수 있다."
   },
   "MeatCutterKnife": {
     "localized_name": "푸주칼",
@@ -945,19 +945,19 @@
   },
   "MedicalPalBed_04": {
     "localized_name": "대형 팰 침대",
-    "description": null
+    "description": "팰이 푹 잠들 수 있는 커다란 전용 침대. 팰이 다쳤거나 밤에 잘 때 사용한다. 덩치 큰 팰도 편안히 잘 수 있을 것이다."
   },
   "MedicalPalBed_05": {
     "localized_name": "고도 문명 팰 포드",
-    "description": null
+    "description": "팰이 사용하는 회복용 포드. 팰이 다쳤거나 밤에 잘 때 사용한다. 기술 혁신을 거친 덕분에 회복량이 상승했다."
   },
   "MedicineFacility_03": {
     "localized_name": "고도 문명 제약대",
-    "description": null
+    "description": "아픈 팰을 치료할 약을 만드는 설비. 미래 기술을 활용하여 미지의 약도 만들 수 있다. 작업은 제약이 가능한 팰에게 맡기자."
   },
   "MetalDetector": {
     "localized_name": "금속 탐지기",
-    "description": null
+    "description": "손으로 들고 주변에 숨겨진 광석을 탐지하는 도구. 광석 근처에서 탐지하면 그 금속에 표식을 찍는다. 거리가 멀어지면 찍었던 표식이 사라진다."
   },
   "Metal_Gate": {
     "localized_name": "금속 문",
@@ -968,12 +968,12 @@
     "description": "금속으로 거점을 제작할 때 쓰는 세트. 금속제 토대, 벽, 지붕, 계단 등 집을 지을 때 필요한 것들을 만들 수 있다."
   },
   "MiningTool": {
-    "localized_name": "곡괭이와 헬멧",
-    "description": null
+    "localized_name": "채굴 왜건",
+    "description": "거점에 배치하면 채굴 작업 속도가 상승한다. 2개 이상 배치해도 효과는 없다."
   },
   "MissileBullet": {
     "localized_name": "미사일탄",
-    "description": null
+    "description": "미사일 발사기 등에 사용하는 탄."
   },
   "MonsterFarm": {
     "localized_name": "가축 목장",
@@ -981,7 +981,7 @@
   },
   "MultiElectricHatchingPalEgg": {
     "localized_name": "대형 전동 알 부화기",
-    "description": null
+    "description": "팰의 알을 부화시키는 장치. 전기가 필요하지만 온도 최적화와 더불어 여러 알을 병행으로 부화시키는 기능이 추가되었다."
   },
   "MultiHatchingPalEgg": {
     "localized_name": "대형 알 부화기",
@@ -995,25 +995,33 @@
     "localized_name": "달꽃단 깃발 세트",
     "description": "달꽃단 깃발, 달꽃단 휘장아이템이 포함된 세트. 달꽃단을 압도했음을 나타내는 증표이다."
   },
+  "OctaviaSet01": {
+    "localized_name": "ULTRAKILL 컬래버 세트 1",
+    "description": "[ULTRAKILL 컬래버] V1 갑옷, 마크스맨 리볼버 아이템이 포함된 세트."
+  },
+  "OctaviaSet02": {
+    "localized_name": "ULTRAKILL 컬래버 세트 2",
+    "description": "[ULTRAKILL 컬래버] V2 갑옷, 코어 이젝트 산탄총 아이템이 포함된 세트."
+  },
   "OilPump": {
     "localized_name": "원유 추출기",
-    "description": null
+    "description": "유전에서 원유을(를) 추출할 때 필요한 장치. 가동하려면 대량의 전력 공급이 필요하다."
   },
   "OlympicCauldron": {
     "localized_name": "성화대",
-    "description": null
+    "description": "거점에 배치하면 불 피우기 작업 속도가 상승한다. 2개 이상 배치해도 효과는 없다."
   },
   "OperatingTable": {
-    "localized_name": "팔 수술대",
-    "description": null
+    "localized_name": "팰 수술대",
+    "description": "ko_Text"
   },
   "OverheatRifle": {
     "localized_name": "전자동 소총",
-    "description": null
+    "description": "ko_Text"
   },
   "OverheatRifleBullet": {
     "localized_name": "전자동 소총 탄약",
-    "description": null
+    "description": "ko_Text"
   },
   "PALBOX": {
     "localized_name": "팰 상자",
@@ -1021,15 +1029,15 @@
   },
   "PalBooth": {
     "localized_name": "프리마켓 (팰)",
-    "description": null
+    "description": "팰을 판매할 때 사용하는 시설. 다른 플레이어에게 팰을 판매할 수 있다. 얼음 팰을 배치하면 판매하는 식료품의 부패가 늦춰진다."
   },
   "PalDopingShot": {
     "localized_name": "부스트 건",
-    "description": null
+    "description": "ko_Text"
   },
   "PalDopingShotBullet": {
     "localized_name": "부스트 건 탄약",
-    "description": null
+    "description": "ko_Text"
   },
   "PalDopingShot_2": {
     "localized_name": "메가 부스트 건",
@@ -1041,23 +1049,23 @@
   },
   "PalHealingGrenade": {
     "localized_name": "팰 회복 수류탄",
-    "description": null
+    "description": "ko_Text"
   },
   "PalMedicineBox": {
     "localized_name": "약 선반",
-    "description": null
+    "description": "팰의 약을 넣어두는 선반. 병에 걸린 팰이 여기서 약을 먹는다. 약이 떨어지지 않게 관리하자."
   },
   "PalRevive": {
     "localized_name": "부활약",
-    "description": null
+    "description": "상처 입어 행동 불능 상태가 된 팰을 부활시키는 약."
   },
   "PalSphere_Exotic": {
     "localized_name": "인피니티 스피어",
-    "description": null
+    "description": "던져서 팰을 포획하는 도구. 경이로운 성능을 자랑하며, 틀에서 벗어난 팰이라도 잡을 수 있다."
   },
   "Plastic": {
     "localized_name": "플라스틸",
-    "description": null
+    "description": "원유와(과) 금속을 가공해서 만드는 특수 소재. 전기 화로에서 만들 수 있다."
   },
   "PoliceFlagSet": {
     "localized_name": "자경단 깃발 세트",
@@ -1065,11 +1073,11 @@
   },
   "Polymer": {
     "localized_name": "폴리머",
-    "description": null
+    "description": "기름을 가공해 만든 폴리머. 총 등을 만들 때 필요."
   },
   "Potion_Extreme": {
     "localized_name": "지고의 회복약",
-    "description": null
+    "description": "천천히 몸의 상처를 치료하는 음용약. 품질이 비약적으로 상승하여, 아주 빠르게 HP를 회복시켜 준다."
   },
   "Product_Axe_Grade_01": {
     "localized_name": "돌 도끼",
@@ -1085,7 +1093,7 @@
   },
   "Product_CoalPit": {
     "localized_name": "석탄 채굴장",
-    "description": null
+    "description": "석탄을(를) 생산하는 시설. 석탄을(를) 파내는 작업은 고되므로 체력이 필요하다. 채굴에 자신 있는 팰에게 맡기자."
   },
   "Product_Cooking_Grade_01": {
     "localized_name": "모닥불",
@@ -1101,11 +1109,11 @@
   },
   "Product_CopperPit": {
     "localized_name": "금속 채굴장",
-    "description": null
+    "description": "금속 광석을(를) 생산하는 시설. 금속 광석을(를) 파내는 작업은 고되므로 체력이 필요하다. 채굴에 자신 있는 팰에게 맡기자."
   },
   "Product_CopperPit_2": {
     "localized_name": "금속 채굴장 Ⅱ",
-    "description": null
+    "description": "금속 광석을(를) 대량으로 생산하는 시설. 금속 광석을(를) 파내는 작업은 고되므로 체력이 필요하다. 채굴에 자신 있는 팰에게 맡기자."
   },
   "Product_Factory_Hard_Grade_01": {
     "localized_name": "상급 작업대",
@@ -1116,7 +1124,7 @@
     "description": "전기가 필요하지만 보다 빠르게 다양한 아이템을 생산할 수 있게 된다. 작업하려면 |수작업| 적성을 가진 팰이 필요하다."
   },
   "Product_Factory_Hard_Grade_03": {
-    "localized_name": "작업라인 공장 II",
+    "localized_name": "작업라인 공장 Ⅱ",
     "description": "전기가 필요하지만 더욱 빠르게 다양한 아이템을 생산할 수 있게 된다. 작업하려면 |수작업| 적성을 가진 팰이 필요하다."
   },
   "Product_Farm_Berries": {
@@ -1125,7 +1133,7 @@
   },
   "Product_Farm_Carrot": {
     "localized_name": "당근 농원",
-    "description": null
+    "description": "당근을(를) 기를 수 있는 농원. 수확까지 시간이 좀 걸리지만 요리의 폭이 넓어진다. 파종 및 관개, 수확 작업에 여러 마리의 팰이 필요하다."
   },
   "Product_Farm_Lettuce": {
     "localized_name": "양상추 농원",
@@ -1133,11 +1141,11 @@
   },
   "Product_Farm_Onion": {
     "localized_name": "양파 농원",
-    "description": null
+    "description": "양파을(를) 기를 수 있는 농원. 수확까지 시간이 좀 걸리지만 요리의 폭이 넓어진다. 파종 및 관개, 수확 작업에 여러 마리의 팰이 필요하다."
   },
   "Product_Farm_Potato": {
     "localized_name": "감자 농원",
-    "description": null
+    "description": "감자을(를) 기를 수 있는 농원. 수확까지 시간이 좀 걸리지만 요리의 폭이 넓어진다. 파종 및 관개, 수확 작업에 여러 마리의 팰이 필요하다."
   },
   "Product_Farm_tomato": {
     "localized_name": "토마토 농원",
@@ -1181,7 +1189,7 @@
   },
   "Product_QuartzPit": {
     "localized_name": "순수한 석영 채굴장",
-    "description": null
+    "description": "순수한 석영을(를) 생산하는 시설. 순수한 석영을(를) 파내는 작업은 고되므로 체력이 필요하다. 채굴에 자신 있는 팰에게 맡기자."
   },
   "Product_StationDeforest": {
     "localized_name": "벌목장",
@@ -1193,7 +1201,7 @@
   },
   "Product_SulfurPit": {
     "localized_name": "유황 채굴장",
-    "description": null
+    "description": "유황을(를) 생산하는 시설. 유황을(를) 파내는 작업은 고되므로 체력이 필요하다. 채굴에 자신 있는 팰에게 맡기자."
   },
   "Product_WeaponFactory_Dirty_Grade_01": {
     "localized_name": "무기 제작대",
@@ -1204,7 +1212,7 @@
     "description": "전기가 필요하지만 보다 빠르게 무기나 탄약을 생산할 수 있게 된다. 작업하려면 |수작업| 적성을 가진 팰이 필요하다."
   },
   "Product_WeaponFactory_Dirty_Grade_03": {
-    "localized_name": "무기라인 공장 II",
+    "localized_name": "무기라인 공장 Ⅱ",
     "description": "전기가 필요하지만 더욱 빠르게 무기나 탄약을 생산할 수 있게 된다. 작업하려면 |수작업| 적성을 가진 팰이 필요하다."
   },
   "Product_WorkBench_SkillUnlock": {
@@ -1213,11 +1221,11 @@
   },
   "Refrigerator": {
     "localized_name": "냉장고",
-    "description": null
+    "description": "대용량 식료품 보관창고. 얼음 팰을 배치하면 보관한 식료품의 부패를 늦출 수 있다."
   },
   "ReinforcedArrow": {
     "localized_name": "강화 화살",
-    "description": null
+    "description": "기계식 활(으)로 발사하는 강화된 화살."
   },
   "RepairBench": {
     "localized_name": "수리대",
@@ -1225,7 +1233,7 @@
   },
   "RepairKit": {
     "localized_name": "수리 키트",
-    "description": null
+    "description": "건축물을 수리할 때 쓰는 도구. 파괴된 건축물에 사용한다."
   },
   "RifleBullet": {
     "localized_name": "소총 탄약",
@@ -1237,31 +1245,31 @@
   },
   "SFArmor": {
     "localized_name": "헥소라이트 갑옷",
-    "description": null
+    "description": "헥소라이트 소재로 만든 갑옷. 압도적인 내구도와 방어력을 겸비했다."
   },
   "SFArmorCold": {
     "localized_name": "내한 헥소라이트 갑옷",
-    "description": null
+    "description": "개량형 헥소라이트 갑옷. 몸이 얼 정도의 추위를 막아준다."
   },
   "SFArmorHeat": {
     "localized_name": "내열 헥소라이트 갑옷",
-    "description": null
+    "description": "개량형 헥소라이트 갑옷. 뛰어난 내열성을 자랑한다."
   },
   "SFArmorWeight": {
     "localized_name": "경량 헥소라이트 갑옷",
-    "description": null
+    "description": "개량형 헥소라이트 갑옷. 플레이어의 소지 중량 제한이 증가한다."
   },
   "SFArrow": {
     "localized_name": "발전형 화살",
-    "description": null
+    "description": "발전형 활(으)로 발사하는 헥소라이트 소재 화살."
   },
   "SFBow": {
     "localized_name": "발전형 활",
-    "description": null
+    "description": "고도의 기술로 재구축된 활. 매우 강력한 화살을 발사할 수 있다."
   },
   "SFHelmet": {
     "localized_name": "헥소라이트 투구",
-    "description": null
+    "description": "헥소라이트 소재로 만든 투구. 믿을 수 없을 정도로 단단하고 가볍다."
   },
   "SF_houseset": {
     "localized_name": "미래식 건축 세트",
@@ -1273,7 +1281,7 @@
   },
   "SanityDecrease1": {
     "localized_name": "α파 발생 장치",
-    "description": null
+    "description": "α파를 발생시켜 팰의 정신을 안정화하는 장치. 거점 내 팰의 SAN 수치 감소량을 경감한다. 2개 이상 배치해도 효과는 없다."
   },
   "ScientistFlagSet": {
     "localized_name": "유전자 연구 부대 깃발 세트",
@@ -1293,15 +1301,15 @@
   },
   "Shield_04": {
     "localized_name": "테라 방패",
-    "description": "팰지움 기술로 탄생한 신비한 방패. 실험을 거듭한 결과 품질 면에서 최고봉에 도달했다. |작업라인 공장 II|에서 제작할 수 있다."
+    "description": "팰지움 기술로 탄생한 신비한 방패. 실험을 거듭한 결과 품질 면에서 최고봉에 도달했다. |작업라인 공장 Ⅱ|에서 제작할 수 있다."
   },
   "Shield_05": {
     "localized_name": "울트라 방패",
-    "description": "팰지움 기술로 탄생한 신비한 방패. 실험을 더욱 거듭한 결과 품질 면에서 궁극에 도달했다. |작업라인 공장 II|에서 제작할 수 있다."
+    "description": "팰지움 기술로 탄생한 신비한 방패. 실험을 더욱 거듭한 결과 품질 면에서 궁극에 도달했다. |작업라인 공장 Ⅱ|에서 제작할 수 있다."
   },
   "Shield_SF": {
     "localized_name": "발전형 방패",
-    "description": null
+    "description": "초고도 기술로 탄생한 신비한 방패. 한동안 공격받지 않으면 자동으로 수리된다. 품질 면에서 완전무결의 성과를 실현했다."
   },
   "ShotGunBullet": {
     "localized_name": "산탄총 탄약",
@@ -1313,51 +1321,51 @@
   },
   "Silo": {
     "localized_name": "사일로",
-    "description": null
+    "description": "거점에 배치하면 파종 작업 속도가 상승한다. 2개 이상 배치해도 효과는 없다."
   },
   "SkillUnlock_Alpaca": {
     "localized_name": "멜파카의 안장",
-    "description": null
+    "description": "가지고 있으면 멜파카에 탑승할 수 있다."
   },
   "SkillUnlock_AmaterasuWolf": {
     "localized_name": "불이리의 안장",
-    "description": null
+    "description": "가지고 있으면 불이리에 탑승할 수 있다."
   },
   "SkillUnlock_AmaterasuWolf_Dark": {
     "localized_name": "음이리의 안장",
-    "description": null
+    "description": "가지고 있으면 음이리에 탑승할 수 있다."
   },
   "SkillUnlock_BadCatgirl": {
     "localized_name": "뭘보냥의 산탄총",
-    "description": null
+    "description": "멀보냥 전용 산탄총. 파트너 스킬을 발동하면 멀보냥이(가) 근처 적에게 산탄총을 난사한다."
   },
   "SkillUnlock_BirdDragon": {
     "localized_name": "버드래곤의 안장",
-    "description": null
+    "description": "가지고 있으면 버드래곤에 탑승할 수 있다."
   },
   "SkillUnlock_BirdDragon_Ice": {
     "localized_name": "시로카바네의 안장",
-    "description": null
+    "description": "가지고 있으면 시로카바네에 탑승할 수 있다."
   },
   "SkillUnlock_BlackCentaur": {
     "localized_name": "켄타나이트의 안장",
-    "description": null
+    "description": "가지고 있으면 켄타나이트에 탑승할 수 있다."
   },
   "SkillUnlock_BlackGriffon": {
     "localized_name": "제노그리프의 안장",
-    "description": null
+    "description": "가지고 있으면 제노그리프에 탑승할 수 있다."
   },
   "SkillUnlock_BlackMetalDragon": {
     "localized_name": "라바드래곤의 안장",
-    "description": null
+    "description": "가지고 있으면 라바드래곤에 탑승할 수 있다."
   },
   "SkillUnlock_BlackPuppy": {
     "localized_name": "껌댕이의 하네스",
-    "description": null
+    "description": "껌댕이 전용 하네스. 파트너 스킬을 발동하면 가까이 있는 크로마이트의 위치를 탐지할 수 있다."
   },
   "SkillUnlock_BlueDragon": {
     "localized_name": "아주리비의 안장",
-    "description": null
+    "description": "가지고 있으면 아주리비에 탑승할 수 있다."
   },
   "SkillUnlock_BlueDragon_Ice": {
     "localized_name": "아주리나의 안장",
@@ -1365,95 +1373,95 @@
   },
   "SkillUnlock_BlueThunderHorse": {
     "localized_name": "썬더호스의 안장",
-    "description": null
+    "description": "가지고 있으면 썬더호스에 탑승할 수 있다."
   },
   "SkillUnlock_Boar": {
     "localized_name": "돌진돼지의 안장",
-    "description": null
+    "description": "가지고 있으면 돌진돼지에 탑승할 수 있다."
   },
   "SkillUnlock_Carbunclo": {
     "localized_name": "쿠룰리스의 기관단총",
-    "description": null
+    "description": "큐룰리스 전용 소형 기관단총. 파트너 스킬을 발동하면 플레이어의 머리에 올라 공격에 맞춰 추가 사격으로 지원한다."
   },
   "SkillUnlock_ColorfulBird": {
     "localized_name": "알록새의 장갑",
-    "description": null
+    "description": "알록새을(를) 조심스럽게 잡는 장갑. 파트너 스킬을 발동하면 알록새을(를) 잡은 채 폭탄 알을 발사하여 공격할 수 있다."
   },
   "SkillUnlock_DarkMechaDragon": {
     "localized_name": "제노드란의 안장",
-    "description": null
+    "description": "가지고 있으면 제노드란에 탑승할 수 있다."
   },
   "SkillUnlock_Deer": {
     "localized_name": "신령사슴의 안장",
-    "description": null
+    "description": "가지고 있으면 신령사슴에 탑승할 수 있다."
   },
   "SkillUnlock_Deer_Ground": {
     "localized_name": "산령사슴의 안장",
-    "description": null
+    "description": "가지고 있으면 산령사슴에 탑승할 수 있다."
   },
   "SkillUnlock_DreamDemon": {
     "localized_name": "몽마둥이의 목걸이",
-    "description": null
+    "description": "몽마둥이의 목걸이. 소지한 상태로 몽마둥이을(를) 보유하고 있으면 항상 등장하여 플레이어의 공격에 맞춰 추가 공격으로 지원한다."
   },
   "SkillUnlock_DrillGame": {
     "localized_name": "드릴북이의 머리띠",
-    "description": null
+    "description": "드릴북이의 결전의 머리띠. 파트너 스킬을 발동하면 드릴북이이(가) 고속으로 회전하여 더욱 높은 효율로 돌을 깎는다."
   },
   "SkillUnlock_Eagle": {
     "localized_name": "질풍수리의 장갑",
-    "description": null
+    "description": "질풍수리의 다리를 조심스럽게 잡는 장갑. 소지한 상태로 질풍수리을(를) 보유하고 있으면 질풍수리이(가) 글라이더가 된다."
   },
   "SkillUnlock_ElecPanda": {
     "localized_name": "일렉판다의 미니건",
-    "description": null
+    "description": "가지고 있으면 일렉판다에 탑승해 미니건을 난사할 수 있다."
   },
   "SkillUnlock_FairyDragon": {
     "localized_name": "실피아의 안장",
-    "description": null
+    "description": "가지고 있으면 실피아에 탑승할 수 있다."
   },
   "SkillUnlock_FairyDragon_Water": {
     "localized_name": "실티아의 안장",
-    "description": null
+    "description": "가지고 있으면 실티아에 탑승할 수 있다."
   },
   "SkillUnlock_FeatherOstrich": {
     "localized_name": "페더치프의 안장",
-    "description": null
+    "description": "가지고 있으면 페더치프에 탑승할 수 있다."
   },
   "SkillUnlock_FengyunDeeper": {
     "localized_name": "윈드디어의 안장",
-    "description": null
+    "description": "가지고 있으면 윈드디어에 탑승할 수 있다."
   },
   "SkillUnlock_FengyunDeeper_Electric": {
     "localized_name": "볼트디어의 안장",
-    "description": null
+    "description": "가지고 있으면 볼트디어에 탑승할 수 있다."
   },
   "SkillUnlock_FireKirin": {
     "localized_name": "파이린의 안장",
-    "description": null
+    "description": "가지고 있으면 파이린에 탑승할 수 있다."
   },
   "SkillUnlock_FireKirin_Dark": {
     "localized_name": "사라블랙의 안장",
-    "description": null
+    "description": "가지고 있으면 사라블랙에 탑승할 수 있다."
   },
   "SkillUnlock_FlameBuffalo": {
     "localized_name": "불페르노의 안장",
-    "description": null
+    "description": "가지고 있으면 불페르노에 탑승할 수 있다."
   },
   "SkillUnlock_FlowerDinosaur": {
     "localized_name": "플로라디노의 안장",
-    "description": null
+    "description": "가지고 있으면 플로라디노에 탑승할 수 있다."
   },
   "SkillUnlock_FlowerDinosaur_Electric": {
     "localized_name": "찌르르디노의 안장",
-    "description": null
+    "description": "가지고 있으면 찌르르디노에 탑승할 수 있다."
   },
   "SkillUnlock_FlowerRabbit": {
     "localized_name": "토푸리의 목걸이",
-    "description": null
+    "description": "토푸리의 목걸이. 소지한 상태로 토푸리을(를) 보유하고 있으면 항상 등장하여 근처의 아이템을 자동으로 수집해준다."
   },
   "SkillUnlock_FlyingManta": {
     "localized_name": "루미카이트의 장갑",
-    "description": null
+    "description": "루미카이트의 손을 조심스럽게 잡는 장갑. 소지한 상태로 루미카이트을(를) 보유하고 있으면 루미카이트이(가) 글라이더가 된다."
   },
   "SkillUnlock_FlyingManta_Thunder": {
     "localized_name": "일레카이트의 장갑",
@@ -1461,7 +1469,7 @@
   },
   "SkillUnlock_Garm": {
     "localized_name": "다크울프의 안장 부착 마구",
-    "description": null
+    "description": "가지고 있으면 다크울프에 탑승할 수 있다."
   },
   "SkillUnlock_GhostAnglerfish": {
     "localized_name": "빛초롱의 안장",
@@ -1473,71 +1481,71 @@
   },
   "SkillUnlock_GhostBeast": {
     "localized_name": "고스호스의 안장",
-    "description": null
+    "description": "가지고 있으면 고스호스에 탑승할 수 있다."
   },
   "SkillUnlock_GoldenHorse": {
     "localized_name": "러시골드의 안장",
-    "description": null
+    "description": "가지고 있으면 러시골드에 탑승할 수 있다."
   },
   "SkillUnlock_GrassMammoth": {
     "localized_name": "그린모스의 안장",
-    "description": null
+    "description": "가지고 있으면 그린모스에 탑승할 수 있다."
   },
   "SkillUnlock_GrassMammoth_Ice": {
     "localized_name": "블리자모스의 안장",
-    "description": null
+    "description": "가지고 있으면 블리자모스에 탑승할 수 있다."
   },
   "SkillUnlock_GrassPanda": {
     "localized_name": "초판다의 수류탄 발사기",
-    "description": null
+    "description": "가지고 있으면 초판다에 탑승해 수류탄 발사기를 난사할 수 있다."
   },
   "SkillUnlock_GrassPanda_Electric": {
     "localized_name": "썬더판다의 수류탄 발사기",
-    "description": null
+    "description": "가지고 있으면 썬더판다에 탑승해 수류탄 발사기를 난사할 수 있다."
   },
   "SkillUnlock_GuardianDog": {
     "localized_name": "둥실해치의 안장",
-    "description": null
+    "description": "가지고 있으면 둥실해치에 탑승할 수 있다."
   },
   "SkillUnlock_HadesBird": {
     "localized_name": "헬가루다의 안장",
-    "description": null
+    "description": "가지고 있으면 헬가루다에 탑승할 수 있다."
   },
   "SkillUnlock_HadesBird_Electric": {
     "localized_name": "라이가루다의 안장",
-    "description": null
+    "description": "가지고 있으면 라이가루다에 탑승할 수 있다."
   },
   "SkillUnlock_HawkBird": {
     "localized_name": "나이트윙의 안장",
-    "description": null
+    "description": "가지고 있으면 나이트윙에 탑승할 수 있다."
   },
   "SkillUnlock_Hedgehog": {
     "localized_name": "찌릿도치의 장갑",
-    "description": null
+    "description": "찌릿도치을(를) 잡는 고무장갑. 파트너 스킬을 발동하면 찌릿도치을(를) 전격 수류탄 삼아 투척한다."
   },
   "SkillUnlock_Hedgehog_Ice": {
     "localized_name": "코치도치의 장갑",
-    "description": null
+    "description": "코치도치을(를) 잡는 단열 장갑. 파트너 스킬을 발동하면 코치도치을(를) 빙결 수류탄 삼아 투척한다."
   },
   "SkillUnlock_Horus": {
     "localized_name": "호루스의 안장",
-    "description": null
+    "description": "가지고 있으면 호루스에 탑승할 수 있다."
   },
   "SkillUnlock_Horus_Water": {
     "localized_name": "이시스의 안장",
-    "description": null
+    "description": "가지고 있으면 이시스에 탑승할 수 있다."
   },
   "SkillUnlock_IceDeer": {
     "localized_name": "얼음사슴의 안장",
-    "description": null
+    "description": "가지고 있으면 얼음사슴에 탑승할 수 있다."
   },
   "SkillUnlock_IceHorse": {
     "localized_name": "빙천마의 안장",
-    "description": null
+    "description": "가지고 있으면 빙천마에 탑승할 수 있다."
   },
   "SkillUnlock_IceHorse_Dark": {
     "localized_name": "그레이섀도우의 안장",
-    "description": null
+    "description": "가지고 있으면 그레이섀도우에 탑승할 수 있다."
   },
   "SkillUnlock_IceNarwhal": {
     "localized_name": "빙등고래의 안장",
@@ -1548,88 +1556,92 @@
     "description": null
   },
   "SkillUnlock_IceSeal": {
-    "localized_name": "크리범의 하네스",
+    "localized_name": "크리범의 안장",
     "description": null
   },
   "SkillUnlock_JetDragon": {
     "localized_name": "제트래곤의 미사일 발사기",
-    "description": null
+    "description": "가지고 있으면 제트래곤에 탑승해 미사일을 난사할 수 있다."
   },
   "SkillUnlock_KingAlpaca": {
     "localized_name": "킹파카의 안장",
-    "description": null
+    "description": "가지고 있으면 킹파카에 탑승할 수 있다."
   },
   "SkillUnlock_KingAlpaca_Ice": {
     "localized_name": "블루파카의 안장",
-    "description": null
+    "description": "가지고 있으면 블루파카에 탑승할 수 있다."
   },
   "SkillUnlock_KingBahamut": {
     "localized_name": "볼카이저의 안장",
-    "description": null
+    "description": "가지고 있으면 마그마 카이저에 탑승할 수 있다."
   },
   "SkillUnlock_KingBahamut_Dragon": {
     "localized_name": "마그마 드라고의 안장",
-    "description": null
+    "description": "가지고 있으면 마그마 드라고에 탑승할 수 있다."
   },
   "SkillUnlock_Kirin": {
     "localized_name": "썬더콘의 안장",
-    "description": null
+    "description": "가지고 있으면 썬더콘에 탑승할 수 있다."
   },
   "SkillUnlock_Kitsunebi": {
     "localized_name": "파이호의 마구",
-    "description": null
+    "description": "파이호을(를) 안을 때 쓰는 하니스. 파트너 스킬을 발동하면 파이호을(를) 안은 채 화염방사기 삼아 공격할 수 있다."
   },
   "SkillUnlock_Kitsunebi_Ice": {
     "localized_name": "아이호의 하네스",
-    "description": null
+    "description": "아이호을(를) 안을 때 쓰는 하네스. 파트너 스킬을 발동하면 아이호을(를) 안고 냉기를 방출해 공격할 수 있다."
   },
   "SkillUnlock_LazyDragon": {
     "localized_name": "헤로롱의 미사일 발사기",
-    "description": null
+    "description": "가지고 있으면 헤로롱에 탑승해 미사일 발사기를 난사할 수 있다."
   },
   "SkillUnlock_LazyDragon_Electric": {
     "localized_name": "핑피롱의 미사일 발사기",
-    "description": null
+    "description": "가지고 있으면 핑피롱에 탑승해 미사일 발사기를 난사할 수 있다."
   },
   "SkillUnlock_LeafMomonga": {
     "localized_name": "모몽파의 하네스",
     "description": null
   },
+  "SkillUnlock_LegendDeer": {
+    "localized_name": "레전디얼의 안장",
+    "description": null
+  },
   "SkillUnlock_Manticore": {
     "localized_name": "만티파이어의 안장",
-    "description": null
+    "description": "가지고 있으면 만티파이어에 탑승할 수 있다."
   },
   "SkillUnlock_Manticore_Dark": {
     "localized_name": "시니에노의 안장",
-    "description": null
+    "description": "가지고 있으면 시니에노에 탑승할 수 있다."
   },
   "SkillUnlock_Monkey": {
     "localized_name": "몽지의 돌격 소총",
-    "description": null
+    "description": "몽지 전용 소형 돌격 소총. 파트너 스킬을 발동하면 몽지이(가) 총격 모드로 전환, 주변 적에게 난사한다."
   },
   "SkillUnlock_MoonQueen": {
     "localized_name": "셀레문의 안장",
-    "description": null
+    "description": "가지고 있으면 셀레문에 탑승할 수 있다."
   },
   "SkillUnlock_MopKing": {
     "localized_name": "모프킹의 안장",
-    "description": null
+    "description": "가지고 있으면 모프킹에 탑승할 수 있다."
   },
   "SkillUnlock_MushroomDragon": {
     "localized_name": "머쉬드래곤의 안장",
-    "description": null
+    "description": "가지고 있으면 머쉬드래곤에 탑승할 수 있다."
   },
   "SkillUnlock_MushroomDragon_Dark": {
     "localized_name": "머쉬포이즌의 안장",
-    "description": null
+    "description": "가지고 있으면 머쉬포이즌에 탑승할 수 있다."
   },
   "SkillUnlock_NaughtyCat": {
     "localized_name": "소름냥이의 안장",
-    "description": null
+    "description": "가지고 있으면 소름냥이에 탑승할 수 있다."
   },
   "SkillUnlock_NegativeOctopus": {
     "localized_name": "고스문의 장갑",
-    "description": null
+    "description": "고스문의 발을 조심스럽게 잡는 장갑. 소지한 상태로 고스문을(를) 보유하고 있으면 고스문이(가) 글라이더가 된다."
   },
   "SkillUnlock_NegativeOctopus_Neutral": {
     "localized_name": "드리문의 장갑",
@@ -1637,11 +1649,11 @@
   },
   "SkillUnlock_NightBlueHorse": {
     "localized_name": "나이트롯의 안장",
-    "description": null
+    "description": "가지고 있으면 나이트롯에 탑승할 수 있다."
   },
   "SkillUnlock_Penguin": {
     "localized_name": "펭키의 로켓 발사기",
-    "description": null
+    "description": "펭키을(를) 발사하는 포신. 파트너 스킬을 발동하면 펭키을(를) 발사하여 적을 공격할 수 있다. 발사 후에는 펭키이(가) 빈사 상태가 된다."
   },
   "SkillUnlock_Penguin_Electric": {
     "localized_name": "뎅키의 로켓 발사기",
@@ -1657,67 +1669,67 @@
   },
   "SkillUnlock_PurpleSpider": {
     "localized_name": "스틱툴라의 안장",
-    "description": null
+    "description": "가지고 있으면 스틱툴라에 탑승할 수 있다."
   },
   "SkillUnlock_RaijinDaughter": {
     "localized_name": "썬더 키드의 목걸이",
-    "description": null
+    "description": "썬더 키드의 목걸이. 소지한 상태로 썬더 키드을(를) 보유하고 있으면 항상 등장하여 플레이어의 공격에 맞춰 추가 공격으로 지원한다."
   },
   "SkillUnlock_RaijinDaughter_Water": {
     "localized_name": "다크 키드의 목걸이",
-    "description": null
+    "description": "다크 키드의 목걸이. 소지한 상태로 다크 키드을(를) 보유하고 있으면 항상 등장하여 플레이어의 공격에 맞춰 추가 공격으로 지원한다."
   },
   "SkillUnlock_RedArmorBird": {
     "localized_name": "적토조의 안장",
-    "description": null
+    "description": "가지고 있으면 적토조에 탑승할 수 있다."
   },
   "SkillUnlock_SaintCentaur": {
     "localized_name": "팔라디우스의 안장",
-    "description": null
+    "description": "가지고 있으면 팔라디우스에 탑승할 수 있다."
   },
   "SkillUnlock_SakuraSaurus": {
     "localized_name": "라브라돈의 안장",
-    "description": null
+    "description": "가지고 있으면 라브라돈에 탑승할 수 있다."
   },
   "SkillUnlock_SakuraSaurus_Water": {
     "localized_name": "스프라돈의 안장",
-    "description": null
+    "description": "가지고 있으면 스프라돈에 탑승할 수 있다."
   },
   "SkillUnlock_Serpent": {
     "localized_name": "씨무기의 안장",
-    "description": null
+    "description": "가지고 있으면 씨무기에 탑승할 수 있다."
   },
   "SkillUnlock_Serpent_Ground": {
     "localized_name": "스너펜트의 안장",
-    "description": null
+    "description": "가지고 있으면 스너펜트에 탑승할 수 있다."
   },
   "SkillUnlock_SkyDragon": {
     "localized_name": "페스키의 안장",
-    "description": null
+    "description": "가지고 있으면 페스키에 탑승할 수 있다."
   },
   "SkillUnlock_SkyDragon_Grass": {
     "localized_name": "포레스키의 안장",
-    "description": null
+    "description": "가지고 있으면 포레스키에 탑승할 수 있다."
   },
   "SkillUnlock_SnowTigerBeastman": {
     "localized_name": "빙호우거의 해머",
-    "description": null
+    "description": "가지고 있으면 빙호우거에 탑승할 수 있다."
   },
   "SkillUnlock_Suzaku": {
     "localized_name": "주작의 안장",
-    "description": null
+    "description": "가지고 있으면 주작에 탑승할 수 있다."
   },
   "SkillUnlock_Suzaku_Water": {
     "localized_name": "시바의 안장",
-    "description": null
+    "description": "가지고 있으면 시바에 탑승할 수 있다."
   },
   "SkillUnlock_ThunderBird": {
     "localized_name": "라이버드의 안장",
-    "description": null
+    "description": "가지고 있으면 라이버드에 탑승할 수 있다."
   },
   "SkillUnlock_ThunderDog": {
     "localized_name": "썬도그의 안장",
-    "description": null
+    "description": "가지고 있으면 썬도그에 탑승할 수 있다."
   },
   "SkillUnlock_TropicalOstrich": {
     "localized_name": "트로조크의 안장",
@@ -1725,63 +1737,63 @@
   },
   "SkillUnlock_Umihebi": {
     "localized_name": "레비드라의 안장",
-    "description": null
+    "description": "가지고 있으면 레비드라에 탑승할 수 있다."
   },
   "SkillUnlock_Umihebi_Fire": {
     "localized_name": "아그니드라의 안장",
-    "description": null
+    "description": "가지고 있으면 아그니드라에 탑승할 수 있다."
   },
   "SkillUnlock_VolcanicMonster": {
     "localized_name": "볼카노의 안장",
-    "description": null
+    "description": "가지고 있으면 볼카노에 탑승할 수 있다."
   },
   "SkillUnlock_VolcanicMonster_Ice": {
     "localized_name": "프로스카노의 안장",
-    "description": null
+    "description": "가지고 있으면 프로스카노에 탑승할 수 있다."
   },
   "SkillUnlock_WeaselDragon": {
     "localized_name": "베비뇽의 안장",
-    "description": null
+    "description": "가지고 있으면 베비뇽에 탑승할 수 있다."
   },
   "SkillUnlock_WeaselDragon_Fire": {
     "localized_name": "천도뇽의 안장",
-    "description": null
+    "description": "가지고 있으면 천도뇽에 탑승할 수 있다."
   },
   "SkillUnlock_WhiteAlienDragon": {
     "localized_name": "제노루더의 안장",
-    "description": null
+    "description": "가지고 있으면 제노루더에 탑승할 수 있다."
   },
   "SkillUnlock_WhiteDeer": {
     "localized_name": "셀레스디얼의 안장",
-    "description": null
+    "description": "가지고 있으면 셀레스디얼에 탑승할 수 있다."
   },
   "SkillUnlock_WhiteShieldDragon": {
     "localized_name": "드라이지스의 안장",
-    "description": null
+    "description": "가지고 있으면 드라이지스에 탑승할 수 있다."
   },
   "SkillUnlock_WindChimes": {
     "localized_name": "건다리의 장갑",
-    "description": null
+    "description": "건다리의 팔을 조심스럽게 잡는 장갑. 소지한 상태로 건다리을(를) 보유하고 있으면 건다리이(가) 글라이더가 된다."
   },
   "SkillUnlock_WindChimes_Ice": {
     "localized_name": "유령건다리의 장갑",
-    "description": null
+    "description": "유령건다리의 팔을 조심스럽게 잡는 장갑. 소지한 상태로 유령건다리을(를) 보유하고 있으면 유령건다리이(가) 글라이더가 된다."
   },
   "SkillUnlock_Yeti": {
     "localized_name": "움포의 안장",
-    "description": null
+    "description": "가지고 있으면 움포에 탑승할 수 있다."
   },
   "SkillUnlock_Yeti_Grass": {
     "localized_name": "트로피티의 안장",
-    "description": null
+    "description": "가지고 있으면 트로피티에 탑승할 수 있다."
   },
   "SkinChange": {
     "localized_name": "팰 치장용 장치",
-    "description": null
+    "description": "스킨을 변경하는 시설. 팰을 특별한 외모로 변경할 수 있게 된다. 게임 외적으로 획득한 스킨 등을 적용할 수 있다."
   },
   "Snowman": {
     "localized_name": "눈사람",
-    "description": null
+    "description": "거점에 배치하면 냉각 작업 속도가 상승한다. 2개 이상 배치해도 효과는 없다."
   },
   "Spa": {
     "localized_name": "온천",
@@ -1797,7 +1809,7 @@
   },
   "Spear": {
     "localized_name": "돌 창",
-    "description": null
+    "description": "근접 전투에서 유용한 창. 사정거리가 길어 거리를 조금 벌린 채 싸울 수 있다."
   },
   "Spear_2": {
     "localized_name": "금속 창",
@@ -1809,11 +1821,11 @@
   },
   "Spear_ForestBoss": {
     "localized_name": "릴리의 창",
-    "description": null
+    "description": "릴리가 애용하던 창. 팰을 업신여기는 자에게 심판을 내린다."
   },
   "Special_ElectricHatchingPalEgg": {
     "localized_name": "전동 알 부화기",
-    "description": null
+    "description": "팰의 알을 부화시키는 장치. 전기가 필요하지만 부화기 내부 온도를 자동으로 최적화한 후 유지하는 기능이 있다."
   },
   "Special_HatchingPalEgg": {
     "localized_name": "알 부화기",
@@ -1841,15 +1853,15 @@
   },
   "Special_PalSphere_Grade_05": {
     "localized_name": "울트라 스피어",
-    "description": "던져서 팰을 포획하는 도구. 상당한 성능 덕에 도망칠 수 있는 팰이 별로 없다. 제작하려면 '스피어라인 공장 II'이(가) 필요하다."
+    "description": "던져서 팰을 포획하는 도구. 상당한 성능 덕에 도망칠 수 있는 팰이 별로 없다. 제작하려면 '스피어라인 공장 Ⅱ'이(가) 필요하다."
   },
   "Special_PalSphere_Grade_06": {
     "localized_name": "전설 스피어",
-    "description": "던져서 팰을 포획하는 도구. 이 스피어를 피해 도망칠 수 있는 팰은 거의 없다. 제작하려면 '스피어라인 공장 II'이(가) 필요하다."
+    "description": "던져서 팰을 포획하는 도구. 이 스피어를 피해 도망칠 수 있는 팰은 거의 없다. 제작하려면 '스피어라인 공장 Ⅱ'이(가) 필요하다."
   },
   "Special_PalSphere_Grade_07": {
     "localized_name": "얼티밋 스피어",
-    "description": "던져서 팰을 포획하는 도구. 압도적인 성능으로, 그 어떤 팰이라도 잡을 수 있다. 제작하려면 |스피어라인 공장 II|이(가) 필요하다."
+    "description": "던져서 팰을 포획하는 도구. 압도적인 성능으로, 그 어떤 팰이라도 잡을 수 있다. 제작하려면 |스피어라인 공장 Ⅱ|이(가) 필요하다."
   },
   "Special_SphereFactory_Black_Grade_01": {
     "localized_name": "스피어 제작대",
@@ -1860,40 +1872,40 @@
     "description": "빠르게 |팰 스피어|을(를) 생산할 수 있게 된다. 작업하려면 |수작업| 적성을 가진 팰이 필요하다."
   },
   "Special_SphereFactory_Black_Grade_03": {
-    "localized_name": "스피어라인 공장 II",
+    "localized_name": "스피어라인 공장 Ⅱ",
     "description": "더욱 빠르게 |팰 스피어|을(를) 생산할 수 있게 된다. 작업하려면 |수작업| 적성을 가진 팰이 필요하다."
   },
   "SphereFactory_Black_04": {
     "localized_name": "고도 문명 스피어 공장",
-    "description": null
+    "description": "팰 포획용 스피어 제작 공장. 고성능 기계를 도입하여 고속 스피어 제작이 가능해졌다. 수작업이 가능한 팰이 필요하다."
   },
   "SphereModule_Curve": {
     "localized_name": "커브 모듈",
-    "description": null
+    "description": "장착하면 스피어에 커브를 걸 수 있게 된다. 팰의 허를 찌르는 회전으로 포획력이 상승한다."
   },
   "SphereModule_Curve2": {
     "localized_name": "슬라이더 모듈",
-    "description": null
+    "description": "장착하면 스피어에 슬라이더를 걸 수 있게 된다. 스피어가 상당한 각도로 휘며 팰의 허를 찌르는 회전으로 포획력이 상승한다."
   },
   "SphereModule_Heavy": {
     "localized_name": "헤비 웨이트 모듈",
-    "description": null
+    "description": "장착하면 스피어의 무게가 증가한다. 비거리가 짧아지는 대신 포획력이 상승한다."
   },
   "SphereModule_Homing": {
     "localized_name": "호밍 모듈",
-    "description": null
+    "description": "장착하면 스피어가 팰을 추적할 수 있게 된다. 그에 더해 포획력도 상승한다."
   },
   "SphereModule_Sniper": {
     "localized_name": "스나이퍼 모듈",
-    "description": null
+    "description": "장착하면 스피어의 비거리가 늘어난다. 더욱 날카로워진 투구로 포획력이 상승한다."
   },
   "SphereModule_Sniper2": {
     "localized_name": "슬라이더 모듈 Ⅱ",
-    "description": null
+    "description": "장착하면 스피어의 비거리가 상당히 늘어난다. 더욱 날카로워진 투구로 포획력이 상승한다."
   },
   "StainlessSteel": {
     "localized_name": "헥소라이트",
-    "description": null
+    "description": "크로마이트, 금속 주괴, 헥소 석영(으)로 구성된 합금. 더욱 발전된 장비와 건축물의 재료로 활용할 수 있다."
   },
   "Stone_Gate": {
     "localized_name": "돌 문",
@@ -1905,15 +1917,15 @@
   },
   "Stump": {
     "localized_name": "그루터기와 도끼",
-    "description": null
+    "description": "거점에 배치하면 벌목 작업 속도가 상승한다. 2개 이상 배치해도 효과는 없다."
   },
   "TableDresser01_Stone": {
     "localized_name": "앤티크 드레서",
-    "description": null
+    "description": "자신의 모습을 단장하기 위한 옷장. 캐릭터의 외형을 변경할 수 있다."
   },
   "ToolBoxV1": {
     "localized_name": "대형 공구함",
-    "description": null
+    "description": "거점에 배치하면 수작업의 작업 속도가 상승한다. 2개 이상 배치해도 효과는 없다."
   },
   "Torch": {
     "localized_name": "설치형 횃불",
@@ -1921,7 +1933,7 @@
   },
   "TransmissionTower": {
     "localized_name": "송전탑",
-    "description": null
+    "description": "거점에 배치하면 발전 작업 속도가 상승한다. 2개 이상 배치해도 효과는 없다."
   },
   "Trap_LegHold": {
     "localized_name": "덫(소형)",
@@ -1949,19 +1961,19 @@
   },
   "Unlock_Picking_Tier1": {
     "localized_name": "간소한 락픽 도구",
-    "description": null
+    "description": "가지고 있으면 구리 열쇠이(가) 필요한 보물 상자의 자물쇠를 억지로 딸 수 있게 된다. 아무리 많이 써도 고장 나지 않는다."
   },
   "Unlock_Picking_Tier2": {
     "localized_name": "고급 락픽 도구",
-    "description": null
+    "description": "가지고 있으면 은 열쇠필요한 보물 상자의 자물쇠를 억지로 딸 수 있게 된다. 아무리 많이 써도 고장 나지 않는다."
   },
   "Unlock_Picking_Tier3": {
     "localized_name": "전문가용 락픽 도구",
-    "description": null
+    "description": "가지고 있으면 금 열쇠필요한 보물 상자의 자물쇠를 억지로 딸 수 있게 된다. 아무리 많이 써도 고장 나지 않는다."
   },
   "WallSignboard": {
     "localized_name": "WallSignBoard",
-    "description": null
+    "description": "문자를 쓸 수 있는 간판. 벽에 걸 수 있다."
   },
   "WallTorch": {
     "localized_name": "벽걸이 횃불",
@@ -1969,7 +1981,7 @@
   },
   "WeaponFactory_Dirty_04": {
     "localized_name": "고도 문명 무기 공장",
-    "description": null
+    "description": "무기나 탄약을 생산하는 공장. 고성능 기계를 도입하여 고속 제작이 가능해졌다. 수작업이 가능한 팰이 필요하다."
   },
   "Wood_Gate": {
     "localized_name": "나무 문",
@@ -1981,11 +1993,11 @@
   },
   "Wooden_ladder": {
     "localized_name": "사다리",
-    "description": null
+    "description": "조금 높은 곳에 올라갈 때 활용하는 사다리."
   },
   "WorkSpeedIncrease1": {
     "localized_name": "β파 발생 장치",
-    "description": null
+    "description": "β파를 발생시켜 팰의 활동을 활성화하는 장치. 거점 내 팰의 작업 속도가 상승한다. 2개 이상 배치해도 효과는 없다."
   },
   "Workbench": {
     "localized_name": "원시적인 작업대",
@@ -1993,6 +2005,6 @@
   },
   "YakushimaBlade": {
     "localized_name": "미야우미어",
-    "description": null
+    "description": "[Terraria 컬래버] 먼 나라에 다녀온 칼구리이(가) 들고 왔다는 전설이 붙은 검. 그러나 들고 온 이유에 대해선 알려진 바가 없다고 한다…"
   }
 }

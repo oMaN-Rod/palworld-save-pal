@@ -245,23 +245,27 @@
   },
   "AdditionalInventory_001": {
     "localized_name": "소형 확장 파우치",
-    "description": "물건을 더 많이 휴대할 수 있도록 하는 소형 파우치. 가지고 있으면 인벤토리 슬롯이 추가된다."
+    "description": "물건을 더 많이 휴대할 수 있는 소형 파우치. 가지고 있으면 인벤토리 슬롯이 추가된다."
   },
   "AdditionalInventory_002": {
     "localized_name": "중형 확장 파우치",
-    "description": "물건을 더 많이 휴대할 수 있도록 하는 중형 파우치. 가지고 있으면 인벤토리 슬롯이 추가된다."
+    "description": "물건을 더 많이 휴대할 수 있는 중형 파우치. 가지고 있으면 인벤토리 슬롯이 추가된다."
   },
   "AdditionalInventory_003": {
     "localized_name": "대형 확장 파우치",
-    "description": "물건을 더 많이 휴대할 수 있도록 하는 대형 파우치. 가지고 있으면 인벤토리 슬롯이 추가된다."
+    "description": "물건을 더 많이 휴대할 수 있는 대형 파우치. 가지고 있으면 인벤토리 슬롯이 추가된다."
   },
   "AdditionalInventory_004": {
     "localized_name": "거대 확장 파우치",
-    "description": "물건을 더 많이 휴대할 수 있도록 하는 거대 파우치. 가지고 있으면 인벤토리 슬롯이 추가된다."
+    "description": "물건을 더 많이 휴대할 수 있는 거대 파우치. 가지고 있으면 인벤토리 슬롯이 추가된다."
   },
   "AffectionFruit_01": {
     "localized_name": "유대의 보도",
     "description": "좀처럼 보기 드문 마법의 열매. 팰에게 먹이면 마음을 연다는 소문이 있다. 어떤 팰에게 먹일지 신중하게 고려하자."
+  },
+  "AffectionFruit_02": {
+    "localized_name": "유대의 소도",
+    "description": "상냥한 마음이 담긴 작은 열매. 팰에게 먹이면 마음을 연다는 소문이 있다. 어떤 팰에게 먹일지 신중하게 고려하자."
   },
   "AncientParts2": {
     "localized_name": "고대 문명의 코어",
@@ -349,7 +353,7 @@
   },
   "AutoMealPouch_Tier5": {
     "localized_name": "초거대 먹이 주머니",
-    "description": "음식을 넣어두는 특대형 주머니. 자동 식사용 장비 슬롯이 5개까지 해제된다. 배가 고프면 슬롯 내 음식을 자동으로 소비한다."
+    "description": "음식을 넣어두는 초특대형 주머니. 자동 식사용 장비 슬롯이 5개까지 해제된다. 배가 고프면 슬롯 내 음식을 자동으로 소비한다."
   },
   "Axe_Steal": {
     "localized_name": "팰 금속 도끼",
@@ -385,7 +389,7 @@
   },
   "BakedMeat_Boar": {
     "localized_name": "돌진돼지 통구이",
-    "description": "이글거리는 불로 구워낸 돼지고기. 겉은 바삭바삭, 속은 촉촉한 식감이 난다. 호화로운 파티용 메뉴로 안성맞춤이다."
+    "description": "이글거리는 불로 구워낸 멧돼지고기. 겉은 바삭바삭, 속은 촉촉한 식감이 난다. 호화로운 파티용 메뉴로 안성맞춤이다."
   },
   "BakedMeat_ChickenPal": {
     "localized_name": "꼬꼬닭 닭꼬치",
@@ -425,7 +429,7 @@
   },
   "BakedMeat_SakuraSaurus": {
     "localized_name": "라브라돈 로스트",
-    "description": "야생의 왕자의 풍미를 느낄 수 있는 중후한 불고기. 응축된 육즙이 뼈에서부터 흘러나와 씹는 맛이 있으면서도 속은 놀랄 정도로 부드럽다."
+    "description": "야생의 왕자의 풍미를 느낄 수 있는 중후한 고기 구이. 응축된 육즙이 뼈에서부터 흘러나와 씹는 맛이 있으면서도 속은 놀랄 정도로 부드럽다."
   },
   "BakedMeat_SheepBall": {
     "localized_name": "도로롱 양고기 케밥",
@@ -537,7 +541,7 @@
   },
   "Blueprint_CandleStand": {
     "localized_name": "장엄한 촛대 설계도",
-    "description": "가지고 있거나 거점에 수납하면 |장엄한 촛대|을(를) 건축할 수 있게 된다."
+    "description": "가지고 있거나 거점에 수납하면 |<MapObjectName id=|CandleStand|/>|을(를) 건축할 수 있게 된다."
   },
   "Blueprint_ChargeLaserRifle_2": {
     "localized_name": "충전식 소총 설계도 1",
@@ -621,11 +625,11 @@
   },
   "Blueprint_ConservationGroupBannerA": {
     "localized_name": "팰 애호 단체 깃발 설계도",
-    "description": "가지고 있거나 거점에 수납하면 |팰 애호 단체 깃발|을(를) 건축할 수 있게 된다."
+    "description": "가지고 있거나 거점에 수납하면 |<MapObjectName id=|ConservationGroupBannerA|/>|을(를) 건축할 수 있게 된다."
   },
   "Blueprint_ConservationGroupBannerB": {
     "localized_name": "팰 애호 단체 배너 설계도",
-    "description": "가지고 있거나 거점에 수납하면 |팰 애호 단체 배너|을(를) 건축할 수 있게 된다."
+    "description": "가지고 있거나 거점에 수납하면 |<MapObjectName id=|ConservationGroupBannerB|/>|을(를) 건축할 수 있게 된다."
   },
   "Blueprint_CopperArmorCold_2": {
     "localized_name": "내한 금속 갑옷 설계도 1",
@@ -741,7 +745,7 @@
   },
   "Blueprint_FireStand": {
     "localized_name": "의식용 촛대 설계도",
-    "description": "가지고 있거나 거점에 수납하면 |의식용 촛대|을(를) 건축할 수 있게 된다."
+    "description": "가지고 있거나 거점에 수납하면 |<MapObjectName id=|FireStand|/>|을(를) 건축할 수 있게 된다."
   },
   "Blueprint_FishingRod_01_2": {
     "localized_name": "초급 낚싯대 (초롱이) 설계도",
@@ -869,7 +873,7 @@
   },
   "Blueprint_GuardianDogStatue": {
     "localized_name": "둥실해치 상 설계도",
-    "description": "가지고 있거나 거점에 수납하면 |둥실해치 상|을(를) 건축할 수 있게 된다."
+    "description": "가지고 있거나 거점에 수납하면 |<MapObjectName id=|GuardianDogStatue|/>|을(를) 건축할 수 있게 된다."
   },
   "Blueprint_GuidedMissileLauncher_2": {
     "localized_name": "미사일 발사기 설계도 1",
@@ -1345,7 +1349,7 @@
   },
   "Blueprint_Hunter_GangFlag": {
     "localized_name": "밀렵단 깃발 설계도",
-    "description": "가지고 있거나 거점에 수납하면 |Hunter GangFlag|을(를) 건축할 수 있게 된다."
+    "description": "가지고 있거나 거점에 수납하면 |<MapObjectName id=|Hunter GangFlag|/>|을(를) 건축할 수 있게 된다."
   },
   "Blueprint_IronArmorCold_2": {
     "localized_name": "내한 제련 금속 갑옷 설계도 1",
@@ -1413,7 +1417,7 @@
   },
   "Blueprint_LanternTop": {
     "localized_name": "제등 설계도",
-    "description": "가지고 있거나 거점에 수납하면 |제등|을(를) 건축할 수 있게 된다."
+    "description": "가지고 있거나 거점에 수납하면 |<MapObjectName id=|LanternTop|/>|을(를) 건축할 수 있게 된다."
   },
   "Blueprint_LaserGatlingGun_2": {
     "localized_name": "레이저 개틀링 건 설계도 1",
@@ -1469,7 +1473,7 @@
   },
   "Blueprint_LilyQueenStatue": {
     "localized_name": "릴린 상 설계도",
-    "description": "가지고 있거나 거점에 수납하면 |릴린 상|을(를) 건축할 수 있게 된다."
+    "description": "가지고 있거나 거점에 수납하면 |<MapObjectName id=|LilyQueenStatue|/>|을(를) 건축할 수 있게 된다."
   },
   "Blueprint_MakeshiftAssaultRifle_2": {
     "localized_name": "낡은 돌격 소총 설계도 1",
@@ -1570,6 +1574,46 @@
   "Blueprint_Musket_5": {
     "localized_name": "머스킷 설계도 4",
     "description": "가지고 있으면 |머스킷 (Legendary)| 레시피가 해제된다. |WeaponFactory Dirty 01|에서 제작할 수 있다."
+  },
+  "Blueprint_Octavia001_Armor_5": {
+    "localized_name": "V1 갑옷 설계도 4",
+    "description": "[ULTRAKILL 컬래버] 가지고 있으면 |Octavia001 Armor 5 (Legendary)| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
+  },
+  "Blueprint_Octavia002_Armor_5": {
+    "localized_name": "V2 갑옷 설계도 4",
+    "description": "[ULTRAKILL 컬래버] 가지고 있으면 |Octavia002 Armor 5 (Legendary)| 레시피가 해제된다. |Factory Hard 03|에서 제작할 수 있다."
+  },
+  "Blueprint_OctaviaRevolver_2": {
+    "localized_name": "마크스맨 리볼버 설계도 1",
+    "description": "[ULTRAKILL 컬래버] 가지고 있으면 |마크스맨 리볼버 (Uncommon)| 레시피가 해제된다. |WeaponFactory Dirty 02|에서 제작할 수 있다."
+  },
+  "Blueprint_OctaviaRevolver_3": {
+    "localized_name": "마크스맨 리볼버 설계도 2",
+    "description": "[ULTRAKILL 컬래버] 가지고 있으면 |마크스맨 리볼버 (Rare)| 레시피가 해제된다. |WeaponFactory Dirty 02|에서 제작할 수 있다."
+  },
+  "Blueprint_OctaviaRevolver_4": {
+    "localized_name": "마크스맨 리볼버 설계도 3",
+    "description": "[ULTRAKILL 컬래버] 가지고 있으면 |마크스맨 리볼버 (Epic)| 레시피가 해제된다. |WeaponFactory Dirty 02|에서 제작할 수 있다."
+  },
+  "Blueprint_OctaviaRevolver_5": {
+    "localized_name": "마크스맨 리볼버 설계도 4",
+    "description": "[ULTRAKILL 컬래버] 가지고 있으면 |마크스맨 리볼버 (Legendary)| 레시피가 해제된다. |WeaponFactory Dirty 02|에서 제작할 수 있다."
+  },
+  "Blueprint_OctaviaShotgun_2": {
+    "localized_name": "코어 이젝트 산탄총 설계도 1",
+    "description": "[ULTRAKILL 컬래버] 가지고 있으면 |코어 이젝트 산탄총 (Uncommon)| 레시피가 해제된다. |WeaponFactory Dirty 03|에서 제작할 수 있다."
+  },
+  "Blueprint_OctaviaShotgun_3": {
+    "localized_name": "코어 이젝트 산탄총 설계도 2",
+    "description": "[ULTRAKILL 컬래버] 가지고 있으면 |코어 이젝트 산탄총 (Rare)| 레시피가 해제된다. |WeaponFactory Dirty 03|에서 제작할 수 있다."
+  },
+  "Blueprint_OctaviaShotgun_4": {
+    "localized_name": "코어 이젝트 산탄총 설계도 3",
+    "description": "[ULTRAKILL 컬래버] 가지고 있으면 |코어 이젝트 산탄총 (Epic)| 레시피가 해제된다. |WeaponFactory Dirty 03|에서 제작할 수 있다."
+  },
+  "Blueprint_OctaviaShotgun_5": {
+    "localized_name": "코어 이젝트 산탄총 설계도 4",
+    "description": "[ULTRAKILL 컬래버] 가지고 있으면 |코어 이젝트 산탄총 (Legendary)| 레시피가 해제된다. |WeaponFactory Dirty 03|에서 제작할 수 있다."
   },
   "Blueprint_OldRevolver_2": {
     "localized_name": "낡은 리볼버 설계도 1",
@@ -1801,11 +1845,11 @@
   },
   "Blueprint_SF_Chair": {
     "localized_name": "연구실 의자 설계도",
-    "description": "가지고 있거나 거점에 수납하면 |SF Chair|을(를) 건축할 수 있게 된다."
+    "description": "가지고 있거나 거점에 수납하면 |<MapObjectName id=|SF Chair|/>|을(를) 건축할 수 있게 된다."
   },
   "Blueprint_SF_Desk": {
     "localized_name": "연구실 책상 설계도",
-    "description": "가지고 있거나 거점에 수납하면 |SF Desk|을(를) 건축할 수 있게 된다."
+    "description": "가지고 있거나 거점에 수납하면 |<MapObjectName id=|SF Desk|/>|을(를) 건축할 수 있게 된다."
   },
   "Blueprint_SemiAutoRifle_2": {
     "localized_name": "반자동 소총 설계도 1",
@@ -1841,7 +1885,7 @@
   },
   "Blueprint_Shrine_Lantern": {
     "localized_name": "등롱 설계도",
-    "description": "가지고 있거나 거점에 수납하면 |Shrine Lantern|을(를) 건축할 수 있게 된다."
+    "description": "가지고 있거나 거점에 수납하면 |<MapObjectName id=|Shrine Lantern|/>|을(를) 건축할 수 있게 된다."
   },
   "Blueprint_SingleShotRifle_2": {
     "localized_name": "단발식 소총 설계도 1",
@@ -1941,7 +1985,7 @@
   },
   "Blueprint_WallTorch02": {
     "localized_name": "장엄한 벽걸이 횃불 설계도",
-    "description": "가지고 있거나 거점에 수납하면 |장엄한 벽걸이 횃불|을(를) 건축할 수 있게 된다."
+    "description": "가지고 있거나 거점에 수납하면 |<MapObjectName id=|WallTorch02|/>|을(를) 건축할 수 있게 된다."
   },
   "Blueprint_WeakerBow_2": {
     "localized_name": "오래된 활 설계도 1",
@@ -1961,11 +2005,11 @@
   },
   "Blueprint_Wire_Fence": {
     "localized_name": "와이어 울타리 설계도",
-    "description": "가지고 있거나 거점에 수납하면 |Wire Fence|을(를) 건축할 수 있게 된다."
+    "description": "가지고 있거나 거점에 수납하면 |<MapObjectName id=|Wire Fence|/>|을(를) 건축할 수 있게 된다."
   },
   "Blueprint_WoodenBarricade": {
     "localized_name": "나무 바리케이드 설계도",
-    "description": "가지고 있거나 거점에 수납하면 |나무 바리케이드|을(를) 건축할 수 있게 된다."
+    "description": "가지고 있거나 거점에 수납하면 |<MapObjectName id=|WoodenBarricade|/>|을(를) 건축할 수 있게 된다."
   },
   "Blueprint_YakushimaArmor001": {
     "localized_name": "신성한 판금 갑옷 설계도",
@@ -2046,6 +2090,10 @@
   "Blueprint_YakushimaBlade004_5": {
     "localized_name": "엑스칼리버 설계도 4",
     "description": "[테라리아 컬래버] 가지고 있으면 |엑스칼리버 (Legendary)| 레시피가 해제된다. |WeaponFactory Dirty 02|에서 제작할 수 있다."
+  },
+  "Blueprint_YakushimaBoss002_Relic": {
+    "localized_name": "달의 군주 석상 설계도",
+    "description": "[테라리아 컬래버] 가지고 있거나 거점에 수납하면 |<MapObjectName id=|YakushimaBoss002 Relic|/>|을(를) 건축할 수 있게 된다."
   },
   "Blueprint_YakushimaGun001": {
     "localized_name": "볼텍스 비터 설계도",
@@ -2166,6 +2214,10 @@
   "Blueprint_YakushimaLantern001_5": {
     "localized_name": "나이트글로우 설계도 4",
     "description": "[테라리아 컬래버] 가지고 있으면 |나이트글로우 (Legendary)| 레시피가 해제된다. |WeaponFactory Dirty 02|에서 제작할 수 있다."
+  },
+  "Blueprint_Zoe_Halloweenskin_1": {
+    "localized_name": "조이의 핼러윈 의상 설계도",
+    "description": "조이의 혼잣말을 몰래 듣고 남긴 메모. 작업대에서 제작해 완성품을 조이에게 건네주자."
   },
   "Bone": {
     "localized_name": "뼈",
@@ -2517,7 +2569,7 @@
   },
   "Bow_Fifth": {
     "localized_name": "오연궁",
-    "description": "5대의 화살을 동시에 발사하는 개량형 활. 신비한 힘 덕분에 1번 쏠 때 1대의 화살만 소비된다."
+    "description": "5발의 화살을 동시에 발사하는 개량형 활. 신비한 힘 덕분에 한 번 쏠 때 1발의 화살만 소비된다."
   },
   "Bow_Fire": {
     "localized_name": "불의 활",
@@ -2529,7 +2581,7 @@
   },
   "Bow_Triple": {
     "localized_name": "삼연궁",
-    "description": "3대의 화살을 동시에 발사하는 개량형 활. 신비한 힘 덕분에 1번 쏠 때 1대의 화살만 소비된다."
+    "description": "3발의 화살을 동시에 발사하는 개량형 활. 신비한 힘 덕분에 한 번 쏠 때 1발의 화살만 소비된다."
   },
   "Cake": {
     "localized_name": "케이크",
@@ -2597,7 +2649,7 @@
   },
   "ChickenSaute": {
     "localized_name": "꼬꼬닭 치킨소테",
-    "description": "두툼한 닭가슴살에 버터를 발라 볶은 요리. 상큼한 레몬 풍미가 느껴진다. 먹으면 일정 시간 동안 작업 속도가 조금 상승한다."
+    "description": "두툼한 닭고기에 버터를 발라 볶은 요리. 상큼한 레몬 풍미가 느껴진다. 먹으면 일정 시간 동안 작업 속도가 조금 상승한다."
   },
   "Chowder": {
     "localized_name": "도도롱 수프",
@@ -2629,23 +2681,23 @@
   },
   "ClothArmorCold": {
     "localized_name": "한랭 지방 민속 의상",
-    "description": "한랭 지역에서 생산한천 옷. 몸이 얼 정도의 추위를 막아준다."
+    "description": "한랭 지역에서 생산한 천 옷. 몸이 얼 정도의 추위를 막아준다."
   },
   "ClothArmorCold_2": {
     "localized_name": "한랭 지방 민속 의상",
-    "description": "한랭 지역에서 생산한천 옷. 몸이 얼 정도의 추위를 막아준다."
+    "description": "한랭 지역에서 생산한 천 옷. 몸이 얼 정도의 추위를 막아준다."
   },
   "ClothArmorCold_3": {
     "localized_name": "한랭 지방 민속 의상",
-    "description": "한랭 지역에서 생산한천 옷. 몸이 얼 정도의 추위를 막아준다."
+    "description": "한랭 지역에서 생산한 천 옷. 몸이 얼 정도의 추위를 막아준다."
   },
   "ClothArmorCold_4": {
     "localized_name": "한랭 지방 민속 의상",
-    "description": "한랭 지역에서 생산한천 옷. 몸이 얼 정도의 추위를 막아준다."
+    "description": "한랭 지역에서 생산한 천 옷. 몸이 얼 정도의 추위를 막아준다."
   },
   "ClothArmorCold_5": {
     "localized_name": "한랭 지방 민속 의상",
-    "description": "한랭 지역에서 생산한천 옷. 몸이 얼 정도의 추위를 막아준다."
+    "description": "한랭 지역에서 생산한 천 옷. 몸이 얼 정도의 추위를 막아준다."
   },
   "ClothArmorHeat": {
     "localized_name": "열대 지방 민속 의상",
@@ -2713,7 +2765,7 @@
   },
   "CopperArmor": {
     "localized_name": "금속 갑옷",
-    "description": "금속으로 완성한 갑옷. 적당한 무게에 적당한 방어력을 자랑한다."
+    "description": "금속으로 만든 갑옷. 적당한 무게에 적당한 방어력을 자랑한다."
   },
   "CopperArmorCold": {
     "localized_name": "내한 금속 갑옷",
@@ -2737,39 +2789,39 @@
   },
   "CopperArmorHeat": {
     "localized_name": "내열 금속 갑옷",
-    "description": "개량한 금속 갑옷. 뛰어난 내열성을 자랑한다."
+    "description": "개량형 금속 갑옷. 뛰어난 내열성을 자랑한다."
   },
   "CopperArmorHeat_2": {
     "localized_name": "내열 금속 갑옷",
-    "description": "개량한 금속 갑옷. 뛰어난 내열성을 자랑한다."
+    "description": "개량형 금속 갑옷. 뛰어난 내열성을 자랑한다."
   },
   "CopperArmorHeat_3": {
     "localized_name": "내열 금속 갑옷",
-    "description": "개량한 금속 갑옷. 뛰어난 내열성을 자랑한다."
+    "description": "개량형 금속 갑옷. 뛰어난 내열성을 자랑한다."
   },
   "CopperArmorHeat_4": {
     "localized_name": "내열 금속 갑옷",
-    "description": "개량한 금속 갑옷. 뛰어난 내열성을 자랑한다."
+    "description": "개량형 금속 갑옷. 뛰어난 내열성을 자랑한다."
   },
   "CopperArmorHeat_5": {
     "localized_name": "내열 금속 갑옷",
-    "description": "개량한 금속 갑옷. 뛰어난 내열성을 자랑한다."
+    "description": "개량형 금속 갑옷. 뛰어난 내열성을 자랑한다."
   },
   "CopperArmor_2": {
     "localized_name": "금속 갑옷",
-    "description": "금속으로 완성한 갑옷. 적당한 무게에 적당한 방어력을 자랑한다."
+    "description": "금속으로 만든 갑옷. 적당한 무게에 적당한 방어력을 자랑한다."
   },
   "CopperArmor_3": {
     "localized_name": "금속 갑옷",
-    "description": "금속으로 완성한 갑옷. 적당한 무게에 적당한 방어력을 자랑한다."
+    "description": "금속으로 만든 갑옷. 적당한 무게에 적당한 방어력을 자랑한다."
   },
   "CopperArmor_4": {
     "localized_name": "금속 갑옷",
-    "description": "금속으로 완성한 갑옷. 적당한 무게에 적당한 방어력을 자랑한다."
+    "description": "금속으로 만든 갑옷. 적당한 무게에 적당한 방어력을 자랑한다."
   },
   "CopperArmor_5": {
     "localized_name": "금속 갑옷",
-    "description": "금속으로 완성한 갑옷. 적당한 무게에 적당한 방어력을 자랑한다."
+    "description": "금속으로 만든 갑옷. 적당한 무게에 적당한 방어력을 자랑한다."
   },
   "CopperHelmet": {
     "localized_name": "금속 투구",
@@ -3197,23 +3249,23 @@
   },
   "FurArmorCold": {
     "localized_name": "내한 모피 갑옷",
-    "description": "한랭 지역에서 생산한가죽 갑옷. 몸이 얼 정도의 추위를 막아준다."
+    "description": "한랭 지역에서 생산한 가죽 갑옷. 몸이 얼 정도의 추위를 막아준다."
   },
   "FurArmorCold_2": {
     "localized_name": "내한 모피 갑옷",
-    "description": "한랭 지역에서 생산한가죽 갑옷. 몸이 얼 정도의 추위를 막아준다."
+    "description": "한랭 지역에서 생산한 가죽 갑옷. 몸이 얼 정도의 추위를 막아준다."
   },
   "FurArmorCold_3": {
     "localized_name": "내한 모피 갑옷",
-    "description": "한랭 지역에서 생산한가죽 갑옷. 몸이 얼 정도의 추위를 막아준다."
+    "description": "한랭 지역에서 생산한 가죽 갑옷. 몸이 얼 정도의 추위를 막아준다."
   },
   "FurArmorCold_4": {
     "localized_name": "내한 모피 갑옷",
-    "description": "한랭 지역에서 생산한가죽 갑옷. 몸이 얼 정도의 추위를 막아준다."
+    "description": "한랭 지역에서 생산한 가죽 갑옷. 몸이 얼 정도의 추위를 막아준다."
   },
   "FurArmorCold_5": {
     "localized_name": "내한 모피 갑옷",
-    "description": "한랭 지역에서 생산한가죽 갑옷. 몸이 얼 정도의 추위를 막아준다."
+    "description": "한랭 지역에서 생산한 가죽 갑옷. 몸이 얼 정도의 추위를 막아준다."
   },
   "FurArmorHeat": {
     "localized_name": "내열 모피 갑옷",
@@ -3478,6 +3530,10 @@
   "HandgunBullet": {
     "localized_name": "핸드건 탄약",
     "description": "HandGun Default 등에 사용하는 탄."
+  },
+  "HandgunShield": {
+    "localized_name": "전술 방패",
+    "description": "전술 방패"
   },
   "Head001": {
     "localized_name": "왕관",
@@ -3820,7 +3876,7 @@
     "description": null
   },
   "HeadEquip001_purple": {
-    "localized_name": "마녀의 관[궁극]",
+    "localized_name": "마녀의 관",
     "description": "벨라루주[궁극]의 불길한 힘이 느껴진다. 이걸 손에 넣는 일은 극도로 드물다."
   },
   "HeadEquip023": {
@@ -3955,6 +4011,14 @@
     "localized_name": "제노드란 헤드",
     "description": "제노드란의 모습을 본뜬 모자."
   },
+  "HeadEquip045": {
+    "localized_name": "뚱코알라 흉내 헬멧",
+    "description": "뚱코알라의 모습을 본뜬 인형 머리. 어둠 속성 피해를 미미하게 경감해 주는 효과가 있다."
+  },
+  "HeadEquip046": {
+    "localized_name": "구원의 왕관",
+    "description": "레전디얼[궁극]의 불길한 힘이 느껴진다. 이걸 손에 넣는 일은 극도로 드물다."
+  },
   "Herbs": {
     "localized_name": "하급 의약품",
     "description": "감기, 염좌, 과식증에 잘 듣는 하급 의약품. 먹어도 HP는 회복되지 않는다."
@@ -4001,7 +4065,7 @@
   },
   "IronArmor": {
     "localized_name": "제련 금속 갑옷",
-    "description": "고품질 금속으로 완성한 갑옷. 상당한 방어력을 자랑하는 만큼 무겁다."
+    "description": "고품질 금속으로 만든 갑옷. 상당한 방어력을 자랑하는 만큼 무겁다."
   },
   "IronArmorCold": {
     "localized_name": "내한 제련 금속 갑옷",
@@ -4025,39 +4089,39 @@
   },
   "IronArmorHeat": {
     "localized_name": "내열 제련 금속 갑옷",
-    "description": "개량한 제련 금속 갑옷. 뛰어난 내열성을 자랑한다."
+    "description": "개량형 제련 금속 갑옷. 뛰어난 내열성을 자랑한다."
   },
   "IronArmorHeat_2": {
     "localized_name": "내열 제련 금속 갑옷",
-    "description": "개량한 제련 금속 갑옷. 뛰어난 내열성을 자랑한다."
+    "description": "개량형 제련 금속 갑옷. 뛰어난 내열성을 자랑한다."
   },
   "IronArmorHeat_3": {
     "localized_name": "내열 제련 금속 갑옷",
-    "description": "개량한 제련 금속 갑옷. 뛰어난 내열성을 자랑한다."
+    "description": "개량형 제련 금속 갑옷. 뛰어난 내열성을 자랑한다."
   },
   "IronArmorHeat_4": {
     "localized_name": "내열 제련 금속 갑옷",
-    "description": "개량한 제련 금속 갑옷. 뛰어난 내열성을 자랑한다."
+    "description": "개량형 제련 금속 갑옷. 뛰어난 내열성을 자랑한다."
   },
   "IronArmorHeat_5": {
     "localized_name": "내열 제련 금속 갑옷",
-    "description": "개량한 제련 금속 갑옷. 뛰어난 내열성을 자랑한다."
+    "description": "개량형 제련 금속 갑옷. 뛰어난 내열성을 자랑한다."
   },
   "IronArmor_2": {
     "localized_name": "제련 금속 갑옷",
-    "description": "고품질 금속으로 완성한 갑옷. 상당한 방어력을 자랑하는 만큼 무겁다."
+    "description": "고품질 금속으로 만든 갑옷. 상당한 방어력을 자랑하는 만큼 무겁다."
   },
   "IronArmor_3": {
     "localized_name": "제련 금속 갑옷",
-    "description": "고품질 금속으로 완성한 갑옷. 상당한 방어력을 자랑하는 만큼 무겁다."
+    "description": "고품질 금속으로 만든 갑옷. 상당한 방어력을 자랑하는 만큼 무겁다."
   },
   "IronArmor_4": {
     "localized_name": "제련 금속 갑옷",
-    "description": "고품질 금속으로 완성한 갑옷. 상당한 방어력을 자랑하는 만큼 무겁다."
+    "description": "고품질 금속으로 만든 갑옷. 상당한 방어력을 자랑하는 만큼 무겁다."
   },
   "IronArmor_5": {
     "localized_name": "제련 금속 갑옷",
-    "description": "고품질 금속으로 완성한 갑옷. 상당한 방어력을 자랑하는 만큼 무겁다."
+    "description": "고품질 금속으로 만든 갑옷. 상당한 방어력을 자랑하는 만큼 무겁다."
   },
   "IronHelmet": {
     "localized_name": "제련 금속 투구",
@@ -4555,6 +4619,62 @@
     "localized_name": "ko Text",
     "description": "ko Text"
   },
+  "Octavia001_Armor": {
+    "localized_name": "V1 갑옷",
+    "description": "[ULTRAKILL 컬래버] 먼 땅에서 제조된 전쟁용 로봇의 구조를 참고하여 제작한 갑옷. 피해를 주면 회복하는 자가수리 기능이 탑재되어 있다."
+  },
+  "Octavia001_Armor_5": {
+    "localized_name": "V1 갑옷",
+    "description": "[ULTRAKILL 컬래버] 먼 땅에서 제조된 전쟁용 로봇의 구조를 참고하여 제작한 갑옷. 피해를 주면 회복하는 자가수리 기능이 탑재되어 있다."
+  },
+  "Octavia002_Armor": {
+    "localized_name": "V2 갑옷",
+    "description": "[ULTRAKILL 컬래버] 먼 땅에서 제조된 평화유지용 로봇의 구조를 참고하여 제작한 갑옷. 자가수리 기능은 제거되었으나, 대신 더욱 견고한 장갑을 탑재하였다."
+  },
+  "Octavia002_Armor_5": {
+    "localized_name": "V2 갑옷",
+    "description": "[ULTRAKILL 컬래버] 먼 땅에서 제조된 평화유지용 로봇의 구조를 참고하여 제작한 갑옷. 자가수리 기능은 제거되었으나, 대신 더욱 견고한 장갑을 탑재하였다."
+  },
+  "OctaviaRevolver": {
+    "localized_name": "마크스맨 리볼버",
+    "description": "[ULTRAKILL 컬래버] 전력을 이용해 재장전 없이 계속 발사할 수 있는 리볼버. 장착 중에는 포획 스피어 던지기가 동전 던지기로 변경되며, 마크스맨 리볼버 사격이 코인에 명중할 경우 적을 향해 도탄된다."
+  },
+  "OctaviaRevolver_2": {
+    "localized_name": "마크스맨 리볼버",
+    "description": "[ULTRAKILL 컬래버] 전력을 이용해 재장전 없이 계속 발사할 수 있는 리볼버. 장착 중에는 포획 스피어 던지기가 동전 던지기로 변경되며, 마크스맨 리볼버 사격이 코인에 명중할 경우 적을 향해 도탄된다."
+  },
+  "OctaviaRevolver_3": {
+    "localized_name": "마크스맨 리볼버",
+    "description": "[ULTRAKILL 컬래버] 전력을 이용해 재장전 없이 계속 발사할 수 있는 리볼버. 장착 중에는 포획 스피어 던지기가 동전 던지기로 변경되며, 마크스맨 리볼버 사격이 코인에 명중할 경우 적을 향해 도탄된다."
+  },
+  "OctaviaRevolver_4": {
+    "localized_name": "마크스맨 리볼버",
+    "description": "[ULTRAKILL 컬래버] 전력을 이용해 재장전 없이 계속 발사할 수 있는 리볼버. 장착 중에는 포획 스피어 던지기가 동전 던지기로 변경되며, 마크스맨 리볼버 사격이 코인에 명중할 경우 적을 향해 도탄된다."
+  },
+  "OctaviaRevolver_5": {
+    "localized_name": "마크스맨 리볼버",
+    "description": "[ULTRAKILL 컬래버] 전력을 이용해 재장전 없이 계속 발사할 수 있는 리볼버. 장착 중에는 포획 스피어 던지기가 동전 던지기로 변경되며, 마크스맨 리볼버 사격이 코인에 명중할 경우 적을 향해 도탄된다."
+  },
+  "OctaviaShotgun": {
+    "localized_name": "코어 이젝트 산탄총",
+    "description": "[ULTRAKILL 컬래버] 열에너지를 이용해 재장전 없이 계속 발사할 수 있는 산탄총. 장착 중에는 포획 스피어 던지기가 코어 발사로 변경되며, 마크스맨 리볼버 사격이 코어에 명중할 경우 폭발한다."
+  },
+  "OctaviaShotgun_2": {
+    "localized_name": "코어 이젝트 산탄총",
+    "description": "[ULTRAKILL 컬래버] 열에너지를 이용해 재장전 없이 계속 발사할 수 있는 산탄총. 장착 중에는 포획 스피어 던지기가 코어 발사로 변경되며, 마크스맨 리볼버 사격이 코어에 명중할 경우 폭발한다."
+  },
+  "OctaviaShotgun_3": {
+    "localized_name": "코어 이젝트 산탄총",
+    "description": "[ULTRAKILL 컬래버] 열에너지를 이용해 재장전 없이 계속 발사할 수 있는 산탄총. 장착 중에는 포획 스피어 던지기가 코어 발사로 변경되며, 마크스맨 리볼버 사격이 코어에 명중할 경우 폭발한다."
+  },
+  "OctaviaShotgun_4": {
+    "localized_name": "코어 이젝트 산탄총",
+    "description": "[ULTRAKILL 컬래버] 열에너지를 이용해 재장전 없이 계속 발사할 수 있는 산탄총. 장착 중에는 포획 스피어 던지기가 코어 발사로 변경되며, 마크스맨 리볼버 사격이 코어에 명중할 경우 폭발한다."
+  },
+  "OctaviaShotgun_5": {
+    "localized_name": "코어 이젝트 산탄총",
+    "description": "[ULTRAKILL 컬래버] 열에너지를 이용해 재장전 없이 계속 발사할 수 있는 산탄총. 장착 중에는 포획 스피어 던지기가 코어 발사로 변경되며, 마크스맨 리볼버 사격이 코어에 명중할 경우 폭발한다."
+  },
   "OctopusGirl_Takoyaki": {
     "localized_name": "옥토비아 타코야키",
     "description": "Meat OctopusGirl을(를) 밀가루 생지에 넣어 둥글게 구운 요리. 먹으면 일정 시간 동안 경험치 획득량이 조금 증가한다."
@@ -4849,11 +4969,11 @@
   },
   "PalEgg_Electricity_01": {
     "localized_name": "찌릿찌릿한 알",
-    "description": "PalEgg Electricity 01. 탁탁 튀길 듯한 태동이 느껴진다. 알 부화기에 넣어 부화시키자."
+    "description": "PalEgg Electricity 01. 터질 듯한 태동이 느껴진다. 알 부화기에 넣어 부화시키자."
   },
   "PalEgg_Electricity_02": {
     "localized_name": "찌릿찌릿한 알",
-    "description": "PalEgg Electricity 02. 탁탁 튀길 듯한 태동이 느껴진다. 알 부화기에 넣어 부화시키자."
+    "description": "PalEgg Electricity 02. 터질 듯한 태동이 느껴진다. 알 부화기에 넣어 부화시키자."
   },
   "PalEgg_Electricity_03": {
     "localized_name": "찌릿찌릿한 대형 알",
@@ -4909,11 +5029,11 @@
   },
   "PalEgg_Leaf_01": {
     "localized_name": "신록의 알",
-    "description": "PalEgg Leaf 01. 싱그러운 태동이 느껴진다. 알 부화기에 넣어 부화시키자."
+    "description": "PalEgg Leaf 01. 생생한 태동이 느껴진다. 알 부화기에 넣어 부화시키자."
   },
   "PalEgg_Leaf_02": {
     "localized_name": "신록의 알",
-    "description": "PalEgg Leaf 02. 싱그러운 태동이 느껴진다. 알 부화기에 넣어 부화시키자."
+    "description": "PalEgg Leaf 02. 생생한 태동이 느껴진다. 알 부화기에 넣어 부화시키자."
   },
   "PalEgg_Leaf_03": {
     "localized_name": "신록의 대형 알",
@@ -4973,7 +5093,7 @@
   },
   "PalGenderReverse": {
     "localized_name": "팰 리버서",
-    "description": "팰의 성별을 반전시키는 신비한 약품. 팔 수술대 에서 사용할 수 있다."
+    "description": "팰의 성별을 반전시키는 신비한 약품. 팰 수술대에서 사용할 수 있다."
   },
   "PalHealingGrenade": {
     "localized_name": "팰 회복 수류탄",
@@ -5041,111 +5161,151 @@
   },
   "PalPassiveSkillChange_CoolTimeReduction_Up_1": {
     "localized_name": "임플란트: 냉철함",
-    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팔 수술대 에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
   },
   "PalPassiveSkillChange_CoolTimeReduction_Up_2": {
     "localized_name": "임플란트: 성급함",
-    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팔 수술대 에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
   },
   "PalPassiveSkillChange_CraftSpeed_up1": {
     "localized_name": "임플란트: 성실함",
-    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팔 수술대 에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
   },
   "PalPassiveSkillChange_CraftSpeed_up2": {
     "localized_name": "임플란트: 장인 기질",
-    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팔 수술대 에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
   },
   "PalPassiveSkillChange_CraftSpeed_up3": {
     "localized_name": "임플란트: 초절기교",
-    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팔 수술대 에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
   },
   "PalPassiveSkillChange_Deffence_up1": {
     "localized_name": "임플란트: 단단한 피부",
-    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팔 수술대 에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
   },
   "PalPassiveSkillChange_Deffence_up2": {
     "localized_name": "임플란트: 억센 육체",
-    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팔 수술대 에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
   },
   "PalPassiveSkillChange_Deffence_up3": {
     "localized_name": "임플란트: 다이아몬드 보디",
-    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팔 수술대 에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
   },
   "PalPassiveSkillChange_HatchingSpeed_Up": {
     "localized_name": "임플란트: 박애주의자",
-    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팔 수술대 에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
   },
   "PalPassiveSkillChange_MoveSpeed_up_1": {
     "localized_name": "임플란트: 재빠름",
-    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팔 수술대 에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
   },
   "PalPassiveSkillChange_MoveSpeed_up_2": {
     "localized_name": "임플란트: 달리기 왕",
-    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팔 수술대 에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
   },
   "PalPassiveSkillChange_MoveSpeed_up_3": {
     "localized_name": "임플란트: 신속",
-    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팔 수술대 에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
   },
   "PalPassiveSkillChange_Nocturnal": {
     "localized_name": "임플란트: 야행성",
-    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팔 수술대 에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
   },
   "PalPassiveSkillChange_NonKilling": {
     "localized_name": "임플란트: 힘 조절",
-    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팔 수술대 에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
   },
   "PalPassiveSkillChange_Noukin": {
     "localized_name": "임플란트: 운동 바보",
-    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팔 수술대 에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
   },
   "PalPassiveSkillChange_PAL_ALLAttack_up1": {
     "localized_name": "임플란트: 용감",
-    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팔 수술대 에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
   },
   "PalPassiveSkillChange_PAL_ALLAttack_up2": {
     "localized_name": "임플란트: 사나움",
-    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팔 수술대 에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
   },
   "PalPassiveSkillChange_PAL_ALLAttack_up3": {
     "localized_name": "임플란트: 귀신",
-    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팔 수술대 에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+  },
+  "PalPassiveSkillChange_PAL_CorporateSlave": {
+    "localized_name": "임플란트: 일의 노예",
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
   },
   "PalPassiveSkillChange_PAL_FullStomach_Down_1": {
     "localized_name": "임플란트: 소식",
-    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팔 수술대 에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
   },
   "PalPassiveSkillChange_PAL_FullStomach_Down_2": {
     "localized_name": "임플란트: 식습관의 달인",
-    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팔 수술대 에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
   },
   "PalPassiveSkillChange_PAL_FullStomach_Down_3": {
     "localized_name": "임플란트: 절식의 극의",
-    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팔 수술대 에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
   },
   "PalPassiveSkillChange_PAL_Sanity_Down_1": {
     "localized_name": "임플란트: 긍정적인 사고",
-    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팔 수술대 에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
   },
   "PalPassiveSkillChange_PAL_Sanity_Down_2": {
     "localized_name": "임플란트: 일 중독",
-    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팔 수술대 에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
   },
   "PalPassiveSkillChange_PAL_Sanity_Down_3": {
     "localized_name": "임플란트: 부동명왕의 마음",
-    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팔 수술대 에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+  },
+  "PalPassiveSkillChange_SalePrice_Up_1": {
+    "localized_name": "임플란트: 고귀",
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+  },
+  "PalPassiveSkillChange_SalePrice_Up_2": {
+    "localized_name": "임플란트: 좋은 혈통",
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
   },
   "PalPassiveSkillChange_Stamina_Up_1": {
     "localized_name": "임플란트: 넘쳐나는 기력",
-    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팔 수술대 에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
   },
   "PalPassiveSkillChange_Stamina_Up_2": {
     "localized_name": "임플란트: 건강한 우량아",
-    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팔 수술대 에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
   },
   "PalPassiveSkillChange_Stamina_Up_3": {
     "localized_name": "임플란트: 영구기관",
-    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팔 수술대 에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+  },
+  "PalPassiveSkillChange_SwimSpeed_up_1": {
+    "localized_name": "임플란트: 유연한 헤엄",
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+  },
+  "PalPassiveSkillChange_SwimSpeed_up_2": {
+    "localized_name": "임플란트: 수영의 달인",
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+  },
+  "PalPassiveSkillChange_TrainerATK_UP_1": {
+    "localized_name": "임플란트: 돌격 지휘자",
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+  },
+  "PalPassiveSkillChange_TrainerDEF_UP_1": {
+    "localized_name": "임플란트: 철옹성의 책사",
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+  },
+  "PalPassiveSkillChange_TrainerLogging_up1": {
+    "localized_name": "임플란트: 벌목 관리자",
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+  },
+  "PalPassiveSkillChange_TrainerMining_up1": {
+    "localized_name": "임플란트: 광산 관리자",
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+  },
+  "PalPassiveSkillChange_TrainerWorkSpeed_UP_1": {
+    "localized_name": "임플란트: 동기 부여가",
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
   },
   "PalRevive": {
     "localized_name": "부활약",
@@ -5223,6 +5383,22 @@
     "localized_name": "마그마 드라고[궁극]의 석편",
     "description": "KingBahamut Dragon의 힘이 흘러넘치는 석판의 파편. 모아서 조합하면 석판이 완성된다."
   },
+  "PalSummon_LegendDeer": {
+    "localized_name": "레전디얼의 석판",
+    "description": "레젠디얼의 모습이 그려진 석판. 소환의 제단에 바치면 아주 강대한 레젠디얼[Lv 65]이(가) 소환된다."
+  },
+  "PalSummon_LegendDeer_2": {
+    "localized_name": "레전디얼[궁극]의 석판",
+    "description": "레젠디얼의 힘이 흘러넘치는 석판. 소환의 제단에 바치면 절망적인 위력의 레젠디얼[Lv ??]이(가) 소환된다."
+  },
+  "PalSummon_LegendDeer_Parts": {
+    "localized_name": "레전디얼의 석편",
+    "description": "레젠디얼의 모습이 그려진 석판의 조각. 모아서 조합하면 석판이 완성된다."
+  },
+  "PalSummon_LegendDeer_Parts_2": {
+    "localized_name": "레전디얼[궁극]의 석편",
+    "description": "레젠디얼의 힘이 흘러넘치는 석판의 조각. 모아서 조합하면 석판이 완성된다."
+  },
   "PalSummon_NightLady": {
     "localized_name": "벨라누아르의 석판",
     "description": "벨라누아르의 모습이 그려진 석판. 소환의 제단에 바치면 강대한 [Lv 30] 벨라누아르이(가) 소환된다."
@@ -5250,6 +5426,10 @@
   "PalSummon_YakushimaBoss002": {
     "localized_name": "천상의 인장",
     "description": "[테라리아 컬래버] 미지의 문양이 그려진 석판. 소환의 제단에 바치면 강대한 존재를 소환할 수 있다."
+  },
+  "PalSummon_YakushimaBoss002_2": {
+    "localized_name": "천상의 인장 [마스터]",
+    "description": "[테라리아 컬래버] 미지의 문양이 그려진 인장. 소환의 제단에 바치면 절망적으로 강력한 존재를 소환할 수 있다."
   },
   "PalUpgradeStone": {
     "localized_name": "작은 팰 영혼",
@@ -5407,6 +5587,14 @@
     "localized_name": "플라스틸 투구",
     "description": "플라스틸(으)로 만든 투구. 방어력 향상은 물론 경량화에도 성공했다."
   },
+  "PlayerDropItem": {
+    "localized_name": "승자의 증표",
+    "description": "승리를 거머쥔 자만이 얻을 수 있는 영광의 증표. 이것을 지닌 자는 전장에서 우위를 점했음을 증명한 것과 같다."
+  },
+  "Player_Outfit_Kigurumi001": {
+    "localized_name": "뚱코알라 흉내 갑옷",
+    "description": "뚱코알라의 모습을 본뜬 인형 갑옷."
+  },
   "PoisonMushroom": {
     "localized_name": "이상한 버섯",
     "description": "생으로 먹기에는 부적절한 버섯. 먹으면 배가 더 빨리 고파진다."
@@ -5417,7 +5605,7 @@
   },
   "Poppy": {
     "localized_name": "예쁜 꽃",
-    "description": "고운 빛깔의 꽃이 피는 식물. 수상한 주스 또는 이상한 주스 을(를) 만들 수 있다."
+    "description": "고운 빛깔의 꽃이 피는 식물. 수상한 주스 또는 이상한 주스을(를) 만들 수 있다."
   },
   "Potage": {
     "localized_name": "ko Text",
@@ -5445,7 +5633,7 @@
   },
   "Potion_Extreme": {
     "localized_name": "지고의 회복약",
-    "description": "천천히 몸의 상처를 치료하는 음용약. 품질이 비약적으로 상승하여, 아주 빠르게 HP를 회복시켜 준다."
+    "description": "천천히 몸의 상처를 치료하는 음용약. 품질이 매우 좋아, 아주 빠르게 HP를 회복시켜 준다."
   },
   "Potion_High": {
     "localized_name": "고품질 회복약",
@@ -5495,6 +5683,10 @@
     "localized_name": "조이의 추억이 담긴 천",
     "description": "희미한 향기가 남아 있는 낡은 천. 조이의 소중한 추억이 담긴 물건인 듯하다."
   },
+  "QuestItem_Zoe_Halloweenskin_1": {
+    "localized_name": "조이의 핼러윈 의상",
+    "description": "조이의 핼러윈 의상. 이거라면 조이도 무척 기뻐해 줄 것이다. 조이에게 건네주자!"
+  },
   "Quiche": {
     "localized_name": "버섯 키슈",
     "description": "파이 생지에 달걀, 야채, 버섯, 크림을 넣고 구운 요리. 따끈해도 좋고, 식었을 때 먹어도 맛있다. 먹으면 일정 시간 동안 배가 든든해지며, SAN 수치 하락 속도가 감소한다."
@@ -5504,24 +5696,24 @@
     "description": "천락의 땅에서만 발견되는 귀중한 결정. 오랜 세월을 거쳐 응축된 팰지움이 변질하여 무지갯빛으로 빛나게 되었다."
   },
   "Rankup_1": {
-    "localized_name": "만능 팰 정수 ☆1",
-    "description": "팰에게 주입하면 재능을 활짝 꽃 피게 해주는 신비한 정수. 팰의 랭크를 ☆0에서 ☆1로 올릴 수 있다. 어디선가 원망과 한탄의 목소리가 들리는 듯한데……"
+    "localized_name": "각성의 별 열매 ☆1",
+    "description": "좀처럼 보기 드문 마법의 열매. 팰의 랭크를 ☆0에서 ☆1로 올릴 수 있다."
   },
   "Rankup_2": {
-    "localized_name": "만능 팰 정수 ☆2",
-    "description": "팰에게 주입하면 재능을 활짝 꽃 피게 해주는 신비한 정수. 팰의 랭크를 ☆1에서 ☆2로 올릴 수 있다. 어디선가 원망과 한탄의 목소리가 들리는 듯한데……"
+    "localized_name": "각성의 별 열매 ☆2",
+    "description": "좀처럼 보기 드문 마법의 열매. 팰의 랭크를 ☆1에서 ☆2로 올릴 수 있다."
   },
   "Rankup_3": {
-    "localized_name": "만능 팰 정수 ☆3",
-    "description": "팰에게 주입하면 재능을 활짝 꽃 피게 해주는 신비한 정수. 팰의 랭크를 ☆2에서 ☆3로 올릴 수 있다. 어디선가 원망과 한탄의 목소리가 들리는 듯한데……"
+    "localized_name": "각성의 별 열매 ☆3",
+    "description": "좀처럼 보기 드문 마법의 열매. 팰의 랭크를 ☆2에서 ☆3으로 올릴 수 있다."
   },
   "Rankup_4": {
-    "localized_name": "만능 팰 정수 ☆4",
-    "description": "팰에게 주입하면 재능을 활짝 꽃 피게 해주는 신비한 정수. 팰의 랭크를 ☆3에서 ☆4로 올릴 수 있다. 어디선가 원망과 한탄의 목소리가 들리는 듯한데……"
+    "localized_name": "각성의 별 열매 ☆4",
+    "description": "좀처럼 보기 드문 마법의 열매. 팰의 랭크를 ☆3에서 ☆4로 올릴 수 있다."
   },
   "Rankup_Arbitrary": {
-    "localized_name": "농축 만능 팰 정수",
-    "description": "팰에게 주입하면 재능을 활짝 꽃 피게 해주는 신비한 정수. 팰의 랭크를 1단계 올릴 수 있다. 어디선가 원망과 한탄의 목소리가 들리는 듯한데……"
+    "localized_name": "잘 익은 각성의 별 열매",
+    "description": "좀처럼 보기 드문 마법의 열매. 팰의 랭크를 한 단계 올릴 수 있다."
   },
   "ReinforcedArrow": {
     "localized_name": "강화 화살",
@@ -6233,7 +6425,7 @@
   },
   "SkillUnlock_DreamDemon": {
     "localized_name": "몽마둥이의 목걸이",
-    "description": "몽마둥이의 목걸이. 소지한 상태로 몽마둥이을(를) 보유하고 있으면 항상 등장하여 플레이어의 공격에 맞춰 추가 공격으로 지원한다."
+    "description": "몽마둥이의 목걸이. 소지하고 있으면 보유 중인 몽마둥이이(가) 항상 등장하여 플레이어의 공격에 맞춰 추가 공격으로 지원한다."
   },
   "SkillUnlock_DrillGame": {
     "localized_name": "드릴북이의 머리띠",
@@ -6333,11 +6525,11 @@
   },
   "SkillUnlock_GrassPanda": {
     "localized_name": "초판다의 수류탄 발사기",
-    "description": "가지고 있으면 초판다에 탑승해 수류탄 발사기를 난사할 수 있다."
+    "description": "가지고 있으면 초판다에 탑승해 유탄 발사기를 난사할 수 있다."
   },
   "SkillUnlock_GrassPanda_Electric": {
     "localized_name": "썬더판다의 수류탄 발사기",
-    "description": "가지고 있으면 GrassPanda Electric에 탑승해 수류탄 발사기를 난사할 수 있다."
+    "description": "가지고 있으면 GrassPanda Electric에 탑승해 유탄 발사기를 난사할 수 있다."
   },
   "SkillUnlock_GuardianDog": {
     "localized_name": "둥실해치의 안장",
@@ -6392,7 +6584,7 @@
     "description": "가지고 있으면 IceNarwhal Fire에 탑승할 수 있다."
   },
   "SkillUnlock_IceSeal": {
-    "localized_name": "크리범의 하네스",
+    "localized_name": "크리범의 안장",
     "description": "가지고 있으면 크리범에 탑승할 수 있다."
   },
   "SkillUnlock_JetDragon": {
@@ -6438,6 +6630,10 @@
   "SkillUnlock_LeafMomonga": {
     "localized_name": "모몽파의 하네스",
     "description": "모몽파의 하네스. 가지고 있으면 플레이어가 빈사 상태가 될 시 모몽파이(가) 치유의 힘으로 플레이어를 부활시킨다."
+  },
+  "SkillUnlock_LegendDeer": {
+    "localized_name": "레전디얼의 안장",
+    "description": "가지고 있으면 레젠디얼에 탑승해 공격을 막는 보호막을 생성할 수 있다."
   },
   "SkillUnlock_Manticore": {
     "localized_name": "만티파이어의 안장",
@@ -6505,11 +6701,11 @@
   },
   "SkillUnlock_RaijinDaughter": {
     "localized_name": "썬더 키드의 목걸이",
-    "description": "썬더 키드의 목걸이. 소지한 상태로 썬더 키드을(를) 보유하고 있으면 항상 등장하여 플레이어의 공격에 맞춰 추가 공격으로 지원한다."
+    "description": "썬더 키드의 목걸이. 소지하고 있으면 보유 중인 썬더 키드이(가) 항상 등장하여 플레이어의 공격에 맞춰 추가 공격으로 지원한다."
   },
   "SkillUnlock_RaijinDaughter_Water": {
     "localized_name": "다크 키드의 목걸이",
-    "description": "RaijinDaughter Water의 목걸이. 소지한 상태로 RaijinDaughter Water을(를) 보유하고 있으면 항상 등장하여 플레이어의 공격에 맞춰 추가 공격으로 지원한다."
+    "description": "RaijinDaughter Water의 목걸이. 소지하고 있으면 보유 중인 RaijinDaughter Water이(가) 항상 등장하여 플레이어의 공격에 맞춰 추가 공격으로 지원한다."
   },
   "SkillUnlock_RedArmorBird": {
     "localized_name": "적토조의 안장",
@@ -6713,23 +6909,23 @@
   },
   "StealArmorHeat": {
     "localized_name": "내열 팰 금속 갑옷",
-    "description": "개량한 팰 금속 갑옷. 뛰어난 내열성을 자랑한다."
+    "description": "개량형 팰 금속 갑옷. 뛰어난 내열성을 자랑한다."
   },
   "StealArmorHeat_2": {
     "localized_name": "내열 팰 금속 갑옷",
-    "description": "개량한 팰 금속 갑옷. 뛰어난 내열성을 자랑한다."
+    "description": "개량형 팰 금속 갑옷. 뛰어난 내열성을 자랑한다."
   },
   "StealArmorHeat_3": {
     "localized_name": "내열 팰 금속 갑옷",
-    "description": "개량한 팰 금속 갑옷. 뛰어난 내열성을 자랑한다."
+    "description": "개량형 팰 금속 갑옷. 뛰어난 내열성을 자랑한다."
   },
   "StealArmorHeat_4": {
     "localized_name": "내열 팰 금속 갑옷",
-    "description": "개량한 팰 금속 갑옷. 뛰어난 내열성을 자랑한다."
+    "description": "개량형 팰 금속 갑옷. 뛰어난 내열성을 자랑한다."
   },
   "StealArmorHeat_5": {
     "localized_name": "내열 팰 금속 갑옷",
-    "description": "개량한 팰 금속 갑옷. 뛰어난 내열성을 자랑한다."
+    "description": "개량형 팰 금속 갑옷. 뛰어난 내열성을 자랑한다."
   },
   "StealArmor_2": {
     "localized_name": "팰 금속 갑옷",
@@ -6749,23 +6945,23 @@
   },
   "StealHelmet": {
     "localized_name": "팰 금속 투구",
-    "description": "팰 금속 주괴(으)로 만든 투구. 누구나 부러워할 최상의 품질, 적수를 선택하는 전사의 증명."
+    "description": "팰 금속 주괴(으)로 만든 투구. 누구나 부러워할 최상의 품질, 착용자를 선택하는 전사의 증거."
   },
   "StealHelmet_2": {
     "localized_name": "팰 금속 투구",
-    "description": "팰 금속 주괴(으)로 만든 투구. 누구나 부러워할 최상의 품질, 적수를 선택하는 전사의 증명."
+    "description": "팰 금속 주괴(으)로 만든 투구. 누구나 부러워할 최상의 품질, 착용자를 선택하는 전사의 증거."
   },
   "StealHelmet_3": {
     "localized_name": "팰 금속 투구",
-    "description": "팰 금속 주괴(으)로 만든 투구. 누구나 부러워할 최상의 품질, 적수를 선택하는 전사의 증명."
+    "description": "팰 금속 주괴(으)로 만든 투구. 누구나 부러워할 최상의 품질, 착용자를 선택하는 전사의 증거."
   },
   "StealHelmet_4": {
     "localized_name": "팰 금속 투구",
-    "description": "팰 금속 주괴(으)로 만든 투구. 누구나 부러워할 최상의 품질, 적수를 선택하는 전사의 증명."
+    "description": "팰 금속 주괴(으)로 만든 투구. 누구나 부러워할 최상의 품질, 착용자를 선택하는 전사의 증거."
   },
   "StealHelmet_5": {
     "localized_name": "팰 금속 투구",
-    "description": "팰 금속 주괴(으)로 만든 투구. 누구나 부러워할 최상의 품질, 적수를 선택하는 전사의 증명."
+    "description": "팰 금속 주괴(으)로 만든 투구. 누구나 부러워할 최상의 품질, 착용자를 선택하는 전사의 증거."
   },
   "StealIngot": {
     "localized_name": "팰 금속 주괴",
@@ -6897,15 +7093,15 @@
   },
   "Unlock_Picking_Tier1": {
     "localized_name": "간소한 락픽 도구",
-    "description": "가지고 있으면 구리 열쇠이(가) 필요한 보물 상자의 자물쇠를 억지로 딸 수 있게 된다. 아무리 많이 써도 고장 나지 않는다."
+    "description": "가지고 있으면 구리 열쇠이(가) 필요한 보물 상자의 자물쇠를 억지로 딸 수 있게 된다. 아무리 많이 써도 파손되지 않는다."
   },
   "Unlock_Picking_Tier2": {
     "localized_name": "고급 락픽 도구",
-    "description": "가지고 있으면 은 열쇠필요한 보물 상자의 자물쇠를 억지로 딸 수 있게 된다. 아무리 많이 써도 고장 나지 않는다."
+    "description": "가지고 있으면 은 열쇠필요한 보물 상자의 자물쇠를 억지로 딸 수 있게 된다. 아무리 많이 써도 파손되지 않는다."
   },
   "Unlock_Picking_Tier3": {
     "localized_name": "전문가용 락픽 도구",
-    "description": "가지고 있으면 금 열쇠필요한 보물 상자의 자물쇠를 억지로 딸 수 있게 된다. 아무리 많이 써도 고장 나지 않는다."
+    "description": "가지고 있으면 금 열쇠필요한 보물 상자의 자물쇠를 억지로 딸 수 있게 된다. 아무리 많이 써도 파손되지 않는다."
   },
   "Venom": {
     "localized_name": "독샘",
@@ -7065,23 +7261,23 @@
   },
   "YakushimaBlade004": {
     "localized_name": "엑스칼리버",
-    "description": "[테라리아 컬래버] 금색으로 빛나는 신성한 검. 휘두르면 자신의 주변에 충격파를 발사하여 넓은 범위를 공격할 수 있다."
+    "description": "[테라리아 컬래버] 금색으로 빛나는 신성한 검. 휘두르면 자신의 주변에 충격파를 발사한다."
   },
   "YakushimaBlade004_2": {
     "localized_name": "엑스칼리버",
-    "description": "[테라리아 컬래버] 금색으로 빛나는 신성한 검. 휘두르면 자신의 주변에 충격파를 발사하여 넓은 범위를 공격할 수 있다."
+    "description": "[테라리아 컬래버] 금색으로 빛나는 신성한 검. 휘두르면 자신의 주변에 충격파를 발사한다."
   },
   "YakushimaBlade004_3": {
     "localized_name": "엑스칼리버",
-    "description": "[테라리아 컬래버] 금색으로 빛나는 신성한 검. 휘두르면 자신의 주변에 충격파를 발사하여 넓은 범위를 공격할 수 있다."
+    "description": "[테라리아 컬래버] 금색으로 빛나는 신성한 검. 휘두르면 자신의 주변에 충격파를 발사한다."
   },
   "YakushimaBlade004_4": {
     "localized_name": "엑스칼리버",
-    "description": "[테라리아 컬래버] 금색으로 빛나는 신성한 검. 휘두르면 자신의 주변에 충격파를 발사하여 넓은 범위를 공격할 수 있다."
+    "description": "[테라리아 컬래버] 금색으로 빛나는 신성한 검. 휘두르면 자신의 주변에 충격파를 발사한다."
   },
   "YakushimaBlade004_5": {
     "localized_name": "엑스칼리버",
-    "description": "[테라리아 컬래버] 금색으로 빛나는 신성한 검. 휘두르면 자신의 주변에 충격파를 발사하여 넓은 범위를 공격할 수 있다."
+    "description": "[테라리아 컬래버] 금색으로 빛나는 신성한 검. 휘두르면 자신의 주변에 충격파를 발사한다."
   },
   "YakushimaBlade005": {
     "localized_name": "전설적인 미야우미어",
@@ -7201,7 +7397,7 @@
   },
   "YakushimaIngot002": {
     "localized_name": "루미나이트 주괴",
-    "description": "[테라리아 컬래버] YakushimaBoss002이(가) 떨어뜨린 강대한 힘이 느껴지는 소재. 반짝이는 빛이 마치 달빛과도 같다."
+    "description": "[테라리아 컬래버] RAID YakushimaBoss002이(가) 떨어뜨린 강대한 힘이 느껴지는 소재. 반짝이는 빛이 마치 달빛과도 같다."
   },
   "YakushimaLantern001": {
     "localized_name": "나이트글로우",

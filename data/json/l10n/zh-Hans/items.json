@@ -1,15 +1,15 @@
 {
   "Accessory_AT_1": {
     "localized_name": "攻击吊坠",
-    "description": "可提升少量攻击力的装饰。"
+    "description": "可稍微提升攻击力的饰品。"
   },
   "Accessory_AT_2": {
     "localized_name": "攻击吊坠+1",
-    "description": "可提升攻击力的装饰。"
+    "description": "可提升攻击力的饰品。"
   },
   "Accessory_AT_3": {
     "localized_name": "攻击吊坠+2",
-    "description": "可提升大量攻击力的装饰。"
+    "description": "可大幅提升攻击力的饰品。"
   },
   "Accessory_AirDash1": {
     "localized_name": "空中冲刺靴",
@@ -29,123 +29,123 @@
   },
   "Accessory_AquaResist_1": {
     "localized_name": "水属性抵抗戒指",
-    "description": "可稍微减轻水属性伤害的装饰。"
+    "description": "可稍微减轻水属性伤害的饰品。"
   },
   "Accessory_AquaResist_2": {
     "localized_name": "水属性抵抗戒指+1",
-    "description": "可减轻水属性伤害的装饰。"
+    "description": "可减轻水属性伤害的饰品。"
   },
   "Accessory_AquaResist_3": {
     "localized_name": "水属性抵抗戒指+2",
-    "description": "可大大减轻水属性伤害的装饰。"
+    "description": "可大幅减轻水属性伤害的饰品。"
   },
   "Accessory_CoolResist_1": {
     "localized_name": "防寒内衣",
-    "description": "拥有少量耐寒效果的装饰。"
+    "description": "拥有少量耐寒效果的饰品。"
   },
   "Accessory_CoolResist_2": {
     "localized_name": "防寒内衣+1",
-    "description": "拥有耐寒效果的装饰。"
+    "description": "拥有耐寒效果的饰品。"
   },
   "Accessory_CoolResist_3": {
     "localized_name": "防寒内衣+2",
-    "description": "拥有很强耐寒效果的装饰。"
+    "description": "拥有很强耐寒效果的饰品。"
   },
   "Accessory_DarkResist_1": {
     "localized_name": "暗属性抵抗戒指",
-    "description": "可稍微减轻暗属性伤害的装饰。"
+    "description": "可稍微减轻暗属性伤害的饰品。"
   },
   "Accessory_DarkResist_2": {
     "localized_name": "暗属性抵抗戒指+1",
-    "description": "可减轻暗属性伤害的装饰。"
+    "description": "可减轻暗属性伤害的饰品。"
   },
   "Accessory_DarkResist_3": {
     "localized_name": "暗属性抵抗戒指+2",
-    "description": "可大大减轻暗属性伤害的装饰。"
+    "description": "可大幅减轻暗属性伤害的饰品。"
   },
   "Accessory_DragonResist_1": {
     "localized_name": "龙属性抵抗戒指",
-    "description": "可稍微减轻龙属性伤害的装饰。"
+    "description": "可稍微减轻龙属性伤害的饰品。"
   },
   "Accessory_DragonResist_2": {
     "localized_name": "龙属性抵抗戒指+1",
-    "description": "可减轻龙属性伤害的装饰。"
+    "description": "可减轻龙属性伤害的饰品。"
   },
   "Accessory_DragonResist_3": {
     "localized_name": "龙属性抵抗戒指+2",
-    "description": "可大大减轻龙属性伤害的装饰。"
+    "description": "可大幅减轻龙属性伤害的饰品。"
   },
   "Accessory_EarthResist_1": {
     "localized_name": "地属性抵抗戒指",
-    "description": "可稍微减轻地属性伤害的装饰。"
+    "description": "可稍微减轻地属性伤害的饰品。"
   },
   "Accessory_EarthResist_2": {
     "localized_name": "地属性抵抗戒指+1",
-    "description": "可减轻地属性伤害的装饰。"
+    "description": "可减轻地属性伤害的饰品。"
   },
   "Accessory_EarthResist_3": {
     "localized_name": "地属性抵抗戒指+2",
-    "description": "可大大减轻地属性伤害的装饰。"
+    "description": "可大幅减轻地属性伤害的饰品。"
   },
   "Accessory_FireResist_1": {
     "localized_name": "炎属性抵抗戒指",
-    "description": "可稍微减轻炎属性伤害的装饰。"
+    "description": "可稍微减轻炎属性伤害的饰品。"
   },
   "Accessory_FireResist_2": {
     "localized_name": "炎属性抵抗戒指+1",
-    "description": "可减轻炎属性伤害的装饰。"
+    "description": "可减轻炎属性伤害的饰品。"
   },
   "Accessory_FireResist_3": {
     "localized_name": "炎属性抵抗戒指+2",
-    "description": "可大大减轻炎属性伤害的装饰。"
+    "description": "可大幅减轻炎属性伤害的饰品。"
   },
   "Accessory_HP_1": {
     "localized_name": "生命吊坠",
-    "description": "可提升少量HP的装饰。"
+    "description": "可稍微提升HP的饰品。"
   },
   "Accessory_HP_2": {
     "localized_name": "生命吊坠+1",
-    "description": "可提升HP的装饰。"
+    "description": "可提升HP的饰品。"
   },
   "Accessory_HP_3": {
     "localized_name": "生命吊坠+2",
-    "description": "可提升大量HP的装饰。"
+    "description": "可大幅提升HP的饰品。"
   },
   "Accessory_HeatColdResist_1": {
     "localized_name": "耐热防寒内衣",
-    "description": "同时拥有少量耐热、耐寒效果的装饰。"
+    "description": "同时拥有少量耐热、耐寒效果的饰品。"
   },
   "Accessory_HeatColdResist_2": {
     "localized_name": "耐热防寒内衣+1",
-    "description": "同时拥有耐热、耐寒效果的装饰。"
+    "description": "同时拥有耐热、耐寒效果的饰品。"
   },
   "Accessory_HeatColdResist_3": {
     "localized_name": "耐热防寒内衣+2",
-    "description": "同时拥有很强耐热、耐寒效果的装饰。"
+    "description": "同时拥有很强耐热、耐寒效果的饰品。"
   },
   "Accessory_HeatResist_1": {
     "localized_name": "耐热内衣",
-    "description": "拥有少量耐热效果的装饰。"
+    "description": "拥有少量耐热效果的饰品。"
   },
   "Accessory_HeatResist_2": {
     "localized_name": "耐热内衣+1",
-    "description": "拥有耐热效果的装饰。"
+    "description": "拥有耐热效果的饰品。"
   },
   "Accessory_HeatResist_3": {
     "localized_name": "耐热内衣+2",
-    "description": "拥有很强耐热效果的装饰。"
+    "description": "拥有很强耐热效果的饰品。"
   },
   "Accessory_IceResist_1": {
     "localized_name": "冰属性抵抗戒指",
-    "description": "可稍微减轻冰属性伤害的装饰。"
+    "description": "可稍微减轻冰属性伤害的饰品。"
   },
   "Accessory_IceResist_2": {
     "localized_name": "冰属性抵抗戒指+1",
-    "description": "可减轻冰属性伤害的装饰。"
+    "description": "可减轻冰属性伤害的饰品。"
   },
   "Accessory_IceResist_3": {
     "localized_name": "冰属性抵抗戒指+2",
-    "description": "可大大减轻冰属性伤害的装饰。"
+    "description": "可大幅减轻冰属性伤害的饰品。"
   },
   "Accessory_JumpCount_Increase1": {
     "localized_name": "二段跳靴",
@@ -165,15 +165,15 @@
   },
   "Accessory_LeafResist_1": {
     "localized_name": "草属性抵抗戒指",
-    "description": "可稍微减轻草属性伤害的装饰。"
+    "description": "可稍微减轻草属性伤害的饰品。"
   },
   "Accessory_LeafResist_2": {
     "localized_name": "草属性抵抗戒指+1",
-    "description": "可减轻草属性伤害的装饰。"
+    "description": "可减轻草属性伤害的饰品。"
   },
   "Accessory_LeafResist_3": {
     "localized_name": "草属性抵抗戒指+2",
-    "description": "可大大减轻草属性伤害的装饰。"
+    "description": "可大幅减轻草属性伤害的饰品。"
   },
   "Accessory_MaxWeightUp_01": {
     "localized_name": "搬运工戒指",
@@ -209,39 +209,39 @@
   },
   "Accessory_ThunderResist_1": {
     "localized_name": "雷属性抵抗戒指",
-    "description": "可稍微减轻雷属性伤害的装饰。"
+    "description": "可稍微减轻雷属性伤害的饰品。"
   },
   "Accessory_ThunderResist_2": {
     "localized_name": "雷属性抵抗戒指+1",
-    "description": "可减轻雷属性伤害的装饰。"
+    "description": "可减轻雷属性伤害的饰品。"
   },
   "Accessory_ThunderResist_3": {
     "localized_name": "雷属性抵抗戒指+2",
-    "description": "可大大减轻雷属性伤害的装饰。"
+    "description": "可大幅减轻雷属性伤害的饰品。"
   },
   "Accessory_WorkSpeed_1": {
     "localized_name": "勤劳吊坠",
-    "description": "可少许提升作业速度的装饰。"
+    "description": "可稍微提升作业速度的饰品。"
   },
   "Accessory_WorkSpeed_2": {
     "localized_name": "勤劳吊坠+1",
-    "description": "可提升作业速度的装饰。"
+    "description": "可提升作业速度的饰品。"
   },
   "Accessory_WorkSpeed_3": {
     "localized_name": "勤劳吊坠+2",
-    "description": "可大大提升作业速度的装饰。"
+    "description": "可大幅提升作业速度的饰品。"
   },
   "Accessory_defense_1": {
     "localized_name": "防御吊坠",
-    "description": "可提升少量防御力的装饰。"
+    "description": "可稍微提升防御力的饰品。"
   },
   "Accessory_defense_2": {
     "localized_name": "防御吊坠+1",
-    "description": "可提升防御力的装饰。"
+    "description": "可提升防御力的饰品。"
   },
   "Accessory_defense_3": {
     "localized_name": "防御吊坠+2",
-    "description": "可提升大量防御力的装饰。"
+    "description": "可大幅提升防御力的饰品。"
   },
   "AdditionalInventory_001": {
     "localized_name": "小型扩展背包",
@@ -262,6 +262,10 @@
   "AffectionFruit_01": {
     "localized_name": "羁绊宝桃",
     "description": "极为罕见的魔法果实。 据说帕鲁吃下后会对人类敞开心扉。 务必谨慎选择赠送对象。"
+  },
+  "AffectionFruit_02": {
+    "localized_name": "羁绊小桃",
+    "description": "饱含温情的小小果实。 据说帕鲁吃下后会对人类敞开心扉。 务必谨慎选择赠送对象。"
   },
   "AncientParts2": {
     "localized_name": "古代文明核心",
@@ -309,7 +313,7 @@
   },
   "AssaultRifleBullet": {
     "localized_name": "突击步枪子弹",
-    "description": "AssaultRifle Default1等使用的子弹。"
+    "description": "用于AssaultRifle Default1等武器的子弹。"
   },
   "AssaultRifle_Default1": {
     "localized_name": "突击步枪",
@@ -537,7 +541,7 @@
   },
   "Blueprint_CandleStand": {
     "localized_name": "庄严烛台设计图",
-    "description": "持有或存放在据点中， 即可建造「庄严烛台」。"
+    "description": "持有或存放在据点中， 即可建造「<MapObjectName id=|CandleStand|/>」。"
   },
   "Blueprint_ChargeLaserRifle_2": {
     "localized_name": "充能步枪设计图1",
@@ -621,11 +625,11 @@
   },
   "Blueprint_ConservationGroupBannerA": {
     "localized_name": "帕鲁保护团体旗帜设计图",
-    "description": "持有或存放在据点中， 即可建造「帕鲁保护团体旗帜」。"
+    "description": "持有或存放在据点中， 即可建造「<MapObjectName id=|ConservationGroupBannerA|/>」。"
   },
   "Blueprint_ConservationGroupBannerB": {
     "localized_name": "帕鲁保护团体横幅设计图",
-    "description": "持有或存放在据点中， 即可建造「帕鲁保护团体横幅」。"
+    "description": "持有或存放在据点中， 即可建造「<MapObjectName id=|ConservationGroupBannerB|/>」。"
   },
   "Blueprint_CopperArmorCold_2": {
     "localized_name": "耐寒金属盔甲设计图1",
@@ -741,7 +745,7 @@
   },
   "Blueprint_FireStand": {
     "localized_name": "仪式用烛台设计图",
-    "description": "持有或存放在据点中， 即可建造「仪式用烛台」。"
+    "description": "持有或存放在据点中， 即可建造「<MapObjectName id=|FireStand|/>」。"
   },
   "Blueprint_FishingRod_01_2": {
     "localized_name": "初级钓竿（叶泥泥）设计图",
@@ -869,7 +873,7 @@
   },
   "Blueprint_GuardianDogStatue": {
     "localized_name": "八云犬雕像设计图",
-    "description": "持有或存放在据点中， 即可建造「八云犬雕像」。"
+    "description": "持有或存放在据点中， 即可建造「<MapObjectName id=|GuardianDogStatue|/>」。"
   },
   "Blueprint_GuidedMissileLauncher_2": {
     "localized_name": "追踪导弹发射器设计图1",
@@ -1345,7 +1349,7 @@
   },
   "Blueprint_Hunter_GangFlag": {
     "localized_name": "盗猎团旗帜设计图",
-    "description": "持有或存放在据点中， 即可建造「Hunter GangFlag」。"
+    "description": "持有或存放在据点中， 即可建造「<MapObjectName id=|Hunter GangFlag|/>」。"
   },
   "Blueprint_IronArmorCold_2": {
     "localized_name": "耐寒精炼金属盔甲设计图1",
@@ -1413,7 +1417,7 @@
   },
   "Blueprint_LanternTop": {
     "localized_name": "日式白灯笼设计图",
-    "description": "持有或存放在据点中， 即可建造「日式白灯笼」。"
+    "description": "持有或存放在据点中， 即可建造「<MapObjectName id=|LanternTop|/>」。"
   },
   "Blueprint_LaserGatlingGun_2": {
     "localized_name": "激光加特林设计图1",
@@ -1469,7 +1473,7 @@
   },
   "Blueprint_LilyQueenStatue": {
     "localized_name": "百合女王雕像设计图",
-    "description": "持有或存放在据点中， 即可建造「百合女王雕像」。"
+    "description": "持有或存放在据点中， 即可建造「<MapObjectName id=|LilyQueenStatue|/>」。"
   },
   "Blueprint_MakeshiftAssaultRifle_2": {
     "localized_name": "破旧的突击步枪设计图1",
@@ -1570,6 +1574,46 @@
   "Blueprint_Musket_5": {
     "localized_name": "鸟枪设计图4",
     "description": "持有此设计图，即可解锁 「鸟枪（Legendary）」的配方。 可在「WeaponFactory Dirty 01」制作。"
+  },
+  "Blueprint_Octavia001_Armor_5": {
+    "localized_name": "V1盔甲设计图4",
+    "description": "【ULTRAKILL 联动】 持有此设计图，即可解锁 「Octavia001 Armor 5（Legendary）」的配方。 可在「Factory Hard 02」制作。"
+  },
+  "Blueprint_Octavia002_Armor_5": {
+    "localized_name": "V2盔甲设计图4",
+    "description": "【ULTRAKILL 联动】 持有此设计图，即可解锁 「Octavia002 Armor 5（Legendary）」的配方。 可在「Factory Hard 03」制作。"
+  },
+  "Blueprint_OctaviaRevolver_2": {
+    "localized_name": "神射左轮手枪设计图1",
+    "description": "【ULTRAKILL 联动】 持有此设计图，即可解锁 「神射左轮手枪（Uncommon）」的配方。 可在「WeaponFactory Dirty 02」制作。"
+  },
+  "Blueprint_OctaviaRevolver_3": {
+    "localized_name": "神射左轮手枪设计图2",
+    "description": "【ULTRAKILL 联动】 持有此设计图，即可解锁 「神射左轮手枪（Rare）」的配方。 可在「WeaponFactory Dirty 02」制作。"
+  },
+  "Blueprint_OctaviaRevolver_4": {
+    "localized_name": "神射左轮手枪设计图3",
+    "description": "【ULTRAKILL 联动】 持有此设计图，即可解锁 「神射左轮手枪（Epic）」的配方。 可在「WeaponFactory Dirty 02」制作。"
+  },
+  "Blueprint_OctaviaRevolver_5": {
+    "localized_name": "神射左轮手枪设计图4",
+    "description": "【ULTRAKILL 联动】 持有此设计图，即可解锁 「神射左轮手枪（Legendary）」的配方。 可在「WeaponFactory Dirty 02」制作。"
+  },
+  "Blueprint_OctaviaShotgun_2": {
+    "localized_name": "核心喷射霰弹枪设计图1",
+    "description": "【ULTRAKILL 联动】 持有此设计图，即可解锁 「核心喷射霰弹枪（Uncommon）」的配方。 可在「WeaponFactory Dirty 03」制作。"
+  },
+  "Blueprint_OctaviaShotgun_3": {
+    "localized_name": "核心喷射霰弹枪设计图2",
+    "description": "【ULTRAKILL 联动】 持有此设计图，即可解锁 「核心喷射霰弹枪（Rare）」的配方。 可在「WeaponFactory Dirty 03」制作。"
+  },
+  "Blueprint_OctaviaShotgun_4": {
+    "localized_name": "核心喷射霰弹枪设计图3",
+    "description": "【ULTRAKILL 联动】 持有此设计图，即可解锁 「核心喷射霰弹枪（Epic）」的配方。 可在「WeaponFactory Dirty 03」制作。"
+  },
+  "Blueprint_OctaviaShotgun_5": {
+    "localized_name": "核心喷射霰弹枪设计图4",
+    "description": "【ULTRAKILL 联动】 持有此设计图，即可解锁 「核心喷射霰弹枪（Legendary）」的配方。 可在「WeaponFactory Dirty 03」制作。"
   },
   "Blueprint_OldRevolver_2": {
     "localized_name": "古旧左轮手枪设计图1",
@@ -1801,11 +1845,11 @@
   },
   "Blueprint_SF_Chair": {
     "localized_name": "研究室风格椅子设计图",
-    "description": "持有或存放在据点中， 即可建造「SF Chair」。"
+    "description": "持有或存放在据点中， 即可建造「<MapObjectName id=|SF Chair|/>」。"
   },
   "Blueprint_SF_Desk": {
     "localized_name": "研究室风格书桌设计图",
-    "description": "持有或存放在据点中， 即可建造「SF Desk」。"
+    "description": "持有或存放在据点中， 即可建造「<MapObjectName id=|SF Desk|/>」。"
   },
   "Blueprint_SemiAutoRifle_2": {
     "localized_name": "半自动步枪设计图1",
@@ -1841,7 +1885,7 @@
   },
   "Blueprint_Shrine_Lantern": {
     "localized_name": "神社赤灯笼设计图",
-    "description": "持有或存放在据点中， 即可建造「Shrine Lantern」。"
+    "description": "持有或存放在据点中， 即可建造「<MapObjectName id=|Shrine Lantern|/>」。"
   },
   "Blueprint_SingleShotRifle_2": {
     "localized_name": "单发步枪设计图1",
@@ -1941,7 +1985,7 @@
   },
   "Blueprint_WallTorch02": {
     "localized_name": "庄严壁挂火把设计图",
-    "description": "持有或存放在据点中， 即可建造「庄严壁挂火把」。"
+    "description": "持有或存放在据点中， 即可建造「<MapObjectName id=|WallTorch02|/>」。"
   },
   "Blueprint_WeakerBow_2": {
     "localized_name": "陈旧的弓设计图1",
@@ -1961,11 +2005,11 @@
   },
   "Blueprint_Wire_Fence": {
     "localized_name": "铁丝网围栏设计图",
-    "description": "持有或存放在据点中， 即可建造「Wire Fence」。"
+    "description": "持有或存放在据点中， 即可建造「<MapObjectName id=|Wire Fence|/>」。"
   },
   "Blueprint_WoodenBarricade": {
     "localized_name": "木制路障设计图",
-    "description": "持有或存放在据点中， 即可建造「木制路障」。"
+    "description": "持有或存放在据点中， 即可建造「<MapObjectName id=|WoodenBarricade|/>」。"
   },
   "Blueprint_YakushimaArmor001": {
     "localized_name": "神圣板甲设计图",
@@ -2046,6 +2090,10 @@
   "Blueprint_YakushimaBlade004_5": {
     "localized_name": "断钢剑设计图4",
     "description": "【泰拉瑞亚联动】 持有此设计图，即可解锁 「断钢剑（Legendary）」的配方。 可在「WeaponFactory Dirty 02」制作。"
+  },
+  "Blueprint_YakushimaBoss002_Relic": {
+    "localized_name": "月亮领主雕像设计图",
+    "description": "【泰拉瑞亚联动】 持有或存放在据点中， 即可建造「<MapObjectName id=|YakushimaBoss002 Relic|/>」。"
   },
   "Blueprint_YakushimaGun001": {
     "localized_name": "星旋机枪设计图",
@@ -2166,6 +2214,10 @@
   "Blueprint_YakushimaLantern001_5": {
     "localized_name": "夜光设计图4",
     "description": "【泰拉瑞亚联动】 持有此设计图，即可解锁 「夜光（Legendary）」的配方。 可在「WeaponFactory Dirty 02」制作。"
+  },
+  "Blueprint_Zoe_Halloweenskin_1": {
+    "localized_name": "佐伊的万圣节服装设计图",
+    "description": "偷听到佐伊自言自语后记下的笔记。 在工作台上制作，并把成品交给佐伊吧。"
   },
   "Bone": {
     "localized_name": "骨头",
@@ -2569,7 +2621,7 @@
   },
   "ChargeLaserRifleBullet": {
     "localized_name": "充能步枪子弹",
-    "description": "充能步枪等使用的子弹。"
+    "description": "用于充能步枪等武器的弹药。"
   },
   "ChargeLaserRifle_2": {
     "localized_name": "充能步枪",
@@ -2597,7 +2649,7 @@
   },
   "ChickenSaute": {
     "localized_name": "嫩煎皮皮鸡",
-    "description": "用黄油煎炒而制的厚实鸡胸肉料理。 透出一股清爽的柠檬风味。 食用后的一段时间内，略微提高工作速度。"
+    "description": "用黄油煎炒而制的厚实鸡肉料理。 透出一股清爽的柠檬风味。 食用后的一段时间内，略微提高工作速度。"
   },
   "Chowder": {
     "localized_name": "趴趴鲶杂烩",
@@ -2937,7 +2989,7 @@
   },
   "EnergyLauncherBullet": {
     "localized_name": "电浆能量盒",
-    "description": "等离子炮等使用的弹药。"
+    "description": "用于等离子炮等武器的弹药。"
   },
   "EnergyRocketLauncher": {
     "localized_name": "等离子炮",
@@ -2965,7 +3017,7 @@
   },
   "EnergyShotgunBullet": {
     "localized_name": "能量霰弹枪子弹",
-    "description": "能量霰弹枪等使用的子弹。"
+    "description": "用于能量霰弹枪等武器的弹药。"
   },
   "EnergyShotgun_2": {
     "localized_name": "能量霰弹枪",
@@ -3001,7 +3053,7 @@
   },
   "ExplosiveBullet": {
     "localized_name": "火箭弹",
-    "description": "Launcher Default等使用的弹药。"
+    "description": "用于Launcher Default等武器的弹药。"
   },
   "Fang": {
     "localized_name": "zh-hans text",
@@ -3117,7 +3169,7 @@
   },
   "FlamethrowerBullet": {
     "localized_name": "火焰喷射器燃料",
-    "description": "Flamethrower使用的燃料。"
+    "description": "用于Flamethrower等武器的燃料。"
   },
   "Flour": {
     "localized_name": "面粉",
@@ -3145,7 +3197,7 @@
   },
   "FragGrenade_Ground": {
     "localized_name": "大地手榴弹",
-    "description": "利于中等距离战斗的FragGrenade Ground。 投掷数秒后引爆，给敌人造成Ground伤害。"
+    "description": "利于中等距离战斗的FragGrenade Ground。 投掷数秒后引爆，给敌人造成地属性伤害。"
   },
   "FragGrenade_Ice": {
     "localized_name": "冷冻手榴弹",
@@ -3305,7 +3357,7 @@
   },
   "GatlingBullet": {
     "localized_name": "加特林子弹",
-    "description": "加特林机枪使用的弹药。"
+    "description": "用于加特林机枪等武器的弹药。"
   },
   "GatlingGun": {
     "localized_name": "加特林机枪",
@@ -3357,23 +3409,23 @@
   },
   "GrapplingGun": {
     "localized_name": "爪钩枪",
-    "description": "可进行高速移动的爪钩枪。 可向射击地点射出爪钩，牽引射击者的身体。 可在有高低差的地方轻松移动。"
+    "description": "用于快速移动的爪钩枪。 能将爪钩射向目标地点，再将使用者牵引过去。 可在有高低差的地方轻松移动。"
   },
   "GrapplingGun2": {
     "localized_name": "高级爪钩枪",
-    "description": "可进行高速移动的爪钩枪。 可向射击地点射出爪钩，牽引射击者的身体。 此款式经过改良，射程变得更远。"
+    "description": "用于快速移动的爪钩枪。 能将爪钩射向目标地点，再将使用者牵引过去。 经过改良，射程变得更远。"
   },
   "GrapplingGun3": {
     "localized_name": "优质爪钩枪",
-    "description": "可进行高速移动的爪钩枪。 可向射击地点射出爪钩，牽引射击者的身体。 此款式在试验品数据的基础上进行了改良，性能得到进一步提升。"
+    "description": "用于快速移动的爪钩枪。 能将爪钩射向目标地点，再将使用者牵引过去。 在试验品数据的基础上进行改良，进一步提升了性能。"
   },
   "GrapplingGun4": {
     "localized_name": "特级爪钩枪",
-    "description": "用于快速移动的爪钩枪。 它能将爪钩射向目的地，再将使用者牵引过去。 此款式经过研究改良，灵活性可谓无与伦比。"
+    "description": "用于快速移动的爪钩枪。 能将爪钩射向目标地点，再将使用者牵引过去。 经过研究改良，灵活性可谓无与伦比。"
   },
   "GrapplingGun5": {
     "localized_name": "超级爪钩枪",
-    "description": "可实现高速移动的爪钩枪。 可向射击地点发射爪钩，牽引射击者的身体。 此款式采用了新型材料，大幅缩短了散热时间。"
+    "description": "用于快速移动的爪钩枪。 能将爪钩射向目标地点，再将使用者牵引过去。 采用了新型材料，大幅缩短了散热时间。"
   },
   "Gratin": {
     "localized_name": "法式焗菜",
@@ -3381,7 +3433,7 @@
   },
   "GrenadeBullet": {
     "localized_name": "榴弹",
-    "description": "榴弹发射器使用的弹药。"
+    "description": "用于榴弹发射器等武器的弹药。"
   },
   "GrenadeLauncher": {
     "localized_name": "榴弹发射器",
@@ -3477,7 +3529,11 @@
   },
   "HandgunBullet": {
     "localized_name": "手枪子弹",
-    "description": "HandGun Default使用的子弹。"
+    "description": "用于HandGun Default等武器的子弹。"
+  },
+  "HandgunShield": {
+    "localized_name": "防爆盾手枪",
+    "description": "防爆盾手枪"
   },
   "Head001": {
     "localized_name": "王冠",
@@ -3820,7 +3876,7 @@
     "description": null
   },
   "HeadEquip001_purple": {
-    "localized_name": "魔女之冠【极】",
+    "localized_name": "魔女之冠",
     "description": "可以感受到贝菈露洁【极】不祥的力量。 由于是相当稀少之物，拥有之人少之又少。"
   },
   "HeadEquip023": {
@@ -3955,6 +4011,14 @@
     "localized_name": "杰诺多兰头套",
     "description": "模仿杰诺多兰的头套。"
   },
+  "HeadEquip045": {
+    "localized_name": "瞅什魔头套",
+    "description": "仿照瞅什魔的样子制作的玩偶装头部。 似乎可以稍微减轻暗属性伤害。"
+  },
+  "HeadEquip046": {
+    "localized_name": "救赎王冠",
+    "description": "可以感受到【极】默世鹿不祥的力量。 由于是相当稀少之物，拥有之人少之又少。"
+  },
   "Herbs": {
     "localized_name": "低品质药品",
     "description": "可治疗感冒及扭伤、暴食症的低品质药品。 吃下后也无法恢复HP。"
@@ -3997,7 +4061,7 @@
   },
   "InkBullet": {
     "localized_name": "印花墨水",
-    "description": "印花枪使用的子弹。 可用墨水画出帕鲁的图案。"
+    "description": "用于印花枪的子弹。 可用墨水画出帕鲁的图案。"
   },
   "IronArmor": {
     "localized_name": "精炼金属盔甲",
@@ -4109,11 +4173,11 @@
   },
   "LaserBullet": {
     "localized_name": "能量盒",
-    "description": "激光步枪使用的弹药。"
+    "description": "用于激光步枪等武器的弹药。"
   },
   "LaserGatlingBullet": {
     "localized_name": "加特林激光能量盒",
-    "description": "激光加特林等使用的弹药。"
+    "description": "用于激光加特林等武器的弹药。"
   },
   "LaserGatlingGun": {
     "localized_name": "激光加特林",
@@ -4265,11 +4329,11 @@
   },
   "MachingunBullet": {
     "localized_name": "机关枪子弹",
-    "description": "Machingun等使用的子弹。"
+    "description": "用于Machingun等武器的子弹。"
   },
   "MagnumBullet": {
     "localized_name": "马格南子弹",
-    "description": "Magnum等使用的子弹。"
+    "description": "用于Magnum等武器的子弹。"
   },
   "MakeshiftAssaultRifle": {
     "localized_name": "破旧的突击步枪",
@@ -4461,7 +4525,7 @@
   },
   "MeteorBullet": {
     "localized_name": "陨石弹",
-    "description": "Launcher Meteor使用的弹药。"
+    "description": "用于Launcher Meteor等武器的弹药。"
   },
   "MeteorDrop": {
     "localized_name": "陨石碎片",
@@ -4481,7 +4545,7 @@
   },
   "MissileBullet": {
     "localized_name": "导弹",
-    "description": "追踪导弹发射器使用的弹药。"
+    "description": "用于追踪导弹发射器等武器的弹药。"
   },
   "Money": {
     "localized_name": "金币",
@@ -4554,6 +4618,62 @@
   "NightVisionGoggles": {
     "localized_name": "zh-hans text",
     "description": "zh-hans text"
+  },
+  "Octavia001_Armor": {
+    "localized_name": "V1盔甲",
+    "description": "【ULTRAKILL 联动】 参考遥远之地制造的战争机器人的结构打造的盔甲。 具备在造成伤害时进行自我修复的功能。"
+  },
+  "Octavia001_Armor_5": {
+    "localized_name": "V1盔甲",
+    "description": "【ULTRAKILL 联动】 参考遥远之地制造的战争机器人的结构打造的盔甲。 具备在造成伤害时进行自我修复的功能。"
+  },
+  "Octavia002_Armor": {
+    "localized_name": "V2盔甲",
+    "description": "【ULTRAKILL 联动】 参考遥远之地制造的维和机器人的结构打造的盔甲。 舍弃自我修复功能，转而更进一步强化了装甲。"
+  },
+  "Octavia002_Armor_5": {
+    "localized_name": "V2盔甲",
+    "description": "【ULTRAKILL 联动】 参考遥远之地制造的维和机器人的结构打造的盔甲。 舍弃自我修复功能，转而更进一步强化了装甲。"
+  },
+  "OctaviaRevolver": {
+    "localized_name": "神射左轮手枪",
+    "description": "【ULTRAKILL 联动】 利用电能驱动可连续射击的左轮手枪。 装备期间，投掷捕获用帕鲁球的动作会变为掷硬币， 神射左轮手枪的子弹击中硬币时将会弹向敌人。"
+  },
+  "OctaviaRevolver_2": {
+    "localized_name": "神射左轮手枪",
+    "description": "【ULTRAKILL 联动】 利用电能驱动可连续射击的左轮手枪。 装备期间，投掷捕获用帕鲁球的动作会变为掷硬币， 神射左轮手枪的子弹击中硬币时将会弹向敌人。"
+  },
+  "OctaviaRevolver_3": {
+    "localized_name": "神射左轮手枪",
+    "description": "【ULTRAKILL 联动】 利用电能驱动可连续射击的左轮手枪。 装备期间，投掷捕获用帕鲁球的动作会变为掷硬币， 神射左轮手枪的子弹击中硬币时将会弹向敌人。"
+  },
+  "OctaviaRevolver_4": {
+    "localized_name": "神射左轮手枪",
+    "description": "【ULTRAKILL 联动】 利用电能驱动可连续射击的左轮手枪。 装备期间，投掷捕获用帕鲁球的动作会变为掷硬币， 神射左轮手枪的子弹击中硬币时将会弹向敌人。"
+  },
+  "OctaviaRevolver_5": {
+    "localized_name": "神射左轮手枪",
+    "description": "【ULTRAKILL 联动】 利用电能驱动可连续射击的左轮手枪。 装备期间，投掷捕获用帕鲁球的动作会变为掷硬币， 神射左轮手枪的子弹击中硬币时将会弹向敌人。"
+  },
+  "OctaviaShotgun": {
+    "localized_name": "核心喷射霰弹枪",
+    "description": "【ULTRAKILL 联动】 利用热能驱动可连续射击的霰弹枪。 装备期间，投掷捕获用帕鲁球的动作将变为发射核心，长按可充能并延长核心发射的射程。 被神射左轮手枪击中的核心将会爆炸。"
+  },
+  "OctaviaShotgun_2": {
+    "localized_name": "核心喷射霰弹枪",
+    "description": "【ULTRAKILL 联动】 利用热能驱动可连续射击的霰弹枪。 装备期间，投掷捕获用帕鲁球的动作将变为发射核心，长按可充能并延长核心发射的射程。 被神射左轮手枪击中的核心将会爆炸。"
+  },
+  "OctaviaShotgun_3": {
+    "localized_name": "核心喷射霰弹枪",
+    "description": "【ULTRAKILL 联动】 利用热能驱动可连续射击的霰弹枪。 装备期间，投掷捕获用帕鲁球的动作将变为发射核心，长按可充能并延长核心发射的射程。 被神射左轮手枪击中的核心将会爆炸。"
+  },
+  "OctaviaShotgun_4": {
+    "localized_name": "核心喷射霰弹枪",
+    "description": "【ULTRAKILL 联动】 利用热能驱动可连续射击的霰弹枪。 装备期间，投掷捕获用帕鲁球的动作将变为发射核心，长按可充能并延长核心发射的射程。 被神射左轮手枪击中的核心将会爆炸。"
+  },
+  "OctaviaShotgun_5": {
+    "localized_name": "核心喷射霰弹枪",
+    "description": "【ULTRAKILL 联动】 利用热能驱动可连续射击的霰弹枪。 装备期间，投掷捕获用帕鲁球的动作将变为发射核心，长按可充能并延长核心发射的射程。 被神射左轮手枪击中的核心将会爆炸。"
   },
   "OctopusGirl_Takoyaki": {
     "localized_name": "墨沫姬的章鱼烧",
@@ -4745,7 +4865,7 @@
   },
   "OverheatRifleBullet": {
     "localized_name": "过热步枪子弹",
-    "description": "过热步枪等使用的子弹。"
+    "description": "用于过热步枪等武器的弹药。"
   },
   "OverheatRifle_2": {
     "localized_name": "过热步枪",
@@ -4777,7 +4897,7 @@
   },
   "PalDopingShotBullet": {
     "localized_name": "强化枪子弹",
-    "description": "强化枪等使用的子弹。"
+    "description": "用于强化枪等武器的弹药。"
   },
   "PalDopingShot_2": {
     "localized_name": "高级强化枪",
@@ -5111,6 +5231,10 @@
     "localized_name": "植入体：鬼神",
     "description": "植入帕鲁体内、用于更改其被动技能的植入体。 持有此道具时，可在帕鲁手术台选择相应的被动技能。"
   },
+  "PalPassiveSkillChange_PAL_CorporateSlave": {
+    "localized_name": "植入体：社畜",
+    "description": "植入帕鲁体内、用于更改其被动技能的植入体。 持有此道具时，可在帕鲁手术台选择相应的被动技能。"
+  },
   "PalPassiveSkillChange_PAL_FullStomach_Down_1": {
     "localized_name": "植入体：小胃",
     "description": "植入帕鲁体内、用于更改其被动技能的植入体。 持有此道具时，可在帕鲁手术台选择相应的被动技能。"
@@ -5135,6 +5259,14 @@
     "localized_name": "植入体：明镜止水",
     "description": "植入帕鲁体内、用于更改其被动技能的植入体。 持有此道具时，可在帕鲁手术台选择相应的被动技能。"
   },
+  "PalPassiveSkillChange_SalePrice_Up_1": {
+    "localized_name": "植入体：高贵",
+    "description": "植入帕鲁体内、用于更改其被动技能的植入体。 持有此道具时，可在帕鲁手术台选择相应的被动技能。"
+  },
+  "PalPassiveSkillChange_SalePrice_Up_2": {
+    "localized_name": "植入体：贵族",
+    "description": "植入帕鲁体内、用于更改其被动技能的植入体。 持有此道具时，可在帕鲁手术台选择相应的被动技能。"
+  },
   "PalPassiveSkillChange_Stamina_Up_1": {
     "localized_name": "植入体：无限精力",
     "description": "植入帕鲁体内、用于更改其被动技能的植入体。 持有此道具时，可在帕鲁手术台选择相应的被动技能。"
@@ -5145,6 +5277,34 @@
   },
   "PalPassiveSkillChange_Stamina_Up_3": {
     "localized_name": "植入体：永动机",
+    "description": "植入帕鲁体内、用于更改其被动技能的植入体。 持有此道具时，可在帕鲁手术台选择相应的被动技能。"
+  },
+  "PalPassiveSkillChange_SwimSpeed_up_1": {
+    "localized_name": "植入体：悠然泳姿",
+    "description": "植入帕鲁体内、用于更改其被动技能的植入体。 持有此道具时，可在帕鲁手术台选择相应的被动技能。"
+  },
+  "PalPassiveSkillChange_SwimSpeed_up_2": {
+    "localized_name": "植入体：游泳健将",
+    "description": "植入帕鲁体内、用于更改其被动技能的植入体。 持有此道具时，可在帕鲁手术台选择相应的被动技能。"
+  },
+  "PalPassiveSkillChange_TrainerATK_UP_1": {
+    "localized_name": "植入体：突袭指挥官",
+    "description": "植入帕鲁体内、用于更改其被动技能的植入体。 持有此道具时，可在帕鲁手术台选择相应的被动技能。"
+  },
+  "PalPassiveSkillChange_TrainerDEF_UP_1": {
+    "localized_name": "植入体：铁壁军师",
+    "description": "植入帕鲁体内、用于更改其被动技能的植入体。 持有此道具时，可在帕鲁手术台选择相应的被动技能。"
+  },
+  "PalPassiveSkillChange_TrainerLogging_up1": {
+    "localized_name": "植入体：采伐领袖",
+    "description": "植入帕鲁体内、用于更改其被动技能的植入体。 持有此道具时，可在帕鲁手术台选择相应的被动技能。"
+  },
+  "PalPassiveSkillChange_TrainerMining_up1": {
+    "localized_name": "植入体：矿山首领",
+    "description": "植入帕鲁体内、用于更改其被动技能的植入体。 持有此道具时，可在帕鲁手术台选择相应的被动技能。"
+  },
+  "PalPassiveSkillChange_TrainerWorkSpeed_UP_1": {
+    "localized_name": "植入体：啦啦队",
     "description": "植入帕鲁体内、用于更改其被动技能的植入体。 持有此道具时，可在帕鲁手术台选择相应的被动技能。"
   },
   "PalRevive": {
@@ -5223,6 +5383,22 @@
     "localized_name": "【极】殁殃的石板碎片",
     "description": "KingBahamut Dragon之力满溢而出的石板碎片。 通过组合可将其拼成石板。"
   },
+  "PalSummon_LegendDeer": {
+    "localized_name": "默世鹿的石板",
+    "description": "画着默世鹿的石板。 只要将其献给召唤的祭坛， 就能召唤非常强大的默世鹿[Lv 65]。"
+  },
+  "PalSummon_LegendDeer_2": {
+    "localized_name": "【极】默世鹿的石板",
+    "description": "默世鹿之力满溢而出的石板。 只要将其献给召唤的祭坛， 就能召唤强大到令人绝望的默世鹿[Lv ??]。"
+  },
+  "PalSummon_LegendDeer_Parts": {
+    "localized_name": "默世鹿的石板碎片",
+    "description": "画着默世鹿的石板碎片。 通过组合可将其拼成石板。"
+  },
+  "PalSummon_LegendDeer_Parts_2": {
+    "localized_name": "【极】默世鹿的石板碎片",
+    "description": "默世鹿之力满溢而出的石板碎片。 通过组合可将其拼成石板。"
+  },
   "PalSummon_NightLady": {
     "localized_name": "贝菈诺娃的石板",
     "description": "画着贝菈诺娃的石板。 只要将其献给召唤的祭坛， 就能召唤强大的贝菈诺娃[Lv 30]。"
@@ -5250,6 +5426,10 @@
   "PalSummon_YakushimaBoss002": {
     "localized_name": "天界符",
     "description": "【泰拉瑞亚联动】 画着未知图案的印章。 只要将其献给召唤的祭坛， 就能召唤强大的存在。"
+  },
+  "PalSummon_YakushimaBoss002_2": {
+    "localized_name": "天界符【大师】",
+    "description": "【泰拉瑞亚联动】 画着未知图案的印章。 只要将其献给召唤的祭坛， 就能召唤强大到令人绝望的存在。"
   },
   "PalUpgradeStone": {
     "localized_name": "小型帕鲁之魂",
@@ -5407,6 +5587,14 @@
     "localized_name": "塑钢头盔",
     "description": "以塑钢制成的头盔。 在增强防御力的同时，实现了轻量化。"
   },
+  "PlayerDropItem": {
+    "localized_name": "胜者证明",
+    "description": "只有胜者才能获得的荣誉之证。 象征着持有者在战场上取得的优势地位。"
+  },
+  "Player_Outfit_Kigurumi001": {
+    "localized_name": "瞅什魔玩偶装",
+    "description": "仿照瞅什魔的样子制作的玩偶装躯干。"
+  },
   "PoisonMushroom": {
     "localized_name": "不可思议的蘑菇",
     "description": "不适合生吃的蘑菇。 吃了后肚子会更容易饿。"
@@ -5495,6 +5683,10 @@
     "localized_name": "佐伊记忆中的布条",
     "description": "依稀残留着香气的旧布，承载着佐伊的珍贵回忆。"
   },
+  "QuestItem_Zoe_Halloweenskin_1": {
+    "localized_name": "佐伊的万圣节服装",
+    "description": "佐伊的万圣节服装。 她收到后一定会很开心的。 把它交给佐伊吧！"
+  },
   "Quiche": {
     "localized_name": "蘑菇乳蛋饼",
     "description": "将蛋、蔬菜、蘑菇和奶油加入派皮烘烤的料理。 就算凉了依然美味可口。 食用后的一段时间内，减缓SAN值的下降速度， 且不容易感到饥饿。"
@@ -5504,24 +5696,24 @@
     "description": "只能在天坠之地发现的珍贵结晶。 帕鲁矿历经漫长岁月凝结变质而成， 呈现出彩虹般的光芒。"
   },
   "Rankup_1": {
-    "localized_name": "万能帕鲁精华提取液☆1",
-    "description": "给帕鲁注入就能使其才能开花结果的不可思议的精华。 可以使帕鲁的阶级从☆0升到☆1。 不知道为什么好像能听到充满怨念的呻吟……"
+    "localized_name": "觉醒星果☆1",
+    "description": "极为罕见的魔法果实。 可以使帕鲁的阶级从☆0升到☆1。"
   },
   "Rankup_2": {
-    "localized_name": "万能帕鲁精华提取液☆2",
-    "description": "给帕鲁注入就能使其才能开花结果的不可思议的精华。 可以使帕鲁的阶级从☆1升到☆2。 不知道为什么好像能听到充满怨念的呻吟……"
+    "localized_name": "觉醒星果☆2",
+    "description": "极为罕见的魔法果实。 可以使帕鲁的阶级从☆1升到☆2。"
   },
   "Rankup_3": {
-    "localized_name": "万能帕鲁精华提取液☆3",
-    "description": "给帕鲁注入就能使其才能开花结果的不可思议的精华。 可以使帕鲁的阶级从☆2升到☆3。 不知道为什么好像能听到充满怨念的呻吟……"
+    "localized_name": "觉醒星果☆3",
+    "description": "极为罕见的魔法果实。 可以使帕鲁的阶级从☆2升到☆3。"
   },
   "Rankup_4": {
-    "localized_name": "万能帕鲁精华提取液☆4",
-    "description": "给帕鲁注入就能使其才能开花结果的不可思议的精华。 可以使帕鲁的阶级从☆3升到☆4。 不知道为什么好像能听到充满怨念的呻吟……"
+    "localized_name": "觉醒星果☆4",
+    "description": "极为罕见的魔法果实。 可以使帕鲁的阶级从☆3升到☆4。"
   },
   "Rankup_Arbitrary": {
-    "localized_name": "浓缩万能帕鲁精华",
-    "description": "给帕鲁注入就能使其才能开花结果的不可思议的精华。 可以使帕鲁的阶级上升1阶。 不知道为什么好像能听到充满怨念的呻吟……"
+    "localized_name": "成熟觉醒星果",
+    "description": "极为罕见的魔法果实。 可以使帕鲁的阶级上升1阶。"
   },
   "ReinforcedArrow": {
     "localized_name": "强化箭矢",
@@ -5537,11 +5729,11 @@
   },
   "RifleBullet": {
     "localized_name": "步枪子弹",
-    "description": "步枪等使用的子弹。"
+    "description": "用于步枪等武器的子弹。"
   },
   "RoughBullet": {
     "localized_name": "劣质弹药",
-    "description": "鸟枪和劣质手枪等使用的子弹。"
+    "description": "用于鸟枪和劣质手枪等武器的子弹。"
   },
   "Ruby": {
     "localized_name": "红宝石",
@@ -5765,7 +5957,7 @@
   },
   "ShotgunBullet": {
     "localized_name": "霰弹枪子弹",
-    "description": "霰弹枪等使用的子弹。"
+    "description": "用于霰弹枪等武器的子弹。"
   },
   "SingleShotRifle": {
     "localized_name": "单发步枪",
@@ -6392,7 +6584,7 @@
     "description": "持有此道具时， 即可骑乘IceNarwhal Fire。"
   },
   "SkillUnlock_IceSeal": {
-    "localized_name": "香草豹冰的背带",
+    "localized_name": "香草豹冰的鞍具",
     "description": "持有此道具时， 即可骑乘香草豹冰。"
   },
   "SkillUnlock_JetDragon": {
@@ -6438,6 +6630,10 @@
   "SkillUnlock_LeafMomonga": {
     "localized_name": "达鼠泥的背带",
     "description": "达鼠泥的背带。 持有此道具时，达鼠泥会在玩家陷入濒死状态时 通过疗愈能力让玩家复活。"
+  },
+  "SkillUnlock_LegendDeer": {
+    "localized_name": "默世鹿的鞍具",
+    "description": "持有此道具时， 即可骑乘默世鹿并生成护盾，抵御攻击。"
   },
   "SkillUnlock_Manticore": {
     "localized_name": "狱焰王的鞍具",
@@ -7065,23 +7261,23 @@
   },
   "YakushimaBlade004": {
     "localized_name": "断钢剑",
-    "description": "【泰拉瑞亚联动】 闪耀着金色光辉的神圣之剑。 挥舞时会释放冲击波，攻击自身周围大范围的目标。"
+    "description": "【泰拉瑞亚联动】 闪耀着金色光辉的神圣之剑。 挥舞时会向自身周围释放冲击波。"
   },
   "YakushimaBlade004_2": {
     "localized_name": "断钢剑",
-    "description": "【泰拉瑞亚联动】 闪耀着金色光辉的神圣之剑。 挥舞时会释放冲击波，攻击自身周围大范围的目标。"
+    "description": "【泰拉瑞亚联动】 闪耀着金色光辉的神圣之剑。 挥舞时会向自身周围释放冲击波。"
   },
   "YakushimaBlade004_3": {
     "localized_name": "断钢剑",
-    "description": "【泰拉瑞亚联动】 闪耀着金色光辉的神圣之剑。 挥舞时会释放冲击波，攻击自身周围大范围的目标。"
+    "description": "【泰拉瑞亚联动】 闪耀着金色光辉的神圣之剑。 挥舞时会向自身周围释放冲击波。"
   },
   "YakushimaBlade004_4": {
     "localized_name": "断钢剑",
-    "description": "【泰拉瑞亚联动】 闪耀着金色光辉的神圣之剑。 挥舞时会释放冲击波，攻击自身周围大范围的目标。"
+    "description": "【泰拉瑞亚联动】 闪耀着金色光辉的神圣之剑。 挥舞时会向自身周围释放冲击波。"
   },
   "YakushimaBlade004_5": {
     "localized_name": "断钢剑",
-    "description": "【泰拉瑞亚联动】 闪耀着金色光辉的神圣之剑。 挥舞时会释放冲击波，攻击自身周围大范围的目标。"
+    "description": "【泰拉瑞亚联动】 闪耀着金色光辉的神圣之剑。 挥舞时会向自身周围释放冲击波。"
   },
   "YakushimaBlade005": {
     "localized_name": "传奇彩虹猫之刃",
@@ -7201,7 +7397,7 @@
   },
   "YakushimaIngot002": {
     "localized_name": "夜明锭",
-    "description": "【泰拉瑞亚联动】 YakushimaBoss002掉落的蕴含强大力量的材料。 散发着宛如月光的银辉。"
+    "description": "【泰拉瑞亚联动】 RAID YakushimaBoss002掉落的蕴含强大力量的材料。 散发着宛如月光的银辉。"
   },
   "YakushimaLantern001": {
     "localized_name": "夜光",

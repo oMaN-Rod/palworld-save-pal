@@ -1327,6 +1327,10 @@
     "localized_name": "春彩娘",
     "description": "一到開春時節，就會乘風在島上散佈花粉。 波娜兔會得到花粉症， 都怪春彩娘。"
   },
+  "LegendDeer": {
+    "localized_name": "默世鹿",
+    "description": "於此幽寂之地，不覺心神凝定。 此處已無人，眾人皆蒙救度。 救贖之王，請攜我共赴無盡之寂。 ——古老的文獻到這裡就中斷了。"
+  },
   "LilyQueen": {
     "localized_name": "百合女王",
     "description": "滿懷慈愛且性格溫和的帕魯。 牠會照顧失去父母的年幼帕魯， 但也會用毫無保留的SolarBeam來管教牠們。"
@@ -1381,6 +1385,10 @@
   },
   "Male_DesertPeople01": {
     "localized_name": "村民",
+    "description": null
+  },
+  "Male_Kigurumi01_v01": {
+    "localized_name": "島民",
     "description": null
   },
   "Male_Ninja01": {
@@ -1807,6 +1815,10 @@
     "localized_name": "自衛隊 步槍兵",
     "description": null
   },
+  "Police_Shield_Tower": {
+    "localized_name": "自衛隊 步槍兵",
+    "description": null
+  },
   "Police_Shotgun": {
     "localized_name": "自衛隊 菁英",
     "description": null
@@ -1883,6 +1895,14 @@
     "localized_name": "歿殃",
     "description": null
   },
+  "RAID_LegendDeer": {
+    "localized_name": "默世鹿",
+    "description": null
+  },
+  "RAID_LegendDeer_2": {
+    "localized_name": "默世鹿",
+    "description": null
+  },
   "RAID_NightLady": {
     "localized_name": "貝菈諾娃",
     "description": null
@@ -1899,7 +1919,15 @@
     "localized_name": "克蘇魯真眼",
     "description": null
   },
+  "RAID_YakushimaBoss001_Green_2": {
+    "localized_name": "克蘇魯真眼",
+    "description": null
+  },
   "RAID_YakushimaBoss002": {
+    "localized_name": "月尊",
+    "description": null
+  },
+  "RAID_YakushimaBoss002_2": {
     "localized_name": "月尊",
     "description": null
   },
@@ -1907,11 +1935,23 @@
     "localized_name": "月尊",
     "description": null
   },
+  "RAID_YakushimaBoss002_Hand_Left_2": {
+    "localized_name": "月尊",
+    "description": null
+  },
   "RAID_YakushimaBoss002_Hand_Right": {
     "localized_name": "月尊",
     "description": null
   },
+  "RAID_YakushimaBoss002_Hand_Right_2": {
+    "localized_name": "月尊",
+    "description": null
+  },
   "RAID_YakushimaBoss002_Head": {
+    "localized_name": "月尊",
+    "description": null
+  },
+  "RAID_YakushimaBoss002_Head_2": {
     "localized_name": "月尊",
     "description": null
   },

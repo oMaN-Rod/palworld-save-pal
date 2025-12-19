@@ -329,7 +329,7 @@
   },
   "FarmBlockV2_Berries": {
     "localized_name": "Beerengarten",
-    "description": "Ein Feld zum Anbau von Rote Beeren. Können schnell geerntet werden, sind aber nicht besonders sättigend. Zum Säen, Gießen und Ernten werden mehrere Pals benötigt."
+    "description": "Ein Feld zum Anbau von Rote Beeren. Können schnell geerntet werden, sind aber nicht besonders sättigend. Zum Säen, Bewässern und Ernten werden mehrere Pals benötigt."
   },
   "FarmBlockV2_Carrot": {
     "localized_name": "Karottenbeet",
@@ -337,7 +337,7 @@
   },
   "FarmBlockV2_Lettuce": {
     "localized_name": "Salatacker",
-    "description": "Ein Feld zum Anbau von Kopfsalat. Bis zur Ernte dauert es länger, dafür steigt die Vielfalt der Gerichte, die sich zubereiten lassen. Zum Säen, Gießen und Ernten werden mehrere Pals benötigt."
+    "description": "Ein Feld zum Anbau von Kopfsalat. Bis zur Ernte dauert es länger, dafür steigt die Vielfalt der Gerichte, die sich zubereiten lassen. Zum Säen, Bewässern und Ernten werden mehrere Pals benötigt."
   },
   "FarmBlockV2_Onion": {
     "localized_name": "Zwiebelbeet",
@@ -349,11 +349,11 @@
   },
   "FarmBlockV2_tomato": {
     "localized_name": "Tomatenacker",
-    "description": "Ein Feld zum Anbau von Tomate. Bis zur Ernte dauert es länger, dafür steigt die Vielfalt der Gerichte, die sich zubereiten lassen. Zum Säen, Gießen und Ernten werden mehrere Pals benötigt."
+    "description": "Ein Feld zum Anbau von Tomate. Bis zur Ernte dauert es länger, dafür steigt die Vielfalt der Gerichte, die sich zubereiten lassen. Zum Säen, Bewässern und Ernten werden mehrere Pals benötigt."
   },
   "FarmBlockV2_wheet": {
     "localized_name": "Weizenfeld",
-    "description": "Ein Feld zum Anbau von Weizen. Kann durchschnittlich schnell geerntet werden. Zum Säen, Gießen und Ernten werden mehrere Pals benötigt."
+    "description": "Ein Feld zum Anbau von Weizen. Kann durchschnittlich schnell geerntet werden. Zum Säen, Bewässern und Ernten werden mehrere Pals benötigt."
   },
   "Farm_SkillFruits": {
     "localized_name": "Technikfruchtgarten",
@@ -403,6 +403,10 @@
     "localized_name": "Müllsack",
     "description": "Dekorative Müllsäcke. Wem’s gefällt..."
   },
+  "Glass_DiagonalWall": {
+    "localized_name": "Diagonale Glaswand",
+    "description": "Eine diagonale Wand, die du auf einem dreieckigen Fundament errichten kannst, um Eindringlinge fernzuhalten. Ist aus Hartglas und dadurch sehr robust."
+  },
   "Glass_DoorWall": {
     "localized_name": "Glaswand mit Tür",
     "description": "Eine Eingangstür, die du auf einem Fundament errichten kannst. Ist aus Hartglas und dadurch sehr robust."
@@ -411,13 +415,41 @@
     "localized_name": "Glasgeländer",
     "description": "Ein Geländer, das du auf einem Fundament oder einem Dach errichten kannst, um Absturzunfällen vorzubeugen. Ist aus Hartglas und dadurch sehr robust."
   },
+  "Glass_PyramidRoof": {
+    "localized_name": "Pyramidenförmiges Glasdach",
+    "description": "Ein pyramidenförmiges Dach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist aus Hartglas und dadurch sehr robust."
+  },
   "Glass_SlantedRoof": {
     "localized_name": "Schräges Glasdach",
     "description": "Ein Schrägdach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist aus Hartglas und dadurch sehr robust."
   },
+  "Glass_SlopedRoofCorner": {
+    "localized_name": "Dreieckiges Glasschrägdach",
+    "description": "Ein dreieckiges Schrägdach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist aus Hartglas und dadurch sehr robust."
+  },
+  "Glass_TriangleFoundation": {
+    "localized_name": "Dreieckiges Glasfundament",
+    "description": "Ein dreieckiges Fundament, worauf du Wände oder Gebäude errichten kannst. Ist aus Hartglas und dadurch sehr robust."
+  },
+  "Glass_TriangleRoof": {
+    "localized_name": "Dreieckiges Glasdach",
+    "description": "Ein dreieckiges Dach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist aus Hartglas und dadurch sehr robust."
+  },
+  "Glass_TriangleStairsCorner": {
+    "localized_name": "Glaseckdach",
+    "description": "Ein Eckdach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist aus Hartglas und dadurch sehr robust."
+  },
   "Glass_TriangleWall": {
     "localized_name": "Dreieckige Glaswand",
     "description": "Eine dreieckige Wand, die du auf einem Fundament errichten kannst. Ist aus Hartglas und dadurch sehr robust."
+  },
+  "Glass_TriangleWallReverse": {
+    "localized_name": "Dreieckige Glaswand (umgedreht)",
+    "description": "Eine umgekehrte dreieckige Wand, die du auf einem Fundament errichten kannst. Ist aus Hartglas und dadurch sehr robust."
+  },
+  "Glass_WallGate": {
+    "localized_name": "Glasdurchgang für Pals",
+    "description": "Ein Durchgang für Pals, den du auf einem Fundament errichten kannst. Ist aus Hartglas und dadurch sehr robust."
   },
   "Glass_WindowWall": {
     "localized_name": "Glaswand mit Fenster",
@@ -491,9 +523,41 @@
     "localized_name": "Gefrierzerkleinerer",
     "description": "Eine Anlage zum Zerkleinern und Umwandeln von Erz. Für den Betrieb benötigt man Strom sowie einen Pal, der „Kühlung| beherrscht. Sehr effizient."
   },
+  "Iron_DiagonalWall": {
+    "localized_name": "Diagonale Metallwand",
+    "description": "Eine diagonale Wand, die du auf einem dreieckigen Fundament errichten kannst, um Eindringlinge fernzuhalten. Ist aus Metall und dadurch extrem solide."
+  },
   "Iron_Fence": {
     "localized_name": "Metallgeländer",
     "description": "Ein Geländer, das du auf einem Fundament oder einem Dach errichten kannst, um Absturzunfällen vorzubeugen. Ist aus Metall und dadurch extrem solide."
+  },
+  "Iron_PyramidRoof": {
+    "localized_name": "Pyramidenförmiges Metalldach",
+    "description": "Ein pyramidenförmiges Dach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist aus Metall und dadurch extrem solide."
+  },
+  "Iron_SlopedRoofCorner": {
+    "localized_name": "Tejado triangular e inclinado de metal",
+    "description": "Ein dreieckiges Schrägdach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist aus Metall und dadurch extrem solide."
+  },
+  "Iron_TriangleFoundation": {
+    "localized_name": "Dreieckiges Metallfundament",
+    "description": "Ein dreieckiges Fundament, worauf du Wände oder Gebäude errichten kannst. Ist aus Metall und dadurch extrem solide."
+  },
+  "Iron_TriangleRoof": {
+    "localized_name": "Dreieckiges Metalldach",
+    "description": "Ein dreieckiges Dach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist aus Metall und dadurch extrem solide."
+  },
+  "Iron_TriangleStairsCorner": {
+    "localized_name": "Metalleckdach",
+    "description": "Ein Eckdach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist aus Metall und dadurch extrem solide."
+  },
+  "Iron_TriangleWallReverse": {
+    "localized_name": "Dreieckige Metallwand (umgedreht)",
+    "description": "Eine umgekehrte dreieckige Wand, die du auf einem Fundament errichten kannst. Ist aus Metall und dadurch extrem solide."
+  },
+  "Iron_WallGate": {
+    "localized_name": "Metalldurchgang für Pals",
+    "description": "Ein Durchgang für Pals, den du auf einem Fundament errichten kannst. Ist aus Metall und dadurch extrem solide."
   },
   "Irori": {
     "localized_name": "Fernöstliche Feuerstelle",
@@ -531,6 +595,10 @@
     "localized_name": "Breiter Wand-Efeu",
     "description": "Eine dekorative breite Efeupflanze. Muss an einer Wand angebracht werden."
   },
+  "JapaneseStyle_DiagonalWall": {
+    "localized_name": "Fernöstliche diagonale Wand",
+    "description": "Eine diagonale Wand, die du auf einem dreieckigen Fundament errichten kannst, um Eindringlinge fernzuhalten. Besticht mit fernöstlicher Eleganz."
+  },
   "JapaneseStyle_DoorWall_01": {
     "localized_name": "Fernöstliche Wand mit Tür A",
     "description": "Eine Eingangstür, die du auf einem Fundament errichten kannst. Besticht mit fernöstlicher Eleganz."
@@ -551,13 +619,45 @@
     "localized_name": "Fernöstliche Säule",
     "description": "Eine Säule zum Abstützen von Gebäuden. Besticht mit fernöstlicher Eleganz."
   },
+  "JapaneseStyle_PyramidRoof": {
+    "localized_name": "Fernöstliches pyramidenförmiges Dach",
+    "description": "Ein pyramidenförmiges Dach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Besticht mit fernöstlicher Eleganz."
+  },
   "JapaneseStyle_SlantedRoof": {
     "localized_name": "Fernöstliches Schrägdach",
     "description": "Ein Schrägdach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Besticht mit fernöstlicher Eleganz."
   },
+  "JapaneseStyle_SlopedRoofCorner": {
+    "localized_name": "Japanisches dreieckiges Schrägdach",
+    "description": "Ein dreieckiges Schrägdach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Besticht mit fernöstlicher Eleganz."
+  },
+  "JapaneseStyle_TriangleFoundation": {
+    "localized_name": "Fernöstliches dreieckiges Fundament",
+    "description": "Ein dreieckiges Fundament, worauf du Wände oder Gebäude errichten kannst. Besticht mit fernöstlicher Eleganz."
+  },
+  "JapaneseStyle_TriangleRoof_01": {
+    "localized_name": "Fernöstliches dreieckiges Dach A",
+    "description": "Ein dreieckiges Dach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Die Oberseite ist aus Tatami-Matten. Besticht mit fernöstlicher Eleganz."
+  },
+  "JapaneseStyle_TriangleRoof_02": {
+    "localized_name": "Fernöstliches dreieckiges Dach B",
+    "description": "Ein dreieckiges Dach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Die Oberseite ist aus Ziegeln. Besticht mit fernöstlicher Eleganz."
+  },
+  "JapaneseStyle_TriangleStairsCorner_01": {
+    "localized_name": "Fernöstliches Eckdach",
+    "description": "Ein Eckdach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Besticht mit fernöstlicher Eleganz."
+  },
   "JapaneseStyle_TriangleWall": {
     "localized_name": "Fernöstliche dreieckige Wand",
     "description": "Eine dreieckige Wand, die du auf einem Fundament errichten kannst. Besticht mit fernöstlicher Eleganz."
+  },
+  "JapaneseStyle_TriangleWallReverse": {
+    "localized_name": "Fernöstliche dreieckige Wand (umgedreht)",
+    "description": "Eine umgekehrte dreieckige Wand, die du auf einem Fundament errichten kannst. Besticht mit fernöstlicher Eleganz."
+  },
+  "JapaneseStyle_WallGate": {
+    "localized_name": "Fernöstlicher Durchgang für Pals",
+    "description": "Ein Durchgang für Pals, den du auf einem Fundament errichten kannst. Besticht mit fernöstlicher Eleganz."
   },
   "JapaneseStyle_WindowWall": {
     "localized_name": "Fernöstliche Wand mit Fenster",
@@ -732,7 +832,7 @@
     "description": "Eine Wand, die du auf einem Fundament errichten kannst, um Eindringlinge fernzuhalten. Ist aus Metall und dadurch extrem solide."
   },
   "MiningTool": {
-    "localized_name": "Spitzhacke und Helm",
+    "localized_name": "Bergbauwagen",
     "description": "Kann im Lager aufgestellt werden und erhöht das Arbeitstempo beim Bergbau. Mehrere aufzustellen, bringt keinen zusätzlichen Nutzen."
   },
   "Mirror01_Stone": {
@@ -776,7 +876,7 @@
     "description": "Kann im Lager aufgestellt werden und erhöht das Arbeitstempo beim Arbeiten mit Feuer. Mehrere aufzustellen, bringt keinen zusätzlichen Nutzen."
   },
   "OperatingTable": {
-    "localized_name": "Pal-Operationstisch",
+    "localized_name": "Pal-OP-Tisch",
     "description": "Eine Anlage, in der Pals operiert werden können, um ihr Geschlecht oder ihre passiven Fähigkeiten zu verändern."
   },
   "PalBooth": {
@@ -887,6 +987,10 @@
     "localized_name": "Tisch im Laborstil",
     "description": "Ein dekorativer Schreibtisch im Laborstil."
   },
+  "SF_DiagonalWall": {
+    "localized_name": "Futuristische diagonale Wand",
+    "description": "Eine diagonale Wand, die du auf einem dreieckigen Fundament errichten kannst, um Eindringlinge fernzuhalten. Für Liebhaber steriler Futuristik."
+  },
   "SF_DoorWall": {
     "localized_name": "Futuristische Wand mit Tür",
     "description": "Eine Eingangstür, die du auf einem Fundament errichten kannst. Für Liebhaber steriler Futuristik."
@@ -895,13 +999,41 @@
     "localized_name": "Futuristisches Geländer",
     "description": "Ein Geländer, das du auf einem Fundament oder einem Dach errichten kannst, um Absturzunfällen vorzubeugen. Für Liebhaber steriler Futuristik."
   },
+  "SF_PyramidRoof": {
+    "localized_name": "Futuristisches pyramidenförmiges Dach",
+    "description": "Ein pyramidenförmiges Dach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Für Liebhaber steriler Futuristik."
+  },
   "SF_SlantedRoof": {
     "localized_name": "Futuristisches Schrägdach",
     "description": "Ein Schrägdach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Für Liebhaber steriler Futuristik."
   },
+  "SF_SlopedRoofCorner": {
+    "localized_name": "Futuristisches Schrägdach",
+    "description": "Ein dreieckiges Schrägdach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Für Liebhaber steriler Futuristik."
+  },
+  "SF_TriangleFoundation": {
+    "localized_name": "Futuristisches dreieckiges Fundament",
+    "description": "Ein dreieckiges Fundament, worauf du Wände oder Gebäude errichten kannst. Für Liebhaber steriler Futuristik."
+  },
+  "SF_TriangleRoof": {
+    "localized_name": "Futuristisches dreieckiges Dach",
+    "description": "Ein dreieckiges Dach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Für Liebhaber steriler Futuristik."
+  },
+  "SF_TriangleStairsCorner": {
+    "localized_name": "Futuristisches Eckdach",
+    "description": "Ein Eckdach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Für Liebhaber steriler Futuristik."
+  },
   "SF_TriangleWall": {
     "localized_name": "Futuristische dreieckige Wand",
     "description": "Eine dreieckige Wand, die du auf einem Fundament errichten kannst. Für Liebhaber steriler Futuristik."
+  },
+  "SF_TriangleWallReverse": {
+    "localized_name": "Futuristische dreieckige Wand (umgedreht)",
+    "description": "Eine umgekehrte dreieckige Wand, die du auf einem Fundament errichten kannst. Für Liebhaber steriler Futuristik."
+  },
+  "SF_WallGate": {
+    "localized_name": "Futuristischer Durchgang für Pals",
+    "description": "Ein Durchgang für Pals, den du auf einem Fundament errichten kannst. Für Liebhaber steriler Futuristik."
   },
   "SF_WindowWall": {
     "localized_name": "Futuristische Wand mit Fenster",
@@ -1095,6 +1227,10 @@
     "localized_name": "Steinbruch",
     "description": "Eine Anlage zur Gewinnung von Stein. Der Stein-Abbau ist körperlich anstrengend. Überlasse die Arbeit Pals, die sich mit Bergbau auskennen."
   },
+  "Stone_DiagonalWall": {
+    "localized_name": "Diagonale Steinwand",
+    "description": "Eine diagonale Wand, die du auf einem dreieckigen Fundament errichten kannst, um Eindringlinge fernzuhalten. Ist aus Stein und dadurch ziemlich robust."
+  },
   "Stone_DoorWall": {
     "localized_name": "Steintür",
     "description": "Eine Eingangstür, die du auf einem Fundament errichten kannst. Ist aus Stein und dadurch ziemlich robust."
@@ -1107,13 +1243,41 @@
     "localized_name": "Steintor",
     "description": "Ein Tor, durch das auch größere Pals hindurchpassen. Ist aus Stein und dadurch ziemlich robust."
   },
+  "Stone_PyramidRoof": {
+    "localized_name": "Pyramidenförmiges Steindach",
+    "description": "Ein pyramidenförmiges Dach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist aus Stein und dadurch ziemlich robust."
+  },
   "Stone_SlantedRoof": {
     "localized_name": "Schräges Steindach",
     "description": "Ein Schrägdach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist aus Stein und dadurch ziemlich robust."
   },
+  "Stone_SlopedRoofCorner": {
+    "localized_name": "Dreieckiges Steinschrägdach",
+    "description": "Ein dreieckiges Schrägdach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist aus Stein und dadurch ziemlich robust."
+  },
+  "Stone_TriangleFoundation": {
+    "localized_name": "Dreieckiges Steinfundament",
+    "description": "Ein dreieckiges Fundament, worauf du Wände oder Gebäude errichten kannst. Ist aus Stein und dadurch ziemlich robust."
+  },
+  "Stone_TriangleRoof": {
+    "localized_name": "Dreieckiges Steindach",
+    "description": "Ein dreieckiges Dach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist aus Stein und dadurch ziemlich robust."
+  },
+  "Stone_TriangleStairsCorner": {
+    "localized_name": "Steineckdach",
+    "description": "Ein Eckdach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist aus Stein und dadurch ziemlich robust."
+  },
   "Stone_TriangleWall": {
     "localized_name": "Dreieckige Steinwand",
     "description": "Eine dreieckige Wand, die du auf einem Fundament errichten kannst. Ist aus Stein und dadurch ziemlich robust."
+  },
+  "Stone_TriangleWallReverse": {
+    "localized_name": "Dreieckige Steinwand (umgedreht)",
+    "description": "Eine umgekehrte dreieckige Wand, die du auf einem Fundament errichten kannst. Ist aus Stein und dadurch ziemlich robust."
+  },
+  "Stone_WallGate": {
+    "localized_name": "Steindurchgang für Pals",
+    "description": "Ein Durchgang für Pals, den du auf einem Fundament errichten kannst. Ist aus Stein und dadurch ziemlich robust."
   },
   "Stone_WindowWall": {
     "localized_name": "Steinwand mit Fenster",
@@ -1367,6 +1531,10 @@
     "localized_name": "Dreieckige Holzwand",
     "description": "Eine dreieckige Wand, die du auf einem Fundament errichten kannst. Ist aus Holz und nicht sonderlich stabil."
   },
+  "Wood_TriangleWallReverse": {
+    "localized_name": "Dreieckige Holzwand (umgedreht)",
+    "description": "Eine umgekehrte dreieckige Wand, die du auf einem Fundament errichten kannst. Ist aus Holz und nicht sonderlich stabil."
+  },
   "Wood_WindowWall": {
     "localized_name": "Holzwand mit Fenster",
     "description": "Eine Wand mit Fenster, die du auf einem Fundament errichten kannst, um Eindringlinge fernzuhalten. Ist aus Holz und nicht sonderlich stabil."
@@ -1375,9 +1543,37 @@
     "localized_name": "Holzbarrikade",
     "description": "Eine dekorative Holzbarrikade."
   },
+  "Wooden_DiagonalWall": {
+    "localized_name": "Diagonale Holzwand",
+    "description": "Eine diagonale Wand, die du auf einem dreieckigen Fundament errichten kannst, um Eindringlinge fernzuhalten. Ist aus Holz und nicht sonderlich stabil."
+  },
   "Wooden_DoorWall": {
     "localized_name": "Holztür",
     "description": "Eine Eingangstür, die du auf einem Fundament errichten kannst. Ist aus Holz und nicht sonderlich stabil."
+  },
+  "Wooden_PyramidRoof": {
+    "localized_name": "Pyramidenförmiges Holzdach",
+    "description": "Ein pyramidenförmiges Dach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist aus Holz und nicht sonderlich stabil."
+  },
+  "Wooden_SlopedRoofCorner": {
+    "localized_name": "Dreieckiges Holzschrägdach",
+    "description": "Ein dreieckiges Schrägdach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist aus Holz und nicht sonderlich stabil."
+  },
+  "Wooden_TriangleFoundation": {
+    "localized_name": "Dreieckiges Holzfundament",
+    "description": "Ein dreieckiges Fundament, worauf du Wände oder Gebäude errichten kannst. Ist aus Holz und nicht sonderlich stabil."
+  },
+  "Wooden_TriangleRoof": {
+    "localized_name": "Dreieckiges Holzdach",
+    "description": "Ein dreieckiges Dach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist aus Holz und nicht sonderlich stabil."
+  },
+  "Wooden_TriangleStairsCorner": {
+    "localized_name": "Holzeckdach",
+    "description": "Ein Eckdach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist aus Holz und nicht sonderlich stabil."
+  },
+  "Wooden_WallGate": {
+    "localized_name": "Holzdurchgang für Pals",
+    "description": "Ein Durchgang für Pals, den du auf einem Fundament errichten kannst. Ist aus Holz und nicht sonderlich stabil."
   },
   "Wooden_foundation": {
     "localized_name": "Holzfundament",
@@ -1410,6 +1606,10 @@
   "WorkSpeedIncrease1": {
     "localized_name": "Betawellengenerator",
     "description": "Diese Maschine generiert Betawellen, die auf Pals eine anregende Wirkung haben. Das Arbeitstempo von Pals im Lager wird dadurch erhöht. Mehrere aufzustellen, bringt keinen zusätzlichen Nutzen."
+  },
+  "YakushimaBoss002_Relic": {
+    "localized_name": "Mondherrenstatue",
+    "description": "[Terraria-Collab] Eine goldglänzende Mondherr-Statue. Ein Zeichen der Stärke, errungen in einem Kampf jenseits aller Hoffnung."
   },
   "Zabuton": {
     "localized_name": "Sitzkissen",

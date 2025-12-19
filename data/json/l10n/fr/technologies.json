@@ -1,91 +1,91 @@
 {
   "Accessory_AirDash1": {
     "localized_name": "Bottes de ruée aérienne",
-    "description": null
+    "description": "Un accessoire à équiper pour permettre au joueur d'effectuer une ruée dans les airs."
   },
   "Accessory_AirDash2": {
     "localized_name": "Bottes de double ruée aérienne",
-    "description": null
+    "description": "Un accessoire à équiper pour permettre au joueur d'effectuer une double ruée dans les airs."
   },
   "Accessory_AirDash3": {
     "localized_name": "Bottes de triple ruée aérienne",
-    "description": null
+    "description": "fr_Text"
   },
   "Accessory_JumpCount_Increase1": {
     "localized_name": "Bottes de double saut",
-    "description": null
+    "description": "Un accessoire à équiper pour permettre au joueur d'effectuer un saut dans les airs."
   },
   "Accessory_JumpCount_Increase2": {
     "localized_name": "Bottes de triple saut",
-    "description": null
+    "description": "Un accessoire à équiper pour permettre au joueur d'effectuer un double saut dans les airs."
   },
   "Accessory_JumpPower_Increase": {
     "localized_name": "Ceinture anti-gravité",
-    "description": null
+    "description": "Un accessoire à équiper pour permettre au joueur de sauter plus haut."
   },
   "Accessory_Nonkilling": {
-    "localized_name": "Anneau de manipulation",
-    "description": null
+    "localized_name": "Anneau de Pitié",
+    "description": "Une bague de pacifiste. Son porteur ne peut pas réduire la santé de sa cible à moins de 1."
   },
   "Accessory_TalentChecker": {
     "localized_name": "Lunettes de clairvoyance",
-    "description": null
+    "description": "Des lunettes qui permettent de déceler les talents cachés des Pals. Les PV, l'attaque et la défense sont affichés sur une échelle de 100."
   },
   "AdditionalInventory_001": {
-    "localized_name": "Petite poche supplémentaire",
-    "description": null
+    "localized_name": "Petite Poche Supplémentaire",
+    "description": "Une petite poche permettant de transporter plus de choses. La posséder ajoute un emplacement dans l'inventaire."
   },
   "AdditionalInventory_002": {
-    "localized_name": "Poche supplémentaire",
-    "description": null
+    "localized_name": "Poche Supplémentaire",
+    "description": "Une poche permettant de transporter plus de choses. La posséder ajoute un emplacement dans l'inventaire."
   },
   "AdditionalInventory_003": {
-    "localized_name": "Grosse poche supplémentaire",
-    "description": null
+    "localized_name": "Grosse Poche Supplémentaire",
+    "description": "Une grande poche permettant de transporter plus de choses. La posséder ajoute un emplacement dans l'inventaire."
   },
   "AdditionalInventory_004": {
-    "localized_name": "Énorme poche supplémentaire",
-    "description": null
+    "localized_name": "Énorme Poche Supplémentaire",
+    "description": "Une énorme poche permettant de transporter plus de choses. La posséder ajoute un emplacement dans l'inventaire."
   },
   "Altar": {
-    "localized_name": "Autel d'appel",
-    "description": null
+    "localized_name": "Autel d'invocation",
+    "description": "Faire offrande d'une tablette à l'effigie d'un Pal permet d'appeler un puissant Pal sur le camp. Ces combats nécessitent une préparation minutieuse."
   },
   "Arrow": {
     "localized_name": "Flèche",
-    "description": "Une Flèche à tirer avec un arc. Un Établi de fortune est requis pour en fabriquer."
+    "description": "Une Flèche à tirer avec un arc. Un Établi de Fortune est requis pour en fabriquer."
   },
   "Arrow_Fire": {
-    "localized_name": "Flèche enflammée",
-    "description": "Une Flèche à tirer avec un Arc de feu ou un Arbalète enflammée. Inflige des dégâts de Feu. Un Établi de fortune est requis pour en fabriquer."
+    "localized_name": "Flèche Enflammée",
+    "description": "Une Flèche à tirer avec un Arc de Feu ou un Arbalète Enflammée. Inflige des dégâts de Feu. Un Établi de Fortune est requis pour en fabriquer."
   },
   "Arrow_Poison": {
-    "localized_name": "Flèche empoisonnée",
-    "description": "Une Flèche à tirer avec un Arc de poison ou un Arbalète empoisonnée. Empoisonne sa cible. Un Établi de fortune est requis pour en fabriquer."
+    "localized_name": "Flèche Empoisonnée",
+    "description": "Une Flèche à tirer avec un Arc de Poison ou un Arbalète Empoisonnée. Empoisonne sa cible. Un Établi de Fortune est requis pour en fabriquer."
   },
   "AssaultRifleBullet": {
     "localized_name": "Balles de fusil d'assaut",
-    "description": "Des munitions compatibles notamment avec le Fusil d'assaut. Une Chaîne de production d'armes est requise pour en fabriquer."
+    "description": "Des munitions compatibles notamment avec le Fusil d'assaut. Une Chaîne de Production d'Armes est requise pour en fabriquer."
   },
   "AutoMealPouch_Tier1": {
     "localized_name": "Petit sac de nourriture",
-    "description": null
+    "description": "Un petit sac contenant de la nourriture. Libère jusqu'à 1 emplacement d'équipement pour repas automatique. Consomme automatiquement la nourriture dans cet emplacement en cas de besoin."
   },
   "AutoMealPouch_Tier2": {
     "localized_name": "Sac de nourriture",
-    "description": null
+    "description": "Un sac contenant de la nourriture. Libère jusqu'à 2 emplacements d'équipement pour repas automatique. Consomme automatiquement la nourriture dans ces emplacements en cas de besoin."
   },
   "AutoMealPouch_Tier3": {
     "localized_name": "Gros sac de nourriture",
-    "description": null
+    "description": "Un grand sac contenant de la nourriture. Libère jusqu'à 3 emplacements d'équipement pour repas automatique. Consomme automatiquement la nourriture dans ces emplacements en cas de besoin."
   },
   "AutoMealPouch_Tier4": {
     "localized_name": "Énorme sac de nourriture",
-    "description": null
+    "description": "Un énorme sac contenant de la nourriture. Libère jusqu'à 4 emplacements d'équipement pour repas automatique. Consomme automatiquement la nourriture dans ces emplacements en cas de besoin."
   },
   "AutoMealPouch_Tier5": {
     "localized_name": "Sac de nourriture ultime",
-    "description": null
+    "description": "Un énorme sac contenant de la nourriture. Libère jusqu'à 5 emplacements d'équipement pour repas automatique. Consomme automatiquement la nourriture dans ces emplacements en cas de besoin."
   },
   "BaseCampBattleDirector": {
     "localized_name": "Alarme",
@@ -93,95 +93,95 @@
   },
   "BaseCampItemDispenser": {
     "localized_name": "Extracteur d'objets",
-    "description": null
+    "description": "Un appareil qui permet de récupérer tous les objets contenus dans les coffres du camp où il est installé."
   },
   "BaseCampWorkHard": {
     "localized_name": "Plateforme de surveillance",
-    "description": null
+    "description": "La façon de travailler des Pals du camp ainsi que les autorisations / interdictions vis-à-vis de chaque tâche peuvent être définies."
   },
   "BaseCampWorkerExtraStation": {
     "localized_name": "Terminal de Gestion de Boîte à Pals",
     "description": null
   },
   "Battle_Armor_Grade_01_Cloth": {
-    "localized_name": "Vêtement en tissu",
-    "description": "Des habits en Tissu. Ils protègent contre le froid nocturne. Un Établi de fortune est requis pour en fabriquer."
+    "localized_name": "Vêtement en Tissu",
+    "description": "Des habits en Tissu. Ils protègent contre le froid nocturne. Un Établi de Fortune est requis pour en fabriquer."
   },
   "Battle_Armor_Grade_01_Cloth_Cold": {
-    "localized_name": "Habits traditionnels des montagnes",
-    "description": "Une Vêtement en tissu originaire d'une région froide. Elle protège contre le gel. Un Établi de fortune est requis pour en fabriquer."
+    "localized_name": "Habits Traditionnels des Montagnes",
+    "description": "Une Vêtement en Tissu originaire d'une région froide. Elle protège contre le gel. Un Établi de Fortune est requis pour en fabriquer."
   },
   "Battle_Armor_Grade_01_Cloth_Heat": {
-    "localized_name": "Habits traditionnels des tropiques",
-    "description": "Une Vêtement en tissu originaire d'une région chaude. Ses propriétés réfrigérantes ne sont plus à prouver. Un Établi de fortune est requis pour en fabriquer."
+    "localized_name": "Habits Traditionnels des Tropiques",
+    "description": "Une Vêtement en Tissu originaire d'une région chaude. Ses propriétés réfrigérantes ne sont plus à prouver. Un Établi de Fortune est requis pour en fabriquer."
   },
   "Battle_Armor_Grade_02_Fur": {
-    "localized_name": "Armure en fourrure",
-    "description": "Une armure en Cuir. Elle allie robustesse et protection. Une Établi de qualité est requise pour en fabriquer."
+    "localized_name": "Armure en Fourrure",
+    "description": "Une armure en Cuir. Elle allie robustesse et protection. Une Établi de Qualité est requise pour en fabriquer."
   },
   "Battle_Armor_Grade_02_Fur_Cold": {
-    "localized_name": "Armure en fourrure chauffante",
-    "description": "Une Armure en fourrure originaire d'une région froide. Elle protège contre le gel. Une Établi de qualité est requise pour en fabriquer."
+    "localized_name": "Armure en Fourrure Chauffante",
+    "description": "Une Armure en Fourrure originaire d'une région froide. Elle protège contre le gel. Une Établi de Qualité est requise pour en fabriquer."
   },
   "Battle_Armor_Grade_02_Fur_Heat": {
-    "localized_name": "Armure en fourrure réfrigérante",
-    "description": "Une Armure en fourrure originaire d'une région froide. Ses propriétés réfrigérantes ne sont plus à prouver. Une Établi de qualité est requise pour en fabriquer."
+    "localized_name": "Armure en Fourrure Réfrigérante",
+    "description": "Une Armure en Fourrure originaire d'une région froide. Ses propriétés réfrigérantes ne sont plus à prouver. Une Établi de Qualité est requise pour en fabriquer."
   },
   "Battle_Armor_Grade_03_Copper": {
-    "localized_name": "Armure en métal",
-    "description": "Une armure en métal. Elle pèse un certain poids tout en offrant une protection correcte. Une Établi de qualité est requise pour en fabriquer."
+    "localized_name": "Armure en Métal",
+    "description": "Une armure en métal. Elle pèse un certain poids tout en offrant une protection correcte. Une Établi de Qualité est requise pour en fabriquer."
   },
   "Battle_Armor_Grade_03_Copper_Cold": {
-    "localized_name": "Armure en métal chauffante",
-    "description": "Une Armure en métal améliorée. Elle protège contre le gel. Une Établi de qualité est requise pour en fabriquer."
+    "localized_name": "Armure en Métal Chauffante",
+    "description": "Une Armure en Métal améliorée. Elle protège contre le gel. Une Établi de Qualité est requise pour en fabriquer."
   },
   "Battle_Armor_Grade_03_Copper_Heat": {
-    "localized_name": "Armure en métal réfrigérante",
-    "description": "Une Armure en métal améliorée. Ses propriétés réfrigérantes ne sont plus à prouver. Une Établi de qualité est requise pour en fabriquer."
+    "localized_name": "Armure en Métal Réfrigérante",
+    "description": "Une Armure en Métal améliorée. Ses propriétés réfrigérantes ne sont plus à prouver. Une Établi de Qualité est requise pour en fabriquer."
   },
   "Battle_Armor_Grade_03_Iron": {
-    "localized_name": "Armure en métal raffiné",
-    "description": "Une armure en métal noble. Sa robustesse à toute épreuve vient compenser son poids. Une Chaîne de production est requise pour en fabriquer."
+    "localized_name": "Armure en Métal Raffiné",
+    "description": "Une armure en métal noble. Sa robustesse à toute épreuve vient compenser son poids. Une Chaîne de Production est requise pour en fabriquer."
   },
   "Battle_Armor_Grade_03_Iron_Cold": {
-    "localized_name": "Armure en métal raffiné chauffante",
-    "description": "Une Armure en métal raffiné améliorée. Elle protège contre le gel. Une Chaîne de production est requise pour en fabriquer."
+    "localized_name": "Armure en Métal Raffinée Chauffante",
+    "description": "Une Armure en Métal Raffiné améliorée. Elle protège contre le gel. Une Chaîne de Production est requise pour en fabriquer."
   },
   "Battle_Armor_Grade_03_Iron_Heat": {
-    "localized_name": "Armure en métal raffiné réfrigérante",
-    "description": "Une Armure en métal raffiné améliorée. Ses propriétés réfrigérantes ne sont plus à prouver. Une Chaîne de production est requise pour en fabriquer."
+    "localized_name": "Armure en Métal Raffinée Réfrigérante",
+    "description": "Une Armure en Métal Raffiné améliorée. Ses propriétés réfrigérantes ne sont plus à prouver. Une Chaîne de Production est requise pour en fabriquer."
   },
   "Battle_Armor_Grade_04_Steal": {
     "localized_name": "Armure en Paluminium",
-    "description": "Une armure en Lingot de Paluminium. Ses propriétés défensives sont aussi exceptionnelles et élevées que son poids. Une Chaîne de production II est requise pour en fabriquer."
+    "description": "Une armure en Lingot de Paluminium. Ses propriétés défensives sont aussi exceptionnelles et élevées que son poids. Une Chaîne de Production II est requise pour en fabriquer."
   },
   "Battle_Armor_Grade_04_Steal_Cold": {
     "localized_name": "Armure en Paluminium Chauffante",
-    "description": "Une Armure en Paluminium améliorée. Elle protège contre le gel. Une Chaîne de production II est requise pour en fabriquer."
+    "description": "Une Armure en Paluminium améliorée. Elle protège contre le gel. Une Chaîne de Production II est requise pour en fabriquer."
   },
   "Battle_Armor_Grade_04_Steal_Heat": {
     "localized_name": "Armure en Paluminium Réfrigérante",
-    "description": "Une Armure en Paluminium améliorée. Ses propriétés réfrigérantes ne sont plus à prouver. Une Chaîne de production II est requise pour en fabriquer."
+    "description": "Une Armure en Paluminium améliorée. Ses propriétés réfrigérantes ne sont plus à prouver. Une Chaîne de Production II est requise pour en fabriquer."
   },
   "Battle_Armor_Grade_05_Plastic": {
-    "localized_name": "Armure en plastacier",
-    "description": "Une armure en Plastacier. Avant tout destinée à augmenter la défense, elle est aussi très légère. Une Chaîne de production II est requise pour en fabriquer."
+    "localized_name": "Armure en Plastacier",
+    "description": "Une armure en Plastacier. Avant tout destinée à augmenter la défense, elle est aussi très légère. Une Chaîne de Production II est requise pour en fabriquer."
   },
   "Battle_Armor_Grade_05_Plastic_Cold": {
-    "localized_name": "Armure en plastacier chauffante",
-    "description": "Une Armure en plastacier améliorée. Elle protège contre le gel. Une Chaîne de production II est requise pour en fabriquer."
+    "localized_name": "Armure en Plastacier Chauffante",
+    "description": "Une Armure en Plastacier améliorée. Elle protège contre le gel. Une Chaîne de Production II est requise pour en fabriquer."
   },
   "Battle_Armor_Grade_05_Plastic_Heat": {
-    "localized_name": "Armure en plastacier réfrigérante",
-    "description": "Une Armure en plastacier améliorée. Ses propriétés réfrigérantes ne sont plus à prouver. Une Chaîne de production II est requise pour en fabriquer."
+    "localized_name": "Armure en Plastacier Réfrigérante",
+    "description": "Une Armure en Plastacier améliorée. Ses propriétés réfrigérantes ne sont plus à prouver. Une Chaîne de Production II est requise pour en fabriquer."
   },
   "Battle_Armor_Grade_05_Plastic_Weight": {
-    "localized_name": "Armure en plastacier allégée",
-    "description": "Une Armure en plastacier améliorée. Augmente le poids max du joueur. Une Chaîne de production II est requise pour en fabriquer."
+    "localized_name": "Armure en Plastacier Allégée",
+    "description": "Une Armure en Plastacier améliorée. Augmente le poids max du joueur. Une Chaîne de Production II est requise pour en fabriquer."
   },
   "Battle_Cloth": {
     "localized_name": "Tissu",
-    "description": null
+    "description": "Du Tissu obtenu en tissant de la Laine. Nécessaire à la fabrication des protections."
   },
   "Battle_Defense_BowGun": {
     "localized_name": "Arbalète montée",
@@ -201,43 +201,43 @@
   },
   "Battle_Glider_Grade_02": {
     "localized_name": "Méga planeur",
-    "description": "Permet de planer une fois déplié. Son industrialisation procure une certaine vitesse. Une Établi de qualité est requise pour en fabriquer."
+    "description": "Permet de planer une fois déplié. Son industrialisation procure une certaine vitesse. Une Établi de Qualité est requise pour en fabriquer."
   },
   "Battle_Glider_Grade_03": {
     "localized_name": "Giga planeur",
-    "description": "Permet de planer une fois déplié. Sa qualité supérieure permet d'atteindre une vitesse considérable. Une Chaîne de production est requise pour en fabriquer."
+    "description": "Permet de planer une fois déplié. Sa qualité supérieure permet d'atteindre une vitesse considérable. Une Chaîne de Production est requise pour en fabriquer."
   },
   "Battle_Glider_Grade_04": {
     "localized_name": "Téra planeur",
-    "description": "Permet de planer une fois déplié. Sa qualité encore supérieure décuple sa vitesse et sa portance. Une Chaîne de production II est requise pour en fabriquer."
+    "description": "Permet de planer une fois déplié. Sa qualité encore supérieure décuple sa vitesse et sa portance. Une Chaîne de Production II est requise pour en fabriquer."
   },
   "Battle_GunPowder_Grade_02": {
     "localized_name": "Poudre à canon",
-    "description": "De la Poudre à canon pour tirer des munitions. Nécessaire à la fabrication des balles. Une Établi de qualité est requise pour en fabriquer."
+    "description": "De la Poudre à canon pour tirer des munitions. Nécessaire à la fabrication des balles. Une Établi de Qualité est requise pour en fabriquer."
   },
   "Battle_Helm_Grade_02_Fur": {
     "localized_name": "Barrette à plumes",
     "description": "Une jolie broche plume. Elle semble protéger des coups mortels à la tête. Un Workbench est requis pour en fabriquer."
   },
   "Battle_Helm_Grade_03_Copper": {
-    "localized_name": "Heaume en métal",
-    "description": "Un casque en métal. Une protection fiable qui permet de garder la tête froide. Une Établi de qualité est requise pour en fabriquer."
+    "localized_name": "Heaume en Métal",
+    "description": "Un casque en métal. Une protection fiable qui permet de garder la tête froide. Une Établi de Qualité est requise pour en fabriquer."
   },
   "Battle_Helm_Grade_04_Iron": {
-    "localized_name": "Heaume en métal raffiné",
-    "description": "Un casque fait de métal noble. L'éclat du métal poli accroît sa valeur. Une Chaîne de production est requise pour en fabriquer."
+    "localized_name": "Heaume en Métal Raffiné",
+    "description": "Un casque fait de métal noble. L'éclat du métal poli accroît sa valeur. Une Chaîne de Production est requise pour en fabriquer."
   },
   "Battle_Helm_Grade_05_Steal": {
     "localized_name": "Heaume en Paluminium",
-    "description": "Un casque en Lingot de Paluminium. L'héritage d'un guerrier qui choisit son porteur parmi tous ses aspirants. Une Chaîne de production II est requise pour en fabriquer."
+    "description": "Un casque en Lingot de Paluminium. L'héritage d'un guerrier qui choisit son porteur parmi tous ses aspirants. Une Chaîne de Production II est requise pour en fabriquer."
   },
   "Battle_Helm_Grade_06_Plastic": {
-    "localized_name": "Casque en plastacier",
-    "description": "Un casque en Plastacier. Avant tout destiné à augmenter la défense, il est aussi très léger. Une Chaîne de production II est requise pour en fabriquer."
+    "localized_name": "Casque en Plastacier",
+    "description": "Un casque en Plastacier. Avant tout destiné à augmenter la défense, il est aussi très léger. Une Chaîne de Production II est requise pour en fabriquer."
   },
   "Battle_MeleeWeapon_Axe_Steal": {
-    "localized_name": "Hache en paluminium",
-    "description": null
+    "localized_name": "Hache en Paluminium",
+    "description": "Une hache pour couper le bois. Sa conception en paluminium lui confère un tranchant exceptionnel."
   },
   "Battle_MeleeWeapon_Bat": {
     "localized_name": "Batte en bois",
@@ -245,131 +245,131 @@
   },
   "Battle_MeleeWeapon_Bat2": {
     "localized_name": "Batte",
-    "description": null
+    "description": "Une batte de baseball adaptée au combat rapproché. Les Pals sont trop gros pour faire office de balles."
   },
   "Battle_MeleeWeapon_Pickaxe_Steal": {
-    "localized_name": "Pioche en paluminium",
-    "description": null
+    "localized_name": "Pioche en Paluminium",
+    "description": "Une pioche pour extraire des matériaux. Sa conception en paluminium lui confère une efficacité remarquable."
   },
   "Battle_MeleeWeapon_Sword": {
     "localized_name": "Épée",
-    "description": "Une Épée pour le combat rapproché. Son tranchant est sans égal ! Aux risques et périls des ennemis un peu trop collants. Une Établi pour armes est requise pour en fabriquer."
+    "description": "Une Épée pour le combat rapproché. Son tranchant est sans égal ! Aux risques et périls des ennemis un peu trop collants. Une Établi pour Armes est requise pour en fabriquer."
   },
   "Battle_RangeWeapon_AssaultRifle": {
     "localized_name": "Fusil d'assaut",
-    "description": "Un Fusil d'assaut dont la cadence de tir permet de dominer l'ennemi. Une arme tout indiquée contre les adversaires coriaces. Une Chaîne de production d'armes est requise pour en fabriquer."
+    "description": "Un Fusil d'assaut dont la cadence de tir permet de dominer l'ennemi. Une arme tout indiquée contre les adversaires coriaces. Une Chaîne de Production d'Armes est requise pour en fabriquer."
   },
   "Battle_RangeWeapon_Bow1": {
-    "localized_name": "Vieil arc",
-    "description": "Une arme primitive à longue distance. Le fait qu'elle ait été raccommodée lui fait perdre en puissance. Un Établi de fortune est requis pour en fabriquer."
+    "localized_name": "Vieil Arc",
+    "description": "Une arme primitive à longue distance. Le fait qu'elle ait été raccommodée lui fait perdre en puissance. Un Établi de Fortune est requis pour en fabriquer."
   },
   "Battle_RangeWeapon_Bow3": {
-    "localized_name": "Arc triple",
+    "localized_name": "Arc Triple",
     "description": "Un arc amélioré pouvant tirer 3 flèches à la fois. Une mystérieuse force lui permet de ne consommer qu'une seule Flèche par coup."
   },
   "Battle_RangeWeapon_BowGun": {
     "localized_name": "Arbalète",
-    "description": "Permet de tirer une Flèche sans le moindre effort. Le charger prend du temps mais ses tirs sont dévastateurs. Une Établi de qualité est requise pour en fabriquer."
+    "description": "Permet de tirer une Flèche sans le moindre effort. Le charger prend du temps mais ses tirs sont dévastateurs. Une Établi de Qualité est requise pour en fabriquer."
   },
   "Battle_RangeWeapon_BowGun_Fire": {
-    "localized_name": "Arbalète enflammée",
-    "description": "Un Arbalète infligeant des dégâts de Feu. S'utilise avec des Flèche enflammée. Une Établi de qualité est requise pour en fabriquer."
+    "localized_name": "Arbalète Enflammée",
+    "description": "Un Arbalète infligeant des dégâts de Feu. S'utilise avec des Flèche Enflammée. Une Établi de Qualité est requise pour en fabriquer."
   },
   "Battle_RangeWeapon_BowGun_Poison": {
-    "localized_name": "Arbalète empoisonnée",
-    "description": "Un Arbalète terrifiant qui peut empoisonner ses cibles. S'utilise avec des Flèche empoisonnée. Une Établi de qualité est requise pour en fabriquer."
+    "localized_name": "Arbalète Empoisonnée",
+    "description": "Un Arbalète terrifiant qui peut empoisonner ses cibles. S'utilise avec des Flèche Empoisonnée. Une Établi de Qualité est requise pour en fabriquer."
   },
   "Battle_RangeWeapon_Bow_Fire": {
-    "localized_name": "Arc de feu",
-    "description": "Un arc infligeant des dégâts de Feu. Les flèches de feu embrasent les Pals et les rendent plus faciles à capturer. Requiert des Flèche enflammée."
+    "localized_name": "Arc de Feu",
+    "description": "Un arc infligeant des dégâts de Feu. Les flèches de feu embrasent les Pals et les rendent plus faciles à capturer. Requiert des Flèche Enflammée."
   },
   "Battle_RangeWeapon_Bow_Poison": {
-    "localized_name": "Arc de poison",
-    "description": "Un arc terrifiant qui peut empoisonner ses cibles. Les Pals empoisonnées sont plus faciles à capturer. Requiert des Flèche empoisonnée."
+    "localized_name": "Arc de Poison",
+    "description": "Un arc terrifiant qui peut empoisonner ses cibles. Les Pals empoisonnées sont plus faciles à capturer. Requiert des Flèche Empoisonnée."
   },
   "Battle_RangeWeapon_CompoundBow": {
-    "localized_name": "Arc composite",
-    "description": null
+    "localized_name": "Arc Composite",
+    "description": "Un arc modernisé. Permet de tirer des flèches avec une puissance accrue."
   },
   "Battle_RangeWeapon_FlameThrower": {
     "localized_name": "FlameThrower",
-    "description": null
+    "description": "Un Flamethrower pour souffler du feu sur une longue distance. Permet d'enflammer les individus touchés. Une Chaîne de Production d'Armes II est requise pour en fabriquer."
   },
   "Battle_RangeWeapon_GatlingGun": {
-    "localized_name": "Pistolet gatling",
-    "description": "Un pistolet gatling qui mise tout sur sa vitesse de tir. Attaque l'ennemi sans relâche pour le perforer de tous les côtés. Une Chaîne de production d'armes II est requise pour en fabriquer."
+    "localized_name": "Gatling",
+    "description": "Un pistolet gatling qui mise tout sur sa vitesse de tir. Attaque l'ennemi sans relâche pour le perforer de tous les côtés. Une Chaîne de Production d'Armes II est requise pour en fabriquer."
   },
   "Battle_RangeWeapon_GrenadeLauncher": {
     "localized_name": "Lance-grenades",
-    "description": "Permet de tirer des grenades qui créent une explosion sur la zone touchée. Particulièrement efficace quand beaucoup d'ennemis sont regroupés. Une Chaîne de production d'armes II est requise pour en fabriquer."
+    "description": "Permet de tirer des grenades qui créent une explosion sur la zone touchée. Particulièrement efficace quand beaucoup d'ennemis sont regroupés. Une Chaîne de Production d'Armes II est requise pour en fabriquer."
   },
   "Battle_RangeWeapon_GuidedMissileLauncher": {
     "localized_name": "Lance-missiles",
-    "description": "Permet de tirer des missiles qui pourchassent les ennemis automatiquement. Ceux-ci explosent à l'impact pour infliger des dégâts sur une zone étendue. Une Chaîne de production d'armes II est requise pour en fabriquer."
+    "description": "Permet de tirer des missiles qui pourchassent les ennemis automatiquement. Ceux-ci explosent à l'impact pour infliger des dégâts sur une zone étendue. Une Chaîne de Production d'Armes II est requise pour en fabriquer."
   },
   "Battle_RangeWeapon_HandGun": {
     "localized_name": "Pistolet",
-    "description": "Un pistolet à la capacité et à la cadence de tir améliorées. Puissance de feu à la seconde supérieure à celle du Pistolet rouillé. Une Établi pour armes est requise pour en fabriquer."
+    "description": "Un pistolet à la capacité et à la cadence de tir améliorées. Puissance de feu à la seconde supérieure à celle du Pistolet rouillé. Une Établi pour Armes est requise pour en fabriquer."
   },
   "Battle_RangeWeapon_HomingSphereLauncher": {
     "localized_name": "Lance-sphères à tête chercheuse",
-    "description": "Un lanceur tirant des sphères. Les sphères tirées poursuivent les Pals. Une Chaîne de production d'armes II est requise pour en fabriquer."
+    "description": "Un lanceur tirant des sphères. Les sphères tirées poursuivent les Pals. Une Chaîne de Production d'Armes II est requise pour en fabriquer."
   },
   "Battle_RangeWeapon_LaserRifle": {
     "localized_name": "Fusil laser",
-    "description": "Une arme pour tirer des lasers. Puissant et facile d'utilisation. Une Chaîne de production d'armes II est requise pour en fabriquer."
+    "description": "Une arme pour tirer des lasers. Puissant et facile d'utilisation. Une Chaîne de Production d'Armes II est requise pour en fabriquer."
   },
   "Battle_RangeWeapon_OldRevolver": {
     "localized_name": "Vieux revolver",
-    "description": null
+    "description": "Un pistolet avec système rotatif comportant des traces d'usure. Sa puissance surpasse celle du Handgun_default."
   },
   "Battle_RangeWeapon_Rifle": {
     "localized_name": "Fusil à un coup",
-    "description": "Un fusil tirant un coup à la fois. Temps de recharge long. Sa capacité réduite est compensée par une grande puissance de feu. Une Chaîne de production d'armes est requise pour en fabriquer."
+    "description": "Un fusil tirant un coup à la fois. Temps de recharge long. Sa capacité réduite est compensée par une grande puissance de feu. Une Chaîne de Production d'Armes est requise pour en fabriquer."
   },
   "Battle_RangeWeapon_RocketLauncher": {
     "localized_name": "Lance-fusées",
-    "description": "Un Lance-fusées qui permet des bombardements puissants à longue distance. Une Chaîne de production d'armes II est requise pour en fabriquer."
+    "description": "Un Lance-fusées qui permet des bombardements puissants à longue distance. Une Chaîne de Production d'Armes II est requise pour en fabriquer."
   },
   "Battle_RangeWeapon_SemiAutoRifle": {
     "localized_name": "Fusil semi-automatique",
-    "description": null
+    "description": "Un fusil à la fonction de tir continu efficace. Sa facilité de visée et sa puissance de feu en font une bonne arme à moyenne distance."
   },
   "Battle_RangeWeapon_SemiAutoShotgun": {
     "localized_name": "Fusil à pompe semi-automatique",
-    "description": null
+    "description": "Un fusil à pompe aux tirs rapides. Inflige d'énormes dégâts à courte distance."
   },
   "Battle_RangeWeapon_ShotGun": {
     "localized_name": "Fusil à double canon",
-    "description": "Un fusil à pompe dévastateur à courte distance. Peut tirer deux coups à la suite. Sa capacité réduite est compensée par une grande puissance de feu. Une Chaîne de production d'armes est requise pour en fabriquer."
+    "description": "Un fusil à pompe dévastateur à courte distance. Peut tirer deux coups à la suite. Sa capacité réduite est compensée par une grande puissance de feu. Une Chaîne de Production d'Armes est requise pour en fabriquer."
   },
   "Battle_RangeWeapon_ShotGun_Multi": {
     "localized_name": "Fusil à pompe",
-    "description": "Un fusil à pompe à la capacité de chargeur améliorée. Inflige d'énormes dégâts à courte distance. Une Chaîne de production d'armes est requise pour en fabriquer."
+    "description": "Un fusil à pompe à la capacité de chargeur améliorée. Inflige d'énormes dégâts à courte distance. Une Chaîne de Production d'Armes est requise pour en fabriquer."
   },
   "Battle_RangeWeapon_SphereLauncher": {
     "localized_name": "Lance-sphères à diffusion",
-    "description": "Un nouveau type d'arme permettant de tirer une grande quantité de sphères à la fois. Optimal pour capturer des Pals en masse. Une Chaîne de production d'armes est requise pour en fabriquer."
+    "description": "Un nouveau type d'arme permettant de tirer une grande quantité de sphères à la fois. Optimal pour capturer des Pals en masse. Une Chaîne de Production d'Armes est requise pour en fabriquer."
   },
   "Battle_RangeWeapon_SphereLauncher_Once": {
     "localized_name": "Lance-sphères à un coup",
-    "description": "Un lanceur tirant des sphères. Permet de capturer des Pals même sur une longue distance. Une Établi pour armes est requise pour en fabriquer."
+    "description": "Un lanceur tirant des sphères. Permet de capturer des Pals même sur une longue distance. Une Établi pour Armes est requise pour en fabriquer."
   },
   "Battle_RangeWeapon_SubmachineGun": {
     "localized_name": "Pistolet-mitrailleur",
-    "description": null
+    "description": "Un pistolet-mitrailleur au tir continu extrêmement efficace. Facile d'utilisation, en particulier en combat rapproché."
   },
   "BeamSword": {
-    "localized_name": "Épée rayonnante",
-    "description": null
+    "localized_name": "Épée Rayonnante",
+    "description": "Une Épée Rayonnante adaptée au combat rapproché. Carbonise l'adversaire à l'aide d'un laser surpuissant."
   },
   "BelieverFlagSet": {
-    "localized_name": "Ensemble de Drapeaux de la LPP",
+    "localized_name": "Ensemble de Drapeaux de la Ligue pour la Protection des Pals",
     "description": "Un ensemble contenant un Drapeau de la Ligue pour la Protection des Pals et une Bannière de la Ligue pour la Protection des Pals. Symbole de votre victoire sur la Ligue pour la Protection des Pals."
   },
   "BlastFurnace4": {
     "localized_name": "Fournaise géante",
-    "description": null
+    "description": "Permet de raffiner l'Hexolite. Sa taille gigantesque permet à plusieurs Pals de raffiner ensemble. Un Pal de feu est requis pour allumer le feu."
   },
   "BreedFarm": {
     "localized_name": "Ranch",
@@ -381,11 +381,11 @@
   },
   "CarbonFiber": {
     "localized_name": "Fibre de carbone",
-    "description": null
+    "description": "Un matériau de qualité aussi léger que robuste. Peut servir à fabriquer des protections."
   },
   "Cauldron": {
     "localized_name": "Chaudron de sorcière",
-    "description": null
+    "description": "À installer sur le camp pour accroître la vitesse de fabrication des médicaments. En installer 2 ou plus n'octroie aucun effet supplémentaire."
   },
   "CeilingLamp": {
     "localized_name": "Plafonnier",
@@ -393,35 +393,35 @@
   },
   "Cement": {
     "localized_name": "Ciment",
-    "description": null
+    "description": "Du Ciment faisant office de matériau pour les structures. Peut être fabriqué dans une Établi de Qualité."
   },
   "ChargeLaserRifle": {
     "localized_name": "Fusil Chargé",
-    "description": null
+    "description": "fr_Text"
   },
   "ChargeLaserRifleBullet": {
     "localized_name": "Balles de Fusil Chargé",
-    "description": null
+    "description": "fr_Text"
   },
   "Cloth2": {
     "localized_name": "Tissu de qualité",
-    "description": null
+    "description": "Du Tissu de qualité obtenu en tissant une grande quantité de Laine. Nécessaire à la fabrication des protections de qualité. Une Établi de Qualité est requise pour en fabriquer."
   },
   "CompositeDesk": {
     "localized_name": "Table de dessin",
-    "description": null
+    "description": "Une installation qui permet d'associer plusieurs plans pour en obtenir un de qualité supérieure."
   },
   "Cooler": {
-    "localized_name": "Climatiseur à glace",
+    "localized_name": "Climatiseur",
     "description": "Permet de rafraîchir les environs et de se prémunir contre la chaleur."
   },
   "CoolerBox": {
     "localized_name": "Glacière",
-    "description": null
+    "description": "Un petit contenant à nourriture. Y attribuer un Pal de glace ralentira la dégradation des aliments qu'il contient."
   },
   "CoolerPalFoodBox": {
     "localized_name": "Boîte à nourriture réfrigérée",
-    "description": null
+    "description": "Un petit contenant pour garder la nourriture au frais. Y attribuer un Pal de glace ralentira la dégradation des aliments qu'elle contient."
   },
   "Crusher": {
     "localized_name": "Concasseur",
@@ -457,11 +457,11 @@
   },
   "DimensionPalStorage": {
     "localized_name": "Stockage de Pals dimensionnel",
-    "description": null
+    "description": "Une installation qui permet de stocker un grand nombre de Pals attrapés. Les membres de la guilde peuvent ajouter et retirer des Pals à leur guise. Passer les paramètres en « privé » restreint l'accès au propriétaire uniquement."
   },
   "DismantlingConveyor": {
     "localized_name": "Destructeur de Pals",
-    "description": null
+    "description": "Une installation pour découper automatiquement les Pals introduits."
   },
   "DisplayCharacter": {
     "localized_name": "Cage d'observation",
@@ -469,7 +469,7 @@
   },
   "ElecBaton": {
     "localized_name": "Matraque électrique",
-    "description": "Une arme de proximité capable d'électrocuter. Les Pals électrocutés sont plus faciles à capturer. Une Établi de qualité est requise pour en fabriquer."
+    "description": "Une arme de proximité capable d'électrocuter. Les Pals électrocutés sont plus faciles à capturer. Une Établi de Qualité est requise pour en fabriquer."
   },
   "ElectricCooler": {
     "localized_name": "Climatiseur électrique",
@@ -477,7 +477,7 @@
   },
   "ElectricGenerator_Large": {
     "localized_name": "Grand générateur",
-    "description": null
+    "description": "Une installation permettant de stocker l'électricité produite par les Pals de foudre. Sa capacité de production a augmenté avec sa taille."
   },
   "ElectricHeater": {
     "localized_name": "Chauffage électrique",
@@ -485,39 +485,39 @@
   },
   "EnergyLauncherBullet": {
     "localized_name": "Cartouche de plasma",
-    "description": null
+    "description": "Des munitions compatibles notamment avec le Canon à plasma."
   },
   "EnergyRocketLauncher": {
     "localized_name": "Canon à plasma",
-    "description": null
+    "description": "Tire un projectile d'énergie surpuissant. Crée une explosion d'énergie à l'impact."
   },
   "EnergyShotgun": {
     "localized_name": "Fusil à pompe Énergétique",
-    "description": null
+    "description": "fr_Text"
   },
   "EnergyShotgunBullet": {
-    "localized_name": "Balles de Fusil à pompe Énergétique",
-    "description": null
+    "localized_name": "Cartouches de Fusil à pompe Énergétique",
+    "description": "fr_Text"
   },
   "EnergyStorage_Electric": {
     "localized_name": "Condensateur",
-    "description": null
+    "description": "Une installation permettant de stocker le surplus d'électricité produit par le Générateur."
   },
   "Expedition": {
     "localized_name": "Lieu d'expédition pour Pals",
-    "description": null
+    "description": "Une structure pour envoyer les Pals en expédition dans des donjons. Les Pals dépêchés combattront et rapporteront diverses ressources sur le camp."
   },
   "Factory_Hard_04": {
-    "localized_name": "Usine d'une Civilisation Avancée",
-    "description": null
+    "localized_name": "Chaîne de Production Avancée",
+    "description": "Une usine pour fabriquer objets et protections. L'ajout de machines performantes a permis d'accélérer la production. Un Pal habile dans les travaux manuels est requis."
   },
   "Factory_Money": {
     "localized_name": "Usine de fabrication de pièces d'or",
-    "description": null
+    "description": "Une usine pour fabriquer de l'Pièce d'or. La charge mentale fait chuter les points MEN des travailleurs. Un Pal habile dans les travaux manuels est requis."
   },
   "Farm_SkillFruits": {
     "localized_name": "Plantation de Fruits de Maîtrise",
-    "description": null
+    "description": "Un champ pour cultiver des Fruits de Maîtrise. Mettre un fruit en terre permet d'en récolter plusieurs du même type."
   },
   "FireCultFlagSet": {
     "localized_name": "Ensemble de Drapeaux de la Confrérie",
@@ -557,7 +557,7 @@
   },
   "FlamethrowerBullet": {
     "localized_name": "Combustible pour lance-flammes",
-    "description": null
+    "description": "Du combustible pour lance-flammes. Des munitions compatibles notamment avec le Flamethrower."
   },
   "FlourMill": {
     "localized_name": "Broyeur",
@@ -565,51 +565,51 @@
   },
   "FlowerBed": {
     "localized_name": "Parterre",
-    "description": null
+    "description": "À installer sur le camp pour accroître la vitesse de collecte. En installer 2 ou plus n'octroie aucun effet supplémentaire."
   },
   "Fountain": {
     "localized_name": "Fontaine",
-    "description": null
+    "description": "À installer sur le camp pour accroître la vitesse d'arrosage. En installer 2 ou plus n'octroie aucun effet supplémentaire."
   },
   "FragGrenade": {
-    "localized_name": "Grenade à fragmentation",
-    "description": null
+    "localized_name": "Grenade à Fragmentation",
+    "description": "Une Grenade à Fragmentation adaptée au combat à moyenne distance. Explose après quelques secondes pour infliger des dégâts aux ennemis."
   },
   "FragGrenade_Dark": {
-    "localized_name": "Grenade obscure",
-    "description": null
+    "localized_name": "Grenade Tenebra",
+    "description": "Une Grenade Tenebra adaptée au combat à moyenne distance. Explose après quelques secondes pour infliger des dégâts de type Ténèbres."
   },
   "FragGrenade_Dragon": {
-    "localized_name": "Grenade draconique",
-    "description": null
+    "localized_name": "Grenade Draco",
+    "description": "Une Grenade Draco adaptée au combat à moyenne distance. Explose après quelques secondes pour infliger des dégâts de type Dragon."
   },
   "FragGrenade_Elec": {
-    "localized_name": "Grenades électriques",
-    "description": null
+    "localized_name": "Grenade Fulgura",
+    "description": "Une Grenade Fulgura adaptée au combat à moyenne distance. Explose après quelques secondes pour électrifier les environs."
   },
   "FragGrenade_Fire": {
-    "localized_name": "Grenades incendiaires",
-    "description": null
+    "localized_name": "Grenade Flamma",
+    "description": "Une Grenade Flamma adaptée au combat à moyenne distance. Explose après quelques secondes pour embraser les environs."
   },
   "FragGrenade_Ground": {
-    "localized_name": "Grenade terrestre",
-    "description": null
+    "localized_name": "Grenade Terra",
+    "description": "Une Grenade Terra adaptée au combat à moyenne distance. Explose après quelques secondes pour infliger des dégâts de type Terre."
   },
   "FragGrenade_Ice": {
-    "localized_name": "Grenades gelantes",
-    "description": null
+    "localized_name": "Grenade Glacia",
+    "description": "Une Grenade Glacia adaptée au combat à moyenne distance. Explose après quelques secondes pour geler les environs."
   },
   "FragGrenade_Leaf": {
-    "localized_name": "Grenade végétale",
-    "description": null
+    "localized_name": "Grenade Herba",
+    "description": "Une Grenade Herba adaptée au combat à moyenne distance. Explose après quelques secondes pour infliger des dégâts de type Herbe."
   },
   "FragGrenade_Super": {
-    "localized_name": "Grenade à fragmentation améliorée",
-    "description": null
+    "localized_name": "Grenade à Fragmentation Améliorée",
+    "description": "Une version améliorée de la grenade à fragmentation. Explose après quelques secondes pour infliger de lourds dégâts aux ennemis."
   },
   "FragGrenade_Water": {
-    "localized_name": "Grenade torrentielle",
-    "description": null
+    "localized_name": "Grenade Aqua",
+    "description": "Une Grenade Aqua adaptée au combat à moyenne distance. Explose après quelques secondes pour infliger des dégâts de type Eau."
   },
   "FurnitureSet_1": {
     "localized_name": "Ensemble de meubles pour salon en bois",
@@ -744,8 +744,8 @@
     "description": "Un ensemble de meubles décoratifs de style japonais. Pour donner une touche nipponne au camp."
   },
   "GatlingBullet": {
-    "localized_name": "Munitions de gatling",
-    "description": null
+    "localized_name": "Munitions de Gatling",
+    "description": "Des munitions compatibles notamment avec le Gatling."
   },
   "Glass_houseset": {
     "localized_name": "Structures en verre",
@@ -753,23 +753,23 @@
   },
   "GlobalPalStorage": {
     "localized_name": "Boîte à Pals globale",
-    "description": null
+    "description": "Une installation qui permet de sauvegarder les données génétiques des Pals pour ensuite récupérer ces derniers. Les données enregistrées peuvent aussi être transférées vers un autre monde."
   },
   "GrapplingGun": {
     "localized_name": "Pistolet-grappin",
-    "description": null
+    "description": "Un pistolet-grappin permettant des déplacements plus rapides. Projette un crochet sur une cible pour y tirer l'utilisateur. Permet de se déplacer même entre deux points sur différents niveaux."
   },
   "GrapplingGun2": {
     "localized_name": "Méga pistolet-grappin",
-    "description": null
+    "description": "Un pistolet-grappin permettant des déplacements plus rapides. Projette un crochet sur une cible pour y tirer l'utilisateur. Sa portée a été améliorée."
   },
   "GrapplingGun3": {
     "localized_name": "Giga pistolet-grappin",
-    "description": null
+    "description": "Un pistolet-grappin permettant des déplacements plus rapides. Projette un crochet sur une cible pour y tirer l'utilisateur. Les données d'un prototype ont permis de l'améliorer davantage."
   },
   "GrapplingGun4": {
     "localized_name": "Téra pistolet-grappin",
-    "description": null
+    "description": "Un pistolet-grappin permettant des déplacements plus rapides. Projette un crochet sur une cible pour y tirer l'utilisateur. Les recherches ininterrompues ont permis de l'optimiser."
   },
   "GrapplingGun5": {
     "localized_name": "Ultra pistolet-grappin",
@@ -777,35 +777,35 @@
   },
   "GrenadeBullet": {
     "localized_name": "Grenade",
-    "description": null
+    "description": "Des munitions compatibles notamment avec le Lance-grenades."
   },
   "GuildChest": {
     "localized_name": "Coffre de guilde",
-    "description": null
+    "description": "Un coffre qui peut envoyer et recevoir instantanément son contenu via l'hyperespace. Ces coffres partagent leur contenu avec toutes les bases dans lesquelles ils sont installés."
   },
   "HandTorch": {
     "localized_name": "Torche à porter",
-    "description": "Dissipe les ténèbres et protège contre le froid. Peut aussi être utilisée en combat rapproché en cas d'urgence. Un Établi de fortune est requis pour en fabriquer."
+    "description": "Dissipe les ténèbres et protège contre le froid. Peut aussi être utilisée en combat rapproché en cas d'urgence. Un Établi de Fortune est requis pour en fabriquer."
   },
   "HandgunBullet": {
     "localized_name": "Balles de pistolet",
-    "description": "Des munitions compatibles notamment avec le Pistolet. Une Établi pour armes est requise pour en fabriquer."
+    "description": "Des munitions compatibles notamment avec le Pistolet. Une Établi pour Armes est requise pour en fabriquer."
   },
   "Headstone": {
     "localized_name": "Pierre tombale",
-    "description": null
+    "description": "Une pierre tombale sur laquelle on peut écrire. À utiliser à des fins d'archivage."
   },
   "Heater": {
-    "localized_name": "Chauffage à flammes",
+    "localized_name": "Chauffage",
     "description": "Permet de réchauffer les environs et de se prémunir contre le froid."
   },
   "Homeward": {
     "localized_name": "Nuage d'orage",
-    "description": null
+    "description": "Permet de rejoindre le premier camp à proximité. Utilisation impossible dans les donjons."
   },
   "HugeKitchen": {
     "localized_name": "Grande cuisine",
-    "description": null
+    "description": "Une installation requise pour cuisiner. Sa taille gigantesque permet à plusieurs Pals de cuisiner ensemble. Un Pal de feu est requis pour allumer le feu."
   },
   "HunterFlagSet": {
     "localized_name": "Ensemble de Drapeaux des Syndicats",
@@ -813,7 +813,7 @@
   },
   "IceCrusher": {
     "localized_name": "Broyeur à glace",
-    "description": null
+    "description": "Une installation permettant de broyer du Minerai de métal pour obtenir d'autres matériaux. Une alimentation en électricité ainsi qu'un Pal avec la capacité Réfrigération sont requis pour profiter de sa grande efficacité."
   },
   "Infra_ElectricGenerator_Grade_01": {
     "localized_name": "Générateur",
@@ -821,7 +821,7 @@
   },
   "Infra_ElectronicCircuit": {
     "localized_name": "Circuit imprimé",
-    "description": "Des Circuit imprimé nécessaires à la fabrication d'équipement délicat. Peuvent être confectionnées dans une Chaîne de production."
+    "description": "Des Circuit imprimé nécessaires à la fabrication d'équipement délicat. Peuvent être confectionnées dans une Chaîne de Production."
   },
   "Infra_ItemChest_Grade_01": {
     "localized_name": "Coffre en bois",
@@ -837,7 +837,7 @@
   },
   "Infra_MachineParts": {
     "localized_name": "Clou",
-    "description": null
+    "description": "Des matériaux nécessaires à la fabrication de nombreuses installations. Peuvent être confectionnés sur un Établi de Fortune."
   },
   "Infra_PalBed_Grade_01": {
     "localized_name": "Lit pour Pal en paille",
@@ -848,20 +848,20 @@
     "description": "Les Pals bénéficieront d'un confort inégalé pour récupérer plus de PV et de points MEN."
   },
   "Infra_PlayerBed_Grade_01": {
-    "localized_name": "Lit de fortune",
+    "localized_name": "Lit de Fortune",
     "description": "Un lit restaurant les PV des humains qu'il accueille. Y dormir la nuit fait passer le temps jusqu'au matin. Doit impérativement être installé sous un toit pour être utilisable."
   },
   "Infra_PlayerBed_Grade_02": {
-    "localized_name": "Lit de qualité",
+    "localized_name": "Lit de Qualité",
     "description": "Son confort entraîne une meilleure récupération. Doit impérativement être installé sous un toit pour être utilisable."
   },
   "ItemBooth": {
     "localized_name": "Marché aux puces (Objets)",
-    "description": null
+    "description": "Une installation pour vendre ses objets. Permet de vendre des objets aux autres joueurs. Y déposer un Pal de glace permet de ralentir la dégradation des aliments contenus."
   },
   "ItemChest_04": {
-    "localized_name": "Coffre d'une civilisation avancée",
-    "description": null
+    "localized_name": "Coffre Avancée",
+    "description": "Permet de stocker des objets. Allie robustesse et espace de stockage. L'idéal pour déposer ses biens l'esprit tranquille."
   },
   "JapaneseStyle_houseset": {
     "localized_name": "Structures de style japonais",
@@ -869,11 +869,11 @@
   },
   "Katana": {
     "localized_name": "Katana",
-    "description": null
+    "description": "Un Katana adapté au combat rapproché. Son tranchant coupe en deux du premier coup."
   },
   "Lab": {
     "localized_name": "Centre de recherche sur le travail des Pals",
-    "description": null
+    "description": "Une installation dédiée à l'étude des différentes tâches des Pals. Faire travailler les Pals ici permet de faire progresser les recherches et d'obtenir divers effets."
   },
   "Lamp": {
     "localized_name": "Lampadaire",
@@ -881,10 +881,10 @@
   },
   "Lantern": {
     "localized_name": "Lanterne de taille",
-    "description": null
+    "description": "Une lanterne à accrocher à la taille. S'allume d'elle-même à la nuit tombée. Une seule suffit à éclairer les environs."
   },
   "Lantern_High": {
-    "localized_name": "Lanterne de taille",
+    "localized_name": "Lanterne de taille améliorée",
     "description": null
   },
   "LargeCeilingLamp": {
@@ -897,39 +897,39 @@
   },
   "LaserBullet": {
     "localized_name": "Cartouche d'énergie",
-    "description": null
+    "description": "Des munitions compatibles notamment avec le Fusil laser."
   },
   "LaserGatlingBullet": {
-    "localized_name": "Cartouche de gatling laser",
-    "description": null
+    "localized_name": "Cartouche de Gatling Laser",
+    "description": "Des munitions compatibles notamment avec le Gatling Laser."
   },
   "LaserGatlingGun": {
-    "localized_name": "Pistolet gatling laser",
-    "description": null
+    "localized_name": "Gatling Laser",
+    "description": "Permet de tirer des rayons lumineux à grande vitesse. Sa puissance de feu permet d'éliminer plusieurs ennemis à la fois."
   },
   "LauncherBullet": {
     "localized_name": "Balles fusées",
-    "description": "Des munitions compatibles notamment avec le Lance-fusées. Une Chaîne de production d'armes II est requise pour en fabriquer."
+    "description": "Des munitions compatibles notamment avec le Lance-fusées. Une Chaîne de Production d'Armes II est requise pour en fabriquer."
   },
   "Launcher_Meteor": {
     "localized_name": "Lance-météorites",
-    "description": "Une arme singulière obtenue en traitant des météorites. Provoque des explosions à l'impact. Une Chaîne de production d'armes est requise pour en fabriquer."
+    "description": "Une arme singulière obtenue en traitant des météorites. Provoque des explosions à l'impact. Une Chaîne de Production d'Armes est requise pour en fabriquer."
   },
   "MakeshiftAssaultRifle": {
     "localized_name": "Fusil d'assaut usé",
-    "description": null
+    "description": "Un fusil d'assaut assemblé à partir de matériaux de récupération. Sa cadence de tir et sa portée sont élevées pour compenser sa faible puissance."
   },
   "MakeshiftHandgun": {
     "localized_name": "Pistolet rouillé",
-    "description": "Un pistolet artisanal obtenu à partir de camelote. Plus adapté au combat de proximité, il tire une balle à la fois. Une Établi pour armes est requise pour en fabriquer."
+    "description": "Un pistolet artisanal obtenu à partir de camelote. Plus adapté au combat de proximité, il tire une balle à la fois. Une Établi pour Armes est requise pour en fabriquer."
   },
   "MakeshiftShotgun": {
     "localized_name": "Fusil à pompe usé",
-    "description": null
+    "description": "Un fusil à pompe assemblé à partir de matériaux de récupération. Sa portée réduite est compensée par une grande puissance de feu à courte distance."
   },
   "MakeshiftSubmachineGun": {
     "localized_name": "Pistolet-mitrailleur usé",
-    "description": null
+    "description": "Un pistolet-mitrailleur assemblé à partir de matériaux de récupération. Sa cadence de tir élevée compense sa faible puissance."
   },
   "ManganeseIngot": {
     "localized_name": "Lingot de Korallium",
@@ -937,7 +937,7 @@
   },
   "ManualElectricGenerator": {
     "localized_name": "Générateur manuel",
-    "description": null
+    "description": "Une installation qui convertit les mouvements rotatifs en électricité. Peu efficace et gourmande en points MEN pour les Pals, elle permet néanmoins d'accumuler de l'EXP."
   },
   "MeatCutterKnife": {
     "localized_name": "Couteau de boucher",
@@ -945,19 +945,19 @@
   },
   "MedicalPalBed_04": {
     "localized_name": "Grand lit pour Pal",
-    "description": null
+    "description": "Un grand lit confortable pour Pal. Les Pals l'utilisent la nuit ou quand ils sont blessés. Même les grands Pals peuvent y dormir comme des bébés."
   },
   "MedicalPalBed_05": {
-    "localized_name": "Capsule pour Pal d'une civilisation avancée",
-    "description": null
+    "localized_name": "Capsule pour Pal Avancée",
+    "description": "Une capsule de rétablissement pour Pal. Les Pals l'utilisent la nuit ou quand ils sont blessés. Cette innovation technologique assure un meilleur rétablissement."
   },
   "MedicineFacility_03": {
-    "localized_name": "Table pharmaceutique d'une civilisation avancée",
-    "description": null
+    "localized_name": "Table Pharmaceutique Avancée",
+    "description": "Une installation qui fabrique des médicaments pour soigner les maladies des Pals. Une technologie futuriste permet de produire des médicaments inconnus. Mieux vaut confier ces tâches aux Pals à vocation pharmaceutique."
   },
   "MetalDetector": {
     "localized_name": "Détecteur de métaux",
-    "description": null
+    "description": "L'avoir en main permet de détecter les minerais cachés à proximité. Une marque apparaît sur le métal s'il est utilisé près d'un minerai. Cette marque disparaît lorsqu'on s'en éloigne."
   },
   "Metal_Gate": {
     "localized_name": "Porte en métal",
@@ -968,12 +968,12 @@
     "description": "Un assortiment pour construire un camp en métal. Permet de fabriquer tout le nécessaire à la construction d'une maison en métal (base, murs, toit, escalier, etc.)"
   },
   "MiningTool": {
-    "localized_name": "Pioche et casque",
-    "description": null
+    "localized_name": "Wagon minier",
+    "description": "À installer sur le camp pour accroître la vitesse d'extraction. En installer 2 ou plus n'octroie aucun effet supplémentaire."
   },
   "MissileBullet": {
     "localized_name": "Missile",
-    "description": null
+    "description": "Des munitions compatibles notamment avec le Lance-missiles."
   },
   "MonsterFarm": {
     "localized_name": "Ferme",
@@ -981,7 +981,7 @@
   },
   "MultiElectricHatchingPalEgg": {
     "localized_name": "Grand incubateur électrique",
-    "description": null
+    "description": "Une installation pour faire éclore les œufs de Pals. Doit être alimentée en électricité, mais profite d'une température optimale et permet d'y faire éclore plusieurs œufs à la fois."
   },
   "MultiHatchingPalEgg": {
     "localized_name": "Incubateur Géant",
@@ -989,31 +989,39 @@
   },
   "Musket": {
     "localized_name": "Fusil à mousquet",
-    "description": "Un pistolet modeste marqué par les années. Ses coups sont puissants mais le recharger prend du temps. Une Établi pour armes est requise pour en fabriquer."
+    "description": "Un pistolet modeste marqué par les années. Ses coups sont puissants mais le recharger prend du temps. Une Établi pour Armes est requise pour en fabriquer."
   },
   "NinjaFlagSet": {
     "localized_name": "Ensemble de Drapeaux des Fleurs Lunaires",
     "description": "Un ensemble contenant un Drapeau du Clan des Fleurs Lunaires et une Bannière du Clan des Fleurs Lunaires. Symbole de votre victoire sur le Clan des Fleurs Lunaires."
   },
+  "OctaviaSet01": {
+    "localized_name": "Ensemble Collaboration ULTRAKILL 1",
+    "description": "[Collaboration ULTRAKILL] Comprend l'Armure V1 et le Revolver Marksman."
+  },
+  "OctaviaSet02": {
+    "localized_name": "Ensemble Collaboration ULTRAKILL 2",
+    "description": "[Collaboration ULTRAKILL] Comprend l'Armure V2 et le Fusil à pompe Core Eject."
+  },
   "OilPump": {
     "localized_name": "Pompe à pétrole brut",
-    "description": null
+    "description": "Une installation requise pour extraire le Pétrole brut des champs pétrolifères. Doit être grandement alimentée en électricité pour fonctionner."
   },
   "OlympicCauldron": {
-    "localized_name": "Marmite",
-    "description": null
+    "localized_name": "Brasero",
+    "description": "À installer sur le camp pour accroître la vitesse d'allumage. En installer 2 ou plus n'octroie aucun effet supplémentaire."
   },
   "OperatingTable": {
-    "localized_name": "Table d'opération de Pal",
-    "description": null
+    "localized_name": "Table d'opération pour Pals",
+    "description": "fr_text"
   },
   "OverheatRifle": {
     "localized_name": "Fusil à Surchauffe",
-    "description": null
+    "description": "fr_Text"
   },
   "OverheatRifleBullet": {
     "localized_name": "Balles de Fusil à Surchauffe",
-    "description": null
+    "description": "fr_Text"
   },
   "PALBOX": {
     "localized_name": "Boîte à Pal",
@@ -1021,15 +1029,15 @@
   },
   "PalBooth": {
     "localized_name": "Marché aux puces (Pals)",
-    "description": null
+    "description": "Une installation pour vendre ses Pals. Permet de vendre des Pals aux autres joueurs. Y déposer un Pal de glace permet de ralentir la dégradation des aliments issue des ventes."
   },
   "PalDopingShot": {
     "localized_name": "Pistolet Dopant",
-    "description": null
+    "description": "fr_Text"
   },
   "PalDopingShotBullet": {
     "localized_name": "Balles de Pistolet Dopant",
-    "description": null
+    "description": "fr_Text"
   },
   "PalDopingShot_2": {
     "localized_name": "Méga Pistolet Dopant",
@@ -1041,23 +1049,23 @@
   },
   "PalHealingGrenade": {
     "localized_name": "Grenade à Régénération de Pal",
-    "description": null
+    "description": "fr_Text"
   },
   "PalMedicineBox": {
     "localized_name": "Étagère à remèdes",
-    "description": null
+    "description": "Une étagère qui contient des médicaments pour Pal. Les Pals s'en servent pour se soigner quand ils sont malades. Attention à ne pas tomber à court de médicaments."
   },
   "PalRevive": {
-    "localized_name": "Potion de résurrection",
-    "description": null
+    "localized_name": "Potion de Résurrection",
+    "description": "Une potion pour ressusciter les Pals blessés ou incapables de bouger."
   },
   "PalSphere_Exotic": {
-    "localized_name": "Sphère exotique",
-    "description": null
+    "localized_name": "Sphère Exotique",
+    "description": "Un dispositif à lancer pour capturer les Pals. Sa qualité incroyable permet de capturer même les Pals non standards."
   },
   "Plastic": {
     "localized_name": "Plastacier",
-    "description": null
+    "description": "Un matériau obtenu en traitant le Pétrole brut et le métal. Se fabrique dans une Fournaise Électrique."
   },
   "PoliceFlagSet": {
     "localized_name": "Ensemble de Drapeaux de la Milice",
@@ -1065,27 +1073,27 @@
   },
   "Polymer": {
     "localized_name": "Polymère",
-    "description": null
+    "description": "Du Polymère obtenu à partir d'huile. Nécessaire notamment à la fabrication des armes à feu."
   },
   "Potion_Extreme": {
-    "localized_name": "Potion suprême",
-    "description": null
+    "localized_name": "Potion Suprême de Guérison",
+    "description": "Un remède qui panse peu à peu les blessures. Sa qualité remarquable fait qu'elle restaure les PV en un clin d'œil."
   },
   "Product_Axe_Grade_01": {
-    "localized_name": "Hache en pierre",
+    "localized_name": "Hache en Pierre",
     "description": "Une hache pour couper du bois. Sa conception en pierre offre un tranchant limité."
   },
   "Product_Axe_Grade_02": {
-    "localized_name": "Hache en métal",
-    "description": "Une hache pour couper du bois. Sa conception en métal lui confère une robustesse et un tranchant efficaces. Une Établi de qualité est requise pour en fabriquer."
+    "localized_name": "Hache en Métal",
+    "description": "Une hache pour couper du bois. Sa conception en métal lui confère une robustesse et un tranchant efficaces. Une Établi de Qualité est requise pour en fabriquer."
   },
   "Product_Axe_Grade_03": {
-    "localized_name": "Hache en métal raffiné",
-    "description": "Une hache pour couper du bois. Sa robustesse et son tranchant ont été améliorés. Une Chaîne de production est requise pour en fabriquer."
+    "localized_name": "Hache en Métal Raffiné",
+    "description": "Une hache pour couper du bois. Sa robustesse et son tranchant ont été améliorés. Une Chaîne de Production est requise pour en fabriquer."
   },
   "Product_CoalPit": {
     "localized_name": "Mine de charbon",
-    "description": null
+    "description": "Une installation pour produire du Charbon. Une bonne force physique est nécessaire pour extraire le Charbon. Laisse faire les Pals doué dans l'extraction."
   },
   "Product_Cooking_Grade_01": {
     "localized_name": "Feu de camp",
@@ -1096,27 +1104,27 @@
     "description": "Permet d'étendre la gamme de plats à cuisiner pour gagner en efficacité."
   },
   "Product_Cooking_Grade_03": {
-    "localized_name": "Cuisine électrique",
+    "localized_name": "Cuisine Électrique",
     "description": "A besoin d'électricité pour fonctionner et cuisiner encore plus efficacement. Un Pal avec la capacité Allumage de feu est requis pour l'exploiter."
   },
   "Product_CopperPit": {
     "localized_name": "Carrière de cuivre",
-    "description": null
+    "description": "Une installation pour produire du Minerai de métal. Son extraction est encore plus éprouvante et demande une grande force physique pour extraire le Minerai de métal. Laisse faire les Pals doué dans l'extraction."
   },
   "Product_CopperPit_2": {
     "localized_name": "Carrière de cuivre II",
-    "description": null
+    "description": "Une installation pour produire du Minerai de métal. Son extraction est encore plus éprouvante et demande une grande force physique pour extraire le Minerai de métal. Laisse faire les Pals doué dans l'extraction."
   },
   "Product_Factory_Hard_Grade_01": {
-    "localized_name": "Établi de qualité",
-    "description": "Permet de produire plus rapidement qu'avec un Établi de fortune. Un Pal avec la capacité Travaux manuels est requis pour l'exploiter."
+    "localized_name": "Établi de Qualité",
+    "description": "Permet de produire plus rapidement qu'avec un Établi de Fortune. Un Pal avec la capacité Travaux manuels est requis pour l'exploiter."
   },
   "Product_Factory_Hard_Grade_02": {
-    "localized_name": "Chaîne de production",
+    "localized_name": "Chaîne de Production",
     "description": "A besoin d'électricité pour fonctionner et produire divers objets plus rapidement. Un Pal avec la capacité Travaux manuels est requis pour l'exploiter."
   },
   "Product_Factory_Hard_Grade_03": {
-    "localized_name": "Chaîne de production II",
+    "localized_name": "Chaîne de Production II",
     "description": "A besoin d'électricité pour fonctionner et produire divers objets encore plus rapidement. Un Pal avec la capacité Travaux manuels est requis pour l'exploiter."
   },
   "Product_Farm_Berries": {
@@ -1125,7 +1133,7 @@
   },
   "Product_Farm_Carrot": {
     "localized_name": "Plantation de carottes",
-    "description": null
+    "description": "Une ferme pour faire pousser des Carottes. Le délai de récolte est long, mais les possibilités de cuisine sont élargies. Plusieurs Pals sont nécessaires pour les semailles, l'arrosage et la récolte."
   },
   "Product_Farm_Lettuce": {
     "localized_name": "Plantation de laitue",
@@ -1133,11 +1141,11 @@
   },
   "Product_Farm_Onion": {
     "localized_name": "Plantation d'oignons",
-    "description": null
+    "description": "Une ferme pour faire pousser des Oignons. Le délai de récolte est long, mais les possibilités de cuisine sont élargies. Plusieurs Pals sont nécessaires pour les semailles, l'arrosage et la récolte."
   },
   "Product_Farm_Potato": {
     "localized_name": "Plantation de patates",
-    "description": null
+    "description": "Une ferme pour faire pousser des Patate. Le délai de récolte est long, mais les possibilités de cuisine sont élargies. Plusieurs Pals sont nécessaires pour les semailles, l'arrosage et la récolte."
   },
   "Product_Farm_tomato": {
     "localized_name": "Plantation de tomates",
@@ -1148,40 +1156,40 @@
     "description": "Permet de cultiver du blé, ingrédient de base du Pain. Nécessite des Pals possédant les capacités Semence, Arrosage et Collecte."
   },
   "Product_Ingot_Grade_01_Copper": {
-    "localized_name": "Fournaise de fortune",
+    "localized_name": "Fournaise de Fortune",
     "description": "Permet de raffiner le Minerai de métal pour produire des lingots."
   },
   "Product_Ingot_Grade_02_Iron": {
-    "localized_name": "Fournaise améliorée",
-    "description": "Permet de raffiner des Lingot de métal raffiné."
+    "localized_name": "Fournaise Améliorée",
+    "description": "Permet de raffiner des Lingot de Métal Raffiné."
   },
   "Product_Ingot_Grade_03_Steal": {
-    "localized_name": "Fournaise électrique",
+    "localized_name": "Fournaise Électrique",
     "description": "Permet de raffiner : Lingot de Paluminium."
   },
   "Product_Medicine_Grade_01": {
-    "localized_name": "Table pharmaceutique archaïque",
+    "localized_name": "Table Pharmaceutique Archaïque",
     "description": "Permet de produire les médicaments de base. Un Pal avec la capacité Pharmacie est requis pour l'exploiter."
   },
   "Product_Medicine_Grade_02": {
-    "localized_name": "Table pharmaceutique électrique",
+    "localized_name": "Table Pharmaceutique Électrique",
     "description": "A besoin d'électricité pour fonctionner et produire des médicaments de haute qualité. Un Pal avec la capacité Pharmacie est requis pour l'exploiter."
   },
   "Product_Pickaxe_Grade_01": {
-    "localized_name": "Pioche en pierre",
+    "localized_name": "Pioche en Pierre",
     "description": "Une pioche pour extraire des matériaux. Sa conception en pierre la rend plus ou moins efficace."
   },
   "Product_Pickaxe_Grade_02": {
-    "localized_name": "Pioche en métal",
-    "description": "Une pioche pour extraire des matériaux. Sa conception en métal allie robustesse et efficacité. Une Établi de qualité est requise pour en fabriquer."
+    "localized_name": "Pioche en Métal",
+    "description": "Une pioche pour extraire des matériaux. Sa conception en métal allie robustesse et efficacité. Une Établi de Qualité est requise pour en fabriquer."
   },
   "Product_Pickaxe_Grade_03": {
-    "localized_name": "Pioche en métal raffiné",
-    "description": "Une pioche pour extraire des matériaux. Sa robustesse et son efficacité ont été améliorées. Une Chaîne de production est requise pour en fabriquer."
+    "localized_name": "Pioche en Métal Raffiné",
+    "description": "Une pioche pour extraire des matériaux. Sa robustesse et son efficacité ont été améliorées. Une Chaîne de Production est requise pour en fabriquer."
   },
   "Product_QuartzPit": {
     "localized_name": "Carrière de quartz pur",
-    "description": null
+    "description": "Une installation pour produire du Quartz pur. Il faut une bonne condition physique pour extraire le Quartz pur. Laisse faire les Pals doué dans l'extraction."
   },
   "Product_StationDeforest": {
     "localized_name": "Scierie",
@@ -1193,18 +1201,18 @@
   },
   "Product_SulfurPit": {
     "localized_name": "Mine de soufre",
-    "description": null
+    "description": "Une installation pour produire du Soufre. Une bonne force physique est nécessaire pour extraire le Soufre. Laisse faire les Pals doué dans l'extraction."
   },
   "Product_WeaponFactory_Dirty_Grade_01": {
-    "localized_name": "Établi pour armes",
+    "localized_name": "Établi pour Armes",
     "description": "Une installation qui permet de fabriquer des armes simples. Un Pal avec la capacité Travaux manuels est requis pour l'utiliser."
   },
   "Product_WeaponFactory_Dirty_Grade_02": {
-    "localized_name": "Chaîne de production d'armes",
+    "localized_name": "Chaîne de Production d'Armes",
     "description": "A besoin d'électricité pour fonctionner et produire des armes et des munitions plus rapidement. Un Pal avec la capacité Travaux manuels est requis pour l'exploiter."
   },
   "Product_WeaponFactory_Dirty_Grade_03": {
-    "localized_name": "Chaîne de production d'armes II",
+    "localized_name": "Chaîne de Production d'Armes II",
     "description": "A besoin d'électricité pour fonctionner et produire des armes et des munitions encore plus rapidement. Un Pal avec la capacité Travaux manuels est requis pour l'exploiter."
   },
   "Product_WorkBench_SkillUnlock": {
@@ -1213,11 +1221,11 @@
   },
   "Refrigerator": {
     "localized_name": "Réfrigérateur",
-    "description": null
+    "description": "Un grand contenant à nourriture. Y attribuer un Pal de glace ralentira la dégradation des aliments qu'il contient."
   },
   "ReinforcedArrow": {
-    "localized_name": "Flèche renforcée",
-    "description": null
+    "localized_name": "Flèche Renforcée",
+    "description": "Une flèche renforcée à tirer avec un Arc Composite."
   },
   "RepairBench": {
     "localized_name": "Banc de réparation",
@@ -1225,43 +1233,43 @@
   },
   "RepairKit": {
     "localized_name": "Kit de réparation",
-    "description": null
+    "description": "Un outil pour réparer les structures. S'utilise sur les structures cassées."
   },
   "RifleBullet": {
     "localized_name": "Balles de fusil",
-    "description": "Des munitions compatibles notamment avec le fusil. Une Établi pour armes est requise pour en fabriquer."
+    "description": "Des munitions compatibles notamment avec le fusil. Une Établi pour Armes est requise pour en fabriquer."
   },
   "RoughBullet": {
     "localized_name": "Munitions bas de gamme",
-    "description": "Des munitions compatibles notamment avec le Fusil à mousquet et le Pistolet rouillé. Une Établi pour armes est requise pour en fabriquer."
+    "description": "Des munitions compatibles notamment avec le Fusil à mousquet et le Pistolet rouillé. Une Établi pour Armes est requise pour en fabriquer."
   },
   "SFArmor": {
     "localized_name": "Armure en Hexolite",
-    "description": null
+    "description": "Une armure en hexolite. Sa résistance et ses propriétés défensives sont exceptionnelles."
   },
   "SFArmorCold": {
-    "localized_name": "Armure en Hexolite chauffante",
-    "description": null
+    "localized_name": "Armure en Hexolite Chauffante",
+    "description": "Une Armure en Hexolite améliorée. Elle protège contre le gel."
   },
   "SFArmorHeat": {
-    "localized_name": "Armure en Hexolite réfrigérante",
-    "description": null
+    "localized_name": "Armure en Hexolite Réfrigérante",
+    "description": "Une Armure en Hexolite améliorée. Ses propriétés réfrigérantes ne sont plus à prouver."
   },
   "SFArmorWeight": {
-    "localized_name": "Armure en Hexolite légère",
-    "description": null
+    "localized_name": "Armure en Hexolite Légère",
+    "description": "Une Armure en Hexolite améliorée. Augmente le poids max du joueur."
   },
   "SFArrow": {
-    "localized_name": "Flèche avancée",
-    "description": null
+    "localized_name": "Flèche Avancée",
+    "description": "Une flèche en hexolite à tirer avec un Arc Avancé."
   },
   "SFBow": {
-    "localized_name": "Arc avancé",
-    "description": null
+    "localized_name": "Arc Avancé",
+    "description": "Un arc reconstruit grâce à une technologie avancée. Permet de tirer des flèches avec une puissance phénoménale."
   },
   "SFHelmet": {
     "localized_name": "Casque en Hexolite",
-    "description": null
+    "description": "Un casque en hexolite. Allie robustesse et légèreté d'une façon remarquable."
   },
   "SF_houseset": {
     "localized_name": "Structures de Style Futuriste",
@@ -1273,7 +1281,7 @@
   },
   "SanityDecrease1": {
     "localized_name": "Dispositif de vague α",
-    "description": null
+    "description": "Un dispositif qui génère une vague α pour détendre les Pals. Ralentit la chute des points MEN des Pals sur le camp. En installer plusieurs ne décuple pas l'effet."
   },
   "ScientistFlagSet": {
     "localized_name": "Ensemble de Drapeaux de l'Unité de Recherche",
@@ -1285,27 +1293,27 @@
   },
   "Shield_02": {
     "localized_name": "Méga bouclier",
-    "description": "Un étrange bouclier issu de la technologie paldium. L'amélioration du prototype a renforcé sa défense. Une Établi de qualité est requise pour en fabriquer."
+    "description": "Un étrange bouclier issu de la technologie paldium. L'amélioration du prototype a renforcé sa défense. Une Établi de Qualité est requise pour en fabriquer."
   },
   "Shield_03": {
     "localized_name": "Giga bouclier",
-    "description": "Un étrange bouclier issu de la technologie du paldium. L'amélioration du prototype a encore renforcé ses propriétés. Une Chaîne de production est requise pour en fabriquer."
+    "description": "Un étrange bouclier issu de la technologie du paldium. L'amélioration du prototype a encore renforcé ses propriétés. Une Chaîne de Production est requise pour en fabriquer."
   },
   "Shield_04": {
     "localized_name": "Téra bouclier",
-    "description": "Un étrange bouclier issu de la technologie du paldium. Des expériences répétées ont permis de révéler toutes ses qualités. Une Chaîne de production II est requise pour en fabriquer."
+    "description": "Un étrange bouclier issu de la technologie du paldium. Des expériences répétées ont permis de révéler toutes ses qualités. Une Chaîne de Production II est requise pour en fabriquer."
   },
   "Shield_05": {
     "localized_name": "Ultra bouclier",
-    "description": "Un étrange bouclier issu de la technologie du paldium. Des expériences supplémentaires ont permis d'en faire la pièce parfaite. Une Chaîne de production II est requise pour en fabriquer."
+    "description": "Un étrange bouclier issu de la technologie du paldium. Des expériences supplémentaires ont permis d'en faire la pièce parfaite. Une Chaîne de Production II est requise pour en fabriquer."
   },
   "Shield_SF": {
     "localized_name": "Bouclier avancé",
-    "description": null
+    "description": "Un étrange bouclier obtenu grâce à une technologie ultra-avancée. Se régénère automatiquement s'il n'encaisse aucune attaque pendant un certain temps. Sa qualité est irréprochable."
   },
   "ShotGunBullet": {
-    "localized_name": "Balles de fusil à pompe",
-    "description": "Des munitions compatibles notamment avec le fusil à pompe. Une Établi pour armes est requise pour en fabriquer."
+    "localized_name": "Cartouches de Fusil à pompe",
+    "description": "Des munitions compatibles notamment avec le fusil à pompe. Une Établi pour Armes est requise pour en fabriquer."
   },
   "Signboard": {
     "localized_name": "Pancarte",
@@ -1313,51 +1321,51 @@
   },
   "Silo": {
     "localized_name": "Silo",
-    "description": null
+    "description": "À installer sur le camp pour accroître la vitesse de semence. En installer 2 ou plus n'octroie aucun effet supplémentaire."
   },
   "SkillUnlock_Alpaca": {
     "localized_name": "Selle pour Melpaca",
-    "description": null
+    "description": "À posséder pour monter Melpaca."
   },
   "SkillUnlock_AmaterasuWolf": {
     "localized_name": "Selle pour Kitsun",
-    "description": null
+    "description": "À posséder pour monter Kitsun."
   },
   "SkillUnlock_AmaterasuWolf_Dark": {
     "localized_name": "Selle pour Kitsun Noct",
-    "description": null
+    "description": "La posséder permet de monter Kitsun Noct."
   },
   "SkillUnlock_BadCatgirl": {
     "localized_name": "Fusil à pompe de Nyafia",
-    "description": null
+    "description": "Le fusil à pompe de Nyafia. Mitraille temporairement les ennemis qui s'approchent au fusil à pompe avec l'utilisation d'une compétence partenaire."
   },
   "SkillUnlock_BirdDragon": {
     "localized_name": "Selle pour Vanwyrm",
-    "description": null
+    "description": "À posséder pour monter Vanwyrm."
   },
   "SkillUnlock_BirdDragon_Ice": {
     "localized_name": "Selle pour Vanwyrm Cryst",
-    "description": null
+    "description": "À posséder pour monter Vanwyrm Cryst."
   },
   "SkillUnlock_BlackCentaur": {
     "localized_name": "Selle pour Necromus",
-    "description": null
+    "description": "À posséder pour monter Necromus."
   },
   "SkillUnlock_BlackGriffon": {
     "localized_name": "Selle pour Shadowbeak",
-    "description": null
+    "description": "À posséder pour monter Shadowbeak."
   },
   "SkillUnlock_BlackMetalDragon": {
     "localized_name": "Selle pour Astegon",
-    "description": null
+    "description": "À posséder pour monter Astegon."
   },
   "SkillUnlock_BlackPuppy": {
     "localized_name": "Harnais pour Smokie",
-    "description": null
+    "description": "Un harnais pour Smokie. Son odorat très développé détecte le Chromite à proximité avec l'utilisation d'une compétence partenaire."
   },
   "SkillUnlock_BlueDragon": {
     "localized_name": "Selle pour Azurobe",
-    "description": null
+    "description": "À posséder pour monter Azurobe."
   },
   "SkillUnlock_BlueDragon_Ice": {
     "localized_name": "Selle pour Azurobe Cryst",
@@ -1365,95 +1373,95 @@
   },
   "SkillUnlock_BlueThunderHorse": {
     "localized_name": "Selle pour Azurmane",
-    "description": null
+    "description": "La posséder permet de monter Azurmane."
   },
   "SkillUnlock_Boar": {
     "localized_name": "Selle pour Rushoar",
-    "description": null
+    "description": "À posséder pour monter Rushoar."
   },
   "SkillUnlock_Carbunclo": {
     "localized_name": "Pistolet-mitrailleur pour Lifmunk",
-    "description": null
+    "description": "Un petit pistolet-mitrailleur réservé à Lifmunk. Monte sur la tête du joueur avec l'utilisation d'une compétence partenaire pour accompagner ses attaques."
   },
   "SkillUnlock_ColorfulBird": {
     "localized_name": "Gants pour Tocotoco",
-    "description": null
+    "description": "Des gants pour manipuler Tocotoco avec douceur. Permet de porter Tocotoco pour lui faire tirer des bombes avec l'utilisation d'une compétence partenaire."
   },
   "SkillUnlock_DarkMechaDragon": {
     "localized_name": "Selle pour Xenolord",
-    "description": null
+    "description": "La posséder permet de monter Xenolord."
   },
   "SkillUnlock_Deer": {
     "localized_name": "Selle pour Eikthyrdeer",
-    "description": null
+    "description": "À posséder pour monter Eikthyrdeer."
   },
   "SkillUnlock_Deer_Ground": {
     "localized_name": "Selle pour Eikthyrdeer Terra",
-    "description": null
+    "description": "À posséder pour monter Eikthyrdeer Terra."
   },
   "SkillUnlock_DreamDemon": {
     "localized_name": "Collier pour Daedream",
-    "description": null
+    "description": "Le collier de Daedream. À posséder avec Daedream dans l'équipe pour accompagner les attaques du joueur."
   },
   "SkillUnlock_DrillGame": {
     "localized_name": "Bandeau pour Digtoise",
-    "description": null
+    "description": "Le bandeau de Digtoise. Permet de le faire tourner à toute vitesse pour fendre la roche avec l'utilisation d'une compétence partenaire."
   },
   "SkillUnlock_Eagle": {
     "localized_name": "Gants pour Galeclaw",
-    "description": null
+    "description": "Des gants pour saisir Galeclaw par les pattes avec douceur. À posséder avec Galeclaw dans l'équipe pour s'en servir comme planeur."
   },
   "SkillUnlock_ElecPanda": {
     "localized_name": "Minigun pour Grizzbolt",
-    "description": null
+    "description": "À posséder pour monter Grizzbolt alors qu'il tire au minigun."
   },
   "SkillUnlock_FairyDragon": {
     "localized_name": "Selle pour Elphidran",
-    "description": null
+    "description": "À posséder pour monter Elphidran."
   },
   "SkillUnlock_FairyDragon_Water": {
     "localized_name": "Selle pour Elphidran Aqua",
-    "description": null
+    "description": "À posséder pour monter Elphidran Aqua."
   },
   "SkillUnlock_FeatherOstrich": {
     "localized_name": "Selle pour Dazemu",
-    "description": null
+    "description": "À posséder pour monter Dazemu."
   },
   "SkillUnlock_FengyunDeeper": {
     "localized_name": "Selle pour Fenglope",
-    "description": null
+    "description": "À posséder pour monter Fenglope."
   },
   "SkillUnlock_FengyunDeeper_Electric": {
     "localized_name": "Selle pour Fenglope Lux",
-    "description": null
+    "description": "La posséder permet de monter Fenglope Lux."
   },
   "SkillUnlock_FireKirin": {
     "localized_name": "Selle pour Pyrin",
-    "description": null
+    "description": "À posséder pour monter Pyrin."
   },
   "SkillUnlock_FireKirin_Dark": {
     "localized_name": "Selle pour Pyrin Noct",
-    "description": null
+    "description": "À posséder pour monter Pyrin Noct."
   },
   "SkillUnlock_FlameBuffalo": {
     "localized_name": "Selle pour Arsox",
-    "description": null
+    "description": "À posséder pour monter Arsox."
   },
   "SkillUnlock_FlowerDinosaur": {
     "localized_name": "Selle pour Dinossom",
-    "description": null
+    "description": "À posséder pour monter Dinossom."
   },
   "SkillUnlock_FlowerDinosaur_Electric": {
     "localized_name": "Selle pour Dinossom Lux",
-    "description": null
+    "description": "À posséder pour monter Dinossom Lux."
   },
   "SkillUnlock_FlowerRabbit": {
     "localized_name": "Collier pour Flopie",
-    "description": null
+    "description": "Le collier de Flopie. À posséder avec Flopie dans l'équipe pour lui faire ramasser automatiquement les objets à proximité."
   },
   "SkillUnlock_FlyingManta": {
     "localized_name": "Gants pour Celaray",
-    "description": null
+    "description": "Des gants pour saisir Celaray par les nageoires avec douceur. À posséder avec Celaray dans l'équipe pour s'en servir comme planeur."
   },
   "SkillUnlock_FlyingManta_Thunder": {
     "localized_name": "Gants pour Celaray Lux",
@@ -1461,7 +1469,7 @@
   },
   "SkillUnlock_Garm": {
     "localized_name": "Harnais à selle pour Direhowl",
-    "description": null
+    "description": "À posséder pour monter Direhowl."
   },
   "SkillUnlock_GhostAnglerfish": {
     "localized_name": "Selle pour Ghangler",
@@ -1473,71 +1481,71 @@
   },
   "SkillUnlock_GhostBeast": {
     "localized_name": "Selle pour Maraith",
-    "description": null
+    "description": "À posséder pour monter Maraith."
   },
   "SkillUnlock_GoldenHorse": {
     "localized_name": "Selle pour Gildane",
-    "description": null
+    "description": "À posséder pour monter Gildane."
   },
   "SkillUnlock_GrassMammoth": {
     "localized_name": "Selle pour Mammorest",
-    "description": null
+    "description": "À posséder pour monter Mammorest."
   },
   "SkillUnlock_GrassMammoth_Ice": {
     "localized_name": "Selle pour Mammorest Cryst",
-    "description": null
+    "description": "À posséder pour monter Mammorest Cryst."
   },
   "SkillUnlock_GrassPanda": {
     "localized_name": "Lance-grenades pour Mossanda",
-    "description": null
+    "description": "À posséder pour monter Mossanda alors qu'il tire au lance-grenades."
   },
   "SkillUnlock_GrassPanda_Electric": {
     "localized_name": "Lance-grenades pour Mossanda Lux",
-    "description": null
+    "description": "À posséder pour monter Mossanda Lux alors qu'il tire au lance-grenades."
   },
   "SkillUnlock_GuardianDog": {
     "localized_name": "Selle pour Yakumo",
-    "description": null
+    "description": "À posséder pour monter Yakumo."
   },
   "SkillUnlock_HadesBird": {
     "localized_name": "Selle pour Helzephyr",
-    "description": null
+    "description": "À posséder pour monter Helzephyr."
   },
   "SkillUnlock_HadesBird_Electric": {
     "localized_name": "Selle pour Helzephyr Lux",
-    "description": null
+    "description": "À posséder pour monter Helzephyr Lux."
   },
   "SkillUnlock_HawkBird": {
     "localized_name": "Selle pour Nitewing",
-    "description": null
+    "description": "À posséder pour monter Nitewing."
   },
   "SkillUnlock_Hedgehog": {
     "localized_name": "Gants pour Jolthog",
-    "description": null
+    "description": "Des gants en caoutchouc pour porter Jolthog. Permet de se servir de Jolthog comme grenade électrisante avec l'utilisation d'une compétence partenaire."
   },
   "SkillUnlock_Hedgehog_Ice": {
     "localized_name": "Gants pour Jolthog Cryst",
-    "description": null
+    "description": "Des gants isolants pour porter Jolthog Cryst. Permet de se servir de Jolthog Cryst comme grenade gelante avec l'utilisation d'une compétence partenaire."
   },
   "SkillUnlock_Horus": {
     "localized_name": "Selle pour Faleris",
-    "description": null
+    "description": "À posséder pour monter Faleris."
   },
   "SkillUnlock_Horus_Water": {
     "localized_name": "Selle pour Faleris Aqua",
-    "description": null
+    "description": "La posséder permet de monter Faleris Aqua."
   },
   "SkillUnlock_IceDeer": {
     "localized_name": "Selle pour Reindrix",
-    "description": null
+    "description": "À posséder pour monter Reindrix."
   },
   "SkillUnlock_IceHorse": {
     "localized_name": "Selle pour Frostallion",
-    "description": null
+    "description": "À posséder pour monter Frostallion."
   },
   "SkillUnlock_IceHorse_Dark": {
     "localized_name": "Selle pour Frostallion Noct",
-    "description": null
+    "description": "À posséder pour monter Frostallion Noct."
   },
   "SkillUnlock_IceNarwhal": {
     "localized_name": "Selle pour Whalaska",
@@ -1548,88 +1556,92 @@
     "description": null
   },
   "SkillUnlock_IceSeal": {
-    "localized_name": "Harnais pour Polapup",
+    "localized_name": "Selle pour Polapup",
     "description": null
   },
   "SkillUnlock_JetDragon": {
     "localized_name": "Lance-missiles pour Jetragon",
-    "description": null
+    "description": "À posséder pour monter Jetragon alors qu'il tire des missiles."
   },
   "SkillUnlock_KingAlpaca": {
     "localized_name": "Selle pour Kingpaca",
-    "description": null
+    "description": "À posséder pour monter Kingpaca."
   },
   "SkillUnlock_KingAlpaca_Ice": {
     "localized_name": "Selle pour Kingpaca Cryst",
-    "description": null
+    "description": "À posséder pour monter Kingpaca Cryst."
   },
   "SkillUnlock_KingBahamut": {
     "localized_name": "Selle pour Blazamut",
-    "description": null
+    "description": "À posséder pour monter Blazamut."
   },
   "SkillUnlock_KingBahamut_Dragon": {
     "localized_name": "Selle pour Blazamut Ryu",
-    "description": null
+    "description": "À posséder pour monter Blazamut Ryu."
   },
   "SkillUnlock_Kirin": {
     "localized_name": "Selle pour Univolt",
-    "description": null
+    "description": "À posséder pour monter Univolt."
   },
   "SkillUnlock_Kitsunebi": {
     "localized_name": "Harnais pour Foxparks",
-    "description": null
+    "description": "Un harnais pour câliner Foxparks. Permet de serrer Foxparks dans ses bras pour s'en servir comme lance-flammes avec l'utilisation d'une compétence partenaire."
   },
   "SkillUnlock_Kitsunebi_Ice": {
     "localized_name": "Harnais pour Foxparks Cryst",
-    "description": null
+    "description": "Un harnais pour câliner Foxparks Cryst. Permet de serrer Foxparks Cryst dans ses bras pour cracher de l'air froid avec l'utilisation d'une compétence partenaire."
   },
   "SkillUnlock_LazyDragon": {
     "localized_name": "Lance-missiles pour Relaxaurus",
-    "description": null
+    "description": "À posséder pour monter Relaxaurus alors qu'il tire au lance-missiles."
   },
   "SkillUnlock_LazyDragon_Electric": {
     "localized_name": "Lance-missiles pour Relaxaurus Lux",
-    "description": null
+    "description": "À posséder pour monter Relaxaurus Lux alors qu'il tire au lance-missiles."
   },
   "SkillUnlock_LeafMomonga": {
     "localized_name": "Harnais pour Herbil",
     "description": null
   },
+  "SkillUnlock_LegendDeer": {
+    "localized_name": "Selle pour Hartalis",
+    "description": null
+  },
   "SkillUnlock_Manticore": {
     "localized_name": "Selle pour Blazehowl",
-    "description": null
+    "description": "À posséder pour monter Blazehowl."
   },
   "SkillUnlock_Manticore_Dark": {
     "localized_name": "Selle pour Blazehowl Noct",
-    "description": null
+    "description": "À posséder pour monter Blazehowl Noct."
   },
   "SkillUnlock_Monkey": {
     "localized_name": "Fusil d'assaut pour Tanzee",
-    "description": null
+    "description": "Un petit fusil d'assaut réservé à Tanzee. Fait passer Tanzee en mode tireur pour mitrailler les ennemis alentours avec l'utilisation d'une compétence partenaire."
   },
   "SkillUnlock_MoonQueen": {
     "localized_name": "Selle pour Selyne",
-    "description": null
+    "description": "À posséder pour monter Selyne."
   },
   "SkillUnlock_MopKing": {
     "localized_name": "Selle pour Sweepa",
-    "description": null
+    "description": "À posséder pour monter Sweepa."
   },
   "SkillUnlock_MushroomDragon": {
     "localized_name": "Selle pour Shroomer",
-    "description": null
+    "description": "À posséder pour monter Shroomer."
   },
   "SkillUnlock_MushroomDragon_Dark": {
     "localized_name": "Selle pour Shroomer Noct",
-    "description": null
+    "description": "À posséder pour monter Shroomer Noct."
   },
   "SkillUnlock_NaughtyCat": {
     "localized_name": "Selle pour Grintale",
-    "description": null
+    "description": "À posséder pour monter Grintale."
   },
   "SkillUnlock_NegativeOctopus": {
     "localized_name": "Gants pour Killamari",
-    "description": null
+    "description": "Des gants pour saisir Killamari par les tentacules avec douceur. À posséder avec Killamari dans l'équipe pour s'en servir comme planeur."
   },
   "SkillUnlock_NegativeOctopus_Neutral": {
     "localized_name": "Gants pour Killamari Primo",
@@ -1637,11 +1649,11 @@
   },
   "SkillUnlock_NightBlueHorse": {
     "localized_name": "Selle pour Starryon",
-    "description": null
+    "description": "La posséder permet de monter Starryon."
   },
   "SkillUnlock_Penguin": {
     "localized_name": "Lance-Roquettes pour Pengullet",
-    "description": null
+    "description": "Un canon pour propulser Pengullet. Permet de tirer Pengullet sur les ennemis avec l'utilisation d'une compétence partenaire, ce qui a pour effet de le mettre K.O."
   },
   "SkillUnlock_Penguin_Electric": {
     "localized_name": "Lance-fusées pour Pengullet Lux",
@@ -1657,67 +1669,67 @@
   },
   "SkillUnlock_PurpleSpider": {
     "localized_name": "Selle pour Tarantriss",
-    "description": null
+    "description": "La posséder permet de monter Tarantriss."
   },
   "SkillUnlock_RaijinDaughter": {
     "localized_name": "Collier pour Dazzi",
-    "description": null
+    "description": "Le collier de Dazzi. À posséder avec Dazzi dans l'équipe pour accompagner les attaques du joueur."
   },
   "SkillUnlock_RaijinDaughter_Water": {
     "localized_name": "Collier pour Dazzi Noct",
-    "description": null
+    "description": "Le collier de Dazzi Noct. À posséder avec Dazzi Noct dans l'équipe pour accompagner les attaques du joueur."
   },
   "SkillUnlock_RedArmorBird": {
     "localized_name": "Selle pour Ragnahawk",
-    "description": null
+    "description": "À posséder pour monter Ragnahawk."
   },
   "SkillUnlock_SaintCentaur": {
     "localized_name": "Selle pour Paladius",
-    "description": null
+    "description": "À posséder pour monter Paladius."
   },
   "SkillUnlock_SakuraSaurus": {
     "localized_name": "Selle pour Broncherry",
-    "description": null
+    "description": "À posséder pour monter Broncherry."
   },
   "SkillUnlock_SakuraSaurus_Water": {
     "localized_name": "Selle pour Broncherry Aqua",
-    "description": null
+    "description": "À posséder pour monter Broncherry Aqua."
   },
   "SkillUnlock_Serpent": {
     "localized_name": "Selle pour Surfent",
-    "description": null
+    "description": "À posséder pour monter Surfent."
   },
   "SkillUnlock_Serpent_Ground": {
     "localized_name": "Selle pour Surfent Terra",
-    "description": null
+    "description": "À posséder pour monter Surfent Terra."
   },
   "SkillUnlock_SkyDragon": {
     "localized_name": "Selle pour Quivern",
-    "description": null
+    "description": "À posséder pour monter Quivern."
   },
   "SkillUnlock_SkyDragon_Grass": {
     "localized_name": "Selle pour Quivern Botan",
-    "description": null
+    "description": "À posséder pour monter Quivern Botan."
   },
   "SkillUnlock_SnowTigerBeastman": {
     "localized_name": "Marteau de Bastigor",
-    "description": null
+    "description": "La posséder permet de monter Bastigor."
   },
   "SkillUnlock_Suzaku": {
     "localized_name": "Selle pour Suzaku",
-    "description": null
+    "description": "À posséder pour monter Suzaku."
   },
   "SkillUnlock_Suzaku_Water": {
     "localized_name": "Selle pour Suzaku Aqua",
-    "description": null
+    "description": "À posséder pour monter Suzaku Aqua."
   },
   "SkillUnlock_ThunderBird": {
     "localized_name": "Selle pour Beakon",
-    "description": null
+    "description": "À posséder pour monter Beakon."
   },
   "SkillUnlock_ThunderDog": {
     "localized_name": "Selle pour Rayhound",
-    "description": null
+    "description": "À posséder pour monter Rayhound."
   },
   "SkillUnlock_TropicalOstrich": {
     "localized_name": "Selle pour Palumba",
@@ -1725,63 +1737,63 @@
   },
   "SkillUnlock_Umihebi": {
     "localized_name": "Selle pour Jormuntide",
-    "description": null
+    "description": "À posséder pour monter Jormuntide."
   },
   "SkillUnlock_Umihebi_Fire": {
     "localized_name": "Selle pour Jormuntide Ignis",
-    "description": null
+    "description": "À posséder pour monter Jormuntide Ignis."
   },
   "SkillUnlock_VolcanicMonster": {
     "localized_name": "Selle pour Reptyro",
-    "description": null
+    "description": "À posséder pour monter Reptyro."
   },
   "SkillUnlock_VolcanicMonster_Ice": {
     "localized_name": "Selle pour Reptyro Cryst",
-    "description": null
+    "description": "À posséder pour monter Reptyro Cryst."
   },
   "SkillUnlock_WeaselDragon": {
     "localized_name": "Selle pour Chillet",
-    "description": null
+    "description": "À posséder pour monter Chillet."
   },
   "SkillUnlock_WeaselDragon_Fire": {
     "localized_name": "Selle pour Chillet Ignis",
-    "description": null
+    "description": "À posséder pour monter Chillet Ignis."
   },
   "SkillUnlock_WhiteAlienDragon": {
     "localized_name": "Selle pour Xenogard",
-    "description": null
+    "description": "La posséder permet de monter Xenogard."
   },
   "SkillUnlock_WhiteDeer": {
     "localized_name": "Selle pour Celesdir",
-    "description": null
+    "description": "La posséder permet de monter Celesdir."
   },
   "SkillUnlock_WhiteShieldDragon": {
     "localized_name": "Selle pour Silvegis",
-    "description": null
+    "description": "La posséder permet de monter Silvegis."
   },
   "SkillUnlock_WindChimes": {
     "localized_name": "Gants pour Hangyu",
-    "description": null
+    "description": "Des gants pour saisir Hangyu par les bras avec douceur. À posséder avec Hangyu dans l'équipe pour s'en servir comme planeur."
   },
   "SkillUnlock_WindChimes_Ice": {
     "localized_name": "Gants pour Hangyu Cryst",
-    "description": null
+    "description": "Des gants pour saisir Hangyu Cryst par les bras avec douceur. À posséder avec Hangyu Cryst dans l'équipe pour s'en servir comme planeur."
   },
   "SkillUnlock_Yeti": {
     "localized_name": "Selle pour Wumpo",
-    "description": null
+    "description": "À posséder pour monter Wumpo."
   },
   "SkillUnlock_Yeti_Grass": {
     "localized_name": "Selle pour Wumpo Botan",
-    "description": null
+    "description": "À posséder pour monter Wumpo Botan."
   },
   "SkinChange": {
     "localized_name": "Dispositif d'habillage pour Pals",
-    "description": null
+    "description": "Une installation pour modifier l'apparence. Sert à donner une apparence spéciale aux Pals. Permet notamment d'utiliser les apparences obtenues en dehors du jeu."
   },
   "Snowman": {
     "localized_name": "Bonhomme de neige",
-    "description": null
+    "description": "À installer sur le camp pour accroître la vitesse de réfrigération. En installer 2 ou plus n'octroie aucun effet supplémentaire."
   },
   "Spa": {
     "localized_name": "Source chaude",
@@ -1796,31 +1808,31 @@
     "description": null
   },
   "Spear": {
-    "localized_name": "Lance en pierre",
-    "description": null
+    "localized_name": "Lance en Pierre",
+    "description": "Une lance adaptée au combat rapproché. Sa longue portée permet de conserver une certaine distance."
   },
   "Spear_2": {
-    "localized_name": "Lance en métal",
-    "description": "Une lance adaptée au combat rapproché. Sa conception en métal accroît son attaque. Une Établi de qualité est requise pour en fabriquer."
+    "localized_name": "Lance en Métal",
+    "description": "Une lance adaptée au combat rapproché. Sa conception en métal accroît son attaque. Une Établi de Qualité est requise pour en fabriquer."
   },
   "Spear_3": {
-    "localized_name": "Lance en métal raffiné",
-    "description": "Une lance adaptée au combat rapproché. Sa conception en métal noble accroît son attaque. Une Chaîne de production est requise pour en fabriquer."
+    "localized_name": "Lance en Métal Raffiné",
+    "description": "Une lance adaptée au combat rapproché. Sa conception en métal noble accroît son attaque. Une Chaîne de Production est requise pour en fabriquer."
   },
   "Spear_ForestBoss": {
     "localized_name": "Lance de Lily",
-    "description": null
+    "description": "La lance préférée de Lily. Son jugement s'abattra sur quiconque maltraite les Pals."
   },
   "Special_ElectricHatchingPalEgg": {
     "localized_name": "Incubateur électrique",
-    "description": null
+    "description": "Une installation pour faire éclore les œufs de Pals. Doit être alimenté en électricité pour maintenir une température optimale dans l'incubateur."
   },
   "Special_HatchingPalEgg": {
     "localized_name": "Incubateur",
     "description": "Il suffit d'y installer un œuf de Pal pour le faire éclore."
   },
   "Special_PalRankUp": {
-    "localized_name": "Capsule d'enrichissement pour Pal",
+    "localized_name": "Capsule d’Essence de Pal",
     "description": "Permet de synthétiser plusieurs Pals du même type pour renforcer celui dont le rang a augmenté."
   },
   "Special_PalSphere_Grade_01": {
@@ -1829,71 +1841,71 @@
   },
   "Special_PalSphere_Grade_02": {
     "localized_name": "Méga Sphère",
-    "description": "Des dispositifs à lancer pour capturer les Pals. Leurs performances améliorées permettent de capturer une plus grande variété de Pals. Une Établi pour sphères est requise pour en fabriquer."
+    "description": "Des dispositifs à lancer pour capturer les Pals. Leurs performances améliorées permettent de capturer une plus grande variété de Pals. Une Établi pour Sphères est requise pour en fabriquer."
   },
   "Special_PalSphere_Grade_03": {
     "localized_name": "Giga Sphère",
-    "description": "Des dispositifs à lancer pour capturer les Pals. Elles permettent de capturer des Pals à la puissance limitée. Une Établi pour sphères est requise pour en fabriquer."
+    "description": "Des dispositifs à lancer pour capturer les Pals. Elles permettent de capturer des Pals à la puissance limitée. Une Établi pour Sphères est requise pour en fabriquer."
   },
   "Special_PalSphere_Grade_04": {
     "localized_name": "Téra Sphère",
-    "description": "Des dispositifs à lancer pour capturer les Pals. Elles permettent de capturer des Pals plus puissants. Une Chaîne de production de sphères est requise pour en fabriquer."
+    "description": "Des dispositifs à lancer pour capturer les Pals. Elles permettent de capturer des Pals plus puissants. Une Chaîne de Production de Sphères est requise pour en fabriquer."
   },
   "Special_PalSphere_Grade_05": {
     "localized_name": "Ultra Sphère",
-    "description": "Des dispositifs à lancer pour capturer les Pals. Leur qualité remarquable empêche la plupart des Pals de s'en échapper. Une Chaîne de production de sphères II est requise pour en fabriquer."
+    "description": "Des dispositifs à lancer pour capturer les Pals. Leur qualité remarquable empêche la plupart des Pals de s'en échapper. Une Chaîne de Production de Sphères II est requise pour en fabriquer."
   },
   "Special_PalSphere_Grade_06": {
     "localized_name": "Sphère Légendaire",
-    "description": "Des dispositifs à lancer pour capturer les Pals. Presque aucun Pal n'est capable de s'échapper de ce modèle. Une Chaîne de production de sphères II est requise pour en fabriquer."
+    "description": "Des dispositifs à lancer pour capturer les Pals. Presque aucun Pal n'est capable de s'échapper de ce modèle. Une Chaîne de Production de Sphères II est requise pour en fabriquer."
   },
   "Special_PalSphere_Grade_07": {
-    "localized_name": "Sphère ultime",
-    "description": "Un dispositif à lancer pour capturer les Pals. Sa qualité incomparable permet de capturer la totalité des Pals. Une Chaîne de production de sphères II est requise pour en fabriquer."
+    "localized_name": "Sphère Ultime",
+    "description": "Un dispositif à lancer pour capturer les Pals. Sa qualité incomparable permet de capturer la totalité des Pals. Une Chaîne de Production de Sphères II est requise pour en fabriquer."
   },
   "Special_SphereFactory_Black_Grade_01": {
-    "localized_name": "Établi pour sphères",
+    "localized_name": "Établi pour Sphères",
     "description": "Un établi pour sphères permettant de capturer des Pals. Un Pal avec la capacité Travaux manuels est requis pour l'exploiter."
   },
   "Special_SphereFactory_Black_Grade_02": {
-    "localized_name": "Chaîne de production de sphères",
+    "localized_name": "Chaîne de Production de Sphères",
     "description": "Permet de produire des Sphère de Pal plus rapidement. Un Pal avec la capacité Travaux manuels est requis pour l'exploiter."
   },
   "Special_SphereFactory_Black_Grade_03": {
-    "localized_name": "Chaîne de production de sphères II",
+    "localized_name": "Chaîne de Production de Sphères II",
     "description": "Permet de produire des Sphère de Pal encore plus rapidement. Un Pal avec la capacité Travaux manuels est requis pour l'exploiter."
   },
   "SphereFactory_Black_04": {
-    "localized_name": "Usine de sphères d'une civilisation avancée",
-    "description": null
+    "localized_name": "Chaîne de Production de Sphères Avancée",
+    "description": "Une usine de sphères pour la capture des Pals. L'automatisation avancée permet une fabrication ultra-rapide des sphères. Un Pal habile dans les travaux manuels est requis."
   },
   "SphereModule_Curve": {
     "localized_name": "Module courbe",
-    "description": null
+    "description": "L'équiper permet aux sphères de prendre une trajectoire incurvée. Augmente la force de capture en prenant les Pals par surprise."
   },
   "SphereModule_Curve2": {
     "localized_name": "Module glisseur",
-    "description": null
+    "description": "L'équiper permet aux sphères de prendre une trajectoire glissante. L'angle plus prononcé de la courbe augmente la force de capture en prenant les Pals par surprise."
   },
   "SphereModule_Heavy": {
     "localized_name": "Module poids lourd",
-    "description": null
+    "description": "L'équiper alourdit les sphères pour augmenter la force de capture au détriment de la portée."
   },
   "SphereModule_Homing": {
     "localized_name": "Module tête chercheuse",
-    "description": null
+    "description": "L'équiper permet aux sphères de suivre les Pals, ce qui augmente encore davantage la force de capture."
   },
   "SphereModule_Sniper": {
     "localized_name": "Module sniper",
-    "description": null
+    "description": "L'équiper allonge la portée des sphères pour augmenter la force de capture en empêchant les Pals de s'enfuir."
   },
   "SphereModule_Sniper2": {
     "localized_name": "Module sniper II",
-    "description": null
+    "description": "L'équiper allonge de beaucoup la portée des sphères pour augmenter la force de capture en empêchant les Pals de s'enfuir."
   },
   "StainlessSteel": {
     "localized_name": "Hexolite",
-    "description": null
+    "description": "Un alliage à base de Chromite, de Lingot de métal et de Hexoquartz. Utilisé comme matériau pour l'équipement et les structures de pointe."
   },
   "Stone_Gate": {
     "localized_name": "Portail en pierre",
@@ -1905,23 +1917,23 @@
   },
   "Stump": {
     "localized_name": "Souche et hache",
-    "description": null
+    "description": "À installer sur le camp pour accroître la vitesse d'abattage. En installer 2 ou plus n'octroie aucun effet supplémentaire."
   },
   "TableDresser01_Stone": {
     "localized_name": "Buffet ancien",
-    "description": null
+    "description": "Une commode pour changer de look. Permet de modifier l'apparence du personnage."
   },
   "ToolBoxV1": {
     "localized_name": "Grosse caisse à outils",
-    "description": null
+    "description": "À installer sur le camp pour accroître la vitesse du travail manuel. En installer 2 ou plus n'octroie aucun effet supplémentaire."
   },
   "Torch": {
-    "localized_name": "Torche à poser",
+    "localized_name": "Torche sur pied",
     "description": "À installer sur le camp pour éclairer les environs."
   },
   "TransmissionTower": {
     "localized_name": "Poteau électrique",
-    "description": null
+    "description": "À installer sur le camp pour accroître la vitesse de génération d'énergie. En installer 2 ou plus n'octroie aucun effet supplémentaire."
   },
   "Trap_LegHold": {
     "localized_name": "Piège (petit)",
@@ -1949,27 +1961,27 @@
   },
   "Unlock_Picking_Tier1": {
     "localized_name": "Outil de crochetage basique",
-    "description": null
+    "description": "Le posséder permet de crocheter les coffres nécessitant une Clé en Bronze. Peut être utilisé à volonté sans se casser."
   },
   "Unlock_Picking_Tier2": {
     "localized_name": "Outil de crochetage avancé",
-    "description": null
+    "description": "Le posséder permet de crocheter les coffres nécessitant une Clé en Argent. Peut être utilisé à volonté sans se casser."
   },
   "Unlock_Picking_Tier3": {
     "localized_name": "Outil de crochetage professionnel",
-    "description": null
+    "description": "Le posséder permet de crocheter les coffres nécessitant une Clé en Or. Peut être utilisé à volonté sans se casser."
   },
   "WallSignboard": {
     "localized_name": "WallSignBoard",
-    "description": null
+    "description": "Un panneau sur lequel on peut écrire. Peut être accroché aux murs."
   },
   "WallTorch": {
     "localized_name": "Torche murale",
     "description": "À accrocher aux murs."
   },
   "WeaponFactory_Dirty_04": {
-    "localized_name": "Usine d'armes d'une Civilisation Avancée",
-    "description": null
+    "localized_name": "Chaîne de Production d'Armes Avancée",
+    "description": "Une usine pour fabriquer armes et munitions. L'ajout de machines performantes a permis d'accélérer la production des armes. Un Pal habile dans les travaux manuels est requis."
   },
   "Wood_Gate": {
     "localized_name": "Portail en bois",
@@ -1981,18 +1993,18 @@
   },
   "Wooden_ladder": {
     "localized_name": "Échelle",
-    "description": null
+    "description": "Une échelle qui permet de monter sur les lieux légèrement surélevés."
   },
   "WorkSpeedIncrease1": {
     "localized_name": "Dispositif de vague β",
-    "description": null
+    "description": "Un dispositif qui génère une vague β pour stimuler les Pals. Augmente la vitesse de travail des Pals sur le camp. En installer plusieurs ne décuple pas l'effet."
   },
   "Workbench": {
-    "localized_name": "Établi de fortune",
-    "description": "Un Établi de fortune pour créer des objets simples. Un Pal avec la capacité Travaux manuels saura se montrer utile."
+    "localized_name": "Établi de Fortune",
+    "description": "Un Établi de Fortune pour créer des objets simples. Un Pal avec la capacité Travaux manuels saura se montrer utile."
   },
   "YakushimaBlade": {
-    "localized_name": "Épée arc-en-ciel",
-    "description": null
+    "localized_name": "Épée Arc-en-ciel",
+    "description": "[Collaboration avec Terraria] La légende raconte que cette épée aurait été arrachée à une terre lointaine par Croajiro. Mais nul ne sait vraiment dans quel but..."
   }
 }

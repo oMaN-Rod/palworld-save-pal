@@ -263,6 +263,10 @@
     "localized_name": "Fruta do Vínculo Precioso",
     "description": "Fruto mágico que é raramente avistado. Dizem que, quando um Pal ingere esse fruto, ele passa a confiar mais nos humanos. Escolha bem para qual Pal vai oferecê-lo."
   },
+  "AffectionFruit_02": {
+    "localized_name": "Fruta do Vínculo Modesto",
+    "description": "Pequeno fruto carregado de afeto. Dizem que, quando um Pal ingere esse fruto, ele passa a confiar mais nos humanos. Escolha bem para qual Pal vai oferecê-lo."
+  },
   "AncientParts2": {
     "localized_name": "Núcleo da Civilização Antiga",
     "description": "Núcleo da tecnologia perdida que existia na Antiguidade. Já quase não podem ser encontrados em Palpagos, mas contêm sabedoria esquecida."
@@ -333,23 +337,23 @@
   },
   "AutoMealPouch_Tier1": {
     "localized_name": "Saco de Ração Pequeno",
-    "description": "Saco pequeno para colocar comida. Desbloqueia 1 slot de equipamento para refeição automática. Quando a fome aperta, a comida no slot é consumida automaticamente."
+    "description": "Saco pequeno para colocar comida. Desbloqueia 1 slot para refeição automática. Quando a fome aperta, a comida no slot é consumida automaticamente."
   },
   "AutoMealPouch_Tier2": {
     "localized_name": "Saco de Ração Razoável",
-    "description": "Saco de tamanho razoável para colocar comida. Desbloqueia 2 slots de equipamento para refeição automática. Quando a fome aperta, a comida nos slots é consumida automaticamente."
+    "description": "Saco de tamanho razoável para colocar comida. Desbloqueia 2 slots para refeição automática. Quando a fome aperta, a comida nos slots é consumida automaticamente."
   },
   "AutoMealPouch_Tier3": {
     "localized_name": "Saco de Ração Grande",
-    "description": "Saco grande para colocar comida. Desbloqueia 3 slots de equipamento para refeição automática. Quando a fome aperta, a comida nos slots é consumida automaticamente."
+    "description": "Saco grande para colocar comida. Desbloqueia 3 slots para refeição automática. Quando a fome aperta, a comida nos slots é consumida automaticamente."
   },
   "AutoMealPouch_Tier4": {
     "localized_name": "Saco de Ração Gigante",
-    "description": "Saco extragrande para colocar comida. Desbloqueia 4 slots de equipamento para refeição automática. Quando a fome aperta, a comida nos slots é consumida automaticamente."
+    "description": "Saco extragrande para colocar comida. Desbloqueia 4 slots para refeição automática. Quando a fome aperta, a comida nos slots é consumida automaticamente."
   },
   "AutoMealPouch_Tier5": {
     "localized_name": "Saco de Ração Colossal",
-    "description": "Saco extragrande para colocar comida. Desbloqueia 5 slots de equipamento para refeição automática. Quando a fome aperta, a comida nos slots é consumida automaticamente."
+    "description": "Saco colossal para colocar comida. Desbloqueia 5 slots para refeição automática. Quando a fome aperta, a comida nos slots é consumida automaticamente."
   },
   "Axe_Steal": {
     "localized_name": "Machado de Metal Pal",
@@ -365,7 +369,7 @@
   },
   "Axe_Tier_02": {
     "localized_name": "Machado de Metal Refinado",
-    "description": "Machado para cortar lenha. É feito de metal de qualidade, com um fio ainda mais superior."
+    "description": "Machado para cortar lenha. É feito de metal de qualidade, com um fio ainda melhor."
   },
   "Axe_Tier_03": {
     "localized_name": "pt-BR Text",
@@ -537,7 +541,7 @@
   },
   "Blueprint_CandleStand": {
     "localized_name": "Esquema de Castiçal Solene",
-    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [Castiçal Solene]."
+    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [<MapObjectName id=|CandleStand|/>]."
   },
   "Blueprint_ChargeLaserRifle_2": {
     "localized_name": "Esquema de Fuzil de Carga 1",
@@ -621,11 +625,11 @@
   },
   "Blueprint_ConservationGroupBannerA": {
     "localized_name": "Esquema de Bandeira da Associação de Proteção aos Pals",
-    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [Bandeira da Associação de Proteção aos Pals]."
+    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [<MapObjectName id=|ConservationGroupBannerA|/>]."
   },
   "Blueprint_ConservationGroupBannerB": {
     "localized_name": "Esquema de Faixa Horizontal da Associação de Proteção aos Pals",
-    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [Faixa da Associação de Proteção aos Pals]."
+    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [<MapObjectName id=|ConservationGroupBannerB|/>]."
   },
   "Blueprint_CopperArmorCold_2": {
     "localized_name": "Esquema de Armadura de Metal Resistente a Frio 1",
@@ -741,7 +745,7 @@
   },
   "Blueprint_FireStand": {
     "localized_name": "Esquema de Castiçal para Cerimônias",
-    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [Castiçal para Cerimônias]."
+    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [<MapObjectName id=|FireStand|/>]."
   },
   "Blueprint_FishingRod_01_2": {
     "localized_name": "Esquema de Vara de Pesca Iniciante (Gumoss)",
@@ -869,7 +873,7 @@
   },
   "Blueprint_GuardianDogStatue": {
     "localized_name": "Esquema de Estátua de Yakumo",
-    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [Estátua de Yakumo]."
+    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [<MapObjectName id=|GuardianDogStatue|/>]."
   },
   "Blueprint_GuidedMissileLauncher_2": {
     "localized_name": "Esquema de Lança-Mísseis 1",
@@ -1345,7 +1349,7 @@
   },
   "Blueprint_Hunter_GangFlag": {
     "localized_name": "Esquema de Bandeira dos Caçadores Clandestinos",
-    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [Hunter GangFlag]."
+    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [<MapObjectName id=|Hunter GangFlag|/>]."
   },
   "Blueprint_IronArmorCold_2": {
     "localized_name": "Esquema de Armadura de Metal Refinado Resistente a Frio 1",
@@ -1413,7 +1417,7 @@
   },
   "Blueprint_LanternTop": {
     "localized_name": "Esquema de Lanterna de Papel Portátil",
-    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [Lanterna de Papel Portátil]."
+    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [<MapObjectName id=|LanternTop|/>]."
   },
   "Blueprint_LaserGatlingGun_2": {
     "localized_name": "Esquema de Gatling Gun Laser 1",
@@ -1469,7 +1473,7 @@
   },
   "Blueprint_LilyQueenStatue": {
     "localized_name": "Esquema de Estátua de Lyleen",
-    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [Estátua de Lyleen]."
+    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [<MapObjectName id=|LilyQueenStatue|/>]."
   },
   "Blueprint_MakeshiftAssaultRifle_2": {
     "localized_name": "Esquema de Fuzil de Assalto Desgastado 1",
@@ -1570,6 +1574,46 @@
   "Blueprint_Musket_5": {
     "localized_name": "Esquema de Mosquete 4",
     "description": "Com isto em mãos, é desbloqueada a receita de [Mosquete (Legendary)], que você pode criar em [WeaponFactory Dirty 01]."
+  },
+  "Blueprint_Octavia001_Armor_5": {
+    "localized_name": "Esquema de Armadura V1 4",
+    "description": "[Colaboração com ULTRAKILL] Com isto em mãos, a receita de [Octavia001 Armor 5 (Legendary)] é desbloqueada. Você pode fazê-la em [Factory Hard 02]."
+  },
+  "Blueprint_Octavia002_Armor_5": {
+    "localized_name": "Esquema de Armadura V2 4",
+    "description": "[Colaboração com ULTRAKILL] Com isto em mãos, a receita de [Octavia002 Armor 5 (Legendary)] é desbloqueada. Você pode fazê-la em [Factory Hard 03]."
+  },
+  "Blueprint_OctaviaRevolver_2": {
+    "localized_name": "Esquema de Revólver de Atirador 1",
+    "description": "[Colaboração com ULTRAKILL] Com isto em mãos, a receita de [Revólver de Atirador (Uncommon)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_OctaviaRevolver_3": {
+    "localized_name": "Esquema de Revólver de Atirador 2",
+    "description": "[Colaboração com ULTRAKILL] Com isto em mãos, a receita de [Revólver de Atirador (Rare)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_OctaviaRevolver_4": {
+    "localized_name": "Esquema de Revólver de Atirador 3",
+    "description": "[Colaboração com ULTRAKILL] Com isto em mãos, a receita de [Revólver de Atirador (Epic)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_OctaviaRevolver_5": {
+    "localized_name": "Esquema de Revólver de Atirador 4",
+    "description": "[Colaboração com ULTRAKILL] Com isto em mãos, a receita de [Revólver de Atirador (Legendary)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_OctaviaShotgun_2": {
+    "localized_name": "Esquema de Espingarda de Ejeção de Núcleo 1",
+    "description": "[Colaboração com ULTRAKILL] Com isto em mãos, a receita de [Espingarda de Ejeção de Núcleo (Uncommon)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 03]."
+  },
+  "Blueprint_OctaviaShotgun_3": {
+    "localized_name": "Esquema de Espingarda de Ejeção de Núcleo 2",
+    "description": "[Colaboração com ULTRAKILL] Com isto em mãos, a receita de [Espingarda de Ejeção de Núcleo (Rare)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 03]."
+  },
+  "Blueprint_OctaviaShotgun_4": {
+    "localized_name": "Esquema de Espingarda de Ejeção de Núcleo 3",
+    "description": "[Colaboração com ULTRAKILL] Com isto em mãos, a receita de [Espingarda de Ejeção de Núcleo (Epic)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 03]."
+  },
+  "Blueprint_OctaviaShotgun_5": {
+    "localized_name": "Esquema de Espingarda de Ejeção de Núcleo 4",
+    "description": "[Colaboração com ULTRAKILL] Com isto em mãos, a receita de [Espingarda de Ejeção de Núcleo (Legendary)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 03]."
   },
   "Blueprint_OldRevolver_2": {
     "localized_name": "Esquema de Revólver Deteriorado 1",
@@ -1801,11 +1845,11 @@
   },
   "Blueprint_SF_Chair": {
     "localized_name": "Esquema de Cadeira de Laboratório",
-    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [SF Chair]."
+    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [<MapObjectName id=|SF Chair|/>]."
   },
   "Blueprint_SF_Desk": {
     "localized_name": "Esquema de Escrivaninha de Laboratório",
-    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [SF Desk]."
+    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [<MapObjectName id=|SF Desk|/>]."
   },
   "Blueprint_SemiAutoRifle_2": {
     "localized_name": "Esquema de Fuzil Semiautomático 1",
@@ -1841,7 +1885,7 @@
   },
   "Blueprint_Shrine_Lantern": {
     "localized_name": "Esquema de Lanterna de Santuário",
-    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [Shrine Lantern]."
+    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [<MapObjectName id=|Shrine Lantern|/>]."
   },
   "Blueprint_SingleShotRifle_2": {
     "localized_name": "Esquema de Fuzil de Tiro Único 1",
@@ -1941,7 +1985,7 @@
   },
   "Blueprint_WallTorch02": {
     "localized_name": "Esquema de Tocha de Parede Solene",
-    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [Tocha de Parede Solene]."
+    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [<MapObjectName id=|WallTorch02|/>]."
   },
   "Blueprint_WeakerBow_2": {
     "localized_name": "Esquema de Arco Deteriorado 1",
@@ -1961,11 +2005,11 @@
   },
   "Blueprint_Wire_Fence": {
     "localized_name": "Esquema de Cerca de Arame",
-    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [Wire Fence]."
+    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [<MapObjectName id=|Wire Fence|/>]."
   },
   "Blueprint_WoodenBarricade": {
     "localized_name": "Esquema de Barricada de Madeira",
-    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [Barricada de Madeira]."
+    "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [<MapObjectName id=|WoodenBarricade|/>]."
   },
   "Blueprint_YakushimaArmor001": {
     "localized_name": "Esquema de Armadura Sagrada",
@@ -2046,6 +2090,10 @@
   "Blueprint_YakushimaBlade004_5": {
     "localized_name": "Esquema de Excalibur 4",
     "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Excalibur (Legendary)], que você pode criar em [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_YakushimaBoss002_Relic": {
+    "localized_name": "Esquema de Estátua do Senhor da Lua",
+    "description": "[Colaboração com Terraria] Enquanto tiver isto com você ou deixar guardado na base, poderá construir [<MapObjectName id=|YakushimaBoss002 Relic|/>]."
   },
   "Blueprint_YakushimaGun001": {
     "localized_name": "Esquema de Espingarda do Vórtice",
@@ -2166,6 +2214,10 @@
   "Blueprint_YakushimaLantern001_5": {
     "localized_name": "Esquema de Brilho Noturno 4",
     "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Brilho Noturno (Legendary)], que você pode criar em [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_Zoe_Halloweenskin_1": {
+    "localized_name": "Esquema de Roupa de Dia das Bruxas da Zoe",
+    "description": "Anotação do que você ouviu Zoe murmurar em segredo. Fabrique na bancada e entregue o item pronto para Zoe."
   },
   "Bone": {
     "localized_name": "Osso",
@@ -2873,11 +2925,11 @@
   },
   "Eaglestew": {
     "localized_name": "Refogado de Galeclaw",
-    "description": "Iguaria bem refogada que contém um delicioso e encorpado sabor selvagem. Quando ingerida, torna um pouco mais difícil perder SAN por tempo limitado."
+    "description": "Iguaria bem cozida que contém um delicioso e encorpado sabor selvagem. Quando ingerida, torna um pouco mais difícil perder SAN por tempo limitado."
   },
   "Eemerald": {
     "localized_name": "Esmeralda",
-    "description": "Joia que brilha verde. Comerciantes podem comprá-la por um preço elevado."
+    "description": "Joia com um brilho verde. Comerciantes podem comprá-la por um preço elevado."
   },
   "Egg": {
     "localized_name": "Ovo",
@@ -3169,7 +3221,7 @@
   },
   "FriedEggs": {
     "localized_name": "Ovo Frito",
-    "description": "Assar um Ovo o deixa ainda mais saboroso. É surpreendente como satisfaz a fome."
+    "description": "Fritar um Ovo o deixa ainda mais saboroso. É surpreendente como satisfaz a fome."
   },
   "FriedKelpie": {
     "localized_name": "Kelpsea frito",
@@ -3478,6 +3530,10 @@
   "HandgunBullet": {
     "localized_name": "Bala de Pistola",
     "description": "Projétil usado com HandGun Default e armas similares."
+  },
+  "HandgunShield": {
+    "localized_name": "Escudo Balístico",
+    "description": "Escudo Balístico"
   },
   "Head001": {
     "localized_name": "Coroa Real",
@@ -3820,7 +3876,7 @@
     "description": null
   },
   "HeadEquip001_purple": {
-    "localized_name": "Coroa de Bruxa [Suprema]",
+    "localized_name": "Coroa de Bruxa",
     "description": "Permite sentir a força sinistra da Bellanoir Libero [Suprema]. São pouquíssimos os que conseguem obter isto."
   },
   "HeadEquip023": {
@@ -3955,9 +4011,17 @@
     "localized_name": "Capacete de Xenolord",
     "description": "Artigo para a cabeça inspirado em um Xenolord."
   },
+  "HeadEquip045": {
+    "localized_name": "Capacete para Virar Depresso",
+    "description": "Cabeça de uma fantasia de Depresso. Parece reduzir ligeiramente o dano por escuridão."
+  },
+  "HeadEquip046": {
+    "localized_name": "Coroa da Salvação",
+    "description": "Permite sentir a força sinistra do Hartalis [Supremo]. São pouquíssimos os que conseguem obter isto."
+  },
   "Herbs": {
     "localized_name": "Remédio Inferior",
-    "description": "IndigestãoÓtimasRemédio Inferior para Gripe e Distensão. Não recuperam PV ao serem ingeridas."
+    "description": "Remédio Inferior ótimas para Gripe, Distensão e Indigestão. Não recuperam PV ao serem ingeridas."
   },
   "Homeward": {
     "localized_name": "Nuvens de Trovão do Regresso",
@@ -4101,7 +4165,7 @@
   },
   "Lantern": {
     "localized_name": "Lampião de Cintura",
-    "description": "Lampião preso à cintura. Acende sozinho ao anoitecer. É possível alterar o modo de iluminação para que permaneça sempre aceso. Um só já basta para iluminar o ambiente."
+    "description": "Lampião para prender à cintura. Acende sozinho ao anoitecer. É possível alterar o modo de iluminação para que permaneça sempre aceso. Um só já basta para iluminar o ambiente."
   },
   "Lantern_High": {
     "localized_name": "Lampião de Cintura Melhorado",
@@ -4365,7 +4429,7 @@
   },
   "MeaninglessItem_ButcheringImportPal": {
     "localized_name": "Amostra Descartada de Tecido",
-    "description": "Tecido biológico inutilizável. Resíduo gerado ao cortar e desmontar um Pal restaurado geneticamente. Totalmente inútil, serve apenas para descarte ou venda."
+    "description": "Tecido biológico inutilizável. Resíduo gerado ao talhar um Pal restaurado geneticamente. Totalmente inútil, serve apenas para descarte ou venda."
   },
   "Meat": {
     "localized_name": "Meat",
@@ -4554,6 +4618,62 @@
   "NightVisionGoggles": {
     "localized_name": "pt-BR Text",
     "description": "pt-BR Text"
+  },
+  "Octavia001_Armor": {
+    "localized_name": "Armadura V1",
+    "description": "[Colaboração com ULTRAKILL] Armadura criada usando como referência os mecanismos de um robô de guerra fabricado numa terra distante. Possui uma função que lhe permite se autorreparar ao causar dano."
+  },
+  "Octavia001_Armor_5": {
+    "localized_name": "Armadura V1",
+    "description": "[Colaboração com ULTRAKILL] Armadura criada usando como referência os mecanismos de um robô de guerra fabricado numa terra distante. Possui uma função que lhe permite se autorreparar ao causar dano."
+  },
+  "Octavia002_Armor": {
+    "localized_name": "Armadura V2",
+    "description": "[Colaboração com ULTRAKILL] Armadura criada usando como referência os mecanismos de um robô pacificador fabricado numa terra distante. Embora a função de se autorreparar ao causar dano tenha sido removida, conta com blindagem ainda mais resistente."
+  },
+  "Octavia002_Armor_5": {
+    "localized_name": "Armadura V2",
+    "description": "[Colaboração com ULTRAKILL] Armadura criada usando como referência os mecanismos de um robô pacificador fabricado numa terra distante. Embora a função de se autorreparar ao causar dano tenha sido removida, conta com blindagem ainda mais resistente."
+  },
+  "OctaviaRevolver": {
+    "localized_name": "Revólver de Atirador",
+    "description": "[Colaboração com ULTRAKILL] Revólver que pode ser disparado continuamente usando eletricidade, sem necessidade de recarregar. Enquanto estiver equipado, em vez de lançar esferas de captura, você lançará moedas, que voam na direção do inimigo quando atingidas pelo Revólver de Atirador."
+  },
+  "OctaviaRevolver_2": {
+    "localized_name": "Revólver de Atirador",
+    "description": "[Colaboração com ULTRAKILL] Revólver que pode ser disparado continuamente usando eletricidade, sem necessidade de recarregar. Enquanto estiver equipado, em vez de lançar esferas de captura, você lançará moedas, que voam na direção do inimigo quando atingidas pelo Revólver de Atirador."
+  },
+  "OctaviaRevolver_3": {
+    "localized_name": "Revólver de Atirador",
+    "description": "[Colaboração com ULTRAKILL] Revólver que pode ser disparado continuamente usando eletricidade, sem necessidade de recarregar. Enquanto estiver equipado, em vez de lançar esferas de captura, você lançará moedas, que voam na direção do inimigo quando atingidas pelo Revólver de Atirador."
+  },
+  "OctaviaRevolver_4": {
+    "localized_name": "Revólver de Atirador",
+    "description": "[Colaboração com ULTRAKILL] Revólver que pode ser disparado continuamente usando eletricidade, sem necessidade de recarregar. Enquanto estiver equipado, em vez de lançar esferas de captura, você lançará moedas, que voam na direção do inimigo quando atingidas pelo Revólver de Atirador."
+  },
+  "OctaviaRevolver_5": {
+    "localized_name": "Revólver de Atirador",
+    "description": "[Colaboração com ULTRAKILL] Revólver que pode ser disparado continuamente usando eletricidade, sem necessidade de recarregar. Enquanto estiver equipado, em vez de lançar esferas de captura, você lançará moedas, que voam na direção do inimigo quando atingidas pelo Revólver de Atirador."
+  },
+  "OctaviaShotgun": {
+    "localized_name": "Espingarda de Ejeção de Núcleo",
+    "description": "[Colaboração com ULTRAKILL] Espingarda que pode ser disparada continuamente usando energia térmica, sem necessidade de recarregar. Enquanto estiver equipada, em vez de lançar esferas de captura, você lançará núcleos, que explodem quando atingidos pelo Revólver de Atirador."
+  },
+  "OctaviaShotgun_2": {
+    "localized_name": "Espingarda de Ejeção de Núcleo",
+    "description": "[Colaboração com ULTRAKILL] Espingarda que pode ser disparada continuamente usando energia térmica, sem necessidade de recarregar. Enquanto estiver equipada, em vez de lançar esferas de captura, você lançará núcleos, que explodem quando atingidos pelo Revólver de Atirador."
+  },
+  "OctaviaShotgun_3": {
+    "localized_name": "Espingarda de Ejeção de Núcleo",
+    "description": "[Colaboração com ULTRAKILL] Espingarda que pode ser disparada continuamente usando energia térmica, sem necessidade de recarregar. Enquanto estiver equipada, em vez de lançar esferas de captura, você lançará núcleos, que explodem quando atingidos pelo Revólver de Atirador."
+  },
+  "OctaviaShotgun_4": {
+    "localized_name": "Espingarda de Ejeção de Núcleo",
+    "description": "[Colaboração com ULTRAKILL] Espingarda que pode ser disparada continuamente usando energia térmica, sem necessidade de recarregar. Enquanto estiver equipada, em vez de lançar esferas de captura, você lançará núcleos, que explodem quando atingidos pelo Revólver de Atirador."
+  },
+  "OctaviaShotgun_5": {
+    "localized_name": "Espingarda de Ejeção de Núcleo",
+    "description": "[Colaboração com ULTRAKILL] Espingarda que pode ser disparada continuamente usando energia térmica, sem necessidade de recarregar. Enquanto estiver equipada, em vez de lançar esferas de captura, você lançará núcleos, que explodem quando atingidos pelo Revólver de Atirador."
   },
   "OctopusGirl_Takoyaki": {
     "localized_name": "Takoyaki de Gloopie",
@@ -4897,11 +5017,11 @@
   },
   "PalEgg_Ice_03": {
     "localized_name": "Ovo Congelante Imenso",
-    "description": "PalEgg Ice 03. É possível sentir nele uma vibração calculista. Coloque na Incubadora de Ovos para fazê-lo chocar."
+    "description": "PalEgg Ice 03. É possível sentir nele uma vibração frígida. Coloque na Incubadora de Ovos para fazê-lo chocar."
   },
   "PalEgg_Ice_04": {
     "localized_name": "Ovo Congelante Imenso",
-    "description": "PalEgg Ice 04. É possível sentir nele uma vibração calculista. Coloque na Incubadora de Ovos para fazê-lo chocar."
+    "description": "PalEgg Ice 04. É possível sentir nele uma vibração frígida. Coloque na Incubadora de Ovos para fazê-lo chocar."
   },
   "PalEgg_Ice_05": {
     "localized_name": "Ovo Congelante Colossal",
@@ -4937,11 +5057,11 @@
   },
   "PalEgg_Normal_03": {
     "localized_name": "Ovo Comum Imenso",
-    "description": "PalEgg Normal 03. É possível sentir nele uma vibração sossegada. Coloque na Incubadora de Ovos para fazê-lo chocar."
+    "description": "PalEgg Normal 03. É possível sentir nele uma vibração suave. Coloque na Incubadora de Ovos para fazê-lo chocar."
   },
   "PalEgg_Normal_04": {
     "localized_name": "Ovo Comum Imenso",
-    "description": "PalEgg Normal 04. É possível sentir nele uma vibração sossegada. Coloque na Incubadora de Ovos para fazê-lo chocar."
+    "description": "PalEgg Normal 04. É possível sentir nele uma vibração suave. Coloque na Incubadora de Ovos para fazê-lo chocar."
   },
   "PalEgg_Normal_05": {
     "localized_name": "Ovo Comum Colossal",
@@ -4973,7 +5093,7 @@
   },
   "PalGenderReverse": {
     "localized_name": "Inversor de Pal",
-    "description": "Remédio fantástico capaz de inverter o sexo de um Pal. Pode ser usado em [Mesa cirúrgica Pal]."
+    "description": "Remédio fantástico capaz de inverter o sexo de um Pal. Pode ser usado em [Mesa de Operação de Pals]."
   },
   "PalHealingGrenade": {
     "localized_name": "Granada Curadora de Pals",
@@ -5041,111 +5161,151 @@
   },
   "PalPassiveSkillChange_CoolTimeReduction_Up_1": {
     "localized_name": "Implante: Sossegado",
-    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
   },
   "PalPassiveSkillChange_CoolTimeReduction_Up_2": {
     "localized_name": "Implante: Impaciente",
-    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
   },
   "PalPassiveSkillChange_CraftSpeed_up1": {
     "localized_name": "Implante: Dedicado",
-    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
   },
   "PalPassiveSkillChange_CraftSpeed_up2": {
     "localized_name": "Implante: Espírito Artesão",
-    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
   },
   "PalPassiveSkillChange_CraftSpeed_up3": {
     "localized_name": "Implante: Artesão Transcendental",
-    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
   },
   "PalPassiveSkillChange_Deffence_up1": {
     "localized_name": "Implante: Casca Grossa",
-    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
   },
   "PalPassiveSkillChange_Deffence_up2": {
     "localized_name": "Implante: Corpo Fechado",
-    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
   },
   "PalPassiveSkillChange_Deffence_up3": {
     "localized_name": "Implante: Corpo de Diamante",
-    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
   },
   "PalPassiveSkillChange_HatchingSpeed_Up": {
     "localized_name": "Implante: Filantropo",
-    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
   },
   "PalPassiveSkillChange_MoveSpeed_up_1": {
     "localized_name": "Implante: Ligeiro",
-    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
   },
   "PalPassiveSkillChange_MoveSpeed_up_2": {
     "localized_name": "Implante: Bom Corredor",
-    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
   },
   "PalPassiveSkillChange_MoveSpeed_up_3": {
     "localized_name": "Implante: Desenfreado",
-    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
   },
   "PalPassiveSkillChange_Nocturnal": {
     "localized_name": "Implante: Noturno",
-    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
   },
   "PalPassiveSkillChange_NonKilling": {
     "localized_name": "Implante: Clemência",
-    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
   },
   "PalPassiveSkillChange_Noukin": {
     "localized_name": "Implante: Brutamontes",
-    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
   },
   "PalPassiveSkillChange_PAL_ALLAttack_up1": {
     "localized_name": "Implante: Ousado",
-    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
   },
   "PalPassiveSkillChange_PAL_ALLAttack_up2": {
     "localized_name": "Implante: Brutal",
-    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
   },
   "PalPassiveSkillChange_PAL_ALLAttack_up3": {
     "localized_name": "Implante: Deus Inclemente",
-    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
+  },
+  "PalPassiveSkillChange_PAL_CorporateSlave": {
+    "localized_name": "Implante: Escravo do Trabalho",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
   },
   "PalPassiveSkillChange_PAL_FullStomach_Down_1": {
     "localized_name": "Implante: Comedido",
-    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
   },
   "PalPassiveSkillChange_PAL_FullStomach_Down_2": {
     "localized_name": "Implante: Mestre da Dieta",
-    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
   },
   "PalPassiveSkillChange_PAL_FullStomach_Down_3": {
     "localized_name": "Implante: Jejuador Supremo",
-    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
   },
   "PalPassiveSkillChange_PAL_Sanity_Down_1": {
     "localized_name": "Implante: Pensamento Positivo",
-    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
   },
   "PalPassiveSkillChange_PAL_Sanity_Down_2": {
     "localized_name": "Implante: Viciado em Trabalho",
-    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
   },
   "PalPassiveSkillChange_PAL_Sanity_Down_3": {
     "localized_name": "Implante: Espírito Inabalável",
-    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
+  },
+  "PalPassiveSkillChange_SalePrice_Up_1": {
+    "localized_name": "Implante: Nobre",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
+  },
+  "PalPassiveSkillChange_SalePrice_Up_2": {
+    "localized_name": "Implante: Linhagem Distinta",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
   },
   "PalPassiveSkillChange_Stamina_Up_1": {
     "localized_name": "Implante: Fôlego Interminável",
-    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
   },
   "PalPassiveSkillChange_Stamina_Up_2": {
     "localized_name": "Implante: Criança Serelepe",
-    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
   },
   "PalPassiveSkillChange_Stamina_Up_3": {
     "localized_name": "Implante: Movimento Perpétuo",
-    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa cirúrgica Pal]."
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
+  },
+  "PalPassiveSkillChange_SwimSpeed_up_1": {
+    "localized_name": "Implante: Nado Gracioso",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
+  },
+  "PalPassiveSkillChange_SwimSpeed_up_2": {
+    "localized_name": "Implante: Bom Nadador",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
+  },
+  "PalPassiveSkillChange_TrainerATK_UP_1": {
+    "localized_name": "Implante: Comandante Intrépido",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
+  },
+  "PalPassiveSkillChange_TrainerDEF_UP_1": {
+    "localized_name": "Implante: Estrategista Inabalável",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
+  },
+  "PalPassiveSkillChange_TrainerLogging_up1": {
+    "localized_name": "Implante: Lenhador Líder",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
+  },
+  "PalPassiveSkillChange_TrainerMining_up1": {
+    "localized_name": "Implante: Mineiro-Chefe",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
+  },
+  "PalPassiveSkillChange_TrainerWorkSpeed_UP_1": {
+    "localized_name": "Implante: Motivador",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
   },
   "PalRevive": {
     "localized_name": "Revivificante",
@@ -5223,6 +5383,22 @@
     "localized_name": "Lasca de Blazamut Ryu [Supremo]",
     "description": "Fragmento de tabuleta que emana a força de KingBahamut Dragon. Combine os fragmentos para criar uma tabuleta."
   },
+  "PalSummon_LegendDeer": {
+    "localized_name": "Tabuleta de Hartalis",
+    "description": "Tabuleta com uma gravura de Hartalis. Ofereça a um Altar de Invocação para chamar um Hartalis de [Nv. 65] extremamente poderoso."
+  },
+  "PalSummon_LegendDeer_2": {
+    "localized_name": "Tabuleta de Hartalis [Supremo]",
+    "description": "Tabuleta que emana a força de Hartalis. Ofereça a um Altar de Invocação para chamar um Hartalis de [Nv. ??] com poder tenebroso."
+  },
+  "PalSummon_LegendDeer_Parts": {
+    "localized_name": "Lasca de Hartalis",
+    "description": "Fragmento de tabuleta com uma gravura de Hartalis. Combine os fragmentos para criar uma tabuleta."
+  },
+  "PalSummon_LegendDeer_Parts_2": {
+    "localized_name": "Lasca de Hartalis [Supremo]",
+    "description": "Fragmento de tabuleta que emana a força de Hartalis. Combine os fragmentos para criar uma tabuleta."
+  },
   "PalSummon_NightLady": {
     "localized_name": "Tabuleta de Bellanoir",
     "description": "Tabuleta com uma gravura de Bellanoir. Ofereça a um Altar de Invocação para chamar uma Bellanoir de [Nv. 30] poderosa."
@@ -5250,6 +5426,10 @@
   "PalSummon_YakushimaBoss002": {
     "localized_name": "Símbolo Celestial",
     "description": "[Colaboração com Terraria] Selo com um padrão desconhecido. Ofereça a um Altar de Invocação para chamar uma entidade poderosa."
+  },
+  "PalSummon_YakushimaBoss002_2": {
+    "localized_name": "Símbolo Celestial [Mestre]",
+    "description": "[Colaboração com Terraria] Selo com um padrão desconhecido. Ofereça a um Altar de Invocação para chamar uma entidade com poder tenebroso."
   },
   "PalUpgradeStone": {
     "localized_name": "Alma de Pal Pequena",
@@ -5305,7 +5485,7 @@
   },
   "Plastic": {
     "localized_name": "Plastiaço",
-    "description": "Material especial criado pelo processamento de Óleo cru e metal. Pode ser feito na Forno Elétrico."
+    "description": "Material especial criado pelo processamento de Óleo cru e metal. Pode ser feito no Forno Elétrico."
   },
   "PlasticArmor": {
     "localized_name": "Armadura de Plastiaço",
@@ -5407,6 +5587,14 @@
     "localized_name": "Elmo de Plastiaço",
     "description": "Capacete feito de Plastiaço. Além da defesa melhorada, também conseguiram reduzir seu peso."
   },
+  "PlayerDropItem": {
+    "localized_name": "Prova de Vitória",
+    "description": "Prova honrosa que só pode ser obtida por aqueles que conquistaram a vitória. Possuir isto demonstra sua superioridade em combate."
+  },
+  "Player_Outfit_Kigurumi001": {
+    "localized_name": "Armadura para Virar Depresso",
+    "description": "Tronco de uma fantasia de Depresso."
+  },
   "PoisonMushroom": {
     "localized_name": "Cogumelo Misterioso",
     "description": "Cogumelo que não deve ser comido cru. Caso seja ingerido, faz com que sua fome aumente mais rápido."
@@ -5437,23 +5625,23 @@
   },
   "PotatoSeeds": {
     "localized_name": "Batata-Semente",
-    "description": "Batatas-semente que permitem cultivar Batata. São necessárias para criar uma plantação."
+    "description": "Batatas-sementes que permitem cultivar Batata. São necessárias para criar uma plantação."
   },
   "Potion": {
     "localized_name": "Poção",
-    "description": "Remédio que trata os ferimentos do corpo com o passar do tempo. Vai curando PV razoável."
+    "description": "Remédio que trata os ferimentos do corpo com o passar do tempo. Cura um PV razoável de forma gradual."
   },
   "Potion_Extreme": {
     "localized_name": "Poção Sublime",
-    "description": "Remédio que trata os ferimentos do corpo com o passar do tempo. De qualidade extremamente elevada, vai curando PV a olhos vistos."
+    "description": "Remédio que trata os ferimentos do corpo com o passar do tempo. De qualidade extremamente elevada, cura PV de forma notável e gradual."
   },
   "Potion_High": {
     "localized_name": "Poção Superior",
-    "description": "Remédio que trata os ferimentos do corpo com o passar do tempo. De alta qualidade, vai curando bastante PV."
+    "description": "Remédio que trata os ferimentos do corpo com o passar do tempo. De alta qualidade, cura bastante PV de forma gradual."
   },
   "Potion_Low": {
     "localized_name": "Poção Inferior",
-    "description": "Remédio que trata os ferimentos do corpo com o passar do tempo. É de baixa qualidade, mas ao menos vai curando PV."
+    "description": "Remédio que trata os ferimentos do corpo com o passar do tempo. É de baixa qualidade, mas pelo menos cura PV de forma gradual."
   },
   "PredatorCrystal": {
     "localized_name": "Núcleo de Predador",
@@ -5495,6 +5683,10 @@
     "localized_name": "Pano Saudoso da Zoe",
     "description": "Pano velho que ainda contém uma leve fragrância. Para Zoe, é um artigo carregado de recordações preciosas."
   },
+  "QuestItem_Zoe_Halloweenskin_1": {
+    "localized_name": "Roupa de Dia das Bruxas da Zoe",
+    "description": "Roupa de Dia das Bruxas da Zoe. Até ela deve ficar contente com algo assim. Entregue para a Zoe!"
+  },
   "Quiche": {
     "localized_name": "Quiche de Cogumelos",
     "description": "Prato preparado assando uma massa de torta recheada com ovos, verduras, cogumelos e creme. É delicioso comer até mesmo frio. Quando ingerido, reduz a fome e torna mais difícil perder SAN por tempo limitado."
@@ -5504,24 +5696,24 @@
     "description": "Cristal valioso que só pode ser encontrado na Terra Decaída. É formado por palúdio concentrado que mudou de forma após um longo período, passando a brilhar com as cores do arco-íris."
   },
   "Rankup_1": {
-    "localized_name": "Extrato de Pal Multiuso ☆1",
-    "description": "Extrato fantástico que desperta os talentos de um Pal quando injetado. Permite elevar um Pal da classe ☆0 para a ☆1. Mas por algum motivo é possível escutar murmúrios de rancor…"
+    "localized_name": "Fruto-Astral do Despertar ☆1",
+    "description": "Fruto mágico que é raramente avistado. Permite elevar um Pal da classe ☆0 para a ☆1."
   },
   "Rankup_2": {
-    "localized_name": "Extrato de Pal Multiuso ☆2",
-    "description": "Extrato fantástico que desperta os talentos de um Pal quando injetado. Permite elevar um Pal da classe ☆1 para a ☆2. Mas por algum motivo é possível escutar murmúrios de rancor…"
+    "localized_name": "Fruto-Astral do Despertar ☆2",
+    "description": "Fruto mágico que é raramente avistado. Permite elevar um Pal da classe ☆1 para a ☆2."
   },
   "Rankup_3": {
-    "localized_name": "Extrato de Pal Multiuso ☆3",
-    "description": "Extrato fantástico que desperta os talentos de um Pal quando injetado. Permite elevar um Pal da classe ☆2 para a ☆3. Mas por algum motivo é possível escutar murmúrios de rancor…"
+    "localized_name": "Fruto-Astral do Despertar ☆3",
+    "description": "Fruto mágico que é raramente avistado. Permite elevar um Pal da classe ☆2 para a ☆3."
   },
   "Rankup_4": {
-    "localized_name": "Extrato de Pal Multiuso ☆4",
-    "description": "Extrato fantástico que desperta os talentos de um Pal quando injetado. Permite elevar um Pal da classe ☆3 para a ☆4. Mas por algum motivo é possível escutar murmúrios de rancor…"
+    "localized_name": "Fruto-Astral do Despertar ☆4",
+    "description": "Fruto mágico que é raramente avistado. Permite elevar um Pal da classe ☆3 para a ☆4."
   },
   "Rankup_Arbitrary": {
-    "localized_name": "Extrato de Pal Multiuso Condensado",
-    "description": "Extrato fantástico que desperta os talentos de um Pal quando injetado. Permite elevar um Pal para uma classe acima. Mas por algum motivo é possível escutar murmúrios de rancor…"
+    "localized_name": "Fruto-Astral do Despertar Maduro",
+    "description": "Fruto mágico que é raramente avistado. Permite elevar um Pal para uma classe acima."
   },
   "ReinforcedArrow": {
     "localized_name": "Flecha Reforçada",
@@ -5529,7 +5721,7 @@
   },
   "Relic": {
     "localized_name": "Estátua de Lifmunk",
-    "description": "Estátuas de Pal misteriosas encontradas em vários pontos da ilha de Palpagos. Oferecê-las a certo monumento permite fortalecer o jogador."
+    "description": "Estátuas de Pal misteriosas encontradas em vários pontos da ilha de Palpagos. Oferecê-las a certo monumento permite que você se fortaleça."
   },
   "RepairKit": {
     "localized_name": "Kit de Conserto",
@@ -5545,7 +5737,7 @@
   },
   "Ruby": {
     "localized_name": "Rubi",
-    "description": "Joia que brilha vermelha. Comerciantes podem comprá-la por um preço elevado."
+    "description": "Joia com um brilho vermelho. Comerciantes podem comprá-la por um preço elevado."
   },
   "SFArmor": {
     "localized_name": "Armadura de Exolita",
@@ -5689,7 +5881,7 @@
   },
   "Sapphire": {
     "localized_name": "Safira",
-    "description": "Joia que brilha azul. Comerciantes podem comprá-la por um preço elevado."
+    "description": "Joia com um brilho azul. Comerciantes podem comprá-la por um preço elevado."
   },
   "SeafoodSoup": {
     "localized_name": "pt-BR Text",
@@ -6157,7 +6349,7 @@
   },
   "SkillUnlock_AmaterasuWolf_Dark": {
     "localized_name": "Sela de Kitsun Noct",
-    "description": "Quando você tem isto,AmaterasuWolf Darkpode montar num ."
+    "description": "Quando você tem isto, pode montar num AmaterasuWolf Dark."
   },
   "SkillUnlock_BadCatgirl": {
     "localized_name": "Espingarda de ニャニミテ",
@@ -6201,7 +6393,7 @@
   },
   "SkillUnlock_BlueThunderHorse": {
     "localized_name": "Sela de Azurmane",
-    "description": "Quando você tem isto,Azurmanepode montar num ."
+    "description": "Quando você tem isto, pode montar num Azurmane."
   },
   "SkillUnlock_Boar": {
     "localized_name": "Sela de Rushoar",
@@ -6217,7 +6409,7 @@
   },
   "SkillUnlock_DarkMechaDragon": {
     "localized_name": "Sela de Xenolord",
-    "description": "Quando você tem isto,Xenolordpode montar num ."
+    "description": "Quando você tem isto, pode montar num Xenolord."
   },
   "SkillUnlock_DarkMutant": {
     "localized_name": "pt-BR Text",
@@ -6261,7 +6453,7 @@
   },
   "SkillUnlock_FeatherOstrich": {
     "localized_name": "Sela de Dazemu",
-    "description": "Quando você tem isto,Dazemupode montar num ."
+    "description": "Quando você tem isto, pode montar num Dazemu."
   },
   "SkillUnlock_FengyunDeeper": {
     "localized_name": "Sela de Fenglope",
@@ -6269,7 +6461,7 @@
   },
   "SkillUnlock_FengyunDeeper_Electric": {
     "localized_name": "Sela de Fenglope Lux",
-    "description": "Quando você tem isto,FengyunDeeper Electricpode montar num ."
+    "description": "Quando você tem isto, pode montar num FengyunDeeper Electric."
   },
   "SkillUnlock_FireKirin": {
     "localized_name": "Sela de Pyrin",
@@ -6341,7 +6533,7 @@
   },
   "SkillUnlock_GuardianDog": {
     "localized_name": "Sela de Yakumo",
-    "description": "Quando você tem isto,Yakumopode montar num ."
+    "description": "Quando você tem isto, pode montar num Yakumo."
   },
   "SkillUnlock_HadesBird": {
     "localized_name": "Sela de Helzephyr",
@@ -6349,7 +6541,7 @@
   },
   "SkillUnlock_HadesBird_Electric": {
     "localized_name": "Sela de Helzephyr Lux",
-    "description": "Quando você tem isto,HadesBird Electricpode montar num ."
+    "description": "Quando você tem isto, pode montar num HadesBird Electric."
   },
   "SkillUnlock_HawkBird": {
     "localized_name": "Sela de Nitewing",
@@ -6369,7 +6561,7 @@
   },
   "SkillUnlock_Horus_Water": {
     "localized_name": "Sela de Faleris Aqua",
-    "description": "Quando você tem isto,Horus Waterpode montar num ."
+    "description": "Quando você tem isto, pode montar num Horus Water."
   },
   "SkillUnlock_IceDeer": {
     "localized_name": "Sela de Reindrix",
@@ -6392,7 +6584,7 @@
     "description": "Quando você tem isto, pode montar num IceNarwhal Fire."
   },
   "SkillUnlock_IceSeal": {
-    "localized_name": "Arreios de Polapup",
+    "localized_name": "Sela de Polapup",
     "description": "Quando você tem isto, pode montar num Polapup."
   },
   "SkillUnlock_JetDragon": {
@@ -6413,7 +6605,7 @@
   },
   "SkillUnlock_KingBahamut_Dragon": {
     "localized_name": "Sela de Blazamut Ryu",
-    "description": "Quando você tem isto,KingBahamut Dragonpode montar num ."
+    "description": "Quando você tem isto, pode montar num KingBahamut Dragon."
   },
   "SkillUnlock_Kirin": {
     "localized_name": "Sela de Univolt",
@@ -6439,6 +6631,10 @@
     "localized_name": "Arreios de Herbil",
     "description": "Arreios de Herbil. Com isto em mãos, quando você for incapacitado, será revivido pelo poder curativo do Herbil."
   },
+  "SkillUnlock_LegendDeer": {
+    "localized_name": "Sela de Hartalis",
+    "description": "Quando você tem isto, pode montar num Hartalis e gerar uma barreira que protege contra ataques."
+  },
   "SkillUnlock_Manticore": {
     "localized_name": "Sela de Blazehowl",
     "description": "Quando você tem isto, pode montar num Blazehowl."
@@ -6452,8 +6648,8 @@
     "description": "Pequeno fuzil de assalto para Tanzee. Quando a habilidade de companheiro é ativada, Tanzee entra no modo de disparo e atira contra os inimigos nos arredores."
   },
   "SkillUnlock_MoonQueen": {
-    "localized_name": "Sela de Selemoon",
-    "description": "Quando você tem isto,Selynepode montar num ."
+    "localized_name": "Sela de Selyne",
+    "description": "Quando você tem isto, pode montar num Selyne."
   },
   "SkillUnlock_MopKing": {
     "localized_name": "Sela de Sweepa",
@@ -6461,11 +6657,11 @@
   },
   "SkillUnlock_MushroomDragon": {
     "localized_name": "Sela de Shroomer",
-    "description": "Quando você tem isto,Shroomerpode montar num ."
+    "description": "Quando você tem isto, pode montar num Shroomer."
   },
   "SkillUnlock_MushroomDragon_Dark": {
     "localized_name": "Sela de Shroomer Noct",
-    "description": "Quando você tem isto,MushroomDragon Darkpode montar num ."
+    "description": "Quando você tem isto, pode montar num MushroomDragon Dark."
   },
   "SkillUnlock_NaughtyCat": {
     "localized_name": "Sela de Grintale",
@@ -6481,7 +6677,7 @@
   },
   "SkillUnlock_NightBlueHorse": {
     "localized_name": "Sela de Starryon",
-    "description": "Quando você tem isto,Starryonpode montar num ."
+    "description": "Quando você tem isto, pode montar num Starryon."
   },
   "SkillUnlock_Penguin": {
     "localized_name": "Lança-foguetes de Pengullet",
@@ -6501,7 +6697,7 @@
   },
   "SkillUnlock_PurpleSpider": {
     "localized_name": "Sela de Tarantriss",
-    "description": "Quando você tem isto,Tarantrisspode montar num ."
+    "description": "Quando você tem isto, pode montar num Tarantriss."
   },
   "SkillUnlock_RaijinDaughter": {
     "localized_name": "Colar de Dazzi",
@@ -6541,11 +6737,11 @@
   },
   "SkillUnlock_SkyDragon_Grass": {
     "localized_name": "Sela de Quivern Botan",
-    "description": "Quando você tem isto,SkyDragon Grasspode montar num ."
+    "description": "Quando você tem isto, pode montar num SkyDragon Grass."
   },
   "SkillUnlock_SnowTigerBeastman": {
     "localized_name": "Martelo de Bastigor",
-    "description": "Quando você tem isto,Bastigorpode montar num ."
+    "description": "Quando você tem isto, pode montar num Bastigor."
   },
   "SkillUnlock_Suzaku": {
     "localized_name": "Sela de Suzaku",
@@ -6589,19 +6785,19 @@
   },
   "SkillUnlock_WeaselDragon_Fire": {
     "localized_name": "Sela de Chillet Ignis",
-    "description": "Quando você tem isto,WeaselDragon Firepode montar num ."
+    "description": "Quando você tem isto, pode montar num WeaselDragon Fire."
   },
   "SkillUnlock_WhiteAlienDragon": {
     "localized_name": "Sela de Xenogard",
-    "description": "Quando você tem isto,Xenogardpode montar num ."
+    "description": "Quando você tem isto, pode montar num Xenogard."
   },
   "SkillUnlock_WhiteDeer": {
     "localized_name": "Sela de Celesdir",
-    "description": "Quando você tem isto,Celesdirpode montar num ."
+    "description": "Quando você tem isto, pode montar num Celesdir."
   },
   "SkillUnlock_WhiteShieldDragon": {
     "localized_name": "Sela de Silvegis",
-    "description": "Quando você tem isto,Silvegispode montar num ."
+    "description": "Quando você tem isto, pode montar num Silvegis."
   },
   "SkillUnlock_WindChimes": {
     "localized_name": "Luvas de Hangyu",
@@ -6621,15 +6817,15 @@
   },
   "Spear": {
     "localized_name": "Lança de Pedra",
-    "description": "Lança útil em combates à curta distância. De longo alcance, permite lutar mantendo-se um pouco afastado."
+    "description": "Lança útil em combates à curta distância. De longo alcance, permite lutar mantendo-se um pouco distante."
   },
   "Spear_2": {
     "localized_name": "Lança de Metal",
-    "description": "Lança útil em combates à curta distância. É feita de metal, contando com poder de ataque melhorado. De longo alcance, permite lutar mantendo-se um pouco afastado."
+    "description": "Lança útil em combates à curta distância. É feita de metal, contando com poder de ataque melhorado. De longo alcance, permite lutar mantendo-se um pouco distante."
   },
   "Spear_3": {
     "localized_name": "Lança de Metal Refinado",
-    "description": "Lança útil em combates à curta distância. É feita de metal de qualidade, contando com poder de ataque melhorado. De longo alcance, permite lutar mantendo-se um pouco afastado."
+    "description": "Lança útil em combates à curta distância. É feita de metal de qualidade, contando com poder de ataque melhorado. De longo alcance, permite lutar mantendo-se um pouco distante."
   },
   "Spear_ForestBoss": {
     "localized_name": "Lança da Lily",
@@ -6829,7 +7025,7 @@
   },
   "TechnologyBook_G2": {
     "localized_name": "Manual Técnico Inovador",
-    "description": "Livro que versa sobre assuntos técnicos de vanguarda. Use-o para obter pontos de tecnologia."
+    "description": "Livro que versa sobre assuntos técnicos bastante avançados. Use-o para obter pontos de tecnologia."
   },
   "TechnologyBook_G3": {
     "localized_name": "Manual Técnico Futurista",
@@ -6881,11 +7077,11 @@
   },
   "Unko_L": {
     "localized_name": "Esterco Gigante",
-    "description": "Sua presença causa uma sensação um tanto opressiva. Tanto o cheiro quanto a forma são prova de sua grandeza."
+    "description": "Sua presença causa uma sensação um tanto intimidadora. Tanto o cheiro quanto a forma são símbolos da sua imponência."
   },
   "Unko_S": {
     "localized_name": "Esterco",
-    "description": "Excremento animal. Podendo ser usado também como adubo, tendo um papel indispensável nos ecossistemas. É difícil ignorar seu cheiro pungente."
+    "description": "Excremento animal. Pode ser usado também como adubo e tem um papel indispensável no ecossistema. É difícil ignorar seu cheiro pungente."
   },
   "UnlockEquipmentSlot_Accessory_01": {
     "localized_name": "Caixa de Acessórios Fantástica",
@@ -7065,23 +7261,23 @@
   },
   "YakushimaBlade004": {
     "localized_name": "Excalibur",
-    "description": "[Colaboração com Terraria] Espada sagrada que brilha com a cor do ouro. Emite uma onda de choque ao seu redor quando agitada, possibilitando lançar um ataque em grande área."
+    "description": "[Colaboração com Terraria] Espada sagrada que brilha com a cor do ouro. Emite uma onda de choque ao seu redor quando agitada."
   },
   "YakushimaBlade004_2": {
     "localized_name": "Excalibur",
-    "description": "[Colaboração com Terraria] Espada sagrada que brilha com a cor do ouro. Emite uma onda de choque ao seu redor quando agitada, possibilitando lançar um ataque em grande área."
+    "description": "[Colaboração com Terraria] Espada sagrada que brilha com a cor do ouro. Emite uma onda de choque ao seu redor quando agitada."
   },
   "YakushimaBlade004_3": {
     "localized_name": "Excalibur",
-    "description": "[Colaboração com Terraria] Espada sagrada que brilha com a cor do ouro. Emite uma onda de choque ao seu redor quando agitada, possibilitando lançar um ataque em grande área."
+    "description": "[Colaboração com Terraria] Espada sagrada que brilha com a cor do ouro. Emite uma onda de choque ao seu redor quando agitada."
   },
   "YakushimaBlade004_4": {
     "localized_name": "Excalibur",
-    "description": "[Colaboração com Terraria] Espada sagrada que brilha com a cor do ouro. Emite uma onda de choque ao seu redor quando agitada, possibilitando lançar um ataque em grande área."
+    "description": "[Colaboração com Terraria] Espada sagrada que brilha com a cor do ouro. Emite uma onda de choque ao seu redor quando agitada."
   },
   "YakushimaBlade004_5": {
     "localized_name": "Excalibur",
-    "description": "[Colaboração com Terraria] Espada sagrada que brilha com a cor do ouro. Emite uma onda de choque ao seu redor quando agitada, possibilitando lançar um ataque em grande área."
+    "description": "[Colaboração com Terraria] Espada sagrada que brilha com a cor do ouro. Emite uma onda de choque ao seu redor quando agitada."
   },
   "YakushimaBlade005": {
     "localized_name": "Lendário Espada-Gato",
@@ -7201,7 +7397,7 @@
   },
   "YakushimaIngot002": {
     "localized_name": "Barra de Luminita",
-    "description": "[Colaboração com Terraria] Material deixado por YakushimaBoss002 e do qual se pode sentir uma força imensa. Emite um brilho semelhante ao do luar."
+    "description": "[Colaboração com Terraria] Material deixado por RAID YakushimaBoss002 e do qual se pode sentir uma força imensa. Emite um brilho semelhante ao do luar."
   },
   "YakushimaLantern001": {
     "localized_name": "Brilho Noturno",

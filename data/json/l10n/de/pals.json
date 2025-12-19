@@ -1327,6 +1327,10 @@
     "localized_name": "Lullu",
     "description": "Lässt sich im Frühjahr vom Wind tragen und weht Pollen über die Inseln. Ist am Heuschnupfen von Flopie schuld."
   },
+  "LegendDeer": {
+    "localized_name": "Hartalis",
+    "description": "Es ist unheimlich still, aber auf seltsame Weise beruhigend. Niemand sonst ist mehr hier. Alle sind längst erlöst. O König der Erlösung, geleite auch mich in die ewige Stille! – An dieser Stelle bricht das alte Manuskript ab."
+  },
   "LilyQueen": {
     "localized_name": "Lyleen",
     "description": "Ein liebevoller und sanftmütiger Pal. Kümmert sich um kleine Pals, die ihre Eltern verloren haben. Wer über die Stränge schlägt, bekommt eine Auszeit mit dem SolarBeam."
@@ -1381,6 +1385,10 @@
   },
   "Male_DesertPeople01": {
     "localized_name": "Dorfbewohner",
+    "description": null
+  },
+  "Male_Kigurumi01_v01": {
+    "localized_name": "Insulaner",
     "description": null
   },
   "Male_Ninja01": {
@@ -1807,6 +1815,10 @@
     "localized_name": "Miliz – Gardist",
     "description": null
   },
+  "Police_Shield_Tower": {
+    "localized_name": "Miliz – Gardist",
+    "description": null
+  },
   "Police_Shotgun": {
     "localized_name": "Miliz – Elite",
     "description": null
@@ -1883,6 +1895,14 @@
     "localized_name": "Blazamut Ryu",
     "description": null
   },
+  "RAID_LegendDeer": {
+    "localized_name": "Hartalis",
+    "description": null
+  },
+  "RAID_LegendDeer_2": {
+    "localized_name": "Hartalis",
+    "description": null
+  },
   "RAID_NightLady": {
     "localized_name": "Bellanoir",
     "description": null
@@ -1899,7 +1919,15 @@
     "localized_name": "Das wahre Auge von Cthulhu",
     "description": null
   },
+  "RAID_YakushimaBoss001_Green_2": {
+    "localized_name": "Das wahre Auge von Cthulhu",
+    "description": null
+  },
   "RAID_YakushimaBoss002": {
+    "localized_name": "Mondherr",
+    "description": null
+  },
+  "RAID_YakushimaBoss002_2": {
     "localized_name": "Mondherr",
     "description": null
   },
@@ -1907,11 +1935,23 @@
     "localized_name": "Mondherr",
     "description": null
   },
+  "RAID_YakushimaBoss002_Hand_Left_2": {
+    "localized_name": "Mondherr",
+    "description": null
+  },
   "RAID_YakushimaBoss002_Hand_Right": {
     "localized_name": "Mondherr",
     "description": null
   },
+  "RAID_YakushimaBoss002_Hand_Right_2": {
+    "localized_name": "Mondherr",
+    "description": null
+  },
   "RAID_YakushimaBoss002_Head": {
+    "localized_name": "Mondherr",
+    "description": null
+  },
+  "RAID_YakushimaBoss002_Head_2": {
     "localized_name": "Mondherr",
     "description": null
   },

@@ -17,7 +17,7 @@
   },
   "Alien": {
     "localized_name": "Organisme Inconnu",
-    "description": "Attaque +10.0 % Réduction des dégâts de type feu 15.0 % Réduction des dégâts de type foudre 15.0 %"
+    "description": "Attaque +10.0 % Réduction des dégâts de type Feu de 15.0 % Réduction des dégâts de type Foudre de 15.0 %"
   },
   "Attack_ACC_up1": {
     "localized_name": "Attaque Augmentée Niv. 1",
@@ -453,7 +453,7 @@
   },
   "ElementBoost_Aqua_1_PAL": {
     "localized_name": "Hydrophile",
-    "description": "Les dégâts de type eau augmentent de 10.0 %."
+    "description": "Les dégâts de type Eau augmentent de 10.0 %."
   },
   "ElementBoost_Aqua_2_PAL": {
     "localized_name": "Seigneur des Mers",
@@ -469,7 +469,7 @@
   },
   "ElementBoost_Dark_1_PAL": {
     "localized_name": "Voile des Ténèbres",
-    "description": "Les dégâts de type ténèbres augmentent de 10.0 %."
+    "description": "Les dégâts de type Ténèbres augmentent de 10.0 %."
   },
   "ElementBoost_Dark_2_BossDefeat": {
     "localized_name": "Dégâts de type Ténèbres Augmentés (Moyen)",
@@ -501,7 +501,7 @@
   },
   "ElementBoost_Dragon_1_PAL": {
     "localized_name": "Sang de Dragon",
-    "description": "Les dégâts de type dragon augmentent de 10.0 %."
+    "description": "Les dégâts de type Dragon augmentent de 10.0 %."
   },
   "ElementBoost_Dragon_2_BossDefeat": {
     "localized_name": "Dégâts de type Dragon Augmentés (Moyen)",
@@ -533,7 +533,7 @@
   },
   "ElementBoost_Earth_1_PAL": {
     "localized_name": "Force Tellurique",
-    "description": "Les dégâts de type terre augmentent de 10.0 %."
+    "description": "Les dégâts de type Terre augmentent de 10.0 %."
   },
   "ElementBoost_Earth_2_BossDefeat": {
     "localized_name": "Dégâts de type Terre Augmentés (Moyen)",
@@ -589,7 +589,7 @@
   },
   "ElementBoost_Fire_1_PAL": {
     "localized_name": "Pyromane",
-    "description": "Les dégâts de type feu augmentent de 10.0 %."
+    "description": "Les dégâts de type Feu augmentent de 10.0 %."
   },
   "ElementBoost_Fire_2_BossDefeat": {
     "localized_name": "Dégâts de type Feu Augmentés (Moyen)",
@@ -621,7 +621,7 @@
   },
   "ElementBoost_Ice_1_PAL": {
     "localized_name": "Sang Froid",
-    "description": "Les dégâts de type glace augmentent de 10.0 %."
+    "description": "Les dégâts de type Glace augmentent de 10.0 %."
   },
   "ElementBoost_Ice_2_BossDefeat": {
     "localized_name": "Dégâts de type Glace Augmentés (Moyen)",
@@ -653,7 +653,7 @@
   },
   "ElementBoost_Leaf_1_PAL": {
     "localized_name": "Fragrance Boisée",
-    "description": "Les dégâts de type plante augmentent de 10.0 %."
+    "description": "Les dégâts de type Plante augmentent de 10.0 %."
   },
   "ElementBoost_Leaf_2_BossDefeat": {
     "localized_name": "Dégâts de type Plante Augmentés (Moyen)",
@@ -685,7 +685,7 @@
   },
   "ElementBoost_Normal_1_PAL": {
     "localized_name": "Esprit Zen",
-    "description": "Les dégâts non élémentaires augmentent de 10.0 %."
+    "description": "Les dégâts Non Élémentaires augmentent de 10.0 %."
   },
   "ElementBoost_Normal_2_BossDefeat": {
     "localized_name": "Dégâts Non Élémentaire Augmentés (Moyen)",
@@ -709,7 +709,7 @@
   },
   "ElementBoost_Thunder_1_PAL": {
     "localized_name": "Condensateur",
-    "description": "Les dégâts de type foudre augmentent de 10.0 %."
+    "description": "Les dégâts de type Foudre augmentent de 10.0 %."
   },
   "ElementBoost_Thunder_2_PAL": {
     "localized_name": "Seigneur des Tempêtes",
@@ -745,7 +745,7 @@
   },
   "ElementResist_Aqua_1_PAL": {
     "localized_name": "Imperméabilité",
-    "description": "Les dégâts de type eau sont réduits de 10.0 %."
+    "description": "Les dégâts de type Eau sont réduits de 10.0 %."
   },
   "ElementResist_Aqua_2": {
     "localized_name": "Réduction des dégâts d’Eau Niv. 2",
@@ -761,7 +761,7 @@
   },
   "ElementResist_Dark_1_PAL": {
     "localized_name": "Lumineux",
-    "description": "Les dégâts de type ténèbres sont réduits de 10.0 %."
+    "description": "Les dégâts de type Ténèbres sont réduits de 10.0 %."
   },
   "ElementResist_Dark_2": {
     "localized_name": "Réduction des dégâts des Ténèbres Niv. 2",
@@ -777,7 +777,7 @@
   },
   "ElementResist_Dragon_1_PAL": {
     "localized_name": "Tueur de Dragons",
-    "description": "Les dégâts de type dragon sont réduits de 10.0 %."
+    "description": "Les dégâts de type Dragon sont réduits de 10.0 %."
   },
   "ElementResist_Dragon_2": {
     "localized_name": "Réduction des dégâts Draconiques Niv. 2",
@@ -793,7 +793,7 @@
   },
   "ElementResist_Earth_1_PAL": {
     "localized_name": "Parasismique",
-    "description": "Les dégâts de type terre sont réduits de 10.0 %."
+    "description": "Les dégâts de type Terre sont réduits de 10.0 %."
   },
   "ElementResist_Earth_2": {
     "localized_name": "Réduction des dégâts de Terre Niv. 2",
@@ -809,7 +809,7 @@
   },
   "ElementResist_Fire_1_PAL": {
     "localized_name": "Bronzage Naturel",
-    "description": "Les dégâts de type feu sont réduits de 10.0 %."
+    "description": "Les dégâts de type Feu sont réduits de 10.0 %."
   },
   "ElementResist_Fire_2": {
     "localized_name": "Réduction des dégâts de Feu Niv. 2",
@@ -825,7 +825,7 @@
   },
   "ElementResist_Ice_1_PAL": {
     "localized_name": "Sang Chaud",
-    "description": "Les dégâts de type glace sont réduits de 10.0 %."
+    "description": "Les dégâts de type Glace sont réduits de 10.0 %."
   },
   "ElementResist_Ice_2": {
     "localized_name": "Réduction des dégâts de Glace Niv. 2",
@@ -841,7 +841,7 @@
   },
   "ElementResist_Leaf_1_PAL": {
     "localized_name": "Protection Végétale",
-    "description": "Les dégâts de type plante sont réduits de 10.0 %."
+    "description": "Les dégâts de type Plante sont réduits de 10.0 %."
   },
   "ElementResist_Leaf_2": {
     "localized_name": "Réduction des dégâts de Plante Niv. 2",
@@ -857,7 +857,7 @@
   },
   "ElementResist_Normal_1_PAL": {
     "localized_name": "Anormal",
-    "description": "Les dégâts non élémentaires sont réduits de 10.0 %."
+    "description": "Les dégâts Non Élémentaires sont réduits de 10.0 %."
   },
   "ElementResist_Normal_2": {
     "localized_name": "Réduction des dégâts Non Élémentaire Niv. 2",
@@ -873,7 +873,7 @@
   },
   "ElementResist_Thunder_1_PAL": {
     "localized_name": "Isolant",
-    "description": "Les dégâts de type foudre sont réduits de 10.0 %."
+    "description": "Les dégâts de type Foudre sont réduits de 10.0 %."
   },
   "ElementResist_Thunder_2": {
     "localized_name": "Réduction des dégâts de Foudre Niv. 2",
@@ -892,7 +892,7 @@
     "description": null
   },
   "GYM_NAME_Forest": {
-    "localized_name": "Membre Fondateur de la LPP",
+    "localized_name": "Membre Fondateur de la Ligue pour la Protection des Pals",
     "description": null
   },
   "GYM_NAME_Meadow": {
@@ -908,7 +908,7 @@
     "description": null
   },
   "GYM_NAME_Viking": {
-    "localized_name": "Habitant du Paradis Déchu (Chef)",
+    "localized_name": "Jarl du Paradis Déchu",
     "description": null
   },
   "GYM_NAME_Volcano": {
@@ -992,8 +992,8 @@
     "description": "Ne dort pas et continue à travailler la nuit."
   },
   "NonKilling": {
-    "localized_name": "Ménagement",
-    "description": "Pacifiste. Impossible de réduire la santé de la cible à moins de 1."
+    "localized_name": "Pitié",
+    "description": "Frappe sans tuer. Impossible de réduire la santé de la cible à moins de 1 PV."
   },
   "Noukin": {
     "localized_name": "Impulsif",
@@ -1003,12 +1003,16 @@
     "localized_name": "Trophée des Flots",
     "description": "Les dégâts de type Eau augmentent de 20.0 %. Les dégâts de type Glace augmentent de 20.0 %. Défense +20.0 %"
   },
+  "OctaviaArmorVampire": {
+    "localized_name": "Afflux Sanguin",
+    "description": null
+  },
   "PAL_ALLAttack_down1": {
     "localized_name": "Lâche",
     "description": null
   },
   "PAL_ALLAttack_down2": {
-    "localized_name": "Pacifique",
+    "localized_name": "Pacifiste",
     "description": null
   },
   "PAL_ALLAttack_up1": {
@@ -1118,6 +1122,10 @@
   "SalePrice_Up_2": {
     "localized_name": "Belle Fourrure",
     "description": "Montant des ventes + : 3.0 %"
+  },
+  "Salvation": {
+    "localized_name": "Sauveur",
+    "description": null
   },
   "SphereModule_Curve": {
     "localized_name": "Courbe des sphères +1",

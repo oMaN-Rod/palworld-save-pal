@@ -403,6 +403,10 @@
     "localized_name": "Saco de Lixo",
     "description": "Saco de lixo para decoração."
   },
+  "Glass_DiagonalWall": {
+    "localized_name": "Parede Diagonal de Vidro",
+    "description": "Parede diagonal erguido sobre uma fundação triangular para impedir a entrada de invasores. É bastante resistente por ser feita de vidro reforçado."
+  },
   "Glass_DoorWall": {
     "localized_name": "Parede com Porta de Vidro",
     "description": "Porta erguida sobre a fundação para servir de entrada. É bastante resistente, pois é feita de vidro reforçado."
@@ -411,13 +415,41 @@
     "localized_name": "Cerca de Vidro",
     "description": "Cerca erguida sobre a fundação ou telhado para evitar quedas. É bastante resistente, pois é feita de vidro reforçado."
   },
+  "Glass_PyramidRoof": {
+    "localized_name": "Telhado de Pirâmide de Vidro",
+    "description": "Telhado cônico erguido sobre paredes para oferecer proteção contra vento e chuva. É bastante resistente por ser feito de vidro reforçado."
+  },
   "Glass_SlantedRoof": {
     "localized_name": "Telhado Inclinado de Vidro",
     "description": "Telhado inclinado erguido sobre o muro para oferecer proteção contra vento e chuva. É bastante resistente, pois é feito de vidro reforçado."
   },
+  "Glass_SlopedRoofCorner": {
+    "localized_name": "Telhado Inclinado Triangular de Vidro",
+    "description": "Telhado inclinado de quina erguido sobre paredes para oferecer proteção contra vento e chuva. É bastante resistente por ser feito de vidro reforçado."
+  },
+  "Glass_TriangleFoundation": {
+    "localized_name": "Fundação Triangular de Vidro",
+    "description": "Fundação triangular para erigir muros ou instalações. É bastante resistente por ser feita de vidro reforçado."
+  },
+  "Glass_TriangleRoof": {
+    "localized_name": "Telhado Triangular de Vidro",
+    "description": "Telhado triangular erguido sobre paredes para oferecer proteção contra vento e chuva. É bastante resistente por ser feito de vidro reforçado."
+  },
+  "Glass_TriangleStairsCorner": {
+    "localized_name": "Telhado de Quina de Vidro",
+    "description": "Telhado de quina erguido sobre paredes para oferecer proteção contra vento e chuva. É bastante resistente por ser feito de vidro reforçado."
+  },
   "Glass_TriangleWall": {
     "localized_name": "Parede Triangular de Vidro",
     "description": "Parede triangular erguida sobre a fundação. É bastante resistente, pois é feita de vidro reforçado."
+  },
+  "Glass_TriangleWallReverse": {
+    "localized_name": "Parede Triangular de Vidro (Invertida)",
+    "description": "Parede triangular (invertida) erguida sobre a fundação. É bastante resistente por ser feita de vidro reforçado."
+  },
+  "Glass_WallGate": {
+    "localized_name": "Passagem para Pals de Vidro",
+    "description": "Passagem para Pals erguida sobre a fundação para servir de entrada e saída. É bastante resistente por ser feita de vidro reforçado."
   },
   "Glass_WindowWall": {
     "localized_name": "Parede com Janela de Vidro",
@@ -491,9 +523,41 @@
     "localized_name": "Triturador de Gelo",
     "description": "Instalações para triturar Minério Metálico e convertê-lo em outros materiais. É preciso ter um Pal com aptidão para [Refrigeração] e alimentação de energia elétrica a fim de usá-las, mas permitem trabalhar com mais eficiência."
   },
+  "Iron_DiagonalWall": {
+    "localized_name": "Parede Diagonal de Metal",
+    "description": "Parede diagonal erguida sobre uma fundação triangular para impedir a entrada de invasores. É bastante resistente por ser feita de metal."
+  },
   "Iron_Fence": {
     "localized_name": "Cerca de Metal",
     "description": "Cerca erguida sobre a fundação ou telhado para evitar quedas. É bastante resistente, pois é feita de metal."
+  },
+  "Iron_PyramidRoof": {
+    "localized_name": "Telhado de Pirâmide de Metal",
+    "description": "Telhado cônico erguido sobre paredes para oferecer proteção contra vento e chuva. É bastante resistente por ser feito de metal."
+  },
+  "Iron_SlopedRoofCorner": {
+    "localized_name": "Telhado Inclinado Triangular de Metal",
+    "description": "Telhado inclinado de quina erguido sobre paredes para oferecer proteção contra vento e chuva. É bastante resistente por ser feito de metal."
+  },
+  "Iron_TriangleFoundation": {
+    "localized_name": "Fundação Triangular de Metal",
+    "description": "Fundação triangular para erigir muros ou instalações. É bastante resistente, pois é feita de metal."
+  },
+  "Iron_TriangleRoof": {
+    "localized_name": "Telhado Triangular de Metal",
+    "description": "Telhado triangular erguido sobre paredes para oferecer proteção contra vento e chuva. É bastante resistente por ser feito de metal."
+  },
+  "Iron_TriangleStairsCorner": {
+    "localized_name": "Telhado de Quina de Metal",
+    "description": "Telhado de quina erguido sobre paredes para oferecer proteção contra vento e chuva. É bastante resistente por ser feito de metal."
+  },
+  "Iron_TriangleWallReverse": {
+    "localized_name": "Parede Triangular de Metal (Invertida)",
+    "description": "Parede triangular (invertida) erguida sobre a fundação. É bastante resistente por ser feita de metal."
+  },
+  "Iron_WallGate": {
+    "localized_name": "Passagem para Pals de Metal",
+    "description": "Passagem para Pals erguida sobre a fundação para servir de entrada e saída. É bastante resistente por ser feita de metal."
   },
   "Irori": {
     "localized_name": "Lareira de chão",
@@ -531,6 +595,10 @@
     "localized_name": "Trepadeira Horizontal de Parede",
     "description": "Trepadeira horizontal para decoração. Pode ser colocada na parede."
   },
+  "JapaneseStyle_DiagonalWall": {
+    "localized_name": "Parede Diagonal Japonesa",
+    "description": "Parede diagonal erguida sobre uma fundação triangular para impedir a entrada de invasores. Permite criar construções exuberantes em estilo japonês."
+  },
   "JapaneseStyle_DoorWall_01": {
     "localized_name": "Parede com Porta Japonesa A",
     "description": "Porta erguida sobre a fundação para servir de entrada. Permite criar construções exuberantes em estilo japonês."
@@ -551,13 +619,45 @@
     "localized_name": "Pilar Japonês",
     "description": "Pilar para sustentar a construção. Permite criar construções exuberantes em estilo japonês."
   },
+  "JapaneseStyle_PyramidRoof": {
+    "localized_name": "Telhado de Pirâmide Japonês",
+    "description": "Telhado cônico erguido sobre paredes para oferecer proteção contra vento e chuva. Permite criar construções exuberantes em estilo japonês."
+  },
   "JapaneseStyle_SlantedRoof": {
     "localized_name": "Telhado Inclinado Japonês",
     "description": "Telhado inclinado erguido sobre o muro para oferecer proteção contra vento e chuva. Permite criar construções exuberantes em estilo japonês."
   },
+  "JapaneseStyle_SlopedRoofCorner": {
+    "localized_name": "Telhado Inclinado Triangular Japonês",
+    "description": "Telhado inclinado de quina erguido sobre o muro para oferecer proteção contra vento e chuva. Permite criar construções exuberantes em estilo japonês."
+  },
+  "JapaneseStyle_TriangleFoundation": {
+    "localized_name": "Fundação Triangular Japonesa",
+    "description": "Fundação triangular para erigir muros ou instalações. Permite criar construções exuberantes em estilo japonês."
+  },
+  "JapaneseStyle_TriangleRoof_01": {
+    "localized_name": "Telhado Triangular Japonês A",
+    "description": "Telhado triangular erguido sobre paredes para oferecer proteção contra vento e chuva. A parte superior é coberta de tatamis. Permite criar construções exuberantes em estilo japonês."
+  },
+  "JapaneseStyle_TriangleRoof_02": {
+    "localized_name": "Telhado Triangular Japonês B",
+    "description": "Telhado triangular erguido sobre paredes para oferecer proteção contra vento e chuva. A parte superior é coberta de telhas. Permite criar construções exuberantes em estilo japonês."
+  },
+  "JapaneseStyle_TriangleStairsCorner_01": {
+    "localized_name": "Telhado de Quina Japonês",
+    "description": "Telhado de quina erguido sobre paredes para oferecer proteção contra vento e chuva. Permite criar construções exuberantes em estilo japonês."
+  },
   "JapaneseStyle_TriangleWall": {
     "localized_name": "Parede Triangular Japonesa",
     "description": "Parede triangular erguida sobre a fundação. Permite criar construções exuberantes em estilo japonês."
+  },
+  "JapaneseStyle_TriangleWallReverse": {
+    "localized_name": "Parede Triangular Japonesa (Invertida)",
+    "description": "Parede triangular (invertida) erguida sobre a fundação. Permite criar construções exuberantes em estilo japonês."
+  },
+  "JapaneseStyle_WallGate": {
+    "localized_name": "Passagem para Pals Japonesa",
+    "description": "Passagem para Pals erguida sobre a fundação para servir de entrada e saída. Permite criar construções exuberantes em estilo japonês."
   },
   "JapaneseStyle_WindowWall": {
     "localized_name": "Parede com Janela Japonesa",
@@ -732,7 +832,7 @@
     "description": "Muro erguido sobre a fundação para impedir a entrada de invasores. É bastante resistente, pois é feito de metal."
   },
   "MiningTool": {
-    "localized_name": "Picareta e Capacete",
+    "localized_name": "Vagoneta de Garimpo",
     "description": "Quando isto é colocado na base, aumenta a velocidade de trabalho de garimpo. Não há efeito adicional por se colocar mais de um."
   },
   "Mirror01_Stone": {
@@ -776,7 +876,7 @@
     "description": "Quando isto é colocado na base, aumenta a velocidade de trabalho de geração de fogo. Não há efeito adicional por se colocar mais de um."
   },
   "OperatingTable": {
-    "localized_name": "Mesa cirúrgica Pal",
+    "localized_name": "Mesa de Operação de Pals",
     "description": "Recurso que possibilita realizar cirurgias nos Pals para alterar seu sexo ou habilidades passivas."
   },
   "PalBooth": {
@@ -887,6 +987,10 @@
     "localized_name": "Escrivaninha de Laboratório",
     "description": "Escrivaninha ao estilo de móveis de laboratório para decoração."
   },
+  "SF_DiagonalWall": {
+    "localized_name": "Parede Diagonal Despojada",
+    "description": "Parede diagonal erguida sobre uma fundação triangular para impedir a entrada de invasores. Permite criar construções neofuturistas e despojadas."
+  },
   "SF_DoorWall": {
     "localized_name": "Parede com Porta Despojada",
     "description": "Porta erguida sobre a fundação para servir de entrada. Permite criar construções neofuturistas e despojadas."
@@ -895,13 +999,41 @@
     "localized_name": "Cerca Despojada",
     "description": "Cerca erguida sobre a fundação ou telhado para evitar quedas. Permite criar construções neofuturistas e despojadas."
   },
+  "SF_PyramidRoof": {
+    "localized_name": "Telhado de Pirâmide Despojado",
+    "description": "Telhado cônico erguido sobre paredes para oferecer proteção contra vento e chuva. Permite criar construções neofuturistas e despojadas."
+  },
   "SF_SlantedRoof": {
     "localized_name": "Telhado Inclinado Despojado",
     "description": "Telhado inclinado erguido sobre o muro para oferecer proteção contra vento e chuva. Permite criar construções neofuturistas e despojadas."
   },
+  "SF_SlopedRoofCorner": {
+    "localized_name": "Telhado Inclinado Triangular de Quina Despojado",
+    "description": "Telhado inclinado de quina erguido sobre paredes para oferecer proteção contra vento e chuva. Permite criar construções neofuturistas e despojadas."
+  },
+  "SF_TriangleFoundation": {
+    "localized_name": "Fundação Triangular Despojada",
+    "description": "Fundação triangular para erigir muros ou instalações. Permite criar construções neofuturistas e despojadas."
+  },
+  "SF_TriangleRoof": {
+    "localized_name": "Telhado Triangular Despojado",
+    "description": "Telhado triangular erguido sobre paredes para oferecer proteção contra vento e chuva. Permite criar construções neofuturistas e despojadas."
+  },
+  "SF_TriangleStairsCorner": {
+    "localized_name": "Telhado de Quina Despojado",
+    "description": "Telhado de quina erguido sobre paredes para oferecer proteção contra vento e chuva. Permite criar construções neofuturistas e despojadas."
+  },
   "SF_TriangleWall": {
     "localized_name": "Parede Triangular Despojada",
     "description": "Parede triangular erguida sobre a fundação. Permite criar construções neofuturistas e despojadas."
+  },
+  "SF_TriangleWallReverse": {
+    "localized_name": "Parede Triangular Despojada (Invertida)",
+    "description": "Parede triangular (invertida) erguida sobre a fundação. Permite criar construções neofuturistas e despojadas."
+  },
+  "SF_WallGate": {
+    "localized_name": "Passagem para Pals Despojada",
+    "description": "Passagem para Pals erguida sobre a fundação para servir de entrada e saída. Permite criar construções neofuturistas e despojadas."
   },
   "SF_WindowWall": {
     "localized_name": "Parede com Janela Despojada",
@@ -1095,6 +1227,10 @@
     "localized_name": "Pedreira",
     "description": "Recurso para produzir Pedra. O trabalho de escavar Pedra é árduo e requer muita energia. Confie-o a um Pal com habilidade para o garimpo."
   },
+  "Stone_DiagonalWall": {
+    "localized_name": "Parede Diagonal de Pedra",
+    "description": "Parede diagonal erguida sobre uma fundação triangular para impedir a entrada de invasores. É um tanto resistente por ser feita de pedra."
+  },
   "Stone_DoorWall": {
     "localized_name": "Porta de Pedra",
     "description": "Porta erguida sobre a fundação para servir de entrada. É um tanto resistente, pois é feita de pedra."
@@ -1107,13 +1243,41 @@
     "localized_name": "Portão de Pedra",
     "description": "Portão que permite a passagem de Pals maiores. É um tanto resistente, pois é feito de pedra."
   },
+  "Stone_PyramidRoof": {
+    "localized_name": "Telhado de Pirâmide de Pedra",
+    "description": "Telhado cônico erguido sobre o muro para oferecer proteção contra vento e chuva. É um tanto resistente por ser feito de pedra."
+  },
   "Stone_SlantedRoof": {
     "localized_name": "Telhado Inclinado de Pedra",
     "description": "Telhado inclinado erguido sobre paredes para oferecer proteção contra vento e chuva. É um tanto resistente, pois é feito de pedra."
   },
+  "Stone_SlopedRoofCorner": {
+    "localized_name": "Telhado Inclinado Triangular de Pedra",
+    "description": "Telhado inclinado de quina erguido sobre paredes para oferecer proteção contra vento e chuva. É um tanto resistente por ser feito de pedra."
+  },
+  "Stone_TriangleFoundation": {
+    "localized_name": "Fundação Triangular de Pedra",
+    "description": "Fundação triangular para erigir muros ou instalações. É um tanto resistente por ser feita de pedra."
+  },
+  "Stone_TriangleRoof": {
+    "localized_name": "Telhado Triangular de Pedra",
+    "description": "Telhado triangular erguido sobre paredes para oferecer proteção contra vento e chuva. É um tanto resistente por ser feito de pedra."
+  },
+  "Stone_TriangleStairsCorner": {
+    "localized_name": "Telhado de Quina de Pedra",
+    "description": "Telhado de quina erguido sobre paredes para oferecer proteção contra vento e chuva. É um tanto resistente por ser feito de pedra."
+  },
   "Stone_TriangleWall": {
     "localized_name": "Parede Triangular de Pedra",
     "description": "Parede triangular erguida sobre a fundação. É um tanto resistente, pois é feita de pedra."
+  },
+  "Stone_TriangleWallReverse": {
+    "localized_name": "Parede Triangular de Pedra (Invertida)",
+    "description": "Parede triangular (invertida) erguida sobre a fundação. É um tanto resistente por ser feita de pedra."
+  },
+  "Stone_WallGate": {
+    "localized_name": "Passagem para Pals de Pedra",
+    "description": "Passagem para Pals erguida sobre a fundação para servir de entrada e saída. É um tanto resistente por ser feita de pedra."
   },
   "Stone_WindowWall": {
     "localized_name": "Parede com Janela de Pedra",
@@ -1367,6 +1531,10 @@
     "localized_name": "Parede Triangular de Madeira",
     "description": "Parede triangular erguida sobre a fundação. É frágil por ser feita de madeira."
   },
+  "Wood_TriangleWallReverse": {
+    "localized_name": "Parede Triangular de Madeira (Invertida)",
+    "description": "Parede triangular (invertida) erguida sobre a fundação. É frágil por ser feita de madeira."
+  },
   "Wood_WindowWall": {
     "localized_name": "Parede com Janela de Madeira",
     "description": "Parede com janela erguida sobre a fundação para impedir a entrada de invasores. É frágil por ser feita de madeira."
@@ -1375,9 +1543,37 @@
     "localized_name": "Barricada de Madeira",
     "description": "Barricada de madeira para decoração."
   },
+  "Wooden_DiagonalWall": {
+    "localized_name": "Parede Diagonal de Madeira",
+    "description": "Parede diagonal erguida sobre uma fundação triangular para impedir a entrada de invasores. É frágil por ser feita de madeira."
+  },
   "Wooden_DoorWall": {
     "localized_name": "Porta de Madeira",
     "description": "Porta erguida sobre a fundação para servir de entrada. É frágil por ser feita de madeira."
+  },
+  "Wooden_PyramidRoof": {
+    "localized_name": "Telhado de Pirâmide de Madeira",
+    "description": "Telhado cônico erguido sobre paredes para oferecer proteção contra vento e chuva. É frágil por ser feito de madeira."
+  },
+  "Wooden_SlopedRoofCorner": {
+    "localized_name": "Telhado Inclinado Triangular de Madeira",
+    "description": "Telhado inclinado de quina erguido sobre paredes para oferecer proteção contra vento e chuva. É frágil por ser feito de madeira."
+  },
+  "Wooden_TriangleFoundation": {
+    "localized_name": "Fundação Triangular de Madeira",
+    "description": "Fundação triangular para erigir muros ou instalações. É frágil por ser feita de madeira."
+  },
+  "Wooden_TriangleRoof": {
+    "localized_name": "Telhado Triangular de Madeira",
+    "description": "Telhado triangular erguido sobre paredes para oferecer proteção contra vento e chuva. É frágil por ser feito de madeira."
+  },
+  "Wooden_TriangleStairsCorner": {
+    "localized_name": "Telhado de Quina de Madeira",
+    "description": "Telhado de quina erguido sobre paredes para oferecer proteção contra vento e chuva. É frágil por ser feito de madeira."
+  },
+  "Wooden_WallGate": {
+    "localized_name": "Passagem para Pals de Madeira",
+    "description": "Passagem para Pals erguida sobre a fundação para servir de entrada e saída. É frágil por ser feita de madeira."
   },
   "Wooden_foundation": {
     "localized_name": "Fundação de Madeira",
@@ -1410,6 +1606,10 @@
   "WorkSpeedIncrease1": {
     "localized_name": "Emissor de Ondas Beta",
     "description": "Dispositivo para emitir ondas beta e fazer com que os Pal se dediquem mais às suas atividades. Aumenta a velocidade de trabalho de Pals na base. Ter mais de um deste dispositivo não surte nenhum efeito adicional."
+  },
+  "YakushimaBoss002_Relic": {
+    "localized_name": "Estátua do Senhor da Lua",
+    "description": "[Colaboração com Terraria] Estátua do Senhor da Lua que brilha com a cor do ouro. Prova de alguém poderoso que superou uma batalha tenebrosa."
   },
   "Zabuton": {
     "localized_name": "Almofada",

@@ -6113,6 +6113,35 @@
     "add_accessory": false,
     "disabled": false
   },
+  "OctaviaArmorVampire": {
+    "rank": 4,
+    "effects": [
+      {
+        "type": "Nocturnal",
+        "value": 0.0,
+        "target": "ToSelf"
+      },
+      {
+        "type": "LifeSteal",
+        "value": 1.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
   "PAL_ALLAttack_down1": {
     "rank": -1,
     "effects": [
@@ -6862,6 +6891,35 @@
     "invoke_always": true,
     "invoke_in_base": false,
     "add_pal": true,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "Salvation": {
+    "rank": 4,
+    "effects": [
+      {
+        "type": "ElementBoost_Normal",
+        "value": 30.0,
+        "target": "ToSelf"
+      },
+      {
+        "type": "ElementBoost_Leaf",
+        "value": 30.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
     "add_rare_pal": false,
     "add_shot_weapon": false,
     "add_melee_weapon": false,

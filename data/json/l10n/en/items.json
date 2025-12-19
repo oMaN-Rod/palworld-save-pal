@@ -263,6 +263,10 @@
     "localized_name": "Kinship Peach",
     "description": "A rarely seen magical fruit. It is said that a Pal who eats it will open its heart to humans. Choose carefully which Pal you give it to."
   },
+  "AffectionFruit_02": {
+    "localized_name": "Little Kinship Peach",
+    "description": "A small fruit filled with kindness. It is said that a Pal who eats it will open its heart to humans. Choose carefully which Pal you give it to."
+  },
   "AncientParts2": {
     "localized_name": "Ancient Civilization Core",
     "description": "Core from technology that was lost long ago. Nearly impossible to find on the Palpagos Islands, it contains a wealth of forgotten knowledge."
@@ -485,7 +489,7 @@
   },
   "Blueprint_AssaultRifle_Default5": {
     "localized_name": "Assault Rifle Schematic 4",
-    "description": "Unlocks recipe for AssaultRifle Default1 (Legendary). Can be crafted at WeaponFactory Dirty 02."
+    "description": "When in inventory, unlocks recipe for AssaultRifle Default1 (Legendary). Can be crafted at WeaponFactory Dirty 02."
   },
   "Blueprint_BowGun_2": {
     "localized_name": "Crossbow Schematic 1",
@@ -537,7 +541,7 @@
   },
   "Blueprint_CandleStand": {
     "localized_name": "Majestic Candlestick Schematic",
-    "description": "When in inventory or stored in a base, allows you to build Majestic Candlestick."
+    "description": "When in inventory or stored in a base, allows you to build <MapObjectName id=|CandleStand|/>."
   },
   "Blueprint_ChargeLaserRifle_2": {
     "localized_name": "Charge Rifle Schematic 1",
@@ -621,11 +625,11 @@
   },
   "Blueprint_ConservationGroupBannerA": {
     "localized_name": "Free Pal Alliance Flag Schematic",
-    "description": "When in inventory or stored in a base, allows you to build Free Pal Alliance Flag."
+    "description": "When in inventory or stored in a base, allows you to build <MapObjectName id=|ConservationGroupBannerA|/>."
   },
   "Blueprint_ConservationGroupBannerB": {
     "localized_name": "Free Pal Alliance Banner Schematic",
-    "description": "When in inventory or stored in a base, allows you to build Free Pal Alliance Horizontal Banner."
+    "description": "When in inventory or stored in a base, allows you to build <MapObjectName id=|ConservationGroupBannerB|/>."
   },
   "Blueprint_CopperArmorCold_2": {
     "localized_name": "Cold Resistant Metal Armor Schematic 1",
@@ -741,7 +745,7 @@
   },
   "Blueprint_FireStand": {
     "localized_name": "Ceremonial Candlestick Schematic",
-    "description": "When in inventory or stored in a base, allows you to build Ceremonial Candlestick."
+    "description": "When in inventory or stored in a base, allows you to build <MapObjectName id=|FireStand|/>."
   },
   "Blueprint_FishingRod_01_2": {
     "localized_name": "Beginner Fishing Rod (Gumoss) Schematic",
@@ -869,7 +873,7 @@
   },
   "Blueprint_GuardianDogStatue": {
     "localized_name": "Yakumo Statue Schematic",
-    "description": "When in inventory or stored in a base, allows you to build Yakumo Statue."
+    "description": "When in inventory or stored in a base, allows you to build <MapObjectName id=|GuardianDogStatue|/>."
   },
   "Blueprint_GuidedMissileLauncher_2": {
     "localized_name": "Guided Missile Launcher Schematic 1",
@@ -1345,7 +1349,7 @@
   },
   "Blueprint_Hunter_GangFlag": {
     "localized_name": "Rayne Syndicate Flag Schematic",
-    "description": "When in inventory or stored in a base, allows you to build Hunter GangFlag."
+    "description": "When in inventory or stored in a base, allows you to build <MapObjectName id=|Hunter GangFlag|/>."
   },
   "Blueprint_IronArmorCold_2": {
     "localized_name": "Cold Resistant Refined Metal Armor Schematic 1",
@@ -1413,7 +1417,7 @@
   },
   "Blueprint_LanternTop": {
     "localized_name": "Paper Lantern Schematic",
-    "description": "When in inventory or stored in a base, allows you to build Paper Lantern."
+    "description": "When in inventory or stored in a base, allows you to build <MapObjectName id=|LanternTop|/>."
   },
   "Blueprint_LaserGatlingGun_2": {
     "localized_name": "Laser Gatling Gun Schematic 1",
@@ -1469,7 +1473,7 @@
   },
   "Blueprint_LilyQueenStatue": {
     "localized_name": "Lyleen Statue Schematic",
-    "description": "When in inventory or stored in a base, allows you to build Lyleen Statue."
+    "description": "When in inventory or stored in a base, allows you to build <MapObjectName id=|LilyQueenStatue|/>."
   },
   "Blueprint_MakeshiftAssaultRifle_2": {
     "localized_name": "Makeshift Assault Rifle Schematic 1",
@@ -1570,6 +1574,46 @@
   "Blueprint_Musket_5": {
     "localized_name": "Musket Schematic 4",
     "description": "When in inventory, unlocks recipe for Musket (Legendary). Can be crafted at WeaponFactory Dirty 01."
+  },
+  "Blueprint_Octavia001_Armor_5": {
+    "localized_name": "V1 Armor Schematic 4",
+    "description": "[ULTRAKILL Collab] When in inventory, unlocks recipe for Octavia001 Armor 5 (Legendary). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_Octavia002_Armor_5": {
+    "localized_name": "V2 Armor Schematic 4",
+    "description": "[ULTRAKILL Collab] When in inventory, unlocks recipe for Octavia002 Armor 5 (Legendary). Can be crafted at Factory Hard 03."
+  },
+  "Blueprint_OctaviaRevolver_2": {
+    "localized_name": "Marksman Revolver Schematic 1",
+    "description": "[ULTRAKILL Collab] When in inventory, unlocks recipe for Marksman Revolver (Uncommon). Can be crafted at WeaponFactory Dirty 02."
+  },
+  "Blueprint_OctaviaRevolver_3": {
+    "localized_name": "Marksman Revolver Schematic 2",
+    "description": "[ULTRAKILL Collab] When in inventory, unlocks recipe for Marksman Revolver (Rare). Can be crafted at WeaponFactory Dirty 02."
+  },
+  "Blueprint_OctaviaRevolver_4": {
+    "localized_name": "Marksman Revolver Schematic 3",
+    "description": "[ULTRAKILL Collab] When in inventory, unlocks recipe for Marksman Revolver (Epic). Can be crafted at WeaponFactory Dirty 02."
+  },
+  "Blueprint_OctaviaRevolver_5": {
+    "localized_name": "Marksman Revolver Schematic 4",
+    "description": "[ULTRAKILL Collab] When in inventory, unlocks recipe for Marksman Revolver (Legendary). Can be crafted at WeaponFactory Dirty 02."
+  },
+  "Blueprint_OctaviaShotgun_2": {
+    "localized_name": "Core Eject Shotgun Schematic 1",
+    "description": "[ULTRAKILL Collab] When in inventory, unlocks recipe for Core Eject Shotgun (Uncommon). Can be crafted at WeaponFactory Dirty 03."
+  },
+  "Blueprint_OctaviaShotgun_3": {
+    "localized_name": "Core Eject Shotgun Schematic 2",
+    "description": "[ULTRAKILL Collab] When in inventory, unlocks recipe for Core Eject Shotgun (Rare). Can be crafted at WeaponFactory Dirty 03."
+  },
+  "Blueprint_OctaviaShotgun_4": {
+    "localized_name": "Core Eject Shotgun Schematic 3",
+    "description": "[ULTRAKILL Collab] When in inventory, unlocks recipe for Core Eject Shotgun (Epic). Can be crafted at WeaponFactory Dirty 03."
+  },
+  "Blueprint_OctaviaShotgun_5": {
+    "localized_name": "Core Eject Shotgun Schematic 4",
+    "description": "[ULTRAKILL Collab] When in inventory, unlocks recipe for Core Eject Shotgun (Legendary). Can be crafted at WeaponFactory Dirty 03."
   },
   "Blueprint_OldRevolver_2": {
     "localized_name": "Old Revolver Schematic 1",
@@ -1801,11 +1845,11 @@
   },
   "Blueprint_SF_Chair": {
     "localized_name": "Laboratory Chair Schematic",
-    "description": "When in inventory or stored in a base, allows you to build SF Chair."
+    "description": "When in inventory or stored in a base, allows you to build <MapObjectName id=|SF Chair|/>."
   },
   "Blueprint_SF_Desk": {
     "localized_name": "Laboratory Desk Schematic",
-    "description": "When in inventory or stored in a base, allows you to build SF Desk."
+    "description": "When in inventory or stored in a base, allows you to build <MapObjectName id=|SF Desk|/>."
   },
   "Blueprint_SemiAutoRifle_2": {
     "localized_name": "Semi-Auto Rifle Schematic 1",
@@ -1840,8 +1884,8 @@
     "description": "When in inventory, unlocks recipe for Semi-Auto Shotgun (Legendary). Can be crafted at WeaponFactory Dirty 03."
   },
   "Blueprint_Shrine_Lantern": {
-    "localized_name": "Festival Lantern Schematic",
-    "description": "When in inventory or stored in a base, allows you to build Shrine Lantern."
+    "localized_name": "Red Wooden Lantern Schematic",
+    "description": "When in inventory or stored in a base, allows you to build <MapObjectName id=|Shrine Lantern|/>."
   },
   "Blueprint_SingleShotRifle_2": {
     "localized_name": "Single-Shot Rifle Schematic 1",
@@ -1941,7 +1985,7 @@
   },
   "Blueprint_WallTorch02": {
     "localized_name": "Majestic Wall Torch Schematic",
-    "description": "When in inventory or stored in a base, allows you to build Majestic Wall Torch."
+    "description": "When in inventory or stored in a base, allows you to build <MapObjectName id=|WallTorch02|/>."
   },
   "Blueprint_WeakerBow_2": {
     "localized_name": "Old Bow Schematic 1",
@@ -1961,11 +2005,11 @@
   },
   "Blueprint_Wire_Fence": {
     "localized_name": "Wire Fence Schematic",
-    "description": "When in inventory or stored in a base, allows you to build Wire Fence."
+    "description": "When in inventory or stored in a base, allows you to build <MapObjectName id=|Wire Fence|/>."
   },
   "Blueprint_WoodenBarricade": {
     "localized_name": "Wooden Barricade Schematic",
-    "description": "When in inventory or stored in a base, allows you to build Wooden Barricade."
+    "description": "When in inventory or stored in a base, allows you to build <MapObjectName id=|WoodenBarricade|/>."
   },
   "Blueprint_YakushimaArmor001": {
     "localized_name": "Hallowed Plate Mail Schematic",
@@ -2046,6 +2090,10 @@
   "Blueprint_YakushimaBlade004_5": {
     "localized_name": "Excalibur Schematic 4",
     "description": "[Tides of Terraria] When in inventory, unlocks recipe for Excalibur (Legendary). Can be crafted at WeaponFactory Dirty 02."
+  },
+  "Blueprint_YakushimaBoss002_Relic": {
+    "localized_name": "Moon Lord Statue Schematic",
+    "description": "[Tides of Terraria] When in inventory or stored in a base, allows you to build <MapObjectName id=|YakushimaBoss002 Relic|/>."
   },
   "Blueprint_YakushimaGun001": {
     "localized_name": "Vortex Beater Schematic",
@@ -2166,6 +2214,10 @@
   "Blueprint_YakushimaLantern001_5": {
     "localized_name": "Nightglow Schematic 4",
     "description": "[Tides of Terraria] When in inventory, unlocks recipe for Nightglow (Legendary). Can be crafted at WeaponFactory Dirty 02."
+  },
+  "Blueprint_Zoe_Halloweenskin_1": {
+    "localized_name": "Zoe's Halloween Costume Schematic",
+    "description": "A memo of Zoe's mutterings. Craft it at a workbench and deliver the finished piece to her."
   },
   "Bone": {
     "localized_name": "Bone",
@@ -2409,7 +2461,7 @@
   },
   "BossDefeatReward_ThunderBird": {
     "localized_name": "Beakon Bounty Token",
-    "description": "Proof of defeating [Beakon, Wings of Thunder]. Simply possessing it permanently increases the stats of the Pals in your team."
+    "description": "Proof of defeating [Beakon, Wings of Thunderbolt]. Simply possessing it permanently increases the stats of the Pals in your team."
   },
   "BossDefeatReward_Umihebi": {
     "localized_name": "Jormuntide Bounty Token",
@@ -3033,7 +3085,7 @@
   },
   "FishingBait_2": {
     "localized_name": "High Quality Bait",
-    "description": "Bait that lures in Pals. Improved to make them bite more readily."
+    "description": "Bait that lures in Pals. Improved from FishingBait 1 to increase the chances of Pals biting the bait."
   },
   "FishingBait_2_A": {
     "localized_name": "Lucky Bait",
@@ -3479,6 +3531,10 @@
     "localized_name": "Handgun Ammo",
     "description": "Ammo for HandGun Default and other similar weapons."
   },
+  "HandgunShield": {
+    "localized_name": "Ballistic Shield",
+    "description": "Ballistic Shield"
+  },
   "Head001": {
     "localized_name": "Monarch's Crown",
     "description": null
@@ -3820,7 +3876,7 @@
     "description": null
   },
   "HeadEquip001_purple": {
-    "localized_name": "Witch's Crown (Ultra)",
+    "localized_name": "Witch's Crown",
     "description": "Imbued with the ominous power of Bellanoir Libero (Ultra). Extremely difficult to obtain."
   },
   "HeadEquip023": {
@@ -3949,11 +4005,19 @@
   },
   "HeadEquip041": {
     "localized_name": "Horns of Supremacy",
-    "description": "Bursts with the ominous power of Blazamut Ryu (Ultra). To possess this is exceedingly rare."
+    "description": "Imbued with the ominous power of Blazamut Ryu (Ultra). Extremely difficult to obtain."
   },
   "HeadEquip044": {
     "localized_name": "Xenolord's head",
     "description": "A headgear designed to resemble a Xenolord ."
+  },
+  "HeadEquip045": {
+    "localized_name": "Depresso Helmet",
+    "description": "A costume headpiece modeled after Depresso. Slightly decreases incoming Dark damage."
+  },
+  "HeadEquip046": {
+    "localized_name": "Crown of Salvation",
+    "description": "Imbued with the ominous power of Hartalis (Ultra). Extremely difficult to obtain."
   },
   "Herbs": {
     "localized_name": "Low Grade Medical Supplies",
@@ -4555,6 +4619,62 @@
     "localized_name": "Night Vision Goggles",
     "description": "Night Vision Goggles"
   },
+  "Octavia001_Armor": {
+    "localized_name": "V1 Armor",
+    "description": "[ULTRAKILL Collab] Armor modeled after the Final War machine built in a distant land. It features a self-repair system that activates when dealing damage."
+  },
+  "Octavia001_Armor_5": {
+    "localized_name": "V1 Armor",
+    "description": "[ULTRAKILL Collab] Armor modeled after the Final War machine built in a distant land. It features a self-repair system that activates when dealing damage."
+  },
+  "Octavia002_Armor": {
+    "localized_name": "V2 Armor",
+    "description": "[ULTRAKILL Collab] Armor modeled after the New Peace machine built in a distant land. Its self-repair system was removed in favor of sturdier plating."
+  },
+  "Octavia002_Armor_5": {
+    "localized_name": "V2 Armor",
+    "description": "[ULTRAKILL Collab] Armor modeled after the New Peace machine built in a distant land. Its self-repair system was removed in favor of sturdier plating."
+  },
+  "OctaviaRevolver": {
+    "localized_name": "Marksman Revolver",
+    "description": "[ULTRAKILL Collab] An electrically powered revolver capable of firing endlessly. When equipped, Pal Sphere throws are replaced with Coin Toss. Hitting a coin with the Marksman Revolver causes the bullet to ricochet toward enemies."
+  },
+  "OctaviaRevolver_2": {
+    "localized_name": "Marksman Revolver",
+    "description": "[ULTRAKILL Collab] An electrically powered revolver capable of firing endlessly. When equipped, Pal Sphere throws are replaced with Coin Toss. Hitting a coin with the Marksman Revolver causes the bullet to ricochet toward enemies."
+  },
+  "OctaviaRevolver_3": {
+    "localized_name": "Marksman Revolver",
+    "description": "[ULTRAKILL Collab] An electrically powered revolver capable of firing endlessly. When equipped, Pal Sphere throws are replaced with Coin Toss. Hitting a coin with the Marksman Revolver causes the bullet to ricochet toward enemies."
+  },
+  "OctaviaRevolver_4": {
+    "localized_name": "Marksman Revolver",
+    "description": "[ULTRAKILL Collab] An electrically powered revolver capable of firing endlessly. When equipped, Pal Sphere throws are replaced with Coin Toss. Hitting a coin with the Marksman Revolver causes the bullet to ricochet toward enemies."
+  },
+  "OctaviaRevolver_5": {
+    "localized_name": "Marksman Revolver",
+    "description": "[ULTRAKILL Collab] An electrically powered revolver capable of firing endlessly. When equipped, Pal Sphere throws are replaced with Coin Toss. Hitting a coin with the Marksman Revolver causes the bullet to ricochet toward enemies."
+  },
+  "OctaviaShotgun": {
+    "localized_name": "Core Eject Shotgun",
+    "description": "[ULTRAKILL Collab] A shotgun powered by heat, capable of firing endlessly. When equipped, throwing a Pal Sphere is replaced with Core Eject. Hold to charge and extend its range. Cores hit by shots from Marksman Revolver will explode."
+  },
+  "OctaviaShotgun_2": {
+    "localized_name": "Core Eject Shotgun",
+    "description": "[ULTRAKILL Collab] A shotgun powered by heat, capable of firing endlessly. When equipped, throwing a Pal Sphere is replaced with Core Eject. Hold to charge and extend its range. Cores hit by shots from Marksman Revolver will explode."
+  },
+  "OctaviaShotgun_3": {
+    "localized_name": "Core Eject Shotgun",
+    "description": "[ULTRAKILL Collab] A shotgun powered by heat, capable of firing endlessly. When equipped, throwing a Pal Sphere is replaced with Core Eject. Hold to charge and extend its range. Cores hit by shots from Marksman Revolver will explode."
+  },
+  "OctaviaShotgun_4": {
+    "localized_name": "Core Eject Shotgun",
+    "description": "[ULTRAKILL Collab] A shotgun powered by heat, capable of firing endlessly. When equipped, throwing a Pal Sphere is replaced with Core Eject. Hold to charge and extend its range. Cores hit by shots from Marksman Revolver will explode."
+  },
+  "OctaviaShotgun_5": {
+    "localized_name": "Core Eject Shotgun",
+    "description": "[ULTRAKILL Collab] A shotgun powered by heat, capable of firing endlessly. When equipped, throwing a Pal Sphere is replaced with Core Eject. Hold to charge and extend its range. Cores hit by shots from Marksman Revolver will explode."
+  },
   "OctopusGirl_Takoyaki": {
     "localized_name": "Fried Gloopie Balls",
     "description": "Meat OctopusGirl encased in a Flour dough and grilled into round bites. Eating it will slightly increase EXP gain for a period of time."
@@ -4817,11 +4937,11 @@
   },
   "PalEgg_Dragon_03": {
     "localized_name": "Large Dragon Egg",
-    "description": "An PalEgg Dragon 03. A strange movement pulses within. Place in a Egg Incubator to incubate it."
+    "description": "A PalEgg Dragon 03. A strange movement pulses within. Place in a Egg Incubator to incubate it."
   },
   "PalEgg_Dragon_04": {
     "localized_name": "Large Dragon Egg",
-    "description": "An PalEgg Dragon 04. A strange movement pulses within. Place in a Egg Incubator to incubate it."
+    "description": "A PalEgg Dragon 04. A strange movement pulses within. Place in a Egg Incubator to incubate it."
   },
   "PalEgg_Dragon_05": {
     "localized_name": "Huge Dragon Egg",
@@ -4829,23 +4949,23 @@
   },
   "PalEgg_Earth_01": {
     "localized_name": "Rocky Egg",
-    "description": "An PalEgg Earth 01. Something calm stirs within. Place in a Egg Incubator to incubate it."
+    "description": "A PalEgg Earth 01. Something calm stirs within. Place in a Egg Incubator to incubate it."
   },
   "PalEgg_Earth_02": {
     "localized_name": "Rocky Egg",
-    "description": "An PalEgg Earth 02. Something calm stirs within. Place in a Egg Incubator to incubate it."
+    "description": "A PalEgg Earth 02. Something calm stirs within. Place in a Egg Incubator to incubate it."
   },
   "PalEgg_Earth_03": {
     "localized_name": "Large Rocky Egg",
-    "description": "An PalEgg Earth 03. A dignified rumble drums within. Place in a Egg Incubator to incubate it."
+    "description": "A PalEgg Earth 03. A dignified rumble drums within. Place in a Egg Incubator to incubate it."
   },
   "PalEgg_Earth_04": {
     "localized_name": "Large Rocky Egg",
-    "description": "An PalEgg Earth 04. A dignified rumble drums within. Place in a Egg Incubator to incubate it."
+    "description": "A PalEgg Earth 04. A dignified rumble drums within. Place in a Egg Incubator to incubate it."
   },
   "PalEgg_Earth_05": {
     "localized_name": "Huge Rocky Egg",
-    "description": "An PalEgg Earth 05. An earthly spirit resounds within—as if a monster is about to be born. Place in a Egg Incubator to incubate it."
+    "description": "A PalEgg Earth 05. An earthly spirit resounds within—as if a monster is about to be born. Place in a Egg Incubator to incubate it."
   },
   "PalEgg_Electricity_01": {
     "localized_name": "Electric Egg",
@@ -4857,15 +4977,15 @@
   },
   "PalEgg_Electricity_03": {
     "localized_name": "Large Electric Egg",
-    "description": "An PalEgg Electricity 03. A pulsing energy stirs within. Place in a Egg Incubator to incubate it."
+    "description": "A PalEgg Electricity 03. A pulsing energy stirs within. Place in a Egg Incubator to incubate it."
   },
   "PalEgg_Electricity_04": {
     "localized_name": "Large Electric Egg",
-    "description": "An PalEgg Electricity 04. A pulsing energy stirs within. Place in a Egg Incubator to incubate it."
+    "description": "A PalEgg Electricity 04. A pulsing energy stirs within. Place in a Egg Incubator to incubate it."
   },
   "PalEgg_Electricity_05": {
     "localized_name": "Huge Electric Egg",
-    "description": "An PalEgg Electricity 05. A raging spirit grows within—as if a monster is about to be born. Place in a Egg Incubator to incubate it."
+    "description": "A PalEgg Electricity 05. A raging spirit grows within—as if a monster is about to be born. Place in a Egg Incubator to incubate it."
   },
   "PalEgg_Fire_01": {
     "localized_name": "Scorching Egg",
@@ -4889,23 +5009,23 @@
   },
   "PalEgg_Ice_01": {
     "localized_name": "Frozen Egg",
-    "description": "An PalEgg Ice 01. Something cold stirs within. Place in a Egg Incubator to incubate it."
+    "description": "A PalEgg Ice 01. Something cold stirs within. Place in a Egg Incubator to incubate it."
   },
   "PalEgg_Ice_02": {
     "localized_name": "Frozen Egg",
-    "description": "An PalEgg Ice 02. Something cold stirs within. Place in a Egg Incubator to incubate it."
+    "description": "A PalEgg Ice 02. Something cold stirs within. Place in a Egg Incubator to incubate it."
   },
   "PalEgg_Ice_03": {
     "localized_name": "Large Frozen Egg",
-    "description": "An PalEgg Ice 03. An icy pulse pounds within. Place in a Egg Incubator to incubate it."
+    "description": "A PalEgg Ice 03. An icy pulse pounds within. Place in a Egg Incubator to incubate it."
   },
   "PalEgg_Ice_04": {
     "localized_name": "Large Frozen Egg",
-    "description": "An PalEgg Ice 04. An icy pulse pounds within. Place in a Egg Incubator to incubate it."
+    "description": "A PalEgg Ice 04. An icy pulse pounds within. Place in a Egg Incubator to incubate it."
   },
   "PalEgg_Ice_05": {
     "localized_name": "Huge Frozen Egg",
-    "description": "An PalEgg Ice 05. A frigid spirit stirs within—as if a monster is about to be born. Place in a Egg Incubator to incubate it."
+    "description": "A PalEgg Ice 05. A frigid spirit stirs within—as if a monster is about to be born. Place in a Egg Incubator to incubate it."
   },
   "PalEgg_Leaf_01": {
     "localized_name": "Verdant Egg",
@@ -5041,111 +5161,151 @@
   },
   "PalPassiveSkillChange_CoolTimeReduction_Up_1": {
     "localized_name": "Implant: Serenity",
-    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
   },
   "PalPassiveSkillChange_CoolTimeReduction_Up_2": {
     "localized_name": "Implant: Impatient",
-    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
   },
   "PalPassiveSkillChange_CraftSpeed_up1": {
     "localized_name": "Implant: Serious",
-    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
   },
   "PalPassiveSkillChange_CraftSpeed_up2": {
     "localized_name": "Implant: Artisan",
-    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
   },
   "PalPassiveSkillChange_CraftSpeed_up3": {
     "localized_name": "Implant: Remarkable Craftsmanship",
-    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
   },
   "PalPassiveSkillChange_Deffence_up1": {
     "localized_name": "Implant: Hard Skin",
-    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
   },
   "PalPassiveSkillChange_Deffence_up2": {
     "localized_name": "Implant: Burly Body",
-    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
   },
   "PalPassiveSkillChange_Deffence_up3": {
     "localized_name": "Implant: Diamond Body",
-    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
   },
   "PalPassiveSkillChange_HatchingSpeed_Up": {
     "localized_name": "Implant: Philanthropist",
-    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
   },
   "PalPassiveSkillChange_MoveSpeed_up_1": {
     "localized_name": "Implant: Nimble",
-    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
   },
   "PalPassiveSkillChange_MoveSpeed_up_2": {
     "localized_name": "Implant: Runner",
-    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
   },
   "PalPassiveSkillChange_MoveSpeed_up_3": {
     "localized_name": "Implant: Swift",
-    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
   },
   "PalPassiveSkillChange_Nocturnal": {
     "localized_name": "Implant: Nocturnal",
-    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
   },
   "PalPassiveSkillChange_NonKilling": {
     "localized_name": "Implant: Mercy Hit",
-    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
   },
   "PalPassiveSkillChange_Noukin": {
     "localized_name": "Implant: Musclehead",
-    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
   },
   "PalPassiveSkillChange_PAL_ALLAttack_up1": {
     "localized_name": "Implant: Brave",
-    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
   },
   "PalPassiveSkillChange_PAL_ALLAttack_up2": {
     "localized_name": "Implant: Ferocious",
-    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
   },
   "PalPassiveSkillChange_PAL_ALLAttack_up3": {
     "localized_name": "Implant: Demon God",
-    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_PAL_CorporateSlave": {
+    "localized_name": "Implant: Work Slave",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
   },
   "PalPassiveSkillChange_PAL_FullStomach_Down_1": {
     "localized_name": "Implant: Dainty Eater",
-    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
   },
   "PalPassiveSkillChange_PAL_FullStomach_Down_2": {
     "localized_name": "Implant: Diet Lover",
-    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
   },
   "PalPassiveSkillChange_PAL_FullStomach_Down_3": {
     "localized_name": "Implant: Mastery of Fasting",
-    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
   },
   "PalPassiveSkillChange_PAL_Sanity_Down_1": {
     "localized_name": "Implant: Positive Thinker",
-    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
   },
   "PalPassiveSkillChange_PAL_Sanity_Down_2": {
     "localized_name": "Implant: Workaholic",
-    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
   },
   "PalPassiveSkillChange_PAL_Sanity_Down_3": {
     "localized_name": "Implant: Heart of the Immovable King",
-    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_SalePrice_Up_1": {
+    "localized_name": "Implant: Noble",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_SalePrice_Up_2": {
+    "localized_name": "Implant: Fine Furs",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
   },
   "PalPassiveSkillChange_Stamina_Up_1": {
     "localized_name": "Implant: Infinite Stamina",
-    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
   },
   "PalPassiveSkillChange_Stamina_Up_2": {
     "localized_name": "Implant: Fit as a Fiddle",
-    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
   },
   "PalPassiveSkillChange_Stamina_Up_3": {
     "localized_name": "Implant: Eternal Engine",
-    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at an Pal Surgery Table."
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_SwimSpeed_up_1": {
+    "localized_name": "Implant: Sleek Stroke",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_SwimSpeed_up_2": {
+    "localized_name": "Implant: Ace Swimmer",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_TrainerATK_UP_1": {
+    "localized_name": "Implant: Vanguard",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_TrainerDEF_UP_1": {
+    "localized_name": "Implant: Stronghold Strategist",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_TrainerLogging_up1": {
+    "localized_name": "Implant: Logging Foreman",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_TrainerMining_up1": {
+    "localized_name": "Implant: Mine Foreman",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_TrainerWorkSpeed_UP_1": {
+    "localized_name": "Implant: Motivational Leader",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
   },
   "PalRevive": {
     "localized_name": "Revival Potion",
@@ -5197,7 +5357,7 @@
   },
   "PalSummon_DarkMechaDragon_2": {
     "localized_name": "Xenolord (Ultra) Slab",
-    "description": "Slab depicting Xenolord . Offer to a Summoning Altar to summon an exceptionally powerful Lv ?? Xenolord ."
+    "description": "Slab depicting Xenolord . Offer to a Summoning Altar to summon an inconceivably powerful Lv ?? Xenolord ."
   },
   "PalSummon_DarkMechaDragon_Parts": {
     "localized_name": "Xenolord Slab Fragment",
@@ -5222,6 +5382,22 @@
   "PalSummon_KingBahamut_Dragon_Parts_2": {
     "localized_name": "Blazamut Ryu (Ultra) Slab Fragment",
     "description": "Fragment overflowing with the energy of KingBahamut Dragon. Combine all of them to create a Slab."
+  },
+  "PalSummon_LegendDeer": {
+    "localized_name": "Hartalis Slab",
+    "description": "Slab depicting Hartalis. Offer to a Summoning Altar to summon an exceptionally powerful Lv 65 Hartalis."
+  },
+  "PalSummon_LegendDeer_2": {
+    "localized_name": "Hartalis (Ultra) Slab",
+    "description": "Slab overflowing with Hartalis energy. Offer to a Summoning Altar to summon an inconceivably powerful Lv ?? Hartalis."
+  },
+  "PalSummon_LegendDeer_Parts": {
+    "localized_name": "Hartalis Slab Fragment",
+    "description": "Fragment depicting Hartalis. Combine all of them to create a Slab."
+  },
+  "PalSummon_LegendDeer_Parts_2": {
+    "localized_name": "Hartalis (Ultra) Slab Fragment",
+    "description": "Fragment overflowing with Hartalis energy. Combine all of them to create a Slab."
   },
   "PalSummon_NightLady": {
     "localized_name": "Bellanoir's Slab",
@@ -5250,6 +5426,10 @@
   "PalSummon_YakushimaBoss002": {
     "localized_name": "Celestial Sigil",
     "description": "[Tides of Terraria] A seal inscribed with cryptic symbols. Offer to a Summoning Altar to summon a powerful entity."
+  },
+  "PalSummon_YakushimaBoss002_2": {
+    "localized_name": "Celestial Sigil [Master]",
+    "description": "[Tides of Terraria] A seal inscribed with cryptic symbols. Offer to an Summoning Altar to summon an inconceivably powerful entity."
   },
   "PalUpgradeStone": {
     "localized_name": "Small Pal Soul",
@@ -5407,6 +5587,14 @@
     "localized_name": "Plasteel Helmet",
     "description": "Helmet made of Plasteel. In addition to enhanced defense capabilities, its weight was also reduced. Equipment that pushes the limits of technology."
   },
+  "PlayerDropItem": {
+    "localized_name": "Champion's Emblem",
+    "description": "An emblem of glory earned through victory. Bearing it signifies superiority on the battlefield."
+  },
+  "Player_Outfit_Kigurumi001": {
+    "localized_name": "Depresso Armor",
+    "description": "A costume bodypiece modeled after Depresso."
+  },
   "PoisonMushroom": {
     "localized_name": "Mysterious Mushroom",
     "description": "Mushrooms that are not suitable for eating raw. Eating makes one more prone to feeling hungry."
@@ -5495,6 +5683,10 @@
     "localized_name": "Zoe's Tattered Memento",
     "description": "A worn scrap of fabric with a faint lingering scent. To Zoe, it's a treasured reminder of the past."
   },
+  "QuestItem_Zoe_Halloweenskin_1": {
+    "localized_name": "Zoe's Halloween Costume",
+    "description": "A Halloween outfit for Zoe. She's bound to love it, so let's give it to her!"
+  },
   "Quiche": {
     "localized_name": "Mushroom Quiche",
     "description": "A dish made by baking a pastry crust filled with eggs, vegetables, mushrooms, and cream. It’s delicious even when cooled. Eating it will help you stay fuller for a while and make it harder for your SAN value to decrease for a period of time."
@@ -5504,24 +5696,24 @@
     "description": "A rare crystal found only in Feybreak. Over many years, Paladium has condensed and transformed, now shining with a rainbow-like glow."
   },
   "Rankup_1": {
-    "localized_name": "All-Purpose Pal Extract☆1",
-    "description": "A mysterious extract that can be injected into pals to unlock their potential. Raises Pal's rank from ☆0 to ☆1. For some reason, a resentful voice can be heard from within..."
+    "localized_name": "Awakening Starfruit ☆1",
+    "description": "A magical fruit, said to be seen only on the rarest of occasions. Raises a Pal’s rank from ☆0 to ☆1."
   },
   "Rankup_2": {
-    "localized_name": "All-Purpose Pal Extract☆2",
-    "description": "A mysterious extract that can be injected into pals to unlock their potential. Raises Pal's rank from ☆1 to ☆2. For some reason, a resentful voice can be heard from within..."
+    "localized_name": "Awakening Starfruit ☆2",
+    "description": "A magical fruit, said to be seen only on the rarest of occasions. Raises a Pal’s rank from ☆1 to ☆2."
   },
   "Rankup_3": {
-    "localized_name": "All-Purpose Pal Extract☆3",
-    "description": "A mysterious extract that can be injected into pals to unlock their potential. Raises Pal's rank from ☆2 to ☆3. For some reason, a resentful voice can be heard from within..."
+    "localized_name": "Awakening Starfruit ☆3",
+    "description": "A magical fruit, said to be seen only on the rarest of occasions. Raises a Pal’s rank from ☆2 to ☆3."
   },
   "Rankup_4": {
-    "localized_name": "All-Purpose Pal Extract☆4",
-    "description": "A mysterious extract that can be injected into pals to unlock their potential. Raises Pal's rank from ☆3 to ☆4. For some reason, a resentful voice can be heard from within..."
+    "localized_name": "Awakening Starfruit ☆4",
+    "description": "A magical fruit, said to be seen only on the rarest of occasions. Raises a Pal’s rank from ☆3 to ☆4."
   },
   "Rankup_Arbitrary": {
-    "localized_name": "Concentrated All-Purpose Pal Extract",
-    "description": "A mysterious extract that can be injected into pals to unlock their potential. Raises Pal's rank by one. For some reason, a resentful voice can be heard from within..."
+    "localized_name": "Ripe Awakening Starfruit",
+    "description": "A magical fruit, said to be seen only on the rarest of occasions. Raises a Pal’s rank by one."
   },
   "ReinforcedArrow": {
     "localized_name": "Reinforced Arrow",
@@ -5848,7 +6040,7 @@
     "description": "Use on a Pal to teach DarkLaser."
   },
   "SkillCard_DarkLegion": {
-    "localized_name": "Dark Skill Fruit: Dark Wisp",
+    "localized_name": "Dark Skill Fruit: Dark Whisp",
     "description": "Use on a Pal to teach DarkLegion."
   },
   "SkillCard_DarkPulse": {
@@ -6132,7 +6324,7 @@
     "description": "Use on a Pal to teach TriSpark."
   },
   "SkillCard_WallSplash": {
-    "localized_name": "Water Skill Fruit: Wall Splash",
+    "localized_name": "Water Skill Fruit: Curtain Splash",
     "description": "Use on a Pal to teach WallSplash."
   },
   "SkillCard_WaterBall": {
@@ -6392,7 +6584,7 @@
     "description": "Saddle for safely riding IceNarwhal Fire."
   },
   "SkillUnlock_IceSeal": {
-    "localized_name": "Polapup's Harness",
+    "localized_name": "Polapup Saddle",
     "description": "Saddle for safely riding Polapup."
   },
   "SkillUnlock_JetDragon": {
@@ -6438,6 +6630,10 @@
   "SkillUnlock_LeafMomonga": {
     "localized_name": "Herbil's Harness",
     "description": "Harness for Herbil. Herbil can use its healing power to revive the player when incapacitated."
+  },
+  "SkillUnlock_LegendDeer": {
+    "localized_name": "Hartalis Saddle",
+    "description": "Saddle for safely riding Hartalis. Grants the ability to generate a barrier that blocks incoming attacks."
   },
   "SkillUnlock_Manticore": {
     "localized_name": "Blazehowl Saddle",
@@ -6960,7 +7156,7 @@
     "description": "A rare book written about the secrets of Cooling. Allowing a Pal to read it permanently increases their Cooling affinity by +1."
   },
   "WorkSuitability_AddTicket_Deforest": {
-    "localized_name": "Applied LumberingTechnique Ⅰ",
+    "localized_name": "Applied Lumbering Technique Ⅰ",
     "description": "A rare book written about the secrets of Lumbering. Allowing a Pal to read it permanently increases their Lumbering affinity by +1."
   },
   "WorkSuitability_AddTicket_EmitFlame": {
@@ -7065,23 +7261,23 @@
   },
   "YakushimaBlade004": {
     "localized_name": "Excalibur",
-    "description": "[Tides of Terraria] A sacred sword that gleams with golden light. Swinging it unleashes shockwaves around you, striking a wide area."
+    "description": "[Tides of Terraria] A sacred sword that gleams with golden light. Swinging it unleashes shockwaves around you."
   },
   "YakushimaBlade004_2": {
     "localized_name": "Excalibur",
-    "description": "[Tides of Terraria] A sacred sword that gleams with golden light. Swinging it unleashes shockwaves around you, striking a wide area."
+    "description": "[Tides of Terraria] A sacred sword that gleams with golden light. Swinging it unleashes shockwaves around you."
   },
   "YakushimaBlade004_3": {
     "localized_name": "Excalibur",
-    "description": "[Tides of Terraria] A sacred sword that gleams with golden light. Swinging it unleashes shockwaves around you, striking a wide area."
+    "description": "[Tides of Terraria] A sacred sword that gleams with golden light. Swinging it unleashes shockwaves around you."
   },
   "YakushimaBlade004_4": {
     "localized_name": "Excalibur",
-    "description": "[Tides of Terraria] A sacred sword that gleams with golden light. Swinging it unleashes shockwaves around you, striking a wide area."
+    "description": "[Tides of Terraria] A sacred sword that gleams with golden light. Swinging it unleashes shockwaves around you."
   },
   "YakushimaBlade004_5": {
     "localized_name": "Excalibur",
-    "description": "[Tides of Terraria] A sacred sword that gleams with golden light. Swinging it unleashes shockwaves around you, striking a wide area."
+    "description": "[Tides of Terraria] A sacred sword that gleams with golden light. Swinging it unleashes shockwaves around you."
   },
   "YakushimaBlade005": {
     "localized_name": "Legendary Meowmere",
@@ -7201,7 +7397,7 @@
   },
   "YakushimaIngot002": {
     "localized_name": "Luminite Bar",
-    "description": "[Tides of Terraria] A material exuding immense power, dropped by YakushimaBoss002. Radiates a soft, moon-like glow."
+    "description": "[Tides of Terraria] A material exuding immense power, dropped by RAID YakushimaBoss002. Radiates a soft, moon-like glow."
   },
   "YakushimaLantern001": {
     "localized_name": "Nightglow",

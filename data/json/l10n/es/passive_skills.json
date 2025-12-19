@@ -17,7 +17,7 @@
   },
   "Alien": {
     "localized_name": "Células de origen incierto",
-    "description": "Ataque + 10.0% Reducción del daño de fuego: 15.0% Reducción de daño de rayo: 15.0%"
+    "description": "Ataque + 10.0 % Reducción del daño de fuego: 15.0 % Reducción de daño de rayo: 15.0 %"
   },
   "Attack_ACC_up1": {
     "localized_name": "Aumento de ataque, nv. 1",
@@ -385,19 +385,19 @@
   },
   "CoolTimeReduction_Down_1": {
     "localized_name": "A mi ritmo",
-    "description": "Aumento del tiempo de espera de técnicas activas: -15.0%"
+    "description": "Aumento del tiempo de espera de técnicas activas: -15.0 %"
   },
   "CoolTimeReduction_Up_1": {
     "localized_name": "Tranquilo y sereno",
-    "description": "Reducción del tiempo de espera de técnicas activas: 30.0% Ataque + 10.0%"
+    "description": "Reducción del tiempo de espera de técnicas activas: 30.0 % Ataque + 10.0 %"
   },
   "CoolTimeReduction_Up_2": {
     "localized_name": "Impaciente",
-    "description": "Reducción del tiempo de espera de técnicas activas: 15.0%"
+    "description": "Reducción del tiempo de espera de técnicas activas: 15.0 %"
   },
   "CoolTimeReduction_Up_3": {
     "localized_name": "Impaciente",
-    "description": "Reducción del tiempo de espera de técnicas activas: 0.0% Ataque + 0.0%"
+    "description": "Reducción del tiempo de espera de técnicas activas: 0.0 % Ataque + 0.0 %"
   },
   "CraftSpeed_down1": {
     "localized_name": "Torpeza",
@@ -993,7 +993,7 @@
   },
   "NonKilling": {
     "localized_name": "Relax",
-    "description": "Pacifista. La vida del objetivo de ataque no puede ser inferior a 1."
+    "description": "Pacifista. La vida del objetivo del ataque no puede ser inferior a 1."
   },
   "Noukin": {
     "localized_name": "Impulsividad",
@@ -1002,6 +1002,10 @@
   "Nushi": {
     "localized_name": "Maestro",
     "description": "Aumenta el daño de los ataques de agua en un 20.0 % Aumenta el daño de los ataques de hielo en un 20.0 % Aumenta la defensa en un 20.0 %"
+  },
+  "OctaviaArmorVampire": {
+    "localized_name": "Blood fuel",
+    "description": null
   },
   "PAL_ALLAttack_down1": {
     "localized_name": "Cobardía",
@@ -1029,43 +1033,43 @@
   },
   "PAL_FullStomach_Down_1": {
     "localized_name": "Inapetencia",
-    "description": "La saciedad baja un <NumBlue_13>+10.0%</> menos."
+    "description": "La saciedad baja un <NumBlue_13>+10.0 %</> menos."
   },
   "PAL_FullStomach_Down_2": {
     "localized_name": "Amante de las dietas",
-    "description": "La saciedad baja un <NumBlue_13>+15.0%</> menos."
+    "description": "La saciedad baja un <NumBlue_13>+15.0 %</> menos."
   },
   "PAL_FullStomach_Down_3": {
     "localized_name": "Ayuno supremo",
-    "description": "La saciedad baja un <NumBlue_13>+20.0%</> menos."
+    "description": "La saciedad baja un <NumBlue_13>+20.0 %</> menos."
   },
   "PAL_FullStomach_Up_1": {
     "localized_name": "Glotonería",
-    "description": "La saciedad baja un <NumRed_13>+10.0%</> más."
+    "description": "La saciedad baja un <NumRed_13>+10.0 %</> más."
   },
   "PAL_FullStomach_Up_2": {
     "localized_name": "Pozo sin fondo",
-    "description": "La saciedad baja un <NumRed_13>+15.0%</> más."
+    "description": "La saciedad baja un <NumRed_13>+15.0 %</> más."
   },
   "PAL_Sanity_Down_1": {
     "localized_name": "Actitud positiva",
-    "description": "La COR baja un <NumBlue_13>+10.0%</> menos."
+    "description": "La COR baja un <NumBlue_13>+10.0 %</> menos."
   },
   "PAL_Sanity_Down_2": {
     "localized_name": "Adicción al trabajo",
-    "description": "La COR baja un <NumBlue_13>+15.0%</> menos."
+    "description": "La COR baja un <NumBlue_13>+15.0 %</> menos."
   },
   "PAL_Sanity_Down_3": {
     "localized_name": "Corazón de rey inmutable",
-    "description": "La COR baja un <NumBlue_13>+20.0%</> menos."
+    "description": "La COR baja un <NumBlue_13>+20.0 %</> menos."
   },
   "PAL_Sanity_Up_1": {
     "localized_name": "Inestabilidad mental",
-    "description": "La COR baja un <NumRed_13>+10.0%</> más."
+    "description": "La COR baja un <NumRed_13>+10.0 %</> más."
   },
   "PAL_Sanity_Up_2": {
     "localized_name": "Impulsos destructivos",
-    "description": "La COR baja un <NumRed_13>+15.0%</> más."
+    "description": "La COR baja un <NumRed_13>+15.0 %</> más."
   },
   "PAL_SpiritualInst": {
     "localized_name": "es_Text",
@@ -1109,15 +1113,19 @@
   },
   "SalePrice_Down_1": {
     "localized_name": "Miseria",
-    "description": "Desmejora del precio de transacciones: -10.0%"
+    "description": "Desmejora del precio de transacciones: -10.0 %"
   },
   "SalePrice_Up_1": {
     "localized_name": "Nobleza",
-    "description": "Mejora del precio de transacciones + 5.0%"
+    "description": "Mejora del precio de transacciones + 5.0 %"
   },
   "SalePrice_Up_2": {
     "localized_name": "Linaje superior",
-    "description": "Mejora del precio de transacciones + 3.0%"
+    "description": "Mejora del precio de transacciones + 3.0 %"
+  },
+  "Salvation": {
+    "localized_name": "Salvación",
+    "description": null
   },
   "SphereModule_Curve": {
     "localized_name": "Curva esfera +1",
@@ -1145,19 +1153,19 @@
   },
   "Stamina_Down_1": {
     "localized_name": "Confinamiento",
-    "description": "Energía máxima: -25.0% *Solo efectivo en Pals que se puedan montar"
+    "description": "Energía máxima: -25.0 % *Solo efectivo en Pals que se puedan montar"
   },
   "Stamina_Up_1": {
     "localized_name": "Energía inagotable",
-    "description": "Energía máxima + 50.0% *Solo efectivo en Pals que se puedan montar"
+    "description": "Energía máxima + 50.0 % *Solo efectivo en Pals que se puedan montar"
   },
   "Stamina_Up_2": {
     "localized_name": "Vigor de juventud",
-    "description": "Energía máxima + 25.0% *Solo efectivo en Pals que se puedan montar"
+    "description": "Energía máxima + 25.0 % *Solo efectivo en Pals que se puedan montar"
   },
   "Stamina_Up_3": {
     "localized_name": "Máquina imparable",
-    "description": "Energía máxima + 75.0% *Solo efectivo en Pals que se puedan montar"
+    "description": "Energía máxima + 75.0 % *Solo efectivo en Pals que se puedan montar"
   },
   "SwimSpeed_up_1": {
     "localized_name": "Nado ágil",
@@ -1209,27 +1217,27 @@
   },
   "Test_PalEgg_HatchingSpeed_Up": {
     "localized_name": "Filántropo",
-    "description": "Mientras esté asignado a un criadero, la velocidad a la que se ponen huevas aumenta en un 100.0%."
+    "description": "Mientras esté asignado a un criadero, la velocidad a la que se ponen huevos aumenta en un 100.0 %."
   },
   "TrainerATK_UP_1": {
     "localized_name": "General de asalto",
-    "description": "Aumenta el ataque del jugador en un 10.0 %"
+    "description": "Aumenta tu ataque en un 10.0 %"
   },
   "TrainerDEF_UP_1": {
     "localized_name": "Estrat. de la fortaleza",
-    "description": "Aumenta la defensa del jugador en un 10.0 %"
+    "description": "Aumenta tu defensa en un 10.0 %"
   },
   "TrainerLogging_up1": {
     "localized_name": "Líder talador",
-    "description": "Aumenta la eficiencia de tala del jugador en un 25.0 %"
+    "description": "Aumenta tu eficiencia de tala en un 25.0 %"
   },
   "TrainerMining_up1": {
     "localized_name": "Jefe minero",
-    "description": "Aumenta la eficiencia en minería del jugador en un 25.0 %"
+    "description": "Aumenta tu eficiencia en minería en un 25.0 %"
   },
   "TrainerWorkSpeed_UP_1": {
     "localized_name": "Animador",
-    "description": "Aumenta la velocidad de trabajo del jugador en un 25.0 %"
+    "description": "Aumenta tu velocidad de trabajo en un 25.0 %"
   },
   "Vampire": {
     "localized_name": "Vampírico",

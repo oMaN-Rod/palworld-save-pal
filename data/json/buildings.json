@@ -24,7 +24,7 @@
     "icon": "t_icon_buildobject_altar"
   },
   "Andon": {
-    "type_a": "Furniture",
+    "type_a": "Light",
     "type_b": "Infra_Environment",
     "rank": 1,
     "required_build_work_amount": 2000.0,
@@ -480,8 +480,8 @@
         "count": 20
       }
     ],
-    "material_type": "EPalMapObjectMaterialType::None",
-    "material_sub_type": "EPalMapObjectMaterialSubType::None",
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Stone",
     "hp": 10000,
     "defense": 5,
     "deterioration_damage": 0.1,
@@ -728,7 +728,7 @@
     "icon": "t_icon_buildobject_campfire"
   },
   "CandleStand": {
-    "type_a": "Blueprint",
+    "type_a": "Light",
     "type_b": "Infra_Environment",
     "rank": 1,
     "required_build_work_amount": 1000.0,
@@ -1076,7 +1076,7 @@
     "icon": "t_icon_buildobject_compositedesk"
   },
   "ConservationGroupBannerA": {
-    "type_a": "Blueprint",
+    "type_a": "Furniture",
     "type_b": "Infra_Environment",
     "rank": 1,
     "required_build_work_amount": 2000.0,
@@ -1104,7 +1104,7 @@
     "icon": "t_icon_buildobject_conservationgroupbannera"
   },
   "ConservationGroupBannerB": {
-    "type_a": "Blueprint",
+    "type_a": "Furniture",
     "type_b": "Infra_Environment",
     "rank": 1,
     "required_build_work_amount": 2000.0,
@@ -1442,10 +1442,38 @@
     ],
     "material_type": "EPalMapObjectMaterialType::None",
     "material_sub_type": "EPalMapObjectMaterialSubType::None",
-    "hp": 50000,
+    "hp": 5000000,
     "defense": 100,
     "deterioration_damage": 0.0,
     "icon": "t_icon_buildobject_damagedscarecrow"
+  },
+  "DamagedScarecrow_Test": {
+    "type_a": "Other",
+    "type_b": "Other",
+    "rank": 1,
+    "required_build_work_amount": 2000.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Wood",
+        "count": 20
+      },
+      {
+        "id": "Fiber",
+        "count": 5
+      },
+      {
+        "id": "Pal_crystal_S",
+        "count": 5
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::None",
+    "material_sub_type": "EPalMapObjectMaterialSubType::None",
+    "hp": 1000000,
+    "defense": 100,
+    "deterioration_damage": 0.0,
+    "disabled": true
   },
   "Decal_PalSticker_PinkCat": {
     "type_a": "Furniture",
@@ -1583,7 +1611,7 @@
     "icon": "t_icon_buildobject_defensewait"
   },
   "DefenseWall": {
-    "type_a": "Foundation",
+    "type_a": "Defense",
     "type_b": "Infra_Defense",
     "rank": 1,
     "required_build_work_amount": 0.0,
@@ -1607,7 +1635,7 @@
     "icon": "t_icon_buildobject_defensewall"
   },
   "DefenseWall_Metal": {
-    "type_a": "Foundation",
+    "type_a": "Defense",
     "type_b": "Infra_Defense",
     "rank": 1,
     "required_build_work_amount": 0.0,
@@ -1631,7 +1659,7 @@
     "icon": "t_icon_buildobject_defensewall_metal"
   },
   "DefenseWall_Wood": {
-    "type_a": "Foundation",
+    "type_a": "Defense",
     "type_b": "Infra_Defense",
     "rank": 1,
     "required_build_work_amount": 0.0,
@@ -1892,7 +1920,7 @@
       },
       {
         "id": "AncientParts2",
-        "count": 5
+        "count": 2
       }
     ],
     "material_type": "EPalMapObjectMaterialType::Stone",
@@ -2495,7 +2523,7 @@
     "icon": "t_icon_buildobject_firecult_flag"
   },
   "FireStand": {
-    "type_a": "Blueprint",
+    "type_a": "Light",
     "type_b": "Infra_Environment",
     "rank": 1,
     "required_build_work_amount": 1000.0,
@@ -2714,6 +2742,30 @@
     "deterioration_damage": 0.08,
     "icon": "t_icon_buildobject_garbagebag_iron"
   },
+  "Glass_DiagonalWall": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Stone",
+        "count": 1
+      },
+      {
+        "id": "Pal_crystal_S",
+        "count": 2
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Copper",
+    "hp": 2000,
+    "defense": 4,
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_glass_diagonalwall"
+  },
   "Glass_DoorWall": {
     "type_a": "Foundation",
     "type_b": "Found_Basic",
@@ -2762,6 +2814,30 @@
     "deterioration_damage": 0.08,
     "icon": "t_icon_buildobject_glass_fence"
   },
+  "Glass_PyramidRoof": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Stone",
+        "count": 1
+      },
+      {
+        "id": "Pal_crystal_S",
+        "count": 2
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Copper",
+    "hp": 2000,
+    "defense": 4,
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_glass_pyramidroof"
+  },
   "Glass_SlantedRoof": {
     "type_a": "Foundation",
     "type_b": "Found_Basic",
@@ -2786,6 +2862,102 @@
     "deterioration_damage": 0.02,
     "icon": "t_icon_buildobject_glass_slantedroof"
   },
+  "Glass_SlopedRoofCorner": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Stone",
+        "count": 1
+      },
+      {
+        "id": "Pal_crystal_S",
+        "count": 2
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Copper",
+    "hp": 2000,
+    "defense": 4,
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_glass_slopedroofcorner"
+  },
+  "Glass_TriangleFoundation": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Stone",
+        "count": 1
+      },
+      {
+        "id": "Pal_crystal_S",
+        "count": 2
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Copper",
+    "hp": 2000,
+    "defense": 4,
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_glass_trianglefoundation"
+  },
+  "Glass_TriangleRoof": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Stone",
+        "count": 1
+      },
+      {
+        "id": "Pal_crystal_S",
+        "count": 2
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Copper",
+    "hp": 2000,
+    "defense": 4,
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_glass_triangleroof"
+  },
+  "Glass_TriangleStairsCorner": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Stone",
+        "count": 1
+      },
+      {
+        "id": "Pal_crystal_S",
+        "count": 2
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Copper",
+    "hp": 2000,
+    "defense": 4,
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_glass_trianglestairscorner"
+  },
   "Glass_TriangleWall": {
     "type_a": "Foundation",
     "type_b": "Found_Basic",
@@ -2809,6 +2981,54 @@
     "defense": 4,
     "deterioration_damage": 0.02,
     "icon": "t_icon_buildobject_glass_trianglewall"
+  },
+  "Glass_TriangleWallReverse": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Stone",
+        "count": 1
+      },
+      {
+        "id": "Pal_crystal_S",
+        "count": 2
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Copper",
+    "hp": 2000,
+    "defense": 4,
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_glass_trianglewallreverse"
+  },
+  "Glass_WallGate": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Stone",
+        "count": 1
+      },
+      {
+        "id": "Pal_crystal_S",
+        "count": 2
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Copper",
+    "hp": 2000,
+    "defense": 4,
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_glass_wallgate"
   },
   "Glass_WindowWall": {
     "type_a": "Foundation",
@@ -3032,7 +3252,7 @@
     "icon": "t_icon_buildobject_goalsoccer_iron"
   },
   "GuardianDogStatue": {
-    "type_a": "Blueprint",
+    "type_a": "Furniture",
     "type_b": "Infra_Environment",
     "rank": 1,
     "required_build_work_amount": 2000.0,
@@ -3248,7 +3468,7 @@
     "icon": "t_icon_buildobject_hunter_flag"
   },
   "Hunter_GangFlag": {
-    "type_a": "Blueprint",
+    "type_a": "Furniture",
     "type_b": "Infra_Environment",
     "rank": 1,
     "required_build_work_amount": 2000.0,
@@ -3299,6 +3519,30 @@
     "deterioration_damage": 0.12,
     "icon": "t_icon_buildobject_icecrusher"
   },
+  "Iron_DiagonalWall": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "CopperIngot",
+        "count": 1
+      },
+      {
+        "id": "stone",
+        "count": 2
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Copper",
+    "hp": 2000,
+    "defense": 4,
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_iron_diagonalwall"
+  },
   "Iron_Fence": {
     "type_a": "Foundation",
     "type_b": "Found_Basic",
@@ -3318,6 +3562,174 @@
     "defense": 2,
     "deterioration_damage": 0.08,
     "icon": "t_icon_buildobject_iron_fence"
+  },
+  "Iron_PyramidRoof": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "CopperIngot",
+        "count": 1
+      },
+      {
+        "id": "stone",
+        "count": 2
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Copper",
+    "hp": 2000,
+    "defense": 4,
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_iron_pyramidroof"
+  },
+  "Iron_SlopedRoofCorner": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "CopperIngot",
+        "count": 1
+      },
+      {
+        "id": "stone",
+        "count": 2
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Copper",
+    "hp": 2000,
+    "defense": 4,
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_iron_slopedroofcorner"
+  },
+  "Iron_TriangleFoundation": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "CopperIngot",
+        "count": 1
+      },
+      {
+        "id": "stone",
+        "count": 2
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Copper",
+    "hp": 2000,
+    "defense": 4,
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_iron_trianglefoundation"
+  },
+  "Iron_TriangleRoof": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "CopperIngot",
+        "count": 1
+      },
+      {
+        "id": "stone",
+        "count": 2
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Copper",
+    "hp": 2000,
+    "defense": 4,
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_iron_triangleroof"
+  },
+  "Iron_TriangleStairsCorner": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "CopperIngot",
+        "count": 1
+      },
+      {
+        "id": "stone",
+        "count": 2
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Copper",
+    "hp": 2000,
+    "defense": 4,
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_iron_trianglestairscorner"
+  },
+  "Iron_TriangleWallReverse": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "CopperIngot",
+        "count": 1
+      },
+      {
+        "id": "stone",
+        "count": 2
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Copper",
+    "hp": 2000,
+    "defense": 4,
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_iron_trianglewallreverse"
+  },
+  "Iron_WallGate": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "CopperIngot",
+        "count": 1
+      },
+      {
+        "id": "stone",
+        "count": 2
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Copper",
+    "hp": 2000,
+    "defense": 4,
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_iron_wallgate"
   },
   "Irori": {
     "type_a": "Furniture",
@@ -3539,6 +3951,26 @@
     "deterioration_damage": 0.08,
     "icon": "t_icon_buildobject_ivy03"
   },
+  "JapaneseStyle_DiagonalWall": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Wood",
+        "count": 4
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Wood",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Wood",
+    "hp": 500,
+    "defense": 4,
+    "deterioration_damage": 0.005,
+    "icon": "t_icon_buildobject_japanesestyle_diagonalwall"
+  },
   "JapaneseStyle_DoorWall_01": {
     "type_a": "Foundation",
     "type_b": "Found_Basic",
@@ -3639,6 +4071,26 @@
     "deterioration_damage": 0.02,
     "icon": "t_icon_buildobject_japanesestyle_pillar"
   },
+  "JapaneseStyle_PyramidRoof": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Wood",
+        "count": 4
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Wood",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Wood",
+    "hp": 500,
+    "defense": 4,
+    "deterioration_damage": 0.005,
+    "icon": "t_icon_buildobject_japanesestyle_pyramidroof"
+  },
   "JapaneseStyle_SlantedRoof": {
     "type_a": "Foundation",
     "type_b": "Found_Basic",
@@ -3659,6 +4111,106 @@
     "deterioration_damage": 0.02,
     "icon": "t_icon_buildobject_japanesestyle_slantedroof"
   },
+  "JapaneseStyle_SlopedRoofCorner": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Wood",
+        "count": 4
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Wood",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Wood",
+    "hp": 500,
+    "defense": 4,
+    "deterioration_damage": 0.005,
+    "icon": "t_icon_buildobject_japanesestyle_slopedroofcorner"
+  },
+  "JapaneseStyle_TriangleFoundation": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Wood",
+        "count": 4
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Wood",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Wood",
+    "hp": 500,
+    "defense": 4,
+    "deterioration_damage": 0.005,
+    "icon": "t_icon_buildobject_japanesestyle_trianglefoundation"
+  },
+  "JapaneseStyle_TriangleRoof_01": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Wood",
+        "count": 4
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Wood",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Wood",
+    "hp": 500,
+    "defense": 4,
+    "deterioration_damage": 0.005,
+    "icon": "t_icon_buildobject_japanesestyle_triangleroof_01"
+  },
+  "JapaneseStyle_TriangleRoof_02": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Wood",
+        "count": 4
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Wood",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Wood",
+    "hp": 500,
+    "defense": 4,
+    "deterioration_damage": 0.005,
+    "icon": "t_icon_buildobject_japanesestyle_triangleroof_02"
+  },
+  "JapaneseStyle_TriangleStairsCorner_01": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Wood",
+        "count": 4
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Wood",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Wood",
+    "hp": 500,
+    "defense": 4,
+    "deterioration_damage": 0.005,
+    "icon": "t_icon_buildobject_japanesestyle_trianglestairscorner"
+  },
   "JapaneseStyle_TriangleWall": {
     "type_a": "Foundation",
     "type_b": "Found_Basic",
@@ -3678,6 +4230,46 @@
     "defense": 2,
     "deterioration_damage": 0.02,
     "icon": "t_icon_buildobject_japanesestyle_trianglewall"
+  },
+  "JapaneseStyle_TriangleWallReverse": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Wood",
+        "count": 4
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Wood",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Wood",
+    "hp": 500,
+    "defense": 4,
+    "deterioration_damage": 0.005,
+    "icon": "t_icon_buildobject_japanesestyle_trianglewallreverse"
+  },
+  "JapaneseStyle_WallGate": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Wood",
+        "count": 4
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Wood",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Wood",
+    "hp": 500,
+    "defense": 4,
+    "deterioration_damage": 0.005,
+    "icon": "t_icon_buildobject_japanesestyle_wallgate"
   },
   "JapaneseStyle_WindowWall": {
     "type_a": "Foundation",
@@ -3904,7 +4496,7 @@
     "icon": "t_icon_buildobject_lampstand"
   },
   "LanternTop": {
-    "type_a": "Blueprint",
+    "type_a": "Furniture",
     "type_b": "Infra_Environment",
     "rank": 1,
     "required_build_work_amount": 7000.0,
@@ -4264,7 +4856,7 @@
     "icon": "t_icon_buildobject_light_lightpole04"
   },
   "LilyQueenStatue": {
-    "type_a": "Blueprint",
+    "type_a": "Furniture",
     "type_b": "Infra_Environment",
     "rank": 1,
     "required_build_work_amount": 2000.0,
@@ -4580,7 +5172,7 @@
     "icon": "t_icon_buildobject_metal_doorwall"
   },
   "Metal_Gate": {
-    "type_a": "Foundation",
+    "type_a": "Defense",
     "type_b": "Other",
     "rank": 1,
     "required_build_work_amount": 15000.0,
@@ -4987,7 +5579,7 @@
       },
       {
         "id": "AncientParts2",
-        "count": 10
+        "count": 4
       }
     ],
     "material_type": "EPalMapObjectMaterialType::Stone",
@@ -5766,7 +6358,7 @@
     "icon": "t_icon_buildobject_rug_wood"
   },
   "SF_Chair": {
-    "type_a": "Blueprint",
+    "type_a": "Furniture",
     "type_b": "Infra_Environment",
     "rank": 1,
     "required_build_work_amount": 1000.0,
@@ -5786,7 +6378,7 @@
     "icon": "t_icon_buildobject_sf_chair"
   },
   "SF_Desk": {
-    "type_a": "Blueprint",
+    "type_a": "Furniture",
     "type_b": "Infra_Environment",
     "rank": 1,
     "required_build_work_amount": 5000.0,
@@ -5804,6 +6396,26 @@
     "defense": 2,
     "deterioration_damage": 0.08,
     "icon": "t_icon_buildobject_sf_desk"
+  },
+  "SF_DiagonalWall": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Polymer",
+        "count": 1
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Copper",
+    "hp": 2000,
+    "defense": 4,
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_sf_diagonalwall"
   },
   "SF_DoorWall": {
     "type_a": "Foundation",
@@ -5845,6 +6457,26 @@
     "deterioration_damage": 0.08,
     "icon": "t_icon_buildobject_sf_fence"
   },
+  "SF_PyramidRoof": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Polymer",
+        "count": 1
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Copper",
+    "hp": 2000,
+    "defense": 4,
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_sf_pyramidroof"
+  },
   "SF_SlantedRoof": {
     "type_a": "Foundation",
     "type_b": "Found_Basic",
@@ -5865,6 +6497,86 @@
     "deterioration_damage": 0.02,
     "icon": "t_icon_buildobject_sf_slantedroof"
   },
+  "SF_SlopedRoofCorner": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Polymer",
+        "count": 1
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Copper",
+    "hp": 2000,
+    "defense": 4,
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_sf_slopedroofcorner"
+  },
+  "SF_TriangleFoundation": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Polymer",
+        "count": 1
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Copper",
+    "hp": 2000,
+    "defense": 4,
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_sf_trianglefoundation"
+  },
+  "SF_TriangleRoof": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Polymer",
+        "count": 1
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Copper",
+    "hp": 2000,
+    "defense": 4,
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_sf_triangleroof"
+  },
+  "SF_TriangleStairsCorner": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Polymer",
+        "count": 1
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Copper",
+    "hp": 2000,
+    "defense": 4,
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_sf_trianglestairscorner"
+  },
   "SF_TriangleWall": {
     "type_a": "Foundation",
     "type_b": "Found_Basic",
@@ -5884,6 +6596,46 @@
     "defense": 4,
     "deterioration_damage": 0.02,
     "icon": "t_icon_buildobject_sf_trianglewall"
+  },
+  "SF_TriangleWallReverse": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Polymer",
+        "count": 1
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Copper",
+    "hp": 2000,
+    "defense": 4,
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_sf_trianglewallreverse"
+  },
+  "SF_WallGate": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Polymer",
+        "count": 1
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Copper",
+    "hp": 2000,
+    "defense": 4,
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_sf_wallgate"
   },
   "SF_WindowWall": {
     "type_a": "Foundation",
@@ -6006,7 +6758,7 @@
     "icon": "t_icon_buildobject_sf_wall"
   },
   "SanityDecrease1": {
-    "type_a": "Infrastructure",
+    "type_a": "Other",
     "type_b": "Infra_Environment",
     "rank": 1,
     "required_build_work_amount": 50000.0,
@@ -6558,7 +7310,7 @@
     "icon": "t_icon_buildobject_shishiodoshi"
   },
   "Shrine_Lantern": {
-    "type_a": "Blueprint",
+    "type_a": "Furniture",
     "type_b": "Infra_Environment",
     "rank": 1,
     "required_build_work_amount": 7000.0,
@@ -6966,7 +7718,7 @@
     "icon": "t_icon_buildobject_spa3"
   },
   "SphereFactory_Black_01": {
-    "type_a": "Pal",
+    "type_a": "Product",
     "type_b": "Pal_Capture",
     "rank": 1,
     "required_build_work_amount": 5000.0,
@@ -6994,7 +7746,7 @@
     "icon": "t_icon_buildobject_spherefactory_black_01"
   },
   "SphereFactory_Black_02": {
-    "type_a": "Pal",
+    "type_a": "Product",
     "type_b": "Pal_Capture",
     "rank": 1,
     "required_build_work_amount": 30000.0,
@@ -7026,7 +7778,7 @@
     "icon": "t_icon_buildobject_spherefactory_black_02"
   },
   "SphereFactory_Black_03": {
-    "type_a": "Pal",
+    "type_a": "Product",
     "type_b": "Pal_Capture",
     "rank": 1,
     "required_build_work_amount": 120000.0,
@@ -7058,7 +7810,7 @@
     "icon": "t_icon_buildobject_spherefactory_black_03"
   },
   "SphereFactory_Black_04": {
-    "type_a": "Pal",
+    "type_a": "Product",
     "type_b": "Pal_Capture",
     "rank": 1,
     "required_build_work_amount": 500000.0,
@@ -7145,6 +7897,26 @@
     "deterioration_damage": 0.2,
     "icon": "t_icon_buildobject_stonepit"
   },
+  "Stone_DiagonalWall": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Stone",
+        "count": 3
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Stone",
+    "hp": 1000,
+    "defense": 3,
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_stone_diagonalwall"
+  },
   "Stone_DoorWall": {
     "type_a": "Foundation",
     "type_b": "Found_Basic",
@@ -7186,7 +7958,7 @@
     "icon": "t_icon_buildobject_stone_fence"
   },
   "Stone_Gate": {
-    "type_a": "Foundation",
+    "type_a": "Defense",
     "type_b": "Other",
     "rank": 1,
     "required_build_work_amount": 5000.0,
@@ -7209,6 +7981,26 @@
     "deterioration_damage": 0.4,
     "icon": "t_icon_buildobject_stone_gate"
   },
+  "Stone_PyramidRoof": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Stone",
+        "count": 3
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Stone",
+    "hp": 1000,
+    "defense": 3,
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_stone_pyramidroof"
+  },
   "Stone_SlantedRoof": {
     "type_a": "Foundation",
     "type_b": "Found_Basic",
@@ -7229,6 +8021,86 @@
     "deterioration_damage": 0.02,
     "icon": "t_icon_buildobject_stone_slantedroof"
   },
+  "Stone_SlopedRoofCorner": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Stone",
+        "count": 3
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Stone",
+    "hp": 1000,
+    "defense": 3,
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_stone_slopedroofcorner"
+  },
+  "Stone_TriangleFoundation": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Stone",
+        "count": 3
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Stone",
+    "hp": 1000,
+    "defense": 3,
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_stone_trianglefoundation"
+  },
+  "Stone_TriangleRoof": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Stone",
+        "count": 3
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Stone",
+    "hp": 1000,
+    "defense": 3,
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_stone_triangleroof"
+  },
+  "Stone_TriangleStairsCorner": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Stone",
+        "count": 3
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Stone",
+    "hp": 1000,
+    "defense": 3,
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_stone_trianglestairscorner"
+  },
   "Stone_TriangleWall": {
     "type_a": "Foundation",
     "type_b": "Found_Basic",
@@ -7248,6 +8120,46 @@
     "defense": 3,
     "deterioration_damage": 0.02,
     "icon": "t_icon_buildobject_stone_trianglewall"
+  },
+  "Stone_TriangleWallReverse": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Stone",
+        "count": 3
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Stone",
+    "hp": 1000,
+    "defense": 3,
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_stone_trianglewallreverse"
+  },
+  "Stone_WallGate": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Stone",
+        "count": 3
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Stone",
+    "hp": 1000,
+    "defense": 3,
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_stone_wallgate"
   },
   "Stone_WindowWall": {
     "type_a": "Foundation",
@@ -8483,7 +9395,7 @@
     "icon": "t_icon_buildobject_torchhang"
   },
   "WallTorch02": {
-    "type_a": "Blueprint",
+    "type_a": "Light",
     "type_b": "Infra_Environment",
     "rank": 1,
     "required_build_work_amount": 1000.0,
@@ -8631,7 +9543,7 @@
     "icon": "t_icon_buildobject_weaponfactory_dirty_04"
   },
   "Wire_Fence": {
-    "type_a": "Blueprint",
+    "type_a": "Furniture",
     "type_b": "Infra_Environment",
     "rank": 1,
     "required_build_work_amount": 2000.0,
@@ -8675,7 +9587,7 @@
     "icon": "t_icon_buildobject_wood_fence"
   },
   "Wood_Gate": {
-    "type_a": "Foundation",
+    "type_a": "Defense",
     "type_b": "Other",
     "rank": 1,
     "required_build_work_amount": 2000.0,
@@ -8734,6 +9646,26 @@
     "deterioration_damage": 0.02,
     "icon": "t_icon_buildobject_wood_trianglewall"
   },
+  "Wood_TriangleWallReverse": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Wood",
+        "count": 2
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Wood",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Wood",
+    "hp": 500,
+    "defense": 2,
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_wood_trianglewallreverse"
+  },
   "Wood_WindowWall": {
     "type_a": "Foundation",
     "type_b": "Found_Basic",
@@ -8755,7 +9687,7 @@
     "icon": "t_icon_buildobject_wood_windowwall"
   },
   "WoodenBarricade": {
-    "type_a": "Blueprint",
+    "type_a": "Furniture",
     "type_b": "Infra_Environment",
     "rank": 1,
     "required_build_work_amount": 2000.0,
@@ -8778,6 +9710,26 @@
     "deterioration_damage": 0.08,
     "icon": "t_icon_buildobject_woodenbarricade"
   },
+  "Wooden_DiagonalWall": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Wood",
+        "count": 2
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Wood",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Wood",
+    "hp": 500,
+    "defense": 2,
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_wooden_diagonalwall"
+  },
   "Wooden_DoorWall": {
     "type_a": "Foundation",
     "type_b": "Found_Basic",
@@ -8797,6 +9749,126 @@
     "defense": 2,
     "deterioration_damage": 0.02,
     "icon": "t_icon_buildobject_wood_doorwall"
+  },
+  "Wooden_PyramidRoof": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Wood",
+        "count": 2
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Wood",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Wood",
+    "hp": 500,
+    "defense": 2,
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_wooden_pyramidroof"
+  },
+  "Wooden_SlopedRoofCorner": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Wood",
+        "count": 2
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Wood",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Wood",
+    "hp": 500,
+    "defense": 2,
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_wooden_slopedroofcorner"
+  },
+  "Wooden_TriangleFoundation": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Wood",
+        "count": 2
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Wood",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Wood",
+    "hp": 500,
+    "defense": 2,
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_wooden_trianglefoundation"
+  },
+  "Wooden_TriangleRoof": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Wood",
+        "count": 2
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Wood",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Wood",
+    "hp": 500,
+    "defense": 2,
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_wooden_triangleroof"
+  },
+  "Wooden_TriangleStairsCorner": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Wood",
+        "count": 2
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Wood",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Wood",
+    "hp": 500,
+    "defense": 2,
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_wooden_trianglestairscorner"
+  },
+  "Wooden_WallGate": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Wood",
+        "count": 2
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Wood",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Wood",
+    "hp": 500,
+    "defense": 2,
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_wooden_wallgate"
   },
   "Wooden_foundation": {
     "type_a": "Foundation",
@@ -8968,7 +10040,7 @@
     "icon": "t_icon_buildobject_workbench_skillunlock"
   },
   "WorkSpeedIncrease1": {
-    "type_a": "Infrastructure",
+    "type_a": "Other",
     "type_b": "Infra_Environment",
     "rank": 1,
     "required_build_work_amount": 120000.0,
@@ -8994,6 +10066,26 @@
     "defense": 3,
     "deterioration_damage": 0.15,
     "icon": "t_icon_buildobject_workspeedincrease1"
+  },
+  "YakushimaBoss002_Relic": {
+    "type_a": "Furniture",
+    "type_b": "Infra_Environment",
+    "rank": 1,
+    "required_build_work_amount": 2000.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "YakushimaIngot001",
+        "count": 100
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Copper",
+    "hp": 2000,
+    "defense": 4,
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_yakushimaboss002_relic"
   },
   "Zabuton": {
     "type_a": "Furniture",

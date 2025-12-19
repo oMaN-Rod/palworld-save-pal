@@ -1003,6 +1003,10 @@
     "localized_name": "湖之主",
     "description": "水属性攻击伤害增加20.0% 冰属性攻击伤害增加20.0% 防御+20.0%"
   },
+  "OctaviaArmorVampire": {
+    "localized_name": "血液燃料",
+    "description": null
+  },
   "PAL_ALLAttack_down1": {
     "localized_name": "胆小",
     "description": null
@@ -1118,6 +1122,10 @@
   "SalePrice_Up_2": {
     "localized_name": "贵族",
     "description": "改善交易价格+3.0%"
+  },
+  "Salvation": {
+    "localized_name": "救世主",
+    "description": null
   },
   "SphereModule_Curve": {
     "localized_name": "投掷曲线+1",

@@ -24,11 +24,11 @@
     "description": null
   },
   "Mining": {
-    "localized_name": "Добыча ископаемых",
+    "localized_name": "Добыча",
     "description": null
   },
   "MonsterFarm": {
-    "localized_name": "Пастбище",
+    "localized_name": "Фермерство",
     "description": null
   },
   "OilExtraction": {
@@ -36,7 +36,7 @@
     "description": null
   },
   "ProductMedicine": {
-    "localized_name": "Производство лекарств",
+    "localized_name": "Фармацевтика",
     "description": null
   },
   "Seeding": {

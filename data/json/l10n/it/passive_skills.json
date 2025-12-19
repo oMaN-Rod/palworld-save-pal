@@ -1003,6 +1003,10 @@
     "localized_name": "Dominatore",
     "description": "Incremento del danno di attributo acqua: 20.0% Incremento del danno di attributo ghiaccio: 20.0% Difesa: +20.0%"
   },
+  "OctaviaArmorVampire": {
+    "localized_name": "Potere del sangue",
+    "description": null
+  },
   "PAL_ALLAttack_down1": {
     "localized_name": "Codardia",
     "description": null
@@ -1116,8 +1120,12 @@
     "description": "Miglioramento delle vendite: +5.0%"
   },
   "SalePrice_Up_2": {
-    "localized_name": "Pelliccia curata",
+    "localized_name": "Ottimo pedigree",
     "description": "Miglioramento delle vendite: +3.0%"
+  },
+  "Salvation": {
+    "localized_name": "Salvatore",
+    "description": null
   },
   "SphereModule_Curve": {
     "localized_name": "Curva sfera +1",
@@ -1225,7 +1233,7 @@
   },
   "TrainerMining_up1": {
     "localized_name": "Maestria estrazione",
-    "description": "Incremento efficienza nell'estrazione del giocatore: 25.0%"
+    "description": "Incremento efficienza estrattiva del giocatore: 25.0%"
   },
   "TrainerWorkSpeed_UP_1": {
     "localized_name": "Gran motivatore",
