@@ -12,21 +12,31 @@
 		Map,
 		FileHeart,
 		Download,
-		Database
+		Database,
+		Globe
 	} from 'lucide-svelte';
-	import { page } from '$app/state';
+
 	import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
 	import { SettingsModal } from '$components/modals';
 	import { MessageType } from '$types';
 	import { send } from '$lib/utils/websocketUtils';
+	import { page } from '$app/state';
+	import { goto } from '$app/navigation';
 
-	let navigationState = getNavigationState();
 	let appState = getAppState();
 	let modal = getModalState();
 
-	$effect(() => {
-		const { id } = page.route;
-		navigationState.navigateTo(id?.replace('/', '') as Page);
+	const activeTile = $derived.by(() => {
+		if (page.url.pathname.startsWith('/edit')) return 'edit';
+		if (page.url.pathname.startsWith('/file')) return 'file';
+		if (page.url.pathname.startsWith('/upload')) return 'upload';
+		if (page.url.pathname.startsWith('/worldmap')) return 'map';
+		if (page.url.pathname.startsWith('/about')) return 'about';
+		if (page.url.pathname.startsWith('/presets')) return 'presets';
+		if (page.url.pathname.startsWith('/gps')) return 'gps';
+		if (page.url.pathname.startsWith('/ups')) return 'ups';
+		if (page.url.pathname.startsWith('/debug')) return 'debug';
+		return '';
 	});
 
 	async function handleLanguageSelect(): Promise<void> {
@@ -47,8 +57,8 @@
 
 <Navigation.Rail
 	width="48px"
-	value={navigationState.activePage}
-	onValueChange={(value: string) => navigationState.navigateToAndSave(value as Page)}
+	value={activeTile}
+	onValueChange={appState.saveState}
 >
 	{#snippet header()}
 		{#if appState.saveFile && PUBLIC_DESKTOP_MODE === 'true'}
@@ -131,6 +141,18 @@
 		>
 			<FileHeart />
 		</Navigation.Tile>
+		{#if appState.gps}
+			<Navigation.Tile
+				label="GPS"
+				labelBase="text-xs"
+				title="Global Pal Storage"
+				id="gps"
+				href="/gps"
+				active="bg-secondary-500"
+			>
+				<Globe />
+			</Navigation.Tile>
+		{/if}
 		<Navigation.Tile
 			label="UPS"
 			labelBase="text-xs"

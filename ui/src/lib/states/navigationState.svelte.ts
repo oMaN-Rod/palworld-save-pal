@@ -1,3 +1,4 @@
+import { page } from '$app/state';
 import { getAppState } from './appState.svelte';
 
 export type Page =
@@ -13,19 +14,22 @@ export type Page =
 export type Tab = 'player' | 'pal' | 'pal-box' | 'dps' | 'guilds' | 'gps' | 'technologies';
 
 export interface NavigationState {
-	activePage: Page;
+	activePage: Page | string;
 	activeTab?: Tab;
 }
 
 class NavigationStateManager implements NavigationState {
-	#activePage = $state<Page>('file');
+	#activePage = $state('file');
 	#activeTab = $state<Tab>('pal');
 	#initialLoad = true;
 	#appState = getAppState();
-
-	constructor(initialPage: Page = 'file', initialTab: Tab = 'pal') {
+	constructor(initialPage: string = 'file', initialTab: Tab = 'pal') {
 		this.#activePage = initialPage;
 		this.#activeTab = initialTab;
+	}
+
+	isCurrentPath(path: string): boolean {
+		return page.url.pathname === path;
 	}
 
 	navigateTo(page: Page): void {
@@ -40,7 +44,7 @@ class NavigationStateManager implements NavigationState {
 		this.#initialLoad = false;
 	}
 
-	get activePage(): Page {
+	get activePage(): Page | string {
 		return this.#activePage;
 	}
 
