@@ -25315,7 +25315,7 @@
     "type_a": "Essential",
     "type_b": "Essential_PalGear",
     "rank": 0,
-    "rarity": 4,
+    "rarity": 99,
     "max_stack_count": 999999,
     "weight": 0.0,
     "price": 0,
@@ -25477,7 +25477,7 @@
     "price": 0,
     "sort_id": 9999,
     "icon": "t_darkmutant_icon_normal",
-    "disabled": false
+    "disabled": true
   },
   "SkillUnlock_Deer": {
     "group": "KeyItem",
@@ -25555,7 +25555,7 @@
     "price": 0,
     "sort_id": 9999,
     "icon": "t_itemicon_essential_skillunlock_saddle",
-    "disabled": false
+    "disabled": true
   },
   "SkillUnlock_ElecPanda": {
     "group": "KeyItem",
