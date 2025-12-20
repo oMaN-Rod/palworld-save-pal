@@ -279,6 +279,10 @@
     "localized_name": "Gravità psichica",
     "description": "Solleva i nemici circostanti con la telecinesi e poi li fa schiantare al suolo."
   },
+  "EPalWazaID::RadiantBarrage": {
+    "localized_name": "Raffica radiante",
+    "description": "Spara una sfera di luce che insegue lentamente il nemico. Quando è abbastanza vicina al bersaglio, si divide in innumerevoli proiettili di luce e attacca."
+  },
   "EPalWazaID::RaidCutter": {
     "localized_name": "Falce improvvisa",
     "description": "Scaglia innumerevoli lame d'aria che volano verso il nemico."
@@ -433,19 +437,19 @@
   },
   "EPalWazaID::Unique_Anubis_GroundPunch": {
     "localized_name": "Frattura terrestre",
-    "description": "Abilità di Anubis. Salta in alto per poi colpire con violenza il suolo. Genera un impatto che danneggia ogni cosa in un'ampia area."
+    "description": "Abilità del Pal Anubis. Salta in alto per poi colpire con violenza il suolo. Genera un impatto che danneggia ogni cosa in un'ampia area."
   },
   "EPalWazaID::Unique_Anubis_LowRoundKick": {
     "localized_name": "Calcio basso rotante",
-    "description": "Abilità di Anubis. Falcia qualunque cosa intorno a sé con un potente calcio circolare."
+    "description": "Abilità del Pal Anubis. Falcia qualunque cosa intorno a sé con un potente calcio circolare."
   },
   "EPalWazaID::Unique_Anubis_Tackle": {
     "localized_name": "Carica energetica",
-    "description": "Abilità di Anubis. Si lancia verso un nemico ad alta velocità e lo colpisce con un pugno ammantato di energia."
+    "description": "Abilità del Pal Anubis. Si lancia verso un nemico ad alta velocità e lo colpisce con un pugno ammantato di energia."
   },
   "EPalWazaID::Unique_Baphomet_SwallowKite": {
     "localized_name": "Artigli infernali",
-    "description": "Abilità di Incineram. Si avvicina attaccando con l'artiglio sinistro, per poi saltare e colpire col destro."
+    "description": "Abilità del Pal Incineram. Si avvicina attaccando con l'artiglio sinistro, per poi saltare e colpire col destro."
   },
   "EPalWazaID::Unique_BirdDragon_FireBreath": {
     "localized_name": "Soffio in volo",
@@ -475,13 +479,17 @@
     "localized_name": "Schianto in surf",
     "description": null
   },
+  "EPalWazaID::Unique_BluePlatypus_Toboggan_Fire": {
+    "localized_name": "Schianto di fuoco",
+    "description": null
+  },
   "EPalWazaID::Unique_BlueThunderHorse_FlashDash": {
     "localized_name": "Scatto fulmineo",
     "description": "Abilità del Pal Azurmane. Si muove alla velocità del fulmine, risucchiando nella sua orbita ogni cosa."
   },
   "EPalWazaID::Unique_Boar_Tackle": {
     "localized_name": "Carica a testa bassa",
-    "description": "Abilità di Rushoar. Punta un nemico e lo carica con violenza."
+    "description": "Abilità del Pal Rushoar. Punta un nemico e lo carica con violenza."
   },
   "EPalWazaID::Unique_CaptainPenguin_Black_BodySlide_Electric": {
     "localized_name": "Scivolata fulminante",
@@ -489,11 +497,11 @@
   },
   "EPalWazaID::Unique_CaptainPenguin_BodySlide": {
     "localized_name": "Scivolata del capitano",
-    "description": "Abilità del Pal Penking. Si mente pancia a terra e genera aria gelata per scivolare meglio contro il nemico."
+    "description": "Abilità del Pal Penking. Si mette pancia a terra e genera aria gelata per scivolare meglio contro il nemico."
   },
   "EPalWazaID::Unique_ChickenPal_ChickenPeck": {
     "localized_name": "Schianto gallinaceo",
-    "description": "Abilità di Chikipi. Punta un nemico e si lancia in volo per perforarlo col suo becco affilato."
+    "description": "Abilità del Pal Chikipi. Punta un nemico e si lancia in volo per perforarlo col suo becco affilato."
   },
   "EPalWazaID::Unique_DarkAlien_JumpScractch": {
     "localized_name": "Artiglio malevolo",
@@ -529,7 +537,7 @@
   },
   "EPalWazaID::Unique_Deer_PushupHorn": {
     "localized_name": "Incornata",
-    "description": "Abilità di Eikthyrdeer e delle sue sottospecie. Si lancia verso un nemico per colpirlo con le corna. Durante la cavalcata, è possibile controllare la direzione."
+    "description": "Abilità del Pal Eikthyrdeer e delle sue sottospecie. Si lancia verso un nemico per colpirlo con le corna. Durante la cavalcata, è possibile controllare la direzione."
   },
   "EPalWazaID::Unique_DrillGame_ShellAttack": {
     "localized_name": "Guscio con spuntoni",
@@ -541,7 +549,7 @@
   },
   "EPalWazaID::Unique_ElecPanda_ElecScratch": {
     "localized_name": "Artigli elettrici",
-    "description": "Abilità di Grizzbolt. Si lancia sul nemico e colpisce con artigli intrisi di elettricità. Dopo due attacchi, affonda gli artigli nel terreno, lanciando un attacco elettrico ad area."
+    "description": "Abilità del Pal Grizzbolt. Si lancia sul nemico e colpisce con artigli intrisi di elettricità. Dopo due attacchi, affonda gli artigli nel terreno, lanciando un attacco elettrico ad area."
   },
   "EPalWazaID::Unique_ElecPanda_GatlingAttack": {
     "localized_name": "Carro pesante fulminante",
@@ -549,7 +557,7 @@
   },
   "EPalWazaID::Unique_FairyDragon_FairyTornado": {
     "localized_name": "Uragano mistico",
-    "description": "Abilità di Elphidran. Crea due vortici dal potere misterioso, che inseguono il nemico."
+    "description": "Abilità del Pal Elphidran. Crea due vortici dal potere misterioso, che inseguono il nemico."
   },
   "EPalWazaID::Unique_FeatherOstrich_Tossin": {
     "localized_name": "Scatto terrestre",
@@ -565,7 +573,7 @@
   },
   "EPalWazaID::Unique_FireKirin_Dark_DarkTossin": {
     "localized_name": "Carica oscura",
-    "description": "Abilità di Pyrin Noct. Si scaglia sul nemico avvolto dal fuoco. Tutto ciò che ha intorno arde tra le fiamme."
+    "description": "Abilità del Pal Pyrin Noct. Si scaglia sul nemico avvolto dal fuoco. Tutto ciò che ha intorno arde tra le fiamme."
   },
   "EPalWazaID::Unique_FireKirin_Tackle": {
     "localized_name": "Carica di fuoco",
@@ -577,11 +585,11 @@
   },
   "EPalWazaID::Unique_FlowerDinosaur_Whip": {
     "localized_name": "Schianto botanico",
-    "description": "Abilità di Dinossom. Colpisce la zona di fronte a sé con la sua enorme coda, causando un impatto terrificante in linea retta."
+    "description": "Abilità del Pal Dinossom. Colpisce la zona di fronte a sé con la sua enorme coda, causando un impatto terrificante in linea retta."
   },
   "EPalWazaID::Unique_Garm_Bite": {
     "localized_name": "Zanne selvagge",
-    "description": "Abilità di Direhowl. Si lancia verso un nemico ad alta velocità e lo attacca con un morso."
+    "description": "Abilità del Pal Direhowl. Si lancia verso un nemico ad alta velocità e lo attacca con un morso."
   },
   "EPalWazaID::Unique_GhostAnglerfish_Fire_SweepBait_Fire": {
     "localized_name": "Colpo di lanterna ardente",
@@ -617,7 +625,7 @@
   },
   "EPalWazaID::Unique_Grassmammoth_Earthquake": {
     "localized_name": "Schianto terrestre",
-    "description": "Abilità di Mammorest. Fa tremare la terra sotto il suo enorme peso, danneggiando tutta l'area intorno a sé."
+    "description": "Abilità del Pal Mammorest. Fa tremare la terra sotto il suo enorme peso, danneggiando tutta l'area intorno a sé."
   },
   "EPalWazaID::Unique_GrimGirl_BrutalMachete": {
     "localized_name": "Machete dell'odio",
@@ -629,11 +637,11 @@
   },
   "EPalWazaID::Unique_HerculesBeetle_BeetleTackle": {
     "localized_name": "Corno titanico",
-    "description": "Abilità del Pal Warsect . Trafigge il nemico coi suoi quattro durissimi corni."
+    "description": "Abilità del Pal Warsect . Trafigge il nemico con le sue quattro durissime corna."
   },
   "EPalWazaID::Unique_Horus_FlareBird": {
     "localized_name": "Volo della fenice",
-    "description": "Abilità di Faleris. Dopo aver creato un tornado fiammeggiante, si avvolge nelle fiamme e si lancia in volo sul nemico."
+    "description": "Abilità del Pal Faleris. Dopo aver creato un tornado fiammeggiante, si avvolge nelle fiamme e si lancia in volo sul nemico."
   },
   "EPalWazaID::Unique_Horus_PerfectStorm": {
     "localized_name": "Ascesa ardente",
@@ -661,7 +669,7 @@
   },
   "EPalWazaID::Unique_JetDragon_JumpBeam": {
     "localized_name": "Cometa raggiante",
-    "description": "Abilità di Jetragon. Mentre si lancia sul nemico, le sue ali si illuminano ed emettono innumerevoli raggi, che esplodono all'impatto."
+    "description": "Abilità del Pal Jetragon. Mentre si lancia sul nemico, le sue ali si illuminano ed emettono innumerevoli raggi, che esplodono all'impatto."
   },
   "EPalWazaID::Unique_KingAlpaca_BodyPress": {
     "localized_name": "Schiacciamento reale",
@@ -682,6 +690,18 @@
   "EPalWazaID::Unique_LeafMomonga_SomerSault": {
     "localized_name": "Assalto della foglia",
     "description": "Abilità del Pal Herbil. Raccoglie le forze per un attimo, e poi si lancia contro il nemico a gran velocità facendo una capriola."
+  },
+  "EPalWazaID::Unique_LegendDeer_RadiantPurge_Otomo": {
+    "localized_name": "Luce della purificazione",
+    "description": "Abilità del Pal Hartalis. Sale verso il cielo accumulando una grande energia, che scaglia verso il suolo. Il colpo di energia cancella tutto ciò che esiste in superficie."
+  },
+  "EPalWazaID::Unique_LegendDeer_RadiantWingRush": {
+    "localized_name": "Ali divine",
+    "description": "Abilità del Pal Hartalis. Salta all'indietro, dispiegando ali di luce sul dorso, per poi abbattersi dal cielo contro il nemico."
+  },
+  "EPalWazaID::Unique_LegendDeer_WarpPillarBurst": {
+    "localized_name": "Pioggia sacra",
+    "description": "Abilità del Pal Hartalis. Sparisce per un istante, per poi far cadere numerosi pilastri di luce in una zona con se stesso al centro."
   },
   "EPalWazaID::Unique_LilyQueen_LilyHealing": {
     "localized_name": "Benedizione del raccolto",
@@ -721,15 +741,15 @@
   },
   "EPalWazaID::Unique_NightLady_FlameNightmare": {
     "localized_name": "Valzer di fuoco",
-    "description": "Abilità di Bellanoir Libero. Danza vorticosamente, generando fiamme intorno a sé. Scaglia anche fiamme inquietanti che inseguono i nemici."
+    "description": "Abilità del Pal Bellanoir Libero. Danza vorticosamente, generando fiamme intorno a sé. Scaglia anche fiamme inquietanti che inseguono i nemici."
   },
   "EPalWazaID::Unique_NightLady_WarpBeam": {
     "localized_name": "Fioritura d'incubo",
-    "description": "Abilità di Bellanoir Libero. Sparisce all'improvviso, e quando riappare scaglia una pioggia di raggi. I raggi si espandono come un fiore che sboccia."
+    "description": "Abilità del Pal Bellanoir Libero. Sparisce all'improvviso, e quando riappare scaglia una pioggia di raggi. I raggi si espandono come un fiore che sboccia."
   },
   "EPalWazaID::Unique_NightLady_WarpBeam_Straight": {
     "localized_name": "Raggio d'incubo",
-    "description": "Abilità di Bellanoir. Sparisce all'improvviso, e quando riappare scaglia una pioggia di raggi."
+    "description": "Abilità del Pal Bellanoir. Sparisce all'improvviso, e quando riappare scaglia una pioggia di raggi."
   },
   "EPalWazaID::Unique_OctopursGirl_InkJet": {
     "localized_name": "Cortina d'inchiostro",
@@ -737,7 +757,7 @@
   },
   "EPalWazaID::Unique_PinkCat_CatPunch": {
     "localized_name": "Pugni rotanti",
-    "description": "Abilità di Cattiva. Si lancia contro un nemico ruotando le braccia, tempestandolo di pugni."
+    "description": "Abilità del Pal Cattiva. Si lancia contro un nemico ruotando le braccia, tempestandolo di pugni."
   },
   "EPalWazaID::Unique_Plesiosaur_LongBreath": {
     "localized_name": "Soffio lungo",
@@ -773,7 +793,7 @@
   },
   "EPalWazaID::Unique_SakuraSaurus_SideTackle": {
     "localized_name": "Schianto brutale",
-    "description": "Abilità di Broncherry. Si gira di lato e poi si lancia, travolgendo ogni cosa col suo corpo."
+    "description": "Abilità del Pal Broncherry. Si gira di lato e poi si lancia, travolgendo ogni cosa col suo corpo."
   },
   "EPalWazaID::Unique_ScorpionMan_Uppercut": {
     "localized_name": "Schianto ascendente",
@@ -781,7 +801,7 @@
   },
   "EPalWazaID::Unique_SheepBall_Roll": {
     "localized_name": "Rotolamento della pecora",
-    "description": "Abilità di SheepBall. Si appallottola e si lancia contro un nemico. Dopo l'attacco, la testa gli gira troppo per muoversi."
+    "description": "Abilità del Pal SheepBall. Si appallottola e si lancia contro un nemico. Dopo l'attacco, la testa gli gira troppo per muoversi."
   },
   "EPalWazaID::Unique_SifuDog_Counter": {
     "localized_name": "Posizione inespugnabile",
@@ -837,7 +857,7 @@
   },
   "EPalWazaID::Unique_VolcanicMonster_Ice_IceAttack": {
     "localized_name": "Impulso glaciale",
-    "description": "Abilità di Reptyro Cryst. Colpisce il terreno con le zampe anteriori e soffia una tempesta di neve sul nemico. La zona circostante viene ricoperta di palle di neve."
+    "description": "Abilità del Pal Reptyro Cryst. Colpisce il terreno con le zampe anteriori e soffia una tempesta di neve sul nemico. La zona circostante viene ricoperta di palle di neve."
   },
   "EPalWazaID::Unique_VolcanicMonster_MagmaAttack": {
     "localized_name": "Assalto vulcanico",
@@ -942,6 +962,10 @@
   "EPalWazaID::WaterGun": {
     "localized_name": "Colpo d'acqua",
     "description": "Scaglia un proiettile d'acqua che vola in linea retta nella direzione del bersaglio."
+  },
+  "EPalWazaID::Weapon_Use": {
+    "localized_name": "Uso delle armi",
+    "description": "Attacca usando le armi che impugna."
   },
   "EPalWazaID::WindCutter": {
     "localized_name": "Falce d'aria",
