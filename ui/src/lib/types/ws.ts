@@ -18,6 +18,7 @@ export enum MessageType {
 	GET_PAL_DETAILS = 'get_pal_details',
 	LOAD_ZIP_FILE = 'load_zip_file',
 	PROGRESS_MESSAGE = 'progress_message',
+	RELOAD_MOUNTED_SAVE = 'reload_mounted_save',
 	SYNC_APP_STATE = 'sync_app_state',
 	UPDATE_SAVE_FILE = 'update_save_file',
 	GET_PRESETS = 'get_presets',

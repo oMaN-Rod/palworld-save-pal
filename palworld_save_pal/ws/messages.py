@@ -93,6 +93,7 @@ class MessageType(str, Enum):
     LOADED_SAVE_FILES = "loaded_save_files"
     LOAD_ZIP_FILE = "load_zip_file"
     NO_FILE_SELECTED = "no_file_selected"
+    RELOAD_MOUNTED_SAVE = "reload_mounted_save"
     SAVE_MODDED_SAVE = "save_modded_save"
     SELECT_GAMEPASS_SAVE = "select_gamepass_save"
     SELECT_SAVE = "select_save"

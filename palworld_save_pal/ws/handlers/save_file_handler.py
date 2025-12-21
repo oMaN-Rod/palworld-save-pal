@@ -6,6 +6,7 @@ import uuid
 import zipfile
 from fastapi import WebSocket
 from palworld_save_pal.ws.messages import (
+    BaseMessage,
     DownloadSaveFileMessage,
     MessageType,
     UpdateSaveFileMessage,
@@ -195,6 +196,7 @@ async def load_zip_file_handler(message: LoadZipFileMessage, ws: WebSocket):
         "name": app_state.save_file.level_sav_path,
         "size": app_state.save_file.size,
         "type": app_state.save_type.name.lower(),
+        "local": app_state.local,
     }
 
     await ws_callback(
@@ -209,3 +211,65 @@ async def load_zip_file_handler(message: LoadZipFileMessage, ws: WebSocket):
 
     response = build_response(MessageType.GET_GUILDS, app_state.guilds)
     await ws.send_json(response)
+
+
+async def reload_mounted_save_handler(message: BaseMessage, ws: WebSocket):
+    """Reload save files from mounted directory without restarting container."""
+    import os
+    from palworld_save_pal.utils.auto_loader import check_mounted_saves
+    
+    async def ws_callback(message: str):
+        response = build_response(MessageType.PROGRESS_MESSAGE, message)
+        await ws.send_json(response)
+
+    app_state = get_app_state()
+    mount_path = os.getenv("SAVE_MOUNT_PATH", "/app/saves")
+    
+    await ws_callback(f"Checking for saves in {mount_path}...")
+    
+    save_data = check_mounted_saves(mount_path)
+    if not save_data:
+        error_msg = f"No valid save files found in {mount_path}"
+        logger.error(error_msg)
+        response = build_response(MessageType.ERROR, error_msg)
+        await ws.send_json(response)
+        return
+    
+    await ws_callback("Reloading save files...")
+    
+    try:
+        await app_state.process_save_files(
+            sav_id=save_data["save_id"],
+            level_sav=save_data["level_sav"],
+            level_meta=save_data["level_meta"],
+            player_savs=save_data["player_saves"],
+            ws_callback=ws_callback,
+            local=True,
+        )
+        
+        data = {
+            "level": app_state.save_file.world_name,
+            "players": [str(p) for p in app_state.players.keys()],
+            "name": app_state.save_file.level_sav_path,
+            "size": app_state.save_file.size,
+            "type": app_state.save_type.name.lower(),
+            "local": app_state.local,
+        }
+        
+        await ws_callback("✅ Save reloaded successfully!")
+        response = build_response(MessageType.LOADED_SAVE_FILES, data)
+        await ws.send_json(response)
+        
+        response = build_response(MessageType.GET_PLAYERS, app_state.players)
+        await ws.send_json(response)
+
+        response = build_response(MessageType.GET_GUILDS, app_state.guilds)
+        await ws.send_json(response)
+        
+        logger.info("Save files reloaded successfully from mounted directory")
+        
+    except Exception as e:
+        error_msg = f"Failed to reload save files: {str(e)}"
+        logger.error(error_msg, exc_info=True)
+        response = build_response(MessageType.ERROR, error_msg)
+        await ws.send_json(response)

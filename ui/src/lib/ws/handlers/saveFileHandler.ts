@@ -15,10 +15,10 @@ export const loadedSaveFilesHandler: WSMessageHandler = {
 	type: MessageType.LOADED_SAVE_FILES,
 	async handle(data) {
 		const appState = getAppState();
-		const { level, players, world_name, size, type } = data;
-		console.log('Loaded save files', level, players);
+		const { level, players, world_name, size, type, local } = data;
+		console.log('Loaded save files', level, players, 'local:', local);
 		appState.resetState();
-		appState.saveFile = { name: level, world_name, type };
+		appState.saveFile = { name: level, world_name, type, local };
 		appState.playerSaveFiles = players.map((p: any) => ({ name: p }));
 	}
 };

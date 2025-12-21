@@ -25,6 +25,7 @@ async def sync_app_state_handler(_: SyncAppStateMessage, ws: WebSocket):
         "world_name": save_file.world_name,
         "type": app_state.save_type.name.lower(),
         "size": save_file.size,
+        "local": app_state.local,
     }
 
     response = build_response(MessageType.LOADED_SAVE_FILES, data)

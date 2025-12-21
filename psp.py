@@ -2,12 +2,15 @@ import argparse
 from pathlib import Path
 import multiprocessing
 from urllib.parse import quote
+import os
 
 import uvicorn
 from fastapi import FastAPI, Request, WebSocket, WebSocketDisconnect
 from fastapi.responses import FileResponse, RedirectResponse
 from palworld_save_pal.db.bootstrap import create_db_and_tables
 from palworld_save_pal.ws.manager import ConnectionManager
+from palworld_save_pal.state import get_app_state
+from palworld_save_pal.utils.auto_loader import check_mounted_saves
 
 from palworld_save_pal.utils.logging_config import create_logger, setup_logging
 
@@ -43,6 +46,42 @@ async def static_files_middleware(request: Request, call_next):
         encoded_path = quote(path)
         return RedirectResponse(url=f"/?path={encoded_path}")
     return await call_next(request)
+
+
+@app.on_event("startup")
+async def startup_event():
+    """
+    Check for mounted saves on startup and auto-load if available.
+    
+    This bypasses the normal zip upload/extraction process by reading
+    raw .sav files directly from the mounted directory.
+    """
+    mount_path = os.getenv("SAVE_MOUNT_PATH", "/app/saves")
+    logger.info(f"Checking for auto-load from {mount_path}")
+    
+    save_data = check_mounted_saves(mount_path)
+    if save_data:
+        logger.info("Auto-loading mounted save files (raw .sav, no unzipping)...")
+        app_state = get_app_state()
+        try:
+            # We can't use ws_callback here since there's no websocket connection yet
+            async def dummy_callback(msg: str):
+                logger.info(f"[Auto-load] {msg}")
+            
+            # Pass raw .sav bytes directly - no zip extraction needed!
+            await app_state.process_save_files(
+                sav_id=save_data["save_id"],
+                level_sav=save_data["level_sav"],
+                level_meta=save_data["level_meta"],
+                player_savs=save_data["player_saves"],
+                ws_callback=dummy_callback,
+                local=True,
+            )
+            logger.info("✅ Auto-load successful! Save file ready.")
+        except Exception as e:
+            logger.error(f"Failed to auto-load save files: {e}", exc_info=True)
+    else:
+        logger.info("No auto-load save files found. Manual upload required.")
 
 
 @app.websocket("/ws/{client_id}")

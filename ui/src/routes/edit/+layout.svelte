@@ -4,8 +4,9 @@
 	import { goto } from '$app/navigation';
 	import { MessageType, type Player } from '$types';
 	import { KeyboardShortcut, Tooltip } from '$components/ui';
-	import { send } from '$utils/websocketUtils';
+	import { send, pushProgressMessage } from '$utils/websocketUtils';
 	import Nuke from '$components/ui/icons/Nuke.svelte';
+	import { RefreshCw } from 'lucide-svelte';
 	
 	const { children } = $props();
 
@@ -70,6 +71,12 @@
 		}
 	}
 
+	async function handleReloadSave() {
+		await goto('/loading');
+		pushProgressMessage('Reloading save from mounted directory... 🔄');
+		send(MessageType.RELOAD_MOUNTED_SAVE);
+	}
+
 	async function handleOnSelectPlayer(player: Player) {
 		appState.selectedPlayer = player;
 		goto('/edit/player');
@@ -124,13 +131,24 @@
 				<KeyboardShortcut text="Pal" key="P" href="/edit/pal"/>
 				{/if}
 			</div>
-			<a
-				href="https://discord.gg/YWZFPy9G8J"
-				target="_blank"
-				rel="noopener noreferrer"
-				class="mr-2 inline-flex rounded-md bg-indigo-600 px-3 py-2 text-sm font-medium text-white hover:bg-indigo-700 {appState.saveFile
-					? ''
-					: 'mt-3'}"
+			<div class="flex gap-2">
+				{#if appState.saveFile?.local}
+					<button
+						onclick={handleReloadSave}
+						class="inline-flex rounded-md bg-green-600 px-3 py-2 text-sm font-medium text-white hover:bg-green-700"
+						title="Reload save from mounted directory"
+					>
+						<RefreshCw size={20} class="mr-2" />
+						Reload Save
+					</button>
+				{/if}
+				<a
+					href="https://discord.gg/YWZFPy9G8J"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="inline-flex rounded-md bg-indigo-600 px-3 py-2 text-sm font-medium text-white hover:bg-indigo-700 {appState.saveFile
+						? ''
+						: 'mt-3'}"
 			>
 				<svg
 					class="mr-2 h-5 w-5"
@@ -144,6 +162,7 @@
 				</svg>
 				Support
 			</a>
+			</div>
 		</div>
 		<div class="overflow-y-auto">
 			{@render children()}

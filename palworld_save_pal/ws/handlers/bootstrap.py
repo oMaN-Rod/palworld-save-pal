@@ -120,6 +120,14 @@ def bootstrap(dispatcher: "MessageDispatcher"):
     )
 
     dispatcher.register_handler(
+        MessageType.RELOAD_MOUNTED_SAVE.value,
+        {
+            "message_class": BaseMessage,
+            "handler_func": save_file_handler.reload_mounted_save_handler,
+        },
+    )
+
+    dispatcher.register_handler(
         MessageType.UPDATE_SAVE_FILE.value,
         {
             "message_class": UpdateSaveFileMessage,

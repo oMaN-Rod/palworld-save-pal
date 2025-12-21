@@ -11,6 +11,9 @@ services:
     volumes:
       - ./data:/app/data
       - ./palworld_save_pal:/app/palworld_save_pal
+      # Uncomment and adjust the path below to auto-load your save files
+      # - /path/to/your/SaveGames/0/YOUR-WORLD-ID:/app/saves:ro  
     environment:
       - PORT=5174
+      - SAVE_MOUNT_PATH=/app/saves  # Path where saves are mounted (auto-load enabled)
     command: python psp.py
