@@ -12,6 +12,24 @@ export interface GamepassSave {
 	containers: GamePassContainer[];
 }
 
+export interface PlayerSummary {
+	uid: string;
+	nickname: string;
+	level?: number;
+	guild_id?: string;
+	pal_count: number;
+	loaded: boolean;
+}
+
+export interface GuildSummary {
+	id: string;
+	name: string;
+	admin_player_uid?: string;
+	player_count: number;
+	base_count: number;
+	loaded: boolean;
+}
+
 export type EggConfig = {
 	character_id: string;
 	gender: PalGender;

@@ -205,6 +205,38 @@ class FileManager:
         return player_saves
 
     @staticmethod
+    def get_player_save_paths(players_dir: str) -> Dict[uuid.UUID, Dict[str, str]]:
+        player_save_paths: Dict[uuid.UUID, Dict[str, str]] = {}
+        players_path = Path(players_dir)
+
+        for save_file in players_path.glob("*.sav"):
+            dps = False
+            try:
+                player_id = save_file.stem
+                if "_dps" in player_id:
+                    player_id = player_id.replace("_dps", "")
+                    dps = True
+
+                logger.debug(
+                    "Found player save path: %s, uuid: %s", save_file, player_id
+                )
+                player_uuid = uuid.UUID(player_id)
+
+                if player_uuid not in player_save_paths:
+                    player_save_paths[player_uuid] = {}
+
+                save_type = "dps" if dps else "sav"
+                player_save_paths[player_uuid][save_type] = str(save_file)
+
+            except:
+                logger.error(
+                    "Failed to parse player save path: %s", save_file, exc_info=True
+                )
+                continue
+
+        return player_save_paths
+
+    @staticmethod
     def read_level_meta(data: bytes) -> Optional[str]:
         level_meta = SaveFile().load_level_meta(data)
         world_name = PalObjects.get_nested(

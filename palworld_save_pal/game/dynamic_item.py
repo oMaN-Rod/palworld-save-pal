@@ -75,7 +75,7 @@ class DynamicItem(BaseModel):
 
     @computed_field
     def remaining_bullets(self) -> Optional[int]:
-        return PalObjects.get_nested(self._raw_data, "remaining_bullets", log=False)
+        return PalObjects.get_nested(self._raw_data, "remaining_bullets")
 
     @remaining_bullets.setter
     def remaining_bullets(self, value: int) -> None:
@@ -223,9 +223,7 @@ class DynamicItem(BaseModel):
 
     @property
     def _save_parameter(self) -> Dict[str, Any]:
-        return PalObjects.get_nested(
-            self._raw_data, "object", "SaveParameter", "value", log=False
-        )
+        return PalObjects.get_nested(self._raw_data, "object", "SaveParameter", "value")
 
     @property
     def save_data(self) -> Dict[str, Any]:

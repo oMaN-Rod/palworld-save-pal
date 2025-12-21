@@ -1,8 +1,7 @@
 <script lang="ts">
-	import type { Player } from '$types';
+	import type { Player, PlayerSummary } from '$types';
 	import { Combobox } from '$components/ui';
 	import { getAppState } from '$states';
-	import { onMount } from 'svelte';
 
 	let appState = getAppState();
 
@@ -12,27 +11,72 @@
 		[key: string]: any;
 	}>();
 
-	const selectOptions = $derived(
-		Object.entries(appState.players as Record<string, Player>).map(([uid, player]) => ({
-			value: uid,
-			label: player.nickname || `Player ${uid}`
-		}))
-	);
+	const selectOptions = $derived.by(() => {
+		return Object.entries(appState.playerSummaries as Record<string, PlayerSummary>).map(
+			([uid, summary]) => ({
+				value: uid,
+				label: summary.loaded
+					? `🟦 ${summary.nickname || `Player ${uid.slice(0, 8)}`} (${summary.pal_count} pals)`
+					: `🟪 ${summary.nickname || `Player ${uid.slice(0, 8)}`} (${summary.pal_count} pals)`
+			})
+		);
+	});
+
+	function handleSelect(playerId: string) {
+		if (appState.players[playerId]) {
+			onselect(appState.players[playerId]);
+		} else {
+			appState.selectPlayerLazy(playerId);
+		}
+	}
 
 	$effect(() => {
-		if (!selected && Object.keys(appState.players).length === 1) {
-			const singlePlayerId = Object.keys(appState.players)[0];
+		const playerCount = Object.keys(appState.playerSummaries).length;
+
+		if (!selected && playerCount === 1) {
+			const singlePlayerId = Object.keys(appState.playerSummaries)[0];
 			selected = singlePlayerId;
-			onselect(appState.players[singlePlayerId]);
+			handleSelect(singlePlayerId);
 		}
-	})
+	});
+
+	$effect(() => {
+		if (appState.selectedPlayer && !appState.loadingPlayer) {
+			if (selected === appState.selectedPlayer.uid) {
+				onselect(appState.selectedPlayer);
+			}
+		}
+	});
 </script>
 
 <div class="w-full" {...additionalProps}>
-	<Combobox
-		value={selected}
-		options={selectOptions}
-		placeholder="Select Player"
-		onChange={(value) => onselect(appState.players[value])}
-	/>
+	{#if appState.loadingPlayer}
+		<div class="flex items-center gap-2 px-3 py-2 text-sm text-gray-400">
+			<svg class="animate-spin h-4 w-4" viewBox="0 0 24 24">
+				<circle
+					class="opacity-25"
+					cx="12"
+					cy="12"
+					r="10"
+					stroke="currentColor"
+					stroke-width="4"
+					fill="none"
+				></circle>
+				<path
+					class="opacity-75"
+					fill="currentColor"
+					d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+				></path>
+			</svg>
+			Loading player...
+		</div>
+	{:else}
+		<Combobox
+			value={selected}
+			options={selectOptions}
+			placeholder="Select Player"
+			onChange={(value) => handleSelect(value as string)}
+			selectClass="w-80"
+		/>
+	{/if}
 </div>

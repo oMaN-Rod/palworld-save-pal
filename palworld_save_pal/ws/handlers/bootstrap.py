@@ -11,6 +11,7 @@ from palworld_save_pal.ws.handlers import (
     guild_handler,
     items_handler,
     lab_research_handler,
+    lazy_load_handler,
     map_objects_handler,
     map_unlock_handler,
     open_in_browser_handler,
@@ -96,6 +97,9 @@ from palworld_save_pal.ws.messages import (
     GetUpsStatsMessage,
     NukeUpsPalsMessage,
     UnlockMapMessage,
+    RequestPlayerDetailsMessage,
+    RequestGuildDetailsMessage,
+    RequestGpsMessage,
 )
 
 if TYPE_CHECKING:
@@ -645,5 +649,29 @@ def bootstrap(dispatcher: "MessageDispatcher"):
         {
             "message_class": UnlockMapMessage,
             "handler_func": map_unlock_handler.unlock_map_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.REQUEST_PLAYER_DETAILS.value,
+        {
+            "message_class": RequestPlayerDetailsMessage,
+            "handler_func": lazy_load_handler.request_player_details_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.REQUEST_GUILD_DETAILS.value,
+        {
+            "message_class": RequestGuildDetailsMessage,
+            "handler_func": lazy_load_handler.request_guild_details_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.REQUEST_GPS.value,
+        {
+            "message_class": RequestGpsMessage,
+            "handler_func": gps_handler.request_gps_handler,
         },
     )

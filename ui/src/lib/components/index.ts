@@ -28,6 +28,7 @@ import Spinner from './spinner/Spinner.svelte';
 import StoragePresets from './storage-presets/StoragePresets.svelte';
 import Talents from './talents/Talents.svelte';
 import Toast from './toast/Toast.svelte';
+import Stopwatch from './ui/stopwatch/Stopwatch.svelte';
 
 export * from './modals';
 export {
@@ -57,6 +58,7 @@ export {
 	Spinner,
 	StatsBadges,
 	StatusBadge,
+	Stopwatch,
 	StoragePresets,
 	Talents,
 	Toast,

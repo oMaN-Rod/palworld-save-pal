@@ -83,7 +83,15 @@ export enum MessageType {
 	NUKE_UPS_PALS = 'nuke_ups_pals',
 
 	// Map
-	UNLOCK_MAP = 'unlock_map'
+	UNLOCK_MAP = 'unlock_map',
+	GET_PLAYER_SUMMARIES = 'get_player_summaries',
+	GET_GUILD_SUMMARIES = 'get_guild_summaries',
+	REQUEST_PLAYER_DETAILS = 'request_player_details',
+	GET_PLAYER_DETAILS_RESPONSE = 'get_player_details_response',
+	REQUEST_GUILD_DETAILS = 'request_guild_details',
+	GET_GUILD_DETAILS_RESPONSE = 'get_guild_details_response',
+	REQUEST_GPS = 'request_gps',
+	GET_GPS_RESPONSE = 'get_gps_response'
 }
 
 interface UpdateSaveFileData {

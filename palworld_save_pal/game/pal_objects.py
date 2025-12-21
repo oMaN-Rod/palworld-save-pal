@@ -99,17 +99,12 @@ class PalObjects:
         return PalObjects.get_nested(d, "value", default=default)
 
     @staticmethod
-    def get_nested(
-        d: Dict[str, Any], *keys: str, default: Any = None, log: bool = True
-    ) -> Any:
+    def get_nested(d: Dict[str, Any], *keys: str, default: Any = None) -> Any:
         try:
-            return (
-                d[keys[0]]
-                if len(keys) == 1
-                else PalObjects.get_nested(d[keys[0]], *keys[1:], default=default)
-            )
+            for key in keys:
+                d = d[key]
+            return d
         except (KeyError, TypeError, IndexError):
-            logger.warning("Key(s) not found: %s", keys)
             return default
 
     @staticmethod

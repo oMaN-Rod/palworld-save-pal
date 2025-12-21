@@ -4,6 +4,7 @@
 	import { getAppState, getModalState, getToastState, getUpsState } from '$states';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import { Card, Input, Tooltip, TooltipButton } from '$components/ui';
+	import { Spinner } from '$components';
 	import {
 		PalSelectModal,
 		FillPalsModal,
@@ -599,6 +600,20 @@
 	}
 </script>
 
+{#if appState.loadingGps}
+	<div class="flex h-full w-full items-center justify-center">
+		<div class="flex flex-col items-center gap-4">
+			<Spinner size="size-16" />
+			<p class="text-surface-400">Loading Global Pal Storage...</p>
+		</div>
+	</div>
+{:else if !appState.hasGpsAvailable && !appState.gpsLoaded}
+	<div class="flex h-full w-full items-center justify-center">
+		<div class="flex flex-col items-center gap-4">
+			<p class="text-surface-400">Global Pal Storage is not available for this save.</p>
+		</div>
+	</div>
+{:else}
 <div
 	class="grid h-full w-full grid-cols-[25%_1fr] 2xl:grid-cols-[25%_1fr_20%]"
 	{...additionalProps}
@@ -872,6 +887,7 @@
 		</Card>
 	{/if}
 </div>
+{/if}
 
 <style>
 	.pal-element-badge {

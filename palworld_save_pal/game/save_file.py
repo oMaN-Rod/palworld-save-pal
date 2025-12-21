@@ -1,4 +1,5 @@
 import copy
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from enum import Enum
 import json
 import os
@@ -23,6 +24,7 @@ from palworld_save_tools.paltypes import (
 
 from palworld_save_pal.dto.pal import PalDTO
 from palworld_save_pal.dto.guild import GuildDTO
+from palworld_save_pal.dto.summary import PlayerSummary, GuildSummary
 from palworld_save_pal.game.base import Base
 from palworld_save_pal.game.guild import Guild
 from palworld_save_pal.game.pal import Pal
@@ -31,6 +33,7 @@ from palworld_save_pal.game.enum import GroupType, PalGender
 from palworld_save_pal.utils.logging_config import create_logger
 from palworld_save_pal.game.player import Player, PlayerDTO, PlayerGvasFiles
 from palworld_save_pal.utils.uuid import are_equal_uuids, is_empty_uuid
+from palworld_save_pal.utils.json_manager import sanitize_string
 
 logger = create_logger(__name__)
 
@@ -167,6 +170,28 @@ class SaveFile(BaseModel):
     _base_camp_save_data_map: List[Dict[str, Any]] = PrivateAttr(default_factory=list)
     _map_object_save_data: List[Dict[str, Any]] = PrivateAttr(default_factory=list)
     _guild_extra_save_data_map: List[Dict[str, Any]] = PrivateAttr(default_factory=list)
+
+    _player_summaries: Dict[UUID, PlayerSummary] = PrivateAttr(default_factory=dict)
+    _guild_summaries: Dict[UUID, GuildSummary] = PrivateAttr(default_factory=dict)
+    _loaded_players: set = PrivateAttr(default_factory=set)
+    _loaded_guilds: set = PrivateAttr(default_factory=set)
+
+    _player_file_refs: Dict[UUID, Dict[str, Any]] = PrivateAttr(default_factory=dict)
+
+    _pal_owner_counts_cache: Optional[Dict[UUID, int]] = PrivateAttr(default=None)
+    _player_guild_map_cache: Optional[Dict[UUID, UUID]] = PrivateAttr(default=None)
+    _map_object_index: Optional[Dict[UUID, List[Dict[str, Any]]]] = PrivateAttr(
+        default=None
+    )
+    _item_container_index: Optional[Dict[UUID, Dict[str, Any]]] = PrivateAttr(
+        default=None
+    )
+    _dynamic_item_index: Optional[Dict[UUID, Dict[str, Any]]] = PrivateAttr(
+        default=None
+    )
+    _character_container_index: Optional[Dict[UUID, Dict[str, Any]]] = PrivateAttr(
+        default=None
+    )
 
     def _should_delete_map_object(
         self, map_object: dict, guild_id: UUID | None, player_ids: List[UUID]
@@ -493,6 +518,7 @@ class SaveFile(BaseModel):
             return
         self._character_save_parameter_map.append(new_pal.character_save)
         self._pals[new_pal.instance_id] = new_pal
+        self.invalidate_performance_caches()
         return new_pal
 
     def add_player_pal_from_dto(
@@ -512,6 +538,7 @@ class SaveFile(BaseModel):
             return
         self._character_save_parameter_map.append(new_pal.character_save)
         self._pals[new_pal.instance_id] = new_pal
+        self.invalidate_performance_caches()
         return new_pal
 
     def add_player_dps_pal(
@@ -656,6 +683,7 @@ class SaveFile(BaseModel):
             return
         self._character_save_parameter_map.append(new_pal.character_save)
         self._pals[new_pal.instance_id] = new_pal
+        self.invalidate_performance_caches()
         return new_pal
 
     def move_pal(self, player_id: UUID, pal_id: UUID, container_id: UUID) -> Pal | None:
@@ -675,6 +703,7 @@ class SaveFile(BaseModel):
             return
         self._character_save_parameter_map.append(new_pal.character_save)
         self._pals[new_pal.instance_id] = new_pal
+        self.invalidate_performance_caches()
         return new_pal
 
     def clone_dps_pal(self, pal: PalDTO) -> Optional[Pal]:
@@ -698,6 +727,7 @@ class SaveFile(BaseModel):
             return
         self._character_save_parameter_map.append(new_pal.character_save)
         self._pals[new_pal.instance_id] = new_pal
+        self.invalidate_performance_caches()
         return new_pal
 
     def delete_player_pals(self, player_id: UUID, pal_ids: List[UUID]) -> None:
@@ -800,16 +830,10 @@ class SaveFile(BaseModel):
         return None
 
     def get_character_container(self, container_id: UUID) -> Dict[str, Any]:
-        for entry in self._character_container_save_data:
-            if are_equal_uuids(PalObjects.get_guid(entry["key"]["ID"]), container_id):
-                return entry
-        return None
+        return self._get_character_container_index().get(container_id)
 
     def get_item_container(self, container_id: UUID) -> Dict[str, Any]:
-        for entry in self._item_container_save_data:
-            if are_equal_uuids(PalObjects.get_guid(entry["key"]["ID"]), container_id):
-                return entry
-        return None
+        return self._get_item_container_index().get(container_id)
 
     def load_json(self, data: bytes):
         logger.info("Loading %s as JSON", self.level_sav_path)
@@ -849,19 +873,52 @@ class SaveFile(BaseModel):
     def pal_count(self):
         return len(self._pals)
 
+    def get_player_summaries(self) -> Dict[UUID, PlayerSummary]:
+        valid_summaries = {}
+        filtered_count = 0
+
+        for player_id, summary in self._player_summaries.items():
+            if player_id in self._player_file_refs:
+                valid_summaries[player_id] = summary
+            else:
+                filtered_count += 1
+                logger.warning(
+                    f"Filtering out player {player_id} ({summary.nickname}) - no .sav file reference"
+                )
+
+        if filtered_count > 0:
+            logger.info(
+                f"Filtered {filtered_count} players without .sav files, "
+                f"returning {len(valid_summaries)} valid players"
+            )
+
+        return valid_summaries
+
+    def get_guild_summaries(self) -> Dict[UUID, GuildSummary]:
+        return self._guild_summaries
+
+    def is_player_loaded(self, player_id: UUID) -> bool:
+        return player_id in self._loaded_players
+
+    def is_guild_loaded(self, guild_id: UUID) -> bool:
+        return guild_id in self._loaded_guilds
+
     async def load_sav_files(
         self,
         level_sav: bytes,
-        player_sav_files: Dict[UUID, Dict[str, bytes]],
+        player_file_refs: Dict[UUID, Dict[str, Any]],
         level_meta: Optional[bytes] = None,
         ws_callback=None,
-    ):
-        logger.info("Loading %s", self.level_sav_path)
+    ) -> "SaveFile":
+        logger.info("Loading %s (minimal mode)", self.level_sav_path)
+        start_time = time.perf_counter()
+
         raw_gvas, _ = decompress_sav_to_gvas(level_sav)
         gvas_file = GvasFile.read(
             raw_gvas, PALWORLD_TYPE_HINTS, CUSTOM_PROPERTIES, allow_nan=True
         )
         self._gvas_file = gvas_file
+        logger.info(f"Level.sav parsed in {time.perf_counter() - start_time:.2f}s")
 
         if level_meta:
             await ws_callback("Loading level meta...")
@@ -872,15 +929,644 @@ class SaveFile(BaseModel):
             self.world_name = "No LevelMeta.sav found"
 
         self._get_file_size(level_sav)
+
         self._set_data()
-        await ws_callback("Loading pals...")
-        self._load_pals()
-        await ws_callback("Loading guilds...")
-        self._load_guilds()
-        await self._load_players(player_sav_files, ws_callback)
-        await ws_callback("Loading bases...")
-        await self._load_bases(ws_callback)
+
+        self._player_file_refs = player_file_refs
+
+        await ws_callback("Extracting player summaries...")
+        self._extract_player_summaries()
+
+        await ws_callback("Extracting guild summaries...")
+        self._extract_guild_summaries()
+
+        logger.info(
+            f"Load complete in {time.perf_counter() - start_time:.2f}s - "
+            f"{len(self._player_summaries)} players, {len(self._guild_summaries)} guilds"
+        )
+
         return self
+
+    def _extract_player_summaries(self) -> Dict[UUID, PlayerSummary]:
+        start_time = time.perf_counter()
+        players_data, pal_owner_counts = self._categorize_character_entries()
+        player_guild_map = self._get_player_guild_map()
+
+        if len(players_data) > 2:
+            summaries = self._extract_players_parallel(
+                players_data, player_guild_map, pal_owner_counts
+            )
+        else:
+            summaries = self._extract_players_sequential(
+                players_data, player_guild_map, pal_owner_counts
+            )
+
+        self._player_summaries = summaries
+        elapsed = time.perf_counter() - start_time
+        logger.info(f"Extracted {len(summaries)} player summaries in {elapsed:.3f}s")
+        return summaries
+
+    def _categorize_character_entries(
+        self,
+    ) -> Tuple[List[Tuple[UUID, Dict[str, Any]]], Dict[UUID, int]]:
+        players_data: List[Tuple[UUID, Dict[str, Any]]] = []
+        pal_owner_counts: Dict[UUID, int] = {}
+
+        for entry in self._character_save_parameter_map:
+            try:
+                save_parameter = entry["value"]["RawData"]["value"]["object"][
+                    "SaveParameter"
+                ]["value"]
+            except (KeyError, TypeError):
+                continue
+
+            if self._is_player(entry):
+                try:
+                    uid = PalObjects.get_guid(entry["key"]["PlayerUId"])
+                    if uid and not is_empty_uuid(uid):
+                        players_data.append((uid, save_parameter))
+                except (KeyError, TypeError):
+                    continue
+            else:
+                owner_uid_data = save_parameter.get("OwnerPlayerUId")
+                if owner_uid_data:
+                    owner_uid = PalObjects.get_guid(owner_uid_data)
+                    if owner_uid:
+                        pal_owner_counts[owner_uid] = (
+                            pal_owner_counts.get(owner_uid, 0) + 1
+                        )
+
+        self._pal_owner_counts_cache = pal_owner_counts
+
+        return players_data, pal_owner_counts
+
+    def _get_player_guild_map(self) -> Dict[UUID, UUID]:
+        if self._player_guild_map_cache is not None:
+            return self._player_guild_map_cache
+
+        self._player_guild_map_cache = self._build_player_guild_index()
+        return self._player_guild_map_cache
+
+    def _build_player_guild_index(self) -> Dict[UUID, UUID]:
+        player_guild_map: Dict[UUID, UUID] = {}
+
+        if not self._group_save_data_map:
+            return player_guild_map
+
+        for entry in self._group_save_data_map:
+            group_type = PalObjects.get_enum_property(
+                PalObjects.get_nested(entry, "value", "GroupType")
+            )
+            if GroupType.from_value(group_type) != GroupType.GUILD:
+                continue
+
+            guild_id = PalObjects.as_uuid(PalObjects.get_nested(entry, "key"))
+            if not guild_id:
+                continue
+
+            try:
+                raw_data = entry["value"]["RawData"]["value"]
+            except (KeyError, TypeError):
+                continue
+
+            for player_entry in raw_data.get("players", []):
+                player_uid = PalObjects.as_uuid(player_entry.get("player_uid"))
+                if player_uid:
+                    player_guild_map[player_uid] = guild_id
+
+        return player_guild_map
+
+    def _create_player_summary(
+        self,
+        uid: UUID,
+        save_parameter: Dict[str, Any],
+        player_guild_map: Dict[UUID, UUID],
+        pal_owner_counts: Dict[UUID, int],
+    ) -> PlayerSummary:
+        nickname = None
+        if "NickName" in save_parameter:
+            nickname_data = save_parameter["NickName"]
+            if isinstance(nickname_data, dict):
+                nickname = nickname_data.get("value")
+            else:
+                nickname = nickname_data
+        if not nickname:
+            nickname = f"Player ({str(uid)[:8]})"
+        nickname = sanitize_string(nickname)
+
+        level = None
+        if "Level" in save_parameter:
+            level = PalObjects.get_byte_property(save_parameter["Level"])
+
+        return PlayerSummary(
+            uid=uid,
+            nickname=nickname,
+            level=level,
+            guild_id=player_guild_map.get(uid),
+            pal_count=pal_owner_counts.get(uid, 0),
+            loaded=False,
+        )
+
+    def _extract_players_sequential(
+        self,
+        players_data: List[Tuple[UUID, Dict[str, Any]]],
+        player_guild_map: Dict[UUID, UUID],
+        pal_owner_counts: Dict[UUID, int],
+    ) -> Dict[UUID, PlayerSummary]:
+        summaries = {}
+        for uid, save_parameter in players_data:
+            summaries[uid] = self._create_player_summary(
+                uid, save_parameter, player_guild_map, pal_owner_counts
+            )
+            logger.debug(
+                "Extracted player summary for player: %s", summaries[uid].nickname
+            )
+        return summaries
+
+    def _extract_players_parallel(
+        self,
+        players_data: List[Tuple[UUID, Dict[str, Any]]],
+        player_guild_map: Dict[UUID, UUID],
+        pal_owner_counts: Dict[UUID, int],
+    ) -> Dict[UUID, PlayerSummary]:
+        summaries = {}
+        max_workers = min(4, len(players_data))
+
+        with ThreadPoolExecutor(max_workers=max_workers) as executor:
+            future_to_uid = {
+                executor.submit(
+                    self._create_player_summary,
+                    uid,
+                    save_parameter,
+                    player_guild_map,
+                    pal_owner_counts,
+                ): uid
+                for uid, save_parameter in players_data
+            }
+
+            for future in as_completed(future_to_uid):
+                uid = future_to_uid[future]
+                try:
+                    summaries[uid] = future.result()
+                    logger.debug(
+                        "Extracted player summary for player: %s",
+                        summaries[uid].nickname,
+                    )
+                except Exception as e:
+                    logger.error(f"Error extracting player {uid}: {e}")
+
+        return summaries
+
+    def invalidate_performance_caches(self) -> None:
+        self._pal_owner_counts_cache = None
+        self._player_guild_map_cache = None
+        self._map_object_index = None
+        self._item_container_index = None
+        self._dynamic_item_index = None
+        self._character_container_index = None
+        logger.debug("Performance caches invalidated")
+
+    def _get_map_object_index(self) -> Dict[UUID, List[Dict[str, Any]]]:
+        if self._map_object_index is not None:
+            return self._map_object_index
+        self._map_object_index = self._build_map_object_index()
+        return self._map_object_index
+
+    def _build_map_object_index(self) -> Dict[UUID, List[Dict[str, Any]]]:
+        index: Dict[UUID, List[Dict[str, Any]]] = {}
+        if not self._map_object_save_data or "values" not in self._map_object_save_data:
+            return index
+        for map_object in self._map_object_save_data["values"]:
+            try:
+                base_camp_id = PalObjects.as_uuid(
+                    map_object["Model"]["value"]["RawData"]["value"][
+                        "base_camp_id_belong_to"
+                    ]
+                )
+            except (KeyError, TypeError):
+                continue
+            if base_camp_id:
+                if base_camp_id not in index:
+                    index[base_camp_id] = []
+                index[base_camp_id].append(map_object)
+        return index
+
+    def _get_item_container_index(self) -> Dict[UUID, Dict[str, Any]]:
+        if self._item_container_index is not None:
+            return self._item_container_index
+        self._item_container_index = self._build_item_container_index()
+        return self._item_container_index
+
+    def _build_item_container_index(self) -> Dict[UUID, Dict[str, Any]]:
+        index: Dict[UUID, Dict[str, Any]] = {}
+        if not self._item_container_save_data:
+            return index
+        for entry in self._item_container_save_data:
+            try:
+                container_id = PalObjects.get_guid(entry["key"]["ID"])
+            except (KeyError, TypeError):
+                continue
+            if container_id:
+                index[container_id] = entry
+        return index
+
+    def _get_dynamic_item_index(self) -> Dict[UUID, Dict[str, Any]]:
+        if self._dynamic_item_index is not None:
+            return self._dynamic_item_index
+        self._dynamic_item_index = self._build_dynamic_item_index()
+        return self._dynamic_item_index
+
+    def _build_dynamic_item_index(self) -> Dict[UUID, Dict[str, Any]]:
+        index: Dict[UUID, Dict[str, Any]] = {}
+        if not self._dynamic_item_save_data:
+            return index
+        for entry in self._dynamic_item_save_data:
+            try:
+                local_id = PalObjects.as_uuid(
+                    entry["RawData"]["value"]["id"]["local_id_in_created_world"]
+                )
+            except (KeyError, TypeError):
+                continue
+            if local_id:
+                index[local_id] = entry
+        return index
+
+    def _get_character_container_index(self) -> Dict[UUID, Dict[str, Any]]:
+        if self._character_container_index is not None:
+            return self._character_container_index
+        self._character_container_index = self._build_character_container_index()
+        return self._character_container_index
+
+    def _build_character_container_index(self) -> Dict[UUID, Dict[str, Any]]:
+        index: Dict[UUID, Dict[str, Any]] = {}
+        if not self._character_container_save_data:
+            return index
+        for entry in self._character_container_save_data:
+            try:
+                container_id = PalObjects.get_guid(entry["key"]["ID"])
+            except (KeyError, TypeError):
+                continue
+            if container_id:
+                index[container_id] = entry
+        return index
+
+    def _extract_guild_summaries(self) -> Dict[UUID, GuildSummary]:
+        summaries = {}
+
+        if not self._group_save_data_map:
+            self._guild_summaries = summaries
+            return summaries
+
+        for entry in self._group_save_data_map:
+            group_type = PalObjects.get_enum_property(
+                PalObjects.get_nested(entry, "value", "GroupType")
+            )
+            group_type = GroupType.from_value(group_type)
+            if group_type != GroupType.GUILD:
+                continue
+
+            guild_id = PalObjects.as_uuid(PalObjects.get_nested(entry, "key"))
+            if not guild_id or is_empty_uuid(guild_id):
+                continue
+
+            raw_data = PalObjects.get_nested(entry, "value", "RawData", "value")
+            if not raw_data:
+                continue
+
+            name = raw_data.get("guild_name", "Unknown Guild")
+            name = sanitize_string(name)
+            players = raw_data.get("players", [])
+            admin_player_uid = PalObjects.as_uuid(raw_data.get("admin_player_uid"))
+
+            base_count = 0
+            if self._base_camp_save_data_map:
+                base_count = sum(
+                    1
+                    for base in self._base_camp_save_data_map
+                    if are_equal_uuids(
+                        PalObjects.as_uuid(
+                            PalObjects.get_nested(
+                                base, "value", "RawData", "value", "group_id_belong_to"
+                            )
+                        ),
+                        guild_id,
+                    )
+                )
+
+            summaries[guild_id] = GuildSummary(
+                id=guild_id,
+                name=name,
+                admin_player_uid=admin_player_uid,
+                player_count=len(players),
+                base_count=base_count,
+                loaded=False,
+            )
+
+        self._guild_summaries = summaries
+        logger.info(f"Extracted {len(summaries)} guild summaries")
+        return summaries
+
+    def _find_player_guild_id(self, player_id: UUID):
+        if self._player_guild_map_cache is not None:
+            guild_id = self._player_guild_map_cache.get(player_id)
+            if guild_id:
+                for entry in self._group_save_data_map:
+                    entry_guild_id = PalObjects.as_uuid(
+                        PalObjects.get_nested(entry, "key")
+                    )
+                    if are_equal_uuids(entry_guild_id, guild_id):
+                        yield guild_id, entry
+                        return
+
+        if not self._group_save_data_map:
+            return
+
+        for entry in self._group_save_data_map:
+            group_type = PalObjects.get_enum_property(
+                PalObjects.get_nested(entry, "value", "GroupType")
+            )
+            if GroupType.from_value(group_type) != GroupType.GUILD:
+                continue
+
+            guild_id = PalObjects.as_uuid(PalObjects.get_nested(entry, "key"))
+            raw_data = PalObjects.get_nested(entry, "value", "RawData", "value")
+            if not raw_data:
+                continue
+
+            players = raw_data.get("players", [])
+            for player_entry in players:
+                player_uid = PalObjects.as_uuid(player_entry.get("player_uid"))
+                if are_equal_uuids(player_uid, player_id):
+                    yield guild_id, entry
+
+    def _pal_belongs_to_player(self, entry: Dict[str, Any], player_id: UUID) -> bool:
+        save_parameter = PalObjects.get_nested(
+            entry, "value", "RawData", "value", "object", "SaveParameter", "value"
+        )
+        if not save_parameter:
+            return False
+
+        owner_uid = PalObjects.get_guid(save_parameter.get("OwnerPlayerUId"))
+        return are_equal_uuids(owner_uid, player_id)
+
+    async def load_player_on_demand(
+        self,
+        player_id: UUID,
+        ws_callback=None,
+    ) -> Optional[Player]:
+        if player_id in self._players:
+            logger.info(f"Player {player_id} already loaded, returning cached")
+            return self._players[player_id]
+
+        if player_id not in self._player_file_refs:
+            logger.warning(f"No file reference for player {player_id}")
+            return None
+
+        file_ref = self._player_file_refs[player_id]
+        start_time = time.perf_counter()
+
+        if ws_callback:
+            nickname = self._player_summaries.get(player_id)
+            name = nickname.nickname if nickname else str(player_id)[:8]
+            await ws_callback(f"Loading player {name}...")
+
+        sav_data = file_ref.get("sav")
+        if sav_data is None:
+            logger.warning(f"No save data for player {player_id}")
+            return None
+
+        if isinstance(sav_data, bytes):
+            sav_bytes = sav_data
+        else:
+            with open(sav_data, "rb") as f:
+                sav_bytes = f.read()
+
+        raw_gvas, _ = decompress_sav_to_gvas(sav_bytes)
+        gvas_file = GvasFile.read(
+            raw_gvas, PALWORLD_TYPE_HINTS, CUSTOM_PROPERTIES, allow_nan=True
+        )
+
+        dps_gvas = None
+        dps_data = file_ref.get("dps")
+        if dps_data:
+            if isinstance(dps_data, bytes):
+                dps_bytes = dps_data
+            else:
+                with open(dps_data, "rb") as f:
+                    dps_bytes = f.read()
+            raw_dps, _ = decompress_sav_to_gvas(dps_bytes)
+            dps_gvas = GvasFile.read(
+                raw_dps, PALWORLD_TYPE_HINTS, CUSTOM_PROPERTIES, allow_nan=True
+            )
+
+        self._player_gvas_files[player_id] = PlayerGvasFiles(
+            sav=gvas_file, dps=dps_gvas
+        )
+
+        player_entry = None
+        for entry in self._character_save_parameter_map:
+            if self._is_player(entry):
+                if are_equal_uuids(
+                    PalObjects.get_guid(entry["key"]["PlayerUId"]), player_id
+                ):
+                    player_entry = entry
+                    break
+
+        if not player_entry:
+            logger.warning(f"No character entry for player {player_id}")
+            return None
+
+        if ws_callback:
+            await ws_callback("Loading pals...")
+        player_pals = self._load_player_pals_only(player_id)
+
+        guild = self._player_guild(player_id)
+        if not guild:
+            for gid, _ in self._find_player_guild_id(player_id):
+                if gid not in self._guilds:
+                    self._load_guild_by_id(gid)
+                guild = self._guilds.get(gid)
+                break
+
+        player = Player(
+            gvas_files=self._player_gvas_files[player_id],
+            character_save_parameter=player_entry,
+            guild=guild,
+            item_container_index=self._get_item_container_index(),
+            dynamic_item_index=self._get_dynamic_item_index(),
+            character_container_index=self._get_character_container_index(),
+            pals=player_pals,
+        )
+
+        self._players[player_id] = player
+        self._loaded_players.add(player_id)
+
+        if player_id in self._player_summaries:
+            self._player_summaries[player_id].loaded = True
+
+        logger.info(
+            f"Player {player_id} loaded on demand in {time.perf_counter() - start_time:.2f}s "
+            f"with {len(player_pals)} pals"
+        )
+
+        return player
+
+    def _load_player_pals_only(self, player_id: UUID) -> Dict[UUID, Pal]:
+        pals = {}
+        for entry in self._character_save_parameter_map:
+            if self._is_player(entry):
+                continue
+            if self._pal_belongs_to_player(entry, player_id):
+                pal = Pal(entry)
+                if pal:
+                    pals[pal.instance_id] = pal
+                    self._pals[pal.instance_id] = pal
+        return pals
+
+    def _load_guild_by_id(self, guild_id: UUID) -> Optional[Guild]:
+        logger.debug(f"Loading guild {guild_id}")
+        if guild_id in self._guilds:
+            logger.info(f"Guild {guild_id} already loaded, returning cached")
+            return self._guilds[guild_id]
+
+        for entry in self._group_save_data_map:
+            gid = PalObjects.as_uuid(PalObjects.get_nested(entry, "key"))
+            if not are_equal_uuids(gid, guild_id):
+                continue
+
+            guild_extra_save_data = next(
+                (
+                    g
+                    for g in self._guild_extra_save_data_map
+                    if are_equal_uuids(g["key"], guild_id)
+                ),
+                None,
+            )
+            if not guild_extra_save_data:
+                logger.warning(f"Guild extra save data not found for guild {guild_id}")
+                return None
+
+            guild = Guild(
+                group_save_data=entry,
+                guild_extra_data=guild_extra_save_data,
+                item_container_index=self._get_item_container_index(),
+                dynamic_item_index=self._get_dynamic_item_index(),
+            )
+            self._guilds[guild_id] = guild
+            self._loaded_guilds.add(guild_id)
+
+            self._load_bases_for_guild(guild_id)
+
+            if guild_id in self._guild_summaries:
+                self._guild_summaries[guild_id].loaded = True
+
+            return guild
+
+        return None
+
+    def _load_bases_for_guild(self, guild_id: UUID) -> None:
+        logger.debug(f"Loading bases for guild {guild_id}")
+        if not self._base_camp_save_data_map:
+            logger.warning("No bases found in the save file.")
+            return
+
+        if guild_id not in self._guilds:
+            logger.warning(f"Guild {guild_id} not loaded, cannot load bases")
+            return
+
+        map_object_index = self._get_map_object_index()
+        item_container_index = self._get_item_container_index()
+        dynamic_item_index = self._get_dynamic_item_index()
+
+        for entry in self._base_camp_save_data_map:
+            group_id_belong_to = PalObjects.as_uuid(
+                PalObjects.get_nested(
+                    entry, "value", "RawData", "value", "group_id_belong_to"
+                )
+            )
+            if not are_equal_uuids(group_id_belong_to, guild_id):
+                continue
+
+            container_id = PalObjects.as_uuid(
+                PalObjects.get_nested(
+                    entry,
+                    "value",
+                    "WorkerDirector",
+                    "value",
+                    "RawData",
+                    "value",
+                    "container_id",
+                )
+            )
+
+            character_container = next(
+                (
+                    c
+                    for c in self._character_container_save_data
+                    if are_equal_uuids(
+                        PalObjects.get_guid(PalObjects.get_nested(c, "key", "ID")),
+                        container_id,
+                    )
+                ),
+                None,
+            )
+
+            if not character_container:
+                logger.warning(f"Character container not found for base {entry['key']}")
+                continue
+
+            container_slot_count = PalObjects.get_value(
+                character_container["value"]["SlotNum"]
+            )
+
+            pals = self._load_pals_for_container(container_id)
+            base_id = PalObjects.as_uuid(entry["key"])
+            base_map_objects = map_object_index.get(base_id, [])
+
+            base = Base(
+                data=entry,
+                pals=pals,
+                container_id=container_id,
+                slot_count=container_slot_count,
+                character_container_index=self._get_character_container_index(),
+                base_map_objects=base_map_objects,
+                item_container_index=item_container_index,
+                dynamic_item_index=dynamic_item_index,
+            )
+            self._guilds[guild_id].add_base(base)
+
+            logger.debug(f"Loaded base for guild {guild_id} with {len(pals)} pals")
+
+    def _load_pals_for_container(self, container_id: UUID) -> Dict[UUID, Pal]:
+        pals = {}
+        logger.debug(f"Loading pals for container {container_id}")
+        for entry in self._character_save_parameter_map:
+            if self._is_player(entry):
+                continue
+
+            save_parameter = PalObjects.get_nested(
+                entry, "value", "RawData", "value", "object", "SaveParameter", "value"
+            )
+            if not save_parameter:
+                continue
+
+            slot_id = save_parameter.get("SlotId")
+            if not slot_id:
+                logger.debug("Pal entry has no SlotID, skipping")
+                continue
+
+            pal_container_id = PalObjects.get_guid(
+                PalObjects.get_nested(slot_id, "value", "ContainerId", "value", "ID")
+            )
+
+            if are_equal_uuids(pal_container_id, container_id):
+                logger.debug(f"Found pal in container {container_id}")
+                pal = Pal(entry)
+                if pal:
+                    pals[pal.instance_id] = pal
+                    self._pals[pal.instance_id] = pal
+
+        return pals
 
     def sav(self, gvas_file: GvasFile = None) -> bytes:
         logger.info("Converting %s to SAV", self.level_sav_path)
@@ -1097,6 +1783,7 @@ class SaveFile(BaseModel):
             if are_equal_uuids(PalObjects.get_guid(entry["key"]["InstanceId"]), pal_id):
                 logger.debug("Deleting pal %s from CharacterSaveParameterMap", pal_id)
                 self._character_save_parameter_map.remove(entry)
+                self.invalidate_performance_caches()
                 break
 
     def _get_file_size(self, data: bytes):
@@ -1161,8 +1848,8 @@ class SaveFile(BaseModel):
             self._guilds[guild_id] = Guild(
                 group_save_data=entry,
                 guild_extra_data=guild_extra_save_data,
-                item_container_save_data=self._item_container_save_data,
-                dynamic_item_save_data=self._dynamic_item_save_data,
+                item_container_index=self._get_item_container_index(),
+                dynamic_item_index=self._get_dynamic_item_index(),
             )
 
     async def _load_bases(self, ws_callback):
@@ -1171,8 +1858,11 @@ class SaveFile(BaseModel):
             ws_callback("No bases found in the save file.")
             return
 
+        map_object_index = self._get_map_object_index()
+        item_container_index = self._get_item_container_index()
+        dynamic_item_index = self._get_dynamic_item_index()
+
         for entry in self._base_camp_save_data_map:
-            # Guild to add to
             group_id_belong_to = PalObjects.as_uuid(
                 PalObjects.get_nested(
                     entry, "value", "RawData", "value", "group_id_belong_to"
@@ -1183,7 +1873,7 @@ class SaveFile(BaseModel):
                     "Base %s does not belong to a guild, skipping.", entry["key"]
                 )
                 continue
-            # Pal Container ID
+
             container_id = PalObjects.as_uuid(
                 PalObjects.get_nested(
                     entry,
@@ -1209,26 +1899,27 @@ class SaveFile(BaseModel):
                 character_container["value"]["SlotNum"]
             )
 
-            # Find all pals that have that container ID
             pals = {
                 pal.instance_id: pal
                 for pal in self._pals.values()
                 if pal.storage_id == container_id
             }
 
+            base_id = PalObjects.as_uuid(entry["key"])
+            base_map_objects = map_object_index.get(base_id, [])
+
             base = Base(
                 data=entry,
                 pals=pals,
                 container_id=container_id,
                 slot_count=container_slot_count,
-                character_container_save_data=self._character_container_save_data,
-                map_object_save_data=self._map_object_save_data,
-                item_container_save_data=self._item_container_save_data,
-                dynamic_item_save_data=self._dynamic_item_save_data,
+                character_container_index=self._get_character_container_index(),
+                base_map_objects=base_map_objects,
+                item_container_index=item_container_index,
+                dynamic_item_index=dynamic_item_index,
             )
             self._guilds[group_id_belong_to].add_base(base)
 
-            # Debug, print the guild name, and pals at base
             logger.debug(
                 "Guild %s has %d pals at base %s",
                 self._guilds[group_id_belong_to].name,
@@ -1422,12 +2113,12 @@ class SaveFile(BaseModel):
                     )
                 player = Player(
                     gvas_files=self._player_gvas_files[uid],
-                    item_container_save_data=self._item_container_save_data,
-                    dynamic_item_save_data=self._dynamic_item_save_data,
-                    character_container_save_data=self._character_container_save_data,
                     character_save_parameter=entry,
-                    pals=player_pals,
                     guild=self._player_guild(uid),
+                    item_container_index=self._get_item_container_index(),
+                    dynamic_item_index=self._get_dynamic_item_index(),
+                    character_container_index=self._get_character_container_index(),
+                    pals=player_pals,
                 )
                 players[uid] = player
 

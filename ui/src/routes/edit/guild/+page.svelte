@@ -2,6 +2,7 @@
 	import { palsData, buildingsData, itemsData, presetsData } from '$lib/data';
 	import { getAppState, getModalState, getToastState } from '$states';
 	import { Input, List, Tooltip, TooltipButton } from '$components/ui';
+	import { Spinner } from '$components';
 	import {
 		type ItemContainer,
 		type Pal,
@@ -223,17 +224,6 @@
 	});
 
 	const debouncedFilterPals = debounce(filterPals, 300);
-
-	function fixStupidTypos(key: string) {
-		switch (key) {
-			case 'Stonepit':
-				return 'StonePit';
-			case 'bone':
-				return 'Bone';
-			default:
-				return key;
-		}
-	}
 
 	function handleKeydown(event: KeyboardEvent) {
 		if (event.target instanceof HTMLInputElement) return;
@@ -664,7 +654,14 @@
 </script>
 
 {#if appState.selectedPlayer}
-	{#if !playerGuild}
+	{#if appState.loadingGuild}
+		<div class="flex h-full w-full items-center justify-center">
+			<div class="flex flex-col items-center gap-4">
+				<Spinner size="size-16" />
+				<p class="text-surface-400">Loading Guild...</p>
+			</div>
+		</div>
+	{:else if !playerGuild}
 		<div class="flex w-full items-center justify-center">
 			<h2 class="h2">No Guild found</h2>
 		</div>

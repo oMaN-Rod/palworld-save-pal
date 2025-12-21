@@ -4,12 +4,48 @@ from palworld_save_pal.state import get_app_state
 from palworld_save_pal.ws.messages import (
     AddGpsPalMessage,
     DeleteGpsPalsMessage,
+    RequestGpsMessage,
     MessageType,
 )
 from palworld_save_pal.ws.utils import build_response
 from palworld_save_pal.utils.logging_config import create_logger
 
 logger = create_logger(__name__)
+
+
+async def request_gps_handler(message: RequestGpsMessage, ws: WebSocket):
+    app_state = get_app_state()
+
+    if not app_state.save_file:
+        logger.error("No save file loaded")
+        await ws.send_json(
+            build_response(
+                MessageType.GET_GPS_RESPONSE,
+                {"error": "No save file loaded"},
+            )
+        )
+        return
+
+    async def progress_callback(msg: str):
+        await ws.send_json(build_response(MessageType.PROGRESS_MESSAGE, msg))
+
+    if app_state.gps_loaded and app_state.gps:
+        logger.info("GPS already loaded, returning cached data")
+        await ws.send_json(build_response(MessageType.GET_GPS_RESPONSE, app_state.gps))
+        return
+
+    gps = await app_state.load_gps_on_demand(progress_callback)
+
+    if gps is not None:
+        await ws.send_json(build_response(MessageType.GET_GPS_RESPONSE, gps))
+        logger.info(f"Sent GPS data with {len(gps)} pals")
+    else:
+        await ws.send_json(
+            build_response(
+                MessageType.GET_GPS_RESPONSE,
+                {"available": False, "message": "No GPS file available for this save"},
+            )
+        )
 
 
 async def add_gps_pal_handler(message: AddGpsPalMessage, ws: WebSocket):

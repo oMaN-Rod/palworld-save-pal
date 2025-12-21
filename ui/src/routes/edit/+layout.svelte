@@ -85,7 +85,7 @@
 </script>
 
 <div class="flex flex-col h-full w-full overflow-hidden">
-	<div class="flex min-w-72 flex-row items-center justify-between mx-2">
+	<div class="flex min-w-72 items-center justify-between mx-2">
 			{#if appState.saveFile}
 				<div class="flex items-center">
 					<PlayerList

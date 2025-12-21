@@ -15,7 +15,6 @@ from palworld_save_pal.dto.pal import PalDTO
 from palworld_save_pal.game.pal_objects import PalObjects
 from palworld_save_pal.utils.dict import safe_remove
 from palworld_save_pal.utils.logging_config import create_logger
-from palworld_save_pal.utils.uuid import are_equal_uuids
 
 logger = create_logger(__name__)
 
@@ -40,25 +39,27 @@ class Base(BaseModel):
         self,
         data: Dict[str, Any] = None,
         pals: List[UUID] = [],
-        character_container_save_data: Dict[str, Any] = None,
-        map_object_save_data: Dict[str, Any] = None,
-        item_container_save_data: Dict[str, Any] = None,
-        dynamic_item_save_data: Dict[str, Any] = None,
+        character_container_index: Dict[UUID, Dict[str, Any]] = None,
+        base_map_objects: List[Dict[str, Any]] = None,
+        item_container_index: Dict[UUID, Dict[str, Any]] = None,
+        dynamic_item_index: Dict[UUID, Dict[str, Any]] = None,
         **kwargs,
     ):
         super().__init__(**kwargs)
         if data:
             self._base_save_data = data
-        if character_container_save_data:
-            self.pal_container = CharacterContainer(
-                id=self.container_id,
-                player_uid=PalObjects.EMPTY_UUID,
-                type=CharacterContainerType.BASE,
-                character_container_save_data=character_container_save_data,
-            )
-        if map_object_save_data and item_container_save_data and dynamic_item_save_data:
+        if character_container_index is not None and self.container_id:
+            container_data = character_container_index.get(self.container_id)
+            if container_data:
+                self.pal_container = CharacterContainer(
+                    id=self.container_id,
+                    player_uid=PalObjects.EMPTY_UUID,
+                    type=CharacterContainerType.BASE,
+                    container_data=container_data,
+                )
+        if base_map_objects is not None and item_container_index and dynamic_item_index:
             self._load_storage_containers(
-                map_object_save_data, item_container_save_data, dynamic_item_save_data
+                base_map_objects, item_container_index, dynamic_item_index
             )
         if pals:
             self.pals = pals
@@ -169,40 +170,35 @@ class Base(BaseModel):
             logger.warning("Base name is empty")
 
     def _load_storage_containers(
-        self, map_object_save_data, item_container_save_data, dynamic_item_save_data
+        self,
+        base_map_objects: List[Dict[str, Any]],
+        item_container_index: Dict[UUID, Dict[str, Any]],
+        dynamic_item_index: Dict[UUID, Dict[str, Any]],
     ):
         self.storage_containers = {}
-        for map_object in map_object_save_data["values"]:
-            base_camp_id = PalObjects.as_uuid(
-                PalObjects.get_nested(
-                    map_object,
-                    "Model",
-                    "value",
-                    "RawData",
-                    "value",
-                    "base_camp_id_belong_to",
-                )
-            )
-            if not are_equal_uuids(base_camp_id, self.id):
-                continue
+        for map_object in base_map_objects:
             self._map_object_save_data.append(map_object)
-            module_map = PalObjects.get_nested(
-                map_object, "ConcreteModel", "value", "ModuleMap", "value"
-            )
+            try:
+                module_map = map_object["ConcreteModel"]["value"]["ModuleMap"]["value"]
+            except (KeyError, TypeError):
+                continue
             for module in module_map:
                 if (
                     module["key"]
                     == "EPalMapObjectConcreteModelModuleType::ItemContainer"
                 ):
-                    container_id = PalObjects.as_uuid(
-                        module["value"]["RawData"]["value"]["target_container_id"]
-                    )
-                    logger.debug("%s => %s", self.id, container_id)
-                    key = PalObjects.get_value(map_object["MapObjectId"])
-                    self.storage_containers[container_id] = ItemContainer(
-                        id=container_id,
-                        key=key,
-                        type=ItemContainerType.BASE,
-                        item_container_save_data=item_container_save_data,
-                        dynamic_item_save_data=dynamic_item_save_data,
-                    )
+                    try:
+                        container_id = PalObjects.as_uuid(
+                            module["value"]["RawData"]["value"]["target_container_id"]
+                        )
+                    except (KeyError, TypeError):
+                        continue
+                    if container_id and container_id in item_container_index:
+                        key = PalObjects.get_value(map_object["MapObjectId"])
+                        self.storage_containers[container_id] = ItemContainer(
+                            id=container_id,
+                            key=key,
+                            type=ItemContainerType.BASE,
+                            container_data=item_container_index[container_id],
+                            dynamic_item_index=dynamic_item_index,
+                        )

@@ -32,8 +32,8 @@ class Guild(BaseModel):
         self,
         group_save_data: Dict[str, Any] = None,
         guild_extra_data: Dict[str, Any] = None,
-        item_container_save_data: Dict[str, Any] = None,
-        dynamic_item_save_data: Dict[str, Any] = None,
+        item_container_index: Dict[UUID, Dict[str, Any]] = None,
+        dynamic_item_index: Dict[UUID, Dict[str, Any]] = None,
     ):
         super().__init__()
         if group_save_data:
@@ -47,8 +47,8 @@ class Guild(BaseModel):
             )
         if guild_extra_data:
             self._guild_extra_data = guild_extra_data
-            if item_container_save_data and dynamic_item_save_data:
-                self._load_guild_chest(item_container_save_data, dynamic_item_save_data)
+            if item_container_index is not None and dynamic_item_index is not None:
+                self._load_guild_chest(item_container_index, dynamic_item_index)
             self._load_lab_research()
 
     @computed_field
@@ -229,14 +229,24 @@ class Guild(BaseModel):
         if guildDTO.guild_chest and self.guild_chest is not None:
             self.guild_chest.update_from(guildDTO.guild_chest.model_dump())
 
-    def _load_guild_chest(self, item_container_save_data, dynamic_item_save_data):
+    def _load_guild_chest(
+        self,
+        item_container_index: Dict[UUID, Dict[str, Any]],
+        dynamic_item_index: Dict[UUID, Dict[str, Any]],
+    ):
         if self.container_id is None:
             return
-        self.guild_chest = ItemContainer(
-            id=self.container_id,
-            key="GuildChest",
-            type=ItemContainerType.GUILD,
-            item_container_save_data=item_container_save_data,
-            dynamic_item_save_data=dynamic_item_save_data,
-        )
-        logger.debug("Loaded guild chest %s", self.container_id)
+        container_data = item_container_index.get(self.container_id)
+        if container_data:
+            self.guild_chest = ItemContainer(
+                id=self.container_id,
+                key="GuildChest",
+                type=ItemContainerType.GUILD,
+                container_data=container_data,
+                dynamic_item_index=dynamic_item_index,
+            )
+            logger.debug("Loaded guild chest %s", self.container_id)
+        else:
+            logger.warning(
+                "Guild chest container %s not found in index", self.container_id
+            )

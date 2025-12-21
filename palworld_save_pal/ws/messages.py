@@ -59,6 +59,18 @@ class MessageType(str, Enum):
     DELETE_PLAYER = "delete_player"
     SET_TECHNOLOGY_DATA = "set_technology_data"
 
+    # Lazy Loading - Summaries (lightweight initial load)
+    GET_PLAYER_SUMMARIES = "get_player_summaries"
+    GET_GUILD_SUMMARIES = "get_guild_summaries"
+
+    # Lazy Loading - On-Demand Details
+    REQUEST_PLAYER_DETAILS = "request_player_details"
+    GET_PLAYER_DETAILS_RESPONSE = "get_player_details_response"
+    REQUEST_GUILD_DETAILS = "request_guild_details"
+    GET_GUILD_DETAILS_RESPONSE = "get_guild_details_response"
+    REQUEST_GPS = "request_gps"
+    GET_GPS_RESPONSE = "get_gps_response"
+
     # Game Data Retrieval
     GET_ACTIVE_SKILLS = "get_active_skills"
     GET_BUILDINGS = "get_buildings"
@@ -424,6 +436,12 @@ class GetGpsMessage(BaseModel):
     type: str = MessageType.GET_GPS_PALS.value
 
 
+class RequestGpsMessage(BaseModel):
+    """Request GPS data on-demand (lazy loading)"""
+
+    type: str = MessageType.REQUEST_GPS.value
+
+
 class AddGpsPalMessage(BaseMessage):
     type: str = MessageType.ADD_DPS_PAL.value
     data: AddPalData
@@ -641,3 +659,14 @@ class UnlockMapData(BaseModel):
 class UnlockMapMessage(BaseMessage):
     type: str = MessageType.UNLOCK_MAP.value
     data: UnlockMapData
+
+
+# Lazy Loading Message Classes
+class RequestPlayerDetailsMessage(BaseMessage):
+    type: str = MessageType.REQUEST_PLAYER_DETAILS.value
+    data: UUID  # Player UID to load
+
+
+class RequestGuildDetailsMessage(BaseMessage):
+    type: str = MessageType.REQUEST_GUILD_DETAILS.value
+    data: UUID  # Guild ID to load
