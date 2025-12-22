@@ -141,7 +141,7 @@
 		>
 			<FileHeart />
 		</Navigation.Tile>
-		{#if appState.gps}
+		{#if appState.hasGpsAvailable}
 			<Navigation.Tile
 				label="GPS"
 				labelBase="text-xs"

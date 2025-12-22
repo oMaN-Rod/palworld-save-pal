@@ -404,9 +404,10 @@ def main():
         if app_state.server_instance:
             app_state.server_instance.stop()
 
-        logger.info("Application shutdown complete, goodbye!")
     finally:
         remove_lock_file()
+        logger.info("Application shutdown complete, goodbye!")
+        sys.exit(0)
 
 
 if __name__ == "__main__":
