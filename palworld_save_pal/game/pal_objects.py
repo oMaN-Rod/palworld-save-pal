@@ -435,6 +435,7 @@ class PalObjects:
         active_skills: Optional[List[str]] = None,
         passive_skills: Optional[List[str]] = None,
         work_suitability_data: Optional[Dict[str, int]] = None,
+        gender: Optional[PalGender] = None,
     ) -> Dict[str, Any]:
         nickname = nickname or character_id
         active_skills = active_skills or []
@@ -476,7 +477,10 @@ class PalObjects:
                                         character_id
                                     ),
                                     "Gender": PalObjects.EnumProperty(
-                                        "EPalGenderType", PalGender.FEMALE.prefixed()
+                                        "EPalGenderType",
+                                        gender.prefixed()
+                                        if gender
+                                        else PalGender.FEMALE.prefixed(),
                                     ),
                                     "Level": PalObjects.ByteProperty(1),
                                     "Exp": PalObjects.Int64Property(0),

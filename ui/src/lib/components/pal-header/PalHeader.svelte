@@ -26,11 +26,11 @@
 		pal = $bindable(),
 		showActions = true,
 		popup = false
-	} = $props<{
-		pal?: Pal;
+	}: {
+		pal: Pal;
 		showActions?: boolean;
 		popup?: boolean;
-	}>();
+	} = $props();
 
 	const appState = getAppState();
 	const modal = getModalState();
@@ -164,11 +164,21 @@
 	}
 
 	function handleEditGender() {
-		if (pal) {
-			const currentGender = pal.gender;
-			pal.gender = currentGender === PalGender.MALE ? PalGender.FEMALE : PalGender.MALE;
-			pal.state = EntryState.MODIFIED;
+		if (!pal) return;
+		
+		let genderCycle: Record<PalGender, PalGender> = {
+			[PalGender.MALE]: PalGender.FEMALE,
+			[PalGender.FEMALE]: PalGender.MALE,
+			[PalGender.NONE]: PalGender.MALE
+		};
+		
+		const palData = palsData.getByKey(pal.character_key);
+		if (palData && !palData.is_pal) {
+			genderCycle[PalGender.FEMALE] = PalGender.NONE;
 		}
+		
+		pal.gender = genderCycle[pal.gender] ?? PalGender.MALE;
+		pal.state = EntryState.MODIFIED;
 	}
 
 	function handleEditLucky() {
@@ -475,7 +485,7 @@
 							</Tooltip>
 						{/if}
 
-						<Tooltip position="bottom" label="Toggle gender">
+						<Tooltip position="bottom" label="Toggle gender ({pal.gender})">
 							<CornerDotButton onClick={handleEditGender} class="h-8 w-8 p-1">
 								<img
 									src={assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${pal.gender}.webp`)}

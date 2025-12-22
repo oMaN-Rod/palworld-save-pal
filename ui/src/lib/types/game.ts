@@ -649,6 +649,7 @@ export enum EffectType {
 }
 
 export enum PalGender {
+	NONE = 'None',
 	MALE = 'Male',
 	FEMALE = 'Female'
 }
