@@ -268,7 +268,9 @@
 								{@const isSelected =
 									Number(levelCap) === 1
 										? true
-										: appState.selectedPlayer.technologies.includes(techID)}
+										: appState.selectedPlayer.technologies.some(
+												(t) => t.toLowerCase() === techID.toLowerCase()
+											)}
 								{#if technologyItem && !technologyItem?.details.is_boss_technology}
 									{@render technologyButton(techID, isSelected, technologyItem, 'tech')}
 								{/if}
