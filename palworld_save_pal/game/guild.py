@@ -52,20 +52,28 @@ class Guild(BaseModel):
             self._load_lab_research()
 
     @computed_field
-    def id(self) -> UUID:
-        return PalObjects.as_uuid(self._group_save_data["key"])
-
-    @computed_field
-    def admin_player_uid(self) -> UUID:
-        return self.players[0] if self.players else None
-
-    @computed_field
     def name(self) -> str:
         return PalObjects.get_nested(self._raw_data, "guild_name")
 
     @name.setter
     def name(self, value: str):
         PalObjects.set_nested(self._raw_data, "guild_name", value=value)
+
+    @computed_field
+    def base_camp_level(self) -> int:
+        return self._raw_data.get("base_camp_level", 1)
+
+    @base_camp_level.setter
+    def base_camp_level(self, value: int):
+        self._raw_data["base_camp_level"] = value
+
+    @computed_field
+    def id(self) -> UUID:
+        return PalObjects.as_uuid(self._group_save_data["key"])
+
+    @computed_field
+    def admin_player_uid(self) -> UUID:
+        return self.players[0] if self.players else None
 
     @computed_field
     def players(self) -> List[UUID]:
@@ -213,6 +221,8 @@ class Guild(BaseModel):
         logger.debug("%s <= %s", self.id, guildDTO.name or "Unnamed GuildDTO")
         if guildDTO.name:
             self.name = guildDTO.name
+        if guildDTO.base_camp_level:
+            self.base_camp_level = guildDTO.base_camp_level
         if guildDTO.bases:
             for base_id, base_dto in guildDTO.bases.items():
                 if base_id in self.bases:

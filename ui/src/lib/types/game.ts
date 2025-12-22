@@ -167,6 +167,7 @@ export type Guild = {
 	guild_chest?: ItemContainer;
 	lab_research_data?: GuildLabResearchInfo[];
 	state: EntryState;
+	base_camp_level?: number;
 };
 
 export type Base = {

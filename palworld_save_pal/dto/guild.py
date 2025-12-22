@@ -13,3 +13,4 @@ class GuildDTO(BaseModel):
     bases: Optional[Dict[UUID, BaseDTO]] = None
     guild_chest: Optional[ItemContainerDTO] = None
     lab_research: Optional[List[GuildLabResearchInfo]] = None
+    base_camp_level: Optional[int] = None

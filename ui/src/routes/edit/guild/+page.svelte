@@ -431,31 +431,6 @@
 		selectedPals = [];
 	}
 
-	$effect(() => {
-		if (palSearchQuery) {
-			debouncedFilterPals();
-		}
-	});
-
-	$effect(() => {
-		window.addEventListener('keydown', handleKeydown);
-		return () => {
-			window.removeEventListener('keydown', handleKeydown);
-		};
-	});
-
-	$effect(() => {
-		if (currentPage > totalPages && totalPages > 0) {
-			currentPage = totalPages;
-		}
-	});
-
-	$effect(() => {
-		if (inventorySearchQuery !== '') {
-			selectedInventoryItem = '';
-		}
-	});
-
 	function handleHealAll() {
 		if (!guildBases || !playerGuild || !currentBase) return;
 		send(MessageType.HEAL_ALL_PALS, {
@@ -636,6 +611,19 @@
 		playerGuild!.state = EntryState.MODIFIED;
 	}
 
+	async function handleEditBasecampLevel() {
+		// @ts-ignore
+		const result = await modal.showModal<number>(NumberInputModal, {
+			title: 'Edit Basecamp Level',
+			value: playerGuild!.base_camp_level || 1,
+			min: 1,
+			max: 30
+		});
+		if (!result) return;
+		playerGuild!.base_camp_level = result;
+		playerGuild!.state = EntryState.MODIFIED;
+	}
+
 	async function handleDeleteGuild() {
 		const confirmed = await modal.showConfirmModal({
 			title: 'Delete Guild',
@@ -651,6 +639,31 @@
 			goto('/loading');
 		}
 	}
+
+	$effect(() => {
+		if (palSearchQuery) {
+			debouncedFilterPals();
+		}
+	});
+
+	$effect(() => {
+		window.addEventListener('keydown', handleKeydown);
+		return () => {
+			window.removeEventListener('keydown', handleKeydown);
+		};
+	});
+
+	$effect(() => {
+		if (currentPage > totalPages && totalPages > 0) {
+			currentPage = totalPages;
+		}
+	});
+
+	$effect(() => {
+		if (inventorySearchQuery !== '') {
+			selectedInventoryItem = '';
+		}
+	});
 </script>
 
 {#if appState.selectedPlayer}
@@ -675,9 +688,20 @@
 			<!-- Left Controls -->
 			<div class="shrink-0 space-y-2 p-4">
 				<div class="flex">
-					<button class="btn px-0 text-start" onclick={handleEditGuildName}>
-						<h4 class="h4 hover:text-secondary-500">{playerGuild!.name}</h4>
-					</button>
+					<div class="flex items-center">
+						<button class="btn px-0 text-start" onclick={handleEditGuildName}>
+							<h4 class="h4 hover:text-secondary-500">{playerGuild!.name}</h4>
+						</button>
+						<Tooltip label="Basecamp Level">
+							<button
+								class="outline-surface-700 hover:outline-secondary-500 ml-2 flex gap-2 rounded p-1 align-bottom outline"
+								onclick={handleEditBasecampLevel}
+							>
+								<span class="text-surface-700">Lvl</span>
+								{playerGuild.base_camp_level}
+							</button>
+						</Tooltip>
+					</div>
 					{#if playerGuild && appState.settings.debug_mode}
 						<DebugButton href={`/debug?guildId=${playerGuild.id}`} />
 					{/if}
