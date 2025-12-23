@@ -17,6 +17,7 @@ from palworld_save_pal.dto.pal import PalDTO
 from palworld_save_pal.game.item_container import ItemContainer, ItemContainerType
 from palworld_save_pal.game.pal_objects import ArrayType, PalGender, PalObjects
 from palworld_save_pal.utils.dict import safe_remove
+from palworld_save_pal.utils.indexed_collection import IndexedCollection
 from palworld_save_pal.utils.uuid import are_equal_uuids
 from palworld_save_pal.utils.logging_config import create_logger
 
@@ -59,7 +60,6 @@ class Player(BaseModel):
     _player_gvas_files: PlayerGvasFiles
     _save_data: Dict[str, Any]
     _inventory_info: Dict[str, Any]
-    _dynamic_item_save_data: Dict[str, Any]
     _character_save: Dict[str, Any]
     _save_parameter: Dict[str, Any]
     _dps: Optional[Dict[int, Pal]] = PrivateAttr(default=None)
@@ -79,7 +79,7 @@ class Player(BaseModel):
         character_save_parameter: Dict[str, Any] = None,
         guild: Optional[Guild] = None,
         item_container_index: Dict[UUID, Dict[str, Any]] = None,
-        dynamic_item_index: Dict[UUID, Dict[str, Any]] = None,
+        dynamic_items: Optional[IndexedCollection[UUID, Dict[str, Any]]] = None,
         character_container_index: Dict[UUID, Dict[str, Any]] = None,
         **kwargs,
     ):
@@ -101,8 +101,8 @@ class Player(BaseModel):
             )
             self._guild = guild
 
-            if item_container_index is not None and dynamic_item_index is not None:
-                self._load_inventory(item_container_index, dynamic_item_index)
+            if item_container_index is not None and dynamic_items is not None:
+                self._load_inventory(item_container_index, dynamic_items)
 
             if character_container_index is not None:
                 self._load_pal_box(character_container_index)
@@ -632,7 +632,7 @@ class Player(BaseModel):
     def _load_inventory(
         self,
         item_container_index: Dict[UUID, Dict[str, Any]],
-        dynamic_item_index: Dict[UUID, Dict[str, Any]],
+        dynamic_items: IndexedCollection[UUID, Dict[str, Any]],
     ):
         if "inventoryInfo" in self._save_data:
             logger.debug(
@@ -659,7 +659,7 @@ class Player(BaseModel):
                 id=common_container_id,
                 type=ItemContainerType.COMMON,
                 container_data=container_data,
-                dynamic_item_index=dynamic_item_index,
+                dynamic_items=dynamic_items,
             )
 
         essential_container_id = PalObjects.get_guid(
@@ -671,7 +671,7 @@ class Player(BaseModel):
                 id=essential_container_id,
                 type=ItemContainerType.ESSENTIAL,
                 container_data=container_data,
-                dynamic_item_index=dynamic_item_index,
+                dynamic_items=dynamic_items,
             )
 
         weapon_load_out_container_id = PalObjects.get_guid(
@@ -685,7 +685,7 @@ class Player(BaseModel):
                 id=weapon_load_out_container_id,
                 type=ItemContainerType.WEAPON,
                 container_data=container_data,
-                dynamic_item_index=dynamic_item_index,
+                dynamic_items=dynamic_items,
             )
 
         player_equipment_armor_container_id = PalObjects.get_guid(
@@ -699,7 +699,7 @@ class Player(BaseModel):
                 id=player_equipment_armor_container_id,
                 type=ItemContainerType.ARMOR,
                 container_data=container_data,
-                dynamic_item_index=dynamic_item_index,
+                dynamic_items=dynamic_items,
             )
 
         food_equip_container_id = PalObjects.get_guid(
@@ -711,7 +711,7 @@ class Player(BaseModel):
                 id=food_equip_container_id,
                 type=ItemContainerType.FOOD,
                 container_data=container_data,
-                dynamic_item_index=dynamic_item_index,
+                dynamic_items=dynamic_items,
             )
 
     def _find_first_empty_dps_slot(self) -> Optional[int]:

@@ -30,6 +30,7 @@ from palworld_save_pal.game.guild import Guild
 from palworld_save_pal.game.pal import Pal
 from palworld_save_pal.game.pal_objects import PalObjects
 from palworld_save_pal.game.enum import GroupType, PalGender
+from palworld_save_pal.utils.indexed_collection import IndexedCollection
 from palworld_save_pal.utils.logging_config import create_logger
 from palworld_save_pal.game.player import Player, PlayerDTO, PlayerGvasFiles
 from palworld_save_pal.utils.uuid import are_equal_uuids, is_empty_uuid
@@ -186,7 +187,7 @@ class SaveFile(BaseModel):
     _item_container_index: Optional[Dict[UUID, Dict[str, Any]]] = PrivateAttr(
         default=None
     )
-    _dynamic_item_index: Optional[Dict[UUID, Dict[str, Any]]] = PrivateAttr(
+    _dynamic_items: Optional[IndexedCollection[UUID, Dict[str, Any]]] = PrivateAttr(
         default=None
     )
     _character_container_index: Optional[Dict[UUID, Dict[str, Any]]] = PrivateAttr(
@@ -466,6 +467,7 @@ class SaveFile(BaseModel):
         slots = PalObjects.get_array_property(
             PalObjects.get_nested(item_container, "value", "Slots")
         )
+        dynamic_items = self._get_dynamic_items()
         for slot in slots:
             raw_data = PalObjects.get_value(slot["RawData"])
             local_id = PalObjects.as_uuid(
@@ -475,20 +477,8 @@ class SaveFile(BaseModel):
             )
             if local_id and not is_empty_uuid(local_id):
                 logger.debug("Deleting dynamic item %s", local_id)
-                for entry in self._dynamic_item_save_data:
-                    if are_equal_uuids(
-                        PalObjects.get_nested(
-                            entry,
-                            "RawData",
-                            "value",
-                            "id",
-                            "local_id_in_created_world",
-                        ),
-                        local_id,
-                    ):
-                        self._dynamic_item_save_data.remove(entry)
-                        logger.debug("Deleted dynamic item %s", local_id)
-                        break
+                if dynamic_items.remove_by_key(local_id):
+                    logger.debug("Deleted dynamic item %s", local_id)
 
     def _delete_character_containers(self, container_ids_to_delete: List[UUID]) -> None:
         logger.debug("Deleting character containers for %s", container_ids_to_delete)
@@ -1122,7 +1112,8 @@ class SaveFile(BaseModel):
         self._player_guild_map_cache = None
         self._map_object_index = None
         self._item_container_index = None
-        self._dynamic_item_index = None
+        if self._dynamic_items is not None:
+            self._dynamic_items.invalidate()
         self._character_container_index = None
         logger.debug("Performance caches invalidated")
 
@@ -1170,26 +1161,27 @@ class SaveFile(BaseModel):
                 index[container_id] = entry
         return index
 
-    def _get_dynamic_item_index(self) -> Dict[UUID, Dict[str, Any]]:
-        if self._dynamic_item_index is not None:
-            return self._dynamic_item_index
-        self._dynamic_item_index = self._build_dynamic_item_index()
-        return self._dynamic_item_index
+    def _get_dynamic_items(self) -> IndexedCollection[UUID, Dict[str, Any]]:
+        if self._dynamic_items is not None:
+            return self._dynamic_items
+        self._dynamic_items = self._build_dynamic_items_collection()
+        return self._dynamic_items
 
-    def _build_dynamic_item_index(self) -> Dict[UUID, Dict[str, Any]]:
-        index: Dict[UUID, Dict[str, Any]] = {}
-        if not self._dynamic_item_save_data:
-            return index
-        for entry in self._dynamic_item_save_data:
+    def _build_dynamic_items_collection(
+        self,
+    ) -> IndexedCollection[UUID, Dict[str, Any]]:
+        def key_extractor(entry: Dict[str, Any]) -> Optional[UUID]:
             try:
-                local_id = PalObjects.as_uuid(
+                return PalObjects.as_uuid(
                     entry["RawData"]["value"]["id"]["local_id_in_created_world"]
                 )
             except (KeyError, TypeError):
-                continue
-            if local_id:
-                index[local_id] = entry
-        return index
+                return None
+
+        return IndexedCollection(
+            data=self._dynamic_item_save_data,
+            key_extractor=key_extractor,
+        )
 
     def _get_character_container_index(self) -> Dict[UUID, Dict[str, Any]]:
         if self._character_container_index is not None:
@@ -1393,7 +1385,7 @@ class SaveFile(BaseModel):
             character_save_parameter=player_entry,
             guild=guild,
             item_container_index=self._get_item_container_index(),
-            dynamic_item_index=self._get_dynamic_item_index(),
+            dynamic_items=self._get_dynamic_items(),
             character_container_index=self._get_character_container_index(),
             pals=player_pals,
         )
@@ -1450,7 +1442,7 @@ class SaveFile(BaseModel):
                 group_save_data=entry,
                 guild_extra_data=guild_extra_save_data,
                 item_container_index=self._get_item_container_index(),
-                dynamic_item_index=self._get_dynamic_item_index(),
+                dynamic_items=self._get_dynamic_items(),
             )
             self._guilds[guild_id] = guild
             self._loaded_guilds.add(guild_id)
@@ -1476,7 +1468,7 @@ class SaveFile(BaseModel):
 
         map_object_index = self._get_map_object_index()
         item_container_index = self._get_item_container_index()
-        dynamic_item_index = self._get_dynamic_item_index()
+        dynamic_items = self._get_dynamic_items()
 
         for entry in self._base_camp_save_data_map:
             group_id_belong_to = PalObjects.as_uuid(
@@ -1531,7 +1523,7 @@ class SaveFile(BaseModel):
                 character_container_index=self._get_character_container_index(),
                 base_map_objects=base_map_objects,
                 item_container_index=item_container_index,
-                dynamic_item_index=dynamic_item_index,
+                dynamic_items=dynamic_items,
             )
             self._guilds[guild_id].add_base(base)
 
@@ -1849,7 +1841,7 @@ class SaveFile(BaseModel):
                 group_save_data=entry,
                 guild_extra_data=guild_extra_save_data,
                 item_container_index=self._get_item_container_index(),
-                dynamic_item_index=self._get_dynamic_item_index(),
+                dynamic_items=self._get_dynamic_items(),
             )
 
     async def _load_bases(self, ws_callback):
@@ -1860,7 +1852,7 @@ class SaveFile(BaseModel):
 
         map_object_index = self._get_map_object_index()
         item_container_index = self._get_item_container_index()
-        dynamic_item_index = self._get_dynamic_item_index()
+        dynamic_items = self._get_dynamic_items()
 
         for entry in self._base_camp_save_data_map:
             group_id_belong_to = PalObjects.as_uuid(
@@ -1916,7 +1908,7 @@ class SaveFile(BaseModel):
                 character_container_index=self._get_character_container_index(),
                 base_map_objects=base_map_objects,
                 item_container_index=item_container_index,
-                dynamic_item_index=dynamic_item_index,
+                dynamic_items=dynamic_items,
             )
             self._guilds[group_id_belong_to].add_base(base)
 
@@ -2116,7 +2108,7 @@ class SaveFile(BaseModel):
                     character_save_parameter=entry,
                     guild=self._player_guild(uid),
                     item_container_index=self._get_item_container_index(),
-                    dynamic_item_index=self._get_dynamic_item_index(),
+                    dynamic_items=self._get_dynamic_items(),
                     character_container_index=self._get_character_container_index(),
                     pals=player_pals,
                 )

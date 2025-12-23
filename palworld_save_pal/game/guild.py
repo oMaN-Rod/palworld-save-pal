@@ -9,6 +9,7 @@ from palworld_save_pal.game.base import Base
 from palworld_save_pal.game.guild_lab_research_info import GuildLabResearchInfo
 from palworld_save_pal.game.item_container import ItemContainer, ItemContainerType
 from palworld_save_pal.game.pal_objects import PalObjects
+from palworld_save_pal.utils.indexed_collection import IndexedCollection
 from palworld_save_pal.utils.uuid import are_equal_uuids
 from palworld_save_pal.utils.logging_config import create_logger
 
@@ -33,7 +34,7 @@ class Guild(BaseModel):
         group_save_data: Dict[str, Any] = None,
         guild_extra_data: Dict[str, Any] = None,
         item_container_index: Dict[UUID, Dict[str, Any]] = None,
-        dynamic_item_index: Dict[UUID, Dict[str, Any]] = None,
+        dynamic_items: Optional[IndexedCollection[UUID, Dict[str, Any]]] = None,
     ):
         super().__init__()
         if group_save_data:
@@ -47,8 +48,8 @@ class Guild(BaseModel):
             )
         if guild_extra_data:
             self._guild_extra_data = guild_extra_data
-            if item_container_index is not None and dynamic_item_index is not None:
-                self._load_guild_chest(item_container_index, dynamic_item_index)
+            if item_container_index is not None and dynamic_items is not None:
+                self._load_guild_chest(item_container_index, dynamic_items)
             self._load_lab_research()
 
     @computed_field
@@ -242,7 +243,7 @@ class Guild(BaseModel):
     def _load_guild_chest(
         self,
         item_container_index: Dict[UUID, Dict[str, Any]],
-        dynamic_item_index: Dict[UUID, Dict[str, Any]],
+        dynamic_items: IndexedCollection[UUID, Dict[str, Any]],
     ):
         if self.container_id is None:
             return
@@ -253,7 +254,7 @@ class Guild(BaseModel):
                 key="GuildChest",
                 type=ItemContainerType.GUILD,
                 container_data=container_data,
-                dynamic_item_index=dynamic_item_index,
+                dynamic_items=dynamic_items,
             )
             logger.debug("Loaded guild chest %s", self.container_id)
         else:

@@ -14,6 +14,7 @@ from palworld_save_pal.game.pal import Pal
 from palworld_save_pal.dto.pal import PalDTO
 from palworld_save_pal.game.pal_objects import PalObjects
 from palworld_save_pal.utils.dict import safe_remove
+from palworld_save_pal.utils.indexed_collection import IndexedCollection
 from palworld_save_pal.utils.logging_config import create_logger
 
 logger = create_logger(__name__)
@@ -42,7 +43,7 @@ class Base(BaseModel):
         character_container_index: Dict[UUID, Dict[str, Any]] = None,
         base_map_objects: List[Dict[str, Any]] = None,
         item_container_index: Dict[UUID, Dict[str, Any]] = None,
-        dynamic_item_index: Dict[UUID, Dict[str, Any]] = None,
+        dynamic_items: Optional[IndexedCollection[UUID, Dict[str, Any]]] = None,
         **kwargs,
     ):
         super().__init__(**kwargs)
@@ -57,9 +58,11 @@ class Base(BaseModel):
                     type=CharacterContainerType.BASE,
                     container_data=container_data,
                 )
-        if base_map_objects is not None and item_container_index and dynamic_item_index:
+        if base_map_objects is not None and item_container_index and dynamic_items:
             self._load_storage_containers(
-                base_map_objects, item_container_index, dynamic_item_index
+                base_map_objects,
+                item_container_index,
+                dynamic_items,
             )
         if pals:
             self.pals = pals
@@ -173,7 +176,7 @@ class Base(BaseModel):
         self,
         base_map_objects: List[Dict[str, Any]],
         item_container_index: Dict[UUID, Dict[str, Any]],
-        dynamic_item_index: Dict[UUID, Dict[str, Any]],
+        dynamic_items: IndexedCollection[UUID, Dict[str, Any]],
     ):
         self.storage_containers = {}
         for map_object in base_map_objects:
@@ -200,5 +203,5 @@ class Base(BaseModel):
                             key=key,
                             type=ItemContainerType.BASE,
                             container_data=item_container_index[container_id],
-                            dynamic_item_index=dynamic_item_index,
+                            dynamic_items=dynamic_items,
                         )

@@ -230,6 +230,7 @@ class DynamicItem(BaseModel):
         return self._dynamic_item_save_data
 
     def update_from(self, other: Dict[str, Any]) -> None:
+        logger.debug("Updating DynamicItem %s, %s", self.local_id, self.static_id)
         self.type = other["type"]
         match self.type:
             case DynamicItemType.ARMOR.value:

@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Union
 from uuid import UUID
 import uuid
 from pydantic import BaseModel, Field, PrivateAttr
@@ -8,6 +8,7 @@ from palworld_save_pal.dto.item_container_slot import ItemContainerSlotDTO
 from palworld_save_pal.game.item_container_slot import ItemContainerSlot
 from palworld_save_pal.game.dynamic_item import DynamicItem
 from palworld_save_pal.game.pal_objects import PalObjects
+from palworld_save_pal.utils.indexed_collection import IndexedCollection
 from palworld_save_pal.utils.uuid import (
     are_equal_uuids,
     is_empty_uuid,
@@ -37,23 +38,20 @@ class ItemContainer(BaseModel):
     _container_slots_data: Optional[List[Dict[str, Any]]] = PrivateAttr(
         default_factory=list
     )
-    _dynamic_item_save_data: Optional[List[Dict[str, Any]]] = PrivateAttr(
-        default_factory=list
-    )
-    _dynamic_item_index: Optional[Dict[UUID, Dict[str, Any]]] = PrivateAttr(
+    _dynamic_items: Optional[IndexedCollection[UUID, Dict[str, Any]]] = PrivateAttr(
         default=None
     )
 
     def __init__(
         self,
         container_data: Optional[Dict[str, Any]] = None,
-        dynamic_item_index: Optional[Dict[UUID, Dict[str, Any]]] = None,
+        dynamic_items: Optional[IndexedCollection[UUID, Dict[str, Any]]] = None,
         **kwargs: Any,
     ) -> None:
         super().__init__(**kwargs)
-        self._dynamic_item_index = dynamic_item_index
+        self._dynamic_items = dynamic_items
 
-        if container_data is not None and dynamic_item_index is not None:
+        if container_data is not None and dynamic_items is not None:
             self._container_slots_data = PalObjects.get_array_property(
                 PalObjects.get_nested(container_data, "value", "Slots")
             )
@@ -89,16 +87,14 @@ class ItemContainer(BaseModel):
                 and container_slot
                 and container_slot.dynamic_item
             ):
-                self._dynamic_item_save_data.remove(
-                    container_slot.dynamic_item.save_data
-                )
+                self._dynamic_items.remove(container_slot.dynamic_item.save_data)
                 container_slot.dynamic_item = None
             if slot_dto.static_id == "None":
                 self._remove_container_slot(slot_dto.slot_index)
 
     def _get_dynamic_item(self, local_id: UUID) -> Optional[DynamicItem]:
-        if self._dynamic_item_index and local_id in self._dynamic_item_index:
-            entry = self._dynamic_item_index[local_id]
+        entry = self._dynamic_items.get(local_id)
+        if entry is not None:
             return DynamicItem(local_id=local_id, dynamic_item_save_data=entry)
         return None
 
@@ -159,7 +155,9 @@ class ItemContainer(BaseModel):
             slot_dto.dynamic_item.local_id
         ):
             slot_dto.dynamic_item.local_id = (
-                uuid.uuid4() if not slot.dynamic_item else slot.dynamic_item.local_id
+                uuid.uuid4()
+                if not slot.dynamic_item or is_empty_uuid(slot.dynamic_item.local_id)
+                else slot.dynamic_item.local_id
             )
 
         if slot.dynamic_item:
@@ -170,5 +168,5 @@ class ItemContainer(BaseModel):
                 local_id=slot_dto.dynamic_item.local_id, dynamic_item_save_data=new_item
             )
             slot.dynamic_item.update_from(slot_dto.dynamic_item.model_dump())
-            self._dynamic_item_save_data.append(slot.dynamic_item.save_data)
+            self._dynamic_items.add(slot.dynamic_item.save_data)
         slot.local_id = slot_dto.dynamic_item.local_id
