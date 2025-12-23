@@ -58,7 +58,7 @@
 <Navigation.Rail
 	width="48px"
 	value={activeTile}
-	onValueChange={appState.saveState}
+	onValueChange={() => appState.saveState()}
 >
 	{#snippet header()}
 		{#if appState.saveFile && PUBLIC_DESKTOP_MODE === 'true'}

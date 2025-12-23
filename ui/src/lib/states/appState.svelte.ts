@@ -67,7 +67,7 @@ class AppState {
 	}
 
 	async selectPlayerLazy(playerId: string) {
-		if (this.players[playerId]) {
+		if (this.players?.[playerId]) {
 			this.selectedPlayer = this.players[playerId];
 			this.selectedPlayerUid = playerId;
 			return;
@@ -78,7 +78,7 @@ class AppState {
 	}
 
 	async loadGuildLazy(guildId: string) {
-		if (this.guilds[guildId]) {
+		if (this.guilds?.[guildId]) {
 			return this.guilds[guildId];
 		}
 
@@ -91,7 +91,7 @@ class AppState {
 	}
 
 	async loadGpsLazy(): Promise<boolean> {
-		if (this.gpsLoaded && Object.keys(this.gps).length > 0) {
+		if (this.gpsLoaded && Object.keys(this.gps ?? {}).length > 0) {
 			return true;
 		}
 
@@ -109,19 +109,19 @@ class AppState {
 	}
 
 	isPlayerLoaded(playerId: string): boolean {
-		return playerId in this.players;
+		return this.players ? playerId in this.players : false;
 	}
 
 	isGuildLoaded(guildId: string): boolean {
-		return guildId in this.guilds;
+		return this.guilds ? guildId in this.guilds : false;
 	}
 
 	get playerSummariesArray(): PlayerSummary[] {
-		return Object.values(this.playerSummaries);
+		return Object.values(this.playerSummaries ?? {});
 	}
 
 	get guildSummariesArray(): GuildSummary[] {
-		return Object.values(this.guildSummaries);
+		return Object.values(this.guildSummaries ?? {});
 	}
 
 	initData() {}
@@ -184,7 +184,7 @@ class AppState {
 			__ups_new: false
 		};
 
-		appState.selectedPal = palWithMetadata;
+		this.selectedPal = palWithMetadata;
 		upsState.pals = [...upsState.pals, upsPal];
 		upsState.pagination.totalCount++;
 		nav.activeTab = 'pal';
@@ -208,33 +208,10 @@ class AppState {
 		upsState.updatePal(pal.__ups_id, updates);
 	}
 
-	async saveState() {
-		let modifiedData: ModifiedData = {};
-		let modifiedPals: [string, Pal][] = [];
-		let modifiedDspPals: [string, Pal][] = [];
-		let modifiedGspPals: [string, Pal][] = [];
+	processPlayers() {
 		let modifiedPlayers: [string, Player][] = [];
-		let modifiedGuilds: [string, GuildDTO][] = [];
-
-		// Handle UPS pal modifications and new UPS pals
-		if (
-			this.selectedPal &&
-			this.selectedPal.state === EntryState.MODIFIED &&
-			this.selectedPal.__ups_source
-		) {
-			try {
-				if (this.selectedPal.__ups_new) {
-					// Add new pal to UPS
-					await this.addNewUpspal(this.selectedPal);
-				} else {
-					// Save UPS pal changes back to UPS
-					await this.saveUpspalChanges(this.selectedPal);
-				}
-				this.selectedPal.state = EntryState.NONE;
-			} catch (error) {
-				console.error('Failed to save UPS pal changes:', error);
-			}
-		}
+		let modifiedPals: [string, Pal][] = [];
+		let modifiedDpsPals: [string, Pal][] = [];
 
 		for (const player of Object.values(this.players)) {
 			if (player.state === EntryState.MODIFIED) {
@@ -264,15 +241,20 @@ class AppState {
 						pal.owner_uid = player.uid;
 						// Skip UPS pals - they're handled separately
 						if (!pal.__ups_source) {
-							modifiedDspPals = [...modifiedDspPals, [index, pal]];
+							modifiedDpsPals = [...modifiedDpsPals, [index, pal]];
 						}
 						pal.state = EntryState.NONE;
 					}
 				}
 			}
 		}
+		return { modifiedPlayers, modifiedPals, modifiedDpsPals };
+	}
 
-		for (const guild of Object.values(this.guilds)) {
+	processGuilds() {
+		let modifiedGuilds: [string, GuildDTO][] = [];
+		let modifiedPals: [string, Pal][] = [];
+		for (const guild of Object.values(this.guilds ?? {})) {
 			const guildClone = deepCopy(guild);
 			if (guild.bases) {
 				for (const base of Object.values(guild.bases)) {
@@ -306,6 +288,58 @@ class AppState {
 				modifiedGuilds = [...modifiedGuilds, [guildClone.id, guildClone]];
 				guild.state = EntryState.NONE;
 			}
+		}
+		return { modifiedGuilds, modifiedPals };
+	}
+
+	async saveState() {
+		console.log('Saving state...');
+		let modifiedData: ModifiedData = {};
+		let modifiedPals: [string, Pal][] = [];
+		let modifiedDspPals: [string, Pal][] = [];
+		let modifiedGspPals: [string, Pal][] = [];
+		let modifiedPlayers: [string, Player][] = [];
+		let modifiedGuilds: [string, GuildDTO][] = [];
+
+		// Handle UPS pal modifications and new UPS pals
+		if (
+			this.selectedPal &&
+			this.selectedPal.state === EntryState.MODIFIED &&
+			this.selectedPal.__ups_source
+		) {
+			try {
+				if (this.selectedPal.__ups_new) {
+					// Add new pal to UPS
+					await this.addNewUpspal(this.selectedPal);
+				} else {
+					// Save UPS pal changes back to UPS
+					await this.saveUpspalChanges(this.selectedPal);
+				}
+				this.selectedPal.state = EntryState.NONE;
+			} catch (error) {
+				console.error('Failed to save UPS pal changes:', error);
+			}
+		}
+
+		if (this.players && Object.entries(this.players).length > 0) {
+			const {
+				modifiedPlayers: modsPlayers,
+				modifiedPals: modsPals,
+				modifiedDpsPals: modsDps
+			} = this.processPlayers();
+			modifiedPlayers = modsPlayers;
+			modifiedPals = modsPals;
+			modifiedDspPals = modsDps;
+		} else {
+			console.log('No players to process for modifications');
+		}
+
+		if (this.guilds && Object.entries(this.guilds).length > 0) {
+			const { modifiedGuilds: modsGuilds, modifiedPals: modsPals } = this.processGuilds();
+			modifiedGuilds = modsGuilds;
+			modifiedPals = [...modifiedPals, ...modsPals];
+		} else {
+			console.log('No guilds to process for modifications');
 		}
 
 		if (this.gps && Object.values(this.gps).some((p) => p.state === EntryState.MODIFIED)) {
