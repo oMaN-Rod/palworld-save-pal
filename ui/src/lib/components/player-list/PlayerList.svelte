@@ -9,11 +9,15 @@
 	let stopwatchSeconds = $state(0);
 	let stopwatchInterval: ReturnType<typeof setInterval> | null = null;
 
-	let { selected, onselect, ...additionalProps } = $props<{
+	let {
+		selected,
+		onselect,
+		...additionalProps
+	}: {
 		selected?: string;
 		onselect: (player: Player) => void;
 		[key: string]: any;
-	}>();
+	} = $props();
 
 	const selectOptions = $derived.by(() => {
 		return Object.entries(appState.playerSummaries as Record<string, PlayerSummary>).map(
@@ -102,7 +106,7 @@
 			options={selectOptions}
 			placeholder="Select Player"
 			onChange={(value) => handleSelect(value as string)}
-			selectClass="w-80"
+			selectClass="w-full"
 		/>
 	{/if}
 </div>

@@ -1,13 +1,14 @@
 <script lang="ts">
-	import { Map } from '$components';
+	import { Map, PlayerList } from '$components';
+	import { Combobox } from '$components/ui';
 	import { getAppState, getModalState, getToastState } from '$states';
 	import { worldToLeaflet, worldToMap } from '$components/map/utils';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import { mapImg } from '$components/map/mapImages';
-	import { Target, Unlock } from 'lucide-svelte';
+	import { Target, Unlock, Users, Building } from 'lucide-svelte';
 	import { mapObjects } from '$lib/data';
 	import L from 'leaflet';
-	import type { Base, Player } from '$types';
+	import type { Base, Guild, GuildSummary, Player } from '$types';
 	import { assetLoader } from '$utils';
 	import { TextInputModal } from '$components/modals';
 	import { EntryState, MessageType } from '$types';
@@ -19,6 +20,8 @@
 
 	const appState = getAppState();
 	const modal = getModalState();
+	let selectedPlayerUid = $state('');
+	let selectedGuildId = $state('');
 
 	type MapOptions = {
 		showOrigin: boolean;
@@ -45,8 +48,11 @@
 	let map: L.Map | undefined = $state();
 
 	const players = $derived(Object.values(appState.players || {}));
-	const playerCount = $derived(players.length);
+	const loadedPlayerCount = $derived(players.length);
+	const totalPlayerCount = $derived(Object.keys(appState.playerSummaries || {}).length);
 	const guilds = $derived(Object.values(appState.guilds || {}));
+	const loadedGuildCount = $derived(guilds.length);
+	const totalGuildCount = $derived(Object.keys(appState.guildSummaries || {}).length);
 	const bases = $derived.by(() => {
 		return Object.values(guilds).reduce(
 			(acc, guild) => {
@@ -58,6 +64,24 @@
 				return acc;
 			},
 			{} as Record<string, any>
+		);
+	});
+	const loadedBaseCount = $derived(Object.keys(bases).length);
+	const totalBaseCount = $derived(
+		Object.values(appState.guildSummaries || {}).reduce(
+			(acc, summary) => acc + (summary as GuildSummary).base_count,
+			0
+		)
+	);
+
+	const guildSelectOptions = $derived.by(() => {
+		return Object.entries(appState.guildSummaries as Record<string, GuildSummary>).map(
+			([id, summary]) => ({
+				value: id,
+				label: summary.loaded
+					? `🟦 ${summary.name} (${summary.base_count} bases)`
+					: `🟪 ${summary.name} (${summary.base_count} bases)`
+			})
 		);
 	});
 	const fastTravelCount = $derived.by(() => {
@@ -82,13 +106,37 @@
 	const starryonImg = $derived(assetLoader.loadMenuImage('nightbluehorse'));
 
 	function handlePlayerFocus(player: Player) {
+		if (!player.location) return;
 		const coords = worldToLeaflet(player.location.x, player.location.y);
 		map?.flyTo(coords, 3);
 	}
 
+	function handlePlayerLoaded(player: Player) {
+		selectedPlayerUid = player.uid;
+		if (player.location) {
+			handlePlayerFocus(player);
+		}
+	}
+
 	function handleBaseFocus(base: Base) {
+		if (!base.location) return;
 		const coords = worldToLeaflet(base.location.x, base.location.y);
 		map?.flyTo(coords, 3);
+	}
+
+	function handleGuildSelect(guildId: string) {
+		selectedGuildId = guildId;
+		if (appState.guilds?.[guildId]) {
+			// Guild already loaded, focus on first base if available
+			const guild = appState.guilds[guildId];
+			const firstBase = guild.bases ? Object.values(guild.bases)[0] : null;
+			if (firstBase?.location) {
+				handleBaseFocus(firstBase);
+			}
+		} else {
+			// Load the guild
+			appState.loadGuildLazy(guildId);
+		}
 	}
 
 	async function handleEditBaseName(base: Base) {
@@ -134,6 +182,12 @@
 			}
 		}
 	}
+
+	$effect(() => {
+		if (appState.selectedPlayer) {
+			handlePlayerLoaded(appState.selectedPlayer);
+		}
+	});
 </script>
 
 <div class="grid h-full grid-cols-[20%_1fr] gap-2">
@@ -173,7 +227,7 @@
 						>
 							<img src={mapImg.player} alt="Players" class="mr-2 h-6 w-6" />
 							<span>Players</span>
-							<span class="text-surface-500 text-xs">{playerCount}</span>
+							<span class="text-surface-500 text-xs">{loadedPlayerCount}/{totalPlayerCount}</span>
 						</button>
 						<button
 							class="flex items-center space-x-2 {mapOptions.showBases ? '' : 'opacity-25'}"
@@ -181,7 +235,7 @@
 						>
 							<img src={mapImg.baseCamp} alt="Bases" class="mr-2 h-6 w-6" />
 							<span>Bases</span>
-							<span class="text-surface-500 text-xs">{Object.keys(bases).length}</span>
+							<span class="text-surface-500 text-xs">{loadedBaseCount}/{totalBaseCount}</span>
 						</button>
 					{/if}
 
@@ -212,6 +266,52 @@
 				</div>
 			</div>
 			{#if appState.saveFile}
+				<div class="flex flex-col gap-2">
+					<div class="flex items-center gap-2">
+						<Users class="h-4 w-4" />
+						<span class="text-sm font-medium">Load Player</span>
+					</div>
+					<PlayerList selected={selectedPlayerUid} onselect={handlePlayerLoaded} />
+					<p class="text-xs text-gray-500">Select a player to load and show on map</p>
+				</div>
+
+				<div class="flex flex-col gap-2">
+					<div class="flex items-center gap-2">
+						<Building class="h-4 w-4" />
+						<span class="text-sm font-medium">Load Guild/Bases</span>
+					</div>
+					{#if appState.loadingGuild}
+						<div class="my-2 flex items-center gap-2 px-3 py-2 text-sm text-gray-400">
+							<svg class="h-4 w-4 animate-spin" viewBox="0 0 24 24">
+								<circle
+									class="opacity-25"
+									cx="12"
+									cy="12"
+									r="10"
+									stroke="currentColor"
+									stroke-width="4"
+									fill="none"
+								></circle>
+								<path
+									class="opacity-75"
+									fill="currentColor"
+									d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+								></path>
+							</svg>
+							Loading guild...
+						</div>
+					{:else}
+						<Combobox
+							value={selectedGuildId}
+							options={guildSelectOptions}
+							placeholder="Select Guild"
+							onChange={(value) => handleGuildSelect(value as string)}
+							selectClass="w-full"
+						/>
+					{/if}
+					<p class="text-xs text-gray-500">Select a guild to load its bases on the map</p>
+				</div>
+
 				<Accordion
 					value={section}
 					onValueChange={(e: ValueChangeDetails) => (section = e.value)}
@@ -219,10 +319,10 @@
 				>
 					<Accordion.Item value="players" controlHover="hover:bg-secondary-500/25">
 						{#snippet control()}
-							<h2 class="text-lg font-bold">Players</h2>
+							<h2 class="text-lg font-bold">Loaded Players</h2>
 						{/snippet}
 						{#snippet panel()}
-							{#if mapOptions.showPlayers && playerCount > 0}
+							{#if mapOptions.showPlayers && loadedPlayerCount > 0}
 								<div class="max-h-64 space-y-2 overflow-y-auto">
 									{#each players as player}
 										{#if player.location}
@@ -244,41 +344,47 @@
 									{/each}
 								</div>
 							{:else}
-								<p class="text-sm text-gray-500">No players found.</p>
+								<p class="text-sm text-gray-500">
+									No players loaded yet. Use the selector above to load players.
+								</p>
 							{/if}
 						{/snippet}
 					</Accordion.Item>
 					<Accordion.Item value="bases" controlHover="hover:bg-secondary-500/25">
 						{#snippet control()}
-							<h2 class="text-lg font-bold">Bases</h2>
+							<h2 class="text-lg font-bold">Loaded Bases</h2>
 						{/snippet}
 						{#snippet panel()}
-							{#if mapOptions.showBases}
+							{#if mapOptions.showBases && loadedBaseCount > 0}
 								<div class="max-h-64 space-y-2 overflow-y-auto">
 									{#each Object.values(bases) as base}
-										<button
-											class="bg-surface-800 hover:bg-secondary-500/25 mb-2 w-full rounded-sm p-2 text-start"
-											onclick={() => handleBaseFocus(base)}
-											oncontextmenu={(e) => {
-												e.preventDefault();
-												handleEditBaseName(base);
-											}}
-										>
-											<div class="font-bold">{base.name}</div>
-											<div class="text-xs text-gray-400">
-												ID: {base.id}
-											</div>
-											<div class="text-xs text-gray-400">
-												Location: {worldToMap(base.location.x, base.location.y).x}, {worldToMap(
-													base.location.x,
-													base.location.y
-												).y}
-											</div>
-										</button>
+										{#if base.location}
+											<button
+												class="bg-surface-800 hover:bg-secondary-500/25 mb-2 w-full rounded-sm p-2 text-start"
+												onclick={() => handleBaseFocus(base)}
+												oncontextmenu={(e) => {
+													e.preventDefault();
+													handleEditBaseName(base);
+												}}
+											>
+												<div class="font-bold">{base.name}</div>
+												<div class="text-xs text-gray-400">
+													ID: {base.id}
+												</div>
+												<div class="text-xs text-gray-400">
+													Location: {worldToMap(base.location.x, base.location.y).x}, {worldToMap(
+														base.location.x,
+														base.location.y
+													).y}
+												</div>
+											</button>
+										{/if}
 									{/each}
 								</div>
 							{:else}
-								<p class="text-sm text-gray-500">No bases found.</p>
+								<p class="text-sm text-gray-500">
+									No bases loaded yet. Use the guild selector above to load bases.
+								</p>
 							{/if}
 						{/snippet}
 					</Accordion.Item>
