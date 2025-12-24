@@ -162,10 +162,22 @@ class SaveFile(BaseModel):
     _character_save_parameter_map: List[Dict[str, Any]] = PrivateAttr(
         default_factory=list
     )
+    _character_save_parameters: Optional[IndexedCollection[UUID, Dict[str, Any]]] = (
+        PrivateAttr(default=None)
+    )
     _item_container_save_data: List[Dict[str, Any]] = PrivateAttr(default_factory=list)
+    _item_containers: Optional[IndexedCollection[UUID, Dict[str, Any]]] = PrivateAttr(
+        default=None
+    )
     _dynamic_item_save_data: List[Dict[str, Any]] = PrivateAttr(default_factory=list)
+    _dynamic_items: Optional[IndexedCollection[UUID, Dict[str, Any]]] = PrivateAttr(
+        default=None
+    )
     _character_container_save_data: List[Dict[str, Any]] = PrivateAttr(
         default_factory=list
+    )
+    _character_containers: Optional[IndexedCollection[UUID, Dict[str, Any]]] = (
+        PrivateAttr(default=None)
     )
     _group_save_data_map: List[Dict[str, Any]] = PrivateAttr(default_factory=list)
     _base_camp_save_data_map: List[Dict[str, Any]] = PrivateAttr(default_factory=list)
@@ -182,15 +194,6 @@ class SaveFile(BaseModel):
     _pal_owner_counts_cache: Optional[Dict[UUID, int]] = PrivateAttr(default=None)
     _player_guild_map_cache: Optional[Dict[UUID, UUID]] = PrivateAttr(default=None)
     _map_object_index: Optional[Dict[UUID, List[Dict[str, Any]]]] = PrivateAttr(
-        default=None
-    )
-    _item_container_index: Optional[Dict[UUID, Dict[str, Any]]] = PrivateAttr(
-        default=None
-    )
-    _dynamic_items: Optional[IndexedCollection[UUID, Dict[str, Any]]] = PrivateAttr(
-        default=None
-    )
-    _character_container_index: Optional[Dict[UUID, Dict[str, Any]]] = PrivateAttr(
         default=None
     )
 
@@ -315,6 +318,7 @@ class SaveFile(BaseModel):
                 player_id,
             )
         ]
+        self.invalidate_performance_caches()
 
         # Delete player save file
         del self._player_gvas_files[player_id]
@@ -447,21 +451,26 @@ class SaveFile(BaseModel):
             len(container_ids_to_delete),
             target_id,
         )
+        item_containers = self._get_item_containers()
         for container_id in container_ids_to_delete:
-            for entry in self._item_container_save_data:
-                if are_equal_uuids(
-                    PalObjects.get_guid(
-                        PalObjects.get_nested(
-                            entry, "value", "BelongInfo", "value", "GroupId"
-                        )
-                    ),
-                    target_id,
-                ) or are_equal_uuids(
-                    PalObjects.get_guid(entry["key"]["ID"]), container_id
-                ):
-                    self._delete_dynamic_items(entry)
-                    self._item_container_save_data.remove(entry)
-                    break
+            entry = item_containers.get(container_id)
+            if entry:
+                self._delete_dynamic_items(entry)
+                item_containers.remove_by_key(container_id)
+            else:
+                # Fallback: search by GroupId if not found by container_id
+                for entry in item_containers.data:
+                    if are_equal_uuids(
+                        PalObjects.get_guid(
+                            PalObjects.get_nested(
+                                entry, "value", "BelongInfo", "value", "GroupId"
+                            )
+                        ),
+                        target_id,
+                    ):
+                        self._delete_dynamic_items(entry)
+                        item_containers.remove(entry)
+                        break
 
     def _delete_dynamic_items(self, item_container: UUID) -> None:
         slots = PalObjects.get_array_property(
@@ -482,14 +491,9 @@ class SaveFile(BaseModel):
 
     def _delete_character_containers(self, container_ids_to_delete: List[UUID]) -> None:
         logger.debug("Deleting character containers for %s", container_ids_to_delete)
-        self._character_container_save_data[:] = [
-            entry
-            for entry in self._character_container_save_data
-            if not any(
-                are_equal_uuids(PalObjects.get_guid(entry["key"]["ID"]), container_id)
-                for container_id in container_ids_to_delete
-            )
-        ]
+        character_containers = self._get_character_containers()
+        for container_id in container_ids_to_delete:
+            character_containers.remove_by_key(container_id)
 
     def add_player_pal(
         self,
@@ -506,7 +510,7 @@ class SaveFile(BaseModel):
         new_pal = player.add_pal(character_id, nickname, container_id, storage_slot)
         if new_pal is None:
             return
-        self._character_save_parameter_map.append(new_pal.character_save)
+        self._get_character_save_parameters().add(new_pal.character_save)
         self._pals[new_pal.instance_id] = new_pal
         self.invalidate_performance_caches()
         return new_pal
@@ -526,7 +530,7 @@ class SaveFile(BaseModel):
         new_pal = player.add_pal_from_dto(pal_dto, container_id, storage_slot)
         if new_pal is None:
             return
-        self._character_save_parameter_map.append(new_pal.character_save)
+        self._get_character_save_parameters().add(new_pal.character_save)
         self._pals[new_pal.instance_id] = new_pal
         self.invalidate_performance_caches()
         return new_pal
@@ -671,7 +675,7 @@ class SaveFile(BaseModel):
         new_pal = guild.add_base_pal(character_id, nickname, base_id, storage_slot)
         if new_pal is None:
             return
-        self._character_save_parameter_map.append(new_pal.character_save)
+        self._get_character_save_parameters().add(new_pal.character_save)
         self._pals[new_pal.instance_id] = new_pal
         self.invalidate_performance_caches()
         return new_pal
@@ -691,7 +695,7 @@ class SaveFile(BaseModel):
         new_pal = player.clone_pal(pal)
         if new_pal is None:
             return
-        self._character_save_parameter_map.append(new_pal.character_save)
+        self._get_character_save_parameters().add(new_pal.character_save)
         self._pals[new_pal.instance_id] = new_pal
         self.invalidate_performance_caches()
         return new_pal
@@ -715,7 +719,7 @@ class SaveFile(BaseModel):
         new_pal = guild.clone_base_pal(base_id, pal)
         if new_pal is None:
             return
-        self._character_save_parameter_map.append(new_pal.character_save)
+        self._get_character_save_parameters().add(new_pal.character_save)
         self._pals[new_pal.instance_id] = new_pal
         self.invalidate_performance_caches()
         return new_pal
@@ -820,10 +824,10 @@ class SaveFile(BaseModel):
         return None
 
     def get_character_container(self, container_id: UUID) -> Dict[str, Any]:
-        return self._get_character_container_index().get(container_id)
+        return self._get_character_containers().get(container_id)
 
     def get_item_container(self, container_id: UUID) -> Dict[str, Any]:
-        return self._get_item_container_index().get(container_id)
+        return self._get_item_containers().get(container_id)
 
     def load_json(self, data: bytes):
         logger.info("Loading %s as JSON", self.level_sav_path)
@@ -1111,10 +1115,14 @@ class SaveFile(BaseModel):
         self._pal_owner_counts_cache = None
         self._player_guild_map_cache = None
         self._map_object_index = None
-        self._item_container_index = None
+        if self._item_containers is not None:
+            self._item_containers.invalidate()
         if self._dynamic_items is not None:
             self._dynamic_items.invalidate()
-        self._character_container_index = None
+        if self._character_containers is not None:
+            self._character_containers.invalidate()
+        if self._character_save_parameters is not None:
+            self._character_save_parameters.invalidate()
         logger.debug("Performance caches invalidated")
 
     def _get_map_object_index(self) -> Dict[UUID, List[Dict[str, Any]]]:
@@ -1142,24 +1150,25 @@ class SaveFile(BaseModel):
                 index[base_camp_id].append(map_object)
         return index
 
-    def _get_item_container_index(self) -> Dict[UUID, Dict[str, Any]]:
-        if self._item_container_index is not None:
-            return self._item_container_index
-        self._item_container_index = self._build_item_container_index()
-        return self._item_container_index
+    def _get_item_containers(self) -> IndexedCollection[UUID, Dict[str, Any]]:
+        if self._item_containers is not None:
+            return self._item_containers
+        self._item_containers = self._build_item_containers_collection()
+        return self._item_containers
 
-    def _build_item_container_index(self) -> Dict[UUID, Dict[str, Any]]:
-        index: Dict[UUID, Dict[str, Any]] = {}
-        if not self._item_container_save_data:
-            return index
-        for entry in self._item_container_save_data:
+    def _build_item_containers_collection(
+        self,
+    ) -> IndexedCollection[UUID, Dict[str, Any]]:
+        def key_extractor(entry: Dict[str, Any]) -> Optional[UUID]:
             try:
-                container_id = PalObjects.get_guid(entry["key"]["ID"])
+                return PalObjects.get_guid(entry["key"]["ID"])
             except (KeyError, TypeError):
-                continue
-            if container_id:
-                index[container_id] = entry
-        return index
+                return None
+
+        return IndexedCollection(
+            data=self._item_container_save_data,
+            key_extractor=key_extractor,
+        )
 
     def _get_dynamic_items(self) -> IndexedCollection[UUID, Dict[str, Any]]:
         if self._dynamic_items is not None:
@@ -1183,24 +1192,47 @@ class SaveFile(BaseModel):
             key_extractor=key_extractor,
         )
 
-    def _get_character_container_index(self) -> Dict[UUID, Dict[str, Any]]:
-        if self._character_container_index is not None:
-            return self._character_container_index
-        self._character_container_index = self._build_character_container_index()
-        return self._character_container_index
+    def _get_character_containers(self) -> IndexedCollection[UUID, Dict[str, Any]]:
+        if self._character_containers is not None:
+            return self._character_containers
+        self._character_containers = self._build_character_containers_collection()
+        return self._character_containers
 
-    def _build_character_container_index(self) -> Dict[UUID, Dict[str, Any]]:
-        index: Dict[UUID, Dict[str, Any]] = {}
-        if not self._character_container_save_data:
-            return index
-        for entry in self._character_container_save_data:
+    def _build_character_containers_collection(
+        self,
+    ) -> IndexedCollection[UUID, Dict[str, Any]]:
+        def key_extractor(entry: Dict[str, Any]) -> Optional[UUID]:
             try:
-                container_id = PalObjects.get_guid(entry["key"]["ID"])
+                return PalObjects.get_guid(entry["key"]["ID"])
             except (KeyError, TypeError):
-                continue
-            if container_id:
-                index[container_id] = entry
-        return index
+                return None
+
+        return IndexedCollection(
+            data=self._character_container_save_data,
+            key_extractor=key_extractor,
+        )
+
+    def _get_character_save_parameters(self) -> IndexedCollection[UUID, Dict[str, Any]]:
+        if self._character_save_parameters is not None:
+            return self._character_save_parameters
+        self._character_save_parameters = (
+            self._build_character_save_parameters_collection()
+        )
+        return self._character_save_parameters
+
+    def _build_character_save_parameters_collection(
+        self,
+    ) -> IndexedCollection[UUID, Dict[str, Any]]:
+        def key_extractor(entry: Dict[str, Any]) -> Optional[UUID]:
+            try:
+                return PalObjects.get_guid(entry["key"]["InstanceId"])
+            except (KeyError, TypeError):
+                return None
+
+        return IndexedCollection(
+            data=self._character_save_parameter_map,
+            key_extractor=key_extractor,
+        )
 
     def _extract_guild_summaries(self) -> Dict[UUID, GuildSummary]:
         summaries = {}
@@ -1384,9 +1416,9 @@ class SaveFile(BaseModel):
             gvas_files=self._player_gvas_files[player_id],
             character_save_parameter=player_entry,
             guild=guild,
-            item_container_index=self._get_item_container_index(),
+            item_container_index=self._get_item_containers().index,
             dynamic_items=self._get_dynamic_items(),
-            character_container_index=self._get_character_container_index(),
+            character_container_index=self._get_character_containers().index,
             pals=player_pals,
         )
 
@@ -1441,7 +1473,7 @@ class SaveFile(BaseModel):
             guild = Guild(
                 group_save_data=entry,
                 guild_extra_data=guild_extra_save_data,
-                item_container_index=self._get_item_container_index(),
+                item_container_index=self._get_item_containers().index,
                 dynamic_items=self._get_dynamic_items(),
             )
             self._guilds[guild_id] = guild
@@ -1467,7 +1499,7 @@ class SaveFile(BaseModel):
             return
 
         map_object_index = self._get_map_object_index()
-        item_container_index = self._get_item_container_index()
+        item_container_index = self._get_item_containers().index
         dynamic_items = self._get_dynamic_items()
 
         for entry in self._base_camp_save_data_map:
@@ -1520,7 +1552,7 @@ class SaveFile(BaseModel):
                 pals=pals,
                 container_id=container_id,
                 slot_count=container_slot_count,
-                character_container_index=self._get_character_container_index(),
+                character_container_index=self._get_character_containers().index,
                 base_map_objects=base_map_objects,
                 item_container_index=item_container_index,
                 dynamic_items=dynamic_items,
@@ -1673,7 +1705,8 @@ class SaveFile(BaseModel):
         for pal_id, pal in modified_pals.items():
             pal_name = pal.nickname if pal.nickname else pal.character_id
             await ws_callback(f"Updating pal {pal_name}")
-            self._update_pal(pal_id, pal)
+            existing_pal = self._pals[pal_id]
+            existing_pal.update_from(pal)
 
         logger.info("Updated %d pals in the save file.", len(modified_pals))
 
@@ -1726,7 +1759,8 @@ class SaveFile(BaseModel):
 
         for _, player in modified_players.items():
             await ws_callback(f"Updating player {player.nickname}")
-            self._update_player(player)
+            existing_player = self._players.get(player.uid)
+            existing_player.update_from(player)
 
         logger.info("Updated %d players in the save file.", len(modified_players))
 
@@ -1771,12 +1805,10 @@ class SaveFile(BaseModel):
 
     def _delete_pal_by_id(self, pal_id: UUID) -> None:
         del self._pals[pal_id]
-        for entry in self._character_save_parameter_map:
-            if are_equal_uuids(PalObjects.get_guid(entry["key"]["InstanceId"]), pal_id):
-                logger.debug("Deleting pal %s from CharacterSaveParameterMap", pal_id)
-                self._character_save_parameter_map.remove(entry)
-                self.invalidate_performance_caches()
-                break
+        character_params = self._get_character_save_parameters()
+        if character_params.remove_by_key(pal_id):
+            logger.debug("Deleting pal %s from CharacterSaveParameterMap", pal_id)
+            self.invalidate_performance_caches()
 
     def _get_file_size(self, data: bytes):
         if hasattr(data, "seek") and hasattr(data, "tell"):
@@ -1840,7 +1872,7 @@ class SaveFile(BaseModel):
             self._guilds[guild_id] = Guild(
                 group_save_data=entry,
                 guild_extra_data=guild_extra_save_data,
-                item_container_index=self._get_item_container_index(),
+                item_container_index=self._get_item_containers().index,
                 dynamic_items=self._get_dynamic_items(),
             )
 
@@ -1851,7 +1883,7 @@ class SaveFile(BaseModel):
             return
 
         map_object_index = self._get_map_object_index()
-        item_container_index = self._get_item_container_index()
+        item_container_index = self._get_item_containers().index
         dynamic_items = self._get_dynamic_items()
 
         for entry in self._base_camp_save_data_map:
@@ -1905,7 +1937,7 @@ class SaveFile(BaseModel):
                 pals=pals,
                 container_id=container_id,
                 slot_count=container_slot_count,
-                character_container_index=self._get_character_container_index(),
+                character_container_index=self._get_character_containers().index,
                 base_map_objects=base_map_objects,
                 item_container_index=item_container_index,
                 dynamic_items=dynamic_items,
@@ -2107,19 +2139,11 @@ class SaveFile(BaseModel):
                     gvas_files=self._player_gvas_files[uid],
                     character_save_parameter=entry,
                     guild=self._player_guild(uid),
-                    item_container_index=self._get_item_container_index(),
+                    item_container_index=self._get_item_containers().index,
                     dynamic_items=self._get_dynamic_items(),
-                    character_container_index=self._get_character_container_index(),
+                    character_container_index=self._get_character_containers().index,
                     pals=player_pals,
                 )
                 players[uid] = player
 
         self._players = players
-
-    def _update_pal(self, pal_id: UUID, updated_pal: PalDTO) -> None:
-        existing_pal = self._pals[pal_id]
-        existing_pal.update_from(updated_pal)
-
-    def _update_player(self, player: PlayerDTO) -> None:
-        existing_player = self._players.get(player.uid)
-        existing_player.update_from(player)
