@@ -1,9 +1,13 @@
 <script lang="ts">
 	import type { Player, PlayerSummary } from '$types';
 	import { Combobox } from '$components/ui';
+	import Stopwatch from '$components/ui/stopwatch/Stopwatch.svelte';
 	import { getAppState } from '$states';
 
 	let appState = getAppState();
+
+	let stopwatchSeconds = $state(0);
+	let stopwatchInterval: ReturnType<typeof setInterval> | null = null;
 
 	let { selected, onselect, ...additionalProps } = $props<{
 		selected?: string;
@@ -47,12 +51,33 @@
 			}
 		}
 	});
+
+	$effect(() => {
+		if (appState.loadingPlayer) {
+			stopwatchSeconds = 0;
+			stopwatchInterval = setInterval(() => {
+				stopwatchSeconds++;
+			}, 1000);
+		} else {
+			if (stopwatchInterval) {
+				clearInterval(stopwatchInterval);
+				stopwatchInterval = null;
+			}
+		}
+
+		return () => {
+			if (stopwatchInterval) {
+				clearInterval(stopwatchInterval);
+				stopwatchInterval = null;
+			}
+		};
+	});
 </script>
 
 <div class="w-full" {...additionalProps}>
 	{#if appState.loadingPlayer}
-		<div class="flex items-center gap-2 px-3 py-2 text-sm text-gray-400">
-			<svg class="animate-spin h-4 w-4" viewBox="0 0 24 24">
+		<div class="my-2 flex items-center gap-2 px-3 py-2 text-sm text-gray-400">
+			<svg class="h-4 w-4 animate-spin" viewBox="0 0 24 24">
 				<circle
 					class="opacity-25"
 					cx="12"
@@ -69,6 +94,7 @@
 				></path>
 			</svg>
 			Loading player...
+			<Stopwatch bind:seconds={stopwatchSeconds} size="text-sm" />
 		</div>
 	{:else}
 		<Combobox
