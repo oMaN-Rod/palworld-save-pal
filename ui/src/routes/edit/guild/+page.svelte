@@ -15,7 +15,12 @@
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { Ambulance, X, ReplaceAll, Plus, Trash, Bandage, Play, RefreshCcw } from 'lucide-svelte';
 	import { DebugButton, ItemBadge, PalBadge, StoragePresets, LabResearch } from '$components';
-	import { PalSelectModal, NumberInputModal, PalPresetSelectModal } from '$components/modals';
+	import {
+		PalSelectModal,
+		NumberInputModal,
+		PalPresetSelectModal,
+		NumberSliderModal
+	} from '$components/modals';
 	import { assetLoader, debounce, deepCopy, formatNickname } from '$utils';
 	import { cn } from '$theme';
 	import { TextInputModal } from '$components/modals';
@@ -613,11 +618,12 @@
 
 	async function handleEditBasecampLevel() {
 		// @ts-ignore
-		const result = await modal.showModal<number>(NumberInputModal, {
+		const result = await modal.showModal<number>(NumberSliderModal, {
 			title: 'Edit Basecamp Level',
 			value: playerGuild!.base_camp_level || 1,
 			min: 1,
-			max: 30
+			max: 30,
+			markers: [5, 10, 15, 20, 25, 30]
 		});
 		if (!result) return;
 		playerGuild!.base_camp_level = result;
