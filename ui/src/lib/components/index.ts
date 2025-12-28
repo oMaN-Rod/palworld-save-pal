@@ -23,6 +23,7 @@ import PassiveSkillOption from './passive-skill-option/PassiveSkillOption.svelte
 import PlayerList from './player-list/PlayerList.svelte';
 import PlayerPresets from './player-presets/PlayerPresets.svelte';
 import PlayerStats from './player-stats/PlayerStats.svelte';
+import SkillPresets from './skill-presets/SkillPresets.svelte';
 import Souls from './souls/Souls.svelte';
 import Spinner from './spinner/Spinner.svelte';
 import StoragePresets from './storage-presets/StoragePresets.svelte';
@@ -54,6 +55,7 @@ export {
 	PlayerList,
 	PlayerPresets,
 	PlayerStats,
+	SkillPresets,
 	Souls,
 	Spinner,
 	StatsBadges,

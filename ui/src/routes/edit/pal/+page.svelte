@@ -1,27 +1,27 @@
 <script lang="ts">
-	import { PalHeader, SkillSelectModal } from '$components';
-	import StatusBadge from '$components/badges/status-badge/StatusBadge.svelte';
 	import {
 		ActiveSkillBadge,
+		LearnedSkillSelectModal,
+		PalHeader,
 		PassiveSkillBadge,
+		Souls,
 		StatsBadges,
-		WorkSuitabilities,
-		TextInputModal,
 		Talents,
-		LearnedSkillSelectModal
+		TextInputModal,
+		WorkSuitabilities
 	} from '$components';
+	import StatusBadge from '$components/badges/status-badge/StatusBadge.svelte';
+	import MultiSkillSelectModal from '$components/modals/multi-skill-select/MultiSkillSelectModal.svelte';
 	import { SectionHeader, Tooltip } from '$components/ui';
+	import { SkillPresets } from '$lib/components';
+	import { expData, palsData, presetsData } from '$lib/data';
+	import { getAppState, getModalState } from '$states';
 	import { EntryState, type PresetProfile, type WorkSuitability } from '$types';
 	import { staticIcons } from '$types/icons';
-	import { palsData, expData, presetsData } from '$lib/data';
-	import { getAppState, getModalState } from '$states';
-	import { BicepsFlexed, Brain, Plus, Save } from 'lucide-svelte';
-	import { Souls } from '$components';
-	import SkillPresets from './SkillPresets.svelte';
 	import { assetLoader, calculateFilters } from '$utils';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
-	import MultiSkillSelectModal from '$components/modals/multi-skill-select/MultiSkillSelectModal.svelte';
 	import type { ValueChangeDetails } from '@zag-js/accordion';
+	import { BicepsFlexed, Brain, Plus, Save } from 'lucide-svelte';
 
 	const appState = getAppState();
 
