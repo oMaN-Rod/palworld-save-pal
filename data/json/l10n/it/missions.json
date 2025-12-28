@@ -1,0 +1,258 @@
+{
+  "Main_BaseCampLevel": {
+    "localized_name": "Una base accogliente",
+    "description": "Per far lavorare i Pal in modo efficiente sarà necessario espandere la base. Porta la base fino al livello 7 e crea un ambiente più confortevole per i tuoi Pal. Continua così e diventerai abbastanza forte da sfidare il boss della torre."
+  },
+  "Main_BuildHatchingMachine": {
+    "localized_name": "Uova di Pal",
+    "description": "È noto che i Pal nascano dalle uova. È possibile trovare uova in ogni angolo dell'isola, quindi tieni gli occhi ben aperti durante le tue esplorazioni. Facendo schiudere le uova di Pal, potrai incontrare tanti esemplari diversi. In poco tempo, alleverai dei Pal tutti tuoi. Sblocca la tecnologia Incubatrice per uova e attivala nella base. Inserisci le uova nella Incubatrice per uova e a quel punto dovrai soltanto aspettare."
+  },
+  "Main_BuildPalBox": {
+    "localized_name": "Una base da cui iniziare",
+    "description": "Apri il menu Edificazione da <keyGuideIcon id=|OpenConstructionMenu| iconScale=|0.7|/>, e costruisci il Box per Pal in uno spazio ampio. Qui sorgerà la prima base per te e i Pal: sarà il punto d'origine delle spedizioni, e una risorsa fondamentale quando un giorno punterai alle torri. Scegli con attenzione dove edificarla."
+  },
+  "Main_BuildWorkBench": {
+    "localized_name": "Dove inizia ogni attività",
+    "description": "Le risorse hanno utilizzi sorprendenti. Costruendo un banco da lavoro, potrai realizzare oggetti più complessi. Apri il menu Edificazione, seleziona Banco da lavoro primitivo e scegli dove costruirlo. Costruisci con le tue mani i tuoi primi strumenti."
+  },
+  "Main_Capture30Pal": {
+    "localized_name": "Cattura 30 Pal",
+    "description": "Questo dispositivo include una funzione chiamata Palpedia, che permette di consultare le informazioni su ogni Pal. Può contenere i dati su fino a dodici esemplari per ogni specie di Pal. Catturando tanti Pal otterrai anche tanti punti esperienza. Per prima cosa, prova a catturarne trenta. Ottieni alleati con tante capacità diverse, così che possano aiutarti a sconfiggere anche i nemici più forti."
+  },
+  "Main_CaptureDeerGround": {
+    "localized_name": "La riserva",
+    "description": "Su Palpagos ci sono diverse zone note come riserve, dove si trovano Pal con caratteristiche diverse dal normale. Tra di loro si dice che sia particolarmente forte il Pal noto come {targetpal}. Cattura {targetpal} e nuove strade si spalancheranno di fronte a te."
+  },
+  "Main_CapturePal": {
+    "localized_name": "Il primo Pal",
+    "description": "Lancia una Sfera Pal verso un Pal per catturarlo. Cattura il tuo primo Pal e le vostre vite saranno legate. Indebolire un Pal rende più semplice catturarlo."
+  },
+  "Main_CaptureSheepBall": {
+    "localized_name": "Il Pal più debole",
+    "description": "A Palpagos vige la legge del più forte. SheepBall si trova in fondo alla catena alimentare dei Pal ed è facile da catturare. Tuttavia si tratta di una specie abile in certe attività, che potrà svolgere al posto tuo. Cattura 5 esemplari di SheepBall. Ti saranno di certo utili man mano che la tua base crescerà. Inoltre, dai SheepBall puoi ricavare Lana e Carne di Lamball, risorse fondamentali per vivere bene. Per sopravvivere in questo mondo spietato, dovrai sfruttare ogni risorsa a tua disposizione."
+  },
+  "Main_CollectCrystal": {
+    "localized_name": "Il Paldium",
+    "description": "Su quest'isola esiste un minerale dalle capacità incredibili, noto come Paldium. Sembra che abbia a che fare col gigantesco albero che si vede all'orizzonte, ma non sono noti i dettagli. Questo materiale misterioso ha tanti utilizzi diversi ed è una risorsa essenziale per creare la Sfera Pal. Il Paldium si trova nei pressi delle acque. Cerca sulla riva dei corsi d'acqua e, quando trovi un minerale blu splendente, colpiscilo col piccone. Per costruirti un piccone, vai al Banco da lavoro primitivo e combina Pietra e Legno."
+  },
+  "Main_CraftKitsunebiGear": {
+    "localized_name": "Abilità compagno",
+    "description": "Tutti i Pal hanno capacità chiamate abilità compagno, che variano in base alla specie di appartenenza. A volte potrai equipaggiare e usare direttamente un'abilità, altre volte potrai cavalcare un Pal per muoverti. Sblocca la tecnologia Banco da lavoro per strumenti per Pal e attivala nella base. Quindi sblocca la tecnologia Bardatura di Foxparks e creala al Banco da lavoro per strumenti per Pal. A differenza di equipaggiamenti e oggetti, gli strumenti per Pal si trovano sotto Oggetti importanti, accanto all'inventario."
+  },
+  "Main_CraftMealPouch": {
+    "localized_name": "La fame è il peggiore dei nemici",
+    "description": "La fame è il peggiore dei nemici. Non bisogna mai dimenticarsi di mangiare. Con una Borsa di cibo piccola, sarà più facile gestire l'alimentazione sia tua che dei tuoi Pal. Un dispositivo così piccolo cambierà tutto sia per l'esplorazione che per le battaglie. La Borsa di cibo piccola, proprio come gli strumenti per Pal, si trova sotto Oggetti importanti, accanto all'inventario."
+  },
+  "Main_CraftPalSphere": {
+    "localized_name": "Uno strumento di cattura",
+    "description": "La Sfera Pal è lo strumento essenziale per catturare un Pal. Combina le risorse al Banco da lavoro primitivo per creare una Sfera Pal. Le risorse necessarie sono Legno, Pietra e Frammento di Paldium."
+  },
+  "Main_CraftShield": {
+    "localized_name": "La protezione del Paldium",
+    "description": "Durante uno scontro, è impossibile schivare all'infinito i colpi nemici. Ottieni uno strumento difensivo col potere del Paldium. Sblocca la tecnologia Scudo normale e creala al Banco da lavoro primitivo. Se la equipaggi ogni giorno, ti proteggerà anche dagli attacchi a sorpresa."
+  },
+  "Main_DefeatDesertBoss": {
+    "localized_name": "Il signore delle sabbie",
+    "description": "La Milizia volontaria avrebbe dovuto proteggere questa terra, ma oramai non fa che corromperla. Al centro di tutto c'è un uomo chiamato Marcus Dryden. Smercia veleno e si arricchisce approfittando della sua posizione di guardiano dell'ordine, gettando così l'isola nel caos. Il deserto da lui dominato attende anche oggi che qualcuno lo riconquisti. Qualcuno come te. Raggiungi la torre delle dune della siccità e liberala dalla sua corruzione."
+  },
+  "Main_DefeatDungeonBoss": {
+    "localized_name": "Il Pal sigillato",
+    "description": "Su quest'isola c'è un Pal chiamato {targetpal}. È molto forte: l'avversario ideale per mettere alla prova le tue capacità in battaglia. Trova {targetpal} e scegli se sconfiggerlo o catturarlo."
+  },
+  "Main_DefeatForestBoss": {
+    "localized_name": "I Pal sono sacri",
+    "description": "Lily Everhart predica la coesistenza coi Pal, che ama d'un amore anomalo. Questo amore, però, l'ha portata presto a considerare tutti gli umani come peccatori. Se vuoi procedere per la tua strada, dovrai porre un freno al suo estremismo. Raggiungi la torre della montagna dei ghiacci eterni e affrontala direttamente."
+  },
+  "Main_DefeatGrassBoss": {
+    "localized_name": "La ragazza e la torre",
+    "description": "È giunto il momento di affrontare la prima delle torri dell'isola. A sua difesa c'è una ragazza di nome Zoe Rayne. Totalmente ignara del suo vero destino, anche oggi se ne sta nella torre, obbedendo al compito che le è stato assegnato. Cosa si troverà oltre quella torre? Starà a te cercare la risposta."
+  },
+  "Main_DefeatSakurajimaBoss": {
+    "localized_name": "Stanotte il sakè è buonissimo",
+    "description": "Saya Kurosaki è la guardiana della torre dell'isola dei ciliegi. Veglia in silenzio su un tempo immobile, sotto una luna immutabile. Di recente ha incontrato un Pal che chiama |lama della luna crescente|, e ha finalmente deciso di rompere il suo silenzio. Raggiungi la torre del clan dei fiori di luna sull'isola dei ciliegi e metti alla prova la sua determinazione."
+  },
+  "Main_DefeatSnowyMountainBoss": {
+    "localized_name": "Gli esperimenti interspecie sui Pal",
+    "description": "In una certa struttura sono state rinvenute tracce di esperimenti estremamente pericolosi. Da ciò che si può evincere, il loro scopo era creare nuove forme di vita e potenziare gli esseri viventi. Nella documentazione, ricorre spesso il nome di Victor Ashford. Sembra che abbia trovato la risposta che cercava. Dovrai osservare con i tuoi occhi ciò che è accaduto in quel luogo. Scala la torre sulla cima del monte dello spirito argento e metti fine ai suoi pericolosi esperimenti."
+  },
+  "Main_DefeatVikingBoss": {
+    "localized_name": "La persona giusta",
+    "description": "In un lontano passato, le terre della rovina furono colpite da una calamità. A quel tempo Bjorn Seligson prese la guida del suo popolo, e ancora oggi difende la torre. Parla sempre dell'arrivo di |quel momento|, ma non è chiaro cosa stia aspettando. L'unica cosa certa è che questa terra potrà venire cambiata dall'arrivo della persona giusta. Raggiungi la torre nelle profondità delle terre della rovina, e aiuta il suo popolo. Solo tu puoi farti carico del peso della calamità."
+  },
+  "Main_DefeatVolcanoBoss": {
+    "localized_name": "L'ossessione per la vittoria perfetta",
+    "description": "Un tempo c'era un uomo ossessionato dalla vittoria perfetta. Non aveva una ragione per combattere, se non la ricerca di qualcuno più forte di lui. Non desiderava altro. Axel Traverse si erge a difesa della torre del fuoco perenne. Sta aspettando la tua sfida nella torre del cratere dei monti fiammeggianti."
+  },
+  "Main_DefeatWildBoss": {
+    "localized_name": "Il primo scontro con un boss",
+    "description": "Alcune zone dell'isola di Palpagos sono il territorio di Pal potentissimi. A volte si rivelano un pericolo, ma sconfiggendoli puoi ottenere tanti punti esperienza, mentre catturandoli ti guadagnerai potenti alleati. La scelta spetta a te. Sembra che su quest'isola ci sia un Pal chiamato {targetpal}. Trova {targetpal} e scegli se sconfiggerlo o catturarlo."
+  },
+  "Main_EquipClothArmor": {
+    "localized_name": "Proteggiti",
+    "description": "La natura di Palpagos è ostile verso tutti coloro che la abitano. È importante avere indumenti che proteggano dal freddo e da avversità varie. Sblocca la tecnologia Abiti di stoffa e creala al Banco da lavoro primitivo. Per farlo sono necessari Stoffa e Lana di Pal. Cerca dei Pal abbastanza morbidi."
+  },
+  "Main_GainStatus": {
+    "localized_name": "Potenzia le statistiche",
+    "description": "Ottenere esperienza ti permetterà di diventare più forte e superare le avversità. Quando sali di livello, apri l'inventario e potenzia una delle tue statistiche. Fai questo passo avanti senza temere il cambiamento."
+  },
+  "Main_Meal": {
+    "localized_name": "Sazia la fame",
+    "description": "Mangiare è fondamentale sia per combattere sia per andare all'avventura. Per fortuna, quest'isola è piena di piante dai frutti deliziosi. Cerca la frutta nota come Bacche rosse. Una volta raccolta, apri l'inventario e consumala per saziarti."
+  },
+  "Main_OpenSurvivalGuide": {
+    "localized_name": "Nozioni per sopravvivere",
+    "description": "Sino a oggi, tanti pionieri e avventurieri hanno perso la vita sfidando quest'isola. Trovi i resoconti di ciò che hanno imparato nella lotta alla sopravvivenza nel tuo dispositivo. Se vuoi sopravvivere un po' più a lungo, innanzitutto apri <keyGuideIcon id=|UIEscape|/> dal menu opzioni e leggi la sezione Manuale di sopravvivenza."
+  },
+  "Main_PickupWood": {
+    "localized_name": "La prima raccolta di risorse",
+    "description": "Tra tutte le risorse che esistono in natura, il Legno è fondamentale come base per vari strumenti. Procurati del Legno cogliendo rami da terra o attaccando un albero vicino."
+  },
+  "Main_UnlockFastTravel": {
+    "localized_name": "Attiva la statua del grande volatile",
+    "description": "In questa terra esistono le cosiddette statue del grande volatile, la cui origine è tramandata negli antichi testi. Se riesci ad attivarle, rendono molto comodi gli spostamenti. Innanzitutto devi toccare una statua del grande volatile vicina, per attivarla e creare un punto di partenza. Forse, un giorno, potresti voler raggiungere persino quella torre distante."
+  },
+  "Main_UnlockPalBox": {
+    "localized_name": "Box per Pal",
+    "description": "Per coesistere coi Pal, è essenziale sapere come organizzarli. Negli antichi testi si parla di una tecnologia utile a questo scopo, nota come Box per Pal. Apri la schermata Tecnologia dal menu e studia il progetto relativo. Sembra che il Box per Pal sia capace anche di curare i Pal feriti."
+  },
+  "Main_UnlockPalSphere": {
+    "localized_name": "Sblocca la tecnologia",
+    "description": "Su quest'isola, per sopravvivere devi collaborare coi Pal. Il primo passo per farlo è l'oggetto sferico noto come Sfera Pal. Apri la schermata Tecnologia dal menu e studia il progetto relativo. È giunto il momento di fare tue le antiche tecnologie."
+  },
+  "Main_UseGlider": {
+    "localized_name": "Misure di sicurezza",
+    "description": "Su questa isola esistono tantissimi pericoli. Uno di questi sono i precipizi. Mettere un piede in fallo potrebbe causare ferite o peggio. Sblocca la tecnologia Paracadute normale e creala al Banco da lavoro primitivo. Una volta fatto, potrai planare giù da ogni elevazione senza correre rischi."
+  },
+  "Main_WorkerPal": {
+    "localized_name": "Metti al lavoro i Pal",
+    "description": "I Pal sono compagni che mandano avanti la base insieme a te. Accedi al Box per Pal e assegna un Pal alla base dal menu di gestione."
+  },
+  "Sub_Angler01": {
+    "localized_name": "Una gran giornata di pesca",
+    "description": "Come va con la pesca? {PalName} dovrebbe abboccare in questa zona. Fammi sapere se riesci a prenderne uno!"
+  },
+  "Sub_BossDefeatReward": {
+    "localized_name": "Richiesta del cacciatore di Pal veterano",
+    "description": "I tuoi occhi non sono quelli di una persona qualunque... Brillano come quelli di un vero cacciatore. Sono colpito. Avrei una richiesta da farti. Sono certo che sarai all'altezza."
+  },
+  "Sub_Breeder01": {
+    "localized_name": "Primi passi di un allevatore",
+    "description": "Ehilà! Hai portato le torte che ti ho chiesto? Forse cinque sono pure troppe, ma prendo molto sul serio questa faccenda dell'allevamento. Conto su di te!"
+  },
+  "Sub_Breeder02": {
+    "localized_name": "L'ultima visita ai ciliegi",
+    "description": "Hai trovato una pozione curativa suprema?!"
+  },
+  "Sub_Breeder03": {
+    "localized_name": "Punisci i ladri di Pal!",
+    "description": "Salva il mio amato Pal da quei maledetti bracconieri! Si trovano in cima a questa altura!"
+  },
+  "Sub_Breeder04": {
+    "localized_name": "Il piano per la proliferazione di Splatterina",
+    "description": "Beh, hai già trovato qualche Splatterina? 10 andranno bene per iniziare. Conto su di te!"
+  },
+  "Sub_Farmer01": {
+    "localized_name": "La benedizione dei Pal",
+    "description": "Se hai un Pal specializzato nell'irrigazione, potresti darmelo? Certo, c'è l'acqua del fiume, ma quella spruzzata dai Pal ha dentro qualcosa di speciale che fa crescere le verdure più rigogliose. Ti prego, dammi una mano!"
+  },
+  "Sub_Farmer02": {
+    "localized_name": "Cercasi Pal voraci!",
+    "description": "Ho cucinato un po' troppe torte... Non è che i tuoi Pal le vogliono? Qualsiasi Pal dall'appetito vorace sarebbe felice di mangiarle! Ti assicuro che sono buonissime!"
+  },
+  "Sub_Farmer03": {
+    "localized_name": "Una ricetta speciale",
+    "description": "All'ingresso del villaggio vicino c'è una persona dall'aria affidabile! Ti prego, portale questo spuntino e poi torna da me! Ho già pronta una ricompensa!"
+  },
+  "Sub_Farmer04": {
+    "localized_name": "Una cura costosa",
+    "description": "Mi manca così poco per permettermi le cure... Ti prego, anche solo 5000 monete! Potresti aiutarmi?"
+  },
+  "Sub_FoodReward": {
+    "localized_name": "Richiesta del buongustaio arrogante",
+    "description": "Io ricopro l'incarico di presidente in carica del comitato di buongustai di Palpagos. In quanto celebre gourmet, sono disposto a valutare la tua cucina. Anche se non penso che un'anima errante come te sia in grado di appagare il mio palato."
+  },
+  "Sub_Kigurumi01": {
+    "localized_name": "Diventa anche tu Depresso!",
+    "description": "Aspetta! Non sono un Pal! Non lanciarmi sfere per Pal addosso! Ah, ma sei tu! Ti avevo promesso un costume come questo! Ahah! Hai trovato i materiali necessari? Ricorda: 20 rotoli di stoffa di alta qualità e 100 ghiandole velenifere! Servono un sacco di ghiandole velenifere per rendere al meglio la bellezza del manto di Depresso."
+  },
+  "Sub_Kigurumi01_Replay": {
+    "localized_name": "Diventa anche tu Depresso!",
+    "description": "Aspetta! Non sono un Pal! Non lanciarmi sfere per Pal addosso! Ah, ma sei tu! Ti avevo promesso un costume come questo! Ahah! Hai trovato i materiali necessari? Ricorda: 20 rotoli di stoffa di alta qualità e 100 ghiandole velenifere! Servono un sacco di ghiandole velenifere per rendere al meglio la bellezza del manto di Depresso."
+  },
+  "Sub_Nomad01": {
+    "localized_name": "Per ogni salita, una discesa",
+    "description": "Wumpo è davvero forzuto! Pensi che mi porterebbe i bagagli?"
+  },
+  "Sub_Nomad02": {
+    "localized_name": "Brilla come sabbia",
+    "description": "Lo splendore della notte è la cosiddetta sabbia stellare. Quando cala il sole, riluce di un tenue bagliore. Me ne procureresti un po'? Dieci campioni dovrebbero bastare."
+  },
+  "Sub_Nomad03": {
+    "localized_name": "Cercasi dungeon",
+    "description": "Hai trovato Leezpunk e Leezpunk Ignis? In cambio, ti darò un oggetto che mi piace tanto!"
+  },
+  "Sub_Nomad04": {
+    "localized_name": "Viaggio di relax",
+    "description": "Esisterà uno Yakumo che non ha nessuna voglia di sbattersi, come me? Cosa non darei per passeggiare con lui, in mezzo a questa tempesta di petali di ciliegio..."
+  },
+  "Sub_PalCaptureCountReward": {
+    "localized_name": "Richiesta del cacciatore esperto",
+    "description": "Mi trovo qui per riportare equilibrio nell'ecosistema. Per farlo, è necessario tenere sotto controllo il numero dei Pal. Sto cercando qualcuno che mi aiuti a ridurlo."
+  },
+  "Sub_PaldexReward": {
+    "localized_name": "Richiesta dello studioso della vita dei Pal",
+    "description": "Molto piacere! Io mi occupo di portare avanti ricerche sulle specie dei Pal. Sono qui per studiare l'ecosistema di questo luogo, pieno di specie ancora ignote... Tu possiedi una Palpedia, vero? Potresti mostrarmi i tuoi dati?"
+  },
+  "Sub_Ranger01": {
+    "localized_name": "Le qualità di un cacciatore",
+    "description": "Vorrei al mio fianco un Pal simile a una tavola da surf per solcare le sabbie. Uno che sappia raggiungere un perfetto stato di quiete. Se lo trovi, fammi sapere!"
+  },
+  "Sub_Ranger02": {
+    "localized_name": "Criminali in fuga",
+    "description": "Si trovano in questa direzione. Sono davvero imperdonabili. Dagli una bella lezione!"
+  },
+  "Sub_Ranger03": {
+    "localized_name": "Tarantriss titanico",
+    "description": "Quel Tarantriss titanico è davvero pericoloso. Se intendi sfidarlo, preparati come si deve."
+  },
+  "Sub_Ranger04": {
+    "localized_name": "Nettare tra i fiori",
+    "description": "Hai trovato dei Beegarde o degli Elizabee? Me ne bastano tre!"
+  },
+  "Sub_Scholar01": {
+    "localized_name": "Sveliamo le leggende!",
+    "description": "Avanti, aiutami a trovare un Pal delle leggende! I monti fiammeggianti a ovest, il monte dello spirito argento a nord, le dune della siccità a est... Sembra che si trovi almeno un Pal delle leggende in ognuno di questi luoghi, come anche ai confini di quella che chiamano |terra della rovina|. Se ti inerpichi sulle grandi zone rocciose, potrai guardarti intorno senza ostacoli. Conto su di te!"
+  },
+  "Sub_Scholar02": {
+    "localized_name": "In cerca di motivazione",
+    "description": "Accidenti, non ho proprio voglia di fare nulla... Hai trovato un Pal capace di migliorare le attività dei compagni? L'ideale sarebbe un Pal capace di scalare i monti più impervi..."
+  },
+  "Sub_Scholar03": {
+    "localized_name": "La ricerca su Fuack",
+    "description": "Hai trovato il mio Fuack?!"
+  },
+  "Sub_Scholar04": {
+    "localized_name": "Alla ricerca di minerali",
+    "description": "Allora? Hai trovato le cromiti che ti ho chiesto? Un metal detector sarebbe sicuramente utile per trovare quelle sepolte in giro per l'isola."
+  },
+  "Sub_Zoe01": {
+    "localized_name": "Non montarti la testa solo perché hai vinto",
+    "description": "Allora, hai preso un Grizzbolt? Nella prima riserva ci sono un sacco di Pal forti, non ce la farai mai. Datti da fare, se vuoi conquistarti il mio rispetto."
+  },
+  "Sub_Zoe02": {
+    "localized_name": "Non mi fido mica di te!",
+    "description": "Allora, l'hai fatta pagare a quelli dell'Ente per la tutela dei Pal? Oppure hai troppa paura? Lo sapevo, ho sbagliato a chiedertelo. Alla fine, dovrò pensarci da sola."
+  },
+  "Sub_Zoe03": {
+    "localized_name": "Il ricordo del calore",
+    "description": "Hai trovato ciò che ti ho chiesto? Ricordo che l'ho lasciato in un sito di rovine. Ma in effetti sono passati così tanti anni... Figurati se c'è ancora. Non preoccuparti, alla fine non ci speravo neanche."
+  },
+  "Sub_Zoe04": {
+    "localized_name": "Sfera di Zoe",
+    "description": "Ma dai, non hai ancora finito la missione? Ho detto che ti darò la sfera solo dopo che gli avrai dato una bella lezione."
+  },
+  "Sub_Zoe_Halloween": {
+    "localized_name": "Buon Halloween!",
+    "description": "(Le orecchie da Cattiva lo renderebbero più grazioso... Ma se metto le orecchie, devo mettere pure la coda... Poi, vediamo...)"
+  }
+}

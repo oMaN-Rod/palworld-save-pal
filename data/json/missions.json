@@ -1,0 +1,395 @@
+{
+  "Main_BaseCampLevel": {
+    "quest_type": "EPalQuestType::Main"
+  },
+  "Main_BuildHatchingMachine": {
+    "quest_type": "EPalQuestType::Main"
+  },
+  "Main_BuildPalBox": {
+    "quest_type": "EPalQuestType::Main"
+  },
+  "Main_BuildWorkBench": {
+    "quest_type": "EPalQuestType::Main"
+  },
+  "Main_Capture30Pal": {
+    "quest_type": "EPalQuestType::Main"
+  },
+  "Main_CaptureDeerGround": {
+    "quest_type": "EPalQuestType::Main",
+    "location": {
+      "x": -456797.8,
+      "y": 197837.9,
+      "z": -800.0
+    }
+  },
+  "Main_CapturePal": {
+    "quest_type": "EPalQuestType::Main"
+  },
+  "Main_CaptureSheepBall": {
+    "quest_type": "EPalQuestType::Main"
+  },
+  "Main_CollectCrystal": {
+    "quest_type": "EPalQuestType::Main"
+  },
+  "Main_CraftKitsunebiGear": {
+    "quest_type": "EPalQuestType::Main"
+  },
+  "Main_CraftMealPouch": {
+    "quest_type": "EPalQuestType::Main"
+  },
+  "Main_CraftPalSphere": {
+    "quest_type": "EPalQuestType::Main"
+  },
+  "Main_CraftShield": {
+    "quest_type": "EPalQuestType::Main"
+  },
+  "Main_DefeatDesertBoss": {
+    "quest_type": "EPalQuestType::Main",
+    "location": {
+      "x": 29975.275,
+      "y": 413325.0,
+      "z": 15514.0
+    }
+  },
+  "Main_DefeatDungeonBoss": {
+    "quest_type": "EPalQuestType::Main",
+    "location": {
+      "x": -285331.3,
+      "y": 210162.69,
+      "z": 1000.0
+    }
+  },
+  "Main_DefeatForestBoss": {
+    "quest_type": "EPalQuestType::Main",
+    "location": {
+      "x": -109960.0,
+      "y": 241300.0,
+      "z": 18820.0
+    }
+  },
+  "Main_DefeatGrassBoss": {
+    "quest_type": "EPalQuestType::Main",
+    "location": {
+      "x": -321360.0,
+      "y": 208989.0,
+      "z": 150.0
+    }
+  },
+  "Main_DefeatSakurajimaBoss": {
+    "quest_type": "EPalQuestType::Main",
+    "location": {
+      "x": -29427.572,
+      "y": -115900.055,
+      "z": 6225.5356
+    }
+  },
+  "Main_DefeatSnowyMountainBoss": {
+    "quest_type": "EPalQuestType::Main",
+    "location": {
+      "x": 81363.0,
+      "y": 90183.0,
+      "z": 63796.0
+    }
+  },
+  "Main_DefeatVikingBoss": {
+    "quest_type": "EPalQuestType::Main",
+    "location": {
+      "x": -889805.2,
+      "y": -435828.0,
+      "z": 19038.922
+    }
+  },
+  "Main_DefeatVolcanoBoss": {
+    "quest_type": "EPalQuestType::Main",
+    "location": {
+      "x": -361695.0,
+      "y": -112009.0,
+      "z": 61207.5
+    }
+  },
+  "Main_DefeatWildBoss": {
+    "quest_type": "EPalQuestType::Main",
+    "location": {
+      "x": -316071.7,
+      "y": 237782.42,
+      "z": 2600.0
+    }
+  },
+  "Main_EquipClothArmor": {
+    "quest_type": "EPalQuestType::Main"
+  },
+  "Main_GainStatus": {
+    "quest_type": "EPalQuestType::Main"
+  },
+  "Main_Meal": {
+    "quest_type": "EPalQuestType::Main"
+  },
+  "Main_OpenSurvivalGuide": {
+    "quest_type": "EPalQuestType::Main"
+  },
+  "Main_PickupWood": {
+    "quest_type": "EPalQuestType::Main"
+  },
+  "Main_UnlockFastTravel": {
+    "quest_type": "EPalQuestType::Main",
+    "location": {
+      "x": -358785.0,
+      "y": 267940.0,
+      "z": 8500.0
+    }
+  },
+  "Main_UnlockPalBox": {
+    "quest_type": "EPalQuestType::Main"
+  },
+  "Main_UnlockPalSphere": {
+    "quest_type": "EPalQuestType::Main"
+  },
+  "Main_UseGlider": {
+    "quest_type": "EPalQuestType::Main"
+  },
+  "Main_WorkerPal": {
+    "quest_type": "EPalQuestType::Main"
+  },
+  "Sub_Angler01": {
+    "quest_type": "EPalQuestType::Sub",
+    "location": {
+      "x": -331671.0,
+      "y": 335454.0,
+      "z": -1903.0
+    }
+  },
+  "Sub_BossDefeatReward": {
+    "quest_type": "EPalQuestType::Sub"
+  },
+  "Sub_Breeder01": {
+    "quest_type": "EPalQuestType::Sub",
+    "location": {
+      "x": -340952.0,
+      "y": 107575.0,
+      "z": -1115.0
+    }
+  },
+  "Sub_Breeder02": {
+    "quest_type": "EPalQuestType::Sub",
+    "location": {
+      "x": -14110.0,
+      "y": -135560.0,
+      "z": 4790.0
+    }
+  },
+  "Sub_Breeder03": {
+    "quest_type": "EPalQuestType::Sub",
+    "location": {
+      "x": -48296.0,
+      "y": 288135.0,
+      "z": 673.0
+    }
+  },
+  "Sub_Breeder04": {
+    "quest_type": "EPalQuestType::Sub",
+    "location": {
+      "x": -697180.75,
+      "y": -322452.22,
+      "z": 15741.0
+    }
+  },
+  "Sub_Farmer01": {
+    "quest_type": "EPalQuestType::Sub",
+    "location": {
+      "x": -346423.0,
+      "y": 197007.0,
+      "z": 1029.0
+    }
+  },
+  "Sub_Farmer02": {
+    "quest_type": "EPalQuestType::Sub",
+    "location": {
+      "x": -329082.0,
+      "y": 163717.0,
+      "z": -1311.0
+    }
+  },
+  "Sub_Farmer03": {
+    "quest_type": "EPalQuestType::Sub",
+    "location": {
+      "x": -337585.0,
+      "y": 230200.0,
+      "z": -1656.0
+    }
+  },
+  "Sub_Farmer04": {
+    "quest_type": "EPalQuestType::Sub",
+    "location": {
+      "x": -291046.0,
+      "y": 203720.0,
+      "z": -993.0
+    }
+  },
+  "Sub_FoodReward": {
+    "quest_type": "EPalQuestType::Sub"
+  },
+  "Sub_Kigurumi01": {
+    "quest_type": "EPalQuestType::Sub",
+    "location": {
+      "x": -229596.77,
+      "y": 167702.84,
+      "z": -1751.0
+    }
+  },
+  "Sub_Kigurumi01_Replay": {
+    "quest_type": "EPalQuestType::Sub"
+  },
+  "Sub_Nomad01": {
+    "quest_type": "EPalQuestType::Sub",
+    "location": {
+      "x": 89040.0,
+      "y": 94145.67,
+      "z": 67399.0
+    }
+  },
+  "Sub_Nomad02": {
+    "quest_type": "EPalQuestType::Sub",
+    "location": {
+      "x": -511240.0,
+      "y": -221020.0,
+      "z": 176.0
+    }
+  },
+  "Sub_Nomad03": {
+    "quest_type": "EPalQuestType::Sub",
+    "location": {
+      "x": -670864.75,
+      "y": -178856.0,
+      "z": 8.34377
+    }
+  },
+  "Sub_Nomad04": {
+    "quest_type": "EPalQuestType::Sub",
+    "location": {
+      "x": -20307.0,
+      "y": -131533.0,
+      "z": 5981.0
+    }
+  },
+  "Sub_PalCaptureCountReward": {
+    "quest_type": "EPalQuestType::Sub"
+  },
+  "Sub_PalDisplay_A_01": {
+    "quest_type": "EPalQuestType::Sub",
+    "disabled": true
+  },
+  "Sub_PalDisplay_B_01": {
+    "quest_type": "EPalQuestType::Sub",
+    "disabled": true
+  },
+  "Sub_PalDisplay_C_01": {
+    "quest_type": "EPalQuestType::Sub",
+    "disabled": true
+  },
+  "Sub_PalDisplay_D_01": {
+    "quest_type": "EPalQuestType::Sub",
+    "disabled": true
+  },
+  "Sub_PalDisplay_E_01": {
+    "quest_type": "EPalQuestType::Sub",
+    "disabled": true
+  },
+  "Sub_PalDisplay_F_01": {
+    "quest_type": "EPalQuestType::Sub",
+    "disabled": true
+  },
+  "Sub_PalDisplay_G_01": {
+    "quest_type": "EPalQuestType::Sub",
+    "disabled": true
+  },
+  "Sub_PalDisplay_H_01": {
+    "quest_type": "EPalQuestType::Sub",
+    "disabled": true
+  },
+  "Sub_PalDisplay_I_01": {
+    "quest_type": "EPalQuestType::Sub",
+    "disabled": true
+  },
+  "Sub_PaldexReward": {
+    "quest_type": "EPalQuestType::Sub"
+  },
+  "Sub_Ranger01": {
+    "quest_type": "EPalQuestType::Sub",
+    "location": {
+      "x": 29076.0,
+      "y": 406040.0,
+      "z": 15773.0
+    }
+  },
+  "Sub_Ranger02": {
+    "quest_type": "EPalQuestType::Sub",
+    "location": {
+      "x": -350489.75,
+      "y": -6617.2056,
+      "z": 1747.0
+    }
+  },
+  "Sub_Ranger03": {
+    "quest_type": "EPalQuestType::Sub",
+    "location": {
+      "x": -784615.0,
+      "y": -446274.0,
+      "z": -260.0
+    }
+  },
+  "Sub_Ranger04": {
+    "quest_type": "EPalQuestType::Sub",
+    "location": {
+      "x": -181690.0,
+      "y": 237584.0,
+      "z": -1597.0
+    }
+  },
+  "Sub_Scholar01": {
+    "quest_type": "EPalQuestType::Sub",
+    "location": {
+      "x": -272761.97,
+      "y": 185543.62,
+      "z": 480.0
+    }
+  },
+  "Sub_Scholar02": {
+    "quest_type": "EPalQuestType::Sub",
+    "location": {
+      "x": -83350.34,
+      "y": 137191.16,
+      "z": 8023.0
+    }
+  },
+  "Sub_Scholar03": {
+    "quest_type": "EPalQuestType::Sub",
+    "location": {
+      "x": -272547.06,
+      "y": 264756.25,
+      "z": -1464.0
+    }
+  },
+  "Sub_Scholar04": {
+    "quest_type": "EPalQuestType::Sub",
+    "location": {
+      "x": -606867.0,
+      "y": -482761.84,
+      "z": 6967.0
+    }
+  },
+  "Sub_Zoe01": {
+    "quest_type": "EPalQuestType::Sub"
+  },
+  "Sub_Zoe02": {
+    "quest_type": "EPalQuestType::Sub"
+  },
+  "Sub_Zoe03": {
+    "quest_type": "EPalQuestType::Sub"
+  },
+  "Sub_Zoe04": {
+    "quest_type": "EPalQuestType::Sub"
+  },
+  "Sub_Zoe_Halloween": {
+    "quest_type": "EPalQuestType::Sub"
+  }
+}

@@ -1,0 +1,258 @@
+{
+  "Main_BaseCampLevel": {
+    "localized_name": "A Cozy Base",
+    "description": "Expanding your base is essential if you want your Pals to work efficiently. Raise your base to level 7 to create a more comfortable space for them. With the right setup, you'll be strong enough to take on that tower when the time comes."
+  },
+  "Main_BuildHatchingMachine": {
+    "localized_name": "Pal Eggs",
+    "description": "Pals hatch from Pal Eggs. You can find these eggs all over the islands, so keep a sharp eye out while exploring. Raising Pals from Pal Eggs can lead you to rare and unique new allies. Who knows? One day, you might just hatch the perfect Pal. Start by unlocking the Egg Incubator technology and setting one up at your base. Once you place an egg inside, you'll need to wait a while for it to hatch."
+  },
+  "Main_BuildPalBox": {
+    "localized_name": "Starting Base",
+    "description": "Open the Build menu with <keyGuideIcon id=|OpenConstructionMenu| iconScale=|0.7|/> and place a Palbox on a wide, open stretch of land. This will be your first base with your Pals—your launch point for future expeditions. If you maintain it well, it will become a vital stronghold when the time comes to face a tower, so choose your location carefully."
+  },
+  "Main_BuildWorkBench": {
+    "localized_name": "Base of Operations",
+    "description": "Materials on their own are merely raw resources. By assembling a Workbench, you'll gain the ability to craft more complex items. Open the Build menu, select the Primitive Workbench, and choose where to place it. This marks your first step to building your base and surviving these wilds."
+  },
+  "Main_Capture30Pal": {
+    "localized_name": "Capture any 30 Pals.",
+    "description": "This device includes a feature called the Palpedia, which collects and stores information on Pals. It can hold data for up to 12 individuals per species. Capturing more Pals also rewards you with bonus EXP. Start by catching 30 different Pals. With a wide range of abilities on your team, you'll be ready to take on even more powerful foes."
+  },
+  "Main_CaptureDeerGround": {
+    "localized_name": "Wildlife Sanctuaries",
+    "description": "Around the edges of the Palpagos Islands lie restricted zones known as Wildlife Sanctuaries, home to Pals with traits unlike any others. Among them, a Pal known as {targetpal} is said to possess extraordinary power. Capturing one could unlock entirely new possibilities."
+  },
+  "Main_CapturePal": {
+    "localized_name": "Your First Pal",
+    "description": "Throw a Pal Sphere at a Pal to try and capture it. To boost your chances for success, weaken it first. Once you catch your first Pal, the two of you can form a bond unlike any other."
+  },
+  "Main_CaptureSheepBall": {
+    "localized_name": "The Weakest Pal",
+    "description": "In the Palpagos Islands, only the strong survive. SheepBall sit at the very bottom of the food chain, making them easy to catch. But don't underestimate them—their dexterity makes them surprisingly useful for all kinds of tasks. Try capturing five SheepBall to start. They'll be dependable first companions as you grow your base. Plus, they can provide essential materials like Wool and Lamball Mutton. In this harsh world, the key to survival is simple: use every resource you can."
+  },
+  "Main_CollectCrystal": {
+    "localized_name": "Paldium",
+    "description": "These islands are home to an extraordinary mineral infused with supernatural energy: an ore known as Paldium. It's believed to be deeply connected to the massive tree towering in the distance, though the details remain a mystery. What we do know is that Paldium is a versatile material essential for crafting Pal Spheres. It's commonly found near water, so explore riversides and wetlands. If you spot something glowing blue, try striking it with a pickaxe. You can craft a pickaxe by combining Stone and Wood at a Primitive Workbench."
+  },
+  "Main_CraftKitsunebiGear": {
+    "localized_name": "Partner Skills",
+    "description": "Each Pal has a unique Partner Skill with different effects depending on its species. Some can be equipped and controlled directly, while others can be ridden as mounts. First, unlock the Pal Gear Workbench technology and set one up at your base. Then, unlock the Foxparks's Harness to craft it at your Pal Gear Workbench. Unlike other items, Pal Gear is stored in the Key Items space next to your Inventory."
+  },
+  "Main_CraftMealPouch": {
+    "localized_name": "Hunger is the Greatest Foe",
+    "description": "Hunger is your greatest enemy. No matter the situation, never forget to eat. Both you and your Pals can use Small Feed Bags to help you eat while on the move. Small conveniences like these can make a big difference in both exploration and battle. Like Pal Gear, the Small Feed Bag is stored in the Key Items space next to your inventory."
+  },
+  "Main_CraftPalSphere": {
+    "localized_name": "Capturing Device",
+    "description": "Pal Spheres are vessels used to capture Pals. Think of them as your key to companionship. Craft Pal Spheres by combining materials at a Primitive Workbench. All you need is Wood, Stone, and Paldium Fragments."
+  },
+  "Main_CraftShield": {
+    "localized_name": "Mining Paldium",
+    "description": "In battle, you can't dodge forever. But fear not, you can harness the power of Paldium for defense. Unlock the Common Shield technology and craft it at the Primitive Workbench. Equip it ahead of time, and you'll be ready for whatever surprise attacks come your way."
+  },
+  "Main_DefeatDesertBoss": {
+    "localized_name": "Ruler of the Sands",
+    "description": "The PIDF, once meant to protect this land, has become the heart of its corruption. At the center of it all stands Commander Marcus Dryden. Under the guise of law enforcement, he engages in drug trafficking to line his pockets, manipulating the island's chaos to his advantage. But the desert he controls awaits the return of its true ruler—you. Head to the tower in the Desiccated Dunes and purge the rot with your own hands."
+  },
+  "Main_DefeatDungeonBoss": {
+    "localized_name": "Sealed Pals",
+    "description": "These islands are home to a Pal known as {targetpal}. Though it is fierce, challenging it might be the perfect chance to put your combat skills to the test. Find one and try taking it down or capturing it."
+  },
+  "Main_DefeatForestBoss": {
+    "localized_name": "Thou Shalt Not Harm Pals",
+    "description": "Lily Everhart preaches coexistence with Pals, yet her love for them has grown into something extreme. That affection twisted into a doctrine that paints humanity as an irredeemable blight—and now, you are the only one who can stop her. Head to the tower on Frostbound Mountains and face her fanaticism head-on."
+  },
+  "Main_DefeatGrassBoss": {
+    "localized_name": "The Girl and the Tower",
+    "description": "The time has come for you to challenge the tower of Zoe Rayne. Though she still doesn't fully grasp her role as its guardian, she has dutifully accepted all the same. Claim victory in battle, and you may yet glimpse what lies beyond this tower."
+  },
+  "Main_DefeatSakurajimaBoss": {
+    "localized_name": "A Fine Night for a Drink",
+    "description": "Like the soft glow of the moon above, Saya Kurosaki watched over the tower on Sakurajima, standing guard over a place where even time itself seemed frozen. But after her recent encounter with a Pal known as the Blade of the Crescent Moon, she resolved to break the stillness at last. Head to Moonflower Tower on Sakurajima to put her conviction to the test."
+  },
+  "Main_DefeatSnowyMountainBoss": {
+    "localized_name": "Interspecies Experiments",
+    "description": "Rumor has it that highly dangerous experiments are being conducted in the Astral Mountains, including genetic engineering to create new, artificially enhanced Pals. Evidence indicates that Victor Ashford is the mastermind behind it all, but such crimes against nature come at a cost—one you must see to believe. Journey to the peak of the Astral Mountains to put an end to his inhumane research once and for all."
+  },
+  "Main_DefeatVikingBoss": {
+    "localized_name": "Bearer of All Burdens",
+    "description": "The land of Feybreak was once struck by catastrophe. Amidst the chaos, Bjorn Seligsson took charge, guiding the people and guarding the tower there— a duty he still carries out to this day. He often speaks about awaiting a fateful day of reckoning, but what he means by that remains unclear. Yet one thing is certain: those strong enough to face him may be the spark that changes everything. Make your way to the tower at the heart of the Feybreak and bring salvation to its people. Only you can pierce the darkness of their curse."
+  },
+  "Main_DefeatVolcanoBoss": {
+    "localized_name": "Flawless Victory Fixation",
+    "description": "Axel Travers, guardian of the Tower of the Eternal Pyre, is a juggernaut of a man obsessed only with absolute victory. He fights for no cause, seeking only one thing: a foe stronger than himself. He now awaits a worthy challenger at the mouth of Mount Obsidian."
+  },
+  "Main_DefeatWildBoss": {
+    "localized_name": "First Boss Battle",
+    "description": "Powerful Pals have carved out their own territories across the Palpagos Islands. They can be dangerous, but defeating them yields experience, and capturing them earns you formidable new allies. How you deal with them is up to you. Rumor has it there's a Pal called {targetpal} somewhere in these wilds. Track it down—whether you defeat or capture it is your choice alone."
+  },
+  "Main_EquipClothArmor": {
+    "localized_name": "Protect Yourself",
+    "description": "The unforgiving wilds of the Palpagos Islands show mercy to no one. To protect yourself from the cold and harm, you'll need proper clothing. Unlock the Cloth Outfit technology and craft it at the Primitive Workbench. You'll need Cloth, which can be made from materials dropped by fluffy Pals that bear Wool. Time to go find something soft and wooly!"
+  },
+  "Main_GainStatus": {
+    "localized_name": "Enhance Stats",
+    "description": "Gaining EXP and honing your skills are the keys to overcoming the challenges ahead. Once you level up, open your inventory and enhance one of your stats. Don't fear change—after all, every journey begins with a single brave step."
+  },
+  "Main_Meal": {
+    "localized_name": "Fill Your Belly",
+    "description": "Whether you're battling or exploring, you can't forget to eat. Fortunately, this island is home to plants that bear delicious fruit. Keep an eye out for Red Berries. If you find some, open your inventory and use them to satisfy your hunger."
+  },
+  "Main_OpenSurvivalGuide": {
+    "localized_name": "How to Stay Alive",
+    "description": "Countless pioneers and explorers have tried to conquer these islands, but most never made it back. Their hard-earned survival knowledge has been synced to your device. If you hope to make it through the journey ahead, your first step is simple: use <keyGuideIcon id=|UIEscape|/> to open the Options menu and take a look at the Survival Guide."
+  },
+  "Main_PickupWood": {
+    "localized_name": "First Gathering Run",
+    "description": "Of all the resources you can gather from nature, Wood is the foundation for nearly every tool and structure. Pick up fallen branches or strike nearby trees to start collecting."
+  },
+  "Main_UnlockFastTravel": {
+    "localized_name": "Activate Great Eagle Statue",
+    "description": "In this region, you'll find Great Eagle Statues—transporters left behind by an ancient civilization. Activate them, and your journey will become far smoother. Start by touching the nearest statue to anchor your travels, and someday, you might just reach that towering spire in the distance."
+  },
+  "Main_UnlockPalBox": {
+    "localized_name": "Palbox",
+    "description": "To truly coexist with Pals, proper management is essential. Ancient records describe storage technology known as the Palbox. Open the Technology screen to learn how to build one. The Palbox also has the ability to heal injured Pals."
+  },
+  "Main_UnlockPalSphere": {
+    "localized_name": "Unlock Technology",
+    "description": "On this island, coexistence with Pals is the key to survival. And it all begins with a single device: the Pal Sphere. Open the Technology menu and study its blueprint. The time has come to reclaim the power of the ancients."
+  },
+  "Main_UseGlider": {
+    "localized_name": "Safety Measures",
+    "description": "This island is full of dangers, and cliffs are one of them. One wrong step could cost you more than just a few scrapes. Unlock the Normal Parachute technology and craft it at the Primitive Workbench. With this tool in hand, even the highest drop becomes an easy-breezy descent."
+  },
+  "Main_WorkerPal": {
+    "localized_name": "Put Pals to Work",
+    "description": "Pals don't just fight, they can also work alongside you to help keep your base running. Access the Palbox, open the Management menu, and assign one of your Pals to the base."
+  },
+  "Sub_Angler01": {
+    "localized_name": "A Fine Day for Fishing",
+    "description": "Having any luck with fishing? You should be able to find {PalName} in these waters. If you manage to catch one, I hope you'll be generous enough to share a bit of its meat with me!"
+  },
+  "Sub_BossDefeatReward": {
+    "localized_name": "Request from a Veteran Hunter",
+    "description": "Your eyes are no ordinary ones... A gaze sharp as that of a hunter, truly remarkable. I have a task I wish to entrust to someone of your skill."
+  },
+  "Sub_Breeder01": {
+    "localized_name": "Breeding Basics",
+    "description": "Hey, did you manage to get those cakes? Five might be a bit much, but I'm serious about this breeding business. I'm counting on you!"
+  },
+  "Sub_Breeder02": {
+    "localized_name": "Farewell Under the Sakura Tree",
+    "description": "Don't tell me—you brought some Advanced Recovery Meds to share?!"
+  },
+  "Sub_Breeder03": {
+    "localized_name": "No Mercy for Pal Thieves",
+    "description": "Please, you've gotta get my precious Pal back from those Rayne Syndicate goons! Hurry, they climbed up that ledge over there!"
+  },
+  "Sub_Breeder04": {
+    "localized_name": "Operation: Splatterina Spree",
+    "description": "Do you have any Splatterinas for me? Ten should be plenty for breeding. I'm counting on you!"
+  },
+  "Sub_Farmer01": {
+    "localized_name": "Pal's Blessing",
+    "description": "If you've got a Pal that's good at watering, could you let me have it? Sure, I could haul water from the river myself, but Pals just seem to have the magic touch— the vegetables always grow bigger and happier with their help. Please lend me a hand, will you?"
+  },
+  "Sub_Farmer02": {
+    "localized_name": "Hungry for Recruits",
+    "description": "I've still got some cake left over... Would one of your Pals like a bite? If they've got a big appetite, they might just jump for joy! So, what do you say? It's scrumptious, I promise!"
+  },
+  "Sub_Farmer03": {
+    "localized_name": "A Special Dish",
+    "description": "Go to the entrance of the nearby settlement and find someone who looks like they know what they're doing! Please make sure it gets delivered, all right? And once you're done, I'll be waiting right here with a thank-you gift!"
+  },
+  "Sub_Farmer04": {
+    "localized_name": "Medical Bills",
+    "description": "I'm so close to being able to afford the treatment. I just need another 5,000 Gold Coins. Please, I'm begging you...could you help me?"
+  },
+  "Sub_FoodReward": {
+    "localized_name": "Request from an Arrogant Foodie",
+    "description": "Well, well...I'm the esteemed gourmet critic and chief advisor to the Palpagos Gourmet Society. I'll grace your dish with my refined palate, young upstart. Though I doubt a drifter like you could possibly satisfy my discerning tastes."
+  },
+  "Sub_Kigurumi01": {
+    "localized_name": "That's That Me, Depresso!",
+    "description": "Stop right there! I'm no Pal—don't throw that Sphere! Oh, it's just you! You're here about the costume, yeah? Haha! So, got the goods? I need 20 High-Quality Cloth and 100 Venom Glands. It takes tons of Venom Glands to nail Depresso's beautiful coat, you know."
+  },
+  "Sub_Kigurumi01_Replay": {
+    "localized_name": "That's That Me, Depresso!",
+    "description": "Stop right there! I'm no Pal—don't throw that Sphere! Oh, it's just you! You're here about the costume, yeah? Haha! So, got the goods? I need 20 High-Quality Cloth and 100 Venom Glands. It takes tons of Venom Glands to nail Depresso's beautiful coat, you know."
+  },
+  "Sub_Nomad01": {
+    "localized_name": "A True Ascent Ends in Descent",
+    "description": "I heard Wumpos are super strong! I wonder if they'd help me carry my stuff..."
+  },
+  "Sub_Nomad02": {
+    "localized_name": "Sparkly and Smooth",
+    "description": "The sparkly stuff you see at night is called Nightstar Sand. It starts to glow after the sun sets. If you've got any to spare, could you share some with me? Ten should be enough."
+  },
+  "Sub_Nomad03": {
+    "localized_name": "Dungeon Hunt",
+    "description": "Found any Leezpunks or Leezpunk Ignis yet? I've got a special item for you once you do!"
+  },
+  "Sub_Nomad04": {
+    "localized_name": "Easygoing Adventures",
+    "description": "I wonder if there's an Easygoing Yakumo out there somewhere... I'd love to take a slow walk through these falling cherry blossoms with a Pal like that by my side."
+  },
+  "Sub_PalCaptureCountReward": {
+    "localized_name": "Request from a Wise Hunter",
+    "description": "Hey... I'm the one who monitors the balance of this region's ecosystem, keeping an eye on the Pal population. Right now, I’m looking for someone who can help reduce their numbers"
+  },
+  "Sub_PaldexReward": {
+    "localized_name": "Request from a Pal Ecological Researcher",
+    "description": "Nice to meet you. I'm researching Pal species and conducting an ecological survey, including unidentified species in this area... You have a Palpedia, don't you? Would you mind showing it to me for reference?"
+  },
+  "Sub_Ranger01": {
+    "localized_name": "Hunting Essentials",
+    "description": "I wonder if there's a calm, cool-headed Pal out there that can glide over sand like it's surfing. If you find one with an aura of Serenity, be sure to let me know!"
+  },
+  "Sub_Ranger02": {
+    "localized_name": "The Fugitive",
+    "description": "I'll never forgive that creep... They're just up ahead. Please, give them the ass-kicking they deserve!"
+  },
+  "Sub_Ranger03": {
+    "localized_name": "Gargantuan Tarantriss",
+    "description": "That huge Tarantriss is a real menace. If you're planning on taking it on, double-check your gear first...or else."
+  },
+  "Sub_Ranger04": {
+    "localized_name": "A Sweet Deal",
+    "description": "Have you found any Beegardes or Elizabees for me? Just three'll do!"
+  },
+  "Sub_Scholar01": {
+    "localized_name": "Prove the Legend!",
+    "description": "Now then, off you go! Find those legendary Pals! We know there's at least one in each of these places: Mount Obsidian to the west, the Astral Mountains to the north, the Desiccated Dunes to the east, and the far-off land known as Feybreak. Climb up that big rocky outcrop over there to get a clear view of the area. And remember...I'm counting on you!"
+  },
+  "Sub_Scholar02": {
+    "localized_name": "Lock In",
+    "description": "Ugh, I have ZERO motivation to do...well, anything at all. Any luck finding me a Pal to boost my work efficiency? Ideally one that can scale steep mountains with ease. That'd get my butt in gear."
+  },
+  "Sub_Scholar03": {
+    "localized_name": "Give a Fuack",
+    "description": "Well? I can't stand the suspense! Did you find me a Fuack?"
+  },
+  "Sub_Scholar04": {
+    "localized_name": "Metal on Your Mind",
+    "description": "So? Have you gathered any Chromite yet? If you had a metal detector, you might be able to uncover some buried somewhere on this island. Keep your eyes peeled, now."
+  },
+  "Sub_Zoe01": {
+    "localized_name": "Don't Get Cocky",
+    "description": "So, did you manage to catch that Grizzbolt? I heard there are plenty of other powerful Pals in the No. 1 Wildlife Sanctuary, too. Probably a bit too much for you to handle. But if you really want my approval, you’d better give it everything you’ve got."
+  },
+  "Sub_Zoe02": {
+    "localized_name": "I Still Don't Trust You",
+    "description": "Did you take care of those Free Pal Alliance weirdos for me? Or did you chicken out? Figures... Guess asking you was a mistake after all. Maybe I should just take care of it myself."
+  },
+  "Sub_Zoe03": {
+    "localized_name": "A Warm Memory",
+    "description": "Did you find what I asked for? I think I left it near some old ruins, or what was left of them... But I guess there's no way it'd still be there. It's been years. Don't worry about it. I wasn't really expecting anything anyway."
+  },
+  "Sub_Zoe04": {
+    "localized_name": "Zoe's Sphere",
+    "description": "Not taken care of it yet? I told you, teach those guys a lesson and I'll hook you up with a Sphere."
+  },
+  "Sub_Zoe_Halloween": {
+    "localized_name": "Happy Halloween!",
+    "description": "(...Ears like Cattiva's might be kinda cute... If I'm going with ears, I have to add a tail too... And maybe... Hmm...)"
+  }
+}
