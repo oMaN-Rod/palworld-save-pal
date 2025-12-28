@@ -1,0 +1,54 @@
+{
+  "Collection": {
+    "localized_name": "สะสม",
+    "description": null
+  },
+  "Cool": {
+    "localized_name": "แช่เย็น",
+    "description": null
+  },
+  "Deforest": {
+    "localized_name": "ตัดไม้",
+    "description": null
+  },
+  "EmitFlame": {
+    "localized_name": "จุดไฟ",
+    "description": null
+  },
+  "GenerateElectricity": {
+    "localized_name": "ผลิตไฟฟ้า",
+    "description": null
+  },
+  "Handcraft": {
+    "localized_name": "งานฝีมือ",
+    "description": null
+  },
+  "Mining": {
+    "localized_name": "ขุดแร่",
+    "description": null
+  },
+  "MonsterFarm": {
+    "localized_name": "ฟาร์ม",
+    "description": null
+  },
+  "OilExtraction": {
+    "localized_name": "-",
+    "description": null
+  },
+  "ProductMedicine": {
+    "localized_name": "ผลิตยา",
+    "description": null
+  },
+  "Seeding": {
+    "localized_name": "หว่านเมล็ด",
+    "description": null
+  },
+  "Transport": {
+    "localized_name": "ขนส่ง",
+    "description": null
+  },
+  "Watering": {
+    "localized_name": "รดน้ำ",
+    "description": null
+  }
+}

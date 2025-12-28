@@ -1,0 +1,1294 @@
+{
+  "AirDash_1": {
+    "localized_name": "Lướt Trên Không +1",
+    "description": "Lướt Trên Không +1"
+  },
+  "AirDash_2": {
+    "localized_name": "Lướt Trên Không +2",
+    "description": "Lướt Trên Không +2"
+  },
+  "AirDash_3": {
+    "localized_name": "Lướt Trên Không +3",
+    "description": "Lướt Trên Không +3"
+  },
+  "AirDash_4": {
+    "localized_name": "Lướt Trên Không +4",
+    "description": "Lướt Trên Không +4"
+  },
+  "Alien": {
+    "localized_name": "Tế Bào Khác Thường",
+    "description": "Tấn công +10.0% Sát thương hệ lửa giảm 15.0% Sát thương hệ sấm giảm 15.0%"
+  },
+  "Attack_ACC_up1": {
+    "localized_name": "Tăng Tấn Công Cấp 1",
+    "description": null
+  },
+  "Attack_ACC_up1_Otomo_Only_Equip": {
+    "localized_name": "Tăng Tấn Công Cho Pal Cấp 1",
+    "description": null
+  },
+  "Attack_ACC_up2": {
+    "localized_name": "Tăng Tấn Công Cấp 2",
+    "description": null
+  },
+  "Attack_ACC_up2_Otomo_Only_Equip": {
+    "localized_name": "Tăng Tấn Công Cho Pal Cấp 2",
+    "description": null
+  },
+  "Attack_ACC_up3": {
+    "localized_name": "Tăng Tấn Công Cấp 3",
+    "description": null
+  },
+  "Attack_ACC_up3_Otomo_Only_Equip": {
+    "localized_name": "Tăng Tấn Công Cho Pal Cấp 3",
+    "description": null
+  },
+  "BossDefeatReward_AmaterasuWolf_Dark": {
+    "localized_name": "Tăng Sát Thương Hệ Bóng Tối (Thấp)",
+    "description": null
+  },
+  "BossDefeatReward_Anubis": {
+    "localized_name": "Tăng Sát Thương Hệ Đất (Thấp)",
+    "description": null
+  },
+  "BossDefeatReward_BadCatgirl": {
+    "localized_name": "Tăng Sát Thương Hệ Bóng Tối (Thấp)",
+    "description": null
+  },
+  "BossDefeatReward_BerryGoat_Dark": {
+    "localized_name": "Tăng Sát Thương Hệ Cỏ (Vừa)",
+    "description": null
+  },
+  "BossDefeatReward_BlackMetalDragon": {
+    "localized_name": "Tăng Sát Thương Hệ Rồng (Vừa)",
+    "description": null
+  },
+  "BossDefeatReward_BlackPuppy": {
+    "localized_name": "Tăng Sát Thương Hệ Bóng Tối (Thấp)",
+    "description": null
+  },
+  "BossDefeatReward_BlueDragon": {
+    "localized_name": "Tăng Sát Thương Hệ Nước (Thấp)",
+    "description": null
+  },
+  "BossDefeatReward_BlueThunderHorse": {
+    "localized_name": "Tăng Sát Thương Hệ Sấm (Vừa)",
+    "description": null
+  },
+  "BossDefeatReward_BlueberryFairy": {
+    "localized_name": "Tăng Sát Thương Hệ Cỏ (Vừa)",
+    "description": null
+  },
+  "BossDefeatReward_CaptainPenguin": {
+    "localized_name": "Tăng Sát Thương Hệ Nước (Thấp)",
+    "description": null
+  },
+  "BossDefeatReward_CatMage": {
+    "localized_name": "Tăng Sát Thương Hệ Bóng Tối (Thấp)",
+    "description": null
+  },
+  "BossDefeatReward_CatVampire": {
+    "localized_name": "Tăng Sát Thương Hệ Bóng Tối (Thấp)",
+    "description": null
+  },
+  "BossDefeatReward_DarkScorpion": {
+    "localized_name": "Tăng Sát Thương Hệ Bóng Tối (Thấp)",
+    "description": null
+  },
+  "BossDefeatReward_DarkScorpion_Ground": {
+    "localized_name": "Tăng Sát Thương Hệ Đất (Thấp)",
+    "description": null
+  },
+  "BossDefeatReward_FairyDragon": {
+    "localized_name": "Tăng Sát Thương Hệ Rồng (Thấp)",
+    "description": null
+  },
+  "BossDefeatReward_FengyunDeeper": {
+    "localized_name": "Tăng Sát Thương Hệ Thường (Thấp)",
+    "description": null
+  },
+  "BossDefeatReward_FengyunDeeper_Electric": {
+    "localized_name": "Tăng Sát Thương Hệ Sấm (Vừa)",
+    "description": null
+  },
+  "BossDefeatReward_FlowerDinosaur_Electric": {
+    "localized_name": "Tăng Sát Thương Hệ Sấm (Thấp)",
+    "description": null
+  },
+  "BossDefeatReward_FlowerDoll": {
+    "localized_name": "Tăng Sát Thương Hệ Cỏ (Thấp)",
+    "description": null
+  },
+  "BossDefeatReward_GhostRabbit": {
+    "localized_name": "Tăng Sát Thương Hệ Bóng Tối (Thấp)",
+    "description": null
+  },
+  "BossDefeatReward_GoldenHorse": {
+    "localized_name": "Tăng Sát Thương Hệ Đất (Vừa)",
+    "description": null
+  },
+  "BossDefeatReward_GrassMammoth": {
+    "localized_name": "Tăng Sát Thương Hệ Cỏ (Vừa)",
+    "description": null
+  },
+  "BossDefeatReward_GrassPanda_Electric": {
+    "localized_name": "Tăng Sát Thương Hệ Sấm (Thấp)",
+    "description": null
+  },
+  "BossDefeatReward_GrassRabbitMan": {
+    "localized_name": "Tăng Sát Thương Hệ Cỏ (Thấp)",
+    "description": null
+  },
+  "BossDefeatReward_GrimGirl": {
+    "localized_name": "Tăng Sát Thương Hệ Bóng Tối (Thấp)",
+    "description": null
+  },
+  "BossDefeatReward_HawkBird": {
+    "localized_name": "Tăng Sát Thương Hệ Thường (Thấp)",
+    "description": null
+  },
+  "BossDefeatReward_HerculesBeetle": {
+    "localized_name": "Tăng Sát Thương Hệ Đất (Thấp)",
+    "description": null
+  },
+  "BossDefeatReward_HerculesBeetle_Ground": {
+    "localized_name": "Tăng Sát Thương Hệ Đất (Vừa)",
+    "description": null
+  },
+  "BossDefeatReward_Horus_Water": {
+    "localized_name": "Tăng Sát Thương Hệ Nước (Vừa)",
+    "description": null
+  },
+  "BossDefeatReward_IceHorse": {
+    "localized_name": "Tăng Sát Thương Hệ Băng (Cao)",
+    "description": null
+  },
+  "BossDefeatReward_IceHorse_Dark": {
+    "localized_name": "Tăng Sát Thương Hệ Bóng Tối (Thấp)",
+    "description": null
+  },
+  "BossDefeatReward_IceNarwhal": {
+    "localized_name": "Tăng Sát Thương Hệ Băng (Cao)",
+    "description": null
+  },
+  "BossDefeatReward_IceNarwhal_Fire": {
+    "localized_name": "Tăng Sát Thương Hệ Lửa (Cao)",
+    "description": null
+  },
+  "BossDefeatReward_JetDragon": {
+    "localized_name": "Tăng Sát Thương Hệ Rồng (Cao)",
+    "description": null
+  },
+  "BossDefeatReward_KingAlpaca": {
+    "localized_name": "Tăng Sát Thương Hệ Thường (Thấp)",
+    "description": null
+  },
+  "BossDefeatReward_KingAlpaca_Ice": {
+    "localized_name": "Tăng Sát Thương Hệ Băng (Vừa)",
+    "description": null
+  },
+  "BossDefeatReward_KingBahamut": {
+    "localized_name": "Tăng Sát Thương Hệ Lửa (Cao)",
+    "description": null
+  },
+  "BossDefeatReward_Kirin": {
+    "localized_name": "Tăng Sát Thương Hệ Sấm (Thấp)",
+    "description": null
+  },
+  "BossDefeatReward_Kitsunebi_Ice": {
+    "localized_name": "Tăng Sát Thương Hệ Băng (Cao)",
+    "description": null
+  },
+  "BossDefeatReward_LazyCatfish": {
+    "localized_name": "Tăng Sát Thương Hệ Đất (Thấp)",
+    "description": null
+  },
+  "BossDefeatReward_LazyDragon_Electric": {
+    "localized_name": "Tăng Sát Thương Hệ Rồng (Thấp)",
+    "description": null
+  },
+  "BossDefeatReward_LilyQueen_Dark": {
+    "localized_name": "Tăng Sát Thương Hệ Bóng Tối (Thấp)",
+    "description": null
+  },
+  "BossDefeatReward_MopKing": {
+    "localized_name": "Tăng Sát Thương Hệ Băng (Thấp)",
+    "description": null
+  },
+  "BossDefeatReward_Mutant": {
+    "localized_name": "Tăng Sát Thương Hệ Thường (Thấp)",
+    "description": null
+  },
+  "BossDefeatReward_MysteryMask": {
+    "localized_name": "Tăng Sát Thương Hệ Bóng Tối (Thấp)",
+    "description": null
+  },
+  "BossDefeatReward_NaughtyCat": {
+    "localized_name": "Tăng Sát Thương Hệ Thường (Thấp)",
+    "description": null
+  },
+  "BossDefeatReward_NightBlueHorse": {
+    "localized_name": "Tăng Sát Thương Hệ Bóng Tối (Thấp)",
+    "description": null
+  },
+  "BossDefeatReward_PinkRabbit_Grass": {
+    "localized_name": "Tăng Sát Thương Hệ Cỏ (Vừa)",
+    "description": null
+  },
+  "BossDefeatReward_PlantSlime": {
+    "localized_name": "Tăng Sát Thương Hệ Đất (Thấp)",
+    "description": null
+  },
+  "BossDefeatReward_PoseidonOrca": {
+    "localized_name": "Tăng Sát Thương Hệ Nước (Cao)",
+    "description": null
+  },
+  "BossDefeatReward_PurpleSpider": {
+    "localized_name": "Tăng Sát Thương Hệ Bóng Tối (Thấp)",
+    "description": null
+  },
+  "BossDefeatReward_QueenBee": {
+    "localized_name": "Tăng Sát Thương Hệ Cỏ (Thấp)",
+    "description": null
+  },
+  "BossDefeatReward_RaijinDaughter_Water": {
+    "localized_name": "Tăng Sát Thương Hệ Bóng Tối (Thấp)",
+    "description": null
+  },
+  "BossDefeatReward_Ronin": {
+    "localized_name": "Tăng Sát Thương Hệ Lửa (Vừa)",
+    "description": null
+  },
+  "BossDefeatReward_SaintCentaur_1": {
+    "localized_name": "Tăng Sát Thương Hệ Thường (Cao)",
+    "description": null
+  },
+  "BossDefeatReward_SaintCentaur_2": {
+    "localized_name": "Tăng Sát Thương Hệ Bóng Tối (Thấp)",
+    "description": null
+  },
+  "BossDefeatReward_SakuraSaurus": {
+    "localized_name": "Tăng Sát Thương Hệ Cỏ (Thấp)",
+    "description": null
+  },
+  "BossDefeatReward_SakuraSaurus_Water": {
+    "localized_name": "Tăng Sát Thương Hệ Nước (Thấp)",
+    "description": null
+  },
+  "BossDefeatReward_SkyDragon": {
+    "localized_name": "Tăng Sát Thương Hệ Rồng (Thấp)",
+    "description": null
+  },
+  "BossDefeatReward_Suzaku": {
+    "localized_name": "Tăng Sát Thương Hệ Lửa (Cao)",
+    "description": null
+  },
+  "BossDefeatReward_ThunderBird": {
+    "localized_name": "Tăng Sát Thương Hệ Sấm (Thấp)",
+    "description": null
+  },
+  "BossDefeatReward_Umihebi": {
+    "localized_name": "Tăng Sát Thương Hệ Nước (Vừa)",
+    "description": null
+  },
+  "BossDefeatReward_VioletFairy": {
+    "localized_name": "Tăng Sát Thương Hệ Cỏ (Vừa)",
+    "description": null
+  },
+  "BossDefeatReward_WeaselDragon": {
+    "localized_name": "Tăng Sát Thương Hệ Băng (Thấp)",
+    "description": null
+  },
+  "BossDefeatReward_Werewolf_Ice": {
+    "localized_name": "Tăng Sát Thương Hệ Băng (Cao)",
+    "description": null
+  },
+  "BossDefeatReward_WhiteDeer": {
+    "localized_name": "Tăng Sát Thương Hệ Thường (Vừa)",
+    "description": null
+  },
+  "BossDefeatReward_WhiteMoth": {
+    "localized_name": "Tăng Sát Thương Hệ Băng (Thấp)",
+    "description": null
+  },
+  "BossDefeatReward_WhiteShieldDragon": {
+    "localized_name": "Tăng Sát Thương Hệ Rồng (Vừa)",
+    "description": null
+  },
+  "BossDefeatReward_WhiteTiger_Ground": {
+    "localized_name": "Tăng Sát Thương Hệ Đất (Vừa)",
+    "description": null
+  },
+  "BossDefeatReward_WingGolem": {
+    "localized_name": "Tăng Sát Thương Hệ Đất (Thấp)",
+    "description": null
+  },
+  "BossDefeatReward_Yeti_Grass": {
+    "localized_name": "Tăng Sát Thương Hệ Cỏ (Thấp)",
+    "description": null
+  },
+  "CaptureLevel_Up_1": {
+    "localized_name": "Tăng Sức Bắt Giữ +1",
+    "description": null
+  },
+  "CaptureLevel_Up_2": {
+    "localized_name": "Tăng Sức Bắt Giữ +2",
+    "description": null
+  },
+  "CaptureLevel_Up_3": {
+    "localized_name": "Tăng Sức Bắt Giữ +3",
+    "description": null
+  },
+  "CaptureLevel_Up_4": {
+    "localized_name": "Tăng Sức Bắt Giữ +4",
+    "description": null
+  },
+  "CaptureLevel_Up_5": {
+    "localized_name": "Tăng Sức Bắt Giữ +5",
+    "description": null
+  },
+  "CaptureLevel_Up_6": {
+    "localized_name": "Tăng Sức Bắt Giữ +6",
+    "description": null
+  },
+  "CollectItem_Berries": {
+    "localized_name": "Hái Quả Mọng",
+    "description": null
+  },
+  "CollectItem_Egg": {
+    "localized_name": "Sản Xuất Trứng",
+    "description": null
+  },
+  "CollectItem_Milk": {
+    "localized_name": "Sản Xuất Sữa",
+    "description": null
+  },
+  "CollectItem_Money": {
+    "localized_name": "Đào Vàng",
+    "description": null
+  },
+  "CollectItem_Sweets": {
+    "localized_name": "Sản Xuất Bánh Kẹo",
+    "description": null
+  },
+  "CollectItem_Wool_Alpaca": {
+    "localized_name": "Sản Xuất Len",
+    "description": null
+  },
+  "CollectItem_Wool_SheepBall": {
+    "localized_name": "Sản Xuất Len",
+    "description": null
+  },
+  "CollectItem_Wool_WhiteMoth": {
+    "localized_name": "Dệt Lụa",
+    "description": null
+  },
+  "CoolTimeReduction_Down_1": {
+    "localized_name": "Dễ Dãi",
+    "description": "Thời gian hồi chiêu của kỹ năng chủ động tăng -15.0%"
+  },
+  "CoolTimeReduction_Up_1": {
+    "localized_name": "Điềm Tĩnh",
+    "description": "Thời gian hồi chiêu của kỹ năng chủ động giảm 30.0% Tấn công +10.0%"
+  },
+  "CoolTimeReduction_Up_2": {
+    "localized_name": "Nóng Vội",
+    "description": "Thời gian hồi chiêu của kỹ năng chủ động giảm 15.0%"
+  },
+  "CoolTimeReduction_Up_3": {
+    "localized_name": "Thịnh Nộ",
+    "description": "Thời gian hồi chiêu của kỹ năng chủ động giảm 0.0% Tấn công +0.0%"
+  },
+  "CraftSpeed_down1": {
+    "localized_name": "Vụng Về",
+    "description": null
+  },
+  "CraftSpeed_down2": {
+    "localized_name": "Lười Biếng",
+    "description": null
+  },
+  "CraftSpeed_up1": {
+    "localized_name": "Chú Tâm",
+    "description": null
+  },
+  "CraftSpeed_up2": {
+    "localized_name": "Nghệ Nhân Đích Thực",
+    "description": null
+  },
+  "CraftSpeed_up3": {
+    "localized_name": "Kỹ Năng Siêu Việt",
+    "description": null
+  },
+  "Defense_ACC_up1_Otomo_Only_Equip": {
+    "localized_name": "Tăng Phòng Thủ Cho Pal Cấp 1",
+    "description": null
+  },
+  "Defense_ACC_up2_Otomo_Only_Equip": {
+    "localized_name": "Tăng Phòng Thủ Cho Pal Cấp 2",
+    "description": null
+  },
+  "Defense_ACC_up3_Otomo_Only_Equip": {
+    "localized_name": "Tăng Phòng Thủ Cho Pal Cấp 3",
+    "description": null
+  },
+  "Deffence_down1": {
+    "localized_name": "Yếu Ớt",
+    "description": null
+  },
+  "Deffence_down2": {
+    "localized_name": "Mỏng Manh",
+    "description": null
+  },
+  "Deffence_up1": {
+    "localized_name": "Da Sắt",
+    "description": null
+  },
+  "Deffence_up2": {
+    "localized_name": "Thân Thể Cường Tráng",
+    "description": null
+  },
+  "Deffence_up3": {
+    "localized_name": "Thân Thể Kim Cương",
+    "description": null
+  },
+  "ElementBoost_Aqua_1_PAL": {
+    "localized_name": "Ưa Nước",
+    "description": "Sát thương tấn công hệ nước tăng 10.0%"
+  },
+  "ElementBoost_Aqua_2_PAL": {
+    "localized_name": "Hải Vương",
+    "description": null
+  },
+  "ElementBoost_Dark_1_BossDefeat": {
+    "localized_name": "Tăng Sát Thương Hệ Bóng Tối (Thấp)",
+    "description": null
+  },
+  "ElementBoost_Dark_1_Otomo_Only_Equip": {
+    "localized_name": "Tăng Sát Thương Hệ Bóng Tối Cho Pal Cấp 1",
+    "description": null
+  },
+  "ElementBoost_Dark_1_PAL": {
+    "localized_name": "Bức Màn Bóng Đêm",
+    "description": "Sát thương tấn công hệ bóng tối tăng 10.0%"
+  },
+  "ElementBoost_Dark_2_BossDefeat": {
+    "localized_name": "Tăng Sát Thương Hệ Bóng Tối (Vừa)",
+    "description": null
+  },
+  "ElementBoost_Dark_2_Otomo_Only_Equip": {
+    "localized_name": "Tăng Sát Thương Hệ Bóng Tối Cho Pal Cấp 2",
+    "description": null
+  },
+  "ElementBoost_Dark_2_PAL": {
+    "localized_name": "Minh Vương",
+    "description": null
+  },
+  "ElementBoost_Dark_3_BossDefeat": {
+    "localized_name": "Tăng Sát Thương Hệ Bóng Tối (Cao)",
+    "description": null
+  },
+  "ElementBoost_Dark_3_Otomo_Only_Equip": {
+    "localized_name": "Tăng Sát Thương Hệ Bóng Tối Cho Pal Cấp 3",
+    "description": null
+  },
+  "ElementBoost_Dragon_1_BossDefeat": {
+    "localized_name": "Tăng Sát Thương Hệ Rồng (Thấp)",
+    "description": null
+  },
+  "ElementBoost_Dragon_1_Otomo_Only_Equip": {
+    "localized_name": "Tăng Sát Thương Hệ Rồng Cho Pal Cấp 1",
+    "description": null
+  },
+  "ElementBoost_Dragon_1_PAL": {
+    "localized_name": "Dòng Máu Loài Rồng",
+    "description": "Sát thương tấn công hệ rồng tăng 10.0%"
+  },
+  "ElementBoost_Dragon_2_BossDefeat": {
+    "localized_name": "Tăng Sát Thương Hệ Rồng (Vừa)",
+    "description": null
+  },
+  "ElementBoost_Dragon_2_Otomo_Only_Equip": {
+    "localized_name": "Tăng Sát Thương Hệ Rồng Cho Pal Cấp 2",
+    "description": null
+  },
+  "ElementBoost_Dragon_2_PAL": {
+    "localized_name": "Thần Long",
+    "description": null
+  },
+  "ElementBoost_Dragon_3_BossDefeat": {
+    "localized_name": "Tăng Sát Thương Hệ Rồng (Cao)",
+    "description": null
+  },
+  "ElementBoost_Dragon_3_Otomo_Only_Equip": {
+    "localized_name": "Tăng Sát Thương Hệ Rồng Cho Pal Cấp 3",
+    "description": null
+  },
+  "ElementBoost_Earth_1_BossDefeat": {
+    "localized_name": "Tăng Sát Thương Hệ Đất (Thấp)",
+    "description": null
+  },
+  "ElementBoost_Earth_1_Otomo_Only_Equip": {
+    "localized_name": "Tăng Sát Thương Hệ Đất Cho Pal Cấp 1",
+    "description": null
+  },
+  "ElementBoost_Earth_1_PAL": {
+    "localized_name": "Sức Mạnh Từ Đất Mẹ",
+    "description": "Sát thương tấn công hệ đất tăng 10.0%"
+  },
+  "ElementBoost_Earth_2_BossDefeat": {
+    "localized_name": "Tăng Sát Thương Hệ Đất (Vừa)",
+    "description": null
+  },
+  "ElementBoost_Earth_2_Otomo_Only_Equip": {
+    "localized_name": "Tăng Sát Thương Hệ Đất Cho Pal Cấp 2",
+    "description": null
+  },
+  "ElementBoost_Earth_2_PAL": {
+    "localized_name": "Địa Đế",
+    "description": null
+  },
+  "ElementBoost_Earth_3_BossDefeat": {
+    "localized_name": "Tăng Sát Thương Hệ Đất (Cao)",
+    "description": null
+  },
+  "ElementBoost_Earth_3_Otomo_Only_Equip": {
+    "localized_name": "Tăng Sát Thương Hệ Đất Cho Pal Cấp 3",
+    "description": null
+  },
+  "ElementBoost_Electricity_1_BossDefeat": {
+    "localized_name": "Tăng Sát Thương Hệ Sấm (Thấp)",
+    "description": null
+  },
+  "ElementBoost_Electricity_1_Otomo_Only_Equip": {
+    "localized_name": "Tăng Sát Thương Hệ Sấm Cho Pal Cấp 1",
+    "description": null
+  },
+  "ElementBoost_Electricity_2_BossDefeat": {
+    "localized_name": "Tăng Sát Thương Hệ Sấm (Vừa)",
+    "description": null
+  },
+  "ElementBoost_Electricity_2_Otomo_Only_Equip": {
+    "localized_name": "Tăng Sát Thương Hệ Sấm Cho Pal Cấp 2",
+    "description": null
+  },
+  "ElementBoost_Electricity_3_BossDefeat": {
+    "localized_name": "Tăng Sát Thương Hệ Sấm (Cao)",
+    "description": null
+  },
+  "ElementBoost_Electricity_3_Otomo_Only_Equip": {
+    "localized_name": "Tăng Sát Thương Hệ Sấm Cho Pal Cấp 3",
+    "description": null
+  },
+  "ElementBoost_Fire_1_BossDefeat": {
+    "localized_name": "Tăng Sát Thương Hệ Lửa (Thấp)",
+    "description": null
+  },
+  "ElementBoost_Fire_1_Otomo_Only_Equip": {
+    "localized_name": "Tăng Sát Thương Hệ Lửa Cho Pal Cấp 1",
+    "description": null
+  },
+  "ElementBoost_Fire_1_PAL": {
+    "localized_name": "Ưa Lửa",
+    "description": "Sát thương tấn công hệ lửa tăng 10.0%"
+  },
+  "ElementBoost_Fire_2_BossDefeat": {
+    "localized_name": "Tăng Sát Thương Hệ Lửa (Vừa)",
+    "description": null
+  },
+  "ElementBoost_Fire_2_Otomo_Only_Equip": {
+    "localized_name": "Tăng Sát Thương Hệ Lửa Cho Pal Cấp 2",
+    "description": null
+  },
+  "ElementBoost_Fire_2_PAL": {
+    "localized_name": "Viêm Đế",
+    "description": null
+  },
+  "ElementBoost_Fire_3_BossDefeat": {
+    "localized_name": "Tăng Sát Thương Hệ Lửa (Cao)",
+    "description": null
+  },
+  "ElementBoost_Fire_3_Otomo_Only_Equip": {
+    "localized_name": "Tăng Sát Thương Hệ Lửa Cho Pal Cấp 3",
+    "description": null
+  },
+  "ElementBoost_Ice_1_BossDefeat": {
+    "localized_name": "Tăng Sát Thương Hệ Băng (Thấp)",
+    "description": null
+  },
+  "ElementBoost_Ice_1_Otomo_Only_Equip": {
+    "localized_name": "Tăng Sát Thương Hệ Băng Cho Pal Cấp 1",
+    "description": null
+  },
+  "ElementBoost_Ice_1_PAL": {
+    "localized_name": "Máu Lạnh",
+    "description": "Sát thương tấn công hệ băng tăng 10.0%"
+  },
+  "ElementBoost_Ice_2_BossDefeat": {
+    "localized_name": "Tăng Sát Thương Hệ Băng (Vừa)",
+    "description": null
+  },
+  "ElementBoost_Ice_2_Otomo_Only_Equip": {
+    "localized_name": "Tăng Sát Thương Hệ Băng Cho Pal Cấp 2",
+    "description": null
+  },
+  "ElementBoost_Ice_2_PAL": {
+    "localized_name": "Băng Đế",
+    "description": null
+  },
+  "ElementBoost_Ice_3_BossDefeat": {
+    "localized_name": "Tăng Sát Thương Hệ Băng (Cao)",
+    "description": null
+  },
+  "ElementBoost_Ice_3_Otomo_Only_Equip": {
+    "localized_name": "Tăng Sát Thương Hệ Băng Cho Pal Cấp 3",
+    "description": null
+  },
+  "ElementBoost_Leaf_1_BossDefeat": {
+    "localized_name": "Tăng Sát Thương Hệ Cỏ (Thấp)",
+    "description": null
+  },
+  "ElementBoost_Leaf_1_Otomo_Only_Equip": {
+    "localized_name": "Tăng Sát Thương Hệ Cỏ Cho Pal Cấp 1",
+    "description": null
+  },
+  "ElementBoost_Leaf_1_PAL": {
+    "localized_name": "Lá Xanh Hương Nồng",
+    "description": "Sát thương tấn công hệ cỏ tăng 10.0%"
+  },
+  "ElementBoost_Leaf_2_BossDefeat": {
+    "localized_name": "Tăng Sát Thương Hệ Cỏ (Vừa)",
+    "description": null
+  },
+  "ElementBoost_Leaf_2_Otomo_Only_Equip": {
+    "localized_name": "Tăng Sát Thương Hệ Cỏ Cho Pal Cấp 2",
+    "description": null
+  },
+  "ElementBoost_Leaf_2_PAL": {
+    "localized_name": "Tinh Linh Vương",
+    "description": null
+  },
+  "ElementBoost_Leaf_3_BossDefeat": {
+    "localized_name": "Tăng Sát Thương Hệ Cỏ (Cao)",
+    "description": null
+  },
+  "ElementBoost_Leaf_3_Otomo_Only_Equip": {
+    "localized_name": "Tăng Sát Thương Hệ Cỏ Cho Pal Cấp 3",
+    "description": null
+  },
+  "ElementBoost_Normal_1_BossDefeat": {
+    "localized_name": "Tăng Sát Thương Hệ Thường (Thấp)",
+    "description": null
+  },
+  "ElementBoost_Normal_1_Otomo_Only_Equip": {
+    "localized_name": "Tăng Sát Thương Hệ Thường Cho Pal Cấp 1",
+    "description": null
+  },
+  "ElementBoost_Normal_1_PAL": {
+    "localized_name": "Tâm Thiền",
+    "description": "Sát thương tấn công hệ thường tăng 10.0%"
+  },
+  "ElementBoost_Normal_2_BossDefeat": {
+    "localized_name": "Tăng Sát Thương Hệ Thường (Vừa)",
+    "description": null
+  },
+  "ElementBoost_Normal_2_Otomo_Only_Equip": {
+    "localized_name": "Tăng Sát Thương Hệ Thường Cho Pal Cấp 2",
+    "description": null
+  },
+  "ElementBoost_Normal_2_PAL": {
+    "localized_name": "Thiên Vương",
+    "description": null
+  },
+  "ElementBoost_Normal_3_BossDefeat": {
+    "localized_name": "Tăng Sát Thương Hệ Thường (Cao)",
+    "description": null
+  },
+  "ElementBoost_Normal_3_Otomo_Only_Equip": {
+    "localized_name": "Tăng Sát Thương Hệ Thường Cho Pal Cấp 3",
+    "description": null
+  },
+  "ElementBoost_Thunder_1_PAL": {
+    "localized_name": "Tụ Điện",
+    "description": "Sát thương tấn công hệ sấm tăng 10.0%"
+  },
+  "ElementBoost_Thunder_2_PAL": {
+    "localized_name": "Lôi Đế",
+    "description": null
+  },
+  "ElementBoost_Water_1_BossDefeat": {
+    "localized_name": "Tăng Sát Thương Hệ Nước (Thấp)",
+    "description": null
+  },
+  "ElementBoost_Water_1_Otomo_Only_Equip": {
+    "localized_name": "Tăng Sát Thương Hệ Nước Cho Pal Cấp 1",
+    "description": null
+  },
+  "ElementBoost_Water_2_BossDefeat": {
+    "localized_name": "Tăng Sát Thương Hệ Nước (Vừa)",
+    "description": null
+  },
+  "ElementBoost_Water_2_Otomo_Only_Equip": {
+    "localized_name": "Tăng Sát Thương Hệ Nước Cho Pal Cấp 2",
+    "description": null
+  },
+  "ElementBoost_Water_3_BossDefeat": {
+    "localized_name": "Tăng Sát Thương Hệ Nước (Cao)",
+    "description": null
+  },
+  "ElementBoost_Water_3_Otomo_Only_Equip": {
+    "localized_name": "Tăng Sát Thương Hệ Nước Cho Pal Cấp 3",
+    "description": null
+  },
+  "ElementResist_Aqua_1": {
+    "localized_name": "Giảm Sát Thương Hệ Nước Cấp 1",
+    "description": null
+  },
+  "ElementResist_Aqua_1_PAL": {
+    "localized_name": "Chống Thấm Nước",
+    "description": "Sát thương hệ nước giảm 10.0%"
+  },
+  "ElementResist_Aqua_2": {
+    "localized_name": "Giảm Sát Thương Hệ Nước Cấp 2",
+    "description": null
+  },
+  "ElementResist_Aqua_3": {
+    "localized_name": "Giảm Sát Thương Hệ Nước Cấp 3",
+    "description": null
+  },
+  "ElementResist_Dark_1": {
+    "localized_name": "Giảm Sát Thương Hệ Bóng Tối Cấp 1",
+    "description": null
+  },
+  "ElementResist_Dark_1_PAL": {
+    "localized_name": "Lạc Quan Vui Vẻ",
+    "description": "Sát thương hệ bóng tối giảm 10.0%"
+  },
+  "ElementResist_Dark_2": {
+    "localized_name": "Giảm Sát Thương Hệ Bóng Tối Cấp 2",
+    "description": null
+  },
+  "ElementResist_Dark_3": {
+    "localized_name": "Giảm Sát Thương Hệ Bóng Tối Cấp 3",
+    "description": null
+  },
+  "ElementResist_Dragon_1": {
+    "localized_name": "Giảm Sát Thương Hệ Rồng Cấp 1",
+    "description": null
+  },
+  "ElementResist_Dragon_1_PAL": {
+    "localized_name": "Kẻ Hạ Gục Rồng",
+    "description": "Sát thương hệ rồng giảm 10.0%"
+  },
+  "ElementResist_Dragon_2": {
+    "localized_name": "Giảm Sát Thương Hệ Rồng Cấp 2",
+    "description": null
+  },
+  "ElementResist_Dragon_3": {
+    "localized_name": "Giảm Sát Thương Hệ Rồng Cấp 3",
+    "description": null
+  },
+  "ElementResist_Earth_1": {
+    "localized_name": "Giảm Sát Thương Hệ Đất Cấp 1",
+    "description": null
+  },
+  "ElementResist_Earth_1_PAL": {
+    "localized_name": "Chống Động Đất",
+    "description": "Sát thương hệ đất giảm 10.0%"
+  },
+  "ElementResist_Earth_2": {
+    "localized_name": "Giảm Sát Thương Hệ Đất Cấp 2",
+    "description": null
+  },
+  "ElementResist_Earth_3": {
+    "localized_name": "Giảm Sát Thương Hệ Đất Cấp 3",
+    "description": null
+  },
+  "ElementResist_Fire_1": {
+    "localized_name": "Giảm Sát Thương Hệ Lửa Cấp 1",
+    "description": null
+  },
+  "ElementResist_Fire_1_PAL": {
+    "localized_name": "Ưa Nắng",
+    "description": "Sát thương hệ lửa giảm 10.0%"
+  },
+  "ElementResist_Fire_2": {
+    "localized_name": "Giảm Sát Thương Hệ Lửa Cấp 2",
+    "description": null
+  },
+  "ElementResist_Fire_3": {
+    "localized_name": "Giảm Sát Thương Hệ Lửa Cấp 3",
+    "description": null
+  },
+  "ElementResist_Ice_1": {
+    "localized_name": "Giảm Sát Thương Hệ Băng Cấp 1",
+    "description": null
+  },
+  "ElementResist_Ice_1_PAL": {
+    "localized_name": "Thân Nhiệt Cao",
+    "description": "Sát thương hệ băng giảm 10.0%"
+  },
+  "ElementResist_Ice_2": {
+    "localized_name": "Giảm Sát Thương Hệ Băng Cấp 2",
+    "description": null
+  },
+  "ElementResist_Ice_3": {
+    "localized_name": "Giảm Sát Thương Hệ Băng Cấp 3",
+    "description": null
+  },
+  "ElementResist_Leaf_1": {
+    "localized_name": "Giảm Sát Thương Hệ Cỏ Cấp 1",
+    "description": null
+  },
+  "ElementResist_Leaf_1_PAL": {
+    "localized_name": "Phòng Tuyến Cỏ Cây",
+    "description": "Sát thương hệ cỏ giảm 10.0%"
+  },
+  "ElementResist_Leaf_2": {
+    "localized_name": "Giảm Sát Thương Hệ Cỏ Cấp 2",
+    "description": null
+  },
+  "ElementResist_Leaf_3": {
+    "localized_name": "Giảm Sát Thương Hệ Cỏ Cấp 3",
+    "description": null
+  },
+  "ElementResist_Normal_1": {
+    "localized_name": "Giảm Sát Thương Hệ Thường Cấp 1",
+    "description": null
+  },
+  "ElementResist_Normal_1_PAL": {
+    "localized_name": "Bất Thường",
+    "description": "Sát thương hệ thường giảm 10.0%"
+  },
+  "ElementResist_Normal_2": {
+    "localized_name": "Giảm Sát Thương Hệ Thường Cấp 2",
+    "description": null
+  },
+  "ElementResist_Normal_3": {
+    "localized_name": "Giảm Sát Thương Hệ Thường Cấp 3",
+    "description": null
+  },
+  "ElementResist_Thunder_1": {
+    "localized_name": "Giảm Sát Thương Hệ Sấm Cấp 1",
+    "description": null
+  },
+  "ElementResist_Thunder_1_PAL": {
+    "localized_name": "Thân Cách Điện",
+    "description": "Sát thương hệ sấm giảm 10.0%"
+  },
+  "ElementResist_Thunder_2": {
+    "localized_name": "Giảm Sát Thương Hệ Sấm Cấp 2",
+    "description": null
+  },
+  "ElementResist_Thunder_3": {
+    "localized_name": "Giảm Sát Thương Hệ Sấm Cấp 3",
+    "description": null
+  },
+  "EternalFlame": {
+    "localized_name": "Ngọn Lửa Vĩnh Cửu",
+    "description": null
+  },
+  "GYM_NAME_Desert": {
+    "localized_name": "Chỉ Huy Đội Tự Vệ Đảo Palpagos",
+    "description": null
+  },
+  "GYM_NAME_Forest": {
+    "localized_name": "Người Sáng Lập Tổ Chức Bảo Vệ Pal",
+    "description": null
+  },
+  "GYM_NAME_Meadow": {
+    "localized_name": "Thủ Lĩnh Tổ Chức Săn Trộm Rayne",
+    "description": "Tấn công +20.0% Tăng tốc độ di chuyển 10.0%"
+  },
+  "GYM_NAME_Sakurajima": {
+    "localized_name": "Thủ Lĩnh Hoa Mặt Trăng",
+    "description": null
+  },
+  "GYM_NAME_Snow": {
+    "localized_name": "Đội Trưởng - Đơn Vị Nghiên Cứu Gen Pal",
+    "description": null
+  },
+  "GYM_NAME_Viking": {
+    "localized_name": "Tộc Trưởng Dân Feybreak",
+    "description": null
+  },
+  "GYM_NAME_Volcano": {
+    "localized_name": "Thủ Lĩnh Linh Hồn - Đồng Minh Ngọn Lửa Vĩnh Cửu",
+    "description": null
+  },
+  "HP_ACC_up1": {
+    "localized_name": "Tăng Thể Lực Cấp 1",
+    "description": null
+  },
+  "HP_ACC_up2": {
+    "localized_name": "Tăng Thể Lực Cấp 2",
+    "description": null
+  },
+  "HP_ACC_up3": {
+    "localized_name": "Tăng Thể Lực Cấp 3",
+    "description": null
+  },
+  "Invader": {
+    "localized_name": "Kẻ Xâm Lược",
+    "description": null
+  },
+  "JumpCount_Increase1": {
+    "localized_name": "Tăng Số Lần Nhảy +1",
+    "description": "Tăng Số Lần Nhảy +1"
+  },
+  "JumpCount_Increase2": {
+    "localized_name": "Tăng Số Lần Nhảy +2",
+    "description": "Tăng Số Lần Nhảy +2"
+  },
+  "JumpCount_Increase3": {
+    "localized_name": "Tăng Số Lần Nhảy +3",
+    "description": "Tăng Số Lần Nhảy +3"
+  },
+  "JumpPower_Increase": {
+    "localized_name": "Tăng Sức Nhảy",
+    "description": "Tăng Sức Nhảy"
+  },
+  "Legend": {
+    "localized_name": "Huyền Thoại",
+    "description": "Tấn công +20.0% Phòng thủ +20.0% Tăng tốc độ di chuyển 15.0%"
+  },
+  "MaxInventoryWeight_up": {
+    "localized_name": "Tăng Sức Mang Tối Đa Cấp 1",
+    "description": null
+  },
+  "MaxInventoryWeight_up2": {
+    "localized_name": "Tăng Sức Mang Tối Đa Cấp 2",
+    "description": null
+  },
+  "MaxInventoryWeight_up3": {
+    "localized_name": "Tăng Sức Mang Tối Đa Cấp 3",
+    "description": null
+  },
+  "MaxInventoryWeight_up_Equip_1": {
+    "localized_name": "Tăng Sức Mang Tối Đa Cấp 1",
+    "description": null
+  },
+  "MaxInventoryWeight_up_Equip_2": {
+    "localized_name": "Tăng Sức Mang Tối Đa Cấp 2",
+    "description": null
+  },
+  "MaxInventoryWeight_up_Equip_3": {
+    "localized_name": "Tăng Sức Mang Tối Đa Cấp 3",
+    "description": null
+  },
+  "MoveSpeed_up_1": {
+    "localized_name": "Nhanh Nhẹn",
+    "description": "Tăng tốc độ di chuyển 10.0%"
+  },
+  "MoveSpeed_up_2": {
+    "localized_name": "Cấp Tốc",
+    "description": "Tăng tốc độ di chuyển 20.0%"
+  },
+  "MoveSpeed_up_3": {
+    "localized_name": "Thần Tốc",
+    "description": "Tăng tốc độ di chuyển 30.0%"
+  },
+  "Nocturnal": {
+    "localized_name": "Hoạt Động Ban Đêm",
+    "description": "Tiếp tục làm việc mà không ngủ, ngay cả vào ban đêm."
+  },
+  "NonKilling": {
+    "localized_name": "Đòn Nhân Từ",
+    "description": "Người theo chủ nghĩa hòa bình. Không thể giảm máu của mục tiêu tấn công xuống dưới 1."
+  },
+  "Noukin": {
+    "localized_name": "Cơ Bắp",
+    "description": null
+  },
+  "Nushi": {
+    "localized_name": "Thủ Lĩnh",
+    "description": "Tăng sát thương tấn công hệ Nước 20.0% Tăng sát thương tấn công hệ Băng 20.0% Phòng thủ+20.0%"
+  },
+  "OctaviaArmorVampire": {
+    "localized_name": "Nhiên Liệu Máu",
+    "description": null
+  },
+  "PAL_ALLAttack_down1": {
+    "localized_name": "Nhút Nhát",
+    "description": null
+  },
+  "PAL_ALLAttack_down2": {
+    "localized_name": "Dĩ Hòa Vi Quý",
+    "description": null
+  },
+  "PAL_ALLAttack_up1": {
+    "localized_name": "Dũng Cảm",
+    "description": null
+  },
+  "PAL_ALLAttack_up2": {
+    "localized_name": "Cuồng Bạo",
+    "description": null
+  },
+  "PAL_ALLAttack_up3": {
+    "localized_name": "Quỷ Thần",
+    "description": null
+  },
+  "PAL_CorporateSlave": {
+    "localized_name": "Đam Mê Công Việc",
+    "description": null
+  },
+  "PAL_FullStomach_Down_1": {
+    "localized_name": "Ăn Nhẹ",
+    "description": "No lâu <NumBlue_13>+10,0%</>"
+  },
+  "PAL_FullStomach_Down_2": {
+    "localized_name": "Ăn Kiêng",
+    "description": "No lâu <NumBlue_13>+15,0%</>"
+  },
+  "PAL_FullStomach_Down_3": {
+    "localized_name": "Nhịn Ăn Thành Thạo",
+    "description": "No lâu <NumBlue_13>+20,0%</>"
+  },
+  "PAL_FullStomach_Up_1": {
+    "localized_name": "Háu Ăn",
+    "description": "Nhanh đói <NumRed_13>+10,0%</>"
+  },
+  "PAL_FullStomach_Up_2": {
+    "localized_name": "Dạ Dày Vô Hạn",
+    "description": "Nhanh đói <NumRed_13>+15,0%</>"
+  },
+  "PAL_Sanity_Down_1": {
+    "localized_name": "Suy Nghĩ Tích Cực",
+    "description": "Minh mẫn giảm chậm hơn <NumBlue_13>+10,0%</>"
+  },
+  "PAL_Sanity_Down_2": {
+    "localized_name": "Cuồng Si Công Việc",
+    "description": "Minh mẫn giảm chậm hơn <NumBlue_13>+15,0%</>"
+  },
+  "PAL_Sanity_Down_3": {
+    "localized_name": "Bất Động Minh Vương Tâm",
+    "description": "Minh mẫn giảm chậm hơn <NumBlue_13>+20,0%</>"
+  },
+  "PAL_Sanity_Up_1": {
+    "localized_name": "Tinh Thần Bất Ổn",
+    "description": "Minh mẫn giảm nhanh hơn <NumRed_13>+10,0%</>"
+  },
+  "PAL_Sanity_Up_2": {
+    "localized_name": "Quấy Phá",
+    "description": "Minh mẫn giảm nhanh hơn <NumRed_13>+15,0%</>"
+  },
+  "PAL_SpiritualInst": {
+    "localized_name": "-",
+    "description": null
+  },
+  "PAL_conceited": {
+    "localized_name": "Tự Cao",
+    "description": null
+  },
+  "PAL_masochist": {
+    "localized_name": "Chịu Trận",
+    "description": null
+  },
+  "PAL_oraora": {
+    "localized_name": "Hung Hăng",
+    "description": null
+  },
+  "PAL_rude": {
+    "localized_name": "Thô Lỗ",
+    "description": null
+  },
+  "PAL_sadist": {
+    "localized_name": "Tàn Bạo",
+    "description": null
+  },
+  "PalExp_Increase_1_Otomo_Only_Equip": {
+    "localized_name": "Tăng Điểm Kinh Nghiệm Cho Pal Cấp 1",
+    "description": null
+  },
+  "PalExp_Increase_2_Otomo_Only_Equip": {
+    "localized_name": "Tăng Điểm Kinh Nghiệm Cho Pal Cấp 2",
+    "description": null
+  },
+  "PalExp_Increase_3_Otomo_Only_Equip": {
+    "localized_name": "Tăng Điểm Kinh Nghiệm Cho Pal Cấp 3",
+    "description": null
+  },
+  "Rare": {
+    "localized_name": "May Mắn",
+    "description": null
+  },
+  "SalePrice_Down_1": {
+    "localized_name": "Xoàng Xĩnh",
+    "description": "Giá giao dịch giảm -10.0%"
+  },
+  "SalePrice_Up_1": {
+    "localized_name": "Cao Quý",
+    "description": "Giá giao dịch tăng +5.0%"
+  },
+  "SalePrice_Up_2": {
+    "localized_name": "Dòng Dõi Cao Quý",
+    "description": "Giá giao dịch tăng +3.0%"
+  },
+  "Salvation": {
+    "localized_name": "Đấng Cứu Thế",
+    "description": null
+  },
+  "SphereModule_Curve": {
+    "localized_name": "Quả Cầu Pal Bay Vòng +1",
+    "description": null
+  },
+  "SphereModule_Curve2": {
+    "localized_name": "Quả Cầu Pal Bay Lướt",
+    "description": null
+  },
+  "SphereModule_Heavy": {
+    "localized_name": "Trọng Lượng Quả Cầu Pal +1",
+    "description": null
+  },
+  "SphereModule_Homing": {
+    "localized_name": "Quả Cầu Pal Tự Dẫn",
+    "description": null
+  },
+  "SphereModule_Sniper": {
+    "localized_name": "Cự Ly Quả Cầu Pal +1",
+    "description": null
+  },
+  "SphereModule_Sniper2": {
+    "localized_name": "Cự Ly Quả Cầu Pal +2",
+    "description": null
+  },
+  "Stamina_Down_1": {
+    "localized_name": "Ốm Yếu",
+    "description": "Thể lực tối đa -25.0% *Chỉ hiệu lực đối với Pal có thể cưỡi"
+  },
+  "Stamina_Up_1": {
+    "localized_name": "Sức Bền Vô Hạn",
+    "description": "Thể lực tối đa +50.0% *Chỉ hiệu lực đối với Pal có thể cưỡi"
+  },
+  "Stamina_Up_2": {
+    "localized_name": "Sung Sức",
+    "description": "Thể lực tối đa +25.0% *Chỉ hiệu lực đối với Pal có thể cưỡi"
+  },
+  "Stamina_Up_3": {
+    "localized_name": "Động Cơ Vĩnh Cửu",
+    "description": "Thể lực tối đa +75.0% *Chỉ hiệu lực đối với Pal có thể cưỡi"
+  },
+  "SwimSpeed_up_1": {
+    "localized_name": "Bơi Lội Uyển Chuyển",
+    "description": "Tăng tốc độ di chuyển trên mặt nước 30.0%"
+  },
+  "SwimSpeed_up_2": {
+    "localized_name": "Bơi Lội Siêu Phàm",
+    "description": null
+  },
+  "SwimSpeed_up_3": {
+    "localized_name": "Vua Lướt Sóng",
+    "description": null
+  },
+  "TemperatureResist_Cold1": {
+    "localized_name": "Kháng Lạnh Cấp 1",
+    "description": null
+  },
+  "TemperatureResist_Cold2": {
+    "localized_name": "Kháng Lạnh Cấp 2",
+    "description": null
+  },
+  "TemperatureResist_Cold3": {
+    "localized_name": "Kháng Lạnh Cấp 3",
+    "description": null
+  },
+  "TemperatureResist_Heat1": {
+    "localized_name": "Kháng Nhiệt Cấp 1",
+    "description": null
+  },
+  "TemperatureResist_Heat1Cold1": {
+    "localized_name": "Kháng Nhiệt Cấp 1 / Kháng Lạnh Cấp 1",
+    "description": null
+  },
+  "TemperatureResist_Heat2": {
+    "localized_name": "Kháng Nhiệt Cấp 2",
+    "description": null
+  },
+  "TemperatureResist_Heat2Cold2": {
+    "localized_name": "Kháng Nhiệt Cấp 2 / Kháng Lạnh Cấp 2",
+    "description": null
+  },
+  "TemperatureResist_Heat3": {
+    "localized_name": "Kháng Nhiệt Cấp 3",
+    "description": null
+  },
+  "TemperatureResist_Heat3Cold3": {
+    "localized_name": "Kháng Nhiệt Cấp 3 / Kháng Lạnh Cấp 3",
+    "description": null
+  },
+  "Test_PalEgg_HatchingSpeed_Up": {
+    "localized_name": "Lòng Thương Bao La",
+    "description": "Khi được phân công vào Trang Trại Nhân Giống, tốc độ sản xuất trứng tăng 100.0%"
+  },
+  "TrainerATK_UP_1": {
+    "localized_name": "Kẻ Tiên Phong",
+    "description": "Tấn công của người chơi tăng 10.0%"
+  },
+  "TrainerDEF_UP_1": {
+    "localized_name": "Quân Sư Phòng Thủ",
+    "description": "Phòng thủ của người chơi tăng 10.0%"
+  },
+  "TrainerLogging_up1": {
+    "localized_name": "Quản Đốc Khai Thác Gỗ",
+    "description": "Hiệu quả đốn gỗ của người chơi tăng 25.0%"
+  },
+  "TrainerMining_up1": {
+    "localized_name": "Quản Đốc Mỏ",
+    "description": "Hiệu quả khai thác của người chơi tăng 25.0%"
+  },
+  "TrainerWorkSpeed_UP_1": {
+    "localized_name": "Thúc Đẩy Động Lực",
+    "description": "Tốc độ làm việc của người chơi tăng 25.0%"
+  },
+  "Vampire": {
+    "localized_name": "Ma Cà Rồng",
+    "description": "Gây sát thương, hấp thụ một phần sát thương đó và hồi phục Máu. Tiếp tục làm việc mà không ngủ, ngay cả vào ban đêm."
+  },
+  "Witch": {
+    "localized_name": "Nhân Ngư Từ Hư Không",
+    "description": null
+  },
+  "WorkSpeed_ACC_up1": {
+    "localized_name": "Làm Việc Nhanh Nhẹn Cấp 1",
+    "description": null
+  },
+  "WorkSpeed_ACC_up2": {
+    "localized_name": "Làm Việc Nhanh Nhẹn Cấp 2",
+    "description": null
+  },
+  "WorkSpeed_ACC_up3": {
+    "localized_name": "Làm Việc Nhanh Nhẹn Cấp 3",
+    "description": null
+  },
+  "YakushimaDagameBoost_Magic_Equip": {
+    "localized_name": "Sức Mạnh Thần Thánh: Phép Thuật",
+    "description": null
+  },
+  "YakushimaDagameBoost_Melee_Equip": {
+    "localized_name": "Sức Mạnh Thần Thánh: Cận Chiến",
+    "description": null
+  },
+  "YakushimaDagameBoost_Ranged_Equip": {
+    "localized_name": "Sức Mạnh Thần Thánh: Tầm Xa",
+    "description": null
+  },
+  "YakushimaDagameBoost_Summon_Equip": {
+    "localized_name": "Sức Mạnh Thần Thánh: Triệu Hồi",
+    "description": null
+  },
+  "YakushimaProtection_Equip": {
+    "localized_name": "Bảo Hộ Thần Thánh",
+    "description": null
+  },
+  "defense_ACC_up1": {
+    "localized_name": "Tăng Phòng Thủ Cấp 1",
+    "description": null
+  },
+  "defense_ACC_up2": {
+    "localized_name": "Tăng Phòng Thủ Cấp 2",
+    "description": null
+  },
+  "defense_ACC_up3": {
+    "localized_name": "Tăng Phòng Thủ Cấp 3",
+    "description": null
+  }
+}

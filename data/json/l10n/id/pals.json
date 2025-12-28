@@ -1,0 +1,2454 @@
+{
+  "Alpaca": {
+    "localized_name": "Melpaca",
+    "description": "Jangan terkecoh dengan penampilannya yang berbulu lembut. Tendangan super cepat dari kaki panjangnya dapat membuatmu terpental hingga ke ujung bumi."
+  },
+  "AmaterasuWolf": {
+    "localized_name": "Kitsun",
+    "description": "Memiliki perasaan yang sangat sensitif, dia akan bersembunyi ke dalam gua jika ada hal yang tidak disukainya. Orang-orang zaman dahulu beranggapan dihindari oleh Kitsun merupakan suatu pertanda buruk."
+  },
+  "AmaterasuWolf_Dark": {
+    "localized_name": "Kitsun Noct",
+    "description": "Memiliki perasaan yang sangat sensitif, dia akan bersembunyi ke dalam gua jika ada hal yang tidak disukainya. Dia menjadi sangat murung karena terlalu sering bersembunyi."
+  },
+  "Ambassador01": {
+    "localized_name": "Utusan Kota Padang Pasir",
+    "description": null
+  },
+  "Anubis": {
+    "localized_name": "Anubis",
+    "description": "Dari penampilannya, dahulu ia dianggap sebagai simbol kebangsawanan. Panutan bagi mereka yang menjauhi kekayaan dan kekuasaan. Seiring berjalannya waktu, Anubis telah menjadi simbol kematian."
+  },
+  "Arena_BossDefeat": {
+    "localized_name": "Pemburu Pal Veteran",
+    "description": null
+  },
+  "Arena_DarkTrader": {
+    "localized_name": "Pedagang Gelap",
+    "description": null
+  },
+  "Arena_Female_Presenter": {
+    "localized_name": "Pal Tamer Ramah",
+    "description": null
+  },
+  "Arena_Female_Soldier02": {
+    "localized_name": "Pal Tamer Berkembang",
+    "description": null
+  },
+  "Arena_Female_Soldier03": {
+    "localized_name": "Pal Tamer Veteran",
+    "description": null
+  },
+  "Arena_Female_Soldier04": {
+    "localized_name": "Pal Tamer Ahli",
+    "description": null
+  },
+  "Arena_FireCult_FlameThrower": {
+    "localized_name": "Para Martir Sekutu Api Abadi",
+    "description": null
+  },
+  "Arena_Hunter_Fat_GatlingGun": {
+    "localized_name": "Gerombolan Pemburu Liar Penghancur",
+    "description": null
+  },
+  "Arena_Male_DarkTrader02": {
+    "localized_name": "Pedagang Medali",
+    "description": null
+  },
+  "Arena_Male_Police_old": {
+    "localized_name": "Paman yang Bereinkarnasi",
+    "description": null
+  },
+  "Arena_Male_Soldier02": {
+    "localized_name": "Pal Tamer Pendatang Baru",
+    "description": null
+  },
+  "Arena_Male_Soldier02_Invader": {
+    "localized_name": "Pal Tamer Bersemangat",
+    "description": null
+  },
+  "Arena_Male_Soldier03": {
+    "localized_name": "Pal Tamer Kejam",
+    "description": null
+  },
+  "Arena_Male_Soldier04": {
+    "localized_name": "Pal Tamer Bersemangat",
+    "description": null
+  },
+  "Arena_Ninja": {
+    "localized_name": "Ninja Kelas Bawah Bunga Bulan",
+    "description": null
+  },
+  "Arena_NinjaElite": {
+    "localized_name": "Ninja Kelas Atas Bunga Bulan",
+    "description": null
+  },
+  "Arena_PalPassive_Doctor": {
+    "localized_name": "Profesor Brawn",
+    "description": null
+  },
+  "Arena_Ranger04": {
+    "localized_name": "Pemburu yang Wangi",
+    "description": null
+  },
+  "Arena_Reward_Emote": {
+    "localized_name": "Pengkhotbah Cinta",
+    "description": null
+  },
+  "Arena_Reward_Paldex": {
+    "localized_name": "Peneliti Ekologi Pal",
+    "description": null
+  },
+  "Arena_Scholar01": {
+    "localized_name": "Peneliti yang Mengejar Legenda",
+    "description": null
+  },
+  "Arena_Scientist_LaserRifle": {
+    "localized_name": "Unit Penelitian Genetika, Tim Eksekutif",
+    "description": null
+  },
+  "Arena_Soldier": {
+    "localized_name": "Tentara Bayaran yang Kuat",
+    "description": null
+  },
+  "Arena_Viking": {
+    "localized_name": "Penduduk Langit Jatuh",
+    "description": null
+  },
+  "Arena_VikingElite": {
+    "localized_name": "Pasukan Elit Penduduk Langit Jatuh",
+    "description": null
+  },
+  "BOSS_Believer_CrossBow": {
+    "localized_name": "Hadiah Perburuan Ego",
+    "description": null
+  },
+  "BOSS_Believer_Fat_GiantClub": {
+    "localized_name": "Hadiah Perburuan Bata",
+    "description": null
+  },
+  "BOSS_DarkTrader": {
+    "localized_name": "Hadiah Perburuan Domba Jantan",
+    "description": null
+  },
+  "BOSS_Female_DesertPeople": {
+    "localized_name": "Hadiah Perburuan Whisper",
+    "description": null
+  },
+  "BOSS_Female_People": {
+    "localized_name": "Hadiah Perburuan Suar",
+    "description": null
+  },
+  "BOSS_Female_People02": {
+    "localized_name": "Hadiah Perburuan Sirene",
+    "description": null
+  },
+  "BOSS_Female_People03": {
+    "localized_name": "Hadiah Perburuan Tangki",
+    "description": null
+  },
+  "BOSS_Female_Soldier": {
+    "localized_name": "Hadiah Perburuan Giok",
+    "description": null
+  },
+  "BOSS_Female_Soldier02": {
+    "localized_name": "Hadiah Perburuan Medali",
+    "description": null
+  },
+  "BOSS_Female_Soldier03": {
+    "localized_name": "Hadiah Perburuan Aloha",
+    "description": null
+  },
+  "BOSS_Female_Soldier04": {
+    "localized_name": "Hadiah Perburuan Nimble",
+    "description": null
+  },
+  "BOSS_FireCult_FlameThrower": {
+    "localized_name": "Hadiah Perburuan Bayangan",
+    "description": null
+  },
+  "BOSS_Hunter_Fat_GatlingGun": {
+    "localized_name": "Hadiah Perburuan Pemanggang",
+    "description": null
+  },
+  "BOSS_Hunter_Rifle": {
+    "localized_name": "Hadiah Perburuan Elang",
+    "description": null
+  },
+  "BOSS_Male_DesertPeople": {
+    "localized_name": "Hadiah Perburuan Phantom",
+    "description": null
+  },
+  "BOSS_Male_NinjaElite": {
+    "localized_name": "Hadiah Perburuan Landak Laut",
+    "description": null
+  },
+  "BOSS_Male_People": {
+    "localized_name": "Hadiah Perburuan Dyna",
+    "description": null
+  },
+  "BOSS_Male_People02": {
+    "localized_name": "Hadiah Perburuan Bulu Ayam",
+    "description": null
+  },
+  "BOSS_Male_People03": {
+    "localized_name": "Hadiah Perburuan Scoot",
+    "description": null
+  },
+  "BOSS_Male_People2": {
+    "localized_name": "Hadiah Perburuan Might",
+    "description": null
+  },
+  "BOSS_Male_Soldier": {
+    "localized_name": "Hadiah Perburuan Crash",
+    "description": null
+  },
+  "BOSS_Male_Soldier02": {
+    "localized_name": "Hadiah Perburuan Kotoran",
+    "description": null
+  },
+  "BOSS_Male_Soldier03": {
+    "localized_name": "Hadiah Perburuan Clint",
+    "description": null
+  },
+  "BOSS_Male_Soldier04": {
+    "localized_name": "Hadiah Perburuan Laso",
+    "description": null
+  },
+  "BOSS_Male_Trader01": {
+    "localized_name": "Hadiah Perburuan Skim",
+    "description": null
+  },
+  "BOSS_Male_Trader02": {
+    "localized_name": "Hadiah Perburuan Mimic",
+    "description": null
+  },
+  "BOSS_Male_Trader03": {
+    "localized_name": "Hadiah Perburuan Billy",
+    "description": null
+  },
+  "BOSS_Ninja": {
+    "localized_name": "Hadiah Perburuan Fumble",
+    "description": null
+  },
+  "BOSS_Police_Rifle": {
+    "localized_name": "Hadiah Perburuan Cambuk",
+    "description": null
+  },
+  "BOSS_Police_old": {
+    "localized_name": "Hadiah Perburuan Pinch",
+    "description": null
+  },
+  "BOSS_Scientist_LaserRifle": {
+    "localized_name": "Hadiah Perburuan Whisk",
+    "description": null
+  },
+  "BOSS_Viking": {
+    "localized_name": "Hadiah Perburuan Naa",
+    "description": null
+  },
+  "BOSS_VikingElite": {
+    "localized_name": "Hadiah Perburuan Cache",
+    "description": null
+  },
+  "BadCatgirl": {
+    "localized_name": "Nyafia",
+    "description": "Sangat tidak suka jika ada yang bertemu pandang dengan kedua matanya. Jika kamu memaksa untuk menatapnya, dia akan menangis dan tidak mengacuhkanmu kurang lebih dua minggu."
+  },
+  "Baphomet": {
+    "localized_name": "Incineram",
+    "description": "Menangkap mangsa di malam hari dan membawanya pulang ke teritorinya. Setelah itu, tidak sulit membayangkan apa yang akan terjadi pada Pal yang tertangkap tersebut."
+  },
+  "Baphomet_Dark": {
+    "localized_name": "Incineram Noct",
+    "description": "Selalu menarget Pal anak-anak dan membawanya pulang ke teritorinya. Tidak sulit membayangkan bagaimana putus asanya induk Pal yang kehilangan anak-anaknya."
+  },
+  "Baphomet_Dark_Oilrig": {
+    "localized_name": "Incineram Noct",
+    "description": null
+  },
+  "Bastet": {
+    "localized_name": "Mau",
+    "description": "Ekornya yang keras tidak akan rusak meskipun sudah terputus. Ada yang meyakini ekor-ekor yang terputus ini membawa keberuntungan sehingga banyak Mau yang kehilangan nyawanya."
+  },
+  "Bastet_Ice": {
+    "localized_name": "Mau Cryst",
+    "description": "Ekor kristalnya sangat cantik tetapi akan pecah berkeping-keping di saat mereka mati. Ada yang meyakini memelihara banyak dari mereka membawa keberuntungan sehingga Mau Cryst dirawat dengan sangat baik."
+  },
+  "Believer_Bat": {
+    "localized_name": "Anggota Kelompok Perlindungan Pal",
+    "description": null
+  },
+  "Believer_Bat_Camp02": {
+    "localized_name": "Anggota Kelompok Perlindungan Pal",
+    "description": null
+  },
+  "Believer_Bat_Invader": {
+    "localized_name": "Anggota Kelompok Perlindungan Pal",
+    "description": null
+  },
+  "Believer_CrossBow": {
+    "localized_name": "Anggota Kelompok Perlindungan Pal",
+    "description": null
+  },
+  "Believer_CrossBow_Camp02": {
+    "localized_name": "Anggota Kelompok Perlindungan Pal",
+    "description": null
+  },
+  "Believer_CrossBow_Invader": {
+    "localized_name": "Anggota Kelompok Perlindungan Pal",
+    "description": null
+  },
+  "Believer_CrossBow_Tower": {
+    "localized_name": "Anggota Kelompok Perlindungan Pal",
+    "description": null
+  },
+  "Believer_Fat_Cane": {
+    "localized_name": "Hakim Kelompok Perlindungan Pal",
+    "description": null
+  },
+  "Believer_Fat_GatlingGun": {
+    "localized_name": "Hakim Kelompok Perlindungan Pal",
+    "description": null
+  },
+  "Believer_Fat_Prisoner": {
+    "localized_name": "Hakim Kelompok Perlindungan Pal",
+    "description": null
+  },
+  "Believer_Prisoner": {
+    "localized_name": "Anggota Kelompok Perlindungan Pal",
+    "description": null
+  },
+  "BerryGoat": {
+    "localized_name": "Caprity",
+    "description": "Selama tidak kelaparan, semak-semak di punggungnya akan menghasilkan beri. Ia akan menawarkan berinya kepada calon yang dia suka jika rasanya cocok, jadilah mereka sepasang kekasih."
+  },
+  "BerryGoat_Dark": {
+    "localized_name": "Caprity Noct",
+    "description": "Beri yang tumbuh di semak-semak punggungnya berubah rasa sesuai emosi mereka. Semakin ganas lingkungan tempat mereka dibesarkan, semakin manis rasanya, oleh karena itu banyak Caprity Noct di penangkaran yang tidak mengenal cinta."
+  },
+  "BirdDragon": {
+    "localized_name": "Vanwyrm",
+    "description": "Konon, peluit yang terbuat dari kerangka luar Vanwyrm dapat terdengar hingga melintasi seribu gunung. Di pertempuran zaman dulu, peluit ini digunakan sebagai sinyal komando penyerangan."
+  },
+  "BirdDragon_Ice": {
+    "localized_name": "Vanwyrm Cryst",
+    "description": "Konon, peluit yang terbuat dari kerangka luar Vanwyrm Cryst dapat terdengar hingga melintasi seribu gunung. Di pertempuran zaman dulu, peluit ini digunakan sebagai seruan kemenangan."
+  },
+  "BlackCentaur": {
+    "localized_name": "Necromus",
+    "description": "Dahulu ia pernah menjadi satu dengan Paladius. Meskipun bentuknya yang gelap dianggap perwujudan emosi negatif, dari balik matanya terdapat secercah belas kasih."
+  },
+  "BlackFurDragon": {
+    "localized_name": "Dragostrophe",
+    "description": "Dia adalah makhluk sunyi yang datang dari jurang yang dalam. Jangan coba-coba menaiki punggungnya. Jangan coba-coba berteriak padanya."
+  },
+  "BlackGriffon": {
+    "localized_name": "Shadowbeak",
+    "description": "Terlahir dari dalam kegilaan, keberadaannya menentang akal sehat. Dia telah kehilangan hubungan genetiknya dari Pal lain, bahkan mungkin sudah tidak bisa dikatakan sebagai Pal."
+  },
+  "BlackMetalDragon": {
+    "localized_name": "Astegon",
+    "description": "Dia adalah amukan yang datang dari jurang yang dalam. Jangan coba-coba berada di depannya. Jangan coba-coba mendengarkan suaranya."
+  },
+  "BlackPuppy": {
+    "localized_name": "Smokie",
+    "description": "Kobaran api hitamnya hanya terasa hangat saat disentuh tetapi semua yang bersentuhan dengannya pelan-pelan meleleh dari dalam. Bawa sedikit keju dan itu akan jadi hidangan yang sempurna."
+  },
+  "Blacksmith01": {
+    "localized_name": "Pandai Besi dalam Pelatihan",
+    "description": null
+  },
+  "BlueDragon": {
+    "localized_name": "Azurobe",
+    "description": "Pita putihnya akan berubah menjadi hitam jika menyentuh air kotor. Karena sangat berguna untuk mendeteksi racun, dahulu ia banyak diburu sehingga sampai sekarang ia tidak menyukai manusia."
+  },
+  "BlueDragon_Ice": {
+    "localized_name": "Azurobe Cryst",
+    "description": "Pita putihnya terus-menerus menyerap panas dari lingkungan sekitar. Anehnya, suhu pitanya tidak berubah sama sekali. Karena karakteristik yang aneh ini, dahulu ia banyak diburu sehingga sampai sekarang ia tidak menyukai manusia."
+  },
+  "BluePlatypus": {
+    "localized_name": "Fuack",
+    "description": "Dia bisa membuat ombak di mana saja dengan air yang keluar dari badannya. Di saat terburu-buru, ia bisa bergerak dengan body surfing. Namun saking bersemangatnya terkadang ia mati karena menabrak dinding."
+  },
+  "BluePlatypus_Fire": {
+    "localized_name": "Fuack Ignis",
+    "description": "Dia memilih perut yang memiliki daya gesek tinggi lalu terbakar karena bodysurfing. Dia terlalu bersemangat sehingga malah sering jadi boneka api."
+  },
+  "BlueThunderHorse": {
+    "localized_name": "Azurmane",
+    "description": "Seperti Univolt, ia dianggap berhubungan dengan Dewa Petir. Saat kepercayaan pada Univolt memudar Azurmane dianggap sebagai utusan Dewa sejati tetapi seiring berjalannya waktu, status mereka turun menjadi pekerja biasa."
+  },
+  "BlueberryFairy": {
+    "localized_name": "Prunelia",
+    "description": "Karena pintar dan anggun perilakunya, sering dipekerjakan sebagai pelayan pribadi di kalangan bangsawan pulau. Akan tetapi, jika bertemu dengannya di malam hari, dia terlihat sangat menyeramkan sehingga popularitasnya langsung meredup."
+  },
+  "Boar": {
+    "localized_name": "Rushoar",
+    "description": "Dia merupakan makhluk yang sangat agresif sehingga suka memulai perkelahian sebelum mengukur kekuatan lawannya. Meski termasuk Pal kecil, kekuatan serangannya sangat dahsyat bahkan batu raksasa pun bisa terpental."
+  },
+  "BountyTrader": {
+    "localized_name": "Penjaga",
+    "description": null
+  },
+  "CandleGhost": {
+    "localized_name": "Sootseer",
+    "description": "Dahulu dipercaya bahwa semakin mendekati akhir dunia maka kobaran apinya akan semakin lemah. Para pendukung kiamat berulang kali bersuka cita saat apinya melemah, tetapi pada akhirnya, itu hanyalah ulah dari Sootseer. Setidaknya sampai sekarang."
+  },
+  "CaptainPenguin": {
+    "localized_name": "Penking",
+    "description": "Sebenarnya ia spesies yang tidak berhubungan sama sekali dengan Pengullet. Namun, karena terlalu dimanjakan, sekarang ia selalu berusaha terlihat lebih unggul."
+  },
+  "CaptainPenguin_Black": {
+    "localized_name": "Penking Lux",
+    "description": "Untuk berburu di dalam air, ia mendapatkan kekuatan listrik dan berubah warna. Akibatnya, ia tidak lagi disukai oleh Pengullet. Tapi mungkin karena itu, kali ini ia malah mendapatkan anak buah yang bernama Pengullet Lux."
+  },
+  "CaravanLeader01": {
+    "localized_name": "Kapten Karavan",
+    "description": null
+  },
+  "CaravanLeader02": {
+    "localized_name": "Kapten Karavan",
+    "description": null
+  },
+  "CaravanLeader03": {
+    "localized_name": "Kapten Karavan",
+    "description": null
+  },
+  "Carbunclo": {
+    "localized_name": "Lifmunk",
+    "description": "Memiliki kecerdasan setara anak-anak usia lima hingga tujuh tahun. Merupakan partner yang luar biasa, tetapi di beberapa kasus tercatat mereka membunuh majikannya setelah belajar menggunakan senjata."
+  },
+  "CatBat": {
+    "localized_name": "Tombat",
+    "description": "Ia bisa tiba-tiba muncul di depan Pal lain, mengembangkan sayap kebanggaannya, memamerkan diri. Meski ini merupakan sebuah taktik intimidasi, Pal lain malah terlihat terpukau dengannya."
+  },
+  "CatMage": {
+    "localized_name": "Katress",
+    "description": "Dengan kekuatan bayangan, ia memamerkan trik yang aneh. Ia suka makanan apa pun yang mentah. Ia bermusuhan dengan Wixen."
+  },
+  "CatMage_Fire": {
+    "localized_name": "Katress Ignis",
+    "description": "Ia tidak peduli hal-hal kecil seperti makanannya mentah atau tidak dikarenakan ajaran induknya. Ia suka semua makanan yang pedas. Ia bermusuhan dengan Wixen Noct."
+  },
+  "CatVampire": {
+    "localized_name": "Felbat",
+    "description": "Ia menyerang mangsanya dari kegelapan, menangkapnya dengan sayap yang seperti jubah. Sebaiknya kamu tidak tahu apa yang terjadi di dalam sana dan mengapa bagian dalam sayapnya berwarna merah."
+  },
+  "ChickenPal": {
+    "localized_name": "Chikipi",
+    "description": "Sangat lemah dan sangat lezat. Mereka masuk ke daftar Pal terlemah bersama dengan SheepBall. Berapa banyak pun diburu, mereka akan terus bermunculan dari mana saja."
+  },
+  "ColorfulBird": {
+    "localized_name": "Tocotoco",
+    "description": "Pal menyeramkan yang mengeluarkan telur yang bisa meledak. Biasanya mereka menembakkan telur dari pantatnya sebagai senjata, tetapi saat terdesak mereka sendirilah yang akan meledak."
+  },
+  "CowPal": {
+    "localized_name": "Mozzarina",
+    "description": "Meski tidak terurus, dari mereka keluar susu seperti sebuah keran yang terbuka. Pal jantan pun bisa mengeluarkan susu. Ini merupakan sebuah misteri kehidupan."
+  },
+  "CuteButterfly": {
+    "localized_name": "Cinnamoth",
+    "description": "Konon katanya, menghirup serbuk sisik mereka dapat memberikan efek buff yang luar biasa. Meskipun ada upaya untuk memperketat penegakan hukum untuk hal ini, gerakan tersebut terhambat karena penolakan dari Aliansi Pelindung Pal."
+  },
+  "CuteFox": {
+    "localized_name": "Vixy",
+    "description": "Idola Pulau Palpagos. Jika kamu mengganggu Vixy, seluruh dunia akan jadi musuhmu."
+  },
+  "CuteMole": {
+    "localized_name": "Fuddler",
+    "description": "Cakar besarnya tangguh bagaikan berlian. Tapi, menajamkannya saja sudah menguras lebih dari setengah energinya. Jika tidak, waktu seharian akan habis hanya untuk merawatnya."
+  },
+  "DarkAlien": {
+    "localized_name": "Xenovader",
+    "description": "Mereka dapat mengirimkan informasi dan merubahnya menjadi energi saat melupakan informasi tersebut. Tampaknya mereka mengirimkan informasi ke siapa saja secara rutin. - Harap balas. Target ditemukan. Segera menuju penghancuran."
+  },
+  "DarkAlien_Oilrig": {
+    "localized_name": "Xenovader",
+    "description": null
+  },
+  "DarkCrow": {
+    "localized_name": "Cawgnito",
+    "description": "Dahulu ia suka terbang dengan bebas di langit, tetapi semenjak kalah dalam pertarungan dengan Galeclaw, ia meninggalkan langit dan hidup dengan tenang di malam hari."
+  },
+  "DarkMechaDragon": {
+    "localized_name": "Xenolord",
+    "description": "- Tiba di tujuan. Prioritas: Temukan entitas Naga Meteor. - Catatan: Batas waktu penaklukan telah terlewati selama < ://Error_Code:126DC >tahun. - Update: Tidak ada jejak penaklukan. Naturalisasi terkonfirmasi. Mulai eliminasi. - Memo pekerja: Jangan sampai melupakan atau mengonsumsi data penting!"
+  },
+  "DarkScorpion": {
+    "localized_name": "Menasting",
+    "description": "Badannya terbuat dari energi itu sendiri dan dalamnya kosong. Mereka memasukkan mangsanya yang masih hidup ke dalam kulit luar mereka, lalu menyerapnya. Di sekitar mereka terus-menerus terdengar suara jeritan neraka."
+  },
+  "DarkScorpion_Ground": {
+    "localized_name": "Menasting Terra",
+    "description": "Badannya terbuat dari energi itu sendiri dan dalamnya kosong. Mereka menjejalkan tanah dan mineral ke dalam kulit luar mereka, menciptakan berat massa yang luar biasa. Makhluk yang terkena hanya bisa mengeluarkan erangan seperti di neraka."
+  },
+  "DeathPenalty_guide": {
+    "localized_name": "Pal Tamer Veteran",
+    "description": null
+  },
+  "Deer": {
+    "localized_name": "Eikthyrdeer",
+    "description": "Siapa yang memiliki tanduk paling menawan akan menjadi pemimpin kawanan. Saat tanduknya patah, patah pula hatinya. Kemudian mereka meninggalkan kawanannya ke tempat di mana tidak seorang pun bisa melihat mereka lagi."
+  },
+  "Deer_Ground": {
+    "localized_name": "Eikthyrdeer Terra",
+    "description": "Siapa yang memiliki tanduk paling keras akan menjadi pemimpin kawanan. Jika mereka kehilangan tanduknya, hilang pula status tersebut. Sambil diantar oleh kawanannya ia meninggalkan mereka dan kembali ke tanah secara diam-diam."
+  },
+  "Doctor": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "DreamDemon": {
+    "localized_name": "Daedream",
+    "description": "Mereka membuat makhluk yang mereka sukai tertidur dan terus-menerus memperlihatkan mimpi yang indah. Korbannya tidak akan membuka mata lagi hingga maut memisahkan."
+  },
+  "DrillGame": {
+    "localized_name": "Digtoise",
+    "description": "Konon ada kisah tentang |BorDigtoise|. Ini adalah kisah moral tentang Digtoise yang memiliki tempurung dan bor terkuat dan selalu memikirkan paradoks cerita anaka-anak."
+  },
+  "Eagle": {
+    "localized_name": "Galeclaw",
+    "description": "Mereka bisa terbang tanpa kesulitan meski sambil mencengkeram manusia. Akan tetapi, karena cenderung melepas cengkeramannya saat lelah, hal ini mengakibatkan kematian akibat terjatuh terus-menerus."
+  },
+  "ElecCat": {
+    "localized_name": "Sparkit",
+    "description": "Selama musim kering, mereka selalu gugup dan mengeluarkan setruman. Percikan listrik dapat muncul bahkan di sesama teman mereka menimbulkan pertengkaran besar yang sengit."
+  },
+  "ElecLion": {
+    "localized_name": "Boltmane",
+    "description": "-"
+  },
+  "ElecPanda": {
+    "localized_name": "Grizzbolt",
+    "description": "Dengan senyum yang ramah dan fisik yang kokoh, mereka jinak terhadap makhluk yang diakuinya sebagai pasangan. Entah mengapa mereka tiba-tiba berubah saat membawa minigun."
+  },
+  "Emote_location_A_01": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Emote_location_A_02": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Emote_location_B_01": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Emote_location_B_02": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Emote_location_C_01": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Emote_location_C_02": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Emote_location_D_01": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Emote_location_D_02": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Emote_location_E_01": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Emote_location_E_02": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Emote_location_F_01": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Emote_location_F_02": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Emote_location_G_01": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Emote_location_G_02": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Emote_location_H_01": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Emote_location_H_02": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Emote_location_I_01": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Emote_location_I_02": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Epicure01": {
+    "localized_name": "Pemburu Makanan",
+    "description": null
+  },
+  "Escort_PalTamer01": {
+    "localized_name": "Penjaga Pal Tamer",
+    "description": null
+  },
+  "Escort_Warrior01": {
+    "localized_name": "Penjaga Tentara Bayaran",
+    "description": null
+  },
+  "FairyDragon": {
+    "localized_name": "Elphidran",
+    "description": "Kepribadiannya lugu seperti penampilannya. Mungkin karena ini lah mereka tidak bisa membedakan mana yang baik dan yang buruk sehingga terkadang dimanfaatkan oleh manusia yang berniat jahat."
+  },
+  "FairyDragon_Water": {
+    "localized_name": "Elphidran Aqua",
+    "description": "Kepribadiannya lugu seperti penampilannya. Mungkin karena ini lah mereka tidak pernah memiliki niat buruk apa pun tindakannya sehingga saat membunuh siapa pun mereka tidak punya rasa bersalah."
+  },
+  "FeatherOstrich": {
+    "localized_name": "Dazemu",
+    "description": "Maju selangkah dan lupakan keraguanmu, maju dua langkah dan lupakan kekhawatiranmu, maju tiga langkah dan lupakan ketakutanmu, hadapi semua musuhmu."
+  },
+  "Female_DesertPeople02": {
+    "localized_name": "Penduduk Desa",
+    "description": null
+  },
+  "Female_Farmer01_v01": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Female_Farmer01_v02": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Female_Farmer01_v03": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Female_Farmer01_v04": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Female_Nomad01_v01": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Female_Nomad01_v02": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Female_Nomad01_v03": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Female_Nomad01_v04": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Female_People02": {
+    "localized_name": "Penduduk Desa",
+    "description": null
+  },
+  "Female_People03": {
+    "localized_name": "Penduduk Desa",
+    "description": null
+  },
+  "Female_Presenter01": {
+    "localized_name": "Pal Tamer Ramah",
+    "description": null
+  },
+  "Female_Ranger01_v01": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Female_Ranger01_v02": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Female_Ranger01_v03": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Female_Ranger01_v04": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Female_Soldier01": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Female_Soldier02": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Female_Soldier03": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Female_Soldier03_Invader": {
+    "localized_name": "Pal Tamer Kembar",
+    "description": null
+  },
+  "Female_Soldier04": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Female_Soldier04_Invader": {
+    "localized_name": "Pal Tamer Kembar",
+    "description": null
+  },
+  "FengyunDeeper": {
+    "localized_name": "Fenglope",
+    "description": "Jauh di masa lalu, karena penampilannya yang cantik ia akrab menjadi subjek lukisan. Seiring berjalannya waktu, bulu dan tanduknya yang cantik menjadi hal yang umum sebagai sebuah karya seni."
+  },
+  "FengyunDeeper_Electric": {
+    "localized_name": "Fenglope Lux",
+    "description": "Jauh di masa lalu, dipercaya bahwa melukis gambar Fenglope Lux akan membuatmu mati tersambar petir. Seiring berjalannya waktu, karya seni yang menggambarkan Fenglope Lux menjadi hal yang umum sebagai jimat penangkal petir."
+  },
+  "FireCult_FlameThrower": {
+    "localized_name": "Para Martir Sekutu Api Abadi",
+    "description": null
+  },
+  "FireCult_FlameThrower_Invader": {
+    "localized_name": "Para Martir Sekutu Api Abadi",
+    "description": null
+  },
+  "FireCult_FlameThrower_Relax": {
+    "localized_name": "Para Martir Sekutu Api Abadi",
+    "description": null
+  },
+  "FireCult_Prisoner": {
+    "localized_name": "Para Martir Sekutu Api Abadi",
+    "description": null
+  },
+  "FireCult_Rifle": {
+    "localized_name": "Para Martir Sekutu Api Abadi",
+    "description": null
+  },
+  "FireCult_Rifle_Invader": {
+    "localized_name": "Para Martir Sekutu Api Abadi",
+    "description": null
+  },
+  "FireCult_Rifle_Relax": {
+    "localized_name": "Para Martir Sekutu Api Abadi",
+    "description": null
+  },
+  "FireKirin": {
+    "localized_name": "Pyrin",
+    "description": "Seluruh badannya telah berevolusi menjadi radiator berefisiensi tinggi memberikannya stamina yang menakjubkan. Saat seseorang menaikinya, mereka akan berhati-hati agar tidak membakar orang tersebut."
+  },
+  "FireKirin_Dark": {
+    "localized_name": "Pyrin Noct",
+    "description": "Mereka membakar dark matter misterius sebagai energi dan mengeluarkan partikel sisa dari tubuhnya. Saat seseorang menaikinya, mereka akan berhati-hati agar orang tersebut tidak terjerumus ke dalam kegelapan."
+  },
+  "FlameBambi": {
+    "localized_name": "Rooby",
+    "description": "Anehnya Rooby liar tidak pernah sakit. Rahasia kesehatan abadinya adalah membakar satu ranting perhari dan memakan arangnya."
+  },
+  "FlameBuffalo": {
+    "localized_name": "Arsox",
+    "description": "Di masa lalu, Pal karnivora selalu memburu mereka. Kemarahan luar biasa dalam teriakan Arsox menjelma menjadi kobaran api neraka yang terus berkobar."
+  },
+  "FlowerDinosaur": {
+    "localized_name": "Dinossom",
+    "description": "Sekali marah, mereka jadi tak terkendali dan mengamuk seperti kesetanan. Peribahasa |menginjak ekor Dinossom| bermakna membuat seseorang marah."
+  },
+  "FlowerDinosaur_Electric": {
+    "localized_name": "Dinossom Lux",
+    "description": "Meski tersambar petir, nyawa mereka selamat. Peribahasa |petir menyambar Dinossom Lux| bermakna lolos dari maut."
+  },
+  "FlowerDoll": {
+    "localized_name": "Petallia",
+    "description": "Di akhir hidupnya, mereka berubah menjadi tanaman yang besar. Sekali setiap sepuluh tahun, mekarlah sebuah bunga yang sangat cantik dan lahirlah Petallia baru."
+  },
+  "FlowerRabbit": {
+    "localized_name": "Flopie",
+    "description": "Mereka menyukai tempat dengan banyak tanaman. Tetapi belakangan ini, tampaknya alergi serbuk bunga sedang marak di antara para Flopie."
+  },
+  "FlyingManta": {
+    "localized_name": "Celaray",
+    "description": "Mereka menunggangi angin dan berkelana ke mana saja yang mereka suka. Perjalanan mereka berakhir ketika mereka menemukan pasangannya."
+  },
+  "FlyingManta_Thunder": {
+    "localized_name": "Celaray Lux",
+    "description": "Motif yang sangat mencolok supaya mereka bisa menemukan pasangan. Sejarah kecelakaan akibat sengatan listrikCelaray Lux telah lama ada, dan sekarang di pulau itu, motif garis-garis kuning dan hitam dianggap sebagai warna yang berbahaya."
+  },
+  "FoxMage": {
+    "localized_name": "Wixen",
+    "description": "Dengan kekuatan cahaya, mereka memamerkan trik yang aneh. Ia suka makanan apa pun yang matang sempurna. Ia bermusuhan dengan Katress."
+  },
+  "FoxMage_Dark": {
+    "localized_name": "Wixen Noct",
+    "description": "Ia tidak peduli hal-hal kecil seperti makanannya dibakar atau tidak dikarenakan ajaran induknya. Ia suka semua makanan yang manis. Ia bermusuhan dengan Katress Ignis."
+  },
+  "GYM_BlackGriffon": {
+    "localized_name": "Victor & Shadowbeak",
+    "description": "Terlahir dari dalam kegilaan, keberadaannya menentang akal sehat. Dia telah kehilangan hubungan genetiknya dari Pal lain, bahkan mungkin sudah tidak bisa dikatakan sebagai Pal."
+  },
+  "GYM_BlackGriffon_2": {
+    "localized_name": "Victor & Shadowbeak",
+    "description": "Terlahir dari dalam kegilaan, keberadaannya menentang akal sehat. Dia telah kehilangan hubungan genetiknya dari Pal lain, bahkan mungkin sudah tidak bisa dikatakan sebagai Pal."
+  },
+  "GYM_BlackGriffon_2_Avatar": {
+    "localized_name": "Victor & Shadowbeak",
+    "description": null
+  },
+  "GYM_ElecPanda": {
+    "localized_name": "Zoe & Grizzbolt",
+    "description": "Dengan senyum yang ramah dan fisik yang kokoh, mereka jinak terhadap makhluk yang diakuinya sebagai pasangan. Entah mengapa mereka tiba-tiba berubah saat membawa minigun."
+  },
+  "GYM_ElecPanda_2": {
+    "localized_name": "Zoe & Grizzbolt",
+    "description": "Dengan senyum yang ramah dan fisik yang kokoh, mereka jinak terhadap makhluk yang diakuinya sebagai pasangan. Entah mengapa mereka tiba-tiba berubah saat membawa minigun."
+  },
+  "GYM_ElecPanda_Otomo": {
+    "localized_name": "Zoe & Grizzbolt",
+    "description": null
+  },
+  "GYM_Horus": {
+    "localized_name": "Marcus & Faleris",
+    "description": "Saat menemukan kawanan mangsanya mereka membakar seluruh area dengan angin puting beliung yang panas. Napas Faleris terkenal dengan wanginya yang enak."
+  },
+  "GYM_Horus_2": {
+    "localized_name": "Marcus & Faleris",
+    "description": "Saat menemukan kawanan mangsanya mereka membakar seluruh area dengan angin puting beliung yang panas. Napas Faleris terkenal dengan wanginya yang enak."
+  },
+  "GYM_LilyQueen": {
+    "localized_name": "Lily & Lyleen",
+    "description": "Pal lembut yang penuh cinta. Dia merawat Pal-Pal kecil yang kehilangan induknya. Cara mendisiplinkannya adalah menggunakan SolarBeam sekuat tenaga."
+  },
+  "GYM_LilyQueen_2": {
+    "localized_name": "Lily & Lyleen",
+    "description": "Pal lembut yang penuh cinta. Dia merawat Pal-Pal kecil yang kehilangan induknya. Cara mendisiplinkannya adalah menggunakan SolarBeam sekuat tenaga."
+  },
+  "GYM_MoonQueen": {
+    "localized_name": "Saya & Selyne",
+    "description": "Objek menyerupai bulan yang melayang di punggungnya dikatakan semakin membentuk lingkaran seiring berlalunya tiap generasi. Tidak ada yang tahu apa yang akan terjadi saat bulannya penuh."
+  },
+  "GYM_MoonQueen_2": {
+    "localized_name": "Saya & Selyne",
+    "description": "Objek menyerupai bulan yang melayang di punggungnya dikatakan semakin membentuk lingkaran seiring berlalunya tiap generasi. Tidak ada yang tahu apa yang akan terjadi saat bulannya penuh."
+  },
+  "GYM_MoonQueen_2_Servant": {
+    "localized_name": "Selyne",
+    "description": null
+  },
+  "GYM_SnowTigerBeastman": {
+    "localized_name": "Bjorn & Bastigor",
+    "description": "Jika ia melihat benda bulat, ia langsung ingin memukulnya tak terkendali. Bagi SnowTigerBeastMan, hal tersulit setelah bertahan hidup adalah membuat boneka salju."
+  },
+  "GYM_SnowTigerBeastman_2": {
+    "localized_name": "Bjorn & Bastigor",
+    "description": "Jika ia melihat benda bulat, ia langsung ingin memukulnya tak terkendali. Bagi SnowTigerBeastMan, hal tersulit setelah bertahan hidup adalah membuat boneka salju."
+  },
+  "GYM_ThunderDragonMan": {
+    "localized_name": "Axel & Orserk",
+    "description": "Dia membakar tubuh lawannya dengan mengalirkan aliran listrik lewat luka terbuka. Perkelahian sesama Orserk berakhir dalam sekejap."
+  },
+  "GYM_ThunderDragonMan_2": {
+    "localized_name": "Axel & Orserk",
+    "description": "Dia membakar tubuh lawannya dengan mengalirkan aliran listrik lewat luka terbuka. Perkelahian sesama Orserk berakhir dalam sekejap."
+  },
+  "Ganesha": {
+    "localized_name": "Teafant",
+    "description": "Banyak air yang keluar dari organ yang dianggap sebagai hidung mereka, tapi ternyata ini hanyalah ingus. Hal ini menjadi diskusi panas di kalangan para ilmuwan."
+  },
+  "Garm": {
+    "localized_name": "Direhowl",
+    "description": "Hubungan mereka dengan manusia sudah lama memudar, akan tetapi dahulu kala sistem berburu Direhowl berakar pada perburuan yang dilakukan bersama manusia."
+  },
+  "GhostAnglerfish": {
+    "localized_name": "Ghangler",
+    "description": "Umpan buatan yang bercahaya, bisa menerangi kegelapan. Jika para Pal yang tersesat dan bingung ditemukan oleh GhostAnglerFish, mereka tidak akan bisa kabur. Kamu akan dipandu sampai pulang ke rumah dengan selamat."
+  },
+  "GhostAnglerfish_Fire": {
+    "localized_name": "Ghangler Ignis",
+    "description": "Umpan buatan yang menyala juga digunakan untuk membakar buruan. Jika para Pal yang datang karena terpikat bau yang lezat ditemukan oleh Ghangler Ignis, mereka sudah tidak bisa lari lagi. Ia akan makan sampai perutnya kenyang."
+  },
+  "GhostBeast": {
+    "localized_name": "Maraith",
+    "description": "Mereka mengeluarkan bau khusus yang dikeluarkan makhluk hidup saat mendekati ajal. Jika seekor Maraith menyukaimu, mungkin itulah sebabnya."
+  },
+  "GhostRabbit": {
+    "localized_name": "Nitemary",
+    "description": "Yang mereka bawa adalah jiwanya sendiri. Jika menemukan pasangan yang mereka sukai, mereka mengektraksi jiwa pasangannya secara paksa dan menggabungkan ke jiwanya sendiri untuk menjadi satu jiwa."
+  },
+  "GoldenHorse": {
+    "localized_name": "Gildane",
+    "description": "Selama masa emas alkimia di pulau, bulu emasnya yang terus bersinar terkenal sebagai katalis untuk menghasilkan emas. Pada waktunya terungkap penemuan luar biasa. Warna emas yang sama juga bisa didapatkan dengan mengolah surainya."
+  },
+  "GoodwillAmbassador": {
+    "localized_name": "Pedagang Pal",
+    "description": null
+  },
+  "Gorilla": {
+    "localized_name": "Gorirat",
+    "description": "Mereka menghentak-hentakkan tanah sesuai irama untuk berkomunikasi dengan teman-temannya. Arti dari tiap irama berbeda-beda tiap kawanan, tetapi perbedaannya masih belum jelas sampai sekarang."
+  },
+  "Gorilla_Ground": {
+    "localized_name": "Gorirat Terra",
+    "description": "Mereka menghentak-hentakkan tanah sesuai irama untuk berkomunikasi dengan teman-temannya. Mereka lebih kuat dari Gorirat, jika saja semua Gorirat Terra memukul tanah bersama-sama, Pulau Palpagos akan tenggelam dalam satu detik."
+  },
+  "GrassBoss": {
+    "localized_name": "Zoe",
+    "description": null
+  },
+  "GrassMammoth": {
+    "localized_name": "Mammorest",
+    "description": "Tumbuh-tumbuhan di punggungnya bervariasi tiap individu. Ada sejarah panjang tentang kepopulerannya sebagai tanaman hias, bahkan ada tukang pangkas spesialis Mammorest."
+  },
+  "GrassMammoth_Ice": {
+    "localized_name": "Mammorest Cryst",
+    "description": "Tumbuh-tumbuhan di punggungnya bervariasi tiap individu. Pernah ditemukan sebuah biji tanaman yang telah dikira punah berada di punggung Mammorest Cryst masih dalam kondisi beku."
+  },
+  "GrassPanda": {
+    "localized_name": "Mossanda",
+    "description": "Seekor Pal dengan kekuatan yang tak terbayangkan luar biasanya. Menurut hasil pengamatan dalam satu eksperimen, mereka dapat dengan mudah menyobek 3000 lembar kertas sekaligus. Syukurlah, mereka tidak diciptakan sebagai karnivora."
+  },
+  "GrassPanda_Electric": {
+    "localized_name": "Mossanda Lux",
+    "description": "Seekor Pal dengan kekuatan yang tak terbayangkan luar biasanya. Dengan memanfaatkan arus listrik tubuhnya, mereka bisa menyalurkan energi itu untuk melampaui batas fisik mereka sendiri. Topik langganan dalam diskusi tentang makhluk terkuat."
+  },
+  "GrassRabbitMan": {
+    "localized_name": "Verdash",
+    "description": "Tanah tempat Verdash berlari memiliki kualitas yang sangat baik dan menyuburkan tumbuhan. Kalau kamu menyemprotkan herbisida, mereka tidak akan mau berlari di sana."
+  },
+  "GrimGirl": {
+    "localized_name": "Splatterina",
+    "description": "Memiliki keinginan tak terkendali untuk menyobek mangsanya. Tiap individu memiliki urutannya sendiri untuk memisahkan tubuh lawannya. Jika kamu tertangkap Splatterina, berdoalah supaya kepalamu yang pertama diambil."
+  },
+  "Guard_Rifle": {
+    "localized_name": "Penjaga",
+    "description": null
+  },
+  "Guard_Shotgun": {
+    "localized_name": "Penjaga",
+    "description": null
+  },
+  "GuardianDog": {
+    "localized_name": "Yakumo",
+    "description": "Dengan sifat mereka yang menolak kejahatan, seharusnya mereka membangun hubungan yang baik dengan penduduk pulau sebagai partner yang luar biasa untuk waktu yang lama. Namun hari ini, para Yakumo membangun tembok pemisah kejahatan antara mereka dan manusia."
+  },
+  "HadesBird": {
+    "localized_name": "Helzephyr",
+    "description": "Biasa disebut sebagai petir dari neraka. Makhluk yang mati tersambar petir Helzephyr jiwanya akan langsung terjatuh ke neraka."
+  },
+  "HadesBird_Electric": {
+    "localized_name": "Helzephyr Lux",
+    "description": "Biasa disebut sebagai petir dari neraka. Mereka dianggap sebagai subspesies dari Helzephyr, tetapi ada teori yang mengatakan Helzephyr Lux yang terkena petir dari neraka akan berubah menjadi Helzephyr."
+  },
+  "HadesBird_Oilrig": {
+    "localized_name": "Helzephyr",
+    "description": null
+  },
+  "HawkBird": {
+    "localized_name": "Nitewing",
+    "description": "Pal ini membawa Pal yang baru lahir ke sarangnya dan membesarkan mereka sebagai induk angkat. Begitu gemuk dan matang, ia akan memburu mereka."
+  },
+  "Hedgehog": {
+    "localized_name": "Jolthog",
+    "description": "Saat diserang, Pal ini mengeluarkan arus listrik yang tersimpan. Tegangannya mencapai 10 juta Volt. Jika dilempar, ini lebih berbahaya dari pada senjata api yang buruk."
+  },
+  "Hedgehog_Ice": {
+    "localized_name": "Jolthog Cryst",
+    "description": "Saat diserang, Pal ini mengeluarkan angin dingin yang tersimpan. Udara dingin yang menyebar ke segala arah membekukan udara di sekitarnya dan menusuk sekujur tubuh lawan yang menyerang."
+  },
+  "Help01": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Help02": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Help03": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Help04": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "HerculesBeetle": {
+    "localized_name": "Warsect",
+    "description": "Baju zirah super keras yang menyelimuti seluruh tubuhnya memiliki kekuatan luar biasa dan tahan panas. Bahkan Napalm Blast pun hampir tidak terasa efeknya."
+  },
+  "HerculesBeetle_Ground": {
+    "localized_name": "Warsect Terra",
+    "description": "Baju zirah super keras yang menyelimuti seluruh tubuhnya memiliki kekuatan luar biasa dan tahan panas. Bahkan diinjak oleh Mammorest pun tidak masalah."
+  },
+  "Horus": {
+    "localized_name": "Faleris",
+    "description": "Saat menemukan kawanan mangsanya mereka membakar seluruh area dengan angin puting beliung yang panas. Napas Faleris terkenal dengan wanginya yang enak."
+  },
+  "Horus_Oilrig": {
+    "localized_name": "Faleris",
+    "description": null
+  },
+  "Horus_Water": {
+    "localized_name": "Faleris Aqua",
+    "description": "Saat menemukan kawanan mangsanya mereka menyapu seluruh area dengan aliran air yang dahsyat. Seringnya, mangsanya tersapu bersih sehingga orang-orang jadi bertanya apakah ini bisa disebut berburu."
+  },
+  "Hunter_Bat": {
+    "localized_name": "Gerombolan Pemburu Liar Pemula",
+    "description": null
+  },
+  "Hunter_Bat_Invader": {
+    "localized_name": "Gerombolan Pemburu Liar Pemula",
+    "description": null
+  },
+  "Hunter_BowGun": {
+    "localized_name": "Gerombolan Pemburu Liar Pemanah",
+    "description": null
+  },
+  "Hunter_BowGun_Oilrig": {
+    "localized_name": "Gerombolan Pemburu Liar Pemanah",
+    "description": null
+  },
+  "Hunter_Fat_GatlingGun": {
+    "localized_name": "Gerombolan Pemburu Liar Penghancur",
+    "description": null
+  },
+  "Hunter_Fat_GatlingGun_Invader": {
+    "localized_name": "Gerombolan Pemburu Liar Penghancur",
+    "description": null
+  },
+  "Hunter_Fat_GatlingGun_LargeOilrig": {
+    "localized_name": "Gerombolan Pemburu Liar Penghancur",
+    "description": null
+  },
+  "Hunter_Fat_GatlingGun_MiniOilrig": {
+    "localized_name": "Gerombolan Pemburu Liar Penghancur",
+    "description": null
+  },
+  "Hunter_Fat_GatlingGun_Oilrig": {
+    "localized_name": "Gerombolan Pemburu Liar Penghancur",
+    "description": null
+  },
+  "Hunter_Fat_GatlingGun_Tower": {
+    "localized_name": "Gerombolan Pemburu Liar Penghancur",
+    "description": null
+  },
+  "Hunter_Fat_Prisoner": {
+    "localized_name": "Gerombolan Pemburu Liar Penghancur",
+    "description": null
+  },
+  "Hunter_FlameThrower": {
+    "localized_name": "Gerombolan Pemburu Liar Pembersih",
+    "description": null
+  },
+  "Hunter_FlameThrower_Invader": {
+    "localized_name": "Gerombolan Pemburu Liar Pembersih",
+    "description": null
+  },
+  "Hunter_FlameThrower_LargeOilrig": {
+    "localized_name": "Gerombolan Pemburu Liar Pembersih",
+    "description": null
+  },
+  "Hunter_FlameThrower_MiiniOilrig": {
+    "localized_name": "Gerombolan Pemburu Liar Pembersih",
+    "description": null
+  },
+  "Hunter_FlameThrower_Oilrig": {
+    "localized_name": "Gerombolan Pemburu Liar Pembersih",
+    "description": null
+  },
+  "Hunter_Grenade": {
+    "localized_name": "Gerombolan Pemburu Liar Tentara Grenadier",
+    "description": null
+  },
+  "Hunter_GrenadeLauncher": {
+    "localized_name": "Gerombolan Pemburu Liar Veteran",
+    "description": null
+  },
+  "Hunter_GrenadeLauncher_LargeOilrig": {
+    "localized_name": "Gerombolan Pemburu Liar Veteran",
+    "description": null
+  },
+  "Hunter_GrenadeLauncher_Oilrig": {
+    "localized_name": "Gerombolan Pemburu Liar Veteran",
+    "description": null
+  },
+  "Hunter_Grenade_Invader": {
+    "localized_name": "Gerombolan Pemburu Liar Tentara Grenadier",
+    "description": null
+  },
+  "Hunter_Grenade_LargeOilrig": {
+    "localized_name": "Gerombolan Pemburu Liar Tentara Grenadier",
+    "description": null
+  },
+  "Hunter_Grenade_MiniOilrig": {
+    "localized_name": "Gerombolan Pemburu Liar Tentara Grenadier",
+    "description": null
+  },
+  "Hunter_Grenade_Oilrig": {
+    "localized_name": "Gerombolan Pemburu Liar Tentara Grenadier",
+    "description": null
+  },
+  "Hunter_Handgun": {
+    "localized_name": "Gerombolan Pemburu Liar Pemula",
+    "description": null
+  },
+  "Hunter_Handgun_Invader": {
+    "localized_name": "Gerombolan Pemburu Liar Pemula",
+    "description": null
+  },
+  "Hunter_Handgun_MiniOilrig": {
+    "localized_name": "Gerombolan Pemburu Liar Pemula",
+    "description": null
+  },
+  "Hunter_Katana": {
+    "localized_name": "Gerombolan Pemburu Liar Pendekar Pedang",
+    "description": null
+  },
+  "Hunter_Katana_Oilrig": {
+    "localized_name": "Gerombolan Pemburu Liar Pendekar Pedang",
+    "description": null
+  },
+  "Hunter_LaserRifle": {
+    "localized_name": "Gerombolan Pemburu Liar Teknologi Tinggi",
+    "description": null
+  },
+  "Hunter_LaserRifle_Oilrig": {
+    "localized_name": "Gerombolan Pemburu Liar Teknologi Tinggi",
+    "description": null
+  },
+  "Hunter_MissileLauncher": {
+    "localized_name": "Gerombolan Pemburu Liar Pencegat",
+    "description": null
+  },
+  "Hunter_MissileLauncher_LargeOilrig": {
+    "localized_name": "Gerombolan Pemburu Liar Pencegat",
+    "description": null
+  },
+  "Hunter_MissileLauncher_Oilrig": {
+    "localized_name": "Gerombolan Pemburu Liar Pencegat",
+    "description": null
+  },
+  "Hunter_Prisoner": {
+    "localized_name": "Gerombolan Pemburu Liar Pemula",
+    "description": null
+  },
+  "Hunter_Rifle": {
+    "localized_name": "Gerombolan Pemburu Liar Penembak",
+    "description": null
+  },
+  "Hunter_Rifle_Invader": {
+    "localized_name": "Gerombolan Pemburu Liar Penembak",
+    "description": null
+  },
+  "Hunter_Rifle_LargeOilrig": {
+    "localized_name": "Gerombolan Pemburu Liar Penembak",
+    "description": null
+  },
+  "Hunter_Rifle_MiniOilrig": {
+    "localized_name": "Gerombolan Pemburu Liar Penembak",
+    "description": null
+  },
+  "Hunter_Rifle_Oilrig": {
+    "localized_name": "Gerombolan Pemburu Liar Penembak",
+    "description": null
+  },
+  "Hunter_RocketLauncher": {
+    "localized_name": "Gerombolan Pemburu Liar Elite",
+    "description": null
+  },
+  "Hunter_RocketLauncher_Invader": {
+    "localized_name": "Gerombolan Pemburu Liar Elite",
+    "description": null
+  },
+  "Hunter_RocketLauncher_LargeOilrig": {
+    "localized_name": "Gerombolan Pemburu Liar Elite",
+    "description": null
+  },
+  "Hunter_RocketLauncher_MiniOilrig": {
+    "localized_name": "Gerombolan Pemburu Liar Elite",
+    "description": null
+  },
+  "Hunter_RocketLauncher_Oilrig": {
+    "localized_name": "Gerombolan Pemburu Liar Elite",
+    "description": null
+  },
+  "Hunter_RocketLauncher_Oilrig_LD": {
+    "localized_name": "Gerombolan Pemburu Liar Elite",
+    "description": null
+  },
+  "Hunter_Shotgun": {
+    "localized_name": "Gerombolan Pemburu Liar Pemburu",
+    "description": null
+  },
+  "Hunter_Shotgun_Invader": {
+    "localized_name": "Gerombolan Pemburu Liar Pemburu",
+    "description": null
+  },
+  "Hunter_Shotgun_LargeOilrig": {
+    "localized_name": "Gerombolan Pemburu Liar Pemburu",
+    "description": null
+  },
+  "Hunter_Shotgun_MiniOilrig": {
+    "localized_name": "Gerombolan Pemburu Liar Pemburu",
+    "description": null
+  },
+  "Hunter_Shotgun_Oilrig": {
+    "localized_name": "Gerombolan Pemburu Liar Pemburu",
+    "description": null
+  },
+  "IceCrocodile": {
+    "localized_name": "Munchill",
+    "description": "Bagian dalam mulutnya sangat dingin, dan saat ditutup bisa menjadi seperti kulkas. Bagian khusus yang terdapat pada air liurnya juga mencegah pembusukan makanan. Sebenarnya bisa saja dipakai sebagai tempat penyimpanan makanan manusia, tetapi demi kebersihan, dia sebaiknya tetap menutup mulut."
+  },
+  "IceDeer": {
+    "localized_name": "Reindrix",
+    "description": "Tanduk biru transparannya akan bersinar di titik nol mutlak. Semua yang menyentuh mereka dengan tangan kosong akan membeku seketika dan hancur berkeping-keping hingga nyawa melayang."
+  },
+  "IceFox": {
+    "localized_name": "Foxcicle",
+    "description": "Di malam hari saat aurora terlihat, mereka melihat ke langit dan mulai menyanyikan lolongan yang indah. Namun, mereka diserang musuh karenanya."
+  },
+  "IceHorse": {
+    "localized_name": "Frostallion",
+    "description": "Pal ini merupakan dewa pelindung Pulau Palpagos sebagai pemanggil musim dingin. Dahulu kala, ketika bencana melanda daratan ia menembus langit, membangkitkan musim dingin abadi, dan meyegelnya."
+  },
+  "IceHorse_Dark": {
+    "localized_name": "Frostallion Noct",
+    "description": "Pal ini merupakan dewa pelindung Pulau Palpagos sebagai pemanggil malam. Dahulu kala, ketika bencana melanda daratan ia menembus langit, membangkitkan kegelapan abadi, dan meyegelnya."
+  },
+  "IceNarwhal": {
+    "localized_name": "Whalaska",
+    "description": "Saat dia sedang tidur, Pal akan datang untuk beristirahat di atasnya karena mengira dia adalah es yang terapung. Dia tidak akan memaksa mereka turun saat dia terbangun karena kepribadiannya yang lembut, tapi dia tetap merasa stres karena ruang pribadinya terganggu."
+  },
+  "IceNarwhal_Fire": {
+    "localized_name": "Whalaska Ignis",
+    "description": "Agar tidak dikira sebagai bongkahan es untuk kedua kalinya, ia berubah menjadi merah dengan tekadnya yang kuat. Tapi ini tidak berpengaruh bagi Pal yang tidak bisa melihat warna merah, jadi usahanya sia-sia dan ruang pribadinya tetap terganggu."
+  },
+  "IceSeal": {
+    "localized_name": "Polapup",
+    "description": "Yang paling cepat meluncur di atas salju, yang paling hebat. Kadang ada yang terlalu semangat melompat, lalu tiba-tiba jatuh dari langit, dan ini banyak terjadi pada saat perebutan posisi bos. Kadang cerah, kadang Polapup."
+  },
+  "IceWitch": {
+    "localized_name": "Icelyn",
+    "description": "Tubuhnya mulai meleleh saat panas, tetapi mau bagaimana lagi, dia suka berjemur. Tubuh dan semangatnya mulai meleleh, tetapi mau bagaimana lagi, dia suka pemandian air panas. Kalaupun harus mati, ia ingin meleleh di pemandian air panas terbuka dengan cuaca yang cerah."
+  },
+  "Inspector": {
+    "localized_name": "Pedagang Pal",
+    "description": null
+  },
+  "JellyfishFairy": {
+    "localized_name": "Jelliette",
+    "description": "Pal yang bentuknya sangat mirip Jellroy. Sering pergi bersama teman-temannya, dan saat jadwal bermainnya bertabrakan, ia meminta Jellroy yang akrab dengannya untuk pergi menggantikannya. Dia membayarnya dengan kencan 1 kali."
+  },
+  "JellyfishGhost": {
+    "localized_name": "Jellroy",
+    "description": "Pal yang bentuknya sangat mirip Jelliette. Sebagai ganti Jelliette yang tidak bisa memenuhi janjinya, ia sering muncul sebagai pengganti. Aktingnya sangat lihai, tidak ada satu pun yang menyadarinya."
+  },
+  "JetDragon": {
+    "localized_name": "Jetragon",
+    "description": "Melindungi Pulau Palpagos dari atas langit. Ketika datang bencana kembali, bumi terbelah dan langit terbakar, mereka akan menghancurkannya dengan kilat penghancur total."
+  },
+  "Kelpie": {
+    "localized_name": "Kelpsea",
+    "description": "Perilakunya berbeda-beda sesuai kualitas air tempatnya dilahirkan. Kelpsea yang lahir di lokasi air yang kotor sifatnya buruk dan menjadi berandalan."
+  },
+  "Kelpie_Fire": {
+    "localized_name": "Kelpsea Ignis",
+    "description": "Perilakunya berbeda-beda sesuai temperatur air tempatnya dilahirkan. Kelpsea yang lahir di lokasi air hangat punya sifat yang membara dan penuh motivasi."
+  },
+  "KendoFrog": {
+    "localized_name": "Croajiro",
+    "description": "Mereka yang melakukan kesalahan besar di kawanannya dipaksa untuk bunuh diri. Dengan menusuk kantung suara mereka yang mengembang dengan dahan pohon, mereka terhempas ke atmosfer dan pulang ke alam baka."
+  },
+  "KendoFrog_Dark": {
+    "localized_name": "Croajiro Noct",
+    "description": "Para Croajiro yang melepas kehormatannya berkumpul dan bercabang. Mangsa yang diincar akan diburu sampai dapat dengan cara apa pun. Jika di tengah malam kita bertemu dengan kawanan Croajiro Noct, kitalah yang pergi ke alam baka."
+  },
+  "KingAlpaca": {
+    "localized_name": "Kingpaca",
+    "description": "Mereka dilayani oleh Melpaca, dan pada duel antar Kingpaca, mereka menawarkan pengikutnya sebagai taruhan. Melpaca yang tertinggal sendirian lah yang akan kalah."
+  },
+  "KingAlpaca_Ice": {
+    "localized_name": "Kingpaca Cryst",
+    "description": "Dengan sikap dinginnya, mereka kesulitan mengekspresikan emosinya. Individu yang sendirian terlihat sebagai individu yang ceroboh dan menyedihkan bagi Melpaca."
+  },
+  "KingBahamut": {
+    "localized_name": "Blazamut",
+    "description": "Legenda mengatakan mereka lahir bersamaan dengan erupsi vulkanik. Ada organisasi mencurigakan yang menyatakan bahwa daratan ini berada di punggung Blazamut raksasa."
+  },
+  "KingBahamut_Dragon": {
+    "localized_name": "Blazamut Ryu",
+    "description": "Dahulu kala, mereka muncul dari dalam bumi. Dengan kobaran api yang tiada henti dan tanpa belas kasihan membakar seluruh pulau sampai tidak ada yang tersisa. Ini dikenal dengan |Api Abadi|."
+  },
+  "Kirin": {
+    "localized_name": "Univolt",
+    "description": "Dulu, karena diyakini sebagai utusan dewa petir, ia tidak diburu manusia. Tapi setelah ada yang melihat salah satu dari mereka mati tersambar petir, kepercayaan manusia kepada mereka pun hilang dan ia menjadi kuda pekerja."
+  },
+  "Kitsunebi": {
+    "localized_name": "Foxparks",
+    "description": "Pada saat lahir, mereka tidak pandai mengendalikan api dan bahkan cenderung menghirup api sendiri dan tersedak. Bersin Foxparks merupakan penyebab kebakaran hutan."
+  },
+  "Kitsunebi_Ice": {
+    "localized_name": "Foxparks Cryst",
+    "description": "Mereka tidak pandai mengendalikan udara dingin sejak lahir dan cenderung menghirup udara dingin dan tersedak. Jika terkena flu, ingusnya membeku, membuatnya panik kesulitan bernafas."
+  },
+  "LavaGirl": {
+    "localized_name": "Flambelle",
+    "description": "Sebagai ganti air mata, magma mengucur ketika ia mulai menangis. Magma yang keluar kembali diserap oleh tubuh, menjadikannya terus semakin panas. Dia jadi semakin kuat dengan semakin banyak tangisannya."
+  },
+  "LazyCatfish": {
+    "localized_name": "Dumud",
+    "description": "Pada waktu terlalu santai, reaksinya jadi melambat. Meski ada 28 luka tusuk pun ia baru akan sadar di keesokan paginya dan mati."
+  },
+  "LazyCatfish_Gold": {
+    "localized_name": "Dumud Gild",
+    "description": "Permukaan tubuhnya memantulkan banyak cahaya. Tapi kecepatan refleksnya lebih lambat dari Dumud!"
+  },
+  "LazyDragon": {
+    "localized_name": "Relaxaurus",
+    "description": "Berbeda dari penampilannya yang membosankan, mereka cukup ganas. Semua yang terlihat di matanya dikenali sebagai umpan dan siap memangsa apa pun."
+  },
+  "LazyDragon_Electric": {
+    "localized_name": "Relaxaurus Lux",
+    "description": "Tiba-tiba Relaxaurus memikirkan sesuatu. Mungkin sekarang adalah waktunya untuk berubah. Saat itu juga, sengatan listrik mengalir ke seluruh tubuhnya!"
+  },
+  "LeafMomonga": {
+    "localized_name": "Herbil",
+    "description": "Semua yang sudah rusak dapat diperbaiki dengan cara dipukul. Bagi manusia, kekuatan pukulan Herbil sangat cocok, jantung yang berhenti berdetak dapat digerakkan hanya dengan memukulnya."
+  },
+  "LeafPrincess": {
+    "localized_name": "Lullu",
+    "description": "Begitu musim semi, mereka akan menunggangi angin dan serbuknya menari di sepanjang pulau. Alergi serbuk bunga Flopie terjadi karena Lullu."
+  },
+  "LegendDeer": {
+    "localized_name": "Hartalis",
+    "description": "Semuanya sangat sunyi, tapi anehnya menenangkan. Tidak ada lagi orang lain. Semua orang sudah diselamatkan. Oh Raja Penyelamat, bawa aku ke keheningan tak berujung. - Naskah kuno berakhir di sini."
+  },
+  "LilyQueen": {
+    "localized_name": "Lyleen",
+    "description": "Pal lembut yang penuh cinta. Dia merawat Pal-Pal kecil yang kehilangan induknya. Cara mendisiplinkannya adalah menggunakan SolarBeam sekuat tenaga."
+  },
+  "LilyQueen_Dark": {
+    "localized_name": "Lyleen Noct",
+    "description": "Pal elegan yang penuh keanggunan. Ia menegur siapa saja yang tidak sopan dengan tamparan yang menyakitkan. Terkadang ada juga Pal yang sengaja mengincar hal ini."
+  },
+  "LittleBriarRose": {
+    "localized_name": "Bristla",
+    "description": "Durinya beracun dan berbahaya jika tertusuk. Dia berteman baik dengan Cinnamoth dan wajahnya terlihat ceria hanya ketika dia sedang menghirup nektar Pal ini."
+  },
+  "LizardMan": {
+    "localized_name": "Leezpunk",
+    "description": "Dia menunjukkan obsesi yang tidak biasa akan sikap bergayanya. Dia selalu mencari gaya yang paling keren dan bergaya sepanjang waktu jika diberikan cermin."
+  },
+  "LizardMan_Fire": {
+    "localized_name": "Leezpunk Ignis",
+    "description": "Dia menunjukkan obsesi yang tidak biasa akan sikap bergayanya. Dia akan selalu mencari pose yang paling keren hingga akhir waktu. Pemiliknya yang kena imbasan pamernya sampai-sampai letih dan jenuh."
+  },
+  "LizardMan_Oilrig": {
+    "localized_name": "Leezpunk",
+    "description": null
+  },
+  "Male_Angler01_v01": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Male_Breeder01_v01": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Male_Breeder01_v02": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Male_Breeder01_v03": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Male_Breeder01_v04": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Male_DarkTrader01": {
+    "localized_name": "Pedagang Gelap",
+    "description": null
+  },
+  "Male_DarkTrader02": {
+    "localized_name": "Pedagang Medali",
+    "description": null
+  },
+  "Male_DesertPeople01": {
+    "localized_name": "Penduduk Desa",
+    "description": null
+  },
+  "Male_Kigurumi01_v01": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Male_Ninja01": {
+    "localized_name": "Ninja Kelas Bawah Bunga Bulan",
+    "description": null
+  },
+  "Male_NinjaElite01": {
+    "localized_name": "Ninja Kelas Atas Bunga Bulan",
+    "description": null
+  },
+  "Male_NinjaElite01_Invader": {
+    "localized_name": "Ninja Kelas Atas Bunga Bulan",
+    "description": null
+  },
+  "Male_People02": {
+    "localized_name": "Penduduk Desa",
+    "description": null
+  },
+  "Male_People03": {
+    "localized_name": "Penduduk Desa",
+    "description": null
+  },
+  "Male_Police_old": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Male_Scholar01_v01": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Male_Scholar01_v02": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Male_Scholar01_v03": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Male_Scholar01_v04": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Male_Scientist01_LaserRifle": {
+    "localized_name": "Unit Penelitian Genetika, Tim Eksekutif",
+    "description": null
+  },
+  "Male_Scientist01_LaserRifle_Invader": {
+    "localized_name": "Unit Penelitian Genetika, Tim Eksekutif",
+    "description": null
+  },
+  "Male_Soldier01": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Male_Soldier01_EnemyGroup": {
+    "localized_name": "Tentara Bayaran yang Kuat",
+    "description": null
+  },
+  "Male_Soldier02": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Male_Soldier02_EnemyGroup": {
+    "localized_name": "Tentara Bayaran yang Kuat",
+    "description": null
+  },
+  "Male_Soldier02_Invader": {
+    "localized_name": "Pal Tamer Bersemangat",
+    "description": null
+  },
+  "Male_Soldier03": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Male_Soldier04": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Male_Trader01": {
+    "localized_name": "Penduduk Desa",
+    "description": null
+  },
+  "Male_Trader02": {
+    "localized_name": "Penduduk Desa",
+    "description": null
+  },
+  "Male_Trader03": {
+    "localized_name": "Penduduk Desa",
+    "description": null
+  },
+  "Manticore": {
+    "localized_name": "Blazehowl",
+    "description": "Dia lebih suka daging mentah, tetapi malah selalu makan daging bakar. Karena cakarnya yang panas membara digunakan sebagai senjata dia tidak sadar mangsanya telah terbakar."
+  },
+  "Manticore_Dark": {
+    "localized_name": "Blazehowl Noct",
+    "description": "Dia lebih suka daging biasa, tetapi malah selalu makan daging yang tercemar. Karena cakar maut kegelapannya digunakan sebagai senjata dia tidak sadar mangsanya terkena kutukan."
+  },
+  "MimicDog": {
+    "localized_name": "Mimog",
+    "description": "Di kerajaan yang dulunya ada di pulau ini terdapat tradisi untuk memberikan penghargaan kepada orang yang mati paling bodoh di tahun itu. Alasan kematian pertama yang layak diingat adalah |tidak menyadari adanya Mimog, membuka petinya, dan digigit sampai mati.|"
+  },
+  "MobuCitizen": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "MobuCitizen_Male": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "MobuVillager": {
+    "localized_name": "Penduduk Desa",
+    "description": null
+  },
+  "Monkey": {
+    "localized_name": "Tanzee",
+    "description": "Dulu, mereka menggunakan benda panjang seperti batang pohon sebagai senjata. Setelah berinteraksi dengan manusia, mereka tidak lagi menggunakan benda tersebut. Ternyata senapan jauh lebih efektif."
+  },
+  "MoonQueen": {
+    "localized_name": "Selyne",
+    "description": "Objek menyerupai bulan yang melayang di punggungnya dikatakan semakin membentuk lingkaran seiring berlalunya tiap generasi. Tidak ada yang tahu apa yang akan terjadi saat bulannya penuh."
+  },
+  "MopBaby": {
+    "localized_name": "Swee",
+    "description": "Mereka merangkak di tanah dan memakan mikroorganisme kecil. Segala sesuatu yang tidak bergizi akan dibuang setelah beberapa saat. Jika digunakan sebagai pel untuk bersih-bersih jadi saling menguntungkan."
+  },
+  "MopKing": {
+    "localized_name": "Sweepa",
+    "description": "Selama hibernasi, banyak Swee yang bersembunyi di balik bulu lebatnya. Rekor terbanyak adalah 101 ekor."
+  },
+  "MushroomDragon": {
+    "localized_name": "Shroomer",
+    "description": "Dengan menghirup banyak spora dia berada dalam keadaan trans. Terkadang, Shroomer yang tidak bergerak bukan karena sedang menirukan sebuah jamur, tetapi sedang teler karena sporanya sendiri."
+  },
+  "MushroomDragon_Dark": {
+    "localized_name": "Shroomer Noct",
+    "description": "Banyaknya spora yang dihasilkannya menghalangi sinar matahari. Terkadang, Shroomer Noct yang tidak bergerak bukan karena sedang menirukan sebuah jamur, tetapi karena tidak bisa melihat apa pun karena sporanya sendiri."
+  },
+  "Mutant": {
+    "localized_name": "Lunaris",
+    "description": "Dia bisa mengendalikan siapa pun yang tidak sengaja menatap matanya. Kebanyakan dari mereka yang mengikuti Lunaris hanya tertipu ilusi bahwa mereka yang telah menaklukkannya."
+  },
+  "MysteryMask": {
+    "localized_name": "Omascul",
+    "description": "Katanya bagian yang menyerupai topeng itu bukanlah wajahnya. Dia seperti ada di depan mata, tapi sebenarnya tidak. Dia selalu memperhatikan dari suatu tempat. Alihkan pandanganmu dan ia akan semakin mendekat."
+  },
+  "NPC_FoodRequire_1": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "NPC_PalDisplay_1": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "NaughtyCat": {
+    "localized_name": "Grintale",
+    "description": "Mata pendeteksi yang dimiliki Grintale menyala begitu ada yang memasuki teritorinya. Ini bukanlah perumpamaan, matanya benar-benar menyala."
+  },
+  "NegativeKoala": {
+    "localized_name": "Depresso",
+    "description": "Dia hanya memiliki sedikit teman karena tatapannya, padahal hatinya baik. Ada yang menyaksikan sosoknya berbagi makanan kepada Vixy yang tersesat dari kawanan."
+  },
+  "NegativeOctopus": {
+    "localized_name": "Killamari",
+    "description": "Dia melilitkan dirinya ke leher musuh dan menghisap isinya. Pal mumi jarang sekali terlihat, tetapi sebenarnya mereka merupakan korban dari Killamari."
+  },
+  "NegativeOctopus_Neutral": {
+    "localized_name": "Killamari Primo",
+    "description": "Menggigit leher lawan dan menghisap habis darahnya. Jika sesama Killamari Primo saling menggigit, mereka akan saling menghisap dengan serius dan tidak akan terpisahkan hingga ada yang membusuk."
+  },
+  "NightBlueHorse": {
+    "localized_name": "Starryon",
+    "description": "Kebanggaannya adalah surainya yang cantik dan terurai. Jika ada bulunya yang bercabang, dia sangat malu hingga tidak bisa fokus berlari. Karena listrik statis membuat bulu kusut, dia sama sekali tidak mau berdekatan dengan Azurmane."
+  },
+  "NightFox": {
+    "localized_name": "Nox",
+    "description": "Jika kamu menemukan bulu Nox saat jalan-jalan di malam hari jangan diambil dan segera pergi. Itu merupakan tiket perjalanan satu arah ke malam yang tidak akan berakhir."
+  },
+  "NightLady": {
+    "localized_name": "Bellanoir",
+    "description": "Keberadaannya tidak terlihat, hanya diam mengamati dunia. Di suatu waktu, dia berharap jadi bisa terlihat. Hasratnya yang memusuhi dunia luar mendefinisikannya sebagai wanita gila."
+  },
+  "NightLady_Dark": {
+    "localized_name": "Bellanoir Libero",
+    "description": "Dengan hasratnya yang meluap, dia segera kewalahan. Dia mendambakan dirinya untuk menatap dirinya sendiri. Para saudarinya yang menatap, yang telah memusuhi dunia luar, terlempar ke jurang dan akhirnya menutup mata mereka."
+  },
+  "Ninja01_Tower": {
+    "localized_name": "Ninja Kelas Bawah Bunga Bulan",
+    "description": null
+  },
+  "NinjaElite01_Tower": {
+    "localized_name": "Ninja Kelas Atas Bunga Bulan",
+    "description": null
+  },
+  "NinjaElite_Bowgun": {
+    "localized_name": "Ninja Kelas Atas Bunga Bulan",
+    "description": null
+  },
+  "NinjaElite_NoEquip": {
+    "localized_name": "Ninja Kelas Atas Bunga Bulan",
+    "description": null
+  },
+  "Ninja_Bowgun": {
+    "localized_name": "Ninja Kelas Bawah Bunga Bulan",
+    "description": null
+  },
+  "Ninja_NoEquip": {
+    "localized_name": "Ninja Kelas Bawah Bunga Bulan",
+    "description": null
+  },
+  "Ninja_Prisoner": {
+    "localized_name": "Ninja Kelas Bawah Bunga Bulan",
+    "description": null
+  },
+  "OctopusGirl": {
+    "localized_name": "Gloopie",
+    "description": "Kalau kamu tidur bersamanya, periksa jadwalmu untuk hari esok. Bekas hisapannya tampak seperti bekas ciuman, jadi kalau kamu terhisap saat sedang tidur, itu bisa menimbulkan kesalahpahaman."
+  },
+  "PREDATOR_AmaterasuWolf": {
+    "localized_name": "Kitsun",
+    "description": "Memiliki perasaan yang sangat sensitif, dia akan bersembunyi ke dalam gua jika ada hal yang tidak disukainya. Orang-orang zaman dahulu beranggapan dihindari oleh Kitsun merupakan suatu pertanda buruk."
+  },
+  "PREDATOR_Baphomet_Dark": {
+    "localized_name": "Incineram Noct",
+    "description": "Selalu menarget Pal anak-anak dan membawanya pulang ke teritorinya. Tidak sulit membayangkan bagaimana putus asanya induk Pal yang kehilangan anak-anaknya."
+  },
+  "PREDATOR_BirdDragon": {
+    "localized_name": "Vanwyrm",
+    "description": "Konon, peluit yang terbuat dari kerangka luar Vanwyrm dapat terdengar hingga melintasi seribu gunung. Di pertempuran zaman dulu, peluit ini digunakan sebagai sinyal komando penyerangan."
+  },
+  "PREDATOR_CandleGhost": {
+    "localized_name": "Sootseer",
+    "description": "Dahulu dipercaya bahwa semakin mendekati akhir dunia maka kobaran apinya akan semakin lemah. Para pendukung kiamat berulang kali bersuka cita saat apinya melemah, tetapi pada akhirnya, itu hanyalah ulah dari Sootseer. Setidaknya sampai sekarang."
+  },
+  "PREDATOR_DrillGame": {
+    "localized_name": "Digtoise",
+    "description": "Konon ada kisah tentang |BorDigtoise|. Ini adalah kisah moral tentang Digtoise yang memiliki tempurung dan bor terkuat dan selalu memikirkan paradoks cerita anaka-anak."
+  },
+  "PREDATOR_FairyDragon": {
+    "localized_name": "Elphidran",
+    "description": "Kepribadiannya lugu seperti penampilannya. Mungkin karena ini lah mereka tidak bisa membedakan mana yang baik dan yang buruk sehingga terkadang dimanfaatkan oleh manusia yang berniat jahat."
+  },
+  "PREDATOR_FeatherOstrich": {
+    "localized_name": "Dazemu",
+    "description": "Maju selangkah dan lupakan keraguanmu, maju dua langkah dan lupakan kekhawatiranmu, maju tiga langkah dan lupakan ketakutanmu, hadapi semua musuhmu."
+  },
+  "PREDATOR_FlowerDinosaur": {
+    "localized_name": "Dinossom",
+    "description": "Sekali marah, mereka jadi tak terkendali dan mengamuk seperti kesetanan. Peribahasa |menginjak ekor Dinossom| bermakna membuat seseorang marah."
+  },
+  "PREDATOR_Garm": {
+    "localized_name": "Direhowl",
+    "description": "Hubungan mereka dengan manusia sudah lama memudar, akan tetapi dahulu kala sistem berburu Direhowl berakar pada perburuan yang dilakukan bersama manusia."
+  },
+  "PREDATOR_GhostBeast": {
+    "localized_name": "Maraith",
+    "description": "Mereka mengeluarkan bau khusus yang dikeluarkan makhluk hidup saat mendekati ajal. Jika seekor Maraith menyukaimu, mungkin itulah sebabnya."
+  },
+  "PREDATOR_GoldenHorse": {
+    "localized_name": "Gildane",
+    "description": "Selama masa emas alkimia di pulau, bulu emasnya yang terus bersinar terkenal sebagai katalis untuk menghasilkan emas. Pada waktunya terungkap penemuan luar biasa. Warna emas yang sama juga bisa didapatkan dengan mengolah surainya."
+  },
+  "PREDATOR_Gorilla": {
+    "localized_name": "Gorirat",
+    "description": "Mereka menghentak-hentakkan tanah sesuai irama untuk berkomunikasi dengan teman-temannya. Arti dari tiap irama berbeda-beda tiap kawanan, tetapi perbedaannya masih belum jelas sampai sekarang."
+  },
+  "PREDATOR_GrassPanda": {
+    "localized_name": "Mossanda",
+    "description": "Seekor Pal dengan kekuatan yang tak terbayangkan luar biasanya. Menurut hasil pengamatan dalam satu eksperimen, mereka dapat dengan mudah menyobek 3000 lembar kertas sekaligus. Syukurlah, mereka tidak diciptakan sebagai karnivora."
+  },
+  "PREDATOR_GrimGirl": {
+    "localized_name": "Splatterina",
+    "description": "Memiliki keinginan tak terkendali untuk menyobek mangsanya. Tiap individu memiliki urutannya sendiri untuk memisahkan tubuh lawannya. Jika kamu tertangkap Splatterina, berdoalah supaya kepalamu yang pertama diambil."
+  },
+  "PREDATOR_HadesBird_Electric": {
+    "localized_name": "Helzephyr Lux",
+    "description": "Biasa disebut sebagai petir dari neraka. Mereka dianggap sebagai subspesies dari Helzephyr, tetapi ada teori yang mengatakan Helzephyr Lux yang terkena petir dari neraka akan berubah menjadi Helzephyr."
+  },
+  "PREDATOR_Horus_Water": {
+    "localized_name": "Faleris Aqua",
+    "description": "Saat menemukan kawanan mangsanya mereka menyapu seluruh area dengan aliran air yang dahsyat. Seringnya, mangsanya tersapu bersih sehingga orang-orang jadi bertanya apakah ini bisa disebut berburu."
+  },
+  "PREDATOR_LazyDragon": {
+    "localized_name": "Relaxaurus",
+    "description": "Berbeda dari penampilannya yang membosankan, mereka cukup ganas. Semua yang terlihat di matanya dikenali sebagai umpan dan siap memangsa apa pun."
+  },
+  "PREDATOR_Manticore_Dark": {
+    "localized_name": "Blazehowl Noct",
+    "description": "Dia lebih suka daging biasa, tetapi malah selalu makan daging yang tercemar. Karena cakar maut kegelapannya digunakan sebagai senjata dia tidak sadar mangsanya terkena kutukan."
+  },
+  "PREDATOR_MushroomDragon": {
+    "localized_name": "Shroomer",
+    "description": "Dengan menghirup banyak spora dia berada dalam keadaan trans. Terkadang, Shroomer yang tidak bergerak bukan karena sedang menirukan sebuah jamur, tetapi sedang teler karena sporanya sendiri."
+  },
+  "PREDATOR_MysteryMask": {
+    "localized_name": "Omascul",
+    "description": "Katanya bagian yang menyerupai topeng itu bukanlah wajahnya. Dia seperti ada di depan mata, tapi sebenarnya tidak. Dia selalu memperhatikan dari suatu tempat. Alihkan pandanganmu dan ia akan semakin mendekat."
+  },
+  "PREDATOR_NightBlueHorse": {
+    "localized_name": "Starryon",
+    "description": "Kebanggaannya adalah surainya yang cantik dan terurai. Jika ada bulunya yang bercabang, dia sangat malu hingga tidak bisa fokus berlari. Karena listrik statis membuat bulu kusut, dia sama sekali tidak mau berdekatan dengan Azurmane."
+  },
+  "PREDATOR_PinkLizard": {
+    "localized_name": "Lovander",
+    "description": "Dia mencari malam penuh cinta sehingga selalu mengejar-ngejar seseorang. Pada awalnya, ia hanya tertarik pada Pal, tetapi beberapa tahun terakhir dia mulai melebarkan jangkauan sihirnya ke manusia."
+  },
+  "PREDATOR_PurpleSpider": {
+    "localized_name": "Tarantriss",
+    "description": "Sangat lengket dan terus menempel. Semakin dilawan malah semakin menempel. Begitulah |kepribadiannya|."
+  },
+  "PREDATOR_RedArmorBird": {
+    "localized_name": "Ragnahawk",
+    "description": "Ia dianggap satu relasi dengan Beakon, padahal tidak. Pada umumnya mereka memakan batu, dan setelah bertahun-tahun tidak hanya paruhnya, tetapi juga kepalanya jadi sekeras batu."
+  },
+  "PREDATOR_Ronin_Dark": {
+    "localized_name": "Bushi Noct",
+    "description": "Setelah mati, tubuhnya berubah menjadi bilah pedang yang akan diambil oleh generasi berikutnya. Jika Bushi yang mewarisi pedang berhati lemah, suara-suara korban yang terpendam di dalamnya akan menghantui dan mengubahnya menjadi Bushi Noct lalu bergentayangan."
+  },
+  "PREDATOR_ScorpionMan": {
+    "localized_name": "Prixter",
+    "description": "Memiliki sekitar 5000 racun. Di antaranya terdapat racun menakutkan yang bisa menyebabkan kematian instan, akan tetapi semuanya terlalu sedikit sehingga tidak berarti apa-apa."
+  },
+  "PREDATOR_SifuDog": {
+    "localized_name": "Dogen",
+    "description": "Dengan tujuan mencapai kondisi tidak egois, ia bermeditasi tanpa henti. Setelah menghadapi keinginan duniawinya, ia berniat makan sampai kenyang. Hari ini dia makan terlalu banyak."
+  },
+  "PREDATOR_ThunderDog": {
+    "localized_name": "Rayhound",
+    "description": "Dengan kecepatan penuh ia bisa dikira sebagai kilat. Saat sesama Rayhound bertabrakan, suara gemuruh menggelegar seperti suara guntur."
+  },
+  "PREDATOR_Umihebi_Fire": {
+    "localized_name": "Jormuntide Ignis",
+    "description": "Legenda mengatakan bahwa Jormuntide Ignis merupakan kesatria yang dilempar ke gunung berapi atas tuduhan palsu, bangkit kembali dan memusnahkan negara ini."
+  },
+  "PREDATOR_VolcanicMonster_Ice": {
+    "localized_name": "Reptyro Cryst",
+    "description": "Darah sedingin es mengalir di seluruh tubuhnya. Jika dipanaskan dengan cepat, darahnya menguap, dan menimbulkan ledakan uap yang dahsyat."
+  },
+  "PREDATOR_Werewolf_Ice": {
+    "localized_name": "Loupmoon Cryst",
+    "description": "Tanduk di kepalanya terbuat dari es misterius yang tidak pernah meleleh. Es serut yang dibuat dari patahan tanduknya disebut-sebut merupakan barang langka, tetapi orang yang memakannya maupun Loupmoon Cryst itu sendiri jadi sakit kepala."
+  },
+  "PREDATOR_WhiteTiger_Ground": {
+    "localized_name": "Cryolinx Terra",
+    "description": "Dengan tangannya yang besar, ia dapat membawa banyak barang dengan mudah. Akan tetapi, jalannya lambat karena kakinya pendek, sehingga matahari pun sering terbenam di tengah perjalanan."
+  },
+  "PREDATOR_Yeti": {
+    "localized_name": "Wumpo",
+    "description": "Para peneliti pernah mencukur bulunya untuk mengetahui bentuk aslinya, tetapi pada akhirnya yang tersisa hanyalah bulu, seperti memang tidak ada apa-apa di sana sejak awal."
+  },
+  "PalDealer": {
+    "localized_name": "Pedagang Pal",
+    "description": null
+  },
+  "PalDealer_Desert": {
+    "localized_name": "Pedagang Pal",
+    "description": null
+  },
+  "PalDealer_Volcano": {
+    "localized_name": "Pedagang Pal",
+    "description": null
+  },
+  "PalPassive_Doctor": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "PalTrader": {
+    "localized_name": "Pedagang Pal",
+    "description": null
+  },
+  "Penguin": {
+    "localized_name": "Pengullet",
+    "description": "Bulu-bulunya telah hilang total, sehinga ia tidak bisa terbang. Akan tetapi, kerinduannya akan langit tak pernah sirna. Konon, ia akan melakukan segala cara agar bisa kembali terbang."
+  },
+  "Penguin_Electric": {
+    "localized_name": "Pengullet Lux",
+    "description": "Sayapnya benar-benar menyusut hingga tidak bisa terbang. Kecintaannya pada langit berubah menjadi rasa iri, dan dia mendapatkan kekuatan listrik untuk menembak jatuh apa pun yang terbang di langit!"
+  },
+  "PinkCat": {
+    "localized_name": "Cattiva",
+    "description": "Sekilas, ia terlihat percaya diri, tapi sebenarnya ia penakut dan lemah. Dipermainkan oleh Cattiva dapat diartikan sebagai penghinaan terbesar."
+  },
+  "PinkLizard": {
+    "localized_name": "Lovander",
+    "description": "Dia mencari malam penuh cinta sehingga selalu mengejar-ngejar seseorang. Pada awalnya, ia hanya tertarik pada Pal, tetapi beberapa tahun terakhir dia mulai melebarkan jangkauan sihirnya ke manusia."
+  },
+  "PinkRabbit": {
+    "localized_name": "Ribbuny",
+    "description": "Dia selalu tersenyum ramah. Terkadang telinganya terlilit karena keusilan Cattiva. Hanya pada waktu itu lah ekspresinya berubah menjadi monster."
+  },
+  "PinkRabbit_Grass": {
+    "localized_name": "Ribbuny Botan",
+    "description": "Dia selalu tersenyum ramah. Terkadang telinganya terlilit karena keusilan Cattiva. Jika begitu, ia akan menghajar mereka sambil tetap tersenyum."
+  },
+  "PlantSlime": {
+    "localized_name": "Gumoss",
+    "description": "Pal aneh dengan tubuh seperti getah pohon. Kekuatannya perlahan menghilang jika tubuhnya tidak tertutupi, sampai akhirnya membusuk."
+  },
+  "PlantSlime_Flower": {
+    "localized_name": "Gumoss",
+    "description": null
+  },
+  "Plesiosaur": {
+    "localized_name": "Braloha",
+    "description": "Benda seperti serbuk sari yang tercampur dalam nafasnya adalah serbuk ajaib yang dapat membuahi tanaman apa saja. Dari sudut pandang Pal yang memiliki tanaman di tubuhnya, dia adalah lawan yang sedikit rumit."
+  },
+  "Police_BowGun": {
+    "localized_name": "Kelompok Penegak Hukum Penembak",
+    "description": null
+  },
+  "Police_Chief": {
+    "localized_name": "Kepala Polisi yang Tidak Bersemangat Bekerja",
+    "description": null
+  },
+  "Police_Handgun": {
+    "localized_name": "Kelompok Penegak Hukum Penjaga",
+    "description": null
+  },
+  "Police_Rifle": {
+    "localized_name": "Kelompok Penegak Hukum Penembak",
+    "description": null
+  },
+  "Police_Rifle_Tower": {
+    "localized_name": "Kelompok Penegak Hukum Penembak",
+    "description": null
+  },
+  "Police_Shield_Tower": {
+    "localized_name": "Kelompok Penegak Hukum Penembak",
+    "description": null
+  },
+  "Police_Shotgun": {
+    "localized_name": "Kelompok Penegak Hukum Elite",
+    "description": null
+  },
+  "Police_Shotgun_Tower": {
+    "localized_name": "Kelompok Penegak Hukum Elite",
+    "description": null
+  },
+  "Police_TreasureGuard_NarrowSite": {
+    "localized_name": "Kelompok Penegak Hukum Penembak",
+    "description": null
+  },
+  "Police_Vigilance": {
+    "localized_name": "Kelompok Penegak Hukum Penembak",
+    "description": null
+  },
+  "Police_old_Prisoner": {
+    "localized_name": "Mantan Kepala Polisi yang Dipenjara",
+    "description": null
+  },
+  "PoseidonOrca": {
+    "localized_name": "Neptilius",
+    "description": "Setelah bencana disegel, ia bertemu dengan kesatria Langit Jatuh. Setelah itu, di dekat pantai, ia muncul di hadapan orang-orang kuat. Pertemuan dengannya adalah takdir."
+  },
+  "PurpleSpider": {
+    "localized_name": "Tarantriss",
+    "description": "Sangat lengket dan terus menempel. Semakin dilawan malah semakin menempel. Begitulah |kepribadiannya|."
+  },
+  "QueenBee": {
+    "localized_name": "Elizabee",
+    "description": "Ratu terpilih yang mengatur para Beegarde. Tidak pernah habis pelayan yang bersedia bekerja sampai mati demi kesenangan melayani ratunya."
+  },
+  "QuestMan": {
+    "localized_name": "-",
+    "description": null
+  },
+  "Quest_Farmer03_PinkCat": {
+    "localized_name": "Cattiva",
+    "description": null
+  },
+  "Quest_Farmer03_SheepBall": {
+    "localized_name": "Lamball",
+    "description": null
+  },
+  "Quest_Hunter_Fat_GatlingGun01": {
+    "localized_name": "Gerombolan Pemburu Liar Penghancur",
+    "description": null
+  },
+  "Quest_Hunter_FlameThrower": {
+    "localized_name": "Gerombolan Pemburu Liar Pembersih",
+    "description": null
+  },
+  "Quest_Hunter_Katana01": {
+    "localized_name": "Gerombolan Pemburu Liar Pendekar Pedang",
+    "description": null
+  },
+  "Quest_Hunter_RocketLauncher01": {
+    "localized_name": "Gerombolan Pemburu Liar Elite",
+    "description": null
+  },
+  "RAID_DarkMechaDragon": {
+    "localized_name": "Xenolord",
+    "description": null
+  },
+  "RAID_DarkMechaDragon_2": {
+    "localized_name": "Xenolord",
+    "description": null
+  },
+  "RAID_KingBahamut_Dragon": {
+    "localized_name": "Blazamut Ryu",
+    "description": null
+  },
+  "RAID_KingBahamut_Dragon_2": {
+    "localized_name": "Blazamut Ryu",
+    "description": null
+  },
+  "RAID_LegendDeer": {
+    "localized_name": "Hartalis",
+    "description": null
+  },
+  "RAID_LegendDeer_2": {
+    "localized_name": "Hartalis",
+    "description": null
+  },
+  "RAID_NightLady": {
+    "localized_name": "Bellanoir",
+    "description": null
+  },
+  "RAID_NightLady_Dark": {
+    "localized_name": "Bellanoir Libero",
+    "description": null
+  },
+  "RAID_NightLady_Dark_2": {
+    "localized_name": "Bellanoir Libero",
+    "description": null
+  },
+  "RAID_YakushimaBoss001_Green": {
+    "localized_name": "Bola Mata Sejati Cthulhu",
+    "description": null
+  },
+  "RAID_YakushimaBoss001_Green_2": {
+    "localized_name": "Bola Mata Sejati Cthulhu",
+    "description": null
+  },
+  "RAID_YakushimaBoss002": {
+    "localized_name": "Penguasa Bulan",
+    "description": null
+  },
+  "RAID_YakushimaBoss002_2": {
+    "localized_name": "Penguasa Bulan",
+    "description": null
+  },
+  "RAID_YakushimaBoss002_Hand_Left": {
+    "localized_name": "Penguasa Bulan",
+    "description": null
+  },
+  "RAID_YakushimaBoss002_Hand_Left_2": {
+    "localized_name": "Penguasa Bulan",
+    "description": null
+  },
+  "RAID_YakushimaBoss002_Hand_Right": {
+    "localized_name": "Penguasa Bulan",
+    "description": null
+  },
+  "RAID_YakushimaBoss002_Hand_Right_2": {
+    "localized_name": "Penguasa Bulan",
+    "description": null
+  },
+  "RAID_YakushimaBoss002_Head": {
+    "localized_name": "Penguasa Bulan",
+    "description": null
+  },
+  "RAID_YakushimaBoss002_Head_2": {
+    "localized_name": "Penguasa Bulan",
+    "description": null
+  },
+  "RaijinDaughter": {
+    "localized_name": "Dazzi",
+    "description": "Sering berlaku baik pada Pal yang sendirian. Begitu Pal tersebut salah paham dengan hubungannya, ia memanfaatkan kesempatan itu untuk menghabisi mereka dengan petir."
+  },
+  "RaijinDaughter_Water": {
+    "localized_name": "Dazzi Noct",
+    "description": "Sering berlaku baik pada Pal yang sendirian, menunggu mereka lemah, lalu menghabisinya dengan petir. Prosesnya seperti itu, akan tetapi ia sering melewatkan momen tersebut dan berakhir tetap berteman."
+  },
+  "RandomEventShop": {
+    "localized_name": "Pedagang Pal",
+    "description": null
+  },
+  "RedArmorBird": {
+    "localized_name": "Ragnahawk",
+    "description": "Ia dianggap satu relasi dengan Beakon, padahal tidak. Pada umumnya mereka memakan batu, dan setelah bertahun-tahun tidak hanya paruhnya, tetapi juga kepalanya jadi sekeras batu."
+  },
+  "Respawn_guide": {
+    "localized_name": "Pal Tamer Ramah",
+    "description": null
+  },
+  "Reward_BossDefeat": {
+    "localized_name": "Penjaga",
+    "description": null
+  },
+  "Reward_Emote_A_01": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Reward_Emote_B_01": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Reward_Emote_C_01": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Reward_Emote_D_01": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Reward_Emote_E_01": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Reward_Emote_F_01": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Reward_Emote_G_01": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Reward_Emote_H_01": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Reward_Emote_I_01": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Reward_Food": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Reward_PalCaptureCount": {
+    "localized_name": "Penjaga",
+    "description": null
+  },
+  "Reward_PalDisplay_A_01": {
+    "localized_name": "Penjaga",
+    "description": null
+  },
+  "Reward_PalDisplay_B_01": {
+    "localized_name": "Penjaga",
+    "description": null
+  },
+  "Reward_PalDisplay_C_01": {
+    "localized_name": "Penjaga",
+    "description": null
+  },
+  "Reward_PalDisplay_D_01": {
+    "localized_name": "Penjaga",
+    "description": null
+  },
+  "Reward_PalDisplay_E_01": {
+    "localized_name": "Penjaga",
+    "description": null
+  },
+  "Reward_PalDisplay_F_01": {
+    "localized_name": "Penjaga",
+    "description": null
+  },
+  "Reward_PalDisplay_G_01": {
+    "localized_name": "Penjaga",
+    "description": null
+  },
+  "Reward_PalDisplay_H_01": {
+    "localized_name": "Penjaga",
+    "description": null
+  },
+  "Reward_PalDisplay_I_01": {
+    "localized_name": "Penjaga",
+    "description": null
+  },
+  "Reward_Paldex": {
+    "localized_name": "Penjaga",
+    "description": null
+  },
+  "Robbery_Leader": {
+    "localized_name": "Pedagang Pal",
+    "description": null
+  },
+  "Robbery_Minion": {
+    "localized_name": "Pedagang Pal",
+    "description": null
+  },
+  "RobinHood": {
+    "localized_name": "Robinquill",
+    "description": "Pal yang sangat mirip dengan manusia yang berburu dan tinggal di hutan. Pada zaman dahulu, mereka diduga telah terpisah dari garis keturunan yang berbeda dari manusia, dan mungkin ini merupakan kunci untuk mengungkap misteri Pal."
+  },
+  "RobinHood_Ground": {
+    "localized_name": "Robinquill Terra",
+    "description": "Pal yang sangat mirip dengan manusia yang berburu dan tinggal di tempat berbatu. Saat ditemukan tulang Robinquill Terra dari reruntuhan pasti di sana juga ditemukan tulang manusia."
+  },
+  "Ronin": {
+    "localized_name": "Bushi",
+    "description": "Setelah mati, tubuhnya berubah menjadi bilah pedang yang akan diambil oleh generasi berikutnya. Jika makhluk selain Bushi mengambil pedang itu, suara-suara korban yang terpendam di dalamnya menghantui hingga mereka jadi gila."
+  },
+  "Ronin_Dark": {
+    "localized_name": "Bushi Noct",
+    "description": "Setelah mati, tubuhnya berubah menjadi bilah pedang yang akan diambil oleh generasi berikutnya. Jika Bushi yang mewarisi pedang berhati lemah, suara-suara korban yang terpendam di dalamnya akan menghantui dan mengubahnya menjadi Bushi Noct lalu bergentayangan."
+  },
+  "SUMMON_DarkAlien": {
+    "localized_name": "Xenovader",
+    "description": null
+  },
+  "SUMMON_DarkAlien_MAX": {
+    "localized_name": "Xenovader",
+    "description": null
+  },
+  "SUMMON_WhiteAlienDragon": {
+    "localized_name": "Xenogard",
+    "description": null
+  },
+  "SUMMON_WhiteAlienDragon_MAX": {
+    "localized_name": "Xenogard",
+    "description": null
+  },
+  "SaintCentaur": {
+    "localized_name": "Paladius",
+    "description": "Dahulu ia pernah menjadi satu dengan Necromus. Meskipun dianggap sebagai makhluk yang membersihkan diri dari emosi negatif, dari balik matanya terlihat sedikit kebencian."
+  },
+  "SakuraSaurus": {
+    "localized_name": "Broncherry",
+    "description": "Baunya berubah drastis sebelum dan sesudah kawin. Ia mengeluarkan aroma yang wangi setelah menemukan partner yang disebut dengan |Aroma Cinta Pertama|."
+  },
+  "SakuraSaurus_Water": {
+    "localized_name": "Broncherry Aqua",
+    "description": "Baunya berubah drastis sebelum dan sesudah kawin. Ia mengeluarkan aroma yang wangi setelah menemukan partner yang disebut dengan |Aroma Kesucian|."
+  },
+  "SalesPerson": {
+    "localized_name": "Pedagang Pengembara",
+    "description": null
+  },
+  "SalesPerson_Desert": {
+    "localized_name": "Pedagang Pengembara",
+    "description": null
+  },
+  "SalesPerson_Desert2": {
+    "localized_name": "Pedagang Pengembara",
+    "description": null
+  },
+  "SalesPerson_Volcano": {
+    "localized_name": "Pedagang Pengembara",
+    "description": null
+  },
+  "SalesPerson_Volcano2": {
+    "localized_name": "Pedagang Pengembara",
+    "description": null
+  },
+  "SalesPerson_Wander": {
+    "localized_name": "Pedagang Pengembara",
+    "description": null
+  },
+  "Scientist_FlameThrower": {
+    "localized_name": "Unit Penelitian Genetika, Tim Eksekutif",
+    "description": null
+  },
+  "Scientist_FlameThrower_Invader": {
+    "localized_name": "Unit Penelitian Genetika, Tim Eksekutif",
+    "description": null
+  },
+  "Scientist_Prisoner": {
+    "localized_name": "Unit Penelitian Genetika, Tim Eksekutif",
+    "description": null
+  },
+  "ScorpionMan": {
+    "localized_name": "Prixter",
+    "description": "Memiliki sekitar 5000 racun. Di antaranya terdapat racun menakutkan yang bisa menyebabkan kematian instan, akan tetapi semuanya terlalu sedikit sehingga tidak berarti apa-apa."
+  },
+  "SecurityDrone": {
+    "localized_name": "Helikopter Bersenjata",
+    "description": null
+  },
+  "Serpent": {
+    "localized_name": "Surfent",
+    "description": "Bentuknya yang hidrodinamis cocok untuk beraktivitas di air. Dia sering ditangkap oleh kelompok pemburu gelap dan digunakan sebagai pengganti papan seluncur."
+  },
+  "Serpent_Ground": {
+    "localized_name": "Surfent Terra",
+    "description": "Bentuknya yang hidrodinamis cocok untuk beraktivitas di atas pasir. Dia sering ditangkap oleh kelompok pemburu gelap dan digunakan sebagai pengganti papan seluncur."
+  },
+  "SharkKid": {
+    "localized_name": "Gobfin",
+    "description": "Di zaman dahulu, ia merupakan Pal akuatik raksasa yang kuat, tetapi dengan berkurangnya mangsa, ia keluar ke permukaan. Karena untuk berjalan memerlukan banyak energi, tubuhnya perlahan mengecil dan sekarang menjadi Pal kecil yang lemah."
+  },
+  "SharkKid_Fire": {
+    "localized_name": "Gobfin Ignis",
+    "description": "Di zaman dahulu, ia merupakan Pal akuatik raksasa yang kuat, tetapi dengan berkurangnya mangsa, ia keluar ke permukaan. Akibat banyaknya kalori yang terbakar untuk berjalan, tiba-tiba ia terbangun dengan kekuatan api!"
+  },
+  "Sheepball": {
+    "localized_name": "Lamball",
+    "description": "Saat berjalan menaiki bukit, secara alami mereka akan berguling. Selain itu, mereka juga jadi pusing dan tidak bisa bergerak sehingga dapat mudah dibunuh. Mereka adalah bagian terbawah dari rantai makanan."
+  },
+  "SifuDog": {
+    "localized_name": "Dogen",
+    "description": "Dengan tujuan mencapai kondisi tidak egois, ia bermeditasi tanpa henti. Setelah menghadapi keinginan duniawinya, ia berniat makan sampai kenyang. Hari ini dia makan terlalu banyak."
+  },
+  "SkyDragon": {
+    "localized_name": "Quivern",
+    "description": "Tidur dengan memeluk Quivern sangat nyaman seperti di surga, tetapi jika tidur dengan Quivern yang punya kebiasaan tidur buruk, kamu akan remuk dan benar-benar pergi ke surga."
+  },
+  "SkyDragon_Grass": {
+    "localized_name": "Quivern Botan",
+    "description": "Jika memeluk Quivern Botan tercium aroma matahari dan padang rumput, besok akan cerah. Jika tercium aroma setengah kering, besok akan hujan deras."
+  },
+  "SmallArmadillo": {
+    "localized_name": "Kikit",
+    "description": "Zaman dahulu, sepak bola Kikit sangat populer. Namun hal itu segera berakhir akibat adanya penolakan dari Aliansi Pelindung Pal. Meskipun begitu, para Kikit sendiri tidak mempermasalahkannya karena hal ini membantu melepaskan tempurung lama mereka."
+  },
+  "SnowPeafowl": {
+    "localized_name": "Frostplume",
+    "description": "Sangat peka terhadap waktu, dan bangun di waktu yang sama setiap pagi. Konon, 1 hari di Pulau Palpagos dibagi menjadi 24 bagian karena jika melihat Frostplume membuka sayapnya dari depan, akan terlihat seperti 24 ruang yang tertutup."
+  },
+  "SnowTigerBeastman": {
+    "localized_name": "Bastigor",
+    "description": "Jika ia melihat benda bulat, ia langsung ingin memukulnya tak terkendali. Bagi SnowTigerBeastMan, hal tersulit setelah bertahan hidup adalah membuat boneka salju."
+  },
+  "SoldierBee": {
+    "localized_name": "Beegarde",
+    "description": "Pelayan yang bersumpah untuk loyal kepada Elizabee. Siapa pun yang membahayakan ratu akan langsung didepak. Terakhir, mereka akan melindungi ratu meskipun harus mengorbankan diri sendiri."
+  },
+  "StuffedShark": {
+    "localized_name": "Finsider",
+    "description": "Kelihatannya seperti ada yang sedang mengintip dari balik kostum, tetapi setelah memasukkan tangan ke dalam, ternyata tidak ada apa-apa. Sebaliknya, tangan jadi masuk lebih jauh ke dalam. Mungkin luar angkasa ada di dalam sini."
+  },
+  "StuffedShark_Fire": {
+    "localized_name": "Finsider Ignis",
+    "description": "Tidak ada apa-apa jika kamu memasukkan tangan ke dalam mulutnya, dan kamu bisa memasukkan tangan sejauh yang kamu inginkan. Peneliti yang merasa ini adalah ruang dimensi lain mengiranya sebagai kantong tidur, lalu mencoba memasukkan seluruh tubuhnya, tapi dia mulai merasa mual, jadi sepertinya itu adalah anggota tubuh."
+  },
+  "Suzaku": {
+    "localized_name": "Suzaku",
+    "description": "Dahulu ia dianggap sebagai tanda datangnya musim kemarau. Setiap kali terjadi kekeringan di tahun sebelumnya, demi panen di masa depan, mereka menjadi target pemberantasan tiada henti."
+  },
+  "Suzaku_Water": {
+    "localized_name": "Suzaku Aqua",
+    "description": "Dahulu ia dianggap sebagai tanda datangnya musim hujan. Setiap kali terjadi bencana banjir di tahun sebelumnya, demi keselamatan di masa depan, mereka menjadi target pemberantasan tiada henti."
+  },
+  "SweetsSheep": {
+    "localized_name": "Woolipop",
+    "description": "Seluruh tubuhnya 18.000 kali lebih manis daripada gula. Karnivora yang terpancing aromanya yang sangat manis sampai memutar matanya dan akhirnya pingsan."
+  },
+  "TentacleTurtle": {
+    "localized_name": "Turtacle",
+    "description": "Dia memiliki cangkang yang kokoh untuk melindungi tubuhnya yang lemah. Tapi dia akan pingsan jika digelitiki karena terlalu melindungi dirinya."
+  },
+  "TentacleTurtle_Ground": {
+    "localized_name": "Turtacle Terra",
+    "description": "Untuk melindungi tubuhnya yang lemah, ia memiliki cangkang yang kuat. Sebagian besar indera perabanya terpusat pada tangan dan cangkang, bahkan jika kamu menyentuh tubuhnya diam-diam, ia tidak akan menyadarinya."
+  },
+  "ThunderBird": {
+    "localized_name": "Beakon",
+    "description": "Ia dianggap satu relasi dengan Ragnahawk, padahal tidak. Ia menukik tajam dan cepat menyambar lawannya dengan paruhnya yang tajam. Gerakannya ini seperti sambaran petir."
+  },
+  "ThunderDog": {
+    "localized_name": "Rayhound",
+    "description": "Dengan kecepatan penuh ia bisa dikira sebagai kilat. Saat sesama Rayhound bertabrakan, suara gemuruh menggelegar seperti suara guntur."
+  },
+  "ThunderDragonMan": {
+    "localized_name": "Orserk",
+    "description": "Dia membakar tubuh lawannya dengan mengalirkan aliran listrik lewat luka terbuka. Perkelahian sesama Orserk berakhir dalam sekejap."
+  },
+  "TropicalOstrich": {
+    "localized_name": "Palumba",
+    "description": "Tarian unik yang menghancurkan ritme lawan. Dalam perang wilayah, yang terlebih dahulu mengikuti ritme lawan adalah yang kalah. Saat pacaran, saat bersantai, apa pun itu, ia terus menari! Sebenarnya apa ya arti tariannya untuk manusia..."
+  },
+  "Umihebi": {
+    "localized_name": "Jormuntide",
+    "description": "Legenda mengatakan bahwa Jormuntide merupakan orang bijak yang dilempar ke pusaran air atas tuduhan palsu, bangkit kembali dan menghancurkan negara ini."
+  },
+  "Umihebi_Fire": {
+    "localized_name": "Jormuntide Ignis",
+    "description": "Legenda mengatakan bahwa Jormuntide Ignis merupakan kesatria yang dilempar ke gunung berapi atas tuduhan palsu, bangkit kembali dan memusnahkan negara ini."
+  },
+  "Viking": {
+    "localized_name": "Penduduk Langit Jatuh",
+    "description": null
+  },
+  "VikingElite_Tower": {
+    "localized_name": "Pasukan Elit Penduduk Langit Jatuh",
+    "description": null
+  },
+  "Viking_Elite": {
+    "localized_name": "Pasukan Elit Penduduk Langit Jatuh",
+    "description": null
+  },
+  "Viking_Elite_Invader": {
+    "localized_name": "Pasukan Elit Penduduk Langit Jatuh",
+    "description": null
+  },
+  "Viking_Prisoner": {
+    "localized_name": "Penduduk Langit Jatuh",
+    "description": null
+  },
+  "Viking_Tower": {
+    "localized_name": "Penduduk Langit Jatuh",
+    "description": null
+  },
+  "VioletFairy": {
+    "localized_name": "Vaelet",
+    "description": "Kastilnya penuh dengan bunga kesukaan raja. Pertempuran besar terjadi dan api menghampiri kastil. Di tengah hal itu, sesosok roh bunga muncul. - dari dongeng |Bunga Sang Raja|"
+  },
+  "VisitingMerchant": {
+    "localized_name": "-",
+    "description": null
+  },
+  "Visitor_Hunter_Rifle": {
+    "localized_name": "Gerombolan Pemburu Liar Pemula",
+    "description": null
+  },
+  "Visitor_Present": {
+    "localized_name": "Pedagang Pengembara",
+    "description": null
+  },
+  "Visitor_Recruiter": {
+    "localized_name": "Perekrut Pal",
+    "description": null
+  },
+  "VolcanicMonster": {
+    "localized_name": "Reptyro",
+    "description": "Darah seperti magma mengalir di seluruh tubuhnya. Jika sejumlah besar air disiram ke atasnya, air tersebut dengan cepat memanas, dan menimbulkan ledakan uap yang dahsyat."
+  },
+  "VolcanicMonster_Ice": {
+    "localized_name": "Reptyro Cryst",
+    "description": "Darah sedingin es mengalir di seluruh tubuhnya. Jika dipanaskan dengan cepat, darahnya menguap, dan menimbulkan ledakan uap yang dahsyat."
+  },
+  "WeaponsDealer": {
+    "localized_name": "-",
+    "description": null
+  },
+  "WeaselDragon": {
+    "localized_name": "Chillet",
+    "description": "Dia bisa menggulung badannya dan berputar-putar dengan kecepatan tinggi. Orang-orang zaman dulu mengikat kantong yang berisi susu pada Chillet yang telah dipelihara untuk membuat mentega dengan putarannya tersebut."
+  },
+  "WeaselDragon_Fire": {
+    "localized_name": "Chillet Ignis",
+    "description": "Dia bisa menggulung badannya dan berputar-putar cepat hingga memercikkan api. Ia juga memercikkan api saat sedang gembira. Jika terlalu banyak dielus, ia akan berapi-api."
+  },
+  "Werewolf": {
+    "localized_name": "Loupmoon",
+    "description": "Tanduk di kepalanya tumbuh di bawah sinar bulan. Dia bukannya membenci matahari, tetapi tanduknya jadi gatal saat terkena sinar matahari."
+  },
+  "Werewolf_Ice": {
+    "localized_name": "Loupmoon Cryst",
+    "description": "Tanduk di kepalanya terbuat dari es misterius yang tidak pernah meleleh. Es serut yang dibuat dari patahan tanduknya disebut-sebut merupakan barang langka, tetapi orang yang memakannya maupun Loupmoon Cryst itu sendiri jadi sakit kepala."
+  },
+  "WhiteAlienDragon": {
+    "localized_name": "Xenogard",
+    "description": "Dia memakan informasi dan mengubahnya jadi energi. Tampaknya mereka mengirimkan informasi ke siapa saja secara rutin. - Halo. Iya, maaf, tadi pesannya termakan duluan sebelum sempat aku baca."
+  },
+  "WhiteDeer": {
+    "localized_name": "Celesdir",
+    "description": "Naskah kuno menyebutnya sebagai |Binatang Penyelamat|. Cahaya yang dipancarkan Celesdir memurnikan segalanya. Secara harfiah, ia melenyapkan sesuatu dari dunia ini tanpa jejak."
+  },
+  "WhiteMoth": {
+    "localized_name": "Sibelyx",
+    "description": "Dia menyukai hujan sehingga ia seringkali berdiam diri di tengah hujan yang turun terus-menerus. Foxparks sering datang untuk berteduh."
+  },
+  "WhiteShieldDragon": {
+    "localized_name": "Silvegis",
+    "description": "Komponen metal di sekitar lehernya memiliki kemampuan magnetik. Jika bagian kaki terlalu berdekatan, ini akan menempel padanya. Saat serpihan logam di lehernya menumpuk, ia dengan enggan membersihkannya, tetapi jadi frustasi karena hal itu tidak mudah dibersihkan."
+  },
+  "WhiteTiger": {
+    "localized_name": "Cryolinx",
+    "description": "Dengan cakarnya yang keras, gunung yang curam pun ia panjat dengan mudah. Akan tetapi, ia kesulitan turun karena kakinya pendek, sehingga sering putus asa di tempat yang tinggi."
+  },
+  "WhiteTiger_Ground": {
+    "localized_name": "Cryolinx Terra",
+    "description": "Dengan tangannya yang besar, ia dapat membawa banyak barang dengan mudah. Akan tetapi, jalannya lambat karena kakinya pendek, sehingga matahari pun sering terbenam di tengah perjalanan."
+  },
+  "WindChimes": {
+    "localized_name": "Hangyu",
+    "description": "Tangan raksasanya dapat merobek apa pun, bahkan besi sekalipun. Sebagai bentuk hukuman yang sangat keji, para kriminal berat diikat dan dicabik-cabik oleh Windchimes di alun-alun."
+  },
+  "WindChimes_Ice": {
+    "localized_name": "Hangyu Cryst",
+    "description": "Tangan raksasanya dapat merobek apa pun, bahkan balok es sekalipun. Sebagai bentuk penghinaan yang sangat keji, para kriminal berat diikat dan rambutnya dicabut helai per helai oleh Windchimes_Ice di alun-alun."
+  },
+  "WingGolem": {
+    "localized_name": "Knocklem",
+    "description": "Dapat dibongkar jadi 215 bagian, tetapi meskipun tubuhnya berserakan ia akan menyatu dan kembali bergerak dengan tenang. Pal yang misterius. Jika bagian tubuhnya tercampur dengan individu lain, identitasnya runtuh, dan terpuruk."
+  },
+  "WingGolem_Oilrig": {
+    "localized_name": "Knocklem",
+    "description": null
+  },
+  "WizardOwl": {
+    "localized_name": "Hoocrates",
+    "description": "Ia kerap tenggelam dalam pikirannya sendiri. Alhasil, ia sulit tidur karena pikirannya tidak bisa berhenti berputar. |Aku berpikir, maka aku ada.|"
+  },
+  "WoolFox": {
+    "localized_name": "Cremis",
+    "description": "Kualitas bulunya lebih bagus daripada SheepBall, tingkah lakunya lebih cocok untuk ternak daripada SheepBall. Meskipun begitu, secara historis mereka selalu dijadikan hewan peliharaan. Keistimewaan makhluk lucu."
+  },
+  "YakushimaBoss001": {
+    "localized_name": "Bola Mata Cthulhu",
+    "description": "[Kolaborasi Terraria] Monster dari dunia lain. Sepertinya bisa dijinakkan di sini."
+  },
+  "YakushimaBoss001_Small": {
+    "localized_name": "Bola Mata Iblis",
+    "description": "[Kolaborasi Terraria] Monster dari dunia lain. Sepertinya bisa dijinakkan di sini."
+  },
+  "YakushimaMonster001": {
+    "localized_name": "Slime Hijau",
+    "description": "[Kolaborasi Terraria] Monster dari dunia lain. Sepertinya bisa dijinakkan di sini."
+  },
+  "YakushimaMonster001_Blue": {
+    "localized_name": "Slime Biru",
+    "description": "[Kolaborasi Terraria] Monster dari dunia lain. Sepertinya bisa dijinakkan di sini."
+  },
+  "YakushimaMonster001_Pink": {
+    "localized_name": "Slime Berkilau",
+    "description": "[Kolaborasi Terraria] Monster dari dunia lain. Sepertinya bisa dijinakkan di sini."
+  },
+  "YakushimaMonster001_Purple": {
+    "localized_name": "Slime Ungu",
+    "description": "[Kolaborasi Terraria] Monster dari dunia lain. Sepertinya bisa dijinakkan di sini."
+  },
+  "YakushimaMonster001_Rainbow": {
+    "localized_name": "Slime Pelangi",
+    "description": "[Kolaborasi Terraria] Monster dari dunia lain. Sepertinya bisa dijinakkan di sini."
+  },
+  "YakushimaMonster001_Red": {
+    "localized_name": "Slime Merah",
+    "description": "[Kolaborasi Terraria] Monster dari dunia lain. Sepertinya bisa dijinakkan di sini."
+  },
+  "YakushimaMonster002": {
+    "localized_name": "Pedang Ajaib",
+    "description": "[Kolaborasi Terraria] Monster dari dunia lain. Sepertinya bisa dijinakkan di sini."
+  },
+  "YakushimaMonster003": {
+    "localized_name": "Kelelawar Gua",
+    "description": "[Kolaborasi Terraria] Monster dari dunia lain. Sepertinya bisa dijinakkan di sini."
+  },
+  "YakushimaMonster003_Purple": {
+    "localized_name": "Kelelawar Bercahaya",
+    "description": "[Kolaborasi Terraria] Monster dari dunia lain. Sepertinya bisa dijinakkan di sini."
+  },
+  "Yamishima_guide1": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Yamishima_guide2": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Yamishima_guide3": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Yamishima_guide4": {
+    "localized_name": "Penduduk Pulau",
+    "description": null
+  },
+  "Yamishima_guide5": {
+    "localized_name": "Penjaga Tentara Bayaran",
+    "description": null
+  },
+  "Yeti": {
+    "localized_name": "Wumpo",
+    "description": "Para peneliti pernah mencukur bulunya untuk mengetahui bentuk aslinya, tetapi pada akhirnya yang tersisa hanyalah bulu, seperti memang tidak ada apa-apa di sana sejak awal."
+  },
+  "Yeti_Grass": {
+    "localized_name": "Wumpo Botan",
+    "description": "Para peneliti pernah memotong rumputnya untuk mengetahui bentuk aslinya, tetapi pada akhirnya yang tersisa hanyalah rumput, seperti memang tidak ada apa-apa di sana sejak awal."
+  }
+}

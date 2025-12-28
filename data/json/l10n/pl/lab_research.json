@@ -1,0 +1,602 @@
+{
+  "Cool1": {
+    "localized_name": "Magazynowanie chłodnicze poziom 1",
+    "description": null
+  },
+  "Cool1_2": {
+    "localized_name": "Zadanie: chłodzenie poziom 1",
+    "description": null
+  },
+  "Cool1_3": {
+    "localized_name": "Zadanie: chłodzenie poziom 2",
+    "description": null
+  },
+  "Cool1_4": {
+    "localized_name": "Zadanie: chłodzenie poziom 3",
+    "description": null
+  },
+  "Cool1_5": {
+    "localized_name": "Zadanie: chłodzenie poziom 4",
+    "description": null
+  },
+  "Cool2": {
+    "localized_name": "Przyspieszenie wykluwania poziom 1",
+    "description": null
+  },
+  "Cool2_2": {
+    "localized_name": "Przyspieszenie wykluwania poziom 2",
+    "description": null
+  },
+  "Cool2_3": {
+    "localized_name": "Przyspieszenie wykluwania poziom 3",
+    "description": null
+  },
+  "Cool2_4": {
+    "localized_name": "Przyspieszenie wykluwania poziom 4",
+    "description": null
+  },
+  "Cool3": {
+    "localized_name": "Badania nad chłodzeniem poziom 1",
+    "description": null
+  },
+  "Cool3_2": {
+    "localized_name": "Badania nad chłodzeniem poziom 2",
+    "description": null
+  },
+  "Cool3_3": {
+    "localized_name": "Wzmocnienie Pali w bazie poziom 1",
+    "description": null
+  },
+  "Cool3_4": {
+    "localized_name": "Wzmocnienie Pali w bazie poziom 2",
+    "description": null
+  },
+  "Cool4": {
+    "localized_name": "Magazynowanie chłodnicze poziom 2",
+    "description": null
+  },
+  "Cool4_2": {
+    "localized_name": "Magazynowanie chłodnicze poziom 3",
+    "description": null
+  },
+  "Cool4_3": {
+    "localized_name": "Magazynowanie chłodnicze poziom 4",
+    "description": null
+  },
+  "Cool5": {
+    "localized_name": "Projekt: bałwan",
+    "description": null
+  },
+  "Deforest1": {
+    "localized_name": "Zadanie: ścinanie drzew poziom 1",
+    "description": null
+  },
+  "Deforest1_2": {
+    "localized_name": "Zadanie: ścinanie drzew poziom 2",
+    "description": null
+  },
+  "Deforest1_3": {
+    "localized_name": "Zadanie: ścinanie drzew poziom 3",
+    "description": null
+  },
+  "Deforest1_4": {
+    "localized_name": "Zadanie: ścinanie drzew poziom 4",
+    "description": null
+  },
+  "Deforest1_5": {
+    "localized_name": "Zadanie: ścinanie drzew poziom 5",
+    "description": null
+  },
+  "Deforest2": {
+    "localized_name": "Skrócona wyprawa poziom 1",
+    "description": null
+  },
+  "Deforest2_2": {
+    "localized_name": "Mistrz wypraw poziom 1",
+    "description": null
+  },
+  "Deforest2_3": {
+    "localized_name": "Skrócona wyprawa poziom 2",
+    "description": null
+  },
+  "Deforest2_4": {
+    "localized_name": "Mistrz wypraw poziom 2",
+    "description": null
+  },
+  "Deforest2_5": {
+    "localized_name": "Skrócona wyprawa poziom 3",
+    "description": null
+  },
+  "Deforest2_6": {
+    "localized_name": "Mistrz wypraw poziom 3",
+    "description": null
+  },
+  "Deforest3": {
+    "localized_name": "Wskazówki badawcze: ścinanie drzew poziom 1",
+    "description": null
+  },
+  "Deforest3_2": {
+    "localized_name": "Wskazówki badawcze: ścinanie drzew poziom 2",
+    "description": null
+  },
+  "Deforest3_3": {
+    "localized_name": "Wzmocnienie Pali w bazie poziom 1",
+    "description": null
+  },
+  "Deforest3_4": {
+    "localized_name": "Wzmocnienie Pali w bazie poziom 2",
+    "description": null
+  },
+  "Deforest4": {
+    "localized_name": "Projekt: pień i siekiera",
+    "description": null
+  },
+  "EmitFlame1": {
+    "localized_name": "Zadanie: rozpalanie ognia poziom 1",
+    "description": null
+  },
+  "EmitFlame1_2": {
+    "localized_name": "Zadanie: rozpalanie ognia poziom 2",
+    "description": null
+  },
+  "EmitFlame1_3": {
+    "localized_name": "Zadanie: rozpalanie ognia poziom 3",
+    "description": null
+  },
+  "EmitFlame1_4": {
+    "localized_name": "Zadanie: rozpalanie ognia poziom 4",
+    "description": null
+  },
+  "EmitFlame1_5": {
+    "localized_name": "Zadanie: rozpalanie ognia poziom 5",
+    "description": null
+  },
+  "EmitFlame2": {
+    "localized_name": "Przyspieszenie wykluwania poziom 1",
+    "description": null
+  },
+  "EmitFlame2_2": {
+    "localized_name": "Przyspieszenie wykluwania poziom 2",
+    "description": null
+  },
+  "EmitFlame2_3": {
+    "localized_name": "Przyspieszenie wykluwania poziom 3",
+    "description": null
+  },
+  "EmitFlame2_4": {
+    "localized_name": "Przyspieszenie wykluwania poziom 4",
+    "description": null
+  },
+  "EmitFlame3": {
+    "localized_name": "Wskazówki badawcze: rozpalanie ognia poziom 1",
+    "description": null
+  },
+  "EmitFlame3_2": {
+    "localized_name": "Wskazówki badawcze: rozpalanie ognia poziom 2",
+    "description": null
+  },
+  "EmitFlame3_3": {
+    "localized_name": "Wzmocnienie Pali w bazie poziom 1",
+    "description": null
+  },
+  "EmitFlame3_4": {
+    "localized_name": "Wzmocnienie Pali w bazie poziom 2",
+    "description": null
+  },
+  "EmitFlame4": {
+    "localized_name": "Masowe gotowanie poziom 1",
+    "description": null
+  },
+  "EmitFlame4_2": {
+    "localized_name": "Technika rafinacji poziom 1",
+    "description": null
+  },
+  "EmitFlame4_3": {
+    "localized_name": "Masowe gotowanie poziom 2",
+    "description": null
+  },
+  "EmitFlame4_4": {
+    "localized_name": "Technika rafinacji poziom 2",
+    "description": null
+  },
+  "EmitFlame5": {
+    "localized_name": "Projekt: palenisko",
+    "description": null
+  },
+  "GenerateEnergy1": {
+    "localized_name": "Zadanie: wytwarzanie energii poziom 1",
+    "description": null
+  },
+  "GenerateEnergy1_2": {
+    "localized_name": "Zadanie: wytwarzanie energii poziom 2",
+    "description": null
+  },
+  "GenerateEnergy1_3": {
+    "localized_name": "Zadanie: wytwarzanie energii poziom 3",
+    "description": null
+  },
+  "GenerateEnergy1_4": {
+    "localized_name": "Zadanie: wytwarzanie energii poziom 4",
+    "description": null
+  },
+  "GenerateEnergy1_5": {
+    "localized_name": "Zadanie: wytwarzanie energii poziom 5",
+    "description": null
+  },
+  "GenerateEnergy2": {
+    "localized_name": "Magazynowanie energii poziom 1",
+    "description": null
+  },
+  "GenerateEnergy2_2": {
+    "localized_name": "Magazynowanie energii poziom 2",
+    "description": null
+  },
+  "GenerateEnergy2_3": {
+    "localized_name": "Magazynowanie energii poziom 3",
+    "description": null
+  },
+  "GenerateEnergy3": {
+    "localized_name": "Wskazówki badawcze: wytwarzanie energii poziom 1",
+    "description": null
+  },
+  "GenerateEnergy3_2": {
+    "localized_name": "Wskazówki badawcze: wytwarzanie energii poziom 2",
+    "description": null
+  },
+  "GenerateEnergy3_3": {
+    "localized_name": "Wzmocnienie Pali w bazie poziom 1",
+    "description": null
+  },
+  "GenerateEnergy3_4": {
+    "localized_name": "Wzmocnienie Pali w bazie poziom 2",
+    "description": null
+  },
+  "GenerateEnergy4": {
+    "localized_name": "Oszczędzanie energii poziom 1",
+    "description": null
+  },
+  "GenerateEnergy4_2": {
+    "localized_name": "Oszczędzanie energii poziom 2",
+    "description": null
+  },
+  "GenerateEnergy4_3": {
+    "localized_name": "Oszczędzanie energii poziom 3",
+    "description": null
+  },
+  "GenerateEnergy5": {
+    "localized_name": "Projekt: słup elektryczny",
+    "description": null
+  },
+  "Handcraft1": {
+    "localized_name": "Prędkość wytwarzania poziom 1",
+    "description": null
+  },
+  "Handcraft1_2": {
+    "localized_name": "Prędkość wytwarzania poziom 2",
+    "description": null
+  },
+  "Handcraft1_3": {
+    "localized_name": "Prędkość wytwarzania poziom 3",
+    "description": null
+  },
+  "Handcraft1_4": {
+    "localized_name": "Prędkość wytwarzania poziom 4",
+    "description": null
+  },
+  "Handcraft1_5": {
+    "localized_name": "Prędkość wytwarzania poziom 5",
+    "description": null
+  },
+  "Handcraft2": {
+    "localized_name": "Oszczędne wytwarzanie zbroi poziom 1",
+    "description": null
+  },
+  "Handcraft2_2": {
+    "localized_name": "Oszczędne wytwarzanie Pal Sprzętu poziom 1",
+    "description": null
+  },
+  "Handcraft2_3": {
+    "localized_name": "Oszczędne wytwarzanie broni poziom 1",
+    "description": null
+  },
+  "Handcraft2_4": {
+    "localized_name": "Oszczędne wytwarzanie zbroi poziom 2",
+    "description": null
+  },
+  "Handcraft2_5": {
+    "localized_name": "Oszczędne wytwarzanie Pal Sprzętu poziom 2",
+    "description": null
+  },
+  "Handcraft2_6": {
+    "localized_name": "Oszczędne wytwarzanie broni poziom 2",
+    "description": null
+  },
+  "Handcraft3": {
+    "localized_name": "Wskazówki badawcze: rzemiosło poziom 1",
+    "description": null
+  },
+  "Handcraft3_2": {
+    "localized_name": "Wskazówki badawcze: rzemiosło poziom 2",
+    "description": null
+  },
+  "Handcraft3_3": {
+    "localized_name": "Wzmocnienie Pali w bazie poziom 1",
+    "description": null
+  },
+  "Handcraft3_4": {
+    "localized_name": "Wzmocnienie Pali w bazie poziom 2",
+    "description": null
+  },
+  "Handcraft4": {
+    "localized_name": "Technika duplikacji sfer poziom 1",
+    "description": null
+  },
+  "Handcraft4_2": {
+    "localized_name": "Technika duplikacji amunicji poziom 1",
+    "description": null
+  },
+  "Handcraft4_3": {
+    "localized_name": "Technika duplikacji sfer poziom 2",
+    "description": null
+  },
+  "Handcraft4_4": {
+    "localized_name": "Technika duplikacji amunicji poziom 2",
+    "description": null
+  },
+  "Handcraft5": {
+    "localized_name": "Projekt: duża skrzynka z narzędziami",
+    "description": null
+  },
+  "Medicine1": {
+    "localized_name": "Zadanie: produkcja leków poziom 1",
+    "description": null
+  },
+  "Medicine1_2": {
+    "localized_name": "Zadanie: produkcja leków poziom 2",
+    "description": null
+  },
+  "Medicine1_3": {
+    "localized_name": "Zadanie: produkcja leków poziom 3",
+    "description": null
+  },
+  "Medicine1_4": {
+    "localized_name": "Zadanie: produkcja leków poziom 4",
+    "description": null
+  },
+  "Medicine1_5": {
+    "localized_name": "Zadanie: produkcja leków poziom 5",
+    "description": null
+  },
+  "Medicine2": {
+    "localized_name": "Badania nad produkcją leków poziom 1",
+    "description": null
+  },
+  "Medicine2_2": {
+    "localized_name": "Badania nad produkcją leków poziom 2",
+    "description": null
+  },
+  "Medicine2_3": {
+    "localized_name": "Wzmocnienie Pali w bazie poziom 1",
+    "description": null
+  },
+  "Medicine2_4": {
+    "localized_name": "Wzmocnienie Pali w bazie poziom 2",
+    "description": null
+  },
+  "Medicine3": {
+    "localized_name": "Oszczędne wytwarzanie leków poziom 1",
+    "description": null
+  },
+  "Medicine3_2": {
+    "localized_name": "Oszczędne wytwarzanie leków poziom 2",
+    "description": null
+  },
+  "Medicine3_3": {
+    "localized_name": "Oszczędne wytwarzanie leków poziom 3",
+    "description": null
+  },
+  "Medicine4": {
+    "localized_name": "Projekt: kocioł czarownicy",
+    "description": null
+  },
+  "Mining1": {
+    "localized_name": "Zadanie: wydobycie poziom 1",
+    "description": null
+  },
+  "Mining1_2": {
+    "localized_name": "Zadanie: wydobycie poziom 2",
+    "description": null
+  },
+  "Mining1_3": {
+    "localized_name": "Zadanie: wydobycie poziom 3",
+    "description": null
+  },
+  "Mining1_4": {
+    "localized_name": "Zadanie: wydobycie poziom 4",
+    "description": null
+  },
+  "Mining1_5": {
+    "localized_name": "Zadanie: wydobycie poziom 5",
+    "description": null
+  },
+  "Mining2": {
+    "localized_name": "Skrócona wyprawa poziom 1",
+    "description": null
+  },
+  "Mining2_2": {
+    "localized_name": "Mistrz wypraw poziom 1",
+    "description": null
+  },
+  "Mining2_3": {
+    "localized_name": "Skrócona wyprawa poziom 2",
+    "description": null
+  },
+  "Mining2_4": {
+    "localized_name": "Mistrz wypraw poziom 2",
+    "description": null
+  },
+  "Mining3": {
+    "localized_name": "Wskazówki badawcze: wydobycie poziom 1",
+    "description": null
+  },
+  "Mining3_2": {
+    "localized_name": "Wskazówki badawcze: wydobycie poziom 2",
+    "description": null
+  },
+  "Mining3_3": {
+    "localized_name": "Wzmocnienie Pali w bazie poziom 1",
+    "description": null
+  },
+  "Mining3_4": {
+    "localized_name": "Wzmocnienie Pali w bazie poziom 2",
+    "description": null
+  },
+  "Mining4": {
+    "localized_name": "Efektywność wydobycia ropy poziom 1",
+    "description": null
+  },
+  "Mining4_2": {
+    "localized_name": "Efektywność wydobycia ropy poziom 2",
+    "description": null
+  },
+  "Mining4_3": {
+    "localized_name": "Efektywność wydobycia ropy poziom 3",
+    "description": null
+  },
+  "Mining5": {
+    "localized_name": "Projekt: wózek górniczy",
+    "description": null
+  },
+  "Seeding1": {
+    "localized_name": "Zadanie: sadzenie poziom 1",
+    "description": null
+  },
+  "Seeding1_2": {
+    "localized_name": "Zadanie: sadzenie poziom 2",
+    "description": null
+  },
+  "Seeding1_3": {
+    "localized_name": "Zadanie: sadzenie poziom 3",
+    "description": null
+  },
+  "Seeding1_4": {
+    "localized_name": "Zadanie: sadzenie poziom 4",
+    "description": null
+  },
+  "Seeding1_5": {
+    "localized_name": "Zadanie: sadzenie poziom 5",
+    "description": null
+  },
+  "Seeding2": {
+    "localized_name": "Wiedza o uprawach poziom 1",
+    "description": null
+  },
+  "Seeding2_2": {
+    "localized_name": "Wiedza o zbiorach poziom 1",
+    "description": null
+  },
+  "Seeding2_3": {
+    "localized_name": "Wiedza o uprawach poziom 2",
+    "description": null
+  },
+  "Seeding2_4": {
+    "localized_name": "Wiedza o uprawach poziom 3",
+    "description": null
+  },
+  "Seeding2_5": {
+    "localized_name": "Wiedza o zbiorach poziom 2",
+    "description": null
+  },
+  "Seeding2_6": {
+    "localized_name": "Wiedza o zbiorach poziom 3",
+    "description": null
+  },
+  "Seeding3": {
+    "localized_name": "Wskazówki badawcze: sadzenie poziom 1",
+    "description": null
+  },
+  "Seeding3_2": {
+    "localized_name": "Wskazówki badawcze: sadzenie poziom 2",
+    "description": null
+  },
+  "Seeding3_3": {
+    "localized_name": "Wzmocnienie Pali w bazie poziom 1",
+    "description": null
+  },
+  "Seeding3_4": {
+    "localized_name": "Wzmocnienie Pali w bazie poziom 2",
+    "description": null
+  },
+  "Seeding4": {
+    "localized_name": "Projekt: klomb kwiatowy",
+    "description": null
+  },
+  "Seeding5": {
+    "localized_name": "Projekt: silos",
+    "description": null
+  },
+  "Watering1": {
+    "localized_name": "Zadanie: podlewanie poziom 1",
+    "description": null
+  },
+  "Watering1_2": {
+    "localized_name": "Zadanie: podlewanie poziom 2",
+    "description": null
+  },
+  "Watering1_3": {
+    "localized_name": "Zadanie: podlewanie poziom 3",
+    "description": null
+  },
+  "Watering1_4": {
+    "localized_name": "Zadanie: podlewanie poziom 4",
+    "description": null
+  },
+  "Watering1_5": {
+    "localized_name": "Zadanie: podlewanie poziom 5",
+    "description": null
+  },
+  "Watering2": {
+    "localized_name": "Wiedza o uprawach poziom 1",
+    "description": null
+  },
+  "Watering2_2": {
+    "localized_name": "Wiedza o zbiorach poziom 1",
+    "description": null
+  },
+  "Watering2_3": {
+    "localized_name": "Wiedza o uprawach poziom 2",
+    "description": null
+  },
+  "Watering2_4": {
+    "localized_name": "Wiedza o zbiorach poziom 2",
+    "description": null
+  },
+  "Watering3": {
+    "localized_name": "Wskazówki badawcze: podlewanie poziom 1",
+    "description": null
+  },
+  "Watering3_2": {
+    "localized_name": "Wskazówki badawcze: podlewanie poziom 2",
+    "description": null
+  },
+  "Watering3_3": {
+    "localized_name": "Wzmocnienie Pali w bazie poziom 1",
+    "description": null
+  },
+  "Watering3_4": {
+    "localized_name": "Wzmocnienie Pali w bazie poziom 2",
+    "description": null
+  },
+  "Watering4": {
+    "localized_name": "Technika kruszenia Paldium poziom 1",
+    "description": null
+  },
+  "Watering4_2": {
+    "localized_name": "Technika kruszenia Paldium poziom 2",
+    "description": null
+  },
+  "Watering5": {
+    "localized_name": "Projekt: fontanna",
+    "description": null
+  }
+}

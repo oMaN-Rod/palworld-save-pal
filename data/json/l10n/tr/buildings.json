@@ -1,0 +1,1622 @@
+{
+  "Altar": {
+    "localized_name": "Çağırma Sunağı",
+    "description": "Üssüne güçlü bir Pal çağırmak için bir Pal'ı resmeden bir Levha sun. Dikkatli ve savaşmaya hazır olmak büyük önem taşımaktadır."
+  },
+  "Andon": {
+    "localized_name": "Japon Tarzı Kâğıt Fener",
+    "description": "Dekoratif kâğıt fener. Japon tarzı binalar için mükemmel."
+  },
+  "Barrel01_Iron": {
+    "localized_name": "Kırmızı Metal Fıçı",
+    "description": "Dekoratif kırmızı metal fıçı."
+  },
+  "Barrel02_Iron": {
+    "localized_name": "Mavi Metal Fıçı",
+    "description": "Dekoratif mavi metal fıçı."
+  },
+  "Barrel03_Iron": {
+    "localized_name": "Yeşil Metal Fıçı",
+    "description": "Dekoratif yeşil metal fıçı."
+  },
+  "Barrel_Wood": {
+    "localized_name": "Tahta Fıçı",
+    "description": "Eşya saklamak için tahta bir fıçı."
+  },
+  "BaseCampBattleDirector": {
+    "localized_name": "Alarm Zili",
+    "description": "Üsteki Pal'ları alarm durumuna sokan bir zil. Pal davranışlarını işgalci düşmanlara saldırmak veya sadece kendi seçeceğin bir işe odaklanmak olarak belirleyebilirsin."
+  },
+  "BaseCampItemDispenser": {
+    "localized_name": "Eşya Geri Alma Makinesi",
+    "description": "Üsteki tüm sandıklarda bulunan eşyalara özgürce erişmeni sağlayan bir cihaz."
+  },
+  "BaseCampWorkHard": {
+    "localized_name": "İzleme Kürsüsü",
+    "description": "Pal'larına bir üsteki çeşitli işlerde çalışmalarını emret. Belirli türlerden işlere izin verebilir veya bazı işleri yasaklayabilirsin."
+  },
+  "BaseCampWorkerExtraStation": {
+    "localized_name": "Palbox Kontrol Terminali",
+    "description": "Pal kutusunu uzaktan kontrol edebilen cihaz. Pal’ı çıkarmak istediğin yere yerleştirip, özgürce üs kurmaya devam et!"
+  },
+  "BathTub_Stone": {
+    "localized_name": "Antika Küvet",
+    "description": "Dekoratif antika küvet."
+  },
+  "Believer_Banner": {
+    "localized_name": "Hür Pal İttifakı Dikey Flaması",
+    "description": "Dekoratif Hür Pal İttikafı dikey flaması."
+  },
+  "Believer_Flag": {
+    "localized_name": "Hür Pal İttifakı Örgüt Bayrağı",
+    "description": "Dekoratif Hür Pal İttikafı örgüt bayrağı."
+  },
+  "Bench_Wood": {
+    "localized_name": "Tahta Sıra",
+    "description": "Dekoratif tahta sıra."
+  },
+  "BlastFurnace": {
+    "localized_name": "İlkel Ocak",
+    "description": "Külçe saflaştırma işlemlerine olanak tanır. Kalitesi oldukça yetersizdir ve işleme süresi uzundur. Ateş yakmak için bir Ateş Pal'ı gerekir."
+  },
+  "BlastFurnace2": {
+    "localized_name": "Geliştirilmiş Ocak",
+    "description": "Saf Külçe saflaştırma işlemlerine olanak tanır. Kalitesi daha iyidir ancak işleme süresi hâlâ yeterince kısa değildir. Ateş yakmak için bir Ateş Pal'ı gerekir."
+  },
+  "BlastFurnace3": {
+    "localized_name": "Elektrikli Ocak",
+    "description": "Pal Metali Külçe saflaştırma işlemlerine olanak tanır. Elektrik olmadan çalışmaz; ancak çalıştığında, işleme süresi daha kısadır. Ateş yakmak için bir Ateş Pal'ı gerekir."
+  },
+  "BlastFurnace4": {
+    "localized_name": "Devasa Ocak",
+    "description": "Heksolit saflaştırma işlemlerine olanak tanır. Artan boyutu sayesinde birden fazla Pal eritme işlerinde birlikte çalışabilir. Ateş yakmak için bir Ateş Pal'ı gerekir."
+  },
+  "Bonsai": {
+    "localized_name": "Bonsai",
+    "description": "Dekoratif bonsai. Japon tarzı binalar için mükemmel."
+  },
+  "Box01_Iron": {
+    "localized_name": "Küçük Kasa",
+    "description": "Eşya saklamak için küçük bir kasa."
+  },
+  "Box01_Stone": {
+    "localized_name": "Antika Örgü Sepet",
+    "description": "Dekoratif antika örgü sepet."
+  },
+  "Box02_Iron": {
+    "localized_name": "Kumaş Kaplı Kasa",
+    "description": "Eşya saklamak için kumaş kaplı bir kasa."
+  },
+  "Box_Wood": {
+    "localized_name": "Tahta Kutu",
+    "description": "Eşya saklamak için tahta bir kutu."
+  },
+  "BreedFarm": {
+    "localized_name": "Üretim Çiftliği",
+    "description": "Yumurtalar üretmek için bir erkek ve bir dişi Pal ata. Üretim için bu tesise Pasta koyman gerekir."
+  },
+  "BuildableGoddessStatue": {
+    "localized_name": "Güç Heykeli",
+    "description": "Palpagos Adası'ndaki efsanelere konu olmuş bir heykel. Tuhaf güçler elde etmek için heykele Lifmunk Figürü sun."
+  },
+  "Byobu": {
+    "localized_name": "Katlanır Paravan",
+    "description": "Dekoratif katlanır paravan. Japon tarzı binalar için mükemmel."
+  },
+  "CableCoil01_Iron": {
+    "localized_name": "Kablo Makarası",
+    "description": "Dekoratif kablo makarası."
+  },
+  "CampFire": {
+    "localized_name": "Kamp Ateşi",
+    "description": "Yemek pişirmek için gereklidir. Sadece basit gıda malzemelerini pişirmek için kullanılabilir. Ateş yakmak için bir Ateş Pal'ı gerekir."
+  },
+  "CandleStand": {
+    "localized_name": "Görkemli Şamdan",
+    "description": "Ebedi alevin yoldaşlarının tapındığı ateşle yakilmış heybetli şamdan. Yere yerleştirilebilen bir ışık kaynağıdır. Alev Pal’ının ateşi yakması gerekmektedir."
+  },
+  "Cauldron": {
+    "localized_name": "Cadı Kazanı",
+    "description": "İlaç üretme hızını artırmak için üsse yerleştir. Birden fazla yerleştirmenin ilave etkisi olmaz."
+  },
+  "CeilingLamp": {
+    "localized_name": "Tavan Lambası",
+    "description": "Bir üssü geceleri bile aydınlatabilen bir ışık kaynağı. Tavana asılabilir. Elektrik olmadan çalışmaz; ancak çalıştığında, daha geniş bir alanı aydınlatır."
+  },
+  "Chair01_Iron": {
+    "localized_name": "Deri Sandalye",
+    "description": "Dekoratif deri sandalye."
+  },
+  "Chair01_Pal": {
+    "localized_name": "Kurbağa Sandalyesi",
+    "description": "Sevimli dekoratif sandalye."
+  },
+  "Chair01_Stone": {
+    "localized_name": "Antika Tahta Sandalye",
+    "description": "Dekoratif antika tahta sandalye."
+  },
+  "Chair01_Wood": {
+    "localized_name": "Tahta Sandalye",
+    "description": "Dekoratif tahta sandalye."
+  },
+  "Chair02_Iron": {
+    "localized_name": "Demir Sandalye",
+    "description": "Dekoratif tahta sandalye."
+  },
+  "Chair02_Stone": {
+    "localized_name": "Antika Yeşil Tahta Sandalye",
+    "description": "Dekoratif antika yeşil tahta sandalye."
+  },
+  "CharacterRankUp": {
+    "localized_name": "Pal Özü Yoğunlaştırıcı",
+    "description": "Bir Pal'ın derecesini artıran bir oda. Pal'lar, aynı türden bir Pal'dan alınan konsantre bir öz verilmesi hâlinde, fiziksel sınırlamalarını aşabilir."
+  },
+  "Clock01_Stone": {
+    "localized_name": "Antika Sarkaçlı Saat",
+    "description": "Dekoratif antika sarkaçlı saat. Bozuktur, zamanı göstermez."
+  },
+  "Clock01_Wall_Iron": {
+    "localized_name": "Duvar Saati",
+    "description": "Dekoratif duvar saati. Bozuktur, zamanı göstermez."
+  },
+  "CoalPit": {
+    "localized_name": "Kömür Madeni",
+    "description": "Kömür üretmek için bir tesis. Kömür kazmak çok zorlu bir beden işidir. Bu işi madencilikte yetenekli bir Pal'a bırak."
+  },
+  "CompositeDesk": {
+    "localized_name": "Çizim Masası",
+    "description": "Birden fazla şemayı birleştirerek daha gelişmiş şemalar oluşturmanı sağlayan bir tesis."
+  },
+  "ConservationGroupBannerA": {
+    "localized_name": "Pal Koruma Derneği Bayrağı",
+    "description": "Dekorasyon amaçlı Pal Koruma Derneği bayrağı."
+  },
+  "ConservationGroupBannerB": {
+    "localized_name": "Pal Koruma Derneği Afişi",
+    "description": "Dekorasyon amaçlı Pal Koruma Derneği pankartı."
+  },
+  "Container01_Iron": {
+    "localized_name": "Konteyner",
+    "description": "Eşyaları saklamak için bir konteyner. Kadim ve zengin bir medeniyet tarafından bırakılan tasarımları taklit eder."
+  },
+  "CookingStove": {
+    "localized_name": "Kazan",
+    "description": "Yemek pişirmek için gereklidir. Kazan kullanmak çok daha çeşitli yemek hazırlıklarına olanak tanır. Ateş yakmak için bir Ateş Pal'ı gerekir."
+  },
+  "Cooler": {
+    "localized_name": "Soğutucu",
+    "description": "Soğuk hava üfleyerek bir üssün sıcaklığını düşüren bir cihaz. Fazla serinlik sağlamaz ama sıcak ortamlara dayanabilmeye yardımcı olur. Soğutma için bir Buz Pal'ı gerekir."
+  },
+  "CoolerBox": {
+    "localized_name": "Soğutucu Kutu",
+    "description": "Küçük yiyecek kasası. İçinde saklanan yiyeceklerin bozulmasını engellemek için bir Buz Pal'ı ata."
+  },
+  "CoolerPalFoodBox": {
+    "localized_name": "Soğuk Yiyecek Kutusu",
+    "description": "Soğuk kalabilen bir yem kutusu. Bir Buz Pal'ı atarsan içindeki yiyeceklerin bozulma olasılığı azalır."
+  },
+  "CopperPit": {
+    "localized_name": "Cevher Maden Alanı",
+    "description": "Cevher üretmek için bir tesis. Cevher çıkarmak fiziksel dayanıklılık isteyen zor bir iştir. Bu işi madencilikte yetenekli Pal'lara bırak."
+  },
+  "CopperPit_2": {
+    "localized_name": "Cevher Maden Alanı II",
+    "description": "Büyük miktarlarda Cevher üretmek için bir tesis. Cevher çıkarmak fiziksel dayanıklılık isteyen zor bir iştir. Bu işi madencilikte yetenekli Pal'lara bırak."
+  },
+  "Counter_Wood": {
+    "localized_name": "Tahta Tezgâh",
+    "description": "Dekoratif tahta tezgâh."
+  },
+  "Crusher": {
+    "localized_name": "Öğütücü",
+    "description": "Diğer malzemelerle takas etmek için Taş ve Odun öğüten bir tesis. Su türbinin dönmesi için Sulama özelliğine sahip bir Pal gerekir."
+  },
+  "CrystalPit": {
+    "localized_name": "Hexoquartz Madeni",
+    "description": "Heksolit Kuvarsı üretmek için bir tesis. Heksolit Kuvarsı kazma çalışması zorlu ve dayanıklılık gerektirir. Bu işi madencilikte yetenekli Pal’lere bırakın."
+  },
+  "Curtain01_Wall_Stone": {
+    "localized_name": "Antika Perde",
+    "description": "Dekoratif antika perde. Duvarlara yerleştirilebilir."
+  },
+  "DamagedScarecrow": {
+    "localized_name": "Antrenman Mankeni",
+    "description": "Pengullet şeklinde bir antrenman mankeni. Sadece geniş, açık alanlara yerleştirilebilir."
+  },
+  "Decal_PalSticker_PinkCat": {
+    "localized_name": "-",
+    "description": "-"
+  },
+  "DefenseBowGun": {
+    "localized_name": "Sabitlenmiş Arbalet",
+    "description": "Bu savunma silahını kullanması için bir Pal konuşlandır. Kullanmak için Ok gerekir. Cephaneleri sandığa koy, konuşlandırdığın Pal silahı otomatik olarak dolduracaktır."
+  },
+  "DefenseMachinegun": {
+    "localized_name": "Sabitlenmiş Makineli Tüfek",
+    "description": "Bu savunma silahını kullanması için bir Pal konuşlandır. Kullanmak için Tüfek Mermisi gerekir. Cephaneleri sandığa koy, konuşlandırdığın Pal silahı otomatik olarak dolduracaktır."
+  },
+  "DefenseMissile": {
+    "localized_name": "Sabitlenmiş Füzeatar",
+    "description": "Bu savunma silahını kullanması için bir Pal konuşlandır. Kullanmak için Roket Mermisi gerekir. Cephaneleri sandığa koy, konuşlandırdığın Pal silahı otomatik olarak dolduracaktır."
+  },
+  "DefenseWait": {
+    "localized_name": "Kum Çuvalı",
+    "description": "Bir üssü düşmanlardan korumak için savunma odaklı bir siperlik. Buraya yerleştireceğin bir Pal diğer işleri yapmayacak; nöbet tutacak ve savaşa hazırlanacaktır."
+  },
+  "DefenseWall": {
+    "localized_name": "Taş Savunma Duvarı",
+    "description": "Düşman müdahalesini engellemek için yapılmış devasa savunma duvarı. Taştan yapılmıştır ve yeteri kadar sağlamdır."
+  },
+  "DefenseWall_Metal": {
+    "localized_name": "Metal Savunma Duvarı",
+    "description": "Düşman müdahalesini engellemek için yapılmış devasa savunma duvarı. Metalden yapılmıştır ve son derece sağlamdır."
+  },
+  "DefenseWall_Wood": {
+    "localized_name": "Tahta Savunma Duvarı",
+    "description": "Düşman müdahalesini engellemek için yapılmış devasa savunma duvarı. Tahtadan yapıldığı için kolay kırılır."
+  },
+  "Desk01_Iron": {
+    "localized_name": "Demir Çalışma Masası",
+    "description": "Dekoratif demir çalışma masası."
+  },
+  "Desk01_Stone": {
+    "localized_name": "Antika Çalışma Masası",
+    "description": "Dekoratif antika çalışma masası."
+  },
+  "DimensionPalStorage": {
+    "localized_name": "Boyutsal Pal Deposu",
+    "description": "Yakalanan çok sayıda Pal'ı depolayan bir tesis. Tüm lonca üyeleri Pal'ları buraya koyabilir veya buradan alabilir. Özel olarak ayarlaman hâlinde kişisel Pal depon olarak işler."
+  },
+  "DismantlingConveyor": {
+    "localized_name": "Pal Parçalama Bandı",
+    "description": "İçine yerleştirilen tüm Pal'ları otomatik olarak parçalayan, rüya gibi bir tesis."
+  },
+  "DisplayCharacter": {
+    "localized_name": "Sergileme Kafesi",
+    "description": "Yakaladığın Pal'ları izlemek için bir yapı. İçindeki Pal'lar savaşa veya üretime katılamaz ancak karınları da acıkmaz."
+  },
+  "ElectricCooler": {
+    "localized_name": "Elektrikli Soğutucu",
+    "description": "Soğuk hava üfleyerek bir üssün sıcaklığını düşüren bir cihaz. Elektrik kullanarak etrafını çok iyi soğutabilir. Soğutma için bir Buz Pal'ı gerekir."
+  },
+  "ElectricGenerator": {
+    "localized_name": "Güç Jeneratörü",
+    "description": "Elektrik Pal'larıyla çalışan bir güç jeneratörü. Elektrikli ekipmanlar bu olmadan çalışamaz."
+  },
+  "ElectricGenerator_Large": {
+    "localized_name": "Büyük Güç Jeneratörü",
+    "description": "Elektrik Pal'larıyla çalışan bir güç jeneratörü. Daha büyüktür ve güç üretimi verimliliği artmıştır."
+  },
+  "ElectricHatchingPalEgg": {
+    "localized_name": "Elektrikli Kuluçka Makinesi",
+    "description": "Pal yumurtalarını kuluçkaya sokan bir cihaz. Elektrik olmadan çalışmaz; ancak çalıştığında, kuluçka makinesinin içi otomatik olarak olması gereken sıcaklıklarda tutulur."
+  },
+  "ElectricHeater": {
+    "localized_name": "Elektrikli Isıtıcı",
+    "description": "Sıcak hava üfleyerek bir üssün sıcaklığını yükselten bir cihaz. Elektrik kullanarak etrafını çok iyi ısıtabilir. Ateş yakmak için bir Ateş Pal'ı gerekir."
+  },
+  "ElectricKitchen": {
+    "localized_name": "Elektrikli Mutfak",
+    "description": "Yemek pişirmek için gereklidir. Elektrik olmadan çalışmaz ancak büyük miktarda yemeklerin hızlıca hazırlanmasına olanak tanır. Ateş yakmak için bir Ateş Pal'ı gerekir."
+  },
+  "EnergyStorage_Electric": {
+    "localized_name": "Akümülatör",
+    "description": "Güç Jeneratörü ile üretilen fazla elektriği depolayan bir araç."
+  },
+  "Expedition": {
+    "localized_name": "Pal Seferi İstasyonu",
+    "description": "Pal'ların zindan gibi yerlere seferlere gönderilmesine olanak tanıyan bir tesis. Gönderilen Pal'lar dövüşlere girer ve eşyalar toplar, ardından kaynakları üsse getirir."
+  },
+  "Factory_Hard_01": {
+    "localized_name": "Yüksek Kaliteli Çalışma Tezgâhı",
+    "description": "Eşya ve teçhizat üretmek için bir Montaj Hattı. Çalışma alanı küçük olduğu için üretim hızları sınırlıdır. Ellerini kullanabilen Pal'lar olmadan çalışmaz."
+  },
+  "Factory_Hard_02": {
+    "localized_name": "Üretim Montaj Hattı",
+    "description": "Eşya ve teçhizat üretmek için bir Montaj Hattı. Gruplara ayrılarak çalışan Pal'lar sayesinde üretim hızı biraz artmıştır. Ellerini kullanabilen Pal'lar olmadan çalışmaz."
+  },
+  "Factory_Hard_03": {
+    "localized_name": "Üretim Montaj Hattı II",
+    "description": "Eşya ve teçhizat üretmek için bir Montaj Hattı. Akıllıca yönetim kararları sayesinde üretim hızları büyük ölçüde artmıştır. Ellerini kullanabilen Pal'lar olmadan çalışmaz."
+  },
+  "Factory_Hard_04": {
+    "localized_name": "Gelişmiş medeniyetin iş fabrikası",
+    "description": "Eşya ve teçhizat üretmek için bir Montaj Hattı. Gelişmiş makinelerin takviyesiyle yüksek hızda küre üretimi mümkün hâle gelmiştir. Ellerini kullanabilen Pal'lar olmadan çalışmaz."
+  },
+  "Factory_Money": {
+    "localized_name": "Altın Para Montaj Hattı",
+    "description": "Para basan bir Montaj Hattı. İş yoğunluğu zihin yüküne neden olduğundan, Pal'ların AKL değerinde azalma görülür. Ellerini kullanabilen Pal'lar olmadan çalışmaz."
+  },
+  "FarmBlockV2_Berries": {
+    "localized_name": "Meyve Tarlası",
+    "description": "Kırmızı Meyveler yetiştirebileceğin bir tarla. Hasat süresi kısadır ama bu ürünler fazla doyurucu değildir. Tohumları ekmek, sulama yapmak ve ekinleri hasat etmek için birkaç Pal gerekir."
+  },
+  "FarmBlockV2_Carrot": {
+    "localized_name": "Havuç Tarlası",
+    "description": "Havuç yetiştirebileceğin bir tarla. Hasat edilmesi zaman alır ama hazırlayabildiğin yemek çeşitlerini artırır. Tohumları ekmek, sulama yapmak ve ekinleri hasat etmek için birkaç Pal gerekir."
+  },
+  "FarmBlockV2_Lettuce": {
+    "localized_name": "Marul Tarlası",
+    "description": "Marul yetiştirebileceğin bir tarla. Hasat edilmesi zaman alır ama hazırlayabildiğin yemek çeşitlerini artırır. Tohumları ekmek, sulama yapmak ve ekinleri hasat etmek için birkaç Pal gerekir."
+  },
+  "FarmBlockV2_Onion": {
+    "localized_name": "Soğan Tarlası",
+    "description": "Soğan yetiştirebileceğin bir tarla. Hasat edilmesi zaman alır ama hazırlayabildiğin yemek çeşitlerini artırır. Tohumları ekmek, sulama yapmak ve ekinleri hasat etmek için birkaç Pal gerekir."
+  },
+  "FarmBlockV2_Potato": {
+    "localized_name": "Patates Tarlası",
+    "description": "Patates yetiştirebileceğin bir tarla. Hasat edilmesi zaman alır ama hazırlayabildiğin yemek çeşitlerini artırır. Tohumları ekmek, sulama yapmak ve ekinleri hasat etmek için birkaç Pal gerekir."
+  },
+  "FarmBlockV2_tomato": {
+    "localized_name": "Domates Tarlası",
+    "description": "Domates yetiştirebileceğin bir tarla. Hasat edilmesi zaman alır ama hazırlayabildiğin yemek çeşitlerini artırır. Tohumları ekmek, sulama yapmak ve ekinleri hasat etmek için birkaç Pal gerekir."
+  },
+  "FarmBlockV2_wheet": {
+    "localized_name": "Buğday Tarlası",
+    "description": "Buğday yetiştirebileceğin bir tarla. Hasada hazır olması orta uzunlukta süre alır. Tohumları ekmek, sulama yapmak ve ekinleri hasat etmek için birkaç Pal gerekir."
+  },
+  "Farm_SkillFruits": {
+    "localized_name": "Yetenek Meyvesi Bahçesi",
+    "description": "Yetenek Meyvelerinin yetiştirildiği bir tarla. Orijinal meyveyi toprağa ekerek aynı türden birden fazla meyve hasat edilebilir."
+  },
+  "FastTravelPoint": {
+    "localized_name": "Büyük Kartal Heykeli",
+    "description": "Chikipi şekilli, taştan bir anıt. Yerleştirildiği konuma hızlı seyahat yapmana olanak tanır."
+  },
+  "FireCult_Banner": {
+    "localized_name": "Ölümsüz Ateş Kardeşliği Dikey Flaması",
+    "description": "Dekoratif Ölümsüz Ateş Kardeşliği dikey flaması."
+  },
+  "FireCult_Flag": {
+    "localized_name": "Ölümsüz Ateş Kardeşliği Örgüt Bayrağı",
+    "description": "Dekoratif Ölümsüz Ateş Kardeşliği örgüt bayrağı."
+  },
+  "FireStand": {
+    "localized_name": "Tören Şamdanı",
+    "description": "Ebedi alevin yoldaşlarının tapındığı ateşle yakılmış ritüel şamdanı. Yere yerleştirilebilen bir ışık kaynağıdır. Alev Pal’ının ateşi yakması gerekmektedir."
+  },
+  "FishingPond1": {
+    "localized_name": "Balık tutma alanı",
+    "description": "Balıkçılık ekipmanlarının hazırlandığı balık havuzu. Pal görevlendirildiğinde, sakince balık tutacak. Elle çalışabilecek Pal gerekli."
+  },
+  "FishingPond2": {
+    "localized_name": "Büyük balık tutma alanı",
+    "description": "Balık tutma ekipmanlarının hazırlandığı büyük balık havuzu. Geniş su alanı sayesinde daha büyük Pal’lar tutulabilir. Elle çalışabilecek Pal gerekli."
+  },
+  "FlourMill": {
+    "localized_name": "Değirmen",
+    "description": "Un üretmek için Buğday öğüten bir tesis. Su türbinin dönmesi için Sulama özelliğine sahip bir Pal gerekir."
+  },
+  "FlowerBed": {
+    "localized_name": "Çiçek Tarhı",
+    "description": "Toplama hızını artırmak için üsse yerleştir. Birden fazla yerleştirmenin ilave etkisi olmaz."
+  },
+  "Fountain": {
+    "localized_name": "Çeşme",
+    "description": "Sulama hızını artırmak için üsse yerleştir. Birden fazla yerleştirmenin ilave etkisi olmaz."
+  },
+  "Fudukue": {
+    "localized_name": "Japon Yazı Masası",
+    "description": "Dekoratif, işlemeli yazı masası. Japon tarzı binalar için mükemmel."
+  },
+  "GarbageBag_Iron": {
+    "localized_name": "Çöp Poşeti",
+    "description": "Dekoratif çöp poşeti."
+  },
+  "Glass_DiagonalWall": {
+    "localized_name": "Cam Diyagonal Duvar",
+    "description": "Üçgen temelin üzerine inşa edilerek istilacılara karşı koruma sağlamak için kullanılan diyagonal bir duvar. Sert camdan yapıldığı için son derece sağlamdır."
+  },
+  "Glass_DoorWall": {
+    "localized_name": "Kapılı Cam Duvar",
+    "description": "Zemin üzerine inşa edilmiş kapı. Bir giriş görevi görür. Endüstriyel camdan yapılmıştır ve epey dayanıklıdır."
+  },
+  "Glass_Fence": {
+    "localized_name": "Cam Çit",
+    "description": "Düşmeyi önlemek için temel veya çatının üzerine inşa edilen parmaklık. Sert camdan yapıldığı için çok sağlamdır."
+  },
+  "Glass_PyramidRoof": {
+    "localized_name": "Cam Piramit Çatı",
+    "description": "Duvarların üzerine inşa edilerek yağmur ve rüzgârdan korunmak için kullanılan konik bir çatı. Sert camdan yapıldığı için son derece sağlamdır."
+  },
+  "Glass_SlantedRoof": {
+    "localized_name": "Cam Eğimli Çatı",
+    "description": "Yağmuru ve rüzgârı uzak tutmak için duvarların üzerine inşa edilmiş eğimli bir çatı. Endüstriyel camdan yapılmıştır ve epey dayanıklıdır."
+  },
+  "Glass_SlopedRoofCorner": {
+    "localized_name": "Cam Üçgen Eğik Çatı",
+    "description": "Duvarların üzerine inşa edilerek yağmur ve rüzgârdan korunmak için kullanılan köşe eğimli bir çatı. Sert camdan yapıldığı için son derece sağlamdır."
+  },
+  "Glass_TriangleFoundation": {
+    "localized_name": "Cam Üçgen Temel",
+    "description": "Üzerine duvar veya tesis inşa etmek için kullanılan üçgen bir temel. Sert camdan yapıldığı için son derece sağlamdır."
+  },
+  "Glass_TriangleRoof": {
+    "localized_name": "Cam Üçgen Çatı",
+    "description": "Duvarların üzerine inşa edilerek yağmur ve rüzgârdan korunmak için kullanılan üçgen bir çatı. Sert camdan yapıldığı için son derece sağlamdır."
+  },
+  "Glass_TriangleStairsCorner": {
+    "localized_name": "Cam Köşe Çatı",
+    "description": "Duvarların üzerine inşa edilerek yağmur ve rüzgârdan korunmak için kullanılan köşe çatı. Sert camdan yapıldığı için son derece sağlamdır."
+  },
+  "Glass_TriangleWall": {
+    "localized_name": "Cam Üçgen Duvar",
+    "description": "Davetsiz misafirleri uzak tutmak için zemin üzerine inşa edilmiş üçgen duvar. Endüstriyel camdan yapılmıştır ve epey dayanıklıdır"
+  },
+  "Glass_TriangleWallReverse": {
+    "localized_name": "Cam Üçgen Duvar (Ters)",
+    "description": "Temelin üzerine inşa edilmek üzere tasarlanmış ters üçgen bir duvar. Sert camdan yapıldığı için son derece sağlamdır."
+  },
+  "Glass_WallGate": {
+    "localized_name": "Cam Pal Geçidi",
+    "description": "Temelin üzerine inşa edilip giriş çıkış noktası olarak kullanılan Pal geçidi. Sert camdan yapıldığı için son derece sağlamdır."
+  },
+  "Glass_WindowWall": {
+    "localized_name": "Pencereli Cam Duvar",
+    "description": "Davetsiz misafirleri uzak tutmak için zemin üzerine inşa edilmiş pencereli bir duvar. Endüstriyel camdan yapılmıştır ve epey dayanıklıdır."
+  },
+  "Glass_foundation": {
+    "localized_name": "Cam Zemin",
+    "description": "Üzerine duvarlar inşa edebileceğin veya araç ve tesisler kurabileceğin bir zemin. Endüstriyel camdan yapılmıştır ve epey dayanıklıdır."
+  },
+  "Glass_roof": {
+    "localized_name": "Cam Çatı",
+    "description": "Yağmuru ve rüzgârı uzak tutmak için duvarların üzerine inşa edilmiş bir çatı. Endüstriyel camdan yapılmıştır ve epey dayanıklıdır."
+  },
+  "Glass_stair": {
+    "localized_name": "Cam Merdiven",
+    "description": "Yukarı çıkmak için bir zeminin veya çatının altına yerleştirmiş merdivenler. Endüstriyel camdan yapılmıştır ve epey dayanıklıdır."
+  },
+  "Glass_wall": {
+    "localized_name": "Cam Duvar",
+    "description": "Davetsiz misafirleri uzak tutmak için zemin üzerine inşa edilmiş duvarlar. Endüstriyel camdan yapılmıştır ve epey dayanıklıdır."
+  },
+  "GlobalPalStorage": {
+    "localized_name": "Global Pal Kutusu",
+    "description": "Pal'ların genetik verilerini depolayan ve bu veriyi kullanarak onları yeniden inşa etmene olanak tanıyan bir araç. Depolanan genetik veriler başka dünyalara da taşınabilir."
+  },
+  "Globe01_Stone": {
+    "localized_name": "Antika Küre",
+    "description": "Dekoratif antika küre."
+  },
+  "GoalSoccer_Iron": {
+    "localized_name": "Futbol Kalesi",
+    "description": "Dekoratif futbol kalesi. Vurduğun SheepBall içine girerse golün sayılmaz."
+  },
+  "GuardianDogStatue": {
+    "localized_name": "Yakumo Heykeli",
+    "description": "Dekoratif Yakumaru heykeli."
+  },
+  "GuildChest": {
+    "localized_name": "Lonca Sandığı",
+    "description": "Alt uzay aracılığıyla eşyaları anında gönderebilen ve alabilen bir sandık. İçindeki eşyalar yerleştirildikleri tüm üslerde paylaşılır."
+  },
+  "HatchingPalEgg": {
+    "localized_name": "Kuluçka Makinesi",
+    "description": "Bir Pal Yumurtasını kuluçkaya sokmak için kullanılır. Bir Pal Yumurtası içinde bırakılırsa bir süre sonra bir Pal otomatik olarak yumurtadan çıkacaktır."
+  },
+  "Headstone": {
+    "localized_name": "Mezar Taşı",
+    "description": "Üzerinde bir şeyler yazan bir mezar taşı. Kayıt tutma amacıyla kullanabilirsin."
+  },
+  "Heater": {
+    "localized_name": "Isıtıcı",
+    "description": "Sıcak hava üfleyerek bir üssün sıcaklığını yükselten bir cihaz. Fazla sıcaklık sağlamaz ama soğuk ortamlara dayanabilmeye yardımcı olur. Ateş yakmak için bir Ateş Pal'ı gerekir."
+  },
+  "HugeKitchen": {
+    "localized_name": "Büyük Ölçekli Taş Fırın",
+    "description": "Yemek pişirmek için gereklidir. Daha büyük olduğu için birden fazla Pal birlikte çalışarak yemek yapabilir. Ateş yakmak için bir Ateş Pal'ı gerekir."
+  },
+  "Hunter_Banner": {
+    "localized_name": "Kaçak Avcılar Çetesi Dikey Flaması",
+    "description": "Dekoratif Kaçak Avcılar Çetesi dikey flaması."
+  },
+  "Hunter_Flag": {
+    "localized_name": "Kaçak Avcılar Çetesi Örgüt Bayrağı",
+    "description": "Dekoratif Kaçak Avcılar Çetesi örgüt bayrağı."
+  },
+  "Hunter_GangFlag": {
+    "localized_name": "Kaçak Avcılar Çetesi Bayrağı",
+    "description": "Dekorasyon amaçlı Kaçak Avcılar Bayrağı."
+  },
+  "IceCrusher": {
+    "localized_name": "Soğutmalı Öğütücü",
+    "description": "Cevher öğüten ve başka malzemelere dönüştüren bir araç. Bir güç kaynağına ve iş uygunluğu Soğutma olan bir Pal'a ihtiyaç duyar."
+  },
+  "Iron_DiagonalWall": {
+    "localized_name": "Metal Diyagonal Duvar",
+    "description": "Üçgen temelin üzerine inşa edilerek istilacılara karşı koruma sağlamak için kullanılan diyagonal bir duvar. Metalden yapıldığı için son derece sağlamdır."
+  },
+  "Iron_Fence": {
+    "localized_name": "Metal Çit",
+    "description": "Düşmeyi önlemek için temel veya çatının üzerine inşa edilen parmaklık. Metalden yapıldığı için çok sağlamdır."
+  },
+  "Iron_PyramidRoof": {
+    "localized_name": "Metal Piramit Çatı",
+    "description": "Duvarların üzerine inşa edilerek yağmur ve rüzgârdan korunmak için kullanılan konik bir çatı. Metalden yapıldığı için son derece sağlamdır."
+  },
+  "Iron_SlopedRoofCorner": {
+    "localized_name": "Metal Üçgen Eğik Çatı",
+    "description": "Duvarların üzerine inşa edilerek yağmur ve rüzgârdan korunmak için kullanılan köşe eğimli bir çatı. Metalden yapıldığı için son derece sağlamdır."
+  },
+  "Iron_TriangleFoundation": {
+    "localized_name": "Metal Üçgen Temel",
+    "description": "Üzerine duvar veya tesis inşa etmek için kullanılan üçgen bir temel. Metalden yapıldığı için son derece sağlamdır."
+  },
+  "Iron_TriangleRoof": {
+    "localized_name": "Metal Üçgen Çatı",
+    "description": "Duvarların üzerine inşa edilerek yağmur ve rüzgârdan korunmak için kullanılan üçgen bir çatı. Metalden yapıldığı için son derece sağlamdır."
+  },
+  "Iron_TriangleStairsCorner": {
+    "localized_name": "Metal Köşe Çatı",
+    "description": "Duvarların üzerine inşa edilerek yağmur ve rüzgârdan korunmak için kullanılan köşe çatı. Metalden yapıldığı için son derece sağlamdır."
+  },
+  "Iron_TriangleWallReverse": {
+    "localized_name": "Metal Üçgen Duvar (Ters)",
+    "description": "Temelin üzerine inşa edilmek üzere tasarlanmış ters üçgen bir duvar. Metalden yapıldığı için son derece sağlamdır."
+  },
+  "Iron_WallGate": {
+    "localized_name": "Metal Pal Geçidi",
+    "description": "Temelin üzerine inşa edilip giriş çıkış noktası olarak kullanılan Pal geçidi. Metalden yapıldığı için son derece sağlamdır."
+  },
+  "Irori": {
+    "localized_name": "Japon Tarzı Ocak",
+    "description": "Dekoratif ocak. Japon tarzı binalar için mükemmel."
+  },
+  "ItemBooth": {
+    "localized_name": "Bit Pazarı (Eşyalar)",
+    "description": "Eşyaları satmak için bir tesis. Eşyaları satış listesine koyarak diğer oyunculara eşya satabilirsin. Bir Buz Pal'ı atarsan içindeki yiyeceklerin bozulma olasılığı azalır."
+  },
+  "ItemChest": {
+    "localized_name": "Tahta Sandık",
+    "description": "Eşyaları depolar. Odundan yapıldığı için kolaylıkla kırılır. Değerli şeyleri saklamak için en iyi yer olmadığı ortadadır."
+  },
+  "ItemChest_02": {
+    "localized_name": "Metal Sandık",
+    "description": "Eşyaları depolar. Metalle güçlendirildiği için biraz daha dayanıklıdır. Büyüyen boyutu sayesinde daha fazla eşya barındırabilir."
+  },
+  "ItemChest_03": {
+    "localized_name": "Saf Metal Sandık",
+    "description": "Eşyaları depolar. Demirden yapıldığından son derece dayanıklıdır. Büyük ve güvenli bir depolama kutusu olarak kullanışlıdır."
+  },
+  "ItemChest_04": {
+    "localized_name": "Gelişmiş Sandık",
+    "description": "Eşyaları depolar. Hem oldukça sağlamdır hem de çok fazla depolama alanı sunar. Büyük ve güvenli bir depolama kutusu olarak kullanışlıdır."
+  },
+  "Ivy01": {
+    "localized_name": "Büyük Duvar Sarmaşığı",
+    "description": "Dekoratif büyük sarmaşık. Bir duvara yerleştirilebilir."
+  },
+  "Ivy02": {
+    "localized_name": "Küçük Duvar Sarmaşığı",
+    "description": "Dekoratif küçük sarmaşık. Bir duvara yerleştirilebilir."
+  },
+  "Ivy03": {
+    "localized_name": "Yatay Duvar Sarmaşığı",
+    "description": "Dekoratif yatay sarmaşık. Bir duvara yerleştirilebilir."
+  },
+  "JapaneseStyle_DiagonalWall": {
+    "localized_name": "Japon Tarzı Diyagonal Duvar",
+    "description": "Üçgen temelin üzerine inşa edilerek istilacılara karşı koruma sağlamak için kullanılan diyagonal bir duvar. Japon tarzında şık yapılar inşa etmeye olanak tanır."
+  },
+  "JapaneseStyle_DoorWall_01": {
+    "localized_name": "Japon Tarzı Kapı A",
+    "description": "Zemin üzerine inşa edilmiş kapı. Bir giriş görevi görür. Japon tarzı, şık mimariler tasarlayabilirsin."
+  },
+  "JapaneseStyle_DoorWall_02": {
+    "localized_name": "Japon Tarzı Kapı B",
+    "description": "Zemin üzerine inşa edilmiş Japon tarzı kayar kapı (shoji). Yapı içindeki bir giriş görevi görür. Japon tarzı, şık mimariler tasarlayabilirsin."
+  },
+  "JapaneseStyle_DoorWall_03": {
+    "localized_name": "Japon Tarzı Kapı C",
+    "description": "Zemin üzerine inşa edilmiş Japon tarzı kayar kapı (fusuma). Yapı içindeki bir giriş görevi görür. Japon tarzı, şık mimariler tasarlayabilirsin."
+  },
+  "JapaneseStyle_Fence": {
+    "localized_name": "Japon Tarzı Çit",
+    "description": "Düşmeyi önlemek için temel veya çatının üzerine inşa edilen parmaklık. Japon tarzı şık bir mimari ile yapılabilir."
+  },
+  "JapaneseStyle_Pillar": {
+    "localized_name": "Japon Tarzı Direk",
+    "description": "Yapıya destek olması için bir sütun. Japon tarzı, şık mimariler tasarlayabilirsin."
+  },
+  "JapaneseStyle_PyramidRoof": {
+    "localized_name": "Japon Tarzı Piramit Çatı",
+    "description": "Duvarların üzerine inşa edilerek yağmur ve rüzgârdan korunmak için kullanılan konik bir çatı. Japon tarzında şık yapılar inşa etmeye olanak tanır."
+  },
+  "JapaneseStyle_SlantedRoof": {
+    "localized_name": "Japon Tarzı Eğimli Çatı",
+    "description": "Yağmuru ve rüzgârı uzak tutmak için duvarların üzerine inşa edilmiş eğimli bir çatı. Japon tarzı, şık mimariler tasarlayabilirsin."
+  },
+  "JapaneseStyle_SlopedRoofCorner": {
+    "localized_name": "Japon Tarzı Üçgen Eğik Çatı",
+    "description": "Duvarların üzerine inşa edilerek yağmur ve rüzgârdan korunmak için kullanılan köşe eğimli bir çatı. Japon tarzında şık yapılar inşa etmeye olanak tanır."
+  },
+  "JapaneseStyle_TriangleFoundation": {
+    "localized_name": "Japon Tarzı Üçgen Temel",
+    "description": "Üzerine duvar veya tesis inşa etmek için kullanılan üçgen bir temel. Japon tarzında şık yapılar inşa etmeye olanak tanır."
+  },
+  "JapaneseStyle_TriangleRoof_01": {
+    "localized_name": "Japon Tarzı Üçgen Çatı A",
+    "description": "Duvarların üzerine inşa edilerek yağmur ve rüzgârdan korunmak için kullanılan üçgen bir çatı. Japon tarzında şık yapılar inşa etmeye olanak tanır."
+  },
+  "JapaneseStyle_TriangleRoof_02": {
+    "localized_name": "Japon Tarzı Üçgen Çatı B",
+    "description": "Duvarların üzerine inşa edilerek yağmur ve rüzgârdan korunmak için kullanılan üçgen bir çatı. Japon tarzında şık yapılar inşa etmeye olanak tanır."
+  },
+  "JapaneseStyle_TriangleStairsCorner_01": {
+    "localized_name": "Japon Tarzı Köşe Çatı",
+    "description": "Duvarların üzerine inşa edilerek yağmur ve rüzgârdan korunmak için kullanılan köşe çatı. Japon tarzında şık yapılar inşa etmeye olanak tanır."
+  },
+  "JapaneseStyle_TriangleWall": {
+    "localized_name": "Japon Tarzı Üçgen Duvar",
+    "description": "Davetsiz misafirleri uzak tutmak için zemin üzerine inşa edilmiş üçgen duvar. Japon tarzı, şık mimariler tasarlayabilirsin."
+  },
+  "JapaneseStyle_TriangleWallReverse": {
+    "localized_name": "Japon Tarzı Üçgen Duvar (Ters)",
+    "description": "Temelin üzerine inşa edilmek üzere tasarlanmış ters üçgen bir duvar. Japon tarzında şık yapılar inşa etmeye olanak tanır."
+  },
+  "JapaneseStyle_WallGate": {
+    "localized_name": "Japon Tarzı Pal Geçidi",
+    "description": "Temelin üzerine inşa edilip giriş çıkış noktası olarak kullanılan Pal geçidi. Japon tarzında şık yapılar inşa etmeye olanak tanır."
+  },
+  "JapaneseStyle_WindowWall": {
+    "localized_name": "Japon Tarzı Pencereli Duvar",
+    "description": "Davetsiz misafirleri uzak tutmak için zemin üzerine inşa edilmiş pencereli bir duvar. Japon tarzı, şık mimariler tasarlayabilirsin."
+  },
+  "JapaneseStyle_foundation": {
+    "localized_name": "Japon Tarzı Zemin",
+    "description": "Üzerine duvarlar inşa edebileceğin veya araç ve tesisler kurabileceğin bir zemin. Japon tarzı, şık mimariler tasarlayabilirsin."
+  },
+  "JapaneseStyle_roof_01": {
+    "localized_name": "Japon Tarzı Çatı A",
+    "description": "Yağmuru ve rüzgârı uzak tutmak için duvarların üzerine inşa edilmiş bir çatı. Japon tarzı, şık mimariler tasarlayabilirsin."
+  },
+  "JapaneseStyle_roof_02": {
+    "localized_name": "Japon Tarzı Çatı B",
+    "description": "Yağmuru ve rüzgârı uzak tutmak için duvarların üzerine inşa edilmiş bir çatı. Japon tarzı, şık mimariler tasarlayabilirsin."
+  },
+  "JapaneseStyle_stair": {
+    "localized_name": "Japon Tarzı Merdiven",
+    "description": "Yukarı çıkmak için bir zeminin veya çatının altına yerleştirmiş merdivenler. Japon tarzı, şık mimariler tasarlayabilirsin."
+  },
+  "JapaneseStyle_wall_01": {
+    "localized_name": "Japon Tarzı Duvar",
+    "description": "Davetsiz misafirleri uzak tutmak için zemin üzerine inşa edilmiş duvarlar. Japon tarzı, şık mimariler tasarlayabilirsin."
+  },
+  "Kakejiku": {
+    "localized_name": "Asılı Parşömen",
+    "description": "Dekoratif asılı parşömen. Japon tarzı binalar için mükemmel."
+  },
+  "Koro": {
+    "localized_name": "Tütsülük",
+    "description": "Dekoratif tütsülük. Japon tarzı binalar için mükemmel."
+  },
+  "Lab": {
+    "localized_name": "Pal İş Gücü Araştırma Laboratuvarı",
+    "description": "Pal'ların çeşitli görevleri hakkında araştırmalar yapmak için bir tesis. Bu tesiste Pal'lara görevler atarsan araştırmalar ilerler ve çeşitli avantajlar elde edebilirsin."
+  },
+  "Lamp": {
+    "localized_name": "Lamba",
+    "description": "Bir üssü geceleri bile aydınlatabilen bir ışık kaynağı. Elektrik olmadan çalışmaz; ancak çalıştığında, daha geniş bir alanı aydınlatır."
+  },
+  "LanternTop": {
+    "localized_name": "Japon tarzı kağıt fener",
+    "description": "Dekoratif Fener."
+  },
+  "LargeCeilingLamp": {
+    "localized_name": "Büyük Tavan Lambası",
+    "description": "Bir üssü geceleri bile aydınlatabilen bir ışık kaynağı. Tavana asılabilir. Büyük miktarda elektrik olmadan çalışmaz; ancak çalıştığında, çok daha geniş bir alanı aydınlatır."
+  },
+  "LargeLamp": {
+    "localized_name": "Sabitlenmiş Büyük Lamba",
+    "description": "Bir üssü geceleri bile aydınlatabilen bir ışık kaynağı. Büyük miktarda elektrik olmadan çalışmaz; ancak çalıştığında, çok daha geniş bir alanı aydınlatır."
+  },
+  "Light_CandleSticks_Top": {
+    "localized_name": "Avize",
+    "description": "Aydınlatma sağlayan bir avize. Elektrik olmadan çalışmaz."
+  },
+  "Light_CandleSticks_Wall": {
+    "localized_name": "Duvar Lambası",
+    "description": "Aydınlatma sağlayan bir duvar lambası. Elektrik olmadan çalışmaz."
+  },
+  "Light_FirePlace01": {
+    "localized_name": "Tuğla Şömine",
+    "description": "Aydınlatma sağlayan, tuğladan bir şömine. Bir Ateş Pal'ının ateşiyle yakılmalıdır."
+  },
+  "Light_FirePlace02": {
+    "localized_name": "Şömine",
+    "description": "Aydınlatma sağlayan bir şömine. Bir Ateş Pal'ının ateşiyle yakılmalıdır."
+  },
+  "Light_FloorLamp01": {
+    "localized_name": "Antika Kahverengi Ayaklı Lamba",
+    "description": "Aydınlatma sağlayan antika kahverengi yer lambası. Elektrik olmadan çalışmaz."
+  },
+  "Light_FloorLamp02": {
+    "localized_name": "Antika Kırmızı Ayaklı Lamba",
+    "description": "Aydınlatma sağlayan antika kırmızı yer lambası. Elektrik olmadan çalışmaz."
+  },
+  "Light_LightPole01": {
+    "localized_name": "Basit Sokak Lambası",
+    "description": "Aydınlatma sağlayan basit bir sokak lambası. Elektrik olmadan çalışmaz."
+  },
+  "Light_LightPole02": {
+    "localized_name": "Çift Sokak Lambası",
+    "description": "Aydınlatma sağlayan çift sokak lambası. Elektrik olmadan çalışmaz."
+  },
+  "Light_LightPole03": {
+    "localized_name": "Retro Sokak Lambası",
+    "description": "Aydınlatma sağlayan retro bir sokak lambası. Elektrik olmadan çalışmaz."
+  },
+  "Light_LightPole04": {
+    "localized_name": "Şık Sokak Lambası",
+    "description": "Aydınlatma sağlayan şık bir sokak lambası. Elektrik olmadan çalışmaz."
+  },
+  "LilyQueenStatue": {
+    "localized_name": "Lyleen Heykeli",
+    "description": "Dekorasyon amaçlı Lyleen Heykeli."
+  },
+  "MachineGame01_Iron": {
+    "localized_name": "Oyuncak Yakalama Makinesi",
+    "description": "Dekoratif oyuncak yakalama makinesi. Bozuktur, oynanamaz."
+  },
+  "MachineVending01_Iron": {
+    "localized_name": "Kola Otomatı",
+    "description": "Dekoratif kola otomatı. Eşya satın almak için kullanılamaz."
+  },
+  "ManualElectricGenerator": {
+    "localized_name": "İnsan Enerjili Jeneratör",
+    "description": "Dönüş hareketlerinden elektrik enerjisi üreten bir tesis. Verimliliği düşüktür ve burada çalışan Pal'ların AKL değerinde düşüş görülür fakat bu Pal'lar aynı zamanda deneyim puanı kazanırlar."
+  },
+  "MedicalPalBed_02": {
+    "localized_name": "Saman Pal Yatağı",
+    "description": "Pal'lar için samandan bir yatak. Pal'lar yaralandıklarında burada dinlenebilir veya geceleri burada uyuyabilir. Yumuşak değildir ama hiç yoktan iyidir."
+  },
+  "MedicalPalBed_03": {
+    "localized_name": "Yumuşak Pal Yatağı",
+    "description": "Pal'ların iyice dinlenebileceği yumuşak bir yatak. Pal'lar yaralandıklarında burada dinlenebilir veya geceleri burada uyuyabilir. Pal'lar böyle yumuşak yataklarda yatmaya bayılırlar."
+  },
+  "MedicalPalBed_04": {
+    "localized_name": "Büyük Pal Yatağı",
+    "description": "Pal'ların iyice dinlenebileceği yumuşak bir yatak. Pal'lar yaralandıklarında burada dinlenebilir veya geceleri burada uyuyabilir. En büyük Pal'lar bile böyle bir yatakta rahatlıkla uyuyabilir."
+  },
+  "MedicalPalBed_05": {
+    "localized_name": "Pal Kapsülü",
+    "description": "Pal'lar için bir iyileştirme kapsülü. Pal'lar yaralandığında veya gece dinlenmeleri gerektiğinde kullanılır. Teknolojik gelişmeler sayesinde iyileştirme oranı artmıştır."
+  },
+  "MedicineFacility_01": {
+    "localized_name": "Orta Çağ İlaç Tezgâhı",
+    "description": "Pal ilaçları yapmak için kullanılan bir araç. Sadece basit ilaçları üretebilir. Kullanımını ilaç yapabilen bir Pal'a bırakabilirsin."
+  },
+  "MedicineFacility_02": {
+    "localized_name": "Elektrikli İlaç Tezgâhı",
+    "description": "Pal ilaçları yapmak için kullanılan bir araç. Elektrik olmadan çalışmaz; ancak çalıştığında, yüksek kaliteli ilaçları üretebilir. Kullanımını ilaç yapabilen bir Pal'a bırakabilirsin."
+  },
+  "MedicineFacility_03": {
+    "localized_name": "Gelişmiş İlaç Tezgâhı",
+    "description": "Pal'ların hastalıklarını tedavi edecek ilaçları üretmek için kullanılan bir araç. Gelişmiş teknolojisiyle bilinmeyen ilaçlar da üretebilir. Bu görevi, eczacılık yapabilecek bir Pal'a verebilirsin."
+  },
+  "Metal_DoorWall": {
+    "localized_name": "Metal Kapı",
+    "description": "Zemin üzerine inşa edilmiş kapı. Bir giriş görevi görür. Metalden yapılmıştır ve son derece sağlamdır."
+  },
+  "Metal_Gate": {
+    "localized_name": "Demir Giriş Kapısı",
+    "description": "Büyük Pal'ların geçmesine olanak tanıyacak kadar geniş bir giriş kapısı. Metalden yapılmıştır ve son derece sağlamdır."
+  },
+  "Metal_SlantedRoof": {
+    "localized_name": "Metal Eğimli Çatı",
+    "description": "Yağmuru ve rüzgârı uzak tutmak için duvarların üzerine inşa edilmiş eğimli bir çatı. Metalden yapılmıştır ve son derece sağlamdır."
+  },
+  "Metal_TriangleWall": {
+    "localized_name": "Metal Üçgen Duvar",
+    "description": "Davetsiz misafirleri uzak tutmak için zemin üzerine inşa edilmiş üçgen duvar. Metalden yapılmıştır ve son derece sağlamdır."
+  },
+  "Metal_WindowWall": {
+    "localized_name": "Pencereli Metal Duvar",
+    "description": "Davetsiz misafirleri uzak tutmak için zemin üzerine inşa edilmiş duvar. Bir penceresi de vardır. Metalden yapılmıştır ve son derece sağlamdır."
+  },
+  "Metal_foundation": {
+    "localized_name": "Metal Zemin",
+    "description": "Üzerine duvarlar inşa edebileceğin veya araç ve tesisler kurabileceğin bir zemin. Metalden yapılmıştır ve son derece sağlamdır."
+  },
+  "Metal_roof": {
+    "localized_name": "Metal Çatı",
+    "description": "Yağmuru ve rüzgârı uzak tutmak için duvarların üzerine inşa edilmiş bir çatı. Metalden yapılmıştır ve son derece sağlamdır."
+  },
+  "Metal_stair": {
+    "localized_name": "Metal Merdiven",
+    "description": "Yukarı çıkmak için bir zeminin veya çatının altına yerleştirmiş merdivenler. Metalden yapılmıştır ve son derece sağlamdır."
+  },
+  "Metal_wall": {
+    "localized_name": "Metal Duvar",
+    "description": "Davetsiz misafirleri uzak tutmak için zemin üzerine inşa edilmiş duvarlar. Metalden yapılmıştır ve son derece sağlamdır."
+  },
+  "MiningTool": {
+    "localized_name": "Maden Vagonu",
+    "description": "Madencilik hızını artırmak için üsse yerleştir. Birden fazla yerleştirmenin ilave etkisi olmaz."
+  },
+  "Mirror01_Stone": {
+    "localized_name": "Antika Oval Ayna",
+    "description": "Dekoratif antika oval ayna."
+  },
+  "Mirror01_Wall_Stone": {
+    "localized_name": "Antika Duvar Aynası",
+    "description": "Dekoratif antika duvar aynası. Duvarlara yerleştirilebilir."
+  },
+  "Mirror02_Stone": {
+    "localized_name": "Antika Ayna",
+    "description": "Dekoratif antika ayna."
+  },
+  "MonsterFarm": {
+    "localized_name": "Ağıl",
+    "description": "Koyun ve kümes hayvanı benzeri Pal'ları yetiştirmek için çiftlik. Ürün üretmek için çiftliğe uygun bir Partner Yeteneği olan bir Pal ata."
+  },
+  "MultiElectricHatchingPalEgg": {
+    "localized_name": "Büyük Ölçekli Elektrikli Kuluçka Makinesi",
+    "description": "Pal yumurtalarını kuluçkaya sokan bir cihaz. Güç kaynağı gereklidir ancak birden fazla yumurtanın en uygun sıcaklıkta aynı anda kuluçkaya girmesini sağlar."
+  },
+  "MultiHatchingPalEgg": {
+    "localized_name": "Büyük Yumurta Kuluçka Makinesi",
+    "description": "Pal yumurtalarını çatlatmak için kullanılan cihaz. Otomatik olarak uygun sıcaklığa gelir ve birden fazla yumurtayı aynı anda çatlatabilir."
+  },
+  "Ninja_Banner": {
+    "localized_name": "Ay Goncası Dikey Flaması",
+    "description": "Dekoratif Ay Goncası dikey flaması."
+  },
+  "Ninja_Flag": {
+    "localized_name": "Ay Goncası Örgüt Bayrağı",
+    "description": "Dekoratif Ay Goncası örgüt bayrağı."
+  },
+  "OilPump": {
+    "localized_name": "Ham Petrol Çıkarıcı",
+    "description": "Petrol sahalarından Ham Petrol çıkarmak için gerekli ekipman. Çalışması için bir güç kaynağı gerekir."
+  },
+  "OlympicCauldron": {
+    "localized_name": "Ateş Kazanı",
+    "description": "Ateş yakma hızını artırmak için üsse yerleştir. Birden fazla yerleştirmenin ilave etkisi olmaz."
+  },
+  "OperatingTable": {
+    "localized_name": "Pal Ameliyat Masası",
+    "description": "Pal üzerinde ameliyat yaparak, Pal’in cinsiyetini ve pasif yeteneklerini değiştirebileceğiniz bir tesistir."
+  },
+  "PalBooth": {
+    "localized_name": "Bit Pazarı (Pal'lar)",
+    "description": "Pal'ları satmak için bir tesis. Pal'ları satış listesine koyarak diğer oyunculara satabilirsin. Bir Buz Pal'ı atarsan içindeki yiyeceklerin bozulma olasılığı azalır."
+  },
+  "PalBoxV2": {
+    "localized_name": "Pal Kutusu",
+    "description": "Yakalanan Pal'ları saklayan bir tesis. İçindeki Pal'lar, zaman içinde Canlarını geri kazanır. Bu tesisin etrafındaki bölge bir üsse dönüşür."
+  },
+  "PalCage": {
+    "localized_name": "Boş Kafes",
+    "description": "Dekorasyon amaçlı boş kafes."
+  },
+  "PalFoodBox": {
+    "localized_name": "Yem Kutusu",
+    "description": "Pal yiyecekleri saklamak için bir kutu. Acıkan Pal'lar buradan beslenebilir. Pal'larının mutluluğu için bunu dolu tutmayı ihmal etme."
+  },
+  "PalMedicineBox": {
+    "localized_name": "İlaç Dolabı",
+    "description": "İlaç saklamak için bir raf. Hasta Pal'lar, ilaçlarını almak için buraya gelirler. İlaç stoklarını dolu tutmayı unutma."
+  },
+  "Partition_Stone": {
+    "localized_name": "Antika Paravan",
+    "description": "Dekoratif antika paravan."
+  },
+  "Piano01_Stone": {
+    "localized_name": "Kuyruklu Piyano",
+    "description": "Dekoratif kuyruklu piyano. Çalışmıyor."
+  },
+  "Piano02_Stone": {
+    "localized_name": "Duvar Piyanosu",
+    "description": "Dekoratif duvar piyanosu. Çalışmıyor."
+  },
+  "PipeClay01_Iron": {
+    "localized_name": "Beton Boru",
+    "description": "Dekoratif beton boru."
+  },
+  "Plant01_Plant": {
+    "localized_name": "Ev Bitkisi",
+    "description": "Antika ev bitkisi."
+  },
+  "Plant02_Plant": {
+    "localized_name": "Sehpalı Ev Bitkisi",
+    "description": "Antika sandalyeli ev bitkisi."
+  },
+  "Plant03_Plant": {
+    "localized_name": "Masaüstü Ev Bitkisi",
+    "description": "Antika masaüstü ev bitkisi."
+  },
+  "Plant04_Plant": {
+    "localized_name": "Saksılı Ev Bitkisi",
+    "description": "Dekoratif saksılı ev bitkisi."
+  },
+  "PlayerBed_02": {
+    "localized_name": "Uyduruk Yatak",
+    "description": "İnsanlar için uyduruk bir yatak. Yaralandığında veya geceleri uyumak için kullanabilirsin. Üzerinde bir çatı olmadan rahat uyuyamazsın."
+  },
+  "PlayerBed_03": {
+    "localized_name": "İyi Yatak",
+    "description": "İnsanlar için yumuşak bir yatak. Yaralandığında veya geceleri uyumak için kullanabilirsin. Üzerinde bir çatı olmadan rahat uyuyamazsın."
+  },
+  "Police_Banner": {
+    "localized_name": "PASG Dikey Flaması",
+    "description": "Dekoratif PASG dikey flaması."
+  },
+  "Police_Flag": {
+    "localized_name": "PASG Örgüt Bayrağı",
+    "description": "Dekoratif PASG örgüt bayrağı."
+  },
+  "QuartzPit": {
+    "localized_name": "Saf Kuvars Madeni",
+    "description": "Saf Kuvars üretmek için bir tesis. Saf Kuvars çıkarmak fiziksel dayanıklılık isteyen zor bir iştir. Bu işi madencilikte yetenekli Pal'lara bırak."
+  },
+  "Refrigerator": {
+    "localized_name": "Buzdolabı",
+    "description": "Büyük yiyecek kasası. İçinde saklanan yiyeceklerin bozulmasını engellemek için bir Buz Pal'ı ata."
+  },
+  "RepairBench": {
+    "localized_name": "Tamir Tezgâhı",
+    "description": "Kırılan araçları tamir etmek için bir tezgâh. Tamirat yapmak için malzemeler gerekir."
+  },
+  "Rug01_Stone": {
+    "localized_name": "Antika Halı",
+    "description": "Dekoratif antika halı."
+  },
+  "Rug02_Stone": {
+    "localized_name": "Antika Kırmızı Halı",
+    "description": "Dekoratif antika kırmızı halı."
+  },
+  "Rug03_Stone": {
+    "localized_name": "Antika Yeşil Halı",
+    "description": "Dekoratif antika yeşil halı."
+  },
+  "Rug04_Stone": {
+    "localized_name": "Antika Uzun Halı",
+    "description": "Dekoratif antika uzun halı."
+  },
+  "Rug_Wood": {
+    "localized_name": "-",
+    "description": "-"
+  },
+  "SF_Chair": {
+    "localized_name": "Araştırma Odası Tipi Sandalye",
+    "description": "Dekoratif araştırma odası tipi sandalye."
+  },
+  "SF_Desk": {
+    "localized_name": "Araştırma Odası Tipi Masa",
+    "description": "Dekoratif araştırma odası tipi masa."
+  },
+  "SF_DiagonalWall": {
+    "localized_name": "Fütüristik Diyagonal Duvar",
+    "description": "Üçgen temelin üzerine inşa edilerek istilacılara karşı koruma sağlamak için kullanılan diyagonal bir duvar. Sade ve fütüristik tarzda yapılar inşa etmeye olanak tanır."
+  },
+  "SF_DoorWall": {
+    "localized_name": "Kapılı Temiz Duvar",
+    "description": "Temelin üzerine inşa edilen ve giriş olarak kullanılabilen bir kapı. Temiz ve fütüristik bir mimari yaratır."
+  },
+  "SF_Fence": {
+    "localized_name": "Temiz Çit",
+    "description": "Düşmeyi önlemek için temel veya çatının üzerine inşa edilen parmaklık. Temiz ve yakın geleceğe ait tarzda bir mimari ile yapılabilir."
+  },
+  "SF_PyramidRoof": {
+    "localized_name": "Fütüristik Piramit Çatı",
+    "description": "Duvarların üzerine inşa edilerek yağmur ve rüzgârdan korunmak için kullanılan konik bir çatı. Sade ve fütüristik tarzda yapılar inşa etmeye olanak tanır."
+  },
+  "SF_SlantedRoof": {
+    "localized_name": "Temiz Eğimli Çatı",
+    "description": "Duvarın üzerine inşa edilip yağmur ve rüzgardan koruyan eğimli çatı. Temiz ve fütüristik bir mimari yaratır."
+  },
+  "SF_SlopedRoofCorner": {
+    "localized_name": "Fütüristik Üçgen Eğimli Çatı",
+    "description": "Duvarların üzerine inşa edilerek yağmur ve rüzgârdan korunmak için kullanılan köşe eğimli bir çatı. Sade ve fütüristik tarzda yapılar inşa etmeye olanak tanır."
+  },
+  "SF_TriangleFoundation": {
+    "localized_name": "Fütüristik Üçgen Temel",
+    "description": "Üzerine duvar veya tesis inşa etmek için kullanılan üçgen bir temel. Sade ve fütüristik tarzda yapılar inşa etmeye olanak tanır."
+  },
+  "SF_TriangleRoof": {
+    "localized_name": "Fütüristik Üçgen Çatı",
+    "description": "Duvarların üzerine inşa edilerek yağmur ve rüzgârdan korunmak için kullanılan üçgen bir çatı. Sade ve fütüristik tarzda yapılar inşa etmeye olanak tanır."
+  },
+  "SF_TriangleStairsCorner": {
+    "localized_name": "Fütüristik Köşe Çatı",
+    "description": "Duvarların üzerine inşa edilerek yağmur ve rüzgârdan korunmak için kullanılan köşe çatı. Sade ve fütüristik tarzda yapılar inşa etmeye olanak tanır."
+  },
+  "SF_TriangleWall": {
+    "localized_name": "Temiz Üçgen Duvar",
+    "description": "Temel üzerine inşa edilen üçgen duvar. Temiz ve fütüristik bir mimari yaratır."
+  },
+  "SF_TriangleWallReverse": {
+    "localized_name": "Fütüristik Üçgen Duvar (Ters)",
+    "description": "Temelin üzerine inşa edilmek üzere tasarlanmış ters üçgen bir duvar. Sade ve fütüristik tarzda yapılar inşa etmeye olanak tanır."
+  },
+  "SF_WallGate": {
+    "localized_name": "Fütüristik Pal Geçidi",
+    "description": "Temelin üzerine inşa edilip giriş çıkış noktası olarak kullanılan Pal geçidi. Sade ve fütüristik tarzda yapılar inşa etmeye olanak tanır."
+  },
+  "SF_WindowWall": {
+    "localized_name": "Temiz Pencereli Duvar",
+    "description": "Temelin üzerine inşa edilen ve yabancıların girmesini engellemek için pencere bulunan duvar. Temiz ve fütüristik bir mimari yaratır."
+  },
+  "SF_foundation": {
+    "localized_name": "Temiz Temel",
+    "description": "Üstüne duvar veya tesisler inşa etmek için bir temel. Temiz ve fütüristik bir mimari inşa etmeye olanak tanır."
+  },
+  "SF_roof": {
+    "localized_name": "Temiz Çatı",
+    "description": "Duvarın üzerine inşa edilerek yağmur ve rüzgârdan korunmayı sağlayan çatı. Temiz ve fütüristik bir mimari inşa etmeye olanak tanır."
+  },
+  "SF_stair": {
+    "localized_name": "Temiz Merdiven",
+    "description": "Temel ya da çatının altına yerleştirilerek üzerine çıkılmasını sağlayan merdiven. Temiz ve fütüristik bir mimari inşa etmeye olanak tanır."
+  },
+  "SF_wall": {
+    "localized_name": "Temiz Duvar",
+    "description": "Temel üzerine inşa edilip, istilacıları engellemek için kullanılan duvar Temiz ve fütüristik bir mimari inşa etmeye olanak tanır."
+  },
+  "SanityDecrease1": {
+    "localized_name": "Alfa Dalga Jeneratörü",
+    "description": "Pal'ları rahatlatmak için alfa dalgaları üreten bir cihaz. Üsteki müttefiklerinin AKL değerlerinin düşme hızını azaltır. Bu cihazdan iki veya daha fazla yerleştirmenin ek bir etkisi olmaz."
+  },
+  "Scientist_Banner": {
+    "localized_name": "PAL Genetik Araştırma Birimi Dikey Flaması",
+    "description": "Dekoratif PAL Genetik Araştırma Birimi dikey flaması."
+  },
+  "Scientist_Flag": {
+    "localized_name": "PAL Genetik Araştırma Birimi Örgüt Bayrağı",
+    "description": "Dekoratif PAL Genetik Araştırma Birimi örgüt bayrağı."
+  },
+  "Seika": {
+    "localized_name": "Çiçek Aranjmanı",
+    "description": "Dekoratif çiçek aranjmanı. Japon tarzı binalar için mükemmel."
+  },
+  "Shelf01_Iron": {
+    "localized_name": "Demir Raf",
+    "description": "Eşya saklamak için demir bir raf."
+  },
+  "Shelf01_Stone": {
+    "localized_name": "Antika Kitaplık",
+    "description": "Eşya saklamak için antika bir kitaplık."
+  },
+  "Shelf01_Wall_Iron": {
+    "localized_name": "Demir Duvar Rafı",
+    "description": "Eşya saklamak için demirden bir duvar rafı. Bir duvara yerleştirilebilir."
+  },
+  "Shelf01_Wall_Stone": {
+    "localized_name": "Antika Duvar Dolabı",
+    "description": "Eşya saklamak için antika bir duvar dolabı. Duvarlara yerleştirilebilir."
+  },
+  "Shelf02_Iron": {
+    "localized_name": "Uzun Demir Raf",
+    "description": "Eşya saklamak için uzun, demir bir raf."
+  },
+  "Shelf02_Stone": {
+    "localized_name": "Antika Gardırop",
+    "description": "Eşya saklamak için antika bir gardırop."
+  },
+  "Shelf03_Iron": {
+    "localized_name": "Turuncu Dolap",
+    "description": "Eşya saklamak için turuncu bir dolap. Pal çıkartmalarıyla süslü."
+  },
+  "Shelf03_Stone": {
+    "localized_name": "Antika Sandık",
+    "description": "Eşya saklamak için antika bir sandık. Bir Pal'ın fotoğrafıyla süslü."
+  },
+  "Shelf04_Iron": {
+    "localized_name": "Dolap",
+    "description": "Eşya saklamak için bir dolap. Pal çıkartmalarıyla süslü."
+  },
+  "Shelf04_Stone": {
+    "localized_name": "Antika Komodin",
+    "description": "Eşya saklamak için antika bir komodin. Bir Pal'ın fotoğrafıyla süslü."
+  },
+  "Shelf05_Stone": {
+    "localized_name": "Antika Konsol",
+    "description": "Eşya saklamak için antika bir konsol."
+  },
+  "Shelf06_Stone": {
+    "localized_name": "Antika Uzun Konsol",
+    "description": "Eşya saklamak için antika ve uzun bir konsol. Bir Pal'ın fotoğrafıyla süslü."
+  },
+  "Shelf07_Stone": {
+    "localized_name": "Büyük Antika Vitrin",
+    "description": "Eşya saklamak için antika ve büyük bir vitrin."
+  },
+  "Shelf_Cask_Wood": {
+    "localized_name": "Tahta Fıçı Rafı",
+    "description": "Eşya saklamak için tahta bir fıçı rafı."
+  },
+  "Shelf_Hang01_Wood": {
+    "localized_name": "Tahta Duvar Rafı",
+    "description": "Eşya saklamak için tahta bir raf. Bir duvara yerleştirilebilir."
+  },
+  "Shelf_Hang02_Wood": {
+    "localized_name": "Tahta Dekoratif Duvar Rafı",
+    "description": "Dekoratif, tahta bir raf. Bir duvara yerleştirilebilir."
+  },
+  "Shelf_Wood": {
+    "localized_name": "Tahta Raf",
+    "description": "Eşya saklamak için tahta bir raf."
+  },
+  "Shishiodoshi": {
+    "localized_name": "Geyik Kaçıran",
+    "description": "Dekoratif geyik kaçıran. Japon tarzı binalar için mükemmel."
+  },
+  "Shrine_Lantern": {
+    "localized_name": "Asılı Fener",
+    "description": "Dekoratif Taş Fener."
+  },
+  "SignExit_Ceiling_Iron": {
+    "localized_name": "Acil Çıkış Tavan Tabelası",
+    "description": "Dekoratif acil çıkış tabelası. Tavanlara asılabilir."
+  },
+  "SignExit_Wall_Iron": {
+    "localized_name": "Acil Çıkış Duvar Tabelası",
+    "description": "Dekoratif acil çıkış tabelası. Duvarlara asılabilir."
+  },
+  "Signboard": {
+    "localized_name": "Tabela",
+    "description": "Üzerine yazı yazılabilir. Anı olarak veya başkalarıyla iletişim kurmak için kullanılabilir."
+  },
+  "Silo": {
+    "localized_name": "Silo",
+    "description": "Bitki dikme hızını artırmak için üsse yerleştir. Birden fazla yerleştirmenin ilave etkisi olmaz."
+  },
+  "SkinChange": {
+    "localized_name": "Pal Kostüm Tesisi",
+    "description": "Pal Kostüm Tesisi. Pal'larına yeni bir görünüm kazandır! Oyunun içinde ve dışında kazanılan kostümler burada uygulanır!"
+  },
+  "Snowman": {
+    "localized_name": "Kardan Adam",
+    "description": "Soğutma hızını artırmak için üsse yerleştir. Birden fazla yerleştirmenin ilave etkisi olmaz."
+  },
+  "Sofa01_Iron": {
+    "localized_name": "Deri Koltuk",
+    "description": "Dekoratif deri koltuk."
+  },
+  "Sofa01_Stone": {
+    "localized_name": "Antika Koltuk",
+    "description": "Dekoratif antika koltuk."
+  },
+  "Sofa02_Iron": {
+    "localized_name": "Deri Kanepe",
+    "description": "Dekoratif deri kanepe."
+  },
+  "Sofa02_Stone": {
+    "localized_name": "Antika Kanepe",
+    "description": "Dekoratif antika kanepe."
+  },
+  "Sofa03_Stone": {
+    "localized_name": "Antika Puf",
+    "description": "Dekoratif antika puf."
+  },
+  "Spa": {
+    "localized_name": "Kaplıca",
+    "description": "Üsteki Pal'ların dinlenebileceği bir tesis. Yoğun geçen uzun bir iş gününün ardından AKL'yi geri kazandırır."
+  },
+  "Spa2": {
+    "localized_name": "Yüksek Kaliteli Kaplıca",
+    "description": "Üsteki Pal'ların dinlenebileceği bir tesis. Artık çok daha konforlu ve daha fazla AKL'yi geri kazandırır."
+  },
+  "Spa3": {
+    "localized_name": "Japon tarzı kaplıca",
+    "description": "Yorgun Pal’ların dinlenmesi için kullanılan bir tesis. Japon tarzı rahatlatıcı bir ortam sunar ve SAN değerini iyileştirmeye olanak sağlar."
+  },
+  "SphereFactory_Black_01": {
+    "localized_name": "Küre Tezgâhı",
+    "description": "Pal'ları yakalamada kullanılan küreleri üretmek için bir İlkel Tezgâh. Çalışma alanı küçük olduğu için üretim hızı yavaştır. Ellerini kullanabilen Pal'lar olmadan çalışmaz."
+  },
+  "SphereFactory_Black_02": {
+    "localized_name": "Küre Montaj Hattı",
+    "description": "Pal'ları yakalamada kullanılan küreleri üretmek için bir Montaj Hattı. Gruplara ayrılarak çalışan Pal'lar sayesinde üretim hızı biraz artmıştır. Ellerini kullanabilen Pal'lar olmadan çalışmaz."
+  },
+  "SphereFactory_Black_03": {
+    "localized_name": "Küre Montaj Hattı II",
+    "description": "Pal'ları yakalamada kullanılan küreleri üretmek için bir Montaj Hattı. Akıllıca yönetim kararları sayesinde üretim hızları büyük ölçüde artmıştır. Ellerini kullanabilen Pal'lar olmadan çalışmaz."
+  },
+  "SphereFactory_Black_04": {
+    "localized_name": "Gelişmiş Küre Montaj Hattı",
+    "description": "Pal'ları yakalamada kullanılan küreleri üretmek için bir Montaj Hattı. Gelişmiş makinelerin takviyesiyle yüksek hızda küre üretimi mümkün hâle gelmiştir. Ellerini kullanabilen Pal'lar olmadan çalışmaz."
+  },
+  "StationDeforest2": {
+    "localized_name": "Odunculuk Kampı",
+    "description": "Odun üretmek için bir tesis. Odun kesmek büyük fiziksel dayanıklılık isteyen zor bir iştir. Bu işi odunculukta yetenekli Pal'lara bırak."
+  },
+  "StonePit": {
+    "localized_name": "Taş Ocağı",
+    "description": "Taş üretmek için bir tesis. Taş çıkarmak büyük fiziksel dayanıklılık isteyen zor bir iştir. Bu işi madencilikte yetenekli Pal'lara bırak."
+  },
+  "Stone_DiagonalWall": {
+    "localized_name": "Taş Diyagonal Duvar",
+    "description": "Üçgen temelin üzerine inşa edilerek istilacılara karşı koruma sağlamak için kullanılan diyagonal bir duvar. Taştan yapıldığı için oldukça sağlamdır."
+  },
+  "Stone_DoorWall": {
+    "localized_name": "Taş Kapı",
+    "description": "Zemin üzerine inşa edilmiş kapı. Bir giriş görevi görür. Taştan yapılmıştır ve yeteri kadar sağlamdır."
+  },
+  "Stone_Fence": {
+    "localized_name": "Taş Çit",
+    "description": "Düşmeyi önlemek için temel veya çatının üzerine inşa edilen parmaklık. Taştan yapıldığı için oldukça sağlamdır."
+  },
+  "Stone_Gate": {
+    "localized_name": "Taş Giriş Kapısı",
+    "description": "Büyük Pal'ların geçmesine olanak tanıyacak kadar geniş bir giriş kapısı. Taştan yapılmıştır ve yeteri kadar sağlamdır."
+  },
+  "Stone_PyramidRoof": {
+    "localized_name": "Taş Piramit Çatı",
+    "description": "Duvarların üzerine inşa edilerek yağmur ve rüzgârdan korunmak için kullanılan konik bir çatı. Taştan yapıldığı için oldukça sağlamdır."
+  },
+  "Stone_SlantedRoof": {
+    "localized_name": "Taş Eğimli Çatı",
+    "description": "Yağmuru ve rüzgârı uzak tutmak için duvarların üzerine inşa edilmiş eğimli bir çatı. Taştan yapılmıştır ve yeteri kadar sağlamdır."
+  },
+  "Stone_SlopedRoofCorner": {
+    "localized_name": "Taş Üçgen Eğimli Çatı",
+    "description": "Duvarların üzerine inşa edilerek yağmur ve rüzgârdan korunmak için kullanılan köşe eğimli bir çatı. Taştan yapıldığı için oldukça sağlamdır."
+  },
+  "Stone_TriangleFoundation": {
+    "localized_name": "Taş Üçgen Temel",
+    "description": "Üzerine duvar veya tesis inşa etmek için kullanılan üçgen bir temel. Taştan yapıldığı için oldukça sağlamdır."
+  },
+  "Stone_TriangleRoof": {
+    "localized_name": "Taş Üçgen Çatı",
+    "description": "Duvarların üzerine inşa edilerek yağmur ve rüzgârdan korunmak için kullanılan üçgen bir çatı. Taştan yapıldığı için oldukça sağlamdır."
+  },
+  "Stone_TriangleStairsCorner": {
+    "localized_name": "Taş Köşe Çatı",
+    "description": "Duvarların üzerine inşa edilerek yağmur ve rüzgârdan korunmak için kullanılan köşe çatı. Taştan yapıldığı için oldukça sağlamdır."
+  },
+  "Stone_TriangleWall": {
+    "localized_name": "Taş Üçgen Duvar",
+    "description": "Davetsiz misafirleri uzak tutmak için zemin üzerine inşa edilmiş üçgen duvar. Taştan yapılmıştır ve yeteri kadar sağlamdır."
+  },
+  "Stone_TriangleWallReverse": {
+    "localized_name": "Taş Üçgen Duvar (Ters)",
+    "description": "Temelin üzerine inşa edilmek üzere tasarlanmış ters üçgen bir duvar. Taştan yapıldığı için oldukça sağlamdır."
+  },
+  "Stone_WallGate": {
+    "localized_name": "Taş Pal Geçidi",
+    "description": "Temelin üzerine inşa edilip giriş çıkış noktası olarak kullanılan Pal geçidi. Taştan yapıldığı için oldukça sağlamdır."
+  },
+  "Stone_WindowWall": {
+    "localized_name": "Pencereli Taş Duvar",
+    "description": "Davetsiz misafirleri uzak tutmak için zemin üzerine inşa edilmiş duvar. Bir penceresi de vardır. Taştan yapılmıştır ve yeteri kadar sağlamdır."
+  },
+  "Stone_foundation": {
+    "localized_name": "Taş Zemin",
+    "description": "Üzerine duvarlar inşa edebileceğin veya araç ve tesisler kurabileceğin bir zemin. Taştan yapılmıştır ve yeteri kadar sağlamdır."
+  },
+  "Stone_roof": {
+    "localized_name": "Taş Çatı",
+    "description": "Yağmuru ve rüzgârı uzak tutmak için duvarların üzerine inşa edilmiş bir çatı. Taştan yapılmıştır ve yeteri kadar sağlamdır."
+  },
+  "Stone_stair": {
+    "localized_name": "Taş Merdiven",
+    "description": "Yukarı çıkmak için bir zeminin veya çatının altına yerleştirmiş merdivenler. Taştan yapılmıştır ve yeteri kadar sağlamdır."
+  },
+  "Stone_wall": {
+    "localized_name": "Taş Duvar",
+    "description": "Davetsiz misafirleri uzak tutmak için zemin üzerine inşa edilmiş duvarlar. Taştan yapılmıştır, yeteri kadar sağlamdır."
+  },
+  "Stool01_Iron": {
+    "localized_name": "Demir Tabure",
+    "description": "Dekoratif demir tabure."
+  },
+  "Stool01_Stone": {
+    "localized_name": "Antika Tabure",
+    "description": "Dekoratif antika tabure."
+  },
+  "Stool_High_Wood": {
+    "localized_name": "Tahta Bar Taburesi",
+    "description": "Dekoratif bar taburesi."
+  },
+  "Stool_Wood": {
+    "localized_name": "Tahta Tabure",
+    "description": "Dekoratif tahta tabure."
+  },
+  "Stove01_Stone": {
+    "localized_name": "Antika Fırın",
+    "description": "Dekoratif antika fırın."
+  },
+  "Stump": {
+    "localized_name": "Kütük ve Balta",
+    "description": "Odunculuk hızını artırmak için üsse yerleştir. Birden fazla yerleştirmenin ilave etkisi olmaz."
+  },
+  "SulfurPit": {
+    "localized_name": "Kükürt Madeni",
+    "description": "Kükürt üretmek için bir tesis. Kükürt kazmak çok zorlu bir beden işidir. Bu işi madencilikte yetenekli bir Pal'a bırak."
+  },
+  "TableCircular01_Iron": {
+    "localized_name": "Yuvarlak Demir Masa",
+    "description": "Dekoratif yuvarlak demir masa."
+  },
+  "TableCircular01_Stone": {
+    "localized_name": "Antika Yuvarlak Masa",
+    "description": "Dekoratif antika yuvarlak masa."
+  },
+  "TableCircular_Wood": {
+    "localized_name": "Yuvarlak Masa",
+    "description": "Dekoratif yuvarlak masa."
+  },
+  "TableDresser01_Stone": {
+    "localized_name": "Antika Şifonyer",
+    "description": "Kendini baştan yaratmak için kullanışlı bir şifonyer. Oyuncuların görünümlerini düzenlemelerine olanak tanır."
+  },
+  "TableSide01_Iron": {
+    "localized_name": "Ahşap-Demir Sehpa",
+    "description": "Dekoratif ahşap-demir sehpa."
+  },
+  "TableSink01_Stone": {
+    "localized_name": "Antika Lavabo",
+    "description": "Dekoratif antika lavabo."
+  },
+  "TableSquare01_Iron": {
+    "localized_name": "Ahşap-Demir Masa",
+    "description": "Dekoratif ahşap-demir masa."
+  },
+  "TableSquare02_Iron": {
+    "localized_name": "Ahşap-Demir Orta Sehpa",
+    "description": "Dekoratif ahşap-demir orta sehpa."
+  },
+  "TableSquare_Wood": {
+    "localized_name": "Kare Masa",
+    "description": "Dekoratif kare masa."
+  },
+  "Tansu": {
+    "localized_name": "Japon Tarzı Sandık",
+    "description": "Eşyaları depolar. Japon tarzı binalar için mükemmel."
+  },
+  "Television01_Iron": {
+    "localized_name": "Eski Televizyon",
+    "description": "Dekoratif, eski bir televizyon. Kadim bir medeniyetten kalmış. Artık sadece Pengullet görüntüleri gösteriyor."
+  },
+  "Tire01_Iron": {
+    "localized_name": "Lastik",
+    "description": "Dekoratif lastik."
+  },
+  "Toilet01_Stone": {
+    "localized_name": "Antika Klozet",
+    "description": "Dekoratif antika klozet. Orijinal amacıyla kullanılamaz."
+  },
+  "ToiletHolder01_Stone": {
+    "localized_name": "Antika Tuvalet Kâğıdı Askısı",
+    "description": "Dekoratif antika tuvalet kâğıdı askısı."
+  },
+  "ToolBoxV1": {
+    "localized_name": "Büyük Alet Çantası",
+    "description": "El işi hızını artırmak için üsse yerleştir. Birden fazla yerleştirmenin ilave etkisi olmaz."
+  },
+  "Torch": {
+    "localized_name": "Sabitlenmiş Meşale",
+    "description": "Bir üssü geceleri bile aydınlatabilen bir ışık kaynağı. Ateş yakmak için bir Ateş Pal'ı gerekir."
+  },
+  "Toro": {
+    "localized_name": "Taş Fener",
+    "description": "Dekoratif taş fener. Japon tarzı binalar için mükemmel."
+  },
+  "TowlRack01_Stone": {
+    "localized_name": "Antika Havluluk",
+    "description": "Dekoratif antika havluluk."
+  },
+  "TrafficBarricade01_Iron": {
+    "localized_name": "Barikat",
+    "description": "Dekoratif barikat."
+  },
+  "TrafficBarricade02_Iron": {
+    "localized_name": "Turuncu Barikat",
+    "description": "Dekoratif turuncu barikat."
+  },
+  "TrafficBarricade03_Iron": {
+    "localized_name": "Kırmızı Demir Barikat",
+    "description": "Dekoratif kırmızı barikat."
+  },
+  "TrafficBarricade04_Iron": {
+    "localized_name": "Beyaz Demir Barikat",
+    "description": "Dekoratif beyaz barikat."
+  },
+  "TrafficBarricade05_Iron": {
+    "localized_name": "Demir Çit",
+    "description": "Dekoratif demir çit."
+  },
+  "TrafficCone01_Iron": {
+    "localized_name": "Trafik Dubası",
+    "description": "Dekoratif trafik dubası."
+  },
+  "TrafficCone02_Iron": {
+    "localized_name": "Kalın Trafik Dubası",
+    "description": "Dekoratif kalın trafik dubası."
+  },
+  "TrafficCone03_Iron": {
+    "localized_name": "İnce Trafik Dubası",
+    "description": "Dekoratif ince trafik dubası."
+  },
+  "TrafficLight01_Iron": {
+    "localized_name": "Trafik Işığı",
+    "description": "Dekoratif trafik ışığı."
+  },
+  "TrafficSign01_Iron": {
+    "localized_name": "Pal Giremez Tabelası",
+    "description": "Dekoratif Pal Giremez tabelası. Kadim zamanlarda kullanılırdı, artık bir amacı yok."
+  },
+  "TrafficSign02_Iron": {
+    "localized_name": "Dur Tabelası",
+    "description": "Dekoratif Dur tabelası. Kadim zamanlarda kullanılırdı, artık bir amacı yok."
+  },
+  "TrafficSign03_Iron": {
+    "localized_name": "Eikthyrdeer Çıkabilir Tabelası",
+    "description": "Dekoratif Eikthyrdeer Çıkabilir tabelası. Kadim zamanlarda Eikthyrdeer türü ve diğer Pal'ların çarpışması sık görülürdü."
+  },
+  "TrafficSign04_Iron": {
+    "localized_name": "Mammorest Çıkabilir Tabelası",
+    "description": "Dekoratif Mammorest Çıkabilir tabelası. Kadim zamanlarda bir Mammorest'i öfkelendirenler çoğu zamanlar ölürdü."
+  },
+  "TransmissionTower": {
+    "localized_name": "Elektrik Direği",
+    "description": "Elektrik üretme hızını artırmak için üsse yerleştir. Birden fazla yerleştirmenin ilave etkisi olmaz."
+  },
+  "Trap_LegHold": {
+    "localized_name": "Ayı Tuzağı (Küçük)",
+    "description": "Üzerine basan Pal'ları hareketsiz bırakan bir tuzak. Tuzağa düşmüş Pal'ları küreyle yakalama oranı artar. Sadece küçük Pal'lar üzerinde etkilidir."
+  },
+  "Trap_LegHold_Big": {
+    "localized_name": "Ayı Tuzağı (Büyük)",
+    "description": "Büyük Pal'ları hareketsiz bırakan bir ayı tuzağı. Tuzağa düşmüş Pal'ları küreyle yakalama oranı artar. Sadece büyük Pal'lar üzerinde etkilidir; küçük Pal'lar yakalanmaz."
+  },
+  "Trap_MineAttack": {
+    "localized_name": "Mayın",
+    "description": "Üzerine bir Pal bastığında patlayan bir tuzak. Geniş bir alana hasar verir."
+  },
+  "Trap_MineElecShock": {
+    "localized_name": "Elektrik Mayını",
+    "description": "Üzerine basan Pal'lara elektrik veren bir tuzak. Elektrik çarpmış Pal'ları küreyle yakalama oranı artar."
+  },
+  "Trap_MineFreeze": {
+    "localized_name": "Buz Mayını",
+    "description": "Üzerine basan Pal'ları donduran bir tuzak. Donmuş Pal'ları küreyle yakalama oranı artar."
+  },
+  "Trap_MovingPanel": {
+    "localized_name": "-",
+    "description": "-"
+  },
+  "Trap_Noose": {
+    "localized_name": "Asılı Tuzak",
+    "description": "İçinden geçen Pal'ları yakalayan bir tuzak. Tuzağa yakalanan Pal'ları kürelerle yakalamak daha kolaydır. Sadece küçük Pal'lar üzerinde etkilidir."
+  },
+  "WallSignboard": {
+    "localized_name": "Duvara Asılı Tabela",
+    "description": "Üzerine yazı yazabileceğin bir tabela. Duvarlara asılabilir."
+  },
+  "WallTorch": {
+    "localized_name": "Duvar Meşalesi",
+    "description": "Bir üssü geceleri bile aydınlatabilen bir ışık kaynağı. Duvarlara yerleştirilebilir. Ateş yakmak için bir Ateş Pal'ı gerekir."
+  },
+  "WallTorch02": {
+    "localized_name": "Görkemli Duvar Meşalesi",
+    "description": "Ebedi alevin yoldaşlarının tapındığı ateşle yakılmış heybetli meşale. Duvarda asilan bir ışık kaynağıdır. Alev Pal’ının ateşi yakması gerekmektedir."
+  },
+  "WeaponFactory_Dirty_01": {
+    "localized_name": "Silah Tezgâhı",
+    "description": "Silah ve cephane üretmek için bir İlkel Tezgâh. Çalışma alanı küçük olduğu için yüksek kaliteli silahlar üretilemez. Ellerini kullanabilen Pal'lar olmadan çalışmaz."
+  },
+  "WeaponFactory_Dirty_02": {
+    "localized_name": "Silah Montaj Hattı",
+    "description": "Silah ve cephane üretmek için bir Montaj Hattı. Gruplara ayrılarak çalışan Pal'lar sayesinde üretim hızı biraz artmıştır. Ellerini kullanabilen Pal'lar olmadan çalışmaz."
+  },
+  "WeaponFactory_Dirty_03": {
+    "localized_name": "Silah Montaj Hattı II",
+    "description": "Silah ve cephane üretmek için bir Montaj Hattı. Akıllıca yönetim kararları sayesinde üretim hızları büyük ölçüde artmıştır. Ellerini kullanabilen Pal'lar olmadan çalışmaz."
+  },
+  "WeaponFactory_Dirty_04": {
+    "localized_name": "Gelişmiş medeniyetin silah üretim tesisi",
+    "description": "Silah ve cephane üretmek için bir Montaj Hattı. Gelişmiş makinelerin takviyesiyle yüksek hızda küre üretimi mümkün hâle gelmiştir. Ellerini kullanabilen Pal'lar olmadan çalışmaz."
+  },
+  "Wire_Fence": {
+    "localized_name": "Tel örgülü çit",
+    "description": "Dekoratif tel çit."
+  },
+  "Wood_Fence": {
+    "localized_name": "Ahşap Çit",
+    "description": "Temel ve çatının üzerine inşa edilerek düşmeyi önlemek için kullanılan çit. Ahşaptan yapıldığı için kırılgandır."
+  },
+  "Wood_Gate": {
+    "localized_name": "Tahta Giriş Kapısı",
+    "description": "Büyük Pal'ların geçmesine olanak tanıyacak kadar geniş bir giriş kapısı. Tahtadan yapıldığı için kolay kırılır."
+  },
+  "Wood_SlantedRoof": {
+    "localized_name": "Tahta Eğimli Çatı",
+    "description": "Yağmuru ve rüzgârı uzak tutmak için duvarların üzerine inşa edilmiş eğimli bir çatı. Tahtadan yapıldığı için kolay kırılır."
+  },
+  "Wood_TriangleWall": {
+    "localized_name": "Tahta Üçgen Duvar",
+    "description": "Davetsiz misafirleri uzak tutmak için zemin üzerine inşa edilmiş üçgen duvar. Tahtadan yapıldığı için kolay kırılır."
+  },
+  "Wood_TriangleWallReverse": {
+    "localized_name": "Ahşap Üçgen Duvar (Ters)",
+    "description": "Temelin üzerine inşa edilmek üzere tasarlanmış ters üçgen bir duvar. Ahşaptan yapıldığı için dayanıksızdır."
+  },
+  "Wood_WindowWall": {
+    "localized_name": "Pencereli Tahta Duvar",
+    "description": "Davetsiz misafirleri uzak tutmak için zemin üzerine inşa edilmiş duvar. Bir penceresi de vardır. Tahtadan yapıldığı için kolay kırılır."
+  },
+  "WoodenBarricade": {
+    "localized_name": "Ahşap Barikat",
+    "description": "Dekorasyon amaçlı Ahşap Barikat."
+  },
+  "Wooden_DiagonalWall": {
+    "localized_name": "Ahşap Diyagonal Duvar",
+    "description": "Üçgen temelin üzerine inşa edilerek istilacılara karşı koruma sağlamak için kullanılan diyagonal bir duvar. Ahşaptan yapıldığı için dayanıksızdır."
+  },
+  "Wooden_DoorWall": {
+    "localized_name": "Tahta Kapı",
+    "description": "Zemin üzerine inşa edilmiş kapı. Bir giriş görevi görür. Tahtadan yapıldığı için kolay kırılır."
+  },
+  "Wooden_PyramidRoof": {
+    "localized_name": "Ahşap Piramit Çatı",
+    "description": "Duvarların üzerine inşa edilerek yağmur ve rüzgârdan korunmak için kullanılan konik bir çatı. Ahşaptan yapıldığı için dayanıksızdır."
+  },
+  "Wooden_SlopedRoofCorner": {
+    "localized_name": "Ahşap Üçgen Eğik Çatı",
+    "description": "Duvarların üzerine inşa edilerek yağmur ve rüzgârdan korunmak için kullanılan köşe eğimli bir çatı. Ahşaptan yapıldığı için dayanıksızdır."
+  },
+  "Wooden_TriangleFoundation": {
+    "localized_name": "Ahşap Üçgen Temel",
+    "description": "Üzerine duvar veya tesis inşa etmek için kullanılan üçgen bir temel. Ahşaptan yapıldığı için dayanıksızdır."
+  },
+  "Wooden_TriangleRoof": {
+    "localized_name": "Ahşap Üçgen Çatı",
+    "description": "Duvarların üzerine inşa edilerek yağmur ve rüzgârdan korunmak için kullanılan üçgen bir çatı. Ahşaptan yapıldığı için dayanıksızdır."
+  },
+  "Wooden_TriangleStairsCorner": {
+    "localized_name": "Ahşap Köşe Çatı",
+    "description": "Duvarların üzerine inşa edilerek yağmur ve rüzgârdan korunmak için kullanılan köşe çatı. Ahşaptan yapıldığı için dayanıksızdır."
+  },
+  "Wooden_WallGate": {
+    "localized_name": "Ahşap Pal Geçidi",
+    "description": "Temelin üzerine inşa edilip giriş çıkış noktası olarak kullanılan Pal geçidi. Ahşaptan yapıldığı için dayanıksızdır."
+  },
+  "Wooden_foundation": {
+    "localized_name": "Tahta Zemin",
+    "description": "Üzerine duvarlar inşa edebileceğin veya araç ve tesisler kurabileceğin bir zemin. Tahtadan yapıldığı için kolay kırılır."
+  },
+  "Wooden_ladder": {
+    "localized_name": "Merdiven",
+    "description": "Biraz yüksekte yerlere tırmanmana olanak tanıyan bir merdiven."
+  },
+  "Wooden_roof": {
+    "localized_name": "Tahta Çatı",
+    "description": "Yağmuru ve rüzgârı uzak tutmak için duvarların üzerine inşa edilmiş bir çatı. Tahtadan yapıldığı için kolay kırılır."
+  },
+  "Wooden_stair": {
+    "localized_name": "Tahta Merdiven",
+    "description": "Yukarı çıkmak için bir zeminin veya çatının altına yerleştirmiş merdivenler. Tahtadan yapıldığı için kolay kırılır."
+  },
+  "Wooden_wall": {
+    "localized_name": "Tahta Duvar",
+    "description": "Davetsiz misafirleri uzak tutmak için zemin üzerine inşa edilmiş duvarlar. Tahtadan yapıldığı için kolay kırılır."
+  },
+  "WorkBench": {
+    "localized_name": "İlkel Tezgâh",
+    "description": "Basit eşyalar üretmek için bir İlkel Tezgâh. Ellerini kullanabilen bir Pal gerektirir."
+  },
+  "WorkBench_SkillUnlock": {
+    "localized_name": "Pal Teçhizatı Tezgâhı",
+    "description": "Pal araçları üretmek için bir İlkel Tezgâh. Pal'lara binmek için bir eyer veya Pal'ların kullanabileceği bir tüfek yap."
+  },
+  "WorkSpeedIncrease1": {
+    "localized_name": "Beta Dalga Jeneratörü",
+    "description": "Pal'lara enerji vermek için beta dalgaları üreten bir cihaz. Üsteki Pal'ların çalışma hızını artırır. Bu cihazdan birden fazla yerleştirmenin ek bir etkisi olmaz."
+  },
+  "YakushimaBoss002_Relic": {
+    "localized_name": "Ay Efendisi Heykeli",
+    "description": "[Terraria İşbirliği] Altın gibi parlayanAy Efendisiheykeli Umutsuz bir savaşı aşmış olan güçlülerin simgesi."
+  },
+  "Zabuton": {
+    "localized_name": "Japon Tarzı Yer Minderi",
+    "description": "Dekoratif yer minderi. Japon tarzı binalar için mükemmel."
+  },
+  "Zaisu": {
+    "localized_name": "Japon Tarzı Yer Sandalyesi",
+    "description": "Dekoratif yer sandalyesi. Japon tarzı binalar için mükemmel."
+  }
+}

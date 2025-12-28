@@ -1,0 +1,38 @@
+{
+  "Dark": {
+    "localized_name": "ธาตุความมืด",
+    "description": null
+  },
+  "Dragon": {
+    "localized_name": "ธาตุมังกร",
+    "description": null
+  },
+  "Earth": {
+    "localized_name": "ธาตุดิน",
+    "description": null
+  },
+  "Electricity": {
+    "localized_name": "ธาตุสายฟ้า",
+    "description": null
+  },
+  "Fire": {
+    "localized_name": "ธาตุไฟ",
+    "description": null
+  },
+  "Ice": {
+    "localized_name": "ธาตุน้ำแข็ง",
+    "description": null
+  },
+  "Leaf": {
+    "localized_name": "ธาตุพืช",
+    "description": null
+  },
+  "Normal": {
+    "localized_name": "ไร้ธาตุ",
+    "description": null
+  },
+  "Water": {
+    "localized_name": "ธาตุน้ำ",
+    "description": null
+  }
+}

@@ -1,0 +1,1294 @@
+{
+  "AirDash_1": {
+    "localized_name": "Lompatan Udara +1",
+    "description": "Lompatan Udara +1"
+  },
+  "AirDash_2": {
+    "localized_name": "Lompatan Udara +2",
+    "description": "Lompatan Udara +2"
+  },
+  "AirDash_3": {
+    "localized_name": "Lompatan Udara +3",
+    "description": "Lompatan Udara +3"
+  },
+  "AirDash_4": {
+    "localized_name": "Lompatan Udara +4",
+    "description": "Lompatan Udara +4"
+  },
+  "Alien": {
+    "localized_name": "Sel Biologis Tidak Dikenal",
+    "description": "Serangan+10.0% Pengurangan damage elemen api 15.0% Pengurangan damage elemen petir 15.0%"
+  },
+  "Attack_ACC_up1": {
+    "localized_name": "Peningkatan Serangan Level 1",
+    "description": null
+  },
+  "Attack_ACC_up1_Otomo_Only_Equip": {
+    "localized_name": "Peningkatan Serangan Pal Level 1",
+    "description": null
+  },
+  "Attack_ACC_up2": {
+    "localized_name": "Peningkatan Serangan Level 2",
+    "description": null
+  },
+  "Attack_ACC_up2_Otomo_Only_Equip": {
+    "localized_name": "Peningkatan Serangan Pal Level 2",
+    "description": null
+  },
+  "Attack_ACC_up3": {
+    "localized_name": "Peningkatan Serangan Level 3",
+    "description": null
+  },
+  "Attack_ACC_up3_Otomo_Only_Equip": {
+    "localized_name": "Peningkatan Serangan Pal Level 3",
+    "description": null
+  },
+  "BossDefeatReward_AmaterasuWolf_Dark": {
+    "localized_name": "Peningkatan Kecil Damage Elemen Kegelapan",
+    "description": null
+  },
+  "BossDefeatReward_Anubis": {
+    "localized_name": "Peningkatan Kecil Damage Elemen Tanah",
+    "description": null
+  },
+  "BossDefeatReward_BadCatgirl": {
+    "localized_name": "Peningkatan Kecil Damage Elemen Kegelapan",
+    "description": null
+  },
+  "BossDefeatReward_BerryGoat_Dark": {
+    "localized_name": "Peningkatan Sedang Damage Elemen Rumput",
+    "description": null
+  },
+  "BossDefeatReward_BlackMetalDragon": {
+    "localized_name": "Peningkatan Sedang Damage Elemen Naga",
+    "description": null
+  },
+  "BossDefeatReward_BlackPuppy": {
+    "localized_name": "Peningkatan Kecil Damage Elemen Kegelapan",
+    "description": null
+  },
+  "BossDefeatReward_BlueDragon": {
+    "localized_name": "Peningkatan Kecil Damage Elemen Air",
+    "description": null
+  },
+  "BossDefeatReward_BlueThunderHorse": {
+    "localized_name": "Peningkatan Sedang Damage Elemen Petir",
+    "description": null
+  },
+  "BossDefeatReward_BlueberryFairy": {
+    "localized_name": "Peningkatan Sedang Damage Elemen Rumput",
+    "description": null
+  },
+  "BossDefeatReward_CaptainPenguin": {
+    "localized_name": "Peningkatan Kecil Damage Elemen Air",
+    "description": null
+  },
+  "BossDefeatReward_CatMage": {
+    "localized_name": "Peningkatan Kecil Damage Elemen Kegelapan",
+    "description": null
+  },
+  "BossDefeatReward_CatVampire": {
+    "localized_name": "Peningkatan Kecil Damage Elemen Kegelapan",
+    "description": null
+  },
+  "BossDefeatReward_DarkScorpion": {
+    "localized_name": "Peningkatan Kecil Damage Elemen Kegelapan",
+    "description": null
+  },
+  "BossDefeatReward_DarkScorpion_Ground": {
+    "localized_name": "Peningkatan Kecil Damage Elemen Tanah",
+    "description": null
+  },
+  "BossDefeatReward_FairyDragon": {
+    "localized_name": "Peningkatan Kecil Damage Elemen Naga",
+    "description": null
+  },
+  "BossDefeatReward_FengyunDeeper": {
+    "localized_name": "Peningkatan Kecil Damage Netral",
+    "description": null
+  },
+  "BossDefeatReward_FengyunDeeper_Electric": {
+    "localized_name": "Peningkatan Sedang Damage Elemen Petir",
+    "description": null
+  },
+  "BossDefeatReward_FlowerDinosaur_Electric": {
+    "localized_name": "Peningkatan Kecil Damage Elemen Petir",
+    "description": null
+  },
+  "BossDefeatReward_FlowerDoll": {
+    "localized_name": "Peningkatan Kecil Damage Elemen Rumput",
+    "description": null
+  },
+  "BossDefeatReward_GhostRabbit": {
+    "localized_name": "Peningkatan Kecil Damage Elemen Kegelapan",
+    "description": null
+  },
+  "BossDefeatReward_GoldenHorse": {
+    "localized_name": "Peningkatan Sedang Damage Elemen Tanah",
+    "description": null
+  },
+  "BossDefeatReward_GrassMammoth": {
+    "localized_name": "Peningkatan Sedang Damage Elemen Rumput",
+    "description": null
+  },
+  "BossDefeatReward_GrassPanda_Electric": {
+    "localized_name": "Peningkatan Kecil Damage Elemen Petir",
+    "description": null
+  },
+  "BossDefeatReward_GrassRabbitMan": {
+    "localized_name": "Peningkatan Kecil Damage Elemen Rumput",
+    "description": null
+  },
+  "BossDefeatReward_GrimGirl": {
+    "localized_name": "Peningkatan Kecil Damage Elemen Kegelapan",
+    "description": null
+  },
+  "BossDefeatReward_HawkBird": {
+    "localized_name": "Peningkatan Kecil Damage Netral",
+    "description": null
+  },
+  "BossDefeatReward_HerculesBeetle": {
+    "localized_name": "Peningkatan Kecil Damage Elemen Tanah",
+    "description": null
+  },
+  "BossDefeatReward_HerculesBeetle_Ground": {
+    "localized_name": "Peningkatan Sedang Damage Elemen Tanah",
+    "description": null
+  },
+  "BossDefeatReward_Horus_Water": {
+    "localized_name": "Peningkatan Sedang Damage Elemen Air",
+    "description": null
+  },
+  "BossDefeatReward_IceHorse": {
+    "localized_name": "Peningkatan Besar Damage Elemen Es",
+    "description": null
+  },
+  "BossDefeatReward_IceHorse_Dark": {
+    "localized_name": "Peningkatan Kecil Damage Elemen Kegelapan",
+    "description": null
+  },
+  "BossDefeatReward_IceNarwhal": {
+    "localized_name": "Peningkatan Besar Damage Elemen Es",
+    "description": null
+  },
+  "BossDefeatReward_IceNarwhal_Fire": {
+    "localized_name": "Peningkatan Besar Damage Elemen Api",
+    "description": null
+  },
+  "BossDefeatReward_JetDragon": {
+    "localized_name": "Peningkatan Besar Damage Elemen Naga",
+    "description": null
+  },
+  "BossDefeatReward_KingAlpaca": {
+    "localized_name": "Peningkatan Kecil Damage Netral",
+    "description": null
+  },
+  "BossDefeatReward_KingAlpaca_Ice": {
+    "localized_name": "Peningkatan Sedang Damage Elemen Es",
+    "description": null
+  },
+  "BossDefeatReward_KingBahamut": {
+    "localized_name": "Peningkatan Besar Damage Elemen Api",
+    "description": null
+  },
+  "BossDefeatReward_Kirin": {
+    "localized_name": "Peningkatan Kecil Damage Elemen Petir",
+    "description": null
+  },
+  "BossDefeatReward_Kitsunebi_Ice": {
+    "localized_name": "Peningkatan Besar Damage Elemen Es",
+    "description": null
+  },
+  "BossDefeatReward_LazyCatfish": {
+    "localized_name": "Peningkatan Kecil Damage Elemen Tanah",
+    "description": null
+  },
+  "BossDefeatReward_LazyDragon_Electric": {
+    "localized_name": "Peningkatan Kecil Damage Elemen Naga",
+    "description": null
+  },
+  "BossDefeatReward_LilyQueen_Dark": {
+    "localized_name": "Peningkatan Kecil Damage Elemen Kegelapan",
+    "description": null
+  },
+  "BossDefeatReward_MopKing": {
+    "localized_name": "Peningkatan Kecil Damage Elemen Es",
+    "description": null
+  },
+  "BossDefeatReward_Mutant": {
+    "localized_name": "Peningkatan Kecil Damage Netral",
+    "description": null
+  },
+  "BossDefeatReward_MysteryMask": {
+    "localized_name": "Peningkatan Kecil Damage Elemen Kegelapan",
+    "description": null
+  },
+  "BossDefeatReward_NaughtyCat": {
+    "localized_name": "Peningkatan Kecil Damage Netral",
+    "description": null
+  },
+  "BossDefeatReward_NightBlueHorse": {
+    "localized_name": "Peningkatan Kecil Damage Elemen Kegelapan",
+    "description": null
+  },
+  "BossDefeatReward_PinkRabbit_Grass": {
+    "localized_name": "Peningkatan Sedang Damage Elemen Rumput",
+    "description": null
+  },
+  "BossDefeatReward_PlantSlime": {
+    "localized_name": "Peningkatan Kecil Damage Elemen Tanah",
+    "description": null
+  },
+  "BossDefeatReward_PoseidonOrca": {
+    "localized_name": "Peningkatan Besar Damage Elemen Es",
+    "description": null
+  },
+  "BossDefeatReward_PurpleSpider": {
+    "localized_name": "Peningkatan Kecil Damage Elemen Kegelapan",
+    "description": null
+  },
+  "BossDefeatReward_QueenBee": {
+    "localized_name": "Peningkatan Kecil Damage Elemen Rumput",
+    "description": null
+  },
+  "BossDefeatReward_RaijinDaughter_Water": {
+    "localized_name": "Peningkatan Kecil Damage Elemen Kegelapan",
+    "description": null
+  },
+  "BossDefeatReward_Ronin": {
+    "localized_name": "Peningkatan Sedang Damage Elemen Api",
+    "description": null
+  },
+  "BossDefeatReward_SaintCentaur_1": {
+    "localized_name": "Peningkatan Besar Damage Netral",
+    "description": null
+  },
+  "BossDefeatReward_SaintCentaur_2": {
+    "localized_name": "Peningkatan Kecil Damage Elemen Kegelapan",
+    "description": null
+  },
+  "BossDefeatReward_SakuraSaurus": {
+    "localized_name": "Peningkatan Kecil Damage Elemen Rumput",
+    "description": null
+  },
+  "BossDefeatReward_SakuraSaurus_Water": {
+    "localized_name": "Peningkatan Kecil Damage Elemen Air",
+    "description": null
+  },
+  "BossDefeatReward_SkyDragon": {
+    "localized_name": "Peningkatan Kecil Damage Elemen Naga",
+    "description": null
+  },
+  "BossDefeatReward_Suzaku": {
+    "localized_name": "Peningkatan Besar Damage Elemen Api",
+    "description": null
+  },
+  "BossDefeatReward_ThunderBird": {
+    "localized_name": "Peningkatan Kecil Damage Elemen Petir",
+    "description": null
+  },
+  "BossDefeatReward_Umihebi": {
+    "localized_name": "Peningkatan Sedang Damage Elemen Air",
+    "description": null
+  },
+  "BossDefeatReward_VioletFairy": {
+    "localized_name": "Peningkatan Sedang Damage Elemen Rumput",
+    "description": null
+  },
+  "BossDefeatReward_WeaselDragon": {
+    "localized_name": "Peningkatan Kecil Damage Elemen Es",
+    "description": null
+  },
+  "BossDefeatReward_Werewolf_Ice": {
+    "localized_name": "Peningkatan Besar Damage Elemen Es",
+    "description": null
+  },
+  "BossDefeatReward_WhiteDeer": {
+    "localized_name": "Peningkatan Sedang Damage Netral",
+    "description": null
+  },
+  "BossDefeatReward_WhiteMoth": {
+    "localized_name": "Peningkatan Kecil Damage Elemen Es",
+    "description": null
+  },
+  "BossDefeatReward_WhiteShieldDragon": {
+    "localized_name": "Peningkatan Sedang Damage Elemen Naga",
+    "description": null
+  },
+  "BossDefeatReward_WhiteTiger_Ground": {
+    "localized_name": "Peningkatan Sedang Damage Elemen Tanah",
+    "description": null
+  },
+  "BossDefeatReward_WingGolem": {
+    "localized_name": "Peningkatan Kecil Damage Elemen Tanah",
+    "description": null
+  },
+  "BossDefeatReward_Yeti_Grass": {
+    "localized_name": "Peningkatan Kecil Damage Elemen Rumput",
+    "description": null
+  },
+  "CaptureLevel_Up_1": {
+    "localized_name": "Peningkatan Daya Tangkap +1",
+    "description": null
+  },
+  "CaptureLevel_Up_2": {
+    "localized_name": "Peningkatan Daya Tangkap +2",
+    "description": null
+  },
+  "CaptureLevel_Up_3": {
+    "localized_name": "Peningkatan Daya Tangkap +3",
+    "description": null
+  },
+  "CaptureLevel_Up_4": {
+    "localized_name": "Peningkatan Daya Tangkap +4",
+    "description": null
+  },
+  "CaptureLevel_Up_5": {
+    "localized_name": "Peningkatan Daya Tangkap +5",
+    "description": null
+  },
+  "CaptureLevel_Up_6": {
+    "localized_name": "Peningkatan Daya Tangkap +6",
+    "description": null
+  },
+  "CollectItem_Berries": {
+    "localized_name": "Pemanen Beri",
+    "description": null
+  },
+  "CollectItem_Egg": {
+    "localized_name": "Produksi Telur",
+    "description": null
+  },
+  "CollectItem_Milk": {
+    "localized_name": "Produksi Susu",
+    "description": null
+  },
+  "CollectItem_Money": {
+    "localized_name": "Penggali Harta",
+    "description": null
+  },
+  "CollectItem_Sweets": {
+    "localized_name": "Produsen Makanan ringan",
+    "description": null
+  },
+  "CollectItem_Wool_Alpaca": {
+    "localized_name": "Produsen Wol",
+    "description": null
+  },
+  "CollectItem_Wool_SheepBall": {
+    "localized_name": "Produsen Wol",
+    "description": null
+  },
+  "CollectItem_Wool_WhiteMoth": {
+    "localized_name": "Tenun Sutra",
+    "description": null
+  },
+  "CoolTimeReduction_Down_1": {
+    "localized_name": "Orang Santai",
+    "description": "Penambahan waktu cooldown skill aktif -15.0%"
+  },
+  "CoolTimeReduction_Up_1": {
+    "localized_name": "Tenang dan Terkendali",
+    "description": "Pengurangan waktu cooldown skill aktif 30.0% Serangan 10.0%"
+  },
+  "CoolTimeReduction_Up_2": {
+    "localized_name": "Tidak Sabar",
+    "description": "Pengurangan waktu cooldown skill aktif 15.0%"
+  },
+  "CoolTimeReduction_Up_3": {
+    "localized_name": "Badai Mengamuk",
+    "description": "Pengurangan waktu cooldown skill aktif 0.0% Serangan 0.0%"
+  },
+  "CraftSpeed_down1": {
+    "localized_name": "Canggung",
+    "description": null
+  },
+  "CraftSpeed_down2": {
+    "localized_name": "Malas",
+    "description": null
+  },
+  "CraftSpeed_up1": {
+    "localized_name": "Rajin",
+    "description": null
+  },
+  "CraftSpeed_up2": {
+    "localized_name": "Tekun",
+    "description": null
+  },
+  "CraftSpeed_up3": {
+    "localized_name": "Teknik Super",
+    "description": null
+  },
+  "Defense_ACC_up1_Otomo_Only_Equip": {
+    "localized_name": "Peningkatan Pertahanan Pal Level 1",
+    "description": null
+  },
+  "Defense_ACC_up2_Otomo_Only_Equip": {
+    "localized_name": "Peningkatan Pertahanan Pal Level 2",
+    "description": null
+  },
+  "Defense_ACC_up3_Otomo_Only_Equip": {
+    "localized_name": "Peningkatan Pertahanan Pal Level 3",
+    "description": null
+  },
+  "Deffence_down1": {
+    "localized_name": "Mudah Diserang",
+    "description": null
+  },
+  "Deffence_down2": {
+    "localized_name": "Mudah Patah Tulang",
+    "description": null
+  },
+  "Deffence_up1": {
+    "localized_name": "Kulit Keras",
+    "description": null
+  },
+  "Deffence_up2": {
+    "localized_name": "Badan Berotot",
+    "description": null
+  },
+  "Deffence_up3": {
+    "localized_name": "Badan Berlian",
+    "description": null
+  },
+  "ElementBoost_Aqua_1_PAL": {
+    "localized_name": "Suka Bermain Air",
+    "description": "Peningkatan damage serangan elemen air 10.0%"
+  },
+  "ElementBoost_Aqua_2_PAL": {
+    "localized_name": "Kaisar Laut",
+    "description": null
+  },
+  "ElementBoost_Dark_1_BossDefeat": {
+    "localized_name": "Peningkatan Kecil Damage Elemen Kegelapan",
+    "description": null
+  },
+  "ElementBoost_Dark_1_Otomo_Only_Equip": {
+    "localized_name": "Peningkatan Damage Elemen Kegelapan Pal Level 1",
+    "description": null
+  },
+  "ElementBoost_Dark_1_PAL": {
+    "localized_name": "Tirai Malam",
+    "description": "Peningkatan damage serangan elemen kegelapan 10.0%"
+  },
+  "ElementBoost_Dark_2_BossDefeat": {
+    "localized_name": "Peningkatan Sedang Damage Elemen Kegelapan",
+    "description": null
+  },
+  "ElementBoost_Dark_2_Otomo_Only_Equip": {
+    "localized_name": "Peningkatan Damage Elemen Kegelapan Pal Level 2",
+    "description": null
+  },
+  "ElementBoost_Dark_2_PAL": {
+    "localized_name": "Neraka",
+    "description": null
+  },
+  "ElementBoost_Dark_3_BossDefeat": {
+    "localized_name": "Peningkatan Besar Damage Elemen Kegelapan",
+    "description": null
+  },
+  "ElementBoost_Dark_3_Otomo_Only_Equip": {
+    "localized_name": "Peningkatan Damage Elemen Kegelapan Pal Level 3",
+    "description": null
+  },
+  "ElementBoost_Dragon_1_BossDefeat": {
+    "localized_name": "Peningkatan Kecil Damage Elemen Naga",
+    "description": null
+  },
+  "ElementBoost_Dragon_1_Otomo_Only_Equip": {
+    "localized_name": "Peningkatan Damage Elemen Naga Pal Level 1",
+    "description": null
+  },
+  "ElementBoost_Dragon_1_PAL": {
+    "localized_name": "Keturunan Naga",
+    "description": "Peningkatan damage serangan elemen naga 10.0%"
+  },
+  "ElementBoost_Dragon_2_BossDefeat": {
+    "localized_name": "Peningkatan Sedang Damage Elemen Naga",
+    "description": null
+  },
+  "ElementBoost_Dragon_2_Otomo_Only_Equip": {
+    "localized_name": "Peningkatan Damage Elemen Naga Pal Level 2",
+    "description": null
+  },
+  "ElementBoost_Dragon_2_PAL": {
+    "localized_name": "Naga Suci",
+    "description": null
+  },
+  "ElementBoost_Dragon_3_BossDefeat": {
+    "localized_name": "Peningkatan Besar Damage Elemen Naga",
+    "description": null
+  },
+  "ElementBoost_Dragon_3_Otomo_Only_Equip": {
+    "localized_name": "Peningkatan Damage Elemen Naga Pal Level 3",
+    "description": null
+  },
+  "ElementBoost_Earth_1_BossDefeat": {
+    "localized_name": "Peningkatan Kecil Damage Elemen Tanah",
+    "description": null
+  },
+  "ElementBoost_Earth_1_Otomo_Only_Equip": {
+    "localized_name": "Peningkatan Damage Elemen Tanah Pal Level 1",
+    "description": null
+  },
+  "ElementBoost_Earth_1_PAL": {
+    "localized_name": "Kekuatan Bumi",
+    "description": "Peningkatan damage serangan elemen tanah 10.0%"
+  },
+  "ElementBoost_Earth_2_BossDefeat": {
+    "localized_name": "Peningkatan Sedang Damage Elemen Tanah",
+    "description": null
+  },
+  "ElementBoost_Earth_2_Otomo_Only_Equip": {
+    "localized_name": "Peningkatan Damage Elemen Tanah Pal Level 2",
+    "description": null
+  },
+  "ElementBoost_Earth_2_PAL": {
+    "localized_name": "Kaisar Bumi",
+    "description": null
+  },
+  "ElementBoost_Earth_3_BossDefeat": {
+    "localized_name": "Peningkatan Besar Damage Elemen Tanah",
+    "description": null
+  },
+  "ElementBoost_Earth_3_Otomo_Only_Equip": {
+    "localized_name": "Peningkatan Damage Elemen Tanah Pal Level 3",
+    "description": null
+  },
+  "ElementBoost_Electricity_1_BossDefeat": {
+    "localized_name": "Peningkatan Kecil Damage Elemen Petir",
+    "description": null
+  },
+  "ElementBoost_Electricity_1_Otomo_Only_Equip": {
+    "localized_name": "Peningkatan Damage Elemen Petir Pal Level 1",
+    "description": null
+  },
+  "ElementBoost_Electricity_2_BossDefeat": {
+    "localized_name": "Peningkatan Sedang Damage Elemen Petir",
+    "description": null
+  },
+  "ElementBoost_Electricity_2_Otomo_Only_Equip": {
+    "localized_name": "Peningkatan Damage Elemen Petir Pal Level 2",
+    "description": null
+  },
+  "ElementBoost_Electricity_3_BossDefeat": {
+    "localized_name": "Peningkatan Besar Damage Elemen Petir",
+    "description": null
+  },
+  "ElementBoost_Electricity_3_Otomo_Only_Equip": {
+    "localized_name": "Peningkatan Damage Elemen Petir Pal Level 3",
+    "description": null
+  },
+  "ElementBoost_Fire_1_BossDefeat": {
+    "localized_name": "Peningkatan Kecil Damage Elemen Api",
+    "description": null
+  },
+  "ElementBoost_Fire_1_Otomo_Only_Equip": {
+    "localized_name": "Peningkatan Damage Elemen Api Pal Level 1",
+    "description": null
+  },
+  "ElementBoost_Fire_1_PAL": {
+    "localized_name": "Suka Bermain Api",
+    "description": "Peningkatan damage serangan elemen api 10.0%"
+  },
+  "ElementBoost_Fire_2_BossDefeat": {
+    "localized_name": "Peningkatan Sedang Damage Elemen Api",
+    "description": null
+  },
+  "ElementBoost_Fire_2_Otomo_Only_Equip": {
+    "localized_name": "Peningkatan Damage Elemen Api Pal Level 2",
+    "description": null
+  },
+  "ElementBoost_Fire_2_PAL": {
+    "localized_name": "Kaisar Api",
+    "description": null
+  },
+  "ElementBoost_Fire_3_BossDefeat": {
+    "localized_name": "Peningkatan Besar Damage Elemen Api",
+    "description": null
+  },
+  "ElementBoost_Fire_3_Otomo_Only_Equip": {
+    "localized_name": "Peningkatan Damage Elemen Api Pal Level 3",
+    "description": null
+  },
+  "ElementBoost_Ice_1_BossDefeat": {
+    "localized_name": "Peningkatan Kecil Damage Elemen Es",
+    "description": null
+  },
+  "ElementBoost_Ice_1_Otomo_Only_Equip": {
+    "localized_name": "Peningkatan Damage Elemen Es Pal Level 1",
+    "description": null
+  },
+  "ElementBoost_Ice_1_PAL": {
+    "localized_name": "Berdarah Dingin",
+    "description": "Peningkatan damage serangan elemen es 10.0%"
+  },
+  "ElementBoost_Ice_2_BossDefeat": {
+    "localized_name": "Peningkatan Sedang Damage Elemen Es",
+    "description": null
+  },
+  "ElementBoost_Ice_2_Otomo_Only_Equip": {
+    "localized_name": "Peningkatan Damage Elemen Es Pal Level 2",
+    "description": null
+  },
+  "ElementBoost_Ice_2_PAL": {
+    "localized_name": "Kaisar Es",
+    "description": null
+  },
+  "ElementBoost_Ice_3_BossDefeat": {
+    "localized_name": "Peningkatan Besar Damage Elemen Es",
+    "description": null
+  },
+  "ElementBoost_Ice_3_Otomo_Only_Equip": {
+    "localized_name": "Peningkatan Damage Elemen Es Pal Level 3",
+    "description": null
+  },
+  "ElementBoost_Leaf_1_BossDefeat": {
+    "localized_name": "Peningkatan Kecil Damage Elemen Rumput",
+    "description": null
+  },
+  "ElementBoost_Leaf_1_Otomo_Only_Equip": {
+    "localized_name": "Peningkatan Damage Elemen Rumput Pal Level 1",
+    "description": null
+  },
+  "ElementBoost_Leaf_1_PAL": {
+    "localized_name": "Aroma Rumput dan Pepohonan",
+    "description": "Peningkatan damage serangan elemen rumput 10.0%"
+  },
+  "ElementBoost_Leaf_2_BossDefeat": {
+    "localized_name": "Peningkatan Sedang Damage Elemen Rumput",
+    "description": null
+  },
+  "ElementBoost_Leaf_2_Otomo_Only_Equip": {
+    "localized_name": "Peningkatan Damage Elemen Rumput Pal Level 2",
+    "description": null
+  },
+  "ElementBoost_Leaf_2_PAL": {
+    "localized_name": "Raja Roh",
+    "description": null
+  },
+  "ElementBoost_Leaf_3_BossDefeat": {
+    "localized_name": "Peningkatan Besar Damage Elemen Rumput",
+    "description": null
+  },
+  "ElementBoost_Leaf_3_Otomo_Only_Equip": {
+    "localized_name": "Peningkatan Damage Elemen Rumput Pal Level 3",
+    "description": null
+  },
+  "ElementBoost_Normal_1_BossDefeat": {
+    "localized_name": "Peningkatan Kecil Damage Netral",
+    "description": null
+  },
+  "ElementBoost_Normal_1_Otomo_Only_Equip": {
+    "localized_name": "Peningkatan Damage Non Elemen Pal Level 1",
+    "description": null
+  },
+  "ElementBoost_Normal_1_PAL": {
+    "localized_name": "Kekosongan Pikiran",
+    "description": "Peningkatan damage serangan netral 10.0%"
+  },
+  "ElementBoost_Normal_2_BossDefeat": {
+    "localized_name": "Peningkatan Sedang Damage Netral",
+    "description": null
+  },
+  "ElementBoost_Normal_2_Otomo_Only_Equip": {
+    "localized_name": "Peningkatan Damage Non Elemen Pal Level 2",
+    "description": null
+  },
+  "ElementBoost_Normal_2_PAL": {
+    "localized_name": "Surga Suci",
+    "description": null
+  },
+  "ElementBoost_Normal_3_BossDefeat": {
+    "localized_name": "Peningkatan Besar Damage Netral",
+    "description": null
+  },
+  "ElementBoost_Normal_3_Otomo_Only_Equip": {
+    "localized_name": "Peningkatan Damage Non Elemen Pal Level 3",
+    "description": null
+  },
+  "ElementBoost_Thunder_1_PAL": {
+    "localized_name": "Kapasitor",
+    "description": "Peningkatan damage serangan elemen petir 10.0%"
+  },
+  "ElementBoost_Thunder_2_PAL": {
+    "localized_name": "Kaisar Petir",
+    "description": null
+  },
+  "ElementBoost_Water_1_BossDefeat": {
+    "localized_name": "Peningkatan Kecil Damage Elemen Air",
+    "description": null
+  },
+  "ElementBoost_Water_1_Otomo_Only_Equip": {
+    "localized_name": "Peningkatan Damage Elemen Air Pal Level 1",
+    "description": null
+  },
+  "ElementBoost_Water_2_BossDefeat": {
+    "localized_name": "Peningkatan Sedang Damage Elemen Air",
+    "description": null
+  },
+  "ElementBoost_Water_2_Otomo_Only_Equip": {
+    "localized_name": "Peningkatan Damage Elemen Air Pal Level 2",
+    "description": null
+  },
+  "ElementBoost_Water_3_BossDefeat": {
+    "localized_name": "Peningkatan Besar Damage Elemen Air",
+    "description": null
+  },
+  "ElementBoost_Water_3_Otomo_Only_Equip": {
+    "localized_name": "Peningkatan Damage Elemen Air Pal Level 3",
+    "description": null
+  },
+  "ElementResist_Aqua_1": {
+    "localized_name": "Pengurangan Damage Elemen Air Level 1",
+    "description": null
+  },
+  "ElementResist_Aqua_1_PAL": {
+    "localized_name": "Lapisan Tahan Air",
+    "description": "Pengurangan damage elemen air 10.0%"
+  },
+  "ElementResist_Aqua_2": {
+    "localized_name": "Pengurangan Damage Elemen Air Level 2",
+    "description": null
+  },
+  "ElementResist_Aqua_3": {
+    "localized_name": "Pengurangan Damage Elemen Air Level 3",
+    "description": null
+  },
+  "ElementResist_Dark_1": {
+    "localized_name": "Pengurangan Damage Elemen Kegelapan Level 1",
+    "description": null
+  },
+  "ElementResist_Dark_1_PAL": {
+    "localized_name": "Karakter Gembira",
+    "description": "Pengurangan damage elemen kegelapan 10.0%"
+  },
+  "ElementResist_Dark_2": {
+    "localized_name": "Pengurangan Damage Elemen Kegelapan Level 2",
+    "description": null
+  },
+  "ElementResist_Dark_3": {
+    "localized_name": "Pengurangan Damage Elemen Kegelapan Level 3",
+    "description": null
+  },
+  "ElementResist_Dragon_1": {
+    "localized_name": "Pengurangan Damage Elemen Naga Level 1",
+    "description": null
+  },
+  "ElementResist_Dragon_1_PAL": {
+    "localized_name": "Pembasmi Naga",
+    "description": "Pengurangan damage elemen naga 10.0%"
+  },
+  "ElementResist_Dragon_2": {
+    "localized_name": "Pengurangan Damage Elemen Naga Level 2",
+    "description": null
+  },
+  "ElementResist_Dragon_3": {
+    "localized_name": "Pengurangan Damage Elemen Naga Level 3",
+    "description": null
+  },
+  "ElementResist_Earth_1": {
+    "localized_name": "Pengurangan Damage Elemen Tanah Level 1",
+    "description": null
+  },
+  "ElementResist_Earth_1_PAL": {
+    "localized_name": "Struktur Tahan Gempa",
+    "description": "Pengurangan damage elemen tanah 10.0%"
+  },
+  "ElementResist_Earth_2": {
+    "localized_name": "Pengurangan Damage Elemen Tanah Level 2",
+    "description": null
+  },
+  "ElementResist_Earth_3": {
+    "localized_name": "Pengurangan Damage Elemen Tanah Level 3",
+    "description": null
+  },
+  "ElementResist_Fire_1": {
+    "localized_name": "Pengurangan Damage Elemen Api Level 1",
+    "description": null
+  },
+  "ElementResist_Fire_1_PAL": {
+    "localized_name": "Suka Berjemur",
+    "description": "Pengurangan damage elemen api 10.0%"
+  },
+  "ElementResist_Fire_2": {
+    "localized_name": "Pengurangan Damage Elemen Api Level 2",
+    "description": null
+  },
+  "ElementResist_Fire_3": {
+    "localized_name": "Pengurangan Damage Elemen Api Level 3",
+    "description": null
+  },
+  "ElementResist_Ice_1": {
+    "localized_name": "Pengurangan Damage Elemen Es Level 1",
+    "description": null
+  },
+  "ElementResist_Ice_1_PAL": {
+    "localized_name": "Ketahanan Suhu Tinggi",
+    "description": "Pengurangan damage elemen es 10.0%"
+  },
+  "ElementResist_Ice_2": {
+    "localized_name": "Pengurangan Damage Elemen Es Level 2",
+    "description": null
+  },
+  "ElementResist_Ice_3": {
+    "localized_name": "Pengurangan Damage Elemen Es Level 3",
+    "description": null
+  },
+  "ElementResist_Leaf_1": {
+    "localized_name": "Pengurangan Damage Elemen Rumput Level 1",
+    "description": null
+  },
+  "ElementResist_Leaf_1_PAL": {
+    "localized_name": "Efek Pencegah Rumput Liar",
+    "description": "Pengurangan damage elemen rumput 10.0%"
+  },
+  "ElementResist_Leaf_2": {
+    "localized_name": "Pengurangan Damage Elemen Rumput Level 2",
+    "description": null
+  },
+  "ElementResist_Leaf_3": {
+    "localized_name": "Pengurangan Damage Elemen Rumput Level 3",
+    "description": null
+  },
+  "ElementResist_Normal_1": {
+    "localized_name": "Pengurangan Damage Netral Level 1",
+    "description": null
+  },
+  "ElementResist_Normal_1_PAL": {
+    "localized_name": "Abnormal",
+    "description": "Pengurangan damage netral 10.0%"
+  },
+  "ElementResist_Normal_2": {
+    "localized_name": "Pengurangan Damage Netral Level 2",
+    "description": null
+  },
+  "ElementResist_Normal_3": {
+    "localized_name": "Pengurangan Damage Netral Level 3",
+    "description": null
+  },
+  "ElementResist_Thunder_1": {
+    "localized_name": "Pengurangan Damage Elemen Petir Level 1",
+    "description": null
+  },
+  "ElementResist_Thunder_1_PAL": {
+    "localized_name": "Insulasi",
+    "description": "Pengurangan damage elemen petir 10.0%"
+  },
+  "ElementResist_Thunder_2": {
+    "localized_name": "Pengurangan Damage Elemen Petir Level 2",
+    "description": null
+  },
+  "ElementResist_Thunder_3": {
+    "localized_name": "Pengurangan Damage Elemen Petir Level 3",
+    "description": null
+  },
+  "EternalFlame": {
+    "localized_name": "Api Abadi",
+    "description": null
+  },
+  "GYM_NAME_Desert": {
+    "localized_name": "Pemimpin Kelompok Penegak Hukum Pulau Palpagos",
+    "description": null
+  },
+  "GYM_NAME_Forest": {
+    "localized_name": "Pendiri Kelompok Perlindungan Pal",
+    "description": null
+  },
+  "GYM_NAME_Meadow": {
+    "localized_name": "Pemimpin Gerombolan Pemburu Liar Rayne",
+    "description": "Serangan+20.0% Peningkatan Kecepatan Gerakan 10.0%"
+  },
+  "GYM_NAME_Sakurajima": {
+    "localized_name": "Pemimpin Bunga Bulan",
+    "description": null
+  },
+  "GYM_NAME_Snow": {
+    "localized_name": "Komandan Unit Penelitian Genetik Pal",
+    "description": null
+  },
+  "GYM_NAME_Viking": {
+    "localized_name": "Pemimpin Penduduk Langit Jatuh",
+    "description": null
+  },
+  "GYM_NAME_Volcano": {
+    "localized_name": "Pemimpin Jiwa Sekutu Api Abadi",
+    "description": null
+  },
+  "HP_ACC_up1": {
+    "localized_name": "Peningkatan HP Level 1",
+    "description": null
+  },
+  "HP_ACC_up2": {
+    "localized_name": "Peningkatan HP Level 2",
+    "description": null
+  },
+  "HP_ACC_up3": {
+    "localized_name": "Peningkatan HP Level 3",
+    "description": null
+  },
+  "Invader": {
+    "localized_name": "Penyerbu",
+    "description": null
+  },
+  "JumpCount_Increase1": {
+    "localized_name": "Peningkatan Jumlah Lompatan +1",
+    "description": "Peningkatan Jumlah Lompatan +1"
+  },
+  "JumpCount_Increase2": {
+    "localized_name": "Peningkatan Jumlah Lompatan +2",
+    "description": "Peningkatan Jumlah Lompatan +2"
+  },
+  "JumpCount_Increase3": {
+    "localized_name": "Peningkatan Jumlah Lompatan +3",
+    "description": "Peningkatan Jumlah Lompatan +3"
+  },
+  "JumpPower_Increase": {
+    "localized_name": "Peningkatan Kekuatan Lompatan",
+    "description": "Peningkatan Kekuatan Lompatan"
+  },
+  "Legend": {
+    "localized_name": "Legenda",
+    "description": "Serangan+20.0% Pertahanan+20.0% Peningkatan Kecepatan Gerakan 15.0%"
+  },
+  "MaxInventoryWeight_up": {
+    "localized_name": "Kapasitas Bawaan Maksimum Level 1",
+    "description": null
+  },
+  "MaxInventoryWeight_up2": {
+    "localized_name": "Kapasitas Bawaan Maksimum Level 2",
+    "description": null
+  },
+  "MaxInventoryWeight_up3": {
+    "localized_name": "Kapasitas Bawaan Maksimum Level 3",
+    "description": null
+  },
+  "MaxInventoryWeight_up_Equip_1": {
+    "localized_name": "Kapasitas Bawaan Maksimum Level 1",
+    "description": null
+  },
+  "MaxInventoryWeight_up_Equip_2": {
+    "localized_name": "Kapasitas Bawaan Maksimum Level 2",
+    "description": null
+  },
+  "MaxInventoryWeight_up_Equip_3": {
+    "localized_name": "Kapasitas Bawaan Maksimum Level 3",
+    "description": null
+  },
+  "MoveSpeed_up_1": {
+    "localized_name": "Lincah",
+    "description": "Peningkatan Kecepatan Gerakan 10.0%"
+  },
+  "MoveSpeed_up_2": {
+    "localized_name": "Jago Berlari",
+    "description": "Peningkatan Kecepatan Gerakan 20.0%"
+  },
+  "MoveSpeed_up_3": {
+    "localized_name": "Secepat Kilat",
+    "description": "Peningkatan Kecepatan Gerakan 30.0%"
+  },
+  "Nocturnal": {
+    "localized_name": "Nokturnal",
+    "description": "Bekerja terus tanpa tidur, bahkan di malam hari."
+  },
+  "NonKilling": {
+    "localized_name": "Menahan Diri",
+    "description": "Orang yang cinta damai. HP target tidak dapat berkurang di bawah 1."
+  },
+  "Noukin": {
+    "localized_name": "Berpikir Pendek",
+    "description": null
+  },
+  "Nushi": {
+    "localized_name": "Bos",
+    "description": "Peningkatkan damage serangan elemen air 20.0% Peningkatan damage serangan elemen es 20.0% Pertahanan +20.0%"
+  },
+  "OctaviaArmorVampire": {
+    "localized_name": "Energi Darah",
+    "description": null
+  },
+  "PAL_ALLAttack_down1": {
+    "localized_name": "Penakut",
+    "description": null
+  },
+  "PAL_ALLAttack_down2": {
+    "localized_name": "Cinta Damai",
+    "description": null
+  },
+  "PAL_ALLAttack_up1": {
+    "localized_name": "Berani",
+    "description": null
+  },
+  "PAL_ALLAttack_up2": {
+    "localized_name": "Ganas",
+    "description": null
+  },
+  "PAL_ALLAttack_up3": {
+    "localized_name": "Dewa Iblis",
+    "description": null
+  },
+  "PAL_CorporateSlave": {
+    "localized_name": "Budak Perusahaan",
+    "description": null
+  },
+  "PAL_FullStomach_Down_1": {
+    "localized_name": "Makan Sedikit",
+    "description": "Tingkat kenyang berkurang lebih lambat <NumBlue_13>+10,0%</>"
+  },
+  "PAL_FullStomach_Down_2": {
+    "localized_name": "Ahli Diet",
+    "description": "Tingkat kenyang berkurang lebih lambat <NumBlue_13>+15,0%</>"
+  },
+  "PAL_FullStomach_Down_3": {
+    "localized_name": "Master Puasa",
+    "description": "Tingkat kenyang berkurang lebih lambat <NumBlue_13>+20,0%</>"
+  },
+  "PAL_FullStomach_Up_1": {
+    "localized_name": "Rakus",
+    "description": "Tingkat kenyang berkurang lebih cepat <NumRed_13>+10,0%</>"
+  },
+  "PAL_FullStomach_Up_2": {
+    "localized_name": "Perut Tak Terbatas",
+    "description": "Tingkat kenyang berkurang lebih cepat <NumRed_13>+15,0%</>"
+  },
+  "PAL_Sanity_Down_1": {
+    "localized_name": "Berpikir Positif",
+    "description": "Nilai SAN berkurang lebih lambat <NumBlue_13>+10,0%</>"
+  },
+  "PAL_Sanity_Down_2": {
+    "localized_name": "Gila Kerja",
+    "description": "Nilai SAN berkurang lebih lambat <NumBlue_13>+15,0%</>"
+  },
+  "PAL_Sanity_Down_3": {
+    "localized_name": "Hati Teguh",
+    "description": "Nilai SAN berkurang lebih lambat <NumBlue_13>+20,0%</>"
+  },
+  "PAL_Sanity_Up_1": {
+    "localized_name": "Mental Tidak Stabil",
+    "description": "Nilai SAN berkurang lebih cepat <NumRed_13>+10,0%</>"
+  },
+  "PAL_Sanity_Up_2": {
+    "localized_name": "Menghancurkan Diri",
+    "description": "Nilai SAN berkurang lebih cepat <NumRed_13>+15,0%</>"
+  },
+  "PAL_SpiritualInst": {
+    "localized_name": "-",
+    "description": null
+  },
+  "PAL_conceited": {
+    "localized_name": "Sombong",
+    "description": null
+  },
+  "PAL_masochist": {
+    "localized_name": "Masokis",
+    "description": null
+  },
+  "PAL_oraora": {
+    "localized_name": "Agresif",
+    "description": null
+  },
+  "PAL_rude": {
+    "localized_name": "Kasar",
+    "description": null
+  },
+  "PAL_sadist": {
+    "localized_name": "Sadis",
+    "description": null
+  },
+  "PalExp_Increase_1_Otomo_Only_Equip": {
+    "localized_name": "Peningkatan Jumlah EXP Pal Level 1",
+    "description": null
+  },
+  "PalExp_Increase_2_Otomo_Only_Equip": {
+    "localized_name": "Peningkatan Jumlah EXP Pal Level 2",
+    "description": null
+  },
+  "PalExp_Increase_3_Otomo_Only_Equip": {
+    "localized_name": "Peningkatan Jumlah EXP Pal Level 3",
+    "description": null
+  },
+  "Rare": {
+    "localized_name": "Hoki",
+    "description": null
+  },
+  "SalePrice_Down_1": {
+    "localized_name": "Kumuh",
+    "description": "Penurunan nilai transaksi -10.0%"
+  },
+  "SalePrice_Up_1": {
+    "localized_name": "Bangsawan",
+    "description": "Peningkatan nilai transaksi+5.0%"
+  },
+  "SalePrice_Up_2": {
+    "localized_name": "Keturunan yang Bagus",
+    "description": "Peningkatan nilai transaksi+3.0%"
+  },
+  "Salvation": {
+    "localized_name": "Sang Penyelamat",
+    "description": null
+  },
+  "SphereModule_Curve": {
+    "localized_name": "Kurva Sphere +1",
+    "description": null
+  },
+  "SphereModule_Curve2": {
+    "localized_name": "Penggeser Sphere",
+    "description": null
+  },
+  "SphereModule_Heavy": {
+    "localized_name": "Berat Sphere +1",
+    "description": null
+  },
+  "SphereModule_Homing": {
+    "localized_name": "Sphere Berpemandu",
+    "description": null
+  },
+  "SphereModule_Sniper": {
+    "localized_name": "Jarak Sphere +1",
+    "description": null
+  },
+  "SphereModule_Sniper2": {
+    "localized_name": "Jarak Sphere +2",
+    "description": null
+  },
+  "Stamina_Down_1": {
+    "localized_name": "Penyendiri",
+    "description": "Stamina Maksimal -25.0% Hanya berlaku untuk Pal yang dapat dikendarai."
+  },
+  "Stamina_Up_1": {
+    "localized_name": "Stamina Tak Terbatas",
+    "description": "Stamina Maksimal+50.0% Hanya berlaku untuk Pal yang dapat dikendarai."
+  },
+  "Stamina_Up_2": {
+    "localized_name": "Anak Sehat",
+    "description": "Stamina Maksimal+25.0% Hanya berlaku untuk Pal yang dapat dikendarai."
+  },
+  "Stamina_Up_3": {
+    "localized_name": "Mesin Gerak Abadi",
+    "description": "Stamina Maksimal+75.0% Hanya berlaku untuk Pal yang dapat dikendarai."
+  },
+  "SwimSpeed_up_1": {
+    "localized_name": "Berenang dengan Lincah",
+    "description": "Peningkatan Kecepatan Gerakan di Atas Air 30.0%"
+  },
+  "SwimSpeed_up_2": {
+    "localized_name": "Ahli Berenang",
+    "description": null
+  },
+  "SwimSpeed_up_3": {
+    "localized_name": "Raja Ombak",
+    "description": null
+  },
+  "TemperatureResist_Cold1": {
+    "localized_name": "Ketahanan Dingin Level 1",
+    "description": null
+  },
+  "TemperatureResist_Cold2": {
+    "localized_name": "Ketahanan Dingin Level 2",
+    "description": null
+  },
+  "TemperatureResist_Cold3": {
+    "localized_name": "Ketahanan Dingin Level 3",
+    "description": null
+  },
+  "TemperatureResist_Heat1": {
+    "localized_name": "Ketahanan Panas Level 1",
+    "description": null
+  },
+  "TemperatureResist_Heat1Cold1": {
+    "localized_name": "Ketahanan Panas Level 1 / Ketahanan Dingin Level 1",
+    "description": null
+  },
+  "TemperatureResist_Heat2": {
+    "localized_name": "Ketahanan Panas Level 2",
+    "description": null
+  },
+  "TemperatureResist_Heat2Cold2": {
+    "localized_name": "Ketahanan Panas Level 2 / Ketahanan Dingin Level 2",
+    "description": null
+  },
+  "TemperatureResist_Heat3": {
+    "localized_name": "Ketahanan Panas Level 3",
+    "description": null
+  },
+  "TemperatureResist_Heat3Cold3": {
+    "localized_name": "Ketahanan Panas Level 3 / Ketahanan Dingin Level 3",
+    "description": null
+  },
+  "Test_PalEgg_HatchingSpeed_Up": {
+    "localized_name": "Dermawan",
+    "description": "Selama ditugaskan di tempat pengembangbiakkan, kecepatan produksi telur meningkat sebesar 100.0%"
+  },
+  "TrainerATK_UP_1": {
+    "localized_name": "Pemimpin Serangan",
+    "description": "Peningkatan serangan pemain 10.0%"
+  },
+  "TrainerDEF_UP_1": {
+    "localized_name": "Ahli Strategi Pertahanan",
+    "description": "Peningkatan pertahanan pemain 10.0%"
+  },
+  "TrainerLogging_up1": {
+    "localized_name": "Pemimpin Penebang Kayu",
+    "description": "Peningkatan efisiensi penebangan pemain 25.0%"
+  },
+  "TrainerMining_up1": {
+    "localized_name": "Kepala Tambang",
+    "description": "Peningkatan efisiensi penambangan pemain 25.0%"
+  },
+  "TrainerWorkSpeed_UP_1": {
+    "localized_name": "Motivator",
+    "description": "Peningkatan kecepatan kerja pemain 25.0%"
+  },
+  "Vampire": {
+    "localized_name": "Vampir",
+    "description": "Saat menerima damage sebagian dari damage tersebut diserap untuk memulihkan HP. Bekerja terus tanpa tidur, bahkan di malam hari."
+  },
+  "Witch": {
+    "localized_name": "Penyihir",
+    "description": null
+  },
+  "WorkSpeed_ACC_up1": {
+    "localized_name": "Kecepatan Kerja Level 1",
+    "description": null
+  },
+  "WorkSpeed_ACC_up2": {
+    "localized_name": "Kecepatan Kerja Level 2",
+    "description": null
+  },
+  "WorkSpeed_ACC_up3": {
+    "localized_name": "Kecepatan Kerja Level 3",
+    "description": null
+  },
+  "YakushimaDagameBoost_Magic_Equip": {
+    "localized_name": "Kekuatan Suci - Sihir",
+    "description": null
+  },
+  "YakushimaDagameBoost_Melee_Equip": {
+    "localized_name": "Kekuatan Suci - Serangan Jarak Dekat",
+    "description": null
+  },
+  "YakushimaDagameBoost_Ranged_Equip": {
+    "localized_name": "Kekuatan Suci - Serangan Jarak Jauh",
+    "description": null
+  },
+  "YakushimaDagameBoost_Summon_Equip": {
+    "localized_name": "Kekuatan Suci - Pemanggilan",
+    "description": null
+  },
+  "YakushimaProtection_Equip": {
+    "localized_name": "Perlindungan Suci",
+    "description": null
+  },
+  "defense_ACC_up1": {
+    "localized_name": "Peningkatan Pertahanan Level 1",
+    "description": null
+  },
+  "defense_ACC_up2": {
+    "localized_name": "Peningkatan Pertahanan Level 2",
+    "description": null
+  },
+  "defense_ACC_up3": {
+    "localized_name": "Peningkatan Pertahanan Level 3",
+    "description": null
+  }
+}
