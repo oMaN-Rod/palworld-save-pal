@@ -10,7 +10,7 @@
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { itemsData, palsData } from '$lib/data';
 	import { cn } from '$theme';
-	import { getModalState } from '$states';
+	import { getAppState, getModalState } from '$states';
 	import { ItemSelectModal } from '$components';
 	import { Progress } from '@skeletonlabs/skeleton-svelte';
 	import { Package } from 'lucide-svelte';
@@ -32,6 +32,7 @@
 	} = $props();
 
 	const modal = getModalState();
+	const appState = getAppState();
 
 	const stupidTypoMap: Record<string, string> = {
 		cheeseburger_2: 'CheeseBurger_2',
@@ -188,8 +189,8 @@
 		}
 		const itemData = itemsData.getByKey(slot.static_id);
 		if (itemData) {
-			slot.count =
-				count > itemData.details.max_stack_count ? itemData.details.max_stack_count : count;
+			let maxCount = appState.settings.cheat_mode ? 999999999 : itemData.details.max_stack_count;
+			slot.count = Math.min(count, maxCount);
 			if (itemData.details.dynamic) {
 				if (!slot.dynamic_item) {
 					slot.dynamic_item = {
@@ -217,7 +218,7 @@
 				slot.dynamic_item = undefined;
 			}
 		}
-		if (onUpdate) onUpdate(slot);
+		onUpdate?.(slot);
 	}
 
 	function handleMouseEvent(

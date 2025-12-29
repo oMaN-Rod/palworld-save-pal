@@ -201,9 +201,15 @@
 		return items.map((item) => ({ label: item.info.localized_name, value: item.id }));
 	});
 
-	const selectedItemMaxStackCount = $derived(
-		items.find((item) => item.id === itemId)?.details.max_stack_count
-	);
+	const selectedItemMaxStackCount = $derived.by(() => {
+		const item = itemsData.getByKey(itemId);
+		if (!item) return 1;
+
+		const maxStackCount = item.details.max_stack_count;
+		if (!maxStackCount) return 1;
+
+		return maxStackCount === 9999 && appState.settings.cheat_mode ? 999999999 : maxStackCount;
+	});
 
 	const cardClass = $derived(isEgg ? 'w-[1200px]' : 'w-[600px]');
 	const controlsClass = $derived(isEgg ? 'grid grid-cols-[570px_1fr] gap-2' : 'flex w-full');
@@ -254,16 +260,6 @@
 			return;
 		}
 		return Rarity[itemData.details.rarity];
-	}
-
-	function getItem(staticId: string) {
-		if (!staticId) return;
-		const itemData = items.find((item) => item.id === staticId);
-		if (!itemData) {
-			console.error(`Item data not found for static id: ${staticId}`);
-			return;
-		}
-		return itemData;
 	}
 
 	function getBackgroundColor(staticId: string) {
