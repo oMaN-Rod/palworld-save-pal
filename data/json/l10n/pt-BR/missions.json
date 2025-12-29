@@ -199,6 +199,42 @@
     "localized_name": "Pedido do caçador esperto",
     "description": "Olá… Estou supervisionando a quantidade de Pals na região para preservar o equilíbrio do ecossistema. No momento preciso de alguém que possa reduzir o número de Pals."
   },
+  "Sub_PalDisplay_A_01": {
+    "localized_name": "Pedido do avaliador de Pals",
+    "description": "Chame um {PalName} e fale com o avaliador de Pals."
+  },
+  "Sub_PalDisplay_B_01": {
+    "localized_name": "Pedido do avaliador de Pals",
+    "description": "Chame um {PalName} e fale com o avaliador de Pals."
+  },
+  "Sub_PalDisplay_C_01": {
+    "localized_name": "Pedido do avaliador de Pals",
+    "description": "Chame um {PalName} e fale com o avaliador de Pals."
+  },
+  "Sub_PalDisplay_D_01": {
+    "localized_name": "Pedido do avaliador de Pals",
+    "description": "Chame um {PalName} e fale com o avaliador de Pals."
+  },
+  "Sub_PalDisplay_E_01": {
+    "localized_name": "Pedido do avaliador de Pals",
+    "description": "Chame um {PalName} e fale com o avaliador de Pals."
+  },
+  "Sub_PalDisplay_F_01": {
+    "localized_name": "Pedido do avaliador de Pals",
+    "description": "Chame um {PalName} e fale com o avaliador de Pals."
+  },
+  "Sub_PalDisplay_G_01": {
+    "localized_name": "Pedido do avaliador de Pals",
+    "description": "Chame um {PalName} e fale com o avaliador de Pals."
+  },
+  "Sub_PalDisplay_H_01": {
+    "localized_name": "Pedido do avaliador de Pals",
+    "description": "Chame um {PalName} e fale com o avaliador de Pals."
+  },
+  "Sub_PalDisplay_I_01": {
+    "localized_name": "Pedido do avaliador de Pals",
+    "description": "Chame um {PalName} e fale com o avaliador de Pals."
+  },
   "Sub_PaldexReward": {
     "localized_name": "Pedido do biólogo de Pals",
     "description": "Muito prazer, sou um cientista que estuda diferentes tipos de Pals. Também estou investigando espécies nesta região, inclusive algumas ainda desconhecidas. Ei, você tem um Palpedia, não é mesmo? Não poderia me mostrar para ajudar na minha pesquisa?"

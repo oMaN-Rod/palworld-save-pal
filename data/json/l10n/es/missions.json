@@ -199,6 +199,42 @@
     "localized_name": "Petición del Cazador erudito",
     "description": "¿Qué hay? Soy el que supervisa el número de Pals de la zona para mantener el equilibrio en su ecosistema. Ahora mismo estoy buscando a alguien que me ayude a reducir el número de Pals."
   },
+  "Sub_PalDisplay_A_01": {
+    "localized_name": "Petición del crítico Pal",
+    "description": "Invoca a un {PalName} y habla con el crítico Pal"
+  },
+  "Sub_PalDisplay_B_01": {
+    "localized_name": "Petición del crítico Pal",
+    "description": "Invoca a un {PalName} y habla con el crítico Pal"
+  },
+  "Sub_PalDisplay_C_01": {
+    "localized_name": "Petición del crítico Pal",
+    "description": "Invoca a un {PalName} y habla con el crítico Pal"
+  },
+  "Sub_PalDisplay_D_01": {
+    "localized_name": "Petición del crítico Pal",
+    "description": "Invoca a un {PalName} y habla con el crítico Pal"
+  },
+  "Sub_PalDisplay_E_01": {
+    "localized_name": "Petición del crítico Pal",
+    "description": "Invoca a un {PalName} y habla con el crítico Pal"
+  },
+  "Sub_PalDisplay_F_01": {
+    "localized_name": "Petición del crítico Pal",
+    "description": "Invoca a un {PalName} y habla con el crítico Pal"
+  },
+  "Sub_PalDisplay_G_01": {
+    "localized_name": "Petición del crítico Pal",
+    "description": "Invoca a un {PalName} y habla con el crítico Pal"
+  },
+  "Sub_PalDisplay_H_01": {
+    "localized_name": "Petición del crítico Pal",
+    "description": "Invoca a un {PalName} y habla con el crítico Pal"
+  },
+  "Sub_PalDisplay_I_01": {
+    "localized_name": "Petición del crítico Pal",
+    "description": "Invoca a un {PalName} y habla con el crítico Pal"
+  },
   "Sub_PaldexReward": {
     "localized_name": "Petición del Ecólogo Pal",
     "description": "Encantado de conocerte. Estoy investigando varias especies Pal. Ahora mismo estudio las especies no identificadas de esta zona... Tienes una Palpedia, ¿verdad? ¿Podrías mostrármela?"

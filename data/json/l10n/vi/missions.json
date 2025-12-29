@@ -199,6 +199,42 @@
     "localized_name": "Yêu Cầu Của Thợ Săn Khôn Ngoan",
     "description": "Xin chào... Tôi là người chịu trách nhiệm giám sát số lượng Pal để duy trì cân bằng sinh thái trong khu vực này. Hiện tại, tôi đang tìm người nào đó có thể giúp giảm số lượng Pal."
   },
+  "Sub_PalDisplay_A_01": {
+    "localized_name": "Yêu cầu của Nhà Phê Bình Pal",
+    "description": "Triệu hồi {PalName} và nói chuyện với Nhà Phê Bình Pal."
+  },
+  "Sub_PalDisplay_B_01": {
+    "localized_name": "Yêu cầu của Nhà Phê Bình Pal",
+    "description": "Triệu hồi {PalName} và nói chuyện với Nhà Phê Bình Pal."
+  },
+  "Sub_PalDisplay_C_01": {
+    "localized_name": "Yêu cầu của Nhà Phê Bình Pal",
+    "description": "Triệu hồi {PalName} và nói chuyện với Nhà Phê Bình Pal."
+  },
+  "Sub_PalDisplay_D_01": {
+    "localized_name": "Yêu cầu của Nhà Phê Bình Pal",
+    "description": "Triệu hồi {PalName} và nói chuyện với Nhà Phê Bình Pal."
+  },
+  "Sub_PalDisplay_E_01": {
+    "localized_name": "Yêu cầu của Nhà Phê Bình Pal",
+    "description": "Triệu hồi {PalName} và nói chuyện với Nhà Phê Bình Pal."
+  },
+  "Sub_PalDisplay_F_01": {
+    "localized_name": "Yêu cầu của Nhà Phê Bình Pal",
+    "description": "Triệu hồi {PalName} và nói chuyện với Nhà Phê Bình Pal."
+  },
+  "Sub_PalDisplay_G_01": {
+    "localized_name": "Yêu cầu của Nhà Phê Bình Pal",
+    "description": "Triệu hồi {PalName} và nói chuyện với Nhà Phê Bình Pal."
+  },
+  "Sub_PalDisplay_H_01": {
+    "localized_name": "Yêu cầu của Nhà Phê Bình Pal",
+    "description": "Triệu hồi {PalName} và nói chuyện với Nhà Phê Bình Pal."
+  },
+  "Sub_PalDisplay_I_01": {
+    "localized_name": "Yêu cầu của Nhà Phê Bình Pal",
+    "description": "Triệu hồi {PalName} và nói chuyện với Nhà Phê Bình Pal."
+  },
   "Sub_PaldexReward": {
     "localized_name": "Yêu Cầu Của Nhà Nghiên Cứu Sinh Thái Pal",
     "description": "Hân hạnh được gặp bạn. Tôi là một nhà nghiên cứu về các loài Pal. Tôi đang tiến hành khảo sát sinh thái ở khu vực này, bao gồm cả những loài Pal chưa được xác định... Bạn có Palpedia phải không? Bạn có thể cho tôi xem để tham khảo không?"

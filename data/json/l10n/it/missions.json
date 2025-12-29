@@ -199,6 +199,42 @@
     "localized_name": "Richiesta del cacciatore esperto",
     "description": "Mi trovo qui per riportare equilibrio nell'ecosistema. Per farlo, è necessario tenere sotto controllo il numero dei Pal. Sto cercando qualcuno che mi aiuti a ridurlo."
   },
+  "Sub_PalDisplay_A_01": {
+    "localized_name": "Richiesta del critico di Pal",
+    "description": "Parla al critico di Pal con {PalName} al tuo fianco."
+  },
+  "Sub_PalDisplay_B_01": {
+    "localized_name": "Richiesta del critico di Pal",
+    "description": "Parla al critico di Pal con {PalName} al tuo fianco."
+  },
+  "Sub_PalDisplay_C_01": {
+    "localized_name": "Richiesta del critico di Pal",
+    "description": "Parla al critico di Pal con {PalName} al tuo fianco."
+  },
+  "Sub_PalDisplay_D_01": {
+    "localized_name": "Richiesta del critico di Pal",
+    "description": "Parla al critico di Pal con {PalName} al tuo fianco."
+  },
+  "Sub_PalDisplay_E_01": {
+    "localized_name": "Richiesta del critico di Pal",
+    "description": "Parla al critico di Pal con {PalName} al tuo fianco."
+  },
+  "Sub_PalDisplay_F_01": {
+    "localized_name": "Richiesta del critico di Pal",
+    "description": "Parla al critico di Pal con {PalName} al tuo fianco."
+  },
+  "Sub_PalDisplay_G_01": {
+    "localized_name": "Richiesta del critico di Pal",
+    "description": "Parla al critico di Pal con {PalName} al tuo fianco."
+  },
+  "Sub_PalDisplay_H_01": {
+    "localized_name": "Richiesta del critico di Pal",
+    "description": "Parla al critico di Pal con {PalName} al tuo fianco."
+  },
+  "Sub_PalDisplay_I_01": {
+    "localized_name": "Richiesta del critico di Pal",
+    "description": "Parla al critico di Pal con {PalName} al tuo fianco."
+  },
   "Sub_PaldexReward": {
     "localized_name": "Richiesta dello studioso della vita dei Pal",
     "description": "Molto piacere! Io mi occupo di portare avanti ricerche sulle specie dei Pal. Sono qui per studiare l'ecosistema di questo luogo, pieno di specie ancora ignote... Tu possiedi una Palpedia, vero? Potresti mostrarmi i tuoi dati?"

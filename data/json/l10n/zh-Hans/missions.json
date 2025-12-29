@@ -199,6 +199,42 @@
     "localized_name": "聪明的猎人的委托",
     "description": "哟...我是负责保持这片地区生态平衡而进行帕鲁数量观测的人员。 现在正在寻找能减少帕鲁数量的人。"
   },
+  "Sub_PalDisplay_A_01": {
+    "localized_name": "帕鲁评赏家的委托",
+    "description": "在召唤出{PalName}的状态下与帕鲁评赏家对话"
+  },
+  "Sub_PalDisplay_B_01": {
+    "localized_name": "帕鲁评赏家的委托",
+    "description": "在召唤出{PalName}的状态下与帕鲁评赏家对话"
+  },
+  "Sub_PalDisplay_C_01": {
+    "localized_name": "帕鲁评赏家的委托",
+    "description": "在召唤出{PalName}的状态下与帕鲁评赏家对话"
+  },
+  "Sub_PalDisplay_D_01": {
+    "localized_name": "帕鲁评赏家的委托",
+    "description": "在召唤出{PalName}的状态下与帕鲁评赏家对话"
+  },
+  "Sub_PalDisplay_E_01": {
+    "localized_name": "帕鲁评赏家的委托",
+    "description": "在召唤出{PalName}的状态下与帕鲁评赏家对话"
+  },
+  "Sub_PalDisplay_F_01": {
+    "localized_name": "帕鲁评赏家的委托",
+    "description": "在召唤出{PalName}的状态下与帕鲁评赏家对话"
+  },
+  "Sub_PalDisplay_G_01": {
+    "localized_name": "帕鲁评赏家的委托",
+    "description": "在召唤出{PalName}的状态下与帕鲁评赏家对话"
+  },
+  "Sub_PalDisplay_H_01": {
+    "localized_name": "帕鲁评赏家的委托",
+    "description": "在召唤出{PalName}的状态下与帕鲁评赏家对话"
+  },
+  "Sub_PalDisplay_I_01": {
+    "localized_name": "帕鲁评赏家的委托",
+    "description": "在召唤出{PalName}的状态下与帕鲁评赏家对话"
+  },
   "Sub_PaldexReward": {
     "localized_name": "帕鲁生态调查员的委托",
     "description": "初次见面，我是一名调查帕鲁种族的调查员。 正在此地进行未确认物种的生态调查... 你有帕鲁图鉴对吧？能作为资料让我看看吗？"

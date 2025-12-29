@@ -199,6 +199,42 @@
     "localized_name": "Solicitud del Cazador erudito",
     "description": "Hey... yo soy quien supervisa la cantidad de Pals para mantener el equilibrio ecológico en esta región. Ahora mismo busco a alguien que pueda reducir el número de Pals."
   },
+  "Sub_PalDisplay_A_01": {
+    "localized_name": "Encargos del Crítico de Pals",
+    "description": "Invoca a un {PalName} y habla con el Crítico de Pals."
+  },
+  "Sub_PalDisplay_B_01": {
+    "localized_name": "Encargos del Crítico de Pals",
+    "description": "Invoca a un {PalName} y habla con el Crítico de Pals."
+  },
+  "Sub_PalDisplay_C_01": {
+    "localized_name": "Encargos del Crítico de Pals",
+    "description": "Invoca a un {PalName} y habla con el Crítico de Pals."
+  },
+  "Sub_PalDisplay_D_01": {
+    "localized_name": "Encargos del Crítico de Pals",
+    "description": "Invoca a un {PalName} y habla con el Crítico de Pals."
+  },
+  "Sub_PalDisplay_E_01": {
+    "localized_name": "Encargos del Crítico de Pals",
+    "description": "Invoca a un {PalName} y habla con el Crítico de Pals."
+  },
+  "Sub_PalDisplay_F_01": {
+    "localized_name": "Encargos del Crítico de Pals",
+    "description": "Invoca a un {PalName} y habla con el Crítico de Pals."
+  },
+  "Sub_PalDisplay_G_01": {
+    "localized_name": "Encargos del Crítico de Pals",
+    "description": "Invoca a un {PalName} y habla con el Crítico de Pals."
+  },
+  "Sub_PalDisplay_H_01": {
+    "localized_name": "Encargos del Crítico de Pals",
+    "description": "Invoca a un {PalName} y habla con el Crítico de Pals."
+  },
+  "Sub_PalDisplay_I_01": {
+    "localized_name": "Encargos del Crítico de Pals",
+    "description": "Invoca a un {PalName} y habla con el Crítico de Pals."
+  },
   "Sub_PaldexReward": {
     "localized_name": "Solicitud del Investigador de la ecología de Pals",
     "description": "Mucho gusto, soy investigador de especies Pal. Estoy realizando una investigación ecológica, incluyendo especies no confirmadas en esta región... Tienes una Palpedia, ¿cierto? ¿Podrías mostrármelo como material de estudio?"

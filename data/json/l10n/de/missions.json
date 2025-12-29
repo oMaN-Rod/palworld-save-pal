@@ -199,6 +199,42 @@
     "localized_name": "Auftrag des verständigen Jägers",
     "description": "Hey! Ich bin hier, um die Zahl der Pals zu überwachen, damit das ökologische Gleichgewicht in dieser Region gewahrt bleibt. Tja, und momentan suche ich jemanden, der die Pal-Population hier etwas ausdünnt ..."
   },
+  "Sub_PalDisplay_A_01": {
+    "localized_name": "Auftrag des Palkritikers",
+    "description": "Rufe ein {PalName} und sprich mit dem Palkritiker."
+  },
+  "Sub_PalDisplay_B_01": {
+    "localized_name": "Auftrag des Palkritikers",
+    "description": "Rufe ein {PalName} und sprich mit dem Palkritiker."
+  },
+  "Sub_PalDisplay_C_01": {
+    "localized_name": "Auftrag des Palkritikers",
+    "description": "Rufe ein {PalName} und sprich mit dem Palkritiker."
+  },
+  "Sub_PalDisplay_D_01": {
+    "localized_name": "Auftrag des Palkritikers",
+    "description": "Rufe ein {PalName} und sprich mit dem Palkritiker."
+  },
+  "Sub_PalDisplay_E_01": {
+    "localized_name": "Auftrag des Palkritikers",
+    "description": "Rufe ein {PalName} und sprich mit dem Palkritiker."
+  },
+  "Sub_PalDisplay_F_01": {
+    "localized_name": "Auftrag des Palkritikers",
+    "description": "Rufe ein {PalName} und sprich mit dem Palkritiker."
+  },
+  "Sub_PalDisplay_G_01": {
+    "localized_name": "Auftrag des Palkritikers",
+    "description": "Rufe ein {PalName} und sprich mit dem Palkritiker."
+  },
+  "Sub_PalDisplay_H_01": {
+    "localized_name": "Auftrag des Palkritikers",
+    "description": "Rufe ein {PalName} und sprich mit dem Palkritiker."
+  },
+  "Sub_PalDisplay_I_01": {
+    "localized_name": "Auftrag des Palkritikers",
+    "description": "Rufe ein {PalName} und sprich mit dem Palkritiker."
+  },
   "Sub_PaldexReward": {
     "localized_name": "Auftrag des Pal-Biologen",
     "description": "Hallöchen, ich bin Pal-Forscher und führe hier Untersuchungen zur Lebensweise verschiedener Pal-Spezies durch. Ich sehe, du hast eine Palpedia! Würdest du sie mir zeigen?"

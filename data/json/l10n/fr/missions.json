@@ -199,6 +199,42 @@
     "localized_name": "La requête du Chasseur brillant",
     "description": "Salut... Je m'occupe de réguler la population de Pals dans le but de préserver l'écosystème de la région. Je recherche donc quelqu'un capable de réduire leur nombre."
   },
+  "Sub_PalDisplay_A_01": {
+    "localized_name": "Demande du Critique de Pals",
+    "description": "Parler au Critique de Pals après avoir appelé un {PalName}"
+  },
+  "Sub_PalDisplay_B_01": {
+    "localized_name": "Demande du Critique de Pals",
+    "description": "Parler au Critique de Pals après avoir appelé un {PalName}"
+  },
+  "Sub_PalDisplay_C_01": {
+    "localized_name": "Demande du Critique de Pals",
+    "description": "Parler au Critique de Pals après avoir appelé un {PalName}"
+  },
+  "Sub_PalDisplay_D_01": {
+    "localized_name": "Demande du Critique de Pals",
+    "description": "Parler au Critique de Pals après avoir appelé un {PalName}"
+  },
+  "Sub_PalDisplay_E_01": {
+    "localized_name": "Demande du Critique de Pals",
+    "description": "Parler au Critique de Pals après avoir appelé un {PalName}"
+  },
+  "Sub_PalDisplay_F_01": {
+    "localized_name": "Demande du Critique de Pals",
+    "description": "Parler au Critique de Pals après avoir appelé un {PalName}"
+  },
+  "Sub_PalDisplay_G_01": {
+    "localized_name": "Demande du Critique de Pals",
+    "description": "Parler au Critique de Pals après avoir appelé un {PalName}"
+  },
+  "Sub_PalDisplay_H_01": {
+    "localized_name": "Demande du Critique de Pals",
+    "description": "Parler au Critique de Pals après avoir appelé un {PalName}"
+  },
+  "Sub_PalDisplay_I_01": {
+    "localized_name": "Demande du Critique de Pals",
+    "description": "Parler au Critique de Pals après avoir appelé un {PalName}"
+  },
   "Sub_PaldexReward": {
     "localized_name": "La mission du Chercheur en écologie de Pal",
     "description": "Je me charge d'étudier les différentes espèces de Pals. Mes recherches actuelles incluent des espèces non identifiées dans cette région... Vous possédez un Paldex, non ? Vous permettriez que j'y jette un coup d'œil ?"

@@ -199,6 +199,42 @@
     "localized_name": "Zlecenie mądrego łowcy",
     "description": "Hej... To ja pilnuję równowagi ekosystemu w tym regionie, ze szczególnym uwzględnieniem populacji Pali. Obecnie potrzebuję kogoś, kto pomoże nieco zmniejszyć ich liczebność."
   },
+  "Sub_PalDisplay_A_01": {
+    "localized_name": "Zlecenie oceniającego Pale",
+    "description": "Przywołaj {PalName} i porozmawiaj z oceniającym Pale."
+  },
+  "Sub_PalDisplay_B_01": {
+    "localized_name": "Zlecenie oceniającego Pale",
+    "description": "Przywołaj {PalName} i porozmawiaj z oceniającym Pale."
+  },
+  "Sub_PalDisplay_C_01": {
+    "localized_name": "Zlecenie oceniającego Pale",
+    "description": "Przywołaj {PalName} i porozmawiaj z oceniającym Pale."
+  },
+  "Sub_PalDisplay_D_01": {
+    "localized_name": "Zlecenie oceniającego Pale",
+    "description": "Przywołaj {PalName} i porozmawiaj z oceniającym Pale."
+  },
+  "Sub_PalDisplay_E_01": {
+    "localized_name": "Zlecenie oceniającego Pale",
+    "description": "Przywołaj {PalName} i porozmawiaj z oceniającym Pale."
+  },
+  "Sub_PalDisplay_F_01": {
+    "localized_name": "Zlecenie oceniającego Pale",
+    "description": "Przywołaj {PalName} i porozmawiaj z oceniającym Pale."
+  },
+  "Sub_PalDisplay_G_01": {
+    "localized_name": "Zlecenie oceniającego Pale",
+    "description": "Przywołaj {PalName} i porozmawiaj z oceniającym Pale."
+  },
+  "Sub_PalDisplay_H_01": {
+    "localized_name": "Zlecenie oceniającego Pale",
+    "description": "Przywołaj {PalName} i porozmawiaj z oceniającym Pale."
+  },
+  "Sub_PalDisplay_I_01": {
+    "localized_name": "Zlecenie oceniającego Pale",
+    "description": "Przywołaj {PalName} i porozmawiaj z oceniającym Pale."
+  },
   "Sub_PaldexReward": {
     "localized_name": "Zlecenie ekologa badającego Pale",
     "description": "Miło cię poznać. Zajmuję się badaniem gatunków Pali i prowadzę obserwacje ekologiczne, także wśród niezidentyfikowanych okazów w tej okolicy... Masz Palpedię, nie? Czy mogę na nią zerknąć w celach badawczych?"

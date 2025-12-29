@@ -199,6 +199,42 @@
     "localized_name": "Bilge avcının talebi",
     "description": "Selam... Bu bölgenin ekosisteminin dengesini izleyen ve Pal nüfusuna göz kulak olan kişi benim. Şu anda Pal'ların sayısını azaltmaya yardımcı olabilecek birilerini arıyorum."
   },
+  "Sub_PalDisplay_A_01": {
+    "localized_name": "Pal Değerlendiricisinin İsteği",
+    "description": "{PalName} çağrılmış durumdayken Pal Değerlendiricisi ile konuş."
+  },
+  "Sub_PalDisplay_B_01": {
+    "localized_name": "Pal Değerlendiricisinin İsteği",
+    "description": "{PalName} çağrılmış durumdayken Pal Değerlendiricisi ile konuş."
+  },
+  "Sub_PalDisplay_C_01": {
+    "localized_name": "Pal Değerlendiricisinin İsteği",
+    "description": "{PalName} çağrılmış durumdayken Pal Değerlendiricisi ile konuş."
+  },
+  "Sub_PalDisplay_D_01": {
+    "localized_name": "Pal Değerlendiricisinin İsteği",
+    "description": "{PalName} çağrılmış durumdayken Pal Değerlendiricisi ile konuş."
+  },
+  "Sub_PalDisplay_E_01": {
+    "localized_name": "Pal Değerlendiricisinin İsteği",
+    "description": "{PalName} çağrılmış durumdayken Pal Değerlendiricisi ile konuş."
+  },
+  "Sub_PalDisplay_F_01": {
+    "localized_name": "Pal Değerlendiricisinin İsteği",
+    "description": "{PalName} çağrılmış durumdayken Pal Değerlendiricisi ile konuş."
+  },
+  "Sub_PalDisplay_G_01": {
+    "localized_name": "Pal Değerlendiricisinin İsteği",
+    "description": "{PalName} çağrılmış durumdayken Pal Değerlendiricisi ile konuş."
+  },
+  "Sub_PalDisplay_H_01": {
+    "localized_name": "Pal Değerlendiricisinin İsteği",
+    "description": "{PalName} çağrılmış durumdayken Pal Değerlendiricisi ile konuş."
+  },
+  "Sub_PalDisplay_I_01": {
+    "localized_name": "Pal Değerlendiricisinin İsteği",
+    "description": "{PalName} çağrılmış durumdayken Pal Değerlendiricisi ile konuş."
+  },
   "Sub_PaldexReward": {
     "localized_name": "Pal ekolojisi araştırmacısının talebi",
     "description": "Memnun oldum. Ben Pal türlerini araştırıyorum ve bir de bu bölgedeki tanımlanmamış türleri içeren bir ekolojik çalışma yürütüyorum... Sende bir Palpedia var, değil mi? Referans olarak bir bakabilir miyim?"

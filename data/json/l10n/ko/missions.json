@@ -199,6 +199,42 @@
     "localized_name": "똑똑한 수렵꾼의 의뢰",
     "description": "여어… 난 이 지역 생태계의 균형을 유지하기 위해 팰의 개체 수를 감시하는 사람이야. 지금은 팰의 개체 수를 줄여줄 사람을 애타게 찾고 있지."
   },
+  "Sub_PalDisplay_A_01": {
+    "localized_name": "팰 품평가의 의뢰",
+    "description": "{PalName}을(를) 소환한 상태에서 팰 품평가에게 말을 건다"
+  },
+  "Sub_PalDisplay_B_01": {
+    "localized_name": "팰 품평가의 의뢰",
+    "description": "{PalName}을(를) 소환한 상태에서 팰 품평가에게 말을 건다"
+  },
+  "Sub_PalDisplay_C_01": {
+    "localized_name": "팰 품평가의 의뢰",
+    "description": "{PalName}을(를) 소환한 상태에서 팰 품평가에게 말을 건다"
+  },
+  "Sub_PalDisplay_D_01": {
+    "localized_name": "팰 품평가의 의뢰",
+    "description": "{PalName}을(를) 소환한 상태에서 팰 품평가에게 말을 건다"
+  },
+  "Sub_PalDisplay_E_01": {
+    "localized_name": "팰 품평가의 의뢰",
+    "description": "{PalName}을(를) 소환한 상태에서 팰 품평가에게 말을 건다"
+  },
+  "Sub_PalDisplay_F_01": {
+    "localized_name": "팰 품평가의 의뢰",
+    "description": "{PalName}을(를) 소환한 상태에서 팰 품평가에게 말을 건다"
+  },
+  "Sub_PalDisplay_G_01": {
+    "localized_name": "팰 품평가의 의뢰",
+    "description": "{PalName}을(를) 소환한 상태에서 팰 품평가에게 말을 건다"
+  },
+  "Sub_PalDisplay_H_01": {
+    "localized_name": "팰 품평가의 의뢰",
+    "description": "{PalName}을(를) 소환한 상태에서 팰 품평가에게 말을 건다"
+  },
+  "Sub_PalDisplay_I_01": {
+    "localized_name": "팰 품평가의 의뢰",
+    "description": "{PalName}을(를) 소환한 상태에서 팰 품평가에게 말을 건다"
+  },
   "Sub_PaldexReward": {
     "localized_name": "팰 생태조사원의 의뢰",
     "description": "처음 뵙겠습니다. 저는 팰의 종족을 조사연구하는 사람입니다. 이 지역에서 미확인종을 호함한 생태 조사를 수행 중입니다만… 혹시 팰 덱을 갖고 계십니까? 자료에 보탬이 되도록, 보여 주시면 안 되겠습니까?"

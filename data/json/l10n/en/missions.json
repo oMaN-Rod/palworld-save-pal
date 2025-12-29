@@ -199,6 +199,42 @@
     "localized_name": "Request from a Wise Hunter",
     "description": "Hey... I'm the one who monitors the balance of this region's ecosystem, keeping an eye on the Pal population. Right now, I’m looking for someone who can help reduce their numbers"
   },
+  "Sub_PalDisplay_A_01": {
+    "localized_name": "Request from Pal Critic",
+    "description": "Speak to the Pal Critic while {PalName} is summoned."
+  },
+  "Sub_PalDisplay_B_01": {
+    "localized_name": "Request from Pal Critic",
+    "description": "Speak to the Pal Critic while {PalName} is summoned."
+  },
+  "Sub_PalDisplay_C_01": {
+    "localized_name": "Request from Pal Critic",
+    "description": "Speak to the Pal Critic while {PalName} is summoned."
+  },
+  "Sub_PalDisplay_D_01": {
+    "localized_name": "Request from Pal Critic",
+    "description": "Speak to the Pal Critic while {PalName} is summoned."
+  },
+  "Sub_PalDisplay_E_01": {
+    "localized_name": "Request from Pal Critic",
+    "description": "Speak to the Pal Critic while {PalName} is summoned."
+  },
+  "Sub_PalDisplay_F_01": {
+    "localized_name": "Request from Pal Critic",
+    "description": "Speak to the Pal Critic while {PalName} is summoned."
+  },
+  "Sub_PalDisplay_G_01": {
+    "localized_name": "Request from Pal Critic",
+    "description": "Speak to the Pal Critic while {PalName} is summoned."
+  },
+  "Sub_PalDisplay_H_01": {
+    "localized_name": "Request from Pal Critic",
+    "description": "Speak to the Pal Critic while {PalName} is summoned."
+  },
+  "Sub_PalDisplay_I_01": {
+    "localized_name": "Request from Pal Critic",
+    "description": "Speak to the Pal Critic while {PalName} is summoned."
+  },
   "Sub_PaldexReward": {
     "localized_name": "Request from a Pal Ecological Researcher",
     "description": "Nice to meet you. I'm researching Pal species and conducting an ecological survey, including unidentified species in this area... You have a Palpedia, don't you? Would you mind showing it to me for reference?"

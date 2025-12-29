@@ -199,6 +199,42 @@
     "localized_name": "聰明的獵人的委託",
     "description": "唷...我是為了維持這個地區的生態平衡而監控帕魯數量的人員， 現在我正在找能幫忙減少帕魯數量的人。"
   },
+  "Sub_PalDisplay_A_01": {
+    "localized_name": "帕魯鑑賞家的委託",
+    "description": "在召喚出{PalName}的狀態下與帕魯鑑賞家對話"
+  },
+  "Sub_PalDisplay_B_01": {
+    "localized_name": "帕魯鑑賞家的委託",
+    "description": "在召喚出{PalName}的狀態下與帕魯鑑賞家對話"
+  },
+  "Sub_PalDisplay_C_01": {
+    "localized_name": "帕魯鑑賞家的委託",
+    "description": "在召喚出{PalName}的狀態下與帕魯鑑賞家對話"
+  },
+  "Sub_PalDisplay_D_01": {
+    "localized_name": "帕魯鑑賞家的委託",
+    "description": "在召喚出{PalName}的狀態下與帕魯鑑賞家對話"
+  },
+  "Sub_PalDisplay_E_01": {
+    "localized_name": "帕魯鑑賞家的委託",
+    "description": "在召喚出{PalName}的狀態下與帕魯鑑賞家對話"
+  },
+  "Sub_PalDisplay_F_01": {
+    "localized_name": "帕魯鑑賞家的委託",
+    "description": "在召喚出{PalName}的狀態下與帕魯鑑賞家對話"
+  },
+  "Sub_PalDisplay_G_01": {
+    "localized_name": "帕魯鑑賞家的委託",
+    "description": "在召喚出{PalName}的狀態下與帕魯鑑賞家對話"
+  },
+  "Sub_PalDisplay_H_01": {
+    "localized_name": "帕魯鑑賞家的委託",
+    "description": "在召喚出{PalName}的狀態下與帕魯鑑賞家對話"
+  },
+  "Sub_PalDisplay_I_01": {
+    "localized_name": "帕魯鑑賞家的委託",
+    "description": "在召喚出{PalName}的狀態下與帕魯鑑賞家對話"
+  },
   "Sub_PaldexReward": {
     "localized_name": "帕魯生態調查員的委託",
     "description": "初次見面，我是調查帕魯物種的調查員。 在此地進行未確認物種的生態調查... 你有帕魯圖鑑對吧？能作為資料讓我看看嗎？"
