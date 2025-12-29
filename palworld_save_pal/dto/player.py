@@ -27,3 +27,5 @@ class PlayerDTO(BaseModel):
     technologies: List[str] = Field(default_factory=list)
     technology_points: int = 0
     boss_technology_points: int = 0
+    current_missions: List[str] = Field(default_factory=list)
+    completed_missions: List[str] = Field(default_factory=list)

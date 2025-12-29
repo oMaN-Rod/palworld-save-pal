@@ -32,7 +32,8 @@ from palworld_save_pal.game.pal_objects import PalObjects
 from palworld_save_pal.game.enum import GroupType, PalGender
 from palworld_save_pal.utils.indexed_collection import IndexedCollection
 from palworld_save_pal.utils.logging_config import create_logger
-from palworld_save_pal.game.player import Player, PlayerDTO, PlayerGvasFiles
+from palworld_save_pal.game.player import Player, PlayerGvasFiles
+from palworld_save_pal.dto.player import PlayerDTO
 from palworld_save_pal.utils.uuid import are_equal_uuids, is_empty_uuid
 from palworld_save_pal.utils.json_manager import sanitize_string
 

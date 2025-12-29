@@ -1,6 +1,12 @@
 <script lang="ts">
 	import { Tooltip } from '$components/ui';
-	import { type EggConfig, type ItemContainerSlot, type ItemGroup, Rarity } from '$types';
+	import {
+		type DynamicItem,
+		type EggConfig,
+		type ItemContainerSlot,
+		type ItemGroup,
+		Rarity
+	} from '$types';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { itemsData, palsData } from '$lib/data';
 	import { cn } from '$theme';
@@ -14,14 +20,16 @@
 	let {
 		slot = $bindable<ItemContainerSlot>(),
 		itemGroup,
+		disabled = false,
 		onCopyPaste,
 		onUpdate
-	} = $props<{
+	}: {
 		slot: ItemContainerSlot;
 		itemGroup: ItemGroup;
+		disabled?: boolean;
 		onCopyPaste?: (event: MouseEvent) => void;
 		onUpdate?: (slot: ItemContainerSlot) => void;
-	}>();
+	} = $props();
 
 	const modal = getModalState();
 
@@ -154,11 +162,14 @@
 	});
 	const palIconSrc = $derived.by(() => {
 		if (!isEgg) return;
-		const palData = palsData.getByKey(slot?.dynamic_item?.character_id ?? '');
-		return assetLoader.loadMenuImage(slot?.dynamic_item?.character_id, palData?.is_pal ?? true);
+		const characterId = slot?.dynamic_item?.character_id;
+		if (!characterId) return;
+		const palData = palsData.getByKey(characterId);
+		return assetLoader.loadMenuImage(characterId, palData?.is_pal ?? true);
 	});
 
 	async function handleItemSelect() {
+		if (disabled) return;
 		// @ts-ignore
 		const result = await modal.showModal<[string, number, EggConfig]>(ItemSelectModal, {
 			group: itemGroup,
@@ -183,7 +194,7 @@
 				if (!slot.dynamic_item) {
 					slot.dynamic_item = {
 						local_id: '00000000-0000-0000-0000-000000000000'
-					};
+					} as DynamicItem;
 				}
 
 				slot.dynamic_item.durability = itemData.details.dynamic.durability || 0;
@@ -212,7 +223,8 @@
 	function handleMouseEvent(
 		event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }
 	) {
-		onCopyPaste(event);
+		if (disabled) return;
+		onCopyPaste?.(event);
 	}
 </script>
 
@@ -248,7 +260,7 @@
 						<span class="absolute bottom-0 right-0.5 text-xs">{slot.count}</span>
 					{/if}
 				</div>
-				{#if showDurability && dynamic}
+				{#if showDurability && dynamic && slot.dynamic_item}
 					<Progress
 						value={slot.dynamic_item.durability}
 						max={dynamic.durability < slot.dynamic_item.durability
@@ -313,32 +325,38 @@
 						<span class="whitespace-pre-line">{item?.info.description}</span>
 					</div>
 					<div class="bg-surface-900 flex p-2 text-sm">
-						<div class="flex grow flex-col space-y-2">
-							<div class="flex items-center space-x-2">
-								<div class="h-6 w-6">
-									<img src={staticIcons.rightClickIcon} alt="Right Click" class="h-full w-full" />
+						{#if !disabled}
+							<div class="flex grow flex-col space-y-2">
+								<div class="flex items-center space-x-2">
+									<div class="h-6 w-6">
+										<img src={staticIcons.rightClickIcon} alt="Right Click" class="h-full w-full" />
+									</div>
+									<span class="text-xs font-bold">Copy</span>
 								</div>
-								<span class="text-xs font-bold">Copy</span>
+								<div class="flex items-center space-x-2">
+									<div class="h-6 w-6">
+										<img src={staticIcons.ctrlIcon} alt="Right Click" class="h-full w-full" />
+									</div>
+									<div class="h-6 w-6">
+										<img src={staticIcons.rightClickIcon} alt="Right Click" class="h-full w-full" />
+									</div>
+									<span class="text-xs font-bold">Paste</span>
+								</div>
+								<div class="flex items-center space-x-2">
+									<div class="h-6 w-6">
+										<img src={staticIcons.ctrlIcon} alt="Right Click" class="h-full w-full" />
+									</div>
+									<div class="h-6 w-6">
+										<img
+											src={staticIcons.middleClickIcon}
+											alt="Right Click"
+											class="h-full w-full"
+										/>
+									</div>
+									<span class="text-xs font-bold">Delete</span>
+								</div>
 							</div>
-							<div class="flex items-center space-x-2">
-								<div class="h-6 w-6">
-									<img src={staticIcons.ctrlIcon} alt="Right Click" class="h-full w-full" />
-								</div>
-								<div class="h-6 w-6">
-									<img src={staticIcons.rightClickIcon} alt="Right Click" class="h-full w-full" />
-								</div>
-								<span class="text-xs font-bold">Paste</span>
-							</div>
-							<div class="flex items-center space-x-2">
-								<div class="h-6 w-6">
-									<img src={staticIcons.ctrlIcon} alt="Right Click" class="h-full w-full" />
-								</div>
-								<div class="h-6 w-6">
-									<img src={staticIcons.middleClickIcon} alt="Right Click" class="h-full w-full" />
-								</div>
-								<span class="text-xs font-bold">Delete</span>
-							</div>
-						</div>
+						{/if}
 						<div
 							class="bg-surface-800 text-one-surface hover:ring-secondary-500 absolute bottom-4 right-4 rounded-sm px-3 py-1 font-semibold hover:ring"
 							style="min-width: 80px; height: 2rem;"

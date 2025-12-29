@@ -150,6 +150,8 @@ export type Player = {
 	boss_technology_points: number;
 	location: WorldMapPoint;
 	last_online_time: string;
+	current_missions: string[];
+	completed_missions: string[];
 };
 
 export type GuildLabResearchInfo = {
@@ -204,6 +206,7 @@ export type SaveFileType = 'gamepass' | 'steam';
 export type SaveFile = { name: string; type: SaveFileType; world_name?: string; size?: number };
 export interface DynamicItem {
 	local_id: string;
+	static_id?: string;
 	durability: number;
 	remaining_bullets?: number;
 	type: DynamicItemClass;
@@ -850,4 +853,24 @@ export interface ImportToUpsModalResults {
 export interface AddToCollectionResult {
 	collectionId?: number;
 	removeFromCollection: boolean;
+}
+
+export type MissionType = 'Main' | 'Sub';
+
+export interface MissionRewardItem {
+	id: string;
+	count: number;
+}
+
+export interface MissionRewards {
+	exp?: number;
+	items?: MissionRewardItem[];
+}
+
+export interface Mission {
+	id: string;
+	localized_name: string;
+	description: string;
+	quest_type: MissionType;
+	rewards: MissionRewards;
 }

@@ -79,6 +79,7 @@ class MessageType(str, Enum):
     GET_MAP_OBJECTS = "get_map_objects"
     GET_GUILDS = "get_guilds"
     GET_ITEMS = "get_items"
+    GET_MISSIONS = "get_missions"
     GET_PASSIVE_SKILLS = "get_passive_skills"
     GET_PLAYERS = "get_players"
     GET_TECHNOLOGIES = "get_technologies"
@@ -357,6 +358,10 @@ class GetRawDataData(BaseModel):
 class GetRawDataMessage(BaseModel):
     type: str = MessageType.GET_RAW_DATA.value
     data: GetRawDataData
+
+
+class GetMissionsMessage(BaseModel):
+    type: str = MessageType.GET_MISSIONS.value
 
 
 class GetTechnologiesMessage(BaseModel):

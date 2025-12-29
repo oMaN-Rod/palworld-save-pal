@@ -14,6 +14,7 @@ from palworld_save_pal.ws.handlers import (
     lazy_load_handler,
     map_objects_handler,
     map_unlock_handler,
+    missions_handler,
     open_in_browser_handler,
     passive_skills_handler,
     player_handler,
@@ -47,6 +48,7 @@ from palworld_save_pal.ws.messages import (
     GetItemsMessage,
     GetLabResearchMessage,
     GetMapObjectsMessage,
+    GetMissionsMessage,
     GetPalsMessage,
     GetPassiveSkillsMessage,
     GetRawDataMessage,
@@ -296,6 +298,14 @@ def bootstrap(dispatcher: "MessageDispatcher"):
         {
             "message_class": GetItemsMessage,
             "handler_func": items_handler.get_items_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.GET_MISSIONS.value,
+        {
+            "message_class": GetMissionsMessage,
+            "handler_func": missions_handler.get_missions_handler,
         },
     )
 

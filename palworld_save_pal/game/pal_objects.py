@@ -424,6 +424,48 @@ class PalObjects:
         )
 
     @staticmethod
+    def OrderedQuestArray(quests: List[str]) -> Dict[str, Any]:
+        return PalObjects.ArrayProperty(
+            ArrayType.STRUCT_PROPERTY,
+            {
+                "prop_name": "OrderedQuestArray",
+                "prop_type": "StructProperty",
+                "values": [PalObjects.OrderedQuest(quest) for quest in quests],
+                "type_name": "PalOrderedQuestSaveData",
+                "id": PalObjects.EMPTY_UUID,
+            },
+        )
+
+    @staticmethod
+    def OrderedQuest(quest: str) -> Dict[str, Any]:
+        return {
+            "QuestName": {
+                "id": None,
+                "value": quest,
+                "type": "NameProperty",
+            },
+            "BlockIndex": {"id": None, "value": 0, "type": "IntProperty"},
+            "IntegerMap": {
+                "key_type": "NameProperty",
+                "value_type": "IntProperty",
+                "key_struct_type": None,
+                "value_struct_type": None,
+                "id": None,
+                "value": [],
+                "type": "MapProperty",
+            },
+            "StringMap": {
+                "key_type": "NameProperty",
+                "value_type": "StrProperty",
+                "key_struct_type": None,
+                "value_struct_type": None,
+                "id": None,
+                "value": [],
+                "type": "MapProperty",
+            },
+        }
+
+    @staticmethod
     def PalSaveParameter(
         character_id: str,
         instance_id: UUID | str,

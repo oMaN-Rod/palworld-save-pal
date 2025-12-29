@@ -6,6 +6,7 @@ from pydantic import BaseModel, ConfigDict, Field, PrivateAttr, computed_field
 
 from palworld_save_tools.gvas import GvasFile
 
+from palworld_save_pal.dto.player import PlayerDTO
 from palworld_save_pal.game.character_container import (
     CharacterContainer,
     CharacterContainerType,
@@ -29,30 +30,6 @@ class PlayerGvasFiles(BaseModel):
     dps: Optional[GvasFile] = None
 
     model_config = ConfigDict(arbitrary_types_allowed=True)
-
-
-class PlayerDTO(BaseModel):
-    uid: UUID
-    nickname: str
-    level: int
-    exp: int
-    hp: int = 5000
-    stomach: float = 100.0
-    sanity: float = 100.0
-    status_point_list: Dict[str, int] = Field(default_factory=dict)
-    ext_status_point_list: Dict[str, int] = Field(default_factory=dict)
-    instance_id: Optional[UUID] = Field(default=None)
-    guild_id: Optional[UUID] = Field(default=None)
-    pal_box_id: Optional[UUID] = Field(default=None)
-    otomo_container_id: Optional[UUID] = Field(default=None)
-    common_container: Optional[ItemContainer] = Field(default=None)
-    essential_container: Optional[ItemContainer] = Field(default=None)
-    weapon_load_out_container: Optional[ItemContainer] = Field(default=None)
-    player_equipment_armor_container: Optional[ItemContainer] = Field(default=None)
-    food_equip_container: Optional[ItemContainer] = Field(default=None)
-    technologies: List[str] = Field(default_factory=list)
-    technology_points: int = 0
-    boss_technology_points: int = 0
 
 
 class Player(BaseModel):
@@ -298,8 +275,7 @@ class Player(BaseModel):
     def pal_box_id(self) -> Optional[UUID]:
         return PalObjects.get_guid(
             PalObjects.get_nested(
-                self._player_gvas_files.sav.properties["SaveData"],
-                "value",
+                self._save_data,
                 "PalStorageContainerId",
                 "value",
                 "ID",
@@ -310,12 +286,47 @@ class Player(BaseModel):
     def otomo_container_id(self) -> Optional[UUID]:
         return PalObjects.get_guid(
             PalObjects.get_nested(
-                self._player_gvas_files.sav.properties["SaveData"],
-                "value",
+                self._save_data,
                 "OtomoCharacterContainerId",
                 "value",
                 "ID",
             )
+        )
+
+    @computed_field
+    def completed_missions(self) -> List[str]:
+        return PalObjects.get_array_property(
+            self._save_data.get(
+                "CompletedQuestArray",
+                PalObjects.ArrayPropertyValues(ArrayType.NAME_PROPERTY, values=[]),
+            )
+        )
+
+    @completed_missions.setter
+    def completed_missions(self, value: List[str]):
+        self._save_data["CompletedQuestArray"] = PalObjects.ArrayPropertyValues(
+            ArrayType.NAME_PROPERTY, values=value
+        )
+
+    @computed_field
+    def current_missions(self) -> List[str]:
+        quests = PalObjects.get_array_property(
+            self._save_data.get(
+                "OrderedQuestArray",
+                PalObjects.ArrayPropertyValues(ArrayType.NAME_PROPERTY, values=[]),
+            )
+        )
+        return [
+            quest_id
+            for quest in quests
+            if (quest_id := PalObjects.get_value(quest.get("QuestName")))
+            and quest_id != "None"
+        ]
+
+    @current_missions.setter
+    def current_missions(self, value: List[str]):
+        self._save_data["OrderedQuestArray"] = PalObjects.OrderedQuestArray(
+            quests=value
         )
 
     @computed_field
@@ -587,6 +598,8 @@ class Player(BaseModel):
                     | "technologies"
                     | "technology_points"
                     | "boss_technology_points"
+                    | "completed_missions"
+                    | "current_missions"
                 ):
                     setattr(self, key, value)
                 case "common_container":

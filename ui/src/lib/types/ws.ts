@@ -91,7 +91,8 @@ export enum MessageType {
 	REQUEST_GUILD_DETAILS = 'request_guild_details',
 	GET_GUILD_DETAILS_RESPONSE = 'get_guild_details_response',
 	REQUEST_GPS = 'request_gps',
-	GET_GPS_RESPONSE = 'get_gps_response'
+	GET_GPS_RESPONSE = 'get_gps_response',
+	GET_MISSIONS = 'get_missions'
 }
 
 interface UpdateSaveFileData {

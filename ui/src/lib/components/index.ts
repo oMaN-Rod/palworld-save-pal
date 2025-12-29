@@ -13,6 +13,7 @@ import GamepassSaveList from './gamepass-save-list/GamepassSaveList.svelte';
 import LabResearch from './guilds/LabResearch.svelte';
 import LabResearchControls from './guilds/LabResearchControls.svelte';
 import Map from './map/Map.svelte';
+import { MissionDetails, MissionList } from './missions';
 import Modal from './modal/Modal.svelte';
 import NavBar from './nav-bar/NavBar.svelte';
 import PalCard from './pal-card/PalCard.svelte';
@@ -42,6 +43,8 @@ export {
 	LabResearch,
 	LabResearchControls,
 	Map,
+	MissionDetails,
+	MissionList,
 	Modal,
 	NavBar,
 	PalBadge,

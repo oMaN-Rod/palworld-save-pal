@@ -6,6 +6,7 @@ import { friendshipData } from './friendship.svelte';
 import { itemsData } from './items.svelte';
 import { labResearchData } from './labResearch.svelte';
 import { mapObjects } from './mapObjects.svelte';
+import { missionsData } from './missions.svelte';
 import { palsData } from './pals.svelte';
 import { passiveSkillsData } from './passiveSkills.svelte';
 import { presetsData } from './presets.svelte';
@@ -22,6 +23,7 @@ export {
 	itemsData,
 	labResearchData,
 	mapObjects,
+	missionsData,
 	palsData,
 	passiveSkillsData,
 	presetsData,
