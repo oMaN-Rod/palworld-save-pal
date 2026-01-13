@@ -21,7 +21,8 @@
 		onDelete,
 		selected = $bindable([]),
 		onSelect,
-		showCloneToUps = true
+		showCloneToUps = true,
+		disabled = false
 	} = $props<{
 		pal: Pal;
 		onMove: () => void;
@@ -32,6 +33,7 @@
 		selected?: string[];
 		onSelect?: (pal: Pal, event: MouseEvent) => void;
 		showCloneToUps?: boolean;
+		disabled?: boolean;
 	}>();
 
 	const appState = getAppState();
@@ -41,7 +43,9 @@
 			'outline-surface-600 xl:h-18 xl:w-18 h-16 w-16 rounded-full outline outline-2 outline-offset-2',
 			selected.includes(pal.instance_id) || selected.includes(pal.id?.toString() || '')
 				? 'ring-4 ring-secondary-500'
-				: 'hover:ring-4 hover:ring-secondary-500'
+				: !disabled
+					? 'hover:ring-4 hover:ring-secondary-500'
+					: ''
 		)
 	);
 
@@ -89,6 +93,7 @@
 	);
 
 	function handleClick(event: MouseEvent) {
+		if (disabled) return;
 		if (!pal || pal.character_id === 'None') {
 			onAdd();
 			return;
@@ -118,6 +123,7 @@
 				rounded="rounded-none"
 				position="right"
 				useArrow={false}
+				{disabled}
 			>
 				<div class="flex flex-col">
 					<div class={cn('relative flex items-center justify-center', sickClass)}>
@@ -151,9 +157,11 @@
 						>
 							<img src={genderIcon} alt={pal.gender} />
 						</div>
-						<div class="absolute -bottom-4 -left-3 h-6 w-6 xl:h-8 xl:w-8">
-							<span class="text-xs {levelSyncClass} font-bold">lvl {palLevel}</span>
-						</div>
+						{#if palLevel}
+							<div class="absolute -bottom-4 -left-3 h-6 w-6 xl:h-8 xl:w-8">
+								<span class="text-xs {levelSyncClass} font-bold">lvl {palLevel}</span>
+							</div>
+						{/if}
 					</div>
 				</div>
 

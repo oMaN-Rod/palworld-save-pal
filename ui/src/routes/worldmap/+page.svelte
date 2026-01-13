@@ -2,13 +2,13 @@
 	import { Map, PlayerList } from '$components';
 	import { Combobox } from '$components/ui';
 	import { getAppState, getModalState, getToastState } from '$states';
-	import { worldToLeaflet, worldToMap } from '$components/map/utils';
+	import { worldToPixel, worldToMap } from '$components/map/utils';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
-	import { mapImg } from '$components/map/mapImages';
+	import { mapImg } from '$components/map/styles';
 	import { Target, Unlock, Users, Building } from 'lucide-svelte';
 	import { mapObjects } from '$lib/data';
-	import L from 'leaflet';
-	import type { Base, Guild, GuildSummary, Player } from '$types';
+	import type { Map as OLMap } from 'ol';
+	import type { Base, GuildSummary, Player } from '$types';
 	import { assetLoader } from '$utils';
 	import { TextInputModal } from '$components/modals';
 	import { EntryState, MessageType } from '$types';
@@ -45,14 +45,13 @@
 	const mapOptions = $derived(mapOptionsState.current);
 	const toast = getToastState();
 	let section = $state(['players']);
-	let map: L.Map | undefined = $state();
+	let map: OLMap | null = $state(null);
 
 	const players = $derived(Object.values(appState.players || {}));
 	const loadedPlayerCount = $derived(players.length);
 	const totalPlayerCount = $derived(Object.keys(appState.playerSummaries || {}).length);
 	const guilds = $derived(Object.values(appState.guilds || {}));
-	const loadedGuildCount = $derived(guilds.length);
-	const totalGuildCount = $derived(Object.keys(appState.guildSummaries || {}).length);
+
 	const bases = $derived.by(() => {
 		return Object.values(guilds).reduce(
 			(acc, guild) => {
@@ -105,10 +104,13 @@
 	const anubisImg = $derived(assetLoader.loadMenuImage('anubis'));
 	const starryonImg = $derived(assetLoader.loadMenuImage('nightbluehorse'));
 
+	function panTo(x: number, y: number) {
+		const coords = worldToPixel(x, y);
+		map?.getView().animate({ center: coords, zoom: 5, duration: 500 });
+	}
 	function handlePlayerFocus(player: Player) {
 		if (!player.location) return;
-		const coords = worldToLeaflet(player.location.x, player.location.y);
-		map?.flyTo(coords, 3);
+		panTo(player.location.x, player.location.y);
 	}
 
 	function handlePlayerLoaded(player: Player) {
@@ -120,8 +122,7 @@
 
 	function handleBaseFocus(base: Base) {
 		if (!base.location) return;
-		const coords = worldToLeaflet(base.location.x, base.location.y);
-		map?.flyTo(coords, 3);
+		panTo(base.location.x, base.location.y);
 	}
 
 	function handleGuildSelect(guildId: string) {
