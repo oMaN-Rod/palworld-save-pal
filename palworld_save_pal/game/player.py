@@ -605,7 +605,7 @@ class Player(BaseModel):
                 case "common_container":
                     self.common_container.update_from(value)
                 case "essential_container":
-                    self.essential_container.update_from(value)
+                    self.essential_container.update_from(value, self.common_container)
                 case "weapon_load_out_container":
                     self.weapon_load_out_container.update_from(value)
                 case "player_equipment_armor_container":
