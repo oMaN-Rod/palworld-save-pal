@@ -3,6 +3,8 @@
 	import { EntryState, type Pal } from '$types';
 	import { Input } from '$components/ui';
 	import { getAppState } from '$states';
+	import * as m from '$i18n/messages';
+	import { c } from '$lib/utils/commonTranslations';
 
 	let { pal = $bindable() } = $props<{
 		pal: Pal;
@@ -10,8 +12,8 @@
 
 	let appState = getAppState();
 
-	const max = $derived(appState.settings.cheat_mode ? 255: 20);
-    const markers = $derived(appState.settings.cheat_mode ? [50, 100, 150, 200]: [5, 10, 15]);
+	const max = $derived(appState.settings.cheat_mode ? 255 : 20);
+	const markers = $derived(appState.settings.cheat_mode ? [50, 100, 150, 200] : [5, 10, 15]);
 
 	const hp = $derived([pal.rank_hp ?? 0]);
 	const attack = $derived([pal.rank_attack ?? 0]);
@@ -40,36 +42,29 @@
 </script>
 
 <div class="grid grid-cols-[80px_1fr_auto] items-center gap-2">
-	<span>Health</span>
+	<span>{m.health()}</span>
 	<Slider
 		classes="grow"
 		height="h-2"
 		meterBg="bg-green-500"
 		thumbRingColor="ring-green-500"
 		min={0}
-		max={max}
-		markers={markers}
+		{max}
+		{markers}
 		step={1}
 		value={hp}
 		onValueChange={handleUpdateHp}
 	/>
-	<Input
-		type="number"
-		inputClass="h-8 p-1"
-		value={hp[0]}
-		onchange={handleUpdateHp}
-		min={0}
-		max={max}
-	/>
+	<Input type="number" inputClass="h-8 p-1" value={hp[0]} onchange={handleUpdateHp} min={0} {max} />
 
-	<span>Attack</span>
+	<span>{m.attack()}</span>
 	<Slider
 		height="h-2"
 		meterBg="bg-red-500"
 		thumbRingColor="ring-red-500"
 		min={0}
-		max={max}
-		markers={markers}
+		{max}
+		{markers}
 		step={1}
 		value={attack}
 		onValueChange={handleUpdateAttack}
@@ -80,17 +75,17 @@
 		value={attack[0]}
 		onchange={handleUpdateAttack}
 		min={0}
-		max={max}
+		{max}
 	/>
 
-	<span>Defense</span>
+	<span>{m.defense()}</span>
 	<Slider
 		height="h-2"
 		meterBg="bg-primary-500"
 		thumbRingColor="ring-primary-500"
 		min={0}
-		max={max}
-		markers={markers}
+		{max}
+		{markers}
 		step={1}
 		value={defense}
 		onValueChange={handleUpdateDefense}
@@ -101,17 +96,17 @@
 		value={defense[0]}
 		onchange={handleUpdateDefense}
 		min={0}
-		max={max}
+		{max}
 	/>
 
-	<span>Workspeed</span>
+	<span>{m.workspeed()}</span>
 	<Slider
 		height="h-2"
 		meterBg="bg-secondary-500"
 		thumbRingColor="ring-secondary-500"
 		min={0}
-		max={max}
-		markers={markers}
+		{max}
+		{markers}
 		step={1}
 		value={craftSpeed}
 		onValueChange={handleUpdateCraftSpeed}
@@ -122,6 +117,6 @@
 		value={craftSpeed[0]}
 		onchange={handleUpdateCraftSpeed}
 		min={0}
-		max={max}
+		{max}
 	/>
 </div>

@@ -3,6 +3,8 @@
 	import { Combobox } from '$components/ui';
 	import Stopwatch from '$components/ui/stopwatch/Stopwatch.svelte';
 	import { getAppState } from '$states';
+	import * as m from '$i18n/messages';
+	import { c } from '$lib/utils/commonTranslations';
 
 	let appState = getAppState();
 
@@ -97,14 +99,14 @@
 					d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
 				></path>
 			</svg>
-			Loading player...
+			{m.loading_entity({ entity: c.player })}...
 			<Stopwatch bind:seconds={stopwatchSeconds} size="text-sm" />
 		</div>
 	{:else}
 		<Combobox
 			value={selected}
 			options={selectOptions}
-			placeholder="Select Player"
+			placeholder={m.select_entity({ entity: c.player })}
 			onChange={(value) => handleSelect(value as string)}
 			selectClass="w-full"
 		/>

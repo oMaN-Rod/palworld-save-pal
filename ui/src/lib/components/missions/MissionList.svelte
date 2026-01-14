@@ -4,6 +4,8 @@
 	import type { Mission, MissionType } from '$types';
 	import { Check, Circle, Trash2, CheckCircle } from 'lucide-svelte';
 	import { SectionHeader, Tooltip } from '$components/ui';
+	import * as m from '$i18n/messages';
+	import { c } from '$lib/utils/commonTranslations';
 
 	let {
 		currentMissions = [],
@@ -59,7 +61,7 @@
 <div class="flex h-full flex-col space-y-4">
 	{#if filteredCurrentMissions.length > 0}
 		<div class="flex flex-col gap-2">
-			<SectionHeader text="Current Missions" />
+			<SectionHeader text={m.current_missions()} />
 			<ul
 				class="divide-surface-700 border-surface-700 max-h-[300px] divide-y overflow-y-auto border"
 			>
@@ -75,7 +77,7 @@
 							<Circle class="text-warning-500 h-4 w-4 shrink-0" />
 							<span class="flex-1 truncate">{mission.localized_name}</span>
 							<div class="flex gap-1 opacity-0 transition-opacity group-hover:opacity-100">
-								<Tooltip label="Mark Complete" position="left">
+								<Tooltip label={m.mark_complete()} position="left">
 									<button
 										class="hover:bg-success-500/25 rounded p-1"
 										onclick={(e) => handleComplete(e, mission.id)}
@@ -83,7 +85,7 @@
 										<CheckCircle class="text-success-500 h-4 w-4" />
 									</button>
 								</Tooltip>
-								<Tooltip label="Clear Mission" position="left">
+								<Tooltip label={m.clear_entity({ entity: m.mission() })} position="left">
 									<button
 										class="hover:bg-error-500/25 rounded p-1"
 										onclick={(e) => handleClear(e, mission.id, false)}
@@ -101,7 +103,7 @@
 
 	{#if filteredCompletedMissions.length > 0}
 		<div class="flex flex-col gap-2">
-			<SectionHeader text="Completed Missions" />
+			<SectionHeader text={m.completed_missions()} />
 			<ul class="divide-surface-700 border-surface-700 divide-y overflow-y-auto border">
 				{#each filteredCompletedMissions as mission, index (index)}
 					<li>
@@ -115,7 +117,7 @@
 							<Check class="text-success-500 h-4 w-4 shrink-0" />
 							<span class="flex-1 truncate">{mission.localized_name}</span>
 							<div class="flex gap-1 opacity-0 transition-opacity group-hover:opacity-100">
-								<Tooltip label="Clear Mission" position="left">
+								<Tooltip label={m.clear_entity({ entity: m.mission() })} position="left">
 									<button
 										class="hover:bg-error-500/25 rounded p-1"
 										onclick={(e) => handleClear(e, mission.id, true)}
@@ -133,7 +135,7 @@
 
 	{#if filteredCurrentMissions.length === 0 && filteredCompletedMissions.length === 0}
 		<div class="text-surface-400 flex h-full items-center justify-center">
-			<p>No {missionType.toLowerCase()} missions found</p>
+			<p>{m.no_missions_found({ type: missionType.toLowerCase() })}</p>
 		</div>
 	{/if}
 </div>

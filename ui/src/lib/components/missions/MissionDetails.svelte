@@ -4,6 +4,8 @@
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import type { Mission } from '$types';
 	import { assetLoader, calculateFilters } from '$utils';
+	import * as m from '$i18n/messages';
+	import { c } from '$lib/utils/commonTranslations';
 
 	let { mission }: { mission?: Mission } = $props();
 
@@ -24,7 +26,7 @@
 				<div class="flex w-full flex-col items-start">
 					<h3 class="h3 relative">{mission.localized_name}</h3>
 					<span class="text-surface-200 relative text-sm uppercase"
-						>{mission.quest_type} Mission</span
+						>{mission.quest_type} {m.mission()}</span
 					>
 				</div>
 			</div>
@@ -38,7 +40,7 @@
 
 		{#if mission.rewards && (mission.rewards.exp || (mission.rewards.items && mission.rewards.items.length > 0))}
 			<div class="flex flex-col space-y-2 p-2">
-				<SectionHeader text="Rewards" borderClass="bg-surface-800 z-0" />
+				<SectionHeader text={m.rewards()} borderClass="bg-surface-800 z-0" />
 				<div class="flex flex-col space-y-2">
 					{#if mission.rewards.exp}
 						<div class="flex items-center gap-2 rounded p-2">
@@ -72,6 +74,6 @@
 	</Card>
 {:else}
 	<div class=" text-surface-400 flex h-full items-center justify-center p-4">
-		<p>Select a mission to view details</p>
+		<p>{m.select_a_mission_to_view()}</p>
 	</div>
 {/if}

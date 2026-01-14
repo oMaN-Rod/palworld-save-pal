@@ -10,6 +10,8 @@
 	import { Switch } from '@skeletonlabs/skeleton-svelte';
 	import { X, Check, Trash, Lock } from 'lucide-svelte';
 	import type { CheckedChangeDetails } from '@zag-js/switch';
+	import * as m from '$i18n/messages';
+	import { c } from '$lib/utils/commonTranslations';
 
 	let {
 		title,
@@ -377,18 +379,18 @@
 	<div class="flex space-x-2">
 		{#if isBusy}
 			<div class="flex w-full items-center justify-center space-x-2">
-				<span class="text-surface-500 text-2xl">created</span>
+				<span class="text-surface-500 text-2xl">{m.created()}</span>
 				<span class="text-4xl font-bold"><NumberFlow value={count} /></span>
-				<span class="text-surface-500 text-2xl"> of </span>
+				<span class="text-surface-500 text-2xl"> {m.of()} </span>
 				<span class="text-surface-500 text-2xl">{totalRequiredSlots}</span>
-				<span class="text-surface-500 text-2xl"> pals </span>
+				<span class="text-surface-500 text-2xl"> {c.pals.toLowerCase()} </span>
 			</div>
 		{:else}
 			<div>
-				<h6 class="h6">Types</h6>
+				<h6 class="h6">{m.type({ count: 2 })}</h6>
 				<div class="mt-2 grid grid-cols-2 gap-2 overflow-y-auto p-2">
 					<Tooltip
-						label={`Add ${normalPals.length} Normal Pals`}
+						label={m.add_count_pals({ count: normalPals.length, type: m.normal(), pals: c.pals })}
 						baseClass="flex items-center space-x-2"
 					>
 						<Switch
@@ -398,10 +400,10 @@
 								addNormalPals = mode.checked;
 							}}
 						/>
-						<span>Normal</span>
+						<span>{m.normal()}</span>
 					</Tooltip>
 					<Tooltip
-						label={`Add ${normalPals.length} Lucky Pals`}
+						label={m.add_count_pals({ count: normalPals.length, type: m.lucky(), pals: c.pals })}
 						baseClass="flex items-center space-x-2"
 					>
 						<Switch
@@ -411,10 +413,10 @@
 								addLuckyPals = mode.checked;
 							}}
 						/>
-						<span>Lucky</span>
+						<span>{m.lucky()}</span>
 					</Tooltip>
 					<Tooltip
-						label={`Add ${normalPals.length} Alpha Pals`}
+						label={m.add_count_pals({ count: normalPals.length, type: m.alpha(), pals: c.pals })}
 						baseClass="flex items-center space-x-2"
 					>
 						<Switch
@@ -424,10 +426,10 @@
 								addAlphaPals = mode.checked;
 							}}
 						/>
-						<span>Alpha</span>
+						<span>{m.alpha()}</span>
 					</Tooltip>
 					<Tooltip
-						label={`Add ${bossPals.length} Boss Pals`}
+						label={m.add_count_pals({ count: bossPals.length, type: m.boss(), pals: c.pals })}
 						baseClass="flex items-center space-x-2"
 					>
 						<Switch
@@ -437,10 +439,10 @@
 								addBossPals = mode.checked;
 							}}
 						/>
-						<span>Boss</span>
+						<span>{m.boss()}</span>
 					</Tooltip>
 					<Tooltip
-						label={`Add ${predatorPals.length} Predator Pals`}
+						label={m.add_count_pals({ count: predatorPals.length, type: m.predator(), pals: c.pals })}
 						baseClass="flex items-center space-x-2"
 					>
 						<Switch
@@ -450,10 +452,10 @@
 								addPredatorPals = mode.checked;
 							}}
 						/>
-						<span>Predator</span>
+						<span>{m.predator()}</span>
 					</Tooltip>
 					<Tooltip
-						label={`Add ${raidPals.length} Raid Pals`}
+						label={m.add_count_pals({ count: raidPals.length, type: m.raid(), pals: c.pals })}
 						baseClass="flex items-center space-x-2"
 					>
 						<Switch
@@ -463,10 +465,10 @@
 								addRaidPals = mode.checked;
 							}}
 						/>
-						<span>Raid</span>
+						<span>{m.raid()}</span>
 					</Tooltip>
 					<Tooltip
-						label={`Add ${summonPals.length} Summon Pals`}
+						label={m.add_count_pals({ count: summonPals.length, type: m.summon(), pals: c.pals })}
 						baseClass="flex items-center space-x-2"
 					>
 						<Switch
@@ -476,10 +478,10 @@
 								addSummonPals = mode.checked;
 							}}
 						/>
-						<span>Summon</span>
+						<span>{m.summon()}</span>
 					</Tooltip>
 					<Tooltip
-						label={`Add ${oilRigPals.length} Oil Rig Pals`}
+						label={m.add_count_pals({ count: oilRigPals.length, type: m.oil_rig(), pals: c.pals })}
 						baseClass="flex items-center space-x-2"
 					>
 						<Switch
@@ -489,10 +491,10 @@
 								addOilRigPals = mode.checked;
 							}}
 						/>
-						<span>Oil Rig</span>
+						<span>{m.oil_rig()}</span>
 					</Tooltip>
 					<Tooltip
-						label={`Add ${humanPals.length} Human Pals`}
+						label={m.add_count_pals({ count: humanPals.length, type: c.human, pals: c.pals })}
 						baseClass="flex items-center space-x-2"
 					>
 						<Switch
@@ -502,15 +504,14 @@
 								addHumanPals = mode.checked;
 							}}
 						/>
-						<span>Human</span>
+						<span>{c.human}</span>
 					</Tooltip>
 				</div>
 			</div>
 			<Card background="preset-filled-surface-200-800">
-				<h6 class="h6">Apply Presets</h6>
+				<h6 class="h6">{m.apply_presets()}</h6>
 				<p class="text-sm">
-					Presets precedence is: pal lock ➡️ element lock ➡️ default. Only select one preset per
-					pal, element, or default.
+					{m.presets_precedence()}
 				</p>
 				{#if palPresets.length > 0}
 					<List
@@ -523,7 +524,7 @@
 					>
 						{#snippet listHeader()}
 							<div>
-								<span class="font-bold">All</span>
+								<span class="font-bold">{m.all()}</span>
 							</div>
 						{/snippet}
 						{#snippet listItem(preset)}
@@ -577,35 +578,36 @@
 
 	{#if canAddPals && !isBusy}
 		<div class="mt-1 flex w-full justify-end text-sm text-green-500">
-			<span class="font-bold">Ready to fill {target} with {totalRequiredSlots} pals.</span>
+			<span class="font-bold">{m.ready_to_fill({ target, count: totalRequiredSlots, pals: c.pals })}</span>
 		</div>
 	{:else if !canAddPals && !isBusy}
 		<div class="mt-1 flex w-full justify-end text-sm text-red-500">
 			<span class="font-bold">
-				You cannot fill your {target}, you need {Math.abs(
-					availablePalBoxSlots - totalRequiredSlots
-				)} more slots.
+				{m.cannot_fill({
+					target,
+					count: Math.abs(availablePalBoxSlots - totalRequiredSlots)
+				})}
 			</span>
 		</div>
 	{/if}
 	<div class="flex justify-end space-x-4">
-		<Tooltip position="bottom" label="Cancel">
+		<Tooltip position="bottom" label={m.cancel()}>
 			<button
 				class="btn preset-filled-secondary hover:preset-tonal-secondary"
 				onclick={handleCancel}
 			>
 				<X size={20} />
-				<span>Cancel</span>
+				<span>{m.cancel()}</span>
 			</button>
 		</Tooltip>
-		<Tooltip position="bottom" label="Confirm">
+		<Tooltip position="bottom" label={m.confirm()}>
 			<button
 				class="btn preset-filled-primary hover:preset-tonal-primary"
 				onclick={handleConfirm}
 				disabled={!canAddPals || isBusy}
 			>
 				<Check size={20} />
-				<span>Fill</span>
+				<span>{m.fill()}</span>
 			</button>
 		</Tooltip>
 	</div>

@@ -3,6 +3,8 @@
 	import { send } from '$lib/utils/websocketUtils';
 	import { MessageType, type GamepassSave } from '$types';
 	import { Users } from 'lucide-svelte';
+	import * as m from '$i18n/messages';
+	import { c } from '$lib/utils/commonTranslations';
 
 	let { saves = $bindable() } = $props<{
 		saves: Record<string, GamepassSave>;
@@ -21,7 +23,7 @@
 </script>
 
 <div class="flex flex-col space-y-4">
-	<h2 class="h2">Available Saves</h2>
+	<h2 class="h2">{m.available_entity({ entity: c.saves })}</h2>
 	{#if saves && Object.keys(saves).length > 0}
 		<List
 			baseClass="bg-surface-800 max-h-64 2xl:max-h-[500px]"
@@ -33,8 +35,8 @@
 		>
 			{#snippet listHeader()}
 				<div class="flex w-full">
-					<span class="grow font-bold">World Name</span>
-					<span class="font-bold">Players</span>
+					<span class="grow font-bold">{m.world_name()}</span>
+					<span class="font-bold">{c.players}</span>
 				</div>
 			{/snippet}
 			{#snippet listItem(save: GamepassSave)}

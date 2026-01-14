@@ -1,14 +1,29 @@
 <script lang="ts">
-	import { Card, Tooltip, Combobox, Input, List, CornerDotButton } from '$components/ui';
+	import { ActiveSkillOption, PassiveSkillOption, Talents } from '$components';
+	import { Card, Combobox, CornerDotButton, Input, List, Tooltip } from '$components/ui';
+	import * as m from '$i18n/messages';
+	import { c } from '$lib/utils/commonTranslations';
+	import { ASSET_DATA_PATH } from '$lib/constants';
+	import { activeSkillsData, itemsData, palsData, passiveSkillsData } from '$lib/data';
+	import { getAppState } from '$states';
+	import { cn } from '$theme';
 	import {
 		ItemTypeA,
 		ItemTypeB,
+		PalGender,
 		Rarity,
 		type DynamicItem,
 		type EggConfig,
+		type Item,
+		type ItemGroup,
 		type Pal,
 		type SelectOption
 	} from '$types';
+	import { staticIcons } from '$types/icons';
+	import { assetLoader } from '$utils';
+	import { focusModal } from '$utils/modalUtils';
+	import { Accordion } from '@skeletonlabs/skeleton-svelte';
+	import type { ValueChangeDetails } from '@zag-js/accordion';
 	import {
 		Apple,
 		Cuboid,
@@ -22,18 +37,7 @@
 		Trash,
 		X
 	} from 'lucide-svelte';
-	import { activeSkillsData, itemsData, palsData, passiveSkillsData } from '$lib/data';
-	import { PalGender, type Item, type ItemGroup } from '$types';
-	import { ASSET_DATA_PATH } from '$lib/constants';
-	import { cn } from '$theme';
-	import { assetLoader } from '$utils';
-	import { staticIcons } from '$types/icons';
 	import { onMount } from 'svelte';
-	import { ActiveSkillOption, PassiveSkillOption, Talents } from '$components';
-	import { Accordion } from '@skeletonlabs/skeleton-svelte';
-	import { getAppState } from '$states';
-	import type { ValueChangeDetails } from '@zag-js/accordion';
-	import { focusModal } from '$utils/modalUtils';
 
 	let {
 		title = '',
@@ -42,14 +46,14 @@
 		dynamicItem,
 		group,
 		closeModal
-	} = $props<{
+	}: {
 		title: string;
 		itemId: string;
 		dynamicItem?: DynamicItem;
 		count: number;
 		group: ItemGroup;
-		closeModal: (value: [string, number]) => void;
-	}>();
+		closeModal: (value?: [string, number, EggConfig]) => void;
+	} = $props();
 
 	let modalContainer: HTMLDivElement;
 
@@ -292,14 +296,14 @@
 
 	onMount(() => {
 		if (dynamicItem) {
-			eggConfig.character_id = dynamicItem.character_id;
+			eggConfig.character_id = dynamicItem.character_id || '';
 			eggConfig.active_skills = dynamicItem.active_skills || [];
 			eggConfig.learned_skills = dynamicItem.learned_skills || [];
 			eggConfig.passive_skills = dynamicItem.passive_skills || [];
 			eggConfig.talent_defense = dynamicItem.talent_defense;
 			eggConfig.talent_hp = dynamicItem.talent_hp;
 			eggConfig.talent_shot = dynamicItem.talent_shot;
-			eggConfig.gender = dynamicItem.gender;
+			eggConfig.gender = dynamicItem.gender as PalGender;
 		}
 		focusModal(modalContainer);
 	});
@@ -331,14 +335,14 @@
 				<div class="flex flex-row items-center">
 					<Combobox options={selectOptions} bind:value={itemId}>
 						{#snippet selectOption(option)}
-							{@const item = itemsData.getByKey(option.value)}
-							{#await getItemIcon(option.value) then icon}
+							{@const item = itemsData.getByKey(option.value as string)}
+							{#await getItemIcon(option.value as string) then icon}
 								<div class="grid grid-cols-[auto_1fr_auto] items-center gap-2">
 									{#if icon}
 										<div
 											class={cn(
 												'mr-2 flex items-center justify-center',
-												getBackgroundColor(option.value)
+												getBackgroundColor(option.value as string)
 											)}
 										>
 											<img src={icon} alt={option.label} class="h-8 w-8" />
@@ -347,7 +351,7 @@
 										<div
 											class={cn(
 												'mr-2 flex items-center justify-center',
-												getBackgroundColor(option.value)
+												getBackgroundColor(option.value as string)
 											)}
 										>
 											{@render noIcon(item!.details.type_a, item!.details.type_b)}
@@ -356,7 +360,7 @@
 									<div class="flex flex-col">
 										<div class="flex space-x-4">
 											<span class="grow items-center">{option.label}</span>
-											<span class="text-xs">{getItemTier(option.value)}</span>
+											<span class="text-xs">{getItemTier(option.value as string)}</span>
 										</div>
 
 										<span class="text-xs">{item?.info.description}</span>
@@ -367,13 +371,13 @@
 									<div
 										class={cn(
 											'mr-2 flex items-center justify-center',
-											getBackgroundColor(option.value)
+											getBackgroundColor(option.value as string)
 										)}
 									>
 										{@render noIcon(item!.details.type_a, item!.details.type_b)}
 									</div>
 									<span class="h-6">{option.label}</span>
-									<span>{getItemTier(option.value)}</span>
+									<span>{getItemTier(option.value as string)}</span>
 								</div>
 							{/await}
 						{/snippet}
@@ -394,7 +398,7 @@
 
 						<div class="mt-4 flex items-center justify-center space-x-4 p-4">
 							<div class="flex flex-col items-center">
-								<span class="text-surface-400 mb-1 text-sm">Egg</span>
+								<span class="text-surface-400 mb-1 text-sm">{m.egg()}</span>
 								<img
 									src={eggIconSrc}
 									alt={itemId || 'Unknown Egg'}
@@ -403,7 +407,7 @@
 							</div>
 							<span class="text-surface-400 text-2xl font-bold">=</span>
 							<div class="flex flex-col items-center">
-								<span class="text-surface-400 mb-1 text-sm">Pal</span>
+								<span class="text-surface-400 mb-1 text-sm">{c.pal}</span>
 								<div class="relative flex">
 									<img
 										src={palIconSrc}
@@ -440,18 +444,22 @@
 						controlHover="hover:bg-secondary-500/25"
 					>
 						{#snippet control()}
-							Pal
+							{c.pal}
 						{/snippet}
 						{#snippet panel()}
 							<div class="flex w-full items-center space-x-2">
 								<Combobox
 									options={palOptions}
 									bind:value={eggConfig.character_id}
-									placeholder="Choose a Pal..."
+									placeholder={m.select_entity({ entity: c.pal })}
 								>
 									{#snippet selectOption(option)}
 										<div class="flex items-center space-x-2">
-											<img src={getPalIcon(option.value)} alt={option.label} class="h-8 w-8" />
+											<img
+												src={getPalIcon(option.value as string)}
+												alt={option.label}
+												class="h-8 w-8"
+											/>
 											<span>{option.label}</span>
 										</div>
 									{/snippet}
@@ -477,12 +485,12 @@
 						controlHover="hover:bg-secondary-500/25"
 					>
 						{#snippet control()}
-							Active Skills
+							{m.active_skill({ count: 2 })}
 						{/snippet}
 						{#snippet panel()}
 							<Combobox
 								options={activeSkillOptions}
-								placeholder="Choose Active Skills..."
+								placeholder={m.select_entity({ entity: m.active_skill({ count: 1 }) })}
 								onChange={(value) => {
 									eggConfig.active_skills.push(value as string);
 								}}
@@ -502,7 +510,7 @@
 								>
 									{#snippet listHeader()}
 										<div>
-											<span class="font-bold">Active Skills</span>
+											<span class="font-bold">{m.active_skill({ count: 2 })}</span>
 										</div>
 									{/snippet}
 									{#snippet listItem(skill: string)}
@@ -527,7 +535,7 @@
 										<div class="flex items-center space-x-1 justify-self-start">
 											<TimerReset class="h-4 w-4" />
 											<span class="font-bold">{activeSkill?.details.cool_time}</span>
-											<span class="text-xs">Pwr</span>
+											<span class="text-xs">{m.pwr()}</span>
 											<span class="font-bold">{activeSkill?.details.power}</span>
 										</div>
 									{/snippet}
@@ -541,12 +549,12 @@
 						controlHover="hover:bg-secondary-500/25"
 					>
 						{#snippet control()}
-							Learned Skills
+							{m.learned_skills()}
 						{/snippet}
 						{#snippet panel()}
 							<Combobox
 								options={learnedSkillsOptions}
-								placeholder="Choose Learned Skills..."
+								placeholder={m.select_entity({ entity: m.active_skill({ count: 2 }) })}
 								onChange={(value) => {
 									eggConfig.learned_skills.push(value as string);
 								}}
@@ -565,7 +573,7 @@
 								>
 									{#snippet listHeader()}
 										<div>
-											<span class="font-bold">Learned Skills</span>
+											<span class="font-bold">{m.learned_skills()}</span>
 										</div>
 									{/snippet}
 									{#snippet listItem(skill: string)}
@@ -590,7 +598,7 @@
 										<div class="flex items-center space-x-1 justify-self-start">
 											<TimerReset class="h-4 w-4" />
 											<span class="font-bold">{activeSkill?.details.cool_time}</span>
-											<span class="text-xs">Pwr</span>
+											<span class="text-xs">{m.pwr()}</span>
 											<span class="font-bold">{activeSkill?.details.power}</span>
 										</div>
 									{/snippet}
@@ -604,13 +612,13 @@
 						controlHover="hover:bg-secondary-500/25"
 					>
 						{#snippet control()}
-							Passive Skills
+							{m.passive_skill({ count: 2 })}
 						{/snippet}
 						{#snippet panel()}
 							<Combobox
-								label="Passive Skills"
+								label={m.passive_skill({ count: 2 })}
 								options={passiveSkillOptions}
-								placeholder="Choose Passive Skills..."
+								placeholder={m.select_entity({ entity: m.passive_skill({ count: 2 }) })}
 								onChange={(value) => eggConfig.passive_skills.push(value as string)}
 								disabled={passiveSkillAddDisabled}
 							>
@@ -628,7 +636,7 @@
 								>
 									{#snippet listHeader()}
 										<div>
-											<span class="font-bold">Passive Skills</span>
+											<span class="font-bold">{m.passive_skill({ count: 2 })}</span>
 										</div>
 									{/snippet}
 									{#snippet listItem(skill: string)}
@@ -665,7 +673,7 @@
 						controlHover="hover:bg-secondary-500/25"
 					>
 						{#snippet control()}
-							IVs
+							{m.talents_ivs()}
 						{/snippet}
 						{#snippet panel()}
 							<Talents bind:pal={eggConfig as Pal} />
@@ -681,7 +689,7 @@
 					<Delete />
 				</button>
 				{#snippet popup()}
-					<span>Clear</span>
+					<span>{m.clear()}</span>
 				{/snippet}
 			</Tooltip>
 			<Tooltip position="bottom">
@@ -693,7 +701,7 @@
 					<Save />
 				</button>
 				{#snippet popup()}
-					<span>Save</span>
+					<span>{c.save}</span>
 				{/snippet}
 			</Tooltip>
 			<Tooltip position="bottom">
@@ -701,7 +709,7 @@
 					<X />
 				</button>
 				{#snippet popup()}
-					<span>Cancel</span>
+					<span>{m.cancel()}</span>
 				{/snippet}
 			</Tooltip>
 		</div>

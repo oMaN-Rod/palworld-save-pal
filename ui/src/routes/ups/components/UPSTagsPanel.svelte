@@ -4,6 +4,8 @@
 	import { TooltipButton } from '$components/ui';
 	import { TextInputModal } from '$components';
 	import type { UPSTag } from '$types';
+	import * as m from '$i18n/messages';
+	import { c } from '$utils/commonTranslations';
 
 	const upsState = getUpsState();
 	const modal = getModalState();
@@ -19,9 +21,9 @@
 	async function createTag() {
 		// @ts-ignore
 		const result = await modal.showModal<string>(TextInputModal, {
-			title: 'Create Tag',
+			title: m.add_entity({ entity: c.tag }),
 			value: '',
-			inputLabel: 'Enter a name for the new tag:'
+			inputLabel: m.enter_name_for_entity({ entity: c.tag })
 		});
 
 		if (result) {
@@ -32,9 +34,9 @@
 	async function editTag(tag: UPSTag) {
 		// @ts-ignore
 		const result = await modal.showModal<string>(TextInputModal, {
-			title: 'Edit Tag',
+			title: m.edit_entity({ entity: c.tag }),
 			value: tag.name,
-			inputLabel: 'Enter new name for the tag:'
+			inputLabel: m.enter_new_name_for_entity({ entity: c.tag })
 		});
 
 		if (result && result !== tag.name) {
@@ -44,10 +46,10 @@
 
 	async function deleteTag(tag: UPSTag) {
 		const confirmed = await modal.showConfirmModal({
-			title: 'Delete Tag',
-			message: `Are you sure you want to delete "${tag.name}"? This tag will be removed from all Pals that have it.`,
-			confirmText: 'Delete',
-			cancelText: 'Cancel'
+			title: m.delete_entity({ entity: c.tag }),
+			message: m.delete_entity_warning({ name: tag.name, warning: m.tag_delete_warning() }),
+			confirmText: m.delete(),
+			cancelText: m.cancel()
 		});
 
 		if (confirmed) {
@@ -83,11 +85,11 @@
 	<!-- Header -->
 	<div class="border-surface-300 dark:border-surface-700 border-b p-4">
 		<div class="mb-3 flex items-center justify-between">
-			<h2 class="text-lg font-semibold">Tags</h2>
+			<h2 class="text-lg font-semibold">{c.tags}</h2>
 			<TooltipButton
 				onclick={createTag}
 				class="bg-primary-500 hover:bg-primary-600 rounded-md p-2 text-white"
-				popupLabel="Create Tag"
+				popupLabel={m.add_entity({ entity: c.tag })}
 			>
 				<Plus class="h-4 w-4" />
 			</TooltipButton>
@@ -98,7 +100,7 @@
 			<input
 				type="text"
 				bind:value={searchTags}
-				placeholder="Search tags..."
+				placeholder={m.search_placeholder({ entity: c.tags })}
 				class="border-surface-300 dark:border-surface-600 dark:bg-surface-800 w-full rounded-md border bg-white py-2 pl-8 pr-3 text-sm"
 			/>
 			<Tag class="text-surface-500 absolute left-2.5 top-1/2 h-3 w-3 -translate-y-1/2" />
@@ -111,10 +113,10 @@
 					<span
 						class="text-surface-600 dark:text-surface-400 text-xs font-medium uppercase tracking-wide"
 					>
-						Active Filters ({upsState.filters.tags.length})
+						{m.active_filters_count({ count: upsState.filters.tags.length })}
 					</span>
 					<button onclick={clearTagFilters} class="text-primary-600 hover:text-primary-700 text-xs">
-						Clear All
+						{m.clear_all()}
 					</button>
 				</div>
 				<div class="flex flex-wrap gap-1">
@@ -175,7 +177,7 @@
 									editTag(tag);
 								}}
 								class="rounded bg-black/20 p-1 text-white hover:bg-black/40"
-								popupLabel="Edit tag"
+								popupLabel={m.edit_entity({ entity: c.tag })}
 								size="sm"
 							>
 								<Edit class="h-3 w-3" />
@@ -186,7 +188,7 @@
 									deleteTag(tag);
 								}}
 								class="rounded bg-red-500/80 p-1 text-white hover:bg-red-600/80"
-								popupLabel="Delete tag"
+								popupLabel={m.delete_entity({ entity: c.tag })}
 								size="sm"
 							>
 								<Trash2 class="h-3 w-3" />
@@ -200,19 +202,19 @@
 			<div class="py-8 text-center">
 				<Tag class="text-surface-400 mx-auto mb-3 h-12 w-12" />
 				<p class="text-surface-500 mb-2 text-sm">
-					No tags found matching "{searchTags}"
+					{m.no_entity_matching({ entity: c.tags, query: searchTags })}
 				</p>
 				<button onclick={createTag} class="text-primary-600 hover:text-primary-700 text-sm">
-					Create "{searchTags}" tag
+					{m.create_entity_name({ name: searchTags, entity: c.tag })}
 				</button>
 			</div>
 		{:else if upsState.availableTags.length === 0}
 			<!-- Empty State -->
 			<div class="py-8 text-center">
 				<Tag class="text-surface-400 mx-auto mb-3 h-12 w-12" />
-				<p class="text-surface-500 mb-2 text-sm">No tags yet</p>
+				<p class="text-surface-500 mb-2 text-sm">{m.no_entity_yet({ entity: c.tags })}</p>
 				<button onclick={createTag} class="text-primary-600 hover:text-primary-700 text-sm">
-					Create your first tag
+					{m.create_first_entity({ entity: c.tag })}
 				</button>
 			</div>
 		{/if}
@@ -222,7 +224,7 @@
 	{#if upsState.availableTags.length > 0}
 		<div class="border-surface-300 dark:border-surface-700 border-t p-4">
 			<p class="text-surface-500 text-center text-xs">
-				{upsState.availableTags.length} tag{upsState.availableTags.length > 1 ? 's' : ''} available
+				{m.entity_count_available({ count: upsState.availableTags.length, entity: m.tag({ count: upsState.availableTags.length }) })}
 			</p>
 		</div>
 	{/if}

@@ -4,6 +4,8 @@
 	import { TooltipButton } from '$components/ui';
 	import { TextInputModal } from '$components';
 	import type { UPSCollection } from '$types';
+	import * as m from '$i18n/messages';
+	import { c } from '$utils/commonTranslations';
 
 	const upsState = getUpsState();
 	const modal = getModalState();
@@ -21,9 +23,9 @@
 	async function createCollection() {
 		// @ts-ignore
 		const result = await modal.showModal<string>(TextInputModal, {
-			title: 'Create Collection',
+			title: m.create_new_collection(),
 			value: '',
-			inputLabel: 'Enter a name for the new collection:'
+			inputLabel: m.enter_name_for_entity({ entity: c.collection })
 		});
 
 		if (result) {
@@ -34,9 +36,9 @@
 	async function editCollection(collection: UPSCollection) {
 		// @ts-ignore
 		const result = await modal.showModal<string>(TextInputModal, {
-			title: 'Edit Collection',
+			title: m.edit_entity({ entity: c.collection }),
 			value: collection.name,
-			inputLabel: 'Enter new name for the collection:'
+			inputLabel: m.enter_new_name_for_entity({ entity: c.collection })
 		});
 
 		if (result && result !== collection.name) {
@@ -54,10 +56,10 @@
 
 	async function deleteCollection(collection: UPSCollection) {
 		const confirmed = await modal.showConfirmModal({
-			title: 'Delete Collection',
-			message: `Are you sure you want to delete "${collection.name}"? Pals in this collection will not be deleted, but they will no longer be associated with this collection.`,
-			confirmText: 'Delete',
-			cancelText: 'Cancel'
+			title: m.delete_entity({ entity: c.collection }),
+			message: m.delete_entity_warning({ name: collection.name, warning: m.collection_delete_warning() }),
+			confirmText: m.delete(),
+			cancelText: m.cancel()
 		});
 
 		if (confirmed) {
@@ -79,11 +81,11 @@
 	<!-- Header -->
 	<div class="border-surface-300 dark:border-surface-700 border-b p-4">
 		<div class="mb-3 flex items-center justify-between">
-			<h2 class="text-lg font-semibold">Collections</h2>
+			<h2 class="text-lg font-semibold">{c.collections}</h2>
 			<TooltipButton
 				onclick={createCollection}
 				class="bg-primary-500 hover:bg-primary-600 rounded-md p-2 text-white"
-				popupLabel="Create Collection"
+				popupLabel={m.create_new_collection()}
 			>
 				<Plus class="h-4 w-4" />
 			</TooltipButton>
@@ -98,7 +100,7 @@
 				: ''}"
 		>
 			<Folder class="h-4 w-4" />
-			<span class="flex-1">All Pals</span>
+			<span class="flex-1">{m.all_entity({ entity: c.pals })}</span>
 			<span class="text-surface-200 text-xs">
 				{upsState.stats?.total_pals || 0}
 			</span>
@@ -113,7 +115,7 @@
 				<h3
 					class="text-surface-600 dark:text-surface-400 mb-2 text-sm font-medium uppercase tracking-wide"
 				>
-					Favorites
+					{m.favorites()}
 				</h3>
 				<div class="space-y-1">
 					{#each favoriteCollections as collection (collection.id)}
@@ -146,7 +148,7 @@
 										toggleFavorite(collection);
 									}}
 									class="rounded bg-black/20 p-1 text-white hover:bg-black/40"
-									popupLabel="Remove from favorites"
+									popupLabel={m.remove_from_favorites()}
 									size="sm"
 								>
 									<Star class="h-3 w-3 fill-current" />
@@ -157,7 +159,7 @@
 										editCollection(collection);
 									}}
 									class="rounded bg-black/20 p-1 text-white hover:bg-black/40"
-									popupLabel="Edit collection"
+									popupLabel={m.edit_entity({ entity: c.collection })}
 									size="sm"
 								>
 									<Edit class="h-3 w-3" />
@@ -176,7 +178,7 @@
 					<h3
 						class="text-surface-600 dark:text-surface-400 mb-2 text-sm font-medium uppercase tracking-wide"
 					>
-						Collections
+						{c.collections}
 					</h3>
 				{/if}
 				<div class="space-y-1">
@@ -210,7 +212,7 @@
 										toggleFavorite(collection);
 									}}
 									class="rounded bg-black/20 p-1 text-white hover:bg-black/40"
-									popupLabel="Add to favorites"
+									popupLabel={m.add_to_favorites()}
 									size="sm"
 								>
 									<Star class="h-3 w-3" />
@@ -221,7 +223,7 @@
 										editCollection(collection);
 									}}
 									class="rounded bg-black/20 p-1 text-white hover:bg-black/40"
-									popupLabel="Edit collection"
+									popupLabel={m.edit_entity({ entity: c.collection })}
 									size="sm"
 								>
 									<Edit class="h-3 w-3" />
@@ -232,7 +234,7 @@
 										toggleArchived(collection);
 									}}
 									class="rounded bg-black/20 p-1 text-white hover:bg-black/40"
-									popupLabel="Archive collection"
+									popupLabel={m.archive_entity({ entity: c.collection })}
 									size="sm"
 								>
 									<Archive class="h-3 w-3" />
@@ -243,7 +245,7 @@
 										deleteCollection(collection);
 									}}
 									class="rounded bg-red-500/80 p-1 text-white hover:bg-red-600/80"
-									popupLabel="Delete collection"
+									popupLabel={m.delete_entity({ entity: c.collection })}
 									size="sm"
 								>
 									<Trash2 class="h-3 w-3" />
@@ -260,14 +262,14 @@
 			<div class="py-8 text-center">
 				<Folder class="text-surface-400 mx-auto mb-3 h-12 w-12" />
 				<p class="text-surface-500 text-sm">
-					{showArchived ? 'No archived collections' : 'No collections yet'}
+					{showArchived ? m.no_archived_entity({ entity: c.collections }) : m.no_entity_yet({ entity: c.collections })}
 				</p>
 				{#if !showArchived}
 					<button
 						onclick={createCollection}
 						class="text-primary-600 hover:text-primary-700 mt-2 text-sm"
 					>
-						Create your first collection
+						{m.create_first_entity({ entity: c.collection })}
 					</button>
 				{/if}
 			</div>
@@ -278,7 +280,7 @@
 	<div class="border-surface-300 dark:border-surface-700 border-t p-4">
 		<label class="flex items-center gap-2 text-sm">
 			<input type="checkbox" bind:checked={showArchived} class="border-surface-300 rounded" />
-			Show archived
+			{m.show_archived()}
 		</label>
 	</div>
 </div>

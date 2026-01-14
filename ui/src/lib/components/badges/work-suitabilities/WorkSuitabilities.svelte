@@ -6,6 +6,7 @@
 	import { assetLoader } from '$utils';
 	import { NumberSliderModal } from '$components/modals';
 	import { getModalState } from '$states';
+	import * as m from '$i18n/messages';
 
 	const modal = getModalState();
 
@@ -71,7 +72,7 @@
 	async function handleEditSuitability(workSuitability: string, value: number): Promise<void> {
 		// @ts-ignore
 		const result = await modal.showModal<number>(NumberSliderModal, {
-			title: 'Edit Work Suitability',
+			title: m.edit_entity({ entity: m.work_suitability() }),
 			value: value,
 			min: 0,
 			max: 5,
@@ -116,7 +117,7 @@
 				{#snippet popup()}
 					<div class="flex items-center space-x-2">
 						{#if value !== 0}
-							<span class="p-2 text-lg font-bold">Lvl {value}</span>
+							<span class="p-2 text-lg font-bold">{m.level_abbr_value({ value })}</span>
 						{/if}
 						<span class="text-lg">
 							{workSuitabilityData.workSuitability[suitability].localized_name ??

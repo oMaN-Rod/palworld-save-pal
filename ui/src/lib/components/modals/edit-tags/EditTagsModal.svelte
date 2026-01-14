@@ -5,9 +5,11 @@
 	import { focusModal } from '$utils/modalUtils';
 	import { getUpsState } from '$states';
 	import type { UPSPal } from '$types';
+	import * as m from '$i18n/messages';
+	import { c } from '$lib/utils/commonTranslations';
 
 	let {
-		title = 'Edit Tags',
+		title = m.edit_entity({ entity: c.tags }),
 		message = '',
 		pals = [],
 		closeModal
@@ -95,13 +97,15 @@
 		<div class="space-y-4">
 			<!-- Show pal count -->
 			<p class="text-surface-600 dark:text-surface-400 text-sm">
-				Editing tags for {pals.length} selected pal{pals.length > 1 ? 's' : ''}
+				{m.edit_tags_for_pals({ count: pals.length, pals: c.pals })}
 			</p>
 
 			<!-- Available Tags -->
 			{#if upsState.availableTags.length > 0}
 				<div>
-					<span class="mb-2 block text-sm font-medium">Available Tags</span>
+					<span class="mb-2 block text-sm font-medium"
+						>{m.available_entity({ entity: c.tags })}</span
+					>
 					<div class="flex flex-wrap gap-2">
 						{#each upsState.availableTags as tag}
 							<button
@@ -123,17 +127,17 @@
 
 			<!-- Add New Tag -->
 			<div>
-				<span class="mb-2 block text-sm font-medium">Add New Tag</span>
+				<span class="mb-2 block text-sm font-medium">{m.add_new_tag()}</span>
 				<div class="flex items-center gap-2">
 					<Input
 						type="text"
 						bind:value={newTagInput}
-						placeholder="Enter tag name"
+						placeholder={m.enter_tag_name()}
 						inputClass="flex-1"
 						onkeydown={(e: KeyboardEvent) => e.key === 'Enter' && addNewTag()}
 					/>
 					<TooltipButton
-						popupLabel="Add Tag"
+						popupLabel={m.add_tag()}
 						onclick={addNewTag}
 						buttonClass="bg-primary-500 hover:bg-primary-600"
 					>
@@ -145,7 +149,7 @@
 			<!-- Selected Tags Display -->
 			{#if selectedTags.length > 0}
 				<div>
-					<span class="mb-2 block text-sm font-medium">Selected Tags</span>
+					<span class="mb-2 block text-sm font-medium">{m.selected_tags()}</span>
 					<div class="flex flex-wrap gap-1">
 						{#each selectedTags as tag}
 							<span
@@ -170,20 +174,20 @@
 				{@const tagsToAdd = selectedTags.filter((tag) => !existingTags.includes(tag))}
 				{@const tagsToRemove = existingTags.filter((tag) => !selectedTags.includes(tag))}
 				<div class="bg-surface-100 dark:bg-surface-800 rounded p-3 text-sm">
-					<p class="mb-2 font-medium">Tag Changes:</p>
+					<p class="mb-2 font-medium">{m.tag_changes()}:</p>
 
 					{#if tagsToAdd.length > 0}
 						<p class="text-green-600 dark:text-green-400">
-							+ Add: {tagsToAdd.join(', ')}
+							+ {m.add()}: {tagsToAdd.join(', ')}
 						</p>
 					{/if}
 					{#if tagsToRemove.length > 0}
 						<p class="text-red-600 dark:text-red-400">
-							- Remove: {tagsToRemove.join(', ')}
+							- {m.remove()}: {tagsToRemove.join(', ')}
 						</p>
 					{/if}
 					{#if tagsToAdd.length === 0 && tagsToRemove.length === 0}
-						<p class="text-surface-500">No changes</p>
+						<p class="text-surface-500">{m.no_changes()}</p>
 					{/if}
 				</div>
 			{/if}
@@ -197,7 +201,7 @@
 				class="bg-surface-500 hover:bg-surface-600 flex items-center gap-2 rounded-md px-4 py-2 text-white"
 			>
 				<X class="h-4 w-4" />
-				Cancel
+				{m.cancel()}
 			</button>
 			<button
 				type="button"
@@ -206,7 +210,7 @@
 				data-modal-primary
 			>
 				<Save class="h-4 w-4" />
-				Save Changes
+				{m.save_changes()}
 			</button>
 		</div>
 	</Card>

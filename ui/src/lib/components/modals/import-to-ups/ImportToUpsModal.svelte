@@ -5,9 +5,11 @@
 	import { focusModal } from '$utils/modalUtils';
 	import { getAppState, getUpsState } from '$states';
 	import type { ImportToUpsModalResults, Pal, Player } from '$types';
+	import * as m from '$i18n/messages';
+	import { c, p } from '$lib/utils/commonTranslations';
 
 	let {
-		title = 'Save File 🡆 UPS',
+		title = m.import_to_ups_title(),
 		message = '',
 		closeModal
 	}: {
@@ -234,32 +236,32 @@
 							label: (player as Player).nickname || `Player ${id}`,
 							value: id
 						}))}
-						placeholder="Select Player"
+						placeholder={m.select_entity({ entity: m.player({ count: 1 }) })}
 						inputClass="w-full"
 					/>
 					{#if selectedPlayerId}
-						<span class="mb-2 block text-sm font-medium">Import From</span>
+						<span class="mb-2 block text-sm font-medium">{m.import_from()}</span>
 						<div class="grid grid-cols-3 gap-2">
 							<label
 								class="hover:bg-surface-100 dark:hover:bg-surface-800 border-surface-700 flex cursor-pointer items-center space-x-2 rounded border p-2"
 								class:bg-primary-500={sourceType === 'pal_box'}
 							>
 								<input type="radio" bind:group={sourceType} value="pal_box" class="sr-only" />
-								<span class="text-sm">Pal Box</span>
+								<span class="text-sm">{m.palbox()}</span>
 							</label>
 							<label
 								class="hover:bg-surface-100 dark:hover:bg-surface-800 border-surface-700 flex cursor-pointer items-center space-x-2 rounded border p-2"
 								class:bg-primary-500={sourceType === 'gps'}
 							>
 								<input type="radio" bind:group={sourceType} value="gps" class="sr-only" />
-								<span class="text-sm">GPS</span>
+								<span class="text-sm">{m.gps()}</span>
 							</label>
 							<label
 								class="hover:bg-surface-100 dark:hover:bg-surface-800 border-surface-700 flex cursor-pointer items-center space-x-2 rounded border p-2"
 								class:bg-primary-500={sourceType === 'dps'}
 							>
 								<input type="radio" bind:group={sourceType} value="dps" class="sr-only" />
-								<span class="text-sm">DPS</span>
+								<span class="text-sm">{m.dps()}</span>
 							</label>
 						</div>
 					{/if}
@@ -270,10 +272,10 @@
 					<div class="flex items-center gap-2">
 						<label class="flex items-center text-sm font-medium">
 							<Folder class="mr-2 h-4 w-4" />
-							Collection (Optional)
+							{m.collection_optional()}
 						</label>
 						<TooltipButton
-							popupLabel="Create New Collection"
+							popupLabel={m.create_new_collection()}
 							onclick={() => (isCreatingCollection = true)}
 							buttonClass="bg-primary-500 hover:bg-primary-800"
 						>
@@ -288,7 +290,7 @@
 									label: c.name,
 									value: c.id
 								}))}
-								placeholder="No Collection"
+								placeholder={m.no_collection()}
 								inputClass="flex-1"
 								onChange={(id) => handleUpdateCollection(id as number)}
 							/>
@@ -298,13 +300,13 @@
 							<Input
 								type="text"
 								bind:value={newCollectionName}
-								placeholder="Collection name"
+								placeholder={m.collection_name()}
 								inputClass="w-full"
 							/>
 							<Input
 								type="text"
 								bind:value={newCollectionDescription}
-								placeholder="Description (optional)"
+								placeholder={m.description_optional()}
 								inputClass="w-full"
 							/>
 							<div class="flex gap-2">
@@ -313,7 +315,7 @@
 									onclick={createCollection}
 									class="rounded bg-green-500 px-3 py-1 text-sm text-white hover:bg-green-600"
 								>
-									Create
+									{m.create()}
 								</button>
 								<button
 									type="button"
@@ -324,7 +326,7 @@
 									}}
 									class="rounded bg-gray-500 px-3 py-1 text-sm text-white hover:bg-gray-600"
 								>
-									Cancel
+									{m.cancel()}
 								</button>
 							</div>
 						</div>
@@ -335,7 +337,7 @@
 				<div>
 					<label class="mb-2 flex items-center gap-2 text-sm font-medium">
 						<Tag class="h-4 w-4" />
-						Tags (Optional)
+						{m.tags_optional()}
 					</label>
 
 					<!-- Existing Tags -->
@@ -363,12 +365,12 @@
 						<Input
 							type="text"
 							bind:value={newTagInput}
-							placeholder="Add new tag"
+							placeholder={m.add_new_tag()}
 							inputClass="flex-1"
 							onkeydown={(e: KeyboardEvent) => e.key === 'Enter' && addNewTag()}
 						/>
 						<TooltipButton
-							popupLabel="Add Tag"
+							popupLabel={m.add_tag()}
 							onclick={addNewTag}
 							buttonClass="bg-primary-500 hover:bg-primary-800"
 						>
@@ -379,7 +381,7 @@
 					<!-- Selected Tags Display -->
 					{#if selectedTags.length > 0}
 						<div class="mt-2">
-							<span class="text-surface-600 dark:text-surface-400 text-sm">Selected:</span>
+							<span class="text-surface-600 dark:text-surface-400 text-sm">{m.selected()}:</span>
 							<div class="mt-1 flex flex-wrap gap-1">
 								{#each selectedTags as tag}
 									<span
@@ -398,11 +400,11 @@
 
 				<!-- Notes -->
 				<div>
-					<label for="notes" class="mb-2 block text-sm font-medium">Notes (Optional)</label>
+					<label for="notes" class="mb-2 block text-sm font-medium">{m.notes_optional()}</label>
 					<textarea
 						id="notes"
 						bind:value={notes}
-						placeholder="Add notes about these imported Pals..."
+						placeholder={m.add_notes_about_imported_pals(p.pals)}
 						rows="3"
 						class="focus:outline-hidden ring-surface-200-800 focus-within:ring-secondary-500 rounded-xs resize-vertical border-surface-700 bg-surface-900 w-full border p-2 ring"
 					></textarea>
@@ -411,20 +413,20 @@
 			{#if selectedPlayerId}
 				<div class="flex h-full flex-col">
 					<div class="flex items-center gap-2">
-						<Combobox options={palOptions} bind:value={selectedPalId} placeholder="Select Pal">
+						<Combobox options={palOptions} bind:value={selectedPalId} placeholder={m.select_entity({ entity: c.pal })}>
 							{#snippet selectOption(option)}
 								<span class="truncate">{option.label}</span>
 							{/snippet}
 						</Combobox>
 						<TooltipButton
-							popupLabel="Transfer Pal"
+							popupLabel={m.transfer_pal(p.pal)}
 							onclick={() => addPal(selectedPalId)}
 							buttonClass="bg-primary-500 hover:bg-primary-800"
 						>
 							<Plus class="h-4 w-4" />
 						</TooltipButton>
 						<TooltipButton
-							popupLabel="Transfer all Pals"
+							popupLabel={m.transfer_all_pals(p.pals)}
 							onclick={() => addAllPals()}
 							buttonClass="bg-primary-500 hover:bg-primary-800"
 						>
@@ -437,7 +439,7 @@
 						{/snippet}
 						{#snippet listItemActions(pal)}
 							<TooltipButton
-								popupLabel="Remove Pal"
+								popupLabel={m.remove_pal()}
 								onclick={() => removePal(pal.instance_id)}
 								buttonClass="hover:bg-red-600"
 							>
@@ -460,7 +462,7 @@
 				class="bg-surface-500 hover:bg-surface-600 flex items-center gap-2 rounded-md px-4 py-2 text-white"
 			>
 				<X class="h-4 w-4" />
-				Cancel
+				{m.cancel()}
 			</button>
 			<button
 				type="button"
@@ -469,7 +471,7 @@
 				data-modal-primary
 			>
 				<Save class="h-4 w-4" />
-				Import
+				{m.import()}
 			</button>
 		</div>
 	</Card>

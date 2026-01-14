@@ -3,11 +3,10 @@
 	import { X, AlertTriangle, Trash2 } from 'lucide-svelte';
 	import { onMount } from 'svelte';
 	import { focusModal } from '$utils/modalUtils';
+	import * as m from '$i18n/messages';
+	import { c } from '$lib/utils/commonTranslations';
 
-	let {
-		totalPals = 0,
-		closeModal
-	} = $props<{
+	let { totalPals = 0, closeModal } = $props<{
 		totalPals: number;
 		closeModal: (value: boolean | null) => void;
 	}>();
@@ -51,28 +50,32 @@
 <div bind:this={modalContainer}>
 	<Card class="min-w-[calc(100vw/2.5)] max-w-md">
 		<!-- Header with warning icon -->
-		<div class="flex items-center gap-3 mb-6">
-			<div class="bg-error-500/20 p-2 rounded-full">
-				<AlertTriangle class="h-6 w-6 text-error-500" />
+		<div class="mb-6 flex items-center gap-3">
+			<div class="bg-error-500/20 rounded-full p-2">
+				<AlertTriangle class="text-error-500 h-6 w-6" />
 			</div>
 			<div>
 				<h3 class="h3 text-error-500">Nuke UPS Storage</h3>
-				<p class="text-sm text-surface-600 dark:text-surface-400">This action is irreversible</p>
+				<p class="text-surface-600 dark:text-surface-400 text-sm">This action is irreversible</p>
 			</div>
 		</div>
 
 		{#if step === 1}
 			<!-- Step 1: Warning and count display -->
-			<div class="space-y-4 mb-6">
-				<div class="bg-error-50 dark:bg-error-900/20 border border-error-200 dark:border-error-800 rounded-lg p-4">
+			<div class="mb-6 space-y-4">
+				<div
+					class="bg-error-50 dark:bg-error-900/20 border-error-200 dark:border-error-800 rounded-lg border p-4"
+				>
 					<div class="flex items-start gap-3">
-						<Trash2 class="h-5 w-5 text-error-500 mt-0.5 flex-shrink-0" />
+						<Trash2 class="text-error-500 mt-0.5 h-5 w-5 flex-shrink-0" />
 						<div class="space-y-2">
-							<h4 class="font-semibold text-error-700 dark:text-error-300">
+							<h4 class="text-error-700 dark:text-error-300 font-semibold">
 								You are about to delete ALL pals from UPS
 							</h4>
-							<p class="text-sm text-error-600 dark:text-error-400">
-								This will permanently delete {totalPals.toLocaleString()} pal{totalPals !== 1 ? 's' : ''} from your Universal Pal Storage. This action cannot be undone.
+							<p class="text-error-600 dark:text-error-400 text-sm">
+								This will permanently delete {totalPals.toLocaleString()} pal{totalPals !== 1
+									? 's'
+									: ''} from your Universal Pal Storage. This action cannot be undone.
 							</p>
 						</div>
 					</div>
@@ -85,11 +88,13 @@
 						</p>
 					</div>
 				{:else}
-					<div class="bg-warning-50 dark:bg-warning-900/20 border border-warning-200 dark:border-warning-800 rounded-lg p-4">
-						<h4 class="font-semibold text-warning-700 dark:text-warning-300 mb-2">
+					<div
+						class="bg-warning-50 dark:bg-warning-900/20 border-warning-200 dark:border-warning-800 rounded-lg border p-4"
+					>
+						<h4 class="text-warning-700 dark:text-warning-300 mb-2 font-semibold">
 							What will be affected:
 						</h4>
-						<ul class="text-sm text-warning-600 dark:text-warning-400 space-y-1">
+						<ul class="text-warning-600 dark:text-warning-400 space-y-1 text-sm">
 							<li>• All {totalPals.toLocaleString()} pals will be permanently deleted</li>
 							<li>• All collection counts will be reset to 0</li>
 							<li>• Transfer and clone statistics will be updated</li>
@@ -130,24 +135,29 @@
 			</div>
 		{:else if step === 2}
 			<!-- Step 2: Text confirmation -->
-			<div class="space-y-4 mb-6">
-				<div class="bg-error-50 dark:bg-error-900/20 border border-error-200 dark:border-error-800 rounded-lg p-4">
-					<h4 class="font-semibold text-error-700 dark:text-error-300 mb-3">
+			<div class="mb-6 space-y-4">
+				<div
+					class="bg-error-50 dark:bg-error-900/20 border-error-200 dark:border-error-800 rounded-lg border p-4"
+				>
+					<h4 class="text-error-700 dark:text-error-300 mb-3 font-semibold">
 						Final Confirmation Required
 					</h4>
-					<p class="text-sm text-error-600 dark:text-error-400 mb-4">
-						To confirm deletion of {totalPals.toLocaleString()} pals, type <span class="font-mono font-bold bg-error-100 dark:bg-error-900 px-1 rounded">{REQUIRED_TEXT}</span> below:
+					<p class="text-error-600 dark:text-error-400 mb-4 text-sm">
+						To confirm deletion of {totalPals.toLocaleString()} pals, type
+						<span class="bg-error-100 dark:bg-error-900 rounded px-1 font-mono font-bold"
+							>{REQUIRED_TEXT}</span
+						> below:
 					</p>
-					
+
 					<Input
 						bind:value={confirmationText}
 						placeholder="Type 'DELETE ALL' to confirm"
 						inputClass="font-mono text-center {isValid ? 'border-success-500' : 'border-error-500'}"
 						autofocus
 					/>
-					
+
 					{#if confirmationText && !isValid}
-						<p class="text-xs text-error-500 mt-2">
+						<p class="text-error-500 mt-2 text-xs">
 							Text must match exactly: {REQUIRED_TEXT}
 						</p>
 					{/if}
@@ -167,7 +177,7 @@
 						<span>Go back to previous step</span>
 					{/snippet}
 				</Tooltip>
-				
+
 				<div class="flex space-x-4">
 					<Tooltip position="bottom">
 						<button

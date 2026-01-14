@@ -3,6 +3,8 @@
 	import { X } from 'lucide-svelte';
 	import { getToastState } from '$states/toastState.svelte';
 	import { fly, scale } from 'svelte/transition';
+	import * as m from '$i18n/messages';
+	import { c } from '$lib/utils/commonTranslations';
 
 	let { toast }: { toast: ToastType } = $props();
 
@@ -29,7 +31,7 @@
 	<span class="font-bold">{toast.title}</span>
 	<span>{toast.message}</span>
 	<button class="absolute right-1 top-1 size-5" onclick={() => toastState.remove(toast.id)}>
-		<span class="sr-only">Close toast</span>
+		<span class="sr-only">{m.close_toast()}</span>
 		<X class="size-4" />
 	</button>
 </div>

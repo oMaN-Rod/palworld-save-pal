@@ -5,9 +5,11 @@
 	import { focusModal } from '$utils/modalUtils';
 	import { getAppState } from '$states';
 	import type { UPSPal, Player } from '$types';
+	import * as m from '$i18n/messages';
+	import { c } from '$lib/utils/commonTranslations';
 
 	let {
-		title = 'Export Pals',
+		title = m.export_pals({ count: "", pals: c.pals }),
 		message = '',
 		pals = [],
 		closeModal
@@ -117,12 +119,12 @@
 		<div class="space-y-4">
 			<!-- Show pal count -->
 			<p class="text-surface-600 dark:text-surface-400 text-sm">
-				Exporting {pals.length} selected pal{pals.length > 1 ? 's' : ''}
+				{m.exporting_count_selected_pals({ count: pals.length, pals: m.pal({count: pals.length}) })}
 			</p>
 
 			<!-- Export Target Selection -->
 			<div>
-				<span class="mb-2 block text-sm font-medium">Export To</span>
+				<span class="mb-2 block text-sm font-medium">{m.export_to()}</span>
 				<div class="grid grid-cols-3 gap-2">
 					<label
 						class="hover:bg-surface-100 dark:hover:bg-surface-800 border-surface-700 flex cursor-pointer items-center justify-center space-x-2 rounded border p-3"
@@ -131,7 +133,7 @@
 					>
 						<input type="radio" bind:group={exportTarget} value="pal_box" class="sr-only" />
 						<Upload class="h-4 w-4" />
-						<span class="text-sm">Pal Box</span>
+						<span class="text-sm">{m.palbox()}</span>
 					</label>
 					<label
 						class="hover:bg-surface-100 dark:hover:bg-surface-800 border-surface-700 flex cursor-pointer items-center justify-center space-x-2 rounded border p-3"
@@ -140,7 +142,7 @@
 					>
 						<input type="radio" bind:group={exportTarget} value="dps" class="sr-only" />
 						<Download class="h-4 w-4" />
-						<span class="text-sm">DPS</span>
+						<span class="text-sm">{m.dps()}</span>
 					</label>
 					<label
 						class="hover:bg-surface-100 dark:hover:bg-surface-800 border-surface-700 flex cursor-pointer items-center justify-center space-x-2 rounded border p-3"
@@ -149,7 +151,7 @@
 					>
 						<input type="radio" bind:group={exportTarget} value="gps" class="sr-only" />
 						<Share class="h-4 w-4" />
-						<span class="text-sm">GPS</span>
+						<span class="text-sm">{m.gps()}</span>
 					</label>
 				</div>
 			</div>
@@ -157,11 +159,11 @@
 			<!-- Player Selection (for Pal Box and DPS) -->
 			{#if exportTarget === 'pal_box' || exportTarget === 'dps'}
 				<div>
-					<span class="mb-2 block text-sm font-medium">Select Player</span>
+					<span class="mb-2 block text-sm font-medium">{m.select_entity({ entity: m.player({ count: 1 }) })}</span>
 					<Combobox
 						bind:value={selectedPlayerId}
 						options={playerOptions}
-						placeholder="Choose a player"
+						placeholder={m.choose_a_entity({ entity: c.player })}
 						inputClass="w-full"
 					/>
 				</div>
@@ -169,7 +171,7 @@
 
 			<!-- Target description and availability check -->
 			<div class="bg-surface-100 dark:bg-surface-800 rounded p-3 text-sm">
-				<p class="mb-1 font-medium">Export Target:</p>
+				<p class="mb-1 font-medium">{m.export_target()}:</p>
 				<p class="text-surface-600 dark:text-surface-400 mb-2">
 					{getTargetDescription()}
 				</p>
@@ -177,23 +179,23 @@
 				{#if !isTargetAvailable}
 					<div class="text-red-600 dark:text-red-400">
 						{#if exportTarget === 'pal_box'}
-							⚠ Please select a valid player
+							⚠ {m.select_valid_player()}
 						{:else if exportTarget === 'dps'}
-							⚠ Selected player does not have DPS access
+							⚠ {m.dps_not_available()}
 						{:else if exportTarget === 'gps'}
-							⚠ GPS is not available in this save file
+							⚠ {m.gps_not_available()}
 						{/if}
 					</div>
 				{:else}
-					<div class="text-green-600 dark:text-green-400">✓ Target is available</div>
+					<div class="text-green-600 dark:text-green-400">✓ {m.target_available()}</div>
 				{/if}
 			</div>
 
 			<!-- Warning about export -->
 			<div class="rounded bg-yellow-100 p-3 text-sm dark:bg-yellow-900/20">
-				<p class="mb-1 font-medium text-yellow-800 dark:text-yellow-200">Note:</p>
+				<p class="mb-1 font-medium text-yellow-800 dark:text-yellow-200">{m.note()}:</p>
 				<p class="text-yellow-700 dark:text-yellow-300">
-					Exported pals will be copied to the target location. The originals will remain in UPS.
+					{m.export_note_message()}
 				</p>
 			</div>
 		</div>
@@ -206,7 +208,7 @@
 				class="bg-surface-500 hover:bg-surface-600 flex items-center gap-2 rounded-md px-4 py-2 text-white"
 			>
 				<X class="h-4 w-4" />
-				Cancel
+				{m.cancel()}
 			</button>
 			<button
 				type="button"
@@ -216,7 +218,7 @@
 				disabled={!isTargetAvailable}
 			>
 				<Save class="h-4 w-4" />
-				Export to {exportTarget.toUpperCase()}
+				{m.export_to_target({ target: exportTarget.toUpperCase() })}
 			</button>
 		</div>
 	</Card>

@@ -4,6 +4,8 @@
 	import { getModalState } from '$states';
 	import { NumberSliderModal } from '$components/modals';
 	import { CornerDotButton } from '$components/ui';
+	import * as m from '$i18n/messages';
+	import { c } from '$lib/utils/commonTranslations';
 
 	let { player = $bindable() } = $props<{
 		player: Player;
@@ -23,23 +25,23 @@
 		let initialValue = 0;
 		switch (statType) {
 			case 'health':
-				title = 'Edit Health';
+				title = m.edit_entity({ entity: m.health() });
 				initialValue = player.status_point_list.max_hp;
 				break;
 			case 'stamina':
-				title = 'Edit Stamina';
+				title = m.edit_entity({ entity: m.stamina() });
 				initialValue = player.status_point_list.max_sp;
 				break;
 			case 'attack':
-				title = 'Edit Attack';
+				title = m.edit_entity({ entity: m.attack() });
 				initialValue = player.status_point_list.attack;
 				break;
 			case 'workSpeed':
-				title = 'Edit Work Speed';
+				title = m.edit_entity({ entity: m.workspeed() });
 				initialValue = player.status_point_list.work_speed;
 				break;
 			case 'weight':
-				title = 'Edit Weight';
+				title = m.edit_entity({ entity: m.weight() });
 				initialValue = player.status_point_list.weight;
 				break;
 		}
@@ -99,10 +101,10 @@
 {/snippet}
 
 <div class="flex flex-col items-end space-y-1">
-	{@render statButton('health', staticIcons.hpIcon, 'Health', health)}
-	{@render statButton('stamina', staticIcons.staminaIcon, 'Stamina', stamina)}
-	{@render statButton('attack', staticIcons.attackIcon, 'Attack', attack)}
-	{@render statButton('workSpeed', staticIcons.workSpeedIcon, 'Work Speed', workSpeed)}
-	{@render statButton('weight', staticIcons.weightIcon, 'Weight', weight)}
-	<CornerDotButton class="w-24" label="Max" onClick={handleMaxPlayerStats} />
+	{@render statButton('health', staticIcons.hpIcon, m.health(), health)}
+	{@render statButton('stamina', staticIcons.staminaIcon, m.stamina(), stamina)}
+	{@render statButton('attack', staticIcons.attackIcon, m.attack(), attack)}
+	{@render statButton('workSpeed', staticIcons.workSpeedIcon, m.workspeed(), workSpeed)}
+	{@render statButton('weight', staticIcons.weightIcon, m.weight(), weight)}
+	<CornerDotButton class="w-24" label={m.max()} onClick={handleMaxPlayerStats} />
 </div>

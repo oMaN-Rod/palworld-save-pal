@@ -4,6 +4,8 @@
 	import { Save, X, Delete, Trash, Plus } from 'lucide-svelte';
 	import { activeSkillsData, passiveSkillsData } from '$lib/data';
 	import { ActiveSkillOption, PassiveSkillOption } from '$components';
+	import * as m from '$i18n/messages';
+	import { c } from '$lib/utils/commonTranslations';
 
 	let {
 		title = '',
@@ -76,8 +78,8 @@
 			{/snippet}
 		</Combobox>
 		<TooltipButton
-			onclick={() => values.push(...selectOptions.map((option) => option.value))}
-			popupLabel="Add all Skills"
+			onclick={() => values.push(...selectOptions.map((option) => option.value as string))}
+			popupLabel={m.add_all_skills()}
 		>
 			<Plus />
 		</TooltipButton>
@@ -135,7 +137,7 @@
 				<Delete />
 			</button>
 			{#snippet popup()}
-				<span>Clear</span>
+				<span>{m.clear()}</span>
 			{/snippet}
 		</Tooltip>
 		<Tooltip position="bottom">
@@ -143,7 +145,7 @@
 				<Save />
 			</button>
 			{#snippet popup()}
-				<span>Save</span>
+				<span>{c.save}</span>
 			{/snippet}
 		</Tooltip>
 		<Tooltip position="bottom">
@@ -151,7 +153,7 @@
 				<X />
 			</button>
 			{#snippet popup()}
-				<span>Cancel</span>
+				<span>{m.cancel()}</span>
 			{/snippet}
 		</Tooltip>
 	</div>

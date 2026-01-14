@@ -5,6 +5,7 @@
 	import { onMount, type Snippet } from 'svelte';
 	import { ChevronDown } from 'lucide-svelte';
 	import { debounce } from '$utils';
+	import * as m from '$i18n/messages';
 
 	let {
 		options = [],
@@ -16,7 +17,7 @@
 		value = $bindable(),
 		disabled = false,
 		error = false,
-		placeholder = 'Search...',
+		placeholder = m.search(),
 		selectOption,
 		onChange = () => {},
 		...additionalProps

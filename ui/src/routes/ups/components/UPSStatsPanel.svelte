@@ -5,6 +5,8 @@
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { assetLoader } from '$utils';
 	import { staticIcons } from '$types/icons';
+	import * as m from '$i18n/messages';
+	import { c } from '$utils/commonTranslations';
 
 	const upsState = getUpsState();
 
@@ -70,7 +72,7 @@
 	<div class="border-surface-300 dark:border-surface-700 border-b p-4">
 		<div class="flex items-center gap-2">
 			<BarChart3 class="text-primary-500 h-5 w-5" />
-			<h2 class="text-lg font-semibold">Statistics</h2>
+			<h2 class="text-lg font-semibold">{m.statistics()}</h2>
 		</div>
 	</div>
 
@@ -84,7 +86,7 @@
 					class="dark:bg-surface-800 border-surface-300 dark:border-surface-700 rounded-lg border bg-white p-3"
 				>
 					<div class="mb-1 flex items-center justify-between">
-						<span class="text-surface-600 dark:text-surface-400 text-sm">Pals</span>
+						<span class="text-surface-600 dark:text-surface-400 text-sm">{c.pals}</span>
 						<Database class="text-surface-400 h-4 w-4" />
 					</div>
 					<div class="text-surface-900 dark:text-surface-100 text-2xl font-bold">
@@ -97,7 +99,7 @@
 					class="dark:bg-surface-800 border-surface-300 dark:border-surface-700 rounded-lg border bg-white p-3"
 				>
 					<div class="mb-1 flex items-center justify-between">
-						<span class="text-surface-600 dark:text-surface-400 text-sm">Collections</span>
+						<span class="text-surface-600 dark:text-surface-400 text-sm">{c.collections}</span>
 						<TrendingUp class="text-surface-400 h-4 w-4" />
 					</div>
 					<div class="text-surface-900 dark:text-surface-100 text-2xl font-bold">
@@ -110,7 +112,7 @@
 					class="dark:bg-surface-800 border-surface-300 dark:border-surface-700 rounded-lg border bg-white p-3"
 				>
 					<div class="mb-1 flex items-center justify-between">
-						<span class="text-surface-600 dark:text-surface-400 text-sm">Tags</span>
+						<span class="text-surface-600 dark:text-surface-400 text-sm">{c.tags}</span>
 						<span class="text-xl">🏷️</span>
 					</div>
 					<div class="text-surface-900 dark:text-surface-100 text-2xl font-bold">
@@ -123,7 +125,7 @@
 					class="dark:bg-surface-800 border-surface-300 dark:border-surface-700 rounded-lg border bg-white p-3"
 				>
 					<div class="mb-1 flex items-center justify-between">
-						<span class="text-surface-600 dark:text-surface-400 text-sm">Storage</span>
+						<span class="text-surface-600 dark:text-surface-400 text-sm">{c.storage}</span>
 						<span class="text-xl">💾</span>
 					</div>
 					<div class="text-surface-900 dark:text-surface-100 text-lg font-bold">
@@ -136,19 +138,19 @@
 			<div
 				class="dark:bg-surface-800 border-surface-300 dark:border-surface-700 rounded-lg border bg-white p-4"
 			>
-				<h3 class="text-surface-900 dark:text-surface-100 mb-3 text-sm font-medium">Activity</h3>
+				<h3 class="text-surface-900 dark:text-surface-100 mb-3 text-sm font-medium">{m.activity()}</h3>
 				<div class="space-y-3">
 					<div class="flex items-center justify-between">
 						<div class="flex items-center gap-2">
 							<span class="text-xl">📤</span>
-							<span class="text-surface-600 dark:text-surface-400 text-sm">Total Exports</span>
+							<span class="text-surface-600 dark:text-surface-400 text-sm">{m.total_exports()}</span>
 						</div>
 						<span class="font-medium">{totalTransfers.toLocaleString()}</span>
 					</div>
 					<div class="flex items-center justify-between">
 						<div class="flex items-center gap-2">
 							<span class="text-xl">🔄</span>
-							<span class="text-surface-600 dark:text-surface-400 text-sm">Total Clones</span>
+							<span class="text-surface-600 dark:text-surface-400 text-sm">{m.total_clones()}</span>
 						</div>
 						<span class="font-medium">{totalClones.toLocaleString()}</span>
 					</div>
@@ -161,11 +163,11 @@
 					class="dark:bg-surface-800 border-surface-300 dark:border-surface-700 rounded-lg border bg-white p-4"
 				>
 					<h3 class="text-surface-900 dark:text-surface-100 mb-3 text-sm font-medium">
-						Most Popular
+						{m.most_popular()}
 					</h3>
 					<div class="space-y-2">
 						<div>
-							<span class="text-surface-600 dark:text-surface-400 text-sm">Character:</span>
+							<span class="text-surface-600 dark:text-surface-400 text-sm">{m.character()}</span>
 							<span class="ml-2 font-medium">{stats.most_popular_character_id}</span>
 						</div>
 					</div>
@@ -178,25 +180,31 @@
 					class="dark:bg-surface-800 border-surface-300 dark:border-surface-700 rounded-lg border bg-white p-4"
 				>
 					<h3 class="text-surface-900 dark:text-surface-100 mb-3 text-sm font-medium">
-						Distribution
+						{m.distribution()}
 					</h3>
 					<div class="space-y-2">
 						<div class="flex items-center justify-between">
 							<span class="text-surface-600 dark:text-surface-400 text-sm"
-								>Avg. transfers per Pal:</span
+								>
+								{m.avg_transfers_per_pal({pal: c.pal})}
+								</span
 							>
 							<span class="font-medium">{(totalTransfers / totalPals).toFixed(1)}</span>
 						</div>
 						<div class="flex items-center justify-between">
 							<span class="text-surface-600 dark:text-surface-400 text-sm"
-								>Avg. clones per Pal:</span
+								>
+								{m.avg_clones_per_pal({pal: c.pal})}
+								</span
 							>
 							<span class="font-medium">{(totalClones / totalPals).toFixed(1)}</span>
 						</div>
 						{#if totalCollections > 0}
 							<div class="flex items-center justify-between">
 								<span class="text-surface-600 dark:text-surface-400 text-sm"
-									>Avg. Pals per collection:</span
+									>
+									{m.avg_pals_per_collection({pal: c.pals})}
+									</span
 								>
 								<span class="font-medium">{(totalPals / totalCollections).toFixed(1)}</span>
 							</div>
@@ -211,7 +219,7 @@
 					class="dark:bg-surface-800 border-surface-300 dark:border-surface-700 rounded-lg border bg-white p-4"
 				>
 					<h3 class="text-surface-900 dark:text-surface-100 mb-3 text-sm font-medium">
-						Elemental Distribution
+						{m.elemental_distribution()}
 					</h3>
 					<div class="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
 						{#each elementTypes as element}
@@ -236,48 +244,48 @@
 					class="dark:bg-surface-800 border-surface-300 dark:border-surface-700 rounded-lg border bg-white p-4"
 				>
 					<h3 class="text-surface-900 dark:text-surface-100 mb-3 text-sm font-medium">
-						Special Categories
+						{m.special_categories()}
 					</h3>
 					<div class="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
 						<div class="flex items-center">
 							<img src={staticIcons.alphaIcon} alt="Alpha" class="mr-2 h-5 w-5" />
 							<div class="grow">
-								<span class="text-xs">Alpha</span>
+								<span class="text-xs">{m.alpha()}</span>
 							</div>
 							<span class="font-medium">{specialStats.alpha}</span>
 						</div>
 						<div class="flex items-center">
 							<img src={staticIcons.luckyIcon} alt="Lucky" class="mr-2 h-5 w-5" />
 							<div class="grow">
-								<span class="text-xs">Lucky</span>
+								<span class="text-xs">{m.lucky()}</span>
 							</div>
 							<span class="font-medium">{specialStats.lucky}</span>
 						</div>
 						<div class="flex items-center">
 							<User class="mr-2 h-5 w-5" />
 							<div class="grow">
-								<span class="text-xs">Human</span>
+								<span class="text-xs">{c.human}</span>
 							</div>
 							<span class="font-medium">{specialStats.human}</span>
 						</div>
 						<div class="flex items-center">
 							<img src={staticIcons.predatorIcon} alt="Predator" class="mr-2 h-5 w-5" />
 							<div class="grow">
-								<span class="text-xs">Predator</span>
+								<span class="text-xs">{m.predator()}</span>
 							</div>
 							<span class="font-medium">{specialStats.predator}</span>
 						</div>
 						<div class="flex items-center">
 							<img src={staticIcons.oilrigIcon} alt="Oil Rig" class="mr-2 h-5 w-5" />
 							<div class="grow">
-								<span class="text-xs">Oil Rig</span>
+								<span class="text-xs">{m.oil_rig()}</span>
 							</div>
 							<span class="font-medium">{specialStats.oilrig}</span>
 						</div>
 						<div class="flex items-center">
 							<img src={staticIcons.altarIcon} alt="Summoned" class="mr-2 h-5 w-5" />
 							<div class="grow">
-								<span class="text-xs">Summoned</span>
+								<span class="text-xs">{m.summoned()}</span>
 							</div>
 							<span class="font-medium">{specialStats.summon}</span>
 						</div>
@@ -290,7 +298,7 @@
 				<div class="bg-surface-100 dark:bg-surface-700 rounded-lg p-3">
 					<div class="text-surface-600 dark:text-surface-400 flex items-center gap-2 text-xs">
 						<Calendar class="h-3 w-3" />
-						<span>Last updated: {formatDate(lastUpdated)}</span>
+						<span>{m.last_updated_date({date: formatDate(lastUpdated)})}</span>
 					</div>
 				</div>
 			{/if}
@@ -308,7 +316,7 @@
 			onclick={() => upsState.loadStats()}
 			class="bg-primary-500 hover:bg-primary-600 w-full rounded-md px-3 py-2 text-sm text-white transition-colors"
 		>
-			Refresh Stats
+			{m.refresh_entity({entity: m.stats()})}
 		</button>
 	</div>
 </div>

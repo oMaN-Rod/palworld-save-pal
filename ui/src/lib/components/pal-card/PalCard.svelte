@@ -12,6 +12,8 @@
 	import { assetLoader, calculateFilters } from '$utils';
 	import { staticIcons } from '$types/icons';
 	import { goto } from '$app/navigation';
+	import * as m from '$i18n/messages';
+	import { c } from '$utils/commonTranslations';
 
 	let {
 		pal = $bindable(),
@@ -49,15 +51,15 @@
 	const palData = $derived(palsData.getByKey(pal.character_key));
 	const levelSyncTxt = $derived(
 		appState.selectedPlayer!.level < pal.level
-			? `Level sync ${pal.level} 🡆 ${appState.selectedPlayer!.level}`
-			: 'No Level Sync'
+			? m.level_sync_display({ from: pal.level.toString(), to: appState.selectedPlayer!.level.toString() })
+			: m.no_level_sync()
 	);
 
 	const menuItems = $derived.by(() => {
 		if (!pal || pal.character_id === 'None') {
 			return [
 				{
-					label: `Add a new Pal`,
+					label: m.add_new_pal({ pal: c.pal }),
 					onClick: onAdd,
 					icon: Plus
 				}
@@ -65,15 +67,15 @@
 		}
 
 		const items = [
-			{ label: 'Move to Palbox', onClick: onMove, icon: ArchiveRestore },
-			{ label: 'Clone Pal', onClick: onClone, icon: Copy }
+			{ label: m.move_to_entity({ entity: m.palbox() }), onClick: onMove, icon: ArchiveRestore },
+			{ label: m.clone_selected_pal({ pal: c.pal }), onClick: onClone, icon: Copy }
 		];
 
 		if (onCloneToUps && showCloneToUps) {
-			items.push({ label: 'Clone to UPS', onClick: onCloneToUps, icon: Upload });
+			items.push({ label: m.clone_to_entity({ entity: m.ups()}), onClick: onCloneToUps, icon: Upload });
 		}
 
-		items.push({ label: 'Delete Pal', onClick: onDelete, icon: Trash });
+		items.push({ label: m.delete_entity({ entity: c.pal }), onClick: onDelete, icon: Trash });
 
 		return items;
 	});
