@@ -1,4 +1,4 @@
-# PALWORLD Save Pal
+# Palworld Save Pal
 
 > **Note**: This project was put together for fun and to kick the tires on Sveltekit 5 and Skeleton UI Next. Things may be broken or not work as expected.
 
@@ -8,7 +8,7 @@ Palworld Save Pal is a tool for managing and analyzing save files.
 
 ## 📋 Table of Contents
 
-- [PALWORLD Save Pal](#palworld-save-pal)
+- [Palworld Save Pal](#palworld-save-pal)
   - [📋 Table of Contents](#-table-of-contents)
   - [🚀 Installation](#-installation)
   - [🎮 Usage](#-usage)
@@ -193,11 +193,12 @@ or
 
 - [x] Filter/Sort Pals by name, nickname, character ID, Boss, Lucky, Human, Level, Paldeck #, Predator, Oil Rig, Summon, or Element type
 - [x] Gamepass & Steam support (solo/coop/dedicated)
-- [x] Localization; supports Deutsch, English, Español, Français, Italiano, 한국어, Português, Русский, 简体中文, and 繁體中文
+- [x] Localization; supports Deutsch, English, Español, Français, Italiano, 한국어, Português, Русский, 简体中文, and 繁體中文, Español (México), Bahasa Indonesia, Polski, ไทย, Türkçe, and Tiếng Việt
+- [x] Supports Desktop for Windows/Mac/Linux, Docker (web), or running from source (web)
 
 ### Pals
 
-- [x] Edit Pal box, Base, and Dimensional Pal Storage Pals
+- [x] Edit Palbox, Base, Dimensional Pal Storage, and Global Pal Storage Pals
 - [x] Edit Nickname
 - [x] Edit Gender
 - [x] Edit Active Skills / Learned Skills
@@ -225,6 +226,7 @@ or
 - [x] Create your own inventory presets/load outs and apply them across players and saves.
 - [x] Edit Technology Tree, Technology Points, and Ancient Technology points
 - [x] Delete Players (Deletes all map objects, items, and pals)
+- [x] Edit Active and Completed Missions
 
 ### Guilds
 
@@ -232,14 +234,17 @@ or
 - [x] Edit Guild Chest
 - [x] Edit Base Pals
 - [x] Edit Base Inventory
+- [x] Edit Base Name (Currently only applies in PSP, not exposed in game)
 - [x] Edit Lab Research
 - [x] Delete Guilds (Deletes all players, map objects, items, and pals)
 
 ### Extras
 
 - [x] Data Explorer / Debug Mode (Read Only)
-- [x] Map integration
-- [x] Preset management
+- [x] Map integration - See players, bases, fast travels, dungeons, and alpha/predator pals on the map
+- [x] Preset management - Create and manage Player (Inventory), Pal, Active/Passive Skills, Storage presets.
+- [x] Universal Pal Storage (UPS) lets you organize Pals into collections with customizable tags and instantly transfer one, many, or all Pals across any player and any save in a single action.
+- [x] Unlock Map (remove fog)
 
 ## 📜 License
 
