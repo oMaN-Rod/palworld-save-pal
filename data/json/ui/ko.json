@@ -1,0 +1,757 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "about": "에 대한",
+  "about_built_by": "<s>개발자</s>가 재미를 위해 개발자인 몇몇 사람들에 의해 만들어졌습니다.",
+  "about_check_out": "확인해 보세요",
+  "about_for_more_info": "자세한 내용은",
+  "about_github_repo": "Github 레포",
+  "accessory": "종범",
+  "actions": "행위",
+  "active": "활동적인",
+  "active_filters_count": "활성 필터({count})",
+  "activity": "활동",
+  "add": "추가하다",
+  "add_all_implants": "모든 임플란트 추가",
+  "add_all_pal_gear": "모든 {pal} 장비 추가",
+  "add_all_pals_to_entity": "{entity}에 모든 {pals} 추가",
+  "add_all_skills": "모든 스킬 추가",
+  "add_count_pals": "{count} {type} {pals} 추가",
+  "add_entity": "{entity} 추가",
+  "add_new_pal": "새로운 {pal} 추가",
+  "add_new_pal_to_entity": "{entity}에 새로운 친구를 추가하세요",
+  "add_new_tag": "새 태그 추가",
+  "add_notes_about_cloned_pals": "복제된 {pals}에 대한 메모를 추가하세요...",
+  "add_notes_about_imported_pals": "가져온 {pals}에 대한 메모를 추가하세요...",
+  "add_other_key_items": "기타 주요 항목 추가",
+  "add_pal_to_base": "기본 {base}에 새 {pal} 추가",
+  "add_preset_entity": "{entity} 사전 설정 추가",
+  "add_skill": "스킬 추가",
+  "add_skills_preset": "{type} 스킬 프리셋 추가",
+  "add_tag": "태그 추가",
+  "add_to_collection": "컬렉션에 추가",
+  "add_to_favorites": "즐겨찾기에 추가",
+  "added_label": "추가됨:",
+  "all": "모두",
+  "all_entity": "모두 {entity}",
+  "alpha": "알파",
+  "alpha_pal": "알파 {pals}",
+  "ammo": "탄약",
+  "ancient_technology_points": "고대 기술 포인트",
+  "and_more_count": "+{count} 이상",
+  "apply_preset": "사전 설정 적용",
+  "apply_preset_to_selected": "선택한 {pals}에 사전 설정 적용",
+  "apply_presets": "사전 설정 적용",
+  "apply_selected_entity": "선택한 {entity} 적용",
+  "archive_entity": "보관 {entity}",
+  "armor": "갑옷",
+  "attack": "공격",
+  "available_entity": "{entity} 사용 가능",
+  "available_saves": "사용 가능한 저장",
+  "available_slots": "사용 가능한 슬롯",
+  "available_tags": "사용 가능한 태그",
+  "avg_clones_per_pal": "평균 {pal}당 클론:",
+  "avg_level": "평균 수준",
+  "avg_pals_per_collection": "평균 컬렉션당 {pals}:",
+  "avg_transfers_per_pal": "평균 {pal}당 전송:",
+  "base_container": "기본 컨테이너",
+  "base_name": "기본 이름",
+  "basecamp_level": "베이스캠프 레벨",
+  "blueprint": "청사진",
+  "body": "몸",
+  "boss": "사장",
+  "box": "상자",
+  "bulk_clone_to_ups_failed": "UPS에 대한 대량 복제가 실패했습니다. 다시 시도해 주세요.",
+  "cancel": "취소",
+  "cannot_fill": "{target}을(를) 채울 수 없습니다. {count} 슬롯이 더 필요합니다.",
+  "cannot_paste_here": "여기에 붙여넣을 수 없습니다(아직™).",
+  "category": "범주",
+  "change_player_name": "플레이어 이름 변경",
+  "changes": "변경 사항",
+  "character": "성격",
+  "character_container": "캐릭터 컨테이너",
+  "cheat_mode": "치트 모드",
+  "chest": "가슴",
+  "choose_a_entity": "{entity}을(를) 선택하세요",
+  "choose_entity": "엔터티 선택",
+  "clear": "분명한",
+  "clear_all": "모두 지우기",
+  "clear_all_entity": "{entity} 모두 지우기",
+  "clear_completed_missions_confirm": "{count} 완료한 {type} 임무를 모두 삭제하시겠습니까?",
+  "clear_current_missions_confirm": "{count} 현재 {type} 임무를 모두 삭제하시겠습니까?",
+  "clear_entity": "{entity} 지우기",
+  "clear_selected": "선택 항목 지우기",
+  "clear_selected_entity": "선택한 {entity} 지우기",
+  "clear_selection": "선택 취소",
+  "cleared_completed_missions": "{count} 완료한 {type} 임무를 클리어했습니다.",
+  "cleared_current_missions": "{count} 현재 {type} 미션을 클리어했습니다.",
+  "click_map_coordinates": "지도를 클릭하시면 자세한 좌표를 보실 수 있습니다.",
+  "click_to_complete": "완료하려면 클릭하세요.",
+  "clipboard_cleared": "클립보드가 삭제되었습니다.",
+  "clone_pal_to_entity": "{pal}을(를) {entity}에 복제",
+  "clone_pals_to_entity": "{count} {pals}을(를) {entity}에 복제",
+  "clone_prefix": "클론 접두사",
+  "clone_selected_pal": "복제가 선택됨 {pal}",
+  "clone_to_entity": "{entity}에 복제",
+  "clone_to_entity_failed": "{entity}에 대한 복제에 실패했습니다. 다시 시도해 주세요.",
+  "clones": "클론",
+  "cloning_count_pals": "{count} {pals} 복제 중",
+  "close_drawer": "서랍 닫기",
+  "close_toast": "토스트를 닫으세요",
+  "collection_delete_warning": "이 컬렉션의 친구는 삭제되지 않지만 더 이상 이 컬렉션과 연결되지 않습니다.",
+  "collection_name": "컬렉션 이름",
+  "collection_optional": "수집(선택)",
+  "collections": "컬렉션",
+  "common": "흔한",
+  "completed": "완전한",
+  "completed_missions": "완료된 임무",
+  "confirm": "확인하다",
+  "consume": "소모품",
+  "container_entity": "{entity} 컨테이너",
+  "copy": "복사",
+  "create": "만들다",
+  "create_entity_name": "\"{name}\" {entity} 만들기",
+  "create_first_entity": "첫 번째 {entity} 만들기",
+  "create_new_collection": "새 컬렉션 만들기",
+  "create_pals_or_import": "시작하려면 새 {pals}을(를) 생성하거나 저장 파일에서 가져오세요.",
+  "create_preset_from_container": "컨테이너에서 사전 설정 만들기",
+  "create_preset_from_current": "현재 {entity}에서 사전 설정 만들기",
+  "created": "생성됨",
+  "current_collection": "현재 컬렉션",
+  "current_missions": "현재 임무",
+  "current_save_file": "현재 저장 파일",
+  "debug": "디버그",
+  "debug_mode": "디버그 모드",
+  "defense": "방어",
+  "delete": "삭제",
+  "delete_count_entities_confirm": "{count} 선택한 {entity}을(를) 삭제하시겠습니까?",
+  "delete_entire_guild": "전체 길드 삭제",
+  "delete_entity": "{entity} 삭제",
+  "delete_entity_by_name_confirm": "{name}을(를) 삭제하시겠습니까? 이 작업은 취소할 수 없습니다.",
+  "delete_entity_confirm": "이 {entity}을(를) 삭제하시겠습니까? 이 작업은 취소할 수 없습니다.",
+  "delete_entity_warning": "정말로 \"{name}\"을(를) 삭제하시겠습니까? {warning}",
+  "delete_selected_entity": "선택한 {entity} 삭제",
+  "delete_selected_entity_confirm": "선택한 {entity}을(를) 삭제하시겠습니까?",
+  "deleted_entity": "{count} {entity} 삭제됨",
+  "description_optional": "설명(선택사항)",
+  "dimensional_pal_storage": "차원 {pal} 저장",
+  "distribution": "분포",
+  "download": "다운로드",
+  "download_modified_save": "수정된 Level.sav 파일 다운로드",
+  "dps": "DPS",
+  "dps_not_available": "선택한 플레이어에는 DPS가 없습니다.",
+  "drag_drop_zip": "또는 zip 파일을 여기에 끌어다 놓으세요.",
+  "dungeons": "던전",
+  "edit": "편집하다",
+  "edit_entity": "{entity} 편집",
+  "edit_entity_name": "{entity} 이름 수정",
+  "edit_tags_for_pals": "{count} {pals}에 대한 태그 편집",
+  "effect": "효과",
+  "egg": "계란",
+  "element_and_type": "요소 및 유형",
+  "element_types": "요소 유형",
+  "elemental_distribution": "원소 분포",
+  "empty": "비어 있는",
+  "enter_item_count": "항목 수를 입력하세요",
+  "enter_name_for_entity": "새 {entity}의 이름을 입력하세요.",
+  "enter_new_name_for_entity": "{entity}의 새 이름을 입력하세요.",
+  "enter_tag_name": "태그 이름을 입력하세요.",
+  "entity_count_available": "{count} {entity} 사용 가능",
+  "entity_not_available": "{entity}을(를) 사용할 수 없습니다.",
+  "epic": "서사시",
+  "error": "오류",
+  "error_copied": "오류 세부정보가 클립보드에 복사되었습니다.",
+  "error_copy_failed": "오류 세부정보를 복사하지 못했습니다.",
+  "error_nuke_operation": "핵작전 중 오류가 발생했습니다. 다시 시도해 주세요.",
+  "essential": "필수적인",
+  "export": "내보내다",
+  "export_pals": "{count} {pals} 내보내기",
+  "export_preset": "사전 설정을 파일로 내보내기",
+  "export_selected": "선택 내보내기",
+  "export_target": "수출대상",
+  "export_to": "다음으로 내보내기",
+  "exporting_count_selected_pals": "{count} 내보내기 중 {pals} 선택됨",
+  "export_note_message": "내보낸 친구는 대상 위치로 복사됩니다. 원본은 UPS에 남아 있습니다.",
+  "export_to_target": "{target}(으)로 내보내기",
+  "failed_create_pal": "새 친구를 만드는 데 실패했습니다. 다시 시도해 주세요.",
+  "failed_export_pals": "{count} {pals}을(를) 내보내지 못했습니다.",
+  "failed_get_pal_data": "친구 데이터를 가져오지 못했습니다.",
+  "failed_nuke_ups": "UPS를 핵 공격하지 못했습니다. 다시 시도해 주세요.",
+  "fast_travel": "빠른 여행",
+  "favorites": "즐겨찾기",
+  "feed": "밥을 먹이다",
+  "fill": "채우다",
+  "fill_container": "용기 채우기",
+  "fill_current_entity": "현재 충전 {entity}",
+  "fill_entity": "{entity} 채우기",
+  "filter_and_sort": "필터링 및 정렬",
+  "filtered": "거르는",
+  "food": "음식",
+  "for": "~을 위한",
+  "friendship_rank": "우정 순위",
+  "gender": "성별",
+  "glider": "글라이더",
+  "global_pal_storage": "글로벌 {pal} 스토리지",
+  "gps": "GPS",
+  "gps_not_available": "이 저장 파일에서는 GPS를 사용할 수 없습니다.",
+  "grid_view": "그리드 보기",
+  "guild_name": "길드 이름",
+  "head": "머리",
+  "heal_all_in_entity": "{entity}에서 모두 치유하세요",
+  "heal_selected_pals": "선택됨 {pals} 치료",
+  "health": "건강",
+  "how_many_clones": "클론은 몇 개입니까?",
+  "hp": "HP",
+  "id": "ID",
+  "ivs": "IV",
+  "import": "수입",
+  "import_failed": "가져오기에 실패했습니다. 다시 시도해 주세요.",
+  "import_from": "다음에서 가져오기",
+  "import_from_save": "저장에서 가져오기",
+  "import_preset": "파일에서 사전 설정 가져오기",
+  "import_to_ups_message": "{pals}을(를) UPS로 가져오기 위한 소스와 옵션을 선택하세요.",
+  "import_to_ups_title": "UPS에 파일 저장",
+  "in_inventory": "재고 있음",
+  "info": "정보",
+  "invalid_option_selected": "잘못된 옵션이 선택되었습니다.",
+  "inventory": "목록",
+  "item_container": "아이템 컨테이너",
+  "item_copied": "{name}이 클립보드에 복사되었습니다.",
+  "key_items": "주요 품목",
+  "lab": "랩",
+  "language": "언어",
+  "last_accessed": "마지막으로 액세스함",
+  "last_online": "마지막 온라인",
+  "last_updated_date": "마지막 업데이트: {date}",
+  "later": "나중에",
+  "learn_all_skills": "모든 기술 배우기",
+  "learn_skills_matching_type": "Pal 유형에 맞는 모든 스킬 배우기",
+  "learned_skills": "배운 기술",
+  "left_click_focus": "집중하려면 플레이어나 기지를 마우스 왼쪽 버튼으로 클릭하세요.",
+  "legendary": "전설적인",
+  "level": "수준",
+  "level_abbr": "레벨",
+  "level_abbr_value": "레벨 {value}",
+  "level_distribution": "레벨 분포",
+  "level_sync_display": "레벨 동기화 {from} → {to}",
+  "level_value": "레벨 {level}",
+  "list_view": "목록 보기",
+  "load_guild_bases": "길드/기지 로드",
+  "load_player": "플레이어 로드",
+  "loaded_entity": "{entity} 로드됨",
+  "loading_data": "데이터 로드 중...",
+  "loading_entity": "{entity} 로드 중",
+  "loadout": "로드아웃",
+  "location": "위치",
+  "lock_all": "모두 잠금",
+  "locked": "잠김",
+  "lucky": "운이 좋은",
+  "lucky_pals": "행운아 {pals}",
+  "main_missions": "주요 임무",
+  "manage_collection_for_pals": "{count} {pals}에 대한 컬렉션 관리",
+  "map": "지도",
+  "map_coordinate_origin_point": "지도 좌표 원점",
+  "map_coordinates": "지도 좌표",
+  "map_options": "지도 옵션",
+  "mark_all_current_complete": "모든 현재 항목을 완료로 표시",
+  "mark_complete": "완료로 표시",
+  "mark_complete_confirm": "모든 {count} 현재 {type} 임무를 완료로 표시하시겠습니까?",
+  "marked_missions_complete": "{count} {type} 임무가 완료된 것으로 표시됨",
+  "material": "재료",
+  "max": "맥스",
+  "max_ivs": "IV 최대화",
+  "max_level": "최대 레벨",
+  "max_level_pals": "최대 레벨 {pals}",
+  "max_out_pal_stats": "{pal} 통계를 최대로 활용하세요 💉💪",
+  "max_out_selected_pals": "최대 초과 선택됨 {pals}",
+  "max_souls": "영혼 최대화",
+  "max_work_suitability": "업무적합성 최대화",
+  "menu": "메뉴",
+  "min_level": "최소 레벨",
+  "mission": "사명",
+  "mission_cleared": "미션 클리어",
+  "mission_marked_complete": "임무가 완료로 표시됨",
+  "missions": "임무",
+  "mixed_collections": "혼합 컬렉션",
+  "mixed_collections_message": "선택한 {pals}은(는) 다른 컬렉션에 있거나 일부 컬렉션이 없습니다.",
+  "modified": "수정됨",
+  "modified_label": "수정됨:",
+  "module": "기준 치수",
+  "monster_equip_weapon": "몬스터 장비 무기",
+  "most_popular": "가장 인기있는",
+  "move": "이동하다",
+  "move_all_to_collection": "선택한 모든 {pals}을(를) \"{name}\"(으)로 이동",
+  "move_to_entity": "{entity}(으)로 이동",
+  "moved_pals_to_collection": "{count} {pals}을(를) 컬렉션으로 이동했습니다.",
+  "name": "이름",
+  "new_pal_prefix": "새로운 Pal 접두사",
+  "new_version_available": "Palworld Save Pal의 새 버전이 GitHub에서 제공됩니다.",
+  "next": "다음",
+  "nickname": "별명",
+  "no_archived_entity": "보관된 {entity} 없음",
+  "no_bases_loaded": "아직 베이스가 로드되지 않았습니다. 기지를 로드하려면 위의 길드 선택기를 사용하세요.",
+  "no_changes": "변경사항 없음",
+  "no_collection": "컬렉션 없음",
+  "no_completed_missions_to_clear": "클리어할 완료된 미션이 없습니다.",
+  "no_current_missions_to_clear": "현재 클리어할 미션이 없습니다.",
+  "no_current_missions_to_complete": "현재 완료할 임무가 없습니다.",
+  "no_detailed_info": "자세한 정보가 없습니다.",
+  "no_entity_matching": "\"{query}\"과 일치하는 {entity}을(를) 찾을 수 없습니다.",
+  "no_entity_selected": "{entity}이(가) 선택되지 않았습니다.",
+  "no_entity_yet": "아직 {entity}은(는) 없습니다",
+  "no_guild_bases_found": "길드 기지를 찾을 수 없습니다",
+  "no_guild_found": "길드를 찾을 수 없습니다",
+  "no_level_sync": "레벨 동기화 없음",
+  "no_missions_found": "{type} 임무를 찾을 수 없습니다.",
+  "no_pals_available": "사용 가능한 {pals} 데이터가 없습니다.",
+  "no_pals_in_storage": "저장소에 {pals} 없음",
+  "no_players_loaded": "아직 로드된 플레이어가 없습니다. 플레이어를 로드하려면 위의 선택기를 사용하세요.",
+  "no_save_loaded": "저장 파일이 로드되지 않았습니다.",
+  "no_skills_learned": "배운 기술이 없습니다.",
+  "no_slots_available_in_entity": "이 {entity}에는 사용 가능한 슬롯이 없습니다.",
+  "no_storage_containers": "저장 용기 없음",
+  "none": "없음",
+  "normal": "정상",
+  "note": "메모",
+  "notes_optional": "메모(선택사항)",
+  "nuke_all_presets": "Nuke 모든 사전 설정",
+  "nuke_presets_confirm": "모든 사전 설정을 삭제하시겠습니까? 이 작업을 수행하면 기본값이 복원되며 취소할 수 없습니다.",
+  "nuke_ups": "Nuke UPS - {pals} 모두 삭제",
+  "of": "~의",
+  "oil_rig": "석유 굴착 장치",
+  "oil_rig_pals": "석유 굴착 장치 {pals}",
+  "open_drawer": "서랍 열기",
+  "oops_something_wrong": "이런... 문제가 발생했습니다.",
+  "or_drag_and_drop": "또는 드래그 앤 드롭",
+  "origin": "기원",
+  "origin_label": "원천:",
+  "origin_point": "원점(0,0)",
+  "page": "페이지",
+  "page_of_pages": "{total} 중 {current} 페이지",
+  "pal_box_party": "팔박스+파티",
+  "pal_cannot_be_trait": "{type} 친구는 {trait}일 수 없습니다.",
+  "pal_types": "Pal 유형",
+  "palbox": "팔박스",
+  "paldeck": "팔데크",
+  "pals_in_storage": "{pals} 보관 중",
+  "party": "파티",
+  "passive": "수동적인",
+  "paste": "반죽",
+  "predator": "포식자",
+  "predator_pals": "프레데터 {pals}",
+  "preset_name": "프리셋 이름",
+  "preset_select_details": "세부정보를 보려면 목록에서 사전 설정을 선택하세요.",
+  "presets_precedence": "사전 설정 우선 순위는 다음과 같습니다: pal 잠금 ➡️ 요소 잠금 ➡️ 기본값. 친구, 요소 또는 기본값당 하나의 사전 설정만 선택하세요.",
+  "previous": "이전의",
+  "progress": "진전",
+  "pwr": "전원",
+  "raid": "레이드",
+  "range": "범위",
+  "rare": "희귀한",
+  "raw": "날것의",
+  "read_only": "읽기 전용",
+  "ready_to_fill": "{target}을 {count} {pals}로 채울 준비가 되었습니다.",
+  "refresh": "새로고침(저장되지 않은 변경사항 삭제)",
+  "refresh_entity": "새로고침 {entity}",
+  "remove": "제거하다",
+  "remove_all_from_collections": "컬렉션에서 선택한 {pals}을 모두 제거합니다.",
+  "remove_from_collection": "컬렉션에서 제거",
+  "remove_from_favorites": "즐겨찾기에서 제거",
+  "remove_pal": "Pal 제거",
+  "removed_pals_from_collections": "컬렉션에서 {count} {pals}을(를) 삭제했습니다.",
+  "research_cost": "연구비",
+  "research_node": "연구 노드",
+  "reset": "다시 놓기",
+  "restore_hp": "HP 회복",
+  "rewards": "보상",
+  "right_click_edit_base": "이름을 편집하려면 베이스를 마우스 오른쪽 버튼으로 클릭하세요.",
+  "save_as_preset": "사전 설정으로 저장",
+  "save_changes": "변경 사항 저장",
+  "save_file_to_ups": "파일 저장 🡆 UPS",
+  "save_id": "아이디 저장",
+  "save_platform": "플랫폼 저장",
+  "search": "찾다",
+  "search_by_name_nickname": "이름이나 닉네임으로 검색하세요",
+  "search_entity": "{entity} 검색",
+  "search_pals": "이름, 캐릭터 ID 또는 메모로 {pals}을(를) 검색하세요...",
+  "search_placeholder": "{entity} 검색...",
+  "select": "선택하다",
+  "select_valid_player": "유효한 플레이어를 선택하세요.",
+  "select_a_entity": "{entity}을(를) 선택하세요",
+  "select_a_entity_to_view": "세부정보를 보려면 {entity}을(를) 선택하세요.",
+  "select_all_current_base": "현재 베이스에서 모두 선택",
+  "select_all_filtered_pals": "필터링된 {pals}({count})을 모두 선택하세요.",
+  "select_all_in": "모두 선택",
+  "select_all_page_pals": "현재 페이지({count})에서 {pals}을 모두 선택하세요.",
+  "select_all_ups_pals": "UPS({count})에서 {pals}을 모두 선택하세요.",
+  "select_entity": "{entity}을 선택하세요.",
+  "select_entity_to_edit": "편집하려면 {entity}을 선택하세요.",
+  "select_entity_to_load": "지도에 로드하고 표시하려면 {entity}을(를) 선택하세요.",
+  "select_guild_to_load_bases": "지도에 기지를 로드할 길드를 선택하세요.",
+  "select_pal_edit_description": "{pals}은(는) 플레이어 팔박스, 길드 기지, 글로벌 Pal 저장소, 차원 Pal 저장소, 유니버설 Pal 저장소에서 선택할 수 있습니다.",
+  "select_player_view_entity": "{entity}을(를) 보려면 플레이어를 선택하세요.",
+  "selected": "선택된",
+  "selected_of_total": "{total} 중 {selected}이(가) 선택됨",
+  "selected_tags": "선택된 태그",
+  "set_entity_item_count": "{entity} 항목 수 설정",
+  "set_inventory_count": "재고 수량 설정",
+  "set_item_count": "항목 수 설정",
+  "settings": "설정",
+  "shield": "방패",
+  "shortcuts": "단축키",
+  "show_archived": "보관된 항목 표시",
+  "showing_pals": "{total} {pals} 중 {start}부터 {end}까지 표시 중",
+  "size": "크기",
+  "skills": "기술",
+  "slots_available_in_entity": "이 {entity}에는 {count} 슬롯을 사용할 수 있습니다.",
+  "sort": "종류",
+  "sort_by": "정렬 기준",
+  "sort_by_entity": "{entity} 기준으로 정렬",
+  "sort_inventory": "재고 정렬",
+  "souls": "위",
+  "special_categories": "특별 카테고리",
+  "special_weapon": "특수무기",
+  "sphere_module": "구형 모듈",
+  "stamina": "내구력",
+  "statistics": "통계",
+  "stats": "통계",
+  "stomach": "위",
+  "steam": "증기",
+  "steam_description": "Steam/Mac: Level.sav 저장 파일",
+  "storage": "저장",
+  "storage_container": "저장 용기",
+  "structures": "구조",
+  "sub_missions": "서브 미션",
+  "success": "성공",
+  "successfully_cloned_pal_to_entity": "{pal}을(를) {entity}에 성공적으로 복제했습니다.",
+  "successfully_cloned_pals_to_entity": "{count} {pals}을(를) {entity}에 성공적으로 복제했습니다.",
+  "successfully_deleted_entity": "{entity}에서 {count} {pals}을(를) 삭제했습니다.",
+  "successfully_exported_pals": "{total} {pals} 중 {count}을(를) 성공적으로 내보냈습니다.",
+  "summon": "소환",
+  "summoned": "소환됨",
+  "summoned_pals": "소환됨 {pals}",
+  "support": "지원하다",
+  "syncing": "동기화 중",
+  "tag_changes": "태그 변경",
+  "tag_delete_warning": "이 태그는 해당 태그를 갖고 있는 모든 친구에게서 제거됩니다.",
+  "tags_for_pals": "{count} {pals}에 대한 태그",
+  "target_available": "대상이 가능합니다",
+  "tags_optional": "태그(선택사항)",
+  "talents_ivs": "재능(IV)",
+  "technology_points": "기술 포인트",
+  "to_collection": "컬렉션으로",
+  "toggle_entity": "{entity} 전환",
+  "total": "총",
+  "total_clones": "총 클론",
+  "total_count": "총 개수",
+  "total_exports": "총 수출",
+  "total_pals": "합계 {pals}",
+  "transfer_all_pals": "{pals} 모두 이전",
+  "transfer_pal": "{pal} 이전",
+  "trust": "신뢰하다",
+  "trust_level": "신뢰 수준",
+  "trust_xp": "XP를 신뢰하세요",
+  "type_label": "유형: {type}",
+  "unarchive_entity": "{entity} 보관 취소",
+  "uncommon": "드문",
+  "universal_pal_storage": "범용 {pal} 스토리지",
+  "unknown": "알려지지 않은",
+  "unknown_collection": "알 수 없는 컬렉션",
+  "unlock_all": "모두 잠금 해제",
+  "unlock_all_category_research": "모든 {category} 연구 잠금 해제",
+  "unlock_full_map": "전체 지도 잠금 해제",
+  "unlock_map": "지도 잠금 해제",
+  "unlock_map_confirm": "그러면 LocalData.sav 파일을 수정하여 전체 지도의 잠금이 해제됩니다. LocalData.sav 파일을 선택해야 합니다. 계속하다?",
+  "unlock_prerequisite_entity": "먼저 전제 조건 잠금 해제 {entity}",
+  "unlocks": "잠금 해제",
+  "update_available": "업데이트 가능!",
+  "update_now": "지금 업데이트",
+  "updated_tags_for_pals": "{count} {pals}에 대한 태그가 업데이트되었습니다.",
+  "upload": "업로드",
+  "upload_a_file": "파일 업로드",
+  "upload_zip_files": "압축된 저장 파일을 업로드하려면 클릭하세요.",
+  "ups": "UPS",
+  "ups_already_empty": "UPS는 이미 비어 있었습니다",
+  "used_slots": "사용된 슬롯",
+  "warning": "경고",
+  "weight": "무게",
+  "work_suitability": "업무적합성",
+  "working_on_it": "삑삑, 작업 중이에요!",
+  "workload": "작업량",
+  "workspeed": "작업속도",
+  "work_speed": "작업속도",
+  "world_coordinates": "세계 좌표",
+  "world_name": "세계 이름",
+  "xbox_game_pass": "엑스박스 게임 패스",
+  "xbox_game_pass_description": "Xbox Game Pass: 컨테이너.index 파일",
+  "zoom_in_out": "확대/축소",
+  "active_skill": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "액티브 스킬",
+        "countPlural=other": "액티브 스킬"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "base": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "베이스",
+        "countPlural=other": "기지"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "collection": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "수집",
+        "countPlural=other": "컬렉션"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "file": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "파일",
+        "countPlural=other": "파일"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "filter": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "필터",
+        "countPlural=other": "필터"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "guild": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "동업 조합",
+        "countPlural=other": "길드"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "human": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "인간",
+        "countPlural=other": "인간"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "item": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "목",
+        "countPlural=other": "품목"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "pal": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "단짝",
+        "countPlural=other": "친구들"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "passive_skill": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "패시브 스킬",
+        "countPlural=other": "패시브 스킬"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "player": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "플레이어",
+        "countPlural=other": "플레이어"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "preset": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "프리셋",
+        "countPlural=other": "사전 설정"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "save": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "구하다",
+        "countPlural=other": "저장"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "tag": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "꼬리표",
+        "countPlural=other": "태그"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "technology": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "기술",
+        "countPlural=other": "기술"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "transfer": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "옮기다",
+        "countPlural=other": "환승"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "type": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "유형",
+        "countPlural=other": "유형"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "weapon": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "무기",
+        "countPlural=other": "무기"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ]
+}
