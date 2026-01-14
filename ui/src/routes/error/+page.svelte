@@ -5,6 +5,8 @@
 	import { Copy } from 'lucide-svelte';
 	import { getToastState } from '$states';
 	import type { ValueChangeDetails } from '@zag-js/accordion';
+	import * as m from '$i18n/messages';
+	import { c } from '$lib/utils/commonTranslations';
 
 	const toast = getToastState();
 
@@ -21,11 +23,11 @@
 		navigator.clipboard
 			.writeText(errorText)
 			.then(() => {
-				toast.add('Error details copied to clipboard', 'Success', 'success');
+				toast.add(m.error_copied(), m.success(), 'success');
 			})
 			.catch((err) => {
 				console.error('Failed to copy error details: ', err);
-				toast.add('Failed to copy error details', 'Error', 'error');
+				toast.add(m.error_copy_failed(), m.error(), 'error');
 			});
 	}
 </script>
@@ -34,7 +36,7 @@
 	<div class="flex w-[1080px] flex-col">
 		<div class="flex items-center">
 			<img src={staticIcons.sadIcon} alt="Sad face icon" class="mr-2 h-14 w-14" />
-			<h1 class="text-4xl font-bold">Oops... Something went wrong</h1>
+			<h1 class="text-4xl font-bold">{m.oops_something_wrong()}</h1>
 		</div>
 
 		<Accordion

@@ -22,6 +22,8 @@
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import type { ValueChangeDetails } from '@zag-js/accordion';
 	import { BicepsFlexed, Brain, Plus, Save } from 'lucide-svelte';
+	import * as m from '$i18n/messages';
+	import { c, p } from '$lib/utils/commonTranslations';
 
 	const appState = getAppState();
 
@@ -156,9 +158,9 @@
 		if (!appState.selectedPal) return;
 		// @ts-ignore
 		const result = await modal.showModal<string>(TextInputModal, {
-			title: `Add ${type} skills preset`,
+			title: m.add_skills_preset({ type }),
 			value: '',
-			inputLabel: 'Preset name'
+			inputLabel: m.preset_name()
 		});
 		if (!result) return;
 		const skills =
@@ -206,7 +208,7 @@
 		// @ts-ignore
 		const result = await modal.showModal<string[]>(MultiSkillSelectModal, {
 			type: type === 'active' ? 'Active' : 'Passive',
-			title: `Select ${type === 'active' ? 'Active' : 'Passive'} Skill`,
+			title: m.select_entity({ entity: type === 'active' ? c.activeSkill : c.passiveSkill }),
 			pal: appState.selectedPal
 		});
 		if (!result) return;
@@ -223,10 +225,10 @@
 </script>
 
 {#snippet activeSkillsHeader()}
-	<SectionHeader text="Active Skills">
+	<SectionHeader text={c.activeSkills}>
 		{#snippet action()}
 			<div class="flex">
-				<Tooltip label="Edit Learned Skills">
+				<Tooltip label={m.learned_skills()}>
 					<button
 						class="btn hover:bg-secondary-500/25 ml-2 p-2"
 						onclick={(event) => {
@@ -237,7 +239,7 @@
 						<Brain size={20} />
 					</button>
 				</Tooltip>
-				<Tooltip label="Save as preset">
+				<Tooltip label={m.save_as_preset()}>
 					<button
 						class="btn hover:bg-secondary-500/25 ml-2 p-2"
 						onclick={(event) => {
@@ -248,7 +250,7 @@
 						<Save size={20} />
 					</button>
 				</Tooltip>
-				<Tooltip label="Add Active Skills">
+				<Tooltip label={m.add_entity({entity: c.activeSkill})}>
 					<button
 						class="btn hover:bg-secondary-500/25 ml-2 p-2"
 						onclick={(event) => {
@@ -273,10 +275,10 @@
 {/snippet}
 
 {#snippet passiveSkillsHeader()}
-	<SectionHeader text="Passive Skills">
+	<SectionHeader text={c.passiveSkills}>
 		{#snippet action()}
 			<div class="flex">
-				<Tooltip label="Save as preset">
+				<Tooltip label={m.save_as_preset()}>
 					<button
 						class="btn hover:bg-secondary-500/25 ml-2 p-2"
 						onclick={(event) => {
@@ -287,7 +289,7 @@
 						<Save size={20} />
 					</button>
 				</Tooltip>
-				<Tooltip label="Add Passive Skill">
+				<Tooltip label={m.add_entity({entity: c.passiveSkill})}>
 					<button
 						class="btn hover:bg-secondary-500/25 ml-2 p-2"
 						onclick={(event) => {
@@ -312,10 +314,10 @@
 {/snippet}
 
 {#snippet workSuitabilityHeader()}
-	<SectionHeader text="Work Suitability">
+	<SectionHeader text={m.work_suitability()}>
 		{#snippet action()}
 			<div class="flex">
-				<Tooltip label="Max out Work Suitability">
+				<Tooltip label={m.max_work_suitability()}>
 					<button
 						class="btn hover:bg-secondary-500/25 ml-2 p-2"
 						onclick={(event) => {
@@ -332,10 +334,10 @@
 {/snippet}
 
 {#snippet talentsHeader()}
-	<SectionHeader text="Talents (IVs)">
+	<SectionHeader text={m.talents_ivs()}>
 		{#snippet action()}
 			<div class="flex">
-				<Tooltip label="Max out IVs">
+				<Tooltip label={m.max_ivs()}>
 					<button
 						class="btn hover:bg-secondary-500/25 ml-2 p-2"
 						onclick={(event) => {
@@ -352,10 +354,10 @@
 {/snippet}
 
 {#snippet soulsHeader()}
-	<SectionHeader text="Souls">
+	<SectionHeader text={m.souls()}>
 		{#snippet action()}
 			<div class="flex">
-				<Tooltip label="Max out Souls">
+				<Tooltip label={m.max_souls()}>
 					<button
 						class="btn hover:bg-secondary-500/25 ml-2 p-2"
 						onclick={(event) => {
@@ -385,7 +387,7 @@
 						{@render passiveSkillsHeader()}
 						{@render passiveSkillsBody()}
 
-						<SectionHeader text="Presets" />
+						<SectionHeader text={c.presets} />
 						<SkillPresets onSelect={setSkillPreset} />
 						{@render workSuitabilityHeader()}
 						<WorkSuitabilities bind:pal={appState.selectedPal} />
@@ -416,7 +418,7 @@
 						</Accordion.Item>
 						<Accordion.Item value="presets" controlHover="hover:bg-secondary-500/25">
 							{#snippet control()}
-								<SectionHeader text="Presets" />
+								<SectionHeader text={c.presets} />
 							{/snippet}
 							{#snippet panel()}
 								<SkillPresets onSelect={setSkillPreset} />
@@ -475,7 +477,7 @@
 		<div class="w-1/3 overflow-auto p-2">
 			<div class="hidden flex-col space-y-2 2xl:flex">
 				<StatusBadge bind:pal={appState.selectedPal} />
-				<SectionHeader text="Stats" />
+				<SectionHeader text={m.stats()} />
 				<StatsBadges bind:pal={appState.selectedPal} bind:player={appState.selectedPlayer} />
 				{@render talentsHeader()}
 				<Talents bind:pal={appState.selectedPal} />
@@ -492,7 +494,7 @@
 				>
 					<Accordion.Item value="stats" controlHover="hover:bg-secondary-500/25">
 						{#snippet control()}
-							<SectionHeader text="Stats" />
+							<SectionHeader text={m.stats()} />
 						{/snippet}
 						{#snippet panel()}
 							<StatsBadges bind:pal={appState.selectedPal} bind:player={appState.selectedPlayer} />
@@ -520,10 +522,9 @@
 	</div>
 {:else}
 	<div class="flex w-full flex-col items-center justify-center">
-		<h2 class="h2">Select a Pal to edit 🚀</h2>
+		<h2 class="h2">{m.select_entity_to_edit({ entity: c.pal })}</h2>
 		<p>
-			Pals can be selected in a Players Pal Box, Guild Bases, Global Pal Storage, Dimensional Pal
-			Storage, or Universal Pal Storage
+			{m.select_pal_edit_description(p.pals)}
 		</p>
 	</div>
 {/if}

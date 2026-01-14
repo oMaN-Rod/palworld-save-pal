@@ -56,6 +56,8 @@
 	import { PalCard, PalBadge, PalContainerStats } from '$components';
 	import { send } from '$lib/utils/websocketUtils';
 	import type { ValueChangeDetails } from '@zag-js/accordion';
+	import * as m from '$i18n/messages';
+	import { c, p } from '$lib/utils/commonTranslations';
 
 	const PALS_PER_PAGE = 30;
 	const TOTAL_SLOTS = 960;
@@ -367,7 +369,7 @@
 		if (!appState.selectedPlayer) return;
 		// @ts-ignore
 		const result = await modal.showModal<[string, string] | undefined>(PalSelectModal, {
-			title: `Add a new Pal to your ${target === 'party' ? 'Party' : 'Pal Box'}`
+			title: m.add_new_pal_to_entity({ entity: target === 'party' ? m.party() : m.palbox() })
 		});
 		if (!result) return;
 		const [selectedPal, nickname] = result;
@@ -428,13 +430,13 @@
 			? 965 - Object.values(appState.selectedPlayer!.pals).length
 			: 0;
 		if (maxClones === 0) {
-			toast.add('There are no slots available in your Pal box.', 'Error', 'error');
+			toast.add(m.no_slots_available_in_entity({ entity: m.palbox() }), m.error(), 'error');
 			return;
 		}
 		// @ts-ignore
 		const result = await modal.showModal<number>(NumberInputModal, {
-			title: 'How many clones?',
-			message: `There are ${maxClones} slots available in your Pal box.`,
+			title: m.how_many_clones(),
+			message: m.slots_available_in_entity({ count: maxClones, entity: m.palbox() }),
 			value: 1,
 			min: 0,
 			max: maxClones
@@ -467,8 +469,8 @@
 	async function handleCloneToUps(pal: Pal) {
 		// @ts-ignore
 		const result = await modal.showModal<CloneToUpsModalProps>(CloneToUpsModal, {
-			title: 'Clone to UPS',
-			message: 'Clone this Pal to your Universal Pal Storage.',
+			title: m.clone_to_entity({ entity: m.ups() }),
+			message: m.clone_selected_to_entity({ pals: c.pals, entity: c.universalPalStorage }),
 			pals: [pal]
 		});
 
@@ -486,10 +488,17 @@
 				notes || undefined
 			);
 
-			toast.add(`Successfully cloned ${pal.nickname || pal.name} to UPS`, 'Success', 'success');
+			toast.add(
+				m.successfully_cloned_pal_to_entity({
+					pal: pal.nickname || pal.name,
+					entity: c.universalPalStorage
+				}),
+				m.success(),
+				'success'
+			);
 		} catch (error) {
 			console.error('Clone to UPS failed:', error);
-			toast.add('Clone to UPS failed. Please try again.', 'Error', 'error');
+			toast.add(m.clone_to_entity_failed({ entity: c.universalPalStorage }), m.error(), 'error');
 		}
 	}
 
@@ -504,8 +513,12 @@
 
 		// @ts-ignore
 		const result = await modal.showModal<CloneToUpsModalProps>(CloneToUpsModal, {
-			title: 'Clone to UPS',
-			message: `Clone ${palsToClone.length} selected Pals to your Universal Pal Storage.`,
+			title: m.clone_to_entity({ entity: c.universalPalStorage }),
+			message: m.clone_selected_pals_to_entity({
+				count: palsToClone.length,
+				pals: m.pal({ count: palsToClone.length }),
+				entity: c.universalPalStorage
+			}),
 			pals: palsToClone
 		});
 
@@ -523,12 +536,20 @@
 				notes || undefined
 			);
 
-			toast.add(`Successfully cloned ${palsToClone.length} Pals to UPS`, 'Success', 'success');
+			toast.add(
+				m.successfully_cloned_pals_to_entity({
+					count: palsToClone.length,
+					pals: m.pal({ count: palsToClone.length }),
+					entity: c.universalPalStorage
+				}),
+				m.success(),
+				'success'
+			);
 
 			selectedPals = [];
 		} catch (error) {
 			console.error('Bulk clone to UPS failed:', error);
-			toast.add('Bulk clone to UPS failed. Please try again.', 'Error', 'error');
+			toast.add(m.bulk_clone_to_ups_failed(), m.error(), 'error');
 		}
 	}
 
@@ -579,10 +600,13 @@
 		if (selectedPals.length === 0) return;
 
 		const confirmed = await modal.showConfirmModal({
-			title: `Delete Pal${selectedPals.length > 1 ? 's' : ''}`,
-			message: `Are you sure you want to delete the ${selectedPals.length} selected pal${selectedPals.length == 1 ? '' : 's'}?`,
-			confirmText: 'Delete',
-			cancelText: 'Cancel'
+			title: m.delete_selected_entity({ entity: m.pal({ count: selectedPals.length }) }),
+			message: m.delete_count_entities_confirm({
+				count: selectedPals.length,
+				entity: m.pal({ count: selectedPals.length })
+			}),
+			confirmText: m.delete(),
+			cancelText: m.cancel()
 		});
 
 		if (appState.selectedPlayer && appState.selectedPlayer.pals && confirmed) {
@@ -601,10 +625,10 @@
 
 	async function handleDeletePal(pal: Pal) {
 		const confirmed = await modal.showConfirmModal({
-			title: 'Delete Pal',
-			message: `Are you sure you want to delete ${pal.nickname || pal.name}?`,
-			confirmText: 'Delete',
-			cancelText: 'Cancel'
+			title: m.delete_entity({ entity: c.pal }),
+			message: m.delete_entity_by_name_confirm({ name: pal.nickname || pal.name }),
+			confirmText: m.delete(),
+			cancelText: m.cancel()
 		});
 		if (appState.selectedPlayer && appState.selectedPlayer.pals && confirmed) {
 			send(MessageType.DELETE_PALS, {
@@ -712,7 +736,7 @@
 
 		// @ts-ignore
 		const result = await modal.showModal<string>(PalPresetSelectModal, {
-			title: 'Select preset',
+			title: m.select_entity({ entity: `${c.pal} ${m.preset({ count: 1 })}` }),
 			selectedPals: allPals
 		});
 		if (!result) return;
@@ -736,7 +760,7 @@
 		if (!appState.selectedPlayer) return;
 		// @ts-ignore
 		await modal.showModal<string>(FillPalsModal, {
-			title: 'Fill Pal Box',
+			title: m.add_all_pals_to_entity({ entity: m.palbox(), pals: c.pals }),
 			player: appState.selectedPlayer,
 			target: 'pal-box'
 		});
@@ -768,7 +792,7 @@
 	>
 		<div class="shrink-0 p-4">
 			<nav class="btn-group bg-surface-900 mb-2 w-full items-center overflow-x-auto rounded-sm p-1">
-				<Tooltip position="right" label="Add a new pal to your Pal Box">
+				<Tooltip position="right" label={m.add_new_pal_to_entity({ entity: m.palbox() })}>
 					<button
 						class="btn hover:preset-tonal-secondary p-2"
 						onclick={() => handleAddPal('palbox')}
@@ -776,7 +800,10 @@
 						<Plus class="h-4 w-4" />
 					</button>
 				</Tooltip>
-				<Tooltip position="right" label="Add all pals to your Pal Box">
+				<Tooltip
+					position="right"
+					label={m.add_all_pals_to_entity({ entity: m.palbox(), pals: c.pals })}
+				>
 					<button class="btn hover:preset-tonal-secondary p-2" onclick={() => addAllPalsToBox()}>
 						<CircleFadingPlus class="h-4 w-4" />
 					</button>
@@ -790,58 +817,70 @@
 					</button>
 					{#snippet popup()}
 						<div class="flex flex-col">
-							<span>Select all in</span>
+							<span>{m.select_all_in()}</span>
 							<div class="grid grid-cols-[auto_1fr] gap-1">
 								<img src={staticIcons.leftClickIcon} alt="Left Click" class="h-6 w-6" />
-								<span class="text-sm">pal box</span>
+								<span class="text-sm">{m.palbox()}</span>
 								<div class="flex">
 									<img src={staticIcons.ctrlIcon} alt="Ctrl" class="h-6 w-6" />
 									<img src={staticIcons.leftClickIcon} alt="Left Click" class="h-6 w-6" />
 								</div>
-								<span class="text-sm">pal box + party</span>
+								<span class="text-sm">{m.pal_box_party()}</span>
 							</div>
 						</div>
 					{/snippet}
 				</Tooltip>
-				<Tooltip label="Heal all in pal box">
+				<Tooltip label={m.heal_all_in_entity({ entity: m.palbox() })}>
 					<button class="btn hover:preset-tonal-secondary p-2" onclick={handleHealAll}>
 						<Bandage class="h-4 w-4" />
 					</button>
 				</Tooltip>
 				{#if selectedPals.length === 1}
-					<Tooltip label="Clone selected pal">
+					<Tooltip label={m.clone_selected_pal(p.pal)}>
 						<button class="btn hover:preset-tonal-secondary p-2" onclick={cloneSelectedPal}>
 							<Copy class="h-4 w-4" />
 						</button>
 					</Tooltip>
 				{/if}
 				{#if selectedPals.length >= 1}
-					<Tooltip label="Apply preset to selected pal(s)">
+					<Tooltip
+						label={m.apply_preset_to_selected({ pals: m.pal({ count: selectedPals.length }) })}
+					>
 						<button class="btn hover:preset-tonal-secondary p-2" onclick={handleSelectPreset}>
 							<Play class="h-4 w-4" />
 						</button>
 					</Tooltip>
-					<Tooltip label="Clone selected pal(s) to UPS">
+					<Tooltip
+						label={m.clone_pals_to_entity({
+							count: selectedPals.length,
+							pals: m.pal({ count: selectedPals.length }),
+							entity: c.universalPalStorage
+						})}
+					>
 						<button class="btn hover:preset-tonal-secondary p-2" onclick={handleBulkCloneToUps}>
 							<Upload class="h-4 w-4" />
 						</button>
 					</Tooltip>
-					<Tooltip label="Heal selected pal(s)">
+					<Tooltip label={m.heal_selected_pals({ pals: m.pal({ count: selectedPals.length }) })}>
 						<button class="btn hover:preset-tonal-secondary p-2" onclick={healSelectedPals}>
 							<Ambulance class="h-4 w-4" />
 						</button>
 					</Tooltip>
-					<Tooltip label="Max out selected pal(s)">
+					<Tooltip label={m.max_out_selected_pals({ pals: m.pal({ count: selectedPals.length }) })}>
 						<button class="btn hover:preset-tonal-secondary p-2" onclick={maxSelectedPals}>
 							<BicepsFlexed class="h-4 w-4" />
 						</button>
 					</Tooltip>
-					<Tooltip label="Delete selected pal(s)">
+					<Tooltip
+						label={m.delete_selected_entity({ entity: m.pal({ count: selectedPals.length }) })}
+					>
 						<button class="btn hover:preset-tonal-secondary p-2" onclick={deleteSelectedPals}>
 							<Trash class="h-4 w-4" />
 						</button>
 					</Tooltip>
-					<Tooltip label="Clear selected pal(s)">
+					<Tooltip
+						label={m.clear_selected_entity({ entity: m.pal({ count: selectedPals.length }) })}
+					>
 						<button
 							class="btn hover:preset-tonal-secondary p-2"
 							onclick={() => (selectedPals = [])}
@@ -863,20 +902,20 @@
 				>
 					{#snippet lead()}<Search />{/snippet}
 					{#snippet control()}
-						<span class="font-bold">Filter & Sort</span>
+						<span class="font-bold">{m.filter_and_sort()}</span>
 					{/snippet}
 					{#snippet panel()}
 						<Input
 							type="text"
 							inputClass="w-full"
-							placeholder="Search by name or nickname"
+							placeholder={m.search_by_name_nickname()}
 							bind:value={searchQuery}
 						/>
 						<div>
-							<legend class="font-bold">Sort</legend>
+							<legend class="font-bold">{m.sort()}</legend>
 							<hr />
 							<div class="grid grid-cols-6">
-								<Tooltip label="Sort by level">
+								<Tooltip label={m.sort_by_entity({ entity: m.level() })}>
 									<button
 										type="button"
 										class={sortButtonClass('level')}
@@ -885,7 +924,7 @@
 										<LevelSortIcon />
 									</button>
 								</Tooltip>
-								<Tooltip label="Sort by name">
+								<Tooltip label={m.sort_by_entity({ entity: m.name() })}>
 									<button
 										type="button"
 										class={sortButtonClass('name')}
@@ -894,7 +933,7 @@
 										<NameSortIcon />
 									</button>
 								</Tooltip>
-								<Tooltip label="Sort by Paldeck #">
+								<Tooltip label={m.sort_by_entity({ entity: `${m.paldeck()} #` })}>
 									<button
 										type="button"
 										class={sortButtonClass('paldeck-index')}
@@ -906,14 +945,14 @@
 							</div>
 						</div>
 						<div>
-							<legend class="font-bold">Element & Type</legend>
+							<legend class="font-bold">{m.element_and_type()}</legend>
 							<hr />
 							<div class="mt-2 grid grid-cols-4 2xl:grid-cols-6">
 								<Tooltip>
 									<button class={elementClass('All')} onclick={() => (selectedFilter = 'All')}>
 										<GalleryVerticalEnd />
 									</button>
-									{#snippet popup()}All pals{/snippet}
+									{#snippet popup()}{m.all_entity({ entity: c.pals })}{/snippet}
 								</Tooltip>
 								{#each [...elementTypes] as element}
 									{@const localizedName = elementsData.getByKey(element)?.localized_name}
@@ -931,7 +970,7 @@
 										</button>
 									</Tooltip>
 								{/each}
-								<Tooltip label="Alpha Pals">
+								<Tooltip label={c.alphaPals}>
 									<button
 										type="button"
 										class={sortAlphaClass}
@@ -940,7 +979,7 @@
 										<img src={staticIcons.alphaIcon} alt="Alpha" class="pal-element-badge" />
 									</button>
 								</Tooltip>
-								<Tooltip label="Lucky Pals">
+								<Tooltip label={c.luckyPals}>
 									<button
 										type="button"
 										class={sortLuckyClass}
@@ -949,7 +988,7 @@
 										<img src={staticIcons.luckyIcon} alt="Alpha" class="pal-element-badge" />
 									</button>
 								</Tooltip>
-								<Tooltip label="Humans">
+								<Tooltip label={c.humans}>
 									<button
 										type="button"
 										class={sortHumanClass}
@@ -958,7 +997,7 @@
 										<User />
 									</button>
 								</Tooltip>
-								<Tooltip label="Predator Pals">
+								<Tooltip label={c.predatorPals}>
 									<button
 										type="button"
 										class={sortPredatorClass}
@@ -972,7 +1011,7 @@
 										/>
 									</button>
 								</Tooltip>
-								<Tooltip label="Oil Rig Pals">
+								<Tooltip label={c.oilRigPals}>
 									<button
 										type="button"
 										class={sortOilrigClass}
@@ -981,7 +1020,7 @@
 										<img src={staticIcons.oilrigIcon} alt="Oil Rig" class="pal-element-badge" />
 									</button>
 								</Tooltip>
-								<Tooltip label="Summoned Pals">
+								<Tooltip label={c.summonedPals}>
 									<button
 										type="button"
 										class={sortSummonClass}
@@ -1001,13 +1040,13 @@
 				>
 					{#snippet lead()}<Info />{/snippet}
 					{#snippet control()}
-						<span class="font-bold">Stats</span>
+						<span class="font-bold">{m.stats()}</span>
 					{/snippet}
 					{#snippet panel()}
 						{#if pals && pals.length > 0}
 							<PalContainerStats {pals} {elementTypes} />
 						{:else}
-							<div>No pals data available</div>
+							<div>{m.no_pals_available(p.pals)}</div>
 						{/if}
 					{/snippet}
 				</Accordion.Item>
@@ -1018,7 +1057,7 @@
 				>
 					{#snippet lead()}<User />{/snippet}
 					{#snippet control()}
-						<span class="font-bold">Party</span>
+						<span class="font-bold">{m.party()}</span>
 					{/snippet}
 					{#snippet panel()}
 						{@render party()}
@@ -1027,7 +1066,7 @@
 			</Accordion>
 
 			<Card rounded="rounded-sm" class="mt-2 hidden 2xl:block">
-				<h4 class="h4 mb-2">Party</h4>
+				<h4 class="h4 mb-2">{m.party()}</h4>
 				{@render party()}
 			</Card>
 		</div>
@@ -1078,18 +1117,18 @@
 			</div>
 		</div>
 		{#if pals && pals.length > 0}
-			<Card class="mr-2 hidden h-[430px] 2xl:block">
+			<Card class="h-107.5 mr-2 hidden 2xl:block">
 				<PalContainerStats {pals} {elementTypes} />
 			</Card>
 		{:else}
-			<Card class="mr-2 hidden h-[430px] 2xl:block">
-				<div>No pals data available</div>
+			<Card class="h-107.5 mr-2 hidden 2xl:block">
+				<div>{m.no_pals_available(p.pals)}</div>
 			</Card>
 		{/if}
 	</div>
 {:else}
 	<div class="flex w-full items-center justify-center">
-		<h2 class="h2">Select a Player to view Pal Box</h2>
+		<h2 class="h2">{m.select_player_view_entity({ entity: m.palbox() })}</h2>
 	</div>
 {/if}
 

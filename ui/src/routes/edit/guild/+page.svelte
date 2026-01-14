@@ -29,6 +29,8 @@
 	import { goto } from '$app/navigation';
 	import Nuke from '$components/ui/icons/Nuke.svelte';
 	import LabResearchControls from '$components/guilds/LabResearchControls.svelte';
+	import * as m from '$i18n/messages';
+	import { c, p } from '$lib/utils/commonTranslations';
 
 	interface PalWithBaseId {
 		pal: Pal;
@@ -280,7 +282,7 @@
 
 		// @ts-ignore
 		const result = await modal.showModal<[string, string] | undefined>(PalSelectModal, {
-			title: `Add a new Pal to Base ${currentPage}`
+			title: m.add_pal_to_base({ pal: c.pal, base: currentPage })
 		});
 		if (!result) return;
 
@@ -306,14 +308,14 @@
 
 		const maxClones = base.slot_count - Object.keys(base.pals).length;
 		if (maxClones === 0) {
-			toast.add('There are no slots available in this base.', 'Error', 'error');
+			toast.add(m.no_slots_available_in_entity({ entity: c.base }), m.error(), 'error');
 			return;
 		}
 
 		// @ts-ignore
 		const result = await modal.showModal<number>(NumberInputModal, {
-			title: 'How many clones?',
-			message: `There are ${maxClones} slots available in this base.`,
+			title: m.how_many_clones(),
+			message: m.slots_available_in_entity({ count: maxClones, entity: c.base }),
 			value: 1,
 			min: 0,
 			max: maxClones
@@ -339,10 +341,13 @@
 		if (selectedPals.length === 0) return;
 
 		const confirmed = await modal.showConfirmModal({
-			title: `Delete Pal${selectedPals.length > 1 ? 's' : ''}`,
-			message: `Are you sure you want to delete the ${selectedPals.length} selected pal${selectedPals.length == 1 ? '' : 's'}?`,
-			confirmText: 'Delete',
-			cancelText: 'Cancel'
+			title: m.delete_entity({ entity: m.pal({ count: selectedPals.length }) }),
+			message: m.delete_count_entities_confirm({
+				count: selectedPals.length,
+				entity: m.pal({ count: selectedPals.length })
+			}),
+			confirmText: m.delete(),
+			cancelText: m.cancel()
 		});
 
 		if (confirmed) {
@@ -364,10 +369,10 @@
 
 	async function handleDeletePal(baseId: string, pal: Pal) {
 		const confirmed = await modal.showConfirmModal({
-			title: 'Delete Pal',
-			message: `Are you sure you want to delete ${pal.nickname || pal.name}?`,
-			confirmText: 'Delete',
-			cancelText: 'Cancel'
+			title: m.delete_entity({ entity: c.pal }),
+			message: m.delete_entity_by_name_confirm({ name: pal.nickname || pal.name }),
+			confirmText: m.delete(),
+			cancelText: m.cancel()
 		});
 
 		if (appState.selectedPlayer && confirmed) {
@@ -483,10 +488,10 @@
 			if (itemData) {
 				itemName = itemData.info.localized_name;
 			}
-			toast.add(`${itemName} copied to clipboard`);
+			toast.add(m.item_copied({ name: itemName }));
 		} else {
 			appState.clipboardItem = null;
-			toast.add('Clipboard cleared');
+			toast.add(m.clipboard_cleared());
 		}
 	}
 
@@ -519,7 +524,7 @@
 		} else if (!event.ctrlKey && event.button === 2) {
 			await copyItem(slot);
 		} else {
-			toast.add('Cannot paste here (yet™)', undefined, 'warning');
+			toast.add(m.cannot_paste_here(), undefined, 'warning');
 		}
 	}
 
@@ -533,7 +538,7 @@
 		});
 		// @ts-ignore
 		const result = await modal.showModal<string>(PalPresetSelectModal, {
-			title: 'Select preset',
+			title: m.select_entity({ entity: c.preset }),
 			selectedPals: selectedPalsData
 		});
 		if (!result) return;
@@ -597,7 +602,7 @@
 		if (!currentBase) return;
 		// @ts-ignore
 		const result = await modal.showModal<string>(TextInputModal, {
-			title: 'Edit Base Name',
+			title: m.edit_entity({ entity: m.base_name() }),
 			value: currentBase[1].name || ''
 		});
 		if (!result) return;
@@ -608,7 +613,7 @@
 	async function handleEditGuildName() {
 		// @ts-ignore
 		const result = await modal.showModal<string>(TextInputModal, {
-			title: 'Edit Guild Name',
+			title: m.edit_entity({ entity: m.guild_name() }),
 			value: playerGuild!.name
 		});
 		if (!result) return;
@@ -619,7 +624,7 @@
 	async function handleEditBasecampLevel() {
 		// @ts-ignore
 		const result = await modal.showModal<number>(NumberSliderModal, {
-			title: 'Edit Basecamp Level',
+			title: m.edit_entity({ entity: m.basecamp_level() }),
 			value: playerGuild!.base_camp_level || 1,
 			min: 1,
 			max: 30,
@@ -632,10 +637,10 @@
 
 	async function handleDeleteGuild() {
 		const confirmed = await modal.showConfirmModal({
-			title: 'Delete Guild',
-			message: 'Are you sure you want to delete this guild? This action cannot be undone.',
-			confirmText: 'Delete',
-			cancelText: 'Cancel'
+			title: m.delete_entity({ entity: c.guild }),
+			message: m.delete_entity_by_name_confirm({ name: playerGuild!.name }),
+			confirmText: m.delete(),
+			cancelText: m.cancel()
 		});
 		if (confirmed) {
 			send(MessageType.DELETE_GUILD, {
@@ -677,16 +682,16 @@
 		<div class="flex h-full w-full items-center justify-center">
 			<div class="flex flex-col items-center gap-4">
 				<Spinner size="size-16" />
-				<p class="text-surface-400">Loading Guild...</p>
+				<p class="text-surface-400">{m.loaded_entity({ entity: c.guild })}</p>
 			</div>
 		</div>
 	{:else if !playerGuild}
 		<div class="flex w-full items-center justify-center">
-			<h2 class="h2">No Guild found</h2>
+			<h2 class="h2">{m.no_guild_found()}</h2>
 		</div>
 	{:else if !guildBases || Object.values(guildBases).length === 0}
 		<div class="flex w-full items-center justify-center space-x-4">
-			<h2 class="h2">No Guild Bases found</h2>
+			<h2 class="h2">{m.no_guild_bases_found()}</h2>
 			<img src={staticIcons.sadIcon} alt="Sad" class="h-18 w-18" />
 		</div>
 	{:else}
@@ -698,12 +703,12 @@
 						<button class="btn px-0 text-start" onclick={handleEditGuildName}>
 							<h4 class="h4 hover:text-secondary-500">{playerGuild!.name}</h4>
 						</button>
-						<Tooltip label="Basecamp Level">
+						<Tooltip label={m.basecamp_level()}>
 							<button
 								class="outline-surface-700 hover:outline-secondary-500 ml-2 flex gap-2 rounded p-1 align-bottom outline"
 								onclick={handleEditBasecampLevel}
 							>
-								<span class="text-surface-700">Lvl</span>
+								<span class="text-surface-700">{m.level_abbr()}</span>
 								{playerGuild.base_camp_level}
 							</button>
 						</Tooltip>
@@ -711,7 +716,7 @@
 					{#if playerGuild && appState.settings.debug_mode}
 						<DebugButton href={`/debug?guildId=${playerGuild.id}`} />
 					{/if}
-					<Tooltip label="Delete entire guild">
+					<Tooltip label={m.delete_entire_guild()}>
 						<button class="btn ml-4 h-8 w-8 p-2 hover:bg-red-500/50" onclick={handleDeleteGuild}>
 							<Nuke size={24} />
 						</button>
@@ -720,7 +725,7 @@
 
 				<div class="flex flex-col">
 					<div class="flex">
-						<h5 class="h5 font-light">Base {currentPage}</h5>
+						<h5 class="h5 font-light">{c.base} {currentPage}</h5>
 						{#if playerGuild && currentBase && appState.settings.debug_mode}
 							<DebugButton
 								iconClass="h-4 w-4"
@@ -751,7 +756,7 @@
 							selectedInventoryItem = '';
 						}}
 					>
-						<span>Pals</span>
+						<span>{c.pals}</span>
 					</button>
 					<button
 						class={cn(
@@ -764,7 +769,7 @@
 							selectedInventoryItem = '';
 						}}
 					>
-						<span>Storage</span>
+						<span>{m.storage()}</span>
 					</button>
 					<button
 						class={cn(
@@ -777,7 +782,7 @@
 							handleSelectGuildChest();
 						}}
 					>
-						<span>Chest</span>
+						<span>{m.chest()}</span>
 					</button>
 					<button
 						class={cn(
@@ -790,12 +795,12 @@
 							activeTab = 'lab';
 						}}
 					>
-						<span>Lab</span>
+						<span>{m.lab()}</span>
 					</button>
 				</nav>
 				{#if activeTab === 'pals'}
 					<div class="btn-group bg-surface-900 w-full items-center rounded-sm p-1">
-						<Tooltip position="right" label="Add Pal to Base">
+						<Tooltip position="right" label={m.add_new_pal_to_entity({ entity: c.base })}>
 							<button
 								class="btn hover:bg-secondary-500/50 p-2"
 								onclick={() => currentBase && handleAddPal(currentBase[0])}
@@ -803,33 +808,33 @@
 								<Plus class="h-4 w-4" />
 							</button>
 						</Tooltip>
-						<Tooltip label="Select all in current base">
+						<Tooltip label={m.select_all_current_base()}>
 							<button class="btn hover:bg-secondary-500/50 p-2" onclick={handleSelectAll}>
 								<ReplaceAll class="h-4 w-4" />
 							</button>
 						</Tooltip>
-						<Tooltip label="Heal all in current base">
+						<Tooltip label={m.heal_all_in_entity({ entity: c.base })}>
 							<button class="btn hover:bg-secondary-500/50 p-2" onclick={handleHealAll}>
 								<Bandage class="h-4 w-4" />
 							</button>
 						</Tooltip>
 						{#if selectedPals.length > 0}
-							<Tooltip label="Apply preset to selected pal(s)">
+							<Tooltip label={m.apply_preset_to_selected(p.pals)}>
 								<button class="btn hover:bg-secondary-500/50 p-2" onclick={handleSelectPreset}>
 									<Play class="h-4 w-4" />
 								</button>
 							</Tooltip>
-							<Tooltip label="Heal selected pal(s)">
+							<Tooltip label={m.heal_selected_pals(p.pals)}>
 								<button class="btn hover:bg-secondary-500/50 p-2" onclick={healSelectedPals}>
 									<Ambulance class="h-4 w-4" />
 								</button>
 							</Tooltip>
-							<Tooltip label="Delete selected pal(s)">
+							<Tooltip label={m.delete_selected_entity({ entity: c.pals })}>
 								<button class="btn hover:bg-secondary-500/50 p-2" onclick={deleteSelectedPals}>
 									<Trash class="h-4 w-4" />
 								</button>
 							</Tooltip>
-							<Tooltip label="Clear selected">
+							<Tooltip label={m.clear_entity({ entity: m.selected() })}>
 								<button
 									class="btn hover:bg-secondary-500/50 p-2"
 									onclick={() => (selectedPals = [])}
@@ -842,7 +847,7 @@
 				{/if}
 				{#if activeTab == 'storage'}
 					<div class="flex items-center">
-						<Input bind:value={inventorySearchQuery} placeholder="Search Inventory" />
+						<Input bind:value={inventorySearchQuery} placeholder={m.search_inventory()} />
 						<button
 							class="btn"
 							onclick={() => {
@@ -868,8 +873,8 @@
 					>
 						{#snippet listHeader()}
 							<div class="h-8 w-8"></div>
-							<span class="font-bold">Inventory</span>
-							<span class="font-bold">Total</span>
+							<span class="font-bold">{m.inventory()}</span>
+							<span class="font-bold">{m.total()}</span>
 						{/snippet}
 						{#snippet listItem(item)}
 							{@const itemData = itemsData.getByKey(item.static_id)}
@@ -903,7 +908,7 @@
 									<span class="font-bold">{itemData.info.localized_name}</span>
 									<span class="text-sm">{itemData.info.description}</span>
 									<hr class="border-surface-500 my-2" />
-									<span class="font-bold">Total Count: {item.total_count}</span>
+									<span class="font-bold">{m.total_count({ count: item.total_count })}</span>
 									{#each Object.entries(item.containers) as [containerId, count]}
 										{@const building = buildingsData.getByKey(containerId)}
 										{#if building}
@@ -948,7 +953,7 @@
 				{#if activeTab !== 'lab'}
 					<div class="mb-4 flex items-center justify-center space-x-4">
 						<button class="rounded-sm px-4 py-2 font-bold" onclick={decrementPage}>
-							<img src={staticIcons.qIcon} alt="Previous" class="h-10 w-10" />
+							<img src={staticIcons.qIcon} alt={m.previous()} class="h-10 w-10" />
 						</button>
 
 						<div class="flex space-x-2">
@@ -958,7 +963,7 @@
 										? 'bg-primary-500 text-white'
 										: 'bg-surface-800 hover:bg-gray-300'}"
 									onclick={() => (currentPage = page)}
-									popupLabel={`Base ${Object.entries(guildBases!)[page - 1]?.[0]}`}
+									popupLabel={`${c.base} ${Object.entries(guildBases!)[page - 1]?.[0]}`}
 								>
 									{page}
 								</TooltipButton>
@@ -966,7 +971,7 @@
 						</div>
 
 						<button class="rounded-sm px-4 py-2 font-bold" onclick={incrementPage}>
-							<img src={staticIcons.eIcon} alt="Next" class="h-10 w-10" />
+							<img src={staticIcons.eIcon} alt={m.next()} class="h-10 w-10" />
 						</button>
 					</div>
 				{/if}
@@ -1026,11 +1031,11 @@
 										<div class="flex flex-col">
 											<h4 class="h4">{building.localized_name}</h4>
 											<div class="grid w-full grid-cols-2 gap-2">
-												<span class="font-bold"> Available Slots: </span>
+												<span class="font-bold">{m.available_slots()}</span>
 												<span>{item.slot_num}</span>
 											</div>
 											<div class="grid w-full grid-cols-2 gap-2">
-												<span class="font-bold"> Used Slots: </span>
+												<span class="font-bold">{m.used_slots()}</span>
 												<span>
 													{item?.slots?.filter((slot) => slot.static_id !== 'None').length}
 												</span>
@@ -1079,20 +1084,20 @@
 									</div>
 								{:else}
 									<div class="flex w-full items-center justify-center">
-										<h2 class="h2">Select a Storage Container</h2>
+										<h2 class="h2">{m.select_entity({ entity: m.storage_container() })}</h2>
 									</div>
 								{/if}
 							</div>
 						</div>
 					{:else}
 						<div class="flex w-full items-center justify-center">
-							<h2 class="h2">No Storage Containers</h2>
+							<h2 class="h2">{m.no_storage_containers()}</h2>
 						</div>
 					{/if}
 				{:else if activeTab == 'guildChest' && playerGuild?.guild_chest}
 					{@const building = buildingsData.getByKey('GuildChest')}
 					{@const itemGroup = building?.type_a == BuildingTypeA.Food ? 'Food' : 'Common'}
-					<div class="max-h-[550px] overflow-y-auto 2xl:max-h-[800px]">
+					<div class="max-h-137.5 2xl:max-h-200 overflow-y-auto">
 						<div class="flex items-start space-x-4">
 							<div class="m-1 grid grid-cols-6 gap-2">
 								{#each Object.values(playerGuild.guild_chest.slots) as _, index}
@@ -1140,6 +1145,6 @@
 	{/if}
 {:else}
 	<div class="flex w-full items-center justify-center">
-		<h2 class="h2">Select a Player to view Guilds</h2>
+		<h2 class="h2">{m.select_player_view_entity({ entity: c.guild })}</h2>
 	</div>
 {/if}

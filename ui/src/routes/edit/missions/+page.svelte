@@ -7,6 +7,8 @@
 	import { EntryState, type Mission, type MissionType } from '$types';
 	import { CheckCheck, Trash2, ListX } from 'lucide-svelte';
 	import { ConfirmModal } from '$components';
+	import * as m from '$i18n/messages';
+	import { c } from '$lib/utils/commonTranslations';
 
 	const appState = getAppState();
 	const modal = getModalState();
@@ -31,13 +33,13 @@
 			m.startsWith(prefix)
 		).length;
 		if (count === 0) {
-			toast.add('No current missions to clear', undefined, 'warning');
+			toast.add(m.no_current_missions_to_clear(), undefined, 'warning');
 			return;
 		}
 		// @ts-ignore
 		const confirmed = await modal.showModal(ConfirmModal, {
-			title: 'Clear All Current Missions',
-			message: `Are you sure you want to clear all ${count} current ${activeTab.toLowerCase()} missions?`
+			title: m.clear_all_entity({ entity: m.current_missions() }),
+			message: m.clear_current_missions_confirm({ count, type: activeTab.toLowerCase() })
 		});
 		if (!confirmed) return;
 		appState.selectedPlayer.current_missions = appState.selectedPlayer.current_missions.filter(
@@ -45,7 +47,7 @@
 		);
 		appState.selectedPlayer.state = EntryState.MODIFIED;
 		selectedMission = undefined;
-		toast.add(`Cleared ${count} current ${activeTab.toLowerCase()} missions`);
+		toast.add(m.cleared_current_missions({ count, type: activeTab.toLowerCase() }));
 	}
 
 	async function clearAllCompletedMissions() {
@@ -55,13 +57,13 @@
 			m.startsWith(prefix)
 		).length;
 		if (count === 0) {
-			toast.add('No completed missions to clear', undefined, 'warning');
+			toast.add(m.no_completed_missions_to_clear(), undefined, 'warning');
 			return;
 		}
 		// @ts-ignore
 		const confirmed = await modal.showModal(ConfirmModal, {
-			title: 'Clear All Completed Missions',
-			message: `Are you sure you want to clear all ${count} completed ${activeTab.toLowerCase()} missions?`
+			title: m.clear_all_entity({ entity: m.completed_missions() }),
+			message: m.clear_completed_missions_confirm({ count, type: activeTab.toLowerCase() })
 		});
 		if (!confirmed) return;
 		appState.selectedPlayer.completed_missions = appState.selectedPlayer.completed_missions.filter(
@@ -69,7 +71,7 @@
 		);
 		appState.selectedPlayer.state = EntryState.MODIFIED;
 		selectedMission = undefined;
-		toast.add(`Cleared ${count} completed ${activeTab.toLowerCase()} missions`);
+		toast.add(m.cleared_completed_missions({ count, type: activeTab.toLowerCase() }));
 	}
 
 	async function markAllCurrentAsComplete() {
@@ -79,13 +81,16 @@
 			m.startsWith(prefix)
 		);
 		if (currentOfType.length === 0) {
-			toast.add('No current missions to complete', undefined, 'warning');
+			toast.add(m.no_current_missions_to_complete(), undefined, 'warning');
 			return;
 		}
 		// @ts-ignore
 		const confirmed = await modal.showModal(ConfirmModal, {
-			title: 'Mark All as Complete',
-			message: `Are you sure you want to mark all ${currentOfType.length} current ${activeTab.toLowerCase()} missions as complete?`
+			title: m.mark_all_current_complete(),
+			message: m.mark_complete_confirm({
+				count: currentOfType.length,
+				type: activeTab.toLowerCase()
+			})
 		});
 		if (!confirmed) return;
 		appState.selectedPlayer.current_missions = appState.selectedPlayer.current_missions.filter(
@@ -97,7 +102,9 @@
 		];
 		appState.selectedPlayer.state = EntryState.MODIFIED;
 		selectedMission = undefined;
-		toast.add(`Marked ${currentOfType.length} ${activeTab.toLowerCase()} missions as complete`);
+		toast.add(
+			m.marked_missions_complete({ count: currentOfType.length, type: activeTab.toLowerCase() })
+		);
 	}
 
 	function handleClearMission(missionId: string, isCompleted: boolean) {
@@ -114,7 +121,7 @@
 		if (selectedMission?.id === missionId) {
 			selectedMission = undefined;
 		}
-		toast.add('Mission cleared');
+		toast.add(m.mission_cleared());
 	}
 
 	function handleMarkComplete(missionId: string) {
@@ -132,7 +139,7 @@
 		if (selectedMission?.id === missionId) {
 			selectedMission = undefined;
 		}
-		toast.add('Mission marked as complete');
+		toast.add(m.mission_marked_complete());
 	}
 </script>
 
@@ -154,7 +161,7 @@
 						stateActive="bg-secondary-800"
 						padding="p-0"
 					>
-						Main Missions
+						{m.main_missions()}
 					</Tabs.Control>
 					<Tabs.Control
 						value="Sub"
@@ -164,7 +171,7 @@
 						stateActive="bg-secondary-800"
 						padding="p-0"
 					>
-						Sub Missions
+						{m.sub_missions()}
 					</Tabs.Control>
 				{/snippet}
 				{#snippet content()}
@@ -207,7 +214,7 @@
 			<div class="absolute right-4 top-4 flex items-center gap-2">
 				<TooltipButton
 					buttonClass="preset-outlined-surface-200-800 rounded-sm p-2 hover:bg-secondary-500/50"
-					popupLabel="Mark All Current as Complete"
+					popupLabel={m.mark_all_current_complete()}
 					position="bottom"
 					onclick={markAllCurrentAsComplete}
 				>
@@ -215,7 +222,7 @@
 				</TooltipButton>
 				<TooltipButton
 					buttonClass="preset-outlined-surface-200-800 rounded-sm p-2 hover:bg-secondary-500/50"
-					popupLabel="Clear All Current Missions"
+					popupLabel={m.clear_all_entity({ entity: m.current_missions() })}
 					position="bottom"
 					onclick={clearAllCurrentMissions}
 				>
@@ -223,7 +230,7 @@
 				</TooltipButton>
 				<TooltipButton
 					buttonClass="preset-outlined-surface-200-800 rounded-sm p-2 hover:bg-secondary-500/50"
-					popupLabel="Clear All Completed Missions"
+					popupLabel={m.clear_all_entity({ entity: m.completed_missions() })}
 					position="bottom"
 					onclick={clearAllCompletedMissions}
 				>
@@ -234,6 +241,6 @@
 	</div>
 {:else}
 	<div class="flex h-full w-full items-center justify-center">
-		<h2 class="h2">Select a Player to view missions</h2>
+		<h2 class="h2">{m.select_player_view_entity({ entity: m.missions() })}</h2>
 	</div>
 {/if}

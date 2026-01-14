@@ -17,6 +17,8 @@
 	import type { ValueChangeDetails } from '@zag-js/accordion';
 	import { sendAndWait } from '$utils/websocketUtils';
 	import { SectionHeader } from '$components/ui';
+	import * as m from '$i18n/messages';
+	import { c, p } from '$lib/utils/commonTranslations';
 
 	const appState = getAppState();
 	const modal = getModalState();
@@ -143,7 +145,7 @@
 	async function handleEditBaseName(base: Base) {
 		// @ts-ignore
 		const result = await modal.showModal<string>(TextInputModal, {
-			title: 'Edit Base Name',
+			title: m.edit_entity({ entity: m.base({ count: 1 }) }),
 			value: base.name || ''
 		});
 		if (!result) return;
@@ -165,11 +167,10 @@
 	async function handleUnlockMap() {
 		// @ts-ignore
 		const confirmed = await modal.showConfirmModal({
-			title: 'Unlock Full Map',
-			message:
-				'This will unlock the entire map by modifying your LocalData.sav file. You will need to select your LocalData.sav file. Continue?',
-			confirmText: 'Select File',
-			cancelText: 'Cancel'
+			title: m.unlock_full_map(),
+			message: m.unlock_map_confirm(),
+			confirmText: m.select_entity({ entity: m.file({ count: 1 }) }),
+			cancelText: m.cancel()
 		});
 
 		if (confirmed) {
@@ -196,11 +197,11 @@
 		<div class="flex flex-col gap-4">
 			<div class="flex flex-col gap-2">
 				<div class="flex items-center">
-					<SectionHeader text="Map Options">
+					<SectionHeader text={m.map_options()}>
 						{#snippet action()}
 							<button class="btn btn-sm flex items-center gap-2" onclick={handleUnlockMap}>
 								<Unlock class="h-4 w-4" />
-								<span>Unlock Map</span>
+								<span>{m.unlock_map()}</span>
 							</button>
 						{/snippet}
 					</SectionHeader>
@@ -211,14 +212,14 @@
 						onclick={() => (mapOptions.showOrigin = !mapOptions.showOrigin)}
 					>
 						<Target class="mr-2 h-6 w-6" />
-						<span>Origin</span>
+						<span>{m.origin()}</span>
 					</button>
 					<button
 						class="flex items-center space-x-2 {mapOptions.showFastTravel ? '' : 'opacity-25'} "
 						onclick={() => (mapOptions.showFastTravel = !mapOptions.showFastTravel)}
 					>
-						<img src={mapImg.fastTravel} alt="Fast Travel" class="mr-2 h-6 w-6" />
-						<span>Fast Travel</span>
+						<img src={mapImg.fastTravel} alt={m.fast_travel()} class="mr-2 h-6 w-6" />
+						<span>{m.fast_travel()}</span>
 						<span class="text-surface-500 text-xs">{fastTravelCount}</span>
 					</button>
 					{#if appState.saveFile}
@@ -226,16 +227,16 @@
 							class="flex items-center space-x-2 {mapOptions.showPlayers ? '' : 'opacity-25'}"
 							onclick={() => (mapOptions.showPlayers = !mapOptions.showPlayers)}
 						>
-							<img src={mapImg.player} alt="Players" class="mr-2 h-6 w-6" />
-							<span>Players</span>
+							<img src={mapImg.player} alt={m.player({ count: 2 })} class="mr-2 h-6 w-6" />
+							<span>{m.player({ count: 1 })}</span>
 							<span class="text-surface-500 text-xs">{loadedPlayerCount}/{totalPlayerCount}</span>
 						</button>
 						<button
 							class="flex items-center space-x-2 {mapOptions.showBases ? '' : 'opacity-25'}"
 							onclick={() => (mapOptions.showBases = !mapOptions.showBases)}
 						>
-							<img src={mapImg.baseCamp} alt="Bases" class="mr-2 h-6 w-6" />
-							<span>Bases</span>
+							<img src={mapImg.baseCamp} alt={m.base({ count: 2 })} class="mr-2 h-6 w-6" />
+							<span>{m.base({ count: 2 })}</span>
 							<span class="text-surface-500 text-xs">{loadedBaseCount}/{totalBaseCount}</span>
 						</button>
 					{/if}
@@ -244,24 +245,24 @@
 						class="flex items-center space-x-2 {mapOptions.showDungeons ? '' : 'opacity-25'}"
 						onclick={() => (mapOptions.showDungeons = !mapOptions.showDungeons)}
 					>
-						<img src={mapImg.dungeon} alt="Dungeons" class="mr-2 h-6 w-6" />
-						<span>Dungeons</span>
+						<img src={mapImg.dungeon} alt={m.dungeons()} class="mr-2 h-6 w-6" />
+						<span>{m.dungeons()}</span>
 						<span class="text-surface-500 text-xs">{dungeonCount}</span>
 					</button>
 					<button
 						class="flex items-center space-x-2 {mapOptions.showAlphaPals ? '' : 'opacity-25'}"
 						onclick={() => (mapOptions.showAlphaPals = !mapOptions.showAlphaPals)}
 					>
-						<img src={anubisImg} alt="Alpha Pals" class="mr-2 h-6 w-6" />
-						<span>Alpha Pals</span>
+						<img src={anubisImg} alt={m.alpha_pal(p.pals)} class="mr-2 h-6 w-6" />
+						<span>{m.alpha_pal(p.pals)}</span>
 						<span class="text-surface-500 text-xs">{alphaPalCount}</span>
 					</button>
 					<button
 						class="flex items-center space-x-2 {mapOptions.showPredatorPals ? '' : 'opacity-25'}"
 						onclick={() => (mapOptions.showPredatorPals = !mapOptions.showPredatorPals)}
 					>
-						<img src={starryonImg} alt="Predator Pals" class="mr-2 h-6 w-6" />
-						<span>Predator Pals</span>
+						<img src={starryonImg} alt={m.predator_pals(p.pals)} class="mr-2 h-6 w-6" />
+						<span>{m.predator_pals(p.pals)}</span>
 						<span class="text-surface-500 text-xs">{predatorPalCount}</span>
 					</button>
 				</div>
@@ -270,16 +271,14 @@
 				<div class="flex flex-col gap-2">
 					<div class="flex items-center gap-2">
 						<Users class="h-4 w-4" />
-						<span class="text-sm font-medium">Load Player</span>
+						<span class="text-sm font-medium">{m.load_player()}</span>
 					</div>
 					<PlayerList selected={selectedPlayerUid} onselect={handlePlayerLoaded} />
-					<p class="text-xs text-gray-500">Select a player to load and show on map</p>
 				</div>
-
 				<div class="flex flex-col gap-2">
 					<div class="flex items-center gap-2">
 						<Building class="h-4 w-4" />
-						<span class="text-sm font-medium">Load Guild/Bases</span>
+						<span class="text-sm font-medium">{m.load_guild_bases()}</span>
 					</div>
 					{#if appState.loadingGuild}
 						<div class="my-2 flex items-center gap-2 px-3 py-2 text-sm text-gray-400">
@@ -299,18 +298,18 @@
 									d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
 								></path>
 							</svg>
-							Loading guild...
+							{m.loading_entity({ entity: m.guild({ count: 1 }) })}
 						</div>
 					{:else}
 						<Combobox
 							value={selectedGuildId}
 							options={guildSelectOptions}
-							placeholder="Select Guild"
+							placeholder={m.select_entity({ entity: m.guild({ count: 1 }) })}
 							onChange={(value) => handleGuildSelect(value as string)}
 							selectClass="w-full"
 						/>
 					{/if}
-					<p class="text-xs text-gray-500">Select a guild to load its bases on the map</p>
+					<p class="text-xs text-gray-500">{m.select_guild_to_load_bases()}</p>
 				</div>
 
 				<Accordion
@@ -320,7 +319,9 @@
 				>
 					<Accordion.Item value="players" controlHover="hover:bg-secondary-500/25">
 						{#snippet control()}
-							<h2 class="text-lg font-bold">Loaded Players</h2>
+							<h2 class="text-lg font-bold">
+								{m.loaded_entity({ entity: m.player({ count: 2 }) })}
+							</h2>
 						{/snippet}
 						{#snippet panel()}
 							{#if mapOptions.showPlayers && loadedPlayerCount > 0}
@@ -333,12 +334,14 @@
 												onclick={() => handlePlayerFocus(player)}
 											>
 												<div class="font-bold">{player.nickname}</div>
-												<div class="text-xs">Level: {player.level} | HP: {player.hp}</div>
-												<div class="text-xs text-gray-400">
-													Location: {Math.round(mapCoords.x)}, {Math.round(mapCoords.y)}
+												<div class="text-xs">
+													{m.level()}: {player.level} | {m.hp()}: {player.hp}
 												</div>
 												<div class="text-xs text-gray-400">
-													Last Online: {new Date(player.last_online_time).toLocaleString()}
+													{m.location()}: {Math.round(mapCoords.x)}, {Math.round(mapCoords.y)}
+												</div>
+												<div class="text-xs text-gray-400">
+													{m.last_online()}: {new Date(player.last_online_time).toLocaleString()}
 												</div>
 											</button>
 										{/if}
@@ -346,14 +349,14 @@
 								</div>
 							{:else}
 								<p class="text-sm text-gray-500">
-									No players loaded yet. Use the selector above to load players.
+									{m.no_players_loaded()}
 								</p>
 							{/if}
 						{/snippet}
 					</Accordion.Item>
 					<Accordion.Item value="bases" controlHover="hover:bg-secondary-500/25">
 						{#snippet control()}
-							<h2 class="text-lg font-bold">Loaded Bases</h2>
+							<h2 class="text-lg font-bold">{m.loaded_entity({ entity: m.base({ count: 2 }) })}</h2>
 						{/snippet}
 						{#snippet panel()}
 							{#if mapOptions.showBases && loadedBaseCount > 0}
@@ -370,10 +373,10 @@
 											>
 												<div class="font-bold">{base.name}</div>
 												<div class="text-xs text-gray-400">
-													ID: {base.id}
+													{m.id()}: {base.id}
 												</div>
 												<div class="text-xs text-gray-400">
-													Location: {worldToMap(base.location.x, base.location.y).x}, {worldToMap(
+													{m.location()}: {worldToMap(base.location.x, base.location.y).x}, {worldToMap(
 														base.location.x,
 														base.location.y
 													).y}
@@ -384,7 +387,7 @@
 								</div>
 							{:else}
 								<p class="text-sm text-gray-500">
-									No bases loaded yet. Use the guild selector above to load bases.
+									{m.no_bases_loaded()}
 								</p>
 							{/if}
 						{/snippet}
@@ -393,15 +396,15 @@
 			{/if}
 
 			<div class="mt-auto flex flex-col gap-2">
-				<p class="text-sm text-gray-500">Click on the map to see detailed coordinates.</p>
+				<p class="text-sm text-gray-500">{m.click_map_coordinates()}</p>
 				<div class="flex flex-col">
 					<div class="flex items-center gap-2">
-						<img src={staticIcons.leftClickIcon} alt="Right Click" class=" h-6 w-6" />
-						<span class="text-xs text-gray-500">Left-click on a player or base to focus.</span>
+						<img src={staticIcons.leftClickIcon} alt="Left Click" class=" h-6 w-6" />
+						<span class="text-xs text-gray-500">{m.left_click_focus()}</span>
 					</div>
 					<div class="flex items-center gap-2">
 						<img src={staticIcons.rightClickIcon} alt="Right Click" class=" h-6 w-6" />
-						<span class="text-xs text-gray-500">Right-click on a base to edit its name.</span>
+						<span class="text-xs text-gray-500">{m.right_click_edit_base()}</span>
 					</div>
 				</div>
 			</div>
