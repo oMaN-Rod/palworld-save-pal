@@ -4,6 +4,8 @@
 	import { Save, X } from 'lucide-svelte';
 	import { friendshipData } from '$lib/data/friendship.svelte';
 	import { type Pal } from '$types';
+	import * as m from '$i18n/messages';
+	import { c } from '$lib/utils/commonTranslations';
 
 	let { pal, closeModal } = $props<{
 		pal: Pal;
@@ -52,12 +54,12 @@
 </script>
 
 <Card class="min-w-[min(100vw,24rem)] rounded-xl p-6 text-white shadow-lg">
-	<h3 class="mb-6 text-lg font-semibold">Edit Trust</h3>
+	<h3 class="mb-6 text-lg font-semibold">{m.edit_entity({ entity: m.trust() })}</h3>
 
 	<div class="space-y-6">
 		<!-- Trust Level Display -->
 		<div class="flex items-center justify-between">
-			<span class="text-sm text-white/80">Friendship Rank</span>
+			<span class="text-sm text-white/80">{m.friendship_rank()}</span>
 			<span class="rounded-full bg-[#db7c90] px-3 py-1 text-sm font-bold text-white">
 				Lv.{currentRank}
 			</span>
@@ -65,7 +67,8 @@
 
 		<!-- Custom Slider -->
 		<div>
-			<label for="trust-slider" class="mb-1 block text-sm font-medium text-white/80">Trust XP</label
+			<label for="trust-slider" class="mb-1 block text-sm font-medium text-white/80"
+				>{m.trust_xp()}</label
 			>
 			<input
 				id="trust-slider"
@@ -93,7 +96,7 @@
 				</button>
 			{/snippet}
 			{#snippet popup()}
-				<span>Save</span>
+				<span>{c.save}</span>
 			{/snippet}
 		</Tooltip>
 
@@ -104,7 +107,7 @@
 				</button>
 			{/snippet}
 			{#snippet popup()}
-				<span>Cancel</span>
+				<span>{m.cancel()}</span>
 			{/snippet}
 		</Tooltip>
 	</div>

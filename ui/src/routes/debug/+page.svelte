@@ -19,6 +19,8 @@
 	import { JSONEditor, type ContextMenuItem } from 'svelte-jsoneditor';
 	import { send, sendAndWait } from '$lib/utils/websocketUtils';
 	import type { CheckedChangeDetails } from '@zag-js/switch';
+	import * as m from '$i18n/messages';
+	import { c } from '$lib/utils/commonTranslations';
 
 	type JsonContent = {
 		content: { text: string };
@@ -32,6 +34,17 @@
 		| 'item_container'
 		| 'character_container'
 		| 'level';
+	const tabTitles = {
+		guild: c.guild,
+		base: c.base,
+		player: c.player,
+		pal: c.pal,
+		item_container: m.item_container(),
+		character_container: m.character_container(),
+		level: m.level()
+	};
+	const toggleRaw = m.toggle_entity({ entity: m.raw() });
+
 	const appState = getAppState();
 	const modal = getModalState();
 
@@ -145,15 +158,15 @@
 	const characterContainerSelectOptions = $derived.by(() => {
 		let options: { [key: string]: string } = {};
 		if (base) {
-			options[base.container_id] = 'Base Container';
+			options[base.container_id] = m.base_container();
 			return Object.entries(options).map(([id, name]) => ({
 				label: name,
 				value: id
 			}));
 		}
 		if (player) {
-			options[player.pal_box_id] = 'Pal Box';
-			options[player.otomo_container_id] = 'Party';
+			options[player.pal_box_id] = m.palbox();
+			options[player.otomo_container_id] = m.party();
 			return Object.entries(options).map(([id, name]) => ({
 				label: name,
 				value: id
@@ -177,11 +190,11 @@
 			}));
 		}
 		if (player) {
-			options['common'] = 'Common';
-			options['essential'] = 'Key Items';
-			options['weapon'] = 'Weapon';
-			options['armor'] = 'Armor';
-			options['food'] = 'Food';
+			options['common'] = m.common();
+			options['essential'] = m.key_items();
+			options['weapon'] = m.weapon({ count: 1 });
+			options['armor'] = m.armor();
+			options['food'] = m.food();
 			return Object.entries(options).map(([id, name]) => ({
 				label: name,
 				value: id
@@ -366,15 +379,6 @@
 		return items;
 	}
 
-	function formatTabTitle(tab: RawDataType) {
-		// replace underscores with spaces and capitalize the first letter of each word
-		return tab
-			.replace(/_/g, ' ')
-			.split(' ')
-			.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-			.join(' ');
-	}
-
 	function selectClass(tab: RawDataType) {
 		return activePage === tab ? 'bg-surface-900 ring ring-secondary-500' : 'bg-surface-900';
 	}
@@ -437,10 +441,10 @@
 
 	async function handleDeletePlayer() {
 		const confirmed = await modal.showConfirmModal({
-			title: 'Delete Player',
-			message: 'Are you sure you want to delete this player? This action cannot be undone.',
-			confirmText: 'Delete',
-			cancelText: 'Cancel'
+			title: m.delete_entity({ entity: c.player }),
+			message: m.delete_entity_by_name_confirm({ name: player?.nickname || player?.uid || '' }),
+			confirmText: m.delete(),
+			cancelText: m.cancel()
 		});
 		if (confirmed) {
 			send(MessageType.DELETE_PLAYER, { player_id: selectedPlayerId, origin: 'debug' });
@@ -451,10 +455,10 @@
 	async function handleDeleteGuild() {
 		console.log('handleDeleteGuild', selectedGuildId);
 		const confirmed = await modal.showConfirmModal({
-			title: 'Delete Guild',
-			message: 'Are you sure you want to delete this guild? This action cannot be undone.',
-			confirmText: 'Delete',
-			cancelText: 'Cancel'
+			title: m.delete_entity({ entity: c.guild }),
+			message: m.delete_entity_by_name_confirm({ name: guild?.name || guild?.id || '' }),
+			confirmText: m.delete(),
+			cancelText: m.cancel()
 		});
 		if (confirmed) {
 			send(MessageType.DELETE_GUILD, {
@@ -476,20 +480,20 @@
 <div class="grid h-full grid-cols-[25%_1fr] gap-2 p-2">
 	<div class="flex flex-col">
 		<button class="btn preset-filled-primary-500 mb-2 flex w-full" onclick={handleReset}>
-			<span class="font-medium"> Reset </span>
+			<span class="font-medium">{m.reset()}</span>
 			<RefreshCcw size="20" />
 		</button>
 
 		<div class="flex items-center gap-2">
 			<Combobox
-				label="Guild"
+				label={c.guild}
 				options={guildSelectOptions}
 				bind:value={selectedGuildId}
-				placeholder="Select Guild"
+				placeholder={m.select_entity({ entity: c.guild })}
 				onChange={handleSelectGuild}
 				selectClass={selectClass('guild')}
 			/>
-			<Tooltip label="Toggle Raw">
+			<Tooltip label={toggleRaw}>
 				<Switch
 					defaultChecked={false}
 					onCheckedChange={(e: CheckedChangeDetails) => {
@@ -507,7 +511,7 @@
 				</Switch>
 			</Tooltip>
 			<TooltipButton
-				popupLabel="Delete Guild"
+				popupLabel={m.delete_entity({ entity: c.guild })}
 				buttonClass="bg-surface-900 rounded-full hover:bg-red-500/50"
 				onclick={handleDeleteGuild}
 				disabled={!guild}
@@ -518,14 +522,14 @@
 		{#if baseSelectOptions.length > 0}
 			<div class="flex items-center gap-2">
 				<Combobox
-					label="Base"
+					label={c.base}
 					options={baseSelectOptions}
 					bind:value={selectedBaseId}
-					placeholder="Select Base"
+					placeholder={m.select_entity({ entity: c.base })}
 					onChange={handleSelectBase}
 					selectClass={selectClass('base')}
 				/>
-				<Tooltip label="Toggle Raw">
+				<Tooltip label={toggleRaw}>
 					<Switch
 						defaultChecked={false}
 						onCheckedChange={(e: CheckedChangeDetails) => {
@@ -547,14 +551,14 @@
 
 		<div class="flex items-center gap-2">
 			<Combobox
-				label="Player"
+				label={c.player}
 				options={playerSelectOptions}
 				bind:value={selectedPlayerId}
-				placeholder={guild ? 'Select Guild Player' : 'Select Player'}
+				placeholder={m.select_entity({ entity: c.player })}
 				onChange={handleSelectPlayer}
 				selectClass={selectClass('player')}
 			/>
-			<Tooltip label="Toggle Raw">
+			<Tooltip label={toggleRaw}>
 				<Switch
 					defaultChecked={false}
 					onCheckedChange={(e: CheckedChangeDetails) => {
@@ -572,7 +576,7 @@
 				</Switch>
 			</Tooltip>
 			<TooltipButton
-				popupLabel="Delete Player"
+				popupLabel={m.delete_entity({ entity: c.player })}
 				buttonClass="bg-surface-900 rounded-full hover:bg-red-500/50"
 				onclick={handleDeletePlayer}
 				disabled={!player}
@@ -584,14 +588,14 @@
 		{#if palSelectOptions.length > 0}
 			<div class="flex items-center gap-2">
 				<Combobox
-					label="Pal"
+					label={c.pal}
 					options={palSelectOptions}
 					bind:value={selectedPalId}
-					placeholder={base ? 'Select Base Pal' : 'Select Player Pal'}
+					placeholder={m.select_entity({ entity: c.pal })}
 					onChange={handleSelectPal}
 					selectClass={selectClass('pal')}
 				/>
-				<Tooltip label="Toggle Raw">
+				<Tooltip label={toggleRaw}>
 					<Switch
 						defaultChecked={false}
 						onCheckedChange={(e: CheckedChangeDetails) => {
@@ -614,16 +618,14 @@
 		{#if characterContainerSelectOptions.length > 0}
 			<div class="flex items-center gap-2">
 				<Combobox
-					label="Character Container"
+					label={m.character_container()}
 					options={characterContainerSelectOptions}
 					bind:value={selectedCharacterContainerId}
-					placeholder={base
-						? 'Select Base Character Container'
-						: 'Select Player Character Container'}
+					placeholder={m.select_entity({ entity: m.character_container() })}
 					onChange={handleSelectCharacterContainer}
 					selectClass={selectClass('character_container')}
 				/>
-				<Tooltip label="Toggle Raw">
+				<Tooltip label={toggleRaw}>
 					<Switch
 						defaultChecked={false}
 						onCheckedChange={(e: CheckedChangeDetails) => {
@@ -648,14 +650,14 @@
 		{#if itemContainerSelectOptions.length > 0}
 			<div class="flex items-center gap-2">
 				<Combobox
-					label="Item Container"
+					label={m.item_container()}
 					options={itemContainerSelectOptions}
 					bind:value={selectedItemContainerId}
-					placeholder={base ? 'Select Base Item Container' : 'Select Player Item Container'}
+					placeholder={m.select_entity({ entity: m.item_container() })}
 					onChange={handleSelectItemContainer}
 					selectClass={selectClass('item_container')}
 				/>
-				<Tooltip label="Toggle Raw">
+				<Tooltip label={m.toggle_entity({ entity: m.raw() })}>
 					<Switch
 						defaultChecked={false}
 						onCheckedChange={(e: CheckedChangeDetails) => {
@@ -685,17 +687,13 @@
 					value={key}
 					stateActive="border-b-secondary-500 opacity-100 text-secondary-500"
 				>
-					{formatTabTitle(key as RawDataType)}
+					{tabTitles[key as RawDataType]}
 				</Tabs.Control>
 			{/each}
 			<Tooltip baseClass="text-end m-auto flex items-center">
-				<span class=" text-red-500">READ ONLY ⚠️</span>
+				<span class=" text-red-500">{m.read_only()}</span>
 				{#snippet popup()}
-					<div class="flex flex-col">
-						<span>This data is read-only for the moment.</span>
-						<span>To modify data, use the appropriate in-app features.</span>
-						<span>Writing is in the roadmap, stay tuned!</span>
-					</div>
+					{m.read_only()}
 				{/snippet}
 			</Tooltip>
 		{/snippet}

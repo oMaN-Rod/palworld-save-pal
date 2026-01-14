@@ -13,6 +13,7 @@ import GamepassSaveList from './gamepass-save-list/GamepassSaveList.svelte';
 import LabResearch from './guilds/LabResearch.svelte';
 import LabResearchControls from './guilds/LabResearchControls.svelte';
 import Map from './map/Map.svelte';
+import { MissionDetails, MissionList } from './missions';
 import Modal from './modal/Modal.svelte';
 import NavBar from './nav-bar/NavBar.svelte';
 import PalCard from './pal-card/PalCard.svelte';
@@ -23,11 +24,13 @@ import PassiveSkillOption from './passive-skill-option/PassiveSkillOption.svelte
 import PlayerList from './player-list/PlayerList.svelte';
 import PlayerPresets from './player-presets/PlayerPresets.svelte';
 import PlayerStats from './player-stats/PlayerStats.svelte';
+import SkillPresets from './skill-presets/SkillPresets.svelte';
 import Souls from './souls/Souls.svelte';
 import Spinner from './spinner/Spinner.svelte';
 import StoragePresets from './storage-presets/StoragePresets.svelte';
 import Talents from './talents/Talents.svelte';
 import Toast from './toast/Toast.svelte';
+import Stopwatch from './ui/stopwatch/Stopwatch.svelte';
 
 export * from './modals';
 export {
@@ -40,6 +43,8 @@ export {
 	LabResearch,
 	LabResearchControls,
 	Map,
+	MissionDetails,
+	MissionList,
 	Modal,
 	NavBar,
 	PalBadge,
@@ -53,10 +58,12 @@ export {
 	PlayerList,
 	PlayerPresets,
 	PlayerStats,
+	SkillPresets,
 	Souls,
 	Spinner,
 	StatsBadges,
 	StatusBadge,
+	Stopwatch,
 	StoragePresets,
 	Talents,
 	Toast,

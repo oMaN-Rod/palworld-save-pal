@@ -1,0 +1,54 @@
+{
+  "Collection": {
+    "localized_name": "Mengumpulkan",
+    "description": null
+  },
+  "Cool": {
+    "localized_name": "Mendinginkan",
+    "description": null
+  },
+  "Deforest": {
+    "localized_name": "Menebang Kayu",
+    "description": null
+  },
+  "EmitFlame": {
+    "localized_name": "Menyalakan Api",
+    "description": null
+  },
+  "GenerateElectricity": {
+    "localized_name": "Menghasilkan Listrik",
+    "description": null
+  },
+  "Handcraft": {
+    "localized_name": "Kerajinan Tangan",
+    "description": null
+  },
+  "Mining": {
+    "localized_name": "Menambang",
+    "description": null
+  },
+  "MonsterFarm": {
+    "localized_name": "Beternak",
+    "description": null
+  },
+  "OilExtraction": {
+    "localized_name": "-",
+    "description": null
+  },
+  "ProductMedicine": {
+    "localized_name": "Memproduksi Obat",
+    "description": null
+  },
+  "Seeding": {
+    "localized_name": "Menanam Bibit",
+    "description": null
+  },
+  "Transport": {
+    "localized_name": "Mengangkut",
+    "description": null
+  },
+  "Watering": {
+    "localized_name": "Menyiram",
+    "description": null
+  }
+}

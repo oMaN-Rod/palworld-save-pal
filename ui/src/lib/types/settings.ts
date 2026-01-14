@@ -2,25 +2,37 @@ export type SupportedLanguage =
 	| 'de'
 	| 'en'
 	| 'es'
+	| 'es-mx'
 	| 'fr'
 	| 'it'
+	| 'id-id'
 	| 'ko'
-	| 'pt-BR'
+	| 'pl'
+	| 'pt-br'
 	| 'ru'
-	| 'zh-Hans'
-	| 'zh-Hant';
+	| 'th'
+	| 'tr'
+	| 'vi'
+	| 'zh-hans'
+	| 'zh-hant';
 
 export const languages: Record<SupportedLanguage, string> = {
 	de: 'Deutsch',
 	en: 'English',
 	es: 'Español',
+	'es-mx': 'Español (México)',
 	fr: 'Français',
+	'id-id': 'Bahasa Indonesia',
 	it: 'Italiano',
 	ko: '한국어',
-	'pt-BR': 'Português',
+	pl: 'Polski',
+	'pt-br': 'Português',
 	ru: 'Русский',
-	'zh-Hans': '简体中文',
-	'zh-Hant': '繁體中文'
+	th: 'ไทย',
+	tr: 'Türkçe',
+	vi: 'Tiếng Việt',
+	'zh-hans': '简体中文',
+	'zh-hant': '繁體中文'
 };
 
 export interface AppSettings {

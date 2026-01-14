@@ -1,0 +1,757 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "about": "Hakkında",
+  "about_built_by": "<s>Geliştirici olan biri</s> tarafından, geliştirici olan bazı kişiler tarafından eğlence için oluşturulmuştur.",
+  "about_check_out": "Çıkış yapmak",
+  "about_for_more_info": "daha fazla bilgi için.",
+  "about_github_repo": "Github deposu",
+  "accessory": "Aksesuar",
+  "actions": "Eylemler",
+  "active": "Aktif",
+  "active_filters_count": "Aktif Filtreler ({count})",
+  "activity": "Etkinlik",
+  "add": "Eklemek",
+  "add_all_implants": "Tüm İmplantları Ekle",
+  "add_all_pal_gear": "Tüm {pal} Ekipmanlarını Ekle",
+  "add_all_pals_to_entity": "Tüm {pals}'ları {entity}'e ekle",
+  "add_all_skills": "Tüm Becerileri Ekle",
+  "add_count_pals": "{count} {type} {pals} ekle",
+  "add_entity": "{entity} ekle",
+  "add_new_pal": "Yeni {pal} Ekle",
+  "add_new_pal_to_entity": "{entity}'nize yeni bir Arkadaş ekleyin",
+  "add_new_tag": "Yeni Etiket Ekle",
+  "add_notes_about_cloned_pals": "Bu klonlanmış {pals} hakkında not ekleyin...",
+  "add_notes_about_imported_pals": "İçe aktarılan bu {pals} hakkında not ekleyin...",
+  "add_other_key_items": "Diğer Önemli Öğeleri Ekle",
+  "add_pal_to_base": "{base} Üssüne yeni bir {pal} ekleyin",
+  "add_preset_entity": "{entity} ön ayarı ekle",
+  "add_skill": "Beceri Ekle",
+  "add_skills_preset": "{type} beceri ön ayarını ekle",
+  "add_tag": "Etiket Ekle",
+  "add_to_collection": "Koleksiyona Ekle",
+  "add_to_favorites": "Favorilere ekle",
+  "added_label": "Eklendi:",
+  "all": "Tüm",
+  "all_entity": "Hepsi {entity}",
+  "alpha": "Alfa",
+  "alpha_pal": "Alfa {pals}",
+  "ammo": "Cephane",
+  "ancient_technology_points": "Kadim Teknoloji Puanları",
+  "and_more_count": "+{count} daha",
+  "apply_preset": "Bir ön ayar uygulama",
+  "apply_preset_to_selected": "Ön ayarı seçili {pals} öğesine uygula",
+  "apply_presets": "Ön Ayarları Uygula",
+  "apply_selected_entity": "Seçilen {entity}'ı uygula",
+  "archive_entity": "Arşiv {entity}",
+  "armor": "Zırh",
+  "attack": "Saldırı",
+  "available_entity": "Mevcut {entity}",
+  "available_saves": "Mevcut Kayıtlar",
+  "available_slots": "Mevcut Yuvalar",
+  "available_tags": "Mevcut Etiketler",
+  "avg_clones_per_pal": "Ortalama {pal} başına klonlar:",
+  "avg_level": "Ortalama Düzey",
+  "avg_pals_per_collection": "Ortalama Koleksiyon başına {pals}:",
+  "avg_transfers_per_pal": "Ortalama {pal} başına transferler:",
+  "base_container": "Temel Konteyner",
+  "base_name": "Temel Ad",
+  "basecamp_level": "Ana Kamp Seviyesi",
+  "blueprint": "Taslak",
+  "body": "Vücut",
+  "boss": "Patron",
+  "box": "Kutu",
+  "bulk_clone_to_ups_failed": "UPS'e toplu klonlama başarısız oldu. Lütfen tekrar deneyin.",
+  "cancel": "İptal etmek",
+  "cannot_fill": "{target} kontenjanınızı dolduramazsınız, {count} slota daha ihtiyacınız var.",
+  "cannot_paste_here": "Buraya yapıştırılamıyor (henüz™)",
+  "category": "Kategori",
+  "change_player_name": "Oyuncu Adını Değiştir",
+  "changes": "Değişiklikler",
+  "character": "Karakter",
+  "character_container": "Karakter Kabı",
+  "cheat_mode": "Hile Modu",
+  "chest": "Göğüs",
+  "choose_a_entity": "Bir {entity} seçin",
+  "choose_entity": "Varlık Seçin",
+  "clear": "Temizlemek",
+  "clear_all": "Tümünü Temizle",
+  "clear_all_entity": "Tümünü temizle {entity}",
+  "clear_completed_missions_confirm": "Tüm {count} tamamlanmış {type} görevlerini temizlemek istediğinizden emin misiniz?",
+  "clear_current_missions_confirm": "Mevcut tüm {count} {type} görevlerini temizlemek istediğinizden emin misiniz?",
+  "clear_entity": "{entity} öğesini temizle",
+  "clear_selected": "Seçileni temizle",
+  "clear_selected_entity": "Seçilenleri temizle {entity}",
+  "clear_selection": "Seçimi Temizle",
+  "cleared_completed_missions": "{count} temizlendi, {type} görevi tamamlandı",
+  "cleared_current_missions": "{count} mevcut {type} görevleri temizlendi",
+  "click_map_coordinates": "Ayrıntılı koordinatları görmek için haritaya tıklayın.",
+  "click_to_complete": "Tamamlamak için tıklayın",
+  "clipboard_cleared": "Pano temizlendi",
+  "clone_pal_to_entity": "{pal}'yi {entity}'e klonlayın",
+  "clone_pals_to_entity": "{count} {pals}'yi {entity}'ye klonlayın",
+  "clone_prefix": "Klon Öneki",
+  "clone_selected_pal": "Seçilen klon {pal}",
+  "clone_to_entity": "{entity}'a klonla",
+  "clone_to_entity_failed": "{entity}'a klonlama başarısız oldu. Lütfen tekrar deneyin.",
+  "clones": "Klonlar",
+  "cloning_count_pals": "Klonlama {count} {pals}",
+  "close_drawer": "Çekmeceyi kapat",
+  "close_toast": "Tostu kapat",
+  "collection_delete_warning": "Bu koleksiyondaki arkadaşlar silinmeyecek ancak artık bu koleksiyonla ilişkilendirilmeyecekler.",
+  "collection_name": "Koleksiyon adı",
+  "collection_optional": "Koleksiyon (İsteğe bağlı)",
+  "collections": "Koleksiyonlar",
+  "common": "Yaygın",
+  "completed": "Tamamlanmış",
+  "completed_missions": "Tamamlanan Görevler",
+  "confirm": "Onaylamak",
+  "consume": "Sarf malzemesi",
+  "container_entity": "{entity} Konteyner",
+  "copy": "Kopyala",
+  "create": "Yaratmak",
+  "create_entity_name": "\"{name}\" {entity} oluştur",
+  "create_first_entity": "İlk {entity}'nizi oluşturun",
+  "create_new_collection": "Yeni Koleksiyon Oluştur",
+  "create_pals_or_import": "Başlamak için yeni {pals} oluşturun veya bunları kaydetme dosyalarınızdan içe aktarın.",
+  "create_preset_from_container": "Kapsayıcıdan ön ayar oluştur",
+  "create_preset_from_current": "Geçerli {entity} öğesinden ön ayar oluştur",
+  "created": "Oluşturuldu",
+  "current_collection": "Güncel Koleksiyon",
+  "current_missions": "Mevcut Görevler",
+  "current_save_file": "Geçerli Kaydetme Dosyası",
+  "debug": "Hata ayıklama",
+  "debug_mode": "Hata Ayıklama Modu",
+  "defense": "Savunma",
+  "delete": "Silmek",
+  "delete_count_entities_confirm": "{count} seçili {entity} öğesini silmek istediğinizden emin misiniz?",
+  "delete_entire_guild": "Loncanın tamamını sil",
+  "delete_entity": "{entity} öğesini sil",
+  "delete_entity_by_name_confirm": "{name} silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.",
+  "delete_entity_confirm": "Bu {entity} öğesini silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.",
+  "delete_entity_warning": "\"{name}\" silmek istediğinizden emin misiniz? {warning}",
+  "delete_selected_entity": "Seçilen {entity} öğesini sil",
+  "delete_selected_entity_confirm": "Seçilen {entity} öğesini silmek istediğinizden emin misiniz?",
+  "deleted_entity": "Silindi {count} {entity}",
+  "description_optional": "Açıklama (isteğe bağlı)",
+  "dimensional_pal_storage": "Boyutlu {pal} Depolama",
+  "distribution": "Dağıtım",
+  "download": "İndirmek",
+  "download_modified_save": "Değiştirilmiş Level.sav dosyasını indirin",
+  "dps": "DPS",
+  "dps_not_available": "Seçilen oyuncunun DPS'si yok",
+  "drag_drop_zip": "veya zip dosyanızı buraya sürükleyip bırakın",
+  "dungeons": "Zindanlar",
+  "edit": "Düzenlemek",
+  "edit_entity": "{entity}'ı düzenle",
+  "edit_entity_name": "{entity} adını düzenleyin",
+  "edit_tags_for_pals": "{count} {pals} için Etiketleri Düzenle",
+  "effect": "Etki",
+  "egg": "Yumurta",
+  "element_and_type": "Eleman ve Tip",
+  "element_types": "Eleman Türleri",
+  "elemental_distribution": "Element Dağılımı",
+  "empty": "Boş",
+  "enter_item_count": "Öğe Sayısını Girin",
+  "enter_name_for_entity": "Yeni {entity} için bir ad girin:",
+  "enter_new_name_for_entity": "{entity} için yeni adı girin:",
+  "enter_tag_name": "Etiket adını girin",
+  "entity_count_available": "{count} {entity} mevcut",
+  "entity_not_available": "{entity} mevcut değil.",
+  "epic": "Destansı",
+  "error": "Hata",
+  "error_copied": "Hata ayrıntıları panoya kopyalandı",
+  "error_copy_failed": "Hata ayrıntıları kopyalanamadı",
+  "error_nuke_operation": "Nükleer operasyon sırasında bir hata oluştu. Lütfen tekrar deneyin.",
+  "essential": "Gerekli",
+  "export": "İhracat",
+  "export_pals": "Dışa aktar {count} {pals}",
+  "export_preset": "Ön ayarı dosyaya aktar",
+  "export_selected": "Seçileni Dışa Aktar",
+  "export_target": "İhracat Hedefi",
+  "export_to": "Şuraya Aktar:",
+  "exporting_count_selected_pals": "Seçilen {count} dışa aktarılıyor {pals}",
+  "export_note_message": "Dışa aktarılan arkadaşlar hedef konuma kopyalanacak. Orijinaller UPS'te kalacaktır.",
+  "export_to_target": "{target}'a aktar",
+  "failed_create_pal": "Yeni arkadaş oluşturulamadı. Lütfen tekrar deneyin.",
+  "failed_export_pals": "{count} {pals} dışa aktarılamadı",
+  "failed_get_pal_data": "Arkadaş verileri alınamadı",
+  "failed_nuke_ups": "UPS'i bombalamak başarısız oldu. Lütfen tekrar deneyin.",
+  "fast_travel": "Hızlı Seyahat",
+  "favorites": "Favoriler",
+  "feed": "Beslemek",
+  "fill": "Doldurmak",
+  "fill_container": "Kabı Doldur",
+  "fill_current_entity": "Geçerli {entity}'yi doldurun",
+  "fill_entity": "{entity} doldurun",
+  "filter_and_sort": "Filtrele ve Sırala",
+  "filtered": "Filtrelendi",
+  "food": "Yiyecek",
+  "for": "için",
+  "friendship_rank": "Arkadaşlık Sıralaması",
+  "gender": "Cinsiyet",
+  "glider": "Planör",
+  "global_pal_storage": "Küresel {pal} Depolama",
+  "gps": "Küresel Konumlama Sistemi",
+  "gps_not_available": "Bu kaydetme dosyasında GPS mevcut değil",
+  "grid_view": "Izgara Görünümü",
+  "guild_name": "Lonca Adı",
+  "head": "KAFA",
+  "heal_all_in_entity": "{entity}'da herkesi iyileştirin",
+  "heal_selected_pals": "İyileştirme seçildi {pals}",
+  "health": "Sağlık",
+  "how_many_clones": "Kaç klon?",
+  "hp": "HP",
+  "id": "İD",
+  "ivs": "IV'ler",
+  "import": "İçe aktarmak",
+  "import_failed": "İçe aktarma başarısız oldu. Lütfen tekrar deneyin.",
+  "import_from": "İçe Aktarma Kaynağı",
+  "import_from_save": "Kaydet'ten içe aktar",
+  "import_preset": "Ön ayarı dosyadan içe aktar",
+  "import_to_ups_message": "{pals} öğesini UPS'e aktarmak için kaynağı ve seçenekleri seçin.",
+  "import_to_ups_title": "Dosyayı UPS'e Kaydet",
+  "in_inventory": "envanterde",
+  "info": "Bilgi",
+  "invalid_option_selected": "Geçersiz seçenek seçildi",
+  "inventory": "Envanter",
+  "item_container": "Öğe Kabı",
+  "item_copied": "{name} panoya kopyalandı",
+  "key_items": "Anahtar Öğeler",
+  "lab": "Laboratuar",
+  "language": "Dil",
+  "last_accessed": "Son erişim",
+  "last_online": "Son Çevrimiçi",
+  "last_updated_date": "Son güncelleme: {date}",
+  "later": "Daha sonra",
+  "learn_all_skills": "Tüm Becerileri Öğrenin",
+  "learn_skills_matching_type": "Arkadaş Türüyle Eşleşen Tüm Becerileri Öğrenin",
+  "learned_skills": "Öğrenilen Beceriler",
+  "left_click_focus": "Odaklanmak için bir oyuncuya veya üsse sol tıklayın.",
+  "legendary": "Efsanevi",
+  "level": "Seviye",
+  "level_abbr": "Seviye",
+  "level_abbr_value": "Seviye {value}",
+  "level_distribution": "Seviye Dağılımı",
+  "level_sync_display": "Seviye senkronizasyonu {from} → {to}",
+  "level_value": "Seviye {level}",
+  "list_view": "Liste Görünümü",
+  "load_guild_bases": "Lonca/Üsleri Yükle",
+  "load_player": "Oynatıcıyı Yükle",
+  "loaded_entity": "{entity} yüklendi",
+  "loading_data": "Veriler yükleniyor...",
+  "loading_entity": "{entity} yükleniyor",
+  "loadout": "Ekipman",
+  "location": "Konum",
+  "lock_all": "Tümünü Kilitle",
+  "locked": "Kilitli",
+  "lucky": "Şanslı",
+  "lucky_pals": "Şanslı {pals}",
+  "main_missions": "Ana Görevler",
+  "manage_collection_for_pals": "{count} {pals} için Koleksiyonu Yönet",
+  "map": "Harita",
+  "map_coordinate_origin_point": "Harita koordinat başlangıç ​​noktası",
+  "map_coordinates": "Harita Koordinatları",
+  "map_options": "Harita Seçenekleri",
+  "mark_all_current_complete": "Mevcut Olanların Tümünü Tamamlandı Olarak İşaretle",
+  "mark_complete": "Tamamlandı Olarak İşaretle",
+  "mark_complete_confirm": "Tüm {count} mevcut {type} görevlerini tamamlanmış olarak işaretlemek istediğinizden emin misiniz?",
+  "marked_missions_complete": "{count} {type} görevleri tamamlandı olarak işaretlendi",
+  "material": "Malzeme",
+  "max": "Maksimum",
+  "max_ivs": "Maksimum IV'ler",
+  "max_level": "Maksimum Seviye",
+  "max_level_pals": "Maksimum Seviye {pals}",
+  "max_out_pal_stats": "{pal} istatistikleri maksimuma çıkarın 💉💪",
+  "max_out_selected_pals": "Seçilen maksimum çıkış {pals}",
+  "max_souls": "Maksimum Ruh Sayısı",
+  "max_work_suitability": "İşe Uygunluğu Maksimuma Çıkarın",
+  "menu": "Menü",
+  "min_level": "Minimum Seviye",
+  "mission": "Misyon",
+  "mission_cleared": "Görev temizlendi",
+  "mission_marked_complete": "Görev tamamlandı olarak işaretlendi",
+  "missions": "Görevler",
+  "mixed_collections": "Karma Koleksiyonlar",
+  "mixed_collections_message": "Seçilen {pals} farklı koleksiyonlarda veya bazılarının koleksiyonu yok",
+  "modified": "Değiştirildi",
+  "modified_label": "Değiştirildi:",
+  "module": "Modül",
+  "monster_equip_weapon": "Canavar Silahını Donat",
+  "most_popular": "En Popüler",
+  "move": "Taşınmak",
+  "move_all_to_collection": "Seçilen tüm {pals} öğelerini \"{name}\" konumuna taşı",
+  "move_to_entity": "{entity}'a taşı",
+  "moved_pals_to_collection": "{count} {pals} koleksiyona taşındı",
+  "name": "İsim",
+  "new_pal_prefix": "Yeni Pal Öneki",
+  "new_version_available": "GitHub'da Palworld Save Pal'ın yeni bir sürümü mevcut.",
+  "next": "Sonraki",
+  "nickname": "Takma ad",
+  "no_archived_entity": "Arşivlenmiş bir şey yok {entity}",
+  "no_bases_loaded": "Henüz hiçbir üs yüklenmedi. Üsleri yüklemek için yukarıdaki lonca seçiciyi kullanın.",
+  "no_changes": "Değişiklik yok",
+  "no_collection": "Koleksiyon Yok",
+  "no_completed_missions_to_clear": "Temizlenecek tamamlanmış görev yok",
+  "no_current_missions_to_clear": "Temizlenecek mevcut görev yok",
+  "no_current_missions_to_complete": "Tamamlanacak mevcut görev yok",
+  "no_detailed_info": "Detaylı bilgi mevcut değil",
+  "no_entity_matching": "\"{query}\" ile eşleşen {entity} bulunamadı",
+  "no_entity_selected": "{entity} seçilmedi",
+  "no_entity_yet": "Henüz {entity} yok",
+  "no_guild_bases_found": "Lonca Üssü bulunamadı",
+  "no_guild_found": "Lonca bulunamadı",
+  "no_level_sync": "Seviye Senkronizasyonu Yok",
+  "no_missions_found": "{type} görevi bulunamadı",
+  "no_pals_available": "{pals} verisi yok",
+  "no_pals_in_storage": "Depolamada {pals} yok",
+  "no_players_loaded": "Henüz oyuncu yüklenmedi. Oyuncuları yüklemek için yukarıdaki seçiciyi kullanın.",
+  "no_save_loaded": "Kayıt dosyası yüklenmedi",
+  "no_skills_learned": "Öğrenilen beceri yok",
+  "no_slots_available_in_entity": "Bu {entity}'da kullanılabilir slot yok.",
+  "no_storage_containers": "Saklama Kabı Yok",
+  "none": "Hiçbiri",
+  "normal": "Normal",
+  "note": "Not",
+  "notes_optional": "Notlar (isteğe bağlı)",
+  "nuke_all_presets": "Tüm ön ayarları iptal edin",
+  "nuke_presets_confirm": "Tüm ön ayarları silmek istediğinizden emin misiniz? Bu eylem varsayılanları geri yükleyecektir ve geri alınamaz.",
+  "nuke_ups": "Nuke UPS - TÜMÜNÜ Sil {pals}",
+  "of": "ile ilgili",
+  "oil_rig": "Petrol Sondajı",
+  "oil_rig_pals": "Petrol Sondajı {pals}",
+  "open_drawer": "Çekmeceyi aç",
+  "oops_something_wrong": "Hata... Bir şeyler ters gitti",
+  "or_drag_and_drop": "veya sürükleyip bırakın",
+  "origin": "Menşei",
+  "origin_label": "Kaynak:",
+  "origin_point": "Menşei (0,0)",
+  "page": "Sayfa",
+  "page_of_pages": "{current} / {total} Sayfası",
+  "pal_box_party": "Palbox + parti",
+  "pal_cannot_be_trait": "{type} Arkadaş {trait} olamaz",
+  "pal_types": "Arkadaş Türleri",
+  "palbox": "Palbox",
+  "paldeck": "Paldeck",
+  "pals_in_storage": "{pals} depoda",
+  "party": "Parti",
+  "passive": "Pasif",
+  "paste": "Yapıştır",
+  "predator": "Yırtıcı",
+  "predator_pals": "Yırtıcı {pals}",
+  "preset_name": "Ön ayar adı",
+  "preset_select_details": "Ayrıntıları görüntülemek için listeden bir ön ayar seçin",
+  "presets_precedence": "Ön ayarların önceliği şu şekildedir: pal lock ➡️ element lock ➡️ varsayılan. Pal, öğe veya varsayılan başına yalnızca bir ön ayar seçin.",
+  "previous": "Öncesi",
+  "progress": "İlerlemek",
+  "pwr": "Güç",
+  "raid": "Yağma",
+  "range": "Menzil",
+  "rare": "Nadir",
+  "raw": "Çiğ",
+  "read_only": "SADECE OKUYUN",
+  "ready_to_fill": "{target}'yi {count} {pals} ile doldurmaya hazır.",
+  "refresh": "Yenile (Kaydedilmemiş değişiklikleri temizle)",
+  "refresh_entity": "{entity} yenile",
+  "remove": "Kaldırmak",
+  "remove_all_from_collections": "Seçilen tüm {pals} koleksiyonlarından kaldır",
+  "remove_from_collection": "Koleksiyondan kaldır",
+  "remove_from_favorites": "Favorilerden kaldır",
+  "remove_pal": "Pal'ı kaldır",
+  "removed_pals_from_collections": "{count} {pals} koleksiyonlardan kaldırıldı",
+  "research_cost": "Araştırma Maliyeti",
+  "research_node": "Araştırma Noktası",
+  "reset": "Sıfırla",
+  "restore_hp": "HP'yi geri yükle",
+  "rewards": "Ödüller",
+  "right_click_edit_base": "Adını düzenlemek için bir üssün üzerine sağ tıklayın.",
+  "save_as_preset": "Ön ayar olarak kaydet",
+  "save_changes": "Değişiklikleri Kaydet",
+  "save_file_to_ups": "Dosyayı Kaydet 🡆 UPS",
+  "save_id": "Kimliği kaydet",
+  "save_platform": "Platformu Kaydet",
+  "search": "Aramak",
+  "search_by_name_nickname": "Ada veya takma isme göre arayın",
+  "search_entity": "{entity} ara",
+  "search_pals": "{pals} adını, karakter kimliğini veya notlara göre arayın...",
+  "search_placeholder": "{entity} ara...",
+  "select": "Seçme",
+  "select_valid_player": "Lütfen geçerli bir oyuncu seçin",
+  "select_a_entity": "Bir {entity} seçin",
+  "select_a_entity_to_view": "Ayrıntıları görüntülemek için bir {entity} seçin",
+  "select_all_current_base": "Geçerli tabandaki tümünü seç",
+  "select_all_filtered_pals": "Filtrelenenlerin tümünü seç {pals} ({count})",
+  "select_all_in": "Tümünü seç",
+  "select_all_page_pals": "Geçerli sayfadaki tüm {pals}'yi seç ({count})",
+  "select_all_ups_pals": "UPS'teki tüm {pals}'yi seçin ({count})",
+  "select_entity": "{entity} öğesini seçin",
+  "select_entity_to_edit": "Düzenlemek için bir {entity} seçin",
+  "select_entity_to_load": "Yüklemek ve haritada göstermek için bir {entity} seçin",
+  "select_guild_to_load_bases": "Üslerini haritaya yüklemek için bir lonca seçin",
+  "select_pal_edit_description": "{pals} Oyuncuların Palbox'ında, Lonca Üslerinde, Global Pal Depolamasında, Dimensional Pal Depolamasında veya Universal Pal Depolamasında seçilebilir",
+  "select_player_view_entity": "{entity} görüntülemek için bir Oyuncu seçin",
+  "selected": "Seçildi",
+  "selected_of_total": "{selected} / {total} seçildi",
+  "selected_tags": "Seçilen Etiketler",
+  "set_entity_item_count": "{entity} öğe sayısını ayarla",
+  "set_inventory_count": "Envanter Sayısını Ayarla",
+  "set_item_count": "Öğe Sayısını Ayarla",
+  "settings": "Ayarlar",
+  "shield": "Kalkan",
+  "shortcuts": "Kısayollar",
+  "show_archived": "Arşivlenenleri göster",
+  "showing_pals": "{start} - {end} / {total} {pals} gösteriliyor",
+  "size": "Boyut",
+  "skills": "Yetenekler",
+  "slots_available_in_entity": "Bu {entity}'de {count} yuva mevcut.",
+  "sort": "Düzenlemek",
+  "sort_by": "Göre sırala",
+  "sort_by_entity": "{entity}'a göre sırala",
+  "sort_inventory": "Envanteri Sırala",
+  "souls": "Ruhlar",
+  "special_categories": "Özel Kategoriler",
+  "special_weapon": "Özel Silah",
+  "sphere_module": "Küre Modülü",
+  "stamina": "Dayanıklılık",
+  "statistics": "İstatistikler",
+  "stats": "İstatistikler",
+  "stomach": "Karın",
+  "steam": "Buhar",
+  "steam_description": "Steam/Mac: Level.sav kaydetme dosyası",
+  "storage": "Depolamak",
+  "storage_container": "Saklama Kabı",
+  "structures": "Yapılar",
+  "sub_missions": "Alt Görevler",
+  "success": "Başarı",
+  "successfully_cloned_pal_to_entity": "{pal} başarıyla {entity}'ye klonlandı",
+  "successfully_cloned_pals_to_entity": "{count} {pals} başarıyla {entity}'ye klonlandı",
+  "successfully_deleted_entity": "{count} {pals}, {entity} öğesinden başarıyla silindi",
+  "successfully_exported_pals": "{count} / {total} {pals} başarıyla dışa aktarıldı",
+  "summon": "Çağır",
+  "summoned": "Çağrıldı",
+  "summoned_pals": "{pals} çağrıldı",
+  "support": "Destek",
+  "syncing": "Senkronizasyon",
+  "tag_changes": "Etiket Değişiklikleri",
+  "tag_delete_warning": "Bu etiket, ona sahip olan tüm Arkadaşlardan kaldırılacaktır.",
+  "tags_for_pals": "{count} {pals} için etiketler",
+  "target_available": "Hedef mevcut",
+  "tags_optional": "Etiketler (isteğe bağlı)",
+  "talents_ivs": "Yetenekler (IV'ler)",
+  "technology_points": "Teknoloji Puanları",
+  "to_collection": "Koleksiyona",
+  "toggle_entity": "{entity}'ı değiştir",
+  "total": "Toplam",
+  "total_clones": "Toplam Klonlar",
+  "total_count": "Toplam Sayı",
+  "total_exports": "Toplam İhracat",
+  "total_pals": "Toplam {pals}",
+  "transfer_all_pals": "{pals} tümünü aktar",
+  "transfer_pal": "{pal} aktar",
+  "trust": "Güven",
+  "trust_level": "Güven Düzeyi",
+  "trust_xp": "XP'ye güvenin",
+  "type_label": "Tür: {type}",
+  "unarchive_entity": "Arşivden kaldır {entity}",
+  "uncommon": "Yaygın olmayan",
+  "universal_pal_storage": "Evrensel {pal} Depolama",
+  "unknown": "Bilinmiyor",
+  "unknown_collection": "Bilinmeyen Koleksiyon",
+  "unlock_all": "Tümünün Kilidini Aç",
+  "unlock_all_category_research": "Tüm {category} Araştırmalarının Kilidini Açın",
+  "unlock_full_map": "Tam Haritanın Kilidini Aç",
+  "unlock_map": "Haritanın Kilidini Aç",
+  "unlock_map_confirm": "Bu, LocalData.sav dosyanızı değiştirerek tüm haritanın kilidini açacaktır. LocalData.sav dosyanızı seçmeniz gerekecektir. Devam etmek?",
+  "unlock_prerequisite_entity": "Önce ön koşulun kilidini açın {entity}",
+  "unlocks": "Kilidi açar",
+  "update_available": "Güncelleme Mevcut!",
+  "update_now": "Şimdi Güncelle",
+  "updated_tags_for_pals": "{count} {pals} için güncellenmiş etiketler",
+  "upload": "Yüklemek",
+  "upload_a_file": "Bir dosya yükle",
+  "upload_zip_files": "Sıkıştırılmış kaydetme dosyalarınızı yüklemek için tıklayın",
+  "ups": "GÜÇ KAYNAĞI",
+  "ups_already_empty": "UPS zaten boştu",
+  "used_slots": "Kullanılan Slotlar",
+  "warning": "Uyarı",
+  "weight": "Ağırlık",
+  "work_suitability": "İşe Uygunluk",
+  "working_on_it": "Bip Boop, üzerinde çalışıyoruz!",
+  "workload": "İş yükü",
+  "workspeed": "Çalışma hızı",
+  "work_speed": "Çalışma Hızı",
+  "world_coordinates": "Dünya Koordinatları",
+  "world_name": "Dünya Adı",
+  "xbox_game_pass": "Xbox Oyun Geçişi",
+  "xbox_game_pass_description": "Xbox Game Pass: Container.index dosyası",
+  "zoom_in_out": "Yakınlaştır/Uzaklaştır",
+  "active_skill": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Aktif Beceri",
+        "countPlural=other": "Aktif Beceriler"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "base": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Temel",
+        "countPlural=other": "Üsler"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "collection": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Koleksiyon",
+        "countPlural=other": "Koleksiyonlar"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "file": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Dosya",
+        "countPlural=other": "Dosyalar"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "filter": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Filtre",
+        "countPlural=other": "Filtreler"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "guild": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Lonca",
+        "countPlural=other": "Loncalar"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "human": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "İnsan",
+        "countPlural=other": "İnsanlar"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "item": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Öğe",
+        "countPlural=other": "Öğeler"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "pal": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Dostum",
+        "countPlural=other": "Arkadaşlar"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "passive_skill": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Pasif Beceri",
+        "countPlural=other": "Pasif Beceriler"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "player": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Oyuncu",
+        "countPlural=other": "Oyuncular"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "preset": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Ön ayar",
+        "countPlural=other": "Ön ayarlar"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "save": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Kaydetmek",
+        "countPlural=other": "kaydeder"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "tag": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Etiket",
+        "countPlural=other": "Etiketler"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "technology": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Teknoloji",
+        "countPlural=other": "Teknolojiler"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "transfer": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Aktarım",
+        "countPlural=other": "Transferler"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "type": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Tip",
+        "countPlural=other": "Türler"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "weapon": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Silah",
+        "countPlural=other": "Silahlar"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ]
+}

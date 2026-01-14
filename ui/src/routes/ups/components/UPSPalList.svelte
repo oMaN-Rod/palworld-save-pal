@@ -2,6 +2,8 @@
 	import UPSPalBadge from './UPSPalBadge.svelte';
 	import { getUpsState } from '$states';
 	import type { UPSPal } from '$types';
+	import * as m from '$i18n/messages';
+	import { c } from '$utils/commonTranslations';
 
 	const upsState = getUpsState();
 
@@ -49,7 +51,7 @@
 						</span>
 					{/if}
 					<span class="text-surface-600 dark:text-surface-300 text-sm">
-						Lv. {upsPal.level}
+						{m.level_abbr()}. {upsPal.level}
 					</span>
 				</div>
 
@@ -64,7 +66,7 @@
 							</span>
 						{/each}
 						{#if upsPal.tags.length > 3}
-							<span class="text-surface-500 text-xs">+{upsPal.tags.length - 3} more</span>
+							<span class="text-surface-500 text-xs">{m.and_more_count({ count: upsPal.tags.length - 3 })}</span>
 						{/if}
 					</div>
 				{/if}
@@ -80,19 +82,19 @@
 				<div class="text-surface-500 dark:text-surface-400 space-y-1 text-xs">
 					{#if upsPal.source_save_file}
 						<div>
-							Source: <span class="font-medium">{upsPal.source_save_file}</span>
+							{m.origin_label()} <span class="font-medium">{upsPal.source_save_file}</span>
 							{#if upsPal.source_player_name}
-								• Player: <span class="font-medium">{upsPal.source_player_name}</span>
+								• {c.player}: <span class="font-medium">{upsPal.source_player_name}</span>
 							{/if}
 							{#if upsPal.source_storage_type}
-								• From: <span class="font-medium uppercase">{upsPal.source_storage_type}</span>
+								• {m.import_from()}: <span class="font-medium uppercase">{upsPal.source_storage_type}</span>
 							{/if}
 						</div>
 					{/if}
 					<div>
-						Added: <span class="font-medium">{formatDate(upsPal.created_at)}</span>
+						{m.added_label()} <span class="font-medium">{formatDate(upsPal.created_at)}</span>
 						{#if upsPal.updated_at !== upsPal.created_at}
-							• Modified: <span class="font-medium">{formatDate(upsPal.updated_at)}</span>
+							• {m.modified_label()} <span class="font-medium">{formatDate(upsPal.updated_at)}</span>
 						{/if}
 					</div>
 				</div>
@@ -102,17 +104,17 @@
 			<div class="flex-shrink-0 text-right">
 				<div class="text-surface-500 dark:text-surface-400 space-y-1 text-xs">
 					{#if upsPal.transfer_count > 0}
-						<div title="Transfer count">
+						<div title={m.transfer({ count: 2 })}>
 							📤 {upsPal.transfer_count}
 						</div>
 					{/if}
 					{#if upsPal.clone_count > 0}
-						<div title="Clone count">
+						<div title={m.clones()}>
 							🔄 {upsPal.clone_count}
 						</div>
 					{/if}
 					{#if upsPal.last_accessed_at}
-						<div title="Last accessed">
+						<div title={m.last_accessed()}>
 							👁️ {new Date(upsPal.last_accessed_at).toLocaleDateString()}
 						</div>
 					{/if}

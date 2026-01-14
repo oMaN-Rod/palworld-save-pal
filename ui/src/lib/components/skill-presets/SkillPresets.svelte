@@ -6,9 +6,11 @@
 	import { cn } from '$theme';
 	import { type PassiveSkill, type PresetProfile, type SelectOption } from '$types';
 	import { assetLoader, calculateFilters, deepCopy } from '$utils';
+	import { c } from '$utils/commonTranslations';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import { Play, Trash } from 'lucide-svelte';
 	import type { ValueChangeDetails } from '@zag-js/accordion';
+	import * as m from '$i18n/messages';
 
 	let { onSelect } = $props<{
 		onSelect: (type: 'active' | 'passive', value: string[]) => void;
@@ -84,10 +86,10 @@
 		const presetId = type === 'active' ? selectedActiveSkillPreset : selectedPassiveSkillPreset;
 		if (!presetId) return;
 		const confirmed = await modal.showConfirmModal({
-			title: 'Delete Preset',
-			message: `Are you sure you want to delete the selected preset?`,
-			confirmText: 'Delete',
-			cancelText: 'Cancel'
+			title: m.delete_entity({ entity: c.preset }),
+			message: m.delete_selected_entity_confirm({ entity: c.preset }),
+			confirmText: m.delete(),
+			cancelText: m.cancel()
 		});
 		if (!confirmed) return;
 		await presetsData.removePresetProfiles([presetId]);
@@ -134,7 +136,7 @@
 >
 	<Accordion.Item value="active" controlHover="hover:bg-secondary-500/25">
 		{#snippet control()}
-			Active Skills
+			{c.activeSkills}
 		{/snippet}
 		{#snippet panel()}
 			<div class="flex flex-col">
@@ -173,14 +175,14 @@
 				</Combobox>
 				<div class="flex justify-end">
 					<TooltipButton
-						popupLabel="Apply selected preset"
+						popupLabel={m.apply_selected_entity({ entity: c.preset })}
 						onclick={() => handleApplyPreset('active')}
 						disabled={!selectedActiveSkillPreset}
 					>
 						<Play class="text-primary-500" size="24" />
 					</TooltipButton>
 					<TooltipButton
-						popupLabel="Delete selected preset"
+						popupLabel={m.delete_selected_entity({ entity: c.preset })}
 						onclick={() => handleDeletePreset('active')}
 						disabled={!selectedActiveSkillPreset}
 					>
@@ -192,7 +194,7 @@
 	</Accordion.Item>
 	<Accordion.Item value="passive" controlHover="hover:bg-secondary-500/25">
 		{#snippet control()}
-			Passive Skills
+			{c.passiveSkills}
 		{/snippet}
 		{#snippet panel()}
 			<div class="flex flex-col">
@@ -238,14 +240,14 @@
 				</Combobox>
 				<div class="flex justify-end">
 					<TooltipButton
-						popupLabel="Apply selected preset"
+						popupLabel={m.apply_selected_entity({ entity: c.preset })}
 						onclick={() => handleApplyPreset('passive')}
 						disabled={!selectedPassiveSkillPreset}
 					>
 						<Play class="text-primary-500" size="24" />
 					</TooltipButton>
 					<TooltipButton
-						popupLabel="Delete selected preset"
+						popupLabel={m.delete_selected_entity({ entity: c.preset })}
 						onclick={() => handleDeletePreset('passive')}
 						disabled={!selectedPassiveSkillPreset}
 					>

@@ -1,0 +1,1622 @@
+{
+  "Altar": {
+    "localized_name": "Altar Pemanggilan",
+    "description": "Dengan mempersembahkan tablet batu dengan gambar Pal, kamu dapat memanggil Pal yang kuat ke markas. Persiapan yang matang menentukan hidup dan mati dalam pertarungan."
+  },
+  "Andon": {
+    "localized_name": "Lentera Kertas Jepang",
+    "description": "Lentera kertas Jepang untuk dekorasi. Gunakan saat membuat bangunan bergaya Jepang."
+  },
+  "Barrel01_Iron": {
+    "localized_name": "Drum Merah",
+    "description": "Drum berwarna merah untuk dekorasi."
+  },
+  "Barrel02_Iron": {
+    "localized_name": "Drum Biru",
+    "description": "Drum berwarna biru untuk dekorasi."
+  },
+  "Barrel03_Iron": {
+    "localized_name": "Drum Hijau",
+    "description": "Drum berwarna hijau untuk dekorasi."
+  },
+  "Barrel_Wood": {
+    "localized_name": "Tong Kayu",
+    "description": "Tong kayu untuk menyimpan item."
+  },
+  "BaseCampBattleDirector": {
+    "localized_name": "Bel Peringatan",
+    "description": "Lonceng di markas yang mengubah status waspada Pal. Dapat dengan sesuka hati mengubah kondisi Pal antara siap melawan musuh dari luar atau berkonsentrasi pada pekerjaan di markas."
+  },
+  "BaseCampItemDispenser": {
+    "localized_name": "Mesin Pengambil Barang",
+    "description": "Fasilitas yang dapat memungkinkanmu mengambil item dari semua peti yang berada di markas sesuka hati."
+  },
+  "BaseCampWorkHard": {
+    "localized_name": "Pos Pengamatan",
+    "description": "Dapat memberikan instruksi kerja atau memberi izin/larangan untuk setiap pekerjaan individual pada Pal yang ada di markas."
+  },
+  "BaseCampWorkerExtraStation": {
+    "localized_name": "Terminal Operasi Palbox",
+    "description": "Terminal yang dapat mengoperasikan Palbox dari jarak jauh. Tempatkan Pal di tempat yang diinginkan, lalu lanjutkan membuat markas sesuai keinginanmu."
+  },
+  "BathTub_Stone": {
+    "localized_name": "Bak Mandi Antik",
+    "description": "Bak mandi antik untuk dekorasi."
+  },
+  "Believer_Banner": {
+    "localized_name": "Tirai Vertikal Kelompok Perlindungan Pal",
+    "description": "Tirai vertikal dekorasi Kelompok Perlindungan Pal."
+  },
+  "Believer_Flag": {
+    "localized_name": "Bendera Pendukung Kelompok Perlindungan Pal",
+    "description": "Bendera dekorasi pendukung Kelompok Perlindungan Pal."
+  },
+  "Bench_Wood": {
+    "localized_name": "Bangku Kayu",
+    "description": "Bangku kayu untuk dekorasi."
+  },
+  "BlastFurnace": {
+    "localized_name": "Tungku Primitif",
+    "description": "Dapat meleburkan Batangan Logam. Kualitasnya tidak terlalu baik, dan prosesnya lama. Membutuhkan Pal Api untuk menyalakan api."
+  },
+  "BlastFurnace2": {
+    "localized_name": "Tungku Modern",
+    "description": "Dapat meleburkan Batangan Logam Murni. Kualitasnya sedikit meningkat, tetapi lama prosesnya masih tidak memuaskan. Membutuhkan Pal Api untuk menyalakan api."
+  },
+  "BlastFurnace3": {
+    "localized_name": "Tungku Listrik",
+    "description": "Dapat meleburkan Batangan Logam Metal Pal. Ini memerlukan listrik, tetapi dapat melebur dengan lebih cepat. Membutuhkan Pal Api untuk menyalakan api."
+  },
+  "BlastFurnace4": {
+    "localized_name": "Tungku Raksasa",
+    "description": "Dapat meleburkan Hexolit. Karena ukurannya besar, beberapa Pal harus bekerja sama mengerjakan peleburannya. Membutuhkan Pal Api untuk menyalakan api."
+  },
+  "Bonsai": {
+    "localized_name": "Bonsai",
+    "description": "Bonsai untuk dekorasi. Gunakan saat membuat bangunan bergaya Jepang."
+  },
+  "Box01_Iron": {
+    "localized_name": "Kontainer Kecil",
+    "description": "Kontainer kecil untuk menyimpan item."
+  },
+  "Box01_Stone": {
+    "localized_name": "Tempah Sampah Anyaman Antik",
+    "description": "Tempah sampah anyaman yang antik untuk dekorasi."
+  },
+  "Box02_Iron": {
+    "localized_name": "Kontainer dengan Penutup Kain",
+    "description": "Kontainer dengan penutup kain untuk menyimpan item."
+  },
+  "Box_Wood": {
+    "localized_name": "Kotak Kayu",
+    "description": "Kotak kayu untuk menyimpan item."
+  },
+  "BreedFarm": {
+    "localized_name": "Tempat Pembiakkan",
+    "description": "Dengan menugaskan 2 ekor Pal, ♂ dan ♀, mereka akan menghasilkan telur. Membutuhkan Bolu untuk diletakkan di fasilitas ini."
+  },
+  "BuildableGoddessStatue": {
+    "localized_name": "Patung Kekuatan",
+    "description": "Patung batu yang tercatat di legenda Pulau Palpagos. Persembahkan Patung Lifmunk dan kamu akan mendapatkan kekuatan misterius."
+  },
+  "Byobu": {
+    "localized_name": "Partisi Lipat",
+    "description": "Partisi lipat untuk dekorasi. Gunakan saat membuat bangunan bergaya Jepang."
+  },
+  "CableCoil01_Iron": {
+    "localized_name": "Gulungan Kabel",
+    "description": "Gulungan kabel untuk dekorasi."
+  },
+  "CampFire": {
+    "localized_name": "Api Unggun",
+    "description": "Fasilitas yang diperlukan untuk memasak makanan. Hanya untuk memanggang bahan-bahan yang sederhana. Membutuhkan Pal Api untuk menyalakan api."
+  },
+  "CandleStand": {
+    "localized_name": "Tempat Lilin Agung",
+    "description": "Lilin megah yang dinyalakan oleh api yang disembah oleh Sekutu Api Abadi. Sumber cahaya yang dapat dipasang di lantai. Membutuhkan Pal Api untuk menyalakannya."
+  },
+  "Cauldron": {
+    "localized_name": "Kuali Penyihir",
+    "description": "Jika diletakkan di markas, akan meningkatkan kecepatan memproduksi obat. Meletakkan 2 buah atau lebih tidak akan ada efeknya."
+  },
+  "CeilingLamp": {
+    "localized_name": "Lampu Gantung",
+    "description": "Sumber cahaya yang menerangi markas meskipun di malam hari. Dapat dipasang di langit-langit. Membutuhkan listrik, tetapi bisa menerangi wilayah yang lebih luas."
+  },
+  "Chair01_Iron": {
+    "localized_name": "Kursi Kulit",
+    "description": "Kursi kulit untuk dekorasi."
+  },
+  "Chair01_Pal": {
+    "localized_name": "Kursi Kodok",
+    "description": "Kursi lucu untuk dekorasi."
+  },
+  "Chair01_Stone": {
+    "localized_name": "Kursi Kayu Antik",
+    "description": "Kursi kayu antik untuk dekorasi."
+  },
+  "Chair01_Wood": {
+    "localized_name": "Kursi Kayu",
+    "description": "Kursi kayu untuk dekorasi."
+  },
+  "Chair02_Iron": {
+    "localized_name": "Kursi Besi",
+    "description": "Kursi besi untuk dekorasi."
+  },
+  "Chair02_Stone": {
+    "localized_name": "Kursi Kayu Hijau Antik",
+    "description": "Kursi kayu warna hijau yang antik untuk dekorasi."
+  },
+  "CharacterRankUp": {
+    "localized_name": "Tabung Ekstraktor Pal",
+    "description": "Fasilitas untuk menaikkan peringkat Pal. Pal dapat melampaui batas kemampuan fisiknya dengan memberikannya ekstrak dari Pal sejenis."
+  },
+  "Clock01_Stone": {
+    "localized_name": "Lemari Jam Antik",
+    "description": "Lemari jam antik untuk dekorasi. Rusak, tidak bisa menunjukkan waktu."
+  },
+  "Clock01_Wall_Iron": {
+    "localized_name": "Jam Dinding",
+    "description": "Jam dinding untuk dekorasi. Rusak, tidak bisa menunjukkan waktu."
+  },
+  "CoalPit": {
+    "localized_name": "Tambang Batu Bara",
+    "description": "Fasilitas untuk memproduksi Batu Bara. Menambang Batu Bara adalah pekerjaan berat dan membutuhkan kekuatan fisik. Serahkan pada Pal yang ahli menambang."
+  },
+  "CompositeDesk": {
+    "localized_name": "Meja Desain",
+    "description": "Fasilitas yang dapat mengombinasikan beberapa desain untuk menciptakan desain yang lebih canggih."
+  },
+  "ConservationGroupBannerA": {
+    "localized_name": "Bendera Kelompok Perlindungan Pal",
+    "description": "Bendera Kelompok Perlindungan Pal untuk dekorasi."
+  },
+  "ConservationGroupBannerB": {
+    "localized_name": "Banner Kelompok Perlindungan Pal",
+    "description": "Umbul-Umbul Kelompok Perlindungan Pal untuk dekorasi."
+  },
+  "Container01_Iron": {
+    "localized_name": "Kontainer Besar",
+    "description": "Kontainer besar untuk menyimpan item. Desainnya meniru artefak peradaban kuno yang berjaya di masa lalu."
+  },
+  "CookingStove": {
+    "localized_name": "Kuali Masak",
+    "description": "Fasilitas yang diperlukan untuk memasak makanan. Gunakan kuali masak untuk memperbanyak variasi masakan. Membutuhkan Pal Api untuk menyalakan api."
+  },
+  "Cooler": {
+    "localized_name": "Pendingin Es",
+    "description": "Alat yang meniupkan angin dingin dan menurunkan suhu di markas. Ini tidak terlalu sejuk, tetapi cukup untuk menahan cuaca panas. Membutuhkan Pal Es untuk mendinginkan."
+  },
+  "CoolerBox": {
+    "localized_name": "Kotak Pendingin",
+    "description": "Tempat penyimpanan makanan berukuran kecil. Tugaskan Pal Es ke kotak ini dan makanan di dalamnya tidak akan cepat basi."
+  },
+  "CoolerPalFoodBox": {
+    "localized_name": "Kotak Makan Pal Berpendingin",
+    "description": "Kotak makanan yang bisa menyimpan makanan tetap dingin. Tugaskan Pal Es ke kotak ini dan makanan di dalamnya tidak akan cepat basi."
+  },
+  "CopperPit": {
+    "localized_name": "Lokasi Tambang Logam",
+    "description": "Fasilitas untuk memproduksi Bijih Logam. Menambang Bijih Logam adalah pekerjaan berat dan membutuhkan kekuatan fisik. Serahkan pada Pal yang ahli menambang."
+  },
+  "CopperPit_2": {
+    "localized_name": "Lokasi Tambang Logam Ⅱ",
+    "description": "Fasilitas untuk memproduksi Bijih Logam dalam jumlah besar. Menambang Bijih Logam adalah pekerjaan berat dan membutuhkan kekuatan fisik. Serahkan pada Pal yang ahli menambang."
+  },
+  "Counter_Wood": {
+    "localized_name": "Konter Kayu",
+    "description": "Konter kayu untuk dekorasi."
+  },
+  "Crusher": {
+    "localized_name": "Mesin Penghancur",
+    "description": "Fasilitas untuk menghancurkan Batu dan Kayu lalu mengubahnya menjadi material lain. Membutuhkan Pal yang memiliki keahlian |Penyiraman| untuk menggerakkan kincir air."
+  },
+  "CrystalPit": {
+    "localized_name": "Lokasi Tambang Kuarsa Hexo",
+    "description": "Fasilitas untuk membuat Kuarsa Hexo. Menggali Kuarsa Hexo membutuhkan kekuatan fisik yang besar. Serahkan pada Pal yang ahli menggali."
+  },
+  "Curtain01_Wall_Stone": {
+    "localized_name": "Gorden Antik",
+    "description": "Gorden antik untuk dekorasi. Dapat dipasang di tembok."
+  },
+  "DamagedScarecrow": {
+    "localized_name": "Boneka Latihan",
+    "description": "Boneka untuk latihan yang berbentuk Pengullet. Hanya bisa diletakkan di tempat yang luas."
+  },
+  "Decal_PalSticker_PinkCat": {
+    "localized_name": "-",
+    "description": "-"
+  },
+  "DefenseBowGun": {
+    "localized_name": "Busur Silang Statis",
+    "description": "Fasilitas pertahanan untuk menempatkan Pal agar siap bertarung. Perlu Anak Panah untuk menggunakannya. Masukkan peluru ke peti supaya Pal yang ditempatkan memuat peluru secara otomatis."
+  },
+  "DefenseMachinegun": {
+    "localized_name": "Senapan Mesin Statis",
+    "description": "Fasilitas pertahanan untuk menempatkan Pal agar siap bertarung. Perlu Peluru Senapan untuk menggunakannya. Masukkan peluru ke peti supaya Pal yang ditempatkan memuat peluru secara otomatis."
+  },
+  "DefenseMissile": {
+    "localized_name": "Peluncur Rudal Statis",
+    "description": "Fasilitas pertahanan untuk menempatkan Pal agar siap bertarung. Perlu Bom Roket untuk menggunakannya. Masukkan peluru ke peti supaya Pal yang ditempatkan memuat peluru secara otomatis."
+  },
+  "DefenseWait": {
+    "localized_name": "Karung Pasir",
+    "description": "Fasilitas pertahanan untuk melindungi markas dari lawan. Jika ditempatkan di sini, Pal tidak akan melakukan pekerjaan lain selain mengintai dan bersiap menghadapi pertarungan."
+  },
+  "DefenseWall": {
+    "localized_name": "Benteng Batu",
+    "description": "Benteng raksasa untuk mencegah invasi musuh. Terbuat dari batu sehingga cukup kokoh."
+  },
+  "DefenseWall_Metal": {
+    "localized_name": "Benteng Logam",
+    "description": "Benteng raksasa untuk mencegah invasi musuh. Terbuat dari logam sehingga sangat kokoh."
+  },
+  "DefenseWall_Wood": {
+    "localized_name": "Benteng Kayu",
+    "description": "Benteng raksasa untuk mencegah invasi musuh. Terbuat dari kayu sehingga sangat rapuh."
+  },
+  "Desk01_Iron": {
+    "localized_name": "Meja Besi",
+    "description": "Meja besi untuk dekorasi."
+  },
+  "Desk01_Stone": {
+    "localized_name": "Meja Antik",
+    "description": "Meja antik untuk dekorasi."
+  },
+  "DimensionPalStorage": {
+    "localized_name": "Ruang Penyimpanan Pal Dimensional",
+    "description": "Fasilitas yang dapat menyimpan sejumlah besar Pal yang tertangkap. Setiap anggota guild bebas memasukkan dan mengeluarkan Pal yang disimpan di sini. Pengaturan privasi dapat diubah untuk penyimpanan pribadi Pal."
+  },
+  "DismantlingConveyor": {
+    "localized_name": "Konveyor Pemotongan Pal",
+    "description": "Instalasi impian yang secara otomatis memotong Pal yang dimasukkan."
+  },
+  "DisplayCharacter": {
+    "localized_name": "Kandang Pajangan",
+    "description": "Kandang untuk mengamati Pal yang telah ditangkap. Pal yang ada di dalamnya tidak bisa bertarung atau bekerja, tetapi mereka juga tidak akan kelaparan."
+  },
+  "ElectricCooler": {
+    "localized_name": "Pendingin Listrik",
+    "description": "Alat yang meniupkan angin dingin dan menurunkan suhu di markas. Karena menggunakan daya listrik, alat ini bisa menurunkan suhu. Membutuhkan Pal Es untuk mendinginkan."
+  },
+  "ElectricGenerator": {
+    "localized_name": "Alat Pembangkit Listrik",
+    "description": "Fasilitas untuk menyimpan listrik yang dihasilkan Pal Listrik. Peralatan listrik tidak akan bisa menyala tanpa ini."
+  },
+  "ElectricGenerator_Large": {
+    "localized_name": "Alat Pembangkit Listrik Besar",
+    "description": "Fasilitas untuk menyimpan listrik yang dihasilkan Pal Listrik. Ukurannya lebih besar dan efisiensi dalam menghasilkan listrik juga meningkat."
+  },
+  "ElectricHatchingPalEgg": {
+    "localized_name": "Inkubator Elektrik",
+    "description": "Alat untuk mengerami telur Pal. Membutuhkan sumber daya listrik, tetapi ini akan menjaga bagian dalam inkubator pada suhu yang sesuai secara otomatis."
+  },
+  "ElectricHeater": {
+    "localized_name": "Pemanas Listrik",
+    "description": "Alat yang meniupkan angin hangat dan menaikkan suhu di markas. Karena menggunakan daya listrik, alat ini bisa menaikkan suhu. Membutuhkan Pal Api untuk menyalakan api."
+  },
+  "ElectricKitchen": {
+    "localized_name": "Dapur Listrik",
+    "description": "Fasilitas yang diperlukan untuk memasak makanan. Membutuhkan listrik, tetapi dapat memasak banyak makanan dengan cepat. Membutuhkan Pal Api untuk menyalakan api."
+  },
+  "EnergyStorage_Electric": {
+    "localized_name": "Akumulator",
+    "description": "Fasilitas untuk menyimpan kelebihan listrik yang dihasilkan dari Alat Pembangkit Listrik."
+  },
+  "Expedition": {
+    "localized_name": "Pos Ekspedisi Pal",
+    "description": "Fasilitas untuk mengirim Pal melakukan ekspedisi ke gua dan sebagainya. Pal yang dikirim akan bertarung dan mengumpulkan item di tempat-tempat tersebut, lalu membawa item tersebut ke markas."
+  },
+  "Factory_Hard_01": {
+    "localized_name": "Meja Kerja Kualitas Tinggi",
+    "description": "Meja Kerja Kualitas Tinggi untuk membuat item atau perisai. Tempatnya masih kecil dan belum bisa melakukan produksi dengan cepat. Membutuhkan Pal yang bisa melakukan kerajinan tangan."
+  },
+  "Factory_Hard_02": {
+    "localized_name": "Pabrik Perakitan",
+    "description": "Pabrik untuk membuat item atau perisai. Dengan berbagi tugas, waktu produksi jadi sedikit lebih cepat. Membutuhkan Pal yang bisa melakukan kerajinan tangan."
+  },
+  "Factory_Hard_03": {
+    "localized_name": "Pabrik Perakitan II",
+    "description": "Pabrik untuk membuat item atau perisai. Pekerjaan disegmentasi sehingga produksi jadi jauh lebih cepat. Membutuhkan Pal yang bisa melakukan kerajinan tangan."
+  },
+  "Factory_Hard_04": {
+    "localized_name": "Bengkel Peradaban Tingkat Tinggi",
+    "description": "Pabrik untuk membuat item atau perisai. Menggunakan mesin canggih, memungkinkan produksi dengan kecepatan tinggi. Membutuhkan Pal yang bisa melakukan kerajinan tangan."
+  },
+  "Factory_Money": {
+    "localized_name": "Pabrik Pembuatan Uang",
+    "description": "Pabrik untuk memproduksi Uang. Akibat beban mental, SAN para pekerjanya akan berkurang. Membutuhkan Pal yang bisa melakukan kerajinan tangan."
+  },
+  "FarmBlockV2_Berries": {
+    "localized_name": "Ladang Beri",
+    "description": "Ladang yang bisa ditanami Buah Beri Merah. Waktu panennya cepat, tetapi tidak terlalu mengenyangkan saat dimakan. Membutuhkan beberapa Pal untuk menanam benih, menyiram air, dan memanen."
+  },
+  "FarmBlockV2_Carrot": {
+    "localized_name": "Ladang Wortel",
+    "description": "Ladang yang bisa ditanami Wortel. Membutuhkan waktu untuk panen, tetapi akan memperbanyak variasi masakan. Membutuhkan beberapa Pal untuk menanam benih, menyiram air, dan memanen."
+  },
+  "FarmBlockV2_Lettuce": {
+    "localized_name": "Ladang Selada",
+    "description": "Ladang yang bisa ditanami Selada. Membutuhkan waktu untuk panen, tetapi akan memperbanyak variasi masakan. Membutuhkan beberapa Pal untuk menanam benih, menyiram air, dan memanen."
+  },
+  "FarmBlockV2_Onion": {
+    "localized_name": "Ladang Bawang Bombai",
+    "description": "Ladang yang bisa ditanami Bawang Bombai. Membutuhkan waktu untuk panen, tetapi akan memperbanyak variasi masakan. Membutuhkan beberapa Pal untuk menanam benih, menyiram air, dan memanen."
+  },
+  "FarmBlockV2_Potato": {
+    "localized_name": "Ladang Kentang",
+    "description": "Ladang yang bisa ditanami Kentang. Membutuhkan waktu untuk panen, tetapi akan memperbanyak variasi masakan. Membutuhkan beberapa Pal untuk menanam benih, menyiram air, dan memanen."
+  },
+  "FarmBlockV2_tomato": {
+    "localized_name": "Ladang Tomat",
+    "description": "Ladang yang bisa ditanami Tomat. Membutuhkan waktu untuk panen, tetapi akan memperbanyak variasi masakan. Membutuhkan beberapa Pal untuk menanam benih, menyiram air, dan memanen."
+  },
+  "FarmBlockV2_wheet": {
+    "localized_name": "Ladang Gandum",
+    "description": "Ladang yang bisa ditanami Gandum. Lumayan membutuhkan waktu hingga panen. Membutuhkan beberapa Pal untuk menanam benih, menyiram air, dan memanen."
+  },
+  "Farm_SkillFruits": {
+    "localized_name": "Kebun Buah Skill",
+    "description": "Ladang untuk menanam Buah Skill. Dengan menanam buah yang asli di tanah, kamu dapat memanen buah dari jenis yang sama berkali lipat."
+  },
+  "FastTravelPoint": {
+    "localized_name": "Patung Elang Raksasa",
+    "description": "Monumen batu berbentuk Chikipi. Membangunnya bisa memungkinkan Fast Travel."
+  },
+  "FireCult_Banner": {
+    "localized_name": "Tirai Vertikal Sekutu Api Abadi",
+    "description": "Tirai vertikal dekorasi Sekutu Api Abadi."
+  },
+  "FireCult_Flag": {
+    "localized_name": "Bendera Pendukung Sekutu Api Abadi",
+    "description": "Bendera dekorasi pendukung Sekutu Api Abadi."
+  },
+  "FireStand": {
+    "localized_name": "Tempat Lilin Upacara",
+    "description": "Tempat Lilin Upacara yang dinyalakan oleh api yang disembah oleh Sekutu Api Abadi. Sumber cahaya yang dapat dipasang di lantai. Membutuhkan Pal Api untuk menyalakannya."
+  },
+  "FishingPond1": {
+    "localized_name": "Kolam Pemancingan",
+    "description": "Kolam pemancingan yang menyediakan peralatan pancing. Tugaskan Pal dan ia akan memancing dengan santai. Membutuhkan Pal yang bisa melakukan kerajinan tangan."
+  },
+  "FishingPond2": {
+    "localized_name": "Kolam Pemancingan Besar",
+    "description": "Kolam pemancingan besar yang menyediakan peralatan pancing. Karena kolamnya luas, jadi bisa memancing Pal yang lebih besar. Membutuhkan Pal yang bisa melakukan kerajinan tangan."
+  },
+  "FlourMill": {
+    "localized_name": "Penggiling Tepung",
+    "description": "Fasilitas untuk menggiling Gandum untuk membuat Tepung Gandum. Membutuhkan Pal yang memiliki keahlian |Penyiraman| untuk menggerakkan kincir air."
+  },
+  "FlowerBed": {
+    "localized_name": "Petak Bunga",
+    "description": "Jika diletakkan di markas, akan meningkatkan kecepatan memanen. Meletakkan 2 buah atau lebih tidak akan ada efeknya."
+  },
+  "Fountain": {
+    "localized_name": "Air Mancur",
+    "description": "Jika diletakkan di markas, akan meningkatkan kecepatan penyiraman. Meletakkan 2 buah atau lebih tidak akan ada efeknya."
+  },
+  "Fudukue": {
+    "localized_name": "Meja Tulis Jepang",
+    "description": "Meja tulis Jepang untuk dekorasi. Gunakan saat membuat bangunan bergaya Jepang."
+  },
+  "GarbageBag_Iron": {
+    "localized_name": "Kantong Sampah",
+    "description": "Kantong sampah untuk dekorasi."
+  },
+  "Glass_DiagonalWall": {
+    "localized_name": "Tembok Kaca Diagonal",
+    "description": "Tembok diagonal yang dibangun di atas fondasi segitiga untuk mencegah penyusup masuk. Terbuat dari kaca solid sehingga sangat kokoh."
+  },
+  "Glass_DoorWall": {
+    "localized_name": "Tembok Kaca dengan Pintu",
+    "description": "Pintu yang dibangun di atas fondasi sebagai jalan masuk. Terbuat dari kaca solid sehingga sangat kokoh."
+  },
+  "Glass_Fence": {
+    "localized_name": "Pagar Kaca",
+    "description": "Pagar yang dibangun di atas fondasi atau atap untuk mencegah sesuatu terjatuh. Terbuat dari kaca keras sehingga sangat kokoh."
+  },
+  "Glass_PyramidRoof": {
+    "localized_name": "Atap Kaca Piramida",
+    "description": "Atap berbentuk piramida yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Terbuat dari kaca solid sehingga sangat kokoh."
+  },
+  "Glass_SlantedRoof": {
+    "localized_name": "Atap Kaca Miring",
+    "description": "Atap miring yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Terbuat dari kaca solid sehingga sangat kokoh."
+  },
+  "Glass_SlopedRoofCorner": {
+    "localized_name": "Atap Kaca Segitiga Miring",
+    "description": "Atap sudut miring yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Terbuat dari kaca solid sehingga sangat kokoh."
+  },
+  "Glass_TriangleFoundation": {
+    "localized_name": "Fondasi Kaca Segitiga",
+    "description": "Fondasi segitiga untuk membangun tembok atau fasilitas di atasnya. Terbuat dari kaca solid sehingga sangat kokoh."
+  },
+  "Glass_TriangleRoof": {
+    "localized_name": "Atap Kaca Segitiga",
+    "description": "Atap segitiga yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Terbuat dari kaca solid sehingga sangat kokoh."
+  },
+  "Glass_TriangleStairsCorner": {
+    "localized_name": "Atap Kaca Sudut",
+    "description": "Atap sudut yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Terbuat dari kaca solid sehingga sangat kokoh."
+  },
+  "Glass_TriangleWall": {
+    "localized_name": "Tembok Kaca Segitiga",
+    "description": "Tembok segitiga untuk dibangun di atas fondasi. Terbuat dari kaca solid sehingga sangat kokoh."
+  },
+  "Glass_TriangleWallReverse": {
+    "localized_name": "Tembok Kaca Segitiga (Terbalik)",
+    "description": "Tembok segitiga (terbalik) untuk dibangun di atas fondasi. Terbuat dari kaca solid sehingga sangat kokoh."
+  },
+  "Glass_WallGate": {
+    "localized_name": "Pintu Masuk untuk Pal dari Kaca",
+    "description": "Pintu masuk untuk Pal yang dibangun di atas fondasi sebagai jalan masuk. Terbuat dari kaca solid sehingga sangat kokoh."
+  },
+  "Glass_WindowWall": {
+    "localized_name": "Tembok Kaca dengan Jendela",
+    "description": "Tembok dilengkapi jendela yang dibangun di atas fondasi untuk mencegah penyusup masuk. Terbuat dari kaca solid sehingga sangat kokoh."
+  },
+  "Glass_foundation": {
+    "localized_name": "Fondasi Kaca",
+    "description": "Fondasi untuk membangun tembok atau fasilitas di atasnya. Terbuat dari kaca solid sehingga sangat kokoh."
+  },
+  "Glass_roof": {
+    "localized_name": "Atap Kaca",
+    "description": "Atap yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Terbuat dari kaca solid sehingga sangat kokoh."
+  },
+  "Glass_stair": {
+    "localized_name": "Tangga Kaca",
+    "description": "Tangga yang diletakkan di bawah fondasi atau atap agar bisa dinaiki. Terbuat dari kaca solid sehingga sangat kokoh."
+  },
+  "Glass_wall": {
+    "localized_name": "Tembok Kaca",
+    "description": "Tembok yang dibangun di atas fondasi untuk mencegah penyusup masuk. Terbuat dari kaca solid sehingga sangat kokoh."
+  },
+  "GlobalPalStorage": {
+    "localized_name": "Palbox Global",
+    "description": "Fasilitas yang dapat menyimpan data genetik Pal, lalu merekonstruksi mereka dari data genetik yang tersimpan. Data genetik yang tersimpan dapat ditransfer ke dunia yang berbeda."
+  },
+  "Globe01_Stone": {
+    "localized_name": "Globe Antik",
+    "description": "Globe antik untuk dekorasi."
+  },
+  "GoalSoccer_Iron": {
+    "localized_name": "Gawang Sepak Bola",
+    "description": "Gawang sepak bola untuk dekorasi. Memasukkan SheepBall ke dalamnya tidak akan memberimu poin."
+  },
+  "GuardianDogStatue": {
+    "localized_name": "Patung Yakumo",
+    "description": "Patung Yakumo untuk dekorasi."
+  },
+  "GuildChest": {
+    "localized_name": "Peti Guild",
+    "description": "Peti yang dapat mengirim dan menerima barang melalu ruang subdimensi. Isi setiap peti ini saling terhubung, meskipun masing-masing peti ditempatkan di markas yang berbeda."
+  },
+  "HatchingPalEgg": {
+    "localized_name": "Inkubator",
+    "description": "Digunakan untuk mengerami telur Pal. Letakkan telur Pal di sini, dan setelah beberapa waktu ia akan menetas dengan sendirinya."
+  },
+  "Headstone": {
+    "localized_name": "Batu Nisan",
+    "description": "Batu nisan yang dapat ditulis. Gunakan sebagai catatan."
+  },
+  "Heater": {
+    "localized_name": "Pemanas Api",
+    "description": "Alat yang meniupkan angin hangat dan menaikkan suhu di markas. Ini tidak terlalu panas, tetapi cukup untuk menahan cuaca dingin. Membutuhkan Pal Api untuk menyalakan api."
+  },
+  "HugeKitchen": {
+    "localized_name": "Dapur Besar",
+    "description": "Fasilitas yang diperlukan untuk memasak makanan. Berukuran raksasa sehingga kamu dapat memasak di sini menggunakan beberapa Pal untuk bekerja sama. Membutuhkan Pal Api untuk menyalakan api."
+  },
+  "Hunter_Banner": {
+    "localized_name": "Tirai Vertikal Gerombolan Pemburu Liar",
+    "description": "Tirai vertikal dekorasi Gerombolan Pemburu Liar."
+  },
+  "Hunter_Flag": {
+    "localized_name": "Bendera Pendukung Gerombolan Pemburu Liar",
+    "description": "Bendera dekorasi pendukung Gerombolan Pemburu Liar."
+  },
+  "Hunter_GangFlag": {
+    "localized_name": "Bendera Gerombolan Pemburu Liar",
+    "description": "Bendera Gerombolan Pemburu Liar untuk dekorasi."
+  },
+  "IceCrusher": {
+    "localized_name": "Mesin Penghancur Berpendingin",
+    "description": "Fasilitas untuk menghancurkan Bijih Logam lalu mengubahnya menjadi material lain. Untuk menggerakkannya membutuhkan sumber daya listrik dan Pal yang memiliki keahlian |Pendinginan|, tetapi ini sangat efektif."
+  },
+  "Iron_DiagonalWall": {
+    "localized_name": "Tembok Logam Diagonal",
+    "description": "Tembok diagonal yang dibangun di atas fondasi segitiga untuk mencegah penyusup masuk. Terbuat dari logam sehingga sangat kokoh."
+  },
+  "Iron_Fence": {
+    "localized_name": "Pagar Logam",
+    "description": "Pagar yang dibangun di atas fondasi atau atap untuk mencegah sesuatu terjatuh. Terbuat dari logam sehingga sangat kokoh."
+  },
+  "Iron_PyramidRoof": {
+    "localized_name": "Atap Logam Piramida",
+    "description": "Atap berbentuk piramida yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Terbuat dari logam sehingga sangat kokoh."
+  },
+  "Iron_SlopedRoofCorner": {
+    "localized_name": "Atap Logam Segitiga Miring",
+    "description": "Atap sudut miring yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Terbuat dari logam sehingga sangat kokoh."
+  },
+  "Iron_TriangleFoundation": {
+    "localized_name": "Fondasi Logam Segitiga",
+    "description": "Fondasi segitiga untuk membangun tembok atau fasilitas di atasnya. Terbuat dari logam sehingga sangat kokoh."
+  },
+  "Iron_TriangleRoof": {
+    "localized_name": "Atap Logam Segitiga",
+    "description": "Atap segitiga yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Terbuat dari logam sehingga sangat kokoh."
+  },
+  "Iron_TriangleStairsCorner": {
+    "localized_name": "Atap Logam Sudut",
+    "description": "Atap sudut yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Terbuat dari logam sehingga sangat kokoh."
+  },
+  "Iron_TriangleWallReverse": {
+    "localized_name": "Tembok Logam Segitiga (Terbalik)",
+    "description": "Tembok segitiga (terbalik) untuk dibangun di atas fondasi. Terbuat dari logam sehingga sangat kokoh."
+  },
+  "Iron_WallGate": {
+    "localized_name": "Pintu Masuk untuk Pal dari Logam",
+    "description": "Pintu masuk untuk Pal yang dibangun di atas fondasi sebagai jalan masuk. Terbuat dari logam sehingga sangat kokoh."
+  },
+  "Irori": {
+    "localized_name": "Perapian Jepang",
+    "description": "Perapian Jepang untuk dekorasi. Gunakan saat membuat bangunan bergaya Jepang."
+  },
+  "ItemBooth": {
+    "localized_name": "Pasar Loak (Item)",
+    "description": "Fasilitas untuk menjual item. Kamu bisa menjual item kepada pemain lain. Tugaskan Pal Es ke sini dan makanan di dalamnya tidak akan cepat basi."
+  },
+  "ItemChest": {
+    "localized_name": "Peti Kayu",
+    "description": "Dapat digunakan untuk menyimpan item. Terbuat dari kayu sehingga sangat rapuh. Tidak meyakinkan untuk menyimpan barang berharga."
+  },
+  "ItemChest_02": {
+    "localized_name": "Peti Logam",
+    "description": "Dapat digunakan untuk menyimpan item. Sedikit kokoh karena diperkuat dengan logam. Semakin besar ukurannya, kapasitas penyimpanannya pun semakin banyak."
+  },
+  "ItemChest_03": {
+    "localized_name": "Peti Logam Murni",
+    "description": "Dapat digunakan untuk menyimpan item. Cukup kokoh karena terbuat dari logam murni. Gunakan sebagai gudang penyimpanan yang besar dan aman."
+  },
+  "ItemChest_04": {
+    "localized_name": "Peti Modern",
+    "description": "Dapat digunakan untuk menyimpan item. Cukup kokoh, ruang penyimpanannya juga banyak. Gunakan sebagai gudang penyimpanan yang besar dan aman."
+  },
+  "Ivy01": {
+    "localized_name": "Tanaman Rambat Dinding Besar",
+    "description": "Tanaman rambat besar untuk dekorasi. Dapat dipasang di tembok."
+  },
+  "Ivy02": {
+    "localized_name": "Tanaman Rambat Dinding Kecil",
+    "description": "Tanaman rambat kecil untuk dekorasi. Dapat dipasang di tembok."
+  },
+  "Ivy03": {
+    "localized_name": "Tanaman Rambat Dinding Panjang",
+    "description": "Tanaman rambat panjang untuk dekorasi. Dapat dipasang di tembok."
+  },
+  "JapaneseStyle_DiagonalWall": {
+    "localized_name": "Tembok Diagonal Bergaya Jepang",
+    "description": "Tembok diagonal yang dibangun di atas fondasi segitiga untuk mencegah penyusup masuk. Bisa untuk membuat bangunan trendi bergaya Jepang."
+  },
+  "JapaneseStyle_DoorWall_01": {
+    "localized_name": "Tembok Bergaya Jepang dengan Pintu A",
+    "description": "Pintu yang dibangun di atas fondasi sebagai jalan masuk. Bisa untuk membuat bangunan trendi bergaya Jepang."
+  },
+  "JapaneseStyle_DoorWall_02": {
+    "localized_name": "Tembok Bergaya Jepang dengan Pintu B",
+    "description": "Pintu geser (Shoji) yang dibangun di atas fondasi sebagai pintu di dalam ruangan. Bisa untuk membuat bangunan trendi bergaya Jepang."
+  },
+  "JapaneseStyle_DoorWall_03": {
+    "localized_name": "Tembok Bergaya Jepang dengan Pintu C",
+    "description": "Pintu geser (Fusuma) yang dibangun di atas fondasi sebagai pintu di dalam ruangan. Bisa untuk membuat bangunan trendi bergaya Jepang."
+  },
+  "JapaneseStyle_Fence": {
+    "localized_name": "Pagar Bergaya Jepang",
+    "description": "Pagar yang dibangun di atas fondasi atau atap untuk mencegah sesuatu terjatuh. Bisa untuk membuat bangunan trendi bergaya Jepang."
+  },
+  "JapaneseStyle_Pillar": {
+    "localized_name": "Pilar Bergaya Jepang",
+    "description": "Pilar untuk menopang bangunan. Bisa untuk membuat bangunan trendi bergaya Jepang."
+  },
+  "JapaneseStyle_PyramidRoof": {
+    "localized_name": "Atap Piramida Bergaya Jepang",
+    "description": "Atap berbentuk piramida yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Bisa untuk membuat bangunan trendi bergaya Jepang."
+  },
+  "JapaneseStyle_SlantedRoof": {
+    "localized_name": "Atap Miring Bergaya Jepang",
+    "description": "Atap miring yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Bisa untuk membuat bangunan trendi bergaya Jepang."
+  },
+  "JapaneseStyle_SlopedRoofCorner": {
+    "localized_name": "Atap Segitiga Miring Bergaya Jepang",
+    "description": "Atap sudut miring yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Bisa untuk membuat bangunan trendi bergaya Jepang."
+  },
+  "JapaneseStyle_TriangleFoundation": {
+    "localized_name": "Fondasi Segitiga Bergaya Jepang",
+    "description": "Fondasi segitiga untuk membangun tembok atau fasilitas di atasnya. Bisa untuk membuat bangunan trendi bergaya Jepang."
+  },
+  "JapaneseStyle_TriangleRoof_01": {
+    "localized_name": "Atap Segitiga Bergaya Jepang A",
+    "description": "Atap segitiga yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Permukaan atasnya adalah tatami. Bisa untuk membuat bangunan trendi bergaya Jepang."
+  },
+  "JapaneseStyle_TriangleRoof_02": {
+    "localized_name": "Atap Segitiga Bergaya Jepang B",
+    "description": "Atap segitiga yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Permukaan atasnya adalah genting. Bisa untuk membuat bangunan trendi bergaya Jepang."
+  },
+  "JapaneseStyle_TriangleStairsCorner_01": {
+    "localized_name": "Atap Sudut Bergaya Jepang",
+    "description": "Atap sudut yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Bisa untuk membuat bangunan trendi bergaya Jepang."
+  },
+  "JapaneseStyle_TriangleWall": {
+    "localized_name": "Tembok Segitiga Bergaya Jepang",
+    "description": "Tembok segitiga untuk dibangun di atas fondasi. Bisa untuk membuat bangunan trendi bergaya Jepang."
+  },
+  "JapaneseStyle_TriangleWallReverse": {
+    "localized_name": "Tembok Segitiga Bergaya Jepang (Terbalik)",
+    "description": "Tembok segitiga (terbalik) untuk dibangun di atas fondasi. Bisa untuk membuat bangunan trendi bergaya Jepang."
+  },
+  "JapaneseStyle_WallGate": {
+    "localized_name": "Pintu Masuk untuk Pal Bergaya Jepang",
+    "description": "Pintu masuk untuk Pal yang dibangun di atas fondasi sebagai jalan masuk. Bisa untuk membuat bangunan trendi bergaya Jepang."
+  },
+  "JapaneseStyle_WindowWall": {
+    "localized_name": "Tembok Bergaya Jepang dengan Jendela",
+    "description": "Tembok dilengkapi jendela yang dibangun di atas fondasi untuk mencegah penyusup masuk. Bisa untuk membuat bangunan trendi bergaya Jepang."
+  },
+  "JapaneseStyle_foundation": {
+    "localized_name": "Fondasi Bergaya Jepang",
+    "description": "Fondasi untuk membangun tembok atau fasilitas di atasnya. Bisa untuk membuat bangunan trendi bergaya Jepang."
+  },
+  "JapaneseStyle_roof_01": {
+    "localized_name": "Atap Bergaya Jepang A",
+    "description": "Atap yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Permukaan atasnya adalah tatami. Bisa untuk membuat bangunan trendi bergaya Jepang."
+  },
+  "JapaneseStyle_roof_02": {
+    "localized_name": "Atap Bergaya Jepang B",
+    "description": "Atap yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Permukaan atasnya adalah genting. Bisa untuk membuat bangunan trendi bergaya Jepang."
+  },
+  "JapaneseStyle_stair": {
+    "localized_name": "Tangga Bergaya Jepang",
+    "description": "Tangga yang diletakkan di bawah fondasi atau atap agar bisa dinaiki. Bisa untuk membuat bangunan trendi bergaya Jepang."
+  },
+  "JapaneseStyle_wall_01": {
+    "localized_name": "Tembok Bergaya Jepang",
+    "description": "Tembok yang dibangun di atas fondasi untuk mencegah penyusup masuk. Bisa untuk membuat bangunan trendi bergaya Jepang."
+  },
+  "Kakejiku": {
+    "localized_name": "Lukisan Gantung Jepang",
+    "description": "Lukisan gantung Jepang untuk dekorasi. Gunakan saat membuat bangunan bergaya Jepang."
+  },
+  "Koro": {
+    "localized_name": "Tungku Dupa",
+    "description": "Tungku dupa untuk dekorasi. Gunakan saat membuat bangunan bergaya Jepang."
+  },
+  "Lab": {
+    "localized_name": "Laboraturium Kerja Pal",
+    "description": "Fasilitas untuk meneliti berbagai pekerjaan Pal. Dengan menugaskan Pal di fasilitas ini, penelitian akan berlangsung, sehingga bisa mendapatkan berbagai macam efek."
+  },
+  "Lamp": {
+    "localized_name": "Lampu Pancang",
+    "description": "Sumber cahaya yang menerangi markas meskipun di malam hari. Membutuhkan listrik, tetapi bisa menerangi wilayah yang lebih luas."
+  },
+  "LanternTop": {
+    "localized_name": "Lampion",
+    "description": "Lampion untuk dekorasi."
+  },
+  "LargeCeilingLamp": {
+    "localized_name": "Lampu Gantung Besar",
+    "description": "Sumber cahaya yang menerangi markas meskipun di malam hari. Dapat dipasang di langit-langit. Membutuhkan listrik lebih banyak, tetapi bisa menerangi wilayah yang lebih luas lagi."
+  },
+  "LargeLamp": {
+    "localized_name": "Lampu Pancang Besar",
+    "description": "Sumber cahaya yang menerangi markas meskipun di malam hari. Membutuhkan listrik lebih banyak, tetapi bisa menerangi wilayah yang lebih luas lagi."
+  },
+  "Light_CandleSticks_Top": {
+    "localized_name": "Lampu Gantung Kristal",
+    "description": "Lampu jalan sederhana yang menjadi sumber cahaya. Butuh listrik untuk menyalakannya."
+  },
+  "Light_CandleSticks_Wall": {
+    "localized_name": "Lampu Dinding",
+    "description": "Lampu dinding yang menjadi sumber cahaya. Butuh listrik untuk menyalakannya."
+  },
+  "Light_FirePlace01": {
+    "localized_name": "Perapian Batu Bata",
+    "description": "Perapian batu bata yang menjadi sumber cahaya. Membutuhkan Pal Api untuk menyalakan api."
+  },
+  "Light_FirePlace02": {
+    "localized_name": "Perapian",
+    "description": "Perapian yang menjadi sumber cahaya. Membutuhkan Pal Api untuk menyalakan api."
+  },
+  "Light_FloorLamp01": {
+    "localized_name": "Lampu Lantai Coklat Antik",
+    "description": "Lampu lantai antik warna coklat yang menjadi sumber cahaya. Butuh listrik untuk menyalakannya."
+  },
+  "Light_FloorLamp02": {
+    "localized_name": "Lampu Lantai Merah Antik",
+    "description": "Lampu lantai antik warna merah yang menjadi sumber cahaya. Butuh listrik untuk menyalakannya."
+  },
+  "Light_LightPole01": {
+    "localized_name": "Lampu Jalan Sederhana",
+    "description": "Lampu jalan sederhana yang menjadi sumber cahaya. Butuh listrik untuk menyalakannya."
+  },
+  "Light_LightPole02": {
+    "localized_name": "Lampu Jalan Lengan Ganda",
+    "description": "Lampu jalan lengan ganda yang menjadi sumber cahaya. Butuh listrik untuk menyalakannya."
+  },
+  "Light_LightPole03": {
+    "localized_name": "Lampu Jalan Retro",
+    "description": "Lampu jalan retro yang menjadi sumber cahaya. Butuh listrik untuk menyalakannya."
+  },
+  "Light_LightPole04": {
+    "localized_name": "Lampu Jalan Trendi",
+    "description": "Lampu jalan trendi yang menjadi sumber cahaya. Butuh listrik untuk menyalakannya."
+  },
+  "LilyQueenStatue": {
+    "localized_name": "Patung Lyleen",
+    "description": "Patung Lyleen untuk dekorasi."
+  },
+  "MachineGame01_Iron": {
+    "localized_name": "Mesin Capit",
+    "description": "Mesin capit untuk dekorasi. Rusak, tidak bisa dimainkan."
+  },
+  "MachineVending01_Iron": {
+    "localized_name": "Mesin Penjual Soda Otomatis",
+    "description": "Mesin penjual soda otomatis untuk dekorasi. Tidak bisa digunakan untuk membeli item."
+  },
+  "ManualElectricGenerator": {
+    "localized_name": "Alat Pembangkit Listrik Tenaga Manusia",
+    "description": "Fasilitas yang mengubah gerakan berputar menjadi energi listrik. Efisiensinya buruk, dan SAN Pal yang bekerja akan berkurang, tetapi kamu bisa mendapatkan nilai EXP."
+  },
+  "MedicalPalBed_02": {
+    "localized_name": "Tempat Tidur Pal Jerami",
+    "description": "Tempat tidur Pal yang terbuat dari jerami. Gunakan saat Pal sedang terluka atau untuk tidur di malam hari. Meski keras, ini masih lebih baik daripada tidak ada."
+  },
+  "MedicalPalBed_03": {
+    "localized_name": "Tempat Tidur Pal Empuk",
+    "description": "Tempat tidur empuk yang nyaman untuk ditiduri Pal. Gunakan saat Pal sedang terluka atau untuk tidur di malam hari. Sangat empuk, Pal pasti akan menyukainya."
+  },
+  "MedicalPalBed_04": {
+    "localized_name": "Tempat Tidur Pal Besar",
+    "description": "Tempat tidur besar yang nyaman untuk ditiduri Pal. Gunakan saat Pal sedang terluka atau untuk tidur di malam hari. Pal berbadan besar pun bisa tidur nyenyak di sini."
+  },
+  "MedicalPalBed_05": {
+    "localized_name": "Pal Pod Modern",
+    "description": "Pod untuk Pal memulihkan diri. Digunakan saat Pal terluka atau beristirahat di malam hari. Berkat inovasi teknologi, nilai penyembuhannya meningkat."
+  },
+  "MedicineFacility_01": {
+    "localized_name": "Meja Produksi Obat Abad Pertengahan",
+    "description": "Instalasi pembuatan obat untuk menyembuhkan penyakit Pal. Hanya bisa membuat obat sederhana. Serahkan pengerjaannya pada Pal yang bisa membuat obat."
+  },
+  "MedicineFacility_02": {
+    "localized_name": "Meja Produksi Obat Elektrik",
+    "description": "Instalasi pembuatan obat untuk menyembuhkan penyakit Pal. Membutuhkan listrik, tetapi mampu membuat obat berkualitas tinggi. Serahkan pengerjaannya pada Pal yang bisa membuat obat."
+  },
+  "MedicineFacility_03": {
+    "localized_name": "Meja Produksi Obat Modern",
+    "description": "Instalasi pembuatan obat untuk menyembuhkan penyakit Pal. Dengan teknologi masa depan, bahkan bisa membuat obat tidak dikenal sekalipun. Serahkan pengerjaannya pada Pal yang bisa membuat obat."
+  },
+  "Metal_DoorWall": {
+    "localized_name": "Pintu Logam",
+    "description": "Pintu yang dibangun di atas fondasi sebagai jalan masuk. Terbuat dari logam sehingga sangat kokoh."
+  },
+  "Metal_Gate": {
+    "localized_name": "Gerbang Logam",
+    "description": "Gerbang yang bahkan bisa dilewati Pal besar. Terbuat dari logam sehingga sangat kokoh."
+  },
+  "Metal_SlantedRoof": {
+    "localized_name": "Atap Logam Miring",
+    "description": "Atap miring yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Terbuat dari logam sehingga sangat kokoh."
+  },
+  "Metal_TriangleWall": {
+    "localized_name": "Tembok Logam Segitiga",
+    "description": "Tembok segitiga untuk dibangun di atas fondasi. Terbuat dari logam sehingga sangat kokoh."
+  },
+  "Metal_WindowWall": {
+    "localized_name": "Tembok Logam dengan Jendela",
+    "description": "Tembok dilengkapi jendela yang dibangun di atas fondasi untuk mencegah penyusup masuk. Terbuat dari logam sehingga sangat kokoh."
+  },
+  "Metal_foundation": {
+    "localized_name": "Fondasi Logam",
+    "description": "Fondasi untuk membangun tembok atau fasilitas di atasnya. Terbuat dari logam sehingga sangat kokoh."
+  },
+  "Metal_roof": {
+    "localized_name": "Atap Logam",
+    "description": "Atap yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Terbuat dari logam sehingga sangat kokoh."
+  },
+  "Metal_stair": {
+    "localized_name": "Tangga Logam",
+    "description": "Tangga yang diletakkan di bawah fondasi atau atap agar bisa dinaiki. Terbuat dari logam sehingga sangat kokoh."
+  },
+  "Metal_wall": {
+    "localized_name": "Tembok Logam",
+    "description": "Tembok yang dibangun di atas fondasi untuk mencegah penyusup masuk. Terbuat dari logam sehingga sangat kokoh."
+  },
+  "MiningTool": {
+    "localized_name": "Kereta Tambang",
+    "description": "Jika diletakkan di markas, akan meningkatkan kecepatan menambang. Meletakkan 2 buah atau lebih tidak akan ada efeknya."
+  },
+  "Mirror01_Stone": {
+    "localized_name": "Cermin Oval Antik",
+    "description": "Cermin oval antik untuk dekorasi."
+  },
+  "Mirror01_Wall_Stone": {
+    "localized_name": "Cermin Dinding Antik",
+    "description": "Cermin dinding antik untuk dekorasi. Dapat dipasang di tembok."
+  },
+  "Mirror02_Stone": {
+    "localized_name": "Cermin Antik",
+    "description": "Cermin antik untuk dekorasi."
+  },
+  "MonsterFarm": {
+    "localized_name": "Peternakan",
+    "description": "Peternakan untuk Pal seperti domba dan unggas merumput. Tugaskan Pal yang memiliki Skill Partner yang sesuai untuk memproduksi item."
+  },
+  "MultiElectricHatchingPalEgg": {
+    "localized_name": "Inkubator Elektrik Besar",
+    "description": "Alat untuk mengerami telur Pal. Membutuhkan sumber daya listrik, tetapi ini dapat menjaga suhu yang sesuai dan mengerami beberapa telur sekaligus."
+  },
+  "MultiHatchingPalEgg": {
+    "localized_name": "Inkubator Besar",
+    "description": "Alat untuk menetaskan telur Pal. Alat ini menjaga suhu yang sesuai secara otomatis, dan dapat menetaskan beberapa telur sekaligus."
+  },
+  "Ninja_Banner": {
+    "localized_name": "Tirai Vertikal Gerakan Bunga Bulan",
+    "description": "Tirai vertikal dekorasi Gerakan Bunga Bulan."
+  },
+  "Ninja_Flag": {
+    "localized_name": "Bendera Pendukung Gerakan Bunga Bulan",
+    "description": "Bendera dekorasi pendukung Gerakan Bunga Bulan."
+  },
+  "OilPump": {
+    "localized_name": "Ekstraktor Minyak Mentah",
+    "description": "Alat yang diperlukan untuk mengekstrak Minyak Mentah dari ladang minyak. Untuk menggerakkannya butuh sumber daya listrik yang besar."
+  },
+  "OlympicCauldron": {
+    "localized_name": "Kuali Api",
+    "description": "Jika diletakkan di markas, akan meningkatkan kecepatan menyalakan api. Meletakkan 2 buah atau lebih tidak akan ada efeknya."
+  },
+  "OperatingTable": {
+    "localized_name": "Meja Operasi Pal",
+    "description": "Fasilitas di mana kamu bisa mengubah jenis kelamin dan skill pasif Pal-mu."
+  },
+  "PalBooth": {
+    "localized_name": "Pasar Loak (Pal)",
+    "description": "Fasilitas untuk menjual Pal. Kamu bisa menjual Pal kepada pemain lain. Tugaskan Pal Es ke sini dan makanan yang dijual tidak akan cepat basi."
+  },
+  "PalBoxV2": {
+    "localized_name": "Palbox",
+    "description": "Fasilitas untuk menyimpan Pal yang telah ditangkap. Perlahan-lahan memulihkan HP Pal yang ada di dalamnya. Daerah di sekeliling fasilitas ini akan menjadi markasmu."
+  },
+  "PalCage": {
+    "localized_name": "Kandang jeruji",
+    "description": "Kandang jeruji untuk dekorasi."
+  },
+  "PalFoodBox": {
+    "localized_name": "Kotak Makan Pal",
+    "description": "Kotak untuk meletakkan makanan Pal. Pal yang lapar akan makan dari sini. Pastikan stok makanan mereka jangan sampai habis."
+  },
+  "PalMedicineBox": {
+    "localized_name": "Rak Obat",
+    "description": "Rak tempat menyimpan obat Pal. Pal yang sakit akan makan obat di sini. Pastikan stok obat mereka jangan sampai habis."
+  },
+  "Partition_Stone": {
+    "localized_name": "Partisi Antik",
+    "description": "Partisi antik untuk dekorasi."
+  },
+  "Piano01_Stone": {
+    "localized_name": "Grand Piano",
+    "description": "Grand piano untuk dekorasi. Tidak bisa dimainkan."
+  },
+  "Piano02_Stone": {
+    "localized_name": "Piano Tegak",
+    "description": "Piano tegak untuk dekorasi. Tidak bisa dimainkan."
+  },
+  "PipeClay01_Iron": {
+    "localized_name": "Pipa Beton",
+    "description": "Pipa beton untuk dekorasi."
+  },
+  "Plant01_Plant": {
+    "localized_name": "Tanaman Hias",
+    "description": "Tanaman hias untuk dekorasi."
+  },
+  "Plant02_Plant": {
+    "localized_name": "Tanaman Hias dengan Bangku",
+    "description": "Tanaman hias dengan bangku untuk dekorasi."
+  },
+  "Plant03_Plant": {
+    "localized_name": "Tanaman Hias di atas Meja",
+    "description": "Tanaman hias di atas meja untuk dekorasi."
+  },
+  "Plant04_Plant": {
+    "localized_name": "Tanaman Hias dalam Pot",
+    "description": "Tanaman hias dalam pot untuk dekorasi."
+  },
+  "PlayerBed_02": {
+    "localized_name": "Tempat Tidur Kualitas Rendah",
+    "description": "Tempat tidur usang untuk manusia. Gunakan saat terluka atau untuk tidur di malam hari. Tidak akan bisa tidur tenang jika tidak ada atap."
+  },
+  "PlayerBed_03": {
+    "localized_name": "Tempat Tidur Kualitas Tinggi",
+    "description": "Tempat tidur empuk yang nyaman untuk ditiduri manusia. Gunakan saat terluka atau untuk tidur di malam hari. Tidak akan bisa tidur tenang jika tidak ada atap."
+  },
+  "Police_Banner": {
+    "localized_name": "Tirai Vertikal Kelompok Penegak Hukum",
+    "description": "Tirai vertikal dekorasi Kelompok Penegak Hukum."
+  },
+  "Police_Flag": {
+    "localized_name": "Bendera Pendukung Kelompok Penegak Hukum",
+    "description": "Bendera dekorasi pendukung Kelompok Penegak Hukum."
+  },
+  "QuartzPit": {
+    "localized_name": "Lokasi Tambang Kuarsa Murni",
+    "description": "Fasilitas untuk memproduksi Kuarsa Murni. Menambang Kuarsa Murni adalah pekerjaan berat dan membutuhkan kekuatan fisik. Serahkan pada Pal yang ahli menambang."
+  },
+  "Refrigerator": {
+    "localized_name": "Kulkas",
+    "description": "Tempat penyimpanan makanan berkapasitas besar. Tugaskan Pal Es ke kotak ini dan makanan di dalamnya tidak akan cepat basi."
+  },
+  "RepairBench": {
+    "localized_name": "Meja Perbaikan",
+    "description": "Meja kerja untuk memperbaiki peralatan yang rusak. Perbaikan dapat dilakukan dengan mengonsumsi material."
+  },
+  "Rug01_Stone": {
+    "localized_name": "Karpet Antik",
+    "description": "Karpet antik untuk dekorasi."
+  },
+  "Rug02_Stone": {
+    "localized_name": "Karpet Merah Antik",
+    "description": "Karpet merah yang antik untuk dekorasi."
+  },
+  "Rug03_Stone": {
+    "localized_name": "Karpet Hijau Antik",
+    "description": "Karpet hijau yang antik untuk dekorasi."
+  },
+  "Rug04_Stone": {
+    "localized_name": "Kapet Panjang Antik",
+    "description": "Karpet panjang yang antik untuk dekorasi."
+  },
+  "Rug_Wood": {
+    "localized_name": "-",
+    "description": "-"
+  },
+  "SF_Chair": {
+    "localized_name": "Kursi Laboratorium",
+    "description": "Kursi dekorasi laboratorium."
+  },
+  "SF_Desk": {
+    "localized_name": "Meja Laboratorium",
+    "description": "Meja dekorasi laboratorium."
+  },
+  "SF_DiagonalWall": {
+    "localized_name": "Tembok Diagonal Bersih",
+    "description": "Tembok diagonal yang dibangun di atas fondasi segitiga untuk mencegah penyusup masuk. Bisa untuk membuat arsitektur yang bersih dan futuristik."
+  },
+  "SF_DoorWall": {
+    "localized_name": "Tembok Bergaya Jepang dengan Pintu Bersih",
+    "description": "Pintu yang dibangun di atas fondasi sebagai jalan masuk. Bisa untuk membuat arsitektur yang bersih dan futuristik."
+  },
+  "SF_Fence": {
+    "localized_name": "Pagar Bersih",
+    "description": "Pagar yang dibangun di atas fondasi atau atap untuk mencegah sesuatu terjatuh. Bisa untuk membuat arsitektur yang bersih dan futuristik."
+  },
+  "SF_PyramidRoof": {
+    "localized_name": "Atap Piramida Bersih",
+    "description": "Atap berbentuk piramida yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Bisa untuk membuat arsitektur yang bersih dan futuristik."
+  },
+  "SF_SlantedRoof": {
+    "localized_name": "Atap Miring Bersih",
+    "description": "Atap miring yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Bisa untuk membuat arsitektur yang bersih dan futuristik."
+  },
+  "SF_SlopedRoofCorner": {
+    "localized_name": "Atap Sudut Miring Bersih",
+    "description": "Atap sudut miring yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Bisa untuk membuat arsitektur yang bersih dan futuristik."
+  },
+  "SF_TriangleFoundation": {
+    "localized_name": "Fondasi Segitiga Bersih",
+    "description": "Fondasi segitiga untuk membangun tembok atau fasilitas di atasnya. Bisa untuk membuat arsitektur yang bersih dan futuristik."
+  },
+  "SF_TriangleRoof": {
+    "localized_name": "Atap Segitiga Bersih",
+    "description": "Atap segitiga yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Bisa untuk membuat arsitektur yang bersih dan futuristik."
+  },
+  "SF_TriangleStairsCorner": {
+    "localized_name": "Atap Sudut Bersih",
+    "description": "Atap sudut yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Bisa untuk membuat arsitektur yang bersih dan futuristik."
+  },
+  "SF_TriangleWall": {
+    "localized_name": "Tembok Segitiga Bersih",
+    "description": "Tembok segitiga untuk dibangun di atas fondasi. Bisa untuk membuat arsitektur yang bersih dan futuristik."
+  },
+  "SF_TriangleWallReverse": {
+    "localized_name": "Tembok Segitiga Bersih (Terbalik)",
+    "description": "Tembok segitiga (terbalik) untuk dibangun di atas fondasi. Bisa untuk membuat arsitektur yang bersih dan futuristik."
+  },
+  "SF_WallGate": {
+    "localized_name": "Pintu Masuk untuk Pal yang Bersih",
+    "description": "Pintu masuk untuk Pal yang dibangun di atas fondasi sebagai jalan masuk. Bisa untuk membuat arsitektur yang bersih dan futuristik."
+  },
+  "SF_WindowWall": {
+    "localized_name": "Dinding Berjendela Bersih",
+    "description": "Tembok dilengkapi jendela yang dibangun di atas fondasi untuk mencegah penyusup masuk. Bisa untuk membuat arsitektur yang bersih dan futuristik."
+  },
+  "SF_foundation": {
+    "localized_name": "Fondasi Bersih",
+    "description": "Fondasi untuk membangun tembok atau fasilitas di atasnya. Bisa untuk membuat arsitektur yang bersih dan futuristik."
+  },
+  "SF_roof": {
+    "localized_name": "Atap Bersih",
+    "description": "Atap yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Bisa untuk membuat arsitektur yang bersih dan futuristik."
+  },
+  "SF_stair": {
+    "localized_name": "Tangga Bersih",
+    "description": "Tangga yang diletakkan di bawah fondasi atau atap agar bisa dinaiki. Bisa untuk membuat arsitektur yang bersih dan futuristik."
+  },
+  "SF_wall": {
+    "localized_name": "Tembok Bersih",
+    "description": "Tembok yang dibangun di atas fondasi untuk mencegah penyusup masuk. Bisa untuk membuat arsitektur yang bersih dan futuristik."
+  },
+  "SanityDecrease1": {
+    "localized_name": "Generator Gelombang Alfa",
+    "description": "Alat yang menghasilkan gelombang Alfa untuk menenangkan Pal. SAN Pal yang ada di markas akan sulit berkurang. Meletakkan 2 buah atau lebih tidak akan ada efeknya."
+  },
+  "Scientist_Banner": {
+    "localized_name": "Tirai Vertikal Unit Penelitian Genetika",
+    "description": "Tirai vertikal dekorasi Unit Penelitian Genetika."
+  },
+  "Scientist_Flag": {
+    "localized_name": "Bendera Pendukung Unit Penelitian Genetika",
+    "description": "Bendera dekorasi pendukung Unit Penelitian Genetika."
+  },
+  "Seika": {
+    "localized_name": "Ikebana",
+    "description": "Ikebana untuk dekorasi. Gunakan saat membuat bangunan bergaya Jepang."
+  },
+  "Shelf01_Iron": {
+    "localized_name": "Rak Besi",
+    "description": "Rak dari besi untuk menyimpan item."
+  },
+  "Shelf01_Stone": {
+    "localized_name": "Rak Buku Antik",
+    "description": "Rak buku antik untuk menyimpan item."
+  },
+  "Shelf01_Wall_Iron": {
+    "localized_name": "Rak Dinding Besi",
+    "description": "Rak dinding besi untuk menyimpan item. Dapat dipasang di tembok."
+  },
+  "Shelf01_Wall_Stone": {
+    "localized_name": "Kabinet Dinding Antik",
+    "description": "Kabinet antik untuk menyimpan item. Dapat dipasang di tembok."
+  },
+  "Shelf02_Iron": {
+    "localized_name": "Rak Besi Panjang",
+    "description": "Rak panjang dari besi untuk menyimpan item."
+  },
+  "Shelf02_Stone": {
+    "localized_name": "Lemari Antik",
+    "description": "Lemari antik untuk menyimpan item."
+  },
+  "Shelf03_Iron": {
+    "localized_name": "Loker Oranye",
+    "description": "Loker berwarna oranye untuk menyimpan item. Ditempeli stiker-stiker Pal."
+  },
+  "Shelf03_Stone": {
+    "localized_name": "Laci Antik",
+    "description": "Laci antik untuk menyimpan item. Foto-foto Pal dipajang di sini."
+  },
+  "Shelf04_Iron": {
+    "localized_name": "Loker",
+    "description": "Loker untuk menyimpan item. Ditempeli stiker-stiker Pal."
+  },
+  "Shelf04_Stone": {
+    "localized_name": "Nakas Antik",
+    "description": "Nakas antik untuk menyimpan item. Foto-foto Pal dipajang di sini."
+  },
+  "Shelf05_Stone": {
+    "localized_name": "Kabinet Antik",
+    "description": "Kabinet antik untuk menyimpan item."
+  },
+  "Shelf06_Stone": {
+    "localized_name": "Kabinet Panjang Antik",
+    "description": "Kabinet panjang yang antik untuk menyimpan item. Foto-foto Pal dipajang di sini."
+  },
+  "Shelf07_Stone": {
+    "localized_name": "Kabinet Besar Antik",
+    "description": "Kabinet besar yang antik untuk menyimpan item."
+  },
+  "Shelf_Cask_Wood": {
+    "localized_name": "Rak Tong Kayu",
+    "description": "Rak tong kayu untuk menyimpan item."
+  },
+  "Shelf_Hang01_Wood": {
+    "localized_name": "Rak Dinding Kayu",
+    "description": "Rak kayu untuk menyimpan item. Dapat dipasang di tembok."
+  },
+  "Shelf_Hang02_Wood": {
+    "localized_name": "Rak Dinding Kayu Dekoratif",
+    "description": "Lemari kayu untuk dekorasi. Dapat dipasang di tembok."
+  },
+  "Shelf_Wood": {
+    "localized_name": "Rak Kayu",
+    "description": "Rak kayu untuk menyimpan item."
+  },
+  "Shishiodoshi": {
+    "localized_name": "Pancuran Air Bambu",
+    "description": "Pancuran air bambu untuk dekorasi. Gunakan saat membuat bangunan bergaya Jepang."
+  },
+  "Shrine_Lantern": {
+    "localized_name": "Lentera",
+    "description": "Lentera untuk dekorasi."
+  },
+  "SignExit_Ceiling_Iron": {
+    "localized_name": "Tanda Pintu Darurat Gantung",
+    "description": "Tanda pintu darurat untuk dekorasi. Dapat dipasang di langit-langit."
+  },
+  "SignExit_Wall_Iron": {
+    "localized_name": "Tanda Pintu Darurat Dinding",
+    "description": "Tanda pintu darurat untuk dekorasi. Dapat dipasang di tembok."
+  },
+  "Signboard": {
+    "localized_name": "Papan Nama",
+    "description": "Papan nama yang dapat ditulis. Gunakan sebagai catatan atau untuk komunikasi."
+  },
+  "Silo": {
+    "localized_name": "Silo",
+    "description": "Jika diletakkan di markas, akan meningkatkan kecepatan menanam benih. Meletakkan 2 buah atau lebih tidak akan ada efeknya."
+  },
+  "SkinChange": {
+    "localized_name": "Fasilitas Kustomisasi Pal",
+    "description": "Fasilitas untuk mengganti Skin. Fasilitas di mana kamu bisa mengubah penampilan khusus Pal. Skin yang didapat dari luar game juga dapat digunakan."
+  },
+  "Snowman": {
+    "localized_name": "Boneka Salju",
+    "description": "Jika diletakkan di markas, akan meningkatkan kecepatan pendinginan. Meletakkan 2 buah atau lebih tidak akan ada efeknya."
+  },
+  "Sofa01_Iron": {
+    "localized_name": "Sofa Kulit untuk 1 orang",
+    "description": "Sofa kulit untuk 1 orang untuk dekorasi."
+  },
+  "Sofa01_Stone": {
+    "localized_name": "Sofa Antik untuk 1 orang",
+    "description": "Sofa antik untuk 1 orang untuk dekorasi."
+  },
+  "Sofa02_Iron": {
+    "localized_name": "Sofa Kulit untuk 2 orang",
+    "description": "Sofa kulit untuk 2 orang untuk dekorasi."
+  },
+  "Sofa02_Stone": {
+    "localized_name": "Sofa Antik untuk 2 orang",
+    "description": "Sofa antik untuk 2 orang untuk dekorasi."
+  },
+  "Sofa03_Stone": {
+    "localized_name": "Kursi Ottoman Antik",
+    "description": "Kursi ottoman antik untuk dekorasi."
+  },
+  "Spa": {
+    "localized_name": "Pemandian Air Panas",
+    "description": "Fasilitas di mana Pal yang kelelahan di markas bisa beristirahat. Pulihkan SAN untuk menghilangkan rasa lelah yang menumpuk setelah bekerja keras."
+  },
+  "Spa2": {
+    "localized_name": "Pemandian Air Panas Kualitas Tinggi",
+    "description": "Fasilitas di mana Pal yang kelelahan di markas bisa beristirahat. Tempatnya lebih nyaman sehingga dapat memulihkan lebih banyak SAN."
+  },
+  "Spa3": {
+    "localized_name": "Pemandian Air Panas Bergaya Jepang",
+    "description": "Fasilitas di mana Pal yang kelelahan di markas bisa beristirahat. Dengan ruang yang nyaman bergaya Jepang sehingga dapat memulihkan lebih banyak SAN."
+  },
+  "SphereFactory_Black_01": {
+    "localized_name": "Meja Produksi Sphere",
+    "description": "Meja produksi Sphere untuk menangkap Pal. Tempatnya masih kecil dan belum bisa membuat Sphere dengan cepat. Membutuhkan Pal yang bisa melakukan kerajinan tangan."
+  },
+  "SphereFactory_Black_02": {
+    "localized_name": "Pabrik Perakitan Sphere",
+    "description": "Pabrik bola Sphere untuk menangkap Pal. Dengan berbagi tugas, waktu produksi jadi sedikit lebih cepat. Membutuhkan Pal yang bisa melakukan kerajinan tangan."
+  },
+  "SphereFactory_Black_03": {
+    "localized_name": "Pabrik Perakitan Sphere II",
+    "description": "Pabrik Sphere untuk menangkap Pal. Pekerjaan disegmentasi sehingga produksi Sphere jadi jauh lebih cepat. Membutuhkan Pal yang bisa melakukan kerajinan tangan."
+  },
+  "SphereFactory_Black_04": {
+    "localized_name": "Pabrik Perakitan Sphere Modern",
+    "description": "Pabrik Sphere untuk menangkap Pal. Menggunakan mesin canggih, memungkinkan produksi Sphere dengan kecepatan tinggi. Membutuhkan Pal yang bisa melakukan kerajinan tangan."
+  },
+  "StationDeforest2": {
+    "localized_name": "Lokasi Penebangan Kayu",
+    "description": "Fasilitas untuk memproduksi Kayu. Menebang pohon adalah pekerjaan berat dan membutuhkan kekuatan fisik. Serahkan pada Pal yang ahli menebang kayu."
+  },
+  "StonePit": {
+    "localized_name": "Tambang Batu",
+    "description": "Fasilitas untuk memproduksi Batu. Menambang Batu adalah pekerjaan berat dan membutuhkan kekuatan fisik. Serahkan pada Pal yang ahli menambang."
+  },
+  "Stone_DiagonalWall": {
+    "localized_name": "Tembok Batu Diagonal",
+    "description": "Tembok diagonal yang dibangun di atas fondasi segitiga untuk mencegah penyusup masuk. Terbuat dari batu sehingga cukup kokoh."
+  },
+  "Stone_DoorWall": {
+    "localized_name": "Pintu Batu",
+    "description": "Pintu yang dibangun di atas fondasi sebagai jalan masuk. Terbuat dari batu sehingga cukup kokoh."
+  },
+  "Stone_Fence": {
+    "localized_name": "Pagar Batu",
+    "description": "Pagar yang dibangun di atas fondasi atau atap untuk mencegah sesuatu terjatuh. Terbuat dari batu sehingga cukup kokoh."
+  },
+  "Stone_Gate": {
+    "localized_name": "Gerbang Batu",
+    "description": "Gerbang yang bahkan bisa dilewati Pal besar. Terbuat dari batu sehingga cukup kokoh."
+  },
+  "Stone_PyramidRoof": {
+    "localized_name": "Atap Batu Piramida",
+    "description": "Atap berbentuk piramida yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Terbuat dari batu sehingga cukup kokoh."
+  },
+  "Stone_SlantedRoof": {
+    "localized_name": "Atap Batu Miring",
+    "description": "Atap miring yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Terbuat dari batu sehingga cukup kokoh."
+  },
+  "Stone_SlopedRoofCorner": {
+    "localized_name": "Atap Batu Segitiga Miring",
+    "description": "Atap sudut miring yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Terbuat dari batu sehingga cukup kokoh."
+  },
+  "Stone_TriangleFoundation": {
+    "localized_name": "Fondasi Batu Segitiga",
+    "description": "Fondasi segitiga untuk membangun tembok atau fasilitas di atasnya. Terbuat dari batu sehingga cukup kokoh."
+  },
+  "Stone_TriangleRoof": {
+    "localized_name": "Atap Batu Segitiga",
+    "description": "Atap segitiga yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Terbuat dari batu sehingga cukup kokoh."
+  },
+  "Stone_TriangleStairsCorner": {
+    "localized_name": "Atap Batu Sudut",
+    "description": "Atap sudut yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Terbuat dari batu sehingga cukup kokoh."
+  },
+  "Stone_TriangleWall": {
+    "localized_name": "Tembok Batu Segitiga",
+    "description": "Tembok segitiga untuk dibangun di atas fondasi. Terbuat dari batu sehingga cukup kokoh."
+  },
+  "Stone_TriangleWallReverse": {
+    "localized_name": "Tembok Batu Segitiga (Terbalik)",
+    "description": "Tembok segitiga (terbalik) untuk dibangun di atas fondasi. Terbuat dari batu sehingga cukup kokoh."
+  },
+  "Stone_WallGate": {
+    "localized_name": "Pintu Masuk untuk Pal dari Batu",
+    "description": "Pintu masuk untuk Pal yang dibangun di atas fondasi sebagai jalan masuk. Terbuat dari batu sehingga cukup kokoh."
+  },
+  "Stone_WindowWall": {
+    "localized_name": "Tembok Batu dengan Jendela",
+    "description": "Tembok dilengkapi jendela yang dibangun di atas fondasi untuk mencegah penyusup masuk. Terbuat dari batu sehingga cukup kokoh."
+  },
+  "Stone_foundation": {
+    "localized_name": "Fondasi Batu",
+    "description": "Fondasi untuk membangun tembok atau fasilitas di atasnya. Terbuat dari batu sehingga cukup kokoh."
+  },
+  "Stone_roof": {
+    "localized_name": "Atap Batu",
+    "description": "Atap yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Terbuat dari batu sehingga cukup kokoh."
+  },
+  "Stone_stair": {
+    "localized_name": "Tangga Batu",
+    "description": "Tangga yang diletakkan di bawah fondasi atau atap agar bisa dinaiki. Terbuat dari batu sehingga cukup kokoh."
+  },
+  "Stone_wall": {
+    "localized_name": "Tembok Batu",
+    "description": "Tembok yang dibangun di atas fondasi untuk mencegah penyusup masuk. Terbuat dari batu sehingga cukup kokoh."
+  },
+  "Stool01_Iron": {
+    "localized_name": "Bangku Bulat Besi",
+    "description": "Bangku bulat dari besi untuk dekorasi."
+  },
+  "Stool01_Stone": {
+    "localized_name": "Bangku Bulat Antik",
+    "description": "Bangku bulat antik untuk dekorasi."
+  },
+  "Stool_High_Wood": {
+    "localized_name": "Kursi Bar Kayu",
+    "description": "Kursi bar kayu untuk dekorasi."
+  },
+  "Stool_Wood": {
+    "localized_name": "Bangku Bulat Kayu",
+    "description": "Bangku bulat kayu untuk dekorasi."
+  },
+  "Stove01_Stone": {
+    "localized_name": "Tungku Antik",
+    "description": "Tungku antik untuk dekorasi."
+  },
+  "Stump": {
+    "localized_name": "Tunggul dan Kapak",
+    "description": "Jika diletakkan di markas, akan meningkatkan menebang kayu. Meletakkan 2 buah atau lebih tidak akan ada efeknya."
+  },
+  "SulfurPit": {
+    "localized_name": "Tambang Belerang",
+    "description": "Fasilitas untuk memproduksi Belerang. Menambang Belerang adalah pekerjaan berat dan membutuhkan kekuatan fisik. Serahkan pada Pal yang ahli menambang."
+  },
+  "TableCircular01_Iron": {
+    "localized_name": "Meja Bundar Besi",
+    "description": "Meja bundar dari besi untuk dekorasi."
+  },
+  "TableCircular01_Stone": {
+    "localized_name": "Meja Bundar Antik",
+    "description": "Meja bundar antik untuk dekorasi."
+  },
+  "TableCircular_Wood": {
+    "localized_name": "Meja Bundar",
+    "description": "Meja bundar untuk dekorasi."
+  },
+  "TableDresser01_Stone": {
+    "localized_name": "Meja Rias Antik",
+    "description": "Meja rias untuk memperbaiki penampilan. Dapat mengubah penampilan karaktermu."
+  },
+  "TableSide01_Iron": {
+    "localized_name": "Meja Samping Kayu Besi",
+    "description": "Meja samping dari kayu besi untuk dekorasi."
+  },
+  "TableSink01_Stone": {
+    "localized_name": "Wastafel Antik",
+    "description": "Wastafel antik untuk dekorasi."
+  },
+  "TableSquare01_Iron": {
+    "localized_name": "Meja Kayu Besi",
+    "description": "Meja dari kayu besi untuk dekorasi."
+  },
+  "TableSquare02_Iron": {
+    "localized_name": "Meja Tamu Kayu Besi",
+    "description": "Meja tamu dari kayu besi untuk dekorasi."
+  },
+  "TableSquare_Wood": {
+    "localized_name": "Meja Persegi",
+    "description": "Meja persegi untuk dekorasi."
+  },
+  "Tansu": {
+    "localized_name": "Lemari Jepang",
+    "description": "Lemari Jepang untuk menyimpan item. Gunakan saat membuat bangunan bergaya Jepang."
+  },
+  "Television01_Iron": {
+    "localized_name": "TV Tua",
+    "description": "TV tua untuk dekorasi. Peninggalan peradaban kuno, sekarang hanya menampilkan gambar Pengullet."
+  },
+  "Tire01_Iron": {
+    "localized_name": "Ban",
+    "description": "Ban untuk dekorasi."
+  },
+  "Toilet01_Stone": {
+    "localized_name": "Toilet Antik",
+    "description": "Toilet antik untuk dekorasi. Kamu tidak bisa buang air di sini."
+  },
+  "ToiletHolder01_Stone": {
+    "localized_name": "Gantungan Tisu Toilet Antik",
+    "description": "Gantungan tisu toilet antik untuk dekorasi."
+  },
+  "ToolBoxV1": {
+    "localized_name": "Kotak Peralatan Besar",
+    "description": "Jika diletakkan di markas, akan meningkatkan kecepatan membuat kerajinan tangan. Meletakkan 2 buah atau lebih tidak akan ada efeknya."
+  },
+  "Torch": {
+    "localized_name": "Obor Pancang",
+    "description": "Sumber cahaya yang menerangi markas meskipun di malam hari. Membutuhkan Pal Api untuk menyalakan api."
+  },
+  "Toro": {
+    "localized_name": "Lentera Batu",
+    "description": "Lentera batu untuk dekorasi. Gunakan saat membuat bangunan bergaya Jepang."
+  },
+  "TowlRack01_Stone": {
+    "localized_name": "Gantungan Handuk Antik",
+    "description": "Gantungan handuk antik untuk dekorasi."
+  },
+  "TrafficBarricade01_Iron": {
+    "localized_name": "Barikade",
+    "description": "Barikade untuk dekorasi."
+  },
+  "TrafficBarricade02_Iron": {
+    "localized_name": "Barikade Oranye",
+    "description": "Barikade berwarna oranye untuk dekorasi."
+  },
+  "TrafficBarricade03_Iron": {
+    "localized_name": "Barikade Besi Merah",
+    "description": "Barikade dari besi berwarna merah untuk dekorasi."
+  },
+  "TrafficBarricade04_Iron": {
+    "localized_name": "Barikade Besi Putih",
+    "description": "Barikade dari besi berwarna putih untuk dekorasi."
+  },
+  "TrafficBarricade05_Iron": {
+    "localized_name": "Pagar Besi",
+    "description": "Pagar dari besi untuk dekorasi."
+  },
+  "TrafficCone01_Iron": {
+    "localized_name": "Kerucut Lalu Lintas",
+    "description": "Kerucut lalu lintas untuk dekorasi."
+  },
+  "TrafficCone02_Iron": {
+    "localized_name": "Patok Jalan Besar",
+    "description": "Patok jalan besar untuk dekorasi."
+  },
+  "TrafficCone03_Iron": {
+    "localized_name": "Patok Jalan Kecil",
+    "description": "Patok jalan kecil untuk dekorasi."
+  },
+  "TrafficLight01_Iron": {
+    "localized_name": "Lampu Lalu Lintas",
+    "description": "Lampu lalu lintas untuk dekorasi."
+  },
+  "TrafficSign01_Iron": {
+    "localized_name": "Rambu Pal Dilarang Lewat",
+    "description": "Rambu Pal Dilarang Lewat untuk dekorasi. Digunakan di zaman dulu, tetapi sekarang cuma jadi simbol belaka."
+  },
+  "TrafficSign02_Iron": {
+    "localized_name": "Rambu Stop",
+    "description": "Rambu Stop untuk dekorasi. Digunakan di zaman dulu, tetapi sekarang cuma jadi simbol belaka."
+  },
+  "TrafficSign03_Iron": {
+    "localized_name": "Rambu Hati-Hati Ada Eikthyrdeer",
+    "description": "Rambu Hati-Hati Ada Eikthyrdeer untuk dekorasi. Di zaman dahulu, terjadi serangkaian tabrakan antara Eikthyrdeer dan Pal lain."
+  },
+  "TrafficSign04_Iron": {
+    "localized_name": "Rambu Hati-Hati Ada Mammorest",
+    "description": "Rambu Hati-Hati Ada Mammorest untuk dekorasi. Di zaman dahulu, sering terjadi tragedi tewasnya orang yang membuat marah Mammorest."
+  },
+  "TransmissionTower": {
+    "localized_name": "Menara Listrik",
+    "description": "Jika diletakkan di markas, akan meningkatkan kecepatan pembangkit listrik. Meletakkan 2 buah atau lebih tidak akan ada efeknya."
+  },
+  "Trap_LegHold": {
+    "localized_name": "Perangkap (Kecil)",
+    "description": "Perangkap yang akan melumpuhkan Pal yang berjalan di atasnya. Pal yang terperangkap akan meningkatkan peluang keberhasilan Bola. Hanya efektif pada Pal kecil."
+  },
+  "Trap_LegHold_Big": {
+    "localized_name": "Perangkap (Besar)",
+    "description": "Perangkap kaki untuk menghentikan gerakan Pal besar. Pal yang terperangkap akan meningkatkan peluang keberhasilan Bola. Hanya efektif pada Pal besar, tidak dapat mengenai Pal kecil."
+  },
+  "Trap_MineAttack": {
+    "localized_name": "Ranjau",
+    "description": "Perangkap yang akan meledakkan Pal yang menginjaknya. Ini akan mengakibatkan damage pada area yang luas."
+  },
+  "Trap_MineElecShock": {
+    "localized_name": "Ranjau Listrik",
+    "description": "Perangkap yang akan menyetrum Pal yang menginjaknya. Pal yang tersengat akan meningkatkan peluang keberhasilan Bola."
+  },
+  "Trap_MineFreeze": {
+    "localized_name": "Ranjau Es",
+    "description": "Perangkap yang akan membekukan Pal yang menginjaknya. Pal yang membeku akan meningkatkan peluang keberhasilan Bola."
+  },
+  "Trap_MovingPanel": {
+    "localized_name": "-",
+    "description": "-"
+  },
+  "Trap_Noose": {
+    "localized_name": "Perangkap Gantung",
+    "description": "Perangkap untuk menangkap Pal yang lewat. Peluang Sphere berhasil menangkap Pal yang tertangkap akan meningkat. Hanya efektif pada Pal kecil."
+  },
+  "WallSignboard": {
+    "localized_name": "Papan Nama Dinding",
+    "description": "Papan nama yang dapat ditulis. Dapat dipasang di tembok."
+  },
+  "WallTorch": {
+    "localized_name": "Obor Dinding",
+    "description": "Sumber cahaya yang menerangi markas meskipun di malam hari. Dapat dipasang di tembok. Membutuhkan Pal Api untuk menyalakan api."
+  },
+  "WallTorch02": {
+    "localized_name": "Obor Dinding Agung",
+    "description": "Obor megah yang dinyalakan oleh api yang disembah oleh Sekutu Api Abadi. Sumber cahaya yang dapat dipasang di tembok. Membutuhkan Pal Api untuk menyalakannya."
+  },
+  "WeaponFactory_Dirty_01": {
+    "localized_name": "Meja Produksi Senjata",
+    "description": "Meja kerja untuk produksi senjata dan amunisi. Tempatnya masih kecil sehingga belum bisa membuat senjata berkualitas tinggi. Membutuhkan Pal yang bisa melakukan kerajinan tangan."
+  },
+  "WeaponFactory_Dirty_02": {
+    "localized_name": "Pabrik Perakitan Senjata",
+    "description": "Pabrik untuk produksi senjata dan amunisi. Dengan berbagi tugas, waktu produksi senjata jadi sedikit lebih cepat. Membutuhkan Pal yang bisa melakukan kerajinan tangan."
+  },
+  "WeaponFactory_Dirty_03": {
+    "localized_name": "Pabrik Perakitan Senjata II",
+    "description": "Pabrik untuk produksi senjata dan amunisi. Pekerjaan disegmentasi sehingga produksi jadi jauh lebih cepat. Membutuhkan Pal yang bisa melakukan kerajinan tangan."
+  },
+  "WeaponFactory_Dirty_04": {
+    "localized_name": "Pabrik Senjata Peradaban Tingkat Tinggi",
+    "description": "Pabrik untuk produksi senjata dan amunisi. Menggunakan mesin canggih, memungkinkan produksi senjata dengan kecepatan tinggi. Membutuhkan Pal yang bisa melakukan kerajinan tangan."
+  },
+  "Wire_Fence": {
+    "localized_name": "Pagar Kawat",
+    "description": "Pagar berkawat untuk dekorasi."
+  },
+  "Wood_Fence": {
+    "localized_name": "Pagar Kayu",
+    "description": "Pagar yang dibangun di atas fondasi atau atap untuk mencegah sesuatu jatuh. Terbuat dari kayu sehingga sangat rapuh."
+  },
+  "Wood_Gate": {
+    "localized_name": "Gerbang Kayu",
+    "description": "Gerbang yang bahkan bisa dilewati Pal besar. Terbuat dari kayu sehingga sangat rapuh."
+  },
+  "Wood_SlantedRoof": {
+    "localized_name": "Atap Kayu Miring",
+    "description": "Atap miring yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Terbuat dari kayu sehingga sangat rapuh."
+  },
+  "Wood_TriangleWall": {
+    "localized_name": "Tembok Kayu Segitiga",
+    "description": "Tembok segitiga untuk dibangun di atas fondasi. Terbuat dari kayu sehingga sangat rapuh."
+  },
+  "Wood_TriangleWallReverse": {
+    "localized_name": "Tembok Kayu Segitiga (Terbalik)",
+    "description": "Tembok segitiga (terbalik) untuk dibangun di atas fondasi. Terbuat dari kayu sehingga sangat rapuh."
+  },
+  "Wood_WindowWall": {
+    "localized_name": "Tembok Kayu dengan Jendela",
+    "description": "Tembok dilengkapi jendela yang dibangun di atas fondasi untuk mencegah penyusup masuk. Terbuat dari kayu sehingga sangat rapuh."
+  },
+  "WoodenBarricade": {
+    "localized_name": "Barikade Kayu",
+    "description": "Barikade kayu untuk dekorasi."
+  },
+  "Wooden_DiagonalWall": {
+    "localized_name": "Tembok Kayu Diagonal",
+    "description": "Tembok diagonal yang dibangun di atas fondasi segitiga untuk mencegah penyusup masuk. Terbuat dari kayu sehingga sangat rapuh."
+  },
+  "Wooden_DoorWall": {
+    "localized_name": "Pintu Kayu",
+    "description": "Pintu yang dibangun di atas fondasi sebagai jalan masuk. Terbuat dari kayu sehingga sangat rapuh."
+  },
+  "Wooden_PyramidRoof": {
+    "localized_name": "Atap Kayu Piramida",
+    "description": "Atap berbentuk piramida yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Terbuat dari kayu sehingga sangat rapuh."
+  },
+  "Wooden_SlopedRoofCorner": {
+    "localized_name": "Atap Kayu Segitiga Miring",
+    "description": "Atap sudut miring yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Terbuat dari kayu sehingga sangat rapuh."
+  },
+  "Wooden_TriangleFoundation": {
+    "localized_name": "Fondasi Kayu Segitiga",
+    "description": "Fondasi segitiga untuk membangun tembok atau fasilitas di atasnya. Terbuat dari kayu sehingga sangat rapuh."
+  },
+  "Wooden_TriangleRoof": {
+    "localized_name": "Atap Kayu Segitiga",
+    "description": "Atap segitiga yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Terbuat dari kayu sehingga sangat rapuh."
+  },
+  "Wooden_TriangleStairsCorner": {
+    "localized_name": "Atap Kayu Sudut",
+    "description": "Atap sudut yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Terbuat dari kayu sehingga sangat rapuh."
+  },
+  "Wooden_WallGate": {
+    "localized_name": "Pintu Masuk untuk Pal dari Kayu",
+    "description": "Pintu masuk untuk Pal yang dibangun di atas fondasi sebagai jalan masuk. Terbuat dari kayu sehingga sangat rapuh."
+  },
+  "Wooden_foundation": {
+    "localized_name": "Fondasi Kayu",
+    "description": "Fondasi untuk membangun tembok atau fasilitas di atasnya. Terbuat dari kayu sehingga sangat rapuh."
+  },
+  "Wooden_ladder": {
+    "localized_name": "Tangga",
+    "description": "Tangga yang bisa kamu gunakan untuk naik ke tempat yang sedikit lebih tinggi."
+  },
+  "Wooden_roof": {
+    "localized_name": "Atap Kayu",
+    "description": "Atap yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Terbuat dari kayu sehingga sangat rapuh."
+  },
+  "Wooden_stair": {
+    "localized_name": "Tangga Kayu",
+    "description": "Tangga yang diletakkan di bawah fondasi atau atap agar bisa dinaiki. Terbuat dari kayu sehingga sangat rapuh."
+  },
+  "Wooden_wall": {
+    "localized_name": "Tembok Kayu",
+    "description": "Tembok yang dibangun di atas fondasi untuk mencegah penyusup masuk. Terbuat dari kayu sehingga sangat rapuh."
+  },
+  "WorkBench": {
+    "localized_name": "Meja Kerja Primitif",
+    "description": "Meja Kerja Primitif untuk membuat item sederhana. Membutuhkan Pal yang bisa melakukan kerajinan tangan."
+  },
+  "WorkBench_SkillUnlock": {
+    "localized_name": "Meja Produksi Pal Gear",
+    "description": "Meja Kerja Primitif untuk membuat peralatan yang digunakan Pal. Buat pelana untuk menaiki Pal, atau buat senjata untuk Pal bertarung."
+  },
+  "WorkSpeedIncrease1": {
+    "localized_name": "Generator Gelombang Beta",
+    "description": "Alat yang menghasilkan gelombang Beta untuk memberi energi pada Pal. Kecepatan kerja Pal yang ada di markas akan meningkat. Meletakkan 2 buah atau lebih tidak akan ada efeknya."
+  },
+  "YakushimaBoss002_Relic": {
+    "localized_name": "Patung Penguasa Bulan",
+    "description": "[Kolaborasi Terraria] Patung emas Penguasa Bulan. Bukti kekuatan setelah melewati pertarungan yang sangat sulit."
+  },
+  "Zabuton": {
+    "localized_name": "Bantal Duduk Jepang",
+    "description": "Bantal duduk Jepang untuk dekorasi. Gunakan saat membuat bangunan bergaya Jepang."
+  },
+  "Zaisu": {
+    "localized_name": "Kursi Lantai Jepang",
+    "description": "Kursi lantai Jepang untuk dekorasi. Gunakan saat membuat bangunan bergaya Jepang."
+  }
+}

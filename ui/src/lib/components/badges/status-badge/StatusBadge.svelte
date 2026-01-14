@@ -6,6 +6,8 @@
 	import { friendshipData } from '$lib/data';
 	import { getModalState } from '$states';
 	import TrustEditModal from './TrustEditModal.svelte';
+	import * as m from '$i18n/messages';
+	import { c } from '$lib/utils/commonTranslations';
 
 	let {
 		pal = $bindable(),
@@ -112,7 +114,7 @@
 {#if pal}
 	<div class="mb-2 flex items-center">
 		{#if showActions}
-			<Tooltip label="Edit Trust Level">
+			<Tooltip label={m.edit_entity({ entity: m.trust_level() })}>
 				<button type="button" class="mr-2" onclick={showTrustEditModal} aria-label="Edit Trust">
 					<img src={staticIcons.trustIcon} alt="Trust" class="h-6 w-6" />
 				</button>
@@ -127,14 +129,16 @@
 				color="bg-[#db7c90]"
 			/>
 			{#snippet popup()}
-				<span>Trust: {trustCurrent.toLocaleString()}</span>
+				<span>{m.trust()}: {trustCurrent.toLocaleString()}</span>
 				{#if currentLevel < 10}
 					<span> / {levelProgress.nextLevelMin.toLocaleString()}</span>
 				{:else}
-					<span> (Max Level)</span>
+					<span> ({m.max_level()})</span>
 				{/if}
 				<br />
-				<span>Progress: {((levelProgress.current / levelProgress.max) * 100).toFixed(1)}%</span>
+				<span
+					>{m.progress()}: {((levelProgress.current / levelProgress.max) * 100).toFixed(1)}%</span
+				>
 			{/snippet}
 		</Tooltip>
 	</div>
@@ -165,7 +169,7 @@
 					<img src={staticIcons.foodIcon} alt="Food" class="h-6 w-6" />
 				</button>
 				{#snippet popup()}
-					<span>Feed</span>
+					<span>{m.feed()}</span>
 					{Math.round(pal.stomach)}/{maxStomach}
 				{/snippet}
 			</Tooltip>

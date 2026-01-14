@@ -1,5 +1,3 @@
-import L from 'leaflet';
-
 // Constants for coordinate conversion from the PalworldCoordinateConverter class
 export const WORLD_MIN_X = -999940.0;
 export const WORLD_MIN_Y = -738920.0;
@@ -31,10 +29,10 @@ export const MAP_WIDTH = GAME_MAX_X - GAME_MIN_X;
 export const MAP_HEIGHT = GAME_MAX_Y - GAME_MIN_Y;
 
 // Calculated transformation parameters for correct mapping
-// These values map the game coordinates to the Leaflet display coordinates
+// These values map the game coordinates to the pixel display coordinates
 export const TRANSFORM_A = MAP_SIZE / MAP_WIDTH; // Scale factor for X
 export const TRANSFORM_B = 5075.45; // Offset for X (calculated to position origin correctly)
-export const TRANSFORM_C = -MAP_SIZE / MAP_HEIGHT; // Scale factor for Y (negative because Leaflet Y is inverted)
+export const TRANSFORM_C = -MAP_SIZE / MAP_HEIGHT; // Scale factor for Y (negative for Y-axis inversion)
 export const TRANSFORM_D = 4960.62; // Offset for Y (calculated to position origin correctly)
 
 // Fixed: Y-coordinate is now inverted with * -1
@@ -51,28 +49,40 @@ export function mapToWorld(mapX: number, mapY: number): { x: number; y: number }
 	return { x: worldX, y: worldY };
 }
 
-// This remains correct since we're using the updated mapCoords with inverted Y
-export function worldToLeaflet(worldX: number, worldY: number): L.LatLng {
+// Convert world coordinates to pixel coordinates for OpenLayers
+// Returns [x, y] in pixel coordinates
+export function worldToPixel(worldX: number, worldY: number): [number, number] {
 	const mapCoords = worldToMap(worldX, worldY);
-	// Transform game coordinates to Leaflet coordinates
-	const leafletX = TRANSFORM_A * mapCoords.x + TRANSFORM_B;
-	const leafletY = TRANSFORM_C * mapCoords.y + TRANSFORM_D;
-	return L.latLng(leafletY, leafletX);
+	// Transform game coordinates to pixel coordinates
+	const pixelX = TRANSFORM_A * mapCoords.x + TRANSFORM_B;
+	const pixelY = TRANSFORM_C * mapCoords.y + TRANSFORM_D;
+	return [pixelX, pixelY];
 }
 
-// Convert Leaflet coordinates to world coordinates
-export function leafletToWorld(latlng: L.LatLng): { worldX: number; worldY: number } {
-	// Convert from Leaflet to game coordinates
-	// Reverse the transformation: x_game = (x_leaflet - TRANSFORM_B) / TRANSFORM_A
-	const gameX = (latlng.lng - TRANSFORM_B) / TRANSFORM_A;
-	const gameY = (latlng.lat - TRANSFORM_D) / TRANSFORM_C;
+// Convert pixel coordinates to world coordinates
+export function pixelToWorld(pixelX: number, pixelY: number): { worldX: number; worldY: number } {
+	// Convert from pixel to game coordinates
+	// Reverse the transformation: x_game = (x_pixel - TRANSFORM_B) / TRANSFORM_A
+	const gameX = (pixelX - TRANSFORM_B) / TRANSFORM_A;
+	const gameY = (pixelY - TRANSFORM_D) / TRANSFORM_C;
 
 	// Then convert from game coordinates to world coordinates
 	const worldCoords = mapToWorld(gameX, gameY);
 	return { worldX: worldCoords.x, worldY: worldCoords.y };
 }
 
-export function mapToLeaflet(mapX: number, mapY: number): L.LatLng {
+// Convert pixel coordinates to game (map) coordinates for display
+export function pixelToGameCoords(
+	pixelX: number,
+	pixelY: number
+): { gameX: number; gameY: number } {
+	const gameX = (pixelX - TRANSFORM_B) / TRANSFORM_A;
+	const gameY = ((pixelY - TRANSFORM_D) / TRANSFORM_C) * -1;
+	return { gameX: Math.round(gameX), gameY: Math.round(gameY) };
+}
+
+// Convert map (game) coordinates to pixel coordinates
+export function mapToPixel(mapX: number, mapY: number): [number, number] {
 	const worldCoords = mapToWorld(mapX, mapY);
-	return worldToLeaflet(worldCoords.x, worldCoords.y);
+	return worldToPixel(worldCoords.x, worldCoords.y);
 }

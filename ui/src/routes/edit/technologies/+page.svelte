@@ -8,6 +8,8 @@
 	import { Lock, Unlock } from 'lucide-svelte';
 	import { EntryState, type Technology } from '$types';
 	import { staticIcons } from '$types/icons';
+	import * as m from '$i18n/messages';
+	import { c } from '$lib/utils/commonTranslations';
 
 	const appState = getAppState();
 	const modal = getModalState();
@@ -73,7 +75,7 @@
 	async function handleEditTechPoints(type: 'tech' | 'ancient') {
 		if (!appState.selectedPlayer) return;
 
-		const title = type === 'tech' ? 'Technology Points' : 'Ancient Technology Points';
+		const title = type === 'tech' ? m.technology_points() : m.ancient_technology_points();
 		// @ts-ignore
 		const result = await modal.showModal<number>(NumberInputModal, {
 			title: title,
@@ -107,7 +109,7 @@
 			? `bg-linear-to-tl from-tech-500/100 to-tech-500/25`
 			: `bg-linear-to-tl from-ancient-tech-500/100 to-ancient-tech-500/25`}
 	{@const headerText =
-		technologyItem.details.unlock_build_objects.length > 0 ? 'Structures' : 'Items'}
+		technologyItem.details.unlock_build_objects.length > 0 ? m.structures() : m.item({ count: 2 })}
 	{@const selectedClass = isSelected
 		? ``
 		: type === 'tech'
@@ -161,7 +163,7 @@
 						<div class="text-start">{technologyItem.description}</div>
 					{/if}
 					{#if technologyItem.details.unlock_build_objects.length > 1}
-						<span class="font-bold">Unlocks:</span>
+						<span class="font-bold">{m.unlocks()}</span>
 						<ul class="ml-4 list-disc">
 							{#each technologyItem.details.unlock_build_objects as buildObject}
 								{@const buildingData = buildingsData.getByKey(buildObject)}
@@ -185,7 +187,7 @@
 						</ul>
 					{/if}
 					{#if technologyItem.details.unlock_item_recipes.length > 1}
-						<span class="font-bold">Unlocks:</span>
+						<span class="font-bold">{m.unlocks()}</span>
 						<ul class="ml-4 list-disc">
 							{#each technologyItem.details.unlock_item_recipes as itemRecipe}
 								{@const itemData = itemsData.getByKey(itemRecipe)}
@@ -213,7 +215,7 @@
 						class="border-surface-400 hover:ring-tech-500 cursor-pointer rounded-lg border hover:ring-2"
 					>
 						<div class="px-6 py-3">
-							<div class="text-surface-400 text-xs">Technology Points</div>
+							<div class="text-surface-400 text-xs">{m.technology_points()}</div>
 							<div class="text-tech-500 text-2xl font-bold">
 								{appState.selectedPlayer.technology_points}
 							</div>
@@ -224,7 +226,7 @@
 						class="border-surface-400 hover:ring-ancient-tech-500 cursor-pointer rounded-lg border hover:ring-2"
 					>
 						<div class="px-6 py-3">
-							<div class="text-surface-400 text-xs">Ancient Technology Points</div>
+							<div class="text-surface-400 text-xs">{m.ancient_technology_points()}</div>
 							<div class="text-ancient-tech-500 text-2xl font-bold">
 								{appState.selectedPlayer.boss_technology_points}
 							</div>
@@ -236,13 +238,15 @@
 						onclick={resetAll}
 						class="btn preset-filled-primary-500 hover:ring-secondary-500 hover:preset-filled-secondary-500 rounded-lg bg-opacity-20 px-6 py-2 font-medium hover:ring-2"
 					>
-						<Lock class="inline h-4 w-4" /> Lock All
+						<Lock class="inline h-4 w-4" />
+						{m.lock_all()}
 					</button>
 					<button
 						onclick={unlockAll}
 						class="btn preset-filled-primary-500 hover:ring-secondary-500 hover:preset-filled-secondary-500 rounded-lg bg-opacity-20 px-6 py-2 font-medium hover:ring-2"
 					>
-						<Unlock class="inline h-4 w-4" /> Unlock All
+						<Unlock class="inline h-4 w-4" />
+						{m.unlock_all()}
 					</button>
 				</div>
 			</div>
@@ -268,7 +272,9 @@
 								{@const isSelected =
 									Number(levelCap) === 1
 										? true
-										: appState.selectedPlayer.technologies.includes(techID)}
+										: appState.selectedPlayer.technologies.some(
+												(t) => t.toLowerCase() === techID.toLowerCase()
+											)}
 								{#if technologyItem && !technologyItem?.details.is_boss_technology}
 									{@render technologyButton(techID, isSelected, technologyItem, 'tech')}
 								{/if}
@@ -294,6 +300,6 @@
 	</main>
 {:else}
 	<div class="flex w-full items-center justify-center">
-		<h2 class="h2">Select a Player to view technologies 🌐</h2>
+		<h2 class="h2">{m.select_player_view_entity({ entity: m.technology({ count: 2 }) })}</h2>
 	</div>
 {/if}

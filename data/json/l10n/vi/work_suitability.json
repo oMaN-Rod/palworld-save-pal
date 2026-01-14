@@ -1,0 +1,54 @@
+{
+  "Collection": {
+    "localized_name": "Thu Thập",
+    "description": null
+  },
+  "Cool": {
+    "localized_name": "Làm Mát",
+    "description": null
+  },
+  "Deforest": {
+    "localized_name": "Đốn Gỗ",
+    "description": null
+  },
+  "EmitFlame": {
+    "localized_name": "Nhóm lửa",
+    "description": null
+  },
+  "GenerateElectricity": {
+    "localized_name": "Phát Điện",
+    "description": null
+  },
+  "Handcraft": {
+    "localized_name": "Công Việc Thủ Công",
+    "description": null
+  },
+  "Mining": {
+    "localized_name": "Khai Thác",
+    "description": null
+  },
+  "MonsterFarm": {
+    "localized_name": "Làm Nông",
+    "description": null
+  },
+  "OilExtraction": {
+    "localized_name": "-",
+    "description": null
+  },
+  "ProductMedicine": {
+    "localized_name": "Chế Thuốc",
+    "description": null
+  },
+  "Seeding": {
+    "localized_name": "Gieo Hạt",
+    "description": null
+  },
+  "Transport": {
+    "localized_name": "Vận Chuyển",
+    "description": null
+  },
+  "Watering": {
+    "localized_name": "Tưới Nước",
+    "description": null
+  }
+}

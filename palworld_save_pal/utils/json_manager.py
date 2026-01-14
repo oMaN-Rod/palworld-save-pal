@@ -9,15 +9,30 @@ from palworld_save_pal.utils.logging_config import create_logger
 logger = create_logger(__name__)
 
 
+def sanitize_string(value: str) -> str:
+    if not value:
+        return value
+    try:
+        # First try normal encoding - if it works, string is clean
+        value.encode("utf-8")
+        return value
+    except UnicodeEncodeError:
+        # String contains surrogates - remove them
+        return value.encode("utf-8", errors="surrogatepass").decode(
+            "utf-8", errors="replace"
+        )
+
+
 def find_data_file(filename):
     # If we're on Mac and frozen, make sure we use the correct path
-    if getattr(sys, 'frozen', False) and platform.system() == "Darwin":
+    if getattr(sys, "frozen", False) and platform.system() == "Darwin":
         # The application is frozen
         datadir = os.path.dirname(sys.executable)
     else:
         # The application is not frozen
         datadir = ""
     return os.path.join(datadir, filename)
+
 
 class JsonManager:
     def __init__(self, file_path: str):

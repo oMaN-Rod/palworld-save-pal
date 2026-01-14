@@ -1,0 +1,602 @@
+{
+  "Cool1": {
+    "localized_name": "แช่เย็นถนอมอาหาร Lv1",
+    "description": null
+  },
+  "Cool1_2": {
+    "localized_name": "งานแช่เย็น Lv1",
+    "description": null
+  },
+  "Cool1_3": {
+    "localized_name": "งานแช่เย็น Lv2",
+    "description": null
+  },
+  "Cool1_4": {
+    "localized_name": "งานแช่เย็น Lv3",
+    "description": null
+  },
+  "Cool1_5": {
+    "localized_name": "งานแช่เย็น Lv4",
+    "description": null
+  },
+  "Cool2": {
+    "localized_name": "ความไวฟักไข่ Lv1",
+    "description": null
+  },
+  "Cool2_2": {
+    "localized_name": "ความไวฟักไข่ Lv2",
+    "description": null
+  },
+  "Cool2_3": {
+    "localized_name": "ความไวฟักไข่ Lv3",
+    "description": null
+  },
+  "Cool2_4": {
+    "localized_name": "ความไวฟักไข่ Lv4",
+    "description": null
+  },
+  "Cool3": {
+    "localized_name": "วิจัยแช่เย็น Lv1",
+    "description": null
+  },
+  "Cool3_2": {
+    "localized_name": "วิจัยแช่เย็น Lv2",
+    "description": null
+  },
+  "Cool3_3": {
+    "localized_name": "เสริมพลังพาลที่ฐาน Lv1",
+    "description": null
+  },
+  "Cool3_4": {
+    "localized_name": "เสริมพลังพาลที่ฐาน Lv2",
+    "description": null
+  },
+  "Cool4": {
+    "localized_name": "แช่เย็นถนอมอาหาร Lv2",
+    "description": null
+  },
+  "Cool4_2": {
+    "localized_name": "แช่เย็นถนอมอาหาร Lv3",
+    "description": null
+  },
+  "Cool4_3": {
+    "localized_name": "แช่เย็นถนอมอาหาร Lv4",
+    "description": null
+  },
+  "Cool5": {
+    "localized_name": "พัฒนาตุ๊กตาหิมะ",
+    "description": null
+  },
+  "Deforest1": {
+    "localized_name": "งานตัดไม้ Lv1",
+    "description": null
+  },
+  "Deforest1_2": {
+    "localized_name": "งานตัดไม้ Lv2",
+    "description": null
+  },
+  "Deforest1_3": {
+    "localized_name": "งานตัดไม้ Lv3",
+    "description": null
+  },
+  "Deforest1_4": {
+    "localized_name": "งานตัดไม้ Lv4",
+    "description": null
+  },
+  "Deforest1_5": {
+    "localized_name": "งานตัดไม้ Lv5",
+    "description": null
+  },
+  "Deforest2": {
+    "localized_name": "ร่นเวลาเดินทางไกล Lv1",
+    "description": null
+  },
+  "Deforest2_2": {
+    "localized_name": "เคล็ดลับเดินทางไกล Lv1",
+    "description": null
+  },
+  "Deforest2_3": {
+    "localized_name": "ร่นเวลาเดินทางไกล Lv2",
+    "description": null
+  },
+  "Deforest2_4": {
+    "localized_name": "เคล็ดลับเดินทางไกล Lv2",
+    "description": null
+  },
+  "Deforest2_5": {
+    "localized_name": "ร่นเวลาเดินทางไกล Lv3",
+    "description": null
+  },
+  "Deforest2_6": {
+    "localized_name": "เคล็ดลับเดินทางไกล Lv3",
+    "description": null
+  },
+  "Deforest3": {
+    "localized_name": "เกร็ดการวิจัยการตัดไม้ Lv1",
+    "description": null
+  },
+  "Deforest3_2": {
+    "localized_name": "เกร็ดการวิจัยการตัดไม้ Lv2",
+    "description": null
+  },
+  "Deforest3_3": {
+    "localized_name": "เสริมพลังพาลที่ฐาน Lv1",
+    "description": null
+  },
+  "Deforest3_4": {
+    "localized_name": "เสริมพลังพาลที่ฐาน Lv2",
+    "description": null
+  },
+  "Deforest4": {
+    "localized_name": "พัฒนาตอและขวานตัดไม้",
+    "description": null
+  },
+  "EmitFlame1": {
+    "localized_name": "งานจุดไฟ Lv1",
+    "description": null
+  },
+  "EmitFlame1_2": {
+    "localized_name": "งานจุดไฟ Lv2",
+    "description": null
+  },
+  "EmitFlame1_3": {
+    "localized_name": "งานจุดไฟ Lv3",
+    "description": null
+  },
+  "EmitFlame1_4": {
+    "localized_name": "งานจุดไฟ Lv4",
+    "description": null
+  },
+  "EmitFlame1_5": {
+    "localized_name": "งานจุดไฟ Lv5",
+    "description": null
+  },
+  "EmitFlame2": {
+    "localized_name": "ความไวฟักไข่ Lv1",
+    "description": null
+  },
+  "EmitFlame2_2": {
+    "localized_name": "ความไวฟักไข่ Lv2",
+    "description": null
+  },
+  "EmitFlame2_3": {
+    "localized_name": "ความไวฟักไข่ Lv3",
+    "description": null
+  },
+  "EmitFlame2_4": {
+    "localized_name": "ความไวฟักไข่ Lv4",
+    "description": null
+  },
+  "EmitFlame3": {
+    "localized_name": "เกร็ดการวิจัยการจุดไฟ Lv1",
+    "description": null
+  },
+  "EmitFlame3_2": {
+    "localized_name": "เกร็ดการวิจัยการจุดไฟ Lv2",
+    "description": null
+  },
+  "EmitFlame3_3": {
+    "localized_name": "เสริมพลังพาลที่ฐาน Lv1",
+    "description": null
+  },
+  "EmitFlame3_4": {
+    "localized_name": "เสริมพลังพาลที่ฐาน Lv2",
+    "description": null
+  },
+  "EmitFlame4": {
+    "localized_name": "ทักษะประกอบอาหารจำนวนมาก Lv1",
+    "description": null
+  },
+  "EmitFlame4_2": {
+    "localized_name": "เทคนิคการถลุง Lv1",
+    "description": null
+  },
+  "EmitFlame4_3": {
+    "localized_name": "ทักษะประกอบอาหารจำนวนมาก Lv2",
+    "description": null
+  },
+  "EmitFlame4_4": {
+    "localized_name": "เทคนิคการถลุง Lv2",
+    "description": null
+  },
+  "EmitFlame5": {
+    "localized_name": "พัฒนากระถางไฟศักดิ์สิทธิ์",
+    "description": null
+  },
+  "GenerateEnergy1": {
+    "localized_name": "งานผลิตไฟฟ้า Lv1",
+    "description": null
+  },
+  "GenerateEnergy1_2": {
+    "localized_name": "งานผลิตไฟฟ้า Lv2",
+    "description": null
+  },
+  "GenerateEnergy1_3": {
+    "localized_name": "งานผลิตไฟฟ้า Lv3",
+    "description": null
+  },
+  "GenerateEnergy1_4": {
+    "localized_name": "งานผลิตไฟฟ้า Lv4",
+    "description": null
+  },
+  "GenerateEnergy1_5": {
+    "localized_name": "งานผลิตไฟฟ้า Lv5",
+    "description": null
+  },
+  "GenerateEnergy2": {
+    "localized_name": "เทคนิคการสะสมไฟฟ้า Lv1",
+    "description": null
+  },
+  "GenerateEnergy2_2": {
+    "localized_name": "เทคนิคการสะสมไฟฟ้า Lv2",
+    "description": null
+  },
+  "GenerateEnergy2_3": {
+    "localized_name": "เทคนิคการสะสมไฟฟ้า Lv3",
+    "description": null
+  },
+  "GenerateEnergy3": {
+    "localized_name": "เกร็ดการวิจัยการผลิตไฟฟ้า Lv1",
+    "description": null
+  },
+  "GenerateEnergy3_2": {
+    "localized_name": "เกร็ดการวิจัยการผลิตไฟฟ้า Lv2",
+    "description": null
+  },
+  "GenerateEnergy3_3": {
+    "localized_name": "เสริมพลังพาลที่ฐาน Lv1",
+    "description": null
+  },
+  "GenerateEnergy3_4": {
+    "localized_name": "เสริมพลังพาลที่ฐาน Lv2",
+    "description": null
+  },
+  "GenerateEnergy4": {
+    "localized_name": "เคล็ดลับประหยัดไฟ Lv1",
+    "description": null
+  },
+  "GenerateEnergy4_2": {
+    "localized_name": "เคล็ดลับประหยัดไฟ Lv2",
+    "description": null
+  },
+  "GenerateEnergy4_3": {
+    "localized_name": "เคล็ดลับประหยัดไฟ Lv3",
+    "description": null
+  },
+  "GenerateEnergy5": {
+    "localized_name": "พัฒนาเสาไฟฟ้า",
+    "description": null
+  },
+  "Handcraft1": {
+    "localized_name": "ความเร็วการทำงานฝีมือ Lv1",
+    "description": null
+  },
+  "Handcraft1_2": {
+    "localized_name": "ความเร็วการทำงานฝีมือ Lv2",
+    "description": null
+  },
+  "Handcraft1_3": {
+    "localized_name": "ความเร็วการทำงานฝีมือ Lv3",
+    "description": null
+  },
+  "Handcraft1_4": {
+    "localized_name": "ความเร็วการทำงานฝีมือ Lv4",
+    "description": null
+  },
+  "Handcraft1_5": {
+    "localized_name": "ความเร็วการทำงานฝีมือ Lv5",
+    "description": null
+  },
+  "Handcraft2": {
+    "localized_name": "เทคนิคประหยัดวัสดุสร้างเครื่องป้องกัน Lv1",
+    "description": null
+  },
+  "Handcraft2_2": {
+    "localized_name": "เทคนิคประหยัดวัสดุสร้างพาลเกียร์ Lv1",
+    "description": null
+  },
+  "Handcraft2_3": {
+    "localized_name": "เทคนิคประหยัดวัสดุสร้างอาวุธ Lv1",
+    "description": null
+  },
+  "Handcraft2_4": {
+    "localized_name": "เทคนิคประหยัดวัสดุสร้างเครื่องป้องกัน Lv2",
+    "description": null
+  },
+  "Handcraft2_5": {
+    "localized_name": "เทคนิคประหยัดวัสดุสร้างพาลเกียร์ Lv2",
+    "description": null
+  },
+  "Handcraft2_6": {
+    "localized_name": "เทคนิคประหยัดวัสดุสร้างอาวุธ Lv2",
+    "description": null
+  },
+  "Handcraft3": {
+    "localized_name": "เกร็ดการวิจัยงานฝีมือ Lv1",
+    "description": null
+  },
+  "Handcraft3_2": {
+    "localized_name": "เกร็ดการวิจัยงานฝีมือ Lv2",
+    "description": null
+  },
+  "Handcraft3_3": {
+    "localized_name": "เสริมพลังพาลที่ฐาน Lv1",
+    "description": null
+  },
+  "Handcraft3_4": {
+    "localized_name": "เสริมพลังพาลที่ฐาน Lv2",
+    "description": null
+  },
+  "Handcraft4": {
+    "localized_name": "เทคนิคผลิตสเฟียร์ซ้ำ Lv1",
+    "description": null
+  },
+  "Handcraft4_2": {
+    "localized_name": "เทคนิคผลิตดินปืนซ้ำ Lv1",
+    "description": null
+  },
+  "Handcraft4_3": {
+    "localized_name": "เทคนิคผลิตบสเฟียร์ซ้ำ Lv2",
+    "description": null
+  },
+  "Handcraft4_4": {
+    "localized_name": "เทคนิคผลิตดินปืนซ้ำ Lv2",
+    "description": null
+  },
+  "Handcraft5": {
+    "localized_name": "พัฒนากล่องเครื่องมือขนาดใหญ่",
+    "description": null
+  },
+  "Medicine1": {
+    "localized_name": "งานผลิตยา Lv1",
+    "description": null
+  },
+  "Medicine1_2": {
+    "localized_name": "งานผลิตยา Lv2",
+    "description": null
+  },
+  "Medicine1_3": {
+    "localized_name": "งานผลิตยา Lv3",
+    "description": null
+  },
+  "Medicine1_4": {
+    "localized_name": "งานผลิตยา Lv4",
+    "description": null
+  },
+  "Medicine1_5": {
+    "localized_name": "งานผลิตยา Lv5",
+    "description": null
+  },
+  "Medicine2": {
+    "localized_name": "วิจัยผลิตยา Lv1",
+    "description": null
+  },
+  "Medicine2_2": {
+    "localized_name": "วิจัยผลิตยา Lv2",
+    "description": null
+  },
+  "Medicine2_3": {
+    "localized_name": "เสริมพลังพาลที่ฐาน Lv1",
+    "description": null
+  },
+  "Medicine2_4": {
+    "localized_name": "เสริมพลังพาลที่ฐาน Lv2",
+    "description": null
+  },
+  "Medicine3": {
+    "localized_name": "เทคนิคประหยัดวัสดุผลิตยา Lv1",
+    "description": null
+  },
+  "Medicine3_2": {
+    "localized_name": "เทคนิคประหยัดวัสดุผลิตยา Lv2",
+    "description": null
+  },
+  "Medicine3_3": {
+    "localized_name": "เทคนิคประหยัดวัสดุผลิตยา Lv3",
+    "description": null
+  },
+  "Medicine4": {
+    "localized_name": "พัฒนาหม้อแม่มด",
+    "description": null
+  },
+  "Mining1": {
+    "localized_name": "งานขุดแร่ Lv1",
+    "description": null
+  },
+  "Mining1_2": {
+    "localized_name": "งานขุดแร่ Lv2",
+    "description": null
+  },
+  "Mining1_3": {
+    "localized_name": "งานขุดแร่ Lv3",
+    "description": null
+  },
+  "Mining1_4": {
+    "localized_name": "งานขุดแร่ Lv4",
+    "description": null
+  },
+  "Mining1_5": {
+    "localized_name": "งานขุดแร่ Lv5",
+    "description": null
+  },
+  "Mining2": {
+    "localized_name": "ร่นเวลาเดินทางไกล Lv1",
+    "description": null
+  },
+  "Mining2_2": {
+    "localized_name": "เคล็ดลับเดินทางไกล Lv1",
+    "description": null
+  },
+  "Mining2_3": {
+    "localized_name": "ร่นเวลาเดินทางไกล Lv2",
+    "description": null
+  },
+  "Mining2_4": {
+    "localized_name": "เคล็ดลับเดินทางไกล Lv2",
+    "description": null
+  },
+  "Mining3": {
+    "localized_name": "เกร็ดการวิจัยการขุดแร่ Lv1",
+    "description": null
+  },
+  "Mining3_2": {
+    "localized_name": "เกร็ดการวิจัยการขุดแร่ Lv2",
+    "description": null
+  },
+  "Mining3_3": {
+    "localized_name": "เสริมพลังพาลที่ฐาน Lv1",
+    "description": null
+  },
+  "Mining3_4": {
+    "localized_name": "เสริมพลังพาลที่ฐาน Lv2",
+    "description": null
+  },
+  "Mining4": {
+    "localized_name": "เพิ่มประสิทธิภาพเครื่องสกัดน้ำมันดิบ Lv1",
+    "description": null
+  },
+  "Mining4_2": {
+    "localized_name": "เพิ่มประสิทธิภาพเครื่องสกัดน้ำมันดิบ Lv2",
+    "description": null
+  },
+  "Mining4_3": {
+    "localized_name": "เพิ่มประสิทธิภาพเครื่องสกัดน้ำมันดิบ Lv3",
+    "description": null
+  },
+  "Mining5": {
+    "localized_name": "พัฒนารถขุดแร่",
+    "description": null
+  },
+  "Seeding1": {
+    "localized_name": "งานหว่านเมล็ด Lv1",
+    "description": null
+  },
+  "Seeding1_2": {
+    "localized_name": "งานหว่านเมล็ด Lv2",
+    "description": null
+  },
+  "Seeding1_3": {
+    "localized_name": "งานหว่านเมล็ด Lv3",
+    "description": null
+  },
+  "Seeding1_4": {
+    "localized_name": "งานหว่านเมล็ด Lv4",
+    "description": null
+  },
+  "Seeding1_5": {
+    "localized_name": "งานหว่านเมล็ด Lv5",
+    "description": null
+  },
+  "Seeding2": {
+    "localized_name": "องค์ความรู้เรื่องพืชผล Lv1",
+    "description": null
+  },
+  "Seeding2_2": {
+    "localized_name": "องค์ความรู้เรื่องเก็บเกี่ยว Lv1",
+    "description": null
+  },
+  "Seeding2_3": {
+    "localized_name": "องค์ความรู้เรื่องพืชผล Lv2",
+    "description": null
+  },
+  "Seeding2_4": {
+    "localized_name": "องค์ความรู้เรื่องพืชผล Lv3",
+    "description": null
+  },
+  "Seeding2_5": {
+    "localized_name": "องค์ความรู้เรื่องเก็บเกี่ยว Lv2",
+    "description": null
+  },
+  "Seeding2_6": {
+    "localized_name": "องค์ความรู้เรื่องเก็บเกี่ยว Lv3",
+    "description": null
+  },
+  "Seeding3": {
+    "localized_name": "เกร็ดการวิจัยการหว่านเมล็ด Lv1",
+    "description": null
+  },
+  "Seeding3_2": {
+    "localized_name": "เกร็ดการวิจัยการหว่านเมล็ด Lv2",
+    "description": null
+  },
+  "Seeding3_3": {
+    "localized_name": "เสริมพลังพาลที่ฐาน Lv1",
+    "description": null
+  },
+  "Seeding3_4": {
+    "localized_name": "เสริมพลังพาลที่ฐาน Lv2",
+    "description": null
+  },
+  "Seeding4": {
+    "localized_name": "พัฒนากระถางดอกไม้",
+    "description": null
+  },
+  "Seeding5": {
+    "localized_name": "พัฒนาไซโล",
+    "description": null
+  },
+  "Watering1": {
+    "localized_name": "งานรดน้ำ Lv1",
+    "description": null
+  },
+  "Watering1_2": {
+    "localized_name": "งานรดน้ำ Lv2",
+    "description": null
+  },
+  "Watering1_3": {
+    "localized_name": "งานรดน้ำ Lv3",
+    "description": null
+  },
+  "Watering1_4": {
+    "localized_name": "งานรดน้ำ Lv4",
+    "description": null
+  },
+  "Watering1_5": {
+    "localized_name": "งานรดน้ำ Lv5",
+    "description": null
+  },
+  "Watering2": {
+    "localized_name": "องค์ความรู้เรื่องพืชผล Lv1",
+    "description": null
+  },
+  "Watering2_2": {
+    "localized_name": "องค์ความรู้เรื่องเก็บเกี่ยว Lv1",
+    "description": null
+  },
+  "Watering2_3": {
+    "localized_name": "องค์ความรู้เรื่องพืชผล Lv2",
+    "description": null
+  },
+  "Watering2_4": {
+    "localized_name": "องค์ความรู้เรื่องเก็บเกี่ยว Lv2",
+    "description": null
+  },
+  "Watering3": {
+    "localized_name": "เกร็ดการวิจัยการรดน้ำ Lv1",
+    "description": null
+  },
+  "Watering3_2": {
+    "localized_name": "เกร็ดการวิจัยการรดน้ำ Lv2",
+    "description": null
+  },
+  "Watering3_3": {
+    "localized_name": "เสริมพลังพาลที่ฐาน Lv1",
+    "description": null
+  },
+  "Watering3_4": {
+    "localized_name": "เสริมพลังพาลที่ฐาน Lv2",
+    "description": null
+  },
+  "Watering4": {
+    "localized_name": "ทักษะบดพาลเดียม Lv1",
+    "description": null
+  },
+  "Watering4_2": {
+    "localized_name": "ทักษะบดพาลเดียม Lv2",
+    "description": null
+  },
+  "Watering5": {
+    "localized_name": "พัฒนาน้ำพุ",
+    "description": null
+  }
+}

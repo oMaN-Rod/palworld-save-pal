@@ -7,6 +7,8 @@
 	import { TimerReset } from 'lucide-svelte';
 	import { assetLoader } from '$utils';
 	import { staticIcons } from '$types/icons';
+	import * as m from '$i18n/messages';
+	import { c } from '$lib/utils/commonTranslations';
 
 	let { skill = 'Empty', onSkillUpdate } = $props<{
 		skill: string;
@@ -36,7 +38,7 @@
 		const result = await modal.showModal<string>(SkillSelectModal, {
 			type: 'Active',
 			value: skill,
-			title: 'Select Active Skill',
+			title: m.select_entity({ entity: c.activeSkill }),
 			pal: appState.selectedPal
 		});
 		if (!result) return;
@@ -74,7 +76,7 @@
 				</div>
 			</div>
 			<div
-				class="absolute bottom-0 right-[3rem] top-0 w-8 origin-top-right skew-x-[-20deg] transform"
+				class="absolute bottom-0 right-12 top-0 w-8 origin-top-right skew-x-[-20deg] transform"
 				style="background-color: {element?.color}"
 			></div>
 		</div>
@@ -92,7 +94,7 @@
 						<div class="flex items-center space-x-2">
 							<TimerReset class="h-4 w-4" />
 							<span class="font-bold">{activeSkill?.details.cool_time}</span>
-							<span class="text-xs">Pwr</span>
+							<span class="text-xs">{m.pwr()}</span>
 							<span class="font-bold">{activeSkill?.details.power}</span>
 						</div>
 					</div>
@@ -103,7 +105,7 @@
 				<div>
 					<div class="flex flex-row items-center space-x-2 p-2">
 						<div class="grow text-start">
-							<span class="text-xs">Range</span>
+							<span class="text-xs">{m.range()}</span>
 							<span class="font-bold"
 								>{activeSkill?.details.min_range} - {activeSkill?.details.max_range}</span
 							>

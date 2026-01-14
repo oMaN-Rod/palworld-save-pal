@@ -4,6 +4,8 @@
 	import { Save, X } from 'lucide-svelte';
 	import { onMount } from 'svelte';
 	import { focusModal } from '$utils/modalUtils';
+	import * as m from '$i18n/messages';
+	import { c } from '$lib/utils/commonTranslations';
 
 	let {
 		title = '',
@@ -50,7 +52,7 @@
 					<Save />
 				</button>
 				{#snippet popup()}
-					<span>Save</span>
+					<span>{c.save}</span>
 				{/snippet}
 			</Tooltip>
 			<Tooltip position="bottom">
@@ -58,7 +60,7 @@
 					<X />
 				</button>
 				{#snippet popup()}
-					<span>Cancel</span>
+					<span>{m.cancel()}</span>
 				{/snippet}
 			</Tooltip>
 		</div>

@@ -1,0 +1,757 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "about": "Acerca de",
+  "about_built_by": "Creado por <s>un tipo que es desarrollador</s> algunos tipos que son desarrolladores por diversión.",
+  "about_check_out": "Verificar",
+  "about_for_more_info": "para más información.",
+  "about_github_repo": "repositorio de Github",
+  "accessory": "Accesorio",
+  "actions": "Comportamiento",
+  "active": "Activo",
+  "active_filters_count": "Filtros activos ({count})",
+  "activity": "Actividad",
+  "add": "Agregar",
+  "add_all_implants": "Agregar todos los implantes",
+  "add_all_pal_gear": "Agregar todo el equipo {pal}",
+  "add_all_pals_to_entity": "Agregue todo {pals} a {entity}",
+  "add_all_skills": "Agregar todas las habilidades",
+  "add_count_pals": "Añadir {count} {type} {pals}",
+  "add_entity": "Añadir {entity}",
+  "add_new_pal": "Agregar nuevo {pal}",
+  "add_new_pal_to_entity": "Agrega un nuevo amigo a tu {entity}",
+  "add_new_tag": "Agregar nueva etiqueta",
+  "add_notes_about_cloned_pals": "Agregue notas sobre estos {pals} clonados...",
+  "add_notes_about_imported_pals": "Agregue notas sobre estos {pals} importados...",
+  "add_other_key_items": "Agregar otros elementos clave",
+  "add_pal_to_base": "Agregue un nuevo {pal} a la base {base}",
+  "add_preset_entity": "Agregar {entity} preestablecido",
+  "add_skill": "Agregar habilidad",
+  "add_skills_preset": "Agregar {type} habilidades preestablecidas",
+  "add_tag": "Agregar etiqueta",
+  "add_to_collection": "Añadir a la colección",
+  "add_to_favorites": "Añadir a favoritos",
+  "added_label": "Agregado:",
+  "all": "Todo",
+  "all_entity": "Todo {entity}",
+  "alpha": "Alfa",
+  "alpha_pal": "Alfa {pals}",
+  "ammo": "Munición",
+  "ancient_technology_points": "Puntos de tecnología antigua",
+  "and_more_count": "+{count} más",
+  "apply_preset": "Aplicar un ajuste preestablecido",
+  "apply_preset_to_selected": "Aplicar ajuste preestablecido al {pals} seleccionado",
+  "apply_presets": "Aplicar ajustes preestablecidos",
+  "apply_selected_entity": "Aplicar seleccionado {entity}",
+  "archive_entity": "Archivo {entity}",
+  "armor": "Armadura",
+  "attack": "Ataque",
+  "available_entity": "Disponible {entity}",
+  "available_saves": "Guardados disponibles",
+  "available_slots": "Ranuras disponibles",
+  "available_tags": "Etiquetas disponibles",
+  "avg_clones_per_pal": "Promedio clones por {pal}:",
+  "avg_level": "Nivel promedio",
+  "avg_pals_per_collection": "Promedio {pals} por colección:",
+  "avg_transfers_per_pal": "Promedio transferencias por {pal}:",
+  "base_container": "Contenedor básico",
+  "base_name": "Nombre base",
+  "basecamp_level": "Nivel de campo base",
+  "blueprint": "Cianotipo",
+  "body": "Cuerpo",
+  "boss": "Jefe",
+  "box": "Caja",
+  "bulk_clone_to_ups_failed": "Falló la clonación masiva a UPS. Por favor inténtalo de nuevo.",
+  "cancel": "Cancelar",
+  "cannot_fill": "No puedes llenar tu {target}, necesitas {count} espacios más.",
+  "cannot_paste_here": "No se puede pegar aquí (todavía™)",
+  "category": "Categoría",
+  "change_player_name": "Cambiar nombre de jugador",
+  "changes": "Cambios",
+  "character": "Personaje",
+  "character_container": "Contenedor de personajes",
+  "cheat_mode": "Modo trampa",
+  "chest": "Pecho",
+  "choose_a_entity": "Elige un {entity}",
+  "choose_entity": "Elija entidad",
+  "clear": "Claro",
+  "clear_all": "Borrar todo",
+  "clear_all_entity": "Borrar todo {entity}",
+  "clear_completed_missions_confirm": "¿Estás seguro de que deseas borrar todas las {count} misiones {type} completadas?",
+  "clear_current_missions_confirm": "¿Estás seguro de que deseas borrar todas las {count} misiones {type} actuales?",
+  "clear_entity": "Borrar {entity}",
+  "clear_selected": "Borrar seleccionado",
+  "clear_selected_entity": "Borrar seleccionado {entity}",
+  "clear_selection": "Borrar selección",
+  "cleared_completed_missions": "Has completado {count} y has completado {type} misiones.",
+  "cleared_current_missions": "Has completado {count} misiones {type} actuales.",
+  "click_map_coordinates": "Haga clic en el mapa para ver las coordenadas detalladas.",
+  "click_to_complete": "Haga clic para completar",
+  "clipboard_cleared": "Portapapeles borrado",
+  "clone_pal_to_entity": "Clonar {pal} a {entity}",
+  "clone_pals_to_entity": "Clonar {count} {pals} a {entity}",
+  "clone_prefix": "Clonar prefijo",
+  "clone_selected_pal": "Clon seleccionado {pal}",
+  "clone_to_entity": "Clonar a {entity}",
+  "clone_to_entity_failed": "Error al clonar {entity}. Por favor inténtalo de nuevo.",
+  "clones": "Clones",
+  "cloning_count_pals": "Clonación {count} {pals}",
+  "close_drawer": "Cerrar cajón",
+  "close_toast": "Cerrar brindis",
+  "collection_delete_warning": "Los amigos de esta colección no se eliminarán, pero ya no estarán asociados con esta colección.",
+  "collection_name": "Nombre de la colección",
+  "collection_optional": "Colección (opcional)",
+  "collections": "Colecciones",
+  "common": "Común",
+  "completed": "Terminado",
+  "completed_missions": "Misiones completadas",
+  "confirm": "Confirmar",
+  "consume": "Consumible",
+  "container_entity": "{entity} Contenedor",
+  "copy": "Copiar",
+  "create": "Crear",
+  "create_entity_name": "Crear \"{name}\" {entity}",
+  "create_first_entity": "Crea tu primer {entity}",
+  "create_new_collection": "Crear nueva colección",
+  "create_pals_or_import": "Cree nuevos {pals} o impórtelos desde sus archivos guardados para comenzar.",
+  "create_preset_from_container": "Crear preset desde el contenedor",
+  "create_preset_from_current": "Crear ajuste preestablecido a partir del {entity} actual",
+  "created": "Creado",
+  "current_collection": "Colección actual",
+  "current_missions": "Misiones actuales",
+  "current_save_file": "Archivo guardado actual",
+  "debug": "Depurar",
+  "debug_mode": "Modo de depuración",
+  "defense": "Defensa",
+  "delete": "Borrar",
+  "delete_count_entities_confirm": "¿Está seguro de que desea eliminar el {count} seleccionado {entity}?",
+  "delete_entire_guild": "Eliminar todo el gremio",
+  "delete_entity": "Eliminar {entity}",
+  "delete_entity_by_name_confirm": "¿Está seguro de que desea eliminar {name}? Esta acción no se puede deshacer.",
+  "delete_entity_confirm": "¿Está seguro de que desea eliminar este {entity}? Esta acción no se puede deshacer.",
+  "delete_entity_warning": "¿Está seguro de que desea eliminar \"{name}\"? {warning}",
+  "delete_selected_entity": "Eliminar seleccionado {entity}",
+  "delete_selected_entity_confirm": "¿Está seguro de que desea eliminar el {entity} seleccionado?",
+  "deleted_entity": "Eliminado {count} {entity}",
+  "description_optional": "Descripción (opcional)",
+  "dimensional_pal_storage": "Dimensional {pal} Almacenamiento",
+  "distribution": "Distribución",
+  "download": "Descargar",
+  "download_modified_save": "Descargar el archivo Level.sav modificado",
+  "dps": "DPS",
+  "dps_not_available": "El jugador seleccionado no tiene DPS",
+  "drag_drop_zip": "o arrastra y suelta tu archivo zip aquí",
+  "dungeons": "Mazmorras",
+  "edit": "Editar",
+  "edit_entity": "Editar {entity}",
+  "edit_entity_name": "Editar nombre {entity}",
+  "edit_tags_for_pals": "Editar etiquetas para {count} {pals}",
+  "effect": "Efecto",
+  "egg": "Huevo",
+  "element_and_type": "Elemento y tipo",
+  "element_types": "Tipos de elementos",
+  "elemental_distribution": "Distribución elemental",
+  "empty": "Vacío",
+  "enter_item_count": "Ingrese el recuento de artículos",
+  "enter_name_for_entity": "Ingrese un nombre para el nuevo {entity}:",
+  "enter_new_name_for_entity": "Ingrese un nuevo nombre para el {entity}:",
+  "enter_tag_name": "Introduzca el nombre de la etiqueta",
+  "entity_count_available": "{count} {entity} disponible",
+  "entity_not_available": "{entity} no está disponible.",
+  "epic": "Épico",
+  "error": "Error",
+  "error_copied": "Detalles del error copiados al portapapeles",
+  "error_copy_failed": "No se pudieron copiar los detalles del error",
+  "error_nuke_operation": "Se produjo un error durante la operación nuclear. Por favor inténtalo de nuevo.",
+  "essential": "Básico",
+  "export": "Exportar",
+  "export_pals": "Exportar {count} {pals}",
+  "export_preset": "Exportar preset a archivo",
+  "export_selected": "Exportar seleccionado",
+  "export_target": "Destino de exportación",
+  "export_to": "Exportar a",
+  "exporting_count_selected_pals": "Exportando {count} seleccionado {pals}",
+  "export_note_message": "Los amigos exportados se copiarán en la ubicación de destino. Los originales permanecerán en UPS.",
+  "export_to_target": "Exportar a {target}",
+  "failed_create_pal": "No se pudo crear un nuevo amigo. Por favor inténtalo de nuevo.",
+  "failed_export_pals": "No se pudo exportar {count} {pals}",
+  "failed_get_pal_data": "No se pudieron obtener los datos del amigo",
+  "failed_nuke_ups": "No se pudo bombardear UPS. Por favor inténtalo de nuevo.",
+  "fast_travel": "Viaje rápido",
+  "favorites": "Favoritos",
+  "feed": "Alimentar",
+  "fill": "Llenar",
+  "fill_container": "Llenar el contenedor",
+  "fill_current_entity": "Llenar actual {entity}",
+  "fill_entity": "Rellenar {entity}",
+  "filter_and_sort": "Filtrar y ordenar",
+  "filtered": "Filtrado",
+  "food": "Alimento",
+  "for": "para",
+  "friendship_rank": "Rango de amistad",
+  "gender": "Género",
+  "glider": "Planeador",
+  "global_pal_storage": "Almacenamiento global {pal}",
+  "gps": "GPS",
+  "gps_not_available": "El GPS no está disponible en este archivo guardado",
+  "grid_view": "Vista de cuadrícula",
+  "guild_name": "Nombre del gremio",
+  "head": "Cabeza",
+  "heal_all_in_entity": "Cura todo en {entity}",
+  "heal_selected_pals": "Curar seleccionado {pals}",
+  "health": "Salud",
+  "how_many_clones": "¿Cuantos clones?",
+  "hp": "caballos de fuerza",
+  "id": "IDENTIFICACIÓN",
+  "ivs": "IV",
+  "import": "Importar",
+  "import_failed": "La importación falló. Por favor inténtalo de nuevo.",
+  "import_from": "Importar desde",
+  "import_from_save": "Importar desde Guardar",
+  "import_preset": "Importar preset desde archivo",
+  "import_to_ups_message": "Seleccione la fuente y las opciones para importar {pals} a UPS.",
+  "import_to_ups_title": "Guardar archivo en UPS",
+  "in_inventory": "en inventario",
+  "info": "Información",
+  "invalid_option_selected": "Opción no válida seleccionada",
+  "inventory": "Inventario",
+  "item_container": "Contenedor de artículos",
+  "item_copied": "{name} copiado al portapapeles",
+  "key_items": "Artículos clave",
+  "lab": "Laboratorio",
+  "language": "Idioma",
+  "last_accessed": "Último acceso",
+  "last_online": "Último en línea",
+  "last_updated_date": "Última actualización: {date}",
+  "later": "Más tarde",
+  "learn_all_skills": "Aprende todas las habilidades",
+  "learn_skills_matching_type": "Aprenda todas las habilidades que coincidan con el tipo de amigo",
+  "learned_skills": "Habilidades aprendidas",
+  "left_click_focus": "Haz clic izquierdo en un jugador o base para enfocarte.",
+  "legendary": "Legendario",
+  "level": "Nivel",
+  "level_abbr": "nivel",
+  "level_abbr_value": "Nivel {value}",
+  "level_distribution": "Distribución de niveles",
+  "level_sync_display": "Sincronización de nivel {from} → {to}",
+  "level_value": "Nivel {level}",
+  "list_view": "Vista de lista",
+  "load_guild_bases": "Cargar gremio/bases",
+  "load_player": "Cargar reproductor",
+  "loaded_entity": "Cargado {entity}",
+  "loading_data": "Cargando datos...",
+  "loading_entity": "Cargando {entity}",
+  "loadout": "Equipamiento",
+  "location": "Ubicación",
+  "lock_all": "Bloquear todo",
+  "locked": "bloqueado",
+  "lucky": "Afortunado",
+  "lucky_pals": "Suerte {pals}",
+  "main_missions": "Misiones principales",
+  "manage_collection_for_pals": "Administrar colección para {count} {pals}",
+  "map": "Mapa",
+  "map_coordinate_origin_point": "Punto de origen de coordenadas del mapa",
+  "map_coordinates": "Coordenadas del mapa",
+  "map_options": "Opciones de mapa",
+  "mark_all_current_complete": "Marcar todo lo actual como completo",
+  "mark_complete": "Marcar completo",
+  "mark_complete_confirm": "¿Estás seguro de que quieres marcar todas las {count} misiones {type} actuales como completadas?",
+  "marked_missions_complete": "Misiones {count} {type} marcadas como completadas",
+  "material": "Material",
+  "max": "máx.",
+  "max_ivs": "Maximizar los IV",
+  "max_level": "Nivel máximo",
+  "max_level_pals": "Nivel máximo {pals}",
+  "max_out_pal_stats": "Maximiza las estadísticas de {pal} 💉💪",
+  "max_out_selected_pals": "Salida máxima seleccionada {pals}",
+  "max_souls": "Maximizar las almas",
+  "max_work_suitability": "Maximice la idoneidad laboral",
+  "menu": "Menú",
+  "min_level": "Nivel mínimo",
+  "mission": "Misión",
+  "mission_cleared": "Misión despejada",
+  "mission_marked_complete": "Misión marcada como completa",
+  "missions": "Misiones",
+  "mixed_collections": "Colecciones mixtas",
+  "mixed_collections_message": "Los {pals} seleccionados están en colecciones diferentes o algunos no tienen colección",
+  "modified": "Modificado",
+  "modified_label": "Modificado:",
+  "module": "Módulo",
+  "monster_equip_weapon": "Monstruo Equipar Arma",
+  "most_popular": "Más Popular",
+  "move": "Mover",
+  "move_all_to_collection": "Mover todos los {pals} seleccionados a \"{name}\"",
+  "move_to_entity": "Mover a {entity}",
+  "moved_pals_to_collection": "Se movió {count} {pals} a la colección.",
+  "name": "Nombre",
+  "new_pal_prefix": "Prefijo de nuevo amigo",
+  "new_version_available": "Una nueva versión de Palworld Save Pal está disponible en GitHub.",
+  "next": "Próximo",
+  "nickname": "Apodo",
+  "no_archived_entity": "No archivado {entity}",
+  "no_bases_loaded": "Aún no hay bases cargadas. Utilice el selector de gremio de arriba para cargar bases.",
+  "no_changes": "Sin cambios",
+  "no_collection": "Sin colección",
+  "no_completed_missions_to_clear": "No hay misiones completadas para completar",
+  "no_current_missions_to_clear": "No hay misiones actuales para completar",
+  "no_current_missions_to_complete": "No hay misiones actuales para completar.",
+  "no_detailed_info": "No hay información detallada disponible",
+  "no_entity_matching": "No se encontró ningún {entity} que coincida con \"{query}\"",
+  "no_entity_selected": "No se seleccionó {entity}",
+  "no_entity_yet": "No hay {entity} todavía",
+  "no_guild_bases_found": "No se encontraron bases de gremio",
+  "no_guild_found": "No se encontró ningún gremio",
+  "no_level_sync": "Sin sincronización de nivel",
+  "no_missions_found": "No se encontraron misiones {type}",
+  "no_pals_available": "No hay datos {pals} disponibles",
+  "no_pals_in_storage": "No hay {pals} almacenado",
+  "no_players_loaded": "Aún no se han cargado reproductores. Utilice el selector de arriba para cargar jugadores.",
+  "no_save_loaded": "No se ha cargado ningún archivo guardado",
+  "no_skills_learned": "No se aprenden habilidades",
+  "no_slots_available_in_entity": "No hay espacios disponibles en este {entity}.",
+  "no_storage_containers": "Sin contenedores de almacenamiento",
+  "none": "Ninguno",
+  "normal": "Normal",
+  "note": "Nota",
+  "notes_optional": "Notas (opcional)",
+  "nuke_all_presets": "Nuke todo preestablecido",
+  "nuke_presets_confirm": "¿Está seguro de que desea eliminar todos los ajustes preestablecidos? Esta acción restaurará los valores predeterminados y no se puede deshacer.",
+  "nuke_ups": "Nuke UPS - Eliminar TODOS {pals}",
+  "of": "de",
+  "oil_rig": "plataforma petrolera",
+  "oil_rig_pals": "Plataforma petrolera {pals}",
+  "open_drawer": "cajón abierto",
+  "oops_something_wrong": "Ups... Algo salió mal.",
+  "or_drag_and_drop": "o arrastrar y soltar",
+  "origin": "Origen",
+  "origin_label": "Fuente:",
+  "origin_point": "Origen (0,0)",
+  "page": "Página",
+  "page_of_pages": "Página {current} de {total}",
+  "pal_box_party": "palbox + fiesta",
+  "pal_cannot_be_trait": "{type} Amigo no puede ser {trait}",
+  "pal_types": "Tipos de amigos",
+  "palbox": "palbox",
+  "paldeck": "Paldeck",
+  "pals_in_storage": "{pals} en almacenamiento",
+  "party": "Fiesta",
+  "passive": "Pasivo",
+  "paste": "Pasta",
+  "predator": "Depredador",
+  "predator_pals": "Depredador {pals}",
+  "preset_name": "Nombre preestablecido",
+  "preset_select_details": "Seleccione un ajuste preestablecido de la lista para ver los detalles",
+  "presets_precedence": "La prioridad de los ajustes preestablecidos es: bloqueo de amigo ➡️ bloqueo de elemento ➡️ predeterminado. Seleccione solo un ajuste preestablecido por amigo, elemento o valor predeterminado.",
+  "previous": "Anterior",
+  "progress": "Progreso",
+  "pwr": "encendido",
+  "raid": "RAID",
+  "range": "Rango",
+  "rare": "Extraño",
+  "raw": "Crudo",
+  "read_only": "SOLO LECTURA",
+  "ready_to_fill": "Listo para llenar {target} con {count} {pals}.",
+  "refresh": "Actualizar (purgar cambios no guardados)",
+  "refresh_entity": "Actualizar {entity}",
+  "remove": "Eliminar",
+  "remove_all_from_collections": "Eliminar todos los {pals} seleccionados de sus colecciones",
+  "remove_from_collection": "Quitar de la colección",
+  "remove_from_favorites": "Quitar de favoritos",
+  "remove_pal": "Eliminar amigo",
+  "removed_pals_from_collections": "Se eliminó {count} {pals} de las colecciones.",
+  "research_cost": "Costo de la investigación",
+  "research_node": "Nodo de investigación",
+  "reset": "Reiniciar",
+  "restore_hp": "Restaurar HP",
+  "rewards": "Recompensas",
+  "right_click_edit_base": "Haga clic derecho en una base para editar su nombre.",
+  "save_as_preset": "Guardar como preestablecido",
+  "save_changes": "Guardar cambios",
+  "save_file_to_ups": "Guardar archivo 🡆 UPS",
+  "save_id": "Guardar identificación",
+  "save_platform": "Guardar plataforma",
+  "search": "Buscar",
+  "search_by_name_nickname": "Buscar por nombre o apodo",
+  "search_entity": "Buscar {entity}",
+  "search_pals": "Busca {pals} por nombre, ID de personaje o notas...",
+  "search_placeholder": "Buscar {entity}...",
+  "select": "Seleccionar",
+  "select_valid_player": "Por favor seleccione un jugador válido",
+  "select_a_entity": "Seleccione un {entity}",
+  "select_a_entity_to_view": "Seleccione un {entity} para ver los detalles",
+  "select_all_current_base": "Seleccionar todo en la base actual",
+  "select_all_filtered_pals": "Seleccionar todo filtrado {pals} ({count})",
+  "select_all_in": "Seleccionar todo en",
+  "select_all_page_pals": "Seleccionar todo {pals} en la página actual ({count})",
+  "select_all_ups_pals": "Seleccione todos los {pals} en UPS ({count})",
+  "select_entity": "Seleccione {entity}",
+  "select_entity_to_edit": "Seleccione un {entity} para editar",
+  "select_entity_to_load": "Seleccione un {entity} para cargar y mostrar en el mapa",
+  "select_guild_to_load_bases": "Selecciona un gremio para cargar sus bases en el mapa.",
+  "select_pal_edit_description": "{pals} se puede seleccionar en Players Palbox, Guild Bases, Global Pal Storage, Dimensional Pal Storage o Universal Pal Storage.",
+  "select_player_view_entity": "Seleccione un jugador para ver {entity}",
+  "selected": "Seleccionado",
+  "selected_of_total": "{selected} de {total} seleccionado",
+  "selected_tags": "Etiquetas seleccionadas",
+  "set_entity_item_count": "Establecer recuento de elementos {entity}",
+  "set_inventory_count": "Establecer recuento de inventario",
+  "set_item_count": "Establecer recuento de elementos",
+  "settings": "Ajustes",
+  "shield": "Blindaje",
+  "shortcuts": "Atajos",
+  "show_archived": "Mostrar archivado",
+  "showing_pals": "Mostrando {start} a {end} de {total} {pals}",
+  "size": "Tamaño",
+  "skills": "Habilidades",
+  "slots_available_in_entity": "Hay {count} espacios disponibles en este {entity}.",
+  "sort": "Clasificar",
+  "sort_by": "Ordenar por",
+  "sort_by_entity": "Ordenar por {entity}",
+  "sort_inventory": "Ordenar inventario",
+  "souls": "almas",
+  "special_categories": "Categorías especiales",
+  "special_weapon": "Arma especial",
+  "sphere_module": "Módulo de esfera",
+  "stamina": "Aguante",
+  "statistics": "Estadística",
+  "stats": "Estadísticas",
+  "stomach": "Estómago",
+  "steam": "Vapor",
+  "steam_description": "Steam/Mac: archivo guardado Level.sav",
+  "storage": "Almacenamiento",
+  "storage_container": "Contenedor de almacenamiento",
+  "structures": "Estructuras",
+  "sub_missions": "Submisiones",
+  "success": "Éxito",
+  "successfully_cloned_pal_to_entity": "Clonado exitosamente {pal} a {entity}",
+  "successfully_cloned_pals_to_entity": "Clonado exitosamente {count} {pals} a {entity}",
+  "successfully_deleted_entity": "Eliminado con éxito {count} {pals} de {entity}",
+  "successfully_exported_pals": "Exportado exitosamente {count} de {total} {pals}",
+  "summon": "Convocar",
+  "summoned": "convocado",
+  "summoned_pals": "Invocado {pals}",
+  "support": "Apoyo",
+  "syncing": "Sincronización",
+  "tag_changes": "Cambios de etiquetas",
+  "tag_delete_warning": "Esta etiqueta se eliminará de todos los amigos que la tengan.",
+  "tags_for_pals": "Etiquetas para {count} {pals}",
+  "target_available": "El objetivo está disponible",
+  "tags_optional": "Etiquetas (opcional)",
+  "talents_ivs": "Talentos (IV)",
+  "technology_points": "Puntos de tecnología",
+  "to_collection": "a la colección",
+  "toggle_entity": "Alternar {entity}",
+  "total": "Total",
+  "total_clones": "Clones totales",
+  "total_count": "Recuento total",
+  "total_exports": "Exportaciones Totales",
+  "total_pals": "Total {pals}",
+  "transfer_all_pals": "Transferir todo {pals}",
+  "transfer_pal": "Transferir {pal}",
+  "trust": "Confianza",
+  "trust_level": "Nivel de confianza",
+  "trust_xp": "Confía en XP",
+  "type_label": "Tipo: {type}",
+  "unarchive_entity": "Desarchivar {entity}",
+  "uncommon": "Poco común",
+  "universal_pal_storage": "Almacenamiento universal {pal}",
+  "unknown": "Desconocido",
+  "unknown_collection": "Colección desconocida",
+  "unlock_all": "Desbloquear todo",
+  "unlock_all_category_research": "Desbloquear toda la investigación {category}",
+  "unlock_full_map": "Desbloquear mapa completo",
+  "unlock_map": "Desbloquear mapa",
+  "unlock_map_confirm": "Esto desbloqueará todo el mapa modificando su archivo LocalData.sav. Deberá seleccionar su archivo LocalData.sav. ¿Continuar?",
+  "unlock_prerequisite_entity": "Desbloquear el requisito previo primero {entity}",
+  "unlocks": "Desbloquea",
+  "update_available": "¡Actualización disponible!",
+  "update_now": "Actualizar ahora",
+  "updated_tags_for_pals": "Etiquetas actualizadas para {count} {pals}",
+  "upload": "Subir",
+  "upload_a_file": "Subir un archivo",
+  "upload_zip_files": "Haga clic para cargar sus archivos guardados comprimidos",
+  "ups": "Unión Postal Universal",
+  "ups_already_empty": "UPS ya estaba vacío",
+  "used_slots": "Tragamonedas usadas",
+  "warning": "Advertencia",
+  "weight": "Peso",
+  "work_suitability": "Idoneidad laboral",
+  "working_on_it": "Beep Boop, ¡trabajando en ello!",
+  "workload": "Carga de trabajo",
+  "workspeed": "Velocidad de trabajo",
+  "work_speed": "Velocidad de trabajo",
+  "world_coordinates": "Coordenadas mundiales",
+  "world_name": "Nombre mundial",
+  "xbox_game_pass": "Pase de juego de Xbox",
+  "xbox_game_pass_description": "Xbox Game Pass: archivo contenedor.index",
+  "zoom_in_out": "Acercar/alejar",
+  "active_skill": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Habilidad activa",
+        "countPlural=other": "Habilidades activas"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "base": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Base",
+        "countPlural=other": "Bases"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "collection": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Recopilación",
+        "countPlural=other": "Colecciones"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "file": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Archivo",
+        "countPlural=other": "Archivos"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "filter": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Filtrar",
+        "countPlural=other": "Filtros"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "guild": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Gremio",
+        "countPlural=other": "Gremios"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "human": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Humano",
+        "countPlural=other": "Humanos"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "item": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Artículo",
+        "countPlural=other": "Elementos"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "pal": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Camarada",
+        "countPlural=other": "amigos"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "passive_skill": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Habilidad Pasiva",
+        "countPlural=other": "Habilidades pasivas"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "player": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Jugador",
+        "countPlural=other": "Jugadores"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "preset": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Programar",
+        "countPlural=other": "Preajustes"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "save": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Ahorrar",
+        "countPlural=other": "Guarda"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "tag": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Etiqueta",
+        "countPlural=other": "Etiquetas"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "technology": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Tecnología",
+        "countPlural=other": "Tecnologías"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "transfer": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Transferir",
+        "countPlural=other": "Transferencias"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "type": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Tipo",
+        "countPlural=other": "Tipos"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "weapon": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Arma",
+        "countPlural=other": "Armas"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ]
+}

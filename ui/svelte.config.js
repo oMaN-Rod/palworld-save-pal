@@ -20,7 +20,8 @@ const config = {
 			$ws: 'src/lib/ws',
 			$types: 'src/lib/types',
 			$states: 'src/lib/states',
-			$utils: 'src/lib/utils'
+			$utils: 'src/lib/utils',
+			$i18n: 'src/paraglide'
 		}
 	}
 };

@@ -7,6 +7,8 @@
 	import type { CheckedChangeDetails } from '@zag-js/switch';
 	import { onMount } from 'svelte';
 	import { focusModal } from '$utils';
+	import * as m from '$i18n/messages';
+	import { c } from '$lib/utils/commonTranslations';
 
 	let {
 		title = 'Select Language',
@@ -35,9 +37,9 @@
 		<h3 class="h3">{title}</h3>
 
 		<div class="mt-2 flex flex-col space-y-2">
-			<Combobox options={languageOptions} bind:value={settings.language} label="Language" />
-			<Input bind:value={settings.clone_prefix} label="Clone Prefix" />
-			<Input bind:value={settings.new_pal_prefix} label="New Pal Prefix" />
+			<Combobox options={languageOptions} bind:value={settings.language} label={m.language()} />
+			<Input bind:value={settings.clone_prefix} label={m.clone_prefix()} />
+			<Input bind:value={settings.new_pal_prefix} label={m.new_pal_prefix()} />
 			<div class="flex space-x-2">
 				<Switch
 					checked={settings.debug_mode}
@@ -45,9 +47,9 @@
 						settings.debug_mode = mode.checked;
 					}}
 					name="debug_mode"
-					label="Debug Mode"
+					label={m.debug_mode()}
 				/>
-				<span>Debug Mode</span>
+				<span>{m.debug_mode()}</span>
 			</div>
 			<div class="flex space-x-2">
 				<Switch
@@ -56,14 +58,14 @@
 						settings.cheat_mode = mode.checked;
 					}}
 					name="cheat_mode"
-					label="Cheat Mode"
+					label={m.cheat_mode()}
 				/>
-				<span>Cheat Mode</span>
+				<span>{m.cheat_mode()}</span>
 			</div>
 		</div>
 
 		<div class="mt-2 flex justify-end space-x-2">
-			<Tooltip position="bottom" label="Save">
+			<Tooltip position="bottom" label={c.save}>
 				<button
 					class="btn hover:bg-secondary-500/25 px-2"
 					onclick={() => closeModal(settings)}
@@ -73,7 +75,7 @@
 				</button>
 			</Tooltip>
 
-			<Tooltip position="bottom" label="Cancel">
+			<Tooltip position="bottom" label={m.cancel()}>
 				<button class="btn hover:bg-secondary-500/25 px-2" onclick={() => closeModal(null)}>
 					<X />
 				</button>

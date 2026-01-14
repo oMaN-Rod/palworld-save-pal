@@ -1,0 +1,38 @@
+{
+  "Dark": {
+    "localized_name": "Karanlık",
+    "description": null
+  },
+  "Dragon": {
+    "localized_name": "Ejderha",
+    "description": null
+  },
+  "Earth": {
+    "localized_name": "Toprak",
+    "description": null
+  },
+  "Electricity": {
+    "localized_name": "Elektrik",
+    "description": null
+  },
+  "Fire": {
+    "localized_name": "Ateş",
+    "description": null
+  },
+  "Ice": {
+    "localized_name": "Buz",
+    "description": null
+  },
+  "Leaf": {
+    "localized_name": "Çimen",
+    "description": null
+  },
+  "Normal": {
+    "localized_name": "Nötr",
+    "description": null
+  },
+  "Water": {
+    "localized_name": "Su",
+    "description": null
+  }
+}

@@ -9,6 +9,7 @@ import { friendshipData } from './friendship.svelte';
 import { itemsData } from './items.svelte';
 import { labResearchData } from './labResearch.svelte';
 import { mapObjects } from './mapObjects.svelte';
+import { missionsData } from './missions.svelte';
 import { palsData } from './pals.svelte';
 import { passiveSkillsData } from './passiveSkills.svelte';
 import { presetsData } from './presets.svelte';
@@ -29,6 +30,7 @@ export const bootstrap = async () => {
 	await buildingsData.reset();
 	await mapObjects.reset();
 	await labResearchData.reset();
+	await missionsData.reset();
 	const upsState = getUpsState();
 	await upsState.loadAll();
 

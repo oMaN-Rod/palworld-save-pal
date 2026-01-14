@@ -11,6 +11,8 @@
 	import { assetLoader, calculateFilters } from '$utils';
 	import { staticIcons } from '$types/icons';
 	import { goto } from '$app/navigation';
+	import * as m from '$i18n/messages';
+	import { c } from '$utils/commonTranslations';
 
 	let {
 		pal = $bindable(),
@@ -21,7 +23,8 @@
 		onDelete,
 		selected = $bindable([]),
 		onSelect,
-		showCloneToUps = true
+		showCloneToUps = true,
+		disabled = false
 	} = $props<{
 		pal: Pal;
 		onMove: () => void;
@@ -32,6 +35,7 @@
 		selected?: string[];
 		onSelect?: (pal: Pal, event: MouseEvent) => void;
 		showCloneToUps?: boolean;
+		disabled?: boolean;
 	}>();
 
 	const appState = getAppState();
@@ -41,7 +45,9 @@
 			'outline-surface-600 xl:h-18 xl:w-18 h-16 w-16 rounded-full outline outline-2 outline-offset-2',
 			selected.includes(pal.instance_id) || selected.includes(pal.id?.toString() || '')
 				? 'ring-4 ring-secondary-500'
-				: 'hover:ring-4 hover:ring-secondary-500'
+				: !disabled
+					? 'hover:ring-4 hover:ring-secondary-500'
+					: ''
 		)
 	);
 
@@ -55,7 +61,7 @@
 		if (!pal || pal.character_id === 'None') {
 			return [
 				{
-					label: `Add a new Pal`,
+					label: m.add_new_pal({ pal: c.pal }),
 					onClick: onAdd,
 					icon: Plus
 				}
@@ -63,15 +69,15 @@
 		}
 
 		const items = [
-			{ label: 'Move to Party', onClick: onMove, icon: ArchiveRestore },
-			{ label: 'Clone Pal', onClick: onClone, icon: Copy }
+			{ label: m.move_to_entity({ entity: m.party() }), onClick: onMove, icon: ArchiveRestore },
+			{ label: m.clone_selected_pal({ pal: c.pal }), onClick: onClone, icon: Copy }
 		];
 
 		if (onCloneToUps && showCloneToUps) {
-			items.push({ label: 'Clone to UPS', onClick: onCloneToUps, icon: Upload });
+			items.push({ label: m.clone_to_entity({ entity: m.ups() }), onClick: onCloneToUps, icon: Upload });
 		}
 
-		items.push({ label: 'Delete Pal', onClick: onDelete, icon: Trash });
+		items.push({ label: m.delete_entity({ entity: c.pal }), onClick: onDelete, icon: Trash });
 
 		return items;
 	});
@@ -89,6 +95,7 @@
 	);
 
 	function handleClick(event: MouseEvent) {
+		if (disabled) return;
 		if (!pal || pal.character_id === 'None') {
 			onAdd();
 			return;
@@ -118,6 +125,7 @@
 				rounded="rounded-none"
 				position="right"
 				useArrow={false}
+				{disabled}
 			>
 				<div class="flex flex-col">
 					<div class={cn('relative flex items-center justify-center', sickClass)}>
@@ -151,9 +159,11 @@
 						>
 							<img src={genderIcon} alt={pal.gender} />
 						</div>
-						<div class="absolute -bottom-4 -left-3 h-6 w-6 xl:h-8 xl:w-8">
-							<span class="text-xs {levelSyncClass} font-bold">lvl {palLevel}</span>
-						</div>
+						{#if palLevel}
+							<div class="absolute -bottom-4 -left-3 h-6 w-6 xl:h-8 xl:w-8">
+								<span class="text-xs {levelSyncClass} font-bold">lvl {palLevel}</span>
+							</div>
+						{/if}
 					</div>
 				</div>
 

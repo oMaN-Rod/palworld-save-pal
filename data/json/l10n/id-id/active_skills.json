@@ -1,0 +1,978 @@
+{
+  "EPalWazaID::AcidRain": {
+    "localized_name": "Hujan Asam",
+    "description": "Menciptakan awan asam dan menghujani musuh dengan asam dari atas."
+  },
+  "EPalWazaID::AirBlade": {
+    "localized_name": "Pedang Angin",
+    "description": "Menembakkan bilah-bilah udara tajam dalam bentuk kipas."
+  },
+  "EPalWazaID::AirCanon": {
+    "localized_name": "Meriam Angin",
+    "description": "Menembakkan bola udara yang melaju dengan kecepatan tinggi."
+  },
+  "EPalWazaID::Apocalypse": {
+    "localized_name": "Kiamat",
+    "description": "Membuat beberapa tornado kegelapan di sekitar musuh."
+  },
+  "EPalWazaID::AquaJet": {
+    "localized_name": "Semburan Air",
+    "description": "Menembakkan peluru air dengan kecepatan tinggi ke arah musuh."
+  },
+  "EPalWazaID::BeamSlicer": {
+    "localized_name": "Pemotong Sinar",
+    "description": "Menyapu area di depan dengan cahaya yang diisi dengan kekuatan naga. Area yang tersapu akan meledak setelah beberapa waktu."
+  },
+  "EPalWazaID::BlastCanon": {
+    "localized_name": "Meriam Ledakan",
+    "description": "Menembakkan peluru energi yang diisi dengan kekuatan naga ke lokasi musuh. Peluru energi akan hancur saat menghantam, memicu ledakan besar di area di depannya."
+  },
+  "EPalWazaID::BlizzardLance": {
+    "localized_name": "Gunung Es",
+    "description": "Memunculkan bilah-bilah es tajam dari bawah kaki musuh."
+  },
+  "EPalWazaID::BubbleShot": {
+    "localized_name": "Tembakan Gelembung",
+    "description": "Menembakkan banyak gelembung yang perlahan mengejar musuh."
+  },
+  "EPalWazaID::BubbleShower": {
+    "localized_name": "Hujan Racun",
+    "description": "Mengumpulkan kekuatan di dalam tubuhnya sebelum menyebarkannya sebagai bola-bola racun ke segala arah."
+  },
+  "EPalWazaID::ChargeCanon": {
+    "localized_name": "Meriam Daya",
+    "description": "Menembakkan peluru energi yang diisi dengan kekuatan naga ke arah musuh. Saat menghantam, peluru tersebut menyebabkan ledakan besar di area sekitarnya."
+  },
+  "EPalWazaID::Commet": {
+    "localized_name": "Komet",
+    "description": "Menjatuhkan meteor secara vertikal yang membuat gelombang kejut di area sekitarnya."
+  },
+  "EPalWazaID::CommetRain": {
+    "localized_name": "Hujan Meteor",
+    "description": "Menjatuhkan meteor tanpa henti yang membuat gelombang kejut di area sekitarnya."
+  },
+  "EPalWazaID::CrossThunder": {
+    "localized_name": "Petir Bersilang",
+    "description": "Membuat sambaran petir yang bergerak ke 2 arah menghalangi pergerakan musuh."
+  },
+  "EPalWazaID::CrossWind": {
+    "localized_name": "Angin Silang",
+    "description": "Menyerang dengan menyilangkan pedang angin yang dibuat di depan musuh."
+  },
+  "EPalWazaID::DarkArrow": {
+    "localized_name": "Panah Kegelapan",
+    "description": "Menembakkan beberapa panah kecepatan tinggi secara berurutan dan melacak musuh dengan kekuatan kegelapan."
+  },
+  "EPalWazaID::DarkBall": {
+    "localized_name": "Bola Kegelapan",
+    "description": "Menembakkan bola kegelapan yang perlahan mengejar musuh."
+  },
+  "EPalWazaID::DarkCanon": {
+    "localized_name": "Meriam Kegelapan",
+    "description": "Menembakkan peluru energi kecepatan tinggi yang dipenuhi kekuatan kegelapan ke arah musuh."
+  },
+  "EPalWazaID::DarkLaser": {
+    "localized_name": "Laser Kegelapan",
+    "description": "Mengumpulkan kekuatan kegelapan dan menembakkan sinar kuat ke arah musuh."
+  },
+  "EPalWazaID::DarkLegion": {
+    "localized_name": "Arwah Kegelapan",
+    "description": "Menembakkan bola kegelapan yang mengejar musuh."
+  },
+  "EPalWazaID::DarkPulse": {
+    "localized_name": "Sebaran Kegelapan",
+    "description": "Menembakkan bola kegelapan kecepatan tinggi yang menyebar seperti kipas."
+  },
+  "EPalWazaID::DarkWave": {
+    "localized_name": "Ledakan Bayangan",
+    "description": "Melepaskan kekuatan kegelapan dengan cepat yang menyebabkan gelombang kejut ke musuh yang berada di sekitar."
+  },
+  "EPalWazaID::DiamondFall": {
+    "localized_name": "Hujan Berlian",
+    "description": "Membuat serpihan es di atas musuh, lalu dihujankan silih berganti."
+  },
+  "EPalWazaID::DiversionLaser": {
+    "localized_name": "Serangan Air Bertekanan Tinggi",
+    "description": "Menyemburkan gelombang air bertekanan tinggi ke arah depan. Gelombang air itu bercabang ke kiri dan kanan setelah beberapa saat."
+  },
+  "EPalWazaID::DoubleIcicleThrow": {
+    "localized_name": "Paku Badai Salju Ganda",
+    "description": "Membuat 2 blok es raksasa dan menembakkannya ke arah musuh secara berturut-turut. Saat menghantam, blok es memberikan gelombang kejut ke sekitarnya."
+  },
+  "EPalWazaID::DragonBreath": {
+    "localized_name": "Napas Naga",
+    "description": "Menghembuskan nafas dengan kekuatan naga ke depan, dan memberikan damage secara terus menerus."
+  },
+  "EPalWazaID::DragonCanon": {
+    "localized_name": "Meriam Naga",
+    "description": "Menembakkan peluru yang diisi dengan kekuatan naga ke arah musuh."
+  },
+  "EPalWazaID::DragonMeteor": {
+    "localized_name": "Meteor Naga",
+    "description": "Memanggil banyak meteor kecil dan menembakkannya ke arah musuh."
+  },
+  "EPalWazaID::DragonWave": {
+    "localized_name": "Ledakan Naga",
+    "description": "Melepaskan kekuatan naga dengan cepat dan memberikan gelombang kejut ke area sekitar."
+  },
+  "EPalWazaID::ElecWave": {
+    "localized_name": "Gelombang Listrik",
+    "description": "Melepaskan kekuatan listrik dengan cepat yang mengejutkan musuh yang berada di sekitar."
+  },
+  "EPalWazaID::Eruption": {
+    "localized_name": "Hujan Vulkanik",
+    "description": "Menembakkan bom vulkanik yang tak terhitung jumlahnya ke langit. Setelah beberapa saat, bom vulkanik yang ditembakkan akan menghujani area di sekitar penggunanya."
+  },
+  "EPalWazaID::FireBall": {
+    "localized_name": "Bola Api",
+    "description": "Membuat bola api besar di atas kepala, menembakkannya ke arah musuh. Meledak saat mengenai sasaran, menyebarkan gelombang ledakan ke wilayah yang luas."
+  },
+  "EPalWazaID::FireBlast": {
+    "localized_name": "Tembakan Api",
+    "description": "Menembakkan peluru api yang terbang lurus ke arah musuh."
+  },
+  "EPalWazaID::FireSeed": {
+    "localized_name": "Api Terbelah",
+    "description": "Menembakkan bola api ke musuh. Setelah terbang beberapa saat, bola api tersebut meledak dan menyebarkan bola api kecil ke depan."
+  },
+  "EPalWazaID::FlameFunnel": {
+    "localized_name": "Terowongan Api",
+    "description": "Menciptakan banyak bola energi api, lalu menembakkan bola api yang banyak tersebut ke arah musuh."
+  },
+  "EPalWazaID::FlameWall": {
+    "localized_name": "Dinding Api",
+    "description": "Membuat dinding api di lokasi musuh. Dinding api akan bertahan untuk beberapa saat, memberikan damage pada musuh yang menyentuhnya."
+  },
+  "EPalWazaID::Flamethrower": {
+    "localized_name": "Tekanan Api",
+    "description": "Menembakkan api ke musuh, memberikan damage terus menerus."
+  },
+  "EPalWazaID::FlareArrow": {
+    "localized_name": "Panah Api",
+    "description": "Menembakkan 3 panah api kecepatan tinggi berturut-turut yang mengejar musuh."
+  },
+  "EPalWazaID::FlareTornado": {
+    "localized_name": "Badai Api",
+    "description": "Membuat tornado yang membara di kedua sisi dan mengarahkannya ke musuh."
+  },
+  "EPalWazaID::FlareTwister": {
+    "localized_name": "-",
+    "description": "-"
+  },
+  "EPalWazaID::FrostBreath": {
+    "localized_name": "Napas Dingin",
+    "description": "Menghembuskan udara dingin ke arah musuh, dan memberikan damage terus menerus."
+  },
+  "EPalWazaID::GhostFlame": {
+    "localized_name": "Api Roh",
+    "description": "Menembakkan 3 roh pendendam yang mengejar musuh tanpa henti."
+  },
+  "EPalWazaID::GrassTornado": {
+    "localized_name": "Tornado Rumput",
+    "description": "Membuat tornado di kedua sisi dan mengarahkannya ke musuh."
+  },
+  "EPalWazaID::GravityShot": {
+    "localized_name": "Tembakan Kegelapan",
+    "description": "Menembakkan peluru kegelapan yang melesat secara perlahan semakin cepat."
+  },
+  "EPalWazaID::HolyBlast": {
+    "localized_name": "Ledakan Suci",
+    "description": "Menciptakan ledakan cahaya yang luas di lokasi musuh berada dan sekitarnya"
+  },
+  "EPalWazaID::Human_Punch": {
+    "localized_name": "Pukulan",
+    "description": "Percayalah pada tanganmu dan pukul."
+  },
+  "EPalWazaID::HydroPump": {
+    "localized_name": "Aliran Hidro",
+    "description": "Menyemburkan air dengan kekuatan besar, menyapu area luas di depan."
+  },
+  "EPalWazaID::HydroSlicer": {
+    "localized_name": "Air Pemotong",
+    "description": "Menyapu yang dihadapannya dengan gelombang air terkompresi. Dari tempat yang tersapu itu air menyembur keluar dengan waktu yang berbeda-beda."
+  },
+  "EPalWazaID::HyperBeam": {
+    "localized_name": "Gelombang Ledakan",
+    "description": "Mengisi energi perusak lalu menembakkan sinar yang kuat ke area luas di depan."
+  },
+  "EPalWazaID::IceAge": {
+    "localized_name": "Hembusan Beku",
+    "description": "Membuat paku es muncul dari area luas di bawah kaki musuh."
+  },
+  "EPalWazaID::IceBlade": {
+    "localized_name": "Pemotong Es",
+    "description": "Membuat bilah es berbentuk bulan sabit dan menembakkannya ke depan."
+  },
+  "EPalWazaID::IceMissile": {
+    "localized_name": "Rudal Es",
+    "description": "Membuat bongkahan es tajam di langit dan menembakkannya ke arah musuh."
+  },
+  "EPalWazaID::IceWall": {
+    "localized_name": "Dinding Es",
+    "description": "Memunculkan dinding es dari tanah. Dinding es itu akan bertahan untuk beberapa waktu dan akan runtuh setelah menerima beberapa damage."
+  },
+  "EPalWazaID::IcicleLine": {
+    "localized_name": "Tetesan Es",
+    "description": "Membuat paku es yang bergerak lurus dalam tiga arah."
+  },
+  "EPalWazaID::IciclePierce": {
+    "localized_name": "Peluru Es",
+    "description": "Membuat serpihan es tajam di langit dan menembakkannya ke arah musuh."
+  },
+  "EPalWazaID::IcicleThrow": {
+    "localized_name": "Paku Badai Salju",
+    "description": "Membuat blok es besar dan menembakkannya ke arah musuh dengan kecepatan tinggi. Saat menghantam, blok es ini mengirimkan gelombang kejut ke area di sekitarnya."
+  },
+  "EPalWazaID::Inferno": {
+    "localized_name": "Neraka Api",
+    "description": "Memberi energi pada tanah di sekitar musuh yang meledak setelah jangka waktu tertentu."
+  },
+  "EPalWazaID::LightningStrike": {
+    "localized_name": "Serangan Petir",
+    "description": "Menggunakan dirinya sebagai penangkal petir untuk memanggil kilat, menyebabkan ledakan listrik di tempat."
+  },
+  "EPalWazaID::LineGeyser": {
+    "localized_name": "Percikan Garis",
+    "description": "Membuat pilar air yang bergerak dalam garis lurus."
+  },
+  "EPalWazaID::LineThunder": {
+    "localized_name": "Garis Petir",
+    "description": "Membuat sambaran petir yang menjalar dalam garis lurus."
+  },
+  "EPalWazaID::LockonLaser": {
+    "localized_name": "Laser Pengunci",
+    "description": "Membidik musuh lalu menembakkan laser secepat kilat."
+  },
+  "EPalWazaID::MudShot": {
+    "localized_name": "Tembak Lumpur",
+    "description": "Menembaki musuh dengan lumpur lembek."
+  },
+  "EPalWazaID::PoisonFog": {
+    "localized_name": "Kabut Beracun",
+    "description": "Membuat kabut beracun di depan, yang akan meracuni musuh."
+  },
+  "EPalWazaID::PoisonShot": {
+    "localized_name": "Tembakan Racun",
+    "description": "Menembakkan lumpur beracun ke arah musuh."
+  },
+  "EPalWazaID::PowerBall": {
+    "localized_name": "Ledakan Hebat",
+    "description": "Mengumpulkan energi dalam jumlah besar dan menembakkannya sebagai bola raksasa."
+  },
+  "EPalWazaID::PowerShot": {
+    "localized_name": "Tembakan Kuat",
+    "description": "Mengumpulkan energi dan menembakkannya seperti peluru."
+  },
+  "EPalWazaID::PredatorBeam": {
+    "localized_name": "Sinar Predator",
+    "description": null
+  },
+  "EPalWazaID::PredatorLockon": {
+    "localized_name": "Penargetan Predator",
+    "description": null
+  },
+  "EPalWazaID::PredatorWave": {
+    "localized_name": "Gelombang Predator",
+    "description": null
+  },
+  "EPalWazaID::Psychokinesis": {
+    "localized_name": "Gravitasi Psiko",
+    "description": "Menggunakan psikokinesis untuk mengikat musuh di sekitar dan membantingnya ke tanah dari ketinggian."
+  },
+  "EPalWazaID::RadiantBarrage": {
+    "localized_name": "Serbuan Bercahaya",
+    "description": "Menembakkan bola cahaya yang perlahan mengejar musuh. Saat mendekati target, bola cahaya itu akan terpecah menjadi jutaan peluru cahaya yang menyerang target."
+  },
+  "EPalWazaID::RaidCutter": {
+    "localized_name": "Pemotong Serangan",
+    "description": "Menembakkan banyak bilah angin yang terbang menuju musuh."
+  },
+  "EPalWazaID::Railbolt": {
+    "localized_name": "Jalur Petir",
+    "description": "Mengumpulkan kekuatan petir hingga penuh sambil menembakkan beberapa sengatan listrik yang kuat ke arah musuh."
+  },
+  "EPalWazaID::RangeThunder": {
+    "localized_name": "Petir Jarak Jauh",
+    "description": "Membuat sambaran petir yang bergerak lurus ke segala arah."
+  },
+  "EPalWazaID::ReflectiveShuriken": {
+    "localized_name": "Daun Pemantul",
+    "description": "Mengeluarkan pedang angin yang memantul jika mengenai pohon atau musuh. Memantul hingga 4x."
+  },
+  "EPalWazaID::RipTide": {
+    "localized_name": "Gelombang Air",
+    "description": "Membuat gelombang ombak yang menerjang musuh. Ombak itu meledak di tengah dan membuat pilar air."
+  },
+  "EPalWazaID::RockBeat": {
+    "localized_name": "Ketukan Batu",
+    "description": "Menghentak tanah dan mengangkat sebuah batu besar."
+  },
+  "EPalWazaID::RockLance": {
+    "localized_name": "Tombak Batu",
+    "description": "Membuat tombak batu tajam dari bawah kaki musuh."
+  },
+  "EPalWazaID::RootAttack": {
+    "localized_name": "Sulur Berduri",
+    "description": "Menghasilkan akar tajam yang mengejar musuh di sepanjang tanah, menusuk mereka dari bawah."
+  },
+  "EPalWazaID::RootLance": {
+    "localized_name": "Lingkaran Sulur",
+    "description": "Di tempat musuh berada dan sekitarnya, akar tajam bermunculan."
+  },
+  "EPalWazaID::SandTornado": {
+    "localized_name": "Tornado Pasir",
+    "description": "Membuat tornado pasir di kedua sisi dan mengarahkannya ke musuh."
+  },
+  "EPalWazaID::SandTwister": {
+    "localized_name": "Pusaran Pasir",
+    "description": "Membuat beberapa tornado pasir. Tornado-tornado ini terus bergerak dalam gerakan melingkar."
+  },
+  "EPalWazaID::SeaGush": {
+    "localized_name": "Semburan Pilar Air",
+    "description": "Banyak pilar air menyembur di tempat musuh berada dan di sekitarnya."
+  },
+  "EPalWazaID::SeedMachinegun": {
+    "localized_name": "Senapan Mesin Biji-Bijian",
+    "description": "Menembakkan banyak biji keras yang menyerang musuh di depan."
+  },
+  "EPalWazaID::SeedMine": {
+    "localized_name": "Ranjau Biji-Bijian",
+    "description": "Menembakkan biji berbahaya. Jika mengenai musuh, bijinya akan terbuka dan meledak."
+  },
+  "EPalWazaID::SelfDestruct": {
+    "localized_name": "Ledakan Bunuh Diri",
+    "description": "Meledak dengan mempertaruhkan nyawa. Membuat pengguna tidak dapat bertarung."
+  },
+  "EPalWazaID::SelfDestruct_Bee": {
+    "localized_name": "Lebah Berani Mati",
+    "description": "Meledak dengan mempertaruhkan nyawa. Teknik terhormat yang membuat penggunanya juga gugur."
+  },
+  "EPalWazaID::SelfExplosion": {
+    "localized_name": "Ledakan Diri Megaton",
+    "description": "Menyebabkan ledakan besar yang membahayakan nyawa. Penggunanya kehilangan nyawanya, menjadi bintang yang bersinar di langit malam."
+  },
+  "EPalWazaID::ShadowBall": {
+    "localized_name": "Bola Mimpi Buruk",
+    "description": "Membuat bola kegelapan yang besar dan menembakkannya ke musuh dengan kecepatan tinggi."
+  },
+  "EPalWazaID::ShokeiLaser": {
+    "localized_name": "Laser Eksekusi",
+    "description": "Setelah membidik musuh, dan menembakkan beberapa laser petir kecepatan tinggi."
+  },
+  "EPalWazaID::SolarBeam": {
+    "localized_name": "Ledakan Solar",
+    "description": "Mengumpulkan kekuatan matahari lalu menembakkan sinar yang kuat ke arah musuh."
+  },
+  "EPalWazaID::SpecialCutter": {
+    "localized_name": "Pemotong Serbaguna",
+    "description": "Menembakkan 3 bilah angin super cepat yang terbang lurus ke arah musuh."
+  },
+  "EPalWazaID::SpreadPulse": {
+    "localized_name": "Tembakan Percikan",
+    "description": "Menembakkan bola petir yang menyebar seperti kipas."
+  },
+  "EPalWazaID::StarMine": {
+    "localized_name": "Ranjau Bintang",
+    "description": "Membuat bintang di sekitar musuh yang meledak saat bersentuhan. Bintang juga meledak setelah beberapa waktu."
+  },
+  "EPalWazaID::StoneShotgun": {
+    "localized_name": "Ledakan Batu",
+    "description": "Menembakkan banyak batu kecil ke depan."
+  },
+  "EPalWazaID::ThreeCommet": {
+    "localized_name": "Komet Jatuh",
+    "description": "Menjatuhkan meteor satu per satu yang membuat gelombang kejut di area sekitarnya."
+  },
+  "EPalWazaID::ThreeThunder": {
+    "localized_name": "Tiga Petir",
+    "description": "Membuat 3 sambaran petir berturut-turut dari atas musuh."
+  },
+  "EPalWazaID::ThrowRock": {
+    "localized_name": "Meriam Batu",
+    "description": "Mengambil batu dari tanah di depannya dan menembakkannya ke arah musuh."
+  },
+  "EPalWazaID::ThunderBall": {
+    "localized_name": "Bola Petir",
+    "description": "Menembakkan bola petir yang perlahan mengejar musuh."
+  },
+  "EPalWazaID::ThunderFunnel": {
+    "localized_name": "Terowongan Plasma",
+    "description": "Membuat 2 bola energi petir dan kemudian menembakkan bola petir yang tak terhitung ke arah musuh."
+  },
+  "EPalWazaID::ThunderRain": {
+    "localized_name": "Hujan Petir",
+    "description": "Memanggil petir yang membuat banyak sambaran kilat setelah beberapa waktu."
+  },
+  "EPalWazaID::ThunderSpear": {
+    "localized_name": "Tombak Petir",
+    "description": "Melemparkan tombak petir yang melesat dalam garis lurus ke arah musuh dengan kecepatan tinggi."
+  },
+  "EPalWazaID::ThunderStorm": {
+    "localized_name": "Badai Petir",
+    "description": "Membuat tornado petir raksasa. Tornado itu bergerak perlahan ke arah musuh."
+  },
+  "EPalWazaID::Thunderbolt": {
+    "localized_name": "Sambaran Petir",
+    "description": "Mengumpulkan kekuatan petir dan melepaskan sengatan listrik yang kuat pada musuh."
+  },
+  "EPalWazaID::Tremor": {
+    "localized_name": "Letusan Batu",
+    "description": "Mengguncangkan tanah dan melemparkan bongkahan batu besar ke sekeliling."
+  },
+  "EPalWazaID::TriSpark": {
+    "localized_name": "Tiga Percikan",
+    "description": "Menembakkan bola petir kecepatan tinggi yang bergerak lurus dan bola petir yang bergerak lambat sambil mengejar musuh."
+  },
+  "EPalWazaID::Unique_Alpaca_Tackle": {
+    "localized_name": "Terjangan Lembut",
+    "description": "Skill khusus Melpaca. Dia menyerang ke depan sambil memancarkan aura yang imut."
+  },
+  "EPalWazaID::Unique_AmaterasuWolf_Dark_DarkCharge": {
+    "localized_name": "Serangan Geledek",
+    "description": "Skill khusus Kitsun Noct. Seluruh tubuhnya diselimuti api ungu dan dia menyerang maju dengan kekuatan besar."
+  },
+  "EPalWazaID::Unique_AmaterasuWolf_FireCharge": {
+    "localized_name": "Furinkazan",
+    "description": "Skill khusus Kitsun. Seluruh tubuhnya diselimuti api biru dan dia menyerang maju dengan kekuatan besar."
+  },
+  "EPalWazaID::Unique_Anubis_GroundPunch": {
+    "localized_name": "Penghancur Tanah",
+    "description": "Skill khusus Anubis. Melompat tinggi ke udara dan menghantam tanah. Gelombang kejutnya menyebar, memberikan damage di area yang luas."
+  },
+  "EPalWazaID::Unique_Anubis_LowRoundKick": {
+    "localized_name": "Tendangan Berputar",
+    "description": "Skill khusus Anubis. Melakukan tendangan berputar dengan kakinya yang kuat, menyapu area yang luas."
+  },
+  "EPalWazaID::Unique_Anubis_Tackle": {
+    "localized_name": "Dorongan Kuat",
+    "description": "Skill khusus Anubis. Dapat bergerak dengan kecepatan tinggi untuk mengejar musuh dan memberikan pukulan kuat sambil melepaskan energi."
+  },
+  "EPalWazaID::Unique_Baphomet_SwallowKite": {
+    "localized_name": "Cakar Api Neraka",
+    "description": "Skill khusus spesies Incineram. Saat mendekat, ia melompat sambil menebas ke atas dengan cakar tangan kirinya, lalu dengan cepat menebas ke bawah dengan cakar tangan kanannya."
+  },
+  "EPalWazaID::Unique_BirdDragon_FireBreath": {
+    "localized_name": "Napas Api Terbang",
+    "description": "Skill khusus Vanwyrm. Ia maju sambil menyemburkan api dari mulutnya."
+  },
+  "EPalWazaID::Unique_BirdDragon_Ice_IceBreath": {
+    "localized_name": "Badai Salju Terbang",
+    "description": "Skill khusus Vanwyrm Cryst. Ia maju sambil menyemburkan udara dingin dari mulutnya."
+  },
+  "EPalWazaID::Unique_BlackCentaur_TwoSpearRushes": {
+    "localized_name": "Kilatan Sepasang Tombak",
+    "description": "Skill khusus Necromus. Ia menyerbu ke depan, sambil menusukkan tombak-tombak dengan kedua tangannya yang diselimuti angin puyuh, secara bergantian ke kiri dan kanan."
+  },
+  "EPalWazaID::Unique_BlackGriffon_TackleLaser": {
+    "localized_name": "Bencana Agung",
+    "description": "Skill khusus Shadowbeak. Saat menyerang, muncul bola cahaya. Bola cahaya tersebut secara otomatis menangkap musuh dan menembakkan laser yang tak terhitung jumlahnya."
+  },
+  "EPalWazaID::Unique_BlackGriffon_TackleLaser2": {
+    "localized_name": "Bencana Agung Ⅱ",
+    "description": "Skill khusus spesies Shadowbeak. Menerjang ke depan, memancarkan sinar biru dari lingkaran cahaya di tubuhnya. Sinar tersebut menangkap dan melacak musuh secara otomatis."
+  },
+  "EPalWazaID::Unique_BlackMetalDragon_FirePunch": {
+    "localized_name": "Pukulan Napas Api",
+    "description": "Skill khusus Astegon. Setelah meninju ke depan 2 kali, ia menyemburkan napas tipe naga ke bawah."
+  },
+  "EPalWazaID::Unique_BluePlatypus_Toboggan": {
+    "localized_name": "Terjangan Seluncur",
+    "description": null
+  },
+  "EPalWazaID::Unique_BluePlatypus_Toboggan_Fire": {
+    "localized_name": "Jegalan Api",
+    "description": null
+  },
+  "EPalWazaID::Unique_BlueThunderHorse_FlashDash": {
+    "localized_name": "Lompatan Kilat",
+    "description": "Skill khusus Azurmane. Bergerak secepat kilat, dan menelan segala sesuatu yang berada di jalurnya."
+  },
+  "EPalWazaID::Unique_Boar_Tackle": {
+    "localized_name": "Serangan Tanpa Henti",
+    "description": "Skill khusus Rushoar. Dapat membidik musuh dan menyerang maju dengan kekuatan yang dahsyat."
+  },
+  "EPalWazaID::Unique_CaptainPenguin_Black_BodySlide_Electric": {
+    "localized_name": "Luncuran Petir",
+    "description": "Skill khusus Penking Lux. Meletakkan perutnya ke tanah, memancarkan listrik dari seluruh tubuhnya lalu meluncur dan menabrak musuh."
+  },
+  "EPalWazaID::Unique_CaptainPenguin_BodySlide": {
+    "localized_name": "Terjangan Sang Kapten",
+    "description": "Skill khusus Penking. Meletakkan perut di tanah dan mengeluarkan udara dingin dari seluruh tubuhnya, lalu meluncur dan menabrak musuh."
+  },
+  "EPalWazaID::Unique_ChickenPal_ChickenPeck": {
+    "localized_name": "Terjangan Ayam",
+    "description": "Skill khusus Chikipi. Dapat melompat ke arah musuh dan menyerang dengan paruhnya yang tajam."
+  },
+  "EPalWazaID::Unique_DarkAlien_JumpScractch": {
+    "localized_name": "Cakar Jahat",
+    "description": "Skill khusus spesies Xenovader. Lompatan cepat diikuti dengan tebasan tangan kiri."
+  },
+  "EPalWazaID::Unique_DarkCrow_TelePoke": {
+    "localized_name": "Serangan Hantu",
+    "description": "Skill khusus Cawgnito. Setelah berteleportasi ke dekat musuh, ia menyerang dengan paruhnya."
+  },
+  "EPalWazaID::Unique_DarkMechaDragon_BeamSlash": {
+    "localized_name": "Tebasan Sinar",
+    "description": "Skill khusus Xenolord. Membuat pedang berkekuatan tinggi di tangan kanannya. Bergerak dengan kecepatan tinggi dan menebas 2 kali."
+  },
+  "EPalWazaID::Unique_DarkMechaDragon_ConvergentBeam": {
+    "localized_name": "Sinar Astral",
+    "description": "Skill khusus Xenolord. Mengumpulkan energi kegelapan, lalu melepaskannya dalam sebuah garis lurus."
+  },
+  "EPalWazaID::Unique_DarkMechaDragon_FunnelLaser": {
+    "localized_name": "Laser Omega",
+    "description": "Skill khusus Xenolord. Cahaya kehancuran yang dipanggil dari suatu dimensi, terus menerus ditembakkan ke segala arah, membakar apa pun yang ada di jangkauannya."
+  },
+  "EPalWazaID::Unique_DarkMechaDragon_SetFunnel": {
+    "localized_name": "Satelit Kecil",
+    "description": "Skill khusus Xenolord. Menciptakan 4 sayap berbentuk satelit dengan kemampuan menyerang otomatis. Saat sayap ini melepaskan serangan berikutnya, mereka melacak dan menyerang musuh secara otomatis."
+  },
+  "EPalWazaID::Unique_DarkMechaDragon_WarpComet": {
+    "localized_name": "Meteor Kosmik",
+    "description": "Skill khusus Xenolord. Melayang ke udara dengan kecepatan cahaya, menembakkan peluru meteor yang tak terhingga. Setelah itu, berubah menjadi komet dan menyerang ke depan, menyebabkan ledakan besar pada lokasi tabrakan."
+  },
+  "EPalWazaID::Unique_DarkScorpion_Pierce": {
+    "localized_name": "Sengatan Melompat",
+    "description": "Skill khusus spesies Menasting. Ia melompat tinggi ke udara dan menusuk mangsanya dengan ekornya yang mengandung racun."
+  },
+  "EPalWazaID::Unique_Deer_PushupHorn": {
+    "localized_name": "Tandukan Atas",
+    "description": "Skill khusus spesies Eikthyrdeer. Menghadapi musuh dan menyerang dengan mengayunkan tanduknya ke atas. Jika diaktifkan saat menaikinya, kamu dapat mengatur arahnya."
+  },
+  "EPalWazaID::Unique_DrillGame_ShellAttack": {
+    "localized_name": "Kerang Berputar",
+    "description": "Skill khusus Digtoise. Bergerak sambil memutar seluruh tubuh dengan kecepatan tinggi. Mengebor musuh dan memberikan damage terus-menerus."
+  },
+  "EPalWazaID::Unique_Eagle_GlidingNail": {
+    "localized_name": "Cakar Peluncur",
+    "description": "Skill khusus Galeclaw. Dengan cakarnya yang terentang ke depan, ia melancarkan serangan meluncur yang kuat."
+  },
+  "EPalWazaID::Unique_ElecPanda_ElecScratch": {
+    "localized_name": "Cakar Petir",
+    "description": "Skill khusus Grizzbolt. Dapat melompat ke arah musuh dan menebas mereka dengan cakar yang beraliran listrik. Setelah melompat 2 kali, dia mengakhirinya dengan menancapkan cakarnya ke tanah, dan menyebarkan listrik ke area yang luas."
+  },
+  "EPalWazaID::Unique_ElecPanda_GatlingAttack": {
+    "localized_name": "Gempuran Tank Berat",
+    "description": "Skill khusus spesies Grizzbolt. Mengeluarkan pistol kecil entah dari mana dan menembakkannya dengan liar. Terakhir, dia mengisi energi sedikit dan melepaskan tembakan yang kuat."
+  },
+  "EPalWazaID::Unique_FairyDragon_FairyTornado": {
+    "localized_name": "Badai Mistis",
+    "description": "Skill khusus spesies Elphidran. Mengejar musuh dengan menembakkan 2 tornado yang dipenuhi kekuatan misterius."
+  },
+  "EPalWazaID::Unique_FeatherOstrich_Tossin": {
+    "localized_name": "Loncatan Bumi",
+    "description": "Skill khusus spesies Dazemu. Berakselerasi dengan cepat dan menerjang ke depan dengan kecepatan tinggi."
+  },
+  "EPalWazaID::Unique_FengyunDeeper_CloudTempest": {
+    "localized_name": "Badai Awan",
+    "description": "Skill khusus Fenglope. Dia memanipulasi atmosfer dan menyerang ke depan sambil menyelimuti dirinya dalam tekanan angin."
+  },
+  "EPalWazaID::Unique_FengyunDeeper_Electric_ThunderTempest": {
+    "localized_name": "Badai Petir",
+    "description": "Skill khusus Fenglope Lux. Dia memanipulasi atmosfer dan menyerbu ke depan sambil menyelimuti dirinya dalam awan petir."
+  },
+  "EPalWazaID::Unique_FireKirin_Dark_DarkTossin": {
+    "localized_name": "Serangan Kegelapan",
+    "description": "Skill khusus Pyrin Noct. Ia menyerbu ke depan, terselimuti api gelap. Api yang membara tertinggal di bekas lintasan yang dilaluinya."
+  },
+  "EPalWazaID::Unique_FireKirin_Tackle": {
+    "localized_name": "Serangan Api",
+    "description": "Skill khusus Pyrin. Ia menyerbu ke depan sambil diselimuti api. Api yang membara tertinggal di atas lintasan yang dilaluinya."
+  },
+  "EPalWazaID::Unique_FlameBuffalo_FlameHorn": {
+    "localized_name": "Tanduk Menyala",
+    "description": "Skill khusus Arsox. Setelah membidik musuh, ia menyerang maju dengan kekuatan yang dahsyat sambil mengangkat tanduknya."
+  },
+  "EPalWazaID::Unique_FlowerDinosaur_Whip": {
+    "localized_name": "Pukulan Botani",
+    "description": "Skill khusus spesies Dinossom. Dapat menggunakan ekornya yang besar untuk menghantam tanah di depannya, dan menciptakan gelombang dalam garis lurus."
+  },
+  "EPalWazaID::Unique_Garm_Bite": {
+    "localized_name": "Taring Liar",
+    "description": "Skill khusus Direhowl. Menyerang musuh dengan melompat cepat ke arahnya dan menggigitnya."
+  },
+  "EPalWazaID::Unique_GhostAnglerfish_Fire_SweepBait_Fire": {
+    "localized_name": "Tebasan Lentera Berapi",
+    "description": "Skill khusus Ghangler Ignis. Menyapu lebar ke depan dengan lampion berapi yang ada di kepalanya."
+  },
+  "EPalWazaID::Unique_GhostAnglerfish_SweepBait": {
+    "localized_name": "Tebasan Lentera",
+    "description": "Skill khusus Ghangler. Menyapu lebar ke depan dengan lampion panjang yang ada di kepalanya."
+  },
+  "EPalWazaID::Unique_GhostBeast_Tossin": {
+    "localized_name": "Loncatan Jiwa",
+    "description": "Skill khusus Maraith. Sambil berlari pelan, ia meluncurkan bola api yang berkedip-kedip ke arah musuh."
+  },
+  "EPalWazaID::Unique_GoldenHorse_StoneDash": {
+    "localized_name": "Hantaman Cepat",
+    "description": "Skill khusus Gildane. Menyerang ke depan dengan kekuatan besar, melemparkan batu-batu ke kiri dan kanan."
+  },
+  "EPalWazaID::Unique_Gorilla_GroundPunch": {
+    "localized_name": "Kombo Gorila",
+    "description": "Skill khusus Gorirat. Setelah membanting musuh ke tanah 2 kali, terakhir dia melompat ke udara dan meluncurkan pukulan yang kuat."
+  },
+  "EPalWazaID::Unique_GrassPanda_Electric_ElectricPunch": {
+    "localized_name": "Pukulan Ledakan",
+    "description": "Skill khusus Mossanda Lux. Dia memutar lengan kanannya dan melayangkan pukulan listrik ke depan."
+  },
+  "EPalWazaID::Unique_GrassPanda_MusclePunch": {
+    "localized_name": "Pukulan Otot",
+    "description": "Skill khusus Mossanda. Dapat memutar lengan kanannya dan melayangkan pukulan kuat ke depan."
+  },
+  "EPalWazaID::Unique_GrassRabbitMan_GrassRoundKick": {
+    "localized_name": "Tendangan Berputar Cepat",
+    "description": "Skill khusus Verdash. Melompat ke depan dan melakukan tendangan berputar berkecepatan tinggi, menyapu area sekitarnya."
+  },
+  "EPalWazaID::Unique_Grassmammoth_Earthquake": {
+    "localized_name": "Hantaman Bumi",
+    "description": "Skill khusus spesies Mammorest. Tubuhnya yang raksasa mengguncang bumi, memberikan damage pada area luas yang berpusat pada dirinya sendiri."
+  },
+  "EPalWazaID::Unique_GrimGirl_BrutalMachete": {
+    "localized_name": "Lontaran Dendam",
+    "description": "Skill khusus Splatterina. Teleportasi dari lokasinya dan melepaskan tebasan. Lalu melakukan teleportasi ke atas musuh, Menusukkan senjata ke musuh dan menciptakan gelombang kegelapan."
+  },
+  "EPalWazaID::Unique_HawkBird_Storm": {
+    "localized_name": "Serangan Tornado",
+    "description": "Skill khusus Nitewing. Setelah membuat tornado di depan, lalu meluncur ke depan dan menyerang musuh."
+  },
+  "EPalWazaID::Unique_HerculesBeetle_BeetleTackle": {
+    "localized_name": "Tanduk Raksasa",
+    "description": "Skill khusus Warsect . Ia menusuk musuhnya dengan 4 tanduknya yang kokoh."
+  },
+  "EPalWazaID::Unique_Horus_FlareBird": {
+    "localized_name": "Gelombang Terbang Phoenix",
+    "description": "Skill khusus Faleris. Setelah menciptakan tornado yang sangat panas, dia membungkus tubuhnya dengan api neraka, lalu menyerang sambil melesat maju."
+  },
+  "EPalWazaID::Unique_Horus_PerfectStorm": {
+    "localized_name": "Gelombang Api Phoenix",
+    "description": "Skill khusus Faleris. Setelah menciptakan banyak tornado yang membakar, menyerang maju sambil meluncur. Tornado berkumpul di tengah, pada akhirnya menjadi satu tornado raksasa."
+  },
+  "EPalWazaID::Unique_Horus_Water_AquaStorm": {
+    "localized_name": "Gelombang Laut Phoenix",
+    "description": "Skill khusus Faleris Aqua. Setelah menciptakan pusaran tornado air yang besar, dia menutupi tubuhnya dengan air, lalu menyerang sambil melesat maju."
+  },
+  "EPalWazaID::Unique_IceCrocodile_SpitAttack": {
+    "localized_name": "Muntah Tak Terkendali",
+    "description": "Skill khusus Munchill. Ia menyerang dengan memuntahkan 3 granat yang tidak dicerna dan didinginkan di dalam tubuhnya. Kadang ia bisa memuntahkan sesuatu yang lebih berbahaya...?"
+  },
+  "EPalWazaID::Unique_IceDeer_IceHorn": {
+    "localized_name": "Serangan Tanduk Es",
+    "description": "Skill khusus Reindrix. Menyerang sambil mendorong musuh dengan tanduk es yang megah."
+  },
+  "EPalWazaID::Unique_IceHorse_IceBladeAttack": {
+    "localized_name": "Sayap Kristal",
+    "description": "Skill khusus spesies Frostallion. Mengembunkan udara dingin untuk melapisi sayapnya dengan es, lalu menebas musuh dengan sayap esnya sambil berlari."
+  },
+  "EPalWazaID::Unique_IceNarwhal_JumpingHorn": {
+    "localized_name": "Pemutihan Tingkat Tinggi",
+    "description": "Skill khusus spesies Whalaska. Bergerak maju dan menyelam sebentar, lalu melompat tinggi ke langit untuk menyerang. Saat ia melompat keluar, terjadi ledakan dengan elemen es."
+  },
+  "EPalWazaID::Unique_JetDragon_JumpBeam": {
+    "localized_name": "Komet Sinar",
+    "description": "Skill khusus Jetragon. Sayapnya bersinar saat terbang menuju musuh, dan menembakkan sinar yang tak terhitung jumlahnya. Sinar tersebut akan meledak saat terjadi benturan."
+  },
+  "EPalWazaID::Unique_KingAlpaca_BodyPress": {
+    "localized_name": "Injakan Raja",
+    "description": "Skill khusus spesies Kingpaca. Setelah lompatan besar, ia menghancurkan musuh dengan tubuhnya yang besar dan gemuk."
+  },
+  "EPalWazaID::Unique_KingBahamut_AirCrash": {
+    "localized_name": "Hantaman Magna",
+    "description": "Skill khusus spesies Blazamut Ryu. Setelah lompatan besar, mampu tetap bergerak dengan kecepatan tinggi di udara, mengumpulkan kekuatan, dan melayangkan pukulan sekuat tenaga."
+  },
+  "EPalWazaID::Unique_KingBahamut_ArmSmash": {
+    "localized_name": "Hantaman Lengan",
+    "description": "Skill khusus spesies Blazamut. Setelah mengangkat dan memperbesar lengannya, ia menepukkannya hingga menciptakan ledakan dahsyat di sekitarnya."
+  },
+  "EPalWazaID::Unique_Kirin_LightningTackle": {
+    "localized_name": "Serangan Petir Badai",
+    "description": "Skill khusus Univolt. Sambil membuat petir di sekitar tubuhnya, dan menyerang ke arah musuh."
+  },
+  "EPalWazaID::Unique_LeafMomonga_SomerSault": {
+    "localized_name": "Daun Berputar",
+    "description": "Skill khusus Herbil. Setelah mempersiapkan diri, dia melakukan lompatan salto sambil menerjang musuh dengan kecepatan tinggi."
+  },
+  "EPalWazaID::Unique_LegendDeer_RadiantPurge_Otomo": {
+    "localized_name": "Cahaya Pemurnian",
+    "description": "Skill khusus Hartalis. Ia melompat ke langit, memadatkan energi luar biasa dan melepaskannya ke tanah. Bola cahaya yang turun akan menyucikan semua yang ada di permukaan tanah."
+  },
+  "EPalWazaID::Unique_LegendDeer_RadiantWingRush": {
+    "localized_name": "Sayap Agung",
+    "description": "Skill khusus Hartalis. Melompat ke belakang, lalu memunculkan sayap cahaya dari punggungnya, dan menerjang musuh berkali-kali dari langit."
+  },
+  "EPalWazaID::Unique_LegendDeer_WarpPillarBurst": {
+    "localized_name": "Hujan Suci",
+    "description": "Skill khusus Hartalis. Setelah menghilang sesaat, ia menghujani area luas di sekelilingnya dengan banyak pilar cahaya."
+  },
+  "EPalWazaID::Unique_LilyQueen_LilyHealing": {
+    "localized_name": "Perlindungan Agung",
+    "description": "Skill khusus spesies Lyleen. Memulihkan HP semua teman yang ada dalam jangkauannya dengan kekuatan penyembuh."
+  },
+  "EPalWazaID::Unique_LilyQueen_WindBarrier": {
+    "localized_name": "-",
+    "description": "-"
+  },
+  "EPalWazaID::Unique_Manticore_InfernoStrike": {
+    "localized_name": "Taring Vulkanik",
+    "description": "Skill khusus Blazehowl. Sambil mencari momentum, dia menerjang ke arah musuhnya tanpa ampun, membuat ledakan di tempat ia melompat."
+  },
+  "EPalWazaID::Unique_MoonQueen_IceMoonBlade": {
+    "localized_name": "Kilatan Bulan Biru",
+    "description": "Skill khusus spesies Selyne. Melepaskan 3 bilah kecepatan tinggi berturut-turut yang dipenuhi dengan kekuatan cahaya bulan."
+  },
+  "EPalWazaID::Unique_MoonQueen_MoonBeam": {
+    "localized_name": "Cahaya Bulan",
+    "description": "Skill khusus spesies Selyne. Mengumpulkan energi di punggung bulan, lalu menembakkan sinar berbentuk bulan sabit ke arah depan."
+  },
+  "EPalWazaID::Unique_MoonQueen_MoonBlade": {
+    "localized_name": "Pedang Bulan Biru",
+    "description": "Skill khusus spesies Selyne. Menembakkan 2 bilah pedang yang dipenuhi dengan kekuatan cahaya bulan dengan kecepatan tinggi secara berurutan."
+  },
+  "EPalWazaID::Unique_MysteryMask_LifeSteal": {
+    "localized_name": "Pencuri Jiwa",
+    "description": "Skill khusus Omascul. Tiba-tiba muncul di dekat musuh dan memegangnya erat-erat dengan kedua tangan. Menyerap HP dari musuh yang terjebak."
+  },
+  "EPalWazaID::Unique_NaughtyCat_CatPress": {
+    "localized_name": "Tindihan Kucing",
+    "description": "Skill khusus Grintale. Dengan senyum tak kenal takut di wajahnya, dia melompat, menghancurkan musuh dengan seluruh tubuhnya."
+  },
+  "EPalWazaID::Unique_NightBlueHorse_DeathStep": {
+    "localized_name": "Langkah Mematikan",
+    "description": "Skill khusus Starryon. Mempermainkan musuh dengan langkah berayun sambil menebas dengan tanduknya yang tajam."
+  },
+  "EPalWazaID::Unique_NightLady_FlameNightmare": {
+    "localized_name": "Tarian Api",
+    "description": "Skill khusus Bellanoir Libero. Sambil bergoyang, Membuat cincin api yang menyebar ke sekitarnya. Selain itu juga menembakkan api misterius yang dapat melacak musuh."
+  },
+  "EPalWazaID::Unique_NightLady_WarpBeam": {
+    "localized_name": "Sebaran Sinar Mimpi Buruk",
+    "description": "Skill khusus Bellanoir Libero. Tiba-tiba menghilang, dan saat muncul kembali, memancarkan sinar cahaya yang tak terhitung jumlahnya. Cahaya menyebar bagaikan bunga yang mekar."
+  },
+  "EPalWazaID::Unique_NightLady_WarpBeam_Straight": {
+    "localized_name": "Sinar Mimpi Buruk",
+    "description": "Skill khusus Bellanoir. Tiba-tiba menghilang, dan saat muncul kembali, memancarkan sinar cahaya yang tak terhitung jumlahnya."
+  },
+  "EPalWazaID::Unique_OctopursGirl_InkJet": {
+    "localized_name": "Asap Jet",
+    "description": "Skill khusus Gloopie. Mengeluarkan asap untuk menyembunyikan dirinya, lalu melakukan serangan mendadak dengan menanduk dari posisi yang tidak terlihat."
+  },
+  "EPalWazaID::Unique_PinkCat_CatPunch": {
+    "localized_name": "Pukulan Bertubi-tubi",
+    "description": "Skill khusus Cattiva. Sambil mengejar musuh, dapat mengayunkan kedua lengannya dan melancarkan pukulan beruntun."
+  },
+  "EPalWazaID::Unique_Plesiosaur_LongBreath": {
+    "localized_name": "Napas Panjang",
+    "description": "Skill khusus Braloha. Menghembuskan napas dengan elemen rumput sedikit demi sedikit dari pangkal lehernya yang panjang."
+  },
+  "EPalWazaID::Unique_PoseidonOrca_TorrentLaser": {
+    "localized_name": "Laser Thalasonic",
+    "description": "Skill khusus Neptilius. Sambil mengapung sedikit, mengumpulkan air di sekitar mulutnya. Setelah itu dia menyemburkan air bertekanan tinggi yang menyapu secara vertikal dan horizontal tiga kali. Di tempat yang tersapu muncul retakan, dan air akan menyembur keluar."
+  },
+  "EPalWazaID::Unique_PurpleSpider_SpiderRaid": {
+    "localized_name": "Serangan Laba-Laba",
+    "description": "Skill khusus Tarantriss. Memuntahkan bola-bola benang yang akan menjerat mangsanya. Setelah itu, mereka berlari dengan kecepatan penuh ke arah mangsa, lalu menyayatnya tiga kali untuk menghabisinya."
+  },
+  "EPalWazaID::Unique_QueenBee_SpinLance": {
+    "localized_name": "Tongkat Berputar",
+    "description": "Skill khusus Elizabee. Mengumpulkan kekuatan pada tongkat, melepaskan kekuatan sambil memutarnya."
+  },
+  "EPalWazaID::Unique_RedArmorBird_TriplePeck": {
+    "localized_name": "Serangan Paruh Cepat",
+    "description": "Skill khusus Ragnahawk. Mengepakkan sayap ke depan, kanan, dan kiri Mematuk dengan paruhnya, membakar musuhnya, lalu menciptakan ledakan kecil."
+  },
+  "EPalWazaID::Unique_RobinHood_BowSnipe": {
+    "localized_name": "Tembakan Sniper",
+    "description": "Skill khusus spesies Robinquill. Menarik busur dan membidik musuh lalu menembaknya."
+  },
+  "EPalWazaID::Unique_Ronin_Iai": {
+    "localized_name": "Tebasan Iai",
+    "description": "Skill khusus spesies Bushi. Setelah menghunus pedang, ia muncul di depan musuh dalam sekejap, melancarkan serangan secepat kilat."
+  },
+  "EPalWazaID::Unique_SaintCentaur_OneSpearRushes": {
+    "localized_name": "Kilatan Satu Tombak",
+    "description": "Skill khusus Paladius. Menyelimuti tubuhnya dengan kekuatan suci. Menyerang maju sambil mengacungkan tombak di tangan kirinya. Selagi menyerang, perisai di tangan kanannya memblokir semua serangan."
+  },
+  "EPalWazaID::Unique_SakuraSaurus_SideTackle": {
+    "localized_name": "Pukulan Tubuh",
+    "description": "Skill khusus spesies Broncherry. Mengarahkan tubuhnya ke samping, kemudian menerjang ke depan dan membuatnya melayang."
+  },
+  "EPalWazaID::Unique_ScorpionMan_Uppercut": {
+    "localized_name": "Pukulan Atas",
+    "description": "Skill khusus spesies Prixter. Memotong jarak dan memojokkan musuh dengan kecepatan tinggi, lalu mengayunkan pemotongnya dengan sekuat tenaga."
+  },
+  "EPalWazaID::Unique_SheepBall_Roll": {
+    "localized_name": "Bola Guling",
+    "description": "Skill khusus SheepBall. Dapat mengejar musuh sambil berguling-guling. Setelah menyerang, ia menjadi pusing dan tidak bisa bergerak."
+  },
+  "EPalWazaID::Unique_SifuDog_Counter": {
+    "localized_name": "Formasi Kuda-Kuda",
+    "description": "Skill khusus spesies Dogen. Mengambil posisi Aikido. Dalam posisi tersebut, serangan musuh akan dihentikan. Lalu ia mendekati musuh dalam sekejap dan melancarkan serangan telapak tangan yang dahsyat."
+  },
+  "EPalWazaID::Unique_SnowTigerBeastman_SnowImpact": {
+    "localized_name": "Penghancur Lapisan Es",
+    "description": "Skill khusus Bastigor. Mengaum keras dan melompat, kemudian menghantamkan lengannya ke tanah untuk membuat retakan es raksasa. Terus menghantam tanah dengan kuat, dan pada akhirnya menyebabkan ledakan es yang besar."
+  },
+  "EPalWazaID::Unique_SnowTigerBeastman_TrampleSlash": {
+    "localized_name": "Cakar Es Ganas",
+    "description": "Skill khusus Bastigor. Menghentakkan kaki ke tanah, menciptakan retakan es di depannya. Setelah itu dengan cepat mendekat dan menyerang dengan tangan kanan."
+  },
+  "EPalWazaID::Unique_SoldierBee_NeedleLance": {
+    "localized_name": "Tombak Jarum",
+    "description": "Skill khusus Beegarde. Menerjang musuh dengan kecepatan tinggi. Mengakhirinya dengan tusukan tombak untuk menghabisinya."
+  },
+  "EPalWazaID::Unique_StuffedShark_HiddenWeapon": {
+    "localized_name": "Si Gila Menembak",
+    "description": "Skill khusus spesies Finsider. Mengeluarkan dua pistol air dari mulutnya lalu menembakkan 6 peluru air secara bergantian ke kiri dan kanan. Terakhir, kedua pistol tersebut digabungkan untuk menembakkan 1 tembakan yang kuat."
+  },
+  "EPalWazaID::Unique_TentacleTurtle_HydroSpin": {
+    "localized_name": "Putaran Air",
+    "description": "Skill khusus spesies Turtacle. Menggunakan tenaga penggerak dari semburan jet, ia terbang ke arah musuh dengan putaran kecepatan tinggi."
+  },
+  "EPalWazaID::Unique_ThunderBird_ThunderStorm": {
+    "localized_name": "Lompatan Petir",
+    "description": "Skill khusus Beakon. Awalnya, petir menyambar musuh. Setelah itu, sambil meluncur dan menyerang ke depan, petir menyambar di sisi kanan dan kiri."
+  },
+  "EPalWazaID::Unique_ThunderDog_InazumaShorai": {
+    "localized_name": "Pemanggilan Petir",
+    "description": "Skill khusus Rayhound. Memanggil petir satu per satu di depan, lalu menyerang dengan kecepatan tinggi melewati petir yang berjatuhan."
+  },
+  "EPalWazaID::Unique_ThunderDragonMan_NumerousSwordAttack": {
+    "localized_name": "Polychronos",
+    "description": "Skill khusus spesies Orserk. Memanggil sejumlah tombak petir, dan melemparkannya ke musuh. Tombak yang pertama menyimpan kekuatan petir, dan meledak setelah beberapa detik."
+  },
+  "EPalWazaID::Unique_ThunderDragonMan_ThunderSwordAttack": {
+    "localized_name": "Keraunos",
+    "description": "Skill khusus Orserk. Dia melompat dan memanggil tombak petir, lalu melemparnya ke musuh."
+  },
+  "EPalWazaID::Unique_TropicalOstrich_DashKick": {
+    "localized_name": "Tendangan Berlari",
+    "description": "Skill khusus Palumba. Melancarkan tendangan melayang ke arah musuh sambil berlari kencang."
+  },
+  "EPalWazaID::Unique_Umihebi_Fire_FireWindingTackle": {
+    "localized_name": "Ular Magma",
+    "description": "Skill khusus Jormuntide Ignis. Mengeluarkan suara gemuruh, lalu menyerang musuh sambil memutar tubuhnya yang diselimuti kobaran api."
+  },
+  "EPalWazaID::Unique_Umihebi_WindingTackle": {
+    "localized_name": "Ular Laut",
+    "description": "Skill khusus Jormuntide. Mengeluarkan suara gemuruh, lalu menyerang musuh sambil memutar tubuhnya yang diselimuti air."
+  },
+  "EPalWazaID::Unique_VolcanicMonster_Ice_IceAttack": {
+    "localized_name": "Ledakan Es",
+    "description": "Skill khusus Reptyro Cryst. Mengangkat kaki depannya dan menghentakkannya ke tanah Menyebabkan salju di lokasi musuh. Saat salju turun, bola salju menghujani daerah sekitarnya."
+  },
+  "EPalWazaID::Unique_VolcanicMonster_MagmaAttack": {
+    "localized_name": "Ledakan Vulkanik",
+    "description": "Skill khusus Reptyro. Mengangkat kaki depannya dan menghentakkannya ke tanah Menyebabkan letusan di lokasi musuh. Saat meletus, bom vulkanik menghujani daerah sekitarnya."
+  },
+  "EPalWazaID::Unique_WeaselDragon_FlyingTackle": {
+    "localized_name": "Terjangan Roket",
+    "description": "Skill khusus spesies Chillet. Setelah mengumpulkan sedikit kekuatan, ia melompat ke depan. Saat mendarat mereka selalu ketakutan dan menutup matanya."
+  },
+  "EPalWazaID::Unique_Werewolf_Ice_SnowScratch": {
+    "localized_name": "Cakar Salju",
+    "description": "Skill khusus WereWolf_Ice. Melompat ke depan dan mencakar 2 kali dengan cepat. Tebasan itu dipenuhi dengan kekuatan es."
+  },
+  "EPalWazaID::Unique_Werewolf_Scratch": {
+    "localized_name": "Cakaran Meloncat",
+    "description": "Skill khusus WereWolf. Melompat ke depan dan mencakar 2 kali dengan cepat. Tebasan itu dipenuhi dengan kekuatan kegelapan."
+  },
+  "EPalWazaID::Unique_WhiteDeer_HolyPillar": {
+    "localized_name": "Ledakan Suci",
+    "description": "Skill khusus Celesdir. Setelah menciptakan ledakan cahaya di area luas yang ada di depannya, memancarkan cahaya suci di sekelilingnya sambil berjalan."
+  },
+  "EPalWazaID::Unique_WhiteShieldDragon_ShieldTackle": {
+    "localized_name": "Serangan Aegis",
+    "description": "Skill khusus Silvegis. Memasang perisai di depan untuk mengurangi semua serangan, lalu menyerang dan menghancurkan musuh."
+  },
+  "EPalWazaID::Unique_WhiteTiger_Ground_IronScratch": {
+    "localized_name": "Cakar Batu",
+    "description": "Skill khusus Cryolinx Terra. Menebas dengan cakar pada serangan pertama dan kedua, kemudian menggunakan seluruh tubuhnya untuk membuat sayatan besar. Saat mengayunkan cakarnya, menembakkan 3 batu ke depan dalam bentuk kipas."
+  },
+  "EPalWazaID::Unique_WhiteTiger_IceScratch": {
+    "localized_name": "Cakar Badai salju",
+    "description": "Skill khusus Cryolinx. Menebas dengan cakar pada serangan pertama dan kedua, kemudian menggunakan seluruh tubuhnya untuk membuat sayatan besar. Saat mengayunkan cakarnya, menembakkan 3 bongkahan es ke depan dalam bentuk kipas."
+  },
+  "EPalWazaID::Unique_WingGolem_RoundCutter": {
+    "localized_name": "Pemotong Bumi",
+    "description": "Skill khusus spesies Knocklem. Mengayunkan lengannya dengan kuat dan melempar cincin yang ada di punggungnya. Cincin itu terbang dengan arah melingkar."
+  },
+  "EPalWazaID::Unique_YakushimaBoss001_Small_DemonEyeCharge": {
+    "localized_name": "Serangan Bola Mata",
+    "description": "Skill khusus Bola Mata Iblis. Menerjang ke arah musuh. Memantul jika mengenai tanah atau dinding."
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Dark": {
+    "localized_name": "Tindihan Slime (Kegelapan)",
+    "description": "Skill khusus Slime Ungu. Menyerang dengan melompat ke arah musuh."
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Fire": {
+    "localized_name": "Tindihan Slime (Api)",
+    "description": "Skill khusus Slime Merah. Menyerang dengan melompat ke arah musuh."
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Leaf": {
+    "localized_name": "Tindihan Slime (Rumput)",
+    "description": "Skill khusus Slime Hijau. Menyerang dengan melompat ke arah musuh."
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Normal": {
+    "localized_name": "Tindihan Slime (Netral)",
+    "description": "Skill khusus Slime Berkilau. Menyerang dengan melompat ke arah musuh."
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Rainbow": {
+    "localized_name": "Tindihan Slime (Pelangi)",
+    "description": "Skill khusus Slime Pelangi. Menyerang dengan melompat ke arah musuh."
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Water": {
+    "localized_name": "Tindihan Slime (Air)",
+    "description": "Skill khusus Slime Biru. Menyerang dengan melompat ke arah musuh."
+  },
+  "EPalWazaID::Unique_YakushimaMonster002_SwordCharge": {
+    "localized_name": "Pengisian Kekuatan Pedang",
+    "description": "Skill khusus Pedang Ajaib. Menusuk ke arah musuh."
+  },
+  "EPalWazaID::Unique_YakushimaMonster003_BatCharge": {
+    "localized_name": "Serangan Kelelawar",
+    "description": "Skill khusus Kelelawar Gua. Menerjang musuh menggunakan seluruh tubuhnya. Memantul jika mengenai tanah atau dinding."
+  },
+  "EPalWazaID::Unique_Yakushima_EyeTossin": {
+    "localized_name": "Serangan Tatapan Tajam",
+    "description": "Skill khusus Bola Mata Cthulhu. Menerjang musuh berkali-kali."
+  },
+  "EPalWazaID::Unique_Yakushima_MouthTossin": {
+    "localized_name": "Serangan Kecepatan Tinggi",
+    "description": "Skill khusus Bola Mata Cthulhu. Menerjang musuh berkali-kali dengan kecepatan ekstrem."
+  },
+  "EPalWazaID::Unique_Yakushima_SummonServant": {
+    "localized_name": "Memanggil Pelayan",
+    "description": "Skill khusus Bola Mata Cthulhu. Memanggil 4 pelayan. Para pelayan akan mengejar musuh, menerjangnya, dan memberikan damage. Pelayan akan lenyap jika diserang atau setelah beberapa waktu."
+  },
+  "EPalWazaID::Unique_Yeti_Grass_GrassBall": {
+    "localized_name": "Bowling Salju",
+    "description": "Skill khusus Wumpo Botan. Menggulung bola yang terbuat dari rumput setelah mencapai ukuran maksimal, lalu dilempar dan meledak."
+  },
+  "EPalWazaID::Unique_Yeti_SnowBall": {
+    "localized_name": "Bola salju",
+    "description": "Skill khusus Wumpo. Menggulirkan bola yang terbuat dari salju. Setelah mencapai ukuran maksimal, bola salju itu akan dilempar dan kemudian meledak."
+  },
+  "EPalWazaID::WallSplash": {
+    "localized_name": "Percikan Dinding",
+    "description": "Terus menerus membuat pilar air pada lokasi musuh."
+  },
+  "EPalWazaID::WaterBall": {
+    "localized_name": "Bom Percikan",
+    "description": "Membuat bola air raksasa di atas kepala, menembakkannya ke arah musuh."
+  },
+  "EPalWazaID::WaterGun": {
+    "localized_name": "Tembakan Air",
+    "description": "Menembakkan peluru air yang terbang lurus ke arah musuh."
+  },
+  "EPalWazaID::Weapon_Use": {
+    "localized_name": "Penggunaan Senjata",
+    "description": "Menyerang menggunakan senjata yang kamu miliki."
+  },
+  "EPalWazaID::WindCutter": {
+    "localized_name": "Pemotong Angin",
+    "description": "Menembakkan bilah angin super cepat yang terbang lurus ke arah musuh."
+  },
+  "EPalWazaID::WindEdge": {
+    "localized_name": "Tepian Angin",
+    "description": "Menembakkan bilah angin tajam dalam bentuk kipas."
+  }
+}

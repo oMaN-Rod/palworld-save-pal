@@ -1,0 +1,757 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "about": "關於",
+  "about_built_by": "由<s>一個開發人員</s>構建，一些開發人員是為了好玩。",
+  "about_check_out": "查看",
+  "about_for_more_info": "了解更多信息。",
+  "about_github_repo": "Github 倉庫",
+  "accessory": "配飾",
+  "actions": "行動",
+  "active": "積極的",
+  "active_filters_count": "有源濾波器 ({count})",
+  "activity": "活動",
+  "add": "添加",
+  "add_all_implants": "添加所有種植體",
+  "add_all_pal_gear": "添加所有 {pal} 裝備",
+  "add_all_pals_to_entity": "將所有 {pals} 添加到 {entity}",
+  "add_all_skills": "添加所有技能",
+  "add_count_pals": "添加 {count} {type} {pals}",
+  "add_entity": "添加 {entity}",
+  "add_new_pal": "添加新的 {pal}",
+  "add_new_pal_to_entity": "添加一個新朋友到您的 {entity}",
+  "add_new_tag": "添加新標籤",
+  "add_notes_about_cloned_pals": "添加有關這些克隆的 {pals} 的註釋...",
+  "add_notes_about_imported_pals": "添加有關這些導入的 {pals} 的註釋...",
+  "add_other_key_items": "添加其他關鍵項目",
+  "add_pal_to_base": "將新的 {pal} 添加到 Base {base}",
+  "add_preset_entity": "添加 {entity} 預設",
+  "add_skill": "添加技能",
+  "add_skills_preset": "添加{type}技能預設",
+  "add_tag": "添加標籤",
+  "add_to_collection": "添加到收藏",
+  "add_to_favorites": "添加到收藏夾",
+  "added_label": "額外：",
+  "all": "全部",
+  "all_entity": "全部 {entity}",
+  "alpha": "阿爾法",
+  "alpha_pal": "阿爾法 {pals}",
+  "ammo": "彈藥",
+  "ancient_technology_points": "古代科技點",
+  "and_more_count": "+{count} 更多",
+  "apply_preset": "應用預設",
+  "apply_preset_to_selected": "將預設應用到選定的 {pals}",
+  "apply_presets": "應用預設",
+  "apply_selected_entity": "應用選定的 {entity}",
+  "archive_entity": "存檔{entity}",
+  "armor": "盔甲",
+  "attack": "攻擊",
+  "available_entity": "可用 {entity}",
+  "available_saves": "可用保存",
+  "available_slots": "可用插槽",
+  "available_tags": "可用標籤",
+  "avg_clones_per_pal": "平均。每個 {pal} 的克隆：",
+  "avg_level": "平均水平",
+  "avg_pals_per_collection": "平均。每個集合 {pals}：",
+  "avg_transfers_per_pal": "平均。每個 {pal} 的傳輸：",
+  "base_container": "基礎容器",
+  "base_name": "基地名稱",
+  "basecamp_level": "大本營級別",
+  "blueprint": "藍圖",
+  "body": "身體",
+  "boss": "老闆",
+  "box": "盒子",
+  "bulk_clone_to_ups_failed": "批量克隆到 UPS 失敗。請再試一次。",
+  "cancel": "取消",
+  "cannot_fill": "您無法填滿您的 {target}，您還需要 {count} 個空位。",
+  "cannot_paste_here": "無法粘貼到此處（還™）",
+  "category": "類別",
+  "change_player_name": "更改玩家姓名",
+  "changes": "變化",
+  "character": "特點",
+  "character_container": "角色容器",
+  "cheat_mode": "作弊模式",
+  "chest": "胸部",
+  "choose_a_entity": "選擇 {entity}",
+  "choose_entity": "選擇實體",
+  "clear": "清除",
+  "clear_all": "全部清除",
+  "clear_all_entity": "清除所有 {entity}",
+  "clear_completed_missions_confirm": "您確定要清除所有 {count} 已完成的 {type} 任務嗎？",
+  "clear_current_missions_confirm": "您確定要清除所有 {count} 當前 {type} 任務嗎？",
+  "clear_entity": "清除 {entity}",
+  "clear_selected": "清除所選內容",
+  "clear_selected_entity": "清除選定的 {entity}",
+  "clear_selection": "清除選擇",
+  "cleared_completed_missions": "清除 {count} 完成 {type} 任務",
+  "cleared_current_missions": "已完成 {count} 當前 {type} 任務",
+  "click_map_coordinates": "點擊地圖查看詳細坐標。",
+  "click_to_complete": "點擊完成",
+  "clipboard_cleared": "剪貼板已清除",
+  "clone_pal_to_entity": "將 {pal} 克隆到 {entity}",
+  "clone_pals_to_entity": "將 {count} {pals} 克隆到 {entity}",
+  "clone_prefix": "克隆前綴",
+  "clone_selected_pal": "選擇克隆 {pal}",
+  "clone_to_entity": "克隆到 {entity}",
+  "clone_to_entity_failed": "克隆到 {entity} 失敗。請再試一次。",
+  "clones": "複製",
+  "cloning_count_pals": "克隆 {count} {pals}",
+  "close_drawer": "關閉抽屜",
+  "close_toast": "關閉吐司",
+  "collection_delete_warning": "此集合中的好友不會被刪除，但他們將不再與此集合關聯。",
+  "collection_name": "藏品名稱",
+  "collection_optional": "收藏（可選）",
+  "collections": "收藏",
+  "common": "常見的",
+  "completed": "完全的",
+  "completed_missions": "已完成的任務",
+  "confirm": "確認",
+  "consume": "消耗品",
+  "container_entity": "{entity} 容器",
+  "copy": "複製",
+  "create": "創造",
+  "create_entity_name": "創建“{name}”{entity}",
+  "create_first_entity": "創建您的第一個 {entity}",
+  "create_new_collection": "創建新集合",
+  "create_pals_or_import": "創建新的 {pals} 或從保存文件中導入它們以開始。",
+  "create_preset_from_container": "從容器創建預設",
+  "create_preset_from_current": "從當前 {entity} 創建預設",
+  "created": "已創建",
+  "current_collection": "當前收藏",
+  "current_missions": "目前的任務",
+  "current_save_file": "當前保存文件",
+  "debug": "偵錯",
+  "debug_mode": "調試模式",
+  "defense": "防禦",
+  "delete": "刪除",
+  "delete_count_entities_confirm": "您確定要刪除 {count} 選定的 {entity} 嗎？",
+  "delete_entire_guild": "刪除整個公會",
+  "delete_entity": "刪除 {entity}",
+  "delete_entity_by_name_confirm": "您確定要刪除 {name} 嗎？此操作無法撤消。",
+  "delete_entity_confirm": "您確定要刪除此 {entity} 嗎？此操作無法撤消。",
+  "delete_entity_warning": "您確定要刪除“{name}”嗎？ {warning}",
+  "delete_selected_entity": "刪除選定的 {entity}",
+  "delete_selected_entity_confirm": "您確定要刪除所選的 {entity} 嗎？",
+  "deleted_entity": "已刪除 {count} {entity}",
+  "description_optional": "說明（可選）",
+  "dimensional_pal_storage": "維度 {pal} 存儲",
+  "distribution": "分配",
+  "download": "下載",
+  "download_modified_save": "下載修改後的Level.sav文件",
+  "dps": "輸出功率",
+  "dps_not_available": "所選玩家沒有 DPS",
+  "drag_drop_zip": "或將您的 zip 文件拖放到此處",
+  "dungeons": "地下城",
+  "edit": "編輯",
+  "edit_entity": "編輯 {entity}",
+  "edit_entity_name": "編輯 {entity} 名稱",
+  "edit_tags_for_pals": "編輯 {count} {pals} 的標籤",
+  "effect": "影響",
+  "egg": "蛋",
+  "element_and_type": "元素和類型",
+  "element_types": "元素類型",
+  "elemental_distribution": "元素分佈",
+  "empty": "空的",
+  "enter_item_count": "輸入商品數量",
+  "enter_name_for_entity": "輸入新 {entity} 的名稱：",
+  "enter_new_name_for_entity": "輸入 {entity} 的新名稱：",
+  "enter_tag_name": "輸入標籤名稱",
+  "entity_count_available": "{count} {entity} 可用",
+  "entity_not_available": "{entity} 不可用。",
+  "epic": "史詩",
+  "error": "錯誤",
+  "error_copied": "錯誤詳細信息已復製到剪貼板",
+  "error_copy_failed": "無法複製錯誤詳細信息",
+  "error_nuke_operation": "nuke 操作期間發生錯誤。請再試一次。",
+  "essential": "基本的",
+  "export": "出口",
+  "export_pals": "導出 {count} {pals}",
+  "export_preset": "將預設導出到文件",
+  "export_selected": "導出選定的內容",
+  "export_target": "出口目標",
+  "export_to": "導出到",
+  "exporting_count_selected_pals": "導出 {count} 選擇 {pals}",
+  "export_note_message": "導出的好友將被複製到目標位置。原件將保留在 UPS 中。",
+  "export_to_target": "導出到 {target}",
+  "failed_create_pal": "創建新好友失敗。請再試一次。",
+  "failed_export_pals": "導出 {count} {pals} 失敗",
+  "failed_get_pal_data": "獲取好友數據失敗",
+  "failed_nuke_ups": "攻擊 UPS 失敗。請再試一次。",
+  "fast_travel": "快速旅行",
+  "favorites": "收藏夾",
+  "feed": "餵養",
+  "fill": "充滿",
+  "fill_container": "填充容器",
+  "fill_current_entity": "填充電流 {entity}",
+  "fill_entity": "填寫{entity}",
+  "filter_and_sort": "過濾和排序",
+  "filtered": "已過濾",
+  "food": "食物",
+  "for": "為了",
+  "friendship_rank": "友誼排名",
+  "gender": "性別",
+  "glider": "滑翔機",
+  "global_pal_storage": "全局 {pal} 存儲",
+  "gps": "全球定位系統",
+  "gps_not_available": "GPS在此保存文件中不可用",
+  "grid_view": "網格視圖",
+  "guild_name": "公會名稱",
+  "head": "頭",
+  "heal_all_in_entity": "在 {entity} 中治愈一切",
+  "heal_selected_pals": "治療選定的 {pals}",
+  "health": "健康",
+  "how_many_clones": "有多少克隆人？",
+  "hp": "惠普",
+  "id": "ID",
+  "ivs": "靜脈注射",
+  "import": "進口",
+  "import_failed": "導入失敗。請再試一次。",
+  "import_from": "導入自",
+  "import_from_save": "從保存導入",
+  "import_preset": "從文件導入預設",
+  "import_to_ups_message": "選擇將 {pals} 導入 UPS 的來源和選項。",
+  "import_to_ups_title": "將文件保存到 UPS",
+  "in_inventory": "庫存中",
+  "info": "資訊",
+  "invalid_option_selected": "選擇的選項無效",
+  "inventory": "存貨",
+  "item_container": "物品容器",
+  "item_copied": "{name} 複製到剪貼板",
+  "key_items": "關鍵項目",
+  "lab": "實驗室",
+  "language": "語言",
+  "last_accessed": "上次訪問時間",
+  "last_online": "最後在線時間",
+  "last_updated_date": "最後更新：{date}",
+  "later": "之後",
+  "learn_all_skills": "學習所有技能",
+  "learn_skills_matching_type": "學習與好友類型匹配的所有技能",
+  "learned_skills": "學到的技能",
+  "left_click_focus": "左鍵單擊玩家或基地以聚焦。",
+  "legendary": "傳奇",
+  "level": "等級",
+  "level_abbr": "等級",
+  "level_abbr_value": "等級 {value}",
+  "level_distribution": "等級分佈",
+  "level_sync_display": "電平同步 {from} → {to}",
+  "level_value": "級別 {level}",
+  "list_view": "列表視圖",
+  "load_guild_bases": "負載公會/基地",
+  "load_player": "加載播放器",
+  "loaded_entity": "已加載 {entity}",
+  "loading_data": "正在加載數據...",
+  "loading_entity": "正在加載 {entity}",
+  "loadout": "裝載",
+  "location": "地點",
+  "lock_all": "全部鎖定",
+  "locked": "鎖定",
+  "lucky": "幸運的",
+  "lucky_pals": "幸運{pals}",
+  "main_missions": "主要任務",
+  "manage_collection_for_pals": "管理 {count} {pals} 的集合",
+  "map": "地圖",
+  "map_coordinate_origin_point": "地圖坐標原點",
+  "map_coordinates": "地圖坐標",
+  "map_options": "地圖選項",
+  "mark_all_current_complete": "將所有當前標記為完成",
+  "mark_complete": "標記完成",
+  "mark_complete_confirm": "您確定要將所有 {count} 當前 {type} 任務標記為完成嗎？",
+  "marked_missions_complete": "將 {count} {type} 任務標記為已完成",
+  "material": "材料",
+  "max": "最大限度",
+  "max_ivs": "最大 IV 數",
+  "max_level": "最高等級",
+  "max_level_pals": "最高等級 {pals}",
+  "max_out_pal_stats": "最大化 {pal} 統計數據💉💪",
+  "max_out_selected_pals": "最大選擇 {pals}",
+  "max_souls": "靈魂最大化",
+  "max_work_suitability": "最大限度地提高工作適應性",
+  "menu": "菜單",
+  "min_level": "最低等級",
+  "mission": "使命",
+  "mission_cleared": "任務已完成",
+  "mission_marked_complete": "任務標記為完成",
+  "missions": "使命",
+  "mixed_collections": "混合系列",
+  "mixed_collections_message": "選定的 {pals} 位於不同的集合中，或者有些沒有集合",
+  "modified": "修改的",
+  "modified_label": "修改的：",
+  "module": "模塊",
+  "monster_equip_weapon": "怪物裝備武器",
+  "most_popular": "最受歡迎",
+  "move": "移動",
+  "move_all_to_collection": "將所有選定的 {pals} 移動到“{name}”",
+  "move_to_entity": "移至 {entity}",
+  "moved_pals_to_collection": "將 {count} {pals} 移至集合",
+  "name": "姓名",
+  "new_pal_prefix": "新朋友前綴",
+  "new_version_available": "Palworld Save Pal 的新版本已在 GitHub 上發布。",
+  "next": "下一個",
+  "nickname": "暱稱",
+  "no_archived_entity": "沒有存檔 {entity}",
+  "no_bases_loaded": "尚未加載基地。使用上面的公會選擇器來加載基地。",
+  "no_changes": "沒有變化",
+  "no_collection": "暫無收藏",
+  "no_completed_missions_to_clear": "沒有已完成的任務需要清除",
+  "no_current_missions_to_clear": "當前沒有任務需要完成",
+  "no_current_missions_to_complete": "當前沒有任務需要完成",
+  "no_detailed_info": "無詳細信息",
+  "no_entity_matching": "未找到與“{query}”匹配的 {entity}",
+  "no_entity_selected": "未選擇 {entity}",
+  "no_entity_yet": "還沒有 {entity}",
+  "no_guild_bases_found": "未找到公會基地",
+  "no_guild_found": "沒有找到公會",
+  "no_level_sync": "無電平同步",
+  "no_missions_found": "未找到 {type} 任務",
+  "no_pals_available": "沒有可用的 {pals} 數據",
+  "no_pals_in_storage": "存儲中沒有 {pals}",
+  "no_players_loaded": "尚未加載任何玩家。使用上面的選擇器加載播放器。",
+  "no_save_loaded": "未加載保存文件",
+  "no_skills_learned": "沒有學到技能",
+  "no_slots_available_in_entity": "此 {entity} 中沒有可用的插槽。",
+  "no_storage_containers": "無存儲容器",
+  "none": "沒有任何",
+  "normal": "普通的",
+  "note": "筆記",
+  "notes_optional": "註釋（可選）",
+  "nuke_all_presets": "核對所有預設",
+  "nuke_presets_confirm": "您確定要刪除所有預設嗎？此操作將恢復默認值且無法撤消。",
+  "nuke_ups": "Nuke UPS - 刪除所有 {pals}",
+  "of": "的",
+  "oil_rig": "石油鑽機",
+  "oil_rig_pals": "石油鑽機 {pals}",
+  "open_drawer": "打開抽屜",
+  "oops_something_wrong": "糟糕...出了點問題",
+  "or_drag_and_drop": "或拖放",
+  "origin": "起源",
+  "origin_label": "來源：",
+  "origin_point": "原點 (0,0)",
+  "page": "頁",
+  "page_of_pages": "第 {current} 頁（共 {total}）",
+  "pal_box_party": "帕爾盒子+派對",
+  "pal_cannot_be_trait": "{type} 朋友不能是 {trait}",
+  "pal_types": "朋友類型",
+  "palbox": "帕爾博克斯",
+  "paldeck": "帕爾德克",
+  "pals_in_storage": "{pals} 存儲中",
+  "party": "派對",
+  "passive": "被動的",
+  "paste": "粘貼",
+  "predator": "掠奪者",
+  "predator_pals": "捕食者 {pals}",
+  "preset_name": "預設名稱",
+  "preset_select_details": "從列表中選擇預設以查看詳細信息",
+  "presets_precedence": "預設優先級為：pal lock ➡️ element lock ➡️ default。每個夥伴、元素或默認值僅選擇一個預設。",
+  "previous": "以前的",
+  "progress": "進步",
+  "pwr": "電源",
+  "raid": "襲擊",
+  "range": "範圍",
+  "rare": "稀有的",
+  "raw": "生的",
+  "read_only": "只讀",
+  "ready_to_fill": "準備用 {count} {pals} 填充 {target}。",
+  "refresh": "刷新（清除未保存的更改）",
+  "refresh_entity": "刷新{entity}",
+  "remove": "消除",
+  "remove_all_from_collections": "從其集合中刪除所有選定的 {pals}",
+  "remove_from_collection": "從集合中刪除",
+  "remove_from_favorites": "從收藏夾中刪除",
+  "remove_pal": "刪除好友",
+  "removed_pals_from_collections": "從集合中刪除了 {count} {pals}",
+  "research_cost": "研究費用",
+  "research_node": "研究節點",
+  "reset": "重置",
+  "restore_hp": "恢復生命值",
+  "rewards": "獎勵",
+  "right_click_edit_base": "右鍵單擊基地可編輯其名稱。",
+  "save_as_preset": "保存為預設",
+  "save_changes": "保存更改",
+  "save_file_to_ups": "保存文件🡆 UPS",
+  "save_id": "保存ID",
+  "save_platform": "保存平台",
+  "search": "搜尋",
+  "search_by_name_nickname": "按姓名或暱稱搜索",
+  "search_entity": "搜索 {entity}",
+  "search_pals": "按名稱、角色 ID 或註釋搜索 {pals}...",
+  "search_placeholder": "搜索 {entity}...",
+  "select": "選擇",
+  "select_valid_player": "請選擇有效的玩家",
+  "select_a_entity": "選擇 {entity}",
+  "select_a_entity_to_view": "選擇 {entity} 查看詳細信息",
+  "select_all_current_base": "選擇當前基地中的全部",
+  "select_all_filtered_pals": "選擇所有已過濾的 {pals} ({count})",
+  "select_all_in": "選擇全部在",
+  "select_all_page_pals": "選擇當前頁面上的所有 {pals} ({count})",
+  "select_all_ups_pals": "選擇 UPS 中的所有 {pals} ({count})",
+  "select_entity": "選擇{entity}",
+  "select_entity_to_edit": "選擇要編輯的 {entity}",
+  "select_entity_to_load": "選擇要加載並在地圖上顯示的 {entity}",
+  "select_guild_to_load_bases": "選擇一個公會以在地圖上加載其基地",
+  "select_pal_edit_description": "{pals} 可以在玩家 Palbox、公會基地、全局好友存儲、維度好友存儲或通用好友存儲中選擇",
+  "select_player_view_entity": "選擇要查看的玩家 {entity}",
+  "selected": "已選擇",
+  "selected_of_total": "已選擇 {total} 中的 {selected}",
+  "selected_tags": "選定的標籤",
+  "set_entity_item_count": "設置 {entity} 項目數",
+  "set_inventory_count": "設置庫存數量",
+  "set_item_count": "設置項目數量",
+  "settings": "設定",
+  "shield": "盾",
+  "shortcuts": "快捷方式",
+  "show_archived": "顯示已存檔",
+  "showing_pals": "顯示 {total} {pals} 的 {start} 到 {end}",
+  "size": "尺寸",
+  "skills": "技能",
+  "slots_available_in_entity": "此 {entity} 中有可用的 {count} 插槽。",
+  "sort": "種類",
+  "sort_by": "排序方式",
+  "sort_by_entity": "按 {entity} 排序",
+  "sort_inventory": "庫存排序",
+  "souls": "靈魂",
+  "special_categories": "特殊類別",
+  "special_weapon": "特殊武器",
+  "sphere_module": "球體模塊",
+  "stamina": "耐力",
+  "statistics": "統計數據",
+  "stats": "統計數據",
+  "stomach": "胃",
+  "steam": "蒸汽",
+  "steam_description": "Steam/Mac：Level.sav 保存文件",
+  "storage": "貯存",
+  "storage_container": "儲存容器",
+  "structures": "結構",
+  "sub_missions": "子任務",
+  "success": "成功",
+  "successfully_cloned_pal_to_entity": "已成功將 {pal} 克隆到 {entity}",
+  "successfully_cloned_pals_to_entity": "已成功將 {count} {pals} 克隆到 {entity}",
+  "successfully_deleted_entity": "已成功從 {entity} 中刪除 {count} {pals}",
+  "successfully_exported_pals": "已成功導出 {total} {pals} 的 {count}",
+  "summon": "召喚",
+  "summoned": "召喚",
+  "summoned_pals": "召喚 {pals}",
+  "support": "支持",
+  "syncing": "正在同步",
+  "tag_changes": "標籤變更",
+  "tag_delete_warning": "該標籤將從所有擁有該標籤的好友中刪除。",
+  "tags_for_pals": "{count} {pals} 的標籤",
+  "target_available": "目標可用",
+  "tags_optional": "標籤（可選）",
+  "talents_ivs": "人才 (IV)",
+  "technology_points": "技術要點",
+  "to_collection": "前往收藏",
+  "toggle_entity": "切換 {entity}",
+  "total": "全部的",
+  "total_clones": "克隆總數",
+  "total_count": "總計數",
+  "total_exports": "出口總額",
+  "total_pals": "總計 {pals}",
+  "transfer_all_pals": "轉移全部 {pals}",
+  "transfer_pal": "轉賬{pal}",
+  "trust": "相信",
+  "trust_level": "信任級別",
+  "trust_xp": "信任XP",
+  "type_label": "類型：{type}",
+  "unarchive_entity": "取消存檔 {entity}",
+  "uncommon": "罕見",
+  "universal_pal_storage": "通用 {pal} 存儲",
+  "unknown": "未知",
+  "unknown_collection": "未知收藏",
+  "unlock_all": "全部解鎖",
+  "unlock_all_category_research": "解鎖所有 {category} 研究",
+  "unlock_full_map": "解鎖完整地圖",
+  "unlock_map": "解鎖地圖",
+  "unlock_map_confirm": "這將通過修改 LocalData.sav 文件來解鎖整個地圖。您需要選擇 LocalData.sav 文件。繼續？",
+  "unlock_prerequisite_entity": "首先解鎖先決條件 {entity}",
+  "unlocks": "解鎖",
+  "update_available": "更新可用！",
+  "update_now": "立即更新",
+  "updated_tags_for_pals": "更新了 {count} {pals} 的標籤",
+  "upload": "上傳",
+  "upload_a_file": "上傳文件",
+  "upload_zip_files": "單擊上傳您的壓縮保存文件",
+  "ups": "UPS",
+  "ups_already_empty": "UPS 已經空了",
+  "used_slots": "已用插槽",
+  "warning": "警告",
+  "weight": "重量",
+  "work_suitability": "工作適合性",
+  "working_on_it": "嘟嘟嘟，正在努力！",
+  "workload": "工作量",
+  "workspeed": "工作速度",
+  "work_speed": "工作速度",
+  "world_coordinates": "世界坐標",
+  "world_name": "世界名稱",
+  "xbox_game_pass": "Xbox 遊戲通行證",
+  "xbox_game_pass_description": "Xbox Game Pass：container.index 文件",
+  "zoom_in_out": "放大/縮小",
+  "active_skill": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "主動技能",
+        "countPlural=other": "主動技能"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "base": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "根據",
+        "countPlural=other": "基地"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "collection": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "收藏",
+        "countPlural=other": "收藏"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "file": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "文件",
+        "countPlural=other": "文件"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "filter": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "篩選",
+        "countPlural=other": "過濾器"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "guild": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "公會",
+        "countPlural=other": "行會"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "human": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "人類",
+        "countPlural=other": "人類"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "item": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "物品",
+        "countPlural=other": "專案"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "pal": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "朋友",
+        "countPlural=other": "好朋友"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "passive_skill": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "被動技能",
+        "countPlural=other": "被動技能"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "player": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "玩家",
+        "countPlural=other": "玩家"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "preset": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "預設",
+        "countPlural=other": "預設"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "save": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "節省",
+        "countPlural=other": "保存"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "tag": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "標籤",
+        "countPlural=other": "標籤"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "technology": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "技術",
+        "countPlural=other": "技術"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "transfer": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "轉移",
+        "countPlural=other": "接送服務"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "type": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "類型",
+        "countPlural=other": "類型"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "weapon": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "武器",
+        "countPlural=other": "武器"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ]
+}

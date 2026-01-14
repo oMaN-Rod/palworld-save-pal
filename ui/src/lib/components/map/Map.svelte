@@ -1,24 +1,39 @@
 <script lang="ts">
-	import { onDestroy } from 'svelte';
-	import 'leaflet/dist/leaflet.css';
-	import L from 'leaflet';
+	import { View, Map, Layer, Feature, Overlay } from 'svelte-openlayers';
+	import { createIconStyle, createStyle, createTextStyle } from 'svelte-openlayers/utils';
+	import { Projection } from 'ol/proj.js';
+	import type { Map as OLMap, MapBrowserEvent, Feature as OLFeature } from 'ol';
 	import { getAppState } from '$states';
 	import {
-		leafletToWorld,
+		pixelToWorld,
+		pixelToGameCoords,
 		MAP_SIZE,
 		mapToWorld,
 		ORIGIN_GAME_X,
 		ORIGIN_GAME_Y,
-		TRANSFORM_A,
-		TRANSFORM_B,
-		TRANSFORM_C,
-		TRANSFORM_D,
-		worldToLeaflet,
-		worldToMap
+		worldToPixel
 	} from './utils';
-	import { mapIcons, mapImg } from './mapImages';
-	import { mapObjects, palsData } from '$lib/data';
+	import { createPalIconStyle, mapImg } from './styles';
+	import { mapObjects } from '$lib/data';
 	import { assetLoader } from '$utils';
+	import 'svelte-openlayers/styles.css';
+	import PlayerPopup from './PlayerPopup.svelte';
+	import PlayerHover from './PlayerHover.svelte';
+	import OriginHover from './OriginHover.svelte';
+	import OriginPopup from './OriginPopup.svelte';
+	import BaseHover from './BaseHover.svelte';
+	import BasePopup from './BasePopup.svelte';
+	import FastTravelHover from './FastTravelHover.svelte';
+	import FastTravelPopup from './FastTravelPopup.svelte';
+	import DungeonHover from './DungeonHover.svelte';
+	import DungeonPopup from './DungeonPopup.svelte';
+	import PalHover from './PalHover.svelte';
+	import PalPopup from './PalPopup.svelte';
+	import compass from '$lib/assets/img/compass.webp';
+	import { onMount } from 'svelte';
+	import ContextMenu from 'ol-contextmenu';
+	import GeoJSON from 'ol/format/GeoJSON.js';
+	import type { Geometry } from 'ol/geom';
 
 	// Props to control which markers to display
 	let {
@@ -32,7 +47,7 @@
 		showPredatorPals = true,
 		onEditBaseName
 	}: {
-		map?: L.Map | undefined;
+		map?: OLMap | null;
 		showOrigin?: boolean;
 		showPlayers?: boolean;
 		showBases?: boolean;
@@ -45,116 +60,77 @@
 
 	const appState = getAppState();
 
-	const initialView = $derived.by(() => {
+	// Map extent and projection setup
+	const extent: [number, number, number, number] = [0, 0, MAP_SIZE, MAP_SIZE];
+	const projection = new Projection({
+		code: 'palworld-map',
+		units: 'pixels',
+		extent
+	});
+	const offset = [20, 0] as [number, number];
+	const positioning = 'center-left';
+	const hoverClass = 'bg-transparent! p-8';
+
+	const defaultCenter = () => {
 		const worldCoords = mapToWorld(ORIGIN_GAME_X, ORIGIN_GAME_Y);
-		const origin = worldToLeaflet(worldCoords.x, worldCoords.y);
-		return [origin.lat, origin.lng] as [number, number];
-	});
-
-	// Custom CRS with corrected transformation
-	const CustomCRS = L.extend({}, L.CRS.Simple, {
-		transformation: new L.Transformation(TRANSFORM_A, TRANSFORM_B, TRANSFORM_C, TRANSFORM_D)
-	});
-
-	// Map bounds based on the texture size
-	const bounds: L.LatLngBoundsExpression = [
-		[0, 0] as L.LatLngTuple,
-		[MAP_SIZE, MAP_SIZE] as L.LatLngTuple
-	];
-
-	let originMarkers: L.Layer[] = [];
-	let playerMarkers: L.Marker[] = [];
-	let baseMarkers: L.Marker[] = [];
-	let fastTravelMarkers: L.Marker[] = [];
-	let dungeonMarkers: L.Marker[] = [];
-	let alphaPalMarkers: L.Marker[] = [];
-	let predatorPalMarkers: L.Marker[] = [];
-
-	const mapOptions = {
-		center: [0, 0] as [number, number],
-		crs: CustomCRS,
-		minZoom: -4,
-		maxZoom: 3,
-		maxBounds: bounds,
-		maxBoundsViscosity: 1
+		return worldToPixel(worldCoords.x, worldCoords.y);
 	};
 
-	// Create icon for the origin
-	function createOriginIcon(): L.Icon {
-		const iconUrl = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23FFFFFF' stroke-width='2'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cline x1='12' y1='2' x2='12' y2='22' stroke='%23FFFFFF' stroke-width='2'/%3E%3Cline x1='2' y1='12' x2='22' y2='12' stroke='%23FFFFFF' stroke-width='2'/%3E%3C/svg%3E`;
+	// Icon styles
+	const playerIconStyle = createIconStyle({
+		src: mapImg.player,
+		scale: 1,
+		anchor: [0.5, 0.5],
+		anchorXUnits: 'fraction',
+		anchorYUnits: 'fraction'
+	});
 
-		return L.icon({
-			iconUrl,
-			iconSize: [24, 24],
-			iconAnchor: [12, 12],
-			popupAnchor: [0, -12]
-		});
-	}
+	const baseIconStyle = createIconStyle({
+		src: mapImg.baseCamp,
+		scale: 0.83,
+		anchor: [0.5, 0.5],
+		anchorXUnits: 'fraction',
+		anchorYUnits: 'fraction'
+	});
 
-	function addOriginMarker() {
-		if (!map) return;
+	const fastTravelIconStyle = createIconStyle({
+		src: mapImg.fastTravel,
+		scale: 1,
+		anchor: [0.5, 0.5],
+		anchorXUnits: 'fraction',
+		anchorYUnits: 'fraction'
+	});
 
-		// Clear any existing origin markers
-		originMarkers.forEach((marker) => map!.removeLayer(marker));
-		originMarkers = [];
+	const dungeonIconStyle = createIconStyle({
+		src: mapImg.dungeon,
+		scale: 1,
+		anchor: [0.5, 0.5],
+		anchorXUnits: 'fraction',
+		anchorYUnits: 'fraction'
+	});
 
-		if (!showOrigin) return;
-
-		// The origin in world coordinates corresponds to map coordinates (0,0)
+	const originIconStyle = createStyle({
+		image: {
+			src: compass,
+			scale: 1,
+			anchor: [0.5, 0.5],
+			anchorXUnits: 'fraction',
+			anchorYUnits: 'fraction'
+		}
+	});
+	const originLineStyle = createStyle({
+		stroke: { color: '#ffffff', width: 0.5, lineDash: [4, 8] }
+	});
+	const originPixelCoords = $derived.by(() => {
 		const worldCoords = mapToWorld(ORIGIN_GAME_X, ORIGIN_GAME_Y);
+		return worldToPixel(worldCoords.x, worldCoords.y);
+	});
 
-		// Convert to Leaflet coordinates
-		const latlng = worldToLeaflet(worldCoords.x, worldCoords.y);
-
-		const icon = createOriginIcon();
-		const originMarker = L.marker(latlng, { icon }).addTo(map!);
-
-		originMarker.bindPopup(`
-            <div>
-                <h3 class="text-lg font-bold">Origin (0,0)</h3>
-                <p>This is the origin (0,0) in map coordinates</p>
-                <p class="text-xs mt-2">World Coords: ${worldCoords.x.toFixed(2)}, ${worldCoords.y.toFixed(2)}</p>
-                <p class="text-xs">Map Coords: ${ORIGIN_GAME_X}, ${ORIGIN_GAME_Y}</p>
-                <p class="text-xs">Leaflet Coords: ${latlng.lat.toFixed(2)}, ${latlng.lng.toFixed(2)}</p>
-            </div>
-        `);
-
-		originMarkers.push(originMarker);
-
-		// Add crosshair lines for better visualization of the origin
-		const horizontalLine = L.polyline(
-			[
-				[latlng.lat, 0],
-				[latlng.lat, MAP_SIZE]
-			],
-			{ color: 'rgba(255, 255, 255, 0.5)', weight: 1, dashArray: '5,5' }
-		).addTo(map!);
-
-		const verticalLine = L.polyline(
-			[
-				[0, latlng.lng],
-				[MAP_SIZE, latlng.lng]
-			],
-			{ color: 'rgba(255, 255, 255, 0.5)', weight: 1, dashArray: '5,5' }
-		).addTo(map!);
-
-		originMarkers.push(horizontalLine);
-		originMarkers.push(verticalLine);
-	}
-
-	function addBaseMarkers() {
-		if (!map) return;
-
-		// Clear any existing base markers
-		baseMarkers.forEach((marker) => map!.removeLayer(marker));
-		baseMarkers = [];
-
-		if (!showBases) return;
-
-		// Get all bases from the app state
+	// Derived data
+	const players = $derived(Object.values(appState.players || {}));
+	const bases = $derived.by(() => {
 		const guilds = Object.values(appState.guilds || {});
-
-		const bases = guilds.reduce((acc, guild) => {
+		return guilds.reduce((acc, guild) => {
 			if (guild.bases) {
 				Object.values(guild.bases).forEach((base) => {
 					acc.push(base);
@@ -162,379 +138,293 @@
 			}
 			return acc;
 		}, [] as any[]);
+	});
 
-		const icon = mapIcons.baseCamp;
-		bases.forEach((base) => {
-			if (!base.location) return;
+	const fastTravelPoints = $derived.by(() => {
+		if (!mapObjects) return [];
+		return mapObjects.points.filter((p) => p.type === 'fast_travel');
+	});
 
-			// Convert base world coordinates to Leaflet coordinates
-			const latlng = worldToLeaflet(base.location.x, base.location.y);
-			const baseMarker = L.marker(latlng, { icon }).addTo(map!);
+	const dungeonPoints = $derived.by(() => {
+		if (!mapObjects) return [];
+		return mapObjects.points.filter((p) => p.type === 'dungeon');
+	});
 
-			baseMarker.bindPopup(`
-            <div>
-				<h3 class="text-lg font-bold">${base.name}</h3>
-                <h4 class="text-xs font-light">ID: ${base.id}</h4>
-                <div>
-					<span class="text-xs">World Coords: ${base.location.x.toFixed(2)}, ${base.location.y.toFixed(2)}</span>
-                	<span class="text-xs">Map Coords: ${worldToMap(base.location.x, base.location.y).x}, ${worldToMap(base.location.x, base.location.y).y * -1}</span>
-				</div>
-            </div>
-        `);
+	const alphaPalPoints = $derived.by(() => {
+		if (!mapObjects) return [];
+		return mapObjects.points.filter((p) => p.type === 'alpha_pal');
+	});
 
-			// Add right-click context menu for editing base name
-			if (onEditBaseName) {
-				baseMarker.on('contextmenu', (e) => {
-					e.originalEvent.preventDefault();
-					onEditBaseName(base);
-				});
+	const predatorPalPoints = $derived.by(() => {
+		if (!mapObjects) return [];
+		return mapObjects.points.filter((p) => p.type === 'predator_pal');
+	});
+
+	// Origin coordinates
+	const originCoords = $derived.by(() => {
+		const worldCoords = mapToWorld(ORIGIN_GAME_X, ORIGIN_GAME_Y);
+		return worldToPixel(worldCoords.x, worldCoords.y);
+	});
+
+	// Coordinate display state
+	let coordDisplayElement: HTMLDivElement | null = $state(null);
+	let coordDisplayText = $state('Coordinates: 0, 0');
+
+	function handlePointerMove(evt: MapBrowserEvent<PointerEvent | KeyboardEvent | WheelEvent>) {
+		const [pixelX, pixelY] = evt.coordinate;
+		const { worldX, worldY } = pixelToWorld(pixelX, pixelY);
+		const { gameX, gameY } = pixelToGameCoords(pixelX, pixelY);
+		coordDisplayText = `World: ${Math.round(worldX)}, ${Math.round(worldY)}<br>Map: ${gameX}, ${gameY}`;
+	}
+
+	function handleMapClick(evt: MapBrowserEvent<PointerEvent | KeyboardEvent | WheelEvent>) {
+		const [pixelX, pixelY] = evt.coordinate;
+		const { worldX, worldY } = pixelToWorld(pixelX, pixelY);
+		const { gameX, gameY } = pixelToGameCoords(pixelX, pixelY);
+		const zoom = map?.getView().getZoom();
+
+		console.log(`Zoom level: ${zoom}`);
+		console.log(`Pixel coords: [${pixelX.toFixed(2)}, ${pixelY.toFixed(2)}]`);
+		console.log(`World coords: [${worldX.toFixed(2)}, ${worldY.toFixed(2)}]`);
+		console.log(`Game Map coords: [${gameX}, ${gameY}]`);
+	}
+
+	function getHorizontalOriginLineStrings(): number[][] {
+		return [
+			[0, originPixelCoords[1]],
+			[MAP_SIZE, originPixelCoords[1]]
+		];
+	}
+
+	function getVerticalOriginLineStrings(): number[][] {
+		return [
+			[originPixelCoords[0], 0],
+			[originPixelCoords[0], MAP_SIZE]
+		];
+	}
+
+	onMount(() => {
+		for (const player of Object.values(appState.playerSummaries)) {
+			if (!appState.players[player.uid] && player.loaded) {
+				appState.selectPlayerLazy(player.uid);
 			}
-
-			// Add the marker to the baseMarkers array so we can remove it later
-			baseMarkers.push(baseMarker);
-		});
-	}
-
-	function addPlayerMarkers() {
-		if (!map) return;
-
-		// Clear any existing player markers
-		playerMarkers.forEach((marker) => map!.removeLayer(marker));
-		playerMarkers = [];
-
-		if (!showPlayers) return;
-
-		// Get all players from the app state
-		const players = Object.values(appState.players || {});
-		const icon = mapIcons.player;
-
-		players.forEach((player) => {
-			if (!player.location) return;
-
-			// Convert player world coordinates to Leaflet coordinates
-			const latlng = worldToLeaflet(player.location.x, player.location.y);
-
-			const playerMarker = L.marker(latlng, { icon }).addTo(map!);
-
-			playerMarker.bindPopup(`
-                <div>
-                    <h3 class="text-lg font-bold">${player.nickname}</h3>
-					<p class="text-xs">Last Online: ${new Date(player.last_online_time).toLocaleString()}</p>
-                    <p class="text-xs">Level: ${player.level}</p>
-                    <p class="text-xs">HP: ${player.hp}</p>
-                    <p class="text-xs mt-2">World Coords: ${player.location.x.toFixed(2)}, ${player.location.y.toFixed(2)}, ${player.location.z.toFixed(2)}</p>
-                    <p class="text-xs">Map Coords: ${worldToMap(player.location.x, player.location.y).x}, ${worldToMap(player.location.x, player.location.y).y * -1}</p>
-                </div>
-            `);
-
-			playerMarkers.push(playerMarker);
-		});
-	}
-
-	async function addFastTravelMarkers() {
-		if (!map) return;
-
-		// Clear any existing fast travel markers
-		fastTravelMarkers.forEach((marker) => map!.removeLayer(marker));
-		fastTravelMarkers = [];
-
-		if (!showFastTravel) return;
-		if (!mapObjects) return;
-		const icon = mapIcons.fastTravel;
-		mapObjects.points
-			.filter((p) => p.type === 'fast_travel')
-			.forEach((point) => {
-				// Convert point world coordinates to Leaflet coordinates
-				const latlng = worldToLeaflet(point.x, point.y);
-
-				const marker = L.marker(latlng, { icon }).addTo(map!);
-
-				marker.bindPopup(`
-					<div>
-						<h3 class="text-lg font-bold">${point.localized_name}</h3>
-						<p class="text-xs mt-2">World Coords: ${point.x.toFixed(2)}, ${point.y.toFixed(2)}</p>
-						<p class="text-xs">Map Coords: ${worldToMap(point.x, point.y).x}, ${worldToMap(point.x, point.y).y * -1}</p>
-					</div>
-				`);
-
-				fastTravelMarkers.push(marker);
-			});
-	}
-
-	async function addDungeonMarkers() {
-		if (!map) return;
-
-		// Clear any existing fast travel markers
-		dungeonMarkers.forEach((marker) => map!.removeLayer(marker));
-		dungeonMarkers = [];
-
-		if (!showDungeons) return;
-		if (!mapObjects) return;
-		const icon = mapIcons.dungeon;
-		mapObjects.points
-			.filter((p) => p.type === 'dungeon')
-			.forEach((point) => {
-				// Convert point world coordinates to Leaflet coordinates
-				const latlng = worldToLeaflet(point.x, point.y);
-
-				const marker = L.marker(latlng, { icon }).addTo(map!);
-
-				marker.bindPopup(`
-					<div>
-						<p class="text-xs mt-2">World Coords: ${point.x.toFixed(2)}, ${point.y.toFixed(2)}</p>
-						<p class="text-xs">Map Coords: ${worldToMap(point.x, point.y).x}, ${worldToMap(point.x, point.y).y * -1}</p>
-					</div>
-				`);
-
-				dungeonMarkers.push(marker);
-			});
-	}
-
-	async function addAlphaPalMarkers() {
-		if (!map) return;
-
-		// Clear any existing alpha pal markers
-		alphaPalMarkers.forEach((marker) => map!.removeLayer(marker));
-		alphaPalMarkers = [];
-
-		if (!showAlphaPals) return;
-		if (!mapObjects) return;
-		mapObjects.points
-			.filter((p) => p.type === 'alpha_pal')
-			.forEach((point) => {
-				// Convert point world coordinates to Leaflet coordinates
-				const latlng = worldToLeaflet(point.x, point.y);
-				const palImage = assetLoader.loadMenuImage(point.pal);
-				const palData = palsData.getByKey(point.pal);
-				const icon = L.icon({
-					iconUrl: palImage,
-					iconSize: [40, 40],
-					iconAnchor: [20, 20],
-					popupAnchor: [0, -20],
-					className: 'rounded-full border-2 border-white'
+		}
+		setTimeout(() => {
+			if (map) {
+				const baseContextMenu = new ContextMenu({
+					width: 180,
+					defaultItems: false,
+					items: []
 				});
-				const marker = L.marker(latlng, { icon }).addTo(map!);
-
-				marker.bindPopup(`
-					<div>
-						<h3 class="text-lg font-bold">${palData ? palData.localized_name : point.pal}</h3>
-						<p class="text-xs mt-2">World Coords: ${point.x.toFixed(2)}, ${point.y.toFixed(2)}</p>
-						<p class="text-xs">Map Coords: ${worldToMap(point.x, point.y).x}, ${worldToMap(point.x, point.y).y * -1}</p>
-					</div>
-				`);
-
-				alphaPalMarkers.push(marker);
-			});
-	}
-
-	async function addPredatorPalMarkers() {
-		if (!map) return;
-
-		// Clear any existing predator pal markers
-		predatorPalMarkers.forEach((marker) => map!.removeLayer(marker));
-		predatorPalMarkers = [];
-
-		if (!showPredatorPals) return;
-		if (!mapObjects) return;
-		mapObjects.points
-			.filter((p) => p.type === 'predator_pal')
-			.forEach((point) => {
-				// Convert point world coordinates to Leaflet coordinates
-				const latlng = worldToLeaflet(point.x, point.y);
-				const palImage = assetLoader.loadMenuImage(point.pal);
-				const palData = palsData.getByKey(point.pal);
-				const icon = L.icon({
-					iconUrl: palImage,
-					iconSize: [40, 40],
-					iconAnchor: [20, 20],
-					popupAnchor: [0, -20],
-					className: 'rounded-full border-2 border-red-500'
+				baseContextMenu.on('open', (evt: any) => {
+					const feature = map?.forEachFeatureAtPixel(evt.pixel, (ft) => ft);
+					if (feature && feature.get('type') === 'base') {
+						onEditBaseName?.(feature.get('data'));
+					}
+					baseContextMenu.closeMenu();
 				});
-				const marker = L.marker(latlng, { icon }).addTo(map!);
-
-				marker.bindPopup(`
-					<div>
-						<h3 class="text-lg font-bold">${palData ? palData.localized_name : point.pal}</h3>
-						<p class="text-xs mt-2">World Coords: ${point.x.toFixed(2)}, ${point.y.toFixed(2)}</p>
-						<p class="text-xs">Map Coords: ${worldToMap(point.x, point.y).x}, ${worldToMap(point.x, point.y).y * -1}</p>
-					</div>
-				`);
-
-				predatorPalMarkers.push(marker);
-			});
-	}
-
-	function initialize(container: HTMLElement) {
-		map = L.map(container, mapOptions);
-
-		// Add the world map image
-		L.imageOverlay(mapImg.worldMap, bounds).addTo(map);
-
-		// Fit to bounds and set initial view
-		map.fitBounds(bounds);
-
-		// Add click handler to log zoom level and coordinates
-		map.on('click', (e: L.LeafletMouseEvent) => {
-			const zoom = map?.getZoom();
-			const leafletCoords = e.latlng;
-			const worldCoords = leafletToWorld(leafletCoords);
-
-			// Calculate game map coordinates from Leaflet coordinates
-			const gameX = (leafletCoords.lng - TRANSFORM_B) / TRANSFORM_A;
-			const gameY = ((leafletCoords.lat - TRANSFORM_D) / TRANSFORM_C) * -1;
-
-			console.log(`Zoom level: ${zoom}`);
-			console.log(
-				`Leaflet coords: [${leafletCoords.lat.toFixed(2)}, ${leafletCoords.lng.toFixed(2)}]`
-			);
-			console.log(
-				`World coords: [${worldCoords.worldX.toFixed(2)}, ${worldCoords.worldY.toFixed(2)}]`
-			);
-			console.log(`Game Map coords: [${Math.round(gameX)}, ${Math.round(gameY)}]`);
-		});
-
-		// Log when zoom changes
-		map.on('zoomend', () => {
-			console.log(`New zoom level: ${map?.getZoom()}`);
-		});
-
-		// Set initial view to the center of the map
-		map.setView(initialView, -3);
-
-		// Add markers
-		addOriginMarker();
-		addPlayerMarkers();
-		addBaseMarkers();
-		addFastTravelMarkers();
-		addDungeonMarkers();
-		addAlphaPalMarkers();
-		addPredatorPalMarkers();
-
-		// Add coordinate display
-		addCoordinateDisplay();
-	}
-
-	// Add a coordinate display in the corner that shows both map and world coordinates
-	function addCoordinateDisplay() {
-		if (!map) return;
-
-		const coordControl = L.Control.extend({
-			options: {
-				position: 'bottomright'
-			},
-
-			onAdd: function () {
-				const container = L.DomUtil.create('div', 'coordinate-display');
-				container.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
-				container.style.color = 'white';
-				container.style.padding = '5px 10px';
-				container.style.borderRadius = '4px';
-				container.style.margin = '0';
-				container.style.fontFamily = 'monospace';
-				container.style.fontSize = '12px';
-				container.style.lineHeight = '1.4';
-				container.innerHTML = 'Coordinates: 0, 0';
-				return container;
+				map.addControl(baseContextMenu);
 			}
-		});
-
-		map.addControl(new coordControl());
-
-		// Update coordinates on mouse move
-		map.on('mousemove', function (e: L.LeafletMouseEvent) {
-			const display = document.querySelector('.coordinate-display');
-			if (display) {
-				const worldCoords = leafletToWorld(e.latlng);
-
-				// Calculate game map coordinates from Leaflet coordinates
-				const gameX = (e.latlng.lng - TRANSFORM_B) / TRANSFORM_A;
-				const gameY = ((e.latlng.lat - TRANSFORM_D) / TRANSFORM_C) * -1;
-
-				display.innerHTML = `
-                    World: ${Math.round(worldCoords.worldX)}, ${Math.round(worldCoords.worldY)}<br>
-                    Map: ${Math.round(gameX)}, ${Math.round(gameY)}
-                `;
-			}
-		});
-	}
-
-	$effect(() => {
-		if (map) {
-			addOriginMarker();
-		}
-	});
-
-	$effect(() => {
-		if (map) {
-			addPlayerMarkers();
-		}
-	});
-
-	$effect(() => {
-		if (map) {
-			addBaseMarkers();
-		}
-	});
-
-	$effect(() => {
-		if (map) {
-			addFastTravelMarkers();
-		}
-	});
-
-	$effect(() => {
-		if (map) {
-			addDungeonMarkers();
-		}
-	});
-
-	$effect(() => {
-		if (map) {
-			addAlphaPalMarkers();
-		}
-	});
-
-	$effect(() => {
-		if (map) {
-			addPredatorPalMarkers();
-		}
-	});
-
-	onDestroy(() => {
-		if (map) {
-			map.remove();
-			map = undefined;
-		}
+		}, 1000);
 	});
 </script>
 
-<div class="h-full w-full" id="map" use:initialize></div>
+<div class="relative h-full w-full">
+	<View center={defaultCenter()} zoom={3} maxZoom={8} {projection} {extent}>
+		<Map bind:map class="h-full w-full" pointermove={handlePointerMove} click={handleMapClick}>
+			<!-- World map background -->
+			<Layer.Static url={mapImg.worldMap} {extent} />
+
+			<!-- Origin marker layer -->
+			{#if showOrigin}
+				<Layer.Vector>
+					<Feature.Point coordinates={originCoords} style={originIconStyle}>
+						<Overlay.Hover {positioning} {offset} class={hoverClass}>
+							<OriginHover />
+						</Overlay.Hover>
+						<Overlay.Popup {positioning} {offset}>
+							<OriginPopup />
+						</Overlay.Popup>
+					</Feature.Point>
+					<Feature.LineString
+						coordinates={getHorizontalOriginLineStrings()}
+						style={originLineStyle}
+					/>
+
+					<Feature.LineString
+						coordinates={getVerticalOriginLineStrings()}
+						style={originLineStyle}
+					/>
+				</Layer.Vector>
+			{/if}
+
+			<!-- Player markers layer -->
+			{#if showPlayers}
+				<Layer.Vector>
+					{#each players as player}
+						{#if player.location}
+							<Feature.Point
+								coordinates={worldToPixel(player.location.x, player.location.y)}
+								style={playerIconStyle}
+								properties={{ type: 'player', data: player }}
+							>
+								<Overlay.Hover {positioning} {offset} class={hoverClass}>
+									<PlayerHover {player} />
+								</Overlay.Hover>
+								<Overlay.Popup {positioning} {offset}>
+									<PlayerPopup {player} />
+								</Overlay.Popup>
+							</Feature.Point>
+						{/if}
+					{/each}
+				</Layer.Vector>
+			{/if}
+
+			<!-- Base markers layer -->
+			{#if showBases}
+				<Layer.Vector>
+					{#each bases as base}
+						<Feature.Point
+							coordinates={worldToPixel(base.location.x, base.location.y)}
+							style={baseIconStyle}
+							properties={{ type: 'base', data: base }}
+						>
+							<Overlay.Hover {positioning} {offset} class={hoverClass}>
+								<BaseHover {base} />
+							</Overlay.Hover>
+							<Overlay.Popup {positioning} {offset}>
+								<BasePopup {base} />
+							</Overlay.Popup>
+						</Feature.Point>
+					{/each}
+				</Layer.Vector>
+			{/if}
+
+			<!-- Fast travel markers layer -->
+			{#if showFastTravel}
+				<Layer.Vector>
+					{#each fastTravelPoints as point}
+						<Feature.Point
+							coordinates={worldToPixel(point.x, point.y)}
+							style={fastTravelIconStyle}
+							properties={{ type: 'fast_travel', data: point }}
+						>
+							<Overlay.Hover {positioning} {offset} class={hoverClass}>
+								<FastTravelHover {point} />
+							</Overlay.Hover>
+							<Overlay.Popup {positioning} {offset}>
+								<FastTravelPopup {point} />
+							</Overlay.Popup>
+						</Feature.Point>
+					{/each}
+				</Layer.Vector>
+			{/if}
+
+			<!-- Dungeon markers layer -->
+			{#if showDungeons}
+				<Layer.Vector>
+					{#each dungeonPoints as point}
+						<Feature.Point
+							coordinates={worldToPixel(point.x, point.y)}
+							style={dungeonIconStyle}
+							properties={{ type: 'dungeon', data: point }}
+						>
+							<Overlay.Hover {positioning} {offset} class={hoverClass}>
+								<DungeonHover {point} />
+							</Overlay.Hover>
+							<Overlay.Popup {positioning} {offset}>
+								<DungeonPopup {point} />
+							</Overlay.Popup>
+						</Feature.Point>
+					{/each}
+				</Layer.Vector>
+			{/if}
+
+			<!-- Alpha Pal markers layer -->
+			{#if showAlphaPals}
+				<Layer.Vector>
+					{#each alphaPalPoints as point}
+						{@const palImage = assetLoader.loadMenuImage(point.pal)}
+						{@const palStyle = createPalIconStyle(palImage, '#ffffff', map)}
+						<Feature.Point
+							coordinates={worldToPixel(point.x, point.y)}
+							style={palStyle}
+							properties={{ type: 'alpha_pal', data: point }}
+						>
+							<Overlay.Hover {positioning} {offset} class={hoverClass}>
+								<PalHover {point} isPredator={false} />
+							</Overlay.Hover>
+							<Overlay.Popup {positioning} {offset}>
+								<PalPopup {point} isPredator={false} />
+							</Overlay.Popup>
+						</Feature.Point>
+					{/each}
+				</Layer.Vector>
+			{/if}
+
+			<!-- Predator Pal markers layer -->
+			{#if showPredatorPals}
+				<Layer.Vector>
+					{#each predatorPalPoints as point}
+						{@const palImage = assetLoader.loadMenuImage(point.pal)}
+						{@const palStyle = createPalIconStyle(palImage, '#ef4444', map)}
+						<Feature.Point
+							coordinates={worldToPixel(point.x, point.y)}
+							style={palStyle}
+							properties={{ type: 'predator_pal', data: point }}
+						>
+							<Overlay.Hover {positioning} {offset} class={hoverClass}>
+								<PalHover {point} isPredator={true} />
+							</Overlay.Hover>
+							<Overlay.Popup {positioning} {offset}>
+								<PalPopup {point} isPredator={true} />
+							</Overlay.Popup>
+						</Feature.Point>
+					{/each}
+				</Layer.Vector>
+			{/if}
+		</Map>
+	</View>
+
+	<!-- Coordinate display overlay -->
+	<div class="coordinate-display" bind:this={coordDisplayElement}>
+		{@html coordDisplayText}
+	</div>
+</div>
 
 <style>
-	:global(.leaflet-container) {
+	:global(.ol-map-root) {
 		background-color: #000 !important;
 	}
 
-	:global(.marker-popup) {
-		padding: 8px;
-	}
-
-	:global(.marker-popup h3) {
-		margin-top: 0;
-		margin-bottom: 8px;
-	}
-
-	:global(.leaflet-popup-content-wrapper) {
+	:global(.ol-tooltip) {
 		background-color: var(--color-surface-900) !important;
 		color: white !important;
 		border-radius: 4px;
 	}
 
-	:global(.leaflet-popup-tip) {
-		background-color: var(--color-surface-900) !important;
+	:global(.click-popup) {
+		z-index: 100;
 	}
 
-	:global(.leaflet-popup-close-button) {
-		color: white !important;
+	.coordinate-display {
+		position: absolute;
+		bottom: 8px;
+		right: 8px;
+		background-color: rgba(0, 0, 0, 0.7);
+		color: white;
+		padding: 5px 10px;
+		border-radius: 4px;
+		font-family: monospace;
+		font-size: 12px;
+		line-height: 1.4;
+		pointer-events: none;
+		z-index: 1000;
+	}
+	:global(.ol-ctx-menu-container) {
+		background-color: transparent !important;
+		background: none;
+		box-shadow: none !important;
+		filter: none !important;
 	}
 </style>

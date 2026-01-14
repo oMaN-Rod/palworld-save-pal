@@ -1,0 +1,2454 @@
+{
+  "Alpaca": {
+    "localized_name": "Melpaca",
+    "description": "Đừng để vẻ ngoài mềm mại của Pal đánh lừa. Nếu lãnh trọn cú đá siêu tốc từ đôi chân dài ấy bạn sẽ bị hất văng đến tận bên kia trái đất."
+  },
+  "AmaterasuWolf": {
+    "localized_name": "Kitsun",
+    "description": "Bản tính quá đỗi nhạy cảm hễ có chuyện không vừa ý là Pal lại trốn biệt vào hang. Người xưa tin rằng khi Kitsun chạy trốn, đó là một điềm dữ."
+  },
+  "AmaterasuWolf_Dark": {
+    "localized_name": "Kitsun Noct",
+    "description": "Bản tính quá đỗi nhạy cảm hễ có chuyện không vừa ý là Pal lại trốn biệt vào hang. Vì nhốt mình quá lâu nên Pal trở nên u sầu và ảm đạm."
+  },
+  "Ambassador01": {
+    "localized_name": "Sứ Giả Thị Trấn Sa Mạc",
+    "description": null
+  },
+  "Anubis": {
+    "localized_name": "Anubis",
+    "description": "Với diện mạo đó, Pal từng được coi là biểu tượng của tầng lớp cao quý. Đối với những ai ghét bỏ sự giàu có và quyền lực, nó cũng là dấu hiệu đặc trưng. Dần dần, Anubis trở thành biểu tượng của cái chết."
+  },
+  "Arena_BossDefeat": {
+    "localized_name": "Thợ Săn Pal Kỳ Cựu",
+    "description": null
+  },
+  "Arena_DarkTrader": {
+    "localized_name": "Thương Nhân Chợ Đen",
+    "description": null
+  },
+  "Arena_Female_Presenter": {
+    "localized_name": "Nhà Huấn Luyện Pal Tử Tế",
+    "description": null
+  },
+  "Arena_Female_Soldier02": {
+    "localized_name": "Nhà Huấn Luyện Pal Đang Phát Triển",
+    "description": null
+  },
+  "Arena_Female_Soldier03": {
+    "localized_name": "Nhà Huấn Luyện Pal Kỳ Cựu",
+    "description": null
+  },
+  "Arena_Female_Soldier04": {
+    "localized_name": "Nhà Huấn Luyện Pal Thành Thục",
+    "description": null
+  },
+  "Arena_FireCult_FlameThrower": {
+    "localized_name": "Kẻ Tử Vì Đạo Hội Tôn Thờ Ngọn Lửa Bất Diệt",
+    "description": null
+  },
+  "Arena_Hunter_Fat_GatlingGun": {
+    "localized_name": "Kẻ Hủy Diệt Băng Săn Trộm",
+    "description": null
+  },
+  "Arena_Male_DarkTrader02": {
+    "localized_name": "Thương Nhân Huy Chương",
+    "description": null
+  },
+  "Arena_Male_Police_old": {
+    "localized_name": "Ông Chú Chuyển Sinh",
+    "description": null
+  },
+  "Arena_Male_Soldier02": {
+    "localized_name": "Nhà Huấn Luyện Pal Mới Vào Nghề",
+    "description": null
+  },
+  "Arena_Male_Soldier02_Invader": {
+    "localized_name": "Nhà Huấn Luyện Pal Cuồng Nhiệt",
+    "description": null
+  },
+  "Arena_Male_Soldier03": {
+    "localized_name": "Nhà Huấn Luyện Pal Lạnh Lùng",
+    "description": null
+  },
+  "Arena_Male_Soldier04": {
+    "localized_name": "Nhà Huấn Luyện Pal Quả Cảm",
+    "description": null
+  },
+  "Arena_Ninja": {
+    "localized_name": "Genin Phái Tsukihana",
+    "description": null
+  },
+  "Arena_NinjaElite": {
+    "localized_name": "Jonin Phái Tsukihana",
+    "description": null
+  },
+  "Arena_PalPassive_Doctor": {
+    "localized_name": "Tiến Sĩ Brawn",
+    "description": null
+  },
+  "Arena_Ranger04": {
+    "localized_name": "Thợ Săn Hương Hoa",
+    "description": null
+  },
+  "Arena_Reward_Emote": {
+    "localized_name": "Nhà Truyền Giáo Tình Yêu",
+    "description": null
+  },
+  "Arena_Reward_Paldex": {
+    "localized_name": "Nhà Nghiên Cứu Sinh Thái Pal",
+    "description": null
+  },
+  "Arena_Scholar01": {
+    "localized_name": "Nhà Nghiên Cứu Theo Đuổi Huyền Thoại",
+    "description": null
+  },
+  "Arena_Scientist_LaserRifle": {
+    "localized_name": "Tổ Hành Động, Đơn Vị Nghiên Cứu Gen Pal",
+    "description": null
+  },
+  "Arena_Soldier": {
+    "localized_name": "Lính Đánh Thuê Cường Tráng",
+    "description": null
+  },
+  "Arena_Viking": {
+    "localized_name": "Cư Dân Feybreak",
+    "description": null
+  },
+  "Arena_VikingElite": {
+    "localized_name": "Lực Lượng Tinh Nhuệ Feybreak",
+    "description": null
+  },
+  "BOSS_Believer_CrossBow": {
+    "localized_name": "Kẻ Bị Truy Nã Ego",
+    "description": null
+  },
+  "BOSS_Believer_Fat_GiantClub": {
+    "localized_name": "Kẻ Bị Truy Nã Brick",
+    "description": null
+  },
+  "BOSS_DarkTrader": {
+    "localized_name": "Kẻ Bị Truy Nã Ram",
+    "description": null
+  },
+  "BOSS_Female_DesertPeople": {
+    "localized_name": "Kẻ Bị Truy Nã Whisper",
+    "description": null
+  },
+  "BOSS_Female_People": {
+    "localized_name": "Kẻ Bị Truy Nã Flare",
+    "description": null
+  },
+  "BOSS_Female_People02": {
+    "localized_name": "Kẻ Bị Truy Nã Siren",
+    "description": null
+  },
+  "BOSS_Female_People03": {
+    "localized_name": "Kẻ Bị Truy Nã Turncoat",
+    "description": null
+  },
+  "BOSS_Female_Soldier": {
+    "localized_name": "Kẻ Bị Truy Nã Jade",
+    "description": null
+  },
+  "BOSS_Female_Soldier02": {
+    "localized_name": "Kẻ Bị Truy Nã Dazzle",
+    "description": null
+  },
+  "BOSS_Female_Soldier03": {
+    "localized_name": "Kẻ Bị Truy Nã Aloha",
+    "description": null
+  },
+  "BOSS_Female_Soldier04": {
+    "localized_name": "Kẻ Bị Truy Nã Nimble",
+    "description": null
+  },
+  "BOSS_FireCult_FlameThrower": {
+    "localized_name": "Kẻ Bị Truy Nã Shadow",
+    "description": null
+  },
+  "BOSS_Hunter_Fat_GatlingGun": {
+    "localized_name": "Kẻ Bị Truy Nã Grill",
+    "description": null
+  },
+  "BOSS_Hunter_Rifle": {
+    "localized_name": "Kẻ Bị Truy Nã Hawk",
+    "description": null
+  },
+  "BOSS_Male_DesertPeople": {
+    "localized_name": "Kẻ Bị Truy Nã Phantom",
+    "description": null
+  },
+  "BOSS_Male_NinjaElite": {
+    "localized_name": "Kẻ Bị Truy Nã Urchin",
+    "description": null
+  },
+  "BOSS_Male_People": {
+    "localized_name": "Kẻ Bị Truy Nã Dyna",
+    "description": null
+  },
+  "BOSS_Male_People02": {
+    "localized_name": "Kẻ Bị Truy Nã Quill",
+    "description": null
+  },
+  "BOSS_Male_People03": {
+    "localized_name": "Kẻ Bị Truy Nã Scoot",
+    "description": null
+  },
+  "BOSS_Male_People2": {
+    "localized_name": "Kẻ Bị Truy Nã Mite",
+    "description": null
+  },
+  "BOSS_Male_Soldier": {
+    "localized_name": "Kẻ Bị Truy Nã Crash",
+    "description": null
+  },
+  "BOSS_Male_Soldier02": {
+    "localized_name": "Kẻ Bị Truy Nã Dart",
+    "description": null
+  },
+  "BOSS_Male_Soldier03": {
+    "localized_name": "Kẻ Bị Truy Nã Clint",
+    "description": null
+  },
+  "BOSS_Male_Soldier04": {
+    "localized_name": "Kẻ Bị Truy Nã Lasso",
+    "description": null
+  },
+  "BOSS_Male_Trader01": {
+    "localized_name": "Kẻ Bị Truy Nã Skim",
+    "description": null
+  },
+  "BOSS_Male_Trader02": {
+    "localized_name": "Kẻ Bị Truy Nã Mimic",
+    "description": null
+  },
+  "BOSS_Male_Trader03": {
+    "localized_name": "Kẻ Bị Truy Nã Billy",
+    "description": null
+  },
+  "BOSS_Ninja": {
+    "localized_name": "Kẻ Bị Truy Nã Fumble",
+    "description": null
+  },
+  "BOSS_Police_Rifle": {
+    "localized_name": "Kẻ Bị Truy Nã Whip",
+    "description": null
+  },
+  "BOSS_Police_old": {
+    "localized_name": "Kẻ Bị Truy Nã Pinch",
+    "description": null
+  },
+  "BOSS_Scientist_LaserRifle": {
+    "localized_name": "Kẻ Bị Truy Nã Whisk",
+    "description": null
+  },
+  "BOSS_Viking": {
+    "localized_name": "Kẻ Bị Truy Nã Gnaw",
+    "description": null
+  },
+  "BOSS_VikingElite": {
+    "localized_name": "Kẻ Bị Truy Nã Cache",
+    "description": null
+  },
+  "BadCatgirl": {
+    "localized_name": "Nyafia",
+    "description": "Sinh vật này đặc biệt khó chịu khi bị nhìn thẳng vào mắt. Bất kỳ ai cố tình nhìn trộm, Pal sẽ oà khóc ngay tức khắc và từ mặt người đó trong khoảng hai tuần."
+  },
+  "Baphomet": {
+    "localized_name": "Incineram",
+    "description": "Đêm xuống, Pal đi săn mồi và mang về lãnh địa của mình. Không khó để tưởng tượng ra những gì sẽ xảy ra với con mồi sau khi bị bắt."
+  },
+  "Baphomet_Dark": {
+    "localized_name": "Incineram Noct",
+    "description": "Pal chỉ nhắm vào những con non và mang chúng về lãnh địa của mình. Không khó để tưởng tượng ra nỗi tuyệt vọng mà bố mẹ sẽ trải qua khi con của chúng bị cướp đi."
+  },
+  "Baphomet_Dark_Oilrig": {
+    "localized_name": "Incineram Noct",
+    "description": null
+  },
+  "Bastet": {
+    "localized_name": "Mau",
+    "description": "Phần đuôi cứng cáp của Pal không hề bị tổn hại dù bị cắt lìa. Người ta đồn rằng những chiếc đuôi này mang đến vận may tiền bạc đã cướp đi sinh mạng của vô số Mau."
+  },
+  "Bastet_Ice": {
+    "localized_name": "Mau Cryst",
+    "description": "Tinh thể trên đuôi của Pal rất đẹp, nhưng sẽ tan vỡ ngay khi Pal chết. Với niềm tin rằng nuôi nhiều con sẽ mang lại vận may về tiền bạc, Mau Cryst bị nuôi nhốt được chăm sóc rất kỹ."
+  },
+  "Believer_Bat": {
+    "localized_name": "Tín Đồ Tổ Chức Bảo Vệ Pal",
+    "description": null
+  },
+  "Believer_Bat_Camp02": {
+    "localized_name": "Tín Đồ Tổ Chức Bảo Vệ Pal",
+    "description": null
+  },
+  "Believer_Bat_Invader": {
+    "localized_name": "Tín Đồ Tổ Chức Bảo Vệ Pal",
+    "description": null
+  },
+  "Believer_CrossBow": {
+    "localized_name": "Tín Đồ Tổ Chức Bảo Vệ Pal",
+    "description": null
+  },
+  "Believer_CrossBow_Camp02": {
+    "localized_name": "Tín Đồ Tổ Chức Bảo Vệ Pal",
+    "description": null
+  },
+  "Believer_CrossBow_Invader": {
+    "localized_name": "Tín Đồ Tổ Chức Bảo Vệ Pal",
+    "description": null
+  },
+  "Believer_CrossBow_Tower": {
+    "localized_name": "Tín Đồ Tổ Chức Bảo Vệ Pal",
+    "description": null
+  },
+  "Believer_Fat_Cane": {
+    "localized_name": "Thẩm Phán Tổ Chức Bảo vệ Pal",
+    "description": null
+  },
+  "Believer_Fat_GatlingGun": {
+    "localized_name": "Thẩm Phán Tổ Chức Bảo vệ Pal",
+    "description": null
+  },
+  "Believer_Fat_Prisoner": {
+    "localized_name": "Thẩm Phán Tổ Chức Bảo vệ Pal",
+    "description": null
+  },
+  "Believer_Prisoner": {
+    "localized_name": "Tín Đồ Tổ Chức Bảo Vệ Pal",
+    "description": null
+  },
+  "BerryGoat": {
+    "localized_name": "Caprity",
+    "description": "Nếu không bị đói, những quả mọng sẽ mọc trên bụi cây ở lưng Pal. Pal sẽ mời đối tượng mình thích ăn quả mọng của mình và nếu chinh phục được dạ dày của đằng ấy, chúng sẽ thành đôi."
+  },
+  "BerryGoat_Dark": {
+    "localized_name": "Caprity Noct",
+    "description": "Những quả mọng mọc trên lưng Pal thay đổi hương vị tùy theo trạng thái tinh thần. Càng lớn lên trong môi trường tàn khốc, quả mọng càng ngọt ngào vì vậy hầu hết các con Caprity Noct bị nuôi nhốt đều không biết đến tình yêu."
+  },
+  "BirdDragon": {
+    "localized_name": "Vanwyrm",
+    "description": "Tương truyền rằng giai điệu của cây sáo được làm từ bộ xương ngoài của Vanwyrm có thể vang vọng qua cả ngàn ngọn núi. Trong các trận chiến từ thời xa xưa, nó đã được dùng để ra hiệu tấn công."
+  },
+  "BirdDragon_Ice": {
+    "localized_name": "Vanwyrm Cryst",
+    "description": "Tương truyền rằng giai điệu của cây sáo được làm từ bộ xương ngoài của Vanwyrm Cryst có thể vang vọng qua cả ngàn ngọn núi. Trong các trận chiến từ thời xa xưa, nó đã được sử dụng như tin báo chiến thắng."
+  },
+  "BlackCentaur": {
+    "localized_name": "Necromus",
+    "description": "Xưa kia, Pal và Paladius vốn là một. Dù được xem là hiện thân của những cảm xúc tiêu cực bị tách rời nhưng sâu trong đôi mắt nó vẫn ẩn chứa một chút lòng trắc ẩn."
+  },
+  "BlackFurDragon": {
+    "localized_name": "Dragostrophe",
+    "description": "Đến từ nơi sâu thẳm nhất, Pal là kẻ tĩnh lặng. Ngươi, không được đứng trên lưng của con thú đó. Ngươi, không được thét lên với con thú đó."
+  },
+  "BlackGriffon": {
+    "localized_name": "Shadowbeak",
+    "description": "Một sự tồn tại cấm kỵ sinh ra từ sự cuồng nộ. Mối liên kết di truyền với các Pal khác đã hoàn toàn biến mất có lẽ Pal đã vượt ra khỏi định nghĩa Pal."
+  },
+  "BlackMetalDragon": {
+    "localized_name": "Astegon",
+    "description": "Đến từ nơi sâu thẳm nhất, Pal là kẻ hung bạo. Ngươi, không được đứng trước con thú đó. Ngươi, không được nghe tiếng của con thú đó."
+  },
+  "BlackPuppy": {
+    "localized_name": "Smokie",
+    "description": "Ngọn lửa đen của Pal, dù chạm vào chỉ thấy ấm nhưng nếu vật gì đó tiếp xúc lâu dài sẽ từ từ tan chảy từ bên trong. Thêm một chút phô mai nữa là ngon tuyệt."
+  },
+  "Blacksmith01": {
+    "localized_name": "Thợ Rèn Tập Sự",
+    "description": null
+  },
+  "BlueDragon": {
+    "localized_name": "Azurobe",
+    "description": "Dải màu trắng sẽ chuyển sang màu đen khi chạm vào nước bẩn. Do có ích trong việc phát hiện độc tố, Pal đã bị săn bắt quá mức trong quá khứ đến tận bây giờ Pal vẫn không mấy thiện cảm với con người."
+  },
+  "BlueDragon_Ice": {
+    "localized_name": "Azurobe Cryst",
+    "description": "Dải trắng trên cơ thể có khả năng hấp thụ nhiệt liên tục từ môi trường xung quanh nhưng lạ thay là nhiệt độ ở đó không hề thay đổi. Vì đặc tính khác thường này, chúng đã từng bị săn lùng ráo riết thế nên đến giờ, chúng vẫn còn ác cảm với con người."
+  },
+  "BluePlatypus": {
+    "localized_name": "Fuack",
+    "description": "Bằng lượng nước tự sinh ra, Pal có thể tạo ra sóng ở bất cứ đâu. Khi vội vàng, Pal di chuyển bằng cách lướt người trên sóng. Vì quá đà mà nó thường đâm sầm vào tường mà chết."
+  },
+  "BluePlatypus_Fire": {
+    "localized_name": "Fuack Ignis",
+    "description": "Vùng bụng có hệ số ma sát cao, chỉ cần trượt đi là tóe lửa. Thường bị cuốn theo đà trượt mà tự biến thành ngọn đuốc sống."
+  },
+  "BlueThunderHorse": {
+    "localized_name": "Azurmane",
+    "description": "Giống như Univolt, nó từng được coi là có liên hệ với thần sấm. Khi sự tôn thờ Univolt dần lụi tàn, Azurmane nghiễm nhiên được tôn vinh là sứ giả chân chính của thần sấm nhưng dòng chảy thời gian đã dần đẩy Pal xuống vị trí của một con ngựa kéo xe bình thường."
+  },
+  "BlueberryFairy": {
+    "localized_name": "Prunelia",
+    "description": "Với vẻ ngoài thông minh và duyên dáng, Pal thường được giới quý tộc trên đảo thuê làm người hầu. Thế nhưng, khi gặp vào ban đêm, vẻ mặt quái dị của Pal đã khiến mọi người nhanh chóng xa lánh."
+  },
+  "Boar": {
+    "localized_name": "Rushoar",
+    "description": "Cực kỳ hiếu chiến, sẵn sàng khiêu chiến mà không cần biết đối thủ mạnh yếu thế nào. Dù là một Pal nhỏ bé, nhưng uy lực của cú húc mạnh lại rất đáng gờm có thể hất văng cả tảng đá lớn."
+  },
+  "BountyTrader": {
+    "localized_name": "Vệ Binh",
+    "description": null
+  },
+  "CandleGhost": {
+    "localized_name": "Sootseer",
+    "description": "Xưa kia, người ta tin rằng ngọn lửa sẽ lụi tàn khi thế giới sắp đến hồi kết. Các tín đồ của thuyết tận thế đã nhiều lần ầm ĩ về việc ngọn lửa yếu đi nhưng hóa ra chỉ là do tính khí thất thường của Sootseer. Ít nhất là cho đến thời điểm hiện tại."
+  },
+  "CaptainPenguin": {
+    "localized_name": "Penking",
+    "description": "Thực ra, Pal chẳng có họ hàng gì với Pengullet. Tuy nhiên, vì bỗng dưng được người người chiều chuộng nên nó cứ ra vẻ ta đây, ưỡn ẹo cho quan trọng."
+  },
+  "CaptainPenguin_Black": {
+    "localized_name": "Penking Lux",
+    "description": "Để săn mồi dưới nước, chúng đã hấp thụ sức mạnh điện và... đổi màu luôn! Kết quả là, chúng không còn được Pengullet ngưỡng mộ. Nhưng không hiểu sao, giờ lại có một đám đàn em mới là Pengullet Lux."
+  },
+  "CaravanLeader01": {
+    "localized_name": "Trưởng Đoàn Thương Nhân Lữ Hành",
+    "description": null
+  },
+  "CaravanLeader02": {
+    "localized_name": "Trưởng Đoàn Thương Nhân Lữ Hành",
+    "description": null
+  },
+  "CaravanLeader03": {
+    "localized_name": "Trưởng Đoàn Thương Nhân Lữ Hành",
+    "description": null
+  },
+  "Carbunclo": {
+    "localized_name": "Lifmunk",
+    "description": "Pal có trí thông minh tương đương với đứa bé 5 – 7 tuổi. Rất phù hợp để làm bạn đồng hành, nhưng cũng có không ít ghi nhận về việc một số cá thể được dạy cách sử dụng vũ khí để rồi quay sang sát hại chính chủ của mình."
+  },
+  "CatBat": {
+    "localized_name": "Tombat",
+    "description": "Thường bất ngờ xuất hiện chỉ để khoe khoang đôi cánh quý giá trước mặt các Pal khác. Có vẻ như đây là một kiểu dọa dẫm nhưng dường như nó lại cảm thấy thích thú với màn phô diễn này."
+  },
+  "CatMage": {
+    "localized_name": "Katress",
+    "description": "Pal điều khiển sức mạnh bóng tối và phô diễn những ma thuật dị thường. Dù là món gì đi nữa, Pal đều thích ăn sống. Pal có mối quan hệ không mấy tốt đẹp với Wixen."
+  },
+  "CatMage_Fire": {
+    "localized_name": "Katress Ignis",
+    "description": "Cách nuôi dạy của cha mẹ khiến Pal chẳng mấy quan tâm đến những chuyện nhỏ nhặt như đồ ăn sống hay chín. Dù là món gì đi nữa, Pal vẫn thích món cay hơn. Pal có mối quan hệ không mấy tốt đẹp với Wixen Noct."
+  },
+  "CatVampire": {
+    "localized_name": "Felbat",
+    "description": "Từ nơi tăm tối, Pal vồ lấy con mồi một cách chớp nhoáng dùng đôi cánh như tấm áo choàng để giam giữ chúng. Chuyện gì xảy ra bên trong đó, tại sao mặt trong đôi cánh lại nhuốm màu đỏ, có những điều tốt hơn là bạn không nên biết."
+  },
+  "ChickenPal": {
+    "localized_name": "Chikipi",
+    "description": "Thật yếu ớt, mà lại ngon khó cưỡng. So với SheepBall, đây là một trong những Pal yếu nhất. Săn bao nhiêu cũng không hết, chúng cứ mọc ra từ đâu ấy."
+  },
+  "ColorfulBird": {
+    "localized_name": "Tocotoco",
+    "description": "Loài Pal đáng sợ này đẻ ra những quả trứng phát nổ. Thông thường, nó phóng trứng ra từ phía đuôi để tấn công, khi bị dồn vào đường cùng, nó sẽ tự nổ tung!"
+  },
+  "CowPal": {
+    "localized_name": "Mozzarina",
+    "description": "Chẳng cần làm gì, sữa của Pal vẫn tự chảy ra như vòi nước. Ngay cả con đực cũng có sữa. Đúng là điều kỳ diệu của sự sống!"
+  },
+  "CuteButterfly": {
+    "localized_name": "Cinnamoth",
+    "description": "Chỉ cần hít vào lớp phấn vảy của Pal, bạn sẽ cảm thấy sung sướng như lạc vào cõi tiên. Dù đang có những nỗ lực để tăng cường quản lý việc này nhưng vẫn chưa có tiến triển do vấp phải sự phản đối của Tổ Chức Bảo Hộ Pal."
+  },
+  "CuteFox": {
+    "localized_name": "Vixy",
+    "description": "Là thần tượng của đảo Palpagos. Nếu dám động đến Vixy, bạn sẽ trở thành kẻ địch của cả thế giới."
+  },
+  "CuteMole": {
+    "localized_name": "Fuddler",
+    "description": "Bộ móng vuốt to lớn cứng ngang kim cương, việc mài móng tiêu tốn phần lớn năng lượng của Pal nên có khi cả ngày Pal chỉ loay hoay với việc đó."
+  },
+  "DarkAlien": {
+    "localized_name": "Xenovader",
+    "description": "Pal có thể biến thông tin thành năng lượng bằng cách gửi đi và lãng quên. Hình như Pal còn định kỳ gửi tin tức cho ai đó. – Mau hồi đáp. Phát hiện mục tiêu. Lập tức tiến hành tiêu diệt!"
+  },
+  "DarkAlien_Oilrig": {
+    "localized_name": "Xenovader",
+    "description": null
+  },
+  "DarkCrow": {
+    "localized_name": "Cawgnito",
+    "description": "Trước đây, Pal từng tung cánh bay lượn tự do trên bầu trời bao la, sau thất bại trong cuộc giao tranh với Galeclaw, Pal đã từ bỏ bầu trời và lặng lẽ sống trong bóng tối."
+  },
+  "DarkMechaDragon": {
+    "localized_name": "Xenolord",
+    "description": "– Đã đến địa điểm mục tiêu. Ưu tiên hàng đầu: Tìm kiếm Rồng Sao Băng. – Ghi chú: Thời hạn hoàn thành chế ngự: < ://Error_Code:126DC > năm trước. – Bổ sung: Không có dấu vết chế ngự. Xác nhận đã hòa nhập. Bắt đầu loại bỏ. – Nhắc nhở nghiệp vụ: Tuyệt đối không được quên hoặc ăn thông tin quan trọng!"
+  },
+  "DarkScorpion": {
+    "localized_name": "Menasting",
+    "description": "Thực chất Pal là một thể năng lượng, bên trong không chứa gì cả. Pal tóm lấy con mồi còn sống, nhét vào lớp vỏ ngoài và hấp thụ. Xung quanh Pal luôn vang vọng những tiếng rên rỉ như từ địa ngục vọng lên."
+  },
+  "DarkScorpion_Ground": {
+    "localized_name": "Menasting Terra",
+    "description": "Thực chất nó là một thể năng lượng, bên trong không chứa gì cả. Pal nhồi nhét đất đá và khoáng vật vào trong lớp vỏ ngoài, tạo nên khối lượng áp đảo. Kẻ nào trúng đòn chỉ còn biết gào thét như trong địa ngục."
+  },
+  "DeathPenalty_guide": {
+    "localized_name": "Nhà Huấn Luyện Pal Kỳ Cựu",
+    "description": null
+  },
+  "Deer": {
+    "localized_name": "Eikthyrdeer",
+    "description": "Con nào có cặp sừng oai phong nhất sẽ trở thành thủ lĩnh. Khi sừng gãy, trái tim cũng tan vỡ. Sau đó, Pal sẽ rời khỏi đàn và chết ở một nơi mà không ai có thể nhìn thấy."
+  },
+  "Deer_Ground": {
+    "localized_name": "Eikthyrdeer Terra",
+    "description": "Con nào có cặp sừng cứng nhất sẽ trở thành thủ lĩnh. Nếu mất sừng, tư cách thủ lĩnh cũng mất đi. Pal sẽ rời đàn trong sự tiễn biệt của các thành viên, lặng lẽ về với đất mẹ."
+  },
+  "Doctor": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "DreamDemon": {
+    "localized_name": "Daedream",
+    "description": "Pal nhẹ nhàng đưa người mình yêu mến vào giấc ngủ sâu liên tục dệt cho họ những giấc mơ hạnh phúc. Đến tận lúc chết, họ cũng không bao giờ tỉnh lại."
+  },
+  "DrillGame": {
+    "localized_name": "Digtoise",
+    "description": "Có một câu chuyện mang tên |Mũi Khoan Của Digtoise|. Đây là câu chuyện ngụ ngôn kể về Digtoise, sinh vật sở hữu chiếc mai kiên cố và một mũi khoan lợi hại, cứ mãi trăn trở về một nghịch lý của cuộc đời."
+  },
+  "Eagle": {
+    "localized_name": "Galeclaw",
+    "description": "Dù đang cắp theo người, Pal vẫn có thể bay lên một cách dễ dàng. Thế nhưng, khi kiệt sức, Pal sẽ thả chân ra không chút thương xót, các tai nạn rơi chết người vẫn thường xuyên xảy ra."
+  },
+  "ElecCat": {
+    "localized_name": "Sparkit",
+    "description": "Mùa khô đến khiến Pal dễ nổi nóng, lúc nào cũng cáu kỉnh. Chỉ cần đồng loại chạm nhẹ vào thôi cũng xảy ra một cuộc ẩu đả tóe lửa ngay."
+  },
+  "ElecLion": {
+    "localized_name": "Boltmane",
+    "description": "-"
+  },
+  "ElecPanda": {
+    "localized_name": "Grizzbolt",
+    "description": "Với nụ cười hào sảng và vóc dáng vạm vỡ, Pal sẽ ngoan ngoãn nghe lời những ai được Pal coi là chiến hữu. Chỉ có điều, cứ hễ cầm khẩu minigun là nó lại thay đổi một cách khó hiểu."
+  },
+  "Emote_location_A_01": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Emote_location_A_02": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Emote_location_B_01": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Emote_location_B_02": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Emote_location_C_01": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Emote_location_C_02": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Emote_location_D_01": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Emote_location_D_02": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Emote_location_E_01": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Emote_location_E_02": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Emote_location_F_01": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Emote_location_F_02": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Emote_location_G_01": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Emote_location_G_02": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Emote_location_H_01": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Emote_location_H_02": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Emote_location_I_01": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Emote_location_I_02": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Epicure01": {
+    "localized_name": "Thợ Săn Ẩm Thực",
+    "description": null
+  },
+  "Escort_PalTamer01": {
+    "localized_name": "Nhà Huấn Luyện Pal Hộ Vệ",
+    "description": null
+  },
+  "Escort_Warrior01": {
+    "localized_name": "Lính Đánh Thuê Hộ Vệ",
+    "description": null
+  },
+  "FairyDragon": {
+    "localized_name": "Elphidran",
+    "description": "Vẻ ngoài thế nào, tính cách y vậy, thật là ngây thơ. Có lẽ vì thế mà Pal không phân biệt rõ được thiện ác thường bị những kẻ có ý xấu lợi dụng."
+  },
+  "FairyDragon_Water": {
+    "localized_name": "Elphidran Aqua",
+    "description": "Vẻ ngoài thế nào, tính cách y vậy, thật là ngây thơ. Có lẽ vì vậy mà mọi hành động của Pal đều không hề có ác ý, dù có giết ai đó Pal cũng chẳng cảm thấy gì."
+  },
+  "FeatherOstrich": {
+    "localized_name": "Dazemu",
+    "description": "Bước một bước, quên hết do dự Bước hai bước, quên đi nỗi buồn Bước ba bước, quên đi nỗi sợ hãi Mọi kẻ thù, Pal đều dám đương đầu."
+  },
+  "Female_DesertPeople02": {
+    "localized_name": "Dân Làng",
+    "description": null
+  },
+  "Female_Farmer01_v01": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Female_Farmer01_v02": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Female_Farmer01_v03": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Female_Farmer01_v04": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Female_Nomad01_v01": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Female_Nomad01_v02": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Female_Nomad01_v03": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Female_Nomad01_v04": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Female_People02": {
+    "localized_name": "Dân Làng",
+    "description": null
+  },
+  "Female_People03": {
+    "localized_name": "Dân Làng",
+    "description": null
+  },
+  "Female_Presenter01": {
+    "localized_name": "Nhà Huấn Luyện Pal Tử Tế",
+    "description": null
+  },
+  "Female_Ranger01_v01": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Female_Ranger01_v02": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Female_Ranger01_v03": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Female_Ranger01_v04": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Female_Soldier01": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Female_Soldier02": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Female_Soldier03": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Female_Soldier03_Invader": {
+    "localized_name": "Cặp Đôi Huấn Luyện Pal",
+    "description": null
+  },
+  "Female_Soldier04": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Female_Soldier04_Invader": {
+    "localized_name": "Cặp Đôi Huấn Luyện Pal",
+    "description": null
+  },
+  "FengyunDeeper": {
+    "localized_name": "Fenglope",
+    "description": "Thời xa xưa, vẻ ngoài xinh đẹp của Pal là một đề tài quen thuộc cho hội họa. Theo thời gian, bộ lông và cặp sừng tuyệt đẹp đó lại trở thành vật liệu đắt giá cho nghệ thuật."
+  },
+  "FengyunDeeper_Electric": {
+    "localized_name": "Fenglope Lux",
+    "description": "Thời xa xưa, người ta tin rằng nếu vẽ tranh Fenglope Lux sẽ bị sét đánh chết. Theo thời gian, các tác phẩm nghệ thuật lấy cảm hứng từ Fenglope Lux trở thành bùa hộ mệnh thường thấy để tránh sét."
+  },
+  "FireCult_FlameThrower": {
+    "localized_name": "Kẻ Tử Vì Đạo Hội Tôn Thờ Ngọn Lửa Bất Diệt",
+    "description": null
+  },
+  "FireCult_FlameThrower_Invader": {
+    "localized_name": "Kẻ Tử Vì Đạo Hội Tôn Thờ Ngọn Lửa Bất Diệt",
+    "description": null
+  },
+  "FireCult_FlameThrower_Relax": {
+    "localized_name": "Kẻ Tử Vì Đạo Hội Tôn Thờ Ngọn Lửa Bất Diệt",
+    "description": null
+  },
+  "FireCult_Prisoner": {
+    "localized_name": "Kẻ Tử Vì Đạo Hội Tôn Thờ Ngọn Lửa Bất Diệt",
+    "description": null
+  },
+  "FireCult_Rifle": {
+    "localized_name": "Kẻ Tử Vì Đạo Hội Tôn Thờ Ngọn Lửa Bất Diệt",
+    "description": null
+  },
+  "FireCult_Rifle_Invader": {
+    "localized_name": "Kẻ Tử Vì Đạo Hội Tôn Thờ Ngọn Lửa Bất Diệt",
+    "description": null
+  },
+  "FireCult_Rifle_Relax": {
+    "localized_name": "Kẻ Tử Vì Đạo Hội Tôn Thờ Ngọn Lửa Bất Diệt",
+    "description": null
+  },
+  "FireKirin": {
+    "localized_name": "Pyrin",
+    "description": "Toàn thân là một hệ thống tản nhiệt siêu hiệu quả Pal có một sức bền đáng kinh ngạc. Khi có ai đó cưỡi, Pal sẽ cẩn thận để người đó không bị bỏng."
+  },
+  "FireKirin_Dark": {
+    "localized_name": "Pyrin Noct",
+    "description": "Pal đốt cháy các vật chất tối không xác định để tạo năng lượng phát tán những hạt hắc ám còn dư từ khắp cơ thể. Khi có ai đó cưỡi, Pal sẽ cẩn thận bảo vệ để người đó không sa vào bóng tối."
+  },
+  "FlameBambi": {
+    "localized_name": "Rooby",
+    "description": "Rooby hoang dã có sức khỏe đáng kinh ngạc. Bí quyết để Pal luôn khỏe mạnh là mỗi ngày ăn một mẩu than từ cành cây bị đốt cháy."
+  },
+  "FlameBuffalo": {
+    "localized_name": "Arsox",
+    "description": "Thời xa xưa, chúng thường xuyên bị các Pal ăn thịt tấn công. Tiếng kêu gào đầy bất lực của Arsox tích tụ thành nỗi hận hóa thành ngọn lửa rực cháy lưu truyền qua bao thế hệ."
+  },
+  "FlowerDinosaur": {
+    "localized_name": "Dinossom",
+    "description": "Khi cơn giận bùng phát, không ai có thể cản được, Pal sẽ hung hãn như ngọn lửa dữ. Câu nói |Giẫm phải đuôi Dinossom| dùng để chỉ việc làm ai đó cực kỳ tức giận."
+  },
+  "FlowerDinosaur_Electric": {
+    "localized_name": "Dinossom Lux",
+    "description": "Dù bị sét đánh nhưng Pal vẫn giữ được mạng sống. Câu nói |Sét đánh Dinossom Lux| dùng để chỉ việc thoát chết trong gang tấc."
+  },
+  "FlowerDoll": {
+    "localized_name": "Petallia",
+    "description": "Đến khi hết vòng đời, sinh vật này sẽ biến thành một cái cây lớn. Cứ mười năm một lần, một bông hoa tuyệt đẹp sẽ nở rộ. Từ bông hoa ấy, một Petallia mới được sinh ra."
+  },
+  "FlowerRabbit": {
+    "localized_name": "Flopie",
+    "description": "Chúng thích những nơi có nhiều cây xanh nhưng gần đây, trong cộng đồng Flopie hình như đang có dịch dị ứng phấn hoa."
+  },
+  "FlyingManta": {
+    "localized_name": "Celaray",
+    "description": "Lướt theo làn gió, Pal tự do du ngoạn khắp chốn. Bất cứ nơi nào Pal đến, khi tìm thấy bạn đồng hành chuyến du ngoạn sẽ kết thúc."
+  },
+  "FlyingManta_Thunder": {
+    "localized_name": "Celaray Lux",
+    "description": "Hoa văn bắt mắt trên cơ thể giúp chúng thu hút bạn tình. Từ xa xưa, Celaray Lux đã gây ra không ít vụ điện giật, giờ đây, trên hòn đảo này, chỉ cần thấy sọc vàng đen là mọi loài đều tự động tránh xa."
+  },
+  "FoxMage": {
+    "localized_name": "Wixen",
+    "description": "Sinh vật này điều khiển sức mạnh ánh sáng và biểu diễn những phép thuật kỳ lạ. Dù là món gì đi nữa, cũng phải nấu chín kỹ. Pal có mối quan hệ không mấy tốt đẹp với Katress."
+  },
+  "FoxMage_Dark": {
+    "localized_name": "Wixen Noct",
+    "description": "Cách nuôi dạy của cha mẹ khiến sinh vật này chẳng mấy quan tâm đến những chuyện nhỏ nhặt như đồ ăn đã được nướng chín hay chưa. Dù là món gì đi nữa, Pal vẫn thích đồ ngọt hơn. Pal có mối quan hệ không mấy tốt đẹp với Katress Ignis."
+  },
+  "GYM_BlackGriffon": {
+    "localized_name": "Victor & Shadowbeak",
+    "description": "Một sự tồn tại cấm kỵ sinh ra từ sự cuồng nộ. Mối liên kết di truyền với các Pal khác đã hoàn toàn biến mất có lẽ Pal đã vượt ra khỏi định nghĩa Pal."
+  },
+  "GYM_BlackGriffon_2": {
+    "localized_name": "Victor & Shadowbeak",
+    "description": "Một sự tồn tại cấm kỵ sinh ra từ sự cuồng nộ. Mối liên kết di truyền với các Pal khác đã hoàn toàn biến mất có lẽ Pal đã vượt ra khỏi định nghĩa Pal."
+  },
+  "GYM_BlackGriffon_2_Avatar": {
+    "localized_name": "Victor & Shadowbeak",
+    "description": null
+  },
+  "GYM_ElecPanda": {
+    "localized_name": "Zoe & Grizzbolt",
+    "description": "Với nụ cười hào sảng và vóc dáng vạm vỡ, Pal sẽ ngoan ngoãn nghe lời những ai được Pal coi là chiến hữu. Chỉ có điều, cứ hễ cầm khẩu minigun là nó lại thay đổi một cách khó hiểu."
+  },
+  "GYM_ElecPanda_2": {
+    "localized_name": "Zoe & Grizzbolt",
+    "description": "Với nụ cười hào sảng và vóc dáng vạm vỡ, Pal sẽ ngoan ngoãn nghe lời những ai được Pal coi là chiến hữu. Chỉ có điều, cứ hễ cầm khẩu minigun là nó lại thay đổi một cách khó hiểu."
+  },
+  "GYM_ElecPanda_Otomo": {
+    "localized_name": "Zoe & Grizzbolt",
+    "description": null
+  },
+  "GYM_Horus": {
+    "localized_name": "Marcus & Faleris",
+    "description": "Khi tìm thấy một đàn con mồi loài Pal này sẽ dùng lốc xoáy thiêu đốt để đốt cháy toàn bộ khu vực xung quanh. Khu vực nơi Faleris sinh sống có mùi rất hấp dẫn."
+  },
+  "GYM_Horus_2": {
+    "localized_name": "Marcus & Faleris",
+    "description": "Khi tìm thấy một đàn con mồi loài Pal này sẽ dùng lốc xoáy thiêu đốt để đốt cháy toàn bộ khu vực xung quanh. Khu vực nơi Faleris sinh sống có mùi rất hấp dẫn."
+  },
+  "GYM_LilyQueen": {
+    "localized_name": "Lily & Lyleen",
+    "description": "Đây là một loài Pal hiền lành, đầy lòng nhân ái. Pal chăm sóc những Pal nhỏ đã mất cha mẹ. Cách Pal dạy dỗ là dùng SolarBeam với toàn bộ sức mạnh."
+  },
+  "GYM_LilyQueen_2": {
+    "localized_name": "Lily & Lyleen",
+    "description": "Đây là một loài Pal hiền lành, đầy lòng nhân ái. Pal chăm sóc những Pal nhỏ đã mất cha mẹ. Cách Pal dạy dỗ là dùng SolarBeam với toàn bộ sức mạnh."
+  },
+  "GYM_MoonQueen": {
+    "localized_name": "Saya & Selyne",
+    "description": "Vật thể giống mặt trăng lơ lửng phía sau Pal đang dần trở thành một hình tròn hoàn chỉnh qua mỗi thế hệ. Không ai biết điều gì sẽ xảy ra khi mặt trăng tròn."
+  },
+  "GYM_MoonQueen_2": {
+    "localized_name": "Saya & Selyne",
+    "description": "Vật thể giống mặt trăng lơ lửng phía sau Pal đang dần trở thành một hình tròn hoàn chỉnh qua mỗi thế hệ. Không ai biết điều gì sẽ xảy ra khi mặt trăng tròn."
+  },
+  "GYM_MoonQueen_2_Servant": {
+    "localized_name": "Selyne",
+    "description": null
+  },
+  "GYM_SnowTigerBeastman": {
+    "localized_name": "Bjorn & Bastigor",
+    "description": "Cứ thấy cái gì tròn tròn, Pal lại muốn đấm cho một phát. Đối với SnowTigerBeastMan, điều khó khăn thứ hai sau đấu tranh sinh tồn chính là hoàn thành một người tuyết."
+  },
+  "GYM_SnowTigerBeastman_2": {
+    "localized_name": "Bjorn & Bastigor",
+    "description": "Cứ thấy cái gì tròn tròn, Pal lại muốn đấm cho một phát. Đối với SnowTigerBeastMan, điều khó khăn thứ hai sau đấu tranh sinh tồn chính là hoàn thành một người tuyết."
+  },
+  "GYM_ThunderDragonMan": {
+    "localized_name": "Axel & Orserk",
+    "description": "Pal truyền điện từ vết thương vào cơ thể đối thủ, thiêu đốt cơ thể đối thủ. Trận chiến giữa các Orserk thường kết thúc trong nháy mắt."
+  },
+  "GYM_ThunderDragonMan_2": {
+    "localized_name": "Axel & Orserk",
+    "description": "Pal truyền điện từ vết thương vào cơ thể đối thủ, thiêu đốt cơ thể đối thủ. Trận chiến giữa các Orserk thường kết thúc trong nháy mắt."
+  },
+  "Ganesha": {
+    "localized_name": "Teafant",
+    "description": "Từ bộ phận được cho là mũi, Pal phun ra một lượng nước lớn, cũng có người cho rằng đó chỉ là nước mũi. Giữa các nhà nghiên cứu đã có một cuộc tranh luận nảy lửa về chuyện này."
+  },
+  "Garm": {
+    "localized_name": "Direhowl",
+    "description": "Mặc dù mối quan hệ với con người đã trở nên xa cách từ lâu nhưng đã có một thời, cách săn bắn của Direhowl bắt nguồn từ những cuộc đi săn chúng từng tham gia cùng con người."
+  },
+  "GhostAnglerfish": {
+    "localized_name": "Ghangler",
+    "description": "Dùng mồi giả phát sáng rực rỡ để chiếu rọi những nơi tối tăm. Những Pal lạc đường bị thu hút bởi ánh sáng này sẽ chẳng còn lối thoát nếu bị GhostAnglerFish phát hiện. Nó sẽ dẫn lối cho đến khi những Pal này về nhà an toàn."
+  },
+  "GhostAnglerfish_Fire": {
+    "localized_name": "Ghangler Ignis",
+    "description": "Mồi nhử rực lửa còn được dùng để nướng chín con mồi. Những Pal bị dẫn dụ bởi mùi thơm khó cưỡng một khi bị Ghangler Ignis phát hiện thì không thể thoát được nữa và rồi trở thành bữa tiệc no nê cho kẻ săn mồi."
+  },
+  "GhostBeast": {
+    "localized_name": "Maraith",
+    "description": "Sinh vật này thích cái mùi đặc biệt tỏa ra từ các sinh vật sắp chết. Nếu Maraith quấn quýt lấy bạn thì bạn hiểu rồi đấy."
+  },
+  "GhostRabbit": {
+    "localized_name": "Nitemary",
+    "description": "Thứ Pal nắm giữ chính là linh hồn của bản thân. Một khi đã yêu thích ai, Pal sẽ không ngần ngại cưỡng đoạt linh hồn của người đó hòa vào linh hồn của mình, khao khát hợp làm một."
+  },
+  "GoldenHorse": {
+    "localized_name": "Gildane",
+    "description": "Vào thời hoàng kim của thuật giả kim trên đảo, bộ lông vàng óng ánh của sinh vật này từng là một chất xúc tác được săn lùng để điều chế vàng. Không lâu sau đó, một phát hiện tuyệt vời đã được hé lộ. Nếu cùng là màu vàng kim, chỉ cần dùng bờm là được rồi."
+  },
+  "GoodwillAmbassador": {
+    "localized_name": "Thương Nhân Pal",
+    "description": null
+  },
+  "Gorilla": {
+    "localized_name": "Gorirat",
+    "description": "Pal giao tiếp với đồng loại bằng những cú đấm xuống đất. Ý nghĩa của mỗi nhịp điệu lại khác nhau tùy theo bầy đàn việc phân loại ý nghĩa của điều đó đến giờ vẫn còn là một bí ẩn."
+  },
+  "Gorilla_Ground": {
+    "localized_name": "Gorirat Terra",
+    "description": "Pal này giao tiếp với đồng loại bằng những cú đấm xuống đất. Lực cánh tay của chúng khỏe hơn Gorirat, nếu tất cả Gorirat Terra đồng loạt giáng nắm đấm xuống đất thì đảo Palpagos sẽ bị nhấn chìm trong nháy mắt."
+  },
+  "GrassBoss": {
+    "localized_name": "Zoe",
+    "description": null
+  },
+  "GrassMammoth": {
+    "localized_name": "Mammorest",
+    "description": "Thảm thực vật trên lưng chúng có sự khác biệt giữa các cá thể. Pal từng được yêu thích và nuôi dưỡng như loài vật trang trí, thậm chí đã từng tồn tại những chuyên gia cắt tỉa cho Mammorest."
+  },
+  "GrassMammoth_Ice": {
+    "localized_name": "Mammorest Cryst",
+    "description": "Thảm thực vật trên lưng chúng có sự khác biệt giữa các cá thể. Đã từng có những hạt giống của loài cây được cho là đã tuyệt chủng được tìm thấy trên lưng Mammorest Cryst trong tình trạng đóng băng."
+  },
+  "GrassPanda": {
+    "localized_name": "Mossanda",
+    "description": "Loài Pal này sở hữu sức mạnh đáng kinh ngạc. Một thí nghiệm đã cho thấy Pal dễ dàng xé nát chồng giấy 3000 tờ. Ơn trời, đây không phải loài ăn thịt."
+  },
+  "GrassPanda_Electric": {
+    "localized_name": "Mossanda Lux",
+    "description": "Loài Pal này sở hữu sức mạnh đáng kinh ngạc. Pal biến điện năng thành tín hiệu, phá vỡ mọi giới hạn về thể chất. Bất cứ khi nào người ta nói về loài mạnh nhất, Pal luôn là cái tên được nhắc đến."
+  },
+  "GrassRabbitMan": {
+    "localized_name": "Verdash",
+    "description": "Mặt đất nơi Verdash chạy qua trở nên rất phì nhiêu, cỏ cây mọc um tùm. Nếu phun thuốc diệt cỏ, Pal sẽ không chạy qua đó nữa."
+  },
+  "GrimGirl": {
+    "localized_name": "Splatterina",
+    "description": "Bản năng thôi thúc Pal phải xé nát con mồi ra từng mảnh. Mỗi cá thể đều có sở thích riêng về thứ tự cắt xé con mồi. Một khi đã rơi vào tay Splatterina, điều cuối cùng có thể làm là cầu nguyện cho cái đầu lìa khỏi cổ trước tiên."
+  },
+  "Guard_Rifle": {
+    "localized_name": "Vệ Binh",
+    "description": null
+  },
+  "Guard_Shotgun": {
+    "localized_name": "Vệ Binh",
+    "description": null
+  },
+  "GuardianDog": {
+    "localized_name": "Yakumo",
+    "description": "Với bản tính chống lại tà ác, chúng từng là những đối tác tuyệt vời lẽ ra sẽ xây dựng mối quan hệ tốt đẹp và bền vững với dân đảo. Nhưng ngày nay, các Yakumo lại dựng lên bức tường tà ác ngăn cách với nhân loại."
+  },
+  "HadesBird": {
+    "localized_name": "Helzephyr",
+    "description": "Triệu hồi sấm sét từ địa ngục. Bất kỳ ai bị sấm sét của Helzephyr thiêu chết, linh hồn kẻ đó sẽ rơi xuống địa ngục."
+  },
+  "HadesBird_Electric": {
+    "localized_name": "Helzephyr Lux",
+    "description": "Triệu hồi sấm sét từ địa ngục. Dù được coi là một phân loài của Helzephyr nhưng cũng có giả thuyết cho rằng Helzephyr Lux sau khi bị sấm sét từ địa ngục đánh trúng đã trở thành Helzephyr."
+  },
+  "HadesBird_Oilrig": {
+    "localized_name": "Helzephyr",
+    "description": null
+  },
+  "HawkBird": {
+    "localized_name": "Nitewing",
+    "description": "Loài Pal này bắt cóc các Pal non khác từ tổ của chúng và nuôi lớn thay cho cha mẹ chúng. Đến khi Pal con trưởng thành, nó sẽ săn bắt chúng."
+  },
+  "Hedgehog": {
+    "localized_name": "Jolthog",
+    "description": "Khi chịu tác động, loài Pal này sẽ phóng điện năng đã tích trữ trong cơ thể. Điện áp đó có thể vượt quá 10 triệu vôn. Nếu ném Pal đi, Pal nguy hiểm hơn nhiều so với một loại vũ khí hạng nặng khủng khiếp."
+  },
+  "Hedgehog_Ice": {
+    "localized_name": "Jolthog Cryst",
+    "description": "Khi chịu tác động, loài Pal này sẽ giải phóng luồng khí lạnh được tích trữ trong cơ thể. Hơi lạnh được phóng ra sẽ lan tỏa và làm đóng băng không khí kẻ tấn công sẽ bị xuyên thủng cơ thể."
+  },
+  "Help01": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Help02": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Help03": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Help04": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "HerculesBeetle": {
+    "localized_name": "Warsect",
+    "description": "Bộ giáp siêu chắc chắn bao quanh cơ thể Pal có độ bền và khả năng chịu nhiệt vượt trội. Ngay cả bom napalm cũng hầu như không có tác dụng."
+  },
+  "HerculesBeetle_Ground": {
+    "localized_name": "Warsect Terra",
+    "description": "Bộ giáp siêu chắc chắn bao quanh cơ thể Pal có độ bền và khả năng chịu nhiệt vượt trội. Ngay cả khi bị Mammorest giẫm lên cũng không hề hấn gì."
+  },
+  "Horus": {
+    "localized_name": "Faleris",
+    "description": "Khi tìm thấy một đàn con mồi loài Pal này sẽ dùng lốc xoáy thiêu đốt để đốt cháy toàn bộ khu vực xung quanh. Khu vực nơi Faleris sinh sống có mùi rất hấp dẫn."
+  },
+  "Horus_Oilrig": {
+    "localized_name": "Faleris",
+    "description": null
+  },
+  "Horus_Water": {
+    "localized_name": "Faleris Aqua",
+    "description": "Khi tìm thấy đàn con mồi sinh vật này sẽ dùng một dòng nước cực mạnh để cuốn trôi toàn bộ khu vực xung quanh. Thường thì con mồi sẽ bị cuốn đi đâu đó mất tích nên gọi là săn mồi thì không biết có đúng hay không nữa."
+  },
+  "Hunter_Bat": {
+    "localized_name": "Lính Mới Băng Săn Trộm",
+    "description": null
+  },
+  "Hunter_Bat_Invader": {
+    "localized_name": "Lính Mới Băng Săn Trộm",
+    "description": null
+  },
+  "Hunter_BowGun": {
+    "localized_name": "Tay Bắn Nỏ Băng Săn Trộm",
+    "description": null
+  },
+  "Hunter_BowGun_Oilrig": {
+    "localized_name": "Tay Bắn Nỏ Băng Săn Trộm",
+    "description": null
+  },
+  "Hunter_Fat_GatlingGun": {
+    "localized_name": "Kẻ Hủy Diệt Băng Săn Trộm",
+    "description": null
+  },
+  "Hunter_Fat_GatlingGun_Invader": {
+    "localized_name": "Kẻ Hủy Diệt Băng Săn Trộm",
+    "description": null
+  },
+  "Hunter_Fat_GatlingGun_LargeOilrig": {
+    "localized_name": "Kẻ Hủy Diệt Băng Săn Trộm",
+    "description": null
+  },
+  "Hunter_Fat_GatlingGun_MiniOilrig": {
+    "localized_name": "Kẻ Hủy Diệt Băng Săn Trộm",
+    "description": null
+  },
+  "Hunter_Fat_GatlingGun_Oilrig": {
+    "localized_name": "Kẻ Hủy Diệt Băng Săn Trộm",
+    "description": null
+  },
+  "Hunter_Fat_GatlingGun_Tower": {
+    "localized_name": "Kẻ Hủy Diệt Băng Săn Trộm",
+    "description": null
+  },
+  "Hunter_Fat_Prisoner": {
+    "localized_name": "Kẻ Hủy Diệt Băng Săn Trộm",
+    "description": null
+  },
+  "Hunter_FlameThrower": {
+    "localized_name": "Người Dọn Dẹp Băng Săn Trộm",
+    "description": null
+  },
+  "Hunter_FlameThrower_Invader": {
+    "localized_name": "Người Dọn Dẹp Băng Săn Trộm",
+    "description": null
+  },
+  "Hunter_FlameThrower_LargeOilrig": {
+    "localized_name": "Người Dọn Dẹp Băng Săn Trộm",
+    "description": null
+  },
+  "Hunter_FlameThrower_MiiniOilrig": {
+    "localized_name": "Người Dọn Dẹp Băng Săn Trộm",
+    "description": null
+  },
+  "Hunter_FlameThrower_Oilrig": {
+    "localized_name": "Người Dọn Dẹp Băng Săn Trộm",
+    "description": null
+  },
+  "Hunter_Grenade": {
+    "localized_name": "Lính Ném Lựu Đạn Băng Săn Trộm",
+    "description": null
+  },
+  "Hunter_GrenadeLauncher": {
+    "localized_name": "Kẻ Lão Luyện Băng Săn Trộm",
+    "description": null
+  },
+  "Hunter_GrenadeLauncher_LargeOilrig": {
+    "localized_name": "Kẻ Lão Luyện Băng Săn Trộm",
+    "description": null
+  },
+  "Hunter_GrenadeLauncher_Oilrig": {
+    "localized_name": "Kẻ Lão Luyện Băng Săn Trộm",
+    "description": null
+  },
+  "Hunter_Grenade_Invader": {
+    "localized_name": "Lính Ném Lựu Đạn Băng Săn Trộm",
+    "description": null
+  },
+  "Hunter_Grenade_LargeOilrig": {
+    "localized_name": "Lính Ném Lựu Đạn Băng Săn Trộm",
+    "description": null
+  },
+  "Hunter_Grenade_MiniOilrig": {
+    "localized_name": "Lính Ném Lựu Đạn Băng Săn Trộm",
+    "description": null
+  },
+  "Hunter_Grenade_Oilrig": {
+    "localized_name": "Lính Ném Lựu Đạn Băng Săn Trộm",
+    "description": null
+  },
+  "Hunter_Handgun": {
+    "localized_name": "Lính Mới Băng Săn Trộm",
+    "description": null
+  },
+  "Hunter_Handgun_Invader": {
+    "localized_name": "Lính Mới Băng Săn Trộm",
+    "description": null
+  },
+  "Hunter_Handgun_MiniOilrig": {
+    "localized_name": "Lính Mới Băng Săn Trộm",
+    "description": null
+  },
+  "Hunter_Katana": {
+    "localized_name": "Kiếm Sĩ Băng Săn Trộm",
+    "description": null
+  },
+  "Hunter_Katana_Oilrig": {
+    "localized_name": "Kiếm Sĩ Băng Săn Trộm",
+    "description": null
+  },
+  "Hunter_LaserRifle": {
+    "localized_name": "Chuyên Gia Công Nghệ Băng Săn Trộm",
+    "description": null
+  },
+  "Hunter_LaserRifle_Oilrig": {
+    "localized_name": "Chuyên Gia Công Nghệ Băng Săn Trộm",
+    "description": null
+  },
+  "Hunter_MissileLauncher": {
+    "localized_name": "Kẻ Đánh Chặn Băng Săn Trộm",
+    "description": null
+  },
+  "Hunter_MissileLauncher_LargeOilrig": {
+    "localized_name": "Kẻ Đánh Chặn Băng Săn Trộm",
+    "description": null
+  },
+  "Hunter_MissileLauncher_Oilrig": {
+    "localized_name": "Kẻ Đánh Chặn Băng Săn Trộm",
+    "description": null
+  },
+  "Hunter_Prisoner": {
+    "localized_name": "Lính Mới Băng Săn Trộm",
+    "description": null
+  },
+  "Hunter_Rifle": {
+    "localized_name": "Tay Súng Băng Săn Trộm",
+    "description": null
+  },
+  "Hunter_Rifle_Invader": {
+    "localized_name": "Tay Súng Băng Săn Trộm",
+    "description": null
+  },
+  "Hunter_Rifle_LargeOilrig": {
+    "localized_name": "Tay Súng Băng Săn Trộm",
+    "description": null
+  },
+  "Hunter_Rifle_MiniOilrig": {
+    "localized_name": "Tay Súng Băng Săn Trộm",
+    "description": null
+  },
+  "Hunter_Rifle_Oilrig": {
+    "localized_name": "Tay Súng Băng Săn Trộm",
+    "description": null
+  },
+  "Hunter_RocketLauncher": {
+    "localized_name": "Lính Tinh Nhuệ Băng Săn Trộm",
+    "description": null
+  },
+  "Hunter_RocketLauncher_Invader": {
+    "localized_name": "Lính Tinh Nhuệ Băng Săn Trộm",
+    "description": null
+  },
+  "Hunter_RocketLauncher_LargeOilrig": {
+    "localized_name": "Lính Tinh Nhuệ Băng Săn Trộm",
+    "description": null
+  },
+  "Hunter_RocketLauncher_MiniOilrig": {
+    "localized_name": "Lính Tinh Nhuệ Băng Săn Trộm",
+    "description": null
+  },
+  "Hunter_RocketLauncher_Oilrig": {
+    "localized_name": "Lính Tinh Nhuệ Băng Săn Trộm",
+    "description": null
+  },
+  "Hunter_RocketLauncher_Oilrig_LD": {
+    "localized_name": "Lính Tinh Nhuệ Băng Săn Trộm",
+    "description": null
+  },
+  "Hunter_Shotgun": {
+    "localized_name": "Thợ Săn Băng Săn Trộm",
+    "description": null
+  },
+  "Hunter_Shotgun_Invader": {
+    "localized_name": "Thợ Săn Băng Săn Trộm",
+    "description": null
+  },
+  "Hunter_Shotgun_LargeOilrig": {
+    "localized_name": "Thợ Săn Băng Săn Trộm",
+    "description": null
+  },
+  "Hunter_Shotgun_MiniOilrig": {
+    "localized_name": "Thợ Săn Băng Săn Trộm",
+    "description": null
+  },
+  "Hunter_Shotgun_Oilrig": {
+    "localized_name": "Thợ Săn Băng Săn Trộm",
+    "description": null
+  },
+  "IceCrocodile": {
+    "localized_name": "Munchill",
+    "description": "Bên trong miệng thật mát lạnh, ngậm lại chẳng khác gì một cái tủ lạnh. Thành phần đặc biệt trong nước bọt của Pal này giúp ngăn thực phẩm bị hư hỏng. Dùng làm kho bảo quản thực phẩm cho con người thì cũng được đấy, nhưng để đảm bảo vệ sinh, tốt nhất là cứ để nó ngậm miệng lại."
+  },
+  "IceDeer": {
+    "localized_name": "Reindrix",
+    "description": "Cặp sừng trong suốt màu xanh lam mang ánh sáng của độ không tuyệt đối. Nếu chạm vào bằng tay không, toàn bộ cơ thể sẽ ngay lập tức đóng băng và vỡ tan thành từng mảnh cùng với sinh mạng."
+  },
+  "IceFox": {
+    "localized_name": "Foxcicle",
+    "description": "Vào những đêm có cực quang, Pal ngước nhìn lên bầu trời và cất tiếng kêu du dương. Cũng vì thế mà Pal dễ bị kẻ thù tấn công."
+  },
+  "IceHorse": {
+    "localized_name": "Frostallion",
+    "description": "Vị thần gọi mùa đông, người bảo hộ đảo Palpagos. Xưa kia, khi tai ương càn quét vùng đất này loài Pal này đã bay lên trời, tạo ra mùa đông vô tận và phong ấn."
+  },
+  "IceHorse_Dark": {
+    "localized_name": "Frostallion Noct",
+    "description": "Vị thần gọi đêm, người bảo hộ đảo Palpagos. Xưa kia, khi tai ương càn quét vùng đất này loài Pal này đã bay lên trời, tạo ra bóng đêm vô tận và phong ấn."
+  },
+  "IceNarwhal": {
+    "localized_name": "Whalaska",
+    "description": "Khi đang ngủ, nó thường bị Pal khác tưởng nhầm là tảng băng trôi mà leo lên nghỉ ngơi. Với bản tính hiền lành, nó không nỡ xua đuổi Pal đó khi tỉnh giấc, nhưng việc không gian riêng tư bị xâm phạm vẫn khiến nó âm thầm phiền lòng."
+  },
+  "IceNarwhal_Fire": {
+    "localized_name": "Whalaska Ignis",
+    "description": "Để không còn bị nhận nhầm là băng trôi, chúng quyết tâm biến thành màu đỏ. Thế nhưng, đối với những Pal mù màu đỏ thì điều đó chẳng khác gì bao công sức đổ sông đổ bể, không gian riêng vẫn bị lấn chiếm."
+  },
+  "IceSeal": {
+    "localized_name": "Polapup",
+    "description": "Kẻ trượt nhanh nhất trên tuyết chính là thủ lĩnh. Đôi khi, có những con nhảy lên quá đà rồi đột nhiên rơi thẳng từ trên trời xuống Vào mùa tranh chức |boss|, cảnh tượng này càng thường xuyên hơn. Dự báo thời tiết: Nắng nhẹ, lác đác vài Polapup rơi xuống."
+  },
+  "IceWitch": {
+    "localized_name": "Icelyn",
+    "description": "Dù biết ánh nắng sẽ làm cơ thể tan chảy, nhưng lại mê tắm nắng mới chết chứ. Dù biết hơi nóng sẽ làm cơ thể tan chảy, nhưng vẫn mê tắm suối nước nóng. Đằng nào cũng chết, vậy nên nó cứ muốn được tan chảy trong bồn tắm lộ thiên giữa một ngày nắng đẹp."
+  },
+  "Inspector": {
+    "localized_name": "Thương Nhân Pal",
+    "description": null
+  },
+  "JellyfishFairy": {
+    "localized_name": "Jelliette",
+    "description": "Một Pal có ngoại hình rất giống với Jellroy. Vì cuộc sống xã giao khá bận rộn nên những lúc bị trùng lịch hẹn, Pal này thường nhờ người bạn thân Jellroy đi thay. Quà trả công là một buổi hẹn hò."
+  },
+  "JellyfishGhost": {
+    "localized_name": "Jellroy",
+    "description": "Một Pal có ngoại hình rất giống với Jelliette. Thỉnh thoảng nó lại xuất hiện để |đóng thế| cho Jelliette khi người bạn này không thể có mặt. Nhập vai hoàn hảo đến mức không ai có thể nhận ra."
+  },
+  "JetDragon": {
+    "localized_name": "Jetragon",
+    "description": "Pal dõi theo Đảo Palpagos từ trên cao. Khi tai ương lại trỗi dậy, mặt đất rạn nứt và bầu trời rực lửa Pal nó sẽ dùng vệt sáng hủy diệt để phá tan mọi thứ."
+  },
+  "Kelpie": {
+    "localized_name": "Kelpsea",
+    "description": "Tính cách của Pal thay đổi tùy thuộc vào chất lượng nước ở nơi sinh ra. Những Kelpsea sinh ra ở vùng nước ô nhiễm thường có tính cách xấu và là những tên côn đồ chính hiệu."
+  },
+  "Kelpie_Fire": {
+    "localized_name": "Kelpsea Ignis",
+    "description": "Tính cách của Pal thay đổi tùy thuộc vào nhiệt độ nước ở nơi sinh ra. Những Kelpsea sinh ra ở vùng nước ấm thường có tính cách nhiệt tình và tràn đầy năng lượng."
+  },
+  "KendoFrog": {
+    "localized_name": "Croajiro",
+    "description": "Bất kỳ kẻ nào phạm phải sai lầm lớn trong đàn đều buộc phải tự kết liễu. Khi đâm một cành cây vào túi âm thanh đã phồng to hết mức, chúng sẽ bị thổi bay đến tận cùng của tầng khí quyển và về thế giới bên kia."
+  },
+  "KendoFrog_Dark": {
+    "localized_name": "Croajiro Noct",
+    "description": "Những Croajiro đã vứt bỏ lòng tự trọng sẽ tụ tập lại và phân đàn. Con mồi mà chúng nhắm đến sẽ bị hạ gục bằng bất kỳ thủ đoạn đê tiện nào. Nếu vô tình gặp phải một đàn Croajiro Noct vào giữa đêm người về thế giới bên kia sẽ là bạn."
+  },
+  "KingAlpaca": {
+    "localized_name": "Kingpaca",
+    "description": "Pal có các Melpaca theo hầu hạ trong các cuộc quyết đấu giữa các Kingpaca, người hầu của nó sẽ là vật đặt cược. Những cá thể đơn độc chính là kẻ thua cuộc."
+  },
+  "KingAlpaca_Ice": {
+    "localized_name": "Kingpaca Cryst",
+    "description": "Với tính cách lạnh lùng, Pal không giỏi thể hiện cảm xúc. Trong mắt các Melpaca khác, những cá thể đơn độc chỉ là những kẻ quá đỗi khờ khạo và đáng thương."
+  },
+  "KingBahamut": {
+    "localized_name": "Blazamut",
+    "description": "Có truyền thuyết kể rằng sinh vật này được sinh ra cùng với sự phun trào của núi lửa. Đã từng có một tổ chức bí ẩn tuyên bố rằng vùng đất này là lưng của Blazamut khổng lồ."
+  },
+  "KingBahamut_Dragon": {
+    "localized_name": "Blazamut Ryu",
+    "description": "Tù rất lâu về trước, Pal đã trỗi dậy từ lòng đất. Bằng ngọn lửa dữ dội không chút thương xót Pal thiêu đốt toàn bộ hòn đảo đến khi không còn gì sót lại. Đó chính là |Ngọn Lửa Bất Diệt|."
+  },
+  "Kirin": {
+    "localized_name": "Univolt",
+    "description": "Trước đây, nó được coi là sứ giả thần sấm, không bị con người săn lùng. Tuy nhiên, niềm tin này đã bị phá bỏ khi người ta chứng kiến nó chết vì sét đánh và nó đã trở thành một con ngựa kéo xe theo đúng nghĩa đen."
+  },
+  "Kitsunebi": {
+    "localized_name": "Foxparks",
+    "description": "Khi còn nhỏ, Pal rất vụng về trong việc điều khiển lửa, cứ hễ có chuyện gì là lại phun lửa rồi bị sặc. Những cú hắt hơi của Foxparks chính là nguyên nhân gây cháy rừng."
+  },
+  "Kitsunebi_Ice": {
+    "localized_name": "Foxparks Cryst",
+    "description": "Khi còn nhỏ, Pal rất vụng về trong việc điều khiển khí lạnh, cứ hễ có chuyện gì là lại phun khí lạnh rồi bị sặc. Khi bị cảm lạnh, nước mũi sẽ đóng băng, khiến Pal khó thở và cuống lên."
+  },
+  "LavaGirl": {
+    "localized_name": "Flambelle",
+    "description": "Khi Pal khóc, dung nham sẽ tuôn trào thay cho nước mắt. Dung nham chảy ra sẽ được hấp thụ lại vào cơ thể, ngày càng nóng hơn. Càng khóc nhiều, Pal càng trở nên mạnh mẽ."
+  },
+  "LazyCatfish": {
+    "localized_name": "Dumud",
+    "description": "Khi quá thư thái, mọi phản ứng của Pal đều trở nên chậm chạp. Dù có đến 28 vết thương do bị đâm, cũng phải đến sáng hôm sau nó mới nhận ra và lìa đời."
+  },
+  "LazyCatfish_Gold": {
+    "localized_name": "Dumud Gild",
+    "description": "Bề mặt cơ thể có độ phản chiếu đáng kinh ngạc. Thế nhưng tốc độ phản ứng lại chậm hơn cả Dumud."
+  },
+  "LazyDragon": {
+    "localized_name": "Relaxaurus",
+    "description": "Trái ngược với vẻ ngoài ỉu xìu, Pal lại khá hung dữ. Mọi thứ đập vào mắt Pal đều được coi là thức ăn và cố gắng săn bắt bằng mọi giá."
+  },
+  "LazyDragon_Electric": {
+    "localized_name": "Relaxaurus Lux",
+    "description": "Relaxaurus chợt nghĩ đã đến lúc nên thay đổi bản thân. Trong khoảng khắc đó, một luồng điện chạy khắp cơ thể Pal!"
+  },
+  "LeafMomonga": {
+    "localized_name": "Herbil",
+    "description": "Người bạn này tin rằng cái gì hỏng chỉ cần một cú đấm là sửa được. May thay, lực tay của Herbil lại hoàn hảo đối với con người một cú đấm cũng có thể hồi sinh một trái tim đã ngừng đập."
+  },
+  "LeafPrincess": {
+    "localized_name": "Lullu",
+    "description": "Khi mùa xuân đến, phấn hoa sẽ theo gió bay khắp hòn đảo. Bệnh dị ứng phấn hoa của Flopie là do Lullu."
+  },
+  "LegendDeer": {
+    "localized_name": "Hartalis",
+    "description": "Nơi đây tĩnh lặng đến rợn người, nhưng lại mang đến cảm giác yên bình lạ kỳ. Nơi đây không còn một ai. Tất cả đều đã được cứu rỗi. Hỡi Vị Vua Cứu Rỗi, xin hãy đưa cả tôi đến cõi tĩnh lặng vĩnh cửu. - Cổ văn đến đây thì đứt đoạn."
+  },
+  "LilyQueen": {
+    "localized_name": "Lyleen",
+    "description": "Đây là một loài Pal hiền lành, đầy lòng nhân ái. Pal chăm sóc những Pal nhỏ đã mất cha mẹ. Cách Pal dạy dỗ là dùng SolarBeam với toàn bộ sức mạnh."
+  },
+  "LilyQueen_Dark": {
+    "localized_name": "Lyleen Noct",
+    "description": "Đây là một Pal thanh lịch, đầy khí chất. Bất kỳ kẻ nào hỗn xược đều bị Pal tát cho một cú đau điếng. Thỉnh thoảng cũng có những Pal khác muốn bị như vậy."
+  },
+  "LittleBriarRose": {
+    "localized_name": "Bristla",
+    "description": "Gai của Pal có độc, bị đâm phải sẽ rất nguy hiểm. Pal có mối quan hệ tốt với Cinnamoth chỉ khi để cho chúng hút mật, Pal mới lộ vẻ rạng rỡ."
+  },
+  "LizardMan": {
+    "localized_name": "Leezpunk",
+    "description": "Pal có một nỗi ám ảnh kỳ lạ với dáng đứng của mình. Pal luôn cố gắng tìm ra kiểu tạo dáng sao cho ngầu nhất chỉ cần có gương, Pal sẽ nghiên cứu các kiểu tạo dáng suốt ngày đêm."
+  },
+  "LizardMan_Fire": {
+    "localized_name": "Leezpunk Ignis",
+    "description": "Pal có một nỗi ám ảnh kỳ lạ với dáng đứng của mình. Nó luôn cố gắng tìm ra kiểu tạo dáng |nóng| nhất chủ nhân của Pal thì cứ phải xem những tư thế |nóng bỏng| đến phát ngán."
+  },
+  "LizardMan_Oilrig": {
+    "localized_name": "Leezpunk",
+    "description": null
+  },
+  "Male_Angler01_v01": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Male_Breeder01_v01": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Male_Breeder01_v02": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Male_Breeder01_v03": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Male_Breeder01_v04": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Male_DarkTrader01": {
+    "localized_name": "Thương Nhân Chợ Đen",
+    "description": null
+  },
+  "Male_DarkTrader02": {
+    "localized_name": "Thương Nhân Huy Chương",
+    "description": null
+  },
+  "Male_DesertPeople01": {
+    "localized_name": "Dân Làng",
+    "description": null
+  },
+  "Male_Kigurumi01_v01": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Male_Ninja01": {
+    "localized_name": "Genin Phái Tsukihana",
+    "description": null
+  },
+  "Male_NinjaElite01": {
+    "localized_name": "Jonin Phái Tsukihana",
+    "description": null
+  },
+  "Male_NinjaElite01_Invader": {
+    "localized_name": "Jonin Phái Tsukihana",
+    "description": null
+  },
+  "Male_People02": {
+    "localized_name": "Dân Làng",
+    "description": null
+  },
+  "Male_People03": {
+    "localized_name": "Dân Làng",
+    "description": null
+  },
+  "Male_Police_old": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Male_Scholar01_v01": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Male_Scholar01_v02": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Male_Scholar01_v03": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Male_Scholar01_v04": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Male_Scientist01_LaserRifle": {
+    "localized_name": "Tổ Hành Động, Đơn Vị Nghiên Cứu Gen Pal",
+    "description": null
+  },
+  "Male_Scientist01_LaserRifle_Invader": {
+    "localized_name": "Tổ Hành Động, Đơn Vị Nghiên Cứu Gen Pal",
+    "description": null
+  },
+  "Male_Soldier01": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Male_Soldier01_EnemyGroup": {
+    "localized_name": "Lính Đánh Thuê Cường Tráng",
+    "description": null
+  },
+  "Male_Soldier02": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Male_Soldier02_EnemyGroup": {
+    "localized_name": "Lính Đánh Thuê Cường Tráng",
+    "description": null
+  },
+  "Male_Soldier02_Invader": {
+    "localized_name": "Nhà Huấn Luyện Pal Cuồng Nhiệt",
+    "description": null
+  },
+  "Male_Soldier03": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Male_Soldier04": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Male_Trader01": {
+    "localized_name": "Dân Làng",
+    "description": null
+  },
+  "Male_Trader02": {
+    "localized_name": "Dân Làng",
+    "description": null
+  },
+  "Male_Trader03": {
+    "localized_name": "Dân Làng",
+    "description": null
+  },
+  "Manticore": {
+    "localized_name": "Blazehowl",
+    "description": "Mặc dù thích thịt sống, nhưng Pal luôn phải ăn thịt đã nướng. Chẳng qua là do Pal dùng móng vuốt thiêu đốt làm vũ khí nên chẳng hề hay biết con mồi đã bị cháy đen."
+  },
+  "Manticore_Dark": {
+    "localized_name": "Blazehowl Noct",
+    "description": "Mặc dù thích thịt sạch, nhưng Pal luôn phải ăn thịt bị nhiễm độc. Chẳng qua là do Pal dùng móng vuốt hắc ám làm vũ khí nên chẳng hề hay biết con mồi đã bị dính lời nguyền."
+  },
+  "MimicDog": {
+    "localized_name": "Mimog",
+    "description": "Ở một vương quốc cổ xưa nọ trên đảo có một truyền thống trao giải cho kẻ có cái chết ngớ ngẩn nhất trong năm. Nguyên nhân tử vong đáng nhớ đầu tiên là |Không nhận ra Mimog, mở hộp và bị cắn chết|."
+  },
+  "MobuCitizen": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "MobuCitizen_Male": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "MobuVillager": {
+    "localized_name": "Dân Làng",
+    "description": null
+  },
+  "Monkey": {
+    "localized_name": "Tanzee",
+    "description": "Ngày xưa, Pal dùng những vật thon dài như cành cây làm vũ khí. Khi tiếp xúc với con người, Pal đã không còn dùng nữa. Vì nó đã phát hiện ra |món vũ khí' thon dài và hiệu quả hơn."
+  },
+  "MoonQueen": {
+    "localized_name": "Selyne",
+    "description": "Vật thể giống mặt trăng lơ lửng phía sau Pal đang dần trở thành một hình tròn hoàn chỉnh qua mỗi thế hệ. Không ai biết điều gì sẽ xảy ra khi mặt trăng tròn."
+  },
+  "MopBaby": {
+    "localized_name": "Swee",
+    "description": "Pal lê la trên mặt đất, ăn các sinh vật hữu cơ nhỏ xíu. Những thứ không bổ béo sẽ bị thải ra sau đó. Nếu dùng Pal làm cây lau nhà, thì đúng là đôi bên cùng có lợi."
+  },
+  "MopKing": {
+    "localized_name": "Sweepa",
+    "description": "Trong khi ngủ đông, bên trong bộ lông dày của Pal che giấu rất nhiều Swee. Kỷ lục lớn nhất từng ghi nhận được là 101 con."
+  },
+  "MushroomDragon": {
+    "localized_name": "Shroomer",
+    "description": "Khi hít phải một lượng lớn bào tử của Pal này, bạn sẽ rơi vào một trạng thái mơ màng. Đôi khi, Shroomer đứng yên bất động không phải Pal đang ngụy trang thành nấm mà là do Pal đang |phê| bào tử của chính mình."
+  },
+  "MushroomDragon_Dark": {
+    "localized_name": "Shroomer Noct",
+    "description": "Một lượng lớn bào tử của Pal có thể dễ dàng che khuất ánh sáng mặt trời. Đôi khi, Shroomer Noct đứng yên bất động không phải Pal đang ngụy trang thành nấm mà là do Pal không nhìn thấy gì vì bị bào tử của chính mình che mắt."
+  },
+  "Mutant": {
+    "localized_name": "Lunaris",
+    "description": "Nếu dại dột nhìn vào mắt Pal, bạn sẽ bị thao túng. Đa số những kẻ mang theo Lunaris đều ảo tưởng rằng mình đã thuần hóa được Pal."
+  },
+  "MysteryMask": {
+    "localized_name": "Omascul",
+    "description": "Phần giống như mặt nạ thực ra không phải là khuôn mặt thật. Cứ ngỡ Pal đang ở ngay đây, nhưng hóa ra lại không. Có vẻ như Pal luôn dõi theo chúng ta từ đâu đó. Nếu quay lại, hình như Pal đang ở đó."
+  },
+  "NPC_FoodRequire_1": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "NPC_PalDisplay_1": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "NaughtyCat": {
+    "localized_name": "Grintale",
+    "description": "Chỉ cần đặt chân vào lãnh địa của Grintale đôi mắt cảnh giác của Pal sẽ lập tức sáng lên. Đó không phải là cách nói ẩn dụ, mà là thật sự sáng lên."
+  },
+  "NegativeKoala": {
+    "localized_name": "Depresso",
+    "description": "Ánh mắt có phần dữ dằn và ít bạn bè, nhưng Pal lại có trái tim nhân hậu. Người ta đã thấy Pal chia sẻ thức ăn cho một con Vixy lạc đàn."
+  },
+  "NegativeOctopus": {
+    "localized_name": "Killamari",
+    "description": "Pal sẽ cắn vào cổ kẻ địch và hút cạn mọi thứ bên trong. Tuy hiếm khi phát hiện ra xác khô của Pal nhưng hầu hết trong số đó đều là nạn nhân của Killamari."
+  },
+  "NegativeOctopus_Neutral": {
+    "localized_name": "Killamari Primo",
+    "description": "Tấn công kẻ địch bằng cách cắn vào cổ và hút cạn máu. Khi hai Killamari Primo cắn xé nhau, chúng sẽ cố hút cạn lẫn nhau đến tận cùng không buông ra cho đến khi một trong hai tan xác."
+  },
+  "NightBlueHorse": {
+    "localized_name": "Starryon",
+    "description": "Bộ bờm đẹp bồng bềnh như dòng suối là niềm kiêu hãnh lớn nhất của Pal. Chỉ cần thấy một sợi lông chẻ ngọn, Pal sẽ xấu hổ đến mức không thể tập trung chạy. Vì lông của Pal sẽ bị xù lên do tĩnh điện nên Pal tuyệt đối không muốn Azurmane đến gần mình."
+  },
+  "NightFox": {
+    "localized_name": "Nox",
+    "description": "Nếu nhìn thấy lông của Nox trên đường đêm bạn nên quay về ngay lập tức, đừng dại mà nhặt lên. Đó sẽ là tấm vé một đi không trở lại đến một đêm tăm tối vô tận."
+  },
+  "NightLady": {
+    "localized_name": "Bellanoir",
+    "description": "Pal vốn không tồn tại, chỉ lặng lẽ dõi theo thế giới. Không biết từ khi nào, Pal bắt đầu mong muốn được chú ý. Khối dục vọng trả thù thế giới bên ngoài của Pal đã được định nghĩa là quý cô cuồng loạn."
+  },
+  "NightLady_Dark": {
+    "localized_name": "Bellanoir Libero",
+    "description": "Dục vọng một khi được thả ra thì không thể kìm hãm được nữa. Ta muốn một |ta| khác nhìn vào |ta|. Người chị em dõi mắt nhìn, những kẻ đã gieo rắc tai ương cho thế giới, cuối cùng đã bị đẩy vào khe nứt và nhắm mắt xuôi tay."
+  },
+  "Ninja01_Tower": {
+    "localized_name": "Genin Phái Tsukihana",
+    "description": null
+  },
+  "NinjaElite01_Tower": {
+    "localized_name": "Jonin Phái Tsukihana",
+    "description": null
+  },
+  "NinjaElite_Bowgun": {
+    "localized_name": "Jonin Phái Tsukihana",
+    "description": null
+  },
+  "NinjaElite_NoEquip": {
+    "localized_name": "Jonin Phái Tsukihana",
+    "description": null
+  },
+  "Ninja_Bowgun": {
+    "localized_name": "Genin Phái Tsukihana",
+    "description": null
+  },
+  "Ninja_NoEquip": {
+    "localized_name": "Genin Phái Tsukihana",
+    "description": null
+  },
+  "Ninja_Prisoner": {
+    "localized_name": "Genin Phái Tsukihana",
+    "description": null
+  },
+  "OctopusGirl": {
+    "localized_name": "Gloopie",
+    "description": "Trước khi đi ngủ cùng cô ấy, nhớ kiểm tra lịch trình ngày hôm sau nhé. Dấu vết từ giác hút của cô ấy trông hệt như dấu hôn. Lỡ mà bị hút khi đang lơ mơ, đảm bảo sẽ có khối chuyện hiểu nhầm |khó đỡ| đấy!"
+  },
+  "PREDATOR_AmaterasuWolf": {
+    "localized_name": "Kitsun",
+    "description": "Bản tính quá đỗi nhạy cảm hễ có chuyện không vừa ý là Pal lại trốn biệt vào hang. Người xưa tin rằng khi Kitsun chạy trốn, đó là một điềm dữ."
+  },
+  "PREDATOR_Baphomet_Dark": {
+    "localized_name": "Incineram Noct",
+    "description": "Pal chỉ nhắm vào những con non và mang chúng về lãnh địa của mình. Không khó để tưởng tượng ra nỗi tuyệt vọng mà bố mẹ sẽ trải qua khi con của chúng bị cướp đi."
+  },
+  "PREDATOR_BirdDragon": {
+    "localized_name": "Vanwyrm",
+    "description": "Tương truyền rằng giai điệu của cây sáo được làm từ bộ xương ngoài của Vanwyrm có thể vang vọng qua cả ngàn ngọn núi. Trong các trận chiến từ thời xa xưa, nó đã được dùng để ra hiệu tấn công."
+  },
+  "PREDATOR_CandleGhost": {
+    "localized_name": "Sootseer",
+    "description": "Xưa kia, người ta tin rằng ngọn lửa sẽ lụi tàn khi thế giới sắp đến hồi kết. Các tín đồ của thuyết tận thế đã nhiều lần ầm ĩ về việc ngọn lửa yếu đi nhưng hóa ra chỉ là do tính khí thất thường của Sootseer. Ít nhất là cho đến thời điểm hiện tại."
+  },
+  "PREDATOR_DrillGame": {
+    "localized_name": "Digtoise",
+    "description": "Có một câu chuyện mang tên |Mũi Khoan Của Digtoise|. Đây là câu chuyện ngụ ngôn kể về Digtoise, sinh vật sở hữu chiếc mai kiên cố và một mũi khoan lợi hại, cứ mãi trăn trở về một nghịch lý của cuộc đời."
+  },
+  "PREDATOR_FairyDragon": {
+    "localized_name": "Elphidran",
+    "description": "Vẻ ngoài thế nào, tính cách y vậy, thật là ngây thơ. Có lẽ vì thế mà Pal không phân biệt rõ được thiện ác thường bị những kẻ có ý xấu lợi dụng."
+  },
+  "PREDATOR_FeatherOstrich": {
+    "localized_name": "Dazemu",
+    "description": "Bước một bước, quên hết do dự Bước hai bước, quên đi nỗi buồn Bước ba bước, quên đi nỗi sợ hãi Mọi kẻ thù, Pal đều dám đương đầu."
+  },
+  "PREDATOR_FlowerDinosaur": {
+    "localized_name": "Dinossom",
+    "description": "Khi cơn giận bùng phát, không ai có thể cản được, Pal sẽ hung hãn như ngọn lửa dữ. Câu nói |Giẫm phải đuôi Dinossom| dùng để chỉ việc làm ai đó cực kỳ tức giận."
+  },
+  "PREDATOR_Garm": {
+    "localized_name": "Direhowl",
+    "description": "Mặc dù mối quan hệ với con người đã trở nên xa cách từ lâu nhưng đã có một thời, cách săn bắn của Direhowl bắt nguồn từ những cuộc đi săn chúng từng tham gia cùng con người."
+  },
+  "PREDATOR_GhostBeast": {
+    "localized_name": "Maraith",
+    "description": "Sinh vật này thích cái mùi đặc biệt tỏa ra từ các sinh vật sắp chết. Nếu Maraith quấn quýt lấy bạn thì bạn hiểu rồi đấy."
+  },
+  "PREDATOR_GoldenHorse": {
+    "localized_name": "Gildane",
+    "description": "Vào thời hoàng kim của thuật giả kim trên đảo, bộ lông vàng óng ánh của sinh vật này từng là một chất xúc tác được săn lùng để điều chế vàng. Không lâu sau đó, một phát hiện tuyệt vời đã được hé lộ. Nếu cùng là màu vàng kim, chỉ cần dùng bờm là được rồi."
+  },
+  "PREDATOR_Gorilla": {
+    "localized_name": "Gorirat",
+    "description": "Pal giao tiếp với đồng loại bằng những cú đấm xuống đất. Ý nghĩa của mỗi nhịp điệu lại khác nhau tùy theo bầy đàn việc phân loại ý nghĩa của điều đó đến giờ vẫn còn là một bí ẩn."
+  },
+  "PREDATOR_GrassPanda": {
+    "localized_name": "Mossanda",
+    "description": "Loài Pal này sở hữu sức mạnh đáng kinh ngạc. Một thí nghiệm đã cho thấy Pal dễ dàng xé nát chồng giấy 3000 tờ. Ơn trời, đây không phải loài ăn thịt."
+  },
+  "PREDATOR_GrimGirl": {
+    "localized_name": "Splatterina",
+    "description": "Bản năng thôi thúc Pal phải xé nát con mồi ra từng mảnh. Mỗi cá thể đều có sở thích riêng về thứ tự cắt xé con mồi. Một khi đã rơi vào tay Splatterina, điều cuối cùng có thể làm là cầu nguyện cho cái đầu lìa khỏi cổ trước tiên."
+  },
+  "PREDATOR_HadesBird_Electric": {
+    "localized_name": "Helzephyr Lux",
+    "description": "Triệu hồi sấm sét từ địa ngục. Dù được coi là một phân loài của Helzephyr nhưng cũng có giả thuyết cho rằng Helzephyr Lux sau khi bị sấm sét từ địa ngục đánh trúng đã trở thành Helzephyr."
+  },
+  "PREDATOR_Horus_Water": {
+    "localized_name": "Faleris Aqua",
+    "description": "Khi tìm thấy đàn con mồi sinh vật này sẽ dùng một dòng nước cực mạnh để cuốn trôi toàn bộ khu vực xung quanh. Thường thì con mồi sẽ bị cuốn đi đâu đó mất tích nên gọi là săn mồi thì không biết có đúng hay không nữa."
+  },
+  "PREDATOR_LazyDragon": {
+    "localized_name": "Relaxaurus",
+    "description": "Trái ngược với vẻ ngoài ỉu xìu, Pal lại khá hung dữ. Mọi thứ đập vào mắt Pal đều được coi là thức ăn và cố gắng săn bắt bằng mọi giá."
+  },
+  "PREDATOR_Manticore_Dark": {
+    "localized_name": "Blazehowl Noct",
+    "description": "Mặc dù thích thịt sạch, nhưng Pal luôn phải ăn thịt bị nhiễm độc. Chẳng qua là do Pal dùng móng vuốt hắc ám làm vũ khí nên chẳng hề hay biết con mồi đã bị dính lời nguyền."
+  },
+  "PREDATOR_MushroomDragon": {
+    "localized_name": "Shroomer",
+    "description": "Khi hít phải một lượng lớn bào tử của Pal này, bạn sẽ rơi vào một trạng thái mơ màng. Đôi khi, Shroomer đứng yên bất động không phải Pal đang ngụy trang thành nấm mà là do Pal đang |phê| bào tử của chính mình."
+  },
+  "PREDATOR_MysteryMask": {
+    "localized_name": "Omascul",
+    "description": "Phần giống như mặt nạ thực ra không phải là khuôn mặt thật. Cứ ngỡ Pal đang ở ngay đây, nhưng hóa ra lại không. Có vẻ như Pal luôn dõi theo chúng ta từ đâu đó. Nếu quay lại, hình như Pal đang ở đó."
+  },
+  "PREDATOR_NightBlueHorse": {
+    "localized_name": "Starryon",
+    "description": "Bộ bờm đẹp bồng bềnh như dòng suối là niềm kiêu hãnh lớn nhất của Pal. Chỉ cần thấy một sợi lông chẻ ngọn, Pal sẽ xấu hổ đến mức không thể tập trung chạy. Vì lông của Pal sẽ bị xù lên do tĩnh điện nên Pal tuyệt đối không muốn Azurmane đến gần mình."
+  },
+  "PREDATOR_PinkLizard": {
+    "localized_name": "Lovander",
+    "description": "Khao khát có được tình một đêm, lúc nào cũng đuổi theo ai đó. Ban đầu, Pal chỉ để mắt đến những Pal khác nhưng gần đây Pal đã bắt đầu giở trò với cả con người."
+  },
+  "PREDATOR_PurpleSpider": {
+    "localized_name": "Tarantriss",
+    "description": "Pal rất dính, bám siêu dính. Càng cố giãy giụa, Pal lại càng dính chặt hơn. Đó là |tính cách| của nó."
+  },
+  "PREDATOR_RedArmorBird": {
+    "localized_name": "Ragnahawk",
+    "description": "Có vẻ Pal này là họ hàng với Beakon nhưng thực ra không có quan hệ gì. Thức ăn chủ yếu là đá, và qua nhiều năm không chỉ chiếc mỏ mà toàn bộ phần đầu đều hóa cứng."
+  },
+  "PREDATOR_Ronin_Dark": {
+    "localized_name": "Bushi Noct",
+    "description": "Khi chết, thân xác hóa thành lưỡi kiếm và được truyền lại cho thế hệ sau. Nếu Bushi kế thừa thanh kiếm có trái tim yếu mềm chúng sẽ không chịu nổi tiếng vọng của những vong hồn ẩn chứa bên trong trở thành Bushi Noct vất vưởng."
+  },
+  "PREDATOR_ScorpionMan": {
+    "localized_name": "Prixter",
+    "description": "Có khoảng 5.000 loại độc tố trong người Pal. Có vài loại nghe nói là ghê gớm lắm, có thể gây chết người ngay lập tức nhưng tất cả đều quá loãng nên cũng chẳng làm nên trò trống gì."
+  },
+  "PREDATOR_SifuDog": {
+    "localized_name": "Dogen",
+    "description": "Pal luôn cố gắng đạt tới cảnh giới vô ngã bằng cách chăm chỉ thiền định. Sau khi đối diện với mọi ham muốn trần tục và thấy lòng nhẹ nhõm Pal sẽ làm một bữa thật no rồi lại tự nhủ: Hôm nay lại ăn quá nhiều rồi."
+  },
+  "PREDATOR_ThunderDog": {
+    "localized_name": "Rayhound",
+    "description": "Khi dồn hết tốc lực, Pal quả thực nhanh như một tia chớp. Hai con Rayhound mà lao vào nhau, tiếng động phát ra chẳng khác tiếng sấm."
+  },
+  "PREDATOR_Umihebi_Fire": {
+    "localized_name": "Jormuntide Ignis",
+    "description": "Có truyền thuyết kể rằng một dũng sĩ bị kết tội oan và bị ném vào núi lửa đã hồi sinh thành Jormuntide Ignis và thiêu rụi cả vương quốc."
+  },
+  "PREDATOR_VolcanicMonster_Ice": {
+    "localized_name": "Reptyro Cryst",
+    "description": "Dòng máu lạnh giá đến thấu xương chảy khắp người Pal. Nếu bị nung nóng tức thời, máu sẽ bốc hơi gây ra một vụ nổ hơi nước khủng khiếp."
+  },
+  "PREDATOR_Werewolf_Ice": {
+    "localized_name": "Loupmoon Cryst",
+    "description": "Cặp sừng trên đầu Pal là một khối băng kỳ lạ không bao giờ tan chảy. Món đá bào làm từ sừng gãy nghe nói là ngon tuyệt nhưng cả người ăn lẫn Loupmoon Cryst đều bị đau đầu."
+  },
+  "PREDATOR_WhiteTiger_Ground": {
+    "localized_name": "Cryolinx Terra",
+    "description": "Với bàn tay to lớn, Pal có thể dễ dàng mang theo nhiều thứ. Chỉ có điều chân hơi ngắn nên đi bộ chậm rì mới đi nửa đường là trời đã tối mịt."
+  },
+  "PREDATOR_Yeti": {
+    "localized_name": "Wumpo",
+    "description": "Để khám phá chân tướng, các nhà nghiên cứu đã cắt lông trên người Pal nhưng hóa ra bên trong trống rỗng chỉ còn trơ lại mớ lông."
+  },
+  "PalDealer": {
+    "localized_name": "Thương Nhân Pal",
+    "description": null
+  },
+  "PalDealer_Desert": {
+    "localized_name": "Thương Nhân Pal",
+    "description": null
+  },
+  "PalDealer_Volcano": {
+    "localized_name": "Thương Nhân Pal",
+    "description": null
+  },
+  "PalPassive_Doctor": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "PalTrader": {
+    "localized_name": "Thương Nhân Pal",
+    "description": null
+  },
+  "Penguin": {
+    "localized_name": "Pengullet",
+    "description": "Đôi cánh của Pal đã thoái hóa hoàn toàn, không thể bay được nữa. Nhưng niềm lưu luyến với bầu trời vẫn khắc sâu trong gen khiến Pal đang nỗ lực tìm cách để bay trở lại."
+  },
+  "Penguin_Electric": {
+    "localized_name": "Pengullet Lux",
+    "description": "Đôi cánh của chúng đã thoái hóa hoàn toàn, không thể bay được nữa. Sự tiếc nuối với bầu trời dần biến thành lòng đố kỵ với sức mạnh điện, chúng bắn hạ mọi sinh vật biết bay!"
+  },
+  "PinkCat": {
+    "localized_name": "Cattiva",
+    "description": "Pal trông thì oai phong, nhưng thực chất lại nhút nhát và yếu đuối. Bị Cattiva liếm có thể nói là nỗi nhục nhã lớn nhất."
+  },
+  "PinkLizard": {
+    "localized_name": "Lovander",
+    "description": "Khao khát có được tình một đêm, lúc nào cũng đuổi theo ai đó. Ban đầu, Pal chỉ để mắt đến những Pal khác nhưng gần đây Pal đã bắt đầu giở trò với cả con người."
+  },
+  "PinkRabbit": {
+    "localized_name": "Ribbuny",
+    "description": "Pal luôn nở nụ cười tươi tắn trên môi. Thỉnh thoảng, Cattiva lại nghịch ngợm thắt nút tua xúc giác của nó. Chỉ lúc đó, Pal mới lộ ra vẻ mặt hung tợn như quỷ dữ."
+  },
+  "PinkRabbit_Grass": {
+    "localized_name": "Ribbuny Botan",
+    "description": "Pal luôn nở nụ cười tươi tắn trên môi. Thỉnh thoảng, Cattiva lại nghịch ngợm buộc các tua xúc giác của nó. Những lúc đó, Pal vẫn cười tươi mà đánh tên kia bầm dập."
+  },
+  "PlantSlime": {
+    "localized_name": "Gumoss",
+    "description": "Một loài Pal kỳ lạ với cơ thể như nhựa cây. Khi lớp vỏ ngoài biến mất, Pal sẽ dần dần héo rũ và cuối cùng là thối rữa."
+  },
+  "PlantSlime_Flower": {
+    "localized_name": "Gumoss",
+    "description": null
+  },
+  "Plesiosaur": {
+    "localized_name": "Braloha",
+    "description": "Hơi thở của Pal này mang theo loại phấn hoa kỳ diệu có thể thụ phấn cho bất kỳ loại thực vật nào. Đối với các Pal có cây mọc trên người, đây là một đối tượng hơi... đáng ngại."
+  },
+  "Police_BowGun": {
+    "localized_name": "Xạ Thủ Đội Tự Vệ",
+    "description": null
+  },
+  "Police_Chief": {
+    "localized_name": "Cảnh Sát Trưởng Lười Nhác",
+    "description": null
+  },
+  "Police_Handgun": {
+    "localized_name": "Lính Gác Đội Tự Vệ",
+    "description": null
+  },
+  "Police_Rifle": {
+    "localized_name": "Xạ Thủ Đội Tự Vệ",
+    "description": null
+  },
+  "Police_Rifle_Tower": {
+    "localized_name": "Xạ Thủ Đội Tự Vệ",
+    "description": null
+  },
+  "Police_Shield_Tower": {
+    "localized_name": "Xạ Thủ Đội Tự Vệ",
+    "description": null
+  },
+  "Police_Shotgun": {
+    "localized_name": "Lính Tinh Nhuệ Đội Tự Vệ",
+    "description": null
+  },
+  "Police_Shotgun_Tower": {
+    "localized_name": "Lính Tinh Nhuệ Đội Tự Vệ",
+    "description": null
+  },
+  "Police_TreasureGuard_NarrowSite": {
+    "localized_name": "Xạ Thủ Đội Tự Vệ",
+    "description": null
+  },
+  "Police_Vigilance": {
+    "localized_name": "Xạ Thủ Đội Tự Vệ",
+    "description": null
+  },
+  "Police_old_Prisoner": {
+    "localized_name": "Cựu Cảnh Sát Trưởng Bị Giam Giữ",
+    "description": null
+  },
+  "PoseidonOrca": {
+    "localized_name": "Neptilius",
+    "description": "Thuở tai ương được phong ấn, những kẻ hùng mạnh của vùng đất Feybreak đã chạm trán. Kể từ đó, loài Pal này chỉ xuất hiện trước mặt những kẻ mạnh ở vùng biển gần bờ. Bởi vì, cuộc gặp gỡ ấy... là định mệnh."
+  },
+  "PurpleSpider": {
+    "localized_name": "Tarantriss",
+    "description": "Pal rất dính, bám siêu dính. Càng cố giãy giụa, Pal lại càng dính chặt hơn. Đó là |tính cách| của nó."
+  },
+  "QueenBee": {
+    "localized_name": "Elizabee",
+    "description": "Pal là nữ hoàng được chọn để thống lĩnh loài Beegarde. Niềm vinh hạnh được phục vụ cho nữ hoàng vĩ đại khiến cho vô số tôi tớ sẵn lòng làm việc cho đến chết."
+  },
+  "QuestMan": {
+    "localized_name": "-",
+    "description": null
+  },
+  "Quest_Farmer03_PinkCat": {
+    "localized_name": "Cattiva",
+    "description": null
+  },
+  "Quest_Farmer03_SheepBall": {
+    "localized_name": "Lamball",
+    "description": null
+  },
+  "Quest_Hunter_Fat_GatlingGun01": {
+    "localized_name": "Kẻ Hủy Diệt Băng Săn Trộm",
+    "description": null
+  },
+  "Quest_Hunter_FlameThrower": {
+    "localized_name": "Người Dọn Dẹp Băng Săn Trộm",
+    "description": null
+  },
+  "Quest_Hunter_Katana01": {
+    "localized_name": "Kiếm Sĩ Băng Săn Trộm",
+    "description": null
+  },
+  "Quest_Hunter_RocketLauncher01": {
+    "localized_name": "Lính Tinh Nhuệ Băng Săn Trộm",
+    "description": null
+  },
+  "RAID_DarkMechaDragon": {
+    "localized_name": "Xenolord",
+    "description": null
+  },
+  "RAID_DarkMechaDragon_2": {
+    "localized_name": "Xenolord",
+    "description": null
+  },
+  "RAID_KingBahamut_Dragon": {
+    "localized_name": "Blazamut Ryu",
+    "description": null
+  },
+  "RAID_KingBahamut_Dragon_2": {
+    "localized_name": "Blazamut Ryu",
+    "description": null
+  },
+  "RAID_LegendDeer": {
+    "localized_name": "Hartalis",
+    "description": null
+  },
+  "RAID_LegendDeer_2": {
+    "localized_name": "Hartalis",
+    "description": null
+  },
+  "RAID_NightLady": {
+    "localized_name": "Bellanoir",
+    "description": null
+  },
+  "RAID_NightLady_Dark": {
+    "localized_name": "Bellanoir Libero",
+    "description": null
+  },
+  "RAID_NightLady_Dark_2": {
+    "localized_name": "Bellanoir Libero",
+    "description": null
+  },
+  "RAID_YakushimaBoss001_Green": {
+    "localized_name": "Con Mắt Thực Sự Của Cthulhu",
+    "description": null
+  },
+  "RAID_YakushimaBoss001_Green_2": {
+    "localized_name": "Con Mắt Thực Sự Của Cthulhu",
+    "description": null
+  },
+  "RAID_YakushimaBoss002": {
+    "localized_name": "Chúa Tể Mặt Trăng",
+    "description": null
+  },
+  "RAID_YakushimaBoss002_2": {
+    "localized_name": "Chúa Tể Mặt Trăng",
+    "description": null
+  },
+  "RAID_YakushimaBoss002_Hand_Left": {
+    "localized_name": "Chúa Tể Mặt Trăng",
+    "description": null
+  },
+  "RAID_YakushimaBoss002_Hand_Left_2": {
+    "localized_name": "Chúa Tể Mặt Trăng",
+    "description": null
+  },
+  "RAID_YakushimaBoss002_Hand_Right": {
+    "localized_name": "Chúa Tể Mặt Trăng",
+    "description": null
+  },
+  "RAID_YakushimaBoss002_Hand_Right_2": {
+    "localized_name": "Chúa Tể Mặt Trăng",
+    "description": null
+  },
+  "RAID_YakushimaBoss002_Head": {
+    "localized_name": "Chúa Tể Mặt Trăng",
+    "description": null
+  },
+  "RAID_YakushimaBoss002_Head_2": {
+    "localized_name": "Chúa Tể Mặt Trăng",
+    "description": null
+  },
+  "RaijinDaughter": {
+    "localized_name": "Dazzi",
+    "description": "Loài Pal này thường tỏ ra rất tốt bụng với những Pal đơn độc. Nhưng khi Pal nào đó ngộ nhận lòng tốt mà bám theo nó liền thừa cơ hội đó để giáng sấm sét tiêu diệt ngay."
+  },
+  "RaijinDaughter_Water": {
+    "localized_name": "Dazzi Noct",
+    "description": "Loài Pal này đối xử tử tế với những Pal đơn độc để khiến chúng lơ là rồi dùng sấm sét hạ sát. Mưu tính là vậy, nhưng mãi không tìm được thời cơ, cuối cùng lại kết bạn luôn."
+  },
+  "RandomEventShop": {
+    "localized_name": "Thương Nhân Pal",
+    "description": null
+  },
+  "RedArmorBird": {
+    "localized_name": "Ragnahawk",
+    "description": "Có vẻ Pal này là họ hàng với Beakon nhưng thực ra không có quan hệ gì. Thức ăn chủ yếu là đá, và qua nhiều năm không chỉ chiếc mỏ mà toàn bộ phần đầu đều hóa cứng."
+  },
+  "Respawn_guide": {
+    "localized_name": "Nhà Huấn Luyện Pal Tử Tế",
+    "description": null
+  },
+  "Reward_BossDefeat": {
+    "localized_name": "Vệ Binh",
+    "description": null
+  },
+  "Reward_Emote_A_01": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Reward_Emote_B_01": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Reward_Emote_C_01": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Reward_Emote_D_01": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Reward_Emote_E_01": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Reward_Emote_F_01": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Reward_Emote_G_01": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Reward_Emote_H_01": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Reward_Emote_I_01": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Reward_Food": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Reward_PalCaptureCount": {
+    "localized_name": "Vệ Binh",
+    "description": null
+  },
+  "Reward_PalDisplay_A_01": {
+    "localized_name": "Vệ Binh",
+    "description": null
+  },
+  "Reward_PalDisplay_B_01": {
+    "localized_name": "Vệ Binh",
+    "description": null
+  },
+  "Reward_PalDisplay_C_01": {
+    "localized_name": "Vệ Binh",
+    "description": null
+  },
+  "Reward_PalDisplay_D_01": {
+    "localized_name": "Vệ Binh",
+    "description": null
+  },
+  "Reward_PalDisplay_E_01": {
+    "localized_name": "Vệ Binh",
+    "description": null
+  },
+  "Reward_PalDisplay_F_01": {
+    "localized_name": "Vệ Binh",
+    "description": null
+  },
+  "Reward_PalDisplay_G_01": {
+    "localized_name": "Vệ Binh",
+    "description": null
+  },
+  "Reward_PalDisplay_H_01": {
+    "localized_name": "Vệ Binh",
+    "description": null
+  },
+  "Reward_PalDisplay_I_01": {
+    "localized_name": "Vệ Binh",
+    "description": null
+  },
+  "Reward_Paldex": {
+    "localized_name": "Vệ Binh",
+    "description": null
+  },
+  "Robbery_Leader": {
+    "localized_name": "Thương Nhân Pal",
+    "description": null
+  },
+  "Robbery_Minion": {
+    "localized_name": "Thương Nhân Pal",
+    "description": null
+  },
+  "RobinHood": {
+    "localized_name": "Robinquill",
+    "description": "Một loài Pal sống bằng nghề săn bắt trong rừng, có những đặc tính rất giống con người. Người ta cho rằng nó đã tách ra từ một nhánh khác với loài người từ thời cổ đại có lẽ nó chính là chìa khóa để giải mã Pal là gì."
+  },
+  "RobinHood_Ground": {
+    "localized_name": "Robinquill Terra",
+    "description": "Một loài Pal sống bằng nghề săn bắn ở khu vực bãi đá, có những đặc tính rất giống con người. Khi xương của Robinquill Terra được tìm thấy trong các phế tích, ở đó luôn có cả xương người."
+  },
+  "Ronin": {
+    "localized_name": "Bushi",
+    "description": "Khi chết, thân xác hóa thành lưỡi kiếm và được truyền lại cho thế hệ sau. Bất kỳ ai không phải Bushi cầm thanh kiếm này sẽ không chịu nổi tiếng vọng của những vong hồn ẩn chứa bên trong mà phát điên."
+  },
+  "Ronin_Dark": {
+    "localized_name": "Bushi Noct",
+    "description": "Khi chết, thân xác hóa thành lưỡi kiếm và được truyền lại cho thế hệ sau. Nếu Bushi kế thừa thanh kiếm có trái tim yếu mềm chúng sẽ không chịu nổi tiếng vọng của những vong hồn ẩn chứa bên trong trở thành Bushi Noct vất vưởng."
+  },
+  "SUMMON_DarkAlien": {
+    "localized_name": "Xenovader",
+    "description": null
+  },
+  "SUMMON_DarkAlien_MAX": {
+    "localized_name": "Xenovader",
+    "description": null
+  },
+  "SUMMON_WhiteAlienDragon": {
+    "localized_name": "Xenogard",
+    "description": null
+  },
+  "SUMMON_WhiteAlienDragon_MAX": {
+    "localized_name": "Xenogard",
+    "description": null
+  },
+  "SaintCentaur": {
+    "localized_name": "Paladius",
+    "description": "Xưa kia, loài Pal này và Necromus vốn là một. Dù được cho là một sinh vật đã rũ bỏ mọi cảm xúc tiêu cực nhưng sâu trong đáy mắt nó vẫn còn tia oán hận."
+  },
+  "SakuraSaurus": {
+    "localized_name": "Broncherry",
+    "description": "Mùi hương cơ thể của Pal thay đổi đáng kể trước và sau khi ghép đôi. Mùi hương sau khi tìm được bạn đời được cho là rất dễ chịu, được gọi là |Hương tình đầu|."
+  },
+  "SakuraSaurus_Water": {
+    "localized_name": "Broncherry Aqua",
+    "description": "Mùi hương cơ thể của Pal thay đổi đáng kể trước và sau khi ghép đôi. Mùi hương trước khi tìm được bạn đời được cho là rất dễ chịu, được gọi là |Hương thuần khiết|."
+  },
+  "SalesPerson": {
+    "localized_name": "Thương Nhân Lang Thang",
+    "description": null
+  },
+  "SalesPerson_Desert": {
+    "localized_name": "Thương Nhân Lang Thang",
+    "description": null
+  },
+  "SalesPerson_Desert2": {
+    "localized_name": "Thương Nhân Lang Thang",
+    "description": null
+  },
+  "SalesPerson_Volcano": {
+    "localized_name": "Thương Nhân Lang Thang",
+    "description": null
+  },
+  "SalesPerson_Volcano2": {
+    "localized_name": "Thương Nhân Lang Thang",
+    "description": null
+  },
+  "SalesPerson_Wander": {
+    "localized_name": "Thương Nhân Lang Thang",
+    "description": null
+  },
+  "Scientist_FlameThrower": {
+    "localized_name": "Tổ Hành Động, Đơn Vị Nghiên Cứu Gen Pal",
+    "description": null
+  },
+  "Scientist_FlameThrower_Invader": {
+    "localized_name": "Tổ Hành Động, Đơn Vị Nghiên Cứu Gen Pal",
+    "description": null
+  },
+  "Scientist_Prisoner": {
+    "localized_name": "Tổ Hành Động, Đơn Vị Nghiên Cứu Gen Pal",
+    "description": null
+  },
+  "ScorpionMan": {
+    "localized_name": "Prixter",
+    "description": "Có khoảng 5.000 loại độc tố trong người Pal. Có vài loại nghe nói là ghê gớm lắm, có thể gây chết người ngay lập tức nhưng tất cả đều quá loãng nên cũng chẳng làm nên trò trống gì."
+  },
+  "SecurityDrone": {
+    "localized_name": "Trực Thăng Vũ Trang",
+    "description": null
+  },
+  "Serpent": {
+    "localized_name": "Surfent",
+    "description": "Thân hình thon dài giúp Pal hoạt động tốt trên nước. Tiếc là Pal hay bị mấy tay săn trộm bắt để cưỡi như ván lướt sóng."
+  },
+  "Serpent_Ground": {
+    "localized_name": "Surfent Terra",
+    "description": "Thân hình thon dài giúp Pal hoạt động tốt trên cát. Tiếc là Pal hay bị mấy tay săn trộm bắt để cưỡi như ván lướt sóng."
+  },
+  "SharkKid": {
+    "localized_name": "Gobfin",
+    "description": "Thời xa xưa, loài Pal này từng là một loài thủy sinh to lớn và mạnh mẽ nhưng do nguồn thức ăn dần khan hiếm, nó đã tiến lên đất liền. Vì di chuyển trên cạn tốn rất nhiều năng lượng hình thể dần dần nhỏ lại, giờ chỉ còn là một Pal yếu đuối."
+  },
+  "SharkKid_Fire": {
+    "localized_name": "Gobfin Ignis",
+    "description": "Thời xa xưa, loài Pal này từng là một loài thủy sinh to lớn và mạnh mẽ nhưng do nguồn thức ăn dần khan hiếm, nó đã tiến lên đất liền. Việc đi lại đã đốt cháy rất nhiều calo và thật bất ngờ, sức mạnh của lửa trong nó đã thức tỉnh!"
+  },
+  "Sheepball": {
+    "localized_name": "Lamball",
+    "description": "Hễ mà lên dốc là Pal lại tự lăn lông lốc xuống. Lăn xong còn bị hoa mắt không đi nổi nữa chứ, đúng là phận hẩm hiu ở đáy chuỗi thức ăn."
+  },
+  "SifuDog": {
+    "localized_name": "Dogen",
+    "description": "Pal luôn cố gắng đạt tới cảnh giới vô ngã bằng cách chăm chỉ thiền định. Sau khi đối diện với mọi ham muốn trần tục và thấy lòng nhẹ nhõm Pal sẽ làm một bữa thật no rồi lại tự nhủ: Hôm nay lại ăn quá nhiều rồi."
+  },
+  "SkyDragon": {
+    "localized_name": "Quivern",
+    "description": "Nếu có Quivern làm gối ôm ngủ thì sẽ êm ái như ở thiên đường nhưng nếu vớ phải con nào ngủ hay quẫy bạn sẽ bị Pal đè cho lên thiên đường luôn."
+  },
+  "SkyDragon_Grass": {
+    "localized_name": "Quivern Botan",
+    "description": "Khi ôm Quivern Botan, nếu ngửi thấy mùi nắng và cỏ thì ngày mai trời sẽ nắng. Nếu ngửi thấy mùi ẩm mốc thì xác định ngày mai mưa tầm tã."
+  },
+  "SmallArmadillo": {
+    "localized_name": "Kikit",
+    "description": "Cách đây không lâu, môn bóng đá Kikit từng rất thịnh hành. Do sự phản đối dữ dội của Tổ chức Bảo hộ Pal, môn này nhanh chóng bị dẹp bỏ, mà nghe đâu mấy em Kikit cũng khoái tham gia lắm vì trò này giúp chúng tẩy đi lớp da chết."
+  },
+  "SnowPeafowl": {
+    "localized_name": "Frostplume",
+    "description": "Loài Pal này cực kỳ nhạy thời gian, sáng nào cũng thức dậy vào đúng một khung giờ cố định. Tương truyền, lý do người dân đảo Palpagos chia 1 ngày thành 24 phần là vì khi nhìn trực diện vào Frostplume đang xòe cánh có thể nhìn thấy được 24 khoảng trống."
+  },
+  "SnowTigerBeastman": {
+    "localized_name": "Bastigor",
+    "description": "Cứ thấy cái gì tròn tròn, Pal lại muốn đấm cho một phát. Đối với SnowTigerBeastMan, điều khó khăn thứ hai sau đấu tranh sinh tồn chính là hoàn thành một người tuyết."
+  },
+  "SoldierBee": {
+    "localized_name": "Beegarde",
+    "description": "Loài Pal này là kẻ tôi tớ thề trung thành với Elizabee. Bất kỳ kẻ nào dám gây hại đến nữ hoàng đều sẽ bị nó tiêu diệt ngay lập tức. Pal sẽ bảo vệ nữ hoàng bằng mọi giá, dù phải tự hủy diệt chính mình."
+  },
+  "StuffedShark": {
+    "localized_name": "Finsider",
+    "description": "Nhìn qua thì tưởng có gì đó đang núp trong bộ đồ thú nhưng thò tay vào trong thì lại chẳng có gì cả. Mà kỳ lạ thay, bên trong sâu thẳm đến vô tận. Phải chăng trong đó là cả vũ trụ!?"
+  },
+  "StuffedShark_Fire": {
+    "localized_name": "Finsider Ignis",
+    "description": "Thò tay vào miệng thì chẳng thấy gì, có thể đưa tay vào thật sâu. Có một nhà nghiên cứu nghĩ rằng đây là một chiều không gian khác và thử chui cả người vào làm túi ngủ, nhưng người này bắt đầu buồn nôn nên có vẻ như bên trong đúng là cơ thể rồi."
+  },
+  "Suzaku": {
+    "localized_name": "Suzaku",
+    "description": "Ngày xưa, người ta cho rằng Pal là hiện thân của khô hạn. Hễ năm nào có khô hạn là năm sau, Pal lại trở thành mục tiêu bị truy lùng và tiêu diệt không ngừng với hy vọng vụ mùa bội thu."
+  },
+  "Suzaku_Water": {
+    "localized_name": "Suzaku Aqua",
+    "description": "Ngày xưa, người ta cho rằng Pal là hiện thân của mưa lũ. Hễ năm nào bị lũ lụt là năm sau, Pal lại trở thành mục tiêu bị truy lùng và tiêu diệt không ngừng để cầu mong bình an."
+  },
+  "SweetsSheep": {
+    "localized_name": "Woolipop",
+    "description": "Cả người Pal ngọt lịm gấp 18.000 lần đường. Mấy con Pal ăn thịt bị mùi hương dụ dỗ cắn một miếng y như rằng sẽ trợn trắng mắt, lăn ra xỉu vì ngọt khé cổ."
+  },
+  "TentacleTurtle": {
+    "localized_name": "Turtacle",
+    "description": "Để bảo vệ cơ thể yếu ớt, nó đã có được một chiếc mai kiên cố. Nhưng đổi lại, nó đã bỏ qua quá nhiều phòng thủ cơ thể, đến nỗi chỉ cần bị cù lét là có thể bất tỉnh."
+  },
+  "TentacleTurtle_Ground": {
+    "localized_name": "Turtacle Terra",
+    "description": "Để bảo vệ cho cơ thể yếu ớt, loài Pal này đã phát triển lớp mai cứng cáp. Mọi xúc giác đều tập trung ở tay và lớp mai nên nếu bạn khẽ chạm vào phần cơ thể thì chúng cũng không nhận ra."
+  },
+  "ThunderBird": {
+    "localized_name": "Beakon",
+    "description": "Loài Pal này có vẻ là họ hàng với Ragnahawk nhưng thực ra không có quan hệ gì. Nó lao xuống cực nhanh, kết liễu con mồi bằng chiếc mỏ sắc nhọn. Dáng vẻ ấy chẳng khác nào một tia sét."
+  },
+  "ThunderDog": {
+    "localized_name": "Rayhound",
+    "description": "Khi dồn hết tốc lực, Pal quả thực nhanh như một tia chớp. Hai con Rayhound mà lao vào nhau, tiếng động phát ra chẳng khác tiếng sấm."
+  },
+  "ThunderDragonMan": {
+    "localized_name": "Orserk",
+    "description": "Pal truyền điện từ vết thương vào cơ thể đối thủ, thiêu đốt cơ thể đối thủ. Trận chiến giữa các Orserk thường kết thúc trong nháy mắt."
+  },
+  "TropicalOstrich": {
+    "localized_name": "Palumba",
+    "description": "Điệu nhảy độc nhất vô nhị khiến cho nhịp điệu của kẻ địch bị rối loạn. Trong một trận chiến giành lãnh thổ, kẻ nào theo nhịp của đối phương trước sẽ là kẻ thua cuộc. Dù là tán tỉnh hay giết thời gian, mọi thứ đều thể hiện qua vũ điệu! Vậy thì, điệu nhảy dành cho con người, rốt cuộc mang ý nghĩa gì đây?"
+  },
+  "Umihebi": {
+    "localized_name": "Jormuntide",
+    "description": "Có truyền thuyết kể rằng một nhà hiền triết bị kết tội oan và bị ném xuống xoáy nước đã hồi sinh thành Jormuntide và hủy diệt cả vương quốc."
+  },
+  "Umihebi_Fire": {
+    "localized_name": "Jormuntide Ignis",
+    "description": "Có truyền thuyết kể rằng một dũng sĩ bị kết tội oan và bị ném vào núi lửa đã hồi sinh thành Jormuntide Ignis và thiêu rụi cả vương quốc."
+  },
+  "Viking": {
+    "localized_name": "Cư Dân Feybreak",
+    "description": null
+  },
+  "VikingElite_Tower": {
+    "localized_name": "Lực Lượng Tinh Nhuệ Feybreak",
+    "description": null
+  },
+  "Viking_Elite": {
+    "localized_name": "Lực Lượng Tinh Nhuệ Feybreak",
+    "description": null
+  },
+  "Viking_Elite_Invader": {
+    "localized_name": "Lực Lượng Tinh Nhuệ Feybreak",
+    "description": null
+  },
+  "Viking_Prisoner": {
+    "localized_name": "Cư Dân Feybreak",
+    "description": null
+  },
+  "Viking_Tower": {
+    "localized_name": "Cư Dân Feybreak",
+    "description": null
+  },
+  "VioletFairy": {
+    "localized_name": "Vaelet",
+    "description": "Trong lâu đài có rất nhiều loài hoa mà nhà vua yêu thích. Một cuộc chiến lớn đã xảy ra và ngọn lửa đã lan đến lâu đài. Rồi có một nàng tiên hoa xuất hiện. – Theo truyện cổ tích |Hoa của nhà vua|."
+  },
+  "VisitingMerchant": {
+    "localized_name": "-",
+    "description": null
+  },
+  "Visitor_Hunter_Rifle": {
+    "localized_name": "Lính Mới Băng Săn Trộm",
+    "description": null
+  },
+  "Visitor_Present": {
+    "localized_name": "Thương Nhân Lang Thang",
+    "description": null
+  },
+  "Visitor_Recruiter": {
+    "localized_name": "Nhà Tuyển Dụng Pal",
+    "description": null
+  },
+  "VolcanicMonster": {
+    "localized_name": "Reptyro",
+    "description": "Dòng máu nóng rực như dung nham chảy khắp người Pal. Nếu dội một lượng lớn nước vào, Palsẽ bị nung nóng tức thời gây ra một vụ nổ hơi nước khủng khiếp."
+  },
+  "VolcanicMonster_Ice": {
+    "localized_name": "Reptyro Cryst",
+    "description": "Dòng máu lạnh giá đến thấu xương chảy khắp người Pal. Nếu bị nung nóng tức thời, máu sẽ bốc hơi gây ra một vụ nổ hơi nước khủng khiếp."
+  },
+  "WeaponsDealer": {
+    "localized_name": "-",
+    "description": null
+  },
+  "WeaselDragon": {
+    "localized_name": "Chillet",
+    "description": "Pal có thể cuộn tròn cơ thể, lăn đi với tốc độ cực nhanh. Ngày xưa, người ta thường buộc túi sữa vào Chillet đã thuần hóa rồi thả Pal ra đồng cỏ thế là có bơ để ăn nhờ cái tài lăn lộn đó."
+  },
+  "WeaselDragon_Fire": {
+    "localized_name": "Chillet Ignis",
+    "description": "Pal có thể cuộn tròn cơ thể, vừa lăn vừa bắn ra tia lửa. Cảm xúc phấn khích cũng khiến Pal xẹt lửa. Vuốt ve nhiều quá là Pal cũng tự hủy luôn."
+  },
+  "Werewolf": {
+    "localized_name": "Loupmoon",
+    "description": "Cặp sừng trên đầu Pal dài ra khi tắm ánh trăng. Pal không hẳn là sợ mặt trời nhưng tắm nắng khiến sừng của Pal bị ngứa ngáy."
+  },
+  "Werewolf_Ice": {
+    "localized_name": "Loupmoon Cryst",
+    "description": "Cặp sừng trên đầu Pal là một khối băng kỳ lạ không bao giờ tan chảy. Món đá bào làm từ sừng gãy nghe nói là ngon tuyệt nhưng cả người ăn lẫn Loupmoon Cryst đều bị đau đầu."
+  },
+  "WhiteAlienDragon": {
+    "localized_name": "Xenogard",
+    "description": "Pal có thể ăn thông tin để chuyển hóa thành năng lượng. Hình như Pal còn định kỳ gửi tin tức cho ai đó. – Alo, tớ lỡ ăn mất tin ban nãy rồi, chưa kịp xem. Nhắn gì vậy?"
+  },
+  "WhiteDeer": {
+    "localized_name": "Celesdir",
+    "description": "Trong các tài liệu cổ ghi rằng loài Pal này là |Thần thú cứu rỗi|. Ánh sáng phát ra từ Celesdir giúp thanh tẩy vạn vật. Theo nghĩa đen, mọi thứ sẽ biến mất khỏi thế gian không một dấu vết."
+  },
+  "WhiteMoth": {
+    "localized_name": "Sibelyx",
+    "description": "Pal thích mưa và thường đứng yên trong khi mưa rơi. Foxparks thường đến chỗ Pal trú mưa."
+  },
+  "WhiteShieldDragon": {
+    "localized_name": "Silvegis",
+    "description": "Các mảnh kim loại quanh cổ Pal có tính chất như nam châm. Nếu đưa các bộ phận ở chân lại gần, chúng sẽ tự dính vào nhau. Khi cổ bị bám đầy rác kim loại, Pal miễn cưỡng bắt đầu dọn dẹp nhưng mà làm mãi không xong nên lại nổi cơn tam bành."
+  },
+  "WhiteTiger": {
+    "localized_name": "Cryolinx",
+    "description": "Với bộ móng vuốt cứng cáp, Pal có thể dễ dàng trèo lên những ngọn núi hiểm trở. Chỉ có điều chân ngắn quá nên leo xuống hơi bị tệ lại còn không biết đường xuống."
+  },
+  "WhiteTiger_Ground": {
+    "localized_name": "Cryolinx Terra",
+    "description": "Với bàn tay to lớn, Pal có thể dễ dàng mang theo nhiều thứ. Chỉ có điều chân hơi ngắn nên đi bộ chậm rì mới đi nửa đường là trời đã tối mịt."
+  },
+  "WindChimes": {
+    "localized_name": "Hangyu",
+    "description": "Đôi tay to vật vã của Pal có thể bẻ gãy cả sắt thép. Ngày xưa, người ta hay trói những tên tội phạm nguy hiểm ở quảng trường rồi thả Windchimes đến xé xác chúng, một kiểu hành hình vô cùng dã man."
+  },
+  "WindChimes_Ice": {
+    "localized_name": "Hangyu Cryst",
+    "description": "Đôi tay to vật vã của Pal có thể phá tan cả tảng băng. Ngày xưa, người ta hay trói những tên tội phạm nguy hiểm ở quảng trường rồi thả Windchimes_Ice đến giật tóc chúng, một kiểu hành hình man rợ để làm gương."
+  },
+  "WingGolem": {
+    "localized_name": "Knocklem",
+    "description": "Có thể tách rời cơ thể thành 215 mảnh, dù có bị vứt lung tung, chỉ cần lắp ráp lại là Pal vẫn hoạt động bình thường, thật là một loài Pal kỳ lạ. Nếu trộn lẫn các mảnh của những cá thể khác nhau lại Pal sẽ bị mất hết bản sắc, trở nên ủ dột."
+  },
+  "WingGolem_Oilrig": {
+    "localized_name": "Knocklem",
+    "description": null
+  },
+  "WizardOwl": {
+    "localized_name": "Hoocrates",
+    "description": "Pal thường hay đắm chìm trong suy tư nghĩ nhiều quá nên thành ra mất ngủ. |Cogito, ergo sum| (Tôi tư duy, tôi tồn tại)."
+  },
+  "WoolFox": {
+    "localized_name": "Cremis",
+    "description": "Chất lượng lông của Pal tốt hơn SheepBall. Tính cách cũng phù hợp để nuôi làm gia súc hơn SheepBall. Ấy vậy mà xưa nay, Pal luôn được cưng nựng như một loài thú cưng. Đúng là dễ thương là chân lý."
+  },
+  "YakushimaBoss001": {
+    "localized_name": "Con Mắt Của Cthulhu",
+    "description": "[Hợp tác với Terraria] Những quái thú từ thế giới khác đã xuất hiện. Tại đây, bạn sẽ có cơ hội thuần hóa chúng!"
+  },
+  "YakushimaBoss001_Small": {
+    "localized_name": "Mắt Ác Quỷ",
+    "description": "[Hợp tác với Terraria] Những quái thú từ thế giới khác đã xuất hiện. Tại đây, bạn sẽ có cơ hội thuần hóa chúng!"
+  },
+  "YakushimaMonster001": {
+    "localized_name": "Slime Xanh Lá",
+    "description": "[Hợp tác với Terraria] Những quái thú từ thế giới khác đã xuất hiện. Tại đây, bạn sẽ có cơ hội thuần hóa chúng!"
+  },
+  "YakushimaMonster001_Blue": {
+    "localized_name": "Slime Xanh Dương",
+    "description": "[Hợp tác với Terraria] Những quái thú từ thế giới khác đã xuất hiện. Tại đây, bạn sẽ có cơ hội thuần hóa chúng!"
+  },
+  "YakushimaMonster001_Pink": {
+    "localized_name": "Slime Lấp Lánh",
+    "description": "[Hợp tác với Terraria] Những quái thú từ thế giới khác đã xuất hiện. Tại đây, bạn sẽ có cơ hội thuần hóa chúng!"
+  },
+  "YakushimaMonster001_Purple": {
+    "localized_name": "Slime Tím",
+    "description": "[Hợp tác với Terraria] Những quái thú từ thế giới khác đã xuất hiện. Tại đây, bạn sẽ có cơ hội thuần hóa chúng!"
+  },
+  "YakushimaMonster001_Rainbow": {
+    "localized_name": "Slime Cầu Vồng",
+    "description": "[Hợp tác với Terraria] Những quái thú từ thế giới khác đã xuất hiện. Tại đây, bạn sẽ có cơ hội thuần hóa chúng!"
+  },
+  "YakushimaMonster001_Red": {
+    "localized_name": "Slime Đỏ",
+    "description": "[Hợp tác với Terraria] Những quái thú từ thế giới khác đã xuất hiện. Tại đây, bạn sẽ có cơ hội thuần hóa chúng!"
+  },
+  "YakushimaMonster002": {
+    "localized_name": "Kiếm Phép Thuật",
+    "description": "[Hợp tác với Terraria] Những quái thú từ thế giới khác đã xuất hiện. Tại đây, bạn sẽ có cơ hội thuần hóa chúng!"
+  },
+  "YakushimaMonster003": {
+    "localized_name": "Dơi Hang Động",
+    "description": "[Hợp tác với Terraria] Những quái thú từ thế giới khác đã xuất hiện. Tại đây, bạn sẽ có cơ hội thuần hóa chúng!"
+  },
+  "YakushimaMonster003_Purple": {
+    "localized_name": "Dơi Lấp Lánh",
+    "description": "[Hợp tác với Terraria] Những quái thú từ thế giới khác đã xuất hiện. Tại đây, bạn sẽ có cơ hội thuần hóa chúng!"
+  },
+  "Yamishima_guide1": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Yamishima_guide2": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Yamishima_guide3": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Yamishima_guide4": {
+    "localized_name": "Dân Đảo",
+    "description": null
+  },
+  "Yamishima_guide5": {
+    "localized_name": "Lính Đánh Thuê Hộ Vệ",
+    "description": null
+  },
+  "Yeti": {
+    "localized_name": "Wumpo",
+    "description": "Để khám phá chân tướng, các nhà nghiên cứu đã cắt lông trên người Pal nhưng hóa ra bên trong trống rỗng chỉ còn trơ lại mớ lông."
+  },
+  "Yeti_Grass": {
+    "localized_name": "Wumpo Botan",
+    "description": "Để khám phá chân tướng, các nhà nghiên cứu đã cắt cỏ trên người Pal nhưng hóa ra bên trong trống rỗng chỉ còn trơ lại mớ cỏ."
+  }
+}

@@ -11,6 +11,8 @@
 	import { activeSkillsData, elementsData, passiveSkillsData } from '$lib/data';
 	import { assetLoader, calculateFilters } from '$utils';
 	import { ASSET_DATA_PATH, staticIcons } from '$types/icons';
+	import * as m from '$i18n/messages';
+	import { c } from '$lib/utils/commonTranslations';
 
 	let {
 		title = '',
@@ -117,7 +119,7 @@
 </script>
 
 {#snippet ActiveSkillOption(option: SelectOption)}
-	{@const activeSkill = activeSkillsData.getByKey(option.value)}
+	{@const activeSkill = activeSkillsData.getByKey(option.value as string)}
 	{@const icon = getActiveSkillIcon(activeSkill)}
 	<div class="grid w-full grid-cols-[auto_1fr_auto] items-center gap-2">
 		<img src={icon} alt={activeSkill?.localized_name} class="h-6 w-6" />
@@ -145,7 +147,7 @@
 {/snippet}
 
 {#snippet PassiveSkillOption(option: SelectOption)}
-	{@const passiveSkill = passiveSkillsData.getByKey(option.value)}
+	{@const passiveSkill = passiveSkillsData.getByKey(option.value as string)}
 	{@const icon = assetLoader.loadImage(
 		`${ASSET_DATA_PATH}/img/rank_${passiveSkill?.details.rank}.webp`
 	)}
@@ -177,7 +179,7 @@
 				<Delete />
 			</button>
 			{#snippet popup()}
-				<span>Clear</span>
+				<span>{m.clear()}</span>
 			{/snippet}
 		</Tooltip>
 		<Tooltip position="bottom">
@@ -185,7 +187,7 @@
 				<Save />
 			</button>
 			{#snippet popup()}
-				<span>Save</span>
+				<span>{c.save}</span>
 			{/snippet}
 		</Tooltip>
 		<Tooltip position="bottom">
@@ -193,7 +195,7 @@
 				<X />
 			</button>
 			{#snippet popup()}
-				<span>Cancel</span>
+				<span>{m.cancel()}</span>
 			{/snippet}
 		</Tooltip>
 	</div>

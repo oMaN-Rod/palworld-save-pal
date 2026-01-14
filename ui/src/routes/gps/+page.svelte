@@ -4,6 +4,7 @@
 	import { getAppState, getModalState, getToastState, getUpsState } from '$states';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import { Card, Input, Tooltip, TooltipButton } from '$components/ui';
+	import { Spinner } from '$components';
 	import {
 		PalSelectModal,
 		FillPalsModal,
@@ -49,6 +50,8 @@
 	import { PalBadge, PalContainerStats } from '$components';
 	import { send } from '$lib/utils/websocketUtils';
 	import type { ValueChangeDetails } from '@zag-js/accordion';
+	import * as m from '$i18n/messages';
+	import { c, p } from '$lib/utils/commonTranslations';
 
 	const PALS_PER_PAGE = 30;
 	const TOTAL_SLOTS = 960;
@@ -291,7 +294,7 @@
 
 		// @ts-ignore
 		const result = await modal.showModal<string>(PalPresetSelectModal, {
-			title: 'Select preset',
+			title: m.select_entity({ entity: m.preset({ count: 1 }) }),
 			selectedPals: selectedPalsData
 		});
 		if (!result) return;
@@ -342,7 +345,7 @@
 		if (!appState.gps) return;
 		// @ts-ignore
 		const result = await modal.showModal<[string, string] | undefined>(PalSelectModal, {
-			title: `Add a new Pal to your GPS`
+			title: m.add_new_pal_to_entity({ entity: m.global_pal_storage({ pal: m.pal({ count: 1 }) }) })
 		});
 		if (!result) return;
 		const [selectedPal, nickname] = result;
@@ -360,13 +363,16 @@
 	async function clonePal(pal: Pal) {
 		const maxClones = appState.gps ? TOTAL_SLOTS - Object.values(appState.gps).length : 0;
 		if (maxClones === 0) {
-			toast.add('There are no slots available in your Dimensional Pal Storage.', 'Error', 'error');
+			toast.add(m.no_slots_available_in_entity({ entity: m.gps() }), m.error(), 'error');
 			return;
 		}
 		// @ts-ignore
 		const result = await modal.showModal<number>(NumberInputModal, {
-			title: 'How many clones?',
-			message: `There are ${maxClones} slots available in your Dimensional Pal Storage.`,
+			title: m.how_many_clones(),
+			message: m.slots_available_in_entity({
+				entity: m.global_pal_storage({ pal: m.pal({ count: 1 }) }),
+				count: maxClones
+			}),
 			value: 1,
 			min: 0,
 			max: maxClones
@@ -439,10 +445,13 @@
 		if (selectedPals.length === 0) return;
 
 		const confirmed = await modal.showConfirmModal({
-			title: `Delete Pal${selectedPals.length > 1 ? 's' : ''}`,
-			message: `Are you sure you want to delete the ${selectedPals.length} selected pal${selectedPals.length == 1 ? '' : 's'}?`,
-			confirmText: 'Delete',
-			cancelText: 'Cancel'
+			title: m.delete_entity({ entity: m.pal({ count: selectedPals.length }) }),
+			message: m.delete_count_entities_confirm({
+				entity: m.pal({ count: selectedPals.length }),
+				count: selectedPals.length
+			}),
+			confirmText: m.delete(),
+			cancelText: m.cancel()
 		});
 
 		if (appState.gps && confirmed) {
@@ -463,10 +472,10 @@
 
 	async function handleDeletePal(pal: Pal) {
 		const confirmed = await modal.showConfirmModal({
-			title: 'Delete Pal',
-			message: `Are you sure you want to delete ${pal.nickname || pal.name}?`,
-			confirmText: 'Delete',
-			cancelText: 'Cancel'
+			title: m.delete_entity({ entity: m.pal({ count: 1 }) }),
+			message: m.delete_entity_by_name_confirm({ name: pal.nickname || pal.name }),
+			confirmText: m.delete(),
+			cancelText: m.cancel()
 		});
 		if (appState.gps && confirmed) {
 			const palIndex = Object.entries(appState.gps).find(
@@ -523,8 +532,11 @@
 	async function handleCloneToUps(pal: Pal) {
 		// @ts-ignore
 		const result = await modal.showModal<CloneToUpsModalProps>(CloneToUpsModal, {
-			title: 'Clone to UPS',
-			message: 'Clone this Pal to your Universal Pal Storage.',
+			title: m.clone_to_entity({ entity: m.ups() }),
+			message: m.clone_selected_to_entity({
+				pals: m.pal({ count: 1 }),
+				entity: m.universal_pal_storage({ pal: m.pal({ count: 1 }) })
+			}),
 			pals: [pal]
 		});
 
@@ -542,10 +554,18 @@
 				notes || undefined
 			);
 
-			toast.add(`Successfully cloned ${pal.nickname || pal.name} to UPS`, 'Success', 'success');
+			toast.add(
+				m.successfully_cloned_pals_to_entity({
+					pals: c.pals,
+					entity: c.universalPalStorage,
+					count: 1
+				}),
+				m.success(),
+				'success'
+			);
 		} catch (error) {
 			console.error('Clone to UPS failed:', error);
-			toast.add('Clone to UPS failed. Please try again.', 'Error', 'error');
+			toast.add(m.clone_to_entity_failed({ entity: m.ups() }), m.error(), 'error');
 		}
 	}
 
@@ -560,8 +580,12 @@
 
 		// @ts-ignore
 		const result = await modal.showModal<CloneToUpsModalProps>(CloneToUpsModal, {
-			title: 'Clone to UPS',
-			message: `Clone ${palsToClone.length} selected Pals to your Universal Pal Storage.`,
+			title: m.clone_to_entity({ entity: m.ups() }),
+			message: m.successfully_cloned_pals_to_entity({
+				count: palsToClone.length,
+				pals: c.pals,
+				entity: c.universalPalStorage
+			}),
 			pals: palsToClone
 		});
 
@@ -579,12 +603,20 @@
 				notes || undefined
 			);
 
-			toast.add(`Successfully cloned ${palsToClone.length} Pals to UPS`, 'Success', 'success');
+			toast.add(
+				m.successfully_cloned_pals_to_entity({
+					count: palsToClone.length,
+					pals: c.pals,
+					entity: c.universalPalStorage
+				}),
+				m.success(),
+				'success'
+			);
 
 			selectedPals = [];
 		} catch (error) {
 			console.error('Bulk clone to UPS failed:', error);
-			toast.add('Bulk clone to UPS failed. Please try again.', 'Error', 'error');
+			toast.add(m.bulk_clone_to_ups_failed(), m.error(), 'error');
 		}
 	}
 
@@ -592,286 +624,313 @@
 		if (!appState.gps) return;
 		// @ts-ignore
 		await modal.showModal<string>(FillPalsModal, {
-			title: 'Fill Global Pal Storage',
+			title: m.fill_entity({ entity: m.global_pal_storage({ pal: m.pal({ count: 1 }) }) }),
 			player: appState.selectedPlayer,
 			target: 'gps'
 		});
 	}
 </script>
 
-<div
-	class="grid h-full w-full grid-cols-[25%_1fr] 2xl:grid-cols-[25%_1fr_20%]"
-	{...additionalProps}
->
-	<div class="shrink-0 p-4">
-		<div class="btn-group bg-surface-900 mb-2 w-full items-center rounded-sm p-1">
-			<Tooltip position="right" label="Add all pals to your Pal Box">
-				<button class="btn hover:preset-tonal-secondary p-2" onclick={addAllPalsGps}>
-					<CircleFadingPlus />
-				</button>
-			</Tooltip>
-			<Tooltip>
-				<button class="btn hover:preset-tonal-secondary p-2" onclick={handleSelectAll}>
-					<ReplaceAll />
-				</button>
-				{#snippet popup()}
-					<div class="flex flex-col">
-						<span>Select all in</span>
-						<div class="grid grid-cols-[auto_1fr] gap-1">
-							<img src={staticIcons.leftClickIcon} alt="Left Click" class="h-6 w-6" />
-							<span class="text-sm">pal box</span>
-							<div class="flex">
-								<img src={staticIcons.ctrlIcon} alt="Ctrl" class="h-6 w-6" />
-								<img src={staticIcons.leftClickIcon} alt="Left Click" class="h-6 w-6" />
-							</div>
-							<span class="text-sm">pal box + party</span>
-						</div>
-					</div>
-				{/snippet}
-			</Tooltip>
-
-			{#if selectedPals.length >= 1}
-				<Tooltip label="Apply preset to selected pal(s)">
-					<button class="btn hover:preset-tonal-secondary p-2" onclick={handleSelectPreset}>
-						<Play />
-					</button>
-				</Tooltip>
-				<Tooltip label="Clone selected pal(s) to UPS">
-					<button class="btn hover:preset-tonal-secondary p-2" onclick={handleBulkCloneToUps}>
-						<Upload />
-					</button>
-				</Tooltip>
-				<Tooltip label="Delete selected pal(s)">
-					<button class="btn hover:preset-tonal-secondary p-2" onclick={deleteSelectedPals}>
-						<Trash />
-					</button>
-				</Tooltip>
-				<Tooltip label="Clear selected pal(s)">
-					<button class="btn hover:preset-tonal-secondary p-2" onclick={() => (selectedPals = [])}>
-						<X />
-					</button>
-				</Tooltip>
-			{/if}
+{#if appState.loadingGps}
+	<div class="flex h-full w-full items-center justify-center">
+		<div class="flex flex-col items-center gap-4">
+			<Spinner size="size-16" />
+			<p class="text-surface-400">{m.loading_entity({ entity: m.gps() })}</p>
 		</div>
-		<Accordion
-			value={filterExpand}
-			onValueChange={(e: ValueChangeDetails) => (filterExpand = e.value)}
-			collapsible
-		>
-			<Accordion.Item
-				value="filter"
-				base="rounded-sm bg-surface-900"
-				controlHover="hover:bg-secondary-500/25"
-			>
-				{#snippet lead()}<Search />{/snippet}
-				{#snippet control()}
-					<span class="font-bold">Filter & Sort</span>
-				{/snippet}
-				{#snippet panel()}
-					<Input
-						type="text"
-						inputClass="w-full"
-						placeholder="Search by name or nickname"
-						bind:value={searchQuery}
-					/>
-					<div>
-						<legend class="font-bold">Sort</legend>
-						<hr />
-						<div class="grid grid-cols-6">
-							<Tooltip label="Sort by level">
-								<button
-									type="button"
-									class={sortButtonClass('level')}
-									onclick={() => toggleSort('level')}
-								>
-									<LevelSortIcon />
-								</button>
-							</Tooltip>
-							<Tooltip label="Sort by name">
-								<button
-									type="button"
-									class={sortButtonClass('name')}
-									onclick={() => toggleSort('name')}
-								>
-									<NameSortIcon />
-								</button>
-							</Tooltip>
-							<Tooltip label="Sort by Paldeck #">
-								<button
-									type="button"
-									class={sortButtonClass('paldeck-index')}
-									onclick={() => toggleSort('paldeck-index')}
-								>
-									<PaldeckSortIcon />
-								</button>
-							</Tooltip>
+	</div>
+{:else if !appState.hasGpsAvailable && !appState.gpsLoaded}
+	<div class="flex h-full w-full items-center justify-center">
+		<div class="flex flex-col items-center gap-4">
+			<p class="text-surface-400">{m.entity_not_available({ entity: c.globalPalStorage })}</p>
+		</div>
+	</div>
+{:else}
+	<div
+		class="grid h-full w-full grid-cols-[25%_1fr] 2xl:grid-cols-[25%_1fr_20%]"
+		{...additionalProps}
+	>
+		<div class="shrink-0 p-4">
+			<div class="btn-group bg-surface-900 mb-2 w-full items-center rounded-sm p-1">
+				<Tooltip
+					position="right"
+					label={m.add_all_pals_to_entity({ entity: m.gps(), pals: c.pals })}
+				>
+					<button class="btn hover:preset-tonal-secondary p-2" onclick={addAllPalsGps}>
+						<CircleFadingPlus />
+					</button>
+				</Tooltip>
+				<Tooltip>
+					<button class="btn hover:preset-tonal-secondary p-2" onclick={handleSelectAll}>
+						<ReplaceAll />
+					</button>
+					{#snippet popup()}
+						<div class="flex flex-col">
+							<span>{m.select_all_in()}</span>
+							<div class="grid grid-cols-[auto_1fr] gap-1">
+								<img src={staticIcons.leftClickIcon} alt="Left Click" class="h-6 w-6" />
+								<span class="text-sm">{m.palbox()}</span>
+								<div class="flex">
+									<img src={staticIcons.ctrlIcon} alt="Ctrl" class="h-6 w-6" />
+									<img src={staticIcons.leftClickIcon} alt="Left Click" class="h-6 w-6" />
+								</div>
+								<span class="text-sm">{m.pal_box_party()}</span>
+							</div>
 						</div>
-					</div>
-					<div>
-						<legend class="font-bold">Element & Type</legend>
-						<hr />
-						<div class="mt-2 grid grid-cols-4 2xl:grid-cols-6">
-							<Tooltip>
-								<button class={elementClass('All')} onclick={() => (selectedFilter = 'All')}>
-									<GalleryVerticalEnd />
-								</button>
-								{#snippet popup()}All pals{/snippet}
-							</Tooltip>
-							{#each [...elementTypes] as element}
-								{@const localizedName = elementsData.elements[element].localized_name}
-								<Tooltip label={localizedName}>
+					{/snippet}
+				</Tooltip>
+
+				{#if selectedPals.length >= 1}
+					<Tooltip
+						label={m.apply_preset_to_selected({ pals: m.pal({ count: selectedPals.length }) })}
+					>
+						<button class="btn hover:preset-tonal-secondary p-2" onclick={handleSelectPreset}>
+							<Play />
+						</button>
+					</Tooltip>
+					<Tooltip label={m.clone_selected_to_entity({ entity: m.ups(), pals: c.pals })}>
+						<button class="btn hover:preset-tonal-secondary p-2" onclick={handleBulkCloneToUps}>
+							<Upload />
+						</button>
+					</Tooltip>
+					<Tooltip
+						label={m.delete_selected_entity({ entity: m.pal({ count: selectedPals.length }) })}
+					>
+						<button class="btn hover:preset-tonal-secondary p-2" onclick={deleteSelectedPals}>
+							<Trash />
+						</button>
+					</Tooltip>
+					<Tooltip
+						label={m.clear_selected_entity({ entity: m.pal({ count: selectedPals.length }) })}
+					>
+						<button
+							class="btn hover:preset-tonal-secondary p-2"
+							onclick={() => (selectedPals = [])}
+						>
+							<X />
+						</button>
+					</Tooltip>
+				{/if}
+			</div>
+			<Accordion
+				value={filterExpand}
+				onValueChange={(e: ValueChangeDetails) => (filterExpand = e.value)}
+				collapsible
+			>
+				<Accordion.Item
+					value="filter"
+					base="rounded-sm bg-surface-900"
+					controlHover="hover:bg-secondary-500/25"
+				>
+					{#snippet lead()}<Search />{/snippet}
+					{#snippet control()}
+						<span class="font-bold">{m.filter_and_sort()}</span>
+					{/snippet}
+					{#snippet panel()}
+						<Input
+							type="text"
+							inputClass="w-full"
+							placeholder={m.search_by_name_nickname()}
+							bind:value={searchQuery}
+						/>
+						<div>
+							<legend class="font-bold">{m.sort()}</legend>
+							<hr />
+							<div class="grid grid-cols-6">
+								<Tooltip label={m.sort_by_entity({ entity: m.level() })}>
 									<button
-										class={elementClass(element)}
-										onclick={() => (selectedFilter = element)}
-										aria-label={localizedName}
+										type="button"
+										class={sortButtonClass('level')}
+										onclick={() => toggleSort('level')}
+									>
+										<LevelSortIcon />
+									</button>
+								</Tooltip>
+								<Tooltip label={m.sort_by_entity({ entity: m.name({ count: 1 }) })}>
+									<button
+										type="button"
+										class={sortButtonClass('name')}
+										onclick={() => toggleSort('name')}
+									>
+										<NameSortIcon />
+									</button>
+								</Tooltip>
+								<Tooltip label={m.sort_by_paldeck()}>
+									<button
+										type="button"
+										class={sortButtonClass('paldeck-index')}
+										onclick={() => toggleSort('paldeck-index')}
+									>
+										<PaldeckSortIcon />
+									</button>
+								</Tooltip>
+							</div>
+						</div>
+						<div>
+							<legend class="font-bold">{m.element_and_type()}</legend>
+							<hr />
+							<div class="mt-2 grid grid-cols-4 2xl:grid-cols-6">
+								<Tooltip>
+									<button class={elementClass('All')} onclick={() => (selectedFilter = 'All')}>
+										<GalleryVerticalEnd />
+									</button>
+									{#snippet popup()}{m.all_entity({ entity: c.pals })}{/snippet}
+								</Tooltip>
+								{#each [...elementTypes] as element}
+									{@const localizedName = elementsData.elements[element].localized_name}
+									<Tooltip label={localizedName}>
+										<button
+											class={elementClass(element)}
+											onclick={() => (selectedFilter = element)}
+											aria-label={localizedName}
+										>
+											<img
+												src={elementIcons[element]}
+												alt={localizedName}
+												class="pal-element-badge"
+											/>
+										</button>
+									</Tooltip>
+								{/each}
+								<Tooltip label={c.alphaPals}>
+									<button
+										type="button"
+										class={sortAlphaClass}
+										onclick={() => (selectedFilter = 'alpha')}
+									>
+										<img src={staticIcons.alphaIcon} alt="Alpha" class="pal-element-badge" />
+									</button>
+								</Tooltip>
+								<Tooltip label={c.luckyPals}>
+									<button
+										type="button"
+										class={sortLuckyClass}
+										onclick={() => (selectedFilter = 'lucky')}
+									>
+										<img src={staticIcons.luckyIcon} alt="Alpha" class="pal-element-badge" />
+									</button>
+								</Tooltip>
+								<Tooltip label={c.human}>
+									<button
+										type="button"
+										class={sortHumanClass}
+										onclick={() => (selectedFilter = 'human')}
+									>
+										<User />
+									</button>
+								</Tooltip>
+								<Tooltip label={c.predatorPals}>
+									<button
+										type="button"
+										class={sortPredatorClass}
+										onclick={() => (selectedFilter = 'predator')}
 									>
 										<img
-											src={elementIcons[element]}
-											alt={localizedName}
+											src={staticIcons.predatorIcon}
+											alt="Predator"
 											class="pal-element-badge"
+											style="filter: {calculateFilters('#FF0000')};"
 										/>
 									</button>
 								</Tooltip>
-							{/each}
-							<Tooltip label="Alpha Pals">
-								<button
-									type="button"
-									class={sortAlphaClass}
-									onclick={() => (selectedFilter = 'alpha')}
-								>
-									<img src={staticIcons.alphaIcon} alt="Alpha" class="pal-element-badge" />
-								</button>
-							</Tooltip>
-							<Tooltip label="Lucky Pals">
-								<button
-									type="button"
-									class={sortLuckyClass}
-									onclick={() => (selectedFilter = 'lucky')}
-								>
-									<img src={staticIcons.luckyIcon} alt="Alpha" class="pal-element-badge" />
-								</button>
-							</Tooltip>
-							<Tooltip label="Humans">
-								<button
-									type="button"
-									class={sortHumanClass}
-									onclick={() => (selectedFilter = 'human')}
-								>
-									<User />
-								</button>
-							</Tooltip>
-							<Tooltip label="Predator Pals">
-								<button
-									type="button"
-									class={sortPredatorClass}
-									onclick={() => (selectedFilter = 'predator')}
-								>
-									<img
-										src={staticIcons.predatorIcon}
-										alt="Predator"
-										class="pal-element-badge"
-										style="filter: {calculateFilters('#FF0000')};"
-									/>
-								</button>
-							</Tooltip>
-							<Tooltip label="Oil Rig Pals">
-								<button
-									type="button"
-									class={sortOilrigClass}
-									onclick={() => (selectedFilter = 'oilrig')}
-								>
-									<img src={staticIcons.oilrigIcon} alt="Oil Rig" class="pal-element-badge" />
-								</button>
-							</Tooltip>
-							<Tooltip label="Summoned Pals">
-								<button
-									type="button"
-									class={sortSummonClass}
-									onclick={() => (selectedFilter = 'summon')}
-								>
-									<img src={staticIcons.altarIcon} alt="Summoned" class="pal-element-badge" />
-								</button>
-							</Tooltip>
+								<Tooltip label={c.oilRigPals}>
+									<button
+										type="button"
+										class={sortOilrigClass}
+										onclick={() => (selectedFilter = 'oilrig')}
+									>
+										<img src={staticIcons.oilrigIcon} alt="Oil Rig" class="pal-element-badge" />
+									</button>
+								</Tooltip>
+								<Tooltip label={c.summonedPals}>
+									<button
+										type="button"
+										class={sortSummonClass}
+										onclick={() => (selectedFilter = 'summon')}
+									>
+										<img src={staticIcons.altarIcon} alt="Summoned" class="pal-element-badge" />
+									</button>
+								</Tooltip>
+							</div>
 						</div>
-					</div>
-				{/snippet}
-			</Accordion.Item>
-			<Accordion.Item
-				value="stats"
-				base="block 2xl:hidden rounded-sm bg-surface-900"
-				controlHover="hover:bg-secondary-500/25"
-			>
-				{#snippet lead()}<Info />{/snippet}
-				{#snippet control()}
-					<span class="font-bold">Stats</span>
-				{/snippet}
-				{#snippet panel()}
-					{#if pals && pals.length > 0}
-						<PalContainerStats {pals} {elementTypes} />
-					{:else}
-						<div>No pals data available</div>
-					{/if}
-				{/snippet}
-			</Accordion.Item>
-		</Accordion>
-	</div>
-
-	<div>
-		<!-- Pager -->
-		<div class="mb-4 flex items-center justify-center space-x-4">
-			<button class="rounded-sm px-4 py-2 font-bold" onclick={decrementPage}>
-				<img src={staticIcons.qIcon} alt="Previous" class="h-10 w-10" />
-			</button>
-
-			<div class="flex space-x-2">
-				{#each visiblePages as page}
-					<TooltipButton
-						class="h-8 w-8 rounded-full {page === currentPage
-							? 'bg-primary-500 text-white'
-							: 'bg-surface-800 hover:bg-gray-300'}"
-						onclick={() => (currentPage = page)}
-						popupLabel={`Box ${page}`}
-					>
-						{Math.floor(page)}
-					</TooltipButton>
-				{/each}
-			</div>
-
-			<button class="rounded-sm px-4 py-2 font-bold" onclick={incrementPage}>
-				<img src={staticIcons.eIcon} alt="Next" class="h-10 w-10" />
-			</button>
+					{/snippet}
+				</Accordion.Item>
+				<Accordion.Item
+					value="stats"
+					base="block 2xl:hidden rounded-sm bg-surface-900"
+					controlHover="hover:bg-secondary-500/25"
+				>
+					{#snippet lead()}<Info />{/snippet}
+					{#snippet control()}
+						<span class="font-bold">{m.stats()}</span>
+					{/snippet}
+					{#snippet panel()}
+						{#if pals && pals.length > 0}
+							<PalContainerStats {pals} {elementTypes} />
+						{:else}
+							<div>{m.no_pals_available(p.pals)}</div>
+						{/if}
+					{/snippet}
+				</Accordion.Item>
+			</Accordion>
 		</div>
 
-		<div class="overflow-hidden">
-			<div class="grid grid-cols-6 place-items-center gap-4 p-4">
-				{#each currentPageItems as item (item.pal.instance_id)}
-					{#if item.pal.character_id !== 'None' || (!searchQuery && selectedFilter === 'All' && sortBy === 'slot-index')}
-						<PalBadge
-							pal={item.pal}
-							bind:selected={selectedPals}
-							onSelect={handlePalSelect}
-							onMove={() => {}}
-							onDelete={() => handleDeletePal(item.pal)}
-							onAdd={() => handleAddPal(item.index)}
-							onClone={() => handleClonePal(item.pal)}
-							onCloneToUps={() => handleCloneToUps(item.pal)}
-						/>
-					{/if}
-				{/each}
+		<div>
+			<!-- Pager -->
+			<div class="mb-4 flex items-center justify-center space-x-4">
+				<button class="rounded-sm px-4 py-2 font-bold" onclick={decrementPage}>
+					<img src={staticIcons.qIcon} alt={m.previous()} class="h-10 w-10" />
+				</button>
+
+				<div class="flex space-x-2">
+					{#each visiblePages as page}
+						<TooltipButton
+							class="h-8 w-8 rounded-full {page === currentPage
+								? 'bg-primary-500 text-white'
+								: 'bg-surface-800 hover:bg-gray-300'}"
+							onclick={() => (currentPage = page)}
+							popupLabel={`${m.box()} ${page}`}
+						>
+							{Math.floor(page)}
+						</TooltipButton>
+					{/each}
+				</div>
+
+				<button class="rounded-sm px-4 py-2 font-bold" onclick={incrementPage}>
+					<img src={staticIcons.eIcon} alt={m.next()} class="h-10 w-10" />
+				</button>
+			</div>
+
+			<div class="overflow-hidden">
+				<div class="grid grid-cols-6 place-items-center gap-4 p-4">
+					{#each currentPageItems as item (item.pal.instance_id)}
+						{#if item.pal.character_id !== 'None' || (!searchQuery && selectedFilter === 'All' && sortBy === 'slot-index')}
+							<PalBadge
+								pal={item.pal}
+								bind:selected={selectedPals}
+								onSelect={handlePalSelect}
+								onMove={() => {}}
+								onDelete={() => handleDeletePal(item.pal)}
+								onAdd={() => handleAddPal(item.index)}
+								onClone={() => handleClonePal(item.pal)}
+								onCloneToUps={() => handleCloneToUps(item.pal)}
+							/>
+						{/if}
+					{/each}
+				</div>
 			</div>
 		</div>
-	</div>
 
-	{#if pals && pals.length > 0}
-		<Card class="mr-2 hidden h-[430px] 2xl:block">
-			<PalContainerStats {pals} {elementTypes} />
-		</Card>
-	{:else}
-		<Card class="mr-2 hidden h-[430px] 2xl:block">
-			<div>No pals data available</div>
-		</Card>
-	{/if}
-</div>
+		{#if pals && pals.length > 0}
+			<Card class="h-107.5 mr-2 hidden 2xl:block">
+				<PalContainerStats {pals} {elementTypes} />
+			</Card>
+		{:else}
+			<Card class="h-107.5 mr-2 hidden 2xl:block">
+				<div>{m.no_pals_available(p.pals)}</div>
+			</Card>
+		{/if}
+	</div>
+{/if}
 
 <style>
 	.pal-element-badge {

@@ -1,13 +1,15 @@
 <script lang="ts">
 	import { TextInputModal } from '$components/modals';
-	import { List, Tooltip, TooltipButton } from '$components/ui';
+	import { List, TooltipButton } from '$components/ui';
 	import { presetsData, itemsData } from '$lib/data';
-	import type { ItemContainer, ItemContainerSlot, Player, PresetProfile } from '$lib/types';
+	import type { ItemContainerSlot, Player, PresetProfile } from '$lib/types';
 	import { getAppState, getModalState } from '$states';
 	import { EntryState, ItemTypeA } from '$types';
 	import { deepCopy } from '$utils';
 	import { Edit, Play, Plus, Trash, X } from 'lucide-svelte';
-
+	import * as m from '$i18n/messages';
+	import { c } from '$utils/commonTranslations';
+	
 	let { containerRef, player = $bindable() } = $props<{
 		containerRef: HTMLDivElement | null;
 		player: Player | undefined;
@@ -124,7 +126,7 @@
 		if (!player) return;
 		// @ts-ignore
 		const result = await modal.showModal<string>(TextInputModal, {
-			title: 'Add preset',
+			title: m.add_entity({entity: c.presets}),
 			value: ''
 		});
 		if (!result) return;
@@ -146,8 +148,11 @@
 		if (selectedPresets.length === 0) return;
 		// @ts-ignore
 		const result = await modal.showConfirmModal({
-			title: 'Delete presets',
-			message: `Are you sure you want to delete ${selectedPresets.length} preset${selectedPresets.length > 1 ? 's' : ''}?`
+			title: m.delete_entity({entity: c.presets}),
+			message: m.delete_count_entities_confirm({
+				count: selectedPresets.length,
+				entity: m.preset({ count: selectedPresets.length })
+			})
 		});
 		if (!result) return;
 		const presetIds = selectedPresets.map((preset) => preset.id);
@@ -159,7 +164,7 @@
 	async function handleEditPresetName(preset: ExtendedPresetProfile) {
 		// @ts-ignore
 		const result = await modal.showModal<string>(TextInputModal, {
-			title: 'Edit preset name',
+			title: m.edit_entity({entity: c.preset}),
 			value: preset.name
 		});
 		if (!result) return;
@@ -182,20 +187,20 @@
 	<div class="btn-group bg-surface-900 items-center rounded-sm p-1">
 		<TooltipButton
 			onclick={handleAddPreset}
-			popupLabel="Create a preset from your current selection"
+			popupLabel={m.create_preset_from_current({ entity: m.inventory() })}
 		>
 			<Plus />
 		</TooltipButton>
 		{#if selectedPresets.length === 1}
-			<TooltipButton onclick={handleApplyPreset} popupLabel="Apply selected preset">
+			<TooltipButton onclick={handleApplyPreset} popupLabel={m.apply_selected_entity({ entity: c.preset })}>
 				<Play />
 			</TooltipButton>
 		{/if}
 		{#if selectedPresets.length >= 1}
-			<TooltipButton onclick={handleDeletePresets} popupLabel="Delete selected preset(s)">
+			<TooltipButton onclick={handleDeletePresets} popupLabel={m.delete_selected_entity({ entity: m.preset({ count: selectedPresets.length }) })}>
 				<Trash />
 			</TooltipButton>
-			<TooltipButton onclick={() => (selectedPresets = [])} popupLabel="Clear selected">
+			<TooltipButton onclick={() => (selectedPresets = [])} popupLabel={m.clear_selected()}>
 				<X />
 			</TooltipButton>
 		{/if}
@@ -212,7 +217,7 @@
 		>
 			{#snippet listHeader()}
 				<div class="flex justify-start">
-					<span class="font-bold">Presets</span>
+					<span class="font-bold">{c.presets}</span>
 				</div>
 			{/snippet}
 			{#snippet listItem(preset)}
@@ -226,46 +231,46 @@
 			{#snippet listItemPopup(preset)}
 				{@const commonContainerString =
 					preset.common_container && preset.common_container.length > 0
-						? `${preset.common_container.length} items`
+						? `${preset.common_container.length} ${c.items}`
 						: '💩'}
 				{@const essentialContainerString =
 					preset.essential_container && preset.essential_container.length > 0
-						? `${preset.essential_container.length} items`
+						? `${preset.essential_container.length} ${c.items}`
 						: '💩'}
 				{@const weaponLoadOutContainerString =
 					preset.weapon_load_out_container && preset.weapon_load_out_container.length > 0
-						? `${preset.weapon_load_out_container.length} items`
+						? `${preset.weapon_load_out_container.length} ${c.items}`
 						: '💩'}
 				{@const playerEquipmentArmorContainerString =
 					preset.player_equipment_armor_container &&
 					preset.player_equipment_armor_container.length > 0
-						? `${preset.player_equipment_armor_container.length} items`
+						? `${preset.player_equipment_armor_container.length} ${c.items}`
 						: '💩'}
 				{@const foodEquipContainerString =
 					preset.food_equip_container && preset.food_equip_container.length > 0
-						? `${preset.food_equip_container.length} items`
+						? `${preset.food_equip_container.length} ${c.items}`
 						: '💩'}
 				<div class="flex flex-col">
 					<span class="text-lg font-bold">{preset.name}</span>
 					<div class="flex flex-col space-y-2">
 						<div class="flex justify-between">
-							<span class="mr-2">Common container:</span>
+							<span class="mr-2">{m.container_entity({entity: m.common})}</span>
 							<span>{commonContainerString}</span>
 						</div>
 						<div class="flex justify-between">
-							<span class="mr-2">Essential container:</span>
+							<span class="mr-2">{m.container_entity({entity: m.essential()})}</span>
 							<span>{essentialContainerString}</span>
 						</div>
 						<div class="flex justify-between">
-							<span class="mr-2">Weapon load out container:</span>
+							<span class="mr-2">{m.container_entity({ entity: m.weapon({count: 1})})}</span>
 							<span>{weaponLoadOutContainerString}</span>
 						</div>
 						<div class="flex justify-between">
-							<span class="mr-2">Player equipment armor container:</span>
+							<span class="mr-2">{m.container_entity({entity: m.armor()})}</span>
 							<span>{playerEquipmentArmorContainerString}</span>
 						</div>
 						<div class="flex justify-between">
-							<span class="mr-2">Food equip container:</span>
+							<span class="mr-2">{m.container_entity({entity: m.food()})}</span>
 							<span>{foodEquipContainerString}</span>
 						</div>
 					</div>

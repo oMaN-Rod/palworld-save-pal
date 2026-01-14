@@ -1,0 +1,38 @@
+{
+  "Dark": {
+    "localized_name": "Hệ Bóng Tối",
+    "description": null
+  },
+  "Dragon": {
+    "localized_name": "Hệ Rồng",
+    "description": null
+  },
+  "Earth": {
+    "localized_name": "Hệ Đất",
+    "description": null
+  },
+  "Electricity": {
+    "localized_name": "Hệ Sấm",
+    "description": null
+  },
+  "Fire": {
+    "localized_name": "Hệ Lửa",
+    "description": null
+  },
+  "Ice": {
+    "localized_name": "Hệ Băng",
+    "description": null
+  },
+  "Leaf": {
+    "localized_name": "Hệ Cỏ",
+    "description": null
+  },
+  "Normal": {
+    "localized_name": "Hệ Thường",
+    "description": null
+  },
+  "Water": {
+    "localized_name": "Hệ Nước",
+    "description": null
+  }
+}

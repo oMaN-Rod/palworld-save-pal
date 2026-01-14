@@ -99,17 +99,12 @@ class PalObjects:
         return PalObjects.get_nested(d, "value", default=default)
 
     @staticmethod
-    def get_nested(
-        d: Dict[str, Any], *keys: str, default: Any = None, log: bool = True
-    ) -> Any:
+    def get_nested(d: Dict[str, Any], *keys: str, default: Any = None) -> Any:
         try:
-            return (
-                d[keys[0]]
-                if len(keys) == 1
-                else PalObjects.get_nested(d[keys[0]], *keys[1:], default=default)
-            )
+            for key in keys:
+                d = d[key]
+            return d
         except (KeyError, TypeError, IndexError):
-            logger.warning("Key(s) not found: %s", keys)
             return default
 
     @staticmethod
@@ -429,6 +424,48 @@ class PalObjects:
         )
 
     @staticmethod
+    def OrderedQuestArray(quests: List[str]) -> Dict[str, Any]:
+        return PalObjects.ArrayProperty(
+            ArrayType.STRUCT_PROPERTY,
+            {
+                "prop_name": "OrderedQuestArray",
+                "prop_type": "StructProperty",
+                "values": [PalObjects.OrderedQuest(quest) for quest in quests],
+                "type_name": "PalOrderedQuestSaveData",
+                "id": PalObjects.EMPTY_UUID,
+            },
+        )
+
+    @staticmethod
+    def OrderedQuest(quest: str) -> Dict[str, Any]:
+        return {
+            "QuestName": {
+                "id": None,
+                "value": quest,
+                "type": "NameProperty",
+            },
+            "BlockIndex": {"id": None, "value": 0, "type": "IntProperty"},
+            "IntegerMap": {
+                "key_type": "NameProperty",
+                "value_type": "IntProperty",
+                "key_struct_type": None,
+                "value_struct_type": None,
+                "id": None,
+                "value": [],
+                "type": "MapProperty",
+            },
+            "StringMap": {
+                "key_type": "NameProperty",
+                "value_type": "StrProperty",
+                "key_struct_type": None,
+                "value_struct_type": None,
+                "id": None,
+                "value": [],
+                "type": "MapProperty",
+            },
+        }
+
+    @staticmethod
     def PalSaveParameter(
         character_id: str,
         instance_id: UUID | str,
@@ -440,6 +477,7 @@ class PalObjects:
         active_skills: Optional[List[str]] = None,
         passive_skills: Optional[List[str]] = None,
         work_suitability_data: Optional[Dict[str, int]] = None,
+        gender: Optional[PalGender] = None,
     ) -> Dict[str, Any]:
         nickname = nickname or character_id
         active_skills = active_skills or []
@@ -481,7 +519,10 @@ class PalObjects:
                                         character_id
                                     ),
                                     "Gender": PalObjects.EnumProperty(
-                                        "EPalGenderType", PalGender.FEMALE.prefixed()
+                                        "EPalGenderType",
+                                        gender.prefixed()
+                                        if gender
+                                        else PalGender.FEMALE.prefixed(),
                                     ),
                                     "Level": PalObjects.ByteProperty(1),
                                     "Exp": PalObjects.Int64Property(0),

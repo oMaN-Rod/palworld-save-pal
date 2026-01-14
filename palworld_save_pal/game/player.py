@@ -6,6 +6,7 @@ from pydantic import BaseModel, ConfigDict, Field, PrivateAttr, computed_field
 
 from palworld_save_tools.gvas import GvasFile
 
+from palworld_save_pal.dto.player import PlayerDTO
 from palworld_save_pal.game.character_container import (
     CharacterContainer,
     CharacterContainerType,
@@ -17,6 +18,7 @@ from palworld_save_pal.dto.pal import PalDTO
 from palworld_save_pal.game.item_container import ItemContainer, ItemContainerType
 from palworld_save_pal.game.pal_objects import ArrayType, PalGender, PalObjects
 from palworld_save_pal.utils.dict import safe_remove
+from palworld_save_pal.utils.indexed_collection import IndexedCollection
 from palworld_save_pal.utils.uuid import are_equal_uuids
 from palworld_save_pal.utils.logging_config import create_logger
 
@@ -30,36 +32,11 @@ class PlayerGvasFiles(BaseModel):
     model_config = ConfigDict(arbitrary_types_allowed=True)
 
 
-class PlayerDTO(BaseModel):
-    uid: UUID
-    nickname: str
-    level: int
-    exp: int
-    hp: int = 5000
-    stomach: float = 100.0
-    sanity: float = 100.0
-    status_point_list: Dict[str, int] = Field(default_factory=dict)
-    ext_status_point_list: Dict[str, int] = Field(default_factory=dict)
-    instance_id: Optional[UUID] = Field(default=None)
-    guild_id: Optional[UUID] = Field(default=None)
-    pal_box_id: Optional[UUID] = Field(default=None)
-    otomo_container_id: Optional[UUID] = Field(default=None)
-    common_container: Optional[ItemContainer] = Field(default=None)
-    essential_container: Optional[ItemContainer] = Field(default=None)
-    weapon_load_out_container: Optional[ItemContainer] = Field(default=None)
-    player_equipment_armor_container: Optional[ItemContainer] = Field(default=None)
-    food_equip_container: Optional[ItemContainer] = Field(default=None)
-    technologies: List[str] = Field(default_factory=list)
-    technology_points: int = 0
-    boss_technology_points: int = 0
-
-
 class Player(BaseModel):
     _guild: Optional[Guild] = PrivateAttr(default=None)
     _player_gvas_files: PlayerGvasFiles
     _save_data: Dict[str, Any]
     _inventory_info: Dict[str, Any]
-    _dynamic_item_save_data: Dict[str, Any]
     _character_save: Dict[str, Any]
     _save_parameter: Dict[str, Any]
     _dps: Optional[Dict[int, Pal]] = PrivateAttr(default=None)
@@ -76,21 +53,15 @@ class Player(BaseModel):
     def __init__(
         self,
         gvas_files: PlayerGvasFiles = None,
-        item_container_save_data: Dict[str, Any] = None,
-        dynamic_item_save_data: Dict[str, Any] = None,
-        character_container_save_data: Dict[str, Any] = None,
         character_save_parameter: Dict[str, Any] = None,
         guild: Optional[Guild] = None,
+        item_container_index: Dict[UUID, Dict[str, Any]] = None,
+        dynamic_items: Optional[IndexedCollection[UUID, Dict[str, Any]]] = None,
+        character_container_index: Dict[UUID, Dict[str, Any]] = None,
         **kwargs,
     ):
         super().__init__(**kwargs)
-        if (
-            gvas_files is not None
-            and item_container_save_data is not None
-            and dynamic_item_save_data is not None
-            and character_container_save_data is not None
-            and character_save_parameter is not None
-        ):
+        if gvas_files is not None and character_save_parameter is not None:
             self._character_save = character_save_parameter
             self._save_parameter = PalObjects.get_nested(
                 self._character_save,
@@ -106,9 +77,14 @@ class Player(BaseModel):
                 self._player_gvas_files.sav.properties["SaveData"]
             )
             self._guild = guild
-            self._load_inventory(item_container_save_data, dynamic_item_save_data)
-            self._load_pal_box(character_container_save_data)
-            self._load_otomo_container(character_container_save_data)
+
+            if item_container_index is not None and dynamic_items is not None:
+                self._load_inventory(item_container_index, dynamic_items)
+
+            if character_container_index is not None:
+                self._load_pal_box(character_container_index)
+                self._load_party(character_container_index)
+
             if self._player_gvas_files.dps:
                 self._load_dps()
 
@@ -299,8 +275,7 @@ class Player(BaseModel):
     def pal_box_id(self) -> Optional[UUID]:
         return PalObjects.get_guid(
             PalObjects.get_nested(
-                self._player_gvas_files.sav.properties["SaveData"],
-                "value",
+                self._save_data,
                 "PalStorageContainerId",
                 "value",
                 "ID",
@@ -311,12 +286,47 @@ class Player(BaseModel):
     def otomo_container_id(self) -> Optional[UUID]:
         return PalObjects.get_guid(
             PalObjects.get_nested(
-                self._player_gvas_files.sav.properties["SaveData"],
-                "value",
+                self._save_data,
                 "OtomoCharacterContainerId",
                 "value",
                 "ID",
             )
+        )
+
+    @computed_field
+    def completed_missions(self) -> List[str]:
+        return PalObjects.get_array_property(
+            self._save_data.get(
+                "CompletedQuestArray",
+                PalObjects.ArrayPropertyValues(ArrayType.NAME_PROPERTY, values=[]),
+            )
+        )
+
+    @completed_missions.setter
+    def completed_missions(self, value: List[str]):
+        self._save_data["CompletedQuestArray"] = PalObjects.ArrayPropertyValues(
+            ArrayType.NAME_PROPERTY, values=value
+        )
+
+    @computed_field
+    def current_missions(self) -> List[str]:
+        quests = PalObjects.get_array_property(
+            self._save_data.get(
+                "OrderedQuestArray",
+                PalObjects.ArrayPropertyValues(ArrayType.NAME_PROPERTY, values=[]),
+            )
+        )
+        return [
+            quest_id
+            for quest in quests
+            if (quest_id := PalObjects.get_value(quest.get("QuestName")))
+            and quest_id != "None"
+        ]
+
+    @current_missions.setter
+    def current_missions(self, value: List[str]):
+        self._save_data["OrderedQuestArray"] = PalObjects.OrderedQuestArray(
+            quests=value
         )
 
     @computed_field
@@ -588,12 +598,14 @@ class Player(BaseModel):
                     | "technologies"
                     | "technology_points"
                     | "boss_technology_points"
+                    | "completed_missions"
+                    | "current_missions"
                 ):
                     setattr(self, key, value)
                 case "common_container":
                     self.common_container.update_from(value)
                 case "essential_container":
-                    self.essential_container.update_from(value)
+                    self.essential_container.update_from(value, self.common_container)
                 case "weapon_load_out_container":
                     self.weapon_load_out_container.update_from(value)
                 case "player_equipment_armor_container":
@@ -604,110 +616,36 @@ class Player(BaseModel):
                     logger.debug("Ignoring key %s", key)
                     continue
 
-    def _load_pal_box(self, character_container_save_data: Dict[str, Any]):
-        self.pal_box = CharacterContainer(
-            id=self.pal_box_id,
-            player_uid=self.uid,
-            type=CharacterContainerType.PAL_BOX,
-            character_container_save_data=character_container_save_data,
-        )
-
-    def _load_otomo_container(self, character_container_save_data: Dict[str, Any]):
-        self.party = CharacterContainer(
-            id=self.otomo_container_id,
-            player_uid=self.uid,
-            type=CharacterContainerType.PARTY,
-            character_container_save_data=character_container_save_data,
-        )
-
-    def _load_common_container(
-        self,
-        inventory_info: Dict[str, Any],
-        item_container_save_data: Dict[str, Any],
-        dynamic_item_save_data: Dict[str, Any],
-    ):
-        common_container_id = PalObjects.get_guid(
-            PalObjects.get_nested(inventory_info, "CommonContainerId", "value", "ID")
-        )
-        self.common_container = ItemContainer(
-            id=common_container_id,
-            type=ItemContainerType.COMMON,
-            item_container_save_data=item_container_save_data,
-            dynamic_item_save_data=dynamic_item_save_data,
-        )
-
-    def _load_essential_container(
-        self,
-        inventory_info: Dict[str, Any],
-        item_container_save_data: Dict[str, Any],
-        dynamic_item_save_data: Dict[str, Any],
-    ):
-        essential_container_id = PalObjects.get_guid(
-            PalObjects.get_nested(inventory_info, "EssentialContainerId", "value", "ID")
-        )
-        self.essential_container = ItemContainer(
-            id=essential_container_id,
-            type=ItemContainerType.ESSENTIAL,
-            item_container_save_data=item_container_save_data,
-            dynamic_item_save_data=dynamic_item_save_data,
-        )
-
-    def _load_weapon_load_out_container(
-        self,
-        inventory_info: Dict[str, Any],
-        item_container_save_data: Dict[str, Any],
-        dynamic_item_save_data: Dict[str, Any],
-    ):
-        weapon_load_out_container_id = PalObjects.get_guid(
-            PalObjects.get_nested(
-                inventory_info, "WeaponLoadOutContainerId", "value", "ID"
+    def _load_pal_box(self, character_container_index: Dict[UUID, Dict[str, Any]]):
+        container_data = character_container_index.get(self.pal_box_id)
+        if container_data:
+            self.pal_box = CharacterContainer(
+                id=self.pal_box_id,
+                player_uid=self.uid,
+                type=CharacterContainerType.PAL_BOX,
+                container_data=container_data,
             )
-        )
-        self.weapon_load_out_container = ItemContainer(
-            id=weapon_load_out_container_id,
-            type=ItemContainerType.WEAPON,
-            item_container_save_data=item_container_save_data,
-            dynamic_item_save_data=dynamic_item_save_data,
-        )
+        else:
+            logger.warning("Pal box container %s not found in index", self.pal_box_id)
 
-    def _load_player_equipment_armor_container(
-        self,
-        inventory_info: Dict[str, Any],
-        item_container_save_data: Dict[str, Any],
-        dynamic_item_save_data: Dict[str, Any],
-    ):
-        player_equipment_armor_container_id = PalObjects.get_guid(
-            PalObjects.get_nested(
-                inventory_info, "PlayerEquipArmorContainerId", "value", "ID"
+    def _load_party(self, character_container_index: Dict[UUID, Dict[str, Any]]):
+        container_data = character_container_index.get(self.otomo_container_id)
+        if container_data:
+            self.party = CharacterContainer(
+                id=self.otomo_container_id,
+                player_uid=self.uid,
+                type=CharacterContainerType.PARTY,
+                container_data=container_data,
             )
-        )
-        self.player_equipment_armor_container = ItemContainer(
-            id=player_equipment_armor_container_id,
-            type=ItemContainerType.ARMOR,
-            item_container_save_data=item_container_save_data,
-            dynamic_item_save_data=dynamic_item_save_data,
-        )
-
-    def _load_food_equip_container(
-        self,
-        inventory_info: Dict[str, Any],
-        item_container_save_data: Dict[str, Any],
-        dynamic_item_save_data: Dict[str, Any],
-    ):
-        food_equip_container_id = PalObjects.get_guid(
-            PalObjects.get_nested(inventory_info, "FoodEquipContainerId", "value", "ID")
-        )
-        self.food_equip_container = ItemContainer(
-            id=food_equip_container_id,
-            type=ItemContainerType.FOOD,
-            item_container_save_data=item_container_save_data,
-            dynamic_item_save_data=dynamic_item_save_data,
-        )
+        else:
+            logger.warning(
+                "Party container %s not found in index", self.otomo_container_id
+            )
 
     def _load_inventory(
         self,
-        item_container_save_data: Dict[str, Any],
-        dynamic_item_save_data: Dict[str, Any],
+        item_container_index: Dict[UUID, Dict[str, Any]],
+        dynamic_items: IndexedCollection[UUID, Dict[str, Any]],
     ):
         if "inventoryInfo" in self._save_data:
             logger.debug(
@@ -724,21 +662,70 @@ class Player(BaseModel):
             return
 
         logger.debug("Loading storage for player %s", self.nickname)
-        self._load_common_container(
-            inventory_info, item_container_save_data, dynamic_item_save_data
+
+        common_container_id = PalObjects.get_guid(
+            PalObjects.get_nested(inventory_info, "CommonContainerId", "value", "ID")
         )
-        self._load_essential_container(
-            inventory_info, item_container_save_data, dynamic_item_save_data
+        container_data = item_container_index.get(common_container_id)
+        if container_data:
+            self.common_container = ItemContainer(
+                id=common_container_id,
+                type=ItemContainerType.COMMON,
+                container_data=container_data,
+                dynamic_items=dynamic_items,
+            )
+
+        essential_container_id = PalObjects.get_guid(
+            PalObjects.get_nested(inventory_info, "EssentialContainerId", "value", "ID")
         )
-        self._load_weapon_load_out_container(
-            inventory_info, item_container_save_data, dynamic_item_save_data
+        container_data = item_container_index.get(essential_container_id)
+        if container_data:
+            self.essential_container = ItemContainer(
+                id=essential_container_id,
+                type=ItemContainerType.ESSENTIAL,
+                container_data=container_data,
+                dynamic_items=dynamic_items,
+            )
+
+        weapon_load_out_container_id = PalObjects.get_guid(
+            PalObjects.get_nested(
+                inventory_info, "WeaponLoadOutContainerId", "value", "ID"
+            )
         )
-        self._load_player_equipment_armor_container(
-            inventory_info, item_container_save_data, dynamic_item_save_data
+        container_data = item_container_index.get(weapon_load_out_container_id)
+        if container_data:
+            self.weapon_load_out_container = ItemContainer(
+                id=weapon_load_out_container_id,
+                type=ItemContainerType.WEAPON,
+                container_data=container_data,
+                dynamic_items=dynamic_items,
+            )
+
+        player_equipment_armor_container_id = PalObjects.get_guid(
+            PalObjects.get_nested(
+                inventory_info, "PlayerEquipArmorContainerId", "value", "ID"
+            )
         )
-        self._load_food_equip_container(
-            inventory_info, item_container_save_data, dynamic_item_save_data
+        container_data = item_container_index.get(player_equipment_armor_container_id)
+        if container_data:
+            self.player_equipment_armor_container = ItemContainer(
+                id=player_equipment_armor_container_id,
+                type=ItemContainerType.ARMOR,
+                container_data=container_data,
+                dynamic_items=dynamic_items,
+            )
+
+        food_equip_container_id = PalObjects.get_guid(
+            PalObjects.get_nested(inventory_info, "FoodEquipContainerId", "value", "ID")
         )
+        container_data = item_container_index.get(food_equip_container_id)
+        if container_data:
+            self.food_equip_container = ItemContainer(
+                id=food_equip_container_id,
+                type=ItemContainerType.FOOD,
+                container_data=container_data,
+                dynamic_items=dynamic_items,
+            )
 
     def _find_first_empty_dps_slot(self) -> Optional[int]:
         if not self._player_gvas_files.dps:

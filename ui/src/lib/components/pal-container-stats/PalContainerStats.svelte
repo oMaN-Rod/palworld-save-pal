@@ -6,6 +6,8 @@
 	import { User } from 'lucide-svelte';
 	import type { ElementType, Pal, PalData } from '$types';
 	import { getAppState } from '$states';
+	import * as m from '$i18n/messages';
+	import { c, p } from '$lib/utils/commonTranslations';
 
 	type PalWithData = {
 		id: string;
@@ -119,13 +121,13 @@
 <div class="flex flex-col space-y-3">
 	<!-- Overall stats -->
 	<div class="flex space-x-2">
-		<span class="grow font-bold">Total Pals</span>
+		<span class="grow font-bold">{m.total_pals(p.pals)}</span>
 		<span>{totalPals}</span>
 	</div>
 
 	<!-- Element type stats -->
 	<div>
-		<h5 class="mb-1 font-bold">Elemental Distribution</h5>
+		<h5 class="mb-1 font-bold">{m.elemental_distribution()}</h5>
 		<div class="grid grid-cols-2 gap-x-4 gap-y-1 text-sm">
 			{#each elementTypes as element}
 				{@const count = elementStats[element] || 0}
@@ -144,26 +146,26 @@
 
 	<!-- Special categories -->
 	<div>
-		<h5 class="mb-1 font-bold">Special Categories</h5>
+		<h5 class="mb-1 font-bold">{m.special_categories()}</h5>
 		<div class="grid grid-cols-2 gap-x-4 gap-y-1 text-sm">
 			<div class="flex items-center">
 				<img src={staticIcons.alphaIcon} alt="Alpha" class="pal-element-badge mr-2" />
 				<div class="grow">
-					<span class="text-xs 2xl:text-base">Alpha</span>
+					<span class="text-xs 2xl:text-base">{m.alpha()}</span>
 				</div>
 				<span>{specialStats.alpha}</span>
 			</div>
 			<div class="flex items-center">
 				<img src={staticIcons.luckyIcon} alt="Lucky" class="pal-element-badge mr-2" />
 				<div class="grow">
-					<span class="text-xs 2xl:text-base">Lucky</span>
+					<span class="text-xs 2xl:text-base">{m.lucky()}</span>
 				</div>
 				<span>{specialStats.lucky}</span>
 			</div>
 			<div class="flex items-center">
 				<User class="pal-element-badge mr-2" />
 				<div class="grow">
-					<span class="text-xs 2xl:text-base">Human</span>
+					<span class="text-xs 2xl:text-base">{c.human}</span>
 				</div>
 				<span>{specialStats.human}</span>
 			</div>
@@ -175,21 +177,21 @@
 					style="filter: {calculateFilters('#FF0000')}"
 				/>
 				<div class="grow">
-					<span class="text-xs 2xl:text-base">Predator</span>
+					<span class="text-xs 2xl:text-base">{m.predator()}</span>
 				</div>
 				<span>{specialStats.predator}</span>
 			</div>
 			<div class="flex items-center">
 				<img src={staticIcons.oilrigIcon} alt="Oil Rig" class="pal-element-badge mr-2" />
 				<div class="grow">
-					<span class="text-xs 2xl:text-base">Oil Rig</span>
+					<span class="text-xs 2xl:text-base">{m.oil_rig()}</span>
 				</div>
 				<span>{specialStats.oilrig}</span>
 			</div>
 			<div class="flex items-center">
 				<img src={staticIcons.altarIcon} alt="Summoned" class="pal-element-badge mr-2" />
 				<div class="grow">
-					<span class="text-xs 2xl:text-base">Summoned</span>
+					<span class="text-xs 2xl:text-base">{m.summoned()}</span>
 				</div>
 				<span>{specialStats.summon}</span>
 			</div>
@@ -198,29 +200,29 @@
 
 	<!-- Level stats -->
 	<div>
-		<h5 class="mb-1 font-bold">Level Distribution</h5>
+		<h5 class="mb-1 font-bold">{m.level_distribution()}</h5>
 		<div class="grid grid-cols-2 gap-x-4 gap-y-1 text-sm">
 			<div class="flex space-x-2">
 				<div class="grow">
-					<span class="text-xs 2xl:text-base">Avg Level</span>
+					<span class="text-xs 2xl:text-base">{m.avg_level()}</span>
 				</div>
 				<span>{levelStats.average.toFixed(1)}</span>
 			</div>
 			<div class="flex space-x-2">
 				<div class="grow">
-					<span class="text-xs 2xl:text-base">Max Level</span>
+					<span class="text-xs 2xl:text-base">{m.max_level()}</span>
 				</div>
 				<span>{levelStats.max}</span>
 			</div>
 			<div class="flex space-x-2">
 				<div class="grow">
-					<span class="text-xs 2xl:text-base">Min Level</span>
+					<span class="text-xs 2xl:text-base">{m.min_level()}</span>
 				</div>
 				<span>{levelStats.min}</span>
 			</div>
 			<div class="flex space-x-2">
 				<div class="grow">
-					<span class="text-xs 2xl:text-base">Max Level Pals</span>
+					<span class="text-xs 2xl:text-base">{m.max_level_pals(p.pals)}</span>
 				</div>
 				<span>{levelStats.maxCount}</span>
 			</div>

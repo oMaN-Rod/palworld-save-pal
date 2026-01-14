@@ -1,0 +1,978 @@
+{
+  "EPalWazaID::AcidRain": {
+    "localized_name": "แอซิดเรน",
+    "description": "สร้างเมฆฝนกรด ให้ฝนกรดตกใส่ศัตรู"
+  },
+  "EPalWazaID::AirBlade": {
+    "localized_name": "แอร์เบลด",
+    "description": "ซัดใบมีดอากาศคมกริบออกไปเป็นรูปพัด"
+  },
+  "EPalWazaID::AirCanon": {
+    "localized_name": "แอร์แคนนอน",
+    "description": "ยิงกระสุนอากาศความเร็วสูง"
+  },
+  "EPalWazaID::Apocalypse": {
+    "localized_name": "อโพคาลิปส์",
+    "description": "สร้างพายุหมุนแห่งความมืดหลายลูกรอบตัวศัตรู"
+  },
+  "EPalWazaID::AquaJet": {
+    "localized_name": "วอเตอร์เจ็ต",
+    "description": "ยิงกระสุนน้ำความเร็วสูง ใส่ศัตรู"
+  },
+  "EPalWazaID::BeamSlicer": {
+    "localized_name": "บีมสไลเซอร์",
+    "description": "ใช้ลำแสงพลังมังกรกวาดพื้นที่ด้านหน้า เมื่อเวลาผ่านไปพื้นที่ที่โดนลำแสงกวาดจะระเบิด"
+  },
+  "EPalWazaID::BlastCanon": {
+    "localized_name": "บลาสต์แคนนอน",
+    "description": "ยิงกระสุนพลังงานมังกรใส่จุดที่มีศัตรู เมื่อกระสุนพลังงานยิงโดนศัตรูจะกระจายตัว และระเบิดพื้นที่ด้านหน้าเป็นวงกว้าง"
+  },
+  "EPalWazaID::BlizzardLance": {
+    "localized_name": "ไอซ์สปาร์ก",
+    "description": "เรียกใบมีดน้ำแข็งคมกริบ จากปลายเท้าศัตรู"
+  },
+  "EPalWazaID::BubbleShot": {
+    "localized_name": "บับเบิลช็อต",
+    "description": "ยิงฟองจำนวนมาก ไล่ตามศัตรูอย่างช้า ๆ"
+  },
+  "EPalWazaID::BubbleShower": {
+    "localized_name": "พอยซันชาวเวอร์",
+    "description": "สะสมพลังไว้ในร่าง โปรยบอลพิษออกไปทุกทิศทาง"
+  },
+  "EPalWazaID::ChargeCanon": {
+    "localized_name": "ชาร์จแคนนอน",
+    "description": "ยิงกระสุนพลังงานมังกรใส่ศัตรู เมื่อกระสุนโดนศัตรู จะระเบิดเป็นวงกว้าง"
+  },
+  "EPalWazaID::Commet": {
+    "localized_name": "โคเม็ต",
+    "description": "เรียกอุกกาบาตให้ตกลงมาจากเหนือศีรษะศัตรู สร้างคลื่นกระแทกเป็นวงกว้าง"
+  },
+  "EPalWazaID::CommetRain": {
+    "localized_name": "มีทีออร์เรน",
+    "description": "เรียกอุกกาบาตจำนวนมากให้ตกลงมา สร้างคลื่นกระแทกเป็นวงกว้าง"
+  },
+  "EPalWazaID::CrossThunder": {
+    "localized_name": "ครอสธันเดอร์",
+    "description": "สร้างการโจมตีสายฟ้าจาก 2 ทาง ขนาบข้างศัตรู"
+  },
+  "EPalWazaID::CrossWind": {
+    "localized_name": "ครอสวินด์",
+    "description": "สร้างใบมีดลมด้านหน้าศัตรู และไขว้ใบมีดลมเข้าหากันเพื่อโจมตี"
+  },
+  "EPalWazaID::DarkArrow": {
+    "localized_name": "ดาร์กแอโรว์",
+    "description": "ยิงลูกศรความมืดจำนวนมาก ไล่ตามศัตรูอย่างรวดเร็วและต่อเนื่อง"
+  },
+  "EPalWazaID::DarkBall": {
+    "localized_name": "ดาร์กบอล",
+    "description": "ยิงบอลความมืด ไล่ตามศัตรูอย่างช้า ๆ"
+  },
+  "EPalWazaID::DarkCanon": {
+    "localized_name": "ดาร์กแคนนอน",
+    "description": "ยิงกระสุนพลังงานความมืด ใส่ศัตรูด้วยความเร็วสูง"
+  },
+  "EPalWazaID::DarkLaser": {
+    "localized_name": "ดาร์กเลเซอร์",
+    "description": "ชาร์จพลังงานความมืด แล้วยิงลำแสงทรงพลังออกไปหาศัตรู"
+  },
+  "EPalWazaID::DarkLegion": {
+    "localized_name": "ดาร์กวิสป์",
+    "description": "ยิงบอลความมืดจำนวนมากไล่ตามศัตรู"
+  },
+  "EPalWazaID::DarkPulse": {
+    "localized_name": "สเปรดดาร์ก",
+    "description": "ยิงบอลความมืด กระจายใส่ศัตรูเป็นรูปพัด"
+  },
+  "EPalWazaID::DarkWave": {
+    "localized_name": "ชาโดว์เบิสต์",
+    "description": "ปล่อยพลังความมืดอย่างรวดเร็ว สร้างแรงกระแทกเป็นวงกว้าง"
+  },
+  "EPalWazaID::DiamondFall": {
+    "localized_name": "ไดมอนด์ฟอลล์",
+    "description": "สร้างก้อนน้ำแข็งขึ้นเหนือศีรษะ ให้โปรยปรายลงมาต่อเนื่อง"
+  },
+  "EPalWazaID::DiversionLaser": {
+    "localized_name": "ปืนฉีดน้ำแรงดันสูง",
+    "description": "ยิงกระแสน้ำแรงดันสูงไปด้านหน้า เมื่อเวลาผ่านไปเล็กน้อย กระแสน้ำจะแยกออกไปทางซ้ายและขวา"
+  },
+  "EPalWazaID::DoubleIcicleThrow": {
+    "localized_name": "ดับเบิลบลิซซาร์ดสไปก์",
+    "description": "สร้างก้อนน้ำแข็งขนาดยักษ์ 2 ก้อน ยิงต่อเนื่องใส่ศัตรู เมื่อตกกระทบจะสร้างแรงกระแทกไปยังรอบตัวด้วย"
+  },
+  "EPalWazaID::DragonBreath": {
+    "localized_name": "ดรากอนเบรธ",
+    "description": "พ่นลมหายใจพลังมังกรไปด้านหน้า สร้างความเสียหายต่อเนื่อง"
+  },
+  "EPalWazaID::DragonCanon": {
+    "localized_name": "ดรากอนแคนนอน",
+    "description": "ยิงกระสุนพลังงานมังกร ใส่ศัตรู"
+  },
+  "EPalWazaID::DragonMeteor": {
+    "localized_name": "ดรากอนมีทีออร์",
+    "description": "เรียกอุกกาบาตขนาดเล็กจำนวนมาก ยิงใส่ศัตรู"
+  },
+  "EPalWazaID::DragonWave": {
+    "localized_name": "ดรากอนเบิสต์",
+    "description": "ปล่อยพลังมังกรอย่างรวดเร็ว สร้างแรงกระแทกเป็นวงกว้าง"
+  },
+  "EPalWazaID::ElecWave": {
+    "localized_name": "ช็อกเวฟ",
+    "description": "ปล่อยสายฟ้าอย่างรวดเร็ว สร้างแรงกระแทกเป็นวงกว้าง"
+  },
+  "EPalWazaID::Eruption": {
+    "localized_name": "โวลคานิกเรน",
+    "description": "ยิงสะเก็ดลาวาจำนวนมากขึ้นฟ้า เมื่อเวลาผ่านไปสะเก็ดลาวา จะตกลงมารอบตัวผู้ยิง"
+  },
+  "EPalWazaID::FireBall": {
+    "localized_name": "ไฟร์บอล",
+    "description": "สร้างบอลไฟขนาดยักษ์ขึ้นเหนือศีรษะ ยิงใส่ศัตรู เมื่อยิงโดนศัตรูจะระเบิด แรงระเบิดกระจายเป็นวงกว้าง"
+  },
+  "EPalWazaID::FireBlast": {
+    "localized_name": "ไฟร์ช็อต",
+    "description": "ยิงกระสุนเพลิง ให้ลอยไปหาศัตรูที่เล็งไว้เป็นเส้นตรง"
+  },
+  "EPalWazaID::FireSeed": {
+    "localized_name": "สปิริตไฟร์",
+    "description": "ยิงบอลไฟใส่ศัตรู เมื่อบอลไฟเคลื่อนที่ไปเล็กน้อยจะแตกออก กลายเป็นบอลไฟขนาดเล็กกระจายออกเบื้องหน้า"
+  },
+  "EPalWazaID::FlameFunnel": {
+    "localized_name": "เฟลมฟันเนล",
+    "description": "สร้างบอลพลังไฟจำนวนมาก แล้วยิงบอลไฟเหล่านั้นใส่ศัตรู"
+  },
+  "EPalWazaID::FlameWall": {
+    "localized_name": "เฟลมวอลล์",
+    "description": "สร้างกำแพงไฟลุกโชนตรงจุดที่มีศัตรู กำแพงไฟจะคงอยู่ได้ครู่หนึ่ง สร้างความเสียหายให้ศัตรูที่สัมผัส"
+  },
+  "EPalWazaID::Flamethrower": {
+    "localized_name": "ไฟร์เบรธ",
+    "description": "ปล่อยเปลวไฟใส่ศัตรู สร้างความเสียหายต่อเนื่อง"
+  },
+  "EPalWazaID::FlareArrow": {
+    "localized_name": "แฟลร์แอโรว์",
+    "description": "ยิงลูกศรไฟความเร็วสูง ต่อเนื่อง 3 ดอกไล่ตามศัตรู"
+  },
+  "EPalWazaID::FlareTornado": {
+    "localized_name": "เฟลมสตอร์ม",
+    "description": "สร้างพายุหมุนไฟขึ้นทางซ้ายและขวา พัดเข้าใส่ศัตรู"
+  },
+  "EPalWazaID::FlareTwister": {
+    "localized_name": "-",
+    "description": "-"
+  },
+  "EPalWazaID::FrostBreath": {
+    "localized_name": "โคลด์เบรธ",
+    "description": "พ่นไอเย็นใส่ศัตรู สร้างความเสียหายต่อเนื่อง"
+  },
+  "EPalWazaID::GhostFlame": {
+    "localized_name": "สปิริตเฟลม",
+    "description": "รวมความแค้นฝังลึกเป็นก้อนกลม 3 ก้อน ยิงออกไปไล่ตามศัตรู"
+  },
+  "EPalWazaID::GrassTornado": {
+    "localized_name": "กราสทอร์นาโด",
+    "description": "สร้างพายุหมุนขึ้นทางซ้ายและขวา พัดเข้าใส่ศัตรู"
+  },
+  "EPalWazaID::GravityShot": {
+    "localized_name": "ดาร์กช็อต",
+    "description": "ยิงกระสุนพลังงานความมืด ให้กระสุนเคลื่อนที่เร็วขึ้นทีละน้อย"
+  },
+  "EPalWazaID::HolyBlast": {
+    "localized_name": "โฮลีเบิสต์",
+    "description": "สร้างระเบิดแสงวงกว้าง ณ บริเวณที่ศัตรูอยู่"
+  },
+  "EPalWazaID::Human_Punch": {
+    "localized_name": "ต่อย",
+    "description": "เชื่อในกำปั้นของตนแล้วต่อยออกไป"
+  },
+  "EPalWazaID::HydroPump": {
+    "localized_name": "ไฮโดรสตรีม",
+    "description": "พ่นน้ำแรงดันสูง โจมตีกวาดด้านหน้าเป็นวงกว้าง"
+  },
+  "EPalWazaID::HydroSlicer": {
+    "localized_name": "ไฮโดรสไลเซอร์",
+    "description": "ใช้ลกระแสน้ำแรงดันสูงกวาดพื้นที่ด้านหน้า เมื่อเวลาผ่านไป จะมีน้ำผุดขึ้นมาบริเวณที่โดนกระแสน้ำกวาด"
+  },
+  "EPalWazaID::HyperBeam": {
+    "localized_name": "พาลบลาสต์",
+    "description": "ชาร์จพลังงานทำลายล้าง แล้วยิงลำแสงทรงอานุภาพออกไปด้านหน้าเป็นวงกว้าง"
+  },
+  "EPalWazaID::IceAge": {
+    "localized_name": "ฟรอสต์เอาต์",
+    "description": "เรียกเสาน้ำแข็งขึ้นมาเป็นวงกว้างจากปลายเท้าศัตรู"
+  },
+  "EPalWazaID::IceBlade": {
+    "localized_name": "ไอซ์คัตเตอร์",
+    "description": "สร้างใบมีดน้ำแข็งทรงจันทร์เสี้ยว ซัดออกไปด้านหน้า"
+  },
+  "EPalWazaID::IceMissile": {
+    "localized_name": "ไอซ์มิสไซล์",
+    "description": "สร้างก้อนน้ำแข็งปลายแหลม ยิงใส่ศัตรูจากบนฟ้า"
+  },
+  "EPalWazaID::IceWall": {
+    "localized_name": "ฟรีซวอลล์",
+    "description": "สร้างกำแพงน้ำแข็งจากพื้นดิน กำแพงน้ำแข็งจะคงอยู่ได้ครู่หนึ่ง และจะสลายไปหลังได้รับความเสียหายระดับหนึ่ง"
+  },
+  "EPalWazaID::IcicleLine": {
+    "localized_name": "ไอซิเคิลไลน์",
+    "description": "สร้างเสาน้ำแข็งพุ่งไปเป็นเส้นตรงสามทิศทาง"
+  },
+  "EPalWazaID::IciclePierce": {
+    "localized_name": "ไอซิเคิลบุลเล็ต",
+    "description": "สร้างก้อนน้ำแข็งปลายแหลมจำนวนมาก ยิงใส่ศัตรูจากบนฟ้า"
+  },
+  "EPalWazaID::IcicleThrow": {
+    "localized_name": "บลิซซาร์ดสไปก์",
+    "description": "สร้างก้อนน้ำแข็งขนาดยักษ์ ยิงใส่ศัตรูด้วยความเร็วสูง เมื่อตกกระทบจะสร้างแรงกระแทกไปยังรอบตัวด้วย"
+  },
+  "EPalWazaID::Inferno": {
+    "localized_name": "อินเฟอร์โน",
+    "description": "กระตุ้นพื้นดินรอบตัวศัตรู เมื่อเวลาผ่านไประยะหนึ่งจะเกิดระเบิด"
+  },
+  "EPalWazaID::LightningStrike": {
+    "localized_name": "ไลต์นิงสไตรก์",
+    "description": "ใช้ตัวเองต่างสายล่อฟ้า เรียกฟ้าผ่า ระเบิดพลังสายฟ้าขึ้น ณ บริเวณนั้น"
+  },
+  "EPalWazaID::LineGeyser": {
+    "localized_name": "ไลน์สแปลช",
+    "description": "สร้างเสาน้ำพุ่งไปเป็นเส้นตรง"
+  },
+  "EPalWazaID::LineThunder": {
+    "localized_name": "ไลน์ธันเดอร์",
+    "description": "ปล่อยสายฟ้าพุ่งไปเป็นเส้นตรง"
+  },
+  "EPalWazaID::LockonLaser": {
+    "localized_name": "ล็อกออนเลเซอร์",
+    "description": "เล็งเป้าศัตรู แล้วยิงเลเซอร์สายฟ้าความเร็วสูงใส่"
+  },
+  "EPalWazaID::MudShot": {
+    "localized_name": "มัดชู้ต",
+    "description": "ยิงโคลนหนืด ใส่ศัตรู"
+  },
+  "EPalWazaID::PoisonFog": {
+    "localized_name": "พอยซันฟ็อก",
+    "description": "สร้างหมอกพิษขึ้นด้านหน้า ทำให้ศัตรูติดพิษ"
+  },
+  "EPalWazaID::PoisonShot": {
+    "localized_name": "พอยซันชู้ต",
+    "description": "ยิงโคลนพิษ ใส่ศัตรู"
+  },
+  "EPalWazaID::PowerBall": {
+    "localized_name": "พาวเวอร์บอม",
+    "description": "ชาร์จพลังงานปริมาณมาก ทำเป็นบอลยักษ์ แล้วยิงออกไป"
+  },
+  "EPalWazaID::PowerShot": {
+    "localized_name": "พาวเวอร์ช็อต",
+    "description": "ชาร์จพลังงาน ทำเป็นกระสุน แล้วยิงออกไป"
+  },
+  "EPalWazaID::PredatorBeam": {
+    "localized_name": "พรีเดเตอร์บีม",
+    "description": null
+  },
+  "EPalWazaID::PredatorLockon": {
+    "localized_name": "พรีเดเตอร์ล็อกออน",
+    "description": null
+  },
+  "EPalWazaID::PredatorWave": {
+    "localized_name": "พรีเดเตอร์เวฟ",
+    "description": null
+  },
+  "EPalWazaID::Psychokinesis": {
+    "localized_name": "ไซโคกราวิตี้",
+    "description": "ใช้พลังจิตชิงอิสระของศัตรูรอบตัว แล้วฟาดศัตรูลงกับพื้น"
+  },
+  "EPalWazaID::RadiantBarrage": {
+    "localized_name": "เรเดียนต์บาราจ",
+    "description": "ปล่อยลูกบอลมืด ค่อย ๆ ไล่ล่าศัตรู พอลูกไฟเข้าใกล้เป้าหมายเเล้วจะเเยกเป็นกระสุนเเสงที่นับไม่ถ้วน เเละโจมตี"
+  },
+  "EPalWazaID::RaidCutter": {
+    "localized_name": "เรดคัตเตอร์",
+    "description": "ยิงใบมีดลมจำนวนมาก เข้าใส่ศัตรู"
+  },
+  "EPalWazaID::Railbolt": {
+    "localized_name": "ธันเดอร์เรล",
+    "description": "ชาร์จพลังงานสายฟ้าจนถึงขีดจำกัด แล้วยิงลำแสงทรงพลังจำนวนมากออกไปหาศัตรูพร้อมกัน"
+  },
+  "EPalWazaID::RangeThunder": {
+    "localized_name": "ออลเรนจ์ธันเดอร์",
+    "description": "ปล่อยสายฟ้าพุ่งไปเป็นเส้นตรงทุกทิศทาง"
+  },
+  "EPalWazaID::ReflectiveShuriken": {
+    "localized_name": "รีเฟลกต์ลีฟ",
+    "description": "ซัดใบมีดลม ที่เมื่อโดนศัตรูหรือต้นไม้จะกระดอนกลับ เกิดเป็นการโจมตีต่อเนื่อง กระดอนกลับได้สูงสุด 4 ครั้ง"
+  },
+  "EPalWazaID::RipTide": {
+    "localized_name": "อควาเซิร์จ",
+    "description": "สร้างคลื่นจากรอบข้างซัดเข้าใส่ศัตรู คลื่นลูกสุดท้ายจะระเบิดจากจุดศูนย์กลาง เกิดเสาน้ำพุ่งขึ้นฟ้า"
+  },
+  "EPalWazaID::RockBeat": {
+    "localized_name": "สโตนบีต",
+    "description": "สร้างแผ่นดินไหว ทำให้ก้อนหินขนาดใหญ่ลอยขึ้น"
+  },
+  "EPalWazaID::RockLance": {
+    "localized_name": "ร็อกแลนซ์",
+    "description": "เรียกหอกหินคมกริบ จากปลายเท้าศัตรู"
+  },
+  "EPalWazaID::RootAttack": {
+    "localized_name": "สไปน์ไวน์",
+    "description": "ใช้รากแหลมคมไล่ล่าศัตรู แล้วแทงทะลุร่างศัตรูจากด้านล่าง"
+  },
+  "EPalWazaID::RootLance": {
+    "localized_name": "เซอร์เคิลไวน์",
+    "description": "แทงรากแหลมคม ใส่บริเวณที่ศัตรูอยู่"
+  },
+  "EPalWazaID::SandTornado": {
+    "localized_name": "แซนด์ทอร์นาโด",
+    "description": "สร้างพายุทรายหมุนขึ้นทางซ้ายและขวา พัดเข้าใส่ศัตรู"
+  },
+  "EPalWazaID::SandTwister": {
+    "localized_name": "แซนด์ทวิสเตอร์",
+    "description": "สร้างพายุทรายหมุนจำนวนมาก ให้พัดวนเป็นวงกลมต่อเนื่อง"
+  },
+  "EPalWazaID::SeaGush": {
+    "localized_name": "เสาน้ำพุ",
+    "description": "สร้างเสาน้ำจำนวนมากให้ผุดขึ้นจากพื้น ใส่บริเวณที่ศัตรูอยู่"
+  },
+  "EPalWazaID::SeedMachinegun": {
+    "localized_name": "ซีดแมชชีนกัน",
+    "description": "ปล่อยเมล็ดแข็งจำนวนมาก ไปโจมตีศัตรูด้านหน้า"
+  },
+  "EPalWazaID::SeedMine": {
+    "localized_name": "ซีดมายน์",
+    "description": "ยิงเมล็ดพืชอันตราย เมื่อยิงโดนศัตรู จะกระดอนและระเบิด"
+  },
+  "EPalWazaID::SelfDestruct": {
+    "localized_name": "ระเบิดตัวเอง",
+    "description": "เสี่ยงชีวิตระเบิดตัวเอง ตัวเองจะไม่สามารถสู้ต่อได้"
+  },
+  "EPalWazaID::SelfDestruct_Bee": {
+    "localized_name": "บี ไควเอ็ต",
+    "description": "เสี่ยงชีวิตระเบิดตัวเอง วิชาลือชื่อที่ทำให้ตนเองตายในหน้าที่"
+  },
+  "EPalWazaID::SelfExplosion": {
+    "localized_name": "ระเบิดตัวเองเมกาตัน",
+    "description": "เสี่ยงชีวิตระเบิดตัวเองครั้งใหญ่ จบชีวิตตัวเอง กลายเป็นดาวส่องสว่างยามค่ำคืน"
+  },
+  "EPalWazaID::ShadowBall": {
+    "localized_name": "ไนต์แมร์บอล",
+    "description": "สร้างบอลความมืดขนาดยักษ์ขึ้นเหนือศีรษะ ยิงใส่ศัตรูด้วยความเร็วสูง"
+  },
+  "EPalWazaID::ShokeiLaser": {
+    "localized_name": "เอ็กซ์คิวชันเลเซอร์",
+    "description": "เล็งเป้าศัตรู แล้วยิงเลเซอร์สายฟ้าความเร็วสูงหลายสายใส่"
+  },
+  "EPalWazaID::SolarBeam": {
+    "localized_name": "โซลาร์บลาสต์",
+    "description": "ชาร์จพลังงานแสงอาทิตย์ แล้วยิงลำแสงทรงพลังออกไปหาศัตรู"
+  },
+  "EPalWazaID::SpecialCutter": {
+    "localized_name": "มัลติคัตเตอร์",
+    "description": "ยิงใบมีดลมความเร็วสูง ให้ลอยไปหาศัตรูที่เล็งไว้เป็นเส้นตรง 3 ครั้ง"
+  },
+  "EPalWazaID::SpreadPulse": {
+    "localized_name": "สปาร์กช็อต",
+    "description": "ยิงบอลสายฟ้า กระจายใส่ศัตรูเป็นรูปพัด"
+  },
+  "EPalWazaID::StarMine": {
+    "localized_name": "สตาร์มายน์",
+    "description": "สร้างดวงดาวไว้รอบตัวศัตรู เมื่อศัตรูสัมผัสจะระเบิด และเมื่อเวลาผ่านไปดวงดาวก็จะระเบิดเองเช่นเดียวกัน"
+  },
+  "EPalWazaID::StoneShotgun": {
+    "localized_name": "สโตนบลาสต์",
+    "description": "ยิงก้อนกรวดจำนวนมาก ออกไปด้านหน้า"
+  },
+  "EPalWazaID::ThreeCommet": {
+    "localized_name": "โคเม็ตฟอลล์",
+    "description": "เรียกอุกกาบาตให้ตกลงมาต่อเนื่อง สร้างคลื่นกระแทกเป็นวงกว้าง"
+  },
+  "EPalWazaID::ThreeThunder": {
+    "localized_name": "ไตรธันเดอร์",
+    "description": "สร้างฟ้าผ่า 3 ครั้งเหนือศีรษะศัตรู"
+  },
+  "EPalWazaID::ThrowRock": {
+    "localized_name": "สโตนแคนนอน",
+    "description": "สร้างหินผาขึ้นมาจากพื้นดินตรงหน้า ยิงใส่ศัตรู"
+  },
+  "EPalWazaID::ThunderBall": {
+    "localized_name": "ธันเดอร์บอล",
+    "description": "ยิงบอลสายฟ้า ไล่ตามศัตรูอย่างช้า ๆ"
+  },
+  "EPalWazaID::ThunderFunnel": {
+    "localized_name": "พลาสมาฟันเนล",
+    "description": "สร้างบอลพลังงานสายฟ้า 2 ลูก แล้วใช้บอลเหล่านั้นยิงกระสุนสายฟ้าใส่ศัตรู"
+  },
+  "EPalWazaID::ThunderRain": {
+    "localized_name": "ธันเดอร์เรน",
+    "description": "เรียกสายฟ้า ให้ผ่าลงมาจำนวนมากหลังผ่านไประยะหนึ่ง"
+  },
+  "EPalWazaID::ThunderSpear": {
+    "localized_name": "ธันเดอร์สเปียร์",
+    "description": "ยิงหอกสายฟ้า พุ่งเข้าใส่ศัตรูด้วยความเร็วสูง"
+  },
+  "EPalWazaID::ThunderStorm": {
+    "localized_name": "ธันเดอร์สตอร์ม",
+    "description": "สร้างพายุหมุนสายฟ้าขนาดใหญ่ พัดพายุหมุนให้เคลื่อนที่เข้าศัตรูอย่างช้า ๆ"
+  },
+  "EPalWazaID::Thunderbolt": {
+    "localized_name": "ไลต์นิงโบลต์",
+    "description": "ชาร์จพลังงานสายฟ้า แล้วยิงลำแสงทรงพลังออกไปหาศัตรู"
+  },
+  "EPalWazaID::Tremor": {
+    "localized_name": "ร็อกเบิสต์",
+    "description": "สร้างแผ่นดินไหว แล้วซัดก้อนหินขนาดใหญ่ออกไปรอบบริเวณ"
+  },
+  "EPalWazaID::TriSpark": {
+    "localized_name": "ไตรสปาร์ก",
+    "description": "ยิงบอลสายฟ้าความเร็วสูงที่พุ่งเป็นเส้นตรง และบอลสายฟ้าความเร็วต่ำติดตามศัตรูออกไปพร้อมกัน"
+  },
+  "EPalWazaID::Unique_Alpaca_Tackle": {
+    "localized_name": "นุ่มฟูพุ่งชน",
+    "description": "สกิลเฉพาะตัวของ Melpaca พุ่งกระแทกดโดยมีออร่าน่ารักปกคลุมร่าง"
+  },
+  "EPalWazaID::Unique_AmaterasuWolf_Dark_DarkCharge": {
+    "localized_name": "เงาอัคคีอัสนีสิงขร",
+    "description": "สกิลเฉพาะตัวของ Kitsun Noct ใช้ร่างที่มีไฟสีม่วงปกคลุมพุ่งชนศัตรูเต็มแรง"
+  },
+  "EPalWazaID::Unique_AmaterasuWolf_FireCharge": {
+    "localized_name": "วายุพนาภูผาอัคคี",
+    "description": "สกิลเฉพาะตัวของ Kitsun ใช้ร่างที่มีไฟสีน้ำเงินปกคลุมพุ่งชนศัตรูเต็มแรง"
+  },
+  "EPalWazaID::Unique_Anubis_GroundPunch": {
+    "localized_name": "กราวด์สแมชเชอร์",
+    "description": "สกิลเฉพาะตัวของ Anubis กระโดดขึ้นฟ้า แล้วชกพื้น แรงกระแทกจากพื้นจะกระจายออก สร้างความเสียหายวงกว้าง"
+  },
+  "EPalWazaID::Unique_Anubis_LowRoundKick": {
+    "localized_name": "สปินเลกสแลช",
+    "description": "สกิลเฉพาะตัวของ Anubis ใช้ขาอันแข็งแกร่งหมุนตัวเตะ โจมตีปัดเป็นวงกว้าง"
+  },
+  "EPalWazaID::Unique_Anubis_Tackle": {
+    "localized_name": "ฟอร์ซไดรฟ์",
+    "description": "สกิลเฉพาะตัวของ Anubis เคลื่อนที่ด้วยความเร็วสูงไล่ตามศัตรู แล้วปล่อยพลังงาน พลางออกหมัดทรงพลัง"
+  },
+  "EPalWazaID::Unique_Baphomet_SwallowKite": {
+    "localized_name": "เฮลไฟร์คลอว์",
+    "description": "สกิลเฉพาะตัวของ Incineram เข้าใกล้ศัตรู ใช้เล็บมือซ้ายตวัดขึ้นแล้วกระโดดเตะ ตามด้วยใช้เล็บมือขวาตวัดลงอย่างรวดเร็ว"
+  },
+  "EPalWazaID::Unique_BirdDragon_FireBreath": {
+    "localized_name": "ฟลายอิ้งเบรธ",
+    "description": "สกิลเฉพาะตัวของ Vanwyrm พุ่งกระแทกพร้อมพ่นไฟ"
+  },
+  "EPalWazaID::Unique_BirdDragon_Ice_IceBreath": {
+    "localized_name": "ฟลายอิ้งบลิซซาร์ด",
+    "description": "สกิลเฉพาะตัวของ Vanwyrm Cryst พุ่งกระแทกพร้อมพ่นไอเย็น"
+  },
+  "EPalWazaID::Unique_BlackCentaur_TwoSpearRushes": {
+    "localized_name": "หอกคู่ปราดแทง",
+    "description": "สกิลเฉพาะตัวของ Necromus พุ่งเข้าหาศัตรู สองมือถือหอกที่ล้อมด้วยลมกระโชก แล้วแทงสลับซ้ายขวา"
+  },
+  "EPalWazaID::Unique_BlackGriffon_TackleLaser": {
+    "localized_name": "ดิสแซสเตอร์ดีไวน์",
+    "description": "สกิลเฉพาะตัวของShadowbeak พุ่งชนพลางสร้างลูกบอลแสง บอลแสงจะตรวจจับศัตรูอัตโนมัติ และยิงลำแสงจำนวนมหาศาล"
+  },
+  "EPalWazaID::Unique_BlackGriffon_TackleLaser2": {
+    "localized_name": "ดิสแซสเตอร์ดีไวน์ II",
+    "description": "สกิลเฉพาะตัวของ Shadowbeak พุ่งชนพลางปล่อยลำแสงสีน้ำเงินจำนวนมากจากวงแหวนแสงบนตัว ลำแสงจะตรวจจับและติดตามศัตรูโดยอัตโนมัติ"
+  },
+  "EPalWazaID::Unique_BlackMetalDragon_FirePunch": {
+    "localized_name": "พันช์เบรธ",
+    "description": "สกิลเฉพาะตัวของAstegon หลังต่อยหมัดตรง 2 ครั้ง จะพ่นลมหายใจธาตุมังกรลงไปด้านล่าง"
+  },
+  "EPalWazaID::Unique_BluePlatypus_Toboggan": {
+    "localized_name": "เซิร์ฟฟิงแท็กเคิล",
+    "description": null
+  },
+  "EPalWazaID::Unique_BluePlatypus_Toboggan_Fire": {
+    "localized_name": "ไฟร์แท็กเคิล",
+    "description": null
+  },
+  "EPalWazaID::Unique_BlueThunderHorse_FlashDash": {
+    "localized_name": "โวลต์บลิงก์",
+    "description": "สกิลเฉพาะตัวของ Azurmane เคลื่อนที่ไวปานสายฟ้า ดึงดูดทุกสิ่งบนเส้นทางเข้าด้วยกัน"
+  },
+  "EPalWazaID::Unique_Boar_Tackle": {
+    "localized_name": "พุ่งชนเต็มแรง",
+    "description": "สกิลเฉพาะตัวของ Rushoar หมายหัวศัตรูแล้วพุ่งเข้าใส่อย่างแรง"
+  },
+  "EPalWazaID::Unique_CaptainPenguin_Black_BodySlide_Electric": {
+    "localized_name": "ธันเดอร์สไลดิ้ง",
+    "description": "สกิลเฉพาะตัวของ Penking Lux ใช้ท้องกระแทกพื้น สร้างไฟฟ้าจากร่าง ไถลตัวกระแทกศัตรู"
+  },
+  "EPalWazaID::Unique_CaptainPenguin_BodySlide": {
+    "localized_name": "กัปตันสไลดิ้ง",
+    "description": "สกิลเฉพาะตัวของ Penking ใช้ท้องกระแทกพื้น สร้างไอเย็นจากร่าง ไถลตัวกระแทกศัตรู"
+  },
+  "EPalWazaID::Unique_ChickenPal_ChickenPeck": {
+    "localized_name": "ชิกเกนแท็กเคิล",
+    "description": "สกิลเฉพาะตัวของ Chikipi กระโจนใส่ดวงตาศัตรูแล้วใช้จะงอยปากแหลมจิกเต็มแรง"
+  },
+  "EPalWazaID::Unique_DarkAlien_JumpScractch": {
+    "localized_name": "อีวิลคลอว์",
+    "description": "สกิลเฉพาะตัวของ Xenovader กระโจนด้วยความไว แล้วข่วนด้วยมือซ้าย"
+  },
+  "EPalWazaID::Unique_DarkCrow_TelePoke": {
+    "localized_name": "แฟนธอมแอสซัลต์",
+    "description": "สกิลเฉพาะตัวของCawgnito เคลื่อนที่พริบตาไปประชิดศัตรู แล้วใช้จะงอยปากโจมตี"
+  },
+  "EPalWazaID::Unique_DarkMechaDragon_BeamSlash": {
+    "localized_name": "บีมสแลช",
+    "description": "สกิลเฉพาะตัวของ Xenolord สร้างดาบทรงอานุภาพด้วยมือขวา แล้วฟัน 2 ครั้งขณะเคลื่อนที่"
+  },
+  "EPalWazaID::Unique_DarkMechaDragon_ConvergentBeam": {
+    "localized_name": "แอสทรัลเรย์",
+    "description": "สกิลเฉพาะตัวของ Xenolord ดูดซับพลังงานที่เต็มไปด้วยความมืด แล้วปล่อยออกไปเป็นเส้นตรงในคราวเดียว"
+  },
+  "EPalWazaID::Unique_DarkMechaDragon_FunnelLaser": {
+    "localized_name": "โอเมก้าเลเซอร์",
+    "description": "สกิลเฉพาะตัวของ Xenolord เรียกลำแสงทำลายล้างออกมาจากมิติย่อย ยิงโจมตีทุกทิศทาง เผาไหม้ทุกสิ่งที่ตาเห็นให้มอดไหม้"
+  },
+  "EPalWazaID::Unique_DarkMechaDragon_SetFunnel": {
+    "localized_name": "แซตเทลไลต์บิต",
+    "description": "สกิลเฉพาะตัวของ Xenolord สร้างปีกทรงดาวเทียม 4 ปีกที่มีฟังก์ชันโจมตีอัตโนมัติ ในตอนที่โจมตีครั้งถัดไป ปีกเหล่านี้จะ ไล่ตามและโจมตีศัตรูโดยอัตโนมัติ"
+  },
+  "EPalWazaID::Unique_DarkMechaDragon_WarpComet": {
+    "localized_name": "คอสมิกมีทีออร์",
+    "description": "สกิลเฉพาะตัวของ Xenolord บินขึ้นฟ้าด้วยความเร็วแสง ปล่อยกระสุนดาวตกมหาศาล หลังจากนั้นเปลี่ยนตัวเองเป็นดาวหางพุ่งชนศัตรู และจุดระเบิดครั้งใหญ่ ณ จุดที่ชน"
+  },
+  "EPalWazaID::Unique_DarkScorpion_Pierce": {
+    "localized_name": "จัมปิงสติงเกอร์",
+    "description": "สกิลเฉพาะตัวของ Menasting กระโดดสูงแล้วใช้หางแทงเหยื่ออย่างแรง ที่หางมีพิษ"
+  },
+  "EPalWazaID::Unique_Deer_PushupHorn": {
+    "localized_name": "ฮอร์นอัปเปอร์",
+    "description": "สกิลเฉพาะตัวของ Eikthyrdeer โจมตีโดยพุ่งกระแทกศัตรู แล้วใช้เขางัด ถ้าใช้งานขณะขี่จะควบคุมทิศทางได้"
+  },
+  "EPalWazaID::Unique_DrillGame_ShellAttack": {
+    "localized_name": "เชลสปิน",
+    "description": "สกิลเฉพาะตัวของ Digtoise เคลื่อนที่พลางหมุนตัวด้วยความเร็วสูง แล้วใส่สว่างเจาะร่างศัตรู สร้างความเสียหายต่อเนื่อง"
+  },
+  "EPalWazaID::Unique_Eagle_GlidingNail": {
+    "localized_name": "ไกลด์คลอว์",
+    "description": "สกิลเฉพาะตัวของ Galeclaw กางกรงเล็บเท้าพลาง โฉบโจมตีศัตรูอย่างรุนแรงจากบนฟ้า"
+  },
+  "EPalWazaID::Unique_ElecPanda_ElecScratch": {
+    "localized_name": "ไลต์นิงคลอว์",
+    "description": "สกิลเฉพาะตัวของ Grizzbolt กระโจนใส่ศัตรูแล้วใช้กรงเล็บสายฟ้ากรีดเฉือนศัตรู หลังกระโจนใส่ 2 ครั้ง และแทงเล็บลงกับพื้น สร้างสายฟ้าโจมตีเป็นวงกว้างตบท้าย"
+  },
+  "EPalWazaID::Unique_ElecPanda_GatlingAttack": {
+    "localized_name": "รถถังอสนีบาต",
+    "description": "สกิลเฉพาะตัวของ Grizzbolt ยิงมินิกันที่หยิบออกมาจากไหนไม่รู้ หลังชาร์จเล็กน้อย จะยิงกระสุนด้วยพลังรุนแรง 1 นัดเป็นการตบท้าย"
+  },
+  "EPalWazaID::Unique_FairyDragon_FairyTornado": {
+    "localized_name": "มิสติกเฮอร์ริเคน",
+    "description": "สกิลเฉพาะตัวของ Elphidran ยิงพายุหมุนมหัศจรรย์ออกไป 2 ครั้ง ให้พายุไล่ตามศัตรู"
+  },
+  "EPalWazaID::Unique_FeatherOstrich_Tossin": {
+    "localized_name": "เอิร์ธแดช",
+    "description": "สกิลเฉพาะตัวของ Dazemu เร่งความเร็วในอึดใจ แล้วพุ่งชนไปด้านหน้าด้วยความเร็วสูง"
+  },
+  "EPalWazaID::Unique_FengyunDeeper_CloudTempest": {
+    "localized_name": "กราวด์เทมเพสต์",
+    "description": "สกิลเฉพาะตัวของ Fenglope ควบคุมอากาศให้โอบล้อมตัวแล้วพุ่งชนศัตรู"
+  },
+  "EPalWazaID::Unique_FengyunDeeper_Electric_ThunderTempest": {
+    "localized_name": "ธันเดอร์เทมเพสต์",
+    "description": "สกิลเฉพาะตัวของ Fenglope Lux ควบคุมอากาศให้เมฆสายฟ้าโอบล้อมตัวแล้วพุ่งชนศัตรู"
+  },
+  "EPalWazaID::Unique_FireKirin_Dark_DarkTossin": {
+    "localized_name": "ดาร์กชาร์จ",
+    "description": "สกิลเฉพาะตัวของ Pyrin Noct ใช้ร่างที่มีเปลวไฟสีดำปกคลุมพุ่งชนศัตรู เกิดไฟลุกไหม้ตามทางที่วิ่งผ่าน"
+  },
+  "EPalWazaID::Unique_FireKirin_Tackle": {
+    "localized_name": "เฟลมชาร์จ",
+    "description": "สกิลเฉพาะตัวของ Pyrin ใช้ร่างที่มีเปลวไฟปกคลุมพุ่งชนศัตรู เกิดไฟลุกไหม้ตามทางที่วิ่งผ่าน"
+  },
+  "EPalWazaID::Unique_FlameBuffalo_FlameHorn": {
+    "localized_name": "เบลซิงฮอร์น",
+    "description": "สกิลเฉพาะตัวของ Arsox เล็งศัตรูแล้วพุ่งเข้าใส่อย่างแรง พลางใช้เขางัด"
+  },
+  "EPalWazaID::Unique_FlowerDinosaur_Whip": {
+    "localized_name": "โบทานิเคิลสแมช",
+    "description": "สกิลเฉพาะตัวของ Dinossom ใช้หางขนาดใหญ่ฟาดพื้นด้านหน้า สร้างแรงกระแทกเป็นเส้นตรง"
+  },
+  "EPalWazaID::Unique_Garm_Bite": {
+    "localized_name": "ไวลด์แฟงก์",
+    "description": "สกิลเฉพาะตัวของ Direhowl โจมตีโดยกระโจนหาศัตรูอย่างรวดเร็ว แล้วกัดศัตรู"
+  },
+  "EPalWazaID::Unique_GhostAnglerfish_Fire_SweepBait_Fire": {
+    "localized_name": "แกว่งโคมแผดเผา",
+    "description": "สกิลเฉพาะตัวของ Ghangler Ignis แกว่างโคมแขวนที่มีเปลวไฟปกคุลมตรงส่วนหัวไปข้างหน้าอย่างแรง"
+  },
+  "EPalWazaID::Unique_GhostAnglerfish_SweepBait": {
+    "localized_name": "แกว่งโคม",
+    "description": "สกิลเฉพาะตัวของ Ghangler แกว่งโคมแขวนตรงส่วนหัวไปข้างหน้าอย่างแรง"
+  },
+  "EPalWazaID::Unique_GhostBeast_Tossin": {
+    "localized_name": "สปิริตแดช",
+    "description": "สกิลเฉพาะตัวของ Maraith เดินช้า ๆ พลางปล่อยลูกไฟสว่างไสว เข้าใส่ศัตรูอย่างต่อเนื่อง"
+  },
+  "EPalWazaID::Unique_GoldenHorse_StoneDash": {
+    "localized_name": "ครัชแดช",
+    "description": "สกิลเฉพาะตัวของ Gildane ขว้างหินอย่างแรงไปทางซ้ายและขวา พลางพุ่งเข้าหาศัตรู"
+  },
+  "EPalWazaID::Unique_Gorilla_GroundPunch": {
+    "localized_name": "กอริราวด์คอมโบ",
+    "description": "สกิลเฉพาะตัวของ Gorirat หลังฟาดพื้น 2 ครั้ง จะกระโดด แล้วส่งหมัดอันทรงพลังอัดใส่หน้าศัตรูส่งท้าย"
+  },
+  "EPalWazaID::Unique_GrassPanda_Electric_ElectricPunch": {
+    "localized_name": "เบิสต์พันช์",
+    "description": "สกิลเฉพาะตัวของ Mossanda Lux ควงแขนขวา ชกหมัดสายฟ้าออกไปด้านหน้า"
+  },
+  "EPalWazaID::Unique_GrassPanda_MusclePunch": {
+    "localized_name": "มัสเซิลพันช์",
+    "description": "สกิลเฉพาะตัวของ Mossanda ควงแขนขวา ชกเต็มแรงออกไปด้านหน้า"
+  },
+  "EPalWazaID::Unique_GrassRabbitMan_GrassRoundKick": {
+    "localized_name": "สปินเลกรัช",
+    "description": "สกิลเฉพาะตัวของ Verdash กระโดดไปข้างหน้า พลางหมุนตัวเตะด้วยความเร็วสูง โจมตีกวาดบริเวณโดยรอบ"
+  },
+  "EPalWazaID::Unique_Grassmammoth_Earthquake": {
+    "localized_name": "เอิร์ธอิมแพค",
+    "description": "สกิลเฉพาะตัวของ Mammorest ใช้ร่างมหึมาทำให้พื้นสั่นสะเทือน สร้างความเสียหายเป็นวงกว้างโดยมีตนเป็นศูนย์กลาง"
+  },
+  "EPalWazaID::Unique_GrimGirl_BrutalMachete": {
+    "localized_name": "กระหน่ำยิ่งด้วยแรงแค้น",
+    "description": "สกิลเฉพาะตัวของ Splatterina เคลื่อนที่พริบตาไปฟันศัตรู และเคลื่อที่พริบตาไปอยู่เหนือศีรษะศัตรู ยื่นอาวุธออกไปแล้วยิงคลื่นพลังความมืด"
+  },
+  "EPalWazaID::Unique_HawkBird_Storm": {
+    "localized_name": "ทอร์นาโดแอตแทก",
+    "description": "สกิลเฉพาะตัวของ Nitewing หลังสร้างพายุหมุนตรงด้านหน้า จะถลาลมพุ่งใส่ศัตรู"
+  },
+  "EPalWazaID::Unique_HerculesBeetle_BeetleTackle": {
+    "localized_name": "กิกาฮอร์น",
+    "description": "สกิลเฉพาะตัวของ Warsect ใช้เขาอันแข็งแกร่งทั้ง 4 เขาเสียบทะลุร่างศัตรู"
+  },
+  "EPalWazaID::Unique_Horus_FlareBird": {
+    "localized_name": "ฟินิกซ์เริงลม",
+    "description": "สกิลเฉพาะตัวของ Faleris หลังสร้างพายุหมุนอันร้อนระอุ จะบินโฉบโจมตีศัตรูโดยมีเพลิงนรกล้อมรอบตัว"
+  },
+  "EPalWazaID::Unique_Horus_PerfectStorm": {
+    "localized_name": "หงส์เพลิงโหมกระหน่ำ",
+    "description": "สกิลเฉพาะตัวของ Faleris หลังสร้างพายุหมุนร้อนระอุจำนวนมาก จะบินโฉบโจมตีศัตรู พายุหมุนจะมารวมกันตรงกลาง และสุดท้ายจะกลายเป็นพายุหมุนขนาดใหญ่ลูกเดียว"
+  },
+  "EPalWazaID::Unique_Horus_Water_AquaStorm": {
+    "localized_name": "ฟินิกซ์เริงคลื่น",
+    "description": "สกิลเฉพาะตัวของ Faleris Aqua หลังสร้างวังน้ำวน จะบินโฉบโจมตีศัตรูโดยมีสายน้ำล้อมรอบตัว"
+  },
+  "EPalWazaID::Unique_IceCrocodile_SpitAttack": {
+    "localized_name": "สำรอกอลวน",
+    "description": "สกิลเฉพาะตัวของ Munchill โจมตีด้วยการพ่นระเบิดแช่เย็นที่ไม่โดนย่อย ออกมาจากภายในตัวต่อเนื่อง 3 ลูก บางครั้งก็พ่นของอันตรายๆออกมาด้วย..."
+  },
+  "EPalWazaID::Unique_IceDeer_IceHorn": {
+    "localized_name": "ไอซ์ฮอร์นรัช",
+    "description": "สกิลเฉพาะตัวของ Reindrix พุ่งชนศัตรูพลางใช้เขาน้ำแข็งอันงามสง่างัดร่างศัตรูขึ้น"
+  },
+  "EPalWazaID::Unique_IceHorse_IceBladeAttack": {
+    "localized_name": "คริสตัลวิงก์",
+    "description": "สกิลเฉพาะตัวของ Frostallion สร้างปีกที่กลั่นจากไอเย็นมาล้อมกาย แล้ววิ่งพลางใช้ปีกน้ำแข็งกรีดเฉือนศัตรู"
+  },
+  "EPalWazaID::Unique_IceNarwhal_JumpingHorn": {
+    "localized_name": "ไฮบลีช",
+    "description": "สกิลเฉพาะสายพันธ์ของ Whalaska พุ่งไปข้างหน้า แล้วดำลงไปครู่หนึ่ง ก่อนจะกระโดดสูงเสียดฟ้าขึ้นมาโจมตี ตอนที่กระโดดขึ้นมาจะสร้างระเบิดธาตุน้ำแข็ง"
+  },
+  "EPalWazaID::Unique_JetDragon_JumpBeam": {
+    "localized_name": "บีมโคเม็ต",
+    "description": "สกิลเฉพาะตัวของ Jetragon ปีกจะเรืองแสง แล้วยิงลำแสงจำนวนมากเข้าใส่ศัตรู เมื่อลำแสงยิงโดนศัตรูจะระเบิด"
+  },
+  "EPalWazaID::Unique_KingAlpaca_BodyPress": {
+    "localized_name": "คิงเพรส",
+    "description": "สกิลเฉพาะตัวของ Kingpaca กระโดดสูง แล้วใช้ร่างนุ่มฟูทับศัตรู"
+  },
+  "EPalWazaID::Unique_KingBahamut_AirCrash": {
+    "localized_name": "แม็กนาครัช",
+    "description": "สกิลเฉพาะตัวของ Blazamut Ryu หลังกระโดดสูง จะเคลื่อนที่กลางอากาศด้วยความเร็วสูง พลางสะสมพลังแล้วทุ่มตัวต่อย"
+  },
+  "EPalWazaID::Unique_KingBahamut_ArmSmash": {
+    "localized_name": "อาร์มอิมแพค",
+    "description": "สกิลเฉพาะตัวของ Blazamut ควงแขนให้พองโต และเมื่อประกบมือเข้าด้วยกันจะทำให้เกิดระเบิดขึ้นโดยรอบ"
+  },
+  "EPalWazaID::Unique_Kirin_LightningTackle": {
+    "localized_name": "วายุอสนีบาต",
+    "description": "สกิลเฉพาะตัวของ Univolt สร้างฟ้าผ่าขึ้นรอบตัว ขณะพุ่งชนศัตรู"
+  },
+  "EPalWazaID::Unique_LeafMomonga_SomerSault": {
+    "localized_name": "ใบไม้ตีลังกา",
+    "description": "สกิลเฉพาะตัวของ Herbil หลังตั้งท่าเตรียมพร้อมครู่หนึ่ง จะพุ่งชนศัตรูด้วยความเร็วสูง แล้วตีลังกากลางอากาศ"
+  },
+  "EPalWazaID::Unique_LegendDeer_RadiantPurge_Otomo": {
+    "localized_name": "แสงแห่งการชำระล้าง",
+    "description": "Hartalisสกิลเฉพาะตัวของ กระโจนขึ้นสู่ท้องฟ้า รวมพลังอันมหาศาลปล่อยใส่พื้นดิน ลูกบอลเเสงที่ร่อนลงมาชำระล้างพื้นให้บริสุทธิ์"
+  },
+  "EPalWazaID::Unique_LegendDeer_RadiantWingRush": {
+    "localized_name": "ดีไวน์วิง",
+    "description": "Hartalisสกิลเฉพาะตัวของ กระโดดย้อนหลัง สร้างปีกแห่งแสงขึ้นบนหลัง แล้วพุ่งเข้าใส่ศัตรูจากกลางอากาศ"
+  },
+  "EPalWazaID::Unique_LegendDeer_WarpPillarBurst": {
+    "localized_name": "เซเคร็ดเรน",
+    "description": "Hartalisสกิลเฉพาะตัวของ หลังจากที่หายตัวเพียงชั่วพริบตาเเล้ว ลำแสงจำนวนมากโปรยลงมาครอบคลุมพื้นที่กว้างโดยมีตัวผู้ใช้เป็นศูนย์กลาง"
+  },
+  "EPalWazaID::Unique_LilyQueen_LilyHealing": {
+    "localized_name": "พรปกปักแห่งความบริบูรณ์",
+    "description": "สกิลเฉพาะตัวของ Lyleen ฟื้นฟู HP ให้กับเพื่อนร่วมทีมทั้งหมดในพื้นที่ด้วยพลังแห่งการเยียวยา"
+  },
+  "EPalWazaID::Unique_LilyQueen_WindBarrier": {
+    "localized_name": "-",
+    "description": "-"
+  },
+  "EPalWazaID::Unique_Manticore_InfernoStrike": {
+    "localized_name": "โวลคานิกแฟงก์",
+    "description": "สกิลเฉพาะตัวของ Blazehowl กระโจนใส่ศัตรูด้วยแรงส่ง และจุดระเบิดเพลิงใส่ปลายทาง"
+  },
+  "EPalWazaID::Unique_MoonQueen_IceMoonBlade": {
+    "localized_name": "ประกายดาบจันทร์น้ำเงิน",
+    "description": "สกิลเฉพาะตัวของ Selyne ซัดใบมีดความเร็วสูงที่แฝงพลังแสงจันทร์ออกไป 3 ครั้งต่อเนื่อง"
+  },
+  "EPalWazaID::Unique_MoonQueen_MoonBeam": {
+    "localized_name": "มูนบีม",
+    "description": "สกิลเฉพาะตัวของ Selyne สะสมพลังงานไว้ที่พระจันทร์ที่หลัง ยิงลำแสงรูปจันทร์เสี้ยวออกไปด้านหน้า"
+  },
+  "EPalWazaID::Unique_MoonQueen_MoonBlade": {
+    "localized_name": "ดาบจันทร์น้ำเงิน",
+    "description": "สกิลเฉพาะตัวของ Selyne ซัดใบมีดความเร็วสูงที่แฝงพลังแสงจันทร์ออกไป 2 ครั้งต่อเนื่อง"
+  },
+  "EPalWazaID::Unique_MysteryMask_LifeSteal": {
+    "localized_name": "โซลสตีล",
+    "description": "สกิลเฉพาะตัวของ Omascul โผล่เข้าประชิดศัตรูในพริบตา แล้วใช้แขนทั้งสองรัดศัตรูจนแน่น ดูด HP ของศัตรูที่โดนรัด"
+  },
+  "EPalWazaID::Unique_NaughtyCat_CatPress": {
+    "localized_name": "แคตเพรช",
+    "description": "สกิลเฉพาะตัวของ Grintale กระโจนใส่ศัตรูพร้อมยิ้มเย้ย แล้วใช้ทั้งร่างทับศัตรู"
+  },
+  "EPalWazaID::Unique_NightBlueHorse_DeathStep": {
+    "localized_name": "ลีธัลสเต็ป",
+    "description": "สกิลเฉพาะตัวของ Starryon ก้าวเท้าพลิ้วไหวหลอกล่อศัตรู แล้วใช้เขาอันแหลมคมขวิดศัตรูให้กระเด็น"
+  },
+  "EPalWazaID::Unique_NightLady_FlameNightmare": {
+    "localized_name": "เฟลมวอลซ์",
+    "description": "สกิลเฉพาะตัวของ Bellanoir Libero ร่ายรำพลิ้วไหว สร้างวงแหวนไฟกระจายออกไปโดยรอบ และยิงไฟปริศนาติดตามศัตรู"
+  },
+  "EPalWazaID::Unique_NightLady_WarpBeam": {
+    "localized_name": "ไนต์แมร์เรย์บลูม",
+    "description": "สกิลเฉพาะตัวของ Bellanoir Libero หายตัวไปเงียบ ๆ และพริบตาที่ปรากฏตัวขึ้นอีกครั้งจะยิงลำแสงนับไม่ถ้วนใส่ศัตรู ลำแสงจะกระจายตัวเหมือนดอกไม้บาน"
+  },
+  "EPalWazaID::Unique_NightLady_WarpBeam_Straight": {
+    "localized_name": "ไนต์แมร์เรย์",
+    "description": "สกิลเฉพาะตัวของ Bellanoir หายตัวไปเงียบ ๆ และพริบตาที่ปรากฏตัวขึ้นอีกครั้งจะยิงลำแสงนับไม่ถ้วนใส่ศัตรู"
+  },
+  "EPalWazaID::Unique_OctopursGirl_InkJet": {
+    "localized_name": "เจ็ตสโมก",
+    "description": "สกิลเฉพาะตัวของ Gloopie สร้างควันที่ด้านหน้า เพื่อซ่อนตัว ก่อนจะโจมตีอย่างแรงเข้าที่หัวศัตรูโดยที่อีกฝ่ายมองไม่เห็น"
+  },
+  "EPalWazaID::Unique_PinkCat_CatPunch": {
+    "localized_name": "หมัดแมว",
+    "description": "สกิลเฉพาะตัวของ Cattiva ไล่ตามศัตรูพลางเหวี่ยงแขนสองแขน แล้วต่อยรัว"
+  },
+  "EPalWazaID::Unique_Plesiosaur_LongBreath": {
+    "localized_name": "ลองก์เบรธ",
+    "description": "สกิลเฉพาะตัวของ Braloha ลมหายใจธาตุพืชค่อย ๆ แพร่กระจายไปทั่ว ตั้งแต่ต้นคอไปจนถึงปลายคอยาว ๆ ของมัน"
+  },
+  "EPalWazaID::Unique_PoseidonOrca_TorrentLaser": {
+    "localized_name": "ทาราโซนิกเลเซอร์",
+    "description": "สกิลเฉพาะตัวของ Neptilius รวบรวมน้ำไว้ที่ปากขณะลอยตัวขึ้นเล็กน้อย หลังจากนั้นพ่นกระแสน้ำแรงดันสูงกวาดทั้งแนวตั้งและแนวนอนสามครั้ง จุดที่ถูกกระแสน้ำกวาดจะมีน้ำผุดออกมาจากรอยแยก"
+  },
+  "EPalWazaID::Unique_PurpleSpider_SpiderRaid": {
+    "localized_name": "สไปเดอร์เรด",
+    "description": "สกิลเฉพาะตัวของ Tarantriss พ่นลูกบอลใยแมงมุมออกไปมัดตัวเหยื่อ หลังจากนั้นพุ่งเข้าหาเหยื่อด้วยความเร็วสูงสุด ข่วน 3 ครั้งแล้วลงมือปิดฉาก"
+  },
+  "EPalWazaID::Unique_QueenBee_SpinLance": {
+    "localized_name": "สปินนิงสต๊าฟ",
+    "description": "สกิลเฉพาะตัวของ Elizabee รวมพลังไว้ที่คทา ก่อนจะปล่อยพลังพลางหมุนตัว"
+  },
+  "EPalWazaID::Unique_RedArmorBird_TriplePeck": {
+    "localized_name": "รัชบีก",
+    "description": "สกิลเฉพาะตัวของ Ragnahawk กระพือปีกไปด้านหน้า พลางใช้จะงอยปากพุ่งไปข้างหน้า ซ้าย และขวา เพื่อจุดระเบิดขนาดย่อม"
+  },
+  "EPalWazaID::Unique_RobinHood_BowSnipe": {
+    "localized_name": "สไนป์ช็อต",
+    "description": "สกิลเฉพาะตัวของ Robinquill ง้างธนูเล็งเป้า แล้วยิงธนูใส่ศัตรู"
+  },
+  "EPalWazaID::Unique_Ronin_Iai": {
+    "localized_name": "ดาบอิไอกิริ",
+    "description": "สกิลเฉพาะตัวของพาลประเภท Bushi หลังจับดาบ จะมาปรากฏตัวต่อหน้าศัตรูในพริบตา แล้วชักดาบโจมตีศัตรูด้วยความเร็วสูง"
+  },
+  "EPalWazaID::Unique_SaintCentaur_OneSpearRushes": {
+    "localized_name": "หอกเดี่ยวโถมแทง",
+    "description": "สกิลเฉพาะตัวของ Paladius ใช้พลังศักดิ์สิทธิ์มาปกคลุมร่าง พุ่งไปข้างหน้าพลางแทงหอกในมือซ้าย ระหว่างพุ่งตัว จะใช้โล่ในมือขวาป้องกันการโจมตีต่าง ๆ"
+  },
+  "EPalWazaID::Unique_SakuraSaurus_SideTackle": {
+    "localized_name": "บอดี้สแมช",
+    "description": "สกิลเฉพาะตัวของ Broncherry ตั้งท่าหันข้าง กระแทกใส่ศัตรูด้านหน้า ผลักศัตรูให้กระเด็น"
+  },
+  "EPalWazaID::Unique_ScorpionMan_Uppercut": {
+    "localized_name": "อัปเปอร์สแมช",
+    "description": "สกิลเฉพาะตัวของ Prixter เข้าประชิดศัตรูด้วยความเร็วสูง แล้วซัดกรรไกรขึ้นด้านบนเต็มแรง"
+  },
+  "EPalWazaID::Unique_SheepBall_Roll": {
+    "localized_name": "ขนแกะกลมกลิ้ง",
+    "description": "สกิลเฉพาะตัวของ SheepBall กลิ้งหลุน ๆ ไล่ตามศัตรู หลังโจมตีจะตาลายจนขยับไม่ได้"
+  },
+  "EPalWazaID::Unique_SifuDog_Counter": {
+    "localized_name": "ตั้งรับสุดตัว",
+    "description": "สกิลเฉพาะตัวของ Dogen ตั้งท่าแบบไอคิโด ระหว่างตั้งท่า ศัตรูจะโจมตีไม่ได้ผล และเข้าประชิดตัวศัตรูในพริบตา ปล่อยส้นมือกระแทกเต็มแรง"
+  },
+  "EPalWazaID::Unique_SnowTigerBeastman_SnowImpact": {
+    "localized_name": "ทลายธารน้ำแข็ง",
+    "description": "สกิลเฉพาะตัวของ Bastigor กระโดดร้องคำรามเสียงดัง ฝังสองมือลงกับพื้น สร้างธารน้ำแข็งแตกระแหงขนาดใหญ่ ส่งพลังไปยังพื้นต่อเนื่อง ก่อนจะทำให้เกิดระเบิดธาตุน้ำแข็งขนาดใหญ่ตบท้าย"
+  },
+  "EPalWazaID::Unique_SnowTigerBeastman_TrampleSlash": {
+    "localized_name": "กรงเล็บกรีดน้ำแข็ง",
+    "description": "สกิลเฉพาะตัวของ Bastigor กระทืบพื้น สร้างรอยแยกน้ำแข็งขึ้นตรงหน้า แล้วเข้าประชิดศัตรูในอึดใจ ก่อนใช้มือขวาข่วนศัตรู"
+  },
+  "EPalWazaID::Unique_SoldierBee_NeedleLance": {
+    "localized_name": "นีดเดิลสเปียร์",
+    "description": "สกิลเฉพาะตัวของ Beegarde พุ่งชนศัตรูด้วยความเร็วสูง แล้วตบท้ายด้วยแทงหอกใส่ศัตรู"
+  },
+  "EPalWazaID::Unique_StuffedShark_HiddenWeapon": {
+    "localized_name": "ทริกเกอร์แฮปปี้",
+    "description": "สกิลเฉพาะสายพันธ์ของ Finsider หยิบปืนฉีดน้ำสองกระบอกออกมาจากในปาก ยิงกระสุนน้ำสลับซ้ายขวารวม 6 นัด ปิดท้ายด้วยรวมปืนสองกระบอกเข้าด้วยกัน และยิงกระสุนด้วยความรุนแรง 1 นัด"
+  },
+  "EPalWazaID::Unique_TentacleTurtle_HydroSpin": {
+    "localized_name": "ไฮโดรสปิน",
+    "description": "สกิลเฉพาะตัวของ Turtacle ใช้แรงไถลจากไอพ่นเจ็ต บินควงสว่านไปหาศัตรู"
+  },
+  "EPalWazaID::Unique_ThunderBird_ThunderStorm": {
+    "localized_name": "ไลต์นิงไดฟ์",
+    "description": "สกิลเฉพาะตัวของ Beakon เริ่มจากเรียกสายฟ้าโจมตีใส่จุดที่ศัตรูอยู่ และบินโฉบโจมตีพลางเรียกฟ้าผ่าขนาบซ้ายขวา"
+  },
+  "EPalWazaID::Unique_ThunderDog_InazumaShorai": {
+    "localized_name": "อัญเชิญอัสนี",
+    "description": "สกิลเฉพาะตัวของ Rayhound เรียกอสนีบาดมาเบื้องหน้าต่อเนื่อง วิ่งลอดสายฟ้าด้วยความเร็วสูงเข้าหาศัตรู"
+  },
+  "EPalWazaID::Unique_ThunderDragonMan_NumerousSwordAttack": {
+    "localized_name": "โพลิเคราวนอส",
+    "description": "สกิลเฉพาะตัวของ Orserk เรียกหอกสายฟ้าจำนวนมาก ขว้างใส่ศัตรู หอกเล่มแรกจะสะสมพลังไฟฟ้า และระเบิดออกในอีกไม่กี่วินาทีให้หลัง"
+  },
+  "EPalWazaID::Unique_ThunderDragonMan_ThunderSwordAttack": {
+    "localized_name": "เคราวนอส",
+    "description": "สกิลเฉพาะตัวของ Orserk กระโดดเรียกหอกสายฟ้า ขว้างลงไปหาศัตรู"
+  },
+  "EPalWazaID::Unique_TropicalOstrich_DashKick": {
+    "localized_name": "แดชคิก",
+    "description": "สกิลเฉพาะตัวของ Palumba แดชสร้างแรงส่ง แล้วกระโดดเตะวาดลวดลายใส่ศัตรูอย่างแรง"
+  },
+  "EPalWazaID::Unique_Umihebi_Fire_FireWindingTackle": {
+    "localized_name": "แมกมาสเนก",
+    "description": "สกิลเฉพาะตัวของ Jormuntide Ignis ร้องคำราม เรียกเปลวเพลิงมาโอบล้อมตัว แล้วพุ่งชนศัตรู"
+  },
+  "EPalWazaID::Unique_Umihebi_WindingTackle": {
+    "localized_name": "โอเชียนสเนก",
+    "description": "สกิลเฉพาะตัวของ Jormuntide ร้องคำราม เรียกสายน้ำมาโอบล้อมตัว แล้วพุ่งชนศัตรู"
+  },
+  "EPalWazaID::Unique_VolcanicMonster_Ice_IceAttack": {
+    "localized_name": "ฟรอสต์เบิสต์",
+    "description": "สกิลเฉพาะตัวของ Reptyro Cryst เงื้อขาหน้าขึ้นกระทืบพื้น สร้างหิมะให้ผุดขึ้นตรงจุดที่ศัตรูอยู่ ตอนที่เกิดหิมะจะเกิดลูกบอลหิมะโปรยปราย"
+  },
+  "EPalWazaID::Unique_VolcanicMonster_MagmaAttack": {
+    "localized_name": "โวลคานิกเบิสต์",
+    "description": "สกิลเฉพาะตัวของ Reptyro เงื้อขาหน้าขึ้นกระทืบพื้น สร้างไฟปะทุขึ้นตรงจุดที่ศัตรูอยู่ ตอนที่ไฟปะทุจะเกิดสะเก็ดลาวาโปรยปราย"
+  },
+  "EPalWazaID::Unique_WeaselDragon_FlyingTackle": {
+    "localized_name": "ร็อกเก็ตแท็กเคิล",
+    "description": "สกิลเฉพาะตัวของ Chillet หลังสะสมพลังเล็กน้อย จะกระโจนไปด้านหน้า พริบตาที่ถึงที่หมายจะกลัวจนหลับตาปี๋เสมอ"
+  },
+  "EPalWazaID::Unique_Werewolf_Ice_SnowScratch": {
+    "localized_name": "สโนว์คลอว์",
+    "description": "สกิลเฉพาะตัวของ WereWolf_Ice กระโจนไปด้านหน้า ข่วนศัตรู 2 ครั้งอย่างรวดเร็ว การโจมตีนี้มีพลังธาตุน้ำแข็งแฝงอยู่"
+  },
+  "EPalWazaID::Unique_Werewolf_Scratch": {
+    "localized_name": "จัมปิงคลอว์",
+    "description": "สกิลเฉพาะตัวของ WereWolf กระโจนไปด้านหน้า ข่วนศัตรู 2 ครั้งอย่างรวดเร็ว การโจมตีนี้มีพลังธาตุความมืดแฝงอยู่"
+  },
+  "EPalWazaID::Unique_WhiteDeer_HolyPillar": {
+    "localized_name": "โฮลีโนวา",
+    "description": "สกิลเฉพาะตัวของ Celesdir สร้างระเบิดแสงศักดิ์สิทธิ์ขึ้นตรงหน้าเป็นวงกว้าง แล้วเดินเปล่งแสงศักดิ์สิทธิ์จากรอบกาย"
+  },
+  "EPalWazaID::Unique_WhiteShieldDragon_ShieldTackle": {
+    "localized_name": "อีจีสชาร์จ",
+    "description": "สกิลเฉพาะตัวของ Silvegis สร้างโล่ลดทอนพลังโจมตีทุกประเภทขึ้นตรงหน้า แล้วพุ่งตรงไปพลางบดขยี้ศัตรู"
+  },
+  "EPalWazaID::Unique_WhiteTiger_Ground_IronScratch": {
+    "localized_name": "สโตนคลอว์",
+    "description": "สกิลเฉพาะตัวของ Cryolinx Terra โจมตีครั้งแรกและครั้งที่ 2 ด้วยกรงเล็บ และใช้แรงทั้งหมดตะปบศัตรูอย่างแรงในครั้งสุดท้าย ตอนที่ตวัดกรงเล็บจะซัดเสาหิน 3 ต้นออกไปด้านหน้าเป็นรูปพัด"
+  },
+  "EPalWazaID::Unique_WhiteTiger_IceScratch": {
+    "localized_name": "บลิซซาร์ดคลอว์",
+    "description": "สกิลเฉพาะตัวของ Cryolinx โจมตีครั้งแรกและครั้งที่ 2 ด้วยกรงเล็บ และใช้แรงทั้งหมดตะปบศัตรูอย่างแรงในครั้งสุดท้าย ตอนที่ตวัดกรงเล็บจะซัดเสาน้ำแข็ง 3 ต้นออกไปด้านหน้าเป็นรูปพัด"
+  },
+  "EPalWazaID::Unique_WingGolem_RoundCutter": {
+    "localized_name": "กราวด์คัตเตอร์",
+    "description": "สกิลเฉพาะตัวของ Knocklem เหวี่ยงแขนเป็นวงกว้าง ขว้างวงแหวนบนหลัง วงแหวนจะเคลื่อนที่เป็นรูปวงกลม"
+  },
+  "EPalWazaID::Unique_YakushimaBoss001_Small_DemonEyeCharge": {
+    "localized_name": "พุ่งชนด้วยลูกตา",
+    "description": "สกิลเฉพาะตัวของ Demon Eye พุ่งเข้าจู่โจมศัตรู หากกระแทกกับพื้นหรือกำแพงจะกระเด้ง"
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Dark": {
+    "localized_name": "สไลม์เพลส(ธาตุความมืด)",
+    "description": "สกิลเฉพาะตัวของ Purple Slime กระโดดโจมตีใส่ศัตรูโดยตรง"
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Fire": {
+    "localized_name": "สไลม์เพลส(ธาตุไฟ)",
+    "description": "สกิลเฉพาะตัวของ Red Slime กระโดดโจมตีใส่ศัตรูโดยตรง"
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Leaf": {
+    "localized_name": "สไลม์เพลส(ธาตุพืช)",
+    "description": "สกิลเฉพาะตัวของ Green Slime กระโดดโจมตีใส่ศัตรูโดยตรง"
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Normal": {
+    "localized_name": "สไลม์เพลส(ไร้ธาตุ)",
+    "description": "สกิลเฉพาะตัวของ Illuminant Slime กระโดดโจมตีใส่ศัตรูโดยตรง"
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Rainbow": {
+    "localized_name": "สไลม์เพลส(ธาตุสายรุ้ง)",
+    "description": "สกิลเฉพาะตัวของ Rainbow Slime กระโดดโจมตีใส่ศัตรูโดยตรง"
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Water": {
+    "localized_name": "สไลม์เพลส(ธาตุน้ำ)",
+    "description": "สกิลเฉพาะตัวของ Blue Slime กระโดดโจมตีใส่ศัตรูโดยตรง"
+  },
+  "EPalWazaID::Unique_YakushimaMonster002_SwordCharge": {
+    "localized_name": "ซอร์ดชาร์จ",
+    "description": "สกิลเฉพาะตัวของ Enchanted Sword พุ่งแทงโจมตีใส่ศัตรูโดยตรง"
+  },
+  "EPalWazaID::Unique_YakushimaMonster003_BatCharge": {
+    "localized_name": "การจู่โจมของค้างคาว",
+    "description": "สกิลเฉพาะตัวขอ งCave Bat ใช้ร่างกายทั้งหมดพุ่งเข้าจู่โจมศัตรู หากกระแทกกับพื้นหรือกำแพงจะกระเด้ง…"
+  },
+  "EPalWazaID::Unique_Yakushima_EyeTossin": {
+    "localized_name": "พุ่งอย่างไม่ละสายตา",
+    "description": "สกิลเฉพาะตัวของ Eye of Cthulhu พุ่งชนใส่ศัตรูซ้ำหลายครั้ง"
+  },
+  "EPalWazaID::Unique_Yakushima_MouthTossin": {
+    "localized_name": "พุ่งอย่างรวดเร็ว",
+    "description": "สกิลเฉพาะตัวของ Eye of Cthulhu พุ่งชนใส่ศัตรูด้วยความเร็วสูงซ้ำหลายครั้ง"
+  },
+  "EPalWazaID::Unique_Yakushima_SummonServant": {
+    "localized_name": "อัญเชิญบริวาณ",
+    "description": "สกิลเฉพาะตัวของ Eye of Cthulhu อัญเชิญบริวารออกมา 4 ตน บริวารจะพุ่งเข้าหาศัตรูและสร้างความเสียหายเมื่อปะทะ หากถูกโจมตีหรือเวลาผ่านไประยะหนึ่ง บริวารจะสลายหายไป"
+  },
+  "EPalWazaID::Unique_Yeti_Grass_GrassBall": {
+    "localized_name": "กราสโบว์ลิง",
+    "description": "สกิลเฉพาะตัวของ Wumpo Botan กลิ้งบอลหญ้าไปด้านหน้า เมื่อได้ขนาดใหญ่พอ จะขว้างบอลออกไปให้ระเบิดออก"
+  },
+  "EPalWazaID::Unique_Yeti_SnowBall": {
+    "localized_name": "สโนว์โบว์ลิง",
+    "description": "สกิลเฉพาะตัวของ Wumpo กลิ้งบอลหิมะไปด้านหน้า เมื่อได้ขนาดใหญ่พอ จะขว้างบอลออกไปให้ระเบิดออก"
+  },
+  "EPalWazaID::WallSplash": {
+    "localized_name": "วอลล์สแปลช",
+    "description": "สร้างกำแพงจากเสาน้ำที่จุดที่มีศัตรูอยู่อย่างต่อเนื่อง"
+  },
+  "EPalWazaID::WaterBall": {
+    "localized_name": "สแปลชบอม",
+    "description": "สร้างบอลน้ำขนาดยักษ์ขึ้นเหนือศีรษะ ยิงใส่ศัตรู"
+  },
+  "EPalWazaID::WaterGun": {
+    "localized_name": "อควาช็อต",
+    "description": "ยิงกระสุนน้ำ ให้ลอยไปหาศัตรูที่เล็งไว้เป็นเส้นตรง"
+  },
+  "EPalWazaID::Weapon_Use": {
+    "localized_name": "การใช้งานอาวุธ",
+    "description": "ใช้อาวุธที่ถืออยู่โจมตี"
+  },
+  "EPalWazaID::WindCutter": {
+    "localized_name": "วินด์คัตเตอร์",
+    "description": "ยิงใบมีดลมความเร็วสูง ให้ลอยไปหาศัตรูที่เล็งไว้เป็นเส้นตรง"
+  },
+  "EPalWazaID::WindEdge": {
+    "localized_name": "วินด์เอดจ์",
+    "description": "ซัดใบมีดลมคมกริบออกไปเป็นรูปพัด"
+  }
+}

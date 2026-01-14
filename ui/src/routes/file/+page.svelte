@@ -9,6 +9,8 @@
 	import { assetLoader } from '$utils';
 	import { cn } from '$theme';
 	import { GamepassSaveList, TextInputModal } from '$components';
+	import * as m from '$i18n/messages';
+	import { c, p } from '$lib/utils/commonTranslations';
 
 	const appState = getAppState();
 	const modal = getModalState();
@@ -43,27 +45,27 @@
 		if (!isDesktopMode) goto('/upload');
 	});
 
-	const saveOptions = [
+	const saveOptions = $derived([
 		{
 			type: 'steam',
-			title: 'Steam',
+			title: m.steam(),
 			icon: steamIcon,
-			description: 'Steam/Mac: Level.sav save file',
+			description: m.steam_description(),
 			disabled: false
 		},
 		{
 			type: 'gamepass',
-			title: 'Xbox Game Pass',
+			title: m.xbox_game_pass(),
 			icon: xboxIcon,
-			description: 'Xbox Game Pass: container.index file',
+			description: m.xbox_game_pass_description(),
 			disabled: false
 		}
-	];
+	]);
 
 	async function handleEditWorldName() {
 		// @ts-ignore
 		const result = await modal.showModal<string>(TextInputModal, {
-			title: 'Edit World Name',
+			title: m.edit_entity({ entity: m.world_name() }),
 			value: appState.saveFile!.world_name
 		});
 		if (!result) return;
@@ -76,7 +78,7 @@
 	<div class="flex w-full max-w-3xl flex-col gap-12">
 		<section class="w-full">
 			<h1 class="text-primary-400 mb-6 text-center text-4xl font-extrabold tracking-tight">
-				Select Save Platform
+				{m.select_entity({ entity: m.save_platform() })}
 			</h1>
 			<div class="grid w-full grid-cols-1 justify-center gap-8 sm:grid-cols-2">
 				{#each saveOptions as option}
@@ -98,7 +100,7 @@
 								{@html option.icon}
 							</div>
 							<span class="text-xl font-semibold text-white">{option.title}</span>
-							<p class="text-surface-300 text-center text-base">{option.description}</p>
+							<span class="text-surface-300 text-center text-base">{option.description}</span>
 						</div>
 					</button>
 				{/each}
@@ -114,13 +116,13 @@
 				</div>
 				<Card class="min-w-96">
 					<div class="grid grid-cols-[auto_1fr] gap-2">
-						<span class="font-bold">Players:</span>
+						<span class="font-bold">{c.players}:</span>
 						<span class="text-end">{appState.playerSaveFiles.length}</span>
-						<span class="font-bold">Pals:</span>
+						<span class="font-bold">{c.pals}:</span>
 						<span class="text-end">{totalPals}</span>
-						<span class="font-bold">Guilds:</span>
+						<span class="font-bold">{c.guilds}:</span>
 						<span class="text-end">{Object.values(appState.guilds).length}</span>
-						<span class="font-bold">Bases:</span>
+						<span class="font-bold">{c.bases}:</span>
 						<span class="text-end">{totalBases}</span>
 					</div>
 				</Card>

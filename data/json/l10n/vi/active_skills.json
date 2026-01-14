@@ -1,0 +1,978 @@
+{
+  "EPalWazaID::AcidRain": {
+    "localized_name": "Mưa Axit",
+    "description": "Tạo ra đám mây axit và trút mưa axit lên đầu kẻ địch."
+  },
+  "EPalWazaID::AirBlade": {
+    "localized_name": "Lưỡi Đao Khí",
+    "description": "Phóng ra luồng khí sắc nhọn hình quạt."
+  },
+  "EPalWazaID::AirCanon": {
+    "localized_name": "Pháo Hơi",
+    "description": "Bắn ra khối không khí với tốc độ cao."
+  },
+  "EPalWazaID::Apocalypse": {
+    "localized_name": "Tận Thế",
+    "description": "Tạo ra nhiều cơn lốc xoáy hắc ám xung quanh kẻ địch."
+  },
+  "EPalWazaID::AquaJet": {
+    "localized_name": "Tia Nước",
+    "description": "Bắn đạn nước tốc độ cao vào kẻ địch."
+  },
+  "EPalWazaID::BeamSlicer": {
+    "localized_name": "Tia Hủy Diệt",
+    "description": "Quét sạch phía trước bằng một tia sáng chứa đầy sức mạnh rồng. Các khu vực đã quét đến sẽ phát nổ sau một khoảng thời gian nhất định."
+  },
+  "EPalWazaID::BlastCanon": {
+    "localized_name": "Pháo Năng Lượng Rồng",
+    "description": "Bắn viên đạn năng lượng chứa đầy sức mạnh rồng tại vị trí của kẻ địch. Viên đạn năng lượng sẽ phân tán khi va chạm, gây ra vụ nổ trên một khu vực rộng lớn phía trước."
+  },
+  "EPalWazaID::BlizzardLance": {
+    "localized_name": "Gai Băng",
+    "description": "Triệu hồi những lưỡi băng sắc nhọn từ dưới chân kẻ địch."
+  },
+  "EPalWazaID::BubbleShot": {
+    "localized_name": "Bong Bóng Nổ",
+    "description": "Bắn ra nhiều bong bóng chậm rãi truy đuổi kẻ địch."
+  },
+  "EPalWazaID::BubbleShower": {
+    "localized_name": "Mưa Độc",
+    "description": "Truyền sức mạnh vào cơ thể và rải các quả cầu độc khắp nơi."
+  },
+  "EPalWazaID::ChargeCanon": {
+    "localized_name": "Pháo Tích Năng Lượng",
+    "description": "Bắn viên đạn năng lượng tích tụ sức mạnh rồng vào kẻ địch.Viên đạn sẽ gây ra vụ nổ trên diện rộng khi va chạm."
+  },
+  "EPalWazaID::Commet": {
+    "localized_name": "Cú Giáng Sao Chổi",
+    "description": "Thả một thiên thạch theo hướng thẳng đứng, tạo ra sóng xung kích xung quanh."
+  },
+  "EPalWazaID::CommetRain": {
+    "localized_name": "Mưa Sao Băng",
+    "description": "Thả vô số thiên thạch, tạo ra sóng xung kích xung quanh."
+  },
+  "EPalWazaID::CrossThunder": {
+    "localized_name": "Song Sét",
+    "description": "Tạo ra tia sét di chuyển theo 2 hướng để chặn bên trái và phải của kẻ địch."
+  },
+  "EPalWazaID::CrossWind": {
+    "localized_name": "Gió Cắt",
+    "description": "Tạo ra lưỡi dao gió ngay phía trước, xé toạc kẻ địch bằng những nhát cắt chéo."
+  },
+  "EPalWazaID::DarkArrow": {
+    "localized_name": "Mũi Tên Hắc Ám",
+    "description": "Bắn liên tục nhiều mũi tên với tốc độ cao theo đuôi kẻ địch bằng sức mạnh bóng tối."
+  },
+  "EPalWazaID::DarkBall": {
+    "localized_name": "Quả Cầu Bóng Tối",
+    "description": "Bắn ra quả cầu bóng tối từ từ đuổi theo kẻ địch."
+  },
+  "EPalWazaID::DarkCanon": {
+    "localized_name": "Pháo Hắc Ám",
+    "description": "Bắn viên đạn năng lượng tốc độ cao chứa đầy sức mạnh bóng tối vào kẻ địch."
+  },
+  "EPalWazaID::DarkLaser": {
+    "localized_name": "Laser Bóng Tối",
+    "description": "Nạp sức mạnh bóng tối và bắn một chùm tia cực mạnh vào kẻ địch."
+  },
+  "EPalWazaID::DarkLegion": {
+    "localized_name": "Lửa Ma Bóng Tối",
+    "description": "Bắn ra nhiều quả cầu bóng tối đuổi theo kẻ địch."
+  },
+  "EPalWazaID::DarkPulse": {
+    "localized_name": "Bóng Tối Lan Tỏa",
+    "description": "Bắn những quả cầu bóng tối tốc độ cao tỏa đi theo hình quạt."
+  },
+  "EPalWazaID::DarkWave": {
+    "localized_name": "Năng Lượng Bóng Đêm",
+    "description": "Giải phóng nhanh chóng sức mạnh bóng tối và gây ra tác động xung quanh."
+  },
+  "EPalWazaID::DiamondFall": {
+    "localized_name": "Mưa Kim Cương",
+    "description": "Tạo ra những khối băng phía trên đầu kẻ địch và liên tục thả chúng xuống."
+  },
+  "EPalWazaID::DiversionLaser": {
+    "localized_name": "Thủy Kích Áp Lực Cao",
+    "description": "Phóng luồng nước cao áp về phía trước. Ngay sau đó, luồng nước sẽ tách thành hai nhánh."
+  },
+  "EPalWazaID::DoubleIcicleThrow": {
+    "localized_name": "Nhũ Băng Bão Tuyết Nhân Đôi",
+    "description": "Tạo ra 2 khối băng khổng lồ và bắn chúng liên tiếp vào kẻ địch. Khi va chạm, khối băng cũng gây ra tác động cho những kẻ đứng xung quanh."
+  },
+  "EPalWazaID::DragonBreath": {
+    "localized_name": "Hơi Thở Rồng",
+    "description": "Thổi hơi thở chứa đầy sức mạnh rồng về phía trước, gây sát thương liên tục."
+  },
+  "EPalWazaID::DragonCanon": {
+    "localized_name": "Pháo Rồng",
+    "description": "Bắn một viên đạn năng lượng chứa đầy sức mạnh rồng vào kẻ địch."
+  },
+  "EPalWazaID::DragonMeteor": {
+    "localized_name": "Thiên Thạch Rồng",
+    "description": "Triệu hồi nhiều thiên thạch nhỏ và bắn chúng vào kẻ địch."
+  },
+  "EPalWazaID::DragonWave": {
+    "localized_name": "Rồng Bùng Nổ",
+    "description": "Giải phóng nhanh chóng sức mạnh rồng và gây ra tác động xung quanh."
+  },
+  "EPalWazaID::ElecWave": {
+    "localized_name": "Sóng Xung Kích",
+    "description": "Phóng điện nhanh chóng và gây sốc cho những kẻ đứng xung quanh."
+  },
+  "EPalWazaID::Eruption": {
+    "localized_name": "Mưa Bom Núi Lửa",
+    "description": "Bắn vô số bom núi lửa lên bầu trời. Qua một lúc, những quả bom núi lửa đã bắn sẽ rơi xuống xung quanh người bắn chúng."
+  },
+  "EPalWazaID::FireBall": {
+    "localized_name": "Cầu Lửa",
+    "description": "Tạo ra một quả cầu lửa khổng lồ trên đầu và bắn nó vào kẻ địch. Khi va chạm, cầu lửa sẽ phát nổ và làn sóng nổ lan rộng trên một khu vực rộng lớn."
+  },
+  "EPalWazaID::FireBlast": {
+    "localized_name": "Bắn Lửa",
+    "description": "Bắn một quả cầu lửa bay thẳng về phía kẻ địch."
+  },
+  "EPalWazaID::FireSeed": {
+    "localized_name": "Hồn Lửa",
+    "description": "Bắn một quả cầu lửa vào kẻ địch. Sau khi di chuyển về phía trước một chút, cầu lửa sẽ vỡ ra, tạo ra những quả cầu lửa nhỏ sẽ bay tỏa về phía trước."
+  },
+  "EPalWazaID::FlameFunnel": {
+    "localized_name": "Luồng Lửa Xoáy",
+    "description": "Tạo ra nhiều quả cầu năng lượng lửa, từ đó bắn vô số quả cầu lửa vào kẻ địch."
+  },
+  "EPalWazaID::FlameWall": {
+    "localized_name": "Tường Lửa",
+    "description": "Tạo ra một bức tường lửa rực cháy tại vị trí của kẻ địch. Bức tường lửa sẽ tiếp tục tồn tại trong một thời gian và gây sát thương cho kẻ địch chạm vào nó."
+  },
+  "EPalWazaID::Flamethrower": {
+    "localized_name": "Hơi Thở Lửa",
+    "description": "Phóng lửa về phía kẻ địch, gây sát thương liên tục."
+  },
+  "EPalWazaID::FlareArrow": {
+    "localized_name": "Mũi Tên Lửa",
+    "description": "Bắn liên tiếp 3 mũi tên lửa tốc độ cao để truy đuổi kẻ địch."
+  },
+  "EPalWazaID::FlareTornado": {
+    "localized_name": "Bão Xoáy Lửa",
+    "description": "Tạo ra lốc xoáy rực lửa ở bên trái và bên phải và phóng chúng về phía kẻ địch."
+  },
+  "EPalWazaID::FlareTwister": {
+    "localized_name": "-",
+    "description": "-"
+  },
+  "EPalWazaID::FrostBreath": {
+    "localized_name": "Hơi Thở Lạnh Giá",
+    "description": "Phóng ra luồng khí lạnh về phía kẻ địch gây sát thương liên tục."
+  },
+  "EPalWazaID::GhostFlame": {
+    "localized_name": "Lửa Hồn",
+    "description": "Bắn ra 3 oán niệm đuổi theo kẻ địch."
+  },
+  "EPalWazaID::GrassTornado": {
+    "localized_name": "Lốc Xoáy Cỏ",
+    "description": "Tạo ra lốc xoáy ở bên trái và bên phải và phóng chúng về phía kẻ địch."
+  },
+  "EPalWazaID::GravityShot": {
+    "localized_name": "Đạn Bóng Tối",
+    "description": "Bắn một viên đạn năng lượng hắc ám từ từ tăng tốc khi bay."
+  },
+  "EPalWazaID::HolyBlast": {
+    "localized_name": "Bùng Nổ Thánh Quang",
+    "description": "Tạo ra cú nổ ánh sáng diện rộng tại vị trí của địch và xung quanh."
+  },
+  "EPalWazaID::Human_Punch": {
+    "localized_name": "Đấm",
+    "description": "Tung cú đấm với một niềm tin mạnh mẽ."
+  },
+  "EPalWazaID::HydroPump": {
+    "localized_name": "Laser Nước",
+    "description": "Phun nước với lực rất lớn và quét sạch một khu vực rộng lớn phía trước."
+  },
+  "EPalWazaID::HydroSlicer": {
+    "localized_name": "Lưỡi Kiếm Nước",
+    "description": "Quét ngang phía trước bằng dòng nước nén. Chỉ lát sau, từ những điểm bị quét, cột nước mạnh sẽ phun trào."
+  },
+  "EPalWazaID::HyperBeam": {
+    "localized_name": "Chùm Pal",
+    "description": "Tích tụ năng lượng hủy diệt trước khi bắn một tia năng lượng mạnh về phía trước trên diện rộng."
+  },
+  "EPalWazaID::IceAge": {
+    "localized_name": "Băng Giá Tuyệt Đối",
+    "description": "Đâm các cột băng trên một khu vực rộng lớn từ dưới chân kẻ địch."
+  },
+  "EPalWazaID::IceBlade": {
+    "localized_name": "Lưỡi Cắt Băng Giá",
+    "description": "Tạo ra một lưỡi dao băng hình lưỡi liềm và bắn nó về phía trước."
+  },
+  "EPalWazaID::IceMissile": {
+    "localized_name": "Phóng Băng",
+    "description": "Tạo ra những tảng băng nhọn trên không và bắn chúng vào kẻ địch."
+  },
+  "EPalWazaID::IceWall": {
+    "localized_name": "Tường Băng",
+    "description": "Dựng lên một bức tường băng từ mặt đất. Tồn tại trong một khoảng thời gian, sụp đổ khi chịu đủ sát thương."
+  },
+  "EPalWazaID::IcicleLine": {
+    "localized_name": "Đường Trụ Băng",
+    "description": "Tạo ra các cột băng di chuyển ba hướng theo đường thẳng."
+  },
+  "EPalWazaID::IciclePierce": {
+    "localized_name": "Đạn Băng",
+    "description": "Tạo ra nhiều tảng băng nhọn trên không và bắn chúng vào kẻ địch."
+  },
+  "EPalWazaID::IcicleThrow": {
+    "localized_name": "Nhũ Băng Bão Tuyết",
+    "description": "Tạo ra một khối băng khổng lồ và bắn nó vào kẻ địch với tốc độ cao. Khi va chạm, khối băng cũng gây ra tác động cho những kẻ đứng xung quanh."
+  },
+  "EPalWazaID::Inferno": {
+    "localized_name": "Lửa Thịnh Nộ",
+    "description": "Kích hoạt mặt đất xung quanh kẻ địch và khiến chúng phát nổ sau một khoảng thời gian nhất định."
+  },
+  "EPalWazaID::LightningStrike": {
+    "localized_name": "Lôi Trảm",
+    "description": "Triệu hồi sấm sét bằng cách tự biến mình thành cột thu lôi và gây ra một vụ nổ phóng điện ngay tại chỗ."
+  },
+  "EPalWazaID::LineGeyser": {
+    "localized_name": "Cột Nước",
+    "description": "Tạo ra một cột nước di chuyển theo đường thẳng."
+  },
+  "EPalWazaID::LineThunder": {
+    "localized_name": "Chuỗi Tia Chớp",
+    "description": "Tạo ra tia sét di chuyển theo đường thẳng."
+  },
+  "EPalWazaID::LockonLaser": {
+    "localized_name": "Laser Khóa Mục Tiêu",
+    "description": "Sau khi nhắm mục tiêu vào kẻ địch thì bắn một tia laser sét siêu nhanh."
+  },
+  "EPalWazaID::MudShot": {
+    "localized_name": "Ném Bùn",
+    "description": "Bắn bùn kết dính vào kẻ địch."
+  },
+  "EPalWazaID::PoisonFog": {
+    "localized_name": "Sương Mù Độc",
+    "description": "Tạo ra một làn sương độc phía trước và đầu độc đối thủ."
+  },
+  "EPalWazaID::PoisonShot": {
+    "localized_name": "Ném Độc",
+    "description": "Bắn bùn chứa đầy sức mạnh độc hại vào kẻ địch."
+  },
+  "EPalWazaID::PowerBall": {
+    "localized_name": "Bom Năng Lượng",
+    "description": "Tích trữ một lượng năng lượng lớn và bắn ra dưới dạng quả cầu khổng lồ."
+  },
+  "EPalWazaID::PowerShot": {
+    "localized_name": "Bắn Năng Lượng",
+    "description": "Tích trữ năng lượng và bắn ra như đạn."
+  },
+  "EPalWazaID::PredatorBeam": {
+    "localized_name": "Tia Săn Mồi",
+    "description": null
+  },
+  "EPalWazaID::PredatorLockon": {
+    "localized_name": "Đánh Dấu Săn Mồi",
+    "description": null
+  },
+  "EPalWazaID::PredatorWave": {
+    "localized_name": "Sóng Săn Mồi",
+    "description": null
+  },
+  "EPalWazaID::Psychokinesis": {
+    "localized_name": "Ma Pháp Trọng Lực",
+    "description": "Sử dụng năng lực ngoại cảm để tước đoạt tự do của kẻ địch xung quanh và đập chúng xuống đất từ trên cao."
+  },
+  "EPalWazaID::RadiantBarrage": {
+    "localized_name": "Pháo Sáng Truy Kích",
+    "description": "Bắn ra quả cầu ánh sáng chậm rãi đuổi theo kẻ địch. Khi đến gần mục tiêu, quả cầu sẽ phân tách thành vô số đạn sáng, tấn công dồn dập."
+  },
+  "EPalWazaID::RaidCutter": {
+    "localized_name": "Lưỡi Cắt Đột Kích",
+    "description": "Bắn ra vô số lưỡi dao gió bay về phía kẻ địch."
+  },
+  "EPalWazaID::Railbolt": {
+    "localized_name": "Đường Dẫn Sấm Sét",
+    "description": "Nạp sức mạnh của sấm sét đến mức tối đa và đồng thời bắn ra nhiều cú sốc điện cực mạnh vào kẻ địch."
+  },
+  "EPalWazaID::RangeThunder": {
+    "localized_name": "Sấm Sét Diện Rộng",
+    "description": "Tạo ra những tia sét di chuyển khắp nơi theo đường thẳng."
+  },
+  "EPalWazaID::ReflectiveShuriken": {
+    "localized_name": "Lá Phản Xạ",
+    "description": "Phóng ra những lưỡi gió nảy bật khi trúng kẻ địch hoặc cây cối, tạo thành chuỗi tấn công dồn dập. Có thể bật lại tối đa 4 lần."
+  },
+  "EPalWazaID::RipTide": {
+    "localized_name": "Sóng Bủa Vây",
+    "description": "Tạo ra sóng nước cuộn trào bao vây kẻ địch. Cuối cùng, sóng nổ tung tại trung tâm, phóng lên thành cột nước."
+  },
+  "EPalWazaID::RockBeat": {
+    "localized_name": "Đá Vỡ",
+    "description": "Làm rung chuyển mặt đất và nâng một tảng đá khổng lồ lên."
+  },
+  "EPalWazaID::RockLance": {
+    "localized_name": "Giáo Đá",
+    "description": "Triệu hồi những ngọn giáo đá sắc nhọn từ dưới chân kẻ địch."
+  },
+  "EPalWazaID::RootAttack": {
+    "localized_name": "Dây Leo Gai",
+    "description": "Rễ sắc nhọn dưới lòng đất sẽ truy đuổi kẻ địch và đâm xuyên chúng từ dưới chân."
+  },
+  "EPalWazaID::RootLance": {
+    "localized_name": "Dây Leo Bao Vây",
+    "description": "Đâm ra những rễ sắc nhọn tại vị trí của kẻ địch và xung quanh đó."
+  },
+  "EPalWazaID::SandTornado": {
+    "localized_name": "Lốc Xoáy Cát",
+    "description": "Tạo ra lốc xoáy cát ở bên trái và bên phải, và phóng chúng về phía kẻ địch."
+  },
+  "EPalWazaID::SandTwister": {
+    "localized_name": "Bão Xoáy Cát",
+    "description": "Tạo ra nhiều cơn lốc xoáy cát. Các cơn lốc xoáy sẽ không ngừng xoay theo đường tròn."
+  },
+  "EPalWazaID::SeaGush": {
+    "localized_name": "Cột Nước Phun Trào",
+    "description": "Tạo ra vô số cột nước lớn phun trào tại vị trí kẻ địch và xung quanh đó."
+  },
+  "EPalWazaID::SeedMachinegun": {
+    "localized_name": "Súng Bắn Hạt",
+    "description": "Giải phóng nhiều hạt cứng và tấn công kẻ địch phía trước."
+  },
+  "EPalWazaID::SeedMine": {
+    "localized_name": "Hạt Phát Nổ",
+    "description": "Bắn ra hạt giống nguy hiểm. Khi trúng kẻ địch, hạt sẽ nổ tung."
+  },
+  "EPalWazaID::SelfDestruct": {
+    "localized_name": "Phát Nổ",
+    "description": "Liều mình phát nổ. Bản thân không thể chiến đấu ngay sau đó."
+  },
+  "EPalWazaID::SelfDestruct_Bee": {
+    "localized_name": "Ong Phát Nổ",
+    "description": "Liều mình phát nổ. Nhưng lại nhận được vinh dự là ngã xuống trong trận chiến."
+  },
+  "EPalWazaID::SelfExplosion": {
+    "localized_name": "Siêu Phát Nổ",
+    "description": "Liều mình gây ra một vụ nổ siêu lớn. Bản thân hy sinh và trở thành một ngôi sao tỏa sáng trên bầu trời đêm."
+  },
+  "EPalWazaID::ShadowBall": {
+    "localized_name": "Quả Cầu Ác Mộng",
+    "description": "Tạo ra một quả cầu bóng tối lớn và bắn nó vào kẻ địch với tốc độ cao."
+  },
+  "EPalWazaID::ShokeiLaser": {
+    "localized_name": "Laser Chí Mạng",
+    "description": "Sau khi nhắm mục tiêu vào kẻ địch, thì sẽ bắn nhiều tia laser sét siêu nhanh."
+  },
+  "EPalWazaID::SolarBeam": {
+    "localized_name": "Năng Lượng Mặt Trời",
+    "description": "Nạp sức mạnh của mặt trời và bắn một chùm tia uy lực vào kẻ địch."
+  },
+  "EPalWazaID::SpecialCutter": {
+    "localized_name": "Cắt Liên Hoàn",
+    "description": "Bắn 3 lưỡi dao gió siêu nhanh bay thẳng về phía kẻ địch."
+  },
+  "EPalWazaID::SpreadPulse": {
+    "localized_name": "Tia Sét Bùng Nổ",
+    "description": "Bắn những quả cầu sét tỏa theo hình quạt."
+  },
+  "EPalWazaID::StarMine": {
+    "localized_name": "Sao Phát Nổ",
+    "description": "Tạo ra các ngôi sao xung quanh địch, phát nổ khi tiếp xúc. Các ngôi sao cũng tự phát nổ sau một khoảng thời gian."
+  },
+  "EPalWazaID::StoneShotgun": {
+    "localized_name": "Bắn Đá",
+    "description": "Bắn vô số viên đá nhỏ về phía trước."
+  },
+  "EPalWazaID::ThreeCommet": {
+    "localized_name": "Sao Chổi Rơi",
+    "description": "Liên tiếp thả thiên thạch, tạo ra sóng xung kích xung quanh."
+  },
+  "EPalWazaID::ThreeThunder": {
+    "localized_name": "Tam Sét",
+    "description": "Gây ra 3 lần sét đánh xuống trên đầu kẻ địch."
+  },
+  "EPalWazaID::ThrowRock": {
+    "localized_name": "Pháo Đá",
+    "description": "Nhặt tảng đá từ mặt đất trước mặt và bắn chúng vào kẻ địch."
+  },
+  "EPalWazaID::ThunderBall": {
+    "localized_name": "Quả Cầu Sấm Sét",
+    "description": "Bắn ra quả cầu sét từ từ đuổi theo kẻ địch."
+  },
+  "EPalWazaID::ThunderFunnel": {
+    "localized_name": "Phễu Plasma",
+    "description": "Tạo ra 2 quả cầu năng lượng sét từ đó bắn vô số quả cầu sét vào kẻ địch."
+  },
+  "EPalWazaID::ThunderRain": {
+    "localized_name": "Mưa Sấm Sét",
+    "description": "Triệu hồi sấm sét đánh xuống kẻ địch sau một khoảng thời gian nhất định."
+  },
+  "EPalWazaID::ThunderSpear": {
+    "localized_name": "Sấm Sét Xuyên Thủng",
+    "description": "Bắn những ngọn giáo sét với tốc độ cao bay theo đường thẳng vào kẻ địch."
+  },
+  "EPalWazaID::ThunderStorm": {
+    "localized_name": "Bão Sấm Sét",
+    "description": "Tạo ra một cơn lốc xoáy sét khổng lồ. Lốc xoáy sẽ từ từ di chuyển về phía kẻ địch."
+  },
+  "EPalWazaID::Thunderbolt": {
+    "localized_name": "Lôi Kích",
+    "description": "Nạp sức mạnh của sấm sét và gây điện giật cực mạnh vào kẻ địch."
+  },
+  "EPalWazaID::Tremor": {
+    "localized_name": "Đá Nổ",
+    "description": "Làm rung chuyển mặt đất và làm những tảng đá lớn bay khắp xung quanh"
+  },
+  "EPalWazaID::TriSpark": {
+    "localized_name": "Liên Hoàn Sấm Sét",
+    "description": "Đồng thời bắn ra một quả cầu sét tốc độ cao bay theo đường thẳng và một quả cầu sét chậm hơn truy đuổi kẻ địch."
+  },
+  "EPalWazaID::Unique_Alpaca_Tackle": {
+    "localized_name": "Tấn Công Bông Xù",
+    "description": "Kỹ năng độc quyền của Melpaca. Lao về phía trước với hào quang của sự dễ thương bao quanh."
+  },
+  "EPalWazaID::Unique_AmaterasuWolf_Dark_DarkCharge": {
+    "localized_name": "Ngọn Lửa Cuồng Phong",
+    "description": "Kỹ năng độc quyền của Kitsun Noct. Lao cực mạnh về phía trước với ngọn lửa tím bao quanh cơ thể."
+  },
+  "EPalWazaID::Unique_AmaterasuWolf_FireCharge": {
+    "localized_name": "Núi Lửa Dũng Mãnh",
+    "description": "Kỹ năng độc quyền của Kitsun. Lao cực mạnh về phía trước với ngọn lửa xanh bao quanh cơ thể."
+  },
+  "EPalWazaID::Unique_Anubis_GroundPunch": {
+    "localized_name": "Đấm Đất",
+    "description": "Kỹ năng độc quyền của Anubis. Nhảy cao lên không trung và đấm xuống đất. Lực tác động lan tỏa khắp mặt đất, gây sát thương trên diện rộng."
+  },
+  "EPalWazaID::Unique_Anubis_LowRoundKick": {
+    "localized_name": "Đá Xoay",
+    "description": "Kỹ năng độc quyền của Anubis. Thực hiện cú đá xoay bằng đôi chân khỏe mạnh, quét sạch kẻ địch trong phạm vi rộng."
+  },
+  "EPalWazaID::Unique_Anubis_Tackle": {
+    "localized_name": "Tấn Công Mạnh Mẽ",
+    "description": "Kỹ năng độc quyền của Anubis. Di chuyển với tốc độ cao để truy đuổi kẻ địch và tung ra hàng loạt cú đấm mạnh mẽ trong khi giải phóng năng lượng."
+  },
+  "EPalWazaID::Unique_Baphomet_SwallowKite": {
+    "localized_name": "Vuốt Lửa Địa Ngục",
+    "description": "Kỹ năng độc quyền của loài Incineram. Tiến lại gần kẻ địch và vung nhát chém móng vuốt trái, sau đó hạ gục bằng móng vuốt phải."
+  },
+  "EPalWazaID::Unique_BirdDragon_FireBreath": {
+    "localized_name": "Hơi Thở Tỏa Lửa",
+    "description": "Kỹ năng độc quyền của Vanwyrm. Vừa tiến về phía trước vừa phun lửa."
+  },
+  "EPalWazaID::Unique_BirdDragon_Ice_IceBreath": {
+    "localized_name": "Hơi Thở Băng",
+    "description": "Kỹ năng độc quyền của Vanwyrm Cryst. Vừa tiến về phía trước vừa thở ra luồng khí lạnh."
+  },
+  "EPalWazaID::Unique_BlackCentaur_TwoSpearRushes": {
+    "localized_name": "Giáo Song Đôi",
+    "description": "Kỹ năng độc quyền của Necromus. Trang bị những cơn lốc xoáy dữ dội cho hai ngọn giáo và lao về phía trước, đâm giáo lần lượt."
+  },
+  "EPalWazaID::Unique_BlackGriffon_TackleLaser": {
+    "localized_name": "Thần Linh Giáng Họa",
+    "description": "Kỹ năng độc quyền của Shadowbeak. Vừa lao về phía trước, vừa tạo ra những quả cầu ánh sáng. Những quả cầu ánh sáng tự động nhắm vào kẻ địch và phóng ra một loạt tia laser."
+  },
+  "EPalWazaID::Unique_BlackGriffon_TackleLaser2": {
+    "localized_name": "Thần Linh Giáng Họa II",
+    "description": "Kỹ năng độc quyền của loài Shadowbeak. Vừa lao tới vừa bắn ra vô số tia sáng màu xanh dương từ vòng hào quang trên cơ thể. Các tia sáng sẽ tự động khóa mục tiêu và truy đuổi kẻ địch."
+  },
+  "EPalWazaID::Unique_BlackMetalDragon_FirePunch": {
+    "localized_name": "Hơi Thở Cú Đấm",
+    "description": "Kỹ năng độc quyền của Astegon. Sau khi tung ra 2 cú đấm về phía trước, thở ra hơi thở rồng hướng xuống dưới."
+  },
+  "EPalWazaID::Unique_BluePlatypus_Toboggan": {
+    "localized_name": "Tấn Công Lướt Sóng",
+    "description": null
+  },
+  "EPalWazaID::Unique_BluePlatypus_Toboggan_Fire": {
+    "localized_name": "Cú Húc Lửa",
+    "description": null
+  },
+  "EPalWazaID::Unique_BlueThunderHorse_FlashDash": {
+    "localized_name": "Nhanh Như Chớp",
+    "description": "Kỹ năng độc quyền của Azurmane. Di chuyển với tốc độ như sấm sét, cuốn theo mọi thứ trên đường đi."
+  },
+  "EPalWazaID::Unique_Boar_Tackle": {
+    "localized_name": "Tấn Công Liều Lĩnh",
+    "description": "Kỹ năng độc quyền của Rushoar. Nhắm vào kẻ địch và lao tới với đòn tấn công dữ dội."
+  },
+  "EPalWazaID::Unique_CaptainPenguin_Black_BodySlide_Electric": {
+    "localized_name": "Cú Trượt Tụ Sét",
+    "description": "Kỹ năng độc quyền của Penking Lux. Áp bụng sát đất, phóng điện khắp người rồi trượt thẳng vào kẻ địch."
+  },
+  "EPalWazaID::Unique_CaptainPenguin_BodySlide": {
+    "localized_name": "Hoàng Đế Trượt Băng",
+    "description": "Kỹ năng độc quyền của Penking. Đặt bụng xuống đất, phát ra không khí lạnh từ toàn bộ cơ thể và trượt về phía kẻ địch."
+  },
+  "EPalWazaID::Unique_ChickenPal_ChickenPeck": {
+    "localized_name": "Gà Đột Kích",
+    "description": "Kỹ năng độc quyền của Chikipi. Bay đến kẻ địch trong tầm ngắm và tấn công bằng chiếc mỏ sắc nhọn."
+  },
+  "EPalWazaID::Unique_DarkAlien_JumpScractch": {
+    "localized_name": "Nhát Chém Độc Địa",
+    "description": "Kỹ năng độc quyền của loài Xenovader. Nhảy nhanh và xé toạc bằng tay trái."
+  },
+  "EPalWazaID::Unique_DarkCrow_TelePoke": {
+    "localized_name": "Mổ Bất Ngờ",
+    "description": "Kỹ năng độc quyền của Cawgnito. Dịch chuyển tức thời đến bên cạnh kẻ địch, sau đó tấn công bằng mỏ."
+  },
+  "EPalWazaID::Unique_DarkMechaDragon_BeamSlash": {
+    "localized_name": "Nhát Chém Năng Lượng",
+    "description": "Kỹ năng độc quyền của Xenolord. Tạo ra một thanh kiếm công lực cao bằng tay phải và chém 2 lần trong khi di chuyển với tốc độ cao."
+  },
+  "EPalWazaID::Unique_DarkMechaDragon_ConvergentBeam": {
+    "localized_name": "Tia Sáng Thiên Thể",
+    "description": "Kỹ năng độc quyền của Xenolord. Hội tụ năng lượng tràn đầy bóng tối và giải phóng ra toàn bộ theo đường thẳng."
+  },
+  "EPalWazaID::Unique_DarkMechaDragon_FunnelLaser": {
+    "localized_name": "Ánh Sáng Hủy Diệt",
+    "description": "Kỹ năng độc quyền của Xenolord. Liên tục giải phóng ánh sáng hủy diệt được triệu hồi từ không gian phụ theo nhiều hướng, đốt cháy mọi thứ trong tầm mắt của nó."
+  },
+  "EPalWazaID::Unique_DarkMechaDragon_SetFunnel": {
+    "localized_name": "Tinh Thể Vệ Tinh",
+    "description": "Kỹ năng độc quyền của Xenolord. Tạo ra 4 cánh hình vệ tinh với chức năng tự động tấn công. Những chiếc cánh này sẽ tự động truy đuổi và tấn công kẻ địch khi tung ra đòn tấn công tiếp theo."
+  },
+  "EPalWazaID::Unique_DarkMechaDragon_WarpComet": {
+    "localized_name": "Thiên Thạch Vũ Trụ",
+    "description": "Kỹ năng độc quyền của Xenolord. Bay lên không trung với tốc độ ánh sáng và bắn vô số đạn sao băng. Sau đó, tự biến thành sao chổi và lao tới, gây ra một vụ nổ lớn tại điểm va chạm."
+  },
+  "EPalWazaID::Unique_DarkScorpion_Pierce": {
+    "localized_name": "Vết Đốt Đột Kích",
+    "description": "Kỹ năng độc quyền của loài Menasting. Nhảy cao và đâm mạnh đuôi vào con mồi. Đuôi có chứa chất độc."
+  },
+  "EPalWazaID::Unique_Deer_PushupHorn": {
+    "localized_name": "Húc Sừng",
+    "description": "Kỹ năng độc quyền của loài Eikthyrdeer. Lao đến kẻ địch và sử dụng gạc để hất lên không trung. Nếu sử dụng khi đang cưỡi, có thể điều khiển hướng lao đến tấn công."
+  },
+  "EPalWazaID::Unique_DrillGame_ShellAttack": {
+    "localized_name": "Vỏ Xoáy",
+    "description": "Kỹ năng độc quyền của Digtoise. Di chuyển trong khi xoay toàn bộ cơ thể với tốc độ cao. Khoan vào kẻ địch, gây sát thương liên tục."
+  },
+  "EPalWazaID::Unique_Eagle_GlidingNail": {
+    "localized_name": "Vuốt Gió",
+    "description": "Kỹ năng độc quyền của Galeclaw. Lao về phía trước với tốc độ dữ dội, đồng thời duỗi móng vuốt ra phía trước."
+  },
+  "EPalWazaID::Unique_ElecPanda_ElecScratch": {
+    "localized_name": "Vuốt Sét",
+    "description": "Kỹ năng độc quyền của Grizzbolt. Nhảy vào kẻ địch và chém bằng móng vuốt điện. Sau khi chém địch lần thứ 2, phát cuối cùng sẽ đâm móng vuốt xuống đất, tạo ra luồng điện lan tỏa diện rộng."
+  },
+  "EPalWazaID::Unique_ElecPanda_GatlingAttack": {
+    "localized_name": "Súng Máy Toàn Lực",
+    "description": "Kỹ năng độc quyền của loài Grizzbolt. Bắn bằng một khẩu súng minigun lấy ra từ hư không. Đòn cuối cùng sẽ là 1 phát đạn nạp đầy uy lực."
+  },
+  "EPalWazaID::Unique_FairyDragon_FairyTornado": {
+    "localized_name": "Cơn Lốc Huyền Bí",
+    "description": "Kỹ năng độc quyền của loài Elphidran. Tạo ra 2 cơn lốc xoáy chứa sức mạnh bí ẩn để truy đuổi kẻ địch."
+  },
+  "EPalWazaID::Unique_FeatherOstrich_Tossin": {
+    "localized_name": "Lao Nhanh",
+    "description": "Kỹ năng độc quyền của loài Dazemu. Tăng tốc đột ngột và lao nhanh về phía trước."
+  },
+  "EPalWazaID::Unique_FengyunDeeper_CloudTempest": {
+    "localized_name": "Áp Suất Mây",
+    "description": "Kỹ năng độc quyền của Fenglope. Lao về phía trước trong khi điều khiển bầu khí quyển để bao bọc cơ thể trong áp lực gió."
+  },
+  "EPalWazaID::Unique_FengyunDeeper_Electric_ThunderTempest": {
+    "localized_name": "Áp Suất Bão Sấm",
+    "description": "Kỹ năng độc quyền của Fenglope Lux. Lao về phía trước trong khi điều khiển bầu khí quyển để bao bọc cơ thể trong những đám mây giông."
+  },
+  "EPalWazaID::Unique_FireKirin_Dark_DarkTossin": {
+    "localized_name": "Húc Lửa Hắc Ám",
+    "description": "Kỹ năng độc quyền của Pyrin Noct. Lao tới với ngọn lửa hắc ám bao quanh. Lửa sẽ cháy dọc theo đường đi của nó."
+  },
+  "EPalWazaID::Unique_FireKirin_Tackle": {
+    "localized_name": "Húc Lửa",
+    "description": "Kỹ năng độc quyền của Pyrin. Lao về phía trước với ngọn lửa bao quanh. Lửa sẽ cháy dọc theo đường đi của nó."
+  },
+  "EPalWazaID::Unique_FlameBuffalo_FlameHorn": {
+    "localized_name": "Sừng Rực Lửa",
+    "description": "Kỹ năng độc quyền của Arsox. Sau khi nhắm mục tiêu vào kẻ địch, thì lao tới với tốc độ dữ dội và vung sừng lên."
+  },
+  "EPalWazaID::Unique_FlowerDinosaur_Whip": {
+    "localized_name": "Cú Giáng Thực Vật",
+    "description": "Kỹ năng độc quyền của loài Dinossom. Sử dụng chiếc đuôi lớn để đập xuống khu đất trước mặt, tạo ra một làn sóng xung kích theo đường thẳng."
+  },
+  "EPalWazaID::Unique_Garm_Bite": {
+    "localized_name": "Nanh Nhọn",
+    "description": "Kỹ năng độc quyền của Direhowl. Nhanh chóng nhảy vào kẻ địch và cắn."
+  },
+  "EPalWazaID::Unique_GhostAnglerfish_Fire_SweepBait_Fire": {
+    "localized_name": "Quét Đèn Lồng Rực Lửa",
+    "description": "Kỹ năng độc quyền của Ghangler Ignis. Vung chiếc đèn lồng rực lửa trên đầu, tạo ra vòng cung lửa ở phía trước."
+  },
+  "EPalWazaID::Unique_GhostAnglerfish_SweepBait": {
+    "localized_name": "Quét Đèn Lồng",
+    "description": "Kỹ năng độc quyền của Ghangler. Vung chiếc đèn lồng dài trên đầu, càn quét một vùng rộng ở phía trước."
+  },
+  "EPalWazaID::Unique_GhostBeast_Tossin": {
+    "localized_name": "Phóng Lửa Hồn",
+    "description": "Kỹ năng độc quyền của Maraith. Trong khi chạy chậm, liên tục ném những quả cầu lửa nhấp nháy về phía kẻ địch."
+  },
+  "EPalWazaID::Unique_GoldenHorse_StoneDash": {
+    "localized_name": "Húc Đá",
+    "description": "Kỹ năng độc quyền của Gildane. Lao tới với lực rất lớn đồng thời ném đá với lực lớn sang trái và phải."
+  },
+  "EPalWazaID::Unique_Gorilla_GroundPunch": {
+    "localized_name": "Cú Đấm Kết Hợp",
+    "description": "Kỹ năng độc quyền của loài Gorirat. Đập xuống đất 2 lần, sau đó nhảy lên không trung và tung một cú đấm mạnh mẽ."
+  },
+  "EPalWazaID::Unique_GrassPanda_Electric_ElectricPunch": {
+    "localized_name": "Cú Đấm Tích Điện",
+    "description": "Kỹ năng độc quyền của Mossanda Lux. Xoay cánh tay phải và tung một cú đấm mang điện về phía trước."
+  },
+  "EPalWazaID::Unique_GrassPanda_MusclePunch": {
+    "localized_name": "Cú Đấm Hủy Diệt",
+    "description": "Kỹ năng độc quyền của Mossanda. Xoay cánh tay phải và tung một cú đấm mạnh về phía trước."
+  },
+  "EPalWazaID::Unique_GrassRabbitMan_GrassRoundKick": {
+    "localized_name": "Cú Đá Vòng",
+    "description": "Kỹ năng độc quyền của Verdash. Vừa nhảy về phía trước vừa quét sạch xung quanh bằng cú đá xoay tốc độ cao."
+  },
+  "EPalWazaID::Unique_Grassmammoth_Earthquake": {
+    "localized_name": "Rung Lắc Mặt Đất",
+    "description": "Kỹ năng độc quyền của loài Mammorest. Sử dụng cơ thể khổng lồ để làm rung chuyển mặt đất, gây sát thương trên phạm vi rộng xung quanh bản thân."
+  },
+  "EPalWazaID::Unique_GrimGirl_BrutalMachete": {
+    "localized_name": "Thịnh Nộ Hắc Ám",
+    "description": "Kỹ năng độc quyền của Splatterina. Dịch chuyển tức thời khỏi vị trí và tung ra một đòn chém. Sau đó dịch chuyển tức thời lên trên đầu kẻ địch, đâm vũ khí và tạo ra một làn sóng bóng tối."
+  },
+  "EPalWazaID::Unique_HawkBird_Storm": {
+    "localized_name": "Tấn Công Lốc Xoáy",
+    "description": "Kỹ năng độc quyền của Nitewing. Sau khi tạo ra một cơn lốc xoáy phía trước, chao lượn và lao về phía trước."
+  },
+  "EPalWazaID::Unique_HerculesBeetle_BeetleTackle": {
+    "localized_name": "Sừng Khổng Lồ",
+    "description": "Kỹ năng độc quyền của Warsect . Xiên kẻ địch bằng 4 chiếc sừng chắc chắn."
+  },
+  "EPalWazaID::Unique_Horus_FlareBird": {
+    "localized_name": "Sóng Lửa Phượng Hoàng",
+    "description": "Kỹ năng độc quyền của Faleris. Tạo ra nhiều lốc xoáy rực lửa, sau đó bao bọc cơ thể mình trong lửa địa ngục và chao lượn, lao về phía trước."
+  },
+  "EPalWazaID::Unique_Horus_PerfectStorm": {
+    "localized_name": "Sóng Lửa Cuồng Nộ",
+    "description": "Kỹ năng độc quyền của Faleris. Tạo ra nhiều cơn lốc xoáy rực lửa, sau đó chao lượn và lao về phía trước. Các cơn lốc xoáy dồn vào trung tâm, và cuối cùng trở thành một cơn lốc xoáy khổng lồ."
+  },
+  "EPalWazaID::Unique_Horus_Water_AquaStorm": {
+    "localized_name": "Sóng Nước Phượng Hoàng",
+    "description": "Kỹ năng độc quyền của Faleris Aqua. Tạo ra một lốc xoáy nước khổng lồ, sau đó bao bọc cơ thể trong nước và chao lượn, lao về phía trước."
+  },
+  "EPalWazaID::Unique_IceCrocodile_SpitAttack": {
+    "localized_name": "Nhả Đạn Phun Băng",
+    "description": "Kỹ năng độc quyền của Munchill. Phun ra 3 quả lựu đạn được giữ lạnh sâu bên trong cơ thể để tấn công. Đôi khi những thứ nguy hiểm hơn nữa cũng...?"
+  },
+  "EPalWazaID::Unique_IceDeer_IceHorn": {
+    "localized_name": "Húc Sừng Băng",
+    "description": "Kỹ năng độc quyền của Reindrix. Lao tới và dùng sừng băng hùng vĩ đâm kẻ địch."
+  },
+  "EPalWazaID::Unique_IceHorse_IceBladeAttack": {
+    "localized_name": "Cánh Pha Lê",
+    "description": "Kỹ năng độc quyền của loài Frostallion. Ngưng tụ không khí lạnh để bao phủ đôi cánh bằng băng và chém kẻ địch bằng đôi cánh băng trong khi lao đi."
+  },
+  "EPalWazaID::Unique_IceNarwhal_JumpingHorn": {
+    "localized_name": "Đột Kích Băng",
+    "description": "Kỹ năng độc quyền của loài Whalaska. Lao thẳng tới, lặn sâu mất hút rồi bất ngờ bay vọt lên cao để tấn công. Cùng lúc đó, một vụ nổ Băng cực mạnh sẽ xảy ra."
+  },
+  "EPalWazaID::Unique_JetDragon_JumpBeam": {
+    "localized_name": "Sao Chổi Tia Sáng",
+    "description": "Kỹ năng độc quyền của Jetragon. Đôi cánh phát sáng và bắn vô số tia sáng bay về phía kẻ địch. Các tia sáng phát nổ khi va chạm."
+  },
+  "EPalWazaID::Unique_KingAlpaca_BodyPress": {
+    "localized_name": "Uy Chấn Vương Giả",
+    "description": "Kỹ năng độc quyền của loài Kingpaca. Sau khi nhảy vọt lên cao, nghiền nát kẻ địch bằng cơ thể khổng lồ đầy đặn của mình."
+  },
+  "EPalWazaID::Unique_KingBahamut_AirCrash": {
+    "localized_name": "Trời Giáng",
+    "description": "Kỹ năng độc quyền của Blazamut Ryu. Sau khi nhảy vọt lên cao, tích tụ sức mạnh, vừa di chuyển tốc độ cao trên không trung vừa tung ra một cú đấm toàn lực."
+  },
+  "EPalWazaID::Unique_KingBahamut_ArmSmash": {
+    "localized_name": "Uy Lực Cơ Bắp",
+    "description": "Kỹ năng độc quyền của loài Blazamut. Vung cánh tay lên, phồng to chúng lên và sau đó đập chúng lại với nhau để gây ra một vụ nổ lớn xung quanh."
+  },
+  "EPalWazaID::Unique_Kirin_LightningTackle": {
+    "localized_name": "Cuồng Bạo Sấm Sét",
+    "description": "Kỹ năng độc quyền của Univolt. Vừa tạo ra sét xung quanh cơ thể vừa lao về phía kẻ địch."
+  },
+  "EPalWazaID::Unique_LeafMomonga_SomerSault": {
+    "localized_name": "Chiếc Lá Lộn Nhào",
+    "description": "Kỹ năng độc quyền của Herbil. Sau giây lát chuẩn bị, nó lao nhanh vào kẻ địch, thực hiện cú nhào lộn để tấn công."
+  },
+  "EPalWazaID::Unique_LegendDeer_RadiantPurge_Otomo": {
+    "localized_name": "Ánh Sáng Thanh Tẩy",
+    "description": "Kỹ năng độc quyền của Hartalis. Nhảy lên không trung, ngưng tụ năng lượng khổng lồ rồi phóng xuống đất. Quả cầu ánh sáng giáng xuống sẽ thanh tẩy mọi thứ trên mặt đất."
+  },
+  "EPalWazaID::Unique_LegendDeer_RadiantWingRush": {
+    "localized_name": "Cánh Siêu Phàm",
+    "description": "Kỹ năng độc quyền của Hartalis. Nhảy lùi về sau, tạo đôi cánh ánh sáng trên lưng, lao thẳng vào kẻ địch từ trên cao."
+  },
+  "EPalWazaID::Unique_LegendDeer_WarpPillarBurst": {
+    "localized_name": "Cơn Mưa Thần Thánh",
+    "description": "Kỹ năng độc quyền của Hartalis. Biến mất trong chớp mắt, sau đó giáng xuống vô số trụ sáng khắp xung quanh nó."
+  },
+  "EPalWazaID::Unique_LilyQueen_LilyHealing": {
+    "localized_name": "Phục Hồi Dồi Dào",
+    "description": "Kỹ năng độc quyền của Lyleen. Sức mạnh chữa lành giúp hồi phục Máu cho tất cả đồng minh trong phạm vi."
+  },
+  "EPalWazaID::Unique_LilyQueen_WindBarrier": {
+    "localized_name": "-",
+    "description": "-"
+  },
+  "EPalWazaID::Unique_Manticore_InfernoStrike": {
+    "localized_name": "Nanh Núi Lửa",
+    "description": "Kỹ năng độc quyền của loài Blazehowl. Khi lấy được đà thì lao tới kẻ địch không thương tiếc, và làm nổ lửa tại điểm mà mình lao tới."
+  },
+  "EPalWazaID::Unique_MoonQueen_IceMoonBlade": {
+    "localized_name": "Ánh Trăng Lóe Sáng",
+    "description": "Kỹ năng độc quyền của loài Selyne. Bắn liên tiếp 3 lưỡi dao tốc độ cao chứa đầy sức mạnh ánh trăng."
+  },
+  "EPalWazaID::Unique_MoonQueen_MoonBeam": {
+    "localized_name": "Năng Lượng Mặt Trăng",
+    "description": "Kỹ năng độc quyền của loài Selyne. Tích tụ năng lượng vào mặt trăng trên lưng và bắn một chùm tia hình lưỡi liềm về phía trước."
+  },
+  "EPalWazaID::Unique_MoonQueen_MoonBlade": {
+    "localized_name": "Kiếm Ánh Trăng",
+    "description": "Kỹ năng độc quyền của loài Selyne. Bắn liên tiếp 2 lưỡi dao tốc độ cao chứa đầy sức mạnh ánh trăng."
+  },
+  "EPalWazaID::Unique_MysteryMask_LifeSteal": {
+    "localized_name": "Hút Linh Hồn",
+    "description": "Kỹ năng độc quyền của Omascul. Đột ngột xuất hiện gần kẻ địch, trói chặt chúng bằng cả hai tay và hấp thụ máu của kẻ địch bị trói."
+  },
+  "EPalWazaID::Unique_NaughtyCat_CatPress": {
+    "localized_name": "Mèo Đè Bẹp",
+    "description": "Kỹ năng độc quyền của Grintale. Nhảy lên với một nụ cười ngạo nghễ và nghiền nát kẻ địch bằng toàn bộ cơ thể."
+  },
+  "EPalWazaID::Unique_NightBlueHorse_DeathStep": {
+    "localized_name": "Bước Nhảy Tử Thần",
+    "description": "Kỹ năng độc quyền của Starryon. Làm rối loạn kẻ địch bằng những bước đi lảo đảo, đồng thời tung ra những nhát chém bằng chiếc sừng sắc nhọn."
+  },
+  "EPalWazaID::Unique_NightLady_FlameNightmare": {
+    "localized_name": "Điệu Waltz Rực Lửa",
+    "description": "Kỹ năng độc quyền của Bellanoir Libero. Tạo ra vòng lửa lan rộng xung quanh trong khi nhảy múa nhẹ nhàng. Và bắn ra ngọn lửa bí ẩn để theo đuôi kẻ địch."
+  },
+  "EPalWazaID::Unique_NightLady_WarpBeam": {
+    "localized_name": "Ác Mộng Lan Toả",
+    "description": "Kỹ năng độc quyền của Bellanoir Libero. Đột ngột biến mất và bắn vô số tia sáng ngay khi xuất hiện. Các tia sáng sẽ lan rộng như bông hoa nở."
+  },
+  "EPalWazaID::Unique_NightLady_WarpBeam_Straight": {
+    "localized_name": "Tia Ác Mộng",
+    "description": "Kỹ năng độc quyền của Bellanoir. Đột ngột biến mất và bắn vô số tia sáng ngay khi xuất hiện."
+  },
+  "EPalWazaID::Unique_OctopursGirl_InkJet": {
+    "localized_name": "Khói Đột Kích",
+    "description": "Kỹ năng độc quyền của Gloopie. Tạo màn khói dày đặc để ẩn mình, sau đó bất ngờ lao ra, tung cú húc đầu chí mạng vào mục tiêu."
+  },
+  "EPalWazaID::Unique_PinkCat_CatPunch": {
+    "localized_name": "Cơn Mưa Nắm Đấm",
+    "description": "Kỹ năng độc quyền của Cattiva. Đuổi theo kẻ địch, đồng thời vung cả hai tay và tung ra những cú đấm liên tiếp."
+  },
+  "EPalWazaID::Unique_Plesiosaur_LongBreath": {
+    "localized_name": "Hơi Thở Dài",
+    "description": "Kỹ năng độc quyền của Braloha. Từ chiếc cổ dài, nó dần dần lan tỏa hơi thở hệ Cỏ từ đầu xuống cổ."
+  },
+  "EPalWazaID::Unique_PoseidonOrca_TorrentLaser": {
+    "localized_name": "Laser Thủy Kích Địa Chấn",
+    "description": "Kỹ năng độc quyền của Neptilius. Vươn mình, tụ lực nước vào miệng. Sau đó, phóng ba luồng thủy kích áp suất cao theo cả dọc và ngang. Nơi luồng nước đi qua sẽ nứt toác, cột nước phun trào."
+  },
+  "EPalWazaID::Unique_PurpleSpider_SpiderRaid": {
+    "localized_name": "Nhện Đột Kích",
+    "description": "Kỹ năng độc quyền của Tarantriss. Nhả một quả cầu tơ và bắt con mồi bị dính trúng. Sau đó chạy hết tốc lực đến chỗ con mồi và cào 3 lần để kết liễu."
+  },
+  "EPalWazaID::Unique_QueenBee_SpinLance": {
+    "localized_name": "Xoay Gậy",
+    "description": "Kỹ năng độc quyền của Elizabee. Tập trung sức mạnh vào cây trượng và giải phóng nó trong khi xoay."
+  },
+  "EPalWazaID::Unique_RedArmorBird_TriplePeck": {
+    "localized_name": "Mổ Đánh Lửa",
+    "description": "Kỹ năng độc quyền của Ragnahawk. vỗ cánh về phía trước và đâm mỏ vào phía trước, bên phải và bên trái để đốt cháy, gây ra một vụ nổ nhỏ."
+  },
+  "EPalWazaID::Unique_RobinHood_BowSnipe": {
+    "localized_name": "Ngắm Bắn",
+    "description": "Kỹ năng độc quyền của loài Robinquill. Kéo căng cây cung, nhắm mục tiêu vào kẻ địch và bắn chúng."
+  },
+  "EPalWazaID::Unique_Ronin_Iai": {
+    "localized_name": "Kiếm Thuật Phi Phàm",
+    "description": "Kỹ năng độc quyền của Bushi. Sau khi rút kiếm liền xuất hiện trước mặt kẻ địch trong tích tắc tung ra một nhát chém siêu nhanh."
+  },
+  "EPalWazaID::Unique_SaintCentaur_OneSpearRushes": {
+    "localized_name": "Giáo Khiên Phối Hợp",
+    "description": "Kỹ năng độc quyền của Paladius. Bao phủ cơ thể bằng sức mạnh thần thánh và lao tới trong khi đưa ngọn giáo ở tay trái về phía trước. Trong khi lao về phía trước, chiếc khiên ở tay phải sẽ ngăn chặn mọi đòn tấn công."
+  },
+  "EPalWazaID::Unique_SakuraSaurus_SideTackle": {
+    "localized_name": "Húc Ngang",
+    "description": "Kỹ năng độc quyền của loài Broncherry. Nghiêng người, rồi lao về phía trước và thổi bay kẻ địch."
+  },
+  "EPalWazaID::Unique_ScorpionMan_Uppercut": {
+    "localized_name": "Tấn Công Áp Sát",
+    "description": "Kỹ năng độc quyền của loài Prixter. Thu hẹp khoảng cách với kẻ địch với tốc độ cao và vung mạnh càng của mình lên."
+  },
+  "EPalWazaID::Unique_SheepBall_Roll": {
+    "localized_name": "Lăn Lông Lốc",
+    "description": "Kỹ năng độc quyền của SheepBall. Cuộn tròn và lăn để đuổi theo kẻ địch. Bị chóng mặt và không thể di chuyển sau khi đòn tấn công kết thúc."
+  },
+  "EPalWazaID::Unique_SifuDog_Counter": {
+    "localized_name": "Trụ Vững Toàn Thân",
+    "description": "Kỹ năng độc quyền của loài Dogen. Tạo tư thế Hợp Khí.Trong tư thế này, các đòn tấn công bị vô hiệu hóa, sau đó lao tới kẻ địch trong tích tắc và tung ra một cú đấm toàn lực trong thế tay mở."
+  },
+  "EPalWazaID::Unique_SnowTigerBeastman_SnowImpact": {
+    "localized_name": "Băng Công Phá",
+    "description": "Kỹ năng độc quyền của Bastigor. Gầm lên một tiếng lớn rồi nhảy lên không, sau đó vùi cả hai cánh tay xuống đất để tạo ra một vết nứt băng khổng lồ. Tiếp tục truyền sức mạnh vào mặt đất, cuối cùng gây ra một vụ nổ lớn thuộc hệ băng."
+  },
+  "EPalWazaID::Unique_SnowTigerBeastman_TrampleSlash": {
+    "localized_name": "Đòn Vuốt Băng Giá",
+    "description": "Kỹ năng độc quyền của Bastigor. Dẫm mạnh xuống đất và tạo ra một vết nứt băng phía trước. Sau đó, nhanh chóng tiếp cận và chém bằng tay phải."
+  },
+  "EPalWazaID::Unique_SoldierBee_NeedleLance": {
+    "localized_name": "Đâm Chớp Nhoáng",
+    "description": "Kỹ năng độc quyền của Beegarde. Lao về phía kẻ địch với tốc độ cao. Và cuối cùng, đâm ngọn giáo để kết liễu."
+  },
+  "EPalWazaID::Unique_StuffedShark_HiddenWeapon": {
+    "localized_name": "Tay Súng Hiếu Chiến",
+    "description": "Kỹ năng độc quyền của loài Finsider. Lôi ra hai khẩu súng nước từ miệng, luân phiên bắn 6 viên đạn nước từ hai bên. Cuối cùng, kết hợp hai súng để phóng 1 phát đạn cực mạnh."
+  },
+  "EPalWazaID::Unique_TentacleTurtle_HydroSpin": {
+    "localized_name": "Xoay Thủy Lực",
+    "description": "Kỹ năng độc quyền của loài Turtacle. Sử dụng lực đẩy khi phun tia nước, xoay tốc độ và lao về phía kẻ địch."
+  },
+  "EPalWazaID::Unique_ThunderBird_ThunderStorm": {
+    "localized_name": "Giáng Sét",
+    "description": "Kỹ năng độc quyền của Beakon. Đầu tiên, triệu hồi sấm sét đến vị trí của kẻ địch. Sau đó, thả sấm sét sang trái và phải, rồi chao lượn, lao về phía trước."
+  },
+  "EPalWazaID::Unique_ThunderDog_InazumaShorai": {
+    "localized_name": "Triệu Hồi Sét",
+    "description": "Kỹ năng độc quyền của Rayhound. Triệu hồi tia chớp liên tiếp về phía trước và lao qua giữa những tia chớp rơi xuống với tốc độ cao."
+  },
+  "EPalWazaID::Unique_ThunderDragonMan_NumerousSwordAttack": {
+    "localized_name": "Ngọn Giáo Sét",
+    "description": "Kỹ năng độc quyền của loài Orserk. Triệu hồi nhiều ngọn giáo sét và ném chúng vào kẻ địch. Ngọn giáo đầu tiên sẽ tích tụ sức mạnh sét và phát nổ sau vài giây."
+  },
+  "EPalWazaID::Unique_ThunderDragonMan_ThunderSwordAttack": {
+    "localized_name": "Kiếm Sét",
+    "description": "Kỹ năng độc quyền của Orserk. Nhảy lên và triệu hồi một ngọn giáo sét để ném vào kẻ địch."
+  },
+  "EPalWazaID::Unique_TropicalOstrich_DashKick": {
+    "localized_name": "Cú Đá Thần Tốc",
+    "description": "Kỹ năng độc quyền của Palumba. Tăng tốc từ cú chạy lấy đà, sau đó tung một cú đá cực mạnh vào kẻ địch."
+  },
+  "EPalWazaID::Unique_Umihebi_Fire_FireWindingTackle": {
+    "localized_name": "Xà Chiến Nham Thạch",
+    "description": "Kỹ năng độc quyền của Jormuntide Ignis. Gầm lên và lao tới kẻ địch trong khi uốn lượn cơ thể được bao phủ trong lửa."
+  },
+  "EPalWazaID::Unique_Umihebi_WindingTackle": {
+    "localized_name": "Xà Chiến",
+    "description": "Kỹ năng độc quyền của Jormuntide. Gầm lên và lao tới kẻ địch trong khi uốn lượn cơ thể được bao phủ trong nước."
+  },
+  "EPalWazaID::Unique_VolcanicMonster_Ice_IceAttack": {
+    "localized_name": "Núi Băng Bùng Phát",
+    "description": "Kỹ năng độc quyền của Reptyro Cryst. Vung chân trước lên và đập xuống đất làm phun tuyết vào vị trí của kẻ địch. Khi phun, những quả cầu tuyết sẽ rơi xuống xung quanh."
+  },
+  "EPalWazaID::Unique_VolcanicMonster_MagmaAttack": {
+    "localized_name": "Núi Lửa Bùng Phát",
+    "description": "Kỹ năng độc quyền của Reptyro. Vung chân trước lên và đập xuống đất gây vụ nổ phun trào tại vị trí của kẻ địch. Khi phun trào, bom núi lửa sẽ rơi xuống xung quanh."
+  },
+  "EPalWazaID::Unique_WeaselDragon_FlyingTackle": {
+    "localized_name": "Tên Lửa Xung Kích",
+    "description": "Kỹ năng độc quyền của loài Chillet. Sau khi tích tụ một chút sức mạnh thì nhảy về phía trước. Khoảnh khắc hạ cánh dường như khá sợ hãi nên phải nhắm mắt lại."
+  },
+  "EPalWazaID::Unique_Werewolf_Ice_SnowScratch": {
+    "localized_name": "Vuốt Tuyết",
+    "description": "Kỹ năng độc quyền của WereWolf_Ice. Nhảy về phía trước và cào nhanh 2 lần. Các nhát cào chứa đầy sức mạnh hệ băng."
+  },
+  "EPalWazaID::Unique_Werewolf_Scratch": {
+    "localized_name": "Vuốt Phóng Xa",
+    "description": "Kỹ năng độc quyền của WereWolf. Nhảy về phía trước và cào nhanh 2 lần. Các nhát cào chứa đầy sức mạnh hệ bóng tối."
+  },
+  "EPalWazaID::Unique_WhiteDeer_HolyPillar": {
+    "localized_name": "Hào Quang Thần Thánh",
+    "description": "Kỹ năng độc quyền của Celesdir. Gây ra một vụ nổ ánh sáng thần thánh trên một khu vực rộng lớn phía trước, sau đó vừa bước đi vừa tạo ra ánh sáng thần thánh xung quanh."
+  },
+  "EPalWazaID::Unique_WhiteShieldDragon_ShieldTackle": {
+    "localized_name": "Khiên Húc",
+    "description": "Kỹ năng độc quyền của Silvegis. Triển khai một lá chắn phía trước để giảm thiểu mọi đòn tấn công và nghiền nát kẻ địch trong khi lao tới."
+  },
+  "EPalWazaID::Unique_WhiteTiger_Ground_IronScratch": {
+    "localized_name": "Vuốt Đá",
+    "description": "Kỹ năng độc quyền của Cryolinx Terra. Chém bằng móng vuốt 1 lần, 2 lần, và cuối cùng dùng lực toàn thân để chém một mảng lớn.Khi vung móng vuốt, bắn 3 tảng đá về phía trước tỏa theo hình quạt."
+  },
+  "EPalWazaID::Unique_WhiteTiger_IceScratch": {
+    "localized_name": "Vuốt Băng Giá",
+    "description": "Kỹ năng độc quyền của Cryolinx. Chém bằng móng vuốt 1 lần, 2 lần, và cuối cùng dùng lực toàn thân để chém một mảng lớn.Khi vung móng vuốt, bắn 3 trụ băng về phía trước tỏa theo hình quạt."
+  },
+  "EPalWazaID::Unique_WingGolem_RoundCutter": {
+    "localized_name": "Lưỡi Cắt Xoay Vòng",
+    "description": "Kỹ năng độc quyền của loài Knocklem. Vung mạnh tay lên và ném chiếc vòng trên lưng. Chiếc vòng sẽ bay theo quỹ đạo hình tròn."
+  },
+  "EPalWazaID::Unique_YakushimaBoss001_Small_DemonEyeCharge": {
+    "localized_name": "Nhãn Cầu Lao Tới",
+    "description": "Kỹ năng độc quyền của Mắt Ác Quỷ. Lao về phía kẻ địch. Nảy bật khi va chạm với mặt đất hoặc tường."
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Dark": {
+    "localized_name": "Cú Nhảy Slime (Bóng Tối)",
+    "description": "Kỹ năng độc quyền của Slime Tím. Nhảy về phía kẻ địch và tấn công."
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Fire": {
+    "localized_name": "Cú Nhảy Slime (Lửa)",
+    "description": "Kỹ năng độc quyền của Slime Đỏ. Nhảy về phía kẻ địch và tấn công."
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Leaf": {
+    "localized_name": "Cú Nhảy Slime (Cỏ)",
+    "description": "Kỹ năng độc quyền của Slime Xanh Lá. Nhảy về phía kẻ địch và tấn công."
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Normal": {
+    "localized_name": "Cú Nhảy Slime (Thường)",
+    "description": "Kỹ năng độc quyền của Slime Lấp Lánh. Nhảy về phía kẻ địch và tấn công."
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Rainbow": {
+    "localized_name": "Cú Nhảy Slime (Cầu Vồng)",
+    "description": "Kỹ năng độc quyền của Slime Cầu Vồng. Nhảy về phía kẻ địch và tấn công."
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Water": {
+    "localized_name": "Cú Nhảy Slime (Nước)",
+    "description": "Kỹ năng độc quyền của Slime Xanh Dương. Nhảy về phía kẻ địch và tấn công."
+  },
+  "EPalWazaID::Unique_YakushimaMonster002_SwordCharge": {
+    "localized_name": "Kích Kiếm",
+    "description": "Kỹ năng độc quyền của Kiếm Phép Thuật. Tấn công kẻ địch bằng một cú đâm."
+  },
+  "EPalWazaID::Unique_YakushimaMonster003_BatCharge": {
+    "localized_name": "Dơi Tấn Công",
+    "description": "Kỹ năng độc quyền của Dơi Hang Động. Sử dụng toàn thân để tấn công kẻ địch. Nảy bật khi va chạm với mặt đất hoặc tường."
+  },
+  "EPalWazaID::Unique_Yakushima_EyeTossin": {
+    "localized_name": "Cú Lao Chăm Chú",
+    "description": "Kỹ năng độc quyền của Con Mắt Của Cthulhu. Lao về phía kẻ địch nhiều lần."
+  },
+  "EPalWazaID::Unique_Yakushima_MouthTossin": {
+    "localized_name": "Cú Lao Siêu Tốc",
+    "description": "Kỹ năng độc quyền của Con Mắt Của Cthulhu. Lao về phía kẻ địch nhiều lần với tốc độ cực nhanh."
+  },
+  "EPalWazaID::Unique_Yakushima_SummonServant": {
+    "localized_name": "Triệu Hồi Thuộc Hạ",
+    "description": "Kỹ năng độc quyền của Con Mắt Của Cthulhu. Triệu hồi 4 thuộc hạ. Các thuộc hạ sẽ lao về phía kẻ địch, gây sát thương khi va chạm. Chúng sẽ biến mất khi bị tấn công hoặc sau một khoảng thời gian nhất định."
+  },
+  "EPalWazaID::Unique_Yeti_Grass_GrassBall": {
+    "localized_name": "Cỏ Lăn",
+    "description": "Kỹ năng độc quyền của Wumpo Botan. Vừa lăn một quả cầu cỏ vừa tiến lên, và ném nó đi khi đã đủ lớn để phát nổ."
+  },
+  "EPalWazaID::Unique_Yeti_SnowBall": {
+    "localized_name": "Tuyết Lăn",
+    "description": "Kỹ năng độc quyền của Wumpo. Vừa lăn một quả cầu tuyết vừa tiến lên, và ném nó đi khi đã đủ lớn để phát nổ."
+  },
+  "EPalWazaID::WallSplash": {
+    "localized_name": "Màn Nước",
+    "description": "Liên tiếp tạo ra các bức tường làm từ cột nước tại vị trí của kẻ địch."
+  },
+  "EPalWazaID::WaterBall": {
+    "localized_name": "Bom Nước",
+    "description": "Tạo ra một quả cầu nước khổng lồ phía trên đầu và bắn về phía kẻ địch."
+  },
+  "EPalWazaID::WaterGun": {
+    "localized_name": "Bắn Nước",
+    "description": "Bắn đạn nước bay theo đường thẳng về phía mục tiêu."
+  },
+  "EPalWazaID::Weapon_Use": {
+    "localized_name": "Sử dụng vũ khí",
+    "description": "Tấn công bằng vũ khí đang sở hữu."
+  },
+  "EPalWazaID::WindCutter": {
+    "localized_name": "Lưỡi Cắt Gió",
+    "description": "Bắn một lưỡi dao gió siêu nhanh bay thẳng về phía kẻ địch."
+  },
+  "EPalWazaID::WindEdge": {
+    "localized_name": "Luồng Gió Sắc Nhọn",
+    "description": "Phóng ra lưỡi dao gió sắc nhọn theo hình quạt."
+  }
+}

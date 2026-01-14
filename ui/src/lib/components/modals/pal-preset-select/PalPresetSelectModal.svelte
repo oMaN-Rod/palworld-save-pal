@@ -3,9 +3,11 @@
 	import { type SelectOption } from '$types';
 	import { Lock, Save, X } from 'lucide-svelte';
 	import { presetsData, palsData } from '$lib/data';
+	import * as m from '$i18n/messages';
+	import { c, p } from '$lib/utils/commonTranslations';
 
 	let {
-		title = 'Select a Pal Preset',
+		title = m.select_a_entity({ entity: `${c.pal} ${c.preset}` }),
 		selectedPals,
 		closeModal
 	} = $props<{
@@ -74,7 +76,7 @@
 				<Save />
 			</button>
 			{#snippet popup()}
-				<span>Save</span>
+				<span>{c.save}</span>
 			{/snippet}
 		</Tooltip>
 		<Tooltip position="bottom">
@@ -82,7 +84,7 @@
 				<X />
 			</button>
 			{#snippet popup()}
-				<span>Cancel</span>
+				<span>{m.cancel()}</span>
 			{/snippet}
 		</Tooltip>
 	</div>

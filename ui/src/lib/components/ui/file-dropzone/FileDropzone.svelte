@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { FolderArchive } from 'lucide-svelte';
 	import { getAppState } from '$states';
+	import * as m from '$i18n/messages';
+	import { c } from '$lib/utils/commonTranslations';
 
 	const appState = getAppState();
 
@@ -82,7 +84,7 @@
 				{#if message}
 					{@render message()}
 				{:else}
-					<strong>Upload a file</strong> or drag and drop
+					<strong>{m.upload_a_file()}</strong> {m.or_drag_and_drop()}
 				{/if}
 				<div class="mt-2 flex items-center justify-center">
 					<FolderArchive class="h-24 w-24" />

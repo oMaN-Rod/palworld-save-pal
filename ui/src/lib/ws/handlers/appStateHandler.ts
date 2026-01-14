@@ -1,5 +1,6 @@
 import { goto } from '$app/navigation';
 import UpdateAvailableModal from '$components/modals/update-available/UpdateAvailableModal.svelte';
+import { setLocale } from '$i18n/runtime';
 import { getAppState, getModalState } from '$states';
 import { MessageType } from '$types';
 import { isUpdateAvailableOnGitHub } from '$utils/appVersion';
@@ -47,6 +48,7 @@ export const settingsHandler: WSMessageHandler = {
 	async handle(data) {
 		const appState = getAppState();
 		appState.settings = data;
+		setLocale(appState.settings.language);
 	}
 };
 

@@ -18,6 +18,8 @@
 		PackagePlus
 	} from 'lucide-svelte';
 	import { ItemSelectModal, NumberInputModal } from '$components/modals';
+	import * as m from '$i18n/messages';
+	import { c } from '$utils/commonTranslations';
 
 	let { container, onUpdate } = $props<{
 		container: ItemContainer & { slots: ItemContainerSlot[] };
@@ -78,7 +80,7 @@
 	async function handleAddPreset() {
 		// @ts-ignore
 		const result = await modal.showModal<string>(TextInputModal, {
-			title: 'Add storage preset',
+			title: m.add_preset_entity({ entity: m.storage() }),
 			value: ''
 		});
 		if (!result) return;
@@ -100,8 +102,11 @@
 	async function handleDeletePresets() {
 		if (selectedPresets.length === 0) return;
 		const result = await modal.showConfirmModal({
-			title: 'Delete presets',
-			message: `Are you sure you want to delete ${selectedPresets.length} preset${selectedPresets.length > 1 ? 's' : ''}?`
+			title: m.delete_entity({ entity: c.preset }),
+			message: m.delete_count_entities_confirm({
+				count: selectedPresets.length,
+				entity: m.preset({ count: selectedPresets.length })
+			}),
 		});
 		if (!result) return;
 		const presetIds = selectedPresets.map((preset) => preset.id);
@@ -113,7 +118,7 @@
 	async function handleEditPresetName(preset: ExtendedPresetProfile) {
 		// @ts-ignore
 		const result = await modal.showModal<string>(TextInputModal, {
-			title: 'Edit preset name',
+			title: m.edit_entity({ entity: c.preset }),
 			value: preset.name
 		});
 		if (!result) return;
@@ -125,7 +130,7 @@
 		const result = await modal.showModal<[string, number]>(ItemSelectModal, {
 			group: 'Common',
 			itemId: '',
-			title: 'Select Item'
+			title: m.search_entity({ entity: c.item }),
 		});
 		if (!result) return;
 		let [static_id, count] = result;
@@ -154,7 +159,7 @@
 	async function handleSetContainerCount() {
 		// @ts-ignore
 		const result = await modal.showModal<number>(NumberInputModal, {
-			title: 'Enter Item Count',
+			title: m.enter_item_count(),
 			value: '',
 			min: 0,
 			max: 9999
@@ -182,28 +187,28 @@
 
 <div class="flex min-w-64 max-w-96 flex-col space-y-2">
 	<div class="btn-group bg-surface-900 items-center rounded-sm p-1">
-		<TooltipButton onclick={handleAddPreset} popupLabel="Create a preset from current container">
+		<TooltipButton onclick={handleAddPreset} popupLabel={m.create_preset_from_current({ entity: c.container })}>
 			<Plus />
 		</TooltipButton>
-		<TooltipButton onclick={handleFillContainer} popupLabel="Fill current container">
+		<TooltipButton onclick={handleFillContainer} popupLabel={m.fill_current_entity({ entity: c.container })}>
 			<PaintBucket />
 		</TooltipButton>
-		<TooltipButton onclick={handleSetContainerCount} popupLabel="Set container item count">
+		<TooltipButton onclick={handleSetContainerCount} popupLabel={m.set_entity_item_count({ entity: c.container })}>
 			<Hash />
 		</TooltipButton>
-		<TooltipButton onclick={handleClearContainer} popupLabel="Clear container">
+		<TooltipButton onclick={handleClearContainer} popupLabel={m.clear_entity({ entity: c.container })}>
 			<ChevronsLeftRight />
 		</TooltipButton>
 		{#if selectedPresets.length === 1}
-			<TooltipButton onclick={handleApplyPreset} popupLabel="Apply selected preset">
+			<TooltipButton onclick={handleApplyPreset} popupLabel={m.apply_selected_entity({ entity: c.preset })}>
 				<Play />
 			</TooltipButton>
 		{/if}
 		{#if selectedPresets.length >= 1}
-			<TooltipButton onclick={handleDeletePresets} popupLabel="Delete selected preset(s)">
+			<TooltipButton onclick={handleDeletePresets} popupLabel={m.delete_selected_entity({ entity: m.preset({ count: selectedPresets.length }) })}>
 				<Trash />
 			</TooltipButton>
-			<TooltipButton onclick={() => (selectedPresets = [])} popupLabel="Clear selected">
+			<TooltipButton onclick={() => (selectedPresets = [])} popupLabel={m.clear_selected()}>
 				<X />
 			</TooltipButton>
 		{/if}
@@ -218,7 +223,7 @@
 	>
 		{#snippet listHeader()}
 			<div class="flex justify-start">
-				<span class="font-bold">Preset</span>
+				<span class="font-bold">{c.preset}</span>
 			</div>
 		{/snippet}
 		{#snippet listItem(preset)}
@@ -233,7 +238,7 @@
 			<div class="flex flex-col">
 				<span class="text-lg font-bold">{preset.name}</span>
 				<div class="flex justify-between">
-					<span class="mr-2">Items:</span>
+					<span class="mr-2">{c.items}:</span>
 					<span>
 						{preset.storage_container?.slots.filter((slot) => slot.static_id !== 'None').length ||
 							0}

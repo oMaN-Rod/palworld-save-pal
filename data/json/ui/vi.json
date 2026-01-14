@@ -1,0 +1,757 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "about": "Về",
+  "about_built_by": "Được xây dựng bởi <s>một anh chàng là nhà phát triển</s> một số anh chàng phát triển cho vui.",
+  "about_check_out": "Kiểm tra",
+  "about_for_more_info": "để biết thêm thông tin.",
+  "about_github_repo": "Kho lưu trữ Github",
+  "accessory": "phụ kiện",
+  "actions": "hành động",
+  "active": "Tích cực",
+  "active_filters_count": "Bộ lọc đang hoạt động ({count})",
+  "activity": "Hoạt động",
+  "add": "Thêm vào",
+  "add_all_implants": "Thêm tất cả các bộ phận cấy ghép",
+  "add_all_pal_gear": "Thêm tất cả {pal} thiết bị",
+  "add_all_pals_to_entity": "Thêm tất cả {pals} vào {entity}",
+  "add_all_skills": "Thêm tất cả các kỹ năng",
+  "add_count_pals": "Thêm {count} {type} {pals}",
+  "add_entity": "Thêm {entity}",
+  "add_new_pal": "Thêm mới {pal}",
+  "add_new_pal_to_entity": "Thêm Người bạn mới vào {entity} của bạn",
+  "add_new_tag": "Thêm thẻ mới",
+  "add_notes_about_cloned_pals": "Thêm ghi chú về những bản sao {pals}...",
+  "add_notes_about_imported_pals": "Thêm ghi chú về những {pals} đã nhập này...",
+  "add_other_key_items": "Thêm các mục chính khác",
+  "add_pal_to_base": "Thêm {pal} mới vào Cơ sở {base}",
+  "add_preset_entity": "Thêm giá trị đặt sẵn {entity}",
+  "add_skill": "Thêm kỹ năng",
+  "add_skills_preset": "Thêm cài đặt trước kỹ năng {type}",
+  "add_tag": "Thêm thẻ",
+  "add_to_collection": "Thêm vào bộ sưu tập",
+  "add_to_favorites": "Thêm vào mục yêu thích",
+  "added_label": "Đã thêm:",
+  "all": "Tất cả",
+  "all_entity": "Tất cả {entity}",
+  "alpha": "Alpha",
+  "alpha_pal": "Alpha {pals}",
+  "ammo": "đạn",
+  "ancient_technology_points": "Điểm công nghệ cổ đại",
+  "and_more_count": "+{count} thêm",
+  "apply_preset": "Áp dụng giá trị đặt trước",
+  "apply_preset_to_selected": "Áp dụng giá trị đặt trước cho {pals} đã chọn",
+  "apply_presets": "Áp dụng cài đặt trước",
+  "apply_selected_entity": "Áp dụng đã chọn {entity}",
+  "archive_entity": "Lưu trữ {entity}",
+  "armor": "Giáp",
+  "attack": "Tấn công",
+  "available_entity": "Có sẵn {entity}",
+  "available_saves": "Lưu có sẵn",
+  "available_slots": "Các khe có sẵn",
+  "available_tags": "Thẻ có sẵn",
+  "avg_clones_per_pal": "Trung bình nhân bản trên {pal}:",
+  "avg_level": "Mức trung bình",
+  "avg_pals_per_collection": "Trung bình {pals} mỗi bộ sưu tập:",
+  "avg_transfers_per_pal": "Trung bình chuyển khoản cho mỗi {pal}:",
+  "base_container": "Thùng chứa cơ sở",
+  "base_name": "Tên cơ sở",
+  "basecamp_level": "Cấp độ cơ sở",
+  "blueprint": "bản thiết kế",
+  "body": "Thân hình",
+  "boss": "Ông chủ",
+  "box": "Hộp",
+  "bulk_clone_to_ups_failed": "Sao chép hàng loạt vào UPS không thành công. Vui lòng thử lại.",
+  "cancel": "Hủy bỏ",
+  "cannot_fill": "Bạn không thể điền {target} của mình, bạn cần thêm {count} chỗ trống.",
+  "cannot_paste_here": "Không thể dán vào đây (chưa™)",
+  "category": "Loại",
+  "change_player_name": "Thay đổi tên người chơi",
+  "changes": "Thay đổi",
+  "character": "Tính cách",
+  "character_container": "Vùng chứa ký tự",
+  "cheat_mode": "Chế độ gian lận",
+  "chest": "Ngực",
+  "choose_a_entity": "Chọn một {entity}",
+  "choose_entity": "Chọn thực thể",
+  "clear": "Thông thoáng",
+  "clear_all": "Xóa tất cả",
+  "clear_all_entity": "Xóa tất cả {entity}",
+  "clear_completed_missions_confirm": "Bạn có chắc chắn muốn xóa tất cả nhiệm vụ {count} đã hoàn thành {type} không?",
+  "clear_current_missions_confirm": "Bạn có chắc chắn muốn xóa tất cả {count} nhiệm vụ {type} hiện tại không?",
+  "clear_entity": "Xóa {entity}",
+  "clear_selected": "Xóa đã chọn",
+  "clear_selected_entity": "Xóa đã chọn {entity}",
+  "clear_selection": "Xóa lựa chọn",
+  "cleared_completed_missions": "Đã hoàn thành {count} hoàn thành {type} nhiệm vụ",
+  "cleared_current_missions": "Đã hoàn thành nhiệm vụ {count} hiện tại {type}",
+  "click_map_coordinates": "Bấm vào bản đồ để xem tọa độ chi tiết.",
+  "click_to_complete": "Bấm để hoàn thành",
+  "clipboard_cleared": "Đã xóa bảng nhớ tạm",
+  "clone_pal_to_entity": "Sao chép {pal} sang {entity}",
+  "clone_pals_to_entity": "Sao chép {count} {pals} sang {entity}",
+  "clone_prefix": "Tiền tố nhân bản",
+  "clone_selected_pal": "Đã chọn bản sao {pal}",
+  "clone_to_entity": "Sao chép vào {entity}",
+  "clone_to_entity_failed": "Sao chép vào {entity} không thành công. Vui lòng thử lại.",
+  "clones": "bản sao",
+  "cloning_count_pals": "Nhân bản {count} {pals}",
+  "close_drawer": "Đóng ngăn kéo",
+  "close_toast": "Đóng bánh mì nướng",
+  "collection_delete_warning": "Bạn bè trong bộ sưu tập này sẽ không bị xóa nhưng họ sẽ không còn được liên kết với bộ sưu tập này nữa.",
+  "collection_name": "Tên bộ sưu tập",
+  "collection_optional": "Bộ sưu tập (Tùy chọn)",
+  "collections": "Bộ sưu tập",
+  "common": "Chung",
+  "completed": "Hoàn thành",
+  "completed_missions": "Nhiệm vụ đã hoàn thành",
+  "confirm": "Xác nhận",
+  "consume": "tiêu hao",
+  "container_entity": "{entity} Thùng chứa",
+  "copy": "Sao chép",
+  "create": "Tạo nên",
+  "create_entity_name": "Tạo \"{name}\" {entity}",
+  "create_first_entity": "Tạo {entity} đầu tiên của bạn",
+  "create_new_collection": "Tạo bộ sưu tập mới",
+  "create_pals_or_import": "Tạo {pals} mới hoặc nhập chúng từ tệp lưu của bạn để bắt đầu.",
+  "create_preset_from_container": "Tạo cài đặt trước từ vùng chứa",
+  "create_preset_from_current": "Tạo giá trị đặt trước từ {entity} hiện tại",
+  "created": "Tạo",
+  "current_collection": "Bộ sưu tập hiện tại",
+  "current_missions": "Nhiệm vụ hiện tại",
+  "current_save_file": "Tệp lưu hiện tại",
+  "debug": "Gỡ lỗi",
+  "debug_mode": "Chế độ gỡ lỗi",
+  "defense": "Phòng thủ",
+  "delete": "Xóa bỏ",
+  "delete_count_entities_confirm": "Bạn có chắc chắn muốn xóa {count} đã chọn {entity} không?",
+  "delete_entire_guild": "Xóa toàn bộ bang hội",
+  "delete_entity": "Xóa {entity}",
+  "delete_entity_by_name_confirm": "Bạn có chắc chắn muốn xóa {name} không? Không thể hoàn tác hành động này.",
+  "delete_entity_confirm": "Bạn có chắc chắn muốn xóa {entity} này không? Không thể hoàn tác hành động này.",
+  "delete_entity_warning": "Bạn có chắc chắn muốn xóa \"{name}\" không? {warning}",
+  "delete_selected_entity": "Xóa đã chọn {entity}",
+  "delete_selected_entity_confirm": "Bạn có chắc chắn muốn xóa {entity} đã chọn không?",
+  "deleted_entity": "Đã xóa {count} {entity}",
+  "description_optional": "Mô tả (tùy chọn)",
+  "dimensional_pal_storage": "Kích thước {pal} Lưu trữ",
+  "distribution": "Phân bổ",
+  "download": "Tải xuống",
+  "download_modified_save": "Tải xuống tệp Level.sav đã sửa đổi",
+  "dps": "DPS",
+  "dps_not_available": "Người chơi được chọn không có DPS",
+  "drag_drop_zip": "hoặc kéo và thả tệp zip của bạn vào đây",
+  "dungeons": "ngục tối",
+  "edit": "Biên tập",
+  "edit_entity": "Chỉnh sửa {entity}",
+  "edit_entity_name": "Chỉnh sửa tên {entity}",
+  "edit_tags_for_pals": "Chỉnh sửa thẻ cho {count} {pals}",
+  "effect": "Tác dụng",
+  "egg": "Trứng",
+  "element_and_type": "Phần tử & Loại",
+  "element_types": "Các loại phần tử",
+  "elemental_distribution": "Phân phối nguyên tố",
+  "empty": "Trống",
+  "enter_item_count": "Nhập số lượng mặt hàng",
+  "enter_name_for_entity": "Nhập tên cho {entity} mới:",
+  "enter_new_name_for_entity": "Nhập tên mới cho {entity}:",
+  "enter_tag_name": "Nhập tên thẻ",
+  "entity_count_available": "{count} {entity} có sẵn",
+  "entity_not_available": "{entity} không có sẵn.",
+  "epic": "Sử thi",
+  "error": "Lỗi",
+  "error_copied": "Đã sao chép chi tiết lỗi vào bảng nhớ tạm",
+  "error_copy_failed": "Không thể sao chép chi tiết lỗi",
+  "error_nuke_operation": "Đã xảy ra lỗi trong quá trình vận hành hạt nhân. Vui lòng thử lại.",
+  "essential": "Thiết yếu",
+  "export": "Xuất khẩu",
+  "export_pals": "Xuất {count} {pals}",
+  "export_preset": "Xuất cài sẵn sang tập tin",
+  "export_selected": "Xuất đã chọn",
+  "export_target": "Mục tiêu xuất khẩu",
+  "export_to": "Xuất sang",
+  "exporting_count_selected_pals": "Đang xuất {count} đã chọn {pals}",
+  "export_note_message": "Bạn bè đã xuất sẽ được sao chép vào vị trí mục tiêu. Bản gốc sẽ vẫn còn trong UPS.",
+  "export_to_target": "Xuất sang {target}",
+  "failed_create_pal": "Không tạo được bạn mới. Vui lòng thử lại.",
+  "failed_export_pals": "Không xuất được {count} {pals}",
+  "failed_get_pal_data": "Không lấy được dữ liệu bạn bè",
+  "failed_nuke_ups": "Không thể phá hủy UPS. Vui lòng thử lại.",
+  "fast_travel": "Du lịch nhanh",
+  "favorites": "Yêu thích",
+  "feed": "Cho ăn",
+  "fill": "Đổ đầy",
+  "fill_container": "Đổ đầy thùng chứa",
+  "fill_current_entity": "Điền {entity} hiện tại",
+  "fill_entity": "Điền {entity}",
+  "filter_and_sort": "Lọc & Sắp xếp",
+  "filtered": "Đã lọc",
+  "food": "Đồ ăn",
+  "for": "vì",
+  "friendship_rank": "Xếp hạng tình bạn",
+  "gender": "Giới tính",
+  "glider": "Tàu lượn",
+  "global_pal_storage": "Lưu trữ toàn cầu {pal}",
+  "gps": "GPS",
+  "gps_not_available": "GPS không có sẵn trong tệp lưu này",
+  "grid_view": "Chế độ xem lưới",
+  "guild_name": "Tên bang hội",
+  "head": "Cái đầu",
+  "heal_all_in_entity": "Chữa lành tất cả trong {entity}",
+  "heal_selected_pals": "Chữa lành đã chọn {pals}",
+  "health": "Sức khỏe",
+  "how_many_clones": "Có bao nhiêu bản sao?",
+  "hp": "HP",
+  "id": "NHẬN DẠNG",
+  "ivs": "IV",
+  "import": "Nhập khẩu",
+  "import_failed": "Nhập không thành công. Vui lòng thử lại.",
+  "import_from": "Nhập từ",
+  "import_from_save": "Nhập từ Lưu",
+  "import_preset": "Nhập cài đặt trước từ tập tin",
+  "import_to_ups_message": "Chọn nguồn và các tùy chọn để nhập {pals} vào UPS.",
+  "import_to_ups_title": "Lưu tập tin vào UPS",
+  "in_inventory": "trong kho",
+  "info": "Thông tin",
+  "invalid_option_selected": "Đã chọn tùy chọn không hợp lệ",
+  "inventory": "Hàng tồn kho",
+  "item_container": "Hộp đựng vật phẩm",
+  "item_copied": "{name} đã sao chép vào bảng nhớ tạm",
+  "key_items": "Mục chính",
+  "lab": "phòng thí nghiệm",
+  "language": "Ngôn ngữ",
+  "last_accessed": "Truy cập lần cuối",
+  "last_online": "Trực tuyến lần cuối",
+  "last_updated_date": "Cập nhật lần cuối: {date}",
+  "later": "Sau đó",
+  "learn_all_skills": "Học tất cả các kỹ năng",
+  "learn_skills_matching_type": "Tìm hiểu tất cả các kỹ năng phù hợp với loại bạn bè",
+  "learned_skills": "Kỹ năng đã học",
+  "left_click_focus": "Nhấp chuột trái vào người chơi hoặc căn cứ để tập trung.",
+  "legendary": "Huyền thoại",
+  "level": "Mức độ",
+  "level_abbr": "cấp độ",
+  "level_abbr_value": "Cấp độ {value}",
+  "level_distribution": "Phân phối cấp độ",
+  "level_sync_display": "Đồng bộ hóa cấp độ {from} → {to}",
+  "level_value": "Cấp độ {level}",
+  "list_view": "Xem danh sách",
+  "load_guild_bases": "Tải Bang hội/Căn cứ",
+  "load_player": "Tải trình phát",
+  "loaded_entity": "Đã tải {entity}",
+  "loading_data": "Đang tải dữ liệu...",
+  "loading_entity": "Đang tải {entity}",
+  "loadout": "Tải xuống",
+  "location": "Vị trí",
+  "lock_all": "Khóa tất cả",
+  "locked": "Đã khóa",
+  "lucky": "May mắn",
+  "lucky_pals": "May mắn {pals}",
+  "main_missions": "Nhiệm vụ chính",
+  "manage_collection_for_pals": "Quản lý Bộ sưu tập cho {count} {pals}",
+  "map": "Bản đồ",
+  "map_coordinate_origin_point": "Điểm gốc tọa độ bản đồ",
+  "map_coordinates": "Tọa độ bản đồ",
+  "map_options": "Tùy chọn bản đồ",
+  "mark_all_current_complete": "Đánh dấu tất cả hiện tại là hoàn thành",
+  "mark_complete": "Đánh dấu hoàn thành",
+  "mark_complete_confirm": "Bạn có chắc chắn muốn đánh dấu tất cả {count} nhiệm vụ {type} hiện tại là hoàn thành không?",
+  "marked_missions_complete": "Đã đánh dấu nhiệm vụ {count} {type} là hoàn thành",
+  "material": "Vật liệu",
+  "max": "Tối đa",
+  "max_ivs": "Tối đa IV",
+  "max_level": "Cấp độ tối đa",
+  "max_level_pals": "Cấp độ tối đa {pals}",
+  "max_out_pal_stats": "Tối đa {pal} số liệu thống kê 💉💪",
+  "max_out_selected_pals": "Đã chọn tối đa {pals}",
+  "max_souls": "Tối đa linh hồn",
+  "max_work_suitability": "Tối đa hóa sự phù hợp trong công việc",
+  "menu": "Thực đơn",
+  "min_level": "Cấp độ tối thiểu",
+  "mission": "Nhiệm vụ",
+  "mission_cleared": "Đã hoàn thành nhiệm vụ",
+  "mission_marked_complete": "Nhiệm vụ được đánh dấu là hoàn thành",
+  "missions": "Nhiệm vụ",
+  "mixed_collections": "Bộ sưu tập hỗn hợp",
+  "mixed_collections_message": "{pals} đã chọn nằm trong các bộ sưu tập khác nhau hoặc một số không có bộ sưu tập nào",
+  "modified": "Đã sửa đổi",
+  "modified_label": "Đã sửa đổi:",
+  "module": "mô-đun",
+  "monster_equip_weapon": "Vũ khí trang bị quái vật",
+  "most_popular": "Phổ biến nhất",
+  "move": "Di chuyển",
+  "move_all_to_collection": "Di chuyển tất cả {pals} đã chọn sang \"{name}\"",
+  "move_to_entity": "Di chuyển đến {entity}",
+  "moved_pals_to_collection": "Đã chuyển {count} {pals} vào bộ sưu tập",
+  "name": "Tên",
+  "new_pal_prefix": "Tiền tố Pal mới",
+  "new_version_available": "Phiên bản mới của Palworld Save Pal đã có trên GitHub.",
+  "next": "Kế tiếp",
+  "nickname": "Biệt danh",
+  "no_archived_entity": "Không có lưu trữ {entity}",
+  "no_bases_loaded": "Chưa có căn cứ nào được tải. Sử dụng bộ chọn bang hội ở trên để tải căn cứ.",
+  "no_changes": "Không có thay đổi",
+  "no_collection": "Không có bộ sưu tập",
+  "no_completed_missions_to_clear": "Không có nhiệm vụ hoàn thành nào để xóa",
+  "no_current_missions_to_clear": "Không có nhiệm vụ hiện tại để hoàn thành",
+  "no_current_missions_to_complete": "Không có nhiệm vụ hiện tại để hoàn thành",
+  "no_detailed_info": "Không có thông tin chi tiết",
+  "no_entity_matching": "Không tìm thấy {entity} nào khớp với \"{query}\"",
+  "no_entity_selected": "Không có {entity} nào được chọn",
+  "no_entity_yet": "Chưa có {entity}",
+  "no_guild_bases_found": "Không tìm thấy căn cứ bang hội",
+  "no_guild_found": "Không tìm thấy bang hội nào",
+  "no_level_sync": "Không đồng bộ hóa cấp độ",
+  "no_missions_found": "Không tìm thấy nhiệm vụ {type} nào",
+  "no_pals_available": "Không có sẵn dữ liệu {pals}",
+  "no_pals_in_storage": "Không có {pals} trong bộ nhớ",
+  "no_players_loaded": "Chưa có người chơi nào được tải. Sử dụng bộ chọn ở trên để tải người chơi.",
+  "no_save_loaded": "Không tải được tệp lưu",
+  "no_skills_learned": "Không học được kỹ năng nào",
+  "no_slots_available_in_entity": "Không có chỗ trống nào trong {entity} này.",
+  "no_storage_containers": "Không có thùng chứa",
+  "none": "Không có",
+  "normal": "Bình thường",
+  "note": "Ghi chú",
+  "notes_optional": "Ghi chú (tùy chọn)",
+  "nuke_all_presets": "Nuke tất cả cài sẵn",
+  "nuke_presets_confirm": "Bạn có chắc chắn muốn xóa tất cả cài đặt trước không? Hành động này sẽ khôi phục cài đặt gốc và không thể hoàn tác.",
+  "nuke_ups": "Nuke UPS - Xóa TẤT CẢ {pals}",
+  "of": "của",
+  "oil_rig": "giàn khoan dầu",
+  "oil_rig_pals": "Giàn khoan dầu {pals}",
+  "open_drawer": "Mở ngăn kéo",
+  "oops_something_wrong": "Rất tiếc... Đã xảy ra lỗi",
+  "or_drag_and_drop": "hoặc kéo và thả",
+  "origin": "Nguồn gốc",
+  "origin_label": "Nguồn:",
+  "origin_point": "Nguồn gốc (0,0)",
+  "page": "Trang",
+  "page_of_pages": "Trang {current} trong số {total}",
+  "pal_box_party": "Hộp thư + bữa tiệc",
+  "pal_cannot_be_trait": "{type} Bạn không thể là {trait}",
+  "pal_types": "Các loại bạn bè",
+  "palbox": "Hộp thư",
+  "paldeck": "Paldeck",
+  "pals_in_storage": "{pals} đang lưu trữ",
+  "party": "Buổi tiệc",
+  "passive": "Thụ động",
+  "paste": "Dán",
+  "predator": "động vật ăn thịt",
+  "predator_pals": "Động vật ăn thịt {pals}",
+  "preset_name": "Tên đặt trước",
+  "preset_select_details": "Chọn một cài đặt trước từ danh sách để xem chi tiết",
+  "presets_precedence": "Ưu tiên đặt trước là: khóa pal ➡️ khóa phần tử ➡️ mặc định. Chỉ chọn một cài đặt trước cho mỗi người bạn, thành phần hoặc mặc định.",
+  "previous": "Trước",
+  "progress": "Tiến triển",
+  "pwr": "pwr",
+  "raid": "đột kích",
+  "range": "Phạm vi",
+  "rare": "Hiếm",
+  "raw": "thô",
+  "read_only": "CHỈ ĐỌC",
+  "ready_to_fill": "Sẵn sàng điền {target} bằng {count} {pals}.",
+  "refresh": "Làm mới (Xóa các thay đổi chưa được lưu)",
+  "refresh_entity": "Làm mới {entity}",
+  "remove": "Di dời",
+  "remove_all_from_collections": "Xóa tất cả {pals} đã chọn khỏi bộ sưu tập của họ",
+  "remove_from_collection": "Xóa khỏi bộ sưu tập",
+  "remove_from_favorites": "Xóa khỏi mục yêu thích",
+  "remove_pal": "Xóa bạn bè",
+  "removed_pals_from_collections": "Đã xóa {count} {pals} khỏi bộ sưu tập",
+  "research_cost": "Chi phí nghiên cứu",
+  "research_node": "Nút nghiên cứu",
+  "reset": "Cài lại",
+  "restore_hp": "Khôi phục HP",
+  "rewards": "Phần thưởng",
+  "right_click_edit_base": "Nhấp chuột phải vào một cơ sở để chỉnh sửa tên của nó.",
+  "save_as_preset": "Lưu làm giá trị đặt trước",
+  "save_changes": "Lưu thay đổi",
+  "save_file_to_ups": "Lưu tập tin 🡆 UPS",
+  "save_id": "Lưu ID",
+  "save_platform": "Lưu nền tảng",
+  "search": "Tìm kiếm",
+  "search_by_name_nickname": "Tìm kiếm theo tên hoặc biệt hiệu",
+  "search_entity": "Tìm kiếm {entity}",
+  "search_pals": "Tìm kiếm {pals} theo tên, ID ký tự hoặc ghi chú...",
+  "search_placeholder": "Tìm kiếm {entity}...",
+  "select": "Lựa chọn",
+  "select_valid_player": "Vui lòng chọn một người chơi hợp lệ",
+  "select_a_entity": "Chọn một {entity}",
+  "select_a_entity_to_view": "Chọn {entity} để xem chi tiết",
+  "select_all_current_base": "Chọn tất cả trong cơ sở hiện tại",
+  "select_all_filtered_pals": "Chọn tất cả đã lọc {pals} ({count})",
+  "select_all_in": "Chọn tất cả trong",
+  "select_all_page_pals": "Chọn tất cả {pals} trên trang hiện tại ({count})",
+  "select_all_ups_pals": "Chọn tất cả {pals} trong UPS ({count})",
+  "select_entity": "Chọn {entity}",
+  "select_entity_to_edit": "Chọn {entity} để chỉnh sửa",
+  "select_entity_to_load": "Chọn {entity} để tải và hiển thị trên bản đồ",
+  "select_guild_to_load_bases": "Chọn một bang hội để tải căn cứ của nó trên bản đồ",
+  "select_pal_edit_description": "{pals} có thể được chọn trong Hộp thư người chơi, Căn cứ bang hội, Kho lưu trữ Pal toàn cầu, Kho lưu trữ Pal theo chiều hoặc Kho lưu trữ Pal phổ quát",
+  "select_player_view_entity": "Chọn Người chơi để xem {entity}",
+  "selected": "Đã chọn",
+  "selected_of_total": "{selected} trong số {total} đã chọn",
+  "selected_tags": "Thẻ đã chọn",
+  "set_entity_item_count": "Đặt số lượng mục {entity}",
+  "set_inventory_count": "Đặt số lượng hàng tồn kho",
+  "set_item_count": "Đặt số lượng vật phẩm",
+  "settings": "Cài đặt",
+  "shield": "Khiên",
+  "shortcuts": "Phím tắt",
+  "show_archived": "Hiển thị đã lưu trữ",
+  "showing_pals": "Đang hiển thị {start} tới {end} trong tổng số {total} {pals}",
+  "size": "Kích cỡ",
+  "skills": "Kỹ năng",
+  "slots_available_in_entity": "Có sẵn {count} vị trí trong {entity} này.",
+  "sort": "Loại",
+  "sort_by": "Sắp xếp theo",
+  "sort_by_entity": "Sắp xếp theo {entity}",
+  "sort_inventory": "Sắp xếp hàng tồn kho",
+  "souls": "Linh hồn",
+  "special_categories": "Danh mục đặc biệt",
+  "special_weapon": "Vũ khí đặc biệt",
+  "sphere_module": "Mô-đun hình cầu",
+  "stamina": "Sự bền bỉ",
+  "statistics": "Thống kê",
+  "stats": "Thống kê",
+  "stomach": "Cái bụng",
+  "steam": "Hơi nước",
+  "steam_description": "Steam/Mac: Tệp lưu Level.sav",
+  "storage": "Kho",
+  "storage_container": "Thùng chứa",
+  "structures": "Cấu trúc",
+  "sub_missions": "Nhiệm vụ phụ",
+  "success": "Thành công",
+  "successfully_cloned_pal_to_entity": "Đã sao chép thành công {pal} thành {entity}",
+  "successfully_cloned_pals_to_entity": "Đã sao chép thành công {count} {pals} thành {entity}",
+  "successfully_deleted_entity": "Đã xóa thành công {count} {pals} khỏi {entity}",
+  "successfully_exported_pals": "Đã xuất thành công {count} trong số {total} {pals}",
+  "summon": "Triệu hồi",
+  "summoned": "được triệu tập",
+  "summoned_pals": "Đã triệu tập {pals}",
+  "support": "Ủng hộ",
+  "syncing": "Đang đồng bộ hóa",
+  "tag_changes": "Thay đổi thẻ",
+  "tag_delete_warning": "Thẻ này sẽ bị xóa khỏi tất cả Bạn bè có nó.",
+  "tags_for_pals": "Thẻ cho {count} {pals}",
+  "target_available": "Mục tiêu có sẵn",
+  "tags_optional": "Thẻ (tùy chọn)",
+  "talents_ivs": "Tài năng (IV)",
+  "technology_points": "Điểm công nghệ",
+  "to_collection": "vào Bộ sưu tập",
+  "toggle_entity": "Chuyển đổi {entity}",
+  "total": "Tổng cộng",
+  "total_clones": "Tổng số bản sao",
+  "total_count": "Tổng số",
+  "total_exports": "Tổng xuất khẩu",
+  "total_pals": "Tổng số {pals}",
+  "transfer_all_pals": "Chuyển toàn bộ {pals}",
+  "transfer_pal": "Chuyển khoản {pal}",
+  "trust": "Lòng tin",
+  "trust_level": "Mức độ tin cậy",
+  "trust_xp": "Tin tưởng XP",
+  "type_label": "Loại: {type}",
+  "unarchive_entity": "Hủy lưu trữ {entity}",
+  "uncommon": "không phổ biến",
+  "universal_pal_storage": "Bộ lưu trữ đa năng {pal}",
+  "unknown": "Không xác định",
+  "unknown_collection": "Bộ sưu tập không xác định",
+  "unlock_all": "Mở khóa tất cả",
+  "unlock_all_category_research": "Mở khóa tất cả nghiên cứu {category}",
+  "unlock_full_map": "Mở khóa toàn bản đồ",
+  "unlock_map": "Mở khóa bản đồ",
+  "unlock_map_confirm": "Thao tác này sẽ mở khóa toàn bộ bản đồ bằng cách sửa đổi tệp LocalData.sav của bạn. Bạn sẽ cần chọn tệp LocalData.sav của mình. Tiếp tục?",
+  "unlock_prerequisite_entity": "Mở khóa điều kiện tiên quyết trước {entity}",
+  "unlocks": "Mở khóa",
+  "update_available": "Cập nhật có sẵn!",
+  "update_now": "Cập nhật ngay",
+  "updated_tags_for_pals": "Đã cập nhật thẻ cho {count} {pals}",
+  "upload": "Tải lên",
+  "upload_a_file": "Tải lên một tập tin",
+  "upload_zip_files": "Nhấp để tải lên tệp lưu đã nén của bạn",
+  "ups": "UPS",
+  "ups_already_empty": "UPS đã trống rỗng",
+  "used_slots": "Slots đã qua sử dụng",
+  "warning": "Cảnh báo",
+  "weight": "Cân nặng",
+  "work_suitability": "Sự phù hợp với công việc",
+  "working_on_it": "Bíp Boop, đang xử lý!",
+  "workload": "Khối lượng công việc",
+  "workspeed": "Tốc độ làm việc",
+  "work_speed": "Tốc độ làm việc",
+  "world_coordinates": "Tọa độ thế giới",
+  "world_name": "Tên thế giới",
+  "xbox_game_pass": "Thẻ trò chơi Xbox",
+  "xbox_game_pass_description": "Xbox Game Pass: tệp container.index",
+  "zoom_in_out": "Phóng to/thu nhỏ",
+  "active_skill": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Kỹ năng chủ động",
+        "countPlural=other": "Kỹ năng chủ động"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "base": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Căn cứ",
+        "countPlural=other": "căn cứ"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "collection": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Bộ sưu tập",
+        "countPlural=other": "Bộ sưu tập"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "file": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Tài liệu",
+        "countPlural=other": "Tập tin"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "filter": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Lọc",
+        "countPlural=other": "Bộ lọc"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "guild": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "bang hội",
+        "countPlural=other": "Bang hội"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "human": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Nhân loại",
+        "countPlural=other": "Con người"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "item": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Mục",
+        "countPlural=other": "Mặt hàng"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "pal": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Bạn ơi",
+        "countPlural=other": "bạn bè"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "passive_skill": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Kỹ năng thụ động",
+        "countPlural=other": "Kỹ năng thụ động"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "player": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Người chơi",
+        "countPlural=other": "Người chơi"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "preset": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "cài sẵn",
+        "countPlural=other": "cài đặt trước"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "save": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Cứu",
+        "countPlural=other": "Lưu"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "tag": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Nhãn",
+        "countPlural=other": "Thẻ"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "technology": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Công nghệ",
+        "countPlural=other": "Công nghệ"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "transfer": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Chuyển khoản",
+        "countPlural=other": "chuyển nhượng"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "type": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Kiểu",
+        "countPlural=other": "Các loại"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "weapon": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "vũ khí",
+        "countPlural=other": "vũ khí"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ]
+}

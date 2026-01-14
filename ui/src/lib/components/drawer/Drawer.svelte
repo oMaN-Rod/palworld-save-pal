@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { cn } from '$theme';
 	import { ArrowLeft, ArrowRight } from 'lucide-svelte';
+	import * as m from '$i18n/messages';
 
 	type Position = 'left' | 'right';
 	type TabPosition = 'start' | 'center' | 'end';
@@ -61,7 +62,7 @@
 	<button
 		class={tabClass}
 		onclick={toggleDrawer}
-		aria-label={isOpen ? 'Close drawer' : 'Open drawer'}
+		aria-label={isOpen ? m.close_drawer() : m.open_drawer()}
 	>
 		{#if position === 'left'}
 			{#if isOpen}

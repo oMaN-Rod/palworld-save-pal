@@ -16,6 +16,6 @@
 	}>();
 </script>
 
-<div class={cn('card rounded-xs', background, rounded, _class, padding)}>
+<div class={cn('card rounded-xs', background, rounded, padding, _class)}>
 	{@render children()}
 </div>

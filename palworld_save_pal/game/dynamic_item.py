@@ -75,7 +75,7 @@ class DynamicItem(BaseModel):
 
     @computed_field
     def remaining_bullets(self) -> Optional[int]:
-        return PalObjects.get_nested(self._raw_data, "remaining_bullets", log=False)
+        return PalObjects.get_nested(self._raw_data, "remaining_bullets")
 
     @remaining_bullets.setter
     def remaining_bullets(self, value: int) -> None:
@@ -223,15 +223,14 @@ class DynamicItem(BaseModel):
 
     @property
     def _save_parameter(self) -> Dict[str, Any]:
-        return PalObjects.get_nested(
-            self._raw_data, "object", "SaveParameter", "value", log=False
-        )
+        return PalObjects.get_nested(self._raw_data, "object", "SaveParameter", "value")
 
     @property
     def save_data(self) -> Dict[str, Any]:
         return self._dynamic_item_save_data
 
     def update_from(self, other: Dict[str, Any]) -> None:
+        logger.debug("Updating DynamicItem %s, %s", self.local_id, self.static_id)
         self.type = other["type"]
         match self.type:
             case DynamicItemType.ARMOR.value:

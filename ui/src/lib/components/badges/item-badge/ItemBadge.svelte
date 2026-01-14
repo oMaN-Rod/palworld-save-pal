@@ -1,54 +1,68 @@
 <script lang="ts">
 	import { Tooltip } from '$components/ui';
-	import { type EggConfig, type ItemContainerSlot, type ItemGroup, Rarity } from '$types';
+	import {
+		type DynamicItem,
+		type EggConfig,
+		type ItemContainerSlot,
+		type ItemGroup,
+		Rarity
+	} from '$types';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { itemsData, palsData } from '$lib/data';
 	import { cn } from '$theme';
-	import { getModalState } from '$states';
+	import { getAppState, getModalState } from '$states';
 	import { ItemSelectModal } from '$components';
 	import { Progress } from '@skeletonlabs/skeleton-svelte';
 	import { Package } from 'lucide-svelte';
 	import { assetLoader } from '$utils';
 	import { staticIcons } from '$types/icons';
+	import * as m from '$i18n/messages';
+	import { c } from '$lib/utils/commonTranslations';
 
 	let {
 		slot = $bindable<ItemContainerSlot>(),
 		itemGroup,
+		disabled = false,
 		onCopyPaste,
 		onUpdate
-	} = $props<{
+	}: {
 		slot: ItemContainerSlot;
 		itemGroup: ItemGroup;
+		disabled?: boolean;
 		onCopyPaste?: (event: MouseEvent) => void;
 		onUpdate?: (slot: ItemContainerSlot) => void;
-	}>();
+	} = $props();
 
 	const modal = getModalState();
+	const appState = getAppState();
 
-	const stupidTypoMap: Record<string, string> = {
-		cheeseburger_2: 'CheeseBurger_2',
-		bone: 'Bone',
-		potato: 'Potato',
-		gunpowder: 'GunPowder',
-		gunpowder2: 'GunPowder2',
-		bow_triple: 'Bow_Triple'
-	};
-
-	const item = $derived.by(() => {
-		if (slot.static_id == 'None') return;
-		let key: string = slot.static_id;
-
-		if (key.toLowerCase() in stupidTypoMap) {
-			key = stupidTypoMap[key.toLowerCase()];
-		}
-		return itemsData.getByKey(key);
-	});
+	const item = $derived(itemsData.getByKey(slot.static_id));
 
 	const dynamic = $derived.by(() => {
 		if (item) {
 			return item.details.dynamic;
 		}
 	});
+
+	const localTranslationMap = {
+		Weapon: m.weapon({ count: 1 }),
+		SpecialWeapon: m.special_weapon(),
+		Armor: m.armor({ count: 1 }),
+		Accessory: m.accessory(),
+		Material: m.material(),
+		Consume: m.consume(),
+		Ammo: m.ammo(),
+		Food: m.food(),
+		Essential: m.essential(),
+		Glider: m.glider(),
+		MonsterEquipWeapon: m.monster_equip_weapon(),
+		Blueprint: m.blueprint(),
+		Common: m.common(),
+		Uncommon: m.uncommon(),
+		Rare: m.rare(),
+		Epic: m.epic(),
+		Legendary: m.legendary()
+	};
 
 	const showDurability = $derived.by(() => {
 		if (
@@ -154,17 +168,20 @@
 	});
 	const palIconSrc = $derived.by(() => {
 		if (!isEgg) return;
-		const palData = palsData.getByKey(slot?.dynamic_item?.character_id ?? '');
-		return assetLoader.loadMenuImage(slot?.dynamic_item?.character_id, palData?.is_pal ?? true);
+		const characterId = slot?.dynamic_item?.character_id;
+		if (!characterId) return;
+		const palData = palsData.getByKey(characterId);
+		return assetLoader.loadMenuImage(characterId, palData?.is_pal ?? true);
 	});
 
 	async function handleItemSelect() {
+		if (disabled) return;
 		// @ts-ignore
 		const result = await modal.showModal<[string, number, EggConfig]>(ItemSelectModal, {
 			group: itemGroup,
 			itemId: slot.static_id,
 			count: !slot.count || slot.count == 0 ? 1 : slot.count,
-			title: 'Select Item',
+			title: m.select_entity({ entity: c.item }),
 			dynamicItem: slot.dynamic_item
 		});
 		if (!result) return;
@@ -177,13 +194,13 @@
 		}
 		const itemData = itemsData.getByKey(slot.static_id);
 		if (itemData) {
-			slot.count =
-				count > itemData.details.max_stack_count ? itemData.details.max_stack_count : count;
+			let maxCount = appState.settings.cheat_mode ? 999999999 : itemData.details.max_stack_count;
+			slot.count = Math.min(count, maxCount);
 			if (itemData.details.dynamic) {
 				if (!slot.dynamic_item) {
 					slot.dynamic_item = {
 						local_id: '00000000-0000-0000-0000-000000000000'
-					};
+					} as DynamicItem;
 				}
 
 				slot.dynamic_item.durability = itemData.details.dynamic.durability || 0;
@@ -206,13 +223,14 @@
 				slot.dynamic_item = undefined;
 			}
 		}
-		if (onUpdate) onUpdate(slot);
+		onUpdate?.(slot);
 	}
 
 	function handleMouseEvent(
 		event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }
 	) {
-		onCopyPaste(event);
+		if (disabled) return;
+		onCopyPaste?.(event);
 	}
 </script>
 
@@ -248,7 +266,7 @@
 						<span class="absolute bottom-0 right-0.5 text-xs">{slot.count}</span>
 					{/if}
 				</div>
-				{#if showDurability && dynamic}
+				{#if showDurability && dynamic && slot.dynamic_item}
 					<Progress
 						value={slot.dynamic_item.durability}
 						max={dynamic.durability < slot.dynamic_item.durability
@@ -274,7 +292,9 @@
 						</div>
 						<div class="grid grid-cols-[1fr_auto] gap-2">
 							<span class="grow text-left text-gray-300">
-								{item?.details.type_a}
+								{localTranslationMap[
+									item?.details.type_a.toString() as keyof typeof localTranslationMap
+								]}
 							</span>
 							<div
 								class={cn(
@@ -282,7 +302,11 @@
 									itemPopupTierClass
 								)}
 							>
-								{item?.details.rarity !== undefined ? Rarity[item.details.rarity] : ''}
+								{item?.details.rarity !== undefined
+									? localTranslationMap[
+											Rarity[item.details.rarity].toString() as keyof typeof localTranslationMap
+										]
+									: ''}
 							</div>
 						</div>
 					</div>
@@ -299,7 +323,7 @@
 							style="min-width: 80px; height: 2rem;"
 						>
 							<div class="relative z-10 flex h-full items-center justify-between">
-								<span class="mr-8 text-xs">in inventory</span>
+								<span class="mr-8 text-xs">{m.in_inventory()}</span>
 								<span class="font-bold">{slot.count}</span>
 							</div>
 							<span class="border-surface-700 absolute inset-0 rounded-sm border"></span>
@@ -313,32 +337,38 @@
 						<span class="whitespace-pre-line">{item?.info.description}</span>
 					</div>
 					<div class="bg-surface-900 flex p-2 text-sm">
-						<div class="flex grow flex-col space-y-2">
-							<div class="flex items-center space-x-2">
-								<div class="h-6 w-6">
-									<img src={staticIcons.rightClickIcon} alt="Right Click" class="h-full w-full" />
+						{#if !disabled}
+							<div class="flex grow flex-col space-y-2">
+								<div class="flex items-center space-x-2">
+									<div class="h-6 w-6">
+										<img src={staticIcons.rightClickIcon} alt="Right Click" class="h-full w-full" />
+									</div>
+									<span class="text-xs font-bold">{m.copy()}</span>
 								</div>
-								<span class="text-xs font-bold">Copy</span>
+								<div class="flex items-center space-x-2">
+									<div class="h-6 w-6">
+										<img src={staticIcons.ctrlIcon} alt="Right Click" class="h-full w-full" />
+									</div>
+									<div class="h-6 w-6">
+										<img src={staticIcons.rightClickIcon} alt="Right Click" class="h-full w-full" />
+									</div>
+									<span class="text-xs font-bold">{m.paste()}</span>
+								</div>
+								<div class="flex items-center space-x-2">
+									<div class="h-6 w-6">
+										<img src={staticIcons.ctrlIcon} alt="Right Click" class="h-full w-full" />
+									</div>
+									<div class="h-6 w-6">
+										<img
+											src={staticIcons.middleClickIcon}
+											alt="Right Click"
+											class="h-full w-full"
+										/>
+									</div>
+									<span class="text-xs font-bold">{m.delete()}</span>
+								</div>
 							</div>
-							<div class="flex items-center space-x-2">
-								<div class="h-6 w-6">
-									<img src={staticIcons.ctrlIcon} alt="Right Click" class="h-full w-full" />
-								</div>
-								<div class="h-6 w-6">
-									<img src={staticIcons.rightClickIcon} alt="Right Click" class="h-full w-full" />
-								</div>
-								<span class="text-xs font-bold">Paste</span>
-							</div>
-							<div class="flex items-center space-x-2">
-								<div class="h-6 w-6">
-									<img src={staticIcons.ctrlIcon} alt="Right Click" class="h-full w-full" />
-								</div>
-								<div class="h-6 w-6">
-									<img src={staticIcons.middleClickIcon} alt="Right Click" class="h-full w-full" />
-								</div>
-								<span class="text-xs font-bold">Delete</span>
-							</div>
-						</div>
+						{/if}
 						<div
 							class="bg-surface-800 text-one-surface hover:ring-secondary-500 absolute bottom-4 right-4 rounded-sm px-3 py-1 font-semibold hover:ring"
 							style="min-width: 80px; height: 2rem;"
@@ -380,7 +410,7 @@
 
 			{#snippet popup()}
 				<div class="flex">
-					<span>Empty </span>
+					<span>{m.empty()} </span>
 					<img src={staticIcons.sadIcon} alt="Sad Icon" class="h-6 w-6" />
 				</div>
 			{/snippet}
