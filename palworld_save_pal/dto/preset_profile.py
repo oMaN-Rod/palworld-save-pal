@@ -28,6 +28,11 @@ class PalPresetDTO(BaseModel):
     passive_skills: Optional[List[str]] = None
     sanity: Optional[float] = None
     work_suitability: Optional[Dict[str, int]] = None
+    nickname: Optional[str] = None
+    filtered_nickname: Optional[str] = None
+    stomach: Optional[float] = None
+    hp: Optional[int] = None
+    friendship_point: Optional[int] = None
 
 
 class PresetProfileDTO(BaseModel):

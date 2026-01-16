@@ -291,7 +291,12 @@
 				sanity: config.sanity ? pal.sanity : null,
 				exp: config.exp ? pal.exp : null,
 				element: element,
-				lock_element: config.lock_element
+				lock_element: config.lock_element,
+				nickname: config.nickname ? pal.nickname : null,
+				filtered_nickname: config.filtered_nickname ? pal.nickname : null,
+				stomach: config.stomach ? pal.stomach : null,
+				hp: config.hp ? pal.hp : null,
+				friendship_point: config.friendship_point ? pal.friendship_point : null
 			}
 		} as PresetProfile;
 

@@ -352,7 +352,15 @@ export const palPresetNameDescriptionMap: Record<keyof PalPreset, PalPresetNameD
 		label: 'Element Type',
 		description: `Specify the element type for the Pal in this preset. This will restrict the Pal to only being of the specified element types.`
 	},
-	character_id: { label: 'Pal', description: '' }
+	character_id: { label: 'Pal', description: '' },
+	nickname: { label: 'Nickname', description: 'Apply Nickname to preset' },
+	filtered_nickname: {
+		label: 'Filtered Nickname',
+		description: 'Apply Filtered Nickname to preset'
+	},
+	stomach: { label: 'Stomach', description: 'Apply Stomach to preset' },
+	hp: { label: 'HP', description: 'Apply HP to preset' },
+	friendship_point: { label: 'Friendship Point', description: 'Apply Friendship Point to preset' }
 };
 
 export const defaultPresetConfig: PalPresetConfig = {
@@ -376,7 +384,12 @@ export const defaultPresetConfig: PalPresetConfig = {
 	passive_skills: true,
 	work_suitability: true,
 	sanity: true,
-	exp: true
+	exp: true,
+	nickname: true,
+	filtered_nickname: true,
+	stomach: true,
+	hp: true,
+	friendship_point: true
 };
 
 export type PalPreset = {
@@ -402,6 +415,11 @@ export type PalPreset = {
 	work_suitability?: Record<WorkSuitability, number>;
 	sanity?: number;
 	exp?: number;
+	nickname?: string;
+	filtered_nickname?: string;
+	stomach?: number;
+	hp?: number;
+	friendship_point?: number;
 };
 
 export interface PresetProfile {
