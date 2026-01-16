@@ -9,7 +9,7 @@
 	import { Edit, Play, Plus, Trash, X } from 'lucide-svelte';
 	import * as m from '$i18n/messages';
 	import { c } from '$utils/commonTranslations';
-	
+
 	let { containerRef, player = $bindable() } = $props<{
 		containerRef: HTMLDivElement | null;
 		player: Player | undefined;
@@ -126,7 +126,7 @@
 		if (!player) return;
 		// @ts-ignore
 		const result = await modal.showModal<string>(TextInputModal, {
-			title: m.add_entity({entity: c.presets}),
+			title: m.add_entity({ entity: c.presets }),
 			value: ''
 		});
 		if (!result) return;
@@ -148,7 +148,7 @@
 		if (selectedPresets.length === 0) return;
 		// @ts-ignore
 		const result = await modal.showConfirmModal({
-			title: m.delete_entity({entity: c.presets}),
+			title: m.delete_entity({ entity: c.presets }),
 			message: m.delete_count_entities_confirm({
 				count: selectedPresets.length,
 				entity: m.preset({ count: selectedPresets.length })
@@ -164,7 +164,7 @@
 	async function handleEditPresetName(preset: ExtendedPresetProfile) {
 		// @ts-ignore
 		const result = await modal.showModal<string>(TextInputModal, {
-			title: m.edit_entity({entity: c.preset}),
+			title: m.edit_entity({ entity: c.preset }),
 			value: preset.name
 		});
 		if (!result) return;
@@ -192,12 +192,20 @@
 			<Plus />
 		</TooltipButton>
 		{#if selectedPresets.length === 1}
-			<TooltipButton onclick={handleApplyPreset} popupLabel={m.apply_selected_entity({ entity: c.preset })}>
+			<TooltipButton
+				onclick={handleApplyPreset}
+				popupLabel={m.apply_selected_entity({ entity: c.preset })}
+			>
 				<Play />
 			</TooltipButton>
 		{/if}
 		{#if selectedPresets.length >= 1}
-			<TooltipButton onclick={handleDeletePresets} popupLabel={m.delete_selected_entity({ entity: m.preset({ count: selectedPresets.length }) })}>
+			<TooltipButton
+				onclick={handleDeletePresets}
+				popupLabel={m.delete_selected_entity({
+					entity: m.preset({ count: selectedPresets.length })
+				})}
+			>
 				<Trash />
 			</TooltipButton>
 			<TooltipButton onclick={() => (selectedPresets = [])} popupLabel={m.clear_selected()}>
@@ -232,45 +240,45 @@
 				{@const commonContainerString =
 					preset.common_container && preset.common_container.length > 0
 						? `${preset.common_container.length} ${c.items}`
-						: '💩'}
+						: '⬜'}
 				{@const essentialContainerString =
 					preset.essential_container && preset.essential_container.length > 0
 						? `${preset.essential_container.length} ${c.items}`
-						: '💩'}
+						: '⬜'}
 				{@const weaponLoadOutContainerString =
 					preset.weapon_load_out_container && preset.weapon_load_out_container.length > 0
 						? `${preset.weapon_load_out_container.length} ${c.items}`
-						: '💩'}
+						: '⬜'}
 				{@const playerEquipmentArmorContainerString =
 					preset.player_equipment_armor_container &&
 					preset.player_equipment_armor_container.length > 0
 						? `${preset.player_equipment_armor_container.length} ${c.items}`
-						: '💩'}
+						: '⬜'}
 				{@const foodEquipContainerString =
 					preset.food_equip_container && preset.food_equip_container.length > 0
 						? `${preset.food_equip_container.length} ${c.items}`
-						: '💩'}
-				<div class="flex flex-col">
+						: '⬜'}
+				<div class="flex min-w-64 flex-col">
 					<span class="text-lg font-bold">{preset.name}</span>
 					<div class="flex flex-col space-y-2">
 						<div class="flex justify-between">
-							<span class="mr-2">{m.container_entity({entity: m.common})}</span>
+							<span class="mr-2">{m.container_entity({ entity: m.common() })}</span>
 							<span>{commonContainerString}</span>
 						</div>
 						<div class="flex justify-between">
-							<span class="mr-2">{m.container_entity({entity: m.essential()})}</span>
+							<span class="mr-2">{m.container_entity({ entity: m.essential() })}</span>
 							<span>{essentialContainerString}</span>
 						</div>
 						<div class="flex justify-between">
-							<span class="mr-2">{m.container_entity({ entity: m.weapon({count: 1})})}</span>
+							<span class="mr-2">{m.container_entity({ entity: m.weapon({ count: 1 }) })}</span>
 							<span>{weaponLoadOutContainerString}</span>
 						</div>
 						<div class="flex justify-between">
-							<span class="mr-2">{m.container_entity({entity: m.armor()})}</span>
+							<span class="mr-2">{m.container_entity({ entity: m.armor() })}</span>
 							<span>{playerEquipmentArmorContainerString}</span>
 						</div>
 						<div class="flex justify-between">
-							<span class="mr-2">{m.container_entity({entity: m.food()})}</span>
+							<span class="mr-2">{m.container_entity({ entity: m.food() })}</span>
 							<span>{foodEquipContainerString}</span>
 						</div>
 					</div>
