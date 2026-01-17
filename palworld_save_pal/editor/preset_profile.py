@@ -48,7 +48,7 @@ class PalPreset(SQLModel, table=True):
 
     model_config = ConfigDict(arbitrary_types_allowed=True)
 
-    preset_profile: "PresetProfile" | None = Relationship(
+    preset_profile: Optional["PresetProfile"] = Relationship(
         back_populates="pal_preset",
         sa_relationship_kwargs={"foreign_keys": "PresetProfile.pal_preset_id"},
     )
@@ -74,6 +74,6 @@ class PresetProfile(SQLModel, table=True):
     storage_container: dict | None = Field(default=None, sa_column=Column(JSON))
 
     pal_preset_id: str | None = Field(default=None, foreign_key="palpreset.id")
-    pal_preset: PalPreset | None = Relationship(back_populates="preset_profile")
+    pal_preset: Optional[PalPreset] = Relationship(back_populates="preset_profile")
 
     model_config = ConfigDict(arbitrary_types_allowed=True)
