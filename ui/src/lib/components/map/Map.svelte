@@ -231,7 +231,13 @@
 
 <div class="relative h-full w-full">
 	<View center={defaultCenter()} zoom={3} maxZoom={8} {projection} {extent}>
-		<Map bind:map class="h-full w-full" pointermove={handlePointerMove} click={handleMapClick}>
+		<Map
+			bind:map
+			class="h-full w-full"
+			pointermove={handlePointerMove}
+			click={handleMapClick}
+			controls={{ fullscreen: true }}
+		>
 			<!-- World map background -->
 			<Layer.Static url={mapImg.worldMap} {extent} />
 

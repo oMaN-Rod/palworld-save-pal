@@ -65,7 +65,7 @@
 		"ol": "^10.7.0",
 		"ol-contextmenu": "^6.0.0",
 		"svelte-jsoneditor": "^3.8.0",
-		"svelte-openlayers": "^2.0.0",
+		"svelte-openlayers": "^2.1.0",
 		"svelte-persisted-state": "^1.2.0",
 		"tailwind-merge": "^2.6.0",
 		"uuid": "^11.1.0"
