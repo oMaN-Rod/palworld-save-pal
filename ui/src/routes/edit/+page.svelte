@@ -8,7 +8,7 @@
 	const appState = getAppState();
 
 	onMount(() => {
-		if (appState.selectedPlayer) {
+		if (appState.selectedPlayer && !appState.selectedPal) {
 			goto(`/edit/player`);
 		}
 	});

@@ -5,8 +5,9 @@
 	import { getAppState } from '$states';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
+	import { goto } from '$app/navigation';
 
-	let appState = getAppState();
+	const appState = getAppState();
 
 	let stopwatchSeconds = $state(0);
 	let stopwatchInterval: ReturnType<typeof setInterval> | null = null;
@@ -17,7 +18,7 @@
 		...additionalProps
 	}: {
 		selected?: string;
-		onselect: (player: Player) => void;
+		onselect?: (player: Player) => void;
 		[key: string]: any;
 	} = $props();
 
@@ -34,7 +35,9 @@
 
 	function handleSelect(playerId: string) {
 		if (appState.players[playerId]) {
-			onselect(appState.players[playerId]);
+			onselect?.(appState.players[playerId]);
+			appState.selectedPlayer = appState.players[playerId];
+			goto('/edit/player');
 		} else {
 			appState.selectPlayerLazy(playerId);
 		}
@@ -53,7 +56,7 @@
 	$effect(() => {
 		if (appState.selectedPlayer && !appState.loadingPlayer) {
 			if (selected === appState.selectedPlayer.uid) {
-				onselect(appState.selectedPlayer);
+				onselect?.(appState.selectedPlayer);
 			}
 		}
 	});

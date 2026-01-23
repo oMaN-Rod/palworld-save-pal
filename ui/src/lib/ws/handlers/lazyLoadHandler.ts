@@ -61,6 +61,7 @@ export const getPlayerDetailsResponseHandler: WSMessageHandler = {
 		appState.selectedPlayer = player;
 		appState.selectedPlayerUid = player_id;
 		appState.loadingPlayer = false;
+		goto('/edit/player');
 	}
 };
 

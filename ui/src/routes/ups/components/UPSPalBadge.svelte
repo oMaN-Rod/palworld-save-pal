@@ -93,9 +93,7 @@
 			__ups_id: upsPal.id
 		};
 		appState.selectedPal = palWithMetadata;
-		nav.activeTab = 'pal';
-		// Navigate to edit page
-		goto('/edit');
+		goto('/edit/pal');
 	}
 
 	function handleKeydown(event: KeyboardEvent) {
@@ -131,7 +129,10 @@
 			try {
 				await upsState.exportPal(upsPal.id, target, result.playerId);
 				toast.add(
-					m.successfully_cloned_pal_to_entity({ pal: upsPal.nickname || upsPal.character_id, entity: result.target.toUpperCase() }),
+					m.successfully_cloned_pal_to_entity({
+						pal: upsPal.nickname || upsPal.character_id,
+						entity: result.target.toUpperCase()
+					}),
 					m.success(),
 					'success'
 				);
@@ -156,7 +157,11 @@
 				await upsState.loadAll(); // Refresh to update collection counts
 
 				if (result.removeFromCollection) {
-					toast.add(m.removed_pals_from_collections({ pals: c.pal, count: 1 }), m.success(), 'success');
+					toast.add(
+						m.removed_pals_from_collections({ pals: c.pal, count: 1 }),
+						m.success(),
+						'success'
+					);
 				} else {
 					toast.add(m.moved_pals_to_collection({ pals: c.pal, count: 1 }), m.success(), 'success');
 				}

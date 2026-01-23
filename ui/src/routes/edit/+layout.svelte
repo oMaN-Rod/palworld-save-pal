@@ -73,11 +73,6 @@
 		}
 	}
 
-	async function handleOnSelectPlayer(player: Player) {
-		appState.selectedPlayer = player;
-		goto('/edit/player');
-	}
-
 	// Add keyboard event listener when component mounts
 	$effect(() => {
 		document.addEventListener('keydown', handleKeydown);
@@ -91,10 +86,7 @@
 	<div class="mx-2 flex min-w-72 items-center justify-between">
 		{#if appState.saveFile}
 			<div class="flex items-center">
-				<PlayerList
-					selected={appState.selectedPlayer?.uid || undefined}
-					onselect={(player: Player) => handleOnSelectPlayer(player)}
-				/>
+				<PlayerList selected={appState.selectedPlayer?.uid || undefined} />
 				{#if appState.selectedPlayer && appState.settings.debug_mode}
 					<DebugButton
 						href={`/debug?guildId=${appState.selectedPlayer?.guild_id}&playerId=${appState.selectedPlayer!.uid}`}

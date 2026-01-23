@@ -4,9 +4,7 @@
 
 	const appState = getAppState();
 
-	if (appState.saveFile) {
-		goto('/edit');
-	} else {
+	if (!appState.saveFile) {
 		goto('/file');
 	}
 </script>
