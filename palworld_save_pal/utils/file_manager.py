@@ -124,12 +124,11 @@ class FileManager:
         ).parent.parent.parent.resolve()  # Get the app's root directory
         logger.debug("Application directory: %s", app_dir)
 
+        initial_dir = STEAM_ROOT
         if save_type == "steam":
             file_types = ("Sav Files (*.sav)", "All files (*.*)")
-            initial_dir = STEAM_ROOT
         elif save_type == "local_data":
             file_types = ("Sav Files (*.sav)", "All files (*.*)")
-            initial_dir = STEAM_ROOT
         else:
             file_types = ("Container Index Files (*.index)", "All files (*.*)")
             initial_dir = GAMEPASS_ROOT
