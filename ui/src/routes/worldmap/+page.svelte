@@ -186,7 +186,7 @@
 	}
 
 	$effect(() => {
-		if (appState.selectedPlayer) {
+		if (appState.selectedPlayer && mapOptionsState.current.showPlayers) {
 			handlePlayerLoaded(appState.selectedPlayer);
 		}
 	});
@@ -273,7 +273,7 @@
 						<Users class="h-4 w-4" />
 						<span class="text-sm font-medium">{m.load_player()}</span>
 					</div>
-					<PlayerList selected={selectedPlayerUid} onselect={handlePlayerLoaded} />
+					<PlayerList selected={selectedPlayerUid} onselect={handlePlayerLoaded} redirect={false} />
 				</div>
 				<div class="flex flex-col gap-2">
 					<div class="flex items-center gap-2">
