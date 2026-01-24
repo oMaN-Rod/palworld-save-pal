@@ -21,7 +21,7 @@ logger = create_logger(__name__)
 
 FILETIME_EPOCH = datetime(1601, 1, 1, tzinfo=timezone.utc)
 STEAM_ROOT = (
-    os.path.join(os.getenv("LOCALAPPDATA"), "Pal", "Saved", "SaveGames")
+    os.path.join(os.getenv("LOCALAPPDATA", ""), "Pal", "Saved", "SaveGames")
     if os.name == "nt"
     else (
         os.path.join(
@@ -35,7 +35,7 @@ STEAM_ROOT = (
 )
 GAMEPASS_ROOT = (
     os.path.join(
-        os.getenv("LOCALAPPDATA"),
+        os.getenv("LOCALAPPDATA", ""),
         "Packages",
         "PocketpairInc.Palworld_ad4psfrxyesvt",
         "SystemAppData",
@@ -117,7 +117,7 @@ class FileManager:
 
     @staticmethod
     def open_file_dialog(
-        save_type: str, window: webview.Window, save_dir: str = None
+        save_type: str, window: webview.Window, save_dir: str | None = None
     ) -> Optional[str]:
         app_dir = Path(
             __file__
