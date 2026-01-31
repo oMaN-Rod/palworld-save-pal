@@ -1,20 +1,24 @@
 import base64
+import datetime
 import io
 import os
+import tempfile
 from typing import Dict
 import uuid
 import zipfile
+
 from fastapi import WebSocket
-from palworld_save_pal.ws.messages import (
-    DownloadSaveFileMessage,
-    MessageType,
-    UpdateSaveFileMessage,
-    LoadZipFileMessage,
-)
-from palworld_save_pal.ws.utils import build_response
+
+from palworld_save_pal.game.save_file import SaveType
 from palworld_save_pal.state import get_app_state
 from palworld_save_pal.utils.logging_config import create_logger
-import datetime
+from palworld_save_pal.ws.messages import (
+    DownloadSaveFileMessage,
+    LoadZipFileMessage,
+    MessageType,
+    UpdateSaveFileMessage,
+)
+from palworld_save_pal.ws.utils import build_response
 
 logger = create_logger(__name__)
 
@@ -78,6 +82,12 @@ async def download_save_file_handler(_: DownloadSaveFileMessage, ws: WebSocket):
     player_sav_files = save_file.player_gvas_files()
     logger.debug("Got data for %d players", len(player_sav_files))
 
+    gps_sav_data = None
+    if app_state.gps_loaded:
+        gps_sav_data = save_file.gps_sav()
+        if gps_sav_data:
+            logger.debug("Got GlobalPalStorage.sav data (%d bytes)", len(gps_sav_data))
+
     await ws_callback("Creating ZIP archive... 🤏")
     zip_buffer = io.BytesIO()
     with zipfile.ZipFile(zip_buffer, "w", zipfile.ZIP_DEFLATED) as zipf:
@@ -101,8 +111,13 @@ async def download_save_file_handler(_: DownloadSaveFileMessage, ws: WebSocket):
                 zipf.writestr(player_dps_path, files_data["dps"])
                 logger.debug("Added %s to ZIP", player_dps_path)
 
+        if gps_sav_data:
+            zipf.writestr("GlobalPalStorage.sav", gps_sav_data)
+            logger.debug("Added GlobalPalStorage.sav to ZIP")
+
+    gps_msg = " and GlobalPalStorage.sav" if gps_sav_data else ""
     await ws_callback(
-        f"Archive created with Level.sav and {player_count} player(s) data. Encoding..."
+        f"Archive created with Level.sav{gps_msg} and {player_count} player(s) data. Encoding..."
     )
 
     zip_data = zip_buffer.getvalue()
@@ -134,39 +149,44 @@ async def load_zip_file_handler(message: LoadZipFileMessage, ws: WebSocket):
 
     app_state = get_app_state()
     zip_data = bytes(message.data)
+    gps_file_path = None
 
     with zipfile.ZipFile(io.BytesIO(zip_data), "r") as zip_ref:
         file_list = zip_ref.namelist()
-        if file_list is None:
+        if not file_list:
             raise ValueError("Zip file is empty")
 
-        save_id = file_list[0].split("/")[0]
         nested = not any(f == "Level.sav" for f in file_list)
-        level_sav = f"{save_id}/Level.sav" if nested else "Level.sav"
-        level_meta_sav = f"{save_id}/LevelMeta.sav" if nested else "LevelMeta.sav"
-        players_folder = f"{save_id}/Players/" if nested else "Players/"
+        save_id = file_list[0].split("/")[0] if nested else "uploaded_save"
 
-        if level_sav not in file_list:
+        level_sav_path = f"{save_id}/Level.sav" if nested else "Level.sav"
+        level_meta_path = f"{save_id}/LevelMeta.sav" if nested else "LevelMeta.sav"
+        players_folder = f"{save_id}/Players/" if nested else "Players/"
+        gps_path = (
+            f"{save_id}/GlobalPalStorage.sav" if nested else "GlobalPalStorage.sav"
+        )
+
+        if level_sav_path not in file_list:
             raise ValueError("Zip file does not contain 'Level.sav'")
 
         if not any(f.startswith(players_folder) for f in file_list):
             raise ValueError("Zip file does not contain 'Players' folder")
 
-        level_sav_data = zip_ref.read(level_sav)
+        level_sav_data = zip_ref.read(level_sav_path)
 
         level_meta_data = None
-        if level_meta_sav in file_list:
-            level_meta_data = zip_ref.read(level_meta_sav)
+        if level_meta_path in file_list:
+            level_meta_data = zip_ref.read(level_meta_path)
 
         player_saves: Dict[uuid.UUID, Dict[str, bytes]] = {}
         for f in (
             file for file in file_list if "Players" in file and file.endswith(".sav")
         ):
-            dps = False
             player_id = os.path.splitext(os.path.basename(f))[0]
-            if "_dps" in f:
+            is_dps = "_dps" in player_id
+            if is_dps:
                 player_id = player_id.replace("_dps", "")
-                dps = True
+
             try:
                 player_uuid = uuid.UUID(player_id)
             except ValueError:
@@ -175,26 +195,38 @@ async def load_zip_file_handler(message: LoadZipFileMessage, ws: WebSocket):
 
             if player_uuid not in player_saves:
                 player_saves[player_uuid] = {}
-            save_type = "dps" if dps else "sav"
-            player_saves[player_uuid][save_type] = zip_ref.read(f)
+
+            file_type = "dps" if is_dps else "sav"
+            player_saves[player_uuid][file_type] = zip_ref.read(f)
 
         if not player_saves:
             raise ValueError("No valid player save files found in the 'Players' folder")
+
+        if gps_path in file_list:
+            temp_dir = tempfile.gettempdir()
+            gps_file_path = os.path.join(temp_dir, f"{save_id}_GlobalPalStorage.sav")
+            with open(gps_file_path, "wb") as f:
+                f.write(zip_ref.read(gps_path))
+            logger.debug("Extracted GPS to temp file: %s", gps_file_path)
 
         await app_state.process_save_files(
             sav_id=save_id,
             level_sav=level_sav_data,
             level_meta=level_meta_data,
-            player_savs=player_saves,
+            player_file_refs=player_saves,
             ws_callback=ws_callback,
+            save_type=SaveType.STEAM,
+            gps_file_path=gps_file_path,
         )
 
+    world_name = app_state.save_file.world_name or "Unknown"
     data = {
-        "level": app_state.save_file.world_name,
-        "players": [str(p) for p in app_state.players.keys()],
-        "name": app_state.save_file.level_sav_path,
+        "level": save_id,
+        "players": [str(p) for p in player_saves.keys()],
+        "world_name": world_name,
+        "type": "steam",
         "size": app_state.save_file.size,
-        "type": app_state.save_type.name.lower(),
+        "has_gps": gps_file_path is not None,
     }
 
     await ws_callback(
@@ -204,8 +236,12 @@ async def load_zip_file_handler(message: LoadZipFileMessage, ws: WebSocket):
     response = build_response(MessageType.LOADED_SAVE_FILES, data)
     await ws.send_json(response)
 
-    response = build_response(MessageType.GET_PLAYERS, app_state.players)
+    response = build_response(
+        MessageType.GET_PLAYER_SUMMARIES, app_state.player_summaries
+    )
     await ws.send_json(response)
 
-    response = build_response(MessageType.GET_GUILDS, app_state.guilds)
+    response = build_response(
+        MessageType.GET_GUILD_SUMMARIES, app_state.guild_summaries
+    )
     await ws.send_json(response)

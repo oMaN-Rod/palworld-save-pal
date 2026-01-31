@@ -1631,6 +1631,13 @@ class SaveFile(BaseModel):
             for uid, files in self._player_gvas_files.items()
         }
 
+    def gps_sav(self) -> Optional[bytes]:
+        if not self._gps_gvas_file:
+            return None
+        logger.info("Converting GlobalPalStorage to SAV")
+        gvas = copy.deepcopy(self._gps_gvas_file)
+        return compress_gvas_to_sav(gvas.write(CUSTOM_PROPERTIES), 0x31)
+
     def to_json_file(
         self,
         output_path,
