@@ -131,6 +131,9 @@ class MessageType(str, Enum):
     GET_GUILD_RAW_DATA = "get_guild_raw_data"
     GET_RAW_DATA = "get_raw_data"
 
+    # Utility
+    OPEN_FOLDER = "open_folder"
+
 
 class AddPalData(BaseModel):
     player_id: Optional[UUID] = None
@@ -675,3 +678,12 @@ class RequestPlayerDetailsMessage(BaseMessage):
 class RequestGuildDetailsMessage(BaseMessage):
     type: str = MessageType.REQUEST_GUILD_DETAILS.value
     data: UUID  # Guild ID to load
+
+
+class OpenFolderData(BaseModel):
+    folder_type: str  # "backups", "steam", "gamepass", "psp_root"
+
+
+class OpenFolderMessage(BaseMessage):
+    type: str = MessageType.OPEN_FOLDER.value
+    data: OpenFolderData

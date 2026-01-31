@@ -2,6 +2,7 @@ import json
 import os
 import platform
 import signal
+import subprocess
 import traceback
 from urllib.parse import quote
 import sys
@@ -17,7 +18,7 @@ from typing import Any
 
 from palworld_save_pal.db.bootstrap import create_db_and_tables
 from palworld_save_pal.server_thread import ServerThread
-from palworld_save_pal.utils.file_manager import FileManager
+from palworld_save_pal.utils.file_manager import FileManager, STEAM_ROOT, GAMEPASS_ROOT
 from palworld_save_pal.ws.manager import ConnectionManager
 from palworld_save_pal.utils.logging_config import create_logger, setup_logging
 from palworld_save_pal.__version__ import __version__
@@ -54,6 +55,37 @@ async def static_files_middleware(request: Request, call_next):
         encoded_path = quote(path)
         return RedirectResponse(url=f"/?path={encoded_path}")
     return await call_next(request)
+
+
+def get_app_root() -> str:
+    if getattr(sys, "frozen", False):
+        return os.path.dirname(sys.executable)
+    return os.path.dirname(os.path.abspath(__file__))
+
+
+def get_folder_path(folder_type: str) -> str | None:
+    app_root = get_app_root()
+    folder_paths = {
+        "backups": os.path.join(app_root, "backups"),
+        "steam": STEAM_ROOT,
+        "gamepass": GAMEPASS_ROOT,
+        "psp_root": app_root,
+    }
+    return folder_paths.get(folder_type)
+
+
+def open_folder_in_explorer(folder_path: str) -> None:
+    system = platform.system()
+    try:
+        if system == "Windows":
+            os.startfile(folder_path)
+        elif system == "Darwin":
+            subprocess.run(["open", folder_path], check=True)
+        else:
+            subprocess.run(["xdg-open", folder_path], check=True)
+        logger.info("Opened folder: %s", folder_path)
+    except Exception as e:
+        logger.error("Failed to open folder %s: %s", folder_path, str(e))
 
 
 async def handle_file_selection(
@@ -110,6 +142,18 @@ async def websocket_endpoint(websocket: WebSocket, client_id: int):
                         continue
                     json_data["data"]["path"] = file_path
                     data = json.dumps(json_data)
+                case "open_folder":
+                    folder_type = json_data.get("data", {}).get("folder_type", "")
+                    folder_path = get_folder_path(folder_type)
+                    if folder_path and os.path.exists(folder_path):
+                        open_folder_in_explorer(folder_path)
+                    else:
+                        response = build_response(
+                            MessageType.WARNING,
+                            f"Folder not found: {folder_path or folder_type}",
+                        )
+                        await websocket.send_json(response)
+                    continue
             await manager.process_message(data, websocket)
     except WebSocketDisconnect:
         logger.warning("Client %s disconnected", client_id)

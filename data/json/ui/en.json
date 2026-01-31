@@ -663,5 +663,6 @@
   "world_name": "World Name",
   "xbox_game_pass": "Xbox Game Pass",
   "xbox_game_pass_description": "Xbox Game Pass: container.index file",
-  "zoom_in_out": "Zoom In/Out"
+  "zoom_in_out": "Zoom In/Out",
+  "open_folder": "Open Folder"
 }

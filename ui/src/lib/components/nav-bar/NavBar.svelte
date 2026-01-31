@@ -19,13 +19,14 @@
 	} from 'lucide-svelte';
 
 	import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
-	import { SettingsModal } from '$components/modals';
+	import { OpenFolder, SettingsModal } from '$components/modals';
 	import { MessageType } from '$types';
 	import { send } from '$lib/utils/websocketUtils';
 	import { page } from '$app/state';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 	import { persistedState } from 'svelte-persisted-state';
+	import { Folder } from '@lucide/svelte';
 
 	let appState = getAppState();
 	let modal = getModalState();
@@ -57,6 +58,13 @@
 				location.reload();
 			}, 500);
 		}
+	}
+
+	async function handleOpenFolder(): Promise<void> {
+		// @ts-ignore
+		await modal.showModal(OpenFolder, {
+			title: m.open_folder()
+		});
 	}
 </script>
 
@@ -185,6 +193,16 @@
 		{/if}
 	{/snippet}
 	{#snippet footer()}
+		{#if PUBLIC_DESKTOP_MODE === 'true'}
+			<Navigation.Tile
+				labelExpanded={m.open_folder()}
+				title={m.open_folder()}
+				id="open-folder"
+				onclick={handleOpenFolder}
+			>
+				<Folder />
+			</Navigation.Tile>
+		{/if}
 		<Navigation.Tile
 			labelExpanded={m.settings()}
 			title={m.settings()}

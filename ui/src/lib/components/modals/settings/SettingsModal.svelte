@@ -11,7 +11,7 @@
 	import { c } from '$lib/utils/commonTranslations';
 
 	let {
-		title = 'Select Language',
+		title = '',
 		settings,
 		closeModal
 	} = $props<{
