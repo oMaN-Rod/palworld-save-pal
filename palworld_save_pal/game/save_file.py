@@ -1609,7 +1609,7 @@ class SaveFile(BaseModel):
             for uid in self._player_gvas_files
         }
 
-    def player_gvas_files(self) -> Dict[UUID, Dict[str, bytes]]:
+    def player_gvas_files(self) -> Dict[UUID, Dict[str, Optional[bytes]]]:
         logger.info(
             "Converting player save files to SAV: %s", len(self._player_gvas_files)
         )
