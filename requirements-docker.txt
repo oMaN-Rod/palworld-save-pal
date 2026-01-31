@@ -4,7 +4,7 @@ anyio==4.7.0
 bottle==0.13.2
 cffi==1.17.1
 click==8.1.7
-clr-loader==0.2.6
+clr-loader==0.2.9
 colorama==0.4.6
 colorlog==6.9.0
 cx-freeze==8.3.0
