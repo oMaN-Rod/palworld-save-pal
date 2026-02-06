@@ -1,20 +1,11 @@
+import { goto } from '$app/navigation';
 import { page } from '$app/state';
 import { getAppState } from './appState.svelte';
 
-export type Page =
-	| 'edit'
-	| 'info'
-	| 'file'
-	| 'settings'
-	| 'loading'
-	| 'error'
-	| 'browser'
-	| 'save'
-	| 'ups';
 export type Tab = 'player' | 'pal' | 'pal-box' | 'dps' | 'guilds' | 'gps' | 'technologies';
 
 export interface NavigationState {
-	activePage: Page | string;
+	activePage: string;
 	activeTab?: Tab;
 }
 
@@ -32,19 +23,20 @@ class NavigationStateManager implements NavigationState {
 		return page.url.pathname === path;
 	}
 
-	navigateTo(page: Page): void {
+	navigateTo(page: string): void {
 		this.#activePage = page;
 	}
 
-	navigateToAndSave(page: Page): void {
+	saveAndNavigate(page: string): void {
 		if (!this.#initialLoad && page !== 'save') {
 			this.#appState.saveState();
 		}
 		this.#activePage = page;
 		this.#initialLoad = false;
+		goto(page);
 	}
 
-	get activePage(): Page | string {
+	get activePage(): string {
 		return this.#activePage;
 	}
 

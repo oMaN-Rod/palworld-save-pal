@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { Card } from '$components/ui';
-	import { goto } from '$app/navigation';
-	import { getAppState } from '$states';
+	import { getAppState, getNavigationState } from '$states';
 	import type { Player } from '$types';
 	import { worldToMap } from './utils';
 	import { Pencil, Heart, Trophy, Clock, Users, Gamepad2, Swords, Globe, Map } from 'lucide-svelte';
@@ -13,6 +12,7 @@
 	} = $props();
 
 	const appState = getAppState();
+	const nav = getNavigationState();
 
 	function handleEdit(event: MouseEvent) {
 		console.log('Edit button clicked for player:', player);
@@ -22,7 +22,7 @@
 			appState.selectedPlayer = player;
 			appState.selectedPlayerUid = player.uid;
 		}
-		goto('/edit');
+		nav.saveAndNavigate('/edit');
 	}
 
 	const mapCoords = $derived(worldToMap(player.location.x, player.location.y));

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
+	import { getNavigationState } from '$states';
 
 	let {
 		text,
@@ -7,13 +8,17 @@
 		href,
 		class: _class
 	}: { text: string; class?: string; key: string; href?: string } = $props();
+
+	const nav = getNavigationState();
 </script>
 
-<a
+<button
 	class="hover:bg-secondary-500/50 flex items-center gap-2 rounded p-2 {page.url.pathname == href
 		? 'bg-secondary-500/25'
 		: ''} {_class}"
-	{href}
+	onclick={() => {
+		nav.saveAndNavigate(href as string);
+	}}
 >
 	<span>{text}</span>
 	<kbd
@@ -21,4 +26,4 @@
 	>
 		{key}
 	</kbd>
-</a>
+</button>

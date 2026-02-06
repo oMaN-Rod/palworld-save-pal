@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
-	import { getAppState } from '$states';
+	import { getAppState, getNavigationState } from '$states';
 	import { Bug } from 'lucide-svelte';
 
 	const appState = getAppState();
+	const nav = getNavigationState();
 
 	let {
 		href = '',
@@ -19,8 +19,7 @@
 <button
 	class="btn {baseClass}"
 	onclick={async () => {
-		await appState.saveState();
-		goto(href);
+		nav.saveAndNavigate(href);
 	}}
 >
 	<Bug class={iconClass} />

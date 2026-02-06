@@ -2,12 +2,12 @@
 	import type { Player, PlayerSummary } from '$types';
 	import { Combobox } from '$components/ui';
 	import Stopwatch from '$components/ui/stopwatch/Stopwatch.svelte';
-	import { getAppState } from '$states';
+	import { getAppState, getNavigationState } from '$states';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
-	import { goto } from '$app/navigation';
 
 	const appState = getAppState();
+	const nav = getNavigationState();
 
 	let stopwatchSeconds = $state(0);
 	let stopwatchInterval: ReturnType<typeof setInterval> | null = null;
@@ -39,7 +39,7 @@
 		if (appState.players[playerId]) {
 			onselect?.(appState.players[playerId]);
 			appState.selectedPlayer = appState.players[playerId];
-			if (redirect) goto('/edit/player');
+			if (redirect) nav.saveAndNavigate('/edit/player');
 		} else {
 			appState.selectPlayerLazy(playerId);
 		}

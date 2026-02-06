@@ -4,13 +4,12 @@
 	import { type Pal, PalGender } from '$types';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { cn } from '$theme';
-	import { getAppState } from '$states';
+	import { getAppState, getNavigationState } from '$states';
 	import { palsData } from '$lib/data';
 	import ContextMenu from '$components/ui/context-menu/ContextMenu.svelte';
 	import { Plus, ArchiveRestore, Trash, Copy, Upload } from 'lucide-svelte';
 	import { assetLoader, calculateFilters } from '$utils';
 	import { staticIcons } from '$types/icons';
-	import { goto } from '$app/navigation';
 	import * as m from '$i18n/messages';
 	import { c } from '$utils/commonTranslations';
 
@@ -39,6 +38,7 @@
 	}>();
 
 	const appState = getAppState();
+	const nav = getNavigationState();
 
 	const buttonClass = $derived(
 		cn(
@@ -74,7 +74,11 @@
 		];
 
 		if (onCloneToUps && showCloneToUps) {
-			items.push({ label: m.clone_to_entity({ entity: m.ups() }), onClick: onCloneToUps, icon: Upload });
+			items.push({
+				label: m.clone_to_entity({ entity: m.ups() }),
+				onClick: onCloneToUps,
+				icon: Upload
+			});
 		}
 
 		items.push({ label: m.delete_entity({ entity: c.pal }), onClick: onDelete, icon: Trash });
@@ -113,7 +117,7 @@
 	function handlePalSelect() {
 		if (!pal || pal.character_id === 'None') return;
 		appState.selectedPal = pal;
-		goto('/edit/pal');
+		nav.saveAndNavigate('/edit/pal');
 	}
 </script>
 
@@ -130,12 +134,12 @@
 				<div class="flex flex-col">
 					<div class={cn('relative flex items-center justify-center', sickClass)}>
 						{#if pal.is_boss}
-							<div class="absolute -left-4 -top-1 h-6 w-6 xl:h-8 xl:w-8">
+							<div class="absolute -top-1 -left-4 h-6 w-6 xl:h-8 xl:w-8">
 								<img src={staticIcons.alphaIcon} alt="Alpha" class="pal-element-badge" />
 							</div>
 						{/if}
 						{#if pal.is_predator}
-							<div class="absolute -left-4 -top-1 h-6 w-6 xl:h-8 xl:w-8">
+							<div class="absolute -top-1 -left-4 h-6 w-6 xl:h-8 xl:w-8">
 								<img
 									src={staticIcons.predatorIcon}
 									alt="Alpha"
@@ -145,15 +149,15 @@
 							</div>
 						{/if}
 						{#if pal.is_lucky}
-							<div class="absolute -left-4 -top-1 h-6 w-6 xl:h-8 xl:w-8">
+							<div class="absolute -top-1 -left-4 h-6 w-6 xl:h-8 xl:w-8">
 								<img src={staticIcons.luckyIcon} alt="Lucky" class="pal-element-badge" />
 							</div>
 						{/if}
-						<img src={palIcon} alt={pal.name} class="xl:h-18 xl:w-18 h-16 w-16 rounded-full" />
+						<img src={palIcon} alt={pal.name} class="h-16 w-16 rounded-full xl:h-18 xl:w-18" />
 
 						<div
 							class={cn(
-								'absolute -right-4 -top-1 h-6 w-6 xl:h-8 xl:w-8',
+								'absolute -top-1 -right-4 h-6 w-6 xl:h-8 xl:w-8',
 								pal.gender == PalGender.MALE ? 'text-primary-300' : 'text-tertiary-300'
 							)}
 						>
@@ -174,7 +178,7 @@
 		{:else}
 			<div
 				class={cn(
-					'bg-surface-700 xl:h-18 xl:w-18 relative flex h-16 w-16 items-center justify-center rounded-full'
+					'bg-surface-700 relative flex h-16 w-16 items-center justify-center rounded-full xl:h-18 xl:w-18'
 				)}
 			></div>
 		{/if}

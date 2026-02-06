@@ -3,7 +3,7 @@
 	import { type Pal } from '$types';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { cn } from '$theme';
-	import { getAppState } from '$states';
+	import { getAppState, getNavigationState } from '$states';
 	import { PalInfoPopup } from '$components';
 	import StatusBadge from '$components/badges/status-badge/StatusBadge.svelte';
 	import { palsData } from '$lib/data';
@@ -11,7 +11,6 @@
 	import { Plus, ArchiveRestore, Trash, Copy, Upload } from 'lucide-svelte';
 	import { assetLoader, calculateFilters } from '$utils';
 	import { staticIcons } from '$types/icons';
-	import { goto } from '$app/navigation';
 	import * as m from '$i18n/messages';
 	import { c } from '$utils/commonTranslations';
 
@@ -38,6 +37,7 @@
 	}>();
 
 	const appState = getAppState();
+	const nav = getNavigationState();
 
 	const cardClass = $derived(
 		cn(
@@ -51,7 +51,10 @@
 	const palData = $derived(palsData.getByKey(pal.character_key));
 	const levelSyncTxt = $derived(
 		appState.selectedPlayer!.level < pal.level
-			? m.level_sync_display({ from: pal.level.toString(), to: appState.selectedPlayer!.level.toString() })
+			? m.level_sync_display({
+					from: pal.level.toString(),
+					to: appState.selectedPlayer!.level.toString()
+				})
 			: m.no_level_sync()
 	);
 
@@ -72,7 +75,11 @@
 		];
 
 		if (onCloneToUps && showCloneToUps) {
-			items.push({ label: m.clone_to_entity({ entity: m.ups()}), onClick: onCloneToUps, icon: Upload });
+			items.push({
+				label: m.clone_to_entity({ entity: m.ups() }),
+				onClick: onCloneToUps,
+				icon: Upload
+			});
 		}
 
 		items.push({ label: m.delete_entity({ entity: c.pal }), onClick: onDelete, icon: Trash });
@@ -106,7 +113,7 @@
 	function handlePalSelect() {
 		if (!pal || pal.character_id === 'None') return;
 		appState.selectedPal = pal;
-		goto('/edit/pal');
+		nav.saveAndNavigate('/edit/pal');
 	}
 </script>
 
@@ -175,7 +182,7 @@
 				{/snippet}
 			</Tooltip>
 		{:else}
-			<div class="2xl:h-18 2xl:w-18 h-16 w-16"></div>
+			<div class="h-16 w-16 2xl:h-18 2xl:w-18"></div>
 		{/if}
 	</button>
 </ContextMenu>

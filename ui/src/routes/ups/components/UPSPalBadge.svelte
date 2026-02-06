@@ -10,7 +10,6 @@
 		getNavigationState,
 		getToastState
 	} from '$states';
-	import { goto } from '$app/navigation';
 	import type { UPSPal, Pal, AddToCollectionResult } from '$types';
 	import * as m from '$i18n/messages';
 	import { c } from '$utils/commonTranslations';
@@ -93,7 +92,7 @@
 			__ups_id: upsPal.id
 		};
 		appState.selectedPal = palWithMetadata;
-		goto('/edit/pal');
+		nav.saveAndNavigate('/edit/pal');
 	}
 
 	function handleKeydown(event: KeyboardEvent) {

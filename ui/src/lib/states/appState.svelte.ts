@@ -124,7 +124,7 @@ class AppState {
 		return Object.values(this.guildSummaries ?? {});
 	}
 
-	initData() {}
+	initData() { }
 
 	async addNewUpspal(pal: Pal) {
 		const nav = getNavigationState();
@@ -188,8 +188,7 @@ class AppState {
 		upsState.pals = [...upsState.pals, upsPal];
 		upsState.pagination.totalCount++;
 		nav.activeTab = 'pal';
-		// Navigate to edit page
-		goto('/edit');
+		nav.saveAndNavigate('/edit/pal')
 	}
 
 	async saveUpspalChanges(pal: Pal) {

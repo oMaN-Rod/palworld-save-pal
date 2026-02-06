@@ -13,11 +13,10 @@
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { palsData, elementsData, expData, presetsData } from '$lib/data';
 	import { cn } from '$theme';
-	import { getAppState, getModalState, getToastState } from '$states';
+	import { getAppState, getModalState, getNavigationState, getToastState } from '$states';
 	import { Rating } from '@skeletonlabs/skeleton-svelte';
 	import { BicepsFlexed, Bug, Edit, Minus, Play, Plus, Save } from 'lucide-svelte';
 	import { assetLoader, handleMaxOutPal, canBeLucky, canBeAlpha } from '$utils';
-	import { goto } from '$app/navigation';
 	import { staticIcons } from '$types/icons';
 	import NumberFlow from '@number-flow/svelte';
 	import type { ValueChangeDetails } from '@zag-js/rating-group';
@@ -37,6 +36,7 @@
 	const appState = getAppState();
 	const modal = getModalState();
 	const toast = getToastState();
+	const nav = getNavigationState();
 
 	const max_level = $derived(appState.settings.cheat_mode ? 255 : 65);
 	const max_rank = $derived(appState.settings.cheat_mode ? 255 : 5);
@@ -444,7 +444,7 @@
 			<div class="flex flex-col">
 				<div
 					class={cn(
-						'flex flex-col items-start space-y-2 2xl:flex-row 2xl:space-x-2 2xl:space-y-0',
+						'flex flex-col items-start space-y-2 2xl:flex-row 2xl:space-y-0 2xl:space-x-2',
 						popup ? '2xl:flex-col 2xl:space-y-0' : ''
 					)}
 				>
@@ -456,7 +456,7 @@
 							<Tooltip position="bottom" label={m.debug()}>
 								<CornerDotButton
 									onClick={() => {
-										goto(
+										nav.saveAndNavigate(
 											`/debug?guildId=${appState.selectedPlayer?.guild_id}&playerId=${appState.selectedPlayer!.uid}&palId=${appState.selectedPal!.instance_id}`
 										);
 									}}
